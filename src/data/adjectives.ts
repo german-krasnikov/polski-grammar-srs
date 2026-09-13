@@ -1,0 +1,8 @@
+import type { Adjective,Gender,GramCase } from '../types';
+const cases=(nom:string,gen:string,dat:string,acc:string,inst:string,loc:string,voc:string):Record<GramCase,string>=>({nom,gen,dat,acc,inst,loc,voc});
+function regular(id:string,lemma:string,meaning:string,stem:string,personalPlural:string,soft=false):Adjective{
+ const y=soft?'i':'y', ego=stem+(soft?'iego':'ego'), emu=stem+(soft?'iemu':'emu'), ym=stem+(soft?'im':'ym'), a=stem+'a', ej=stem+(soft?'iej':'ej'), aa=stem+'ą', e=stem+(soft?'ie':'e'), ich=stem+(soft?'ich':'ych'), im=stem+(soft?'im':'ym'), imi=stem+(soft?'imi':'ymi');
+ return {id,lemma,meaning,forms:{sg:{'m-personal':cases(stem+y,ego,emu,ego,ym,ym,stem+y),'m-animate':cases(stem+y,ego,emu,ego,ym,ym,stem+y),'m-inanimate':cases(stem+y,ego,emu,stem+y,ym,ym,stem+y),f:cases(a,ej,ej,aa,aa,ej,a),n:cases(e,ego,emu,e,ym,ym,e)},pl:{'m-personal':cases(personalPlural,ich,im,ich,imi,ich,personalPlural),'m-animate':cases(e,ich,im,e,imi,ich,e),'m-inanimate':cases(e,ich,im,e,imi,ich,e),f:cases(e,ich,im,e,imi,ich,e),n:cases(e,ich,im,e,imi,ich,e)}}}
+}
+export const adjectives:Adjective[]=[regular('new','nowy','новый','now','nowi'),regular('small','mały','маленький','mał','mali'),regular('nice','ładny','красивый','ładn','ładni'),regular('good','dobry','хороший','dobr','dobrzy'),regular('old','stary','старый','star','starzy'),regular('expensive','drogi','дорогой','drog','drodzy',true)];
+export const adjectiveById=(id:string)=>{const a=adjectives.find(x=>x.id===id);if(!a)throw new Error(`Unknown adjective ${id}`);return a};
