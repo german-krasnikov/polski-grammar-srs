@@ -1,23 +1,93 @@
-import {useEffect,useMemo,useState} from 'react';import type {RatingName} from '../types';import {skills,skillById} from '../training/skills';import {generateForSkill} from '../training/generator';import {evaluate} from '../training/evaluator';import {isDue,preview,review} from '../srs/scheduler';import {exportProgress,freshProgress,loadProgress,saveProgress} from '../progress/storage';import {nextSkillId} from '../training/queue';import {localDay} from '../progress/storage';import './style.css';
-const dueText=(d:Date)=>{const m=Math.max(1,Math.round((d.getTime()-Date.now())/60000));if(m<60)return`${m}m`;const h=Math.round(m/60);if(h<48)return`${h}h`;return`${Math.round(h/24)}d`};
+import {useEffect,useMemo,useRef,useState} from 'react';
+import type {Exercise,RatingName} from '../types';
+import {skills,skillById} from '../training/skills';
+import {generateForSkill,generateChain,sentenceSeeds,type SentenceSeed} from '../training/generator';
+import {evaluate} from '../training/evaluator';
+import {isDue,preview} from '../srs/scheduler';
+import {exportProgress,freshProgress,loadProgress,saveProgress,localDay} from '../progress/storage';
+import {recordReview} from '../progress/review';
+import {nextSkillId} from '../training/queue';
+import {nounById} from '../data/nouns';
+import GrammarTables,{CaseReference} from './GrammarTables';
+import './style.css';
+
+const grades:{id:RatingName;label:string;hint:string}[]=[{id:'again',label:'Снова',hint:'Не вспомнил'},{id:'hard',label:'Трудно',hint:'С усилием'},{id:'good',label:'Хорошо',hint:'Вспомнил'},{id:'easy',label:'Легко',hint:'Без усилий'}];
+const dueText=(d:Date)=>{const m=Math.max(1,Math.round((d.getTime()-Date.now())/60000));return m<60?`${m} мин`:m<2880?`${Math.round(m/60)} ч`:`${Math.round(m/1440)} дн`};
+type Mode='chain'|'schedule'|'focused';
 export default function App(){
- const [progress,setProgress]=useState(loadProgress);const [selected,setSelected]=useState<string|null>(null);
- const [exercise,setExercise]=useState(()=>generateForSkill(nextSkillId(progress)));const [answer,setAnswer]=useState('');const [checked,setChecked]=useState(false);const [tab,setTab]=useState<'train'|'theory'|'progress'>('train');
- const [,tick]=useState(0);useEffect(()=>{const timer=setInterval(()=>tick(n=>n+1),30000);return()=>clearInterval(timer)},[]);
- const evaluation=useMemo(()=>evaluate(answer,exercise),[answer,exercise]);const skill=skillById(exercise.primarySkill);const sc=progress.cards.find(c=>c.skillId===exercise.primarySkill)!;const intervals=preview(sc);const dueCount=progress.cards.filter(isDue).length;
- const choose=(id:string)=>{setSelected(id);setExercise(generateForSkill(id));setAnswer('');setChecked(false);setTab('train')};
- const next=(p=progress,selection=selected)=>{setExercise(generateForSkill(nextSkillId(p,selection)));setAnswer('');setChecked(false)};
- const automatic=()=>{setSelected(null);next(progress,null);setTab('train')};
- function rate(r:RatingName){if(!checked)return;const cards=progress.cards.map(c=>c.skillId===exercise.primarySkill?review(c,r):c);const old=progress.stats[exercise.primarySkill];const ok=evaluation.correct;const np={...progress,cards,stats:{...progress.stats,[exercise.primarySkill]:{reviews:old.reviews+1,correct:old.correct+(ok?1:0),streak:ok?old.streak+1:0,mistakes:old.mistakes+(ok?0:1)}},reviewsToday:(progress.lastDay===localDay()?progress.reviewsToday:0)+1,lastDay:localDay(),totalReviews:progress.totalReviews+1};setProgress(np);saveProgress(np);next(np)}
- function reset(){if(confirm('Сбросить весь прогресс?')){const p=freshProgress();setProgress(p);saveProgress(p);setSelected(null);next(p,null)}}
- function download(){const blob=new Blob([exportProgress(progress)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='polski-srs-progress.json';a.click();URL.revokeObjectURL(a.href)}
- const groups=[...new Set(skills.map(s=>s.group))];
- return <div className="app"><header className="top"><div><h1>POLSKI <span>// Grammar SRS</span></h1><p>Правило → трансформация → интервальное повторение.</p></div><div className="topstats"><b>{dueCount}</b><span>due</span><b>{progress.reviewsToday}</b><span>today</span></div></header>
- <nav><button className={tab==='train'?'active':''} onClick={()=>setTab('train')}>Тренировка</button><button className={tab==='theory'?'active':''} onClick={()=>setTab('theory')}>Теория</button><button className={tab==='progress'?'active':''} onClick={()=>setTab('progress')}>Прогресс</button></nav>
- {tab==='train'&&<main className="layout"><aside className="sidebar"><button className={"skill "+(selected===null?"sel":"")} onClick={automatic}>По расписанию</button>{groups.map(g=><section key={g}><h3>{g}</h3>{skills.filter(s=>s.group===g).map(s=>{const st=progress.stats[s.id],acc=st.reviews?Math.round(st.correct/st.reviews*100):0;return <button key={s.id} onClick={()=>choose(s.id)} className={'skill '+(s.id===exercise.primarySkill?'sel':'')}><span><b>{s.title}</b><small>{s.level} · {st.reviews} reps</small></span><em>{acc}%</em></button>})}</section>)}</aside>
- <section className="trainer card">{selected===null&&dueCount===0?<><h2>Повторения на сейчас завершены</h2><p>Следующее повторение: {new Date(sc.card.due).toLocaleString('ru-RU')}.</p><p>Для дополнительной тренировки выбери навык слева.</p></>:<><div className="eyebrow">{skill.level} · {skill.group}</div><h2>{skill.title}</h2><div className="formula">{skill.formula}</div><div className="prompt">{exercise.prompt}</div><input aria-label="Ответ по-польски" autoFocus readOnly={checked} value={answer} onChange={e=>setAnswer(e.target.value)} onKeyDown={e=>{if(e.key==='Enter'&&!checked)setChecked(true)}} placeholder="Напиши ответ по-польски…"/>{!checked?<button className="primary" onClick={()=>setChecked(true)}>Проверить</button>:<><div className={'result '+(evaluation.correct?'ok':'bad')}><strong>{evaluation.correct?'✓ Правильно':'✕ Есть ошибка'}</strong>{!evaluation.correct&&<><div className="your">Твой ответ: {answer||'—'}</div><div className="expected">✓ {exercise.expected}</div></>}<p>{exercise.explanation}</p></div><div className="ratings">{(['again','hard','good','easy'] as RatingName[]).map(r=><button key={r} onClick={()=>rate(r)}><b>{r}</b><small>{dueText(intervals[r])}</small></button>)}</div></>}</>}</section>
- <aside className="card help"><h3>Почему так</h3><p>{skill.theory}</p><h3>Подсказка</h3><p>{skill.hint}</p><div className="tags">{exercise.tags.map(t=><span key={t}>{t}</span>)}</div></aside></main>}
- {tab==='theory'&&<main className="theoryPage"><div className="card hero"><h2>Grammar Map — B1 Core</h2><p>Не учи 7 падежей как 7 независимых тем. Выбирай конструкцию → она требует падеж → весь noun phrase согласуется.</p><pre>{`КОНСТРУКЦИЯ → CASE → pronoun + adjective + noun\n\nwidzę → ACC\nnie mam → GEN\nz → INST\no → LOC\ndaję → DAT`}</pre></div><section className="card theoryGroup"><h2>Падежи — карта триггеров</h2><div className="cheat"><b>Mianownik</b><span>kto? co?</span><code>To jest moja żona.</code><b>Dopełniacz</b><span>kogo? czego?</span><code>nie mam / bez / do</code><b>Celownik</b><span>komu? czemu?</span><code>daję / pomagam</code><b>Biernik</b><span>kogo? co?</span><code>widzę / mam / lubię</code><b>Narzędnik</b><span>z kim? z czym?</span><code>z / jestem</code><b>Miejscownik</b><span>o kim? o czym?</span><code>o / w / na</code><b>Wołacz</b><span>обращение</span><code>Marku! Anno!</code></div></section><section className="card theoryGroup"><h2>Мужской Biernik — главный switch</h2><pre>{`m-personal:  widzę męża → ACC = GEN\nна -a:      widzę kolegę, но nie widzę kolegi\nm-animate:   widzę psa / kota       → ACC = GEN\nm-inanimate: widzę dom / samochód  → ACC = NOM`}</pre><h2>Отрицание</h2><pre>{`Mam nowy samochód.        [ACC]\nNie mam nowego samochodu. [GEN]`}</pre><h2>Времена</h2><pre>{`robię      → NOW\nrobiłem    → PAST\nbędę robić → FUTURE imperfective\nzrobię     → FUTURE perfective`}</pre></section>{groups.map(g=><section className="card theoryGroup" key={g}><h2>{g}</h2>{skills.filter(s=>s.group===g).map(s=><article key={s.id}><h3>{s.title} <small>{s.level}</small></h3><code>{s.formula}</code><p>{s.theory}</p></article>)}</section>)}</main>}
- {tab==='progress'&&<main className="progressPage"><section className="card summary"><h2>Прогресс</h2><div className="bigstats"><div><b>{progress.totalReviews}</b><span>всего повторений</span></div><div><b>{progress.reviewsToday}</b><span>сегодня</span></div><div><b>{dueCount}</b><span>сейчас due</span></div></div><div className="actions"><button onClick={download}>Экспорт JSON</button><button onClick={reset}>Сбросить</button></div></section><section className="card"><h2>Навыки</h2>{skills.map(s=>{const st=progress.stats[s.id],a=st.reviews?Math.round(st.correct/st.reviews*100):0;return <div className="row" key={s.id}><span>{s.title}</span><div className="bar"><i style={{width:`${a}%`}}/></div><b>{a}%</b><small>{st.reviews} reps · streak {st.streak}</small></div>})}</section></main>}
- <footer>Все данные хранятся локально в браузере. FSRS планирует интервалы; каждое повторение генерирует новую фразу.</footer></div>
+ const [progress,setProgress]=useState(loadProgress);
+ const [mode,setMode]=useState<Mode>('chain');
+ const [chain,setChain]=useState(()=>generateChain());
+ const [chainStep,setChainStep]=useState(0),[chainComplete,setChainComplete]=useState(false);
+ const [seedIndex,setSeedIndex]=useState(0);
+ const [exercise,setExercise]=useState<Exercise>(()=>chain[0]);
+ const [tab,setTab]=useState<'train'|'matrix'|'progress'>('train');
+ const [answer,setAnswer]=useState(''),[revealed,setRevealed]=useState(false),[answerMode,setAnswerMode]=useState<'oral'|'typed'>('oral');
+ const [showReference,setShowReference]=useState(false),[showSkills,setShowSkills]=useState(false);
+ const [message,setMessage]=useState('');
+ const rated=useRef<string|null>(null),revealButton=useRef<HTMLButtonElement>(null);
+ const [,tick]=useState(0);
+ useEffect(()=>{const timer=setInterval(()=>tick(n=>n+1),30000);return()=>clearInterval(timer)},[]);
+ const skill=skillById(exercise.primarySkill),sc=progress.cards.find(c=>c.skillId===exercise.primarySkill)!;
+ const intervals=useMemo(()=>preview(sc),[sc]);
+ const dueCount=progress.cards.filter(isDue).length;
+ const today=progress.lastDay===localDay()?progress.reviewsToday:0;
+ const evaluation=useMemo(()=>evaluate(answer,exercise),[answer,exercise]);
+ const clearAnswer=()=>{setAnswer('');setRevealed(false);rated.current=null;};
+ const showExercise=(ex:Exercise)=>{setExercise(ex);clearAnswer();};
+ function startChain(index=seedIndex){const cards=generateChain(sentenceSeeds[index]);setSeedIndex(index);setChain(cards);setChainStep(0);setChainComplete(false);setMode('chain');showExercise(cards[0]);setTab('train');}
+ function automatic(){setMode('schedule');setChainComplete(false);showExercise(generateForSkill(nextSkillId(progress)));setTab('train');}
+ function choose(id:string,nounId?:string,adjectiveId?:string){
+  if(id==='chain'){startChain(Math.max(0,sentenceSeeds.findIndex(s=>s.nounId===nounId)));return;}
+  setMode('focused');setChainComplete(false);showExercise(generateForSkill(id,nounId&&adjectiveId?{nounId,adjectiveId}:undefined));setTab('train');
+ }
+ function persist(np:typeof progress){setProgress(np);try{saveProgress(np);setMessage('')}catch{setMessage('Браузер не смог сохранить прогресс. Экспортируй JSON перед закрытием.')}}
+ function rate(r:RatingName){
+  if(!revealed||rated.current===exercise.id)return;
+  rated.current=exercise.id;
+  const np=recordReview(progress,exercise.primarySkill,r,answerMode==='typed'?evaluation.correct:undefined);
+  persist(np);
+  if(mode==='chain'){
+   if(chainStep+1===chain.length){setChainComplete(true);return;}
+   setChainStep(chainStep+1);showExercise(chain[chainStep+1]);
+  }else showExercise(generateForSkill(mode==='focused'?exercise.primarySkill:nextSkillId(np)));
+  revealButton.current?.focus();
+ }
+ useEffect(()=>{
+  function keyboard(e:KeyboardEvent){
+   const target=e.target as HTMLElement;
+   if(tab!=='train'||chainComplete||(mode==='schedule'&&dueCount===0)||e.repeat||e.altKey||e.ctrlKey||e.metaKey)return;
+   if(['INPUT','TEXTAREA','SELECT','BUTTON','A'].includes(target.tagName))return;
+   if(e.code==='Space'){e.preventDefault();if(!revealed)setRevealed(true);}
+   if(revealed&&['1','2','3','4'].includes(e.key)){e.preventDefault();rate(grades[Number(e.key)-1].id);}
+  }
+  window.addEventListener('keydown',keyboard);return()=>window.removeEventListener('keydown',keyboard);
+ });
+ function download(){const blob=new Blob([exportProgress(progress)],{type:'application/json'});const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='polski-srs-progress.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+ function reset(){if(confirm('Сбросить весь прогресс?')){persist(freshProgress());startChain(0);}}
+ return <div className="app">
+  <header className="top"><div><h1>POLSKI <span>Grammar Matrix</span></h1><p>Предложение → преобразование → новое предложение</p></div><div className="topstats"><div><b>{dueCount}</b><span>к повторению</span></div><div><b>{today}</b><span>сегодня</span></div></div></header>
+  <nav aria-label="Основные разделы"><button className={tab==='train'?'active':''} aria-pressed={tab==='train'} onClick={()=>setTab('train')}>Карточки</button><button className={tab==='matrix'?'active':''} aria-pressed={tab==='matrix'} onClick={()=>setTab('matrix')}>Таблицы и схема</button><button className={tab==='progress'?'active':''} aria-pressed={tab==='progress'} onClick={()=>setTab('progress')}>Прогресс</button></nav>
+  {message&&<p role="alert" className="notice">{message}</p>}
+  {tab==='train'&&<main className="study-page">
+   <div className="study-toolbar"><div className="subnav" aria-label="Режим тренировки"><button className={mode==='chain'?'active':''} aria-pressed={mode==='chain'} onClick={()=>startChain()}>Цепочка предложений</button><button className={mode==='schedule'?'active':''} aria-pressed={mode==='schedule'} onClick={automatic}>По расписанию <span>{dueCount}</span></button><button className={mode==='focused'?'active':''} aria-expanded={showSkills} onClick={()=>setShowSkills(!showSkills)}>Отдельный навык</button></div><button className="reference-toggle" aria-expanded={showReference} onClick={()=>setShowReference(!showReference)}>{showReference?'Скрыть таблицу':'Таблица под рукой'}</button></div>
+   {showSkills&&<section className="skill-picker" aria-label="Выбор навыка">{skills.map(s=><button key={s.id} className={s.id===exercise.primarySkill&&mode==='focused'?'active':''} onClick={()=>{choose(s.id);setShowSkills(false)}}>{s.title}<small>{s.level}</small></button>)}</section>}
+   {mode==='chain'&&<div className="chain-header"><label>Один набор слов<select aria-label="Слова для цепочки" value={seedIndex} onChange={e=>startChain(Number(e.target.value))}>{sentenceSeeds.map((s,i)=><option key={s.nounId} value={i}>{nounById(s.nounId).lemma} — {nounById(s.nounId).meaning}</option>)}</select></label><ol aria-label="Шаги цепочки">{['Вижу','Прошлое','Отрицание','Владелец','Говорю о'].map((label,i)=><li key={label} className={chainComplete||i<chainStep?'done':i===chainStep?'current':''} aria-current={!chainComplete&&i===chainStep?'step':undefined}><span>{i+1}</span>{label}</li>)}</ol></div>}
+   <div className={'study-layout '+(showReference?'with-reference':'')}>
+    <section className="flashcard card" aria-label="Учебная карточка">
+     {chainComplete?<div className="session-complete"><span className="eyebrow">5 преобразований</span><h2>Цепочка завершена</h2><p>Ты изменил время, отрицание, владельца и падеж, сохранив одну мысль. Оценки сохранены в расписании повторений.</p><div className="chain-review">{chain.map((c,i)=><div key={c.id}><small>{i+1} · {skillById(c.primarySkill).title}</small><p lang="pl">{c.expected}</p></div>)}</div><div className="actions"><button className="primary" onClick={()=>startChain((seedIndex+1)%sentenceSeeds.length)}>Следующий набор слов</button><button onClick={automatic}>К повторениям по расписанию</button></div></div>:mode==='schedule'&&dueCount===0?<div className="session-complete"><h2>Повторения на сейчас завершены</h2><p>Следующее: {new Date(sc.card.due).toLocaleString('ru-RU')}.</p><button onClick={()=>startChain()}>Потренировать цепочку</button></div>:<>
+      <div className="card-meta"><span>{mode==='chain'?`Цепочка · ${chainStep+1} / ${chain.length}`:mode==='schedule'?'Повторение по расписанию':'Тренировка навыка'}</span><span>{skill.level} · {skill.title}</span></div>
+      <div className="card-front"><span className="eyebrow">Исходное предложение</span><p className="source-sentence" lang="pl">{exercise.source}</p><div className="operation"><span>Преобразуй</span><h2>{exercise.prompt}</h2></div></div>
+      {!revealed&&<div className="answer-area"><div className="answer-mode" aria-label="Как отвечать"><button className={answerMode==='oral'?'active':''} aria-pressed={answerMode==='oral'} onClick={()=>setAnswerMode('oral')}>Ответ вслух / про себя</button><button className={answerMode==='typed'?'active':''} aria-pressed={answerMode==='typed'} onClick={()=>setAnswerMode('typed')}>Напечатать ответ</button></div>{answerMode==='typed'?<textarea aria-label="Ответ по-польски" value={answer} onChange={e=>setAnswer(e.target.value)} placeholder="Напиши целое предложение…" onKeyDown={e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();setRevealed(true)}}}/>:<p className="muted">Произнеси целое предложение, затем переверни карточку.</p>}<button ref={revealButton} className="primary reveal-button" onClick={()=>setRevealed(true)}>{answerMode==='typed'?'Проверить и показать ответ':'Показать ответ'}<kbd>Пробел</kbd></button></div>}
+      {revealed&&<div className="card-back" aria-live="polite"><span className="eyebrow">Обратная сторона · эталон</span><p className="answer-sentence" lang="pl">{exercise.expected}</p>{exercise.accepted?.length?<p className="accepted">Также: <span lang="pl">{exercise.accepted.join(' / ')}</span></p>:null}{answerMode==='typed'&&<div className={evaluation.correct?'typed-result correct':'typed-result incorrect'}><strong>{evaluation.correct?'Совпадает с правильным вариантом':'Сравни свой ответ с эталоном'}</strong><p lang="pl">{answer||'Ответ не введён'}</p></div>}<div className="change-list"><h3>Что изменилось</h3>{exercise.changes.map((c,i)=><div key={i}><div className="change-pair"><span lang="pl">{c.from}</span><b aria-hidden="true">→</b><strong lang="pl">{c.to}</strong></div><p>{c.reason}</p></div>)}</div><details><summary>Правило и формула</summary><code>{skill.formula}</code><p>{exercise.explanation}</p></details><div className="rating-label">Насколько легко вспомнил?</div><div className="ratings">{grades.map((g,i)=><button key={g.id} onClick={()=>rate(g.id)} className={'rating-'+g.id}><small>{g.hint}</small><b><kbd>{i+1}</kbd> {g.label}</b><span>{dueText(intervals[g.id])}</span></button>)}</div><p className="muted small">Оценка планирует следующее повторение навыка. В цепочке следующая карточка продолжает то же предложение.</p></div>}
+     </>}
+    </section>
+    {showReference&&<aside className="card reference-panel"><div className="reference-heading"><h3>Таблица этого предложения</h3><span>Можно подсматривать</span></div><CaseReference nounId={exercise.nounId} adjectiveId={exercise.adjectiveId} owner={exercise.possessive} number={exercise.number} active={exercise.tags}/><button onClick={()=>setTab('matrix')}>Все таблицы и схема</button></aside>}
+   </div>
+   <div className="study-help"><span><kbd>Пробел</kbd> показать ответ · <kbd>1–4</kbd> оценить</span><span>Один навык повторяется на разных предложениях.</span></div>
+  </main>}
+  {tab==='matrix'&&<GrammarTables onTrain={choose}/>}
+  {tab==='progress'&&<main className="progress-page"><section className="card matrix-section"><h2>Прогресс</h2><div className="bigstats"><div><b>{progress.totalReviews}</b><span>всего карточек</span></div><div><b>{today}</b><span>сегодня</span></div><div><b>{dueCount}</b><span>к повторению</span></div></div><p>При ответе вслух точность считается по самооценке: «Снова» — ошибка, остальные оценки — вспомнил. При печати — по проверке ответа.</p><div className="actions"><button onClick={download}>Экспорт JSON</button><button onClick={reset}>Сбросить прогресс</button></div></section><section className="card matrix-section"><div className="table-scroll"><table><thead><tr><th>Навык</th><th>Повторений</th><th>Точность</th><th>Следующее повторение</th></tr></thead><tbody>{skills.map(s=>{const st=progress.stats[s.id],c=progress.cards.find(c=>c.skillId===s.id)!;return <tr key={s.id}><th><button className="text-button" onClick={()=>choose(s.id)}>{s.title}</button></th><td>{st.reviews}</td><td>{st.reviews?`${Math.round(st.correct/st.reviews*100)}%`:'—'}</td><td>{isDue(c)?'Сейчас':new Date(c.card.due).toLocaleString('ru-RU')}</td></tr>})}</tbody></table></div></section></main>}
+  <footer>Прогресс сохраняется в этом браузере. Интервальные повторения — FSRS.</footer>
+ </div>;
 }
