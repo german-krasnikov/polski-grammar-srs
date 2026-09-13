@@ -68,7 +68,7 @@ npm run preview
 
 Приватный репозиторий: [german-krasnikov/polski-grammar-srs](https://github.com/german-krasnikov/polski-grammar-srs).
 
-Шаблон GitHub Pages находится в `docs/github-pages.yml.example`. Для Pages из личного приватного репозитория нужен поддерживаемый план GitHub; сам Pages-сайт обычно будет публичным. Видимость репозитория ради публикации не меняем. [Условия GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site).
+Шаблон GitHub Pages находится в `docs/github-pages.yml.example`. Проверка 13 сентября 2026: GitHub API отклонил включение Pages с HTTP 422 — текущий тариф не поддерживает Pages для этого приватного репозитория. Для Pages из личного приватного репозитория нужен поддерживаемый план GitHub; сам Pages-сайт обычно будет публичным. Видимость репозитория ради публикации не меняем. [Условия GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site).
 
 После подтверждения доступности Pages: Source → GitHub Actions, скопировать шаблон в `.github/workflows/deploy.yml`, commit и push. `base: './'` поддерживает путь репозитория.
 
