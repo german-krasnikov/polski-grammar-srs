@@ -29,12 +29,16 @@ Production-preview отвечает HTTP 200 на `http://127.0.0.1:4173/`.
 
 ## Репозиторий и хостинг
 
-Создан приватный [german-krasnikov/polski-grammar-srs](https://github.com/german-krasnikov/polski-grammar-srs).
+Репозиторий: [german-krasnikov/polski-grammar-srs](https://github.com/german-krasnikov/polski-grammar-srs).
 
 SSH-ключ GitHub в окружении не сработал, поэтому remote переведён на HTTPS; отправка выполняется через авторизованный GitHub CLI без сохранения токенов в файлах.
 
 Ветка `main` отправлена в репозиторий через HTTPS. Коммит функциональности: `dd67dff`.
 
-GitHub Pages включить не удалось: API вернул HTTP 422 — «Your current plan does not support GitHub Pages for this repository». Репозиторий остаётся приватным, workflow публикации не включён, покупки и смена тарифа не выполнялись. Шаблон сохранён в `docs/github-pages.yml.example`.
+13 сентября включение Pages для приватного репозитория было отклонено тарифом (HTTP 422).
 
-Для работы сейчас: открыть локальный preview `http://127.0.0.1:4173/`. При следующем запуске из рабочей папки: `npm run dev` и адрес, напечатанный Vite. Для постоянного прогресса использовать обычное, а не приватное окно браузера.
+14 сентября с явного разрешения пользователя репозиторий сделан публичным. API подтвердил создание GitHub Pages с HTTPS и публикацией через Actions. Workflow `.github/workflows/deploy.yml` собирает и публикует приложение после push в `main`.
+
+Постоянный адрес: https://german-krasnikov.github.io/polski-grammar-srs/.
+
+Локальная установка для использования опубликованного тренажёра не нужна. Для разработки: `npm run dev`. Для постоянного прогресса использовать обычное, а не приватное окно браузера. Прогресс опубликованного сайта хранится отдельно от localhost.

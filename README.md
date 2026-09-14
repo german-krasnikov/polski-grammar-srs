@@ -2,6 +2,8 @@
 
 Польская грамматика для русскоязычного технаря: маленький словарь, видимая система преобразований и карточки с целыми предложениями.
 
+**[Открыть тренажёр в браузере](https://german-krasnikov.github.io/polski-grammar-srs/)** — установка и локальный сервер не нужны.
+
 ## Тренировка как в Anki
 
 При открытии появляется лицевая сторона карточки: **исходное предложение + операция**. Произнеси ответ вслух или про себя, нажми **«Показать ответ»**, сравни его с эталоном и выбери **Снова / Трудно / Хорошо / Легко**. Можно переключиться на печатный ответ. После проверки ответ фиксируется.
@@ -66,10 +68,10 @@ npm run preview
 
 ## GitHub и размещение
 
-Приватный репозиторий: [german-krasnikov/polski-grammar-srs](https://github.com/german-krasnikov/polski-grammar-srs).
+Сайт: **https://german-krasnikov.github.io/polski-grammar-srs/**.
 
-Шаблон GitHub Pages находится в `docs/github-pages.yml.example`. Проверка 13 сентября 2026: GitHub API отклонил включение Pages с HTTP 422 — текущий тариф не поддерживает Pages для этого приватного репозитория. Для Pages из личного приватного репозитория нужен поддерживаемый план GitHub; сам Pages-сайт обычно будет публичным. Видимость репозитория ради публикации не меняем. [Условия GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site).
+Публичный репозиторий: [german-krasnikov/polski-grammar-srs](https://github.com/german-krasnikov/polski-grammar-srs). Видимость изменена с разрешения владельца 14 сентября 2026 года для использования GitHub Pages.
 
-После подтверждения доступности Pages: Source → GitHub Actions, скопировать шаблон в `.github/workflows/deploy.yml`, commit и push. `base: './'` поддерживает путь репозитория.
+Workflow `.github/workflows/deploy.yml` автоматически выполняет `npm ci`, тесты и production-сборку после push в `main`, затем публикует сайт в GitHub Pages. Его также можно запустить вручную через Actions → Deploy to GitHub Pages → Run workflow. `base: './'` поддерживает путь репозитория.
 
 Локальный запуск работает независимо от хостинга. Состояние проверки — в [docs/verification.md](docs/verification.md), исходные требования — в [docs/product-contract.md](docs/product-contract.md).
