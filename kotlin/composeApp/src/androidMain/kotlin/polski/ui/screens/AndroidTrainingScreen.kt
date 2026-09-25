@@ -62,6 +62,7 @@ internal fun AndroidTrainingScreen(
     dispatch: (AppAction) -> Unit,
     focusReveal: FocusRequester,
     formatDate: (Long) -> String,
+    swipeRatingEnabled: Boolean = true,
 ) {
     val introducing = state.phase == CardPhase.Question && state.introPending
     Column(verticalArrangement = Arrangement.spacedBy(18.dp)) {
@@ -233,7 +234,7 @@ internal fun AndroidTrainingScreen(
                             }
                         }
                         Text(method.review)
-                        AndroidRatingActions(exercise.id, state, dispatch)
+                        AndroidRatingActions(exercise.id, state, dispatch, swipeRatingEnabled)
                     }
                     }
                 }
@@ -249,7 +250,7 @@ internal fun AndroidTrainingScreen(
 }
 
 @Composable
-private fun AndroidRatingActions(exerciseId: String, state: AppUiState, dispatch: (AppAction) -> Unit) {
+private fun AndroidRatingActions(exerciseId: String, state: AppUiState, dispatch: (AppAction) -> Unit, swipeRatingEnabled: Boolean) {
     val thresholdPx = with(LocalDensity.current) { 72.dp.toPx() }
     var dragX by remember(exerciseId) { mutableFloatStateOf(0f) }
     var rated by remember(exerciseId) { mutableStateOf(false) }
@@ -259,28 +260,29 @@ private fun AndroidRatingActions(exerciseId: String, state: AppUiState, dispatch
             dispatch(AppAction.Rate(exerciseId, rating))
         }
     }
+    val swipeModifier = if (swipeRatingEnabled) Modifier.pointerInput(exerciseId, thresholdPx) {
+        detectHorizontalDragGestures(
+            onDragStart = { dragX = 0f },
+            onHorizontalDrag = { change, amount ->
+                dragX += amount
+                change.consume()
+            },
+            onDragEnd = {
+                if (dragX <= -thresholdPx) rate(Rating.Again)
+                if (dragX >= thresholdPx) rate(Rating.Good)
+                dragX = 0f
+            },
+            onDragCancel = { dragX = 0f },
+        )
+    } else Modifier
     Surface(
         shape = RoundedCornerShape(18.dp),
         color = MaterialTheme.colorScheme.surfaceContainerHigh,
-        modifier = Modifier.fillMaxWidth().pointerInput(exerciseId, thresholdPx) {
-            detectHorizontalDragGestures(
-                onDragStart = { dragX = 0f },
-                onHorizontalDrag = { change, amount ->
-                    dragX += amount
-                    change.consume()
-                },
-                onDragEnd = {
-                    if (dragX <= -thresholdPx) rate(Rating.Again)
-                    if (dragX >= thresholdPx) rate(Rating.Good)
-                    dragX = 0f
-                },
-                onDragCancel = { dragX = 0f },
-            )
-        },
+        modifier = Modifier.fillMaxWidth().then(swipeModifier),
     ) {
         Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
             Text("Когда повторить?", style = MaterialTheme.typography.titleMedium)
-            Text("Свайп влево — повторить · вправо — вспомнил",
+            if (swipeRatingEnabled) Text("Свайп влево — повторить · вправо — вспомнил",
                 style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 listOf(Rating.Again to "Повторить", Rating.Good to "Вспомнил").forEach { (rating, label) ->

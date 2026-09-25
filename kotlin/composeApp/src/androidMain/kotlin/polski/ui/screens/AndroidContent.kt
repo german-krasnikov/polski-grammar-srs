@@ -19,10 +19,11 @@ fun AndroidContent(
     dispatch: (AppAction) -> Unit,
     focusReveal: FocusRequester,
     formatDate: (Long) -> String,
+    swipeRatingEnabled: Boolean = true,
 ) {
     when {
         state.loadStatus != LoadStatus.Ready -> AndroidRecoveryScreen(state, dispatch)
-        state.tab == AppTab.Training -> AndroidTrainingScreen(state, dispatch, focusReveal, formatDate)
+        state.tab == AppTab.Training -> AndroidTrainingScreen(state, dispatch, focusReveal, formatDate, swipeRatingEnabled)
         state.tab == AppTab.Matrix -> AndroidMatrixScreen(state, dispatch)
         else -> AndroidProgressScreen(state, formatDate, dispatch)
     }

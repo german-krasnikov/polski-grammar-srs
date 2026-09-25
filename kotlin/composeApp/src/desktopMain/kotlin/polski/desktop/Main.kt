@@ -184,6 +184,7 @@ private fun DesktopSession(
         while (true) {
             delay(30_000)
             store.dispatch(AppAction.RefreshTime)
+            vocabulary.refresh()
         }
     }
     LaunchedEffect(vocabulary) { vocabulary.start() }

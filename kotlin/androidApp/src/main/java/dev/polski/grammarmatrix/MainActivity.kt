@@ -38,6 +38,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.SingleChoiceSegmentedButtonRow
 import androidx.compose.material3.SegmentedButton
 import androidx.compose.material3.SegmentedButtonDefaults
+import androidx.compose.material3.Switch
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
@@ -74,6 +75,7 @@ import polski.presentation.AppTab
 import polski.presentation.CardPhase
 import polski.presentation.EffectOutcome
 import polski.presentation.UiEffect
+import polski.preferences.Motion
 import polski.ui.screens.AndroidContent
 import polski.ui.screens.VocabularyScreen
 
@@ -130,6 +132,7 @@ class MainActivity : ComponentActivity() {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 while (true) {
                     session.store.dispatch(AppAction.RefreshTime)
+                    session.vocabulary.refresh()
                     delay(30_000)
                 }
             }
@@ -180,7 +183,7 @@ private fun AndroidScreen(
     val state by store.state.collectAsStateWithLifecycle()
     LaunchedEffect(state.explanationMethod) { session.persistExplanationMethod(state.explanationMethod) }
     val focusReveal = remember(store) { FocusRequester() }
-    var confirmImport by remember { mutableStateOf(false) }
+    var confirmImport by rememberSaveable { mutableStateOf(false) }
     var showSettings by rememberSaveable { mutableStateOf(false) }
     val studyScroll = rememberScrollState()
     val settingsScroll = rememberScrollState()
@@ -279,9 +282,10 @@ private fun AndroidScreen(
                 else if (state.tab == AppTab.Vocabulary) {
                     VocabularyScreen(session.vocabulary,
                         onImport = onVocabularyImport, onExport = onVocabularyExport,
-                        launchMutation = session::launchVocabularyMutation, enableSwipeRating = true)
+                        launchMutation = session::launchVocabularyMutation,
+                        enableSwipeRating = session.preferences.swipeRatingEnabled)
                 }
-                else AndroidContent(state, store::dispatch, focusReveal, ::androidDate)
+                else AndroidContent(state, store::dispatch, focusReveal, ::androidDate, session.preferences.swipeRatingEnabled)
                 Spacer(Modifier.height(32.dp))
             }
         }
@@ -311,6 +315,31 @@ private fun AndroidSettingsScreen(session: AndroidSessionViewModel) {
             }
         }
         session.preferencesError?.let { Text(it, color = MaterialTheme.colorScheme.error) }
+        Text("Движение", style = MaterialTheme.typography.titleMedium)
+        SingleChoiceSegmentedButtonRow(modifier = Modifier.fillMaxWidth()) {
+            Motion.entries.forEachIndexed { index, motion ->
+                SegmentedButton(
+                    selected = session.preferences.motion == motion,
+                    onClick = { session.setMotion(motion) },
+                    shape = SegmentedButtonDefaults.itemShape(index, Motion.entries.size),
+                    enabled = session.preferencesError == null,
+                ) {
+                    Text(if (motion == Motion.System) "Системное" else "Уменьшенное")
+                }
+            }
+        }
+        Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+            Text("Свайп-оценка карточек")
+            Switch(
+                checked = session.preferences.swipeRatingEnabled,
+                onCheckedChange = { session.setSwipeRatingEnabled(it) },
+                enabled = session.preferencesError == null,
+            )
+        }
+        Text("Свайп влево — повторить, вправо — вспомнил. Кнопки оценки работают всегда.",
+            color = MaterialTheme.colorScheme.onSurfaceVariant)
+        Text("Напоминания", style = MaterialTheme.typography.titleMedium)
+        Text("Недоступно на Android в этой сборке", color = MaterialTheme.colorScheme.onSurfaceVariant)
     }
 }
 

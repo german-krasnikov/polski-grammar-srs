@@ -33,6 +33,7 @@ import polski.training.ExerciseIdFactory
 import polski.training.RandomSource
 import polski.vocabulary.VocabularySession
 import polski.preferences.Appearance
+import polski.preferences.Motion
 import polski.preferences.PreferencesLoad
 import polski.preferences.PreferencesSave
 import polski.preferences.PreferredMethod
@@ -41,16 +42,11 @@ import polski.preferences.UserPreferencesV2
 class AndroidSessionViewModel(context: Context) : ViewModel() {
     private val appContext = context.applicationContext
     private val scheduler = FsrsScheduler()
-    private val glassPreferences = AndroidGlassPreferences(appContext)
-    private val loadedPreferences = glassPreferences.load()
-    private var savedPreferences = (loadedPreferences as? PreferencesLoad.Loaded)?.value ?: UserPreferencesV2()
-    var preferences by mutableStateOf((loadedPreferences as? PreferencesLoad.Loaded)?.value ?: UserPreferencesV2())
+    private val preferencesStore = AndroidUserPreferencesStore(appContext)
+    private var savedPreferences = UserPreferencesV2()
+    var preferences by mutableStateOf(UserPreferencesV2())
         private set
-    var preferencesError by mutableStateOf(when (loadedPreferences) {
-        is PreferencesLoad.RecoveryRequired -> "Настройки требуют восстановления; исходный JSON сохранён"
-        is PreferencesLoad.Unavailable -> loadedPreferences.reason
-        else -> null
-    })
+    var preferencesError by mutableStateOf<String?>(null)
         private set
     val repository = AndroidProgressRepository(appContext, scheduler)
     val vocabulary = VocabularySession(AndroidVocabularyRepository(appContext), scheduler,
@@ -65,6 +61,23 @@ class AndroidSessionViewModel(context: Context) : ViewModel() {
         private set
 
     init {
+        viewModelScope.launch {
+            when (val loaded = preferencesStore.load()) {
+                is PreferencesLoad.Loaded -> {
+                    preferences = loaded.value
+                    savedPreferences = loaded.value
+                    preferencesError = null
+                    val preferred = if (loaded.value.explanationMethod == PreferredMethod.Situations)
+                        ExplanationMethod.Situations else ExplanationMethod.Logic
+                    if (store.state.value.explanationMethod != preferred) {
+                        store.dispatch(AppAction.SetExplanationMethod(preferred))
+                    }
+                }
+                is PreferencesLoad.RecoveryRequired -> preferencesError = "Настройки требуют восстановления; исходный JSON сохранён"
+                is PreferencesLoad.Unavailable -> preferencesError = loaded.reason
+                else -> Unit
+            }
+        }
         viewModelScope.launch { store.start() }
         viewModelScope.launch { vocabulary.start() }
     }
@@ -83,28 +96,40 @@ class AndroidSessionViewModel(context: Context) : ViewModel() {
 
     fun setAppearance(appearance: Appearance) {
         if (preferences.appearance == appearance) return
-        val next = preferences.copy(appearance = appearance)
-        when (val result = glassPreferences.save(next)) {
-            PreferencesSave.Saved -> {
-                preferences = next
-                savedPreferences = next
-                preferencesError = null
-            }
-            is PreferencesSave.WriteFailed -> preferencesError = result.reason
-        }
+        updatePreferences(preferences.copy(appearance = appearance))
     }
 
     fun persistExplanationMethod(method: ExplanationMethod) {
         val preferred = if (method == ExplanationMethod.Situations) PreferredMethod.Situations else PreferredMethod.Logic
         if (preferences.explanationMethod == preferred) return
-        val next = preferences.copy(explanationMethod = preferred)
-        when (val result = glassPreferences.save(next)) {
-            PreferencesSave.Saved -> {
-                preferences = next
-                savedPreferences = next
-                preferencesError = null
+        updatePreferences(preferences.copy(explanationMethod = preferred))
+    }
+
+    fun setMotion(motion: Motion) {
+        if (preferences.motion == motion) return
+        updatePreferences(preferences.copy(motion = motion))
+    }
+
+    fun setSwipeRatingEnabled(enabled: Boolean) {
+        if (preferences.swipeRatingEnabled == enabled) return
+        updatePreferences(preferences.copy(swipeRatingEnabled = enabled))
+    }
+
+    /** Reflects [next] immediately for a responsive UI, then persists off the main thread; a failed write rolls back. */
+    private fun updatePreferences(next: UserPreferencesV2) {
+        val previous = preferences
+        preferences = next
+        viewModelScope.launch {
+            when (val result = preferencesStore.save(next)) {
+                PreferencesSave.Saved -> {
+                    savedPreferences = next
+                    preferencesError = null
+                }
+                is PreferencesSave.WriteFailed -> {
+                    preferences = previous
+                    preferencesError = result.reason
+                }
             }
-            is PreferencesSave.WriteFailed -> preferencesError = result.reason
         }
     }
 
