@@ -29,10 +29,10 @@ import polski.training.ExerciseIdFactory
 import polski.training.RandomSource
 
 /** SwiftUI's one scene-owned entry point. Call [close] when the scene owner is released. */
-class IosSession {
+class IosSession(private val defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults) {
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
     private val scheduler = FsrsScheduler()
-    private val repository = IosProgressRepository(scheduler)
+    private val repository = IosProgressRepository(scheduler, defaults)
     private var nextId = 0L
     private var store = newStore()
     private var observer: Job? = null
@@ -57,9 +57,12 @@ class IosSession {
             "schedule" -> AppAction.StartSchedule
             "skillPicker" -> AppAction.OpenSkillPicker
             "skill" -> AppAction.ChooseSkill(value)
-            "answerMode" -> AnswerMode.entries.firstOrNull { it.name == value }?.let(AppAction::SetAnswerMode)
+            "answerMode" -> AnswerMode.entries.firstOrNull { it.name == value }?.let {
+                defaults.setObject(value, forKey = "answerMode")
+                AppAction.SetAnswerMode(it)
+            }
             "explanationMethod" -> ExplanationMethod.entries.firstOrNull { it.name == value }?.let {
-                NSUserDefaults.standardUserDefaults.setObject(value, forKey = "explanationMethod")
+                defaults.setObject(value, forKey = "explanationMethod")
                 AppAction.SetExplanationMethod(it)
             }
             "draft" -> AppAction.EditAnswer(value)
@@ -139,7 +142,8 @@ class IosSession {
             TimeCapture(now, formatter.stringFromDate(NSDate(timeIntervalSinceReferenceDate = now.toEpochMilliseconds() / 1000.0 - 978307200.0)))
         },
         scope,
-        if (NSUserDefaults.standardUserDefaults.stringForKey("explanationMethod") == "Situations")
+        if (defaults.stringForKey("explanationMethod") == "Situations")
             ExplanationMethod.Situations else ExplanationMethod.Logic,
+        if (defaults.stringForKey("answerMode") == "Typed") AnswerMode.Typed else AnswerMode.Oral,
     )
 }

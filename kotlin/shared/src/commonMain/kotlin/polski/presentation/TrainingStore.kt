@@ -176,7 +176,8 @@ class TrainingStore(
     }
 
     private fun install(source: ProgressDocument, captured: TimeCapture) {
-        val complete = ProgressCodec.completeKnownSkills(source, knownSkillIds, captured.at, scheduler)
+        val completed = ProgressCodec.completeKnownSkills(source, knownSkillIds, captured.at, scheduler)
+        val complete = ProgressCodec.normalizeDay(completed, captured.localDay)
         document = complete
         recoveryRaw = null
         mutableState.value = project(state.value.copy(
@@ -410,7 +411,6 @@ class TrainingStore(
         if (effect is UiEffect.ConfirmReset) return
         if (action.outcome is EffectOutcome.Failed) {
             mutate { it.copy(error = action.outcome.reason) }
-            return
         }
         removeEffect(effect.id)
     }

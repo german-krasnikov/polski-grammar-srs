@@ -6,8 +6,8 @@ import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
 import kotlin.coroutines.cancellation.CancellationException
 import kotlin.time.Instant
+import platform.Foundation.NSProcessInfo
 import platform.Foundation.NSUserDefaults
-import platform.Foundation.NSUUID
 import polski.progress.DecodeResult
 import polski.progress.LoadResult
 import polski.progress.MigrationResult
@@ -24,7 +24,11 @@ class IosProgressRepository(
 ) : ProgressRepository {
     private val lock = Mutex()
     private val key = "polski-progress-v1"
-    private val backupPrefix = "polski-progress-import-backup-"
+    private val backupKey = "polski-progress-import-backup-latest"
+
+    /** Opt-in UI-test seam: forces every [save] to fail without touching decode/read paths. */
+    private val forceSaveFailure: Boolean =
+        NSProcessInfo.processInfo.environment["POLSKI_UITEST_FORCE_SAVE_FAILURE"] as? String == "1"
 
     override suspend fun load(): LoadResult = withContext(Dispatchers.Default) {
         lock.withLock { loadUnlocked() }
@@ -32,6 +36,7 @@ class IosProgressRepository(
 
     override suspend fun save(document: ProgressDocument): SaveResult = withContext(Dispatchers.Default) {
         lock.withLock {
+            if (forceSaveFailure) return@withLock SaveResult.WriteFailed(IllegalStateException("Forced failure for UI test"))
             try {
                 when (val existing = loadUnlocked()) {
                     LoadResult.Missing, is LoadResult.Loaded -> Unit
@@ -61,7 +66,8 @@ class IosProgressRepository(
             try {
                 val old = defaults.stringForKey(key)
                 if (old != null) {
-                    val backupKey = backupPrefix + NSUUID().UUIDString
+                    // Only the most recent pre-import document is kept; earlier backups are
+                    // overwritten rather than accumulating one NSUserDefaults entry per import.
                     put(backupKey, old)
                     check(defaults.stringForKey(backupKey) == old) { "Import backup read-back mismatch" }
                 }
@@ -98,3 +104,4 @@ class IosProgressRepository(
         check(defaults.synchronize()) { "Progress write failed" }
     }
 }
+

@@ -5,7 +5,6 @@ import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
 import platform.Foundation.NSUserDefaults
-import platform.Foundation.NSUUID
 import polski.vocabulary.VocabularyCodec
 import polski.vocabulary.VocabularyRepository
 
@@ -15,6 +14,7 @@ class IosVocabularyRepository(
 ) : VocabularyRepository {
     private val lock = Mutex()
     private val key = "polski-vocabulary-pl-ru-v1"
+    private val backupKey = "polski-vocabulary-import-backup-latest"
 
     override suspend fun loadRaw(): String? = withContext(Dispatchers.Default) {
         lock.withLock { defaults.stringForKey(key) }
@@ -27,7 +27,7 @@ class IosVocabularyRepository(
             val current = defaults.stringForKey(key)
             if (current != null) {
                 if (backupCurrent) {
-                    val backupKey = "polski-vocabulary-import-backup-${NSUUID().UUIDString}"
+                    // Only the latest pre-import document is kept as a backup.
                     put(backupKey, current)
                     check(defaults.stringForKey(backupKey) == current) { "Резервная копия словаря не сохранилась" }
                 } else VocabularyCodec.decode(current)
@@ -42,3 +42,4 @@ class IosVocabularyRepository(
         check(defaults.synchronize()) { "Словарь не сохранился" }
     }
 }
+

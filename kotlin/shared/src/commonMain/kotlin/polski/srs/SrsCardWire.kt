@@ -32,7 +32,8 @@ object SrsCardWire {
             return CardDecodeResult.Invalid("Invalid FSRS number")
         val memoryIsInitial = value.stability == 0.0 && value.difficulty == 0.0
         val memoryIsLearned = value.stability >= 0.001 && value.difficulty >= 1.0
-        if ((!memoryIsInitial && !memoryIsLearned) || (memoryIsInitial && state != CardState.New)) {
+        if ((!memoryIsInitial && !memoryIsLearned) || (memoryIsInitial && state != CardState.New) ||
+            (state == CardState.New && !memoryIsInitial)) {
             return CardDecodeResult.Invalid("Invalid FSRS memory state")
         }
         return CardDecodeResult.Valid(SrsCard(due, value.stability, value.difficulty, value.elapsedDays, value.scheduledDays, value.reps, value.lapses, value.learningSteps, state, last))

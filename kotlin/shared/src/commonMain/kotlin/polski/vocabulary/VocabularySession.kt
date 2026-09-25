@@ -146,6 +146,11 @@ class VocabularySession(
         var pendingDocument: VocabularyDocument? = null
         var pendingRaw: String? = null
         try {
+            // Every UTF-16 code unit encodes to at least one UTF-8 byte, so raw.length is a lower
+            // bound on the exact byte count. This cheap check rejects grossly oversized input
+            // (e.g. a synthetic 10 MB string) before paying for encodeToByteArray, which is slow
+            // enough on Kotlin/JS to blow past test timeouts.
+            require(raw.length <= 10_000_000) { "Файл словаря слишком большой" }
             require(raw.encodeToByteArray().size <= 10_000_000) { "Файл словаря слишком большой" }
             val imported = VocabularyCodec.decode(raw)
             val current = state.value

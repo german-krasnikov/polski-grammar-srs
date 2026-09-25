@@ -20,6 +20,42 @@ final class PolskiGrammarUITests: XCTestCase {
         XCTAssertTrue(app.staticTexts["To jest moja piękna żona."].exists)
     }
 
+    /// C1: a progress save failure must stay visible above every tab (not just Progress), with
+    /// the export action reachable, even though loadStatus stays Ready. `IosProgressRepository`
+    /// exposes an opt-in UI-test seam (`POLSKI_UITEST_FORCE_SAVE_FAILURE`) to force that failure
+    /// deterministically instead of relying on real disk pressure.
+    func testSaveFailureShowsErrorBannerOnEveryTabWithExportReachable() {
+        let app = XCUIApplication()
+        app.launchEnvironment["POLSKI_UITEST_FORCE_SAVE_FAILURE"] = "1"
+        app.launch()
+        XCTAssertTrue(app.staticTexts["To jest moja piękna żona."].waitForExistence(timeout: 20))
+        continueIntroductionIfPresent(app)
+        let reveal = app.buttons["revealAnswer"]
+        for _ in 0..<7 {
+            if reveal.exists && reveal.isHittable { break }
+            app.swipeUp()
+        }
+        XCTAssertTrue(reveal.isHittable)
+        reveal.tap()
+        let good = app.buttons["rateGood"]
+        for _ in 0..<7 {
+            if good.exists && good.isHittable { break }
+            app.swipeUp()
+        }
+        XCTAssertTrue(good.isHittable)
+        good.tap()
+
+        let bannerText = "Не удалось сохранить прогресс. Экспортируй JSON перед закрытием."
+        XCTAssertTrue(app.staticTexts[bannerText].waitForExistence(timeout: 10), app.debugDescription)
+        XCTAssertTrue(app.buttons["errorBannerExport"].exists, app.debugDescription)
+
+        for tab in ["Матрица", "Прогресс", "Слова", "Тренировка"] {
+            app.buttons[tab].firstMatch.tap()
+            XCTAssertTrue(app.staticTexts[bannerText].waitForExistence(timeout: 5), "\(tab): \(app.debugDescription)")
+            XCTAssertTrue(app.buttons["errorBannerExport"].exists, tab)
+        }
+    }
+
     #if S6_PICKER_ACCEPTANCE
     func testS6VocabularySystemFileExporterSaves() {
         let app = XCUIApplication()
@@ -129,10 +165,47 @@ final class PolskiGrammarUITests: XCTestCase {
         XCTAssertTrue(selection.waitForExistence(timeout: 10))
         let before = selection.label
         app.buttons["Импортировать словарь JSON"].tap()
-        let cancel = app.buttons["Отменить"].firstMatch
+        // M17: on iOS 26 the system document picker exposes Cancel as a Link, not a Button.
+        let cancel = app.descendants(matching: .any)["Отменить"].firstMatch
         XCTAssertTrue(cancel.waitForExistence(timeout: 10), app.debugDescription)
         cancel.tap()
         XCTAssertEqual(selection.label, before)
+    }
+
+    /// M10: an answerMode picked in Settings must be restored on the next launch, the same way
+    /// explanationMethod already is, not silently fall back to the Oral default.
+    func testAnswerModeChosenInSettingsSurvivesAppRestart() {
+        let app = XCUIApplication()
+        app.launch()
+        XCTAssertTrue(app.staticTexts["To jest moja piękna żona."].waitForExistence(timeout: 20))
+        continueIntroductionIfPresent(app)
+        let settings = app.buttons["openSettings"]
+        XCTAssertTrue(settings.waitForExistence(timeout: 5))
+        settings.tap()
+        let mode = app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", "Ответ,")).firstMatch
+        for _ in 0..<7 {
+            if mode.isHittable { break }
+            app.swipeUp()
+        }
+        XCTAssertTrue(mode.waitForExistence(timeout: 5), app.debugDescription)
+        mode.tap()
+        app.buttons["Напечатать"].tap()
+        app.buttons["Готово"].tap()
+        let answer = app.descendants(matching: .any)["typedAnswer"].firstMatch
+        XCTAssertTrue(answer.waitForExistence(timeout: 5), app.debugDescription)
+
+        app.terminate()
+        app.launch()
+        XCTAssertTrue(app.staticTexts["To jest moja piękna żona."].waitForExistence(timeout: 20))
+        continueIntroductionIfPresent(app)
+        let answerAfterRestart = app.descendants(matching: .any)["typedAnswer"].firstMatch
+        XCTAssertTrue(answerAfterRestart.waitForExistence(timeout: 10), app.debugDescription)
+
+        // Restore the default so later tests in this run see the usual Oral experience.
+        settings.tap()
+        mode.tap()
+        app.buttons["Вслух"].tap()
+        app.buttons["Готово"].tap()
     }
 
     private func continueIntroductionIfPresent(_ app: XCUIApplication) {

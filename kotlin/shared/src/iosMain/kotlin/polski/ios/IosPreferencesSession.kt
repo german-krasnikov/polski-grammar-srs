@@ -3,7 +3,6 @@ package polski.ios
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
 import platform.Foundation.NSUserDefaults
-import platform.Foundation.NSUUID
 import polski.preferences.Appearance
 import polski.preferences.Motion
 import polski.preferences.PreferencesDecode
@@ -17,6 +16,7 @@ class IosPreferencesSession(
     private val defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults,
 ) {
     private val key = "polski-preferences-v2"
+    private val backupKey = "polski-preferences-import-backup-latest"
     private var loaded: PreferencesDecode = defaults.stringForKey(key)?.let(UserPreferencesCodec::decode)
         ?: PreferencesDecode.Loaded(UserPreferencesV2(
             explanationMethod = if (defaults.stringForKey("explanationMethod") == "Situations")
@@ -66,7 +66,7 @@ class IosPreferencesSession(
         }
         val old = defaults.stringForKey(key)
         if (old != null) {
-            val backupKey = "polski-preferences-import-backup-${NSUUID().UUIDString}"
+            // Only the latest pre-import document is kept as a backup.
             defaults.setObject(old, forKey = backupKey)
             if (!defaults.synchronize() || defaults.stringForKey(backupKey) != old) return "Не удалось сохранить резервную копию"
         }

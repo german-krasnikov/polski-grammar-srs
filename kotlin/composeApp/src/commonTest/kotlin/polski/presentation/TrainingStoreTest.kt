@@ -8,6 +8,7 @@ import kotlinx.coroutines.test.TestScope
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
+import kotlin.test.assertIs
 import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 import kotlin.time.Instant
@@ -187,6 +188,36 @@ class TrainingStoreTest {
         runCurrent()
         assertEquals(2, store.state.value.savedRevision)
         assertEquals(null, store.state.value.error)
+        store.close()
+    }
+
+    @Test
+    fun installNormalizesStaleDailyCounterBeforeFirstReview() = runTest {
+        val stale = ProgressCodec.fresh(skills.map { it.id }, at, "2026-09-22", scheduler).let {
+            it.copy(progress = it.progress.copy(reviewsToday = 3, lastDay = "2026-09-22"))
+        }
+        val repo = FakeRepository(stale)
+        val clock = MutableTime(TimeCapture(at, "2026-09-23"))
+        val store = newStore(repo, backgroundScope, clock)
+        store.start()
+        store.dispatch(AppAction.RequestExport)
+        val effect = store.state.value.pendingEffects.filterIsInstance<UiEffect.DownloadJson>().single()
+        val decoded = assertIs<polski.progress.DecodeResult.Valid>(ProgressCodec.decode(effect.json))
+        assertEquals(0, decoded.document.progress.reviewsToday)
+        assertEquals("2026-09-23", decoded.document.progress.lastDay)
+        store.close()
+    }
+
+    @Test
+    fun acknowledgedFailedEffectIsRemovedFromPendingEffects() = runTest {
+        val repo = FakeRepository(ProgressCodec.fresh(skills.map { it.id }, at, "2026-09-23", scheduler))
+        val store = newStore(repo, backgroundScope)
+        store.start()
+        store.dispatch(AppAction.RequestExport)
+        val effect = store.state.value.pendingEffects.filterIsInstance<UiEffect.DownloadJson>().single()
+        store.dispatch(AppAction.EffectAcknowledged(effect.id, EffectOutcome.Failed("export failed")))
+        assertFalse(store.state.value.pendingEffects.any { it.id == effect.id })
+        assertEquals("export failed", store.state.value.error)
         store.close()
     }
 

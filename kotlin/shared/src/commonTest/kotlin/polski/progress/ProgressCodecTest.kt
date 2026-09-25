@@ -25,7 +25,7 @@ class ProgressCodecTest {
 
     @Test
     fun unknownPropertiesAndUnknownSkillsSurviveCompletionAndExport() {
-        val raw = """{"version":1,"cards":[{"skillId":"future","card":{"due":"2026-03-29T01:30:00.000Z","stability":1,"difficulty":2,"elapsed_days":0,"scheduled_days":0,"reps":0,"lapses":0,"learning_steps":0,"state":0,"futureCard":"keep"},"wrapperExtra":true}],"stats":{"future":{"reviews":0,"correct":0,"streak":0,"mistakes":0,"futureStats":7}},"reviewsToday":0,"lastDay":"2026-03-29","totalReviews":0,"topExtra":{"nested":true}}"""
+        val raw = """{"version":1,"cards":[{"skillId":"future","card":{"due":"2026-03-29T01:30:00.000Z","stability":1,"difficulty":2,"elapsed_days":0,"scheduled_days":0,"reps":0,"lapses":0,"learning_steps":0,"state":2,"futureCard":"keep"},"wrapperExtra":true}],"stats":{"future":{"reviews":0,"correct":0,"streak":0,"mistakes":0,"futureStats":7}},"reviewsToday":0,"lastDay":"2026-03-29","totalReviews":0,"topExtra":{"nested":true}}"""
         val decoded = assertIs<DecodeResult.Valid>(ProgressCodec.decode(raw)).document
         val completed = ProgressCodec.completeKnownSkills(decoded, listOf("known"), at, scheduler)
         val export = ProgressCodec.encodeLegacyV1(completed)

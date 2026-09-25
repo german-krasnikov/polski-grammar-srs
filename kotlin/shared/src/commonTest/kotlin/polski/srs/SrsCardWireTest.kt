@@ -44,8 +44,19 @@ class SrsCardWireTest {
         }
     }
 
+    @Test fun newCardsWithLearnedMemoryAreInvalid() {
+        assertIs<CardDecodeResult.Invalid>(
+            SrsCardWire.decode(empty.copy(state = CardState.New.wire, stability = 5.0, difficulty = 5.0)),
+        )
+    }
+
     @Test fun malformedReviewMemoryIsRejectedByProgressImport() {
         val raw = """{"version":1,"cards":[{"skillId":"case.acc.f","card":{"due":"2026-02-03T12:00:00.000Z","stability":0,"difficulty":0,"elapsed_days":0,"scheduled_days":0,"reps":1,"lapses":0,"learning_steps":0,"state":2,"last_review":"2026-02-02T12:00:00.000Z"}}],"stats":{"case.acc.f":{"reviews":1,"correct":1,"streak":1,"mistakes":0}},"reviewsToday":1,"lastDay":"2026-02-03","totalReviews":1}"""
+        assertIs<DecodeResult.Invalid>(ProgressCodec.decode(raw))
+    }
+
+    @Test fun newCardWithLearnedMemoryIsRejectedByProgressImport() {
+        val raw = """{"version":1,"cards":[{"skillId":"case.acc.f","card":{"due":"2026-02-03T12:00:00.000Z","stability":5,"difficulty":5,"elapsed_days":0,"scheduled_days":0,"reps":0,"lapses":0,"learning_steps":0,"state":0}}],"stats":{"case.acc.f":{"reviews":0,"correct":0,"streak":0,"mistakes":0}},"reviewsToday":0,"lastDay":"2026-02-03","totalReviews":0}"""
         assertIs<DecodeResult.Invalid>(ProgressCodec.decode(raw))
     }
 }

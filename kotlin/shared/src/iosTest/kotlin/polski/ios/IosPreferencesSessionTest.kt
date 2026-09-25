@@ -75,4 +75,26 @@ class IosPreferencesSessionTest {
             defaults.removePersistentDomainForName(suite)
         }
     }
+
+    @Test
+    fun repeatedImportsKeepOnlyTheLatestBackup() {
+        val suite = "polski-ios-preferences-backup-${Random.nextLong()}"
+        val defaults = assertNotNull(NSUserDefaults(suiteName = suite))
+        defaults.removePersistentDomainForName(suite)
+        try {
+            val session = IosPreferencesSession(defaults)
+            val first = UserPreferencesCodec.encode(UserPreferencesV2(glassTintPercent = 10))
+            val second = UserPreferencesCodec.encode(UserPreferencesV2(glassTintPercent = 20))
+            assertNull(session.importJson(first))
+            assertNull(session.importJson(second))
+
+            val backups = defaults.dictionaryRepresentation().keys.filter {
+                it.toString().startsWith("polski-preferences-import-backup-")
+            }
+            assertEquals(1, backups.size, "Only the most recent pre-import backup should be kept, not one per import")
+            assertEquals(first, defaults.stringForKey(backups.single().toString()))
+        } finally {
+            defaults.removePersistentDomainForName(suite)
+        }
+    }
 }

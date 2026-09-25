@@ -37,4 +37,29 @@ class IosVocabularyRepositoryTest {
             defaults.removePersistentDomainForName(suite)
         }
     }
+
+    @Test
+    fun repeatedBackedUpImportsKeepOnlyTheLatestBackup() = runBlocking {
+        val suite = "polski-vocabulary-test-${kotlin.random.Random.nextLong()}"
+        val defaults = assertNotNull(NSUserDefaults(suiteName = suite))
+        defaults.removePersistentDomainForName(suite)
+        try {
+            val repository = IosVocabularyRepository(defaults)
+            val first = VocabularyCodec.encode(VocabularyDocument(selectedIds = listOf("noun.wife")))
+            val second = VocabularyCodec.encode(VocabularyDocument(selectedIds = listOf("noun.husband")))
+            repository.saveRaw(first)
+
+            repository.saveRaw(second, backupCurrent = true)
+            val third = VocabularyCodec.encode(VocabularyDocument())
+            repository.saveRaw(third, backupCurrent = true)
+
+            val backups = defaults.dictionaryRepresentation().keys.filter {
+                it.toString().startsWith("polski-vocabulary-import-backup-")
+            }
+            assertEquals(1, backups.size, "Only the most recent pre-import backup should be kept, not one per import")
+            assertEquals(second, defaults.stringForKey(backups.single().toString()))
+        } finally {
+            defaults.removePersistentDomainForName(suite)
+        }
+    }
 }

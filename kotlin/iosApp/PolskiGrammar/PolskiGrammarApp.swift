@@ -50,6 +50,32 @@ private struct StudyHero: View {
     }
 }
 
+/// C1: shown above every tab whenever `TrainingStore.state.error` is set (e.g. a progress save
+/// failure), regardless of `loadStatus`, with the export action always reachable.
+private struct ErrorBanner: View {
+    let message: String
+    let onExport: () -> Void
+
+    var body: some View {
+        HStack(alignment: .top, spacing: 10) {
+            Image(systemName: "exclamationmark.triangle.fill").foregroundStyle(.red)
+            VStack(alignment: .leading, spacing: 6) {
+                Text(message).font(.footnote).fontWeight(.semibold)
+                Button("Экспортировать JSON", action: onExport)
+                    .font(.footnote)
+                    .accessibilityIdentifier("errorBannerExport")
+            }
+            Spacer(minLength: 0)
+        }
+        .padding(12)
+        .background(Color.red.opacity(0.12), in: RoundedRectangle(cornerRadius: 12))
+        .padding(.horizontal, 12)
+        .padding(.top, 6)
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier("trainingErrorBanner")
+    }
+}
+
 extension Dictionary where Key == String, Value == Any {
     func string(_ key: String) -> String { self[key] as? String ?? "" }
     func int(_ key: String) -> Int { (self[key] as? NSNumber)?.intValue ?? 0 }
@@ -81,11 +107,13 @@ final class AppModel: ObservableObject {
     @Published var exportEffectId: Int64?
     @Published var resetEffectId: Int64?
     @Published var focusEffectId: Int64?
-    private let session = IosSession()
+    var focusExerciseId: String?
+    private let session = IosSession(defaults: .standard)
     private let vocabulary = IosVocabularySession()
     private let preferencesSession = IosPreferencesSession(defaults: .standard)
     private var lastSnapshot = ""
     private var claimedEffects = Set<Int64>()
+    private var vocabularyRefreshTimer: Timer?
 
     init() {
         session.onState = { [weak self] json in
@@ -102,10 +130,17 @@ final class AppModel: ObservableObject {
         receivePreferences(preferencesSession.currentSnapshot())
         if preferences.string("status") == "Ready" {
             send("explanationMethod", preferences.string("method"))
+            send("answerMode", preferences.string("answerMode"))
+        }
+        // Vocabulary due status only changes when time passes; grammar training refreshes on
+        // scenePhase already. Mirrors the 30s tick the desktop/Android hosts use for grammar.
+        vocabularyRefreshTimer = Timer.scheduledTimer(withTimeInterval: 30, repeats: true) { [weak self] _ in
+            self?.sendVocabulary("refresh")
         }
     }
 
     deinit {
+        vocabularyRefreshTimer?.invalidate()
         session.onState = nil
         session.close()
         vocabulary.onState = nil
@@ -220,16 +255,32 @@ final class AppModel: ObservableObject {
         guard json != lastSnapshot, let data = json.data(using: .utf8),
               let parsed = (try? JSONSerialization.jsonObject(with: data)) as? Record else { return }
         lastSnapshot = json
+        let previousPhase = state.string("phase")
+        let previousExerciseId = state.record("exercise").string("id")
         state = parsed
+        reconcileAnswerMode(previousPhase: previousPhase, previousExerciseId: previousExerciseId)
         for effect in parsed.rows("effects") {
             guard let id = effect.int64("id"), claimedEffects.insert(id).inserted else { continue }
             switch effect.string("kind") {
             case "export": exportFile = ProgressFile(text: effect.string("json")); exportEffectId = id
             case "reset": resetEffectId = id
-            case "focus": focusEffectId = id
+            case "focus": focusExerciseId = effect.string("exerciseId"); focusEffectId = id
             default: acknowledge(id, completed: false)
             }
         }
+    }
+
+    /// M10: a preferred answerMode set while a card is Revealed is dropped by the store (it only
+    /// accepts SetAnswerMode in CardPhase.Question); re-apply it once the next Question appears,
+    /// the same way the desktop host's `applyPendingAnswerMode` reacts to phase/exerciseId changes.
+    private func reconcileAnswerMode(previousPhase: String, previousExerciseId: String) {
+        let phase = state.string("phase")
+        guard phase == "Question" else { return }
+        let exerciseId = state.record("exercise").string("id")
+        guard phase != previousPhase || exerciseId != previousExerciseId else { return }
+        let desired = preferences.string("answerMode")
+        guard !desired.isEmpty, desired != state.string("answerMode") else { return }
+        send("answerMode", desired)
     }
     private func receiveVocabulary(_ json: String) {
         guard let data = json.data(using: .utf8),
@@ -259,19 +310,26 @@ struct PolskiGrammarApp: App {
 
     var body: some Scene {
         WindowGroup {
-            TabView(selection: Binding(
-                get: { model.state.string("tab") },
-                set: { model.send("tab", $0) }
-            )) {
-                NavigationStack { TrainingView(model: model).toolbar { settingsToolbar } }
-                    .tabItem { Label("Тренировка", systemImage: "square.stack") }.tag("Training")
-                NavigationStack { MatrixView(model: model).toolbar { settingsToolbar } }
-                    .tabItem { Label("Матрица", systemImage: "tablecells") }.tag("Matrix")
-                NavigationStack { ProgressView(model: model, importing: $importing).toolbar { settingsToolbar } }
-                    .tabItem { Label("Прогресс", systemImage: "chart.bar") }.tag("Progress")
-                NavigationStack { VocabularyView(model: model, importing: $importingVocabulary,
-                    exporting: $exportingVocabulary, exportFile: $vocabularyFile).toolbar { settingsToolbar } }
-                    .tabItem { Label("Слова", systemImage: "character.book.closed") }.tag("Vocabulary")
+            VStack(spacing: 0) {
+                // C1: a save failure (state.error) must stay visible above every tab, regardless
+                // of loadStatus, with the export action reachable so no reviewed progress is lost.
+                if let error = model.state["error"] as? String {
+                    ErrorBanner(message: error) { model.send("export") }
+                }
+                TabView(selection: Binding(
+                    get: { model.state.string("tab") },
+                    set: { model.send("tab", $0) }
+                )) {
+                    NavigationStack { TrainingView(model: model).toolbar { settingsToolbar } }
+                        .tabItem { Label("Тренировка", systemImage: "square.stack") }.tag("Training")
+                    NavigationStack { MatrixView(model: model).toolbar { settingsToolbar } }
+                        .tabItem { Label("Матрица", systemImage: "tablecells") }.tag("Matrix")
+                    NavigationStack { ProgressView(model: model, importing: $importing).toolbar { settingsToolbar } }
+                        .tabItem { Label("Прогресс", systemImage: "chart.bar") }.tag("Progress")
+                    NavigationStack { VocabularyView(model: model, importing: $importingVocabulary,
+                        exporting: $exportingVocabulary, exportFile: $vocabularyFile).toolbar { settingsToolbar } }
+                        .tabItem { Label("Слова", systemImage: "character.book.closed") }.tag("Vocabulary")
+                }
             }
             .fileImporter(isPresented: $importing, allowedContentTypes: [.json]) { model.importFile($0) }
             .fileExporter(isPresented: $exporting, document: model.exportFile,
@@ -302,7 +360,9 @@ struct PolskiGrammarApp: App {
             .alert("Сообщение", isPresented: Binding(
                 get: { model.notice != nil }, set: { if !$0 { model.notice = nil } }
             )) { Button("ОК") { model.notice = nil } } message: { Text(model.notice ?? "") }
-            .onChange(of: scenePhase) { _, phase in if phase == .active { model.send("refresh") } }
+            .onChange(of: scenePhase) { _, phase in
+                if phase == .active { model.send("refresh"); model.sendVocabulary("refresh") }
+            }
             .tint(Color(uiColor: .systemTeal))
             .preferredColorScheme(colorScheme)
         }
@@ -416,6 +476,7 @@ private extension Dictionary where Key == String, Value == Any {
 private struct TrainingView: View {
     @ObservedObject var model: AppModel
     @FocusState private var answerFocused: Bool
+    @AccessibilityFocusState private var revealButtonFocused: Bool
     @State private var localDraft = ""
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     private var state: Record { model.state }
@@ -431,7 +492,7 @@ private struct TrainingView: View {
             if state.string("loadStatus") != "Ready" {
                 Section("Прогресс") {
                     Text(state.string("loadStatus") == "Loading" ? "Загружаем…" : "Нужна копия прогресса")
-                    if let error = state["error"] as? String { Text(error).foregroundStyle(.red) }
+                    // state.error is shown by the global ErrorBanner above every tab (C1).
                     Text("Откройте «Прогресс» для импорта или экспорта JSON.")
                 }
             } else {
@@ -530,12 +591,20 @@ private struct TrainingView: View {
             model.send("reveal")
         }
         .accessibilityIdentifier("revealAnswer")
+        .accessibilityFocused($revealButtonFocused)
         .buttonStyle(.borderedProminent)
         .controlSize(.large)
         .frame(maxWidth: expands ? .infinity : nil)
         .onAppear {
-            if let id = model.focusEffectId {
-                model.focusEffectId = nil
+            // M11: only claim the FocusReveal effect while its exercise is still the one on
+            // screen; a stale effect from an exercise the user already left is Skipped instead.
+            guard let id = model.focusEffectId else { return }
+            model.focusEffectId = nil
+            if model.focusExerciseId == card.string("id") {
+                model.focusExerciseId = nil
+                revealButtonFocused = true
+                model.acknowledge(id, completed: true)
+            } else {
                 model.acknowledge(id, completed: false)
             }
         }
@@ -879,7 +948,7 @@ private struct ProgressView: View {
                 LabeledContent("Сегодня", value: "\(state.int("todayCount"))")
                 LabeledContent("К повторению", value: "\(state.int("dueCount"))")
                 LabeledContent("Следующее", value: formattedDate(state.int64("nextDue")))
-                if let error = state["error"] as? String { Text(error).foregroundStyle(.red) }
+                // state.error is shown by the global ErrorBanner above every tab (C1).
             }
             Section("Навыки") {
                 ForEach(state.rows("progress"), id: \.selfHash) { row in

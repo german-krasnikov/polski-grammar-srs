@@ -33,7 +33,7 @@ class DesktopPreferencesRepositoryTest {
     fun invalidV1RetainsRawAndNeverFallsBackToLegacy() {
         val directory = Files.createTempDirectory("polski-prefs-")
         try {
-            val raw = "{\"schemaVersion\":2}"
+            val raw = "{\"schemaVersion\":2,\"glassTintPercent\":101}"
             Files.writeString(directory.resolve("preferences-v1.json"), raw)
             val repository = DesktopPreferencesRepository(directory, { "Situations" })
             assertIs<PreferencesLoad.RecoveryRequired>(repository.load())

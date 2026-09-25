@@ -209,7 +209,7 @@ internal object PolishCourseData {
         val value = root.obj("training").obj("chainPresentation")
         val completion = value.obj("completion")
         ChainPresentation(
-            value.rows("steps").map { ChainStep(it.string("id"), it.string("label")) },
+            value.rows("steps").map { ChainStep(it.string("id"), it.string("label")) }.requireUniqueIds(ChainStep::id),
             ChainCompletion(
                 completion.string("title"), completion.string("reactEyebrow"),
                 completion.string("reactBody"), completion.string("webBody"),
