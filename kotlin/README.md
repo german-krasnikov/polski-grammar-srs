@@ -1,6 +1,6 @@
 # Kotlin Multiplatform preview
 
-This directory contains the Kotlin Multiplatform implementation for browser, Mac, Android and iOS. The browser preview renders grammar training, the matrix, progress and the first Polish/Russian vocabulary mode on both Wasm and JS; native hosts expose those flows through their platform UI. The current [pre-glass visual rollback](../Plans/Kotlin/PreGlassRollback.md) restores the earlier instructional hierarchy in semantic browser controls, Android Material 3 and SwiftUI on iPhone, iPad and Mac, while keeping system/light/dark appearance and no app-owned glass optics. All hosts read the shared content pack in `../courses/pl-ru/`. The React app at the repository root remains the product and progress baseline until independent parity and device checks pass. The old stage-2 spike remains in source for its historical tests and uses a separate `polski-grammar-srs-kmp-spike-v1` localStorage key.
+This directory contains the Kotlin Multiplatform implementation for browser, Mac, Android and iOS. The browser preview renders grammar training, the matrix, progress and the first Polish/Russian vocabulary mode on both Wasm and JS; native hosts expose those flows through their platform UI. The current [pre-glass visual rollback](../Plans/Kotlin/PreGlassRollback.md) restores the earlier instructional hierarchy in semantic browser controls, Android Material 3 and SwiftUI on iPhone, iPad and Mac, while keeping system/light/dark appearance and no app-owned glass optics. All hosts read the shared content pack in `../courses/pl-ru/`. The React app at the repository root remains the product and progress baseline until independent parity and device checks pass. The disposable stage-2 renderer spike (`SpikeScreen`, `SpikeSession` and platform `SpikeControls*`) has been removed now that per-host native UI has landed; it is not part of any shipped screen.
 
 ## Toolchain
 
@@ -68,11 +68,11 @@ Current desktop checks and limits are recorded in [MacDesktop.md](../Plans/Kotli
 
 The Android application lives in `androidApp/`. It uses the shared grammar, FSRS and `TrainingStore`, with Android-specific Jetpack Compose Material 3 training, matrix and progress screens and bottom navigation. Its v1 JSON is private to the Android app; transfer existing browser progress through **Экспорт JSON** in the browser and **Импорт** on Android. Import validates the file and backs up the previous Android document. It does not access browser LocalStorage. The current debug APK has launched on a Pixel 4 XL (Android 13) and an API 35 emulator; accessibility and full parity checks remain open.
 
-Build with JDK 21 and an Android SDK containing API 37 and Build Tools 36 (Gradle can download missing SDK packages after licenses are accepted):
+Build with JDK 21 and an Android SDK containing API 37 and Build Tools 36 (Gradle can download missing SDK packages after licenses are accepted). On Apple silicon, use an arm64 JDK 21 — an x86_64 JDK runs under Rosetta and misidentifies the host as `macos_x64`, which breaks native (iOS/macOS) Gradle tasks:
 
 ```sh
 cd kotlin
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/openlogic-openjdk-21.jdk/Contents/Home
+export JAVA_HOME=$(/usr/libexec/java_home -v 21 -a arm64)
 export ANDROID_HOME="$HOME/Library/Android/sdk"
 ./gradlew :androidApp:assembleDebug :androidApp:testDebugUnitTest
 ```

@@ -13,5 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "polski-web-spike"
+rootProject.name = "polski-grammar-kotlin"
 include(":shared", ":composeApp", ":androidApp")

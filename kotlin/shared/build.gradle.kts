@@ -11,11 +11,24 @@ val generateCoursePackSource by tasks.registering {
     inputs.file(frequencyFile)
     outputs.dir(generatedCourseDirectory)
     doLast {
-        fun literalChunks(source: String) = source.chunked(8000).map { chunk ->
-            chunk.replace("\\", "\\\\")
-                .replace("\"", "\\\"")
-                .replace("$", "\\$")
-                .replace("\n", "\\n")
+        fun literalChunks(source: String): List<String> {
+            val rawChunks = mutableListOf<String>()
+            var start = 0
+            while (start < source.length) {
+                var end = minOf(start + 8000, source.length)
+                // Never split a UTF-16 surrogate pair across two chunks.
+                if (end < source.length && Character.isHighSurrogate(source[end - 1]) && Character.isLowSurrogate(source[end])) {
+                    end -= 1
+                }
+                rawChunks += source.substring(start, end)
+                start = end
+            }
+            return rawChunks.map { chunk ->
+                chunk.replace("\\", "\\\\")
+                    .replace("\"", "\\\"")
+                    .replace("$", "\\$")
+                    .replace("\n", "\\n")
+            }
         }
         val chunks = literalChunks(courseFile.asFile.readText())
         val frequencyChunks = literalChunks(frequencyFile.asFile.readText())
@@ -27,9 +40,6 @@ val generateCoursePackSource by tasks.registering {
             frequencyChunks.joinToString("\n") { "    append(\"$it\")" } + "\n}\n")
     }
 }
-tasks.matching { it.name.startsWith("compileKotlin") || it.name == "compileAndroidMain" }
-    .configureEach { dependsOn(generateCoursePackSource) }
-
 kotlin {
     jvmToolchain(21)
     jvm("desktop")
@@ -59,7 +69,11 @@ kotlin {
 
     sourceSets {
         commonMain {
-            kotlin.srcDir(generatedCourseDirectory)
+            // Deriving the srcDir from the task's own outputs (rather than the raw
+            // directory provider) lets Gradle auto-wire every consumer — including
+            // compile*MainKotlinMetadata — as a task dependency, not just tasks whose
+            // name happens to match a "compileKotlin*" prefix.
+            kotlin.srcDir(generateCoursePackSource.map { it.outputs.files.singleFile })
         }
         commonMain.dependencies {
             implementation(libs.kotlinx.serialization.json)

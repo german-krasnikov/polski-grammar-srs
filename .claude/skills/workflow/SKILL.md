@@ -92,6 +92,6 @@ Send the developer concrete blockers, current plan and evidence needed to resolv
 - Commits, version bumps, publication and deployments are separate scope decisions, not automatic consequences of completing this pipeline.
 - Final report: behavior changed, module/entrypoints, actual validation, review status and remaining limitations. If asked only for the next handoff, return the next role, concrete inputs and unresolved gate.
 
-For this migration, use `Plans/Kotlin/Plan.md` and keep the existing web implementation as a behavior oracle until its parity gate is complete. Gradle task names must come from the actual build; do not claim native or browser checks from common/JVM tests. Documentation-only setup needs link/frontmatter/diff checks, not invented RED evidence.
+For this migration, use `Plans/Kotlin/Plan.md`. The React↔Kotlin parity gate for stage 11 was dropped 2026-09-25 in favor of per-host native UI (DOM/CSS web, Compose M3 Android, SwiftUI iOS/macOS); the web parity gate no longer blocks native work, though the React implementation remains a useful behavior reference. Gradle task names must come from the actual build; do not claim native or browser checks from common/JVM tests. Documentation-only setup needs link/frontmatter/diff checks, not invented RED evidence.
 
 This workflow is a coordination convention for the included roles. It does not claim to be a language-standard requirement.

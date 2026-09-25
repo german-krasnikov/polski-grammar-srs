@@ -70,3 +70,28 @@ jobs:
           name: kotlin-web-preview
           path: kotlin/composeApp/build/dist/composeWebCompatibility/productionExecutable/
           if-no-files-found: error
+
+  jvm:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: kotlin
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: android-actions/setup-android@v3
+      - name: Install Android SDK platform and build tools
+        run: sdkmanager "platforms;android-37" "build-tools;36.0.0"
+      - name: Verify Gradle wrapper JAR
+        run: echo '7d3a4ac4de1c32b59bc6a4eb8ecb8e612ccd0cf1ae1e99f66902da64df296172  gradle/wrapper/gradle-wrapper.jar' | sha256sum --check
+      - name: Test shared desktop (JVM) target
+        run: ./gradlew :shared:desktopTest
+      - name: Test composeApp desktop target
+        run: ./gradlew :composeApp:desktopTest
+      - name: Test Android unit tests
+        run: ./gradlew :androidApp:testDebugUnitTest
