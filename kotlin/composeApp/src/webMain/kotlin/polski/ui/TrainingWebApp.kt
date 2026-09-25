@@ -153,6 +153,8 @@ fun TrainingWebApp() {
                     if (!executeEffect(root, state, effect, store, routes::navigate)) attemptedEffects.remove(effect.id)
                 }
             }
+            // Bound the set to still-pending ids; acknowledged/removed effects must not accumulate forever.
+            attemptedEffects.retainAll(state.pendingEffects.mapTo(mutableSetOf()) { it.id })
         },
     )
 }
@@ -220,7 +222,7 @@ private class TrainingDomRenderer {
     private val vocabulary = VocabularyWebController()
     private var navigation: WebNav? = null
 
-    fun close() { navigation?.close(); navigation = null }
+    fun close() { navigation?.close(); navigation = null; vocabulary.close() }
 
     fun render(root: HTMLElement, state: AppUiState, route: WebRoute, returnTo: WebRoute, preferences: WebPreferencesController, store: TrainingStore, navigate: (WebRoute) -> Unit, dispatch: (AppAction) -> Unit) {
         val old = previous
@@ -233,6 +235,10 @@ private class TrainingDomRenderer {
             return // A timer/visibility refresh must not replace an active IME editor.
         }
         val focusId = (document.activeElement as? HTMLElement)?.id.orEmpty()
+        // A rebuild always recreates the focused element, so caret and selection would otherwise
+        // reset to the end of the text every time (e.g. the periodic RefreshTime timer).
+        val focusedTextArea = document.activeElement as? HTMLTextAreaElement
+        val focusedSelection = focusedTextArea?.let { Triple(it.selectionStart, it.selectionEnd, it.scrollTop) }
         val scroll = root.scrollTop
         val innerScroll = root.querySelectorAll("[data-scroll-key]")
         val scrollPositions = buildMap {
@@ -256,6 +262,9 @@ private class TrainingDomRenderer {
         if (state.error != null) {
             content.appendChild(node("p", "notice", state.error).apply { setAttribute("role", "alert") })
         }
+        // A cross-tab storage write must not replay a Vocabulary render callback captured for a
+        // route this host has since navigated away from.
+        if (route != WebRoute.Vocabulary) vocabulary.deactivate()
         when (route) {
             WebRoute.Training -> renderTraining(content, state, preferences.value.swipeRatingEnabled, dispatch)
             WebRoute.Vocabulary -> vocabulary.render(node("main", "vocabulary-page").also(content::appendChild), preferences.value.swipeRatingEnabled) {
@@ -276,6 +285,13 @@ private class TrainingDomRenderer {
         val restoredFocus = if (focusId.isNotEmpty()) document.getElementById(focusId) as? HTMLElement else null
         if (restoredFocus != null) {
             restoredFocus.focus()
+            if (restoredFocus is HTMLTextAreaElement && focusedSelection != null) {
+                val (start, end, scrollTop) = focusedSelection
+                val length = restoredFocus.value.length
+                restoredFocus.selectionStart = start?.coerceAtMost(length)
+                restoredFocus.selectionEnd = end?.coerceAtMost(length)
+                restoredFocus.scrollTop = scrollTop
+            }
         } else if (previousRoute != null && previousRoute != route) {
             // Rebuilding the page removes route-local controls. Give keyboard users a stable
             // focus destination when returning from Settings (or another section).

@@ -7,6 +7,8 @@ import org.w3c.dom.HTMLElement
 import org.w3c.dom.HTMLInputElement
 import org.w3c.dom.HTMLSelectElement
 import org.w3c.dom.HTMLTextAreaElement
+import org.w3c.dom.StorageEvent
+import org.w3c.dom.events.Event
 import kotlin.random.Random
 import kotlin.time.Clock
 import polski.data.courseVocabularyInstructions
@@ -19,6 +21,8 @@ import polski.srs.Rating
 import polski.vocabulary.StudyDirection
 import polski.vocabulary.VocabularyCodec
 import polski.vocabulary.VocabularyDocument
+
+private const val VOCABULARY_BACKUP_KEY = "polski-vocabulary-pl-ru-v1-backup"
 
 /** Browser adapter for the shared vocabulary document; it never writes legacy grammar progress. */
 internal class VocabularyWebController {
@@ -35,19 +39,50 @@ internal class VocabularyWebController {
     private var editing: String? = null
     private var editor = EditorDraft()
     private var importText = ""
+    private var pendingRefresh: (() -> Unit)? = null
+    private val storageListener: (Event) -> Unit = { raw ->
+        // Fires only in OTHER tabs of this origin; the writing tab never sees its own event.
+        val event = raw as? StorageEvent
+        if (event == null || event.key == VocabularyCodec.key || event.key == null) reload()
+    }
 
     init {
+        reload()
+        window.addEventListener("storage", storageListener)
+    }
+
+    /** Stop listening for cross-tab writes; call once when the host unmounts. */
+    fun close() {
+        window.removeEventListener("storage", storageListener)
+    }
+
+    /**
+     * Drop the render callback captured by the last [render] call. The host calls this once it
+     * has navigated away from the Vocabulary route, so a later cross-tab [reload] cannot replay a
+     * closure that still captures the old route/state and would redraw the wrong page.
+     */
+    fun deactivate() {
+        pendingRefresh = null
+    }
+
+    private fun reload() {
         val raw = runCatching { window.localStorage.getItem(VocabularyCodec.key) }.getOrElse {
             error = "Не удалось открыть хранилище словаря: ${it.message}"
             null
         }
-        if (raw != null) runCatching { VocabularyCodec.decode(raw) }.onSuccess { document = it }.onFailure {
+        if (raw != null) runCatching { VocabularyCodec.decode(raw) }.onSuccess {
+            document = it
+            recoveryRaw = null
+            error = null
+        }.onFailure {
             recoveryRaw = raw
             error = "Словарь нужно восстановить: ${it.message}"
         }
+        pendingRefresh?.invoke()
     }
 
     fun render(root: HTMLElement, swipeRatingEnabled: Boolean, refresh: () -> Unit) {
+        pendingRefresh = refresh
         root.className = "vocabulary-page"
         val page = root.add("section", cls = "vocabulary-view")
         page.setAttribute("aria-label", "Тренировка слов")
@@ -101,6 +136,7 @@ internal class VocabularyWebController {
             modes.button("Напечатать ответ") { typed = true; refresh() }.setAttribute("aria-pressed", typed.toString())
             if (typed) {
                 val input = section.add("textarea") as HTMLTextAreaElement
+                input.id = "vocabulary-answer"
                 input.setAttribute("aria-label", "Ответ на карточку слова")
                 input.value = draft
                 input.addEventListener("input", { draft = input.value })
@@ -197,8 +233,7 @@ internal class VocabularyWebController {
             runCatching {
                 val imported = VocabularyCodec.decode(importText)
                 val merged = if (recoveryRaw != null) imported else VocabularyCodec.merge(document, imported)
-                window.localStorage.setItem(VocabularyCodec.key, VocabularyCodec.encode(merged))
-                document = merged; recoveryRaw = null; importText = ""; error = null
+                if (writeDocument(merged, backupCurrent = true)) { recoveryRaw = null; importText = "" }
             }.onFailure { error = it.message ?: "Не удалось импортировать словарь" }
             refresh()
         }
@@ -250,14 +285,34 @@ internal class VocabularyWebController {
 
     private fun commit(next: VocabularyDocument, refresh: () -> Unit): Boolean {
         if (recoveryRaw != null) { error = "Сначала сохрани исходный JSON и восстанови словарь."; refresh(); return false }
-        runCatching {
-            val serialized = VocabularyCodec.encode(next)
+        val ok = writeDocument(next, backupCurrent = false)
+        refresh()
+        return ok
+    }
+
+    /**
+     * Writes [next] and reads it back to catch a silently truncated or evicted write; on failure
+     * the previous value is restored. With [backupCurrent] the value in place before the write is
+     * copied to [VOCABULARY_BACKUP_KEY] and read back first, so a bad import never destroys the
+     * only copy of the current document. Does not consult [recoveryRaw]; callers gate that.
+     */
+    private fun writeDocument(next: VocabularyDocument, backupCurrent: Boolean): Boolean {
+        val serialized = VocabularyCodec.encode(next)
+        var previous: String? = null
+        return runCatching {
+            previous = window.localStorage.getItem(VocabularyCodec.key)
+            if (backupCurrent && previous != null) {
+                window.localStorage.setItem(VOCABULARY_BACKUP_KEY, previous)
+                check(window.localStorage.getItem(VOCABULARY_BACKUP_KEY) == previous) { "Резервная копия словаря не подтверждена" }
+            }
             window.localStorage.setItem(VocabularyCodec.key, serialized)
+            check(window.localStorage.getItem(VocabularyCodec.key) == serialized) { "Словарь не прошёл проверку записи" }
             document = next
             error = null
-        }.onFailure { error = it.message ?: "Не удалось сохранить словарь" }
-        refresh()
-        return error == null
+        }.onFailure {
+            previous?.let { raw -> runCatching { window.localStorage.setItem(VocabularyCodec.key, raw) } }
+            error = it.message ?: "Не удалось сохранить словарь"
+        }.isSuccess
     }
 }
 

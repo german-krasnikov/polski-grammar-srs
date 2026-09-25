@@ -150,3 +150,56 @@ test('Kotlin opens a React vocabulary export with its separate review histories'
   expect(stored.cards['pl-ru:vocabulary:ru-pl:noun.wife'].reps).toBe(1);
   expect(stored.cards['pl-ru:vocabulary:pl-ru:noun.wife']).toBeUndefined();
 });
+
+test('vocabulary import keeps a read-back verified backup of the previous document', async ({ page }) => {
+  const fixture = JSON.parse(readFileSync('tests/fixtures/vocabulary-four-cards.json', 'utf8'));
+  await page.goto('/');
+  await page.getByRole('button', { name: 'Слова', exact: true }).click();
+  await page.getByRole('checkbox').first().check();
+  const before = await page.evaluate(() => localStorage.getItem('polski-vocabulary-pl-ru-v1'));
+  await page.getByRole('textbox', { name: 'JSON словаря для импорта' }).fill(JSON.stringify(fixture));
+  await page.getByRole('button', { name: 'Добавить данные из JSON' }).click();
+  await expect(page.getByText('Мой словарь · 2')).toBeVisible();
+  const backup = await page.evaluate(() => localStorage.getItem('polski-vocabulary-pl-ru-v1-backup'));
+  expect(backup).toBe(before);
+});
+
+test('a storage write from another tab reloads the vocabulary catalog', async ({ page }) => {
+  await page.goto('/');
+  await page.getByRole('button', { name: 'Слова', exact: true }).click();
+  await page.getByRole('checkbox').first().check();
+  await expect(page.getByText('Мой словарь · 1')).toBeVisible();
+  await page.evaluate(() => {
+    const key = 'polski-vocabulary-pl-ru-v1';
+    // Same-tab writes never dispatch `storage`; this reproduces what a second tab's write
+    // looks like from this tab's perspective, without needing a second browser context.
+    const previous = localStorage.getItem(key)!;
+    const doc = JSON.parse(previous);
+    doc.selectedIds = [];
+    const next = JSON.stringify(doc);
+    localStorage.setItem(key, next);
+    window.dispatchEvent(new StorageEvent('storage', { key, oldValue: previous, newValue: next, storageArea: localStorage }));
+  });
+  await expect(page.getByText('Мой словарь · 0')).toBeVisible();
+});
+
+test('a storage write from another tab does not resurrect a stale vocabulary route', async ({ page }) => {
+  await page.goto('/');
+  await page.getByRole('button', { name: 'Слова', exact: true }).click();
+  await page.getByRole('checkbox').first().check();
+  await page.getByRole('button', { name: 'Карточки', exact: true }).click();
+  await expect(page.locator('.vocabulary-page')).toHaveCount(0);
+  await page.evaluate(() => {
+    const key = 'polski-vocabulary-pl-ru-v1';
+    // Same-tab writes never dispatch `storage`; this reproduces a second tab's write while
+    // this tab is showing Training, not Vocabulary, to catch a stale route replay.
+    const previous = localStorage.getItem(key)!;
+    const doc = JSON.parse(previous);
+    doc.selectedIds = [];
+    const next = JSON.stringify(doc);
+    localStorage.setItem(key, next);
+    window.dispatchEvent(new StorageEvent('storage', { key, oldValue: previous, newValue: next, storageArea: localStorage }));
+  });
+  await expect(page.getByRole('button', { name: 'Карточки', exact: true })).toHaveAttribute('aria-current', 'page');
+  await expect(page.locator('.vocabulary-page')).toHaveCount(0);
+});

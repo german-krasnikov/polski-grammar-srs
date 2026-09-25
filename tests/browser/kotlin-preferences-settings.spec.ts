@@ -461,7 +461,9 @@ test('light theme navigation button keeps readable text when hovered', async ({ 
 
 test('capture narrow training and settings in both themes for visual review', async ({ page }, testInfo) => {
   const branch = `${process.env.KOTLIN_SPIKE_BRANCH ?? 'unknown'}-${testInfo.project.name}`;
-  const directory = 'Plans/Kotlin/artifacts/ux2-test';
+  // Screenshots are run artifacts, not tracked review material: keep them under the
+  // gitignored Playwright output directory instead of Plans/Kotlin/artifacts.
+  const directory = testInfo.outputPath('ux2-test');
   mkdirSync(directory, { recursive: true });
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/#/training');

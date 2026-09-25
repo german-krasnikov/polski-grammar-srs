@@ -74,6 +74,23 @@ test('typed answer stays focused while editing and freezes at reveal', async ({ 
   expect(progress.stats['case.acc.f'].correct).toBe(1);
 });
 
+test('a periodic time refresh does not disturb caret or selection while typing', async ({ page }) => {
+  await page.getByRole('button', { name: 'Напечатать ответ' }).click();
+  const answer = page.getByRole('textbox', { name: 'Ответ по-польски' });
+  await answer.fill('Widzę moją piękną żonę.');
+  await answer.evaluate(node => (node as HTMLTextAreaElement).setSelectionRange(6, 10));
+  // RefreshTime is also dispatched on window focus (and document visibilitychange, and the
+  // 30s timer); a synthetic focus event exercises the same rebuild path without a real wait.
+  await page.evaluate(() => window.dispatchEvent(new Event('focus')));
+  await expect(answer).toBeFocused();
+  await expect(answer).toHaveValue('Widzę moją piękną żonę.');
+  const selection = await answer.evaluate(node => {
+    const textarea = node as HTMLTextAreaElement;
+    return [textarea.selectionStart, textarea.selectionEnd];
+  });
+  expect(selection).toEqual([6, 10]);
+});
+
 test('keyboard shortcuts avoid buttons and place focus on the next reveal', async ({ page }) => {
   await page.locator('.source-sentence').click();
   await page.keyboard.press('Space');
