@@ -1,0 +1,46 @@
+.matrix-page,.progress-page{min-width:0;width:100%}
+.matrix-page>h2,.matrix-page>p{max-width:75ch}
+.matrix-page>.subnav{margin:20px 0 22px}
+.matrix-section{padding:24px 28px;margin:0 0 18px;min-width:0}
+.matrix-section>p{color:#b4c5d8;max-width:90ch}
+.matrix-section h3{font-size:1.12rem;color:#edf4ff}
+.system-grid,.decision-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:12px;margin:18px 0}
+.system-grid article,.decision-grid article{border:1px solid #354a62;border-radius:10px;background:#0c1928;padding:17px;min-width:0}
+.system-grid h4,.decision-grid h4{font-size:.98rem;margin:0 0 9px;color:#d9e8f7}
+.system-grid p,.decision-grid p{font-size:.87rem;color:#afc1d5;margin:0 0 12px}
+.decision-grid small{display:block;color:#9fb4ca;line-height:1.5}
+.table-controls{display:flex;flex-wrap:wrap;gap:12px;margin:16px 0 20px;align-items:end}
+.table-controls label{min-width:min(100%,175px);flex:1 1 175px}
+.table-controls select{width:100%}
+.table-scroll{width:100%;max-width:100%;min-width:0;overflow-x:auto;overflow-y:auto;overscroll-behavior-inline:contain;border:1px solid #34495e;border-radius:9px;margin:14px 0 18px;scrollbar-color:#567089 #152436}
+.table-scroll table{border-collapse:collapse;width:100%;min-width:650px;color:#dce7f3;font-size:.875rem;line-height:1.45}
+.table-scroll .comparison-table{min-width:900px}
+.table-scroll th,.table-scroll td{text-align:left;vertical-align:top;padding:11px 13px;border-bottom:1px solid #314358;min-width:100px}
+.table-scroll thead th{background:#183049;color:#e8f2ff;font-weight:700;white-space:normal}
+.table-scroll tbody th{background:#14263a;color:#c8e6fa;font-weight:600}
+.table-scroll tbody tr:last-child>*{border-bottom:0}
+.table-scroll tr:hover td,.table-scroll tr:hover th{background:#1b3045}
+.table-scroll .highlight-row td,.table-scroll .highlight-row th{background:#244536;color:#d1f3df}
+.table-scroll [lang=pl]{font-weight:500}
+.table-scroll .text-button{border:0;background:transparent;color:#8cd3fa;text-align:left;padding:0;text-decoration:underline;text-underline-offset:3px}
+.table-scroll .text-button:hover{color:#c2eaff;background:transparent}
+.bigstats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:18px 0}
+.bigstats>div{display:flex;flex-direction:column;gap:4px;border:1px solid #3b526b;border-radius:9px;background:#0d1b2c;padding:18px;min-width:0}
+.bigstats b{font-size:clamp(1.45rem,3vw,2.25rem);line-height:1.2;color:#e5f6ff}
+.bigstats span{font-size:.82rem;color:#adc2d8}
+.reference-panel .table-scroll table{min-width:330px;font-size:.78rem}
+.reference-panel .table-scroll th,.reference-panel .table-scroll td{padding:9px 10px;min-width:0}
+.reference-panel .table-scroll th{width:42%}
+@media(max-width:600px){.matrix-section{padding:18px 15px}.matrix-page>.subnav button{flex:1 1 130px}.bigstats{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.bigstats>div{padding:11px 8px}.bigstats span{font-size:.68rem}.table-scroll table{font-size:.8rem}.table-scroll th,.table-scroll td{padding:9px 10px}}
+@media(max-width:380px){.bigstats{grid-template-columns:1fr}.bigstats>div{flex-direction:row;align-items:center;gap:12px}.bigstats span{font-size:.8rem}}
+:root[data-theme=light] .matrix-section>p,:root[data-theme=light] .system-grid p,:root[data-theme=light] .decision-grid p,:root[data-theme=light] .decision-grid small,:root[data-theme=light] .bigstats span{color:var(--muted)}
+:root[data-theme=light] .matrix-section h3,:root[data-theme=light] .system-grid h4,:root[data-theme=light] .decision-grid h4,:root[data-theme=light] .bigstats b{color:var(--text)}
+:root[data-theme=light] .system-grid article,:root[data-theme=light] .decision-grid article,:root[data-theme=light] .bigstats>div{background:var(--surface);border-color:var(--line)}
+:root[data-theme=light] .table-scroll{border-color:var(--line);scrollbar-color:#8faac2 #e5edf5}
+:root[data-theme=light] .table-scroll table{color:var(--text)}
+:root[data-theme=light] .table-scroll th,:root[data-theme=light] .table-scroll td{border-color:var(--line)}
+:root[data-theme=light] .table-scroll thead th{background:var(--table-head);color:var(--text)}
+:root[data-theme=light] .table-scroll tbody th{background:var(--table-row);color:#154c72}
+:root[data-theme=light] .table-scroll tr:hover td,:root[data-theme=light] .table-scroll tr:hover th{background:#dcecf7}
+:root[data-theme=light] .table-scroll .highlight-row td,:root[data-theme=light] .table-scroll .highlight-row th{background:#d9f2e4;color:#15533d}
+:root[data-theme=light] .table-scroll .text-button{color:var(--blue)}

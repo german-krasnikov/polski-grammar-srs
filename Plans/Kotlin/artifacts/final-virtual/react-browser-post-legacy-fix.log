@@ -1,0 +1,36 @@
+
+> polski-grammar-srs@1.0.0 test:browser
+> playwright test
+
+[2m[WebServer] [22m(node:54983) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[2m[WebServer] [22m(Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 21 tests using 1 worker
+
+(node:54985) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:54985) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/browser/method-cycle-react.spec.ts:3:1 › first method cycle preserves the task and writes one review only after rating (1.1s)
+  ✓   2 tests/browser/react-acceptance.spec.ts:26:1 › standard keyboard activation grades once and advances the card (424ms)
+  ✓   3 tests/browser/react-acceptance.spec.ts:42:1 › failed save preserves the reviewed state for export in the open session (541ms)
+  ✓   4 tests/browser/react-acceptance.spec.ts:68:1 › a pointer wheel scrolls the narrow comparison table to its last column (613ms)
+  ✓   5 tests/browser/react-baseline.spec.ts:40:1 › five linked cards save binary oral ratings and advance to the next seed (1.2s)
+  ✓   6 tests/browser/react-baseline.spec.ts:70:1 › explanation method switches on the same draft and survives reload (469ms)
+  ✓   7 tests/browser/react-baseline.spec.ts:86:1 › word cards keep both directions and a user entry across reload (660ms)
+  ✓   8 tests/browser/react-baseline.spec.ts:110:1 › frequency catalog reports exact coverage and disables unready ranks (496ms)
+  ✓   9 tests/browser/react-baseline.spec.ts:121:1 › imported custom word cannot make a deferred frequency rank selectable (505ms)
+  ✓  10 tests/browser/react-baseline.spec.ts:143:1 › clean React profile restores a legacy shipped-homonym custom export (556ms)
+  ✓  11 tests/browser/react-baseline.spec.ts:166:1 › four-card vocabulary file round-trips and rejects invalid pair before write (569ms)
+  ✓  12 tests/browser/react-baseline.spec.ts:184:1 › typed answer freezes after Enter, records actual correctness and clears on mode change (733ms)
+  ✓  13 tests/browser/react-baseline.spec.ts:204:1 › accepted typed alternative counts correct; wrong text counts a mistake despite Good rating (790ms)
+  ✓  14 tests/browser/react-baseline.spec.ts:223:1 › global shortcuts ignore modifiers and focused input controls (433ms)
+  ✓  15 tests/browser/react-baseline.spec.ts:239:1 › characterizes focus after advancing a card (629ms)
+  ✓  16 tests/browser/react-baseline.spec.ts:249:1 › schedule queue, keyboard guard and reference preserve the current card (581ms)
+  ✓  17 tests/browser/react-baseline.spec.ts:272:1 › matrix selectors, gender forms, comparison and drill work in the browser (750ms)
+  ✓  18 tests/browser/react-baseline.spec.ts:304:1 › matrix pipeline keeps three authored steps and opens its chain drill (420ms)
+  ✓  19 tests/browser/react-baseline.spec.ts:317:1 › progress survives reload, exports JSON and reset cancel/confirm (840ms)
+  ✓  20 tests/browser/react-baseline.spec.ts:340:1 › storage write failure reports a visible recovery action (578ms)
+  ✓  21 tests/browser/react-baseline.spec.ts:355:1 › reviewable screenshots cover desktop, 320px, landscape and reduced motion (5.4s)
+
+  21 passed (20.5s)

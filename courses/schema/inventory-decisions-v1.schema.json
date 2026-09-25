@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://polski-grammar-srs.local/inventory-decisions-v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "decisions"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "decisions": { "type": "array", "items": { "$ref": "#/$defs/decision" } }
+  },
+  "$defs": {
+    "category": {
+      "enum": [
+        "pack-backed-authored",
+        "runtime-morphology",
+        "ui-localization-chrome",
+        "serialization-plumbing",
+        "diagnostic",
+        "inactive-prototype"
+      ]
+    },
+    "classification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["category", "reason"],
+      "properties": {
+        "category": { "$ref": "#/$defs/category" },
+        "reason": { "type": "string", "pattern": "\\S" },
+        "packPointer": { "type": "string", "pattern": "^/(?:[^/~]|~[01])+(?:/(?:[^/~]|~[01])*)*$" }
+      },
+      "if": { "properties": { "category": { "const": "pack-backed-authored" } }, "required": ["category"] },
+      "then": { "required": ["packPointer"] },
+      "else": { "not": { "required": ["packPointer"] } }
+    },
+    "part": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ordinal", "category", "reason"],
+      "properties": {
+        "ordinal": { "type": "integer", "minimum": 0 },
+        "category": { "$ref": "#/$defs/category" },
+        "reason": { "type": "string", "pattern": "\\S" },
+        "packPointer": { "type": "string", "pattern": "^/(?:[^/~]|~[01])+(?:/(?:[^/~]|~[01])*)*$" }
+      },
+      "if": { "properties": { "category": { "const": "pack-backed-authored" } }, "required": ["category"] },
+      "then": { "required": ["packPointer"] },
+      "else": { "not": { "required": ["packPointer"] } }
+    },
+    "decision": {
+      "type": "object",
+      "required": ["path", "symbol", "sourceFingerprint", "occurrence"],
+      "properties": {
+        "path": { "type": "string", "pattern": "^(src|kotlin)/[^\\n]+\\.(ts|tsx|kt|swift)$" },
+        "symbol": { "type": "string", "pattern": "\\S" },
+        "sourceFingerprint": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "occurrence": { "type": "integer", "minimum": 1 },
+        "category": { "$ref": "#/$defs/category" },
+        "reason": { "type": "string", "pattern": "\\S" },
+        "packPointer": { "type": "string", "pattern": "^/(?:[^/~]|~[01])+(?:/(?:[^/~]|~[01])*)*$" },
+        "parts": { "type": "array", "minItems": 2, "items": { "$ref": "#/$defs/part" } }
+      },
+      "oneOf": [
+        { "required": ["category", "reason"], "not": { "required": ["parts"] } },
+        { "required": ["parts"], "not": { "anyOf": [{ "required": ["category"] }, { "required": ["reason"] }, { "required": ["packPointer"] }] } }
+      ],
+      "if": { "properties": { "category": { "const": "pack-backed-authored" } }, "required": ["category"] },
+      "then": { "anyOf": [{ "required": ["packPointer"] }, { "required": ["parts"] }] },
+      "else": { "not": { "required": ["packPointer"] } },
+      "additionalProperties": false
+    }
+  }
+}

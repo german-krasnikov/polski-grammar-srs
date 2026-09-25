@@ -1,0 +1,4 @@
+interface:
+  display_name: "Kotlin Multiplatform Web"
+  short_description: "Browser code, responsive layout and motion"
+  default_prompt: "Use $kmp-web for this Kotlin Multiplatform task."

@@ -1,0 +1,170 @@
+{
+  "date": "2026-09-25T09:00:24.225Z",
+  "urls": {
+    "base": "http://127.0.0.1:4178/",
+    "liquid": "http://127.0.0.1:4180/"
+  },
+  "rounds": 8,
+  "durationMs": 3000,
+  "engines": [
+    {
+      "engine": "webkit",
+      "browserVersion": "26.0",
+      "runs": [
+        {
+          "round": 1,
+          "variant": "base",
+          "clicks": 5,
+          "frameCount": 175,
+          "p50Ms": 17,
+          "p95Ms": 20,
+          "over25Ms": 7
+        },
+        {
+          "round": 1,
+          "variant": "liquid",
+          "clicks": 5,
+          "frameCount": 173,
+          "p50Ms": 17,
+          "p95Ms": 19,
+          "over25Ms": 5
+        },
+        {
+          "round": 2,
+          "variant": "liquid",
+          "clicks": 5,
+          "frameCount": 174,
+          "p50Ms": 16,
+          "p95Ms": 19,
+          "over25Ms": 5
+        },
+        {
+          "round": 2,
+          "variant": "base",
+          "clicks": 5,
+          "frameCount": 180,
+          "p50Ms": 17,
+          "p95Ms": 18,
+          "over25Ms": 2
+        },
+        {
+          "round": 3,
+          "variant": "base",
+          "clicks": 5,
+          "frameCount": 179,
+          "p50Ms": 17,
+          "p95Ms": 19,
+          "over25Ms": 3
+        },
+        {
+          "round": 3,
+          "variant": "liquid",
+          "clicks": 5,
+          "frameCount": 172,
+          "p50Ms": 17,
+          "p95Ms": 22,
+          "over25Ms": 6
+        },
+        {
+          "round": 4,
+          "variant": "liquid",
+          "clicks": 5,
+          "frameCount": 174,
+          "p50Ms": 17,
+          "p95Ms": 19,
+          "over25Ms": 5
+        },
+        {
+          "round": 4,
+          "variant": "base",
+          "clicks": 5,
+          "frameCount": 177,
+          "p50Ms": 17,
+          "p95Ms": 21,
+          "over25Ms": 6
+        },
+        {
+          "round": 5,
+          "variant": "base",
+          "clicks": 5,
+          "frameCount": 176,
+          "p50Ms": 17,
+          "p95Ms": 22,
+          "over25Ms": 7
+        },
+        {
+          "round": 5,
+          "variant": "liquid",
+          "clicks": 5,
+          "frameCount": 169,
+          "p50Ms": 17,
+          "p95Ms": 20,
+          "over25Ms": 6
+        },
+        {
+          "round": 6,
+          "variant": "liquid",
+          "clicks": 5,
+          "frameCount": 174,
+          "p50Ms": 17,
+          "p95Ms": 23,
+          "over25Ms": 7
+        },
+        {
+          "round": 6,
+          "variant": "base",
+          "clicks": 5,
+          "frameCount": 176,
+          "p50Ms": 17,
+          "p95Ms": 22,
+          "over25Ms": 7
+        },
+        {
+          "round": 7,
+          "variant": "base",
+          "clicks": 5,
+          "frameCount": 178,
+          "p50Ms": 17,
+          "p95Ms": 19,
+          "over25Ms": 3
+        },
+        {
+          "round": 7,
+          "variant": "liquid",
+          "clicks": 5,
+          "frameCount": 174,
+          "p50Ms": 17,
+          "p95Ms": 19,
+          "over25Ms": 5
+        },
+        {
+          "round": 8,
+          "variant": "liquid",
+          "clicks": 5,
+          "frameCount": 175,
+          "p50Ms": 17,
+          "p95Ms": 20,
+          "over25Ms": 5
+        },
+        {
+          "round": 8,
+          "variant": "base",
+          "clicks": 5,
+          "frameCount": 178,
+          "p50Ms": 17,
+          "p95Ms": 19,
+          "over25Ms": 2
+        }
+      ],
+      "summary": {
+        "baseMedianP95Ms": 19,
+        "liquidMedianP95Ms": 19,
+        "pairedMedianDeltaP95Ms": 0,
+        "pairedRangeDeltaP95Ms": [
+          -2,
+          3
+        ]
+      }
+    }
+  ]
+}

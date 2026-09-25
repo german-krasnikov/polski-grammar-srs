@@ -1,0 +1,4 @@
+interface:
+  display_name: "Kotlin Multiplatform Architecture"
+  short_description: "KMP boundaries, state, compatibility and builds"
+  default_prompt: "Use $module-architecture for this project task."

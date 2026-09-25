@@ -1,0 +1,239 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e9]:
+  - banner [ref=e10]:
+    - generic [ref=e11]:
+      - heading "POLSKI Grammar Matrix" [level=1] [ref=e12]
+      - paragraph [ref=e13]: Предложение → преобразование → новое предложение
+    - generic [ref=e14]:
+      - generic [ref=e15]:
+        - generic [ref=e16]: "16"
+        - generic [ref=e17]: к повторению
+      - generic [ref=e18]:
+        - generic [ref=e19]: "0"
+        - generic [ref=e20]: сегодня
+  - navigation "Основные разделы" [ref=e21]:
+    - button "Карточки" [ref=e22] [cursor=pointer]
+    - button "Слова" [pressed] [ref=e23] [cursor=pointer]
+    - button "Таблицы и схема" [ref=e24] [cursor=pointer]
+    - button "Прогресс" [ref=e25] [cursor=pointer]
+  - main [ref=e26]:
+    - region "Тренировка слов" [ref=e27]:
+      - generic [ref=e28]:
+        - generic [ref=e29]:
+          - heading "Слова и выражения" [level=2] [ref=e30]
+          - paragraph [ref=e31]: Отмечай слова в каталоге. Узнавание и воспроизведение повторяются по отдельным расписаниям.
+        - generic [ref=e32]:
+          - text: Направление
+          - combobox "Направление карточки" [ref=e33] [cursor=pointer]:
+            - option "Русский → польский" [selected]
+            - option "Польский → русский"
+      - alert [ref=e34]: Это польское слово уже есть в словаре
+      - generic [ref=e35]:
+        - region "Карточка слова" [ref=e36]:
+          - heading "Выбери слова для тренировки" [level=3] [ref=e37]
+          - paragraph [ref=e38]: Отметь готовые карточки в каталоге. История каждого направления сохраняется отдельно.
+        - generic [ref=e39]:
+          - generic [ref=e40]:
+            - heading "Мой словарь · 0" [level=3] [ref=e41]
+            - button "Скрыть каталог" [expanded] [ref=e42] [cursor=pointer]
+          - generic [ref=e43]:
+            - text: Подборка
+            - combobox "Подборка слов" [ref=e44] [cursor=pointer]:
+              - option "A1 · готовые карточки" [selected]
+              - option "A2 · готовые карточки"
+              - option "B1 · готовые карточки"
+              - option "Топ-100 по частоте"
+              - option "Топ-500 по частоте"
+              - option "Топ-1000 по частоте"
+              - option "Мои слова"
+          - paragraph [ref=e45]: Частотный ранг не равен уровню CEFR. Слова без проверенного перевода и примера пока не добавляются в тренировки. Исходные 32 карточки прошли языковую проверку; метки A1/A2 — локальные группы, не официальная сертификация CEFR.
+          - generic [ref=e46]:
+            - generic [ref=e47]:
+              - checkbox "żona жена № 506" [ref=e48]
+              - generic [ref=e49]:
+                - generic [ref=e50]: żona
+                - generic [ref=e51]: жена
+              - generic [ref=e52]: № 506
+            - generic [ref=e53]:
+              - checkbox "kobieta женщина № 162" [ref=e54]
+              - generic [ref=e55]:
+                - generic [ref=e56]: kobieta
+                - generic [ref=e57]: женщина
+              - generic [ref=e58]: № 162
+            - generic [ref=e59]:
+              - checkbox "książka книга № 276" [ref=e60]
+              - generic [ref=e61]:
+                - generic [ref=e62]: książka
+                - generic [ref=e63]: книга
+              - generic [ref=e64]: № 276
+            - generic [ref=e65]:
+              - checkbox "syn сын № 490" [ref=e66]
+              - generic [ref=e67]:
+                - generic [ref=e68]: syn
+                - generic [ref=e69]: сын
+              - generic [ref=e70]: № 490
+            - generic [ref=e71]:
+              - checkbox "pies собака № 637" [ref=e72]
+              - generic [ref=e73]:
+                - generic [ref=e74]: pies
+                - generic [ref=e75]: собака
+              - generic [ref=e76]: № 637
+            - generic [ref=e77]:
+              - checkbox "kot кот № 540" [ref=e78]
+              - generic [ref=e79]:
+                - generic [ref=e80]: kot
+                - generic [ref=e81]: кот
+              - generic [ref=e82]: № 540
+            - generic [ref=e83]:
+              - checkbox "samochód машина № 225" [ref=e84]
+              - generic [ref=e85]:
+                - generic [ref=e86]: samochód
+                - generic [ref=e87]: машина
+              - generic [ref=e88]: № 225
+            - generic [ref=e89]:
+              - checkbox "dom дом № 104" [ref=e90]
+              - generic [ref=e91]:
+                - generic [ref=e92]: dom
+                - generic [ref=e93]: дом
+              - generic [ref=e94]: № 104
+            - generic [ref=e95]:
+              - checkbox "telefon телефон № 596" [ref=e96]
+              - generic [ref=e97]:
+                - generic [ref=e98]: telefon
+                - generic [ref=e99]: телефон
+              - generic [ref=e100]: № 596
+            - generic [ref=e101]:
+              - checkbox "dziecko ребёнок № 86" [ref=e102]
+              - generic [ref=e103]:
+                - generic [ref=e104]: dziecko
+                - generic [ref=e105]: ребёнок
+              - generic [ref=e106]: № 86
+            - generic [ref=e107]:
+              - checkbox "okno окно № 554" [ref=e108]
+              - generic [ref=e109]:
+                - generic [ref=e110]: okno
+                - generic [ref=e111]: окно
+              - generic [ref=e112]: № 554
+            - generic [ref=e113]:
+              - checkbox "nowy новый № 68" [ref=e114]
+              - generic [ref=e115]:
+                - generic [ref=e116]: nowy
+                - generic [ref=e117]: новый
+              - generic [ref=e118]: № 68
+            - generic [ref=e119]:
+              - checkbox "mały маленький № 155" [ref=e120]
+              - generic [ref=e121]:
+                - generic [ref=e122]: mały
+                - generic [ref=e123]: маленький
+              - generic [ref=e124]: № 155
+            - generic [ref=e125]:
+              - checkbox "ładny симпатичный, приятный на вид" [ref=e126]
+              - generic [ref=e127]:
+                - generic [ref=e128]: ładny
+                - generic [ref=e129]: симпатичный, приятный на вид
+            - generic [ref=e130]:
+              - checkbox "dobry хороший № 81" [ref=e131]
+              - generic [ref=e132]:
+                - generic [ref=e133]: dobry
+                - generic [ref=e134]: хороший
+              - generic [ref=e135]: № 81
+            - generic [ref=e136]:
+              - checkbox "stary старый № 142" [ref=e137]
+              - generic [ref=e138]:
+                - generic [ref=e139]: stary
+                - generic [ref=e140]: старый
+              - generic [ref=e141]: № 142
+            - generic [ref=e142]:
+              - checkbox "mieć иметь № 14" [ref=e143]
+              - generic [ref=e144]:
+                - generic [ref=e145]: mieć
+                - generic [ref=e146]: иметь
+              - generic [ref=e147]: № 14
+            - generic [ref=e148]:
+              - checkbox "widzieć видеть № 117" [ref=e149]
+              - generic [ref=e150]:
+                - generic [ref=e151]: widzieć
+                - generic [ref=e152]: видеть
+              - generic [ref=e153]: № 117
+            - generic [ref=e154]:
+              - checkbox "lubić нравиться (о занятии); любить делать что-либо № 370" [ref=e155]
+              - generic [ref=e156]:
+                - generic [ref=e157]: lubić
+                - generic [ref=e158]: нравиться (о занятии); любить делать что-либо
+              - generic [ref=e159]: № 370
+            - generic [ref=e160]:
+              - checkbox "kupować покупать" [ref=e161]
+              - generic [ref=e162]:
+                - generic [ref=e163]: kupować
+                - generic [ref=e164]: покупать
+            - generic [ref=e165]:
+              - checkbox "czytać читать № 455" [ref=e166]
+              - generic [ref=e167]:
+                - generic [ref=e168]: czytać
+                - generic [ref=e169]: читать
+              - generic [ref=e170]: № 455
+            - generic [ref=e171]:
+              - checkbox "mówić говорить № 41" [ref=e172]
+              - generic [ref=e173]:
+                - generic [ref=e174]: mówić
+                - generic [ref=e175]: говорить
+              - generic [ref=e176]: № 41
+            - generic [ref=e177]:
+              - checkbox "iść идти № 176" [ref=e178]
+              - generic [ref=e179]:
+                - generic [ref=e180]: iść
+                - generic [ref=e181]: идти
+              - generic [ref=e182]: № 176
+            - generic [ref=e183]:
+              - checkbox "być быть № 2" [ref=e184]
+              - generic [ref=e185]:
+                - generic [ref=e186]: być
+                - generic [ref=e187]: быть
+              - generic [ref=e188]: № 2
+            - generic [ref=e189]:
+              - checkbox "robić делать № 133" [ref=e190]
+              - generic [ref=e191]:
+                - generic [ref=e192]: robić
+                - generic [ref=e193]: делать
+              - generic [ref=e194]: № 133
+          - generic [ref=e195]:
+            - heading "Добавить своё слово" [level=4] [ref=e196]
+            - generic [ref=e197]:
+              - generic [ref=e198]:
+                - text: Польское слово
+                - textbox "Польское слово" [ref=e199]
+              - generic [ref=e200]:
+                - text: Перевод
+                - textbox "Перевод" [ref=e201]
+              - generic [ref=e202]:
+                - text: Форма
+                - textbox "Форма" [ref=e203]
+              - generic [ref=e204]:
+                - text: Пример в предложении
+                - textbox "Пример в предложении" [ref=e205]
+              - generic [ref=e206]:
+                - text: Уровень
+                - combobox "Уровень" [ref=e207] [cursor=pointer]:
+                  - option "—" [selected]
+                  - option "A1"
+                  - option "A2"
+                  - option "B1"
+                  - option "B2"
+                  - option "C1"
+                  - option "C2"
+            - button "Добавить слово" [ref=e209] [cursor=pointer]
+          - generic [ref=e210]:
+            - button "Экспорт словаря JSON" [ref=e211] [cursor=pointer]
+            - button "Добавить данные из JSON" [ref=e212] [cursor=pointer]
+          - generic [ref=e213]:
+            - text: Импорт JSON
+            - textbox "JSON словаря для импорта" [ref=e214]: "{\"version\":1,\"pair\":\"pl-ru\",\"selectedIds\":[\"noun.wife\",\"user.00000000-0000-4000-8000-000000000091\"],\"custom\":[{\"id\":\"user.00000000-0000-4000-8000-000000000091\",\"lemma\":\"żona\",\"translation\":\"супруга (личное)\",\"form\":\"żona\",\"example\":\"To jest moja żona.\",\"level\":\"—\",\"frequencyRank\":null,\"custom\":true}],\"cards\":{\"pl-ru:vocabulary:ru-pl:noun.wife\":{\"due\":\"2099-01-01T00:00:00.000Z\",\"stability\":2.3065,\"difficulty\":2.11810397,\"elapsed_days\":0,\"scheduled_days\":0,\"reps\":1,\"lapses\":0,\"learning_steps\":1,\"state\":1,\"last_review\":\"2026-09-23T12:00:00.000Z\"},\"pl-ru:vocabulary:ru-pl:user.00000000-0000-4000-8000-000000000091\":{\"due\":\"2099-01-01T00:00:00.000Z\",\"stability\":2.3065,\"difficulty\":2.11810397,\"elapsed_days\":0,\"scheduled_days\":0,\"reps\":1,\"lapses\":0,\"learning_steps\":1,\"state\":1,\"last_review\":\"2026-09-23T12:00:00.000Z\"}}}"
+      - paragraph [ref=e215]:
+        - generic [ref=e216]: "Частотные ранги и counts:"
+        - link "Leksjo / NKJP, CC BY 4.0" [ref=e217] [cursor=pointer]:
+          - /url: https://github.com/KubaCiolo/leksjo-dane/blob/01782aa92cc842d0d3199079eba47ecbf05879e1/dane/nkjp-frekwencja.csv
+        - generic [ref=e218]: ". Изменения: взяты первые 1000 лемм, рангов и counts."
+  - contentinfo [ref=e219]: Прогресс сохраняется в этом браузере. Интервальные повторения — FSRS.
+```

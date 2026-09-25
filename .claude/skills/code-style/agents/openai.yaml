@@ -1,0 +1,4 @@
+interface:
+  display_name: "Kotlin Code Style"
+  short_description: "Kotlin naming, formatting, KDoc and static checks"
+  default_prompt: "Use $code-style for this project task."

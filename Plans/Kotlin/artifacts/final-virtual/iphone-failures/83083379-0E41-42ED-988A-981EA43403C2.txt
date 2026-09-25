@@ -1,0 +1,18 @@
+Failed to tap "revealAnswer" Button: No matches found for Elements matching predicate '"revealAnswer" IN identifiers' from input {(
+    Button, identifier: 'square.stack', label: 'Тренировка', Selected,
+    Button, identifier: 'tablecells', label: 'Матрица',
+    Button, identifier: 'chart.bar', label: 'Прогресс',
+    Button, identifier: 'character.book.closed', label: 'Слова',
+    Button, label: 'Режим: Цепочка предложений',
+    Button, label: 'Набор слов, żona',
+    Button, label: 'Подача объяснений, Схемы и логика',
+    Button
+)}
+Possibly caused by runtime issues:
+Automation type mismatch: computed Button from legacy attributes vs PopUpButton from modern attribute. Input attributes and values: {
+    "XC_kAXXCAttributeAutomationType" = 14;
+    "XC_kAXXCAttributeElementBaseType" = UIResponder;
+    "XC_kAXXCAttributeElementType" = "SwiftUI.AccessibilityNode";
+    "XC_kAXXCAttributeTraits" = 1108101562369;
+}
+See test report attachments for more detail.

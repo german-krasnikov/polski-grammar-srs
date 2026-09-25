@@ -1,0 +1,13 @@
+
+> polski-grammar-srs@1.0.0 test
+> vitest run
+
+
+ RUN  v4.1.11 /Users/german/Work/JS/polski-grammar-srs
+
+
+ Test Files  35 passed (35)
+      Tests  201 passed (201)
+   Start at  19:40:08
+   Duration  6.94s (transform 3.32s, setup 0ms, import 18.17s, tests 18.08s, environment 3.42s)
+

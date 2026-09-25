@@ -1,0 +1,4 @@
+interface:
+  display_name: "Web Parity Testing"
+  short_description: "Browser acceptance for React and Kotlin parity"
+  default_prompt: "Use $playwright-testing for this project task."

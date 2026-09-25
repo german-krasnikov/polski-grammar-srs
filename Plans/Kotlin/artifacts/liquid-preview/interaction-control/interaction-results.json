@@ -1,0 +1,257 @@
+{
+  "date": "2026-09-25T08:58:44.505Z",
+  "urls": {
+    "base": "http://127.0.0.1:4178/",
+    "liquid": "http://127.0.0.1:4178/?control=1"
+  },
+  "rounds": 6,
+  "durationMs": 3000,
+  "engines": [
+    {
+      "engine": "chromium",
+      "browserVersion": "140.0.7339.186",
+      "runs": [
+        {
+          "round": 1,
+          "variant": "base",
+          "clicks": 5,
+          "frameCount": 180,
+          "p50Ms": 16.699999999999818,
+          "p95Ms": 16.700000000000273,
+          "over25Ms": 0
+        },
+        {
+          "round": 1,
+          "variant": "liquid",
+          "clicks": 5,
+          "frameCount": 179,
+          "p50Ms": 16.699999999999818,
+          "p95Ms": 16.800000000000182,
+          "over25Ms": 0
+        },
+        {
+          "round": 2,
+          "variant": "liquid",
+          "clicks": 5,
+          "frameCount": 180,
+          "p50Ms": 16.69999999999891,
+          "p95Ms": 16.700000000000728,
+          "over25Ms": 0
+        },
+        {
+          "round": 2,
+          "variant": "base",
+          "clicks": 5,
+          "frameCount": 179,
+          "p50Ms": 16.69999999999891,
+          "p95Ms": 16.700000000000728,
+          "over25Ms": 0
+        },
+        {
+          "round": 3,
+          "variant": "base",
+          "clicks": 5,
+          "frameCount": 180,
+          "p50Ms": 16.69999999999891,
+          "p95Ms": 16.700000000000728,
+          "over25Ms": 0
+        },
+        {
+          "round": 3,
+          "variant": "liquid",
+          "clicks": 5,
+          "frameCount": 179,
+          "p50Ms": 16.700000000000728,
+          "p95Ms": 16.700000000000728,
+          "over25Ms": 0
+        },
+        {
+          "round": 4,
+          "variant": "liquid",
+          "clicks": 5,
+          "frameCount": 179,
+          "p50Ms": 16.700000000000728,
+          "p95Ms": 16.700000000000728,
+          "over25Ms": 0
+        },
+        {
+          "round": 4,
+          "variant": "base",
+          "clicks": 5,
+          "frameCount": 179,
+          "p50Ms": 16.700000000000728,
+          "p95Ms": 16.700000000000728,
+          "over25Ms": 0
+        },
+        {
+          "round": 5,
+          "variant": "base",
+          "clicks": 5,
+          "frameCount": 179,
+          "p50Ms": 16.700000000000728,
+          "p95Ms": 16.700000000000728,
+          "over25Ms": 0
+        },
+        {
+          "round": 5,
+          "variant": "liquid",
+          "clicks": 5,
+          "frameCount": 179,
+          "p50Ms": 16.69999999999709,
+          "p95Ms": 16.700000000004366,
+          "over25Ms": 0
+        },
+        {
+          "round": 6,
+          "variant": "liquid",
+          "clicks": 5,
+          "frameCount": 180,
+          "p50Ms": 16.69999999999709,
+          "p95Ms": 16.700000000004366,
+          "over25Ms": 0
+        },
+        {
+          "round": 6,
+          "variant": "base",
+          "clicks": 5,
+          "frameCount": 179,
+          "p50Ms": 16.69999999999709,
+          "p95Ms": 16.799999999995634,
+          "over25Ms": 0
+        }
+      ],
+      "summary": {
+        "baseMedianP95Ms": 16.700000000000728,
+        "liquidMedianP95Ms": 16.700000000000728,
+        "pairedMedianDeltaP95Ms": 0,
+        "pairedRangeDeltaP95Ms": [
+          -0.09999999999126885,
+          0.09999999999990905
+        ]
+      }
+    },
+    {
+      "engine": "webkit",
+      "browserVersion": "26.0",
+      "runs": [
+        {
+          "round": 1,
+          "variant": "base",
+          "clicks": 5,
+          "frameCount": 173,
+          "p50Ms": 17,
+          "p95Ms": 22,
+          "over25Ms": 5
+        },
+        {
+          "round": 1,
+          "variant": "liquid",
+          "clicks": 5,
+          "frameCount": 176,
+          "p50Ms": 17,
+          "p95Ms": 19,
+          "over25Ms": 3
+        },
+        {
+          "round": 2,
+          "variant": "liquid",
+          "clicks": 5,
+          "frameCount": 178,
+          "p50Ms": 17,
+          "p95Ms": 22,
+          "over25Ms": 4
+        },
+        {
+          "round": 2,
+          "variant": "base",
+          "clicks": 5,
+          "frameCount": 179,
+          "p50Ms": 17,
+          "p95Ms": 20,
+          "over25Ms": 4
+        },
+        {
+          "round": 3,
+          "variant": "base",
+          "clicks": 5,
+          "frameCount": 179,
+          "p50Ms": 17,
+          "p95Ms": 19,
+          "over25Ms": 3
+        },
+        {
+          "round": 3,
+          "variant": "liquid",
+          "clicks": 5,
+          "frameCount": 180,
+          "p50Ms": 17,
+          "p95Ms": 19,
+          "over25Ms": 1
+        },
+        {
+          "round": 4,
+          "variant": "liquid",
+          "clicks": 5,
+          "frameCount": 178,
+          "p50Ms": 17,
+          "p95Ms": 19,
+          "over25Ms": 3
+        },
+        {
+          "round": 4,
+          "variant": "base",
+          "clicks": 5,
+          "frameCount": 177,
+          "p50Ms": 17,
+          "p95Ms": 19,
+          "over25Ms": 2
+        },
+        {
+          "round": 5,
+          "variant": "base",
+          "clicks": 5,
+          "frameCount": 179,
+          "p50Ms": 17,
+          "p95Ms": 21,
+          "over25Ms": 4
+        },
+        {
+          "round": 5,
+          "variant": "liquid",
+          "clicks": 5,
+          "frameCount": 178,
+          "p50Ms": 17,
+          "p95Ms": 22,
+          "over25Ms": 4
+        },
+        {
+          "round": 6,
+          "variant": "liquid",
+          "clicks": 5,
+          "frameCount": 180,
+          "p50Ms": 17,
+          "p95Ms": 19,
+          "over25Ms": 0
+        },
+        {
+          "round": 6,
+          "variant": "base",
+          "clicks": 5,
+          "frameCount": 178,
+          "p50Ms": 17,
+          "p95Ms": 20,
+          "over25Ms": 2
+        }
+      ],
+      "summary": {
+        "baseMedianP95Ms": 20,
+        "liquidMedianP95Ms": 19,
+        "pairedMedianDeltaP95Ms": 0,
+        "pairedRangeDeltaP95Ms": [
+          -3,
+          2
+        ]
+      }
+    }
+  ]
+}

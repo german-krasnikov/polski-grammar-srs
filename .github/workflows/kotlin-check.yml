@@ -1,0 +1,72 @@
+name: Kotlin check
+
+on:
+  push:
+    paths:
+      - 'kotlin/**'
+      - 'courses/**'
+      - 'scripts/**'
+      - 'src/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - '.github/workflows/kotlin-check.yml'
+  pull_request:
+    paths:
+      - 'kotlin/**'
+      - 'courses/**'
+      - 'scripts/**'
+      - 'src/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - '.github/workflows/kotlin-check.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  web:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: kotlin
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Install course validator
+        run: npm ci
+        working-directory: .
+      - name: Validate authored course
+        run: npm run course:validate
+        working-directory: .
+      - name: Check course source inventory
+        run: npm run course:inventory:check
+        working-directory: .
+      - name: Check classified course source inventory
+        run: npm run course:inventory:decisions:check
+        working-directory: .
+      - name: Test React baseline and course validator
+        run: npm test
+        working-directory: .
+      - name: Verify Gradle wrapper JAR
+        run: echo '7d3a4ac4de1c32b59bc6a4eb8ecb8e612ccd0cf1ae1e99f66902da64df296172  gradle/wrapper/gradle-wrapper.jar' | sha256sum --check
+      - name: List Gradle tasks
+        run: ./gradlew tasks --all
+      - name: Test shared web targets
+        run: ./gradlew :shared:jsBrowserTest :shared:wasmJsBrowserTest
+      - name: Build JS and Wasm compatibility distribution
+        run: ./gradlew :composeApp:composeCompatibilityBrowserDistribution
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kotlin-web-preview
+          path: kotlin/composeApp/build/dist/composeWebCompatibility/productionExecutable/
+          if-no-files-found: error

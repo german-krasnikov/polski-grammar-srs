@@ -1,0 +1,88 @@
+{
+  "device": "Android SDK built for arm64 emulator, API 35",
+  "variant": "benchmark, R8 minified",
+  "fixture": "dark theme; four warm tab taps then gfxinfo reset and eight tab taps; five interleaved rounds per arm",
+  "limitation": "gfxinfo frames include navigation screen rendering; emulator is not physical performance/battery evidence",
+  "samples": [
+    {
+      "round": 1,
+      "optical": false,
+      "frames": 55.0,
+      "janky": 20.0,
+      "p50_ms": 36.0,
+      "p95_ms": 200.0
+    },
+    {
+      "round": 1,
+      "optical": true,
+      "frames": 33.0,
+      "janky": 3.0,
+      "p50_ms": 26.0,
+      "p95_ms": 150.0
+    },
+    {
+      "round": 2,
+      "optical": true,
+      "frames": 51.0,
+      "janky": 3.0,
+      "p50_ms": 27.0,
+      "p95_ms": 85.0
+    },
+    {
+      "round": 2,
+      "optical": false,
+      "frames": 48.0,
+      "janky": 6.0,
+      "p50_ms": 24.0,
+      "p95_ms": 85.0
+    },
+    {
+      "round": 3,
+      "optical": false,
+      "frames": 55.0,
+      "janky": 2.0,
+      "p50_ms": 30.0,
+      "p95_ms": 89.0
+    },
+    {
+      "round": 3,
+      "optical": true,
+      "frames": 52.0,
+      "janky": 7.0,
+      "p50_ms": 27.0,
+      "p95_ms": 85.0
+    },
+    {
+      "round": 4,
+      "optical": true,
+      "frames": 55.0,
+      "janky": 18.0,
+      "p50_ms": 44.0,
+      "p95_ms": 150.0
+    },
+    {
+      "round": 4,
+      "optical": false,
+      "frames": 55.0,
+      "janky": 15.0,
+      "p50_ms": 34.0,
+      "p95_ms": 150.0
+    },
+    {
+      "round": 5,
+      "optical": false,
+      "frames": 68.0,
+      "janky": 28.0,
+      "p50_ms": 38.0,
+      "p95_ms": 129.0
+    },
+    {
+      "round": 5,
+      "optical": true,
+      "frames": 43.0,
+      "janky": 2.0,
+      "p50_ms": 18.0,
+      "p95_ms": 81.0
+    }
+  ]
+}

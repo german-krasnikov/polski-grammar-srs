@@ -1,0 +1,4 @@
+interface:
+  display_name: "Kotlin Multiplatform Testing"
+  short_description: "Behavior tests, TDD and cross-platform evidence"
+  default_prompt: "Use $testing-tdd for this project task."

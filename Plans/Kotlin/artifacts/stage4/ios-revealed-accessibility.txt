@@ -1,0 +1,2 @@
+                                              StaticText, 0x105f34430, {{16.0, 459.3}, {370.0, 56.3}}, label: 'Widzę moją piękną żonę.'
+                                              StaticText, 0x105f07be0, {{16.0, 567.7}, {370.0, 52.0}}, label: 'Moja proba'

@@ -1,0 +1,201 @@
+Application, 0x10240c130, pid: 32466, label: 'Polski Grammar Matrix' <App element pid: 32466>
+  Window (Main), 0x10241c1b0, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 32466, elementOrHash.elementID: 4380050336.4>
+    Other, 0x1024265e0, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 32466, elementOrHash.elementID: 4382064032.5>
+      Other, 0x102426700, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 32466, elementOrHash.elementID: 4382066016.6>
+        Other, 0x102426340, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 32466, elementOrHash.elementID: 4378934560.7>
+          Other, 0x102426460, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 32466, elementOrHash.elementID: 4378991152.8>
+            Other, 0x102426820, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 32466, elementOrHash.elementID: 4376887792.9>
+              Other, 0x102426940, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 32466, elementOrHash.elementID: 4382030448.10>
+                Other, 0x102426a60, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 32466, elementOrHash.elementID: 4376897008.12>
+                  Other, 0x102426b80, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 32466, elementOrHash.elementID: 4379923568.175>
+                    Other, 0x102426ca0, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 32466, elementOrHash.elementID: 4376915232.176>
+                      Other, 0x102426dc0, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 32466, elementOrHash.elementID: 4377176464.177>
+                        Other, 0x102426ee0, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 32466, elementOrHash.elementID: 4383841120.178>
+                          NavigationBar, 0x102427000, {{0.0, 62.0}, {402.0, 54.0}}, identifier: 'Матрица' <AX element pid: 32466, elementOrHash.elementID: 4383894960.179>
+                            StaticText, 0x102427120, {{164.0, 73.7}, {74.0, 20.7}}, label: 'Матрица' <AX element pid: 32466, elementOrHash.elementID: 4376983600.182>
+                          Other, 0x102427240, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 32466, elementOrHash.elementID: 4383783712.180>
+                            Other, 0x10241b6a0, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 32466, elementOrHash.elementID: 4377119440.183>
+                              Other, 0x10241b7c0, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 32466, elementOrHash.elementID: 4383691168.185>
+                                Other, 0x10241b8e0, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 32466, elementOrHash.elementID: 4381369456.186>
+                                  CollectionView, 0x102419ea0, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 32466, elementOrHash.elementID: 4438351360.187>
+                                    Other, 0x102419fc0, {{-16.0, -203.0}, {434.0, 591.0}} <AX element pid: 32466, elementOrHash.elementID: 4379083520.446>
+                                    Cell, 0x10241a0e0, {{16.0, -111.0}, {370.0, 125.7}} <AX element pid: 32466, elementOrHash.elementID: 4429631488.449>
+                                      Other, 0x10241a200, {{16.0, -111.0}, {370.0, 125.7}} <AX element pid: 32466, elementOrHash.elementID: 4381342368.462>
+                                        Other, 0x10241a320, {{16.0, -111.0}, {370.0, 125.7}} <AX element pid: 32466, elementOrHash.elementID: 4381306256.481>
+                                      Other, 0x10241a440, {{16.0, -111.0}, {370.0, 125.7}} <AX element pid: 32466, elementOrHash.elementID: 4381081248.463>
+                                        Other, 0x10241a560, {{16.0, -111.0}, {370.0, 125.7}} <AX element pid: 32466, elementOrHash.elementID: 4429861376.482>
+                                          Other, 0x10241a680, {{16.0, -111.0}, {370.0, 125.7}} <AX element pid: 32466, elementOrHash.elementID: 4377286880.497>
+                                            Other, 0x10241aa40, {{16.0, -111.0}, {370.0, 125.7}}, label: 'Было: robić; Стало: robisz' <AX element pid: 32466, elementOrHash.elementID: 4377286448.505>
+                                              StaticText, 0x10241ab60, {{32.0, -96.0}, {30.7, 14.3}}, label: 'Было' <AX element pid: 32466, elementOrHash.elementID: 4377282528.514>
+                                              StaticText, 0x10241ac80, {{32.0, -78.7}, {38.7, 20.3}}, label: 'robić' <AX element pid: 32466, elementOrHash.elementID: 4377283312.515>
+                                              StaticText, 0x10241ada0, {{32.0, -55.3}, {11.0, 14.3}}, label: '→' <AX element pid: 32466, elementOrHash.elementID: 4377284096.516>
+                                              StaticText, 0x10241aec0, {{32.0, -38.0}, {35.3, 14.3}}, label: 'Стало' <AX element pid: 32466, elementOrHash.elementID: 4377284880.517>
+                                              StaticText, 0x102418f90, {{32.0, -20.7}, {47.3, 20.3}}, label: 'robisz' <AX element pid: 32466, elementOrHash.elementID: 4377285664.518>
+                                    Other, 0x1024190b0, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 32466, elementOrHash.elementID: 4383905952.189>
+                                      Other, 0x1024191d0, {{0.0, 0.0}, {402.0, 170.8}} <AX element pid: 32466, elementOrHash.elementID: 4382352928.210>
+                                      Other, 0x1024192f0, {{0.0, 726.2}, {402.0, 147.8}} <AX element pid: 32466, elementOrHash.elementID: 4382181568.211>
+                                    Other, 0x102419410, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 32466, elementOrHash.elementID: 4383901184.190>
+                                      Other, 0x102419530, {{0.0, 0.0}, {402.0, 170.8}} <AX element pid: 32466, elementOrHash.elementID: 4382310192.453>
+                                        Other, 0x10241ccb0, {{0.0, 0.0}, {402.0, 94.3}} <AX element pid: 32466, elementOrHash.elementID: 4382367904.470>
+                                        Other, 0x10241cdd0, {{0.0, 0.0}, {402.0, 170.8}} <AX element pid: 32466, elementOrHash.elementID: 4382327792.471>
+                                          Other, 0x10241cef0, {{0.0, 0.0}, {402.0, 170.8}} <AX element pid: 32466, elementOrHash.elementID: 4382248864.489>
+                                        Other, 0x10241d010, {{0.0, 0.0}, {402.0, 170.8}} <AX element pid: 32466, elementOrHash.elementID: 4382353904.472>
+                                          Other, 0x10241d130, {{0.0, 0.0}, {402.0, 170.8}} <AX element pid: 32466, elementOrHash.elementID: 4382228896.490>
+                                        Other, 0x10241d250, {{0.0, 0.0}, {402.0, 170.8}} <AX element pid: 32466, elementOrHash.elementID: 4382195280.473>
+                                          Other, 0x10241d370, {{0.0, 0.0}, {402.0, 170.8}} <AX element pid: 32466, elementOrHash.elementID: 4382256544.491>
+                                          Other, 0x10241d490, {{0.0, 0.0}, {402.0, 170.8}} <AX element pid: 32466, elementOrHash.elementID: 4382229344.492>
+                                      Other, 0x10241d5b0, {{0.0, 726.2}, {402.0, 147.8}} <AX element pid: 32466, elementOrHash.elementID: 4382181008.212>
+                                        Image, 0x10241d6d0, {{-120.0, 731.0}, {642.0, 286.0}}, identifier: 'AdditionalDimmingOverlay' <AX element pid: 32466, elementOrHash.elementID: 4382202656.234>
+                                        Other, 0x10241d7f0, {{0.0, 726.2}, {402.0, 147.8}} <AX element pid: 32466, elementOrHash.elementID: 4382192096.235>
+                                          Other, 0x10241d910, {{0.0, 726.2}, {402.0, 147.8}} <AX element pid: 32466, elementOrHash.elementID: 4382182016.255>
+                                        Other, 0x10241da30, {{0.0, 726.2}, {402.0, 147.8}} <AX element pid: 32466, elementOrHash.elementID: 4382193232.236>
+                                          Other, 0x10241db50, {{0.0, 726.2}, {402.0, 147.8}} <AX element pid: 32466, elementOrHash.elementID: 4382193872.256>
+                                          Other, 0x10241dc70, {{0.0, 726.2}, {402.0, 147.8}} <AX element pid: 32466, elementOrHash.elementID: 4377038192.257>
+                                    Cell, 0x10241dd90, {{16.0, 15.0}, {370.0, 52.0}} <AX element pid: 32466, elementOrHash.elementID: 4421561856.450>
+                                      Other, 0x10241deb0, {{16.0, 15.0}, {370.0, 52.0}} <AX element pid: 32466, elementOrHash.elementID: 4379527312.464>
+                                        Other, 0x10241dfd0, {{16.0, 15.0}, {370.0, 52.0}} <AX element pid: 32466, elementOrHash.elementID: 4379527808.483>
+                                      Other, 0x10241e0f0, {{16.0, 15.0}, {370.0, 52.0}} <AX element pid: 32466, elementOrHash.elementID: 4379526384.465>
+                                        Other, 0x10241e210, {{16.0, 15.0}, {370.0, 52.0}} <AX element pid: 32466, elementOrHash.elementID: 4421563392.484>
+                                          Other, 0x10241e330, {{16.0, 15.0}, {370.0, 52.0}} <AX element pid: 32466, elementOrHash.elementID: 4377289120.498>
+                                            StaticText, 0x10241e450, {{16.0, 15.0}, {370.0, 52.0}}, label: 'Przeszłość' <AX element pid: 32466, elementOrHash.elementID: 4377287664.506>
+                                    Other, 0x10241e570, {{32.0, 14.0}, {338.0, 1.0}} <AX element pid: 32466, elementOrHash.elementID: 4377161392.198>
+                                    Cell, 0x10241e690, {{16.0, 67.0}, {370.0, 125.7}} <AX element pid: 32466, elementOrHash.elementID: 4463780352.451>
+                                      Other, 0x10241e7b0, {{16.0, 67.0}, {370.0, 125.7}} <AX element pid: 32466, elementOrHash.elementID: 4380379184.466>
+                                        Other, 0x10241e8d0, {{16.0, 67.0}, {370.0, 125.7}} <AX element pid: 32466, elementOrHash.elementID: 4380201552.485>
+                                      Other, 0x10241e9f0, {{16.0, 67.0}, {370.0, 125.7}} <AX element pid: 32466, elementOrHash.elementID: 4380120496.467>
+                                        Other, 0x10241eb10, {{16.0, 67.0}, {370.0, 125.7}} <AX element pid: 32466, elementOrHash.elementID: 4463384064.486>
+                                          Other, 0x10241ec30, {{16.0, 67.0}, {370.0, 125.7}} <AX element pid: 32466, elementOrHash.elementID: 4377261216.499>
+                                            Other, 0x10241ed50, {{16.0, 67.0}, {370.0, 125.7}}, label: 'Было: robić; Стало: robiłaś' <AX element pid: 32466, elementOrHash.elementID: 4377260784.507>
+                                              StaticText, 0x10241ee70, {{32.0, 82.0}, {30.7, 14.3}}, label: 'Было' <AX element pid: 32466, elementOrHash.elementID: 4377289552.519>
+                                              StaticText, 0x10241ef90, {{32.0, 99.3}, {38.7, 20.3}}, label: 'robić' <AX element pid: 32466, elementOrHash.elementID: 4377290336.520>
+                                              StaticText, 0x10241f0b0, {{32.0, 122.7}, {11.0, 14.3}}, label: '→' <AX element pid: 32466, elementOrHash.elementID: 4377291120.521>
+                                              StaticText, 0x10241f1d0, {{32.0, 140.0}, {35.3, 14.3}}, label: 'Стало' <AX element pid: 32466, elementOrHash.elementID: 4377259216.522>
+                                              StaticText, 0x10241f2f0, {{32.0, 157.3}, {53.0, 20.3}}, label: 'robiłaś' <AX element pid: 32466, elementOrHash.elementID: 4377260000.523>
+                                    Other, 0x10241f410, {{32.0, 66.0}, {338.0, 1.0}} <AX element pid: 32466, elementOrHash.elementID: 4377175952.206>
+                                    Cell, 0x10241f530, {{16.0, 192.7}, {370.0, 52.0}} <AX element pid: 32466, elementOrHash.elementID: 4446986240.452>
+                                      Other, 0x10241f650, {{16.0, 192.7}, {370.0, 52.0}} <AX element pid: 32466, elementOrHash.elementID: 4384565168.468>
+                                        Other, 0x10241f770, {{16.0, 192.7}, {370.0, 52.0}} <AX element pid: 32466, elementOrHash.elementID: 4384414096.487>
+                                      Other, 0x10241f890, {{16.0, 192.7}, {370.0, 52.0}} <AX element pid: 32466, elementOrHash.elementID: 4384498640.469>
+                                        Other, 0x10241f9b0, {{16.0, 192.7}, {370.0, 52.0}} <AX element pid: 32466, elementOrHash.elementID: 4446004736.488>
+                                          Other, 0x10241fad0, {{16.0, 192.7}, {370.0, 52.0}} <AX element pid: 32466, elementOrHash.elementID: 4377263456.500>
+                                            StaticText, 0x10241fbf0, {{16.0, 192.7}, {370.0, 52.0}}, label: 'Przyszłość' <AX element pid: 32466, elementOrHash.elementID: 4377262000.508>
+                                    Other, 0x10241fd10, {{32.0, 191.7}, {338.0, 1.0}} <AX element pid: 32466, elementOrHash.elementID: 4377175440.204>
+                                    Cell, 0x10241fe30, {{16.0, 244.7}, {370.0, 125.7}} <AX element pid: 32466, elementOrHash.elementID: 4429839872.524>
+                                      Other, 0x10241ff50, {{16.0, 244.7}, {370.0, 125.7}} <AX element pid: 32466, elementOrHash.elementID: 4381384224.532>
+                                        Other, 0x102420070, {{16.0, 244.7}, {370.0, 125.7}} <AX element pid: 32466, elementOrHash.elementID: 4381155552.546>
+                                      Other, 0x102420190, {{16.0, 244.7}, {370.0, 125.7}} <AX element pid: 32466, elementOrHash.elementID: 4381084240.533>
+                                        Other, 0x1024202b0, {{16.0, 244.7}, {370.0, 125.7}} <AX element pid: 32466, elementOrHash.elementID: 4429841408.547>
+                                          Other, 0x1024203d0, {{16.0, 244.7}, {370.0, 125.7}} <AX element pid: 32466, elementOrHash.elementID: 4382620800.560>
+                                            Other, 0x1024204f0, {{16.0, 244.7}, {370.0, 125.7}}, label: 'Было: robić; Стало: będziesz robić' <AX element pid: 32466, elementOrHash.elementID: 4382620368.567>
+                                              StaticText, 0x102420610, {{32.0, 259.7}, {30.7, 14.3}}, label: 'Было' <AX element pid: 32466, elementOrHash.elementID: 4382616448.575>
+                                              StaticText, 0x102420730, {{32.0, 277.0}, {40.3, 20.3}}, label: 'robić' <AX element pid: 32466, elementOrHash.elementID: 4382617232.576>
+                                              StaticText, 0x102420850, {{32.0, 300.3}, {11.0, 14.3}}, label: '→' <AX element pid: 32466, elementOrHash.elementID: 4382618016.577>
+                                              StaticText, 0x102420970, {{32.0, 317.7}, {35.3, 14.3}}, label: 'Стало' <AX element pid: 32466, elementOrHash.elementID: 4382618800.578>
+                                              StaticText, 0x102420a90, {{32.0, 335.0}, {115.7, 20.3}}, label: 'będziesz robić' <AX element pid: 32466, elementOrHash.elementID: 4382619584.579>
+                                    Other, 0x102420bb0, {{32.0, 243.7}, {338.0, 1.0}} <AX element pid: 32466, elementOrHash.elementID: 4377271312.525>
+                                    Other, 0x102420cd0, {{-16.0, 387.7}, {434.0, 591.0}} <AX element pid: 32466, elementOrHash.elementID: 4377148288.194>
+                                    Cell, 0x102420df0, {{16.0, 387.7}, {370.0, 40.3}} <AX element pid: 32466, elementOrHash.elementID: 4455036928.208>
+                                      Other, 0x102420f10, {{16.0, 387.7}, {370.0, 40.3}} <AX element pid: 32466, elementOrHash.elementID: 4382366016.231>
+                                      Other, 0x102421030, {{16.0, 387.7}, {370.0, 40.3}} <AX element pid: 32466, elementOrHash.elementID: 4382365088.232>
+                                        Other, 0x102421150, {{16.0, 387.7}, {370.0, 40.3}} <AX element pid: 32466, elementOrHash.elementID: 4455038464.254>
+                                          Other, 0x102421270, {{16.0, 387.7}, {370.0, 40.3}} <AX element pid: 32466, elementOrHash.elementID: 4379272608.267>
+                                            StaticText, 0x102421390, {{16.0, 387.7}, {370.0, 40.3}}, label: 'on — он' <AX element pid: 32466, elementOrHash.elementID: 4382664928.568>
+                                    Cell, 0x1024214b0, {{16.0, 428.0}, {370.0, 52.0}} <AX element pid: 32466, elementOrHash.elementID: 4430409216.526>
+                                      Other, 0x1024215d0, {{16.0, 428.0}, {370.0, 52.0}} <AX element pid: 32466, elementOrHash.elementID: 4381365072.534>
+                                        Other, 0x1024216f0, {{16.0, 428.0}, {370.0, 52.0}} <AX element pid: 32466, elementOrHash.elementID: 4381444544.548>
+                                      Other, 0x102421810, {{16.0, 428.0}, {370.0, 52.0}} <AX element pid: 32466, elementOrHash.elementID: 4381382816.535>
+                                        Other, 0x102421930, {{16.0, 428.0}, {370.0, 52.0}} <AX element pid: 32466, elementOrHash.elementID: 4429842944.549>
+                                          Other, 0x102421a50, {{16.0, 428.0}, {370.0, 52.0}} <AX element pid: 32466, elementOrHash.elementID: 4378207312.561>
+                                            StaticText, 0x102421b70, {{16.0, 428.0}, {370.0, 52.0}}, label: 'Teraz' <AX element pid: 32466, elementOrHash.elementID: 4377996416.569>
+                                    Cell, 0x102421c90, {{16.0, 480.0}, {370.0, 125.7}} <AX element pid: 32466, elementOrHash.elementID: 4404684800.527>
+                                      Other, 0x102421db0, {{16.0, 480.0}, {370.0, 125.7}} <AX element pid: 32466, elementOrHash.elementID: 4377269168.536>
+                                        Other, 0x102421ed0, {{16.0, 480.0}, {370.0, 125.7}} <AX element pid: 32466, elementOrHash.elementID: 4377267536.550>
+                                      Other, 0x102421ff0, {{16.0, 480.0}, {370.0, 125.7}} <AX element pid: 32466, elementOrHash.elementID: 4377267120.537>
+                                        Other, 0x102422110, {{16.0, 480.0}, {370.0, 125.7}} <AX element pid: 32466, elementOrHash.elementID: 4404686336.551>
+                                          Other, 0x102422230, {{16.0, 480.0}, {370.0, 125.7}} <AX element pid: 32466, elementOrHash.elementID: 4378195664.562>
+                                            Other, 0x102422350, {{16.0, 480.0}, {370.0, 125.7}}, label: 'Было: robić; Стало: robi' <AX element pid: 32466, elementOrHash.elementID: 4378195232.570>
+                                              StaticText, 0x102422470, {{32.0, 495.0}, {30.7, 14.3}}, label: 'Было' <AX element pid: 32466, elementOrHash.elementID: 4378212032.580>
+                                              StaticText, 0x102422590, {{32.0, 512.3}, {40.3, 20.3}}, label: 'robić' <AX element pid: 32466, elementOrHash.elementID: 4378192448.581>
+                                              StaticText, 0x1024226b0, {{32.0, 535.7}, {11.0, 14.3}}, label: '→' <AX element pid: 32466, elementOrHash.elementID: 4378192880.582>
+                                              StaticText, 0x1024227d0, {{32.0, 553.0}, {35.3, 14.3}}, label: 'Стало' <AX element pid: 32466, elementOrHash.elementID: 4378193664.583>
+                                              StaticText, 0x1024228f0, {{32.0, 570.3}, {31.0, 20.3}}, label: 'robi' <AX element pid: 32466, elementOrHash.elementID: 4378194448.584>
+                                    Other, 0x102422a10, {{32.0, 479.0}, {338.0, 1.0}} <AX element pid: 32466, elementOrHash.elementID: 4379546160.443>
+                                    Cell, 0x102422d00, {{16.0, 605.7}, {370.0, 52.0}} <AX element pid: 32466, elementOrHash.elementID: 4421789184.528>
+                                      Other, 0x102422e20, {{16.0, 605.7}, {370.0, 52.0}} <AX element pid: 32466, elementOrHash.elementID: 4379461264.538>
+                                        Other, 0x102422f40, {{16.0, 605.7}, {370.0, 52.0}} <AX element pid: 32466, elementOrHash.elementID: 4379135024.552>
+                                      Other, 0x102423060, {{16.0, 605.7}, {370.0, 52.0}} <AX element pid: 32466, elementOrHash.elementID: 4379237824.539>
+                                        Other, 0x102423180, {{16.0, 605.7}, {370.0, 52.0}} <AX element pid: 32466, elementOrHash.elementID: 4421679616.553>
+                                          Other, 0x1024232a0, {{16.0, 605.7}, {370.0, 52.0}} <AX element pid: 32466, elementOrHash.elementID: 4378198208.563>
+                                            StaticText, 0x1024233c0, {{16.0, 605.7}, {370.0, 52.0}}, label: 'Przeszłość' <AX element pid: 32466, elementOrHash.elementID: 4378196752.571>
+                                    Other, 0x1024234e0, {{32.0, 604.7}, {338.0, 1.0}} <AX element pid: 32466, elementOrHash.elementID: 4379523760.445>
+                                    Cell, 0x102423600, {{16.0, 657.7}, {370.0, 125.7}} <AX element pid: 32466, elementOrHash.elementID: 4404687872.529>
+                                      Other, 0x102423720, {{16.0, 657.7}, {370.0, 125.7}} <AX element pid: 32466, elementOrHash.elementID: 4377096736.540>
+                                        Other, 0x102423840, {{16.0, 657.7}, {370.0, 125.7}} <AX element pid: 32466, elementOrHash.elementID: 4377274048.554>
+                                      Other, 0x102423960, {{16.0, 657.7}, {370.0, 125.7}} <AX element pid: 32466, elementOrHash.elementID: 4377267952.541>
+                                        Other, 0x102423a80, {{16.0, 657.7}, {370.0, 125.7}} <AX element pid: 32466, elementOrHash.elementID: 4404871680.555>
+                                          Other, 0x102423ba0, {{16.0, 657.7}, {370.0, 125.7}} <AX element pid: 32466, elementOrHash.elementID: 4381459296.564>
+                                            Other, 0x102423cc0, {{16.0, 657.7}, {370.0, 125.7}}, label: 'Было: robić; Стало: robił' <AX element pid: 32466, elementOrHash.elementID: 4378144592.572>
+                                              StaticText, 0x102423de0, {{32.0, 672.7}, {30.7, 14.3}}, label: 'Было' <AX element pid: 32466, elementOrHash.elementID: 4378198944.585>
+                                              StaticText, 0x102423f00, {{32.0, 690.0}, {38.7, 20.3}}, label: 'robić' <AX element pid: 32466, elementOrHash.elementID: 4378199728.586>
+                                              StaticText, 0x102424020, {{32.0, 713.3}, {11.0, 14.3}}, label: '→' <AX element pid: 32466, elementOrHash.elementID: 4378162784.587>
+                                              StaticText, 0x102424140, {{32.0, 730.7}, {35.3, 14.3}}, label: 'Стало' <AX element pid: 32466, elementOrHash.elementID: 4378139008.588>
+                                              StaticText, 0x102424260, {{32.0, 748.0}, {34.7, 20.3}}, label: 'robił' <AX element pid: 32466, elementOrHash.elementID: 4378139440.589>
+                                    Other, 0x102424380, {{32.0, 656.7}, {338.0, 1.0}} <AX element pid: 32466, elementOrHash.elementID: 4377174928.202>
+                                    Cell, 0x1024244a0, {{16.0, 783.3}, {370.0, 52.0}} <AX element pid: 32466, elementOrHash.elementID: 4463145984.530>
+                                      Other, 0x1024245c0, {{16.0, 783.3}, {370.0, 52.0}} <AX element pid: 32466, elementOrHash.elementID: 4380332288.542>
+                                        Other, 0x1024246e0, {{16.0, 783.3}, {370.0, 52.0}} <AX element pid: 32466, elementOrHash.elementID: 4380144672.556>
+                                      Other, 0x102424800, {{16.0, 783.3}, {370.0, 52.0}} <AX element pid: 32466, elementOrHash.elementID: 4380079904.543>
+                                        Other, 0x102424920, {{16.0, 783.3}, {370.0, 52.0}} <AX element pid: 32466, elementOrHash.elementID: 4463991296.557>
+                                          Other, 0x102424a40, {{16.0, 783.3}, {370.0, 52.0}} <AX element pid: 32466, elementOrHash.elementID: 4381457296.565>
+                                            StaticText, 0x102424b60, {{16.0, 783.3}, {370.0, 52.0}}, label: 'Przyszłość' <AX element pid: 32466, elementOrHash.elementID: 4381332416.573>
+                                    Other, 0x102424c80, {{32.0, 782.3}, {338.0, 1.0}} <AX element pid: 32466, elementOrHash.elementID: 4380312640.193>
+                                    Cell, 0x102424da0, {{16.0, 835.3}, {370.0, 125.7}} <AX element pid: 32466, elementOrHash.elementID: 4454899712.531>
+                                      Other, 0x102424ec0, {{16.0, 835.3}, {370.0, 125.7}} <AX element pid: 32466, elementOrHash.elementID: 4382489184.544>
+                                        Other, 0x1024273b0, {{16.0, 835.3}, {370.0, 125.7}} <AX element pid: 32466, elementOrHash.elementID: 4382489680.558>
+                                      Other, 0x1024274d0, {{16.0, 835.3}, {370.0, 125.7}} <AX element pid: 32466, elementOrHash.elementID: 4382337200.545>
+                                        Other, 0x1024275f0, {{16.0, 835.3}, {370.0, 125.7}} <AX element pid: 32466, elementOrHash.elementID: 4454400512.559>
+                                          Other, 0x102427710, {{16.0, 835.3}, {370.0, 125.7}} <AX element pid: 32466, elementOrHash.elementID: 4381351152.566>
+                                            Other, 0x102427830, {{16.0, 835.3}, {370.0, 125.7}}, label: 'Было: robić; Стало: będzie robić' <AX element pid: 32466, elementOrHash.elementID: 4381246576.574>
+                                              StaticText, 0x102427950, {{32.0, 850.3}, {30.7, 14.3}}, label: 'Было' <AX element pid: 32466, elementOrHash.elementID: 4381057472.590>
+                                              StaticText, 0x102427a70, {{32.0, 867.7}, {40.3, 20.3}}, label: 'robić' <AX element pid: 32466, elementOrHash.elementID: 4381299552.591>
+                                              StaticText, 0x102427b90, {{32.0, 891.0}, {11.0, 14.3}}, label: '→' <AX element pid: 32466, elementOrHash.elementID: 4381363088.592>
+                                              StaticText, 0x102427cb0, {{32.0, 908.3}, {35.3, 14.3}}, label: 'Стало' <AX element pid: 32466, elementOrHash.elementID: 4381445264.593>
+                                              StaticText, 0x102427dd0, {{32.0, 925.7}, {97.7, 20.3}}, label: 'będzie robić' <AX element pid: 32466, elementOrHash.elementID: 4381339872.594>
+                                    Other, 0x102427ef0, {{32.0, 834.3}, {338.0, 1.0}} <AX element pid: 32466, elementOrHash.elementID: 4377155840.200>
+                                    Other, 0x102428010, {{369.0, 116.0}, {30.0, 675.0}}, label: 'Вертикальная полоса прокрутки, 8 страниц', value: 31 % <AX element pid: 32466, elementOrHash.elementID: 4380279520.209>
+                                      Other, 0x102428130, {{396.0, 293.3}, {3.0, 113.3}} <AX element pid: 32466, elementOrHash.elementID: 4380047648.233>
+                                    Other, 0x102428250, {{369.0, 116.0}, {30.0, 675.0}}, label: 'Вертикальная полоса прокрутки, 8 страниц', value: 31 % <AX element pid: 32466, elementOrHash.elementID: 4380279520.209>
+                                      Other, 0x102428370, {{396.0, 293.3}, {3.0, 113.3}} <AX element pid: 32466, elementOrHash.elementID: 4380047648.233>
+                          Other, 0x1024287e0, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 32466, elementOrHash.elementID: 4383825712.181>
+                            Other, 0x102428900, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 32466, elementOrHash.elementID: 4383883952.184>
+              Other, 0x102428a20, {{0.0, 791.0}, {402.0, 83.0}} <AX element pid: 32466, elementOrHash.elementID: 4376888752.11>
+                Other, 0x102428b40, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 32466, elementOrHash.elementID: 4382048064.13>
+                  TabBar, 0x102428c60, {{0.0, 791.0}, {402.0, 83.0}}, label: 'Панель вкладок' <AX element pid: 32466, elementOrHash.elementID: 4376892960.16>
+                    Other, 0x102428d80, {{21.0, 791.0}, {360.0, 62.0}} <AX element pid: 32466, elementOrHash.elementID: 4376894784.19>
+                      Other, 0x102428ea0, {{21.0, 791.0}, {101.3, 54.0}} <AX element pid: 32466, elementOrHash.elementID: 4378995344.22>
+                      Other, 0x102428fc0, {{21.0, 791.0}, {360.0, 62.0}} <AX element pid: 32466, elementOrHash.elementID: 4376895200.23>
+                        Button, 0x1024290e0, {{25.0, 795.0}, {101.3, 54.0}}, identifier: 'square.stack', label: 'Тренировка' <AX element pid: 32466, elementOrHash.elementID: 4404135424.28>
+                          Image, 0x102429200, {{63.0, 799.7}, {26.0, 32.3}}, identifier: 'square.stack.fill', label: 'square.stack.fill' <AX element pid: 32466, elementOrHash.elementID: 4376890976.38>
+                        Button, 0x102429320, {{108.6, 795.0}, {101.3, 54.0}}, identifier: 'tablecells', label: 'Матрица', Selected <AX element pid: 32466, elementOrHash.elementID: 4404488704.29>
+                          Image, 0x102429440, {{142.6, 802.3}, {33.0, 25.0}}, identifier: 'tablecells.fill', label: 'таблица' <AX element pid: 32466, elementOrHash.elementID: 4376947040.39>
+                        Button, 0x102429560, {{192.1, 795.0}, {101.3, 54.0}}, identifier: 'chart.bar', label: 'Прогресс' <AX element pid: 32466, elementOrHash.elementID: 4404502528.30>
+                          Image, 0x102429680, {{225.1, 802.3}, {35.0, 25.3}}, identifier: 'chart.bar.fill', label: 'гистограмма' <AX element pid: 32466, elementOrHash.elementID: 4376968096.40>
+                        Button, 0x1024297a0, {{275.7, 795.0}, {101.3, 54.0}}, identifier: 'character.book.closed', label: 'Слова' <AX element pid: 32466, elementOrHash.elementID: 4404530688.31>
+                          Image, 0x1024298c0, {{313.7, 800.7}, {25.3, 28.7}}, identifier: 'character.book.closed.fill', label: 'character.book.closed.fill' <AX element pid: 32466, elementOrHash.elementID: 4376989120.41>
+                      Other, 0x1024299e0, {{108.6, 795.0}, {101.3, 54.0}} <AX element pid: 32466, elementOrHash.elementID: 4378956784.24>
+                        Other, 0x102429b00, {{108.6, 795.0}, {101.3, 54.0}} <AX element pid: 32466, elementOrHash.elementID: 4378958608.32>
+                          Other, 0x102429c20, {{108.6, 795.0}, {101.3, 54.0}} <AX element pid: 32466, elementOrHash.elementID: 4378945776.42>
+                          Other, 0x102429d40, {{108.6, 795.0}, {101.3, 54.0}} <AX element pid: 32466, elementOrHash.elementID: 4378959024.43>
+                            Other, 0x102429e60, {{108.6, 795.0}, {101.3, 54.0}} <AX element pid: 32466, elementOrHash.elementID: 4378962768.48>
+                              Other, 0x102429f80, {{108.6, 795.0}, {101.3, 54.0}} <AX element pid: 32466, elementOrHash.elementID: 4378963696.51>
+                                Other, 0x10242a0a0, {{108.6, 795.0}, {101.3, 54.0}} <AX element pid: 32466, elementOrHash.elementID: 4378965136.54>
+                              Other, 0x10242a1c0, {{108.6, 795.0}, {101.3, 54.0}} <AX element pid: 32466, elementOrHash.elementID: 4378959488.52>
+                            Other, 0x10242a2e0, {{108.6, 795.0}, {101.3, 54.0}} <AX element pid: 32466, elementOrHash.elementID: 4378962352.49>
+                Other, 0x10242a400, {{0.0, 791.0}, {402.0, 83.0}} <AX element pid: 32466, elementOrHash.elementID: 4376889680.14>
+                  Other, 0x10242a520, {{0.0, 791.0}, {402.0, 83.0}} <AX element pid: 32466, elementOrHash.elementID: 4379004768.17>
+                    Other, 0x10242a640, {{0.0, 791.0}, {402.0, 83.0}} <AX element pid: 32466, elementOrHash.elementID: 4376898352.20>
+                      Other, 0x10242a760, {{0.0, 791.0}, {402.0, 83.0}} <AX element pid: 32466, elementOrHash.elementID: 4376811824.25>
+                        Other, 0x10242a880, {{0.0, 791.0}, {402.0, 83.0}} <AX element pid: 32466, elementOrHash.elementID: 4376948992.33>
+                          Other, 0x10242a9a0, {{0.0, 791.0}, {402.0, 83.0}} <AX element pid: 32466, elementOrHash.elementID: 4376928400.44>
+                      Other, 0x10242aac0, {{0.0, 791.0}, {402.0, 83.0}} <AX element pid: 32466, elementOrHash.elementID: 4376821824.26>
+                        Other, 0x10242abe0, {{0.0, 791.0}, {402.0, 83.0}} <AX element pid: 32466, elementOrHash.elementID: 4376970048.34>

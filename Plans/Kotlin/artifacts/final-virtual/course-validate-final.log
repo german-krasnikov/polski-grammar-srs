@@ -1,0 +1,6 @@
+
+> polski-grammar-srs@1.0.0 course:validate
+> node scripts/validate-course.mjs && node scripts/validate-vocabulary-editorial.mjs --strict
+
+PASS course pack: /Users/german/Work/JS/polski-grammar-srs/courses/pl-ru/course.json
+PASS vocabulary editorial journal

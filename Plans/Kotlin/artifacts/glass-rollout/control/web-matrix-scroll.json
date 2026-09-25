@@ -1,0 +1,127 @@
+{
+  "date": "2026-09-25T09:17:45.328Z",
+  "urls": {
+    "baseline": "http://127.0.0.1:4181/",
+    "candidate": "http://127.0.0.1:4181/"
+  },
+  "rounds": 2,
+  "durationMs": 2500,
+  "profile": {
+    "width": 390,
+    "height": 844,
+    "dpr": 3,
+    "colorScheme": "dark"
+  },
+  "engines": [
+    {
+      "name": "chromium",
+      "browserVersion": "140.0.7339.186",
+      "runs": [
+        {
+          "round": 1,
+          "variant": "baseline",
+          "frames": 150,
+          "p50Ms": 16.699999999999818,
+          "p95Ms": 16.799999999999727,
+          "over25Ms": 0,
+          "navFilter": "none",
+          "cardFilter": "none"
+        },
+        {
+          "round": 1,
+          "variant": "candidate",
+          "frames": 150,
+          "p50Ms": 16.699999999999818,
+          "p95Ms": 16.700000000000728,
+          "over25Ms": 0,
+          "navFilter": "none",
+          "cardFilter": "none"
+        },
+        {
+          "round": 2,
+          "variant": "candidate",
+          "frames": 149,
+          "p50Ms": 16.69999999999891,
+          "p95Ms": 16.700000000000728,
+          "over25Ms": 0,
+          "navFilter": "none",
+          "cardFilter": "none"
+        },
+        {
+          "round": 2,
+          "variant": "baseline",
+          "frames": 149,
+          "p50Ms": 16.69999999999891,
+          "p95Ms": 16.700000000000728,
+          "over25Ms": 0,
+          "navFilter": "none",
+          "cardFilter": "none"
+        }
+      ],
+      "summary": {
+        "baselineMedianP95Ms": 16.700000000000728,
+        "candidateMedianP95Ms": 16.700000000000728,
+        "pairedMedianDeltaP95Ms": -0.09999999999899956,
+        "pairedRangeDeltaP95Ms": [
+          -0.09999999999899956,
+          0
+        ]
+      }
+    },
+    {
+      "name": "webkit",
+      "browserVersion": "26.0",
+      "runs": [
+        {
+          "round": 1,
+          "variant": "baseline",
+          "frames": 150,
+          "p50Ms": 17,
+          "p95Ms": 19,
+          "over25Ms": 0,
+          "navFilter": "none",
+          "cardFilter": "none"
+        },
+        {
+          "round": 1,
+          "variant": "candidate",
+          "frames": 150,
+          "p50Ms": 17,
+          "p95Ms": 19,
+          "over25Ms": 0,
+          "navFilter": "none",
+          "cardFilter": "none"
+        },
+        {
+          "round": 2,
+          "variant": "candidate",
+          "frames": 150,
+          "p50Ms": 17,
+          "p95Ms": 18,
+          "over25Ms": 0,
+          "navFilter": "none",
+          "cardFilter": "none"
+        },
+        {
+          "round": 2,
+          "variant": "baseline",
+          "frames": 149,
+          "p50Ms": 17,
+          "p95Ms": 18,
+          "over25Ms": 1,
+          "navFilter": "none",
+          "cardFilter": "none"
+        }
+      ],
+      "summary": {
+        "baselineMedianP95Ms": 18,
+        "candidateMedianP95Ms": 18,
+        "pairedMedianDeltaP95Ms": 0,
+        "pairedRangeDeltaP95Ms": [
+          0,
+          0
+        ]
+      }
+    }
+  ]
+}

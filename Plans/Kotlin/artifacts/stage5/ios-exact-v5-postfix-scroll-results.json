@@ -1,0 +1,75 @@
+{
+  "devices" : [
+    {
+      "architecture" : "arm64",
+      "deviceId" : "502F57FE-944F-4C27-B74F-5EC34D1B995D",
+      "deviceName" : "iPhone 17 Pro",
+      "modelName" : "iPhone 17 Pro",
+      "osBuildNumber" : "23B86",
+      "osVersion" : "26.1",
+      "platform" : "iOS Simulator"
+    }
+  ],
+  "testNodes" : [
+    {
+      "children" : [
+        {
+          "children" : [
+            {
+              "children" : [
+                {
+                  "children" : [
+                    {
+                      "name" : "XCTAssertTrue failed",
+                      "nodeType" : "Failure Message",
+                      "sourceLocation" : {
+                        "filePath" : "/Users/german/Work/JS/polski-grammar-srs/kotlin/iosApp/PolskiGrammarUITests/PolskiGrammarUITests.swift",
+                        "lineNumber" : 221
+                      }
+                    },
+                    {
+                      "name" : "XCTAssertTrue failed",
+                      "nodeType" : "Failure Message",
+                      "sourceLocation" : {
+                        "filePath" : "/Users/german/Work/JS/polski-grammar-srs/kotlin/iosApp/PolskiGrammarUITests/PolskiGrammarUITests.swift",
+                        "lineNumber" : 223
+                      }
+                    },
+                    {
+                      "name" : "Failed to get matching snapshot: No matches found for first query match sequence: `Descendants matching type Button` -> `Elements matching predicate '\"vocabularySelect-\" IN identifiers'`, given input App element pid: 67411",
+                      "nodeType" : "Failure Message"
+                    }
+                  ],
+                  "duration" : "28s",
+                  "durationInSeconds" : 28.066796898841858,
+                  "name" : "testInventoryAuthoredMatrixAndVocabularyCopyOnSimulator()",
+                  "nodeIdentifier" : "PolskiGrammarUITests/testInventoryAuthoredMatrixAndVocabularyCopyOnSimulator()",
+                  "nodeIdentifierURL" : "test://com.apple.xcode/PolskiGrammar/PolskiGrammarUITests/PolskiGrammarUITests/testInventoryAuthoredMatrixAndVocabularyCopyOnSimulator",
+                  "nodeType" : "Test Case",
+                  "result" : "Failed"
+                }
+              ],
+              "name" : "PolskiGrammarUITests",
+              "nodeIdentifierURL" : "test://com.apple.xcode/PolskiGrammar/PolskiGrammarUITests/PolskiGrammarUITests",
+              "nodeType" : "Test Suite",
+              "result" : "Failed"
+            }
+          ],
+          "name" : "PolskiGrammarUITests",
+          "nodeIdentifierURL" : "test://com.apple.xcode/PolskiGrammar/PolskiGrammarUITests",
+          "nodeType" : "UI test bundle",
+          "result" : "Failed"
+        }
+      ],
+      "name" : "PolskiGrammar",
+      "nodeType" : "Test Plan",
+      "result" : "Failed"
+    }
+  ],
+  "testPlanConfigurations" : [
+    {
+      "configurationId" : "1",
+      "configurationName" : "Test Scheme Action"
+    }
+  ]
+}

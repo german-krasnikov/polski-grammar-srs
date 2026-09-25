@@ -1,0 +1,362 @@
+{
+  "date": "2026-09-25T09:53:32.495Z",
+  "urls": {
+    "baseline": "http://127.0.0.1:4181/",
+    "candidate": "http://127.0.0.1:4182/"
+  },
+  "rounds": 5,
+  "durationMs": 2500,
+  "profile": {
+    "width": 390,
+    "height": 844,
+    "dpr": 3,
+    "colorScheme": "dark"
+  },
+  "engines": [
+    {
+      "name": "chromium",
+      "browserVersion": "140.0.7339.186",
+      "runs": [
+        {
+          "round": 1,
+          "variant": "baseline",
+          "frames": 150,
+          "p50Ms": 16.699999999999818,
+          "p95Ms": 16.799999999999727,
+          "over25Ms": 0,
+          "navFilter": "none",
+          "cardFilter": "none"
+        },
+        {
+          "round": 1,
+          "variant": "candidate",
+          "frames": 150,
+          "p50Ms": 16.699999999999818,
+          "p95Ms": 16.799999999999272,
+          "over25Ms": 0,
+          "navFilter": "blur(8px) saturate(1.2)",
+          "cardFilter": "none"
+        },
+        {
+          "round": 2,
+          "variant": "candidate",
+          "frames": 149,
+          "p50Ms": 16.69999999999891,
+          "p95Ms": 16.700000000000728,
+          "over25Ms": 0,
+          "navFilter": "blur(8px) saturate(1.2)",
+          "cardFilter": "none"
+        },
+        {
+          "round": 2,
+          "variant": "baseline",
+          "frames": 150,
+          "p50Ms": 16.69999999999891,
+          "p95Ms": 16.700000000000728,
+          "over25Ms": 0,
+          "navFilter": "none",
+          "cardFilter": "none"
+        },
+        {
+          "round": 3,
+          "variant": "baseline",
+          "frames": 150,
+          "p50Ms": 16.69999999999891,
+          "p95Ms": 16.700000000000728,
+          "over25Ms": 0,
+          "navFilter": "none",
+          "cardFilter": "none"
+        },
+        {
+          "round": 3,
+          "variant": "candidate",
+          "frames": 149,
+          "p50Ms": 16.700000000000728,
+          "p95Ms": 16.799999999999272,
+          "over25Ms": 0,
+          "navFilter": "blur(8px) saturate(1.2)",
+          "cardFilter": "none"
+        },
+        {
+          "round": 4,
+          "variant": "candidate",
+          "frames": 149,
+          "p50Ms": 16.700000000000728,
+          "p95Ms": 16.700000000000728,
+          "over25Ms": 0,
+          "navFilter": "blur(8px) saturate(1.2)",
+          "cardFilter": "none"
+        },
+        {
+          "round": 4,
+          "variant": "baseline",
+          "frames": 149,
+          "p50Ms": 16.69999999999709,
+          "p95Ms": 16.799999999999272,
+          "over25Ms": 0,
+          "navFilter": "none",
+          "cardFilter": "none"
+        },
+        {
+          "round": 5,
+          "variant": "baseline",
+          "frames": 149,
+          "p50Ms": 16.700000000000728,
+          "p95Ms": 16.799999999999272,
+          "over25Ms": 0,
+          "navFilter": "none",
+          "cardFilter": "none"
+        },
+        {
+          "round": 5,
+          "variant": "candidate",
+          "frames": 148,
+          "p50Ms": 16.700000000000728,
+          "p95Ms": 16.700000000000728,
+          "over25Ms": 1,
+          "navFilter": "blur(8px) saturate(1.2)",
+          "cardFilter": "none"
+        }
+      ],
+      "summary": {
+        "baselineMedianP95Ms": 16.799999999999272,
+        "candidateMedianP95Ms": 16.700000000000728,
+        "pairedMedianDeltaP95Ms": -4.547473508864641e-13,
+        "pairedRangeDeltaP95Ms": [
+          -0.09999999999854481,
+          0.09999999999854481
+        ]
+      }
+    },
+    {
+      "name": "firefox",
+      "browserVersion": "141.0",
+      "runs": [
+        {
+          "round": 1,
+          "variant": "baseline",
+          "frames": 299,
+          "p50Ms": 8.319999999999709,
+          "p95Ms": 9.980000000000018,
+          "over25Ms": 0,
+          "navFilter": "none",
+          "cardFilter": "none"
+        },
+        {
+          "round": 1,
+          "variant": "candidate",
+          "frames": 299,
+          "p50Ms": 8.319999999999709,
+          "p95Ms": 9.980000000000473,
+          "over25Ms": 0,
+          "navFilter": "none",
+          "cardFilter": "none"
+        },
+        {
+          "round": 2,
+          "variant": "candidate",
+          "frames": 296,
+          "p50Ms": 8.320000000000618,
+          "p95Ms": 10.079999999999927,
+          "over25Ms": 1,
+          "navFilter": "none",
+          "cardFilter": "none"
+        },
+        {
+          "round": 2,
+          "variant": "baseline",
+          "frames": 299,
+          "p50Ms": 8.320000000001528,
+          "p95Ms": 9.980000000001382,
+          "over25Ms": 0,
+          "navFilter": "none",
+          "cardFilter": "none"
+        },
+        {
+          "round": 3,
+          "variant": "baseline",
+          "frames": 299,
+          "p50Ms": 8.320000000001528,
+          "p95Ms": 9.899999999999636,
+          "over25Ms": 0,
+          "navFilter": "none",
+          "cardFilter": "none"
+        },
+        {
+          "round": 3,
+          "variant": "candidate",
+          "frames": 298,
+          "p50Ms": 8.319999999999709,
+          "p95Ms": 9.979999999999563,
+          "over25Ms": 0,
+          "navFilter": "none",
+          "cardFilter": "none"
+        },
+        {
+          "round": 4,
+          "variant": "candidate",
+          "frames": 298,
+          "p50Ms": 8.319999999999709,
+          "p95Ms": 10.019999999996799,
+          "over25Ms": 0,
+          "navFilter": "none",
+          "cardFilter": "none"
+        },
+        {
+          "round": 4,
+          "variant": "baseline",
+          "frames": 299,
+          "p50Ms": 8.340000000000146,
+          "p95Ms": 9.880000000001019,
+          "over25Ms": 0,
+          "navFilter": "none",
+          "cardFilter": "none"
+        },
+        {
+          "round": 5,
+          "variant": "baseline",
+          "frames": 298,
+          "p50Ms": 8.319999999999709,
+          "p95Ms": 9.979999999999563,
+          "over25Ms": 0,
+          "navFilter": "none",
+          "cardFilter": "none"
+        },
+        {
+          "round": 5,
+          "variant": "candidate",
+          "frames": 299,
+          "p50Ms": 8.320000000003347,
+          "p95Ms": 10.119999999998981,
+          "over25Ms": 0,
+          "navFilter": "none",
+          "cardFilter": "none"
+        }
+      ],
+      "summary": {
+        "baselineMedianP95Ms": 9.979999999999563,
+        "candidateMedianP95Ms": 10.019999999996799,
+        "pairedMedianDeltaP95Ms": 0.09999999999854481,
+        "pairedRangeDeltaP95Ms": [
+          4.547473508864641e-13,
+          0.13999999999941792
+        ]
+      }
+    },
+    {
+      "name": "webkit",
+      "browserVersion": "26.0",
+      "runs": [
+        {
+          "round": 1,
+          "variant": "baseline",
+          "frames": 149,
+          "p50Ms": 17,
+          "p95Ms": 18,
+          "over25Ms": 0,
+          "navFilter": "none",
+          "cardFilter": "none"
+        },
+        {
+          "round": 1,
+          "variant": "candidate",
+          "frames": 149,
+          "p50Ms": 17,
+          "p95Ms": 18,
+          "over25Ms": 0,
+          "navFilter": "none",
+          "cardFilter": "none"
+        },
+        {
+          "round": 2,
+          "variant": "candidate",
+          "frames": 150,
+          "p50Ms": 17,
+          "p95Ms": 18,
+          "over25Ms": 0,
+          "navFilter": "none",
+          "cardFilter": "none"
+        },
+        {
+          "round": 2,
+          "variant": "baseline",
+          "frames": 149,
+          "p50Ms": 17,
+          "p95Ms": 18,
+          "over25Ms": 0,
+          "navFilter": "none",
+          "cardFilter": "none"
+        },
+        {
+          "round": 3,
+          "variant": "baseline",
+          "frames": 150,
+          "p50Ms": 17,
+          "p95Ms": 18,
+          "over25Ms": 1,
+          "navFilter": "none",
+          "cardFilter": "none"
+        },
+        {
+          "round": 3,
+          "variant": "candidate",
+          "frames": 149,
+          "p50Ms": 17,
+          "p95Ms": 18,
+          "over25Ms": 0,
+          "navFilter": "none",
+          "cardFilter": "none"
+        },
+        {
+          "round": 4,
+          "variant": "candidate",
+          "frames": 149,
+          "p50Ms": 17,
+          "p95Ms": 18,
+          "over25Ms": 0,
+          "navFilter": "none",
+          "cardFilter": "none"
+        },
+        {
+          "round": 4,
+          "variant": "baseline",
+          "frames": 149,
+          "p50Ms": 17,
+          "p95Ms": 18,
+          "over25Ms": 0,
+          "navFilter": "none",
+          "cardFilter": "none"
+        },
+        {
+          "round": 5,
+          "variant": "baseline",
+          "frames": 149,
+          "p50Ms": 17,
+          "p95Ms": 18,
+          "over25Ms": 1,
+          "navFilter": "none",
+          "cardFilter": "none"
+        },
+        {
+          "round": 5,
+          "variant": "candidate",
+          "frames": 147,
+          "p50Ms": 17,
+          "p95Ms": 18,
+          "over25Ms": 1,
+          "navFilter": "none",
+          "cardFilter": "none"
+        }
+      ],
+      "summary": {
+        "baselineMedianP95Ms": 18,
+        "candidateMedianP95Ms": 18,
+        "pairedMedianDeltaP95Ms": 0,
+        "pairedRangeDeltaP95Ms": [
+          0,
+          0
+        ]
+      }
+    }
+  ]
+}

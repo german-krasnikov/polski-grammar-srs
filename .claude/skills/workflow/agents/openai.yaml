@@ -1,0 +1,4 @@
+interface:
+  display_name: "Kotlin Development Workflow"
+  short_description: "Architect, developer, tester and reviewer handoffs"
+  default_prompt: "Use $workflow for this project task."

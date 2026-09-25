@@ -1,0 +1,4 @@
+interface:
+  display_name: "Compose Multiplatform UI"
+  short_description: "Shared Compose state, layout, semantics and motion"
+  default_prompt: "Use $compose-multiplatform-ui for this Kotlin Multiplatform task."

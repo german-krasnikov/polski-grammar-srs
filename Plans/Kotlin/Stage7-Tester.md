@@ -1,0 +1,28 @@
+# Stage 7 independent Tester handoff — P05/P10/P11
+
+**Status: FAIL (P11 retry path).** Tested on 2026-09-23 against HEAD `df59774e153a5bdf590fe27bd8780c7bd5457a26` plus uncommitted Stage 7/8/9/10 workspace files. This is a source/working-tree result, not a release artifact. Kotlin JS production bundle SHA-256 `896939409efc053d7ea7b811544344dfd643fc31041481f2d8d4db76a698895e`; Wasm bundle `2d4b85a6d756e29c5d959022c86ef4f1b80f87e0e1030205c14864334559b25a`. Progress fixture SHA-256 `12547f0cf5c27bb5340f92be7940007776f05044dc0673d8a821d232fa04ac56`.
+
+## Independent evidence
+
+| Contract | Result | Evidence and limit |
+| --- | --- | --- |
+| P05 reducer oral/typed count, purity | PASS for existing focused cases | `ReviewReducerTest` 2/2 on JS and Wasm. Full oral rating matrix and duplicate UI action are outside this Stage 7 test. |
+| P10 card wire/scheduler prerequisite | PASS, reused | [Stage6-Tester.md](Stage6-Tester.md) records 99/99 targeted SRS cases on each JS/Wasm target after the final wire correction. Stage 7 did not change those production files. Current focused compilation/tests also passed. |
+| P11 codec, repository, raw failure protocol | PASS for selected cases | Existing 3 codec + 5 repository tests and new 2 `MigrationFailureTest` cases on each shared target, zero failures/skips. The new test injects one exception at each of the 11 observed raw get/put operations, retries, checks exact backup and loaded state; separate silent corruption cases cover backup, preview and marker read-back. |
+| P11 actual LocalStorage JS/Wasm | PASS for selected cases | `WebProgressRepositoryTest` 1/1 on each browser target using real `window.localStorage`. Browser migration and malformed legacy were also exercised in production bundles. |
+| P11 Kotlin current export → React load | PASS | A migrated review was exported from Kotlin, parsed as v1, placed in a separate React browser origin/context and shown as one review. The exact pre-migration raw stayed in legacy and backup keys. Chromium, Firefox and Playwright WebKit passed on both JS and Wasm bundles. |
+| P11 transient migration retry | **FAIL** | See defect below. |
+| P11 all 20 `progress.json` cases, timezone/DST, all malformed/unknown variants | **NOT RUN as a complete matrix** | Existing tests and the new browser case cover selected inputs; there is no case-by-case Kotlin execution of all 20 fixtures yet. React historical PASS in `Parity.md` is not Kotlin acceptance. |
+| Native Android/iOS, real Safari/iPhone | **NOT RUN** | No native target; Playwright WebKit is browser-engine evidence only. |
+
+## Product defect P11: partial migration cannot be retried in the app
+
+Reproduction: seed copied `P-fresh` in `polski-grammar-srs-v1`, intercept the first `Storage.prototype.setItem` for `polski-grammar-srs-kmp-migrated-v1` to throw `QuotaExceededError`, then click **Перенести прогресс**. Backup equals the exact legacy raw, preview is present, marker is absent. The app enters **Нужна копия прогресса** and shows only **Экспорт JSON**. Expected: an in-app retry that resumes the unmarked preview, writes the marker once storage works, and reaches Ready without repeating a review. Actual: no migration retry control. `TrainingStore.requestMigration()` accepts only `MigrationAvailable`; `TrainingWebApp.renderLoadStatus()` shows the migration button only in that state. Reload retains partial state and still requires recovery. Consequence: a transient quota/security failure strands an otherwise resumable migration, violating the Stage 7 idempotent retry contract. The failing acceptance is retained in `tests/browser/kotlin-progress-migration.spec.ts`; trace and screenshot are under `test-results/kotlin-progress-migration--62eff-s-an-in-app-migration-retry-chromium/` (last failing run was Wasm Chromium). After a production correction, run this failed case first on JS and Wasm, then affected browser cases.
+
+## Commands and environment
+
+Working directory `kotlin/`: `./gradlew :shared:jsBrowserTest :shared:wasmJsBrowserTest --tests 'polski.progress.*' :composeApp:jsBrowserTest :composeApp:wasmJsBrowserTest --rerun-tasks` — **PASS**, 1m37s, 78 tasks. XML shows 12/12 `polski.progress` shared tests per target and 1/1 web progress test per target, all zero failures/errors/skips. `./gradlew :composeApp:jsBrowserProductionWebpack :composeApp:wasmJsBrowserProductionWebpack` — **PASS**, both up to date.
+
+Working directory repository root: `npm run typecheck` — **PASS** after correcting a test-only TypeScript project-boundary import. `KOTLIN_SPIKE_DIST=kotlin/composeApp/build/dist/js/productionExecutable KOTLIN_SPIKE_BRANCH=js KOTLIN_SPIKE_PORT=4174 npx playwright test tests/browser/kotlin-progress-migration.spec.ts --config playwright.kotlin.config.ts --grep-invert 'transient marker'` — **PASS**, 6/6 over Chromium/Firefox/WebKit. The same command with the Wasm distribution and `KOTLIN_SPIKE_BRANCH=wasm` — **PASS**, 6/6. Unfiltered focused command with `--project=chromium` — **FAIL** on both JS and Wasm: 2 passed, the transient-marker retry case failed. The browser spec starts a loopback Vite React server on an ephemeral port for its rollback load check; no live user storage is used.
+
+Tool versions: Node 24.1.0, Java 23, Gradle 8.14.2, Kotlin plugin 2.4.20, Playwright 1.55.1. Browser binary versions were not recorded; claims above are Playwright engine runs, not shipping Safari/device certification. No production code was modified by Tester, and passing tests do not constitute code-review approval. Test-only changes are `kotlin/shared/src/commonTest/kotlin/polski/progress/MigrationFailureTest.kt`, `tests/browser/kotlin-progress-migration.spec.ts`, and the `playwright.kotlin.config.ts` discovery line.

@@ -1,0 +1,69 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.3.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+
+> Configure project :shared
+w: [33m[1m⚠️ Native task 'iosSimulatorArm64Test' is disabled[0m[0m
+Task 'iosSimulatorArm64Test' for target 'ios_simulator_arm64' cannot run on the current host (macos-x86_64).
+Reason: architecture mismatch - target requires ARM64, current host is X64
+[32m[1mSolution:[0m[0m
+[32m[3mTo suppress this warning, add 'kotlin.native.ignoreDisabledTargets=true' to gradle.properties.[0m[0m
+
+w: [33m[1m⚠️ Deprecated Kotlin/Native Host[0m[0m
+The current host platform 'macos_x64' is deprecated and will be removed in a future Kotlin release. The Kotlin/Native compiler will no longer be distributed for this host.
+[32m[1mSolution:[0m[0m
+[32m[3mMigrate your build to a non-deprecated supported host platform for Kotlin/Native.[0m[0m
+[36mLearn more about Kotlin/Native target support and migration: [0m[34mhttps://kotl.in/native-targets-tiers[0m[36m[0m
+
+
+> Task :composeApp:checkDesktopMainComposeLibrariesCompatibility
+> Task :composeApp:kmpPartiallyResolvedDependenciesChecker
+> Task :composeApp:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :composeApp:convertXmlValueResourcesForCommonMain NO-SOURCE
+> Task :composeApp:copyNonXmlValueResourcesForCommonMain NO-SOURCE
+> Task :composeApp:prepareComposeResourcesTaskForCommonMain NO-SOURCE
+> Task :composeApp:generateResourceAccessorsForCommonMain SKIPPED
+> Task :composeApp:convertXmlValueResourcesForDesktopMain NO-SOURCE
+> Task :composeApp:copyNonXmlValueResourcesForDesktopMain NO-SOURCE
+> Task :composeApp:prepareComposeResourcesTaskForDesktopMain NO-SOURCE
+> Task :composeApp:generateResourceAccessorsForDesktopMain SKIPPED
+> Task :composeApp:generateActualResourceCollectorsForDesktopMain SKIPPED
+> Task :composeApp:generateComposeResClass SKIPPED
+> Task :composeApp:generateExpectResourceCollectorsForCommonMain SKIPPED
+> Task :shared:kmpPartiallyResolvedDependenciesChecker
+> Task :shared:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared:generateCoursePackSource UP-TO-DATE
+> Task :shared:compileKotlinDesktop UP-TO-DATE
+> Task :shared:compileDesktopMainJava NO-SOURCE
+> Task :shared:desktopProcessResources NO-SOURCE
+> Task :shared:processDesktopMainResources SKIPPED
+> Task :shared:desktopMainClasses UP-TO-DATE
+> Task :shared:desktopJar UP-TO-DATE
+> Task :composeApp:compileKotlinDesktop UP-TO-DATE
+> Task :composeApp:compileDesktopMainJava NO-SOURCE
+> Task :composeApp:checkDesktopTestComposeLibrariesCompatibility
+> Task :composeApp:assembleDesktopMainResources UP-TO-DATE
+> Task :composeApp:desktopProcessResources UP-TO-DATE
+> Task :composeApp:processDesktopMainResources SKIPPED
+> Task :composeApp:desktopMainClasses UP-TO-DATE
+> Task :composeApp:desktopJar UP-TO-DATE
+> Task :composeApp:convertXmlValueResourcesForCommonTest NO-SOURCE
+> Task :composeApp:copyNonXmlValueResourcesForCommonTest NO-SOURCE
+> Task :composeApp:prepareComposeResourcesTaskForCommonTest NO-SOURCE
+> Task :composeApp:generateResourceAccessorsForCommonTest SKIPPED
+> Task :composeApp:convertXmlValueResourcesForDesktopTest NO-SOURCE
+> Task :composeApp:copyNonXmlValueResourcesForDesktopTest NO-SOURCE
+> Task :composeApp:prepareComposeResourcesTaskForDesktopTest NO-SOURCE
+> Task :composeApp:generateResourceAccessorsForDesktopTest SKIPPED
+> Task :composeApp:assembleDesktopTestResources UP-TO-DATE
+> Task :composeApp:desktopTestProcessResources UP-TO-DATE
+> Task :composeApp:processDesktopTestResources SKIPPED
+> Task :composeApp:compileTestKotlinDesktop
+> Task :composeApp:compileDesktopTestJava NO-SOURCE
+> Task :composeApp:desktopTestClasses
+> Task :composeApp:desktopTest
+
+[Incubating] Problems report is available at: file:///Users/german/Work/JS/polski-grammar-srs/kotlin/build/reports/problems/problems-report.html
+
+BUILD SUCCESSFUL in 1m 43s
+15 actionable tasks: 6 executed, 9 up-to-date
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.3.1/userguide/configuration_cache_enabling.html

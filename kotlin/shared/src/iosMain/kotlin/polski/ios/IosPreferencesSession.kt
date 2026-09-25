@@ -1,0 +1,83 @@
+package polski.ios
+
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.put
+import platform.Foundation.NSUserDefaults
+import platform.Foundation.NSUUID
+import polski.preferences.Appearance
+import polski.preferences.Motion
+import polski.preferences.PreferencesDecode
+import polski.preferences.PreferredAnswerMode
+import polski.preferences.PreferredMethod
+import polski.preferences.UserPreferencesCodec
+import polski.preferences.UserPreferencesV2
+
+/** Native Settings bridge. The Apple material setting is owned by the OS; portable tint is retained in JSON. */
+class IosPreferencesSession(
+    private val defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults,
+) {
+    private val key = "polski-preferences-v2"
+    private var loaded: PreferencesDecode = defaults.stringForKey(key)?.let(UserPreferencesCodec::decode)
+        ?: PreferencesDecode.Loaded(UserPreferencesV2(
+            explanationMethod = if (defaults.stringForKey("explanationMethod") == "Situations")
+                PreferredMethod.Situations else PreferredMethod.Logic,
+        ))
+
+    var onState: ((String) -> Unit)? = null
+        set(value) { field = value; value?.invoke(currentSnapshot()) }
+
+    fun currentSnapshot(): String = buildJsonObject {
+        put("schemaVersion", 2)
+        when (val result = loaded) {
+            is PreferencesDecode.Loaded -> {
+                put("status", "Ready")
+                put("method", result.value.explanationMethod.name)
+                put("answerMode", result.value.answerMode.name)
+                put("appearance", result.value.appearance.name)
+                put("motion", result.value.motion.name)
+            }
+            is PreferencesDecode.RecoveryRequired -> {
+                put("status", "RecoveryRequired")
+                put("error", result.reason)
+            }
+        }
+    }.toString()
+
+    fun exportJson(): String? = defaults.stringForKey(key)
+        ?: (loaded as? PreferencesDecode.Loaded)?.value?.let(UserPreferencesCodec::encode)
+
+    fun set(field: String, value: String): String? {
+        val current = (loaded as? PreferencesDecode.Loaded)?.value ?: return "Настройки требуют восстановления"
+        val next = when (field) {
+            "method" -> current.copy(explanationMethod = PreferredMethod.entries.firstOrNull { it.name == value } ?: return "Неизвестный метод")
+            "answerMode" -> current.copy(answerMode = PreferredAnswerMode.entries.firstOrNull { it.name == value } ?: return "Неизвестный способ ответа")
+            "appearance" -> current.copy(appearance = Appearance.entries.firstOrNull { it.name == value } ?: return "Неизвестная тема")
+            "motion" -> current.copy(motion = Motion.entries.firstOrNull { it.name == value } ?: return "Неизвестное движение")
+            else -> return "Неизвестная настройка"
+        }
+        return write(UserPreferencesCodec.encode(next), next)
+    }
+
+    fun importJson(raw: String): String? {
+        if (raw.encodeToByteArray().size > 1_000_000) return "Файл настроек слишком большой"
+        val next = when (val decoded = UserPreferencesCodec.decode(raw)) {
+            is PreferencesDecode.Loaded -> decoded.value
+            is PreferencesDecode.RecoveryRequired -> return decoded.reason
+        }
+        val old = defaults.stringForKey(key)
+        if (old != null) {
+            val backupKey = "polski-preferences-import-backup-${NSUUID().UUIDString}"
+            defaults.setObject(old, forKey = backupKey)
+            if (!defaults.synchronize() || defaults.stringForKey(backupKey) != old) return "Не удалось сохранить резервную копию"
+        }
+        return write(raw, next)
+    }
+
+    private fun write(raw: String, next: UserPreferencesV2): String? = try {
+        defaults.setObject(raw, forKey = key)
+        check(defaults.synchronize() && defaults.stringForKey(key) == raw) { "Не удалось сохранить настройки" }
+        loaded = PreferencesDecode.Loaded(next)
+        onState?.invoke(currentSnapshot())
+        null
+    } catch (error: Throwable) { error.message ?: "Не удалось сохранить настройки" }
+}

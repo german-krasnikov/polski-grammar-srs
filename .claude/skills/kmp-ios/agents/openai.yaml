@@ -1,0 +1,4 @@
+interface:
+  display_name: "Kotlin Multiplatform iOS"
+  short_description: "iOS interop, accessible layouts and animations"
+  default_prompt: "Use $kmp-ios for this Kotlin Multiplatform task."

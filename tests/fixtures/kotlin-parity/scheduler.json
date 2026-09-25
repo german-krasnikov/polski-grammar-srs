@@ -1,0 +1,1427 @@
+{
+  "schemaVersion": 1,
+  "sourceRevision": "df59774e153a5bdf590fe27bd8780c7bd5457a26",
+  "cases": [
+    {
+      "id": "F-New-again",
+      "input": {
+        "card": {
+          "skillId": "case.acc.f",
+          "card": {
+            "due": "2026-02-03T12:00:00.000Z",
+            "stability": 0,
+            "difficulty": 0,
+            "elapsed_days": 0,
+            "scheduled_days": 0,
+            "reps": 0,
+            "lapses": 0,
+            "learning_steps": 0,
+            "state": 0
+          }
+        },
+        "rating": "again"
+      },
+      "expected": {
+        "preview": {
+          "again": "2026-02-03T12:01:00.000Z",
+          "hard": "2026-02-03T12:06:00.000Z",
+          "good": "2026-02-03T12:10:00.000Z",
+          "easy": "2026-02-11T12:00:00.000Z"
+        },
+        "review": {
+          "skillId": "case.acc.f",
+          "card": {
+            "due": "2026-02-03T12:01:00.000Z",
+            "stability": 0.212,
+            "difficulty": 6.4133,
+            "elapsed_days": 0,
+            "scheduled_days": 0,
+            "reps": 1,
+            "lapses": 0,
+            "learning_steps": 0,
+            "state": 1,
+            "last_review": "2026-02-03T12:00:00.000Z"
+          }
+        },
+        "due": true,
+        "roundTrip": {
+          "due": "2026-02-03T12:00:00.000Z",
+          "stability": 0,
+          "difficulty": 0,
+          "elapsed_days": 0,
+          "scheduled_days": 0,
+          "reps": 0,
+          "lapses": 0,
+          "learning_steps": 0,
+          "state": 0
+        }
+      },
+      "context": {
+        "nowIso": "2026-02-03T12:00:00.000Z",
+        "timeZone": "Europe/Warsaw",
+        "fsrsParameters": {
+          "request_retention": 0.9,
+          "maximum_interval": 3650,
+          "enable_fuzz": true,
+          "enable_short_term": true,
+          "learning_steps": [
+            "1m",
+            "10m"
+          ],
+          "relearning_steps": [
+            "10m"
+          ]
+        }
+      }
+    },
+    {
+      "id": "F-New-hard",
+      "input": {
+        "card": {
+          "skillId": "case.acc.f",
+          "card": {
+            "due": "2026-02-03T12:00:00.000Z",
+            "stability": 0,
+            "difficulty": 0,
+            "elapsed_days": 0,
+            "scheduled_days": 0,
+            "reps": 0,
+            "lapses": 0,
+            "learning_steps": 0,
+            "state": 0
+          }
+        },
+        "rating": "hard"
+      },
+      "expected": {
+        "preview": {
+          "again": "2026-02-03T12:01:00.000Z",
+          "hard": "2026-02-03T12:06:00.000Z",
+          "good": "2026-02-03T12:10:00.000Z",
+          "easy": "2026-02-11T12:00:00.000Z"
+        },
+        "review": {
+          "skillId": "case.acc.f",
+          "card": {
+            "due": "2026-02-03T12:06:00.000Z",
+            "stability": 1.2931,
+            "difficulty": 5.11217071,
+            "elapsed_days": 0,
+            "scheduled_days": 0,
+            "reps": 1,
+            "lapses": 0,
+            "learning_steps": 0,
+            "state": 1,
+            "last_review": "2026-02-03T12:00:00.000Z"
+          }
+        },
+        "due": true,
+        "roundTrip": {
+          "due": "2026-02-03T12:00:00.000Z",
+          "stability": 0,
+          "difficulty": 0,
+          "elapsed_days": 0,
+          "scheduled_days": 0,
+          "reps": 0,
+          "lapses": 0,
+          "learning_steps": 0,
+          "state": 0
+        }
+      },
+      "context": {
+        "nowIso": "2026-02-03T12:00:00.000Z",
+        "timeZone": "Europe/Warsaw",
+        "fsrsParameters": {
+          "request_retention": 0.9,
+          "maximum_interval": 3650,
+          "enable_fuzz": true,
+          "enable_short_term": true,
+          "learning_steps": [
+            "1m",
+            "10m"
+          ],
+          "relearning_steps": [
+            "10m"
+          ]
+        }
+      }
+    },
+    {
+      "id": "F-New-good",
+      "input": {
+        "card": {
+          "skillId": "case.acc.f",
+          "card": {
+            "due": "2026-02-03T12:00:00.000Z",
+            "stability": 0,
+            "difficulty": 0,
+            "elapsed_days": 0,
+            "scheduled_days": 0,
+            "reps": 0,
+            "lapses": 0,
+            "learning_steps": 0,
+            "state": 0
+          }
+        },
+        "rating": "good"
+      },
+      "expected": {
+        "preview": {
+          "again": "2026-02-03T12:01:00.000Z",
+          "hard": "2026-02-03T12:06:00.000Z",
+          "good": "2026-02-03T12:10:00.000Z",
+          "easy": "2026-02-11T12:00:00.000Z"
+        },
+        "review": {
+          "skillId": "case.acc.f",
+          "card": {
+            "due": "2026-02-03T12:10:00.000Z",
+            "stability": 2.3065,
+            "difficulty": 2.11810397,
+            "elapsed_days": 0,
+            "scheduled_days": 0,
+            "reps": 1,
+            "lapses": 0,
+            "learning_steps": 1,
+            "state": 1,
+            "last_review": "2026-02-03T12:00:00.000Z"
+          }
+        },
+        "due": true,
+        "roundTrip": {
+          "due": "2026-02-03T12:00:00.000Z",
+          "stability": 0,
+          "difficulty": 0,
+          "elapsed_days": 0,
+          "scheduled_days": 0,
+          "reps": 0,
+          "lapses": 0,
+          "learning_steps": 0,
+          "state": 0
+        }
+      },
+      "context": {
+        "nowIso": "2026-02-03T12:00:00.000Z",
+        "timeZone": "Europe/Warsaw",
+        "fsrsParameters": {
+          "request_retention": 0.9,
+          "maximum_interval": 3650,
+          "enable_fuzz": true,
+          "enable_short_term": true,
+          "learning_steps": [
+            "1m",
+            "10m"
+          ],
+          "relearning_steps": [
+            "10m"
+          ]
+        }
+      }
+    },
+    {
+      "id": "F-New-easy",
+      "input": {
+        "card": {
+          "skillId": "case.acc.f",
+          "card": {
+            "due": "2026-02-03T12:00:00.000Z",
+            "stability": 0,
+            "difficulty": 0,
+            "elapsed_days": 0,
+            "scheduled_days": 0,
+            "reps": 0,
+            "lapses": 0,
+            "learning_steps": 0,
+            "state": 0
+          }
+        },
+        "rating": "easy"
+      },
+      "expected": {
+        "preview": {
+          "again": "2026-02-03T12:01:00.000Z",
+          "hard": "2026-02-03T12:06:00.000Z",
+          "good": "2026-02-03T12:10:00.000Z",
+          "easy": "2026-02-11T12:00:00.000Z"
+        },
+        "review": {
+          "skillId": "case.acc.f",
+          "card": {
+            "due": "2026-02-11T12:00:00.000Z",
+            "stability": 8.2956,
+            "difficulty": 1,
+            "elapsed_days": 0,
+            "scheduled_days": 8,
+            "reps": 1,
+            "lapses": 0,
+            "learning_steps": 0,
+            "state": 2,
+            "last_review": "2026-02-03T12:00:00.000Z"
+          }
+        },
+        "due": true,
+        "roundTrip": {
+          "due": "2026-02-03T12:00:00.000Z",
+          "stability": 0,
+          "difficulty": 0,
+          "elapsed_days": 0,
+          "scheduled_days": 0,
+          "reps": 0,
+          "lapses": 0,
+          "learning_steps": 0,
+          "state": 0
+        }
+      },
+      "context": {
+        "nowIso": "2026-02-03T12:00:00.000Z",
+        "timeZone": "Europe/Warsaw",
+        "fsrsParameters": {
+          "request_retention": 0.9,
+          "maximum_interval": 3650,
+          "enable_fuzz": true,
+          "enable_short_term": true,
+          "learning_steps": [
+            "1m",
+            "10m"
+          ],
+          "relearning_steps": [
+            "10m"
+          ]
+        }
+      }
+    },
+    {
+      "id": "F-Learning-again",
+      "input": {
+        "card": {
+          "skillId": "case.acc.f",
+          "card": {
+            "due": "2026-02-03T12:01:00.000Z",
+            "stability": 0.212,
+            "difficulty": 6.4133,
+            "elapsed_days": 0,
+            "scheduled_days": 0,
+            "reps": 1,
+            "lapses": 0,
+            "learning_steps": 0,
+            "state": 1,
+            "last_review": "2026-02-03T12:00:00.000Z"
+          }
+        },
+        "rating": "again"
+      },
+      "expected": {
+        "preview": {
+          "again": "2026-02-03T12:01:00.000Z",
+          "hard": "2026-02-03T12:06:00.000Z",
+          "good": "2026-02-03T12:10:00.000Z",
+          "easy": "2026-02-04T12:00:00.000Z"
+        },
+        "review": {
+          "skillId": "case.acc.f",
+          "card": {
+            "due": "2026-02-03T12:01:00.000Z",
+            "stability": 0.08335672,
+            "difficulty": 8.80630447,
+            "elapsed_days": 0,
+            "scheduled_days": 0,
+            "reps": 2,
+            "lapses": 0,
+            "learning_steps": 0,
+            "state": 1,
+            "last_review": "2026-02-03T12:00:00.000Z"
+          }
+        },
+        "due": false,
+        "roundTrip": {
+          "due": "2026-02-03T12:01:00.000Z",
+          "stability": 0.212,
+          "difficulty": 6.4133,
+          "elapsed_days": 0,
+          "scheduled_days": 0,
+          "reps": 1,
+          "lapses": 0,
+          "learning_steps": 0,
+          "state": 1,
+          "last_review": "2026-02-03T12:00:00.000Z"
+        }
+      },
+      "context": {
+        "nowIso": "2026-02-03T12:00:00.000Z",
+        "timeZone": "Europe/Warsaw",
+        "fsrsParameters": {
+          "request_retention": 0.9,
+          "maximum_interval": 3650,
+          "enable_fuzz": true,
+          "enable_short_term": true,
+          "learning_steps": [
+            "1m",
+            "10m"
+          ],
+          "relearning_steps": [
+            "10m"
+          ]
+        }
+      }
+    },
+    {
+      "id": "F-Learning-hard",
+      "input": {
+        "card": {
+          "skillId": "case.acc.f",
+          "card": {
+            "due": "2026-02-03T12:01:00.000Z",
+            "stability": 0.212,
+            "difficulty": 6.4133,
+            "elapsed_days": 0,
+            "scheduled_days": 0,
+            "reps": 1,
+            "lapses": 0,
+            "learning_steps": 0,
+            "state": 1,
+            "last_review": "2026-02-03T12:00:00.000Z"
+          }
+        },
+        "rating": "hard"
+      },
+      "expected": {
+        "preview": {
+          "again": "2026-02-03T12:01:00.000Z",
+          "hard": "2026-02-03T12:06:00.000Z",
+          "good": "2026-02-03T12:10:00.000Z",
+          "easy": "2026-02-04T12:00:00.000Z"
+        },
+        "review": {
+          "skillId": "case.acc.f",
+          "card": {
+            "due": "2026-02-03T12:06:00.000Z",
+            "stability": 0.212,
+            "difficulty": 7.60420977,
+            "elapsed_days": 0,
+            "scheduled_days": 0,
+            "reps": 2,
+            "lapses": 0,
+            "learning_steps": 0,
+            "state": 1,
+            "last_review": "2026-02-03T12:00:00.000Z"
+          }
+        },
+        "due": false,
+        "roundTrip": {
+          "due": "2026-02-03T12:01:00.000Z",
+          "stability": 0.212,
+          "difficulty": 6.4133,
+          "elapsed_days": 0,
+          "scheduled_days": 0,
+          "reps": 1,
+          "lapses": 0,
+          "learning_steps": 0,
+          "state": 1,
+          "last_review": "2026-02-03T12:00:00.000Z"
+        }
+      },
+      "context": {
+        "nowIso": "2026-02-03T12:00:00.000Z",
+        "timeZone": "Europe/Warsaw",
+        "fsrsParameters": {
+          "request_retention": 0.9,
+          "maximum_interval": 3650,
+          "enable_fuzz": true,
+          "enable_short_term": true,
+          "learning_steps": [
+            "1m",
+            "10m"
+          ],
+          "relearning_steps": [
+            "10m"
+          ]
+        }
+      }
+    },
+    {
+      "id": "F-Learning-good",
+      "input": {
+        "card": {
+          "skillId": "case.acc.f",
+          "card": {
+            "due": "2026-02-03T12:01:00.000Z",
+            "stability": 0.212,
+            "difficulty": 6.4133,
+            "elapsed_days": 0,
+            "scheduled_days": 0,
+            "reps": 1,
+            "lapses": 0,
+            "learning_steps": 0,
+            "state": 1,
+            "last_review": "2026-02-03T12:00:00.000Z"
+          }
+        },
+        "rating": "good"
+      },
+      "expected": {
+        "preview": {
+          "again": "2026-02-03T12:01:00.000Z",
+          "hard": "2026-02-03T12:06:00.000Z",
+          "good": "2026-02-03T12:10:00.000Z",
+          "easy": "2026-02-04T12:00:00.000Z"
+        },
+        "review": {
+          "skillId": "case.acc.f",
+          "card": {
+            "due": "2026-02-03T12:10:00.000Z",
+            "stability": 0.24668919,
+            "difficulty": 6.40211507,
+            "elapsed_days": 0,
+            "scheduled_days": 0,
+            "reps": 2,
+            "lapses": 0,
+            "learning_steps": 1,
+            "state": 1,
+            "last_review": "2026-02-03T12:00:00.000Z"
+          }
+        },
+        "due": false,
+        "roundTrip": {
+          "due": "2026-02-03T12:01:00.000Z",
+          "stability": 0.212,
+          "difficulty": 6.4133,
+          "elapsed_days": 0,
+          "scheduled_days": 0,
+          "reps": 1,
+          "lapses": 0,
+          "learning_steps": 0,
+          "state": 1,
+          "last_review": "2026-02-03T12:00:00.000Z"
+        }
+      },
+      "context": {
+        "nowIso": "2026-02-03T12:00:00.000Z",
+        "timeZone": "Europe/Warsaw",
+        "fsrsParameters": {
+          "request_retention": 0.9,
+          "maximum_interval": 3650,
+          "enable_fuzz": true,
+          "enable_short_term": true,
+          "learning_steps": [
+            "1m",
+            "10m"
+          ],
+          "relearning_steps": [
+            "10m"
+          ]
+        }
+      }
+    },
+    {
+      "id": "F-Learning-easy",
+      "input": {
+        "card": {
+          "skillId": "case.acc.f",
+          "card": {
+            "due": "2026-02-03T12:01:00.000Z",
+            "stability": 0.212,
+            "difficulty": 6.4133,
+            "elapsed_days": 0,
+            "scheduled_days": 0,
+            "reps": 1,
+            "lapses": 0,
+            "learning_steps": 0,
+            "state": 1,
+            "last_review": "2026-02-03T12:00:00.000Z"
+          }
+        },
+        "rating": "easy"
+      },
+      "expected": {
+        "preview": {
+          "again": "2026-02-03T12:01:00.000Z",
+          "hard": "2026-02-03T12:06:00.000Z",
+          "good": "2026-02-03T12:10:00.000Z",
+          "easy": "2026-02-04T12:00:00.000Z"
+        },
+        "review": {
+          "skillId": "case.acc.f",
+          "card": {
+            "due": "2026-02-04T12:00:00.000Z",
+            "stability": 0.42437996,
+            "difficulty": 5.20002037,
+            "elapsed_days": 0,
+            "scheduled_days": 1,
+            "reps": 2,
+            "lapses": 0,
+            "learning_steps": 0,
+            "state": 2,
+            "last_review": "2026-02-03T12:00:00.000Z"
+          }
+        },
+        "due": false,
+        "roundTrip": {
+          "due": "2026-02-03T12:01:00.000Z",
+          "stability": 0.212,
+          "difficulty": 6.4133,
+          "elapsed_days": 0,
+          "scheduled_days": 0,
+          "reps": 1,
+          "lapses": 0,
+          "learning_steps": 0,
+          "state": 1,
+          "last_review": "2026-02-03T12:00:00.000Z"
+        }
+      },
+      "context": {
+        "nowIso": "2026-02-03T12:00:00.000Z",
+        "timeZone": "Europe/Warsaw",
+        "fsrsParameters": {
+          "request_retention": 0.9,
+          "maximum_interval": 3650,
+          "enable_fuzz": true,
+          "enable_short_term": true,
+          "learning_steps": [
+            "1m",
+            "10m"
+          ],
+          "relearning_steps": [
+            "10m"
+          ]
+        }
+      }
+    },
+    {
+      "id": "F-Review-again",
+      "input": {
+        "card": {
+          "skillId": "case.acc.f",
+          "card": {
+            "due": "2026-02-11T12:00:00.000Z",
+            "stability": 8.2956,
+            "difficulty": 1,
+            "elapsed_days": 0,
+            "scheduled_days": 8,
+            "reps": 1,
+            "lapses": 0,
+            "learning_steps": 0,
+            "state": 2,
+            "last_review": "2026-02-03T12:00:00.000Z"
+          }
+        },
+        "rating": "again"
+      },
+      "expected": {
+        "preview": {
+          "again": "2026-02-03T12:10:00.000Z",
+          "hard": "2026-02-10T12:00:00.000Z",
+          "good": "2026-02-11T12:00:00.000Z",
+          "easy": "2026-02-15T12:00:00.000Z"
+        },
+        "review": {
+          "skillId": "case.acc.f",
+          "card": {
+            "due": "2026-02-03T12:10:00.000Z",
+            "stability": 2.56250817,
+            "difficulty": 7.02698957,
+            "elapsed_days": 0,
+            "scheduled_days": 0,
+            "reps": 2,
+            "lapses": 1,
+            "learning_steps": 0,
+            "state": 3,
+            "last_review": "2026-02-03T12:00:00.000Z"
+          }
+        },
+        "due": false,
+        "roundTrip": {
+          "due": "2026-02-11T12:00:00.000Z",
+          "stability": 8.2956,
+          "difficulty": 1,
+          "elapsed_days": 0,
+          "scheduled_days": 8,
+          "reps": 1,
+          "lapses": 0,
+          "learning_steps": 0,
+          "state": 2,
+          "last_review": "2026-02-03T12:00:00.000Z"
+        }
+      },
+      "context": {
+        "nowIso": "2026-02-03T12:00:00.000Z",
+        "timeZone": "Europe/Warsaw",
+        "fsrsParameters": {
+          "request_retention": 0.9,
+          "maximum_interval": 3650,
+          "enable_fuzz": true,
+          "enable_short_term": true,
+          "learning_steps": [
+            "1m",
+            "10m"
+          ],
+          "relearning_steps": [
+            "10m"
+          ]
+        }
+      }
+    },
+    {
+      "id": "F-Review-hard",
+      "input": {
+        "card": {
+          "skillId": "case.acc.f",
+          "card": {
+            "due": "2026-02-11T12:00:00.000Z",
+            "stability": 8.2956,
+            "difficulty": 1,
+            "elapsed_days": 0,
+            "scheduled_days": 8,
+            "reps": 1,
+            "lapses": 0,
+            "learning_steps": 0,
+            "state": 2,
+            "last_review": "2026-02-03T12:00:00.000Z"
+          }
+        },
+        "rating": "hard"
+      },
+      "expected": {
+        "preview": {
+          "again": "2026-02-03T12:10:00.000Z",
+          "hard": "2026-02-10T12:00:00.000Z",
+          "good": "2026-02-11T12:00:00.000Z",
+          "easy": "2026-02-15T12:00:00.000Z"
+        },
+        "review": {
+          "skillId": "case.acc.f",
+          "card": {
+            "due": "2026-02-10T12:00:00.000Z",
+            "stability": 8.2956,
+            "difficulty": 4.01060897,
+            "elapsed_days": 0,
+            "scheduled_days": 7,
+            "reps": 2,
+            "lapses": 0,
+            "learning_steps": 0,
+            "state": 2,
+            "last_review": "2026-02-03T12:00:00.000Z"
+          }
+        },
+        "due": false,
+        "roundTrip": {
+          "due": "2026-02-11T12:00:00.000Z",
+          "stability": 8.2956,
+          "difficulty": 1,
+          "elapsed_days": 0,
+          "scheduled_days": 8,
+          "reps": 1,
+          "lapses": 0,
+          "learning_steps": 0,
+          "state": 2,
+          "last_review": "2026-02-03T12:00:00.000Z"
+        }
+      },
+      "context": {
+        "nowIso": "2026-02-03T12:00:00.000Z",
+        "timeZone": "Europe/Warsaw",
+        "fsrsParameters": {
+          "request_retention": 0.9,
+          "maximum_interval": 3650,
+          "enable_fuzz": true,
+          "enable_short_term": true,
+          "learning_steps": [
+            "1m",
+            "10m"
+          ],
+          "relearning_steps": [
+            "10m"
+          ]
+        }
+      }
+    },
+    {
+      "id": "F-Review-good",
+      "input": {
+        "card": {
+          "skillId": "case.acc.f",
+          "card": {
+            "due": "2026-02-11T12:00:00.000Z",
+            "stability": 8.2956,
+            "difficulty": 1,
+            "elapsed_days": 0,
+            "scheduled_days": 8,
+            "reps": 1,
+            "lapses": 0,
+            "learning_steps": 0,
+            "state": 2,
+            "last_review": "2026-02-03T12:00:00.000Z"
+          }
+        },
+        "rating": "good"
+      },
+      "expected": {
+        "preview": {
+          "again": "2026-02-03T12:10:00.000Z",
+          "hard": "2026-02-10T12:00:00.000Z",
+          "good": "2026-02-11T12:00:00.000Z",
+          "easy": "2026-02-15T12:00:00.000Z"
+        },
+        "review": {
+          "skillId": "case.acc.f",
+          "card": {
+            "due": "2026-02-11T12:00:00.000Z",
+            "stability": 8.2956,
+            "difficulty": 1,
+            "elapsed_days": 0,
+            "scheduled_days": 8,
+            "reps": 2,
+            "lapses": 0,
+            "learning_steps": 0,
+            "state": 2,
+            "last_review": "2026-02-03T12:00:00.000Z"
+          }
+        },
+        "due": false,
+        "roundTrip": {
+          "due": "2026-02-11T12:00:00.000Z",
+          "stability": 8.2956,
+          "difficulty": 1,
+          "elapsed_days": 0,
+          "scheduled_days": 8,
+          "reps": 1,
+          "lapses": 0,
+          "learning_steps": 0,
+          "state": 2,
+          "last_review": "2026-02-03T12:00:00.000Z"
+        }
+      },
+      "context": {
+        "nowIso": "2026-02-03T12:00:00.000Z",
+        "timeZone": "Europe/Warsaw",
+        "fsrsParameters": {
+          "request_retention": 0.9,
+          "maximum_interval": 3650,
+          "enable_fuzz": true,
+          "enable_short_term": true,
+          "learning_steps": [
+            "1m",
+            "10m"
+          ],
+          "relearning_steps": [
+            "10m"
+          ]
+        }
+      }
+    },
+    {
+      "id": "F-Review-easy",
+      "input": {
+        "card": {
+          "skillId": "case.acc.f",
+          "card": {
+            "due": "2026-02-11T12:00:00.000Z",
+            "stability": 8.2956,
+            "difficulty": 1,
+            "elapsed_days": 0,
+            "scheduled_days": 8,
+            "reps": 1,
+            "lapses": 0,
+            "learning_steps": 0,
+            "state": 2,
+            "last_review": "2026-02-03T12:00:00.000Z"
+          }
+        },
+        "rating": "easy"
+      },
+      "expected": {
+        "preview": {
+          "again": "2026-02-03T12:10:00.000Z",
+          "hard": "2026-02-10T12:00:00.000Z",
+          "good": "2026-02-11T12:00:00.000Z",
+          "easy": "2026-02-15T12:00:00.000Z"
+        },
+        "review": {
+          "skillId": "case.acc.f",
+          "card": {
+            "due": "2026-02-15T12:00:00.000Z",
+            "stability": 13.04606469,
+            "difficulty": 1,
+            "elapsed_days": 0,
+            "scheduled_days": 12,
+            "reps": 2,
+            "lapses": 0,
+            "learning_steps": 0,
+            "state": 2,
+            "last_review": "2026-02-03T12:00:00.000Z"
+          }
+        },
+        "due": false,
+        "roundTrip": {
+          "due": "2026-02-11T12:00:00.000Z",
+          "stability": 8.2956,
+          "difficulty": 1,
+          "elapsed_days": 0,
+          "scheduled_days": 8,
+          "reps": 1,
+          "lapses": 0,
+          "learning_steps": 0,
+          "state": 2,
+          "last_review": "2026-02-03T12:00:00.000Z"
+        }
+      },
+      "context": {
+        "nowIso": "2026-02-03T12:00:00.000Z",
+        "timeZone": "Europe/Warsaw",
+        "fsrsParameters": {
+          "request_retention": 0.9,
+          "maximum_interval": 3650,
+          "enable_fuzz": true,
+          "enable_short_term": true,
+          "learning_steps": [
+            "1m",
+            "10m"
+          ],
+          "relearning_steps": [
+            "10m"
+          ]
+        }
+      }
+    },
+    {
+      "id": "F-Relearning-again",
+      "input": {
+        "card": {
+          "skillId": "case.acc.f",
+          "card": {
+            "due": "2026-02-10T12:10:00.000Z",
+            "stability": 1.36871808,
+            "difficulty": 7.02698957,
+            "elapsed_days": 7,
+            "scheduled_days": 0,
+            "reps": 2,
+            "lapses": 1,
+            "learning_steps": 0,
+            "state": 3,
+            "last_review": "2026-02-10T12:00:00.000Z"
+          }
+        },
+        "rating": "again"
+      },
+      "expected": {
+        "preview": {
+          "again": "2026-02-10T12:10:00.000Z",
+          "hard": "2026-02-10T12:15:00.000Z",
+          "good": "2026-02-11T12:00:00.000Z",
+          "easy": "2026-02-12T12:00:00.000Z"
+        },
+        "review": {
+          "skillId": "case.acc.f",
+          "card": {
+            "due": "2026-02-10T12:10:00.000Z",
+            "stability": 0.47601669,
+            "difficulty": 9.00802006,
+            "elapsed_days": 0,
+            "scheduled_days": 0,
+            "reps": 3,
+            "lapses": 1,
+            "learning_steps": 0,
+            "state": 3,
+            "last_review": "2026-02-10T12:00:00.000Z"
+          }
+        },
+        "due": false,
+        "roundTrip": {
+          "due": "2026-02-10T12:10:00.000Z",
+          "stability": 1.36871808,
+          "difficulty": 7.02698957,
+          "elapsed_days": 7,
+          "scheduled_days": 0,
+          "reps": 2,
+          "lapses": 1,
+          "learning_steps": 0,
+          "state": 3,
+          "last_review": "2026-02-10T12:00:00.000Z"
+        }
+      },
+      "context": {
+        "nowIso": "2026-02-10T12:00:00.000Z",
+        "timeZone": "Europe/Warsaw",
+        "fsrsParameters": {
+          "request_retention": 0.9,
+          "maximum_interval": 3650,
+          "enable_fuzz": true,
+          "enable_short_term": true,
+          "learning_steps": [
+            "1m",
+            "10m"
+          ],
+          "relearning_steps": [
+            "10m"
+          ]
+        }
+      }
+    },
+    {
+      "id": "F-Relearning-hard",
+      "input": {
+        "card": {
+          "skillId": "case.acc.f",
+          "card": {
+            "due": "2026-02-10T12:10:00.000Z",
+            "stability": 1.36871808,
+            "difficulty": 7.02698957,
+            "elapsed_days": 7,
+            "scheduled_days": 0,
+            "reps": 2,
+            "lapses": 1,
+            "learning_steps": 0,
+            "state": 3,
+            "last_review": "2026-02-10T12:00:00.000Z"
+          }
+        },
+        "rating": "hard"
+      },
+      "expected": {
+        "preview": {
+          "again": "2026-02-10T12:10:00.000Z",
+          "hard": "2026-02-10T12:15:00.000Z",
+          "good": "2026-02-11T12:00:00.000Z",
+          "easy": "2026-02-12T12:00:00.000Z"
+        },
+        "review": {
+          "skillId": "case.acc.f",
+          "card": {
+            "due": "2026-02-10T12:15:00.000Z",
+            "stability": 1.36871808,
+            "difficulty": 8.01160551,
+            "elapsed_days": 0,
+            "scheduled_days": 0,
+            "reps": 3,
+            "lapses": 1,
+            "learning_steps": 0,
+            "state": 3,
+            "last_review": "2026-02-10T12:00:00.000Z"
+          }
+        },
+        "due": false,
+        "roundTrip": {
+          "due": "2026-02-10T12:10:00.000Z",
+          "stability": 1.36871808,
+          "difficulty": 7.02698957,
+          "elapsed_days": 7,
+          "scheduled_days": 0,
+          "reps": 2,
+          "lapses": 1,
+          "learning_steps": 0,
+          "state": 3,
+          "last_review": "2026-02-10T12:00:00.000Z"
+        }
+      },
+      "context": {
+        "nowIso": "2026-02-10T12:00:00.000Z",
+        "timeZone": "Europe/Warsaw",
+        "fsrsParameters": {
+          "request_retention": 0.9,
+          "maximum_interval": 3650,
+          "enable_fuzz": true,
+          "enable_short_term": true,
+          "learning_steps": [
+            "1m",
+            "10m"
+          ],
+          "relearning_steps": [
+            "10m"
+          ]
+        }
+      }
+    },
+    {
+      "id": "F-Relearning-good",
+      "input": {
+        "card": {
+          "skillId": "case.acc.f",
+          "card": {
+            "due": "2026-02-10T12:10:00.000Z",
+            "stability": 1.36871808,
+            "difficulty": 7.02698957,
+            "elapsed_days": 7,
+            "scheduled_days": 0,
+            "reps": 2,
+            "lapses": 1,
+            "learning_steps": 0,
+            "state": 3,
+            "last_review": "2026-02-10T12:00:00.000Z"
+          }
+        },
+        "rating": "good"
+      },
+      "expected": {
+        "preview": {
+          "again": "2026-02-10T12:10:00.000Z",
+          "hard": "2026-02-10T12:15:00.000Z",
+          "good": "2026-02-11T12:00:00.000Z",
+          "easy": "2026-02-12T12:00:00.000Z"
+        },
+        "review": {
+          "skillId": "case.acc.f",
+          "card": {
+            "due": "2026-02-11T12:00:00.000Z",
+            "stability": 1.40874276,
+            "difficulty": 7.01519095,
+            "elapsed_days": 0,
+            "scheduled_days": 1,
+            "reps": 3,
+            "lapses": 1,
+            "learning_steps": 0,
+            "state": 2,
+            "last_review": "2026-02-10T12:00:00.000Z"
+          }
+        },
+        "due": false,
+        "roundTrip": {
+          "due": "2026-02-10T12:10:00.000Z",
+          "stability": 1.36871808,
+          "difficulty": 7.02698957,
+          "elapsed_days": 7,
+          "scheduled_days": 0,
+          "reps": 2,
+          "lapses": 1,
+          "learning_steps": 0,
+          "state": 3,
+          "last_review": "2026-02-10T12:00:00.000Z"
+        }
+      },
+      "context": {
+        "nowIso": "2026-02-10T12:00:00.000Z",
+        "timeZone": "Europe/Warsaw",
+        "fsrsParameters": {
+          "request_retention": 0.9,
+          "maximum_interval": 3650,
+          "enable_fuzz": true,
+          "enable_short_term": true,
+          "learning_steps": [
+            "1m",
+            "10m"
+          ],
+          "relearning_steps": [
+            "10m"
+          ]
+        }
+      }
+    },
+    {
+      "id": "F-Relearning-easy",
+      "input": {
+        "card": {
+          "skillId": "case.acc.f",
+          "card": {
+            "due": "2026-02-10T12:10:00.000Z",
+            "stability": 1.36871808,
+            "difficulty": 7.02698957,
+            "elapsed_days": 7,
+            "scheduled_days": 0,
+            "reps": 2,
+            "lapses": 1,
+            "learning_steps": 0,
+            "state": 3,
+            "last_review": "2026-02-10T12:00:00.000Z"
+          }
+        },
+        "rating": "easy"
+      },
+      "expected": {
+        "preview": {
+          "again": "2026-02-10T12:10:00.000Z",
+          "hard": "2026-02-10T12:15:00.000Z",
+          "good": "2026-02-11T12:00:00.000Z",
+          "easy": "2026-02-12T12:00:00.000Z"
+        },
+        "review": {
+          "skillId": "case.acc.f",
+          "card": {
+            "due": "2026-02-12T12:00:00.000Z",
+            "stability": 2.42346333,
+            "difficulty": 6.01877639,
+            "elapsed_days": 0,
+            "scheduled_days": 2,
+            "reps": 3,
+            "lapses": 1,
+            "learning_steps": 0,
+            "state": 2,
+            "last_review": "2026-02-10T12:00:00.000Z"
+          }
+        },
+        "due": false,
+        "roundTrip": {
+          "due": "2026-02-10T12:10:00.000Z",
+          "stability": 1.36871808,
+          "difficulty": 7.02698957,
+          "elapsed_days": 7,
+          "scheduled_days": 0,
+          "reps": 2,
+          "lapses": 1,
+          "learning_steps": 0,
+          "state": 3,
+          "last_review": "2026-02-10T12:00:00.000Z"
+        }
+      },
+      "context": {
+        "nowIso": "2026-02-10T12:00:00.000Z",
+        "timeZone": "Europe/Warsaw",
+        "fsrsParameters": {
+          "request_retention": 0.9,
+          "maximum_interval": 3650,
+          "enable_fuzz": true,
+          "enable_short_term": true,
+          "learning_steps": [
+            "1m",
+            "10m"
+          ],
+          "relearning_steps": [
+            "10m"
+          ]
+        }
+      }
+    },
+    {
+      "id": "F-same-day",
+      "input": {
+        "card": {
+          "skillId": "case.acc.f",
+          "card": {
+            "due": "2026-02-03T12:01:00.000Z",
+            "stability": 0.212,
+            "difficulty": 6.4133,
+            "elapsed_days": 0,
+            "scheduled_days": 0,
+            "reps": 1,
+            "lapses": 0,
+            "learning_steps": 0,
+            "state": 1,
+            "last_review": "2026-02-03T12:00:00.000Z"
+          }
+        },
+        "rating": "good"
+      },
+      "expected": {
+        "preview": {
+          "again": "2026-02-03T12:02:00.000Z",
+          "hard": "2026-02-03T12:07:00.000Z",
+          "good": "2026-02-03T12:11:00.000Z",
+          "easy": "2026-02-04T12:01:00.000Z"
+        },
+        "review": {
+          "skillId": "case.acc.f",
+          "card": {
+            "due": "2026-02-03T12:11:00.000Z",
+            "stability": 0.24668919,
+            "difficulty": 6.40211507,
+            "elapsed_days": 0,
+            "scheduled_days": 0,
+            "reps": 2,
+            "lapses": 0,
+            "learning_steps": 1,
+            "state": 1,
+            "last_review": "2026-02-03T12:01:00.000Z"
+          }
+        },
+        "due": true
+      },
+      "context": {
+        "nowIso": "2026-02-03T12:01:00.000Z",
+        "timeZone": "Europe/Warsaw"
+      }
+    },
+    {
+      "id": "F-overdue",
+      "input": {
+        "card": {
+          "skillId": "case.acc.f",
+          "card": {
+            "due": "2026-02-11T12:00:00.000Z",
+            "stability": 8.2956,
+            "difficulty": 1,
+            "elapsed_days": 0,
+            "scheduled_days": 8,
+            "reps": 1,
+            "lapses": 0,
+            "learning_steps": 0,
+            "state": 2,
+            "last_review": "2026-02-03T12:00:00.000Z"
+          }
+        },
+        "rating": "good"
+      },
+      "expected": {
+        "preview": {
+          "again": "2026-04-03T12:10:00.000Z",
+          "hard": "2026-06-02T12:00:00.000Z",
+          "good": "2026-07-06T12:00:00.000Z",
+          "easy": "2026-09-21T12:00:00.000Z"
+        },
+        "review": {
+          "skillId": "case.acc.f",
+          "card": {
+            "due": "2026-07-06T12:00:00.000Z",
+            "stability": 100.68585421,
+            "difficulty": 1,
+            "elapsed_days": 59,
+            "scheduled_days": 94,
+            "reps": 2,
+            "lapses": 0,
+            "learning_steps": 0,
+            "state": 2,
+            "last_review": "2026-04-03T12:00:00.000Z"
+          }
+        },
+        "due": true
+      },
+      "context": {
+        "nowIso": "2026-04-03T12:00:00.000Z",
+        "timeZone": "Europe/Warsaw"
+      }
+    },
+    {
+      "id": "F-short-step",
+      "input": {
+        "card": {
+          "skillId": "case.acc.f",
+          "card": {
+            "due": "2026-02-10T12:10:00.000Z",
+            "stability": 1.36871808,
+            "difficulty": 7.02698957,
+            "elapsed_days": 7,
+            "scheduled_days": 0,
+            "reps": 2,
+            "lapses": 1,
+            "learning_steps": 0,
+            "state": 3,
+            "last_review": "2026-02-10T12:00:00.000Z"
+          }
+        },
+        "rating": "good"
+      },
+      "expected": {
+        "preview": {
+          "again": "2026-02-10T12:11:00.000Z",
+          "hard": "2026-02-10T12:16:00.000Z",
+          "good": "2026-02-11T12:01:00.000Z",
+          "easy": "2026-02-12T12:01:00.000Z"
+        },
+        "review": {
+          "skillId": "case.acc.f",
+          "card": {
+            "due": "2026-02-11T12:01:00.000Z",
+            "stability": 1.40874276,
+            "difficulty": 7.01519095,
+            "elapsed_days": 0,
+            "scheduled_days": 1,
+            "reps": 3,
+            "lapses": 1,
+            "learning_steps": 0,
+            "state": 2,
+            "last_review": "2026-02-10T12:01:00.000Z"
+          }
+        },
+        "due": false
+      },
+      "context": {
+        "nowIso": "2026-02-10T12:01:00.000Z",
+        "timeZone": "Europe/Warsaw"
+      }
+    },
+    {
+      "id": "F-fuzz",
+      "input": {
+        "card": {
+          "skillId": "case.acc.f",
+          "card": {
+            "due": "2026-02-11T12:00:00.000Z",
+            "stability": 8.2956,
+            "difficulty": 1,
+            "elapsed_days": 0,
+            "scheduled_days": 8,
+            "reps": 1,
+            "lapses": 0,
+            "learning_steps": 0,
+            "state": 2,
+            "last_review": "2026-02-03T12:00:00.000Z"
+          }
+        },
+        "rating": "good"
+      },
+      "expected": {
+        "preview": {
+          "again": "2026-02-10T12:10:00.000Z",
+          "hard": "2026-03-10T12:00:00.000Z",
+          "good": "2026-03-22T12:00:00.000Z",
+          "easy": "2026-04-16T12:00:00.000Z"
+        },
+        "review": {
+          "skillId": "case.acc.f",
+          "card": {
+            "due": "2026-03-22T12:00:00.000Z",
+            "stability": 36.05646792,
+            "difficulty": 1,
+            "elapsed_days": 7,
+            "scheduled_days": 40,
+            "reps": 2,
+            "lapses": 0,
+            "learning_steps": 0,
+            "state": 2,
+            "last_review": "2026-02-10T12:00:00.000Z"
+          }
+        },
+        "due": false
+      },
+      "context": {
+        "nowIso": "2026-02-10T12:00:00.000Z",
+        "timeZone": "Europe/Warsaw"
+      }
+    },
+    {
+      "id": "F-cap",
+      "input": {
+        "card": {
+          "skillId": "case.acc.f",
+          "card": {
+            "due": "2026-02-11T12:00:00.000Z",
+            "stability": 999999,
+            "difficulty": 1,
+            "elapsed_days": 0,
+            "scheduled_days": 8,
+            "reps": 1,
+            "lapses": 0,
+            "learning_steps": 0,
+            "state": 2,
+            "last_review": "2026-02-03T12:00:00.000Z"
+          }
+        },
+        "rating": "good"
+      },
+      "expected": {
+        "preview": {
+          "again": "2026-03-03T12:10:00.000Z",
+          "hard": "2036-02-04T12:00:00.000Z",
+          "good": "2036-02-05T12:00:00.000Z",
+          "easy": "2036-02-06T12:00:00.000Z"
+        },
+        "review": {
+          "skillId": "case.acc.f",
+          "card": {
+            "due": "2036-02-05T12:00:00.000Z",
+            "stability": 36500,
+            "difficulty": 1,
+            "elapsed_days": 28,
+            "scheduled_days": 3626,
+            "reps": 2,
+            "lapses": 0,
+            "learning_steps": 0,
+            "state": 2,
+            "last_review": "2026-03-03T12:00:00.000Z"
+          }
+        },
+        "due": true
+      },
+      "context": {
+        "nowIso": "2026-03-03T12:00:00.000Z",
+        "timeZone": "Europe/Warsaw"
+      }
+    }
+  ]
+}

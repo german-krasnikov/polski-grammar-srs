@@ -1,0 +1,46 @@
+[2m[WebServer] [22m127.0.0.1 - - [24/Sep/2026 20:35:43] "GET / HTTP/1.1" 200 -
+
+Running 3 tests using 1 worker
+
+(node:40175) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:40175) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[2m[WebServer] [22m127.0.0.1 - - [24/Sep/2026 20:35:44] "GET / HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [24/Sep/2026 20:35:44] "GET /training.css HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [24/Sep/2026 20:35:44] "GET /matrix-progress.css HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [24/Sep/2026 20:35:44] "GET /composeApp.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [24/Sep/2026 20:35:44] "GET /bfa5198fb2fe683c613a.wasm HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [24/Sep/2026 20:35:44] "GET /4e0f43bfe5acd84320e3.wasm HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [24/Sep/2026 20:35:45] "GET / HTTP/1.1" 304 -
+[2m[WebServer] [22m127.0.0.1 - - [24/Sep/2026 20:35:45] "GET /bfa5198fb2fe683c613a.wasm HTTP/1.1" 200 -
+  ✓  1 [chromium] › tests/browser/kotlin-vocabulary.spec.ts:78:1 › clean Kotlin profile restores a legacy shipped-homonym custom export (1.2s)
+(node:40347) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:40347) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[2m[WebServer] [22m127.0.0.1 - - [24/Sep/2026 20:35:49] "GET / HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [24/Sep/2026 20:35:49] "GET /training.css HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [24/Sep/2026 20:35:49] "GET /matrix-progress.css HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [24/Sep/2026 20:35:49] "GET /composeApp.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [24/Sep/2026 20:35:49] "GET /bfa5198fb2fe683c613a.wasm HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [24/Sep/2026 20:35:49] "GET /4e0f43bfe5acd84320e3.wasm HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [24/Sep/2026 20:35:49] "GET /favicon.png HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [24/Sep/2026 20:35:49] "GET /apple-touch-icon.png HTTP/1.1" 200 -
+  ✓  2 [firefox] › tests/browser/kotlin-vocabulary.spec.ts:78:1 › clean Kotlin profile restores a legacy shipped-homonym custom export (2.7s)
+(node:40758) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:40758) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[2m[WebServer] [22m127.0.0.1 - - [24/Sep/2026 20:35:54] "GET / HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [24/Sep/2026 20:35:54] "GET /training.css HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [24/Sep/2026 20:35:54] "GET /composeApp.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [24/Sep/2026 20:35:54] "GET /matrix-progress.css HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [24/Sep/2026 20:35:54] "GET /bfa5198fb2fe683c613a.wasm HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [24/Sep/2026 20:35:54] "GET /4e0f43bfe5acd84320e3.wasm HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [24/Sep/2026 20:35:54] "GET / HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [24/Sep/2026 20:35:54] "GET /bfa5198fb2fe683c613a.wasm HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [24/Sep/2026 20:35:54] "GET /4e0f43bfe5acd84320e3.wasm HTTP/1.1" 200 -
+  ✓  3 [webkit] › tests/browser/kotlin-vocabulary.spec.ts:78:1 › clean Kotlin profile restores a legacy shipped-homonym custom export (2.6s)
+
+  3 passed (12.5s)

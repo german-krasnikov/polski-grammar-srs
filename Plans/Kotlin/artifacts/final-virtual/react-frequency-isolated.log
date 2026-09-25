@@ -1,0 +1,9 @@
+
+ RUN  v4.1.11 /Users/german/Work/JS/polski-grammar-srs
+
+
+ Test Files  1 passed (1)
+      Tests  1 passed | 6 skipped (7)
+   Start at  19:40:00
+   Duration  2.48s (transform 254ms, setup 0ms, import 430ms, tests 1.43s, environment 380ms)
+

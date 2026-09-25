@@ -1,0 +1,1310 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Polski course pack v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "id",
+    "targetLanguage",
+    "nativeLanguage",
+    "title",
+    "training",
+    "reference",
+    "nouns",
+    "adjectives",
+    "verbs",
+    "personalPronouns",
+    "possessives",
+    "morphology",
+    "skills",
+    "sentenceSeeds",
+    "caseSentencePrefixes",
+    "exerciseCopy",
+    "exercisePatterns",
+    "vocabulary",
+    "contentVersion",
+    "attribution"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "id": {
+      "$ref": "#/$defs/id"
+    },
+    "targetLanguage": {
+      "$ref": "#/$defs/language"
+    },
+    "nativeLanguage": {
+      "$ref": "#/$defs/language"
+    },
+    "title": {
+      "$ref": "#/$defs/text"
+    },
+    "training": {
+      "$ref": "#/$defs/training"
+    },
+    "reference": {
+      "$ref": "#/$defs/reference"
+    },
+    "contentVersion": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "attribution": {
+      "$ref": "#/$defs/text"
+    },
+    "nouns": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/noun"
+      }
+    },
+    "adjectives": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/adjective"
+      }
+    },
+    "verbs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/verb"
+      }
+    },
+    "personalPronouns": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ja",
+        "ty",
+        "on",
+        "ona",
+        "ono",
+        "my",
+        "wy",
+        "oni",
+        "one"
+      ],
+      "properties": {
+        "ja": {
+          "$ref": "#/$defs/caseForms"
+        },
+        "ty": {
+          "$ref": "#/$defs/caseForms"
+        },
+        "on": {
+          "$ref": "#/$defs/caseForms"
+        },
+        "ona": {
+          "$ref": "#/$defs/caseForms"
+        },
+        "ono": {
+          "$ref": "#/$defs/caseForms"
+        },
+        "my": {
+          "$ref": "#/$defs/caseForms"
+        },
+        "wy": {
+          "$ref": "#/$defs/caseForms"
+        },
+        "oni": {
+          "$ref": "#/$defs/caseForms"
+        },
+        "one": {
+          "$ref": "#/$defs/caseForms"
+        }
+      }
+    },
+    "possessives": {
+      "type": "array",
+      "minItems": 7,
+      "maxItems": 7,
+      "items": {
+        "$ref": "#/$defs/possessive"
+      }
+    },
+    "morphology": { "$ref": "#/$defs/morphology" },
+    "skills": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/skill"
+      }
+    },
+    "sentenceSeeds": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "nounId",
+          "adjectiveId"
+        ],
+        "properties": {
+          "nounId": {
+            "$ref": "#/$defs/id"
+          },
+          "adjectiveId": {
+            "$ref": "#/$defs/id"
+          }
+        }
+      }
+    },
+    "caseSentencePrefixes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "nomSg",
+        "nomPl",
+        "gen",
+        "dat",
+        "acc",
+        "inst",
+        "loc"
+      ],
+      "properties": {
+        "nomSg": {
+          "$ref": "#/$defs/text"
+        },
+        "nomPl": {
+          "$ref": "#/$defs/text"
+        },
+        "gen": {
+          "$ref": "#/$defs/text"
+        },
+        "dat": {
+          "$ref": "#/$defs/text"
+        },
+        "acc": {
+          "$ref": "#/$defs/text"
+        },
+        "inst": {
+          "$ref": "#/$defs/text"
+        },
+        "loc": {
+          "$ref": "#/$defs/text"
+        }
+      }
+    },
+    "exerciseCopy": {
+      "type": "object",
+      "required": [
+        "accPrompt",
+        "accExplanation",
+        "accReasonPersonalA",
+        "accReasonUnchanged",
+        "accReasonChanged",
+        "genNegPrompt",
+        "genNegExplanation",
+        "genNegReason",
+        "instStart",
+        "instPrompt",
+        "instReason",
+        "locStart",
+        "locPrompt",
+        "locReason",
+        "datStart",
+        "datPrompt",
+        "datReason",
+        "caseDrillExplanation",
+        "ownerYour",
+        "ownerHis",
+        "ownerHer",
+        "ownerOur",
+        "ownerYourPlural",
+        "ownerTheir",
+        "ownerPromptPrefix",
+        "ownerPromptSuffix",
+        "ownerExplanation",
+        "ownerReason",
+        "verbPastPrompt",
+        "verbFuturePrompt",
+        "verbPresentPrompt",
+        "verbExplanation",
+        "verbReason",
+        "aspectSource",
+        "aspectPrompt",
+        "aspectExpected",
+        "aspectAccepted",
+        "aspectExplanation",
+        "aspectFrom",
+        "aspectTo",
+        "aspectReason",
+        "pronounPrompt",
+        "pronounExplanation",
+        "pronounReason",
+        "questionPrompt",
+        "questionExplanation",
+        "questionReason",
+        "pluralPrompt",
+        "pluralExplanation",
+        "pluralReason",
+        "mixedPrompt",
+        "mixedExplanation",
+        "mixedVerbReason",
+        "mixedNounReason",
+        "chainAccPrompt",
+        "chainAccReason",
+        "chainPastPrompt",
+        "chainPastReason",
+        "chainNegPrompt",
+        "chainNegReason",
+        "chainOwnerPrompt",
+        "chainOwnerReason",
+        "chainLocPrompt",
+        "chainLocReason",
+        "questionChangeFrom",
+        "questionChangeTo",
+        "mixedChangeFrom",
+        "mixedChangeTo",
+        "chainPastChangeFrom",
+        "chainPastChangeTo"
+      ],
+      "additionalProperties": {
+        "$ref": "#/$defs/text"
+      },
+      "properties": {}
+    },
+    "vocabulary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source",
+        "items",
+        "instructions",
+        "unavailableLabel"
+      ],
+      "properties": {
+        "source": {
+          "$ref": "#/$defs/text"
+        },
+        "unavailableLabel": { "$ref": "#/$defs/text" },
+        "instructions": {
+          "type": "object", "additionalProperties": false,
+          "required": ["react", "web", "native", "ios"],
+          "properties": {
+            "react": { "$ref": "#/$defs/text" },
+            "web": { "$ref": "#/$defs/text" },
+            "native": { "$ref": "#/$defs/text" },
+            "ios": { "$ref": "#/$defs/text" }
+          }
+        },
+        "items": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/vocabularyItem"
+          }
+        }
+      }
+    },
+    "exercisePatterns": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "seenAcc",
+        "seenGenNeg",
+        "caseDrill",
+        "verbSentence",
+        "verbFutureAccepted",
+        "questionSource",
+        "questionExpected",
+        "mixedMale",
+        "mixedFemale",
+        "chainPast",
+        "chainNeg",
+        "chainOwner",
+        "chainLoc"
+      ],
+      "properties": {
+        "seenAcc": {
+          "$ref": "#/$defs/text"
+        },
+        "seenGenNeg": {
+          "$ref": "#/$defs/text"
+        },
+        "caseDrill": {
+          "$ref": "#/$defs/text"
+        },
+        "verbSentence": {
+          "$ref": "#/$defs/text"
+        },
+        "verbFutureAccepted": {
+          "$ref": "#/$defs/text"
+        },
+        "questionSource": {
+          "$ref": "#/$defs/text"
+        },
+        "questionExpected": {
+          "$ref": "#/$defs/text"
+        },
+        "mixedMale": {
+          "$ref": "#/$defs/text"
+        },
+        "mixedFemale": {
+          "$ref": "#/$defs/text"
+        },
+        "chainPast": {
+          "$ref": "#/$defs/text"
+        },
+        "chainNeg": {
+          "$ref": "#/$defs/text"
+        },
+        "chainOwner": {
+          "$ref": "#/$defs/text"
+        },
+        "chainLoc": {
+          "$ref": "#/$defs/text"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "training": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["chainPresentation"],
+      "properties": {
+        "chainPresentation": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["steps", "completion"],
+          "properties": {
+            "steps": {
+              "type": "array",
+              "minItems": 5,
+              "maxItems": 5,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["id", "label"],
+                "properties": {
+                  "id": { "enum": ["acc", "past", "neg", "owner", "loc"] },
+                  "label": { "$ref": "#/$defs/text" }
+                }
+              }
+            },
+            "completion": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["title", "reactEyebrow", "reactBody", "webBody"],
+              "properties": {
+                "title": { "$ref": "#/$defs/text" },
+                "reactEyebrow": { "$ref": "#/$defs/text" },
+                "reactBody": { "$ref": "#/$defs/text" },
+                "webBody": { "$ref": "#/$defs/text" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "reference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["pronounTeaching", "verbTeaching", "caseTeaching", "comparisonNounIds", "russianSupport", "pipeline", "systemCards", "maleAccRows", "aspectRows", "tenseRows", "chainRows", "caseRows", "genderNames", "matrixIntroduction", "contextHelp", "maleAccIntro", "aspectNoPresent", "webCaseCompositionHeader"],
+      "properties": {
+        "matrixIntroduction": { "$ref": "#/$defs/text" },
+        "webCaseCompositionHeader": { "$ref": "#/$defs/text" },
+        "contextHelp": {
+          "type": "object", "additionalProperties": false,
+          "required": ["react", "compact"],
+          "properties": { "react": { "$ref": "#/$defs/text" }, "compact": { "$ref": "#/$defs/text" } }
+        },
+        "maleAccIntro": { "$ref": "#/$defs/text" },
+        "aspectNoPresent": {
+          "type": "object", "additionalProperties": false,
+          "required": ["compact", "ios"],
+          "properties": { "compact": { "$ref": "#/$defs/text" }, "ios": { "$ref": "#/$defs/text" } }
+        },
+        "pronounTeaching": { "$ref": "#/$defs/pronounTeaching" },
+        "verbTeaching": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["subjects", "genderControlLabel", "genderOptions", "tenseLabels", "futureExplanation"],
+          "properties": {
+            "subjects": {
+              "type": "array", "minItems": 9, "maxItems": 9,
+              "items": {
+                "type": "object", "additionalProperties": false,
+                "required": ["id", "person", "number", "genderMode", "label"],
+                "properties": {
+                  "id": { "enum": ["ja", "ty", "on", "ona", "ono", "my", "wy", "oni", "one"] },
+                  "person": { "enum": [1, 2, 3] },
+                  "number": { "enum": ["sg", "pl"] },
+                  "genderMode": { "enum": ["selected", "fixed"] },
+                  "fixedGender": { "enum": ["m-personal", "f", "n"] },
+                  "label": { "$ref": "#/$defs/verbLabel" }
+                }
+              }
+            },
+            "genderControlLabel": { "$ref": "#/$defs/verbLabel" },
+            "genderOptions": {
+              "type": "array", "minItems": 2, "maxItems": 2,
+              "items": {
+                "type": "object", "additionalProperties": false,
+                "required": ["id", "label"],
+                "properties": {
+                  "id": { "enum": ["m", "f"] },
+                  "label": { "$ref": "#/$defs/verbLabel" }
+                }
+              }
+            },
+            "tenseLabels": {
+              "type": "object", "additionalProperties": false,
+              "required": ["present", "past", "future"],
+              "properties": {
+                "present": { "$ref": "#/$defs/verbLabel" },
+                "past": { "$ref": "#/$defs/verbLabel" },
+                "future": { "$ref": "#/$defs/verbLabel" }
+              }
+            },
+            "futureExplanation": {
+              "type": "object", "additionalProperties": false,
+              "required": ["react", "compact"],
+              "properties": {
+                "react": { "$ref": "#/$defs/text" },
+                "compact": { "$ref": "#/$defs/text" }
+              }
+            }
+          }
+        },
+        "caseTeaching": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["caseNote", "comparisonReadingHint"],
+          "properties": {
+            "caseNote": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["react", "compact"],
+              "properties": {
+                "react": { "$ref": "#/$defs/text" },
+                "compact": { "$ref": "#/$defs/text" }
+              }
+            },
+            "comparisonReadingHint": { "$ref": "#/$defs/text" }
+          }
+        },
+        "comparisonNounIds": {
+          "type": "array",
+          "minItems": 7,
+          "maxItems": 7,
+          "items": { "$ref": "#/$defs/id" }
+        },
+        "russianSupport": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["title", "columns", "rows"],
+          "properties": {
+            "title": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["full", "compact"],
+              "properties": {
+                "full": { "$ref": "#/$defs/text" },
+                "compact": { "$ref": "#/$defs/text" }
+              }
+            },
+            "columns": {
+              "type": "array", "minItems": 3, "maxItems": 3,
+              "items": { "$ref": "#/$defs/text" }
+            },
+            "rows": {
+              "type": "array", "minItems": 4, "maxItems": 4,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["id", "cue", "react", "web", "desktop", "mobileLine"],
+                "properties": {
+                  "id": { "enum": ["accusative", "instrumental", "locative", "possessive"] },
+                  "cue": { "$ref": "#/$defs/text" },
+                  "react": { "$ref": "#/$defs/russianSupportTable" },
+                  "web": { "$ref": "#/$defs/russianSupportTable" },
+                  "desktop": { "$ref": "#/$defs/russianSupportTable" },
+                  "mobileLine": { "$ref": "#/$defs/text" },
+                  "comparisons": {
+                    "type": "array", "minItems": 1,
+                    "items": { "$ref": "#/$defs/contrastPair" }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "pipeline": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["title", "steps", "compactExample"],
+          "properties": {
+            "title": { "$ref": "#/$defs/text" },
+            "steps": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 3,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["id", "label", "question", "example"],
+                "properties": {
+                  "id": { "enum": ["intent", "case", "agreement"] },
+                  "label": { "$ref": "#/$defs/text" },
+                  "question": { "$ref": "#/$defs/text" },
+                  "example": { "$ref": "#/$defs/text" }
+                }
+              }
+            },
+            "compactExample": { "$ref": "#/$defs/text" }
+          }
+        },
+        "systemCards": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "title", "explanation", "example"],
+            "properties": {
+              "id": { "enum": ["noun", "agreement", "verb", "modifiers"] },
+              "title": { "$ref": "#/$defs/text" },
+              "explanation": { "$ref": "#/$defs/text" },
+              "example": { "$ref": "#/$defs/text" }
+            }
+          }
+        },
+        "maleAccRows": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "label", "title", "examples", "rule"],
+            "properties": {
+              "id": { "enum": ["person", "animal", "object"] },
+              "label": { "$ref": "#/$defs/text" },
+              "title": { "$ref": "#/$defs/text" },
+              "examples": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["from", "to", "sentence"],
+                  "properties": {
+                    "from": { "$ref": "#/$defs/text" },
+                    "to": { "$ref": "#/$defs/text" },
+                    "sentence": { "$ref": "#/$defs/text" }
+                  }
+                }
+              },
+              "rule": { "$ref": "#/$defs/text" }
+            }
+          }
+        },
+        "aspectRows": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["label", "from", "present", "past", "future"],
+            "properties": {
+              "label": { "$ref": "#/$defs/text" },
+              "from": { "$ref": "#/$defs/text" },
+              "present": { "anyOf": [{ "$ref": "#/$defs/text" }, { "type": "null" }] },
+              "past": { "$ref": "#/$defs/text" },
+              "future": { "$ref": "#/$defs/text" }
+            }
+          }
+        },
+        "tenseRows": {
+          "type": "array",
+          "minItems": 5,
+          "maxItems": 5,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["label", "from", "to"],
+            "properties": {
+              "label": { "$ref": "#/$defs/text" },
+              "from": { "$ref": "#/$defs/text" },
+              "to": { "$ref": "#/$defs/text" }
+            }
+          }
+        },
+        "chainRows": {
+          "type": "array",
+          "minItems": 5,
+          "maxItems": 5,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["label", "from", "to", "change"],
+            "properties": {
+              "label": { "$ref": "#/$defs/text" },
+              "from": { "$ref": "#/$defs/text" },
+              "to": { "$ref": "#/$defs/text" },
+              "change": { "$ref": "#/$defs/text" }
+            }
+          }
+        },
+        "caseRows": {
+          "type": "array",
+          "minItems": 7,
+          "maxItems": 7,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "pl", "ru", "question", "trigger"],
+            "properties": {
+              "id": { "enum": ["nom", "gen", "dat", "acc", "inst", "loc", "voc"] },
+              "pl": { "$ref": "#/$defs/text" },
+              "ru": { "$ref": "#/$defs/text" },
+              "question": { "$ref": "#/$defs/text" },
+              "trigger": { "$ref": "#/$defs/text" },
+              "skill": { "$ref": "#/$defs/id" }
+            }
+          }
+        },
+        "genderNames": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["m-personal", "m-animate", "m-inanimate", "f", "n"],
+          "properties": {
+            "m-personal": { "$ref": "#/$defs/text" },
+            "m-animate": { "$ref": "#/$defs/text" },
+            "m-inanimate": { "$ref": "#/$defs/text" },
+            "f": { "$ref": "#/$defs/text" },
+            "n": { "$ref": "#/$defs/text" }
+          }
+        }
+      }
+    },
+    "pronounTeaching": {
+      "type": "object", "additionalProperties": false,
+      "required": ["personal", "contexts", "possessive"],
+      "properties": {
+        "personal": {
+          "type": "object", "additionalProperties": false,
+          "required": ["title", "intro", "footer", "pronounIds"],
+          "properties": {
+            "title": { "$ref": "#/$defs/text" },
+            "intro": {
+              "type": "object", "additionalProperties": false, "required": ["react", "compact"],
+              "properties": { "react": { "$ref": "#/$defs/text" }, "compact": { "$ref": "#/$defs/text" } }
+            },
+            "footer": {
+              "type": "object", "additionalProperties": false, "required": ["react", "web", "native"],
+              "properties": { "react": { "$ref": "#/$defs/text" }, "web": { "$ref": "#/$defs/text" }, "native": { "$ref": "#/$defs/text" } }
+            },
+            "pronounIds": { "type": "array", "minItems": 9, "maxItems": 9, "items": { "enum": ["ja", "ty", "on", "ona", "ono", "my", "wy", "oni", "one"] } }
+          }
+        },
+        "contexts": {
+          "type": "array", "minItems": 5, "maxItems": 5,
+          "items": {
+            "type": "object", "additionalProperties": false,
+            "required": ["id", "caseId", "cue", "caseName"],
+            "properties": {
+              "id": { "enum": ["gen", "dat", "acc", "inst", "loc"] },
+              "caseId": { "enum": ["gen", "dat", "acc", "inst", "loc"] },
+              "cue": {
+                "type": "object", "additionalProperties": false, "required": ["full", "compact", "ios"],
+                "properties": { "full": { "$ref": "#/$defs/text" }, "compact": { "$ref": "#/$defs/text" }, "ios": { "$ref": "#/$defs/text" } }
+              },
+              "caseName": { "$ref": "#/$defs/text" },
+              "valuePrefix": { "$ref": "#/$defs/text" },
+              "specialValues": {
+                "type": "object", "additionalProperties": false, "required": ["ja"],
+                "properties": { "ja": { "$ref": "#/$defs/text" } }
+              }
+            }
+          }
+        },
+        "possessive": {
+          "type": "object", "additionalProperties": false, "required": ["title", "demo"],
+          "properties": {
+            "title": { "$ref": "#/$defs/text" },
+            "demo": {
+              "type": "object", "additionalProperties": false,
+              "required": ["nounId", "adjectiveId", "number", "cases", "invariableOwnerIds", "rule"],
+              "properties": {
+                "nounId": { "$ref": "#/$defs/id" },
+                "adjectiveId": { "$ref": "#/$defs/id" },
+                "number": { "enum": ["sg"] },
+                "cases": {
+                  "type": "array", "minItems": 3, "maxItems": 3,
+                  "items": {
+                    "type": "object", "additionalProperties": false, "required": ["id", "caption"],
+                    "properties": {
+                      "id": { "enum": ["nom", "acc", "gen"] },
+                      "caption": {
+                        "type": "object", "additionalProperties": false, "required": ["web", "desktop", "ios"],
+                        "properties": { "web": { "$ref": "#/$defs/text" }, "desktop": { "$ref": "#/$defs/text" }, "ios": { "$ref": "#/$defs/text" } }
+                      }
+                    }
+                  }
+                },
+                "invariableOwnerIds": { "type": "array", "minItems": 3, "maxItems": 3, "items": { "enum": ["his", "her", "their"] } },
+                "rule": {
+                  "type": "object", "additionalProperties": false, "required": ["invariable", "variable"],
+                  "properties": { "invariable": { "$ref": "#/$defs/text" }, "variable": { "$ref": "#/$defs/text" } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "verbLabel": {
+      "type": "object", "additionalProperties": false,
+      "required": ["full", "compact"],
+      "properties": {
+        "full": { "$ref": "#/$defs/text" },
+        "compact": { "$ref": "#/$defs/text" }
+      }
+    },
+    "contrastPart": {
+      "type": "object", "additionalProperties": false,
+      "required": ["text", "isChanged", "isEnding"],
+      "properties": {
+        "text": { "type": "string", "minLength": 1 },
+        "isChanged": { "type": "boolean" },
+        "isEnding": { "type": "boolean" }
+      }
+    },
+    "contrastPair": {
+      "type": "object", "additionalProperties": false,
+      "required": ["from", "to", "beforeParts", "afterParts"],
+      "properties": {
+        "from": { "$ref": "#/$defs/text" },
+        "to": { "$ref": "#/$defs/text" },
+        "beforeParts": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/contrastPart" } },
+        "afterParts": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/contrastPart" } }
+      }
+    },
+    "russianSupportTable": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["construction", "check"],
+      "properties": {
+        "construction": { "$ref": "#/$defs/text" },
+        "check": { "$ref": "#/$defs/text" }
+      }
+    },
+    "text": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][A-Za-z0-9._-]*$"
+    },
+    "language": {
+      "type": "string",
+      "pattern": "^[a-z]{2,3}$"
+    },
+    "caseForms": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "nom",
+        "gen",
+        "dat",
+        "acc",
+        "inst",
+        "loc",
+        "voc"
+      ],
+      "properties": {
+        "nom": {
+          "$ref": "#/$defs/text"
+        },
+        "gen": {
+          "$ref": "#/$defs/text"
+        },
+        "dat": {
+          "$ref": "#/$defs/text"
+        },
+        "acc": {
+          "$ref": "#/$defs/text"
+        },
+        "inst": {
+          "$ref": "#/$defs/text"
+        },
+        "loc": {
+          "$ref": "#/$defs/text"
+        },
+        "voc": {
+          "$ref": "#/$defs/text"
+        }
+      }
+    },
+    "numberForms": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sg",
+        "pl"
+      ],
+      "properties": {
+        "sg": {
+          "$ref": "#/$defs/caseForms"
+        },
+        "pl": {
+          "$ref": "#/$defs/caseForms"
+        }
+      }
+    },
+    "genderForms": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "m-personal",
+        "m-animate",
+        "m-inanimate",
+        "f",
+        "n"
+      ],
+      "properties": {
+        "m-personal": {
+          "$ref": "#/$defs/caseForms"
+        },
+        "m-animate": {
+          "$ref": "#/$defs/caseForms"
+        },
+        "m-inanimate": {
+          "$ref": "#/$defs/caseForms"
+        },
+        "f": {
+          "$ref": "#/$defs/caseForms"
+        },
+        "n": {
+          "$ref": "#/$defs/caseForms"
+        }
+      }
+    },
+    "noun": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "lemma",
+        "meaning",
+        "gender",
+        "forms"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "lemma": {
+          "$ref": "#/$defs/text"
+        },
+        "meaning": {
+          "$ref": "#/$defs/text"
+        },
+        "gender": {
+          "enum": [
+            "m-personal",
+            "m-animate",
+            "m-inanimate",
+            "f",
+            "n"
+          ]
+        },
+        "forms": {
+          "$ref": "#/$defs/numberForms"
+        }
+      }
+    },
+    "adjective": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "lemma",
+        "meaning",
+        "forms"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "lemma": {
+          "$ref": "#/$defs/text"
+        },
+        "meaning": {
+          "$ref": "#/$defs/text"
+        },
+        "forms": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "sg",
+            "pl"
+          ],
+          "properties": {
+            "sg": {
+              "$ref": "#/$defs/genderForms"
+            },
+            "pl": {
+              "$ref": "#/$defs/genderForms"
+            }
+          }
+        }
+      }
+    },
+    "personForms": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "1",
+        "2",
+        "3"
+      ],
+      "properties": {
+        "1": {
+          "$ref": "#/$defs/text"
+        },
+        "2": {
+          "$ref": "#/$defs/text"
+        },
+        "3": {
+          "$ref": "#/$defs/text"
+        }
+      }
+    },
+    "verb": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "lemma",
+        "meaning",
+        "aspect",
+        "futureType",
+        "pastStem"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "lemma": {
+          "$ref": "#/$defs/text"
+        },
+        "meaning": {
+          "$ref": "#/$defs/text"
+        },
+        "aspect": {
+          "enum": [
+            "imperfective",
+            "perfective"
+          ]
+        },
+        "futureType": {
+          "enum": [
+            "compound",
+            "present"
+          ]
+        },
+        "perfectivePair": {
+          "$ref": "#/$defs/id"
+        },
+        "present": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "sg",
+            "pl"
+          ],
+          "properties": {
+            "sg": {
+              "$ref": "#/$defs/personForms"
+            },
+            "pl": {
+              "$ref": "#/$defs/personForms"
+            }
+          }
+        },
+        "pastStem": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "m",
+            "f",
+            "mp",
+            "np"
+          ],
+          "properties": {
+            "m": {
+              "$ref": "#/$defs/text"
+            },
+            "f": {
+              "$ref": "#/$defs/text"
+            },
+            "n": {
+              "$ref": "#/$defs/text"
+            },
+            "mp": {
+              "$ref": "#/$defs/text"
+            },
+            "np": {
+              "$ref": "#/$defs/text"
+            }
+          }
+        }
+      }
+    },
+    "possessive": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "label", "forms"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "label": { "$ref": "#/$defs/text" },
+        "forms": {
+          "if": { "type": "object", "properties": { "kind": { "const": "invariant" } }, "required": ["kind"] },
+          "then": { "$ref": "#/$defs/invariantPossessiveForms" },
+          "else": { "$ref": "#/$defs/declinedPossessiveForms" }
+        }
+      }
+    },
+    "invariantPossessiveForms": {
+      "type": "object", "additionalProperties": false,
+      "required": ["kind", "value"],
+      "properties": { "kind": { "const": "invariant" }, "value": { "$ref": "#/$defs/text" } }
+    },
+    "declinedPossessiveForms": {
+      "type": "object", "additionalProperties": false,
+      "required": ["kind", "sg", "pl"],
+      "properties": {
+        "kind": { "const": "declined" },
+        "sg": {
+          "type": "object", "additionalProperties": false,
+          "required": ["m-personal", "m-animate", "m-inanimate", "f", "n"],
+          "properties": {
+            "m-personal": { "$ref": "#/$defs/caseForms" },
+            "m-animate": { "$ref": "#/$defs/caseForms" },
+            "m-inanimate": { "$ref": "#/$defs/caseForms" },
+            "f": { "$ref": "#/$defs/caseForms" },
+            "n": { "$ref": "#/$defs/caseForms" }
+          }
+        },
+        "pl": {
+          "type": "object", "additionalProperties": false,
+          "required": ["m-personal", "other"],
+          "properties": {
+            "m-personal": { "$ref": "#/$defs/caseForms" },
+            "other": { "$ref": "#/$defs/caseForms" }
+          }
+        }
+      }
+    },
+    "morphology": {
+      "type": "object", "additionalProperties": false,
+      "required": ["futureAuxiliary"],
+      "properties": {
+        "futureAuxiliary": {
+          "type": "object", "additionalProperties": false,
+          "required": ["verbId", "forms"],
+          "properties": {
+            "verbId": { "$ref": "#/$defs/id" },
+            "forms": {
+              "type": "object", "additionalProperties": false,
+              "required": ["sg", "pl"],
+              "properties": {
+                "sg": { "$ref": "#/$defs/personForms" },
+                "pl": { "$ref": "#/$defs/personForms" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "personForms": {
+      "type": "object", "additionalProperties": false,
+      "required": ["1", "2", "3"],
+      "properties": {
+        "1": { "$ref": "#/$defs/text" },
+        "2": { "$ref": "#/$defs/text" },
+        "3": { "$ref": "#/$defs/text" }
+      }
+    },
+    "method": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "introduction",
+        "promptLead",
+        "introduce",
+        "retrieve",
+        "feedback",
+        "review"
+      ],
+      "properties": {
+        "introduction": {
+          "$ref": "#/$defs/text"
+        },
+        "promptLead": {
+          "$ref": "#/$defs/text"
+        },
+        "introduce": {
+          "$ref": "#/$defs/text"
+        },
+        "retrieve": {
+          "$ref": "#/$defs/text"
+        },
+        "feedback": {
+          "$ref": "#/$defs/text"
+        },
+        "review": {
+          "$ref": "#/$defs/text"
+        }
+      }
+    },
+    "skill": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "title",
+        "group",
+        "level",
+        "formula",
+        "theory",
+        "hint",
+        "prerequisites",
+        "focus",
+        "methods"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "title": {
+          "$ref": "#/$defs/text"
+        },
+        "group": {
+          "$ref": "#/$defs/text"
+        },
+        "level": {
+          "enum": [
+            "A1",
+            "A2",
+            "B1",
+            "B2",
+            "C1",
+            "C2"
+          ]
+        },
+        "formula": {
+          "$ref": "#/$defs/text"
+        },
+        "theory": {
+          "$ref": "#/$defs/text"
+        },
+        "hint": {
+          "$ref": "#/$defs/text"
+        },
+        "prerequisites": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/id"
+          }
+        },
+        "focus": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "before",
+            "after"
+          ],
+          "properties": {
+            "before": {
+              "$ref": "#/$defs/text"
+            },
+            "after": {
+              "$ref": "#/$defs/text"
+            }
+          }
+        },
+        "methods": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "logic",
+            "situations"
+          ],
+          "properties": {
+            "logic": {
+              "$ref": "#/$defs/method"
+            },
+            "situations": {
+              "$ref": "#/$defs/method"
+            }
+          }
+        }
+      }
+    },
+    "vocabularyItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "lemma",
+        "translation",
+        "form",
+        "example",
+        "level",
+        "frequencyRank"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "lemma": {
+          "$ref": "#/$defs/text"
+        },
+        "translation": {
+          "$ref": "#/$defs/text"
+        },
+        "form": {
+          "$ref": "#/$defs/text"
+        },
+        "example": {
+          "$ref": "#/$defs/text"
+        },
+        "level": {
+          "enum": [
+            "—",
+            "A1",
+            "A2",
+            "B1",
+            "B2",
+            "C1",
+            "C2"
+          ]
+        },
+        "frequencyRank": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1,
+          "maximum": 1000
+        }
+      }
+    }
+  }
+}

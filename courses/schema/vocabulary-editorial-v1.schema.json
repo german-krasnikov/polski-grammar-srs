@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Polski vocabulary editorial journal v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "frequencySource", "cards", "candidates"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "frequencySource": {
+      "type": "object", "additionalProperties": false,
+      "required": ["repository", "csvUrl", "revision", "license", "attribution", "csvSha256", "jsonSha256", "selection"],
+      "properties": {
+        "repository": { "$ref": "#/$defs/text" },
+        "csvUrl": { "type": "string", "pattern": "^https://[^ ]+$" },
+        "revision": { "type": "string", "pattern": "^[a-f0-9]{40}$" },
+        "license": { "const": "CC BY 4.0" },
+        "attribution": { "$ref": "#/$defs/text" },
+        "csvSha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "jsonSha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "selection": { "$ref": "#/$defs/text" }
+      }
+    },
+    "cards": { "type": "array", "items": { "$ref": "#/$defs/card" } },
+    "candidates": { "type": "array", "items": { "$ref": "#/$defs/candidate" } }
+  },
+  "$defs": {
+    "text": { "type": "string", "minLength": 1, "pattern": "\\S" },
+    "provenance": {
+      "oneOf": [
+        { "type": "object", "additionalProperties": false, "required": ["kind"], "properties": { "kind": { "const": "project-authored" } } },
+        { "type": "object", "additionalProperties": false, "required": ["kind", "url", "revision", "license", "attribution"], "properties": {
+          "kind": { "const": "external" }, "url": { "type": "string", "pattern": "^https://[^ ]+$" },
+          "revision": { "$ref": "#/$defs/text" }, "license": { "$ref": "#/$defs/text" },
+          "attribution": { "$ref": "#/$defs/text" }
+        } }
+      ]
+    },
+    "card": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "lemma", "rank", "sense", "translation", "form", "example", "level", "levelDecision", "provenance", "reviewSources", "reviewer", "reviewedAt", "status", "note"],
+      "properties": {
+        "id": { "$ref": "#/$defs/text" }, "lemma": { "$ref": "#/$defs/text" },
+        "rank": { "type": ["integer", "null"], "minimum": 1, "maximum": 1000 },
+        "sense": { "$ref": "#/$defs/text" }, "translation": { "$ref": "#/$defs/text" },
+        "form": { "$ref": "#/$defs/text" }, "example": { "$ref": "#/$defs/text" },
+        "level": { "enum": ["—", "A1", "A2", "B1", "B2", "C1", "C2"] },
+        "levelDecision": { "$ref": "#/$defs/text" },
+        "provenance": { "type": "object", "additionalProperties": false, "required": ["translation", "form", "example"], "properties": {
+          "translation": { "$ref": "#/$defs/provenance" }, "form": { "$ref": "#/$defs/provenance" },
+          "example": { "$ref": "#/$defs/provenance" }
+        } },
+        "reviewSources": { "type": "array", "uniqueItems": true, "items": { "type": "string", "pattern": "^https://[^ ]+$" } },
+        "reviewer": { "type": ["string", "null"] },
+        "reviewedAt": { "type": ["string", "null"], "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+        "status": { "enum": ["approved", "needs-review"] },
+        "note": { "$ref": "#/$defs/text" }
+      }
+    },
+    "candidate": {
+      "type": "object", "additionalProperties": false, "required": ["rank", "lemma", "status", "reason"],
+      "properties": {
+        "rank": { "type": "integer", "minimum": 1, "maximum": 1000 },
+        "lemma": { "$ref": "#/$defs/text" },
+        "status": { "enum": ["needs-review", "deferred"] },
+        "reason": { "$ref": "#/$defs/text" }
+      }
+    }
+  }
+}

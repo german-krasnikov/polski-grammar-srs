@@ -1,0 +1,130 @@
+[
+  {
+    "attachments" : [
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "502F57FE-944F-4C27-B74F-5EC34D1B995D",
+        "deviceName" : "iPhone 17 Pro",
+        "exportedFileName" : "83083379-0E41-42ED-988A-981EA43403C2.txt",
+        "isAssociatedWithFailure" : true,
+        "suggestedHumanReadableName" : "Complete Issue Description.txt"
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "502F57FE-944F-4C27-B74F-5EC34D1B995D",
+        "deviceName" : "iPhone 17 Pro",
+        "exportedFileName" : "F36C3EEB-4B1D-412D-8675-E322A560231B.txt",
+        "isAssociatedWithFailure" : true,
+        "suggestedHumanReadableName" : "App UI hierarchy for dev.polski.grammarmatrix_0_0EEFADDA-CE5B-45F3-A1B5-FE517E6D62E4.ios",
+        "timestamp" : 1790270829.46
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "502F57FE-944F-4C27-B74F-5EC34D1B995D",
+        "deviceName" : "iPhone 17 Pro",
+        "exportedFileName" : "0EE0A554-9DA2-44AE-A626-086A5046B364",
+        "isAssociatedWithFailure" : true,
+        "suggestedHumanReadableName" : "UI Snapshot 2026-09-24 at 07.27.09 PM",
+        "timestamp" : 1790270829.46
+      }
+    ],
+    "testIdentifier" : "PolskiGrammarUITests/testBinaryRatingSwipesAdvanceOnceInEachDirection()",
+    "testIdentifierURL" : "test://com.apple.xcode/PolskiGrammar/PolskiGrammarUITests/PolskiGrammarUITests/testBinaryRatingSwipesAdvanceOnceInEachDirection"
+  },
+  {
+    "attachments" : [
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "502F57FE-944F-4C27-B74F-5EC34D1B995D",
+        "deviceName" : "iPhone 17 Pro",
+        "exportedFileName" : "54BDDFBB-D0D7-479A-9AC6-A19ED3419760.txt",
+        "isAssociatedWithFailure" : true,
+        "suggestedHumanReadableName" : "Complete Issue Description.txt"
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "502F57FE-944F-4C27-B74F-5EC34D1B995D",
+        "deviceName" : "iPhone 17 Pro",
+        "exportedFileName" : "5C9E9E01-C148-47C5-A1CD-4FEF1F1A09C0.txt",
+        "isAssociatedWithFailure" : true,
+        "suggestedHumanReadableName" : "App UI hierarchy for dev.polski.grammarmatrix_0_555648D3-B83F-483F-B2FF-7AF22A7CBDAF.ios",
+        "timestamp" : 1790270892.533
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "502F57FE-944F-4C27-B74F-5EC34D1B995D",
+        "deviceName" : "iPhone 17 Pro",
+        "exportedFileName" : "29BB4991-816E-4F60-812B-5D388325B090",
+        "isAssociatedWithFailure" : true,
+        "suggestedHumanReadableName" : "UI Snapshot 2026-09-24 at 07.28.12 PM",
+        "timestamp" : 1790270892.533
+      }
+    ],
+    "testIdentifier" : "PolskiGrammarUITests/testFirstMethodIntroductionKeepsReferenceAnswerHiddenUntilContinue()",
+    "testIdentifierURL" : "test://com.apple.xcode/PolskiGrammar/PolskiGrammarUITests/PolskiGrammarUITests/testFirstMethodIntroductionKeepsReferenceAnswerHiddenUntilContinue"
+  },
+  {
+    "attachments" : [
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "502F57FE-944F-4C27-B74F-5EC34D1B995D",
+        "deviceName" : "iPhone 17 Pro",
+        "exportedFileName" : "2DA68B36-0E2C-4AEB-B80F-2A251C4D240E.txt",
+        "isAssociatedWithFailure" : true,
+        "suggestedHumanReadableName" : "Complete Issue Description.txt"
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "502F57FE-944F-4C27-B74F-5EC34D1B995D",
+        "deviceName" : "iPhone 17 Pro",
+        "exportedFileName" : "E0A43225-BD14-4B97-BD94-CB16C14FBF61.txt",
+        "isAssociatedWithFailure" : true,
+        "suggestedHumanReadableName" : "App UI hierarchy for dev.polski.grammarmatrix_0_A07BD80D-5CD3-4ED5-B5B6-05628CC804E1.ios",
+        "timestamp" : 1790270957.532
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "502F57FE-944F-4C27-B74F-5EC34D1B995D",
+        "deviceName" : "iPhone 17 Pro",
+        "exportedFileName" : "61A4760A-143D-450A-859D-A1B01A6BBF56",
+        "isAssociatedWithFailure" : true,
+        "suggestedHumanReadableName" : "UI Snapshot 2026-09-24 at 07.29.17 PM",
+        "timestamp" : 1790270957.532
+      }
+    ],
+    "testIdentifier" : "PolskiGrammarUITests/testMethodSwitchKeepsTypedDraftThroughRevealAndOneReview()",
+    "testIdentifierURL" : "test://com.apple.xcode/PolskiGrammar/PolskiGrammarUITests/PolskiGrammarUITests/testMethodSwitchKeepsTypedDraftThroughRevealAndOneReview"
+  },
+  {
+    "attachments" : [
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "502F57FE-944F-4C27-B74F-5EC34D1B995D",
+        "deviceName" : "iPhone 17 Pro",
+        "exportedFileName" : "E7E721A3-CC63-42D4-9B85-350DDF06E891.txt",
+        "isAssociatedWithFailure" : true,
+        "suggestedHumanReadableName" : "Complete Issue Description.txt"
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "502F57FE-944F-4C27-B74F-5EC34D1B995D",
+        "deviceName" : "iPhone 17 Pro",
+        "exportedFileName" : "A12AD5E2-35A3-4FB6-9336-74D58233148B.txt",
+        "isAssociatedWithFailure" : true,
+        "suggestedHumanReadableName" : "App UI hierarchy for dev.polski.grammarmatrix_0_3C0A46A2-25D1-4D22-A255-8BC4DF99D75C.ios",
+        "timestamp" : 1790271352.051
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "502F57FE-944F-4C27-B74F-5EC34D1B995D",
+        "deviceName" : "iPhone 17 Pro",
+        "exportedFileName" : "09EAC3B8-39E3-45CB-873F-4613D5A22D4E",
+        "isAssociatedWithFailure" : true,
+        "suggestedHumanReadableName" : "UI Snapshot 2026-09-24 at 07.35.52 PM",
+        "timestamp" : 1790271352.051
+      }
+    ],
+    "testIdentifier" : "PolskiGrammarUITests/testTypedPolishAnswerUsesNativeInput()",
+    "testIdentifierURL" : "test://com.apple.xcode/PolskiGrammar/PolskiGrammarUITests/PolskiGrammarUITests/testTypedPolishAnswerUsesNativeInput"
+  }
+]

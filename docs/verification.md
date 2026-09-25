@@ -1,5 +1,7 @@
 # Проверка 13 сентября 2026
 
+Это историческая проверка исходной версии. Текущие Kotlin/browser проверки и открытые gate перечислены в [Plans/Kotlin/Evidence.md](../Plans/Kotlin/Evidence.md) и [CoursePacksPlan.md](../Plans/Kotlin/CoursePacksPlan.md).
+
 Рабочая копия: `/Users/german/Work/JS/polski-grammar-srs`.
 
 ## Результат
@@ -42,3 +44,7 @@ SSH-ключ GitHub в окружении не сработал, поэтому 
 Постоянный адрес: https://german-krasnikov.github.io/polski-grammar-srs/.
 
 Локальная установка для использования опубликованного тренажёра не нужна. Для разработки: `npm run dev`. Для постоянного прогресса использовать обычное, а не приватное окно браузера. Прогресс опубликованного сайта хранится отдельно от localhost.
+
+## Более поздняя проверка Kotlin-ветки
+
+Исторический отчёт выше относится к React baseline сентября 2026 года и не подтверждает новую Kotlin-сборку. На 24 сентября отдельная [виртуальная матрица приёмки](../Plans/Kotlin/FinalVirtualAcceptance-Tester.md) фиксирует React unit 201/201, React browser 21/21, Kotlin JS/Wasm browser по 174/174 в Chromium/Firefox/Playwright WebKit, iPhone/iPad Simulator XCTest по 14/14, iPad large/dark/landscape 1/1, iPhone Reduce Motion 1/1, Mac Compose Desktop 38/38 и свежий пакет `.app`. [Манифест](../Plans/Kotlin/artifacts/final-virtual/manifest.json) связывает исходники и сборки хешами. Взаимодействие с узким окном готового Mac-приложения, физические устройства, реальные IME и screen readers остаются **NOT RUN**. Независимый Reviewer не принял полный виртуальный gate из-за отсутствия Mac host UI evidence. Kotlin не переключён на опубликованный сайт, и эти результаты не являются проверкой его production deployment.

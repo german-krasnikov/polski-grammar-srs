@@ -1,0 +1,31 @@
+
+> polski-grammar-srs@1.0.0 test
+> vitest run
+
+
+ RUN  v4.1.11 /Users/german/Work/JS/polski-grammar-srs
+
+ ❯ tests/vocabulary-view.test.tsx (7 tests | 1 failed) 10380ms
+   × shows exact frequency coverage and keeps unavailable ranks unselectable 5699ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/vocabulary-view.test.tsx > shows exact frequency coverage and keeps unavailable ranks unselectable
+Error: Test timed out in 5000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ tests/vocabulary-view.test.tsx:25:1
+     23| });
+     24|
+     25| it('shows exact frequency coverage and keeps unavailable ranks unselec…
+       | ^
+     26|   const user = userEvent.setup();
+     27|   render(<VocabularyView />);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 34 passed (35)
+      Tests  1 failed | 200 passed (201)
+   Start at  19:39:28
+   Duration  14.74s (transform 8.14s, setup 0ms, import 37.57s, tests 35.95s, environment 8.32s)
+

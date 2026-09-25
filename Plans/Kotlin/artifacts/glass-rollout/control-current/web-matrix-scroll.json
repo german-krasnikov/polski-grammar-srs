@@ -1,0 +1,247 @@
+{
+  "date": "2026-09-25T09:47:13.361Z",
+  "urls": {
+    "baseline": "http://127.0.0.1:4181/",
+    "candidate": "http://127.0.0.1:4181/"
+  },
+  "rounds": 5,
+  "durationMs": 2500,
+  "profile": {
+    "width": 390,
+    "height": 844,
+    "dpr": 3,
+    "colorScheme": "dark"
+  },
+  "engines": [
+    {
+      "name": "firefox",
+      "browserVersion": "141.0",
+      "runs": [
+        {
+          "round": 1,
+          "variant": "baseline",
+          "frames": 297,
+          "p50Ms": 8.319999999999709,
+          "p95Ms": 10.139999999999873,
+          "over25Ms": 1,
+          "navFilter": "none",
+          "cardFilter": "none"
+        },
+        {
+          "round": 1,
+          "variant": "candidate",
+          "frames": 299,
+          "p50Ms": 8.319999999999709,
+          "p95Ms": 10.179999999999382,
+          "over25Ms": 0,
+          "navFilter": "none",
+          "cardFilter": "none"
+        },
+        {
+          "round": 2,
+          "variant": "candidate",
+          "frames": 299,
+          "p50Ms": 8.319999999999709,
+          "p95Ms": 10.220000000000255,
+          "over25Ms": 0,
+          "navFilter": "none",
+          "cardFilter": "none"
+        },
+        {
+          "round": 2,
+          "variant": "baseline",
+          "frames": 299,
+          "p50Ms": 8.340000000000146,
+          "p95Ms": 9.979999999999563,
+          "over25Ms": 0,
+          "navFilter": "none",
+          "cardFilter": "none"
+        },
+        {
+          "round": 3,
+          "variant": "baseline",
+          "frames": 295,
+          "p50Ms": 8.320000000001528,
+          "p95Ms": 9.920000000000073,
+          "over25Ms": 1,
+          "navFilter": "none",
+          "cardFilter": "none"
+        },
+        {
+          "round": 3,
+          "variant": "candidate",
+          "frames": 298,
+          "p50Ms": 8.319999999999709,
+          "p95Ms": 9.779999999998836,
+          "over25Ms": 0,
+          "navFilter": "none",
+          "cardFilter": "none"
+        },
+        {
+          "round": 4,
+          "variant": "candidate",
+          "frames": 300,
+          "p50Ms": 8.299999999999272,
+          "p95Ms": 10.119999999998981,
+          "over25Ms": 0,
+          "navFilter": "none",
+          "cardFilter": "none"
+        },
+        {
+          "round": 4,
+          "variant": "baseline",
+          "frames": 298,
+          "p50Ms": 8.319999999999709,
+          "p95Ms": 10.200000000000728,
+          "over25Ms": 0,
+          "navFilter": "none",
+          "cardFilter": "none"
+        },
+        {
+          "round": 5,
+          "variant": "baseline",
+          "frames": 299,
+          "p50Ms": 8.299999999999272,
+          "p95Ms": 10,
+          "over25Ms": 0,
+          "navFilter": "none",
+          "cardFilter": "none"
+        },
+        {
+          "round": 5,
+          "variant": "candidate",
+          "frames": 299,
+          "p50Ms": 8.340000000000146,
+          "p95Ms": 10.180000000000291,
+          "over25Ms": 0,
+          "navFilter": "none",
+          "cardFilter": "none"
+        }
+      ],
+      "summary": {
+        "baselineMedianP95Ms": 10,
+        "candidateMedianP95Ms": 10.179999999999382,
+        "pairedMedianDeltaP95Ms": 0.03999999999950887,
+        "pairedRangeDeltaP95Ms": [
+          -0.1400000000012369,
+          0.24000000000069122
+        ]
+      }
+    },
+    {
+      "name": "webkit",
+      "browserVersion": "26.0",
+      "runs": [
+        {
+          "round": 1,
+          "variant": "baseline",
+          "frames": 149,
+          "p50Ms": 17,
+          "p95Ms": 19,
+          "over25Ms": 0,
+          "navFilter": "none",
+          "cardFilter": "none"
+        },
+        {
+          "round": 1,
+          "variant": "candidate",
+          "frames": 146,
+          "p50Ms": 17,
+          "p95Ms": 19,
+          "over25Ms": 3,
+          "navFilter": "none",
+          "cardFilter": "none"
+        },
+        {
+          "round": 2,
+          "variant": "candidate",
+          "frames": 145,
+          "p50Ms": 17,
+          "p95Ms": 25,
+          "over25Ms": 7,
+          "navFilter": "none",
+          "cardFilter": "none"
+        },
+        {
+          "round": 2,
+          "variant": "baseline",
+          "frames": 134,
+          "p50Ms": 17,
+          "p95Ms": 40,
+          "over25Ms": 12,
+          "navFilter": "none",
+          "cardFilter": "none"
+        },
+        {
+          "round": 3,
+          "variant": "baseline",
+          "frames": 149,
+          "p50Ms": 17,
+          "p95Ms": 19,
+          "over25Ms": 2,
+          "navFilter": "none",
+          "cardFilter": "none"
+        },
+        {
+          "round": 3,
+          "variant": "candidate",
+          "frames": 150,
+          "p50Ms": 17,
+          "p95Ms": 18,
+          "over25Ms": 0,
+          "navFilter": "none",
+          "cardFilter": "none"
+        },
+        {
+          "round": 4,
+          "variant": "candidate",
+          "frames": 149,
+          "p50Ms": 17,
+          "p95Ms": 19,
+          "over25Ms": 2,
+          "navFilter": "none",
+          "cardFilter": "none"
+        },
+        {
+          "round": 4,
+          "variant": "baseline",
+          "frames": 149,
+          "p50Ms": 17,
+          "p95Ms": 18,
+          "over25Ms": 0,
+          "navFilter": "none",
+          "cardFilter": "none"
+        },
+        {
+          "round": 5,
+          "variant": "baseline",
+          "frames": 149,
+          "p50Ms": 17,
+          "p95Ms": 18,
+          "over25Ms": 0,
+          "navFilter": "none",
+          "cardFilter": "none"
+        },
+        {
+          "round": 5,
+          "variant": "candidate",
+          "frames": 148,
+          "p50Ms": 17,
+          "p95Ms": 18,
+          "over25Ms": 1,
+          "navFilter": "none",
+          "cardFilter": "none"
+        }
+      ],
+      "summary": {
+        "baselineMedianP95Ms": 19,
+        "candidateMedianP95Ms": 19,
+        "pairedMedianDeltaP95Ms": 0,
+        "pairedRangeDeltaP95Ms": [
+          -15,
+          1
+        ]
+      }
+    }
+  ]
+}

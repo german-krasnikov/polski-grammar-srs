@@ -1,0 +1,241 @@
+Configuration 'jsNpmAggregated' was resolved during configuration time.
+This is a build performance and scalability issue.
+See https://github.com/gradle/gradle/issues/2298
+Run with --info for a stacktrace.
+Configuration 'jsTestNpmAggregated' was resolved during configuration time.
+This is a build performance and scalability issue.
+See https://github.com/gradle/gradle/issues/2298
+Run with --info for a stacktrace.
+Configuration 'jsNpmAggregated' was resolved during configuration time.
+This is a build performance and scalability issue.
+See https://github.com/gradle/gradle/issues/2298
+Run with --info for a stacktrace.
+Configuration 'jsTestNpmAggregated' was resolved during configuration time.
+This is a build performance and scalability issue.
+See https://github.com/gradle/gradle/issues/2298
+Run with --info for a stacktrace.
+Configuration 'wasmJsNpmAggregated' was resolved during configuration time.
+This is a build performance and scalability issue.
+See https://github.com/gradle/gradle/issues/2298
+Run with --info for a stacktrace.
+Configuration 'wasmJsTestNpmAggregated' was resolved during configuration time.
+This is a build performance and scalability issue.
+See https://github.com/gradle/gradle/issues/2298
+Run with --info for a stacktrace.
+Configuration 'wasmJsNpmAggregated' was resolved during configuration time.
+This is a build performance and scalability issue.
+See https://github.com/gradle/gradle/issues/2298
+Run with --info for a stacktrace.
+Configuration 'wasmJsTestNpmAggregated' was resolved during configuration time.
+This is a build performance and scalability issue.
+See https://github.com/gradle/gradle/issues/2298
+Run with --info for a stacktrace.
+> Task :kotlinKotlinNpmCachesSetup
+> Task :kotlinNodeJsSetup UP-TO-DATE
+> Task :kotlinRestoreYarnLock UP-TO-DATE
+> Task :kotlinYarnSetup UP-TO-DATE
+> Task :shared:jsPackageJson UP-TO-DATE
+> Task :composeApp:jsPackageJson UP-TO-DATE
+> Task :composeApp:jsTestPackageJson UP-TO-DATE
+> Task :shared:jsTestPackageJson UP-TO-DATE
+> Task :composeApp:jsPublicPackageJson UP-TO-DATE
+> Task :composeApp:jsTestPublicPackageJson UP-TO-DATE
+> Task :shared:jsPublicPackageJson UP-TO-DATE
+> Task :shared:jsTestPublicPackageJson UP-TO-DATE
+> Task :kotlinPackageJsonUmbrella UP-TO-DATE
+> Task :rootPackageJson UP-TO-DATE
+> Task :kotlinNpmInstall UP-TO-DATE
+> Task :kotlinWasmNodeJsSetup UP-TO-DATE
+> Task :kotlinWasmYarnSetup UP-TO-DATE
+> Task :kotlinWasmToolingSetup UP-TO-DATE
+> Task :kotlinStoreYarnLock UP-TO-DATE
+> Task :shared:kmpPartiallyResolvedDependenciesChecker
+> Task :shared:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared:generateCoursePackSource UP-TO-DATE
+> Task :shared:compileKotlinJs UP-TO-DATE
+> Task :shared:jsProcessResources NO-SOURCE
+> Task :shared:jsMainClasses UP-TO-DATE
+> Task :shared:compileTestKotlinJs UP-TO-DATE
+> Task :shared:jsTestProcessResources NO-SOURCE
+> Task :shared:jsTestClasses UP-TO-DATE
+> Task :shared:compileTestDevelopmentExecutableKotlinJs UP-TO-DATE
+> Task :shared:jsTestTestDevelopmentExecutableCompileSync UP-TO-DATE
+> Task :shared:kotlinNodeJsSetup UP-TO-DATE
+> Task :shared:jsBrowserTest UP-TO-DATE
+> Task :kotlinWasmKotlinNpmCachesSetup
+> Task :kotlinWasmRestoreYarnLock UP-TO-DATE
+> Task :shared:wasmJsPackageJson UP-TO-DATE
+> Task :composeApp:wasmJsPackageJson UP-TO-DATE
+> Task :composeApp:wasmJsTestPackageJson UP-TO-DATE
+> Task :shared:wasmJsTestPackageJson UP-TO-DATE
+> Task :composeApp:wasmJsPublicPackageJson UP-TO-DATE
+> Task :composeApp:wasmJsTestPublicPackageJson UP-TO-DATE
+> Task :shared:wasmJsPublicPackageJson UP-TO-DATE
+> Task :shared:wasmJsTestPublicPackageJson UP-TO-DATE
+> Task :kotlinWasmPackageJsonUmbrella UP-TO-DATE
+> Task :wasmRootPackageJson UP-TO-DATE
+> Task :kotlinWasmNpmInstall UP-TO-DATE
+> Task :kotlinWasmStoreYarnLock UP-TO-DATE
+> Task :shared:compileKotlinWasmJs UP-TO-DATE
+> Task :shared:wasmJsProcessResources NO-SOURCE
+> Task :shared:wasmJsMainClasses UP-TO-DATE
+> Task :shared:compileTestKotlinWasmJs UP-TO-DATE
+> Task :shared:kotlinWasmNodeJsSetup UP-TO-DATE
+> Task :shared:wasmJsTestProcessResources NO-SOURCE
+> Task :shared:wasmJsTestClasses UP-TO-DATE
+> Task :shared:compileTestDevelopmentExecutableKotlinWasmJs UP-TO-DATE
+> Task :shared:wasmJsTestTestDevelopmentExecutableCompileSync UP-TO-DATE
+> Task :shared:wasmJsBrowserTest UP-TO-DATE
+> Task :shared:compileKotlinDesktop UP-TO-DATE
+> Task :shared:compileDesktopMainJava NO-SOURCE
+> Task :shared:desktopProcessResources NO-SOURCE
+> Task :shared:processDesktopMainResources SKIPPED
+> Task :shared:desktopMainClasses UP-TO-DATE
+> Task :shared:desktopJar UP-TO-DATE
+> Task :shared:compileTestKotlinDesktop UP-TO-DATE
+> Task :shared:compileDesktopTestJava NO-SOURCE
+> Task :shared:desktopTestProcessResources NO-SOURCE
+> Task :shared:processDesktopTestResources SKIPPED
+> Task :shared:desktopTestClasses UP-TO-DATE
+> Task :shared:desktopTest UP-TO-DATE
+> Task :composeApp:checkDesktopMainComposeLibrariesCompatibility
+> Task :composeApp:kmpPartiallyResolvedDependenciesChecker
+> Task :composeApp:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :composeApp:convertXmlValueResourcesForCommonMain NO-SOURCE
+> Task :composeApp:copyNonXmlValueResourcesForCommonMain NO-SOURCE
+> Task :composeApp:prepareComposeResourcesTaskForCommonMain NO-SOURCE
+> Task :composeApp:generateResourceAccessorsForCommonMain SKIPPED
+> Task :composeApp:convertXmlValueResourcesForDesktopMain NO-SOURCE
+> Task :composeApp:copyNonXmlValueResourcesForDesktopMain NO-SOURCE
+> Task :composeApp:prepareComposeResourcesTaskForDesktopMain NO-SOURCE
+> Task :composeApp:generateResourceAccessorsForDesktopMain SKIPPED
+> Task :composeApp:generateActualResourceCollectorsForDesktopMain SKIPPED
+> Task :composeApp:generateComposeResClass SKIPPED
+> Task :composeApp:generateExpectResourceCollectorsForCommonMain SKIPPED
+> Task :composeApp:compileKotlinDesktop UP-TO-DATE
+> Task :composeApp:compileDesktopMainJava NO-SOURCE
+> Task :composeApp:checkDesktopTestComposeLibrariesCompatibility
+> Task :composeApp:assembleDesktopMainResources UP-TO-DATE
+> Task :composeApp:desktopProcessResources UP-TO-DATE
+> Task :composeApp:processDesktopMainResources SKIPPED
+> Task :composeApp:desktopMainClasses UP-TO-DATE
+> Task :composeApp:desktopJar UP-TO-DATE
+> Task :composeApp:convertXmlValueResourcesForCommonTest NO-SOURCE
+> Task :composeApp:copyNonXmlValueResourcesForCommonTest NO-SOURCE
+> Task :composeApp:prepareComposeResourcesTaskForCommonTest NO-SOURCE
+> Task :composeApp:generateResourceAccessorsForCommonTest SKIPPED
+> Task :composeApp:convertXmlValueResourcesForDesktopTest NO-SOURCE
+> Task :composeApp:copyNonXmlValueResourcesForDesktopTest NO-SOURCE
+> Task :composeApp:prepareComposeResourcesTaskForDesktopTest NO-SOURCE
+> Task :composeApp:generateResourceAccessorsForDesktopTest SKIPPED
+> Task :composeApp:compileTestKotlinDesktop UP-TO-DATE
+> Task :composeApp:compileDesktopTestJava NO-SOURCE
+> Task :composeApp:assembleDesktopTestResources UP-TO-DATE
+> Task :composeApp:desktopTestProcessResources UP-TO-DATE
+> Task :composeApp:processDesktopTestResources SKIPPED
+> Task :composeApp:desktopTestClasses UP-TO-DATE
+> Task :composeApp:desktopTest
+> Task :shared:downloadKotlinNativeDistribution UP-TO-DATE
+> Task :shared:compileKotlinIosSimulatorArm64 UP-TO-DATE
+> Task :shared:iosSimulatorArm64ProcessResources NO-SOURCE
+> Task :shared:iosSimulatorArm64MainKlibrary UP-TO-DATE
+> Task :shared:compileTestKotlinIosSimulatorArm64 UP-TO-DATE
+> Task :shared:validateLocalSwiftPMDependencies
+> Task :shared:computeLocalPackageDependencyInputFiles UP-TO-DATE
+> Task :shared:fingerprintSyntheticPackage UP-TO-DATE
+> Task :shared:generateSyntheticLinkageSwiftPMImportProjectForCinteropsAndLdDump SKIPPED
+> Task :shared:serializeSwiftPMDependenciesMetadataForLockFiles UP-TO-DATE
+> Task :shared:generateUmbrellaPackageIdentifierBasedResolutionForDefault SKIPPED
+> Task :shared:fetchUmbrellaPackageIdentifierForDefault SKIPPED
+> Task :shared:syncPersistedPackageResolvedToSynthetic SKIPPED
+> Task :shared:fetchSyntheticImportProjectPackages SKIPPED
+> Task :shared:fingerprintXcodebuildIphonesimulator UP-TO-DATE
+> Task :shared:dumpXcodebuildArgsIphonesimulator SKIPPED
+> Task :shared:convertSyntheticImportProjectIntoDefFileIphonesimulator UP-TO-DATE
+> Task :shared:linkDebugTestIosSimulatorArm64 UP-TO-DATE
+> Task :shared:iosSimulatorArm64Test UP-TO-DATE
+> Task :androidApp:preBuild UP-TO-DATE
+> Task :androidApp:preDebugBuild UP-TO-DATE
+> Task :androidApp:generateDebugResources UP-TO-DATE
+> Task :androidApp:packageDebugResources UP-TO-DATE
+> Task :composeApp:androidPreBuild UP-TO-DATE
+> Task :composeApp:preAndroidMainBuild UP-TO-DATE
+> Task :composeApp:generateAndroidMainEmptyResourceFiles UP-TO-DATE
+> Task :shared:androidPreBuild UP-TO-DATE
+> Task :shared:preAndroidMainBuild UP-TO-DATE
+> Task :shared:generateAndroidMainEmptyResourceFiles UP-TO-DATE
+> Task :androidApp:processDebugNavigationResources UP-TO-DATE
+> Task :androidApp:parseDebugLocalResources UP-TO-DATE
+> Task :androidApp:generateDebugRFile UP-TO-DATE
+> Task :composeApp:convertXmlValueResourcesForAndroidMain NO-SOURCE
+> Task :composeApp:copyNonXmlValueResourcesForAndroidMain NO-SOURCE
+> Task :composeApp:prepareComposeResourcesTaskForAndroidMain NO-SOURCE
+> Task :composeApp:generateResourceAccessorsForAndroidMain SKIPPED
+> Task :composeApp:generateActualResourceCollectorsForAndroidMain SKIPPED
+> Task :shared:compileAndroidMain UP-TO-DATE
+> Task :shared:bundleAndroidMainClassesToCompileJar UP-TO-DATE
+> Task :composeApp:compileAndroidMain UP-TO-DATE
+> Task :composeApp:bundleAndroidMainClassesToCompileJar UP-TO-DATE
+> Task :androidApp:compileDebugKotlin UP-TO-DATE
+> Task :androidApp:javaPreCompileDebug UP-TO-DATE
+> Task :androidApp:compileDebugJavaWithJavac NO-SOURCE
+> Task :composeApp:writeAndroidMainAarMetadata UP-TO-DATE
+> Task :shared:writeAndroidMainAarMetadata UP-TO-DATE
+> Task :androidApp:checkDebugAarMetadata UP-TO-DATE
+> Task :androidApp:mapDebugSourceSetPaths UP-TO-DATE
+> Task :androidApp:compileDebugNavigationResources UP-TO-DATE
+> Task :androidApp:mergeDebugResources UP-TO-DATE
+> Task :androidApp:createDebugCompatibleScreenManifests UP-TO-DATE
+> Task :androidApp:extractDeepLinksDebug UP-TO-DATE
+> Task :composeApp:processAndroidMainManifest UP-TO-DATE
+> Task :shared:processAndroidMainManifest UP-TO-DATE
+> Task :androidApp:processDebugMainManifest UP-TO-DATE
+> Task :androidApp:processDebugManifest UP-TO-DATE
+> Task :androidApp:processDebugManifestForPackage UP-TO-DATE
+> Task :androidApp:processDebugResources UP-TO-DATE
+> Task :androidApp:bundleDebugClassesToRuntimeJar UP-TO-DATE
+> Task :androidApp:bundleDebugClassesToCompileJar UP-TO-DATE
+> Task :androidApp:preDebugUnitTestBuild UP-TO-DATE
+> Task :androidApp:compileDebugUnitTestKotlin UP-TO-DATE
+> Task :androidApp:javaPreCompileDebugUnitTest UP-TO-DATE
+> Task :androidApp:compileDebugUnitTestJavaWithJavac NO-SOURCE
+> Task :androidApp:processDebugJavaRes UP-TO-DATE
+> Task :androidApp:processDebugUnitTestJavaRes UP-TO-DATE
+> Task :composeApp:bundleAndroidMainClassesToRuntimeJar UP-TO-DATE
+> Task :composeApp:processAndroidMainJavaRes UP-TO-DATE
+> Task :shared:bundleAndroidMainClassesToRuntimeJar UP-TO-DATE
+> Task :shared:processAndroidMainJavaRes UP-TO-DATE
+> Task :androidApp:testDebugUnitTest UP-TO-DATE
+> Task :androidApp:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :androidApp:generateDebugAssets UP-TO-DATE
+> Task :androidApp:mergeDebugAssets UP-TO-DATE
+> Task :androidApp:compressDebugAssets UP-TO-DATE
+> Task :androidApp:desugarDebugFileDependencies UP-TO-DATE
+> Task :androidApp:dexBuilderDebug UP-TO-DATE
+> Task :androidApp:mergeDebugGlobalSynthetics UP-TO-DATE
+> Task :androidApp:mergeDebugJavaResource UP-TO-DATE
+> Task :androidApp:checkDebugDuplicateClasses UP-TO-DATE
+> Task :androidApp:mergeExtDexDebug UP-TO-DATE
+> Task :composeApp:bundleLibRuntimeToDirAndroidMain UP-TO-DATE
+> Task :shared:bundleLibRuntimeToDirAndroidMain UP-TO-DATE
+> Task :androidApp:mergeProjectDexDebug UP-TO-DATE
+> Task :androidApp:mergeDebugJniLibFolders UP-TO-DATE
+> Task :composeApp:mergeAndroidMainJniLibFolders UP-TO-DATE
+> Task :composeApp:mergeAndroidMainNativeLibs NO-SOURCE
+> Task :androidApp:mergeLibDexDebug UP-TO-DATE
+> Task :composeApp:copyAndroidMainJniLibsProjectOnly UP-TO-DATE
+> Task :shared:mergeAndroidMainJniLibFolders UP-TO-DATE
+> Task :shared:mergeAndroidMainNativeLibs NO-SOURCE
+> Task :shared:copyAndroidMainJniLibsProjectOnly UP-TO-DATE
+> Task :androidApp:mergeDebugNativeLibs UP-TO-DATE
+> Task :androidApp:stripDebugDebugSymbols UP-TO-DATE
+> Task :androidApp:validateSigningDebug UP-TO-DATE
+> Task :androidApp:writeDebugAppMetadata UP-TO-DATE
+> Task :androidApp:writeDebugSigningConfigVersions UP-TO-DATE
+> Task :androidApp:packageDebug UP-TO-DATE
+> Task :androidApp:createDebugApkListingFileRedirect UP-TO-DATE
+> Task :androidApp:assembleDebug UP-TO-DATE
+
+BUILD SUCCESSFUL in 17s
+133 actionable tasks: 8 executed, 125 up-to-date
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.3.1/userguide/configuration_cache_enabling.html

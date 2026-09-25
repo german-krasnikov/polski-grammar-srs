@@ -1,0 +1,4 @@
+interface:
+  display_name: "Project Documentation"
+  short_description: "Keep plans and documentation aligned with evidence"
+  default_prompt: "Use $documentation-maintenance for this project task."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Kotlin Multiplatform Android"
+  short_description: "Android code, adaptive layouts and animations"
+  default_prompt: "Use $kmp-android for this Kotlin Multiplatform task."

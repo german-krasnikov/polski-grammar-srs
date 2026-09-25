@@ -1,0 +1,11 @@
+{
+  "scenario": "390x844 Matrix; 12 scroll positions per engine; 220 ms settle after each position",
+  "candidateLimit": 64,
+  "shapeLimit": 8,
+  "engines": {
+    "chromium": { "maxCandidates": 4, "maxShapes": 2, "maxProjectionMs": 0.3, "medianProjectionMs": 0.1 },
+    "firefox": { "maxCandidates": 4, "maxShapes": 2, "maxProjectionMs": 1, "medianProjectionMs": 0 },
+    "webkit": { "maxCandidates": 4, "maxShapes": 2, "maxProjectionMs": 1, "medianProjectionMs": 0 }
+  },
+  "sourceStates": ["surfaces", "ambient"]
+}

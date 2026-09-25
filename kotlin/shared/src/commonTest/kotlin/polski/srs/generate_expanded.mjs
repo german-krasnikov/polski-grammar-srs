@@ -1,0 +1,65 @@
+// Pin: installed ts-fsrs 5.4.2. Run from repository root with node kotlin/shared/src/commonTest/kotlin/polski/srs/generate_expanded.mjs
+import { createEmptyCard, fsrs, Rating } from 'ts-fsrs';
+import { readFileSync, writeFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+const version = '5.4.2';
+const sourceMapSha256 = '49790959efab6a2f67373eabdf8fca47729a4fc445967c143b3b5fc56f222929';
+const root = new URL('../../../../../../../', import.meta.url);
+const packageInfo = JSON.parse(readFileSync(new URL('node_modules/ts-fsrs/package.json', root), 'utf8'));
+if (packageInfo.version !== version) throw new Error(`Expected ts-fsrs ${version}, found ${packageInfo.version}`);
+const sourceMap = readFileSync(new URL('node_modules/ts-fsrs/dist/index.cjs.map', root));
+const actualSha256 = createHash('sha256').update(sourceMap).digest('hex');
+if (actualSha256 !== sourceMapSha256) throw new Error(`ts-fsrs sourcemap SHA mismatch: ${actualSha256}`);
+const baseline = JSON.parse(readFileSync(new URL('tests/fixtures/kotlin-parity/scheduler.json', root), 'utf8'));
+const manifest = JSON.parse(readFileSync(new URL('tests/fixtures/kotlin-parity/manifest.json', root), 'utf8'));
+if (baseline.sourceRevision !== manifest.sourceRevision || baseline.cases.length !== 21)
+  throw new Error('Pinned baseline scheduler fixture/manifest mismatch');
+const configs = [true, false];
+const base = new Date('2026-02-03T12:00:00.000Z');
+const sched = fuzz => fsrs({request_retention:0.9, maximum_interval:3650, enable_fuzz:fuzz, enable_short_term:true, learning_steps:['1m','10m'], relearning_steps:['10m']});
+const iso = c => ({...c,due:c.due.toISOString(),last_review:c.last_review?.toISOString()});
+const out=[];
+function add(id,card,at,rating,fuzz) {
+ const f=sched(fuzz), now=new Date(at), preview=f.repeat(card,now), reviewed=f.next(card,now,rating).card;
+ out.push({id, fuzz, at, rating, input:iso(card), expected:{preview:{again:preview[1].card.due.toISOString(),hard:preview[2].card.due.toISOString(),good:preview[3].card.due.toISOString(),easy:preview[4].card.due.toISOString()},review:iso(reviewed)}});
+}
+for (const fuzz of configs) {
+ const prefix=fuzz?'on':'off';
+ const fresh=createEmptyCard(base);
+ for(const rating of [1,2,3,4]) add(`${prefix}-new-${rating}`,fresh,base,rating,fuzz);
+ const learned=sched(fuzz).next(fresh,base,Rating.Good).card;
+ add(`${prefix}-learning-step2-good`,learned,'2026-02-03T12:10:00.000Z',Rating.Good,fuzz);
+ add(`${prefix}-learning-hard-repeat`,learned,'2026-02-03T12:10:00.000Z',Rating.Hard,fuzz);
+ add(`${prefix}-learning-again`,learned,'2026-02-03T12:10:00.000Z',Rating.Again,fuzz);
+ add(`${prefix}-learning-easy`,learned,'2026-02-03T12:10:00.000Z',Rating.Easy,fuzz);
+ const exhaustedLearning={...learned,learning_steps:2};
+ for (const rating of [1,2,3,4]) add(`${prefix}-learning-exhausted-${rating}`,exhaustedLearning,'2026-02-03T12:10:00.000Z',rating,fuzz);
+ const review=sched(fuzz).next(fresh,base,Rating.Easy).card;
+ for(const rating of [1,2,3,4]) add(`${prefix}-review-${rating}`,review,'2026-02-11T12:00:00.000Z',rating,fuzz);
+ const relearn=sched(fuzz).next(review,new Date('2026-02-11T12:00:00.000Z'),Rating.Again).card;
+ add(`${prefix}-relearning-good`,relearn,'2026-02-11T12:10:00.000Z',Rating.Good,fuzz);
+ add(`${prefix}-relearning-again`,relearn,'2026-02-11T12:10:00.000Z',Rating.Again,fuzz);
+ add(`${prefix}-relearning-hard`,relearn,'2026-02-11T12:10:00.000Z',Rating.Hard,fuzz);
+ add(`${prefix}-relearning-easy`,relearn,'2026-02-11T12:10:00.000Z',Rating.Easy,fuzz);
+ const exhaustedRelearning={...relearn,learning_steps:1};
+ for (const rating of [1,2,3,4]) add(`${prefix}-relearning-exhausted-${rating}`,exhaustedRelearning,'2026-02-11T12:10:00.000Z',rating,fuzz);
+ // 2026 has no leap day: use 2024 for leap-day and UTC calendar boundary.
+ const leap={...review,last_review:new Date('2024-02-28T23:59:59.999Z'),due:new Date('2024-02-29T00:00:00.000Z')};
+ add(`${prefix}-leap-midnight`,leap,'2024-02-29T00:00:00.000Z',Rating.Good,fuzz);
+ add(`${prefix}-dst-24h`,{...review,last_review:new Date('2026-03-28T12:00:00.000Z')},'2026-03-29T12:00:00.000Z',Rating.Good,fuzz);
+ add(`${prefix}-long-overdue`,review,'2041-01-01T12:00:00.000Z',Rating.Easy,fuzz);
+ const capped={...review,stability:36500,difficulty:1.1,last_review:new Date('2020-01-01T00:00:00.000Z')};
+ for(const rating of [2,3,4]) add(`${prefix}-cap-${rating}`,capped,'2030-01-01T00:00:00.000Z',rating,fuzz);
+ for(const [id,s,d] of [['fractional',1.23456789,3.14159265],['exponent',100,1e20],['near-fuzz',2.49,5.1],['fuzz-7',7,5.1],['fuzz-20',20,5.1]]) {
+  add(`${prefix}-seed-${id}`,{...review,stability:s,difficulty:d,last_review:id==='exponent'?new Date('2026-02-05T12:00:00.000Z'):review.last_review},'2026-02-05T12:00:00.000Z',Rating.Good,fuzz);
+ }
+}
+const output = JSON.stringify({package:'ts-fsrs',version,sourceMapSha256,baselineSourceRevision:baseline.sourceRevision,source:'node_modules/ts-fsrs 5.4.2 BasicScheduler, generated by generate_expanded.mjs',settings:{retention:0.9,maximumInterval:3650,learningSteps:['1m','10m'],relearningSteps:['10m']},cases:out},null,2)+'\n';
+const outputUrl = new URL('./expanded_oracle.json',import.meta.url);
+if (process.argv.includes('--check')) {
+  if (readFileSync(outputUrl, 'utf8') !== output) throw new Error('expanded_oracle.json is stale');
+  console.log(`Checked ${out.length} cases against pinned source and fixture`);
+} else {
+  writeFileSync(outputUrl, output);
+  console.log(out.length);
+}

@@ -4,8 +4,19 @@ dist
 .DS_Store
 *.local
 *.tsbuildinfo
+playwright-report/
+test-results/
 vite.config.js
 vite.config.d.ts
 .env
 .env.*
 !.env.example
+kotlin/.gradle/
+kotlin/**/build/
+kotlin/.kotlin/
+# Heavy verification bundles; keep screenshots, logs and JSON evidence
+Plans/Kotlin/artifacts/**/*.xcresult/
+Plans/Kotlin/artifacts/**/*.mp4
+Plans/Kotlin/artifacts/**/*.mov
+Plans/Kotlin/artifacts/**/*.webm
+Plans/Kotlin/artifacts/**/*.zip

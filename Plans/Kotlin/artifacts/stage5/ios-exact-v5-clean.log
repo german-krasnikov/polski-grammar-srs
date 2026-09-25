@@ -1,0 +1,9 @@
+Writing result bundle at path:
+	/Users/german/Work/JS/polski-grammar-srs/Plans/Kotlin/artifacts/stage5/ios-exact-v5-clean.xcresult
+
+2026-09-24 18:08:36.330 xcodebuild[70944:15959234] [MT] IDELaunchParametersSnapshot: debugger version lookup failed for path '<nil>': noURL
+2026-09-24 18:08:36.330 xcodebuild[70944:15959234] [MT] IDELaunchParametersSnapshot: no debugger version
+2026-09-24 18:08:56.873 xcodebuild[70944:15959234] [MT] IDETestOperationsObserverDebug: 22.462 elapsed -- Testing started completed.
+2026-09-24 18:08:56.873 xcodebuild[70944:15959234] [MT] IDETestOperationsObserverDebug: 0.000 sec, +0.000 sec -- start
+2026-09-24 18:08:56.873 xcodebuild[70944:15959234] [MT] IDETestOperationsObserverDebug: 22.462 sec, +22.462 sec -- end
+Testing started

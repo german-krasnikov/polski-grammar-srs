@@ -1,0 +1,456 @@
+{
+  "schemaVersion": 1,
+  "sourceRevision": "df59774e153a5bdf590fe27bd8780c7bd5457a26",
+  "cases": [
+    {
+      "id": "A-exact",
+      "input": {
+        "answer": "Nie widziałeś mojej pięknej żony.",
+        "exercise": {
+          "id": "<generated-id>",
+          "primarySkill": "mixed",
+          "source": "Widzę moją piękną żonę.",
+          "prompt": "Скажи «ты не видел…» в прошедшем времени. Сохрани «мой / моя».",
+          "expected": "Nie widziałeś mojej pięknej żony.",
+          "explanation": "TY + прошедшее время + отрицание. Отрицание требует Dopełniacza всей группы слов.",
+          "changes": [
+            {
+              "from": "Widzę",
+              "to": "Nie widziałeś / Nie widziałaś",
+              "reason": "Лицо + время + отрицание"
+            },
+            {
+              "from": "moją piękną żonę",
+              "to": "mojej pięknej żony",
+              "reason": "Biernik → Dopełniacz"
+            }
+          ],
+          "nounId": "wife",
+          "adjectiveId": "beautiful",
+          "possessive": "my",
+          "number": "sg",
+          "tags": [
+            "mixed",
+            "gen",
+            "past"
+          ],
+          "accepted": [
+            "Nie widziałaś mojej pięknej żony."
+          ]
+        }
+      },
+      "expected": {
+        "normalized": "nie widziałeś mojej pięknej żony",
+        "result": {
+          "correct": true,
+          "normalized": "nie widziałeś mojej pięknej żony",
+          "expected": "Nie widziałeś mojej pięknej żony.",
+          "distance": 0
+        }
+      },
+      "context": {
+        "locale": "pl-PL"
+      }
+    },
+    {
+      "id": "A-accepted",
+      "input": {
+        "answer": "Nie widziałaś mojej pięknej żony.",
+        "exercise": {
+          "id": "<generated-id>",
+          "primarySkill": "mixed",
+          "source": "Widzę moją piękną żonę.",
+          "prompt": "Скажи «ты не видел…» в прошедшем времени. Сохрани «мой / моя».",
+          "expected": "Nie widziałeś mojej pięknej żony.",
+          "explanation": "TY + прошедшее время + отрицание. Отрицание требует Dopełniacza всей группы слов.",
+          "changes": [
+            {
+              "from": "Widzę",
+              "to": "Nie widziałeś / Nie widziałaś",
+              "reason": "Лицо + время + отрицание"
+            },
+            {
+              "from": "moją piękną żonę",
+              "to": "mojej pięknej żony",
+              "reason": "Biernik → Dopełniacz"
+            }
+          ],
+          "nounId": "wife",
+          "adjectiveId": "beautiful",
+          "possessive": "my",
+          "number": "sg",
+          "tags": [
+            "mixed",
+            "gen",
+            "past"
+          ],
+          "accepted": [
+            "Nie widziałaś mojej pięknej żony."
+          ]
+        }
+      },
+      "expected": {
+        "normalized": "nie widziałaś mojej pięknej żony",
+        "result": {
+          "correct": true,
+          "normalized": "nie widziałaś mojej pięknej żony",
+          "expected": "Nie widziałeś mojej pięknej żony.",
+          "distance": 0
+        }
+      },
+      "context": {
+        "locale": "pl-PL"
+      }
+    },
+    {
+      "id": "A-case",
+      "input": {
+        "answer": "NIE WIDZIAŁEŚ MOJEJ PIĘKNEJ ŻONY.",
+        "exercise": {
+          "id": "<generated-id>",
+          "primarySkill": "mixed",
+          "source": "Widzę moją piękną żonę.",
+          "prompt": "Скажи «ты не видел…» в прошедшем времени. Сохрани «мой / моя».",
+          "expected": "Nie widziałeś mojej pięknej żony.",
+          "explanation": "TY + прошедшее время + отрицание. Отрицание требует Dopełniacza всей группы слов.",
+          "changes": [
+            {
+              "from": "Widzę",
+              "to": "Nie widziałeś / Nie widziałaś",
+              "reason": "Лицо + время + отрицание"
+            },
+            {
+              "from": "moją piękną żonę",
+              "to": "mojej pięknej żony",
+              "reason": "Biernik → Dopełniacz"
+            }
+          ],
+          "nounId": "wife",
+          "adjectiveId": "beautiful",
+          "possessive": "my",
+          "number": "sg",
+          "tags": [
+            "mixed",
+            "gen",
+            "past"
+          ],
+          "accepted": [
+            "Nie widziałaś mojej pięknej żony."
+          ]
+        }
+      },
+      "expected": {
+        "normalized": "nie widziałeś mojej pięknej żony",
+        "result": {
+          "correct": true,
+          "normalized": "nie widziałeś mojej pięknej żony",
+          "expected": "Nie widziałeś mojej pięknej żony.",
+          "distance": 0
+        }
+      },
+      "context": {
+        "locale": "pl-PL"
+      }
+    },
+    {
+      "id": "A-whitespace",
+      "input": {
+        "answer": "  Nie   widziałeś   mojej   pięknej   żony.  ",
+        "exercise": {
+          "id": "<generated-id>",
+          "primarySkill": "mixed",
+          "source": "Widzę moją piękną żonę.",
+          "prompt": "Скажи «ты не видел…» в прошедшем времени. Сохрани «мой / моя».",
+          "expected": "Nie widziałeś mojej pięknej żony.",
+          "explanation": "TY + прошедшее время + отрицание. Отрицание требует Dopełniacza всей группы слов.",
+          "changes": [
+            {
+              "from": "Widzę",
+              "to": "Nie widziałeś / Nie widziałaś",
+              "reason": "Лицо + время + отрицание"
+            },
+            {
+              "from": "moją piękną żonę",
+              "to": "mojej pięknej żony",
+              "reason": "Biernik → Dopełniacz"
+            }
+          ],
+          "nounId": "wife",
+          "adjectiveId": "beautiful",
+          "possessive": "my",
+          "number": "sg",
+          "tags": [
+            "mixed",
+            "gen",
+            "past"
+          ],
+          "accepted": [
+            "Nie widziałaś mojej pięknej żony."
+          ]
+        }
+      },
+      "expected": {
+        "normalized": "nie widziałeś mojej pięknej żony",
+        "result": {
+          "correct": true,
+          "normalized": "nie widziałeś mojej pięknej żony",
+          "expected": "Nie widziałeś mojej pięknej żony.",
+          "distance": 0
+        }
+      },
+      "context": {
+        "locale": "pl-PL"
+      }
+    },
+    {
+      "id": "A-punctuation",
+      "input": {
+        "answer": "Nie widziałeś mojej pięknej żony?!",
+        "exercise": {
+          "id": "<generated-id>",
+          "primarySkill": "mixed",
+          "source": "Widzę moją piękną żonę.",
+          "prompt": "Скажи «ты не видел…» в прошедшем времени. Сохрани «мой / моя».",
+          "expected": "Nie widziałeś mojej pięknej żony.",
+          "explanation": "TY + прошедшее время + отрицание. Отрицание требует Dopełniacza всей группы слов.",
+          "changes": [
+            {
+              "from": "Widzę",
+              "to": "Nie widziałeś / Nie widziałaś",
+              "reason": "Лицо + время + отрицание"
+            },
+            {
+              "from": "moją piękną żonę",
+              "to": "mojej pięknej żony",
+              "reason": "Biernik → Dopełniacz"
+            }
+          ],
+          "nounId": "wife",
+          "adjectiveId": "beautiful",
+          "possessive": "my",
+          "number": "sg",
+          "tags": [
+            "mixed",
+            "gen",
+            "past"
+          ],
+          "accepted": [
+            "Nie widziałaś mojej pięknej żony."
+          ]
+        }
+      },
+      "expected": {
+        "normalized": "nie widziałeś mojej pięknej żony",
+        "result": {
+          "correct": true,
+          "normalized": "nie widziałeś mojej pięknej żony",
+          "expected": "Nie widziałeś mojej pięknej żony.",
+          "distance": 0
+        }
+      },
+      "context": {
+        "locale": "pl-PL"
+      }
+    },
+    {
+      "id": "A-decomposed",
+      "input": {
+        "answer": "Nie widziałeś mojej pięknej żony.",
+        "exercise": {
+          "id": "<generated-id>",
+          "primarySkill": "mixed",
+          "source": "Widzę moją piękną żonę.",
+          "prompt": "Скажи «ты не видел…» в прошедшем времени. Сохрани «мой / моя».",
+          "expected": "Nie widziałeś mojej pięknej żony.",
+          "explanation": "TY + прошедшее время + отрицание. Отрицание требует Dopełniacza всей группы слов.",
+          "changes": [
+            {
+              "from": "Widzę",
+              "to": "Nie widziałeś / Nie widziałaś",
+              "reason": "Лицо + время + отрицание"
+            },
+            {
+              "from": "moją piękną żonę",
+              "to": "mojej pięknej żony",
+              "reason": "Biernik → Dopełniacz"
+            }
+          ],
+          "nounId": "wife",
+          "adjectiveId": "beautiful",
+          "possessive": "my",
+          "number": "sg",
+          "tags": [
+            "mixed",
+            "gen",
+            "past"
+          ],
+          "accepted": [
+            "Nie widziałaś mojej pięknej żony."
+          ]
+        }
+      },
+      "expected": {
+        "normalized": "nie widziałeś mojej pięknej żony",
+        "result": {
+          "correct": true,
+          "normalized": "nie widziałeś mojej pięknej żony",
+          "expected": "Nie widziałeś mojej pięknej żony.",
+          "distance": 0
+        }
+      },
+      "context": {
+        "locale": "pl-PL"
+      }
+    },
+    {
+      "id": "A-no-diacritics",
+      "input": {
+        "answer": "Nie widziales mojej pieknej zony.",
+        "exercise": {
+          "id": "<generated-id>",
+          "primarySkill": "mixed",
+          "source": "Widzę moją piękną żonę.",
+          "prompt": "Скажи «ты не видел…» в прошедшем времени. Сохрани «мой / моя».",
+          "expected": "Nie widziałeś mojej pięknej żony.",
+          "explanation": "TY + прошедшее время + отрицание. Отрицание требует Dopełniacza всей группы слов.",
+          "changes": [
+            {
+              "from": "Widzę",
+              "to": "Nie widziałeś / Nie widziałaś",
+              "reason": "Лицо + время + отрицание"
+            },
+            {
+              "from": "moją piękną żonę",
+              "to": "mojej pięknej żony",
+              "reason": "Biernik → Dopełniacz"
+            }
+          ],
+          "nounId": "wife",
+          "adjectiveId": "beautiful",
+          "possessive": "my",
+          "number": "sg",
+          "tags": [
+            "mixed",
+            "gen",
+            "past"
+          ],
+          "accepted": [
+            "Nie widziałaś mojej pięknej żony."
+          ]
+        }
+      },
+      "expected": {
+        "normalized": "nie widziales mojej pieknej zony",
+        "result": {
+          "correct": false,
+          "normalized": "nie widziales mojej pieknej zony",
+          "expected": "Nie widziałeś mojej pięknej żony.",
+          "distance": 4
+        }
+      },
+      "context": {
+        "locale": "pl-PL"
+      }
+    },
+    {
+      "id": "A-empty",
+      "input": {
+        "answer": "",
+        "exercise": {
+          "id": "<generated-id>",
+          "primarySkill": "mixed",
+          "source": "Widzę moją piękną żonę.",
+          "prompt": "Скажи «ты не видел…» в прошедшем времени. Сохрани «мой / моя».",
+          "expected": "Nie widziałeś mojej pięknej żony.",
+          "explanation": "TY + прошедшее время + отрицание. Отрицание требует Dopełniacza всей группы слов.",
+          "changes": [
+            {
+              "from": "Widzę",
+              "to": "Nie widziałeś / Nie widziałaś",
+              "reason": "Лицо + время + отрицание"
+            },
+            {
+              "from": "moją piękną żonę",
+              "to": "mojej pięknej żony",
+              "reason": "Biernik → Dopełniacz"
+            }
+          ],
+          "nounId": "wife",
+          "adjectiveId": "beautiful",
+          "possessive": "my",
+          "number": "sg",
+          "tags": [
+            "mixed",
+            "gen",
+            "past"
+          ],
+          "accepted": [
+            "Nie widziałaś mojej pięknej żony."
+          ]
+        }
+      },
+      "expected": {
+        "normalized": "",
+        "result": {
+          "correct": false,
+          "normalized": "",
+          "expected": "Nie widziałeś mojej pięknej żony.",
+          "distance": 32
+        }
+      },
+      "context": {
+        "locale": "pl-PL"
+      }
+    },
+    {
+      "id": "A-wrong",
+      "input": {
+        "answer": "Widzę mojego dobrego kolegę.",
+        "exercise": {
+          "id": "<generated-id>",
+          "primarySkill": "mixed",
+          "source": "Widzę moją piękną żonę.",
+          "prompt": "Скажи «ты не видел…» в прошедшем времени. Сохрани «мой / моя».",
+          "expected": "Nie widziałeś mojej pięknej żony.",
+          "explanation": "TY + прошедшее время + отрицание. Отрицание требует Dopełniacza всей группы слов.",
+          "changes": [
+            {
+              "from": "Widzę",
+              "to": "Nie widziałeś / Nie widziałaś",
+              "reason": "Лицо + время + отрицание"
+            },
+            {
+              "from": "moją piękną żonę",
+              "to": "mojej pięknej żony",
+              "reason": "Biernik → Dopełniacz"
+            }
+          ],
+          "nounId": "wife",
+          "adjectiveId": "beautiful",
+          "possessive": "my",
+          "number": "sg",
+          "tags": [
+            "mixed",
+            "gen",
+            "past"
+          ],
+          "accepted": [
+            "Nie widziałaś mojej pięknej żony."
+          ]
+        }
+      },
+      "expected": {
+        "normalized": "widzę mojego dobrego kolegę",
+        "result": {
+          "correct": false,
+          "normalized": "widzę mojego dobrego kolegę",
+          "expected": "Nie widziałeś mojej pięknej żony.",
+          "distance": 23
+        }
+      },
+      "context": {
+        "locale": "pl-PL"
+      }
+    }
+  ]
+}

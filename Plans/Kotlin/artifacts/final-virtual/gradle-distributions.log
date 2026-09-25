@@ -1,0 +1,125 @@
+Configuration 'jsNpmAggregated' was resolved during configuration time.
+This is a build performance and scalability issue.
+See https://github.com/gradle/gradle/issues/2298
+Run with --info for a stacktrace.
+Configuration 'jsTestNpmAggregated' was resolved during configuration time.
+This is a build performance and scalability issue.
+See https://github.com/gradle/gradle/issues/2298
+Run with --info for a stacktrace.
+Configuration 'jsNpmAggregated' was resolved during configuration time.
+This is a build performance and scalability issue.
+See https://github.com/gradle/gradle/issues/2298
+Run with --info for a stacktrace.
+Configuration 'jsTestNpmAggregated' was resolved during configuration time.
+This is a build performance and scalability issue.
+See https://github.com/gradle/gradle/issues/2298
+Run with --info for a stacktrace.
+Configuration 'wasmJsNpmAggregated' was resolved during configuration time.
+This is a build performance and scalability issue.
+See https://github.com/gradle/gradle/issues/2298
+Run with --info for a stacktrace.
+Configuration 'wasmJsTestNpmAggregated' was resolved during configuration time.
+This is a build performance and scalability issue.
+See https://github.com/gradle/gradle/issues/2298
+Run with --info for a stacktrace.
+Configuration 'wasmJsNpmAggregated' was resolved during configuration time.
+This is a build performance and scalability issue.
+See https://github.com/gradle/gradle/issues/2298
+Run with --info for a stacktrace.
+Configuration 'wasmJsTestNpmAggregated' was resolved during configuration time.
+This is a build performance and scalability issue.
+See https://github.com/gradle/gradle/issues/2298
+Run with --info for a stacktrace.
+> Task :kotlinKotlinNpmCachesSetup
+> Task :kotlinNodeJsSetup UP-TO-DATE
+> Task :kotlinRestoreYarnLock UP-TO-DATE
+> Task :kotlinYarnSetup UP-TO-DATE
+> Task :shared:jsPackageJson UP-TO-DATE
+> Task :composeApp:jsPackageJson UP-TO-DATE
+> Task :composeApp:jsTestPackageJson UP-TO-DATE
+> Task :shared:jsTestPackageJson UP-TO-DATE
+> Task :composeApp:jsPublicPackageJson UP-TO-DATE
+> Task :composeApp:jsTestPublicPackageJson UP-TO-DATE
+> Task :shared:jsPublicPackageJson UP-TO-DATE
+> Task :shared:jsTestPublicPackageJson UP-TO-DATE
+> Task :kotlinPackageJsonUmbrella UP-TO-DATE
+> Task :rootPackageJson UP-TO-DATE
+> Task :kotlinNpmInstall UP-TO-DATE
+> Task :kotlinWasmNodeJsSetup UP-TO-DATE
+> Task :kotlinWasmYarnSetup UP-TO-DATE
+> Task :kotlinWasmToolingSetup UP-TO-DATE
+> Task :kotlinStoreYarnLock UP-TO-DATE
+> Task :composeApp:jsResolveResourcesFromDependencies UP-TO-DATE
+> Task :composeApp:convertXmlValueResourcesForCommonMain NO-SOURCE
+> Task :composeApp:copyNonXmlValueResourcesForCommonMain NO-SOURCE
+> Task :composeApp:prepareComposeResourcesTaskForCommonMain NO-SOURCE
+> Task :composeApp:convertXmlValueResourcesForJsMain NO-SOURCE
+> Task :composeApp:copyNonXmlValueResourcesForJsMain NO-SOURCE
+> Task :composeApp:prepareComposeResourcesTaskForJsMain NO-SOURCE
+> Task :composeApp:convertXmlValueResourcesForWebMain NO-SOURCE
+> Task :composeApp:copyNonXmlValueResourcesForWebMain NO-SOURCE
+> Task :composeApp:prepareComposeResourcesTaskForWebMain NO-SOURCE
+> Task :composeApp:assembleJsMainResources UP-TO-DATE
+> Task :composeApp:jsResolveSelfResourcesCopyHierarchicalMultiplatformResources UP-TO-DATE
+> Task :composeApp:jsAggregateResources UP-TO-DATE
+> Task :composeApp:unpackSkikoWasmRuntime UP-TO-DATE
+> Task :composeApp:jsProcessResources UP-TO-DATE
+> Task :composeApp:kmpPartiallyResolvedDependenciesChecker
+> Task :composeApp:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :composeApp:checkJsMainComposeLibrariesCompatibility
+> Task :composeApp:generateResourceAccessorsForCommonMain SKIPPED
+> Task :composeApp:generateResourceAccessorsForJsMain SKIPPED
+> Task :composeApp:generateResourceAccessorsForWebMain SKIPPED
+> Task :composeApp:generateActualResourceCollectorsForJsMain SKIPPED
+> Task :composeApp:generateComposeResClass SKIPPED
+> Task :composeApp:generateExpectResourceCollectorsForCommonMain SKIPPED
+> Task :shared:kmpPartiallyResolvedDependenciesChecker
+> Task :shared:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared:generateCoursePackSource UP-TO-DATE
+> Task :shared:compileKotlinJs UP-TO-DATE
+> Task :composeApp:compileKotlinJs UP-TO-DATE
+> Task :composeApp:jsMainClasses UP-TO-DATE
+> Task :composeApp:compileProductionExecutableKotlinJs UP-TO-DATE
+> Task :composeApp:jsProductionExecutableCompileSync UP-TO-DATE
+> Task :composeApp:jsBrowserProductionWebpack UP-TO-DATE
+> Task :composeApp:jsBrowserDistribution UP-TO-DATE
+> Task :kotlinWasmKotlinNpmCachesSetup
+> Task :kotlinWasmRestoreYarnLock UP-TO-DATE
+> Task :shared:wasmJsPackageJson UP-TO-DATE
+> Task :composeApp:wasmJsPackageJson UP-TO-DATE
+> Task :composeApp:wasmJsTestPackageJson UP-TO-DATE
+> Task :shared:wasmJsTestPackageJson UP-TO-DATE
+> Task :composeApp:wasmJsPublicPackageJson UP-TO-DATE
+> Task :composeApp:wasmJsTestPublicPackageJson UP-TO-DATE
+> Task :shared:wasmJsPublicPackageJson UP-TO-DATE
+> Task :shared:wasmJsTestPublicPackageJson UP-TO-DATE
+> Task :kotlinWasmPackageJsonUmbrella UP-TO-DATE
+> Task :wasmRootPackageJson UP-TO-DATE
+> Task :kotlinWasmNpmInstall UP-TO-DATE
+> Task :kotlinWasmStoreYarnLock UP-TO-DATE
+> Task :composeApp:wasmJsResolveResourcesFromDependencies UP-TO-DATE
+> Task :composeApp:convertXmlValueResourcesForWasmJsMain NO-SOURCE
+> Task :composeApp:copyNonXmlValueResourcesForWasmJsMain NO-SOURCE
+> Task :composeApp:prepareComposeResourcesTaskForWasmJsMain NO-SOURCE
+> Task :composeApp:assembleWasmJsMainResources UP-TO-DATE
+> Task :composeApp:wasmJsResolveSelfResourcesCopyHierarchicalMultiplatformResources UP-TO-DATE
+> Task :composeApp:wasmJsAggregateResources UP-TO-DATE
+> Task :composeApp:wasmJsProcessResources UP-TO-DATE
+> Task :composeApp:checkWasmJsMainComposeLibrariesCompatibility
+> Task :composeApp:generateResourceAccessorsForWasmJsMain SKIPPED
+> Task :composeApp:generateActualResourceCollectorsForWasmJsMain SKIPPED
+> Task :shared:compileKotlinWasmJs UP-TO-DATE
+> Task :composeApp:compileKotlinWasmJs UP-TO-DATE
+> Task :composeApp:wasmJsMainClasses UP-TO-DATE
+> Task :composeApp:compileProductionExecutableKotlinWasmJs UP-TO-DATE
+> Task :composeApp:kotlinWasmBinaryenSetup UP-TO-DATE
+> Task :composeApp:compileProductionExecutableKotlinWasmJsOptimize UP-TO-DATE
+> Task :composeApp:processSkikoRuntimeForKWasm UP-TO-DATE
+> Task :composeApp:wasmJsProductionExecutableCompileSync UP-TO-DATE
+> Task :composeApp:wasmJsBrowserProductionWebpack UP-TO-DATE
+> Task :composeApp:wasmJsBrowserDistribution UP-TO-DATE
+> Task :composeApp:composeCompatibilityBrowserDistribution UP-TO-DATE
+
+BUILD SUCCESSFUL in 1s
+63 actionable tasks: 6 executed, 57 up-to-date
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.3.1/userguide/configuration_cache_enabling.html

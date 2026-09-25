@@ -1,0 +1,5007 @@
+{
+  "source": "https://github.com/KubaCiolo/leksjo-dane/blob/main/dane/nkjp-frekwencja.csv",
+  "license": "CC BY 4.0",
+  "corpus": "NKJP 1.2 manually annotated 1M subcorpus",
+  "items": [
+    {
+      "rank": 1,
+      "lemma": "w",
+      "count": 31620
+    },
+    {
+      "rank": 2,
+      "lemma": "być",
+      "count": 28380
+    },
+    {
+      "rank": 3,
+      "lemma": "i",
+      "count": 21991
+    },
+    {
+      "rank": 4,
+      "lemma": "się",
+      "count": 18733
+    },
+    {
+      "rank": 5,
+      "lemma": "z",
+      "count": 18108
+    },
+    {
+      "rank": 6,
+      "lemma": "na",
+      "count": 17639
+    },
+    {
+      "rank": 7,
+      "lemma": "nie",
+      "count": 16939
+    },
+    {
+      "rank": 8,
+      "lemma": "on",
+      "count": 13359
+    },
+    {
+      "rank": 9,
+      "lemma": "to",
+      "count": 13270
+    },
+    {
+      "rank": 10,
+      "lemma": "do",
+      "count": 11824
+    },
+    {
+      "rank": 11,
+      "lemma": "że",
+      "count": 9144
+    },
+    {
+      "rank": 12,
+      "lemma": "ten",
+      "count": 8992
+    },
+    {
+      "rank": 13,
+      "lemma": "o",
+      "count": 7163
+    },
+    {
+      "rank": 14,
+      "lemma": "mieć",
+      "count": 6758
+    },
+    {
+      "rank": 15,
+      "lemma": "który",
+      "count": 6635
+    },
+    {
+      "rank": 16,
+      "lemma": "a",
+      "count": 6232
+    },
+    {
+      "rank": 17,
+      "lemma": "jak",
+      "count": 4565
+    },
+    {
+      "rank": 18,
+      "lemma": "ja",
+      "count": 4500
+    },
+    {
+      "rank": 19,
+      "lemma": "co",
+      "count": 4364
+    },
+    {
+      "rank": 20,
+      "lemma": "po",
+      "count": 4344
+    },
+    {
+      "rank": 21,
+      "lemma": "ale",
+      "count": 4343
+    },
+    {
+      "rank": 22,
+      "lemma": "tak",
+      "count": 3846
+    },
+    {
+      "rank": 23,
+      "lemma": "za",
+      "count": 3775
+    },
+    {
+      "rank": 24,
+      "lemma": "od",
+      "count": 3740
+    },
+    {
+      "rank": 25,
+      "lemma": "móc",
+      "count": 3445
+    },
+    {
+      "rank": 26,
+      "lemma": "rok",
+      "count": 3413
+    },
+    {
+      "rank": 27,
+      "lemma": "by",
+      "count": 3198
+    },
+    {
+      "rank": 28,
+      "lemma": "przez",
+      "count": 3010
+    },
+    {
+      "rank": 29,
+      "lemma": "taki",
+      "count": 2926
+    },
+    {
+      "rank": 30,
+      "lemma": "czy",
+      "count": 2819
+    },
+    {
+      "rank": 31,
+      "lemma": "już",
+      "count": 2764
+    },
+    {
+      "rank": 32,
+      "lemma": "pan",
+      "count": 2500
+    },
+    {
+      "rank": 33,
+      "lemma": "no",
+      "count": 2479
+    },
+    {
+      "rank": 34,
+      "lemma": "swój",
+      "count": 2424
+    },
+    {
+      "rank": 35,
+      "lemma": "dla",
+      "count": 2401
+    },
+    {
+      "rank": 36,
+      "lemma": "bardzo",
+      "count": 2276
+    },
+    {
+      "rank": 37,
+      "lemma": "tylko",
+      "count": 2268
+    },
+    {
+      "rank": 38,
+      "lemma": "siebie",
+      "count": 2125
+    },
+    {
+      "rank": 39,
+      "lemma": "bo",
+      "count": 2028
+    },
+    {
+      "rank": 40,
+      "lemma": "wiedzieć",
+      "count": 2005
+    },
+    {
+      "rank": 41,
+      "lemma": "mówić",
+      "count": 1987
+    },
+    {
+      "rank": 42,
+      "lemma": "jeden",
+      "count": 1936
+    },
+    {
+      "rank": 43,
+      "lemma": "chcieć",
+      "count": 1806
+    },
+    {
+      "rank": 44,
+      "lemma": "człowiek",
+      "count": 1792
+    },
+    {
+      "rank": 45,
+      "lemma": "czas",
+      "count": 1786
+    },
+    {
+      "rank": 46,
+      "lemma": "inny",
+      "count": 1783
+    },
+    {
+      "rank": 47,
+      "lemma": "też",
+      "count": 1770
+    },
+    {
+      "rank": 48,
+      "lemma": "my",
+      "count": 1714
+    },
+    {
+      "rank": 49,
+      "lemma": "jeszcze",
+      "count": 1670
+    },
+    {
+      "rank": 50,
+      "lemma": "zostać",
+      "count": 1635
+    },
+    {
+      "rank": 51,
+      "lemma": "sam",
+      "count": 1604
+    },
+    {
+      "rank": 52,
+      "lemma": "ty",
+      "count": 1589
+    },
+    {
+      "rank": 53,
+      "lemma": "sprawa",
+      "count": 1500
+    },
+    {
+      "rank": 54,
+      "lemma": "dwa",
+      "count": 1495
+    },
+    {
+      "rank": 55,
+      "lemma": "przed",
+      "count": 1487
+    },
+    {
+      "rank": 56,
+      "lemma": "oraz",
+      "count": 1486
+    },
+    {
+      "rank": 57,
+      "lemma": "raz",
+      "count": 1421
+    },
+    {
+      "rank": 58,
+      "lemma": "powiedzieć",
+      "count": 1415
+    },
+    {
+      "rank": 59,
+      "lemma": "polski",
+      "count": 1412
+    },
+    {
+      "rank": 60,
+      "lemma": "pierwszy",
+      "count": 1382
+    },
+    {
+      "rank": 61,
+      "lemma": "nasz",
+      "count": 1379
+    },
+    {
+      "rank": 62,
+      "lemma": "praca",
+      "count": 1378
+    },
+    {
+      "rank": 63,
+      "lemma": "jednak",
+      "count": 1376
+    },
+    {
+      "rank": 64,
+      "lemma": "tam",
+      "count": 1365
+    },
+    {
+      "rank": 65,
+      "lemma": "przy",
+      "count": 1344
+    },
+    {
+      "rank": 66,
+      "lemma": "dzień",
+      "count": 1337
+    },
+    {
+      "rank": 67,
+      "lemma": "musieć",
+      "count": 1288
+    },
+    {
+      "rank": 68,
+      "lemma": "nowy",
+      "count": 1282
+    },
+    {
+      "rank": 69,
+      "lemma": "mój",
+      "count": 1262
+    },
+    {
+      "rank": 70,
+      "lemma": "lub",
+      "count": 1242
+    },
+    {
+      "rank": 71,
+      "lemma": "pod",
+      "count": 1237
+    },
+    {
+      "rank": 72,
+      "lemma": "osoba",
+      "count": 1196
+    },
+    {
+      "rank": 73,
+      "lemma": "jaki",
+      "count": 1194
+    },
+    {
+      "rank": 74,
+      "lemma": "wszystko",
+      "count": 1174
+    },
+    {
+      "rank": 75,
+      "lemma": "nawet",
+      "count": 1168
+    },
+    {
+      "rank": 76,
+      "lemma": "życie",
+      "count": 1138
+    },
+    {
+      "rank": 77,
+      "lemma": "cały",
+      "count": 1133
+    },
+    {
+      "rank": 78,
+      "lemma": "polska",
+      "count": 1115
+    },
+    {
+      "rank": 79,
+      "lemma": "wszystek",
+      "count": 1097
+    },
+    {
+      "rank": 80,
+      "lemma": "jakiś",
+      "count": 1093
+    },
+    {
+      "rank": 81,
+      "lemma": "dobry",
+      "count": 1085
+    },
+    {
+      "rank": 82,
+      "lemma": "można",
+      "count": 1082
+    },
+    {
+      "rank": 83,
+      "lemma": "duży",
+      "count": 1057
+    },
+    {
+      "rank": 84,
+      "lemma": "teraz",
+      "count": 1056
+    },
+    {
+      "rank": 85,
+      "lemma": "miejsce",
+      "count": 1045
+    },
+    {
+      "rank": 86,
+      "lemma": "dziecko",
+      "count": 1040
+    },
+    {
+      "rank": 87,
+      "lemma": "coś",
+      "count": 1018
+    },
+    {
+      "rank": 88,
+      "lemma": "więc",
+      "count": 1008
+    },
+    {
+      "rank": 89,
+      "lemma": "jako",
+      "count": 991
+    },
+    {
+      "rank": 90,
+      "lemma": "także",
+      "count": 984
+    },
+    {
+      "rank": 91,
+      "lemma": "każdy",
+      "count": 981
+    },
+    {
+      "rank": 92,
+      "lemma": "gdy",
+      "count": 963
+    },
+    {
+      "rank": 93,
+      "lemma": "1",
+      "count": 961
+    },
+    {
+      "rank": 94,
+      "lemma": "kto",
+      "count": 944
+    },
+    {
+      "rank": 95,
+      "lemma": "żeby",
+      "count": 917
+    },
+    {
+      "rank": 96,
+      "lemma": "bez",
+      "count": 913
+    },
+    {
+      "rank": 97,
+      "lemma": "dobrze",
+      "count": 913
+    },
+    {
+      "rank": 98,
+      "lemma": "pani",
+      "count": 910
+    },
+    {
+      "rank": 99,
+      "lemma": "tu",
+      "count": 901
+    },
+    {
+      "rank": 100,
+      "lemma": "drugi",
+      "count": 893
+    },
+    {
+      "rank": 101,
+      "lemma": "stać",
+      "count": 887
+    },
+    {
+      "rank": 102,
+      "lemma": "kiedy",
+      "count": 885
+    },
+    {
+      "rank": 103,
+      "lemma": "2",
+      "count": 880
+    },
+    {
+      "rank": 104,
+      "lemma": "dom",
+      "count": 880
+    },
+    {
+      "rank": 105,
+      "lemma": "kilka",
+      "count": 880
+    },
+    {
+      "rank": 106,
+      "lemma": "wiele",
+      "count": 873
+    },
+    {
+      "rank": 107,
+      "lemma": "nad",
+      "count": 867
+    },
+    {
+      "rank": 108,
+      "lemma": "nic",
+      "count": 856
+    },
+    {
+      "rank": 109,
+      "lemma": "wielki",
+      "count": 856
+    },
+    {
+      "rank": 110,
+      "lemma": "może",
+      "count": 854
+    },
+    {
+      "rank": 111,
+      "lemma": "miasto",
+      "count": 831
+    },
+    {
+      "rank": 112,
+      "lemma": "prawo",
+      "count": 799
+    },
+    {
+      "rank": 113,
+      "lemma": "świat",
+      "count": 790
+    },
+    {
+      "rank": 114,
+      "lemma": "jeśli",
+      "count": 780
+    },
+    {
+      "rank": 115,
+      "lemma": "powinien",
+      "count": 774
+    },
+    {
+      "rank": 116,
+      "lemma": "właśnie",
+      "count": 769
+    },
+    {
+      "rank": 117,
+      "lemma": "widzieć",
+      "count": 765
+    },
+    {
+      "rank": 118,
+      "lemma": "gdzie",
+      "count": 764
+    },
+    {
+      "rank": 119,
+      "lemma": "strona",
+      "count": 760
+    },
+    {
+      "rank": 120,
+      "lemma": "niż",
+      "count": 734
+    },
+    {
+      "rank": 121,
+      "lemma": "również",
+      "count": 724
+    },
+    {
+      "rank": 122,
+      "lemma": "koniec",
+      "count": 721
+    },
+    {
+      "rank": 123,
+      "lemma": "u",
+      "count": 720
+    },
+    {
+      "rank": 124,
+      "lemma": "poseł",
+      "count": 719
+    },
+    {
+      "rank": 125,
+      "lemma": "zrobić",
+      "count": 715
+    },
+    {
+      "rank": 126,
+      "lemma": "aby",
+      "count": 714
+    },
+    {
+      "rank": 127,
+      "lemma": "państwo",
+      "count": 714
+    },
+    {
+      "rank": 128,
+      "lemma": "wysoki",
+      "count": 701
+    },
+    {
+      "rank": 129,
+      "lemma": "3",
+      "count": 689
+    },
+    {
+      "rank": 130,
+      "lemma": "droga",
+      "count": 685
+    },
+    {
+      "rank": 131,
+      "lemma": "trzeba",
+      "count": 684
+    },
+    {
+      "rank": 132,
+      "lemma": "trzy",
+      "count": 684
+    },
+    {
+      "rank": 133,
+      "lemma": "robić",
+      "count": 683
+    },
+    {
+      "rank": 134,
+      "lemma": "chodzić",
+      "count": 678
+    },
+    {
+      "rank": 135,
+      "lemma": "ostatni",
+      "count": 678
+    },
+    {
+      "rank": 136,
+      "lemma": "prosić",
+      "count": 678
+    },
+    {
+      "rank": 137,
+      "lemma": "znaleźć",
+      "count": 675
+    },
+    {
+      "rank": 138,
+      "lemma": "minister",
+      "count": 659
+    },
+    {
+      "rank": 139,
+      "lemma": "ręka",
+      "count": 659
+    },
+    {
+      "rank": 140,
+      "lemma": "chwila",
+      "count": 643
+    },
+    {
+      "rank": 141,
+      "lemma": "chyba",
+      "count": 639
+    },
+    {
+      "rank": 142,
+      "lemma": "stary",
+      "count": 636
+    },
+    {
+      "rank": 143,
+      "lemma": "albo",
+      "count": 633
+    },
+    {
+      "rank": 144,
+      "lemma": "prowadzić",
+      "count": 630
+    },
+    {
+      "rank": 145,
+      "lemma": "potem",
+      "count": 629
+    },
+    {
+      "rank": 146,
+      "lemma": "sposób",
+      "count": 625
+    },
+    {
+      "rank": 147,
+      "lemma": "ustawa",
+      "count": 618
+    },
+    {
+      "rank": 148,
+      "lemma": "kraj",
+      "count": 610
+    },
+    {
+      "rank": 149,
+      "lemma": "żaden",
+      "count": 607
+    },
+    {
+      "rank": 150,
+      "lemma": "należeć",
+      "count": 605
+    },
+    {
+      "rank": 151,
+      "lemma": "rada",
+      "count": 598
+    },
+    {
+      "rank": 152,
+      "lemma": "część",
+      "count": 596
+    },
+    {
+      "rank": 153,
+      "lemma": "rzecz",
+      "count": 596
+    },
+    {
+      "rank": 154,
+      "lemma": "ktoś",
+      "count": 593
+    },
+    {
+      "rank": 155,
+      "lemma": "mały",
+      "count": 591
+    },
+    {
+      "rank": 156,
+      "lemma": "dać",
+      "count": 582
+    },
+    {
+      "rank": 157,
+      "lemma": "szkoła",
+      "count": 579
+    },
+    {
+      "rank": 158,
+      "lemma": "wtedy",
+      "count": 579
+    },
+    {
+      "rank": 159,
+      "lemma": "myśleć",
+      "count": 578
+    },
+    {
+      "rank": 160,
+      "lemma": "zacząć",
+      "count": 576
+    },
+    {
+      "rank": 161,
+      "lemma": "rząd",
+      "count": 570
+    },
+    {
+      "rank": 162,
+      "lemma": "kobieta",
+      "count": 569
+    },
+    {
+      "rank": 163,
+      "lemma": "firma",
+      "count": 567
+    },
+    {
+      "rank": 164,
+      "lemma": "słowo",
+      "count": 558
+    },
+    {
+      "rank": 165,
+      "lemma": "oko",
+      "count": 555
+    },
+    {
+      "rank": 166,
+      "lemma": "jeżeli",
+      "count": 554
+    },
+    {
+      "rank": 167,
+      "lemma": "głowa",
+      "count": 547
+    },
+    {
+      "rank": 168,
+      "lemma": "zawsze",
+      "count": 547
+    },
+    {
+      "rank": 169,
+      "lemma": "głos",
+      "count": 540
+    },
+    {
+      "rank": 170,
+      "lemma": "mało",
+      "count": 539
+    },
+    {
+      "rank": 171,
+      "lemma": "przecież",
+      "count": 538
+    },
+    {
+      "rank": 172,
+      "lemma": "stan",
+      "count": 529
+    },
+    {
+      "rank": 173,
+      "lemma": "komisja",
+      "count": 527
+    },
+    {
+      "rank": 174,
+      "lemma": "związek",
+      "count": 527
+    },
+    {
+      "rank": 175,
+      "lemma": "prosty",
+      "count": 520
+    },
+    {
+      "rank": 176,
+      "lemma": "iść",
+      "count": 519
+    },
+    {
+      "rank": 177,
+      "lemma": "program",
+      "count": 518
+    },
+    {
+      "rank": 178,
+      "lemma": "godzina",
+      "count": 517
+    },
+    {
+      "rank": 179,
+      "lemma": "własny",
+      "count": 516
+    },
+    {
+      "rank": 180,
+      "lemma": "prezydent",
+      "count": 511
+    },
+    {
+      "rank": 181,
+      "lemma": "czyli",
+      "count": 510
+    },
+    {
+      "rank": 182,
+      "lemma": "pytanie",
+      "count": 507
+    },
+    {
+      "rank": 183,
+      "lemma": "sytuacja",
+      "count": 507
+    },
+    {
+      "rank": 184,
+      "lemma": "dużo",
+      "count": 504
+    },
+    {
+      "rank": 185,
+      "lemma": "nikt",
+      "count": 504
+    },
+    {
+      "rank": 186,
+      "lemma": "grupa",
+      "count": 498
+    },
+    {
+      "rank": 187,
+      "lemma": "ani",
+      "count": 496
+    },
+    {
+      "rank": 188,
+      "lemma": "kolejny",
+      "count": 496
+    },
+    {
+      "rank": 189,
+      "lemma": "często",
+      "count": 491
+    },
+    {
+      "rank": 190,
+      "lemma": "sąd",
+      "count": 489
+    },
+    {
+      "rank": 191,
+      "lemma": "ważny",
+      "count": 489
+    },
+    {
+      "rank": 192,
+      "lemma": "młody",
+      "count": 488
+    },
+    {
+      "rank": 193,
+      "lemma": "pisać",
+      "count": 488
+    },
+    {
+      "rank": 194,
+      "lemma": "zmiana",
+      "count": 485
+    },
+    {
+      "rank": 195,
+      "lemma": "dziś",
+      "count": 479
+    },
+    {
+      "rank": 196,
+      "lemma": "pomoc",
+      "count": 476
+    },
+    {
+      "rank": 197,
+      "lemma": "dlatego",
+      "count": 475
+    },
+    {
+      "rank": 198,
+      "lemma": "pieniądz",
+      "count": 474
+    },
+    {
+      "rank": 199,
+      "lemma": "problem",
+      "count": 474
+    },
+    {
+      "rank": 200,
+      "lemma": "wczoraj",
+      "count": 471
+    },
+    {
+      "rank": 201,
+      "lemma": "woda",
+      "count": 471
+    },
+    {
+      "rank": 202,
+      "lemma": "uważać",
+      "count": 466
+    },
+    {
+      "rank": 203,
+      "lemma": "5",
+      "count": 465
+    },
+    {
+      "rank": 204,
+      "lemma": "władza",
+      "count": 464
+    },
+    {
+      "rank": 205,
+      "lemma": "informacja",
+      "count": 462
+    },
+    {
+      "rank": 206,
+      "lemma": "policja",
+      "count": 461
+    },
+    {
+      "rank": 207,
+      "lemma": "przyjąć",
+      "count": 458
+    },
+    {
+      "rank": 208,
+      "lemma": "rodzina",
+      "count": 456
+    },
+    {
+      "rank": 209,
+      "lemma": "między",
+      "count": 453
+    },
+    {
+      "rank": 210,
+      "lemma": "warszawa",
+      "count": 453
+    },
+    {
+      "rank": 211,
+      "lemma": "kościół",
+      "count": 451
+    },
+    {
+      "rank": 212,
+      "lemma": "4",
+      "count": 450
+    },
+    {
+      "rank": 213,
+      "lemma": "miesiąc",
+      "count": 450
+    },
+    {
+      "rank": 214,
+      "lemma": "cel",
+      "count": 447
+    },
+    {
+      "rank": 215,
+      "lemma": "temat",
+      "count": 445
+    },
+    {
+      "rank": 216,
+      "lemma": "twój",
+      "count": 439
+    },
+    {
+      "rank": 217,
+      "lemma": "dlaczego",
+      "count": 437
+    },
+    {
+      "rank": 218,
+      "lemma": "znać",
+      "count": 435
+    },
+    {
+      "rank": 219,
+      "lemma": "bóg",
+      "count": 431
+    },
+    {
+      "rank": 220,
+      "lemma": "pewien",
+      "count": 427
+    },
+    {
+      "rank": 221,
+      "lemma": "przypadek",
+      "count": 427
+    },
+    {
+      "rank": 222,
+      "lemma": "gdyby",
+      "count": 425
+    },
+    {
+      "rank": 223,
+      "lemma": "zdanie",
+      "count": 425
+    },
+    {
+      "rank": 224,
+      "lemma": "późno",
+      "count": 424
+    },
+    {
+      "rank": 225,
+      "lemma": "samochód",
+      "count": 422
+    },
+    {
+      "rank": 226,
+      "lemma": "wziąć",
+      "count": 422
+    },
+    {
+      "rank": 227,
+      "lemma": "różny",
+      "count": 421
+    },
+    {
+      "rank": 228,
+      "lemma": "tydzień",
+      "count": 421
+    },
+    {
+      "rank": 229,
+      "lemma": "wydawać",
+      "count": 420
+    },
+    {
+      "rank": 230,
+      "lemma": "dotyczyć",
+      "count": 419
+    },
+    {
+      "rank": 231,
+      "lemma": "podczas",
+      "count": 418
+    },
+    {
+      "rank": 232,
+      "lemma": "wniosek",
+      "count": 418
+    },
+    {
+      "rank": 233,
+      "lemma": "ojciec",
+      "count": 417
+    },
+    {
+      "rank": 234,
+      "lemma": "ponad",
+      "count": 414
+    },
+    {
+      "rank": 235,
+      "lemma": "trochę",
+      "count": 409
+    },
+    {
+      "rank": 236,
+      "lemma": "y",
+      "count": 407
+    },
+    {
+      "rank": 237,
+      "lemma": "udział",
+      "count": 404
+    },
+    {
+      "rank": 238,
+      "lemma": "polityczny",
+      "count": 403
+    },
+    {
+      "rank": 239,
+      "lemma": "tyle",
+      "count": 401
+    },
+    {
+      "rank": 240,
+      "lemma": "projekt",
+      "count": 396
+    },
+    {
+      "rank": 241,
+      "lemma": "decyzja",
+      "count": 395
+    },
+    {
+      "rank": 242,
+      "lemma": "oczywiście",
+      "count": 395
+    },
+    {
+      "rank": 243,
+      "lemma": "tysiąc",
+      "count": 395
+    },
+    {
+      "rank": 244,
+      "lemma": "gmina",
+      "count": 394
+    },
+    {
+      "rank": 245,
+      "lemma": "mężczyzna",
+      "count": 393
+    },
+    {
+      "rank": 246,
+      "lemma": "środek",
+      "count": 392
+    },
+    {
+      "rank": 247,
+      "lemma": "choć",
+      "count": 391
+    },
+    {
+      "rank": 248,
+      "lemma": "dopiero",
+      "count": 391
+    },
+    {
+      "rank": 249,
+      "lemma": "pracownik",
+      "count": 389
+    },
+    {
+      "rank": 250,
+      "lemma": "czekać",
+      "count": 386
+    },
+    {
+      "rank": 251,
+      "lemma": "uwaga",
+      "count": 386
+    },
+    {
+      "rank": 252,
+      "lemma": "nigdy",
+      "count": 385
+    },
+    {
+      "rank": 253,
+      "lemma": "aż",
+      "count": 383
+    },
+    {
+      "rank": 254,
+      "lemma": "tutaj",
+      "count": 383
+    },
+    {
+      "rank": 255,
+      "lemma": "ziemia",
+      "count": 383
+    },
+    {
+      "rank": 256,
+      "lemma": "wojna",
+      "count": 381
+    },
+    {
+      "rank": 257,
+      "lemma": "daleko",
+      "count": 380
+    },
+    {
+      "rank": 258,
+      "lemma": "pracować",
+      "count": 380
+    },
+    {
+      "rank": 259,
+      "lemma": "prawda",
+      "count": 377
+    },
+    {
+      "rank": 260,
+      "lemma": "znaczyć",
+      "count": 376
+    },
+    {
+      "rank": 261,
+      "lemma": "jakby",
+      "count": 375
+    },
+    {
+      "rank": 262,
+      "lemma": "okres",
+      "count": 375
+    },
+    {
+      "rank": 263,
+      "lemma": "przykład",
+      "count": 375
+    },
+    {
+      "rank": 264,
+      "lemma": "spotkanie",
+      "count": 372
+    },
+    {
+      "rank": 265,
+      "lemma": "działać",
+      "count": 370
+    },
+    {
+      "rank": 266,
+      "lemma": "złoty",
+      "count": 370
+    },
+    {
+      "rank": 267,
+      "lemma": "akcja",
+      "count": 368
+    },
+    {
+      "rank": 268,
+      "lemma": "matka",
+      "count": 368
+    },
+    {
+      "rank": 269,
+      "lemma": "więcej",
+      "count": 368
+    },
+    {
+      "rank": 270,
+      "lemma": "członek",
+      "count": 367
+    },
+    {
+      "rank": 271,
+      "lemma": "sejm",
+      "count": 367
+    },
+    {
+      "rank": 272,
+      "lemma": "ulica",
+      "count": 365
+    },
+    {
+      "rank": 273,
+      "lemma": "mieszkaniec",
+      "count": 364
+    },
+    {
+      "rank": 274,
+      "lemma": "społeczny",
+      "count": 362
+    },
+    {
+      "rank": 275,
+      "lemma": "dziękować",
+      "count": 361
+    },
+    {
+      "rank": 276,
+      "lemma": "książka",
+      "count": 361
+    },
+    {
+      "rank": 277,
+      "lemma": "lecz",
+      "count": 361
+    },
+    {
+      "rank": 278,
+      "lemma": "czuć",
+      "count": 360
+    },
+    {
+      "rank": 279,
+      "lemma": "mowa",
+      "count": 360
+    },
+    {
+      "rank": 280,
+      "lemma": "istnieć",
+      "count": 359
+    },
+    {
+      "rank": 281,
+      "lemma": "rozmowa",
+      "count": 359
+    },
+    {
+      "rank": 282,
+      "lemma": "wcześnie",
+      "count": 359
+    },
+    {
+      "rank": 283,
+      "lemma": "śmierć",
+      "count": 358
+    },
+    {
+      "rank": 284,
+      "lemma": "siła",
+      "count": 355
+    },
+    {
+      "rank": 285,
+      "lemma": "góra",
+      "count": 354
+    },
+    {
+      "rank": 286,
+      "lemma": "wynik",
+      "count": 353
+    },
+    {
+      "rank": 287,
+      "lemma": "pójść",
+      "count": 350
+    },
+    {
+      "rank": 288,
+      "lemma": "zasada",
+      "count": 350
+    },
+    {
+      "rank": 289,
+      "lemma": "według",
+      "count": 349
+    },
+    {
+      "rank": 290,
+      "lemma": "urząd",
+      "count": 348
+    },
+    {
+      "rank": 291,
+      "lemma": "ile",
+      "count": 343
+    },
+    {
+      "rank": 292,
+      "lemma": "10",
+      "count": 342
+    },
+    {
+      "rank": 293,
+      "lemma": "polak",
+      "count": 341
+    },
+    {
+      "rank": 294,
+      "lemma": "żyć",
+      "count": 341
+    },
+    {
+      "rank": 295,
+      "lemma": "przepis",
+      "count": 340
+    },
+    {
+      "rank": 296,
+      "lemma": "dostać",
+      "count": 339
+    },
+    {
+      "rank": 297,
+      "lemma": "ogół",
+      "count": 339
+    },
+    {
+      "rank": 298,
+      "lemma": "większość",
+      "count": 339
+    },
+    {
+      "rank": 299,
+      "lemma": "film",
+      "count": 336
+    },
+    {
+      "rank": 300,
+      "lemma": "partia",
+      "count": 336
+    },
+    {
+      "rank": 301,
+      "lemma": "znajdować",
+      "count": 336
+    },
+    {
+      "rank": 302,
+      "lemma": "udać",
+      "count": 335
+    },
+    {
+      "rank": 303,
+      "lemma": "poza",
+      "count": 334
+    },
+    {
+      "rank": 304,
+      "lemma": "stanowić",
+      "count": 333
+    },
+    {
+      "rank": 305,
+      "lemma": "system",
+      "count": 331
+    },
+    {
+      "rank": 306,
+      "lemma": "zły",
+      "count": 330
+    },
+    {
+      "rank": 307,
+      "lemma": "pamiętać",
+      "count": 329
+    },
+    {
+      "rank": 308,
+      "lemma": "rozpocząć",
+      "count": 329
+    },
+    {
+      "rank": 309,
+      "lemma": "rozumieć",
+      "count": 328
+    },
+    {
+      "rank": 310,
+      "lemma": "6",
+      "count": 327
+    },
+    {
+      "rank": 311,
+      "lemma": "główny",
+      "count": 327
+    },
+    {
+      "rank": 312,
+      "lemma": "prezes",
+      "count": 327
+    },
+    {
+      "rank": 313,
+      "lemma": "wy",
+      "count": 326
+    },
+    {
+      "rank": 314,
+      "lemma": "zakład",
+      "count": 326
+    },
+    {
+      "rank": 315,
+      "lemma": "trwać",
+      "count": 325
+    },
+    {
+      "rank": 316,
+      "lemma": "zespół",
+      "count": 325
+    },
+    {
+      "rank": 317,
+      "lemma": "naprawdę",
+      "count": 324
+    },
+    {
+      "rank": 318,
+      "lemma": "wiek",
+      "count": 324
+    },
+    {
+      "rank": 319,
+      "lemma": "natomiast",
+      "count": 323
+    },
+    {
+      "rank": 320,
+      "lemma": "coraz",
+      "count": 322
+    },
+    {
+      "rank": 321,
+      "lemma": "powód",
+      "count": 322
+    },
+    {
+      "rank": 322,
+      "lemma": "punkt",
+      "count": 322
+    },
+    {
+      "rank": 323,
+      "lemma": "działalność",
+      "count": 320
+    },
+    {
+      "rank": 324,
+      "lemma": "oba",
+      "count": 320
+    },
+    {
+      "rank": 325,
+      "lemma": "wyjść",
+      "count": 320
+    },
+    {
+      "rank": 326,
+      "lemma": "około",
+      "count": 319
+    },
+    {
+      "rank": 327,
+      "lemma": "szpital",
+      "count": 319
+    },
+    {
+      "rank": 328,
+      "lemma": "zobaczyć",
+      "count": 319
+    },
+    {
+      "rank": 329,
+      "lemma": "cztery",
+      "count": 318
+    },
+    {
+      "rank": 330,
+      "lemma": "klub",
+      "count": 318
+    },
+    {
+      "rank": 331,
+      "lemma": "niektóry",
+      "count": 318
+    },
+    {
+      "rank": 332,
+      "lemma": "30",
+      "count": 317
+    },
+    {
+      "rank": 333,
+      "lemma": "początek",
+      "count": 314
+    },
+    {
+      "rank": 334,
+      "lemma": "szef",
+      "count": 313
+    },
+    {
+      "rank": 335,
+      "lemma": "przyjść",
+      "count": 312
+    },
+    {
+      "rank": 336,
+      "lemma": "stanowisko",
+      "count": 312
+    },
+    {
+      "rank": 337,
+      "lemma": "teren",
+      "count": 312
+    },
+    {
+      "rank": 338,
+      "lemma": "długi",
+      "count": 310
+    },
+    {
+      "rank": 339,
+      "lemma": "europejski",
+      "count": 310
+    },
+    {
+      "rank": 340,
+      "lemma": "wśród",
+      "count": 310
+    },
+    {
+      "rank": 341,
+      "lemma": "długo",
+      "count": 309
+    },
+    {
+      "rank": 342,
+      "lemma": "ruch",
+      "count": 308
+    },
+    {
+      "rank": 343,
+      "lemma": "siedzieć",
+      "count": 308
+    },
+    {
+      "rank": 344,
+      "lemma": "wejść",
+      "count": 308
+    },
+    {
+      "rank": 345,
+      "lemma": "wszyscy",
+      "count": 308
+    },
+    {
+      "rank": 346,
+      "lemma": "bliski",
+      "count": 307
+    },
+    {
+      "rank": 347,
+      "lemma": "noc",
+      "count": 307
+    },
+    {
+      "rank": 348,
+      "lemma": "otrzymać",
+      "count": 307
+    },
+    {
+      "rank": 349,
+      "lemma": "wydać",
+      "count": 305
+    },
+    {
+      "rank": 350,
+      "lemma": "brać",
+      "count": 304
+    },
+    {
+      "rank": 351,
+      "lemma": "mieszkanie",
+      "count": 303
+    },
+    {
+      "rank": 352,
+      "lemma": "możliwość",
+      "count": 302
+    },
+    {
+      "rank": 353,
+      "lemma": "policjant",
+      "count": 301
+    },
+    {
+      "rank": 354,
+      "lemma": "okazać",
+      "count": 300
+    },
+    {
+      "rank": 355,
+      "lemma": "publiczny",
+      "count": 300
+    },
+    {
+      "rank": 356,
+      "lemma": "drzwi",
+      "count": 299
+    },
+    {
+      "rank": 357,
+      "lemma": "dzięki",
+      "count": 299
+    },
+    {
+      "rank": 358,
+      "lemma": "mimo",
+      "count": 299
+    },
+    {
+      "rank": 359,
+      "lemma": "poprawka",
+      "count": 298
+    },
+    {
+      "rank": 360,
+      "lemma": "cena",
+      "count": 297
+    },
+    {
+      "rank": 361,
+      "lemma": "wypadek",
+      "count": 297
+    },
+    {
+      "rank": 362,
+      "lemma": "dyrektor",
+      "count": 292
+    },
+    {
+      "rank": 363,
+      "lemma": "historia",
+      "count": 292
+    },
+    {
+      "rank": 364,
+      "lemma": "służba",
+      "count": 292
+    },
+    {
+      "rank": 365,
+      "lemma": "dzisiaj",
+      "count": 291
+    },
+    {
+      "rank": 366,
+      "lemma": "iż",
+      "count": 291
+    },
+    {
+      "rank": 367,
+      "lemma": "wyglądać",
+      "count": 290
+    },
+    {
+      "rank": 368,
+      "lemma": "patrzeć",
+      "count": 289
+    },
+    {
+      "rank": 369,
+      "lemma": "temu",
+      "count": 289
+    },
+    {
+      "rank": 370,
+      "lemma": "lubić",
+      "count": 288
+    },
+    {
+      "rank": 371,
+      "lemma": "polityka",
+      "count": 288
+    },
+    {
+      "rank": 372,
+      "lemma": "proces",
+      "count": 288
+    },
+    {
+      "rank": 373,
+      "lemma": "brak",
+      "count": 287
+    },
+    {
+      "rank": 374,
+      "lemma": "imię",
+      "count": 286
+    },
+    {
+      "rank": 375,
+      "lemma": "lekarz",
+      "count": 286
+    },
+    {
+      "rank": 376,
+      "lemma": "twarz",
+      "count": 286
+    },
+    {
+      "rank": 377,
+      "lemma": "andrzej",
+      "count": 285
+    },
+    {
+      "rank": 378,
+      "lemma": "odbyć",
+      "count": 285
+    },
+    {
+      "rank": 379,
+      "lemma": "granica",
+      "count": 284
+    },
+    {
+      "rank": 380,
+      "lemma": "niemiecki",
+      "count": 283
+    },
+    {
+      "rank": 381,
+      "lemma": "myśl",
+      "count": 281
+    },
+    {
+      "rank": 382,
+      "lemma": "dojść",
+      "count": 280
+    },
+    {
+      "rank": 383,
+      "lemma": "wieś",
+      "count": 280
+    },
+    {
+      "rank": 384,
+      "lemma": "wrócić",
+      "count": 280
+    },
+    {
+      "rank": 385,
+      "lemma": "20",
+      "count": 279
+    },
+    {
+      "rank": 386,
+      "lemma": "pełny",
+      "count": 279
+    },
+    {
+      "rank": 387,
+      "lemma": "pięć",
+      "count": 279
+    },
+    {
+      "rank": 388,
+      "lemma": "podstawa",
+      "count": 279
+    },
+    {
+      "rank": 389,
+      "lemma": "szybko",
+      "count": 279
+    },
+    {
+      "rank": 390,
+      "lemma": "daleki",
+      "count": 278
+    },
+    {
+      "rank": 391,
+      "lemma": "potrafić",
+      "count": 277
+    },
+    {
+      "rank": 392,
+      "lemma": "pytać",
+      "count": 277
+    },
+    {
+      "rank": 393,
+      "lemma": "wartość",
+      "count": 277
+    },
+    {
+      "rank": 394,
+      "lemma": "kultura",
+      "count": 276
+    },
+    {
+      "rank": 395,
+      "lemma": "premier",
+      "count": 276
+    },
+    {
+      "rank": 396,
+      "lemma": "twierdzić",
+      "count": 276
+    },
+    {
+      "rank": 397,
+      "lemma": "napisać",
+      "count": 275
+    },
+    {
+      "rank": 398,
+      "lemma": "zdrowie",
+      "count": 275
+    },
+    {
+      "rank": 399,
+      "lemma": "dawać",
+      "count": 273
+    },
+    {
+      "rank": 400,
+      "lemma": "rynek",
+      "count": 273
+    },
+    {
+      "rank": 401,
+      "lemma": "określić",
+      "count": 272
+    },
+    {
+      "rank": 402,
+      "lemma": "ciało",
+      "count": 268
+    },
+    {
+      "rank": 403,
+      "lemma": "jechać",
+      "count": 268
+    },
+    {
+      "rank": 404,
+      "lemma": "prawie",
+      "count": 267
+    },
+    {
+      "rank": 405,
+      "lemma": "wiadomo",
+      "count": 267
+    },
+    {
+      "rank": 406,
+      "lemma": "złożyć",
+      "count": 267
+    },
+    {
+      "rank": 407,
+      "lemma": "15",
+      "count": 265
+    },
+    {
+      "rank": 408,
+      "lemma": "bowiem",
+      "count": 265
+    },
+    {
+      "rank": 409,
+      "lemma": "działanie",
+      "count": 265
+    },
+    {
+      "rank": 410,
+      "lemma": "pewno",
+      "count": 265
+    },
+    {
+      "rank": 411,
+      "lemma": "liczyć",
+      "count": 264
+    },
+    {
+      "rank": 412,
+      "lemma": "liczba",
+      "count": 263
+    },
+    {
+      "rank": 413,
+      "lemma": "wobec",
+      "count": 263
+    },
+    {
+      "rank": 414,
+      "lemma": "zatrzymać",
+      "count": 263
+    },
+    {
+      "rank": 415,
+      "lemma": "europa",
+      "count": 262
+    },
+    {
+      "rank": 416,
+      "lemma": "trzeci",
+      "count": 262
+    },
+    {
+      "rank": 417,
+      "lemma": "wynikać",
+      "count": 261
+    },
+    {
+      "rank": 418,
+      "lemma": "badanie",
+      "count": 260
+    },
+    {
+      "rank": 419,
+      "lemma": "leżeć",
+      "count": 260
+    },
+    {
+      "rank": 420,
+      "lemma": "związany",
+      "count": 260
+    },
+    {
+      "rank": 421,
+      "lemma": "kiedyś",
+      "count": 259
+    },
+    {
+      "rank": 422,
+      "lemma": "zadanie",
+      "count": 259
+    },
+    {
+      "rank": 423,
+      "lemma": "język",
+      "count": 258
+    },
+    {
+      "rank": 424,
+      "lemma": "amerykański",
+      "count": 257
+    },
+    {
+      "rank": 425,
+      "lemma": "bank",
+      "count": 257
+    },
+    {
+      "rank": 426,
+      "lemma": "biały",
+      "count": 257
+    },
+    {
+      "rank": 427,
+      "lemma": "miejski",
+      "count": 256
+    },
+    {
+      "rank": 428,
+      "lemma": "obraz",
+      "count": 256
+    },
+    {
+      "rank": 429,
+      "lemma": "organizacja",
+      "count": 256
+    },
+    {
+      "rank": 430,
+      "lemma": "forma",
+      "count": 255
+    },
+    {
+      "rank": 431,
+      "lemma": "jedynie",
+      "count": 255
+    },
+    {
+      "rank": 432,
+      "lemma": "mieszkać",
+      "count": 255
+    },
+    {
+      "rank": 433,
+      "lemma": "podjąć",
+      "count": 255
+    },
+    {
+      "rank": 434,
+      "lemma": "zmienić",
+      "count": 255
+    },
+    {
+      "rank": 435,
+      "lemma": "7",
+      "count": 254
+    },
+    {
+      "rank": 436,
+      "lemma": "podać",
+      "count": 254
+    },
+    {
+      "rank": 437,
+      "lemma": "pokój",
+      "count": 254
+    },
+    {
+      "rank": 438,
+      "lemma": "trudno",
+      "count": 254
+    },
+    {
+      "rank": 439,
+      "lemma": "tworzyć",
+      "count": 254
+    },
+    {
+      "rank": 440,
+      "lemma": "zajmować",
+      "count": 254
+    },
+    {
+      "rank": 441,
+      "lemma": "nadzieja",
+      "count": 253
+    },
+    {
+      "rank": 442,
+      "lemma": "niech",
+      "count": 253
+    },
+    {
+      "rank": 443,
+      "lemma": "przygotować",
+      "count": 253
+    },
+    {
+      "rank": 444,
+      "lemma": "jan",
+      "count": 252
+    },
+    {
+      "rank": 445,
+      "lemma": "kolega",
+      "count": 252
+    },
+    {
+      "rank": 446,
+      "lemma": "ksiądz",
+      "count": 252
+    },
+    {
+      "rank": 447,
+      "lemma": "otworzyć",
+      "count": 252
+    },
+    {
+      "rank": 448,
+      "lemma": "czarny",
+      "count": 251
+    },
+    {
+      "rank": 449,
+      "lemma": "kupić",
+      "count": 251
+    },
+    {
+      "rank": 450,
+      "lemma": "rodzic",
+      "count": 250
+    },
+    {
+      "rank": 451,
+      "lemma": "rola",
+      "count": 250
+    },
+    {
+      "rank": 452,
+      "lemma": "wzgląd",
+      "count": 250
+    },
+    {
+      "rank": 453,
+      "lemma": "niestety",
+      "count": 248
+    },
+    {
+      "rank": 454,
+      "lemma": "słyszeć",
+      "count": 248
+    },
+    {
+      "rank": 455,
+      "lemma": "czytać",
+      "count": 247
+    },
+    {
+      "rank": 456,
+      "lemma": "narodowy",
+      "count": 247
+    },
+    {
+      "rank": 457,
+      "lemma": "pojawić",
+      "count": 247
+    },
+    {
+      "rank": 458,
+      "lemma": "stosować",
+      "count": 247
+    },
+    {
+      "rank": 459,
+      "lemma": "dokument",
+      "count": 245
+    },
+    {
+      "rank": 460,
+      "lemma": "odpowiedź",
+      "count": 245
+    },
+    {
+      "rank": 461,
+      "lemma": "moment",
+      "count": 244
+    },
+    {
+      "rank": 462,
+      "lemma": "gospodarczy",
+      "count": 243
+    },
+    {
+      "rank": 463,
+      "lemma": "jednostka",
+      "count": 243
+    },
+    {
+      "rank": 464,
+      "lemma": "państwowy",
+      "count": 243
+    },
+    {
+      "rank": 465,
+      "lemma": "jedyny",
+      "count": 242
+    },
+    {
+      "rank": 466,
+      "lemma": "przedstawić",
+      "count": 242
+    },
+    {
+      "rank": 467,
+      "lemma": "wybory",
+      "count": 242
+    },
+    {
+      "rank": 468,
+      "lemma": "fakt",
+      "count": 241
+    },
+    {
+      "rank": 469,
+      "lemma": "grać",
+      "count": 241
+    },
+    {
+      "rank": 470,
+      "lemma": "raczej",
+      "count": 241
+    },
+    {
+      "rank": 471,
+      "lemma": "szansa",
+      "count": 241
+    },
+    {
+      "rank": 472,
+      "lemma": "trafić",
+      "count": 241
+    },
+    {
+      "rank": 473,
+      "lemma": "uzyskać",
+      "count": 241
+    },
+    {
+      "rank": 474,
+      "lemma": "8",
+      "count": 240
+    },
+    {
+      "rank": 475,
+      "lemma": "unia",
+      "count": 240
+    },
+    {
+      "rank": 476,
+      "lemma": "właściwy",
+      "count": 240
+    },
+    {
+      "rank": 477,
+      "lemma": "zarząd",
+      "count": 240
+    },
+    {
+      "rank": 478,
+      "lemma": "ciąg",
+      "count": 239
+    },
+    {
+      "rank": 479,
+      "lemma": "ponieważ",
+      "count": 239
+    },
+    {
+      "rank": 480,
+      "lemma": "właściciel",
+      "count": 239
+    },
+    {
+      "rank": 481,
+      "lemma": "podobny",
+      "count": 238
+    },
+    {
+      "rank": 482,
+      "lemma": "obok",
+      "count": 237
+    },
+    {
+      "rank": 483,
+      "lemma": "szukać",
+      "count": 236
+    },
+    {
+      "rank": 484,
+      "lemma": "dyskusja",
+      "count": 235
+    },
+    {
+      "rank": 485,
+      "lemma": "powstać",
+      "count": 235
+    },
+    {
+      "rank": 486,
+      "lemma": "centrum",
+      "count": 234
+    },
+    {
+      "rank": 487,
+      "lemma": "wybrać",
+      "count": 234
+    },
+    {
+      "rank": 488,
+      "lemma": "piękny",
+      "count": 233
+    },
+    {
+      "rank": 489,
+      "lemma": "rodzaj",
+      "count": 233
+    },
+    {
+      "rank": 490,
+      "lemma": "syn",
+      "count": 233
+    },
+    {
+      "rank": 491,
+      "lemma": "uznać",
+      "count": 233
+    },
+    {
+      "rank": 492,
+      "lemma": "walka",
+      "count": 233
+    },
+    {
+      "rank": 493,
+      "lemma": "12",
+      "count": 232
+    },
+    {
+      "rank": 494,
+      "lemma": "obowiązek",
+      "count": 232
+    },
+    {
+      "rank": 495,
+      "lemma": "sztuka",
+      "count": 232
+    },
+    {
+      "rank": 496,
+      "lemma": "zaczynać",
+      "count": 232
+    },
+    {
+      "rank": 497,
+      "lemma": "środowisko",
+      "count": 231
+    },
+    {
+      "rank": 498,
+      "lemma": "zapytać",
+      "count": 229
+    },
+    {
+      "rank": 499,
+      "lemma": "następny",
+      "count": 228
+    },
+    {
+      "rank": 500,
+      "lemma": "posiadać",
+      "count": 228
+    },
+    {
+      "rank": 501,
+      "lemma": "rozwój",
+      "count": 228
+    },
+    {
+      "rank": 502,
+      "lemma": "wpływ",
+      "count": 228
+    },
+    {
+      "rank": 503,
+      "lemma": "stwierdzić",
+      "count": 227
+    },
+    {
+      "rank": 504,
+      "lemma": "wykonywać",
+      "count": 227
+    },
+    {
+      "rank": 505,
+      "lemma": "zupełnie",
+      "count": 227
+    },
+    {
+      "rank": 506,
+      "lemma": "żona",
+      "count": 227
+    },
+    {
+      "rank": 507,
+      "lemma": "miłość",
+      "count": 226
+    },
+    {
+      "rank": 508,
+      "lemma": "dziewczyna",
+      "count": 225
+    },
+    {
+      "rank": 509,
+      "lemma": "koszt",
+      "count": 225
+    },
+    {
+      "rank": 510,
+      "lemma": "potrzeba",
+      "count": 225
+    },
+    {
+      "rank": 511,
+      "lemma": "prokuratura",
+      "count": 225
+    },
+    {
+      "rank": 512,
+      "lemma": "umowa",
+      "count": 225
+    },
+    {
+      "rank": 513,
+      "lemma": "wprowadzić",
+      "count": 225
+    },
+    {
+      "rank": 514,
+      "lemma": "budowa",
+      "count": 224
+    },
+    {
+      "rank": 515,
+      "lemma": "zająć",
+      "count": 224
+    },
+    {
+      "rank": 516,
+      "lemma": "wspólny",
+      "count": 223
+    },
+    {
+      "rank": 517,
+      "lemma": "oznaczać",
+      "count": 222
+    },
+    {
+      "rank": 518,
+      "lemma": "plan",
+      "count": 222
+    },
+    {
+      "rank": 519,
+      "lemma": "warszawski",
+      "count": 222
+    },
+    {
+      "rank": 520,
+      "lemma": "budynek",
+      "count": 221
+    },
+    {
+      "rank": 521,
+      "lemma": "wieczór",
+      "count": 221
+    },
+    {
+      "rank": 522,
+      "lemma": "autor",
+      "count": 220
+    },
+    {
+      "rank": 523,
+      "lemma": "specjalny",
+      "count": 220
+    },
+    {
+      "rank": 524,
+      "lemma": "spółka",
+      "count": 220
+    },
+    {
+      "rank": 525,
+      "lemma": "słuchać",
+      "count": 220
+    },
+    {
+      "rank": 526,
+      "lemma": "obecnie",
+      "count": 219
+    },
+    {
+      "rank": 527,
+      "lemma": "zawodowy",
+      "count": 219
+    },
+    {
+      "rank": 528,
+      "lemma": "wreszcie",
+      "count": 218
+    },
+    {
+      "rank": 529,
+      "lemma": "minuta",
+      "count": 217
+    },
+    {
+      "rank": 530,
+      "lemma": "przyznać",
+      "count": 217
+    },
+    {
+      "rank": 531,
+      "lemma": "były",
+      "count": 216
+    },
+    {
+      "rank": 532,
+      "lemma": "opowiadać",
+      "count": 216
+    },
+    {
+      "rank": 533,
+      "lemma": "przedstawiciel",
+      "count": 216
+    },
+    {
+      "rank": 534,
+      "lemma": "wolność",
+      "count": 216
+    },
+    {
+      "rank": 535,
+      "lemma": "ii",
+      "count": 215
+    },
+    {
+      "rank": 536,
+      "lemma": "lista",
+      "count": 215
+    },
+    {
+      "rank": 537,
+      "lemma": "ochrona",
+      "count": 215
+    },
+    {
+      "rank": 538,
+      "lemma": "próbować",
+      "count": 215
+    },
+    {
+      "rank": 539,
+      "lemma": "spotkać",
+      "count": 215
+    },
+    {
+      "rank": 540,
+      "lemma": "kot",
+      "count": 214
+    },
+    {
+      "rank": 541,
+      "lemma": "marszałek",
+      "count": 214
+    },
+    {
+      "rank": 542,
+      "lemma": "nazwa",
+      "count": 214
+    },
+    {
+      "rank": 543,
+      "lemma": "obecny",
+      "count": 214
+    },
+    {
+      "rank": 544,
+      "lemma": "przeprowadzić",
+      "count": 214
+    },
+    {
+      "rank": 545,
+      "lemma": "sala",
+      "count": 214
+    },
+    {
+      "rank": 546,
+      "lemma": "termin",
+      "count": 214
+    },
+    {
+      "rank": 547,
+      "lemma": "zbyt",
+      "count": 214
+    },
+    {
+      "rank": 548,
+      "lemma": "zgodnie",
+      "count": 214
+    },
+    {
+      "rank": 549,
+      "lemma": "fundusz",
+      "count": 212
+    },
+    {
+      "rank": 550,
+      "lemma": "kontakt",
+      "count": 212
+    },
+    {
+      "rank": 551,
+      "lemma": "noga",
+      "count": 212
+    },
+    {
+      "rank": 552,
+      "lemma": "odpowiadać",
+      "count": 212
+    },
+    {
+      "rank": 553,
+      "lemma": "okazja",
+      "count": 212
+    },
+    {
+      "rank": 554,
+      "lemma": "okno",
+      "count": 212
+    },
+    {
+      "rank": 555,
+      "lemma": "opinia",
+      "count": 212
+    },
+    {
+      "rank": 556,
+      "lemma": "prawdziwy",
+      "count": 212
+    },
+    {
+      "rank": 557,
+      "lemma": "marek",
+      "count": 211
+    },
+    {
+      "rank": 558,
+      "lemma": "nadal",
+      "count": 211
+    },
+    {
+      "rank": 559,
+      "lemma": "wraz",
+      "count": 211
+    },
+    {
+      "rank": 560,
+      "lemma": "ośrodek",
+      "count": 210
+    },
+    {
+      "rank": 561,
+      "lemma": "połowa",
+      "count": 210
+    },
+    {
+      "rank": 562,
+      "lemma": "płacić",
+      "count": 210
+    },
+    {
+      "rank": 563,
+      "lemma": "zaś",
+      "count": 210
+    },
+    {
+      "rank": 564,
+      "lemma": "pora",
+      "count": 209
+    },
+    {
+      "rank": 565,
+      "lemma": "zakres",
+      "count": 209
+    },
+    {
+      "rank": 566,
+      "lemma": "dokonać",
+      "count": 208
+    },
+    {
+      "rank": 567,
+      "lemma": "jerzy",
+      "count": 208
+    },
+    {
+      "rank": 568,
+      "lemma": "pomysł",
+      "count": 208
+    },
+    {
+      "rank": 569,
+      "lemma": "rozmawiać",
+      "count": 208
+    },
+    {
+      "rank": 570,
+      "lemma": "szczęście",
+      "count": 208
+    },
+    {
+      "rank": 571,
+      "lemma": "uczeń",
+      "count": 208
+    },
+    {
+      "rank": 572,
+      "lemma": "zabrać",
+      "count": 208
+    },
+    {
+      "rank": 573,
+      "lemma": "ciekawy",
+      "count": 207
+    },
+    {
+      "rank": 574,
+      "lemma": "koło",
+      "count": 207
+    },
+    {
+      "rank": 575,
+      "lemma": "przyjaciel",
+      "count": 207
+    },
+    {
+      "rank": 576,
+      "lemma": "stopień",
+      "count": 207
+    },
+    {
+      "rank": 577,
+      "lemma": "gospodarka",
+      "count": 206
+    },
+    {
+      "rank": 578,
+      "lemma": "rosyjski",
+      "count": 206
+    },
+    {
+      "rank": 579,
+      "lemma": "zresztą",
+      "count": 206
+    },
+    {
+      "rank": 580,
+      "lemma": "dawny",
+      "count": 205
+    },
+    {
+      "rank": 581,
+      "lemma": "serce",
+      "count": 205
+    },
+    {
+      "rank": 582,
+      "lemma": "sld",
+      "count": 205
+    },
+    {
+      "rank": 583,
+      "lemma": "wysokość",
+      "count": 205
+    },
+    {
+      "rank": 584,
+      "lemma": "dość",
+      "count": 204
+    },
+    {
+      "rank": 585,
+      "lemma": "wymagać",
+      "count": 204
+    },
+    {
+      "rank": 586,
+      "lemma": "występować",
+      "count": 204
+    },
+    {
+      "rank": 587,
+      "lemma": "list",
+      "count": 203
+    },
+    {
+      "rank": 588,
+      "lemma": "pewnie",
+      "count": 203
+    },
+    {
+      "rank": 589,
+      "lemma": "układ",
+      "count": 203
+    },
+    {
+      "rank": 590,
+      "lemma": "wojskowy",
+      "count": 203
+    },
+    {
+      "rank": 591,
+      "lemma": "znany",
+      "count": 203
+    },
+    {
+      "rank": 592,
+      "lemma": "wszelki",
+      "count": 202
+    },
+    {
+      "rank": 593,
+      "lemma": "zdjęcie",
+      "count": 202
+    },
+    {
+      "rank": 594,
+      "lemma": "gazeta",
+      "count": 201
+    },
+    {
+      "rank": 595,
+      "lemma": "pozwolić",
+      "count": 201
+    },
+    {
+      "rank": 596,
+      "lemma": "telefon",
+      "count": 201
+    },
+    {
+      "rank": 597,
+      "lemma": "chociaż",
+      "count": 200
+    },
+    {
+      "rank": 598,
+      "lemma": "dana",
+      "count": 200
+    },
+    {
+      "rank": 599,
+      "lemma": "bać",
+      "count": 199
+    },
+    {
+      "rank": 600,
+      "lemma": "brat",
+      "count": 199
+    },
+    {
+      "rank": 601,
+      "lemma": "przejść",
+      "count": 199
+    },
+    {
+      "rank": 602,
+      "lemma": "wyborczy",
+      "count": 199
+    },
+    {
+      "rank": 603,
+      "lemma": "źle",
+      "count": 199
+    },
+    {
+      "rank": 604,
+      "lemma": "finansowy",
+      "count": 198
+    },
+    {
+      "rank": 605,
+      "lemma": "oddział",
+      "count": 198
+    },
+    {
+      "rank": 606,
+      "lemma": "tekst",
+      "count": 198
+    },
+    {
+      "rank": 607,
+      "lemma": "tłumaczyć",
+      "count": 198
+    },
+    {
+      "rank": 608,
+      "lemma": "zakończyć",
+      "count": 198
+    },
+    {
+      "rank": 609,
+      "lemma": "święty",
+      "count": 198
+    },
+    {
+      "rank": 610,
+      "lemma": "inaczej",
+      "count": 197
+    },
+    {
+      "rank": 611,
+      "lemma": "klasa",
+      "count": 197
+    },
+    {
+      "rank": 612,
+      "lemma": "nagroda",
+      "count": 197
+    },
+    {
+      "rank": 613,
+      "lemma": "podstawowy",
+      "count": 196
+    },
+    {
+      "rank": 614,
+      "lemma": "pomóc",
+      "count": 196
+    },
+    {
+      "rank": 615,
+      "lemma": "poziom",
+      "count": 196
+    },
+    {
+      "rank": 616,
+      "lemma": "przeciw",
+      "count": 196
+    },
+    {
+      "rank": 617,
+      "lemma": "styczeń",
+      "count": 196
+    },
+    {
+      "rank": 618,
+      "lemma": "żołnierz",
+      "count": 196
+    },
+    {
+      "rank": 619,
+      "lemma": "kierować",
+      "count": 195
+    },
+    {
+      "rank": 620,
+      "lemma": "kontrola",
+      "count": 195
+    },
+    {
+      "rank": 621,
+      "lemma": "materiał",
+      "count": 195
+    },
+    {
+      "rank": 622,
+      "lemma": "nazywać",
+      "count": 195
+    },
+    {
+      "rank": 623,
+      "lemma": "rano",
+      "count": 195
+    },
+    {
+      "rank": 624,
+      "lemma": "stracić",
+      "count": 195
+    },
+    {
+      "rank": 625,
+      "lemma": "typ",
+      "count": 194
+    },
+    {
+      "rank": 626,
+      "lemma": "sądzić",
+      "count": 193
+    },
+    {
+      "rank": 627,
+      "lemma": "warunki",
+      "count": 193
+    },
+    {
+      "rank": 628,
+      "lemma": "wystarczyć",
+      "count": 193
+    },
+    {
+      "rank": 629,
+      "lemma": "dziennikarz",
+      "count": 192
+    },
+    {
+      "rank": 630,
+      "lemma": "przypominać",
+      "count": 192
+    },
+    {
+      "rank": 631,
+      "lemma": "sobota",
+      "count": 192
+    },
+    {
+      "rank": 632,
+      "lemma": "ustalić",
+      "count": 192
+    },
+    {
+      "rank": 633,
+      "lemma": "wówczas",
+      "count": 192
+    },
+    {
+      "rank": 634,
+      "lemma": "zaraz",
+      "count": 192
+    },
+    {
+      "rank": 635,
+      "lemma": "gdzieś",
+      "count": 191
+    },
+    {
+      "rank": 636,
+      "lemma": "kierowca",
+      "count": 191
+    },
+    {
+      "rank": 637,
+      "lemma": "pies",
+      "count": 191
+    },
+    {
+      "rank": 638,
+      "lemma": "tamten",
+      "count": 191
+    },
+    {
+      "rank": 639,
+      "lemma": "widać",
+      "count": 191
+    },
+    {
+      "rank": 640,
+      "lemma": "wiedza",
+      "count": 191
+    },
+    {
+      "rank": 641,
+      "lemma": "wykonać",
+      "count": 191
+    },
+    {
+      "rank": 642,
+      "lemma": "budżet",
+      "count": 190
+    },
+    {
+      "rank": 643,
+      "lemma": "krajowy",
+      "count": 190
+    },
+    {
+      "rank": 644,
+      "lemma": "pokazać",
+      "count": 190
+    },
+    {
+      "rank": 645,
+      "lemma": "krótki",
+      "count": 189
+    },
+    {
+      "rank": 646,
+      "lemma": "nagle",
+      "count": 189
+    },
+    {
+      "rank": 647,
+      "lemma": "porządek",
+      "count": 189
+    },
+    {
+      "rank": 648,
+      "lemma": "wchodzić",
+      "count": 189
+    },
+    {
+      "rank": 649,
+      "lemma": "województwo",
+      "count": 189
+    },
+    {
+      "rank": 650,
+      "lemma": "gra",
+      "count": 188
+    },
+    {
+      "rank": 651,
+      "lemma": "starać",
+      "count": 188
+    },
+    {
+      "rank": 652,
+      "lemma": "charakter",
+      "count": 187
+    },
+    {
+      "rank": 653,
+      "lemma": "mama",
+      "count": 187
+    },
+    {
+      "rank": 654,
+      "lemma": "milion",
+      "count": 187
+    },
+    {
+      "rank": 655,
+      "lemma": "podatek",
+      "count": 187
+    },
+    {
+      "rank": 656,
+      "lemma": "gość",
+      "count": 186
+    },
+    {
+      "rank": 657,
+      "lemma": "kierunek",
+      "count": 186
+    },
+    {
+      "rank": 658,
+      "lemma": "mąż",
+      "count": 186
+    },
+    {
+      "rank": 659,
+      "lemma": "przekazać",
+      "count": 186
+    },
+    {
+      "rank": 660,
+      "lemma": "stosunek",
+      "count": 186
+    },
+    {
+      "rank": 661,
+      "lemma": "trzymać",
+      "count": 186
+    },
+    {
+      "rank": 662,
+      "lemma": "zwrócić",
+      "count": 186
+    },
+    {
+      "rank": 663,
+      "lemma": "nauka",
+      "count": 185
+    },
+    {
+      "rank": 664,
+      "lemma": "numer",
+      "count": 185
+    },
+    {
+      "rank": 665,
+      "lemma": "tytuł",
+      "count": 185
+    },
+    {
+      "rank": 666,
+      "lemma": "wierzyć",
+      "count": 185
+    },
+    {
+      "rank": 667,
+      "lemma": "znaczenie",
+      "count": 184
+    },
+    {
+      "rank": 668,
+      "lemma": "zwłaszcza",
+      "count": 184
+    },
+    {
+      "rank": 669,
+      "lemma": "niedziela",
+      "count": 183
+    },
+    {
+      "rank": 670,
+      "lemma": "niemcy",
+      "count": 183
+    },
+    {
+      "rank": 671,
+      "lemma": "polityk",
+      "count": 183
+    },
+    {
+      "rank": 672,
+      "lemma": "konkurs",
+      "count": 182
+    },
+    {
+      "rank": 673,
+      "lemma": "kraków",
+      "count": 182
+    },
+    {
+      "rank": 674,
+      "lemma": "ludzki",
+      "count": 182
+    },
+    {
+      "rank": 675,
+      "lemma": "możliwy",
+      "count": 182
+    },
+    {
+      "rank": 676,
+      "lemma": "sklep",
+      "count": 182
+    },
+    {
+      "rank": 677,
+      "lemma": "społeczeństwo",
+      "count": 181
+    },
+    {
+      "rank": 678,
+      "lemma": "ściana",
+      "count": 181
+    },
+    {
+      "rank": 679,
+      "lemma": "chłopiec",
+      "count": 180
+    },
+    {
+      "rank": 680,
+      "lemma": "przeciwko",
+      "count": 180
+    },
+    {
+      "rank": 681,
+      "lemma": "przyczyna",
+      "count": 180
+    },
+    {
+      "rank": 682,
+      "lemma": "wojewódzki",
+      "count": 180
+    },
+    {
+      "rank": 683,
+      "lemma": "zachować",
+      "count": 180
+    },
+    {
+      "rank": 684,
+      "lemma": "zrozumieć",
+      "count": 180
+    },
+    {
+      "rank": 685,
+      "lemma": "biuro",
+      "count": 179
+    },
+    {
+      "rank": 686,
+      "lemma": "kara",
+      "count": 179
+    },
+    {
+      "rank": 687,
+      "lemma": "ministerstwo",
+      "count": 179
+    },
+    {
+      "rank": 688,
+      "lemma": "próba",
+      "count": 179
+    },
+    {
+      "rank": 689,
+      "lemma": "znowu",
+      "count": 179
+    },
+    {
+      "rank": 690,
+      "lemma": "bezpieczeństwo",
+      "count": 178
+    },
+    {
+      "rank": 691,
+      "lemma": "maj",
+      "count": 178
+    },
+    {
+      "rank": 692,
+      "lemma": "odpowiedni",
+      "count": 178
+    },
+    {
+      "rank": 693,
+      "lemma": "postawić",
+      "count": 178
+    },
+    {
+      "rank": 694,
+      "lemma": "postać",
+      "count": 178
+    },
+    {
+      "rank": 695,
+      "lemma": "telewizja",
+      "count": 178
+    },
+    {
+      "rank": 696,
+      "lemma": "zwierzę",
+      "count": 178
+    },
+    {
+      "rank": 697,
+      "lemma": "izba",
+      "count": 177
+    },
+    {
+      "rank": 698,
+      "lemma": "las",
+      "count": 177
+    },
+    {
+      "rank": 699,
+      "lemma": "przyjechać",
+      "count": 177
+    },
+    {
+      "rank": 700,
+      "lemma": "pół",
+      "count": 177
+    },
+    {
+      "rank": 701,
+      "lemma": "rosja",
+      "count": 177
+    },
+    {
+      "rank": 702,
+      "lemma": "silny",
+      "count": 177
+    },
+    {
+      "rank": 703,
+      "lemma": "trudny",
+      "count": 177
+    },
+    {
+      "rank": 704,
+      "lemma": "właściwie",
+      "count": 177
+    },
+    {
+      "rank": 705,
+      "lemma": "choroba",
+      "count": 176
+    },
+    {
+      "rank": 706,
+      "lemma": "kwestia",
+      "count": 176
+    },
+    {
+      "rank": 707,
+      "lemma": "nazwisko",
+      "count": 176
+    },
+    {
+      "rank": 708,
+      "lemma": "pić",
+      "count": 176
+    },
+    {
+      "rank": 709,
+      "lemma": "razem",
+      "count": 176
+    },
+    {
+      "rank": 710,
+      "lemma": "rzecznik",
+      "count": 176
+    },
+    {
+      "rank": 711,
+      "lemma": "oglądać",
+      "count": 175
+    },
+    {
+      "rank": 712,
+      "lemma": "skończyć",
+      "count": 175
+    },
+    {
+      "rank": 713,
+      "lemma": "składać",
+      "count": 175
+    },
+    {
+      "rank": 714,
+      "lemma": "stanąć",
+      "count": 175
+    },
+    {
+      "rank": 715,
+      "lemma": "wewnętrzny",
+      "count": 175
+    },
+    {
+      "rank": 716,
+      "lemma": "11",
+      "count": 174
+    },
+    {
+      "rank": 717,
+      "lemma": "obszar",
+      "count": 174
+    },
+    {
+      "rank": 718,
+      "lemma": "używać",
+      "count": 174
+    },
+    {
+      "rank": 719,
+      "lemma": "wracać",
+      "count": 174
+    },
+    {
+      "rank": 720,
+      "lemma": "zauważyć",
+      "count": 174
+    },
+    {
+      "rank": 721,
+      "lemma": "międzynarodowy",
+      "count": 173
+    },
+    {
+      "rank": 722,
+      "lemma": "ofiara",
+      "count": 173
+    },
+    {
+      "rank": 723,
+      "lemma": "pismo",
+      "count": 173
+    },
+    {
+      "rank": 724,
+      "lemma": "proponować",
+      "count": 173
+    },
+    {
+      "rank": 725,
+      "lemma": "wychodzić",
+      "count": 173
+    },
+    {
+      "rank": 726,
+      "lemma": "zamiast",
+      "count": 173
+    },
+    {
+      "rank": 727,
+      "lemma": "piotr",
+      "count": 172
+    },
+    {
+      "rank": 728,
+      "lemma": "warunek",
+      "count": 172
+    },
+    {
+      "rank": 729,
+      "lemma": "wolny",
+      "count": 172
+    },
+    {
+      "rank": 730,
+      "lemma": "artykuł",
+      "count": 171
+    },
+    {
+      "rank": 731,
+      "lemma": "jakoś",
+      "count": 171
+    },
+    {
+      "rank": 732,
+      "lemma": "najpierw",
+      "count": 171
+    },
+    {
+      "rank": 733,
+      "lemma": "przedmiot",
+      "count": 171
+    },
+    {
+      "rank": 734,
+      "lemma": "los",
+      "count": 170
+    },
+    {
+      "rank": 735,
+      "lemma": "chory",
+      "count": 169
+    },
+    {
+      "rank": 736,
+      "lemma": "głównie",
+      "count": 169
+    },
+    {
+      "rank": 737,
+      "lemma": "metoda",
+      "count": 169
+    },
+    {
+      "rank": 738,
+      "lemma": "przewodniczący",
+      "count": 169
+    },
+    {
+      "rank": 739,
+      "lemma": "stół",
+      "count": 169
+    },
+    {
+      "rank": 740,
+      "lemma": "zarówno",
+      "count": 169
+    },
+    {
+      "rank": 741,
+      "lemma": "dziać",
+      "count": 168
+    },
+    {
+      "rank": 742,
+      "lemma": "grudzień",
+      "count": 168
+    },
+    {
+      "rank": 743,
+      "lemma": "nauczyciel",
+      "count": 168
+    },
+    {
+      "rank": 744,
+      "lemma": "postępowanie",
+      "count": 168
+    },
+    {
+      "rank": 745,
+      "lemma": "spowodować",
+      "count": 168
+    },
+    {
+      "rank": 746,
+      "lemma": "czerwony",
+      "count": 167
+    },
+    {
+      "rank": 747,
+      "lemma": "dodać",
+      "count": 167
+    },
+    {
+      "rank": 748,
+      "lemma": "jednocześnie",
+      "count": 167
+    },
+    {
+      "rank": 749,
+      "lemma": "przyszłość",
+      "count": 167
+    },
+    {
+      "rank": 750,
+      "lemma": "sukces",
+      "count": 167
+    },
+    {
+      "rank": 751,
+      "lemma": "funkcja",
+      "count": 166
+    },
+    {
+      "rank": 752,
+      "lemma": "krok",
+      "count": 166
+    },
+    {
+      "rank": 753,
+      "lemma": "niski",
+      "count": 166
+    },
+    {
+      "rank": 754,
+      "lemma": "ostatnio",
+      "count": 166
+    },
+    {
+      "rank": 755,
+      "lemma": "podnieść",
+      "count": 166
+    },
+    {
+      "rank": 756,
+      "lemma": "zdobyć",
+      "count": 166
+    },
+    {
+      "rank": 757,
+      "lemma": "znak",
+      "count": 166
+    },
+    {
+      "rank": 758,
+      "lemma": "światło",
+      "count": 166
+    },
+    {
+      "rank": 759,
+      "lemma": "%",
+      "count": 165
+    },
+    {
+      "rank": 760,
+      "lemma": "korzystać",
+      "count": 165
+    },
+    {
+      "rank": 761,
+      "lemma": "pozwalać",
+      "count": 165
+    },
+    {
+      "rank": 762,
+      "lemma": "usa",
+      "count": 165
+    },
+    {
+      "rank": 763,
+      "lemma": "zagraniczny",
+      "count": 165
+    },
+    {
+      "rank": 764,
+      "lemma": "zdawać",
+      "count": 165
+    },
+    {
+      "rank": 765,
+      "lemma": "krzysztof",
+      "count": 164
+    },
+    {
+      "rank": 766,
+      "lemma": "mecz",
+      "count": 164
+    },
+    {
+      "rank": 767,
+      "lemma": "naród",
+      "count": 164
+    },
+    {
+      "rank": 768,
+      "lemma": "odpowiedzieć",
+      "count": 164
+    },
+    {
+      "rank": 769,
+      "lemma": "powiat",
+      "count": 164
+    },
+    {
+      "rank": 770,
+      "lemma": "przyszły",
+      "count": 164
+    },
+    {
+      "rank": 771,
+      "lemma": "zamknąć",
+      "count": 164
+    },
+    {
+      "rank": 772,
+      "lemma": "znacznie",
+      "count": 164
+    },
+    {
+      "rank": 773,
+      "lemma": "powietrze",
+      "count": 163
+    },
+    {
+      "rank": 774,
+      "lemma": "radny",
+      "count": 163
+    },
+    {
+      "rank": 775,
+      "lemma": "szczególnie",
+      "count": 163
+    },
+    {
+      "rank": 776,
+      "lemma": "tymczasem",
+      "count": 163
+    },
+    {
+      "rank": 777,
+      "lemma": "zawrzeć",
+      "count": 163
+    },
+    {
+      "rank": 778,
+      "lemma": "50",
+      "count": 162
+    },
+    {
+      "rank": 779,
+      "lemma": "impreza",
+      "count": 162
+    },
+    {
+      "rank": 780,
+      "lemma": "pochodzić",
+      "count": 162
+    },
+    {
+      "rank": 781,
+      "lemma": "poznać",
+      "count": 162
+    },
+    {
+      "rank": 782,
+      "lemma": "wrażenie",
+      "count": 162
+    },
+    {
+      "rank": 783,
+      "lemma": "cieszyć",
+      "count": 161
+    },
+    {
+      "rank": 784,
+      "lemma": "traktować",
+      "count": 161
+    },
+    {
+      "rank": 785,
+      "lemma": "zgoda",
+      "count": 161
+    },
+    {
+      "rank": 786,
+      "lemma": "drzewo",
+      "count": 160
+    },
+    {
+      "rank": 787,
+      "lemma": "towarzystwo",
+      "count": 160
+    },
+    {
+      "rank": 788,
+      "lemma": "czerwiec",
+      "count": 159
+    },
+    {
+      "rank": 789,
+      "lemma": "dziwny",
+      "count": 159
+    },
+    {
+      "rank": 790,
+      "lemma": "element",
+      "count": 159
+    },
+    {
+      "rank": 791,
+      "lemma": "krew",
+      "count": 159
+    },
+    {
+      "rank": 792,
+      "lemma": "poinformować",
+      "count": 159
+    },
+    {
+      "rank": 793,
+      "lemma": "potrzebny",
+      "count": 159
+    },
+    {
+      "rank": 794,
+      "lemma": "powrót",
+      "count": 159
+    },
+    {
+      "rank": 795,
+      "lemma": "stawać",
+      "count": 159
+    },
+    {
+      "rank": 796,
+      "lemma": "16",
+      "count": 158
+    },
+    {
+      "rank": 797,
+      "lemma": "9",
+      "count": 158
+    },
+    {
+      "rank": 798,
+      "lemma": "adam",
+      "count": 158
+    },
+    {
+      "rank": 799,
+      "lemma": "dokładnie",
+      "count": 158
+    },
+    {
+      "rank": 800,
+      "lemma": "dziesięć",
+      "count": 158
+    },
+    {
+      "rank": 801,
+      "lemma": "dłoń",
+      "count": 158
+    },
+    {
+      "rank": 802,
+      "lemma": "głosowanie",
+      "count": 158
+    },
+    {
+      "rank": 803,
+      "lemma": "karta",
+      "count": 158
+    },
+    {
+      "rank": 804,
+      "lemma": "kończyć",
+      "count": 158
+    },
+    {
+      "rank": 805,
+      "lemma": "pomyśleć",
+      "count": 158
+    },
+    {
+      "rank": 806,
+      "lemma": "postanowić",
+      "count": 158
+    },
+    {
+      "rank": 807,
+      "lemma": "pozostać",
+      "count": 158
+    },
+    {
+      "rank": 808,
+      "lemma": "zawierać",
+      "count": 158
+    },
+    {
+      "rank": 809,
+      "lemma": "18",
+      "count": 157
+    },
+    {
+      "rank": 810,
+      "lemma": "dowiedzieć",
+      "count": 157
+    },
+    {
+      "rank": 811,
+      "lemma": "poważny",
+      "count": 157
+    },
+    {
+      "rank": 812,
+      "lemma": "rzeczywiście",
+      "count": 157
+    },
+    {
+      "rank": 813,
+      "lemma": "wojsko",
+      "count": 157
+    },
+    {
+      "rank": 814,
+      "lemma": "oddać",
+      "count": 156
+    },
+    {
+      "rank": 815,
+      "lemma": "podpisać",
+      "count": 156
+    },
+    {
+      "rank": 816,
+      "lemma": "profesor",
+      "count": 156
+    },
+    {
+      "rank": 817,
+      "lemma": "sierpień",
+      "count": 156
+    },
+    {
+      "rank": 818,
+      "lemma": "uczyć",
+      "count": 156
+    },
+    {
+      "rank": 819,
+      "lemma": "wcale",
+      "count": 156
+    },
+    {
+      "rank": 820,
+      "lemma": "park",
+      "count": 155
+    },
+    {
+      "rank": 821,
+      "lemma": "wrzesień",
+      "count": 155
+    },
+    {
+      "rank": 822,
+      "lemma": "francuski",
+      "count": 154
+    },
+    {
+      "rank": 823,
+      "lemma": "głosować",
+      "count": 154
+    },
+    {
+      "rank": 824,
+      "lemma": "paweł",
+      "count": 154
+    },
+    {
+      "rank": 825,
+      "lemma": "wybór",
+      "count": 154
+    },
+    {
+      "rank": 826,
+      "lemma": "zwykle",
+      "count": 154
+    },
+    {
+      "rank": 827,
+      "lemma": "ogromny",
+      "count": 153
+    },
+    {
+      "rank": 828,
+      "lemma": "sieć",
+      "count": 153
+    },
+    {
+      "rank": 829,
+      "lemma": "skoro",
+      "count": 153
+    },
+    {
+      "rank": 830,
+      "lemma": "słońce",
+      "count": 153
+    },
+    {
+      "rank": 831,
+      "lemma": "znów",
+      "count": 153
+    },
+    {
+      "rank": 832,
+      "lemma": "interes",
+      "count": 152
+    },
+    {
+      "rank": 833,
+      "lemma": "niemiec",
+      "count": 152
+    },
+    {
+      "rank": 834,
+      "lemma": "podawać",
+      "count": 152
+    },
+    {
+      "rank": 835,
+      "lemma": "podobnie",
+      "count": 152
+    },
+    {
+      "rank": 836,
+      "lemma": "pozostały",
+      "count": 152
+    },
+    {
+      "rank": 837,
+      "lemma": "wykorzystać",
+      "count": 152
+    },
+    {
+      "rank": 838,
+      "lemma": "zależeć",
+      "count": 152
+    },
+    {
+      "rank": 839,
+      "lemma": "zdecydować",
+      "count": 152
+    },
+    {
+      "rank": 840,
+      "lemma": "25",
+      "count": 151
+    },
+    {
+      "rank": 841,
+      "lemma": "ciężki",
+      "count": 151
+    },
+    {
+      "rank": 842,
+      "lemma": "racja",
+      "count": 151
+    },
+    {
+      "rank": 843,
+      "lemma": "skąd",
+      "count": 151
+    },
+    {
+      "rank": 844,
+      "lemma": "tym",
+      "count": 151
+    },
+    {
+      "rank": 845,
+      "lemma": "alkohol",
+      "count": 150
+    },
+    {
+      "rank": 846,
+      "lemma": "kilkanaście",
+      "count": 150
+    },
+    {
+      "rank": 847,
+      "lemma": "metr",
+      "count": 150
+    },
+    {
+      "rank": 848,
+      "lemma": "pozostawać",
+      "count": 150
+    },
+    {
+      "rank": 849,
+      "lemma": "przedsiębiorstwo",
+      "count": 150
+    },
+    {
+      "rank": 850,
+      "lemma": "przypomnieć",
+      "count": 150
+    },
+    {
+      "rank": 851,
+      "lemma": "gdyż",
+      "count": 149
+    },
+    {
+      "rank": 852,
+      "lemma": "kochać",
+      "count": 149
+    },
+    {
+      "rank": 853,
+      "lemma": "młodzież",
+      "count": 149
+    },
+    {
+      "rank": 854,
+      "lemma": "senator",
+      "count": 149
+    },
+    {
+      "rank": 855,
+      "lemma": "skutek",
+      "count": 149
+    },
+    {
+      "rank": 856,
+      "lemma": "wyraźnie",
+      "count": 149
+    },
+    {
+      "rank": 857,
+      "lemma": "źródło",
+      "count": 149
+    },
+    {
+      "rank": 858,
+      "lemma": "jeść",
+      "count": 148
+    },
+    {
+      "rank": 859,
+      "lemma": "wiadomość",
+      "count": 148
+    },
+    {
+      "rank": 860,
+      "lemma": "światowy",
+      "count": 148
+    },
+    {
+      "rank": 861,
+      "lemma": "prywatny",
+      "count": 147
+    },
+    {
+      "rank": 862,
+      "lemma": "senat",
+      "count": 147
+    },
+    {
+      "rank": 863,
+      "lemma": "stacja",
+      "count": 147
+    },
+    {
+      "rank": 864,
+      "lemma": "warto",
+      "count": 147
+    },
+    {
+      "rank": 865,
+      "lemma": "wciąż",
+      "count": 147
+    },
+    {
+      "rank": 866,
+      "lemma": "wydarzenie",
+      "count": 147
+    },
+    {
+      "rank": 867,
+      "lemma": "obrona",
+      "count": 146
+    },
+    {
+      "rank": 868,
+      "lemma": "prawny",
+      "count": 146
+    },
+    {
+      "rank": 869,
+      "lemma": "ramię",
+      "count": 146
+    },
+    {
+      "rank": 870,
+      "lemma": "sens",
+      "count": 146
+    },
+    {
+      "rank": 871,
+      "lemma": "teatr",
+      "count": 146
+    },
+    {
+      "rank": 872,
+      "lemma": "umieć",
+      "count": 146
+    },
+    {
+      "rank": 873,
+      "lemma": "jasny",
+      "count": 145
+    },
+    {
+      "rank": 874,
+      "lemma": "obywatel",
+      "count": 145
+    },
+    {
+      "rank": 875,
+      "lemma": "przynajmniej",
+      "count": 145
+    },
+    {
+      "rank": 876,
+      "lemma": "solidarność",
+      "count": 145
+    },
+    {
+      "rank": 877,
+      "lemma": "spać",
+      "count": 145
+    },
+    {
+      "rank": 878,
+      "lemma": "wzrost",
+      "count": 145
+    },
+    {
+      "rank": 879,
+      "lemma": "zginąć",
+      "count": 145
+    },
+    {
+      "rank": 880,
+      "lemma": "łatwo",
+      "count": 145
+    },
+    {
+      "rank": 881,
+      "lemma": "agencja",
+      "count": 144
+    },
+    {
+      "rank": 882,
+      "lemma": "efekt",
+      "count": 144
+    },
+    {
+      "rank": 883,
+      "lemma": "instytucja",
+      "count": 144
+    },
+    {
+      "rank": 884,
+      "lemma": "odbywać",
+      "count": 144
+    },
+    {
+      "rank": 885,
+      "lemma": "pojawiać",
+      "count": 144
+    },
+    {
+      "rank": 886,
+      "lemma": "zgłosić",
+      "count": 144
+    },
+    {
+      "rank": 887,
+      "lemma": "pamięć",
+      "count": 143
+    },
+    {
+      "rank": 888,
+      "lemma": "parę",
+      "count": 143
+    },
+    {
+      "rank": 889,
+      "lemma": "łódź",
+      "count": 143
+    },
+    {
+      "rank": 890,
+      "lemma": "13",
+      "count": 142
+    },
+    {
+      "rank": 891,
+      "lemma": "14",
+      "count": 142
+    },
+    {
+      "rank": 892,
+      "lemma": "palec",
+      "count": 142
+    },
+    {
+      "rank": 893,
+      "lemma": "siostra",
+      "count": 142
+    },
+    {
+      "rank": 894,
+      "lemma": "wola",
+      "count": 142
+    },
+    {
+      "rank": 895,
+      "lemma": "zorganizować",
+      "count": 142
+    },
+    {
+      "rank": 896,
+      "lemma": "ów",
+      "count": 142
+    },
+    {
+      "rank": 897,
+      "lemma": "organ",
+      "count": 141
+    },
+    {
+      "rank": 898,
+      "lemma": "przynieść",
+      "count": 141
+    },
+    {
+      "rank": 899,
+      "lemma": "realizacja",
+      "count": 141
+    },
+    {
+      "rank": 900,
+      "lemma": "wyjaśnić",
+      "count": 141
+    },
+    {
+      "rank": 901,
+      "lemma": "założyć",
+      "count": 141
+    },
+    {
+      "rank": 902,
+      "lemma": "zmieniać",
+      "count": 141
+    },
+    {
+      "rank": 903,
+      "lemma": "zwać",
+      "count": 141
+    },
+    {
+      "rank": 904,
+      "lemma": "100",
+      "count": 140
+    },
+    {
+      "rank": 905,
+      "lemma": "informować",
+      "count": 140
+    },
+    {
+      "rank": 906,
+      "lemma": "klient",
+      "count": 140
+    },
+    {
+      "rank": 907,
+      "lemma": "południe",
+      "count": 140
+    },
+    {
+      "rank": 908,
+      "lemma": "prawdopodobnie",
+      "count": 140
+    },
+    {
+      "rank": 909,
+      "lemma": "produkcja",
+      "count": 140
+    },
+    {
+      "rank": 910,
+      "lemma": "propozycja",
+      "count": 140
+    },
+    {
+      "rank": 911,
+      "lemma": "sprzedaż",
+      "count": 140
+    },
+    {
+      "rank": 912,
+      "lemma": "broń",
+      "count": 139
+    },
+    {
+      "rank": 913,
+      "lemma": "dowód",
+      "count": 139
+    },
+    {
+      "rank": 914,
+      "lemma": "niemal",
+      "count": 139
+    },
+    {
+      "rank": 915,
+      "lemma": "odrzucić",
+      "count": 139
+    },
+    {
+      "rank": 916,
+      "lemma": "opłata",
+      "count": 139
+    },
+    {
+      "rank": 917,
+      "lemma": "przestać",
+      "count": 139
+    },
+    {
+      "rank": 918,
+      "lemma": "suma",
+      "count": 139
+    },
+    {
+      "rank": 919,
+      "lemma": "uczestnik",
+      "count": 139
+    },
+    {
+      "rank": 920,
+      "lemma": "armia",
+      "count": 138
+    },
+    {
+      "rank": 921,
+      "lemma": "drogi",
+      "count": 138
+    },
+    {
+      "rank": 922,
+      "lemma": "kandydat",
+      "count": 138
+    },
+    {
+      "rank": 923,
+      "lemma": "ku",
+      "count": 138
+    },
+    {
+      "rank": 924,
+      "lemma": "michał",
+      "count": 138
+    },
+    {
+      "rank": 925,
+      "lemma": "nastąpić",
+      "count": 138
+    },
+    {
+      "rank": 926,
+      "lemma": "porozumienie",
+      "count": 138
+    },
+    {
+      "rank": 927,
+      "lemma": "prokurator",
+      "count": 138
+    },
+    {
+      "rank": 928,
+      "lemma": "wystąpić",
+      "count": 138
+    },
+    {
+      "rank": 929,
+      "lemma": "zapłacić",
+      "count": 138
+    },
+    {
+      "rank": 930,
+      "lemma": "gotowy",
+      "count": 137
+    },
+    {
+      "rank": 931,
+      "lemma": "muzyka",
+      "count": 137
+    },
+    {
+      "rank": 932,
+      "lemma": "polegać",
+      "count": 137
+    },
+    {
+      "rank": 933,
+      "lemma": "skład",
+      "count": 137
+    },
+    {
+      "rank": 934,
+      "lemma": "stworzyć",
+      "count": 137
+    },
+    {
+      "rank": 935,
+      "lemma": "wolno",
+      "count": 137
+    },
+    {
+      "rank": 936,
+      "lemma": "radio",
+      "count": 136
+    },
+    {
+      "rank": 937,
+      "lemma": "stały",
+      "count": 136
+    },
+    {
+      "rank": 938,
+      "lemma": "17",
+      "count": 135
+    },
+    {
+      "rank": 939,
+      "lemma": "ilość",
+      "count": 135
+    },
+    {
+      "rank": 940,
+      "lemma": "poprzedni",
+      "count": 135
+    },
+    {
+      "rank": 941,
+      "lemma": "stanisław",
+      "count": 135
+    },
+    {
+      "rank": 942,
+      "lemma": "ubiegły",
+      "count": 135
+    },
+    {
+      "rank": 943,
+      "lemma": "wasz",
+      "count": 135
+    },
+    {
+      "rank": 944,
+      "lemma": "więzienie",
+      "count": 135
+    },
+    {
+      "rank": 945,
+      "lemma": "wykorzystywać",
+      "count": 135
+    },
+    {
+      "rank": 946,
+      "lemma": "włos",
+      "count": 135
+    },
+    {
+      "rank": 947,
+      "lemma": "błąd",
+      "count": 134
+    },
+    {
+      "rank": 948,
+      "lemma": "córka",
+      "count": 134
+    },
+    {
+      "rank": 949,
+      "lemma": "dolar",
+      "count": 134
+    },
+    {
+      "rank": 950,
+      "lemma": "energia",
+      "count": 134
+    },
+    {
+      "rank": 951,
+      "lemma": "linia",
+      "count": 134
+    },
+    {
+      "rank": 952,
+      "lemma": "objąć",
+      "count": 134
+    },
+    {
+      "rank": 953,
+      "lemma": "piątek",
+      "count": 134
+    },
+    {
+      "rank": 954,
+      "lemma": "sprzęt",
+      "count": 134
+    },
+    {
+      "rank": 955,
+      "lemma": "wiara",
+      "count": 134
+    },
+    {
+      "rank": 956,
+      "lemma": "wokół",
+      "count": 134
+    },
+    {
+      "rank": 957,
+      "lemma": "wskazywać",
+      "count": 134
+    },
+    {
+      "rank": 958,
+      "lemma": "lewy",
+      "count": 133
+    },
+    {
+      "rank": 959,
+      "lemma": "spojrzeć",
+      "count": 133
+    },
+    {
+      "rank": 960,
+      "lemma": "sprawdzić",
+      "count": 133
+    },
+    {
+      "rank": 961,
+      "lemma": "służyć",
+      "count": 133
+    },
+    {
+      "rank": 962,
+      "lemma": "zatem",
+      "count": 133
+    },
+    {
+      "rank": 963,
+      "lemma": "dodawać",
+      "count": 132
+    },
+    {
+      "rank": 964,
+      "lemma": "marzec",
+      "count": 132
+    },
+    {
+      "rank": 965,
+      "lemma": "pewny",
+      "count": 132
+    },
+    {
+      "rank": 966,
+      "lemma": "blisko",
+      "count": 131
+    },
+    {
+      "rank": 967,
+      "lemma": "komitet",
+      "count": 131
+    },
+    {
+      "rank": 968,
+      "lemma": "powierzchnia",
+      "count": 131
+    },
+    {
+      "rank": 969,
+      "lemma": "przychodzić",
+      "count": 131
+    },
+    {
+      "rank": 970,
+      "lemma": "przyjmować",
+      "count": 131
+    },
+    {
+      "rank": 971,
+      "lemma": "spokój",
+      "count": 131
+    },
+    {
+      "rank": 972,
+      "lemma": "współpraca",
+      "count": 131
+    },
+    {
+      "rank": 973,
+      "lemma": "wypowiedź",
+      "count": 131
+    },
+    {
+      "rank": 974,
+      "lemma": "dwadzieścia",
+      "count": 130
+    },
+    {
+      "rank": 975,
+      "lemma": "józef",
+      "count": 130
+    },
+    {
+      "rank": 976,
+      "lemma": "kasa",
+      "count": 130
+    },
+    {
+      "rank": 977,
+      "lemma": "listopad",
+      "count": 130
+    },
+    {
+      "rank": 978,
+      "lemma": "nieco",
+      "count": 130
+    },
+    {
+      "rank": 979,
+      "lemma": "utworzyć",
+      "count": 130
+    },
+    {
+      "rank": 980,
+      "lemma": "wyrok",
+      "count": 130
+    },
+    {
+      "rank": 981,
+      "lemma": "zdążyć",
+      "count": 130
+    },
+    {
+      "rank": 982,
+      "lemma": "jezioro",
+      "count": 129
+    },
+    {
+      "rank": 983,
+      "lemma": "lipiec",
+      "count": 129
+    },
+    {
+      "rank": 984,
+      "lemma": "rozwiązanie",
+      "count": 129
+    },
+    {
+      "rank": 985,
+      "lemma": "sześć",
+      "count": 129
+    },
+    {
+      "rank": 986,
+      "lemma": "uczucie",
+      "count": 129
+    },
+    {
+      "rank": 987,
+      "lemma": "usłyszeć",
+      "count": 129
+    },
+    {
+      "rank": 988,
+      "lemma": "wygrać",
+      "count": 129
+    },
+    {
+      "rank": 989,
+      "lemma": "40",
+      "count": 128
+    },
+    {
+      "rank": 990,
+      "lemma": "dodatkowy",
+      "count": 128
+    },
+    {
+      "rank": 991,
+      "lemma": "inwestycja",
+      "count": 128
+    },
+    {
+      "rank": 992,
+      "lemma": "jeździć",
+      "count": 128
+    },
+    {
+      "rank": 993,
+      "lemma": "lewica",
+      "count": 128
+    },
+    {
+      "rank": 994,
+      "lemma": "liczny",
+      "count": 128
+    },
+    {
+      "rank": 995,
+      "lemma": "określać",
+      "count": 128
+    },
+    {
+      "rank": 996,
+      "lemma": "sen",
+      "count": 128
+    },
+    {
+      "rank": 997,
+      "lemma": "skierować",
+      "count": 128
+    },
+    {
+      "rank": 998,
+      "lemma": "stawiać",
+      "count": 128
+    },
+    {
+      "rank": 999,
+      "lemma": "walczyć",
+      "count": 128
+    },
+    {
+      "rank": 1000,
+      "lemma": "wymienić",
+      "count": 128
+    }
+  ]
+}

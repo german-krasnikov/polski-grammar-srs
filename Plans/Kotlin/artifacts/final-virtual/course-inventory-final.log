@@ -1,0 +1,5 @@
+
+> polski-grammar-srs@1.0.0 course:inventory:check
+> node scripts/inventory-course.mjs --check
+
+PASS course inventory: 101 source files

@@ -1,0 +1,1087 @@
+{
+  "testIdentifier" : "PolskiGrammarUITests/testInventoryAuthoredMatrixAndVocabularyCopyOnSimulator()",
+  "testIdentifierURL" : "test://com.apple.xcode/PolskiGrammar/PolskiGrammarUITests/PolskiGrammarUITests/testInventoryAuthoredMatrixAndVocabularyCopyOnSimulator",
+  "testName" : "testInventoryAuthoredMatrixAndVocabularyCopyOnSimulator()",
+  "testRuns" : [
+    {
+      "activities" : [
+        {
+          "activityType" : "com.apple.dt.xctest.activity-type.internal",
+          "attachments" : [
+            {
+              "lifetime" : "deleteOnSuccess",
+              "name" : "Screen Recording 2026-09-24 at 06.03.23 PM.mp4",
+              "payloadId" : "0~hg4UTg_yVNLGhtXn38a-X76PmIr35VT4YNXCBE8hn89CKNbZKcNnBR5HnoAx3GCmzprQHU9_AIXwCNYWzch7bQ==",
+              "timestamp" : 1790265803.133,
+              "uuid" : "15881B8D-B4B3-4DAE-8028-71BFAB0F39B1"
+            }
+          ],
+          "childActivities" : [
+            {
+              "isAssociatedWithFailure" : false,
+              "startTime" : 1790265803.133,
+              "title" : "kXCTAttachmentScreenRecording"
+            }
+          ],
+          "isAssociatedWithFailure" : false,
+          "startTime" : 1790265803.103,
+          "title" : "Start Test at 2026-09-24 18:03:23.102"
+        },
+        {
+          "activityType" : "com.apple.dt.xctest.activity-type.internal",
+          "isAssociatedWithFailure" : false,
+          "startTime" : 1790265803.135,
+          "title" : "Set Up"
+        },
+        {
+          "activityType" : "com.apple.dt.xctest.activity-type.internal",
+          "childActivities" : [
+            {
+              "activityType" : "com.apple.dt.xctest.activity-type.internal",
+              "childActivities" : [
+                {
+                  "activityType" : "com.apple.dt.xctest.activity-type.internal",
+                  "isAssociatedWithFailure" : false,
+                  "startTime" : 1790265804.263,
+                  "title" : "Setting up automation session"
+                },
+                {
+                  "activityType" : "com.apple.dt.xctest.activity-type.internal",
+                  "isAssociatedWithFailure" : false,
+                  "startTime" : 1790265805.019,
+                  "title" : "Wait for dev.polski.grammarmatrix.ios to idle"
+                }
+              ],
+              "isAssociatedWithFailure" : false,
+              "startTime" : 1790265803.14,
+              "title" : "Launch dev.polski.grammarmatrix.ios"
+            }
+          ],
+          "isAssociatedWithFailure" : false,
+          "startTime" : 1790265803.139,
+          "title" : "Open dev.polski.grammarmatrix.ios"
+        },
+        {
+          "activityType" : "com.apple.dt.xctest.activity-type.internal",
+          "attachments" : [
+            {
+              "lifetime" : "deleteOnSuccess",
+              "name" : "Synthesized Event 2026-09-24 at 06.03.27 PM",
+              "payloadId" : "0~122s2T04_JTAjqYf-NgofgXnfGxAS2X9ZomPUAKFgFeuI5g2YhWITv1v9TZHPadbYNotKkaLfoxOnhK84szkkw==",
+              "timestamp" : 1790265807.199,
+              "uuid" : "9040C64C-B7A3-493C-9BA0-F6A0E9F7F5F7"
+            }
+          ],
+          "childActivities" : [
+            {
+              "activityType" : "com.apple.dt.xctest.activity-type.internal",
+              "isAssociatedWithFailure" : false,
+              "startTime" : 1790265806.714,
+              "title" : "Wait for dev.polski.grammarmatrix.ios to idle"
+            },
+            {
+              "activityType" : "com.apple.dt.xctest.activity-type.internal",
+              "isAssociatedWithFailure" : false,
+              "startTime" : 1790265806.719,
+              "title" : "Find the \"Матрица\" Button"
+            },
+            {
+              "activityType" : "com.apple.dt.xctest.activity-type.internal",
+              "isAssociatedWithFailure" : false,
+              "startTime" : 1790265806.807,
+              "title" : "Check for interrupting elements affecting \"Матрица\" Button"
+            },
+            {
+              "activityType" : "com.apple.dt.xctest.activity-type.internal",
+              "attachments" : [
+                {
+                  "lifetime" : "deleteOnSuccess",
+                  "name" : "Synthesized Event 2026-09-24 at 06.03.27 PM",
+                  "payloadId" : "0~122s2T04_JTAjqYf-NgofgXnfGxAS2X9ZomPUAKFgFeuI5g2YhWITv1v9TZHPadbYNotKkaLfoxOnhK84szkkw==",
+                  "timestamp" : 1790265807.199,
+                  "uuid" : "9040C64C-B7A3-493C-9BA0-F6A0E9F7F5F7"
+                }
+              ],
+              "childActivities" : [
+                {
+                  "isAssociatedWithFailure" : false,
+                  "startTime" : 1790265807.199,
+                  "title" : "kXCTAttachmentLegacySynthesizedEvent"
+                }
+              ],
+              "isAssociatedWithFailure" : false,
+              "startTime" : 1790265806.892,
+              "title" : "Synthesize event"
+            },
+            {
+              "activityType" : "com.apple.dt.xctest.activity-type.internal",
+              "isAssociatedWithFailure" : false,
+              "startTime" : 1790265807.2,
+              "title" : "Wait for dev.polski.grammarmatrix.ios to idle"
+            }
+          ],
+          "isAssociatedWithFailure" : false,
+          "startTime" : 1790265806.713,
+          "title" : "Tap \"Матрица\" Button"
+        },
+        {
+          "activityType" : "com.apple.dt.xctest.activity-type.internal",
+          "childActivities" : [
+            {
+              "activityType" : "com.apple.dt.xctest.activity-type.internal",
+              "childActivities" : [
+                {
+                  "activityType" : "com.apple.dt.xctest.activity-type.internal",
+                  "isAssociatedWithFailure" : false,
+                  "startTime" : 1790265809.824,
+                  "title" : "Checking existence of `\"Один небольшой словарь. Видно, что меняется при каждой операции.\" StaticText`"
+                }
+              ],
+              "isAssociatedWithFailure" : false,
+              "startTime" : 1790265809.823,
+              "title" : "Checking `Expect predicate `existsNoRetry == 1` for object \"Один небольшой словарь. Видно, что меняется при каждой операции.\" StaticText`"
+            }
+          ],
+          "isAssociatedWithFailure" : false,
+          "startTime" : 1790265808.746,
+          "title" : "Waiting 10.0s for \"Один небольшой словарь. Видно, что меняется при каждой операции.\" StaticText to exist"
+        },
+        {
+          "activityType" : "com.apple.dt.xctest.activity-type.internal",
+          "attachments" : [
+            {
+              "lifetime" : "deleteOnSuccess",
+              "name" : "Synthesized Event 2026-09-24 at 06.03.30 PM",
+              "payloadId" : "0~4FhSVhyxlov3FqG9eYMcP-eCCa5o4LODD7xXHF9EsGTvi0IE6aL0tYkYpNCqVwdI8rwQSqZJXAEIFVhiLfXI-A==",
+              "timestamp" : 1790265810.304,
+              "uuid" : "B68AE194-D43C-4A07-93C9-00437B05E218"
+            }
+          ],
+          "childActivities" : [
+            {
+              "activityType" : "com.apple.dt.xctest.activity-type.internal",
+              "isAssociatedWithFailure" : false,
+              "startTime" : 1790265809.921,
+              "title" : "Wait for dev.polski.grammarmatrix.ios to idle"
+            },
+            {
+              "activityType" : "com.apple.dt.xctest.activity-type.internal",
+              "isAssociatedWithFailure" : false,
+              "startTime" : 1790265809.925,
+              "title" : "Find the \"Слова\" Button"
+            },
+            {
+              "activityType" : "com.apple.dt.xctest.activity-type.internal",
+              "isAssociatedWithFailure" : false,
+              "startTime" : 1790265809.96,
+              "title" : "Check for interrupting elements affecting \"character.book.closed\" Button"
+            },
+            {
+              "activityType" : "com.apple.dt.xctest.activity-type.internal",
+              "attachments" : [
+                {
+                  "lifetime" : "deleteOnSuccess",
+                  "name" : "Synthesized Event 2026-09-24 at 06.03.30 PM",
+                  "payloadId" : "0~4FhSVhyxlov3FqG9eYMcP-eCCa5o4LODD7xXHF9EsGTvi0IE6aL0tYkYpNCqVwdI8rwQSqZJXAEIFVhiLfXI-A==",
+                  "timestamp" : 1790265810.304,
+                  "uuid" : "B68AE194-D43C-4A07-93C9-00437B05E218"
+                }
+              ],
+              "childActivities" : [
+                {
+                  "isAssociatedWithFailure" : false,
+                  "startTime" : 1790265810.304,
+                  "title" : "kXCTAttachmentLegacySynthesizedEvent"
+                }
+              ],
+              "isAssociatedWithFailure" : false,
+              "startTime" : 1790265810.005,
+              "title" : "Synthesize event"
+            },
+            {
+              "activityType" : "com.apple.dt.xctest.activity-type.internal",
+              "isAssociatedWithFailure" : false,
+              "startTime" : 1790265810.304,
+              "title" : "Wait for dev.polski.grammarmatrix.ios to idle"
+            }
+          ],
+          "isAssociatedWithFailure" : false,
+          "startTime" : 1790265809.921,
+          "title" : "Tap \"Слова\" Button"
+        },
+        {
+          "activityType" : "com.apple.dt.xctest.activity-type.internal",
+          "isAssociatedWithFailure" : false,
+          "startTime" : 1790265811.794,
+          "title" : "Checking existence of `StaticText (First Match)`"
+        },
+        {
+          "activityType" : "com.apple.dt.xctest.activity-type.internal",
+          "childActivities" : [
+            {
+              "activityType" : "com.apple.dt.xctest.activity-type.internal",
+              "childActivities" : [
+                {
+                  "activityType" : "com.apple.dt.xctest.activity-type.internal",
+                  "isAssociatedWithFailure" : false,
+                  "startTime" : 1790265813.087,
+                  "title" : "Checking existence of `StaticText (First Match)`"
+                }
+              ],
+              "isAssociatedWithFailure" : false,
+              "startTime" : 1790265813.086,
+              "title" : "Checking `Expect predicate `existsNoRetry == 1` for object StaticText (First Match)`"
+            }
+          ],
+          "isAssociatedWithFailure" : false,
+          "startTime" : 1790265812.007,
+          "title" : "Waiting 5.0s for StaticText (First Match) to exist"
+        },
+        {
+          "activityType" : "com.apple.dt.xctest.activity-type.internal",
+          "isAssociatedWithFailure" : false,
+          "startTime" : 1790265813.263,
+          "title" : "Find the Button (First Match)"
+        },
+        {
+          "activityType" : "com.apple.dt.xctest.activity-type.internal",
+          "isAssociatedWithFailure" : false,
+          "startTime" : 1790265813.445,
+          "title" : "Find the \"Подборка, A1\" Button"
+        },
+        {
+          "activityType" : "com.apple.dt.xctest.activity-type.internal",
+          "attachments" : [
+            {
+              "lifetime" : "deleteOnSuccess",
+              "name" : "Synthesized Event 2026-09-24 at 06.03.34 PM",
+              "payloadId" : "0~n9AuC-el4GanjanX3TL3-7CxzR1JEvXy8OEmncmTNjK83mcc8AMwsTzeURnxNOKB8NfG33RDKfy517jIXBXWhg==",
+              "timestamp" : 1790265814.132,
+              "uuid" : "BCB85627-5D0D-4B42-B1AF-A0A4AAD1C26B"
+            }
+          ],
+          "childActivities" : [
+            {
+              "activityType" : "com.apple.dt.xctest.activity-type.internal",
+              "isAssociatedWithFailure" : false,
+              "startTime" : 1790265813.624,
+              "title" : "Wait for dev.polski.grammarmatrix.ios to idle"
+            },
+            {
+              "activityType" : "com.apple.dt.xctest.activity-type.internal",
+              "isAssociatedWithFailure" : false,
+              "startTime" : 1790265813.627,
+              "title" : "Find the \"Подборка, A1\" Button"
+            },
+            {
+              "activityType" : "com.apple.dt.xctest.activity-type.internal",
+              "isAssociatedWithFailure" : false,
+              "startTime" : 1790265813.781,
+              "title" : "Check for interrupting elements affecting \"Подборка, A1\" Button"
+            },
+            {
+              "activityType" : "com.apple.dt.xctest.activity-type.internal",
+              "attachments" : [
+                {
+                  "lifetime" : "deleteOnSuccess",
+                  "name" : "Synthesized Event 2026-09-24 at 06.03.34 PM",
+                  "payloadId" : "0~n9AuC-el4GanjanX3TL3-7CxzR1JEvXy8OEmncmTNjK83mcc8AMwsTzeURnxNOKB8NfG33RDKfy517jIXBXWhg==",
+                  "timestamp" : 1790265814.132,
+                  "uuid" : "BCB85627-5D0D-4B42-B1AF-A0A4AAD1C26B"
+                }
+              ],
+              "childActivities" : [
+                {
+                  "isAssociatedWithFailure" : false,
+                  "startTime" : 1790265814.132,
+                  "title" : "kXCTAttachmentLegacySynthesizedEvent"
+                }
+              ],
+              "isAssociatedWithFailure" : false,
+              "startTime" : 1790265813.829,
+              "title" : "Synthesize event"
+            },
+            {
+              "activityType" : "com.apple.dt.xctest.activity-type.internal",
+              "isAssociatedWithFailure" : false,
+              "startTime" : 1790265814.133,
+              "title" : "Wait for dev.polski.grammarmatrix.ios to idle"
+            }
+          ],
+          "isAssociatedWithFailure" : false,
+          "startTime" : 1790265813.623,
+          "title" : "Tap \"Подборка, A1\" Button"
+        },
+        {
+          "activityType" : "com.apple.dt.xctest.activity-type.internal",
+          "childActivities" : [
+            {
+              "activityType" : "com.apple.dt.xctest.activity-type.internal",
+              "childActivities" : [
+                {
+                  "activityType" : "com.apple.dt.xctest.activity-type.internal",
+                  "isAssociatedWithFailure" : false,
+                  "startTime" : 1790265816.13,
+                  "title" : "Checking existence of `Any (First Match)`"
+                }
+              ],
+              "isAssociatedWithFailure" : false,
+              "startTime" : 1790265816.128,
+              "title" : "Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`"
+            }
+          ],
+          "isAssociatedWithFailure" : false,
+          "startTime" : 1790265815.042,
+          "title" : "Waiting 5.0s for Any (First Match) to exist"
+        },
+        {
+          "activityType" : "com.apple.dt.xctest.activity-type.internal",
+          "attachments" : [
+            {
+              "lifetime" : "deleteOnSuccess",
+              "name" : "Synthesized Event 2026-09-24 at 06.03.36 PM",
+              "payloadId" : "0~UrrRFIOo-AqpREoadZFHKdug5-pZAIlYaf65Q9O7dcCvfoIyQgKotPZAKcN-xPwjjaNJaGIuep6XB5Q8GavynA==",
+              "timestamp" : 1790265816.625,
+              "uuid" : "5F76DC1D-8253-4C8F-A0FA-12AD94EC0645"
+            }
+          ],
+          "childActivities" : [
+            {
+              "activityType" : "com.apple.dt.xctest.activity-type.internal",
+              "isAssociatedWithFailure" : false,
+              "startTime" : 1790265816.203,
+              "title" : "Wait for dev.polski.grammarmatrix.ios to idle"
+            },
+            {
+              "activityType" : "com.apple.dt.xctest.activity-type.internal",
+              "isAssociatedWithFailure" : false,
+              "startTime" : 1790265816.207,
+              "title" : "Find the Any (First Match)"
+            },
+            {
+              "activityType" : "com.apple.dt.xctest.activity-type.internal",
+              "isAssociatedWithFailure" : false,
+              "startTime" : 1790265816.256,
+              "title" : "Check for interrupting elements affecting \"Топ 100\" Button"
+            },
+            {
+              "activityType" : "com.apple.dt.xctest.activity-type.internal",
+              "attachments" : [
+                {
+                  "lifetime" : "deleteOnSuccess",
+                  "name" : "Synthesized Event 2026-09-24 at 06.03.36 PM",
+                  "payloadId" : "0~UrrRFIOo-AqpREoadZFHKdug5-pZAIlYaf65Q9O7dcCvfoIyQgKotPZAKcN-xPwjjaNJaGIuep6XB5Q8GavynA==",
+                  "timestamp" : 1790265816.625,
+                  "uuid" : "5F76DC1D-8253-4C8F-A0FA-12AD94EC0645"
+                }
+              ],
+              "childActivities" : [
+                {
+                  "isAssociatedWithFailure" : false,
+                  "startTime" : 1790265816.625,
+                  "title" : "kXCTAttachmentLegacySynthesizedEvent"
+                }
+              ],
+              "isAssociatedWithFailure" : false,
+              "startTime" : 1790265816.325,
+              "title" : "Synthesize event"
+            },
+            {
+              "activityType" : "com.apple.dt.xctest.activity-type.internal",
+              "isAssociatedWithFailure" : false,
+              "startTime" : 1790265816.625,
+              "title" : "Wait for dev.polski.grammarmatrix.ios to idle"
+            }
+          ],
+          "isAssociatedWithFailure" : false,
+          "startTime" : 1790265816.202,
+          "title" : "Tap Any (First Match)"
+        },
+        {
+          "activityType" : "com.apple.dt.xctest.activity-type.internal",
+          "attachments" : [
+            {
+              "lifetime" : "deleteOnSuccess",
+              "name" : "Debug description for `\"Готово 7100 · недоступно 93\" StaticText`_0_002F77F5-A1A4-4EC1-8991-0FD2EBDCCDC5.txt",
+              "payloadId" : "0~JhO3OgtI6KCrpXosceTK_qiPWunb_h2j8IsNfata9SJImFjeZUEeJYUiNPV5RP4LZdxvrIyXR7K22TafgtySUQ==",
+              "timestamp" : 1790265818.619,
+              "uuid" : "446E0BA0-F244-403C-82D6-98368DBDA847"
+            },
+            {
+              "lifetime" : "deleteOnSuccess",
+              "name" : "Debug description for `\"Готово 7100 · недоступно 93\" StaticText`_0_8649B6AC-2411-4CE9-B139-FF46DF24B9EF.txt",
+              "payloadId" : "0~JhO3OgtI6KCrpXosceTK_qiPWunb_h2j8IsNfata9SJImFjeZUEeJYUiNPV5RP4LZdxvrIyXR7K22TafgtySUQ==",
+              "timestamp" : 1790265819.549,
+              "uuid" : "F601D961-DC86-48C9-9FE1-51EC95DBD864"
+            },
+            {
+              "lifetime" : "deleteOnSuccess",
+              "name" : "Debug description for `\"Готово 7100 · недоступно 93\" StaticText`_0_CD395F8E-19A4-44CF-97CE-25DBD3F8B434.txt",
+              "payloadId" : "0~JhO3OgtI6KCrpXosceTK_qiPWunb_h2j8IsNfata9SJImFjeZUEeJYUiNPV5RP4LZdxvrIyXR7K22TafgtySUQ==",
+              "timestamp" : 1790265820.57,
+              "uuid" : "28BACF61-BA34-4DEA-976C-6A993403392D"
+            },
+            {
+              "lifetime" : "deleteOnSuccess",
+              "name" : "Debug description for `\"Готово 7100 · недоступно 93\" StaticText`_0_F3F8FF18-C052-4BEE-83F2-9FE6C8870900.txt",
+              "payloadId" : "0~JhO3OgtI6KCrpXosceTK_qiPWunb_h2j8IsNfata9SJImFjeZUEeJYUiNPV5RP4LZdxvrIyXR7K22TafgtySUQ==",
+              "timestamp" : 1790265821.612,
+              "uuid" : "A33ADFD5-D399-427A-A182-2D167EF15AC0"
+            },
+            {
+              "lifetime" : "deleteOnSuccess",
+              "name" : "Debug description for `\"Готово 7100 · недоступно 93\" StaticText`_0_80C08A59-E828-4D77-8196-5F5D5F7A8C1D.txt",
+              "payloadId" : "0~JhO3OgtI6KCrpXosceTK_qiPWunb_h2j8IsNfata9SJImFjeZUEeJYUiNPV5RP4LZdxvrIyXR7K22TafgtySUQ==",
+              "timestamp" : 1790265822.545,
+              "uuid" : "93630AC1-03C6-4FD6-BBFD-C9C8460E3CC7"
+            }
+          ],
+          "childActivities" : [
+            {
+              "activityType" : "com.apple.dt.xctest.activity-type.internal",
+              "attachments" : [
+                {
+                  "lifetime" : "deleteOnSuccess",
+                  "name" : "Debug description for `\"Готово 7100 · недоступно 93\" StaticText`_0_002F77F5-A1A4-4EC1-8991-0FD2EBDCCDC5.txt",
+                  "payloadId" : "0~JhO3OgtI6KCrpXosceTK_qiPWunb_h2j8IsNfata9SJImFjeZUEeJYUiNPV5RP4LZdxvrIyXR7K22TafgtySUQ==",
+                  "timestamp" : 1790265818.619,
+                  "uuid" : "446E0BA0-F244-403C-82D6-98368DBDA847"
+                }
+              ],
+              "childActivities" : [
+                {
+                  "activityType" : "com.apple.dt.xctest.activity-type.internal",
+                  "isAssociatedWithFailure" : false,
+                  "startTime" : 1790265818.556,
+                  "title" : "Checking existence of `\"Готово 7/100 · недоступно 93\" StaticText`"
+                },
+                {
+                  "activityType" : "com.apple.dt.xctest.activity-type.internal",
+                  "isAssociatedWithFailure" : false,
+                  "startTime" : 1790265818.618,
+                  "title" : "Capturing element debug description"
+                },
+                {
+                  "isAssociatedWithFailure" : false,
+                  "startTime" : 1790265818.619,
+                  "title" : "Debug description for `\"Готово 7/100 · недоступно 93\" StaticText`"
+                }
+              ],
+              "isAssociatedWithFailure" : false,
+              "startTime" : 1790265818.552,
+              "title" : "Checking `Expect predicate `existsNoRetry == 1` for object \"Готово 7/100 · недоступно 93\" StaticText`"
+            },
+            {
+              "activityType" : "com.apple.dt.xctest.activity-type.internal",
+              "attachments" : [
+                {
+                  "lifetime" : "deleteOnSuccess",
+                  "name" : "Debug description for `\"Готово 7100 · недоступно 93\" StaticText`_0_8649B6AC-2411-4CE9-B139-FF46DF24B9EF.txt",
+                  "payloadId" : "0~JhO3OgtI6KCrpXosceTK_qiPWunb_h2j8IsNfata9SJImFjeZUEeJYUiNPV5RP4LZdxvrIyXR7K22TafgtySUQ==",
+                  "timestamp" : 1790265819.549,
+                  "uuid" : "F601D961-DC86-48C9-9FE1-51EC95DBD864"
+                }
+              ],
+              "childActivities" : [
+                {
+                  "activityType" : "com.apple.dt.xctest.activity-type.internal",
+                  "isAssociatedWithFailure" : false,
+                  "startTime" : 1790265819.48,
+                  "title" : "Checking existence of `\"Готово 7/100 · недоступно 93\" StaticText`"
+                },
+                {
+                  "isAssociatedWithFailure" : false,
+                  "startTime" : 1790265819.549,
+                  "title" : "Debug description for `\"Готово 7/100 · недоступно 93\" StaticText`"
+                },
+                {
+                  "activityType" : "com.apple.dt.xctest.activity-type.internal",
+                  "isAssociatedWithFailure" : false,
+                  "startTime" : 1790265819.549,
+                  "title" : "Capturing element debug description"
+                }
+              ],
+              "isAssociatedWithFailure" : false,
+              "startTime" : 1790265819.478,
+              "title" : "Checking `Expect predicate `existsNoRetry == 1` for object \"Готово 7/100 · недоступно 93\" StaticText`"
+            },
+            {
+              "activityType" : "com.apple.dt.xctest.activity-type.internal",
+              "attachments" : [
+                {
+                  "lifetime" : "deleteOnSuccess",
+                  "name" : "Debug description for `\"Готово 7100 · недоступно 93\" StaticText`_0_CD395F8E-19A4-44CF-97CE-25DBD3F8B434.txt",
+                  "payloadId" : "0~JhO3OgtI6KCrpXosceTK_qiPWunb_h2j8IsNfata9SJImFjeZUEeJYUiNPV5RP4LZdxvrIyXR7K22TafgtySUQ==",
+                  "timestamp" : 1790265820.57,
+                  "uuid" : "28BACF61-BA34-4DEA-976C-6A993403392D"
+                }
+              ],
+              "childActivities" : [
+                {
+                  "activityType" : "com.apple.dt.xctest.activity-type.internal",
+                  "isAssociatedWithFailure" : false,
+                  "startTime" : 1790265820.512,
+                  "title" : "Checking existence of `\"Готово 7/100 · недоступно 93\" StaticText`"
+                },
+                {
+                  "isAssociatedWithFailure" : false,
+                  "startTime" : 1790265820.57,
+                  "title" : "Debug description for `\"Готово 7/100 · недоступно 93\" StaticText`"
+                },
+                {
+                  "activityType" : "com.apple.dt.xctest.activity-type.internal",
+                  "isAssociatedWithFailure" : false,
+                  "startTime" : 1790265820.57,
+                  "title" : "Capturing element debug description"
+                }
+              ],
+              "isAssociatedWithFailure" : false,
+              "startTime" : 1790265820.511,
+              "title" : "Checking `Expect predicate `existsNoRetry == 1` for object \"Готово 7/100 · недоступно 93\" StaticText`"
+            },
+            {
+              "activityType" : "com.apple.dt.xctest.activity-type.internal",
+              "attachments" : [
+                {
+                  "lifetime" : "deleteOnSuccess",
+                  "name" : "Debug description for `\"Готово 7100 · недоступно 93\" StaticText`_0_F3F8FF18-C052-4BEE-83F2-9FE6C8870900.txt",
+                  "payloadId" : "0~JhO3OgtI6KCrpXosceTK_qiPWunb_h2j8IsNfata9SJImFjeZUEeJYUiNPV5RP4LZdxvrIyXR7K22TafgtySUQ==",
+                  "timestamp" : 1790265821.612,
+                  "uuid" : "A33ADFD5-D399-427A-A182-2D167EF15AC0"
+                }
+              ],
+              "childActivities" : [
+                {
+                  "activityType" : "com.apple.dt.xctest.activity-type.internal",
+                  "isAssociatedWithFailure" : false,
+                  "startTime" : 1790265821.546,
+                  "title" : "Checking existence of `\"Готово 7/100 · недоступно 93\" StaticText`"
+                },
+                {
+                  "activityType" : "com.apple.dt.xctest.activity-type.internal",
+                  "isAssociatedWithFailure" : false,
+                  "startTime" : 1790265821.611,
+                  "title" : "Capturing element debug description"
+                },
+                {
+                  "isAssociatedWithFailure" : false,
+                  "startTime" : 1790265821.612,
+                  "title" : "Debug description for `\"Готово 7/100 · недоступно 93\" StaticText`"
+                }
+              ],
+              "isAssociatedWithFailure" : false,
+              "startTime" : 1790265821.544,
+              "title" : "Checking `Expect predicate `existsNoRetry == 1` for object \"Готово 7/100 · недоступно 93\" StaticText`"
+            },
+            {
+              "activityType" : "com.apple.dt.xctest.activity-type.internal",
+              "attachments" : [
+                {
+                  "lifetime" : "deleteOnSuccess",
+                  "name" : "Debug description for `\"Готово 7100 · недоступно 93\" StaticText`_0_80C08A59-E828-4D77-8196-5F5D5F7A8C1D.txt",
+                  "payloadId" : "0~JhO3OgtI6KCrpXosceTK_qiPWunb_h2j8IsNfata9SJImFjeZUEeJYUiNPV5RP4LZdxvrIyXR7K22TafgtySUQ==",
+                  "timestamp" : 1790265822.545,
+                  "uuid" : "93630AC1-03C6-4FD6-BBFD-C9C8460E3CC7"
+                }
+              ],
+              "childActivities" : [
+                {
+                  "activityType" : "com.apple.dt.xctest.activity-type.internal",
+                  "isAssociatedWithFailure" : false,
+                  "startTime" : 1790265822.482,
+                  "title" : "Checking existence of `\"Готово 7/100 · недоступно 93\" StaticText`"
+                },
+                {
+                  "activityType" : "com.apple.dt.xctest.activity-type.internal",
+                  "isAssociatedWithFailure" : false,
+                  "startTime" : 1790265822.544,
+                  "title" : "Capturing element debug description"
+                },
+                {
+                  "isAssociatedWithFailure" : false,
+                  "startTime" : 1790265822.545,
+                  "title" : "Debug description for `\"Готово 7/100 · недоступно 93\" StaticText`"
+                }
+              ],
+              "isAssociatedWithFailure" : false,
+              "startTime" : 1790265822.481,
+              "title" : "Checking `Expect predicate `existsNoRetry == 1` for object \"Готово 7/100 · недоступно 93\" StaticText`"
+            },
+            {
+              "activityType" : "com.apple.dt.xctest.activity-type.internal",
+              "isAssociatedWithFailure" : false,
+              "startTime" : 1790265822.545,
+              "title" : "Checking existence of `\"Готово 7/100 · недоступно 93\" StaticText`"
+            }
+          ],
+          "isAssociatedWithFailure" : false,
+          "startTime" : 1790265817.474,
+          "title" : "Waiting 5.0s for \"Готово 7/100 · недоступно 93\" StaticText to exist"
+        },
+        {
+          "activityType" : "com.apple.dt.xctest.activity-type.internal",
+          "attachments" : [
+            {
+              "lifetime" : "deleteOnSuccess",
+              "name" : "App UI hierarchy for dev.polski.grammarmatrix_0_EDCF4A3A-F73D-44C7-9C0D-801A63510004.ios",
+              "payloadId" : "0~w-pnyGKVdq0J99WwbvHp2AbggBoLj3w2BqyMJI2bsmlf5tuhTqS_Bxl-P8lwIfA6PamXW6aLG1eTYdo14RFc6w==",
+              "timestamp" : 1790265822.655,
+              "uuid" : "879F5BFA-A304-4966-B9BE-FEFC52DAABFF"
+            },
+            {
+              "lifetime" : "deleteOnSuccess",
+              "name" : "UI Snapshot 2026-09-24 at 06.03.42 PM",
+              "payloadId" : "0~UwDwjDggJ6w4FEfWRZ5mR_9GrSJbCLJtG2Kc3r-iesSycyaNSy07-XiUy5zew6529mKlhzGMZdma2S5WfsD2Rw==",
+              "timestamp" : 1790265822.656,
+              "uuid" : "68EAD237-368C-407E-863F-B04E83445D5E"
+            }
+          ],
+          "childActivities" : [
+            {
+              "activityType" : "com.apple.dt.xctest.activity-type.internal",
+              "isAssociatedWithFailure" : false,
+              "startTime" : 1790265822.591,
+              "title" : "Requesting snapshot of accessibility hierarchy for app with pid 61515"
+            },
+            {
+              "isAssociatedWithFailure" : false,
+              "startTime" : 1790265822.655,
+              "title" : "App UI hierarchy for dev.polski.grammarmatrix.ios"
+            },
+            {
+              "isAssociatedWithFailure" : false,
+              "startTime" : 1790265822.656,
+              "title" : "kXCTAttachmentLegacySnapshot"
+            }
+          ],
+          "isAssociatedWithFailure" : false,
+          "startTime" : 1790265822.591,
+          "title" : "Collecting debug information to assist test failure triage"
+        },
+        {
+          "childActivities" : [
+            {
+              "isAssociatedWithFailure" : false,
+              "title" : ""
+            }
+          ],
+          "isAssociatedWithFailure" : true,
+          "startTime" : 1790265822.665,
+          "title" : "XCTAssertTrue failed"
+        },
+        {
+          "activityType" : "com.apple.dt.xctest.activity-type.internal",
+          "attachments" : [
+            {
+              "lifetime" : "deleteOnSuccess",
+              "name" : "Debug description for `\"vocabularySelect-\" Button`_0_534BB04E-B242-4305-953B-B4ABE684C48B.txt",
+              "payloadId" : "0~fzclfqyiTEsif3d-BWzkDgV66YTcOrBdQhdTAAOIMi8uJQdbTyaK0r4nwWnQ4NAuoDT-pXfaOUoKBoQFPNfF5w==",
+              "timestamp" : 1790265823.925,
+              "uuid" : "CB744FC7-5DFB-4BBC-B23E-945A54DF4AC6"
+            },
+            {
+              "lifetime" : "deleteOnSuccess",
+              "name" : "Debug description for `\"vocabularySelect-\" Button`_0_858C773A-3AB3-469B-8AC6-782A204CA995.txt",
+              "payloadId" : "0~fzclfqyiTEsif3d-BWzkDgV66YTcOrBdQhdTAAOIMi8uJQdbTyaK0r4nwWnQ4NAuoDT-pXfaOUoKBoQFPNfF5w==",
+              "timestamp" : 1790265824.98,
+              "uuid" : "FF4B472F-B292-4723-A0F7-DB26DE330405"
+            },
+            {
+              "lifetime" : "deleteOnSuccess",
+              "name" : "Debug description for `\"vocabularySelect-\" Button`_0_D58D4117-0D9D-4798-AEAA-23408BA9D5B3.txt",
+              "payloadId" : "0~fzclfqyiTEsif3d-BWzkDgV66YTcOrBdQhdTAAOIMi8uJQdbTyaK0r4nwWnQ4NAuoDT-pXfaOUoKBoQFPNfF5w==",
+              "timestamp" : 1790265825.936,
+              "uuid" : "6CC3D055-72BC-49C9-B9D7-E07448419141"
+            },
+            {
+              "lifetime" : "deleteOnSuccess",
+              "name" : "Debug description for `\"vocabularySelect-\" Button`_0_AE884153-A55B-430D-8096-0160707EA7A9.txt",
+              "payloadId" : "0~fzclfqyiTEsif3d-BWzkDgV66YTcOrBdQhdTAAOIMi8uJQdbTyaK0r4nwWnQ4NAuoDT-pXfaOUoKBoQFPNfF5w==",
+              "timestamp" : 1790265826.875,
+              "uuid" : "319DE6F1-F72A-4097-A5C7-D506C64FF024"
+            },
+            {
+              "lifetime" : "deleteOnSuccess",
+              "name" : "Debug description for `\"vocabularySelect-\" Button`_0_619EE872-665E-4F6A-89BA-0AEAC6B7C3A8.txt",
+              "payloadId" : "0~fzclfqyiTEsif3d-BWzkDgV66YTcOrBdQhdTAAOIMi8uJQdbTyaK0r4nwWnQ4NAuoDT-pXfaOUoKBoQFPNfF5w==",
+              "timestamp" : 1790265827.903,
+              "uuid" : "43B2B2F4-D335-428A-81D3-EFABB763D1EE"
+            }
+          ],
+          "childActivities" : [
+            {
+              "activityType" : "com.apple.dt.xctest.activity-type.internal",
+              "attachments" : [
+                {
+                  "lifetime" : "deleteOnSuccess",
+                  "name" : "Debug description for `\"vocabularySelect-\" Button`_0_534BB04E-B242-4305-953B-B4ABE684C48B.txt",
+                  "payloadId" : "0~fzclfqyiTEsif3d-BWzkDgV66YTcOrBdQhdTAAOIMi8uJQdbTyaK0r4nwWnQ4NAuoDT-pXfaOUoKBoQFPNfF5w==",
+                  "timestamp" : 1790265823.925,
+                  "uuid" : "CB744FC7-5DFB-4BBC-B23E-945A54DF4AC6"
+                }
+              ],
+              "childActivities" : [
+                {
+                  "activityType" : "com.apple.dt.xctest.activity-type.internal",
+                  "isAssociatedWithFailure" : false,
+                  "startTime" : 1790265823.736,
+                  "title" : "Checking existence of `\"vocabularySelect-\" Button`"
+                },
+                {
+                  "activityType" : "com.apple.dt.xctest.activity-type.internal",
+                  "isAssociatedWithFailure" : false,
+                  "startTime" : 1790265823.924,
+                  "title" : "Capturing element debug description"
+                },
+                {
+                  "isAssociatedWithFailure" : false,
+                  "startTime" : 1790265823.925,
+                  "title" : "Debug description for `\"vocabularySelect-\" Button`"
+                }
+              ],
+              "isAssociatedWithFailure" : false,
+              "startTime" : 1790265823.736,
+              "title" : "Checking `Expect predicate `existsNoRetry == 1` for object \"vocabularySelect-\" Button`"
+            },
+            {
+              "activityType" : "com.apple.dt.xctest.activity-type.internal",
+              "attachments" : [
+                {
+                  "lifetime" : "deleteOnSuccess",
+                  "name" : "Debug description for `\"vocabularySelect-\" Button`_0_858C773A-3AB3-469B-8AC6-782A204CA995.txt",
+                  "payloadId" : "0~fzclfqyiTEsif3d-BWzkDgV66YTcOrBdQhdTAAOIMi8uJQdbTyaK0r4nwWnQ4NAuoDT-pXfaOUoKBoQFPNfF5w==",
+                  "timestamp" : 1790265824.98,
+                  "uuid" : "FF4B472F-B292-4723-A0F7-DB26DE330405"
+                }
+              ],
+              "childActivities" : [
+                {
+                  "activityType" : "com.apple.dt.xctest.activity-type.internal",
+                  "isAssociatedWithFailure" : false,
+                  "startTime" : 1790265824.783,
+                  "title" : "Checking existence of `\"vocabularySelect-\" Button`"
+                },
+                {
+                  "activityType" : "com.apple.dt.xctest.activity-type.internal",
+                  "isAssociatedWithFailure" : false,
+                  "startTime" : 1790265824.979,
+                  "title" : "Capturing element debug description"
+                },
+                {
+                  "isAssociatedWithFailure" : false,
+                  "startTime" : 1790265824.98,
+                  "title" : "Debug description for `\"vocabularySelect-\" Button`"
+                }
+              ],
+              "isAssociatedWithFailure" : false,
+              "startTime" : 1790265824.782,
+              "title" : "Checking `Expect predicate `existsNoRetry == 1` for object \"vocabularySelect-\" Button`"
+            },
+            {
+              "activityType" : "com.apple.dt.xctest.activity-type.internal",
+              "attachments" : [
+                {
+                  "lifetime" : "deleteOnSuccess",
+                  "name" : "Debug description for `\"vocabularySelect-\" Button`_0_D58D4117-0D9D-4798-AEAA-23408BA9D5B3.txt",
+                  "payloadId" : "0~fzclfqyiTEsif3d-BWzkDgV66YTcOrBdQhdTAAOIMi8uJQdbTyaK0r4nwWnQ4NAuoDT-pXfaOUoKBoQFPNfF5w==",
+                  "timestamp" : 1790265825.936,
+                  "uuid" : "6CC3D055-72BC-49C9-B9D7-E07448419141"
+                }
+              ],
+              "childActivities" : [
+                {
+                  "activityType" : "com.apple.dt.xctest.activity-type.internal",
+                  "isAssociatedWithFailure" : false,
+                  "startTime" : 1790265825.734,
+                  "title" : "Checking existence of `\"vocabularySelect-\" Button`"
+                },
+                {
+                  "isAssociatedWithFailure" : false,
+                  "startTime" : 1790265825.936,
+                  "title" : "Debug description for `\"vocabularySelect-\" Button`"
+                },
+                {
+                  "activityType" : "com.apple.dt.xctest.activity-type.internal",
+                  "isAssociatedWithFailure" : false,
+                  "startTime" : 1790265825.936,
+                  "title" : "Capturing element debug description"
+                }
+              ],
+              "isAssociatedWithFailure" : false,
+              "startTime" : 1790265825.733,
+              "title" : "Checking `Expect predicate `existsNoRetry == 1` for object \"vocabularySelect-\" Button`"
+            },
+            {
+              "activityType" : "com.apple.dt.xctest.activity-type.internal",
+              "attachments" : [
+                {
+                  "lifetime" : "deleteOnSuccess",
+                  "name" : "Debug description for `\"vocabularySelect-\" Button`_0_AE884153-A55B-430D-8096-0160707EA7A9.txt",
+                  "payloadId" : "0~fzclfqyiTEsif3d-BWzkDgV66YTcOrBdQhdTAAOIMi8uJQdbTyaK0r4nwWnQ4NAuoDT-pXfaOUoKBoQFPNfF5w==",
+                  "timestamp" : 1790265826.875,
+                  "uuid" : "319DE6F1-F72A-4097-A5C7-D506C64FF024"
+                }
+              ],
+              "childActivities" : [
+                {
+                  "activityType" : "com.apple.dt.xctest.activity-type.internal",
+                  "isAssociatedWithFailure" : false,
+                  "startTime" : 1790265826.694,
+                  "title" : "Checking existence of `\"vocabularySelect-\" Button`"
+                },
+                {
+                  "activityType" : "com.apple.dt.xctest.activity-type.internal",
+                  "isAssociatedWithFailure" : false,
+                  "startTime" : 1790265826.874,
+                  "title" : "Capturing element debug description"
+                },
+                {
+                  "isAssociatedWithFailure" : false,
+                  "startTime" : 1790265826.875,
+                  "title" : "Debug description for `\"vocabularySelect-\" Button`"
+                }
+              ],
+              "isAssociatedWithFailure" : false,
+              "startTime" : 1790265826.694,
+              "title" : "Checking `Expect predicate `existsNoRetry == 1` for object \"vocabularySelect-\" Button`"
+            },
+            {
+              "activityType" : "com.apple.dt.xctest.activity-type.internal",
+              "attachments" : [
+                {
+                  "lifetime" : "deleteOnSuccess",
+                  "name" : "Debug description for `\"vocabularySelect-\" Button`_0_619EE872-665E-4F6A-89BA-0AEAC6B7C3A8.txt",
+                  "payloadId" : "0~fzclfqyiTEsif3d-BWzkDgV66YTcOrBdQhdTAAOIMi8uJQdbTyaK0r4nwWnQ4NAuoDT-pXfaOUoKBoQFPNfF5w==",
+                  "timestamp" : 1790265827.903,
+                  "uuid" : "43B2B2F4-D335-428A-81D3-EFABB763D1EE"
+                }
+              ],
+              "childActivities" : [
+                {
+                  "activityType" : "com.apple.dt.xctest.activity-type.internal",
+                  "isAssociatedWithFailure" : false,
+                  "startTime" : 1790265827.699,
+                  "title" : "Checking existence of `\"vocabularySelect-\" Button`"
+                },
+                {
+                  "isAssociatedWithFailure" : false,
+                  "startTime" : 1790265827.903,
+                  "title" : "Debug description for `\"vocabularySelect-\" Button`"
+                },
+                {
+                  "activityType" : "com.apple.dt.xctest.activity-type.internal",
+                  "isAssociatedWithFailure" : false,
+                  "startTime" : 1790265827.903,
+                  "title" : "Capturing element debug description"
+                }
+              ],
+              "isAssociatedWithFailure" : false,
+              "startTime" : 1790265827.697,
+              "title" : "Checking `Expect predicate `existsNoRetry == 1` for object \"vocabularySelect-\" Button`"
+            },
+            {
+              "activityType" : "com.apple.dt.xctest.activity-type.internal",
+              "isAssociatedWithFailure" : false,
+              "startTime" : 1790265827.904,
+              "title" : "Checking existence of `\"vocabularySelect-\" Button`"
+            }
+          ],
+          "isAssociatedWithFailure" : false,
+          "startTime" : 1790265822.687,
+          "title" : "Waiting 5.0s for \"vocabularySelect-\" Button to exist"
+        },
+        {
+          "activityType" : "com.apple.dt.xctest.activity-type.internal",
+          "attachments" : [
+            {
+              "lifetime" : "deleteOnSuccess",
+              "name" : "App UI hierarchy for dev.polski.grammarmatrix_0_CB62A627-18DB-4F39-942F-4FD8EA0E1E79.ios",
+              "payloadId" : "0~DFzxX7VcEIQnjMFC3NFljA3SrZFzUdz068Bl4RR1aTCN6DS0uo694p3JxwScq2MiC2yGrwe9GOtWns39OhcEfQ==",
+              "timestamp" : 1790265828.136,
+              "uuid" : "16782D00-F48D-40E6-9BAA-A8367BC3850E"
+            },
+            {
+              "lifetime" : "deleteOnSuccess",
+              "name" : "UI Snapshot 2026-09-24 at 06.03.48 PM",
+              "payloadId" : "0~UwDwjDggJ6w4FEfWRZ5mR_9GrSJbCLJtG2Kc3r-iesSycyaNSy07-XiUy5zew6529mKlhzGMZdma2S5WfsD2Rw==",
+              "timestamp" : 1790265828.136,
+              "uuid" : "3FEA04C6-B45A-4A67-8161-79E47CA41699"
+            }
+          ],
+          "childActivities" : [
+            {
+              "activityType" : "com.apple.dt.xctest.activity-type.internal",
+              "isAssociatedWithFailure" : false,
+              "startTime" : 1790265828.079,
+              "title" : "Requesting snapshot of accessibility hierarchy for app with pid 61515"
+            },
+            {
+              "isAssociatedWithFailure" : false,
+              "startTime" : 1790265828.136,
+              "title" : "App UI hierarchy for dev.polski.grammarmatrix.ios"
+            },
+            {
+              "isAssociatedWithFailure" : false,
+              "startTime" : 1790265828.136,
+              "title" : "kXCTAttachmentLegacySnapshot"
+            }
+          ],
+          "isAssociatedWithFailure" : false,
+          "startTime" : 1790265828.079,
+          "title" : "Collecting debug information to assist test failure triage"
+        },
+        {
+          "activityType" : "com.apple.dt.xctest.activity-type.internal",
+          "attachments" : [
+            {
+              "lifetime" : "deleteOnSuccess",
+              "name" : "App UI hierarchy for dev.polski.grammarmatrix_0_A2EE6C73-F97E-4928-BFEB-FAF9E97C66E9.ios",
+              "payloadId" : "0~zfwSRq9I-oacufMpIGvc0QQmI97vhHUtfQUsFGTu37fhjmwhT97UcDGBOIXUUmgPOb6XaiL-s3t9-nrQ_kFcpg==",
+              "timestamp" : 1790265830.827,
+              "uuid" : "89C6A131-165A-44DA-840F-728E50A52F0B"
+            },
+            {
+              "lifetime" : "deleteOnSuccess",
+              "name" : "UI Snapshot 2026-09-24 at 06.03.50 PM",
+              "payloadId" : "0~UwDwjDggJ6w4FEfWRZ5mR_9GrSJbCLJtG2Kc3r-iesSycyaNSy07-XiUy5zew6529mKlhzGMZdma2S5WfsD2Rw==",
+              "timestamp" : 1790265830.827,
+              "uuid" : "6B288BF0-AD88-4148-BAE9-702CEDD8445D"
+            }
+          ],
+          "childActivities" : [
+            {
+              "activityType" : "com.apple.dt.xctest.activity-type.internal",
+              "isAssociatedWithFailure" : false,
+              "startTime" : 1790265829.358,
+              "title" : "Find the \"vocabularySelect-\" Button (retry 1)"
+            },
+            {
+              "activityType" : "com.apple.dt.xctest.activity-type.internal",
+              "isAssociatedWithFailure" : false,
+              "startTime" : 1790265830.58,
+              "title" : "Find the \"vocabularySelect-\" Button (retry 2)"
+            },
+            {
+              "activityType" : "com.apple.dt.xctest.activity-type.internal",
+              "attachments" : [
+                {
+                  "lifetime" : "deleteOnSuccess",
+                  "name" : "App UI hierarchy for dev.polski.grammarmatrix_0_A2EE6C73-F97E-4928-BFEB-FAF9E97C66E9.ios",
+                  "payloadId" : "0~zfwSRq9I-oacufMpIGvc0QQmI97vhHUtfQUsFGTu37fhjmwhT97UcDGBOIXUUmgPOb6XaiL-s3t9-nrQ_kFcpg==",
+                  "timestamp" : 1790265830.827,
+                  "uuid" : "89C6A131-165A-44DA-840F-728E50A52F0B"
+                },
+                {
+                  "lifetime" : "deleteOnSuccess",
+                  "name" : "UI Snapshot 2026-09-24 at 06.03.50 PM",
+                  "payloadId" : "0~UwDwjDggJ6w4FEfWRZ5mR_9GrSJbCLJtG2Kc3r-iesSycyaNSy07-XiUy5zew6529mKlhzGMZdma2S5WfsD2Rw==",
+                  "timestamp" : 1790265830.827,
+                  "uuid" : "6B288BF0-AD88-4148-BAE9-702CEDD8445D"
+                }
+              ],
+              "childActivities" : [
+                {
+                  "activityType" : "com.apple.dt.xctest.activity-type.internal",
+                  "isAssociatedWithFailure" : false,
+                  "startTime" : 1790265830.771,
+                  "title" : "Requesting snapshot of accessibility hierarchy for app with pid 61515"
+                },
+                {
+                  "isAssociatedWithFailure" : false,
+                  "startTime" : 1790265830.827,
+                  "title" : "App UI hierarchy for dev.polski.grammarmatrix.ios"
+                },
+                {
+                  "isAssociatedWithFailure" : false,
+                  "startTime" : 1790265830.827,
+                  "title" : "kXCTAttachmentLegacySnapshot"
+                }
+              ],
+              "isAssociatedWithFailure" : false,
+              "startTime" : 1790265830.77,
+              "title" : "Collecting debug information to assist test failure triage"
+            },
+            {
+              "activityType" : "com.apple.dt.xctest.activity-type.internal",
+              "isAssociatedWithFailure" : false,
+              "startTime" : 1790265830.837,
+              "title" : "Requesting snapshot of accessibility hierarchy for app with pid 61515"
+            },
+            {
+              "activityType" : "com.apple.dt.xctest.activity-type.internal",
+              "isAssociatedWithFailure" : false,
+              "startTime" : 1790265830.898,
+              "title" : "Requesting snapshot of accessibility hierarchy for app with pid 61515"
+            },
+            {
+              "attachments" : [
+                {
+                  "lifetime" : "deleteOnSuccess",
+                  "name" : "App UI hierarchy for dev.polski.grammarmatrix_0_ECA96136-15FD-4D5F-B0F5-64870D538B68.ios",
+                  "payloadId" : "0~g8vdt2kj_zPJI_2TFs0q0eEig6xuLzr7tqZCcE48B8fdR0PG4H5013HlN9zlJzqHcXGSQR3_CNv0nG_om5DraQ==",
+                  "timestamp" : 1790265830.957,
+                  "uuid" : "4787894D-E708-4E1D-B245-75294C226208"
+                },
+                {
+                  "lifetime" : "deleteOnSuccess",
+                  "name" : "UI Snapshot 2026-09-24 at 06.03.50 PM",
+                  "payloadId" : "0~UwDwjDggJ6w4FEfWRZ5mR_9GrSJbCLJtG2Kc3r-iesSycyaNSy07-XiUy5zew6529mKlhzGMZdma2S5WfsD2Rw==",
+                  "timestamp" : 1790265830.957,
+                  "uuid" : "3080373B-2290-4256-868B-48AA167D9DB7"
+                }
+              ],
+              "childActivities" : [
+                {
+                  "isAssociatedWithFailure" : false,
+                  "startTime" : 1790265830.957,
+                  "title" : "App UI hierarchy for dev.polski.grammarmatrix.ios"
+                },
+                {
+                  "isAssociatedWithFailure" : false,
+                  "startTime" : 1790265830.957,
+                  "title" : "kXCTAttachmentLegacySnapshot"
+                }
+              ],
+              "isAssociatedWithFailure" : true,
+              "startTime" : 1790265830.957,
+              "title" : "Failed to get matching snapshot: No matches found for first query match sequence: `Descendants matching type Button` -> `Elements matching predicate '\"vocabularySelect-\" IN identifiers'`, given input App element pid: 61515"
+            },
+            {
+              "activityType" : "com.apple.dt.xctest.activity-type.internal",
+              "isAssociatedWithFailure" : false,
+              "startTime" : 1790265830.967,
+              "title" : "Tear Down"
+            }
+          ],
+          "isAssociatedWithFailure" : true,
+          "startTime" : 1790265828.146,
+          "title" : "Find the \"vocabularySelect-\" Button"
+        },
+        {
+          "childActivities" : [
+            {
+              "isAssociatedWithFailure" : false,
+              "title" : ""
+            }
+          ],
+          "isAssociatedWithFailure" : true,
+          "startTime" : 1790265828.146,
+          "title" : "XCTAssertTrue failed"
+        }
+      ],
+      "device" : {
+        "architecture" : "arm64",
+        "deviceId" : "502F57FE-944F-4C27-B74F-5EC34D1B995D",
+        "deviceName" : "iPhone 17 Pro",
+        "modelName" : "iPhone 17 Pro",
+        "osBuildNumber" : "23B86",
+        "osVersion" : "26.1",
+        "platform" : "iOS Simulator"
+      },
+      "testPlanConfiguration" : {
+        "configurationId" : "1",
+        "configurationName" : "Test Scheme Action"
+      }
+    }
+  ]
+}

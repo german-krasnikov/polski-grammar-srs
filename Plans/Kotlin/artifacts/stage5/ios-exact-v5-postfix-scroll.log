@@ -1,0 +1,16 @@
+Writing result bundle at path:
+	/Users/german/Work/JS/polski-grammar-srs/Plans/Kotlin/artifacts/stage5/ios-exact-v5-postfix-scroll.xcresult
+
+2026-09-24 18:06:22.898 xcodebuild[67122:15951196] [MT] IDELaunchParametersSnapshot: debugger version lookup failed for path '<nil>': noURL
+2026-09-24 18:06:22.898 xcodebuild[67122:15951196] [MT] IDELaunchParametersSnapshot: no debugger version
+2026-09-24 18:07:05.236 xcodebuild[67122:15951196] [MT] IDETestOperationsObserverDebug: 44.254 elapsed -- Testing started completed.
+2026-09-24 18:07:05.236 xcodebuild[67122:15951196] [MT] IDETestOperationsObserverDebug: 0.000 sec, +0.000 sec -- start
+2026-09-24 18:07:05.236 xcodebuild[67122:15951196] [MT] IDETestOperationsObserverDebug: 44.254 sec, +44.254 sec -- end
+Failing tests:
+	PolskiGrammarUITests.testInventoryAuthoredMatrixAndVocabularyCopyOnSimulator()
+	PolskiGrammarUITests.testInventoryAuthoredMatrixAndVocabularyCopyOnSimulator()
+	PolskiGrammarUITests.testInventoryAuthoredMatrixAndVocabularyCopyOnSimulator()
+
+** TEST FAILED **
+
+Testing started

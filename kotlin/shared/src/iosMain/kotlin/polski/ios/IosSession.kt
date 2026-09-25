@@ -1,0 +1,145 @@
+package polski.ios
+
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import kotlin.random.Random
+import kotlin.time.Clock
+import platform.Foundation.NSDate
+import platform.Foundation.NSDateFormatter
+import platform.Foundation.NSLocale
+import platform.Foundation.NSUserDefaults
+import polski.presentation.AnswerMode
+import polski.presentation.AppAction
+import polski.presentation.AppTab
+import polski.presentation.EffectOutcome
+import polski.presentation.ExplanationMethod
+import polski.presentation.MatrixSection
+import polski.presentation.TimeCapture
+import polski.presentation.TimeSource
+import polski.presentation.TrainingStore
+import polski.srs.FsrsScheduler
+import polski.srs.Rating
+import polski.training.ExerciseFactory
+import polski.training.ExerciseIdFactory
+import polski.training.RandomSource
+
+/** SwiftUI's one scene-owned entry point. Call [close] when the scene owner is released. */
+class IosSession {
+    private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
+    private val scheduler = FsrsScheduler()
+    private val repository = IosProgressRepository(scheduler)
+    private var nextId = 0L
+    private var store = newStore()
+    private var observer: Job? = null
+    private var closed = false
+    var onState: ((String) -> Unit)? = null
+        set(value) {
+            field = value
+            if (value != null) value(snapshot(store.state.value))
+        }
+
+    init { observeAndStart() }
+
+    fun currentSnapshot(): String = snapshot(store.state.value)
+
+    /** Commands are semantic host actions; malformed values are ignored without changing session state. */
+    fun dispatch(command: String, value: String = "") {
+        if (closed) return
+        val action: AppAction = when (command) {
+            "tab" -> AppTab.entries.firstOrNull { it.name == value }?.let(AppAction::SelectTab)
+            "chain" -> AppAction.StartChain()
+            "seed" -> value.toIntOrNull()?.let(AppAction::SelectChainSeed)
+            "schedule" -> AppAction.StartSchedule
+            "skillPicker" -> AppAction.OpenSkillPicker
+            "skill" -> AppAction.ChooseSkill(value)
+            "answerMode" -> AnswerMode.entries.firstOrNull { it.name == value }?.let(AppAction::SetAnswerMode)
+            "explanationMethod" -> ExplanationMethod.entries.firstOrNull { it.name == value }?.let {
+                NSUserDefaults.standardUserDefaults.setObject(value, forKey = "explanationMethod")
+                AppAction.SetExplanationMethod(it)
+            }
+            "draft" -> AppAction.EditAnswer(value)
+            "continueIntroduction" -> AppAction.ContinueIntroduction
+            "reveal" -> store.state.value.exerciseId?.let(AppAction::Reveal)
+            "rate" -> {
+                val id = store.state.value.exerciseId
+                val rating = Rating.entries.firstOrNull { it.name == value }
+                if (id != null && rating != null) AppAction.Rate(id, rating) else null
+            }
+            "reference" -> AppAction.ToggleReference
+            "matrixSection" -> MatrixSection.entries.firstOrNull { it.name == value }?.let(AppAction::SelectMatrixSection)
+            "matrixNoun" -> AppAction.SetMatrixSelection(store.state.value.matrixSelection.copy(nounId = value))
+            "matrixAdjective" -> AppAction.SetMatrixSelection(store.state.value.matrixSelection.copy(adjectiveId = value))
+            "matrixOwner" -> AppAction.SetMatrixSelection(store.state.value.matrixSelection.copy(ownerId = value))
+            "matrixNumber" -> AppAction.SetMatrixSelection(store.state.value.matrixSelection.copy(numberId = value))
+            "matrixVerb" -> AppAction.SetMatrixSelection(store.state.value.matrixSelection.copy(verbId = value))
+            "matrixGender" -> AppAction.SetMatrixSelection(store.state.value.matrixSelection.copy(feminineGroup = value == "f"))
+            "export" -> AppAction.RequestExport
+            "reset" -> AppAction.RequestReset
+            "refresh" -> AppAction.RefreshTime
+            else -> null
+        } ?: return
+        store.dispatch(action)
+    }
+
+    fun acknowledgeEffect(id: Long, outcome: String) {
+        if (!closed) store.dispatch(AppAction.EffectAcknowledged(id, if (outcome == "completed") EffectOutcome.Completed else EffectOutcome.Skipped))
+    }
+
+    fun decideReset(id: Long, confirmed: Boolean) {
+        if (!closed) store.dispatch(AppAction.ResetDecision(id, confirmed))
+    }
+
+    /** Completion is called on the main dispatcher after validation, backup and reload. */
+    fun importJson(raw: String, completion: (String?) -> Unit) {
+        if (closed) { completion("Сессия закрыта"); return }
+        if (store.state.value.revision != store.state.value.savedRevision) {
+            completion("Дождитесь сохранения прогресса или экспортируйте JSON")
+            return
+        }
+        scope.launch {
+            val error = repository.importJson(raw)
+            if (error == null && !closed) {
+                observer?.cancel()
+                store.close()
+                store = newStore()
+                observeAndStart()
+            }
+            completion(error)
+        }
+    }
+
+    fun close() {
+        if (closed) return
+        closed = true
+        observer?.cancel()
+        store.close()
+        onState = null
+        scope.cancel()
+    }
+
+    private fun observeAndStart() {
+        observer = scope.launch { store.state.collect { onState?.invoke(snapshot(it)) } }
+        scope.launch { store.start() }
+    }
+
+    private fun newStore(): TrainingStore = TrainingStore(
+        repository, scheduler,
+        ExerciseFactory(RandomSource { Random.nextDouble() }, ExerciseIdFactory { "ios-${++nextId}" }),
+        TimeSource {
+            val now = Clock.System.now()
+            val formatter = NSDateFormatter().apply {
+                dateFormat = "yyyy-MM-dd"
+                locale = NSLocale(localeIdentifier = "en_US_POSIX")
+            }
+            TimeCapture(now, formatter.stringFromDate(NSDate(timeIntervalSinceReferenceDate = now.toEpochMilliseconds() / 1000.0 - 978307200.0)))
+        },
+        scope,
+        if (NSUserDefaults.standardUserDefaults.stringForKey("explanationMethod") == "Situations")
+            ExplanationMethod.Situations else ExplanationMethod.Logic,
+    )
+}

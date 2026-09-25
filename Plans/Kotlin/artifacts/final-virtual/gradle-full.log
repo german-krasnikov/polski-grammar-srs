@@ -1,0 +1,160 @@
+Starting a Gradle Daemon, 1 incompatible Daemon could not be reused, use --status for details
+
+> Configure project :composeApp
+w: file:///Users/german/Work/JS/polski-grammar-srs/kotlin/composeApp/build.gradle.kts:34:36: 'val runtime: String' is deprecated. Specify dependency directly.
+w: file:///Users/german/Work/JS/polski-grammar-srs/kotlin/composeApp/build.gradle.kts:35:36: 'val foundation: String' is deprecated. Specify dependency directly.
+w: file:///Users/german/Work/JS/polski-grammar-srs/kotlin/composeApp/build.gradle.kts:36:36: 'val ui: String' is deprecated. Specify dependency directly.
+w: file:///Users/german/Work/JS/polski-grammar-srs/kotlin/composeApp/build.gradle.kts:37:36: 'val material3: String' is deprecated. Specify dependency directly.
+w: file:///Users/german/Work/JS/polski-grammar-srs/kotlin/composeApp/build.gradle.kts:52:40: 'val material3: String' is deprecated. Specify dependency directly.
+w: file:///Users/german/Work/JS/polski-grammar-srs/kotlin/composeApp/build.gradle.kts:62:36: 'val material3: String' is deprecated. Specify dependency directly.
+
+> Configure project :shared
+w: ⚠️ Native task 'iosSimulatorArm64Test' is disabled
+Task 'iosSimulatorArm64Test' for target 'ios_simulator_arm64' cannot run on the current host (macos-x86_64).
+Reason: architecture mismatch - target requires ARM64, current host is X64
+Solution: To suppress this warning, add 'kotlin.native.ignoreDisabledTargets=true' to gradle.properties.
+
+w: ⚠️ Deprecated Kotlin/Native Host
+The current host platform 'macos_x64' is deprecated and will be removed in a future Kotlin release. The Kotlin/Native compiler will no longer be distributed for this host.
+Solution: Migrate your build to a non-deprecated supported host platform for Kotlin/Native.
+Learn more about Kotlin/Native target support and migration: https://kotl.in/native-targets-tiers
+
+Configuration 'jsNpmAggregated' was resolved during configuration time.
+This is a build performance and scalability issue.
+See https://github.com/gradle/gradle/issues/2298
+Run with --info for a stacktrace.
+Configuration 'jsTestNpmAggregated' was resolved during configuration time.
+This is a build performance and scalability issue.
+See https://github.com/gradle/gradle/issues/2298
+Run with --info for a stacktrace.
+Configuration 'jsNpmAggregated' was resolved during configuration time.
+This is a build performance and scalability issue.
+See https://github.com/gradle/gradle/issues/2298
+Run with --info for a stacktrace.
+Configuration 'jsTestNpmAggregated' was resolved during configuration time.
+This is a build performance and scalability issue.
+See https://github.com/gradle/gradle/issues/2298
+Run with --info for a stacktrace.
+Configuration 'wasmJsNpmAggregated' was resolved during configuration time.
+This is a build performance and scalability issue.
+See https://github.com/gradle/gradle/issues/2298
+Run with --info for a stacktrace.
+Configuration 'wasmJsTestNpmAggregated' was resolved during configuration time.
+This is a build performance and scalability issue.
+See https://github.com/gradle/gradle/issues/2298
+Run with --info for a stacktrace.
+Configuration 'wasmJsNpmAggregated' was resolved during configuration time.
+This is a build performance and scalability issue.
+See https://github.com/gradle/gradle/issues/2298
+Run with --info for a stacktrace.
+Configuration 'wasmJsTestNpmAggregated' was resolved during configuration time.
+This is a build performance and scalability issue.
+See https://github.com/gradle/gradle/issues/2298
+Run with --info for a stacktrace.
+
+> Task :kotlinKotlinNpmCachesSetup
+> Task :kotlinNodeJsSetup UP-TO-DATE
+> Task :kotlinRestoreYarnLock UP-TO-DATE
+> Task :kotlinYarnSetup UP-TO-DATE
+> Task :shared:jsPackageJson UP-TO-DATE
+> Task :composeApp:jsPackageJson UP-TO-DATE
+> Task :composeApp:jsTestPackageJson UP-TO-DATE
+> Task :shared:jsTestPackageJson UP-TO-DATE
+> Task :composeApp:jsPublicPackageJson UP-TO-DATE
+> Task :composeApp:jsTestPublicPackageJson UP-TO-DATE
+> Task :shared:jsPublicPackageJson UP-TO-DATE
+> Task :shared:jsTestPublicPackageJson UP-TO-DATE
+> Task :kotlinPackageJsonUmbrella UP-TO-DATE
+> Task :rootPackageJson UP-TO-DATE
+> Task :kotlinNpmInstall UP-TO-DATE
+> Task :kotlinWasmNodeJsSetup UP-TO-DATE
+> Task :kotlinWasmYarnSetup UP-TO-DATE
+> Task :kotlinWasmToolingSetup UP-TO-DATE
+> Task :kotlinStoreYarnLock UP-TO-DATE
+> Task :shared:kmpPartiallyResolvedDependenciesChecker
+> Task :shared:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared:generateCoursePackSource
+> Task :shared:compileKotlinJs UP-TO-DATE
+> Task :shared:jsProcessResources NO-SOURCE
+> Task :shared:jsMainClasses UP-TO-DATE
+> Task :shared:compileTestKotlinJs UP-TO-DATE
+> Task :shared:jsTestProcessResources NO-SOURCE
+> Task :shared:jsTestClasses UP-TO-DATE
+> Task :shared:compileTestDevelopmentExecutableKotlinJs UP-TO-DATE
+> Task :shared:jsTestTestDevelopmentExecutableCompileSync UP-TO-DATE
+> Task :shared:kotlinNodeJsSetup UP-TO-DATE
+> Task :shared:jsBrowserTest UP-TO-DATE
+> Task :kotlinWasmKotlinNpmCachesSetup
+> Task :kotlinWasmRestoreYarnLock UP-TO-DATE
+> Task :shared:wasmJsPackageJson UP-TO-DATE
+> Task :composeApp:wasmJsPackageJson UP-TO-DATE
+> Task :composeApp:wasmJsTestPackageJson UP-TO-DATE
+> Task :shared:wasmJsTestPackageJson UP-TO-DATE
+> Task :composeApp:wasmJsPublicPackageJson UP-TO-DATE
+> Task :composeApp:wasmJsTestPublicPackageJson UP-TO-DATE
+> Task :shared:wasmJsPublicPackageJson UP-TO-DATE
+> Task :shared:wasmJsTestPublicPackageJson UP-TO-DATE
+> Task :kotlinWasmPackageJsonUmbrella UP-TO-DATE
+> Task :wasmRootPackageJson UP-TO-DATE
+> Task :kotlinWasmNpmInstall UP-TO-DATE
+> Task :kotlinWasmStoreYarnLock UP-TO-DATE
+> Task :shared:compileKotlinWasmJs UP-TO-DATE
+> Task :shared:wasmJsProcessResources NO-SOURCE
+> Task :shared:wasmJsMainClasses UP-TO-DATE
+> Task :shared:compileTestKotlinWasmJs UP-TO-DATE
+> Task :shared:kotlinWasmNodeJsSetup UP-TO-DATE
+> Task :shared:wasmJsTestProcessResources NO-SOURCE
+> Task :shared:wasmJsTestClasses UP-TO-DATE
+> Task :shared:compileTestDevelopmentExecutableKotlinWasmJs UP-TO-DATE
+> Task :shared:wasmJsTestTestDevelopmentExecutableCompileSync UP-TO-DATE
+> Task :shared:wasmJsBrowserTest UP-TO-DATE
+> Task :shared:compileKotlinDesktop UP-TO-DATE
+> Task :shared:compileDesktopMainJava NO-SOURCE
+> Task :shared:desktopProcessResources NO-SOURCE
+> Task :shared:processDesktopMainResources SKIPPED
+> Task :shared:desktopMainClasses UP-TO-DATE
+> Task :shared:desktopJar UP-TO-DATE
+> Task :shared:compileTestKotlinDesktop UP-TO-DATE
+> Task :shared:compileDesktopTestJava NO-SOURCE
+> Task :shared:desktopTestProcessResources NO-SOURCE
+> Task :shared:processDesktopTestResources SKIPPED
+> Task :shared:desktopTestClasses UP-TO-DATE
+> Task :shared:desktopTest UP-TO-DATE
+> Task :composeApp:checkDesktopMainComposeLibrariesCompatibility
+> Task :composeApp:kmpPartiallyResolvedDependenciesChecker
+> Task :composeApp:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :composeApp:convertXmlValueResourcesForCommonMain NO-SOURCE
+> Task :composeApp:copyNonXmlValueResourcesForCommonMain NO-SOURCE
+> Task :composeApp:prepareComposeResourcesTaskForCommonMain NO-SOURCE
+> Task :composeApp:generateResourceAccessorsForCommonMain SKIPPED
+> Task :composeApp:convertXmlValueResourcesForDesktopMain NO-SOURCE
+> Task :composeApp:copyNonXmlValueResourcesForDesktopMain NO-SOURCE
+> Task :composeApp:prepareComposeResourcesTaskForDesktopMain NO-SOURCE
+> Task :composeApp:generateResourceAccessorsForDesktopMain SKIPPED
+> Task :composeApp:generateActualResourceCollectorsForDesktopMain SKIPPED
+> Task :composeApp:generateComposeResClass SKIPPED
+> Task :composeApp:generateExpectResourceCollectorsForCommonMain SKIPPED
+> Task :composeApp:compileKotlinDesktop UP-TO-DATE
+> Task :composeApp:compileDesktopMainJava NO-SOURCE
+> Task :composeApp:checkDesktopTestComposeLibrariesCompatibility
+> Task :composeApp:assembleDesktopMainResources UP-TO-DATE
+> Task :composeApp:desktopProcessResources UP-TO-DATE
+> Task :composeApp:processDesktopMainResources SKIPPED
+> Task :composeApp:desktopMainClasses UP-TO-DATE
+> Task :composeApp:desktopJar UP-TO-DATE
+> Task :composeApp:convertXmlValueResourcesForCommonTest NO-SOURCE
+> Task :composeApp:copyNonXmlValueResourcesForCommonTest NO-SOURCE
+> Task :composeApp:prepareComposeResourcesTaskForCommonTest NO-SOURCE
+> Task :composeApp:generateResourceAccessorsForCommonTest SKIPPED
+> Task :composeApp:convertXmlValueResourcesForDesktopTest NO-SOURCE
+> Task :composeApp:copyNonXmlValueResourcesForDesktopTest NO-SOURCE
+> Task :composeApp:prepareComposeResourcesTaskForDesktopTest NO-SOURCE
+> Task :composeApp:generateResourceAccessorsForDesktopTest SKIPPED
+> Task :composeApp:compileTestKotlinDesktop UP-TO-DATE
+> Task :composeApp:compileDesktopTestJava NO-SOURCE
+> Task :composeApp:assembleDesktopTestResources UP-TO-DATE
+> Task :composeApp:desktopTestProcessResources UP-TO-DATE
+> Task :composeApp:processDesktopTestResources SKIPPED
+> Task :composeApp:desktopTestClasses UP-TO-DATE
+> Task :composeApp:desktopTest
+> Task :shared:downloadKotlinNativeDistribution

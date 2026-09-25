@@ -1,0 +1,145 @@
+/* Visual probe only: a still glass surface with a gently shifting liquid rim. */
+:root[data-liquid-preview] {
+  --liquid-line: rgb(153 221 238 / 46%);
+  --liquid-fill: linear-gradient(136deg, rgb(185 237 247 / 30%) 0%, rgb(35 122 158 / 28%) 22%, rgb(10 53 89 / 50%) 62%, rgb(67 164 191 / 30%) 100%);
+  --liquid-rim: rgb(197 247 255 / 72%);
+  --liquid-glow: rgb(56 177 219 / 26%);
+}
+
+:root[data-liquid-preview] nav[aria-label="Основные разделы"] {
+  position: sticky;
+  top: 10px;
+  z-index: 20;
+  gap: 7px;
+  padding: 8px;
+  margin: 0 0 22px;
+  border: 1px solid var(--liquid-line);
+  border-radius: 22px 27px 20px 25px / 24px 20px 27px 19px;
+  background: linear-gradient(118deg, rgb(23 70 94 / 88%), rgb(19 54 77 / 83%) 58%, rgb(22 76 98 / 88%));
+  box-shadow: inset 0 1px rgb(228 255 255 / 28%), inset 0 -2px rgb(53 144 181 / 21%), 0 12px 30px rgb(0 14 26 / 22%);
+}
+
+:root[data-liquid-preview] nav[aria-label="Основные разделы"] button {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  flex: 1 1 0;
+  min-width: 0;
+  border: 1px solid transparent;
+  border-radius: 20px;
+  background: transparent;
+  color: #d3e6ed;
+  font-weight: 600;
+  transition: transform 180ms ease, background-color 180ms ease, border-color 180ms ease;
+}
+
+:root[data-liquid-preview] nav[aria-label="Основные разделы"] button:hover {
+  background: rgb(96 206 219 / 12%);
+  border-color: rgb(166 238 244 / 18%);
+}
+
+:root[data-liquid-preview] nav[aria-label="Основные разделы"] button.active {
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
+  color: #ffffff;
+  text-shadow: 0 1px 2px rgb(0 33 51 / 44%);
+}
+
+:root[data-liquid-preview] nav[aria-label="Основные разделы"] button.active::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -1px;
+  border: 1px solid var(--liquid-rim);
+  border-radius: 45% 37% 42% 33% / 43% 46% 54% 55%;
+  background: var(--liquid-fill);
+  box-shadow: inset 0 2px 2px rgb(244 255 255 / 47%), inset 3px 0 4px rgb(117 220 244 / 22%), inset 0 -3px 3px rgb(8 58 98 / 45%), 0 0 0 2px rgb(124 212 235 / 10%), 0 4px 14px var(--liquid-glow);
+  animation: liquid-rim 7.5s ease-in-out infinite alternate;
+}
+
+:root[data-liquid-preview] .primary,
+:root[data-liquid-preview] .reveal-button.primary {
+  position: relative;
+  isolation: isolate;
+  overflow: visible;
+  border: 1px solid transparent;
+  border-radius: 26px;
+  background: transparent;
+  box-shadow: none;
+  color: #ffffff;
+}
+
+:root[data-liquid-preview] .primary::before,
+:root[data-liquid-preview] .reveal-button.primary::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -2px;
+  border: 1px solid var(--liquid-rim);
+  border-radius: 48% 38% 45% 35% / 45% 49% 55% 51%;
+  background: var(--liquid-fill);
+  box-shadow: inset 0 2px 2px rgb(244 255 255 / 47%), inset 3px 0 4px rgb(117 220 244 / 22%), inset 0 -3px 3px rgb(8 58 98 / 45%), 0 0 0 2px rgb(124 212 235 / 10%), 0 4px 14px var(--liquid-glow);
+  animation: liquid-rim 8.5s ease-in-out infinite alternate;
+}
+
+:root[data-liquid-preview] .primary:hover,
+:root[data-liquid-preview] .reveal-button.primary:hover {
+  transform: translateY(-1px);
+}
+
+:root[data-liquid-preview] .flashcard {
+  border-color: #35546a;
+  box-shadow: 0 12px 36px rgb(0 10 22 / 20%), inset 0 1px rgb(114 213 225 / 10%);
+}
+
+@keyframes liquid-rim {
+  0% {
+    border-radius: 45% 37% 42% 33% / 43% 46% 54% 55%;
+  }
+  50% {
+    border-radius: 42% 40% 44% 37% / 47% 42% 57% 52%;
+  }
+  100% {
+    border-radius: 46% 35% 40% 36% / 45% 48% 52% 57%;
+  }
+}
+
+:root[data-theme="light"][data-liquid-preview] {
+  --liquid-line: rgb(5 111 139 / 35%);
+  --liquid-fill: linear-gradient(136deg, rgb(25 111 145 / 97%), rgb(14 84 123 / 96%) 58%, rgb(11 71 113 / 98%));
+  --liquid-rim: rgb(255 255 255 / 93%);
+  --liquid-glow: rgb(26 143 186 / 23%);
+}
+
+:root[data-theme="light"][data-liquid-preview] nav[aria-label="Основные разделы"] {
+  background: linear-gradient(115deg, #d5f4f7, #e7fbfa 54%, #d8eef7);
+  box-shadow: inset 0 1px #ffffff, 0 10px 25px rgb(40 91 112 / 12%);
+}
+
+:root[data-theme="light"][data-liquid-preview] nav[aria-label="Основные разделы"] button:not(.active) {
+  color: #16465d;
+}
+
+@media (max-width: 600px) {
+  :root[data-liquid-preview] nav[aria-label="Основные разделы"] {
+    top: 6px;
+    gap: 3px;
+    padding: 5px;
+    border-radius: 18px 21px 17px 20px / 21px 17px 20px 18px;
+  }
+  :root[data-liquid-preview] nav[aria-label="Основные разделы"] button {
+    border-radius: 13px;
+    padding: 9px 2px;
+    font-size: .64rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root[data-liquid-preview] *,
+  :root[data-liquid-preview] *::before,
+  :root[data-liquid-preview] *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
