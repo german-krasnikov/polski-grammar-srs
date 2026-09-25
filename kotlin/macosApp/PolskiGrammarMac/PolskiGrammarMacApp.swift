@@ -1,4 +1,5 @@
 import SwiftUI
+import AppKit
 import UniformTypeIdentifiers
 import PolskiShared
 
@@ -49,6 +50,16 @@ private struct TrainingSnapshot: Decodable {
         let cases: [CaseRow]
     }
     struct Skill: Decodable { let id: String; let title: String; let group: String; let reviews: Int; let correct: Int; let due: Int64 }
+    /// M12: mirrors `UiEffect` — a host must claim each id once and acknowledge it so it leaves
+    /// `pendingEffects`, or the array grows without bound and is re-sent in every snapshot.
+    struct Effect: Decodable {
+        let id: Int64
+        let kind: String
+        let exerciseId: String?
+        let filename: String?
+        let json: String?
+        let prompt: String?
+    }
     let schemaVersion: Int
     let loadStatus: String
     let tab: String
@@ -66,6 +77,7 @@ private struct TrainingSnapshot: Decodable {
     let exercise: Exercise?
     let matrix: Matrix
     let progress: [Skill]
+    let effects: [Effect]
 }
 
 private struct VocabularySnapshot: Decodable {
@@ -106,6 +118,32 @@ private enum DocumentKind: String, CaseIterable, Identifiable {
     var filename: String { "\(rawValue)-\(self == .preferences ? "v2" : "v1").json" }
 }
 
+/// C1: shown above every tab whenever `TrainingSnapshot.error` is set (e.g. a progress save
+/// failure), regardless of the selected tab, with the export action always reachable — mirrors
+/// `PolskiGrammarApp.swift`'s `ErrorBanner`.
+private struct ErrorBanner: View {
+    let message: String
+    let onExport: () -> Void
+    var body: some View {
+        HStack(alignment: .top, spacing: 10) {
+            Image(systemName: "exclamationmark.triangle.fill").foregroundStyle(.red)
+            VStack(alignment: .leading, spacing: 6) {
+                Text(message).font(.footnote).fontWeight(.semibold)
+                Button("Экспортировать JSON", action: onExport)
+                    .font(.footnote)
+                    .accessibilityIdentifier("errorBannerExport")
+            }
+            Spacer(minLength: 0)
+        }
+        .padding(12)
+        .background(Color.red.opacity(0.12), in: RoundedRectangle(cornerRadius: 12))
+        .padding(.horizontal, 12)
+        .padding(.top, 6)
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier("trainingErrorBanner")
+    }
+}
+
 private struct JSONDocument: FileDocument {
     static let readableContentTypes: [UTType] = [.json]
     var text: String
@@ -126,12 +164,18 @@ private final class MacModel: ObservableObject {
     @Published private(set) var vocabulary: VocabularySnapshot?
     @Published private(set) var preferences: PreferencesSnapshot?
     @Published var error: String?
+    @Published var resetEffectId: Int64?
+    @Published var exportEffectId: Int64?
+    @Published var exportDocument: JSONDocument?
     @Published var selectedTab = "Training" {
         didSet { if oldValue != selectedTab { trainingSession.dispatch(command: "tab", value: selectedTab) } }
     }
     private let trainingSession: MacSession
     private let vocabularySession: MacVocabularySession
     private let preferencesSession: MacPreferencesSession
+    private var claimedEffects = Set<Int64>()
+    private var vocabularyRefreshTimer: Timer?
+    private var activationObserver: NSObjectProtocol?
 
     init() {
         let root = ProcessInfo.processInfo.environment["POLSKI_MAC_DATA_DIR"]
@@ -146,6 +190,15 @@ private final class MacModel: ObservableObject {
         consumeTraining(trainingSession.currentSnapshot())
         consumeVocabulary(vocabularySession.currentSnapshot())
         consumePreferences(preferencesSession.currentSnapshot())
+        // M4: due status only changes when time passes; without a periodic nudge a word rated
+        // Again stays hidden ("На сейчас всё повторено") until some other change happens to
+        // trigger a snapshot. Mirrors the 30s tick `PolskiGrammarApp.swift` uses on iOS.
+        vocabularyRefreshTimer = Timer.scheduledTimer(withTimeInterval: 30, repeats: true) { [weak self] _ in
+            Task { @MainActor in self?.vocab("refresh") }
+        }
+        activationObserver = NotificationCenter.default.addObserver(
+            forName: NSApplication.didBecomeActiveNotification, object: nil, queue: .main
+        ) { [weak self] _ in Task { @MainActor in self?.vocab("refresh") } }
     }
     private func decode<T: Decodable>(_ type: T.Type, _ raw: String) -> T? {
         do { return try JSONDecoder().decode(type, from: Data(raw.utf8)) }
@@ -155,6 +208,39 @@ private final class MacModel: ObservableObject {
         if let next = decode(TrainingSnapshot.self, raw), next.schemaVersion == 1 {
             training = next
             if next.tab != selectedTab { selectedTab = next.tab }
+            handleEffects(next.effects)
+        }
+    }
+    /// M12: claims each effect id once so it is acknowledged and leaves `pendingEffects` instead
+    /// of growing forever. `reset` opens the confirmation alert; `export` opens the save panel;
+    /// every other kind (currently only `focus`) is acknowledged Skipped — macOS does not move
+    /// VoiceOver focus for a reveal, matching the contract's fallback for a host that does not act.
+    private func handleEffects(_ effects: [TrainingSnapshot.Effect]) {
+        for effect in effects {
+            guard claimedEffects.insert(effect.id).inserted else { continue }
+            switch effect.kind {
+            case "reset": resetEffectId = effect.id
+            case "export":
+                exportDocument = JSONDocument(text: effect.json ?? "")
+                exportEffectId = effect.id
+            default: trainingSession.acknowledgeEffect(id: effect.id, outcome: "skipped")
+            }
+        }
+    }
+    func decideReset(_ confirmed: Bool) {
+        guard let id = resetEffectId else { return }
+        resetEffectId = nil
+        send("resetDecision", "\(id)|\(confirmed)")
+    }
+    func finishExport(_ result: Result<URL, Error>) {
+        guard let id = exportEffectId else { return }
+        exportEffectId = nil
+        exportDocument = nil
+        switch result {
+        case .success: trainingSession.acknowledgeEffect(id: id, outcome: "completed")
+        case .failure(let failure):
+            trainingSession.acknowledgeEffect(id: id, outcome: "skipped")
+            error = failure.localizedDescription
         }
     }
     private func consumeVocabulary(_ raw: String) { vocabulary = decode(VocabularySnapshot.self, raw) }
@@ -178,7 +264,19 @@ private final class MacModel: ObservableObject {
     func importJSON(_ kind: DocumentKind, _ raw: String) {
         switch kind {
         case .progress: trainingSession.importJson(raw: raw) { [weak self] failure in
-            Task { @MainActor in self?.error = failure }
+            Task { @MainActor in
+                guard let self else { return }
+                // A successful import replaces the store, whose effect id counter restarts at 1;
+                // without clearing claimedEffects a reused id would look already-handled and its
+                // effect would never surface (M12).
+                if failure == nil {
+                    self.claimedEffects.removeAll()
+                    self.resetEffectId = nil
+                    self.exportEffectId = nil
+                    self.exportDocument = nil
+                }
+                self.error = failure
+            }
         }
         case .vocabulary: vocabularySession.importJson(raw: raw) { [weak self] accepted in
             if !accepted.boolValue { Task { @MainActor in self?.error = "Словарь не принят: проверьте версию и содержание файла" } }
@@ -194,13 +292,19 @@ private final class MacModel: ObservableObject {
         }
     }
     func close() {
+        vocabularyRefreshTimer?.invalidate()
+        if let activationObserver { NotificationCenter.default.removeObserver(activationObserver) }
         trainingSession.onState = nil
         vocabularySession.onState = nil
         preferencesSession.onState = nil
         trainingSession.close()
         vocabularySession.close()
     }
-    deinit { trainingSession.close(); vocabularySession.close() }
+    deinit {
+        vocabularyRefreshTimer?.invalidate()
+        if let activationObserver { NotificationCenter.default.removeObserver(activationObserver) }
+        trainingSession.close(); vocabularySession.close()
+    }
 }
 
 @main
@@ -223,32 +327,57 @@ private struct MacRootView: View {
         ("Progress", "Прогресс", "chart.bar")
     ]
     var body: some View {
-        NavigationSplitView {
-            List(selection: $model.selectedTab) {
-                ForEach(tabs, id: \.0) { tab in
-                    Label(tab.1, systemImage: tab.2)
-                        .tag(tab.0)
-                }
+        VStack(spacing: 0) {
+            // C1: state.error (e.g. a progress save failure) must stay visible above every tab,
+            // not only on Progress, with the export action reachable so no reviewed progress
+            // is lost. Mirrors PolskiGrammarApp.swift's global ErrorBanner.
+            if let error = model.training?.error {
+                ErrorBanner(message: error) { model.send("export") }
             }
-            .navigationTitle("Polski Grammar Matrix")
-            .frame(minWidth: 165)
-        } detail: {
-            Group {
-                switch model.selectedTab {
-                case "Matrix": MatrixView(model: model)
-                case "Vocabulary": VocabularyView(model: model)
-                case "Progress": ProgressViewNative(model: model)
-                default: TrainingView(model: model)
+            NavigationSplitView {
+                List(selection: $model.selectedTab) {
+                    ForEach(tabs, id: \.0) { tab in
+                        Label(tab.1, systemImage: tab.2)
+                            .tag(tab.0)
+                    }
                 }
+                .navigationTitle("Polski Grammar Matrix")
+                .frame(minWidth: 165)
+            } detail: {
+                Group {
+                    switch model.selectedTab {
+                    case "Matrix": MatrixView(model: model)
+                    case "Vocabulary": VocabularyView(model: model)
+                    case "Progress": ProgressViewNative(model: model)
+                    default: TrainingView(model: model)
+                    }
+                }
+                .frame(minWidth: 320, minHeight: 420)
+                .toolbar { SettingsLink { Label("Настройки", systemImage: "gearshape") } }
             }
-            .frame(minWidth: 320, minHeight: 420)
-            .toolbar { SettingsLink { Label("Настройки", systemImage: "gearshape") } }
         }
         .preferredColorScheme(colorScheme)
         .animation(reduceMotion ? nil : .easeInOut(duration: 0.12), value: model.selectedTab)
         .alert("Ошибка", isPresented: Binding(get: { model.error != nil }, set: { if !$0 { model.error = nil } })) {
             Button("ОК") { model.error = nil }
         } message: { Text(model.error ?? "") }
+        // M12: ConfirmReset stays pending until the user decides; cancelling the alert (e.g. the
+        // system dismiss gesture) must still resolve it as declined so it leaves pendingEffects.
+        .alert("Сбросить весь прогресс?", isPresented: Binding(
+            get: { model.resetEffectId != nil },
+            set: { if !$0 && model.resetEffectId != nil { model.decideReset(false) } }
+        )) {
+            Button("Сбросить", role: .destructive) { model.decideReset(true) }
+            Button("Отмена", role: .cancel) { model.decideReset(false) }
+        } message: { Text("Все оценки и расписание повторений будут удалены.") }
+        // M12: DownloadJson from the error banner's export action opens the save panel; success
+        // or failure (including a user cancel) both acknowledge the effect.
+        .fileExporter(isPresented: Binding(
+            get: { model.exportEffectId != nil },
+            set: { if !$0 && model.exportEffectId != nil { model.finishExport(.failure(CocoaError(.userCancelled))) } }
+        ), document: model.exportDocument, contentType: .json, defaultFilename: "polski-srs-progress") { result in
+            model.finishExport(result)
+        }
     }
     private var colorScheme: ColorScheme? {
         switch model.preferences?.appearance {
@@ -605,6 +734,8 @@ private struct ProgressViewNative: View {
                 }
                 Divider()
                 DataControls(model: model)
+                // M12: RequestReset produces a ConfirmReset effect the root alert now handles.
+                Button("Сбросить прогресс", role: .destructive) { model.send("reset") }
             }.frame(maxWidth: 760, alignment: .leading).padding(28)
         }.navigationTitle("Прогресс")
     }
