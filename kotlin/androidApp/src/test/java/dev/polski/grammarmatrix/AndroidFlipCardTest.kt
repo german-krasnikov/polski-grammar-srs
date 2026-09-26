@@ -1,37 +1,23 @@
 package dev.polski.grammarmatrix
 
 import org.junit.Assert.assertEquals
-import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
 import polski.presentation.CardEffect
-import polski.presentation.CardPhase
 import polski.srs.Rating
 import polski.ui.screens.SingleRatingGate
 import polski.ui.screens.cardEffectToPlay
-import polski.ui.screens.flipOnTap
-import polski.ui.screens.isFlipTap
 import polski.ui.screens.ratingForDrag
 
 /**
- * Behavior for the Android flash card's flip/rating/effect contract
- * (`Plans/Kotlin/FlipCardRivePlan.md` §0/FC-07/FC-10/FC-14/FC-20), exercised as plain unit tests
- * against the pure functions in `AndroidFlipCard.kt` — no Compose test rule needed.
+ * Behavior for the Android training card's rating/effect contract
+ * (`Plans/Kotlin/FlipCardRivePlan.md` §0/FC-07/FC-14/FC-20), exercised as plain unit tests against
+ * the pure functions in `AndroidFlipCard.kt` — no Compose test rule needed. D1 removed the flip
+ * itself (see `AndroidAnswerRevealComposeTest` for the expand-reveal it replaced), so the old
+ * `flipOnTap`/`isFlipTap` tests are gone with it; the swipe-rating contract below is unchanged.
  */
 class AndroidFlipCardTest {
-    @Test fun tapDoesNotFlipBeforeReveal() {
-        assertEquals(false, flipOnTap(CardPhase.Question, false))
-    }
-
-    @Test fun tapFlipsToBackOnceRevealed() {
-        assertEquals(true, flipOnTap(CardPhase.Revealed, false))
-    }
-
-    @Test fun secondTapFlipsBackToFront() {
-        assertEquals(false, flipOnTap(CardPhase.Revealed, true))
-    }
-
     @Test fun leftSwipePastThresholdSelectsAgain() {
         assertEquals(Rating.Again, ratingForDrag(-80f, 72f))
     }
@@ -42,21 +28,6 @@ class AndroidFlipCardTest {
 
     @Test fun shortSwipeSelectsNoRating() {
         assertNull(ratingForDrag(20f, 72f))
-    }
-
-    @Test fun negligibleMovementIsAFlipTap() {
-        assertTrue(isFlipTap(dx = 3f, dy = 2f, tapSlopPx = 12f))
-    }
-
-    @Test fun aShortButNoticeableSwipeIsNeitherATapNorARating() {
-        // FC-07: a short/vertical swipe must not rate, and — since it clearly wasn't a tap either —
-        // must not surprise the user by flipping the card.
-        assertFalse(isFlipTap(dx = 40f, dy = 2f, tapSlopPx = 12f))
-        assertNull(ratingForDrag(40f, thresholdPx = 72f))
-    }
-
-    @Test fun verticalScrollAttemptIsNotAFlipTap() {
-        assertFalse(isFlipTap(dx = 2f, dy = 40f, tapSlopPx = 12f))
     }
 
     @Test fun goodEffectIsRememberedWhenMotionIsNotReduced() {

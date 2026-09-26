@@ -4,6 +4,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.FilledTonalButton
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -159,13 +161,12 @@ internal fun AndroidTrainingScreen(
                             Text("Перейти к заданию")
                         }
                     } else {
-                    // Flip is purely visual host-local state (plan §0/FC-10): front = question,
-                    // back = revealed answer. A single rating gate is shared by the buttons and the
-                    // back-face swipe below so exactly one gesture/tap ever rates this card (FC-07/20).
+                    // D1: no flip — the question stays visible and the answer expands downward
+                    // below it (AndroidAnswerReveal/AndroidStaggeredReveal in AndroidFlipCard.kt).
+                    // A single rating gate is shared by the buttons and the answer panel's swipe
+                    // gesture so exactly one gesture/tap ever rates this card (FC-07/20).
                     var cardEffect by remember(exercise.id) { mutableStateOf<CardEffect?>(null) }
-                    var ringsExpanded by remember(exercise.id) { mutableStateOf(false) }
                     val ratingGate = remember(exercise.id) { SingleRatingGate() }
-                    val riveEnabled = !reduceMotion && !RiveMeasurementVariant.riveDisabled
                     fun rate(rating: Rating) {
                         val effect = ratingGate.rate(rating, reduceMotion, RiveMeasurementVariant.riveDisabled, dispatch = {
                             dispatch(AppAction.Rate(exercise.id, it))
@@ -173,24 +174,33 @@ internal fun AndroidTrainingScreen(
                         if (effect != null) cardEffect = effect
                     }
                     Box(Modifier.fillMaxWidth()) {
-                        // FC2-06/07/08/R2: the flip-in-progress ring cue sits behind the card in
-                        // z-order (composed first in this Box), never over the question/answer text.
-                        if (riveEnabled) AndroidFlipRingsOverlay(ringsExpanded)
-                        AndroidFlipCard(exercise.id, state.phase, reduceMotion,
-                            onRate = { rating -> if (swipeRatingEnabled) rate(rating) },
-                            onRingsExpandedChange = { if (riveEnabled) ringsExpanded = it },
-                            front = {
-                                Column(verticalArrangement = Arrangement.spacedBy(18.dp)) {
-                                    Text("ИСХОДНОЕ ПРЕДЛОЖЕНИЕ", style = MaterialTheme.typography.labelSmall,
-                                        color = MaterialTheme.colorScheme.onSurfaceVariant)
-                                    Text(contrastAnnotatedText(sentenceHighlightParts(exercise.source, exercise.changes, ChangeSide.Before),
-                                        MaterialTheme.colorScheme.error), style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.SemiBold)
-                                    Surface(shape = RoundedCornerShape(18.dp), color = MaterialTheme.colorScheme.secondaryContainer,
-                                        modifier = Modifier.fillMaxWidth()) {
-                                        Text("${exercise.prompt}\n${method.promptLead}", modifier = Modifier.padding(16.dp),
-                                            style = MaterialTheme.typography.titleMedium,
-                                            color = MaterialTheme.colorScheme.onSecondaryContainer)
-                                    }
+                        Column(verticalArrangement = Arrangement.spacedBy(18.dp)) {
+                            Column(
+                                Modifier.fillMaxWidth().then(
+                                    // D1: a tap anywhere on the still-visible question reveals the
+                                    // answer exactly once — only while there is a reveal to trigger;
+                                    // once Revealed this modifier is gone, so a stray tap here does
+                                    // nothing. Nested interactive descendants (the mode chooser, the
+                                    // textarea, the button itself) consume their own taps first, so
+                                    // this never double-fires alongside them.
+                                    if (state.phase == CardPhase.Question) Modifier.clickable(
+                                        interactionSource = remember { MutableInteractionSource() },
+                                        indication = null,
+                                    ) { dispatch(AppAction.Reveal(exercise.id)) } else Modifier
+                                ),
+                                verticalArrangement = Arrangement.spacedBy(18.dp),
+                            ) {
+                                Text("ИСХОДНОЕ ПРЕДЛОЖЕНИЕ", style = MaterialTheme.typography.labelSmall,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant)
+                                Text(contrastAnnotatedText(sentenceHighlightParts(exercise.source, exercise.changes, ChangeSide.Before),
+                                    MaterialTheme.colorScheme.error), style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.SemiBold)
+                                Surface(shape = RoundedCornerShape(18.dp), color = MaterialTheme.colorScheme.secondaryContainer,
+                                    modifier = Modifier.fillMaxWidth()) {
+                                    Text("${exercise.prompt}\n${method.promptLead}", modifier = Modifier.padding(16.dp),
+                                        style = MaterialTheme.typography.titleMedium,
+                                        color = MaterialTheme.colorScheme.onSecondaryContainer)
+                                }
+                                if (state.phase == CardPhase.Question) {
                                     Text(method.retrieve)
                                     AndroidChoiceMenu(
                                         "Ответ",
@@ -213,61 +223,73 @@ internal fun AndroidTrainingScreen(
                                     ) { Text(if (state.answerMode == AnswerMode.Typed) "Проверить ответ" else "Показать ответ",
                                         modifier = Modifier.padding(vertical = 7.dp)) }
                                 }
-                            },
-                            back = {
-                                Column(Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(18.dp)) {
-                                    Text("Эталон", style = MaterialTheme.typography.labelLarge)
-                                    Text(contrastAnnotatedText(sentenceHighlightParts(exercise.expected, exercise.changes, ChangeSide.After),
-                                        MaterialTheme.colorScheme.primary), style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.SemiBold)
-                                    if (exercise.accepted.isNotEmpty()) Text("Также: ${exercise.accepted.joinToString(" / ")}")
-                                    if (state.answerMode == AnswerMode.Typed) {
-                                        Text(if (state.evaluation?.correct == true) "Совпадает с правильным вариантом" else "Сравни свой ответ с эталоном")
-                                        Text(state.frozenAnswer?.takeIf(String::isNotEmpty) ?: "Ответ не введён")
-                                    }
-                                    if (state.explanationMethod == ExplanationMethod.Situations) {
-                                        Text(method.feedback)
-                                        Text(exercise.explanation)
-                                    }
-                                    Text("Что изменилось", style = MaterialTheme.typography.titleMedium)
-                                    exercise.changes.forEach { change ->
-                                        Column {
-                                            Row(horizontalArrangement = Arrangement.spacedBy(5.dp)) {
-                                                Text(contrastAnnotatedText(changeHighlightParts(change.from, change.to, ChangeSide.Before),
-                                                    MaterialTheme.colorScheme.error))
-                                                Text("→")
-                                                Text(contrastAnnotatedText(changeHighlightParts(change.from, change.to, ChangeSide.After),
-                                                    MaterialTheme.colorScheme.primary), fontWeight = FontWeight.Bold)
-                                            }
-                                            Text(change.reason, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                                        }
-                                    }
-                                    Surface(shape = RoundedCornerShape(18.dp), color = MaterialTheme.colorScheme.tertiaryContainer,
-                                        modifier = Modifier.fillMaxWidth()) {
-                                        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                                            Text("ЗАПОМНИ", style = MaterialTheme.typography.labelMedium,
-                                                color = MaterialTheme.colorScheme.onTertiaryContainer)
-                                            Text(skillById(exercise.primarySkill).formula, style = MaterialTheme.typography.titleMedium,
-                                                fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onTertiaryContainer)
-                                            if (state.explanationMethod == ExplanationMethod.Logic) {
-                                                Text(method.feedback, color = MaterialTheme.colorScheme.onTertiaryContainer)
-                                                Text(exercise.explanation, color = MaterialTheme.colorScheme.onTertiaryContainer)
-                                            }
-                                            Row(horizontalArrangement = Arrangement.spacedBy(5.dp)) {
-                                                Text(contrastAnnotatedText(changeHighlightParts(presentation.focusBefore, presentation.focusAfter, ChangeSide.Before),
-                                                    MaterialTheme.colorScheme.error))
-                                                Text("→")
-                                                Text(contrastAnnotatedText(changeHighlightParts(presentation.focusBefore, presentation.focusAfter, ChangeSide.After),
-                                                    MaterialTheme.colorScheme.primary))
+                            }
+                            if (state.phase == CardPhase.Revealed) {
+                                AndroidAnswerReveal(reduceMotion, onRate = { rating -> if (swipeRatingEnabled) rate(rating) }) {
+                                    AndroidStaggeredReveal(0, reduceMotion) {
+                                        Column(verticalArrangement = Arrangement.spacedBy(18.dp)) {
+                                            Text("Эталон", style = MaterialTheme.typography.labelLarge)
+                                            Text(contrastAnnotatedText(sentenceHighlightParts(exercise.expected, exercise.changes, ChangeSide.After),
+                                                MaterialTheme.colorScheme.primary), style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.SemiBold)
+                                            if (exercise.accepted.isNotEmpty()) Text("Также: ${exercise.accepted.joinToString(" / ")}")
+                                            if (state.answerMode == AnswerMode.Typed) {
+                                                Text(if (state.evaluation?.correct == true) "Совпадает с правильным вариантом" else "Сравни свой ответ с эталоном")
+                                                Text(state.frozenAnswer?.takeIf(String::isNotEmpty) ?: "Ответ не введён")
                                             }
                                         }
                                     }
-                                    Text(method.review)
-                                    if (swipeRatingEnabled) Text("Свайп влево — повторить · вправо — вспомнил",
-                                        style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                                    AndroidRatingActions(state, ::rate)
+                                    AndroidStaggeredReveal(1, reduceMotion) {
+                                        Column(verticalArrangement = Arrangement.spacedBy(18.dp)) {
+                                            if (state.explanationMethod == ExplanationMethod.Situations) {
+                                                Text(method.feedback)
+                                                Text(exercise.explanation)
+                                            }
+                                            Text("Что изменилось", style = MaterialTheme.typography.titleMedium)
+                                            exercise.changes.forEach { change ->
+                                                Column {
+                                                    Row(horizontalArrangement = Arrangement.spacedBy(5.dp)) {
+                                                        Text(contrastAnnotatedText(changeHighlightParts(change.from, change.to, ChangeSide.Before),
+                                                            MaterialTheme.colorScheme.error))
+                                                        Text("→")
+                                                        Text(contrastAnnotatedText(changeHighlightParts(change.from, change.to, ChangeSide.After),
+                                                            MaterialTheme.colorScheme.primary), fontWeight = FontWeight.Bold)
+                                                    }
+                                                    Text(change.reason, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                                                }
+                                            }
+                                            Surface(shape = RoundedCornerShape(18.dp), color = MaterialTheme.colorScheme.tertiaryContainer,
+                                                modifier = Modifier.fillMaxWidth()) {
+                                                Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                                                    Text("ЗАПОМНИ", style = MaterialTheme.typography.labelMedium,
+                                                        color = MaterialTheme.colorScheme.onTertiaryContainer)
+                                                    Text(skillById(exercise.primarySkill).formula, style = MaterialTheme.typography.titleMedium,
+                                                        fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onTertiaryContainer)
+                                                    if (state.explanationMethod == ExplanationMethod.Logic) {
+                                                        Text(method.feedback, color = MaterialTheme.colorScheme.onTertiaryContainer)
+                                                        Text(exercise.explanation, color = MaterialTheme.colorScheme.onTertiaryContainer)
+                                                    }
+                                                    Row(horizontalArrangement = Arrangement.spacedBy(5.dp)) {
+                                                        Text(contrastAnnotatedText(changeHighlightParts(presentation.focusBefore, presentation.focusAfter, ChangeSide.Before),
+                                                            MaterialTheme.colorScheme.error))
+                                                        Text("→")
+                                                        Text(contrastAnnotatedText(changeHighlightParts(presentation.focusBefore, presentation.focusAfter, ChangeSide.After),
+                                                            MaterialTheme.colorScheme.primary))
+                                                    }
+                                                }
+                                            }
+                                            Text(method.review)
+                                        }
+                                    }
+                                    AndroidStaggeredReveal(2, reduceMotion) {
+                                        Column(verticalArrangement = Arrangement.spacedBy(18.dp)) {
+                                            if (swipeRatingEnabled) Text("Свайп влево — повторить · вправо — вспомнил",
+                                                style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                                            AndroidRatingActions(state, ::rate)
+                                        }
+                                    }
                                 }
-                            },
-                        )
+                            }
+                        }
                         AndroidRiveOverlay(cardEffect) { cardEffect = null }
                     }
                     }

@@ -1,43 +1,37 @@
 package polski.ui.screens
 
-import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.MutableTransitionState
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.clickable
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.slideInVertically
 import androidx.compose.foundation.gestures.awaitEachGesture
 import androidx.compose.foundation.gestures.awaitFirstDown
-import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.PointerInputScope
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.input.pointer.positionChange
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
-import kotlinx.coroutines.launch
 import polski.presentation.CardEffect
-import polski.presentation.CardPhase
 import polski.presentation.cardEffectFor
 import polski.srs.Rating
 
 /**
- * Pure host-local flip/rating contract for the Android flash card
- * (`Plans/Kotlin/FlipCardRivePlan.md` §0, FC-10). The flip is purely visual: it never dispatches
- * an [polski.presentation.AppAction] and never reads or mutates [CardPhase]/FSRS state. These are
- * plain functions/classes (no Compose dependency) so they are unit-testable from
- * `androidApp/src/test` without a Compose test rule — see `AndroidFlipCardTest.kt`.
+ * Pure host-local rating contract for the Android training card
+ * (`Plans/Kotlin/FlipCardRivePlan.md` §0/FC-07/FC-20). D1 replaced the 3D flip this file used to
+ * host with a downward expand-reveal (see [AndroidAnswerReveal]/[AndroidStaggeredReveal] below) —
+ * these stay plain functions/classes (no Compose dependency) so they are unit-testable from
+ * `androidApp/src/test` without a Compose test rule; see `AndroidFlipCardTest.kt`.
  */
-
-/** A tap only turns the card while [CardPhase.Revealed] — there is no answer face before reveal. */
-fun flipOnTap(phase: CardPhase, current: Boolean): Boolean = if (phase == CardPhase.Revealed) !current else current
 
 /** Which rating (if any) a completed horizontal drag of [dragX] px selects, given [thresholdPx]. */
 fun ratingForDrag(dragX: Float, thresholdPx: Float): Rating? = when {
@@ -46,22 +40,15 @@ fun ratingForDrag(dragX: Float, thresholdPx: Float): Rating? = when {
     else -> null
 }
 
-/**
- * Whether a gesture that moved ([dx], [dy]) px in total, without reaching a rating threshold, is a
- * tap (flips the card) rather than an aborted/vertical swipe (does nothing, per FC-07: a short or
- * vertical swipe must not rate — nor should it surprise the user by flipping the card either).
- */
-fun isFlipTap(dx: Float, dy: Float, tapSlopPx: Float): Boolean = kotlin.math.abs(dx) < tapSlopPx && kotlin.math.abs(dy) < tapSlopPx
-
 /** The Rive effect to play for [rating], or `null` when reduced motion or a measurement variant disables it (FC-16/20). */
 fun cardEffectToPlay(rating: Rating, reduceMotion: Boolean, riveDisabledForMeasurement: Boolean): CardEffect? =
     if (reduceMotion || riveDisabledForMeasurement) null else cardEffectFor(rating)
 
 /**
  * Ensures exactly one rating reaches [dispatch] per revealed card (FC-07/20), no matter how many
- * gestures or buttons race for it — the rating buttons and the back-face swipe both go through the
- * same gate instance. Plain class, not Compose state, so `remember { SingleRatingGate() }` keeps
- * one per card without pulling in a test rule to verify it.
+ * gestures or buttons race for it — the rating buttons and the answer panel's swipe both go
+ * through the same gate instance. Plain class, not Compose state, so `remember { SingleRatingGate() }`
+ * keeps one per card without pulling in a test rule to verify it.
  */
 class SingleRatingGate {
     private var rated = false
@@ -76,23 +63,15 @@ class SingleRatingGate {
 }
 
 /**
- * One recognizer for the revealed back-face (FC-04/07/14): a tap flips the card, a horizontal drag
- * past [thresholdPx] rates it, and anything in between (a short or vertical swipe) does neither.
- * Deliberately a single detector rather than a `clickable` layered over a separate drag
- * `pointerInput` — stacking those two independently let the ancestor's tap win over the
- * descendant's drag in practice, silently swallowing every swipe (see the plan's evidence log).
- *
- * Consumption is gated on confirmed horizontal intent, mirroring
- * [androidx.compose.foundation.gestures.detectHorizontalDragGestures]'s own touch-slop
- * cancellation: while the drag is still undecided (under [tapSlopPx]) nothing is consumed, and the
- * moment it turns out vertical-dominant this bails without ever consuming a change. The training
- * screen wraps this card in `Modifier.verticalScroll`, and Compose's Main pass gives this
- * descendant first look at every pointer move — consuming unconditionally (as an earlier version
- * did) silently ate every scroll attempt that happened to start on the card. Only once horizontal
- * dominance is confirmed does this start consuming, so a vertical drag still reaches the ancestor
- * scrollable untouched.
+ * Swipe-to-rate gesture for [AndroidAnswerReveal]'s panel (D1/D3 successor to the old flip's
+ * back-face gesture, now without a tap-to-flip branch since there is nothing left to flip back
+ * to): a horizontal drag past [thresholdPx] rates the card via [onRate]; a short or
+ * vertical-dominant drag does nothing. Consumption is gated on confirmed horizontal intent
+ * (mirroring [androidx.compose.foundation.gestures.detectHorizontalDragGestures]'s own touch-slop
+ * cancellation) so a vertical drag is never consumed here and still reaches the screen's own
+ * `verticalScroll` untouched.
  */
-private suspend fun PointerInputScope.detectFlipOrSwipe(thresholdPx: Float, tapSlopPx: Float, onTap: () -> Unit, onRate: (Rating) -> Unit) {
+private suspend fun PointerInputScope.detectSwipeRating(thresholdPx: Float, tapSlopPx: Float, onRate: (Rating) -> Unit) {
     awaitEachGesture {
         val down = awaitFirstDown(requireUnconsumed = false)
         var dx = 0f
@@ -113,73 +92,62 @@ private suspend fun PointerInputScope.detectFlipOrSwipe(thresholdPx: Float, tapS
             }
             change.consume()
         }
-        val rating = ratingForDrag(dx, thresholdPx)
-        when {
-            rating != null -> onRate(rating)
-            isFlipTap(dx, dy, tapSlopPx) -> onTap()
-        }
+        ratingForDrag(dx, thresholdPx)?.let(onRate)
     }
 }
 
 /**
- * 3D flip container (FC-10): [front] is the question face, [back] the revealed answer face. Only
- * one face is composed at a time (split at the 90° midpoint), so the hidden face is never in the
- * accessibility tree and never receives touch — simpler than mounting both and hiding one, and
- * equivalent for a11y since there is nothing on the back face before [CardPhase.Revealed] anyway.
- * `reduceMotion` (the app's [polski.preferences.Motion.Reduced] setting) snaps instead of
- * animating, per the plan's shared reduced-motion contract (FC-09/12/14/20). [onRate] shares the
- * caller's [SingleRatingGate] with the rating buttons inside [back] (FC-07/20).
- *
- * [onRingsExpandedChange] drives the flip-in-progress ring cue (`Plans/Kotlin/FlipCardRivePlan.md`
- * FC2-06/07/08, R2): `true` right as an animated (non-reduced-motion) rotation starts, `false` once
- * it fully settles — the same two points the web host's `applyFlip` toggles `IsExpanded` at. An
- * [Animatable] replaces v1's `animateFloatAsState` specifically so this function can `await` the
- * rotation's completion instead of guessing its duration a second time.
+ * D1: the training card's answer panel — expands downward below the always-visible question the
+ * moment it enters composition (the caller only composes this once [polski.presentation.CardPhase]
+ * becomes `Revealed`, so its first composition IS the reveal moment). [MutableTransitionState]
+ * starts at `false` while immediately targeting `true`: the standard idiom for playing an enter
+ * transition on a composable's very first appearance — passing a plain `visible = true` from frame
+ * one would have nothing to transition from and would just snap. `reduceMotion` skips the
+ * transition and renders [content] directly. [onRate] shares the caller's [SingleRatingGate] with
+ * the rating buttons inside [content] (FC-07/20) via [detectSwipeRating].
  */
 @Composable
-fun AndroidFlipCard(
-    exerciseId: String,
-    phase: CardPhase,
+fun AndroidAnswerReveal(
     reduceMotion: Boolean,
     onRate: (Rating) -> Unit,
-    onRingsExpandedChange: (Boolean) -> Unit = {},
-    front: @Composable () -> Unit,
-    back: @Composable () -> Unit,
+    content: @Composable () -> Unit,
 ) {
-    var flipped by remember(exerciseId) { mutableStateOf(false) }
-    val angleAnim = remember(exerciseId) { Animatable(0f) }
-    val scope = rememberCoroutineScope()
-    suspend fun setFlipped(target: Boolean) {
-        if (flipped == target) return
-        flipped = target
-        val to = if (target) 180f else 0f
-        if (reduceMotion) { angleAnim.snapTo(to); return }
-        onRingsExpandedChange(true)
-        angleAnim.animateTo(to, tween(500))
-        onRingsExpandedChange(false)
+    if (reduceMotion) {
+        Column(Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(18.dp)) { content() }
+        return
     }
-    LaunchedEffect(phase, exerciseId) { if (phase == CardPhase.Revealed) setFlipped(true) }
-    val angle = angleAnim.value
-    val density = LocalDensity.current.density
-    fun flip() { val next = flipOnTap(phase, flipped); if (next != flipped) scope.launch { setFlipped(next) } }
-    val showingBack = angle >= 90f
+    val visibleState = remember { MutableTransitionState(false).apply { targetState = true } }
     val thresholdPx = with(LocalDensity.current) { 72.dp.toPx() }
     val tapSlopPx = with(LocalDensity.current) { 12.dp.toPx() }
-    // Gesture detection lives on this OUTER, untransformed Box, never on a rotationY-carrying
-    // descendant: a rotationY(180°) child mirrors its local X axis, which silently flipped the
-    // sign of every measured drag and made real swipes fail to cross the threshold (see the
-    // plan's evidence log). The rotation itself lives purely on the inner Box below, for drawing.
-    val gesture = when {
-        showingBack -> Modifier.pointerInput(exerciseId, thresholdPx, tapSlopPx) {
-            detectFlipOrSwipe(thresholdPx, tapSlopPx, onTap = ::flip, onRate = onRate)
-        }
-        // Front has no competing drag gesture, so a plain `clickable` is safe here.
-        phase == CardPhase.Revealed -> Modifier.clickable(interactionSource = remember { MutableInteractionSource() }, indication = null) { flip() }
-        else -> Modifier
+    AnimatedVisibility(
+        visibleState = visibleState,
+        enter = expandVertically(spring(dampingRatio = Spring.DampingRatioNoBouncy, stiffness = Spring.StiffnessMediumLow)) +
+            fadeIn(spring(stiffness = Spring.StiffnessMediumLow)),
+    ) {
+        Column(
+            Modifier.fillMaxWidth().pointerInput(Unit) { detectSwipeRating(thresholdPx, tapSlopPx, onRate) },
+            verticalArrangement = Arrangement.spacedBy(18.dp),
+        ) { content() }
     }
-    Box(Modifier.fillMaxWidth().then(gesture)) {
-        Box(Modifier.graphicsLayer { rotationY = angle; cameraDistance = 12f * density }) {
-            if (!showingBack) front() else Box(Modifier.graphicsLayer { rotationY = 180f }) { back() }
-        }
+}
+
+/**
+ * D1: one staggered fade+rise for a group inside [AndroidAnswerReveal] — the spec calls for
+ * "answer, explanation, rating panel unfold... with short stagger", so [index] 0/1/2 space those
+ * three groups ~70ms apart. `reduceMotion` renders [content] directly, matching
+ * [AndroidAnswerReveal]'s own snap.
+ */
+@Composable
+fun AndroidStaggeredReveal(index: Int, reduceMotion: Boolean, content: @Composable () -> Unit) {
+    if (reduceMotion) {
+        content()
+        return
     }
+    val visibleState = remember { MutableTransitionState(false).apply { targetState = true } }
+    val delay = index * 70
+    AnimatedVisibility(
+        visibleState = visibleState,
+        enter = fadeIn(tween(220, delayMillis = delay)) +
+            slideInVertically(animationSpec = tween(220, delayMillis = delay), initialOffsetY = { it / 10 }),
+    ) { content() }
 }
