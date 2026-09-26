@@ -74,11 +74,10 @@ struct RiveEffectOverlay: View {
 }
 
 /// Flip-in-progress ring cue (`Plans/Kotlin/FlipCardRivePlan.md` FC2-06/07/08, R2): `rings.riv`'s
-/// boolean `IsExpanded` input on `State Machine 1`, driven by [expanded] exactly as
-/// `FlashCardView.setFlipped`'s `onRingsExpandedChange` reports it — `true` right as an animated
-/// flip's first half starts, `false` once its second half settles. The caller (`TrainingView`)
-/// composes this *before* `FlashCardView` in the same `ZStack`, so it paints behind the card, never
-/// over the question/answer text — decorative, and only ever a cue, never a cover.
+/// boolean `IsExpanded` input on `State Machine 1`, driven by [expanded]. D1 replaced the training
+/// card's native flip with an expand-down reveal (`FlashCardView.swift`) that has no "flip in
+/// progress" moment to report any more, so `TrainingView` no longer composes this type — it is
+/// unused dead code until D3 (drop the ring effect entirely, remove `rings.riv`) removes it.
 ///
 /// Lazily created on the first `expanded == true`, for the same reason as [RiveEffectOverlay]'s own
 /// view models above: a `RiveViewModel(...)` default value would otherwise run its expensive

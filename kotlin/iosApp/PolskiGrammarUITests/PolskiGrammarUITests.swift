@@ -761,10 +761,11 @@ final class PolskiGrammarUITests: XCTestCase {
         XCTAssertTrue(reveal.waitForExistence(timeout: 5))
     }
 
-    /// FlipCardRivePlan.md §0/FC-14: tapping the revealed card flips it purely visually — no extra
-    /// `AppAction.Rate`/`Reveal`, and flipping back never re-offers the Reveal control (the answer
-    /// stays revealed state-wise). Exactly one review still comes from the rating button afterwards.
-    func testTappingRevealedCardFlipsTwiceWithoutExtraReviewThenRatingCountsOnce() {
+    /// D1 (`Plans/Kotlin/FlipCardRivePlan.md`, replacing FC-14's flip test): the question card
+    /// expands downward into the answer/explanation/rating panel exactly once — there is no flip,
+    /// so tapping the already-revealed panel is a no-op (it never hides the answer or re-offers
+    /// Reveal). Exactly one review still comes from the rating button afterwards.
+    func testTappingRevealedCardDoesNothingThenRatingCountsOnce() {
         let app = XCUIApplication()
         app.launch()
         resetTrainingProgress(app)
@@ -786,24 +787,13 @@ final class PolskiGrammarUITests: XCTestCase {
         XCTAssertTrue(changed.waitForExistence(timeout: 5), app.debugDescription)
         let back = app.staticTexts["Эталон"]
         XCTAssertTrue(back.exists)
+        // The question stays visible above the unfolded answer — D1 never hides it.
+        XCTAssertTrue(app.staticTexts["Исходное предложение"].exists)
 
-        back.tap() // Purely visual flip: back face -> front face.
-        let front = app.staticTexts["Исходное предложение"]
-        for _ in 0..<7 {
-            if front.exists { break }
-            app.swipeUp()
-        }
-        XCTAssertTrue(front.waitForExistence(timeout: 5), app.debugDescription)
-        XCTAssertFalse(app.staticTexts["Что изменилось"].exists)
+        back.tap() // No-op: D1 is one-directional, there is no flip-back.
+        XCTAssertTrue(changed.exists, "tapping the revealed answer must not hide it")
         XCTAssertFalse(app.buttons["revealAnswer"].exists,
-            "flipping back to the front must not re-offer Reveal — the answer stays revealed")
-
-        front.tap() // Flip again: front face -> back face.
-        for _ in 0..<7 {
-            if changed.exists { break }
-            app.swipeUp()
-        }
-        XCTAssertTrue(changed.waitForExistence(timeout: 5), app.debugDescription)
+            "tapping the revealed answer must not re-offer Reveal — the answer stays revealed")
 
         let good = app.buttons["rateGood"]
         for _ in 0..<7 {
@@ -822,8 +812,8 @@ final class PolskiGrammarUITests: XCTestCase {
             if total.exists { break }
             app.swipeDown()
         }
-        // resetTrainingProgress guarantees a clean 0, so exactly one rating (through two no-op
-        // flips first) must land on exactly 1 — not 2 or more from a spurious extra review.
+        // resetTrainingProgress guarantees a clean 0, so exactly one rating (through one no-op
+        // tap-on-revealed first) must land on exactly 1 — not 2 or more from a spurious extra review.
         XCTAssertTrue(total.waitForExistence(timeout: 10), app.debugDescription)
         XCTAssertTrue(total.label.hasSuffix(", 1"), total.label)
     }

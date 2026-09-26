@@ -523,10 +523,6 @@ private struct TrainingView: View {
     #if DEBUG
     @AppStorage("polski.debug.riveDisabled") private var riveDisabledForMeasurement = false
     #endif
-    // FC2-06/07 (R2): host-local, mirrors AndroidTrainingScreen's `remember(exercise.id) {
-    // mutableStateOf(false) }` — reset whenever the exercise changes so a stuck-expanded ring cue
-    // from an interrupted flip never carries over to the next card.
-    @State private var ringsExpanded = false
     private var state: Record { model.state }
     private var card: Record { state.record("exercise") }
 
@@ -592,19 +588,12 @@ private struct TrainingView: View {
                     if !card.isEmpty {
                         Section("\(card.string("skillLevel")) · \(card.string("skillTitle"))") {
                             ZStack {
-                                // FC2-06/07/08 (R2): composed *before* FlashCardView, so it paints
-                                // behind the card, never over the question/answer text. Only
-                                // constructed at all while Rive effects aren't suppressed — same
-                                // "riveEnabled" gate AndroidTrainingScreen uses for its own ring
-                                // overlay.
-                                if !riveEffectsSuppressed {
-                                    RiveFlipRingsOverlay(expanded: ringsExpanded)
-                                }
+                                // D1: no more native flip, so there is no flip-in-progress ring cue
+                                // to drive here any more (that overlay's own removal is D3's job).
                                 FlashCardView(
                                     model: model, state: state, card: card,
                                     localDraft: $localDraft, answerFocused: $answerFocused,
                                     reduceMotion: cardMotionReduced,
-                                    onRingsExpandedChange: { if !riveEffectsSuppressed { ringsExpanded = $0 } },
                                     revealButton: { title, expands in revealButton(title: title, expands: expands) }
                                 )
                                 RiveEffectOverlay(effect: model.cardEffect, reduceMotion: riveEffectsSuppressed)
@@ -645,7 +634,7 @@ private struct TrainingView: View {
         .navigationBarTitleDisplayMode(.inline)
         .frame(maxWidth: 850).frame(maxWidth: .infinity)
         .onAppear { localDraft = state.string("draft") }
-        .onChange(of: card.string("id")) { _, _ in localDraft = state.string("draft"); ringsExpanded = false }
+        .onChange(of: card.string("id")) { _, _ in localDraft = state.string("draft") }
         .animation(cardMotionReduced ? nil : .default, value: state.string("phase"))
     }
 
