@@ -50,6 +50,50 @@ trick):
   contract. Flagging this gap rather than adding a new test target, which is out of scope for a
   small, focused task.
 
+## M1 correction — scope the reveal tap gesture away from the interactive controls
+
+**Reviewer blocker** (on `f572529`): the `.onTapGesture` that reveals the card on tap was attached
+to the *entire* Question-phase `frontFace` content, including the answer-mode `Picker`, the Typed
+`TextField` and the reveal `Button` — always co-present with them, unlike either cited precedent
+(iOS's `FlashCardView.swift`, which only attaches its tap gesture while `phase == "Revealed"`, i.e.
+never alongside its own Question-phase Picker/TextField/Button; and the web reference's
+`installTapGesture(front) { ... }`, attached only to the sentence/operation element, a sibling of
+`renderAnswerArea`, never an ancestor of it).
+
+**Fix**: split `frontFace` into two siblings instead of one gesture-wrapped container:
+- `tapToRevealContent` — the ПРЕДЛОЖЕНИЕ label, sentence, divider and (when not `introPending`) the
+  ЗАДАНИЕ label/prompt text. The `.onTapGesture { model.send("reveal", exercise.id) }` is attached
+  only here, and only when `!state.introPending && state.phase == "Question"` — so it's absent
+  entirely during `introPending` (whose own "Перейти к заданию" button lives inside this same block
+  and needs sole gesture priority there) and absent once `Revealed`.
+- `answerControls` — the Picker/TextField/reveal-`Button`, rendered by `frontFace` as a plain
+  sibling of `tapToRevealContent`, never nested under its gesture. This is a structural exclusion, not gesture-priority
+  reliance: there is no ancestor tap gesture over these controls at all now, matching the web
+  reference's sibling layout (`front` / `renderAnswerArea`) exactly.
+- No behavior change to `answerControls` itself (Picker, TextField binding, reveal button) or to
+  `backFace`/rating — only `frontFace`'s internal split changed.
+
+**Verification**:
+- Build: `xcodebuild -project kotlin/macosApp/PolskiGrammarMac.xcodeproj -scheme
+  PolskiGrammarMac -destination "platform=macOS" -derivedDataPath /private/tmp/lane-macos-dd
+  CODE_SIGNING_ALLOWED=NO build` — **BUILD SUCCEEDED** (rerun after the fix).
+- Manual interactive click-through (the reviewer's explicit ask) was attempted on the built app
+  (`open`ed the binary directly, real windowed macOS session, not a simulator) but could not be
+  completed: driving it via `osascript`/System Events failed with "osascript is not allowed
+  assistive access" (-1728) — this sandboxed session has no Accessibility permission for
+  `osascript`/Terminal, and granting one requires an interactive System Settings approval this
+  session cannot perform, and wasn't asked for. The app was launched, screenshotted (confirmed a
+  real window server session exists) and then killed cleanly (`pkill`) rather than left running.
+  Flagging this as a real, unresolved verification gap: (a)-(d) from the reviewer's list are backed
+  here by the structural exclusion (Picker/TextField/Button are siblings with zero ancestor tap
+  gesture — there is no code path left by which tapping them can reach `model.send("reveal", ...)`)
+  and by matching both cited precedents' exact scoping, but not by an actual click-through.
+- `:shared:macosArm64Test`: not run — still no Kotlin (`commonMain`/`macosMain`) files touched by
+  this fix.
+
 ## Status
 
-Done. Committed in this worktree; ready for the cross-lane merge and later end-to-end test pass.
+Correction applied and committed. Structural fix verified by build + code match against both
+cited precedents; interactive click-through evidence is the one open gap (see above) — worth
+closing with a real XCUITest target or manual pass before this ships, not before the cross-lane
+merge.

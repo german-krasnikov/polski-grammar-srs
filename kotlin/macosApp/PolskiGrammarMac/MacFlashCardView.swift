@@ -45,7 +45,26 @@ struct MacFlashCardView: View {
     }
 
     @ViewBuilder private var frontFace: some View {
-        let content = VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: 8) {
+            tapToRevealContent
+            if !state.introPending && state.phase == "Question" {
+                answerControls
+            }
+        }
+    }
+
+    // D1: tapping the sentence/task-prompt region reveals the card too, alongside the
+    // button/⌘Return — scoped to just this non-interactive block, never to the Picker/TextField/
+    // reveal-Button below (a sibling, not a descendant, of this gesture: see `answerControls` in
+    // `frontFace`) and never while `introPending` (its own "Перейти к заданию" button lives inside
+    // this block and must keep sole gesture priority there). This mirrors the web reference's
+    // `front`-only tap target (`TrainingWebApp.kt`'s `installTapGesture(front) { ... }`, attached
+    // only to the sentence/operation element and excluded via `!state.introPending`, never to its
+    // sibling `renderAnswerArea`) and the iOS sibling's phase-exclusive scoping in
+    // `FlashCardView.swift` — both keep the gesture off any view that hosts its own controls,
+    // rather than relying on an ancestor gesture yielding priority to descendants.
+    @ViewBuilder private var tapToRevealContent: some View {
+        let block = VStack(alignment: .leading, spacing: 8) {
             Text("ПРЕДЛОЖЕНИЕ").font(.caption.weight(.semibold))
                 .tracking(1.4).foregroundStyle(.secondary)
             highlightedText(exercise.sourceParts, before: true)
@@ -70,47 +89,43 @@ struct MacFlashCardView: View {
                     Text(exercise.prompt ?? "").font(.title3.weight(.medium))
                         .fixedSize(horizontal: false, vertical: true)
                 }
-                if state.phase == "Question" {
-                    VStack(alignment: .leading, spacing: 18) {
-                        Picker("Способ ответа", selection: Binding(
-                            get: { state.answerMode },
-                            set: { model.preference("answerMode", $0) }
-                        )) {
-                            Text("Вслух").tag("Oral")
-                            Text("Напечатать").tag("Typed")
-                        }
-                        .pickerStyle(.segmented)
-                        .padding(3)
-                        .frame(maxWidth: 360)
-                        if state.answerMode == "Typed" {
-                            TextField("Ответ по-польски", text: Binding(
-                                get: { model.training?.draft ?? "" },
-                                set: { model.send("draft", $0) }
-                            ), axis: .vertical)
-                            .textFieldStyle(.roundedBorder)
-                            .lineLimit(2...4)
-                            .font(.body)
-                        }
-                        HStack {
-                            Spacer()
-                            Button("Показать ответ") { model.send("reveal", exercise.id) }
-                                .keyboardShortcut(.return, modifiers: [.command])
-                                .buttonStyle(.borderedProminent)
-                                .controlSize(.large)
-                        }
-                    }
-                }
             }
         }
-        // D1: tapping anywhere on the question card reveals it too, alongside the button/⌘Return
-        // — attached only while `phase == "Question"`, exactly once (a second tap while already
-        // `Revealed` finds no gesture here to fire). The nested Picker/TextField/Button above keep
-        // gesture priority over this ancestor tap, the same way the old back-face gesture never
-        // stole taps from its own sibling buttons.
-        if state.phase == "Question" {
-            content.contentShape(Rectangle()).onTapGesture { model.send("reveal", exercise.id) }
+        if !state.introPending && state.phase == "Question" {
+            block.contentShape(Rectangle()).onTapGesture { model.send("reveal", exercise.id) }
         } else {
-            content
+            block
+        }
+    }
+
+    @ViewBuilder private var answerControls: some View {
+        VStack(alignment: .leading, spacing: 18) {
+            Picker("Способ ответа", selection: Binding(
+                get: { state.answerMode },
+                set: { model.preference("answerMode", $0) }
+            )) {
+                Text("Вслух").tag("Oral")
+                Text("Напечатать").tag("Typed")
+            }
+            .pickerStyle(.segmented)
+            .padding(3)
+            .frame(maxWidth: 360)
+            if state.answerMode == "Typed" {
+                TextField("Ответ по-польски", text: Binding(
+                    get: { model.training?.draft ?? "" },
+                    set: { model.send("draft", $0) }
+                ), axis: .vertical)
+                .textFieldStyle(.roundedBorder)
+                .lineLimit(2...4)
+                .font(.body)
+            }
+            HStack {
+                Spacer()
+                Button("Показать ответ") { model.send("reveal", exercise.id) }
+                    .keyboardShortcut(.return, modifiers: [.command])
+                    .buttonStyle(.borderedProminent)
+                    .controlSize(.large)
+            }
         }
     }
 
