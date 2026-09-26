@@ -15,10 +15,23 @@ class UserPreferencesCodecTest {
             swipeRatingEnabled = false,
             reminder = ReminderPreferences(enabled = true, localTime = "17:30", days = listOf(1, 3, 5)),
             glassTintPercent = 100,
+            animationsEnabled = false,
         )
         assertEquals(chosen, assertIs<PreferencesDecode.Loaded>(UserPreferencesCodec.decode(UserPreferencesCodec.encode(chosen))).value)
         assertEquals(UserPreferencesV2(), assertIs<PreferencesDecode.Loaded>(UserPreferencesCodec.decode("{\"schemaVersion\":1}")).value)
         assertEquals(2, assertIs<PreferencesDecode.Loaded>(UserPreferencesCodec.decode(UserPreferencesCodec.encode(chosen))).value.schemaVersion)
+    }
+
+    @Test fun animationsEnabledMissingMeansEnabled() {
+        assertEquals(true, UserPreferencesV2().animationsEnabled)
+        val v2WithoutField = """{"schemaVersion":2,"coursePair":"pl-ru"}"""
+        assertEquals(true, assertIs<PreferencesDecode.Loaded>(UserPreferencesCodec.decode(v2WithoutField)).value.animationsEnabled)
+        val v1 = """{"schemaVersion":1}"""
+        assertEquals(true, assertIs<PreferencesDecode.Loaded>(UserPreferencesCodec.decode(v1)).value.animationsEnabled)
+        val off = UserPreferencesV2(animationsEnabled = false)
+        assertEquals(false, assertIs<PreferencesDecode.Loaded>(UserPreferencesCodec.decode(UserPreferencesCodec.encode(off))).value.animationsEnabled)
+        val invalid = """{"schemaVersion":2,"animationsEnabled":"nope"}"""
+        assertIs<PreferencesDecode.RecoveryRequired>(UserPreferencesCodec.decode(invalid))
     }
 
     @Test fun legacyV1MigratesWithoutLosingSettingsAndExportsV2() {

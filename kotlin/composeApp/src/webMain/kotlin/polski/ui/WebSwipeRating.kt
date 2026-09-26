@@ -45,3 +45,30 @@ internal fun installTouchSwipeRating(zone: HTMLElement, acceptAnyPointerType: Bo
     zone.addEventListener("pointercancel", { start = null })
     zone.addEventListener("lostpointercapture", { start = null })
 }
+
+/**
+ * A pointer gesture with near-zero movement counts as a tap; anything larger is left to whatever
+ * swipe/drag handler shares the same element (this one does nothing for it). Shared by the
+ * training card's click-to-reveal question and the vocabulary card's click-to-flip (`FlipCard`)
+ * — one tap-vs-drag implementation for both, not two copies of the same 10px threshold.
+ */
+internal fun installTapGesture(target: HTMLElement, onTap: () -> Unit) {
+    data class Start(val x: Int, val y: Int, val pointerId: Int)
+    var start: Start? = null
+    target.addEventListener("pointerdown", { raw ->
+        start = if (isPrimaryPointer(raw) && !editableTarget(raw.target as? Element)) {
+            val event = raw as MouseEvent
+            Start(event.clientX, event.clientY, pointerIdentifier(raw))
+        } else null
+    })
+    target.addEventListener("pointerup", { raw ->
+        val origin = start
+        start = null
+        if (origin == null || !isPrimaryPointer(raw) || pointerIdentifier(raw) != origin.pointerId || editableTarget(raw.target as? Element)) return@addEventListener
+        val event = raw as MouseEvent
+        val dx = event.clientX - origin.x
+        val dy = event.clientY - origin.y
+        if (kotlin.math.abs(dx) < 10 && kotlin.math.abs(dy) < 10) onTap()
+    })
+    target.addEventListener("pointercancel", { start = null })
+}

@@ -2,10 +2,16 @@ import { expect, test, type Page } from '@playwright/test';
 import { continueIntroductionIfPresent } from './kotlin-introduction';
 
 const progressKey = 'polski-grammar-srs-kmp-preview-v1';
+const vocabularyKey = 'polski-vocabulary-pl-ru-v1';
 
 const revealAnswer = async (page: Page) => {
   await continueIntroductionIfPresent(page);
   await page.getByRole('button', { name: 'Показать ответ' }).click();
+};
+
+const openVocabularyCard = async (page: Page) => {
+  await page.getByRole('button', { name: 'Слова', exact: true }).click();
+  await page.getByRole('checkbox').first().check();
 };
 
 test.beforeEach(async ({ page }) => {
@@ -20,53 +26,50 @@ test.beforeEach(async ({ page }) => {
   }
 });
 
-test('reveal auto-flips the card to face the answer, front stays out of the accessibility tree', async ({ page }) => {
-  await page.goto('/');
-  await revealAnswer(page);
-  const card = page.getByRole('region', { name: 'Учебная карточка' });
-  await expect(card.locator('.card-flip-inner')).toHaveClass(/flipped/);
-  await expect(card.locator('.card-back')).not.toHaveAttribute('aria-hidden', 'true');
-  await expect(card.locator('.card-front')).toHaveAttribute('aria-hidden', 'true');
-});
+// v3/A: the training ("Карточки") card no longer flips at all — the answer expands downward
+// below the still-visible question.
 
-test('tapping the card flips it back to the question, purely visually, then flips again — never a review, never re-hiding the answer data', async ({ page }) => {
+test('reveal expands the answer downward; the question stays visible and the answer was never in the DOM before reveal', async ({ page }) => {
   await page.goto('/');
-  await revealAnswer(page);
+  await continueIntroductionIfPresent(page);
   const card = page.getByRole('region', { name: 'Учебная карточка' });
-  const flip = card.locator('.card-flip');
-  await flip.click({ position: { x: 10, y: 10 } });
-  await expect(card.locator('.card-front')).not.toHaveAttribute('aria-hidden', 'true');
-  await expect(card.locator('.card-back')).toHaveAttribute('aria-hidden', 'true');
-  await expect(card.locator('.ratings button')).toHaveCount(2); // rating buttons remain available on the visible face's DOM regardless
-  await flip.click({ position: { x: 10, y: 10 } });
-  await expect(card.locator('.card-back')).not.toHaveAttribute('aria-hidden', 'true');
+  await expect(card.locator('.card-answer-wrap')).toHaveCount(0);
+  await expect(card.locator('.card-flip')).toHaveCount(0); // no flip wrapper exists on this card at all
+  await page.getByRole('button', { name: 'Показать ответ' }).click();
+  await expect(card.locator('.card-front')).toBeVisible(); // question stays on screen
+  await expect(card.locator('.card-answer-wrap')).toHaveClass(/expanded/);
   await expect(card.locator('.answer-sentence')).toBeVisible();
-  const progress = await page.evaluate(key => JSON.parse(localStorage.getItem(key) ?? '{}'), progressKey);
-  expect(progress.totalReviews ?? 0).toBe(0);
+  await expect(card.locator('.card-flip')).toHaveCount(0); // still no flip, ever
 });
 
-test('clicking a rating button rates and does not get swallowed by the flip handler', async ({ page }) => {
+test('clicking the question card reveals exactly once, like the button/Space; a second click on the revealed card does nothing extra', async ({ page }) => {
+  await page.goto('/');
+  await continueIntroductionIfPresent(page);
+  const card = page.getByRole('region', { name: 'Учебная карточка' });
+  await card.locator('.card-front').click({ position: { x: 10, y: 10 } });
+  await expect(card.locator('.answer-sentence')).toBeVisible();
+  await card.locator('.card-front').click({ position: { x: 10, y: 10 } });
+  await expect(card.locator('.answer-sentence')).toBeVisible(); // still revealed, nothing toggled back
+  const progress = await page.evaluate(key => JSON.parse(localStorage.getItem(key) ?? '{}'), progressKey);
+  expect(progress.totalReviews ?? 0).toBe(0); // a click on the card is never a rating
+});
+
+test('Space still reveals the question card', async ({ page }) => {
+  await page.goto('/');
+  await continueIntroductionIfPresent(page);
+  const card = page.getByRole('region', { name: 'Учебная карточка' });
+  await page.keyboard.press('Space');
+  await expect(card.locator('.answer-sentence')).toBeVisible();
+});
+
+test('clicking a rating button rates the revealed card', async ({ page }) => {
   await page.goto('/');
   await revealAnswer(page);
   await page.getByRole('button', { name: /2 Вспомнил/ }).click();
   await expect.poll(() => page.evaluate(key => JSON.parse(localStorage.getItem(key) ?? '{}').totalReviews ?? 0, progressKey)).toBe(1);
 });
 
-test('typed mode: tapping inside the answer field before reveal never flips; checking the answer flips to the back', async ({ page }) => {
-  await page.goto('/');
-  await continueIntroductionIfPresent(page);
-  await page.getByRole('button', { name: 'Напечатать ответ' }).click();
-  const textbox = page.getByRole('textbox', { name: 'Ответ по-польски' });
-  await textbox.click();
-  await textbox.fill('proba');
-  await expect(page.locator('.card-flip')).toHaveCount(0); // no flip wrapper exists before reveal at all
-  await page.getByRole('button', { name: 'Проверить и показать ответ' }).click();
-  const card = page.getByRole('region', { name: 'Учебная карточка' });
-  await expect(card.locator('.card-flip-inner')).toHaveClass(/flipped/);
-  await expect(card.locator('.typed-result')).toBeVisible();
-});
-
-test('a mouse swipe on the revealed back face rates exactly once; a short drag rates nothing and does not flip either', async ({ page }) => {
+test('a mouse swipe on the revealed answer rates exactly once; a short drag rates nothing', async ({ page }) => {
   await page.goto('/');
   await revealAnswer(page);
   const back = page.getByRole('region', { name: 'Учебная карточка' }).locator('.card-back');
@@ -77,14 +80,11 @@ test('a mouse swipe on the revealed back face rates exactly once; a short drag r
   const hintBounds = await hint.boundingBox();
   expect(hintBounds).not.toBeNull();
   const y = hintBounds!.y + hintBounds!.height / 2;
-  // Short drag: below the 75px rating threshold and above the 10px tap threshold — neither fires.
   await page.mouse.move(bounds!.x + bounds!.width / 2, y);
   await page.mouse.down();
   await page.mouse.move(bounds!.x + bounds!.width / 2 + 30, y, { steps: 5 });
   await page.mouse.up();
-  await expect(page.locator('.card-back')).not.toHaveAttribute('aria-hidden', 'true');
   expect((await page.evaluate(key => JSON.parse(localStorage.getItem(key) ?? '{}').totalReviews ?? 0, progressKey))).toBe(0);
-  // Real swipe: right = Good/"Вспомнил".
   await page.mouse.move(bounds!.x + 20, y);
   await page.mouse.down();
   await page.mouse.move(bounds!.x + Math.min(bounds!.width - 20, 200), y, { steps: 8 });
@@ -92,17 +92,20 @@ test('a mouse swipe on the revealed back face rates exactly once; a short drag r
   await expect.poll(() => page.evaluate(key => JSON.parse(localStorage.getItem(key) ?? '{}').totalReviews ?? 0, progressKey)).toBe(1);
 });
 
-test('reduced motion (app Motion setting) disables the Rive effect overlay entirely on rate', async ({ page }) => {
+test('reduced motion (app Motion setting): the expand is instant and rating never creates the Rive overlay', async ({ page }) => {
   await page.addInitScript(() => localStorage.setItem('polski-preferences-v1', JSON.stringify({ schemaVersion: 1, coursePair: 'pl-ru', motion: 'Reduced' })));
   await page.goto('/');
-  await revealAnswer(page);
+  await continueIntroductionIfPresent(page);
   await expect(page.locator('html')).toHaveAttribute('data-motion', 'reduced');
+  await page.getByRole('button', { name: 'Показать ответ' }).click();
+  const wrap = page.getByRole('region', { name: 'Учебная карточка' }).locator('.card-answer-wrap');
+  await expect(wrap).toHaveCSS('transition-duration', '0s');
   await page.getByRole('button', { name: /2 Вспомнил/ }).click();
   await expect.poll(() => page.evaluate(key => JSON.parse(localStorage.getItem(key) ?? '{}').totalReviews ?? 0, progressKey)).toBe(1);
   await expect(page.locator('#polski-rive-overlay')).toHaveCount(0);
 });
 
-test('normal motion plays the Rive effect overlay as a non-interactive, hidden-from-a11y layer on rate', async ({ page }) => {
+test('normal motion plays the rating Rive effect as a non-interactive, hidden-from-a11y layer', async ({ page }) => {
   await page.goto('/');
   await revealAnswer(page);
   await page.getByRole('button', { name: /2 Вспомнил/ }).click();
@@ -112,76 +115,112 @@ test('normal motion plays the Rive effect overlay as a non-interactive, hidden-f
   await expect(overlay).toHaveAttribute('data-rive-effect', /^remembered:/);
 });
 
-// R1/FC2-01/02/03: the auto-flip-on-reveal must swap faces exactly at the 90° edge-on point, not
-// instantly. `?flipDebugScale=20` stretches each 250ms half to 5s (same test-only-timing idea as
-// the iOS/macOS POLSKI_FLIP_DEBUG_SCALE env var), so 40%/60% of the total (slowed) duration land
-// well inside a single half each, with no flakiness from CI timing jitter.
-test('reveal auto-flip swaps faces only past the 90° point (slowed animation, ~40%/~60% samples)', async ({ page }) => {
-  await page.goto('/?flipDebugScale=20');
-  await revealAnswer(page);
-  const card = page.getByRole('region', { name: 'Учебная карточка' });
-  // Total slowed duration = 2 * 250ms * 20 = 10_000ms; 40% = 4_000ms (still first half, pre-swap),
-  // 60% = 6_000ms (into the second half, post-swap).
-  await page.waitForTimeout(4_000);
-  await expect(card.locator('.card-back'), 'answer must stay out of the a11y tree before the 90° point').toHaveAttribute('aria-hidden', 'true');
-  // `inert` is the actual non-visual guarantee: it removes the subtree from focus/hit-testing and
-  // (per the HTML spec) is expected to hide it from assistive tech, regardless of what a generic
-  // "is this element painted" heuristic reports for a 3D-rotated, backface-hidden face.
-  await expect(card.locator('.card-back')).toHaveAttribute('inert', '');
-  await page.waitForTimeout(2_000); // now at 60% of the total duration
-  await expect(card.locator('.card-back'), 'answer must be in the a11y tree past the 90° point').not.toHaveAttribute('aria-hidden', 'true');
-  await expect(card.locator('.card-back')).not.toHaveAttribute('inert');
-  await expect(card.locator('.answer-sentence')).toBeVisible();
-});
-
-// Symmetric check for the manual flip-back (front swaps into place only past 90° too).
-test('tap-flip-back swaps faces only past the 90° point (slowed animation, ~40%/~60% samples)', async ({ page }) => {
-  await page.goto('/?flipDebugScale=20');
-  await revealAnswer(page);
-  const card = page.getByRole('region', { name: 'Учебная карточка' });
-  await page.waitForTimeout(10_100); // let the (slowed) auto-reveal flip fully settle first
-  await card.locator('.card-flip').click({ position: { x: 10, y: 10 } });
-  await page.waitForTimeout(4_000); // 40% of the total 10_000ms duration, still first half
-  await expect(card.locator('.card-front'), 'question must stay out of the a11y tree before the 90° point').toHaveAttribute('aria-hidden', 'true');
-  await page.waitForTimeout(2_000); // 60% of the total duration
-  await expect(card.locator('.card-front'), 'question must be in the a11y tree past the 90° point').not.toHaveAttribute('aria-hidden', 'true');
-});
-
-// R3/FC2-06/07: the flip-in-progress ring cue and the two new effect assets (Check/Error, Tada)
-// are lazy (never fetched before the first flip) and decorative-only.
-test('the flip ring cue is lazy, non-interactive and gated by reduced motion, not just the rating overlay', async ({ page }) => {
+// v3/A/D: the reveal ring accent (reused rings.riv) pulses once, decoratively, behind the card.
+test('reveal plays a decorative ring accent behind the card, not on top of the answer text', async ({ page }) => {
   const riveRequests: string[] = [];
   page.on('request', request => { if (request.url().includes('/rive/')) riveRequests.push(request.url()); });
   await page.goto('/');
   await continueIntroductionIfPresent(page);
-  expect(riveRequests, 'no Rive asset should load before the first flip').toEqual([]);
   await page.getByRole('button', { name: 'Показать ответ' }).click();
-  await expect.poll(() => riveRequests.some(u => u.endsWith('rings.riv'))).toBe(true);
-  const rings = page.locator('.card-flip-rings');
+  const rings = page.locator('#polski-rive-reveal');
   await expect(rings).toHaveAttribute('aria-hidden', 'true');
   await expect(rings).toHaveCSS('pointer-events', 'none');
+  await expect.poll(() => riveRequests.some(u => u.endsWith('rings.riv'))).toBe(true);
 });
 
-// Regression (reviewer-found, v2 correction round): the ring cue's canvas is recreated inside
-// `.card-flip` on every renderCard() call, which the router-level `.route-content` teardown
-// (`content.textContent = ""`) discards wholesale on essentially every card change. Its cached
-// Rive instance (`canvas.__polskiRive`) must be disposed when that happens, or its own
-// requestAnimationFrame draw loop runs forever against a detached canvas.
-test('ring cue Rive instance is disposed, not leaked, when the card is replaced', async ({ page }) => {
+// v3/D: the runtime is warmed shortly after the first render (requestIdleCallback, or its
+// setTimeout fallback), not held back until the first real effect — this supersedes the old v2
+// "never fetched before the first flip" expectation, which the new prewarm makes obsolete.
+test('Rive is prewarmed shortly after first render when Animations is on, before any card interaction', async ({ page }) => {
   const riveRequests: string[] = [];
   page.on('request', request => { if (request.url().includes('/rive/')) riveRequests.push(request.url()); });
   await page.goto('/');
-  await revealAnswer(page);
-  await expect.poll(() => riveRequests.some(u => u.endsWith('rings.riv'))).toBe(true);
-  await expect.poll(() => page.evaluate(() => Boolean((document.querySelector('.card-flip-rings canvas') as any)?.__polskiRive)), 'ring instance attaches to the first card\'s canvas').toBe(true);
-  await page.getByRole('button', { name: /2 Вспомнил/ }).click(); // advances to the next exercise, discarding .route-content
-  await expect.poll(() => page.evaluate(key => JSON.parse(localStorage.getItem(key) ?? '{}').totalReviews ?? 0, progressKey)).toBe(1);
-  await expect.poll(() => page.evaluate(() => (window as any).__polskiRiveRingDisposals ?? 0), 'the discarded canvas\'s ring instance must be cleaned up, not orphaned').toBeGreaterThan(0);
+  await continueIntroductionIfPresent(page);
+  await expect.poll(() => riveRequests.some(u => u.endsWith('rive-bridge.js')), { timeout: 5_000 }).toBe(true);
 });
 
-test('reduced motion also suppresses the flip ring cue (no data-rive-rings attribute ever set)', async ({ page }) => {
-  await page.addInitScript(() => localStorage.setItem('polski-preferences-v1', JSON.stringify({ schemaVersion: 1, coursePair: 'pl-ru', motion: 'Reduced' })));
+// v3/C: the explicit Settings → Animations toggle, off, keeps Rive entirely unloaded — no
+// prewarm, no rive.js/rive.wasm/*.riv requests — through reveal, vocabulary flip and rating.
+test('Animations off: zero Rive network requests through reveal, flip and rating on either card', async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem('polski-preferences-v1', JSON.stringify({ schemaVersion: 2, coursePair: 'pl-ru', animationsEnabled: false })));
+  const riveRequests: string[] = [];
+  page.on('request', request => { if (request.url().includes('/rive/')) riveRequests.push(request.url()); });
   await page.goto('/');
+  await expect(page.locator('html')).toHaveAttribute('data-animations', 'off');
   await revealAnswer(page);
-  await expect(page.locator('.card-flip-rings')).not.toHaveAttribute('data-rive-rings', /.+/);
+  await page.getByRole('button', { name: /2 Вспомнил/ }).click();
+  await openVocabularyCard(page);
+  await page.getByRole('button', { name: 'Показать ответ' }).click();
+  await page.getByRole('button', { name: 'Вспомнил' }).click();
+  await page.waitForTimeout(500);
+  expect(riveRequests).toEqual([]);
+});
+
+// v3/B: the vocabulary ("Слова") card gets a real flip — the whole card, including its own
+// buttons/panel, rotates as one object, reusing the training card's original tested flip.
+
+test('vocabulary reveal flips the card to face the answer; front stays out of the accessibility tree', async ({ page }) => {
+  await page.goto('/');
+  await openVocabularyCard(page);
+  await page.getByRole('button', { name: 'Показать ответ' }).click();
+  const card = page.getByRole('region', { name: 'Карточка слова' });
+  await expect(card.locator('.card-flip-inner')).toHaveClass(/flipped/);
+  await expect(card.locator('.card-back')).not.toHaveAttribute('aria-hidden', 'true');
+  await expect(card.locator('.card-front')).toHaveAttribute('aria-hidden', 'true');
+});
+
+test('vocabulary flip swaps faces only past the 90° point in both directions (slowed animation, ~40%/~60% samples)', async ({ page }) => {
+  await page.goto('/?flipDebugScale=20');
+  await openVocabularyCard(page);
+  await page.getByRole('button', { name: 'Показать ответ' }).click();
+  const card = page.getByRole('region', { name: 'Карточка слова' });
+  await page.waitForTimeout(4_000); // 40% of the slowed 10s total, still first half
+  await expect(card.locator('.card-back')).toHaveAttribute('aria-hidden', 'true');
+  await expect(card.locator('.card-back')).toHaveAttribute('inert', '');
+  await page.waitForTimeout(2_000); // 60% of the total duration
+  await expect(card.locator('.card-back')).not.toHaveAttribute('aria-hidden', 'true');
+  await expect(card.locator('.card-back')).not.toHaveAttribute('inert');
+});
+
+test('tapping the flipped vocabulary card flips it back to the question, purely visually, never a review', async ({ page }) => {
+  await page.goto('/');
+  await openVocabularyCard(page);
+  await page.getByRole('button', { name: 'Показать ответ' }).click();
+  const card = page.getByRole('region', { name: 'Карточка слова' });
+  const flip = card.locator('.card-flip');
+  await flip.click({ position: { x: 10, y: 10 } });
+  await expect(card.locator('.card-front')).not.toHaveAttribute('aria-hidden', 'true');
+  await expect(card.locator('.card-back')).toHaveAttribute('aria-hidden', 'true');
+  const saved = await page.evaluate(key => JSON.parse(localStorage.getItem(key) ?? '{}'), vocabularyKey);
+  expect(Object.keys(saved.cards ?? {})).toHaveLength(0);
+  await flip.click({ position: { x: 10, y: 10 } });
+  await expect(card.locator('.card-back')).not.toHaveAttribute('aria-hidden', 'true');
+});
+
+test('a touch swipe on the revealed vocabulary card rates exactly once', async ({ page }) => {
+  await page.addInitScript(() => {
+    const nativeMatchMedia = window.matchMedia.bind(window);
+    window.matchMedia = query => query === '(pointer: coarse)' ? ({ matches: true } as MediaQueryList) : nativeMatchMedia(query);
+  });
+  await page.goto('/');
+  await openVocabularyCard(page);
+  await page.getByRole('button', { name: 'Показать ответ' }).click();
+  const zone = page.getByRole('region', { name: 'Карточка слова' }).locator('.vocabulary-swipe-zone');
+  await zone.dispatchEvent('pointerdown', { clientX: 20, clientY: 100, pointerId: 1, pointerType: 'touch', isPrimary: true });
+  await zone.dispatchEvent('pointerup', { clientX: 220, clientY: 102, pointerId: 1, pointerType: 'touch', isPrimary: true });
+  await expect.poll(async () => {
+    const saved = await page.evaluate(key => JSON.parse(localStorage.getItem(key) ?? '{}'), vocabularyKey);
+    return Object.keys(saved.cards ?? {}).length;
+  }).toBe(1);
+});
+
+test('vocabulary flip plays the same ring Rive accent as the training reveal', async ({ page }) => {
+  const riveRequests: string[] = [];
+  page.on('request', request => { if (request.url().includes('/rive/')) riveRequests.push(request.url()); });
+  await page.goto('/');
+  await openVocabularyCard(page);
+  await page.getByRole('button', { name: 'Показать ответ' }).click();
+  await expect.poll(() => riveRequests.some(u => u.endsWith('rings.riv'))).toBe(true);
+  const rings = page.getByRole('region', { name: 'Карточка слова' }).locator('.card-flip-rings');
+  await expect(rings).toHaveAttribute('aria-hidden', 'true');
 });

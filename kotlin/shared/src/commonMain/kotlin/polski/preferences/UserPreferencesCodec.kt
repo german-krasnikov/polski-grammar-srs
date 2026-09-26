@@ -17,7 +17,7 @@ sealed interface PreferencesDecode {
 object UserPreferencesCodec {
     private val json = Json { isLenient = false }
     private val fieldsV1 = setOf("schemaVersion", "coursePair", "explanationMethod", "answerMode", "appearance", "motion", "swipeRatingEnabled", "reminder")
-    private val fieldsV2 = fieldsV1 + "glassTintPercent"
+    private val fieldsV2 = fieldsV1 + "glassTintPercent" + "animationsEnabled"
     private val reminderFields = setOf("enabled", "localTime", "days", "quietStart", "quietEnd")
 
     fun decode(raw: String): PreferencesDecode {
@@ -42,7 +42,10 @@ object UserPreferencesCodec {
         val tint = if (version == 1) defaults.glassTintPercent else
             if ("glassTintPercent" !in root) defaults.glassTintPercent else root.number("glassTintPercent")
         if (tint == null || tint !in 0..100) return invalid(raw, "Invalid glassTintPercent")
-        return PreferencesDecode.Loaded(UserPreferencesV2(2, pair, method, answer, appearance, motion, swipe, reminder, tint))
+        // Missing on decode (v1, or a v2 document saved before this field existed) means enabled.
+        val animations = if (version == 1) defaults.animationsEnabled
+            else root.optionalBoolean("animationsEnabled", defaults.animationsEnabled) ?: return invalid(raw, "Invalid animationsEnabled")
+        return PreferencesDecode.Loaded(UserPreferencesV2(2, pair, method, answer, appearance, motion, swipe, reminder, tint, animations))
     }
 
     fun encode(value: UserPreferencesV2): String {
@@ -57,6 +60,7 @@ object UserPreferencesCodec {
             "motion" to JsonPrimitive(value.motion.name),
             "swipeRatingEnabled" to JsonPrimitive(value.swipeRatingEnabled),
             "glassTintPercent" to JsonPrimitive(value.glassTintPercent),
+            "animationsEnabled" to JsonPrimitive(value.animationsEnabled),
             "reminder" to JsonObject(mapOf(
                 "enabled" to JsonPrimitive(reminder.enabled),
                 "localTime" to JsonPrimitive(reminder.localTime),

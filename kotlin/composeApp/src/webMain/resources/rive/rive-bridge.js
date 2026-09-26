@@ -7,7 +7,9 @@
 // actual Rive API:
 //   #polski-rive-overlay  data-rive-effect="<remembered|again>:<sequence>"   (rating cue)
 //   #polski-rive-chain    data-rive-chain="<sequence>"                       (chain-complete "Tada")
-//   .card-flip-rings      data-rive-rings="<0|1>"                           (flip-in-progress rings)
+//   .card-flip-rings      data-rive-rings="<0|1>"                           (flip/reveal-in-progress rings)
+//   <body>                data-rive-prewarm="1"                              (v3/D: warm the runtime once, idly)
+//   <body>                data-rive-dispose-all="<sequence>"                 (v3/C: Animations turned off — tear down everything now)
 (function () {
   // v2 FC2-09: "again.riv" was replaced (it used to paint an opaque scene, RiveCatalog.md §0.1).
   // "Remembered" now plays confetti together with the new file's "Check" trigger (accepted
@@ -143,6 +145,57 @@
     });
   }
 
+  // v3/D: warms rive.js + rive.wasm + one throwaway instance well before the first real effect,
+  // so that first trigger never pays the fetch/compile cost on the same frames as its own CSS
+  // motion (the diagnosed cause of first-reveal/first-flip jank). `rings.riv` is reused rather
+  // than fetching a 4th asset just for warmth. Runs at most once per page.
+  var prewarmed = false;
+  var prewarmScheduled = false;
+  function prewarm() {
+    if (prewarmed) return;
+    prewarmed = true;
+    withRive(function (rive) {
+      try {
+        configureWasm(rive);
+        var canvas = document.createElement('canvas');
+        canvas.width = 1; canvas.height = 1;
+        var instance = new rive.Rive({
+          src: 'rive/rings.riv',
+          canvas: canvas,
+          stateMachines: 'State Machine 1',
+          autoplay: false,
+          onLoad: function () { try { instance.cleanup(); } catch (e) {} },
+        });
+      } catch (e) {}
+    });
+  }
+  function schedulePrewarm() {
+    if (prewarmScheduled) return;
+    prewarmScheduled = true;
+    if (window.requestIdleCallback) window.requestIdleCallback(prewarm, { timeout: 2000 });
+    else setTimeout(prewarm, 200);
+  }
+
+  // v3/C: tears down every live Rive instance immediately when Animations is turned off, however
+  // it got started (rating/chain/rings), and hides any overlay left visible mid-effect.
+  function disposeAllRive() {
+    stopRating();
+    if (currentChain) { try { currentChain.cleanup(); } catch (e) {} currentChain = null; }
+    var canvases = document.querySelectorAll('canvas');
+    for (var i = 0; i < canvases.length; i++) {
+      var canvas = canvases[i];
+      if (canvas.__polskiRive) {
+        try { canvas.__polskiRive.cleanup(); } catch (e) {}
+        canvas.__polskiRive = null;
+        window.__polskiRiveRingDisposals = (window.__polskiRiveRingDisposals || 0) + 1;
+      }
+    }
+    ['polski-rive-overlay', 'polski-rive-chain', 'polski-rive-reveal'].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) el.style.display = 'none';
+    });
+  }
+
   function setRingsBool(instance, expanded) {
     try {
       var inputs = instance.stateMachineInputs('State Machine 1') || [];
@@ -189,6 +242,7 @@
         var nodes = document.querySelectorAll(selector);
         for (var i = 0; i < nodes.length; i++) react(nodes[i]);
       });
+    if (document.body && document.body.hasAttribute('data-rive-prewarm')) schedulePrewarm();
   }
 
   // A single subtree observer, set up once for the page's lifetime, replaces per-element
@@ -209,13 +263,17 @@
         var mutation = mutations[i];
         if (mutation.type === 'childList') {
           for (var j = 0; j < mutation.removedNodes.length; j++) disposeDetachedRings(mutation.removedNodes[j]);
+        } else if (mutation.attributeName === 'data-rive-prewarm') {
+          schedulePrewarm();
+        } else if (mutation.attributeName === 'data-rive-dispose-all') {
+          disposeAllRive();
         } else {
           react(mutation.target);
         }
       }
     }).observe(document.body, {
       attributes: true,
-      attributeFilter: ['data-rive-effect', 'data-rive-chain', 'data-rive-rings'],
+      attributeFilter: ['data-rive-effect', 'data-rive-chain', 'data-rive-rings', 'data-rive-prewarm', 'data-rive-dispose-all'],
       childList: true,
       subtree: true,
     });

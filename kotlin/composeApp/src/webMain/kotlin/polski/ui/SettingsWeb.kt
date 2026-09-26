@@ -51,9 +51,13 @@ internal fun renderSettingsWeb(
     display.appendChild(settingsSelect("Тема", "settings-appearance", listOf("System" to "Как в системе", "Light" to "Светлая", "Dark" to "Тёмная"), preferences.value.appearance.name) {
         preferences.setAppearance(Appearance.valueOf(it))
     })
-    display.appendChild(settingsSelect("Анимации", "settings-motion", listOf("System" to "Как в системе", "Reduced" to "Меньше движения"), preferences.value.motion.name) {
+    display.appendChild(settingsSelect("Движение", "settings-motion", listOf("System" to "Как в системе", "Reduced" to "Меньше движения"), preferences.value.motion.name) {
         preferences.setMotion(Motion.valueOf(it))
     })
+    display.appendChild(settingsToggle("Анимации", "settings-animations", preferences.value.animationsEnabled) {
+        preferences.setAnimationsEnabled(it)
+    })
+    display.appendChild(settingsNode("p", "muted", "Выключение анимаций отключает раскрытие ответа, оборот карточек слов и все эффекты Rive — они не загружаются из сети."))
     val data = settingsNode("section", "card settings-panel")
     data.appendChild(settingsNode("h3", text = "Данные"))
     root.appendChild(data)

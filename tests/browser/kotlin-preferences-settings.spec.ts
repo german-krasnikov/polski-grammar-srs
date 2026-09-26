@@ -140,7 +140,7 @@ test('system palette follows browser changes while manual choice stays fixed', a
   await page.emulateMedia({ colorScheme: 'dark', reducedMotion: 'no-preference' });
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
   await expect(page.locator('html')).toHaveAttribute('data-motion', 'normal');
-  await page.getByRole('combobox', { name: 'Анимации' }).selectOption('Reduced');
+  await page.getByRole('combobox', { name: 'Движение' }).selectOption('Reduced');
   await expect(page.locator('html')).toHaveAttribute('data-motion', 'reduced');
 });
 
@@ -221,6 +221,10 @@ test('grammar real touch completes after leaving the swipe zone', async ({ page,
   await page.getByRole('button', { name: 'Перейти к заданию' }).click();
   await page.getByRole('button', { name: 'Показать ответ' }).click();
   const zoneElement = page.getByRole('region', { name: 'Учебная карточка' }).locator('.vocabulary-swipe-zone');
+  // v3/A: the answer now expands downward with a real transition (plus a short content stagger)
+  // instead of appearing instantly — wait for it to fully settle before measuring coordinates,
+  // or the bounding box below would be read mid-animation and the CDP touch would miss.
+  await page.waitForTimeout(700);
   await zoneElement.scrollIntoViewIfNeeded();
   const zone = await zoneElement.boundingBox();
   expect(zone).not.toBeNull();

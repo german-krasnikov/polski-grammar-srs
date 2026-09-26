@@ -3,10 +3,15 @@ import { continueIntroductionIfPresent } from './kotlin-introduction';
 
 /**
  * §5 measurement scaffold for the web host: variants A (no animation, real Motion.Reduced) / B
- * (flip only, Rive disabled via the debug `?riveDisabled=1` query) / C (flip + Rive) — see
- * FlipCardRivePlan.md §5. Numbers here are Chromium-headless-indicative, not device-grade (same
- * caveat the plan records for every host). This does not replace the emulator/simulator-native
- * profiling tools §5 lists for Android/iOS/macOS; it only covers what Playwright can drive.
+ * (expand-reveal only, Rive disabled via the debug `?riveDisabled=1` query) / C (expand-reveal +
+ * Rive) — see FlipCardRivePlan.md §5. Numbers here are Chromium-headless-indicative, not
+ * device-grade (same caveat the plan records for every host). This does not replace the
+ * emulator/simulator-native profiling tools §5 lists for Android/iOS/macOS; it only covers what
+ * Playwright can drive.
+ *
+ * v3: the training card itself no longer flips (its own card now expands the answer downward
+ * instead — see kotlin-flip-card.spec.ts); "the flip" in variant B/C below now refers to that
+ * expand-reveal transition, kept under the same variant names for continuity with the plan's §5.
  */
 
 test.beforeEach(async ({ page }) => {
@@ -21,22 +26,22 @@ test.beforeEach(async ({ page }) => {
   }
 });
 
-test('variant A (Motion.Reduced): rating never creates the Rive overlay and the flip has no transition', async ({ page }) => {
+test('variant A (Motion.Reduced): rating never creates the Rive overlay and the expand has no transition', async ({ page }) => {
   await page.addInitScript(() => localStorage.setItem('polski-preferences-v1', JSON.stringify({ schemaVersion: 1, coursePair: 'pl-ru', motion: 'Reduced' })));
   await page.goto('/');
   await continueIntroductionIfPresent(page);
   await page.getByRole('button', { name: 'Показать ответ' }).click();
-  const transition = await page.locator('.card-flip-inner').evaluate(el => getComputedStyle(el).transitionDuration);
+  const transition = await page.locator('.card-answer-wrap').evaluate(el => getComputedStyle(el).transitionDuration);
   expect(transition).toMatch(/^0s/);
   await page.getByRole('button', { name: /2 Вспомнил/ }).click();
   await expect(page.locator('#polski-rive-overlay')).toHaveCount(0);
 });
 
-test('variant B (?riveDisabled=1): flip still plays, Rive overlay never appears even with normal motion', async ({ page }) => {
+test('variant B (?riveDisabled=1): expand-reveal still plays, Rive overlay never appears even with normal motion', async ({ page }) => {
   await page.goto('/?riveDisabled=1');
   await continueIntroductionIfPresent(page);
   await page.getByRole('button', { name: 'Показать ответ' }).click();
-  await expect(page.locator('.card-flip-inner')).toHaveClass(/flipped/);
+  await expect(page.locator('.card-answer-wrap')).toHaveClass(/expanded/);
   await page.getByRole('button', { name: /2 Вспомнил/ }).click();
   await expect(page.locator('#polski-rive-overlay')).toHaveCount(0);
 });
@@ -66,7 +71,7 @@ test('variant C (default motion, Rive enabled): rating creates the overlay and f
 // three variants distinguishable by artificially slowing the main thread, the same technique
 // Chrome DevTools' own performance panel uses.
 for (const rate of [1, 4, 6]) {
-  test(`CPU throttle ${rate}x: flip + rating stays responsive and long tasks are bounded (variant C)`, async ({ page }) => {
+  test(`CPU throttle ${rate}x: reveal + rating stays responsive and long tasks are bounded (variant C)`, async ({ page }) => {
     const cdp = await page.context().newCDPSession(page);
     await page.goto('/');
     await page.evaluate(() => {
@@ -79,29 +84,24 @@ for (const rate of [1, 4, 6]) {
     await cdp.send('Emulation.setCPUThrottlingRate', { rate });
     const start = Date.now();
     await page.getByRole('button', { name: 'Показать ответ' }).click();
-    await expect(page.locator('.card-flip-inner')).toHaveClass(/flipped/);
+    await expect(page.locator('.card-answer-wrap')).toHaveClass(/expanded/);
     await page.getByRole('button', { name: /2 Вспомнил/ }).click();
     await expect(page.locator('#polski-rive-overlay')).toHaveAttribute('data-rive-effect', /^remembered:/);
-    const flipAndRateMs = Date.now() - start;
+    const revealAndRateMs = Date.now() - start;
     await page.waitForTimeout(1500);
     await cdp.send('Emulation.setCPUThrottlingRate', { rate: 1 }); // restore before the next test/teardown
     const longTasks: number[] = await page.evaluate(() => (window as any).__polskiLongTasks ?? []);
     // Indicative-only (Chromium headless + CDP software throttling, not device-grade — §5's
-    // caveat applies here too): the flip+rate interaction itself must still complete in a
+    // caveat applies here too): the reveal+rate interaction itself must still complete in a
     // reasonable wall-clock window even at 6x throttle, and no single long task should be so long
     // it would read as a multi-second freeze.
-    expect(flipAndRateMs, `flip+rate wall time at ${rate}x throttle`).toBeLessThan(20_000);
+    expect(revealAndRateMs, `reveal+rate wall time at ${rate}x throttle`).toBeLessThan(20_000);
     for (const duration of longTasks) expect(duration, `long task at ${rate}x throttle`).toBeLessThan(2_000);
   });
 }
 
-test('bundle keeps the Rive assets lazy: index does not eagerly fetch rive.js/.wasm before first reveal', async ({ page }) => {
-  const riveRequests: string[] = [];
-  page.on('request', request => { if (request.url().includes('/rive/')) riveRequests.push(request.url()); });
-  await page.goto('/');
-  await continueIntroductionIfPresent(page);
-  expect(riveRequests, 'no Rive asset should load before the answer is even revealed').toEqual([]);
-  await page.getByRole('button', { name: 'Показать ответ' }).click();
-  await page.getByRole('button', { name: /2 Вспомнил/ }).click();
-  await expect.poll(() => riveRequests.some(u => u.endsWith('rive-bridge.js'))).toBe(true);
-});
+// v3/D superseded the old "Rive assets stay lazy until the first reveal" expectation: the runtime
+// is now deliberately prewarmed shortly after the first render (idle callback), specifically so
+// the first reveal/flip never pays the fetch/compile cost on its own critical frames. See
+// kotlin-flip-card.spec.ts's "Rive is prewarmed shortly after first render" and "Animations off:
+// zero Rive network requests" tests for the current lazy/eager contract.

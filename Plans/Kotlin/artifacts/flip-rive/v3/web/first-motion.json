@@ -1,0 +1,16 @@
+{
+  "methodology": "Playwright chromium, CDP Emulation.setCPUThrottlingRate rate=4, requestAnimationFrame delta sampling + PerformanceObserver('longtask') over a 900ms window starting exactly at the reveal/flip click. 'before' = D's mitigations (Rive prewarm LaunchedEffect, will-change on .card-answer-wrap/.card-flip-inner) reverted; 'after' = current code. reveal#1/#2 = training card's first vs second expand-reveal in the session; flip#1/#2 = vocabulary card's first vs second word reveal (flip). Indicative only (headless Chromium + CDP software throttling), not device-grade — same caveat as FlipCardRivePlan.md's other §5 evidence.",
+  "before": {
+    "reveal1": { "p95FrameMs": 33.3, "maxFrameMs": 50, "frameCount": 50, "longTaskCount": 1, "longTaskTotalMs": 75 },
+    "reveal2": { "p95FrameMs": 16.7, "maxFrameMs": 16.8, "frameCount": 55, "longTaskCount": 1, "longTaskTotalMs": 75 },
+    "flip1": { "p95FrameMs": 16.7, "maxFrameMs": 16.8, "frameCount": 55, "longTaskCount": 1, "longTaskTotalMs": 75 },
+    "flip2": { "p95FrameMs": 16.8, "maxFrameMs": 16.8, "frameCount": 56, "longTaskCount": 1, "longTaskTotalMs": 75 }
+  },
+  "after": {
+    "reveal1": { "p95FrameMs": 16.8, "maxFrameMs": 33.3, "frameCount": 55, "longTaskCount": 1, "longTaskTotalMs": 66 },
+    "reveal2": { "p95FrameMs": 16.7, "maxFrameMs": 16.8, "frameCount": 55, "longTaskCount": 1, "longTaskTotalMs": 66 },
+    "flip1": { "p95FrameMs": 16.7, "maxFrameMs": 16.8, "frameCount": 56, "longTaskCount": 1, "longTaskTotalMs": 66 },
+    "flip2": { "p95FrameMs": 16.8, "maxFrameMs": 33.3, "frameCount": 55, "longTaskCount": 1, "longTaskTotalMs": 66 }
+  },
+  "observation": "Only reveal#1 (the very first interaction of the whole session, before Rive has ever been fetched) shows an elevated frame in 'before' (p95 33.3ms/max 50ms, i.e. 2-3 dropped frames at 4x throttle) that reveal#2/flip#1/flip#2 do not — consistent with the diagnosed cause (first-ever Rive fetch/compile landing on the same frames as the first reveal's own CSS transition). 'after' halves reveal#1's p95 (33.3ms -> 16.8ms) and reduces its max frame (50ms -> 33.3ms), bringing it in line with reveal#2/flip1/flip2, which were already fine before the fix (headless Chromium + CDP throttling has limited resolution here — the 33.3ms max on 'after' reveal1/flip2 is a single dropped frame, not a stall). Every other window (reveal#2, flip#1, flip#2) is statistically identical before/after, matching the fix's intent: it targets only the very-first-ever interaction, not steady-state motion."
+}

@@ -37,8 +37,23 @@ nav{display:flex;gap:8px;margin-bottom:28px}nav button{padding:10px 18px}
 .answer-area{padding:0 36px 30px}.answer-mode{display:flex;gap:8px;flex-wrap:wrap}.answer-mode button{font-size:.8rem;padding:7px 10px;border-color:transparent;background:transparent}.answer-mode button.active{background:#1c3046;border-color:#395877;color:#d5ebff}
 .muted{color:var(--muted)}.small{font-size:.8rem}.primary{background:#147caf;color:white;border-color:#369ed0;font-weight:600}.primary:hover{background:#1b8ec4;border-color:#7ccffa}.reveal-button{width:100%;padding:14px;margin-top:24px}
 textarea{display:block;resize:vertical;min-height:96px;width:100%;margin-top:16px;padding:14px;background:#0a1422;border:1px solid #405875;border-radius:8px;color:#edf3fd;line-height:1.5}
-.card-back{padding:28px 36px 24px;border-top:1px solid #365342;background:linear-gradient(#0e292033,#101a2800);animation:reveal .18s ease-out}.answer-sentence{font-size:clamp(1.5rem,2.3vw,1.9rem);font-weight:500;line-height:1.5;color:var(--green);margin:14px 0 18px}.accepted{font-size:.875rem;color:#b9d3c7}
-.card-flip{perspective:1400px;position:relative;width:100%;min-width:0;z-index:0}.card-flip-inner{position:relative;z-index:0;display:grid;grid-template-columns:minmax(0,1fr);grid-template-areas:"face";width:100%;min-width:0;transform-style:preserve-3d}.card-flip-inner.flipped{transform:rotateY(180deg)}.card-face{grid-area:face;min-width:0;backface-visibility:hidden}.card-back.card-face{transform:rotateY(180deg)}
+.card-back{padding:28px 36px 24px;border-top:1px solid #365342;background:linear-gradient(#0e292033,#101a2800);overflow:hidden;min-height:0;min-width:0}.answer-sentence{font-size:clamp(1.5rem,2.3vw,1.9rem);font-weight:500;line-height:1.5;color:var(--green);margin:14px 0 18px}.accepted{font-size:.875rem;color:#b9d3c7}
+/* v3/A: the training card's answer expands downward below the question instead of flipping
+   (0fr→1fr on the wrapping grid row is the standard height-auto-animation trick — a plain
+   height transition can't animate to/from "auto"). `will-change` promotes the compositor layer
+   ahead of the first real reveal (v3/D: "promote layers ahead of time"). `.card-back` is the
+   single grid child and supplies its own overflow:hidden/min-height:0 above so the trick clips
+   correctly at any intermediate row height. */
+.card-answer-wrap{display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:0fr;transition:grid-template-rows .55s cubic-bezier(.16,1,.3,1);will-change:grid-template-rows;min-width:0}
+.card-answer-wrap.expanded{grid-template-rows:1fr}
+/* Short stagger for the three named parts (answer / changes+explanation / rating panel), only on
+   the actual reveal transition (`.revealing`, added once and only for that render — a routine
+   DOM rebuild of an already-revealed card never replays it, see applyExpand()). */
+.card-answer-wrap.revealing .card-back>.eyebrow,.card-answer-wrap.revealing .card-back>.answer-sentence,.card-answer-wrap.revealing .card-back>.accepted,.card-answer-wrap.revealing .card-back>.typed-result{opacity:0;transform:translateY(10px);animation:answer-part-in .4s ease-out .08s forwards}
+.card-answer-wrap.revealing .card-back .method-feedback,.card-answer-wrap.revealing .card-back .change-list{opacity:0;transform:translateY(10px);animation:answer-part-in .4s ease-out .18s forwards}
+.card-answer-wrap.revealing .card-back .rule-focus,.card-answer-wrap.revealing .card-back .rating-label,.card-answer-wrap.revealing .card-back .method-review,.card-answer-wrap.revealing .card-back .ratings,.card-answer-wrap.revealing .card-back .vocabulary-swipe-zone{opacity:0;transform:translateY(10px);animation:answer-part-in .4s ease-out .28s forwards}
+@keyframes answer-part-in{to{opacity:1;transform:none}}
+.card-flip{perspective:1400px;position:relative;width:100%;min-width:0;z-index:0}.card-flip-inner{position:relative;z-index:0;display:grid;grid-template-columns:minmax(0,1fr);grid-template-areas:"face";width:100%;min-width:0;transform-style:preserve-3d;will-change:transform}.card-flip-inner.flipped{transform:rotateY(180deg)}.card-face{grid-area:face;min-width:0;backface-visibility:hidden}.card-back.card-face{transform:rotateY(180deg)}
 .card-effect-overlay{position:absolute;inset:0;pointer-events:none;z-index:2}.card-effect-overlay canvas{position:absolute;inset:0;width:100%;height:100%}
 /* Flip-in-progress ring cue (FC2-06/07, R2): a sibling of .card-flip-inner, given an explicit
    negative z-index inside .card-flip's own explicit z-index:0 stacking context so it is behind
@@ -105,7 +120,7 @@ details{margin:16px 0;color:var(--muted);font-size:.875rem}summary{cursor:pointe
 :root[data-theme=light] .rating-label,:root[data-theme=light] details{color:var(--text)}
 .settings-page{max-width:840px;margin:auto;display:grid;gap:16px}.settings-page>h2{margin:0}.settings-page>button{justify-self:start}.settings-panel{padding:22px;display:grid;gap:14px}.settings-panel h3{margin:0}.settings-panel label{max-width:520px}.settings-panel textarea{min-height:130px}.settings-panel>button{justify-self:start}.settings-status{border:1px solid var(--line);padding:10px;border-radius:8px;margin:0}
 .settings-page,.settings-panel{grid-template-columns:minmax(0,1fr);min-width:0}.settings-panel>*{min-width:0}
-[data-motion=reduced] *,[data-motion=reduced] *::before,[data-motion=reduced] *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+[data-motion=reduced] *,[data-motion=reduced] *::before,[data-motion=reduced] *::after,[data-animations=off] *,[data-animations=off] *::before,[data-animations=off] *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
 @media(max-width:600px){.top{padding-bottom:10px;margin-bottom:10px}.topstats b{font-size:1rem}.topstats span{font-size:.68rem}.app{padding-top:12px}nav{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));margin-bottom:12px}nav button{min-width:0;font-size:.65rem;padding:8px 1px;overflow-wrap:normal}.study-toolbar{margin-bottom:8px}.chain-header{margin:8px 0}.chain-header ol{flex-wrap:nowrap;overflow-x:auto;max-width:100%;padding-bottom:7px}.chain-header li{white-space:nowrap}.card-front{padding-top:18px;padding-bottom:12px}.source-sentence{margin:8px 0 14px}.answer-area{padding-bottom:18px}.answer-area .reveal-button{margin-top:12px}.settings-panel{padding:17px}}
 
 .vocabulary-swipe-zone{user-select:none;-webkit-user-select:none;touch-action:pan-y;text-align:center;padding:10px;border:1px dashed var(--line);border-radius:8px;margin-top:16px}

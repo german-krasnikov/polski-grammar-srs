@@ -16,6 +16,7 @@ import polski.data.courseVocabularyUnavailableLabel
 import polski.data.VocabularyItem
 import polski.data.frequencyItems
 import polski.data.vocabularyItems
+import polski.presentation.cardEffectFor
 import polski.srs.FsrsScheduler
 import polski.srs.Rating
 import polski.vocabulary.StudyDirection
@@ -34,6 +35,18 @@ internal class VocabularyWebController {
     private var filter = "A1"
     private var catalogVisible = true
     private var revealed = false
+    // v3/B: real 3D flip, reusing the exact same tested behaviour as the vocabulary flip's own
+    // extracted [FlipCard] (originally the training card's, see CardFlip.kt) — purely visual,
+    // never touches `revealed`/FSRS review state (same contract the training card's flip had).
+    private val flipCard = FlipCard()
+    private var flipped = false
+    private var flippedItemId: String? = null
+    // True only for the render() call right after the reveal button/Enter was pressed — a
+    // routine refresh() of an already-revealed card (e.g. a rating that leaves the same item due
+    // again, or a cross-tab storage reload) must resume the current face instantly, never replay
+    // the flip animation. Consumed (reset to false) by the very next renderCard() call.
+    private var justRevealedFlip = false
+    private val riveOverlay = RiveEffectOverlay()
     private var typed = false
     private var draft = ""
     private var editing: String? = null
@@ -81,7 +94,7 @@ internal class VocabularyWebController {
         pendingRefresh?.invoke()
     }
 
-    fun render(root: HTMLElement, swipeRatingEnabled: Boolean, refresh: () -> Unit) {
+    fun render(root: HTMLElement, outerRoot: HTMLElement, swipeRatingEnabled: Boolean, refresh: () -> Unit) {
         pendingRefresh = refresh
         root.className = "vocabulary-page"
         val page = root.add("section", cls = "vocabulary-view")
@@ -105,7 +118,7 @@ internal class VocabularyWebController {
             page.button("Сохранить исходный JSON") { download("vocabulary-recovery.json", raw) }
         }
         val layout = page.add("div", cls = "vocabulary-layout")
-        renderCard(layout.add("section", cls = "card vocabulary-card"), swipeRatingEnabled, refresh)
+        renderCard(layout.add("section", cls = "card vocabulary-card"), outerRoot, swipeRatingEnabled, refresh)
         renderCatalog(layout.add("section", cls = "card vocabulary-catalog"), refresh)
         page.add("p", cls = "muted small").apply {
             add("span", "Частотные ранги и counts: ")
@@ -118,7 +131,7 @@ internal class VocabularyWebController {
         }
     }
 
-    private fun renderCard(section: HTMLElement, swipeRatingEnabled: Boolean, refresh: () -> Unit) {
+    private fun renderCard(section: HTMLElement, outerRoot: HTMLElement, swipeRatingEnabled: Boolean, refresh: () -> Unit) {
         section.setAttribute("aria-label", "Карточка слова")
         val id = VocabularyCodec.dueIds(document, direction, scheduler, Clock.System.now()).firstOrNull()
         val item = id?.let { VocabularyCodec.item(document, it) }
@@ -127,10 +140,16 @@ internal class VocabularyWebController {
             section.add("p", "Отметь готовые карточки в каталоге. История каждого направления сохраняется отдельно.")
             return
         }
-        section.add("span", if (direction == StudyDirection.RussianToPolish) "Вспомни по-польски" else "Вспомни по-русски", "eyebrow")
-        section.add("p", if (direction == StudyDirection.RussianToPolish) item.translation else item.lemma, "vocabulary-prompt")
+        // The `flipped` visual state is host-local and keyed to the item on screen — a brand-new
+        // due item (after a rating advances, or the direction toggle swaps decks) always starts
+        // question-side-up, never inheriting the previous item's face.
+        if (id != flippedItemId) { flipped = false; flippedItemId = id; flipCard.reset() }
+        val front = detachedElement("div", "card-front")
+        front.add("span", if (direction == StudyDirection.RussianToPolish) "Вспомни по-польски" else "Вспомни по-русски", "eyebrow")
+        front.add("p", if (direction == StudyDirection.RussianToPolish) item.translation else item.lemma, "vocabulary-prompt")
             .setAttribute("lang", if (direction == StudyDirection.RussianToPolish) "ru" else "pl")
         if (!revealed) {
+            section.appendChild(front)
             val modes = section.add("div", cls = "answer-mode")
             modes.button("Ответ вслух / про себя") { typed = false; refresh() }.setAttribute("aria-pressed", (!typed).toString())
             modes.button("Напечатать ответ") { typed = true; refresh() }.setAttribute("aria-pressed", typed.toString())
@@ -143,33 +162,59 @@ internal class VocabularyWebController {
                 input.addEventListener("keydown", { event ->
                     val key = event as org.w3c.dom.events.KeyboardEvent
                     if (key.key == "Enter" && !key.shiftKey && !key.isComposing) {
-                        key.preventDefault(); revealed = true; refresh()
+                        key.preventDefault(); revealed = true; flipped = true; justRevealedFlip = true; refresh()
                     }
                 })
             }
-            section.button("Показать ответ", "primary reveal-button") { revealed = true; refresh() }
-        } else {
-            val answer = section.add("div", cls = "vocabulary-answer")
-            answer.add("span", if (direction == StudyDirection.RussianToPolish) "Эталон · польский" else "Эталон · русский", "eyebrow")
-            answer.add("p", if (direction == StudyDirection.RussianToPolish) item.lemma else item.translation)
-                .setAttribute("lang", if (direction == StudyDirection.RussianToPolish) "pl" else "ru")
-            val description = answer.add("dl")
-            description.detail("Перевод", item.translation)
-            description.detail("Форма", item.form, "pl")
-            description.detail("В предложении", item.example, "pl")
-            if (typed) answer.add("p", "Твой ответ: ${draft.ifBlank { "не введён" }}. Сравни сам и выбери оценку.")
-            if (swipeRatingEnabled) {
-                answer.add("p", "← Повторить · Вспомнил →", "vocabulary-swipe-zone muted small").apply {
-                    setAttribute("aria-hidden", "true")
-                    installTouchSwipeRating(this) { remembered ->
-                        rate(item.id, if (remembered) Rating.Good else Rating.Again, refresh)
-                    }
+            section.button("Показать ответ", "primary reveal-button") { revealed = true; flipped = true; justRevealedFlip = true; refresh() }
+            return
+        }
+        // v3/B: revealed — both faces mount at once in a real 3D flip wrapper, reusing the exact
+        // helpers the training card's flip used (FlipCard/mountRings/setRingsExpanded). Click
+        // toggles which face is forward, purely visually; swipe on the back rates (unchanged from
+        // before this card had a flip at all).
+        front.classList.add("card-face")
+        val answer = detachedElement("div", "vocabulary-answer card-back card-face")
+        answer.setAttribute("aria-live", "polite")
+        renderRevealedAnswer(answer, outerRoot, item, swipeRatingEnabled, refresh)
+        val flip = detachedElement("div", "card-flip")
+        val ringsLayer = mountRings(flip)
+        val inner = detachedElement("div", "card-flip-inner")
+        flip.appendChild(inner)
+        inner.appendChild(front)
+        inner.appendChild(answer)
+        section.appendChild(flip)
+        val isFlipEvent = justRevealedFlip
+        justRevealedFlip = false
+        flipCard.apply(inner, front, answer, ringsLayer, toFlipped = flipped, isFlipEvent = isFlipEvent)
+        flipCard.installTap(flip) {
+            flipped = !flipped
+            flipCard.apply(inner, front, answer, ringsLayer, toFlipped = flipped, isFlipEvent = true)
+        }
+    }
+
+    private fun renderRevealedAnswer(answer: HTMLElement, outerRoot: HTMLElement, item: VocabularyItem, swipeRatingEnabled: Boolean, refresh: () -> Unit) {
+        answer.add("span", if (direction == StudyDirection.RussianToPolish) "Эталон · польский" else "Эталон · русский", "eyebrow")
+        answer.add("p", if (direction == StudyDirection.RussianToPolish) item.lemma else item.translation)
+            .setAttribute("lang", if (direction == StudyDirection.RussianToPolish) "pl" else "ru")
+        val description = answer.add("dl")
+        description.detail("Перевод", item.translation)
+        description.detail("Форма", item.form, "pl")
+        description.detail("В предложении", item.example, "pl")
+        if (typed) answer.add("p", "Твой ответ: ${draft.ifBlank { "не введён" }}. Сравни сам и выбери оценку.")
+        if (swipeRatingEnabled) {
+            answer.add("p", "← Повторить · Вспомнил →", "vocabulary-swipe-zone muted small").apply {
+                setAttribute("aria-hidden", "true")
+                installTouchSwipeRating(this) { remembered ->
+                    val rating = if (remembered) Rating.Good else Rating.Again
+                    riveOverlay.trigger(outerRoot, answer, cardEffectFor(rating))
+                    rate(item.id, rating, refresh)
                 }
             }
-            val ratings = section.add("div", cls = "ratings")
-            ratings.button("Повторить") { rate(item.id, Rating.Again, refresh) }
-            ratings.button("Вспомнил") { rate(item.id, Rating.Good, refresh) }
         }
+        val ratings = answer.add("div", cls = "ratings")
+        ratings.button("Повторить") { riveOverlay.trigger(outerRoot, answer, cardEffectFor(Rating.Again)); rate(item.id, Rating.Again, refresh) }
+        ratings.button("Вспомнил") { riveOverlay.trigger(outerRoot, answer, cardEffectFor(Rating.Good)); rate(item.id, Rating.Good, refresh) }
     }
 
     private fun renderCatalog(section: HTMLElement, refresh: () -> Unit) {
@@ -318,6 +363,14 @@ internal class VocabularyWebController {
 
 private data class EditorDraft(var lemma: String = "", var translation: String = "", var form: String = "",
                                var example: String = "", var level: String = "—")
+
+// Top-level (not a class member) so `document` here always resolves to kotlinx.browser.document —
+// inside VocabularyWebController itself the simple name `document` resolves to its own
+// `VocabularyDocument` field instead, shadowing the browser global (pre-existing naming; the
+// class's own methods below always create elements through this or the `add`/`button`/`select`
+// extensions rather than calling `document.createElement` directly).
+private fun detachedElement(tag: String, cls: String): HTMLElement =
+    (document.createElement(tag) as HTMLElement).apply { className = cls }
 
 private fun HTMLElement.add(tag: String, text: String? = null, cls: String? = null): HTMLElement =
     (document.createElement(tag) as HTMLElement).also { child ->

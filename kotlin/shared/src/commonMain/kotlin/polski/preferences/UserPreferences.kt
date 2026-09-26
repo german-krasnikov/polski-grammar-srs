@@ -25,6 +25,10 @@ data class UserPreferencesV2(
     val reminder: ReminderPreferences = ReminderPreferences(),
     /** App-level web/Android tint control; Apple hosts retain it for portable JSON only. */
     val glassTintPercent: Int = 50,
+    /** Master motion switch (flip/expand-reveal transitions and all Rive effects). A missing
+     *  field on decode means enabled — see [UserPreferencesCodec]. Off keeps Rive entirely
+     *  unloaded (no prewarm, no network requests) and all remaining CSS motion instant. */
+    val animationsEnabled: Boolean = true,
 )
 
 /** Source compatibility for native hosts while their preferences boundary migrates to v2. */

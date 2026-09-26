@@ -24,7 +24,6 @@ import org.w3c.dom.HTMLSelectElement
 import org.w3c.dom.HTMLTextAreaElement
 import org.w3c.dom.events.Event
 import org.w3c.dom.events.KeyboardEvent
-import org.w3c.dom.events.MouseEvent
 import kotlin.random.Random
 import kotlin.time.Clock
 import polski.platform.BrowserLocalDayProvider
@@ -72,6 +71,10 @@ fun TrainingWebApp() {
 
     LaunchedEffect(store) { store.start() }
     LaunchedEffect(state.phase, state.exerciseId, preferences.value.answerMode) { preferences.applyPendingAnswerMode(store) }
+    // v3/D: warm the Rive runtime once the first frame has committed, not on the critical path of
+    // the first reveal/flip; re-runs (cheaply, idempotently) whenever Animations is toggled, so
+    // turning it on later still prewarms lazily at that point.
+    LaunchedEffect(preferences.value.animationsEnabled) { prewarmRiveIfEnabled(preferences.value.animationsEnabled) }
     DisposableEffect(routes, appearance) {
         routes.start { destination ->
             route = destination
@@ -81,7 +84,7 @@ fun TrainingWebApp() {
         appearance.start()
         onDispose { routes.close(); appearance.close() }
     }
-    appearance.update(preferences.value.appearance, preferences.value.motion)
+    appearance.update(preferences.value.appearance, preferences.value.motion, preferences.value.animationsEnabled)
     DisposableEffect(store) {
         val compositionStart: (Event) -> Unit = { renderer.composing = true }
         val compositionEnd: (Event) -> Unit = {
@@ -226,36 +229,14 @@ private class TrainingDomRenderer {
     private var navigation: WebNav? = null
     private val riveOverlay = RiveEffectOverlay()
 
-    // The card `flipped` visual state is purely host-local (never AppUiState/FSRS, see
-    // CardEffect.kt and the plan's §0 contract) and must survive the full `content.textContent =
-    // ""` rebuild this renderer performs on most state changes (e.g. the periodic RefreshTime
-    // timer) — otherwise a manual flip-to-question would silently revert on the next tick.
-    private var flipped = false
-    private var flippedExerciseId: String? = null
-
-    // v2 FC2-01: the exact rotation angle the (possibly freshly-rebuilt) `.card-flip-inner`
-    // element is currently resting at, so a new flip transition always knows its real "from"
-    // angle instead of assuming one. Reset to 0 whenever a brand-new card starts (front-facing).
-    private var currentAngle = 0.0
-    // True only for the render() call where `phase` just became Revealed (auto-flip-on-reveal) —
-    // every OTHER render that rebuilds an already-revealed card's DOM (e.g. the 30s RefreshTime
-    // timer) must resume the current face instantly, not replay the flip animation.
-    private var justRevealed = false
-    private var pendingFlipTimer: Int? = null
-
     fun close() { navigation?.close(); navigation = null; vocabulary.close() }
 
     fun render(root: HTMLElement, state: AppUiState, route: WebRoute, returnTo: WebRoute, preferences: WebPreferencesController, store: TrainingStore, navigate: (WebRoute) -> Unit, dispatch: (AppAction) -> Unit) {
         val old = previous
-        if (state.exerciseId != flippedExerciseId) {
-            flipped = false
-            flippedExerciseId = state.exerciseId
-            currentAngle = 0.0
-        } else if (old != null && old.phase == CardPhase.Question && state.phase == CardPhase.Revealed) {
-            // Showing the answer turns the card to face it; further taps only flip visually.
-            flipped = true
-            justRevealed = true
-        }
+        // v3/A: true only for the render() call where `phase` just became Revealed — every OTHER
+        // render that rebuilds an already-revealed card's DOM (e.g. the 30s RefreshTime timer)
+        // must show the answer already expanded, not replay the expand-reveal animation.
+        val justRevealed = old != null && old.phase == CardPhase.Question && state.phase == CardPhase.Revealed
         val enteringChainComplete = old != null && old.phase != CardPhase.ChainComplete && state.phase == CardPhase.ChainComplete
         if (old != null && previousRoute == route && previousPreferences == preferences.value && previousStatus == preferences.status && old.copy(draft = state.draft) == state) {
             previous = state
@@ -297,8 +278,8 @@ private class TrainingDomRenderer {
         // route this host has since navigated away from.
         if (route != WebRoute.Vocabulary) vocabulary.deactivate()
         when (route) {
-            WebRoute.Training -> renderTraining(root, content, state, preferences.value.swipeRatingEnabled, enteringChainComplete, dispatch)
-            WebRoute.Vocabulary -> vocabulary.render(node("main", "vocabulary-page").also(content::appendChild), preferences.value.swipeRatingEnabled) {
+            WebRoute.Training -> renderTraining(root, content, state, preferences.value.swipeRatingEnabled, enteringChainComplete, justRevealed, dispatch)
+            WebRoute.Vocabulary -> vocabulary.render(node("main", "vocabulary-page").also(content::appendChild), root, preferences.value.swipeRatingEnabled) {
                 previous = null
                 render(root, state, route, returnTo, preferences, store, navigate, dispatch)
             }
@@ -359,7 +340,7 @@ private class TrainingDomRenderer {
         appendChild(node("span", text = label))
     }
 
-    private fun renderTraining(root: HTMLElement, app: HTMLElement, state: AppUiState, swipeRatingEnabled: Boolean, enteringChainComplete: Boolean, dispatch: (AppAction) -> Unit) {
+    private fun renderTraining(root: HTMLElement, app: HTMLElement, state: AppUiState, swipeRatingEnabled: Boolean, enteringChainComplete: Boolean, justRevealed: Boolean, dispatch: (AppAction) -> Unit) {
         val main = node("main", "study-page")
         app.appendChild(main)
         if (state.loadStatus != LoadStatus.Ready) {
@@ -408,7 +389,7 @@ private class TrainingDomRenderer {
         when (state.phase) {
             CardPhase.ChainComplete -> renderChainComplete(root, card, state, dispatch, enteringChainComplete)
             CardPhase.NoDue -> renderNoDue(card, state, dispatch)
-            CardPhase.Question, CardPhase.Revealed -> renderCard(root, card, state, swipeRatingEnabled, dispatch)
+            CardPhase.Question, CardPhase.Revealed -> renderCard(root, card, state, swipeRatingEnabled, justRevealed, dispatch)
         }
         if (state.showReference && !state.introPending) {
             val reference = node("aside", "card reference-panel")
@@ -519,7 +500,7 @@ private class TrainingDomRenderer {
         })
     }
 
-    private fun renderCard(root: HTMLElement, card: HTMLElement, state: AppUiState, swipeRatingEnabled: Boolean, dispatch: (AppAction) -> Unit) {
+    private fun renderCard(root: HTMLElement, card: HTMLElement, state: AppUiState, swipeRatingEnabled: Boolean, justRevealed: Boolean, dispatch: (AppAction) -> Unit) {
         val exercise = state.exercise ?: return
         val skill = polski.data.skillById(exercise.primarySkill)
         val presentation = polski.data.presentationBySkillId(exercise.primarySkill)
@@ -561,132 +542,53 @@ private class TrainingDomRenderer {
         }
         if (state.phase == CardPhase.Question) {
             card.appendChild(front)
+            // v3/A: clicking anywhere on the question card is a reveal trigger too, alongside the
+            // existing button/Space (see the study-help hint below and the global keydown
+            // handler) — excluding interactive descendants (the reveal button itself, the typed-
+            // answer textarea/mode buttons) via the same tap-vs-drag gesture the vocabulary flip
+            // uses, so a text-selection drag on the source sentence never fires it.
+            if (!state.introPending) installTapGesture(front) { state.exerciseId?.let { dispatch(AppAction.Reveal(it)) } }
             renderAnswerArea(card, state, dispatch)
             return
         }
-        // Revealed: both faces are mounted at once in a 3D flip wrapper (FC-08). Tapping either
-        // one toggles which faces forward — purely visual local state (`flipped` above), never an
-        // AppAction and never touches CardPhase/FSRS (see the plan's §0 contract).
-        front.classList.add("card-face")
-        val back = node("div", "card-back card-face")
+        // v3/A: the answer expands downward below the still-visible question — no flip. The wrap
+        // is only ever created once phase == Revealed, so the answer is never in the DOM (let
+        // alone the accessibility tree) before that; `applyExpand` handles the one-shot animation
+        // exactly at the reveal moment, and the ring Rive accent syncs to the same transition.
+        card.appendChild(front)
+        val wrap = node("div", "card-answer-wrap")
+        card.appendChild(wrap)
+        val back = node("div", "card-back")
         back.setAttribute("aria-live", "polite")
+        wrap.appendChild(back)
         renderAnswerBack(root, back, state, swipeRatingEnabled, dispatch)
-        val flip = node("div", "card-flip")
-        val ringsLayer = riveOverlay.mountRings(flip)
-        val inner = node("div", "card-flip-inner")
-        flip.appendChild(inner)
-        inner.appendChild(front)
-        inner.appendChild(back)
-        card.appendChild(flip)
-        val isFlipEvent = justRevealed
-        justRevealed = false
-        applyFlip(inner, front, back, ringsLayer, toFlipped = flipped, isFlipEvent = isFlipEvent)
-        installCardFlip(flip) {
-            flipped = !flipped
-            applyFlip(inner, front, back, ringsLayer, toFlipped = flipped, isFlipEvent = true)
-        }
+        applyExpand(wrap, isRevealEvent = justRevealed)
+        if (justRevealed) riveOverlay.triggerReveal(root, wrap)
     }
 
     /**
-     * Swaps the card's faces exactly at the 90° midpoint of a real flip (R1/FC2-01/02), or
-     * instantly when [isFlipEvent] is false (a routine DOM rebuild resuming the current face, not
-     * an actual flip) or when motion is reduced (a real flip, but the contract requires an
-     * instant swap with no rotation). Never calls `render()` — a flip must never replay the
-     * store's render cycle.
-     *
-     * Implemented with CSS transitions timed by `setTimeout` (not `transitionend`, and not the Web
-     * Animations API) so it needs only the typed DOM bindings already used elsewhere in this file
-     * — no js()/dynamic Kotlin<->JS interop, matching FC-18's stated reason for keeping this
-     * renderer JS/Wasm-target-agnostic. `setTimeout` rather than `transitionend` matters for
-     * correctness, not just style: a flip interrupted at exactly the 90° checkpoint (e.g. a second
-     * tap that lands while the first tap's closing half is still playing) makes `from == mid`, so
-     * the transition has nothing to animate and `transitionend` never fires — a real, reproducible
-     * hang found via a slowed-animation Playwright repro, not a hypothetical. A fixed-duration
-     * timer has no such edge case. A forced layout read between setting the "from" transform and
-     * starting the transition is what actually fixes FC2-01: without it, a freshly created
-     * `.card-flip-inner` node has no previously-painted frame for the browser to transition from,
-     * so the very first auto-flip on reveal snapped instead of animating.
+     * Expands [wrap]'s grid row from 0fr to 1fr (the standard trick for animating to/from an
+     * intrinsic "auto" height — a plain `height` transition can't do it) when [isRevealEvent] is
+     * true and motion isn't instant; otherwise jumps straight to expanded — a routine DOM rebuild
+     * of an already-revealed card (e.g. the 30s refresh timer) must never replay the reveal.
+     * `will-change` in `training.css` promotes the compositor layer ahead of time (v3/D); the
+     * forced layout read below is the same FC2-01 fix ported from the flip: a freshly created
+     * node has no previously-painted frame to transition from, so without it the very first
+     * reveal on a page would snap instead of animating even though every LATER one already did.
      */
-    private fun applyFlip(inner: HTMLElement, front: HTMLElement, back: HTMLElement, ringsLayer: HTMLElement, toFlipped: Boolean, isFlipEvent: Boolean) {
-        val to = if (toFlipped) 180.0 else 0.0
-        // The actual rotation is always driven by the inline `transform` below (which wins over
-        // any stylesheet rule); this class is kept purely as a stable, easily-asserted state
-        // marker (existing acceptance tests key off it) and never itself drives the visual angle.
-        inner.classList.toggle("flipped", toFlipped)
-        pendingFlipTimer?.let { window.clearTimeout(it) }
-        pendingFlipTimer = null
-        val animateVisually = isFlipEvent && !reducedMotionActive()
-        if (!animateVisually) {
-            inner.style.setProperty("transition", "none")
-            inner.style.setProperty("transform", "rotateY(${to}deg)")
-            swapAriaAndInert(front, back, toFlipped)
-            currentAngle = to
+    private fun applyExpand(wrap: HTMLElement, isRevealEvent: Boolean) {
+        wrap.classList.add("expanded")
+        if (!isRevealEvent || motionInstantActive()) {
+            wrap.style.setProperty("transition", "none")
+            wrap.style.setProperty("grid-template-rows", "1fr")
             return
         }
-        val from = currentAngle
-        val mid = 90.0
-        val halfDurationMs = flipHalfDurationMs()
-        riveOverlay.setRingsExpanded(ringsLayer, true)
-        // R1: the target face must stay out of the accessibility tree (and unpainted-as-visible
-        // via backface-visibility) until the 90° edge-on point — explicitly (re)assert the
-        // pre-flip face/hidden-face pairing now, synchronously, before any frame paints, rather
-        // than relying on whatever aria-hidden/inert state happened to be left over.
-        swapAriaAndInert(front, back, toFlipped = !toFlipped)
-        inner.style.setProperty("transition", "none")
-        inner.style.setProperty("transform", "rotateY(${from}deg)")
-        inner.getBoundingClientRect() // force layout: commits the "from" frame before animating
-        inner.style.setProperty("transition", "transform ${halfDurationMs}ms ease-in")
-        inner.style.setProperty("transform", "rotateY(${mid}deg)")
-        pendingFlipTimer = window.setTimeout({
-            pendingFlipTimer = null
-            currentAngle = mid
-            swapAriaAndInert(front, back, toFlipped) // exactly at the 90° edge-on point
-            inner.style.setProperty("transition", "transform ${halfDurationMs}ms ease-out")
-            inner.style.setProperty("transform", "rotateY(${to}deg)")
-            pendingFlipTimer = window.setTimeout({
-                pendingFlipTimer = null
-                currentAngle = to
-                riveOverlay.setRingsExpanded(ringsLayer, false)
-                null
-            }, halfDurationMs)
-            null
-        }, halfDurationMs)
-    }
-
-    private fun swapAriaAndInert(front: HTMLElement, back: HTMLElement, toFlipped: Boolean) {
-        val hidden = if (toFlipped) front else back
-        val shown = if (toFlipped) back else front
-        hidden.setAttribute("aria-hidden", "true")
-        hidden.setAttribute("inert", "")
-        shown.removeAttribute("aria-hidden")
-        shown.removeAttribute("inert")
-    }
-
-    /**
-     * Tap-to-flip on the whole card: a pointer gesture with near-zero movement toggles the face,
-     * skipping interactive descendants (buttons, the typed-answer textarea, `<select>`). A larger
-     * movement is left entirely to the rating swipe installed on the back face (FC-02/03) — this
-     * handler simply does nothing for it, so a swipe never also flips the card.
-     */
-    private fun installCardFlip(flip: HTMLElement, onToggle: () -> Unit) {
-        data class Start(val x: Int, val y: Int, val pointerId: Int)
-        var start: Start? = null
-        flip.addEventListener("pointerdown", { raw ->
-            start = if (isPrimaryPointer(raw) && !editableTarget(raw.target as? Element)) {
-                val event = raw as MouseEvent
-                Start(event.clientX, event.clientY, pointerIdentifier(raw))
-            } else null
-        })
-        flip.addEventListener("pointerup", { raw ->
-            val origin = start
-            start = null
-            if (origin == null || !isPrimaryPointer(raw) || pointerIdentifier(raw) != origin.pointerId || editableTarget(raw.target as? Element)) return@addEventListener
-            val event = raw as MouseEvent
-            val dx = event.clientX - origin.x
-            val dy = event.clientY - origin.y
-            if (kotlin.math.abs(dx) < 10 && kotlin.math.abs(dy) < 10) onToggle()
-        })
-        flip.addEventListener("pointercancel", { start = null })
+        wrap.classList.add("revealing") // gates the CSS stagger fade-in for this render only
+        wrap.style.setProperty("transition", "none")
+        wrap.style.setProperty("grid-template-rows", "0fr")
+        wrap.getBoundingClientRect() // force layout: commits the collapsed frame before animating
+        wrap.style.setProperty("transition", "")
+        wrap.style.setProperty("grid-template-rows", "")
     }
 
     private fun renderAnswerArea(card: HTMLElement, state: AppUiState, dispatch: (AppAction) -> Unit) {

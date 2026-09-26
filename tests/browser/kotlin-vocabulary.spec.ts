@@ -15,7 +15,10 @@ test('serves the selected Kotlin JS or Wasm production artifact', async ({ page 
   const servedScript = await (await scriptResponse).body();
   expect(createHash('sha256').update(servedScript).digest('hex'))
     .toBe(createHash('sha256').update(expectedScript).digest('hex'));
-  expect([...servedFiles].filter(name => name.endsWith('.wasm')).sort()).toEqual(expectedWasm);
+  // v3/D: Rive is now prewarmed shortly after first render (see kotlin-flip-card.spec.ts), so
+  // rive.wasm may already have been fetched by this point too — a deliberate, separately-tested
+  // concern (kotlin-flip-card.spec.ts's prewarm/Animations-off tests), not this test's own.
+  expect([...servedFiles].filter(name => name.endsWith('.wasm') && name !== 'rive.wasm').sort()).toEqual(expectedWasm);
 });
 
 test('Kotlin word cards keep two schedules and custom content', async ({ page }) => {
