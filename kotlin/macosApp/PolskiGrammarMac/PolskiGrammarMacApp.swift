@@ -367,12 +367,29 @@ struct PolskiGrammarMacApp: App {
 private struct MacRootView: View {
     @ObservedObject var model: MacModel
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    // D4: which way the detail pane slides, by sidebar-section order — a lower-indexed tab
+    // (e.g. "Training") slides in from the leading edge, a higher-indexed one (e.g. "Progress")
+    // from the trailing edge, mirroring the web reference's phone-like pager direction
+    // (`TrainingWebApp.kt`'s route-order `nav-indicator`) adapted to a sidebar-driven detail pane.
+    @State private var slideForward = true
     private let tabs: [(String, String, String)] = [
         ("Training", "Карточки", "rectangle.on.rectangle"),
         ("Matrix", "Матрица", "tablecells"),
         ("Vocabulary", "Словарь", "text.book.closed"),
         ("Progress", "Прогресс", "chart.bar")
     ]
+    /// D5: same system-Reduce-Motion-or-app-Motion.Reduced gate the cards already use
+    /// (`TrainingView.cardMotionReduced`), so the tab transition snaps together with everything
+    /// else it gates.
+    private var tabMotionReduced: Bool { reduceMotion || model.preferences?.motion == "Reduced" }
+    private func tabIndex(_ tab: String) -> Int { tabs.firstIndex(where: { $0.0 == tab }) ?? 0 }
+    private var tabTransition: AnyTransition {
+        .asymmetric(
+            insertion: .move(edge: slideForward ? .trailing : .leading).combined(with: .opacity),
+            removal: .move(edge: slideForward ? .leading : .trailing).combined(with: .opacity)
+        )
+    }
+
     var body: some View {
         VStack(spacing: 0) {
             // C1: state.error (e.g. a progress save failure) must stay visible above every tab,
@@ -391,20 +408,26 @@ private struct MacRootView: View {
                 .navigationTitle("Polski Grammar Matrix")
                 .frame(minWidth: 165)
             } detail: {
-                Group {
-                    switch model.selectedTab {
-                    case "Matrix": MatrixView(model: model)
-                    case "Vocabulary": VocabularyView(model: model)
-                    case "Progress": ProgressViewNative(model: model)
-                    default: TrainingView(model: model)
-                    }
+                // D4: `.id(selectedTab)` + an asymmetric `.move`+`.opacity` transition, keyed to
+                // the sidebar section order via `slideForward` (set by the `onChange` below before
+                // the new content mounts) — a directional slide/crossfade instead of the old plain
+                // opacity-only `.animation(value:)` crossfade. ~300ms with a Material-style
+                // "emphasized" decelerate curve (`timingCurve(0.2, 0, 0, 1, ...)`), snapped under
+                // `tabMotionReduced`.
+                ZStack {
+                    detailContent(model.selectedTab)
+                        .id(model.selectedTab)
+                        .transition(tabTransition)
                 }
                 .frame(minWidth: 320, minHeight: 420)
                 .toolbar { SettingsLink { Label("Настройки", systemImage: "gearshape") } }
+                .animation(tabMotionReduced ? nil : .timingCurve(0.2, 0, 0, 1, duration: 0.3), value: model.selectedTab)
+                .onChange(of: model.selectedTab) { oldValue, newValue in
+                    slideForward = tabIndex(newValue) >= tabIndex(oldValue)
+                }
             }
         }
         .preferredColorScheme(colorScheme)
-        .animation(reduceMotion ? nil : .easeInOut(duration: 0.12), value: model.selectedTab)
         .alert("Ошибка", isPresented: Binding(get: { model.error != nil }, set: { if !$0 { model.error = nil } })) {
             Button("ОК") { model.error = nil }
         } message: { Text(model.error ?? "") }
@@ -431,6 +454,15 @@ private struct MacRootView: View {
         case "Light": .light
         case "Dark": .dark
         default: nil
+        }
+    }
+    @ViewBuilder
+    private func detailContent(_ tab: String) -> some View {
+        switch tab {
+        case "Matrix": MatrixView(model: model)
+        case "Vocabulary": VocabularyView(model: model)
+        case "Progress": ProgressViewNative(model: model)
+        default: TrainingView(model: model)
         }
     }
 }
@@ -642,6 +674,11 @@ private struct VocabularyView: View {
     /// Same gate as `TrainingView.cardMotionReduced` (D5): system Reduce Motion or the app's own
     /// `Motion.Reduced` setting, so this card's flip snaps together with everything else it gates.
     private var cardMotionReduced: Bool { reduceMotion || model.preferences?.motion == "Reduced" }
+    // D4: the animated collapsible for the entry catalog — mirrors the web reference's
+    // "Скрыть/Открыть каталог" `.collapsible` (`VocabularyWeb.kt`'s `renderCatalog`), a real
+    // SwiftUI conditional mount (not a height-0 CSS-grid trick, unneeded here) driven by an
+    // explicit `withAnimation` in the toggle button so it animates height+opacity together.
+    @State private var catalogVisible = true
 
     var body: some View {
         ScrollView {
@@ -661,22 +698,33 @@ private struct VocabularyView: View {
                             RiveEffectOverlay(effect: model.cardEffect, reduceMotion: cardMotionReduced)
                         }
                     }
-                    Text("Выбрано: \(state.selectedCount)")
-                    ForEach(state.entries, id: \.lemma) { entry in
-                        HStack {
-                            VStack(alignment: .leading) {
-                                Text(entry.lemma).font(.headline)
-                                Text(entry.translation).foregroundStyle(.secondary)
-                            }
-                            Spacer()
-                            if entry.available {
-                                Button(entry.selected ? "Убрать" : "Добавить") {
-                                    model.vocab(entry.selected ? "deselect" : "select", entry.id)
-                                }
-                            } else { Text("Недоступно").foregroundStyle(.secondary) }
+                    Button(catalogVisible ? "Скрыть каталог" : "Открыть каталог") {
+                        withAnimation(cardMotionReduced ? nil : .timingCurve(0.2, 0, 0, 1, duration: 0.3)) {
+                            catalogVisible.toggle()
                         }
-                        .padding(12)
+                    }
+                    .accessibilityIdentifier("vocabularyCatalogToggle")
+                    if catalogVisible {
+                        VStack(alignment: .leading, spacing: 12) {
+                            Text("Выбрано: \(state.selectedCount)")
+                            ForEach(state.entries, id: \.lemma) { entry in
+                                HStack {
+                                    VStack(alignment: .leading) {
+                                        Text(entry.lemma).font(.headline)
+                                        Text(entry.translation).foregroundStyle(.secondary)
+                                    }
+                                    Spacer()
+                                    if entry.available {
+                                        Button(entry.selected ? "Убрать" : "Добавить") {
+                                            model.vocab(entry.selected ? "deselect" : "select", entry.id)
+                                        }
+                                    } else { Text("Недоступно").foregroundStyle(.secondary) }
+                                }
+                                .padding(12)
 
+                            }
+                        }
+                        .transition(.opacity.combined(with: .move(edge: .top)))
                     }
                 } else { SwiftUI.ProgressView("Загружаем словарь") }
             }.frame(maxWidth: 760, alignment: .leading).padding(28)

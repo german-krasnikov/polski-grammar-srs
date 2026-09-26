@@ -307,13 +307,83 @@ vocabulary `onEffect`/`intervals` plumbing was new Kotlin behavior.
   spec and the web reference's `installSwipeCard`/`intervalLabel`; the Rive-effect and
   interval-preview *data path* is additionally locked by the new `MacVocabularySessionTest`.
 
+## M4 — D4 directional tab-content transition + animated vocabulary catalog collapsible
+
+**Change**: two small, independent SwiftUI-only additions to `PolskiGrammarMacApp.swift`, both
+scoped to macOS's sidebar-driven layout (no bottom tab bar/route-order indicator here, unlike the
+web reference — out of scope per the task).
+
+- **Directional detail-pane transition** (`MacRootView`): replaced the old blanket
+  `.animation(reduceMotion ? nil : .easeInOut(duration: 0.12), value: model.selectedTab)` (a plain
+  opacity-only crossfade applied to the *whole* `NavigationSplitView`, sidebar list included) with
+  a directional slide keyed to sidebar-section order, matching D4's "old and new screens slide
+  together... in the direction of the chosen tab" adapted from a bottom tab bar to a sidebar:
+  - New `@State private var slideForward` set from a `.onChange(of: model.selectedTab) { old, new
+    in slideForward = tabIndex(new) >= tabIndex(old) }` on the detail pane — a lower-indexed tab
+    (Training) slides in from the leading edge, a higher-indexed one (Progress) from the trailing
+    edge, using the same `tabs` array order the sidebar `List` already renders from (no separate
+    ordering source).
+  - The detail content (`detailContent(_:)`, extracted unchanged from the old inline `switch` in
+    `Group`) is `.id(model.selectedTab)`-tagged and carries an asymmetric `.transition` (`.move`
+    +`.opacity`, direction from `slideForward`), animated via `.animation(tabMotionReduced ? nil :
+    .timingCurve(0.2, 0, 0, 1, duration: 0.3), value: model.selectedTab)` scoped to just the detail
+    ZStack — not the sidebar `List`, whose own selection-highlight animation is unaffected. The
+    `.timingCurve(0.2, 0, 0, 1, ...)` is Material 3's "emphasized decelerate" curve, matching D4's
+    "~300ms, emphasized easing" wording literally (this project has no native macOS "emphasized"
+    curve, so the same numeric curve other lanes' Material-motion hosts already use was reused
+    rather than inventing a different one for this host only).
+  - New `tabMotionReduced` mirrors the existing `cardMotionReduced` gate pattern (system Reduce
+    Motion or the app's `Motion.Reduced` setting) already used by `TrainingView`/`VocabularyView` —
+    D5.
+- **Animated vocabulary catalog collapsible** (`VocabularyView`): the entry list (previously always
+  rendered, unconditionally, under a plain "Выбрано: N" label) is now behind a new "Скрыть
+  каталог"/"Открыть каталог" toggle button (`@State private var catalogVisible`), mirroring the web
+  reference's `.collapsible` catalog toggle (`VocabularyWeb.kt`'s `renderCatalog`,
+  `FlipCardRivePlan.md` §17 UX4-20/21/22) — the one genuine show/hide-a-panel concept already
+  established for this app, not a newly invented one. Toggling wraps `catalogVisible.toggle()` in
+  an explicit `withAnimation(cardMotionReduced ? nil : .timingCurve(0.2, 0, 0, 1, duration: 0.3))`
+  and the list carries a `.opacity`+`.move(edge: .top)` `.transition`, so it animates height+
+  opacity together, snapping under the same `cardMotionReduced` gate `VocabularyView` already uses
+  for the card flip.
+  - Deliberate simplification vs. the web precedent: a plain SwiftUI `if catalogVisible { ... }`
+    conditional mount/unmount, not a height-0-but-still-mounted CSS-grid-rows trick. SwiftUI
+    removes/inserts the view (and its accessibility subtree) on each toggle, which already gives
+    the web version's explicit `inert`/`aria-hidden`-on-collapse behavior for free (UX4-21) — no
+    separate focus-transfer-before-collapse step was needed because there is nothing focusable
+    left mounted to lose focus from; the toggle button's own accessibility label already changes
+    with its state, standard for every other stateful button already in this file (rating buttons,
+    reveal, etc.), so no extra `accessibilityValue`/aria-expanded-equivalent was added.
+- Out of scope for this task (left untouched): a phone-style tab-bar `nav-indicator` (macOS has no
+  such element — the sidebar `List`'s own native selection highlight already indicates the current
+  section); any other panel/section on this host (`ErrorBanner`, the `recovery` panel, `MatrixView`'s
+  `GroupBox` rows) — none of them are an established "collapsible" concept the way the vocabulary
+  catalog is, so none were turned into one speculatively.
+
+**Files changed**: `kotlin/macosApp/PolskiGrammarMac/PolskiGrammarMacApp.swift` only (`MacRootView`,
+`VocabularyView`). No new files, no `commonMain`/shared Kotlin changes, no project-file
+regeneration needed.
+
+**Verification**:
+- Build: `xcodebuild -project kotlin/macosApp/PolskiGrammarMac.xcodeproj -scheme
+  PolskiGrammarMac -destination "platform=macOS" -derivedDataPath /private/tmp/lane-macos-dd
+  CODE_SIGNING_ALLOWED=NO build` — **BUILD SUCCEEDED** (arm64, JDK 21 arm64).
+- `:shared:macosArm64Test`: not run — no Kotlin (`commonMain`/`macosMain`) files touched by this
+  task, per the lane's own lean-verification rule ("only affected checks").
+- Launched the built `.app` (`open`), confirmed it stayed running (`pgrep`) with nothing in
+  `log show --predicate 'process == "PolskiGrammarMac"'` over the run, then quit cleanly (`pkill`).
+  Same sandboxed-session Accessibility/Input-Monitoring gap already logged for M1-M3 blocks driving
+  an actual tab click or catalog-toggle click via `osascript`/`CGEventPost` in this session;
+  verification here is the build plus structural code review against D4 and the exact web-reference
+  precedent for "collapsible", not an interactive click-through — flagging this as the same
+  pre-existing, unresolved gap, not a new one introduced by this task.
+
 ## Status
 
-M1 (D1), M2 (D2) and M3 (D3) all applied and committed, plus one reviewer-requested correction each
-to M1 and M2 (M1: scope the reveal tap gesture off interactive controls; M2: stretch the tap
-target/accessibility element to the full panel). All verified by build + structural code review
-against their respective specs/precedents, plus (M3) a focused Kotlin RED→GREEN test for the new
-vocabulary Rive-effect/interval-preview plumbing. Interactive click-through of the actual
-gestures/keyboard remains the one open gap across all three (no Accessibility/Input Monitoring
-permission in this session) — worth closing with a real XCUITest target or a manual pass before
-ship, not before the cross-lane merge.
+M1 (D1), M2 (D2), M3 (D3) and M4 (D4) all applied and committed, plus one reviewer-requested
+correction each to M1 and M2 (M1: scope the reveal tap gesture off interactive controls; M2: stretch
+the tap target/accessibility element to the full panel). All verified by build + structural code
+review against their respective specs/precedents, plus (M3) a focused Kotlin RED→GREEN test for the
+new vocabulary Rive-effect/interval-preview plumbing. Interactive click-through of the actual
+gestures/keyboard/tab-switch/catalog-toggle remains the one open gap across all four (no
+Accessibility/Input Monitoring permission in this session) — worth closing with a real XCUITest
+target or a manual pass before ship, not before the cross-lane merge.
