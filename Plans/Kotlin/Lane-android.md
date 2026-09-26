@@ -546,3 +546,89 @@ Final run: 8/8 across both new files.
 switch, not a bottom-nav tab — left untouched, out of this task's small/focused scope; a live
 TalkBack pass over the new slide (semantics-tree behavior during an `AnimatedContent` transition is
 Android's own well-tested machinery, not custom code here).
+
+## A5 — animations toggle (D5)
+
+**Task**: Settings "Анимации" switch bound to `UserPreferences.animationsEnabled` (already in
+`kotlin/shared`, codec-tested); off ⇒ Rive never initialized and motion instant; unit test for the
+gate.
+
+**Design**: one pure gate function, `motionReduced(preferences: UserPreferencesV2): Boolean =
+!preferences.animationsEnabled || preferences.motion == Motion.Reduced` (new, in `MainActivity.kt`,
+next to the existing `resolveDarkAppearance`) — "animations off" and "system `Motion.Reduced`" both
+collapse into the one `reduceMotion` boolean every existing consumer
+(`AndroidTabContent`/`AndroidCollapsible`/`AndroidAnswerReveal`/`AndroidStaggeredReveal`/
+`AndroidRatingDragSurface`/`AndroidFlipCard`) already reads, so "all motion instant" for A5 falls
+out of A1–A4's existing `reduceMotion` plumbing for free — the only new wiring needed was computing
+that one boolean correctly and pointing Settings at the new preference field.
+
+**The one substantive gap this task actually had to close**: `AndroidRiveOverlay` was mounted
+unconditionally in both `AndroidTrainingScreen`/`AndroidVocabularyScreen` — `reduceMotion` only
+suppressed *firing* a trigger (`cardEffectToPlay` returning `null`), not mounting the composable
+itself, so `ensureRiveInitialized`/`Rive.init`/two `RiveAnimationView` constructions ran every time
+either screen composed a revealed card, regardless of any motion setting. That contradicts D5's "off
+⇒ Rive never initialized (no RiveAnimationView/Rive.init on Android...)" in letter, not just for the
+new toggle — the same gap existed for system `Motion.Reduced` already. Fixed by gating the mount
+itself: `if (!reduceMotion) AndroidRiveOverlay(cardEffect) { cardEffect = null }` in both screens.
+`AndroidChainCompleteOverlay` was already gated this way (`if (!reduceMotion && …)` in
+`AndroidTrainingScreen.kt`, pre-existing) — this brings the rating overlay in line with it, not a
+new pattern.
+
+**Disposal**: no explicit `RiveAnimationView.dispose()`/cleanup call was added. Toggling the switch
+off while an effect overlay is mounted removes `AndroidRiveOverlay` from composition (the `if
+(!reduceMotion)` above), which detaches the `AndroidView`-wrapped `RiveAnimationView`s — Compose's
+own `AndroidView` disposal detaches the underlying `View`, and `rive-android`'s `RiveAnimationView`
+stops/releases its controller from `onDetachedFromWindow` (its own lifecycle hook, not code this
+task owns). No new explicit dispose was written on top of that; flagging it rather than leaving it
+implicit, since D5 names disposal explicitly.
+
+**Files changed**:
+- `kotlin/androidApp/src/main/java/dev/polski/grammarmatrix/AndroidSessionViewModel.kt` — added
+  `setAnimationsEnabled(Boolean)`, same shape as the existing `setSwipeRatingEnabled`/`setMotion`
+  (`updatePreferences(preferences.copy(animationsEnabled = enabled))`).
+- `kotlin/androidApp/src/main/java/dev/polski/grammarmatrix/MainActivity.kt` — added `motionReduced`
+  (above); `AndroidScreen`'s `reduceMotion` now reads `motionReduced(session.preferences)` instead of
+  just `motion == Motion.Reduced`; `AndroidSettingsScreen` gained an "Анимации" `Switch` (same
+  `Row`/`Switch` shape as the existing "Подсказка про свайп-оценку" one) bound to
+  `session.preferences.animationsEnabled`/`session.setAnimationsEnabled`, with one line of helper
+  copy explaining what it does.
+- `kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidTrainingScreen.kt` /
+  `AndroidVocabularyScreen.kt` — gated the `AndroidRiveOverlay(cardEffect) { … }` mount on
+  `!reduceMotion` (see above); no other change.
+- **NEW** `kotlin/androidApp/src/test/java/dev/polski/grammarmatrix/MotionGateTest.kt` — 4 cases for
+  `motionReduced`: animations-on/system-motion → `false`; animations-off (system motion) → `true`;
+  system `Motion.Reduced` (animations on) → `true`; both off → `true`.
+
+**TDD**: RED — `MotionGateTest.kt` written first, calling `motionReduced` before it existed;
+`:androidApp:testDebugUnitTest --tests "...MotionGateTest"` failed to compile (`Unresolved reference
+'motionReduced'`, 4 occurrences), a genuine RED for a new pure function. GREEN — added `motionReduced`
+and wired it in; same command passes (4/4).
+
+**Checks (lane-android worktree, `kotlin/`)**:
+- `./gradlew :androidApp:testDebugUnitTest --tests "dev.polski.grammarmatrix.MotionGateTest"` — FAIL
+  (compile error) before the function existed, PASS (4/4) after — RED→GREEN.
+- `./gradlew :androidApp:testDebugUnitTest` — PASS, full `androidApp` unit suite green (no
+  regressions from the `reduceMotion`/overlay-gating change).
+- `./gradlew :androidApp:assembleDebug` — PASS.
+- On-device (`emulator-5554`, `Polski_ARM35`, debug APK installed and launched, driven via `adb
+  shell input tap`, `uiautomator dump`): opened Settings — the new "Анимации" switch is present,
+  `checked="true"` by default; tapped it off — `checked="false"` immediately; force-stopped and
+  relaunched the app, reopened Settings — still `checked="false"` (persisted through the existing
+  `AndroidUserPreferencesStore`/codec, same as the other switches, no new persistence code needed).
+  With animations off, opened a training card's intro, advanced to the exercise, and tapped "Показать
+  ответ": the answer/explanation/rule/rating-panel content appeared with no animation delay in the
+  same `uiautomator dump` immediately after the tap (confirms `AndroidAnswerReveal`'s `reduceMotion`
+  branch, driven transitively through the new `motionReduced` gate); no rating overlay/Rive view was
+  in the node tree at any point in this run. `adb logcat` for the app process showed no `FATAL
+  EXCEPTION`/`AndroidRuntime` crash across the whole session (toggle, force-stop/relaunch, reveal).
+
+**Skipped**: a direct assertion that `Rive.init`/`RiveAnimationView` are never *constructed* (as
+opposed to never firing a trigger) was not written as a Compose/Robolectric test — `rive-android`'s
+native `.so` is not mockable from a plain unit test and mounting the real view under Robolectric was
+already noted as out of reach in the A3 reviewer-correction entry above; the gate is instead proven
+at the pure-function level (`MotionGateTest`) plus the `if (!reduceMotion) AndroidRiveOverlay(…)`
+code shape itself, which makes construction structurally impossible while `reduceMotion` is `true`
+(the composable call is simply never reached — not a runtime check inside it that could be
+bypassed). Turning animations off *while* an effect is actively playing (mid-animation toggle, to
+directly observe disposal) was not separately exercised on-device; the case exercised was toggling
+before any rating occurred.

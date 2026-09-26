@@ -286,7 +286,11 @@ internal fun AndroidTrainingScreen(
                                 }
                             }
                         }
-                        AndroidRiveOverlay(cardEffect) { cardEffect = null }
+                        // D5: mounting is itself gated — reduceMotion (animations off, or system
+                        // Motion.Reduced) means Rive.init/RiveAnimationView never run, not merely
+                        // that no trigger fires (cardEffect is already null in that case via
+                        // cardEffectToPlay, but the view must never be constructed either).
+                        if (!reduceMotion) AndroidRiveOverlay(cardEffect) { cardEffect = null }
                     }
                     }
                 }

@@ -78,6 +78,7 @@ import polski.presentation.CardPhase
 import polski.presentation.EffectOutcome
 import polski.presentation.UiEffect
 import polski.preferences.Motion
+import polski.preferences.UserPreferencesV2
 import polski.ui.screens.AndroidContent
 import polski.ui.screens.AndroidTabContent
 import polski.ui.screens.AndroidVocabularyScreen
@@ -185,7 +186,7 @@ private fun AndroidScreen(
 ) {
     val store = session.store
     val state by store.state.collectAsStateWithLifecycle()
-    val reduceMotion = session.preferences.motion == Motion.Reduced
+    val reduceMotion = motionReduced(session.preferences)
     LaunchedEffect(state.explanationMethod) { session.persistExplanationMethod(state.explanationMethod) }
     val focusReveal = remember(store) { FocusRequester() }
     var confirmImport by rememberSaveable { mutableStateOf(false) }
@@ -326,6 +327,17 @@ private fun AndroidSettingsScreen(session: AndroidSessionViewModel) {
             }
         }
         session.preferencesError?.let { Text(it, color = MaterialTheme.colorScheme.error) }
+        Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+            Text("Анимации")
+            Switch(
+                checked = session.preferences.animationsEnabled,
+                onCheckedChange = { session.setAnimationsEnabled(it) },
+                enabled = session.preferencesError == null,
+            )
+        }
+        Text("Выключи, если анимации карточек и эффекты Rive мешают или тормозят — переходы " +
+            "станут мгновенными, а Rive не будет загружаться совсем.",
+            color = MaterialTheme.colorScheme.onSurfaceVariant)
         Text("Движение", style = MaterialTheme.typography.titleMedium)
         SingleChoiceSegmentedButtonRow(modifier = Modifier.fillMaxWidth()) {
             Motion.entries.forEachIndexed { index, motion ->
@@ -367,6 +379,15 @@ private fun AndroidSettingsScreen(session: AndroidSessionViewModel) {
         }
     }
 }
+
+/**
+ * D5: the "Анимации" switch ([UserPreferencesV2.animationsEnabled]) and system `Motion.Reduced`
+ * both collapse into one gate — either one alone is enough to make all motion instant and keep
+ * Rive unloaded ([AndroidRiveOverlay]/[AndroidChainCompleteOverlay] are only mounted when this is
+ * `false`, so `Rive.init`/`RiveAnimationView` never run while it is `true`).
+ */
+internal fun motionReduced(preferences: UserPreferencesV2): Boolean =
+    !preferences.animationsEnabled || preferences.motion == Motion.Reduced
 
 internal fun resolveDarkAppearance(appearance: Appearance, systemDark: Boolean): Boolean = when (appearance) {
     Appearance.System -> systemDark

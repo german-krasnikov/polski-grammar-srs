@@ -97,7 +97,8 @@ fun AndroidVocabularyScreen(
                     front = { VocabularyFrontFace(item, state.direction, state.typed, state.draft, session) },
                     back = { VocabularyBackFace(item, state.direction, state.typed, state.draft, enableSwipeRating) },
                 )
-                AndroidRiveOverlay(cardEffect) { cardEffect = null }
+                // D5: gate the mount itself, not just the trigger — see AndroidTrainingScreen.
+                if (!reduceMotion) AndroidRiveOverlay(cardEffect) { cardEffect = null }
             }
         }
 
