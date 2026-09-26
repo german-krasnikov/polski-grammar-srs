@@ -1752,3 +1752,234 @@ P1-3..9, P2-10..14, P3-15). Все реализованы web-only, `kotlin/iosA
 гонка, не починенная в этом проходе (вне заявленного скоупа P0–P3), но задокументированная точнее
 и **не усугублённая** — исходно предложенный `position:sticky` для мобильного nav был испытан,
 эмпирически подтверждён как многократно учащающий её, и убран (см. P2-10 выше).
+
+## 19. v5 — телефонный слайд табов, словарная карточка без кнопки «Показать ответ»
+
+Дата: 2026-09-26. Основание — прямой фидбек пользователя: (1) «переходы между табами дергаются,
+давай как на телефонах сделаем когда свайпаются экраны» (не свайп-жест, именно визуальный слайд
+экрана целиком, как в фидбеке явно уточнено «свайпаются экраны», а не «свайпать»); (2) «когда карты
+слова тренируем не нужно кнопку открыть, клик — переворачивает сразу». Оба пункта — web-only,
+`kotlin/iosApp` не тронут (в рабочем дереве были незакоммиченные iOS-правки — не трогались).
+
+### 19.0 Контракт v5
+
+| # | Решение |
+|---|---|
+| 1. Табы дёргаются | 19.1 диагностика → 19.2 `RouteSlider` (два слоя, только `transform`, без View Transitions) |
+| 2. Слово-карточка: убрать кнопку | 19.4: `installTapGesture` на всей передней грани + `role=button` на блоке подсказки + Space |
+
+### 19.1 Диагностика (перед реализацией, не гипотеза)
+
+Инструмент: `.tmp-ux5/tabs-jank.mjs` (Playwright + CDP `Emulation.setCPUThrottlingRate(4)`,
+персистентный `requestAnimationFrame`-цикл для дельт кадра, `PerformanceObserver({entryTypes:
+['longtask']})`), сырые данные — `Plans/Kotlin/artifacts/ux5/web/tabs.json`.
+
+**before** (HEAD `e52320c`, 3 прогона): переход на «Слова»/«Таблицы и схема» — p95 42–58мс, максимум
+50–63мс, 0 long tasks; на «Прогресс»/«Настройки»/«Карточки» — p95 18–20мс. **before-no-vt**
+(контроль: тот же HEAD, но `document.startViewTransition` удалён `init script`'ом до загрузки, без
+единой правки кода) — цифры **той же величины или хуже** (p95 42–48мс на тех же табах, rapid-click
+максимум даже выше: 47мс vs 33мс) — **View Transitions сам по себе не был доминирующей причиной**;
+план изначально подозревал именно снимки View Transitions, но контрольный прогон это не подтвердил.
+
+Трассировка (`.tmp-ux5/trace-tabs.mjs`, `Tracing.start` с категориями `blink`/`cc`/`v8`/
+`devtools.timeline`) на переходе на «Таблицы и схема» показала на HEAD: **три отдельных** задачи
+(~39мс сборка нового DOM в update-callback'е `startViewTransition`, ~28мс отдельный layout/paint для
+снимка "after", ~22мс третья) — API САМ разбивает работу на несколько тасков вместо одного. Первая
+(наивная) реализация `RouteSlider` без этого разделения делала всё **синхронно в одном таске** внутри
+клик-хендлера — трассировка на ней показала **один** таск ~71мс (`EventHandler::
+handleMouseReleaseEvent`/`v8.callFunction`), объясняющий худший наблюдаемый кадр (макс. 92–98мс).
+
+**Вывод.** Реальная причина дёргания — не сам факт использования View Transitions, а (а) то, что
+`.focus()`/`getBoundingClientRect()`, вызванные ПОСЛЕ полной перестройки большого маршрута
+(словарный каталог, грамматическая таблица), форсируют синхронный layout всего документа в момент,
+когда он это не ждёт, и (б) отсутствие естественного разбиения на несколько тасков, которое API
+View Transitions давал «бесплатно» через свой собственный жизненный цикл (захват snapshot → callback
+→ захват нового snapshot — каждый шаг официально отдельная задача).
+
+### 19.2 Реализация: `RouteSlider` (NEW `RouteSlide.kt`)
+
+Заменяет View Transitions полностью (удалены `ViewTransition.kt`, `ViewTransitionJs.kt`,
+`ViewTransitionWasm.kt`, вызовы `withViewTransition`, CSS `::view-transition-*`/`--vt-dir`).
+
+- Два слоя — `outgoing` (существующий `.route-content`, остаётся `position` static/в потоке, его
+  трогает только `transform` — так он продолжает задавать высоту `.route-viewport` и никогда не
+  форсирует resize) и `incoming` (новый `.route-content`, `position:absolute`, оверлей). Только
+  `transform` (и один раз `overflow` на контейнере, только на время перехода) — оба слоя остаются на
+  своём композитор-слое.
+- **Строительство `incoming` (`populate()`) отложено на один макротаск** (`setTimeout(…, 0)`) от
+  клик-хендлера — реплицирует «бесплатное» разбиение на таски, которое давал View Transitions
+  (см. 19.1). Измеримо: без отложения максимум 69–80мс на двух тяжёлых маршрутах; с отложением —
+  46–63мс (на уровне HEAD или лучше).
+- **Коммит "from"-кадра — двумя `requestAnimationFrame`, не форсированным `getBoundingClientRect()`
+  /`offsetWidth`.** Форсированное чтение сразу после построения `incoming` слило бы «построить DOM»
+  и «первый layout/paint этого кадра» в один долгий таск — именно то, что 19.1 винит в худшем кадре.
+  `raf1` (кадр N, `incoming` ещё на "from"-позиции) ничего не делает кроме планирования `raf2`; кадр N
+  сам красит "from" естественно, без принуждения; `raf2` (кадр N+1, "from" уже отрисован) ставит "to".
+- **`RouteSlider.settle()`** — форсирует незавершённый переход мгновенно (снимает `outgoing`, чистит
+  временные стили `incoming`) и вызывается в начале `start()`, так что быстрый повторный/тройной клик
+  по табам всегда чист (никогда не оставляет второй слой или таймер).
+- **RED #1, найдено и исправлено в этом же проходе:** реактивный поток Compose (клик → `route = X` →
+  `store.dispatch(SelectTab)` → пересборка `HtmlElementView.update`) регулярно вызывает **второй**,
+  того же маршрута, `render()` почти сразу после первого — раньше (пока `previous`/`previousRoute`
+  обновлялись только в `onSettled`, то есть после реальной анимации) это ВТОРОЕ вызов видел
+  `previousRoute` ещё старым, читал себя как «ещё один переход маршрута» и либо (после первого фикса
+  бага с фокусом) вызывал `slider.settle()` в «том же маршруте»-ветке, отменяя только что
+  запланированный (но ещё не выполненный) `buildTimer` — **слайд никогда не проигрывался визуально ни
+  разу**, хотя итоговый контент был правильным (потому и не было заметно на глаз/в assertions на
+  финальный DOM — только по факту, что `.route-content` никогда не становился 2, что показал
+  `MutationObserver`-дебаг). Исправлено двумя частями: (1) `previous`/`previousRoute`/…
+  коммитятся **синхронно**, в момент решения "routeChanged", а не в `onSettled`; (2) **новый**
+  `RouteSlider.isPending()` — «тот же маршрут»-ветка `render()`, если слайд уже в процессе (ещё не
+  осел), не трогает DOM и не зовёт `settle()` вовсе.
+- **RED #2 (найдено сразу следом, тем же проходом, реальным Playwright-прогоном, не гипотеза):**
+  наивная версия фикса #1 просто игнорировала «тот же маршрут»-вызов целиком, пока слайд ещё в
+  процессе — рассуждение было «окно слишком короткое, не важно». Реальный прогон парного React/
+  Kotlin-теста по матрице (клик «Таблицы и схема» → сразу клик «Местоимения», без ожидания)
+  показал 0 строк в таблице местоимений: клик по под-разделу пришёлся ровно в это окно и был
+  безвозвратно потерян — уже запланированный `buildTimer` использовал СТАРОЕ замыкание (раздел
+  «Карта системы», не «Местоимения»). Исправлено **новым** `RouteSlider.refresh()`: если слайд
+  ещё не построил `incoming` — подменяет замыкание, которое будет вызвано; если `incoming` уже
+  смонтирован (даже посреди анимации) — заменяет его детей на месте, не трогая `transform`/
+  `transition` уже идущей анимации.
+- **RED #3 (тот же прогон):** `getByRole('button', {name:'Прогресс'})` (без `exact`) во время
+  слайда Progress→Training неоднозначно совпал с ДВУМЯ элементами — настоящей кнопкой нав-бара И
+  словом «Сбросить **прогресс**» на ещё-не-удалённом `outgoing`-слое (тот всё ещё в DOM все ~320мс
+  анимации). Исправлено: `outgoing` получает `inert`+`aria-hidden="true"` в тот же момент, что и
+  `incoming` монтируется — не только когда `outgoing` наконец удаляется. Это не только чинит тест
+  (Playwright `getByRole` уважает accessibility-дерево), но и настоящий a11y-баг: без этого
+  клавиатурный/скринридер-пользователь мог бы на ~320мс попасть на уже уходящий экран.
+
+### 19.3 Фокус на новый экран (`focusRouteHeading`, `TrainingWebApp.kt`)
+
+Заменяет фокус на кнопку `nav-<slug>` (уже не годится — при реальном переходе часто ФОКУС ДО этого
+был не на кнопке нав-бара, а где угодно ещё; кнопки нав-бара не пересоздаются, поэтому наивный возврат
+на них при каждой смене раздела не соответствует «фокус переходит на новый экран» и ломается, если
+фокус до перехода легитимно был не на нав-баре). Ищет первый `h1`/`h2` внутри свежепостроенного
+`.route-content` (у каждого маршрута есть ровно один, кроме «Карточки» — там нет заголовка, тренинг
+начинается прямо с тулбара режимов); при отсутствии — фокусирует сам контейнер `.route-content`
+(`tabindex="-1"`). Вызывается внутри `onMounted` (см. 19.2) — на кадре, где `incoming` уже в DOM
+(на "from"-позиции, ещё не отрисован визуально, но раскладка уже верна — `transform` не меняет layout-
+координаты, поэтому фокус никогда ничего не скроллит).
+
+### 19.4 Словарная карточка без кнопки «Показать ответ» (`VocabularyWeb.kt`)
+
+- Убрана `front.button("Показать ответ", …)`. Клик/тап в любом месте передней грани (кроме кнопок
+  режима и текстового поля — той же проверкой `editableTarget`, что уже использует
+  `installTapGesture`) вызывает **NEW** `revealAndFlip(refresh)` (= `revealed=true; flipped=true;
+  justRevealedFlip=true; refresh()`, идентично прежнему инлайну кнопки).
+- Печатный режим сохраняет собственное действие — кнопка **«Проверить»** (не «Показать ответ» —
+  другое имя, отличное от устного режима, где кнопки вообще нет), тоже зовёт `revealAndFlip`.
+- **A11y.** Отдельный `<div class="vocabulary-prompt-block" role="button" tabindex="0"
+  aria-label="Показать ответ">` — не весь `front` (который всегда содержит настоящие кнопки режима
+  и, в печатном режиме, `textarea`: `role="button"` на контейнере с настоящими интерактивными
+  потомками — известный анти-паттерн, вложенные интерактивные элементы). `promptBlock` содержит
+  только подсказку/слово, никаких интерактивных потомков — безопасно. Атрибуты `role`/`tabindex`/
+  `aria-label` ставятся только пока `!revealed` (после — это уже не «показать ответ», а обычная
+  переворачиваемая грань, без отдельной affordance, как и раньше).
+- Повторный клик на уже раскрытой карточке — без изменений (уже был `flipCard.installTap`, теперь
+  вызывает **NEW** приватный `toggleFlip()`, идентичная логика).
+- **Space** — **NEW** `VocabularyWebController.spaceReveal(refresh)`, подключённый в общий
+  keydown-обработчик `TrainingWebApp.kt` (маршрут `Vocabulary`, до этого Space там не обрабатывался
+  вовсе): не раскрыто → `revealAndFlip`; уже раскрыто → `toggleFlip()` (тот же путь, что клик).
+- Существующий тест `getByRole('button', {name: 'Показать ответ'})` продолжает резолвиться и
+  кликаться — Playwright ищет по accessible role+name, не по тегу, а `role="button"` даёт ровно то
+  же имя; синтетический `.click()` на `promptBlock` доходит до `installTapGesture` на `front` через
+  обычный bubbling (тот же механизм, что уже проверен существующим тестом «tapping the flipped
+  vocabulary card flips it back», где `.card-flip` без явного click-листенера уже кликается так же).
+
+### 19.5 Затронутые файлы
+
+**NEW** `RouteSlide.kt`. Изменены: `TrainingWebApp.kt` (перестройка `render()`/`rebuild()` —
+`RouteSlider`, `focusRouteHeading`, разделение bookkeeping/DOM-финализации, Space для Vocabulary),
+`VocabularyWeb.kt` (см. 19.4), `training.css` (`.route-viewport`, `.vocabulary-prompt-block`, убраны
+`::view-transition-*`/`--vt-dir`/`.route-content{view-transition-name}`; `.nav-indicator` transition
+синхронизирован на 320мс/`cubic-bezier(.2,0,0,1)`), `PointerInterop.kt` (косметика — обновлён
+doc-comment, ссылавшийся на удалённый `withViewTransition`). **Удалены** `ViewTransition.kt`,
+`ViewTransitionJs.kt`, `ViewTransitionWasm.kt`. Ничего в `androidMain`/`iosApp`/`macosApp` не тронуто.
+
+### 19.6 Проверка (PASS/FAIL/NOT RUN)
+
+| Проверка | Команда (рабочая директория) | Результат |
+|---|---|---|
+| JS/Wasm компиляция | `./gradlew :composeApp:compileKotlinJs :composeApp:compileKotlinWasmJs` (`kotlin/`) | PASS |
+| Fresh distribution | `./gradlew :composeApp:composeCompatibilityBrowserDistribution` (`kotlin/`) | PASS |
+| Playwright TS typecheck | `npx tsc --noEmit -p .` (корень) | PASS |
+| Playwright, wasm, chromium, полный `testMatch` (20 файлов, включая 6 новых UX5-тестов в `kotlin-ux4.spec.ts`, 4 новых в `kotlin-vocabulary.spec.ts`, 1 новый в `kotlin-flip-card.spec.ts`, плюс обновлённые `kotlin-preferences-settings.spec.ts`/`kotlin-native-web.spec.ts`) | `KOTLIN_SPIKE_DIST=… KOTLIN_SPIKE_BRANCH=wasm npx playwright test --config=playwright.kotlin.config.ts --project=chromium` | PASS 134/134 (после RED#1-3 из 19.2, см. ниже — до них наблюдались реальные failures: 13 → 3 → 0, задокументированы построчно) |
+| Playwright, js, chromium, тот же `testMatch` | то же с `KOTLIN_SPIKE_BRANCH=js` | PASS 134/134 |
+| Диагностика: `.tmp-ux5/tabs-jank.mjs` до/после (не в репозитории — временный инструмент; сырые числа — `Plans/Kotlin/artifacts/ux5/web/tabs.json`) | — | см. 19.1/19.7 |
+| Известный предсуществующий флейк `kotlin-preferences-settings.spec.ts`'s «narrow layout…» (§18) | `--repeat-each=8` | 8/8 PASS (флейк не воспроизведён этим прогоном отдельно; при полном прогоне всей сьюты воспроизвёлся ровно 1 раз из 3 полных прогонов — соответствует ранее задокументированной ~1/10 базовой частоте, не связан с v5) |
+| Известный флейк `kotlin-parity-chain.spec.ts`'s «P02… 12 five-step chains» (не документирован ранее, воспроизведён 1 раз из 3 полных прогонов при 122+ тестах в одном процессе, отдельно — PASS за 30.7с) | `-g "P02 React and Kotlin show the same 12 five-step chains"` | PASS изолированно; похоже на ресурсный флейк долгого (60 оценок) теста при последовательном прогоне всей сьюты, не воспроизведён отдельно, не связан с v5 (тест не касается роутинга) |
+
+### 19.7 Числа диагностики (4×CPU throttle, 390×844, Chromium)
+
+| Маршрут | before (max/p95, мс, 3 прогона) | after (max/p95, мс, 3 прогона) |
+|---|---|---|
+| Слова | 50–55 / 43–49 | 46–50 / 24–26 |
+| Таблицы и схема | 59–63 / 57–59 | 60–63 / 18–22 |
+| Прогресс | 31–34 / 19 | 19 / 18 |
+| Настройки | 35–36 / 19 | 18 / 18 |
+| Карточки | 19–35 / 18–19 | 18–20 / 18 |
+| Rapid triple-click | 33–36 / 18–19 | 23–25 / 18 |
+
+`before-no-vt` (контроль без API) — в пределах той же величины, что `before` (не лучше), подтверждая
+19.1's вывод: сам API не был доминирующей причиной.
+
+### 19.8 Известные ограничения
+
+Инструменты диагностики (`tabs-jank.mjs`, `trace-tabs.mjs`, `debug-slide.mjs`) — временные, не
+закоммичены в репозиторий (сырые числа сохранены в `Plans/Kotlin/artifacts/ux5/web/tabs.json`).
+Реальные устройства (iOS Safari/Android Chrome) не проверялись — LEAN MODE, только headless
+Chromium под CPU throttling.
+
+### 19.9 Correction round: два бага из ревью
+
+Ревью первой версии v5 нашло два реальных бага — оба воспроизведены RED (упавший тест на старом
+коде) и закрыты GREEN (тот же тест зелёный на исправленном).
+
+**Баг 1 — clipping/gap высоты во время слайда.** `RouteSlider` держал `incoming`
+`position:absolute`, поэтому высоту `.route-viewport` на всё время transition диктовал только
+`outgoing` (единственный, кто в нормальном потоке). Слайд в более высокий маршрут (Training →
+Таблицы и схема) обрезал `incoming` по высоте `outgoing` на все ~320мс, с «выскакиванием»
+обрезанного низа в момент `finish()`; слайд в более низкий маршрут оставлял пустую полосу под ним.
+RED: новый тест `kotlin-ux4.spec.ts` («a slide between routes of different content height never
+clips the incoming route mid-transition») на добуг-коде — `viewport.clientHeight` 574px против
+ожидаемых ≥1956px (реальный `incoming.scrollHeight`). Фикс — без единого JS-замера высоты
+(значит, без единого форсированного layout-read, что было бы регрессией самого §19.1/19.2):
+`.route-viewport{display:grid;grid-template-columns:1fr}` + `.route-viewport>.route-content
+{grid-area:1/1;min-width:0}` — классический приём «CSS grid stack»: оба слоя (или один, в покое)
+занимают одну и ту же ячейку `1/1`, и высота строки авто-подстраивается под максимум из них,
+браузером, как обычный layout, а не форсированный синхронный JS-read. `RouteSlide.kt` перестал
+выставлять `incoming`'у `position`/`top`/`left`/`width` — это делает уже CSS. GREEN: тот же тест
+проходит на исправленном коде (`viewport.clientHeight` == max слоёв, ±1px), полный целевой прогон
+(`kotlin-ux4`/`kotlin-vocabulary`/`kotlin-flip-card`, wasm+js, chromium) — 52+21=... см. ниже.
+
+**Баг 2 — Enter не активировал фокусный `role="button"` блок подсказки.** Убранная `<button>`
+активировалась и Enter, и Space нативно; `promptBlock` (`<div role="button" tabindex="0">`) — нет:
+браузер не авто-подключает Enter/Space к произвольной ARIA-роли, это обязанность страницы (ARIA
+Authoring Practices, button pattern). Старый код обрабатывал только Space в глобальном keydown-
+хендлере Vocabulary-маршрута (`TrainingWebApp.kt`); реальный `<button>`/`<a>`/`<textarea>` цель
+уже исключалась общим `editableTarget`-guard'ом выше, а `promptBlock` — обычный `<div>`, значит не
+исключался и реально долетал до ветки — просто ветка не слушала Enter. Фикс — одна строка:
+`if (event.code == "Space" || event.key == "Enter")`. RED/GREEN — новый тест
+`kotlin-vocabulary.spec.ts` («Enter on the focused role=button reveal target reveals the card,
+same as Space»): фокусирует именно `reveal`-таргет (`getByRole('button',{name:'Показать
+ответ'})`), жмёт Enter, проверяет `.card-flip-inner` получил класс `flipped` — падал бы на
+предыдущей версии (Enter не обрабатывался вовсе), проходит на исправленной.
+
+Затронутые файлы: `RouteSlide.kt`, `training.css`, `TrainingWebApp.kt` (только keydown-ветка
+Vocabulary + её doc-комментарии), `kotlin-ux4.spec.ts` (+1 тест), `kotlin-vocabulary.spec.ts` (+1
+тест). `VocabularyWeb.kt` не менялся — багов в нём не было, только в вызывающем коде и CSS.
+
+Проверка после фикса:
+
+| Проверка | Команда (рабочая директория) | Результат |
+|---|---|---|
+| JS/Wasm компиляция | `./gradlew :composeApp:compileKotlinJs :composeApp:compileKotlinWasmJs` (`kotlin/`) | PASS, без warnings |
+| Fresh distribution | `./gradlew :composeApp:composeCompatibilityBrowserDistribution` (`kotlin/`) | PASS |
+| Playwright TS typecheck | `npx tsc --noEmit -p .` (корень) | PASS |
+| RED (баг 1, добуг-код) | `kotlin-ux4.spec.ts -g "clips the incoming route"` | FAIL (574px < 1956px) — подтверждает баг |
+| GREEN (баг 1) | тот же тест, исправленный код | PASS |
+| Целевые файлы, wasm, chromium (`kotlin-ux4`+`kotlin-vocabulary`+`kotlin-flip-card`) | `KOTLIN_SPIKE_BRANCH=wasm npx playwright test --config=playwright.kotlin.config.ts kotlin-ux4.spec.ts kotlin-vocabulary.spec.ts kotlin-flip-card.spec.ts --project=chromium` | PASS 52/52 |
+| Те же файлы, js, chromium | то же с `KOTLIN_SPIKE_BRANCH=js` | PASS 52/52 |
+| Полный `testMatch`, wasm, chromium | `KOTLIN_SPIKE_BRANCH=wasm npx playwright test --config=playwright.kotlin.config.ts --project=chromium` | PASS 135/136 (1 fail — уже задокументированный §18/19.6 предсуществующий ~1/10 флейк «narrow layout keeps the next training action visible», не связан с этим фиксом) |
+| Тот же флейк изолированно | `-g "narrow layout keeps the next training action visible" --repeat-each=6` | PASS 6/6 |

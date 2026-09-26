@@ -46,6 +46,11 @@ internal class VocabularyWebController {
     private val flipCard = FlipCard()
     private var flipped = false
     private var flippedItemId: String? = null
+    // UX5: the currently-mounted (inner, front, answer) triple of the revealed flip, set at the
+    // end of every revealed `renderCard` — lets keyboard (Space) toggle the same already-mounted
+    // flip a click already can, without a full page rebuild (matching the click handler's own
+    // direct-DOM-mutation, no-refresh design; see `toggleFlip`).
+    private var flipNodes: Triple<HTMLElement, HTMLElement, HTMLElement>? = null
     // True only for the render() call right after the reveal button/Enter was pressed — a
     // routine refresh() of an already-revealed card (e.g. a rating that leaves the same item due
     // again, or a cross-tab storage reload) must resume the current face instantly, never replay
@@ -159,10 +164,25 @@ internal class VocabularyWebController {
         val inner = detachedElement("div", "card-flip-inner")
         flip.appendChild(inner)
         val front = detachedElement("div", "card-front card-face")
-        front.add("span", if (direction == StudyDirection.RussianToPolish) "Вспомни по-польски" else "Вспомни по-русски", "eyebrow")
-        front.add("p", if (direction == StudyDirection.RussianToPolish) item.translation else item.lemma, "vocabulary-prompt")
+        // UX5: the reveal target is only the prompt block, never `front` as a whole — `front`
+        // always also holds the two real mode-switch buttons (and, in typed mode, the textarea),
+        // so giving IT `role="button"` too would nest a custom button role around other real
+        // interactive controls. `front` itself stays a plain container; ITS tap gesture (below)
+        // is the mouse/touch convenience that reveals from a click anywhere else on the card, and
+        // is not itself an accessibility affordance (it excludes editable/button descendants via
+        // `installTapGesture`'s own `editableTarget` guard, same as training's question card).
+        val promptBlock = front.add("div", cls = "vocabulary-prompt-block")
+        promptBlock.add("span", if (direction == StudyDirection.RussianToPolish) "Вспомни по-польски" else "Вспомни по-русски", "eyebrow")
+        promptBlock.add("p", if (direction == StudyDirection.RussianToPolish) item.translation else item.lemma, "vocabulary-prompt")
             .setAttribute("lang", if (direction == StudyDirection.RussianToPolish) "ru" else "pl")
         if (!revealed) {
+            // UX5: no "Показать ответ" button in oral mode any more — the whole card reveals on a
+            // click/tap (installTapGesture below) or Space (VocabularyWebController.spaceReveal);
+            // `promptBlock` carries the keyboard-focusable/screen-reader affordance that used to
+            // live on that button, under the same accessible name.
+            promptBlock.setAttribute("role", "button")
+            promptBlock.setAttribute("tabindex", "0")
+            promptBlock.setAttribute("aria-label", "Показать ответ")
             val modes = front.add("div", cls = "answer-mode")
             modes.button("Ответ вслух / про себя") { typed = false; refresh() }.apply {
                 setAttribute("aria-pressed", (!typed).toString())
@@ -181,11 +201,19 @@ internal class VocabularyWebController {
                 input.addEventListener("keydown", { event ->
                     val key = event as org.w3c.dom.events.KeyboardEvent
                     if (key.key == "Enter" && !key.shiftKey && !key.isComposing) {
-                        key.preventDefault(); revealed = true; flipped = true; justRevealedFlip = true; refresh()
+                        key.preventDefault(); revealAndFlip(refresh)
                     }
                 })
+                // UX5: typed mode keeps an explicit submit action ("Проверить") — a click/tap
+                // elsewhere on the card (not in the textarea/mode buttons) also reveals, exactly
+                // like oral mode, but typing an answer is a deliberate enough action that it gets
+                // its own named control too, not just the ambient tap.
+                front.button("Проверить", "primary reveal-button") { revealAndFlip(refresh) }
             }
-            front.button("Показать ответ", "primary reveal-button") { revealed = true; flipped = true; justRevealedFlip = true; refresh() }
+            // Click/tap anywhere on the front except the mode buttons/textarea reveals — the same
+            // tap-vs-drag gesture training's question card and this card's own flip-back use, so a
+            // text-selection drag never fires it and clicks inside controls never flip (editableTarget).
+            installTapGesture(front) { revealAndFlip(refresh) }
             inner.appendChild(front)
             section.appendChild(flip)
             return
@@ -202,10 +230,8 @@ internal class VocabularyWebController {
         val isFlipEvent = justRevealedFlip
         justRevealedFlip = false
         flipCard.apply(inner, front, answer, toFlipped = flipped, isFlipEvent = isFlipEvent)
-        flipCard.installTap(flip) {
-            flipped = !flipped
-            flipCard.apply(inner, front, answer, toFlipped = flipped, isFlipEvent = true)
-        }
+        flipNodes = Triple(inner, front, answer)
+        flipCard.installTap(flip) { toggleFlip() }
     }
 
     private fun renderRevealedAnswer(flip: HTMLElement, answer: HTMLElement, outerRoot: HTMLElement, item: VocabularyItem, swipeRatingEnabled: Boolean, refresh: () -> Unit) {
@@ -381,6 +407,33 @@ internal class VocabularyWebController {
         if (!revealed) return
         val id = VocabularyCodec.dueIds(document, direction, scheduler, Clock.System.now()).firstOrNull() ?: return
         rate(id, rating, refresh)
+    }
+
+    /**
+     * UX5: the global Space/Enter handler on the Vocabulary route — mirrors exactly what a click on
+     * the card already does: reveals (and flips to face the answer) when the card isn't revealed yet,
+     * otherwise flips it back and forth, without a full page rebuild for the toggle (see
+     * [toggleFlip]). A no-op when nothing is due (same guard [renderCard] uses).
+     */
+    fun spaceReveal(refresh: () -> Unit) {
+        if (!revealed) { revealAndFlip(refresh); return }
+        toggleFlip()
+    }
+
+    /** Reveals the answer once and flips to face it — shared by the click-to-reveal tap gesture,
+     *  Enter/"Проверить" in typed mode, and [spaceReveal]. A no-op once already revealed, so a
+     *  stray double-trigger (e.g. Enter racing a tap) can never re-flip or replay the animation. */
+    private fun revealAndFlip(refresh: () -> Unit) {
+        if (revealed) return
+        revealed = true; flipped = true; justRevealedFlip = true; refresh()
+    }
+
+    /** Flips the already-revealed card back and forth in place, purely visually — the exact same
+     *  direct DOM mutation the click handler already did, just reachable from [spaceReveal] too. */
+    private fun toggleFlip() {
+        val (inner, front, answer) = flipNodes ?: return
+        flipped = !flipped
+        flipCard.apply(inner, front, answer, toFlipped = flipped, isFlipEvent = true)
     }
 
     private fun rate(id: String, rating: Rating, refresh: () -> Unit) {

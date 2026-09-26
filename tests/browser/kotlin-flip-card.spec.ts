@@ -225,3 +225,19 @@ test('flip and reveal no longer request or render the removed ring Rive accent',
   await expect(page.getByRole('region', { name: 'Карточка слова' }).locator('.card-flip-rings')).toHaveCount(0);
   expect(riveRequests.some(u => u.endsWith('rings.riv'))).toBe(false);
 });
+
+// v5 (FlipCardRivePlan.md §19): the vocabulary card's own "Показать ответ" button is gone —
+// clicking the unrevealed card face reveals (and flips) it, mirroring the training card's
+// click-to-reveal above; a second click on the now-revealed card flips it back, not a review.
+test('clicking the unrevealed vocabulary card face reveals it (no "Показать ответ" button exists any more); clicking the revealed card flips it back, never rates', async ({ page }) => {
+  await page.goto('/');
+  await openVocabularyCard(page);
+  const card = page.getByRole('region', { name: 'Карточка слова' });
+  await expect(page.locator('button:has-text("Показать ответ")')).toHaveCount(0);
+  await card.locator('.vocabulary-prompt').click();
+  await expect(card.locator('.card-flip-inner')).toHaveClass(/flipped/);
+  await card.locator('.card-flip').click({ position: { x: 10, y: 10 } });
+  await expect(card.locator('.card-front')).not.toHaveAttribute('aria-hidden', 'true');
+  const saved = await page.evaluate(key => JSON.parse(localStorage.getItem(key) ?? '{}'), vocabularyKey);
+  expect(Object.keys(saved.cards ?? {})).toHaveLength(0);
+});

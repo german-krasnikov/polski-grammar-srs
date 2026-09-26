@@ -18,8 +18,11 @@ for (const width of [320, 390, 768, 1280]) {
     await page.locator('#nav-settings').focus();
     await page.keyboard.press('Enter');
     await expect(page.locator('#nav-settings')).toHaveAttribute('aria-current', 'page');
-    await expect(page.locator('#nav-settings')).toBeFocused();
     await expect(page.getByRole('heading', { name: 'Настройки обучения' })).toBeVisible();
+    // UX5: a route change moves focus to the new screen's own heading, not back to the nav
+    // button that triggered it (RouteSlider/focusRouteHeading) — see kotlin-ux4.spec.ts's own
+    // UX5 tests for the general contract.
+    await expect(page.getByRole('heading', { name: 'Настройки обучения' })).toBeFocused();
     await expect(page.locator('#settings-glass-tint')).toHaveCount(0);
     const order = await page.evaluate(() => {
       const header = document.querySelector('header.top')!.getBoundingClientRect();

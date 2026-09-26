@@ -9,7 +9,7 @@ button,select{cursor:pointer}
 button{color:var(--button-text);background:var(--button);border:1px solid var(--line);border-radius:8px;padding:10px 15px;line-height:1.35;transition:background .15s,border-color .15s,transform .1s}
 button:hover{background:var(--button-hover);border-color:var(--button-hover-border)}
 button:active{transform:scale(.98)}
-button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:2px solid var(--focus);outline-offset:3px}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible,[role=button]:focus-visible{outline:2px solid var(--focus);outline-offset:3px}
 button.active{background:#183b56;color:#c0eaff;border-color:#4a9ac4}
 button:disabled{opacity:.5;cursor:default}
 h1,h2,h3,p{overflow-wrap:anywhere}
@@ -45,7 +45,9 @@ nav{display:flex;gap:8px;margin-bottom:28px}nav button{padding:10px 18px}
    offset keeps it clear of the buttons' own opaque background, so their existing look is
    untouched. Motion is governed by the existing global reduced-motion rule below, same as every
    other transition in this file. */
-.nav-indicator{position:absolute;left:0;bottom:-8px;height:3px;border-radius:2px;background:var(--focus);pointer-events:none;transition:transform .25s cubic-bezier(.16,1,.3,1),width .25s cubic-bezier(.16,1,.3,1)}
+/* UX5: same 320ms/cubic-bezier(.2,0,0,1) as RouteSlider's own content slide, so the underline
+   reads as part of one motion with the page rather than a separately-timed accent. */
+.nav-indicator{position:absolute;left:0;bottom:-8px;height:3px;border-radius:2px;background:var(--focus);pointer-events:none;transition:transform .32s cubic-bezier(.2,0,0,1),width .32s cubic-bezier(.2,0,0,1)}
 .subnav{display:flex;flex-wrap:wrap;gap:6px}.subnav button{font-size:.875rem;padding:9px 12px;background:transparent}.subnav button.active{background:#173852}
 .study-toolbar{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:18px}
 .card{background:linear-gradient(130deg,var(--surface-raised),var(--surface));border:1px solid var(--line);border-radius:14px;box-shadow:0 12px 36px #0002}
@@ -117,6 +119,9 @@ details{margin:16px 0;color:var(--muted);font-size:.875rem}summary{cursor:pointe
 .vocabulary-card{min-width:0;padding:0;background:none;border:0;box-shadow:none}.vocabulary-prompt{font-size:clamp(1.8rem,3vw,2.7rem);font-weight:650;color:#f3f7ff;margin:20px 0}.vocabulary-card .reveal-button{margin-top:18px}.vocabulary-card textarea{display:block;width:100%;min-height:95px;margin-top:14px}.vocabulary-answer{border-top:1px solid var(--line);padding-top:20px}.vocabulary-answer>p[lang]{font-size:1.5rem;color:var(--green);margin:8px 0}.vocabulary-answer dl{display:grid;gap:9px}.vocabulary-answer dl>div{display:grid;grid-template-columns:110px minmax(0,1fr);gap:10px}.vocabulary-answer dt{color:var(--muted)}.vocabulary-answer dd{margin:0}.vocabulary-card .ratings{margin-top:20px}.catalog-toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px}.catalog-toolbar h3{margin:0}.vocabulary-catalog>label{margin:18px 0}.catalog-list{max-height:540px;overflow:auto;border:1px solid var(--line);border-radius:10px}.catalog-row{display:flex;flex-direction:row;align-items:center;gap:12px;padding:10px 12px;border-bottom:1px solid var(--line);color:#e0e9f5;font-size:.9rem}.catalog-row:last-child{border:0}.catalog-row input{width:18px;height:18px;flex:none}.catalog-row>span{display:grid;gap:2px;flex:1;min-width:0}.catalog-row small{color:var(--muted)}.catalog-row button{font-size:.72rem;padding:5px 8px}.vocabulary-editor{border-top:1px solid var(--line);margin-top:20px;padding-top:12px}.editor-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.editor-fields input,.editor-fields select{width:100%;background:#0e1825;color:#e0e9f5;border:1px solid #3b4b61;border-radius:7px;padding:10px}.vocabulary-editor .actions,.vocabulary-catalog>.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:15px}.vocabulary-view a{color:var(--blue)}@media(max-width:850px){.vocabulary-layout{grid-template-columns:1fr}.vocabulary-heading{align-items:start;flex-direction:column}.vocabulary-catalog{padding:18px}}@media(max-width:500px){.editor-fields{grid-template-columns:1fr}.vocabulary-answer dl>div{grid-template-columns:1fr;gap:2px}}
 .vocabulary-catalog textarea{display:block;width:100%;min-height:90px;margin:8px 0 14px;background:#0e1825;color:#e0e9f5;border:1px solid #3b4b61;border-radius:7px;padding:10px}
 .vocabulary-card{touch-action:pan-y}
+/* UX5: the reveal target (unrevealed front only, see VocabularyWeb.kt) reads as clickable even
+   before it gets `role="button"`'s own focus outline. */
+.vocabulary-prompt-block[role=button]{cursor:pointer;border-radius:10px}
 /* P1-4: front and back overlap in one grid cell (.card-flip-inner), so the shorter face would
    otherwise inherit the taller one's height and look like an empty void — center its content
    instead of letting it hug the top. */
@@ -172,25 +177,23 @@ details{margin:16px 0;color:var(--muted);font-size:.875rem}summary{cursor:pointe
    targets touch/stylus input regardless of viewport width, per the request's own "на телефоне"
    scope, and leaves a resizable desktop window's mouse users with working buttons. */
 @media (pointer:coarse){.ratings{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;margin:-1px}}
-/* UX4-17: the default crossfade View Transitions gives same-document navigations is timed to
-   match the rest of this file's motion (220ms, the same easing token as the swipe fly-out/reveal)
-   instead of the browser's own default. Never created at all when motion is instant or the API is
-   unsupported (see `withViewTransition`), so no extra reduced-motion guard is needed here. */
-/* P1-9: naming `.route-content`/`.nav-indicator` (instead of leaving them in the default `root`
-   group) stops the whole page from crossfading as one image — that made two tabs and two
-   underlines briefly visible together and made the header flicker. The root group itself now
-   animates nothing, so unnamed elements (the header) swap instantly, and only the two named
-   groups get a direction-aware slide (`--vt-dir`, set by TrainingWebApp before starting the
-   transition) plus the indicator's own slide. */
-.route-content{view-transition-name:route}
-.nav-indicator{view-transition-name:nav-indicator}
-html:active-view-transition .nav-indicator{transition:none}
-::view-transition-old(root),::view-transition-new(root){animation:none}
-::view-transition-group(nav-indicator){animation-duration:.25s;animation-timing-function:cubic-bezier(.16,1,.3,1)}
-::view-transition-old(route){animation:.14s cubic-bezier(.4,0,1,1) both vt-out}
-::view-transition-new(route){animation:.24s cubic-bezier(.16,1,.3,1) .04s both vt-in}
-@keyframes vt-out{to{opacity:0;transform:translateX(calc(var(--vt-dir,1) * -24px))}}
-@keyframes vt-in{from{opacity:0;transform:translateX(calc(var(--vt-dir,1) * 24px))}}
+/* UX5: replaces the View Transitions crossfade (measured no faster — see FlipCardRivePlan.md
+   §19/tabs.json — and visually not what was asked for: a phone-style page slide, not a fade).
+   `display:grid` + `grid-template-columns:1fr` with every `.route-content` pinned to the same
+   `1/1` cell is the "CSS grid stack" trick: the outgoing and incoming layers overlap without
+   either needing `position:absolute`, and the row's height auto-sizes to the TALLER of the two —
+   correction round: an earlier version made only `incoming` `position:absolute` (sized purely by
+   `outgoing`, still in normal flow), so a slide into a taller route clipped its own bottom for the
+   whole ~320ms (viewport height = shorter outgoing's height) and a slide into a shorter route left
+   a gap under it (viewport height stayed at the taller outgoing's height) — both are just wrong
+   with zero JS height measurement needed once both layers sit in the same auto-sized grid cell.
+   `min-width:0` (same pattern as `.flashcard`/`.reference-panel` above) lets a wide descendant
+   (a grammar table) keep its own internal horizontal scroll instead of stretching the grid track.
+   `overflow:hidden` is only ever set as a temporary inline style by RouteSlider for a transition's
+   own duration, never left on between transitions, so a `position:sticky` descendant (the
+   reference panel) keeps a real scrolling ancestor the rest of the time. */
+.route-viewport{position:relative;display:grid;grid-template-columns:1fr}
+.route-viewport>.route-content{grid-area:1/1;min-width:0}
 /* UX4-20/21: bidirectional sibling of `.card-answer-wrap` (same 0fr/1fr grid trick) for content
    that already exists in the DOM before *and* after collapsing (the vocabulary catalog, the
    case-reference panel) — unlike the answer reveal, which only ever expands and isn't mounted at

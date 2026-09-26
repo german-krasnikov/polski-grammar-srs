@@ -1,0 +1,807 @@
+{
+  "methodology": {
+    "tool": ".tmp-ux5/tabs-jank.mjs (Playwright + CDP Emulation.setCPUThrottlingRate; per-transition frame deltas via a persistent requestAnimationFrame loop, long tasks via PerformanceObserver({entryTypes:['longtask']}))",
+    "cpuThrottle": 4,
+    "viewport": "390x844 (Playwright default chromium, no device emulation)",
+    "dist": "composeWebCompatibility (wasm branch)",
+    "transitionsMeasured": "each of the 5 nav tabs clicked once from the previous route, 500ms sampling window per click, plus a rapid 3-click sequence (Слова->Прогресс->Карточки, no waiting) sampled over 600ms",
+    "note": "Single-click samples are noisy under 4x throttle; each variant run 3x (see *_runs) to distinguish a real effect from run-to-run variance. 'before' is HEAD (e52320c) unmodified, rebuilt fresh for these measurements. 'before-no-vt' is the same HEAD build with document.startViewTransition deleted via an init script (an isolation control, not a code change) to test whether the View Transitions API itself was the dominant cost. 'after' is the final RouteSlider implementation (custom two-layer transform-only slide, buildIncoming deferred one macrotask, double-rAF instead of a forced layout read)."
+  },
+  "before_runs": {
+    "before-r1": {
+      "label": "before-r1",
+      "cpuThrottle": 4,
+      "viewport": "390x844",
+      "noViewTransition": false,
+      "perTransition": [
+        {
+          "tab": "Слова",
+          "frames": 34,
+          "meanFrameMs": 18.81,
+          "p95FrameMs": 48.9,
+          "maxFrameMs": 53.5,
+          "droppedFrames": 18,
+          "droppedFramePct": 52.9,
+          "longTaskCount": 0,
+          "longTaskTotalMs": 0,
+          "longTaskMaxMs": 0
+        },
+        {
+          "tab": "Таблицы и схема",
+          "frames": 27,
+          "meanFrameMs": 19.82,
+          "p95FrameMs": 58.9,
+          "maxFrameMs": 60,
+          "droppedFrames": 14,
+          "droppedFramePct": 51.9,
+          "longTaskCount": 0,
+          "longTaskTotalMs": 0,
+          "longTaskMaxMs": 0
+        },
+        {
+          "tab": "Прогресс",
+          "frames": 31,
+          "meanFrameMs": 17.19,
+          "p95FrameMs": 19.8,
+          "maxFrameMs": 30.9,
+          "droppedFrames": 16,
+          "droppedFramePct": 51.6,
+          "longTaskCount": 0,
+          "longTaskTotalMs": 0,
+          "longTaskMaxMs": 0
+        },
+        {
+          "tab": "Настройки",
+          "frames": 31,
+          "meanFrameMs": 17.16,
+          "p95FrameMs": 18.6,
+          "maxFrameMs": 35.2,
+          "droppedFrames": 16,
+          "droppedFramePct": 51.6,
+          "longTaskCount": 0,
+          "longTaskTotalMs": 0,
+          "longTaskMaxMs": 0
+        },
+        {
+          "tab": "Карточки",
+          "frames": 34,
+          "meanFrameMs": 16.64,
+          "p95FrameMs": 18.1,
+          "maxFrameMs": 19.4,
+          "droppedFrames": 15,
+          "droppedFramePct": 44.1,
+          "longTaskCount": 0,
+          "longTaskTotalMs": 0,
+          "longTaskMaxMs": 0
+        }
+      ],
+      "rapidConsecutiveClicks": {
+        "frames": 88,
+        "meanFrameMs": 17.05,
+        "p95FrameMs": 18.4,
+        "maxFrameMs": 35.6,
+        "droppedFrames": 40,
+        "droppedFramePct": 45.5,
+        "longTaskCount": 0,
+        "longTaskTotalMs": 0,
+        "longTaskMaxMs": 0
+      }
+    },
+    "before-r2": {
+      "label": "before-r2",
+      "cpuThrottle": 4,
+      "viewport": "390x844",
+      "noViewTransition": false,
+      "perTransition": [
+        {
+          "tab": "Слова",
+          "frames": 33,
+          "meanFrameMs": 19.19,
+          "p95FrameMs": 42.6,
+          "maxFrameMs": 50.4,
+          "droppedFrames": 17,
+          "droppedFramePct": 51.5,
+          "longTaskCount": 0,
+          "longTaskTotalMs": 0,
+          "longTaskMaxMs": 0
+        },
+        {
+          "tab": "Таблицы и схема",
+          "frames": 28,
+          "meanFrameMs": 19.65,
+          "p95FrameMs": 57.4,
+          "maxFrameMs": 62.7,
+          "droppedFrames": 11,
+          "droppedFramePct": 39.3,
+          "longTaskCount": 0,
+          "longTaskTotalMs": 0,
+          "longTaskMaxMs": 0
+        },
+        {
+          "tab": "Прогресс",
+          "frames": 31,
+          "meanFrameMs": 17.16,
+          "p95FrameMs": 18.9,
+          "maxFrameMs": 31.3,
+          "droppedFrames": 15,
+          "droppedFramePct": 48.4,
+          "longTaskCount": 0,
+          "longTaskTotalMs": 0,
+          "longTaskMaxMs": 0
+        },
+        {
+          "tab": "Настройки",
+          "frames": 31,
+          "meanFrameMs": 17.25,
+          "p95FrameMs": 18.7,
+          "maxFrameMs": 36.3,
+          "droppedFrames": 14,
+          "droppedFramePct": 45.2,
+          "longTaskCount": 0,
+          "longTaskTotalMs": 0,
+          "longTaskMaxMs": 0
+        },
+        {
+          "tab": "Карточки",
+          "frames": 32,
+          "meanFrameMs": 17.16,
+          "p95FrameMs": 18.6,
+          "maxFrameMs": 34.8,
+          "droppedFrames": 17,
+          "droppedFramePct": 53.1,
+          "longTaskCount": 0,
+          "longTaskTotalMs": 0,
+          "longTaskMaxMs": 0
+        }
+      ],
+      "rapidConsecutiveClicks": {
+        "frames": 88,
+        "meanFrameMs": 17.06,
+        "p95FrameMs": 19,
+        "maxFrameMs": 34.9,
+        "droppedFrames": 39,
+        "droppedFramePct": 44.3,
+        "longTaskCount": 0,
+        "longTaskTotalMs": 0,
+        "longTaskMaxMs": 0
+      }
+    },
+    "before-r3": {
+      "label": "before-r3",
+      "cpuThrottle": 4,
+      "viewport": "390x844",
+      "noViewTransition": false,
+      "perTransition": [
+        {
+          "tab": "Слова",
+          "frames": 33,
+          "meanFrameMs": 18.79,
+          "p95FrameMs": 44.1,
+          "maxFrameMs": 55.2,
+          "droppedFrames": 19,
+          "droppedFramePct": 57.6,
+          "longTaskCount": 0,
+          "longTaskTotalMs": 0,
+          "longTaskMaxMs": 0
+        },
+        {
+          "tab": "Таблицы и схема",
+          "frames": 27,
+          "meanFrameMs": 19.79,
+          "p95FrameMs": 58.1,
+          "maxFrameMs": 59.4,
+          "droppedFrames": 13,
+          "droppedFramePct": 48.1,
+          "longTaskCount": 0,
+          "longTaskTotalMs": 0,
+          "longTaskMaxMs": 0
+        },
+        {
+          "tab": "Прогресс",
+          "frames": 31,
+          "meanFrameMs": 17.23,
+          "p95FrameMs": 18.6,
+          "maxFrameMs": 34.3,
+          "droppedFrames": 15,
+          "droppedFramePct": 48.4,
+          "longTaskCount": 0,
+          "longTaskTotalMs": 0,
+          "longTaskMaxMs": 0
+        },
+        {
+          "tab": "Настройки",
+          "frames": 32,
+          "meanFrameMs": 17.2,
+          "p95FrameMs": 18.7,
+          "maxFrameMs": 36.4,
+          "droppedFrames": 16,
+          "droppedFramePct": 50,
+          "longTaskCount": 0,
+          "longTaskTotalMs": 0,
+          "longTaskMaxMs": 0
+        },
+        {
+          "tab": "Карточки",
+          "frames": 34,
+          "meanFrameMs": 16.66,
+          "p95FrameMs": 18.8,
+          "maxFrameMs": 19.8,
+          "droppedFrames": 18,
+          "droppedFramePct": 52.9,
+          "longTaskCount": 0,
+          "longTaskTotalMs": 0,
+          "longTaskMaxMs": 0
+        }
+      ],
+      "rapidConsecutiveClicks": {
+        "frames": 88,
+        "meanFrameMs": 17.03,
+        "p95FrameMs": 18.9,
+        "maxFrameMs": 33,
+        "droppedFrames": 40,
+        "droppedFramePct": 45.5,
+        "longTaskCount": 0,
+        "longTaskTotalMs": 0,
+        "longTaskMaxMs": 0
+      }
+    }
+  },
+  "before_no_view_transition_control": {
+    "label": "before-no-vt",
+    "cpuThrottle": 4,
+    "viewport": "390x844",
+    "noViewTransition": true,
+    "perTransition": [
+      {
+        "tab": "Слова",
+        "frames": 34,
+        "meanFrameMs": 18.34,
+        "p95FrameMs": 41.8,
+        "maxFrameMs": 45.3,
+        "droppedFrames": 17,
+        "droppedFramePct": 50,
+        "longTaskCount": 0,
+        "longTaskTotalMs": 0,
+        "longTaskMaxMs": 0
+      },
+      {
+        "tab": "Таблицы и схема",
+        "frames": 29,
+        "meanFrameMs": 19.02,
+        "p95FrameMs": 48.3,
+        "maxFrameMs": 56.8,
+        "droppedFrames": 15,
+        "droppedFramePct": 51.7,
+        "longTaskCount": 0,
+        "longTaskTotalMs": 0,
+        "longTaskMaxMs": 0
+      },
+      {
+        "tab": "Прогресс",
+        "frames": 32,
+        "meanFrameMs": 17.15,
+        "p95FrameMs": 18.7,
+        "maxFrameMs": 31.6,
+        "droppedFrames": 15,
+        "droppedFramePct": 46.9,
+        "longTaskCount": 0,
+        "longTaskTotalMs": 0,
+        "longTaskMaxMs": 0
+      },
+      {
+        "tab": "Настройки",
+        "frames": 31,
+        "meanFrameMs": 17.18,
+        "p95FrameMs": 18.8,
+        "maxFrameMs": 34,
+        "droppedFrames": 15,
+        "droppedFramePct": 48.4,
+        "longTaskCount": 0,
+        "longTaskTotalMs": 0,
+        "longTaskMaxMs": 0
+      },
+      {
+        "tab": "Карточки",
+        "frames": 32,
+        "meanFrameMs": 17.22,
+        "p95FrameMs": 19.1,
+        "maxFrameMs": 33.9,
+        "droppedFrames": 13,
+        "droppedFramePct": 40.6,
+        "longTaskCount": 0,
+        "longTaskTotalMs": 0,
+        "longTaskMaxMs": 0
+      }
+    ],
+    "rapidConsecutiveClicks": {
+      "frames": 89,
+      "meanFrameMs": 17.22,
+      "p95FrameMs": 18.6,
+      "maxFrameMs": 47.4,
+      "droppedFrames": 45,
+      "droppedFramePct": 50.6,
+      "longTaskCount": 0,
+      "longTaskTotalMs": 0,
+      "longTaskMaxMs": 0
+    }
+  },
+  "after_runs_superseded_never_actually_animated": {
+    "after-defer-r1": {
+      "label": "after-defer-r1",
+      "cpuThrottle": 4,
+      "viewport": "390x844",
+      "noViewTransition": false,
+      "perTransition": [
+        {
+          "tab": "Слова",
+          "frames": 35,
+          "meanFrameMs": 17.61,
+          "p95FrameMs": 21.7,
+          "maxFrameMs": 46.6,
+          "droppedFrames": 20,
+          "droppedFramePct": 57.1,
+          "longTaskCount": 0,
+          "longTaskTotalMs": 0,
+          "longTaskMaxMs": 0
+        },
+        {
+          "tab": "Таблицы и схема",
+          "frames": 31,
+          "meanFrameMs": 17.76,
+          "p95FrameMs": 17.9,
+          "maxFrameMs": 49.8,
+          "droppedFrames": 14,
+          "droppedFramePct": 45.2,
+          "longTaskCount": 0,
+          "longTaskTotalMs": 0,
+          "longTaskMaxMs": 0
+        },
+        {
+          "tab": "Прогресс",
+          "frames": 32,
+          "meanFrameMs": 16.69,
+          "p95FrameMs": 18.2,
+          "maxFrameMs": 18.8,
+          "droppedFrames": 14,
+          "droppedFramePct": 43.8,
+          "longTaskCount": 0,
+          "longTaskTotalMs": 0,
+          "longTaskMaxMs": 0
+        },
+        {
+          "tab": "Настройки",
+          "frames": 32,
+          "meanFrameMs": 16.65,
+          "p95FrameMs": 18.2,
+          "maxFrameMs": 18.9,
+          "droppedFrames": 11,
+          "droppedFramePct": 34.4,
+          "longTaskCount": 0,
+          "longTaskTotalMs": 0,
+          "longTaskMaxMs": 0
+        },
+        {
+          "tab": "Карточки",
+          "frames": 33,
+          "meanFrameMs": 16.68,
+          "p95FrameMs": 17.8,
+          "maxFrameMs": 18.7,
+          "droppedFrames": 12,
+          "droppedFramePct": 36.4,
+          "longTaskCount": 0,
+          "longTaskTotalMs": 0,
+          "longTaskMaxMs": 0
+        }
+      ],
+      "rapidConsecutiveClicks": {
+        "frames": 46,
+        "meanFrameMs": 16.67,
+        "p95FrameMs": 18.2,
+        "maxFrameMs": 18.5,
+        "droppedFrames": 19,
+        "droppedFramePct": 41.3,
+        "longTaskCount": 0,
+        "longTaskTotalMs": 0,
+        "longTaskMaxMs": 0
+      }
+    },
+    "after-defer-r2": {
+      "label": "after-defer-r2",
+      "cpuThrottle": 4,
+      "viewport": "390x844",
+      "noViewTransition": false,
+      "perTransition": [
+        {
+          "tab": "Слова",
+          "frames": 31,
+          "meanFrameMs": 17.98,
+          "p95FrameMs": 23.4,
+          "maxFrameMs": 59.4,
+          "droppedFrames": 11,
+          "droppedFramePct": 35.5,
+          "longTaskCount": 0,
+          "longTaskTotalMs": 0,
+          "longTaskMaxMs": 0
+        },
+        {
+          "tab": "Таблицы и схема",
+          "frames": 30,
+          "meanFrameMs": 17.73,
+          "p95FrameMs": 18.5,
+          "maxFrameMs": 51.2,
+          "droppedFrames": 12,
+          "droppedFramePct": 40,
+          "longTaskCount": 1,
+          "longTaskTotalMs": 50,
+          "longTaskMaxMs": 50
+        },
+        {
+          "tab": "Прогресс",
+          "frames": 32,
+          "meanFrameMs": 16.66,
+          "p95FrameMs": 17.7,
+          "maxFrameMs": 18.5,
+          "droppedFrames": 13,
+          "droppedFramePct": 40.6,
+          "longTaskCount": 0,
+          "longTaskTotalMs": 0,
+          "longTaskMaxMs": 0
+        },
+        {
+          "tab": "Настройки",
+          "frames": 32,
+          "meanFrameMs": 16.62,
+          "p95FrameMs": 18.7,
+          "maxFrameMs": 19,
+          "droppedFrames": 12,
+          "droppedFramePct": 37.5,
+          "longTaskCount": 0,
+          "longTaskTotalMs": 0,
+          "longTaskMaxMs": 0
+        },
+        {
+          "tab": "Карточки",
+          "frames": 33,
+          "meanFrameMs": 16.73,
+          "p95FrameMs": 17.7,
+          "maxFrameMs": 18.4,
+          "droppedFrames": 13,
+          "droppedFramePct": 39.4,
+          "longTaskCount": 0,
+          "longTaskTotalMs": 0,
+          "longTaskMaxMs": 0
+        }
+      ],
+      "rapidConsecutiveClicks": {
+        "frames": 45,
+        "meanFrameMs": 16.68,
+        "p95FrameMs": 19,
+        "maxFrameMs": 19.7,
+        "droppedFrames": 25,
+        "droppedFramePct": 55.6,
+        "longTaskCount": 0,
+        "longTaskTotalMs": 0,
+        "longTaskMaxMs": 0
+      }
+    },
+    "after-defer-r3": {
+      "label": "after-defer-r3",
+      "cpuThrottle": 4,
+      "viewport": "390x844",
+      "noViewTransition": false,
+      "perTransition": [
+        {
+          "tab": "Слова",
+          "frames": 31,
+          "meanFrameMs": 17.92,
+          "p95FrameMs": 24.7,
+          "maxFrameMs": 61,
+          "droppedFrames": 16,
+          "droppedFramePct": 51.6,
+          "longTaskCount": 0,
+          "longTaskTotalMs": 0,
+          "longTaskMaxMs": 0
+        },
+        {
+          "tab": "Таблицы и схема",
+          "frames": 31,
+          "meanFrameMs": 17.75,
+          "p95FrameMs": 18.5,
+          "maxFrameMs": 51.3,
+          "droppedFrames": 14,
+          "droppedFramePct": 45.2,
+          "longTaskCount": 0,
+          "longTaskTotalMs": 0,
+          "longTaskMaxMs": 0
+        },
+        {
+          "tab": "Прогресс",
+          "frames": 32,
+          "meanFrameMs": 16.66,
+          "p95FrameMs": 18.4,
+          "maxFrameMs": 18.5,
+          "droppedFrames": 11,
+          "droppedFramePct": 34.4,
+          "longTaskCount": 0,
+          "longTaskTotalMs": 0,
+          "longTaskMaxMs": 0
+        },
+        {
+          "tab": "Настройки",
+          "frames": 32,
+          "meanFrameMs": 16.68,
+          "p95FrameMs": 18.1,
+          "maxFrameMs": 18.7,
+          "droppedFrames": 16,
+          "droppedFramePct": 50,
+          "longTaskCount": 0,
+          "longTaskTotalMs": 0,
+          "longTaskMaxMs": 0
+        },
+        {
+          "tab": "Карточки",
+          "frames": 33,
+          "meanFrameMs": 16.67,
+          "p95FrameMs": 18.7,
+          "maxFrameMs": 18.8,
+          "droppedFrames": 15,
+          "droppedFramePct": 45.5,
+          "longTaskCount": 0,
+          "longTaskTotalMs": 0,
+          "longTaskMaxMs": 0
+        }
+      ],
+      "rapidConsecutiveClicks": {
+        "frames": 45,
+        "meanFrameMs": 16.61,
+        "p95FrameMs": 18.2,
+        "maxFrameMs": 21.7,
+        "droppedFrames": 20,
+        "droppedFramePct": 44.4,
+        "longTaskCount": 0,
+        "longTaskTotalMs": 0,
+        "longTaskMaxMs": 0
+      }
+    }
+  },
+  "after_runs_superseded_never_actually_animated_note": "These 3 runs were captured against a build that had a since-fixed correctness bug (RouteSlider.isPending — see FlipCardRivePlan.md SS19): a same-route Compose re-render landing moments after the route-changing one canceled the just-scheduled slide before it ever ran even once, so these numbers measure an INSTANT in-place rebuild, not the real animated transition. Kept only for the record; after_runs (below) is the real one.",
+  "after_runs": {
+    "after-final-r1": {
+      "label": "after-final-r1",
+      "cpuThrottle": 4,
+      "viewport": "390x844",
+      "noViewTransition": false,
+      "perTransition": [
+        {
+          "tab": "Слова",
+          "frames": 36,
+          "meanFrameMs": 17.51,
+          "p95FrameMs": 24.8,
+          "maxFrameMs": 49.5,
+          "droppedFrames": 18,
+          "droppedFramePct": 50,
+          "longTaskCount": 0,
+          "longTaskTotalMs": 0,
+          "longTaskMaxMs": 0
+        },
+        {
+          "tab": "Таблицы и схема",
+          "frames": 31,
+          "meanFrameMs": 17.73,
+          "p95FrameMs": 18.1,
+          "maxFrameMs": 60.3,
+          "droppedFrames": 16,
+          "droppedFramePct": 51.6,
+          "longTaskCount": 1,
+          "longTaskTotalMs": 60,
+          "longTaskMaxMs": 60
+        },
+        {
+          "tab": "Прогресс",
+          "frames": 33,
+          "meanFrameMs": 16.68,
+          "p95FrameMs": 18.5,
+          "maxFrameMs": 18.5,
+          "droppedFrames": 15,
+          "droppedFramePct": 45.5,
+          "longTaskCount": 0,
+          "longTaskTotalMs": 0,
+          "longTaskMaxMs": 0
+        },
+        {
+          "tab": "Настройки",
+          "frames": 32,
+          "meanFrameMs": 16.64,
+          "p95FrameMs": 17.9,
+          "maxFrameMs": 18.2,
+          "droppedFrames": 16,
+          "droppedFramePct": 50,
+          "longTaskCount": 0,
+          "longTaskTotalMs": 0,
+          "longTaskMaxMs": 0
+        },
+        {
+          "tab": "Карточки",
+          "frames": 33,
+          "meanFrameMs": 16.66,
+          "p95FrameMs": 17.9,
+          "maxFrameMs": 18.3,
+          "droppedFrames": 17,
+          "droppedFramePct": 51.5,
+          "longTaskCount": 0,
+          "longTaskTotalMs": 0,
+          "longTaskMaxMs": 0
+        }
+      ],
+      "rapidConsecutiveClicks": {
+        "frames": 46,
+        "meanFrameMs": 16.68,
+        "p95FrameMs": 17.9,
+        "maxFrameMs": 24,
+        "droppedFrames": 23,
+        "droppedFramePct": 50,
+        "longTaskCount": 0,
+        "longTaskTotalMs": 0,
+        "longTaskMaxMs": 0
+      }
+    },
+    "after-final-r2": {
+      "label": "after-final-r2",
+      "cpuThrottle": 4,
+      "viewport": "390x844",
+      "noViewTransition": false,
+      "perTransition": [
+        {
+          "tab": "Слова",
+          "frames": 35,
+          "meanFrameMs": 17.63,
+          "p95FrameMs": 23.9,
+          "maxFrameMs": 45.7,
+          "droppedFrames": 15,
+          "droppedFramePct": 42.9,
+          "longTaskCount": 0,
+          "longTaskTotalMs": 0,
+          "longTaskMaxMs": 0
+        },
+        {
+          "tab": "Таблицы и схема",
+          "frames": 31,
+          "meanFrameMs": 18.25,
+          "p95FrameMs": 21.8,
+          "maxFrameMs": 63.3,
+          "droppedFrames": 13,
+          "droppedFramePct": 41.9,
+          "longTaskCount": 1,
+          "longTaskTotalMs": 62,
+          "longTaskMaxMs": 62
+        },
+        {
+          "tab": "Прогресс",
+          "frames": 34,
+          "meanFrameMs": 16.69,
+          "p95FrameMs": 18,
+          "maxFrameMs": 18.7,
+          "droppedFrames": 15,
+          "droppedFramePct": 44.1,
+          "longTaskCount": 0,
+          "longTaskTotalMs": 0,
+          "longTaskMaxMs": 0
+        },
+        {
+          "tab": "Настройки",
+          "frames": 32,
+          "meanFrameMs": 16.68,
+          "p95FrameMs": 17.9,
+          "maxFrameMs": 18.1,
+          "droppedFrames": 13,
+          "droppedFramePct": 40.6,
+          "longTaskCount": 0,
+          "longTaskTotalMs": 0,
+          "longTaskMaxMs": 0
+        },
+        {
+          "tab": "Карточки",
+          "frames": 32,
+          "meanFrameMs": 16.67,
+          "p95FrameMs": 17.7,
+          "maxFrameMs": 18,
+          "droppedFrames": 16,
+          "droppedFramePct": 50,
+          "longTaskCount": 0,
+          "longTaskTotalMs": 0,
+          "longTaskMaxMs": 0
+        }
+      ],
+      "rapidConsecutiveClicks": {
+        "frames": 46,
+        "meanFrameMs": 16.68,
+        "p95FrameMs": 18.3,
+        "maxFrameMs": 25.3,
+        "droppedFrames": 20,
+        "droppedFramePct": 43.5,
+        "longTaskCount": 0,
+        "longTaskTotalMs": 0,
+        "longTaskMaxMs": 0
+      }
+    },
+    "after-final-r3": {
+      "label": "after-final-r3",
+      "cpuThrottle": 4,
+      "viewport": "390x844",
+      "noViewTransition": false,
+      "perTransition": [
+        {
+          "tab": "Слова",
+          "frames": 36,
+          "meanFrameMs": 17.26,
+          "p95FrameMs": 25.7,
+          "maxFrameMs": 49.1,
+          "droppedFrames": 19,
+          "droppedFramePct": 52.8,
+          "longTaskCount": 0,
+          "longTaskTotalMs": 0,
+          "longTaskMaxMs": 0
+        },
+        {
+          "tab": "Таблицы и схема",
+          "frames": 31,
+          "meanFrameMs": 17.79,
+          "p95FrameMs": 21.7,
+          "maxFrameMs": 61.1,
+          "droppedFrames": 17,
+          "droppedFramePct": 54.8,
+          "longTaskCount": 1,
+          "longTaskTotalMs": 60,
+          "longTaskMaxMs": 60
+        },
+        {
+          "tab": "Прогресс",
+          "frames": 32,
+          "meanFrameMs": 16.64,
+          "p95FrameMs": 18.5,
+          "maxFrameMs": 19.2,
+          "droppedFrames": 14,
+          "droppedFramePct": 43.8,
+          "longTaskCount": 0,
+          "longTaskTotalMs": 0,
+          "longTaskMaxMs": 0
+        },
+        {
+          "tab": "Настройки",
+          "frames": 33,
+          "meanFrameMs": 16.61,
+          "p95FrameMs": 18.1,
+          "maxFrameMs": 18.3,
+          "droppedFrames": 17,
+          "droppedFramePct": 51.5,
+          "longTaskCount": 0,
+          "longTaskTotalMs": 0,
+          "longTaskMaxMs": 0
+        },
+        {
+          "tab": "Карточки",
+          "frames": 34,
+          "meanFrameMs": 16.67,
+          "p95FrameMs": 18.5,
+          "maxFrameMs": 20,
+          "droppedFrames": 15,
+          "droppedFramePct": 44.1,
+          "longTaskCount": 0,
+          "longTaskTotalMs": 0,
+          "longTaskMaxMs": 0
+        }
+      ],
+      "rapidConsecutiveClicks": {
+        "frames": 46,
+        "meanFrameMs": 16.67,
+        "p95FrameMs": 18.6,
+        "maxFrameMs": 22.9,
+        "droppedFrames": 23,
+        "droppedFramePct": 50,
+        "longTaskCount": 0,
+        "longTaskTotalMs": 0,
+        "longTaskMaxMs": 0
+      }
+    }
+  }
+}

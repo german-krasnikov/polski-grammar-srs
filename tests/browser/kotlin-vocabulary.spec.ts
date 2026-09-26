@@ -206,3 +206,80 @@ test('a storage write from another tab does not resurrect a stale vocabulary rou
   await expect(page.getByRole('button', { name: 'Карточки', exact: true })).toHaveAttribute('aria-current', 'page');
   await expect(page.locator('.vocabulary-page')).toHaveCount(0);
 });
+
+// FlipCardRivePlan.md §19 (v5): the "Показать ответ" <button> is gone from the vocabulary card —
+// a click/tap anywhere on the card reveals (and flips) it immediately; Space does the same; typed
+// mode keeps its own "Проверить" action; clicks inside the text field/mode buttons never flip.
+
+test('UX5: no literal "Показать ответ" <button> exists any more; the reveal target is a keyboard-focusable role=button with that accessible name', async ({ page }) => {
+  await page.goto('/');
+  await page.getByRole('button', { name: 'Слова', exact: true }).click();
+  await page.getByRole('checkbox').first().check();
+  const reveal = page.getByRole('button', { name: 'Показать ответ' });
+  await expect(reveal).toBeVisible();
+  expect(await reveal.evaluate(el => el.tagName)).toBe('DIV');
+  await expect(reveal).toHaveAttribute('tabindex', '0');
+});
+
+test('UX5: clicking the card prompt (not any button) reveals and flips it', async ({ page }) => {
+  await page.goto('/');
+  await page.getByRole('button', { name: 'Слова', exact: true }).click();
+  await page.getByRole('checkbox').first().check();
+  const card = page.getByRole('region', { name: 'Карточка слова' });
+  await card.locator('.vocabulary-prompt').click();
+  await expect(card.locator('.card-flip-inner')).toHaveClass(/flipped/);
+  await expect(card.locator('.card-back')).not.toHaveAttribute('aria-hidden', 'true');
+});
+
+test('UX5: Space reveals the card, then flips it back and forth, exactly like a click', async ({ page }) => {
+  await page.goto('/');
+  await page.getByRole('button', { name: 'Слова', exact: true }).click();
+  await page.getByRole('checkbox').first().check();
+  const card = page.getByRole('region', { name: 'Карточка слова' });
+  await page.getByRole('heading', { name: 'POLSKI Grammar Matrix' }).click(); // move focus off the just-checked checkbox (an editable target)
+  await page.keyboard.press('Space');
+  await expect(card.locator('.card-flip-inner')).toHaveClass(/flipped/);
+  await page.keyboard.press('Space'); // flip back
+  await expect(card.locator('.card-front')).not.toHaveAttribute('aria-hidden', 'true');
+  await page.keyboard.press('Space'); // flip to the answer again
+  await expect(card.locator('.card-back')).not.toHaveAttribute('aria-hidden', 'true');
+  const saved = await page.evaluate(() => JSON.parse(localStorage.getItem('polski-vocabulary-pl-ru-v1')!));
+  expect(Object.keys(saved.cards ?? {})).toHaveLength(0); // purely visual — never a review
+});
+
+test('UX5: Enter on the focused role=button reveal target reveals the card, same as Space', async ({ page }) => {
+  // Correction round: a role="button" custom element gets no automatic Enter/Space activation
+  // from the browser — that wiring is the page's own responsibility (ARIA button pattern). Space
+  // was already covered above; this focuses the reveal target directly (not just the route) and
+  // presses Enter, the conventional activation key any real <button> would also respond to.
+  await page.goto('/');
+  await page.getByRole('button', { name: 'Слова', exact: true }).click();
+  await page.getByRole('checkbox').first().check();
+  const card = page.getByRole('region', { name: 'Карточка слова' });
+  const reveal = page.getByRole('button', { name: 'Показать ответ' });
+  await reveal.focus();
+  await page.keyboard.press('Enter');
+  await expect(card.locator('.card-flip-inner')).toHaveClass(/flipped/);
+  await expect(card.locator('.card-back')).not.toHaveAttribute('aria-hidden', 'true');
+});
+
+test('UX5: typed mode keeps its "Проверить" action; clicks inside the text field/mode buttons never flip', async ({ page }) => {
+  await page.goto('/');
+  await page.getByRole('button', { name: 'Слова', exact: true }).click();
+  await page.getByRole('checkbox').first().check();
+  const card = page.getByRole('region', { name: 'Карточка слова' });
+  await page.getByRole('button', { name: 'Напечатать ответ' }).click();
+  // The click-anywhere-reveals affordance's accessible name ("Показать ответ") is still there in
+  // typed mode too (it is not itself a literal button — see the other UX5 test above); typed mode
+  // additionally gets its own explicit "Проверить" action, checked below.
+  await expect(page.getByRole('button', { name: 'Проверить' })).toBeVisible();
+  const textarea = page.getByRole('textbox', { name: 'Ответ на карточку слова' });
+  await textarea.click();
+  await textarea.type('próba');
+  await expect(card.locator('.card-flip-inner')).not.toHaveClass(/flipped/); // clicking/typing in the field never flips
+  await page.getByRole('button', { name: 'Ответ вслух / про себя' }).click(); // a mode button click never flips either
+  await expect(card.locator('.card-flip-inner')).not.toHaveClass(/flipped/);
+  await page.getByRole('button', { name: 'Напечатать ответ' }).click();
+  await page.getByRole('button', { name: 'Проверить' }).click();
+  await expect(card.locator('.card-flip-inner')).toHaveClass(/flipped/);
+});

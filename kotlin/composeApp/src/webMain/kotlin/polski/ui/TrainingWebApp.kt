@@ -122,6 +122,18 @@ fun TrainingWebApp() {
                     }
                 }
                 WebRoute.Vocabulary -> {
+                    // UX5: Space OR Enter reveals (once) or flips back and forth, exactly like a
+                    // click on the card now does — the vocabulary card no longer has its own
+                    // "Показать ответ" <button>, so this is how a keyboard user activates the
+                    // focused role="button" prompt block instead (the browser does not auto-wire
+                    // Enter/Space activation for a custom role — the ARIA button pattern requires
+                    // both keys to be handled by the page, matching native <button> behavior).
+                    // Real <button>/<a>/etc. targets never reach here (`editableTarget` above).
+                    if (event.code == "Space" || event.key == "Enter") {
+                        event.preventDefault()
+                        renderer.spaceVocabulary { store.dispatch(AppAction.RefreshTime) }
+                        return@keyboard
+                    }
                     val rating = when (event.key) {
                         "1", "ArrowLeft" -> Rating.Again
                         "2", "ArrowRight" -> Rating.Good
@@ -188,6 +200,22 @@ fun TrainingWebApp() {
 internal fun editableTarget(target: Element?): Boolean =
     target?.closest("input, textarea, select, button, a, [contenteditable]") != null
 
+/**
+ * UX5: moves focus to the freshly built route's own heading (its first `h1`/`h2`, wherever it is
+ * nested — every route has exactly one) so a screen reader announces the new screen right when it
+ * appears, not the tab bar it was clicked from. A route with no heading of its own (Training, whose
+ * content starts directly with its mode toolbar) falls back to the route container itself — still
+ * a real, announced focus move, just without a heading to name it. At the moment this runs the
+ * target may still be mid-slide (translated off-screen, see [RouteSlider]) — its own untransformed
+ * layout box is already exactly where it will end up, so focusing it never needs to scroll
+ * anything (`transform` never moves an element's layout position, only its paint position).
+ */
+internal fun focusRouteHeading(content: HTMLElement) {
+    val target = (content.querySelector("h1, h2") as? HTMLElement) ?: content
+    if (!target.hasAttribute("tabindex")) target.setAttribute("tabindex", "-1")
+    target.focus()
+}
+
 private fun executeEffect(root: HTMLElement, state: AppUiState, effect: UiEffect, store: TrainingStore,
                           navigate: (WebRoute) -> Unit): Boolean {
     when (effect) {
@@ -246,11 +274,15 @@ private class TrainingDomRenderer {
     private val vocabulary = VocabularyWebController()
     private var navigation: WebNav? = null
     private val riveOverlay = RiveEffectOverlay()
+    private val slider = RouteSlider()
 
     fun close() { navigation?.close(); navigation = null; vocabulary.close() }
 
     /** UX4-14: delegates to the Vocabulary controller for the shared keydown handler. */
     fun rateVocabularyIfRevealed(rating: Rating, refresh: () -> Unit) = vocabulary.rateCurrentIfRevealed(rating, refresh)
+
+    /** UX5: delegates Space/Enter (reveal-or-flip) to the Vocabulary controller for the shared keydown handler. */
+    fun spaceVocabulary(refresh: () -> Unit) = vocabulary.spaceReveal(refresh)
 
     fun render(root: HTMLElement, state: AppUiState, route: WebRoute, returnTo: WebRoute, preferences: WebPreferencesController, store: TrainingStore, navigate: (WebRoute) -> Unit, dispatch: (AppAction) -> Unit) {
         val old = previous
@@ -286,30 +318,23 @@ private class TrainingDomRenderer {
                 put(key, node.scrollLeft to node.scrollTop)
             }
         }
-        // UX4-16..19: only a genuine route change (not the 30s timer, not a rating re-render)
-        // gets the View Transition treatment — same rebuild either way, just wrapped so the
-        // browser crossfades old→new instead of an instant swap. `withViewTransition`'s own
-        // per-target implementation already no-ops on a browser without the API. Its update
-        // callback is NOT necessarily synchronous (the spec queues it as its own task), so the
-        // bookkeeping fields below must update at the END of `rebuild` itself — updating them
-        // right after this `if` (as a plain synchronous call would allow) would advance
-        // `previousRoute` before the deferred `rebuild` has actually run, which silently broke
-        // this very function's own `previousRoute != route` focus-restore check below (RED,
-        // caught by "keyboard focus returns to the active section after leaving Settings").
+        // UX5: a genuine route change (not the 30s timer, not a rating re-render) pages the
+        // content sideways instead of rebuilding in place — everything below this point only
+        // decides WHICH of those two happens; `populate` itself is identical either way.
         val routeChangedFrom = previousRoute
         val routeChanged = old != null && routeChangedFrom != null && routeChangedFrom != route
-        val rebuild: () -> Unit = {
-            val app = (root.querySelector(":scope > .app") as? HTMLElement)
-                ?: node("div", "app").also(root::appendChild)
-            val nav = navigation ?: WebNav(app, navigate).also { navigation = it }
-            nav.update(route)
-            app.querySelector(":scope > header.top")?.remove()
-            val headerHolder = node("div")
-            renderHeader(headerHolder, state)
-            headerHolder.firstChild?.let { app.insertBefore(it, nav.shell) }
-            val content = (app.querySelector(":scope > .route-content") as? HTMLElement)
-                ?: node("div", "route-content").also(app::appendChild)
-            content.textContent = ""
+        val app = (root.querySelector(":scope > .app") as? HTMLElement)
+            ?: node("div", "app").also(root::appendChild)
+        val nav = navigation ?: WebNav(app, navigate).also { navigation = it }
+        nav.update(route)
+        app.querySelector(":scope > header.top")?.remove()
+        val headerHolder = node("div")
+        renderHeader(headerHolder, state)
+        headerHolder.firstChild?.let { app.insertBefore(it, nav.shell) }
+        val viewport = (app.querySelector(":scope > .route-viewport") as? HTMLElement)
+            ?: node("div", "route-viewport").also(app::appendChild)
+
+        fun populate(content: HTMLElement) {
             if (state.error != null) {
                 content.appendChild(node("p", "notice", state.error).apply { setAttribute("role", "alert") })
             }
@@ -327,29 +352,49 @@ private class TrainingDomRenderer {
                 WebRoute.Settings -> renderSettingsWeb(node("main", "settings-page").also(content::appendChild), preferences, store, returnTo, navigate)
             }
             content.appendChild(node("footer", text = "Прогресс сохраняется в этом браузере. Интервальные повторения — FSRS."))
-            // P1-9: a route change starts its new page at the top, not wherever the previous
-            // page's own scroll happened to be — only a routine same-route rebuild (timer,
-            // rating, …) restores it.
-            root.scrollTop = if (routeChanged) 0.0 else scroll
+        }
+
+        // Only a routine same-route rebuild (timer, rating, IME…) ever restores the element that
+        // was already focused before it — a real route change always moves focus to the new
+        // screen's heading instead (`onMounted` below), regardless of what was focused on the OLD
+        // screen (which is very often a still-live `nav-<slug>` button: nav buttons are never
+        // recreated, so a naive `getElementById(focusId)` would keep re-focusing the tab bar).
+        fun restorePreviousFocus() {
+            val restoredFocus = if (focusId.isNotEmpty()) document.getElementById(focusId) as? HTMLElement else null
+            if (restoredFocus == null) return
+            restoredFocus.focus()
+            if (restoredFocus is HTMLTextAreaElement && focusedSelection != null) {
+                val (start, end, scrollTop) = focusedSelection
+                val length = restoredFocus.value.length
+                restoredFocus.selectionStart = start?.coerceAtMost(length)
+                restoredFocus.selectionEnd = end?.coerceAtMost(length)
+                restoredFocus.scrollTop = scrollTop
+            }
+        }
+
+        // UX5, RED (see FlipCardRivePlan.md §19's evidence log): `previous`/`previousRoute`/…
+        // must update the INSTANT this render() call commits to a route change, not once the
+        // slide's animation has actually finished settling. `slider.start` defers the real DOM
+        // work by a macrotask plus two rAFs plus the full transition duration — if these fields
+        // waited for that (as they harmlessly could when a View Transition's own callback ran
+        // near-synchronously), any OTHER render() call arriving in that whole window (e.g. a
+        // Settings toggle fired right after navigating to Settings) still saw the OLD route in
+        // `previousRoute`, read itself as ANOTHER route change, and started a second slide
+        // stacking a second `.route-content` on top of the first one's still-in-flight incoming
+        // layer — leaving two of everything (e.g. two `#settings-return` buttons) forever, since
+        // nothing ever again finishes what became an orphaned first slide.
+        fun commitRouteBookkeeping() {
+            previous = state
+            previousRoute = route
+            previousPreferences = preferences.value
+            previousStatus = preferences.status
+        }
+
+        fun finalizeContent(content: HTMLElement) {
             for ((key, position) in scrollPositions) {
-                val scrolled = root.querySelector("[data-scroll-key='$key']") as? HTMLElement ?: continue
+                val scrolled = content.querySelector("[data-scroll-key='$key']") as? HTMLElement ?: continue
                 scrolled.scrollLeft = position.first
                 scrolled.scrollTop = position.second
-            }
-            val restoredFocus = if (focusId.isNotEmpty()) document.getElementById(focusId) as? HTMLElement else null
-            if (restoredFocus != null) {
-                restoredFocus.focus()
-                if (restoredFocus is HTMLTextAreaElement && focusedSelection != null) {
-                    val (start, end, scrollTop) = focusedSelection
-                    val length = restoredFocus.value.length
-                    restoredFocus.selectionStart = start?.coerceAtMost(length)
-                    restoredFocus.selectionEnd = end?.coerceAtMost(length)
-                    restoredFocus.scrollTop = scrollTop
-                }
-            } else if (routeChangedFrom != null && routeChangedFrom != route) {
-                // Rebuilding the page removes route-local controls. Give keyboard users a stable
-                // focus destination when returning from Settings (or another section).
-                (document.getElementById("nav-${route.slug}") as? HTMLElement)?.focus()
             }
             if (route == WebRoute.Training && old?.phase == CardPhase.Question && state.phase == CardPhase.Revealed) {
                 val feedback = content.querySelector(".change-list h3") as? HTMLElement
@@ -358,19 +403,49 @@ private class TrainingDomRenderer {
                     if (clearance < 12.0) root.scrollTop += 12.0 - clearance
                 }
             }
-            previous = state
-            previousRoute = route
-            previousPreferences = preferences.value
-            previousStatus = preferences.status
         }
-        if (routeChanged && !motionInstantActive()) {
-            // P1-9: which way the named `route`/`nav-indicator` groups slide (training.css's
-            // `--vt-dir`) — forward along the nav order into the new tab, backward out of it.
-            // Relies on WebRoute's declared order matching the nav's left-to-right order.
-            val direction = if (route.ordinal >= routeChangedFrom.ordinal) "1" else "-1"
-            (document.documentElement as? HTMLElement)?.style?.setProperty("--vt-dir", direction)
-            withViewTransition(rebuild)
-        } else rebuild()
+
+        if (routeChanged) {
+            // UX5: which way the two layers slide — forward along the nav order into the new tab,
+            // backward out of it. Relies on WebRoute's declared order matching the nav's
+            // left-to-right order (same assumption the old View Transition direction used).
+            val direction = if (route.ordinal >= routeChangedFrom.ordinal) 1 else -1
+            commitRouteBookkeeping() // see the comment above — must happen before slider.start, not in onSettled
+            root.scrollTop = 0.0 // P1-9: a route change starts its new page at the top.
+            slider.start(
+                viewport,
+                buildIncoming = { node("div", "route-content").also(::populate) },
+                direction = direction,
+                instant = motionInstantActive(),
+                onMounted = { incoming -> focusRouteHeading(incoming) },
+                onSettled = ::finalizeContent,
+            )
+        } else {
+            if (slider.isPending()) {
+                // RED (see RouteSlider.isPending/refresh's own doc comments): a route change's
+                // slide toward THIS same route is still deferred/animating. This call might be
+                // Compose's own routine post-navigation echo, or it might be a real, later
+                // interaction (a rating, a Matrix sub-section, a Settings toggle) that must still
+                // land — `refresh` updates whichever of the two the slide currently has (the not-
+                // yet-built closure, or the already-mounted incoming layer's content in place)
+                // without touching its animation. Scroll/focus restoration is meaningless here —
+                // there is no settled content to scroll or focus yet; the slide's own `onMounted`/
+                // `onSettled` (already scheduled) still runs once it actually gets there.
+                slider.refresh { node("div", "route-content").also(::populate) }
+                previous = state
+                previousPreferences = preferences.value
+                previousStatus = preferences.status
+            } else {
+                val content = (viewport.querySelector(":scope > .route-content") as? HTMLElement)
+                    ?: node("div", "route-content").also(viewport::appendChild)
+                content.textContent = ""
+                populate(content)
+                root.scrollTop = scroll
+                restorePreviousFocus()
+                finalizeContent(content)
+                commitRouteBookkeeping()
+            }
+        }
     }
 
     private fun renderHeader(app: HTMLElement, state: AppUiState) {

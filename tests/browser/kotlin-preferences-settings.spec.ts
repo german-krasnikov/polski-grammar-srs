@@ -105,18 +105,22 @@ test('direct Settings link and browser history keep four destinations available'
   }
 });
 
-test('keyboard focus returns to the active section after leaving Settings', async ({ page }) => {
+// UX5: a route change now moves focus to the NEW screen's own heading (RouteSlider/
+// focusRouteHeading), not back to the tab bar button that was clicked — nav buttons are never
+// recreated, so re-focusing one on every route change would silently stop working the moment
+// something else (a text field, a card) legitimately held focus when the change fired.
+test('keyboard focus moves to the new screen after leaving Settings (its own heading; Training falls back to its content region, having none)', async ({ page }) => {
   await page.goto('/#/training');
   const settingsNav = page.locator('#nav-settings');
   await settingsNav.focus();
   await page.keyboard.press('Enter');
   await expect(page).toHaveURL(/#\/settings$/);
-  await expect(page.locator('#nav-settings')).toBeFocused();
+  await expect(page.getByRole('heading', { name: 'Настройки обучения' })).toBeFocused();
   const returnButton = page.locator('#settings-return');
   await returnButton.focus();
   await page.keyboard.press('Enter');
   await expect(page).toHaveURL(/#\/training$/);
-  await expect(page.locator('#nav-training')).toBeFocused();
+  await expect(page.locator('.route-content:not([inert])')).toBeFocused(); // the settled one — the outgoing one, if still fading out, is `inert`
 });
 
 test('unreadable future settings stay exportable and cannot be overwritten by a method change', async ({ page }) => {

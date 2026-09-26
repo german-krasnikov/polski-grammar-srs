@@ -144,7 +144,9 @@ test('UX4-14: ArrowLeft/ArrowRight rate the revealed vocabulary card, alongside 
   saved = await page.evaluate(() => JSON.parse(localStorage.getItem('polski-vocabulary-pl-ru-v1')!));
   expect(Object.keys(saved.cards)).toHaveLength(0);
   await expect(page.getByRole('textbox', { name: 'Ответ на карточку слова' })).toHaveValue('próba');
-  await page.getByRole('button', { name: 'Показать ответ' }).click();
+  // UX5: typed mode keeps its own "Проверить" action (not "Показать ответ", which no longer
+  // exists at all in oral mode either — see kotlin-vocabulary.spec.ts's UX5 tests).
+  await page.getByRole('button', { name: 'Проверить' }).click();
   await page.locator('body').click({ position: { x: 5, y: 5 } }); // move focus off the (now removed) textarea
   await page.keyboard.press('ArrowRight');
   await expect.poll(async () => {
@@ -237,7 +239,7 @@ test('UX4-16: the nav indicator slides to the active destination', async ({ page
   }).toBe(true);
 });
 
-test('UX4-17/19: tab navigation still works with View Transitions wired in, on every engine, and is not triggered by the 30s timer', async ({ page }) => {
+test('UX4-17/19: tab navigation still works with RouteSlider wired in (UX5 replaced View Transitions — see kotlin-ux4.spec.ts §UX5 below), and is not triggered by the 30s timer', async ({ page }) => {
   await page.goto('/#/training');
   await continueIntroductionIfPresent(page);
   await page.getByRole('button', { name: 'Показать ответ' }).click(); // reveal, so state persists visibly across the round trip
@@ -287,4 +289,114 @@ test('capture front/back, mid-swipe and tab-switch screenshots for the v4 eviden
     await shoot(viewport, `tabs-progress-${theme}`);
   }
   console.log('UX4 evidence screenshots:', shots.join(', '));
+});
+
+// FlipCardRivePlan.md §19 (v5): tab switches replace the View Transitions crossfade with a
+// custom phone-style slide (RouteSlide.kt's RouteSlider) — two composited layers, transform only,
+// no forced layout read, focus moved to the new screen's heading.
+
+test('UX5: a tab switch slides via transform on two layers, never a textContent flash, and settles to exactly one resting .route-content', async ({ page }) => {
+  await page.goto('/#/training');
+  const viewport = page.locator('.route-viewport');
+  await expect(viewport.locator(':scope > .route-content')).toHaveCount(1);
+  await page.getByRole('button', { name: 'Слова', exact: true }).click();
+  // Mid-transition: both layers briefly coexist, and at least one carries a non-identity
+  // transform (the actual slide, not an instant swap or a crossfade).
+  await expect.poll(() => viewport.locator(':scope > .route-content').count()).toBe(2);
+  const transforms = await viewport.locator(':scope > .route-content').evaluateAll(
+    nodes => nodes.map(n => getComputedStyle(n as Element).transform),
+  );
+  expect(transforms.some(t => t !== 'none' && t !== 'matrix(1, 0, 0, 1, 0, 0)')).toBe(true);
+  // Settled: back to exactly one, showing the new route, with no leftover inline styling.
+  await expect.poll(() => viewport.locator(':scope > .route-content').count()).toBe(1);
+  const settled = viewport.locator(':scope > .route-content');
+  await expect.poll(() => settled.evaluate(el => el.getAttribute('style') || '')).toBe('');
+  await expect(page.getByRole('heading', { name: 'Слова и выражения' })).toBeVisible();
+});
+
+test('UX5: a slide between routes of different content height never clips the incoming route mid-transition', async ({ page }) => {
+  // Correction round: an earlier version made only the incoming layer `position:absolute`, so
+  // `.route-viewport` (its `overflow:hidden` set for the transition's duration) was sized purely
+  // by the outgoing layer, still in normal flow. A slide into a taller route (Training → Matrix,
+  // the plan's own "content-heaviest" route) clipped the incoming route's own bottom for the
+  // whole ~320ms, popping into view only once the transition finished and `overflow` was cleared.
+  await page.goto('/#/training');
+  const viewport = page.locator('.route-viewport');
+  await page.getByRole('button', { name: 'Таблицы и схема', exact: true }).click();
+  await expect.poll(() => viewport.locator(':scope > .route-content').count()).toBe(2);
+  const midTransition = await viewport.evaluate(el => ({
+    viewport: el.clientHeight,
+    layers: Array.from(el.querySelectorAll(':scope > .route-content')).map(l => (l as HTMLElement).scrollHeight),
+  }));
+  // The viewport must be at least as tall as the taller of the two layers throughout the slide —
+  // never clipped to the shorter one.
+  expect(midTransition.viewport).toBeGreaterThanOrEqual(Math.max(...midTransition.layers) - 1);
+  await expect.poll(() => viewport.locator(':scope > .route-content').count()).toBe(1);
+  // Settled: the viewport's height tracks the single resting layer again, with no leftover gap.
+  const settled = await viewport.evaluate(el => ({
+    viewport: el.clientHeight,
+    content: (el.querySelector(':scope > .route-content') as HTMLElement).scrollHeight,
+  }));
+  expect(Math.abs(settled.viewport - settled.content)).toBeLessThanOrEqual(1);
+});
+
+test('UX5: a route change moves focus to the new screen\'s heading; a route with no heading of its own falls back to the content region', async ({ page }) => {
+  await page.goto('/#/training');
+  await page.getByRole('button', { name: 'Слова', exact: true }).click();
+  await expect(page.getByRole('heading', { name: 'Слова и выражения' })).toBeFocused();
+  await page.getByRole('button', { name: 'Прогресс', exact: true }).click();
+  await expect(page.getByRole('heading', { name: 'Прогресс', exact: true })).toBeFocused();
+  await page.getByRole('button', { name: 'Карточки', exact: true }).click(); // Training has no route heading
+  await expect(page.locator('.route-content:not([inert])')).toBeFocused(); // the settled one — the outgoing one, if still fading out, is `inert`
+});
+
+test('UX5: a route change scrolls the new screen back to the top; a same-route rebuild does not', async ({ page }) => {
+  await page.goto('/#/matrix');
+  await page.mouse.wheel(0, 900);
+  await expect.poll(() => page.evaluate(() => document.querySelector('.training-web-host')!.scrollTop)).toBeGreaterThan(50);
+  await page.getByRole('button', { name: 'Прогресс', exact: true }).click();
+  await expect.poll(() => page.evaluate(() => document.querySelector('.training-web-host')!.scrollTop)).toBe(0);
+});
+
+test('UX5: rapid consecutive tab clicks settle cleanly on the last destination, with no leftover layer', async ({ page }) => {
+  await page.goto('/#/training');
+  await page.getByRole('button', { name: 'Слова', exact: true }).click();
+  await page.getByRole('button', { name: 'Таблицы и схема', exact: true }).click();
+  await page.getByRole('button', { name: 'Прогресс', exact: true }).click();
+  await expect(page).toHaveURL(/#\/progress$/);
+  const viewport = page.locator('.route-viewport');
+  await expect.poll(() => viewport.locator(':scope > .route-content').count()).toBe(1);
+  const settled = viewport.locator(':scope > .route-content');
+  await expect.poll(() => settled.evaluate(el => el.getAttribute('style') || '')).toBe('');
+  await expect(page.getByRole('heading', { name: 'Прогресс', exact: true })).toBeVisible();
+  // Settings/vocabulary-only elements from an earlier destination must not linger either.
+  await expect(page.locator('#settings-return')).toHaveCount(0);
+});
+
+for (const [label, prefs] of [['Motion.Reduced', { motion: 'Reduced' }], ['Animations off', { animationsEnabled: false }]] as const) {
+  test(`UX5: ${label} switches tabs instantly, with no transition`, async ({ page }) => {
+    await page.addInitScript(p => localStorage.setItem('polski-preferences-v1', JSON.stringify({ schemaVersion: 2, coursePair: 'pl-ru', ...p })), prefs);
+    await page.goto('/#/training');
+    await page.getByRole('button', { name: 'Слова', exact: true }).click();
+    const viewport = page.locator('.route-viewport');
+    // No intermediate two-layer frame should ever be observable under instant motion.
+    await expect(viewport.locator(':scope > .route-content')).toHaveCount(1);
+    await expect(page.getByRole('heading', { name: 'Слова и выражения' })).toBeVisible();
+  });
+}
+
+test('UX5: View Transitions is never invoked any more', async ({ page }) => {
+  await page.addInitScript(() => {
+    (window as any).__startViewTransitionCalls = 0;
+    const doc = document as any;
+    if (typeof doc.startViewTransition === 'function') {
+      const original = doc.startViewTransition.bind(doc);
+      doc.startViewTransition = (...args: unknown[]) => { (window as any).__startViewTransitionCalls++; return original(...args); };
+    }
+  });
+  await page.goto('/#/training');
+  await page.getByRole('button', { name: 'Слова', exact: true }).click();
+  await page.getByRole('button', { name: 'Прогресс', exact: true }).click();
+  await page.waitForTimeout(500);
+  expect(await page.evaluate(() => (window as any).__startViewTransitionCalls)).toBe(0);
 });

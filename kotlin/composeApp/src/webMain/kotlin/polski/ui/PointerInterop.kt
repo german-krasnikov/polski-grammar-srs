@@ -8,6 +8,6 @@ internal expect fun isPrimaryPointer(event: Event): Boolean
 /**
  * P1-6: drops any text range the browser's own native drag-select already started, right as a
  * horizontal swipe gesture locks in — one `expect`/`actual` per target rather than a shared
- * `dynamic`/`js()` call, same precedent as [withViewTransition].
+ * `dynamic`/`js()` call, same precedent [pointerIdentifier]/[isPrimaryPointer] already set.
  */
 internal expect fun clearTextSelection()
