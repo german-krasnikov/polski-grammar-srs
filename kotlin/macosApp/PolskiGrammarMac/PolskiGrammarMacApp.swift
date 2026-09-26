@@ -607,6 +607,11 @@ func highlightedText(_ parts: [TrainingSnapshot.HighlightPart], before: Bool) ->
 
 private struct VocabularyView: View {
     @ObservedObject var model: MacModel
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    /// Same gate as `TrainingView.cardMotionReduced` (D5): system Reduce Motion or the app's own
+    /// `Motion.Reduced` setting, so this card's flip snaps together with everything else it gates.
+    private var cardMotionReduced: Bool { reduceMotion || model.preferences?.motion == "Reduced" }
+
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 18) {
@@ -620,20 +625,7 @@ private struct VocabularyView: View {
 
                     Text(state.coverage).foregroundStyle(.secondary)
                     if let item = state.current {
-                        GroupBox("Карточка слова") {
-                            VStack(alignment: .leading, spacing: 8) {
-                                Text(item.lemma).font(.title2.bold())
-                                if state.revealed {
-                                    Text(item.translation)
-                                    Text(item.form)
-                                    Text(item.example)
-                                    HStack {
-                                        Button("Повторить") { model.vocab("again") }
-                                        Button("Вспомнил") { model.vocab("good") }
-                                    }
-                                } else { Button("Показать ответ") { model.vocab("reveal") } }
-                            }.frame(maxWidth: .infinity, alignment: .leading)
-                        }
+                        MacVocabularyCardView(model: model, state: state, item: item, reduceMotion: cardMotionReduced)
                     }
                     Text("Выбрано: \(state.selectedCount)")
                     ForEach(state.entries, id: \.lemma) { entry in

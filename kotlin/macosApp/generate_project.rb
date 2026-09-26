@@ -9,7 +9,7 @@ project.root_object.development_region = 'ru'
 
 target = project.new_target(:application, 'PolskiGrammarMac', :osx, '14.0')
 source = project.main_group.new_group('PolskiGrammarMac', 'PolskiGrammarMac')
-%w[PolskiGrammarMacApp.swift MacFlashCardView.swift RiveEffectOverlay.swift].each do |file|
+%w[PolskiGrammarMacApp.swift MacFlashCardView.swift MacVocabularyCardView.swift RiveEffectOverlay.swift].each do |file|
   target.source_build_phase.add_file_reference(source.new_file(file))
 end
 
