@@ -431,3 +431,72 @@ Direction order lives once, as `MacModel.tabOrder`, instead of duplicated in the
   restatement of the reviewer's finding — but it is still not the same as watching the actual pane
   slide on screen, so the interactive click-through remains open under the same pre-existing gap,
   same as the rest of M1-M4.
+
+## M5 — D5 "Анимации" toggle bound to `animationsEnabled`
+
+**Change**: `UserPreferencesV2.animationsEnabled` and its `UserPreferencesCodec` round-trip already
+existed in `commonMain` before this task (missing-on-decode-means-enabled, already tested by
+`UserPreferencesCodecTest.animationsEnabledMissingMeansEnabled`) — untouched here. What was missing
+on macOS specifically was: the field never reached `MacPreferencesSession`'s JSON bridge, there was
+no Settings control for it, and nothing on the Swift side gated Rive/motion on it yet.
+
+- `kotlin/shared/src/macosMain/kotlin/polski/macos/MacPreferencesSession.kt`: `currentSnapshot()`
+  now emits `animationsEnabled`, and `set()` gained an `"animationsEnabled"` case
+  (`value.toBooleanStrictOrNull()`, same pattern as every other field here) — the only shared-Kotlin
+  change, in `macosMain` only (not `commonMain`), additive, mirrors the existing
+  `method`/`appearance`/`motion`/`glassTintPercent` cases exactly.
+- `PolskiGrammarMacApp.swift`:
+  - `PreferencesSnapshot` gained `let animationsEnabled: Bool?`.
+  - New `Toggle("Анимации", ...)` in `MacSettingsView`, bound through the existing
+    `model.preference(_:_:)` bridge (`get: model.preferences?.animationsEnabled ?? true`,
+    `set: model.preference("animationsEnabled", $0 ? "true" : "false")`) — same wiring pattern as
+    the adjacent `motion`/`appearance` Pickers, no new plumbing.
+  - `TrainingView.cardMotionReduced`, `VocabularyView.cardMotionReduced` and
+    `MacRootView.tabMotionReduced` (the three existing "system Reduce Motion OR `Motion.Reduced`"
+    gates that already snap the flip/expand-reveal/tab-slide animations instant and already feed
+    `RiveEffectOverlay`'s `reduceMotion` parameter, which guards every `RiveViewModel(fileName:...)`
+    creation) each gained `|| model.preferences?.animationsEnabled == false` — reusing the one
+    existing gate mechanism rather than inventing a parallel "Rive suppressed" flag, so D5's two
+    requirements ("Rive never loaded" and "all motion instant") both fall out of the same widened
+    boolean instead of two separate code paths that could drift apart.
+- `RiveEffectOverlay.swift`: added an `.onChange(of: reduceMotion)` that nils out both
+  `rememberedViewModel`/`againViewModel` when the (now-widened) gate turns true — D5's "turning off
+  disposes existing Rive views". Previously `reduceMotion` only guarded *future* `RiveViewModel`
+  creation inside the `effect`-change handler; a view already created before the toggle flipped
+  stayed alive with no code path to release it. This closes that gap for all three callers of the
+  widened gate (system Reduce Motion, `Motion.Reduced`, and now `animationsEnabled == false`), not
+  just this task's new one.
+- No Android/iOS/web files touched; no `commonMain` change (the shared field/codec were already
+  there); `RiveViewModel(fileName:...)` is the only Rive-load call site on this host, so gating it is
+  the complete "never loaded/initialized" contract here.
+
+**TDD**: new `kotlin/shared/src/macosTest/kotlin/polski/macos/MacPreferencesSessionTest.kt` — RED
+first (`./gradlew :shared:macosArm64Test --tests "polski.macos.MacPreferencesSessionTest"`, all 3
+cases failed: `NoSuchElementException` on the missing `animationsEnabled` snapshot key, and an
+assertion failure on the write path), then GREEN after the two-line `MacPreferencesSession` change.
+Covers: (1) a fresh session's snapshot exposes `animationsEnabled: true` by default; (2) `set` writes
+`false` and it round-trips through `currentSnapshot()`; (3) an invalid value (`"nope"`) is rejected
+(non-null error) and leaves the stored value untouched. No new Kotlin test for the Swift
+gating/disposal itself — this lane still has no XCUITest target (same gap M1-M4 already flagged), so
+that part is verified by build + structural code review only, same as the rest of this file.
+
+**Files changed**:
+- `kotlin/shared/src/macosMain/kotlin/polski/macos/MacPreferencesSession.kt`.
+- `kotlin/shared/src/macosTest/kotlin/polski/macos/MacPreferencesSessionTest.kt` (new).
+- `kotlin/macosApp/PolskiGrammarMac/PolskiGrammarMacApp.swift`, `RiveEffectOverlay.swift`.
+- No project-file regeneration needed — no Swift files added/removed.
+
+**Verification**:
+- `./gradlew :shared:macosArm64Test` (cwd `kotlin/`, `JAVA_HOME` = JDK 21 arm64) — **PASSED**: the 3
+  new `MacPreferencesSessionTest` cases plus every pre-existing macOS shared test (`MacSessionTest`,
+  `MacVocabularySessionTest`, `MacProgressRepositoryTest`, etc. — none regressed), RED confirmed
+  first as above.
+- Build: `xcodebuild -project kotlin/macosApp/PolskiGrammarMac.xcodeproj -scheme PolskiGrammarMac
+  -destination "platform=macOS" -derivedDataPath /private/tmp/lane-macos-dd
+  CODE_SIGNING_ALLOWED=NO build` — **BUILD SUCCEEDED** (arm64, JDK 21 arm64).
+- Launched the built `.app` (`open`), confirmed it stayed running (`pgrep`) with no crash, then quit
+  cleanly (`pkill`). Same sandboxed-session Accessibility/Input-Monitoring gap already logged for
+  M1-M4 blocks driving a real Settings-window toggle click via `osascript`/`CGEventPost` in this
+  session; the toggle wiring and the widened-gate/dispose logic are verified by the Kotlin test (the
+  data path) plus structural code review against D5 (the Swift gating/disposal), not an interactive
+  click-through — flagging this as the same pre-existing, unresolved gap, not a new one.

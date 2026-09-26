@@ -120,6 +120,7 @@ struct PreferencesSnapshot: Decodable {
     let answerMode: String?
     let appearance: String?
     let motion: String?
+    let animationsEnabled: Bool?
     let error: String?
 }
 
@@ -392,7 +393,7 @@ private struct MacRootView: View {
     /// D5: same system-Reduce-Motion-or-app-Motion.Reduced gate the cards already use
     /// (`TrainingView.cardMotionReduced`), so the tab transition snaps together with everything
     /// else it gates.
-    private var tabMotionReduced: Bool { reduceMotion || model.preferences?.motion == "Reduced" }
+    private var tabMotionReduced: Bool { reduceMotion || model.preferences?.motion == "Reduced" || model.preferences?.animationsEnabled == false }
     private var tabTransition: AnyTransition {
         .asymmetric(
             insertion: .move(edge: model.slideForward ? .trailing : .leading).combined(with: .opacity),
@@ -522,7 +523,7 @@ private struct TrainingView: View {
     /// FC-09/12/14/20's shared reduced-motion gate: system Reduce Motion or the app's own
     /// `Motion.Reduced` setting, the same pair already used by `.animation(...)` above — both the
     /// card flip and the Rive overlay must snap/skip together with everything else this gates.
-    private var cardMotionReduced: Bool { reduceMotion || model.preferences?.motion == "Reduced" }
+    private var cardMotionReduced: Bool { reduceMotion || model.preferences?.motion == "Reduced" || model.preferences?.animationsEnabled == false }
 
     /// FC-20's Rive gate, plus the debug-only variant-B override (§5): the flip itself keeps
     /// animating in variant B — only the Rive trigger is suppressed — so this is deliberately
@@ -681,7 +682,7 @@ private struct VocabularyView: View {
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     /// Same gate as `TrainingView.cardMotionReduced` (D5): system Reduce Motion or the app's own
     /// `Motion.Reduced` setting, so this card's flip snaps together with everything else it gates.
-    private var cardMotionReduced: Bool { reduceMotion || model.preferences?.motion == "Reduced" }
+    private var cardMotionReduced: Bool { reduceMotion || model.preferences?.motion == "Reduced" || model.preferences?.animationsEnabled == false }
     // D4: the animated collapsible for the entry catalog — mirrors the web reference's
     // "Скрыть/Открыть каталог" `.collapsible` (`VocabularyWeb.kt`'s `renderCatalog`), a real
     // SwiftUI conditional mount (not a height-0 CSS-grid trick, unneeded here) driven by an
@@ -803,6 +804,14 @@ private struct MacSettingsView: View {
                 }
                 Text(systemReduceMotion ? "Система сокращает движение" : "Системное движение активно")
                     .foregroundStyle(.secondary)
+                // D5: off keeps every Rive effect unloaded (RiveViewModel is only ever created
+                // inside RiveEffectOverlay's `!reduceMotion` guard, and this toggle now widens that
+                // same gate — see `cardMotionReduced`/`tabMotionReduced`) and snaps all remaining
+                // motion instant, same as system Reduce Motion or `Motion.Reduced` already do.
+                Toggle("Анимации", isOn: Binding(
+                    get: { model.preferences?.animationsEnabled ?? true },
+                    set: { model.preference("animationsEnabled", $0 ? "true" : "false") }
+                ))
             }
             Text("Напоминания пока недоступны").foregroundStyle(.secondary)
             DataControls(model: model)

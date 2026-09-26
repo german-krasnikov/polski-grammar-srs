@@ -28,6 +28,7 @@ class MacPreferencesSession(directory: String) {
                 put("appearance", result.value.appearance.name)
                 put("motion", result.value.motion.name)
                 put("glassTintPercent", result.value.glassTintPercent)
+                put("animationsEnabled", result.value.animationsEnabled)
             }
             is PreferencesDecode.RecoveryRequired -> {
                 put("status", "RecoveryRequired")
@@ -47,6 +48,7 @@ class MacPreferencesSession(directory: String) {
             "appearance" -> current.copy(appearance = Appearance.entries.firstOrNull { it.name == value } ?: return "Неизвестная тема")
             "motion" -> current.copy(motion = Motion.entries.firstOrNull { it.name == value } ?: return "Неизвестное движение")
             "glassTintPercent" -> current.copy(glassTintPercent = value.toIntOrNull()?.takeIf { it in 0..100 } ?: return "Недопустимая плотность стекла")
+            "animationsEnabled" -> current.copy(animationsEnabled = value.toBooleanStrictOrNull() ?: return "Недопустимое значение анимаций")
             else -> return "Неизвестная настройка"
         }
         val error = repository.save(next)
