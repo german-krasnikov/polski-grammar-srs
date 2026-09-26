@@ -387,3 +387,47 @@ new vocabulary Rive-effect/interval-preview plumbing. Interactive click-through 
 gestures/keyboard/tab-switch/catalog-toggle remains the one open gap across all four (no
 Accessibility/Input Monitoring permission in this session) — worth closing with a real XCUITest
 target or a manual pass before ship, not before the cross-lane merge.
+
+## M4 correction: direction flag was one render stale on reversal (commit 6181360 → this fix)
+
+**Reviewer finding**: `slideForward` was only ever written inside
+`.onChange(of: model.selectedTab) { old, new in slideForward = ... }`. SwiftUI runs `onChange`
+*after* `body` has already rendered for the new value, so a write there only takes effect starting
+the *next* render — `tabTransition` (read synchronously in `body`) always reflected the *previous*
+switch's direction. Concrete repro: Training→Progress (forward, matches the `@State` default
+`true`, looks correct by coincidence) then Progress→Training (backward) renders with the stale
+`slideForward=true` left over from the prior switch, so the pane slides the wrong way. Any direction
+reversal between two sidebar clicks reproduces it.
+
+**Fix**: moved `slideForward` off the view (`@State`) and onto `MacModel` as a `@Published` property,
+computed inside `selectedTab`'s existing `didSet` (`PolskiGrammarMacApp.swift`, `MacModel`) instead
+of the view's `onChange`. `didSet` runs synchronously as part of the same write that changes
+`selectedTab` — before SwiftUI schedules any re-render — so `slideForward` is already correct by the
+time `body` reads it for that same switch, for every path that sets `selectedTab`: the sidebar
+`List`'s `$model.selectedTab` binding, the external state-sync in `consumeTraining` (line ~256,
+snapping `selectedTab` to the Kotlin session's `tab` field), and the "Открыть Прогресс" button.
+`MacRootView` now reads `model.slideForward` directly; the local `@State` and `.onChange` are gone.
+Direction order lives once, as `MacModel.tabOrder`, instead of duplicated in the view.
+
+**Verification**:
+- Build: same `xcodebuild` command as M4 above — **BUILD SUCCEEDED** (arm64, JDK 21 arm64,
+  `PolskiGrammarMac.xcodeproj`, scheme `PolskiGrammarMac`, `platform=macOS`,
+  `CODE_SIGNING_ALLOWED=NO`).
+- `:shared:macosArm64Test`: not run — this fix is Swift-only (`PolskiGrammarMacApp.swift`), no
+  Kotlin files touched.
+- Reviewer explicitly asked for a click-through exercising a direction reversal
+  (Training→Progress→Training). Same sandboxed-session Accessibility/Input-Monitoring gap already
+  logged above blocks driving real sidebar clicks via `osascript`/System Events in this session
+  (`osascript is not allowed assistive access (-1719)`; this session's process tree has no
+  Accessibility grant and cannot self-grant one). As a substitute, the exact reported repro was
+  reproduced and proven fixed by extracting the real `selectedTab`/`slideForward`/`didSet` logic
+  verbatim into a standalone Swift script (`swift <script>`, no Xcode project) and asserting
+  `slideForward` is correct *immediately after* each switch, mirroring how `body` reads it
+  synchronously: Training→Progress (forward, `true`) → **Progress→Training (backward, the exact
+  reversal from the reviewer's repro) → `false`, read right after the switch** → Training→Vocabulary
+  (forward, `true`) → Vocabulary→Matrix (backward, `false`). All four assertions passed
+  (`ALL PASS`, exit 0). This is a genuine regression check for the staleness mechanism itself (under
+  the old `onChange`-deferred write, the reversal case would still read the stale `true`), not a
+  restatement of the reviewer's finding — but it is still not the same as watching the actual pane
+  slide on screen, so the interactive click-through remains open under the same pre-existing gap,
+  same as the rest of M1-M4.

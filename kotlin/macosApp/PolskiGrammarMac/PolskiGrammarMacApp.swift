@@ -191,8 +191,24 @@ final class MacModel: ObservableObject {
     @Published var exportEffectId: Int64?
     @Published var exportDocument: JSONDocument?
     @Published var cardEffect: CardEffectEvent?
+    // D4: sidebar section order, shared with `MacRootView`'s slide direction — a lower index
+    // slides in from the leading edge, a higher one from the trailing edge.
+    static let tabOrder = ["Training", "Matrix", "Vocabulary", "Progress"]
+    // D4 fix: computed synchronously in `didSet`, not in a view-level `.onChange`. `.onChange`
+    // runs after `body` has already rendered for the new `selectedTab`, so a direction flag it
+    // writes only takes effect the render AFTER the one it should describe — stale by one step
+    // whenever navigation direction reverses. `didSet` runs inside the same synchronous write
+    // that changes `selectedTab`, before SwiftUI re-renders, so `slideForward` is always current
+    // for every path that sets `selectedTab` (sidebar `List` binding, external state sync in
+    // `consumeTraining`, and the "Открыть Прогресс" button).
+    @Published var slideForward = true
     @Published var selectedTab = "Training" {
-        didSet { if oldValue != selectedTab { trainingSession.dispatch(command: "tab", value: selectedTab) } }
+        didSet {
+            guard oldValue != selectedTab else { return }
+            let order = Self.tabOrder
+            slideForward = (order.firstIndex(of: selectedTab) ?? 0) >= (order.firstIndex(of: oldValue) ?? 0)
+            trainingSession.dispatch(command: "tab", value: selectedTab)
+        }
     }
     private let trainingSession: MacSession
     private let vocabularySession: MacVocabularySession
@@ -367,11 +383,6 @@ struct PolskiGrammarMacApp: App {
 private struct MacRootView: View {
     @ObservedObject var model: MacModel
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
-    // D4: which way the detail pane slides, by sidebar-section order — a lower-indexed tab
-    // (e.g. "Training") slides in from the leading edge, a higher-indexed one (e.g. "Progress")
-    // from the trailing edge, mirroring the web reference's phone-like pager direction
-    // (`TrainingWebApp.kt`'s route-order `nav-indicator`) adapted to a sidebar-driven detail pane.
-    @State private var slideForward = true
     private let tabs: [(String, String, String)] = [
         ("Training", "Карточки", "rectangle.on.rectangle"),
         ("Matrix", "Матрица", "tablecells"),
@@ -382,11 +393,10 @@ private struct MacRootView: View {
     /// (`TrainingView.cardMotionReduced`), so the tab transition snaps together with everything
     /// else it gates.
     private var tabMotionReduced: Bool { reduceMotion || model.preferences?.motion == "Reduced" }
-    private func tabIndex(_ tab: String) -> Int { tabs.firstIndex(where: { $0.0 == tab }) ?? 0 }
     private var tabTransition: AnyTransition {
         .asymmetric(
-            insertion: .move(edge: slideForward ? .trailing : .leading).combined(with: .opacity),
-            removal: .move(edge: slideForward ? .leading : .trailing).combined(with: .opacity)
+            insertion: .move(edge: model.slideForward ? .trailing : .leading).combined(with: .opacity),
+            removal: .move(edge: model.slideForward ? .leading : .trailing).combined(with: .opacity)
         )
     }
 
@@ -409,11 +419,12 @@ private struct MacRootView: View {
                 .frame(minWidth: 165)
             } detail: {
                 // D4: `.id(selectedTab)` + an asymmetric `.move`+`.opacity` transition, keyed to
-                // the sidebar section order via `slideForward` (set by the `onChange` below before
-                // the new content mounts) — a directional slide/crossfade instead of the old plain
-                // opacity-only `.animation(value:)` crossfade. ~300ms with a Material-style
-                // "emphasized" decelerate curve (`timingCurve(0.2, 0, 0, 1, ...)`), snapped under
-                // `tabMotionReduced`.
+                // the sidebar section order via `model.slideForward` (computed synchronously in
+                // `MacModel.selectedTab`'s `didSet`, so it is already correct for the switch that
+                // is about to render — see the fix note there) — a directional slide/crossfade
+                // instead of the old plain opacity-only `.animation(value:)` crossfade. ~300ms with
+                // a Material-style "emphasized" decelerate curve
+                // (`timingCurve(0.2, 0, 0, 1, ...)`), snapped under `tabMotionReduced`.
                 ZStack {
                     detailContent(model.selectedTab)
                         .id(model.selectedTab)
@@ -422,9 +433,6 @@ private struct MacRootView: View {
                 .frame(minWidth: 320, minHeight: 420)
                 .toolbar { SettingsLink { Label("Настройки", systemImage: "gearshape") } }
                 .animation(tabMotionReduced ? nil : .timingCurve(0.2, 0, 0, 1, duration: 0.3), value: model.selectedTab)
-                .onChange(of: model.selectedTab) { oldValue, newValue in
-                    slideForward = tabIndex(newValue) >= tabIndex(oldValue)
-                }
             }
         }
         .preferredColorScheme(colorScheme)
