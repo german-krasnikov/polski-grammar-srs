@@ -99,7 +99,7 @@ internal fun AndroidTrainingScreen(
                 else -> dispatch(AppAction.OpenSkillPicker)
             }
         }
-        if (state.showSkillPicker) {
+        AndroidCollapsible(visible = state.showSkillPicker, reduceMotion = reduceMotion) {
             AndroidChoiceMenu("Выбрать навык", "", skills.map { it.id to it.title }) {
                 dispatch(AppAction.ChooseSkill(it))
             }
@@ -297,7 +297,9 @@ internal fun AndroidTrainingScreen(
             modifier = Modifier.fillMaxWidth()) {
             Text(if (!introducing && state.showReference) "Скрыть таблицу" else "Таблица под рукой")
         }
-        if (state.showReference && !introducing) AndroidCaseReference(state, dispatch)
+        AndroidCollapsible(visible = state.showReference && !introducing, reduceMotion = reduceMotion) {
+            AndroidCaseReference(state, dispatch)
+        }
     }
 }
 

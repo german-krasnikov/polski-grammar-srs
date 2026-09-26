@@ -79,6 +79,7 @@ import polski.presentation.EffectOutcome
 import polski.presentation.UiEffect
 import polski.preferences.Motion
 import polski.ui.screens.AndroidContent
+import polski.ui.screens.AndroidTabContent
 import polski.ui.screens.AndroidVocabularyScreen
 import polski.ui.screens.RiveMeasurementVariant
 
@@ -184,6 +185,7 @@ private fun AndroidScreen(
 ) {
     val store = session.store
     val state by store.state.collectAsStateWithLifecycle()
+    val reduceMotion = session.preferences.motion == Motion.Reduced
     LaunchedEffect(state.explanationMethod) { session.persistExplanationMethod(state.explanationMethod) }
     val focusReveal = remember(store) { FocusRequester() }
     var confirmImport by rememberSaveable { mutableStateOf(false) }
@@ -282,15 +284,19 @@ private fun AndroidScreen(
                 session.notice?.let { Text(it, color = MaterialTheme.colorScheme.primary) }
                 state.error?.let { Text(it, color = MaterialTheme.colorScheme.error) }
                 if (showSettings) AndroidSettingsScreen(session)
-                else if (state.tab == AppTab.Vocabulary) {
-                    AndroidVocabularyScreen(session.vocabulary,
-                        onImport = onVocabularyImport, onExport = onVocabularyExport,
-                        launchMutation = session::launchVocabularyMutation,
-                        enableSwipeRating = session.preferences.swipeRatingEnabled,
-                        reduceMotion = session.preferences.motion == Motion.Reduced)
+                // D4: the four bottom-nav tabs slide past each other horizontally instead of
+                // popping; AndroidTabContent's branch parameter (not the ambient `state.tab`,
+                // already at its new value) decides which screen each side of the slide renders.
+                else AndroidTabContent(state.tab, reduceMotion) { tab ->
+                    if (tab == AppTab.Vocabulary) {
+                        AndroidVocabularyScreen(session.vocabulary,
+                            onImport = onVocabularyImport, onExport = onVocabularyExport,
+                            launchMutation = session::launchVocabularyMutation,
+                            enableSwipeRating = session.preferences.swipeRatingEnabled,
+                            reduceMotion = reduceMotion)
+                    } else AndroidContent(state.copy(tab = tab), store::dispatch, focusReveal, ::androidDate,
+                        session.preferences.swipeRatingEnabled, reduceMotion = reduceMotion)
                 }
-                else AndroidContent(state, store::dispatch, focusReveal, ::androidDate, session.preferences.swipeRatingEnabled,
-                    reduceMotion = session.preferences.motion == Motion.Reduced)
                 Spacer(Modifier.height(32.dp))
             }
         }

@@ -453,3 +453,96 @@ other file touched.
   `FATAL EXCEPTION`/`AndroidRuntime` crash across the session.
 
 **Skipped**: nothing further; this was a single self-contained wiring gap.
+
+## A4 — animated tab paging + collapsibles (D4)
+
+**Task**: phone-like paging between the four bottom-nav tabs (old/new screen slide together
+horizontally, direction from nav-bar order, ~300ms, emphasized easing, indicator already in sync
+since `state.tab` changes before the animation starts) and animated show/hide (height+opacity)
+for the app's collapsible panels, instead of both popping instantly.
+
+**Files changed**:
+- `kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidContent.kt` — added
+  `tabSlideDirection(from, to)` (pure; +1 when `to` sits at-or-right of `from` in the nav-bar order
+  `[Training, Matrix, Progress, Vocabulary]`, else -1) and `AndroidTabContent(tab, reduceMotion,
+  content)`: an `AnimatedContent` keyed on the tab, `transitionSpec` reading its own
+  `initialState`/`targetState` (not the caller's ambient tab, which has already moved on) to pick
+  `slideInHorizontally`/`slideOutHorizontally` (`tween(300, easing = CubicBezierEasing(.2f, 0f, 0f,
+  1f))`, the same curve the web reference's `RouteSlide.kt` uses) + `fadeIn`/`fadeOut`, and
+  `.using(null)` to drop the default size-morph so the container just sizes to whichever screen is
+  taller during the transition rather than visibly stretching between two very different heights.
+  `reduceMotion` swaps in `EnterTransition.None togetherWith ExitTransition.None` for an instant
+  switch. [content] receives the per-branch `AppTab`, not the ambient one — see the bug this avoids
+  below.
+- `kotlin/androidApp/src/main/java/dev/polski/grammarmatrix/MainActivity.kt` — hoisted
+  `reduceMotion` to one `val` (was computed inline twice) and replaced the plain
+  `if (state.tab == Vocabulary) … else AndroidContent(state, …)` branch with
+  `AndroidTabContent(state.tab, reduceMotion) { tab -> if (tab == Vocabulary) AndroidVocabularyScreen(…)
+  else AndroidContent(state.copy(tab = tab), …) }` — `state.copy(tab = tab)` is what makes the
+  outgoing branch keep rendering the screen it was already showing (see below), not settings
+  (`showSettings`), which is untouched and still switches instantly — out of this task's scope.
+- `kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidWidgets.kt` — added
+  `AndroidCollapsible(visible, reduceMotion, content)`: `AnimatedVisibility(visible = …)` with
+  `expandVertically(tween(220), expandFrom = Alignment.Top) + fadeIn(tween(220))` entering and the
+  mirror-image `shrinkVertically`/`fadeOut` exiting (top-anchored, matching the D1 answer-reveal fix
+  so content unfolds top-down, not bottom-up); `reduceMotion` swaps in `EnterTransition.None`/
+  `ExitTransition.None`. `AnimatedVisibility` already removes hidden content from the composition
+  (and so the accessibility tree), so no extra semantics were needed.
+- `kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidTrainingScreen.kt` — the two
+  plain `if (…) { … }` panels that popped instantly now go through `AndroidCollapsible`: the skill
+  picker (`state.showSkillPicker`) and the case-reference table (`state.showReference &&
+  !introducing`, "Таблица под рукой"/"Скрыть таблицу").
+
+**A bug caught before it shipped** (would have been a RED test had I written the naive version
+first): `AnimatedContent`'s `content: @Composable (T) -> Unit` composes both the outgoing and
+incoming branch *simultaneously* for the ~300ms transition. A first draft had the lambda passed to
+`AndroidTabContent` call `AndroidContent(state, …)` directly, reading `state.tab` from the
+enclosing scope instead of the branch's own `tab` parameter — since `state` is one shared object,
+both branches would have rendered the *same*, already-updated screen, i.e. no slide at all (or the
+outgoing screen "converting" instantly into the incoming one, per the caught-in-the-act
+`eachBranchRendersItsOwnTabNotTheLatestAmbientOne` test below). Fixed by passing
+`state.copy(tab = tab)` — every other field stays the live `state`, only the per-branch screen
+selector is pinned.
+
+**TDD**: RED — `AndroidTabTransitionTest`/`AndroidCollapsibleComposeTest` written first against
+`polski.ui.screens.{AndroidTabContent,tabSlideDirection,AndroidCollapsible}`, which didn't exist —
+compile failure (`Unresolved reference`), confirmed. Implemented `tabSlideDirection`/
+`AndroidTabContent` (`AndroidContent.kt`) and `AndroidCollapsible` (`AndroidWidgets.kt`) — compiled,
+then two more RED rounds before GREEN:
+1. Both Compose tests first mutated a plain `var … by mutableStateOf(...)` captured from outside
+   `setContent`, and reading the node right after `mainClock.advanceTimeBy(...)` found nothing —
+   the mutation never went through Compose's own snapshot/recomposition path from inside a
+   `setContent` frame. Fixed by mutating the state through a real `performClick()` on a `Button`
+   inside the composition (the same idiom `AndroidFlipCardGestureTimingTest` already uses), which
+   recomposes correctly once the clock advances.
+2. `reducedMotionShowsContentImmediatelyWithoutWaitingForAnimation` then failed with
+   `advanceTimeBy(16)` — 16ms is *less* than one fake-clock frame period, so zero frames actually
+   advanced and the post-click recomposition never ran. Bumped to `advanceTimeBy(32)` (still
+   nowhere near the real ~220ms animated path, so the "immediate" assertion stays meaningful) — GREEN.
+Final run: 8/8 across both new files.
+
+**Checks (lane-android worktree, `kotlin/`)**:
+- `./gradlew :androidApp:testDebugUnitTest --tests "dev.polski.grammarmatrix.AndroidTabTransitionTest"
+  --tests "dev.polski.grammarmatrix.AndroidCollapsibleComposeTest"` — FAIL (compile error, symbols
+  didn't exist) → FAIL (2 Compose-timing failures, see above) → PASS (8/8) — RED→RED→GREEN.
+- `./gradlew :androidApp:testDebugUnitTest` — PASS, full `androidApp` unit suite green (no
+  regressions in the D1–D3 suites this touches indirectly via `AndroidTrainingScreen.kt`).
+- `./gradlew :androidApp:assembleDebug` — PASS.
+- On-device (`emulator-5554`, `Polski_ARM35`, debug APK installed and launched, driven via `adb
+  shell input tap`, `uiautomator dump`, `screencap`): tapped Матрица then Прогресс in the bottom
+  nav — `uiautomator dump` confirmed `selected="true"` moves to the tapped item each time and the
+  screen content matches (Matrix's "Грамматическая матрица"/case tables, then Progress's
+  "Обзор"/skills list) — indicator and content stay in sync, no stuck/duplicated screen. On the
+  Training tab: dismissed the intro card, scrolled to "Таблица под рукой", tapped it — button label
+  flipped to "Скрыть таблицу" and the "Таблица этого предложения" card appeared below (screenshot);
+  tapped again — button reverted to "Таблица под рукой" and the table disappeared (screenshot). No
+  crash: `adb logcat` showed no `FATAL EXCEPTION`/`AndroidRuntime` for the app process across the
+  whole session. (The ~300ms slide/220ms expand themselves are proven by the Robolectric tests
+  driving the real animation clock frame-by-frame above — `adb`'s own tap→screencap round trip is
+  too slow/racy over ADB to reliably catch a mid-transition frame, confirmed by two attempts that
+  both landed on the already-settled frame.)
+
+**Skipped**: settings-screen open/close (`showSettings`) is a separate, pre-existing instant
+switch, not a bottom-nav tab — left untouched, out of this task's small/focused scope; a live
+TalkBack pass over the new slide (semantics-tree behavior during an `AnimatedContent` transition is
+Android's own well-tested machinery, not custom code here).
