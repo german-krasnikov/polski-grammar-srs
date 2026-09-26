@@ -941,7 +941,11 @@ private struct VocabularyView: View {
     @Binding var exportFile: ProgressFile?
     @State private var editing: Record?
     @State private var deletingId: String?
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     private var state: Record { model.vocabularyState }
+    // D5: system Reduce Motion OR the app's own `Motion.Reduced` gate the vocabulary flip too,
+    // mirroring `TrainingView.cardMotionReduced`.
+    private var cardMotionReduced: Bool { reduceMotion || model.preferences.string("motion") == "Reduced" }
 
     var body: some View {
         Form {
@@ -977,54 +981,10 @@ private struct VocabularyView: View {
                     if state.string("currentId").isEmpty {
                         Text(state.int("selectedCount") == 0 ? "Выберите слова для тренировки" : "На сейчас всё повторено")
                     } else {
-                        let card = state.record("current")
-                        let polishAnswer = state.string("direction") == "ru-pl"
-                        Text(polishAnswer ? "Вспомни по-польски" : "Вспомни по-русски")
-                            .font(.caption).foregroundStyle(.secondary)
-                        Text(polishAnswer ? card.string("translation") : card.string("lemma"))
-                            .font(.title2.weight(.semibold))
-                        if !state.bool("revealed") {
-                            Toggle("Напечатать ответ", isOn: Binding(
-                                get: { state.bool("typed") },
-                                set: { model.sendVocabulary("typed", $0 ? "true" : "false") }
-                            ))
-                            if state.bool("typed") {
-                                TextField("Твой ответ", text: Binding(
-                                    get: { state.string("draft") },
-                                    set: { model.sendVocabulary("draft", $0) }
-                                ))
-                                .textInputAutocapitalization(.never)
-                            }
-                            Button("Показать ответ") { model.sendVocabulary("reveal") }
-                                .accessibilityIdentifier("vocabularyReveal")
-                        } else {
-                            Text(polishAnswer ? card.string("lemma") : card.string("translation"))
-                                .font(.title2.weight(.bold))
-                            LabeledContent("Перевод", value: card.string("translation"))
-                            LabeledContent("Форма", value: card.string("form"))
-                            Text(card.string("example"))
-                                .font(.callout)
-                            if state.bool("typed") {
-                                Text("Твой ответ: \(state.string("draft")). Сравни сам и выбери оценку.")
-                                    .font(.footnote)
-                            }
-                            HStack {
-                                Button("Повторить") { model.sendVocabulary("again") }
-                                    .buttonStyle(.bordered)
-                                    .accessibilityIdentifier("vocabularyAgain")
-                                Spacer()
-                                Button("Вспомнил") { model.sendVocabulary("good") }
-                                    .buttonStyle(.borderedProminent)
-                                    .accessibilityIdentifier("vocabularyGood")
-                            }
-                            .disabled(state.bool("busy"))
-                            .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                                Button("Повторить") { model.sendVocabulary("again") }.tint(.orange)
-                            }
-                            .swipeActions(edge: .leading, allowsFullSwipe: true) {
-                                Button("Вспомнил") { model.sendVocabulary("good") }.tint(.green)
-                            }
-                        }
+                        VocabularyCardView(model: model, state: state, card: state.record("current"),
+                                           reduceMotion: cardMotionReduced)
+                            .listRowInsets(EdgeInsets())
+                            .listRowBackground(Color.clear)
                     }
                 }
                 Section("Мой словарь · \(state.int("selectedCount"))") {

@@ -9,7 +9,7 @@ project.root_object.development_region = 'ru'
 
 target = project.new_target(:application, 'PolskiGrammar', :ios, '17.0')
 source = project.main_group.new_group('PolskiGrammar', 'PolskiGrammar')
-%w[PolskiGrammarApp.swift FlashCardView.swift RiveEffectOverlay.swift].each do |file|
+%w[PolskiGrammarApp.swift FlashCardView.swift VocabularyCardView.swift RiveEffectOverlay.swift].each do |file|
   target.source_build_phase.add_file_reference(source.new_file(file))
 end
 assets_ref = source.new_file('Assets.xcassets')
@@ -89,6 +89,8 @@ tests.source_build_phase.add_file_reference(test_group.new_file('PolskiGrammarUI
 tests.source_build_phase.add_file_reference(test_group.new_file('FlipRivePerfUITests.swift'))
 # FC2-05's correctness proof (§12.1, R1): mid-flip screenshots/assertions, not performance.
 tests.source_build_phase.add_file_reference(test_group.new_file('FlipCorrectnessUITests.swift'))
+# D2: the vocabulary card's own whole-panel flip correctness proof.
+tests.source_build_phase.add_file_reference(test_group.new_file('VocabularyFlipUITests.swift'))
 tests.add_dependency(target)
 tests.build_configurations.each do |config|
   config.build_settings['SWIFT_VERSION'] = '5.0'

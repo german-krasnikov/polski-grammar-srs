@@ -53,6 +53,62 @@ entirely is D3's job (ring effect removal), out of this task's scope. `RiveEffec
   untouched and still exercises reveal cost. Variants A/B/C and the launch metric test are otherwise
   unchanged.
 
+## I2 — D2 whole-card flip (vocabulary cards, `VocabularyCardView`)
+
+**Change:** new `VocabularyCardView.swift`, mirroring the web reference host's own flip contract
+(`kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt`'s `FlipCard`/
+`installTapGesture` — read, not edited) natively via `rotation3DEffect`:
+- The whole rounded panel — background, border, corner radius, shadow — is attached to the
+  view's own **outer** container and rotates as one object; only the face *content* underneath
+  swaps.
+- Unrevealed: no separate "Показать ответ" button any more. The prompt block (eyebrow + word) is
+  the accessible reveal control — `accessibilityLabel("Показать ответ")`, `.isButton` trait,
+  identifier `vocabularyReveal` (the same identifier the old `Button` used, so callers/tests keep
+  working unchanged). A tap on it dispatches `sendVocabulary("reveal")`; the visual flip itself
+  stays downstream of the domain `revealed` flag turning true (`onChange(of: revealed)`), the same
+  "visual state never drives itself" contract I1/D1's reveal uses. The gesture lives on the prompt
+  block only — a **sibling** of the mode `Toggle` / typed `TextField` / "Проверить" button, never
+  their ancestor — the same split D1 already established to avoid the FC2 class of bug (an
+  ancestor tap gesture breaking a sibling Picker/TextField).
+- Typed mode keeps an explicit "Проверить" button (same `"reveal"` action) alongside the
+  tap-to-reveal prompt; taps inside the `TextField` never flip (it's a sibling, never wrapped).
+- Revealed: tapping the card again flips it back and forth **purely visually** (`flipped`/
+  `showBack`) — it never re-reveals and never itself rates; the "Повторить"/"Вспомнил" rating
+  buttons on the answer face are unaffected by this gesture.
+- Face swap at exactly 90° of the 180° rotation, both directions: `showBack` flips at the
+  animation's halfway point (`flipDuration / 2`), the discrete swap a CSS 3D flip does. `reduceMotion`
+  (system Reduce Motion or `Motion.Reduced`, `VocabularyView.cardMotionReduced`, mirroring
+  `TrainingView`'s own) snaps the flip instead of animating it — D5's motion gate.
+- A new due item (`state.currentId` changing) always resets to question-side-up, unanimated —
+  mirrors D1's own `onChange(of: card.string("id"))`.
+
+**`PolskiGrammarApp.swift` (`VocabularyView`) call site:** the "Карточка" section's inline
+oral/typed/revealed branching (Toggle, TextField, "Показать ответ" button, answer fields, rating
+`HStack`, `.swipeActions`) is replaced by one `VocabularyCardView(...)` call. `.swipeActions` was
+dropped — it's a List-row-only modifier that doesn't apply to a custom flip container, and no test
+exercised it (D3's drag-swipe rating rework is out of this task's scope; the two rating buttons are
+otherwise preserved as-is). `reduceMotion`/`cardMotionReduced` added to `VocabularyView`, matching
+`TrainingView`.
+
+**Out of scope (D3/D4, not touched):** swipe-to-rate on the vocabulary card, touch-vs-pointer
+rating-button visibility, Rive rating effects on vocabulary (none exist yet on any host for
+vocabulary — training-only today), tab-switch paging.
+
+**New UI tests** (`VocabularyFlipUITests.swift`, fixture word `noun.book` — deliberately **not**
+`noun.wife`, which `PolskiGrammarUITests.testNativeVocabularyRevealAndBinaryRating` already owns;
+sharing one FSRS-scheduled word between test files starved the later one of a due card when both
+ran in the same `xcodebuild test` invocation, confirmed by reproducing the collision and fixing it
+by switching fixture words — not a product bug):
+- `testTapOnUnrevealedCardRevealsAndFlipsOnce`: unrevealed, `vocabularyReveal` exists and
+  `vocabularyAgain`/`vocabularyGood` don't; one tap reveals+flips, both rating buttons become
+  hittable, and `vocabularyReveal` itself is gone (reveal is exactly once).
+- `testTappingRevealedCardFlipsVisuallyWithoutRating`: after reveal, a tap on the answer face's own
+  content (a dedicated non-button accessibility id, `vocabularyAnswerFace`) does not change
+  "Мой словарь · N" and leaves both rating buttons intact — proving the flip-back is visual-only,
+  never a second reveal or a rating. Ends by rating "Again" (not "Good") on purpose, so the shared
+  fixture word stays due again soon for repeat runs, the same choice the pre-existing
+  `testNativeVocabularyRevealAndBinaryRating` already makes for the same reason.
+
 ## Verification
 
 Working directory for all commands: `/Users/german/Work/JS/polski-lanes/ios/kotlin`.
@@ -68,13 +124,27 @@ Working directory for all commands: `/Users/german/Work/JS/polski-lanes/ios/kotl
 | Regression: method switch keeps typed draft through reveal+review | `-only-testing:.../testMethodSwitchKeepsTypedDraftThroughRevealAndOneReview` | PASS |
 | Regression: intro-pending card hides reference until continue | `-only-testing:.../testFirstMethodIntroductionKeepsReferenceAnswerHiddenUntilContinue` | PASS |
 | Regression: swipe rating (Again/Good) still advances once per gesture | `-only-testing:.../testBinaryRatingSwipesAdvanceOnceInEachDirection` | PASS |
+| I2 build | `xcodebuild ... build` (after adding `VocabularyCardView.swift`) | PASS |
+| I2 RED→GREEN: tap-to-reveal-and-flip, exactly once | `-only-testing:PolskiGrammarUITests/VocabularyFlipUITests/testTapOnUnrevealedCardRevealsAndFlipsOnce` | RED (missing `vocabularyReveal`/scroll target before the fix — see below) → PASS |
+| I2 RED→GREEN: flip-back is visual-only, no re-rating | `-only-testing:.../testTappingRevealedCardFlipsVisuallyWithoutRating` | RED (tap target not hittable/found before adding `vocabularyAnswerFace`) → PASS |
+| I2 regression: pre-existing vocabulary reveal+rating flow (`noun.wife`, old button identifier reused) | `-only-testing:PolskiGrammarUITests/PolskiGrammarUITests/testNativeVocabularyRevealAndBinaryRating` | PASS (run together with `VocabularyFlipUITests` in one invocation, confirming both fixture words coexist without collision) |
+| I2 regression: D1 training-card flip untouched | `-only-testing:PolskiGrammarUITests/FlipCorrectnessUITests` | PASS (2 tests) |
+
+RED evidence for I2: the first `VocabularyFlipUITests` run (before the `vocabularyAnswerFace`
+accessibility id and the `noun.book`/`noun.wife` fixture split existed) failed —
+`testTappingRevealedCardFlipsVisuallyWithoutRating`: "Failed to not hittable: StaticText ...
+label: 'Форма'", then (after the fixture-id fix but before the word split) the pre-existing
+`testNativeVocabularyRevealAndBinaryRating` failed with "Failed to tap 'vocabularyReveal' Button:
+No matches found" — both fixed as described above, then all three tests verified passing together.
 
 Not run (out of scope/lean mode): `FlipRivePerfUITests` variants A/B/C (long-running perf
-measurement, mechanically edited only — build success covers compile correctness); Android/macOS/web
-hosts (other lanes' worktrees).
+measurement, untouched by I2); Android/macOS/web hosts (other lanes' worktrees); D3/D4/D5 behavior
+this task doesn't touch (swipe rating, tab paging, Rive effects on vocabulary).
 
-Not regenerated: `kotlin/iosApp/generate_project.rb` — no files added/removed, only existing file
-contents changed, so the `.xcodeproj`'s file list didn't need touching.
+Not regenerated for I1: `kotlin/iosApp/generate_project.rb` — no files added/removed there, only
+existing file contents changed. For I2, `generate_project.rb` **was** updated (added
+`VocabularyCardView.swift` to the app target's source list and `VocabularyFlipUITests.swift` to the
+UI test target's) and re-run to add both new files to the `.xcodeproj`.
 
 ## Open follow-ups (not this task)
 
