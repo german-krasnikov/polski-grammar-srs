@@ -34,6 +34,11 @@ internal class VocabularyWebController {
     private var direction = StudyDirection.RussianToPolish
     private var filter = "A1"
     private var catalogVisible = true
+    // v4/UX4-20: true only for the render() call right after the catalog toggle button was
+    // clicked — a routine render (e.g. a rating that leaves the catalog exactly as it was) must
+    // resume the current collapsed/expanded state instantly, never replay the transition. Consumed
+    // (reset to false) by the very next renderCatalog() call, same pattern as `justRevealedFlip`.
+    private var catalogToggledThisRender = false
     private var revealed = false
     // v3/B: real 3D flip, reusing the exact same tested behaviour as the vocabulary flip's own
     // extracted [FlipCard] (originally the training card's, see CardFlip.kt) — purely visual,
@@ -136,25 +141,39 @@ internal class VocabularyWebController {
         val id = VocabularyCodec.dueIds(document, direction, scheduler, Clock.System.now()).firstOrNull()
         val item = id?.let { VocabularyCodec.item(document, it) }
         if (item == null) {
-            section.add("h3", if (document.selectedIds.isEmpty()) "Выбери слова для тренировки" else "На сейчас всё повторено")
-            section.add("p", "Отметь готовые карточки в каталоге. История каждого направления сохраняется отдельно.")
+            // P0-2: give the empty state a panel too — a bare heading/paragraph directly on the
+            // page background is the same "no panel" bug as the unrevealed front used to have.
+            val face = section.add("div", cls = "card-front card-face")
+            face.add("h3", if (document.selectedIds.isEmpty()) "Выбери слова для тренировки" else "На сейчас всё повторено")
+            face.add("p", "Отметь готовые карточки в каталоге. История каждого направления сохраняется отдельно.")
             return
         }
         // The `flipped` visual state is host-local and keyed to the item on screen — a brand-new
         // due item (after a rating advances, or the direction toggle swaps decks) always starts
         // question-side-up, never inheriting the previous item's face.
         if (id != flippedItemId) { flipped = false; flippedItemId = id; flipCard.reset() }
-        val front = detachedElement("div", "card-front")
+        // P0-2: the flip wrapper (and the front face's own panel chrome) exists from the very
+        // first unrevealed render, not only once revealed — otherwise the panel visibly springs
+        // into existence the moment the card is revealed instead of the same object rotating.
+        val flip = detachedElement("div", "card-flip")
+        val inner = detachedElement("div", "card-flip-inner")
+        flip.appendChild(inner)
+        val front = detachedElement("div", "card-front card-face")
         front.add("span", if (direction == StudyDirection.RussianToPolish) "Вспомни по-польски" else "Вспомни по-русски", "eyebrow")
         front.add("p", if (direction == StudyDirection.RussianToPolish) item.translation else item.lemma, "vocabulary-prompt")
             .setAttribute("lang", if (direction == StudyDirection.RussianToPolish) "ru" else "pl")
         if (!revealed) {
-            section.appendChild(front)
-            val modes = section.add("div", cls = "answer-mode")
-            modes.button("Ответ вслух / про себя") { typed = false; refresh() }.setAttribute("aria-pressed", (!typed).toString())
-            modes.button("Напечатать ответ") { typed = true; refresh() }.setAttribute("aria-pressed", typed.toString())
+            val modes = front.add("div", cls = "answer-mode")
+            modes.button("Ответ вслух / про себя") { typed = false; refresh() }.apply {
+                setAttribute("aria-pressed", (!typed).toString())
+                classList.toggle("active", !typed) // UX4/P2-12: same selected-state look as training's mode buttons
+            }
+            modes.button("Напечатать ответ") { typed = true; refresh() }.apply {
+                setAttribute("aria-pressed", typed.toString())
+                classList.toggle("active", typed)
+            }
             if (typed) {
-                val input = section.add("textarea") as HTMLTextAreaElement
+                val input = front.add("textarea") as HTMLTextAreaElement
                 input.id = "vocabulary-answer"
                 input.setAttribute("aria-label", "Ответ на карточку слова")
                 input.value = draft
@@ -166,34 +185,30 @@ internal class VocabularyWebController {
                     }
                 })
             }
-            section.button("Показать ответ", "primary reveal-button") { revealed = true; flipped = true; justRevealedFlip = true; refresh() }
+            front.button("Показать ответ", "primary reveal-button") { revealed = true; flipped = true; justRevealedFlip = true; refresh() }
+            inner.appendChild(front)
+            section.appendChild(flip)
             return
         }
         // v3/B: revealed — both faces mount at once in a real 3D flip wrapper, reusing the exact
-        // helpers the training card's flip used (FlipCard/mountRings/setRingsExpanded). Click
-        // toggles which face is forward, purely visually; swipe on the back rates (unchanged from
-        // before this card had a flip at all).
-        front.classList.add("card-face")
+        // `FlipCard` helper the training card's flip used. Click toggles which face is forward,
+        // purely visually; swipe/keyboard on the revealed face rates (v4/UX4-08/09/14).
         val answer = detachedElement("div", "vocabulary-answer card-back card-face")
         answer.setAttribute("aria-live", "polite")
-        renderRevealedAnswer(answer, outerRoot, item, swipeRatingEnabled, refresh)
-        val flip = detachedElement("div", "card-flip")
-        val ringsLayer = mountRings(flip)
-        val inner = detachedElement("div", "card-flip-inner")
-        flip.appendChild(inner)
+        renderRevealedAnswer(flip, answer, outerRoot, item, swipeRatingEnabled, refresh)
         inner.appendChild(front)
         inner.appendChild(answer)
         section.appendChild(flip)
         val isFlipEvent = justRevealedFlip
         justRevealedFlip = false
-        flipCard.apply(inner, front, answer, ringsLayer, toFlipped = flipped, isFlipEvent = isFlipEvent)
+        flipCard.apply(inner, front, answer, toFlipped = flipped, isFlipEvent = isFlipEvent)
         flipCard.installTap(flip) {
             flipped = !flipped
-            flipCard.apply(inner, front, answer, ringsLayer, toFlipped = flipped, isFlipEvent = true)
+            flipCard.apply(inner, front, answer, toFlipped = flipped, isFlipEvent = true)
         }
     }
 
-    private fun renderRevealedAnswer(answer: HTMLElement, outerRoot: HTMLElement, item: VocabularyItem, swipeRatingEnabled: Boolean, refresh: () -> Unit) {
+    private fun renderRevealedAnswer(flip: HTMLElement, answer: HTMLElement, outerRoot: HTMLElement, item: VocabularyItem, swipeRatingEnabled: Boolean, refresh: () -> Unit) {
         answer.add("span", if (direction == StudyDirection.RussianToPolish) "Эталон · польский" else "Эталон · русский", "eyebrow")
         answer.add("p", if (direction == StudyDirection.RussianToPolish) item.lemma else item.translation)
             .setAttribute("lang", if (direction == StudyDirection.RussianToPolish) "pl" else "ru")
@@ -203,36 +218,69 @@ internal class VocabularyWebController {
         description.detail("В предложении", item.example, "pl")
         if (typed) answer.add("p", "Твой ответ: ${draft.ifBlank { "не введён" }}. Сравни сам и выбери оценку.")
         if (swipeRatingEnabled) {
+            // v4/UX4-08/09: the whole revealed face is the element that tilts/translates with the
+            // finger/mouse — this label is a purely visual direction hint, not the gesture target
+            // itself. The gesture LISTENERS live on the stable `.card-flip` (never itself
+            // transformed — only `.card-flip-inner`'s rotateY drives the flip), not on `answer` —
+            // see `installSwipeCard`'s own doc comment for why, and `baseTransform` for how this
+            // face's own resting `rotateY(180deg)` (undoing the flip's mirroring) survives every
+            // drag/settle transform this sets rather than being clobbered by it.
             answer.add("p", "← Повторить · Вспомнил →", "vocabulary-swipe-zone muted small").apply {
                 setAttribute("aria-hidden", "true")
-                installTouchSwipeRating(this) { remembered ->
-                    val rating = if (remembered) Rating.Good else Rating.Again
-                    riveOverlay.trigger(outerRoot, answer, cardEffectFor(rating))
-                    rate(item.id, rating, refresh)
-                }
+            }
+            appendSwipeLabels(answer)
+            installSwipeCard(flip, answer, baseTransform = "rotateY(180deg)") { remembered ->
+                val rating = if (remembered) Rating.Good else Rating.Again
+                riveOverlay.trigger(outerRoot, answer, cardEffectFor(rating))
+                rate(item.id, rating, refresh)
             }
         }
+        // UX4-13: the same hint+interval structure the training card's rating buttons already
+        // show — `VocabularyCodec.preview` routes through the real scheduler without writing
+        // anything, exactly mirroring what a real review would schedule (see its own doc comment).
+        val at = Clock.System.now()
+        val preview = VocabularyCodec.preview(document, item.id, direction, scheduler, at)
         val ratings = answer.add("div", cls = "ratings")
-        ratings.button("Повторить") { riveOverlay.trigger(outerRoot, answer, cardEffectFor(Rating.Again)); rate(item.id, Rating.Again, refresh) }
-        ratings.button("Вспомнил") { riveOverlay.trigger(outerRoot, answer, cardEffectFor(Rating.Good)); rate(item.id, Rating.Good, refresh) }
+        ratings.button("Повторить", hint = "Ошибка или не уверен", interval = intervalLabel(preview[Rating.Again].toEpochMilliseconds(), at.toEpochMilliseconds()), cls = "rating-again") {
+            riveOverlay.trigger(outerRoot, answer, cardEffectFor(Rating.Again)); rate(item.id, Rating.Again, refresh)
+        }
+        ratings.button("Вспомнил", hint = "Воспроизвёл сам", interval = intervalLabel(preview[Rating.Good].toEpochMilliseconds(), at.toEpochMilliseconds()), cls = "rating-good") {
+            riveOverlay.trigger(outerRoot, answer, cardEffectFor(Rating.Good)); rate(item.id, Rating.Good, refresh)
+        }
     }
 
     private fun renderCatalog(section: HTMLElement, refresh: () -> Unit) {
         val header = section.add("div", cls = "catalog-toolbar")
         header.add("h3", "Мой словарь · ${document.selectedIds.size}")
+        val toggleId = "vocabulary-catalog-toggle"
+        val collapsibleId = "vocabulary-catalog-collapsible"
         header.button(if (catalogVisible) "Скрыть каталог" else "Открыть каталог") {
-            catalogVisible = !catalogVisible; refresh()
-        }.setAttribute("aria-expanded", catalogVisible.toString())
-        if (!catalogVisible) return
-        val filterLabel = section.add("label", "Подборка")
+            // UX4-21: move focus out of the collapsing content BEFORE it becomes inert, never
+            // after — otherwise focus would briefly sit on a node about to leave the tab order.
+            if (catalogVisible) {
+                val collapsing = kotlinx.browser.document.getElementById(collapsibleId)
+                val active = kotlinx.browser.document.activeElement
+                if (collapsing != null && active != null && collapsing.contains(active)) {
+                    (kotlinx.browser.document.getElementById(toggleId) as? HTMLElement)?.focus()
+                }
+            }
+            catalogVisible = !catalogVisible; catalogToggledThisRender = true; refresh()
+        }.apply { id = toggleId; setAttribute("aria-expanded", catalogVisible.toString()) }
+        val collapsible = section.add("div", cls = "collapsible catalog-collapsible")
+        collapsible.id = collapsibleId
+        // The 0fr/1fr grid trick clips exactly one row track; a single inner wrapper (rather than
+        // the several sibling elements below living directly in that track) is what lets every
+        // one of them collapse together, not just whichever the auto-placement grid put first.
+        val inner = collapsible.add("div")
+        val filterLabel = inner.add("label", "Подборка")
         val filters = filterLabel.select("Подборка слов", listOf(
             "A1" to "A1 · готовые карточки", "A2" to "A2 · готовые карточки", "B1" to "B1 · готовые карточки",
             "100" to "Топ-100 по частоте", "500" to "Топ-500 по частоте", "1000" to "Топ-1000 по частоте",
             "mine" to "Мои слова",
         ), filter)
         filters.addEventListener("change", { filter = filters.value; refresh() })
-        section.add("p", courseVocabularyInstructions.web, "muted small")
-        val list = section.add("div", cls = "catalog-list")
+        inner.add("p", courseVocabularyInstructions.web, "muted small")
+        val list = inner.add("div", cls = "catalog-list")
         val all = vocabularyItems + document.custom
         val byLemma = vocabularyItems.associateBy(VocabularyItem::lemma)
         val rows = when (filter) {
@@ -242,7 +290,7 @@ internal class VocabularyWebController {
         }
         if (filter in listOf("100", "500", "1000")) {
             val ready = rows.count { (_, _, item) -> item?.custom == false }
-            section.add("p", "Готово $ready/${rows.size} · недоступно ${rows.size - ready}", "muted small")
+            inner.add("p", "Готово $ready/${rows.size} · недоступно ${rows.size - ready}", "muted small")
                 .setAttribute("role", "status")
         }
         rows.forEach { (rank, lemma, item) ->
@@ -265,10 +313,10 @@ internal class VocabularyWebController {
                 refresh()
             }
         }
-        renderEditor(section, refresh)
-        val actions = section.add("div", cls = "actions")
+        renderEditor(inner, refresh)
+        val actions = inner.add("div", cls = "actions")
         actions.button("Экспорт словаря JSON") { download("polski-vocabulary-pl-ru.json", VocabularyCodec.encode(document)) }
-        val importLabel = section.add("label", "Импорт JSON")
+        val importLabel = inner.add("label", "Импорт JSON")
         val input = importLabel.add("textarea") as HTMLTextAreaElement
         input.setAttribute("aria-label", "JSON словаря для импорта")
         input.placeholder = "Вставь содержимое экспортированного JSON"
@@ -282,6 +330,8 @@ internal class VocabularyWebController {
             }.onFailure { error = it.message ?: "Не удалось импортировать словарь" }
             refresh()
         }
+        applyCollapsible(collapsible, expanded = catalogVisible, isToggleEvent = catalogToggledThisRender)
+        catalogToggledThisRender = false
     }
 
     private fun renderEditor(section: HTMLElement, refresh: () -> Unit) {
@@ -319,6 +369,18 @@ internal class VocabularyWebController {
         }
         val custom = if (editing == null) document.custom + item else document.custom.map { if (it.id == id) item else it }
         if (commit(document.copy(custom = custom), refresh)) { editing = null; editor = EditorDraft(); refresh() }
+    }
+
+    /**
+     * UX4-14: a thin wrapper over the existing [rate], reachable from the global keydown handler
+     * (`TrainingWebApp.kt`, `ArrowLeft`/`ArrowRight`/`1`/`2` on the Vocabulary route) — reads the
+     * current due id the same way [renderCard] does and does nothing before reveal or when
+     * nothing is currently due; never publishes [revealed]/[document] themselves.
+     */
+    fun rateCurrentIfRevealed(rating: Rating, refresh: () -> Unit) {
+        if (!revealed) return
+        val id = VocabularyCodec.dueIds(document, direction, scheduler, Clock.System.now()).firstOrNull() ?: return
+        rate(id, rating, refresh)
     }
 
     private fun rate(id: String, rating: Rating, refresh: () -> Unit) {
@@ -381,6 +443,17 @@ private fun HTMLElement.add(tag: String, text: String? = null, cls: String? = nu
 
 private fun HTMLElement.button(label: String, cls: String = "", action: () -> Unit): HTMLElement =
     add("button", label, cls).apply { addEventListener("click", { action() }) }
+
+/** UX4-13: same `<small>hint</small><span>interval</span>` structure the training card's rating
+ *  buttons already use — "не пустые высокие кнопки" is a direct consequence of having this.
+ *  [cls] (P2-13) carries the same `rating-again`/`rating-good` colour accent training's own
+ *  rating buttons get. */
+private fun HTMLElement.button(label: String, hint: String, interval: String, cls: String = "", action: () -> Unit): HTMLElement =
+    add("button", label, cls).apply {
+        add("small", hint)
+        add("span", interval)
+        addEventListener("click", { action() })
+    }
 
 private fun HTMLElement.select(label: String, options: List<Pair<String, String>>, chosen: String): HTMLSelectElement =
     (add("select") as HTMLSelectElement).also { select ->

@@ -18,6 +18,7 @@ import polski.data.vocabularyItems
 import polski.srs.CardDecodeResult
 import polski.srs.Rating
 import polski.srs.Scheduler
+import polski.srs.SchedulePreview
 import polski.srs.SerializedCard
 import polski.srs.SrsCard
 import polski.srs.SrsCardWire
@@ -54,6 +55,16 @@ object VocabularyCodec {
         val key = cardKey(id, direction)
         val old = StoredCard(key, document.cards[key] ?: scheduler.newCard(key, at).card)
         return document.copy(cards = document.cards + (key to scheduler.review(old, rating, at).card))
+    }
+
+    /** UX4-13: the four rating intervals a real [review] of [id] would produce, without writing
+     *  anything — mirrors [dueIds]'s way of reading the stored (or not-yet-created) card, but
+     *  routes it through [Scheduler.preview] instead of [Scheduler.review]. */
+    fun preview(document: VocabularyDocument, id: String, direction: StudyDirection,
+                scheduler: Scheduler, at: Instant): SchedulePreview {
+        val key = cardKey(id, direction)
+        val card = StoredCard(key, document.cards[key] ?: scheduler.newCard(key, at).card)
+        return scheduler.preview(card, at)
     }
 
     fun item(document: VocabularyDocument, id: String): VocabularyItem? =

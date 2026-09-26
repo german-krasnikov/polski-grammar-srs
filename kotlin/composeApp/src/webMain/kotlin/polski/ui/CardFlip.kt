@@ -19,13 +19,17 @@ private fun swapAriaAndInert(front: HTMLElement, back: HTMLElement, toFlipped: B
  * tree exactly at the 90° edge-on point of the rotation (R1/FC2-01/02) — extracted from the
  * training card's original flip (FlipCardRivePlan.md §12.1) so the vocabulary card (v3/B) reuses
  * the exact same tested behaviour instead of a second copy: exact 90° face swap in both
- * directions, an instant swap under reduced motion or Animations-off, and a ring Rive accent
- * ([mountRings]/[setRingsExpanded]) synced to the two halves.
+ * directions and an instant swap under reduced motion or Animations-off (v4/UX4-05 removed the
+ * ring Rive accent this used to pulse across the rotation, see [apply]'s own doc comment).
  *
  * One instance is one card's flip state; the caller [reset]s it whenever a brand-new card mounts
  * and calls [apply] on every render — including the very first, non-animated one — so
  * `currentAngle` always reflects the (possibly freshly rebuilt) DOM node's real angle rather than
  * assuming one.
+ *
+ * v4/UX4-05: the flip-in-progress ring Rive accent this class used to pulse across the rotation
+ * has been removed at the user's explicit request (FlipCardRivePlan.md §17.2) — [apply] now only
+ * drives the 3D rotation and the accessibility swap.
  */
 @OptIn(kotlin.js.ExperimentalWasmJsInterop::class)
 internal class FlipCard {
@@ -52,7 +56,7 @@ internal class FlipCard {
      * previously-painted frame for the browser to transition from, so the very first auto-flip
      * on reveal would snap instead of animating.
      */
-    fun apply(inner: HTMLElement, front: HTMLElement, back: HTMLElement, ringsLayer: HTMLElement, toFlipped: Boolean, isFlipEvent: Boolean) {
+    fun apply(inner: HTMLElement, front: HTMLElement, back: HTMLElement, toFlipped: Boolean, isFlipEvent: Boolean) {
         val to = if (toFlipped) 180.0 else 0.0
         // The actual rotation is always driven by the inline `transform` below (which wins over
         // any stylesheet rule); this class is kept purely as a stable, easily-asserted state
@@ -71,7 +75,6 @@ internal class FlipCard {
         val from = currentAngle
         val mid = 90.0
         val halfDurationMs = flipHalfDurationMs()
-        setRingsExpanded(ringsLayer, true)
         // R1: the target face must stay out of the accessibility tree (and unpainted-as-visible
         // via backface-visibility) until the 90° edge-on point — explicitly (re)assert the
         // pre-flip face/hidden-face pairing now, synchronously, before any frame paints.
@@ -90,7 +93,6 @@ internal class FlipCard {
             pendingTimer = window.setTimeout({
                 pendingTimer = null
                 currentAngle = to
-                setRingsExpanded(ringsLayer, false)
                 null
             }, halfDurationMs)
             null

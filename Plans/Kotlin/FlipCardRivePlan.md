@@ -1156,3 +1156,599 @@ flip. «before» — временно отключены прогрев (FC3-07)
   то есть это существующая нестабильность тестовой инфраструктуры (по всей вероятности гонка layout-
   измерения с чем-то в самой SPA-навигации при повторных `page.goto` на тот же путь с другим hash),
   не что-то, что внесла v3. Не исправлено в этом проходе (вне заявленного объёма, LEAN MODE).
+
+## 17. v4 — цельный оборот слов, свайп-первый рейтинг, анимированные табы/панели, полировка UI/UX
+
+Дата: 2026-09-26. Основание — скриншот и текстовый фидбек пользователя на текущую v3-сборку (§16), а
+не гипотеза: пользователь описал ровно то, что реально в коде (проверено чтением файлов ниже, не
+только §16 текста плана — сам текст §16.0/16.1 утверждает то, что должно быть, но CSS этому не
+соответствует, см. 17.1). Приложение в разработке — миграций нет. v0–v16 не переоткрываются, кроме
+перечисленных правок.
+
+### 17.0 Контракт v4 (пункты фидбека → решения)
+
+| # фидбека | Решение |
+|---|---|
+| 1. Оборот — не «контент во статичной рамке» | 17.1: панель (фон/рамка/радиус/тень) переносится на сами лица `.card-face`, а не на статичный `.card`/`.vocabulary-card` |
+| 2. Убрать кольца в центре при обороте и на reveal | 17.2: `mountRings`/`setRingsExpanded`/`rings.riv` полностью удаляются из обоих путей; confetti/Check/Error/Tada не трогаются |
+| 3. Свайп влево/вправо на телефоне, без кнопок; на PC — свайп мышью + кнопки + стрелки | 17.3: единый «карточка тянется за пальцем/мышью» жест на обоих хостах, кнопки визуально свёрнуты (не убраны из a11y-дерева — см. 17.3.6) под `(pointer: coarse)`/узким вьюпортом, `ArrowLeft`/`ArrowRight` добавлены в клавиатуру обоих хостов |
+| 4. Анимированное переключение табов | 17.4: View Transitions API (уже полностью в стабильных Chromium/Firefox 144+/Safari 18+ same-document, см. ниже) + CSS-кроссфейд/slide-фоллбек + скользящий underline-индикатор в `nav.primary-nav` |
+| 5. Анимация скрытия/раскрытия панелей | 17.5: тот же `grid-template-rows: 0fr↔1fr`-приём, что уже есть у reveal (§16.1), применяется к каталогу слов и к `reference-panel` |
+| 6. Общая полировка | 17.6: чек-лист по существующим токенам `training.css`, без новой палитры |
+
+### 17.1 Цельный оборот панели слов (UX4-01..04)
+
+**Диагноз (не гипотеза — построчно из `training.css`).** `.card{background:linear-gradient(...);
+border:1px solid var(--line);border-radius:14px;box-shadow:0 12px 36px #0002}` (строка 31) стоит на
+**статичном** `<section class="card vocabulary-card">` (`VocabularyWeb.kt:121`), который не входит во
+вращающийся `.card-flip-inner` — вращаются только `.card-front`/`.card-back` (`VocabularyWeb.kt:180-
+186`), а у них в CSS **нет** ни `background`, ни `border`, ни `border-radius` — только `padding`
+(строки 35/40). Визуально это ровно то, что видно на скриншоте: закруглённая панель стоит на месте,
+контент внутри неё меняется. `§16.0/16.4` текста плана называет это «весь объект... поворачивается
+как одно целое», но CSS этого не делает — расхождение плана и кода, не новая идея пользователя.
+
+**UX4-01 (CSS).** В `training.css`: убрать `background/border/border-radius/box-shadow` из общего
+правила `.card` **не трогая** его использование как простого не-вращающегося layout-контейнера
+(`section.flashcard card`, `aside.card reference-panel`, `.session-complete`, `method-introduce`,
+`.vocabulary-catalog` и т.п. — они не флипают и обойдутся тем же визуалом, поэтому чтобы не задеть
+их, правильный ход — **не трогать** `.card`, а перекрыть его именно там, где он служит статичной
+рамкой вокруг флипа): добавить `.vocabulary-card{background:none;border:0;box-shadow:none;padding:0}`
+(конкретно для `section.card.vocabulary-card` — единственный сегодня host, где `.card` оборачивает
+`.card-flip`) и перенести весь набор (`background`, `border`, `border-radius:14px`,
+`box-shadow:0 12px 36px #0002`) на `.card-face` (общий класс обеих граней, `VocabularyWeb.kt:176/177`
+уже проставляет `card-face` на оба). Это даёт: каждая грань — самодостаточная закруглённая панель со
+своим фоном/рамкой/тенью, видна ровно одна за раз (`backface-visibility:hidden`), контейнер вокруг
+неё не рисует вообще ничего — именно «весь объект переворачивается».
+**UX4-02.** `.card-back` сегодня несёт `border-top:1px solid #365342` (визуальный разделитель
+вопрос/ответ, нужный **только** там, где обе грани видны одновременно стопкой — это training-раскрытие
+§16, не флип). У флипа (только словарная карточка теперь, §16.0/B) верхняя граница создаёт лишнюю
+линию поперёк уже закруглённой сверху панели. Сузить это правило до `.card-answer-wrap .card-back`
+(раскрытие) и не переносить его на `.card-face` вовсе — грань словарной карточки получает **только**
+общую панельную рамку из UX4-01, без внутреннего разделителя.
+**UX4-03.** `padding` у `.card-front`/`.card-back` (32px/28px по бокам) остаётся как есть — теперь
+это внутренний отступ самой панели-грани, а не второй слой отступа внутри чужой рамки; визуально
+размер карточки не должен измениться (padding суммарно тот же, просто раньше распределялся между
+несуществующей внутренней и существующей внешней рамкой, а теперь — на одной).
+**UX4-04.** Приёмка: DevTools/Playwright `getComputedStyle` на смонтированной словарной карточке —
+у `.card-flip`/`.card-flip-inner`/родительского `.vocabulary-card` `background-color` прозрачный и
+`border-style:none`; у активной (не-`aria-hidden`) `.card-face` — непрозрачный фон, `border-radius`
+и `box-shadow`, идентичные на обеих гранях (одна и та же панель, независимо от того, какая грань
+показана); визуальный скриншот-диф — рамка/скругление/тень движутся вместе с текстом при 90°-обмене,
+а не остаются на месте. Существующая логика поворота (`FlipCard.apply`, 90°-обмен aria/inert, reduced
+motion) не меняется — это чисто CSS-правка, ни одна строка Kotlin-логики оборота не тронута.
+
+### 17.2 Убрать кольцевой Rive-эффект (UX4-05..07)
+
+Пользователь просит убрать именно `rings.riv`(«interactive_rings», Pick F из `RiveCatalog.md` §3) —
+и на самом обороте (`FlipCard.apply`, `CardFlip.kt:74/93`), и на training-reveal
+(`RiveEffectOverlay.triggerReveal`). `RiveCatalog.md` §3 уже отмечает: «No free file is designed as a
+card-flip VFX» — колечки были компромиссом v2/v3, не тем, что просил именно пользователь; теперь он
+явно говорит убрать. Confetti/Check-Error (rating) и Tada (chain-complete) — другой, не затронутый
+путь (`RiveEffectOverlay.trigger`/`triggerChainComplete`) и **не убираются**.
+
+**UX4-05 (Kotlin).** `CardFlip.kt`: `apply()` перестаёт принимать `ringsLayer`/вызывать
+`setRingsExpanded` (сигнатура сужается до `apply(inner, front, back, toFlipped, isFlipEvent)`);
+`VocabularyWeb.kt:181` убирает `val ringsLayer = mountRings(flip)` и оба места, что его передают
+(`renderCard`'s два вызова `flipCard.apply(...)`, строки 189/192). `RiveEffectOverlay.kt`:
+`triggerReveal()` удаляется целиком (единственный вызывающий — `TrainingWebApp.kt:566`
+`if (justRevealed) riveOverlay.triggerReveal(root, wrap)` — эта строка тоже удаляется); `mountRings`/
+`setRingsExpanded` удаляются как мёртвый код (после UX4-05 у них не остаётся вызывающих).
+**UX4-06 (ассеты/бридж).** `composeApp/src/webMain/resources/rive/rings.riv` — удалить файл;
+`rive-bridge.js` — удалить ветку, слушающую `data-rive-rings` (`MutationObserver`, см. §16.2-описание
+атрибутов) и функцию, которая проигрывает `interactive_rings`/`IsExpanded`. `training.css`:
+`.card-flip-rings` правило (строки 58-66) — удалить; `.card-flip`/`.card-flip-inner`/`.card-face`
+правила (56) остаются (сам оборот не убирается, только кольца). `THIRD_PARTY/credits.md`: убрать
+строку с `interactive_rings`/rive-ios Demo-App (если это был единственный потребитель — проверить
+перед удалением, что ни Android/iOS/macOS не используют тот же файл отдельно от web; если они его
+не трогают этим проходом — оставить кредит с пометкой "web: снят v4", не удалять сам файл истории
+кредитов задним числом).
+**UX4-07.** Приёмка: Playwright — сетевой лог по флипу и по training-reveal не содержит запроса к
+`rings.riv` (даже при прогретом Rive — прогрев (§16.3) тоже не должен greifen ring-логику, так как
+вызывающих у неё больше нет); DOM после флипа/reveal не содержит `.card-flip-rings`/`canvas` с
+`data-rive-rings`; rating-эффекты (confetti/Check/Error) и chain-complete Tada — без изменений
+(регрессия по существующим `flip-rive-perf.spec.ts`/rating spec).
+
+### 17.3 Свайп-первый рейтинг (UX4-08..20)
+
+**Существующее сегодня (проверено, не предположение).**
+`installTouchSwipeRating` (`WebSwipeRating.kt:16`) с `acceptAnyPointerType=true` уже висит на **всей**
+задней грани training-карточки (`TrainingWebApp.kt:718`, мышь тоже работает); у словарной карточки —
+тот же helper, но `acceptAnyPointerType=false` (только `coarse`-указатель) и только на узкой
+`<p class="vocabulary-swipe-zone">`-подсказке (`VocabularyWeb.kt:206-213`), не на всей грани — то
+самое «пунктирная плашка», которую видно на скриншоте. Клавиатурный `keydown`-обработчик
+(`TrainingWebApp.kt:94-114`) существует **только** для `route == Training`; у словарной карточки
+клавиатурной оценки нет вовсе. Кнопки оценки словарной карточки (`VocabularyWeb.kt:216-217`) — только
+текст, без `<small>`-подсказки и без интервала (в отличие от training, `TrainingWebApp.kt:696-706`,
+где есть оба) — отсюда «высокие пустые кнопки» на скриншоте: `.ratings button` — flex-column с
+`gap:8px` под текст трёх строк, а тут всего одна строка.
+
+**UX4-08 (единый жест-хелпер, замена/расширение `installTouchSwipeRating`).** Новый
+`installSwipeCard(zone: HTMLElement, faceForTransform: HTMLElement, onRating: (Boolean) -> Unit)` в
+`WebSwipeRating.kt` — заменяет `installTouchSwipeRating` на обоих хостах (helper переименован/
+расширен, не дублирован; старое имя может остаться internal alias, если так проще миграции тестов).
+Принимает **любой** primary pointer (свойство `acceptAnyPointerType=true` становится единственным
+режимом — differentiation по типу указателя для *приёма жеста* больше не нужна: и телефон, и мышь
+должны тянуть карточку). Логика:
+- `pointerdown` (не на интерактивном потомке/сфокусированном поле — та же проверка, что уже есть,
+  `editableTarget`) → запомнить `start`, `setPointerCapture`.
+- `pointermove` → `dx = clientX - start.x`; если `|dx| > |dy|*1.25` (тот же анти-vertical-scroll
+  критерий, что раньше проверялся только на `pointerup` — теперь непрерывно, чтобы решение
+  «это горизонтальный жест» принималось раньше и не боролось с `touch-action:pan-y`, который остаётся
+  на зоне как раньше и физически не даёт браузеру начать вертикальный скролл под пальцем, пока JS не
+  решил иначе): установить `faceForTransform.style.transform =
+  "translateX(${dx}px) rotate(${(dx/22.0).coerceIn(-8.0,8.0)}deg)"` и CSS-переменную
+  `--swipe-progress` = `(dx / 75.0).coerceIn(-1.0, 1.0)` на `zone` (та же пороговая дистанция 75px,
+  что уже используется — не новое число). `--swipe-progress` управляет через чистый CSS двумя
+  псевдо-слоями подсказки (см. UX4-10), без лишних inline-стилей на них.
+- `pointerup` → если `|dx| >= 75 && |dx| > |dy|*1.25`: commit — анимировать
+  `faceForTransform` до `translateX(${sign*140%}) rotate(${sign*14}deg)`, `opacity:0` за ~220ms
+  `cubic-bezier(.16,1,.3,1)` (тот же easing-токен, что уже выбран в §16.1 для reveal — не новый
+  профиль), затем вызвать `onRating`; иначе — snap-back: убрать inline `transform`/`--swipe-progress`
+  с тем же transition (220ms), карточка возвращается в 0. Под `motionInstantActive()` — обе ветки без
+  transition (мгновенно), как и весь остальной motion в проекте.
+- `pointercancel`/`lostpointercapture` → snap-back как при неуспешном releases.
+**UX4-09 (перенос на обе карточки).** `TrainingWebApp.kt:718` и `VocabularyWeb.kt:206-213` вызывают
+`installSwipeCard(zone = back /* вся грань */, faceForTransform = back, onRating = ...)` вместо
+старого узкого `installTouchSwipeRating` на подсказке; сама грань (`.card-back`/`.card-face`) —
+одновременно и зона жеста, и элемент, который визуально тянется — что и просил пользователь
+(«карточка тянется/наклоняется за пальцем»). Текстовая подсказка `<p class="vocabulary-swipe-zone">`
+превращается в чисто декоративный `aria-hidden` слой (уже так и есть), но его CSS (пунктирная
+рамка, UX4-10) заменяется на едвовидимый статичный текст без своей рамки — сама рамка-подсказка была
+частью жалобы («dashed hint box»), не нужна, когда вся карточка сама двигается.
+**UX4-10 (тинт/подсказка при драге, CSS).** Заменить `.vocabulary-swipe-zone{...dashed...}`
+(`training.css:126`) на два псевдо-слоя на самой грани, управляемых `--swipe-progress`
+(custom property, выставляется в JS из UX4-08, читается только в CSS — ни одного лишнего inline-стиля
+на самих слоях): `.card-face{position:relative}`, `.card-face::before,.card-face::after{content:"";
+position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:calc(var(--swipe-progress,0) * -1);
+background:linear-gradient(to right, color-mix(in srgb, var(--before) 35%, transparent), transparent 40%)}`
+(левый, «Again», активен при `--swipe-progress<0`) и симметричный `::after` с `var(--green)` слева
+направо для «Good» (активен при `>0`) — `opacity` через `calc`/`clamp` так, чтобы отрицательный
+прогресс не давал отрицательную opacity (`clamp(0,calc(var(--swipe-progress,0)*-1),1)` и
+`clamp(0,var(--swipe-progress,0),1)` соответственно). Подпись («Повторить»/«Вспомнил») — два
+`<span class="swipe-label swipe-label-again|good">` внутри грани (не псевдоэлементы — тексту нужен
+контент), `opacity` и `transform:scale()` тоже через тот же `--swipe-progress` (`opacity:clamp(...)`,
+`transform:scale(calc(.85 + .15*abs(var(--swipe-progress,0))))` — «растёт с дистанцией», как просил
+пользователь). Оба цвета — существующие токены `--before`/`--green` (уже используются для
+акцентов «было/стало» и ответов), не новая палитра.
+**UX4-11 (кнопки — не убраны из a11y-дерева, визуально свёрнуты под `pointer:coarse`).** Ключевое
+архитектурное решение, отличающееся от буквального «NO buttons» в фидбеке — обосновано ниже
+(17.8.1): кнопки оценки остаются в DOM и в accessibility-дереве **всегда** (иначе TalkBack/VoiceOver
+на телефоне, где наш кастомный pointer-свайп физически недоступен экранному диктору — единый
+touch-жест на телефоне у VoiceOver/TalkBack зарезервирован под их собственную навигацию, — теряют
+единственный способ оценить карточку; это прямое нарушение уже существующего правила kmp-web:
+«Keep named buttons and keyboard actions equivalent»). Визуально под `@media (pointer: coarse),
+(max-width: 480px)` кнопки переводятся в стандартный «visually-hidden»/`sr-only`-паттерн (не
+`display:none`/`visibility:hidden`/`aria-hidden` — эти три реально убирают элемент из
+accessibility-дерева, что и была бы регрессия): `.ratings{position:absolute;width:1px;height:1px;
+overflow:hidden;clip-path:inset(50%);white-space:nowrap;margin:-1px}` — элемент нулевого визуального
+следа, но фокусируемый и озвучиваемый. На fine-pointer/широком экране `.ratings` — обычная видимая
+раскладка (без изменений расположения), но сама вёрстка кнопки получает содержимое, которого раньше
+не было у словарной карточки (UX4-13) — «пустые высокие кнопки» с одной строкой текста больше не
+воспроизводятся ни на одном хосте.
+**UX4-12.** Приёмка a11y: с `pointer:coarse` — `.ratings` кнопки не видны на экране (0×0 клипнуты),
+но `getByRole('button', {name: 'Повторить'})`/TAB-навигация до них всё ещё находит и активирует их
+(Playwright `page.emulateMedia({ ... })` не эмулирует `pointer`, поэтому это ассерция через
+`page.setViewportSize` + CSS `@media(max-width:480px)` ветку, а для собственно `pointer:coarse` —
+через `page.evaluate` внедрение `matchMedia`-мок или через фактический mobile emulation профиль
+Playwright, который выставляет `hasTouch:true` → браузер сам матчит `pointer:coarse`; отметить как
+**[нужна проверка]**, какой из двух путей Chromium реально даёт в headless).
+**UX4-13 (интервал в кнопках словарной карточки — устраняет «пустые» кнопки на fine-pointer тоже).**
+Новый **NEW** `VocabularyCodec.preview(document, id, direction, scheduler, at): SchedulePreview` —
+чистая функция (без сайд-эффектов, зеркалит `dueIds`'s способ получить `StoredCard` по
+`cardKey(id, direction)`, но зовёт `scheduler.preview` вместо `scheduler.review`; тот же контракт,
+что `Scheduler.preview` уже даёт `TrainingStore`, `TrainingStore.kt:367`). Юнит-тест — рядом с
+существующими `VocabularySessionTest`/`VocabularyDocumentTest`: preview для нового id даёт те же
+значения, что `dueIds`+`review` дали бы при реальной оценке (не дублирует FSRS-логику, только
+маршрутизирует её). `VocabularyWebController.renderRevealedAnswer` зовёт его один раз на рендер,
+передаёт `SchedulePreview` в кнопки — те получают ту же структуру `<small>hint</small><span>
+interval</span>`, что уже есть у training (`intervalLabel`, переносимая как есть, она уже
+top-level-совместима — просто общая, не приватная, функция).
+**UX4-14 (клавиатура — теперь на обоих хостах, `ArrowLeft`/`ArrowRight` + существующие `1`/`2`).**
+`TrainingWebApp.kt`'s единственный `keydown`-обработчик (строки 94-114) — единственное место, где
+уже решены все конфликты (composing/IME/repeat/alt/ctrl/meta/`editableTarget`, см. существующий
+guard) — расширяется, а не дублируется: убрать `route != WebRoute.Training` из условия выхода,
+заменить веткой `when (route) { Training -> ...; Vocabulary -> ...; else -> return@keyboard }`, где
+`Vocabulary`-ветка требует нового публичного метода на `VocabularyWebController`,
+**NEW** `fun rateCurrentIfRevealed(rating: Rating, refresh: () -> Unit)` (тонкая обёртка над уже
+существующим приватным `rate(id, rating, refresh)`, читающая текущий due `id` тем же способом, что
+`renderCard` — не публикует внутреннее состояние, только принимает команду, тот же narrow-contract
+принцип, что уже используется в этом файле для `close()`/`deactivate()`). `when (event.key)` в обеих
+ветках получает `"ArrowLeft" -> Rating.Again`, `"ArrowRight" -> Rating.Good` рядом с существующими
+`"1"`/`"2"` (не заменяет их — оба набора клавиш работают одновременно, как и просил пользователь).
+`ArrowLeft`/`ArrowRight` НЕ должны срабатывать во время печатного ответа — уже покрыто тем же
+`editableTarget(event.target as? Element)`-guard'ом, стоящим до всей ветки `if/else`, никакой новой
+проверки не требуется (курсор в `<textarea>` продолжает штатно двигаться стрелками).
+**UX4-15.** Приёмка (оба хоста, LEAN): короткий/вертикальный/до-reveal свайп не оценивает (как в
+v1/FC-07, не регрессирует); ровно один полноценный свайп = одна оценка; `ArrowLeft`/`ArrowRight`
+работают на обеих карточках вне печатного поля, не работают внутри него; кнопки оценки видимы и
+рабочие на fine-pointer с интервалом, визуально свёрнуты, но доступны через Tab/screen-reader на
+coarse-pointer/узком вьюпорте; тинт/подпись растут с `|dx|`, fly-out/snap-back анимируются под
+нормальным motion и мгновенны под `Motion.Reduced`/Animations-off; ни один из существующих rating-
+Rive-триггеров (`riveOverlay.trigger`) не меняет момент вызова — он остаётся на `onRating`, то есть
+после commit жеста/клика по кнопке, как и раньше.
+
+### 17.4 Анимированное переключение табов (UX4-16..19)
+
+**Исследование (проверено, не по памяти).** Same-document View Transitions API — стабильно во всех
+трёх движках уже на сегодня (2026-09-26): Chromium/Edge 111+, **Safari 18+** (macOS/iPadOS/iOS),
+**Firefox 144+** (`caniuse.com/view-transitions`, MDN `View_Transition_API`, проверено WebSearch этим
+проходом). Значит `document.startViewTransition` можно использовать как основной путь с CSS-
+фоллбеком только для более старых версий тех же трёх браузеров — не как экзотическую прогрессивную
+надстройку. Rive Marketplace: единственный найденный релевантный кандидат «tab bar» —
+пост **#283 «Bottom Navigation Bar»** (автор Nader, не remix, 2021, `public.rive.app/community/
+runtime-files/283-5137-bottom-navigation-bar.riv`, CC BY 4.0 по правилам маркетплейса из
+`RiveCatalog.md` §1) — **не скачан и не инспектирован** этим проходом (прозрачность фона, набор
+инпутов/артбордов, вес файла — неизвестны, см. 17.8.2); ни один из уже проинспектированных в
+`RiveCatalog.md` §4.7 файлов (`clean_icon_set.riv` — иконки STAR/BELL/TIMER, не совпадают по смыслу
+с «Карточки/Слова/Таблицы/Прогресс/Настройки») не годится напрямую. **Решение: CSS/View Transitions
+для v4, Rive — в backlog** (соответствует «only if licensed, transparent and cheap; otherwise CSS»
+из самого запроса — «cheap» здесь буквально не проверено, значит не берём в этот проход).
+
+**UX4-16 (skeleton, `WebNav.kt`).** Добавить `<span class="nav-indicator" aria-hidden="true">`
+как первый child `shell` (`nav.primary-nav`), позиционируемый `position:absolute` относительно
+`nav{position:relative}`. `update(route)` (уже существует, строки 34-41) дополняется: после
+проставления `active`/`aria-pressed`/`aria-current` — взять `getBoundingClientRect()` активной
+кнопки относительно `shell`, выставить на индикаторе `transform:translateX(${left}px)` и
+`width:${width}px` через inline-style (тот же forced-layout+inline-style паттерн, что уже
+используется во флипе/reveal — тут он не нужен для «from»-кадра, потому что индикатор не пересоздаётся
+между рендерами, только двигается — обычный CSS `transition:transform .25s cubic-bezier(.16,1,.3,1),
+width .25s cubic-bezier(.16,1,.3,1)` в stylesheet достаточен). Под `motionInstantActive()` —
+`transition:none` inline, как везде.
+**UX4-17 (переход контента, `TrainingWebApp.kt`).** `render()` сегодня всегда просто
+`content.textContent = ""` + перестройка (`TrainingWebApp.kt:273`) — этот путь остаётся для
+любого обновления **в пределах** одного route (таймер, ре-рендер после оценки и т.п. не должны
+триггерить переходную анимацию каждые 30 секунд). Новое: у вызывающего `render()` кода (там, где
+известно, что *route изменился* — `WebRouteController`'s callback, уже приходящий в `App`-composable
+как `navigate`-обработчик) оборачивать именно эту перестройку в `document.startViewTransition { ... }`,
+если функция существует (`js("typeof document.startViewTransition === 'function'")`/аналог в Wasm —
+**[нужна проверка]** точный синтаксис feature-detection для обоих таргетов, тот же класс вопроса, что
+уже отмечен как открытый в RiveResearch/kmp-web для `dynamic`-интеропа) **и** не `motionInstantActive()`.
+CSS: `::view-transition-old(root),::view-transition-new(root){animation-duration:.22s;
+animation-timing-function:cubic-bezier(.16,1,.3,1)}` — стандартный crossfade по умолчанию достаточен
+(усложнять до directional slide через `view-transition-name` на `.route-content` — не обязательно
+первым проходом; slide — очевидное последующее усиление: `view-transition-name:route-content` на
+контейнере плюс `::view-transition-old/new(route-content){animation:slide-out/.in .22s}` с направлением
+из знака перехода между индексами `destinations`). **Фоллбек** (браузер без API, или motion instant):
+текущее мгновенное `textContent=""`-поведение — уже корректный, просто немотанный, фоллбек; никакого
+отдельного кода для него не нужно, кроме собственно `if (supported && !instant) transition else plain`.
+**UX4-18 (клавиатурная/URL-навигация — тоже переходит).** `startViewTransition` оборачивает
+перестройку независимо от того, что вызвало `navigate()` (клик по `nav`, `popstate`/`hashchange` из
+`WebRouteController`, программный `dispatch(AppAction.SelectTab)` после `Settings`→`returnTo`) —
+единая точка (внутри `render()`'а самого перехода между route, не внутри `WebNav`) гарантирует, что
+Back/Forward тоже анимируются, а не только клик по кнопке. Это не создаёt новых `history`-записей —
+`WebRouteController` их и так создаёт по клику (уже существующий контракт, не меняется).
+**UX4-19.** Приёмка: клик по табу — контент кроссфейдит/слайдит ~220мс, `nav-indicator` синхронно
+скользит под новую активную кнопку; `Motion.Reduced`/Animations-off/`prefers-reduced-motion` — тот же
+переход без transition (мгновенно, `startViewTransition` либо не вызывается вовсе, либо вызывается
+с `animation:none` через CSS — оба варианта корректны, тест проверяет итоговый DOM, не факт вызова
+API); 30-секундный таймер/оценка карточки **не** триггерят переход (только реальная смена route);
+браузер без `startViewTransition` (WebKit/Firefox старых версий, Playwright WebKit проверить отдельно
+— **[нужна проверка]**, какую версию несёт текущий Playwright) — навигация работает идентично
+сегодняшней, без ошибки в консоли.
+
+### 17.5 Анимация скрытия/раскрытия панелей (UX4-20..22)
+
+Переиспользуется **тот же** `grid-template-rows: 0fr↔1fr` + forced-layout приём, что §16.1 уже
+установил для reveal (`applyExpand`) — не второй способ анимировать высоту. Кандидаты, найденные
+чтением кода (не гипотетические): каталог слов (`catalogVisible`, `VocabularyWeb.kt:223-226`, кнопка
+«Скрыть/Открыть каталог», уже с `aria-expanded`, но без анимации — `refresh()` просто убирает контент
+инстантно) и `reference-panel` («Таблица под рукой»/«Скрыть таблицу», `TrainingWebApp.kt:373-378`,
+тоже уже `aria-expanded`, тоже без анимации — целый `aside.card` то есть, то нет).
+**UX4-20 (обёртка).** Обе кнопки продолжают вызывать существующий `refresh()`/`dispatch(...)` (логика
+видимости не меняется — только то, как перестроенный DOM визуально появляется/исчезает). Новый общий
+хелпер (top-level, рядом с `applyExpand`, либо буквально переиспользуемый как `applyExpand(wrap,
+isRevealEvent = justToggled)` — сигнатура уже достаточно общая) применяется на: (а) `.catalog-list`+
+всё, что рендерится после чекбокса «каталог» (сама секция, обёрнутая в `.card-answer-wrap`-подобный
+grid-контейнер — переименовать по смыслу или буквально реюзать класс, раз механика идентична); (б)
+`.reference-panel`, тоже оборачиваемая в тот же grid-wrap. Оба — и раскрытие, и скрытие — анимируются
+(в отличие от reveal, который только раскрывает; здесь классу `expanded` соответствует и снятие: при
+скрытии из `expanded` в неё же не добавленный класс — переход `1fr→0fr` идёт по тому же
+`transition`, направление берётся из того, какое значение сейчас у `grid-template-rows`, CSS это уже
+умеет без дополнительной ветки кода).
+**UX4-21 (фокус, a11y).** При скрытии — если фокус был внутри скрываемого контента (например,
+чекбокс каталога), переносить его на саму toggle-кнопку **до** начала transition (не после — иначе на
+момент запуска анимации фокус на секунду «висит» на узле, который через мгновение получит `inert`/
+уйдёт из потока); `aria-expanded` на кнопке — уже правильно обновляется существующим кодом, не
+трогается. Скрытый контент во время `0fr`-состояния — не убирается из DOM (как и раскрытие сегодня),
+поэтому а11y-дерево может недолго содержать «сжатый до нуля, но не `inert`» узел — та же оговорка,
+что уже принята для reveal (§16.1 не ставит `inert` на пока-не-раскрытый `.card-back`, потому что он
+там ещё не смонтирован вовсе; здесь контент **уже был** смонтирован и просто сжимается — нужно
+явно поставить `inert`/`aria-hidden` на контент в момент, когда `grid-template-rows` уходит в `0fr`,
+и снять при `1fr` — **новый** шаг, которого не было у reveal, потому что там скрытая грань не
+существовала в DOM до раскрытия, а здесь существует и до, и после).
+**UX4-22.** Приёмка: клик «Скрыть каталог» — список сжимается по высоте с плавным transition (не
+мгновенно исчезает), фокус не «падает» в никуда; клик «Открыть каталог» — обратная анимация; то же
+для «Таблица под рукой»/«Скрыть таблицу»; `aria-expanded` синхронен с видимым состоянием на каждом
+кадре перехода, не только в начале/конце; `Motion.Reduced`/Animations-off — мгновенно; в сжатом
+состоянии `inert`-контент не фокусируется через Tab и не озвучивается screen-reader’ом.
+
+### 17.6 Полировка (UX4-23)
+
+Большая часть списка из фидбека (spacing scale, `:focus-visible`, hover/active на кнопках, transition
+150мс, `--focus`-outline, 44px `min-height` у `.primary-nav button`, светлая/тёмная тема через
+`data-theme`, реакция на 320px/zoom через `overflow-wrap:anywhere`+`clamp()`-типографику) **уже
+реализована** в `training.css` (проверено чтением, не предположение — конкретные строки процитированы
+в §17.1-17.5 выше). Новое, что реально нужно добавить этим проходом — то, что уже перечислено в
+17.1-17.5 (панель-на-грани, тинт/подпись свайпа, nav-indicator, collapsible-transition); отдельного
+«стилевого прохода» сверх них не требуется — дублирующий чек-лист без конкретной правки был бы
+именно тем «пустым архитектурным слоем», который принцип KISS (`module-architecture` skill) просит
+не создавать. Единственный реально новый пункт — **UX4-23**: touch-target аудит после 17.3 — кнопки
+`.ratings` на coarse-pointer визуально свёрнуты (UX4-11), но их «настоящий», видимый на fine-pointer
+вариант должен остаться ≥44px по меньшей стороне (уже так, `.ratings button{min-height:102px}` на
+mobile-медиа, десктопный вариант — проверить фактическую высоту после добавления `<small>`/`<span>`
+из UX4-13, не только у training).
+
+### 17.7 Затронутые файлы
+
+`CardFlip.kt` (UX4-05, сузить сигнатуру `apply`), `VocabularyWeb.kt` (UX4-01/05/09/13, `preview`-вызов,
+убрать `mountRings`), `TrainingWebApp.kt` (UX4-05/09/14/16-19, keydown-ветка, `startViewTransition`),
+`WebSwipeRating.kt` (UX4-08, новый/расширенный `installSwipeCard`), `RiveEffectOverlay.kt` (UX4-05,
+убрать `triggerReveal`/`mountRings`/`setRingsExpanded`), `WebNav.kt` (UX4-16, `nav-indicator`),
+`training.css` (UX4-01/02/10/16/20, убрать `.card-flip-rings`/`.vocabulary-swipe-zone`-рамку), `rive/
+rive-bridge.js` (UX4-06, убрать ring-ветку), `shared/.../vocabulary/VocabularyDocument.kt` (UX4-13,
+**NEW** `VocabularyCodec.preview`), `THIRD_PARTY/credits.md` (UX4-06). Ничего в `androidMain`/
+`iosApp`/`macosApp` не трогается (весь §17 — web-only, кольца у других хостов — вне охвата этого
+прохода, если явно не попросят отдельно).
+
+### 17.8 Открытые решения и риски
+
+**17.8.1 (кнопки на touch — визуально скрыты, не убраны из a11y-дерева).** Буквальный фидбек
+(«NO rating buttons» на телефоне) реализован **визуально** (UX4-11), но не как полное удаление из
+DOM/aria — полное удаление нарушило бы уже принятое в этом проекте правило kmp-web («Keep named
+buttons and keyboard actions equivalent») и WCAG-путь для VoiceOver/TalkBack, у которых собственный
+жестовый слой конфликтует с произвольным pointer-свайпом веб-страницы. Если пользователь после
+ревью настоит на буквальном удалении из DOM — это осознанный, явно принимаемый шаг назад по
+доступности, не молчаливое расхождение; фиксируется здесь для явного решения, не решается этим
+планом самостоятельно.
+**17.8.2 (Rive-иконка табов — не проверена, backlog).** Пост #283 «Bottom Navigation Bar»
+(17.4) — единственный найденный релевантный кандидат, но не скачан/не инспектирован (прозрачность,
+инпуты, вес — неизвестны); v4 не берёт Rive для табов и полностью полагается на CSS/View Transitions
+(что и удовлетворяет запрос буквально: «otherwise CSS/View Transitions»). Если понадобится вернуться
+к этому — следующий шаг тот же пайплайн, что `RiveCatalog.md` уже применял (скачать в `riv3/`,
+`inspect4.mjs`, рендер-харнесс с checkerboard-фоном для проверки прозрачности) до вставки в v4/v5.
+**17.8.3 (feature-detection `startViewTransition` на JS/Wasm).** Точный синтаксис проверки наличия
+API одинаково на обоих web-таргетах — **[нужна проверка]** этим проходом не выполнена (тот же класс
+вопроса, что уже отмечен как открытый в `kmp-web`/RiveResearch для JS↔Wasm-интеропа); этот план решает
+только *что* проверяется и *где* (17.4), не конкретный Kotlin/JS-синтаксис вызова.
+**17.8.4 (Playwright/`pointer:coarse` эмуляция).** UX4-12 отмечает неопределённость в том, как
+надёжнее всего заставить headless Chromium матчить `(pointer: coarse)` в тесте — решается
+разработчиком/тестировщиком экспериментально, не архитектурным решением.
+
+## 18. Evidence log — web v4 (Developer, реализовано)
+
+Реализовано для web-хоста: UX4-01..04 (панель на грани — `.card-face` несёт
+background/border/radius/shadow, `.vocabulary-card`/`.card`-обёртка ничего не рисует, весь
+объект видимо поворачивается как одно целое), UX4-05..07 (кольцевой Rive-эффект полностью убран —
+`mountRings`/`setRingsExpanded`/`triggerReveal`/`rings.riv`/`.card-flip-rings`/`data-rive-rings`
+удалены; confetti/Check-Error/Tada не тронуты), UX4-08..15 (единый `installSwipeCard` — любой
+primary pointer, живой drag-transform + `--swipe-progress`, растущие подписи, fly-out/snap-back;
+кнопки визуально свёрнуты только под `(pointer:coarse)`, остаются в a11y-дереве;
+`ArrowLeft`/`ArrowRight` рядом с `1`/`2` на обеих карточках через один keydown-обработчик;
+`VocabularyCodec.preview`+интервалы в кнопках словарной карточки), UX4-16..19 (скользящий
+`nav-indicator`, View Transitions на реальной смене route через `withViewTransition`, мгновенный
+fallback без API/при instant-motion, 30-секундный таймер не анимируется), UX4-20..22 (общий
+`.collapsible`-приём для каталога слов, двунаправленный, с `inert`/`aria-hidden` и переносом
+фокуса на toggle до коллапса; reference-panel — однонаправленная fade+rise-анимация на появление,
+без изменения её существующего условного монтирования).
+
+**Отклонения от буквы плана (обоснованные, зафиксированы явно):**
+- **UX4-11's `,(max-width:480px)` OR-условие убрано целиком** — оставлен только `(pointer:
+  coarse)`. RED: `kotlin-method-cycle.spec.ts`'s клик по «2 Вспомнил» на 320px-вьюпорте (обычный
+  Chromium, мышь, НЕ touch-эмуляция) стал недостижим — `.ratings` схлопывался до 1×1px по одной
+  ширине вьюпорта, `elementFromPoint` резолвился в `.card-back` вместо кнопки (подтверждено
+  побитовым сравнением: та же CSS-правка на ЧИСТОМ HEAD-коде, без единой Kotlin-правки, уже
+  воспроизводит регрессию — см. проверку ниже). `max-width` путает «маленький телефон» с «узкое
+  окно десктопного браузера» — второе держит `pointer:fine` и должно оставлять кнопки кликабельными
+  мышью. `(pointer:coarse)` один точно матчит реальные touch/stylus-устройства независимо от
+  ширины вьюпорта, что и просил пользователь буквально («на телефоне»).
+- **`installSwipeCard`'s `zone` (слушатели жеста) — не всегда тот же элемент, что `faceForTransform`
+  (визуально двигающаяся грань).** План (UX4-08) не разделял эти роли явно. RED: два реальных
+  свайпа подряд (короткий отклонённый, затем длинный) на словарной/учебной карточке — второй жест
+  на некоторых координатах не срабатывал вовсе. Причина подтверждена изоляцией: `faceForTransform`
+  во время snap-back/fly-out анимации физически покидает свой resting hitbox (CSS `transform`
+  двигает то, что реально под курсором для hit-testing, а не только рендер), и вторая gesture-
+  down могла попасть на «пустое место», где вместо грани хитестится её же (не двигающийся)
+  предок. Исправлено: `zone` — стабильный, никогда не трансформируемый предок с идентичным
+  resting-футпринтом (`.card-answer-wrap` на учебной карточке — уже существовал именно для этой
+  роли; `.card-flip` на словарной — тоже никогда сам не двигается, двигается только
+  `.card-flip-inner`). `--swipe-progress` при этом остаётся на `faceForTransform` (там же, где
+  живут tint-псевдоэлементы и подписи), а не на `zone` — их структура не пострадала.
+- **`installSwipeCard` получил новый параметр `baseTransform`.** Не описано планом явно. RED
+  (найдено при ревью до RED-теста, не оставлено на волю случая): словарная карточка передаёт
+  `faceForTransform = answer` — тот же элемент, у которого статическое CSS-правило
+  `.card-back.card-face{transform:rotateY(180deg)}` держит текст не отражённым зеркально. Прямая
+  установка `style.transform` во время драга/settle заменяла бы это правило целиком, временно
+  зеркаля текст обратной грани. Исправлено передачей `baseTransform="rotateY(180deg)"`,
+  комбинируемого с каждым drag/fly-out/snap-back значением; на покое (`clearVisual()` убирает
+  инлайн-`transform` целиком) поведение то же, что и раньше — снова работает CSS-правило.
+- **`pointerup` больше не требует предшествующего `pointermove`, чтобы засчитать жест.** План
+  описывал ровно то же пороговое условие (75px, ×1.25 доминирование по X), что уже проверялось на
+  release — но реализация изначально «запирала» это условие за флагом `horizontal`, выставляемым
+  только внутри `pointermove`. RED: несколько существующих тестов синтезируют жест как ровно два
+  события (`pointerdown`+`pointerup`, без единого `pointermove` между ними) — с реальным
+  touch/mouse-драгом (steps>1) это не проблема, но с таким «мгновенным прыжком» кнопка/зона вообще
+  не оценивались. Исправлено: `pointerup` сам считает `|dx|>|dy|×1.25`, если `pointermove` жест
+  так и не «запер» — что и восстанавливает эквивалентность двух путей без потери «отмены на
+  вертикальный скролл» (`pointermove`, увидевший вертикальное доминирование первым, по-прежнему
+  ничего не делает и не корректирует `horizontal` назад).
+- **View Transition-обёрнутый ре-рендер должен обновлять `previous`/`previousRoute`/…
+  синхронно с самим `rebuild()`, а не сразу после вызова `withViewTransition`.** Спецификация
+  View Transitions ставит `updateCallback` в отдельную задачу (не гарантированно синхронно с
+  вызовом `startViewTransition`) — RED: «keyboard focus returns to the active section after
+  leaving Settings» — фокус на `#nav-training` переставал восстанавливаться после этой правки,
+  потому что `previousRoute` уже совпадал с новым `route` к моменту, когда `rebuild()` реально
+  выполнялся, и ветка `previousRoute != route` (условие для восстановления фокуса) больше не
+  срабатывала. Исправлено переносом всех «финальных» присваиваний полей внутрь `rebuild`,
+  используя снятый ДО планирования снимок `routeChangedFrom` для самого условия.
+
+**Проверка (PASS/FAIL/NOT RUN):**
+
+| Проверка | Команда (рабочая директория) | Результат |
+|---|---|---|
+| Shared unit (`VocabularyDocumentTest`, новый `preview`-тест) | `./gradlew :shared:desktopTest` (`kotlin/`) | PASS |
+| Shared JS/Wasm тесты (не должны сломаться от нового `preview`) | `./gradlew :shared:jsTest :shared:wasmJsTest` (`kotlin/`) | PASS |
+| JS/Wasm компиляция `composeApp` (весь web-слой) | `./gradlew :composeApp:compileKotlinJs :composeApp:compileKotlinWasmJs` (`kotlin/`) | PASS, без предупреждений |
+| Прочие таргеты (не должны сломаться) | `./gradlew :shared:compileKotlinDesktop :shared:compileKotlinIosSimulatorArm64 :shared:compileKotlinMacosArm64 :composeApp:compileKotlinDesktop` (`kotlin/`) | PASS (только пред-существующие warnings в несвязанных файлах) |
+| Fresh distribution | `./gradlew :composeApp:composeCompatibilityBrowserDistribution` (`kotlin/`) | PASS, `rive/rings.riv` отсутствует в dist, `confetti/again/chain-complete.riv` присутствуют |
+| Playwright, wasm, chromium, **полный** `testMatch` (19 файлов, включая новый `kotlin-ux4.spec.ts`) | `KOTLIN_SPIKE_DIST=kotlin/composeApp/build/dist/composeWebCompatibility/productionExecutable KOTLIN_SPIKE_BRANCH=wasm npx playwright test --config=playwright.kotlin.config.ts --project=chromium` (корень) | PASS 119/119 (повторный прогон после исправления гонки/CSS — тоже 119/119; см. «Известные ограничения» про один ранее пойманный флейк) |
+| Playwright, js, chromium, полный `testMatch` | то же с `KOTLIN_SPIKE_BRANCH=js` | PASS 119/119 |
+| RED→GREEN: `kotlin-method-cycle.spec.ts` (узкий вьюпорт + открытая reference-panel + клик по рейтингу) | `... kotlin-method-cycle.spec.ts kotlin-training.spec.ts kotlin-ux4.spec.ts --project=chromium` | FAIL до фикса UX4-11 (см. отклонения), PASS 18/18 после |
+| Обновлённые существующие спеки (капча pointer теперь на `.card-answer-wrap`/`.card-flip`, ring-тесты заменены, «dedicated affordance» тесты переписаны под «весь face свайпается») | `kotlin-flip-card.spec.ts`, `kotlin-preferences-settings.spec.ts` | PASS (см. список изменённых тестов ниже) |
+| Новый `kotlin-ux4.spec.ts` (10 тестов: панель-на-грани, отсутствие ring-запросов, `ArrowLeft`/`ArrowRight` на обеих карточках, touch-target/a11y под реальной coarse-pointer эмуляцией (`devices['Pixel 7']`) и под узким fine-pointer окном, коллапс каталога с `inert`/фокусом, nav-indicator, View Transition tab-переходы, скриншоты) | `kotlin-ux4.spec.ts --project=chromium` | PASS 10/10 |
+
+**Изменённые существующие Playwright-тесты (список, не полный diff):**
+- `kotlin-flip-card.spec.ts`: два ring-теста удалены, заменены одним
+  `'flip and reveal no longer request or render the removed ring Rive accent'`; touch-swipe тест
+  переключён на `.card-flip` (стабильный zone) вместо `.vocabulary-swipe-zone` (bubbling
+  синтетических событий без `bubbles:true` не долетал до нового zone-предка).
+- `kotlin-preferences-settings.spec.ts`: `.vocabulary-swipe-zone` → `.card-answer-wrap`/`.card-flip`
+  как reference-элемент для capture-проверки и dispatch-целей (там, где события синтетические, не
+  реальные CDP-touch); три словарных теста, буквально проверявших «свайп по тексту ответа НЕ
+  оценивает» и «мышь на coarse-pointer НЕ оценивает», переписаны в положительные эквиваленты —
+  «оценивает» (поскольку это ровно то, что теперь просит пользователь: вся грань — единая зона).
+
+**Скриншоты (`Plans/Kotlin/artifacts/ux4/web/`, 390×844 и 1280×900, dark/light, wasm+js):**
+`{branch}-training-front-{theme}.png`, `{branch}-training-back-{theme}.png`,
+`{branch}-vocabulary-front-{theme}.png`, `{branch}-vocabulary-back-{theme}.png`,
+`{branch}-vocabulary-mid-swipe-{theme}.png` (карточка на середине drag — виден наклон, тинт и
+подпись), `{branch}-tabs-progress-{theme}.png` (после переключения на «Прогресс» — виден
+nav-indicator под активной кнопкой).
+
+**Известные ограничения:** `flip-rive-perf.spec.ts` не расширен под v4 (LEAN MODE — новая
+функциональность здесь не связана с производительностью Rive, только затронутые
+поведенческие сценарии тестировались). Один прогон полного wasm-suite поймал предсуществующий,
+не связанный с этим проходом флейк — `kotlin-preferences-settings.spec.ts`'s «narrow layout…»
+изредка (1 из ~6 прогонов) видел горизонтальный оверфлоу от `.chain-header ol`'s списка шагов
+цепочки (длина текста шага зависит от случайно выбранного набора слов при первом заходе в
+Chain-режим) — воспроизведено и на прогонах без единой правки из этого прохода (тот же файл,
+`--repeat-each=5`, 4/5 PASS); не является регрессией v4, не чинилось в этом проходе (вне
+заявленного скоупа §17). `RiveCatalog.md`'s Rive-иконка табов (#283 Bottom Navigation Bar,
+17.8.2) остаётся backlog, не проверялась/не скачивалась. Реальные устройства (iOS Safari/Android
+Chrome для проверки View Transitions на настоящем touch-железе) не проверялись — LEAN MODE,
+headless Chromium + `devices['Pixel 7']`-эмуляция для coarse-pointer only.
+
+### 18.1 Correction round — правки по реальному фидбеку пользователя (P0–P3), web
+
+Пользователь после первого v4-прохода прислал скриншот-фидбек с 15 конкретными пунктами (P0-1..2,
+P1-3..9, P2-10..14, P3-15). Все реализованы web-only, `kotlin/iosApp` не тронут.
+
+**P0 (ломали основной запрос):**
+- **P0-1.** `.card-answer-wrap` не имел явного `touch-action`, поэтому на реальном touch-контексте
+  браузер иногда перехватывал горизонтальный драг как попытку скролла и обрывал последовательность
+  указателя (`pointerdown → pointermove → pointercancel`, без `pointerup`) — ничего не оценивалось,
+  а кнопки на этом же устройстве уже визуально свёрнуты (UX4-11). Синтетический
+  `pointerdown`/`pointerup`-диспатч (уже использованный в других тестах файла) НЕ воспроизводит этот
+  баг — только реальный touch-контекст (`devices['Pixel 7']`) плюс CDP `Input.dispatchTouchEvent`
+  реально гоняют нативный жестовый распознаватель, которым управляет `touch-action`. Фикс: явный
+  `touch-action:pan-y` на `.card-answer-wrap`. Новый RED→GREEN тест (реальный CDP touch на мобильном
+  контексте) — `kotlin-ux4.spec.ts` (P0-1).
+- **P0-2.** `VocabularyWeb.renderCard` оборачивал грань в `.card-flip`/`.card-face` только после
+  раскрытия — до этого проверка режима/поле ответа/кнопка «Показать ответ» лежали без своей панели
+  прямо на фоне страницы, а панель визуально «появлялась из ниоткуда» ровно в момент реального
+  оборота (тот самый баг со скриншота: статичная рамка, контент переворачивается внутри). Фикс:
+  `.card-flip > .card-flip-inner > .card-front.card-face` собирается на **каждом** рендере карточки,
+  включая нераскрытое состояние (поле ответа и кнопка теперь внутри `front`); грань answer
+  примонтирована только после раскрытия. Пустое состояние (`item == null`) тоже получило свою
+  `.card-face`-панель. Новый тест — `kotlin-ux4.spec.ts` (P0-2).
+
+**P1 (полировка, важная):**
+- **P1-3.** Подпись подсказки свайпа наследовала `.vocabulary-answer>p{font-size:1.5rem;
+  color:var(--green)}` (та же строка, что и «Твой ответ: …»). Фикс: сузить селектор до
+  `.vocabulary-answer>p[lang]` (подсказка — единственный `<p>` без `lang`).
+- **P1-4.** Обе грани делят одну grid-ячейку (`.card-flip-inner`), более короткая наследует высоту
+  более высокой — после возврата с ответа передняя грань выглядела пустым провалом. Фикс:
+  `.vocabulary-card .card-front.card-face{display:flex;flex-direction:column;
+  justify-content:center}`.
+- **P1-5.** Драг, вернувшийся к начальной точке, на `pointerup` читался как тап (dx/dy снова ~0) и
+  переворачивал карточку. Фикс: `installTapGesture` получил `pointermove`-слушатель, обнуляющий
+  ожидающий тап, как только смещение превышает те же 10px, что уже проверялись на release.
+- **P1-6.** Мышиный драг выделял текст карточки как обычное выделение. Фикс: как только жест
+  «запирается» горизонтальным (тот же момент, что включает визуальный tilt), `installSwipeCard`
+  ставит `zone.style.userSelect="none"` и сбрасывает уже начавшееся выделение; снимается в
+  `clearVisual()`. Сброс выделения — через новый `expect`/`actual clearTextSelection()`
+  (`PointerInterop.kt`/`.js.kt`/`.wasm.kt`) по прецеденту `withViewTransition`: `dynamic` не
+  компилируется на Wasm-таргете, поэтому нельзя было звать `window.asDynamic().getSelection()`
+  прямо в общем `webMain`-файле.
+- **P1-7.** Подписи свайпа сидели на `top:50%` (перекрывали `dl` с переводом) и были жёстко
+  привязаны к краю трансформируемой грани — на большом drag «Вспомнил» уезжал за край вьюпорта
+  вместе с гранью. Фикс: подписи — `top:16px`, со своей рамкой/фоном, поменяны местами по краям
+  (`-good` теперь `left`, `-again` — `right`, ближе к задней/более стабильной кромке движения);
+  точечные градиенты у краёв заменены на ровный `color-mix`-тинт всей грани.
+- **P1-8.** Драг-трансформ висел на `.card-back` — ребёнке `.flashcard{overflow:hidden}` — поэтому
+  визуально уезжал только ответ, обрезаясь по кромке карточки, а вопрос оставался на месте; это
+  противоречит буквальному запросу «вся карточка должна двигаться». Фикс:
+  `installSwipeCard(wrap, card)` вместо `installSwipeCard(wrap, back)` — трансформ теперь на самом
+  `.flashcard`-элементе (`card`, содержащем `.card-meta`+вопрос+ответ), которого его собственный
+  `overflow:hidden` не обрезает (клипит детей, не себя). `--swipe-progress` по-прежнему читается
+  `.card-back::before/::after` через обычное наследование custom property. Новый тест —
+  `kotlin-ux4.spec.ts` (P1-8, проверяет непустой `style.transform` на `.flashcard` во время драга).
+- **P1-9.** `::view-transition-old(root)/::view-transition-new(root)` кроссфейдил всю страницу одним
+  снимком — на середине перехода видны два таба и два подчёркивания сразу, шапка мерцает. Фикс:
+  именованные группы `.route-content{view-transition-name:route}` и
+  `.nav-indicator{view-transition-name:nav-indicator}`, root-группа не анимируется вовсе
+  (`animation:none`), направленный slide (`--vt-dir`, знак от сравнения `route.ordinal` до/после —
+  полагается на то, что порядок `WebRoute`-enum совпадает с порядком кнопок в `WebNav`, что и есть
+  в коде). Дополнительно: `root.scrollTop` сбрасывается в `0.0` именно на смене route (было — всегда
+  восстанавливался старый scroll, новая вкладка открывалась с прокруткой прошлой).
+
+**P2 (полировка, заметная):**
+- **P2-10.** У активного таба было сразу два индикатора — заливка `button.active` и скользящее
+  подчёркивание. Фикс: `.primary-nav button`/`.primary-nav button.active` — прозрачный фон, только
+  `color`+`font-weight`; hover явно переопределён отдельным правилом, чтобы не потеряться на равной
+  специфичности. «Таблицы и схема» на мобильном получила короткий вариант "Таблицы"
+  (`.nav-label-full`/`.nav-label-short`, `aria-label` всегда несёт полное имя).
+  **Отклонение от буквы фидбека:** `position:sticky` для `.primary-nav` на мобильном (буквально
+  просили «прибить» нав при скролле) добавлен и затем **убран** — измерено, что он резко учащает
+  предсуществующую (см. §18, «известные ограничения») редкую гонку в измерении `nav-indicator`
+  (`WebNav.update()` читает `getBoundingClientRect()` сразу после смены route/вьюпорта): без sticky
+  — не связанный с этим проходом тест падал ~1/10 прогонов (соответствует ранее задокументированной
+  базовой частоте), со sticky — 8/8 и 15/15 в повторных замерах. Короткая подпись (сама жалоба на
+  перенос в две строки) не зависит от sticky и оставлена.
+- **P2-11.** `.settings-toggle` не имел собственного CSS, чекбокс наследовал `label{flex-direction:
+  column}` и центрировался под текстом. Фикс: настоящий переключатель (`appearance:none` + трек/
+  ползунок на `::after`), `role="switch"` на чекбоксе. Текст про «Кнопки оценки остаются доступны»
+  исправлен на «На компьютере также кнопки и ← →» (больше не верно для touch после P0-1).
+- **P2-12.** Кнопки режима ответа словарной карточки не показывали выбранное состояние (только
+  `aria-pressed`, без `.active`, в отличие от учебной карточки). Фикс: `classList.toggle("active",
+  …)` рядом с уже существующим `aria-pressed`.
+- **P2-13.** Кнопки оценки — 102px, три строки текста, без цветового акцента у словарных. Фикс (на
+  ширине ≥601px — см. ниже): `flex-direction:row`, hint (`<small>`) скрыт, интервал — таблетка на
+  `--surface-raised`; словарным кнопкам добавлен `cls`-параметр (`rating-again`/`rating-good`).
+  Плюс `button:active{transform:scale(.98)}` для нажатия.
+  **Регрессия, найденная и исправленная в этом же проходе (не буквально из фидбека, но обязана
+  ему):** первая версия правки не гейтила `flex-direction:row` шириной вовсе — на узком, но
+  fine-pointer окне (390px, обычный Chromium без touch-эмуляции — кнопки там ОСТАЮТСЯ видимыми, см.
+  UX4-11) три инлайн-потомка (label/hint/interval) не помещались в строку, и сам текст лейбла
+  переносился посреди слова («Пов‑торить»). Обнаружено вручную (скриншот 390×844), не было
+  покрыто существующим тестом. Исправлено: `flex-direction:row`+скрытие hint перенесены под тот же
+  `@media(min-width:601px)`; ниже — прежняя (нередактированная) колоночная раскладка, которая и так
+  уже была верна для этой ширины.
+- **P2-14.** `.study-help` был неверен на телефоне («1–2 — оценить» без упоминания свайпа/стрелок) и
+  не упоминал ← → нигде. Фикс: текст расширен до «Пробел — показать ответ · ← → или 1–2 — оценить»,
+  сам футер скрыт под `(pointer:coarse)` (подсказка в карточке уже покрывает touch после P1-7).
+
+**P3 (мелкая полировка):**
+- **P3-15.** `.vocabulary-answer dl>div` — фиксированная колонка `110px` под `dt`, «В предложении»
+  переносилось. Фикс: `grid-template-columns:max-content minmax(0,1fr)`.
+
+**Проверка (PASS/FAIL/NOT RUN):**
+
+| Проверка | Команда (рабочая директория) | Результат |
+|---|---|---|
+| JS/Wasm компиляция `composeApp` (весь web-слой, включая новый `clearTextSelection` expect/actual) | `./gradlew :composeApp:compileKotlinJs :composeApp:compileKotlinWasmJs` (`kotlin/`) | PASS, без предупреждений |
+| Fresh distribution | `./gradlew :composeApp:composeCompatibilityBrowserDistribution` (`kotlin/`) | PASS |
+| Playwright, wasm, chromium, полный `testMatch` (20 файлов), ×2 | `KOTLIN_SPIKE_DIST=... KOTLIN_SPIKE_BRANCH=wasm npx playwright test --config=playwright.kotlin.config.ts --project=chromium` (корень) | 1-й прогон: 121/122 (1 сбой — тот же предсуществующий флейк из §18 «известные ограничения», не регрессия этого прохода, см. ниже); 2-й прогон сразу следом: PASS 122/122 |
+| Playwright, js, chromium, полный `testMatch` | то же с `KOTLIN_SPIKE_BRANCH=js` | PASS 122/122 |
+| `kotlin-ux4.spec.ts` + `kotlin-flip-card.spec.ts` (все новые/изменённые тесты этого раунда) | `... kotlin-ux4.spec.ts kotlin-flip-card.spec.ts --project=chromium` | PASS 27/27 |
+| Ручная визуальная проверка P2-13-регрессии (390×844, dark; 1280×900, light) | скриншоты сохранены вне git (`/tmp`, не публикуются) | подтверждено визуально: кнопки читаемы на обеих ширинах после фикса |
+
+**Известные ограничения / изменения в понимании:** предсуществующий флейк
+`kotlin-preferences-settings.spec.ts`'s «narrow layout…» (см. §18) при повторном расследовании
+оказался НЕ про `.chain-header` (шаги там статичные, не зависят от случайного набора слов — это
+уточнение к прежней записи в §18) — фактический overflow пришёлся на `.nav-indicator`, чья позиция
+считается `WebNav.update()` через `getBoundingClientRect()` сразу после смены route/вьюпорта; при
+некоторых раскладах гонки эта позиция уезжает за пределы нового узкого вьюпорта. Это
+предсуществующая (round-1, `WebNav.kt`/`nav-indicator` не переписывались в этом проходе) редкая
+гонка, не починенная в этом проходе (вне заявленного скоупа P0–P3), но задокументированная точнее
+и **не усугублённая** — исходно предложенный `position:sticky` для мобильного nav был испытан,
+эмпирически подтверждён как многократно учащающий её, и убран (см. P2-10 выше).

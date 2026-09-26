@@ -29,6 +29,19 @@ class VocabularyDocumentTest {
     }
 
     @Test
+    fun previewMatchesWhatARealReviewWouldScheduleWithoutWritingAnything() {
+        val selected = VocabularyCodec.select(VocabularyDocument(), "noun.wife", true)
+        val preview = VocabularyCodec.preview(selected, "noun.wife", StudyDirection.RussianToPolish, scheduler, at)
+        assertEquals(0, selected.cards.size) // preview must not write anything
+        listOf(Rating.Again, Rating.Good).forEach { rating ->
+            val reviewed = VocabularyCodec.review(selected, "noun.wife", StudyDirection.RussianToPolish, rating, scheduler, at)
+            assertEquals(reviewed.cards.getValue(VocabularyCodec.cardKey("noun.wife", StudyDirection.RussianToPolish)).due, preview[rating])
+        }
+        // A never-selected/never-reviewed id still previews (routes through scheduler.newCard, like dueIds does).
+        VocabularyCodec.preview(VocabularyDocument(), "noun.wife", StudyDirection.RussianToPolish, scheduler, at)
+    }
+
+    @Test
     fun rejectsMalformedAndUnknownSelections() {
         assertFails { VocabularyCodec.decode("""{"version":1,"pair":"pl-ru","selectedIds":["missing"],"custom":[],"cards":{}}""") }
         assertFails { VocabularyCodec.select(VocabularyDocument(), "missing", true) }

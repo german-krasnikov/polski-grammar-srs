@@ -43,7 +43,7 @@ internal fun renderSettingsWeb(
     learning.appendChild(settingsToggle("Оценивать карточки свайпом", "settings-swipe-rating", preferences.value.swipeRatingEnabled) {
         preferences.setSwipeRating(it)
     })
-    learning.appendChild(settingsNode("p", "muted", "Для грамматики и слов после раскрытия: влево — «Повторить», вправо — «Вспомнил». Кнопки оценки остаются доступны."))
+    learning.appendChild(settingsNode("p", "muted", "Для грамматики и слов после раскрытия: влево — «Повторить», вправо — «Вспомнил». На компьютере также кнопки и ← →."))
 
     val display = settingsNode("section", "card settings-panel")
     display.appendChild(settingsNode("h3", text = "Внешний вид"))
@@ -108,6 +108,7 @@ private fun settingsToggle(label: String, id: String, checked: Boolean, onChange
     input.id = id
     input.type = "checkbox"
     input.checked = checked
+    input.setAttribute("role", "switch")
     input.setAttribute("aria-label", label)
     input.addEventListener("change", { onChange(input.checked) })
     wrapper.appendChild(input)

@@ -72,22 +72,26 @@ test('clicking a rating button rates the revealed card', async ({ page }) => {
 test('a mouse swipe on the revealed answer rates exactly once; a short drag rates nothing', async ({ page }) => {
   await page.goto('/');
   await revealAnswer(page);
-  const back = page.getByRole('region', { name: 'Учебная карточка' }).locator('.card-back');
-  const bounds = await back.boundingBox();
-  expect(bounds).not.toBeNull();
-  const hint = back.locator('.vocabulary-swipe-zone');
+  const card = page.getByRole('region', { name: 'Учебная карточка' });
+  // P1-8 fix note: the reveal's own expand transition (0fr→1fr, 550ms) is still running right
+  // after the click resolves — wait for it to settle before measuring, or the boundingBox below
+  // (and every pixel offset computed from it) reads a mid-animation, not-yet-final layout.
+  await page.waitForTimeout(700);
+  const hint = card.locator('.vocabulary-swipe-zone');
   await hint.scrollIntoViewIfNeeded();
   const hintBounds = await hint.boundingBox();
   expect(hintBounds).not.toBeNull();
   const y = hintBounds!.y + hintBounds!.height / 2;
-  await page.mouse.move(bounds!.x + bounds!.width / 2, y);
+  const startX = hintBounds!.x + 10;
+  await page.mouse.move(startX, y);
   await page.mouse.down();
-  await page.mouse.move(bounds!.x + bounds!.width / 2 + 30, y, { steps: 5 });
+  await page.mouse.move(startX + 30, y, { steps: 5 });
   await page.mouse.up();
   expect((await page.evaluate(key => JSON.parse(localStorage.getItem(key) ?? '{}').totalReviews ?? 0, progressKey))).toBe(0);
-  await page.mouse.move(bounds!.x + 20, y);
+  await page.waitForTimeout(300); // let the short drag's own snap-back settle first
+  await page.mouse.move(startX, y);
   await page.mouse.down();
-  await page.mouse.move(bounds!.x + Math.min(bounds!.width - 20, 200), y, { steps: 8 });
+  await page.mouse.move(startX + 200, y, { steps: 8 });
   await page.mouse.up();
   await expect.poll(() => page.evaluate(key => JSON.parse(localStorage.getItem(key) ?? '{}').totalReviews ?? 0, progressKey)).toBe(1);
 });
@@ -116,18 +120,6 @@ test('normal motion plays the rating Rive effect as a non-interactive, hidden-fr
 });
 
 // v3/A/D: the reveal ring accent (reused rings.riv) pulses once, decoratively, behind the card.
-test('reveal plays a decorative ring accent behind the card, not on top of the answer text', async ({ page }) => {
-  const riveRequests: string[] = [];
-  page.on('request', request => { if (request.url().includes('/rive/')) riveRequests.push(request.url()); });
-  await page.goto('/');
-  await continueIntroductionIfPresent(page);
-  await page.getByRole('button', { name: 'Показать ответ' }).click();
-  const rings = page.locator('#polski-rive-reveal');
-  await expect(rings).toHaveAttribute('aria-hidden', 'true');
-  await expect(rings).toHaveCSS('pointer-events', 'none');
-  await expect.poll(() => riveRequests.some(u => u.endsWith('rings.riv'))).toBe(true);
-});
-
 // v3/D: the runtime is warmed shortly after the first render (requestIdleCallback, or its
 // setTimeout fallback), not held back until the first real effect — this supersedes the old v2
 // "never fetched before the first flip" expectation, which the new prewarm makes obsolete.
@@ -205,7 +197,11 @@ test('a touch swipe on the revealed vocabulary card rates exactly once', async (
   await page.goto('/');
   await openVocabularyCard(page);
   await page.getByRole('button', { name: 'Показать ответ' }).click();
-  const zone = page.getByRole('region', { name: 'Карточка слова' }).locator('.vocabulary-swipe-zone');
+  // v4/UX4-08: the gesture listeners live on the stable `.card-flip` (never itself transformed —
+  // see installSwipeCard's own doc comment for why), not on the narrower hint label; a real touch
+  // event bubbles up to it from any descendant, which this synthetic dispatch (bubbles:false by
+  // default) does not, so it targets `.card-flip` directly.
+  const zone = page.getByRole('region', { name: 'Карточка слова' }).locator('.card-flip');
   await zone.dispatchEvent('pointerdown', { clientX: 20, clientY: 100, pointerId: 1, pointerType: 'touch', isPrimary: true });
   await zone.dispatchEvent('pointerup', { clientX: 220, clientY: 102, pointerId: 1, pointerType: 'touch', isPrimary: true });
   await expect.poll(async () => {
@@ -214,13 +210,18 @@ test('a touch swipe on the revealed vocabulary card rates exactly once', async (
   }).toBe(1);
 });
 
-test('vocabulary flip plays the same ring Rive accent as the training reveal', async ({ page }) => {
+// v4/UX4-05/06/07: the ring Rive accent (rings.riv) is removed at the user's explicit request —
+// neither the vocabulary flip nor the training reveal plays it any more.
+test('flip and reveal no longer request or render the removed ring Rive accent', async ({ page }) => {
   const riveRequests: string[] = [];
   page.on('request', request => { if (request.url().includes('/rive/')) riveRequests.push(request.url()); });
   await page.goto('/');
+  await continueIntroductionIfPresent(page);
+  await page.getByRole('button', { name: 'Показать ответ' }).click();
+  await expect(page.locator('#polski-rive-reveal')).toHaveCount(0);
+  await expect(page.locator('.card-flip-rings')).toHaveCount(0);
   await openVocabularyCard(page);
   await page.getByRole('button', { name: 'Показать ответ' }).click();
-  await expect.poll(() => riveRequests.some(u => u.endsWith('rings.riv'))).toBe(true);
-  const rings = page.getByRole('region', { name: 'Карточка слова' }).locator('.card-flip-rings');
-  await expect(rings).toHaveAttribute('aria-hidden', 'true');
+  await expect(page.getByRole('region', { name: 'Карточка слова' }).locator('.card-flip-rings')).toHaveCount(0);
+  expect(riveRequests.some(u => u.endsWith('rings.riv'))).toBe(false);
 });

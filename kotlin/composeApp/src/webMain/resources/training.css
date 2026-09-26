@@ -6,8 +6,9 @@ body{background:var(--background)}
 .training-web-host{width:100%;max-width:100vw;height:100%;overflow:auto;overscroll-behavior-y:contain;background:var(--background);color:var(--text)}
 button,input,select,textarea{font:inherit}
 button,select{cursor:pointer}
-button{color:var(--button-text);background:var(--button);border:1px solid var(--line);border-radius:8px;padding:10px 15px;line-height:1.35;transition:background .15s,border-color .15s}
+button{color:var(--button-text);background:var(--button);border:1px solid var(--line);border-radius:8px;padding:10px 15px;line-height:1.35;transition:background .15s,border-color .15s,transform .1s}
 button:hover{background:var(--button-hover);border-color:var(--button-hover-border)}
+button:active{transform:scale(.98)}
 button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:2px solid var(--focus);outline-offset:3px}
 button.active{background:#183b56;color:#c0eaff;border-color:#4a9ac4}
 button:disabled{opacity:.5;cursor:default}
@@ -25,7 +26,26 @@ label{display:flex;flex-direction:column;gap:8px;color:var(--muted);font-size:.8
 .top h1{font-size:1.35rem;margin:0}.top p{margin:8px 0 0;color:var(--muted);font-size:.875rem}
 .topstats{display:flex;gap:25px;flex-shrink:0}.topstats div{display:flex;flex-direction:column;gap:4px}.topstats b{font-size:1.45rem}.topstats span{font-size:.8rem;color:var(--muted)}
 nav{display:flex;gap:8px;margin-bottom:28px}nav button{padding:10px 18px}
-.primary-nav button{min-height:44px}
+.primary-nav{position:relative}.primary-nav button{min-height:44px}
+/* P2-10: the sliding underline is the only active indicator now — a filled/bordered "active"
+   button on top of it read as two competing indicators. */
+.primary-nav button{background:transparent;border-color:transparent}
+.primary-nav button:hover{background:var(--button-hover);border-color:var(--button-hover-border)}
+.primary-nav button.active{background:transparent;color:var(--blue);font-weight:600}
+.nav-label-short{display:none}
+/* P2-10: `position:sticky` here (keeping the nav pinned while a route scrolls) was tried and
+   dropped — it made an existing rare race in the nav-indicator's own resize measurement
+   (WebNav.update reads getBoundingClientRect right after a route/viewport change) fail far more
+   often in practice (measured: an unrelated flaky spec's failure rate rose from ~1/10 runs to
+   consistently reproducing). The label-shortening fix (the actual two-line-wrap complaint) does
+   not depend on stickiness, so it stays without it. */
+@media(max-width:600px){.primary-nav{background:var(--background);padding:6px 0}.nav-label-full{display:none}.nav-label-short{display:inline}}
+/* UX4-16: a thin underline that slides/resizes under the active destination (WebNav.kt sets its
+   transform/width in real pixels, since the buttons aren't equal width) — a negative bottom
+   offset keeps it clear of the buttons' own opaque background, so their existing look is
+   untouched. Motion is governed by the existing global reduced-motion rule below, same as every
+   other transition in this file. */
+.nav-indicator{position:absolute;left:0;bottom:-8px;height:3px;border-radius:2px;background:var(--focus);pointer-events:none;transition:transform .25s cubic-bezier(.16,1,.3,1),width .25s cubic-bezier(.16,1,.3,1)}
 .subnav{display:flex;flex-wrap:wrap;gap:6px}.subnav button{font-size:.875rem;padding:9px 12px;background:transparent}.subnav button.active{background:#173852}
 .study-toolbar{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:18px}
 .card{background:linear-gradient(130deg,var(--surface-raised),var(--surface));border:1px solid var(--line);border-radius:14px;box-shadow:0 12px 36px #0002}
@@ -37,14 +57,18 @@ nav{display:flex;gap:8px;margin-bottom:28px}nav button{padding:10px 18px}
 .answer-area{padding:0 36px 30px}.answer-mode{display:flex;gap:8px;flex-wrap:wrap}.answer-mode button{font-size:.8rem;padding:7px 10px;border-color:transparent;background:transparent}.answer-mode button.active{background:#1c3046;border-color:#395877;color:#d5ebff}
 .muted{color:var(--muted)}.small{font-size:.8rem}.primary{background:#147caf;color:white;border-color:#369ed0;font-weight:600}.primary:hover{background:#1b8ec4;border-color:#7ccffa}.reveal-button{width:100%;padding:14px;margin-top:24px}
 textarea{display:block;resize:vertical;min-height:96px;width:100%;margin-top:16px;padding:14px;background:#0a1422;border:1px solid #405875;border-radius:8px;color:#edf3fd;line-height:1.5}
-.card-back{padding:28px 36px 24px;border-top:1px solid #365342;background:linear-gradient(#0e292033,#101a2800);overflow:hidden;min-height:0;min-width:0}.answer-sentence{font-size:clamp(1.5rem,2.3vw,1.9rem);font-weight:500;line-height:1.5;color:var(--green);margin:14px 0 18px}.accepted{font-size:.875rem;color:#b9d3c7}
+.card-back{padding:28px 36px 24px;overflow:hidden;min-height:0;min-width:0}.answer-sentence{font-size:clamp(1.5rem,2.3vw,1.9rem);font-weight:500;line-height:1.5;color:var(--green);margin:14px 0 18px}.accepted{font-size:.875rem;color:#b9d3c7}
+/* UX4-02: the question/answer divider belongs only to the training card's downward *expand*
+   (both faces visible at once, stacked) — the vocabulary card's *flip* (below) shows exactly one
+   face at a time, so a divider line across an already-closed panel would be a stray artifact. */
+.card-answer-wrap .card-back{border-top:1px solid #365342;background:linear-gradient(#0e292033,#101a2800)}
 /* v3/A: the training card's answer expands downward below the question instead of flipping
    (0fr→1fr on the wrapping grid row is the standard height-auto-animation trick — a plain
    height transition can't animate to/from "auto"). `will-change` promotes the compositor layer
    ahead of the first real reveal (v3/D: "promote layers ahead of time"). `.card-back` is the
    single grid child and supplies its own overflow:hidden/min-height:0 above so the trick clips
    correctly at any intermediate row height. */
-.card-answer-wrap{display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:0fr;transition:grid-template-rows .55s cubic-bezier(.16,1,.3,1);will-change:grid-template-rows;min-width:0}
+.card-answer-wrap{display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:0fr;transition:grid-template-rows .55s cubic-bezier(.16,1,.3,1);will-change:grid-template-rows;min-width:0;touch-action:pan-y}
 .card-answer-wrap.expanded{grid-template-rows:1fr}
 /* Short stagger for the three named parts (answer / changes+explanation / rating panel), only on
    the actual reveal transition (`.revealing`, added once and only for that render — a routine
@@ -53,17 +77,15 @@ textarea{display:block;resize:vertical;min-height:96px;width:100%;margin-top:16p
 .card-answer-wrap.revealing .card-back .method-feedback,.card-answer-wrap.revealing .card-back .change-list{opacity:0;transform:translateY(10px);animation:answer-part-in .4s ease-out .18s forwards}
 .card-answer-wrap.revealing .card-back .rule-focus,.card-answer-wrap.revealing .card-back .rating-label,.card-answer-wrap.revealing .card-back .method-review,.card-answer-wrap.revealing .card-back .ratings,.card-answer-wrap.revealing .card-back .vocabulary-swipe-zone{opacity:0;transform:translateY(10px);animation:answer-part-in .4s ease-out .28s forwards}
 @keyframes answer-part-in{to{opacity:1;transform:none}}
-.card-flip{perspective:1400px;position:relative;width:100%;min-width:0;z-index:0}.card-flip-inner{position:relative;z-index:0;display:grid;grid-template-columns:minmax(0,1fr);grid-template-areas:"face";width:100%;min-width:0;transform-style:preserve-3d;will-change:transform}.card-flip-inner.flipped{transform:rotateY(180deg)}.card-face{grid-area:face;min-width:0;backface-visibility:hidden}.card-back.card-face{transform:rotateY(180deg)}
+.card-flip{perspective:1400px;position:relative;width:100%;min-width:0;z-index:0}.card-flip-inner{position:relative;z-index:0;display:grid;grid-template-columns:minmax(0,1fr);grid-template-areas:"face";width:100%;min-width:0;transform-style:preserve-3d;will-change:transform}.card-flip-inner.flipped{transform:rotateY(180deg)}
+/* UX4-01: the panel itself (background/border/radius/shadow) lives on `.card-face` — the ONE
+   grid child actually visible at a time (`backface-visibility:hidden`) — not on the static
+   `.card`/`.vocabulary-card` wrapping the flip. That wrapper (overridden to `background:none`
+   below) now paints nothing, so the whole rounded panel visibly rotates as one object instead of
+   a static frame with content changing inside it. */
+.card-face{grid-area:face;min-width:0;position:relative;backface-visibility:hidden;background:linear-gradient(130deg,var(--surface-raised),var(--surface));border:1px solid var(--line);border-radius:14px;box-shadow:0 12px 36px #0002}
+.card-back.card-face{transform:rotateY(180deg)}
 .card-effect-overlay{position:absolute;inset:0;pointer-events:none;z-index:2}.card-effect-overlay canvas{position:absolute;inset:0;width:100%;height:100%}
-/* Flip-in-progress ring cue (FC2-06/07, R2): a sibling of .card-flip-inner, given an explicit
-   negative z-index inside .card-flip's own explicit z-index:0 stacking context so it is behind
-   the card's faces per spec (verified in isolated repros with the same rules). In at least one
-   observed environment (headless Chromium/SwiftShader, the same engine Playwright drives) the
-   large Rive-rendered canvas still painted above the text despite the computed z-index being
-   correct — a compositor quirk with large canvas/WebGL layers, not a CSS mistake (see
-   FlipCardRivePlan.md's v2 evidence log). The low opacity here is deliberate, defensive
-   double-insurance: legible even if a given engine paints this layer on top. */
-.card-flip-rings{position:absolute;inset:0;pointer-events:none;z-index:-1;opacity:.32}.card-flip-rings canvas{width:100%;height:100%}
 .change-list{margin-top:22px;padding-top:22px;border-top:1px solid var(--line)}.change-list h3{font-size:.875rem;color:#9cadc2}.change-pair{display:flex;align-items:center;gap:12px;flex-wrap:wrap;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.95rem}.change-pair>span{color:#b9c7d9}.change-pair>strong{color:#9bddbb;font-weight:500}.change-list p{font-size:.875rem;color:#a7b9ca;margin:8px 0 18px}
 details{margin:16px 0;color:var(--muted);font-size:.875rem}summary{cursor:pointer;margin-bottom:12px}.rating-label{font-size:.875rem;color:var(--text);margin-top:25px;margin-bottom:10px}.ratings{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}.ratings button{display:flex;flex-direction:column;align-items:center;gap:8px;background:#122033;padding:13px 6px;min-width:0;overflow-wrap:anywhere}.ratings button small{color:#96a7be;font-size:.75rem}.ratings button span{font-size:.8rem;color:#bfccde}.rating-again{border-color:#815054}.rating-hard{border-color:#94783e}.rating-good{border-color:#35745e}.rating-easy{border-color:#416c9b}
 .typed-result{padding:14px;border-radius:8px;font-size:.875rem}.typed-result p{margin:8px 0 0}.typed-result.correct{background:#183c2d;color:#a7e4bd}.typed-result.incorrect{background:#382228;color:#efbbc3}
@@ -88,9 +110,17 @@ details{margin:16px 0;color:var(--muted);font-size:.875rem}summary{cursor:pointe
 .form-contrast{display:inline-flex;align-items:baseline;gap:.42rem;flex-wrap:wrap;line-height:1.45}.form-contrast-before{color:#aebed0}.form-contrast-arrow{color:#8aa3b6}.form-contrast-after{font-weight:700;color:#d9f3df}
 .study-options{display:flex;align-items:end;gap:12px;flex-wrap:wrap}.study-options label{font-size:.75rem}.study-options select{padding:8px 28px 8px 10px}.method-introduction{margin:8px 0;color:#d9e8f7}.method-lead{color:#99b9d0}.rule-contrast{border-top:1px solid #50877c;padding-top:10px;margin-top:4px}.rule-contrast .form-contrast-before{color:#f1d1d1}
 
-.vocabulary-page{max-width:1350px;margin:auto}.vocabulary-heading{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:20px}.vocabulary-heading h2{margin:0}.vocabulary-heading p{color:var(--muted);margin:6px 0}.vocabulary-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(330px,470px);gap:20px;align-items:start}.vocabulary-card,.vocabulary-catalog{padding:26px;min-width:0}.vocabulary-prompt{font-size:clamp(1.8rem,3vw,2.7rem);font-weight:650;color:#f3f7ff;margin:20px 0}.vocabulary-card .reveal-button{margin-top:18px}.vocabulary-card textarea{display:block;width:100%;min-height:95px;margin-top:14px}.vocabulary-answer{border-top:1px solid var(--line);padding-top:20px}.vocabulary-answer>p{font-size:1.5rem;color:var(--green);margin:8px 0}.vocabulary-answer dl{display:grid;gap:9px}.vocabulary-answer dl>div{display:grid;grid-template-columns:110px minmax(0,1fr);gap:10px}.vocabulary-answer dt{color:var(--muted)}.vocabulary-answer dd{margin:0}.vocabulary-card .ratings{margin-top:20px}.catalog-toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px}.catalog-toolbar h3{margin:0}.vocabulary-catalog>label{margin:18px 0}.catalog-list{max-height:540px;overflow:auto;border:1px solid var(--line);border-radius:10px}.catalog-row{display:flex;flex-direction:row;align-items:center;gap:12px;padding:10px 12px;border-bottom:1px solid var(--line);color:#e0e9f5;font-size:.9rem}.catalog-row:last-child{border:0}.catalog-row input{width:18px;height:18px;flex:none}.catalog-row>span{display:grid;gap:2px;flex:1;min-width:0}.catalog-row small{color:var(--muted)}.catalog-row button{font-size:.72rem;padding:5px 8px}.vocabulary-editor{border-top:1px solid var(--line);margin-top:20px;padding-top:12px}.editor-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.editor-fields input,.editor-fields select{width:100%;background:#0e1825;color:#e0e9f5;border:1px solid #3b4b61;border-radius:7px;padding:10px}.vocabulary-editor .actions,.vocabulary-catalog>.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:15px}.vocabulary-view a{color:var(--blue)}@media(max-width:850px){.vocabulary-layout{grid-template-columns:1fr}.vocabulary-heading{align-items:start;flex-direction:column}.vocabulary-card,.vocabulary-catalog{padding:18px}}@media(max-width:500px){.editor-fields{grid-template-columns:1fr}.vocabulary-answer dl>div{grid-template-columns:1fr;gap:2px}}
+.vocabulary-page{max-width:1350px;margin:auto}.vocabulary-heading{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:20px}.vocabulary-heading h2{margin:0}.vocabulary-heading p{color:var(--muted);margin:6px 0}.vocabulary-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(330px,470px);gap:20px;align-items:start}.vocabulary-catalog{padding:26px;min-width:0}
+/* UX4-01: the flip's panel now lives on `.card-face` (see above) — this static wrapper around
+   `.card-flip` must paint nothing of its own, or the old "static frame, content flips inside"
+   bug comes right back. */
+.vocabulary-card{min-width:0;padding:0;background:none;border:0;box-shadow:none}.vocabulary-prompt{font-size:clamp(1.8rem,3vw,2.7rem);font-weight:650;color:#f3f7ff;margin:20px 0}.vocabulary-card .reveal-button{margin-top:18px}.vocabulary-card textarea{display:block;width:100%;min-height:95px;margin-top:14px}.vocabulary-answer{border-top:1px solid var(--line);padding-top:20px}.vocabulary-answer>p[lang]{font-size:1.5rem;color:var(--green);margin:8px 0}.vocabulary-answer dl{display:grid;gap:9px}.vocabulary-answer dl>div{display:grid;grid-template-columns:110px minmax(0,1fr);gap:10px}.vocabulary-answer dt{color:var(--muted)}.vocabulary-answer dd{margin:0}.vocabulary-card .ratings{margin-top:20px}.catalog-toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px}.catalog-toolbar h3{margin:0}.vocabulary-catalog>label{margin:18px 0}.catalog-list{max-height:540px;overflow:auto;border:1px solid var(--line);border-radius:10px}.catalog-row{display:flex;flex-direction:row;align-items:center;gap:12px;padding:10px 12px;border-bottom:1px solid var(--line);color:#e0e9f5;font-size:.9rem}.catalog-row:last-child{border:0}.catalog-row input{width:18px;height:18px;flex:none}.catalog-row>span{display:grid;gap:2px;flex:1;min-width:0}.catalog-row small{color:var(--muted)}.catalog-row button{font-size:.72rem;padding:5px 8px}.vocabulary-editor{border-top:1px solid var(--line);margin-top:20px;padding-top:12px}.editor-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.editor-fields input,.editor-fields select{width:100%;background:#0e1825;color:#e0e9f5;border:1px solid #3b4b61;border-radius:7px;padding:10px}.vocabulary-editor .actions,.vocabulary-catalog>.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:15px}.vocabulary-view a{color:var(--blue)}@media(max-width:850px){.vocabulary-layout{grid-template-columns:1fr}.vocabulary-heading{align-items:start;flex-direction:column}.vocabulary-catalog{padding:18px}}@media(max-width:500px){.editor-fields{grid-template-columns:1fr}.vocabulary-answer dl>div{grid-template-columns:1fr;gap:2px}}
 .vocabulary-catalog textarea{display:block;width:100%;min-height:90px;margin:8px 0 14px;background:#0e1825;color:#e0e9f5;border:1px solid #3b4b61;border-radius:7px;padding:10px}
 .vocabulary-card{touch-action:pan-y}
+/* P1-4: front and back overlap in one grid cell (.card-flip-inner), so the shorter face would
+   otherwise inherit the taller one's height and look like an empty void — center its content
+   instead of letting it hug the top. */
+.vocabulary-card .card-front.card-face{display:flex;flex-direction:column;justify-content:center}
 .support-comparisons{display:grid;gap:.35rem;margin-top:.55rem}
 .form-contrast-label{font-size:.75rem;font-weight:600;color:#b8c9dc}
 .form-contrast .change-before{text-decoration-style:dashed;text-decoration-color:#ff8383}
@@ -102,11 +132,11 @@ details{margin:16px 0;color:var(--muted);font-size:.875rem}summary{cursor:pointe
 /* All host surfaces share the document palette; contrast cues keep their underline and text labels. */
 :root[data-theme=light] .top h1,:root[data-theme=light] .source-sentence,:root[data-theme=light] .vocabulary-prompt{color:var(--text)}
 :root[data-theme=light] .top p,:root[data-theme=light] .card-meta,:root[data-theme=light] .chain-header li,:root[data-theme=light] .study-help,:root[data-theme=light] footer,:root[data-theme=light] .eyebrow,:root[data-theme=light] .change-list h3,:root[data-theme=light] .change-list p,:root[data-theme=light] .vocabulary-heading p,:root[data-theme=light] .catalog-row small,:root[data-theme=light] .method-retrieve,:root[data-theme=light] .method-feedback,:root[data-theme=light] .method-review,:root[data-theme=light] .method-lead,:root[data-theme=light] .form-contrast-label{color:var(--muted)}
-:root[data-theme=light] .card-back{background:linear-gradient(#e3f5eb66,#ffffff00);border-top-color:var(--line)}
+:root[data-theme=light] .card-answer-wrap .card-back{background:linear-gradient(#e3f5eb66,#ffffff00);border-top-color:var(--line)}
 :root[data-theme=light] .rule-focus{background:#fff6e8;border-color:#b78438;color:#4a3618}
 :root[data-theme=light] .rule-focus small,:root[data-theme=light] .rule-focus strong,:root[data-theme=light] .rule-focus p{color:#654112}
 :root[data-theme=light] .answer-mode button.active,:root[data-theme=light] button.active,:root[data-theme=light] .subnav button.active{background:#dceefb;border-color:#79a9ca;color:#064a77}
-:root[data-theme=light] .answer-sentence,:root[data-theme=light] .vocabulary-answer>p,:root[data-theme=light] .chain-review p,:root[data-theme=light] .form-contrast-after{color:var(--green)}
+:root[data-theme=light] .answer-sentence,:root[data-theme=light] .vocabulary-answer>p[lang],:root[data-theme=light] .chain-review p,:root[data-theme=light] .form-contrast-after{color:var(--green)}
 :root[data-theme=light] .change-pair>span,:root[data-theme=light] .catalog-row,:root[data-theme=light] .vocabulary-answer dd{color:var(--text)}
 :root[data-theme=light] .change-pair>strong{color:var(--green)}
 :root[data-theme=light] .change-pair strong .ending-highlight{color:var(--after)}
@@ -120,7 +150,98 @@ details{margin:16px 0;color:var(--muted);font-size:.875rem}summary{cursor:pointe
 :root[data-theme=light] .rating-label,:root[data-theme=light] details{color:var(--text)}
 .settings-page{max-width:840px;margin:auto;display:grid;gap:16px}.settings-page>h2{margin:0}.settings-page>button{justify-self:start}.settings-panel{padding:22px;display:grid;gap:14px}.settings-panel h3{margin:0}.settings-panel label{max-width:520px}.settings-panel textarea{min-height:130px}.settings-panel>button{justify-self:start}.settings-status{border:1px solid var(--line);padding:10px;border-radius:8px;margin:0}
 .settings-page,.settings-panel{grid-template-columns:minmax(0,1fr);min-width:0}.settings-panel>*{min-width:0}
+/* P2-11: a real switch, row-laid-out with its label — the generic `label{flex-direction:column}`
+   rule otherwise centred the bare checkbox under its own text. */
+.settings-toggle{flex-direction:row;align-items:center;justify-content:space-between;min-height:44px;color:var(--text);font-size:1rem}
+.settings-toggle input{appearance:none;flex:none;width:44px;height:26px;border-radius:13px;background:var(--line);position:relative;transition:background .2s}
+.settings-toggle input::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:transform .2s cubic-bezier(.16,1,.3,1)}
+.settings-toggle input:checked{background:var(--blue)}
+.settings-toggle input:checked::after{transform:translateX(18px)}
 [data-motion=reduced] *,[data-motion=reduced] *::before,[data-motion=reduced] *::after,[data-animations=off] *,[data-animations=off] *::before,[data-animations=off] *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+/* UX4-11: on a touch/coarse pointer, the rating buttons are visually collapsed to nothing (swipe/
+   keyboard cover rating there) but stay in the DOM and a11y tree — `sr-only`/clip, never
+   `display:none`/`visibility:hidden`/`aria-hidden`, which would actually remove them from Tab
+   order and screen readers (the project's own kmp-web rule: "keep named buttons and keyboard
+   actions equivalent"). See FlipCardRivePlan.md §17.8.1 for why this is an explicit, flagged
+   decision rather than the literal "no buttons at all" request.
+   Deviation from the plan's literal `,(max-width:480px)` OR-clause: a narrow *fine-pointer*
+   desktop browser window matches `max-width:480px` too, which silently made every rating button
+   unclickable by mouse there (RED: `kotlin-method-cycle.spec.ts`'s 320px-viewport click on
+   "2 Вспомнил" — `.ratings` clipped to 1×1px, so `elementFromPoint` resolved to `.card-back`
+   instead of the button, on every engine, not just touch). `pointer: coarse` alone correctly
+   targets touch/stylus input regardless of viewport width, per the request's own "на телефоне"
+   scope, and leaves a resizable desktop window's mouse users with working buttons. */
+@media (pointer:coarse){.ratings{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;margin:-1px}}
+/* UX4-17: the default crossfade View Transitions gives same-document navigations is timed to
+   match the rest of this file's motion (220ms, the same easing token as the swipe fly-out/reveal)
+   instead of the browser's own default. Never created at all when motion is instant or the API is
+   unsupported (see `withViewTransition`), so no extra reduced-motion guard is needed here. */
+/* P1-9: naming `.route-content`/`.nav-indicator` (instead of leaving them in the default `root`
+   group) stops the whole page from crossfading as one image — that made two tabs and two
+   underlines briefly visible together and made the header flicker. The root group itself now
+   animates nothing, so unnamed elements (the header) swap instantly, and only the two named
+   groups get a direction-aware slide (`--vt-dir`, set by TrainingWebApp before starting the
+   transition) plus the indicator's own slide. */
+.route-content{view-transition-name:route}
+.nav-indicator{view-transition-name:nav-indicator}
+html:active-view-transition .nav-indicator{transition:none}
+::view-transition-old(root),::view-transition-new(root){animation:none}
+::view-transition-group(nav-indicator){animation-duration:.25s;animation-timing-function:cubic-bezier(.16,1,.3,1)}
+::view-transition-old(route){animation:.14s cubic-bezier(.4,0,1,1) both vt-out}
+::view-transition-new(route){animation:.24s cubic-bezier(.16,1,.3,1) .04s both vt-in}
+@keyframes vt-out{to{opacity:0;transform:translateX(calc(var(--vt-dir,1) * -24px))}}
+@keyframes vt-in{from{opacity:0;transform:translateX(calc(var(--vt-dir,1) * 24px))}}
+/* UX4-20/21: bidirectional sibling of `.card-answer-wrap` (same 0fr/1fr grid trick) for content
+   that already exists in the DOM before *and* after collapsing (the vocabulary catalog, the
+   case-reference panel) — unlike the answer reveal, which only ever expands and isn't mounted at
+   all before that. */
+.collapsible{display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:0fr;transition:grid-template-rows .4s cubic-bezier(.16,1,.3,1);min-width:0}
+.collapsible.expanded{grid-template-rows:1fr}
+.collapsible>*{overflow:hidden;min-height:0;min-width:0}
+/* UX4-20/22: the case-reference panel keeps its existing conditional mount/unmount (so hiding it
+   still gives the card back its full width) — only the *appearing* direction gets a one-shot fade
+   + slight rise, added by TrainingWebApp.kt only for the render where it just turned on. */
+.reference-panel.panel-reveal{animation:panel-reveal .32s cubic-bezier(.16,1,.3,1)}
+@keyframes panel-reveal{from{opacity:0;transform:translateY(6px) scale(.98)}to{opacity:1;transform:none}}
 @media(max-width:600px){.top{padding-bottom:10px;margin-bottom:10px}.topstats b{font-size:1rem}.topstats span{font-size:.68rem}.app{padding-top:12px}nav{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));margin-bottom:12px}nav button{min-width:0;font-size:.65rem;padding:8px 1px;overflow-wrap:normal}.study-toolbar{margin-bottom:8px}.chain-header{margin:8px 0}.chain-header ol{flex-wrap:nowrap;overflow-x:auto;max-width:100%;padding-bottom:7px}.chain-header li{white-space:nowrap}.card-front{padding-top:18px;padding-bottom:12px}.source-sentence{margin:8px 0 14px}.answer-area{padding-bottom:18px}.answer-area .reveal-button{margin-top:12px}.settings-panel{padding:17px}}
 
-.vocabulary-swipe-zone{user-select:none;-webkit-user-select:none;touch-action:pan-y;text-align:center;padding:10px;border:1px dashed var(--line);border-radius:8px;margin-top:16px}
+/* UX4-09: no dashed box any more — the whole face is now the swipe zone (and the element that
+   tilts/translates with the finger/mouse, see installSwipeCard), so a separate boxed "hint zone"
+   would misleadingly suggest a narrower gesture target than what's actually there. */
+.vocabulary-swipe-zone{user-select:none;-webkit-user-select:none;touch-action:pan-y;text-align:center;margin-top:16px}
+/* UX4-08/10: `--swipe-progress` (-1..1) is set by installSwipeCard, on `.card-back` (training —
+   the same element since v1, always the swipe zone) or `.card-face` (vocabulary — either flip
+   face), while dragging. Two decorative tint layers read it directly in CSS (`clamp` keeps a
+   negative progress from giving `::after` a negative, i.e. invalid, opacity, and vice versa for
+   `::before`) — no extra inline styles on either pseudo-element; `position:relative` on
+   `.card-back` here only establishes the positioning context these need (`.card-face` already
+   has it from the flip panel rule above). */
+.card-back{position:relative}
+.card-face::before,.card-face::after,.card-back::before,.card-back::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none}
+/* P1-7: a full-face tint (not an edge gradient that rides off with the translating face) so the
+   colour cue stays legible for the whole width of the card at any drag distance. */
+.card-face::before,.card-back::before{background:color-mix(in srgb,var(--before) 14%,transparent);opacity:clamp(0,calc(var(--swipe-progress,0) * -1),1)}
+.card-face::after,.card-back::after{background:color-mix(in srgb,var(--green) 14%,transparent);opacity:clamp(0,var(--swipe-progress,0),1)}
+.swipe-label{position:absolute;top:16px;font-weight:700;font-size:1.1rem;letter-spacing:.02em;pointer-events:none;opacity:0;padding:4px 10px;border:2px solid currentColor;border-radius:8px;background:var(--surface);transition:none}
+.swipe-label-again{right:16px;left:auto;color:var(--before);opacity:clamp(0,calc(var(--swipe-progress,0) * -1),1)}
+.swipe-label-good{left:16px;right:auto;color:var(--green);opacity:clamp(0,var(--swipe-progress,0),1)}
+
+/* P2-13: compact, side-by-side rating buttons (the request's own "compact, well designed") — the
+   hint text is dropped since the interval next to it already says the same thing as the label.
+   Gated to wider viewports: a narrow *fine-pointer* window (rare, but real — see UX4-11's own
+   `(pointer:coarse)`-only gate a few lines up) still renders these buttons, and three inline
+   children (label/hint/interval) in a row have no room there — label text itself wrapped
+   mid-word. The taller, stacked layout below 601px is the same one narrow *touch* screens already
+   had before this fix (invisible there anyway, collapsed by the coarse-pointer rule). */
+.ratings button span{font-variant-numeric:tabular-nums;padding:2px 8px;border-radius:999px;background:var(--surface-raised)}
+@media(min-width:601px){
+  .ratings button{min-height:0;flex-direction:row;justify-content:space-between;padding:12px 16px}
+  .ratings button small{display:none}
+}
+/* P2-14: phones already show the swipe hint ("← Повторить · Вспомнил →") in the card itself once
+   P0-1 makes the gesture actually work there — this footer duplicated it and never mentioned the
+   arrow keys desktop users have. */
+@media(pointer:coarse){.study-help{display:none}}
+/* P3-15: `minmax(0,1fr)` (not a fixed track) is what lets a long value wrap instead of forcing the
+   label column wider; `max-content` still gives the label exactly the room its longest row needs. */
+.vocabulary-answer dl>div{grid-template-columns:max-content minmax(0,1fr);column-gap:16px}

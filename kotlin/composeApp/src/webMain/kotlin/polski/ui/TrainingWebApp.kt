@@ -92,27 +92,45 @@ fun TrainingWebApp() {
             store.dispatch(AppAction.RefreshTime)
         }
         val refresh: (Event) -> Unit = { store.dispatch(AppAction.RefreshTime) }
+        // UX4-14: ArrowLeft/ArrowRight rate on both the training and vocabulary cards, alongside
+        // the existing "1"/"2" — this single handler (with its already-solved composing/IME/
+        // repeat/modifier/editableTarget guard) now branches on `route` instead of only ever
+        // firing for Training, rather than growing a second copy of that guard for Vocabulary.
         val keyboard: (Event) -> Unit = keyboard@{ raw ->
             val event = raw as? KeyboardEvent ?: return@keyboard
             val current = store.state.value
             if (renderer.composing || event.isComposing || event.repeat || event.altKey || event.ctrlKey || event.metaKey ||
-                route != WebRoute.Training || current.tab != AppTab.Training || current.loadStatus != LoadStatus.Ready ||
-                current.phase !in setOf(CardPhase.Question, CardPhase.Revealed) || editableTarget(event.target as? Element)
+                current.loadStatus != LoadStatus.Ready || editableTarget(event.target as? Element)
             ) return@keyboard
-            val id = current.exerciseId ?: return@keyboard
-            if (event.code == "Space" && current.phase == CardPhase.Question) {
-                event.preventDefault()
-                store.dispatch(if (current.introPending) AppAction.ContinueIntroduction else AppAction.Reveal(id))
-            } else if (current.phase == CardPhase.Revealed) {
-                val rating = when (event.key) {
-                    "1" -> Rating.Again
-                    "2" -> Rating.Good
-                    else -> null
+            when (route) {
+                WebRoute.Training -> {
+                    if (current.tab != AppTab.Training || current.phase !in setOf(CardPhase.Question, CardPhase.Revealed)) return@keyboard
+                    val id = current.exerciseId ?: return@keyboard
+                    if (event.code == "Space" && current.phase == CardPhase.Question) {
+                        event.preventDefault()
+                        store.dispatch(if (current.introPending) AppAction.ContinueIntroduction else AppAction.Reveal(id))
+                    } else if (current.phase == CardPhase.Revealed) {
+                        val rating = when (event.key) {
+                            "1", "ArrowLeft" -> Rating.Again
+                            "2", "ArrowRight" -> Rating.Good
+                            else -> null
+                        }
+                        if (rating != null) {
+                            event.preventDefault()
+                            store.dispatch(AppAction.Rate(id, rating))
+                        }
+                    }
                 }
-                if (rating != null) {
+                WebRoute.Vocabulary -> {
+                    val rating = when (event.key) {
+                        "1", "ArrowLeft" -> Rating.Again
+                        "2", "ArrowRight" -> Rating.Good
+                        else -> null
+                    } ?: return@keyboard
                     event.preventDefault()
-                    store.dispatch(AppAction.Rate(id, rating))
+                    renderer.rateVocabularyIfRevealed(rating) { store.dispatch(AppAction.RefreshTime) }
                 }
+                else -> return@keyboard
             }
         }
         document.addEventListener("compositionstart", compositionStart)
@@ -231,6 +249,9 @@ private class TrainingDomRenderer {
 
     fun close() { navigation?.close(); navigation = null; vocabulary.close() }
 
+    /** UX4-14: delegates to the Vocabulary controller for the shared keydown handler. */
+    fun rateVocabularyIfRevealed(rating: Rating, refresh: () -> Unit) = vocabulary.rateCurrentIfRevealed(rating, refresh)
+
     fun render(root: HTMLElement, state: AppUiState, route: WebRoute, returnTo: WebRoute, preferences: WebPreferencesController, store: TrainingStore, navigate: (WebRoute) -> Unit, dispatch: (AppAction) -> Unit) {
         val old = previous
         // v3/A: true only for the render() call where `phase` just became Revealed — every OTHER
@@ -238,6 +259,11 @@ private class TrainingDomRenderer {
         // must show the answer already expanded, not replay the expand-reveal animation.
         val justRevealed = old != null && old.phase == CardPhase.Question && state.phase == CardPhase.Revealed
         val enteringChainComplete = old != null && old.phase != CardPhase.ChainComplete && state.phase == CardPhase.ChainComplete
+        // UX4-20/22: true only for the render() call where the case-reference panel just turned
+        // on — every other render (timer, rating, etc.) that rebuilds it while already shown must
+        // not replay the reveal animation. Only the appearing direction animates (see
+        // renderTraining); hiding it is instant, matching its existing conditional-mount design.
+        val justShowedReference = old != null && !old.showReference && state.showReference
         if (old != null && previousRoute == route && previousPreferences == preferences.value && previousStatus == preferences.status && old.copy(draft = state.draft) == state) {
             previous = state
             return // Keep the live textarea, selection and IME composition intact.
@@ -260,66 +286,91 @@ private class TrainingDomRenderer {
                 put(key, node.scrollLeft to node.scrollTop)
             }
         }
-        val app = (root.querySelector(":scope > .app") as? HTMLElement)
-            ?: node("div", "app").also(root::appendChild)
-        val nav = navigation ?: WebNav(app, navigate).also { navigation = it }
-        nav.update(route)
-        app.querySelector(":scope > header.top")?.remove()
-        val headerHolder = node("div")
-        renderHeader(headerHolder, state)
-        headerHolder.firstChild?.let { app.insertBefore(it, nav.shell) }
-        val content = (app.querySelector(":scope > .route-content") as? HTMLElement)
-            ?: node("div", "route-content").also(app::appendChild)
-        content.textContent = ""
-        if (state.error != null) {
-            content.appendChild(node("p", "notice", state.error).apply { setAttribute("role", "alert") })
-        }
-        // A cross-tab storage write must not replay a Vocabulary render callback captured for a
-        // route this host has since navigated away from.
-        if (route != WebRoute.Vocabulary) vocabulary.deactivate()
-        when (route) {
-            WebRoute.Training -> renderTraining(root, content, state, preferences.value.swipeRatingEnabled, enteringChainComplete, justRevealed, dispatch)
-            WebRoute.Vocabulary -> vocabulary.render(node("main", "vocabulary-page").also(content::appendChild), root, preferences.value.swipeRatingEnabled) {
-                previous = null
-                render(root, state, route, returnTo, preferences, store, navigate, dispatch)
+        // UX4-16..19: only a genuine route change (not the 30s timer, not a rating re-render)
+        // gets the View Transition treatment — same rebuild either way, just wrapped so the
+        // browser crossfades old→new instead of an instant swap. `withViewTransition`'s own
+        // per-target implementation already no-ops on a browser without the API. Its update
+        // callback is NOT necessarily synchronous (the spec queues it as its own task), so the
+        // bookkeeping fields below must update at the END of `rebuild` itself — updating them
+        // right after this `if` (as a plain synchronous call would allow) would advance
+        // `previousRoute` before the deferred `rebuild` has actually run, which silently broke
+        // this very function's own `previousRoute != route` focus-restore check below (RED,
+        // caught by "keyboard focus returns to the active section after leaving Settings").
+        val routeChangedFrom = previousRoute
+        val routeChanged = old != null && routeChangedFrom != null && routeChangedFrom != route
+        val rebuild: () -> Unit = {
+            val app = (root.querySelector(":scope > .app") as? HTMLElement)
+                ?: node("div", "app").also(root::appendChild)
+            val nav = navigation ?: WebNav(app, navigate).also { navigation = it }
+            nav.update(route)
+            app.querySelector(":scope > header.top")?.remove()
+            val headerHolder = node("div")
+            renderHeader(headerHolder, state)
+            headerHolder.firstChild?.let { app.insertBefore(it, nav.shell) }
+            val content = (app.querySelector(":scope > .route-content") as? HTMLElement)
+                ?: node("div", "route-content").also(app::appendChild)
+            content.textContent = ""
+            if (state.error != null) {
+                content.appendChild(node("p", "notice", state.error).apply { setAttribute("role", "alert") })
             }
-            WebRoute.Matrix -> renderMatrixWeb(node("main", "matrix-page").also(content::appendChild), state, dispatch)
-            WebRoute.Progress -> renderProgressWeb(node("main", "progress-page").also(content::appendChild), state, dispatch)
-            WebRoute.Settings -> renderSettingsWeb(node("main", "settings-page").also(content::appendChild), preferences, store, returnTo, navigate)
-        }
-        content.appendChild(node("footer", text = "Прогресс сохраняется в этом браузере. Интервальные повторения — FSRS."))
-        root.scrollTop = scroll
-        for ((key, position) in scrollPositions) {
-            val node = root.querySelector("[data-scroll-key='$key']") as? HTMLElement ?: continue
-            node.scrollLeft = position.first
-            node.scrollTop = position.second
-        }
-        val restoredFocus = if (focusId.isNotEmpty()) document.getElementById(focusId) as? HTMLElement else null
-        if (restoredFocus != null) {
-            restoredFocus.focus()
-            if (restoredFocus is HTMLTextAreaElement && focusedSelection != null) {
-                val (start, end, scrollTop) = focusedSelection
-                val length = restoredFocus.value.length
-                restoredFocus.selectionStart = start?.coerceAtMost(length)
-                restoredFocus.selectionEnd = end?.coerceAtMost(length)
-                restoredFocus.scrollTop = scrollTop
+            // A cross-tab storage write must not replay a Vocabulary render callback captured for a
+            // route this host has since navigated away from.
+            if (route != WebRoute.Vocabulary) vocabulary.deactivate()
+            when (route) {
+                WebRoute.Training -> renderTraining(root, content, state, preferences.value.swipeRatingEnabled, enteringChainComplete, justRevealed, justShowedReference, dispatch)
+                WebRoute.Vocabulary -> vocabulary.render(node("main", "vocabulary-page").also(content::appendChild), root, preferences.value.swipeRatingEnabled) {
+                    previous = null
+                    render(root, state, route, returnTo, preferences, store, navigate, dispatch)
+                }
+                WebRoute.Matrix -> renderMatrixWeb(node("main", "matrix-page").also(content::appendChild), state, dispatch)
+                WebRoute.Progress -> renderProgressWeb(node("main", "progress-page").also(content::appendChild), state, dispatch)
+                WebRoute.Settings -> renderSettingsWeb(node("main", "settings-page").also(content::appendChild), preferences, store, returnTo, navigate)
             }
-        } else if (previousRoute != null && previousRoute != route) {
-            // Rebuilding the page removes route-local controls. Give keyboard users a stable
-            // focus destination when returning from Settings (or another section).
-            (document.getElementById("nav-${route.slug}") as? HTMLElement)?.focus()
-        }
-        if (route == WebRoute.Training && old?.phase == CardPhase.Question && state.phase == CardPhase.Revealed) {
-            val feedback = content.querySelector(".change-list h3") as? HTMLElement
-            if (feedback != null) {
-                val clearance = nav.shell.getBoundingClientRect().top - feedback.getBoundingClientRect().bottom
-                if (clearance < 12.0) root.scrollTop += 12.0 - clearance
+            content.appendChild(node("footer", text = "Прогресс сохраняется в этом браузере. Интервальные повторения — FSRS."))
+            // P1-9: a route change starts its new page at the top, not wherever the previous
+            // page's own scroll happened to be — only a routine same-route rebuild (timer,
+            // rating, …) restores it.
+            root.scrollTop = if (routeChanged) 0.0 else scroll
+            for ((key, position) in scrollPositions) {
+                val scrolled = root.querySelector("[data-scroll-key='$key']") as? HTMLElement ?: continue
+                scrolled.scrollLeft = position.first
+                scrolled.scrollTop = position.second
             }
+            val restoredFocus = if (focusId.isNotEmpty()) document.getElementById(focusId) as? HTMLElement else null
+            if (restoredFocus != null) {
+                restoredFocus.focus()
+                if (restoredFocus is HTMLTextAreaElement && focusedSelection != null) {
+                    val (start, end, scrollTop) = focusedSelection
+                    val length = restoredFocus.value.length
+                    restoredFocus.selectionStart = start?.coerceAtMost(length)
+                    restoredFocus.selectionEnd = end?.coerceAtMost(length)
+                    restoredFocus.scrollTop = scrollTop
+                }
+            } else if (routeChangedFrom != null && routeChangedFrom != route) {
+                // Rebuilding the page removes route-local controls. Give keyboard users a stable
+                // focus destination when returning from Settings (or another section).
+                (document.getElementById("nav-${route.slug}") as? HTMLElement)?.focus()
+            }
+            if (route == WebRoute.Training && old?.phase == CardPhase.Question && state.phase == CardPhase.Revealed) {
+                val feedback = content.querySelector(".change-list h3") as? HTMLElement
+                if (feedback != null) {
+                    val clearance = nav.shell.getBoundingClientRect().top - feedback.getBoundingClientRect().bottom
+                    if (clearance < 12.0) root.scrollTop += 12.0 - clearance
+                }
+            }
+            previous = state
+            previousRoute = route
+            previousPreferences = preferences.value
+            previousStatus = preferences.status
         }
-        previous = state
-        previousRoute = route
-        previousPreferences = preferences.value
-        previousStatus = preferences.status
+        if (routeChanged && !motionInstantActive()) {
+            // P1-9: which way the named `route`/`nav-indicator` groups slide (training.css's
+            // `--vt-dir`) — forward along the nav order into the new tab, backward out of it.
+            // Relies on WebRoute's declared order matching the nav's left-to-right order.
+            val direction = if (route.ordinal >= routeChangedFrom.ordinal) "1" else "-1"
+            (document.documentElement as? HTMLElement)?.style?.setProperty("--vt-dir", direction)
+            withViewTransition(rebuild)
+        } else rebuild()
     }
 
     private fun renderHeader(app: HTMLElement, state: AppUiState) {
@@ -340,7 +391,7 @@ private class TrainingDomRenderer {
         appendChild(node("span", text = label))
     }
 
-    private fun renderTraining(root: HTMLElement, app: HTMLElement, state: AppUiState, swipeRatingEnabled: Boolean, enteringChainComplete: Boolean, justRevealed: Boolean, dispatch: (AppAction) -> Unit) {
+    private fun renderTraining(root: HTMLElement, app: HTMLElement, state: AppUiState, swipeRatingEnabled: Boolean, enteringChainComplete: Boolean, justRevealed: Boolean, justShowedReference: Boolean, dispatch: (AppAction) -> Unit) {
         val main = node("main", "study-page")
         app.appendChild(main)
         if (state.loadStatus != LoadStatus.Ready) {
@@ -392,11 +443,15 @@ private class TrainingDomRenderer {
             CardPhase.Question, CardPhase.Revealed -> renderCard(root, card, state, swipeRatingEnabled, justRevealed, dispatch)
         }
         if (state.showReference && !state.introPending) {
-            val reference = node("aside", "card reference-panel")
+            // UX4-20/22: animates in (fade + slight rise) exactly on the render where it just
+            // turned on; a routine rebuild of an already-shown panel (timer, rating, …) must not
+            // replay it. Hiding stays instant, matching this panel's existing conditional-mount
+            // design — see TrainingWebApp.kt's own doc comment on `justShowedReference`.
+            val reference = node("aside", "card reference-panel" + if (justShowedReference && !motionInstantActive()) " panel-reveal" else "")
             layout.appendChild(reference)
             renderCaseReferenceWeb(reference, state, dispatch)
         }
-        main.appendChild(node("p", "study-help", "Пробел — ${if (state.introPending) "перейти к заданию" else "показать ответ"} · 1–2 — оценить"))
+        main.appendChild(node("p", "study-help", "Пробел — ${if (state.introPending) "перейти к заданию" else "показать ответ"} · ← → или 1–2 — оценить"))
     }
 
     private fun renderLoadStatus(main: HTMLElement, state: AppUiState, dispatch: (AppAction) -> Unit) {
@@ -554,16 +609,15 @@ private class TrainingDomRenderer {
         // v3/A: the answer expands downward below the still-visible question — no flip. The wrap
         // is only ever created once phase == Revealed, so the answer is never in the DOM (let
         // alone the accessibility tree) before that; `applyExpand` handles the one-shot animation
-        // exactly at the reveal moment, and the ring Rive accent syncs to the same transition.
+        // exactly at the reveal moment.
         card.appendChild(front)
         val wrap = node("div", "card-answer-wrap")
         card.appendChild(wrap)
         val back = node("div", "card-back")
         back.setAttribute("aria-live", "polite")
         wrap.appendChild(back)
-        renderAnswerBack(root, back, state, swipeRatingEnabled, dispatch)
+        renderAnswerBack(root, card, wrap, back, state, swipeRatingEnabled, dispatch)
         applyExpand(wrap, isRevealEvent = justRevealed)
-        if (justRevealed) riveOverlay.triggerReveal(root, wrap)
     }
 
     /**
@@ -624,7 +678,7 @@ private class TrainingDomRenderer {
         }.apply { id = "training-reveal"; className += " reveal-button" })
     }
 
-    private fun renderAnswerBack(root: HTMLElement, back: HTMLElement, state: AppUiState, swipeRatingEnabled: Boolean, dispatch: (AppAction) -> Unit) {
+    private fun renderAnswerBack(root: HTMLElement, card: HTMLElement, wrap: HTMLElement, back: HTMLElement, state: AppUiState, swipeRatingEnabled: Boolean, dispatch: (AppAction) -> Unit) {
         val exercise = state.exercise ?: return
         back.appendChild(node("span", "eyebrow", "Обратная сторона · эталон"))
         back.appendChild(node("p", "answer-sentence").apply {
@@ -710,12 +764,22 @@ private class TrainingDomRenderer {
         }
         back.appendChild(node("p", "muted small", "Оценка планирует следующее повторение навыка."))
         if (swipeRatingEnabled) {
-            // The whole revealed back-face is the swipe-to-rate zone (FC-02); this label is now a
-            // purely visual direction hint, not the gesture target itself.
+            // v4/UX4-08/09: the whole revealed back-face is the element that tilts/translates
+            // with the finger/mouse — this label is a purely visual direction hint, not the
+            // gesture target itself. The gesture LISTENERS live one level up, on the stable
+            // `.card-answer-wrap` (never itself transformed), not on `back` — see
+            // `installSwipeCard`'s own doc comment for why: `back` briefly leaves its own resting
+            // hitbox while snapping back/flying out, which could otherwise make a second gesture
+            // started right at its edge within that ~220ms window miss it entirely.
             back.appendChild(node("p", "vocabulary-swipe-zone muted small", "← Повторить · Вспомнил →").apply {
                 setAttribute("aria-hidden", "true")
             })
-            installTouchSwipeRating(back, acceptAnyPointerType = true) { remembered ->
+            appendSwipeLabels(back)
+            // P1-8: `card` (the whole `.flashcard` section: meta + question + answer) is now the
+            // element that tilts/translates — `back` alone used to move outside `.flashcard`'s own
+            // `overflow:hidden` and get clipped, while the question stayed put; the request itself
+            // asks for the whole panel to move, matching the vocabulary card's whole-object flip.
+            installSwipeCard(wrap, card) { remembered ->
                 val rating = if (remembered) Rating.Good else Rating.Again
                 riveOverlay.trigger(root, back, cardEffectFor(rating))
                 dispatch(AppAction.Rate(exercise.id, rating))
@@ -724,7 +788,35 @@ private class TrainingDomRenderer {
     }
 }
 
-private fun intervalLabel(dueMillis: Long, nowMillis: Long): String {
+/**
+ * UX4-20/21: the bidirectional sibling of [TrainingDomRenderer.applyExpand] — shared by content
+ * that already exists in the DOM before and after collapsing (the vocabulary catalog, the
+ * case-reference panel), unlike the answer reveal ([TrainingDomRenderer.applyExpand]'s only
+ * caller), which never collapses back and whose target face isn't mounted at all until the
+ * reveal. Toggling the same `grid-template-rows` CSS class both ways lets the one stylesheet
+ * transition animate whichever direction is current — no separate collapse-only code path.
+ * `inert`/`aria-hidden` track the collapsed state directly (unlike the reveal case, this content
+ * was already live/focusable before collapsing, so it must leave the tab order and a11y tree
+ * exactly when collapsed, not merely never having entered them).
+ */
+internal fun applyCollapsible(wrap: HTMLElement, expanded: Boolean, isToggleEvent: Boolean) {
+    wrap.classList.toggle("expanded", expanded)
+    if (expanded) { wrap.removeAttribute("inert"); wrap.removeAttribute("aria-hidden") }
+    else { wrap.setAttribute("inert", ""); wrap.setAttribute("aria-hidden", "true") }
+    if (!isToggleEvent || motionInstantActive()) {
+        wrap.style.setProperty("transition", "none")
+        wrap.style.setProperty("grid-template-rows", if (expanded) "1fr" else "0fr")
+        return
+    }
+    wrap.style.setProperty("transition", "none")
+    wrap.style.setProperty("grid-template-rows", if (expanded) "0fr" else "1fr") // the OLD state
+    wrap.getBoundingClientRect() // force layout: commits the "from" frame before animating
+    wrap.style.setProperty("transition", "")
+    wrap.style.setProperty("grid-template-rows", "")
+}
+
+// UX4-13: shared with the vocabulary card's rating buttons, not private to this file any more.
+internal fun intervalLabel(dueMillis: Long, nowMillis: Long): String {
     val minutes = maxOf(1L, (dueMillis - nowMillis + 30_000L) / 60_000L)
     return when {
         minutes < 60 -> "$minutes мин"

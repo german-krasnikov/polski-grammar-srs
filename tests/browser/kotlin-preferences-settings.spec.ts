@@ -187,8 +187,13 @@ test('grammar swipe is disabled until reveal and remains governed by the shared 
   await page.getByRole('button', { name: 'Показать ответ' }).click();
   const zone = card.locator('.vocabulary-swipe-zone');
   await expect(zone).toHaveCount(1);
-  await zone.dispatchEvent('pointerdown', { clientX: 100, clientY: 100, pointerId: 10, pointerType: 'touch', isPrimary: true });
-  await zone.dispatchEvent('pointerup', { clientX: 250, clientY: 102, pointerId: 10, pointerType: 'touch', isPrimary: true });
+  // v4/UX4-08: the gesture listeners live on the stable `.card-answer-wrap` (never itself
+  // transformed — see installSwipeCard's own doc comment for why), not on this narrower hint
+  // label; a real touch event bubbles up to it from any descendant, which this synthetic dispatch
+  // (bubbles:false by default) does not, so it targets `.card-answer-wrap` directly.
+  const back = card.locator('.card-answer-wrap');
+  await back.dispatchEvent('pointerdown', { clientX: 100, clientY: 100, pointerId: 10, pointerType: 'touch', isPrimary: true });
+  await back.dispatchEvent('pointerup', { clientX: 250, clientY: 102, pointerId: 10, pointerType: 'touch', isPrimary: true });
   await expect.poll(() => page.evaluate(() => JSON.parse(localStorage.getItem('polski-grammar-srs-kmp-preview-v1') ?? '{}').totalReviews)).toBe(1);
 });
 
@@ -233,10 +238,11 @@ test('grammar real touch completes after leaving the swipe zone', async ({ page,
   expect(x2).toBeLessThan(page.viewportSize()!.width);
   const y = zone!.y + zone!.height / 2;
   await zoneElement.evaluate(element => {
-    // The gesture listener (and setPointerCapture) now lives on the whole revealed back-face
-    // (FC-02: the swipe zone was relocated off this narrow hint label onto `.card-back`), so
-    // capture is checked on that ancestor, not on the label itself.
-    const back = element.closest('.card-back')!;
+    // v4/UX4-08: the gesture listener (and setPointerCapture) now lives on the stable
+    // `.card-answer-wrap` — never itself transformed while `.card-back` tilts/flies out during a
+    // drag, see installSwipeCard's own doc comment for why — so capture is checked on that
+    // ancestor, not on the label or the (possibly mid-animation) face itself.
+    const back = element.closest('.card-answer-wrap')!;
     document.addEventListener('pointerdown', raw => {
       const pointer = raw as PointerEvent;
       (window as any).__grammarTouchStart = {
@@ -262,29 +268,28 @@ test('grammar real touch completes after leaving the swipe zone', async ({ page,
   }
 });
 
-test('swipe rating is limited to its dedicated touch affordance, never answer text', async ({ page }) => {
+// v4/UX4-08/09: the whole revealed face is the swipe zone now (the request's own "the card tilts
+// with your finger" applies to the entire panel), superseding the old "narrow dedicated affordance
+// only" design these three tests originally asserted — a swipe over the answer text itself is now
+// exactly as valid a gesture as one over the hint label, on either host, mouse or touch.
+test('a touch swipe over the answer text (not just the hint label) rates the revealed vocabulary card', async ({ page }) => {
   await page.addInitScript(() => {
     localStorage.setItem('polski-preferences-v1', JSON.stringify({ schemaVersion: 1, coursePair: 'pl-ru', swipeRatingEnabled: true }));
-    const nativeMatchMedia = window.matchMedia.bind(window);
-    window.matchMedia = query => query === '(pointer: coarse)' ? ({ matches: true } as MediaQueryList) : nativeMatchMedia(query);
   });
   await page.goto('/#/vocabulary');
   await page.getByRole('checkbox').first().check();
   await page.getByRole('button', { name: 'Показать ответ' }).click();
   const card = page.getByRole('region', { name: 'Карточка слова' });
   const answerText = card.locator('.vocabulary-answer p').first();
-  await answerText.dispatchEvent('pointerdown', { clientX: 250, clientY: 100, pointerId: 1, pointerType: 'touch', isPrimary: true });
-  await answerText.dispatchEvent('pointerup', { clientX: 100, clientY: 102, pointerId: 1, pointerType: 'touch', isPrimary: true });
-  await expect(card.getByRole('button', { name: 'Вспомнил' })).toBeVisible();
-  const beforeSwipe = await page.evaluate(() => JSON.parse(localStorage.getItem('polski-vocabulary-pl-ru-v1')!));
-  expect(Object.keys(beforeSwipe.cards)).toHaveLength(0);
-  const swipeZone = card.locator('.vocabulary-swipe-zone');
-  await swipeZone.dispatchEvent('pointerdown', { clientX: 100, clientY: 100, pointerId: 2, pointerType: 'touch', isPrimary: true });
-  await swipeZone.dispatchEvent('pointerup', { clientX: 250, clientY: 102, pointerId: 2, pointerType: 'touch', isPrimary: true });
-  await expect(card.getByRole('heading', { name: 'На сейчас всё повторено' })).toBeVisible();
+  await answerText.dispatchEvent('pointerdown', { clientX: 250, clientY: 100, pointerId: 1, pointerType: 'touch', isPrimary: true, bubbles: true });
+  await answerText.dispatchEvent('pointerup', { clientX: 100, clientY: 102, pointerId: 1, pointerType: 'touch', isPrimary: true, bubbles: true });
+  await expect.poll(async () => {
+    const saved = await page.evaluate(() => JSON.parse(localStorage.getItem('polski-vocabulary-pl-ru-v1')!));
+    return Object.keys(saved.cards).length;
+  }).toBe(1);
 });
 
-test('mouse dragging the swipe affordance does not rate on a coarse-pointer device', async ({ page }) => {
+test('a mouse drag rates the revealed vocabulary card the same as touch, even reporting as a coarse pointer', async ({ page }) => {
   await page.addInitScript(() => {
     localStorage.setItem('polski-preferences-v1', JSON.stringify({ schemaVersion: 1, coursePair: 'pl-ru', swipeRatingEnabled: true }));
     const nativeMatchMedia = window.matchMedia.bind(window);
@@ -302,17 +307,16 @@ test('mouse dragging the swipe affordance does not rate on a coarse-pointer devi
   await page.mouse.down();
   await page.mouse.move(bounds!.x + Math.min(bounds!.width - 20, 170), y, { steps: 8 });
   await page.mouse.up();
-  await expect(card.getByRole('button', { name: 'Вспомнил' })).toBeVisible();
-  const saved = await page.evaluate(() => JSON.parse(localStorage.getItem('polski-vocabulary-pl-ru-v1')!));
-  expect(Object.keys(saved.cards)).toHaveLength(0);
+  await expect.poll(async () => {
+    const saved = await page.evaluate(() => JSON.parse(localStorage.getItem('polski-vocabulary-pl-ru-v1')!));
+    return Object.keys(saved.cards).length;
+  }).toBe(1);
 });
 
-test('a real touch swipe rates only from the dedicated affordance', async ({ page, browserName }) => {
+test('a real touch swipe rates from anywhere on the revealed face, including the answer text', async ({ page, browserName }) => {
   test.skip(browserName !== 'chromium', 'CDP touch injection is available only in Chromium');
   await page.addInitScript(() => {
     localStorage.setItem('polski-preferences-v1', JSON.stringify({ schemaVersion: 1, coursePair: 'pl-ru', swipeRatingEnabled: true }));
-    const nativeMatchMedia = window.matchMedia.bind(window);
-    window.matchMedia = query => query === '(pointer: coarse)' ? ({ matches: true } as MediaQueryList) : nativeMatchMedia(query);
   });
   await page.goto('/#/vocabulary');
   await page.getByRole('checkbox').first().check();
@@ -328,12 +332,10 @@ test('a real touch swipe rates only from the dedicated affordance', async ({ pag
     const answer = await card.locator('.vocabulary-answer p').first().boundingBox();
     expect(answer).not.toBeNull();
     await swipe(answer!.x + Math.min(answer!.width - 20, 170), answer!.x + 20, answer!.y + answer!.height / 2);
-    await expect(card.getByRole('button', { name: 'Вспомнил' })).toBeVisible();
-    await card.locator('.vocabulary-swipe-zone').scrollIntoViewIfNeeded();
-    const zone = await card.locator('.vocabulary-swipe-zone').boundingBox();
-    expect(zone).not.toBeNull();
-    await swipe(zone!.x + 20, zone!.x + Math.min(zone!.width - 20, 170), zone!.y + zone!.height / 2);
-    await expect(card.getByRole('heading', { name: 'На сейчас всё повторено' })).toBeVisible();
+    await expect.poll(async () => {
+      const saved = await page.evaluate(() => JSON.parse(localStorage.getItem('polski-vocabulary-pl-ru-v1')!));
+      return Object.keys(saved.cards).length;
+    }).toBe(1);
   } finally {
     await session.detach();
   }

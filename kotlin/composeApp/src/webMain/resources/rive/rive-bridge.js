@@ -3,13 +3,14 @@
 //
 // The host never calls into this file directly (no js()/dynamic Kotlin<->JS bindings, so the
 // same Kotlin code works unmodified on both the JS and Wasm targets). Instead it toggles DOM
-// attributes on three overlay elements; this script watches those attributes and drives the
+// attributes on two overlay elements; this script watches those attributes and drives the
 // actual Rive API:
 //   #polski-rive-overlay  data-rive-effect="<remembered|again>:<sequence>"   (rating cue)
 //   #polski-rive-chain    data-rive-chain="<sequence>"                       (chain-complete "Tada")
-//   .card-flip-rings      data-rive-rings="<0|1>"                           (flip/reveal-in-progress rings)
 //   <body>                data-rive-prewarm="1"                              (v3/D: warm the runtime once, idly)
 //   <body>                data-rive-dispose-all="<sequence>"                 (v3/C: Animations turned off — tear down everything now)
+// v4/UX4-06: the flip/reveal-in-progress ring cue (`.card-flip-rings`/`data-rive-rings`/
+// `rings.riv`) has been removed at the user's explicit request (FlipCardRivePlan.md §17.2).
 (function () {
   // v2 FC2-09: "again.riv" was replaced (it used to paint an opaque scene, RiveCatalog.md §0.1).
   // "Remembered" now plays confetti together with the new file's "Check" trigger (accepted
@@ -115,40 +116,11 @@
     });
   }
 
-  // Rings toggle a boolean on a persistent-while-flipping instance, not a one-shot trigger; the
-  // canvas element itself is recreated by every full card re-render (see RiveEffectOverlay.kt's
-  // doc comment). The instance is cached on the canvas node (`__polskiRive`) so a re-render that
-  // reuses the same node doesn't restart it; when the node itself is discarded instead, the
-  // observer in attach() below calls `.cleanup()` on it (see disposeDetachedRings) — otherwise its
-  // own requestAnimationFrame draw loop would keep running forever against a detached canvas.
-  function playRings(canvas, expanded) {
-    if (!canvas) return;
-    withRive(function (rive) {
-      configureWasm(rive);
-      if (canvas.__polskiRive) {
-        setRingsBool(canvas.__polskiRive, expanded);
-        return;
-      }
-      try {
-        var rect = canvas.getBoundingClientRect();
-        canvas.width = Math.max(1, Math.round(rect.width));
-        canvas.height = Math.max(1, Math.round(rect.height));
-        var instance = new rive.Rive({
-          src: 'rive/rings.riv',
-          canvas: canvas,
-          stateMachines: 'State Machine 1',
-          autoplay: true,
-          onLoad: function () { setRingsBool(instance, expanded); },
-        });
-        canvas.__polskiRive = instance;
-      } catch (e) {}
-    });
-  }
-
   // v3/D: warms rive.js + rive.wasm + one throwaway instance well before the first real effect,
   // so that first trigger never pays the fetch/compile cost on the same frames as its own CSS
-  // motion (the diagnosed cause of first-reveal/first-flip jank). `rings.riv` is reused rather
-  // than fetching a 4th asset just for warmth. Runs at most once per page.
+  // motion (the diagnosed cause of first-reveal/first-flip jank). `confetti.riv` is reused (an
+  // asset already fetched for rating) rather than fetching a dedicated warmth-only asset. Runs at
+  // most once per page.
   var prewarmed = false;
   var prewarmScheduled = false;
   function prewarm() {
@@ -160,7 +132,7 @@
         var canvas = document.createElement('canvas');
         canvas.width = 1; canvas.height = 1;
         var instance = new rive.Rive({
-          src: 'rive/rings.riv',
+          src: 'rive/confetti.riv',
           canvas: canvas,
           stateMachines: 'State Machine 1',
           autoplay: false,
@@ -177,52 +149,14 @@
   }
 
   // v3/C: tears down every live Rive instance immediately when Animations is turned off, however
-  // it got started (rating/chain/rings), and hides any overlay left visible mid-effect.
+  // it got started (rating/chain), and hides any overlay left visible mid-effect.
   function disposeAllRive() {
     stopRating();
     if (currentChain) { try { currentChain.cleanup(); } catch (e) {} currentChain = null; }
-    var canvases = document.querySelectorAll('canvas');
-    for (var i = 0; i < canvases.length; i++) {
-      var canvas = canvases[i];
-      if (canvas.__polskiRive) {
-        try { canvas.__polskiRive.cleanup(); } catch (e) {}
-        canvas.__polskiRive = null;
-        window.__polskiRiveRingDisposals = (window.__polskiRiveRingDisposals || 0) + 1;
-      }
-    }
-    ['polski-rive-overlay', 'polski-rive-chain', 'polski-rive-reveal'].forEach(function (id) {
+    ['polski-rive-overlay', 'polski-rive-chain'].forEach(function (id) {
       var el = document.getElementById(id);
       if (el) el.style.display = 'none';
     });
-  }
-
-  function setRingsBool(instance, expanded) {
-    try {
-      var inputs = instance.stateMachineInputs('State Machine 1') || [];
-      for (var i = 0; i < inputs.length; i++) { if (inputs[i].name === 'IsExpanded') { inputs[i].value = expanded; break; } }
-    } catch (e) {}
-  }
-
-  // Called on every node removed from the document (see attach()'s childList observation). The
-  // ring cue's canvas is the only kind tagged with `__polskiRive` (rating/chain instances are
-  // tracked in module-level vars instead, disposed by stopRating()/playChain()'s own cleanup
-  // calls), so an unconditional scan for that tag — on the removed node itself and its descendants
-  // — is enough to find and stop any ring instance whose canvas just left the DOM.
-  function disposeDetachedRings(node) {
-    if (!node || node.nodeType !== 1) return;
-    var canvases = node.tagName === 'CANVAS' ? [node] : (node.querySelectorAll ? node.querySelectorAll('canvas') : []);
-    for (var i = 0; i < canvases.length; i++) {
-      var canvas = canvases[i];
-      if (canvas.__polskiRive) {
-        try { canvas.__polskiRive.cleanup(); } catch (e) {}
-        canvas.__polskiRive = null;
-        // Test-only counter (mirrors the `?flipDebugScale`/`?riveDisabled=1` convention of
-        // exposing narrow, harmless hooks for Playwright): lets a regression test observe that a
-        // discarded ring canvas's instance actually got torn down, without reaching into rive.js
-        // internals to prove its RAF loop stopped.
-        window.__polskiRiveRingDisposals = (window.__polskiRiveRingDisposals || 0) + 1;
-      }
-    }
   }
 
   function react(el) {
@@ -231,13 +165,11 @@
       if (value) playRating(el, el.querySelectorAll('canvas'), value.split(':')[0]);
     } else if (el.id === 'polski-rive-chain') {
       if (el.getAttribute('data-rive-chain')) playChain(el, el.querySelector('canvas'));
-    } else if (el.classList && el.classList.contains('card-flip-rings')) {
-      playRings(el.querySelector('canvas'), el.getAttribute('data-rive-rings') === '1');
     }
   }
 
   function scan() {
-    ['#polski-rive-overlay[data-rive-effect]', '#polski-rive-chain[data-rive-chain]', '.card-flip-rings[data-rive-rings]']
+    ['#polski-rive-overlay[data-rive-effect]', '#polski-rive-chain[data-rive-chain]']
       .forEach(function (selector) {
         var nodes = document.querySelectorAll(selector);
         for (var i = 0; i < nodes.length; i++) react(nodes[i]);
@@ -247,23 +179,17 @@
 
   // A single subtree observer, set up once for the page's lifetime, replaces per-element
   // observers entirely. This matters for correctness, not just simplicity: the rating/chain
-  // overlays are created lazily by Kotlin *after* this script starts loading (the very first
-  // `ensureBridgeLoaded()` call can come from the ring cue, on the very first flip, well before
-  // any rating happens) — a per-element observer set up once at load time would never find an
-  // overlay that does not exist yet, and (unlike the ring cue) nothing ever re-attempts it after
-  // that. A subtree observer has no such ordering requirement: it reacts to the attribute the
-  // moment any current or future matching element gets it, regardless of creation order. The ring
-  // cue's own element is additionally recreated on every card re-render (it lives inside
-  // `.card-flip`), which a subtree observer also handles for free.
+  // overlays are created lazily by Kotlin *after* this script starts loading — a per-element
+  // observer set up once at load time would never find an overlay that does not exist yet. A
+  // subtree observer has no such ordering requirement: it reacts to the attribute the moment any
+  // current or future matching element gets it, regardless of creation order.
   function attach() {
     if (!document.body || document.body.__polskiRiveObserved) return;
     document.body.__polskiRiveObserved = true;
     new MutationObserver(function (mutations) {
       for (var i = 0; i < mutations.length; i++) {
         var mutation = mutations[i];
-        if (mutation.type === 'childList') {
-          for (var j = 0; j < mutation.removedNodes.length; j++) disposeDetachedRings(mutation.removedNodes[j]);
-        } else if (mutation.attributeName === 'data-rive-prewarm') {
+        if (mutation.attributeName === 'data-rive-prewarm') {
           schedulePrewarm();
         } else if (mutation.attributeName === 'data-rive-dispose-all') {
           disposeAllRive();
@@ -273,8 +199,7 @@
       }
     }).observe(document.body, {
       attributes: true,
-      attributeFilter: ['data-rive-effect', 'data-rive-chain', 'data-rive-rings', 'data-rive-prewarm', 'data-rive-dispose-all'],
-      childList: true,
+      attributeFilter: ['data-rive-effect', 'data-rive-chain', 'data-rive-prewarm', 'data-rive-dispose-all'],
       subtree: true,
     });
     scan(); // catch anything set before this observer existed
