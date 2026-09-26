@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.PointerInputScope
 import androidx.compose.ui.input.pointer.pointerInput
@@ -121,8 +122,10 @@ fun AndroidAnswerReveal(
     val tapSlopPx = with(LocalDensity.current) { 12.dp.toPx() }
     AnimatedVisibility(
         visibleState = visibleState,
-        enter = expandVertically(spring(dampingRatio = Spring.DampingRatioNoBouncy, stiffness = Spring.StiffnessMediumLow)) +
-            fadeIn(spring(stiffness = Spring.StiffnessMediumLow)),
+        enter = expandVertically(
+            animationSpec = spring(dampingRatio = Spring.DampingRatioNoBouncy, stiffness = Spring.StiffnessMediumLow),
+            expandFrom = Alignment.Top,
+        ) + fadeIn(spring(stiffness = Spring.StiffnessMediumLow)),
     ) {
         Column(
             Modifier.fillMaxWidth().pointerInput(Unit) { detectSwipeRating(thresholdPx, tapSlopPx, onRate) },

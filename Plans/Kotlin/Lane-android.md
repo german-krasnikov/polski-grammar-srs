@@ -64,3 +64,54 @@ the full test run below, plus the on-device verification.
 
 **Skipped**: Space/keyboard reveal wiring, D3's ring-asset removal, and D2 (vocabulary) — out of
 this task's scope.
+
+## Reviewer correction (commit 05e475d): `expandFrom` missing on `expandVertically`
+
+**Finding**: `AndroidAnswerReveal` called `expandVertically(spring(...))` with no `expandFrom`, so
+it used the library default `Alignment.Bottom`. Confirmed against the actual pinned
+`androidx.compose.animation:animation-android:1.12.1` bytecode (`EnterExitTransitionModifierNode`,
+`EnterExitTransitionKt.expandVertically$default`): the default really is `Alignment.Bottom`, and
+that alignment is fed straight into the per-frame `Alignment.align(targetSize, currentAnimatedSize)`
+placement call that positions the (always fully-measured) content inside the growing/clipped box.
+
+**Empirical proof (not just bytecode reading)**: a Robolectric+Compose-UI-test harness drove the
+real `AnimatedVisibility` clock in 8ms steps over two `Text` nodes (`TOP-MARKER` then
+`ANSWER-CONTENT`) inside `AndroidAnswerReveal`, reading `fetchSemanticsNode().boundsInRoot` each
+step. With the unfixed default: `ANSWER-CONTENT` (the second/tail item) became visible
+(`boundsInRoot.height > 0`) at step 2 (~16ms), while `TOP-MARKER` (the heading, meant to unfold
+*first* per D1) stayed at height `0` (fully clipped away) until step ~8 (~64ms) — i.e. the tail
+renders before the heading, exactly the "opposite of the required... reveal" the reviewer
+described. (An earlier, weaker test that only compared `TOP-MARKER`'s *top* position pre/post-settle
+passed even on the buggy code — the clip always reports `top` clamped to the visible window's edge
+regardless of alignment, so it could not distinguish Top from Bottom; it was replaced.)
+
+**Fix**: pass `expandFrom = Alignment.Top` to `expandVertically(...)` in `AndroidAnswerReveal`
+(`kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidFlipCard.kt`), pinning the
+content's top and growing/revealing it downward, matching D1's "answer, explanation, rating panel
+unfold... " top-down ordering.
+
+**Files changed (this correction)**:
+- `kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidFlipCard.kt` — added
+  `import androidx.compose.ui.Alignment`; `expandVertically(animationSpec = ..., expandFrom =
+  Alignment.Top)`.
+- `kotlin/androidApp/src/test/java/dev/polski/grammarmatrix/AndroidAnswerRevealComposeTest.kt` —
+  replaced the position-only test with `answerContentRevealsTopDownNotBottomUp`: drives the clock
+  in 8ms steps and asserts the heading (`TOP-MARKER`) becomes visible (`boundsInRoot.height > 1px`)
+  no later than the tail (`ANSWER-CONTENT`).
+
+**TDD**: RED confirmed by `git stash`-ing the fix (reverting to the exact unfixed
+`expandVertically(spring(...))` call) and running the new test — it failed with an
+`AssertionError` (heading appeared at a later step than the tail), matching the reviewer's report.
+GREEN confirmed by restoring the fix and re-running — 3/3 tests in
+`AndroidAnswerRevealComposeTest` pass.
+
+**Checks**:
+- `./gradlew :androidApp:testDebugUnitTest --tests "dev.polski.grammarmatrix.AndroidAnswerRevealComposeTest"`
+  — PASS (3 tests) after the fix; FAIL (1 test, the new one) before it, confirming RED→GREEN.
+- `./gradlew :androidApp:testDebugUnitTest --tests "dev.polski.grammarmatrix.AndroidFlipCardTest" --tests "dev.polski.grammarmatrix.AndroidAnswerRevealComposeTest"`
+  — PASS.
+- `./gradlew :androidApp:assembleDebug` — PASS.
+- On-device (`emulator-5554`, debug APK reinstalled): tapped the question card and visually
+  confirmed the reveal order top-to-bottom is "Эталон" (answer heading) → "Что изменилось"
+  (explanation) → "ЗАПОМНИ" rule box → rating panel, i.e. heading first, matching D1 and the fix
+  (screenshot inspected, not attached).
