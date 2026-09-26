@@ -67,6 +67,7 @@ struct MacVocabularyCardView: View {
             Text("Слово").font(.caption.weight(.semibold)).tracking(1.4).foregroundStyle(.secondary)
             Text(item.lemma).font(.title2.bold())
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
         .contentShape(Rectangle())
         .onTapGesture(perform: handleTap)
         if state.revealed {
@@ -92,6 +93,7 @@ struct MacVocabularyCardView: View {
                 Button("Вспомнил") { model.vocab("good") }
             }
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
         .contentShape(Rectangle())
         .onTapGesture(perform: handleTap)
     }

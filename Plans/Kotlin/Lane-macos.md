@@ -161,9 +161,47 @@ on `front`, `flipCard.installTap` on the revealed face):
   precedent (`af126a6`'s pre-D1 `MacFlashCardView`); the interactive click-through remains the same
   kind of open gap M1 already flagged, not newly introduced by this task.
 
+## M2 correction — stretch the tap target/accessibility element to the full panel
+
+**Reviewer blocker** (on `6c64b2a`): `frontFace`/`backFace` attached `.contentShape(Rectangle())`,
+`.onTapGesture(handleTap)` and (pre-reveal) the `.accessibilityElement`/`.accessibilityLabel`/
+`.accessibilityAddTraits` modifiers to their own inner `content`/`VStack`, which had no expanding
+child (no `Spacer`, no own `.frame(maxWidth: .infinity)`). The outer `Group` in `body` only gets
+`.frame(maxWidth: .infinity, alignment: .leading)` *afterwards*, stretching the visible
+background/border but not the tap target or the accessibility element sized from `content`'s
+intrinsic size — a SwiftUI VStack with no expanding child reports only its intrinsic (text) size
+regardless of an ancestor frame added later. Result: clicking the panel's padding or empty space
+below a short lemma did nothing, and the single VoiceOver "Показать ответ" button's frame didn't
+match the visible card — a real a11y regression, and it also meant tap-to-flip-back after reveal
+had the same undersized target.
+
+**Fix** (the reviewer's second suggested direction, the smaller of the two): added
+`.frame(maxWidth: .infinity, alignment: .leading)` to `content` in `frontFace`, and to the `VStack`
+in `backFace`, *before* `.contentShape(Rectangle())` — so the shape/gesture/accessibility modifiers
+now compute over the already-stretched view instead of the intrinsic one. Two one-line insertions,
+no structural change: per-state accessibility branching (`state.revealed`) in `frontFace` is
+untouched, `handleTap`/rotation/reveal logic untouched.
+
+**Verification**:
+- Build: `xcodebuild -project kotlin/macosApp/PolskiGrammarMac.xcodeproj -scheme
+  PolskiGrammarMac -destination "platform=macOS" -derivedDataPath /private/tmp/lane-macos-dd
+  CODE_SIGNING_ALLOWED=NO build` — **BUILD SUCCEEDED** (rerun after the fix; project not
+  regenerated, no files added/removed).
+- Launched the built `.app` (`open`) — runs, no crash, quit cleanly afterward.
+- Real interactive click-through / VoiceOver hit-test (the reviewer's explicit ask) again could not
+  be performed: `osascript`/System Events UI scripting still fails with "osascript is not allowed
+  assistive access" (-25211) in this sandboxed session — same unresolved environment gap already
+  logged for M1 and M2's first pass, not something this fix could close. The fix itself is a direct,
+  minimal structural correction (stretch-before-shape, exactly the reviewer's cited pattern), not a
+  workaround, so the code-level defect is resolved even though the interactive confirmation remains
+  open pending real Accessibility permission.
+- `:shared:macosArm64Test`: not run — no Kotlin files touched.
+
 ## Status
 
-M1 (D1) and M2 (D2) both applied and committed. Both verified by build + structural code review
-against their respective specs/precedents; interactive click-through is the one open gap for both
-(no Accessibility/Input Monitoring permission in this session) — worth closing with a real
-XCUITest target or a manual pass before ship, not before the cross-lane merge.
+M1 (D1) and M2 (D2) both applied and committed, plus one reviewer-requested correction to each
+(M1: scope the reveal tap gesture off interactive controls; M2: stretch the tap target/accessibility
+element to the full panel). All verified by build + structural code review against their respective
+specs/precedents; interactive click-through is the one open gap across all of them (no
+Accessibility/Input Monitoring permission in this session) — worth closing with a real XCUITest
+target or a manual pass before ship, not before the cross-lane merge.
