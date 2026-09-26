@@ -116,14 +116,19 @@ final class AppModel: ObservableObject {
     @Published var resetEffectId: Int64?
     @Published var focusEffectId: Int64?
     @Published var cardEffect: CardEffectEvent?
+    /// D3: the vocabulary card's own decorative Rive rating cue — mirrors [cardEffect] exactly,
+    /// but kept as a separate published property so a training rating never re-triggers the
+    /// vocabulary overlay (and vice versa) purely because `CardEffectEvent` is `Equatable`.
+    @Published var vocabularyCardEffect: CardEffectEvent?
     var focusExerciseId: String?
     private let session = IosSession(defaults: .standard)
-    private let vocabulary = IosVocabularySession()
+    private let vocabulary = IosVocabularySession(defaults: .standard)
     private let preferencesSession = IosPreferencesSession(defaults: .standard)
     private var lastSnapshot = ""
     private var claimedEffects = Set<Int64>()
     private var vocabularyRefreshTimer: Timer?
     private var effectCounter = 0
+    private var vocabularyEffectCounter = 0
 
     init() {
         session.onState = { [weak self] json in
@@ -142,6 +147,14 @@ final class AppModel: ObservableObject {
         }
         vocabulary.onState = { [weak self] json in
             DispatchQueue.main.async { self?.receiveVocabulary(json) }
+        }
+        // D3: mirrors `session.onEffect` above for the vocabulary card's own Rive rating cue.
+        vocabulary.onEffect = { [weak self] name in
+            DispatchQueue.main.async {
+                guard let self else { return }
+                self.vocabularyEffectCounter += 1
+                self.vocabularyCardEffect = CardEffectEvent(id: self.vocabularyEffectCounter, name: name)
+            }
         }
         preferencesSession.onState = { [weak self] json in
             DispatchQueue.main.async { self?.receivePreferences(json) }
@@ -981,10 +994,13 @@ private struct VocabularyView: View {
                     if state.string("currentId").isEmpty {
                         Text(state.int("selectedCount") == 0 ? "Выберите слова для тренировки" : "На сейчас всё повторено")
                     } else {
-                        VocabularyCardView(model: model, state: state, card: state.record("current"),
-                                           reduceMotion: cardMotionReduced)
-                            .listRowInsets(EdgeInsets())
-                            .listRowBackground(Color.clear)
+                        ZStack {
+                            VocabularyCardView(model: model, state: state, card: state.record("current"),
+                                               reduceMotion: cardMotionReduced)
+                            RiveEffectOverlay(effect: model.vocabularyCardEffect, reduceMotion: cardMotionReduced)
+                        }
+                        .listRowInsets(EdgeInsets())
+                        .listRowBackground(Color.clear)
                     }
                 }
                 Section("Мой словарь · \(state.int("selectedCount"))") {

@@ -146,9 +146,151 @@ existing file contents changed. For I2, `generate_project.rb` **was** updated (a
 `VocabularyCardView.swift` to the app target's source list and `VocabularyFlipUITests.swift` to the
 UI test target's) and re-run to add both new files to the `.xcodeproj`.
 
-## Open follow-ups (not this task)
+## Open follow-ups (not I1/I2 — resolved by I3 below)
 
 - D3: remove `RiveFlipRingsOverlay`, `rings.riv` and the "again.riv" ring wiring entirely.
 - D3/D5: swipe-rating visual polish (tint+label growing with drag distance, snap-back, fly-out) —
   the existing `DragGesture` threshold-rate behavior in `answerFace` is preserved as-is, not
   upgraded.
+
+## I3 — D3 whole-card swipe rating (touch), Rive rating effects on vocabulary, ring removal
+
+**Change:** new `SwipeToRate.swift` — a `ViewModifier` shared by `FlashCardView`'s answer panel and
+`VocabularyCardView`'s answer face (mirroring the web host's own `installSwipeCard`/
+`appendSwipeLabels`, `WebSwipeRating.kt`, read, not edited): the whole revealed face follows the
+finger (translate + a small tilt, `.offset`/`.rotationEffect`), a red/green tint + "Повторить"/
+"Вспомнил" label grows with drag distance, it snaps back under an 80pt threshold and flies
+off-screen on commit — the domain rating dispatches only *after* the fly-out finishes (~220ms),
+matching the web host's own commit-then-settle order. Both call sites pass `reduceMotion` (D5's
+existing gate) to make the whole thing instant when motion is reduced/off.
+
+- `FlashCardView.answerFace`: the two "Повторить"/"Вспомнил" `Button`s (with their FSRS interval
+  previews) are gone; `.swipeToRate(active: phase == "Revealed", ...)` replaces the old plain
+  `DragGesture` that used to live there. The existing "Свайп влево — повторить · вправо —
+  вспомнил" hint keeps the `ratingSwipeArea` identifier (now the *only* rating UI on this panel).
+- `VocabularyCardView`: the "Повторить"/"Вспомнил" `Button`s in `answerFace` are replaced by the
+  same kind of hint text (`ratingSwipeArea`). `.swipeToRate` is attached at the view's **outer**
+  container (after the flip's own `rotation3DEffect`, background/border/shadow), not inside
+  `answerFace`, so a rating drag carries the whole panel D2 already made "one object" for the flip
+  — `active: showBack` keeps a drag on the still-showing question face inert.
+- The `ratingSwipeArea` identifier itself lives on each call site's own hint `Text`, never inside
+  `SwipeToRate` on the shared, multi-child content — see the file's own doc comment: setting it on
+  the container let SwiftUI inherit it onto several plain, unidentified descendant `Text`s at
+  once, and a `firstMatch` query resolved to whichever tiny caption came first in traversal order
+  (reproduced: `"ЗАПОМНИ"`, a 43×14pt caption on `FlashCardView`) — a synthesized
+  `swipeLeft()`/`swipeRight()` then travels only that caption's own width, well under the 80pt
+  threshold. A real finger gesture is unaffected either way; this only matters for XCUITest's own
+  frame-relative gesture synthesis.
+- `DragGesture(minimumDistance: 18)`, not a lower value: `.simultaneousGesture` already keeps this
+  from blocking the enclosing `Form`'s own scroll, but a lower `minimumDistance` measurably ate
+  into that scroll's own effective distance per gesture on a reference-table-heavy screen
+  (reproduced with an XCUITest scroll loop that reliably reached a target at a fixed swipe count
+  before this, needed more after lowering it, and reached it again at 18).
+
+**Rive rating effect on vocabulary (parity with the web host, which already fires
+`cardEffectFor(rating)` for vocabulary too — `VocabularyWeb.kt`):**
+`IosVocabularySession` (`shared/iosMain`) gets an `onEffect: ((String) -> Unit)?` mirroring
+`IosSession.onEffect` exactly — fires once per *accepted* rating (`VocabularySession.rate`'s own
+returned `Boolean`) with `cardEffectFor`'s mapped name, using the same shared
+`polski.presentation.cardEffectFor` as the training card so there is one mapping, not two. Its
+constructor now takes an injectable `defaults: NSUserDefaults = .standard` (mirroring `IosSession`),
+additive/backward-compatible — needed so a test can point it at an isolated suite instead of the
+real device's `standardUserDefaults`; `AppModel`'s own call site is updated to
+`IosVocabularySession(defaults: .standard)` (Kotlin's default-parameter value isn't visible from
+Swift, so every call site there — like `IosSession`'s own — always passes it explicitly).
+`AppModel` gets a second published `vocabularyCardEffect` (kept separate from the training card's
+own `cardEffect` so a rating on one card never re-triggers the other's overlay purely because
+`CardEffectEvent` is `Equatable`), and `VocabularyView`'s "Карточка" section wraps
+`VocabularyCardView` in a `ZStack` with a second `RiveEffectOverlay`, gated by the same
+`cardMotionReduced` `VocabularyView` already computes for the flip (no debug-only variant-B
+override — that's training-only measurement instrumentation, out of scope here).
+
+**Ring effect removed entirely (D3):** `RiveFlipRingsOverlay` (already dead code since D1 — no
+call site) deleted from `RiveEffectOverlay.swift`; `Rive/rings.riv` deleted; `generate_project.rb`
+no longer vendors it into the bundle (list and comment updated, project regenerated). Not touched:
+`THIRD_PARTY/credits.md` / `Plans/Kotlin/RiveCatalog.md` — both are shared reference docs the
+Android/macOS lanes' own D3 passes will each also want to update for their own `rings.riv` removal;
+editing them here risked a three-way merge conflict on the same lines for no functional gain (the
+build itself no longer references the file regardless of what the docs say).
+
+**Kotlin (`shared/iosMain`/`iosTest`), TDD:**
+- RED→GREEN: `IosVocabularySessionTest.goodRatingFiresTheRememberedEffectOnceAndSkipsAnUnrevealedRate`
+  and `.againRatingFiresTheAgainEffect` (new file, mirrors `IosSessionTest`'s own two `onEffect`
+  tests) — reverted the `onEffect?.invoke(...)` wiring in `IosVocabularySession.dispatch` back to
+  the plain `session.rate(...)` call to confirm both fail first (`kotlin.AssertionError`, empty/
+  wrong `effects` list), then restored it: GREEN, 2/2.
+- Regression: `IosSessionTest` (3/3) and `IosVocabularyRepositoryTest` (2/2) unaffected by the
+  `IosVocabularySession(defaults:)` constructor change.
+
+**iOS UI tests, TDD and fixes found along the way (all against a freshly-`simctl uninstall`ed app —
+this simulator's own device state, not just `resetTrainingProgress`, mattered for a couple of
+these):**
+- Updated for "no rating buttons": `testBinaryRatingSwipesAdvanceOnceInEachDirection` (now asserts
+  `rateAgain`/`rateGood` don't exist, was checking dead identifiers `rateHard`/`rateEasy` that
+  never matched anything — a pre-existing vacuous assertion, not something I3 broke), a new shared
+  `rateViaSwipe(app:good:)` helper replacing every other test's `rateGood.tap()`-based "advance one
+  review" mechanism, `testNativeVocabularyRevealAndBinaryRating` (asserts `vocabularyAgain`/
+  `vocabularyGood` absent, rates via a `ratingSwipeArea` drag instead of a button tap), and
+  `VocabularyFlipUITests`'s two tests (`vocabularyAnswerFace`/`ratingSwipeArea` in place of the
+  removed buttons).
+- `rateViaSwipe` uses a coordinate-based drag (`XCUIElement.coordinate(withNormalizedOffset:)` +
+  `press(forDuration:thenDragTo:)`), not `.swipeLeft()/.swipeRight()`: reproduced the convenience
+  method failing ("visible frame is empty") when the swipe zone sits right at the Form's own
+  scrolled edge (`testFirstMethodIntroductionKeepsReferenceAnswerHiddenUntilContinue`, which also
+  shows the reference table) — a coordinate drag between two explicit offsets inside the element's
+  frame doesn't hit that path. Also bumped its own scroll-hunt loop 7→10 swipes (dropping the two
+  rating buttons shifted how far this test's own *preceding* scroll steps leave the now-shorter
+  panel) and `continueIntroductionIfPresent`'s post-swipe wait 0→1.5s (a caller right after a swipe
+  must give the fly-out's own ~220ms commit delay room to actually land the next card, or a
+  following card that needs its own introduction is never seen to tap — reproduced both a miss at
+  0.5s under load and clean passes at 1.5s across three fresh-install runs).
+- `VocabularyCardView`'s own reveal→scroll-hunt has the same class of race: reproduced a swipe
+  landing before the flip's own ~0.25s face-swap settles overscrolling straight past this
+  single-screen vocabulary card into the catalog list below it (the query then finds nothing at
+  all, not just "off-screen" — likely cell reuse once scrolled that far). Fixed with a bounded
+  `waitForExistence(timeout: 1)` before any scrolling in `testNativeVocabularyRevealAndBinaryRating`
+  and both `VocabularyFlipUITests` tests.
+- `VocabularyFlipUITests.testTappingRevealedCardFlipsVisuallyWithoutRating` rewritten: reproduced
+  (twice, not a fluke) that a tap on the answer face reliably flips it *all the way* back to the
+  question face by the time the very next assertion runs (this host's own tap-driven flip-back has
+  no way back to the answer face afterward via tap — pre-existing `VocabularyCardView` behavior
+  from I2, untouched here) rather than leaving the answer face showing, which the old assertion (and
+  its D2-era predecessor checking the rating buttons) assumed. The test now asserts what actually,
+  reproducibly happens — flips away, no rating — and drops the follow-on rating dance instead of
+  papering over the mismatch; `testNativeVocabularyRevealAndBinaryRating` (a different fixture word)
+  is what verifies the swipe-to-rate drag itself.
+
+## Verification
+
+Working directory for all commands: `/Users/german/Work/JS/polski-lanes/ios/kotlin`.
+`JAVA_HOME=$(/usr/libexec/java_home -v 21 -a arm64)`, simulator
+`4384946F-9E6B-43D0-ADA3-CA219A3456B8`, `-derivedDataPath /private/tmp/lane-ios-dd`. Several iOS UI
+runs below used a freshly `xcrun simctl uninstall`ed app first — noted where it mattered.
+
+| Check | Command | Result |
+|---|---|---|
+| Kotlin RED→GREEN: vocabulary `onEffect` (Good) | `:shared:iosSimulatorArm64Test --tests polski.ios.IosVocabularySessionTest` | RED (reverted wiring, both tests failed) → GREEN (2/2) |
+| Kotlin regression | `--tests polski.ios.IosSessionTest,polski.ios.IosVocabularyRepositoryTest` | PASS (5/5) |
+| iOS build | `xcodebuild ... build` (after adding `SwipeToRate.swift`, removing `rings.riv`) | PASS |
+| iOS regression: D1 training-card flip | `-only-testing:PolskiGrammarUITests/FlipCorrectnessUITests` | PASS (2/2) |
+| iOS D3 direction contract | `-only-testing:.../testBinaryRatingSwipesAdvanceOnceInEachDirection` | RED→GREEN, then 3 more fresh-install repeats, all PASS (see fixes above) |
+| iOS regression: rating still advances chain/typed/reference flows | `testTappingRevealedCardDoesNothingThenRatingCountsOnce`, `testTypedPolishAnswerUsesNativeInput`, `testNativeTrainingMatrixAndProgress`, `testSaveFailureShowsErrorBannerOnEveryTabWithExportReachable`, `testFirstMethodIntroductionKeepsReferenceAnswerHiddenUntilContinue` | PASS (5/5) |
+| iOS D3 vocabulary swipe rating | `testNativeVocabularyRevealAndBinaryRating` (fresh install) | RED→GREEN (see fixes above) |
+| iOS regression: D2 vocabulary flip | `-only-testing:PolskiGrammarUITests/VocabularyFlipUITests` (fresh install) | RED→GREEN (see fixes above), then PASS again combined with the group above |
+| Not run (lean mode) | `FlipRivePerfUITests` (long perf measurement, untouched); Android/macOS/web hosts | — |
+| Known pre-existing, unrelated flake | `testS6VocabularyFileImporterCancellationKeepsSelection` — reproduced failing identically at `HEAD` (before any I3 change, fresh install): a system `UIDocumentPickerViewController`'s own "Отменить" never becomes queryable, unrelated to D3 | not this task's regression |
+
+RED evidence: `IosVocabularySessionTest`'s two new tests, reverting only the `onEffect?.invoke(...)`
+lines (keeping the new constructor param so the test still compiles) — both failed with
+`kotlin.AssertionError`. `testBinaryRatingSwipesAdvanceOnceInEachDirection` against the pre-I3 `HEAD`
+commit (`7adcdcc`, via `git stash`) passes; against my first `SwipeToRate` cut (identifier on the
+shared container, `minimumDistance: 10`, no `continueIntroductionIfPresent` wait) it failed two
+different ways before each fix above, described inline.
+
+## Open follow-ups (not this task)
+
+- D4 (tab/screen paging) and D5 (the `UserPreferences.animationsEnabled` toggle's own iOS wiring,
+  and unloading Rive entirely when it's off) are untouched — this task was D3 only.
+- `THIRD_PARTY/credits.md` / `Plans/Kotlin/RiveCatalog.md` still list `rings.riv` for "Android and
+  iOS" — each host's own D3 pass should update its own line once all three have landed, to avoid
+  a three-way merge conflict on the same lines right now.

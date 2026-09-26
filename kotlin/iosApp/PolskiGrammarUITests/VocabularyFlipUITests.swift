@@ -21,25 +21,29 @@ final class VocabularyFlipUITests: XCTestCase {
 
     /// Unrevealed: there is no separate "Показать ответ" button any more — a tap on the card
     /// (found the same way the old button's own identifier used to be) reveals *and* flips to
-    /// the answer face in one motion, and does so exactly once: the rating buttons that only the
-    /// answer face carries are absent before the tap and hittable right after.
+    /// the answer face in one motion, and does so exactly once: the answer face's own stable tap
+    /// target (`vocabularyAnswerFace`, only ever rendered by [VocabularyCardView]'s back face) is
+    /// absent before the tap and hittable right after. D3: there are no rating buttons any more
+    /// either — [VocabularyCardView]'s answer face is a `SwipeToRate` gesture surface instead.
     func testTapOnUnrevealedCardRevealsAndFlipsOnce() {
         let app = XCUIApplication()
         app.launch()
         selectBookIfNeeded(app)
         let reveal = app.buttons["vocabularyReveal"]
         XCTAssertTrue(reveal.waitForExistence(timeout: 5), app.debugDescription)
-        XCTAssertFalse(app.buttons["vocabularyAgain"].exists, "must start on the question face, unrevealed")
-        XCTAssertFalse(app.buttons["vocabularyGood"].exists)
+        XCTAssertFalse(app.staticTexts["vocabularyAnswerFace"].exists, "must start on the question face, unrevealed")
 
         reveal.tap()
 
+        let answerFace = app.staticTexts["vocabularyAnswerFace"]
+        // See `testNativeVocabularyRevealAndBinaryRating`'s own comment: a bounded wait before any
+        // scrolling avoids a swipe landing mid-flip and overscrolling past this single-screen card.
+        _ = answerFace.waitForExistence(timeout: 1)
         for _ in 0..<6 {
-            if app.buttons["vocabularyGood"].isHittable { break }
+            if answerFace.exists && answerFace.isHittable { break }
             app.swipeUp()
         }
-        XCTAssertTrue(app.buttons["vocabularyGood"].isHittable, app.debugDescription)
-        XCTAssertTrue(app.buttons["vocabularyAgain"].isHittable)
+        XCTAssertTrue(answerFace.isHittable, app.debugDescription)
         let capture = XCTAttachment(screenshot: app.screenshot())
         capture.name = "vocabulary-card-revealed-flip"
         capture.lifetime = .keepAlways
@@ -49,9 +53,15 @@ final class VocabularyFlipUITests: XCTestCase {
         XCTAssertFalse(app.buttons["vocabularyReveal"].exists)
     }
 
-    /// Revealed: tapping the card again (anywhere on the answer face except the rating buttons)
-    /// flips it back and forth **purely visually** — it never re-reveals, never dispatches a
-    /// second rating, and the rating buttons keep working normally afterwards.
+    /// Revealed: tapping the card again (anywhere on the answer face) flips it away **purely
+    /// visually** — it never re-reveals and never dispatches a rating. Rating itself is a
+    /// separate horizontal-drag gesture (D3, coverage for the drag itself lives in
+    /// `PolskiGrammarUITests`'s own `testNativeVocabularyRevealAndBinaryRating`, a `TapGesture`
+    /// and a `DragGesture` on the same view never fire for the same touch); a plain tap here must
+    /// never trigger it. `noun.book` is never rated in this test, so it stays exactly as due as
+    /// before for any sibling test that reuses it (this host's tap-driven flip has no way back to
+    /// the answer face once flipped away — unrelated to D3 and untouched here, so this test proves
+    /// only the flip-away half of the contract, not a round trip).
     func testTappingRevealedCardFlipsVisuallyWithoutRating() {
         let app = XCUIApplication()
         app.launch()
@@ -59,31 +69,25 @@ final class VocabularyFlipUITests: XCTestCase {
         let reveal = app.buttons["vocabularyReveal"]
         XCTAssertTrue(reveal.waitForExistence(timeout: 5), app.debugDescription)
         reveal.tap()
+        let answerFace = app.staticTexts["vocabularyAnswerFace"]
+        _ = answerFace.waitForExistence(timeout: 1)
         for _ in 0..<6 {
-            if app.buttons["vocabularyGood"].isHittable { break }
+            if answerFace.exists && answerFace.isHittable { break }
             app.swipeUp()
         }
-        XCTAssertTrue(app.buttons["vocabularyGood"].isHittable, app.debugDescription)
+        XCTAssertTrue(answerFace.isHittable, app.debugDescription)
         let selectionCount = app.staticTexts.matching(NSPredicate(
             format: "label BEGINSWITH %@", "Мой словарь · "
         )).firstMatch
         XCTAssertTrue(selectionCount.waitForExistence(timeout: 5))
         let before = selectionCount.label
 
-        let answerFace = app.staticTexts["vocabularyAnswerFace"]
-        XCTAssertTrue(answerFace.waitForExistence(timeout: 5), app.debugDescription)
-        XCTAssertTrue(answerFace.isHittable, app.debugDescription)
         answerFace.tap()
 
-        // Purely visual: no rating was dispatched, and the same rating buttons are still there.
+        // Purely visual: no rating was dispatched, and the tap flipped the card away rather than
+        // leaving the answer face (and its swipe-to-rate surface) showing.
         XCTAssertEqual(selectionCount.label, before)
-        XCTAssertTrue(app.buttons["vocabularyGood"].isHittable, app.debugDescription)
-        XCTAssertTrue(app.buttons["vocabularyAgain"].isHittable)
-
-        // "Again" (not "Good"): keeps the shared `noun.book` fixture due again soon, the same
-        // choice `testNativeVocabularyRevealAndBinaryRating` makes, so this test never strands a
-        // sibling test with a long FSRS interval on the one simulator both share.
-        app.buttons["vocabularyAgain"].tap()
-        XCTAssertFalse(app.buttons["vocabularyAgain"].waitForExistence(timeout: 2), app.debugDescription)
+        XCTAssertFalse(answerFace.waitForExistence(timeout: 1),
+            "a tap must flip the card away, not leave the answer face showing or dispatch a rating")
     }
 }

@@ -17,10 +17,16 @@ import SwiftUI
 ///   / "Проверить" button — never their ancestor — the exact split D1's own doc comment calls out
 ///   to avoid the FC2 class of bug where an ancestor tap gesture breaks a sibling control.
 /// - Revealed: tapping the card again flips it back and forth **purely visually** (`flipped`) —
-///   it never re-reveals (that guard lives in `onReveal`'s caller) and never itself rates; the
-///   rating buttons on [answerFace] are unaffected by this gesture.
+///   it never re-reveals (that guard lives in `onReveal`'s caller) and never itself rates; a
+///   horizontal drag on the same revealed card rates instead (D3), never the tap.
 /// - The face swap happens at exactly 90° of the 180° rotation, both directions: `showBack` flips
 ///   at the animation's halfway point, the same discrete swap a CSS 3D flip does.
+///
+/// D3 (`Plans/Kotlin/FlipCardRivePlan.md`): no rating buttons on touch — [SwipeToRate] is attached
+/// to this view's own **outer** container (below), the same one the flip's own `rotation3DEffect`
+/// and background/border/shadow already move as one object, so a rating drag carries the WHOLE
+/// panel, not just its face content (`active: showBack` keeps a drag on the still-showing question
+/// face inert — it must never rate).
 struct VocabularyCardView: View {
     @ObservedObject var model: AppModel
     let state: Record
@@ -46,6 +52,10 @@ struct VocabularyCardView: View {
         .overlay(RoundedRectangle(cornerRadius: 20, style: .continuous).strokeBorder(.separator))
         .shadow(color: .black.opacity(0.08), radius: 6, y: 2)
         .rotation3DEffect(.degrees(flipped ? 180 : 0), axis: (x: 0, y: 1, z: 0))
+        .swipeToRate(active: showBack, reduceMotion: reduceMotion, cornerRadius: 20) { remembered in
+            guard !state.bool("busy") else { return }
+            model.sendVocabulary(remembered ? "good" : "again")
+        }
         // A new due item always starts question-side-up, never inheriting the previous item's
         // face — never animated, so the next card never visibly "un-reveals" (mirrors D1's own
         // `onChange(of: card.string("id"))`).
@@ -102,16 +112,13 @@ struct VocabularyCardView: View {
                 Text("Твой ответ: \(state.string("draft")). Сравни сам и выбери оценку.")
                     .font(.footnote)
             }
-            HStack {
-                Button("Повторить") { model.sendVocabulary("again") }
-                    .buttonStyle(.bordered)
-                    .accessibilityIdentifier("vocabularyAgain")
-                Spacer()
-                Button("Вспомнил") { model.sendVocabulary("good") }
-                    .buttonStyle(.borderedProminent)
-                    .accessibilityIdentifier("vocabularyGood")
-            }
-            .disabled(state.bool("busy"))
+            // D3: no rating buttons on touch — the whole panel is the swipe-to-rate gesture
+            // surface, attached at this view's outer container (see [SwipeToRate]'s own call
+            // site). The identifier lives on this long-text leaf, not the shared container — see
+            // `SwipeToRate`'s own doc comment for why.
+            Text("Свайп влево — повторить · вправо — вспомнил")
+                .font(.footnote).foregroundStyle(.secondary)
+                .accessibilityIdentifier("ratingSwipeArea")
         }
         // Undoes the outer panel's own 180° rotation so the back face's own content reads
         // normally rather than mirrored — the standard SwiftUI 3D-flip counter-rotation.

@@ -73,41 +73,6 @@ struct RiveEffectOverlay: View {
     }
 }
 
-/// Flip-in-progress ring cue (`Plans/Kotlin/FlipCardRivePlan.md` FC2-06/07/08, R2): `rings.riv`'s
-/// boolean `IsExpanded` input on `State Machine 1`, driven by [expanded]. D1 replaced the training
-/// card's native flip with an expand-down reveal (`FlashCardView.swift`) that has no "flip in
-/// progress" moment to report any more, so `TrainingView` no longer composes this type — it is
-/// unused dead code until D3 (drop the ring effect entirely, remove `rings.riv`) removes it.
-///
-/// Lazily created on the first `expanded == true`, for the same reason as [RiveEffectOverlay]'s own
-/// view models above: a `RiveViewModel(...)` default value would otherwise run its expensive
-/// initializer on every re-render of this view's identity, not just the first.
-struct RiveFlipRingsOverlay: View {
-    let expanded: Bool
-
-    @State private var viewModel: RiveViewModel?
-
-    var body: some View {
-        ZStack { viewModel?.view() }
-            .allowsHitTesting(false)
-            .accessibilityHidden(true)
-            .onChange(of: expanded) { _, newValue in
-                if viewModel == nil {
-                    guard newValue else { return }
-                    #if DEBUG
-                    let signpostID = OSSignpostID(log: riveSignpostLog)
-                    os_signpost(.begin, log: riveSignpostLog, name: "RiveFlipRingsFirstLoad", signpostID: signpostID)
-                    #endif
-                    viewModel = RiveViewModel(fileName: "rings", stateMachineName: "State Machine 1")
-                    #if DEBUG
-                    os_signpost(.end, log: riveSignpostLog, name: "RiveFlipRingsFirstLoad", signpostID: signpostID)
-                    #endif
-                }
-                viewModel?.setInput("IsExpanded", value: newValue)
-            }
-    }
-}
-
 /// One-shot chain-completion celebration (`Plans/Kotlin/FlipCardRivePlan.md` FC2-10, R3 Pick C):
 /// plays only `chain-complete.riv`'s "Tada" artboard, "Reveal" animation — a plain named animation,
 /// not a state-machine trigger — autoplaying once as soon as this view exists. The caller mounts it

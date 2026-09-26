@@ -37,13 +37,7 @@ final class PolskiGrammarUITests: XCTestCase {
         }
         XCTAssertTrue(reveal.isHittable)
         reveal.tap()
-        let good = app.buttons["rateGood"]
-        for _ in 0..<7 {
-            if good.exists && good.isHittable { break }
-            app.swipeUp()
-        }
-        XCTAssertTrue(good.isHittable)
-        good.tap()
+        rateViaSwipe(app, good: true)
 
         let bannerText = "Не удалось сохранить прогресс. Экспортируй JSON перед закрытием."
         XCTAssertTrue(app.staticTexts[bannerText].waitForExistence(timeout: 10), app.debugDescription)
@@ -208,11 +202,51 @@ final class PolskiGrammarUITests: XCTestCase {
         app.buttons["Готово"].tap()
     }
 
+    /// D3: rating is a whole-card swipe on touch — there is no `rateGood`/`rateAgain` button any
+    /// more. Scrolls the swipe zone (shared identifier `ratingSwipeArea` on both the training and
+    /// the vocabulary card, `FlashCardView`/`VocabularyCardView`'s own `SwipeToRate` call sites)
+    /// into view and commits a rating via a coordinate-based drag — every other test's plain
+    /// "advance one review" mechanism; `testBinaryRatingSwipesAdvanceOnceInEachDirection` is the
+    /// one test that verifies the direction contract itself.
+    ///
+    /// A coordinate drag (not the `XCUIElement.swipeLeft()/swipeRight()` convenience) on purpose:
+    /// a scenario with extra content above the card (a test that also shows the reference table)
+    /// can leave this zone sitting right at the scrollview's own visible edge — still `isHittable`,
+    /// but `swipeLeft()/swipeRight()` still failed there ("visible frame is empty") since it
+    /// re-derives the element's clipped frame at synthesis time, which can round to zero right at
+    /// that edge. A drag between two explicit offsets inside the element's own frame doesn't hit
+    /// that path — reproduced failing with `swipeLeft()` there, passing with this, before writing it.
+    private func rateViaSwipe(_ app: XCUIApplication, good: Bool) {
+        let zone = app.descendants(matching: .any)["ratingSwipeArea"].firstMatch
+        // 10, not 7: the swipe zone sits below a shorter answer panel now that D3 dropped the two
+        // rating buttons, which shifts how far a caller's own preceding scrolls (e.g. the reference
+        // table dance in `testFirstMethodIntroductionKeepsReferenceAnswerHiddenUntilContinue`) leave
+        // it — reproduced needing more than 7 there, passing reliably with the same margin every
+        // other call site already uses for a "further" target.
+        for _ in 0..<10 {
+            if zone.exists && zone.isHittable { break }
+            app.swipeUp()
+        }
+        XCTAssertTrue(zone.isHittable, app.debugDescription)
+        let start = zone.coordinate(withNormalizedOffset: CGVector(dx: good ? 0.15 : 0.85, dy: 0.5))
+        let end = zone.coordinate(withNormalizedOffset: CGVector(dx: good ? 0.95 : 0.05, dy: 0.5))
+        start.press(forDuration: 0.05, thenDragTo: end)
+    }
+
     private func continueIntroductionIfPresent(_ app: XCUIApplication) {
         let next = app.buttons["Перейти к заданию"]
         for _ in 0..<7 {
             if !next.exists || next.isHittable { break }
             app.swipeUp()
+        }
+        if !next.exists {
+            // D3's swipe-to-rate commits the domain rating only after its fly-out animation
+            // finishes (`SwipeToRate`, mirroring the web host's own commit-then-settle order) —
+            // a caller right after a swipe must give the next card (which might need its own
+            // introduction) a brief moment to actually mount, not assume it is already there.
+            // 1.5s, not the fly-out's own ~0.22s: a generous margin over it, not a tight one —
+            // reproduced an occasional miss at 0.5s under load, never at 1.5s.
+            _ = next.waitForExistence(timeout: 1.5)
         }
         if next.exists { next.tap() }
     }
@@ -277,12 +311,7 @@ final class PolskiGrammarUITests: XCTestCase {
         }
         XCTAssertTrue(reveal.exists)
         reveal.tap()
-        let good = app.buttons["rateGood"]
-        for _ in 0..<7 {
-            if good.isHittable { break }
-            app.swipeUp()
-        }
-        good.tap()
+        rateViaSwipe(app, good: true)
         XCTAssertTrue(next.waitForExistence(timeout: 5))
         let neutral = app.buttons["Таблица под рукой"]
         for _ in 0..<10 {
@@ -406,13 +435,7 @@ final class PolskiGrammarUITests: XCTestCase {
             app.swipeUp()
         }
         XCTAssertTrue(frozen.exists)
-        let good = app.buttons["rateGood"]
-        for _ in 0..<7 {
-            if good.isHittable { break }
-            app.swipeUp()
-        }
-        XCTAssertTrue(good.isHittable)
-        good.tap()
+        rateViaSwipe(app, good: true)
         app.buttons["Прогресс"].firstMatch.tap()
         let total = app.descendants(matching: .any)["totalReviews"].firstMatch
         for _ in 0..<8 {
@@ -523,13 +546,7 @@ final class PolskiGrammarUITests: XCTestCase {
             }
             XCTAssertTrue(reveal.isHittable)
             reveal.tap()
-            let good = app.buttons["rateGood"]
-            for _ in 0..<7 {
-                if good.exists && good.isHittable { break }
-                app.swipeUp()
-            }
-            XCTAssertTrue(good.isHittable)
-            good.tap()
+            rateViaSwipe(app, good: true)
         }
         let completed = app.staticTexts["Цепочка завершена"]
         for _ in 0..<8 {
@@ -710,19 +727,28 @@ final class PolskiGrammarUITests: XCTestCase {
         }
         let reveal = app.buttons["vocabularyReveal"]
         XCTAssertTrue(reveal.waitForExistence(timeout: 5))
+        // D3: no rating buttons on touch — swiping the revealed card is the only way to rate.
         XCTAssertFalse(app.buttons["vocabularyAgain"].exists)
+        XCTAssertFalse(app.buttons["vocabularyGood"].exists)
         reveal.tap()
+        let ratingZone = app.descendants(matching: .any)["ratingSwipeArea"].firstMatch
+        // The whole-panel flip's face swap lands ~0.25s after `reveal.tap()` (half of
+        // `VocabularyCardView.flipDuration`) — a bounded wait here first, before any scrolling,
+        // avoids a swipe landing on the still-showing (shorter) question face and overscrolling
+        // straight past this single-screen card into the catalog list below it (reproduced: a
+        // swipe that fires before the swap settles can travel that far with nothing to stop it).
+        _ = ratingZone.waitForExistence(timeout: 1)
         for _ in 0..<5 {
-            if app.buttons["vocabularyAgain"].isHittable { break }
+            if ratingZone.exists && ratingZone.isHittable { break }
             app.swipeUp()
         }
-        XCTAssertTrue(app.buttons["vocabularyAgain"].isHittable)
-        XCTAssertTrue(app.buttons["vocabularyGood"].isHittable)
+        XCTAssertTrue(ratingZone.isHittable)
+        XCTAssertFalse(app.buttons["vocabularyReveal"].exists, "reveal happens exactly once")
         let capture = XCTAttachment(screenshot: app.screenshot())
         capture.name = "native-vocabulary-iphone"
         capture.lifetime = .keepAlways
         add(capture)
-        app.buttons["vocabularyAgain"].tap()
+        ratingZone.swipeLeft() // Again
         XCTAssertTrue(app.staticTexts["Мой словарь · 1"].waitForExistence(timeout: 5))
         app.terminate()
         app.launch()
@@ -739,8 +765,9 @@ final class PolskiGrammarUITests: XCTestCase {
         let reveal = app.buttons["revealAnswer"]
         XCTAssertTrue(reveal.waitForExistence(timeout: 20))
         reveal.tap()
-        XCTAssertFalse(app.buttons["rateHard"].exists)
-        XCTAssertFalse(app.buttons["rateEasy"].exists)
+        // D3: no rating buttons on touch — swiping is the only way to rate.
+        XCTAssertFalse(app.buttons["rateAgain"].exists)
+        XCTAssertFalse(app.buttons["rateGood"].exists)
         let rating = app.descendants(matching: .any)["ratingSwipeArea"].firstMatch
         for _ in 0..<6 {
             if rating.exists && rating.isHittable { break }
@@ -795,13 +822,7 @@ final class PolskiGrammarUITests: XCTestCase {
         XCTAssertFalse(app.buttons["revealAnswer"].exists,
             "tapping the revealed answer must not re-offer Reveal — the answer stays revealed")
 
-        let good = app.buttons["rateGood"]
-        for _ in 0..<7 {
-            if good.exists && good.isHittable { break }
-            app.swipeUp()
-        }
-        XCTAssertTrue(good.isHittable)
-        good.tap()
+        rateViaSwipe(app, good: true)
 
         app.buttons["Прогресс"].firstMatch.tap()
         let total = app.descendants(matching: .any)["totalReviews"].firstMatch
@@ -876,13 +897,7 @@ final class PolskiGrammarUITests: XCTestCase {
         XCTAssertTrue(reveal.exists)
         reveal.tap()
         XCTAssertTrue(app.staticTexts["Widzę moją piękną żonę."].waitForExistence(timeout: 5))
-        let good = app.buttons["rateGood"]
-        for _ in 0..<6 {
-            if good.exists { break }
-            app.swipeUp()
-        }
-        XCTAssertTrue(good.exists)
-        good.tap()
+        rateViaSwipe(app, good: true)
         for _ in 0..<4 { app.swipeDown() }
         XCTAssertTrue(app.staticTexts["1 / 5 · Вижу → Прошлое → Отрицание → Владелец → Говорю о"].waitForExistence(timeout: 5))
 

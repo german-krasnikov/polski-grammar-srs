@@ -176,39 +176,20 @@ struct FlashCardView<RevealButton: View>: View {
                 Text(card.string("methodReview"))
                 Text("Свайп влево — повторить · вправо — вспомнил")
                     .font(.footnote).foregroundStyle(.secondary)
+                    // See `SwipeToRate`'s own doc comment for why this identifier lives on this
+                    // long-text leaf specifically, and not on the shared gesture container.
                     .accessibilityIdentifier("ratingSwipeArea")
-                HStack(spacing: 8) {
-                    ForEach([("Again", "Повторить"), ("Good", "Вспомнил")], id: \.0) { rating, label in
-                        Button {
-                            model.send("rate", rating)
-                        } label: {
-                            VStack(alignment: .leading, spacing: 3) {
-                                Text(label).fontWeight(.semibold)
-                                Text(formattedDate(card.record("intervals").int64(rating)))
-                                    .font(.caption).foregroundStyle(.secondary)
-                            }
-                            .frame(maxWidth: .infinity, minHeight: 48, alignment: .leading)
-                        }
-                        .buttonStyle(.bordered)
-                        .accessibilityIdentifier("rate\(rating)")
-                    }
-                }
             }
             .padding(.vertical, 4)
             .transition(staggeredReveal(3))
         }
-        // FC-04/05/07: a horizontal drag past the threshold rates. `.simultaneousGesture` (not
-        // `.gesture`) keeps this from blocking the enclosing `Form`'s vertical scroll. D1 removed
-        // the flip-back tap this gesture used to share a container with — there is no reverse
-        // action on this panel any more, so only the rating drag remains.
-        .contentShape(Rectangle())
-        .simultaneousGesture(DragGesture(minimumDistance: 18).onEnded { gesture in
+        // D3: no rating buttons on touch — the whole panel above is the swipe-to-rate gesture
+        // surface. D1 already removed the flip-back tap this container used to share with the old
+        // drag, so there is no reverse action on this panel any more, only the rating drag.
+        .swipeToRate(active: state.string("phase") == "Revealed", reduceMotion: reduceMotion) { remembered in
             guard state.string("phase") == "Revealed" else { return }
-            let x = gesture.translation.width
-            let y = gesture.translation.height
-            guard abs(x) >= 80, abs(x) > abs(y) * 1.5 else { return }
-            model.send("rate", x < 0 ? "Again" : "Good")
-        })
+            model.send("rate", remembered ? "Good" : "Again")
+        }
     }
 }
 
