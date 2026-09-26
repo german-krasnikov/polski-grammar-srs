@@ -115,3 +115,108 @@ GREEN confirmed by restoring the fix and re-running — 3/3 tests in
   confirmed the reveal order top-to-bottom is "Эталон" (answer heading) → "Что изменилось"
   (explanation) → "ЗАПОМНИ" rule box → rating panel, i.e. heading first, matching D1 and the fix
   (screenshot inspected, not attached).
+
+## A2 — vocabulary whole-card flip (D2)
+
+**Task**: give the vocabulary ("Слова") card the whole-panel 3D flip the training card used to
+have before D1 replaced it there (`Plans/Kotlin/FlipCardRivePlan.md` §16.0-B): the entire rounded
+panel (background/border/radius/shadow) turns, not just its content; no more "Показать ответ"
+button — a tap on the card reveals once and flips immediately; a further tap only turns the panel
+back and forth (visual only, never re-reveals, never re-rates); face swap exactly at 90°.
+
+**Why a new host-specific screen, not an edit to the shared `VocabularyScreen`**: unlike Training
+(already fully replaced per-host by `AndroidTrainingScreen`/`AndroidContent`), the Vocabulary tab
+was still calling the shared `commonMain` `VocabularyScreen` composable directly from
+`MainActivity.kt` — the only other callers of that file are the (out-of-scope, unmanaged) JVM
+desktop preview and its tests. Editing it in place to add a 3D flip would be an Android-only
+behavior change smuggled into code the desktop preview also compiles and tests against, and would
+have needed either a `reduceMotion`/host-flag threaded through a file two other lanes' tooling
+(and the desktop preview's tests) touch, or a flip on desktop too (out of scope, not requested).
+Following the already-established Android pattern instead — a full host-specific screen — keeps
+the whole change inside `androidMain`/`androidApp`, touching `commonMain` only for one additive,
+behavior-preserving visibility widening (below).
+
+**Files changed**:
+- `kotlin/composeApp/src/commonMain/kotlin/polski/ui/screens/VocabularyScreen.kt` — **only** change:
+  `private fun VocabularyCatalog` → `internal fun VocabularyCatalog`, so the new Android screen can
+  reuse the catalog (import/export dialog, filter dropdown, checkboxes, custom-word editor — all
+  unaffected by the flip) instead of duplicating ~110 lines of it. No logic changed; the shared
+  screen and the desktop preview still compile and behave identically (confirmed below).
+- `kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidFlipCard.kt` — added
+  `isFlipTap` (pure function, same "short and mostly-still" contract the training card's pre-D1
+  flip used) and `detectFlipOrSwipe` (single pointer-input recognizer combining tap-to-flip-back
+  and swipe-to-rate on the revealed face — a `clickable` layered over a separate drag detector was
+  already proven broken for this exact card class, `FlipCardRivePlan.md` §14's evidence log, so
+  this reuses the merged-detector fix from there rather than re-discovering it), and the new
+  `AndroidFlipCard` composable: the same `rotationY`/`cameraDistance`/`Animatable`-based flip the
+  training card used before D1 (git `af126a6`/`b22e758`), generalized from `CardPhase`/exerciseId
+  to a plain `revealed: Boolean`/`itemId: String` contract, with the old ring-effect wiring
+  (`onRingsExpandedChange`) dropped entirely — D3 already calls for removing `rings.riv` project-
+  wide, so this flip is written without it from the start rather than adding it and removing it
+  again later.
+- **NEW** `kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidVocabularyScreen.kt`
+  — `AndroidVocabularyScreen` (header, import/export, direction chooser via the existing
+  `AndroidChoiceMenu`, the flip card, then the reused `VocabularyCatalog`), `VocabularyFrontFace`
+  (no reveal button; the prompt block itself is `Modifier.clickable(onClickLabel = "Показать
+  ответ", role = Role.Button)` — narrowly scoped to the prompt, not the whole face, so it doesn't
+  nest a button role around the real mode-chooser/`OutlinedTextField`/"Проверить" controls also in
+  `front`; those consume their own taps first, same nested-control precedent already verified for
+  `AndroidTrainingScreen`'s question-card tap-reveal) and `VocabularyBackFace` (answer, rating
+  buttons, swipe hint — each face draws its own full `Card` panel, matching the web host's own v4
+  lesson that the flipping object must be the panel itself, `FlipCardRivePlan.md` §17.1).
+- `kotlin/androidApp/src/main/java/dev/polski/grammarmatrix/MainActivity.kt` — swapped the shared
+  `VocabularyScreen(...)` call for `AndroidVocabularyScreen(...)`, adding
+  `reduceMotion = session.preferences.motion == Motion.Reduced` (same source `AndroidContent` already
+  uses for the training card, per the plan's FC-10 note that Android has no system reduced-motion
+  signal of its own).
+- `kotlin/androidApp/src/test/java/dev/polski/grammarmatrix/AndroidFlipCardTest.kt` — added
+  `isFlipTap` cases (short tap vs. past-slop drag).
+
+Left untouched (out of this task's scope): swipe-to-rate itself is unchanged (still gated by the
+existing `enableSwipeRating`/`session.preferences.swipeRatingEnabled`, using the same
+threshold/tap-slop constants as before); rings/Rive effects (D3) — the vocabulary card had none
+before this task and still has none; the catalog/editor UI (reused as-is).
+
+**TDD**: RED — added `isFlipTap` calls to `AndroidFlipCardTest.kt` before the function existed;
+`:androidApp:testDebugUnitTest --tests "...AndroidFlipCardTest"` failed to compile
+(`Unresolved reference 'isFlipTap'`), a genuine (if compile-level) RED for a new pure function, not
+a tooling failure. GREEN — added `isFlipTap`/`detectFlipOrSwipe`/`AndroidFlipCard`; same command
+passes (10 tests, including the 2 new ones).
+
+**Checks (lane-android worktree, `kotlin/`)**:
+- `./gradlew :androidApp:testDebugUnitTest --tests "dev.polski.grammarmatrix.AndroidFlipCardTest"`
+  — FAIL (compile error) before the implementation, PASS (10/10) after — RED→GREEN.
+- `./gradlew :composeApp:compileAndroidMain :androidApp:compileDebugKotlin` — PASS.
+- `./gradlew :androidApp:testDebugUnitTest` — PASS, full `androidApp` unit suite green.
+- `./gradlew :androidApp:assembleDebug` — PASS.
+- `./gradlew :composeApp:desktopTest --tests "*Vocabulary*"` — PASS (confirms the one `commonMain`
+  visibility change didn't affect the JVM desktop preview's own vocabulary tests).
+- On-device (`emulator-5554`, `Polski_ARM35`, debug APK installed and launched, driven via
+  `adb shell input tap`/`uiautomator dump`/`screencap`, one word ("жена") selected in the A1
+  catalog first): unrevealed card showed the prompt with no "Показать ответ" button (`uiautomator
+  dump` confirmed a `clickable="true" focusable="true"` node wrapping just the prompt text, no
+  button node); tapping the prompt revealed **and** flipped in the same gesture — the dump right
+  after showed "Эталон · польский"/"żona"/translation/form/example/swipe hint/"Повторить"/
+  "Вспомнил", confirmed visually too (screenshot: whole panel is the answer face, rounded
+  corners/shadow intact, no separate static frame); tapping the revealed panel again (not on a
+  button) flipped it back to the question face only — the catalog count and card state were
+  unchanged, confirming this was visual-only, not a second reveal or a rating; tapping the prompt a
+  third time re-revealed+re-flipped, and tapping "Вспомнил" this time actually rated the card — the
+  screen advanced to "На сейчас всё повторено" (no due item left), confirming the rating reached
+  FSRS; `adb logcat` showed no `FATAL EXCEPTION`/`AndroidRuntime` crash for the app process across
+  the whole run.
+
+**Known limitation (honest, not a regression)**: TalkBack's actual spoken announcement for the
+prompt's `onClickLabel`/`role = Role.Button` was not captured — `uiautomator dump`'s XML surfaces
+`content-desc`/`class`/`clickable`, not a node's accessibility-action label, so the dump confirms
+the node is clickable/focusable but not the exact TalkBack phrasing. This is the standard,
+documented Compose API for exposing a clickable region as an accessible button
+(`Modifier.clickable(onClickLabel, role = Role.Button)`), used the same way elsewhere in this
+codebase; a live TalkBack session would be needed to confirm the spoken text and was out of this
+LEAN-MODE pass.
+
+**Skipped**: typed-mode on-device click-through (no due word was available to re-select for it
+within this pass; the same `front`/`onReveal`/textfield code path is exercised by
+`AndroidChoiceMenu`/`OutlinedTextField`, both pre-existing, tested elsewhere); swipe-to-rate
+on-device (unchanged from before this task, not re-verified here); D3 (rings/Rive removal),
+D4 (tab paging), D5 (Animations toggle) — out of this task's scope entirely.

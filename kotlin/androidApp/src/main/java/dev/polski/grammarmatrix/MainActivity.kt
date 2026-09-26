@@ -79,8 +79,8 @@ import polski.presentation.EffectOutcome
 import polski.presentation.UiEffect
 import polski.preferences.Motion
 import polski.ui.screens.AndroidContent
+import polski.ui.screens.AndroidVocabularyScreen
 import polski.ui.screens.RiveMeasurementVariant
-import polski.ui.screens.VocabularyScreen
 
 private val darkPalette = darkColorScheme(
     primary = Color(0xFFFFC48B),
@@ -283,10 +283,11 @@ private fun AndroidScreen(
                 state.error?.let { Text(it, color = MaterialTheme.colorScheme.error) }
                 if (showSettings) AndroidSettingsScreen(session)
                 else if (state.tab == AppTab.Vocabulary) {
-                    VocabularyScreen(session.vocabulary,
+                    AndroidVocabularyScreen(session.vocabulary,
                         onImport = onVocabularyImport, onExport = onVocabularyExport,
                         launchMutation = session::launchVocabularyMutation,
-                        enableSwipeRating = session.preferences.swipeRatingEnabled)
+                        enableSwipeRating = session.preferences.swipeRatingEnabled,
+                        reduceMotion = session.preferences.motion == Motion.Reduced)
                 }
                 else AndroidContent(state, store::dispatch, focusReveal, ::androidDate, session.preferences.swipeRatingEnabled,
                     reduceMotion = session.preferences.motion == Motion.Reduced)

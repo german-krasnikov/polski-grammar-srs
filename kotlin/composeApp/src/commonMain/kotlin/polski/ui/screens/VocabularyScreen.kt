@@ -156,8 +156,11 @@ fun VocabularyScreen(session: VocabularySession, onImport: () -> Unit, onExport:
     }
 }
 
+/** `internal` (not `private`) only so the Android host's own vocabulary screen (D2 whole-card
+ * flip, `AndroidVocabularyScreen.kt`) can reuse the catalog unchanged instead of duplicating it;
+ * no behavior change. */
 @Composable
-private fun VocabularyCatalog(session: VocabularySession, launchMutation: (suspend () -> Unit) -> Unit) {
+internal fun VocabularyCatalog(session: VocabularySession, launchMutation: (suspend () -> Unit) -> Unit) {
     val state by session.state.collectAsState()
     var menuExpanded by remember { mutableStateOf(false) }
     var editingId by remember { mutableStateOf<String?>(null) }

@@ -8,14 +8,16 @@ import polski.presentation.CardEffect
 import polski.srs.Rating
 import polski.ui.screens.SingleRatingGate
 import polski.ui.screens.cardEffectToPlay
+import polski.ui.screens.isFlipTap
 import polski.ui.screens.ratingForDrag
 
 /**
  * Behavior for the Android training card's rating/effect contract
  * (`Plans/Kotlin/FlipCardRivePlan.md` §0/FC-07/FC-14/FC-20), exercised as plain unit tests against
- * the pure functions in `AndroidFlipCard.kt` — no Compose test rule needed. D1 removed the flip
- * itself (see `AndroidAnswerRevealComposeTest` for the expand-reveal it replaced), so the old
- * `flipOnTap`/`isFlipTap` tests are gone with it; the swipe-rating contract below is unchanged.
+ * the pure functions in `AndroidFlipCard.kt` — no Compose test rule needed. D1 removed the training
+ * card's flip (see `AndroidAnswerRevealComposeTest` for the expand-reveal it replaced); D2 (§16.0-B)
+ * brings a whole-panel flip back for the vocabulary card, sharing `isFlipTap` below with its
+ * revealed-face gesture detector (`AndroidVocabularyScreen.kt`).
  */
 class AndroidFlipCardTest {
     @Test fun leftSwipePastThresholdSelectsAgain() {
@@ -72,5 +74,13 @@ class AndroidFlipCardTest {
         assertTrue(first.rate(Rating.Good, reduceMotion = false, riveDisabledForMeasurement = false) {} != null)
         val secondCard = SingleRatingGate()
         assertTrue(secondCard.rate(Rating.Good, reduceMotion = false, riveDisabledForMeasurement = false) {} != null)
+    }
+
+    @Test fun aShortStillTapIsAFlipTap() {
+        assertTrue(isFlipTap(dx = 2f, dy = 1f, tapSlopPx = 12f))
+    }
+
+    @Test fun aDragPastSlopIsNotAFlipTap() {
+        assertTrue(!isFlipTap(dx = 40f, dy = 1f, tapSlopPx = 12f))
     }
 }
