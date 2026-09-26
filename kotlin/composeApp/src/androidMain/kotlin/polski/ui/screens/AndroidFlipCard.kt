@@ -261,11 +261,16 @@ fun AndroidFlipCard(
     // Gesture detection lives on this OUTER, untransformed Box, never on a rotationY-carrying
     // descendant: a rotationY(180°) child mirrors its local X axis, which would silently flip the
     // sign of every measured drag (see the plan's evidence log for the training card's own version
-    // of this bug). The rotation itself lives purely on the inner Box below, for drawing. Before
-    // `revealed`, there is nothing to flip back to and no rating to give, so no gesture at all —
-    // the front face's own tap-to-reveal control lives inside [front] itself.
+    // of this bug). The rotation itself lives purely on the inner Box below, for drawing. Gated on
+    // `showingBack`, not `revealed`: `revealed` flips true the instant the flip *starts*, but
+    // `front()` (with its own always-on tap-to-reveal control) keeps rendering and receiving touch
+    // for the ~250ms `tween(500)` takes to cross 90°. Attaching the swipe/tap detector any earlier
+    // let a swipe fired right after the reveal tap dispatch a rating before the answer face was
+    // ever shown, and let a double-tap in that window race `front`'s reveal against this gesture's
+    // `toggleFlip`, reversing the in-flight animation. Until `showingBack`, there is nothing to flip
+    // back to and no rating to give, so no gesture at all.
     val gesture = when {
-        !revealed -> Modifier
+        !showingBack -> Modifier
         enableSwipeRating -> Modifier.pointerInput(itemId, thresholdPx, tapSlopPx) {
             detectFlipOrSwipe(thresholdPx, tapSlopPx, onTap = ::toggleFlip, onRate = onRate)
         }

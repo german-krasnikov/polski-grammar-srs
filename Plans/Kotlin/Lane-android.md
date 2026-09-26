@@ -220,3 +220,53 @@ within this pass; the same `front`/`onReveal`/textfield code path is exercised b
 `AndroidChoiceMenu`/`OutlinedTextField`, both pre-existing, tested elsewhere); swipe-to-rate
 on-device (unchanged from before this task, not re-verified here); D3 (rings/Rive removal),
 D4 (tab paging), D5 (Animations toggle) — out of this task's scope entirely.
+
+## A2 correction — gate the vocabulary flip's gesture on `showingBack`, not `revealed`
+
+**Reviewer finding** (Major, on commit `61539db`): `AndroidFlipCard`'s `gesture` when-block
+attached the swipe/tap detector (`detectFlipOrSwipe`, or the plain `clickable` toggling `flipped`)
+the instant `revealed` became `true`, not once the flip actually crossed 90° (`showingBack`). Since
+`front()` — with its own always-on tap-to-reveal `clickable` — keeps rendering and receiving touch
+for the ~250ms `tween(500)` takes to reach 90°, a swipe thrown right after the reveal tap (D3's own
+primary rating gesture, chained right after a reveal) could dispatch a real `Rating.Again`/`Good`
+via `onRate` while the question face was still on screen, before the answer was ever shown; a
+double-tap in that same window could also race `front`'s own reveal against the ancestor's
+`toggleFlip`, visibly reversing the in-flight animation. The pre-D1 training-card version of this
+same gesture pattern (git `af126a6`/`b22e758`) gated on `showingBack` for exactly this reason; D2's
+port of it accidentally regressed the gate to `revealed`.
+
+**Fix**: `kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidFlipCard.kt` —
+`gesture`'s first branch is now `!showingBack -> Modifier` (was `!revealed -> Modifier`); everything
+else (the `enableSwipeRating`/`else` branches, `detectFlipOrSwipe`, `toggleFlip`) is unchanged.
+Widened the comment above it to explain the timing window and why it matters. One line changed, no
+public signatures touched.
+
+**TDD**: RED — added `AndroidFlipCardGestureTimingTest.kt` (Robolectric, real Compose animation
+clock via `composeRule.mainClock`, `autoAdvance = false`): reveal via an external button (isolating
+the timing question from any interaction with `front`'s own tap-to-reveal control), advance the
+clock by 100ms (well under the ~250ms needed to cross 90°, confirmed against `tween(500)`), then
+either swipe or tap the card. Against the pre-fix code both tests failed
+(`swipeDuringTheFlipAnimationDoesNotDispatchARatingBeforeTheAnswerIsShown`: a rating was dispatched
+mid-flip; `tapDuringTheFlipAnimationDoesNotReverseIt`: the card reverted to `FRONT` instead of
+settling on `BACK`) — a genuine behavioral RED reproducing both consequences the reviewer described,
+not a compile/tooling failure (confirmed by temporarily `git stash`-ing just the fix and re-running:
+2/2 failed on the pre-fix code). GREEN — after the one-line fix, same command: 2/2 pass.
+
+**Checks (lane-android worktree, `kotlin/`)**:
+- `./gradlew :androidApp:testDebugUnitTest --tests "dev.polski.grammarmatrix.AndroidFlipCardGestureTimingTest"`
+  — FAIL (2/2) on the pre-fix code, PASS (2/2) after — RED→GREEN.
+- `./gradlew :androidApp:testDebugUnitTest` (full `androidApp` unit suite, incl. the existing
+  `AndroidFlipCardTest`/`AndroidAnswerRevealComposeTest`) — PASS, 34/34.
+- `./gradlew :androidApp:assembleDebug` — PASS.
+- On-device (`emulator-5554`, `Polski_ARM35`, debug APK reinstalled and launched, driven via
+  `adb shell input tap`/`swipe`, `uiautomator dump`): tapped the vocabulary prompt ("жена") — the
+  dump right after showed the fully-flipped back face (`żona`/translation/form/example/swipe
+  hint/rating buttons), confirming reveal+flip still works after the fix; a subsequent
+  `input swipe` (right-to-left, simulating "Повторить") on the settled back face rated the card and
+  advanced the session to "На сейчас всё повторено" — confirms the swipe-to-rate path itself (now
+  gated on `showingBack`, same as before this fix for an already-settled card) still reaches FSRS.
+  A manual mid-animation race is not reliably reproducible through `adb shell input`'s timing
+  granularity, which is what the Robolectric test above exists to pin down deterministically.
+
+**Skipped**: a live TalkBack pass and typed-mode click-through were already out of scope for A1/A2
+and remain so for this one-line correction; D3/D4/D5 remain untouched.
