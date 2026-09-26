@@ -8,6 +8,8 @@ import polski.presentation.CardEffect
 import polski.srs.Rating
 import polski.ui.screens.SingleRatingGate
 import polski.ui.screens.cardEffectToPlay
+import polski.ui.screens.dragProgress
+import polski.ui.screens.dragRotationDegrees
 import polski.ui.screens.isFlipTap
 import polski.ui.screens.ratingForDrag
 
@@ -82,5 +84,27 @@ class AndroidFlipCardTest {
 
     @Test fun aDragPastSlopIsNotAFlipTap() {
         assertTrue(!isFlipTap(dx = 40f, dy = 1f, tapSlopPx = 12f))
+    }
+
+    // D3 (`Plans/Kotlin/FlipCardRivePlan.md` §17.3/UX4-08..10): the whole-card drag affordance's
+    // tint/label growth and tilt, ported from the web host's `--swipe-progress`/`rotate()` language.
+    @Test fun dragProgressIsZeroAtRest() {
+        assertEquals(0f, dragProgress(0f, thresholdPx = 72f))
+    }
+
+    @Test fun dragProgressIsHalfwayAtHalfTheThreshold() {
+        assertEquals(0.5f, dragProgress(36f, thresholdPx = 72f))
+    }
+
+    @Test fun dragProgressClampsPastTheThreshold() {
+        assertEquals(1f, dragProgress(200f, thresholdPx = 72f))
+        assertEquals(-1f, dragProgress(-200f, thresholdPx = 72f))
+    }
+
+    @Test fun dragRotationDegreesGrowsWithDistanceThenClamps() {
+        assertEquals(0f, dragRotationDegrees(0f, pxPerDegree = 22f))
+        assertEquals(2f, dragRotationDegrees(44f, pxPerDegree = 22f))
+        assertEquals(8f, dragRotationDegrees(1000f, pxPerDegree = 22f, maxDegrees = 8f))
+        assertEquals(-8f, dragRotationDegrees(-1000f, pxPerDegree = 22f, maxDegrees = 8f))
     }
 }

@@ -55,7 +55,6 @@ class AndroidFlipCardGestureTimingTest {
                             itemId = "x",
                             revealed = revealed,
                             reduceMotion = false,
-                            enableSwipeRating = true,
                             onRate = { ratings += it },
                             front = { Text("FRONT", Modifier.fillMaxWidth()) },
                             back = { Text("BACK") },
@@ -87,7 +86,7 @@ class AndroidFlipCardGestureTimingTest {
                             itemId = "x",
                             revealed = revealed,
                             reduceMotion = false,
-                            enableSwipeRating = false, // the plain-`clickable` ancestor branch the reviewer flagged
+                            // no gesture surface is composed at all before `showingBack` (the branch the reviewer flagged)
                             onRate = {},
                             front = { Text("FRONT", Modifier.fillMaxWidth()) },
                             back = { Text("BACK") },

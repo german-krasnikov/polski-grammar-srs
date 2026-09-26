@@ -28,7 +28,7 @@ class AndroidAnswerRevealComposeTest {
         composeRule.mainClock.autoAdvance = false
         composeRule.setContent {
             MaterialTheme {
-                AndroidAnswerReveal(reduceMotion = false, onRate = {}) {
+                AndroidAnswerReveal(itemKey = "x", reduceMotion = false, onRate = {}) {
                     Text("ANSWER-CONTENT")
                 }
             }
@@ -53,7 +53,7 @@ class AndroidAnswerRevealComposeTest {
         composeRule.mainClock.autoAdvance = false
         composeRule.setContent {
             MaterialTheme {
-                AndroidAnswerReveal(reduceMotion = false, onRate = {}) {
+                AndroidAnswerReveal(itemKey = "x", reduceMotion = false, onRate = {}) {
                     Text("TOP-MARKER")
                     Text("ANSWER-CONTENT")
                 }
@@ -82,7 +82,7 @@ class AndroidAnswerRevealComposeTest {
     @Test fun reducedMotionShowsTheAnswerImmediatelyWithNoAnimation() {
         composeRule.setContent {
             MaterialTheme {
-                AndroidAnswerReveal(reduceMotion = true, onRate = {}) {
+                AndroidAnswerReveal(itemKey = "x", reduceMotion = true, onRate = {}) {
                     Text("ANSWER-CONTENT")
                 }
             }

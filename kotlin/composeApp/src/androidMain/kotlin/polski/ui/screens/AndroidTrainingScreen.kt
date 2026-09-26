@@ -3,7 +3,6 @@ package polski.ui.screens
 import androidx.compose.runtime.setValue
 import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.FilledTonalButton
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
@@ -225,7 +224,7 @@ internal fun AndroidTrainingScreen(
                                 }
                             }
                             if (state.phase == CardPhase.Revealed) {
-                                AndroidAnswerReveal(reduceMotion, onRate = { rating -> if (swipeRatingEnabled) rate(rating) }) {
+                                AndroidAnswerReveal(exercise.id, reduceMotion, onRate = ::rate) {
                                     AndroidStaggeredReveal(0, reduceMotion) {
                                         Column(verticalArrangement = Arrangement.spacedBy(18.dp)) {
                                             Text("Эталон", style = MaterialTheme.typography.labelLarge)
@@ -280,12 +279,9 @@ internal fun AndroidTrainingScreen(
                                             Text(method.review)
                                         }
                                     }
-                                    AndroidStaggeredReveal(2, reduceMotion) {
-                                        Column(verticalArrangement = Arrangement.spacedBy(18.dp)) {
-                                            if (swipeRatingEnabled) Text("Свайп влево — повторить · вправо — вспомнил",
-                                                style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                                            AndroidRatingActions(state, ::rate)
-                                        }
+                                    if (swipeRatingEnabled) AndroidStaggeredReveal(2, reduceMotion) {
+                                        Text("Свайп влево — повторить · вправо — вспомнил",
+                                            style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
                                     }
                                 }
                             }
@@ -302,39 +298,6 @@ internal fun AndroidTrainingScreen(
             Text(if (!introducing && state.showReference) "Скрыть таблицу" else "Таблица под рукой")
         }
         if (state.showReference && !introducing) AndroidCaseReference(state, dispatch)
-    }
-}
-
-/**
- * Rating buttons only — the swipe-to-rate gesture now lives on the whole back-face (FC-04), sharing
- * [onRate]'s [SingleRatingGate] with it so a swipe and a button tap can never both rate the card.
- */
-@Composable
-private fun AndroidRatingActions(state: AppUiState, onRate: (Rating) -> Unit) {
-    Surface(
-        shape = RoundedCornerShape(18.dp),
-        color = MaterialTheme.colorScheme.surfaceContainerHigh,
-        modifier = Modifier.fillMaxWidth(),
-    ) {
-        Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-            Text("Когда повторить?", style = MaterialTheme.typography.titleMedium)
-            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                listOf(Rating.Again to "Повторить", Rating.Good to "Вспомнил").forEach { (rating, label) ->
-                    FilledTonalButton(
-                        onClick = { onRate(rating) },
-                        modifier = Modifier.weight(1f),
-                        shape = RoundedCornerShape(16.dp),
-                    ) {
-                        Column {
-                            Text(label)
-                            Text(state.intervals?.get(rating)?.let {
-                                intervalLabel(it.toEpochMilliseconds(), state.now?.toEpochMilliseconds() ?: it.toEpochMilliseconds())
-                            }.orEmpty(), style = MaterialTheme.typography.labelSmall)
-                        }
-                    }
-                }
-            }
-        }
     }
 }
 
@@ -355,14 +318,5 @@ private fun AndroidCaseReference(state: AppUiState, dispatch: (AppAction) -> Uni
         OutlinedButton(onClick = { dispatch(AppAction.SelectTab(AppTab.Matrix)) }, modifier = Modifier.fillMaxWidth()) {
             Text("Все таблицы и схема")
         }
-    }
-}
-
-private fun intervalLabel(dueMillis: Long, nowMillis: Long): String {
-    val minutes = maxOf(1L, (dueMillis - nowMillis + 30_000L) / 60_000L)
-    return when {
-        minutes < 60 -> "$minutes мин"
-        minutes < 2_880 -> "${(minutes + 30) / 60} ч"
-        else -> "${(minutes + 720) / 1_440} дн"
     }
 }

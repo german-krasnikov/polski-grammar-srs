@@ -270,3 +270,149 @@ not a compile/tooling failure (confirmed by temporarily `git stash`-ing just the
 
 **Skipped**: a live TalkBack pass and typed-mode click-through were already out of scope for A1/A2
 and remain so for this one-line correction; D3/D4/D5 remain untouched.
+
+## A3 — whole-card swipe rating (D3)
+
+**Task**: whole-card drag affordance (translate + tilt, growing tint/label, snap-back under
+threshold, fly-out on commit) on both the training answer panel and the vocabulary back face; no
+rating buttons on phones; Rive rating effects; remove `rings.riv` + the ring-overlay code.
+
+**Design** (`Plans/Kotlin/FlipCardRivePlan.md` §17.3/UX4-08..10, the same drag language the web
+host uses): one new shared composable, `AndroidRatingDragSurface` (in `AndroidFlipCard.kt`),
+replaces both cards' old commit-or-nothing `detectSwipeRating`/`detectFlipOrSwipe` gestures. It
+owns an `Animatable` `offsetX`, a new continuous `detectDragGesture` recognizer (reports every
+horizontal-confirmed move, not just the final release — needed to drive a *live* translate/tilt,
+unlike the old detectors), and two new pure helpers (`dragProgress`, `dragRotationDegrees`,
+alongside the existing `ratingForDrag`/`isFlipTap`) that compute the tint/label growth and tilt
+from the live `dx`. A completed drag past the threshold flies the card off (`animateTo` a large
+offset, `tween(220)`) and calls `onRate` only once that animation finishes (matching the web
+host's own "animate, *then* rate" order); a short release under the threshold snaps back
+(`animateTo(0f)`); `reduceMotion` makes both instant (`snapTo`, no button-removal regression: the
+card must still be ratable even with motion off). `AndroidDragRatingOverlay` (a `BoxScope`
+extension, `matchParentSize()`) draws the tint (reusing the existing `error`/`primary` tokens, no
+new palette) and the growing "Повторить"/"Vспомнил" label.
+
+**No rating buttons on Android** (D3: "phones/tablets: no rating buttons", not the web's own
+"visually collapse but keep in the a11y tree" compromise, UX4-11): `AndroidRatingActions`
+(training) and the `OutlinedButton`/`Button` row (`VocabularyBackFace`) are deleted outright, along
+with now-dead `intervalLabel`. Per `compose-multiplatform-ui`'s "one accessible action per rating"
+and `kmp-android`'s own visible-actions guidance, TalkBack still needs an equivalent, so
+`AndroidRatingDragSurface` exposes both ratings as `CustomAccessibilityAction`s
+("Повторить"/"Вспомнил") on its own `semantics` node (`contentDescription = "Оценка карточки"` so
+TalkBack announces something when it focuses that node) — always present, independent of drag.
+
+**Removed the "swipe disabled ⇒ fall back to buttons" trap**: the existing `swipeRatingEnabled`
+preference (`UserPreferences`, unchanged — no `commonMain` edit) used to gate *whether the drag
+gesture rated at all*, with the visible buttons as the guaranteed fallback ("Кнопки оценки работают
+всегда" in the old Settings copy). With buttons gone that would have been a dead end — turning the
+setting off would leave a card with no way to rate it on a touch host. Fixed by narrowing what the
+preference controls: the drag gesture (and its accessibility actions) are now always active
+regardless of it; the preference only toggles the on-card hint text ("Свайп влево — повторить ·
+вправо — вспомнил") and the Settings copy was rewritten to describe that accurately (`MainActivity.kt`
+Settings screen: label → "Подсказка про свайп-оценку", helper text explains rating is always by
+swipe and TalkBack gets the same two actions). This is a considered, in-scope deviation from a
+literal read of the preference's old contract, not an accidental behavior change — flagging it
+here rather than leaving it implicit.
+
+**`AndroidFlipCard` (vocabulary)**: dropped its now-unused `enableSwipeRating` parameter (the
+plain-`clickable`-vs-gesture branch it gated no longer exists — `AndroidRatingDragSurface` is
+always used once `showingBack`, handling both tap-to-flip-back, via `onTap`, and drag-to-rate in
+one recognizer). The flip mechanics themselves (rotationY/cameraDistance, the 90°-midpoint
+face-swap, the `showingBack`-not-`revealed` gesture-timing gate from the prior correction) are
+untouched — `AndroidRatingDragSurface` wraps the *existing* flip content, it doesn't replace it.
+
+**Rive rating effects**: training already called `AndroidRiveOverlay(cardEffect)` (D1-era,
+unchanged); vocabulary had none before this task and still has none — out of scope for this pass
+(D3's own wording singles out the drag affordance/buttons/rings; adding a first Rive overlay to the
+vocabulary card is a larger, separate wiring change — `SingleRatingGate`/`cardEffectToPlay` are
+already there and ready for it, but wiring `AndroidRiveOverlay` into `AndroidVocabularyScreen` was
+not part of "do only this, small and focused" and is left for a follow-up task rather than expanded
+into this one silently).
+
+**Rings removed**: `AndroidFlipRingsOverlay` deleted from `AndroidRiveOverlay.kt` (it had already
+been unwired from both screens in A1/A2, per those sections' notes — this pass deletes the dead
+function itself) and `composeApp/src/androidMain/res/raw/rings.riv` deleted
+(`git rm`). `THIRD_PARTY/credits.md` — left untouched: it is a shared, cross-host doc ("still used
+by Android and iOS this pass") that the iOS lane is presumably editing concurrently for its own
+`rings.riv` removal; touching it here risks a lane merge conflict for a doc-only line, so the
+correction ("Android" no longer applies) is left for post-merge integration rather than guessed at
+here.
+
+**Files changed**:
+- `kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidFlipCard.kt` — added
+  `dragProgress`, `dragRotationDegrees` (pure), `detectDragGesture` (supersedes
+  `detectSwipeRating`/`detectFlipOrSwipe`), `AndroidRatingDragSurface` + `AndroidDragRatingOverlay`
+  (new); `AndroidAnswerReveal` gained an `itemKey` param and now always wraps its content in
+  `AndroidRatingDragSurface` (including the `reduceMotion` early-return path, which previously had
+  no gesture at all); `AndroidFlipCard` lost `enableSwipeRating`, gates
+  `AndroidRatingDragSurface(onTap = ::toggleFlip)` on `showingBack` exactly as the gesture used to
+  be gated.
+- `kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidTrainingScreen.kt` — call site
+  updated (`exercise.id` as `itemKey`, `onRate = ::rate` unconditional); deleted
+  `AndroidRatingActions` and `intervalLabel`; the third staggered group is now just the (optional)
+  hint text; dropped the now-unused `FilledTonalButton` import.
+- `kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidVocabularyScreen.kt` —
+  `AndroidFlipCard` call site drops `enableSwipeRating`; `VocabularyBackFace` lost its `onRate`
+  param and the rating-buttons `Row`.
+- `kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidRiveOverlay.kt` —
+  `AndroidFlipRingsOverlay` deleted.
+- `kotlin/composeApp/src/androidMain/res/raw/rings.riv` — deleted.
+- `kotlin/androidApp/src/main/java/dev/polski/grammarmatrix/MainActivity.kt` — Settings screen
+  copy rewritten (see above); no other change.
+- `kotlin/androidApp/src/test/java/dev/polski/grammarmatrix/AndroidFlipCardTest.kt` — added
+  `dragProgress`/`dragRotationDegrees` cases.
+- **NEW** `kotlin/androidApp/src/test/java/dev/polski/grammarmatrix/AndroidRatingDragSurfaceTest.kt`
+  — Robolectric+Compose UI tests for `AndroidRatingDragSurface`: swipe-left/-right past the
+  threshold rates `Again`/`Good` exactly once each; a short tap (with `onTap` set) fires `onTap`,
+  not a rating; both ratings are always exposed as `SemanticsActions.CustomActions` and invoking
+  the "Вспомнил" action rates `Good`.
+- `kotlin/androidApp/src/test/java/dev/polski/grammarmatrix/AndroidFlipCardGestureTimingTest.kt` —
+  dropped the now-removed `enableSwipeRating` argument from both calls; updated the second test's
+  comment (the "plain-`clickable` ancestor branch" it described no longer exists — no gesture at
+  all is composed before `showingBack`, which is what the test still verifies).
+- `kotlin/androidApp/src/test/java/dev/polski/grammarmatrix/AndroidAnswerRevealComposeTest.kt` —
+  all three calls updated with the new `itemKey` parameter.
+
+**TDD**: RED — temporarily deleted `dragProgress`/`dragRotationDegrees` from the source; the new
+`AndroidFlipCardTest` cases (and the rest of the file, which now calls them from
+`AndroidRatingDragSurface`) failed to compile (`Unresolved reference`), confirmed, then restored —
+GREEN. For `AndroidRatingDragSurfaceTest`, the first honest RED hit during development was a real
+one: `bothRatingsAreAlwaysExposedAsAccessibilityCustomActions` initially queried the outer
+`testTag("card")` node for `SemanticsActions.CustomActions` and failed
+(`IllegalStateException: Key not present`) — the tag was on an ancestor Box in the test's own
+harness, not on `AndroidRatingDragSurface`'s own semantics node, which doesn't merge descendants;
+fixed by querying `onNodeWithContentDescription("Оценка карточки")` instead (the exact node the
+actions are declared on). Re-ran — GREEN, 4/4.
+
+**Checks (lane-android worktree, `kotlin/`)**:
+- `./gradlew :composeApp:compileAndroidMain :androidApp:compileDebugKotlin` — PASS.
+- `./gradlew :androidApp:testDebugUnitTest --tests "dev.polski.grammarmatrix.AndroidFlipCardTest"` —
+  FAIL (compile error) with `dragProgress`/`dragRotationDegrees` removed, PASS (16/16) restored —
+  RED→GREEN.
+- `./gradlew :androidApp:testDebugUnitTest --tests "dev.polski.grammarmatrix.AndroidRatingDragSurfaceTest"`
+  — PASS (4/4) after the `onNodeWithContentDescription` fix (FAIL 1/4 before it — RED→GREEN).
+- `./gradlew :androidApp:testDebugUnitTest --tests "dev.polski.grammarmatrix.AndroidFlipCardGestureTimingTest"
+  --tests "dev.polski.grammarmatrix.AndroidAnswerRevealComposeTest"` — PASS (5/5).
+- `./gradlew :androidApp:testDebugUnitTest` — PASS, full `androidApp` unit suite green.
+- `./gradlew :androidApp:assembleDebug` — PASS.
+- On-device (`emulator-5554`, `Polski_ARM35`, debug APK installed and launched, driven via
+  `adb shell input tap`/`swipe`, `uiautomator dump`, `screencap`): **Training** — revealed a card by
+  tapping the question, confirmed no rating buttons anywhere in the revealed panel (screenshot),
+  confirmed the swipe hint text; swiped right on the revealed panel → rated "Вспомнил" (chain 0/5 →
+  1/5, progress bar advanced); revealed the next card, swiped left → rated "Повторить" (1/5 → 2/5).
+  **Vocabulary** — unrevealed "жена" card showed no "Показать ответ" button (prompt itself is the
+  control, per D2, unaffected by this task); tapping it revealed+flipped to the back face (no rating
+  buttons, swipe hint shown); swiped right → rated "Вспомнил", advanced to "На сейчас всё
+  повторено" (confirms the rating reached FSRS). **Settings toggle**: turned "Подсказка про
+  свайп-оценку" off in Settings, confirmed (scrolled screenshot) the on-card hint text
+  disappeared while the rating buttons stayed absent, then swiped a revealed training card again —
+  still rated correctly (card 2/5 → 3/5, "negation" example carried through) — confirms rating is
+  never gated by this preference, only the hint text is; re-enabled the toggle afterward. `adb
+  logcat` showed no `FATAL EXCEPTION`/`AndroidRuntime` crash for the app process across the entire
+  session (reveal, both cards' swipes, tab switches, Settings toggle).
+
+**Skipped**: a live TalkBack pass (the custom-action wiring is verified at the semantics-tree level
+in `AndroidRatingDragSurfaceTest`, not with an actual screen reader); wiring a first Rive rating
+overlay into the vocabulary card (see "Rive rating effects" above — none existed before this task,
+adding one is out of this task's stated scope); `THIRD_PARTY/credits.md`'s "still used by
+Android" line (left for post-merge integration, see "Rings removed" above); D4/D5 remain untouched.

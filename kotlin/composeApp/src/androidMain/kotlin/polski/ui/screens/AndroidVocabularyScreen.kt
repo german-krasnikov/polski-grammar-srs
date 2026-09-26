@@ -86,10 +86,9 @@ fun AndroidVocabularyScreen(
                 itemId = item.id,
                 revealed = state.revealed,
                 reduceMotion = reduceMotion,
-                enableSwipeRating = enableSwipeRating,
                 onRate = ::rate,
                 front = { VocabularyFrontFace(item, state.direction, state.typed, state.draft, session) },
-                back = { VocabularyBackFace(item, state.direction, state.typed, state.draft, enableSwipeRating, ::rate) },
+                back = { VocabularyBackFace(item, state.direction, state.typed, state.draft, enableSwipeRating) },
             )
         }
 
@@ -131,14 +130,15 @@ private fun VocabularyFrontFace(item: VocabularyItem, direction: StudyDirection,
 }
 
 /**
- * D2: the revealed face — same panel chrome as [VocabularyFrontFace] (the whole rounded panel is
- * what flips, `FlipCardRivePlan.md` §17.1's lesson applied to Android too), plus the answer,
- * rating buttons and (when [enableSwipeRating]) the swipe hint. A further tap anywhere here that
- * isn't a swipe or a button only flips the panel back visually — [AndroidFlipCard] owns that
- * gesture, so this face has no gesture of its own.
+ * D2/D3: the revealed face — same panel chrome as [VocabularyFrontFace] (the whole rounded panel
+ * is what flips *and* drags, `FlipCardRivePlan.md` §17.1/§17.3 applied to Android too), plus the
+ * answer and (when [enableSwipeRating]) the swipe hint. No rating buttons (D3: "phones/tablets: no
+ * rating buttons") — [AndroidFlipCard]'s [AndroidRatingDragSurface] owns both the drag-to-rate
+ * gesture and its TalkBack equivalent actions, and (once revealed) the tap-to-flip-back gesture; a
+ * further tap anywhere here that isn't a drag commit only flips the panel back visually.
  */
 @Composable
-private fun VocabularyBackFace(item: VocabularyItem, direction: StudyDirection, typed: Boolean, draft: String, enableSwipeRating: Boolean, onRate: (Rating) -> Unit) {
+private fun VocabularyBackFace(item: VocabularyItem, direction: StudyDirection, typed: Boolean, draft: String, enableSwipeRating: Boolean) {
     val recallPolish = direction == StudyDirection.RussianToPolish
     Card(Modifier.fillMaxWidth(), shape = RoundedCornerShape(24.dp)) {
         Column(Modifier.padding(22.dp), verticalArrangement = Arrangement.spacedBy(14.dp)) {
@@ -150,10 +150,6 @@ private fun VocabularyBackFace(item: VocabularyItem, direction: StudyDirection, 
             if (typed) Text("Твой ответ: ${draft.ifBlank { "не введён" }}. Сравни сам и выбери оценку.")
             if (enableSwipeRating) Text("Свайп влево — повторить · вправо — вспомнил",
                 style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
-            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                OutlinedButton(onClick = { onRate(Rating.Again) }) { Text("Повторить") }
-                Button(onClick = { onRate(Rating.Good) }) { Text("Вспомнил") }
-            }
         }
     }
 }

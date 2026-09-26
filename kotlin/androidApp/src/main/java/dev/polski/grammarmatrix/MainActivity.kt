@@ -334,14 +334,16 @@ private fun AndroidSettingsScreen(session: AndroidSessionViewModel) {
             }
         }
         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-            Text("Свайп-оценка карточек")
+            Text("Подсказка про свайп-оценку")
             Switch(
                 checked = session.preferences.swipeRatingEnabled,
                 onCheckedChange = { session.setSwipeRatingEnabled(it) },
                 enabled = session.preferencesError == null,
             )
         }
-        Text("Свайп влево — повторить, вправо — вспомнил. Кнопки оценки работают всегда.",
+        Text("Оценка карточки — всегда свайпом влево (Повторить) или вправо (Вспомнил); эта подсказка " +
+            "просто показывает направления на самой карточке. Экранный диктор получает те же две оценки " +
+            "как отдельные действия, без свайпа.",
             color = MaterialTheme.colorScheme.onSurfaceVariant)
         Text("Напоминания", style = MaterialTheme.typography.titleMedium)
         Text("Недоступно на Android в этой сборке", color = MaterialTheme.colorScheme.onSurfaceVariant)

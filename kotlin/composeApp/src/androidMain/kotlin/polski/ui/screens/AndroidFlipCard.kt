@@ -9,14 +9,16 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.slideInVertically
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.gestures.awaitEachGesture
-import androidx.compose.foundation.gestures.awaitFirstDown
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -30,7 +32,16 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.PointerInputScope
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.input.pointer.positionChange
+import androidx.compose.foundation.gestures.awaitEachGesture
+import androidx.compose.foundation.gestures.awaitFirstDown
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.semantics.CustomAccessibilityAction
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.customActions
+import androidx.compose.ui.semantics.hideFromAccessibility
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
 import polski.presentation.CardEffect
@@ -42,8 +53,10 @@ import polski.srs.Rating
  * [isFlipTap]/[AndroidFlipCard]) the vocabulary card's D2 whole-panel flip
  * (`Plans/Kotlin/FlipCardRivePlan.md` §0/FC-07/FC-20/§16.0-B). D1 replaced the training card's 3D
  * flip with a downward expand-reveal (see [AndroidAnswerReveal]/[AndroidStaggeredReveal] below);
- * D2 brings the same 90°-rotationY flip back for the vocabulary card only. These stay plain
- * functions/classes (no Compose dependency) where possible so they are unit-testable from
+ * D2 brings the same 90°-rotationY flip back for the vocabulary card only. D3
+ * ([AndroidRatingDragSurface]) replaces the commit-or-nothing swipe both used with a live,
+ * whole-card drag affordance and drops the visible rating buttons entirely on Android. These stay
+ * plain functions/classes (no Compose dependency) where possible so they are unit-testable from
  * `androidApp/src/test` without a Compose test rule; see `AndroidFlipCardTest.kt`.
  */
 
@@ -54,15 +67,23 @@ fun ratingForDrag(dragX: Float, thresholdPx: Float): Rating? = when {
     else -> null
 }
 
+/** How far towards a committed rating a live drag of [dx] px is, in `[-1, 1]` (D3: drives the tint/label growth). */
+fun dragProgress(dx: Float, thresholdPx: Float): Float =
+    if (thresholdPx <= 0f) 0f else (dx / thresholdPx).coerceIn(-1f, 1f)
+
+/** The card's slight tilt while dragged [dx] px, capped at [maxDegrees] (D3: "translate + slight tilt"). */
+fun dragRotationDegrees(dx: Float, pxPerDegree: Float, maxDegrees: Float = 8f): Float =
+    if (pxPerDegree <= 0f) 0f else (dx / pxPerDegree).coerceIn(-maxDegrees, maxDegrees)
+
 /** The Rive effect to play for [rating], or `null` when reduced motion or a measurement variant disables it (FC-16/20). */
 fun cardEffectToPlay(rating: Rating, reduceMotion: Boolean, riveDisabledForMeasurement: Boolean): CardEffect? =
     if (reduceMotion || riveDisabledForMeasurement) null else cardEffectFor(rating)
 
 /**
  * Ensures exactly one rating reaches [dispatch] per revealed card (FC-07/20), no matter how many
- * gestures or buttons race for it — the rating buttons and the answer panel's swipe both go
- * through the same gate instance. Plain class, not Compose state, so `remember { SingleRatingGate() }`
- * keeps one per card without pulling in a test rule to verify it.
+ * gestures or accessibility actions race for it — the drag gesture and the TalkBack custom actions
+ * on [AndroidRatingDragSurface] both go through the same gate instance. Plain class, not Compose
+ * state, so `remember { SingleRatingGate() }` keeps one per card without pulling in a test rule.
  */
 class SingleRatingGate {
     private var rated = false
@@ -77,15 +98,30 @@ class SingleRatingGate {
 }
 
 /**
- * Swipe-to-rate gesture for [AndroidAnswerReveal]'s panel (D1/D3 successor to the old flip's
- * back-face gesture, now without a tap-to-flip branch since there is nothing left to flip back
- * to): a horizontal drag past [thresholdPx] rates the card via [onRate]; a short or
- * vertical-dominant drag does nothing. Consumption is gated on confirmed horizontal intent
- * (mirroring [androidx.compose.foundation.gestures.detectHorizontalDragGestures]'s own touch-slop
- * cancellation) so a vertical drag is never consumed here and still reaches the screen's own
- * `verticalScroll` untouched.
+ * Whether a gesture that moved ([dx], [dy]) px in total, without reaching a rating threshold, is a
+ * tap (flips the vocabulary card back) rather than an aborted/vertical swipe (does nothing) — the
+ * same "short and mostly-still" contract the pre-D1 training flip used for its own tap-vs-swipe
+ * split (FC-07).
  */
-private suspend fun PointerInputScope.detectSwipeRating(thresholdPx: Float, tapSlopPx: Float, onRate: (Rating) -> Unit) {
+fun isFlipTap(dx: Float, dy: Float, tapSlopPx: Float): Boolean =
+    kotlin.math.abs(dx) < tapSlopPx && kotlin.math.abs(dy) < tapSlopPx
+
+/**
+ * Continuous drag recognizer behind [AndroidRatingDragSurface] (D3): reports every
+ * horizontal-confirmed move via [onDrag] (drives the live translate/tilt/tint) and, once released,
+ * lets the caller decide whether the final `(dx, dy)` commits a rating, flips a tap, or snaps back
+ * — this stays a pure recognizer. Consumption is gated on confirmed horizontal intent, mirroring
+ * [androidx.compose.foundation.gestures.detectHorizontalDragGestures]'s own touch-slop
+ * cancellation: while the drag is still undecided (under [tapSlopPx]) nothing is consumed, and the
+ * moment it turns out vertical-dominant this bails without consuming or calling back at all — so a
+ * vertical scroll still reaches the ancestor `verticalScroll` untouched (superseded the old,
+ * separate `detectSwipeRating`/`detectFlipOrSwipe`, which only reported the final release).
+ */
+private suspend fun PointerInputScope.detectDragGesture(
+    tapSlopPx: Float,
+    onDrag: (Float) -> Unit,
+    onRelease: (dx: Float, dy: Float) -> Unit,
+) {
     awaitEachGesture {
         val down = awaitFirstDown(requireUnconsumed = false)
         var dx = 0f
@@ -105,8 +141,123 @@ private suspend fun PointerInputScope.detectSwipeRating(thresholdPx: Float, tapS
                 horizontal = true // horizontal-dominant past slop: this gesture now owns the pointer
             }
             change.consume()
+            onDrag(dx)
         }
-        ratingForDrag(dx, thresholdPx)?.let(onRate)
+        onRelease(dx, dy)
+    }
+}
+
+/**
+ * D3 whole-card drag-to-rate affordance, shared by the training answer panel and the vocabulary
+ * back face: the card translates and tilts with the finger ([dragRotationDegrees]), a tint and a
+ * growing label preview which rating a release would commit ([AndroidDragRatingOverlay]), a
+ * released drag under [thresholdPx] snaps back, and a committed drag flies off before [onRate]
+ * fires — mirroring the web host's own drag language (`FlipCardRivePlan.md` §17.3/UX4-08..10).
+ *
+ * No visible rating buttons on Android (D3: "phones/tablets: no rating buttons") — the two ratings
+ * are exposed as TalkBack [CustomAccessibilityAction]s on this surface instead, so screen-reader
+ * users keep an always-available, equivalent way to rate without a drag (`compose-multiplatform-ui`
+ * skill: "one accessible action per rating"). [onTap] (vocabulary only) fires for a short,
+ * mostly-still release that isn't a rating commit; training has no tap action ([onTap] stays
+ * `null`, a swipe short of the threshold there just snaps back).
+ */
+@Composable
+fun AndroidRatingDragSurface(
+    itemKey: Any,
+    reduceMotion: Boolean,
+    onRate: (Rating) -> Unit,
+    onTap: (() -> Unit)? = null,
+    content: @Composable () -> Unit,
+) {
+    val density = LocalDensity.current
+    val thresholdPx = with(density) { 72.dp.toPx() }
+    val tapSlopPx = with(density) { 12.dp.toPx() }
+    val rotationPxPerDegree = with(density) { 22.dp.toPx() }
+    val offsetX = remember(itemKey) { Animatable(0f) }
+    val scope = rememberCoroutineScope()
+
+    fun settle(target: Float) {
+        scope.launch { if (reduceMotion) offsetX.snapTo(target) else offsetX.animateTo(target, tween(220)) }
+    }
+
+    Box(
+        Modifier
+            .fillMaxWidth()
+            .pointerInput(itemKey, thresholdPx, tapSlopPx) {
+                detectDragGesture(
+                    tapSlopPx = tapSlopPx,
+                    onDrag = { dx -> scope.launch { offsetX.snapTo(dx) } },
+                    onRelease = { dx, dy ->
+                        val rating = ratingForDrag(dx, thresholdPx)
+                        when {
+                            rating != null -> {
+                                val sign = if (rating == Rating.Good) 1f else -1f
+                                scope.launch {
+                                    if (reduceMotion) offsetX.snapTo(sign * thresholdPx * 4f)
+                                    else offsetX.animateTo(sign * thresholdPx * 4f, tween(220))
+                                    onRate(rating)
+                                }
+                            }
+                            onTap != null && isFlipTap(dx, dy, tapSlopPx) -> onTap()
+                            else -> settle(0f)
+                        }
+                    },
+                )
+            }
+            .semantics {
+                contentDescription = "Оценка карточки"
+                customActions = listOf(
+                    CustomAccessibilityAction("Повторить") { onRate(Rating.Again); true },
+                    CustomAccessibilityAction("Вспомнил") { onRate(Rating.Good); true },
+                )
+            },
+    ) {
+        Box(
+            Modifier
+                .fillMaxWidth()
+                .offset { IntOffset(kotlin.math.round(offsetX.value).toInt(), 0) }
+                .graphicsLayer { rotationZ = dragRotationDegrees(offsetX.value, rotationPxPerDegree) },
+        ) { content() }
+        val progress = dragProgress(offsetX.value, thresholdPx)
+        if (progress != 0f) AndroidDragRatingOverlay(progress)
+    }
+}
+
+/**
+ * Decorative tint + growing label for [AndroidRatingDragSurface] — never receives touch (a plain
+ * `Box`, no gesture of its own) and is hidden from TalkBack ([hideFromAccessibility]), since the
+ * surface's own [CustomAccessibilityAction]s already cover the same two ratings. Reuses the
+ * existing error/primary tokens the rest of the app already uses for "before"/"after" contrast,
+ * not a new palette (`compose-multiplatform-ui` skill: "a restrained semantic palette").
+ */
+@Composable
+private fun BoxScope.AndroidDragRatingOverlay(progress: Float) {
+    val again = (-progress).coerceIn(0f, 1f)
+    val good = progress.coerceIn(0f, 1f)
+    Box(Modifier.matchParentSize().semantics { hideFromAccessibility() }, contentAlignment = Alignment.Center) {
+        if (again > 0f) Surface(
+            color = MaterialTheme.colorScheme.error.copy(alpha = again * 0.30f),
+            shape = RoundedCornerShape(24.dp),
+            modifier = Modifier.matchParentSize(),
+        ) {}
+        if (good > 0f) Surface(
+            color = MaterialTheme.colorScheme.primary.copy(alpha = good * 0.30f),
+            shape = RoundedCornerShape(24.dp),
+            modifier = Modifier.matchParentSize(),
+        ) {}
+        val (label, weight) = if (again >= good) "Повторить" to again else "Вспомнил" to good
+        if (weight > 0.05f) Text(
+            label,
+            style = MaterialTheme.typography.headlineSmall,
+            fontWeight = FontWeight.Bold,
+            color = if (again >= good) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary,
+            modifier = Modifier.graphicsLayer {
+                alpha = weight
+                val scale = 0.85f + 0.15f * weight
+                scaleX = scale
+                scaleY = scale
+            },
+        )
     }
 }
 
@@ -117,22 +268,24 @@ private suspend fun PointerInputScope.detectSwipeRating(thresholdPx: Float, tapS
  * starts at `false` while immediately targeting `true`: the standard idiom for playing an enter
  * transition on a composable's very first appearance — passing a plain `visible = true` from frame
  * one would have nothing to transition from and would just snap. `reduceMotion` skips the
- * transition and renders [content] directly. [onRate] shares the caller's [SingleRatingGate] with
- * the rating buttons inside [content] (FC-07/20) via [detectSwipeRating].
+ * transition but still wraps [content] in [AndroidRatingDragSurface] — rating must stay reachable
+ * (D3 removed the button fallback) with instant, not skipped, drag settling. [onRate] shares the
+ * caller's [SingleRatingGate] with [AndroidRatingDragSurface] (FC-07/20).
  */
 @Composable
 fun AndroidAnswerReveal(
+    itemKey: Any,
     reduceMotion: Boolean,
     onRate: (Rating) -> Unit,
     content: @Composable () -> Unit,
 ) {
     if (reduceMotion) {
-        Column(Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(18.dp)) { content() }
+        AndroidRatingDragSurface(itemKey, reduceMotion = true, onRate = onRate) {
+            Column(Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(18.dp)) { content() }
+        }
         return
     }
     val visibleState = remember { MutableTransitionState(false).apply { targetState = true } }
-    val thresholdPx = with(LocalDensity.current) { 72.dp.toPx() }
-    val tapSlopPx = with(LocalDensity.current) { 12.dp.toPx() }
     AnimatedVisibility(
         visibleState = visibleState,
         enter = expandVertically(
@@ -140,10 +293,9 @@ fun AndroidAnswerReveal(
             expandFrom = Alignment.Top,
         ) + fadeIn(spring(stiffness = Spring.StiffnessMediumLow)),
     ) {
-        Column(
-            Modifier.fillMaxWidth().pointerInput(Unit) { detectSwipeRating(thresholdPx, tapSlopPx, onRate) },
-            verticalArrangement = Arrangement.spacedBy(18.dp),
-        ) { content() }
+        AndroidRatingDragSurface(itemKey, reduceMotion = false, onRate = onRate) {
+            Column(Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(18.dp)) { content() }
+        }
     }
 }
 
@@ -169,75 +321,30 @@ fun AndroidStaggeredReveal(index: Int, reduceMotion: Boolean, content: @Composab
 }
 
 /**
- * Whether a gesture that moved ([dx], [dy]) px in total, without reaching a rating threshold, is a
- * tap (flips the vocabulary card back) rather than an aborted/vertical swipe (does nothing) — the
- * same "short and mostly-still" contract the pre-D1 training flip used for its own tap-vs-swipe
- * split (FC-07).
- */
-fun isFlipTap(dx: Float, dy: Float, tapSlopPx: Float): Boolean =
-    kotlin.math.abs(dx) < tapSlopPx && kotlin.math.abs(dy) < tapSlopPx
-
-/**
- * One recognizer for the vocabulary card's revealed back face (D2/FC-04/07/14): a tap flips the
- * card back and forth, a horizontal drag past [thresholdPx] rates it, and anything in between (a
- * short or vertical swipe) does neither. A single detector, not a `clickable` layered over a
- * separate drag [pointerInput] — stacking those independently let a `clickable` ancestor win over
- * a drag descendant in practice on this exact card (`FlipCardRivePlan.md` §14's evidence log), so
- * this reuses the merged approach that fixed it there.
- *
- * Consumption is gated on confirmed horizontal intent, mirroring
- * [androidx.compose.foundation.gestures.detectHorizontalDragGestures]'s own touch-slop
- * cancellation: while the drag is still undecided (under [tapSlopPx]) nothing is consumed, and the
- * moment it turns out vertical-dominant this bails without consuming — so a vertical scroll still
- * reaches the ancestor `verticalScroll` untouched.
- */
-private suspend fun PointerInputScope.detectFlipOrSwipe(thresholdPx: Float, tapSlopPx: Float, onTap: () -> Unit, onRate: (Rating) -> Unit) {
-    awaitEachGesture {
-        val down = awaitFirstDown(requireUnconsumed = false)
-        var dx = 0f
-        var dy = 0f
-        var horizontal = false
-        while (true) {
-            val event = awaitPointerEvent()
-            val change = event.changes.firstOrNull { it.id == down.id } ?: break
-            if (!change.pressed) break
-            dx += change.positionChange().x
-            dy += change.positionChange().y
-            if (!horizontal) {
-                val absDx = kotlin.math.abs(dx)
-                val absDy = kotlin.math.abs(dy)
-                if (absDx < tapSlopPx && absDy < tapSlopPx) continue // still undecided; don't consume
-                if (absDy >= absDx) return@awaitEachGesture // vertical-dominant: let the ancestor scroll
-                horizontal = true // horizontal-dominant past slop: this gesture now owns the pointer
-            }
-            change.consume()
-        }
-        val rating = ratingForDrag(dx, thresholdPx)
-        when {
-            rating != null -> onRate(rating)
-            isFlipTap(dx, dy, tapSlopPx) -> onTap()
-        }
-    }
-}
-
-/**
  * D2 whole-panel flip for the vocabulary card (`FlipCardRivePlan.md` §16.0-B): [front]/[back] are
  * each expected to draw their own full panel chrome (background/border/radius/shadow) — the
  * rounded panel itself is what turns, not a static frame around rotating content (the same lesson
  * the web host's v4 pass already applied, §17.1). Reuses the exact `rotationY`/`cameraDistance`/
  * [Animatable] pattern the training card's own pre-D1 flip used (git `af126a6`/`b22e758`), keyed by
  * [itemId] instead of an exercise id. [revealed] auto-flips to the back the first time it becomes
- * true; once revealed, a further tap only turns the panel back and forth — it never re-reveals and
- * never re-rates ([onRate] is still gated by the caller's own [SingleRatingGate], so at most one
- * rating reaches it either way). Only one face is composed at a time (split at the 90° midpoint),
- * so the hidden face is never in the accessibility tree and never receives touch.
+ * true; once revealed, a further tap only turns the panel back and forth (visual only, never
+ * re-reveals, never re-rates — [onRate] is still gated by the caller's own [SingleRatingGate]).
+ * Only one face is composed at a time (split at the 90° midpoint), so the hidden face is never in
+ * the accessibility tree and never receives touch.
+ *
+ * Gesture/drag ([AndroidRatingDragSurface]) attaches only once `showingBack` (angle past 90°), not
+ * the instant [revealed] turns true: `revealed` flips true the moment the flip *starts*, but
+ * `front()` (with its own always-on tap-to-reveal control) keeps rendering and receiving touch for
+ * the ~250ms `tween(500)` takes to cross 90°. Attaching the drag surface any earlier let a swipe
+ * fired right after the reveal tap dispatch a rating before the answer face was ever shown, and let
+ * a double-tap in that window race `front`'s reveal against this gesture's `toggleFlip`, reversing
+ * the in-flight animation (`Plans/Kotlin/Lane-android.md`'s "gate on `showingBack`" correction).
  */
 @Composable
 fun AndroidFlipCard(
     itemId: String,
     revealed: Boolean,
     reduceMotion: Boolean,
-    enableSwipeRating: Boolean,
     onRate: (Rating) -> Unit,
     front: @Composable () -> Unit,
     back: @Composable () -> Unit,
@@ -255,30 +362,15 @@ fun AndroidFlipCard(
     val angle = angleAnim.value
     val density = LocalDensity.current.density
     val showingBack = angle >= 90f
-    val thresholdPx = with(LocalDensity.current) { 72.dp.toPx() }
-    val tapSlopPx = with(LocalDensity.current) { 12.dp.toPx() }
     fun toggleFlip() { scope.launch { setFlipped(!flipped) } }
-    // Gesture detection lives on this OUTER, untransformed Box, never on a rotationY-carrying
-    // descendant: a rotationY(180°) child mirrors its local X axis, which would silently flip the
-    // sign of every measured drag (see the plan's evidence log for the training card's own version
-    // of this bug). The rotation itself lives purely on the inner Box below, for drawing. Gated on
-    // `showingBack`, not `revealed`: `revealed` flips true the instant the flip *starts*, but
-    // `front()` (with its own always-on tap-to-reveal control) keeps rendering and receiving touch
-    // for the ~250ms `tween(500)` takes to cross 90°. Attaching the swipe/tap detector any earlier
-    // let a swipe fired right after the reveal tap dispatch a rating before the answer face was
-    // ever shown, and let a double-tap in that window race `front`'s reveal against this gesture's
-    // `toggleFlip`, reversing the in-flight animation. Until `showingBack`, there is nothing to flip
-    // back to and no rating to give, so no gesture at all.
-    val gesture = when {
-        !showingBack -> Modifier
-        enableSwipeRating -> Modifier.pointerInput(itemId, thresholdPx, tapSlopPx) {
-            detectFlipOrSwipe(thresholdPx, tapSlopPx, onTap = ::toggleFlip, onRate = onRate)
-        }
-        else -> Modifier.clickable(interactionSource = remember { MutableInteractionSource() }, indication = null) { toggleFlip() }
-    }
-    Box(Modifier.fillMaxWidth().then(gesture)) {
+    val cardContent: @Composable () -> Unit = {
         Box(Modifier.graphicsLayer { rotationY = angle; cameraDistance = 12f * density }) {
             if (!showingBack) front() else Box(Modifier.graphicsLayer { rotationY = 180f }) { back() }
         }
+    }
+    if (showingBack) {
+        AndroidRatingDragSurface(itemId, reduceMotion, onRate = onRate, onTap = ::toggleFlip) { cardContent() }
+    } else {
+        Box(Modifier.fillMaxWidth()) { cardContent() }
     }
 }
