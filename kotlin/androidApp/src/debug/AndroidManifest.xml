@@ -1,0 +1,13 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <application>
+        <!-- Debug-only (this file lives under src/debug, never merged into a release build):
+             registers androidx.activity.ComponentActivity as a real, resolvable activity.
+             `ui-test-manifest` declares the same activity too, but only into the debugUnitTest-
+             scoped manifest — which Robolectric's local-test resource APK does not read (it packs
+             the plain "debug" variant manifest); declaring it here, in that manifest, is what
+             actually makes `createComposeRule()`/`ActivityScenario.launch` resolve it under
+             Robolectric (FC2-04's Compose UI test). `exported` matches ui-test-manifest's own
+             value so the two declarations merge without conflict. -->
+        <activity android:name="androidx.activity.ComponentActivity" android:exported="true" />
+    </application>
+</manifest>

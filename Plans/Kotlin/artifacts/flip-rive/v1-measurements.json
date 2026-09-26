@@ -1,0 +1,397 @@
+[
+ {
+  "artifacts": [
+   "/Users/german/Work/JS/polski-grammar-srs/tests/perf/flip-rive-measurements.spec.ts (new, Tester-added: quantitative §5 measurement harness, test-only, no production code touched)",
+   "/Users/german/Work/JS/polski-grammar-srs/playwright.perf.config.ts (new, Tester-added: separate config pointing testDir at tests/perf so the measurement spec runs without editing the developer's playwright.kotlin.config.ts testMatch list)",
+   "/Users/german/Work/JS/polski-grammar-srs/Plans/Kotlin/artifacts/flip-rive/web/variant-{A,B,C}-{js,wasm}.json (raw per-variant-per-branch metrics: frame-time percentiles, janky/dropped %, long tasks, memory, Rive first-effect latency, Rive resource timings)",
+   "/Users/german/Work/JS/polski-grammar-srs/Plans/Kotlin/artifacts/flip-rive/web/summary.csv (all 6 runs combined, one row each)",
+   "/Users/german/Work/JS/polski-grammar-srs/Plans/Kotlin/artifacts/flip-rive/web/bundle-size-delta.csv (gzip delta HEAD a7b063c vs current, independently rebuilt in a disposable git worktree)",
+   "/Users/german/Work/JS/polski-grammar-srs/Plans/Kotlin/artifacts/flip-rive/web/rive-lazy-asset-sizes.txt (raw/gzip size of every vendored Rive file, confirmed lazy — not in initial bundle)"
+  ],
+  "platform": "Web (Kotlin/JS + Kotlin/Wasm), Chromium headless via Playwright; Firefox/WebKit spot-checked for cross-engine pass/fail only (their PerformanceObserver('longtask')/rAF/heap APIs are Chromium-specific or unreliable, so no quantitative frame-time numbers were collected there — this matches the task's \"if quick\" scope, not the full protocol).",
+  "environment": "macOS 26.6 (Darwin 25.6.0), Node/npm from repo (Playwright test runner), JDK 21.0.12 arm64 ($JAVA_HOME via java_home -v 21 -a arm64), Gradle 8.14.2 wrapper from kotlin/. Distribution: kotlin/composeApp/build/dist/composeWebCompatibility/productionExecutable (unified JS+Wasm dir), served via `python3 -m http.server` on loopback (127.0.0.1:4174/4175), no CDN/network latency — Rive resource-timing numbers here (0.4–4ms) are loopback-only, not representative of a real network. Baseline: HEAD a7b063c rebuilt from scratch in a disposable git worktree (/private/tmp/polski-baseline-wt, removed after measurement).",
+  "method": "1) Verified all files the developer's summary claims (CardEffect.kt, RiveEffectOverlay.kt, rive/ assets, kotlin-flip-card.spec.ts, flip-rive-perf.spec.ts, THIRD_PARTY/credits.md) actually exist as untracked files — they do. 2) Built the current composeApp web distribution (`:composeApp:composeCompatibilityBrowserDistribution`, up-to-date) and independently rebuilt the a7b063c baseline in a git worktree to verify the developer's claimed +1.6KB initial-load gzip delta and the \"~460KB gzip Rive, lazy\" claim — both corroborated (see metrics). 3) Ran the two developer-added specs (kotlin-flip-card.spec.ts, flip-rive-perf.spec.ts) on both JS and Wasm branches, Chromium (11/11 each) and spot-checked Firefox+WebKit on the JS branch (11/11 each) — all pass, confirming the developer's PASS claims for the directly-affected acceptance tests (did not re-run the full 96–100 suite; LEAN MODE). 4) Wrote a new Tester-only quantitative measurement spec (tests/perf/flip-rive-measurements.spec.ts) implementing the parts of FlipCardRivePlan.md §5 the plan's own evidence log (§8/§11) says were NOT collected for web: rAF frame-delta profile → p50/p95/p99/janky%/dropped%, PerformanceObserver('longtask') totals, performance.memory baseline/after-effects/after-50-cycles, Rive first-effect latency (click→overlay attribute) and Resource Timing durations for the vendored .riv/.js/.wasm files. Ran it for all 3 variants (A=Motion.Reduced/no-animation, B=?riveDisabled=1/native-flip-only, C=default/flip+Rive) × 2 branches (js, wasm), Chromium, ≥6 flip cycles and ≥6 real-pointer swipe-with-rate cycles per run (exceeds the ≥5 minimum). 5) Hit and fixed 3 real test-harness bugs while building this (not product bugs): (a) using the whole `.card-back` bounding box without `scrollIntoViewIfNeeded()` put synthetic mouse coordinates off the actually-rendered area since the card is taller than the viewport — swipes silently did nothing; (b) the default \"chain\" training mode ends every 5 cards in a \"Цепочка завершена\" summary screen with different buttons, which hung a reveal-loop expecting the normal reveal/rate UI — switched the harness to \"По расписанию\" (scheduled) mode; (c) the exercise stream mixes oral and typed-answer cards, requiring the reveal helper to handle both. None of these were product defects — verified by hand with a throwaway debug script showing the real cause each time before fixing the test.",
+  "metrics": [
+   {
+    "name": "flip animation frame time p50/p95/p99 (ms, avg over 6 tap-flip cycles)",
+    "variant": "no-animation",
+    "value": "js: 16.70/16.73/16.80; wasm: 16.70/16.72/16.80"
+   },
+   {
+    "name": "flip animation frame time p50/p95/p99 (ms)",
+    "variant": "native-flip",
+    "value": "js: 16.70/16.75/16.80; wasm: 16.70/16.72/16.78"
+   },
+   {
+    "name": "flip animation frame time p50/p95/p99 (ms)",
+    "variant": "flip+rive",
+    "value": "js: 16.70/16.72/16.80; wasm: 16.70/16.72/16.80"
+   },
+   {
+    "name": "flip janky%/dropped% (frames >25ms/>33ms)",
+    "variant": "no-animation",
+    "value": "0% / 0% (both branches)"
+   },
+   {
+    "name": "flip janky%/dropped%",
+    "variant": "native-flip",
+    "value": "0% / 0% (both branches)"
+   },
+   {
+    "name": "flip janky%/dropped%",
+    "variant": "flip+rive",
+    "value": "0% / 0% (both branches)"
+   },
+   {
+    "name": "swipe-with-effect frame time p50/p95/p99 (ms, avg over 6 real pointer swipes)",
+    "variant": "no-animation",
+    "value": "js: 16.70/16.73/16.78; wasm: 16.70/16.77/16.80"
+   },
+   {
+    "name": "swipe-with-effect frame time p50/p95/p99 (ms)",
+    "variant": "native-flip",
+    "value": "js: 16.70/16.75/16.80; wasm: 16.70/16.70/16.80"
+   },
+   {
+    "name": "swipe-with-effect frame time p50/p95/p99 (ms)",
+    "variant": "flip+rive",
+    "value": "js: 16.70/16.75/16.80; wasm: 16.70/16.73/16.78"
+   },
+   {
+    "name": "long tasks: count / max / total (ms, over the whole run: 6 flips + 6 swipes + 50-cycle leak check)",
+    "variant": "no-animation",
+    "value": "js: 3 / 190 / 363; wasm: 2 / 79 / 132"
+   },
+   {
+    "name": "long tasks: count / max / total (ms)",
+    "variant": "native-flip",
+    "value": "js: 2 / 183 / 268; wasm: 2 / 67 / 117"
+   },
+   {
+    "name": "long tasks: count / max / total (ms)",
+    "variant": "flip+rive",
+    "value": "js: 3 / 175 / 309; wasm: 1 / 63 / 63 — NOT higher than variant A/B, i.e. the confetti/again Rive burst did not add measurable long-task cost on top of the app's own baseline long tasks in this headless run"
+   },
+   {
+    "name": "Rive first-effect latency (rate click → overlay's data-rive-effect attribute, avg of 6 real swipe-rates)",
+    "variant": "flip+rive",
+    "value": "js: 157ms (149–165 range); wasm: 161ms (156–171 range)"
+   },
+   {
+    "name": "Rive resource load duration (loopback http.server, per rive.js/rive.wasm/confetti.riv/again.riv/rive-bridge.js request)",
+    "variant": "flip+rive",
+    "value": "js: 0.5–3.1ms; wasm: 0.4–4.1ms (loopback-only — not representative of a real network; use the size numbers below for the real cost)"
+   },
+   {
+    "name": "JS heap used (performance.memory.usedJSHeapSize): baseline / after 6 flips+6 rate-effects / after 50 extra flip cycles",
+    "variant": "no-animation",
+    "value": "js: 39,600,000 / 39,600,000 / 39,600,000 (flat, all 3 variants and both branches) — Chromium quantizes this API to 100KB buckets for anti-fingerprinting; flat readings do not by themselves prove no leak at this cycle count"
+   },
+   {
+    "name": "JS heap used: baseline/after-effects/after-50",
+    "variant": "native-flip",
+    "value": "js: 39.6M/39.6M/39.6M; wasm: 29.4M/29.4M/29.4M — flat"
+   },
+   {
+    "name": "JS heap used: baseline/after-effects/after-50",
+    "variant": "flip+rive",
+    "value": "js: 39.6M/39.6M/39.6M; wasm: 29.4M/29.4M/29.4M — flat (loading rive.wasm + creating 2 RiveViewModel-equivalents did not move the quantized heap bucket over just 6 effect triggers + 50 flips)"
+   },
+   {
+    "name": "Initial-load gzip bundle delta, HEAD a7b063c → current (independently rebuilt, not trusting the developer's own number)",
+    "variant": "n/a",
+    "value": "originJsComposeApp.js +1065B (791783→792848), Wasm-branch JS glue +67B (99665→99732), app .wasm binary +537B (744380→744917); total +1669B (~1.6KB) — matches the developer's claimed +1.6KB (~+1053/+56/+540B) within normal build-nondeterminism noise"
+   },
+   {
+    "name": "Rive runtime+assets total size (confirmed lazy: 0 requests before first Reveal/Rate, in both my ad hoc check and the developer's existing flip-rive-perf.spec.ts test)",
+    "variant": "flip+rive",
+    "value": "gzip: rive.js 95,049B + rive.wasm 360,770B + confetti.riv 2,208B + again.riv 2,740B + rive-bridge.js 1,515B = 462,282B (~452KB gzip) — matches developer's '~460KB gzip' claim"
+   }
+  ],
+  "caveats": "All quantitative numbers are Chromium-headless on one dev machine — indicative only, explicitly not device-grade, exactly as the plan's own §5/§8/§11 already caveat for every host. Frame-time p50/p95/p99 came back essentially flat at 16.7ms (0% janky/dropped) for every single variant including the no-animation baseline — this is a real, reproducible result on this machine/headless config, not a script bug (verified: same harness produces very different numbers per variant for long-task count and Rive latency, so it is sensitive to real differences), but it means this measurement floor could not distinguish variant C's animation/Rive cost from variant A's — a loaded/throttled device or a real compositor (not headless swiftshader) may show real jank that this run cannot surface. performance.memory is bucket-quantized by Chromium (100KB granularity) specifically to prevent exactly this kind of measurement, so the flat memory numbers are expected and do NOT constitute evidence of no leak — a real leak check needs more cycles (my 50 is the plan's floor) and/or CDP's Performance.getMetrics/heap-snapshot APIs, which this pass did not add. Rive resource-timing durations were measured against a local loopback http.server, not a CDN — treat only the size numbers as representative of real load cost, not the millisecond durations. Firefox/WebKit were only spot-checked for pass/fail on the two existing behavioral specs (both 11/11), not run through the quantitative harness, because PerformanceObserver('longtask') and performance.memory are Chromium-only/unreliable elsewhere — no frame-time numbers exist for those engines. Android/iOS/macOS quantitative measurement (gfxinfo/Macrobenchmark, XCTOSSignpostMetric/XCTMemoryMetric) is explicitly out of this pass's scope per the task (\"Platform: web\") and is already flagged as NOT collected in the plan's own §9/§10/§11 evidence logs — this pass does not close that gap. I did not modify any production source; the only new files are the Tester-added measurement spec, its dedicated Playwright config, and the raw JSON/CSV artifacts, all left uncommitted in the working tree as instructed.",
+  "verdict": "PASS for the assigned scope, with one open gap flagged rather than silently accepted: the developer's web bundle-size claim (+~1.6KB initial load, ~460KB gzip Rive kept lazy) is independently corroborated by rebuilding the a7b063c baseline from scratch. The two developer-authored web acceptance specs (kotlin-flip-card.spec.ts, flip-rive-perf.spec.ts) pass 11/11 on both JS and Wasm branches in Chromium, and 11/11 on Firefox and WebKit for the JS branch. The quantitative §5 measurement protocol (frame p50/p95/p99, janky/dropped%, long tasks, memory, Rive first-effect latency) — which the plan's own evidence log says was NOT collected for web — is now collected for all 3 variants × 2 branches, ≥6 cycles each, with raw JSON + a combined CSV saved under Plans/Kotlin/artifacts/flip-rive/web/. The main open gap: memory-leak detection is inconclusive at this cycle count due to Chromium's memory-API quantization (a measurement-resolution limitation, not a product finding), and Firefox/WebKit have no quantitative numbers (API availability limitation). Neither indicates a product defect; both should be named explicitly rather than reported as clean data."
+ },
+ {
+  "platform": "android",
+  "environment": "Emulator Polski_ARM35 (emulator-5554), Android 15, launched with -no-window -no-audio -gpu swiftshader_indirect (software-rendered; absolute frame-time numbers are NOT device-representative). JAVA_HOME=jdk-21 arm64, ANDROID_HOME=~/Library/Android/sdk. App under test: dev.polski.grammarmatrix debug build assembled fresh from the dirty working tree at HEAD a7b063c via `cd kotlin && ./gradlew :androidApp:assembleDebug`, installed with `adb install -r`. Verified the installed build matches the described implementation by reading kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/{AndroidFlipCard.kt,AndroidRiveOverlay.kt,AndroidTrainingScreen.kt} (the horizontal-drag-gating fix, SingleRatingGate, CardEffect wiring and riveDisabledForMeasurement() are all real, present code, not just claims).",
+  "method": "Wrote a disposable Python/adb harness (tests/perf/android/flip_rive_perf_driver.py + leak_check.py) that drives the real running app via `uiautomator dump` (element discovery), `adb shell input tap/swipe` (gestures) and `dumpsys gfxinfo`/`dumpsys meminfo`/`top -b` (metrics) -- no production code was touched. Variant A (no-animation) = Settings -> Движение -> Уменьшенное (reduceMotion=true, snap() flip, Rive gated off). Variant C (flip+rive) = Движение -> Системное (default: tween(500) flip, Rive confetti/again on rating). Each variant ran gfxinfo-reset, then 5 tap-to-flip cycles + 5 swipe-to-rate cycles (each swipe triggering a real 'Good'/confetti or 'Again' effect end-to-end through TrainingStore.rate -> FSRS -> SingleRatingGate -> AndroidRiveOverlay), then gfxinfo/meminfo snapshots. A separate 15-cycle memory run (mixed Good/Again) sampled PSS every 5 cycles on the flip+rive variant. CPU was sampled with `top -b -n1` every 0.5s across two rating swipes. Bundle size: built a clean baseline APK for HEAD a7b063c in a disposable `git worktree` under /private/tmp, removed afterward, and diffed against the dirty-tree APK with `unzip -l` broken down per-ABI. Variant B ('native-flip only', Rive disabled but flip animated) was attempted but is NOT reachable on the installed APK: riveDisabledForMeasurement() in AndroidTrainingScreen.kt reads a JVM `System.getProperty`, which nothing external to the process (no intent extra, no adb setprop, no debug-menu toggle, unlike the iOS/macOS passes' AppStorage toggle) can set on a running Android app -- this is a real implementation gap, reported rather than faked.",
+  "metrics": [
+   {
+    "name": "total_frames_in_window",
+    "variant": "no-animation",
+    "value": "929",
+    "notes": "5 flips + 5 rate-swipes; dominated by the harness's own uiautomator scroll/dump overhead on this software-rendered emulator, not by the flip/Rive animation alone"
+   },
+   {
+    "name": "total_frames_in_window",
+    "variant": "flip+rive",
+    "value": "1095",
+    "notes": "same gesture script as no-animation, so harness overhead is controlled for, but not isolated out"
+   },
+   {
+    "name": "janky_frames_pct",
+    "variant": "no-animation",
+    "value": "58.56%",
+    "notes": "dumpsys gfxinfo; legacy metric 85.68%"
+   },
+   {
+    "name": "janky_frames_pct",
+    "variant": "flip+rive",
+    "value": "49.04%",
+    "notes": "legacy metric 87.40%; counter-intuitively lower than no-animation -- read as emulator/GC noise at this small N, not a real improvement from adding Rive"
+   },
+   {
+    "name": "frame_time_p50_p90_p95_p99_ms",
+    "variant": "no-animation",
+    "value": "57 / 81 / 89 / 150"
+   },
+   {
+    "name": "frame_time_p50_p90_p95_p99_ms",
+    "variant": "flip+rive",
+    "value": "46 / 77 / 81 / 113"
+   },
+   {
+    "name": "missed_vsync / slow_ui_thread / deadline_missed",
+    "variant": "no-animation",
+    "value": "258 / 236 / 544"
+   },
+   {
+    "name": "missed_vsync / slow_ui_thread / deadline_missed",
+    "variant": "flip+rive",
+    "value": "254 / 224 / 537"
+   },
+   {
+    "name": "memory_PSS_before_to_after_KB",
+    "variant": "no-animation",
+    "value": "98490 -> 100181"
+   },
+   {
+    "name": "memory_PSS_before_to_after_KB",
+    "variant": "flip+rive",
+    "value": "95432 -> 99006"
+   },
+   {
+    "name": "memory_leak_check_PSS_KB_at_cycles_0_5_10_15",
+    "variant": "flip+rive",
+    "value": "103369 / 98125 / 98761 / 98333",
+    "notes": "15 of the requested >=50 cycles (time-boxed); flat, no growth trend in this window -- not a 50-cycle result"
+   },
+   {
+    "name": "cpu_burst_during_rating_swipe",
+    "variant": "flip+rive",
+    "value": "0% idle -> 96.1% (1 sample, single core) -> ~4%",
+    "notes": "top -b -n1 every 0.5s across 2 rate cycles; one real data point, not a distribution"
+   },
+   {
+    "name": "rive_first_effect_latency",
+    "variant": "flip+rive",
+    "value": "NOT MEASURED",
+    "notes": "no rive-android log lines exist at any adb logcat level to bracket load/first-frame timestamps; only indirect gfxinfo p95/p99 spikes available"
+   },
+   {
+    "name": "native_flip_only_variant",
+    "variant": "native-flip-only",
+    "value": "NOT RUN -- unreachable",
+    "notes": "riveDisabledForMeasurement() reads System.getProperty, not settable externally on Android; real gap vs iOS/macOS's debug-toggle equivalent"
+   },
+   {
+    "name": "debug_apk_size_delta_vs_a7b063c_baseline",
+    "variant": "n/a (bundle size)",
+    "value": "13,061,119 B -> 41,170,211 B, +28,109,092 B (+~26.8 MB, 3.15x)",
+    "notes": "baseline built clean in a disposable git worktree at a7b063c, then removed; delta is almost entirely librive-android.so + libc++_shared.so x4 ABIs (~5.1-5.7MB + ~0.87-1.3MB each) plus +1.45MB in classes12.dex; this is an unstripped, unsplit debug APK carrying all 4 ABIs at once -- a real App-Bundle install would ship roughly 1/4 of the native-lib delta per device"
+   }
+  ],
+  "artifacts": [
+   "/Users/german/Work/JS/polski-grammar-srs/Plans/Kotlin/artifacts/flip-rive/android/README.md",
+   "/Users/german/Work/JS/polski-grammar-srs/Plans/Kotlin/artifacts/flip-rive/android/variant-A-no_animation.json",
+   "/Users/german/Work/JS/polski-grammar-srs/Plans/Kotlin/artifacts/flip-rive/android/variant-C-flip_rive.json",
+   "/Users/german/Work/JS/polski-grammar-srs/Plans/Kotlin/artifacts/flip-rive/android/leak-check-15-cycles-flip_rive.json",
+   "/Users/german/Work/JS/polski-grammar-srs/Plans/Kotlin/artifacts/flip-rive/android/cpu-sample-idle-then-active.txt",
+   "/Users/german/Work/JS/polski-grammar-srs/Plans/Kotlin/artifacts/flip-rive/android/screenshot-motion-reduced.png",
+   "/Users/german/Work/JS/polski-grammar-srs/Plans/Kotlin/artifacts/flip-rive/android/screenshot-motion-system.png",
+   "/Users/german/Work/JS/polski-grammar-srs/Plans/Kotlin/artifacts/flip-rive/android/screenshot-card-revealed.png",
+   "/Users/german/Work/JS/polski-grammar-srs/tests/perf/android/flip_rive_perf_driver.py",
+   "/Users/german/Work/JS/polski-grammar-srs/tests/perf/android/leak_check.py",
+   "/Users/german/Work/JS/polski-grammar-srs/tests/perf/android/README.md"
+  ],
+  "caveats": "(1) All numbers are from a software-rendered (-gpu swiftshader_indirect), headless (-no-window) emulator: absolute frame times, CPU%, and memory are not device-representative; only the controlled A-vs-C comparison (identical gesture script both times) has any relative meaning, and even that is dominated by the test harness's own uiautomator/scroll overhead rather than isolating the flip/Rive animation cost -- a real Macrobenchmark (androidApp/src/benchmark exists as an empty, unwired source set) would be needed for a trustworthy per-frame delta. (2) Variant B (native-flip-only) could not be produced at all: this is a genuine implementation gap (no reachable way to set riveDisabledForMeasurement()'s System.getProperty from outside the process), not a measurement choice -- worth returning to the developer, since iOS/macOS solved the equivalent problem with a real debug-menu toggle. (3) The 50-cycle leak requirement was reduced to 15 cycles for time; the 15-cycle trend is flat but this is not a substitute for the full 50. (4) Rive load/first-effect latency has no instrumentation to measure in this app (no distinguishing logcat output), so it is reported as not measured rather than estimated. (5) The APK size delta is a debug, unstripped, all-4-ABI build; it overstates a real per-device install cost by roughly 3-4x. (6) I discovered mid-session that AndroidFlipCard.kt's front-face 'Показать ответ' button is unconditionally present (not phase-gated) and is a harmless no-op once already revealed (TrainingStore.reveal() guards on CardPhase.Question) -- this only affected my test script's navigation logic, it is not something I flagged as a product defect, but is worth the developer's awareness since it means the button stays tappable/visible on the front face indefinitely.",
+  "verdict": "Two of the three requested variants were measured with real, reproducible evidence (gfxinfo, meminfo, CPU snapshot, and a precise APK-size delta); the third (native-flip-only) is blocked by a genuine, reachable-from-outside-the-process gap in the Android implementation and was correctly reported as not run rather than guessed. Within this run, flip+Rive shows no clear regression in janky-frame% or memory versus no-animation on this emulator, but the harness's own UI-automation overhead dominates the frame counts enough that this should be treated as 'no obvious red flag' rather than a validated performance sign-off -- a real on-device Macrobenchmark pass (with FrameTimingMetric isolating just the flip/rating gesture) is still needed before treating Android's flip+Rive cost as characterized. The APK size delta (+~26.8MB debug / ABI-unsplit, dominated by librive-android.so x4 ABIs) is solid, precise evidence and the single most actionable number from this pass."
+ },
+ {
+  "platform": "ios (native SwiftUI host, iPhone 17 Pro Simulator UDID 4384946F-9E6B-43D0-ADA3-CA219A3456B8)",
+  "environment": "macOS Darwin 25.6.0, Xcode 27.0 (build 27A266a), iOS 26.0 simulator runtime, derivedData /private/tmp/polski-ios-perf-dd. Repo /Users/german/Work/JS/polski-grammar-srs, HEAD a7b063c, working tree as handed off (developer's uncommitted flip/rive changes present, untouched by this pass). No production Swift/Kotlin file was modified. Nothing was committed.",
+  "method": "Added a test-only XCUITest harness — kotlin/iosApp/PolskiGrammarUITests/FlipRivePerfUITests.swift (4 test methods) — registered in kotlin/iosApp/generate_project.rb (+2 lines) and regenerated PolskiGrammar.xcodeproj/scheme via `arch -arm64 ruby generate_project.rb`. It drives the real app UI exactly as a person would (no test seams added to production code): Settings → \"Движение\" picker for Motion.Reduced (variant A), the app's existing #if DEBUG long-press-on-\"Тестовая версия\" toggle for polski.debug.riveDisabled (variant B), defaults for variant C. Per variant: reset progress, then 5 flip round-trips (tap \"Эталон\"→front→\"Исходное предложение\"→back) and 5 swipe-rate round-trips (ratingSwipeArea swipeLeft/Right, alternating, re-revealing after each), each bracketed by a printed `PERF_MARK <label> <epoch>` line. Variant C additionally runs 50 more rate cycles (leak check) with a checkpoint print every 10. A separate testPerfAppLaunch uses XCTApplicationLaunchMetric (XCTest's own metric, 5 iterations). Command (working dir: repo root): `xcodebuild -project kotlin/iosApp/PolskiGrammar.xcodeproj -scheme PolskiGrammar -destination 'platform=iOS Simulator,id=4384946F-9E6B-43D0-ADA3-CA219A3456B8' -derivedDataPath /private/tmp/polski-ios-perf-dd CODE_SIGNING_ALLOWED=NO -only-testing:PolskiGrammarUITests/FlipRivePerfUITests/testPerfVariantA_NoAnimation -only-testing:.../testPerfVariantB_NativeFlipOnly -only-testing:.../testPerfVariantC_FlipPlusRive test`. In parallel, an external bash sampler (ps -eo pid,rss,pcpu,args, 0.5s interval, filtered to the live PolskiGrammar.app process under this simulator's UDID) wrote timestamped RSS/%CPU to CSV; a Python script then correlated PERF_MARK timestamps against the nearest memory sample (≤5s) and computed round-trip durations/percentiles from the marks. XCTApplicationLaunchMetric values were pulled from the run's .xcresult via `xcrun xcresulttool get test-results metrics`. Bundle-size delta vs baseline a7b063c was reused as-is from FlipCardRivePlan.md §10 (LEAN MODE — nothing under the app target changed since that measurement; this pass's additions are confined to the UITests target, which never ships).",
+  "metrics": [
+   {
+    "name": "flip round-trip (UI wall-clock, back→front→back), p50/mean",
+    "variant": "no-animation",
+    "value": "p50 5.32s / mean 5.35s (n=5, range 5.23–5.54s)",
+    "notes": "Includes XCTUITest gesture-synthesis + accessibility-snapshot overhead, not a pure render-frame time; relative deltas across variants are the meaningful signal, not the absolute seconds."
+   },
+   {
+    "name": "flip round-trip (UI wall-clock, back→front→back), p50/mean",
+    "variant": "native-flip",
+    "value": "p50 7.40s / mean 7.51s (n=5, range 7.37–7.98s)",
+    "notes": "+~2.1s vs no-animation — the real cost of the 3D rotation animation itself (Motion not reduced) plus its settle wait."
+   },
+   {
+    "name": "flip round-trip (UI wall-clock, back→front→back), p50/mean",
+    "variant": "flip+rive",
+    "value": "p50 7.31s / mean 7.40s (n=5, range 7.30–7.56s)",
+    "notes": "Statistically indistinguishable from native-flip (n=5 each) — flip itself carries no measurable extra cost from the (lazily-created, gated-off during flip) Rive overlay."
+   },
+   {
+    "name": "swipe-rate round-trip (UI wall-clock, reveal→swipe→reveal), p50/mean",
+    "variant": "no-animation",
+    "value": "p50 15.87s / mean 16.14s (n=5, range 15.02–17.76s)",
+    "notes": "No Rive trigger fires in this variant."
+   },
+   {
+    "name": "swipe-rate round-trip (UI wall-clock, reveal→swipe→reveal), p50/mean",
+    "variant": "native-flip",
+    "value": "p50 16.92s / mean 17.77s (n=5, range 13.16–24.40s)",
+    "notes": "Rive disabled by the debug flag; wide spread includes one milestone-screen (ChainComplete/NoDue) detour."
+   },
+   {
+    "name": "swipe-rate round-trip (UI wall-clock, reveal→swipe→reveal), p50/mean",
+    "variant": "flip+rive",
+    "value": "p50 17.40s / mean 16.30s (n=5, range 12.41–18.15s)",
+    "notes": "Overlapping with native-flip within this small sample — no clear added per-rate cost from Rive at this n."
+   },
+   {
+    "name": "first-effect latency proxy (first accepted rating vs later ones / vs Rive-disabled)",
+    "variant": "flip+rive",
+    "value": "rate#0 15.98s vs variantB rate#0 16.92s (Δ -0.94s); rate#0 vs mean(rate#1..4)=16.38s (Δ -0.40s)",
+    "notes": "Both deltas are near/below XCUITest step-to-step noise (~1-2s) — this harness could not isolate the one-time lazy RiveViewModel creation cost from measurement noise; a real signpost around RiveEffectOverlay's first creation (production code, out of tester scope) would be needed for a clean number."
+   },
+   {
+    "name": "app process RSS (ps), baseline vs after first accepted rating",
+    "variant": "no-animation",
+    "value": "362,496 KB → 331,024 KB",
+    "notes": "ps RSS, a coarse host-level proxy (includes shared/mapped pages), not Xcode's Memory Report physical footprint. Debug/Simulator build."
+   },
+   {
+    "name": "app process RSS (ps), baseline vs after first accepted rating",
+    "variant": "native-flip",
+    "value": "362,880 KB → 373,040 KB (+10,160 KB)",
+    "notes": "Rive disabled; small rise plausibly just deck/exercise-state growth, not Rive."
+   },
+   {
+    "name": "app process RSS (ps), baseline vs after first accepted rating",
+    "variant": "flip+rive",
+    "value": "360,720 KB → 369,296 KB (+8,576 KB)",
+    "notes": "Comparable rise to native-flip — no distinct Rive-creation memory spike visible at this sampling resolution (0.5s)."
+   },
+   {
+    "name": "app process RSS (ps) leak-check over 50 extra rate cycles",
+    "variant": "flip+rive",
+    "value": "baseline 360,720 KB; cycle10 337,296; cycle20 353,104; cycle30 341,056; cycle40 288,608; cycle50 295,968 KB",
+    "notes": "No monotonic growth across 50 cycles — no leak signal at this resolution; values fluctuate (likely deck/exercise churn + GC), not a steady climb."
+   },
+   {
+    "name": "app process %CPU (ps decaying-average sample), baseline vs after first accepted rating",
+    "variant": "flip+rive",
+    "value": "0.5% → 36.2%",
+    "notes": "Single-sample ps %cpu, noisy/indicative only — not a true CPU-time integral over the rating action."
+   },
+   {
+    "name": "app process %CPU (ps decaying-average sample), baseline vs after first accepted rating",
+    "variant": "native-flip",
+    "value": "16.1% → 44.5%",
+    "notes": "Higher baseline than flip+rive's baseline sample in this run — within expected single-sample ps noise, not a reliable A/B signal."
+   },
+   {
+    "name": "XCTApplicationLaunchMetric (cold + 4 warm launches)",
+    "variant": "flip+rive",
+    "value": "cold 10.21s; warm launches 1.57/1.72/1.74/1.80s (p50 1.73s, mean 1.71s)",
+    "notes": "Variant-independent (Rive/motion flags only affect in-card behavior, not launch — RiveViewModels are lazy). Real XCTest metric, from .xcresult via xcresulttool."
+   },
+   {
+    "name": "PolskiGrammar.app bundle size delta vs baseline a7b063c (Debug/iphonesimulator)",
+    "variant": "flip+rive",
+    "value": "13,004 KB → 22,992 KB (Δ +9,988 KB, ~9.75 MB), ~9.7 MB of it RiveRuntime.framework",
+    "notes": "Reused from FlipCardRivePlan.md §10 (LEAN MODE, unchanged since); not re-measured this pass. Debug/simulator/unsigned/unthinned — not release/device-representative."
+   }
+  ],
+  "artifacts": [
+   "/Users/german/Work/JS/polski-grammar-srs/Plans/Kotlin/artifacts/flip-rive/ios/perf-report.json",
+   "/Users/german/Work/JS/polski-grammar-srs/Plans/Kotlin/artifacts/flip-rive/ios/raw-marks.txt",
+   "/Users/german/Work/JS/polski-grammar-srs/Plans/Kotlin/artifacts/flip-rive/ios/raw-memory-samples.csv",
+   "/Users/german/Work/JS/polski-grammar-srs/Plans/Kotlin/artifacts/flip-rive/ios/xcodebuild-test-summary.txt",
+   "/Users/german/Work/JS/polski-grammar-srs/Plans/Kotlin/artifacts/flip-rive/ios/NOTES.txt",
+   "/Users/german/Work/JS/polski-grammar-srs/kotlin/iosApp/PolskiGrammarUITests/FlipRivePerfUITests.swift",
+   "/Users/german/Work/JS/polski-grammar-srs/kotlin/iosApp/generate_project.rb"
+  ],
+  "caveats": "1) Simulator, not device — indicative only, per the plan's own §5 caveat and RiveResearch.md §5 (Metal path/CPU/thermal not representative). 2) No os_signpost calls exist in FlashCardView.swift/RiveEffectOverlay.swift, so the plan's literal §5 protocol (XCTOSSignpostMetric around a flip+effect interval) could NOT be executed — adding signposts is a production-code change, out of tester scope; this is the same gap FlipCardRivePlan.md §10 already flags as unmeasured. What was measured instead is UI-interaction wall-clock round-trip time (XCUITest gesture→next-element-appears), which bundles in XCUITest's own accessibility/event-synthesis overhead (roughly 1-2s/step here) on top of the app's real work — absolute seconds are NOT frame time; only the relative deltas between A/B/C are informative, and at n=5 per variant those deltas mostly sit inside the run-to-run noise (see metrics notes), so no confident quantitative flip-vs-flip+Rive or rate-vs-rate+Rive cost was isolated — NOT a robust signal, report as inconclusive-but-attempted rather than a clean pass/fail number. 3) True per-frame p50/p95/p99, dropped/janky-frame %, and long-task/hitch counts (Instruments/xctrace-Animation-Hitches-based) were NOT collected — NOT RUN; the plan's own §5 protocol names xctrace only for macOS, not iOS, so nothing in the accepted protocol was skipped, but the outer task's general ask for frame-level percentiles is not satisfied for iOS by this evidence. 4) Memory/CPU come from `ps` (RSS / decaying-average %CPU), a coarse host-level proxy, not Xcode's Memory Report \"physical footprint\" or a real CPU-time integral; single-timestamp-nearest correlation against PERF_MARK is noisy. 5) 50-cycle leak check shows no monotonic RSS growth, but with only ~6 checkpoints at 0.5s ps-sampling resolution this is weak evidence against a leak, not strong evidence — a real Instruments \"Allocations\"/\"Leaks\" run would be the actual authoritative check and was not attempted (time budget). 6) iPad Pro 11 (M5) simulator was available and booted but NOT exercised — only iPhone 17 Pro was measured (task named it as optional). 7) Two test-harness bugs were found and fixed during this pass (a wrong accessibility-label predicate for the \"Движение\" picker, and missing handling for the app's real \"ChainComplete\"/\"NoDue\" milestone screens during long rate-cycle runs) — both are bugs in the new test file only, not app defects; documented in NOTES.txt. 8) Did not commit anything, per instruction.",
+  "verdict": "PARTIAL PASS with an open measurement gap. All three variants (A/B/C) were exercised end-to-end on iPhone 17 Pro Simulator with real gestures (≥5 flips, ≥5 swipe-with-effect cycles each, plus 50 more for variant C's leak check) — 3/3 new UI tests PASS, 1/1 launch-metric test PASS, no app crashes or hangs across ~34 minutes of continuous interaction. Concrete evidence collected: UI-interaction round-trip latency per variant, app RSS/%CPU at baseline/after-first-effect/after-50-cycles (no leak signal, but weak evidence), a real XCTApplicationLaunchMetric result, and reuse of the already-collected bundle-size delta. However, the plan's own §5-specified quantitative method for iOS (os_signpost-based XCTOSSignpostMetric around the actual flip+effect interval) requires production-code instrumentation this tester correctly declined to add, so the Rive-specific added cost (first-effect latency, per-flip/per-rate overhead) could NOT be cleanly isolated from this session's measurement-harness noise — that remains an open item for a developer pass that adds the signposts, after which this same harness (or a unit-test-hosted variant using them) would produce the clean numbers the plan asks for. No production defects were found in the app itself during this measurement pass."
+ },
+ {
+  "platform": "macOS (native SwiftUI, PolskiGrammarMac, arm64, this Mac's console session)",
+  "environment": "Repo /Users/german/Work/JS/polski-grammar-srs, branch main, working tree on top of HEAD a7b063c (uncommitted flip+Rive changes). Xcode 27.0 (27A266a). Build: xcodebuild -project kotlin/macosApp/PolskiGrammarMac.xcodeproj -scheme PolskiGrammarMac -destination 'platform=macOS' -derivedDataPath <tmp> CODE_SIGNING_ALLOWED=NO build. Baseline built fresh from git worktree at a7b063c under /private/tmp/polski-baseline-wt (removed after use). A real console GUI session for user german exists (ioreg IOConsoleUsers shows kCGSSessionOnConsoleKey=Yes), but this automated session has no Accessibility/Developer-Tools TCC grant and no sudo.",
+  "method": "1) Build verification (xcodebuild build, Debug, arm64) — PASS. 2) Bundle-size delta vs a7b063c: built baseline in a disposable git worktree with the identical xcodebuild invocation and a separate clean derivedData dir, compared du -sk of the .app and ls -la of the debug.dylib. 3) Idle process footprint: launched the built app via `open ... -n` with a scratch POLSKI_MAC_DATA_DIR, sampled `ps -o pid,rss,%cpu,etime` 4x over ~8s with zero interaction, then killed it cleanly (no crash). 4) Confirmed no macOS UI-test target exists (grep PBXNativeTarget count = 1). 5) Attempted the task's prescribed live-interaction protocol (xcrun xctrace record --template 'Animation Hitches' --launch, plus scripted flip/swipe via osascript/System Events) and it is NOT achievable in this session: osascript UI-element access fails with -1719 'not allowed assistive access' (same class of failure the developer's own §11 evidence log already recorded, independently reproduced here), and two independent xctrace record attempts (PIDs 12047 and 14967) each hung near 100% CPU past their own --time-limit 5s, produced no .trace file and no stdout, and had to be kill -9'd after 40-60s; sudo is unavailable (sudo -n true fails, no password can be supplied non-interactively). No UI test target exists to drive the app another way either. This means the required scripted >=5 flips / >=5 swipes-with-effect per variant, and every live runtime metric that depends on them (frame time p50/p95/p99, dropped/janky-frame %, long-task/hitch counts, CPU-during-interaction, 50-cycle leak check, Rive first-effect latency), could not be produced or measured at all in this environment - not merely \"less precise on a simulator\", a total gap for macOS live interaction.",
+  "metrics": [
+   {
+    "name": "Build (Debug, arm64)",
+    "variant": "n/a",
+    "value": "BUILD SUCCEEDED, 43.3s wall",
+    "notes": "xcodebuild build, CODE_SIGNING_ALLOWED=NO, derivedDataPath /private/tmp/polski-mac-dd-perf"
+   },
+   {
+    "name": ".app bundle size (du -sk)",
+    "variant": "baseline a7b063c",
+    "value": "28128 KB (~27.5 MB)",
+    "notes": "fresh worktree build, clean derivedData"
+   },
+   {
+    "name": ".app bundle size (du -sk)",
+    "variant": "flip+rive (working tree)",
+    "value": "37972 KB (~37.1 MB)",
+    "notes": "same xcodebuild invocation on working tree; matches developer's own §11 number (37972 KB) exactly, baseline differs by ~20KB from their 28148KB (noise, not a real discrepancy)"
+   },
+   {
+    "name": ".app bundle size delta",
+    "variant": "flip+rive vs baseline",
+    "value": "+9844 KB (~9.6 MB)",
+    "notes": "RiveRuntime.framework is +9696 KB and entirely absent from baseline; accounts for nearly all of the delta"
+   },
+   {
+    "name": "debug.dylib size",
+    "variant": "baseline a7b063c",
+    "value": "28,729,952 bytes",
+    "notes": "ls -la"
+   },
+   {
+    "name": "debug.dylib size",
+    "variant": "flip+rive (working tree)",
+    "value": "28,864,944 bytes",
+    "notes": "ls -la, +134,992 bytes for new Swift files (MacFlashCardView.swift, RiveEffectOverlay.swift, MacSession.kt changes)"
+   },
+   {
+    "name": "Idle RSS (no interaction)",
+    "variant": "flip+rive (working tree)",
+    "value": "~112,368-113,488 KB (~110-111 MB)",
+    "notes": "4 samples over 8s, freshly launched, unfocused window, no user input performed at all"
+   },
+   {
+    "name": "Idle CPU%",
+    "variant": "flip+rive (working tree)",
+    "value": "2.7% - 18.7% (noisy)",
+    "notes": "idle SwiftUI/AppKit churn on an unfocused freshly-opened window; not attributable to app logic since no interaction occurred"
+   },
+   {
+    "name": "Frame time p50/p95/p99, dropped/janky frame %, long-task/hitch count, live CPU during interaction, 50-cycle leak check, Rive first-effect latency (variants A/B/C)",
+    "variant": "no-animation, native-flip, flip+rive",
+    "value": "NOT RUN - could not be measured",
+    "notes": "blocked by: (1) no Accessibility/TCC grant for this session (osascript System Events -1719), so no scripted click/keystroke/swipe path exists to drive >=5 flips/>=5 swipes per variant; (2) xcrun xctrace record hangs indefinitely past its own --time-limit in 2 independent attempts (PIDs 12047, 14967), no .trace produced; (3) no macOS UI-test target exists to drive the app another way; (4) no sudo available for an elevated retry. This matches and independently confirms the developer's own §11 admission that macOS has no UI automation available in this environment."
+   }
+  ],
+  "artifacts": [
+   "/Users/german/Work/JS/polski-grammar-srs/Plans/Kotlin/artifacts/flip-rive/macos/README.md",
+   "/Users/german/Work/JS/polski-grammar-srs/Plans/Kotlin/artifacts/flip-rive/macos/bundle-size-delta.csv",
+   "/Users/german/Work/JS/polski-grammar-srs/Plans/Kotlin/artifacts/flip-rive/macos/idle-memory-cpu-samples.csv",
+   "/Users/german/Work/JS/polski-grammar-srs/Plans/Kotlin/FlipCardRivePlan.md (read only, section 11, not modified by this tester pass)"
+  ],
+  "caveats": "All numbers are from an unsigned Debug arm64 build on one Mac; indicative only, not device/Release-representative (matches the plan's own §5 caveat). The idle memory/CPU sample involved zero user interaction (no flip, no swipe, no rating) because none could be triggered - it is a pure launch-idle baseline, not a \"before effects\" data point in the sense the task intended. The core ask of this pass (A/B/C variant comparison via >=5 flips and >=5 swipes-with-effect each, with frame-time/CPU/memory/Rive-latency metrics) is a hard NOT RUN for macOS in this environment: it requires either a granted Accessibility/Developer-Tools TCC permission (needs a human to click an Allow dialog in the real console GUI session - this automated pass has no way to request or wait for that) or a macOS UI-test target (doesn't exist; generate_project.rb never creates one, exactly as the plan's §6/§11 already flagged). This is not a difference of precision versus the other platforms measured in this same effort (web/Android/iOS could at least run some scripted interaction) - for macOS the interaction layer itself is unreachable from this session. Recommend either: (a) someone with interactive access grants Accessibility to Terminal/whatever runs this agent and re-runs xctrace manually, or (b) a macOS XCUITest target is added (mirroring iOS's FlipRivePerfUITests.swift) so future automated passes have a driving mechanism that doesn't depend on System Events.",
+  "verdict": "Build: PASS. Bundle-size delta vs a7b063c: PASS/measured and independently corroborates the developer's own §11 number (+9.6 MB, driven by RiveRuntime.framework). Idle launch stability: PASS (clean launch, clean exit, no crash). Live-interaction performance protocol (frame time percentiles, dropped/janky-frame %, hitches, CPU during flips/swipes, leak check, Rive first-effect latency) across variants A/B/C: NOT RUN - blocked by a verified, reproducible environment limitation (no Accessibility/TCC grant, xctrace hangs indefinitely, no UI-test target, no sudo), consistent with and independently confirming what the developer's own §11 evidence log already stated. This gap should be treated as open, not silently accepted - it is a real, unresolved verification hole for the macOS host, not a rubber-stamped pass."
+ }
+]

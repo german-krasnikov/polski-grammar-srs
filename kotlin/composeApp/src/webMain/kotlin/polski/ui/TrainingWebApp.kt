@@ -215,6 +215,7 @@ private fun percentEncode(value: String): String {
     }
 }
 
+@OptIn(kotlin.js.ExperimentalWasmJsInterop::class)
 private class TrainingDomRenderer {
     private var previous: AppUiState? = null
     private var previousRoute: WebRoute? = null
@@ -232,6 +233,16 @@ private class TrainingDomRenderer {
     private var flipped = false
     private var flippedExerciseId: String? = null
 
+    // v2 FC2-01: the exact rotation angle the (possibly freshly-rebuilt) `.card-flip-inner`
+    // element is currently resting at, so a new flip transition always knows its real "from"
+    // angle instead of assuming one. Reset to 0 whenever a brand-new card starts (front-facing).
+    private var currentAngle = 0.0
+    // True only for the render() call where `phase` just became Revealed (auto-flip-on-reveal) —
+    // every OTHER render that rebuilds an already-revealed card's DOM (e.g. the 30s RefreshTime
+    // timer) must resume the current face instantly, not replay the flip animation.
+    private var justRevealed = false
+    private var pendingFlipTimer: Int? = null
+
     fun close() { navigation?.close(); navigation = null; vocabulary.close() }
 
     fun render(root: HTMLElement, state: AppUiState, route: WebRoute, returnTo: WebRoute, preferences: WebPreferencesController, store: TrainingStore, navigate: (WebRoute) -> Unit, dispatch: (AppAction) -> Unit) {
@@ -239,10 +250,13 @@ private class TrainingDomRenderer {
         if (state.exerciseId != flippedExerciseId) {
             flipped = false
             flippedExerciseId = state.exerciseId
+            currentAngle = 0.0
         } else if (old != null && old.phase == CardPhase.Question && state.phase == CardPhase.Revealed) {
             // Showing the answer turns the card to face it; further taps only flip visually.
             flipped = true
+            justRevealed = true
         }
+        val enteringChainComplete = old != null && old.phase != CardPhase.ChainComplete && state.phase == CardPhase.ChainComplete
         if (old != null && previousRoute == route && previousPreferences == preferences.value && previousStatus == preferences.status && old.copy(draft = state.draft) == state) {
             previous = state
             return // Keep the live textarea, selection and IME composition intact.
@@ -283,7 +297,7 @@ private class TrainingDomRenderer {
         // route this host has since navigated away from.
         if (route != WebRoute.Vocabulary) vocabulary.deactivate()
         when (route) {
-            WebRoute.Training -> renderTraining(root, content, state, preferences.value.swipeRatingEnabled, dispatch)
+            WebRoute.Training -> renderTraining(root, content, state, preferences.value.swipeRatingEnabled, enteringChainComplete, dispatch)
             WebRoute.Vocabulary -> vocabulary.render(node("main", "vocabulary-page").also(content::appendChild), preferences.value.swipeRatingEnabled) {
                 previous = null
                 render(root, state, route, returnTo, preferences, store, navigate, dispatch)
@@ -345,7 +359,7 @@ private class TrainingDomRenderer {
         appendChild(node("span", text = label))
     }
 
-    private fun renderTraining(root: HTMLElement, app: HTMLElement, state: AppUiState, swipeRatingEnabled: Boolean, dispatch: (AppAction) -> Unit) {
+    private fun renderTraining(root: HTMLElement, app: HTMLElement, state: AppUiState, swipeRatingEnabled: Boolean, enteringChainComplete: Boolean, dispatch: (AppAction) -> Unit) {
         val main = node("main", "study-page")
         app.appendChild(main)
         if (state.loadStatus != LoadStatus.Ready) {
@@ -392,7 +406,7 @@ private class TrainingDomRenderer {
         card.setAttribute("aria-label", "Учебная карточка")
         layout.appendChild(card)
         when (state.phase) {
-            CardPhase.ChainComplete -> renderChainComplete(card, state, dispatch)
+            CardPhase.ChainComplete -> renderChainComplete(root, card, state, dispatch, enteringChainComplete)
             CardPhase.NoDue -> renderNoDue(card, state, dispatch)
             CardPhase.Question, CardPhase.Revealed -> renderCard(root, card, state, swipeRatingEnabled, dispatch)
         }
@@ -471,7 +485,7 @@ private class TrainingDomRenderer {
         }
     }
 
-    private fun renderChainComplete(card: HTMLElement, state: AppUiState, dispatch: (AppAction) -> Unit) {
+    private fun renderChainComplete(root: HTMLElement, card: HTMLElement, state: AppUiState, dispatch: (AppAction) -> Unit, justCompleted: Boolean) {
         val complete = node("div", "session-complete")
         card.appendChild(complete)
         complete.appendChild(node("h2", text = polski.data.courseChainPresentation.completion.title))
@@ -490,6 +504,9 @@ private class TrainingDomRenderer {
             })
             appendChild(button("К повторениям по расписанию") { dispatch(AppAction.StartSchedule) })
         })
+        // v2 FC2-10 (R3): a one-shot "Tada" celebration exactly when the chain finishes, never
+        // replayed on a routine re-render while this screen stays on view (e.g. the 30s timer).
+        if (justCompleted) riveOverlay.triggerChainComplete(root, complete)
     }
 
     private fun renderNoDue(card: HTMLElement, state: AppUiState, dispatch: (AppAction) -> Unit) {
@@ -555,20 +572,90 @@ private class TrainingDomRenderer {
         back.setAttribute("aria-live", "polite")
         renderAnswerBack(root, back, state, swipeRatingEnabled, dispatch)
         val flip = node("div", "card-flip")
+        val ringsLayer = riveOverlay.mountRings(flip)
         val inner = node("div", "card-flip-inner")
         flip.appendChild(inner)
         inner.appendChild(front)
         inner.appendChild(back)
         card.appendChild(flip)
-        applyFlipState(inner, front, back)
-        installCardFlip(flip) { flipped = !flipped; applyFlipState(inner, front, back) }
+        val isFlipEvent = justRevealed
+        justRevealed = false
+        applyFlip(inner, front, back, ringsLayer, toFlipped = flipped, isFlipEvent = isFlipEvent)
+        installCardFlip(flip) {
+            flipped = !flipped
+            applyFlip(inner, front, back, ringsLayer, toFlipped = flipped, isFlipEvent = true)
+        }
     }
 
-    /** Direct DOM mutation, no `render()` call — a flip must never replay the store's render cycle. */
-    private fun applyFlipState(inner: HTMLElement, front: HTMLElement, back: HTMLElement) {
-        inner.className = if (flipped) "card-flip-inner flipped" else "card-flip-inner"
-        val hidden = if (flipped) front else back
-        val shown = if (flipped) back else front
+    /**
+     * Swaps the card's faces exactly at the 90° midpoint of a real flip (R1/FC2-01/02), or
+     * instantly when [isFlipEvent] is false (a routine DOM rebuild resuming the current face, not
+     * an actual flip) or when motion is reduced (a real flip, but the contract requires an
+     * instant swap with no rotation). Never calls `render()` — a flip must never replay the
+     * store's render cycle.
+     *
+     * Implemented with CSS transitions timed by `setTimeout` (not `transitionend`, and not the Web
+     * Animations API) so it needs only the typed DOM bindings already used elsewhere in this file
+     * — no js()/dynamic Kotlin<->JS interop, matching FC-18's stated reason for keeping this
+     * renderer JS/Wasm-target-agnostic. `setTimeout` rather than `transitionend` matters for
+     * correctness, not just style: a flip interrupted at exactly the 90° checkpoint (e.g. a second
+     * tap that lands while the first tap's closing half is still playing) makes `from == mid`, so
+     * the transition has nothing to animate and `transitionend` never fires — a real, reproducible
+     * hang found via a slowed-animation Playwright repro, not a hypothetical. A fixed-duration
+     * timer has no such edge case. A forced layout read between setting the "from" transform and
+     * starting the transition is what actually fixes FC2-01: without it, a freshly created
+     * `.card-flip-inner` node has no previously-painted frame for the browser to transition from,
+     * so the very first auto-flip on reveal snapped instead of animating.
+     */
+    private fun applyFlip(inner: HTMLElement, front: HTMLElement, back: HTMLElement, ringsLayer: HTMLElement, toFlipped: Boolean, isFlipEvent: Boolean) {
+        val to = if (toFlipped) 180.0 else 0.0
+        // The actual rotation is always driven by the inline `transform` below (which wins over
+        // any stylesheet rule); this class is kept purely as a stable, easily-asserted state
+        // marker (existing acceptance tests key off it) and never itself drives the visual angle.
+        inner.classList.toggle("flipped", toFlipped)
+        pendingFlipTimer?.let { window.clearTimeout(it) }
+        pendingFlipTimer = null
+        val animateVisually = isFlipEvent && !reducedMotionActive()
+        if (!animateVisually) {
+            inner.style.setProperty("transition", "none")
+            inner.style.setProperty("transform", "rotateY(${to}deg)")
+            swapAriaAndInert(front, back, toFlipped)
+            currentAngle = to
+            return
+        }
+        val from = currentAngle
+        val mid = 90.0
+        val halfDurationMs = flipHalfDurationMs()
+        riveOverlay.setRingsExpanded(ringsLayer, true)
+        // R1: the target face must stay out of the accessibility tree (and unpainted-as-visible
+        // via backface-visibility) until the 90° edge-on point — explicitly (re)assert the
+        // pre-flip face/hidden-face pairing now, synchronously, before any frame paints, rather
+        // than relying on whatever aria-hidden/inert state happened to be left over.
+        swapAriaAndInert(front, back, toFlipped = !toFlipped)
+        inner.style.setProperty("transition", "none")
+        inner.style.setProperty("transform", "rotateY(${from}deg)")
+        inner.getBoundingClientRect() // force layout: commits the "from" frame before animating
+        inner.style.setProperty("transition", "transform ${halfDurationMs}ms ease-in")
+        inner.style.setProperty("transform", "rotateY(${mid}deg)")
+        pendingFlipTimer = window.setTimeout({
+            pendingFlipTimer = null
+            currentAngle = mid
+            swapAriaAndInert(front, back, toFlipped) // exactly at the 90° edge-on point
+            inner.style.setProperty("transition", "transform ${halfDurationMs}ms ease-out")
+            inner.style.setProperty("transform", "rotateY(${to}deg)")
+            pendingFlipTimer = window.setTimeout({
+                pendingFlipTimer = null
+                currentAngle = to
+                riveOverlay.setRingsExpanded(ringsLayer, false)
+                null
+            }, halfDurationMs)
+            null
+        }, halfDurationMs)
+    }
+
+    private fun swapAriaAndInert(front: HTMLElement, back: HTMLElement, toFlipped: Boolean) {
+        val hidden = if (toFlipped) front else back
+        val shown = if (toFlipped) back else front
         hidden.setAttribute("aria-hidden", "true")
         hidden.setAttribute("inert", "")
         shown.removeAttribute("aria-hidden")

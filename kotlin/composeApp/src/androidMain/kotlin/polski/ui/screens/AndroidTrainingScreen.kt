@@ -54,9 +54,6 @@ import polski.training.sentenceSeeds
 import polski.ui.contrastAnnotatedText
 import polski.ui.ContrastPairText
 
-/** Debug-only escape hatch for the A/B/C measurement variants (plan §5): variant B disables Rive, keeping the flip. */
-private fun riveDisabledForMeasurement(): Boolean = System.getProperty("polski.debug.riveDisabled") == "true"
-
 @Composable
 internal fun AndroidTrainingScreen(
     state: AppUiState,
@@ -122,14 +119,19 @@ internal fun AndroidTrainingScreen(
         }
 
         when (state.phase) {
-            CardPhase.ChainComplete -> AndroidInfoCard(courseChainPresentation.completion.title) {
-                state.chain.forEachIndexed { index, exercise -> Text("${index + 1}. ${exercise.expected}") }
-                Button(onClick = { dispatch(AppAction.StartChain((state.seedIndex + 1) % sentenceSeeds.size)) }, modifier = Modifier.fillMaxWidth()) {
-                    Text("Следующий набор слов")
+            CardPhase.ChainComplete -> Box(Modifier.fillMaxWidth()) {
+                AndroidInfoCard(courseChainPresentation.completion.title) {
+                    state.chain.forEachIndexed { index, exercise -> Text("${index + 1}. ${exercise.expected}") }
+                    Button(onClick = { dispatch(AppAction.StartChain((state.seedIndex + 1) % sentenceSeeds.size)) }, modifier = Modifier.fillMaxWidth()) {
+                        Text("Следующий набор слов")
+                    }
+                    OutlinedButton(onClick = { dispatch(AppAction.StartSchedule) }, modifier = Modifier.fillMaxWidth()) {
+                        Text("К повторениям")
+                    }
                 }
-                OutlinedButton(onClick = { dispatch(AppAction.StartSchedule) }, modifier = Modifier.fillMaxWidth()) {
-                    Text("К повторениям")
-                }
+                // FC2-10/R3 Pick C: a one-shot "Tada" celebration, gated the same way the rating
+                // cue is (reduced motion / measurement variant B) — never on the card, only here.
+                if (!reduceMotion && !RiveMeasurementVariant.riveDisabled) AndroidChainCompleteOverlay()
             }
             CardPhase.NoDue -> AndroidInfoCard("Повторения на сейчас завершены") {
                 Text(state.nextDue?.let { "Следующее: ${formatDate(it.toEpochMilliseconds())}" } ?: "Новых повторений пока нет.")
@@ -161,16 +163,22 @@ internal fun AndroidTrainingScreen(
                     // back = revealed answer. A single rating gate is shared by the buttons and the
                     // back-face swipe below so exactly one gesture/tap ever rates this card (FC-07/20).
                     var cardEffect by remember(exercise.id) { mutableStateOf<CardEffect?>(null) }
+                    var ringsExpanded by remember(exercise.id) { mutableStateOf(false) }
                     val ratingGate = remember(exercise.id) { SingleRatingGate() }
+                    val riveEnabled = !reduceMotion && !RiveMeasurementVariant.riveDisabled
                     fun rate(rating: Rating) {
-                        val effect = ratingGate.rate(rating, reduceMotion, riveDisabledForMeasurement(), dispatch = {
+                        val effect = ratingGate.rate(rating, reduceMotion, RiveMeasurementVariant.riveDisabled, dispatch = {
                             dispatch(AppAction.Rate(exercise.id, it))
                         })
                         if (effect != null) cardEffect = effect
                     }
                     Box(Modifier.fillMaxWidth()) {
+                        // FC2-06/07/08/R2: the flip-in-progress ring cue sits behind the card in
+                        // z-order (composed first in this Box), never over the question/answer text.
+                        if (riveEnabled) AndroidFlipRingsOverlay(ringsExpanded)
                         AndroidFlipCard(exercise.id, state.phase, reduceMotion,
                             onRate = { rating -> if (swipeRatingEnabled) rate(rating) },
+                            onRingsExpandedChange = { if (riveEnabled) ringsExpanded = it },
                             front = {
                                 Column(verticalArrangement = Arrangement.spacedBy(18.dp)) {
                                     Text("ИСХОДНОЕ ПРЕДЛОЖЕНИЕ", style = MaterialTheme.typography.labelSmall,

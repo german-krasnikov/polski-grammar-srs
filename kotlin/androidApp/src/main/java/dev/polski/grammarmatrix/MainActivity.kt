@@ -46,6 +46,7 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.SideEffect
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -55,6 +56,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
@@ -77,6 +79,7 @@ import polski.presentation.EffectOutcome
 import polski.presentation.UiEffect
 import polski.preferences.Motion
 import polski.ui.screens.AndroidContent
+import polski.ui.screens.RiveMeasurementVariant
 import polski.ui.screens.VocabularyScreen
 
 private val darkPalette = darkColorScheme(
@@ -341,6 +344,18 @@ private fun AndroidSettingsScreen(session: AndroidSessionViewModel) {
             color = MaterialTheme.colorScheme.onSurfaceVariant)
         Text("Напоминания", style = MaterialTheme.typography.titleMedium)
         Text("Недоступно на Android в этой сборке", color = MaterialTheme.colorScheme.onSurfaceVariant)
+        // FlipCardRivePlan.md §5/FC2-15: a debug-only measurement toggle for variant B (native
+        // flip, Rive effects off), mirroring IosSettingsView's/MacSettingsView's hidden long-press
+        // — never shown in a release build (BuildConfig.DEBUG), and hidden behind a long-press
+        // even in debug so it never reads as a real user-facing setting. Reachable at runtime
+        // (`adb shell input tap`/uiautomator), unlike v1's unreachable `System.getProperty`.
+        if (BuildConfig.DEBUG) {
+            Text("Тестовая версия", color = MaterialTheme.colorScheme.onSurfaceVariant,
+                modifier = Modifier.pointerInput(Unit) {
+                    detectTapGestures(onLongPress = { RiveMeasurementVariant.riveDisabled = !RiveMeasurementVariant.riveDisabled })
+                })
+            if (RiveMeasurementVariant.riveDisabled) Text("Замер: Rive-эффекты отключены (вариант B)", color = MaterialTheme.colorScheme.error)
+        }
     }
 }
 

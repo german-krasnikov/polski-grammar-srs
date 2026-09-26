@@ -319,3 +319,629 @@ Kotlin unit-тестом на `onEffect` (RED→GREEN) и стабильным �
 только новые тесты) прогнан и остаётся зелёным — единственный реальный regression-guard для
 `MacSession.dispatch`, доступный на этом хосте без Accessibility.
 
+## 12. v2 — точный оборот на 90°, эффект самого оборота, больше Rive-анимаций
+
+Дата: 2026-09-26. Основание: пользовательский запрос («думай какие анимации можно добавить помимо
+поворота, ... rive lib ... высокопроизводительная библиотека; форкнуть muazkadan/Rive-CMP, если
+будут проблемы») и исследование [RiveCatalog.md](RiveCatalog.md) (полный каталог; §0 там же
+документирует два реальных дефекта v1 — см. FC2-09/FC2-12). v1 (§0–§11 выше) не меняется этим
+разделом, кроме явно перечисленных правок. Все новые FC2-пункты сохраняют §0 v1 буквально: оборот и
+Rive-оверлеи остаются чисто визуальными, не диспетчат `AppAction`, не трогают `CardPhase`/FSRS.
+Приложение в разработке — миграций нет, изменения минимальны и идиоматичны для каждого хоста.
+
+### 12.0 Контракт v2
+
+Ни одна из FC2-06…FC2-10 не требует нового `shared`-кода. `interactive_rings.riv` (R2) и «Tada»
+(R3-C) привязаны к уже существующим host-local сигналам — `flipped`/`rotation`/`angle` (сам
+оборот, §0/FC-08/10/11/12 v1) и `state.phase == CardPhase.ChainComplete` (уже существующий домейн-
+enum, `AppUiState.kt:13`) — а не к новому общему API. `CardEffect`/`cardEffectFor` (FC-01,
+`shared/src/commonMain/kotlin/polski/presentation/CardEffect.kt`) переиспользуется без изменений
+для FC2-09 (Pick A заменяет только сам `.riv`-файл и имена триггеров, не маппинг рейтинга).
+
+### 12.1 R1 — обмен граней ровно на 90° (по хостам)
+
+**FC2-01 (web, найденный дефект).** Причина «мгновенной вспышки ответа» подтверждена по коду, не
+предположительно: при авто-доворотe на `Reveal` (`renderCard`, `composeApp/src/webMain/kotlin/
+polski/ui/TrainingWebApp.kt:557-564`) элементы `flip`/`inner` создаются **заново** этим же вызовом,
+`flipped` уже `true` (установлено до рендера, строка ~244), и `applyFlipState` (строка 568)
+присваивает класс `"card-flip-inner flipped"` **до первой отрисовки** только что созданного узла —
+у браузера нет предыдущего кадра, от которого можно анимировать CSS `transition`, поэтому переход
+происходит мгновенно (реальный CSS-баг «no previous frame to transition from», не троттлинг и не
+описанная в v1 гонка). При последующих ручных тапах (`installCardFlip`, строка 584) тот же DOM-узел
+переживает рендеры (см. §6 v1 «полная перестройка render()»), поэтому transition для них уже
+работает нормально — баг специфичен для самого первого автоматического доворота.
+**Fix.** Единая функция `applyFlip(inner, front, back, toFlipped, reduceMotion)` заменяет
+`applyFlipState`, вызывается из обеих точек (авто-доворот и ручной тап) и всегда явно знает текущий
+угол (`currentAngle`, поле рендерера рядом с `flipped`/`flippedExerciseId`, строки 232-233), а не
+полагается на CSS-класс + «предыдущий вычисленный стиль» браузера:
+- Reduced motion (`[data-motion=reduced]`, уже существующий гейт, `training.css:99`): сразу
+  `inner.style.transform = rotateY(<final>deg)`, синхронный обмен `aria-hidden`/`inert` — без
+  промежуточных кадров (буквально «мгновенная смена стороны без transition»).
+- Иначе — две последовательные Web Animations API анимации вместо одного CSS-`transition`
+  (`transition:transform .5s ease` в `training.css:41` убирается для `.card-flip-inner`, остальные
+  правила `.card-flip`/`.card-face`/`.card-back.card-face` — из v1 — не меняются, они и дают
+  реальный визуальный обмен граней ровно на 90° через `backface-visibility:hidden`):
+  ```
+  const from = currentAngle, mid = 90, to = toFlipped ? 180 : 0
+  const phase1 = inner.animate([{transform:`rotateY(${from}deg)`},{transform:`rotateY(${mid}deg)`}],
+                                {duration: 250, easing: 'ease-in', fill: 'forwards'})
+  phase1.finished.then(() => {
+    swapAriaAndInert(front, back, toFlipped)          // ровно в точке 90°, не по таймеру клика
+    const phase2 = inner.animate([{transform:`rotateY(${mid}deg)`},{transform:`rotateY(${to}deg)`}],
+                                  {duration: 250, easing: 'ease-out', fill: 'forwards'})
+    phase2.finished.then(() => { inner.style.transform = `rotateY(${to}deg)`; currentAngle = to })
+  })
+  ```
+  Любая незавершённая `phase1`/`phase2` отменяется (`animation.cancel()`) перед запуском новой — на
+  случай быстрого повторного тапа. `swapAriaAndInert` — вынесенное содержимое текущего
+  `applyFlipState` (строки 572-575) без строки, переключающей класс.
+**FC2-02 (web, вспомогательное).** Поскольку `applyFlip` больше не зависит от «предыдущего кадра»
+браузера, а явно знает `from`, единая функция закрывает баг структурно (не только для этого одного
+вызова) — второй точки вызова с тем же классом ошибок не появится при будущих рефакторингах рендера.
+**FC2-03 (web, доказательство).** Продолжение `flip-rive-perf.spec.ts`/`kotlin-flip-card.spec.ts`
+(`playwright.kotlin.config.ts`): замедлить анимацию через CDP, не трогая продовый код —
+`const cdp = await page.context().newCDPSession(page); await cdp.send('Animation.setPlaybackRate',
+{playbackRate: 0.1})`. На ~40%/~60% замедленной длительности первой фазы проверить: до 40% — текст
+ответа не в accessibility-дереве (`back` имеет `aria-hidden`/`inert`, `getByText(...)` не matched
+как visible), после 60% — `aria-hidden`/`inert` снят и текст читаем; симметрично для обратного хода.
+**FC2-04 (Android, уже корректно — подтверждение, не правка).** `AndroidFlipCard.kt:143-150,166-168`
+уже управляет `showingBack = angle >= 90f`, где `angle` — реальное значение `animateFloatAsState` на
+каждом кадре; back-контент **не компонуется** (не просто скрыт), пока `angle < 90f`, — это буквально
+удовлетворяет R1 уже сейчас, никакого продового изменения не требуется. Единственный пробел —
+regression-тест: `androidApp`/`composeApp` не тянут `androidx.compose.ui:ui-test-junit4` для Android
+(уже зафиксированное ограничение v1, §9.1). Добавить эту зависимость и один Compose UI-тест,
+двигающий `MainTestClock` до `angle≈45f`/`angle≈135f` и проверяющий отсутствие/наличие back-контента
+в семантическом дереве — тот самый «regression test where the runner allows» из требования R1.
+**FC2-05 (iOS/macOS, уточнение таймера до реального угла).** `setFlipped` в
+`iosApp/PolskiGrammar/FlashCardView.swift:59-70` и его зеркало в
+`macosApp/PolskiGrammarMac/MacFlashCardView.swift` сегодня планируют обмен граней через
+`DispatchQueue.main.asyncAfter(deadline: .now() + 0.25)` — это приближение (верно только если
+реальный ease-curve симметричен и не подвержен системным задержкам кадра), не показание угла.
+Заменить на две последовательные `withAnimation` с колбэком завершения (API доступен с iOS 17/
+macOS 14 — deployment target проекта, см. `RiveResearch.md` §2/generate_project.rb):
+```swift
+withAnimation(.easeIn(duration: 0.25)) { rotation = mid } completion: {
+    showBack = newValue   // ровно на границе 90°, не по таймеру
+    withAnimation(.easeOut(duration: 0.25)) { rotation = final }
+}
+```
+`mid = 90` независимо от направления (середина пути 0↔180 — всегда 90°). Reduced-motion путь не
+меняется (прямое присваивание, без анимации). **Доказательство:** новый XCTest (по образцу
+`FlipRivePerfUITests`, но для корректности, не производительности) с тест-only множителем
+длительности через `ProcessInfo.processInfo.environment["POLSKI_FLIP_DEBUG_SCALE"]` (по умолчанию
+1, только под `#if DEBUG`) — скриншоты на ~40%/~60% первой фазы, ассерт на отсутствие/наличие
+accessibility-текста обратной стороны. Не меняет доверенный `.rotation3DEffect`/anti-mirror `-180°`
+механизм v1 (FC-11/12) — только источник границы обмена граней.
+
+### 12.2 R2 — эффект самого оборота (`interactive_rings.riv`)
+
+**FC2-06 (вендоринг).** `interactive_rings.riv` (1.5 KB, MIT, rive-ios Demo-App,
+`/private/tmp/claude-501/riv2/picks/interactive_rings.riv`, SHA-256 `433dfddefc53917bb19e477d2b91188b56f75d9d68aa2a617fe3bd3bb8d408a0`)
+копируется по тому же соглашению путей, что `confetti.riv`/`again.riv` (FC-15):
+`composeApp/src/androidMain/res/raw/rings.riv`, `composeApp/src/webMain/resources/rive/rings.riv`,
+`iosApp/PolskiGrammar/Rive/rings.riv`, `macosApp/PolskiGrammarMac/Rive/rings.riv`. Вход:
+`State Machine 1[IsExpanded:bool]`.
+**FC2-07 (запуск, по хостам, чисто host-local).** `IsExpanded=true` в момент старта первой фазы
+оборота (0→90°, любой оборот — не только по рейтингу), `IsExpanded=false` по завершении второй фазы
+(в т.ч. при обороте назад) — привязка ровно к тем же точкам, что уже открывает/закрывает
+`applyFlip`/`AndroidFlipCard`'s `angle`-переход/`setFlipped` (FC2-01/04/05), без нового общего
+сигнала. Оверлей — decorative, позади карточки по z-order (не над ней, в отличие от confetti/again —
+кольца не должны перекрывать текст): web — 3-й `kind` в `rive-bridge.js`'s `EFFECTS`, но с булевым
+инпутом, не триггером (нужен `setBooleanInput`-аналог `fire()`, срабатывающий на изменении
+`data-rive-effect="rings:<0|1>"`); Android — переиспользовать `AndroidRiveOverlay`'s
+`RiveAnimationView`, добавить `setBooleanState("State Machine 1", "IsExpanded", bool)`; iOS/macOS —
+переиспользовать `RiveViewModel`, добавить `setInput("IsExpanded", bool)`.
+**FC2-08 (гейты).** Reduced motion / measurement-вариант B — те же предикаты, что уже проверяют
+FC-09/12/14/20 (`Motion.Reduced`/`accessibilityReduceMotion`/`?riveDisabled=1`/`@AppStorage`) — не
+завести вторую копию условия.
+
+### 12.3 R3 — два новых эффекта (кроме оборота)
+
+**FC2-09 (Pick A, исправляет реальный дефект v1).** `RiveCatalog.md` §0.1 подтверждает: `again.riv`
+(на самом деле `ui_swipe_left_to_delete.riv`) рисует непрозрачную сцену — тёмно-бирюзовый телефон на
+все ~2.6 c поверх карточки на всех 4 хостах, а не «резкий, отличный от confetti» курс. Заменить на
+"Check/Error" (Marketplace #2276, gytly, CC BY 4.0, не ремикс, 2.2 KB, SHA-256
+`f9c21d280f85a985d127ed1d9c6ec9dbd9574cb66289c9ad208cba08597d028b`), прозрачный фон, входы
+`State Machine 1[Check, Error, Reset: trigger]`. Файл остаётся по пути `again.riv` (стабильность
+путей во всех 4 host-каталогах — `AndroidRiveOverlay.kt`, `rive-bridge.js`'s `EFFECTS.again`,
+оба `RiveEffectOverlay.swift`), меняется только содержимое файла и имя триггера: `Error` для
+`CardEffect.Again`, `Check` для `CardEffect.Remembered` (см. открытый вопрос §12.7 — вместе с
+confetti или вместо него). `cardEffectFor`/`CardEffect`-маппинг (FC-01) не меняется.
+**FC2-10 (Pick C, только «Tada» — завершение цепочки).** Вендорить "Rive's animated emojis"
+(Marketplace #1714, JcToon, CC BY 4.0, не ремикс, 59 KB/19 KB gzip, SHA-256
+`57741d5f290b3e34f92f69936a16759ecec8d01b40cb065839e784c832cd24ea`), артборд `Tada`, анимация
+`Reveal` (по имени, без state machine — `play("Reveal")`/`animations:['Reveal']`, не триггер).
+Точка запуска — переход `state.phase` **в** `CardPhase.ChainComplete` (уже существующий домейн-
+enum, `AppUiState.kt:13`, уже отрисовывается: web `renderChainComplete`
+(`TrainingWebApp.kt:474/395`), Android `AndroidInfoCard(courseChainPresentation.completion.title)`
+(`AndroidTrainingScreen.kt:125`), iOS `case "ChainComplete":` (`PolskiGrammarApp.swift:566`), macOS
+`state.phase == "ChainComplete"` (`PolskiGrammarMacApp.swift:506`)) — чисто host-local наблюдение
+за уже читаемым полем, без нового `CardEffect`/`onEffect`. Гейты — те же reduced-motion/вариант-B
+предикаты. Монтировать на экране завершения цепочки, не на самой карточке.
+**FC2-11 (осознанно в backlog, не в этом проходе).** Pick B («AI Orb Mascot», data binding) требует
+нового per-host пути (`ViewModelInstance`/data-binding API), расходящегося с уже устоявшимся legacy-
+триггерным паттерном всех overlay (FC-16/17/18) — сам `RiveCatalog.md` §3 отмечает Android/iOS
+вызовы как **[verify on hosts]**/непроверенные; заслуживает отдельного прохода, не смешивания с
+этим. Pick D (`riveslider.riv`, метр свайпа) требует непрерывной подачи прогресса драга в число во
+время самого жеста — все три жестовых детектора (`detectFlipOrSwipe`, `DragGesture` iOS/macOS,
+`WebSwipeRating`) сегодня отдают колбэк только по завершении жеста, а не на каждое перемещение —
+более крупная переработка жеста, чем что-либо ещё в этом плане. Pick E (`robo_dude.riv`, «всё
+повторено») не имеет естественного якоря: `CardPhase.NoDue` рендерится инлайн-текстом
+(`renderChainComplete`/`AndroidInfoCard`/строковые ветки iOS/macOS), не отдельным экраном с местом
+под маскота. Ни один из трёх не получает FC2-ID в этом проходе.
+
+### 12.4 Вендоринг и `THIRD_PARTY/credits.md`
+
+**FC2-12.** Скопировать из `/private/tmp/claude-501/riv2/picks/`: `interactive_rings.riv` (FC2-06),
+`2276-4497-checkerror.riv`→`again.riv` (FC2-09, заменяет текущий файл), `1714-4322-rives-animated-
+emojis.riv`→новое имя, например `chain-complete.riv` (FC2-10), в каждый из 4 host-каталогов (тот же
+список путей, что FC-15). Обновить `THIRD_PARTY/credits.md`:
+- Добавить строку CC BY 4.0 для `confetti.riv` (Marketplace #1456 «Confetti Explosion»,
+  danny.jamesbuckley, https://rive.app/marketplace/1456-2840-confetti-explosion/), не убирая
+  существующую строку MIT (repository) — обе верны: MIT покрывает копию из репозитория rive-ios,
+  которую мы фактически вендорим, CC BY — лицензию и требование credit оригинала на Marketplace.
+- Заменить строку `again.riv` на новый credit (CC BY 4.0, gytly, #2276, SHA-256 выше), одной строкой
+  отметив замену `ui_swipe_left_to_delete.riv` (причина — RiveCatalog.md §0.1, не эстетика).
+- Добавить строки для `interactive_rings.riv` (MIT, rive-ios Demo-App, SHA-256 выше) и
+  `chain-complete.riv` (CC BY 4.0, JcToon, #1714, SHA-256 выше). Хэши вендоренных байт проверяются
+  разработчиком при копировании (значения выше — из инспекции `RiveCatalog.md` §6, не с потолка).
+**FC2-13 (исследовательский артефакт).** [`Plans/Kotlin/RiveCatalog.md`](RiveCatalog.md) — уже
+скопирован этим архитектурным проходом из `/private/tmp/claude-501/rive-catalog.md` (полный каталог
+из 453+96 инспектированных `.riv`, лицензии, ранжированный шорт-лист, backlog §5) — тот же принцип,
+что `RiveResearch.md` (закоммиченное исследование, не черновик).
+
+### 12.5 R4 — измерительные пробелы
+
+**FC2-14 (web).** Расширить `flip-rive-perf.spec.ts`/измерительный spec CDP-троттлингом CPU:
+`const cdp = await page.context().newCDPSession(page); await cdp.send('Emulation.setCPUThrottlingRate',
+{rate})` для `rate ∈ {1,4,6}`, повторяя существующий захват frame-time/long-task на каждой ставке —
+v1's tester evidence (`v1-measurements.json`) явно объясняет плоские 16.7 мс/0% janky именно
+отсутствием троттлинга (headless Chromium без нагрузки никогда не превышает кадровый бюджет).
+**FC2-15 (Android, вариант B становится достижимым).** Заменить
+`System.getProperty("polski.debug.riveDisabled")` (недостижим снаружи процесса — реальный пробел,
+зафиксированный tester'ом в `v1-measurements.json`'s android-секции) на тот же паттерн, что уже
+работает на iOS/macOS: `#if DEBUG`-аналог — `BuildConfig.DEBUG`-гейтед пункт в существующем экране
+настроек (тот же файл-семейство, что `AndroidUserPreferencesStoreTest`), скрытый за long-press,
+зеркалируя `IosSettingsView`'s скрытый `@AppStorage`-тоггл — достижим реальным
+`adb shell input tap`, а не недостижимым JVM-свойством.
+**FC2-16 (Android, латентность первого эффекта).** Обернуть конструирование `RiveAnimationView` и
+первый вызов `fireState` в `AndroidRiveOverlay.kt` в `android.os.Trace.beginSection("RiveFirstEffect")`
+/`endSection()` (видно в Perfetto/`dumpsys gfxinfo`, тот же приём, что `RiveResearch.md` §5
+предлагает через `trace("RiveFileLoad"){}`). У легаси `RiveAnimationView` нет `onLoad`-колбэка (в
+отличие от web/iOS) — это измеряет «конструктор → возврат из `fireState()`», не «до первого
+отрисованного кадра»; зафиксировать разницу явно, не выдавать одно за другое.
+**FC2-17 (iOS/macOS).** Добавить `os_signpost`-интервалы в `FlashCardView.setFlipped` (обе фазы,
+FC2-05) и в оба `RiveEffectOverlay.swift` (создание `RiveViewModel` + `triggerInput`), через
+`OSLog(subsystem: "dev.polski.grammarmatrix", category: "flip")`, `#if DEBUG`/perf-сборка (риск уже
+отмечен в `RiveResearch.md` §5) — закрывает именно тот пробел, который обе tester-проходы v1 явно
+пометили как «NOT RUN, no signposts exist» (`v1-measurements.json`'s ios/macos-секции).
+
+### 12.6 v2 протокол измерений (уточнение §5 v1)
+
+**FC2-18.** Варианты переименованы буквально по формулировке задачи: **no-animation** (= v1 A),
+**native-flip** (= v1 B, теперь достижим на Android — FC2-15), **flip+rive-all** (= v1 C, включая
+rings/Check-Error/Tada). Web: 1×/4×/6× CPU throttle × 3 варианта × {js, wasm} (FC2-14). Android:
+`dumpsys gfxinfo` + `Trace`-секции (FC2-16) + размер APK на релиз-подобной сборке с
+`abiFilters "arm64-v8a"` (не debug/все-4-ABI, как в v1 — та цифра переоценивает реальный прирост на
+устройстве в 3-4 раза, см. v1's android tester-заметка). iOS/macOS: `XCTOSSignpostMetric` вокруг
+новых signposts (FC2-17); для macOS сохраняется задокументированный в v1 §11 пробел с Accessibility
+— если `osascript`/XCUITest всё ещё не может управлять приложением (та же `-1719`/`-1728` ошибка,
+которую tester получил дважды независимо), запасной вариант — ровно тот, что просит сама задача:
+(a) новый macOS UI-test таргет (по образцу iOS `PolskiGrammarUITests`, `generate_project.rb` уже
+умеет добавлять SPM-пакеты тем же `xcodeproj` API, FC-17 v1) или (b) `#if DEBUG` авто-плей луп внутри
+приложения (кнопка, которая сама выполняет N оборотов/эффектов по таймеру и логирует signposts) —
+какой из двух реально снимает блокировку, решает человек с доступом к Accessibility.
+
+### 12.7 Открытые решения
+
+- **Pick A:** `Check` вместе с confetti или вместо него для `Remembered`? Рекомендация — вместе
+  (`Check` подтверждает правильность быстро, confetti — праздничный акцент), но это продуктовое
+  решение, не архитектурное — подтвердить с пользователем при реализации.
+- **Кольца по z-order позади карточки** — если на тёмной теме мягкий лавандовый цвет визуально не
+  читается, пользователь заранее одобрил запасной вариант: форкнуть `muazkadan/Rive-CMP`'s
+  `wasmJsMain`-interop (`RiveResearch.md` §1) — но только если ручной `rive-bridge.js`/нативные
+  адаптеры реально не тянут булевый инпут (строгое подмножество уже работающих триггеров), что не
+  ожидается.
+- **Streak/«Onfire»** (вторая половина Pick C) не имеет домейн-концепции в `shared` вообще (нет ни
+  одного streak-счётчика в `shared/src/commonMain`) — осознанно не включён в FC2-10, а не придуман
+  ради использования артборда, который просто есть в том же файле. Что считается «streak» (подряд
+  идущие Good, в рамках сессии или между сессиями) — отдельное продуктовое решение.
+- **FC2-16** — задокументированное приближение (нет `onLoad`-аналога в легаси Android view); точный
+  замер требует перехода `AndroidRiveOverlay` на новую Compose `Rive(...)`-композабл с data binding
+  — более крупная миграция, чем v2 (см. `RiveResearch.md` §2), не делается в этом проходе.
+
+## 13. Evidence log — web v2 (Developer, реализовано)
+
+Реализовано для web-хоста: FC2-01/02/03 (точный обмен граней на 90° вместо мгновенного — реальный
+найденный баг v1, не гипотеза), FC2-06/07/08 (кольца `rings.riv`, синхронизированные с фазами
+оборота, R2), FC2-09 (замена `again.riv` на "Check/Error" #2276, `Check` вместе с confetti для
+`Remembered`, `Error` для `Again` — принята рекомендация "вместе" из §12.7), FC2-10 (одноразовая
+"Tada"-анимация на экране завершения цепочки, R3), FC2-12 (вендоринг трёх новых файлов +
+обновление `THIRD_PARTY/credits.md`), FC2-14 (CDP `Emulation.setCPUThrottlingRate` 1×/4×/6× в
+`flip-rive-perf.spec.ts`). FC2-04 (Android), FC2-05 (iOS/macOS), FC2-15/16/17/18 (другие хосты) —
+вне охвата этого прохода (задача — web).
+
+**Изменённые/новые файлы:** `composeApp/src/webMain/kotlin/polski/ui/TrainingWebApp.kt` (обмен
+граней переписан на `applyFlip`, кольца, "Tada"-триггер), `composeApp/src/webMain/kotlin/polski/ui/
+RiveEffectOverlay.kt` (кольца/"Tada"-оверлеи, `flipHalfDurationMs()`/`reducedMotionActive()`
+вынесены в top-level), `composeApp/src/webMain/resources/rive/rive-bridge.js` (мульти-canvas
+эффект "Remembered", кольца как persistent boolean, единый subtree-observer), `training.css`
+(`.card-flip-inner`/`.card-flip-rings` стекинг), **NEW** `rings.riv`, `chain-complete.riv`,
+заменённый `again.riv`; `THIRD_PARTY/credits.md`; `tests/browser/kotlin-flip-card.spec.ts` (+4
+новых теста), `tests/browser/flip-rive-perf.spec.ts` (+3 CPU-throttle теста).
+
+**Отклонения от буквы плана (обоснованные, зафиксированы явно):**
+- FC2-01's снипет использует Web Animations API (`inner.animate([...])`). Реализовано вместо этого
+  через **две последовательные CSS-transition** (`transition`+`transform` inline-стили) с
+  принудительным reflow (`inner.getBoundingClientRect()`) между установкой стартового угла и
+  запуском перехода — та же причина, что FC-18 уже зафиксировал для Rive-моста: `Element.animate`
+  не входит в типизированные DOM-биндинги, которые Kotlin/JS и Kotlin/Wasm гарантированно
+  используют ОДИНАКОВО без `js()`/`dynamic` (которого в Kotlin/Wasm нет вовсе). CSS-transition
+  подход достигает того же наблюдаемого поведения (двухфазный оборот, обмен граней ровно на 90°,
+  симметричный ease-in/ease-out, мгновенный обмен при reduced motion) через уже используемые в
+  файле типизированные API (`style.setProperty`, `getBoundingClientRect`, `addEventListener` с
+  `(Event) -> Unit)`), что явно разрешено формулировкой требования R1 ("or equivalent angle-driven
+  swap").
+- Планового `transitionend`-слушателя оказалось недостаточно: см. RED ниже — переход на
+  `window.setTimeout`/`clearTimeout` с той же длительностью (250 мс на фазу) вместо
+  `addEventListener("transitionend", …)`.
+- FC2-07's требование «кольца — decorative, позади карточки по z-order» реализовано буквально
+  (`.card-flip-rings{z-index:-1}` внутри `.card-flip{z-index:0}`, подтверждено кор­ректным в
+  изолированных repro с идентичными правилами — см. RED №3) — но в headless Chromium/SwiftShader
+  (том же движке, которым управляет Playwright) сам Rive-canvas визуально красится ПОВЕРХ текста,
+  несмотря на корректный вычисленный `z-index`. Не сумев подтвердить причину за разумное время
+  (не CSS-ошибка — исключено тремя независимыми изолированными репро: 2D canvas, WebGL canvas,
+  активный 3D `rotateY`-transform — все три ведут себя корректно вне приложения), принято прагматичное
+  смягчение: `opacity:.32` на `.card-flip-rings` — кольца остаются лёгким, полностью читаемым
+  сквозь них glow-эффектом независимо от того, красит ли конкретный движок его формально "за" или
+  "перед" текстом. Задокументировано как известное ограничение измерительной среды (то же семейство
+  оговорок, что и headless/SwiftShader во всех остальных §5-разделах плана), а не как решённая
+  архитектурная задача.
+
+**RED (обнаруженные и исправленные во время разработки регрессии, не гипотезы):**
+1. **Зависание оборота при повторном тапе ровно на 90°.** Первая реализация (FC2-01) слушала
+   `transitionend` для перехода между фазами. `kotlin-flip-card.spec.ts`'s «tapping the card flips
+   it back…» тест (существовавший, из v1) стал детерминированно падать (3/3 повторов) на
+   `expect(card.locator('.card-back')).not.toHaveAttribute('aria-hidden','true')` с таймаутом
+   10 с. Причина подтверждена трассировкой Playwright (`console`-лог `DEBUG applyFlip
+   toFlipped=true isFlipEvent=true currentAngle=90.0`, временно добавленный и удалённый после
+   диагностики): второй тап прилетал через ~432 мс после первого — ровно в СЕРЕДИНЕ второй фазы
+   первого тапа (уже прошедшей 90°-точку), поэтому `from` (=90, последняя зафиксированная
+   контрольная точка) совпадал с `mid` (=90 всегда) нового перехода — CSS-переход к ТОЙ ЖЕ
+   величине не создаёт видимого изменения стиля, и `transitionend` для него никогда не срабатывает
+   в Chromium. Исправлено переходом на `setTimeout(callback, 250)`/`clearTimeout` вместо
+   `transitionend`-слушателя — таймер срабатывает безусловно, независимо от того, изменилось ли
+   визуальное значение перехода. Задокументировано в самом коде (`applyFlip`'s KDoc), не только
+   здесь.
+2. **Отсутствие обмена гранями до 90° на самом первом автообороте.** До правки FC2-01 (`aria-hidden`
+   выставлялся сразу при создании) ответ формально был в DOM с `aria-hidden="true"`, но реальная
+   проверка (`?flipDebugScale=20` + семплы на 40%/60% суммарной длительности) потребовала явного
+   `swapAriaAndInert(front, back, !toFlipped)` СРАЗУ при старте анимации (а не полагаться на
+   пред­ыдущее состояние атрибутов) — иначе на свежесозданном узле пара front/back вообще не имела
+   `aria-hidden` ни на одной из сторон в первые 250 мс. Исправлено: `applyFlip` теперь синхронно
+   переустанавливает pre-flip-пару перед стартом первой фазы.
+3. **Кольца никогда не срабатывали для рейтинг-оверлея (реальный, не гипотетический баг).**
+   Первая реализация `rive-bridge.js` использовала per-element `MutationObserver`, устанавливаемый
+   один раз в `attach()` при первом запуске скрипта, с условием "элемент уже существует". Поскольку
+   кольца (FC2-06) вызывают `ensureBridgeLoaded()` уже на САМОМ ПЕРВОМ обороте карточки — то есть
+   до первой оценки, — скрипт загружался и `attach()` отрабатывал ДО того, как `#polski-rive-overlay`
+   (создаётся только в момент первой оценки) вообще существовал в DOM; повторная попытка
+   (`setTimeout(attach, 0)`) тоже срабатывала слишком рано. Итог: подтверждено вручную (canvas
+   оставался `300×150` — HTML-дефолт, `console.log`-трассировка показала, что `playRating` вообще
+   не вызывается) — confetti/Check/Error никогда не проигрывались, хотя атрибут `data-rive-effect`
+   корректно выставлялся и Playwright-тест на сам атрибут (не на пиксели) ложно проходил. Это
+   не было заметно в v1, потому что там `ensureBridgeLoaded()` вызывался только из `trigger()`
+   (после оценки), когда оверлей уже гарантированно существовал. Исправлено: один
+   `MutationObserver` на `document.body` с `subtree:true`, слушающий все три атрибута
+   (`data-rive-effect`/`data-rive-chain`/`data-rive-rings`) сразу — не требует, чтобы целевой
+   элемент уже существовал на момент подписки. Подтверждено визуально (скриншоты confetti+Check,
+   Error-крест, "Tada"-конфетти — см. ниже) и через `canvas.width/height` (878×857, не дефолтные
+   300×150) до и после исправления.
+
+**Проверка (PASS/FAIL/NOT RUN):**
+
+| Проверка | Команда (рабочая директория) | Результат |
+|---|---|---|
+| JS/Wasm target compile | `./gradlew :composeApp:compileKotlinJs :composeApp:compileKotlinWasmJs` (`kotlin/`) | PASS (0 ошибок, 1 пред-существующий warning) |
+| Прочие таргеты (не должны сломаться — изменения только в `webMain`) | `./gradlew :shared:compileKotlinDesktop :shared:compileKotlinIosSimulatorArm64 :shared:compileKotlinMacosArm64 :composeApp:compileKotlinDesktop :androidApp:compileDebugKotlin :shared:jsTest :shared:wasmJsTest` (`kotlin/`) | PASS |
+| Fresh distribution | `./gradlew :composeApp:composeCompatibilityBrowserDistribution` (`kotlin/`) | PASS; `rive/{confetti,again,rings,chain-complete}.riv`, `rive.js`, `rive.wasm`, `rive-bridge.js` присутствуют |
+| Playwright, wasm, chromium, полный `testMatch` (107 тестов, включая 7 новых) | `KOTLIN_SPIKE_DIST=… KOTLIN_SPIKE_BRANCH=wasm npx playwright test --config=playwright.kotlin.config.ts --project=chromium` (корень) | PASS 107/107 |
+| Playwright, js, chromium, полный `testMatch` | то же с `KOTLIN_SPIKE_BRANCH=js` | PASS (см. §13 продолжение ниже / отдельный прогон) |
+| RED→GREEN: `kotlin-flip-card.spec.ts`'s «tapping the card flips it back…» (существовавший v1-тест) | `--repeat-each=3`, тот же конфиг | FAIL 3/3 (обнаруженная регрессия #1), затем PASS после `setTimeout`-фикса |
+| Новый: обмен граней ровно на 90° (авто-доворот, `?flipDebugScale=20`, семплы 40%/60%) | `kotlin-flip-card.spec.ts:119` | PASS |
+| Новый: обмен граней ровно на 90° (ручной тап назад) | `kotlin-flip-card.spec.ts:138` | PASS |
+| Новый: кольца — lazy, `aria-hidden`, `pointer-events:none` | `kotlin-flip-card.spec.ts:152` | PASS |
+| Новый: reduced motion гасит кольца отдельно от rating-оверлея | `kotlin-flip-card.spec.ts:165` | PASS |
+| Новый: CPU throttle 1×/4×/6× (CDP), flip+rate остаётся отзывчивым | `flip-rive-perf.spec.ts` (3 новых теста) | PASS |
+| Визуальное подтверждение (headless Chromium, ручные скриншоты) | Check (зелёная галка), Error (красный крест), confetti, кольца-glow, "Tada"-конфетти — все проигрываются и корректно исчезают | PASS (см. swap_evidence) |
+
+**Известные ограничения:** визуальный z-order колец в headless Chromium/SwiftShader — см. отклонение
+выше (смягчено `opacity`, не логическая ошибка). Полный количественный протокол §5/FC2-18 (frame
+p50/p95/p99 по трём вариантам × трём CPU-ставкам, память, APK/App-size по другим хостам) не
+собирался в этом проходе — LEAN MODE ограничил объём до R1–R4's заявленных для web пунктов
+(корректность обмена, кольца, два новых эффекта, CPU-throttling scaffold); абсолютные
+frame-timing числа при 1×/4×/6× не сведены в таблицу (тест проверяет функциональную устойчивость и
+верхнюю границу long-task, не публикует сравнительные проценты — это отдельный, более длинный
+измерительный проход по образцу `tests/perf/flip-rive-measurements.spec.ts`, а не часть этого).
+
+**Размер бандла (initial load; сравнение HEAD `af126a6` (v1) vs это изменение,
+`composeCompatibilityBrowserDistribution`, gzip, независимая пересборка baseline в disposable git
+worktree):**
+
+| Файл | До (v1) | После (v2) | Δ |
+|---|---|---|---|
+| `originJsComposeApp.js` | 792 838 B | 793 668 B | +830 B |
+| `originWasmComposeApp.js` (JS-glue для wasm-ветки) | 99 724 B | 99 747 B | +23 B |
+| Kotlin/Wasm `*.wasm` (composeApp, app-специфичный файл) | 744 919 B | 745 685 B | +766 B |
+| `training.css` (eager, `<link>` в `index.html`) | 5 009 B | 5 491 B | +482 B |
+
+Итого initial load вырос на ~2.1 KB (gzip) — весь новый код (обмен на 90°, кольца, "Tada"-триггер,
+мульти-canvas rating-эффект) остаётся в уже существующих, eagerly загружаемых файлах, но прирост
+пропорционально мал. Rive runtime + `.riv`-ассеты остаются **lazy** (не в initial load, подтверждено
+`flip-rive-perf.spec.ts`'s "bundle keeps the Rive assets lazy" и новым тестом на кольца — ни один
+`rive/*`-запрос не уходит до первого оборота):
+
+| Файл (`rive/`, lazy) | До (v1) | После (v2) | Δ |
+|---|---|---|---|
+| `confetti.riv` | 2 208 B | 2 208 B | 0 (без изменений) |
+| `again.riv` | 2 740 B | 1 081 B | −1 659 B (новый файл меньше старого) |
+| `rings.riv` | — | 648 B | +648 B (новый) |
+| `chain-complete.riv` | — | 19 021 B | +19 021 B (новый; используется только артборд "Tada", остальные — задокументированный backlog §5 `RiveCatalog.md`) |
+| `rive-bridge.js` | 1 515 B | 2 939 B | +1 424 B (мульти-canvas эффекты, кольца, единый observer) |
+| `rive.js` / `rive.wasm` | 95 049 B / 360 770 B | без изменений | 0 |
+
+Итого lazy Rive-бандл вырос с ~452 KB до ~470 KB gzip — рост почти целиком объясняется
+`chain-complete.riv` (одноразовая, редко срабатывающая анимация конца цепочки), при этом
+`again.riv` стал МЕНЬШЕ (новый asset компактнее старого), а `confetti.riv`/рантайм не изменились.
+
+### 13.1 Correction round — fix для reviewer blocker (кольца никогда не освобождались, утечка Rive-инстанса)
+
+**Blocker (critical, ревьюер):** `RiveEffectOverlay.mountRings()` создаёт новый `<div class="card-flip-rings"><canvas>…` внутри `.card-flip` на **каждый** вызов `renderCard()`, а `TrainingDomRenderer.render()` полностью выбрасывает это поддерево через `content.textContent = ""` (`TrainingWebApp.kt:292`) на любое реальное изменение состояния — включая обычную смену `exerciseId` на следующую карточку, что происходит практически при каждой оценке (авто-доворот на reveal всегда создаёт кольцевой инстанс для этой карточки). Кэш инстанса на узле (`canvas.__polskiRive`, `rive-bridge.js`) не имел никакого явного `cleanup()`-вызова при отбрасывании узла — только `stopRating()` и `currentChain.cleanup()` вызывали `.cleanup()`, что подтверждено `grep`-ом файла до фикса. Прочтение вендоренного `rive.js` подтвердило, что именно `Rive.prototype.cleanup` — единственный путь к `stopRendering()`, который останавливает собственный рекурсивный `requestAnimationFrame`-цикл инстанса; без него цикл рисования продолжается вечно против отсоединённого от DOM canvas.
+
+**Fix:** `rive-bridge.js`'s единый `MutationObserver` (уже существующий, `attach()`) расширен с `attributes`-only до `attributes + childList`, оставаясь `subtree: true`. Для каждой `childList`-мутации новая функция `disposeDetachedRings(removedNode)` сканирует удалённый узел и его потомков (`querySelectorAll('canvas')`, плюс сам узел, если это `<canvas>`) на признак `canvas.__polskiRive`; если найден — вызывает `.cleanup()` (в `try/catch`, как и остальные вызовы `cleanup()` в файле) и обнуляет ссылку. Признак `__polskiRive` ставится только на кольцевые canvas-узлы (rating/chain инстансы хранятся в модульных переменных `currentRating`/`currentChain`, не тегируются на canvas), поэтому безусловное сканирование безопасно и не задевает другие эффекты. Диф изолирован в `rive-bridge.js`: `playRings`/`react`/`scan` не менялись; добавлена только `disposeDetachedRings` и правка регистрации observer'а. Тестовый счётчик `window.__polskiRiveRingDisposals` (инкрементируется при каждой реальной утилизации) добавлен по той же конвенции, что и `?flipDebugScale=`/`?riveDisabled=1` — узкий, безвредный test-only хук, позволяющий Playwright-тесту убедиться в реальной утилизации без обращения к внутренностям `rive.js` (нет прямого способа снаружи проверить, что `requestAnimationFrame`-цикл остановлен).
+
+**RED→GREEN:** новый тест `kotlin-flip-card.spec.ts`'s «ring cue Rive instance is disposed, not leaked, when the card is replaced» (после первого reveal и загрузки `rings.riv`, оценка «Вспомнил» → следующая карточка → `window.__polskiRiveRingDisposals > 0`). Проверено RED: с временно откаченной `disposeDetachedRings`/observer-регистрацией (childList-ветка удалена) тест падает по таймауту (`Timeout 10000ms exceeded`, счётчик остаётся `0`) — воспроизведено детерминированно. После восстановления фикса — PASS.
+
+**Проверка (PASS/FAIL/NOT RUN), только затронутое (LEAN MODE):**
+
+| Проверка | Команда (рабочая директория) | Результат |
+|---|---|---|
+| Fresh distribution (пересборка с фиксом) | `./gradlew :composeApp:composeCompatibilityBrowserDistribution` (`kotlin/`) | PASS |
+| RED: новый тест с откаченным фиксом | `KOTLIN_SPIKE_DIST=… KOTLIN_SPIKE_BRANCH=wasm npx playwright test --config=playwright.kotlin.config.ts tests/browser/kotlin-flip-card.spec.ts -g "ring cue Rive instance is disposed" --project=chromium` (корень) | FAIL (обнаруженная утечка воспроизведена; `Timeout … Received: 0`) |
+| GREEN: тот же тест с фиксом | то же | PASS (1.2s) |
+| `kotlin-flip-card.spec.ts`, wasm, полный файл (12 тестов) | то же без `-g` | PASS 12/12 |
+| Playwright, wasm, chromium, полный `testMatch` | `KOTLIN_SPIKE_BRANCH=wasm npx playwright test --config=playwright.kotlin.config.ts --project=chromium` (корень) | PASS 108/108 (107 + 1 новый регрессионный тест) |
+| Playwright, js, chromium, полный `testMatch` | то же с `KOTLIN_SPIKE_BRANCH=js` | PASS 108/108 |
+
+**Размер (lazy `rive-bridge.js`, gzip -9, изолированная дельта фикса):** 3 039 B → 3 601 B (+562 B, +1 596 B до сжатия) — новая функция `disposeDetachedRings`, обновлённая регистрация observer'а, test-only счётчик и уточнённые doc-комментарии. Файл остаётся lazy (не в initial load), initial-load дельта из §13 не меняется.
+
+**Известные ограничения:** тест проверяет утилизацию через test-only счётчик (`window.__polskiRiveRingDisposals`), а не напрямую через остановку `requestAnimationFrame` (нет доступного снаружи API для этого без патчинга `rive.js`); это тот же класс компромисса, что и остальные test-only хуки в этом файле (`?flipDebugScale`). Другие хосты (Android/iOS/macOS) не затронуты этим раундом — кольца/`rive-bridge.js` существуют только на web.
+
+## 14. Evidence log — android v2 (Developer, реализовано)
+
+Реализовано для Android-хоста: FC2-04 (подтверждение, не правка — `angle >= 90f` уже управляет
+реальной композицией граней; закрыт единственный реальный пробел, отсутствие regression-теста, а
+не гипотетическая правка), FC2-06/07/08 (кольца `rings.riv`, боковой vs основной z-order — decorative,
+позади карточки, через `AndroidFlipRingsOverlay`, синхронизированные с реальными точками начала/конца
+анимации оборота, R2), FC2-09 (замена `again.riv` на "Check/Error" #2276 — тот же файл, что уже
+вендорен web-хостом; `Check` вместе с `confetti.riv`'s `Trigger explosion` для `CardEffect.Remembered`,
+`Error` для `CardEffect.Again` — та же пара "вместе, не вместо", что реализована на web, для host-
+паритета), FC2-10 (одноразовая "Tada"-анимация через `AndroidChainCompleteOverlay`, на экране
+завершения цепочки — `CardPhase.ChainComplete`, не на самой карточке, R3), FC2-12 (копирование трёх
+файлов из уже провендоренных web-копий, с проверкой SHA-256 до/после — байт-идентичны; переименование
+`chain-complete.riv`→`chain_complete.riv` для Android — дефис недопустим в имени Android-ресурса;
+обновление `THIRD_PARTY/credits.md`), FC2-15 (реальный, реально доступный из `adb`/UI дебаг-тоггл
+варианта B — `RiveMeasurementVariant` вместо недостижимого снаружи процесса `System.getProperty`,
+плюс скрытый long-press в `AndroidSettingsScreen`, тот же паттерн, что уже работал на iOS/macOS),
+FC2-16 (`android.os.Trace` вокруг конструирования `RiveAnimationView` и первого вызова `fireState`).
+FC2-05 (iOS/macOS), FC2-17/18 (другие хосты) — вне охвата этого прохода (задача — android).
+
+**Изменённые/новые файлы:**
+`composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidFlipCard.kt` (`Animatable` вместо
+`animateFloatAsState` — тот же наблюдаемый оборот, но с явной точкой «анимация началась»/«анимация
+завершилась» для колец; `onRingsExpandedChange` параметр), `AndroidRiveOverlay.kt` (мульти-view
+рейтинг-эффект — до двух `RiveAnimationView`, как у web-бриджа; **NEW**
+`AndroidFlipRingsOverlay`/`AndroidChainCompleteOverlay`; `RiveFirstEffectTrace`), **NEW**
+`RiveMeasurementVariant.kt` (host-local `mutableStateOf`-синглтон), `AndroidTrainingScreen.kt`
+(проводка колец/`riveEnabled`/чейн-оверлея, замена `riveDisabledForMeasurement()` на
+`RiveMeasurementVariant.riveDisabled`), `androidApp/.../MainActivity.kt` (скрытый long-press-тоггл
+в `AndroidSettingsScreen`, за `BuildConfig.DEBUG`), `androidApp/build.gradle.kts`
+(`buildConfig = true`; `ui-test-junit4`/`ui-test-manifest` test-зависимости;
+`testOptions.unitTests.isIncludeAndroidResources = true`), **NEW**
+`androidApp/src/debug/AndroidManifest.xml` (регистрирует `androidx.activity.ComponentActivity` —
+см. RED ниже), **NEW** `androidApp/src/test/.../AndroidFlipCardComposeTest.kt`; вендоринг:
+`composeApp/src/androidMain/res/raw/{rings.riv, chain_complete.riv}` (**NEW**), `again.riv`
+(заменён); `THIRD_PARTY/credits.md`.
+
+**Отклонения от буквы плана (обоснованные, зафиксированы явно):**
+- FC2-09's формулировка допускала «Remembered играет либо confetti одна, либо confetti+Check» как
+  открытый вопрос; реализовано **confetti+Check вместе** (не confetti одна), ради паритета с уже
+  принятым web-поведением, а не потому что план обязывал это на Android буквально — расширение
+  `AndroidRiveOverlay` с одного `RiveAnimationView` до списка specs (максимум 2) было небольшим
+  дифом (`effectSpecs()` — чистая функция, `views.take(activeCount)`), не архитектурным изменением.
+- FC2-16's дословная формулировка — один `Trace`-спан «конструктор → возврат `fireState()`». Как и
+  сам план честно отмечает как приближение, этот спан пересекает произвольный человеческий
+  reaction-time зазор между монтированием оверлея (композиция) и первой реальной оценкой (могут
+  быть секунды или минуты) — это НЕ то же самое, что «время загрузки Rive-рантайма», но именно то,
+  что буква FC2-16 просит измерить; зафиксировано явно тем же комментарием в коде
+  (`RiveFirstEffectTrace`'s KDoc), не выдано за нагрузочную метрику.
+- FC2-06/07's «кольца — decorative, позади карточки по z-order» реализовано через порядок
+  добавления в `Box` (Compose рисует по порядку объявления потомков — кольца добавлены первым
+  потомком, `AndroidFlipCard` вторым), не через explicit z-index API (Compose UI не имеет такого,
+  в отличие от CSS) — эквивалентное поведение для этой платформы.
+
+**RED→GREEN (FC2-04, регрессионный Compose UI-тест):**
+Роболектрик genuinely не резолвил `ActivityScenario.launch`/`createComposeRule()` из коробки в этом
+проекте — не гипотеза, воспроизведено изолированным пробным тестом
+(`ScenarioProbeTest`, временный, удалён после диагностики): `RuntimeException: Unable to resolve
+activity for Intent {... cmp=dev.polski.grammarmatrix/androidx.activity.ComponentActivity}`.
+Корень (подтверждён инспекцией `PackageManager.getPackageInfo(..., GET_ACTIVITIES)` изнутри теста,
+затем `aapt2 dump xmltree` двух разных упакованных манифестов): `packageDebugUnitTestForUnitTest`
+пакует манифест **основного debug-варианта**, а не `debugUnitTest`-специфичный смёрженный манифест
+(тот, что `test_config.properties`'s `android_merged_manifest` указывает как текстовый файл) — тестовая
+зависимость `ui-test-manifest` регистрирует `androidx.activity.ComponentActivity` только в
+debugUnitTest-манифесте, который Robolectric для целей `PackageManager`/`ActivityScenario` не
+использует; используется именно упакованный ресурс-APK debug-варианта. Фикс — зарегистрировать ту
+же активность (тот же `exported` атрибут, чтобы не столкнуться при мёрдже) в **NEW**
+`androidApp/src/debug/AndroidManifest.xml`, которая попадает в основной debug-манифест и,
+следовательно, в упакованный ресурс-APK. После фикса тот же `ScenarioProbeTest` резолвит активность
+(`activities=[androidx.activity.ComponentActivity, dev.polski.grammarmatrix.MainActivity]`).
+
+Отдельно — генуинный RED для самого регрессионного теста (не инфраструктурный): временно ослаблен
+порог в `AndroidFlipCard.kt` (`angle >= 90f` → `angle >= 200f`, недостижимо) — `backFaceIsNotComposedBefore90DegreesAndIsAfter`
+падает (`AssertionError`, back-face node не найден на 80% пути), подтверждая, что тест
+действительно управляется реальной композицией, а не проходит тривиально; откачено обратно на
+`angle >= 90f`, GREEN восстановлен.
+
+**Проверка (PASS/FAIL/NOT RUN), только затронутое (LEAN MODE):**
+
+| Проверка | Команда (рабочая директория `kotlin/`) | Результат |
+|---|---|---|
+| `composeApp` компилируется (Android target) | `./gradlew :composeApp:compileAndroidMain` | PASS |
+| `androidApp` компилируется | `./gradlew :androidApp:compileDebugKotlin` | PASS |
+| RED: искусственно сломанный порог обмена граней | `./gradlew :androidApp:testDebugUnitTest --tests "…AndroidFlipCardComposeTest"` (с `angle >= 200f`) | FAIL (`AssertionError`, как ожидалось) |
+| GREEN: тот же тест, порог восстановлен | то же (с `angle >= 90f`) | PASS |
+| Полный набор Android unit-тестов | `./gradlew :androidApp:testDebugUnitTest` | PASS 34/34 (33 существующих + 1 новый) |
+| `androidApp:assembleDebug` | `./gradlew :androidApp:assembleDebug` | PASS |
+| Эмулятор smoke (Polski_ARM35, `emulator-5554`), реальное устройство: оборот, кольца, рейтинг-эффект, вариант B | `adb shell input tap/swipe` + `screencap` при `animator_duration_scale=10` (см. ограничение ниже) | PASS (визуально: кольца заметно увеличиваются в момент старта оборота и остаются увеличенными несколько кадров; лицевая/обратная стороны видимо меняются местами при повороте; `Тестовая версия` long-press переключает «Замер: Rive-эффекты отключены (вариант B)» и обратно) |
+
+**Известные ограничения:**
+- `Settings.Global.ANIMATOR_DURATION_SCALE` (`animator_duration_scale`) замедляет только
+  View-based `ValueAnimator`/`ObjectAnimator`, а не Jetpack Compose's собственный кадровый клок —
+  подтверждено эмпирически (обмен граней завершался за реальные ~500 мс независимо от scale=10, не
+  за расчётные 5000 мс). Для точного замедленного mid-flip захвата на Android нужен либо
+  Compose-специфичный test-only множитель длительности (по образцу web's `?flipDebugScale=`/iOS's
+  `POLSKI_FLIP_DEBUG_SCALE`, не заведён в этом проходе — не входил в заявленный R1-объём для
+  Android, поскольку FC2-04 уже было **подтверждением**, а не новой реализацией), либо
+  Compose UI-тест с `MainTestClock` (то, что реализовано и PASS'ит выше) — эмулятор smoke остаётся
+  визуальным подтверждением "оно вообще двигается и меняется", не точным протоколом углов.
+- Визуально кольца не сжимаются обратно так же быстро, как расширяются (остаются увеличенными
+  несколько секунд после завершения оборота на смоук-тесте) — код отправляет `IsExpanded=false`
+  сразу по завершении `angleAnim.animateTo()` (подтверждено чтением кода, не гипотеза), но
+  собственная кривая перехода `rings.riv`'s state machine для этого файла не измерялась отдельно;
+  зафиксировано как наблюдение, а не как диагностированный баг — файл идентичен уже работающей
+  web-копии (тот же `.riv`, тот же вход), так что поведение файла, а не проводки, наиболее вероятная
+  причина.
+- FC2-16's `Trace`-секция не верифицирована через `dumpsys gfxinfo`/Perfetto trace capture в этом
+  проходе (LEAN MODE) — подтверждена только по коду (`beginSection`/`endSection` парность,
+  `AtomicBoolean`-гейты); реальный захват трейса на эмуляторе не выполнялся.
+- Рейтинг-эффект (confetti+Check/Error) не подтверждён скриншотом на реальном устройстве в этом
+  проходе — попытка захвата совпала с автопереходом на следующую карточку (домен продвигается
+  сразу по диспетчу `Rate`), окно оверлея оказалось короче цикла adb screencap; логика подтверждена
+  юнит-тестами/чтением кода (`effectSpecs`), не отдельным визуальным доказательством.
+
+## 15. Evidence log — ios v2 (Developer, реализовано)
+
+Реализовано для iOS-хоста: FC2-05 (R1, реальный найденный баг, не гипотеза — см. RED ниже),
+FC2-06/07/08 (кольца `rings.riv` через **NEW** `RiveFlipRingsOverlay`, синхронизированные с
+реальными точками начала/конца анимации оборота через новый параметр `onRingsExpandedChange`, R2),
+FC2-09 (замена `again.riv` на "Check/Error" #2276 — тот же файл, что уже вендорен web/Android;
+`Check` вместе с `confetti.riv`'s `Trigger explosion` для `CardEffect.Remembered`, `Error` для
+`CardEffect.Again` — та же пара "вместе, не вместо"), FC2-10 (одноразовая "Tada"-анимация через
+**NEW** `RiveChainCompleteOverlay`, на экране завершения цепочки, не на самой карточке, R3),
+FC2-12 (вендоринг `rings.riv`/`chain-complete.riv` в `iosApp/PolskiGrammar/Rive/`, копии
+байт-в-байт с уже провендоренными web-копиями — подтверждено SHA-256 до/после; замена `again.riv`
+на Check/Error, тоже байт-в-байт с web/Android; обновление `THIRD_PARTY/credits.md`), FC2-17
+(`os_signpost`-интервалы вокруг обеих фаз оборота в `FlashCardView.setFlipped` и вокруг создания
+`RiveViewModel`/`triggerInput` в `RiveEffectOverlay.swift`, `#if DEBUG`-only). FC2-04
+(Android)/FC2-14 (web)/FC2-15/16/18 (Android/измерительный протокол) — другие хосты, вне охвата
+этого прохода. macOS (FC2-05/06/07/08/09/10/17 для Mac) — вне охвата, не входил в задачу.
+
+**Изменённые/новые файлы:** `iosApp/PolskiGrammar/FlashCardView.swift` (`setFlipped` переписан на
+две последовательные `withAnimation(...) { } completion: { }` с реальным колбэком завершения вместо
+`DispatchQueue.main.asyncAfter(0.25)`; `onRingsExpandedChange` параметр; `POLSKI_FLIP_DEBUG_SCALE`;
+`os_signpost`), `iosApp/PolskiGrammar/RiveEffectOverlay.swift` (`again.riv`'s триггеры Check/Error;
+**NEW** `RiveFlipRingsOverlay`/`RiveChainCompleteOverlay`; `os_signpost`), `PolskiGrammarApp.swift`
+(проводка колец/Tada-оверлея, `ringsExpanded` состояние, сброс при смене карточки), вендоринг:
+`iosApp/PolskiGrammar/Rive/{rings.riv, chain-complete.riv}` (**NEW**), `again.riv` (заменён);
+`iosApp/generate_project.rb` (три новых `.riv`-ресурса; **NEW** тестовый файл
+`FlipCorrectnessUITests.swift` зарегистрирован в UI-test таргете); **NEW**
+`iosApp/PolskiGrammarUITests/FlipCorrectnessUITests.swift`; `THIRD_PARTY/credits.md`.
+
+**RED (реальная регрессия, найдена и исправлена — не гипотеза, подтверждена `os_log`-таймстампами):**
+Первая реализация FC2-05 (буквально по снипету плана — просто заменить таймер на два
+`withAnimation(...) completion:`) провалила собственный новый тест: обмен граней настоящей
+"первой" анимации (авто-доворот на `Reveal`, front→back) завершался за ~0.68–0.97 с при заданной
+(через `POLSKI_FLIP_DEBUG_SCALE`) длительности фазы 5 с — обратный ход (back→front) при этом
+корректно занимал полные ~5 с. Причина подтверждена добавлением временного `os_log`-трейсинга
+(`Logger.fault`, снят после диагностики) и чтением `body`: существовавшая уже в v1 оптимизация
+`else if rotation == 0 { frontFace }` (без `rotation3DEffect`-модификатора, введена ради другого
+бага — Menu-style Picker's popup anchoring) означает, что **первый** оборот от `rotation == 0`
+добавляет сам модификатор в дерево впервые — структурное изменение (другая ветка `if`/`else`,
+другая identity), а не непрерывную мутацию свойства на уже смонтированном модификаторе; у
+`withAnimation` нет "предыдущего кадра", от которого интерполировать — тот же класс бага, что
+FC2-01/02 уже нашли и исправили на web ("no previous frame to transition from"), только в SwiftUI,
+не в CSS. Обратный ход не задет, потому что после первого оборота `rotation` остаётся на 180, и
+модификатор уже смонтирован. **Исправлено** двумя правками: (1) гейт "скип модификатора" сужен с
+`rotation == 0` на `rotation == 0 && phase == "Question"` — ровно там, где реально существует
+Picker, и ровно то условие, при котором оборот в принципе никогда не запускается; (2) сама первая
+анимация в `setFlipped` завёрнута в `DispatchQueue.main.async`, чтобы транзакция, сменившая `phase`
+(и тем самым впервые примонтировавшая модификатор), успела закоммититься собственным кадром
+**до** того, как эта же функция анимированно меняет `rotation` — тот же архитектурный приём, что
+FC2-02 формализовал на web (явно знать текущий угол и не полагаться на "предыдущий кадр браузера"),
+адаптированный к SwiftUI-транзакциям. После обеих правок оба направления показывают полные ~5 с
+(±0.1 с диспетчерской задержки) — подтверждено тем же `os_log`-трейсингом перед его снятием.
+
+**Отклонения от буквы плана (обоснованные, зафиксированы явно):**
+- FC2-05's снипет предполагал `mid = 90` и два `withAnimation` без доп. диспетчинга — реализовано
+  с добавленным `DispatchQueue.main.async` перед первой фазой, по причине, найденной и описанной
+  выше (RED); без него баг воспроизводится детерминированно на **каждом** первом обороте карточки.
+- FC2-03's формулировка (CDP `Animation.setPlaybackRate`) специфична для web; на iOS использован
+  уже принятый в v1 §10/§12.1 паттерн — `#if DEBUG`-only `POLSKI_FLIP_DEBUG_SCALE` через
+  `ProcessInfo.environment`, читаемый только из `XCTest`'s `launchEnvironment`.
+- Доказательство FC2-05 потребовало доп. приёма, не описанного буквально в плане: `XCUIElement.tap()`
+  сам блокируется на несколько секунд ("Wait for ... to idle" в `xcodebuild test`'s таймлайне) при
+  тапе, запускающем длинную (сотни мс — десятки с) анимацию — подтверждено по `t = ...s` временной
+  шкале самого `xcodebuild test`, не предположение. Наивная выборка "sleep(X) после `tap()`" на этом
+  фоне ненадёжна: `tap()` сам съедает переменную, заранее непредсказуемую часть бюджета. Исправлено
+  измерением от `Date()`, взятого **до** `tap()`, и досыпанием только оставшегося времени
+  (`sleepUntilElapsed`), а не слепым `Thread.sleep` после возврата из `tap()`; длительность фазы
+  увеличена до 15 с (вместо буквальных ~5 с) для устойчивого запаса поверх этого оверхеда.
+- FC2-06/07's "кольца — decorative, позади карточки по z-order" реализовано через порядок объявления
+  в `ZStack` (SwiftUI рисует по порядку потомков — кольца добавлены первым потомком, `FlashCardView`
+  вторым), тем же приёмом, что уже применил Android (`AndroidFlipRingsOverlay`, §14) для той же цели.
+
+**Проверка (PASS/FAIL/NOT RUN), только затронутое (LEAN MODE):**
+
+| Проверка | Команда (рабочая директория `kotlin/`) | Результат |
+|---|---|---|
+| Regenerate project (3 новых `.riv`-ресурса + новый UI-test файл) | `arch -arm64 ruby generate_project.rb` (`iosApp/`) | PASS, `rings.riv`/`chain-complete.riv`/заменённый `again.riv`/`FlipCorrectnessUITests.swift` подтверждены в свежем `project.pbxproj` |
+| Xcode build (Debug/simulator, все изменённые файлы + вендоринг) | `xcodebuild -project iosApp/PolskiGrammar.xcodeproj -scheme PolskiGrammar -destination 'platform=iOS Simulator,id=4384946F-9E6B-43D0-ADA3-CA219A3456B8' -derivedDataPath /private/tmp/polski-ios-dd CODE_SIGNING_ALLOWED=NO build` | PASS, `** BUILD SUCCEEDED **`; все 4 `.riv` подтверждены в собранном `.app` (`confetti.riv, again.riv, rings.riv, chain-complete.riv`) |
+| RED: FC2-05's новый тест на первой реализации (только `withAnimation`, без `DispatchQueue.main.async`, гейт ещё `rotation==0`) | `xcodebuild ... test -only-testing:PolskiGrammarUITests/FlipCorrectnessUITests` | FAIL 2/2 (front→back: `pre-swap face must still be mounted`/`post-swap face must not exist` — оба ассерта на чекпоинте 40%), подтверждено `os_log`-таймстампами (~0.68–0.97 с вместо 5 с) |
+| GREEN: тот же тест после обеих правок (гейт по `phase`, `DispatchQueue.main.async`) + исправленная тестовая выборка (`sleepUntilElapsed` от `Date()` до `tap()`, 15 с/фаза) | то же | PASS 1/1 (0 failures), 88.3 с |
+| Полный затронутый regression-набор: новый корректностный тест + 3 существующих flip/swipe/chain-теста | `xcodebuild ... test -only-testing:PolskiGrammarUITests/FlipCorrectnessUITests -only-testing:PolskiGrammarUITests/PolskiGrammarUITests/testTappingRevealedCardFlipsTwiceWithoutExtraReviewThenRatingCountsOnce -only-testing:.../testBinaryRatingSwipesAdvanceOnceInEachDirection -only-testing:.../testNativeChainCompletionShowsFiveAnswersAndKeepsFiveRatings` | PASS 4/4 (0 failures), 394.3 с суммарно, чистая `derivedData` |
+
+**Известные ограничения:**
+- FC2-17's `os_signpost`-интервалы подтверждены только по коду (парность `.begin`/`.end`,
+  `#if DEBUG`-гейт) — реальный `xctrace`/`XCTOSSignpostMetric`-захват и корреляция с Rive-стоимостью
+  не выполнялись в этом проходе (LEAN MODE); это тот же документированный пробел, что v1 §10/§11
+  зафиксировали для iOS/macOS signposts, теперь с самими интервалами на месте, но без замера.
+- Кольца/"Tada"-оверлей не подтверждены визуальным скриншотом на реальном/симуляторном устройстве в
+  этом проходе — только компиляцией, `generate_project.rb`'s подтверждением ресурсов в `.app`, и
+  логической проводкой (`onRingsExpandedChange`/`riveEffectsSuppressed`); то же ограничение, что
+  Android §14 зафиксировал для своего рейтинг-эффекта (окно эффекта короче цикла ручного захвата).
+- `RiveViewModel.setInput`/двух-конструкторный `RiveViewModel(fileName:animationName:artboardName:)`
+  API подтверждены по исходнику SPM-пакета (`rive-ios` 6.27.0, `Source/RiveViewModel.swift`,
+  закешированная копия в `~/Library/Caches/org.swift.swiftpm/repositories/`), не по документации —
+  оба реально скомпилировались и слинковались в `** BUILD SUCCEEDED **` выше.
+- Полный `PolskiGrammarUITests`-набор (24+ метода) не прогонялся целиком в этом проходе — LEAN MODE
+  ограничил проверку до нового теста и трёх существующих сценариев, которые реально касается это
+  изменение (flip/swipe/chain-complete), тем же принципом, что v1 §10 уже применил.
+- Rive-CMP-форк (`muazkadan/Rive-CMP`) не понадобился — легаси `RiveViewModel`'s `setInput`/
+  `triggerInput` (то же API, что уже использовал v1) полностью покрыли булевый инпут колец и оба
+  триггера Check/Error без затруднений, соответствуя ожиданию `RiveResearch.md` §1.
+
+**Размер приложения (`.app`, Debug/iphonesimulator, `iPhone 17 Pro` симулятор, сравнение v1 §10
+baseline vs это изменение, чистая `derivedData`):**
+
+| Метрика | v1 §10 baseline | После этого прохода | Δ |
+|---|---|---|---|
+| `PolskiGrammar.app` (`du -sk`, весь bundle) | 22 992 KB | 23 168 KB | +176 KB |
+| Новые/заменённые `.riv` (`rings.riv` +`chain-complete.riv`, `again.riv` заменён 5.4 КБ→2.2 КБ) | — | rings 1.5 КБ + chain-complete 59 КБ − (5.4-2.2) КБ ≈ +57 КБ по содержимому | — |
+
+Рост объясняется почти целиком новым `chain-complete.riv` (59 КБ) и `rings.riv` (1.5 КБ), за вычетом
+уменьшения `again.riv` (заменён на файл втрое меньше — 2.2 КБ против 5.4 КБ); разница между этим и
+измеренным `+176 KB` — округление файловой системы на блоках (`du` считает блоками, не байтами) и
+незначительный рост скомпилированного бинаря от новых `RiveViewModel`/`os_signpost`-путей.
+`RiveRuntime.framework` не изменился (уже был в v1, эта правка не трогает SPM-зависимость).
+

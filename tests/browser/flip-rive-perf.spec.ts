@@ -60,6 +60,41 @@ test('variant C (default motion, Rive enabled): rating creates the overlay and f
   for (const duration of longTasks) expect(duration).toBeLessThan(200);
 });
 
+// FC2-14 (R4): v1's frame-time measurements came back flat (16.7ms/0% janky for every variant,
+// see Plans/Kotlin/artifacts/flip-rive/v1-measurements.json) because unthrottled headless
+// Chromium never gets close to a frame budget regardless of variant. CDP CPU throttling makes the
+// three variants distinguishable by artificially slowing the main thread, the same technique
+// Chrome DevTools' own performance panel uses.
+for (const rate of [1, 4, 6]) {
+  test(`CPU throttle ${rate}x: flip + rating stays responsive and long tasks are bounded (variant C)`, async ({ page }) => {
+    const cdp = await page.context().newCDPSession(page);
+    await page.goto('/');
+    await page.evaluate(() => {
+      (window as any).__polskiLongTasks = [];
+      new PerformanceObserver(list => {
+        for (const entry of list.getEntries()) (window as any).__polskiLongTasks.push(entry.duration);
+      }).observe({ type: 'longtask', buffered: true });
+    });
+    await continueIntroductionIfPresent(page);
+    await cdp.send('Emulation.setCPUThrottlingRate', { rate });
+    const start = Date.now();
+    await page.getByRole('button', { name: 'Показать ответ' }).click();
+    await expect(page.locator('.card-flip-inner')).toHaveClass(/flipped/);
+    await page.getByRole('button', { name: /2 Вспомнил/ }).click();
+    await expect(page.locator('#polski-rive-overlay')).toHaveAttribute('data-rive-effect', /^remembered:/);
+    const flipAndRateMs = Date.now() - start;
+    await page.waitForTimeout(1500);
+    await cdp.send('Emulation.setCPUThrottlingRate', { rate: 1 }); // restore before the next test/teardown
+    const longTasks: number[] = await page.evaluate(() => (window as any).__polskiLongTasks ?? []);
+    // Indicative-only (Chromium headless + CDP software throttling, not device-grade — §5's
+    // caveat applies here too): the flip+rate interaction itself must still complete in a
+    // reasonable wall-clock window even at 6x throttle, and no single long task should be so long
+    // it would read as a multi-second freeze.
+    expect(flipAndRateMs, `flip+rate wall time at ${rate}x throttle`).toBeLessThan(20_000);
+    for (const duration of longTasks) expect(duration, `long task at ${rate}x throttle`).toBeLessThan(2_000);
+  });
+}
+
 test('bundle keeps the Rive assets lazy: index does not eagerly fetch rive.js/.wasm before first reveal', async ({ page }) => {
   const riveRequests: string[] = [];
   page.on('request', request => { if (request.url().includes('/rive/')) riveRequests.push(request.url()); });

@@ -1,7 +1,6 @@
 package polski.ui.screens
 
-import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.animation.core.snap
+import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.awaitEachGesture
@@ -14,6 +13,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
@@ -22,6 +22,7 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.input.pointer.positionChange
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.launch
 import polski.presentation.CardEffect
 import polski.presentation.CardPhase
 import polski.presentation.cardEffectFor
@@ -128,6 +129,12 @@ private suspend fun PointerInputScope.detectFlipOrSwipe(thresholdPx: Float, tapS
  * `reduceMotion` (the app's [polski.preferences.Motion.Reduced] setting) snaps instead of
  * animating, per the plan's shared reduced-motion contract (FC-09/12/14/20). [onRate] shares the
  * caller's [SingleRatingGate] with the rating buttons inside [back] (FC-07/20).
+ *
+ * [onRingsExpandedChange] drives the flip-in-progress ring cue (`Plans/Kotlin/FlipCardRivePlan.md`
+ * FC2-06/07/08, R2): `true` right as an animated (non-reduced-motion) rotation starts, `false` once
+ * it fully settles — the same two points the web host's `applyFlip` toggles `IsExpanded` at. An
+ * [Animatable] replaces v1's `animateFloatAsState` specifically so this function can `await` the
+ * rotation's completion instead of guessing its duration a second time.
  */
 @Composable
 fun AndroidFlipCard(
@@ -135,18 +142,26 @@ fun AndroidFlipCard(
     phase: CardPhase,
     reduceMotion: Boolean,
     onRate: (Rating) -> Unit,
+    onRingsExpandedChange: (Boolean) -> Unit = {},
     front: @Composable () -> Unit,
     back: @Composable () -> Unit,
 ) {
     var flipped by remember(exerciseId) { mutableStateOf(false) }
-    LaunchedEffect(phase) { if (phase == CardPhase.Revealed) flipped = true }
-    val angle by animateFloatAsState(
-        targetValue = if (flipped) 180f else 0f,
-        animationSpec = if (reduceMotion) snap() else tween(500),
-        label = "cardFlip",
-    )
+    val angleAnim = remember(exerciseId) { Animatable(0f) }
+    val scope = rememberCoroutineScope()
+    suspend fun setFlipped(target: Boolean) {
+        if (flipped == target) return
+        flipped = target
+        val to = if (target) 180f else 0f
+        if (reduceMotion) { angleAnim.snapTo(to); return }
+        onRingsExpandedChange(true)
+        angleAnim.animateTo(to, tween(500))
+        onRingsExpandedChange(false)
+    }
+    LaunchedEffect(phase, exerciseId) { if (phase == CardPhase.Revealed) setFlipped(true) }
+    val angle = angleAnim.value
     val density = LocalDensity.current.density
-    fun flip() { flipped = flipOnTap(phase, flipped) }
+    fun flip() { val next = flipOnTap(phase, flipped); if (next != flipped) scope.launch { setFlipped(next) } }
     val showingBack = angle >= 90f
     val thresholdPx = with(LocalDensity.current) { 72.dp.toPx() }
     val tapSlopPx = with(LocalDensity.current) { 12.dp.toPx() }
