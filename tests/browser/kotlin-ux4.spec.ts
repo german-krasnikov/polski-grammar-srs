@@ -400,3 +400,101 @@ test('UX5: View Transitions is never invoked any more', async ({ page }) => {
   await page.waitForTimeout(500);
   expect(await page.evaluate(() => (window as any).__startViewTransitionCalls)).toBe(0);
 });
+
+// FlipCardRivePlan.md §19.7/§19.10/§19.11: switching to "Таблицы и схема" paid a single ~60ms long
+// task under 4x CPU throttle (RouteSlider deferred the rebuild, but still rebuilt the whole
+// grammar-table subtree every time). Correction round: an earlier version of this fix also kept a
+// persistent, deps-keyed cache of that built subtree alive across visits — dropped after it turned
+// out to carry real correctness risk (one call site could update the live cached node's content
+// without updating the cache's own recorded deps, serving stale content to a later fresh entry —
+// see the mid-slide test below) for no measured perf benefit a repeat visit didn't already have
+// with zero caching (tables-hitch.json's honest `before_head_fb4cdcd` baseline). What's left is only
+// an idle prewarm (§19.10) that forces the browser's own one-time layout/style pass on a disposable
+// throwaway node — Matrix now rebuilds fresh on every single visit, exactly like every other route.
+
+test('UX5 perf: switching to Таблицы и схема repeatedly never leaves a duplicate route or stale control state behind', async ({ page }) => {
+  await page.goto('/#/training');
+  const viewport = page.locator('.route-viewport');
+  await page.getByRole('button', { name: 'Таблицы и схема', exact: true }).click();
+  await expect.poll(() => viewport.locator(':scope > .route-content').count()).toBe(1);
+  await expect(page.getByRole('heading', { name: 'Грамматическая матрица' })).toBeVisible();
+  await expect(page.locator('#matrix-noun')).toHaveCount(0); // default section is "Карта системы"
+  await page.getByRole('button', { name: 'Прогресс', exact: true }).click();
+  await expect.poll(() => viewport.locator(':scope > .route-content').count()).toBe(1);
+  await page.getByRole('button', { name: 'Таблицы и схема', exact: true }).click();
+  await expect.poll(() => viewport.locator(':scope > .route-content').count()).toBe(1);
+  // Still exactly one live, correctly-labelled route on a repeat visit — no leftover second layer,
+  // no duplicate ids, defaults shown again exactly as the first visit had them.
+  await expect(page.locator('#matrix-noun')).toHaveCount(0);
+  await expect(page.getByRole('heading', { name: 'Грамматическая матрица' })).toHaveCount(1);
+  await expect(page.getByRole('button', { name: 'Карта системы', exact: true })).toHaveAttribute('aria-pressed', 'true');
+});
+
+test('UX5 perf: changing a Matrix control updates it immediately, and a fresh re-entry resets to defaults', async ({ page }) => {
+  await page.goto('/#/training');
+  const viewport = page.locator('.route-viewport');
+  await page.getByRole('button', { name: 'Таблицы и схема', exact: true }).click();
+  await expect.poll(() => viewport.locator(':scope > .route-content').count()).toBe(1);
+  await page.getByRole('button', { name: 'Падежи и окончания', exact: true }).click();
+  const nounSelect = page.locator('#matrix-noun');
+  await expect(nounSelect).toBeVisible();
+  const otherNoun = await nounSelect.evaluate((el: HTMLSelectElement) =>
+    Array.from(el.options).find(o => o.value !== el.value)!.value);
+  await nounSelect.selectOption(otherNoun);
+  await expect.poll(() => nounSelect.inputValue()).toBe(otherNoun);
+  // Leave without resetting the selection, then come back from a different tab: the store itself
+  // resets `matrixSelection` to its defaults on every fresh entry (AppUiState.kt/TrainingStore.kt).
+  await page.getByRole('button', { name: 'Прогресс', exact: true }).click();
+  await expect.poll(() => viewport.locator(':scope > .route-content').count()).toBe(1);
+  await page.getByRole('button', { name: 'Таблицы и схема', exact: true }).click();
+  await expect.poll(() => viewport.locator(':scope > .route-content').count()).toBe(1);
+  await expect(page.getByRole('button', { name: 'Карта системы', exact: true })).toHaveAttribute('aria-pressed', 'true');
+  await expect(page.locator('#matrix-noun')).toHaveCount(0); // Cases-only control, not shown once reset to Map
+});
+
+// Correction round (reviewer finding, now moot but kept as a regression guard): a same-route
+// Matrix update landing WHILE RouteSlider already has a live incoming node (mid-slide — see
+// RouteSlide.kt's `refresh`) used to be able to leave a persistent cache serving stale content to
+// a later fresh entry. There is no such cache any more (see the note above), so this now simply
+// guards that interacting mid-slide — rather than waiting for it to settle first, like the tests
+// above do — still ends in the correct state.
+test('UX5 correctness: a control changed mid-slide still lands on the correct state, and a later fresh visit resets cleanly', async ({ page }) => {
+  await page.goto('/#/training');
+  const viewport = page.locator('.route-viewport');
+  await page.getByRole('button', { name: 'Таблицы и схема', exact: true }).click();
+  // No settle wait: interact with the incoming layer while the slide may still be animating.
+  await page.getByRole('button', { name: 'Падежи и окончания', exact: true }).click();
+  const nounSelect = page.locator('#matrix-noun');
+  await nounSelect.waitFor();
+  const otherNoun = await nounSelect.evaluate((el: HTMLSelectElement) =>
+    Array.from(el.options).find(o => o.value !== el.value)!.value);
+  await nounSelect.selectOption(otherNoun);
+  await expect.poll(() => nounSelect.inputValue()).toBe(otherNoun);
+  await expect.poll(() => viewport.locator(':scope > .route-content').count()).toBe(1);
+  // Leave, then re-enter fresh: the store resets `matrixSelection` to its defaults on every fresh
+  // entry — the re-entry must show that reset, not whatever was picked mid-slide.
+  await page.getByRole('button', { name: 'Прогресс', exact: true }).click();
+  await expect.poll(() => viewport.locator(':scope > .route-content').count()).toBe(1);
+  await page.getByRole('button', { name: 'Таблицы и схема', exact: true }).click();
+  await expect.poll(() => viewport.locator(':scope > .route-content').count()).toBe(1);
+  await expect(page.getByRole('button', { name: 'Карта системы', exact: true })).toHaveAttribute('aria-pressed', 'true');
+  await expect(page.locator('#matrix-noun')).toHaveCount(0);
+});
+
+test('UX5 reviewer note: focusing the incoming route heading mid-slide uses preventScroll', async ({ page }) => {
+  await page.addInitScript(() => {
+    (window as any).__focusCalls = [];
+    const proto = HTMLElement.prototype as any;
+    const original = proto.focus;
+    proto.focus = function (this: HTMLElement, options?: FocusOptions) {
+      (window as any).__focusCalls.push({ tag: this.tagName, preventScroll: options?.preventScroll === true });
+      return original.call(this, options);
+    };
+  });
+  await page.goto('/#/training');
+  await page.getByRole('button', { name: 'Таблицы и схема', exact: true }).click();
+  await expect(page.getByRole('heading', { name: 'Грамматическая матрица' })).toBeFocused();
+  const headingCall = await page.evaluate(() =>
+    ((window as any).__focusCalls as Array<{ tag: string; preventScroll: boolean }>).find(c => c.tag === 'H2'));
+  expect(headingCall?.preventScroll).toBe(true);
+});

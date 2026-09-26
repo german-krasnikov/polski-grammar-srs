@@ -1,0 +1,65 @@
+{
+  "methodology": {
+    "tool": ".tmp-ux5/tables-hitch.mjs (Playwright + CDP Emulation.setCPUThrottlingRate; per-transition frame deltas via requestAnimationFrame, long tasks via PerformanceObserver({entryTypes:['longtask']})); not in the repository, same convention as §19.1/19.7's tabs-jank.mjs",
+    "cpuThrottle": 4,
+    "viewport": "390x844 (Playwright default chromium)",
+    "dist": "composeWebCompatibility (wasm branch; the same static bundle also serves the js branch — unaffected by this change, not separately measured)",
+    "scenarios": {
+      "first": "fresh page load, click 'Таблицы и схема' immediately (before the 1500ms idle prewarm has had a chance to fire) — the worst case, and the only one 'before' ever has",
+      "repeat": "click into Matrix once, leave to 'Карточки', wait 600ms, then click into Matrix again",
+      "firstAfterPrewarm": "fresh page load, wait 1800ms (past the 1500ms idle prewarm), THEN click 'Таблицы и схема' for the first time — the idle-prewarm's target case; 'before' has no prewarm mechanism, so this scenario there is just 'first' with an extra idle wait, included to show that waiting alone does not help without it"
+    },
+    "runsPerScenario": 3,
+    "correctionNote": "A prior version of this file's 'before' baseline was NOT actually built from HEAD fb4cdcd — it was re-measured for this correction round by `git stash`-ing the fix's two source files back to HEAD's committed content, rebuilding the distribution from that, measuring, then restoring the fix and rebuilding again for 'after'. The re-measurement reproduces the exact same shape the earlier numbers already showed for 'repeat' (0 long tasks even pre-fix), which is genuine, not a measurement error: switching to Matrix a SECOND time was already cheap even with zero caching and a brand-new DOM subtree every time, because the ~60ms cost is the browser's own one-time layout/style pass over this page's heaviest subtree, paid once per PAGE LIFETIME (font shaping / style-sharing caches internal to the engine), not per DOM node. That finding is exactly why the persistent, deps-keyed keep-alive cache (matrixCache/matrixCacheDeps) this file originally justified was dropped after this round's review — see FlipCardRivePlan.md §19.11: it carried a real correctness bug (a same-route update mid-slide could desync the cache's recorded deps from the live node's actual content — fixed once, then the whole cache was removed instead of re-litigated) for zero measured benefit over a plain 'build once at idle, then always rebuild fresh' design, which is what TrainingWebApp.kt now does."
+  },
+  "before_head_fb4cdcd": {
+    "label": "before-head-fb4cdcd",
+    "cpuThrottle": 4,
+    "viewport": "390x844",
+    "first": [
+      { "frames": 83, "meanFrameMs": 18.47, "p95FrameMs": 33.3, "maxFrameMs": 83.3, "longTaskCount": 1, "longTaskTotalMs": 63, "longTaskMaxMs": 63 },
+      { "frames": 82, "meanFrameMs": 18.09, "p95FrameMs": 16.8, "maxFrameMs": 83.3, "longTaskCount": 1, "longTaskTotalMs": 65, "longTaskMaxMs": 65 },
+      { "frames": 84, "meanFrameMs": 18.05, "p95FrameMs": 16.8, "maxFrameMs": 66.5, "longTaskCount": 1, "longTaskTotalMs": 67, "longTaskMaxMs": 67 }
+    ],
+    "repeat": [
+      { "frames": 75, "meanFrameMs": 16.67, "p95FrameMs": 16.8, "maxFrameMs": 16.8, "longTaskCount": 0, "longTaskTotalMs": 0, "longTaskMaxMs": 0 },
+      { "frames": 76, "meanFrameMs": 16.67, "p95FrameMs": 16.7, "maxFrameMs": 16.8, "longTaskCount": 0, "longTaskTotalMs": 0, "longTaskMaxMs": 0 },
+      { "frames": 76, "meanFrameMs": 16.67, "p95FrameMs": 16.7, "maxFrameMs": 16.8, "longTaskCount": 0, "longTaskTotalMs": 0, "longTaskMaxMs": 0 }
+    ],
+    "firstAfterPrewarm": [
+      { "frames": 69, "meanFrameMs": 18.36, "p95FrameMs": 33.2, "maxFrameMs": 83.3, "longTaskCount": 1, "longTaskTotalMs": 76, "longTaskMaxMs": 76 },
+      { "frames": 78, "meanFrameMs": 17.95, "p95FrameMs": 16.8, "maxFrameMs": 100, "longTaskCount": 1, "longTaskTotalMs": 78, "longTaskMaxMs": 78 },
+      { "frames": 78, "meanFrameMs": 17.73, "p95FrameMs": 16.8, "maxFrameMs": 83.3, "longTaskCount": 1, "longTaskTotalMs": 73, "longTaskMaxMs": 73 }
+    ]
+  },
+  "after_final": {
+    "label": "after-final",
+    "cpuThrottle": 4,
+    "viewport": "390x844",
+    "note": "Idle prewarm only (build the heavy subtree once at idle, force layout, discard it) — no persistent keep-alive cache. Matrix rebuilds fresh on every single visit, exactly like every other route.",
+    "first": [
+      { "frames": 83, "meanFrameMs": 17.87, "p95FrameMs": 16.8, "maxFrameMs": 83.3, "longTaskCount": 1, "longTaskTotalMs": 63, "longTaskMaxMs": 63 },
+      { "frames": 82, "meanFrameMs": 18.09, "p95FrameMs": 16.8, "maxFrameMs": 83.4, "longTaskCount": 1, "longTaskTotalMs": 60, "longTaskMaxMs": 60 },
+      { "frames": 81, "meanFrameMs": 17.7, "p95FrameMs": 16.8, "maxFrameMs": 83.3, "longTaskCount": 1, "longTaskTotalMs": 66, "longTaskMaxMs": 66 }
+    ],
+    "repeat": [
+      { "frames": 76, "meanFrameMs": 16.67, "p95FrameMs": 16.8, "maxFrameMs": 16.8, "longTaskCount": 0, "longTaskTotalMs": 0, "longTaskMaxMs": 0 },
+      { "frames": 76, "meanFrameMs": 16.67, "p95FrameMs": 16.7, "maxFrameMs": 16.8, "longTaskCount": 0, "longTaskTotalMs": 0, "longTaskMaxMs": 0 },
+      { "frames": 75, "meanFrameMs": 16.67, "p95FrameMs": 16.7, "maxFrameMs": 16.8, "longTaskCount": 0, "longTaskTotalMs": 0, "longTaskMaxMs": 0 }
+    ],
+    "firstAfterPrewarm": [
+      { "frames": 71, "meanFrameMs": 17.84, "p95FrameMs": 33.2, "maxFrameMs": 50, "longTaskCount": 0, "longTaskTotalMs": 0, "longTaskMaxMs": 0 },
+      { "frames": 78, "meanFrameMs": 17.09, "p95FrameMs": 16.8, "maxFrameMs": 33.3, "longTaskCount": 0, "longTaskTotalMs": 0, "longTaskMaxMs": 0 },
+      { "frames": 78, "meanFrameMs": 17.31, "p95FrameMs": 16.8, "maxFrameMs": 49.9, "longTaskCount": 0, "longTaskTotalMs": 0, "longTaskMaxMs": 0 }
+    ]
+  },
+  "summary": {
+    "first_maxFrameMs": { "before": [83.3, 83.3, 66.5], "after": [83.3, 83.4, 83.3] },
+    "first_longTaskCount": { "before": [1, 1, 1], "after": [1, 1, 1] },
+    "repeat_maxFrameMs": { "before": [16.8, 16.8, 16.8], "after": [16.8, 16.8, 16.8] },
+    "repeat_longTaskCount": { "before": [0, 0, 0], "after": [0, 0, 0] },
+    "firstAfterPrewarm_maxFrameMs": { "before": [83.3, 100, 83.3], "after": [50, 33.3, 49.9] },
+    "firstAfterPrewarm_longTaskCount": { "before": [1, 1, 1], "after": [0, 0, 0] },
+    "note": "Honest re-measurement (correction round): 'first' and 'repeat' are IDENTICAL before/after, by design — 'first' is the one cost nothing can prevent (something must lay the subtree out once), and 'repeat' was never actually a problem, with or without a fix (see methodology.correctionNote) — the persistent cache this file previously used to justify was measuring/patching a hitch that didn't exist there. Only 'firstAfterPrewarm' genuinely improves: 1 long task/~76-100ms max frame before, 0 long tasks/~33-50ms max frame after, entirely from the idle prewarm forcing the browser's one-time layout/style pass early — no DOM caching needed for that improvement either."
+  }
+}

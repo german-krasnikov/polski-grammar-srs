@@ -1983,3 +1983,56 @@ Vocabulary + её doc-комментарии), `kotlin-ux4.spec.ts` (+1 тест
 | Те же файлы, js, chromium | то же с `KOTLIN_SPIKE_BRANCH=js` | PASS 52/52 |
 | Полный `testMatch`, wasm, chromium | `KOTLIN_SPIKE_BRANCH=wasm npx playwright test --config=playwright.kotlin.config.ts --project=chromium` | PASS 135/136 (1 fail — уже задокументированный §18/19.6 предсуществующий ~1/10 флейк «narrow layout keeps the next training action visible», не связан с этим фиксом) |
 | Тот же флейк изолированно | `-g "narrow layout keeps the next training action visible" --repeat-each=6` | PASS 6/6 |
+
+### 19.10 Хитч «Таблицы и схема»
+
+Каждый визит на «Таблицы и схема» платил ~60мс long task, потому что отложенная сборка внутри
+`RouteSlider` всё равно звала `renderMatrixWeb` заново — единственный маршрут, чей DOM зависит
+только от `state.matrixSelection`/`state.error` (сбрасывается на дефолт при каждом свежем входе
+с другой вкладки, `TrainingStore.kt`), а не от куда более частых `exercise`/`phase`/счётчиков;
+фикс (`TrainingWebApp.kt`, `RouteSlide.kt`) — keep-alive кэш `matrixCache`/`matrixCacheDeps`,
+переживающий уход с вкладки (RouteSlider и раньше лишь `remove()`-ил `outgoing`, не уничтожал) и
+пересобираемый только когда зависимости реально изменились (новый `RouteSlider.hasLiveIncoming()`
+не даёт кэшу подсунуть `refresh()` его же смонтированный узел — самоопустошение), плюс
+idle-прогрев `scheduleMatrixPrewarm` через 1500мс после первого рендера — измерение показало, что
+голая off-DOM JS-сборка это не решает (доминирует первый layout/style-проход браузера по
+поддереву, платится один раз именно на реальном attach), поэтому прогрев временно монтирует узел
+скрытым (`visibility:hidden;pointer-events:none;position:absolute`), форсирует layout одним
+`getBoundingClientRect()` и открепляет обратно. Измерено (4×CPU throttle, 390×844, Chromium,
+временный `.tmp-ux5/tables-hitch.mjs` → `Plans/Kotlin/artifacts/ux5/web/tables-hitch.json`):
+before — 58–68мс/1 long task на каждый визит без исключений; after — первый клик в сессии до
+прогрева платит то же неизбежно один раз, но повторный визит и первый клик после прогрева — 0
+long tasks, максимум кадра 19–51мс, на уровне изначально дешёвых маршрутов. Попутно —
+ревьюерская заметка о `focus()` посреди слайда, способном прыгнуть страницей вслед за ещё едущим
+через grid-stack (§19.9) заголовком: одна замена на `js("element.focus({preventScroll:true})")`
+(ни `kotlinx-browser`, ни `kotlin-dom-api-compat` не объявляют `FocusOptions`). Playwright
+(`kotlin-ux4.spec.ts`, новые тесты на переиспользование/пересборку/сброс/`preventScroll`) —
+PASS 24/24 wasm+js; полный `testMatch` — PASS 138/139 на обеих ветках (уже задокументированный
+§18/19.6 флейк «narrow layout…», не связан с этим фиксом).
+
+### 19.11 Коррекция: persistent-кэш снят, остался только idle-прогрев
+
+Ревью §19.10 нашло две проблемы. (1) Корректность: ветка `refresh()` посреди слайда, когда
+`RouteSlider.hasLiveIncoming()` уже true, физически мутировала контент уже смонтированного
+`matrixCache`-узла (через `refresh`'s "move children"), но не обновляла `matrixCacheDeps` —
+кэш-метаданные расходились с реальным содержимым живого узла, и более поздний свежий вход,
+чей дефолтный `matrixSelection` случайно совпадал с этим устаревшим записанным значением, получал
+кэш-хит с чужим (немутированным дефолту) содержимым — воспроизведено новым Playwright-тестом
+(`UX5 correctness`, меняет контрол ДО оседания слайда, без выдержки `waitForTimeout`) — RED 4/5 на
+сборке с багом, GREEN 10/10 после точечного фикса (обновлять `matrixCacheDeps` и в этой ветке).
+(2) Целостность измерения: честный ре-замер `before` (стек `git stash` двух файлов фикса обратно
+к HEAD fb4cdcd, пересборка, замер) воспроизвёл ТУ ЖЕ картину, что и раньше — `repeat` уже 0 long
+tasks даже без единой строчки кэширования. Это не ошибка замера: ~60мс — одноразовая стоимость
+браузерного layout/style-прохода по этому поддереву, платится один раз за время жизни СТРАНИЦЫ
+(внутренние движковые кэши шейпинга шрифта/расшаривания стилей), а не за узел — повторный визит с
+абсолютно новым DOM был дёшев и до фикса. Persistent-кэш (`matrixCache`/`matrixCacheDeps`) не давал
+никакого измеримого выигрыша сверх того, что даёт один только idle-прогрев, при реальном риске
+устаревания (пункт 1) — снят целиком, а не залатан: `TrainingWebApp.kt`'s три Matrix-специфичные
+ветки в `render()` заменены на тот же generic `node("div","route-content").also(::populate)`, что
+у любого другого маршрута; `scheduleMatrixPrewarm` теперь строит одноразовый узел, форсирует layout
+и выбрасывает его, ничего не сохраняя. Пересборка + честный ре-замер (тот же `.tmp-ux5/tables-hitch.mjs`
+до/после, обновлённый `tables-hitch.json`) подтвердили: `first`/`repeat` не изменились (как и
+ожидалось), `firstAfterPrewarm` всё равно улучшается (1 long task/~76–100мс → 0/~33–50мс) — прогрева
+достаточно без кэша. Полный `kotlin-ux4.spec.ts` — PASS 25/25 wasm+js (24 → 25: старый
+identity-тест на переиспользование заменён поведенческим, добавлен regression-тест на mid-slide
+корректность), 104/104 с `--repeat-each=8` на нефлейковость.

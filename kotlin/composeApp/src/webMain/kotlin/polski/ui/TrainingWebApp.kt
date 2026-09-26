@@ -206,15 +206,25 @@ internal fun editableTarget(target: Element?): Boolean =
  * appears, not the tab bar it was clicked from. A route with no heading of its own (Training, whose
  * content starts directly with its mode toolbar) falls back to the route container itself — still
  * a real, announced focus move, just without a heading to name it. At the moment this runs the
- * target may still be mid-slide (translated off-screen, see [RouteSlider]) — its own untransformed
- * layout box is already exactly where it will end up, so focusing it never needs to scroll
- * anything (`transform` never moves an element's layout position, only its paint position).
+ * target may still be mid-slide (translated off-screen, see [RouteSlider]) — `transform` never
+ * moves an element's own layout box, only its paint position, so this never needs to scroll the
+ * PAGE to bring the target's box into view. It can still scroll the target's own box INTO the
+ * page's current viewport, though (reviewer note, §19.7): the grid-stack the two sliding layers
+ * share (training.css) auto-sizes to whichever layer is taller, and a still-mid-slide `incoming`
+ * heading can therefore land below the fold for one frame — `focus()`'s default scroll-into-view
+ * would jump the page under the still-animating slide to chase it. `preventScroll: true` heads
+ * that off; it isn't in either binding this project has for `focus()` (kotlinx-browser and
+ * kotlin-dom-api-compat both omit `FocusOptions`), so [focusPreventScroll] reaches it through the
+ * one `js()` snippet both the `js()` and `wasmJs()` targets compile identically.
  */
 internal fun focusRouteHeading(content: HTMLElement) {
     val target = (content.querySelector("h1, h2") as? HTMLElement) ?: content
     if (!target.hasAttribute("tabindex")) target.setAttribute("tabindex", "-1")
-    target.focus()
+    focusPreventScroll(target)
 }
+
+@OptIn(kotlin.js.ExperimentalWasmJsInterop::class)
+private fun focusPreventScroll(element: HTMLElement): Unit = js("element.focus({ preventScroll: true })")
 
 private fun executeEffect(root: HTMLElement, state: AppUiState, effect: UiEffect, store: TrainingStore,
                           navigate: (WebRoute) -> Unit): Boolean {
@@ -264,6 +274,15 @@ private fun percentEncode(value: String): String {
     }
 }
 
+private const val ROUTE_FOOTER_TEXT = "Прогресс сохраняется в этом браузере. Интервальные повторения — FSRS."
+
+/** UX5 perf: delay before the idle Matrix prewarm runs (see [TrainingDomRenderer.scheduleMatrixPrewarm]).
+ *  There is no `requestIdleCallback` binding in either DOM binding this project has (kotlinx-browser/
+ *  kotlin-dom-api-compat), so a plain timer stands in for "idle enough" — long enough to sit well
+ *  after the very first paint/layout it must never compete with, short enough to still land well
+ *  before a real first click could plausibly happen. */
+private const val MATRIX_PREWARM_DELAY_MS = 1500
+
 @OptIn(kotlin.js.ExperimentalWasmJsInterop::class)
 private class TrainingDomRenderer {
     private var previous: AppUiState? = null
@@ -276,6 +295,24 @@ private class TrainingDomRenderer {
     private val riveOverlay = RiveEffectOverlay()
     private val slider = RouteSlider()
 
+    // Correction round (reviewer finding — see FlipCardRivePlan.md §19.11): this used to also keep
+    // a persistent, deps-keyed cache of the built Matrix `.route-content` alive across visits. Two
+    // problems killed that design: (1) one of its own call sites (a same-route update landing mid-
+    // slide, once RouteSlider already had a live incoming) mutated the live cached node's content
+    // without updating the cache's recorded deps, so a LATER fresh entry landing on those stale
+    // recorded deps got served whatever had been mutated in — a real stale/wrong-state bug, not a
+    // hypothetical; (2) re-measuring honestly (stashing this file back to its pre-cache commit and
+    // rebuilding — see `before_head_fb4cdcd` in tables-hitch.json) showed a REPEAT visit was already
+    // just as cheap with NO caching at all, brand-new DOM every time: the ~60ms long task the idle
+    // prewarm below targets is a one-time cost the browser's layout/style engine pays once per PAGE
+    // LIFETIME the first time it lays out this particular heavy subtree (several large tables) —
+    // not a per-node cost caching could ever have saved on a repeat visit. The persistent cache was
+    // carrying real correctness risk for zero measured benefit beyond what the prewarm alone gives;
+    // dropped entirely rather than patched, which is also why Matrix no longer needs any special
+    // case in [render] below — it now takes the exact same `node("div", "route-content").also(::populate)`
+    // path every other route always has.
+    private var matrixPrewarmScheduled = false
+
     fun close() { navigation?.close(); navigation = null; vocabulary.close() }
 
     /** UX4-14: delegates to the Vocabulary controller for the shared keydown handler. */
@@ -283,6 +320,37 @@ private class TrainingDomRenderer {
 
     /** UX5: delegates Space/Enter (reveal-or-flip) to the Vocabulary controller for the shared keydown handler. */
     fun spaceVocabulary(refresh: () -> Unit) = vocabulary.spaceReveal(refresh)
+
+    /** UX5 perf: once, ~[MATRIX_PREWARM_DELAY_MS] after the very first render (and only if that
+     *  first render's route isn't already Matrix — a real visit already paid this cost itself),
+     *  builds the Matrix route's heavy table subtree purely to force the browser's OWN one-time
+     *  layout/style pass over it early, then throws the node away — nothing here is ever stored or
+     *  reused. RED (measured — FlipCardRivePlan.md §19.10/§19.11/tables-hitch.json): building it
+     *  off-DOM only (no attach at all) did NOT stop the real click's long task from reappearing, but
+     *  a genuine no-cache repeat visit (brand-new DOM) already WAS cheap — proving the cost is paid
+     *  once per page lifetime by the engine itself, not per node/per cache-hit. So a throwaway
+     *  build+attach+layout+discard here is enough to make the real first click just as cheap as any
+     *  later one, without keeping anything alive to ever go stale. `visibility:hidden` (not
+     *  `display:none`, which skips layout entirely) and `pointer-events:none` keep it inert and
+     *  unhittable for the one synchronous moment it's attached (`position:absolute` avoids a
+     *  transient height/scrollbar change); nothing yields between appendChild and remove, so nothing
+     *  else ever observes it there. GREEN: the real click after this window shows zero long tasks,
+     *  same as a repeat visit (measured — same file). Never touches `vocabulary`. */
+    private fun scheduleMatrixPrewarm(state: AppUiState, dispatch: (AppAction) -> Unit) {
+        if (matrixPrewarmScheduled) return
+        matrixPrewarmScheduled = true
+        window.setTimeout({
+            val content = node("main", "matrix-page")
+            renderMatrixWeb(content, state, dispatch)
+            content.style.setProperty("position", "absolute")
+            content.style.setProperty("visibility", "hidden")
+            content.style.setProperty("pointer-events", "none")
+            document.body?.appendChild(content)
+            content.getBoundingClientRect() // forces the one-time layout/style pass early
+            content.remove()
+            null
+        }, MATRIX_PREWARM_DELAY_MS)
+    }
 
     fun render(root: HTMLElement, state: AppUiState, route: WebRoute, returnTo: WebRoute, preferences: WebPreferencesController, store: TrainingStore, navigate: (WebRoute) -> Unit, dispatch: (AppAction) -> Unit) {
         val old = previous
@@ -351,7 +419,7 @@ private class TrainingDomRenderer {
                 WebRoute.Progress -> renderProgressWeb(node("main", "progress-page").also(content::appendChild), state, dispatch)
                 WebRoute.Settings -> renderSettingsWeb(node("main", "settings-page").also(content::appendChild), preferences, store, returnTo, navigate)
             }
-            content.appendChild(node("footer", text = "Прогресс сохраняется в этом браузере. Интервальные повторения — FSRS."))
+            content.appendChild(node("footer", text = ROUTE_FOOTER_TEXT))
         }
 
         // Only a routine same-route rebuild (timer, rating, IME…) ever restores the element that
@@ -431,7 +499,18 @@ private class TrainingDomRenderer {
                 // without touching its animation. Scroll/focus restoration is meaningless here —
                 // there is no settled content to scroll or focus yet; the slide's own `onMounted`/
                 // `onSettled` (already scheduled) still runs once it actually gets there.
-                slider.refresh { node("div", "route-content").also(::populate) }
+                slider.refresh {
+                    // RED: this is NOT a rare edge case on the web target — Compose's
+                    // `collectAsState()` delivers the store's post-`SelectTab` state (with
+                    // `matrixSelection` freshly reset) one recomposition AFTER the route change
+                    // itself lands, so entering Matrix always re-enters `render()` a second time
+                    // while this exact slide is still pending, landing right here. Whether
+                    // RouteSlider merges this fresh node's children into an already-live incoming
+                    // or swaps it in directly (see `refresh`'s own doc comment) is entirely its own
+                    // concern now — this closure is the same plain builder every other route uses,
+                    // with nothing of its own left to keep in sync with which branch runs.
+                    node("div", "route-content").also(::populate)
+                }
                 previous = state
                 previousPreferences = preferences.value
                 previousStatus = preferences.status
@@ -446,6 +525,7 @@ private class TrainingDomRenderer {
                 commitRouteBookkeeping()
             }
         }
+        if (old == null && route != WebRoute.Matrix) scheduleMatrixPrewarm(state, dispatch)
     }
 
     private fun renderHeader(app: HTMLElement, state: AppUiState) {
