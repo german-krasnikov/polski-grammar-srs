@@ -15,10 +15,11 @@ end
 assets_ref = source.new_file('Assets.xcassets')
 target.resources_build_phase.add_file_reference(assets_ref)
 
-# FC-15: confetti.riv/again.riv (vendored from rive-ios/rive-android sample assets, see
-# THIRD_PARTY/credits.md) ride the app bundle as plain resources, same as Assets.xcassets above.
+# FC-15/FC2-06/09/10: confetti.riv/again.riv/rings.riv/chain-complete.riv (vendored from
+# rive-ios/rive-android sample assets and the Rive Marketplace, see THIRD_PARTY/credits.md) ride
+# the app bundle as plain resources, same as Assets.xcassets above.
 rive_group = source.new_group('Rive', 'Rive')
-%w[confetti.riv again.riv].each do |file|
+%w[confetti.riv again.riv rings.riv chain-complete.riv].each do |file|
   target.resources_build_phase.add_file_reference(rive_group.new_file(file))
 end
 
@@ -86,6 +87,8 @@ test_group = project.main_group.new_group('PolskiGrammarUITests', 'PolskiGrammar
 tests.source_build_phase.add_file_reference(test_group.new_file('PolskiGrammarUITests.swift'))
 # Tester-only perf harness for FlipCardRivePlan.md §5 (variants A/B/C); adds no production code.
 tests.source_build_phase.add_file_reference(test_group.new_file('FlipRivePerfUITests.swift'))
+# FC2-05's correctness proof (§12.1, R1): mid-flip screenshots/assertions, not performance.
+tests.source_build_phase.add_file_reference(test_group.new_file('FlipCorrectnessUITests.swift'))
 tests.add_dependency(target)
 tests.build_configurations.each do |config|
   config.build_settings['SWIFT_VERSION'] = '5.0'

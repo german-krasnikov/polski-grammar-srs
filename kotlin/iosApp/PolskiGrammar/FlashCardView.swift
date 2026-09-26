@@ -1,4 +1,24 @@
 import SwiftUI
+#if DEBUG
+import os
+#endif
+
+#if DEBUG
+/// `os_signpost` interval names in this file share this subsystem/category with
+/// `RiveEffectOverlay.swift`'s own log (FC2-17, R4) so `xctrace`/`XCTOSSignpostMetric` can
+/// correlate flip cost against Rive playback cost from the same trace.
+private let flipSignpostLog = OSLog(subsystem: "dev.polski.grammarmatrix", category: "flip")
+
+/// Test-only duration multiplier (FC2-05's proof): `POLSKI_FLIP_DEBUG_SCALE`, read once, defaults
+/// to 1 (production speed) whenever it is absent, non-numeric or non-positive. Only ever set by
+/// `XCTest`'s `launchEnvironment` (see `FlipCorrectnessUITests.swift`) — never by a person — and
+/// only compiled into Debug builds at all, so it can never affect a Release flip's timing.
+private let flipDebugScale: Double = {
+    guard let raw = ProcessInfo.processInfo.environment["POLSKI_FLIP_DEBUG_SCALE"],
+          let value = Double(raw), value > 0 else { return 1 }
+    return value
+}()
+#endif
 
 /// Native 3D flip card for the training screen (`Plans/Kotlin/FlipCardRivePlan.md` FC-11/13/14).
 ///
@@ -16,6 +36,11 @@ import SwiftUI
 /// transform fights row-splitting if the builder emits more than one top-level child. The back
 /// face's own content carries a `-180°` counter-rotation so its text isn't mirrored once it swaps in
 /// past the 90° mark (the same anti-mirror technique `AndroidFlipCard` uses for `rotationY`).
+///
+/// **FC2-05 (R1):** the face swap happens exactly at the 90° midpoint, not on a fixed timer that
+/// only approximates it. `setFlipped` runs two sequential `withAnimation`s — 0°→90° ease-in, then
+/// (only once that one's completion handler actually fires) 90°→final ease-out — and swaps
+/// `showBack` in the gap between them, at the real edge-on point, in both directions.
 struct FlashCardView<RevealButton: View>: View {
     @ObservedObject var model: AppModel
     let state: Record
@@ -25,23 +50,53 @@ struct FlashCardView<RevealButton: View>: View {
     /// FC-09/12/14/20's shared gate (system Reduce Motion OR the app's `Motion.Reduced`): snaps the
     /// flip instead of animating it. Computed once by the caller (`TrainingView.cardMotionReduced`).
     let reduceMotion: Bool
+    /// FC2-06/07 (R2): called `true` right as an animated flip's first half starts and `false` once
+    /// its second half settles — the caller (`TrainingView`) feeds this into `RiveFlipRingsOverlay`.
+    /// Never called for a `reduceMotion` (snap) flip, matching the ring cue's own reduced-motion gate.
+    var onRingsExpandedChange: (Bool) -> Void = { _ in }
     let revealButton: (_ title: String, _ expands: Bool) -> RevealButton
 
     @State private var flipped = false
     @State private var showBack = false
     @State private var rotation: Double = 0
 
+    /// Each half's duration: 0.25s in production, scaled only under `#if DEBUG` by
+    /// `POLSKI_FLIP_DEBUG_SCALE` (FC2-05's correctness proof) — see the file-level doc comment.
+    private var halfDuration: Double {
+        #if DEBUG
+        return 0.25 * flipDebugScale
+        #else
+        return 0.25
+        #endif
+    }
+
     var body: some View {
         Group {
-            // `rotation == 0` at rest (showing the front, not mid-flip) skips the `rotation3DEffect`
-            // modifier entirely rather than applying it with `.degrees(0)`: even a nominally-identity
-            // 3D transform ancestor confused a Menu-style Picker's popup anchoring in an XCUITest run
-            // (the "Ответ" answer-mode picker's "Напечатать" option became untappable) — the modifier
-            // is only ever load-bearing while genuinely mid-animation or showing the back.
+            // At rest during `Question` (rotation is always 0 there — the flip gesture is only ever
+            // attached once `Revealed`, see `frontFace` below), skip the `rotation3DEffect` modifier
+            // entirely rather than applying it with `.degrees(0)`: even a nominally-identity 3D
+            // transform ancestor confused a Menu-style Picker's popup anchoring in an XCUITest run
+            // (the "Ответ" answer-mode picker's "Напечатать" option became untappable) — that Picker
+            // only ever exists during `Question`, so this is the only branch that needs the skip.
+            //
+            // FC2-05 (R1): gating this skip on `rotation == 0` instead of on `phase == "Question"`
+            // was a real, reproduced bug — every front→back flip starts from `rotation == 0`, and
+            // adding a brand-new `rotation3DEffect` modifier for the first time is a *structural*
+            // view change (a different branch of this `if`/`else`, hence a different view identity),
+            // not a continuous property mutation on an already-mounted one. `withAnimation` cannot
+            // meaningfully interpolate a transform that did not exist a moment ago, so its completion
+            // fired almost immediately instead of after the requested duration — confirmed with
+            // `os_log` timestamps: the modifier-insertion flip settled in ~0.68s against a requested
+            // 5s `POLSKI_FLIP_DEBUG_SCALE` duration, while a flip that only *mutates* an
+            // already-attached modifier (back→front, starting at `rotation == 180`) took the full,
+            // correct ~5s. Every reachable front→back flip happens only once `Revealed` (never during
+            // `Question`, see above), so gating on `phase` instead keeps the Picker fix exactly as
+            // narrow as it always needed to be, while keeping the modifier continuously mounted
+            // (even at a nominally-identity `.degrees(0)`) for every animation that touches it.
             if showBack {
                 backFace.rotation3DEffect(.degrees(-180), axis: (x: 0, y: 1, z: 0))
                     .rotation3DEffect(.degrees(rotation), axis: (x: 0, y: 1, z: 0), perspective: 0.35)
-            } else if rotation == 0 {
+            } else if rotation == 0 && state.string("phase") == "Question" {
                 frontFace
             } else {
                 frontFace.rotation3DEffect(.degrees(rotation), axis: (x: 0, y: 1, z: 0), perspective: 0.35)
@@ -58,14 +113,53 @@ struct FlashCardView<RevealButton: View>: View {
 
     private func setFlipped(_ newValue: Bool, animated: Bool = true) {
         flipped = newValue
-        if animated && !reduceMotion {
-            withAnimation(.easeInOut(duration: 0.5)) { rotation = newValue ? 180 : 0 }
-            // Swap the mounted face at the halfway point, once it is edge-on and invisible, matching
-            // AndroidFlipCard's `angle >= 90f` split.
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) { showBack = newValue }
-        } else {
+        guard animated && !reduceMotion else {
             rotation = newValue ? 180 : 0
             showBack = newValue
+            return
+        }
+        // This flip's very first animated call is reached from `.onChange(of: state.string("phase"))`
+        // — synchronously, within the *same* SwiftUI update transaction that just changed `phase`
+        // itself (from "Question" to "Revealed"). Right up above, that phase change is *also* what
+        // flips `frontFace`'s `rotation3DEffect` modifier from absent to present (see the file-level
+        // gate a few lines up) — so, without this dispatch, the modifier's first-ever appearance and
+        // its very first animated mutation would land in that same transaction, with no earlier
+        // commit showing it already mounted at `rotation == 0` for `withAnimation` to interpolate
+        // *from*. Confirmed with `os_signpost`/log timestamps, not assumed: that produced exactly the
+        // same class of bug FC2-01/02 found and fixed on the web host ("no previous frame to
+        // transition from") — the completion handler fired after ~1s instead of the requested
+        // (scaled) duration, because SwiftUI had no prior frame to animate the insert from. Deferring
+        // by one run-loop turn lets the phase-change transaction commit and render on its own first,
+        // so the modifier truly already exists, at its resting value, by the time this animates it.
+        DispatchQueue.main.async { [self] in
+            #if DEBUG
+            let signpostID = OSSignpostID(log: flipSignpostLog)
+            os_signpost(.begin, log: flipSignpostLog, name: "FlipHalf1", signpostID: signpostID)
+            #endif
+            onRingsExpandedChange(true)
+            // Mid is always 90° regardless of direction — the halfway point between 0 and 180 either
+            // way — so this single ease-in phase covers both a forward and a backward flip.
+            withAnimation(.easeIn(duration: halfDuration)) {
+                rotation = 90
+            } completion: {
+                #if DEBUG
+                os_signpost(.end, log: flipSignpostLog, name: "FlipHalf1", signpostID: signpostID)
+                let signpostID2 = OSSignpostID(log: flipSignpostLog)
+                os_signpost(.begin, log: flipSignpostLog, name: "FlipHalf2", signpostID: signpostID2)
+                #endif
+                // The swap happens right here, in the gap between the two animations — genuinely
+                // edge-on (90°, invisible either way), not on a timer that merely assumes the real
+                // ease curve is symmetric.
+                showBack = newValue
+                withAnimation(.easeOut(duration: halfDuration)) {
+                    rotation = newValue ? 180 : 0
+                } completion: {
+                    #if DEBUG
+                    os_signpost(.end, log: flipSignpostLog, name: "FlipHalf2", signpostID: signpostID2)
+                    #endif
+                    onRingsExpandedChange(false)
+                }
+            }
         }
     }
 
