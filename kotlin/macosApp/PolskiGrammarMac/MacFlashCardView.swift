@@ -180,30 +180,34 @@ struct MacFlashCardView: View {
                     .accessibilityIdentifier("ratingSwipeArea")
                 HStack(spacing: 10) {
                     Spacer()
-                    Button("Повторить") { model.send("rate", "\(exercise.id)|Again") }
-                        .keyboardShortcut("1", modifiers: [.command])
-                        .accessibilityIdentifier("rateAgain")
-                    Button("Вспомнил") { model.send("rate", "\(exercise.id)|Good") }
-                        .keyboardShortcut("2", modifiers: [.command])
-                        .buttonStyle(.borderedProminent)
-                        .accessibilityIdentifier("rateGood")
+                    RatingButton(label: "Повторить", prominent: false,
+                                 dueMs: exercise.intervals?.again, nowMs: state.now) {
+                        model.send("rate", "\(exercise.id)|Again")
+                    }
+                    .keyboardShortcut("1", modifiers: [.command])
+                    .accessibilityIdentifier("rateAgain")
+                    RatingButton(label: "Вспомнил", prominent: true,
+                                 dueMs: exercise.intervals?.good, nowMs: state.now) {
+                        model.send("rate", "\(exercise.id)|Good")
+                    }
+                    .keyboardShortcut("2", modifiers: [.command])
+                    .accessibilityIdentifier("rateGood")
+                    // D3: ArrowLeft/ArrowRight rate too, alongside ⌘1/⌘2 — hidden buttons rather
+                    // than a second `.keyboardShortcut` on the visible ones (SwiftUI only keeps the
+                    // last shortcut set on a control). Only mounted while this back face is, i.e.
+                    // only in the `Revealed` phase — the typed-answer `TextField` (where arrow keys
+                    // must move the caret, not rate) only ever exists in the `Question` phase's
+                    // `answerControls`, so the two never coexist and no extra focus-gating is needed.
+                    Button("") { model.send("rate", "\(exercise.id)|Again") }
+                        .keyboardShortcut(.leftArrow, modifiers: [])
+                        .frame(width: 0, height: 0).hidden().accessibilityHidden(true)
+                    Button("") { model.send("rate", "\(exercise.id)|Good") }
+                        .keyboardShortcut(.rightArrow, modifiers: [])
+                        .frame(width: 0, height: 0).hidden().accessibilityHidden(true)
                 }
-                .controlSize(.large)
             }
             .transition(reduceMotion ? .identity : .revealGroup(delay: 0.22))
         }
-        // FC-06/12: one gesture on the whole revealed back face for swipe-rating (macOS previously
-        // had no swipe at all — only the buttons/⌘1/⌘2 already above). `.simultaneousGesture` (not
-        // `.gesture`) keeps this from blocking the enclosing `ScrollView`'s vertical scroll. D1
-        // dropped the tap-to-flip-back gesture that used to live here — this card only expands.
-        .contentShape(Rectangle())
-        .simultaneousGesture(DragGesture(minimumDistance: 18).onEnded { gesture in
-            guard state.phase == "Revealed" else { return }
-            let x = gesture.translation.width
-            let y = gesture.translation.height
-            guard abs(x) >= 80, abs(x) > abs(y) * 1.5 else { return }
-            model.send("rate", "\(exercise.id)|\(x < 0 ? "Again" : "Good")")
-        })
     }
 }
 

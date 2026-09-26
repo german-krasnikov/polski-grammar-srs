@@ -40,6 +40,11 @@ struct MacVocabularyCardView: View {
         .background(Color(nsColor: .controlBackgroundColor), in: RoundedRectangle(cornerRadius: 18, style: .continuous))
         .overlay(RoundedRectangle(cornerRadius: 18, style: .continuous)
             .strokeBorder(Color.primary.opacity(0.09), lineWidth: 1))
+        // D3: attached here, after `.background`/`.overlay`, so the whole panel (chrome included)
+        // follows the finger, same as the flip above already moves the whole panel as one object.
+        .swipeToRate(enabled: state.revealed, reduceMotion: reduceMotion) { remembered in
+            model.vocab(remembered ? "good" : "again")
+        }
         .onChange(of: state.revealed) { _, revealed in if revealed { setFlipped(true) } }
         // A new due word always starts face-up on its question, regardless of how the previous
         // card was left — never animated, so the next word never visibly "un-flips".
@@ -89,8 +94,23 @@ struct MacVocabularyCardView: View {
             Text(item.form)
             Text(item.example)
             HStack {
-                Button("Повторить") { model.vocab("again") }
-                Button("Вспомнил") { model.vocab("good") }
+                RatingButton(label: "Повторить", prominent: false, dueMs: state.intervals?.again, nowMs: state.now) {
+                    model.vocab("again")
+                }
+                .keyboardShortcut("1", modifiers: [.command])
+                RatingButton(label: "Вспомнил", prominent: true, dueMs: state.intervals?.good, nowMs: state.now) {
+                    model.vocab("good")
+                }
+                .keyboardShortcut("2", modifiers: [.command])
+                // D3: ArrowLeft/ArrowRight rate too (+ ⌘1/⌘2 above), mirroring the training card —
+                // only mounted once flipped to this back face, i.e. only once actually revealed;
+                // this card has no typed-answer field yet to conflict with the plain arrow keys.
+                Button("") { model.vocab("again") }
+                    .keyboardShortcut(.leftArrow, modifiers: [])
+                    .frame(width: 0, height: 0).hidden().accessibilityHidden(true)
+                Button("") { model.vocab("good") }
+                    .keyboardShortcut(.rightArrow, modifiers: [])
+                    .frame(width: 0, height: 0).hidden().accessibilityHidden(true)
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)

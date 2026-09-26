@@ -197,11 +197,123 @@ untouched, `handleTap`/rotation/reveal logic untouched.
   open pending real Accessibility permission.
 - `:shared:macosArm64Test`: not run — no Kotlin files touched.
 
+## M3 — D3 swipe/keys/interval on both cards, Rive rating effect for vocabulary too
+
+**Change**: added the full D3 drag-to-rate affordance (whole card follows the finger, tint+label
+grows with distance, snap-back/fly-out), compact interval-showing rating buttons, and
+ArrowLeft/ArrowRight keyboard rating to **both** the training card (which previously had only a
+crude threshold-only `DragGesture` with no visual feedback and no keyboard arrows) and the
+vocabulary card (which had no swipe, no keyboard shortcuts and no Rive effect at all yet).
+
+- New shared `kotlin/macosApp/PolskiGrammarMac/SwipeRating.swift`:
+  - `SwipeToRate` (`ViewModifier`, via the `.swipeToRate(enabled:reduceMotion:onRating:)` extension):
+    a `DragGesture` (`.simultaneousGesture`, so it never blocks the rating buttons or the existing
+    tap-to-flip/tap-to-reveal gestures underneath) that live-translates+tilts the view it's attached
+    to, snaps back under a 70pt threshold (`.spring`), and flies it off-screen
+    (`.easeIn(0.22s)`, then off `flyingOut`) past it before calling `onRating`. Reduced-motion
+    (system or `Motion.Reduced`) skips both animations and calls back immediately. Mirrors the web
+    reference's `installSwipeCard` (`webMain/kotlin/polski/ui/WebSwipeRating.kt`).
+  - `SwipeRatingTint`: the decorative red/green tint + growing "Повторить"/"Вспомнил" label driven
+    by drag progress (`-1...1`), `allowsHitTesting(false)` so it never intercepts anything.
+  - `RatingButton`: compact (`.controlSize(.regular)`, `.bordered`/`.borderedProminent`) button
+    showing the FSRS interval preview under its label when given `dueMs`/`nowMs` — D3's "compact
+    buttons with interval stay" (vs. no rating buttons at all on touch hosts).
+  - `intervalLabel(dueMs:nowMs:)`: native Swift port of the web reference's `intervalLabel`
+    (`webMain/kotlin/polski/ui/TrainingWebApp.kt`) — pure display formatting, kept host-local
+    rather than exported from `commonMain` since this lane must not touch shared Kotlin source sets
+    for something with no domain logic.
+- **Training card** (`MacFlashCardView.swift`): removed the old bare `DragGesture(minimumDistance:
+  18).onEnded` on the back face. `.swipeToRate` is now attached instead at the `TrainingView`
+  call site around `exerciseCard(state, exercise)` (`PolskiGrammarMacApp.swift`) — deliberately
+  *outside* `contentCard`'s background/border, not inside `MacFlashCardView` itself, so the
+  transform covers the whole visible panel (chrome included), matching the vocabulary card's
+  already-whole-panel flip, not just its text content. `enabled: state.phase == "Revealed"`, same
+  guard the old gesture had. The two rating buttons became compact `RatingButton`s wired to
+  `exercise.intervals?.again`/`.good` + the newly-decoded top-level `now` (both already emitted by
+  `MacSnapshot.kt`'s existing `intervals`/`now` JSON fields — Kotlin needed no changes here, only
+  the Swift decode). Two invisible (`0×0`, `.hidden()`, `.accessibilityHidden(true)`) buttons add
+  bare `.leftArrow`/`.rightArrow` shortcuts alongside the existing ⌘1/⌘2 (a `Button` only keeps its
+  *last* `.keyboardShortcut`, so a second shortcut needs a second button) — both only mounted
+  inside the back face, i.e. only in the `Revealed` phase, which never coexists with the typed
+  answer `TextField` (`Question`-phase-only, in `answerControls`), so arrow keys there always mean
+  "move the caret", never "rate", with no extra focus-tracking needed.
+- **Vocabulary card** (`MacVocabularyCardView.swift`): `.swipeToRate(enabled: state.revealed, ...)`
+  attached after `.background`/`.overlay` in `body`, so it moves the whole flipped panel — calls
+  `model.vocab("good"/"again")`. Back-face buttons became compact `RatingButton`s (previously plain
+  `Button`s with no interval, no shortcuts) wired to the new `state.intervals?.again`/`.good` +
+  `state.now`, plus the same ⌘1/⌘2 + hidden-button ArrowLeft/ArrowRight pattern as training (no
+  typed-answer field exists yet on this card to conflict with).
+- **Rive rating effect for vocabulary** (previously: only the training card had one):
+  - `kotlin/shared/src/macosMain/kotlin/polski/macos/MacVocabularySession.kt`: added `onEffect`
+    (mirrors `MacSession.onEffect` exactly), routing `dispatch("again"/"good")` through a new
+    private `rate(rating)` that calls `cardEffectFor(rating).name` through `onEffect` **only when**
+    `session.rate(rating)` returns `true` — so a rate the domain itself rejects (not yet revealed)
+    never fires a spurious cue, same contract as the training bridge. Also extracted the session's
+    `FsrsScheduler()` into a `private val scheduler` (was inline-only) so it can be reused for the
+    new interval preview.
+  - Same file's `snapshot()`: added `now`/`intervals` (Again/Good due-epoch-millis), computed via
+    the existing shared `VocabularyCodec.preview(document, currentId, direction, scheduler, at)` —
+    only when `state.revealed`, mirroring training's own "only in the Revealed phase" scoping.
+    `commonMain` itself was **not** touched — `VocabularyCodec.preview`/`SchedulePreview` already
+    existed and are exactly what the web reference already calls for the same purpose.
+  - `PolskiGrammarMacApp.swift`'s `MacModel`: wired `vocabularySession.onEffect` to the *same*
+    `cardEffect`/`effectCounter` pair `trainingSession.onEffect` already feeds (not a second
+    published property) — the training and vocabulary cards are never both on screen at once
+    (tab-switched), so one decorative-overlay slot correctly covers both. `VocabularyView` now
+    wraps `MacVocabularyCardView` in a `ZStack` with a `RiveEffectOverlay(effect: model.cardEffect,
+    reduceMotion: cardMotionReduced)`, mirroring `TrainingView.exerciseCard`'s existing pattern.
+  - `TrainingSnapshot`/`VocabularySnapshot` (`PolskiGrammarMacApp.swift`): added the new shared
+    `RatingIntervals` decodable (`again`/`good`, keyed `"Again"`/`"Good"`) and decoded `now`/
+    `intervals` on both — `TrainingSnapshot.Exercise.intervals`/`TrainingSnapshot.now` were already
+    being *emitted* by Kotlin before this task but never decoded on the Swift side at all.
+- **Rings**: `Plans/Kotlin/FlipCardRivePlan.md`'s "remove rings.riv + ring overlay code" — verified
+  there was nothing to remove on macOS: no `rings.riv` file and no ring-related code ever existed
+  under `kotlin/macosApp/**` (`RiveEffectOverlay.swift` only ever had the `confetti`/`again`
+  view-models). No-op here; this instruction only applies to the Android/iOS/web lanes.
+- Regenerated the project (`SwipeRating.swift` added to `generate_project.rb`'s hardcoded file list,
+  same as M2 needed for its new file).
+
+**TDD**: `MacVocabularySessionTest.kt` (new) — RED first (scaffolded a no-op `onEffect` property so
+the test compiled, confirmed both cases failed with the effects list empty), then GREEN after
+wiring `rate()`. Covers: (1) a rate dispatched before `reveal` fires no effect (domain-rejected);
+(2) `good` after `reveal` fires exactly `"Remembered"`; (3) `again` fires exactly `"Again"`. No
+equivalent Kotlin-side test was needed for the training card's swipe/keys/buttons themselves — they
+dispatch the pre-existing `"rate"`/`"reveal"` commands `MacSessionTest` already covers; only the new
+vocabulary `onEffect`/`intervals` plumbing was new Kotlin behavior.
+
+**Files changed**:
+- `kotlin/macosApp/PolskiGrammarMac/SwipeRating.swift` (new).
+- `kotlin/macosApp/PolskiGrammarMac/MacFlashCardView.swift`, `MacVocabularyCardView.swift`,
+  `PolskiGrammarMacApp.swift`.
+- `kotlin/macosApp/generate_project.rb` (added `SwipeRating.swift` to the source list).
+- `kotlin/shared/src/macosMain/kotlin/polski/macos/MacVocabularySession.kt`.
+- `kotlin/shared/src/macosTest/kotlin/polski/macos/MacVocabularySessionTest.kt` (new).
+- No `commonMain`, Android, iOS or web files touched.
+
+**Verification**:
+- `./gradlew :shared:macosArm64Test` (cwd `kotlin/`, `JAVA_HOME` = JDK 21 arm64) — **PASSED**,
+  including the 2 new `MacVocabularySessionTest` cases and all pre-existing macOS shared tests
+  (`MacSessionTest`, `MacProgressRepositoryTest`, etc. — none regressed).
+- `arch -arm64 ruby kotlin/macosApp/generate_project.rb` then `xcodebuild -project
+  kotlin/macosApp/PolskiGrammarMac.xcodeproj -scheme PolskiGrammarMac -destination
+  "platform=macOS" -derivedDataPath /private/tmp/lane-macos-dd CODE_SIGNING_ALLOWED=NO build` —
+  **BUILD SUCCEEDED** (arm64).
+- Launched the built `.app` (`open`), confirmed it stayed running (`pgrep`) with no crash/error in
+  `log show --predicate 'process == "PolskiGrammarMac"'` over the run, then quit cleanly (`pkill`).
+  Full interactive click-through of the new drag/tilt/tint/keyboard behavior itself was not done —
+  same sandboxed-session Accessibility/Input-Monitoring gap M1/M2 already logged (no permission to
+  drive real mouse drags or key events via `osascript`/`CGEventPost` here) — verification for the
+  gesture/keyboard mechanics themselves is the build plus structural code review against the D3
+  spec and the web reference's `installSwipeCard`/`intervalLabel`; the Rive-effect and
+  interval-preview *data path* is additionally locked by the new `MacVocabularySessionTest`.
+
 ## Status
 
-M1 (D1) and M2 (D2) both applied and committed, plus one reviewer-requested correction to each
-(M1: scope the reveal tap gesture off interactive controls; M2: stretch the tap target/accessibility
-element to the full panel). All verified by build + structural code review against their respective
-specs/precedents; interactive click-through is the one open gap across all of them (no
-Accessibility/Input Monitoring permission in this session) — worth closing with a real XCUITest
-target or a manual pass before ship, not before the cross-lane merge.
+M1 (D1), M2 (D2) and M3 (D3) all applied and committed, plus one reviewer-requested correction each
+to M1 and M2 (M1: scope the reveal tap gesture off interactive controls; M2: stretch the tap
+target/accessibility element to the full panel). All verified by build + structural code review
+against their respective specs/precedents, plus (M3) a focused Kotlin RED→GREEN test for the new
+vocabulary Rive-effect/interval-preview plumbing. Interactive click-through of the actual
+gestures/keyboard remains the one open gap across all three (no Accessibility/Input Monitoring
+permission in this session) — worth closing with a real XCUITest target or a manual pass before
+ship, not before the cross-lane merge.

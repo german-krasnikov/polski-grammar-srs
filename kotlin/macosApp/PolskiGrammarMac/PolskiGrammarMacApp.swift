@@ -26,6 +26,9 @@ struct TrainingSnapshot: Decodable {
         let explanation: String?
         let methodFeedback: String?
         let frozenAnswer: String?
+        /// D3's rating-button interval preview (`MacSnapshot.kt`'s `intervals`), keyed by
+        /// `Rating.name` — only `Again`/`Good` are ever shown (see `RatingIntervals`).
+        let intervals: RatingIntervals?
     }
     struct Matrix: Decodable {
         struct ContrastPair: Decodable {
@@ -74,10 +77,19 @@ struct TrainingSnapshot: Decodable {
     let savedRevision: Int64
     let totalReviews: Int
     let error: String?
+    let now: Int64?
     let exercise: Exercise?
     let matrix: Matrix
     let progress: [Skill]
     let effects: [Effect]
+}
+
+/// D3's rating-button interval preview, shared by [TrainingSnapshot.Exercise] and
+/// [VocabularySnapshot] — only `Again`/`Good` are ever surfaced as rating choices.
+struct RatingIntervals: Decodable {
+    let again: Int64?
+    let good: Int64?
+    enum CodingKeys: String, CodingKey { case again = "Again"; case good = "Good" }
 }
 
 struct VocabularySnapshot: Decodable {
@@ -97,6 +109,8 @@ struct VocabularySnapshot: Decodable {
     let busy: Bool
     let error: String?
     let selectedCount: Int
+    let now: Int64?
+    let intervals: RatingIntervals?
 }
 
 struct PreferencesSnapshot: Decodable {
@@ -208,6 +222,16 @@ final class MacModel: ObservableObject {
             }
         }
         vocabularySession.onState = { [weak self] raw in Task { @MainActor in self?.consumeVocabulary(raw) } }
+        // D3: same one-shot Rive cue as training's own `trainingSession.onEffect` above, sharing
+        // `cardEffect`/`effectCounter` — the two cards are never on screen at once (tab-switched),
+        // so one decorative overlay slot covers both hosts without a second published property.
+        vocabularySession.onEffect = { [weak self] name in
+            Task { @MainActor in
+                guard let self else { return }
+                self.effectCounter += 1
+                self.cardEffect = CardEffectEvent(id: self.effectCounter, name: name)
+            }
+        }
         preferencesSession.onState = { [weak self] raw in Task { @MainActor in self?.consumePreferences(raw) } }
         consumeTraining(trainingSession.currentSnapshot())
         consumeVocabulary(vocabularySession.currentSnapshot())
@@ -428,7 +452,14 @@ private struct TrainingView: View {
                     if state.loadStatus != "Ready" {
                         recovery(state)
                     } else if let exercise = state.exercise {
+                        // D3: attached at the call site (not inside `exerciseCard`/`MacFlashCardView`
+                        // themselves) so the transform covers `contentCard`'s own background+border
+                        // too — the *whole* panel follows the finger, matching the vocabulary card's
+                        // already-whole-panel flip.
                         exerciseCard(state, exercise)
+                            .swipeToRate(enabled: state.phase == "Revealed", reduceMotion: cardMotionReduced) { remembered in
+                                model.send("rate", "\(exercise.id)|\(remembered ? "Good" : "Again")")
+                            }
                     } else {
                         completion(state)
                     }
@@ -625,7 +656,10 @@ private struct VocabularyView: View {
 
                     Text(state.coverage).foregroundStyle(.secondary)
                     if let item = state.current {
-                        MacVocabularyCardView(model: model, state: state, item: item, reduceMotion: cardMotionReduced)
+                        ZStack {
+                            MacVocabularyCardView(model: model, state: state, item: item, reduceMotion: cardMotionReduced)
+                            RiveEffectOverlay(effect: model.cardEffect, reduceMotion: cardMotionReduced)
+                        }
                     }
                     Text("Выбрано: \(state.selectedCount)")
                     ForEach(state.entries, id: \.lemma) { entry in
