@@ -761,6 +761,73 @@ final class PolskiGrammarUITests: XCTestCase {
         XCTAssertTrue(reveal.waitForExistence(timeout: 5))
     }
 
+    /// FlipCardRivePlan.md §0/FC-14: tapping the revealed card flips it purely visually — no extra
+    /// `AppAction.Rate`/`Reveal`, and flipping back never re-offers the Reveal control (the answer
+    /// stays revealed state-wise). Exactly one review still comes from the rating button afterwards.
+    func testTappingRevealedCardFlipsTwiceWithoutExtraReviewThenRatingCountsOnce() {
+        let app = XCUIApplication()
+        app.launch()
+        resetTrainingProgress(app)
+        app.buttons["Тренировка"].firstMatch.tap()
+        continueIntroductionIfPresent(app)
+        let reveal = app.buttons["revealAnswer"]
+        for _ in 0..<7 {
+            if reveal.exists && reveal.isHittable { break }
+            app.swipeUp()
+        }
+        XCTAssertTrue(reveal.isHittable)
+        reveal.tap()
+
+        let changed = app.staticTexts["Что изменилось"]
+        for _ in 0..<7 {
+            if changed.exists { break }
+            app.swipeUp()
+        }
+        XCTAssertTrue(changed.waitForExistence(timeout: 5), app.debugDescription)
+        let back = app.staticTexts["Эталон"]
+        XCTAssertTrue(back.exists)
+
+        back.tap() // Purely visual flip: back face -> front face.
+        let front = app.staticTexts["Исходное предложение"]
+        for _ in 0..<7 {
+            if front.exists { break }
+            app.swipeUp()
+        }
+        XCTAssertTrue(front.waitForExistence(timeout: 5), app.debugDescription)
+        XCTAssertFalse(app.staticTexts["Что изменилось"].exists)
+        XCTAssertFalse(app.buttons["revealAnswer"].exists,
+            "flipping back to the front must not re-offer Reveal — the answer stays revealed")
+
+        front.tap() // Flip again: front face -> back face.
+        for _ in 0..<7 {
+            if changed.exists { break }
+            app.swipeUp()
+        }
+        XCTAssertTrue(changed.waitForExistence(timeout: 5), app.debugDescription)
+
+        let good = app.buttons["rateGood"]
+        for _ in 0..<7 {
+            if good.exists && good.isHittable { break }
+            app.swipeUp()
+        }
+        XCTAssertTrue(good.isHittable)
+        good.tap()
+
+        app.buttons["Прогресс"].firstMatch.tap()
+        let total = app.descendants(matching: .any)["totalReviews"].firstMatch
+        // resetTrainingProgress scrolled this tab's list down to reach "Сбросить прогресс"; that
+        // scroll position persists across the tab switches above, so "Сводка" (and totalReviews)
+        // needs scrolling back to the top before it is on screen again.
+        for _ in 0..<8 {
+            if total.exists { break }
+            app.swipeDown()
+        }
+        // resetTrainingProgress guarantees a clean 0, so exactly one rating (through two no-op
+        // flips first) must land on exactly 1 — not 2 or more from a spurious extra review.
+        XCTAssertTrue(total.waitForExistence(timeout: 10), app.debugDescription)
+        XCTAssertTrue(total.label.hasSuffix(", 1"), total.label)
+    }
+
     func testTypedPolishAnswerUsesNativeInput() {
         #if IPAD_LANDSCAPE_ACCEPTANCE
         XCUIDevice.shared.orientation = .landscapeLeft

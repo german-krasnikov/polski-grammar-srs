@@ -1,0 +1,26 @@
+{
+  "variant": "no_animation",
+  "flip_wall_s": 50.76,
+  "rate_wall_s": 77.12,
+  "gfx": {
+    "total_frames": "929",
+    "janky_pct": "58.56",
+    "janky_legacy_pct": "85.68",
+    "p50_ms": "57",
+    "p90_ms": "81",
+    "p95_ms": "89",
+    "p99_ms": "150",
+    "missed_vsync": "258",
+    "high_input_latency": "700",
+    "slow_ui_thread": "236",
+    "deadline_missed": "544"
+  },
+  "mem_before": {
+    "pss_total_kb": 98490,
+    "rss_total_kb": 226192
+  },
+  "mem_after": {
+    "pss_total_kb": 100181,
+    "rss_total_kb": 228044
+  }
+}

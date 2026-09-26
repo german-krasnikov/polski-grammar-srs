@@ -68,6 +68,7 @@ kotlin {
         namespace = "dev.polski.grammarmatrix.compose"
         compileSdk = 37
         minSdk = 24
+        androidResources { enable = true }
     }
     js {
         browser()
@@ -114,6 +115,8 @@ kotlin {
         }
         androidMain.dependencies {
             implementation(compose.material3)
+            // FC-16: legacy RiveAnimationView/state-machine-input API — see AndroidRiveOverlay.kt.
+            implementation("app.rive:rive-android:11.12.1")
         }
     }
 }

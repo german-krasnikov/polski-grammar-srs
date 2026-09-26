@@ -24,6 +24,7 @@ import org.w3c.dom.HTMLSelectElement
 import org.w3c.dom.HTMLTextAreaElement
 import org.w3c.dom.events.Event
 import org.w3c.dom.events.KeyboardEvent
+import org.w3c.dom.events.MouseEvent
 import kotlin.random.Random
 import kotlin.time.Clock
 import polski.platform.BrowserLocalDayProvider
@@ -159,11 +160,12 @@ fun TrainingWebApp() {
     )
 }
 
-private fun editableTarget(target: Element?): Boolean {
-    val tag = target?.tagName?.uppercase()
-    return tag in setOf("INPUT", "TEXTAREA", "SELECT", "BUTTON", "A") ||
-        target?.closest("[contenteditable]") != null
-}
+// Uses closest(), not just the exact target's own tag: a click on a <button> often lands on one
+// of its child nodes (e.g. the rating buttons' <small>/<span> hint text), and callers here rely on
+// interactive ANCESTORS being excluded too (e.g. the card-flip tap handler must never toggle while
+// a rating button is mid-click).
+internal fun editableTarget(target: Element?): Boolean =
+    target?.closest("input, textarea, select, button, a, [contenteditable]") != null
 
 private fun executeEffect(root: HTMLElement, state: AppUiState, effect: UiEffect, store: TrainingStore,
                           navigate: (WebRoute) -> Unit): Boolean {
@@ -221,11 +223,26 @@ private class TrainingDomRenderer {
     var composing = false
     private val vocabulary = VocabularyWebController()
     private var navigation: WebNav? = null
+    private val riveOverlay = RiveEffectOverlay()
+
+    // The card `flipped` visual state is purely host-local (never AppUiState/FSRS, see
+    // CardEffect.kt and the plan's §0 contract) and must survive the full `content.textContent =
+    // ""` rebuild this renderer performs on most state changes (e.g. the periodic RefreshTime
+    // timer) — otherwise a manual flip-to-question would silently revert on the next tick.
+    private var flipped = false
+    private var flippedExerciseId: String? = null
 
     fun close() { navigation?.close(); navigation = null; vocabulary.close() }
 
     fun render(root: HTMLElement, state: AppUiState, route: WebRoute, returnTo: WebRoute, preferences: WebPreferencesController, store: TrainingStore, navigate: (WebRoute) -> Unit, dispatch: (AppAction) -> Unit) {
         val old = previous
+        if (state.exerciseId != flippedExerciseId) {
+            flipped = false
+            flippedExerciseId = state.exerciseId
+        } else if (old != null && old.phase == CardPhase.Question && state.phase == CardPhase.Revealed) {
+            // Showing the answer turns the card to face it; further taps only flip visually.
+            flipped = true
+        }
         if (old != null && previousRoute == route && previousPreferences == preferences.value && previousStatus == preferences.status && old.copy(draft = state.draft) == state) {
             previous = state
             return // Keep the live textarea, selection and IME composition intact.
@@ -266,7 +283,7 @@ private class TrainingDomRenderer {
         // route this host has since navigated away from.
         if (route != WebRoute.Vocabulary) vocabulary.deactivate()
         when (route) {
-            WebRoute.Training -> renderTraining(content, state, preferences.value.swipeRatingEnabled, dispatch)
+            WebRoute.Training -> renderTraining(root, content, state, preferences.value.swipeRatingEnabled, dispatch)
             WebRoute.Vocabulary -> vocabulary.render(node("main", "vocabulary-page").also(content::appendChild), preferences.value.swipeRatingEnabled) {
                 previous = null
                 render(root, state, route, returnTo, preferences, store, navigate, dispatch)
@@ -328,7 +345,7 @@ private class TrainingDomRenderer {
         appendChild(node("span", text = label))
     }
 
-    private fun renderTraining(app: HTMLElement, state: AppUiState, swipeRatingEnabled: Boolean, dispatch: (AppAction) -> Unit) {
+    private fun renderTraining(root: HTMLElement, app: HTMLElement, state: AppUiState, swipeRatingEnabled: Boolean, dispatch: (AppAction) -> Unit) {
         val main = node("main", "study-page")
         app.appendChild(main)
         if (state.loadStatus != LoadStatus.Ready) {
@@ -377,7 +394,7 @@ private class TrainingDomRenderer {
         when (state.phase) {
             CardPhase.ChainComplete -> renderChainComplete(card, state, dispatch)
             CardPhase.NoDue -> renderNoDue(card, state, dispatch)
-            CardPhase.Question, CardPhase.Revealed -> renderCard(card, state, swipeRatingEnabled, dispatch)
+            CardPhase.Question, CardPhase.Revealed -> renderCard(root, card, state, swipeRatingEnabled, dispatch)
         }
         if (state.showReference && !state.introPending) {
             val reference = node("aside", "card reference-panel")
@@ -485,7 +502,7 @@ private class TrainingDomRenderer {
         })
     }
 
-    private fun renderCard(card: HTMLElement, state: AppUiState, swipeRatingEnabled: Boolean, dispatch: (AppAction) -> Unit) {
+    private fun renderCard(root: HTMLElement, card: HTMLElement, state: AppUiState, swipeRatingEnabled: Boolean, dispatch: (AppAction) -> Unit) {
         val exercise = state.exercise ?: return
         val skill = polski.data.skillById(exercise.primarySkill)
         val presentation = polski.data.presentationBySkillId(exercise.primarySkill)
@@ -512,7 +529,7 @@ private class TrainingDomRenderer {
             })
             return
         }
-        card.appendChild(node("div", "card-front").apply {
+        val front = node("div", "card-front").apply {
             appendChild(node("span", "eyebrow", "Исходное предложение"))
             appendChild(node("p", "source-sentence").apply {
                 setAttribute("lang", "pl")
@@ -524,9 +541,65 @@ private class TrainingDomRenderer {
                 appendChild(node("p", "method-retrieve", method.retrieve))
                 appendChild(node("small", "method-lead", method.promptLead))
             })
+        }
+        if (state.phase == CardPhase.Question) {
+            card.appendChild(front)
+            renderAnswerArea(card, state, dispatch)
+            return
+        }
+        // Revealed: both faces are mounted at once in a 3D flip wrapper (FC-08). Tapping either
+        // one toggles which faces forward — purely visual local state (`flipped` above), never an
+        // AppAction and never touches CardPhase/FSRS (see the plan's §0 contract).
+        front.classList.add("card-face")
+        val back = node("div", "card-back card-face")
+        back.setAttribute("aria-live", "polite")
+        renderAnswerBack(root, back, state, swipeRatingEnabled, dispatch)
+        val flip = node("div", "card-flip")
+        val inner = node("div", "card-flip-inner")
+        flip.appendChild(inner)
+        inner.appendChild(front)
+        inner.appendChild(back)
+        card.appendChild(flip)
+        applyFlipState(inner, front, back)
+        installCardFlip(flip) { flipped = !flipped; applyFlipState(inner, front, back) }
+    }
+
+    /** Direct DOM mutation, no `render()` call — a flip must never replay the store's render cycle. */
+    private fun applyFlipState(inner: HTMLElement, front: HTMLElement, back: HTMLElement) {
+        inner.className = if (flipped) "card-flip-inner flipped" else "card-flip-inner"
+        val hidden = if (flipped) front else back
+        val shown = if (flipped) back else front
+        hidden.setAttribute("aria-hidden", "true")
+        hidden.setAttribute("inert", "")
+        shown.removeAttribute("aria-hidden")
+        shown.removeAttribute("inert")
+    }
+
+    /**
+     * Tap-to-flip on the whole card: a pointer gesture with near-zero movement toggles the face,
+     * skipping interactive descendants (buttons, the typed-answer textarea, `<select>`). A larger
+     * movement is left entirely to the rating swipe installed on the back face (FC-02/03) — this
+     * handler simply does nothing for it, so a swipe never also flips the card.
+     */
+    private fun installCardFlip(flip: HTMLElement, onToggle: () -> Unit) {
+        data class Start(val x: Int, val y: Int, val pointerId: Int)
+        var start: Start? = null
+        flip.addEventListener("pointerdown", { raw ->
+            start = if (isPrimaryPointer(raw) && !editableTarget(raw.target as? Element)) {
+                val event = raw as MouseEvent
+                Start(event.clientX, event.clientY, pointerIdentifier(raw))
+            } else null
         })
-        if (state.phase == CardPhase.Question) renderAnswerArea(card, state, dispatch)
-        else renderAnswerBack(card, state, swipeRatingEnabled, dispatch)
+        flip.addEventListener("pointerup", { raw ->
+            val origin = start
+            start = null
+            if (origin == null || !isPrimaryPointer(raw) || pointerIdentifier(raw) != origin.pointerId || editableTarget(raw.target as? Element)) return@addEventListener
+            val event = raw as MouseEvent
+            val dx = event.clientX - origin.x
+            val dy = event.clientY - origin.y
+            if (kotlin.math.abs(dx) < 10 && kotlin.math.abs(dy) < 10) onToggle()
+        })
+        flip.addEventListener("pointercancel", { start = null })
     }
 
     private fun renderAnswerArea(card: HTMLElement, state: AppUiState, dispatch: (AppAction) -> Unit) {
@@ -562,11 +635,8 @@ private class TrainingDomRenderer {
         }.apply { id = "training-reveal"; className += " reveal-button" })
     }
 
-    private fun renderAnswerBack(card: HTMLElement, state: AppUiState, swipeRatingEnabled: Boolean, dispatch: (AppAction) -> Unit) {
+    private fun renderAnswerBack(root: HTMLElement, back: HTMLElement, state: AppUiState, swipeRatingEnabled: Boolean, dispatch: (AppAction) -> Unit) {
         val exercise = state.exercise ?: return
-        val back = node("div", "card-back")
-        back.setAttribute("aria-live", "polite")
-        card.appendChild(back)
         back.appendChild(node("span", "eyebrow", "Обратная сторона · эталон"))
         back.appendChild(node("p", "answer-sentence").apply {
             setAttribute("lang", "pl")
@@ -640,6 +710,7 @@ private class TrainingDomRenderer {
             Triple(Rating.Good, "Вспомнил", "Воспроизвёл сам"),
         ).forEachIndexed { index, (rating, label, hint) ->
             ratings.appendChild(button("${index + 1} $label", extraClass = "rating-${rating.name.lowercase()}") {
+                riveOverlay.trigger(root, back, cardEffectFor(rating))
                 dispatch(AppAction.Rate(exercise.id, rating))
             }.apply {
                 appendChild(node("small", text = hint))
@@ -650,12 +721,16 @@ private class TrainingDomRenderer {
         }
         back.appendChild(node("p", "muted small", "Оценка планирует следующее повторение навыка."))
         if (swipeRatingEnabled) {
+            // The whole revealed back-face is the swipe-to-rate zone (FC-02); this label is now a
+            // purely visual direction hint, not the gesture target itself.
             back.appendChild(node("p", "vocabulary-swipe-zone muted small", "← Повторить · Вспомнил →").apply {
                 setAttribute("aria-hidden", "true")
-                installTouchSwipeRating(this) { remembered ->
-                    dispatch(AppAction.Rate(exercise.id, if (remembered) Rating.Good else Rating.Again))
-                }
             })
+            installTouchSwipeRating(back, acceptAnyPointerType = true) { remembered ->
+                val rating = if (remembered) Rating.Good else Rating.Again
+                riveOverlay.trigger(root, back, cardEffectFor(rating))
+                dispatch(AppAction.Rate(exercise.id, rating))
+            }
         }
     }
 }

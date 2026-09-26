@@ -1,0 +1,82 @@
+iOS performance pass — FlipCardRivePlan.md §5, variants A (no animation) / B (native flip only,
+Rive disabled) / C (flip + Rive). iPhone 17 Pro simulator (4384946F-9E6B-43D0-ADA3-CA219A3456B8),
+Xcode 27.0 (27A266a), HEAD a7b063c working tree (this session's own test-only additions only:
+kotlin/iosApp/PolskiGrammarUITests/FlipRivePerfUITests.swift + one line in generate_project.rb
+registering it + the regenerated PolskiGrammar.xcodeproj/scheme that follows from that — no
+production Swift/Kotlin file was touched).
+
+METHOD
+- Tests: PolskiGrammarUITests/FlipRivePerfUITests (testPerfVariantA_NoAnimation,
+  testPerfVariantB_NativeFlipOnly, testPerfVariantC_FlipPlusRive, testPerfAppLaunch). Each variant
+  test drives the app exactly the way a person would (Settings -> "Движение" picker for
+  Motion.Reduced; long-press on "Тестовая версия" for the #if DEBUG polski.debug.riveDisabled
+  toggle already in the app, per FlipCardRivePlan.md §5) — no test-only seams were added to
+  production code.
+- Per variant: reset progress, then 5 flip round-trips (back->front->back) + 5 swipe-rate cycles
+  (alternating left/right, reveal->rate->reveal), each bracketed by a `print("PERF_MARK ...")`
+  wall-clock timestamp. Variant C additionally runs 50 more rate cycles with a checkpoint every 10
+  for leak detection.
+- Command: xcodebuild -project kotlin/iosApp/PolskiGrammar.xcodeproj -scheme PolskiGrammar
+  -destination 'platform=iOS Simulator,id=4384946F-9E6B-43D0-ADA3-CA219A3456B8'
+  -derivedDataPath /private/tmp/polski-ios-perf-dd CODE_SIGNING_ALLOWED=NO
+  -only-testing:.../testPerfVariantA_NoAnimation -only-testing:.../testPerfVariantB_NativeFlipOnly
+  -only-testing:.../testPerfVariantC_FlipPlusRive test(-without-building)
+  Result: PASS 3/3 (0 failures) after two locator fixes (see "regressions found" below).
+  testPerfAppLaunch (XCTApplicationLaunchMetric) run separately: PASS 1/1.
+- Memory/CPU: NOT read from XCTMemoryMetric/XCTCPUMetric(application:) — those report only to the
+  .xcresult, not back to test code, so they can't be correlated against named checkpoints like
+  "after 50 cycles". Instead an external `ps -eo pid,rss,pcpu,args` sampler (0.5s interval, filtered
+  to the live PolskiGrammar.app process under this run's simulator UDID — see mem_poll.sh logic
+  inlined in raw-memory-samples.csv's provenance) ran throughout, and its samples were correlated
+  against the PERF_MARK timestamps (nearest sample within 5s) — see analyze step in perf-report.json.
+
+GAP AGAINST THE PLAN'S LITERAL §5 PROTOCOL (reported, not fixed — would require production code)
+FlipCardRivePlan.md §5 specifies `XCTOSSignpostMetric(...)` "around an os_signpost interval for
+flip+effect" for variants A/B/C. No os_signpost calls exist in FlashCardView.swift/
+RiveEffectOverlay.swift (confirmed absent) — adding them is a production-code change, out of this
+tester's scope ("Do not change production code"). §10's own evidence log already flags this as not
+collected ("количественные измерения — отдельный проход"). What this pass measures instead is
+UI-interaction wall-clock round-trip time (XCUITest gesture -> next expected element appearing),
+which is a coarser, real, but different quantity than a per-frame/os_signpost interval — it
+includes XCUITest's own accessibility-snapshot and event-synthesis overhead (typically 1-2s per
+step in this app on this simulator), not just the app's render time. Treat the absolute seconds in
+perf-report.json's flip/rate round-trip times as XCUITest-inflated; treat the *relative* deltas
+between variants (A vs B vs C) as the more meaningful signal, since that overhead is present in all
+three the same way.
+No true per-frame p50/p95/p99 (CADisplayLink/Instruments-Animation-Hitches-based) or dropped/janky
+frame % was collected — not attempted this pass; NOT RUN. The plan's own §5 protocol names xctrace
+("Animation Hitches" template) only for macOS, not for iOS, so this isn't a protocol gap for iOS,
+but it does mean frame-level percentiles are not available from this evidence, only the interaction
+p50/p95/p99 in perf-report.json (computed from 5 samples per variant, so p95/p99 are close to max
+of 5, not a real percentile estimate — treat as indicative only, not statistically robust).
+
+REGRESSIONS FOUND IN THE TEST HARNESS ITSELF (fixed here, harness-only, not app defects)
+1. `app.buttons["Движение"]` never matched: the Motion picker (Menu-style, same pattern as the
+   existing "Ответ, ..." picker in PolskiGrammarUITests.swift) exposes its accessibility label as
+   "Движение, <current value>", not the bare title. Fixed with a `label BEGINSWITH "Движение,"`
+   predicate, matching the codebase's own existing convention.
+2. `revealCurrentCard` didn't know about two milestone phases that a long run of rate cycles can
+   hit — "ChainComplete" (offers "Следующий набор слов"/"К повторениям") and "NoDue" (offers
+   "Потренировать цепочку" once nothing is due) — both defined in PolskiGrammarApp.swift's
+   `switch state.string("phase")`. Fixed by dismissing either the same way a person would
+   ("К повторениям" / "Потренировать цепочку") before continuing to look for "revealAnswer".
+   Neither is an app defect — a fresh `resetTrainingProgress` plus 5-65 rate cycles legitimately
+   walks through these real screens.
+
+BUNDLE/APP SIZE
+Reused Plans/Kotlin/FlipCardRivePlan.md §10's own already-collected number rather than rebuilding
+in a worktree (LEAN MODE: nothing under kotlin/iosApp/PolskiGrammar/ or the RiveRuntime SPM
+dependency changed since that measurement; this pass's own additions are confined to the
+PolskiGrammarUITests target, which ships in no App Store build and doesn't affect the app's own
+.app bundle size):
+  PolskiGrammar.app (Debug/iphonesimulator, iPhone 17 Pro, HEAD a7b063c vs this change, clean
+  derivedData): 13,004 KB -> 22,992 KB, Δ +9,988 KB (~9.75 MB), ~9.7 MB of which is
+  Frameworks/RiveRuntime.framework. Debug/simulator/unsigned/unthinned — not device- or
+  release-representative (plan's own §5 caveat).
+
+EXPLICIT CAVEAT (repeated from the plan): iPhone 17 Pro Simulator numbers are indicative only, not
+device-grade — Simulator's Metal path and CPU/thermal behavior differ from a physical device
+(RiveResearch.md §5 "Test on a low-end physical device", "simulator's Metal path is not
+representative"). RSS/%CPU come from `ps` (resident set size / a macOS decaying-average %CPU
+sample), a coarse host-level proxy, not Xcode's Memory Report "physical footprint" or a true
+CPU-time integral.

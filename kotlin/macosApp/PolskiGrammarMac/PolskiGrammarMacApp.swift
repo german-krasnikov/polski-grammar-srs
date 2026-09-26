@@ -3,7 +3,7 @@ import AppKit
 import UniformTypeIdentifiers
 import PolskiShared
 
-private struct TrainingSnapshot: Decodable {
+struct TrainingSnapshot: Decodable {
     struct HighlightPart: Decodable {
         let text: String
         let changed: Bool
@@ -80,7 +80,7 @@ private struct TrainingSnapshot: Decodable {
     let effects: [Effect]
 }
 
-private struct VocabularySnapshot: Decodable {
+struct VocabularySnapshot: Decodable {
     struct Item: Decodable { let id: String; let lemma: String; let translation: String; let form: String; let example: String; let level: String }
     struct Entry: Decodable { let id: String; let lemma: String; let translation: String; let level: String; let selected: Bool; let available: Bool }
     let loadStatus: String
@@ -99,7 +99,7 @@ private struct VocabularySnapshot: Decodable {
     let selectedCount: Int
 }
 
-private struct PreferencesSnapshot: Decodable {
+struct PreferencesSnapshot: Decodable {
     let schemaVersion: Int
     let status: String
     let method: String?
@@ -109,7 +109,7 @@ private struct PreferencesSnapshot: Decodable {
     let error: String?
 }
 
-private enum DocumentKind: String, CaseIterable, Identifiable {
+enum DocumentKind: String, CaseIterable, Identifiable {
     case progress, vocabulary, preferences
     var id: String { rawValue }
     var title: String {
@@ -144,7 +144,7 @@ private struct ErrorBanner: View {
     }
 }
 
-private struct JSONDocument: FileDocument {
+struct JSONDocument: FileDocument {
     static let readableContentTypes: [UTType] = [.json]
     var text: String
     init(text: String) { self.text = text }
@@ -158,8 +158,17 @@ private struct JSONDocument: FileDocument {
     }
 }
 
+/// A one-shot Rive rating cue (`FlipCardRivePlan.md` FC-01/FC-17/FC-20). `id` is a monotonic
+/// counter, not the rating name alone, so `.onChange(of:)` fires again even when the same rating
+/// repeats back to back (e.g. two "Good" ratings in a row) rather than being coalesced as an
+/// unchanged value. Mirrors `PolskiGrammarApp.swift`'s `CardEffectEvent`.
+struct CardEffectEvent: Equatable {
+    let id: Int
+    let name: String
+}
+
 @MainActor
-private final class MacModel: ObservableObject {
+final class MacModel: ObservableObject {
     @Published private(set) var training: TrainingSnapshot?
     @Published private(set) var vocabulary: VocabularySnapshot?
     @Published private(set) var preferences: PreferencesSnapshot?
@@ -167,6 +176,7 @@ private final class MacModel: ObservableObject {
     @Published var resetEffectId: Int64?
     @Published var exportEffectId: Int64?
     @Published var exportDocument: JSONDocument?
+    @Published var cardEffect: CardEffectEvent?
     @Published var selectedTab = "Training" {
         didSet { if oldValue != selectedTab { trainingSession.dispatch(command: "tab", value: selectedTab) } }
     }
@@ -176,6 +186,7 @@ private final class MacModel: ObservableObject {
     private var claimedEffects = Set<Int64>()
     private var vocabularyRefreshTimer: Timer?
     private var activationObserver: NSObjectProtocol?
+    private var effectCounter = 0
 
     init() {
         let root = ProcessInfo.processInfo.environment["POLSKI_MAC_DATA_DIR"]
@@ -185,6 +196,17 @@ private final class MacModel: ObservableObject {
         vocabularySession = MacVocabularySession(directory: root)
         preferencesSession = MacPreferencesSession(directory: root)
         trainingSession.onState = { [weak self] raw in Task { @MainActor in self?.consumeTraining(raw) } }
+        // FC-01/17/20: fired once per accepted rating, never stored in `training` — a decorative
+        // cue for RiveEffectOverlay, not domain data. `cardEffectFor`'s Again/Remembered mapping is
+        // computed in MacSession (Kotlin), the exact point where AppAction.Rate is dispatched, so
+        // this bridge only ever forwards a plain effect name string.
+        trainingSession.onEffect = { [weak self] name in
+            Task { @MainActor in
+                guard let self else { return }
+                self.effectCounter += 1
+                self.cardEffect = CardEffectEvent(id: self.effectCounter, name: name)
+            }
+        }
         vocabularySession.onState = { [weak self] raw in Task { @MainActor in self?.consumeVocabulary(raw) } }
         preferencesSession.onState = { [weak self] raw in Task { @MainActor in self?.consumePreferences(raw) } }
         consumeTraining(trainingSession.currentSnapshot())
@@ -295,6 +317,7 @@ private final class MacModel: ObservableObject {
         vocabularyRefreshTimer?.invalidate()
         if let activationObserver { NotificationCenter.default.removeObserver(activationObserver) }
         trainingSession.onState = nil
+        trainingSession.onEffect = nil
         vocabularySession.onState = nil
         preferencesSession.onState = nil
         trainingSession.close()
@@ -391,6 +414,11 @@ private struct MacRootView: View {
 private struct TrainingView: View {
     @ObservedObject var model: MacModel
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    // FlipCardRivePlan.md §5, variant B (flip only, Rive off) on top of the real Motion gate — a
+    // debug-only measurement toggle, never user-facing; see MacSettingsView's hidden long-press.
+    #if DEBUG
+    @AppStorage("polski.debug.riveDisabled") private var riveDisabledForMeasurement = false
+    #endif
 
     var body: some View {
         ScrollView {
@@ -417,7 +445,23 @@ private struct TrainingView: View {
         }
 
         .navigationTitle("Занятие")
-        .animation(reduceMotion || model.preferences?.motion == "Reduced" ? nil : .easeInOut(duration: 0.12), value: model.training?.phase)
+        .animation(cardMotionReduced ? nil : .easeInOut(duration: 0.12), value: model.training?.phase)
+    }
+
+    /// FC-09/12/14/20's shared reduced-motion gate: system Reduce Motion or the app's own
+    /// `Motion.Reduced` setting, the same pair already used by `.animation(...)` above — both the
+    /// card flip and the Rive overlay must snap/skip together with everything else this gates.
+    private var cardMotionReduced: Bool { reduceMotion || model.preferences?.motion == "Reduced" }
+
+    /// FC-20's Rive gate, plus the debug-only variant-B override (§5): the flip itself keeps
+    /// animating in variant B — only the Rive trigger is suppressed — so this is deliberately
+    /// separate from `cardMotionReduced`, which the flip's own animation uses unchanged.
+    private var riveEffectsSuppressed: Bool {
+        #if DEBUG
+        return cardMotionReduced || riveDisabledForMeasurement
+        #else
+        return cardMotionReduced
+        #endif
     }
 
     private var header: some View {
@@ -440,116 +484,16 @@ private struct TrainingView: View {
         }
     }
 
+    /// FC-06/12/13/14/17/20: the flip card (native `rotation3DEffect`, relocated swipe rating) and
+    /// its decorative Rive overlay both extracted into their own files — see `MacFlashCardView.swift`
+    /// (flip mechanics/gesture) and `RiveEffectOverlay.swift` (effects). `contentCard` is already a
+    /// real standalone card surface on this host, so no `Form`/`List` row-splitting workaround is
+    /// needed here, unlike iOS's `FlashCardView`.
     private func exerciseCard(_ state: TrainingSnapshot, _ exercise: TrainingSnapshot.Exercise) -> some View {
         contentCard {
-            VStack(alignment: .leading, spacing: 24) {
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("ПРЕДЛОЖЕНИЕ").font(.caption.weight(.semibold))
-                        .tracking(1.4).foregroundStyle(.secondary)
-                    highlightedText(exercise.sourceParts, before: true)
-                        .font(.system(size: 28, weight: .medium, design: .rounded))
-                        .accessibilityLabel(exercise.source)
-                        .textSelection(.enabled)
-                        .fixedSize(horizontal: false, vertical: true)
-                }
-                Divider()
-                if state.introPending {
-                    VStack(alignment: .leading, spacing: 18) {
-                        Text("Знакомство с навыком").font(.title3.weight(.semibold))
-                        Text("Посмотрите на предложение и переходите к заданию, когда будете готовы.")
-                            .foregroundStyle(.secondary)
-                        Button("Перейти к заданию") { model.send("continueIntroduction") }
-                            .buttonStyle(.borderedProminent)
-                            .controlSize(.large)
-                    }
-                } else {
-                    VStack(alignment: .leading, spacing: 12) {
-                        Text("ЗАДАНИЕ").font(.caption.weight(.semibold))
-                            .tracking(1.4).foregroundStyle(.secondary)
-                        Text(exercise.prompt ?? "").font(.title3.weight(.medium))
-                            .fixedSize(horizontal: false, vertical: true)
-                    }
-                    if state.phase == "Question" {
-                        VStack(alignment: .leading, spacing: 18) {
-                            Picker("Способ ответа", selection: Binding(
-                                get: { state.answerMode },
-                                set: { model.preference("answerMode", $0) }
-                            )) {
-                                Text("Вслух").tag("Oral")
-                                Text("Напечатать").tag("Typed")
-                            }
-                            .pickerStyle(.segmented)
-                            .padding(3)
-
-                            .frame(maxWidth: 360)
-                            if state.answerMode == "Typed" {
-                                TextField("Ответ по-польски", text: Binding(
-                                    get: { model.training?.draft ?? "" },
-                                    set: { model.send("draft", $0) }
-                                ), axis: .vertical)
-                                .textFieldStyle(.roundedBorder)
-                                .lineLimit(2...4)
-                                .font(.body)
-                            }
-                            HStack {
-                                Spacer()
-                                Button("Показать ответ") { model.send("reveal", exercise.id) }
-                                    .keyboardShortcut(.return, modifiers: [.command])
-                                    .buttonStyle(.borderedProminent)
-                                    .controlSize(.large)
-                            }
-                        }
-                    } else if state.phase == "Revealed" {
-                        VStack(alignment: .leading, spacing: 16) {
-                            Text("ОТВЕТ").font(.caption.weight(.semibold))
-                                .tracking(1.4).foregroundStyle(.secondary)
-                            highlightedText(exercise.expectedParts ?? [], before: false)
-                                .font(.title2.weight(.semibold))
-                                .accessibilityLabel(exercise.expected ?? "")
-                                .textSelection(.enabled)
-                            if let answer = exercise.frozenAnswer {
-                                Text("Ваш ответ: \(answer)").foregroundStyle(.secondary)
-                            }
-                            if let changes = exercise.changes, !changes.isEmpty {
-                                Text("Что изменилось").font(.headline)
-                                ForEach(Array(changes.enumerated()), id: \.offset) { _, change in
-                                    VStack(alignment: .leading, spacing: 3) {
-                                        (Text("Было: ")
-                                         + Text(change.from).foregroundColor(Color(nsColor: .systemRed)).underline()
-                                         + Text(" → Стало: ")
-                                         + highlightedText(change.toParts, before: false))
-                                            .textSelection(.enabled)
-                                        Text(change.reason).foregroundStyle(.secondary)
-                                    }
-                                }
-                            }
-                            if let formula = exercise.formula, !formula.isEmpty {
-                                VStack(alignment: .leading, spacing: 7) {
-                                    Text("ЗАПОМНИ").font(.caption.weight(.semibold))
-                                    Text(formula).font(.headline)
-                                    if let feedback = exercise.methodFeedback, !feedback.isEmpty {
-                                        Text(feedback)
-                                    }
-                                    if let explanation = exercise.explanation, !explanation.isEmpty {
-                                        Text(explanation)
-                                    }
-                                }
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .padding(14)
-                                .background(Color.accentColor.opacity(0.12), in: RoundedRectangle(cornerRadius: 12))
-                            }
-                            HStack(spacing: 10) {
-                                Spacer()
-                                Button("Повторить") { model.send("rate", "\(exercise.id)|Again") }
-                                    .keyboardShortcut("1", modifiers: [.command])
-                                Button("Вспомнил") { model.send("rate", "\(exercise.id)|Good") }
-                                    .keyboardShortcut("2", modifiers: [.command])
-                                    .buttonStyle(.borderedProminent)
-                            }
-                            .controlSize(.large)
-                        }
-                    }
-                }
+            ZStack {
+                MacFlashCardView(model: model, state: state, exercise: exercise, reduceMotion: cardMotionReduced)
+                RiveEffectOverlay(effect: model.cardEffect, reduceMotion: riveEffectsSuppressed)
             }
         }
     }
@@ -652,7 +596,7 @@ private struct MatrixView: View {
 
 }
 
-private func highlightedText(_ parts: [TrainingSnapshot.HighlightPart], before: Bool) -> Text {
+func highlightedText(_ parts: [TrainingSnapshot.HighlightPart], before: Bool) -> Text {
     parts.reduce(Text("")) { result, part in
         let fragment = Text(part.text)
         return result + (part.changed
@@ -744,6 +688,9 @@ private struct ProgressViewNative: View {
 private struct MacSettingsView: View {
     @ObservedObject var model: MacModel
     @Environment(\.accessibilityReduceMotion) private var systemReduceMotion
+    #if DEBUG
+    @AppStorage("polski.debug.riveDisabled") private var riveDisabledForMeasurement = false
+    #endif
     var body: some View {
         Form {
             if model.preferences?.status == "RecoveryRequired" {
@@ -777,7 +724,20 @@ private struct MacSettingsView: View {
             }
             Text("Напоминания пока недоступны").foregroundStyle(.secondary)
             DataControls(model: model)
+            // FlipCardRivePlan.md §5: a debug-only measurement toggle for variant B (native flip,
+            // Rive effects off), layered on top of the real Motion.Reduced gate — never shown in a
+            // release build, and hidden behind a long-press on this existing footer text even in
+            // debug so it never reads as a real user-facing setting (mirrors IosSettingsView).
             Text("Polski Grammar Matrix · польский ↔ русский").foregroundStyle(.secondary)
+                #if DEBUG
+                .onLongPressGesture { riveDisabledForMeasurement.toggle() }
+                #endif
+            #if DEBUG
+            if riveDisabledForMeasurement {
+                Text("Замер: Rive-эффекты отключены (вариант B)")
+                    .font(.footnote).foregroundStyle(.orange)
+            }
+            #endif
         }
         .preferredColorScheme(settingsColorScheme)
     }

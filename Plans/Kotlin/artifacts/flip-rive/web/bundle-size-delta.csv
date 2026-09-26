@@ -1,0 +1,5 @@
+file,baseline_a7b063c_gzip_bytes,head_gzip_bytes,delta_bytes
+originJsComposeApp.js,791783,792848,1065
+originWasmComposeApp.js (JS glue),99665,99732,67
+app wasm binary (compose-composeApp),744380,744917,537
+total_initial_load,1635828,1637497,1669

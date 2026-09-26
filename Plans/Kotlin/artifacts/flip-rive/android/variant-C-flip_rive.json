@@ -1,0 +1,26 @@
+{
+  "variant": "flip_rive",
+  "flip_wall_s": 41.18,
+  "rate_wall_s": 76.72,
+  "gfx": {
+    "total_frames": "1095",
+    "janky_pct": "49.04",
+    "janky_legacy_pct": "87.40",
+    "p50_ms": "46",
+    "p90_ms": "77",
+    "p95_ms": "81",
+    "p99_ms": "113",
+    "missed_vsync": "254",
+    "high_input_latency": "1025",
+    "slow_ui_thread": "224",
+    "deadline_missed": "537"
+  },
+  "mem_before": {
+    "pss_total_kb": 95432,
+    "rss_total_kb": 222624
+  },
+  "mem_after": {
+    "pss_total_kb": 99006,
+    "rss_total_kb": 226504
+  }
+}

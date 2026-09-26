@@ -229,6 +229,10 @@ test('grammar real touch completes after leaving the swipe zone', async ({ page,
   expect(x2).toBeLessThan(page.viewportSize()!.width);
   const y = zone!.y + zone!.height / 2;
   await zoneElement.evaluate(element => {
+    // The gesture listener (and setPointerCapture) now lives on the whole revealed back-face
+    // (FC-02: the swipe zone was relocated off this narrow hint label onto `.card-back`), so
+    // capture is checked on that ancestor, not on the label itself.
+    const back = element.closest('.card-back')!;
     document.addEventListener('pointerdown', raw => {
       const pointer = raw as PointerEvent;
       (window as any).__grammarTouchStart = {
@@ -236,7 +240,7 @@ test('grammar real touch completes after leaving the swipe zone', async ({ page,
         pointerId: pointer.pointerId,
         isPrimary: pointer.isPrimary,
         zoneTarget: element.contains(pointer.target as Node),
-        captured: element.hasPointerCapture(pointer.pointerId),
+        captured: back.hasPointerCapture(pointer.pointerId),
       };
     }, { once: true });
   });

@@ -285,7 +285,8 @@ private fun AndroidScreen(
                         launchMutation = session::launchVocabularyMutation,
                         enableSwipeRating = session.preferences.swipeRatingEnabled)
                 }
-                else AndroidContent(state, store::dispatch, focusReveal, ::androidDate, session.preferences.swipeRatingEnabled)
+                else AndroidContent(state, store::dispatch, focusReveal, ::androidDate, session.preferences.swipeRatingEnabled,
+                    reduceMotion = session.preferences.motion == Motion.Reduced)
                 Spacer(Modifier.height(32.dp))
             }
         }

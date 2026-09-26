@@ -1,0 +1,7 @@
+variant,path,size_kb,notes
+baseline_a7b063c,PolskiGrammarMac.app (du -sk, whole bundle),28128,git worktree /private/tmp/polski-baseline-wt, Debug arm64, CODE_SIGNING_ALLOWED=NO, clean derivedData /private/tmp/polski-mac-dd-baseline
+after_working_tree,PolskiGrammarMac.app (du -sk, whole bundle),37972,working tree at time of test, Debug arm64, CODE_SIGNING_ALLOWED=NO, clean derivedData /private/tmp/polski-mac-dd-perf
+delta,PolskiGrammarMac.app,9844,37972-28128 KB (~9.6 MB); matches developer's own §11 claim of +9824 KB within rounding
+after_working_tree,Contents/Frameworks/RiveRuntime.framework,9696,not present in baseline (no Frameworks dir at all pre-Rive)
+baseline_a7b063c,Contents/MacOS/PolskiGrammarMac.debug.dylib (bytes),28729952,ls -la
+after_working_tree,Contents/MacOS/PolskiGrammarMac.debug.dylib (bytes),28864944,ls -la

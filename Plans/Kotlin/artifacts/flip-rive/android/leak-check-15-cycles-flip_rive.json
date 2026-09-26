@@ -1,0 +1,22 @@
+[
+  {
+    "cycle": 0,
+    "pss_total_kb": 103369,
+    "rss_total_kb": 231592
+  },
+  {
+    "cycle": 5,
+    "pss_total_kb": 98125,
+    "rss_total_kb": 226404
+  },
+  {
+    "cycle": 10,
+    "pss_total_kb": 98761,
+    "rss_total_kb": 227048
+  },
+  {
+    "cycle": 15,
+    "pss_total_kb": 98333,
+    "rss_total_kb": 226656
+  }
+]

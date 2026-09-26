@@ -9,7 +9,34 @@ project.root_object.development_region = 'ru'
 
 target = project.new_target(:application, 'PolskiGrammarMac', :osx, '14.0')
 source = project.main_group.new_group('PolskiGrammarMac', 'PolskiGrammarMac')
-target.source_build_phase.add_file_reference(source.new_file('PolskiGrammarMacApp.swift'))
+%w[PolskiGrammarMacApp.swift MacFlashCardView.swift RiveEffectOverlay.swift].each do |file|
+  target.source_build_phase.add_file_reference(source.new_file(file))
+end
+
+# FC-15: confetti.riv/again.riv (vendored, byte-identical to iosApp/PolskiGrammar/Rive — see
+# THIRD_PARTY/credits.md) ride the app bundle as plain resources.
+rive_group = source.new_group('Rive', 'Rive')
+%w[confetti.riv again.riv].each do |file|
+  target.resources_build_phase.add_file_reference(rive_group.new_file(file))
+end
+
+# FC-17: rive-ios SPM package (RiveRuntime), added the same way iosApp/generate_project.rb does —
+# a remote package reference on the project, a product dependency on the target, and a build file
+# in the Frameworks phase referencing that product. rive-ios supports macOS 13.1+, below this
+# target's own 14.0 deployment target, so no bump is needed.
+rive_package = project.new(Xcodeproj::Project::Object::XCRemoteSwiftPackageReference)
+rive_package.repositoryURL = 'https://github.com/rive-app/rive-ios'
+rive_package.requirement = { 'kind' => 'upToNextMajorVersion', 'minimumVersion' => '6.27.0' }
+project.root_object.package_references << rive_package
+
+rive_product = project.new(Xcodeproj::Project::Object::XCSwiftPackageProductDependency)
+rive_product.package = rive_package
+rive_product.product_name = 'RiveRuntime'
+target.package_product_dependencies << rive_product
+
+rive_build_file = project.new(Xcodeproj::Project::Object::PBXBuildFile)
+rive_build_file.product_ref = rive_product
+target.frameworks_build_phase.files << rive_build_file
 
 script = target.new_shell_script_build_phase('Build Kotlin macOS framework')
 script.shell_script = <<~SH

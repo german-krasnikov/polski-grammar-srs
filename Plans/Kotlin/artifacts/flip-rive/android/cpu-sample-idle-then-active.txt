@@ -1,0 +1,8 @@
+ 4786 u0_a148      10 -10  16G 219M 110M S  0.0  11.0   1:12.78 dev.polski.grammarmatrix
+ 4786 u0_a148      10 -10  16G 219M 110M S  0.0  11.0   1:12.78 dev.polski.grammarmatrix
+ 4786 u0_a148      10 -10  16G 219M 110M S  0.0  11.0   1:12.78 dev.polski.grammarmatrix
+ 4786 u0_a148      10 -10  16G 219M 110M S  0.0  11.1   1:12.80 dev.polski.grammarmatrix
+ 4786 u0_a148      10 -10  16G 219M 110M S 96.1  11.1   1:12.95 dev.polski.grammarmatrix
+ 4786 u0_a148      10 -10  16G 219M 110M S  0.0  11.1   1:13.57 dev.polski.grammarmatrix
+ 4786 u0_a148      10 -10  16G 219M 110M S  3.8  11.1   1:13.57 dev.polski.grammarmatrix
+ 4786 u0_a148      10 -10  16G 219M 110M S  4.0  11.1   1:13.58 dev.polski.grammarmatrix

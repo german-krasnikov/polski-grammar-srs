@@ -4,8 +4,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.FilledTonalButton
-import androidx.compose.foundation.gestures.detectHorizontalDragGestures
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -18,14 +18,11 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
-import androidx.compose.ui.input.pointer.pointerInput
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import polski.data.courseContextHelp
@@ -44,6 +41,7 @@ import polski.presentation.AnswerMode
 import polski.presentation.AppAction
 import polski.presentation.AppTab
 import polski.presentation.AppUiState
+import polski.presentation.CardEffect
 import polski.presentation.CardPhase
 import polski.presentation.TrainingMode
 import polski.presentation.ChangeSide
@@ -56,6 +54,9 @@ import polski.training.sentenceSeeds
 import polski.ui.contrastAnnotatedText
 import polski.ui.ContrastPairText
 
+/** Debug-only escape hatch for the A/B/C measurement variants (plan §5): variant B disables Rive, keeping the flip. */
+private fun riveDisabledForMeasurement(): Boolean = System.getProperty("polski.debug.riveDisabled") == "true"
+
 @Composable
 internal fun AndroidTrainingScreen(
     state: AppUiState,
@@ -63,6 +64,7 @@ internal fun AndroidTrainingScreen(
     focusReveal: FocusRequester,
     formatDate: (Long) -> String,
     swipeRatingEnabled: Boolean = true,
+    reduceMotion: Boolean = false,
 ) {
     val introducing = state.phase == CardPhase.Question && state.introPending
     Column(verticalArrangement = Arrangement.spacedBy(18.dp)) {
@@ -155,86 +157,110 @@ internal fun AndroidTrainingScreen(
                             Text("Перейти к заданию")
                         }
                     } else {
-                    Text("ИСХОДНОЕ ПРЕДЛОЖЕНИЕ", style = MaterialTheme.typography.labelSmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant)
-                    Text(contrastAnnotatedText(sentenceHighlightParts(exercise.source, exercise.changes, ChangeSide.Before),
-                        MaterialTheme.colorScheme.error), style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.SemiBold)
-                    Surface(shape = RoundedCornerShape(18.dp), color = MaterialTheme.colorScheme.secondaryContainer,
-                        modifier = Modifier.fillMaxWidth()) {
-                        Text("${exercise.prompt}\n${method.promptLead}", modifier = Modifier.padding(16.dp),
-                            style = MaterialTheme.typography.titleMedium,
-                            color = MaterialTheme.colorScheme.onSecondaryContainer)
+                    // Flip is purely visual host-local state (plan §0/FC-10): front = question,
+                    // back = revealed answer. A single rating gate is shared by the buttons and the
+                    // back-face swipe below so exactly one gesture/tap ever rates this card (FC-07/20).
+                    var cardEffect by remember(exercise.id) { mutableStateOf<CardEffect?>(null) }
+                    val ratingGate = remember(exercise.id) { SingleRatingGate() }
+                    fun rate(rating: Rating) {
+                        val effect = ratingGate.rate(rating, reduceMotion, riveDisabledForMeasurement(), dispatch = {
+                            dispatch(AppAction.Rate(exercise.id, it))
+                        })
+                        if (effect != null) cardEffect = effect
                     }
-                    if (state.phase == CardPhase.Question) Text(method.retrieve)
-                    if (state.phase == CardPhase.Question) {
-                        AndroidChoiceMenu(
-                            "Ответ",
-                            state.answerMode.name,
-                            listOf(AnswerMode.Oral.name to "Вслух / про себя", AnswerMode.Typed.name to "Напечатать"),
-                        ) { dispatch(AppAction.SetAnswerMode(AnswerMode.valueOf(it))) }
-                        if (state.answerMode == AnswerMode.Typed) {
-                            OutlinedTextField(
-                                value = state.draft,
-                                onValueChange = { dispatch(AppAction.EditAnswer(it)) },
-                                label = { Text("Ответ по-польски") },
-                                modifier = Modifier.fillMaxWidth(),
-                                minLines = 2,
-                            )
-                        } else Text("Произнеси целое предложение, затем покажи ответ.")
-                        Button(
-                            onClick = { dispatch(AppAction.Reveal(exercise.id)) },
-                            modifier = Modifier.fillMaxWidth().focusRequester(focusReveal),
-                            shape = RoundedCornerShape(16.dp),
-                        ) { Text(if (state.answerMode == AnswerMode.Typed) "Проверить ответ" else "Показать ответ",
-                            modifier = Modifier.padding(vertical = 7.dp)) }
-                    } else {
-                        Text("Эталон", style = MaterialTheme.typography.labelLarge)
-                        Text(contrastAnnotatedText(sentenceHighlightParts(exercise.expected, exercise.changes, ChangeSide.After),
-                            MaterialTheme.colorScheme.primary), style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.SemiBold)
-                        if (exercise.accepted.isNotEmpty()) Text("Также: ${exercise.accepted.joinToString(" / ")}")
-                        if (state.answerMode == AnswerMode.Typed) {
-                            Text(if (state.evaluation?.correct == true) "Совпадает с правильным вариантом" else "Сравни свой ответ с эталоном")
-                            Text(state.frozenAnswer?.takeIf(String::isNotEmpty) ?: "Ответ не введён")
-                        }
-                        if (state.explanationMethod == ExplanationMethod.Situations) {
-                            Text(method.feedback)
-                            Text(exercise.explanation)
-                        }
-                        Text("Что изменилось", style = MaterialTheme.typography.titleMedium)
-                        exercise.changes.forEach { change ->
-                            Column {
-                                Row(horizontalArrangement = Arrangement.spacedBy(5.dp)) {
-                                    Text(contrastAnnotatedText(changeHighlightParts(change.from, change.to, ChangeSide.Before),
-                                        MaterialTheme.colorScheme.error))
-                                    Text("→")
-                                    Text(contrastAnnotatedText(changeHighlightParts(change.from, change.to, ChangeSide.After),
-                                        MaterialTheme.colorScheme.primary), fontWeight = FontWeight.Bold)
+                    Box(Modifier.fillMaxWidth()) {
+                        AndroidFlipCard(exercise.id, state.phase, reduceMotion,
+                            onRate = { rating -> if (swipeRatingEnabled) rate(rating) },
+                            front = {
+                                Column(verticalArrangement = Arrangement.spacedBy(18.dp)) {
+                                    Text("ИСХОДНОЕ ПРЕДЛОЖЕНИЕ", style = MaterialTheme.typography.labelSmall,
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant)
+                                    Text(contrastAnnotatedText(sentenceHighlightParts(exercise.source, exercise.changes, ChangeSide.Before),
+                                        MaterialTheme.colorScheme.error), style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.SemiBold)
+                                    Surface(shape = RoundedCornerShape(18.dp), color = MaterialTheme.colorScheme.secondaryContainer,
+                                        modifier = Modifier.fillMaxWidth()) {
+                                        Text("${exercise.prompt}\n${method.promptLead}", modifier = Modifier.padding(16.dp),
+                                            style = MaterialTheme.typography.titleMedium,
+                                            color = MaterialTheme.colorScheme.onSecondaryContainer)
+                                    }
+                                    Text(method.retrieve)
+                                    AndroidChoiceMenu(
+                                        "Ответ",
+                                        state.answerMode.name,
+                                        listOf(AnswerMode.Oral.name to "Вслух / про себя", AnswerMode.Typed.name to "Напечатать"),
+                                    ) { dispatch(AppAction.SetAnswerMode(AnswerMode.valueOf(it))) }
+                                    if (state.answerMode == AnswerMode.Typed) {
+                                        OutlinedTextField(
+                                            value = state.draft,
+                                            onValueChange = { dispatch(AppAction.EditAnswer(it)) },
+                                            label = { Text("Ответ по-польски") },
+                                            modifier = Modifier.fillMaxWidth(),
+                                            minLines = 2,
+                                        )
+                                    } else Text("Произнеси целое предложение, затем покажи ответ.")
+                                    Button(
+                                        onClick = { dispatch(AppAction.Reveal(exercise.id)) },
+                                        modifier = Modifier.fillMaxWidth().focusRequester(focusReveal),
+                                        shape = RoundedCornerShape(16.dp),
+                                    ) { Text(if (state.answerMode == AnswerMode.Typed) "Проверить ответ" else "Показать ответ",
+                                        modifier = Modifier.padding(vertical = 7.dp)) }
                                 }
-                                Text(change.reason, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                            }
-                        }
-                        Surface(shape = RoundedCornerShape(18.dp), color = MaterialTheme.colorScheme.tertiaryContainer,
-                            modifier = Modifier.fillMaxWidth()) {
-                            Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                                Text("ЗАПОМНИ", style = MaterialTheme.typography.labelMedium,
-                                    color = MaterialTheme.colorScheme.onTertiaryContainer)
-                                Text(skillById(exercise.primarySkill).formula, style = MaterialTheme.typography.titleMedium,
-                                    fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onTertiaryContainer)
-                                if (state.explanationMethod == ExplanationMethod.Logic) {
-                                    Text(method.feedback, color = MaterialTheme.colorScheme.onTertiaryContainer)
-                                    Text(exercise.explanation, color = MaterialTheme.colorScheme.onTertiaryContainer)
+                            },
+                            back = {
+                                Column(Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(18.dp)) {
+                                    Text("Эталон", style = MaterialTheme.typography.labelLarge)
+                                    Text(contrastAnnotatedText(sentenceHighlightParts(exercise.expected, exercise.changes, ChangeSide.After),
+                                        MaterialTheme.colorScheme.primary), style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.SemiBold)
+                                    if (exercise.accepted.isNotEmpty()) Text("Также: ${exercise.accepted.joinToString(" / ")}")
+                                    if (state.answerMode == AnswerMode.Typed) {
+                                        Text(if (state.evaluation?.correct == true) "Совпадает с правильным вариантом" else "Сравни свой ответ с эталоном")
+                                        Text(state.frozenAnswer?.takeIf(String::isNotEmpty) ?: "Ответ не введён")
+                                    }
+                                    if (state.explanationMethod == ExplanationMethod.Situations) {
+                                        Text(method.feedback)
+                                        Text(exercise.explanation)
+                                    }
+                                    Text("Что изменилось", style = MaterialTheme.typography.titleMedium)
+                                    exercise.changes.forEach { change ->
+                                        Column {
+                                            Row(horizontalArrangement = Arrangement.spacedBy(5.dp)) {
+                                                Text(contrastAnnotatedText(changeHighlightParts(change.from, change.to, ChangeSide.Before),
+                                                    MaterialTheme.colorScheme.error))
+                                                Text("→")
+                                                Text(contrastAnnotatedText(changeHighlightParts(change.from, change.to, ChangeSide.After),
+                                                    MaterialTheme.colorScheme.primary), fontWeight = FontWeight.Bold)
+                                            }
+                                            Text(change.reason, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                                        }
+                                    }
+                                    Surface(shape = RoundedCornerShape(18.dp), color = MaterialTheme.colorScheme.tertiaryContainer,
+                                        modifier = Modifier.fillMaxWidth()) {
+                                        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                                            Text("ЗАПОМНИ", style = MaterialTheme.typography.labelMedium,
+                                                color = MaterialTheme.colorScheme.onTertiaryContainer)
+                                            Text(skillById(exercise.primarySkill).formula, style = MaterialTheme.typography.titleMedium,
+                                                fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onTertiaryContainer)
+                                            if (state.explanationMethod == ExplanationMethod.Logic) {
+                                                Text(method.feedback, color = MaterialTheme.colorScheme.onTertiaryContainer)
+                                                Text(exercise.explanation, color = MaterialTheme.colorScheme.onTertiaryContainer)
+                                            }
+                                            Row(horizontalArrangement = Arrangement.spacedBy(5.dp)) {
+                                                Text(contrastAnnotatedText(changeHighlightParts(presentation.focusBefore, presentation.focusAfter, ChangeSide.Before),
+                                                    MaterialTheme.colorScheme.error))
+                                                Text("→")
+                                                Text(contrastAnnotatedText(changeHighlightParts(presentation.focusBefore, presentation.focusAfter, ChangeSide.After),
+                                                    MaterialTheme.colorScheme.primary))
+                                            }
+                                        }
+                                    }
+                                    Text(method.review)
+                                    if (swipeRatingEnabled) Text("Свайп влево — повторить · вправо — вспомнил",
+                                        style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                                    AndroidRatingActions(state, ::rate)
                                 }
-                                Row(horizontalArrangement = Arrangement.spacedBy(5.dp)) {
-                                    Text(contrastAnnotatedText(changeHighlightParts(presentation.focusBefore, presentation.focusAfter, ChangeSide.Before),
-                                        MaterialTheme.colorScheme.error))
-                                    Text("→")
-                                    Text(contrastAnnotatedText(changeHighlightParts(presentation.focusBefore, presentation.focusAfter, ChangeSide.After),
-                                        MaterialTheme.colorScheme.primary))
-                                }
-                            }
-                        }
-                        Text(method.review)
-                        AndroidRatingActions(exercise.id, state, dispatch, swipeRatingEnabled)
+                            },
+                        )
+                        AndroidRiveOverlay(cardEffect) { cardEffect = null }
                     }
                     }
                 }
@@ -249,45 +275,23 @@ internal fun AndroidTrainingScreen(
     }
 }
 
+/**
+ * Rating buttons only — the swipe-to-rate gesture now lives on the whole back-face (FC-04), sharing
+ * [onRate]'s [SingleRatingGate] with it so a swipe and a button tap can never both rate the card.
+ */
 @Composable
-private fun AndroidRatingActions(exerciseId: String, state: AppUiState, dispatch: (AppAction) -> Unit, swipeRatingEnabled: Boolean) {
-    val thresholdPx = with(LocalDensity.current) { 72.dp.toPx() }
-    var dragX by remember(exerciseId) { mutableFloatStateOf(0f) }
-    var rated by remember(exerciseId) { mutableStateOf(false) }
-    fun rate(rating: Rating) {
-        if (!rated) {
-            rated = true
-            dispatch(AppAction.Rate(exerciseId, rating))
-        }
-    }
-    val swipeModifier = if (swipeRatingEnabled) Modifier.pointerInput(exerciseId, thresholdPx) {
-        detectHorizontalDragGestures(
-            onDragStart = { dragX = 0f },
-            onHorizontalDrag = { change, amount ->
-                dragX += amount
-                change.consume()
-            },
-            onDragEnd = {
-                if (dragX <= -thresholdPx) rate(Rating.Again)
-                if (dragX >= thresholdPx) rate(Rating.Good)
-                dragX = 0f
-            },
-            onDragCancel = { dragX = 0f },
-        )
-    } else Modifier
+private fun AndroidRatingActions(state: AppUiState, onRate: (Rating) -> Unit) {
     Surface(
         shape = RoundedCornerShape(18.dp),
         color = MaterialTheme.colorScheme.surfaceContainerHigh,
-        modifier = Modifier.fillMaxWidth().then(swipeModifier),
+        modifier = Modifier.fillMaxWidth(),
     ) {
         Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
             Text("Когда повторить?", style = MaterialTheme.typography.titleMedium)
-            if (swipeRatingEnabled) Text("Свайп влево — повторить · вправо — вспомнил",
-                style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 listOf(Rating.Again to "Повторить", Rating.Good to "Вспомнил").forEach { (rating, label) ->
                     FilledTonalButton(
-                        onClick = { rate(rating) },
+                        onClick = { onRate(rating) },
                         modifier = Modifier.weight(1f),
                         shape = RoundedCornerShape(16.dp),
                     ) {

@@ -1,0 +1,49 @@
+{
+  "variant": "C",
+  "branch": "js",
+  "memory": {
+    "baselineBytes": 39600000,
+    "afterEffectsBytes": 39600000,
+    "after50CyclesBytes": 39600000
+  },
+  "flip": {
+    "cycles": 6,
+    "p50": 16.699999999999836,
+    "p95": 16.71666666666677,
+    "p99": 16.800000000000107,
+    "jankyPct": 0,
+    "droppedPct": 0
+  },
+  "swipeWithEffect": {
+    "cycles": 6,
+    "p50": 16.69999999999921,
+    "p95": 16.75,
+    "p99": 16.800000000000484,
+    "jankyPct": 0,
+    "droppedPct": 0
+  },
+  "longTasks": {
+    "count": 3,
+    "maxMs": 175,
+    "totalMs": 309
+  },
+  "riveFirstEffectLatencyMs": [
+    162,
+    153,
+    156,
+    158,
+    165,
+    149
+  ],
+  "riveResourceDurationsMs": [
+    2.400000035762787,
+    2.200000047683716,
+    3.100000023841858,
+    1.4000000357627869,
+    1.699999988079071,
+    0.6000000238418579,
+    0.5,
+    0.7000000476837158,
+    0.6000000238418579
+  ]
+}

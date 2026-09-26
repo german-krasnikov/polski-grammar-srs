@@ -9,10 +9,37 @@ project.root_object.development_region = 'ru'
 
 target = project.new_target(:application, 'PolskiGrammar', :ios, '17.0')
 source = project.main_group.new_group('PolskiGrammar', 'PolskiGrammar')
-source_ref = source.new_file('PolskiGrammarApp.swift')
-target.source_build_phase.add_file_reference(source_ref)
+%w[PolskiGrammarApp.swift FlashCardView.swift RiveEffectOverlay.swift].each do |file|
+  target.source_build_phase.add_file_reference(source.new_file(file))
+end
 assets_ref = source.new_file('Assets.xcassets')
 target.resources_build_phase.add_file_reference(assets_ref)
+
+# FC-15: confetti.riv/again.riv (vendored from rive-ios/rive-android sample assets, see
+# THIRD_PARTY/credits.md) ride the app bundle as plain resources, same as Assets.xcassets above.
+rive_group = source.new_group('Rive', 'Rive')
+%w[confetti.riv again.riv].each do |file|
+  target.resources_build_phase.add_file_reference(rive_group.new_file(file))
+end
+
+# FC-17: rive-ios SPM package (RiveRuntime), added the way xcodeproj (gem 1.27.0) exposes it —
+# a remote package reference on the project, a product dependency on the target, and a build file
+# in the Frameworks phase referencing that product (mirrors what Xcode itself writes for "Add
+# Package Dependency…"). Verified against the actual installed xcodeproj gem before writing this,
+# per the plan's §6 "xcodeproj SPM API" open risk.
+rive_package = project.new(Xcodeproj::Project::Object::XCRemoteSwiftPackageReference)
+rive_package.repositoryURL = 'https://github.com/rive-app/rive-ios'
+rive_package.requirement = { 'kind' => 'upToNextMajorVersion', 'minimumVersion' => '6.27.0' }
+project.root_object.package_references << rive_package
+
+rive_product = project.new(Xcodeproj::Project::Object::XCSwiftPackageProductDependency)
+rive_product.package = rive_package
+rive_product.product_name = 'RiveRuntime'
+target.package_product_dependencies << rive_product
+
+rive_build_file = project.new(Xcodeproj::Project::Object::PBXBuildFile)
+rive_build_file.product_ref = rive_product
+target.frameworks_build_phase.files << rive_build_file
 
 script = target.new_shell_script_build_phase('Build Kotlin framework')
 script.shell_script = <<~SH
@@ -57,6 +84,8 @@ end
 tests = project.new_target(:ui_test_bundle, 'PolskiGrammarUITests', :ios, '17.0')
 test_group = project.main_group.new_group('PolskiGrammarUITests', 'PolskiGrammarUITests')
 tests.source_build_phase.add_file_reference(test_group.new_file('PolskiGrammarUITests.swift'))
+# Tester-only perf harness for FlipCardRivePlan.md §5 (variants A/B/C); adds no production code.
+tests.source_build_phase.add_file_reference(test_group.new_file('FlipRivePerfUITests.swift'))
 tests.add_dependency(target)
 tests.build_configurations.each do |config|
   config.build_settings['SWIFT_VERSION'] = '5.0'

@@ -1,0 +1,5 @@
+again.riv raw=5428 gzip=    2740
+confetti.riv raw=4597 gzip=    2208
+rive-bridge.js raw=3635 gzip=    1515
+rive.js raw=434271 gzip=   95049
+rive.wasm raw=882456 gzip=  360770

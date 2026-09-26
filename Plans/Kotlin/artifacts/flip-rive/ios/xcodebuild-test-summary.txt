@@ -1,0 +1,26 @@
+    t =   835.71s         Checking existence of `"Эталон" StaticText`
+PERF_MARK variantC_cycle50_done 1790397034.2543988
+    t =   835.83s Tear Down
+Test Case '-[PolskiGrammarUITests.FlipRivePerfUITests testPerfVariantC_FlipPlusRive]' passed (838.026 seconds).
+Test Suite 'FlipRivePerfUITests' passed at 2026-09-26 06:30:36.470.
+	 Executed 3 tests, with 0 failures (0 unexpected) in 1191.372 (1191.375) seconds
+Test Suite 'PolskiGrammarUITests.xctest' passed at 2026-09-26 06:30:36.472.
+	 Executed 3 tests, with 0 failures (0 unexpected) in 1191.372 (1191.378) seconds
+Test Suite 'Selected tests' passed at 2026-09-26 06:30:36.474.
+	 Executed 3 tests, with 0 failures (0 unexpected) in 1191.372 (1191.379) seconds
+2026-09-26 06:30:37.017 xcodebuild[39386:35700788] [MT] IDETestOperationsObserverDebug: 1197.441 elapsed -- Testing started completed.
+2026-09-26 06:30:37.017 xcodebuild[39386:35700788] [MT] IDETestOperationsObserverDebug: 0.000 sec, +0.000 sec -- start
+2026-09-26 06:30:37.017 xcodebuild[39386:35700788] [MT] IDETestOperationsObserverDebug: 1197.441 sec, +1197.441 sec -- end
+
+Test session results, code coverage, and logs:
+	/tmp/polski-ios-perf-dd/Logs/Test/Test-PolskiGrammar-2026.09.26_06-10-39-+0200.xcresult
+
+** TEST EXECUTE SUCCEEDED **
+
+Testing started
+18:Test Case '-[PolskiGrammarUITests.FlipRivePerfUITests testPerfVariantA_NoAnimation]' started.
+598:Test Case '-[PolskiGrammarUITests.FlipRivePerfUITests testPerfVariantA_NoAnimation]' passed (170.401 seconds).
+599:Test Case '-[PolskiGrammarUITests.FlipRivePerfUITests testPerfVariantB_NativeFlipOnly]' started.
+1209:Test Case '-[PolskiGrammarUITests.FlipRivePerfUITests testPerfVariantB_NativeFlipOnly]' passed (182.946 seconds).
+1210:Test Case '-[PolskiGrammarUITests.FlipRivePerfUITests testPerfVariantC_FlipPlusRive]' started.
+3725:Test Case '-[PolskiGrammarUITests.FlipRivePerfUITests testPerfVariantC_FlipPlusRive]' passed (838.026 seconds).

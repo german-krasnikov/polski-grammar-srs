@@ -1,0 +1,32 @@
+{
+  "variant": "B",
+  "branch": "js",
+  "memory": {
+    "baselineBytes": 39600000,
+    "afterEffectsBytes": 39600000,
+    "after50CyclesBytes": 39600000
+  },
+  "flip": {
+    "cycles": 6,
+    "p50": 16.699999999999818,
+    "p95": 16.750000000000153,
+    "p99": 16.800000000000068,
+    "jankyPct": 0,
+    "droppedPct": 0
+  },
+  "swipeWithEffect": {
+    "cycles": 6,
+    "p50": 16.69999999999921,
+    "p95": 16.75,
+    "p99": 16.80000000000003,
+    "jankyPct": 0,
+    "droppedPct": 0
+  },
+  "longTasks": {
+    "count": 2,
+    "maxMs": 183,
+    "totalMs": 268
+  },
+  "riveFirstEffectLatencyMs": [],
+  "riveResourceDurationsMs": []
+}

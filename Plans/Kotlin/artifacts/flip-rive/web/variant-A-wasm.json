@@ -1,0 +1,32 @@
+{
+  "variant": "A",
+  "branch": "wasm",
+  "memory": {
+    "baselineBytes": 27600000,
+    "afterEffectsBytes": 27600000,
+    "after50CyclesBytes": 27600000
+  },
+  "flip": {
+    "cycles": 6,
+    "p50": 16.699999999999836,
+    "p95": 16.716666666666924,
+    "p99": 16.799999999999955,
+    "jankyPct": 0,
+    "droppedPct": 0
+  },
+  "swipeWithEffect": {
+    "cycles": 6,
+    "p50": 16.69999999999921,
+    "p95": 16.766666666666424,
+    "p99": 16.80000000000003,
+    "jankyPct": 0,
+    "droppedPct": 0
+  },
+  "longTasks": {
+    "count": 2,
+    "maxMs": 79,
+    "totalMs": 132
+  },
+  "riveFirstEffectLatencyMs": [],
+  "riveResourceDurationsMs": []
+}

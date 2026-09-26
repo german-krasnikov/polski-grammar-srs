@@ -1,0 +1,7 @@
+variant,branch,flip_p50_ms,flip_p95_ms,flip_p99_ms,flip_janky_pct,flip_dropped_pct,swipe_p50_ms,swipe_p95_ms,swipe_p99_ms,swipe_janky_pct,swipe_dropped_pct,longtask_count,longtask_max_ms,longtask_total_ms,rive_first_effect_latency_avg_ms,mem_baseline_bytes,mem_after_effects_bytes,mem_after_50_cycles_bytes
+A,js,16.7,16.73,16.8,0,0,16.7,16.73,16.78,0,0,3,190,363,,39600000,39600000,39600000
+A,wasm,16.7,16.72,16.8,0,0,16.7,16.77,16.8,0,0,2,79,132,,27600000,27600000,27600000
+B,js,16.7,16.75,16.8,0,0,16.7,16.75,16.8,0,0,2,183,268,,39600000,39600000,39600000
+B,wasm,16.7,16.72,16.78,0,0,16.7,16.7,16.8,0,0,2,67,117,,29400000,29400000,29400000
+C,js,16.7,16.72,16.8,0,0,16.7,16.75,16.8,0,0,3,175,309,157.2,39600000,39600000,39600000
+C,wasm,16.7,16.72,16.8,0,0,16.7,16.73,16.78,0,0,1,63,63,160.5,29400000,29400000,29400000

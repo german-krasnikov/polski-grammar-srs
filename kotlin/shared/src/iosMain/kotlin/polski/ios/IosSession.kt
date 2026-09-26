@@ -22,6 +22,7 @@ import polski.presentation.MatrixSection
 import polski.presentation.TimeCapture
 import polski.presentation.TimeSource
 import polski.presentation.TrainingStore
+import polski.presentation.cardEffectFor
 import polski.srs.FsrsScheduler
 import polski.srs.Rating
 import polski.training.ExerciseFactory
@@ -42,6 +43,16 @@ class IosSession(private val defaults: NSUserDefaults = NSUserDefaults.standardU
             field = value
             if (value != null) value(snapshot(store.state.value))
         }
+
+    /**
+     * Fires once per accepted [AppAction.Rate] with a [polski.presentation.CardEffect] name
+     * (`Remembered`/`Again`), for the host's decorative Rive overlay
+     * (`Plans/Kotlin/FlipCardRivePlan.md` FC-01/FC-17/FC-20). Never stored in the snapshot state:
+     * this is a one-shot visual cue, not domain state. Computed here — the exact point where the
+     * iOS host dispatches `AppAction.Rate` — rather than in Swift, so [cardEffectFor] stays the
+     * single source of truth and Swift never needs its own copy of the rating→effect mapping.
+     */
+    var onEffect: ((String) -> Unit)? = null
 
     init { observeAndStart() }
 
@@ -86,7 +97,14 @@ class IosSession(private val defaults: NSUserDefaults = NSUserDefaults.standardU
             "refresh" -> AppAction.RefreshTime
             else -> null
         } ?: return
+        val rateAction = action as? AppAction.Rate
         store.dispatch(action)
+        // A rate is accepted iff the store actually moved off the rated card (it may become null on
+        // ChainComplete/NoDue) — the same guard TrainingStore.rate itself uses, so a rate the domain
+        // silently drops (stale/duplicate exerciseId, wrong phase) never fires a spurious effect.
+        if (rateAction != null && store.state.value.exerciseId != rateAction.exerciseId) {
+            onEffect?.invoke(cardEffectFor(rateAction.rating).name)
+        }
     }
 
     fun acknowledgeEffect(id: Long, outcome: String) {
@@ -122,6 +140,7 @@ class IosSession(private val defaults: NSUserDefaults = NSUserDefaults.standardU
         observer?.cancel()
         store.close()
         onState = null
+        onEffect = null
         scope.cancel()
     }
 

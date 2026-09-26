@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "481A2304B237F7EC3A01A4FA"
+               BlueprintIdentifier = "7261BC28AC33B77574889DC4"
                BuildableName = "PolskiGrammarMac.app"
                BlueprintName = "PolskiGrammarMac"
                ReferencedContainer = "container:PolskiGrammarMac.xcodeproj">
@@ -30,7 +30,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "481A2304B237F7EC3A01A4FA"
+            BlueprintIdentifier = "7261BC28AC33B77574889DC4"
             BuildableName = "PolskiGrammarMac.app"
             BlueprintName = "PolskiGrammarMac"
             ReferencedContainer = "container:PolskiGrammarMac.xcodeproj">
@@ -53,7 +53,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "481A2304B237F7EC3A01A4FA"
+            BlueprintIdentifier = "7261BC28AC33B77574889DC4"
             BuildableName = "PolskiGrammarMac.app"
             BlueprintName = "PolskiGrammarMac"
             ReferencedContainer = "container:PolskiGrammarMac.xcodeproj">
@@ -70,7 +70,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "481A2304B237F7EC3A01A4FA"
+            BlueprintIdentifier = "7261BC28AC33B77574889DC4"
             BuildableName = "PolskiGrammarMac.app"
             BlueprintName = "PolskiGrammarMac"
             ReferencedContainer = "container:PolskiGrammarMac.xcodeproj">

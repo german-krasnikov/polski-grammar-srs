@@ -1,0 +1,184 @@
+{
+  "variantA": {
+    "flip_round_trip_s": {
+      "n": 5,
+      "values": [
+        5.542,
+        5.375,
+        5.281,
+        5.231,
+        5.315
+      ],
+      "p50": 5.315,
+      "p95": 5.508,
+      "p99": 5.535,
+      "mean": 5.349
+    },
+    "rate_round_trip_s": {
+      "n": 5,
+      "values": [
+        15.873,
+        16.326,
+        15.02,
+        15.695,
+        17.76
+      ],
+      "p50": 15.873,
+      "p95": 17.473,
+      "p99": 17.702,
+      "mean": 16.135,
+      "first_rate0_s": 15.873,
+      "mean_rate1_4_s": 16.2
+    },
+    "memory_rss_kb": {
+      "baseline": 362496.0,
+      "after_first_rate": 331024.0
+    },
+    "cpu_pct_sample": {
+      "baseline": 4.1,
+      "after_first_rate": 8.8
+    }
+  },
+  "variantB": {
+    "flip_round_trip_s": {
+      "n": 5,
+      "values": [
+        7.978,
+        7.374,
+        7.398,
+        7.37,
+        7.418
+      ],
+      "p50": 7.398,
+      "p95": 7.866,
+      "p99": 7.956,
+      "mean": 7.508
+    },
+    "rate_round_trip_s": {
+      "n": 5,
+      "values": [
+        16.918,
+        16.443,
+        24.402,
+        13.164,
+        17.923
+      ],
+      "p50": 16.918,
+      "p95": 23.106,
+      "p99": 24.143,
+      "mean": 17.77,
+      "first_rate0_s": 16.918,
+      "mean_rate1_4_s": 17.983
+    },
+    "memory_rss_kb": {
+      "baseline": 362880.0,
+      "after_first_rate": 373040.0
+    },
+    "cpu_pct_sample": {
+      "baseline": 16.1,
+      "after_first_rate": 44.5
+    }
+  },
+  "variantC": {
+    "flip_round_trip_s": {
+      "n": 5,
+      "values": [
+        7.304,
+        7.56,
+        7.313,
+        7.303,
+        7.508
+      ],
+      "p50": 7.313,
+      "p95": 7.549,
+      "p99": 7.558,
+      "mean": 7.397
+    },
+    "rate_round_trip_s": {
+      "n": 5,
+      "values": [
+        15.975,
+        17.542,
+        17.401,
+        12.411,
+        18.152
+      ],
+      "p50": 17.401,
+      "p95": 18.03,
+      "p99": 18.127,
+      "mean": 16.296,
+      "first_rate0_s": 15.975,
+      "mean_rate1_4_s": 16.376
+    },
+    "memory_rss_kb": {
+      "baseline": 360720.0,
+      "after_first_rate": 369296.0
+    },
+    "cpu_pct_sample": {
+      "baseline": 0.5,
+      "after_first_rate": 36.2
+    }
+  },
+  "variantC_leak_checkpoints": {
+    "variantC_baseline": {
+      "ts": 1790396245.8386831,
+      "rss_kb": 360720.0,
+      "cpu_pct_sample": 0.5
+    },
+    "variantC_rate0_end": {
+      "ts": 1790396298.8008718,
+      "rss_kb": 369296.0,
+      "cpu_pct_sample": 36.2
+    },
+    "variantC_cycle10": {
+      "ts": 1790396523.860684,
+      "rss_kb": 337296.0,
+      "cpu_pct_sample": 35.9
+    },
+    "variantC_cycle20": {
+      "ts": 1790396632.758998,
+      "rss_kb": 353104.0,
+      "cpu_pct_sample": 22.9
+    },
+    "variantC_cycle30": {
+      "ts": 1790396754.990312,
+      "rss_kb": 341056.0,
+      "cpu_pct_sample": 0.6
+    },
+    "variantC_cycle40": {
+      "ts": 1790396886.5828118,
+      "rss_kb": 288608.0,
+      "cpu_pct_sample": 24.1
+    },
+    "variantC_cycle50_done": {
+      "ts": 1790397034.2543988,
+      "rss_kb": 295968.0,
+      "cpu_pct_sample": 10.7
+    }
+  },
+  "first_effect_latency_proxy_s": {
+    "variantC_rate0_minus_variantB_rate0": -0.943,
+    "variantC_rate0_minus_variantC_mean_rate1to4": -0.401
+  },
+  "app_launch_XCTApplicationLaunchMetric_s": {
+    "all_5_measurements": [
+      10.214647000000001,
+      1.7980033340000001,
+      1.73619875,
+      1.7233373330000001,
+      1.567162458
+    ],
+    "note": "first value is a cold/simulator-boot-adjacent launch; XCTest's own default iterationCount=5",
+    "warm_launches_n4": {
+      "values": [
+        1.7980033340000001,
+        1.73619875,
+        1.7233373330000001,
+        1.567162458
+      ],
+      "p50": 1.73,
+      "p95": 1.789,
+      "mean": 1.706
+    }
+  }
+}

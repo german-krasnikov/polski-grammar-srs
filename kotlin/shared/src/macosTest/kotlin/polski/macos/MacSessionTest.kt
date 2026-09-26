@@ -102,4 +102,43 @@ class MacSessionTest {
         assertEquals(1, totalReviews(session))
         assertEquals(nextId, exerciseId(session))
     }
+
+    /**
+     * FlipCardRivePlan.md FC-01/FC-17/FC-20: the macOS host's decorative Rive overlay listens to
+     * [MacSession.onEffect], which must fire exactly once per accepted rating — with the effect
+     * `cardEffectFor` maps that [polski.srs.Rating] to — and never for a rate the domain itself
+     * drops (mirrors `IosSessionTest.rateFiresOnEffectOnceWithTheDomainsMappedEffectAndSkipsADroppedSecondRate`).
+     */
+    @Test
+    fun rateFiresOnEffectOnceWithTheDomainsMappedEffectAndSkipsADroppedSecondRate() = withSession { session ->
+        val effects = mutableListOf<String>()
+        session.onEffect = { effects.add(it) }
+
+        session.dispatch("continueIntroduction")
+        val firstId = exerciseId(session)
+        session.dispatch("reveal", firstId)
+
+        session.dispatch("rate", "$firstId|Good")
+        assertEquals(listOf("Remembered"), effects)
+        val nextId = exerciseId(session)
+        assertTrue(nextId != firstId, "a real rate must advance past the rated card")
+
+        // Same command dispatched again now targets the new, still-Question card: TrainingStore's
+        // own phase guard drops it, and onEffect must stay silent — no spurious second burst.
+        session.dispatch("rate", "$firstId|Good")
+        assertEquals(listOf("Remembered"), effects)
+    }
+
+    @Test
+    fun rateAgainFiresTheAgainEffect() = withSession { session ->
+        val effects = mutableListOf<String>()
+        session.onEffect = { effects.add(it) }
+
+        session.dispatch("continueIntroduction")
+        val firstId = exerciseId(session)
+        session.dispatch("reveal", firstId)
+        session.dispatch("rate", "$firstId|Again")
+
+        assertEquals(listOf("Again"), effects)
+    }
 }
