@@ -2,6 +2,7 @@ package polski.ui.screens
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -16,11 +17,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import polski.data.VocabularyItem
+import polski.presentation.CardEffect
 import polski.srs.Rating
 import polski.vocabulary.StudyDirection
 import polski.vocabulary.VocabularyCodec
@@ -78,18 +82,23 @@ fun AndroidVocabularyScreen(
                 }
             }
         } else {
+            var cardEffect by remember(item.id) { mutableStateOf<CardEffect?>(null) }
             val ratingGate = remember(item.id) { SingleRatingGate() }
             fun rate(rating: Rating) {
-                ratingGate.rate(rating, reduceMotion, riveDisabledForMeasurement = false) { launchMutation { session.rate(it) } }
+                val effect = ratingGate.rate(rating, reduceMotion, riveDisabledForMeasurement = false) { launchMutation { session.rate(it) } }
+                if (effect != null) cardEffect = effect
             }
-            AndroidFlipCard(
-                itemId = item.id,
-                revealed = state.revealed,
-                reduceMotion = reduceMotion,
-                onRate = ::rate,
-                front = { VocabularyFrontFace(item, state.direction, state.typed, state.draft, session) },
-                back = { VocabularyBackFace(item, state.direction, state.typed, state.draft, enableSwipeRating) },
-            )
+            Box(Modifier.fillMaxWidth()) {
+                AndroidFlipCard(
+                    itemId = item.id,
+                    revealed = state.revealed,
+                    reduceMotion = reduceMotion,
+                    onRate = ::rate,
+                    front = { VocabularyFrontFace(item, state.direction, state.typed, state.draft, session) },
+                    back = { VocabularyBackFace(item, state.direction, state.typed, state.draft, enableSwipeRating) },
+                )
+                AndroidRiveOverlay(cardEffect) { cardEffect = null }
+            }
         }
 
         VocabularyCatalog(session, launchMutation)

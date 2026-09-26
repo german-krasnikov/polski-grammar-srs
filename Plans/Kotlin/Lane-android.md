@@ -412,7 +412,44 @@ actions are declared on). Re-ran — GREEN, 4/4.
   session (reveal, both cards' swipes, tab switches, Settings toggle).
 
 **Skipped**: a live TalkBack pass (the custom-action wiring is verified at the semantics-tree level
-in `AndroidRatingDragSurfaceTest`, not with an actual screen reader); wiring a first Rive rating
-overlay into the vocabulary card (see "Rive rating effects" above — none existed before this task,
-adding one is out of this task's stated scope); `THIRD_PARTY/credits.md`'s "still used by
-Android" line (left for post-merge integration, see "Rings removed" above); D4/D5 remain untouched.
+in `AndroidRatingDragSurfaceTest`, not with an actual screen reader); `THIRD_PARTY/credits.md`'s
+"still used by Android" line (left for post-merge integration, see "Rings removed" above); D4/D5
+remain untouched.
+
+## Reviewer correction (commit 6659a2f): vocabulary card never played a Rive rating effect
+
+**Blocker**: `AndroidVocabularyScreen.kt`'s `rate()` called `ratingGate.rate(...)` and discarded the
+returned `CardEffect?` — no `cardEffect` state, no `AndroidRiveOverlay` in that file. Confetti/error
+played for training ratings only; the vocabulary card (explicitly in this task's scope) never got
+one, so the D3 "Rive effects: confetti+check on Вспомнил, error on Повторить" requirement was unmet
+for vocabulary.
+
+**Fix** (`kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidVocabularyScreen.kt`):
+mirrors `AndroidTrainingScreen.kt`'s existing wiring exactly — `var cardEffect by
+remember(item.id) { mutableStateOf<CardEffect?>(null) }`, `rate()` now captures
+`ratingGate.rate(...)`'s return and sets `cardEffect` when non-null, and the `AndroidFlipCard` call
+is wrapped in a `Box` with `AndroidRiveOverlay(cardEffect) { cardEffect = null }` as a sibling. No
+other file touched.
+
+**Checks (lane-android worktree, `kotlin/`)**:
+- `./gradlew :composeApp:compileAndroidMain` — PASS.
+- `./gradlew :androidApp:testDebugUnitTest --tests "dev.polski.grammarmatrix.AndroidFlipCardTest"
+  --tests "dev.polski.grammarmatrix.AndroidRatingDragSurfaceTest" --tests
+  "dev.polski.grammarmatrix.AndroidAnswerRevealComposeTest"` — PASS (unaffected pure-function/
+  gesture logic this wiring reuses; no new pure-function behavior was added, so no new case here —
+  see on-device check below for the actual wiring proof, the same way the original task's own
+  evidence log verified the vocabulary/training screens on-device rather than through a Compose
+  test that would need to mount the real `RiveAnimationView`).
+- `./gradlew :androidApp:assembleDebug` — PASS.
+- On-device (`emulator-5554`, fresh `pm clear` + reinstalled debug APK, driven via `adb shell input
+  tap`/`swipe`, `uiautomator dump`, `screencap`, rapid-fire screencaps around the swipe with no
+  sleep in between): selected 2 vocabulary words ("жона", "kobieta"), revealed the "жона" card,
+  swiped it right past the threshold. Captured frames show, in order: the live drag with the
+  "Вспомнил" tint/label (D3, unchanged), the screen already advanced to the next card ("женщина"),
+  and — the frame right after — a green Rive check-mark/confetti animation rendered over the
+  "женщина" card, i.e. the effect fired for the *just-rated* vocabulary card and kept playing after
+  the deck advanced (same "views are `remember(context)`-stable across the `item.id` change"
+  behavior already relied on in `AndroidTrainingScreen`). `adb logcat` showed no
+  `FATAL EXCEPTION`/`AndroidRuntime` crash across the session.
+
+**Skipped**: nothing further; this was a single self-contained wiring gap.
