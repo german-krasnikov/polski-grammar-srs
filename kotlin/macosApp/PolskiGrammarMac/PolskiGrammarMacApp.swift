@@ -73,9 +73,15 @@ struct TrainingSnapshot: Decodable {
     /// the Settings picker and the training-card quick switch.
     let styleId: String
     /// `null` while there is no current exercise (matches `styleBlocksSnapshot` in `MacSnapshot.kt`).
-    /// Only `effectiveStyleId`/`nativeContrastAvailable` are read natively so far — `blocks` itself
-    /// has no native renderer yet (a later host task, `Plans/Kotlin/StylesBlueprint.md` §6).
-    struct StyleBlocks: Decodable { let effectiveStyleId: String; let nativeContrastAvailable: Bool }
+    /// UC-10 S2: `frontBlocks`/`backBlocks` are always both present regardless of `phase` — the
+    /// card keeps its front face mounted after reveal too, so it needs its own Front blocks even
+    /// once `phase == "Revealed"` (see `MacFlashCardView`'s D1 expand-reveal).
+    struct StyleBlocks: Decodable {
+        let effectiveStyleId: String
+        let nativeContrastAvailable: Bool
+        let frontBlocks: [BlockJSON]
+        let backBlocks: [BlockJSON]
+    }
     let styleBlocks: StyleBlocks?
     let draft: String
     let introPending: Bool
@@ -98,6 +104,52 @@ struct RatingIntervals: Decodable {
     let again: Int64?
     let good: Int64?
     enum CodingKeys: String, CodingKey { case again = "Again"; case good = "Good" }
+}
+
+/// UC-10 S2: one entry of `styleBlocks.frontBlocks`/`backBlocks`, mirroring the flat `kind`-tagged
+/// shape `StyleSnapshot.kt`'s `blockToJson` writes — no sealed Kotlin type crosses the bridge, this
+/// struct just reads `kind` and the fields that kind uses (see `MacStyleBlockView.swift`). `items`
+/// is polymorphic on the Kotlin side (`[String]` for `examples`, `[{before,after,reason}]` for
+/// `changes`), hence the manual `init(from:)` splitting it into two typed, mutually-exclusive
+/// fields instead of one `Decodable`-synthesized property.
+struct BlockJSON: Decodable {
+    struct TableRow: Decodable { let label: String; let before: [TrainingSnapshot.HighlightPart]; let after: [TrainingSnapshot.HighlightPart] }
+    struct NativeParallelPair: Decodable { let native: String; let target: String; let note: String; let matches: Bool }
+    struct ChangeItem: Decodable { let before: [TrainingSnapshot.HighlightPart]; let after: [TrainingSnapshot.HighlightPart]; let reason: String }
+
+    let kind: String
+    let text: String?
+    let caption: String?
+    let rows: [TableRow]?
+    let pairs: [NativeParallelPair]?
+    let collapsedLabel: String?
+    let before: [TrainingSnapshot.HighlightPart]?
+    let after: [TrainingSnapshot.HighlightPart]?
+    let exampleItems: [String]?
+    let changeItems: [ChangeItem]?
+
+    private enum CodingKeys: String, CodingKey {
+        case kind, text, caption, rows, pairs, collapsedLabel, before, after, items
+    }
+
+    init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        kind = try c.decode(String.self, forKey: .kind)
+        text = try c.decodeIfPresent(String.self, forKey: .text)
+        caption = try c.decodeIfPresent(String.self, forKey: .caption)
+        rows = try c.decodeIfPresent([TableRow].self, forKey: .rows)
+        pairs = try c.decodeIfPresent([NativeParallelPair].self, forKey: .pairs)
+        collapsedLabel = try c.decodeIfPresent(String.self, forKey: .collapsedLabel)
+        before = try c.decodeIfPresent([TrainingSnapshot.HighlightPart].self, forKey: .before)
+        after = try c.decodeIfPresent([TrainingSnapshot.HighlightPart].self, forKey: .after)
+        if kind == "changes" {
+            exampleItems = nil
+            changeItems = try c.decodeIfPresent([ChangeItem].self, forKey: .items)
+        } else {
+            changeItems = nil
+            exampleItems = try c.decodeIfPresent([String].self, forKey: .items)
+        }
+    }
 }
 
 struct VocabularySnapshot: Decodable {

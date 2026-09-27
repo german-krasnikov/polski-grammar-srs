@@ -171,16 +171,17 @@ internal fun snapshot(state: AppUiState): String = buildJsonObject {
 
 private fun choice(id: String, title: String): JsonObject = buildJsonObject { put("id", id); put("title", title) }
 
-/** UC-10: the resolved (post-fallback) style's blocks, by the same [polski.presentation.blocksToJson]
- *  shape other snapshot sections already use. macOS S1 reads [effectiveStyleId]/`nativeContrastAvailable`
- *  for the Settings fallback hint; `blocks` itself has no native renderer yet (later host task). */
+/** UC-10 S2: the resolved (post-fallback) style's blocks, by the same [polski.presentation.blocksToJson]
+ *  shape other snapshot sections already use. Both phases are always included — not just
+ *  `state.phase`'s — because the macOS card (`MacFlashCardView`'s D1 expand-reveal) keeps the front
+ *  face mounted after reveal too, so it needs its own [StylePhase.Front] blocks even while
+ *  `state.phase == Revealed`. */
 private fun styleBlocksSnapshot(state: AppUiState): JsonElement {
     val exercise = state.exercise ?: return JsonNull
     val registry = StyleRegistry.recipes
     val recipe = registry[state.styleId] ?: return JsonNull
     val content = styleContentBySkillId(exercise.primarySkill)
     val effective = registry[StyleComposer.resolveEffectiveStyle(recipe, content, registry)] ?: recipe
-    val phase = if (state.phase == CardPhase.Revealed) StylePhase.Back else StylePhase.Front
     val skill = skillById(exercise.primarySkill)
     val focus = presentationBySkillId(exercise.primarySkill)
     return buildJsonObject {
@@ -188,7 +189,8 @@ private fun styleBlocksSnapshot(state: AppUiState): JsonElement {
         // native-contrast's only requirement (StyleComposer's isSatisfiedBy) — surfaced directly so
         // Settings can hint "no content for this skill" regardless of which style is selected now.
         put("nativeContrastAvailable", content.nativeParallel.isNotEmpty())
-        put("blocks", blocksToJson(StyleComposer.compose(effective, phase, exercise, skill, focus, content)))
+        put("frontBlocks", blocksToJson(StyleComposer.compose(effective, StylePhase.Front, exercise, skill, focus, content)))
+        put("backBlocks", blocksToJson(StyleComposer.compose(effective, StylePhase.Back, exercise, skill, focus, content)))
     }
 }
 
