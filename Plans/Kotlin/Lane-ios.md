@@ -542,3 +542,77 @@ The next session/lane step should re-run the command above (or the full
 `PolskiGrammarUITests`/`FlipCorrectnessUITests`/`VocabularyFlipUITests` regression battery, per this
 lane's own established pattern above) to turn this from "verified by inspection + Kotlin test" into
 full on-device confirmation before this lane's own work is considered done.
+
+## I8 — iPad-only failures in `testFirstMethodIntroductionKeepsReferenceAnswerHiddenUntilContinue` and `testNativeVerbGenderControlChangesSelectedSubjectOnly`
+
+**Diagnosis, not a product bug:** neither test's screen has any iPad-specific code path — no
+`NavigationSplitView`, size-class or idiom branch exists anywhere in `PolskiGrammarApp.swift`,
+`FlashCardView.swift` or `SwipeToRate.swift`; both screens are the same `Form` on every device.
+Confirmed with real RED evidence (both methods, iPad Pro 11, `-collect-test-diagnostics never` to
+keep each iteration under a minute instead of the default ~10-minute sysdiagnose collection):
+
+- `testFirstMethodIntroductionKeepsReferenceAnswerHiddenUntilContinue`: `rateViaSwipe`'s existing
+  10-swipe hunt for `ratingSwipeArea` failed with XCTest's own `"Failed to get matching snapshot:
+  No matches found"` — not merely off-screen, genuinely unmounted from the lazy `Form`. Raising the
+  count to 16 made it *worse*: the debug snapshot at failure showed the viewport sitting at the
+  screen's absolute last row (the reference table's "Все таблицы и schema" button, then the tab
+  bar) with the zone never having existed — the fixed-size `app.swipeUp()` convenience covers
+  proportionally more content on iPad Pro 11's taller frame than on iPhone, so the same count that
+  reliably lands inside the zone's narrow mounted window on iPhone jumps clean over it on iPad.
+- `testNativeVerbGenderControlChangesSelectedSubjectOnly`: the original file's line 716 (shifted by
+  this lane's earlier I6/I7 edits) was the *final* assertion — `"Было: robić; Стало: robił"` waited
+  for plainly, with no scroll at all, right after a swipe loop that found the *adjacent* `"on — он"`
+  label. That adjacent pair straddled the lazy Form's mount boundary on iPad only.
+
+**Fix (test-only, `PolskiGrammarUITests.swift`):** for the second test, added the same
+scroll-until-exists loop already used for every other lookup in the file before the final
+assertion — a plain omission, not a device-specific branch.
+
+For `rateViaSwipe`, the real story took several iterations to land on, each with its own RED
+evidence, because the first few plausible-looking fixes reproduced *worse* than the original:
+
+1. A fixed swipe count in one direction (10, then 16) sometimes scrolled clean *past* the zone's
+   narrow mounted window in a lazy `Form` before ever reading it — a debug snapshot at failure
+   showed the viewport at the screen's absolute last row (the reference table's own last button,
+   then the tab bar), zone never having existed. Raising the count only got there faster.
+2. A "self-correcting" hunt (reverse direction once the zone is seen to exist, then vanish) doesn't
+   help if the zone is *never* seen existing in the first place — which turned out to be the
+   dominant failure mode: a debug snapshot taken right after `reveal.tap()` (before any scrolling)
+   showed the zone already mounted with a small **negative**-Y frame, i.e. just above the top edge.
+   A full-screen `app.swipeUp()` moves far more than that frame's own height, so the very first
+   guess (forward, matching every simpler screen) throws it straight out of the lazy `Form`'s mount
+   buffer before the loop ever gets a true reading — after that it stays unmounted for the rest of a
+   one-directional hunt, no matter the budget (reproduced failing at both 15 and 25 iterations, and
+   with an 8s pre-hunt settle wait that made no difference).
+3. The actual fix: before falling back to the normal forward `swipeUp()` hunt every other call site
+   already uses (the common case — below the fold, needs real distance), probe a few small,
+   coordinate-based nudges (~15% of the screen, alternating up/down) that cannot by themselves evict
+   a borderline-mounted zone from the buffer. One of these nudges lands inside the zone's window
+   directly; if neither does, it truly is below the fold and the longer forward hunt takes over.
+   Also switched the query from `app.descendants(matching: .any)["ratingSwipeArea"]` to the
+   narrower `app.staticTexts["ratingSwipeArea"]` (its own concrete type, confirmed in a debug
+   snapshot) — the broad `.any` query over this screen's huge tree (the case-declension table alone
+   is 35+ elements) was measurably slower to resolve and added its own timing uncertainty on top.
+
+Neither test's screen has any iPad-specific code path — no `NavigationSplitView`, size-class or
+idiom branch exists anywhere in `PolskiGrammarApp.swift`, `FlashCardView.swift` or
+`SwipeToRate.swift`; both screens are the same `Form` on every device, and the same domain logic
+(the reveal, the rating) never once failed on iPhone across the whole investigation. This is a test
+scroll-hunt problem specific to how a scripted swipe interacts with a lazy `Form`'s mount buffer on
+a heavy screen and a taller frame, not a layout defect a real user reveals or rates their way into.
+
+**Verification:** every run reinstalled a clean app (`xcrun simctl uninstall …
+dev.polski.grammarmatrix.ios`) first; `-collect-test-diagnostics never` kept each iteration under a
+minute instead of the default ~10-minute sysdiagnose collection.
+
+| Check | Device | Result |
+|---|---|---|
+| RED, test 1 alone (10-swipe hunt) | iPad Pro 11 | FAILED — snapshot not found |
+| RED, test 1 alone (16-swipe hunt) | iPad Pro 11 | FAILED — worse, bottomed out past it |
+| RED, test 2 alone (no scroll before final assert) | iPad Pro 11 | FAILED at the `robił` assertion |
+| RED, both together (self-correcting nudge hunt, cap 40) | iPad Pro 11 | FAILED — one run needed 2 nudges, the very next needed the full budget and narrowly missed |
+| RED, test 1 alone (settle wait + direction-from-frame, no probe) | iPad Pro 11 | FAILED ×2 more, incl. after a fresh `simctl boot` |
+| RED, both together (settle wait + retry wrapper, no probe) | iPad Pro 11 | FAILED — never once saw the zone exist across 2 full attempts |
+| GREEN, both together (final fix: small-nudge probe + forward hunt) | iPad Pro 11 | PASSED — 4 consecutive combined runs, one after a fresh `simctl boot` |
+| GREEN, both together (final fix) | iPhone 17 Pro | PASSED (105.1s, 0 failures) |
+Not run (lean mode, unaffected by this change): the rest of `PolskiGrammarUITests`, `FlipCorrectnessUITests`, `VocabularyFlipUITests`, Android/macOS/web hosts.

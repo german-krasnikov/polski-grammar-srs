@@ -506,6 +506,10 @@ private struct IosSettingsView: View {
                         Text("Вслух").tag("Oral")
                         Text("Напечатать").tag("Typed")
                     }
+                    // Distinct from the training screen's own "Ответ" picker (FlashCardView),
+                    // which stays mounted under this sheet and shares the same label — a
+                    // label-based query can't tell them apart. See testAnswerModeChosenInSettingsSurvivesAppRestart.
+                    .accessibilityIdentifier("settingsAnswerModePicker")
                 }
                 Section("Внешний вид") {
                     Picker("Тема", selection: Binding(
