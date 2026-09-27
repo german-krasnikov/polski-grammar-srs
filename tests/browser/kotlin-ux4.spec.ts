@@ -290,9 +290,18 @@ test('capture front/back, mid-swipe and tab-switch screenshots for the v4 eviden
     // UX5: the tab switch slides via RouteSlider over ~320ms — wait for the outgoing layer to be
     // removed and the incoming one to settle back to a single plain `.route-content` before
     // shooting, or the PNG captures a mid-slide frame instead of the resting "progress" screen.
+    // One `evaluateAll` poll, not a `count()` poll followed by a separate `.evaluate()` poll: the
+    // two-poll form is flaky under load (RED) — `count()` briefly reads 1 both BEFORE the slide's
+    // deferred incoming layer is even appended and AFTER it settles, so a slow first poll can
+    // resolve on the pre-slide "1" while the transition is still genuinely running; the follow-up
+    // `.evaluate()` then hits 2 elements, throws a strict-mode violation on its very first
+    // attempt, and `expect.poll` never retries a thrown error the way it retries a mismatched
+    // value. `evaluateAll` never enforces strict mode, so this single poll just keeps retrying
+    // the real settled/not-settled boolean until the transition actually finishes.
     const routeViewport = page.locator('.route-viewport');
-    await expect.poll(() => routeViewport.locator(':scope > .route-content').count()).toBe(1);
-    await expect.poll(() => routeViewport.locator(':scope > .route-content').evaluate(el => el.getAttribute('style') || '')).toBe('');
+    await expect.poll(() => routeViewport.locator(':scope > .route-content').evaluateAll(
+      layers => layers.length === 1 && (layers[0].getAttribute('style') ?? '') === '',
+    )).toBe(true);
     await shoot(viewport, `tabs-progress-${theme}`);
   }
   console.log('UX4 evidence screenshots:', shots.join(', '));
@@ -314,10 +323,13 @@ test('UX5: a tab switch slides via transform on two layers, never a textContent 
     nodes => nodes.map(n => getComputedStyle(n as Element).transform),
   );
   expect(transforms.some(t => t !== 'none' && t !== 'matrix(1, 0, 0, 1, 0, 0)')).toBe(true);
-  // Settled: back to exactly one, showing the new route, with no leftover inline styling.
-  await expect.poll(() => viewport.locator(':scope > .route-content').count()).toBe(1);
-  const settled = viewport.locator(':scope > .route-content');
-  await expect.poll(() => settled.evaluate(el => el.getAttribute('style') || '')).toBe('');
+  // Settled: back to exactly one, showing the new route, with no leftover inline styling. One
+  // `evaluateAll` poll, not `count()` then a separate `.evaluate()` — see the longer comment on
+  // this pattern in the evidence-log test above (`expect.poll` never retries a thrown strict-mode
+  // violation, only a mismatched value).
+  await expect.poll(() => viewport.locator(':scope > .route-content').evaluateAll(
+    layers => layers.length === 1 && (layers[0].getAttribute('style') ?? '') === '',
+  )).toBe(true);
   await expect(page.getByRole('heading', { name: 'Слова и выражения' })).toBeVisible();
 });
 
@@ -372,9 +384,9 @@ test('UX5: rapid consecutive tab clicks settle cleanly on the last destination, 
   await page.getByRole('button', { name: 'Прогресс', exact: true }).click();
   await expect(page).toHaveURL(/#\/progress$/);
   const viewport = page.locator('.route-viewport');
-  await expect.poll(() => viewport.locator(':scope > .route-content').count()).toBe(1);
-  const settled = viewport.locator(':scope > .route-content');
-  await expect.poll(() => settled.evaluate(el => el.getAttribute('style') || '')).toBe('');
+  await expect.poll(() => viewport.locator(':scope > .route-content').evaluateAll(
+    layers => layers.length === 1 && (layers[0].getAttribute('style') ?? '') === '',
+  )).toBe(true);
   await expect(page.getByRole('heading', { name: 'Прогресс', exact: true })).toBeVisible();
   // Settings/vocabulary-only elements from an earlier destination must not linger either.
   await expect(page.locator('#settings-return')).toHaveCount(0);
