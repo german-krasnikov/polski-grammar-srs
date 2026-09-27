@@ -540,6 +540,76 @@ final class PolskiGrammarUITests: XCTestCase {
         }
     }
 
+    /// EmphasisUXAudit E6/C2: "Карта системы" cards used to show their `żona → żonę → żony` chain
+    /// as one flat `example` string with no morpheme-level marking. Each card's `steps` (structured
+    /// pack data, C2) now render as one `NativeContrastPairView` per arrow — same "Было: … Стало:
+    /// …" accessible-name contract every other before/after pair in this app already exposes
+    /// (`testNativeContrastSupportPairsHaveOrderedAccessibleNames` above).
+    func testSystemMapCardsShowStepByStepContrastPairs() {
+        let app = XCUIApplication()
+        app.launch()
+        app.buttons["Матрица"].firstMatch.tap()
+        for name in [
+            "Было: żona; Стало: żonę",
+            "Было: żonę; Стало: żony",
+            "Было: moja piękna; Стало: moją piękną",
+            "Было: widzę; Стало: widziałem",
+            "Было: widziałem; Стало: będę widzieć",
+            "Было: Widzę…; Стало: Nie widzę…",
+            "Было: Nie widzę…; Стало: Czy widzę…?",
+        ] {
+            let pair = app.descendants(matching: .any)[name].firstMatch
+            for _ in 0..<18 {
+                if pair.exists { break }
+                app.swipeUp()
+            }
+            XCTAssertTrue(pair.waitForExistence(timeout: 5), name)
+        }
+    }
+
+    /// ContrastHighlightPlan.md §"Контракт выделения" point 3, checked visually (the accessible-name
+    /// assertion above already proves the data reaches Swift; this proves `EmphasisRole`'s dashed/
+    /// solid tokens actually render on this screen too, not just on the training sentence —
+    /// `testEmphasisTokensRenderInLightAndDarkTheme` above is this test's sibling for that screen).
+    func testSystemMapCardsRenderDashedBeforeSolidAfterInLightAndDarkTheme() {
+        let app = XCUIApplication()
+        app.launch()
+        app.buttons["Матрица"].firstMatch.tap()
+        XCTAssertTrue(app.descendants(matching: .any)["Было: żona; Стало: żonę"].firstMatch.waitForExistence(timeout: 10))
+
+        func setTheme(_ label: String) {
+            app.buttons["openSettings"].tap()
+            let theme = app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", "Тема")).firstMatch
+            for _ in 0..<7 {
+                if theme.isHittable { break }
+                app.swipeDown()
+            }
+            XCTAssertTrue(theme.isHittable, app.debugDescription)
+            guard !theme.label.contains(label) else {
+                app.buttons["Готово"].tap()
+                return
+            }
+            theme.tap()
+            let option = app.descendants(matching: .any)[label].firstMatch
+            XCTAssertTrue(option.waitForExistence(timeout: 5))
+            option.tap()
+            app.buttons["Готово"].tap()
+        }
+        func captureMapCard(_ name: String) {
+            XCTAssertTrue(app.descendants(matching: .any)["Было: żona; Стало: żonę"].firstMatch.exists)
+            let shot = XCTAttachment(screenshot: app.screenshot())
+            shot.name = name
+            shot.lifetime = .keepAlways
+            add(shot)
+        }
+
+        setTheme("Светлая")
+        captureMapCard("system-map-steps-light")
+        setTheme("Тёмная")
+        captureMapCard("system-map-steps-dark")
+        setTheme("Системная") // restore the default for later tests in this run.
+    }
+
     func testNativeGeneratedCaseContrastKeepsFullWordsInSemantics() {
         let app = XCUIApplication()
         app.launch()

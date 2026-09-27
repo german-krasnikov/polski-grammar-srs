@@ -907,9 +907,17 @@ private struct MatrixView: View {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(card.string("title")).font(.headline)
                     Text(card.string("explanation"))
-                    Text(card.string("example")).font(.footnote).textSelection(.enabled)
+                    // C2/EmphasisUXAudit E6: the żona → żonę → żony chain used to show as one flat
+                    // `example` string. Each authored `steps` arrow (structured pack data) now
+                    // renders through the same NativeContrastPairView every other before/after pair
+                    // in this app uses — these cards sit outside the exercise reveal gate (they are
+                    // reference material, not an exercise's own answer), so showing every step's
+                    // "Стало" here is the emphasis contract's stated exception, not an answer leak.
+                    ForEach(Array(card.rows("steps").enumerated()), id: \.offset) { step in
+                        NativeContrastPairView(pair: step.element)
+                    }
                 }
-                .accessibilityElement(children: .combine)
+                .accessibilityElement(children: .contain)
             }
         }
         Section("Одна мысль, пять преобразований") {

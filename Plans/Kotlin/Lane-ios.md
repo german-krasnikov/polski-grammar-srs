@@ -616,3 +616,87 @@ minute instead of the default ~10-minute sysdiagnose collection.
 | GREEN, both together (final fix: small-nudge probe + forward hunt) | iPad Pro 11 | PASSED — 4 consecutive combined runs, one after a fresh `simctl boot` |
 | GREEN, both together (final fix) | iPhone 17 Pro | PASSED (105.1s, 0 failures) |
 Not run (lean mode, unaffected by this change): the rest of `PolskiGrammarUITests`, `FlipCorrectnessUITests`, `VocabularyFlipUITests`, Android/macOS/web hosts.
+
+## I2 (EmphasisUXAudit) — C2 system-map step chain; S4 style-block parts blocked
+
+Separate numbering from I1-I8 above (`FlipCardRivePlan.md` D-numbering) — this section is the
+[EmphasisUXAudit-2026-09-27.md](EmphasisUXAudit-2026-09-27.md)/[ContrastHighlightPlan.md
+§"Контракт выделения"](ContrastHighlightPlan.md) lane, whose own "I1" is commit `eeb5ea6`
+("dashed before / cool after emphasis on FlashCardView" — the main sentence only; not logged here).
+
+**C2, done — system-map step chain.** `MatrixView.map`'s "Карта системы" cards
+(`PolskiGrammarApp.swift`) showed their `żona → żonę → żony` chain as one flat, unhighlighted
+`example` string (E6). `ReferenceSystemCard.steps`/`IosSnapshot.kt`'s `systemCards[].steps` (C2,
+commit `ef66020`, already merged) were already exporting each arrow as a full `ContrastPair`
+(`from`/`to`/`beforeParts`/`afterParts`) — Kotlin-side coverage already existed
+(`IosMatrixSnapshotTest.nativeMatrixReceivesOrderedSystemCards`/
+`…HighlightsOnlyTheInsertedOrReplacedParticleOnTheModifiersCard`); only the Swift consumer hadn't
+caught up. Fix: each card's `steps` now render one `NativeContrastPairView` per arrow — the same
+dashed-red-before/solid-teal-after `EmphasisRole` pair view every other before/after comparison in
+this app already uses — instead of a flat `Text`. These cards sit outside the exercise reveal gate
+(reference material, not the current exercise's own answer), so showing every step's "Стало" here
+is the emphasis contract's stated exception (§4), not an answer leak. The card's outer
+`accessibilityElement` switched `.combine` → `.contain` (matching `comparisonRow`'s own pattern
+elsewhere in this file) so each pair's own "Было: …; Стало: …" accessible name survives instead of
+being flattened into one combined label. One file changed: `PolskiGrammarApp.swift`.
+
+**S4, blocked — style-block parts (Formula/Rule/Scene/NativeParallel/Examples/WhyOnDemand).** E7
+asks these six `Block` kinds' own prose to highlight the literal `from`/`to` phrase they quote, the
+same way `Block.Table`/`Block.Changes` already do via `styledParts`/`EmphasisRole`
+(`FlashCardView.swift:201-351`) — that shared primitive already exists and needs no iOS-side design
+work. The blocker is upstream: at the time of this task, `kotlin/shared/src/commonMain/kotlin/
+polski/presentation/{Block,StyleComposer,StyleSnapshot}.kt` and `CourseData.kt` carried this exact
+change (`Block.Formula`/`Rule`/`Scene`/`WhyOnDemand` gaining a `parts: List<EndingPart>` field,
+`Examples` an `itemParts: List<List<EndingPart>>`, `NativeParallelPair` a `targetParts`) only as
+**uncommitted working-tree edits in the main checkout** (`/Users/german/Work/JS/
+polski-grammar-srs`, not this lane's own `commonMain`, not on any branch) — confirmed still
+uncommitted right before this entry was written (`git status` there). This lane's own scope is
+`kotlin/iosApp` (+ `iosMain` bridge) only, `commonMain` belongs to the shared lane, and copying
+someone else's active uncommitted diff into this branch risks a second, divergent implementation of
+the same contract landing before theirs commits. Two things worth flagging to whoever picks S4 up:
+(1) `Block.Table`/`Block.Changes` already prove the wire shape (`{"text": …, "changed": bool}` — no
+before/after side per part) works for a two-column before/after row; `styleTextHighlightParts`'s
+own doc comment, though, builds one *flat* list for one prose string that can contain a `from`
+match *and* a `to` match in the same sentence, and `{text, changed}` alone can't tell which of the
+two a given `changed` run belongs to once flattened — that ambiguity needs resolving (e.g. a role
+tag per part, or two separate arrays) before a host can safely color it red-dashed vs. teal-solid.
+(2) once landed, the Swift-side change is small and self-contained: `styleBlockView`'s `switch`
+(`FlashCardView.swift:361-372`) passes each new field straight to its `Style*Block` view, which
+swaps its plain `Text(text)` for `styledParts(...)` (or a small mixed-role variant once (1) is
+resolved) — no new plumbing, `IosSnapshot.kt` needs no change beyond whatever `blocksToJson` already
+emits. Not started; no Swift files touched for S4.
+
+**New/changed tests:**
+- `testSystemMapCardsShowStepByStepContrastPairs` (new) — all 4 system-map cards' step arrows
+  (`noun`, `agreement`, `verb`, `modifiers`) expose the same "Было: …; Стало: …" accessible name
+  contract as every other contrast pair (`testNativeContrastSupportPairsHaveOrderedAccessibleNames`,
+  same file). RED first (0/7 names found against the pre-fix flat-`Text` card), GREEN after the fix.
+- `testSystemMapCardsRenderDashedBeforeSolidAfterInLightAndDarkTheme` (new) — sibling of
+  `testEmphasisTokensRenderInLightAndDarkTheme` for this screen: navigates to "Карта системы",
+  switches Светлая/Тёмная, screenshots both (`XCTAttachment`, `.keepAlways`). Screenshots pulled
+  from the `.xcresult` and inspected directly (not just "test passed"): both themes show `żona`'s
+  `a` in warm red with a dashed underline and `żonę`'s `ę`/`żony`'s `y` in the cool accent with a
+  solid underline, matching `testEmphasisTokensRenderInLightAndDarkTheme`'s existing tokens exactly
+  — confirming C2 reuses I1's rendering path rather than a second one (contract §3's "one rendering
+  path per host").
+
+**Verification.** Working directory `/Users/german/Work/JS/polski-lanes/ios/kotlin`.
+`JAVA_HOME=$(/usr/libexec/java_home -v 21 -a arm64)`, simulator
+`4384946F-9E6B-43D0-ADA3-CA219A3456B8`, `-derivedDataPath /private/tmp/claude-501/emph-ios-dd`.
+
+| Check | Command | Result |
+|---|---|---|
+| RED: step-chain accessible names | `-only-testing:.../testSystemMapCardsShowStepByStepContrastPairs` | FAILED — 0/7 names found (pre-fix flat `Text`) |
+| GREEN: same test | same | PASSED (25.4s) |
+| Regression: matrix/progress round-trip | `-only-testing:.../testNativeTrainingMatrixAndProgress` | PASSED |
+| Regression: support-row contrast pairs | `-only-testing:.../testNativeContrastSupportPairsHaveOrderedAccessibleNames` | PASSED |
+| Regression: generated case contrast semantics | `-only-testing:.../testNativeGeneratedCaseContrastKeepsFullWordsInSemantics` | PASSED |
+| Regression: authored matrix/vocab copy | `-only-testing:.../testInventoryAuthoredMatrixAndVocabularyCopyOnSimulator` | PASSED |
+| Regression: 5-step chain completion | `-only-testing:.../testNativeChainCompletionShowsFiveAnswersAndKeepsFiveRatings` | PASSED |
+| Regression: pronoun teaching contexts | `-only-testing:.../testNativePronounTeachingShowsCompactContextsAndOwnerDemo` | PASSED |
+| Regression: verb/gender control | `-only-testing:.../testNativeVerbGenderControlChangesSelectedSubjectOnly` | PASSED |
+| Regression: case reference compact note | `-only-testing:.../testNativeCasesShowCompactNoteAndOrderedComparisonNouns` | PASSED |
+| Visual: light/dark screenshots | `-only-testing:.../testSystemMapCardsRenderDashedBeforeSolidAfterInLightAndDarkTheme` | PASSED (36.7s first run flaked at 0 tests executed — stale simulator state from a manual `simctl launch` moments before; clean rerun passed and was the one inspected) — screenshots pulled via `xcresulttool export attachments` and viewed directly, both themes confirmed dashed-red/solid-teal |
+
+Not run (lean mode / blocked): S4 (no Swift change made, see above); Android/macOS/web hosts (other
+lanes); `FlipRivePerfUITests` (unrelated, untouched).
