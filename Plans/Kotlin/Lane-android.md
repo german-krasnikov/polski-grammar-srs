@@ -632,3 +632,40 @@ code shape itself, which makes construction structurally impossible while `reduc
 bypassed). Turning animations off *while* an effect is actively playing (mid-animation toggle, to
 directly observe disposal) was not separately exercised on-device; the case exercised was toggling
 before any rating occurred.
+
+## A7 — chain indicator after force-stop/relaunch (investigation, no code change)
+
+**Report gap** (`PostMergeTest-2026-09-27.md`): after force-stop and relaunch the chain indicator
+went from 2/5 to 0/5 while review counts persisted. Investigated whether this is a real Android
+deviation or the documented session-vs-durable-state contract; no fix applied.
+
+**Contract**: `Plan.md` §3 ("Состояние, эффекты и lifecycle") is explicit: "Режимы chain/schedule/
+focused, текущая цепочка и шаг, exercise, answer mode, текст и reveal/complete не восстанавливаются
+из legacy прогресса автоматически: React также не сохраняет текущую сессию между загрузками." Only
+durable `Progress` (review counts, FSRS state) belongs to the repository; chain position is
+in-memory session state by design, on every host.
+
+**Code confirms the same contract, shared, not Android-specific**:
+- `TrainingStore`'s own class doc (`kotlin/shared/src/commonMain/kotlin/polski/presentation/TrainingStore.kt:39`):
+  "A new page load creates a new store and reloads durable progress, while draft, reveal and chain
+  position remain session-only values."
+- `TrainingStore.init` (line 63) always calls `exerciseFactory.generateChain()` fresh and starts
+  `chainIndex = 0` — there is no path that reads a persisted chain index back in.
+- `AndroidSessionViewModel.newStore()` constructs a plain `TrainingStore` with no
+  `SavedStateHandle`/process-death persistence of its own; it is a `ViewModel` owned by the Activity,
+  so force-stop kills the process and the next launch builds a brand-new `ViewModel` → brand-new
+  `TrainingStore` → fresh chain at index 0. Review counts survive because they come from
+  `AndroidProgressRepository`/`repository.load()`, the durable path, loaded independently in
+  `store.start()`.
+- The web (`TrainingWebApp.kt`) and desktop (`desktop/Main.kt`) hosts construct `TrainingStore` the
+  same way on each app start/page load — same shared class, same reset-to-fresh-chain behavior. React
+  baseline (`src/ui/App.tsx`) never writes chain/chainIndex to `localStorage` either (only `progress`
+  and `explanationMethod` are persisted); reloading React also starts a fresh chain.
+
+**Conclusion**: Android does not deviate from the other hosts or from the documented contract. The
+2/5 → 0/5 reset on force-stop/relaunch is the intended session-state behavior (chain position is
+not progress), identical across web/desktop/Android/React. No code change made; this is a report
+finding, not an Android bug.
+
+**Checks**: none run — no code touched. Investigation only: read `Plan.md` §3, `TrainingStore.kt`,
+`AndroidSessionViewModel.kt`, `TrainingWebApp.kt`, `desktop/Main.kt`, `src/ui/App.tsx`.
