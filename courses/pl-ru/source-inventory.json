@@ -7438,7 +7438,7 @@
       "path": "src/data/course.ts",
       "owner": "production source audit",
       "migrationStatus": "classified in inventory-decisions.json; review Evidence.md for acceptance",
-      "sha256": "fba123b98bb42c1ce5a87ecb5be4589d88fe2cd457fa9ff0743567e77f214fc0",
+      "sha256": "49632c987523a323c776095c7f2481ae354ae7239fa2525b3c27c3667443b86f",
       "literalLines": [
         {
           "line": 1,

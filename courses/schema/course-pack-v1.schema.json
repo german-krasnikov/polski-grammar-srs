@@ -1254,6 +1254,102 @@
               "$ref": "#/$defs/method"
             }
           }
+        },
+        "styleContent": {
+          "$ref": "#/$defs/styleContent"
+        }
+      }
+    },
+    "styleContent": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "rule": {
+          "$ref": "#/$defs/text"
+        },
+        "table": {
+          "$ref": "#/$defs/styleTable"
+        },
+        "scene": {
+          "$ref": "#/$defs/text"
+        },
+        "nativeParallel": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/nativeParallelPair"
+          }
+        },
+        "examples": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/text"
+          }
+        },
+        "why": {
+          "$ref": "#/$defs/text"
+        }
+      }
+    },
+    "styleTable": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "rows"
+      ],
+      "properties": {
+        "caption": {
+          "$ref": "#/$defs/text"
+        },
+        "rows": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/styleTableRow"
+          }
+        }
+      }
+    },
+    "styleTableRow": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "label",
+        "before",
+        "after"
+      ],
+      "properties": {
+        "label": {
+          "$ref": "#/$defs/text"
+        },
+        "before": {
+          "$ref": "#/$defs/text"
+        },
+        "after": {
+          "$ref": "#/$defs/text"
+        }
+      }
+    },
+    "nativeParallelPair": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "native",
+        "target",
+        "note",
+        "matches"
+      ],
+      "properties": {
+        "native": {
+          "$ref": "#/$defs/text"
+        },
+        "target": {
+          "$ref": "#/$defs/text"
+        },
+        "note": {
+          "$ref": "#/$defs/text"
+        },
+        "matches": {
+          "type": "boolean"
         }
       }
     },

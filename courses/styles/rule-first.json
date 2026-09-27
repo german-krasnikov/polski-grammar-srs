@@ -1,0 +1,12 @@
+{
+  "id": "rule-first",
+  "label": { "ru": "Через правило", "en": "Rule first" },
+  "description": {
+    "ru": "Сначала схема и таблица окончаний, затем пример.",
+    "en": "The scheme and the ending table come first, the example follows."
+  },
+  "blocks": {
+    "front": ["table", "formula"],
+    "back": ["formula", "rule", "changes", "contrast"]
+  }
+}

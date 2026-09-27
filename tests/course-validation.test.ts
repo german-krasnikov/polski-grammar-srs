@@ -231,4 +231,22 @@ describe('authored pl-ru pack', () => {
     ranks.items[9].rank = 11;
     expect(() => validateCoursePack(sample, ranks)).toThrow(/frequency\/items\/9\/rank/);
   });
+
+  test('accepts a skill with no authored nativeParallel (native-contrast falls back to rule-first for it, not a build error)', () => {
+    const [sample, ranks] = copy();
+    delete (sample.skills[0].styleContent as Partial<NonNullable<typeof sample.skills[0]['styleContent']>>).nativeParallel;
+    expect(() => validateCoursePack(sample, ranks)).not.toThrow();
+    const [noStyleContentAtAll, moreRanks] = copy();
+    delete (noStyleContentAtAll.skills[0] as Partial<typeof noStyleContentAtAll.skills[0]>).styleContent;
+    expect(() => validateCoursePack(noStyleContentAtAll, moreRanks)).not.toThrow();
+  });
+
+  test('rejects an empty nativeParallel/examples/table list where omitting the field is expected', () => {
+    const [emptyParallel, ranks] = copy();
+    emptyParallel.skills[0].styleContent = { ...emptyParallel.skills[0].styleContent, nativeParallel: [] };
+    expect(() => validateCoursePack(emptyParallel, ranks)).toThrow(/skills\/0\/styleContent\/nativeParallel/);
+    const [emptyExamples, examplesRanks] = copy();
+    emptyExamples.skills[0].styleContent = { ...emptyExamples.skills[0].styleContent, examples: [] };
+    expect(() => validateCoursePack(emptyExamples, examplesRanks)).toThrow(/skills\/0\/styleContent\/examples/);
+  });
 });

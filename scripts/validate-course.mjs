@@ -8,6 +8,8 @@ const readJson = (relativePath) => JSON.parse(readFileSync(new URL(relativePath,
 const ajv = new Ajv2020({ allErrors: true, strict: true, strictRequired: false });
 const courseSchema = ajv.compile(readJson('courses/schema/course-pack-v1.schema.json'));
 const frequencySchema = ajv.compile(readJson('courses/schema/frequency-top1000-v1.schema.json'));
+const styleRecipeSchema = ajv.compile(readJson('courses/schema/style-recipe-v1.schema.json'));
+const styleIds = ['rule-first', 'situation-first', 'native-contrast', 'minimal-theory'];
 
 function assertSchema(validate, data, prefix) {
   if (validate(data)) return;
@@ -32,6 +34,55 @@ function noHtml(value, path = '') {
   if (Array.isArray(value)) value.forEach((child, index) => noHtml(child, `${path}/${index}`));
   else if (value && typeof value === 'object') {
     for (const [key, child] of Object.entries(value)) noHtml(child, `${path}/${key}`);
+  }
+}
+
+/** Rejects an accidental empty array or empty table in a skill's optional styleContent.
+ *  styleContent itself, and nativeParallel within it, are never required here: a skill with
+ *  no authored nativeParallel is a normal, supported state (StylesBlueprint.md §2-§3, ST-03) —
+ *  StyleComposer.resolveEffectiveStyle (CORE) falls the native-contrast style back to rule-first
+ *  for that skill at runtime, so this generic validator must not make partial coverage a
+ *  build-time error for pl-ru or for any future pack. */
+function validateStyleContent(skills) {
+  skills.forEach((skill, index) => {
+    const path = `/skills/${index}/styleContent`;
+    const content = skill.styleContent;
+    if (!content) return;
+    if (content.nativeParallel && content.nativeParallel.length === 0) {
+      throw new Error(`${path}/nativeParallel: omit the field instead of an empty list`);
+    }
+    if (content.examples && content.examples.length === 0) {
+      throw new Error(`${path}/examples: omit the field instead of an empty list`);
+    }
+    if (content.table && content.table.rows.length === 0) {
+      throw new Error(`${path}/table/rows: omit the field instead of an empty list`);
+    }
+  });
+}
+
+/** Rejects a recipe set that could crash or leak the answer before reveal: unknown/duplicate
+ *  ids, a fallback chain (fallback target with its own requires), or changes/contrast on front. */
+function validateStyleRecipes() {
+  const recipes = styleIds.map((id) => {
+    const recipe = readJson(`courses/styles/${id}.json`);
+    assertSchema(styleRecipeSchema, recipe, `styles/${id}.json`);
+    noHtml(recipe, `/styles/${id}`);
+    if (recipe.id !== id) throw new Error(`/styles/${id}.json/id: expected ${id}, filename must match`);
+    return recipe;
+  });
+  uniqueBy(recipes, 'id', '/styles');
+  const byId = new Map(recipes.map((recipe) => [recipe.id, recipe]));
+  for (const recipe of recipes) {
+    if (recipe.blocks.front.some((kind) => kind === 'changes' || kind === 'contrast')) {
+      throw new Error(`/styles/${recipe.id}.json/blocks/front: changes/contrast would leak the answer before reveal`);
+    }
+    if (recipe.fallback) {
+      const target = byId.get(recipe.fallback);
+      if (!target) throw new Error(`/styles/${recipe.id}.json/fallback: unknown style ${recipe.fallback}`);
+      if (target.requires?.length) {
+        throw new Error(`/styles/${recipe.id}.json/fallback: target ${recipe.fallback} must not itself declare requires`);
+      }
+    }
   }
 }
 
@@ -79,6 +130,8 @@ export function validateCoursePack(course, frequency) {
   assertSchema(courseSchema, course, 'course');
   assertSchema(frequencySchema, frequency, 'frequency');
   noHtml(course);
+  validateStyleContent(course.skills);
+  validateStyleRecipes();
   validatePatterns(course.exercisePatterns);
   for (const section of ['nouns', 'adjectives', 'verbs', 'possessives', 'skills']) {
     uniqueBy(course[section], 'id', `/${section}`);
