@@ -177,6 +177,30 @@ class IosMatrixSnapshotTest {
         }
     }
 
+    // EmphasisUXAudit correction on ef66020: lossless reconstruction alone cannot catch a wrong
+    // morpheme highlighted (E5/S3's bug pattern reintroduced via the steps->ContrastPair wiring).
+    // This inspects which spans are actually marked `changed` for the "modifiers" card, whose
+    // steps are a particle insertion ("Widzę…"→"Nie widzę…") followed by a particle replacement
+    // plus trailing punctuation only ("Nie widzę…"→"Czy widzę…?").
+    @Test
+    fun nativeMatrixHighlightsOnlyTheInsertedOrReplacedParticleOnTheModifiersCard() {
+        val root = Json.parseToJsonElement(snapshot(AppUiState())).jsonObject
+        val cards = root.getValue("matrix").jsonObject.getValue("systemCards").jsonArray
+        val modifiers = cards.first { it.jsonObject.getValue("id").jsonPrimitive.content == "modifiers" }.jsonObject
+        val steps = modifiers.getValue("steps").jsonArray
+        fun changedText(parts: kotlinx.serialization.json.JsonArray) = parts
+            .filter { it.jsonObject.getValue("changed").jsonPrimitive.content == "true" }
+            .joinToString("") { it.jsonObject.getValue("text").jsonPrimitive.content }
+
+        val insertion = steps[0].jsonObject
+        assertEquals("", changedText(insertion.getValue("beforeParts").jsonArray), "insertion must not leak a before-side span")
+        assertEquals("Nie", changedText(insertion.getValue("afterParts").jsonArray))
+
+        val replacement = steps[1].jsonObject
+        assertEquals("Nie", changedText(replacement.getValue("beforeParts").jsonArray))
+        assertEquals("Czy", changedText(replacement.getValue("afterParts").jsonArray), "trailing punctuation must not be marked changed")
+    }
+
     @Test
     fun nativeMatrixReceivesBothSidesOfEveryAuthoredTransition() {
         val root = Json.parseToJsonElement(snapshot(AppUiState())).jsonObject
@@ -200,8 +224,12 @@ class IosMatrixSnapshotTest {
             val row = element.jsonObject
             assertEquals(referenceTenseRows[index].from, row.getValue("from").jsonPrimitive.content)
             assertEquals(referenceTenseRows[index].to, row.getValue("to").jsonPrimitive.content)
+            // Rows 2 ("będzie" inserted) and 3 ("nie" inserted) are pure single-word insertions:
+            // the Emphasis contract requires no before-side span for those, only after.
+            val isPureInsertion = index == 2 || index == 3
             if (index > 0) {
-                assertTrue(row.getValue("beforeParts").jsonArray.any { it.jsonObject.getValue("changed").jsonPrimitive.content == "true" })
+                assertEquals(!isPureInsertion,
+                    row.getValue("beforeParts").jsonArray.any { it.jsonObject.getValue("changed").jsonPrimitive.content == "true" })
                 assertTrue(row.getValue("afterParts").jsonArray.any { it.jsonObject.getValue("changed").jsonPrimitive.content == "true" })
             }
         }
@@ -224,9 +252,12 @@ class IosMatrixSnapshotTest {
             entries.filter { it.jsonObject.getValue("available").jsonPrimitive.content == "true" }.forEach { entry ->
                 val before = entry.jsonObject.getValue("from").jsonPrimitive.content
                 val after = entry.jsonObject.getValue("to").jsonPrimitive.content
-                assertTrue(entry.jsonObject.getValue("beforeParts").jsonArray.any {
+                // "będę " compound future ("robić"→"będę robić") is a pure insertion: the
+                // Emphasis contract requires no before-side span for those, only after.
+                val isPureInsertion = after == "będę $before"
+                assertEquals(!isPureInsertion, entry.jsonObject.getValue("beforeParts").jsonArray.any {
                     it.jsonObject.getValue("changed").jsonPrimitive.content == "true"
-                }, "No old highlight for $before → $after")
+                }, "Unexpected old-highlight state for $before → $after")
                 assertTrue(entry.jsonObject.getValue("afterParts").jsonArray.any {
                     it.jsonObject.getValue("changed").jsonPrimitive.content == "true"
                 })

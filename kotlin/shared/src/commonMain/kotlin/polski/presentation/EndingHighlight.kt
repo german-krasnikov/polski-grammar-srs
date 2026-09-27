@@ -55,10 +55,14 @@ fun changeHighlightParts(
 ): List<EndingPart> {
     val oldWords = from.split(' ')
     val newWords = to.split(' ')
-    val selected = if (side == ChangeSide.Before) oldWords else newWords
-    if (oldWords.size != newWords.size || oldWords.any(String::isEmpty) || newWords.any(String::isEmpty)) {
+    if (oldWords.any(String::isEmpty) || newWords.any(String::isEmpty)) {
         return listOf(EndingPart(if (side == ChangeSide.Before) from else to, false, from != to))
     }
+    if (oldWords.size != newWords.size) {
+        return singleWordInsertionOrDeletionParts(oldWords, newWords, side)
+            ?: listOf(EndingPart(if (side == ChangeSide.Before) from else to, false, from != to))
+    }
+    val selected = if (side == ChangeSide.Before) oldWords else newWords
     return buildList {
         selected.forEachIndexed { index, word ->
             if (index > 0) add(EndingPart(" ", false))
@@ -74,6 +78,13 @@ fun changeHighlightParts(
             val nextCore = next.substring(0, nextCoreEnd)
             val core = if (side == ChangeSide.Before) oldCore else nextCore
             val trailing = word.substring(if (side == ChangeSide.Before) oldCoreEnd else nextCoreEnd)
+            if (oldCore == nextCore) {
+                // Letters are identical; only trailing punctuation differs. Punctuation never
+                // participates in the diff (Emphasis contract, rule 1), so nothing is highlighted.
+                if (core.isNotEmpty()) add(EndingPart(core, false))
+                if (trailing.isNotEmpty()) add(EndingPart(trailing, false))
+                return@forEachIndexed
+            }
             val prefix = oldCore.zip(nextCore)
                 .takeWhile { (a, b) -> a == b || alternations.any { it.matches(a, b) } }.size
             val oldSuffix = oldCore.substring(prefix)
@@ -85,6 +96,36 @@ fun changeHighlightParts(
                 if (prefix < core.length) add(EndingPart(core.substring(prefix), true, true))
                 if (trailing.isNotEmpty()) add(EndingPart(trailing, false))
             } else add(EndingPart(word, false, true))
+        }
+    }
+}
+
+/**
+ * Detects a single word inserted into (or deleted from) an otherwise identical word-for-word
+ * phrase — e.g. the "Nie"/"Czy" particle in a system-card step ("Widzę…" → "Nie widzę…"). Word
+ * case is ignored when aligning (Emphasis contract, rule 1: case never participates in the
+ * diff), since a word's capitalisation can shift with its position in the sentence. Returns null
+ * when no such single-word alignment exists, so the caller falls back to a whole-phrase change.
+ */
+private fun singleWordInsertionOrDeletionParts(
+    oldWords: List<String>,
+    newWords: List<String>,
+    side: ChangeSide,
+): List<EndingPart>? {
+    val insertion = newWords.size == oldWords.size + 1
+    if (!insertion && oldWords.size != newWords.size + 1) return null
+    val longer = if (insertion) newWords else oldWords
+    val shorter = if (insertion) oldWords else newWords
+    val extraIndex = longer.indices.firstOrNull { i ->
+        val remainder = longer.filterIndexed { j, _ -> j != i }
+        remainder.size == shorter.size && remainder.zip(shorter).all { (a, b) -> a.equals(b, ignoreCase = true) }
+    } ?: return null
+    val onLongerSide = if (insertion) side == ChangeSide.After else side == ChangeSide.Before
+    val words = if (onLongerSide) longer else shorter
+    return buildList {
+        words.forEachIndexed { index, word ->
+            if (index > 0) add(EndingPart(" ", false))
+            add(EndingPart(word, false, onLongerSide && index == extraIndex))
         }
     }
 }

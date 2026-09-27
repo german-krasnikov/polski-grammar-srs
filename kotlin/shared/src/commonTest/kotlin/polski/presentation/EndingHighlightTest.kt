@@ -118,4 +118,42 @@ class EndingHighlightTest {
     fun theActivePackAlternationAppliesWithoutCallersPassingIt() {
         assertEquals(listOf("ego"), endingHighlightParts("mój", "mojego").filter(EndingPart::isEnding).map(EndingPart::text))
     }
+
+    // C2 correction (EmphasisUXAudit blocker on ef66020): a system-card step transition like
+    // "Widzę…" → "Nie widzę…" inserts one word into an otherwise identical multi-word phrase.
+    // ContrastPair.generated must highlight only the inserted particle after reveal, with no
+    // before-side leak — the same insertion contract already proven for FormChange("", "Nie").
+    @Test
+    fun aSingleInsertedWordInAMultiWordPhraseHighlightsOnlyThatWordAfterReveal() {
+        val before = changeHighlightParts("Widzę…", "Nie widzę…", ChangeSide.Before)
+        val after = changeHighlightParts("Widzę…", "Nie widzę…", ChangeSide.After)
+        assertEquals("Widzę…", before.joinToString("") { it.text })
+        assertEquals("Nie widzę…", after.joinToString("") { it.text })
+        assertEquals(emptyList(), before.filter(EndingPart::isChanged))
+        assertEquals(listOf("Nie"), after.filter(EndingPart::isChanged).map(EndingPart::text))
+    }
+
+    // Mirror of the insertion case: removing one word highlights it only on the before side.
+    @Test
+    fun aSingleDeletedWordInAMultiWordPhraseHighlightsOnlyThatWordBeforeReveal() {
+        val before = changeHighlightParts("Nie widzę…", "widzę…", ChangeSide.Before)
+        val after = changeHighlightParts("Nie widzę…", "widzę…", ChangeSide.After)
+        assertEquals("Nie widzę…", before.joinToString("") { it.text })
+        assertEquals("widzę…", after.joinToString("") { it.text })
+        assertEquals(listOf("Nie"), before.filter(EndingPart::isChanged).map(EndingPart::text))
+        assertEquals(emptyList(), after.filter(EndingPart::isChanged))
+    }
+
+    // C2 correction: "Nie widzę…" → "Czy widzę…?" changes the particle (whole-word replacement,
+    // correctly highlighted) but the second word only gains a trailing "?" — punctuation never
+    // participates in the diff, even when the letters on both sides are byte-identical.
+    @Test
+    fun trailingPunctuationOnlyDifferenceStaysUnhighlightedEvenWhenTheCoreIsIdentical() {
+        val before = changeHighlightParts("widzę…", "widzę…?", ChangeSide.Before)
+        val after = changeHighlightParts("widzę…", "widzę…?", ChangeSide.After)
+        assertEquals("widzę…", before.joinToString("") { it.text })
+        assertEquals("widzę…?", after.joinToString("") { it.text })
+        assertEquals(emptyList(), before.filter(EndingPart::isChanged))
+        assertEquals(emptyList(), after.filter(EndingPart::isChanged))
+    }
 }
