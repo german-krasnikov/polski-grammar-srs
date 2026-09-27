@@ -26,14 +26,14 @@ class AndroidEmphasisTextTest {
     private val parts = listOf(EndingPart("kup", false), EndingPart("iłem", true, true))
 
     @Test fun beforeChangedSpanIsBoldWithNoNativeUnderline() {
-        val text = androidEmphasisAnnotatedText(parts, before = true, color = red)
+        val text = androidEmphasisAnnotatedText(parts, before = true, beforeColor = red, afterColor = teal)
         assertEquals("kupiłem", text.text)
         val changed = text.spanStyles.single { it.start == 3 && it.end == 7 }
         assertEquals(SpanStyle(color = red, fontWeight = FontWeight.Bold, textDecoration = null), changed.item)
     }
 
     @Test fun afterChangedSpanIsBoldWithSolidUnderline() {
-        val text = androidEmphasisAnnotatedText(parts, before = false, color = teal)
+        val text = androidEmphasisAnnotatedText(parts, before = false, beforeColor = red, afterColor = teal)
         val changed = text.spanStyles.single { it.start == 3 && it.end == 7 }
         assertEquals(
             SpanStyle(color = teal, fontWeight = FontWeight.Bold, textDecoration = TextDecoration.Underline),
@@ -42,8 +42,25 @@ class AndroidEmphasisTextTest {
     }
 
     @Test fun unchangedTextCarriesNoSpanStyle() {
-        val text = androidEmphasisAnnotatedText(parts, before = true, color = red)
+        val text = androidEmphasisAnnotatedText(parts, before = true, beforeColor = red, afterColor = teal)
         assertEquals(0, text.spanStyles.count { it.start == 0 && it.end == 3 })
+    }
+
+    // S4/E7: a style block's own prose (`styleTextHighlightParts`) can carry a literal occurrence
+    // of both the "before" and "after" form in one running list — each changed part's own `side`
+    // must pick its role independently of the call-wide `before` flag (EndingPart doc, W3 correction).
+    @Test fun mixedRoleListStylesEachChangedPartByItsOwnSide() {
+        val mixed = listOf(
+            EndingPart("mojej", true, true, polski.presentation.ChangeSide.Before),
+            EndingPart(" i ", false),
+            EndingPart("ich", true, true, polski.presentation.ChangeSide.After),
+        )
+        val text = androidEmphasisAnnotatedText(mixed, before = false, beforeColor = red, afterColor = teal)
+        assertEquals("mojej i ich", text.text)
+        val beforeSpan = text.spanStyles.single { it.start == 0 && it.end == 5 }
+        assertEquals(SpanStyle(color = red, fontWeight = FontWeight.Bold, textDecoration = null), beforeSpan.item)
+        val afterSpan = text.spanStyles.single { it.start == 8 && it.end == 11 }
+        assertEquals(SpanStyle(color = teal, fontWeight = FontWeight.Bold, textDecoration = TextDecoration.Underline), afterSpan.item)
     }
 
     // `after`'s color must be a fixed constant, never MaterialTheme.colorScheme.secondary: under

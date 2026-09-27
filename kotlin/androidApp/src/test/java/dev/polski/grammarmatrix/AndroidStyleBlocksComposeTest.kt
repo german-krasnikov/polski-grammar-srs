@@ -4,8 +4,13 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.performClick
+import androidx.compose.ui.text.style.TextDecoration
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -18,6 +23,10 @@ import polski.model.Exercise
 import polski.model.FormChange
 import polski.model.NumberGram
 import polski.model.PossessiveId
+import polski.presentation.Block
+import polski.presentation.ChangeSide
+import polski.presentation.EndingPart
+import polski.presentation.NativeParallelPair
 import polski.presentation.StyleComposer
 import polski.presentation.StyleId
 import polski.presentation.StylePhase
@@ -92,5 +101,77 @@ class AndroidStyleBlocksComposeTest {
         }
         composeRule.onNodeWithText(skill.theory).assertExists()
         composeRule.onNodeWithText(exercise.explanation).assertExists()
+    }
+
+    // S4/E7: Formula/Rule/Scene/NativeParallel/Examples/WhyOnDemand must highlight their `parts`
+    // through the same before/after rendering path as the sentence (AndroidEmphasisText) — a
+    // fabricated mixed-role parts list (one changed fragment per role, in the same block) proves
+    // each block kind actually reaches that path with per-part role intact, not just its own text.
+    private val mixedText = "kupiłem i kupiłam"
+    private val mixedParts = listOf(
+        EndingPart("kupiłem", isEnding = false, isChanged = true, side = ChangeSide.Before),
+        EndingPart(" i ", isEnding = false),
+        EndingPart("kupiłam", isEnding = false, isChanged = true, side = ChangeSide.After),
+    )
+
+    /** [before] span carries no native [TextDecoration] (its dash is hand-drawn); [after] carries a solid one. */
+    private fun assertBeforeAfterDecorations(nodeText: String) {
+        val annotated = composeRule.onNodeWithText(nodeText).fetchSemanticsNode()
+            .config[SemanticsProperties.Text].single()
+        val beforeStart = nodeText.indexOf("kupiłem")
+        val afterStart = nodeText.indexOf("kupiłam")
+        val beforeSpan = annotated.spanStyles.single { it.start == beforeStart && it.end == beforeStart + 7 }
+        val afterSpan = annotated.spanStyles.single { it.start == afterStart && it.end == afterStart + 7 }
+        assertEquals(null, beforeSpan.item.textDecoration)
+        assertEquals(TextDecoration.Underline, afterSpan.item.textDecoration)
+        assertTrue(beforeSpan.item.color != afterSpan.item.color)
+    }
+
+    @Test fun formulaBlockHighlightsItsParts() {
+        composeRule.setContent {
+            MaterialTheme { AndroidBlockList(listOf(Block.Formula(mixedText, mixedParts)), reduceMotion = true) }
+        }
+        assertBeforeAfterDecorations(mixedText)
+    }
+
+    @Test fun ruleBlockHighlightsItsParts() {
+        composeRule.setContent {
+            MaterialTheme { AndroidBlockList(listOf(Block.Rule(mixedText, "detail", mixedParts)), reduceMotion = true) }
+        }
+        assertBeforeAfterDecorations(mixedText)
+    }
+
+    @Test fun sceneBlockHighlightsItsParts() {
+        composeRule.setContent {
+            MaterialTheme { AndroidBlockList(listOf(Block.Scene(mixedText, mixedParts)), reduceMotion = true) }
+        }
+        assertBeforeAfterDecorations(mixedText)
+    }
+
+    @Test fun nativeParallelBlockHighlightsTargetPartsOnly() {
+        val pair = NativeParallelPair(native = "native lead-in", target = mixedText, note = "", matches = true, targetParts = mixedParts)
+        composeRule.setContent {
+            MaterialTheme { AndroidBlockList(listOf(Block.NativeParallel(listOf(pair))), reduceMotion = true) }
+        }
+        // Native (L1) side never highlights (Emphasis contract §4) — only the target node exists
+        // with `mixedText`, and it must carry the same before/after decorations as every other block.
+        composeRule.onNodeWithText("native lead-in").assertExists()
+        assertBeforeAfterDecorations(mixedText)
+    }
+
+    @Test fun examplesBlockHighlightsItemParts() {
+        composeRule.setContent {
+            MaterialTheme { AndroidBlockList(listOf(Block.Examples(listOf(mixedText), listOf(mixedParts))), reduceMotion = true) }
+        }
+        assertBeforeAfterDecorations(mixedText)
+    }
+
+    @Test fun whyOnDemandBlockHighlightsItsParts() {
+        composeRule.setContent {
+            MaterialTheme { AndroidBlockList(listOf(Block.WhyOnDemand(mixedText, mixedParts, "Почему так?")), reduceMotion = true) }
+        }
+        composeRule.onNodeWithText("Почему так?").performClick()
+        composeRule.waitForIdle()
+        assertBeforeAfterDecorations(mixedText)
     }
 }
