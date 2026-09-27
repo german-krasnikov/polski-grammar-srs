@@ -68,7 +68,8 @@ class ExerciseFactory(private val random: RandomSource, private val ids: Exercis
             }
             return card(skillId, seed, caseSentence(seed, GramCase.NOM), exerciseCopy("accPrompt"), sentence("seenAcc", "acc" to acc), exerciseCopy("accExplanation"), change(nom, acc, reason), tags = listOf("acc", noun.gender.id))
         }
-        if (skillId == "case.gen.neg") return card(skillId, seed, sentence("seenAcc", "acc" to acc), exerciseCopy("genNegPrompt"), sentence("seenGenNeg", "gen" to gen), exerciseCopy("genNegExplanation"), change(acc, gen, exerciseCopy("genNegReason")), tags = listOf("gen", "negation"))
+        if (skillId == "case.gen.neg") return card(skillId, seed, sentence("seenAcc", "acc" to acc), exerciseCopy("genNegPrompt"), sentence("seenGenNeg", "gen" to gen), exerciseCopy("genNegExplanation"),
+            listOf(FormChange("", exerciseCopy("negationParticle"), exerciseCopy("negationInsertionReason")), FormChange(acc, gen, exerciseCopy("genNegReason"))), tags = listOf("gen", "negation"))
         val drill = when (skillId) {
             "case.inst" -> Triple(GramCase.INST, exerciseCopy("instStart"), exerciseCopy("instPrompt"))
             "case.loc" -> Triple(GramCase.LOC, exerciseCopy("locStart"), exerciseCopy("locPrompt"))
@@ -121,7 +122,7 @@ class ExerciseFactory(private val random: RandomSource, private val ids: Exercis
         }
         if (skillId == "sentence.question") return card(skillId, seed, sentence("questionSource", "acc" to acc), exerciseCopy("questionPrompt"),
             sentence("questionExpected", "acc" to acc), exerciseCopy("questionExplanation"),
-            change(exerciseCopy("questionChangeFrom"), exerciseCopy("questionChangeTo"), exerciseCopy("questionReason")), tags = listOf("question", "acc"))
+            change("", exerciseCopy("questionParticle"), exerciseCopy("questionReason")), tags = listOf("question", "acc"))
         if (skillId == "sentence.plural") {
             val target = phrase(seed, GramCase.ACC, number = NumberGram.PL)
             return card(skillId, seed, sentence("seenAcc", "acc" to acc), exerciseCopy("pluralPrompt"), sentence("seenAcc", "acc" to target),
@@ -150,8 +151,8 @@ class ExerciseFactory(private val random: RandomSource, private val ids: Exercis
                 exerciseCopy("chainAccReason"), tags = listOf("acc")),
             step("verb.past", sentence("seenAcc", "acc" to acc), exerciseCopy("chainPastPrompt"), sentence("chainPast", "acc" to acc), exerciseCopy("chainPastChangeFrom"), exerciseCopy("chainPastChangeTo"),
                 exerciseCopy("chainPastReason"), tags = listOf("past", "acc")),
-            step("case.gen.neg", sentence("chainPast", "acc" to acc), exerciseCopy("chainNegPrompt"), sentence("chainNeg", "gen" to gen), acc, gen,
-                exerciseCopy("chainNegReason"), tags = listOf("gen", "negation")),
+            card("case.gen.neg", seed, sentence("chainPast", "acc" to acc), exerciseCopy("chainNegPrompt"), sentence("chainNeg", "gen" to gen), exerciseCopy("chainNegReason"),
+                listOf(FormChange("", exerciseCopy("negationParticle"), exerciseCopy("negationInsertionReason")), FormChange(acc, gen, exerciseCopy("chainNegReason"))), tags = listOf("gen", "negation")),
             step("agreement.my", sentence("chainNeg", "gen" to gen), exerciseCopy("chainOwnerPrompt"), sentence("chainOwner", "theirGen" to theirGen),
                 gen, theirGen, exerciseCopy("chainOwnerReason"), PossessiveId.THEIR, listOf("gen", "agreement")),
             step("case.loc", sentence("chainOwner", "theirGen" to theirGen), exerciseCopy("chainLocPrompt"), sentence("chainLoc", "theirLoc" to theirLoc),
