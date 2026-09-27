@@ -8,7 +8,7 @@ import kotlin.test.assertTrue
 class UserPreferencesCodecTest {
     @Test fun defaultsAndExplicitChoicesRoundTrip() {
         val chosen = UserPreferencesV2(
-            explanationMethod = PreferredMethod.Situations,
+            styleId = PreferredStyle.SituationFirst,
             answerMode = PreferredAnswerMode.Typed,
             appearance = Appearance.Dark,
             motion = Motion.Reduced,
@@ -19,7 +19,25 @@ class UserPreferencesCodecTest {
         )
         assertEquals(chosen, assertIs<PreferencesDecode.Loaded>(UserPreferencesCodec.decode(UserPreferencesCodec.encode(chosen))).value)
         assertEquals(UserPreferencesV2(), assertIs<PreferencesDecode.Loaded>(UserPreferencesCodec.decode("{\"schemaVersion\":1}")).value)
-        assertEquals(2, assertIs<PreferencesDecode.Loaded>(UserPreferencesCodec.decode(UserPreferencesCodec.encode(chosen))).value.schemaVersion)
+        assertEquals(3, assertIs<PreferencesDecode.Loaded>(UserPreferencesCodec.decode(UserPreferencesCodec.encode(chosen))).value.schemaVersion)
+    }
+
+    // ST-07: v1/v2 `explanationMethod: "Logic"/"Situations"` decodes to `styleId: RuleFirst/SituationFirst`;
+    // v3 reads `styleId` directly with all 4 names; an unknown value never crashes, never silently defaults.
+    @Test fun styleIdTolerantDecodeAcrossSchemaVersions() {
+        assertEquals(PreferredStyle.RuleFirst, assertIs<PreferencesDecode.Loaded>(UserPreferencesCodec.decode("""{"schemaVersion":1,"explanationMethod":"Logic"}""")).value.styleId)
+        assertEquals(PreferredStyle.SituationFirst, assertIs<PreferencesDecode.Loaded>(UserPreferencesCodec.decode("""{"schemaVersion":2,"explanationMethod":"Situations"}""")).value.styleId)
+        assertEquals(PreferredStyle.RuleFirst, assertIs<PreferencesDecode.Loaded>(UserPreferencesCodec.decode("""{"schemaVersion":2}""")).value.styleId)
+        for (style in PreferredStyle.entries) {
+            val raw = """{"schemaVersion":3,"styleId":"${style.name}"}"""
+            assertEquals(style, assertIs<PreferencesDecode.Loaded>(UserPreferencesCodec.decode(raw)).value.styleId)
+        }
+        assertIs<PreferencesDecode.RecoveryRequired>(UserPreferencesCodec.decode("""{"schemaVersion":1,"explanationMethod":"NativeContrast"}"""))
+        assertIs<PreferencesDecode.RecoveryRequired>(UserPreferencesCodec.decode("""{"schemaVersion":3,"styleId":"Logic"}"""))
+        assertIs<PreferencesDecode.RecoveryRequired>(UserPreferencesCodec.decode("""{"schemaVersion":3,"explanationMethod":"Logic"}"""))
+        val encoded = UserPreferencesCodec.encode(UserPreferencesV2(styleId = PreferredStyle.MinimalTheory))
+        assertTrue(encoded.contains("\"styleId\":\"MinimalTheory\""))
+        assertTrue(!encoded.contains("explanationMethod"))
     }
 
     @Test fun animationsEnabledMissingMeansEnabled() {
@@ -56,7 +74,7 @@ class UserPreferencesCodecTest {
     }
 
     @Test fun futureAndMalformedDocumentsRetainOriginalBytes() {
-        for (raw in listOf("{broken", "{\"schemaVersion\":3}", "{\"schemaVersion\":\"1\"}", "{\"schemaVersion\":1,\"future\":true}", "{\"schemaVersion\":1,\"glassTintPercent\":30}", "{\"schemaVersion\":2,\"future\":true}", "{\"schemaVersion\":1,\"appearance\":\"Blue\"}", "{\"schemaVersion\":1,\"swipeRatingEnabled\":\"true\"}", "{\"schemaVersion\":1,\"reminder\":{\"days\":[8]}}")) {
+        for (raw in listOf("{broken", "{\"schemaVersion\":4}", "{\"schemaVersion\":\"1\"}", "{\"schemaVersion\":1,\"future\":true}", "{\"schemaVersion\":1,\"glassTintPercent\":30}", "{\"schemaVersion\":2,\"future\":true}", "{\"schemaVersion\":3,\"future\":true}", "{\"schemaVersion\":1,\"appearance\":\"Blue\"}", "{\"schemaVersion\":1,\"swipeRatingEnabled\":\"true\"}", "{\"schemaVersion\":1,\"reminder\":{\"days\":[8]}}")) {
             val result = assertIs<PreferencesDecode.RecoveryRequired>(UserPreferencesCodec.decode(raw))
             assertEquals(raw, result.raw)
             assertTrue(result.reason.isNotBlank())

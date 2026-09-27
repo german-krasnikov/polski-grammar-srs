@@ -52,6 +52,13 @@ import polski.presentation.sentenceHighlightParts
 import polski.presentation.ChangeSide
 import polski.presentation.ContrastPair
 import polski.data.presentationBySkillId
+import polski.data.styleContentBySkillId
+import polski.presentation.StyleComposer
+import polski.presentation.StyleId
+import polski.presentation.StylePhase
+import polski.presentation.StyleRegistry
+import polski.presentation.blocksToJson
+import polski.presentation.toLegacyWireValue
 import polski.srs.Rating
 import polski.training.sentenceSeeds
 
@@ -61,7 +68,10 @@ internal fun snapshot(state: AppUiState): String = buildJsonObject {
     put("mode", state.mode.name)
     put("phase", state.phase.name)
     put("answerMode", state.answerMode.name)
-    put("explanationMethod", state.explanationMethod.name)
+    // Swift still speaks the pre-UC-10 2-value wire vocabulary (see [toLegacyWireValue]).
+    put("explanationMethod", state.styleId.toLegacyWireValue())
+    put("styleId", state.styleId.name)
+    put("styleBlocks", styleBlocksSnapshot(state))
     put("draft", state.draft)
     put("introPending", state.introPending)
     put("dueCount", state.dueCount)
@@ -88,7 +98,7 @@ internal fun snapshot(state: AppUiState): String = buildJsonObject {
     put("chainAnswers", JsonArray(if (state.phase == CardPhase.ChainComplete) state.chain.map { JsonPrimitive(it.expected) } else emptyList()))
     put("exercise", state.exercise?.let { exercise -> buildJsonObject {
         val presentation = presentationBySkillId(exercise.primarySkill)
-        val method = if (state.explanationMethod.name == "Situations") presentation.situations else presentation.logic
+        val method = if (state.styleId == StyleId.SituationFirst) presentation.situations else presentation.logic
         put("id", exercise.id)
         put("skillId", exercise.primarySkill)
         put("skillTitle", skillById(exercise.primarySkill).title)
@@ -159,6 +169,23 @@ internal fun snapshot(state: AppUiState): String = buildJsonObject {
 }.toString()
 
 private fun choice(id: String, title: String): JsonObject = buildJsonObject { put("id", id); put("title", title) }
+
+/** UC-10: the resolved (post-fallback) style's blocks, by the same [blocksToJson] shape other
+ *  snapshot sections already use. Not yet read by Swift — no native rendering in this task. */
+private fun styleBlocksSnapshot(state: AppUiState): JsonElement {
+    val exercise = state.exercise ?: return JsonNull
+    val registry = StyleRegistry.recipes
+    val recipe = registry[state.styleId] ?: return JsonNull
+    val content = styleContentBySkillId(exercise.primarySkill)
+    val effective = registry[StyleComposer.resolveEffectiveStyle(recipe, content, registry)] ?: recipe
+    val phase = if (state.phase == CardPhase.Revealed) StylePhase.Back else StylePhase.Front
+    val skill = skillById(exercise.primarySkill)
+    val focus = presentationBySkillId(exercise.primarySkill)
+    return buildJsonObject {
+        put("effectiveStyleId", effective.id.name)
+        put("blocks", blocksToJson(StyleComposer.compose(effective, phase, exercise, skill, focus, content)))
+    }
+}
 
 private fun pairSnapshot(pair: ContrastPair): JsonObject = buildJsonObject {
     put("from", pair.from)

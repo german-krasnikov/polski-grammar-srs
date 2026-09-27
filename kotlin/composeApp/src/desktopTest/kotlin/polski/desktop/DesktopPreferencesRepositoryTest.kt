@@ -8,7 +8,7 @@ import kotlin.test.assertTrue
 import polski.preferences.Appearance
 import polski.preferences.PreferencesLoad
 import polski.preferences.PreferencesSave
-import polski.preferences.PreferredMethod
+import polski.preferences.PreferredStyle
 import polski.preferences.UserPreferencesCodec
 import polski.preferences.UserPreferencesV1
 
@@ -19,13 +19,13 @@ class DesktopPreferencesRepositoryTest {
         try {
             val repository = DesktopPreferencesRepository(directory, { "Situations" })
             val migrated = assertIs<PreferencesLoad.Loaded>(repository.load()).value
-            assertEquals(PreferredMethod.Situations, migrated.explanationMethod)
+            assertEquals(PreferredStyle.SituationFirst, migrated.styleId)
             val file = directory.resolve("preferences-v1.json")
             val firstRaw = Files.readString(file)
             assertEquals(migrated, assertIs<PreferencesLoad.Loaded>(repository.load()).value)
             assertEquals(firstRaw, Files.readString(file))
             val reopened = DesktopPreferencesRepository(directory, { "Logic" })
-            assertEquals(PreferredMethod.Situations, assertIs<PreferencesLoad.Loaded>(reopened.load()).value.explanationMethod)
+            assertEquals(PreferredStyle.SituationFirst, assertIs<PreferencesLoad.Loaded>(reopened.load()).value.styleId)
         } finally { directory.toFile().deleteRecursively() }
     }
 
@@ -65,7 +65,7 @@ class DesktopPreferencesRepositoryTest {
             val oldRaw = UserPreferencesCodec.encode(before)
             assertIs<PreferencesSave.WriteFailed>(repository.importJson("{"))
             assertEquals(oldRaw, Files.readString(directory.resolve("preferences-v1.json")))
-            val imported = UserPreferencesV1(explanationMethod = PreferredMethod.Situations)
+            val imported = UserPreferencesV1(styleId = PreferredStyle.SituationFirst)
             assertIs<PreferencesSave.Saved>(repository.importJson(UserPreferencesCodec.encode(imported)))
             assertEquals(imported, assertIs<PreferencesLoad.Loaded>(repository.load()).value)
             val backups = Files.list(directory.resolve("backups")).use { it.toList() }

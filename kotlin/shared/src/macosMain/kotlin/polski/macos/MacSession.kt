@@ -22,7 +22,8 @@ import polski.presentation.AppAction
 import polski.presentation.AppTab
 import polski.presentation.CardPhase
 import polski.presentation.EffectOutcome
-import polski.presentation.ExplanationMethod
+import polski.presentation.StyleId
+import polski.presentation.legacyStyleWireValue
 import polski.presentation.MatrixSection
 import polski.presentation.TimeCapture
 import polski.presentation.TimeSource
@@ -76,7 +77,9 @@ class MacSession(directory: String) {
             "chain" -> AppAction.StartChain()
             "schedule" -> AppAction.StartSchedule
             "matrixSection" -> MatrixSection.entries.firstOrNull { it.name == value }?.let(AppAction::SelectMatrixSection)
-            "method" -> ExplanationMethod.entries.firstOrNull { it.name == value }?.let(AppAction::SetExplanationMethod)
+            // Swift still speaks the pre-UC-10 2-value wire vocabulary ("Logic"/"Situations");
+            // the other 2 styles have no Swift UI yet (Plans/Kotlin/StylesBlueprint.md §5/§6).
+            "method" -> legacyStyleWireValue(value)?.let(AppAction::SetStyle)
             "reference" -> AppAction.ToggleReference
             "reset" -> AppAction.RequestReset
             "resetDecision" -> {

@@ -7,9 +7,12 @@ import polski.preferences.Appearance
 import polski.preferences.Motion
 import polski.preferences.PreferencesDecode
 import polski.preferences.PreferredAnswerMode
-import polski.preferences.PreferredMethod
+import polski.preferences.PreferredStyle
 import polski.preferences.UserPreferencesCodec
 import polski.preferences.UserPreferencesV2
+import polski.presentation.StyleId
+import polski.presentation.legacyStyleWireValue
+import polski.presentation.toLegacyWireValue
 
 /** Small synchronous bridge for native Settings and preferences Files import/export. */
 class MacPreferencesSession(directory: String) {
@@ -23,7 +26,7 @@ class MacPreferencesSession(directory: String) {
         when (val result = loaded) {
             is PreferencesDecode.Loaded -> {
                 put("status", "Ready")
-                put("method", result.value.explanationMethod.name)
+                put("method", StyleId.valueOf(result.value.styleId.name).toLegacyWireValue())
                 put("answerMode", result.value.answerMode.name)
                 put("appearance", result.value.appearance.name)
                 put("motion", result.value.motion.name)
@@ -43,7 +46,7 @@ class MacPreferencesSession(directory: String) {
     fun set(field: String, value: String): String? {
         val current = (loaded as? PreferencesDecode.Loaded)?.value ?: return "Настройки требуют восстановления"
         val next: UserPreferencesV2 = when (field) {
-            "method" -> current.copy(explanationMethod = PreferredMethod.entries.firstOrNull { it.name == value } ?: return "Неизвестный метод")
+            "method" -> current.copy(styleId = legacyStyleWireValue(value)?.let { PreferredStyle.valueOf(it.name) } ?: return "Неизвестный метод")
             "answerMode" -> current.copy(answerMode = PreferredAnswerMode.entries.firstOrNull { it.name == value } ?: return "Неизвестный способ ответа")
             "appearance" -> current.copy(appearance = Appearance.entries.firstOrNull { it.name == value } ?: return "Неизвестная тема")
             "motion" -> current.copy(motion = Motion.entries.firstOrNull { it.name == value } ?: return "Неизвестное движение")

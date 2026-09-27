@@ -17,7 +17,8 @@ import polski.presentation.AnswerMode
 import polski.presentation.AppAction
 import polski.presentation.AppTab
 import polski.presentation.EffectOutcome
-import polski.presentation.ExplanationMethod
+import polski.presentation.StyleId
+import polski.presentation.legacyStyleWireValue
 import polski.presentation.MatrixSection
 import polski.presentation.TimeCapture
 import polski.presentation.TimeSource
@@ -72,9 +73,10 @@ class IosSession(private val defaults: NSUserDefaults = NSUserDefaults.standardU
                 defaults.setObject(value, forKey = "answerMode")
                 AppAction.SetAnswerMode(it)
             }
-            "explanationMethod" -> ExplanationMethod.entries.firstOrNull { it.name == value }?.let {
+            // Swift still speaks the pre-UC-10 2-value wire vocabulary (see [legacyStyleWireValue]).
+            "explanationMethod" -> legacyStyleWireValue(value)?.let {
                 defaults.setObject(value, forKey = "explanationMethod")
-                AppAction.SetExplanationMethod(it)
+                AppAction.SetStyle(it)
             }
             "draft" -> AppAction.EditAnswer(value)
             "continueIntroduction" -> AppAction.ContinueIntroduction
@@ -161,8 +163,7 @@ class IosSession(private val defaults: NSUserDefaults = NSUserDefaults.standardU
             TimeCapture(now, formatter.stringFromDate(NSDate(timeIntervalSinceReferenceDate = now.toEpochMilliseconds() / 1000.0 - 978307200.0)))
         },
         scope,
-        if (defaults.stringForKey("explanationMethod") == "Situations")
-            ExplanationMethod.Situations else ExplanationMethod.Logic,
+        legacyStyleWireValue(defaults.stringForKey("explanationMethod") ?: "") ?: StyleId.RuleFirst,
         if (defaults.stringForKey("answerMode") == "Typed") AnswerMode.Typed else AnswerMode.Oral,
     )
 }

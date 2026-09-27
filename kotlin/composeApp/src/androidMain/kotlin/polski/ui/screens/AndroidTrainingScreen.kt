@@ -46,7 +46,7 @@ import polski.presentation.CardEffect
 import polski.presentation.CardPhase
 import polski.presentation.TrainingMode
 import polski.presentation.ChangeSide
-import polski.presentation.ExplanationMethod
+import polski.presentation.StyleId
 import polski.presentation.changeHighlightParts
 import polski.presentation.ContrastPair
 import polski.presentation.sentenceHighlightParts
@@ -144,11 +144,11 @@ internal fun AndroidTrainingScreen(
                 val exercise = state.exercise
                 if (exercise != null) AndroidInfoCard("${skillById(exercise.primarySkill).level} · ${skillById(exercise.primarySkill).title}") {
                     val presentation = presentationBySkillId(exercise.primarySkill)
-                    val method = if (state.explanationMethod == ExplanationMethod.Logic) presentation.logic else presentation.situations
-                    AndroidChoiceMenu("Подача", state.explanationMethod.name,
-                        listOf(ExplanationMethod.Logic.name to "Схемы и логика",
-                            ExplanationMethod.Situations.name to "Живые ситуации")) {
-                        dispatch(AppAction.SetExplanationMethod(ExplanationMethod.valueOf(it)))
+                    val method = if (state.styleId == StyleId.SituationFirst) presentation.situations else presentation.logic
+                    AndroidChoiceMenu("Подача", state.styleId.name,
+                        listOf(StyleId.RuleFirst.name to "Схемы и логика",
+                            StyleId.SituationFirst.name to "Живые ситуации")) {
+                        dispatch(AppAction.SetStyle(StyleId.valueOf(it)))
                     }
                     if (state.phase == CardPhase.Question && state.introPending) {
                         Text("Знакомство с навыком", style = MaterialTheme.typography.titleMedium)
@@ -239,7 +239,7 @@ internal fun AndroidTrainingScreen(
                                     }
                                     AndroidStaggeredReveal(1, reduceMotion) {
                                         Column(verticalArrangement = Arrangement.spacedBy(18.dp)) {
-                                            if (state.explanationMethod == ExplanationMethod.Situations) {
+                                            if (state.styleId == StyleId.SituationFirst) {
                                                 Text(method.feedback)
                                                 Text(exercise.explanation)
                                             }
@@ -263,7 +263,7 @@ internal fun AndroidTrainingScreen(
                                                         color = MaterialTheme.colorScheme.onTertiaryContainer)
                                                     Text(skillById(exercise.primarySkill).formula, style = MaterialTheme.typography.titleMedium,
                                                         fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onTertiaryContainer)
-                                                    if (state.explanationMethod == ExplanationMethod.Logic) {
+                                                    if (state.styleId != StyleId.SituationFirst) {
                                                         Text(method.feedback, color = MaterialTheme.colorScheme.onTertiaryContainer)
                                                         Text(exercise.explanation, color = MaterialTheme.colorScheme.onTertiaryContainer)
                                                     }

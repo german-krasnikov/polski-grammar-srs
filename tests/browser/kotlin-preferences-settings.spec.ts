@@ -60,14 +60,14 @@ test('legacy method migrates once and settings route preserves the question draf
   const before = await page.evaluate(key => localStorage.getItem(key), progressKey);
   await page.getByRole('button', { name: 'Настройки' }).click();
   await expect(page).toHaveURL(/#\/settings$/);
-  await expect(page.getByRole('combobox', { name: 'Подача объяснений в настройках' })).toHaveValue('Situations');
+  await expect(page.getByRole('combobox', { name: 'Подача объяснений в настройках' })).toHaveValue('SituationFirst');
   await page.getByRole('combobox', { name: 'Тема' }).selectOption('Light');
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
   await page.goBack();
   await expect(page).toHaveURL(/#\/training$/);
   await expect(page.getByRole('textbox', { name: 'Ответ по-польски' })).toHaveValue('Moja próba');
   expect(await page.evaluate(key => localStorage.getItem(key), progressKey)).toBe(before);
-  expect(await page.evaluate(key => JSON.parse(localStorage.getItem(key) ?? '{}').explanationMethod, preferencesKey)).toBe('Situations');
+  expect(await page.evaluate(key => JSON.parse(localStorage.getItem(key) ?? '{}').styleId, preferencesKey)).toBe('SituationFirst');
   await page.reload();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
 });
@@ -80,7 +80,7 @@ test('legacy tint is preserved in settings JSON without an optical control', asy
   await page.getByRole('combobox', { name: 'Тема' }).selectOption('Light');
   expect(await page.evaluate(() => localStorage.getItem('polski-preferences-v1-backup'))).toBe(legacy);
   const migrated = await page.evaluate(key => JSON.parse(localStorage.getItem(key)!), preferencesKey);
-  expect(migrated).toMatchObject({ schemaVersion: 2, appearance: 'Light', answerMode: 'Typed', glassTintPercent: 50 });
+  expect(migrated).toMatchObject({ schemaVersion: 3, appearance: 'Light', answerMode: 'Typed', glassTintPercent: 50 });
   const custom = { ...migrated, glassTintPercent: 17 };
   await page.addInitScript(([key, value]) => localStorage.setItem(key, JSON.stringify(value)), [preferencesKey, custom] as const);
   await page.reload();
@@ -128,7 +128,7 @@ test('unreadable future settings stay exportable and cannot be overwritten by a 
   await page.addInitScript(value => localStorage.setItem('polski-preferences-v1', value), raw);
   await page.goto('/#/settings');
   await expect(page.getByRole('status')).toContainText('восстановления');
-  await page.getByRole('combobox', { name: 'Подача объяснений в настройках' }).selectOption('Situations');
+  await page.getByRole('combobox', { name: 'Подача объяснений в настройках' }).selectOption('SituationFirst');
   expect(await page.evaluate(key => localStorage.getItem(key), preferencesKey)).toBe(raw);
   await expect(page.getByRole('status')).toContainText('Сохраните исходный JSON');
 });

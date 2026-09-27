@@ -8,7 +8,7 @@ import kotlinx.coroutines.withContext
 import polski.preferences.PreferencesDecode
 import polski.preferences.PreferencesLoad
 import polski.preferences.PreferencesSave
-import polski.preferences.PreferredMethod
+import polski.preferences.PreferredStyle
 import polski.preferences.UserPreferencesCodec
 import polski.preferences.UserPreferencesV2
 
@@ -37,7 +37,7 @@ internal class AndroidUserPreferencesStore(context: Context) {
         }
         val legacy = storage.getString("explanationMethod", null)
         val initial = UserPreferencesV2(
-            explanationMethod = if (legacy == "Situations") PreferredMethod.Situations else PreferredMethod.Logic,
+            styleId = if (legacy == "Situations") PreferredStyle.SituationFirst else PreferredStyle.RuleFirst,
         )
         return when (val saved = saveUnlocked(initial)) {
             PreferencesSave.Saved -> PreferencesLoad.Loaded(initial)

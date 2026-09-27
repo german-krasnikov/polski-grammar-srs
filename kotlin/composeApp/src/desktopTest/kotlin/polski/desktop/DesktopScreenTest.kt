@@ -49,7 +49,7 @@ import polski.presentation.AppTab
 import polski.presentation.AppUiState
 import polski.presentation.AnswerMode
 import polski.presentation.CardPhase
-import polski.presentation.ExplanationMethod
+import polski.presentation.StyleId
 import polski.presentation.LoadStatus
 import polski.presentation.MatrixSection
 import polski.presentation.MatrixSelection
@@ -85,7 +85,7 @@ class DesktopScreenTest {
         onNodeWithText("Живые ситуации")
             .performSemanticsAction(SemanticsActions.RequestFocus)
             .performKeyInput { pressKey(Key.Spacebar) }
-        assertEquals(listOf<AppAction>(AppAction.SetExplanationMethod(ExplanationMethod.Situations)), actions)
+        assertEquals(listOf<AppAction>(AppAction.SetStyle(StyleId.SituationFirst)), actions)
     }
 
     @OptIn(ExperimentalTestApi::class)
@@ -132,7 +132,7 @@ class DesktopScreenTest {
                         actions += action
                         when (action) {
                             is AppAction.EditAnswer -> state = state.copy(draft = action.text)
-                            is AppAction.SetExplanationMethod -> state = state.copy(explanationMethod = action.method)
+                            is AppAction.SetStyle -> state = state.copy(styleId = action.styleId)
                             else -> Unit
                         }
                     }, FocusRequester(), { "test-date" })
@@ -144,7 +144,7 @@ class DesktopScreenTest {
         assertEquals("Moja próba", state.draft)
         onNodeWithText("Живые ситуации").performScrollTo().performClick()
         waitForIdle()
-        assertEquals(ExplanationMethod.Situations, state.explanationMethod)
+        assertEquals(StyleId.SituationFirst, state.styleId)
         assertEquals("Moja próba", state.draft)
         onNodeWithText(exercise.expected).assertDoesNotExist()
         onNodeWithText("Проверить и показать ответ").performScrollTo().performClick()

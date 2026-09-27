@@ -7,9 +7,12 @@ import polski.preferences.Appearance
 import polski.preferences.Motion
 import polski.preferences.PreferencesDecode
 import polski.preferences.PreferredAnswerMode
-import polski.preferences.PreferredMethod
+import polski.preferences.PreferredStyle
 import polski.preferences.UserPreferencesCodec
 import polski.preferences.UserPreferencesV2
+import polski.presentation.StyleId
+import polski.presentation.legacyStyleWireValue
+import polski.presentation.toLegacyWireValue
 
 /** Native Settings bridge. The Apple material setting is owned by the OS; portable tint is retained in JSON. */
 class IosPreferencesSession(
@@ -19,8 +22,8 @@ class IosPreferencesSession(
     private val backupKey = "polski-preferences-import-backup-latest"
     private var loaded: PreferencesDecode = defaults.stringForKey(key)?.let(UserPreferencesCodec::decode)
         ?: PreferencesDecode.Loaded(UserPreferencesV2(
-            explanationMethod = if (defaults.stringForKey("explanationMethod") == "Situations")
-                PreferredMethod.Situations else PreferredMethod.Logic,
+            styleId = if (defaults.stringForKey("explanationMethod") == "Situations")
+                PreferredStyle.SituationFirst else PreferredStyle.RuleFirst,
         ))
 
     var onState: ((String) -> Unit)? = null
@@ -31,7 +34,7 @@ class IosPreferencesSession(
         when (val result = loaded) {
             is PreferencesDecode.Loaded -> {
                 put("status", "Ready")
-                put("method", result.value.explanationMethod.name)
+                put("method", StyleId.valueOf(result.value.styleId.name).toLegacyWireValue())
                 put("answerMode", result.value.answerMode.name)
                 put("appearance", result.value.appearance.name)
                 put("motion", result.value.motion.name)
@@ -50,7 +53,7 @@ class IosPreferencesSession(
     fun set(field: String, value: String): String? {
         val current = (loaded as? PreferencesDecode.Loaded)?.value ?: return "Настройки требуют восстановления"
         val next = when (field) {
-            "method" -> current.copy(explanationMethod = PreferredMethod.entries.firstOrNull { it.name == value } ?: return "Неизвестный метод")
+            "method" -> current.copy(styleId = legacyStyleWireValue(value)?.let { PreferredStyle.valueOf(it.name) } ?: return "Неизвестный метод")
             "answerMode" -> current.copy(answerMode = PreferredAnswerMode.entries.firstOrNull { it.name == value } ?: return "Неизвестный способ ответа")
             "appearance" -> current.copy(appearance = Appearance.entries.firstOrNull { it.name == value } ?: return "Неизвестная тема")
             "motion" -> current.copy(motion = Motion.entries.firstOrNull { it.name == value } ?: return "Неизвестное движение")

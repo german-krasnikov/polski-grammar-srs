@@ -1,6 +1,8 @@
 package polski.data
 
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonArray
+import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.boolean
@@ -11,6 +13,8 @@ import kotlinx.serialization.json.jsonPrimitive
 import polski.model.*
 import polski.presentation.ContrastPair
 import polski.presentation.EndingPart
+import polski.presentation.NativeParallelPair
+import polski.presentation.TableRow
 
 data class MethodPresentation(
     val introduction: String,
@@ -25,6 +29,20 @@ data class SkillPresentation(
     val focusAfter: String,
     val logic: MethodPresentation,
     val situations: MethodPresentation,
+)
+/**
+ * Per-skill override content for the 4 presentation styles (UC-10), additive and all-optional:
+ * a missing field means the [StyleComposer] block derives from existing skill/exercise data
+ * instead (see the field-by-field derivation table in `Plans/Kotlin/StylesBlueprint.md`§3).
+ * Only [nativeParallel] has no generic derivation and needs real per-skill authoring.
+ */
+data class SkillStyleContent(
+    val rule: String? = null,
+    val table: List<TableRow>? = null,
+    val scene: String? = null,
+    val nativeParallel: List<NativeParallelPair> = emptyList(),
+    val examples: List<String> = emptyList(),
+    val why: String? = null,
 )
 data class VocabularyItem(
     val id: String,
@@ -395,6 +413,11 @@ internal object PolishCourseData {
         }
     }
 
+    /** Absent on a skill (true for every skill today) means [SkillStyleContent]'s all-derived defaults. */
+    val styleContent: Map<String, SkillStyleContent> by lazy {
+        root.rows("skills").associate { value -> value.string("id") to parseSkillStyleContent(value["styleContent"]) }
+    }
+
     val vocabulary: List<VocabularyItem> by lazy {
         root.obj("vocabulary").rows("items").map { value ->
             VocabularyItem(value.string("id"), value.string("lemma"), value.string("translation"),
@@ -593,6 +616,28 @@ private fun JsonObject.russianSupportComparison(path: String): ContrastPair {
     return ContrastPair(from, to, before, after)
 }
 private fun JsonObject.verbLabel(): VerbLabel = VerbLabel(string("full"), string("compact"))
+
+/** [json] is the optional `skill.styleContent` value as it comes out of `root["styleContent"]` — absent/non-object means the all-derived default. */
+internal fun parseSkillStyleContent(json: JsonElement?): SkillStyleContent =
+    (json as? JsonObject)?.toSkillStyleContent() ?: SkillStyleContent()
+
+private fun JsonObject.toSkillStyleContent(): SkillStyleContent = SkillStyleContent(
+    rule = optionalString("rule"),
+    table = (get("table") as? JsonObject)?.rows("rows")?.map { it.toTableRow() },
+    scene = optionalString("scene"),
+    nativeParallel = (get("nativeParallel") as? JsonArray)?.map { it.jsonObject.toNativeParallelPair() } ?: emptyList(),
+    examples = (get("examples") as? JsonArray)?.map { it.jsonPrimitive.content } ?: emptyList(),
+    why = optionalString("why"),
+)
+
+private fun JsonObject.toTableRow(): TableRow = TableRow(string("label"), endingParts("before"), endingParts("after"))
+
+private fun JsonObject.toNativeParallelPair(): NativeParallelPair =
+    NativeParallelPair(string("native"), string("target"), string("note"), getValue("matches").jsonPrimitive.boolean)
+
+private fun JsonObject.endingParts(key: String): List<EndingPart> = rows(key).map { part ->
+    EndingPart(part.string("text"), part.getValue("isEnding").jsonPrimitive.boolean, part.getValue("isChanged").jsonPrimitive.boolean)
+}
 private fun <T> List<T>.requireUniqueIds(id: (T) -> String): List<T> = also { items ->
     require(items.isNotEmpty() && items.map(id).distinct().size == items.size) { "Duplicate or missing course IDs" }
 }

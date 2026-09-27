@@ -4,7 +4,7 @@ import kotlinx.browser.window
 import polski.preferences.PreferencesDecode
 import polski.preferences.PreferencesLoad
 import polski.preferences.PreferencesSave
-import polski.preferences.PreferredMethod
+import polski.preferences.PreferredStyle
 import polski.preferences.UserPreferencesCodec
 import polski.preferences.UserPreferencesRepository
 import polski.preferences.UserPreferencesV2
@@ -30,7 +30,7 @@ internal class WebPreferencesRepository : UserPreferencesRepository {
         val legacy = try { window.localStorage.getItem(LEGACY_METHOD_KEY) }
         catch (error: Throwable) { return PreferencesLoad.Unavailable(error.message ?: "Хранилище настроек недоступно") }
         if (legacy == null) return PreferencesLoad.Missing
-        val migrated = UserPreferencesV2(explanationMethod = if (legacy == "situations") PreferredMethod.Situations else PreferredMethod.Logic)
+        val migrated = UserPreferencesV2(styleId = if (legacy == "situations") PreferredStyle.SituationFirst else PreferredStyle.RuleFirst)
         return when (save(migrated)) {
             PreferencesSave.Saved -> PreferencesLoad.Loaded(migrated)
             is PreferencesSave.WriteFailed -> PreferencesLoad.Unavailable("Не удалось перенести настройки; прежний ключ сохранён")

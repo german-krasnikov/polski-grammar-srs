@@ -11,7 +11,7 @@ sealed interface AppAction {
     data object OpenSkillPicker : AppAction
     data class ChooseSkill(val skillId: String, val preferredSeed: polski.model.SentenceSeed? = null) : AppAction
     data class SetAnswerMode(val mode: AnswerMode) : AppAction
-    data class SetExplanationMethod(val method: ExplanationMethod) : AppAction
+    data class SetStyle(val styleId: StyleId) : AppAction
     data object ContinueIntroduction : AppAction
     data class EditAnswer(val text: String) : AppAction
     data class Reveal(val exerciseId: String) : AppAction

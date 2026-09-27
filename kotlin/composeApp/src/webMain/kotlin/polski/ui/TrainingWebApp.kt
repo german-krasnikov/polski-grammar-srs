@@ -31,7 +31,7 @@ import polski.platform.browserFormatDate
 import polski.platform.WebProgressRepository
 import polski.platform.WebAppearance
 import polski.preferences.PreferredAnswerMode
-import polski.preferences.PreferredMethod
+import polski.preferences.PreferredStyle
 import polski.presentation.*
 import polski.srs.FsrsScheduler
 import polski.srs.Rating
@@ -59,7 +59,7 @@ fun TrainingWebApp() {
                 TimeCapture(at, BrowserLocalDayProvider().localDay(at))
             },
             scope,
-            if (preferences.value.explanationMethod == PreferredMethod.Situations) ExplanationMethod.Situations else ExplanationMethod.Logic,
+            StyleId.valueOf(preferences.value.styleId.name),
             if (preferences.value.answerMode == PreferredAnswerMode.Typed) AnswerMode.Typed else AnswerMode.Oral,
         )
     }
@@ -173,7 +173,7 @@ fun TrainingWebApp() {
             val dispatch: (AppAction) -> Unit = { action ->
                 when (action) {
                     is AppAction.SelectTab -> routes.navigate(WebRoute.forTab(action.tab))
-                    is AppAction.SetExplanationMethod -> preferences.setMethod(action.method, store)
+                    is AppAction.SetStyle -> preferences.setStyle(action.styleId, store)
                     is AppAction.SetAnswerMode -> preferences.setAnswerMode(action.mode, store)
                     else -> {
                         store.dispatch(action)
@@ -573,10 +573,10 @@ private class TrainingDomRenderer {
         listOf("logic" to "Схемы и логика", "situations" to "Живые ситуации").forEach { (value, title) ->
             methodSelect.appendChild(node("option", text = title).apply { setAttribute("value", value) })
         }
-        methodSelect.value = if (state.explanationMethod == ExplanationMethod.Logic) "logic" else "situations"
+        methodSelect.value = if (state.styleId == StyleId.SituationFirst) "situations" else "logic"
         methodSelect.addEventListener("change", {
-            val method = if (methodSelect.value == "situations") ExplanationMethod.Situations else ExplanationMethod.Logic
-            dispatch(AppAction.SetExplanationMethod(method))
+            val styleId = if (methodSelect.value == "situations") StyleId.SituationFirst else StyleId.RuleFirst
+            dispatch(AppAction.SetStyle(styleId))
         })
         methodLabel.appendChild(methodSelect)
         options.appendChild(button(if (state.showReference && !state.introPending) "Скрыть таблицу" else "Таблица под рукой") {
@@ -714,7 +714,7 @@ private class TrainingDomRenderer {
         val exercise = state.exercise ?: return
         val skill = polski.data.skillById(exercise.primarySkill)
         val presentation = polski.data.presentationBySkillId(exercise.primarySkill)
-        val method = if (state.explanationMethod == ExplanationMethod.Logic) presentation.logic else presentation.situations
+        val method = if (state.styleId == StyleId.SituationFirst) presentation.situations else presentation.logic
         card.appendChild(node("div", "card-meta").apply {
             appendChild(node("span", text = when (state.mode) {
                 TrainingMode.Chain -> "Цепочка · ${state.chainIndex + 1} / ${state.chain.size}"
@@ -725,7 +725,7 @@ private class TrainingDomRenderer {
         })
         if (state.introPending && state.phase == CardPhase.Question) {
             card.appendChild(node("div", "card-front method-introduce").apply {
-                appendChild(node("span", "eyebrow", if (state.explanationMethod == ExplanationMethod.Situations) "Сцена и намерение" else "Признаки и операция"))
+                appendChild(node("span", "eyebrow", if (state.styleId == StyleId.SituationFirst) "Сцена и намерение" else "Признаки и операция"))
                 appendChild(node("p", "source-sentence").apply {
                     setAttribute("lang", "pl")
                     appendContrastParts(this, sentenceHighlightParts(exercise.source, exercise.changes, ChangeSide.Before), "change-before")
@@ -744,7 +744,7 @@ private class TrainingDomRenderer {
                 appendContrastParts(this, sentenceHighlightParts(exercise.source, exercise.changes, ChangeSide.Before), "change-before")
             })
             appendChild(node("div", "operation").apply {
-                appendChild(node("span", text = if (state.explanationMethod == ExplanationMethod.Logic) "Преобразуй" else "Ситуация"))
+                appendChild(node("span", text = if (state.styleId == StyleId.SituationFirst) "Ситуация" else "Преобразуй"))
                 appendChild(node("h2", text = exercise.prompt))
                 appendChild(node("p", "method-retrieve", method.retrieve))
                 appendChild(node("small", "method-lead", method.promptLead))
@@ -851,12 +851,12 @@ private class TrainingDomRenderer {
             })
         }
         val feedbackMethod = polski.data.presentationBySkillId(exercise.primarySkill).let { presentation ->
-            if (state.explanationMethod == ExplanationMethod.Logic) presentation.logic else presentation.situations
+            if (state.styleId == StyleId.SituationFirst) presentation.situations else presentation.logic
         }
         back.appendChild(node("div", "method-feedback").apply {
-            appendChild(node("h3", text = if (state.explanationMethod == ExplanationMethod.Situations) "Сравни смысл и форму" else "Разбор изменений"))
+            appendChild(node("h3", text = if (state.styleId == StyleId.SituationFirst) "Сравни смысл и форму" else "Разбор изменений"))
             appendChild(node("p", text = feedbackMethod.feedback))
-            if (state.explanationMethod == ExplanationMethod.Situations) appendChild(node("p", text = exercise.explanation))
+            if (state.styleId == StyleId.SituationFirst) appendChild(node("p", text = exercise.explanation))
         })
         back.appendChild(node("div", "change-list").apply {
             appendChild(node("h3", text = "Что изменилось"))
@@ -881,9 +881,9 @@ private class TrainingDomRenderer {
         rule.appendChild(node("small", text = "ЗАПОМНИ"))
         rule.appendChild(node("strong", text = polski.data.skillById(exercise.primarySkill).formula))
         val presentation = polski.data.presentationBySkillId(exercise.primarySkill)
-        val method = if (state.explanationMethod == ExplanationMethod.Logic) presentation.logic else presentation.situations
+        val method = if (state.styleId == StyleId.SituationFirst) presentation.situations else presentation.logic
         rule.appendChild(node("p", text = method.introduction))
-        if (state.explanationMethod == ExplanationMethod.Logic) rule.appendChild(node("p", text = exercise.explanation))
+        if (state.styleId != StyleId.SituationFirst) rule.appendChild(node("p", text = exercise.explanation))
         rule.appendChild(node("div", "rule-contrast").apply {
             setAttribute("lang", "pl")
             appendChild(node("span", "form-contrast").apply {

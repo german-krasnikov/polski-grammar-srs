@@ -20,7 +20,7 @@ import kotlin.random.Random
 import kotlin.time.Clock
 import polski.presentation.AppAction
 import polski.presentation.EffectOutcome
-import polski.presentation.ExplanationMethod
+import polski.presentation.StyleId
 import polski.presentation.TimeCapture
 import polski.presentation.TimeSource
 import polski.presentation.TrainingStore
@@ -36,7 +36,7 @@ import polski.preferences.Appearance
 import polski.preferences.Motion
 import polski.preferences.PreferencesLoad
 import polski.preferences.PreferencesSave
-import polski.preferences.PreferredMethod
+import polski.preferences.PreferredStyle
 import polski.preferences.UserPreferencesV2
 
 class AndroidSessionViewModel(context: Context) : ViewModel() {
@@ -67,10 +67,9 @@ class AndroidSessionViewModel(context: Context) : ViewModel() {
                     preferences = loaded.value
                     savedPreferences = loaded.value
                     preferencesError = null
-                    val preferred = if (loaded.value.explanationMethod == PreferredMethod.Situations)
-                        ExplanationMethod.Situations else ExplanationMethod.Logic
-                    if (store.state.value.explanationMethod != preferred) {
-                        store.dispatch(AppAction.SetExplanationMethod(preferred))
+                    val preferred = StyleId.valueOf(loaded.value.styleId.name)
+                    if (store.state.value.styleId != preferred) {
+                        store.dispatch(AppAction.SetStyle(preferred))
                     }
                 }
                 is PreferencesLoad.RecoveryRequired -> preferencesError = "Настройки требуют восстановления; исходный JSON сохранён"
@@ -91,7 +90,7 @@ class AndroidSessionViewModel(context: Context) : ViewModel() {
             TimeCapture(now, SimpleDateFormat("yyyy-MM-dd", Locale.ROOT).format(Date(now.toEpochMilliseconds())))
         },
         viewModelScope,
-        if (preferences.explanationMethod.name == "Situations") ExplanationMethod.Situations else ExplanationMethod.Logic,
+        StyleId.valueOf(preferences.styleId.name),
     )
 
     fun setAppearance(appearance: Appearance) {
@@ -99,10 +98,10 @@ class AndroidSessionViewModel(context: Context) : ViewModel() {
         updatePreferences(preferences.copy(appearance = appearance))
     }
 
-    fun persistExplanationMethod(method: ExplanationMethod) {
-        val preferred = if (method == ExplanationMethod.Situations) PreferredMethod.Situations else PreferredMethod.Logic
-        if (preferences.explanationMethod == preferred) return
-        updatePreferences(preferences.copy(explanationMethod = preferred))
+    fun persistStyle(styleId: StyleId) {
+        val preferred = PreferredStyle.valueOf(styleId.name)
+        if (preferences.styleId == preferred) return
+        updatePreferences(preferences.copy(styleId = preferred))
     }
 
     fun setMotion(motion: Motion) {

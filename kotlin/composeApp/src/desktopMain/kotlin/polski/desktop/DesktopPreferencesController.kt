@@ -9,13 +9,13 @@ import polski.preferences.PreferencesDecode
 import polski.preferences.PreferencesLoad
 import polski.preferences.PreferencesSave
 import polski.preferences.PreferredAnswerMode
-import polski.preferences.PreferredMethod
+import polski.preferences.PreferredStyle
 import polski.preferences.UserPreferencesCodec
 import polski.preferences.UserPreferencesV1
 import polski.presentation.AnswerMode
 import polski.presentation.AppAction
 import polski.presentation.CardPhase
-import polski.presentation.ExplanationMethod
+import polski.presentation.StyleId
 
 internal sealed interface DesktopPreferencesStatus {
     data object Loaded : DesktopPreferencesStatus
@@ -39,10 +39,9 @@ internal class DesktopPreferencesController(private val repository: DesktopPrefe
     val recoveryRaw: String? get() = repository.recoveryRaw()
     fun exportRaw(): String = recoveryRaw ?: UserPreferencesCodec.encode(value)
 
-    fun setMethod(method: ExplanationMethod, dispatch: (AppAction) -> Unit) {
-        if (save(value.copy(explanationMethod =
-                if (method == ExplanationMethod.Logic) PreferredMethod.Logic else PreferredMethod.Situations))) {
-            dispatch(AppAction.SetExplanationMethod(method))
+    fun setStyle(styleId: StyleId, dispatch: (AppAction) -> Unit) {
+        if (save(value.copy(styleId = PreferredStyle.valueOf(styleId.name)))) {
+            dispatch(AppAction.SetStyle(styleId))
         }
     }
 
@@ -66,8 +65,7 @@ internal class DesktopPreferencesController(private val repository: DesktopPrefe
             PreferencesSave.Saved -> {
                 value = (UserPreferencesCodec.decode(raw) as PreferencesDecode.Loaded).value
                 status = DesktopPreferencesStatus.Loaded
-                val method = if (value.explanationMethod == PreferredMethod.Logic) ExplanationMethod.Logic else ExplanationMethod.Situations
-                dispatch(AppAction.SetExplanationMethod(method))
+                dispatch(AppAction.SetStyle(StyleId.valueOf(value.styleId.name)))
                 applyPendingAnswerMode(phase, currentAnswerMode, dispatch)
             }
             is PreferencesSave.WriteFailed -> status = DesktopPreferencesStatus.WriteFailed(saved.reason)

@@ -10,10 +10,10 @@ import org.w3c.files.FileReader
 import polski.preferences.Appearance
 import polski.preferences.Motion
 import polski.preferences.PreferredAnswerMode
-import polski.preferences.PreferredMethod
+import polski.preferences.PreferredStyle
 import polski.presentation.AnswerMode
 import polski.presentation.AppAction
-import polski.presentation.ExplanationMethod
+import polski.presentation.StyleId
 import polski.presentation.TrainingStore
 
 @OptIn(kotlin.js.ExperimentalWasmJsInterop::class)
@@ -33,8 +33,8 @@ internal fun renderSettingsWeb(
     val learning = settingsNode("section", "card settings-panel")
     learning.appendChild(settingsNode("h3", text = "Обучение"))
     root.appendChild(learning)
-    learning.appendChild(settingsSelect("Подача объяснений в настройках", "settings-method", listOf("Logic" to "Схемы и логика", "Situations" to "Живые ситуации"), preferences.value.explanationMethod.name) { selected ->
-        preferences.setMethod(if (selected == "Situations") ExplanationMethod.Situations else ExplanationMethod.Logic, store)
+    learning.appendChild(settingsSelect("Подача объяснений в настройках", "settings-method", listOf("RuleFirst" to "Схемы и логика", "SituationFirst" to "Живые ситуации"), preferences.value.styleId.name) { selected ->
+        preferences.setStyle(if (selected == "SituationFirst") StyleId.SituationFirst else StyleId.RuleFirst, store)
     })
     learning.appendChild(settingsSelect("Способ ответа", "settings-answer-mode", listOf("Oral" to "Вслух или про себя", "Typed" to "Напечатать"), preferences.value.answerMode.name) { selected ->
         preferences.setAnswerMode(if (selected == "Typed") AnswerMode.Typed else AnswerMode.Oral, store)

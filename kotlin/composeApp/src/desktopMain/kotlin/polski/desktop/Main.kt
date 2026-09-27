@@ -79,7 +79,7 @@ import polski.presentation.AppTab
 import polski.presentation.AppUiState
 import polski.presentation.CardPhase
 import polski.presentation.EffectOutcome
-import polski.presentation.ExplanationMethod
+import polski.presentation.StyleId
 import polski.presentation.LoadStatus
 import polski.presentation.TimeCapture
 import polski.presentation.TimeSource
@@ -100,7 +100,7 @@ import polski.ui.screens.RecoveryScreen
 import polski.ui.screens.TabButton
 import polski.ui.screens.VocabularyScreen
 import polski.vocabulary.VocabularySession
-import polski.preferences.PreferredMethod
+import polski.preferences.PreferredStyle
 import polski.preferences.PreferredAnswerMode
 import polski.preferences.Appearance
 import polski.preferences.Motion
@@ -164,8 +164,7 @@ private fun DesktopSession(
                 TimeCapture(at, localDay)
             },
             scope,
-            if (preferences.value.explanationMethod == PreferredMethod.Situations)
-                ExplanationMethod.Situations else ExplanationMethod.Logic,
+            StyleId.valueOf(preferences.value.styleId.name),
             if (preferences.value.answerMode == PreferredAnswerMode.Typed) AnswerMode.Typed else AnswerMode.Oral,
         )
     }
@@ -337,7 +336,7 @@ private fun DesktopSession(
 
     val dispatch: (AppAction) -> Unit = { action ->
         when (action) {
-            is AppAction.SetExplanationMethod -> preferences.setMethod(action.method, store::dispatch)
+            is AppAction.SetStyle -> preferences.setStyle(action.styleId, store::dispatch)
             is AppAction.SetAnswerMode -> preferences.setAnswerMode(action.mode, state.phase, store::dispatch)
             else -> store.dispatch(action)
         }
@@ -388,7 +387,7 @@ private fun DesktopSession(
                 }
                 when {
                     settingsOpen -> DesktopSettingsScreen(preferences, macSystemStatus, onClose = { onSettings(false) },
-                        onMethod = { preferences.setMethod(it, store::dispatch) },
+                        onStyle = { preferences.setStyle(it, store::dispatch) },
                         onAnswerMode = { preferences.setAnswerMode(it, state.phase, store::dispatch) },
                         onAppearance = preferences::setAppearance, onMotion = preferences::setMotion,
                         onProgressImport = ::importFromFile, onProgressExport = { store.dispatch(AppAction.RequestExport) },

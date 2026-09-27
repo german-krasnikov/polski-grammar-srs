@@ -6,11 +6,11 @@ import kotlin.test.assertEquals
 import kotlin.test.assertIs
 import polski.preferences.Appearance
 import polski.preferences.PreferredAnswerMode
-import polski.preferences.PreferredMethod
+import polski.preferences.PreferredStyle
 import polski.presentation.AnswerMode
 import polski.presentation.AppAction
 import polski.presentation.CardPhase
-import polski.presentation.ExplanationMethod
+import polski.presentation.StyleId
 
 class DesktopPreferencesControllerTest {
     @Test
@@ -35,10 +35,10 @@ class DesktopPreferencesControllerTest {
         try {
             val controller = DesktopPreferencesController(DesktopPreferencesRepository(directory, { null }))
             val actions = mutableListOf<AppAction>()
-            controller.setMethod(ExplanationMethod.Situations, actions::add)
+            controller.setStyle(StyleId.SituationFirst, actions::add)
             controller.setAnswerMode(AnswerMode.Typed, CardPhase.Revealed, actions::add)
-            assertEquals(listOf<AppAction>(AppAction.SetExplanationMethod(ExplanationMethod.Situations)), actions)
-            assertEquals(PreferredMethod.Situations, controller.value.explanationMethod)
+            assertEquals(listOf<AppAction>(AppAction.SetStyle(StyleId.SituationFirst)), actions)
+            assertEquals(PreferredStyle.SituationFirst, controller.value.styleId)
             assertEquals(PreferredAnswerMode.Typed, controller.value.answerMode)
             controller.applyPendingAnswerMode(CardPhase.Question, AnswerMode.Oral, actions::add)
             assertEquals(AppAction.SetAnswerMode(AnswerMode.Typed), actions.last())
@@ -51,11 +51,11 @@ class DesktopPreferencesControllerTest {
         val directory = Files.createTempDirectory("polski-controller-")
         try {
             val controller = DesktopPreferencesController(DesktopPreferencesRepository(directory, { null }) { _, _ -> })
-            controller.setMethod(ExplanationMethod.Situations) { }
+            controller.setStyle(StyleId.SituationFirst) { }
             assertIs<DesktopPreferencesStatus.WriteFailed>(controller.status)
-            assertEquals(PreferredMethod.Situations, controller.value.explanationMethod)
-            assertEquals(PreferredMethod.Situations,
-                (polski.preferences.UserPreferencesCodec.decode(controller.exportRaw()) as polski.preferences.PreferencesDecode.Loaded).value.explanationMethod)
+            assertEquals(PreferredStyle.SituationFirst, controller.value.styleId)
+            assertEquals(PreferredStyle.SituationFirst,
+                (polski.preferences.UserPreferencesCodec.decode(controller.exportRaw()) as polski.preferences.PreferencesDecode.Loaded).value.styleId)
         } finally { directory.toFile().deleteRecursively() }
     }
 }

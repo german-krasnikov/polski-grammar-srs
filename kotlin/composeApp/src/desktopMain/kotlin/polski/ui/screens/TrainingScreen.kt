@@ -56,7 +56,7 @@ import polski.presentation.CardPhase
 import polski.presentation.LoadStatus
 import polski.presentation.TrainingMode
 import polski.presentation.ChangeSide
-import polski.presentation.ExplanationMethod
+import polski.presentation.StyleId
 import polski.presentation.changeHighlightParts
 import polski.presentation.sentenceHighlightParts
 import polski.srs.Rating
@@ -173,13 +173,13 @@ internal fun TrainingScreen(state: AppUiState, dispatch: (AppAction) -> Unit, fo
                         val exercise = state.exercise
                         if (exercise != null) {
                             val presentation = presentationBySkillId(exercise.primarySkill)
-                            val method = if (state.explanationMethod == ExplanationMethod.Logic) presentation.logic else presentation.situations
+                            val method = if (state.styleId == StyleId.SituationFirst) presentation.situations else presentation.logic
                             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                                TabButton("Схемы и логика", state.explanationMethod == ExplanationMethod.Logic) {
-                                    dispatch(AppAction.SetExplanationMethod(ExplanationMethod.Logic))
+                                TabButton("Схемы и логика", state.styleId != StyleId.SituationFirst) {
+                                    dispatch(AppAction.SetStyle(StyleId.RuleFirst))
                                 }
-                                TabButton("Живые ситуации", state.explanationMethod == ExplanationMethod.Situations) {
-                                    dispatch(AppAction.SetExplanationMethod(ExplanationMethod.Situations))
+                                TabButton("Живые ситуации", state.styleId == StyleId.SituationFirst) {
+                                    dispatch(AppAction.SetStyle(StyleId.SituationFirst))
                                 }
                             }
                             Text("${skillById(exercise.primarySkill).level} · ${skillById(exercise.primarySkill).title}", color = MaterialTheme.colorScheme.primary)
@@ -227,7 +227,7 @@ internal fun TrainingScreen(state: AppUiState, dispatch: (AppAction) -> Unit, fo
                                     Text(if (state.evaluation?.correct == true) "Совпадает с правильным вариантом" else "Сравни свой ответ с эталоном")
                                     Text(state.frozenAnswer?.takeIf(String::isNotEmpty) ?: "Ответ не введён")
                                 }
-                                if (state.explanationMethod == ExplanationMethod.Situations) {
+                                if (state.styleId == StyleId.SituationFirst) {
                                     Text(method.feedback)
                                     Text(exercise.explanation)
                                 }
@@ -252,7 +252,7 @@ internal fun TrainingScreen(state: AppUiState, dispatch: (AppAction) -> Unit, fo
                                         Text(skillById(exercise.primarySkill).formula, fontWeight = FontWeight.Bold,
                                             style = MaterialTheme.typography.titleMedium,
                                             color = MaterialTheme.colorScheme.onTertiaryContainer)
-                                        if (state.explanationMethod == ExplanationMethod.Logic) {
+                                        if (state.styleId != StyleId.SituationFirst) {
                                             Text(method.feedback, color = MaterialTheme.colorScheme.onTertiaryContainer)
                                             Text(exercise.explanation, color = MaterialTheme.colorScheme.onTertiaryContainer)
                                         }

@@ -13,23 +13,27 @@ sealed interface PreferencesDecode {
     data class RecoveryRequired(val raw: String, val reason: String) : PreferencesDecode
 }
 
-/** Strict v1/v2 wire codec. Unknown data is retained by the caller, never rewritten as defaults. */
+/** Strict v1/v2/v3 wire codec. Unknown data is retained by the caller, never rewritten as defaults. */
 object UserPreferencesCodec {
     private val json = Json { isLenient = false }
     private val fieldsV1 = setOf("schemaVersion", "coursePair", "explanationMethod", "answerMode", "appearance", "motion", "swipeRatingEnabled", "reminder")
     private val fieldsV2 = fieldsV1 + "glassTintPercent" + "animationsEnabled"
+    private val fieldsV3 = fieldsV2 - "explanationMethod" + "styleId"
     private val reminderFields = setOf("enabled", "localTime", "days", "quietStart", "quietEnd")
 
     fun decode(raw: String): PreferencesDecode {
         val root = try { json.parseToJsonElement(raw) as? JsonObject }
         catch (_: Exception) { null } ?: return invalid(raw, "Expected preferences object")
         val version = root.number("schemaVersion") ?: return invalid(raw, "Invalid schemaVersion")
-        if (version !in 1..2) return invalid(raw, "Unsupported schemaVersion: $version")
-        if (root.keys.any { it !in (if (version == 1) fieldsV1 else fieldsV2) }) return invalid(raw, "Unknown preference field")
+        if (version !in 1..3) return invalid(raw, "Unsupported schemaVersion: $version")
+        val allowedFields = when (version) { 1 -> fieldsV1; 2 -> fieldsV2; else -> fieldsV3 }
+        if (root.keys.any { it !in allowedFields }) return invalid(raw, "Unknown preference field")
         val defaults = UserPreferencesV2()
         val pair = root.optionalString("coursePair", defaults.coursePair) ?: return invalid(raw, "Invalid coursePair")
         if (pair != "pl-ru") return invalid(raw, "Unsupported coursePair")
-        val method = root.optionalEnum("explanationMethod", defaults.explanationMethod) ?: return invalid(raw, "Invalid explanationMethod")
+        // v1/v2 wrote `explanationMethod: "Logic"/"Situations"`; v3 writes `styleId` directly with all 4 names.
+        val style = if (version <= 2) root.legacyStyleId(defaults.styleId) ?: return invalid(raw, "Invalid explanationMethod")
+            else root.optionalEnum("styleId", defaults.styleId) ?: return invalid(raw, "Invalid styleId")
         val answer = root.optionalEnum("answerMode", defaults.answerMode) ?: return invalid(raw, "Invalid answerMode")
         val appearance = root.optionalEnum("appearance", defaults.appearance) ?: return invalid(raw, "Invalid appearance")
         val motion = root.optionalEnum("motion", defaults.motion) ?: return invalid(raw, "Invalid motion")
@@ -45,16 +49,16 @@ object UserPreferencesCodec {
         // Missing on decode (v1, or a v2 document saved before this field existed) means enabled.
         val animations = if (version == 1) defaults.animationsEnabled
             else root.optionalBoolean("animationsEnabled", defaults.animationsEnabled) ?: return invalid(raw, "Invalid animationsEnabled")
-        return PreferencesDecode.Loaded(UserPreferencesV2(2, pair, method, answer, appearance, motion, swipe, reminder, tint, animations))
+        return PreferencesDecode.Loaded(UserPreferencesV2(3, pair, style, answer, appearance, motion, swipe, reminder, tint, animations))
     }
 
     fun encode(value: UserPreferencesV2): String {
-        require(value.schemaVersion == 2 && value.coursePair == "pl-ru" && validReminder(value.reminder) && value.glassTintPercent in 0..100)
+        require(value.schemaVersion == 3 && value.coursePair == "pl-ru" && validReminder(value.reminder) && value.glassTintPercent in 0..100)
         val reminder = value.reminder
         val root = JsonObject(mapOf(
-            "schemaVersion" to JsonPrimitive(2),
+            "schemaVersion" to JsonPrimitive(3),
             "coursePair" to JsonPrimitive(value.coursePair),
-            "explanationMethod" to JsonPrimitive(value.explanationMethod.name),
+            "styleId" to JsonPrimitive(value.styleId.name),
             "answerMode" to JsonPrimitive(value.answerMode.name),
             "appearance" to JsonPrimitive(value.appearance.name),
             "motion" to JsonPrimitive(value.motion.name),
@@ -105,6 +109,11 @@ object UserPreferencesCodec {
     private inline fun <reified T : Enum<T>> JsonObject.optionalEnum(key: String, default: T): T? =
         if (key !in this) default else (get(key) as? JsonPrimitive)?.takeIf { it.isString }?.content?.let { wire ->
             enumValues<T>().firstOrNull { it.name == wire }
+        }
+    /** v1/v2 wrote the 2-value `explanationMethod` enum; UC-10 renamed it to the 4-value [PreferredStyle]. */
+    private fun JsonObject.legacyStyleId(default: PreferredStyle): PreferredStyle? =
+        if ("explanationMethod" !in this) default else (get("explanationMethod") as? JsonPrimitive)?.takeIf { it.isString }?.content?.let { wire ->
+            when (wire) { "Logic" -> PreferredStyle.RuleFirst; "Situations" -> PreferredStyle.SituationFirst; else -> null }
         }
     private fun invalid(raw: String, reason: String) = PreferencesDecode.RecoveryRequired(raw, reason)
 }

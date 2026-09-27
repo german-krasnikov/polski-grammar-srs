@@ -29,13 +29,13 @@ class IosPreferencesSessionTest {
             val first = IosPreferencesSession(defaults)
             assertEquals("Situations", Json.parseToJsonElement(first.currentSnapshot()).jsonObject.getValue("method").jsonPrimitive.content)
             val exported = assertNotNull(first.exportJson())
-            assertEquals("Situations", assertIs<PreferencesDecode.Loaded>(UserPreferencesCodec.decode(exported)).value.explanationMethod.name)
+            assertEquals("SituationFirst", assertIs<PreferencesDecode.Loaded>(UserPreferencesCodec.decode(exported)).value.styleId.name)
 
             val restarted = IosPreferencesSession(defaults)
             assertEquals("Situations", Json.parseToJsonElement(restarted.currentSnapshot()).jsonObject.getValue("method").jsonPrimitive.content)
             assertNull(restarted.set(field = "appearance", value = "Dark"))
             val saved = assertIs<PreferencesDecode.Loaded>(UserPreferencesCodec.decode(assertNotNull(restarted.exportJson()))).value
-            assertEquals("Situations", saved.explanationMethod.name)
+            assertEquals("SituationFirst", saved.styleId.name)
             assertEquals("Dark", saved.appearance.name)
         } finally {
             defaults.removePersistentDomainForName(suite)

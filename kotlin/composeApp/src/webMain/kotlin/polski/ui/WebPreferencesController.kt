@@ -9,13 +9,13 @@ import polski.preferences.Motion
 import polski.preferences.PreferencesLoad
 import polski.preferences.PreferencesSave
 import polski.preferences.PreferredAnswerMode
-import polski.preferences.PreferredMethod
+import polski.preferences.PreferredStyle
 import polski.preferences.UserPreferencesCodec
 import polski.preferences.UserPreferencesV2
 import polski.presentation.AnswerMode
 import polski.presentation.AppAction
 import polski.presentation.CardPhase
-import polski.presentation.ExplanationMethod
+import polski.presentation.StyleId
 import polski.presentation.TrainingStore
 
 /** One web-session writer for settings shown on both the card and Settings page. */
@@ -34,9 +34,9 @@ internal class WebPreferencesController(private val repository: WebPreferencesRe
     fun exportRaw(): String = recoveryRaw ?: UserPreferencesCodec.encode(value)
     fun report(message: String) { status = message }
 
-    fun setMethod(method: ExplanationMethod, store: TrainingStore) {
-        if (save(value.copy(explanationMethod = if (method == ExplanationMethod.Logic) PreferredMethod.Logic else PreferredMethod.Situations)))
-            store.dispatch(AppAction.SetExplanationMethod(method))
+    fun setStyle(styleId: StyleId, store: TrainingStore) {
+        if (save(value.copy(styleId = PreferredStyle.valueOf(styleId.name))))
+            store.dispatch(AppAction.SetStyle(styleId))
     }
 
     fun setAnswerMode(mode: AnswerMode, store: TrainingStore) {
@@ -60,7 +60,7 @@ internal class WebPreferencesController(private val repository: WebPreferencesRe
             PreferencesSave.Saved -> {
                 value = (UserPreferencesCodec.decode(raw) as polski.preferences.PreferencesDecode.Loaded).value
                 status = "Настройки импортированы"
-                store.dispatch(AppAction.SetExplanationMethod(if (value.explanationMethod == PreferredMethod.Logic) ExplanationMethod.Logic else ExplanationMethod.Situations))
+                store.dispatch(AppAction.SetStyle(StyleId.valueOf(value.styleId.name)))
                 applyPendingAnswerMode(store)
             }
             is PreferencesSave.WriteFailed -> status = result.reason

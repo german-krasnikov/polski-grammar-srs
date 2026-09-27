@@ -1,6 +1,7 @@
 package polski.preferences
 
-enum class PreferredMethod { Logic, Situations }
+/** UC-10: a display preference, not a diagnosis — задания, FSRS и оценки одинаковы во всех стилях. */
+enum class PreferredStyle { RuleFirst, SituationFirst, NativeContrast, MinimalTheory }
 enum class PreferredAnswerMode { Oral, Typed }
 enum class Appearance { System, Light, Dark }
 enum class Motion { System, Reduced }
@@ -13,11 +14,15 @@ data class ReminderPreferences(
     val quietEnd: String = "08:00",
 )
 
-/** Portable preferences only. Progress, FSRS cards, and host permission state live elsewhere. */
+/**
+ * Portable preferences only. Progress, FSRS cards, and host permission state live elsewhere.
+ * The class name predates schema v3 (UC-10 renamed `explanationMethod` to [styleId]); it is kept
+ * to avoid an unrelated rename across every host adapter — [schemaVersion] is the real version.
+ */
 data class UserPreferencesV2(
-    val schemaVersion: Int = 2,
+    val schemaVersion: Int = 3,
     val coursePair: String = "pl-ru",
-    val explanationMethod: PreferredMethod = PreferredMethod.Logic,
+    val styleId: PreferredStyle = PreferredStyle.RuleFirst,
     val answerMode: PreferredAnswerMode = PreferredAnswerMode.Oral,
     val appearance: Appearance = Appearance.System,
     val motion: Motion = Motion.System,

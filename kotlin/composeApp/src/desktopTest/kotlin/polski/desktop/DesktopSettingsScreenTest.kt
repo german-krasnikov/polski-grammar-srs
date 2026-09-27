@@ -10,7 +10,7 @@ import androidx.compose.ui.test.v2.runComposeUiTest
 import java.nio.file.Files
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import polski.presentation.ExplanationMethod
+import polski.presentation.StyleId
 import polski.ui.screens.DesktopSettingsScreen
 
 class DesktopSettingsScreenTest {
@@ -20,11 +20,11 @@ class DesktopSettingsScreenTest {
         val directory = Files.createTempDirectory("polski-settings-ui-")
         try {
             val controller = DesktopPreferencesController(DesktopPreferencesRepository(directory, { null }))
-            var selected: ExplanationMethod? = null
+            var selected: StyleId? = null
             setContent {
                 MaterialTheme {
                     DesktopSettingsScreen(controller, MacSystemStatus.Available(MacSystemAppearance(false, false, false)),
-                        onClose = {}, onMethod = { selected = it },
+                        onClose = {}, onStyle = { selected = it },
                         onAnswerMode = {}, onAppearance = {}, onMotion = {},
                         onProgressImport = {}, onProgressExport = {},
                         onVocabularyImport = {}, onVocabularyExport = {},
@@ -34,7 +34,7 @@ class DesktopSettingsScreenTest {
             onAllNodesWithText("Польский ↔ русский · активный курс").assertCountEquals(1)
             onAllNodesWithText("Недоступно на Mac в этой сборке").assertCountEquals(1)
             onNodeWithText("Живые ситуации").performClick()
-            assertEquals(ExplanationMethod.Situations, selected)
+            assertEquals(StyleId.SituationFirst, selected)
         } finally { directory.toFile().deleteRecursively() }
     }
 }

@@ -7,7 +7,7 @@ import java.util.prefs.Preferences
 import polski.preferences.PreferencesDecode
 import polski.preferences.PreferencesLoad
 import polski.preferences.PreferencesSave
-import polski.preferences.PreferredMethod
+import polski.preferences.PreferredStyle
 import polski.preferences.UserPreferencesCodec
 import polski.preferences.UserPreferencesRepository
 import polski.preferences.UserPreferencesV1
@@ -38,8 +38,8 @@ internal class DesktopPreferencesRepository(
             }
         } else {
             val oldMethod = legacyMethod() ?: return PreferencesLoad.Missing
-            val migrated = UserPreferencesV1(explanationMethod =
-                if (oldMethod == "Situations") PreferredMethod.Situations else PreferredMethod.Logic)
+            val migrated = UserPreferencesV1(styleId =
+                if (oldMethod == "Situations") PreferredStyle.SituationFirst else PreferredStyle.RuleFirst)
             when (val saved = save(migrated)) {
                 PreferencesSave.Saved -> PreferencesLoad.Loaded(migrated)
                 is PreferencesSave.WriteFailed -> PreferencesLoad.Unavailable(saved.reason)

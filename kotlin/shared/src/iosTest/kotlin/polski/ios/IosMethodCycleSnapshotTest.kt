@@ -11,7 +11,7 @@ import polski.data.presentationBySkillId
 import polski.presentation.AppUiState
 import polski.presentation.AnswerMode
 import polski.presentation.CardPhase
-import polski.presentation.ExplanationMethod
+import polski.presentation.StyleId
 import polski.training.ExerciseFactory
 import polski.training.ExerciseIdFactory
 import polski.training.RandomSource
@@ -24,7 +24,7 @@ class IosMethodCycleSnapshotTest {
             .generateChain(sentenceSeeds.first()).first()
         val presentation = presentationBySkillId(exercise.primarySkill)
         val base = AppUiState(exercise = exercise, chain = listOf(exercise), phase = CardPhase.Question,
-            explanationMethod = ExplanationMethod.Logic, introPending = true)
+            styleId = StyleId.RuleFirst, introPending = true)
 
         val intro = Json.parseToJsonElement(snapshot(base)).jsonObject
         assertTrue(intro.getValue("introPending").jsonPrimitive.content.toBoolean())
@@ -40,16 +40,16 @@ class IosMethodCycleSnapshotTest {
         assertFalse(question.getValue("exercise").jsonObject.containsKey("expected"))
 
         val revealed = Json.parseToJsonElement(snapshot(base.copy(introPending = false,
-            phase = CardPhase.Revealed, explanationMethod = ExplanationMethod.Situations))).jsonObject
+            phase = CardPhase.Revealed, styleId = StyleId.SituationFirst))).jsonObject
         val card = revealed.getValue("exercise").jsonObject
         assertEquals(presentation.situations.feedback, card.getValue("methodFeedback").jsonPrimitive.content)
         assertEquals(presentation.situations.review, card.getValue("methodReview").jsonPrimitive.content)
         assertEquals(exercise.expected, card.getValue("expected").jsonPrimitive.content)
 
-        for (method in ExplanationMethod.entries) {
+        for (styleId in StyleId.entries) {
             val frozen = Json.parseToJsonElement(snapshot(base.copy(introPending = false,
                 phase = CardPhase.Revealed, answerMode = AnswerMode.Typed,
-                draft = "Moja proba", frozenAnswer = "Moja proba", explanationMethod = method))).jsonObject
+                draft = "Moja proba", frozenAnswer = "Moja proba", styleId = styleId))).jsonObject
             assertEquals("Moja proba", frozen.getValue("exercise").jsonObject.getValue("frozenAnswer").jsonPrimitive.content)
         }
     }

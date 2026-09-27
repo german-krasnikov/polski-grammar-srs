@@ -187,7 +187,7 @@ private fun AndroidScreen(
     val store = session.store
     val state by store.state.collectAsStateWithLifecycle()
     val reduceMotion = motionReduced(session.preferences)
-    LaunchedEffect(state.explanationMethod) { session.persistExplanationMethod(state.explanationMethod) }
+    LaunchedEffect(state.styleId) { session.persistStyle(state.styleId) }
     val focusReveal = remember(store) { FocusRequester() }
     var confirmImport by rememberSaveable { mutableStateOf(false) }
     var showSettings by rememberSaveable { mutableStateOf(false) }

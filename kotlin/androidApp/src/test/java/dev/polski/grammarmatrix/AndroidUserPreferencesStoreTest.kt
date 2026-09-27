@@ -56,8 +56,8 @@ class AndroidUserPreferencesStoreTest {
             .putString("explanationMethod", "Situations").commit()
         val repository = AndroidUserPreferencesStore(context)
         val loaded = (repository.load() as PreferencesLoad.Loaded).value
-        assertEquals("Situations", loaded.explanationMethod.name)
-        assertTrue(UserPreferencesCodec.encode(loaded).contains("\"schemaVersion\":2"))
+        assertEquals("SituationFirst", loaded.styleId.name)
+        assertTrue(UserPreferencesCodec.encode(loaded).contains("\"schemaVersion\":3"))
     }
 
     @Test fun v1DocumentMigratesBeforeTintChange() = runBlocking {

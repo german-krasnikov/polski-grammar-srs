@@ -9,7 +9,6 @@ import polski.srs.SchedulePreview
 enum class TrainingMode { Chain, Schedule, Focused }
 enum class AppTab { Training, Vocabulary, Matrix, Progress }
 enum class AnswerMode { Oral, Typed }
-enum class ExplanationMethod { Logic, Situations }
 enum class CardPhase { Question, Revealed, ChainComplete, NoDue }
 enum class MatrixSection { Map, Cases, Verbs, Pronouns }
 enum class LoadStatus { Loading, Ready, MigrationAvailable, RecoveryRequired, Unavailable }
@@ -38,7 +37,8 @@ data class AppUiState(
     val phase: CardPhase = CardPhase.Question,
     val introPending: Boolean = false,
     val answerMode: AnswerMode = AnswerMode.Oral,
-    val explanationMethod: ExplanationMethod = ExplanationMethod.Logic,
+    /** UC-10: a display preference, not a diagnosis — switching it never creates a review. */
+    val styleId: StyleId = StyleId.RuleFirst,
     val draft: String = "",
     val frozenAnswer: String? = null,
     val evaluation: Evaluation? = null,

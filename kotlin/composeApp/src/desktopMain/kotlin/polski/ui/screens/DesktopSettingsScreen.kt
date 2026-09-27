@@ -20,9 +20,9 @@ import polski.desktop.MacSystemStatus
 import polski.preferences.Appearance
 import polski.preferences.Motion
 import polski.preferences.PreferredAnswerMode
-import polski.preferences.PreferredMethod
+import polski.preferences.PreferredStyle
 import polski.presentation.AnswerMode
-import polski.presentation.ExplanationMethod
+import polski.presentation.StyleId
 
 /** Mac-only settings destination; actions are owned by the window and its repositories. */
 @Composable
@@ -30,7 +30,7 @@ internal fun DesktopSettingsScreen(
     preferences: DesktopPreferencesController,
     macSystemStatus: MacSystemStatus,
     onClose: () -> Unit,
-    onMethod: (ExplanationMethod) -> Unit,
+    onStyle: (StyleId) -> Unit,
     onAnswerMode: (AnswerMode) -> Unit,
     onAppearance: (Appearance) -> Unit,
     onMotion: (Motion) -> Unit,
@@ -59,8 +59,8 @@ internal fun DesktopSettingsScreen(
             Text("Польский ↔ русский · активный курс")
             Text("Подача объяснений")
             Row(Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                TabButton("Схемы и логика", preferences.value.explanationMethod == PreferredMethod.Logic) { onMethod(ExplanationMethod.Logic) }
-                TabButton("Живые ситуации", preferences.value.explanationMethod == PreferredMethod.Situations) { onMethod(ExplanationMethod.Situations) }
+                TabButton("Схемы и логика", preferences.value.styleId == PreferredStyle.RuleFirst) { onStyle(StyleId.RuleFirst) }
+                TabButton("Живые ситуации", preferences.value.styleId == PreferredStyle.SituationFirst) { onStyle(StyleId.SituationFirst) }
             }
             Text("Способ ответа")
             Row(Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {

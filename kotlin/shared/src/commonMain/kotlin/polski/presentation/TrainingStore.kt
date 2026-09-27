@@ -47,7 +47,7 @@ class TrainingStore(
     private val exerciseFactory: ExerciseFactory,
     private val time: TimeSource,
     ownerScope: CoroutineScope,
-    initialExplanationMethod: ExplanationMethod = ExplanationMethod.Logic,
+    initialStyleId: StyleId = StyleId.RuleFirst,
     initialAnswerMode: AnswerMode = AnswerMode.Oral,
 ) {
     private val scope = CoroutineScope(ownerScope.coroutineContext + SupervisorJob(ownerScope.coroutineContext[Job]))
@@ -62,7 +62,7 @@ class TrainingStore(
 
     private val initialChain = exerciseFactory.generateChain()
     private val mutableState = MutableStateFlow(
-        AppUiState(chain = initialChain.toList(), exercise = initialChain.first(), explanationMethod = initialExplanationMethod, answerMode = initialAnswerMode),
+        AppUiState(chain = initialChain.toList(), exercise = initialChain.first(), styleId = initialStyleId, answerMode = initialAnswerMode),
     )
     val state: StateFlow<AppUiState> = mutableState
 
@@ -164,7 +164,7 @@ class TrainingStore(
             AppAction.StartSchedule -> ifReady { startSchedule() }
             is AppAction.ChooseSkill -> ifReady { chooseSkill(action) }
             is AppAction.SetAnswerMode -> if (state.value.phase == CardPhase.Question) mutate { it.copy(answerMode = action.mode) }
-            is AppAction.SetExplanationMethod -> mutate { it.copy(explanationMethod = action.method) }
+            is AppAction.SetStyle -> mutate { it.copy(styleId = action.styleId) }
             AppAction.ContinueIntroduction -> if (state.value.phase == CardPhase.Question && state.value.introPending) {
                 mutate { it.copy(introPending = false) }
                 state.value.exercise?.let(::addFocus)
