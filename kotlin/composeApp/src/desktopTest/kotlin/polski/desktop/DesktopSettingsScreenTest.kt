@@ -33,8 +33,10 @@ class DesktopSettingsScreenTest {
             }
             onAllNodesWithText("Польский ↔ русский · активный курс").assertCountEquals(1)
             onAllNodesWithText("Недоступно на Mac в этой сборке").assertCountEquals(1)
-            onNodeWithText("Живые ситуации").performClick()
-            assertEquals(StyleId.SituationFirst, selected)
+            onNodeWithText("Через сравнение с родным").performClick()
+            assertEquals(StyleId.NativeContrast, selected)
+            onNodeWithText("Минимум теории").performClick()
+            assertEquals(StyleId.MinimalTheory, selected)
         } finally { directory.toFile().deleteRecursively() }
     }
 }

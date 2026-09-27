@@ -44,7 +44,12 @@ struct TrainingSnapshot: Decodable {
             let phrasePair: ContrastPair
             let sentencePair: ContrastPair
         }
-        struct SystemCard: Decodable { let id: String; let title: String; let explanation: String; let example: String }
+        /// [example] is the flat `"żona → żonę → żony"` label, kept only for accessibility/VoiceOver
+        /// (`Text` cannot describe a `Text`-chain's own accessibility label from its parts); the
+        /// visible chain renders from [steps] (`MacSnapshot.kt`'s `card.steps.zipWithNext`), one
+        /// [ContrastPair] per arrow, each carrying its own morpheme-level `before`/`after` parts —
+        /// C2, EmphasisUXAudit E6.
+        struct SystemCard: Decodable { let id: String; let title: String; let explanation: String; let example: String; let steps: [ContrastPair] }
         let section: String
         let matrixIntroduction: String
         let pipelineTitle: String
@@ -715,7 +720,8 @@ private struct MatrixView: View {
                             GroupBox(card.title) {
                                 VStack(alignment: .leading) {
                                     Text(card.explanation)
-                                    Text(card.example).font(.headline)
+                                    systemCardChain(card.steps).font(.headline).textSelection(.enabled)
+                                        .accessibilityLabel("\(card.title): \(card.example)")
                                 }.frame(maxWidth: .infinity, alignment: .leading)
                             }
                         }
@@ -739,13 +745,44 @@ private struct MatrixView: View {
 
 }
 
+/// C2 (EmphasisUXAudit E6): a system-map card's chain (`żona → żonę → żony`) is one `before` (the
+/// starting form) followed by every step's `after` — each step's own diff still highlights only
+/// the morpheme that changed at that step, never the whole word. System cards live in the
+/// reference matrix, outside the exercise reveal gate, so showing every step's `after` here does
+/// not leak an exercise answer (contract §2/§4 exception for reference tables).
+private func systemCardChain(_ steps: [TrainingSnapshot.Matrix.ContrastPair]) -> Text {
+    guard let first = steps.first else { return Text("") }
+    return steps.reduce(highlightedText(first.beforeParts, before: true)) { result, step in
+        result + Text(" → ") + highlightedText(step.afterParts, before: false)
+    }
+}
+
+/// Emphasis contract tokens (`ContrastHighlightPlan.md` §"Контракт выделения (Emphasis contract)"):
+/// `before` is a warm red with a **dashed** underline, `after` a cool accent with a **solid**
+/// underline — colour is never the only cue, and both keep ≥4.5:1 contrast against the card
+/// background in light and dark appearance (checked against plain white/`windowBackgroundColor`,
+/// the worst case for this card). This is the *only* place this app turns a `HighlightPart` list
+/// into styled `Text` (every call site above and in `MacStyleBlockView.swift` goes through it), so
+/// there is one rendering path, not a second "simplified" one (contract §3).
 func highlightedText(_ parts: [TrainingSnapshot.HighlightPart], before: Bool) -> Text {
     parts.reduce(Text("")) { result, part in
         let fragment = Text(part.text)
         return result + (part.changed
-            ? fragment.bold().foregroundColor(Color(nsColor: before ? .systemRed : .systemOrange)).underline()
+            ? fragment.bold()
+                .foregroundColor(before ? .emphasisBefore : .emphasisAfter)
+                .underline(true, pattern: before ? .dash : .solid)
             : fragment)
     }
+}
+
+extension Color {
+    /// Warm red, ~6.5:1 on white / ~7.3:1 on `windowBackgroundColor`'s dark value.
+    static let emphasisBefore = Color(nsColor: NSColor(name: nil) { $0.bestMatch(from: [.aqua, .darkAqua]) == .darkAqua
+        ? NSColor(red: 1.00, green: 0.541, blue: 0.502, alpha: 1) : NSColor(red: 0.702, green: 0.149, blue: 0.118, alpha: 1) })
+    /// Cool teal, ~5.9:1 on white / ~8.9:1 on `windowBackgroundColor`'s dark value — never
+    /// red/orange/yellow, so it cannot be confused with `emphasisBefore` (E9).
+    static let emphasisAfter = Color(nsColor: NSColor(name: nil) { $0.bestMatch(from: [.aqua, .darkAqua]) == .darkAqua
+        ? NSColor(red: 0.310, green: 0.820, blue: 0.773, alpha: 1) : NSColor(red: 0.043, green: 0.431, blue: 0.486, alpha: 1) })
 }
 
 private struct VocabularyView: View {
