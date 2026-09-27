@@ -23,7 +23,6 @@ import polski.presentation.AppTab
 import polski.presentation.CardPhase
 import polski.presentation.EffectOutcome
 import polski.presentation.StyleId
-import polski.presentation.legacyStyleWireValue
 import polski.presentation.MatrixSection
 import polski.presentation.TimeCapture
 import polski.presentation.TimeSource
@@ -77,9 +76,9 @@ class MacSession(directory: String) {
             "chain" -> AppAction.StartChain()
             "schedule" -> AppAction.StartSchedule
             "matrixSection" -> MatrixSection.entries.firstOrNull { it.name == value }?.let(AppAction::SelectMatrixSection)
-            // Swift still speaks the pre-UC-10 2-value wire vocabulary ("Logic"/"Situations");
-            // the other 2 styles have no Swift UI yet (Plans/Kotlin/StylesBlueprint.md §5/§6).
-            "method" -> legacyStyleWireValue(value)?.let(AppAction::SetStyle)
+            // macOS S1: native Settings/quick-switch pickers speak the full 4-value StyleId
+            // vocabulary directly (Plans/Kotlin/StylesBlueprint.md §6) — no more legacy collapse.
+            "styleId" -> StyleId.entries.firstOrNull { it.name == value }?.let(AppAction::SetStyle)
             "reference" -> AppAction.ToggleReference
             "reset" -> AppAction.RequestReset
             "resetDecision" -> {

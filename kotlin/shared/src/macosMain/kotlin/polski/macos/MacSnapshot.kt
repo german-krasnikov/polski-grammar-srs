@@ -172,7 +172,8 @@ internal fun snapshot(state: AppUiState): String = buildJsonObject {
 private fun choice(id: String, title: String): JsonObject = buildJsonObject { put("id", id); put("title", title) }
 
 /** UC-10: the resolved (post-fallback) style's blocks, by the same [polski.presentation.blocksToJson]
- *  shape other snapshot sections already use. Not yet read by Swift — no native rendering in this task. */
+ *  shape other snapshot sections already use. macOS S1 reads [effectiveStyleId]/`nativeContrastAvailable`
+ *  for the Settings fallback hint; `blocks` itself has no native renderer yet (later host task). */
 private fun styleBlocksSnapshot(state: AppUiState): JsonElement {
     val exercise = state.exercise ?: return JsonNull
     val registry = StyleRegistry.recipes
@@ -184,6 +185,9 @@ private fun styleBlocksSnapshot(state: AppUiState): JsonElement {
     val focus = presentationBySkillId(exercise.primarySkill)
     return buildJsonObject {
         put("effectiveStyleId", effective.id.name)
+        // native-contrast's only requirement (StyleComposer's isSatisfiedBy) — surfaced directly so
+        // Settings can hint "no content for this skill" regardless of which style is selected now.
+        put("nativeContrastAvailable", content.nativeParallel.isNotEmpty())
         put("blocks", blocksToJson(StyleComposer.compose(effective, phase, exercise, skill, focus, content)))
     }
 }

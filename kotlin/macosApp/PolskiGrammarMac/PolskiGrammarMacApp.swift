@@ -69,6 +69,14 @@ struct TrainingSnapshot: Decodable {
     let phase: String
     let answerMode: String
     let explanationMethod: String
+    /// UC-10 S1: the full 4-value style, read directly (no more Logic/Situations collapse) by
+    /// the Settings picker and the training-card quick switch.
+    let styleId: String
+    /// `null` while there is no current exercise (matches `styleBlocksSnapshot` in `MacSnapshot.kt`).
+    /// Only `effectiveStyleId`/`nativeContrastAvailable` are read natively so far — `blocks` itself
+    /// has no native renderer yet (a later host task, `Plans/Kotlin/StylesBlueprint.md` §6).
+    struct StyleBlocks: Decodable { let effectiveStyleId: String; let nativeContrastAvailable: Bool }
+    let styleBlocks: StyleBlocks?
     let draft: String
     let introPending: Bool
     let dueCount: Int
@@ -114,9 +122,18 @@ struct VocabularySnapshot: Decodable {
 }
 
 struct PreferencesSnapshot: Decodable {
+    /// UC-10 S1: the 4 style recipes' native-language copy, resolved by `MacPreferencesSession`
+    /// (recipe data first, a host-side Russian fallback while CONTENT's authoring is unmerged) —
+    /// Settings and the training-card quick switch both render this, never a hardcoded 4-case list.
+    struct StyleOption: Decodable, Identifiable {
+        let id: String
+        let label: String
+        let description: String
+    }
     let schemaVersion: Int
     let status: String
-    let method: String?
+    let styles: [StyleOption]
+    let styleId: String?
     let answerMode: String?
     let appearance: String?
     let motion: String?
@@ -309,7 +326,7 @@ final class MacModel: ObservableObject {
     private func consumeVocabulary(_ raw: String) { vocabulary = decode(VocabularySnapshot.self, raw) }
     private func consumePreferences(_ raw: String) {
         preferences = decode(PreferencesSnapshot.self, raw)
-        if let method = preferences?.method { trainingSession.dispatch(command: "method", value: method) }
+        if let styleId = preferences?.styleId { trainingSession.dispatch(command: "styleId", value: styleId) }
         if let mode = preferences?.answerMode { trainingSession.dispatch(command: "answerMode", value: mode) }
     }
     func send(_ command: String, _ value: String = "") { trainingSession.dispatch(command: command, value: value) }
@@ -768,6 +785,39 @@ private struct ProgressViewNative: View {
     }
 }
 
+/// UC-10 S1: replaces the old 2-value "Объяснение" `Picker` (`Logic`/`Situations`) with the 4
+/// style recipes, each row's label/description coming from `model.preferences?.styles` (recipe
+/// data, host-side Russian fallback while CONTENT is unmerged — never hardcoded here). A
+/// native-contrast row gets a secondary hint, not a disabled state, whenever the current exercise's
+/// skill has no `nativeParallel` content: `StyleComposer` already falls back tolerantly rather than
+/// crashing or showing an empty block, so choosing it here is always safe.
+private struct StylePickerRows: View {
+    @ObservedObject var model: MacModel
+    var body: some View {
+        ForEach(model.preferences?.styles ?? []) { style in
+            Button {
+                model.preference("styleId", style.id)
+            } label: {
+                HStack(alignment: .top, spacing: 10) {
+                    Image(systemName: model.preferences?.styleId == style.id ? "largecircle.fill.circle" : "circle")
+                        .foregroundStyle(.tint)
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text(style.label)
+                        Text(style.description).font(.caption).foregroundStyle(.secondary)
+                        if style.id == "NativeContrast" && model.training?.styleBlocks?.nativeContrastAvailable == false {
+                            Text("Недоступно для текущего навыка — будет показан другой стиль")
+                                .font(.caption2).foregroundStyle(.orange)
+                        }
+                    }
+                    Spacer(minLength: 0)
+                }
+            }
+            .buttonStyle(.plain)
+            .accessibilityIdentifier("stylePicker.\(style.id)")
+        }
+    }
+}
+
 private struct MacSettingsView: View {
     @ObservedObject var model: MacModel
     @Environment(\.accessibilityReduceMotion) private var systemReduceMotion
@@ -780,13 +830,7 @@ private struct MacSettingsView: View {
                 Text(model.preferences?.error ?? "Настройки требуют восстановления")
                     .foregroundStyle(.red)
             } else {
-                Picker("Объяснение", selection: Binding(
-                    get: { model.preferences?.method ?? "Logic" },
-                    set: { model.preference("method", $0) }
-                )) {
-                    Text("Логика").tag("Logic")
-                    Text("Ситуации").tag("Situations")
-                }
+                Section("Обучение") { StylePickerRows(model: model) }
                 Picker("Внешний вид", selection: Binding(
                     get: { model.preferences?.appearance ?? "System" },
                     set: { model.preference("appearance", $0) }

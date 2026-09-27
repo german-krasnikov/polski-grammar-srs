@@ -46,11 +46,33 @@ struct MacFlashCardView: View {
 
     @ViewBuilder private var frontFace: some View {
         VStack(alignment: .leading, spacing: 8) {
+            styleQuickSwitch
             tapToRevealContent
             if !state.introPending && state.phase == "Question" {
                 answerControls
             }
         }
+    }
+
+    /// UC-10 S1: a compact quick switch for the 4 presentation styles, mirroring the `Способ
+    /// ответа` picker's own persist-through-preferences path (`model.preference`, not a direct
+    /// session command) so a style chosen here also becomes the new default. Shown in both
+    /// `Question` and `Revealed` phases — switching only ever `mutate`s `styleId` in
+    /// `TrainingStore` (never creates a review, never touches `draft`/`frozenAnswer`).
+    private var styleQuickSwitch: some View {
+        Picker("Стиль объяснений", selection: Binding(
+            get: { state.styleId },
+            set: { model.preference("styleId", $0) }
+        )) {
+            ForEach(model.preferences?.styles ?? []) { style in
+                Text(style.label).tag(style.id)
+            }
+        }
+        .pickerStyle(.menu)
+        .labelsHidden()
+        .controlSize(.small)
+        .fixedSize()
+        .accessibilityIdentifier("styleQuickSwitch")
     }
 
     // D1: tapping the sentence/task-prompt region reveals the card too, alongside the
