@@ -78,6 +78,12 @@ class IosSession(private val defaults: NSUserDefaults = NSUserDefaults.standardU
                 defaults.setObject(value, forKey = "explanationMethod")
                 AppAction.SetStyle(it)
             }
+            // StylesBlueprint.md S1: the native 4-value wire, alongside the legacy one above —
+            // switching never creates a review nor touches draft/frozenAnswer (TrainingStore.SetStyle).
+            "styleId" -> StyleId.entries.firstOrNull { it.name == value }?.let {
+                defaults.setObject(value, forKey = "styleId")
+                AppAction.SetStyle(it)
+            }
             "draft" -> AppAction.EditAnswer(value)
             "continueIntroduction" -> AppAction.ContinueIntroduction
             "reveal" -> store.state.value.exerciseId?.let(AppAction::Reveal)
@@ -163,7 +169,10 @@ class IosSession(private val defaults: NSUserDefaults = NSUserDefaults.standardU
             TimeCapture(now, formatter.stringFromDate(NSDate(timeIntervalSinceReferenceDate = now.toEpochMilliseconds() / 1000.0 - 978307200.0)))
         },
         scope,
-        legacyStyleWireValue(defaults.stringForKey("explanationMethod") ?: "") ?: StyleId.RuleFirst,
+        // The native 4-value key wins when present; the legacy 2-value key covers a session that
+        // last stored its style before S1 (no migration write — ADR-6, iOS storage is pre-release).
+        defaults.stringForKey("styleId")?.let { name -> StyleId.entries.firstOrNull { it.name == name } }
+            ?: legacyStyleWireValue(defaults.stringForKey("explanationMethod") ?: "") ?: StyleId.RuleFirst,
         if (defaults.stringForKey("answerMode") == "Typed") AnswerMode.Typed else AnswerMode.Oral,
     )
 }

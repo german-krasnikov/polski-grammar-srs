@@ -90,6 +90,39 @@ extension Dictionary where Key == String, Value == Any {
     func strings(_ key: String) -> [String] { self[key] as? [String] ?? [] }
 }
 
+/// StylesBlueprint.md §2/S1: one of the 4 presentation styles, as offered to the picker/quick
+/// switch. `label`/`description` prefer the recipe's own text (`"styles"` in the preferences
+/// snapshot, sourced from `StyleRegistry` — empty until pl-ru content merges) and fall back to
+/// this file's own copy only when the recipe doesn't provide one yet.
+private struct StyleOption: Identifiable {
+    let id: String
+    let label: String
+    let description: String
+}
+
+private let styleOrder = ["RuleFirst", "SituationFirst", "NativeContrast", "MinimalTheory"]
+private let styleFallbackLabel: [String: String] = [
+    "RuleFirst": "Через правило", "SituationFirst": "Через ситуацию",
+    "NativeContrast": "Через сравнение с родным", "MinimalTheory": "Минимум теории",
+]
+private let styleFallbackDescription: [String: String] = [
+    "RuleFirst": "Формула и схема, потом упражнение.",
+    "SituationFirst": "Короткая сцена, потом упражнение.",
+    "NativeContrast": "Родной язык рядом с изучаемым — где сходится, где отличается.",
+    "MinimalTheory": "Минимум объяснений, больше примеров.",
+]
+
+private func styleOptions(_ preferences: Record) -> [StyleOption] {
+    let recipes = preferences.rows("styles")
+    let ids = recipes.isEmpty ? styleOrder : recipes.map { $0.string("id") }
+    return ids.map { id in
+        let row = recipes.first { $0.string("id") == id } ?? [:]
+        let label = row.string("label"), description = row.string("description")
+        return StyleOption(id: id, label: label.isEmpty ? (styleFallbackLabel[id] ?? id) : label,
+            description: description.isEmpty ? (styleFallbackDescription[id] ?? "") : description)
+    }
+}
+
 struct ProgressFile: FileDocument {
     static var readableContentTypes: [UTType] { [.json] }
     var text: String
@@ -167,7 +200,7 @@ final class AppModel: ObservableObject {
         receiveVocabulary(vocabulary.currentSnapshot())
         receivePreferences(preferencesSession.currentSnapshot())
         if preferences.string("status") == "Ready" {
-            send("explanationMethod", preferences.string("method"))
+            send("styleId", preferences.string("styleId"))
             send("answerMode", preferences.string("answerMode"))
         }
         // Vocabulary due status only changes when time passes; grammar training refreshes on
@@ -195,7 +228,7 @@ final class AppModel: ObservableObject {
     }
     func setPreference(_ field: String, _ value: String) {
         if let error = preferencesSession.set(field: field, value: value) { notice = error; return }
-        if field == "method" { send("explanationMethod", value) }
+        if field == "styleId" { send("styleId", value) }
         if field == "answerMode" { send("answerMode", value) }
     }
     func exportPreferences() -> ProgressFile? {
@@ -216,7 +249,7 @@ final class AppModel: ObservableObject {
             notice = preferencesSession.importJson(raw: raw) ?? "Настройки импортированы"
             receivePreferences(preferencesSession.currentSnapshot())
             if preferences.string("status") == "Ready" {
-                send("explanationMethod", preferences.string("method"))
+                send("styleId", preferences.string("styleId"))
                 send("answerMode", preferences.string("answerMode"))
             }
         } catch { notice = error.localizedDescription }
@@ -492,12 +525,30 @@ private struct IosSettingsView: View {
                 }
             } else {
                 Section("Обучение") {
-                    Picker("Подача объяснений", selection: Binding(
-                        get: { model.preferences.string("method") },
-                        set: { model.setPreference("method", $0) }
+                    // UC-10/S1: 4 styles replace the old Logic/Situations selector — the picker's
+                    // own selected-value row shows the label, the caption below shows its
+                    // description (both prefer StyleRegistry's recipe text, see [styleOptions]).
+                    Picker("Стиль объяснений", selection: Binding(
+                        get: { model.preferences.string("styleId") },
+                        set: { model.setPreference("styleId", $0) }
                     )) {
-                        Text("Схемы и логика").tag("Logic")
-                        Text("Живые ситуации").tag("Situations")
+                        ForEach(styleOptions(model.preferences)) { option in
+                            Text(option.label).tag(option.id)
+                        }
+                    }
+                    .accessibilityIdentifier("settingsStylePicker")
+                    if let description = styleOptions(model.preferences)
+                        .first(where: { $0.id == model.preferences.string("styleId") })?.description, !description.isEmpty {
+                        Text(description).font(.footnote).foregroundStyle(.secondary)
+                    }
+                    // StylesBlueprint.md §2/ST-03: native-contrast never crashes or shows an empty
+                    // block on a skill without an authored L1 parallel — it silently falls back to
+                    // rule-first for that skill. This hint just makes the (already-safe) fallback
+                    // visible instead of surprising, using the currently focused card as the sample.
+                    if model.preferences.string("styleId") == "NativeContrast"
+                        && model.state.record("styleBlocks").bool("nativeContrastFallback") {
+                        Text("Для текущего навыка пока нет пары для сравнения с родным — карточка показывается как «через правило».")
+                            .font(.footnote).foregroundStyle(.secondary)
                     }
                     Picker("Ответ", selection: Binding(
                         get: { model.preferences.string("answerMode") },
@@ -626,13 +677,18 @@ private struct TrainingView: View {
                         Text("\(state.int("chainDisplayCount")) / \(state.int("chainCount")) · \(state.string("chainStepSummary"))")
                             .font(.footnote).foregroundStyle(.secondary)
                     }
-                    Picker("Подача объяснений", selection: Binding(
-                        get: { state.string("explanationMethod") },
-                        set: { model.setPreference("method", $0) }
+                    // S1 compact quick switch — same 4 styles as Settings, same location the old
+                    // Logic/Situations toggle held. Dispatches SetStyle only: never creates a
+                    // review, never touches draft/frozenAnswer (TrainingStore.SetStyle, ST-04).
+                    Picker("Стиль объяснений", selection: Binding(
+                        get: { state.string("styleId") },
+                        set: { model.setPreference("styleId", $0) }
                     )) {
-                        Text("Схемы и логика").tag("Logic")
-                        Text("Живые ситуации").tag("Situations")
+                        ForEach(styleOptions(model.preferences)) { option in
+                            Text(option.label).tag(option.id)
+                        }
                     }
+                    .accessibilityIdentifier("trainingStylePicker")
                 }
                 switch state.string("phase") {
                 case "ChainComplete":

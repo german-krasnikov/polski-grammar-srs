@@ -171,7 +171,9 @@ internal fun snapshot(state: AppUiState): String = buildJsonObject {
 private fun choice(id: String, title: String): JsonObject = buildJsonObject { put("id", id); put("title", title) }
 
 /** UC-10: the resolved (post-fallback) style's blocks, by the same [blocksToJson] shape other
- *  snapshot sections already use. Not yet read by Swift — no native rendering in this task. */
+ *  snapshot sections already use. [nativeContrastFallback] (S1) reads regardless of [AppUiState.styleId]
+ *  — the settings hint needs to know whether the *current skill* lacks native-contrast content even
+ *  while another style is selected. `blocks` itself is not yet read by Swift — no block rendering in this task. */
 private fun styleBlocksSnapshot(state: AppUiState): JsonElement {
     val exercise = state.exercise ?: return JsonNull
     val registry = StyleRegistry.recipes
@@ -181,8 +183,12 @@ private fun styleBlocksSnapshot(state: AppUiState): JsonElement {
     val phase = if (state.phase == CardPhase.Revealed) StylePhase.Back else StylePhase.Front
     val skill = skillById(exercise.primarySkill)
     val focus = presentationBySkillId(exercise.primarySkill)
+    val nativeContrastRecipe = registry[StyleId.NativeContrast]
+    val nativeContrastFallback = nativeContrastRecipe != null &&
+        StyleComposer.resolveEffectiveStyle(nativeContrastRecipe, content, registry) != StyleId.NativeContrast
     return buildJsonObject {
         put("effectiveStyleId", effective.id.name)
+        put("nativeContrastFallback", nativeContrastFallback)
         put("blocks", blocksToJson(StyleComposer.compose(effective, phase, exercise, skill, focus, content)))
     }
 }
