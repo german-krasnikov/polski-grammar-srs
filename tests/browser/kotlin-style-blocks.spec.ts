@@ -35,12 +35,14 @@ test('switching style changes which blocks the card shows, on the front and afte
   await expect(front.locator('.rule-focus')).toHaveCount(0);
   await expect(front.locator('.block-table')).toHaveCount(0);
 
-  // ST-03: no course has authored `styleContent.nativeParallel` yet, so native-contrast resolves
-  // to its declared rule-first fallback (never an empty/crashing NativeParallel block).
+  // ST-03/ST-11: CONTENT has authored `styleContent.nativeParallel` for every real skill, so
+  // native-contrast shows its own block here, not the rule-first fallback (StyleComposerTest's
+  // nativeContrastFallsBackWithoutContentAndComposesWithIt covers the fallback itself with a
+  // literal no-content fixture, never an empty/crashing NativeParallel block either way).
   await method.selectOption('NativeContrast');
-  await expect(front.locator('.rule-focus')).toBeVisible();
-  await expect(front.locator('.block-table')).toBeVisible();
-  await expect(front.locator('.block-native-parallel')).toHaveCount(0);
+  await expect(front.locator('.block-native-parallel')).toBeVisible();
+  await expect(front.locator('.rule-focus')).toHaveCount(0);
+  await expect(front.locator('.block-table')).toHaveCount(0);
   await expect(front.locator('.block-scene')).toHaveCount(0);
 
   await method.selectOption('MinimalTheory');

@@ -62,11 +62,15 @@ class CourseDataStyleContentTest {
         assertEquals("L", content.table?.single()?.label)
     }
 
-    // Every skill in the real course still has no styleContent field today; the reader must
-    // default gracefully rather than requiring CONTENT's field to exist first.
-    @Test fun realCourseSkillsAllDefaultUntilContentAuthorsStyleContent() {
+    // CONTENT has since authored styleContent for all 16 real skills (UC-10 §3/ST-11), so this no
+    // longer asserts every skill defaults; it now guards the other half of the same reader
+    // contract — an id absent from the course (never authored) must still default gracefully
+    // instead of throwing, and every real skill's authored/derived content must parse without
+    // throwing (see CourseDataStyleContentTest.parsesTheDocumentedContract for the exact shape).
+    @Test fun unknownSkillIdDefaultsAndRealSkillsParseWithoutThrowing() {
+        assertEquals(SkillStyleContent(), styleContentBySkillId("no-such-skill"))
         for (skill in skills) {
-            assertEquals(SkillStyleContent(), styleContentBySkillId(skill.id))
+            styleContentBySkillId(skill.id)
         }
     }
 }

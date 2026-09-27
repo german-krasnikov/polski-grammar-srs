@@ -91,17 +91,20 @@ test('legacy tint is preserved in settings JSON without an optical control', asy
 });
 
 // UC-10 S1: the picker now offers all 4 style recipes (replacing the old 2-value Logic/Situations
-// selector), shows a one-line description of the selected style, and — since no skill has authored
-// `styleContent.nativeParallel` yet — a fallback hint naming native-contrast's current stand-in.
-test('style picker offers all 4 recipes with a description and a native-contrast fallback hint', async ({ page }) => {
+// selector) and shows a one-line description of the selected style. CONTENT has since authored
+// `styleContent.nativeParallel` for every real skill (UC-10 §3/ST-11), so the current skill never
+// lacks it and no fallback hint renders — StyleComposerTest/MacSnapshotStyleBlocksTest cover the
+// hint's own fallback wording with a literal/no-content fixture.
+test('style picker offers all 4 recipes with a description and no native-contrast fallback hint', async ({ page }) => {
   await page.goto('/#/settings');
   const picker = page.getByRole('combobox', { name: 'Стиль объяснений' });
   await expect(picker).toHaveValue('RuleFirst');
   const optionValues = await picker.locator('option').evaluateAll(options => options.map(option => (option as HTMLOptionElement).value));
   expect(optionValues).toEqual(['RuleFirst', 'SituationFirst', 'NativeContrast', 'MinimalTheory']);
   await expect(page.locator('.settings-style-description')).toHaveText('Формула и таблица окончаний, затем разбор изменений и правило.');
-  await expect(page.locator('.settings-style-fallback-hint')).toContainText('«Через сравнение с родным» пока недоступен для текущего навыка');
+  await expect(page.locator('.settings-style-fallback-hint')).toHaveCount(0);
   await picker.selectOption('NativeContrast');
+  await expect(page.locator('.settings-style-fallback-hint')).toHaveCount(0);
   await expect(page.locator('.settings-style-description')).toHaveText('По-родному так → по-изучаемому так, где сходится и где отличается.');
   expect(await page.evaluate(key => JSON.parse(localStorage.getItem(key) ?? '{}').styleId, preferencesKey)).toBe('NativeContrast');
   await page.reload();
