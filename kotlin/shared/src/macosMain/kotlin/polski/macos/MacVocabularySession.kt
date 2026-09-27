@@ -18,8 +18,10 @@ import polski.data.frequencyItems
 import polski.data.vocabularyItems
 import polski.data.courseVocabularyInstructions
 import polski.data.courseVocabularyUnavailableLabel
+import polski.presentation.cardEffectFor
 import polski.srs.FsrsScheduler
 import polski.srs.Rating
+import polski.srs.SchedulePreview
 import polski.vocabulary.StudyDirection
 import polski.vocabulary.VocabularyCodec
 import polski.vocabulary.VocabularySession
@@ -28,13 +30,17 @@ import polski.vocabulary.VocabularyUiState
 /** Scene-owned SwiftUI bridge. Kotlin alone owns review scheduling and durable writes. */
 class MacVocabularySession(directory: String) {
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
-    private val session = VocabularySession(MacVocabularyRepository(directory), FsrsScheduler(),
+    private val scheduler = FsrsScheduler()
+    private val session = VocabularySession(MacVocabularyRepository(directory), scheduler,
         { Clock.System.now() }, { "user.${NSUUID().UUIDString.lowercase()}" })
     var onState: ((String) -> Unit)? = null
         set(value) {
             field = value
             value?.invoke(snapshot(session.state.value))
         }
+
+    /** D3: mirrors [MacSession.onEffect] for the vocabulary card's decorative Rive rating overlay. */
+    var onEffect: ((String) -> Unit)? = null
 
     init {
         scope.launch { session.state.collect { onState?.invoke(snapshot(it)) } }
@@ -52,8 +58,8 @@ class MacVocabularySession(directory: String) {
             "draft" -> session.setDraft(value)
             "reveal" -> session.reveal()
             "refresh" -> session.refresh()
-            "again" -> scope.launch { session.rate(Rating.Again) }
-            "good" -> scope.launch { session.rate(Rating.Good) }
+            "again" -> scope.launch { rate(Rating.Again) }
+            "good" -> scope.launch { rate(Rating.Good) }
             "select" -> scope.launch { session.select(value, true) }
             "deselect" -> scope.launch { session.select(value, false) }
             "delete" -> scope.launch { session.deleteCustom(value) }
@@ -71,6 +77,16 @@ class MacVocabularySession(directory: String) {
 
     fun close() { onState = null; scope.cancel() }
 
+    /**
+     * D3 (`Plans/Kotlin/FlipCardRivePlan.md` FC-01/FC-17/FC-20): fires [onEffect] once per
+     * accepted rating with [cardEffectFor]'s Again/Remembered mapping, mirroring
+     * [MacSession.dispatch]'s own rate handling — never for a rate [VocabularySession.rate]
+     * itself rejects (no revealed current card yet), so a stale tap never fires a spurious cue.
+     */
+    private suspend fun rate(rating: Rating) {
+        if (session.rate(rating)) onEffect?.invoke(cardEffectFor(rating).name)
+    }
+
     private fun snapshot(state: VocabularyUiState): String = buildJsonObject {
         put("instructions", courseVocabularyInstructions.ios)
         put("unavailableLabel", courseVocabularyUnavailableLabel)
@@ -86,6 +102,19 @@ class MacVocabularySession(directory: String) {
         put("selectedCount", state.document.selectedIds.size)
         val item = state.currentId?.let { VocabularyCodec.item(state.document, it) }
         put("current", item?.let(::itemJson) ?: JsonNull)
+        // D3: the compact rating buttons' interval hint, mirroring training's own "intervals"
+        // (`MacSnapshot.kt`) and the web reference's `VocabularyCodec.preview` usage
+        // (`webMain/kotlin/polski/ui/VocabularyWeb.kt`) — only computed once actually revealed,
+        // the only phase these buttons are shown in.
+        if (state.revealed && state.currentId != null) {
+            val at = Clock.System.now()
+            val preview = VocabularyCodec.preview(state.document, state.currentId, state.direction, scheduler, at)
+            put("now", at.toEpochMilliseconds())
+            put("intervals", intervalsJson(preview))
+        } else {
+            put("now", JsonNull)
+            put("intervals", JsonNull)
+        }
         val all = vocabularyItems + state.document.custom
         val byLemma = vocabularyItems.associateBy(VocabularyItem::lemma)
         val entries = when (state.filter) {
@@ -110,5 +139,10 @@ class MacVocabularySession(directory: String) {
     private fun itemJson(item: VocabularyItem) = buildJsonObject {
         put("id", item.id); put("lemma", item.lemma); put("translation", item.translation)
         put("form", item.form); put("example", item.example); put("level", item.level)
+    }
+
+    private fun intervalsJson(preview: SchedulePreview) = buildJsonObject {
+        put("Again", preview[Rating.Again].toEpochMilliseconds())
+        put("Good", preview[Rating.Good].toEpochMilliseconds())
     }
 }

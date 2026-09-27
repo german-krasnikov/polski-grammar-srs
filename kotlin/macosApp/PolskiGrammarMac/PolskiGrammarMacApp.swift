@@ -26,6 +26,9 @@ struct TrainingSnapshot: Decodable {
         let explanation: String?
         let methodFeedback: String?
         let frozenAnswer: String?
+        /// D3's rating-button interval preview (`MacSnapshot.kt`'s `intervals`), keyed by
+        /// `Rating.name` — only `Again`/`Good` are ever shown (see `RatingIntervals`).
+        let intervals: RatingIntervals?
     }
     struct Matrix: Decodable {
         struct ContrastPair: Decodable {
@@ -74,10 +77,19 @@ struct TrainingSnapshot: Decodable {
     let savedRevision: Int64
     let totalReviews: Int
     let error: String?
+    let now: Int64?
     let exercise: Exercise?
     let matrix: Matrix
     let progress: [Skill]
     let effects: [Effect]
+}
+
+/// D3's rating-button interval preview, shared by [TrainingSnapshot.Exercise] and
+/// [VocabularySnapshot] — only `Again`/`Good` are ever surfaced as rating choices.
+struct RatingIntervals: Decodable {
+    let again: Int64?
+    let good: Int64?
+    enum CodingKeys: String, CodingKey { case again = "Again"; case good = "Good" }
 }
 
 struct VocabularySnapshot: Decodable {
@@ -97,6 +109,8 @@ struct VocabularySnapshot: Decodable {
     let busy: Bool
     let error: String?
     let selectedCount: Int
+    let now: Int64?
+    let intervals: RatingIntervals?
 }
 
 struct PreferencesSnapshot: Decodable {
@@ -106,6 +120,7 @@ struct PreferencesSnapshot: Decodable {
     let answerMode: String?
     let appearance: String?
     let motion: String?
+    let animationsEnabled: Bool?
     let error: String?
 }
 
@@ -177,8 +192,24 @@ final class MacModel: ObservableObject {
     @Published var exportEffectId: Int64?
     @Published var exportDocument: JSONDocument?
     @Published var cardEffect: CardEffectEvent?
+    // D4: sidebar section order, shared with `MacRootView`'s slide direction — a lower index
+    // slides in from the leading edge, a higher one from the trailing edge.
+    static let tabOrder = ["Training", "Matrix", "Vocabulary", "Progress"]
+    // D4 fix: computed synchronously in `didSet`, not in a view-level `.onChange`. `.onChange`
+    // runs after `body` has already rendered for the new `selectedTab`, so a direction flag it
+    // writes only takes effect the render AFTER the one it should describe — stale by one step
+    // whenever navigation direction reverses. `didSet` runs inside the same synchronous write
+    // that changes `selectedTab`, before SwiftUI re-renders, so `slideForward` is always current
+    // for every path that sets `selectedTab` (sidebar `List` binding, external state sync in
+    // `consumeTraining`, and the "Открыть Прогресс" button).
+    @Published var slideForward = true
     @Published var selectedTab = "Training" {
-        didSet { if oldValue != selectedTab { trainingSession.dispatch(command: "tab", value: selectedTab) } }
+        didSet {
+            guard oldValue != selectedTab else { return }
+            let order = Self.tabOrder
+            slideForward = (order.firstIndex(of: selectedTab) ?? 0) >= (order.firstIndex(of: oldValue) ?? 0)
+            trainingSession.dispatch(command: "tab", value: selectedTab)
+        }
     }
     private let trainingSession: MacSession
     private let vocabularySession: MacVocabularySession
@@ -208,6 +239,16 @@ final class MacModel: ObservableObject {
             }
         }
         vocabularySession.onState = { [weak self] raw in Task { @MainActor in self?.consumeVocabulary(raw) } }
+        // D3: same one-shot Rive cue as training's own `trainingSession.onEffect` above, sharing
+        // `cardEffect`/`effectCounter` — the two cards are never on screen at once (tab-switched),
+        // so one decorative overlay slot covers both hosts without a second published property.
+        vocabularySession.onEffect = { [weak self] name in
+            Task { @MainActor in
+                guard let self else { return }
+                self.effectCounter += 1
+                self.cardEffect = CardEffectEvent(id: self.effectCounter, name: name)
+            }
+        }
         preferencesSession.onState = { [weak self] raw in Task { @MainActor in self?.consumePreferences(raw) } }
         consumeTraining(trainingSession.currentSnapshot())
         consumeVocabulary(vocabularySession.currentSnapshot())
@@ -349,6 +390,17 @@ private struct MacRootView: View {
         ("Vocabulary", "Словарь", "text.book.closed"),
         ("Progress", "Прогресс", "chart.bar")
     ]
+    /// D5: same system-Reduce-Motion-or-app-Motion.Reduced gate the cards already use
+    /// (`TrainingView.cardMotionReduced`), so the tab transition snaps together with everything
+    /// else it gates.
+    private var tabMotionReduced: Bool { reduceMotion || model.preferences?.motion == "Reduced" || model.preferences?.animationsEnabled == false }
+    private var tabTransition: AnyTransition {
+        .asymmetric(
+            insertion: .move(edge: model.slideForward ? .trailing : .leading).combined(with: .opacity),
+            removal: .move(edge: model.slideForward ? .leading : .trailing).combined(with: .opacity)
+        )
+    }
+
     var body: some View {
         VStack(spacing: 0) {
             // C1: state.error (e.g. a progress save failure) must stay visible above every tab,
@@ -367,20 +419,24 @@ private struct MacRootView: View {
                 .navigationTitle("Polski Grammar Matrix")
                 .frame(minWidth: 165)
             } detail: {
-                Group {
-                    switch model.selectedTab {
-                    case "Matrix": MatrixView(model: model)
-                    case "Vocabulary": VocabularyView(model: model)
-                    case "Progress": ProgressViewNative(model: model)
-                    default: TrainingView(model: model)
-                    }
+                // D4: `.id(selectedTab)` + an asymmetric `.move`+`.opacity` transition, keyed to
+                // the sidebar section order via `model.slideForward` (computed synchronously in
+                // `MacModel.selectedTab`'s `didSet`, so it is already correct for the switch that
+                // is about to render — see the fix note there) — a directional slide/crossfade
+                // instead of the old plain opacity-only `.animation(value:)` crossfade. ~300ms with
+                // a Material-style "emphasized" decelerate curve
+                // (`timingCurve(0.2, 0, 0, 1, ...)`), snapped under `tabMotionReduced`.
+                ZStack {
+                    detailContent(model.selectedTab)
+                        .id(model.selectedTab)
+                        .transition(tabTransition)
                 }
                 .frame(minWidth: 320, minHeight: 420)
                 .toolbar { SettingsLink { Label("Настройки", systemImage: "gearshape") } }
+                .animation(tabMotionReduced ? nil : .timingCurve(0.2, 0, 0, 1, duration: 0.3), value: model.selectedTab)
             }
         }
         .preferredColorScheme(colorScheme)
-        .animation(reduceMotion ? nil : .easeInOut(duration: 0.12), value: model.selectedTab)
         .alert("Ошибка", isPresented: Binding(get: { model.error != nil }, set: { if !$0 { model.error = nil } })) {
             Button("ОК") { model.error = nil }
         } message: { Text(model.error ?? "") }
@@ -409,6 +465,15 @@ private struct MacRootView: View {
         default: nil
         }
     }
+    @ViewBuilder
+    private func detailContent(_ tab: String) -> some View {
+        switch tab {
+        case "Matrix": MatrixView(model: model)
+        case "Vocabulary": VocabularyView(model: model)
+        case "Progress": ProgressViewNative(model: model)
+        default: TrainingView(model: model)
+        }
+    }
 }
 
 private struct TrainingView: View {
@@ -428,7 +493,14 @@ private struct TrainingView: View {
                     if state.loadStatus != "Ready" {
                         recovery(state)
                     } else if let exercise = state.exercise {
+                        // D3: attached at the call site (not inside `exerciseCard`/`MacFlashCardView`
+                        // themselves) so the transform covers `contentCard`'s own background+border
+                        // too — the *whole* panel follows the finger, matching the vocabulary card's
+                        // already-whole-panel flip.
                         exerciseCard(state, exercise)
+                            .swipeToRate(enabled: state.phase == "Revealed", reduceMotion: cardMotionReduced) { remembered in
+                                model.send("rate", "\(exercise.id)|\(remembered ? "Good" : "Again")")
+                            }
                     } else {
                         completion(state)
                     }
@@ -451,7 +523,7 @@ private struct TrainingView: View {
     /// FC-09/12/14/20's shared reduced-motion gate: system Reduce Motion or the app's own
     /// `Motion.Reduced` setting, the same pair already used by `.animation(...)` above — both the
     /// card flip and the Rive overlay must snap/skip together with everything else this gates.
-    private var cardMotionReduced: Bool { reduceMotion || model.preferences?.motion == "Reduced" }
+    private var cardMotionReduced: Bool { reduceMotion || model.preferences?.motion == "Reduced" || model.preferences?.animationsEnabled == false }
 
     /// FC-20's Rive gate, plus the debug-only variant-B override (§5): the flip itself keeps
     /// animating in variant B — only the Rive trigger is suppressed — so this is deliberately
@@ -607,6 +679,16 @@ func highlightedText(_ parts: [TrainingSnapshot.HighlightPart], before: Bool) ->
 
 private struct VocabularyView: View {
     @ObservedObject var model: MacModel
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    /// Same gate as `TrainingView.cardMotionReduced` (D5): system Reduce Motion or the app's own
+    /// `Motion.Reduced` setting, so this card's flip snaps together with everything else it gates.
+    private var cardMotionReduced: Bool { reduceMotion || model.preferences?.motion == "Reduced" || model.preferences?.animationsEnabled == false }
+    // D4: the animated collapsible for the entry catalog — mirrors the web reference's
+    // "Скрыть/Открыть каталог" `.collapsible` (`VocabularyWeb.kt`'s `renderCatalog`), a real
+    // SwiftUI conditional mount (not a height-0 CSS-grid trick, unneeded here) driven by an
+    // explicit `withAnimation` in the toggle button so it animates height+opacity together.
+    @State private var catalogVisible = true
+
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 18) {
@@ -620,37 +702,38 @@ private struct VocabularyView: View {
 
                     Text(state.coverage).foregroundStyle(.secondary)
                     if let item = state.current {
-                        GroupBox("Карточка слова") {
-                            VStack(alignment: .leading, spacing: 8) {
-                                Text(item.lemma).font(.title2.bold())
-                                if state.revealed {
-                                    Text(item.translation)
-                                    Text(item.form)
-                                    Text(item.example)
-                                    HStack {
-                                        Button("Повторить") { model.vocab("again") }
-                                        Button("Вспомнил") { model.vocab("good") }
-                                    }
-                                } else { Button("Показать ответ") { model.vocab("reveal") } }
-                            }.frame(maxWidth: .infinity, alignment: .leading)
+                        ZStack {
+                            MacVocabularyCardView(model: model, state: state, item: item, reduceMotion: cardMotionReduced)
+                            RiveEffectOverlay(effect: model.cardEffect, reduceMotion: cardMotionReduced)
                         }
                     }
-                    Text("Выбрано: \(state.selectedCount)")
-                    ForEach(state.entries, id: \.lemma) { entry in
-                        HStack {
-                            VStack(alignment: .leading) {
-                                Text(entry.lemma).font(.headline)
-                                Text(entry.translation).foregroundStyle(.secondary)
-                            }
-                            Spacer()
-                            if entry.available {
-                                Button(entry.selected ? "Убрать" : "Добавить") {
-                                    model.vocab(entry.selected ? "deselect" : "select", entry.id)
-                                }
-                            } else { Text("Недоступно").foregroundStyle(.secondary) }
+                    Button(catalogVisible ? "Скрыть каталог" : "Открыть каталог") {
+                        withAnimation(cardMotionReduced ? nil : .timingCurve(0.2, 0, 0, 1, duration: 0.3)) {
+                            catalogVisible.toggle()
                         }
-                        .padding(12)
+                    }
+                    .accessibilityIdentifier("vocabularyCatalogToggle")
+                    if catalogVisible {
+                        VStack(alignment: .leading, spacing: 12) {
+                            Text("Выбрано: \(state.selectedCount)")
+                            ForEach(state.entries, id: \.lemma) { entry in
+                                HStack {
+                                    VStack(alignment: .leading) {
+                                        Text(entry.lemma).font(.headline)
+                                        Text(entry.translation).foregroundStyle(.secondary)
+                                    }
+                                    Spacer()
+                                    if entry.available {
+                                        Button(entry.selected ? "Убрать" : "Добавить") {
+                                            model.vocab(entry.selected ? "deselect" : "select", entry.id)
+                                        }
+                                    } else { Text("Недоступно").foregroundStyle(.secondary) }
+                                }
+                                .padding(12)
 
+                            }
+                        }
+                        .transition(.opacity.combined(with: .move(edge: .top)))
                     }
                 } else { SwiftUI.ProgressView("Загружаем словарь") }
             }.frame(maxWidth: 760, alignment: .leading).padding(28)
@@ -721,6 +804,14 @@ private struct MacSettingsView: View {
                 }
                 Text(systemReduceMotion ? "Система сокращает движение" : "Системное движение активно")
                     .foregroundStyle(.secondary)
+                // D5: off keeps every Rive effect unloaded (RiveViewModel is only ever created
+                // inside RiveEffectOverlay's `!reduceMotion` guard, and this toggle now widens that
+                // same gate — see `cardMotionReduced`/`tabMotionReduced`) and snaps all remaining
+                // motion instant, same as system Reduce Motion or `Motion.Reduced` already do.
+                Toggle("Анимации", isOn: Binding(
+                    get: { model.preferences?.animationsEnabled ?? true },
+                    set: { model.preference("animationsEnabled", $0 ? "true" : "false") }
+                ))
             }
             Text("Напоминания пока недоступны").foregroundStyle(.secondary)
             DataControls(model: model)

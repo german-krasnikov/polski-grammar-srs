@@ -27,6 +27,14 @@ struct RiveEffectOverlay: View {
         }
         .allowsHitTesting(false)
         .accessibilityHidden(true)
+        // D5: turning off "Анимации" (or system Reduce Motion / Motion.Reduced, which already fold
+        // into the same `reduceMotion` the caller passes in) must dispose any Rive view already
+        // created, not just skip creating new ones below.
+        .onChange(of: reduceMotion) { _, isReduced in
+            guard isReduced else { return }
+            rememberedViewModel = nil
+            againViewModel = nil
+        }
         .onChange(of: effect) { _, event in
             guard let event, !reduceMotion else { return }
             switch event.name {
