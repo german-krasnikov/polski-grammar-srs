@@ -1082,4 +1082,94 @@ final class PolskiGrammarUITests: XCTestCase {
         XCTAssertTrue(blockShown("styleBlock-formula"), app.debugDescription)
         XCTAssertFalse(blockShown("styleBlock-whyOnDemand"), app.debugDescription)
     }
+
+    /// Tester-added (not in StylesBlueprint.md's own test list): the 4th style, native-contrast, and
+    /// situation-first's post-reveal `rule` block have no XCUITest coverage anywhere in this file —
+    /// `testSwitchingStyleChangesWhichBlocksShow` above only exercises rule-first/situation-first/
+    /// minimal-theory's `formula`/`whyOnDemand`. This drives all 4 with real, now-authored
+    /// `courses/pl-ru/course.json` `styleContent` and captures one screenshot per style for visual
+    /// review, plus asserts each style's blueprint-intended block (StylesBlueprint.md §1 TABLE 1).
+    func testFourStylesShowIntendedBlocksWithRealContent() {
+        let app = XCUIApplication()
+        app.launch()
+        resetTrainingProgress(app)
+        app.buttons["Тренировка"].firstMatch.tap()
+        XCTAssertTrue(app.buttons["continueIntroduction"].waitForExistence(timeout: 20))
+        continueIntroductionIfPresent(app)
+
+        let picker = app.buttons.matching(NSPredicate(format: "label CONTAINS %@", "Стиль объяснений")).firstMatch
+        func selectStyle(_ label: String) {
+            for _ in 0..<7 {
+                if picker.isHittable { break }
+                app.swipeDown()
+            }
+            XCTAssertTrue(picker.isHittable, app.debugDescription)
+            guard !picker.label.contains(label) else { return }
+            picker.tap()
+            let option = app.descendants(matching: .any)[label].firstMatch
+            XCTAssertTrue(option.waitForExistence(timeout: 5), app.debugDescription)
+            option.tap()
+        }
+        func scrollToTop() { for _ in 0..<10 { app.swipeDown() } }
+        func blockShown(_ identifier: String) -> Bool {
+            scrollToTop()
+            let element = app.descendants(matching: .any)[identifier].firstMatch
+            for _ in 0..<10 {
+                if element.exists { return true }
+                app.swipeUp()
+            }
+            return element.exists
+        }
+        func capture(_ name: String) {
+            let shot = XCTAttachment(screenshot: app.screenshot())
+            shot.name = name
+            shot.lifetime = .keepAlways
+            add(shot)
+        }
+
+        selectStyle("Через правило")
+        let reveal = app.buttons["revealAnswer"]
+        for _ in 0..<8 {
+            if reveal.isHittable { break }
+            app.swipeUp()
+        }
+        XCTAssertTrue(reveal.waitForExistence(timeout: 5), app.debugDescription)
+        reveal.tap()
+        XCTAssertTrue(blockShown("styleBlock-formula"), app.debugDescription)
+        XCTAssertTrue(blockShown("styleBlock-table") || blockShown("styleBlock-formula"), "rule-first front should show table/formula")
+        // D2 (StylesIntegrationTest-2026-09-27.md): the rule block must show the exercise's own
+        // detail (`Block.Rule.detail`), not just the skill's rule text — a distinct sub-element so
+        // this checks real rendered content, not merely that some rule block exists.
+        XCTAssertTrue(blockShown("styleBlock-rule"), "rule-first back should show the rule block — " + app.debugDescription)
+        XCTAssertTrue(blockShown("styleBlock-rule-detail"), "rule-first back should show the exercise's own detail under the rule — " + app.debugDescription)
+        capture("style-rule-first-revealed")
+
+        // situation-first: scene stays up front (D1 — the front never hides after reveal), and the
+        // card is already revealed from the rule-first step above — ST-04 says switching style
+        // never resets phase, so there is no second revealAnswer to find here.
+        selectStyle("Через ситуацию")
+        scrollToTop()
+        XCTAssertTrue(app.descendants(matching: .any)["styleBlock-scene"].firstMatch.waitForExistence(timeout: 5), app.debugDescription)
+        capture("style-situation-first-front-scene")
+        capture("style-situation-first-revealed")
+        XCTAssertTrue(blockShown("styleBlock-rule"), "situation-first back must show the rule block after reveal — " + app.debugDescription)
+
+        selectStyle("Через сравнение с родным")
+        scrollToTop()
+        capture("style-native-contrast-front")
+        XCTAssertTrue(blockShown("styleBlock-nativeParallel"), "native-contrast front should show nativeParallel with authored styleContent — " + app.debugDescription)
+        // Real authored detail, not just block presence (report D2's own critique of the Android
+        // pass): `case.acc.f`'s styleContent.nativeParallel[0].note is real content, distinctive
+        // enough to be safe to match on.
+        let noteDetail = app.descendants(matching: .any)
+            .matching(NSPredicate(format: "label CONTAINS %@", "żona→żonę"))
+        XCTAssertTrue(noteDetail.firstMatch.waitForExistence(timeout: 5), "native-contrast pair should show its authored note detail — " + app.debugDescription)
+        capture("style-native-contrast-revealed")
+
+        selectStyle("Минимум теории")
+        scrollToTop()
+        capture("style-minimal-theory-front")
+        XCTAssertTrue(blockShown("styleBlock-whyOnDemand"), app.debugDescription)
+        capture("style-minimal-theory-revealed")
+    }
 }
