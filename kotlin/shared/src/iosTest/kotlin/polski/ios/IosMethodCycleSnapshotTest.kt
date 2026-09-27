@@ -12,6 +12,7 @@ import polski.presentation.AppUiState
 import polski.presentation.AnswerMode
 import polski.presentation.CardPhase
 import polski.presentation.StyleId
+import polski.presentation.StyleRegistry
 import polski.training.ExerciseFactory
 import polski.training.ExerciseIdFactory
 import polski.training.RandomSource
@@ -46,7 +47,7 @@ class IosMethodCycleSnapshotTest {
         assertEquals(presentation.situations.review, card.getValue("methodReview").jsonPrimitive.content)
         assertEquals(exercise.expected, card.getValue("expected").jsonPrimitive.content)
 
-        for (styleId in StyleId.entries) {
+        for (styleId in StyleRegistry.recipes.keys) {
             val frozen = Json.parseToJsonElement(snapshot(base.copy(introPending = false,
                 phase = CardPhase.Revealed, answerMode = AnswerMode.Typed,
                 draft = "Moja proba", frozenAnswer = "Moja proba", styleId = styleId))).jsonObject

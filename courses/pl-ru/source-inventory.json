@@ -1218,7 +1218,7 @@
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosSnapshot.kt",
       "owner": "production source audit",
       "migrationStatus": "classified in inventory-decisions.json; review Evidence.md for acceptance",
-      "sha256": "f529916bd548f9fa4f0dccfb21fd0aa04bdb93f7304591d4b32d5dcd06718b15",
+      "sha256": "abd51bd69642b3e2ba13509a36a0e588f615039de32f1250042930e48956a007",
       "literalLines": [
         {
           "line": 66,
@@ -1246,7 +1246,7 @@
         },
         {
           "line": 73,
-          "source": "put(\"styleId\", state.styleId.name)"
+          "source": "put(\"styleId\", state.styleId.value)"
         },
         {
           "line": 74,
@@ -1530,7 +1530,7 @@
         },
         {
           "line": 192,
-          "source": "put(\"effectiveStyleId\", effective.id.name)"
+          "source": "put(\"effectiveStyleId\", effective.id.value)"
         },
         {
           "line": 193,
@@ -2474,7 +2474,7 @@
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/TrainingWebApp.kt",
       "owner": "production source audit",
       "migrationStatus": "classified in inventory-decisions.json; review Evidence.md for acceptance",
-      "sha256": "071ee6299af8e0b47567b0fe56bccf547e7645ffcf18ff0c2b8438ec510cd8a5",
+      "sha256": "9fd916f27cefdd3ae6dae1141da48fa952259e62c7362af269c505a4d052cc47",
       "literalLines": [
         {
           "line": 56,
@@ -3022,7 +3022,7 @@
         },
         {
           "line": 574,
-          "source": "methodSelect.appendChild(node(\"option\", text = styleLabel(styleId)).apply { setAttribute(\"value\", styleId.name) })"
+          "source": "methodSelect.appendChild(node(\"option\", text = styleLabel(styleId)).apply { setAttribute(\"value\", styleId.value) })"
         },
         {
           "line": 580,
@@ -5102,190 +5102,190 @@
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidTrainingScreen.kt",
       "owner": "production source audit",
       "migrationStatus": "classified in inventory-decisions.json; review Evidence.md for acceptance",
-      "sha256": "ff92adc5575691ca6a9d44dfbd3c77f2593c433a76fb1e2692c1a5e3fa988980",
+      "sha256": "40f7a49988031df5dc2d64e56facb3742a9cffe9a0dabb25592e67bbc7facb23",
       "literalLines": [
         {
-          "line": 78,
+          "line": 79,
           "source": "Text(\"ЕЖЕДНЕВНАЯ ПРАКТИКА\", style = MaterialTheme.typography.labelMedium,"
         },
         {
-          "line": 80,
+          "line": 81,
           "source": "Text(\"Тренировка\", style = MaterialTheme.typography.headlineSmall,"
         },
         {
-          "line": 83,
+          "line": 84,
           "source": "Text(\"${state.dueCount} к повторению\", style = MaterialTheme.typography.labelLarge,"
         },
         {
-          "line": 85,
+          "line": 86,
           "source": "Text(\"${state.todayCount} сегодня\", style = MaterialTheme.typography.labelLarge,"
         },
         {
-          "line": 91,
+          "line": 92,
           "source": "\"Режим\","
         },
         {
-          "line": 94,
+          "line": 95,
           "source": "TrainingMode.Chain.name to \"Цепочка предложений\","
         },
         {
-          "line": 95,
+          "line": 96,
           "source": "TrainingMode.Schedule.name to \"По расписанию\","
         },
         {
-          "line": 96,
+          "line": 97,
           "source": "TrainingMode.Focused.name to \"Отдельный навык\","
         },
         {
-          "line": 106,
+          "line": 107,
           "source": "AndroidChoiceMenu(\"Выбрать навык\", \"\", skills.map { it.id to it.title }) {"
         },
         {
-          "line": 112,
+          "line": 113,
           "source": "\"Набор слов\","
         },
         {
-          "line": 117,
+          "line": 118,
           "source": "Text(\"$displayCount / ${state.chain.size} · ${courseChainPresentation.summary}\","
         },
         {
-          "line": 128,
+          "line": 129,
           "source": "state.chain.forEachIndexed { index, exercise -> Text(\"${index + 1}. ${exercise.expected}\") }"
         },
         {
-          "line": 130,
+          "line": 131,
           "source": "Text(\"Следующий набор слов\")"
         },
         {
-          "line": 133,
+          "line": 134,
           "source": "Text(\"К повторениям\")"
         },
         {
-          "line": 136,
+          "line": 137,
           "source": "// FC2-10/R3 Pick C: a one-shot \"Tada\" celebration, gated the same way the rating"
         },
         {
-          "line": 140,
+          "line": 141,
           "source": "CardPhase.NoDue -> AndroidInfoCard(\"Повторения на сейчас завершены\") {"
         },
         {
-          "line": 141,
+          "line": 142,
           "source": "Text(state.nextDue?.let { \"Следующее: ${formatDate(it.toEpochMilliseconds())}\" } ?: \"Новых повторений пока нет.\")"
         },
         {
-          "line": 143,
+          "line": 144,
           "source": "Text(\"Потренировать цепочку\")"
         },
         {
-          "line": 148,
+          "line": 149,
           "source": "if (exercise != null) AndroidInfoCard(\"${skillById(exercise.primarySkill).level} · ${skillById(exercise.primarySkill).title}\") {"
         },
         {
-          "line": 152,
+          "line": 153,
           "source": "// if/else on styleId here. A style whose `requires` isn't met for this skill"
         },
         {
-          "line": 154,
+          "line": 155,
           "source": "// declared fallback, same as the settings picker's own hint (AndroidStylePicker.kt)."
         },
         {
-          "line": 162,
+          "line": 163,
           "source": "// S1: quick switch at the training card's existing method-toggle location, now"
         },
         {
-          "line": 165,
-          "source": "AndroidChoiceMenu(\"Подача\", state.styleId.name,"
-        },
-        {
-          "line": 170,
-          "source": "Text(\"Знакомство с навыком\", style = MaterialTheme.typography.titleMedium)"
+          "line": 166,
+          "source": "AndroidChoiceMenu(\"Подача\", state.styleId.value,"
         },
         {
           "line": 171,
+          "source": "Text(\"Знакомство с навыком\", style = MaterialTheme.typography.titleMedium)"
+        },
+        {
+          "line": 172,
           "source": "Text(\"ИСХОДНОЕ ПРЕДЛОЖЕНИЕ\", style = MaterialTheme.typography.labelSmall)"
         },
         {
-          "line": 176,
+          "line": 177,
           "source": "Text(\"Перейти к заданию\")"
         },
         {
-          "line": 181,
+          "line": 182,
           "source": "// A single rating gate is shared by the buttons and the answer panel's swipe"
         },
         {
-          "line": 208,
+          "line": 209,
           "source": "Text(\"ИСХОДНОЕ ПРЕДЛОЖЕНИЕ\", style = MaterialTheme.typography.labelSmall,"
         },
         {
-          "line": 214,
+          "line": 215,
           "source": "Text(\"${exercise.prompt}\\n${method.promptLead}\", modifier = Modifier.padding(16.dp),"
         },
         {
-          "line": 219,
+          "line": 220,
           "source": "// question above them — they are this style's \"with the question\""
         },
         {
-          "line": 226,
+          "line": 227,
           "source": "\"Ответ\","
         },
         {
-          "line": 228,
+          "line": 229,
           "source": "listOf(AnswerMode.Oral.name to \"Вслух / про себя\", AnswerMode.Typed.name to \"Напечатать\"),"
         },
         {
-          "line": 234,
+          "line": 235,
           "source": "label = { Text(\"Ответ по-польски\") },"
         },
         {
-          "line": 238,
+          "line": 239,
           "source": "} else Text(\"Произнеси целое предложение, затем покажи ответ.\")"
         },
         {
-          "line": 243,
+          "line": 244,
           "source": ") { Text(if (state.answerMode == AnswerMode.Typed) \"Проверить ответ\" else \"Показать ответ\","
         },
         {
-          "line": 251,
+          "line": 252,
           "source": "Text(\"Эталон\", style = MaterialTheme.typography.labelLarge)"
         },
         {
-          "line": 254,
+          "line": 255,
           "source": "if (exercise.accepted.isNotEmpty()) Text(\"Также: ${exercise.accepted.joinToString(\" / \")}\")"
         },
         {
-          "line": 256,
+          "line": 257,
           "source": "Text(if (state.evaluation?.correct == true) \"Совпадает с правильным вариантом\" else \"Сравни свой ответ с эталоном\")"
         },
         {
-          "line": 257,
+          "line": 258,
           "source": "Text(state.frozenAnswer?.takeIf(String::isNotEmpty) ?: \"Ответ не введён\")"
         },
         {
-          "line": 267,
+          "line": 268,
           "source": "// below is the composer's own Back blocks for the"
         },
         {
-          "line": 276,
+          "line": 277,
           "source": "Text(\"Свайп влево — повторить · вправо — вспомнил\","
         },
         {
-          "line": 295,
+          "line": 296,
           "source": "Text(if (!introducing && state.showReference) \"Скрыть таблицу\" else \"Таблица под рукой\")"
         },
         {
-          "line": 307,
+          "line": 308,
           "source": "AndroidInfoCard(\"Таблица этого предложения\") {"
         },
         {
-          "line": 308,
+          "line": 309,
           "source": "Text(\"${noun.lemma} · ${genderNames.getValue(noun.gender)} · ${if (exercise.number == NumberGram.SG) \"ед. ч.\" else \"мн. ч.\"}\")"
         },
         {
-          "line": 310,
+          "line": 311,
           "source": "Text(\"${row.pl} · ${row.ru}\", style = MaterialTheme.typography.labelLarge)"
         },
         {
-          "line": 318,
+          "line": 319,
           "source": "Text(\"Все таблицы и схема\")"
         }
       ]
@@ -9126,59 +9126,91 @@
       "path": "kotlin/shared/src/commonMain/kotlin/polski/model/Grammar.kt",
       "owner": "production source audit",
       "migrationStatus": "classified in inventory-decisions.json; review Evidence.md for acceptance",
-      "sha256": "fc2e9f96f0f6b1a3cf8abed2f327a1926dc89d32a813654ca8c0e4ef0ef95417",
+      "sha256": "d7043da42e3a9decb6c8067a932d8f5f6a8338c76650169cb51ed07f7c0ad829",
       "literalLines": [
         {
-          "line": 4,
+          "line": 7,
           "source": "NOM(\"nom\"), GEN(\"gen\"), DAT(\"dat\"), ACC(\"acc\"), INST(\"inst\"), LOC(\"loc\"), VOC(\"voc\");"
         },
         {
-          "line": 5,
+          "line": 8,
           "source": "companion object { fun fromId(id: String): GramCase = entries.firstOrNull { it.id == id } ?: error(\"Unknown case $id\") }"
         },
         {
-          "line": 9,
+          "line": 12,
           "source": "SG(\"sg\"), PL(\"pl\");"
         },
         {
-          "line": 10,
+          "line": 13,
           "source": "companion object { fun fromId(id: String): NumberGram = entries.firstOrNull { it.id == id } ?: error(\"Unknown number $id\") }"
         },
         {
-          "line": 14,
+          "line": 17,
           "source": "M_PERSONAL(\"m-personal\"), M_ANIMATE(\"m-animate\"), M_INANIMATE(\"m-inanimate\"), F(\"f\"), N(\"n\");"
         },
         {
-          "line": 15,
+          "line": 18,
           "source": "companion object { fun fromId(id: String): Gender = entries.firstOrNull { it.id == id } ?: error(\"Unknown gender $id\") }"
         },
         {
-          "line": 20,
+          "line": 23,
           "source": "companion object { fun fromId(id: Int): Person = entries.firstOrNull { it.id == id } ?: error(\"Unknown person $id\") }"
         },
         {
-          "line": 24,
+          "line": 27,
           "source": "PRESENT(\"present\"), PAST(\"past\"), FUTURE(\"future\");"
         },
         {
-          "line": 25,
+          "line": 28,
           "source": "companion object { fun fromId(id: String): Tense = entries.firstOrNull { it.id == id } ?: error(\"Unknown tense $id\") }"
         },
         {
-          "line": 29,
+          "line": 32,
           "source": "MY(\"my\"), YOUR(\"your\"), HIS(\"his\"), HER(\"her\"), OUR(\"our\"), YOUR_PLURAL(\"yourPlural\"), THEIR(\"their\");"
         },
         {
-          "line": 30,
+          "line": 33,
           "source": "companion object { fun fromId(id: String): PossessiveId = entries.firstOrNull { it.id == id } ?: error(\"Unknown possessive $id\") }"
         },
         {
-          "line": 33,
+          "line": 36,
           "source": "enum class Aspect(val id: String) { IMPERFECTIVE(\"imperfective\"), PERFECTIVE(\"perfective\") }"
         },
         {
-          "line": 34,
+          "line": 37,
           "source": "enum class FutureType(val id: String) { COMPOUND(\"compound\"), PRESENT(\"present\") }"
+        },
+        {
+          "line": 46,
+          "source": "* UniversalCorePlan.md §1/§4.1 (UC-01): pl's closed enums stay the engine's actual grammar model"
+        },
+        {
+          "line": 47,
+          "source": "* (`fromId`, `.id` unchanged, still the only types [polski.grammar.GrammarEngine]/"
+        },
+        {
+          "line": 49,
+          "source": "* universal core's open [FeatureKey]/[FeatureValue] catalog pl uses, not a second grammar model."
+        },
+        {
+          "line": 51,
+          "source": "val CaseFeature = FeatureKey(\"Case\")"
+        },
+        {
+          "line": 52,
+          "source": "val NumberFeature = FeatureKey(\"Number\")"
+        },
+        {
+          "line": 53,
+          "source": "val GenderFeature = FeatureKey(\"Gender\")"
+        },
+        {
+          "line": 54,
+          "source": "val PersonFeature = FeatureKey(\"Person\")"
+        },
+        {
+          "line": 55,
+          "source": "val TenseFeature = FeatureKey(\"Tense\")"
         }
       ]
     },
@@ -9598,102 +9630,154 @@
       "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
       "owner": "production source audit",
       "migrationStatus": "classified in inventory-decisions.json; review Evidence.md for acceptance",
-      "sha256": "8192343560560241c4331c8c5d54b05dc3a7f8998ce06f67515e76b15b110d48",
+      "sha256": "b4f6b1aca397e773df255d1466a9069eecf5a4607bd496e1b24199fc8473c41a",
       "literalLines": [
         {
+          "line": 13,
+          "source": "* §1.1, \"an open catalog, not a closed enum\") so a 5th style needs only a new recipe file under"
+        },
+        {
+          "line": 14,
+          "source": "* `courses/styles` — no Kotlin change reaches [StyleRegistry] (see [parseStyleRecipesJson]). [value] is the"
+        },
+        {
+          "line": 15,
+          "source": "* PascalCase wire vocabulary every host bridge already speaks (Swift `styleId`/`\"styles\"` snapshot"
+        },
+        {
           "line": 16,
-          "source": "/** Fixed lowercase wire names (`formula|table|rule|scene|nativeParallel|examples|whyOnDemand|changes|contrast`)"
+          "source": "* rows, web/Android pickers) — the 4 built-in constants below keep the exact strings the old enum's"
         },
         {
           "line": 17,
-          "source": "*  are `name.replaceFirstChar { it.lowercase() }` — see [presentation.blocksToJson]. */"
+          "source": "* `.name` produced, so no existing host wire format changes; [kebabIdToWireValue] derives the same"
+        },
+        {
+          "line": 22,
+          "source": "val RuleFirst = StyleId(\"RuleFirst\")"
         },
         {
           "line": 23,
+          "source": "val SituationFirst = StyleId(\"SituationFirst\")"
+        },
+        {
+          "line": 24,
+          "source": "val NativeContrast = StyleId(\"NativeContrast\")"
+        },
+        {
+          "line": 25,
+          "source": "val MinimalTheory = StyleId(\"MinimalTheory\")"
+        },
+        {
+          "line": 30,
+          "source": "* The 4 built-in styles in the old closed enum's declaration order — hosts that show a fixed,"
+        },
+        {
+          "line": 31,
+          "source": "* ordered picker (Settings, quick-switch) keep exactly today's option order by iterating this"
+        },
+        {
+          "line": 32,
+          "source": "* instead of [StyleRegistry.recipes]' keys, whose order follows `courses/styles` filenames"
+        },
+        {
+          "line": 34,
+          "source": "* right where \"any currently loaded style\" is the point (dispatch validation, exhaustive tests)."
+        },
+        {
+          "line": 41,
+          "source": "/** Fixed lowercase wire names (`formula|table|rule|scene|nativeParallel|examples|whyOnDemand|changes|contrast`)"
+        },
+        {
+          "line": 42,
+          "source": "*  are `name.replaceFirstChar { it.lowercase() }` — see [presentation.blocksToJson]. */"
+        },
+        {
+          "line": 48,
           "source": "* to [fallback] instead of showing an empty block or crashing. A recipe named as someone else's"
         },
         {
-          "line": 36,
-          "source": "* The `courses/styles` recipe files' kebab-case `id`/`fallback` wire value for each [StyleId]."
+          "line": 61,
+          "source": "* `courses/styles` recipe file ids are kebab-case (`native-contrast`); every host bridge speaks the"
         },
         {
-          "line": 37,
-          "source": "* Bounded to today's 4 named pedagogical styles (ADR-11): a recipe object whose `id` isn't one of"
+          "line": 62,
+          "source": "* PascalCase form the old closed enum's `.name` produced (`NativeContrast`) — this mechanical"
         },
         {
-          "line": 43,
-          "source": "\"rule-first\" to StyleId.RuleFirst,"
+          "line": 64,
+          "source": "* (UC-01: \"a 5th style needs only a new JSON file\") gets a brand-new [StyleId] the same way the 4"
         },
         {
-          "line": 44,
-          "source": "\"situation-first\" to StyleId.SituationFirst,"
+          "line": 67,
+          "source": "private fun String.kebabIdToWireValue(): String = split('-').joinToString(\"\") { it.replaceFirstChar(Char::uppercaseChar) }"
         },
         {
-          "line": 45,
-          "source": "\"native-contrast\" to StyleId.NativeContrast,"
-        },
-        {
-          "line": 46,
-          "source": "\"minimal-theory\" to StyleId.MinimalTheory,"
-        },
-        {
-          "line": 49,
+          "line": 69,
           "source": "/** [BlockKind]'s own fixed lowercase wire name (see [BlockKind]'s doc), inverted for parsing. */"
         },
         {
-          "line": 54,
+          "line": 74,
           "source": "* The built-in recipes (UC-10), loaded from the `courses/styles` recipe files at build time:"
         },
         {
-          "line": 55,
+          "line": 75,
           "source": "* `:shared`'s `generateCoursePackSource` task inlines every JSON file in that directory into"
         },
         {
-          "line": 56,
+          "line": 76,
           "source": "* [generatedStylesJson] the same way `course.json` becomes `generatedCourseJson`"
         },
         {
-          "line": 57,
+          "line": 77,
           "source": "* (`kotlin/shared/build.gradle.kts`). Those files are the single source of truth — editing or"
         },
         {
-          "line": 66,
-          "source": "/** Never throws: a recipe object naming an `id` or block kind outside today's fixed wire"
+          "line": 87,
+          "source": "* Never throws: a recipe's `id` is open (UC-01) — every well-formed recipe object is loaded, not"
         },
         {
-          "line": 72,
-          "source": "val id = styleIdByWireId[getValue(\"id\").jsonPrimitive.content] ?: return null"
+          "line": 88,
+          "source": "* just today's known 4. A block kind outside [BlockKind]'s fixed wire vocabulary is skipped within"
         },
         {
-          "line": 73,
-          "source": "val blocks = getValue(\"blocks\").jsonObject"
-        },
-        {
-          "line": 76,
-          "source": "label = getValue(\"label\").jsonObject.toStringMap(),"
-        },
-        {
-          "line": 77,
-          "source": "description = getValue(\"description\").jsonObject.toStringMap(),"
-        },
-        {
-          "line": 79,
-          "source": "StylePhase.Front to blocks.blockKindList(\"front\"),"
-        },
-        {
-          "line": 80,
-          "source": "StylePhase.Back to blocks.blockKindList(\"back\"),"
-        },
-        {
-          "line": 82,
-          "source": "requires = get(\"requires\")?.jsonArray?.mapNotNull { blockKindByWireName[it.jsonPrimitive.content] }?.toSet() ?: emptySet(),"
-        },
-        {
-          "line": 83,
-          "source": "fallback = get(\"fallback\")?.jsonPrimitive?.content?.let(styleIdByWireId::get),"
+          "line": 89,
+          "source": "* that recipe (`requires`/`blocks`), not a crash — [BlockKind] is a closed set on purpose (§5.2's"
         },
         {
           "line": 96,
+          "source": "val id = StyleId(getValue(\"id\").jsonPrimitive.content.kebabIdToWireValue())"
+        },
+        {
+          "line": 97,
+          "source": "val blocks = getValue(\"blocks\").jsonObject"
+        },
+        {
+          "line": 100,
+          "source": "label = getValue(\"label\").jsonObject.toStringMap(),"
+        },
+        {
+          "line": 101,
+          "source": "description = getValue(\"description\").jsonObject.toStringMap(),"
+        },
+        {
+          "line": 103,
+          "source": "StylePhase.Front to blocks.blockKindList(\"front\"),"
+        },
+        {
+          "line": 104,
+          "source": "StylePhase.Back to blocks.blockKindList(\"back\"),"
+        },
+        {
+          "line": 106,
+          "source": "requires = get(\"requires\")?.jsonArray?.mapNotNull { blockKindByWireName[it.jsonPrimitive.content] }?.toSet() ?: emptySet(),"
+        },
+        {
+          "line": 107,
+          "source": "fallback = get(\"fallback\")?.jsonPrimitive?.content?.let { StyleId(it.kebabIdToWireValue()) },"
+        },
+        {
+          "line": 120,
           "source": "\"Fallback ${fallback?.id} for ${recipe.id} must not declare its own requires (no chains)\""
         }
       ]
@@ -10701,126 +10785,130 @@
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosPreferencesSession.kt",
       "owner": "production source audit",
       "migrationStatus": "classified in inventory-decisions.json; review Evidence.md for acceptance",
-      "sha256": "883c833741cc46a6adac2d7cd17743d88c4d894bc66805b50ff947ca8260ca26",
+      "sha256": "1579b218831dec141dbb07a3855e671fba31fc8d5e555a1e977b94808ac83a99",
       "literalLines": [
         {
-          "line": 23,
+          "line": 24,
           "source": "private val key = \"polski-preferences-v2\""
         },
         {
-          "line": 24,
+          "line": 25,
           "source": "private val backupKey = \"polski-preferences-import-backup-latest\""
         },
         {
-          "line": 27,
+          "line": 28,
           "source": "styleId = if (defaults.stringForKey(\"explanationMethod\") == \"Situations\")"
         },
         {
-          "line": 35,
+          "line": 36,
           "source": "put(\"schemaVersion\", 2)"
         },
         {
-          "line": 37,
+          "line": 38,
           "source": "// until pl-ru content merges) — Swift falls back to its own copy when a value is \"\"."
         },
         {
-          "line": 38,
-          "source": "put(\"styles\", JsonArray(StyleId.entries.map { id ->"
-        },
-        {
-          "line": 41,
-          "source": "put(\"id\", id.name)"
+          "line": 39,
+          "source": "put(\"styles\", JsonArray(builtInStyleIds.map { id ->"
         },
         {
           "line": 42,
-          "source": "put(\"label\", recipe?.label?.get(\"ru\") ?: \"\")"
+          "source": "put(\"id\", id.value)"
         },
         {
           "line": 43,
+          "source": "put(\"label\", recipe?.label?.get(\"ru\") ?: \"\")"
+        },
+        {
+          "line": 44,
           "source": "put(\"description\", recipe?.description?.get(\"ru\") ?: \"\")"
         },
         {
-          "line": 48,
+          "line": 49,
           "source": "put(\"status\", \"Ready\")"
         },
         {
-          "line": 49,
-          "source": "put(\"method\", StyleId.valueOf(result.value.styleId.name).toLegacyWireValue())"
-        },
-        {
           "line": 50,
-          "source": "put(\"styleId\", result.value.styleId.name)"
-        },
-        {
-          "line": 51,
-          "source": "put(\"answerMode\", result.value.answerMode.name)"
+          "source": "// PreferredStyle's `.name` (preferences enum) and StyleId's `.value` share the"
         },
         {
           "line": 52,
-          "source": "put(\"appearance\", result.value.appearance.name)"
+          "source": "put(\"method\", StyleId(result.value.styleId.name).toLegacyWireValue())"
         },
         {
           "line": 53,
-          "source": "put(\"motion\", result.value.motion.name)"
+          "source": "put(\"styleId\", result.value.styleId.name)"
         },
         {
           "line": 54,
-          "source": "put(\"animationsEnabled\", result.value.animationsEnabled)"
+          "source": "put(\"answerMode\", result.value.answerMode.name)"
+        },
+        {
+          "line": 55,
+          "source": "put(\"appearance\", result.value.appearance.name)"
+        },
+        {
+          "line": 56,
+          "source": "put(\"motion\", result.value.motion.name)"
         },
         {
           "line": 57,
+          "source": "put(\"animationsEnabled\", result.value.animationsEnabled)"
+        },
+        {
+          "line": 60,
           "source": "put(\"status\", \"RecoveryRequired\")"
         },
         {
-          "line": 58,
+          "line": 61,
           "source": "put(\"error\", result.reason)"
         },
         {
-          "line": 67,
+          "line": 70,
           "source": "val current = (loaded as? PreferencesDecode.Loaded)?.value ?: return \"Настройки требуют восстановления\""
         },
         {
-          "line": 69,
-          "source": "\"method\" -> current.copy(styleId = legacyStyleWireValue(value)?.let { PreferredStyle.valueOf(it.name) } ?: return \"Неизвестный метод\")"
-        },
-        {
-          "line": 70,
-          "source": "\"styleId\" -> current.copy(styleId = PreferredStyle.entries.firstOrNull { it.name == value } ?: return \"Неизвестный стиль\")"
-        },
-        {
-          "line": 71,
-          "source": "\"answerMode\" -> current.copy(answerMode = PreferredAnswerMode.entries.firstOrNull { it.name == value } ?: return \"Неизвестный способ ответа\")"
-        },
-        {
           "line": 72,
-          "source": "\"appearance\" -> current.copy(appearance = Appearance.entries.firstOrNull { it.name == value } ?: return \"Неизвестная тема\")"
+          "source": "\"method\" -> current.copy(styleId = legacyStyleWireValue(value)?.let { PreferredStyle.valueOf(it.value) } ?: return \"Неизвестный метод\")"
         },
         {
           "line": 73,
-          "source": "\"motion\" -> current.copy(motion = Motion.entries.firstOrNull { it.name == value } ?: return \"Неизвестное движение\")"
+          "source": "\"styleId\" -> current.copy(styleId = PreferredStyle.entries.firstOrNull { it.name == value } ?: return \"Неизвестный стиль\")"
         },
         {
           "line": 74,
-          "source": "\"animationsEnabled\" -> current.copy(animationsEnabled = value.toBooleanStrictOrNull() ?: return \"Неверное значение\")"
+          "source": "\"answerMode\" -> current.copy(answerMode = PreferredAnswerMode.entries.firstOrNull { it.name == value } ?: return \"Неизвестный способ ответа\")"
         },
         {
           "line": 75,
+          "source": "\"appearance\" -> current.copy(appearance = Appearance.entries.firstOrNull { it.name == value } ?: return \"Неизвестная тема\")"
+        },
+        {
+          "line": 76,
+          "source": "\"motion\" -> current.copy(motion = Motion.entries.firstOrNull { it.name == value } ?: return \"Неизвестное движение\")"
+        },
+        {
+          "line": 77,
+          "source": "\"animationsEnabled\" -> current.copy(animationsEnabled = value.toBooleanStrictOrNull() ?: return \"Неверное значение\")"
+        },
+        {
+          "line": 78,
           "source": "else -> return \"Неизвестная настройка\""
         },
         {
-          "line": 81,
+          "line": 84,
           "source": "if (raw.encodeToByteArray().size > 1_000_000) return \"Файл настроек слишком большой\""
         },
         {
-          "line": 90,
+          "line": 93,
           "source": "if (!defaults.synchronize() || defaults.stringForKey(backupKey) != old) return \"Не удалось сохранить резервную копию\""
         },
         {
-          "line": 97,
+          "line": 100,
           "source": "check(defaults.synchronize() && defaults.stringForKey(key) == raw) { \"Не удалось сохранить настройки\" }"
         },
         {
-          "line": 101,
+          "line": 104,
           "source": "} catch (error: Throwable) { error.message ?: \"Не удалось сохранить настройки\" }"
         }
       ]
@@ -10889,170 +10977,170 @@
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosSession.kt",
       "owner": "production source audit",
       "migrationStatus": "classified in inventory-decisions.json; review Evidence.md for acceptance",
-      "sha256": "8d850fe38e3cebcc94bd1d4922b88322832e40d9b9685dd4ff5e3a79bf78bb09",
+      "sha256": "4b347002af1685e023503d11d41b4589cc15e0cf58e35f35662baf97f723a349",
       "literalLines": [
         {
-          "line": 33,
+          "line": 34,
           "source": "/** SwiftUI's one scene-owned entry point. Call [close] when the scene owner is released. */"
         },
         {
-          "line": 50,
+          "line": 51,
           "source": "* (`Remembered`/`Again`), for the host's decorative Rive overlay"
         },
         {
-          "line": 51,
+          "line": 52,
           "source": "* (`Plans/Kotlin/FlipCardRivePlan.md` FC-01/FC-17/FC-20). Never stored in the snapshot state:"
         },
         {
-          "line": 53,
+          "line": 54,
           "source": "* iOS host dispatches `AppAction.Rate` — rather than in Swift, so [cardEffectFor] stays the"
         },
         {
-          "line": 63,
+          "line": 64,
           "source": "fun dispatch(command: String, value: String = \"\") {"
         },
         {
-          "line": 66,
+          "line": 67,
           "source": "\"tab\" -> AppTab.entries.firstOrNull { it.name == value }?.let(AppAction::SelectTab)"
         },
         {
-          "line": 67,
+          "line": 68,
           "source": "\"chain\" -> AppAction.StartChain()"
         },
         {
-          "line": 68,
+          "line": 69,
           "source": "\"seed\" -> value.toIntOrNull()?.let(AppAction::SelectChainSeed)"
         },
         {
-          "line": 69,
+          "line": 70,
           "source": "\"schedule\" -> AppAction.StartSchedule"
         },
         {
-          "line": 70,
+          "line": 71,
           "source": "\"skillPicker\" -> AppAction.OpenSkillPicker"
         },
         {
-          "line": 71,
+          "line": 72,
           "source": "\"skill\" -> AppAction.ChooseSkill(value)"
         },
         {
-          "line": 72,
+          "line": 73,
           "source": "\"answerMode\" -> AnswerMode.entries.firstOrNull { it.name == value }?.let {"
         },
         {
-          "line": 73,
+          "line": 74,
           "source": "defaults.setObject(value, forKey = \"answerMode\")"
         },
         {
-          "line": 77,
+          "line": 78,
           "source": "\"explanationMethod\" -> legacyStyleWireValue(value)?.let {"
         },
         {
-          "line": 78,
+          "line": 79,
           "source": "defaults.setObject(value, forKey = \"explanationMethod\")"
         },
         {
-          "line": 83,
-          "source": "\"styleId\" -> StyleId.entries.firstOrNull { it.name == value }?.let {"
+          "line": 85,
+          "source": "\"styleId\" -> StyleRegistry.recipes.keys.firstOrNull { it.value == value }?.let {"
         },
         {
-          "line": 84,
+          "line": 86,
           "source": "defaults.setObject(value, forKey = \"styleId\")"
         },
         {
-          "line": 87,
+          "line": 89,
           "source": "\"draft\" -> AppAction.EditAnswer(value)"
         },
         {
-          "line": 88,
+          "line": 90,
           "source": "\"continueIntroduction\" -> AppAction.ContinueIntroduction"
         },
         {
-          "line": 89,
+          "line": 91,
           "source": "\"reveal\" -> store.state.value.exerciseId?.let(AppAction::Reveal)"
         },
         {
-          "line": 90,
+          "line": 92,
           "source": "\"rate\" -> {"
         },
         {
-          "line": 95,
+          "line": 97,
           "source": "\"reference\" -> AppAction.ToggleReference"
         },
         {
-          "line": 96,
+          "line": 98,
           "source": "\"matrixSection\" -> MatrixSection.entries.firstOrNull { it.name == value }?.let(AppAction::SelectMatrixSection)"
         },
         {
-          "line": 97,
+          "line": 99,
           "source": "\"matrixNoun\" -> AppAction.SetMatrixSelection(store.state.value.matrixSelection.copy(nounId = value))"
         },
         {
-          "line": 98,
+          "line": 100,
           "source": "\"matrixAdjective\" -> AppAction.SetMatrixSelection(store.state.value.matrixSelection.copy(adjectiveId = value))"
         },
         {
-          "line": 99,
+          "line": 101,
           "source": "\"matrixOwner\" -> AppAction.SetMatrixSelection(store.state.value.matrixSelection.copy(ownerId = value))"
         },
         {
-          "line": 100,
+          "line": 102,
           "source": "\"matrixNumber\" -> AppAction.SetMatrixSelection(store.state.value.matrixSelection.copy(numberId = value))"
         },
         {
-          "line": 101,
+          "line": 103,
           "source": "\"matrixVerb\" -> AppAction.SetMatrixSelection(store.state.value.matrixSelection.copy(verbId = value))"
         },
         {
-          "line": 102,
+          "line": 104,
           "source": "\"matrixGender\" -> AppAction.SetMatrixSelection(store.state.value.matrixSelection.copy(feminineGroup = value == \"f\"))"
         },
         {
-          "line": 103,
+          "line": 105,
           "source": "\"export\" -> AppAction.RequestExport"
         },
         {
-          "line": 104,
+          "line": 106,
           "source": "\"reset\" -> AppAction.RequestReset"
         },
         {
-          "line": 105,
+          "line": 107,
           "source": "\"refresh\" -> AppAction.RefreshTime"
         },
         {
-          "line": 119,
+          "line": 121,
           "source": "if (!closed) store.dispatch(AppAction.EffectAcknowledged(id, if (outcome == \"completed\") EffectOutcome.Completed else EffectOutcome.Skipped))"
         },
         {
-          "line": 128,
+          "line": 130,
           "source": "if (closed) { completion(\"Сессия закрыта\"); return }"
         },
         {
-          "line": 130,
+          "line": 132,
           "source": "completion(\"Дождитесь сохранения прогресса или экспортируйте JSON\")"
         },
         {
-          "line": 162,
+          "line": 164,
           "source": "ExerciseFactory(RandomSource { Random.nextDouble() }, ExerciseIdFactory { \"ios-${++nextId}\" }),"
         },
         {
-          "line": 166,
+          "line": 168,
           "source": "dateFormat = \"yyyy-MM-dd\""
         },
         {
-          "line": 167,
+          "line": 169,
           "source": "locale = NSLocale(localeIdentifier = \"en_US_POSIX\")"
         },
         {
-          "line": 174,
-          "source": "defaults.stringForKey(\"styleId\")?.let { name -> StyleId.entries.firstOrNull { it.name == name } }"
+          "line": 176,
+          "source": "defaults.stringForKey(\"styleId\")?.let { name -> StyleRegistry.recipes.keys.firstOrNull { it.value == name } }"
         },
         {
-          "line": 175,
+          "line": 177,
           "source": "?: legacyStyleWireValue(defaults.stringForKey(\"explanationMethod\") ?: \"\") ?: StyleId.RuleFirst,"
         },
         {
-          "line": 176,
+          "line": 178,
           "source": "if (defaults.stringForKey(\"answerMode\") == \"Typed\") AnswerMode.Typed else AnswerMode.Oral,"
         }
       ]
@@ -11345,7 +11433,7 @@
       "path": "kotlin/shared/src/macosMain/kotlin/polski/macos/MacPreferencesSession.kt",
       "owner": "production source audit",
       "migrationStatus": "classified in inventory-decisions.json; review Evidence.md for acceptance",
-      "sha256": "9a77eda6eea1241089e0891482e0073e089ccfa29310b1cf840d1c0a4035000b",
+      "sha256": "e1eded328e32e089e9619edfc8d6cc442d1a79f7b6859dc4ebf92bb104e729c7",
       "literalLines": [
         {
           "line": 25,
@@ -11445,7 +11533,7 @@
         },
         {
           "line": 86,
-          "source": "put(\"id\", id.name)"
+          "source": "put(\"id\", id.value)"
         },
         {
           "line": 87,
@@ -11537,7 +11625,7 @@
       "path": "kotlin/shared/src/macosMain/kotlin/polski/macos/MacSession.kt",
       "owner": "production source audit",
       "migrationStatus": "classified in inventory-decisions.json; review Evidence.md for acceptance",
-      "sha256": "7f7838dedc235b49391896f98fa488b040d5474dc60334465f0352de1558a481",
+      "sha256": "ef1d087bdb7a150a9c25cc63756c6db870a6f6982621e85eb33a045a1b34fc10",
       "literalLines": [
         {
           "line": 37,
@@ -11576,83 +11664,87 @@
           "source": "\"matrixSection\" -> MatrixSection.entries.firstOrNull { it.name == value }?.let(AppAction::SelectMatrixSection)"
         },
         {
-          "line": 81,
-          "source": "\"styleId\" -> StyleId.entries.firstOrNull { it.name == value }?.let(AppAction::SetStyle)"
-        },
-        {
           "line": 82,
-          "source": "\"reference\" -> AppAction.ToggleReference"
+          "source": "// not just a fixed enum's `entries`."
         },
         {
           "line": 83,
-          "source": "\"reset\" -> AppAction.RequestReset"
+          "source": "\"styleId\" -> StyleRegistry.recipes.keys.firstOrNull { it.value == value }?.let(AppAction::SetStyle)"
         },
         {
           "line": 84,
-          "source": "\"resetDecision\" -> {"
+          "source": "\"reference\" -> AppAction.ToggleReference"
         },
         {
           "line": 85,
-          "source": "val parts = value.split('|')"
+          "source": "\"reset\" -> AppAction.RequestReset"
+        },
+        {
+          "line": 86,
+          "source": "\"resetDecision\" -> {"
         },
         {
           "line": 87,
-          "source": "if (parts.size == 2 && id != null) AppAction.ResetDecision(id, parts[1] == \"true\") else null"
-        },
-        {
-          "line": 89,
-          "source": "\"continueIntroduction\" -> AppAction.ContinueIntroduction"
-        },
-        {
-          "line": 90,
-          "source": "\"answerMode\" -> AnswerMode.entries.firstOrNull { it.name == value }?.let(AppAction::SetAnswerMode)"
-        },
-        {
-          "line": 91,
-          "source": "\"draft\" -> AppAction.EditAnswer(value)"
-        },
-        {
-          "line": 92,
-          "source": "\"reveal\" -> value.takeIf { it == current.exerciseId }?.let(AppAction::Reveal)"
-        },
-        {
-          "line": 93,
-          "source": "\"rate\" -> {"
-        },
-        {
-          "line": 94,
           "source": "val parts = value.split('|')"
         },
         {
-          "line": 99,
+          "line": 89,
+          "source": "if (parts.size == 2 && id != null) AppAction.ResetDecision(id, parts[1] == \"true\") else null"
+        },
+        {
+          "line": 91,
+          "source": "\"continueIntroduction\" -> AppAction.ContinueIntroduction"
+        },
+        {
+          "line": 92,
+          "source": "\"answerMode\" -> AnswerMode.entries.firstOrNull { it.name == value }?.let(AppAction::SetAnswerMode)"
+        },
+        {
+          "line": 93,
+          "source": "\"draft\" -> AppAction.EditAnswer(value)"
+        },
+        {
+          "line": 94,
+          "source": "\"reveal\" -> value.takeIf { it == current.exerciseId }?.let(AppAction::Reveal)"
+        },
+        {
+          "line": 95,
+          "source": "\"rate\" -> {"
+        },
+        {
+          "line": 96,
+          "source": "val parts = value.split('|')"
+        },
+        {
+          "line": 101,
           "source": "\"export\" -> AppAction.RequestExport"
         },
         {
-          "line": 100,
+          "line": 102,
           "source": "\"refresh\" -> AppAction.RefreshTime"
         },
         {
-          "line": 116,
+          "line": 118,
           "source": "if (outcome == \"completed\") EffectOutcome.Completed else EffectOutcome.Skipped))"
         },
         {
-          "line": 120,
+          "line": 122,
           "source": "if (closed) { completion(\"Сессия закрыта\"); return }"
         },
         {
-          "line": 122,
+          "line": 124,
           "source": "completion(\"Дождитесь сохранения прогресса или экспортируйте JSON\")"
         },
         {
-          "line": 156,
+          "line": 158,
           "source": "ExerciseFactory(RandomSource { Random.nextDouble() }, ExerciseIdFactory { \"mac-${++nextId}\" }),"
         },
         {
-          "line": 160,
+          "line": 162,
           "source": "dateFormat = \"yyyy-MM-dd\""
         },
         {
-          "line": 161,
+          "line": 163,
           "source": "locale = NSLocale(localeIdentifier = \"en_US_POSIX\")"
         }
       ]
@@ -11661,7 +11753,7 @@
       "path": "kotlin/shared/src/macosMain/kotlin/polski/macos/MacSnapshot.kt",
       "owner": "production source audit",
       "migrationStatus": "classified in inventory-decisions.json; review Evidence.md for acceptance",
-      "sha256": "bde5fcb208db237ecb5719d403bb039c7899065d4ae3565016b5a7dd37d6223f",
+      "sha256": "8aa5b915654d26833fd6d44232c7fe0396879f5a4f968bc65e106f909796c89f",
       "literalLines": [
         {
           "line": 66,
@@ -11693,7 +11785,7 @@
         },
         {
           "line": 74,
-          "source": "put(\"styleId\", state.styleId.name)"
+          "source": "put(\"styleId\", state.styleId.value)"
         },
         {
           "line": 75,
@@ -11981,7 +12073,7 @@
         },
         {
           "line": 188,
-          "source": "put(\"effectiveStyleId\", effective.id.name)"
+          "source": "put(\"effectiveStyleId\", effective.id.value)"
         },
         {
           "line": 189,
@@ -13069,7 +13161,7 @@
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidStylePicker.kt",
       "owner": "production source audit",
       "migrationStatus": "classified in inventory-decisions.json; review Evidence.md for acceptance",
-      "sha256": "a2671884fb11e21952fb5d393b6452d558ba360d1b504ec4586e876b7a026ee8",
+      "sha256": "efcf75bc15837043ceb498794574c8284a77d425299a76892cddd8fe7d3e82dd",
       "literalLines": [
         {
           "line": 24,
@@ -13345,7 +13437,7 @@
       "path": "kotlin/composeApp/src/desktopMain/kotlin/polski/desktop/DesktopPreferencesController.kt",
       "owner": "production source audit",
       "migrationStatus": "classified in inventory-decisions.json; review Evidence.md for acceptance",
-      "sha256": "60a93c6094293bbc6aaccd509f834488374cab5648fdb5906892765bbdd3cd6e",
+      "sha256": "274fa30e4be22d47b18ce30d3b65bb71a7a5e999692f04458cd6eec2d121c675",
       "literalLines": [
         {
           "line": 27,
@@ -13564,7 +13656,7 @@
       "path": "kotlin/composeApp/src/desktopMain/kotlin/polski/desktop/Main.kt",
       "owner": "production source audit",
       "migrationStatus": "classified in inventory-decisions.json; review Evidence.md for acceptance",
-      "sha256": "82a68532a443e9fd9f3f6fd0231dcadad693c50e74a34e33f5caa2d75c96e5f7",
+      "sha256": "35eaca3a850d579d85221b0f799446b7e5b5b3fec42b8fcdbb471b89c59e6208",
       "literalLines": [
         {
           "line": 119,
@@ -15213,242 +15305,242 @@
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/SettingsWeb.kt",
       "owner": "production source audit",
       "migrationStatus": "classified in inventory-decisions.json; review Evidence.md for acceptance",
-      "sha256": "a09a10ceee34ae06af7bc0db8c1b89e2094b3ef800495ea81b3e52ab02e9bffe",
+      "sha256": "1eeb644797addde782be0a35629d61a0061c7d6d17b8ef879ee0c8107c1ca8c0",
       "literalLines": [
         {
-          "line": 27,
+          "line": 28,
           "source": "root.appendChild(settingsNode(\"h2\", text = \"Настройки обучения\"))"
         },
         {
-          "line": 28,
+          "line": 29,
           "source": "root.appendChild(settingsButton(\"Вернуться к карточке\") { navigate(returnTo) }.apply { id = \"settings-return\" })"
         },
         {
-          "line": 29,
+          "line": 30,
           "source": "if (preferences.status.isNotEmpty()) root.appendChild(settingsNode(\"p\", \"settings-status\", preferences.status).apply {"
         },
         {
-          "line": 30,
+          "line": 31,
           "source": "setAttribute(\"role\", \"status\")"
         },
         {
-          "line": 31,
+          "line": 32,
           "source": "setAttribute(\"aria-live\", \"polite\")"
         },
         {
-          "line": 33,
+          "line": 34,
           "source": "val learning = settingsNode(\"section\", \"card settings-panel\")"
         },
         {
-          "line": 34,
+          "line": 35,
           "source": "learning.appendChild(settingsNode(\"h3\", text = \"Обучение\"))"
         },
         {
-          "line": 37,
-          "source": "learning.appendChild(settingsSelect(\"Стиль объяснений\", \"settings-method\", StyleId.entries.map { it.name to styleLabel(it) }, currentStyleId.name) { selected ->"
+          "line": 38,
+          "source": "learning.appendChild(settingsSelect(\"Стиль объяснений\", \"settings-method\", builtInStyleIds.map { it.value to styleLabel(it) }, currentStyleId.value) { selected ->"
         },
         {
-          "line": 40,
+          "line": 41,
           "source": "learning.appendChild(settingsNode(\"p\", \"muted settings-style-description\", styleDescription(currentStyleId)))"
         },
         {
-          "line": 42,
+          "line": 43,
           "source": "learning.appendChild(settingsNode(\"p\", \"muted settings-style-fallback-hint\", hint))"
         },
         {
-          "line": 44,
+          "line": 45,
           "source": "learning.appendChild(settingsSelect(\"Способ ответа\", \"settings-answer-mode\", listOf(\"Oral\" to \"Вслух или про себя\", \"Typed\" to \"Напечатать\"), preferences.value.answerMode.name) { selected ->"
         },
         {
-          "line": 45,
+          "line": 46,
           "source": "preferences.setAnswerMode(if (selected == \"Typed\") AnswerMode.Typed else AnswerMode.Oral, store)"
         },
         {
-          "line": 47,
+          "line": 48,
           "source": "learning.appendChild(settingsNode(\"p\", \"muted\", \"Переход к печатному ответу после раскрытия применяется к следующему вопросу.\"))"
         },
         {
-          "line": 48,
+          "line": 49,
           "source": "learning.appendChild(settingsToggle(\"Оценивать карточки свайпом\", \"settings-swipe-rating\", preferences.value.swipeRatingEnabled) {"
         },
         {
-          "line": 51,
+          "line": 52,
           "source": "learning.appendChild(settingsNode(\"p\", \"muted\", \"Для грамматики и слов после раскрытия: влево — «Повторить», вправо — «Вспомнил». На компьютере также кнопки и ← →.\"))"
         },
         {
-          "line": 53,
+          "line": 54,
           "source": "val display = settingsNode(\"section\", \"card settings-panel\")"
         },
         {
-          "line": 54,
+          "line": 55,
           "source": "display.appendChild(settingsNode(\"h3\", text = \"Внешний вид\"))"
         },
         {
-          "line": 56,
+          "line": 57,
           "source": "display.appendChild(settingsSelect(\"Тема\", \"settings-appearance\", listOf(\"System\" to \"Как в системе\", \"Light\" to \"Светлая\", \"Dark\" to \"Тёмная\"), preferences.value.appearance.name) {"
         },
         {
-          "line": 59,
+          "line": 60,
           "source": "display.appendChild(settingsSelect(\"Движение\", \"settings-motion\", listOf(\"System\" to \"Как в системе\", \"Reduced\" to \"Меньше движения\"), preferences.value.motion.name) {"
         },
         {
-          "line": 62,
+          "line": 63,
           "source": "display.appendChild(settingsToggle(\"Анимации\", \"settings-animations\", preferences.value.animationsEnabled) {"
         },
         {
-          "line": 65,
+          "line": 66,
           "source": "display.appendChild(settingsNode(\"p\", \"muted\", \"Выключение анимаций отключает раскрытие ответа, оборот карточек слов и все эффекты Rive — они не загружаются из сети.\"))"
         },
         {
-          "line": 66,
+          "line": 67,
           "source": "val data = settingsNode(\"section\", \"card settings-panel\")"
         },
         {
-          "line": 67,
+          "line": 68,
           "source": "data.appendChild(settingsNode(\"h3\", text = \"Данные\"))"
         },
         {
-          "line": 69,
+          "line": 70,
           "source": "data.appendChild(settingsButton(\"Сохранить настройки JSON\") { downloadPreferences(preferences.exportRaw()) })"
         },
         {
-          "line": 70,
+          "line": 71,
           "source": "val importLabel = settingsNode(\"label\", text = \"Выбрать JSON настроек\")"
         },
         {
-          "line": 71,
-          "source": "val input = document.createElement(\"input\") as HTMLInputElement"
-        },
-        {
           "line": 72,
-          "source": "input.id = \"settings-import\""
+          "source": "val input = document.createElement(\"input\") as HTMLInputElement"
         },
         {
           "line": 73,
-          "source": "input.type = \"file\""
+          "source": "input.id = \"settings-import\""
         },
         {
           "line": 74,
-          "source": "input.accept = \"application/json,.json\""
+          "source": "input.type = \"file\""
         },
         {
           "line": 75,
+          "source": "input.accept = \"application/json,.json\""
+        },
+        {
+          "line": 76,
           "source": "input.setAttribute(\"aria-label\", \"Файл JSON настроек для импорта\")"
         },
         {
-          "line": 78,
+          "line": 79,
           "source": "data.appendChild(settingsButton(\"Импортировать настройки\") {"
         },
         {
-          "line": 80,
+          "line": 81,
           "source": "if (file == null) preferences.report(\"Выберите файл JSON настроек\")"
         },
         {
-          "line": 84,
+          "line": 85,
           "source": "reader.onerror = { preferences.report(\"Не удалось прочитать файл настроек\") }"
         },
         {
-          "line": 88,
+          "line": 89,
           "source": "data.appendChild(settingsButton(\"Открыть прогресс и экспорт JSON\") { navigate(WebRoute.Progress) })"
         },
         {
-          "line": 89,
+          "line": 90,
           "source": "data.appendChild(settingsButton(\"Открыть словарь и импорт или экспорт JSON\") { navigate(WebRoute.Vocabulary) })"
         },
         {
-          "line": 90,
+          "line": 91,
           "source": "data.appendChild(settingsNode(\"p\", \"muted\", \"Прогресс и словарь сохраняются отдельно от настроек. Их JSON доступен в соответствующих разделах.\"))"
         },
         {
-          "line": 92,
+          "line": 93,
           "source": "val reminders = settingsNode(\"section\", \"card settings-panel\")"
         },
         {
-          "line": 93,
+          "line": 94,
           "source": "reminders.appendChild(settingsNode(\"h3\", text = \"Напоминания\"))"
         },
         {
-          "line": 94,
+          "line": 95,
           "source": "reminders.appendChild(settingsNode(\"p\", text = \"В браузерной версии напоминания после закрытия страницы недоступны. Для надёжной доставки нужна отдельная поддержка Push/PWA.\"))"
         },
         {
-          "line": 99,
+          "line": 100,
           "source": "val wrapper = settingsNode(\"label\", text = label)"
         },
         {
-          "line": 100,
+          "line": 101,
           "source": "val select = document.createElement(\"select\") as HTMLSelectElement"
         },
         {
-          "line": 102,
+          "line": 103,
           "source": "select.setAttribute(\"aria-label\", label)"
         },
         {
-          "line": 103,
+          "line": 104,
           "source": "options.forEach { (value, title) -> select.appendChild(settingsNode(\"option\", text = title).apply { setAttribute(\"value\", value) }) }"
         },
         {
-          "line": 105,
+          "line": 106,
           "source": "select.addEventListener(\"change\", { onChange(select.value) })"
         },
         {
-          "line": 111,
+          "line": 112,
           "source": "val wrapper = settingsNode(\"label\", \"settings-toggle\", label)"
         },
         {
-          "line": 112,
+          "line": 113,
           "source": "val input = document.createElement(\"input\") as HTMLInputElement"
         },
         {
-          "line": 114,
+          "line": 115,
           "source": "input.type = \"checkbox\""
         },
         {
-          "line": 116,
+          "line": 117,
           "source": "input.setAttribute(\"role\", \"switch\")"
         },
         {
-          "line": 117,
+          "line": 118,
           "source": "input.setAttribute(\"aria-label\", label)"
         },
         {
-          "line": 118,
+          "line": 119,
           "source": "input.addEventListener(\"change\", { onChange(input.checked) })"
         },
         {
-          "line": 124,
+          "line": 125,
           "source": "(settingsNode(\"button\", text = label) as HTMLButtonElement).apply {"
         },
         {
-          "line": 125,
+          "line": 126,
           "source": "type = \"button\""
         },
         {
-          "line": 126,
+          "line": 127,
           "source": "addEventListener(\"click\", { onClick() })"
         },
         {
-          "line": 129,
+          "line": 130,
           "source": "private fun settingsNode(tag: String, classes: String = \"\", text: String? = null): HTMLElement ="
         },
         {
-          "line": 136,
+          "line": 137,
           "source": "val encoded = raw.encodeToByteArray().joinToString(\"\") { byte ->"
         },
         {
-          "line": 138,
+          "line": 139,
           "source": "\"%\" + \"0123456789ABCDEF\"[value shr 4] + \"0123456789ABCDEF\"[value and 15]"
         },
         {
-          "line": 140,
+          "line": 141,
           "source": "val anchor = document.createElement(\"a\") as HTMLAnchorElement"
         },
         {
-          "line": 141,
+          "line": 142,
           "source": "anchor.href = \"data:application/json;charset=utf-8,$encoded\""
         },
         {
-          "line": 142,
+          "line": 143,
           "source": "anchor.download = \"polski-preferences-v2.json\""
         }
       ]
@@ -15665,7 +15757,7 @@
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/WebPreferencesController.kt",
       "owner": "production source audit",
       "migrationStatus": "classified in inventory-decisions.json; review Evidence.md for acceptance",
-      "sha256": "eb399c248bbae77fff962b497780ff727e4406356fc29000388a5eb1741aa0c6",
+      "sha256": "cb21f02032e8c262147dae4513111b87f68773ae3d1bb4e94e7e441dd832e57c",
       "literalLines": [
         {
           "line": 27,
@@ -16001,7 +16093,7 @@
       "path": "kotlin/androidApp/src/main/java/dev/polski/grammarmatrix/AndroidSessionViewModel.kt",
       "owner": "production source audit",
       "migrationStatus": "classified in inventory-decisions.json; review Evidence.md for acceptance",
-      "sha256": "8ac332f4f7913265db15d2ed7b6534efe2d36bc1da3915eb4af67b80acb20994",
+      "sha256": "b72a4126ce32618cfab5ef4604f8508b18732fb4a891bebf3fab66d8444ac2e7",
       "literalLines": [
         {
           "line": 53,

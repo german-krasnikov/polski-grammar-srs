@@ -90,6 +90,9 @@ kotlin {
         commonMain.dependencies {
             implementation(libs.kotlinx.serialization.json)
             api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
+            // UniversalCorePlan.md §4.1 UC-01: model/Grammar.kt's Polish enums are a thin adapter
+            // over the universal core's open FeatureKey/FeatureValue catalog.
+            api(project(":core-model"))
         }
         commonTest.dependencies {
             implementation(kotlin("test"))

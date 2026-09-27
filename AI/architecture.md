@@ -6,8 +6,10 @@ Kotlin Multiplatform: общее ядро + нативный UI на каждо�
 
 ```text
 courses/pl-ru/*.json ──(build: generateCoursePackSource)──► kotlin/shared
+kotlin/build-logic         convention-плагин polski.kmp-common — 7 KMP-таргетов для новых :core-* модулей
+kotlin/core-model          FeatureKey/FeatureValue/FeatureBundle, Construction, SkillSpec (UC-01, первый :core-* модуль)
 kotlin/shared (commonMain)
-  model, data, grammar      польские данные и морфология (GrammarEngine, ExerciseFactory)
+  model, data, grammar      польские данные и морфология (GrammarEngine, ExerciseFactory); model/Grammar.kt — тонкий адаптер над :core-model
   srs                       FSRS (порт ts-fsrs 5.4.2)
   progress, vocabulary      документы прогресса/словаря, кодеки, репозитории
   preferences               UserPreferences (тема, движение, animationsEnabled, методика…)

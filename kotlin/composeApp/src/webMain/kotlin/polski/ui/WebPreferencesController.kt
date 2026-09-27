@@ -35,7 +35,7 @@ internal class WebPreferencesController(private val repository: WebPreferencesRe
     fun report(message: String) { status = message }
 
     fun setStyle(styleId: StyleId, store: TrainingStore) {
-        if (save(value.copy(styleId = PreferredStyle.valueOf(styleId.name))))
+        if (save(value.copy(styleId = PreferredStyle.valueOf(styleId.value))))
             store.dispatch(AppAction.SetStyle(styleId))
     }
 
@@ -60,7 +60,7 @@ internal class WebPreferencesController(private val repository: WebPreferencesRe
             PreferencesSave.Saved -> {
                 value = (UserPreferencesCodec.decode(raw) as polski.preferences.PreferencesDecode.Loaded).value
                 status = "Настройки импортированы"
-                store.dispatch(AppAction.SetStyle(StyleId.valueOf(value.styleId.name)))
+                store.dispatch(AppAction.SetStyle(StyleId(value.styleId.name)))
                 applyPendingAnswerMode(store)
             }
             is PreferencesSave.WriteFailed -> status = result.reason

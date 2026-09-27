@@ -1,4 +1,6 @@
 pluginManagement {
+    // UniversalCorePlan.md §4.3: convention plugin for the 7 KMP targets shared by :core-* modules.
+    includeBuild("build-logic")
     repositories {
         gradlePluginPortal()
         mavenCentral()
@@ -14,4 +16,4 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "polski-grammar-kotlin"
-include(":shared", ":composeApp", ":androidApp")
+include(":shared", ":composeApp", ":androidApp", ":core-model")

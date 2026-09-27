@@ -18,6 +18,7 @@ import polski.presentation.AppAction
 import polski.presentation.AppTab
 import polski.presentation.EffectOutcome
 import polski.presentation.StyleId
+import polski.presentation.StyleRegistry
 import polski.presentation.legacyStyleWireValue
 import polski.presentation.MatrixSection
 import polski.presentation.TimeCapture
@@ -80,7 +81,8 @@ class IosSession(private val defaults: NSUserDefaults = NSUserDefaults.standardU
             }
             // StylesBlueprint.md S1: the native 4-value wire, alongside the legacy one above —
             // switching never creates a review nor touches draft/frozenAnswer (TrainingStore.SetStyle).
-            "styleId" -> StyleId.entries.firstOrNull { it.name == value }?.let {
+            // UC-01: StyleId is open — any id StyleRegistry actually loaded is dispatchable.
+            "styleId" -> StyleRegistry.recipes.keys.firstOrNull { it.value == value }?.let {
                 defaults.setObject(value, forKey = "styleId")
                 AppAction.SetStyle(it)
             }
@@ -171,7 +173,7 @@ class IosSession(private val defaults: NSUserDefaults = NSUserDefaults.standardU
         scope,
         // The native 4-value key wins when present; the legacy 2-value key covers a session that
         // last stored its style before S1 (no migration write — ADR-6, iOS storage is pre-release).
-        defaults.stringForKey("styleId")?.let { name -> StyleId.entries.firstOrNull { it.name == name } }
+        defaults.stringForKey("styleId")?.let { name -> StyleRegistry.recipes.keys.firstOrNull { it.value == name } }
             ?: legacyStyleWireValue(defaults.stringForKey("explanationMethod") ?: "") ?: StyleId.RuleFirst,
         if (defaults.stringForKey("answerMode") == "Typed") AnswerMode.Typed else AnswerMode.Oral,
     )

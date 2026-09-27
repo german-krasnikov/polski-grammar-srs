@@ -22,7 +22,7 @@ import polski.presentation.AppAction
 import polski.presentation.AppTab
 import polski.presentation.CardPhase
 import polski.presentation.EffectOutcome
-import polski.presentation.StyleId
+import polski.presentation.StyleRegistry
 import polski.presentation.MatrixSection
 import polski.presentation.TimeCapture
 import polski.presentation.TimeSource
@@ -78,7 +78,9 @@ class MacSession(directory: String) {
             "matrixSection" -> MatrixSection.entries.firstOrNull { it.name == value }?.let(AppAction::SelectMatrixSection)
             // macOS S1: native Settings/quick-switch pickers speak the full 4-value StyleId
             // vocabulary directly (Plans/Kotlin/StylesBlueprint.md §6) — no more legacy collapse.
-            "styleId" -> StyleId.entries.firstOrNull { it.name == value }?.let(AppAction::SetStyle)
+            // UC-01: StyleId is open now — any id StyleRegistry actually loaded is dispatchable,
+            // not just a fixed enum's `entries`.
+            "styleId" -> StyleRegistry.recipes.keys.firstOrNull { it.value == value }?.let(AppAction::SetStyle)
             "reference" -> AppAction.ToggleReference
             "reset" -> AppAction.RequestReset
             "resetDecision" -> {

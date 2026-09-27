@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "candidateCount": 4110,
-  "tokenCount": 6865,
+  "candidateCount": 4133,
+  "tokenCount": 6889,
   "rows": [
     {
       "path": "src/training/generator.ts",
@@ -10213,9 +10213,9 @@
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosSnapshot.kt",
       "line": 73,
       "symbol": "snapshot",
-      "sourceFingerprint": "35341fb8e2b91a54b95b3dcf3e44e8ca1eb72fec710a115c66d279702707d8a8",
+      "sourceFingerprint": "6a59e3f8eace2af6eca15176b72b2c45eca59b338e58c6ef17727e51ddab12d4",
       "occurrence": 1,
-      "source": "put(\"styleId\", state.styleId.name)",
+      "source": "put(\"styleId\", state.styleId.value)",
       "tokens": [
         "\"styleId\""
       ],
@@ -11631,9 +11631,9 @@
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosSnapshot.kt",
       "line": 192,
       "symbol": "styleBlocksSnapshot",
-      "sourceFingerprint": "824561f61ec63d24adedecb8bfb25dc35c89a2a3abc88bdc982cbb1e86de5b68",
+      "sourceFingerprint": "7f4a33e4c9d182fd2d1f370617b523cc14ddf4607e28eefb1f455a34bc7706b9",
       "occurrence": 1,
-      "source": "put(\"effectiveStyleId\", effective.id.name)",
+      "source": "put(\"effectiveStyleId\", effective.id.value)",
       "tokens": [
         "\"effectiveStyleId\""
       ],
@@ -19385,9 +19385,9 @@
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/TrainingWebApp.kt",
       "line": 574,
       "symbol": "TrainingDomRenderer.renderTraining",
-      "sourceFingerprint": "9b5928bff098a344f4846c893d1ec01c490027deb54aa0d0fa74113eda725c32",
+      "sourceFingerprint": "648f5e30ba68fd222bc07c33d6da28aeff4d8060ad2f942284b7928e74d46e34",
       "occurrence": 1,
-      "source": "methodSelect.appendChild(node(\"option\", text = styleLabel(styleId)).apply { setAttribute(\"value\", styleId.name) })",
+      "source": "methodSelect.appendChild(node(\"option\", text = styleLabel(styleId)).apply { setAttribute(\"value\", styleId.value) })",
       "tokens": [
         "\"option\"",
         "\"value\""
@@ -30485,7 +30485,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidTrainingScreen.kt",
-      "line": 78,
+      "line": 79,
       "symbol": "file-scope",
       "sourceFingerprint": "3c3059b5a234ef4434b71dc730662fe7d01d770eb2d0668662962a44fda8a791",
       "occurrence": 1,
@@ -30503,7 +30503,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidTrainingScreen.kt",
-      "line": 80,
+      "line": 81,
       "symbol": "file-scope",
       "sourceFingerprint": "a2e84fb9103c20a615e9abfc1a16a766aa1fb4f8f3e842cc6ff125b43d5a6099",
       "occurrence": 1,
@@ -30521,7 +30521,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidTrainingScreen.kt",
-      "line": 83,
+      "line": 84,
       "symbol": "file-scope",
       "sourceFingerprint": "7a16591449895f75c6335378f6dde2017836383db530eb87d6bf3b4f19bfea0f",
       "occurrence": 1,
@@ -30545,7 +30545,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidTrainingScreen.kt",
-      "line": 85,
+      "line": 86,
       "symbol": "file-scope",
       "sourceFingerprint": "fd74353362b01d9f16783f941041b77963a7c91b7891a8a096078206f29af69f",
       "occurrence": 1,
@@ -30569,7 +30569,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidTrainingScreen.kt",
-      "line": 91,
+      "line": 92,
       "symbol": "file-scope",
       "sourceFingerprint": "a8cd67685bb66b1167196a783f277c4c83d2c8aa13a4685a5afc4df7c60703bd",
       "occurrence": 1,
@@ -30587,7 +30587,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidTrainingScreen.kt",
-      "line": 94,
+      "line": 95,
       "symbol": "file-scope",
       "sourceFingerprint": "7eaabf686baa62b81b6804066b49b9e380d6f07b156a707c085d51ae53bf624f",
       "occurrence": 1,
@@ -30605,7 +30605,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidTrainingScreen.kt",
-      "line": 95,
+      "line": 96,
       "symbol": "file-scope",
       "sourceFingerprint": "d0804c70e2f409d97db5b285ede3cfb5aeccc05345706d7a34fae646a4bf67c6",
       "occurrence": 1,
@@ -30623,7 +30623,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidTrainingScreen.kt",
-      "line": 96,
+      "line": 97,
       "symbol": "file-scope",
       "sourceFingerprint": "f7eeb0be15a2fa266ea2f9a66fea97a4f0563d88dea5d43d07466d89165a3e7a",
       "occurrence": 1,
@@ -30641,7 +30641,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidTrainingScreen.kt",
-      "line": 106,
+      "line": 107,
       "symbol": "file-scope",
       "sourceFingerprint": "9e13562055be27d9c1fb2f63bb8f425dee814e7bab1499916c5ad219adb614db",
       "occurrence": 1,
@@ -30665,7 +30665,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidTrainingScreen.kt",
-      "line": 112,
+      "line": 113,
       "symbol": "file-scope",
       "sourceFingerprint": "d6106abb3d469e4931817e5a01aefdd7cb965acb6ed25fd50bc7d4e62e3e2c17",
       "occurrence": 1,
@@ -30683,7 +30683,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidTrainingScreen.kt",
-      "line": 117,
+      "line": 118,
       "symbol": "file-scope",
       "sourceFingerprint": "40e6f568046b95ead266c67495cbc49ac5e823858155bcc3962ea917c88bf51e",
       "occurrence": 1,
@@ -30713,7 +30713,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidTrainingScreen.kt",
-      "line": 128,
+      "line": 129,
       "symbol": "file-scope",
       "sourceFingerprint": "d71457954820c27c109ebe01bea6d30ba5e4849bc5ffa14bd919eacc7cc4c308",
       "occurrence": 1,
@@ -30743,7 +30743,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidTrainingScreen.kt",
-      "line": 130,
+      "line": 131,
       "symbol": "file-scope",
       "sourceFingerprint": "58fc24a04221f98bbcb511bb48782285225ce1a0266621e81b17b4940ae6bd15",
       "occurrence": 1,
@@ -30761,7 +30761,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidTrainingScreen.kt",
-      "line": 133,
+      "line": 134,
       "symbol": "file-scope",
       "sourceFingerprint": "9da3704df172bb28c4942a8c3236f51e958f735ca5efcaa4952dc57e79f4e316",
       "occurrence": 1,
@@ -30779,7 +30779,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidTrainingScreen.kt",
-      "line": 136,
+      "line": 137,
       "symbol": "file-scope",
       "sourceFingerprint": "e795143529af4f26e2fac0a25ed7e576accf9504779801bfb21fd1b869e217ab",
       "occurrence": 1,
@@ -30795,7 +30795,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidTrainingScreen.kt",
-      "line": 140,
+      "line": 141,
       "symbol": "file-scope",
       "sourceFingerprint": "3bd8ab26990770abbc2154882d160edcc62b947b48493010b081295c2af3d04b",
       "occurrence": 1,
@@ -30813,7 +30813,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidTrainingScreen.kt",
-      "line": 141,
+      "line": 142,
       "symbol": "file-scope",
       "sourceFingerprint": "907fc3feac0819fcba3f2fe0bb41f5bcc4e18aa15b0b4458a26c5875eddd9354",
       "occurrence": 1,
@@ -30843,7 +30843,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidTrainingScreen.kt",
-      "line": 143,
+      "line": 144,
       "symbol": "file-scope",
       "sourceFingerprint": "19940e001485eeb5a061425f7be191b8828ba369269a5620cbac80e3551a4cc3",
       "occurrence": 1,
@@ -30861,7 +30861,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidTrainingScreen.kt",
-      "line": 148,
+      "line": 149,
       "symbol": "file-scope",
       "sourceFingerprint": "549f9bb4f05856698249d2aa9849948e8d44608c15a646f0386ae79f97e238b4",
       "occurrence": 1,
@@ -30891,7 +30891,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidTrainingScreen.kt",
-      "line": 152,
+      "line": 153,
       "symbol": "file-scope",
       "sourceFingerprint": "b1187b4b0fd6d166d515de7ec11d6110cc473e7b1b8b1b16eb7c61aa5898fc00",
       "occurrence": 1,
@@ -30907,7 +30907,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidTrainingScreen.kt",
-      "line": 154,
+      "line": 155,
       "symbol": "file-scope",
       "sourceFingerprint": "870f271ca7587625887b6cf1356c565057ed4eba79e80573802a8994875dc6ea",
       "occurrence": 1,
@@ -30923,7 +30923,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidTrainingScreen.kt",
-      "line": 162,
+      "line": 163,
       "symbol": "file-scope",
       "sourceFingerprint": "9133f80645f18e2d1d58a121b24262839bc977c6596ea5e63adda84bdd7150a2",
       "occurrence": 1,
@@ -30939,11 +30939,11 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidTrainingScreen.kt",
-      "line": 165,
+      "line": 166,
       "symbol": "file-scope",
-      "sourceFingerprint": "2372cf6ee8bfd8583e519b63f8841e5d76fa94edd6ceedc01053d35e23e88293",
+      "sourceFingerprint": "226bb34fcafc130b24b677e0274429da7843cd35b4f8edfcfe04b531fb8fae89",
       "occurrence": 1,
-      "source": "AndroidChoiceMenu(\"Подача\", state.styleId.name,",
+      "source": "AndroidChoiceMenu(\"Подача\", state.styleId.value,",
       "tokens": [
         "\"Подача\""
       ],
@@ -30957,7 +30957,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidTrainingScreen.kt",
-      "line": 170,
+      "line": 171,
       "symbol": "file-scope",
       "sourceFingerprint": "83814d5808e55e9cadde12c3a49b5616b9340ced4e6f75f803019252878a8678",
       "occurrence": 1,
@@ -30975,7 +30975,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidTrainingScreen.kt",
-      "line": 171,
+      "line": 172,
       "symbol": "file-scope",
       "sourceFingerprint": "09853a97775bac41312b250665c7aa4b72190141e2bbaebb377f50e172a7645d",
       "occurrence": 1,
@@ -30993,7 +30993,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidTrainingScreen.kt",
-      "line": 176,
+      "line": 177,
       "symbol": "file-scope",
       "sourceFingerprint": "49cacb8bfff35779ce04af7cb28aa08500ac5138821e9971168d1c72975e7320",
       "occurrence": 1,
@@ -31011,7 +31011,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidTrainingScreen.kt",
-      "line": 181,
+      "line": 182,
       "symbol": "file-scope",
       "sourceFingerprint": "e456a3f73da59d51ef7c3a268e8ea16e7c27cd18e7f96191ce5b08f98128ba3a",
       "occurrence": 1,
@@ -31027,7 +31027,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidTrainingScreen.kt",
-      "line": 208,
+      "line": 209,
       "symbol": "file-scope",
       "sourceFingerprint": "48d6905af5c2ba33d8437e9c6b011aae2d741385f8208ceb1a7fb2b8584a8640",
       "occurrence": 1,
@@ -31045,7 +31045,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidTrainingScreen.kt",
-      "line": 214,
+      "line": 215,
       "symbol": "file-scope",
       "sourceFingerprint": "4eee07ee431577c404a5ee5d2a945c2ecf6893ab048445b7ccffb1f71e2dd014",
       "occurrence": 1,
@@ -31075,7 +31075,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidTrainingScreen.kt",
-      "line": 219,
+      "line": 220,
       "symbol": "file-scope",
       "sourceFingerprint": "a4df25bcd29a4448a2eabdaccd541f81f12f12322412767b61a60b470146e3de",
       "occurrence": 1,
@@ -31091,7 +31091,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidTrainingScreen.kt",
-      "line": 226,
+      "line": 227,
       "symbol": "file-scope",
       "sourceFingerprint": "413e8e4f15f0994ef2a6afb8eae59c75bdc7f852f048bfe7b37423434f7818c9",
       "occurrence": 1,
@@ -31109,7 +31109,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidTrainingScreen.kt",
-      "line": 228,
+      "line": 229,
       "symbol": "file-scope",
       "sourceFingerprint": "bb43181e8ef50abdde28a283d9e1fd52b4aeeaf88ac36c6aea536b9758688d37",
       "occurrence": 1,
@@ -31133,7 +31133,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidTrainingScreen.kt",
-      "line": 234,
+      "line": 235,
       "symbol": "file-scope",
       "sourceFingerprint": "729a4ff8bfc8981ef281f2c704457005c559420d2337cabf554f93b1878d3226",
       "occurrence": 1,
@@ -31151,7 +31151,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidTrainingScreen.kt",
-      "line": 238,
+      "line": 239,
       "symbol": "file-scope",
       "sourceFingerprint": "7bddda6bf25b50c5596df4150308f4c4fc1a77a25769ccaf9a9a00a90d64a053",
       "occurrence": 1,
@@ -31169,7 +31169,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidTrainingScreen.kt",
-      "line": 243,
+      "line": 244,
       "symbol": "file-scope",
       "sourceFingerprint": "0f6945a99df387248da103f47a5b0a1229cee403bca8edc892f3e47f3e113b20",
       "occurrence": 1,
@@ -31193,7 +31193,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidTrainingScreen.kt",
-      "line": 251,
+      "line": 252,
       "symbol": "file-scope",
       "sourceFingerprint": "265b267685b6488581ec58f7a12905d4bd1dc0d5581760a17007c03665ec1ba7",
       "occurrence": 1,
@@ -31211,7 +31211,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidTrainingScreen.kt",
-      "line": 254,
+      "line": 255,
       "symbol": "file-scope",
       "sourceFingerprint": "795cc69989536a6e1bc9099f079168bc119bf793cc21eefdbc171c8e547a8ff1",
       "occurrence": 1,
@@ -31241,7 +31241,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidTrainingScreen.kt",
-      "line": 256,
+      "line": 257,
       "symbol": "file-scope",
       "sourceFingerprint": "29aa8ca64538e1f789ef92a766cce71871151fa773d669280816de67251b8074",
       "occurrence": 1,
@@ -31265,7 +31265,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidTrainingScreen.kt",
-      "line": 257,
+      "line": 258,
       "symbol": "file-scope",
       "sourceFingerprint": "cc781bc34b632ba83c145699e615fecaca899b092bceb099a05784e2ccb11e0d",
       "occurrence": 1,
@@ -31283,7 +31283,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidTrainingScreen.kt",
-      "line": 267,
+      "line": 268,
       "symbol": "file-scope",
       "sourceFingerprint": "fd1a7d54c37c6941d784b132ed7da0d4a5a9e6938a8af104e06c55c4ef1ee4d6",
       "occurrence": 1,
@@ -31299,7 +31299,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidTrainingScreen.kt",
-      "line": 276,
+      "line": 277,
       "symbol": "file-scope",
       "sourceFingerprint": "5baacb353ca4e7665f4fcd1b37d0a6d3a784d9992f49845a4bcf4c399ca064bf",
       "occurrence": 1,
@@ -31317,7 +31317,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidTrainingScreen.kt",
-      "line": 295,
+      "line": 296,
       "symbol": "file-scope",
       "sourceFingerprint": "ea3a4f09c8881211e2bec3c667c7ab89ba3130464642b776ccf7317a53b2c59b",
       "occurrence": 1,
@@ -31341,7 +31341,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidTrainingScreen.kt",
-      "line": 307,
+      "line": 308,
       "symbol": "AndroidCaseReference",
       "sourceFingerprint": "d578d06f9a4054af3dd58b53e4543ac9737db3f16308c94d59be65e606e603c1",
       "occurrence": 1,
@@ -31359,7 +31359,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidTrainingScreen.kt",
-      "line": 308,
+      "line": 309,
       "symbol": "AndroidCaseReference",
       "sourceFingerprint": "5ad2959d72051070dfb0f4bd42f2ecd49de5ef9c8166c9d64a8cc253d0e88729",
       "occurrence": 1,
@@ -31407,7 +31407,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidTrainingScreen.kt",
-      "line": 310,
+      "line": 311,
       "symbol": "AndroidCaseReference",
       "sourceFingerprint": "b22e972633dbea62c97edbe7e77731f837feedeb933967575966366c84475383",
       "occurrence": 1,
@@ -31437,7 +31437,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidTrainingScreen.kt",
-      "line": 318,
+      "line": 319,
       "symbol": "AndroidCaseReference",
       "sourceFingerprint": "6af89529e62f53cd29ef968448f0c7243be8edc125c5c8e8e24788d3bdae6725",
       "occurrence": 1,
@@ -51135,7 +51135,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/model/Grammar.kt",
-      "line": 4,
+      "line": 7,
       "symbol": "GramCase",
       "sourceFingerprint": "9d3ea803cdd5832b5457be7b50ef4d83c1f6433831cc54baddb43398d37aa665",
       "occurrence": 1,
@@ -51189,7 +51189,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/model/Grammar.kt",
-      "line": 5,
+      "line": 8,
       "symbol": "GramCase.fromId",
       "sourceFingerprint": "9d2a6c19cf9445c3d6f30e4a2e7b3effd1735231405ac5ead006b363f6b30a48",
       "occurrence": 1,
@@ -51207,7 +51207,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/model/Grammar.kt",
-      "line": 9,
+      "line": 12,
       "symbol": "NumberGram",
       "sourceFingerprint": "766b9e8184da6ca2b8753555345de2da368469f39b931f6b3ffb90dd00cb7eac",
       "occurrence": 1,
@@ -51231,7 +51231,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/model/Grammar.kt",
-      "line": 10,
+      "line": 13,
       "symbol": "NumberGram.fromId",
       "sourceFingerprint": "d2365d40f36c12099322681f36a8bdb25abc1f8af3b3aaacede4852d7be95ff1",
       "occurrence": 1,
@@ -51249,7 +51249,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/model/Grammar.kt",
-      "line": 14,
+      "line": 17,
       "symbol": "Gender",
       "sourceFingerprint": "8c3928e8fa85a4900ff9aebe425237f980b374f90dad659e27090df1f44e9ee4",
       "occurrence": 1,
@@ -51291,7 +51291,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/model/Grammar.kt",
-      "line": 15,
+      "line": 18,
       "symbol": "Gender.fromId",
       "sourceFingerprint": "26c5deb3bc3bc5662bb5e60b1fd524dbb34812484850f9e046d3bac9a4e3e461",
       "occurrence": 1,
@@ -51309,7 +51309,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/model/Grammar.kt",
-      "line": 20,
+      "line": 23,
       "symbol": "Person.fromId",
       "sourceFingerprint": "e42af94b6b2be668c87ef79a50d56c8cd81e411264b94b7440b4d91aff61a2f7",
       "occurrence": 1,
@@ -51327,7 +51327,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/model/Grammar.kt",
-      "line": 24,
+      "line": 27,
       "symbol": "Tense",
       "sourceFingerprint": "324ea79b3ddd6e1c79850eed643ab4b1d43017ca64f33cd9b18810a29c170bdb",
       "occurrence": 1,
@@ -51357,7 +51357,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/model/Grammar.kt",
-      "line": 25,
+      "line": 28,
       "symbol": "Tense.fromId",
       "sourceFingerprint": "fb799122da8e4823c4d32630971bc0c1cd2a86f5d794f7725130e89b2f477b0b",
       "occurrence": 1,
@@ -51375,7 +51375,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/model/Grammar.kt",
-      "line": 29,
+      "line": 32,
       "symbol": "PossessiveId",
       "sourceFingerprint": "81daebbe22191d4ce07c449a2aa59d4e4e567ed5016b3adca57c6ed8a385306d",
       "occurrence": 1,
@@ -51429,7 +51429,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/model/Grammar.kt",
-      "line": 30,
+      "line": 33,
       "symbol": "PossessiveId.fromId",
       "sourceFingerprint": "9f7cf9b0c646f080aa1c5e4dd49c67f8790db94fcc6a100acbe28e2968ef29fa",
       "occurrence": 1,
@@ -51447,7 +51447,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/model/Grammar.kt",
-      "line": 33,
+      "line": 36,
       "symbol": "Aspect",
       "sourceFingerprint": "e3d67e6bfd8371d6340411cd60e6ad2c943cb35bd3cd59a22633a11bdcd05bcf",
       "occurrence": 1,
@@ -51471,7 +51471,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/model/Grammar.kt",
-      "line": 34,
+      "line": 37,
       "symbol": "FutureType",
       "sourceFingerprint": "a160c94447d5382b93df502ba867256c18ad74a271ae7ddaa00681a26cb0ed39",
       "occurrence": 1,
@@ -51490,6 +51490,144 @@
           "ordinal": 1,
           "category": "serialization-plumbing",
           "reason": "Persistence, scheduling, model, or platform identifier used for application behavior."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/model/Grammar.kt",
+      "line": 46,
+      "symbol": "file-scope",
+      "sourceFingerprint": "1f78e56f451fd69cadda16381e2a3895d4d6ea30b54b2ca682700495283381e9",
+      "occurrence": 1,
+      "source": "* UniversalCorePlan.md §1/§4.1 (UC-01): pl's closed enums stay the engine's actual grammar model",
+      "tokens": [],
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "serialization-plumbing",
+          "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/model/Grammar.kt",
+      "line": 47,
+      "symbol": "file-scope",
+      "sourceFingerprint": "d0f11db1e9ddb7c39015c4cfc252e790398e2d56e47c3d1dee4ecae560072794",
+      "occurrence": 1,
+      "source": "* (`fromId`, `.id` unchanged, still the only types [polski.grammar.GrammarEngine]/",
+      "tokens": [],
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "serialization-plumbing",
+          "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/model/Grammar.kt",
+      "line": 49,
+      "symbol": "file-scope",
+      "sourceFingerprint": "2d63bdbb312f614d51617bfd34e9a4313a0ee8adcab88a79e7dbe80feb2aad16",
+      "occurrence": 1,
+      "source": "* universal core's open [FeatureKey]/[FeatureValue] catalog pl uses, not a second grammar model.",
+      "tokens": [],
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "serialization-plumbing",
+          "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/model/Grammar.kt",
+      "line": 51,
+      "symbol": "CaseFeature",
+      "sourceFingerprint": "ab443daeba43d60fe8f547685bd78e78abbbee2959b94296bafa95fda16101e7",
+      "occurrence": 1,
+      "source": "val CaseFeature = FeatureKey(\"Case\")",
+      "tokens": [
+        "\"Case\""
+      ],
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "serialization-plumbing",
+          "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/model/Grammar.kt",
+      "line": 52,
+      "symbol": "NumberFeature",
+      "sourceFingerprint": "4d531885e791e523b507281742afd9a44337e83600a9158214bbe20cc3808683",
+      "occurrence": 1,
+      "source": "val NumberFeature = FeatureKey(\"Number\")",
+      "tokens": [
+        "\"Number\""
+      ],
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "serialization-plumbing",
+          "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/model/Grammar.kt",
+      "line": 53,
+      "symbol": "GenderFeature",
+      "sourceFingerprint": "f3de1c93894680cc1be54b111a689d0c1e953554a767b9c78eae75c3ffa9dc74",
+      "occurrence": 1,
+      "source": "val GenderFeature = FeatureKey(\"Gender\")",
+      "tokens": [
+        "\"Gender\""
+      ],
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "serialization-plumbing",
+          "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/model/Grammar.kt",
+      "line": 54,
+      "symbol": "PersonFeature",
+      "sourceFingerprint": "bb89636925ea65166c095bbdbaa119ec2821cdf4ced1acf7cf3f6b211fc40ad5",
+      "occurrence": 1,
+      "source": "val PersonFeature = FeatureKey(\"Person\")",
+      "tokens": [
+        "\"Person\""
+      ],
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "serialization-plumbing",
+          "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/model/Grammar.kt",
+      "line": 55,
+      "symbol": "TenseFeature",
+      "sourceFingerprint": "4f68a1ea34b6c0073dc56dde5fc5e2073530529a4b4d83ae07c5bc1df7c07a65",
+      "occurrence": 1,
+      "source": "val TenseFeature = FeatureKey(\"Tense\")",
+      "tokens": [
+        "\"Tense\""
+      ],
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "serialization-plumbing",
+          "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
         }
       ]
     },
@@ -53063,7 +53201,223 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
+      "line": 13,
+      "symbol": "file-scope",
+      "sourceFingerprint": "56a48cdbabaa013be6fa03235efe19c97b46f9c3080872e00cc807a0f718710a",
+      "occurrence": 1,
+      "source": "* §1.1, \"an open catalog, not a closed enum\") so a 5th style needs only a new recipe file under",
+      "tokens": [],
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "serialization-plumbing",
+          "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
+      "line": 14,
+      "symbol": "file-scope",
+      "sourceFingerprint": "39fd0487a1dd0c18b0850d5771b7162ef78412aa55a4050ce46a01af96790fe3",
+      "occurrence": 1,
+      "source": "* `courses/styles` — no Kotlin change reaches [StyleRegistry] (see [parseStyleRecipesJson]). [value] is the",
+      "tokens": [],
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "serialization-plumbing",
+          "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
+      "line": 15,
+      "symbol": "file-scope",
+      "sourceFingerprint": "b764f2878e33a2fe2bb187ea7d809bc9f48a3802de061e92c6aadc6353000d03",
+      "occurrence": 1,
+      "source": "* PascalCase wire vocabulary every host bridge already speaks (Swift `styleId`/`\"styles\"` snapshot",
+      "tokens": [],
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "serialization-plumbing",
+          "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
       "line": 16,
+      "symbol": "file-scope",
+      "sourceFingerprint": "fccf1d12d9f3503cdb7271dfcc594466cd3b27e6817775fcf46de8aba379d6a3",
+      "occurrence": 1,
+      "source": "* rows, web/Android pickers) — the 4 built-in constants below keep the exact strings the old enum's",
+      "tokens": [],
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "serialization-plumbing",
+          "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
+      "line": 17,
+      "symbol": "file-scope",
+      "sourceFingerprint": "c277df6d6fcca88c0114123b68564c4594d9fbfb3b43468f6768eead2c603253",
+      "occurrence": 1,
+      "source": "* `.name` produced, so no existing host wire format changes; [kebabIdToWireValue] derives the same",
+      "tokens": [],
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "serialization-plumbing",
+          "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
+      "line": 22,
+      "symbol": "StyleId.RuleFirst",
+      "sourceFingerprint": "013ff13c1058c78fd086540a2754ff2b0947cc20ba84e3b172eedc9d0631ecc2",
+      "occurrence": 1,
+      "source": "val RuleFirst = StyleId(\"RuleFirst\")",
+      "tokens": [
+        "\"RuleFirst\""
+      ],
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "serialization-plumbing",
+          "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
+      "line": 23,
+      "symbol": "StyleId.SituationFirst",
+      "sourceFingerprint": "6def0968c6ce7a3b922c984511daa91749f13bc45bae7a6e90410bc49832f65c",
+      "occurrence": 1,
+      "source": "val SituationFirst = StyleId(\"SituationFirst\")",
+      "tokens": [
+        "\"SituationFirst\""
+      ],
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "serialization-plumbing",
+          "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
+      "line": 24,
+      "symbol": "StyleId.NativeContrast",
+      "sourceFingerprint": "338df2c739a58797457bcb91ac37de7a120d9e026ccfbaa089512b9de1b8dea3",
+      "occurrence": 1,
+      "source": "val NativeContrast = StyleId(\"NativeContrast\")",
+      "tokens": [
+        "\"NativeContrast\""
+      ],
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "serialization-plumbing",
+          "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
+      "line": 25,
+      "symbol": "StyleId.MinimalTheory",
+      "sourceFingerprint": "8a00611a90c931f32080d20156ae60637f628d71f8ebe3d7b87bb61c25dd1f19",
+      "occurrence": 1,
+      "source": "val MinimalTheory = StyleId(\"MinimalTheory\")",
+      "tokens": [
+        "\"MinimalTheory\""
+      ],
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "serialization-plumbing",
+          "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
+      "line": 30,
+      "symbol": "file-scope",
+      "sourceFingerprint": "db5466c14947c9742d1e2947b5441d040e0057df04c418d6e6718f6913e5a960",
+      "occurrence": 1,
+      "source": "* The 4 built-in styles in the old closed enum's declaration order — hosts that show a fixed,",
+      "tokens": [],
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "serialization-plumbing",
+          "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
+      "line": 31,
+      "symbol": "file-scope",
+      "sourceFingerprint": "de4cf3ebcce9e6d2e6798b39d975cabd2f524e3f9a102d91f7f98ad1d93d8404",
+      "occurrence": 1,
+      "source": "* ordered picker (Settings, quick-switch) keep exactly today's option order by iterating this",
+      "tokens": [],
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "serialization-plumbing",
+          "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
+      "line": 32,
+      "symbol": "file-scope",
+      "sourceFingerprint": "597a4d67beba4e07817b8b15556dbd289d3a5a2105d68eb5f8b4f38dfb4969bd",
+      "occurrence": 1,
+      "source": "* instead of [StyleRegistry.recipes]' keys, whose order follows `courses/styles` filenames",
+      "tokens": [],
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "serialization-plumbing",
+          "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
+      "line": 34,
+      "symbol": "file-scope",
+      "sourceFingerprint": "8a0960ae991fcfc42908be13e2a501b3b0cc39d0cd3180731adf7e2f2222cad1",
+      "occurrence": 1,
+      "source": "* right where \"any currently loaded style\" is the point (dispatch validation, exhaustive tests).",
+      "tokens": [],
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "serialization-plumbing",
+          "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
+      "line": 41,
       "symbol": "file-scope",
       "sourceFingerprint": "718988ee885010dfd630db848a7891e23bfb5101bb35b15e5cb03bc984f7f75e",
       "occurrence": 1,
@@ -53079,7 +53433,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
-      "line": 17,
+      "line": 42,
       "symbol": "file-scope",
       "sourceFingerprint": "7f82a2eca8a91719666a19a5a7755ece8385fff6cbb36d0cb479c6e1538c14d7",
       "occurrence": 1,
@@ -53095,7 +53449,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
-      "line": 23,
+      "line": 48,
       "symbol": "file-scope",
       "sourceFingerprint": "58852e29a3e8b89fa5af4bf0e5a65a834af4c80040d5316bd1da447d1c51aabd",
       "occurrence": 1,
@@ -53111,11 +53465,11 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
-      "line": 36,
+      "line": 61,
       "symbol": "file-scope",
-      "sourceFingerprint": "061c06ac414c7d4818eedb913f09eb4628d93cbc574dade67b76ecaacc873bc7",
+      "sourceFingerprint": "eb6a5a703ccccf7905f704c97b257b7985a0a6b213cfd358291d27f2c07b6e33",
       "occurrence": 1,
-      "source": "* The `courses/styles` recipe files' kebab-case `id`/`fallback` wire value for each [StyleId].",
+      "source": "* `courses/styles` recipe file ids are kebab-case (`native-contrast`); every host bridge speaks the",
       "tokens": [],
       "parts": [
         {
@@ -53127,11 +53481,11 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
-      "line": 37,
-      "symbol": "whose",
-      "sourceFingerprint": "ebc7a90ab92231c2a3734cf27eb7cc4d95652db3c838cbbf8656368330caf55f",
+      "line": 62,
+      "symbol": "file-scope",
+      "sourceFingerprint": "68052bae5224967dd501ec376f8f8d7eb812d7daf0df07a2bf99c986ccebd9e9",
       "occurrence": 1,
-      "source": "* Bounded to today's 4 named pedagogical styles (ADR-11): a recipe object whose `id` isn't one of",
+      "source": "* PascalCase form the old closed enum's `.name` produced (`NativeContrast`) — this mechanical",
       "tokens": [],
       "parts": [
         {
@@ -53143,14 +53497,12 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
-      "line": 43,
+      "line": 64,
       "symbol": "file-scope",
-      "sourceFingerprint": "15763c60587a3d5d69cef2a8e07b4948d705a6bdf642373e944cbadc46512ab5",
+      "sourceFingerprint": "5274a3827df1805b3aafca516de7f6fdd3d81f548d8476c1efc88cc3d9e3fd38",
       "occurrence": 1,
-      "source": "\"rule-first\" to StyleId.RuleFirst,",
-      "tokens": [
-        "\"rule-first\""
-      ],
+      "source": "* (UC-01: \"a 5th style needs only a new JSON file\") gets a brand-new [StyleId] the same way the 4",
+      "tokens": [],
       "parts": [
         {
           "ordinal": 0,
@@ -53161,17 +53513,23 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
-      "line": 44,
-      "symbol": "file-scope",
-      "sourceFingerprint": "19b35e526abf59529bc20c01ff4f5d8533549275d05e35e6b7d083caadc76902",
+      "line": 67,
+      "symbol": "String",
+      "sourceFingerprint": "918a1bf49dd0057339724c2049d891c1b2de8c9a12928c489fae4d4ac0c844f7",
       "occurrence": 1,
-      "source": "\"situation-first\" to StyleId.SituationFirst,",
+      "source": "private fun String.kebabIdToWireValue(): String = split('-').joinToString(\"\") { it.replaceFirstChar(Char::uppercaseChar) }",
       "tokens": [
-        "\"situation-first\""
+        "'-'",
+        "\"\""
       ],
       "parts": [
         {
           "ordinal": 0,
+          "category": "serialization-plumbing",
+          "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+        },
+        {
+          "ordinal": 1,
           "category": "serialization-plumbing",
           "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
         }
@@ -53179,43 +53537,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
-      "line": 45,
-      "symbol": "file-scope",
-      "sourceFingerprint": "ba0a77cbfff80255dc72bc82045fbae3886a49eb4efba7e2699f8b8dc7fed86f",
-      "occurrence": 1,
-      "source": "\"native-contrast\" to StyleId.NativeContrast,",
-      "tokens": [
-        "\"native-contrast\""
-      ],
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "serialization-plumbing",
-          "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
-        }
-      ]
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
-      "line": 46,
-      "symbol": "file-scope",
-      "sourceFingerprint": "098dad174441ef603114e35d4b9c4f26845225a746259d2896f520e7e5cb2a60",
-      "occurrence": 1,
-      "source": "\"minimal-theory\" to StyleId.MinimalTheory,",
-      "tokens": [
-        "\"minimal-theory\""
-      ],
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "serialization-plumbing",
-          "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
-        }
-      ]
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
-      "line": 49,
+      "line": 69,
       "symbol": "file-scope",
       "sourceFingerprint": "1e063c7bf9ebe6ed8373e0d9e2e7045be2268968dfba9157fc9fa093238efc57",
       "occurrence": 1,
@@ -53231,7 +53553,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
-      "line": 54,
+      "line": 74,
       "symbol": "file-scope",
       "sourceFingerprint": "b629a3f492e97919881d1255027fe445b230df653bd87ef76db648aa6532280a",
       "occurrence": 1,
@@ -53247,7 +53569,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
-      "line": 55,
+      "line": 75,
       "symbol": "file-scope",
       "sourceFingerprint": "f7c11707d0861392726faeb37592cd6c42e0bdf2414d9d0c6039b1be5137bcc8",
       "occurrence": 1,
@@ -53263,7 +53585,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
-      "line": 56,
+      "line": 76,
       "symbol": "file-scope",
       "sourceFingerprint": "4585a1736c8ac661ec660b734a45d85e23b8c73802a035e7dbd939936f1430a2",
       "occurrence": 1,
@@ -53279,7 +53601,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
-      "line": 57,
+      "line": 77,
       "symbol": "file-scope",
       "sourceFingerprint": "02dc8a72d240d01977349a9793451470a8c3f46ac707d502e355c01cb8d10515",
       "occurrence": 1,
@@ -53295,11 +53617,11 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
-      "line": 66,
-      "symbol": "naming",
-      "sourceFingerprint": "ae27161a49cd81570514134d31d7c9c9f943dc0c0879faa3981d521d2b931e42",
+      "line": 87,
+      "symbol": "is",
+      "sourceFingerprint": "8298e2bc59d1ca52f41ac532e4adc3858e87ecc1a527df9ec8c8e369859f3d61",
       "occurrence": 1,
-      "source": "/** Never throws: a recipe object naming an `id` or block kind outside today's fixed wire",
+      "source": "* Never throws: a recipe's `id` is open (UC-01) — every well-formed recipe object is loaded, not",
       "tokens": [],
       "parts": [
         {
@@ -53311,11 +53633,43 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
-      "line": 72,
-      "symbol": "JsonObject.id",
-      "sourceFingerprint": "1ba1932948ceb44b6256bd75a47c352dd893efaa27508ffecbbd38d5a19528b3",
+      "line": 88,
+      "symbol": "file-scope",
+      "sourceFingerprint": "bc3282bae5040027a3f5bc1f39c1a2c9ae22aa9564500dcc0732bafb7f62b710",
       "occurrence": 1,
-      "source": "val id = styleIdByWireId[getValue(\"id\").jsonPrimitive.content] ?: return null",
+      "source": "* just today's known 4. A block kind outside [BlockKind]'s fixed wire vocabulary is skipped within",
+      "tokens": [],
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "serialization-plumbing",
+          "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
+      "line": 89,
+      "symbol": "file-scope",
+      "sourceFingerprint": "ed3b3dd593325ceb8547b89453d10971798661379688b597c61c1190340ebffe",
+      "occurrence": 1,
+      "source": "* that recipe (`requires`/`blocks`), not a crash — [BlockKind] is a closed set on purpose (§5.2's",
+      "tokens": [],
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "serialization-plumbing",
+          "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
+      "line": 96,
+      "symbol": "JsonObject.id",
+      "sourceFingerprint": "265a0b4d818277f0c9bbe0a520976ebae4cd39d8cc48d02bbadfd141812c73f4",
+      "occurrence": 1,
+      "source": "val id = StyleId(getValue(\"id\").jsonPrimitive.content.kebabIdToWireValue())",
       "tokens": [
         "\"id\""
       ],
@@ -53329,7 +53683,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
-      "line": 73,
+      "line": 97,
       "symbol": "JsonObject.blocks",
       "sourceFingerprint": "90600f2adb1fcd2768bf042089cda8c0c717cc32263e0578dbdd6fc028fde96c",
       "occurrence": 1,
@@ -53347,7 +53701,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
-      "line": 76,
+      "line": 100,
       "symbol": "JsonObject",
       "sourceFingerprint": "0a42919893ce0e24b04dbd4fd809113aa3cb593437f12a9083de860d205f5492",
       "occurrence": 1,
@@ -53365,7 +53719,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
-      "line": 77,
+      "line": 101,
       "symbol": "JsonObject",
       "sourceFingerprint": "0d0aad9d42da9472bc8730d557958a9f626c6681a949c905c4e55939f9325c4d",
       "occurrence": 1,
@@ -53383,7 +53737,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
-      "line": 79,
+      "line": 103,
       "symbol": "JsonObject",
       "sourceFingerprint": "30e7f6b77ca91d8a4e41f8fef28c95cc0f11770bdcac3c769169d717552cb6ae",
       "occurrence": 1,
@@ -53401,7 +53755,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
-      "line": 80,
+      "line": 104,
       "symbol": "JsonObject",
       "sourceFingerprint": "950012eb6ee0002330c5bf1208aef012083d94d4b80827945996fb0bd4136d77",
       "occurrence": 1,
@@ -53419,7 +53773,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
-      "line": 82,
+      "line": 106,
       "symbol": "JsonObject",
       "sourceFingerprint": "e5607d47fe9fe921547585ec4e6cc9ee4b5b7b88258e3f7ac312491eda31bf51",
       "occurrence": 1,
@@ -53437,11 +53791,11 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
-      "line": 83,
+      "line": 107,
       "symbol": "JsonObject",
-      "sourceFingerprint": "935ea490e329b091fc4fb9a11c36ac4f949c2b90bc6b249a12492d7b2606f7a7",
+      "sourceFingerprint": "05efbfb3a17e0a9ed5a6f671e66c225aeb44f33b62e38c1d4b291073dacdbbf5",
       "occurrence": 1,
-      "source": "fallback = get(\"fallback\")?.jsonPrimitive?.content?.let(styleIdByWireId::get),",
+      "source": "fallback = get(\"fallback\")?.jsonPrimitive?.content?.let { StyleId(it.kebabIdToWireValue()) },",
       "tokens": [
         "\"fallback\""
       ],
@@ -53455,7 +53809,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
-      "line": 96,
+      "line": 120,
       "symbol": "requireNoFallbackChains",
       "sourceFingerprint": "414acede806beacec11f7749f7bcee0cbfcf555be3cb7d513f560b872e629c6c",
       "occurrence": 1,
@@ -57977,7 +58331,7 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosPreferencesSession.kt",
-      "line": 23,
+      "line": 24,
       "symbol": "key",
       "sourceFingerprint": "d220f5b6439d621cee419da41b7d87f31cbb5a10c63bfb1bf5f8a0fa08d06f55",
       "occurrence": 1,
@@ -57995,7 +58349,7 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosPreferencesSession.kt",
-      "line": 24,
+      "line": 25,
       "symbol": "backupKey",
       "sourceFingerprint": "1775d1d46077f147a65039be285739afd8f6cea1f8314442d56b43de7f8af360",
       "occurrence": 1,
@@ -58013,7 +58367,7 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosPreferencesSession.kt",
-      "line": 27,
+      "line": 28,
       "symbol": "file-scope",
       "sourceFingerprint": "f73dd67a729ba951fba91e26de047be1dd8d09321006f066c3ca1abdb3368149",
       "occurrence": 1,
@@ -58037,7 +58391,7 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosPreferencesSession.kt",
-      "line": 35,
+      "line": 36,
       "symbol": "currentSnapshot",
       "sourceFingerprint": "d3e43c90a001cf46be68ec0a6787d5323be37746596e302b6a55e558c6166b52",
       "occurrence": 1,
@@ -58055,7 +58409,7 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosPreferencesSession.kt",
-      "line": 37,
+      "line": 38,
       "symbol": "currentSnapshot",
       "sourceFingerprint": "2493d5e531eb3e19ad43f41ea1e3c4d234c02409bf615a793753e756ae65b2e4",
       "occurrence": 1,
@@ -58071,11 +58425,11 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosPreferencesSession.kt",
-      "line": 38,
+      "line": 39,
       "symbol": "currentSnapshot",
-      "sourceFingerprint": "d37ac0ba7f63c5124d65a9f6be828208a95950f9b2c0de4bb5e0568cc99ff8c7",
+      "sourceFingerprint": "8ec37d67dd42019ca801a65eea1641352158769b11ff5b623932e139c2bd1753",
       "occurrence": 1,
-      "source": "put(\"styles\", JsonArray(StyleId.entries.map { id ->",
+      "source": "put(\"styles\", JsonArray(builtInStyleIds.map { id ->",
       "tokens": [
         "\"styles\""
       ],
@@ -58089,11 +58443,11 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosPreferencesSession.kt",
-      "line": 41,
+      "line": 42,
       "symbol": "currentSnapshot",
-      "sourceFingerprint": "2bb4771abe24d90e9bb2cc6f70e4195991df9ad672bd9926fe948db206dc836b",
+      "sourceFingerprint": "879069f85fdec8e220c1d49fb8af80af496005b50629196ece286aa1b1aad431",
       "occurrence": 1,
-      "source": "put(\"id\", id.name)",
+      "source": "put(\"id\", id.value)",
       "tokens": [
         "\"id\""
       ],
@@ -58107,7 +58461,7 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosPreferencesSession.kt",
-      "line": 42,
+      "line": 43,
       "symbol": "currentSnapshot",
       "sourceFingerprint": "9604b90e640b937f23a1d04cc582cb8f5309d822b593a9dccdaea4cbe133099f",
       "occurrence": 1,
@@ -58137,7 +58491,7 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosPreferencesSession.kt",
-      "line": 43,
+      "line": 44,
       "symbol": "currentSnapshot",
       "sourceFingerprint": "9b144e8efc5f5a1fdebb937e265bca33bd670386da1a7859e0233358bb4d6bda",
       "occurrence": 1,
@@ -58167,7 +58521,7 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosPreferencesSession.kt",
-      "line": 48,
+      "line": 49,
       "symbol": "currentSnapshot",
       "sourceFingerprint": "c18bba8e5a55834aca2f2816dc4fcc4a93737ff506ae08d3adde2ba703ac0e54",
       "occurrence": 1,
@@ -58191,11 +58545,27 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosPreferencesSession.kt",
-      "line": 49,
+      "line": 50,
       "symbol": "currentSnapshot",
-      "sourceFingerprint": "8e472c2468ff02d08e077f4f38553baee0cdcad199859477d3438b21c38a97ed",
+      "sourceFingerprint": "7d640e4e737ef4db1a1d2fba7de684e38271e7b141d58643772d0eaf15fe4086",
       "occurrence": 1,
-      "source": "put(\"method\", StyleId.valueOf(result.value.styleId.name).toLegacyWireValue())",
+      "source": "// PreferredStyle's `.name` (preferences enum) and StyleId's `.value` share the",
+      "tokens": [],
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "serialization-plumbing",
+          "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosPreferencesSession.kt",
+      "line": 52,
+      "symbol": "currentSnapshot",
+      "sourceFingerprint": "7bfe0b05f21c7901213fb9b9ebaa7e3b4d6a71acfcc2c45c311cc43316bcf929",
+      "occurrence": 1,
+      "source": "put(\"method\", StyleId(result.value.styleId.name).toLegacyWireValue())",
       "tokens": [
         "\"method\""
       ],
@@ -58209,7 +58579,7 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosPreferencesSession.kt",
-      "line": 50,
+      "line": 53,
       "symbol": "currentSnapshot",
       "sourceFingerprint": "e2e5fbd1ba7b00bb3fd93efb1e1f137777c0112ae951a450f7f7eaa35a1a7933",
       "occurrence": 1,
@@ -58227,7 +58597,7 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosPreferencesSession.kt",
-      "line": 51,
+      "line": 54,
       "symbol": "currentSnapshot",
       "sourceFingerprint": "d15e033a7c65f0a6827934a8b74c0d645c432c037a78195277d5de84f39ca8a7",
       "occurrence": 1,
@@ -58245,7 +58615,7 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosPreferencesSession.kt",
-      "line": 52,
+      "line": 55,
       "symbol": "currentSnapshot",
       "sourceFingerprint": "dce4f854e8b767ce203200fa5fdd64b93c8c35fe8c510bf9ea38949316c5a188",
       "occurrence": 1,
@@ -58263,7 +58633,7 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosPreferencesSession.kt",
-      "line": 53,
+      "line": 56,
       "symbol": "currentSnapshot",
       "sourceFingerprint": "12cf6dcabc189832b41d56d687410d8ae089705748d5f4a4f15688bcdfb758ef",
       "occurrence": 1,
@@ -58281,7 +58651,7 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosPreferencesSession.kt",
-      "line": 54,
+      "line": 57,
       "symbol": "currentSnapshot",
       "sourceFingerprint": "d28e49491a2da764789fd225d2f2695dc47e924b9e86774b2fb72f6e7f7b3ecd",
       "occurrence": 1,
@@ -58299,7 +58669,7 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosPreferencesSession.kt",
-      "line": 57,
+      "line": 60,
       "symbol": "currentSnapshot",
       "sourceFingerprint": "32bf563c8104318b2fce931e80c95f921452797da1dd1ce3c1b3db487ed0ff8c",
       "occurrence": 1,
@@ -58323,7 +58693,7 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosPreferencesSession.kt",
-      "line": 58,
+      "line": 61,
       "symbol": "currentSnapshot",
       "sourceFingerprint": "e68e919005c975a445c339e1978bca86d138b941ebdde84b7453c3c7a279adec",
       "occurrence": 1,
@@ -58341,7 +58711,7 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosPreferencesSession.kt",
-      "line": 67,
+      "line": 70,
       "symbol": "set.current",
       "sourceFingerprint": "d2cdde4c63d9ec78a4418cfef1b04be3b990cbb943707e51f61c30900787f6bb",
       "occurrence": 1,
@@ -58359,11 +58729,11 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosPreferencesSession.kt",
-      "line": 69,
+      "line": 72,
       "symbol": "set",
-      "sourceFingerprint": "b68d4c4bac164b2e0de184a1e74b5f31a3c8ec7e863fb70dc3cd31949c3dfe42",
+      "sourceFingerprint": "4aef1b72ae8cb0d86f39ef5078c7515009c1a231892cb82a87ae28ddb92d1a2e",
       "occurrence": 1,
-      "source": "\"method\" -> current.copy(styleId = legacyStyleWireValue(value)?.let { PreferredStyle.valueOf(it.name) } ?: return \"Неизвестный метод\")",
+      "source": "\"method\" -> current.copy(styleId = legacyStyleWireValue(value)?.let { PreferredStyle.valueOf(it.value) } ?: return \"Неизвестный метод\")",
       "tokens": [
         "\"method\"",
         "\"Неизвестный метод\""
@@ -58383,7 +58753,7 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosPreferencesSession.kt",
-      "line": 70,
+      "line": 73,
       "symbol": "set",
       "sourceFingerprint": "8f3f18e09bf5a67f97ca4585464ce3ffc60a891e5bd1cc88f4b75c17573a4936",
       "occurrence": 1,
@@ -58407,7 +58777,7 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosPreferencesSession.kt",
-      "line": 71,
+      "line": 74,
       "symbol": "set",
       "sourceFingerprint": "65e4b02a49697fc1414c53189fd973dec5bcd9576f18d9f21827dd5090f77ec7",
       "occurrence": 1,
@@ -58431,7 +58801,7 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosPreferencesSession.kt",
-      "line": 72,
+      "line": 75,
       "symbol": "set",
       "sourceFingerprint": "b953dbe40f0e0392c30311874b96e297329bbfdbc5e08b05881f9d2f0165f756",
       "occurrence": 1,
@@ -58455,7 +58825,7 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosPreferencesSession.kt",
-      "line": 73,
+      "line": 76,
       "symbol": "set",
       "sourceFingerprint": "1c9599af80c024cadfb66495c490b27fcb82b57a24dea9c74c66691108b29784",
       "occurrence": 1,
@@ -58479,7 +58849,7 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosPreferencesSession.kt",
-      "line": 74,
+      "line": 77,
       "symbol": "set",
       "sourceFingerprint": "48878657183a1286f68b68a97ee74c7cc510ca2deea4e0c5d0bc6a81a9822a9d",
       "occurrence": 1,
@@ -58503,7 +58873,7 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosPreferencesSession.kt",
-      "line": 75,
+      "line": 78,
       "symbol": "set",
       "sourceFingerprint": "119f349c0e7fd8bbd9fe6cd4ac54ec9a7670a9f8702ad7e4bec6768e0fed5822",
       "occurrence": 1,
@@ -58521,7 +58891,7 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosPreferencesSession.kt",
-      "line": 81,
+      "line": 84,
       "symbol": "importJson",
       "sourceFingerprint": "e91e0d5e33876085e00a879e9e4a0d88dd0e7d5cf29a2162250322428e97608e",
       "occurrence": 1,
@@ -58539,7 +58909,7 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosPreferencesSession.kt",
-      "line": 90,
+      "line": 93,
       "symbol": "importJson",
       "sourceFingerprint": "86cd844b2f1ca5c6480ac0e7333263cd22d00bf540f450c316a658226f2c39d2",
       "occurrence": 1,
@@ -58557,7 +58927,7 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosPreferencesSession.kt",
-      "line": 97,
+      "line": 100,
       "symbol": "write",
       "sourceFingerprint": "0ecde8fb8b036517a943547c6d611be832c0bcf952e12a4bf0c9c8c00d83ab71",
       "occurrence": 1,
@@ -58575,7 +58945,7 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosPreferencesSession.kt",
-      "line": 101,
+      "line": 104,
       "symbol": "write",
       "sourceFingerprint": "58cf0f0bca43b16899b7ccbfba8805a5cba94c96bca9633f7477664b76eecae2",
       "occurrence": 1,
@@ -58845,7 +59215,7 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosSession.kt",
-      "line": 33,
+      "line": 34,
       "symbol": "file-scope",
       "sourceFingerprint": "1f0e27a770b6ba63347ec9ff5cf988a5f9ba9f53e9821cb9fe05575b15373df3",
       "occurrence": 1,
@@ -58861,7 +59231,7 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosSession.kt",
-      "line": 50,
+      "line": 51,
       "symbol": "IosSession",
       "sourceFingerprint": "45a8d25be12ab406d95d7e018ab83dc638e29b07cc732ee4584471c85c53689b",
       "occurrence": 1,
@@ -58877,7 +59247,7 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosSession.kt",
-      "line": 51,
+      "line": 52,
       "symbol": "IosSession",
       "sourceFingerprint": "fa3f9e1ce7f507cf8407d69a03bb1ee335dd103f7de6c031b10e3c1093c6512f",
       "occurrence": 1,
@@ -58893,7 +59263,7 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosSession.kt",
-      "line": 53,
+      "line": 54,
       "symbol": "IosSession",
       "sourceFingerprint": "9fe6f6e1c1047d300a47412fde71e2b62338d0da99b7a87d42d7bd0763648cd6",
       "occurrence": 1,
@@ -58909,7 +59279,7 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosSession.kt",
-      "line": 63,
+      "line": 64,
       "symbol": "IosSession.dispatch",
       "sourceFingerprint": "502c7dee4764a249605a9b6029b43868de56072fbad7c543fb43e9f5d9ff99cf",
       "occurrence": 1,
@@ -58927,7 +59297,7 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosSession.kt",
-      "line": 66,
+      "line": 67,
       "symbol": "IosSession.dispatch",
       "sourceFingerprint": "0e33526b55de65f0d615b95d8dc400b2273ba117cdc43db3ccd2d0b59def542c",
       "occurrence": 1,
@@ -58945,7 +59315,7 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosSession.kt",
-      "line": 67,
+      "line": 68,
       "symbol": "IosSession.dispatch",
       "sourceFingerprint": "73124fc6710b19727d34365da71202916aa8c77442c8bfe9a1a88ce21dd38e69",
       "occurrence": 1,
@@ -58963,7 +59333,7 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosSession.kt",
-      "line": 68,
+      "line": 69,
       "symbol": "IosSession.dispatch",
       "sourceFingerprint": "4cd959c677535a53a2c3ec477fcf39f92c8aeec75b513d2cd153f2136d583dbe",
       "occurrence": 1,
@@ -58981,7 +59351,7 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosSession.kt",
-      "line": 69,
+      "line": 70,
       "symbol": "IosSession.dispatch",
       "sourceFingerprint": "64159a56f84afdb2b8f3aa3a733ee99afb207b7eb60cfc06ebb1a5889518b3bb",
       "occurrence": 1,
@@ -58999,7 +59369,7 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosSession.kt",
-      "line": 70,
+      "line": 71,
       "symbol": "IosSession.dispatch",
       "sourceFingerprint": "019ae08d0f24c439883b137843d9ad4a17e2fb8582475fd67c2746c93b4441f5",
       "occurrence": 1,
@@ -59017,7 +59387,7 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosSession.kt",
-      "line": 71,
+      "line": 72,
       "symbol": "IosSession.dispatch",
       "sourceFingerprint": "4472287f72bb581d07ef5596fa6117d4acede7a03054757ff8c6d4d4fe455869",
       "occurrence": 1,
@@ -59035,7 +59405,7 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosSession.kt",
-      "line": 72,
+      "line": 73,
       "symbol": "IosSession.dispatch",
       "sourceFingerprint": "04a374c6dfed959a118a3115296c59754f377c1f905099033ca3683dfb8efa27",
       "occurrence": 1,
@@ -59053,7 +59423,7 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosSession.kt",
-      "line": 73,
+      "line": 74,
       "symbol": "IosSession.dispatch",
       "sourceFingerprint": "80976bdf4fa6d9cbc03d2697609c40259810499bf7b897c37438fe3b8827e770",
       "occurrence": 1,
@@ -59071,7 +59441,7 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosSession.kt",
-      "line": 77,
+      "line": 78,
       "symbol": "IosSession.dispatch",
       "sourceFingerprint": "b9cf02d8a09a7b08da86977ea3670374253fb0267948b622e3a14057117cad3b",
       "occurrence": 1,
@@ -59089,7 +59459,7 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosSession.kt",
-      "line": 78,
+      "line": 79,
       "symbol": "IosSession.dispatch",
       "sourceFingerprint": "a9e9324b22e1750f416c57ebf361eba3ee244d0eccd146a53d8a4ce92fd6a79d",
       "occurrence": 1,
@@ -59107,11 +59477,11 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosSession.kt",
-      "line": 83,
+      "line": 85,
       "symbol": "IosSession.dispatch",
-      "sourceFingerprint": "7cbd63f85aabc6b9018347f7cb427cd3df5513e428b71cf5e5ed0aeaca1efb5b",
+      "sourceFingerprint": "6ff94e4ea0c0956fdc288e3f4da5adf94492a8cb9c886a0ac27050eae1ed41e0",
       "occurrence": 1,
-      "source": "\"styleId\" -> StyleId.entries.firstOrNull { it.name == value }?.let {",
+      "source": "\"styleId\" -> StyleRegistry.recipes.keys.firstOrNull { it.value == value }?.let {",
       "tokens": [
         "\"styleId\""
       ],
@@ -59125,7 +59495,7 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosSession.kt",
-      "line": 84,
+      "line": 86,
       "symbol": "IosSession.dispatch",
       "sourceFingerprint": "60cb50e99f591435dcc94869eeb1902c06583676447ee400357c4d397869211c",
       "occurrence": 1,
@@ -59143,7 +59513,7 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosSession.kt",
-      "line": 87,
+      "line": 89,
       "symbol": "IosSession.dispatch",
       "sourceFingerprint": "25d916eedbbc99c92016e4e9243b62e54e47ec3191fb691ad9cb3a008b4f838e",
       "occurrence": 1,
@@ -59161,7 +59531,7 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosSession.kt",
-      "line": 88,
+      "line": 90,
       "symbol": "IosSession.dispatch",
       "sourceFingerprint": "b4149bb8dec51da2bb4b9871d1bb2f3c3263807a663971c975d2c0e55332d1de",
       "occurrence": 1,
@@ -59179,7 +59549,7 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosSession.kt",
-      "line": 89,
+      "line": 91,
       "symbol": "IosSession.dispatch",
       "sourceFingerprint": "a79d1b0956c7c948372a67d499cd59902d04335145e0e4da66274a4729459df5",
       "occurrence": 1,
@@ -59197,7 +59567,7 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosSession.kt",
-      "line": 90,
+      "line": 92,
       "symbol": "IosSession.dispatch",
       "sourceFingerprint": "8b88176aca33c229db4b18d098c1aec2e05b9126e7088c81425ea9ff3f81c921",
       "occurrence": 1,
@@ -59215,7 +59585,7 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosSession.kt",
-      "line": 95,
+      "line": 97,
       "symbol": "IosSession.dispatch",
       "sourceFingerprint": "63abd7b1fa46003b9ae029729198dd5e900cd951078223af5e004e71bd823d1b",
       "occurrence": 1,
@@ -59233,7 +59603,7 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosSession.kt",
-      "line": 96,
+      "line": 98,
       "symbol": "IosSession.dispatch",
       "sourceFingerprint": "9735f6ef6b98a530ac0495dd07dbcc1ce4e512648bca21c9dc9d4d6921955524",
       "occurrence": 1,
@@ -59251,7 +59621,7 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosSession.kt",
-      "line": 97,
+      "line": 99,
       "symbol": "IosSession.dispatch",
       "sourceFingerprint": "7ee6c1fc3ed997df2bbf24b2a50d2ce11608d5b50e5915f7586e144326a71472",
       "occurrence": 1,
@@ -59269,7 +59639,7 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosSession.kt",
-      "line": 98,
+      "line": 100,
       "symbol": "IosSession.dispatch",
       "sourceFingerprint": "59279aa128ea22f7850945e6fb8a93891a77d061fccf51d87cd43fd2f1428175",
       "occurrence": 1,
@@ -59287,7 +59657,7 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosSession.kt",
-      "line": 99,
+      "line": 101,
       "symbol": "IosSession.dispatch",
       "sourceFingerprint": "5aa1b14d6442fce3022d6fb554bd2a88a666aab2dcf2d67ff4e89be7a900efc4",
       "occurrence": 1,
@@ -59305,7 +59675,7 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosSession.kt",
-      "line": 100,
+      "line": 102,
       "symbol": "IosSession.dispatch",
       "sourceFingerprint": "0ebe0246b9f128fb55be1003d08de74069a8b035434034fe3806c1a2cc47cc80",
       "occurrence": 1,
@@ -59323,7 +59693,7 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosSession.kt",
-      "line": 101,
+      "line": 103,
       "symbol": "IosSession.dispatch",
       "sourceFingerprint": "0dc692031efd273c2174f7937af57b503d1fa8473f3fa029d15578228abe16f8",
       "occurrence": 1,
@@ -59341,7 +59711,7 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosSession.kt",
-      "line": 102,
+      "line": 104,
       "symbol": "IosSession.dispatch",
       "sourceFingerprint": "4a147ed31ffe71e40bd96f6ee7c6e0139ebaffb6b6509339a85b782fddd01b98",
       "occurrence": 1,
@@ -59365,7 +59735,7 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosSession.kt",
-      "line": 103,
+      "line": 105,
       "symbol": "IosSession.dispatch",
       "sourceFingerprint": "20063f6ec34e3b58d9e3a82701a9126fda45ef7971e5cc58c87093530e08e258",
       "occurrence": 1,
@@ -59383,7 +59753,7 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosSession.kt",
-      "line": 104,
+      "line": 106,
       "symbol": "IosSession.dispatch",
       "sourceFingerprint": "44be1a65fdf34ad9987db7034827c0bb0971812775ec89b11c2bd591af5aa979",
       "occurrence": 1,
@@ -59401,7 +59771,7 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosSession.kt",
-      "line": 105,
+      "line": 107,
       "symbol": "IosSession.dispatch",
       "sourceFingerprint": "c0678f10c7c9e3942d86b3298caea474aa0d8cdb693634d83b8efc0e703da7f1",
       "occurrence": 1,
@@ -59419,7 +59789,7 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosSession.kt",
-      "line": 119,
+      "line": 121,
       "symbol": "IosSession.acknowledgeEffect",
       "sourceFingerprint": "1b7b2d0ba6a7c61f20d86b326b182c9dfe7f0e6bfe69c0e8568482d180a8fd2d",
       "occurrence": 1,
@@ -59437,7 +59807,7 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosSession.kt",
-      "line": 128,
+      "line": 130,
       "symbol": "IosSession.importJson",
       "sourceFingerprint": "14e4d67ffc5842c2b41279d53850ec8cd2ec8e9b3f0f2f52ab9105167b195b26",
       "occurrence": 1,
@@ -59455,7 +59825,7 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosSession.kt",
-      "line": 130,
+      "line": 132,
       "symbol": "IosSession.importJson",
       "sourceFingerprint": "580996a9b5490705e764b916b955b042f8700c382a0f2393ad5d95f93a7f8956",
       "occurrence": 1,
@@ -59473,7 +59843,7 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosSession.kt",
-      "line": 162,
+      "line": 164,
       "symbol": "IosSession",
       "sourceFingerprint": "88b8b06580b0152739a7dacacd3f333f00dd638b9b11f66f91ea6601b7667be8",
       "occurrence": 1,
@@ -59497,7 +59867,7 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosSession.kt",
-      "line": 166,
+      "line": 168,
       "symbol": "IosSession",
       "sourceFingerprint": "e703bd677f73e3fcbd3057cfda644d3bdb295e1d9dc156543ca845c1000f2a45",
       "occurrence": 1,
@@ -59515,7 +59885,7 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosSession.kt",
-      "line": 167,
+      "line": 169,
       "symbol": "IosSession",
       "sourceFingerprint": "6fce2377f43626496166d05117d1687f28674eb0794eef27075a6754c5b78f30",
       "occurrence": 1,
@@ -59533,11 +59903,11 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosSession.kt",
-      "line": 174,
+      "line": 176,
       "symbol": "IosSession",
-      "sourceFingerprint": "efb1634fd25ddc016e965c785330c070ba1336d28044d12454a8dd931c99a6f1",
+      "sourceFingerprint": "baaa345cb0b9dd9a2e5ede1669c060ed7a9194e974dc2d919832a456ec3097b1",
       "occurrence": 1,
-      "source": "defaults.stringForKey(\"styleId\")?.let { name -> StyleId.entries.firstOrNull { it.name == name } }",
+      "source": "defaults.stringForKey(\"styleId\")?.let { name -> StyleRegistry.recipes.keys.firstOrNull { it.value == name } }",
       "tokens": [
         "\"styleId\""
       ],
@@ -59551,7 +59921,7 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosSession.kt",
-      "line": 175,
+      "line": 177,
       "symbol": "IosSession",
       "sourceFingerprint": "3a5e9784d0126161fe556c1ea911fe39733657e915907a693a0051657b6f4c29",
       "occurrence": 1,
@@ -59575,7 +59945,7 @@
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosSession.kt",
-      "line": 176,
+      "line": 178,
       "symbol": "IosSession",
       "sourceFingerprint": "5964c5149bd14bee9e6b91f4b5530bd8d14f8df6bfcfead146ceed3f43d6fa77",
       "occurrence": 1,
@@ -61387,9 +61757,9 @@
       "path": "kotlin/shared/src/macosMain/kotlin/polski/macos/MacPreferencesSession.kt",
       "line": 86,
       "symbol": "styleCatalogJson",
-      "sourceFingerprint": "2bb4771abe24d90e9bb2cc6f70e4195991df9ad672bd9926fe948db206dc836b",
+      "sourceFingerprint": "879069f85fdec8e220c1d49fb8af80af496005b50629196ece286aa1b1aad431",
       "occurrence": 1,
-      "source": "put(\"id\", id.name)",
+      "source": "put(\"id\", id.value)",
       "tokens": [
         "\"id\""
       ],
@@ -61927,11 +62297,27 @@
     },
     {
       "path": "kotlin/shared/src/macosMain/kotlin/polski/macos/MacSession.kt",
-      "line": 81,
+      "line": 82,
       "symbol": "MacSession.dispatch",
-      "sourceFingerprint": "2e9f22eab523553f9bc50d6dba6cfe66cc7aaf72232fff38f724d95f4d71945f",
+      "sourceFingerprint": "2595e376ab36aebed94ef119b61b6dd151d1f14987390d5253f31d2abafd250b",
       "occurrence": 1,
-      "source": "\"styleId\" -> StyleId.entries.firstOrNull { it.name == value }?.let(AppAction::SetStyle)",
+      "source": "// not just a fixed enum's `entries`.",
+      "tokens": [],
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "serialization-plumbing",
+          "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/shared/src/macosMain/kotlin/polski/macos/MacSession.kt",
+      "line": 83,
+      "symbol": "MacSession.dispatch",
+      "sourceFingerprint": "f10ca468fa72ec148594de931ea70070d77a5ed5afaf7fea154b37fcd84ef6b9",
+      "occurrence": 1,
+      "source": "\"styleId\" -> StyleRegistry.recipes.keys.firstOrNull { it.value == value }?.let(AppAction::SetStyle)",
       "tokens": [
         "\"styleId\""
       ],
@@ -61945,7 +62331,7 @@
     },
     {
       "path": "kotlin/shared/src/macosMain/kotlin/polski/macos/MacSession.kt",
-      "line": 82,
+      "line": 84,
       "symbol": "MacSession.dispatch",
       "sourceFingerprint": "63abd7b1fa46003b9ae029729198dd5e900cd951078223af5e004e71bd823d1b",
       "occurrence": 1,
@@ -61963,7 +62349,7 @@
     },
     {
       "path": "kotlin/shared/src/macosMain/kotlin/polski/macos/MacSession.kt",
-      "line": 83,
+      "line": 85,
       "symbol": "MacSession.dispatch",
       "sourceFingerprint": "44be1a65fdf34ad9987db7034827c0bb0971812775ec89b11c2bd591af5aa979",
       "occurrence": 1,
@@ -61981,7 +62367,7 @@
     },
     {
       "path": "kotlin/shared/src/macosMain/kotlin/polski/macos/MacSession.kt",
-      "line": 84,
+      "line": 86,
       "symbol": "MacSession.dispatch",
       "sourceFingerprint": "e741e8467460a73afdc37aaff5b2b209694e00cd2ad023b59cd27987064e5db8",
       "occurrence": 1,
@@ -61999,7 +62385,7 @@
     },
     {
       "path": "kotlin/shared/src/macosMain/kotlin/polski/macos/MacSession.kt",
-      "line": 85,
+      "line": 87,
       "symbol": "MacSession.dispatch.parts",
       "sourceFingerprint": "d5e02154aca8f52fd96dc4972735a43b306ff2b8329ed4d673ac65f775abbaef",
       "occurrence": 1,
@@ -62017,7 +62403,7 @@
     },
     {
       "path": "kotlin/shared/src/macosMain/kotlin/polski/macos/MacSession.kt",
-      "line": 87,
+      "line": 89,
       "symbol": "MacSession.dispatch",
       "sourceFingerprint": "5747d08ce4660e482f8c85c6b93bd806af09e1c80f0681d582dc82d6bcdfa333",
       "occurrence": 1,
@@ -62035,7 +62421,7 @@
     },
     {
       "path": "kotlin/shared/src/macosMain/kotlin/polski/macos/MacSession.kt",
-      "line": 89,
+      "line": 91,
       "symbol": "MacSession.dispatch",
       "sourceFingerprint": "b4149bb8dec51da2bb4b9871d1bb2f3c3263807a663971c975d2c0e55332d1de",
       "occurrence": 1,
@@ -62053,7 +62439,7 @@
     },
     {
       "path": "kotlin/shared/src/macosMain/kotlin/polski/macos/MacSession.kt",
-      "line": 90,
+      "line": 92,
       "symbol": "MacSession.dispatch",
       "sourceFingerprint": "e355c967f7dde40db41d89c4703a39ac2b68d1ce970e684ba72e202abf683d65",
       "occurrence": 1,
@@ -62071,7 +62457,7 @@
     },
     {
       "path": "kotlin/shared/src/macosMain/kotlin/polski/macos/MacSession.kt",
-      "line": 91,
+      "line": 93,
       "symbol": "MacSession.dispatch",
       "sourceFingerprint": "25d916eedbbc99c92016e4e9243b62e54e47ec3191fb691ad9cb3a008b4f838e",
       "occurrence": 1,
@@ -62089,7 +62475,7 @@
     },
     {
       "path": "kotlin/shared/src/macosMain/kotlin/polski/macos/MacSession.kt",
-      "line": 92,
+      "line": 94,
       "symbol": "MacSession.dispatch",
       "sourceFingerprint": "1014fb0b2a384e6b18cd34531b3d254e67dd80be8231846a3da4ed0b098b4e69",
       "occurrence": 1,
@@ -62107,7 +62493,7 @@
     },
     {
       "path": "kotlin/shared/src/macosMain/kotlin/polski/macos/MacSession.kt",
-      "line": 93,
+      "line": 95,
       "symbol": "MacSession.dispatch",
       "sourceFingerprint": "8b88176aca33c229db4b18d098c1aec2e05b9126e7088c81425ea9ff3f81c921",
       "occurrence": 1,
@@ -62125,7 +62511,7 @@
     },
     {
       "path": "kotlin/shared/src/macosMain/kotlin/polski/macos/MacSession.kt",
-      "line": 94,
+      "line": 96,
       "symbol": "MacSession.dispatch.parts",
       "sourceFingerprint": "d5e02154aca8f52fd96dc4972735a43b306ff2b8329ed4d673ac65f775abbaef",
       "occurrence": 2,
@@ -62143,7 +62529,7 @@
     },
     {
       "path": "kotlin/shared/src/macosMain/kotlin/polski/macos/MacSession.kt",
-      "line": 99,
+      "line": 101,
       "symbol": "MacSession.dispatch",
       "sourceFingerprint": "20063f6ec34e3b58d9e3a82701a9126fda45ef7971e5cc58c87093530e08e258",
       "occurrence": 1,
@@ -62161,7 +62547,7 @@
     },
     {
       "path": "kotlin/shared/src/macosMain/kotlin/polski/macos/MacSession.kt",
-      "line": 100,
+      "line": 102,
       "symbol": "MacSession.dispatch",
       "sourceFingerprint": "c0678f10c7c9e3942d86b3298caea474aa0d8cdb693634d83b8efc0e703da7f1",
       "occurrence": 1,
@@ -62179,7 +62565,7 @@
     },
     {
       "path": "kotlin/shared/src/macosMain/kotlin/polski/macos/MacSession.kt",
-      "line": 116,
+      "line": 118,
       "symbol": "MacSession.acknowledgeEffect",
       "sourceFingerprint": "c66e8cd57c2cf65dd4b0a6b87e9255da0fc9dd367153b1be04ee4b3d03e4637b",
       "occurrence": 1,
@@ -62197,7 +62583,7 @@
     },
     {
       "path": "kotlin/shared/src/macosMain/kotlin/polski/macos/MacSession.kt",
-      "line": 120,
+      "line": 122,
       "symbol": "MacSession.importJson",
       "sourceFingerprint": "14e4d67ffc5842c2b41279d53850ec8cd2ec8e9b3f0f2f52ab9105167b195b26",
       "occurrence": 1,
@@ -62215,7 +62601,7 @@
     },
     {
       "path": "kotlin/shared/src/macosMain/kotlin/polski/macos/MacSession.kt",
-      "line": 122,
+      "line": 124,
       "symbol": "MacSession.importJson",
       "sourceFingerprint": "580996a9b5490705e764b916b955b042f8700c382a0f2393ad5d95f93a7f8956",
       "occurrence": 1,
@@ -62233,7 +62619,7 @@
     },
     {
       "path": "kotlin/shared/src/macosMain/kotlin/polski/macos/MacSession.kt",
-      "line": 156,
+      "line": 158,
       "symbol": "MacSession",
       "sourceFingerprint": "9e5c03d9eaadb98b5f050fda3d460f13cbc5db9447ea039fa49a625b82310fc2",
       "occurrence": 1,
@@ -62257,7 +62643,7 @@
     },
     {
       "path": "kotlin/shared/src/macosMain/kotlin/polski/macos/MacSession.kt",
-      "line": 160,
+      "line": 162,
       "symbol": "MacSession",
       "sourceFingerprint": "e703bd677f73e3fcbd3057cfda644d3bdb295e1d9dc156543ca845c1000f2a45",
       "occurrence": 1,
@@ -62275,7 +62661,7 @@
     },
     {
       "path": "kotlin/shared/src/macosMain/kotlin/polski/macos/MacSession.kt",
-      "line": 161,
+      "line": 163,
       "symbol": "MacSession",
       "sourceFingerprint": "6fce2377f43626496166d05117d1687f28674eb0794eef27075a6754c5b78f30",
       "occurrence": 1,
@@ -62421,9 +62807,9 @@
       "path": "kotlin/shared/src/macosMain/kotlin/polski/macos/MacSnapshot.kt",
       "line": 74,
       "symbol": "snapshot",
-      "sourceFingerprint": "35341fb8e2b91a54b95b3dcf3e44e8ca1eb72fec710a115c66d279702707d8a8",
+      "sourceFingerprint": "6a59e3f8eace2af6eca15176b72b2c45eca59b338e58c6ef17727e51ddab12d4",
       "occurrence": 1,
-      "source": "put(\"styleId\", state.styleId.name)",
+      "source": "put(\"styleId\", state.styleId.value)",
       "tokens": [
         "\"styleId\""
       ],
@@ -63855,9 +64241,9 @@
       "path": "kotlin/shared/src/macosMain/kotlin/polski/macos/MacSnapshot.kt",
       "line": 188,
       "symbol": "styleBlocksSnapshot",
-      "sourceFingerprint": "824561f61ec63d24adedecb8bfb25dc35c89a2a3abc88bdc982cbb1e86de5b68",
+      "sourceFingerprint": "7f4a33e4c9d182fd2d1f370617b523cc14ddf4607e28eefb1f455a34bc7706b9",
       "occurrence": 1,
-      "source": "put(\"effectiveStyleId\", effective.id.name)",
+      "source": "put(\"effectiveStyleId\", effective.id.value)",
       "tokens": [
         "\"effectiveStyleId\""
       ],
@@ -78397,7 +78783,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/SettingsWeb.kt",
-      "line": 27,
+      "line": 28,
       "symbol": "renderSettingsWeb",
       "sourceFingerprint": "5bc49f2e3e9c1ae411b741041bd073ca2e150e0e7da1b23fe77cf4d857b11593",
       "occurrence": 1,
@@ -78421,7 +78807,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/SettingsWeb.kt",
-      "line": 28,
+      "line": 29,
       "symbol": "renderSettingsWeb",
       "sourceFingerprint": "a6bf1601f78937ef74ffd543d15b33c89346194e38ae748f8fff2fb74c53c9cf",
       "occurrence": 1,
@@ -78445,7 +78831,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/SettingsWeb.kt",
-      "line": 29,
+      "line": 30,
       "symbol": "renderSettingsWeb",
       "sourceFingerprint": "d1f074b3ae1482b56bea46f52bb8646da635ea9c41b0ee6f607f623c2c90459d",
       "occurrence": 1,
@@ -78469,7 +78855,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/SettingsWeb.kt",
-      "line": 30,
+      "line": 31,
       "symbol": "renderSettingsWeb",
       "sourceFingerprint": "dee0c6ab561047386c7db497239a942c0b71a70094dae86b603852409e70fa40",
       "occurrence": 1,
@@ -78493,7 +78879,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/SettingsWeb.kt",
-      "line": 31,
+      "line": 32,
       "symbol": "renderSettingsWeb",
       "sourceFingerprint": "b5ea056f9c13e79d773dd52bf143e132f24eb411b0f3653e2cf0190d66807767",
       "occurrence": 1,
@@ -78517,7 +78903,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/SettingsWeb.kt",
-      "line": 33,
+      "line": 34,
       "symbol": "renderSettingsWeb.learning",
       "sourceFingerprint": "ed2c2ff020cfc606f8b69a0a1714b8d0ae266b4e5928cf1bc3cc83f90b0658a8",
       "occurrence": 1,
@@ -78541,7 +78927,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/SettingsWeb.kt",
-      "line": 34,
+      "line": 35,
       "symbol": "renderSettingsWeb",
       "sourceFingerprint": "e84937ad50016c3d2dc4a518aa2d120fdff98afb0215b8ac6c5abf8424c7508a",
       "occurrence": 1,
@@ -78565,11 +78951,11 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/SettingsWeb.kt",
-      "line": 37,
+      "line": 38,
       "symbol": "renderSettingsWeb",
-      "sourceFingerprint": "8187656f1a0e133ce90440dc8fb070593fe5e66168bff1cb0c8f57a25afa2a67",
+      "sourceFingerprint": "f2767a9b0bb765b2d8b813749c9200233dcb4a06d5b75d938597d2d7f52cf8a3",
       "occurrence": 1,
-      "source": "learning.appendChild(settingsSelect(\"Стиль объяснений\", \"settings-method\", StyleId.entries.map { it.name to styleLabel(it) }, currentStyleId.name) { selected ->",
+      "source": "learning.appendChild(settingsSelect(\"Стиль объяснений\", \"settings-method\", builtInStyleIds.map { it.value to styleLabel(it) }, currentStyleId.value) { selected ->",
       "tokens": [
         "\"Стиль объяснений\"",
         "\"settings-method\""
@@ -78589,7 +78975,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/SettingsWeb.kt",
-      "line": 40,
+      "line": 41,
       "symbol": "renderSettingsWeb",
       "sourceFingerprint": "3ef1f70470a6f81e09324f8ada4dedbd41f29aa00e2c2a1db244c4cc893176e6",
       "occurrence": 1,
@@ -78613,7 +78999,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/SettingsWeb.kt",
-      "line": 42,
+      "line": 43,
       "symbol": "renderSettingsWeb",
       "sourceFingerprint": "3d49fe2fbef6b2ce68d7a096bfc58b05fe93f197c4018179784ac6083ba0bb69",
       "occurrence": 1,
@@ -78637,7 +79023,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/SettingsWeb.kt",
-      "line": 44,
+      "line": 45,
       "symbol": "renderSettingsWeb",
       "sourceFingerprint": "34c42366cb3998b123f1642a52d8f69ea10789e3b6ec3c3797e3c646c5c2143a",
       "occurrence": 1,
@@ -78685,7 +79071,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/SettingsWeb.kt",
-      "line": 45,
+      "line": 46,
       "symbol": "renderSettingsWeb",
       "sourceFingerprint": "f8d4ca9acae1c1e98f35b5ba2216711f4e8d28ad59dabe4be3766be98e090223",
       "occurrence": 1,
@@ -78703,7 +79089,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/SettingsWeb.kt",
-      "line": 47,
+      "line": 48,
       "symbol": "renderSettingsWeb",
       "sourceFingerprint": "a130fce6d6d23568edb8316fa136844a666047b1ca44bd6ff77b288ba06e2b63",
       "occurrence": 1,
@@ -78733,7 +79119,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/SettingsWeb.kt",
-      "line": 48,
+      "line": 49,
       "symbol": "renderSettingsWeb",
       "sourceFingerprint": "d3878007f63ccd840b8a41743688f1cef45c641a93704f4adafb69a80f56f7bb",
       "occurrence": 1,
@@ -78757,7 +79143,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/SettingsWeb.kt",
-      "line": 51,
+      "line": 52,
       "symbol": "renderSettingsWeb",
       "sourceFingerprint": "2de8eb07efb7d06857ad48a595dd47ee37c47a1eefecd6c3265da44b2dd7fdc5",
       "occurrence": 1,
@@ -78787,7 +79173,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/SettingsWeb.kt",
-      "line": 53,
+      "line": 54,
       "symbol": "renderSettingsWeb.display",
       "sourceFingerprint": "5cb2098a05ecb90310b99d8c6d45c1628acb6c52242d328229907f177b7be925",
       "occurrence": 1,
@@ -78811,7 +79197,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/SettingsWeb.kt",
-      "line": 54,
+      "line": 55,
       "symbol": "renderSettingsWeb",
       "sourceFingerprint": "8d1651098271d83349c91775ba16b2187f52381eea0205c79b7ebde82e8ada8e",
       "occurrence": 1,
@@ -78835,7 +79221,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/SettingsWeb.kt",
-      "line": 56,
+      "line": 57,
       "symbol": "renderSettingsWeb",
       "sourceFingerprint": "b1ea3b888fc2e45e46808fc0ef5b47340caf0c033303934977f2d37d8513c51b",
       "occurrence": 1,
@@ -78895,7 +79281,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/SettingsWeb.kt",
-      "line": 59,
+      "line": 60,
       "symbol": "renderSettingsWeb",
       "sourceFingerprint": "9f12bef47668661fd3ffc1cdb857d767e9ee851d4c9b9cecfdce2ded91cf242d",
       "occurrence": 1,
@@ -78943,7 +79329,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/SettingsWeb.kt",
-      "line": 62,
+      "line": 63,
       "symbol": "renderSettingsWeb",
       "sourceFingerprint": "3cdd4b293e25334d92bf366c2e51fa5cd78859db7069e306e3e5a471e271aff5",
       "occurrence": 1,
@@ -78967,7 +79353,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/SettingsWeb.kt",
-      "line": 65,
+      "line": 66,
       "symbol": "renderSettingsWeb",
       "sourceFingerprint": "8bee9327d3d1ad4858cf56e21b9a57db0d5e938bcf543f601770911aef1959cc",
       "occurrence": 1,
@@ -78997,7 +79383,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/SettingsWeb.kt",
-      "line": 66,
+      "line": 67,
       "symbol": "renderSettingsWeb.data",
       "sourceFingerprint": "016220c76f30a3455e39cf760dae85c284f7bb135b8b81ad14be148bcbdbf07d",
       "occurrence": 1,
@@ -79021,7 +79407,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/SettingsWeb.kt",
-      "line": 67,
+      "line": 68,
       "symbol": "renderSettingsWeb",
       "sourceFingerprint": "10e8dc5b1073450f8abc206c1cf403548fbd2e08adc9042be859cd264ec77847",
       "occurrence": 1,
@@ -79045,7 +79431,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/SettingsWeb.kt",
-      "line": 69,
+      "line": 70,
       "symbol": "renderSettingsWeb",
       "sourceFingerprint": "7a4b35beb5b00ce0546d38baa9ae03ed9e130e0b30dcb71ba0dc039666eae76a",
       "occurrence": 1,
@@ -79063,7 +79449,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/SettingsWeb.kt",
-      "line": 70,
+      "line": 71,
       "symbol": "renderSettingsWeb.importLabel",
       "sourceFingerprint": "c4143289a7ecff4799a65ce866da6f1e832ce942153cdab350ba94d5973a8f19",
       "occurrence": 1,
@@ -79087,7 +79473,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/SettingsWeb.kt",
-      "line": 71,
+      "line": 72,
       "symbol": "renderSettingsWeb.input",
       "sourceFingerprint": "748c97097699555bdbe836bb6c46a608e07a646a4e00e799d33a9677185b5e0c",
       "occurrence": 1,
@@ -79105,7 +79491,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/SettingsWeb.kt",
-      "line": 72,
+      "line": 73,
       "symbol": "renderSettingsWeb",
       "sourceFingerprint": "e662c4e6e1563291002b36a820af9fdc95f80d3133426e54c89533d097ad04d3",
       "occurrence": 1,
@@ -79123,7 +79509,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/SettingsWeb.kt",
-      "line": 73,
+      "line": 74,
       "symbol": "renderSettingsWeb",
       "sourceFingerprint": "bfceec501a2444e0deebcd743f7885c781fbe25fd29e578f1a785e06f91e6518",
       "occurrence": 1,
@@ -79141,7 +79527,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/SettingsWeb.kt",
-      "line": 74,
+      "line": 75,
       "symbol": "renderSettingsWeb",
       "sourceFingerprint": "8834d2449d451d4b4537089e57ac9069ea5fecc6465406d911d022247b114876",
       "occurrence": 1,
@@ -79159,7 +79545,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/SettingsWeb.kt",
-      "line": 75,
+      "line": 76,
       "symbol": "renderSettingsWeb",
       "sourceFingerprint": "b062602a82726fd5d6e37d48e0a5ae623465a58eaf48c870bcfbf5cdfcda0bb1",
       "occurrence": 1,
@@ -79183,7 +79569,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/SettingsWeb.kt",
-      "line": 78,
+      "line": 79,
       "symbol": "renderSettingsWeb",
       "sourceFingerprint": "3c7af71242d5b8c68183169e90334538882bee03f0dcd222fc829d17486c46af",
       "occurrence": 1,
@@ -79201,7 +79587,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/SettingsWeb.kt",
-      "line": 80,
+      "line": 81,
       "symbol": "renderSettingsWeb",
       "sourceFingerprint": "8b242151186830898f132426093bd402f59f854e118380ba04acd7fea6c6b3ad",
       "occurrence": 1,
@@ -79219,7 +79605,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/SettingsWeb.kt",
-      "line": 84,
+      "line": 85,
       "symbol": "renderSettingsWeb",
       "sourceFingerprint": "f3d2b71884d6c637710a2fd77c6f0472ae689380553c5f6e951c12b5b9ebe80d",
       "occurrence": 1,
@@ -79237,7 +79623,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/SettingsWeb.kt",
-      "line": 88,
+      "line": 89,
       "symbol": "renderSettingsWeb",
       "sourceFingerprint": "4513c20709e76016f891c6d3f8d5c842fab4d55a895862364d17bb38e0410803",
       "occurrence": 1,
@@ -79255,7 +79641,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/SettingsWeb.kt",
-      "line": 89,
+      "line": 90,
       "symbol": "renderSettingsWeb",
       "sourceFingerprint": "e58cdbc593e83c9fad11262ddd344db7268d08f0084c891cc7df96146c357cab",
       "occurrence": 1,
@@ -79273,7 +79659,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/SettingsWeb.kt",
-      "line": 90,
+      "line": 91,
       "symbol": "renderSettingsWeb",
       "sourceFingerprint": "daaf6b9dfde16bd88979ed97490164d473c3a44579288cf333d3a1dc897f7825",
       "occurrence": 1,
@@ -79303,7 +79689,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/SettingsWeb.kt",
-      "line": 92,
+      "line": 93,
       "symbol": "renderSettingsWeb.reminders",
       "sourceFingerprint": "2b15b6a78a6b92ddd5d3ad1b6acd8b315be8ea79adfec638926c9195cfcc93ec",
       "occurrence": 1,
@@ -79327,7 +79713,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/SettingsWeb.kt",
-      "line": 93,
+      "line": 94,
       "symbol": "renderSettingsWeb",
       "sourceFingerprint": "26b3bec1e17695a92f694adfa05051ee8bc51c14861b54cf6eee266857fb557e",
       "occurrence": 1,
@@ -79351,7 +79737,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/SettingsWeb.kt",
-      "line": 94,
+      "line": 95,
       "symbol": "renderSettingsWeb",
       "sourceFingerprint": "9dc4b3ec2119f94abccd1cc938b1c741e5c8011963af0ba8b6fac2ac411fc2a5",
       "occurrence": 1,
@@ -79375,7 +79761,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/SettingsWeb.kt",
-      "line": 99,
+      "line": 100,
       "symbol": "settingsSelect.wrapper",
       "sourceFingerprint": "b9295d1376cad950e8b373c704fd00b2f217c874a7ff6081ba058c576d93a3bb",
       "occurrence": 1,
@@ -79393,7 +79779,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/SettingsWeb.kt",
-      "line": 100,
+      "line": 101,
       "symbol": "settingsSelect.select",
       "sourceFingerprint": "0ddbb963297de9ffe2cebde8e9ebc9ac8c4550483cea810a37d5c1967f526726",
       "occurrence": 1,
@@ -79411,7 +79797,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/SettingsWeb.kt",
-      "line": 102,
+      "line": 103,
       "symbol": "settingsSelect",
       "sourceFingerprint": "81b89f9d0061bae740165338865c76e7442b1c61075d1584d1df60569a75243e",
       "occurrence": 1,
@@ -79429,7 +79815,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/SettingsWeb.kt",
-      "line": 103,
+      "line": 104,
       "symbol": "settingsSelect",
       "sourceFingerprint": "68f46b55e7d9985da48f066a037f6fb149916ff55ccf391f578ccbc168a3bf4f",
       "occurrence": 1,
@@ -79453,7 +79839,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/SettingsWeb.kt",
-      "line": 105,
+      "line": 106,
       "symbol": "settingsSelect",
       "sourceFingerprint": "6f554ce9a39d027c937da8c0e4fe8ac8cbbc5fb076708a61c40892f013e412f9",
       "occurrence": 1,
@@ -79471,7 +79857,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/SettingsWeb.kt",
-      "line": 111,
+      "line": 112,
       "symbol": "settingsToggle.wrapper",
       "sourceFingerprint": "4ffba598de2ba16c9786dcad17c852ef9808df052d98fe7fc193676beef5bee8",
       "occurrence": 1,
@@ -79495,7 +79881,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/SettingsWeb.kt",
-      "line": 112,
+      "line": 113,
       "symbol": "settingsToggle.input",
       "sourceFingerprint": "748c97097699555bdbe836bb6c46a608e07a646a4e00e799d33a9677185b5e0c",
       "occurrence": 1,
@@ -79513,7 +79899,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/SettingsWeb.kt",
-      "line": 114,
+      "line": 115,
       "symbol": "settingsToggle",
       "sourceFingerprint": "fc4c97bc910e7e84399f5ef598668832432ee9dabbefe415690bb85fbb95266f",
       "occurrence": 1,
@@ -79531,7 +79917,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/SettingsWeb.kt",
-      "line": 116,
+      "line": 117,
       "symbol": "settingsToggle",
       "sourceFingerprint": "7f3c4f7ea2796fe3bd7ee6d460993a01576358a75d74cdc0125672c462761356",
       "occurrence": 1,
@@ -79555,7 +79941,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/SettingsWeb.kt",
-      "line": 117,
+      "line": 118,
       "symbol": "settingsToggle",
       "sourceFingerprint": "330b4ae69d440dc4d9307887448d62a3dab99c7e487b16c6fa51feac01b07e9e",
       "occurrence": 1,
@@ -79573,7 +79959,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/SettingsWeb.kt",
-      "line": 118,
+      "line": 119,
       "symbol": "settingsToggle",
       "sourceFingerprint": "3fee0c0be1b13743ede8ef0467242b9c6005a0955fec59d1eba807e99c595f2d",
       "occurrence": 1,
@@ -79591,7 +79977,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/SettingsWeb.kt",
-      "line": 124,
+      "line": 125,
       "symbol": "file-scope",
       "sourceFingerprint": "3b991e8741c53041daded15144dd7fb31b8496012ced4a4d83bb8704865e5ce7",
       "occurrence": 1,
@@ -79609,7 +79995,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/SettingsWeb.kt",
-      "line": 125,
+      "line": 126,
       "symbol": "file-scope",
       "sourceFingerprint": "58531ab40d4bff642e3d5bd879771e87fa13726f8c8a2942101d4e26f2eb8297",
       "occurrence": 1,
@@ -79627,7 +80013,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/SettingsWeb.kt",
-      "line": 126,
+      "line": 127,
       "symbol": "file-scope",
       "sourceFingerprint": "4bbcd4655a6bda77b79f4383e8e90bf06618a223ecf1f30d0a44833da70cc01d",
       "occurrence": 1,
@@ -79645,7 +80031,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/SettingsWeb.kt",
-      "line": 129,
+      "line": 130,
       "symbol": "settingsNode",
       "sourceFingerprint": "b1a1a023115b73644953e1cbfd841ea97f16556cfffe619dbd7b302d226a75d7",
       "occurrence": 1,
@@ -79663,7 +80049,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/SettingsWeb.kt",
-      "line": 136,
+      "line": 137,
       "symbol": "downloadPreferences.encoded",
       "sourceFingerprint": "fb1a4653ae5099da593c3f4f03bbad11e4461797b560dd9f5c7bc1022b3263e7",
       "occurrence": 1,
@@ -79681,7 +80067,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/SettingsWeb.kt",
-      "line": 138,
+      "line": 139,
       "symbol": "downloadPreferences",
       "sourceFingerprint": "9110c6ee9e05557f5fbac4f008f3036cc779c7e68e9ae18af19a89c849fc6640",
       "occurrence": 1,
@@ -79711,7 +80097,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/SettingsWeb.kt",
-      "line": 140,
+      "line": 141,
       "symbol": "downloadPreferences.anchor",
       "sourceFingerprint": "8ed444345238b36dd36cd21f8f09835e8b2fe6c4833166252db5ece2d0724e8a",
       "occurrence": 1,
@@ -79729,7 +80115,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/SettingsWeb.kt",
-      "line": 141,
+      "line": 142,
       "symbol": "downloadPreferences",
       "sourceFingerprint": "59e83cc622d14841ac8ad3b2e13697dbeba9f11154a80c0a7d95f6049d3d9dbc",
       "occurrence": 1,
@@ -79747,7 +80133,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/SettingsWeb.kt",
-      "line": 142,
+      "line": 143,
       "symbol": "downloadPreferences",
       "sourceFingerprint": "07ebefced77844f91493e1665d40a2d3800967dfb0016ccd8f9b78e9e7668611",
       "occurrence": 1,

@@ -12,6 +12,7 @@ vite.config.d.ts
 .env.*
 !.env.example
 kotlin/.gradle/
+kotlin/**/.gradle/
 kotlin/**/build/
 kotlin/.kotlin/
 # Heavy verification bundles; keep screenshots, logs and JSON evidence

@@ -7,8 +7,33 @@ import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 import polski.data.generatedStylesJson
 
-/** A presentation preference, not a diagnosis; every style shares the same exercises, FSRS ratings and skill IDs. */
-enum class StyleId { RuleFirst, SituationFirst, NativeContrast, MinimalTheory }
+/**
+ * A presentation preference, not a diagnosis; every style shares the same exercises, FSRS ratings
+ * and skill IDs. UC-01 opened this from a closed enum to a string-backed id (UniversalCorePlan.md
+ * §1.1, "an open catalog, not a closed enum") so a 5th style needs only a new recipe file under
+ * `courses/styles` — no Kotlin change reaches [StyleRegistry] (see [parseStyleRecipesJson]). [value] is the
+ * PascalCase wire vocabulary every host bridge already speaks (Swift `styleId`/`"styles"` snapshot
+ * rows, web/Android pickers) — the 4 built-in constants below keep the exact strings the old enum's
+ * `.name` produced, so no existing host wire format changes; [kebabIdToWireValue] derives the same
+ * shape for any new recipe id, so nothing but this file needs to know the transform.
+ */
+data class StyleId(val value: String) {
+    companion object {
+        val RuleFirst = StyleId("RuleFirst")
+        val SituationFirst = StyleId("SituationFirst")
+        val NativeContrast = StyleId("NativeContrast")
+        val MinimalTheory = StyleId("MinimalTheory")
+    }
+}
+
+/**
+ * The 4 built-in styles in the old closed enum's declaration order — hosts that show a fixed,
+ * ordered picker (Settings, quick-switch) keep exactly today's option order by iterating this
+ * instead of [StyleRegistry.recipes]' keys, whose order follows `courses/styles` filenames
+ * (alphabetical) and grows with any new recipe. Iterating [StyleRegistry.recipes] directly is
+ * right where "any currently loaded style" is the point (dispatch validation, exhaustive tests).
+ */
+val builtInStyleIds: List<StyleId> = listOf(StyleId.RuleFirst, StyleId.SituationFirst, StyleId.NativeContrast, StyleId.MinimalTheory)
 
 /** [CardPhase.Question]/[CardPhase.Revealed] under the names blocks are grouped by. */
 enum class StylePhase { Front, Back }
@@ -33,18 +58,13 @@ data class StyleRecipe(
 )
 
 /**
- * The `courses/styles` recipe files' kebab-case `id`/`fallback` wire value for each [StyleId].
- * Bounded to today's 4 named pedagogical styles (ADR-11): a recipe object whose `id` isn't one of
- * these is skipped by [parseStyleRecipesJson], never a crash — a genuinely new style still needs
- * its own [StyleId] entry, but a stray or in-progress recipe file next to the real 4 never breaks
- * the build.
+ * `courses/styles` recipe file ids are kebab-case (`native-contrast`); every host bridge speaks the
+ * PascalCase form the old closed enum's `.name` produced (`NativeContrast`) — this mechanical
+ * transform is the only thing that used to live in a fixed id-lookup table, so a brand-new recipe
+ * (UC-01: "a 5th style needs only a new JSON file") gets a brand-new [StyleId] the same way the 4
+ * built-in ones do, with no table to extend.
  */
-private val styleIdByWireId: Map<String, StyleId> = mapOf(
-    "rule-first" to StyleId.RuleFirst,
-    "situation-first" to StyleId.SituationFirst,
-    "native-contrast" to StyleId.NativeContrast,
-    "minimal-theory" to StyleId.MinimalTheory,
-)
+private fun String.kebabIdToWireValue(): String = split('-').joinToString("") { it.replaceFirstChar(Char::uppercaseChar) }
 
 /** [BlockKind]'s own fixed lowercase wire name (see [BlockKind]'s doc), inverted for parsing. */
 private val blockKindByWireName: Map<String, BlockKind> =
@@ -63,13 +83,17 @@ object StyleRegistry {
     }
 }
 
-/** Never throws: a recipe object naming an `id` or block kind outside today's fixed wire
- *  vocabularies ([styleIdByWireId]/[blockKindByWireName]) is skipped, not a crash. */
+/**
+ * Never throws: a recipe's `id` is open (UC-01) — every well-formed recipe object is loaded, not
+ * just today's known 4. A block kind outside [BlockKind]'s fixed wire vocabulary is skipped within
+ * that recipe (`requires`/`blocks`), not a crash — [BlockKind] is a closed set on purpose (§5.2's
+ * ~10-operator ceiling has no open-catalog equivalent yet).
+ */
 internal fun parseStyleRecipesJson(json: String): List<StyleRecipe> =
     Json.parseToJsonElement(json).jsonArray.mapNotNull { it.jsonObject.toStyleRecipeOrNull() }
 
 private fun JsonObject.toStyleRecipeOrNull(): StyleRecipe? {
-    val id = styleIdByWireId[getValue("id").jsonPrimitive.content] ?: return null
+    val id = StyleId(getValue("id").jsonPrimitive.content.kebabIdToWireValue())
     val blocks = getValue("blocks").jsonObject
     return StyleRecipe(
         id = id,
@@ -80,7 +104,7 @@ private fun JsonObject.toStyleRecipeOrNull(): StyleRecipe? {
             StylePhase.Back to blocks.blockKindList("back"),
         ),
         requires = get("requires")?.jsonArray?.mapNotNull { blockKindByWireName[it.jsonPrimitive.content] }?.toSet() ?: emptySet(),
-        fallback = get("fallback")?.jsonPrimitive?.content?.let(styleIdByWireId::get),
+        fallback = get("fallback")?.jsonPrimitive?.content?.let { StyleId(it.kebabIdToWireValue()) },
     )
 }
 

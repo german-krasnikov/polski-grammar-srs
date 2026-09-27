@@ -35,7 +35,7 @@ fun AndroidStylePicker(
     val registry = StyleRegistry.recipes
     val content = currentSkillId?.let(::styleContentBySkillId)
     Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
-        StyleId.entries.forEach { styleId ->
+        registry.keys.forEach { styleId ->
             val recipe = registry.getValue(styleId)
             val fallbackId = content?.let { StyleComposer.resolveEffectiveStyle(recipe, it, registry) }?.takeIf { it != styleId }
             Row(

@@ -67,7 +67,7 @@ class AndroidSessionViewModel(context: Context) : ViewModel() {
                     preferences = loaded.value
                     savedPreferences = loaded.value
                     preferencesError = null
-                    val preferred = StyleId.valueOf(loaded.value.styleId.name)
+                    val preferred = StyleId(loaded.value.styleId.name)
                     if (store.state.value.styleId != preferred) {
                         store.dispatch(AppAction.SetStyle(preferred))
                     }
@@ -90,7 +90,7 @@ class AndroidSessionViewModel(context: Context) : ViewModel() {
             TimeCapture(now, SimpleDateFormat("yyyy-MM-dd", Locale.ROOT).format(Date(now.toEpochMilliseconds())))
         },
         viewModelScope,
-        StyleId.valueOf(preferences.styleId.name),
+        StyleId(preferences.styleId.name),
     )
 
     fun setAppearance(appearance: Appearance) {
@@ -99,7 +99,7 @@ class AndroidSessionViewModel(context: Context) : ViewModel() {
     }
 
     fun persistStyle(styleId: StyleId) {
-        val preferred = PreferredStyle.valueOf(styleId.name)
+        val preferred = PreferredStyle.valueOf(styleId.value)
         if (preferences.styleId == preferred) return
         updatePreferences(preferences.copy(styleId = preferred))
     }

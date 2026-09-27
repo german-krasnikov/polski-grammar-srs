@@ -70,7 +70,7 @@ internal fun snapshot(state: AppUiState): String = buildJsonObject {
     put("answerMode", state.answerMode.name)
     // Swift still speaks the pre-UC-10 2-value wire vocabulary (see [toLegacyWireValue]).
     put("explanationMethod", state.styleId.toLegacyWireValue())
-    put("styleId", state.styleId.name)
+    put("styleId", state.styleId.value)
     put("styleBlocks", styleBlocksSnapshot(state))
     put("draft", state.draft)
     put("introPending", state.introPending)
@@ -189,7 +189,7 @@ private fun styleBlocksSnapshot(state: AppUiState): JsonElement {
     val nativeContrastFallback = nativeContrastRecipe != null &&
         StyleComposer.resolveEffectiveStyle(nativeContrastRecipe, content, registry) != StyleId.NativeContrast
     return buildJsonObject {
-        put("effectiveStyleId", effective.id.name)
+        put("effectiveStyleId", effective.id.value)
         put("nativeContrastFallback", nativeContrastFallback)
         put("front", blocksToJson(StyleComposer.compose(effective, StylePhase.Front, exercise, skill, focus, content)))
         put("back", blocksToJson(StyleComposer.compose(effective, StylePhase.Back, exercise, skill, focus, content)))

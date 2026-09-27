@@ -14,6 +14,7 @@ import polski.preferences.PreferredStyle
 import polski.presentation.AnswerMode
 import polski.presentation.AppAction
 import polski.presentation.StyleId
+import polski.presentation.builtInStyleIds
 import polski.presentation.TrainingStore
 
 @OptIn(kotlin.js.ExperimentalWasmJsInterop::class)
@@ -33,9 +34,9 @@ internal fun renderSettingsWeb(
     val learning = settingsNode("section", "card settings-panel")
     learning.appendChild(settingsNode("h3", text = "Обучение"))
     root.appendChild(learning)
-    val currentStyleId = StyleId.valueOf(preferences.value.styleId.name)
-    learning.appendChild(settingsSelect("Стиль объяснений", "settings-method", StyleId.entries.map { it.name to styleLabel(it) }, currentStyleId.name) { selected ->
-        preferences.setStyle(StyleId.valueOf(selected), store)
+    val currentStyleId = StyleId(preferences.value.styleId.name)
+    learning.appendChild(settingsSelect("Стиль объяснений", "settings-method", builtInStyleIds.map { it.value to styleLabel(it) }, currentStyleId.value) { selected ->
+        preferences.setStyle(StyleId(selected), store)
     })
     learning.appendChild(settingsNode("p", "muted settings-style-description", styleDescription(currentStyleId)))
     nativeContrastFallbackHint(store.state.value.exercise?.primarySkill)?.let { hint ->

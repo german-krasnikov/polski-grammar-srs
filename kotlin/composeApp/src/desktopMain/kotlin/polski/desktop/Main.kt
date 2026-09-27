@@ -164,7 +164,7 @@ private fun DesktopSession(
                 TimeCapture(at, localDay)
             },
             scope,
-            StyleId.valueOf(preferences.value.styleId.name),
+            StyleId(preferences.value.styleId.name),
             if (preferences.value.answerMode == PreferredAnswerMode.Typed) AnswerMode.Typed else AnswerMode.Oral,
         )
     }

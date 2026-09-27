@@ -71,7 +71,7 @@ internal fun snapshot(state: AppUiState): String = buildJsonObject {
     put("answerMode", state.answerMode.name)
     // Swift still speaks the pre-UC-10 2-value wire vocabulary (see [toLegacyWireValue]).
     put("explanationMethod", state.styleId.toLegacyWireValue())
-    put("styleId", state.styleId.name)
+    put("styleId", state.styleId.value)
     put("styleBlocks", styleBlocksSnapshot(state))
     put("draft", state.draft)
     put("introPending", state.introPending)
@@ -185,7 +185,7 @@ private fun styleBlocksSnapshot(state: AppUiState): JsonElement {
     val skill = skillById(exercise.primarySkill)
     val focus = presentationBySkillId(exercise.primarySkill)
     return buildJsonObject {
-        put("effectiveStyleId", effective.id.name)
+        put("effectiveStyleId", effective.id.value)
         // native-contrast's only requirement (StyleComposer's isSatisfiedBy) — surfaced directly so
         // Settings can hint "no content for this skill" regardless of which style is selected now.
         put("nativeContrastAvailable", content.nativeParallel.isNotEmpty())

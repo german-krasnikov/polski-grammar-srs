@@ -59,7 +59,7 @@ fun TrainingWebApp() {
                 TimeCapture(at, BrowserLocalDayProvider().localDay(at))
             },
             scope,
-            StyleId.valueOf(preferences.value.styleId.name),
+            StyleId(preferences.value.styleId.name),
             if (preferences.value.answerMode == PreferredAnswerMode.Typed) AnswerMode.Typed else AnswerMode.Oral,
         )
     }
@@ -570,15 +570,15 @@ private class TrainingDomRenderer {
         val methodSelect = document.createElement("select") as HTMLSelectElement
         methodSelect.id = "explanation-method"
         methodSelect.setAttribute("aria-label", "Подача объяснений")
-        StyleId.entries.forEach { styleId ->
-            methodSelect.appendChild(node("option", text = styleLabel(styleId)).apply { setAttribute("value", styleId.name) })
+        builtInStyleIds.forEach { styleId ->
+            methodSelect.appendChild(node("option", text = styleLabel(styleId)).apply { setAttribute("value", styleId.value) })
         }
-        methodSelect.value = state.styleId.name
+        methodSelect.value = state.styleId.value
         // UC-10: a compact quick switch over the same 4 styles as Settings — dispatching SetStyle
         // is a display choice only (TrainingStore.SetStyle), never creates a review and never
         // touches draft/frozenAnswer/exercise/phase.
         methodSelect.addEventListener("change", {
-            dispatch(AppAction.SetStyle(StyleId.valueOf(methodSelect.value)))
+            dispatch(AppAction.SetStyle(StyleId(methodSelect.value)))
         })
         methodLabel.appendChild(methodSelect)
         options.appendChild(button(if (state.showReference && !state.introPending) "Скрыть таблицу" else "Таблица под рукой") {

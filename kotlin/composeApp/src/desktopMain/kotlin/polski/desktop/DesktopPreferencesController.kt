@@ -40,7 +40,7 @@ internal class DesktopPreferencesController(private val repository: DesktopPrefe
     fun exportRaw(): String = recoveryRaw ?: UserPreferencesCodec.encode(value)
 
     fun setStyle(styleId: StyleId, dispatch: (AppAction) -> Unit) {
-        if (save(value.copy(styleId = PreferredStyle.valueOf(styleId.name)))) {
+        if (save(value.copy(styleId = PreferredStyle.valueOf(styleId.value)))) {
             dispatch(AppAction.SetStyle(styleId))
         }
     }
@@ -65,7 +65,7 @@ internal class DesktopPreferencesController(private val repository: DesktopPrefe
             PreferencesSave.Saved -> {
                 value = (UserPreferencesCodec.decode(raw) as PreferencesDecode.Loaded).value
                 status = DesktopPreferencesStatus.Loaded
-                dispatch(AppAction.SetStyle(StyleId.valueOf(value.styleId.name)))
+                dispatch(AppAction.SetStyle(StyleId(value.styleId.name)))
                 applyPendingAnswerMode(phase, currentAnswerMode, dispatch)
             }
             is PreferencesSave.WriteFailed -> status = DesktopPreferencesStatus.WriteFailed(saved.reason)

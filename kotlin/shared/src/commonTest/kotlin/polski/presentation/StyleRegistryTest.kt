@@ -39,12 +39,10 @@ class StyleRegistryTest {
         assertEquals(StyleId.RuleFirst, recipe.fallback)
     }
 
-    // "Adding a 5th style must need only a new JSON file": the parser itself must not hardcode
-    // exactly 4 recipes' worth of content — it reads whatever fields a recipe object carries, and
-    // tolerates an extra/unrecognized recipe next to the known 4 without crashing (a genuinely new
-    // StyleId still needs its own enum entry, but a stray or in-progress file must never break the
-    // build). This uses a local JSON fixture, not the real generatedStylesJson.
-    @Test fun parserIsGenericOverAnArbitraryRecipeCountAndSkipsUnknownIds() {
+    // UC-01: StyleId is open now — "adding a 5th style must need only a new JSON file", so a
+    // recipe whose id isn't one of the 4 built-in ones is loaded and selectable, not skipped. This
+    // uses a local JSON fixture, not the real generatedStylesJson.
+    @Test fun parserIsGenericOverAnArbitraryRecipeCountAndLoadsAnUnknownId() {
         val fixtureJson = """
             [
               {
@@ -64,16 +62,32 @@ class StyleRegistryTest {
             ]
         """.trimIndent()
         val parsed = parseStyleRecipesJson(fixtureJson)
-        // The unrecognized 5th recipe is skipped, not a crash and not silently invented content.
-        assertEquals(1, parsed.size)
-        val recipe = parsed.single()
+        // Both recipes are loaded now — an unrecognized id is a brand-new StyleId, not a skip.
+        assertEquals(2, parsed.size)
+        val known = parsed[0]
         // Every field comes straight from this fixture, proving no leftover hardcoded literal
         // shadows JSON content for a known id.
-        assertEquals(StyleId.NativeContrast, recipe.id)
-        assertEquals("Тестовая метка", recipe.label["ru"])
-        assertEquals(mapOf(StylePhase.Front to listOf(BlockKind.Examples), StylePhase.Back to listOf(BlockKind.WhyOnDemand)), recipe.blocks)
-        assertEquals(setOf(BlockKind.Examples), recipe.requires)
-        assertEquals(StyleId.MinimalTheory, recipe.fallback)
+        assertEquals(StyleId.NativeContrast, known.id)
+        assertEquals("Тестовая метка", known.label["ru"])
+        assertEquals(mapOf(StylePhase.Front to listOf(BlockKind.Examples), StylePhase.Back to listOf(BlockKind.WhyOnDemand)), known.blocks)
+        assertEquals(setOf(BlockKind.Examples), known.requires)
+        assertEquals(StyleId.MinimalTheory, known.fallback)
+        // The unknown id is loaded and selectable — dispatchable as any other StyleId, not a crash.
+        val future = parsed[1]
+        assertEquals(StyleId("FutureStyle"), future.id)
+        assertEquals("Будущий стиль", future.label["ru"])
+        assertEquals(mapOf(StylePhase.Front to listOf(BlockKind.Scene), StylePhase.Back to listOf(BlockKind.Rule)), future.blocks)
+        assertEquals(emptySet(), future.requires)
+        assertEquals(null, future.fallback)
+    }
+
+    // "Selectable" end-to-end: an unknown-id recipe reaches AppUiState.styleId through the same
+    // SetStyle/TrainingStore path any of the 4 built-in styles use — no enum boundary rejects it.
+    @Test fun anUnknownStyleIdIsSelectableThroughSetStyle() {
+        val exotic = StyleId("FutureStyle")
+        val action = AppAction.SetStyle(exotic)
+        val next = AppUiState(styleId = StyleId.RuleFirst).copy(styleId = action.styleId)
+        assertEquals(exotic, next.styleId)
     }
 
     @Test fun parserNeverThrowsOnAnEmptyRecipeList() {

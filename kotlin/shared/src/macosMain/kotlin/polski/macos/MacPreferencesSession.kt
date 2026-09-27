@@ -79,11 +79,11 @@ private val styleFallbackCopy: Map<StyleId, Pair<String, String>> = mapOf(
     StyleId.MinimalTheory to ("Минимум теории" to "Только примеры; объяснение — по запросу."),
 )
 
-private fun styleCatalogJson(): JsonArray = JsonArray(StyleId.entries.map { id ->
+private fun styleCatalogJson(): JsonArray = JsonArray(styleFallbackCopy.keys.map { id ->
     val recipe = StyleRegistry.recipes[id]
     val fallback = styleFallbackCopy.getValue(id)
     buildJsonObject {
-        put("id", id.name)
+        put("id", id.value)
         put("label", recipe?.label?.get("ru")?.takeIf { it.isNotBlank() } ?: fallback.first)
         put("description", recipe?.description?.get("ru")?.takeIf { it.isNotBlank() } ?: fallback.second)
     }

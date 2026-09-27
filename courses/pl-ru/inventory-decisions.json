@@ -48593,14 +48593,6 @@
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosSnapshot.kt",
       "symbol": "snapshot",
-      "sourceFingerprint": "35341fb8e2b91a54b95b3dcf3e44e8ca1eb72fec710a115c66d279702707d8a8",
-      "occurrence": 1,
-      "category": "serialization-plumbing",
-      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
-    },
-    {
-      "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosSnapshot.kt",
-      "symbol": "snapshot",
       "sourceFingerprint": "2d5175656e079e3463fdc1357fa30159ae4b3b225c6cc4bb748d36073cba464e",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -48618,14 +48610,6 @@
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosSnapshot.kt",
       "symbol": "file-scope",
       "sourceFingerprint": "049dda6e037c9f1bf4b0c19afa6f8535d2f3876c7d3f77bedb17df40a9e8eacb",
-      "occurrence": 1,
-      "category": "serialization-plumbing",
-      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
-    },
-    {
-      "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosSnapshot.kt",
-      "symbol": "styleBlocksSnapshot",
-      "sourceFingerprint": "824561f61ec63d24adedecb8bfb25dc35c89a2a3abc88bdc982cbb1e86de5b68",
       "occurrence": 1,
       "category": "serialization-plumbing",
       "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
@@ -48653,24 +48637,6 @@
       "occurrence": 1,
       "category": "serialization-plumbing",
       "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
-    },
-    {
-      "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/TrainingWebApp.kt",
-      "symbol": "TrainingDomRenderer.renderTraining",
-      "sourceFingerprint": "9b5928bff098a344f4846c893d1ec01c490027deb54aa0d0fa74113eda725c32",
-      "occurrence": 1,
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "serialization-plumbing",
-          "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
-        },
-        {
-          "ordinal": 1,
-          "category": "serialization-plumbing",
-          "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
-        }
-      ]
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/TrainingWebApp.kt",
@@ -48857,14 +48823,6 @@
       "occurrence": 1,
       "category": "serialization-plumbing",
       "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
-    },
-    {
-      "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidTrainingScreen.kt",
-      "symbol": "file-scope",
-      "sourceFingerprint": "2372cf6ee8bfd8583e519b63f8841e5d76fa94edd6ceedc01053d35e23e88293",
-      "occurrence": 1,
-      "category": "ui-localization-chrome",
-      "reason": "Host UI chrome text shown to the user; moves to ui-strings tables (UC-13)."
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidTrainingScreen.kt",
@@ -49794,54 +49752,6 @@
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
       "symbol": "file-scope",
-      "sourceFingerprint": "061c06ac414c7d4818eedb913f09eb4628d93cbc574dade67b76ecaacc873bc7",
-      "occurrence": 1,
-      "category": "serialization-plumbing",
-      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
-      "symbol": "whose",
-      "sourceFingerprint": "ebc7a90ab92231c2a3734cf27eb7cc4d95652db3c838cbbf8656368330caf55f",
-      "occurrence": 1,
-      "category": "serialization-plumbing",
-      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
-      "symbol": "file-scope",
-      "sourceFingerprint": "15763c60587a3d5d69cef2a8e07b4948d705a6bdf642373e944cbadc46512ab5",
-      "occurrence": 1,
-      "category": "serialization-plumbing",
-      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
-      "symbol": "file-scope",
-      "sourceFingerprint": "19b35e526abf59529bc20c01ff4f5d8533549275d05e35e6b7d083caadc76902",
-      "occurrence": 1,
-      "category": "serialization-plumbing",
-      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
-      "symbol": "file-scope",
-      "sourceFingerprint": "ba0a77cbfff80255dc72bc82045fbae3886a49eb4efba7e2699f8b8dc7fed86f",
-      "occurrence": 1,
-      "category": "serialization-plumbing",
-      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
-      "symbol": "file-scope",
-      "sourceFingerprint": "098dad174441ef603114e35d4b9c4f26845225a746259d2896f520e7e5cb2a60",
-      "occurrence": 1,
-      "category": "serialization-plumbing",
-      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
-      "symbol": "file-scope",
       "sourceFingerprint": "1e063c7bf9ebe6ed8373e0d9e2e7045be2268968dfba9157fc9fa093238efc57",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -49875,22 +49785,6 @@
       "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
       "symbol": "file-scope",
       "sourceFingerprint": "02dc8a72d240d01977349a9793451470a8c3f46ac707d502e355c01cb8d10515",
-      "occurrence": 1,
-      "category": "serialization-plumbing",
-      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
-      "symbol": "naming",
-      "sourceFingerprint": "ae27161a49cd81570514134d31d7c9c9f943dc0c0879faa3981d521d2b931e42",
-      "occurrence": 1,
-      "category": "serialization-plumbing",
-      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
-      "symbol": "JsonObject.id",
-      "sourceFingerprint": "1ba1932948ceb44b6256bd75a47c352dd893efaa27508ffecbbd38d5a19528b3",
       "occurrence": 1,
       "category": "serialization-plumbing",
       "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
@@ -49939,14 +49833,6 @@
       "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
       "symbol": "JsonObject",
       "sourceFingerprint": "e5607d47fe9fe921547585ec4e6cc9ee4b5b7b88258e3f7ac312491eda31bf51",
-      "occurrence": 1,
-      "category": "serialization-plumbing",
-      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
-      "symbol": "JsonObject",
-      "sourceFingerprint": "935ea490e329b091fc4fb9a11c36ac4f949c2b90bc6b249a12492d7b2606f7a7",
       "occurrence": 1,
       "category": "serialization-plumbing",
       "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
@@ -50358,22 +50244,6 @@
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosPreferencesSession.kt",
       "symbol": "currentSnapshot",
-      "sourceFingerprint": "d37ac0ba7f63c5124d65a9f6be828208a95950f9b2c0de4bb5e0568cc99ff8c7",
-      "occurrence": 1,
-      "category": "serialization-plumbing",
-      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
-    },
-    {
-      "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosPreferencesSession.kt",
-      "symbol": "currentSnapshot",
-      "sourceFingerprint": "2bb4771abe24d90e9bb2cc6f70e4195991df9ad672bd9926fe948db206dc836b",
-      "occurrence": 1,
-      "category": "serialization-plumbing",
-      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
-    },
-    {
-      "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosPreferencesSession.kt",
-      "symbol": "currentSnapshot",
       "sourceFingerprint": "9604b90e640b937f23a1d04cc582cb8f5309d822b593a9dccdaea4cbe133099f",
       "occurrence": 1,
       "parts": [
@@ -50420,36 +50290,10 @@
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosPreferencesSession.kt",
       "symbol": "currentSnapshot",
-      "sourceFingerprint": "8e472c2468ff02d08e077f4f38553baee0cdcad199859477d3438b21c38a97ed",
-      "occurrence": 1,
-      "category": "serialization-plumbing",
-      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
-    },
-    {
-      "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosPreferencesSession.kt",
-      "symbol": "currentSnapshot",
       "sourceFingerprint": "e2e5fbd1ba7b00bb3fd93efb1e1f137777c0112ae951a450f7f7eaa35a1a7933",
       "occurrence": 1,
       "category": "serialization-plumbing",
       "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
-    },
-    {
-      "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosPreferencesSession.kt",
-      "symbol": "set",
-      "sourceFingerprint": "b68d4c4bac164b2e0de184a1e74b5f31a3c8ec7e863fb70dc3cd31949c3dfe42",
-      "occurrence": 1,
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "serialization-plumbing",
-          "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
-        },
-        {
-          "ordinal": 1,
-          "category": "ui-localization-chrome",
-          "reason": "Host UI chrome text shown to the user; moves to ui-strings tables (UC-13)."
-        }
-      ]
     },
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosPreferencesSession.kt",
@@ -50480,23 +50324,7 @@
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosSession.kt",
       "symbol": "IosSession.dispatch",
-      "sourceFingerprint": "7cbd63f85aabc6b9018347f7cb427cd3df5513e428b71cf5e5ed0aeaca1efb5b",
-      "occurrence": 1,
-      "category": "serialization-plumbing",
-      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
-    },
-    {
-      "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosSession.kt",
-      "symbol": "IosSession.dispatch",
       "sourceFingerprint": "60cb50e99f591435dcc94869eeb1902c06583676447ee400357c4d397869211c",
-      "occurrence": 1,
-      "category": "serialization-plumbing",
-      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
-    },
-    {
-      "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosSession.kt",
-      "symbol": "IosSession",
-      "sourceFingerprint": "efb1634fd25ddc016e965c785330c070ba1336d28044d12454a8dd931c99a6f1",
       "occurrence": 1,
       "category": "serialization-plumbing",
       "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
@@ -50636,14 +50464,6 @@
     {
       "path": "kotlin/shared/src/macosMain/kotlin/polski/macos/MacPreferencesSession.kt",
       "symbol": "styleCatalogJson",
-      "sourceFingerprint": "2bb4771abe24d90e9bb2cc6f70e4195991df9ad672bd9926fe948db206dc836b",
-      "occurrence": 1,
-      "category": "serialization-plumbing",
-      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
-    },
-    {
-      "path": "kotlin/shared/src/macosMain/kotlin/polski/macos/MacPreferencesSession.kt",
-      "symbol": "styleCatalogJson",
       "sourceFingerprint": "0a37199606e86ce886a4b14c113f8dd44fcb9b775848de460359b616f4d7e4fb",
       "occurrence": 1,
       "parts": [
@@ -50678,25 +50498,9 @@
       ]
     },
     {
-      "path": "kotlin/shared/src/macosMain/kotlin/polski/macos/MacSession.kt",
-      "symbol": "MacSession.dispatch",
-      "sourceFingerprint": "2e9f22eab523553f9bc50d6dba6cfe66cc7aaf72232fff38f724d95f4d71945f",
-      "occurrence": 1,
-      "category": "serialization-plumbing",
-      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
-    },
-    {
       "path": "kotlin/shared/src/macosMain/kotlin/polski/macos/MacSnapshot.kt",
       "symbol": "snapshot",
       "sourceFingerprint": "f76044b33e81285d678b9c72599c073fcb2894dc5d3c03662d290c0929185b0f",
-      "occurrence": 1,
-      "category": "serialization-plumbing",
-      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
-    },
-    {
-      "path": "kotlin/shared/src/macosMain/kotlin/polski/macos/MacSnapshot.kt",
-      "symbol": "snapshot",
-      "sourceFingerprint": "35341fb8e2b91a54b95b3dcf3e44e8ca1eb72fec710a115c66d279702707d8a8",
       "occurrence": 1,
       "category": "serialization-plumbing",
       "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
@@ -50729,14 +50533,6 @@
       "path": "kotlin/shared/src/macosMain/kotlin/polski/macos/MacSnapshot.kt",
       "symbol": "file-scope",
       "sourceFingerprint": "9bb2430f44e7d26e264132d5272364bcda6b553e4d9f4b4f2da49e81de19e933",
-      "occurrence": 1,
-      "category": "serialization-plumbing",
-      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
-    },
-    {
-      "path": "kotlin/shared/src/macosMain/kotlin/polski/macos/MacSnapshot.kt",
-      "symbol": "styleBlocksSnapshot",
-      "sourceFingerprint": "824561f61ec63d24adedecb8bfb25dc35c89a2a3abc88bdc982cbb1e86de5b68",
       "occurrence": 1,
       "category": "serialization-plumbing",
       "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
@@ -52335,24 +52131,6 @@
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/SettingsWeb.kt",
       "symbol": "renderSettingsWeb",
-      "sourceFingerprint": "8187656f1a0e133ce90440dc8fb070593fe5e66168bff1cb0c8f57a25afa2a67",
-      "occurrence": 1,
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "ui-localization-chrome",
-          "reason": "Host UI chrome text shown to the user; moves to ui-strings tables (UC-13)."
-        },
-        {
-          "ordinal": 1,
-          "category": "serialization-plumbing",
-          "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
-        }
-      ]
-    },
-    {
-      "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/SettingsWeb.kt",
-      "symbol": "renderSettingsWeb",
       "sourceFingerprint": "3ef1f70470a6f81e09324f8ada4dedbd41f29aa00e2c2a1db244c4cc893176e6",
       "occurrence": 1,
       "parts": [
@@ -53457,6 +53235,422 @@
       "occurrence": 1,
       "category": "serialization-plumbing",
       "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosSnapshot.kt",
+      "symbol": "snapshot",
+      "sourceFingerprint": "6a59e3f8eace2af6eca15176b72b2c45eca59b338e58c6ef17727e51ddab12d4",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosSnapshot.kt",
+      "symbol": "styleBlocksSnapshot",
+      "sourceFingerprint": "7f4a33e4c9d182fd2d1f370617b523cc14ddf4607e28eefb1f455a34bc7706b9",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/TrainingWebApp.kt",
+      "symbol": "TrainingDomRenderer.renderTraining",
+      "sourceFingerprint": "648f5e30ba68fd222bc07c33d6da28aeff4d8060ad2f942284b7928e74d46e34",
+      "occurrence": 1,
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "serialization-plumbing",
+          "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+        },
+        {
+          "ordinal": 1,
+          "category": "serialization-plumbing",
+          "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidTrainingScreen.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "226bb34fcafc130b24b677e0274429da7843cd35b4f8edfcfe04b531fb8fae89",
+      "occurrence": 1,
+      "category": "ui-localization-chrome",
+      "reason": "Host UI chrome text shown to the user; moves to ui-strings tables (UC-13)."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/model/Grammar.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "1f78e56f451fd69cadda16381e2a3895d4d6ea30b54b2ca682700495283381e9",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/model/Grammar.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "d0f11db1e9ddb7c39015c4cfc252e790398e2d56e47c3d1dee4ecae560072794",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/model/Grammar.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "2d63bdbb312f614d51617bfd34e9a4313a0ee8adcab88a79e7dbe80feb2aad16",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/model/Grammar.kt",
+      "symbol": "CaseFeature",
+      "sourceFingerprint": "ab443daeba43d60fe8f547685bd78e78abbbee2959b94296bafa95fda16101e7",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/model/Grammar.kt",
+      "symbol": "NumberFeature",
+      "sourceFingerprint": "4d531885e791e523b507281742afd9a44337e83600a9158214bbe20cc3808683",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/model/Grammar.kt",
+      "symbol": "GenderFeature",
+      "sourceFingerprint": "f3de1c93894680cc1be54b111a689d0c1e953554a767b9c78eae75c3ffa9dc74",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/model/Grammar.kt",
+      "symbol": "PersonFeature",
+      "sourceFingerprint": "bb89636925ea65166c095bbdbaa119ec2821cdf4ced1acf7cf3f6b211fc40ad5",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/model/Grammar.kt",
+      "symbol": "TenseFeature",
+      "sourceFingerprint": "4f68a1ea34b6c0073dc56dde5fc5e2073530529a4b4d83ae07c5bc1df7c07a65",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "56a48cdbabaa013be6fa03235efe19c97b46f9c3080872e00cc807a0f718710a",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "39fd0487a1dd0c18b0850d5771b7162ef78412aa55a4050ce46a01af96790fe3",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "b764f2878e33a2fe2bb187ea7d809bc9f48a3802de061e92c6aadc6353000d03",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "fccf1d12d9f3503cdb7271dfcc594466cd3b27e6817775fcf46de8aba379d6a3",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "c277df6d6fcca88c0114123b68564c4594d9fbfb3b43468f6768eead2c603253",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
+      "symbol": "StyleId.RuleFirst",
+      "sourceFingerprint": "013ff13c1058c78fd086540a2754ff2b0947cc20ba84e3b172eedc9d0631ecc2",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
+      "symbol": "StyleId.SituationFirst",
+      "sourceFingerprint": "6def0968c6ce7a3b922c984511daa91749f13bc45bae7a6e90410bc49832f65c",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
+      "symbol": "StyleId.NativeContrast",
+      "sourceFingerprint": "338df2c739a58797457bcb91ac37de7a120d9e026ccfbaa089512b9de1b8dea3",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
+      "symbol": "StyleId.MinimalTheory",
+      "sourceFingerprint": "8a00611a90c931f32080d20156ae60637f628d71f8ebe3d7b87bb61c25dd1f19",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "db5466c14947c9742d1e2947b5441d040e0057df04c418d6e6718f6913e5a960",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "de4cf3ebcce9e6d2e6798b39d975cabd2f524e3f9a102d91f7f98ad1d93d8404",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "597a4d67beba4e07817b8b15556dbd289d3a5a2105d68eb5f8b4f38dfb4969bd",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "8a0960ae991fcfc42908be13e2a501b3b0cc39d0cd3180731adf7e2f2222cad1",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "eb6a5a703ccccf7905f704c97b257b7985a0a6b213cfd358291d27f2c07b6e33",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "68052bae5224967dd501ec376f8f8d7eb812d7daf0df07a2bf99c986ccebd9e9",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "5274a3827df1805b3aafca516de7f6fdd3d81f548d8476c1efc88cc3d9e3fd38",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
+      "symbol": "String",
+      "sourceFingerprint": "918a1bf49dd0057339724c2049d891c1b2de8c9a12928c489fae4d4ac0c844f7",
+      "occurrence": 1,
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "serialization-plumbing",
+          "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+        },
+        {
+          "ordinal": 1,
+          "category": "serialization-plumbing",
+          "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
+      "symbol": "is",
+      "sourceFingerprint": "8298e2bc59d1ca52f41ac532e4adc3858e87ecc1a527df9ec8c8e369859f3d61",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "bc3282bae5040027a3f5bc1f39c1a2c9ae22aa9564500dcc0732bafb7f62b710",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "ed3b3dd593325ceb8547b89453d10971798661379688b597c61c1190340ebffe",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
+      "symbol": "JsonObject.id",
+      "sourceFingerprint": "265a0b4d818277f0c9bbe0a520976ebae4cd39d8cc48d02bbadfd141812c73f4",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/StyleRecipe.kt",
+      "symbol": "JsonObject",
+      "sourceFingerprint": "05efbfb3a17e0a9ed5a6f671e66c225aeb44f33b62e38c1d4b291073dacdbbf5",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosPreferencesSession.kt",
+      "symbol": "currentSnapshot",
+      "sourceFingerprint": "8ec37d67dd42019ca801a65eea1641352158769b11ff5b623932e139c2bd1753",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosPreferencesSession.kt",
+      "symbol": "currentSnapshot",
+      "sourceFingerprint": "879069f85fdec8e220c1d49fb8af80af496005b50629196ece286aa1b1aad431",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosPreferencesSession.kt",
+      "symbol": "currentSnapshot",
+      "sourceFingerprint": "7d640e4e737ef4db1a1d2fba7de684e38271e7b141d58643772d0eaf15fe4086",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosPreferencesSession.kt",
+      "symbol": "currentSnapshot",
+      "sourceFingerprint": "7bfe0b05f21c7901213fb9b9ebaa7e3b4d6a71acfcc2c45c311cc43316bcf929",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosPreferencesSession.kt",
+      "symbol": "set",
+      "sourceFingerprint": "4aef1b72ae8cb0d86f39ef5078c7515009c1a231892cb82a87ae28ddb92d1a2e",
+      "occurrence": 1,
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "serialization-plumbing",
+          "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+        },
+        {
+          "ordinal": 1,
+          "category": "ui-localization-chrome",
+          "reason": "Host UI chrome text shown to the user; moves to ui-strings tables (UC-13)."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosSession.kt",
+      "symbol": "IosSession.dispatch",
+      "sourceFingerprint": "6ff94e4ea0c0956fdc288e3f4da5adf94492a8cb9c886a0ac27050eae1ed41e0",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosSession.kt",
+      "symbol": "IosSession",
+      "sourceFingerprint": "baaa345cb0b9dd9a2e5ede1669c060ed7a9194e974dc2d919832a456ec3097b1",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/macosMain/kotlin/polski/macos/MacPreferencesSession.kt",
+      "symbol": "styleCatalogJson",
+      "sourceFingerprint": "879069f85fdec8e220c1d49fb8af80af496005b50629196ece286aa1b1aad431",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/macosMain/kotlin/polski/macos/MacSession.kt",
+      "symbol": "MacSession.dispatch",
+      "sourceFingerprint": "2595e376ab36aebed94ef119b61b6dd151d1f14987390d5253f31d2abafd250b",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/macosMain/kotlin/polski/macos/MacSession.kt",
+      "symbol": "MacSession.dispatch",
+      "sourceFingerprint": "f10ca468fa72ec148594de931ea70070d77a5ed5afaf7fea154b37fcd84ef6b9",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/macosMain/kotlin/polski/macos/MacSnapshot.kt",
+      "symbol": "snapshot",
+      "sourceFingerprint": "6a59e3f8eace2af6eca15176b72b2c45eca59b338e58c6ef17727e51ddab12d4",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/macosMain/kotlin/polski/macos/MacSnapshot.kt",
+      "symbol": "styleBlocksSnapshot",
+      "sourceFingerprint": "7f4a33e4c9d182fd2d1f370617b523cc14ddf4607e28eefb1f455a34bc7706b9",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/SettingsWeb.kt",
+      "symbol": "renderSettingsWeb",
+      "sourceFingerprint": "f2767a9b0bb765b2d8b813749c9200233dcb4a06d5b75d938597d2d7f52cf8a3",
+      "occurrence": 1,
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "ui-localization-chrome",
+          "reason": "Host UI chrome text shown to the user; moves to ui-strings tables (UC-13)."
+        },
+        {
+          "ordinal": 1,
+          "category": "serialization-plumbing",
+          "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+        }
+      ]
     }
   ]
 }

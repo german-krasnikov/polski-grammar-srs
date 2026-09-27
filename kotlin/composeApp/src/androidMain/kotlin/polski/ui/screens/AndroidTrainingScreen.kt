@@ -49,6 +49,7 @@ import polski.presentation.TrainingMode
 import polski.presentation.ChangeSide
 import polski.presentation.StyleComposer
 import polski.presentation.StyleId
+import polski.presentation.builtInStyleIds
 import polski.presentation.StylePhase
 import polski.presentation.StyleRegistry
 import polski.presentation.ContrastPair
@@ -162,9 +163,9 @@ internal fun AndroidTrainingScreen(
                     // S1: quick switch at the training card's existing method-toggle location, now
                     // all 4 styles — dispatching SetStyle never creates a review or clears the
                     // typed draft (TrainingStore.SetStyle is a plain state copy, see AppAction.kt).
-                    AndroidChoiceMenu("Подача", state.styleId.name,
-                        StyleId.entries.map { it.name to styleLabel(StyleRegistry.recipes.getValue(it)) }) {
-                        dispatch(AppAction.SetStyle(StyleId.valueOf(it)))
+                    AndroidChoiceMenu("Подача", state.styleId.value,
+                        builtInStyleIds.map { it.value to styleLabel(StyleRegistry.recipes.getValue(it)) }) {
+                        dispatch(AppAction.SetStyle(StyleId(it)))
                     }
                     if (state.phase == CardPhase.Question && state.introPending) {
                         Text("Знакомство с навыком", style = MaterialTheme.typography.titleMedium)
