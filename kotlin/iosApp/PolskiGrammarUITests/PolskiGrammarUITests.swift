@@ -255,13 +255,37 @@ final class PolskiGrammarUITests: XCTestCase {
     /// that edge. A drag between two explicit offsets inside the element's own frame doesn't hit
     /// that path — reproduced failing with `swipeLeft()` there, passing with this, before writing it.
     private func rateViaSwipe(_ app: XCUIApplication, good: Bool) {
-        let zone = app.descendants(matching: .any)["ratingSwipeArea"].firstMatch
-        // 10, not 7: the swipe zone sits below a shorter answer panel now that D3 dropped the two
-        // rating buttons, which shifts how far a caller's own preceding scrolls (e.g. the reference
-        // table dance in `testFirstMethodIntroductionKeepsReferenceAnswerHiddenUntilContinue`) leave
-        // it — reproduced needing more than 7 there, passing reliably with the same margin every
-        // other call site already uses for a "further" target.
-        for _ in 0..<10 {
+        // `staticTexts[...]` (its own concrete type — confirmed in a debug snapshot), not
+        // `descendants(matching: .any)[...]`: on a reference-table-heavy screen (e.g. the reference
+        // table dance in `testFirstMethodIntroductionKeepsReferenceAnswerHiddenUntilContinue`) the
+        // accessibility tree is huge (the case-declension table alone is 35+ elements), and the
+        // broad `.any` descendant query over that whole tree reproduced unreliable there — `exists`
+        // sometimes staying false for many seconds with no scrolling able to change that, on the
+        // very same screen a narrower, cheaper query resolves quickly and consistently for.
+        let zone = app.staticTexts["ratingSwipeArea"].firstMatch
+        // The revealed panel can land mounted but scrolled *just past the top edge* right after
+        // `reveal.tap()` — a debug snapshot showed a small negative-Y frame there — instead of the
+        // usual case every other call site's plain forward `swipeUp()` hunt already handles, where
+        // it sits below the fold. A full-screen `swipeUp()` is the wrong tool to find out which: it
+        // moves *away* from a that-close-above zone by far more than its own frame, unmounting it
+        // from the lazy Form before this ever gets a reading — reproduced: once that happens, the
+        // zone stops existing at all for the rest of a one-directional hunt, no matter the budget,
+        // because the reversal below only ever triggers *after* first seeing it exist. A few small,
+        // coordinate-based nudges (~15% of the screen — far short of its own frame height) in
+        // alternating directions probe both sides first without that risk; once one direction finds
+        // it, or neither does (the common case — it is below the fold and just needs the usual
+        // longer hunt), the plain forward `swipeUp()` every other call site already uses takes over.
+        func nudge(down: Bool) {
+            let (a, b): (CGFloat, CGFloat) = down ? (0.35, 0.65) : (0.65, 0.35)
+            let start = app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: a))
+            let end = app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: b))
+            start.press(forDuration: 0.02, thenDragTo: end)
+        }
+        for i in 0..<6 {
+            if zone.exists && zone.isHittable { break }
+            nudge(down: i % 2 == 0)
+        }
+        for _ in 0..<15 {
             if zone.exists && zone.isHittable { break }
             app.swipeUp()
         }
@@ -725,7 +749,17 @@ final class PolskiGrammarUITests: XCTestCase {
             app.swipeUp()
         }
         XCTAssertTrue(app.staticTexts["on — он"].waitForExistence(timeout: 5))
-        XCTAssertTrue(app.descendants(matching: .any)["Было: robić; Стало: robił"].firstMatch.waitForExistence(timeout: 5))
+        // "on — он" and its own change row can land on opposite sides of a lazy Form's mounted
+        // window: reproduced on iPad Pro 11 — the label was already on screen but the row below it
+        // (this list's own layout, unrelated to the earlier gender picker) was not yet mounted, so a
+        // plain wait (no scroll) timed out; a bounded scroll-until-exists, like every other lookup
+        // in this test, reaches it on both iPhone and iPad.
+        let robilChange = app.descendants(matching: .any)["Было: robić; Стало: robił"].firstMatch
+        for _ in 0..<6 {
+            if robilChange.exists { break }
+            app.swipeUp()
+        }
+        XCTAssertTrue(robilChange.waitForExistence(timeout: 5))
     }
 
     func testNativeCasesShowCompactNoteAndOrderedComparisonNouns() {
