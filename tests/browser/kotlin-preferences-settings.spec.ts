@@ -101,11 +101,14 @@ test('style picker offers all 4 recipes with a description and no native-contras
   await expect(picker).toHaveValue('RuleFirst');
   const optionValues = await picker.locator('option').evaluateAll(options => options.map(option => (option as HTMLOptionElement).value));
   expect(optionValues).toEqual(['RuleFirst', 'SituationFirst', 'NativeContrast', 'MinimalTheory']);
-  await expect(page.locator('.settings-style-description')).toHaveText('Формула и таблица окончаний, затем разбор изменений и правило.');
+  // D3 (StylesIntegrationTest-2026-09-27.md): courses/styles/*.json is now the single source of
+  // truth for these descriptions (kotlin/shared/build.gradle.kts inlines them), so this must match
+  // rule-first.json/native-contrast.json byte-for-byte, not a Kotlin/web-owned fallback string.
+  await expect(page.locator('.settings-style-description')).toHaveText('Сначала схема и таблица окончаний, затем пример.');
   await expect(page.locator('.settings-style-fallback-hint')).toHaveCount(0);
   await picker.selectOption('NativeContrast');
   await expect(page.locator('.settings-style-fallback-hint')).toHaveCount(0);
-  await expect(page.locator('.settings-style-description')).toHaveText('По-родному так → по-изучаемому так, где сходится и где отличается.');
+  await expect(page.locator('.settings-style-description')).toHaveText('По-родному так → по-изучаемому так: где совпадает, где отличается.');
   expect(await page.evaluate(key => JSON.parse(localStorage.getItem(key) ?? '{}').styleId, preferencesKey)).toBe('NativeContrast');
   await page.reload();
   await expect(picker).toHaveValue('NativeContrast');

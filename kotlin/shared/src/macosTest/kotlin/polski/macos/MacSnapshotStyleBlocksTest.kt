@@ -67,7 +67,7 @@ class MacSnapshotStyleBlocksTest {
         assertNotEquals(ruleFirstBack, situationFirstBack, "rule-first and situation-first must show different back blocks")
         assertNotEquals(ruleFirstBack, minimalTheoryBack, "rule-first and minimal-theory must show different back blocks")
         assertTrue("formula" in ruleFirstBack && "rule" in ruleFirstBack && "contrast" in ruleFirstBack)
-        assertEquals(listOf("changes"), situationFirstBack, "situation-first has no styleContent yet, so only the exercise-data Changes block shows")
+        assertEquals(listOf("changes", "rule"), situationFirstBack, "situation-first.json's back is [changes, rule] — Rule (from skill.theory) always follows Changes")
         assertTrue("whyOnDemand" in minimalTheoryBack)
         // Changes is exercise data, not style data (ST-05): every style still carries it.
         assertTrue("changes" in ruleFirstBack && "changes" in minimalTheoryBack)
@@ -81,7 +81,7 @@ class MacSnapshotStyleBlocksTest {
         session.dispatch("styleId", "SituationFirst")
         val situationFirstFront = blockKinds(session, "frontBlocks")
 
-        assertEquals(listOf("formula", "table"), ruleFirstFront)
+        assertEquals(listOf("table", "formula"), ruleFirstFront, "rule-first.json's front order is [table, formula]")
         assertEquals(listOf("scene"), situationFirstFront)
     }
 

@@ -82,3 +82,17 @@ test('switching style changes which blocks the card shows, on the front and afte
   await expect(back.locator('.block-why-content')).toHaveClass(/expanded/);
   await expect(back.locator('.block-why-content')).not.toHaveAttribute('inert', '');
 });
+
+// D1/D3 (StylesIntegrationTest-2026-09-27.md): situation-first.json's own `blocks.back` is
+// [changes, rule] — courses/styles/*.json is now the single source of truth StyleRegistry loads
+// (kotlin/shared/build.gradle.kts), so the rule must render after reveal, not just the exercise's
+// Changes diff (the pre-fix hand-written registry back was [Changes] only, dropping Rule).
+test('situation-first back shows the rule alongside the changes after reveal', async ({ page }) => {
+  const method = page.getByRole('combobox', { name: 'Подача объяснений' });
+  await method.selectOption('SituationFirst');
+  await page.getByRole('button', { name: 'Показать ответ' }).click();
+  const back = page.locator('.card-back');
+  await expect(back.locator('.change-list')).toBeVisible();
+  await expect(back.locator('.rule-focus')).toBeVisible();
+  await expect(back.locator('.rule-focus > p').first()).not.toBeEmpty();
+});

@@ -5,10 +5,16 @@ plugins {
 
 val courseFile = layout.projectDirectory.file("../../courses/pl-ru/course.json")
 val frequencyFile = layout.projectDirectory.file("../../courses/pl-ru/frequency-top1000.json")
+// UC-10/StylesBlueprint.md §2/§4: every JSON file under here is a presentation-style recipe,
+// inlined below the same way course.json is. Listing files by directory scan (not a fixed
+// filename list) means a new recipe file needs no Gradle/Kotlin edit to reach StyleRegistry —
+// only the JSON file.
+val stylesDirectory = layout.projectDirectory.dir("../../courses/styles")
 val generatedCourseDirectory = layout.buildDirectory.dir("generated/course/kotlin")
 val generateCoursePackSource by tasks.registering {
     inputs.file(courseFile)
     inputs.file(frequencyFile)
+    inputs.dir(stylesDirectory)
     outputs.dir(generatedCourseDirectory)
     doLast {
         fun literalChunks(source: String): List<String> {
@@ -32,12 +38,18 @@ val generateCoursePackSource by tasks.registering {
         }
         val chunks = literalChunks(courseFile.asFile.readText())
         val frequencyChunks = literalChunks(frequencyFile.asFile.readText())
+        val styleFiles = (stylesDirectory.asFile.listFiles { file -> file.extension == "json" } ?: emptyArray())
+            .sortedBy { it.name }
+        val stylesJson = "[" + styleFiles.joinToString(",") { it.readText() } + "]"
+        val styleChunks = literalChunks(stylesJson)
         val target = generatedCourseDirectory.get().file("polski/data/GeneratedCourseJson.kt").asFile
         target.parentFile.mkdirs()
         target.writeText("package polski.data\n\ninternal val generatedCourseJson = buildString {\n" +
             chunks.joinToString("\n") { "    append(\"$it\")" } + "\n}\n" +
             "internal val generatedFrequencyJson = buildString {\n" +
-            frequencyChunks.joinToString("\n") { "    append(\"$it\")" } + "\n}\n")
+            frequencyChunks.joinToString("\n") { "    append(\"$it\")" } + "\n}\n" +
+            "internal val generatedStylesJson = buildString {\n" +
+            styleChunks.joinToString("\n") { "    append(\"$it\")" } + "\n}\n")
     }
 }
 kotlin {

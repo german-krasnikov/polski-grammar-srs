@@ -1,5 +1,12 @@
 package polski.presentation
 
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.jsonArray
+import kotlinx.serialization.json.jsonObject
+import kotlinx.serialization.json.jsonPrimitive
+import polski.data.generatedStylesJson
+
 /** A presentation preference, not a diagnosis; every style shares the same exercises, FSRS ratings and skill IDs. */
 enum class StyleId { RuleFirst, SituationFirst, NativeContrast, MinimalTheory }
 
@@ -26,50 +33,67 @@ data class StyleRecipe(
 )
 
 /**
- * The 4 built-in recipes (UC-10). Data, not language-specific logic: no target/native language
- * is named here. Held as Kotlin literals for now — moving them to JSON files under
- * `courses/styles` is a mechanical, CONTENT-owned follow-up (UC-12), not an architecture change.
+ * The `courses/styles` recipe files' kebab-case `id`/`fallback` wire value for each [StyleId].
+ * Bounded to today's 4 named pedagogical styles (ADR-11): a recipe object whose `id` isn't one of
+ * these is skipped by [parseStyleRecipesJson], never a crash — a genuinely new style still needs
+ * its own [StyleId] entry, but a stray or in-progress recipe file next to the real 4 never breaks
+ * the build.
+ */
+private val styleIdByWireId: Map<String, StyleId> = mapOf(
+    "rule-first" to StyleId.RuleFirst,
+    "situation-first" to StyleId.SituationFirst,
+    "native-contrast" to StyleId.NativeContrast,
+    "minimal-theory" to StyleId.MinimalTheory,
+)
+
+/** [BlockKind]'s own fixed lowercase wire name (see [BlockKind]'s doc), inverted for parsing. */
+private val blockKindByWireName: Map<String, BlockKind> =
+    BlockKind.entries.associateBy { it.name.replaceFirstChar(Char::lowercaseChar) }
+
+/**
+ * The built-in recipes (UC-10), loaded from the `courses/styles` recipe files at build time:
+ * `:shared`'s `generateCoursePackSource` task inlines every JSON file in that directory into
+ * [generatedStylesJson] the same way `course.json` becomes `generatedCourseJson`
+ * (`kotlin/shared/build.gradle.kts`). Those files are the single source of truth — editing or
+ * adding a recipe there needs no Kotlin change to reach [recipes] (StylesBlueprint.md §2/§4).
  */
 object StyleRegistry {
     val recipes: Map<StyleId, StyleRecipe> by lazy {
-        listOf(
-            StyleRecipe(
-                id = StyleId.RuleFirst,
-                blocks = mapOf(
-                    StylePhase.Front to listOf(BlockKind.Formula, BlockKind.Table),
-                    StylePhase.Back to listOf(BlockKind.Changes, BlockKind.Formula, BlockKind.Rule, BlockKind.Contrast),
-                ),
-            ),
-            StyleRecipe(
-                id = StyleId.SituationFirst,
-                blocks = mapOf(
-                    StylePhase.Front to listOf(BlockKind.Scene),
-                    StylePhase.Back to listOf(BlockKind.Changes),
-                ),
-            ),
-            StyleRecipe(
-                id = StyleId.NativeContrast,
-                blocks = mapOf(
-                    StylePhase.Front to listOf(BlockKind.NativeParallel),
-                    StylePhase.Back to listOf(BlockKind.Changes, BlockKind.NativeParallel, BlockKind.Contrast),
-                ),
-                requires = setOf(BlockKind.NativeParallel),
-                fallback = StyleId.RuleFirst,
-            ),
-            StyleRecipe(
-                id = StyleId.MinimalTheory,
-                blocks = mapOf(
-                    StylePhase.Front to listOf(BlockKind.Examples),
-                    StylePhase.Back to listOf(BlockKind.Changes, BlockKind.WhyOnDemand),
-                ),
-            ),
-        ).associateBy { it.id }.also { registry ->
-            registry.values.forEach { recipe ->
-                val fallback = recipe.fallback?.let(registry::getValue)
-                require(fallback == null || fallback.requires.isEmpty()) {
-                    "Fallback ${fallback?.id} for ${recipe.id} must not declare its own requires (no chains)"
-                }
-            }
+        parseStyleRecipesJson(generatedStylesJson).associateBy { it.id }.also(::requireNoFallbackChains)
+    }
+}
+
+/** Never throws: a recipe object naming an `id` or block kind outside today's fixed wire
+ *  vocabularies ([styleIdByWireId]/[blockKindByWireName]) is skipped, not a crash. */
+internal fun parseStyleRecipesJson(json: String): List<StyleRecipe> =
+    Json.parseToJsonElement(json).jsonArray.mapNotNull { it.jsonObject.toStyleRecipeOrNull() }
+
+private fun JsonObject.toStyleRecipeOrNull(): StyleRecipe? {
+    val id = styleIdByWireId[getValue("id").jsonPrimitive.content] ?: return null
+    val blocks = getValue("blocks").jsonObject
+    return StyleRecipe(
+        id = id,
+        label = getValue("label").jsonObject.toStringMap(),
+        description = getValue("description").jsonObject.toStringMap(),
+        blocks = mapOf(
+            StylePhase.Front to blocks.blockKindList("front"),
+            StylePhase.Back to blocks.blockKindList("back"),
+        ),
+        requires = get("requires")?.jsonArray?.mapNotNull { blockKindByWireName[it.jsonPrimitive.content] }?.toSet() ?: emptySet(),
+        fallback = get("fallback")?.jsonPrimitive?.content?.let(styleIdByWireId::get),
+    )
+}
+
+private fun JsonObject.blockKindList(key: String): List<BlockKind> =
+    getValue(key).jsonArray.mapNotNull { blockKindByWireName[it.jsonPrimitive.content] }
+
+private fun JsonObject.toStringMap(): Map<String, String> = mapValues { (_, value) -> value.jsonPrimitive.content }
+
+private fun requireNoFallbackChains(registry: Map<StyleId, StyleRecipe>) {
+    registry.values.forEach { recipe ->
+        val fallback = recipe.fallback?.let(registry::get)
+        require(fallback == null || fallback.requires.isEmpty()) {
+            "Fallback ${fallback?.id} for ${recipe.id} must not declare its own requires (no chains)"
         }
     }
 }
