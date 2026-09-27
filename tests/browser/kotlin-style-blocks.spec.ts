@@ -55,7 +55,10 @@ test('switching style changes which blocks the card shows, on the front and afte
   const back = page.locator('.card-back');
   // Changes is an exercise invariant (ST-05) — present on Back for every style.
   await expect(back.locator('.change-list')).toBeVisible();
-  await expect(back.locator('.rule-focus > strong')).toBeVisible();
+  // Correction (E10/C3, abbe355): rule-first.json's `back` array is ["rule","changes","contrast"]
+  // — Formula (the `.rule-focus > strong` this used to assert) is a Front-only block now, so Back
+  // never repeats it (contract §6 "Шум": one block kind rendered once). The contrast pair below is
+  // Rule's own Contrast block, not Formula's.
   await expect(back.locator('.rule-contrast .form-contrast')).toBeVisible();
   await expect(back.locator('.block-why')).toHaveCount(0);
   // Regression (post-df8ade7 correction): the rule-focus box must still show BOTH the skill's
