@@ -1,0 +1,384 @@
+{
+  "schemaVersion": 1,
+  "$comment": "UniversalCorePlan.md §3.1/§5.1/§12 UC-07: the wiring ExerciseGenerator reads instead of ExerciseFactory.kt's per-skill `when(skillId)` branches. Every string outside a construction/feature/case identifier is an opaque exerciseCopy/exercisePattern KEY (polski.data), resolved through a port at runtime — no Polish or Russian text is ever written here.",
+  "skills": {
+    "case.acc.n": {
+      "skillId": "case.acc.n",
+      "source": { "type": "prefixed", "spec": { "construction": "core.argument.case-role", "bundle": { "Number": "sg", "Case": "nom" } }, "prefixCase": "nom" },
+      "expected": { "type": "pattern", "key": "seenAcc", "values": { "acc": { "type": "phrase", "spec": { "construction": "core.argument.case-role", "bundle": { "Number": "sg", "Case": "acc" } } } } },
+      "promptKey": "accPrompt",
+      "explanationKey": "accExplanation",
+      "changes": [
+        {
+          "from": { "type": "phrase", "spec": { "construction": "core.argument.case-role", "bundle": { "Number": "sg", "Case": "nom" } } },
+          "to": { "type": "phrase", "spec": { "construction": "core.argument.case-role", "bundle": { "Number": "sg", "Case": "acc" } } },
+          "reason": { "type": "classified", "rules": [
+            { "whenClass": "unchanged", "key": "accReasonUnchanged" },
+            { "whenClass": "personalA", "key": "accReasonPersonalA" },
+            { "whenClass": "default", "key": "accReasonChanged" }
+          ] }
+        }
+      ],
+      "tags": ["acc"],
+      "includeNounGenderTag": true
+    },
+    "case.acc.f": {
+      "skillId": "case.acc.f",
+      "source": { "type": "prefixed", "spec": { "construction": "core.argument.case-role", "bundle": { "Number": "sg", "Case": "nom" } }, "prefixCase": "nom" },
+      "expected": { "type": "pattern", "key": "seenAcc", "values": { "acc": { "type": "phrase", "spec": { "construction": "core.argument.case-role", "bundle": { "Number": "sg", "Case": "acc" } } } } },
+      "promptKey": "accPrompt",
+      "explanationKey": "accExplanation",
+      "changes": [
+        {
+          "from": { "type": "phrase", "spec": { "construction": "core.argument.case-role", "bundle": { "Number": "sg", "Case": "nom" } } },
+          "to": { "type": "phrase", "spec": { "construction": "core.argument.case-role", "bundle": { "Number": "sg", "Case": "acc" } } },
+          "reason": { "type": "classified", "rules": [
+            { "whenClass": "unchanged", "key": "accReasonUnchanged" },
+            { "whenClass": "personalA", "key": "accReasonPersonalA" },
+            { "whenClass": "default", "key": "accReasonChanged" }
+          ] }
+        }
+      ],
+      "tags": ["acc"],
+      "includeNounGenderTag": true
+    },
+    "case.acc.m": {
+      "skillId": "case.acc.m",
+      "source": { "type": "prefixed", "spec": { "construction": "core.argument.case-role", "bundle": { "Number": "sg", "Case": "nom" } }, "prefixCase": "nom" },
+      "expected": { "type": "pattern", "key": "seenAcc", "values": { "acc": { "type": "phrase", "spec": { "construction": "core.argument.case-role", "bundle": { "Number": "sg", "Case": "acc" } } } } },
+      "promptKey": "accPrompt",
+      "explanationKey": "accExplanation",
+      "changes": [
+        {
+          "from": { "type": "phrase", "spec": { "construction": "core.argument.case-role", "bundle": { "Number": "sg", "Case": "nom" } } },
+          "to": { "type": "phrase", "spec": { "construction": "core.argument.case-role", "bundle": { "Number": "sg", "Case": "acc" } } },
+          "reason": { "type": "classified", "rules": [
+            { "whenClass": "unchanged", "key": "accReasonUnchanged" },
+            { "whenClass": "personalA", "key": "accReasonPersonalA" },
+            { "whenClass": "default", "key": "accReasonChanged" }
+          ] }
+        }
+      ],
+      "tags": ["acc"],
+      "includeNounGenderTag": true
+    },
+
+    "case.gen.neg": {
+      "skillId": "case.gen.neg",
+      "source": { "type": "pattern", "key": "seenAcc", "values": { "acc": { "type": "phrase", "spec": { "construction": "core.argument.case-role", "bundle": { "Number": "sg", "Case": "acc" } } } } },
+      "expected": { "type": "pattern", "key": "seenGenNeg", "values": { "gen": { "type": "phrase", "spec": { "construction": "core.sentence.polarity", "bundle": { "Number": "sg", "Polarity": "neg" } } } } },
+      "promptKey": "genNegPrompt",
+      "explanationKey": "genNegExplanation",
+      "changes": [
+        { "from": { "type": "literal", "value": "" }, "to": { "type": "copy", "key": "negationParticle" }, "reason": { "type": "fixed", "key": "negationInsertionReason" } },
+        {
+          "from": { "type": "phrase", "spec": { "construction": "core.argument.case-role", "bundle": { "Number": "sg", "Case": "acc" } } },
+          "to": { "type": "phrase", "spec": { "construction": "core.sentence.polarity", "bundle": { "Number": "sg", "Polarity": "neg" } } },
+          "reason": { "type": "fixed", "key": "genNegReason" }
+        }
+      ],
+      "tags": ["gen", "negation"]
+    },
+
+    "case.inst": {
+      "skillId": "case.inst",
+      "source": { "type": "pattern", "key": "seenAcc", "values": { "acc": { "type": "phrase", "spec": { "construction": "core.argument.case-role", "bundle": { "Number": "sg", "Case": "acc" } } } } },
+      "expected": { "type": "pattern", "key": "caseDrill", "values": {
+        "start": { "type": "copy", "key": "instStart" },
+        "target": { "type": "phrase", "spec": { "construction": "core.argument.case-role", "bundle": { "Number": "sg", "Case": "inst" } } }
+      } },
+      "promptKey": "instPrompt",
+      "explanationKey": "caseDrillExplanation",
+      "changes": [
+        {
+          "from": { "type": "phrase", "spec": { "construction": "core.argument.case-role", "bundle": { "Number": "sg", "Case": "acc" } } },
+          "to": { "type": "phrase", "spec": { "construction": "core.argument.case-role", "bundle": { "Number": "sg", "Case": "inst" } } },
+          "reason": { "type": "fixed", "key": "instReason" }
+        }
+      ],
+      "tags": ["inst"]
+    },
+    "case.loc": {
+      "skillId": "case.loc",
+      "source": { "type": "pattern", "key": "seenAcc", "values": { "acc": { "type": "phrase", "spec": { "construction": "core.argument.case-role", "bundle": { "Number": "sg", "Case": "acc" } } } } },
+      "expected": { "type": "pattern", "key": "caseDrill", "values": {
+        "start": { "type": "copy", "key": "locStart" },
+        "target": { "type": "phrase", "spec": { "construction": "core.argument.case-role", "bundle": { "Number": "sg", "Case": "loc" } } }
+      } },
+      "promptKey": "locPrompt",
+      "explanationKey": "caseDrillExplanation",
+      "changes": [
+        {
+          "from": { "type": "phrase", "spec": { "construction": "core.argument.case-role", "bundle": { "Number": "sg", "Case": "acc" } } },
+          "to": { "type": "phrase", "spec": { "construction": "core.argument.case-role", "bundle": { "Number": "sg", "Case": "loc" } } },
+          "reason": { "type": "fixed", "key": "locReason" }
+        }
+      ],
+      "tags": ["loc"]
+    },
+    "case.dat": {
+      "skillId": "case.dat",
+      "source": { "type": "pattern", "key": "seenAcc", "values": { "acc": { "type": "phrase", "spec": { "construction": "core.argument.case-role", "bundle": { "Number": "sg", "Case": "acc" } } } } },
+      "expected": { "type": "pattern", "key": "caseDrill", "values": {
+        "start": { "type": "copy", "key": "datStart" },
+        "target": { "type": "phrase", "spec": { "construction": "core.argument.case-role", "bundle": { "Number": "sg", "Case": "dat" } } }
+      } },
+      "promptKey": "datPrompt",
+      "explanationKey": "caseDrillExplanation",
+      "changes": [
+        {
+          "from": { "type": "phrase", "spec": { "construction": "core.argument.case-role", "bundle": { "Number": "sg", "Case": "acc" } } },
+          "to": { "type": "phrase", "spec": { "construction": "core.argument.case-role", "bundle": { "Number": "sg", "Case": "dat" } } },
+          "reason": { "type": "fixed", "key": "datReason" }
+        }
+      ],
+      "tags": ["dat"]
+    },
+
+    "agreement.my": {
+      "skillId": "agreement.my",
+      "source": { "type": "pattern", "key": "seenAcc", "values": { "acc": { "type": "phrase", "spec": { "construction": "core.argument.case-role", "bundle": { "Number": "sg", "Case": "acc" }, "ownerLexeme": "my" } } } },
+      "expected": { "type": "pattern", "key": "seenAcc", "values": { "acc": { "type": "phrase", "spec": { "construction": "core.agreement.possessive", "bundle": { "Number": "sg", "Case": "acc" } } } } },
+      "explanationKey": "ownerExplanation",
+      "changes": [
+        {
+          "from": { "type": "phrase", "spec": { "construction": "core.argument.case-role", "bundle": { "Number": "sg", "Case": "acc" }, "ownerLexeme": "my" } },
+          "to": { "type": "phrase", "spec": { "construction": "core.agreement.possessive", "bundle": { "Number": "sg", "Case": "acc" } } },
+          "reason": { "type": "fixed", "key": "ownerReason" }
+        }
+      ],
+      "tags": ["agreement", "acc"],
+      "ownerDraw": {
+        "pool": ["your", "his", "her", "our", "yourPlural", "their"],
+        "labelKeys": { "your": "ownerYour", "his": "ownerHis", "her": "ownerHer", "our": "ownerOur", "yourPlural": "ownerYourPlural", "their": "ownerTheir" },
+        "promptPrefixKey": "ownerPromptPrefix",
+        "promptSuffixKey": "ownerPromptSuffix"
+      }
+    },
+
+    "verb.present": {
+      "skillId": "verb.present",
+      "source": { "type": "pattern", "key": "verbSentence", "values": {
+        "nom": { "type": "capitalized", "inner": { "type": "phrase", "spec": { "construction": "core.argument.case-role", "bundle": { "Number": "sg", "Case": "nom" } } } },
+        "verb": { "type": "phrase", "spec": { "construction": "core.verb.tense", "bundle": { "Tense": "past", "Person": "3", "Number": "sg" } } }
+      } },
+      "expected": { "type": "pattern", "key": "verbSentence", "values": {
+        "nom": { "type": "capitalized", "inner": { "type": "phrase", "spec": { "construction": "core.argument.case-role", "bundle": { "Number": "sg", "Case": "nom" } } } },
+        "verb": { "type": "phrase", "spec": { "construction": "core.verb.tense", "bundle": { "Tense": "present", "Person": "3", "Number": "sg" } } }
+      } },
+      "promptKey": "verbPresentPrompt",
+      "explanationKey": "verbExplanation",
+      "changes": [
+        {
+          "from": { "type": "phrase", "spec": { "construction": "core.verb.tense", "bundle": { "Tense": "past", "Person": "3", "Number": "sg" } } },
+          "to": { "type": "phrase", "spec": { "construction": "core.verb.tense", "bundle": { "Tense": "present", "Person": "3", "Number": "sg" } } },
+          "reason": { "type": "fixed", "key": "verbReason" }
+        }
+      ],
+      "tags": ["verb", "present", "nom"]
+    },
+    "verb.past": {
+      "skillId": "verb.past",
+      "source": { "type": "pattern", "key": "verbSentence", "values": {
+        "nom": { "type": "capitalized", "inner": { "type": "phrase", "spec": { "construction": "core.argument.case-role", "bundle": { "Number": "sg", "Case": "nom" } } } },
+        "verb": { "type": "phrase", "spec": { "construction": "core.verb.tense", "bundle": { "Tense": "present", "Person": "3", "Number": "sg" } } }
+      } },
+      "expected": { "type": "pattern", "key": "verbSentence", "values": {
+        "nom": { "type": "capitalized", "inner": { "type": "phrase", "spec": { "construction": "core.argument.case-role", "bundle": { "Number": "sg", "Case": "nom" } } } },
+        "verb": { "type": "phrase", "spec": { "construction": "core.verb.tense", "bundle": { "Tense": "past", "Person": "3", "Number": "sg" } } }
+      } },
+      "promptKey": "verbPastPrompt",
+      "explanationKey": "verbExplanation",
+      "changes": [
+        {
+          "from": { "type": "phrase", "spec": { "construction": "core.verb.tense", "bundle": { "Tense": "present", "Person": "3", "Number": "sg" } } },
+          "to": { "type": "phrase", "spec": { "construction": "core.verb.tense", "bundle": { "Tense": "past", "Person": "3", "Number": "sg" } } },
+          "reason": { "type": "fixed", "key": "verbReason" }
+        }
+      ],
+      "tags": ["verb", "past", "nom"]
+    },
+    "verb.future": {
+      "skillId": "verb.future",
+      "source": { "type": "pattern", "key": "verbSentence", "values": {
+        "nom": { "type": "capitalized", "inner": { "type": "phrase", "spec": { "construction": "core.argument.case-role", "bundle": { "Number": "sg", "Case": "nom" } } } },
+        "verb": { "type": "phrase", "spec": { "construction": "core.verb.tense", "bundle": { "Tense": "present", "Person": "3", "Number": "sg" } } }
+      } },
+      "expected": { "type": "pattern", "key": "verbSentence", "values": {
+        "nom": { "type": "capitalized", "inner": { "type": "phrase", "spec": { "construction": "core.argument.case-role", "bundle": { "Number": "sg", "Case": "nom" } } } },
+        "verb": { "type": "phrase", "spec": { "construction": "core.verb.tense", "bundle": { "Tense": "future", "Person": "3", "Number": "sg" } } }
+      } },
+      "promptKey": "verbFuturePrompt",
+      "explanationKey": "verbExplanation",
+      "changes": [
+        {
+          "from": { "type": "phrase", "spec": { "construction": "core.verb.tense", "bundle": { "Tense": "present", "Person": "3", "Number": "sg" } } },
+          "to": { "type": "phrase", "spec": { "construction": "core.verb.tense", "bundle": { "Tense": "future", "Person": "3", "Number": "sg" } } },
+          "reason": { "type": "fixed", "key": "verbReason" }
+        }
+      ],
+      "accepted": [
+        { "type": "pattern", "key": "verbFutureAccepted", "values": {
+          "nom": { "type": "capitalized", "inner": { "type": "phrase", "spec": { "construction": "core.argument.case-role", "bundle": { "Number": "sg", "Case": "nom" } } } },
+          "past": { "type": "phrase", "spec": { "construction": "core.verb.tense", "bundle": { "Tense": "past", "Person": "3", "Number": "sg" } } }
+        } }
+      ],
+      "tags": ["verb", "future", "nom"]
+    },
+
+    "aspect": {
+      "skillId": "aspect",
+      "staticOverride": {
+        "sourceKey": "aspectSource", "promptKey": "aspectPrompt", "expectedKey": "aspectExpected", "explanationKey": "aspectExplanation",
+        "acceptedKeys": ["aspectAccepted"], "changeFromKey": "aspectFrom", "changeToKey": "aspectTo", "changeReasonKey": "aspectReason",
+        "nounId": "book", "adjectiveId": "new", "tags": ["aspect", "past"]
+      }
+    },
+
+    "pronouns": {
+      "skillId": "pronouns",
+      "source": { "type": "pattern", "key": "seenAcc", "values": { "acc": { "type": "phrase", "spec": { "construction": "core.argument.case-role", "bundle": { "Number": "sg", "Case": "acc" } } } } },
+      "expected": { "type": "pattern", "key": "seenAcc", "values": { "acc": { "type": "pronoun", "genderToKey": { "f": "ona", "n": "ono", "default": "on" }, "case": "acc" } } },
+      "promptKey": "pronounPrompt",
+      "explanationKey": "pronounExplanation",
+      "changes": [
+        {
+          "from": { "type": "phrase", "spec": { "construction": "core.argument.case-role", "bundle": { "Number": "sg", "Case": "acc" } } },
+          "to": { "type": "pronoun", "genderToKey": { "f": "ona", "n": "ono", "default": "on" }, "case": "acc" },
+          "reason": { "type": "fixed", "key": "pronounReason" }
+        }
+      ],
+      "tags": ["pronoun", "acc"]
+    },
+
+    "sentence.question": {
+      "skillId": "sentence.question",
+      "source": { "type": "pattern", "key": "questionSource", "values": { "acc": { "type": "phrase", "spec": { "construction": "core.argument.case-role", "bundle": { "Number": "sg", "Case": "acc" } } } } },
+      "expected": { "type": "pattern", "key": "questionExpected", "values": { "acc": { "type": "phrase", "spec": { "construction": "core.argument.case-role", "bundle": { "Number": "sg", "Case": "acc" } } } } },
+      "promptKey": "questionPrompt",
+      "explanationKey": "questionExplanation",
+      "changes": [
+        { "from": { "type": "literal", "value": "" }, "to": { "type": "copy", "key": "questionParticle" }, "reason": { "type": "fixed", "key": "questionReason" } }
+      ],
+      "tags": ["question", "acc"]
+    },
+
+    "sentence.plural": {
+      "skillId": "sentence.plural",
+      "source": { "type": "pattern", "key": "seenAcc", "values": { "acc": { "type": "phrase", "spec": { "construction": "core.argument.case-role", "bundle": { "Number": "sg", "Case": "acc" } } } } },
+      "expected": { "type": "pattern", "key": "seenAcc", "values": { "acc": { "type": "phrase", "spec": { "construction": "core.number", "bundle": { "Number": "pl", "Case": "acc" } } } } },
+      "promptKey": "pluralPrompt",
+      "explanationKey": "pluralExplanation",
+      "changes": [
+        {
+          "from": { "type": "phrase", "spec": { "construction": "core.argument.case-role", "bundle": { "Number": "sg", "Case": "acc" } } },
+          "to": { "type": "phrase", "spec": { "construction": "core.number", "bundle": { "Number": "pl", "Case": "acc" } } },
+          "reason": { "type": "fixed", "key": "pluralReason" }
+        }
+      ],
+      "numberOverride": "pl",
+      "tags": ["plural", "acc"]
+    },
+
+    "mixed": {
+      "skillId": "mixed",
+      "source": { "type": "pattern", "key": "seenAcc", "values": { "acc": { "type": "phrase", "spec": { "construction": "core.argument.case-role", "bundle": { "Number": "sg", "Case": "acc" } } } } },
+      "expected": { "type": "pattern", "key": "mixedMale", "values": { "gen": { "type": "phrase", "spec": { "construction": "core.sentence.polarity", "bundle": { "Number": "sg", "Polarity": "neg" } } } } },
+      "accepted": [
+        { "type": "pattern", "key": "mixedFemale", "values": { "gen": { "type": "phrase", "spec": { "construction": "core.sentence.polarity", "bundle": { "Number": "sg", "Polarity": "neg" } } } } }
+      ],
+      "promptKey": "mixedPrompt",
+      "explanationKey": "mixedExplanation",
+      "changes": [
+        { "from": { "type": "copy", "key": "mixedChangeFrom" }, "to": { "type": "copy", "key": "mixedChangeTo" }, "reason": { "type": "fixed", "key": "mixedVerbReason" } },
+        {
+          "from": { "type": "phrase", "spec": { "construction": "core.argument.case-role", "bundle": { "Number": "sg", "Case": "acc" } } },
+          "to": { "type": "phrase", "spec": { "construction": "core.sentence.polarity", "bundle": { "Number": "sg", "Polarity": "neg" } } },
+          "reason": { "type": "fixed", "key": "mixedNounReason" }
+        }
+      ],
+      "tags": ["mixed", "gen", "past"]
+    }
+  },
+
+  "$comment_chain": "generateChain's 5 fixed steps (UniversalCorePlan.md §5.1/§5.3): step 1's skillId varies by the drawn noun's gender (firstSkillByGender) — every other field is gender-independent. Owner is always the default \"my\" except where a phrase explicitly names \"their\" (after step 4's agreement.my swaps it) — see Recipe.kt's ChainStepRecipe doc.",
+  "firstSkillByGender": { "f": "case.acc.f", "n": "case.acc.n", "default": "case.acc.m" },
+  "chain": [
+    {
+      "source": { "type": "prefixed", "spec": { "construction": "core.argument.case-role", "bundle": { "Number": "sg", "Case": "nom" } }, "prefixCase": "nom" },
+      "expected": { "type": "pattern", "key": "seenAcc", "values": { "acc": { "type": "phrase", "spec": { "construction": "core.argument.case-role", "bundle": { "Number": "sg", "Case": "acc" } } } } },
+      "promptKey": "chainAccPrompt",
+      "explanationKey": "chainAccReason",
+      "changes": [
+        {
+          "from": { "type": "phrase", "spec": { "construction": "core.argument.case-role", "bundle": { "Number": "sg", "Case": "nom" } } },
+          "to": { "type": "phrase", "spec": { "construction": "core.argument.case-role", "bundle": { "Number": "sg", "Case": "acc" } } },
+          "reason": { "type": "fixed", "key": "chainAccReason" }
+        }
+      ],
+      "tags": ["acc"],
+      "ownerOut": "my"
+    },
+    {
+      "skillId": "verb.past",
+      "source": { "type": "pattern", "key": "seenAcc", "values": { "acc": { "type": "phrase", "spec": { "construction": "core.argument.case-role", "bundle": { "Number": "sg", "Case": "acc" } } } } },
+      "expected": { "type": "pattern", "key": "chainPast", "values": { "acc": { "type": "phrase", "spec": { "construction": "core.argument.case-role", "bundle": { "Number": "sg", "Case": "acc" } } } } },
+      "promptKey": "chainPastPrompt",
+      "explanationKey": "chainPastReason",
+      "changes": [
+        { "from": { "type": "copy", "key": "chainPastChangeFrom" }, "to": { "type": "copy", "key": "chainPastChangeTo" }, "reason": { "type": "fixed", "key": "chainPastReason" } }
+      ],
+      "tags": ["past", "acc"],
+      "ownerOut": "my"
+    },
+    {
+      "skillId": "case.gen.neg",
+      "source": { "type": "pattern", "key": "chainPast", "values": { "acc": { "type": "phrase", "spec": { "construction": "core.argument.case-role", "bundle": { "Number": "sg", "Case": "acc" } } } } },
+      "expected": { "type": "pattern", "key": "chainNeg", "values": { "gen": { "type": "phrase", "spec": { "construction": "core.sentence.polarity", "bundle": { "Number": "sg", "Polarity": "neg" } } } } },
+      "promptKey": "chainNegPrompt",
+      "explanationKey": "chainNegReason",
+      "changes": [
+        { "from": { "type": "literal", "value": "" }, "to": { "type": "copy", "key": "negationParticle" }, "reason": { "type": "fixed", "key": "negationInsertionReason" } },
+        {
+          "from": { "type": "phrase", "spec": { "construction": "core.argument.case-role", "bundle": { "Number": "sg", "Case": "acc" } } },
+          "to": { "type": "phrase", "spec": { "construction": "core.sentence.polarity", "bundle": { "Number": "sg", "Polarity": "neg" } } },
+          "reason": { "type": "fixed", "key": "chainNegReason" }
+        }
+      ],
+      "tags": ["gen", "negation"],
+      "ownerOut": "my"
+    },
+    {
+      "skillId": "agreement.my",
+      "source": { "type": "pattern", "key": "chainNeg", "values": { "gen": { "type": "phrase", "spec": { "construction": "core.sentence.polarity", "bundle": { "Number": "sg", "Polarity": "neg" }, "ownerLexeme": "my" } } } },
+      "expected": { "type": "pattern", "key": "chainOwner", "values": { "theirGen": { "type": "phrase", "spec": { "construction": "core.agreement.possessive", "bundle": { "Number": "sg", "Case": "gen" }, "ownerLexeme": "their" } } } },
+      "promptKey": "chainOwnerPrompt",
+      "explanationKey": "chainOwnerReason",
+      "changes": [
+        {
+          "from": { "type": "phrase", "spec": { "construction": "core.sentence.polarity", "bundle": { "Number": "sg", "Polarity": "neg" }, "ownerLexeme": "my" } },
+          "to": { "type": "phrase", "spec": { "construction": "core.agreement.possessive", "bundle": { "Number": "sg", "Case": "gen" }, "ownerLexeme": "their" } },
+          "reason": { "type": "fixed", "key": "chainOwnerReason" }
+        }
+      ],
+      "tags": ["gen", "agreement"],
+      "ownerOut": "their"
+    },
+    {
+      "skillId": "case.loc",
+      "source": { "type": "pattern", "key": "chainOwner", "values": { "theirGen": { "type": "phrase", "spec": { "construction": "core.agreement.possessive", "bundle": { "Number": "sg", "Case": "gen" }, "ownerLexeme": "their" } } } },
+      "expected": { "type": "pattern", "key": "chainLoc", "values": { "theirLoc": { "type": "phrase", "spec": { "construction": "core.argument.case-role", "bundle": { "Number": "sg", "Case": "loc" }, "ownerLexeme": "their" } } } },
+      "promptKey": "chainLocPrompt",
+      "explanationKey": "chainLocReason",
+      "changes": [
+        {
+          "from": { "type": "phrase", "spec": { "construction": "core.agreement.possessive", "bundle": { "Number": "sg", "Case": "gen" }, "ownerLexeme": "their" } },
+          "to": { "type": "phrase", "spec": { "construction": "core.argument.case-role", "bundle": { "Number": "sg", "Case": "loc" }, "ownerLexeme": "their" } },
+          "reason": { "type": "fixed", "key": "chainLocReason" }
+        }
+      ],
+      "tags": ["loc"],
+      "ownerOut": "their"
+    }
+  ]
+}

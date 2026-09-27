@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "$comment": "UniversalCorePlan.md §3.1/§3.2/§5.2/§12 UC-07: how pl realizes each core construction into surface text — the data ConstructionRealizer/TemplateInterpreter read in place of GrammarEngine.kt's hand-written nounPhrase/verbForm. `order` is each construction's `slots` list (in order); `gov` is `govFeature`/`govDefault`/`govWhen`, single-condition syntax `FeatureKey=value`; `agree` is a slot's `agreementSource` (borrow Gender from another slot's lexeme). Every identifier here is a feature/case/category name already used by :core-model, never a Polish word.",
+  "constructions": {
+    "core.argument.case-role": {
+      "slots": [
+        { "name": "owner", "category": "possessive", "optional": true, "requiredFeatures": ["Number", "Gender", "Case"], "agreementSource": "noun" },
+        { "name": "adjective", "category": "adjective", "requiredFeatures": ["Number", "Gender", "Case"], "agreementSource": "noun" },
+        { "name": "noun", "category": "noun", "requiredFeatures": ["Number", "Case"] }
+      ]
+    },
+    "core.agreement.possessive": {
+      "slots": [
+        { "name": "owner", "category": "possessive", "requiredFeatures": ["Number", "Gender", "Case"], "agreementSource": "noun" },
+        { "name": "adjective", "category": "adjective", "requiredFeatures": ["Number", "Gender", "Case"], "agreementSource": "noun" },
+        { "name": "noun", "category": "noun", "requiredFeatures": ["Number", "Case"] }
+      ]
+    },
+    "core.number": {
+      "slots": [
+        { "name": "owner", "category": "possessive", "optional": true, "requiredFeatures": ["Number", "Gender", "Case"], "agreementSource": "noun" },
+        { "name": "adjective", "category": "adjective", "requiredFeatures": ["Number", "Gender", "Case"], "agreementSource": "noun" },
+        { "name": "noun", "category": "noun", "requiredFeatures": ["Number", "Case"] }
+      ]
+    },
+    "core.sentence.polarity": {
+      "slots": [
+        { "name": "owner", "category": "possessive", "optional": true, "requiredFeatures": ["Number", "Gender", "Case"], "agreementSource": "noun" },
+        { "name": "adjective", "category": "adjective", "requiredFeatures": ["Number", "Gender", "Case"], "agreementSource": "noun" },
+        { "name": "noun", "category": "noun", "requiredFeatures": ["Number", "Case"] }
+      ],
+      "govFeature": "Case",
+      "govDefault": "acc",
+      "govWhen": { "Polarity=neg": "gen" }
+    },
+    "core.verb.tense": {
+      "slots": [
+        {
+          "name": "verb", "category": "verb",
+          "requiredFeatures": ["Tense", "Person", "Number"],
+          "requiredFeaturesWhen": { "Tense=past": ["Tense", "Person", "Number", "Gender"] },
+          "agreementSource": "noun"
+        }
+      ]
+    }
+  }
+}

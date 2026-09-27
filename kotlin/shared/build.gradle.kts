@@ -11,6 +11,11 @@ val frequencyFile = layout.projectDirectory.file("../../courses/pl-ru/frequency-
 // only the JSON file.
 val stylesDirectory = layout.projectDirectory.dir("../../courses/styles")
 val formsFixtureFile = layout.projectDirectory.file("../../courses/pl-ru/forms.generated.json")
+// UniversalCorePlan.md §3.1/§5.1/§12 UC-07: realization.json/exercise-recipes.json are pl's
+// ConstructionRealizer/ExerciseGenerator wiring — test-only for now (ExerciseFactory/GrammarEngine
+// stay the live path until UC-08), so embedded into commonTest the same way as forms.generated.json.
+val realizationFixtureFile = layout.projectDirectory.file("../../courses/lang/pl/realization.json")
+val exerciseRecipesFixtureFile = layout.projectDirectory.file("../../courses/lang/pl/exercise-recipes.json")
 // UniversalCorePlan.md §3.1/§12 UC-06: `lang/<code>/curriculum.json` — scanned the same way as
 // `packDirs` below, so a second target language's curriculum needs no Gradle/Kotlin edit.
 val langDirectory = layout.projectDirectory.dir("../../courses/lang")
@@ -101,6 +106,8 @@ val generateCoursePackSource by tasks.registering {
 // commonMain, the same way generateCoursePackSource embeds course.json for commonMain.
 val generateFormsFixtureSource by tasks.registering {
     inputs.file(formsFixtureFile)
+    inputs.file(realizationFixtureFile)
+    inputs.file(exerciseRecipesFixtureFile)
     outputs.dir(generatedFormsFixtureDirectory)
     doLast {
         val chunks = literalChunks(formsFixtureFile.asFile.readText())
@@ -109,6 +116,15 @@ val generateFormsFixtureSource by tasks.registering {
         target.writeText(
             "package polski.grammar\n\n" +
                 "internal val generatedFormsFixtureJson = " + literalBuildString(chunks) + "\n",
+        )
+        val realizationChunks = literalChunks(realizationFixtureFile.asFile.readText())
+        val recipesChunks = literalChunks(exerciseRecipesFixtureFile.asFile.readText())
+        val recipesTarget = generatedFormsFixtureDirectory.get().file("polski/core/GeneratedRecipesFixtureJson.kt").asFile
+        recipesTarget.parentFile.mkdirs()
+        recipesTarget.writeText(
+            "package polski.core\n\n" +
+                "internal val generatedRealizationJson = " + literalBuildString(realizationChunks) + "\n" +
+                "internal val generatedExerciseRecipesJson = " + literalBuildString(recipesChunks) + "\n",
         )
     }
 }

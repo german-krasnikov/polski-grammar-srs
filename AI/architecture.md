@@ -13,7 +13,13 @@ kotlin/pack-format         CoursePackSource/EmbeddedCoursePackSource/PackManifes
 kotlin/core-engine         Morphology/TableMorphology (UC-05) — табличный lookup формы по (lexeme, FeatureBundle);
                            forms.generated.json (scripts/build-pack.mjs, из courses/pl-ru/course.json) доказанно
                            совпадает с GrammarEngine на каждой лексеме × наборе признаков и с tests/fixtures/core-golden
-                           (TableMorphologyParityTest, kotlin/shared/src/commonTest); GrammarEngine остаётся живым путём
+                           (TableMorphologyParityTest, kotlin/shared/src/commonTest); GrammarEngine остаётся живым путём.
+                           UC-07: + ConstructionRealizer/TemplateInterpreter (order/gov/agree, ≤10 операторов) +
+                           ExerciseGenerator, управляемые courses/lang/pl/{realization,exercise-recipes}.json
+                           (тест-only встраивание, тем же приёмом что forms.generated.json). Побайтный паритет с живым
+                           ExerciseFactory доказан на всех skill×seed×draw и полной цепочке (UniversalCoreExhaustiveTest/
+                           UniversalCoreParityTest, kotlin/shared/src/commonTest/kotlin/polski/core); ExerciseFactory/
+                           GrammarEngine остаются живым путём до UC-08
 kotlin/shared (commonMain)
   model, data, grammar      польские данные и морфология (GrammarEngine, ExerciseFactory); model/Grammar.kt — тонкий адаптер над :core-model
   srs                       FSRS (порт ts-fsrs 5.4.2)
@@ -52,7 +58,7 @@ kotlin/macosApp             SwiftUI macOS
 
 ```text
 :core-model         FeatureBundle (UD/UniMorph), Construction, SkillSpec (+ LexicalFilter, UC-06), порты будущего
-:core-engine        Morphology/TableMorphology (готово, UC-05); ConstructionRealizer, TemplateInterpreter (≤10 операторов), ExerciseGenerator, MatrixTableEngine — впереди (UC-07)
+:core-engine        Morphology/TableMorphology (готово, UC-05); ConstructionRealizer/TemplateInterpreter (≤10 операторов)/ExerciseGenerator готовы и доказаны parity-тестом (UC-07, тест-only wiring — переключение хостов в UC-08); MatrixTableEngine — впереди
 :core-srs           FSRS
 :core-progress      прогресс по pack.id
 :core-presentation  сессии, StyleComposer (стили → блоки)
