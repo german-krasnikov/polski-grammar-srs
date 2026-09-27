@@ -1,0 +1,12 @@
+{
+  "id": "situation-first",
+  "label": { "ru": "Через ситуацию", "en": "Situation first" },
+  "description": {
+    "ru": "Короткая сцена сразу, правило — после ответа.",
+    "en": "A short scene up front, the rule follows the answer."
+  },
+  "blocks": {
+    "front": ["scene"],
+    "back": ["changes"]
+  }
+}

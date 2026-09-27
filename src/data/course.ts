@@ -129,13 +129,25 @@ export function renderCoursePattern(key: keyof typeof course.exercisePatterns, v
   });
 }
 export type ExplanationMethod = 'logic' | 'situations';
+/** Presentation-style content (UC-10); every field is optional and derives from existing
+ *  formula/theory/focus/method text when absent. React does not render styles (ADR-5) — this
+ *  type only keeps the reader tolerant of the new course.json field. */
+export interface SkillStyleContent {
+  rule?: string;
+  table?: { caption?: string; rows: { label: string; before: string; after: string }[] };
+  scene?: string;
+  nativeParallel?: { native: string; target: string; note: string; matches: boolean }[];
+  examples?: string[];
+  why?: string;
+}
 export interface SkillPresentation {
   focus: { before: string; after: string };
   methods: Record<ExplanationMethod, {
     introduction: string; promptLead: string;
     introduce: string; retrieve: string; feedback: string; review: string;
   }>;
+  styleContent?: SkillStyleContent;
 }
 export const coursePresentations: Record<string, SkillPresentation> = Object.fromEntries(
-  course.skills.map(skill => [skill.id, { focus: skill.focus, methods: skill.methods }]),
+  course.skills.map(skill => [skill.id, { focus: skill.focus, methods: skill.methods, styleContent: skill.styleContent }]),
 );

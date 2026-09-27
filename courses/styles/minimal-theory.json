@@ -1,0 +1,12 @@
+{
+  "id": "minimal-theory",
+  "label": { "ru": "Минимум теории", "en": "Minimal theory" },
+  "description": {
+    "ru": "Только примеры; «Почему так?» — по запросу.",
+    "en": "Examples only; \"Why?\" is available on demand."
+  },
+  "blocks": {
+    "front": ["examples"],
+    "back": ["whyOnDemand", "changes"]
+  }
+}

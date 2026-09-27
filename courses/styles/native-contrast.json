@@ -1,0 +1,14 @@
+{
+  "id": "native-contrast",
+  "label": { "ru": "Через сравнение с родным", "en": "Native contrast" },
+  "description": {
+    "ru": "По-родному так → по-изучаемому так: где совпадает, где отличается.",
+    "en": "L1 parallel: where it matches the target language, where it differs."
+  },
+  "blocks": {
+    "front": ["nativeParallel"],
+    "back": ["nativeParallel", "changes", "contrast"]
+  },
+  "requires": ["nativeParallel"],
+  "fallback": "rule-first"
+}

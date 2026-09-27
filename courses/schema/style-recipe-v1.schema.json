@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Presentation style recipe v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "label",
+    "description",
+    "blocks"
+  ],
+  "properties": {
+    "id": {
+      "$ref": "#/$defs/styleId"
+    },
+    "label": {
+      "$ref": "#/$defs/localizedText"
+    },
+    "description": {
+      "$ref": "#/$defs/localizedText"
+    },
+    "blocks": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "front",
+        "back"
+      ],
+      "properties": {
+        "front": {
+          "$ref": "#/$defs/blockList"
+        },
+        "back": {
+          "$ref": "#/$defs/blockList"
+        }
+      }
+    },
+    "requires": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/blockKind"
+      }
+    },
+    "fallback": {
+      "$ref": "#/$defs/styleId"
+    }
+  },
+  "$defs": {
+    "styleId": {
+      "enum": [
+        "rule-first",
+        "situation-first",
+        "native-contrast",
+        "minimal-theory"
+      ]
+    },
+    "blockKind": {
+      "enum": [
+        "formula",
+        "table",
+        "rule",
+        "scene",
+        "nativeParallel",
+        "examples",
+        "whyOnDemand",
+        "changes",
+        "contrast"
+      ]
+    },
+    "blockList": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/blockKind"
+      }
+    },
+    "localizedText": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ru",
+        "en"
+      ],
+      "properties": {
+        "ru": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        }
+      }
+    }
+  }
+}
