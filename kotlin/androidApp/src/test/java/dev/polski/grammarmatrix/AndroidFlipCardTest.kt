@@ -1,37 +1,27 @@
 package dev.polski.grammarmatrix
 
 import org.junit.Assert.assertEquals
-import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
 import polski.presentation.CardEffect
-import polski.presentation.CardPhase
 import polski.srs.Rating
 import polski.ui.screens.SingleRatingGate
 import polski.ui.screens.cardEffectToPlay
-import polski.ui.screens.flipOnTap
+import polski.ui.screens.dragProgress
+import polski.ui.screens.dragRotationDegrees
 import polski.ui.screens.isFlipTap
 import polski.ui.screens.ratingForDrag
 
 /**
- * Behavior for the Android flash card's flip/rating/effect contract
- * (`Plans/Kotlin/FlipCardRivePlan.md` §0/FC-07/FC-10/FC-14/FC-20), exercised as plain unit tests
- * against the pure functions in `AndroidFlipCard.kt` — no Compose test rule needed.
+ * Behavior for the Android training card's rating/effect contract
+ * (`Plans/Kotlin/FlipCardRivePlan.md` §0/FC-07/FC-14/FC-20), exercised as plain unit tests against
+ * the pure functions in `AndroidFlipCard.kt` — no Compose test rule needed. D1 removed the training
+ * card's flip (see `AndroidAnswerRevealComposeTest` for the expand-reveal it replaced); D2 (§16.0-B)
+ * brings a whole-panel flip back for the vocabulary card, sharing `isFlipTap` below with its
+ * revealed-face gesture detector (`AndroidVocabularyScreen.kt`).
  */
 class AndroidFlipCardTest {
-    @Test fun tapDoesNotFlipBeforeReveal() {
-        assertEquals(false, flipOnTap(CardPhase.Question, false))
-    }
-
-    @Test fun tapFlipsToBackOnceRevealed() {
-        assertEquals(true, flipOnTap(CardPhase.Revealed, false))
-    }
-
-    @Test fun secondTapFlipsBackToFront() {
-        assertEquals(false, flipOnTap(CardPhase.Revealed, true))
-    }
-
     @Test fun leftSwipePastThresholdSelectsAgain() {
         assertEquals(Rating.Again, ratingForDrag(-80f, 72f))
     }
@@ -42,21 +32,6 @@ class AndroidFlipCardTest {
 
     @Test fun shortSwipeSelectsNoRating() {
         assertNull(ratingForDrag(20f, 72f))
-    }
-
-    @Test fun negligibleMovementIsAFlipTap() {
-        assertTrue(isFlipTap(dx = 3f, dy = 2f, tapSlopPx = 12f))
-    }
-
-    @Test fun aShortButNoticeableSwipeIsNeitherATapNorARating() {
-        // FC-07: a short/vertical swipe must not rate, and — since it clearly wasn't a tap either —
-        // must not surprise the user by flipping the card.
-        assertFalse(isFlipTap(dx = 40f, dy = 2f, tapSlopPx = 12f))
-        assertNull(ratingForDrag(40f, thresholdPx = 72f))
-    }
-
-    @Test fun verticalScrollAttemptIsNotAFlipTap() {
-        assertFalse(isFlipTap(dx = 2f, dy = 40f, tapSlopPx = 12f))
     }
 
     @Test fun goodEffectIsRememberedWhenMotionIsNotReduced() {
@@ -101,5 +76,35 @@ class AndroidFlipCardTest {
         assertTrue(first.rate(Rating.Good, reduceMotion = false, riveDisabledForMeasurement = false) {} != null)
         val secondCard = SingleRatingGate()
         assertTrue(secondCard.rate(Rating.Good, reduceMotion = false, riveDisabledForMeasurement = false) {} != null)
+    }
+
+    @Test fun aShortStillTapIsAFlipTap() {
+        assertTrue(isFlipTap(dx = 2f, dy = 1f, tapSlopPx = 12f))
+    }
+
+    @Test fun aDragPastSlopIsNotAFlipTap() {
+        assertTrue(!isFlipTap(dx = 40f, dy = 1f, tapSlopPx = 12f))
+    }
+
+    // D3 (`Plans/Kotlin/FlipCardRivePlan.md` §17.3/UX4-08..10): the whole-card drag affordance's
+    // tint/label growth and tilt, ported from the web host's `--swipe-progress`/`rotate()` language.
+    @Test fun dragProgressIsZeroAtRest() {
+        assertEquals(0f, dragProgress(0f, thresholdPx = 72f))
+    }
+
+    @Test fun dragProgressIsHalfwayAtHalfTheThreshold() {
+        assertEquals(0.5f, dragProgress(36f, thresholdPx = 72f))
+    }
+
+    @Test fun dragProgressClampsPastTheThreshold() {
+        assertEquals(1f, dragProgress(200f, thresholdPx = 72f))
+        assertEquals(-1f, dragProgress(-200f, thresholdPx = 72f))
+    }
+
+    @Test fun dragRotationDegreesGrowsWithDistanceThenClamps() {
+        assertEquals(0f, dragRotationDegrees(0f, pxPerDegree = 22f))
+        assertEquals(2f, dragRotationDegrees(44f, pxPerDegree = 22f))
+        assertEquals(8f, dragRotationDegrees(1000f, pxPerDegree = 22f, maxDegrees = 8f))
+        assertEquals(-8f, dragRotationDegrees(-1000f, pxPerDegree = 22f, maxDegrees = 8f))
     }
 }

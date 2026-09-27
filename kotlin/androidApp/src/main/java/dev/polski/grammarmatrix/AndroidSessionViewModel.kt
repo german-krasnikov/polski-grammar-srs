@@ -115,6 +115,12 @@ class AndroidSessionViewModel(context: Context) : ViewModel() {
         updatePreferences(preferences.copy(swipeRatingEnabled = enabled))
     }
 
+    /** D5: off disposes/never loads Rive and makes all motion instant (see `motionReduced` in MainActivity). */
+    fun setAnimationsEnabled(enabled: Boolean) {
+        if (preferences.animationsEnabled == enabled) return
+        updatePreferences(preferences.copy(animationsEnabled = enabled))
+    }
+
     /** Reflects [next] immediately for a responsive UI, then persists off the main thread; a failed write rolls back. */
     private fun updatePreferences(next: UserPreferencesV2) {
         val previous = preferences

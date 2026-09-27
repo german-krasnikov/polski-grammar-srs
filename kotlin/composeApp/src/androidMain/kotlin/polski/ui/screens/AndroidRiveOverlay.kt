@@ -100,27 +100,6 @@ fun AndroidRiveOverlay(effect: CardEffect?, onConsumed: () -> Unit) {
 }
 
 /**
- * Flip-in-progress ring cue (FC2-06/07/08, R2): a boolean `IsExpanded` input on `rings.riv`, driven
- * by [expanded] exactly as [AndroidFlipCard]'s `onRingsExpandedChange` reports it — expanding right
- * as an animated flip starts, contracting once it settles. Placed *behind* the card in z-order (the
- * caller composes this before the flip card in the same `Box`), never on top of it, since the cue is
- * decorative and must never cover the question/answer text.
- */
-@Composable
-fun AndroidFlipRingsOverlay(expanded: Boolean) {
-    val context = LocalContext.current
-    val view = remember(context) {
-        ensureRiveInitialized(context)
-        RiveAnimationView(context).apply {
-            touchPassThrough = true
-            setRiveResource(R.raw.rings, stateMachineName = "State Machine 1")
-        }
-    }
-    LaunchedEffect(expanded) { view.setBooleanState("State Machine 1", "IsExpanded", expanded) }
-    AndroidView(factory = { view }, modifier = Modifier.fillMaxSize().semantics { hideFromAccessibility() })
-}
-
-/**
  * One-shot chain-completion celebration (FC2-10, R3 Pick C): plays only the `chain-complete.riv`
  * file's `Tada` artboard, `Reveal` animation — a plain animation name, not a state-machine trigger,
  * autoplaying once on load. Mounted only while [CardPhase.ChainComplete] is showing (the caller
