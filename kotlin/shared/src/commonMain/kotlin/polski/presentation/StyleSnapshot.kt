@@ -20,7 +20,7 @@ private fun endingPartsJson(parts: List<EndingPart>): JsonArray = JsonArray(part
 
 private fun blockToJson(block: Block): JsonObject = when (block) {
     is Block.Formula -> buildJsonObject { put("kind", "formula"); put("text", block.text) }
-    is Block.Rule -> buildJsonObject { put("kind", "rule"); put("text", block.text) }
+    is Block.Rule -> buildJsonObject { put("kind", "rule"); put("text", block.text); put("detail", block.detail) }
     is Block.Table -> buildJsonObject {
         put("kind", "table")
         put("caption", block.caption)

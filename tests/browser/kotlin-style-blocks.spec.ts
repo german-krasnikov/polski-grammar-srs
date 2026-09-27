@@ -56,6 +56,15 @@ test('switching style changes which blocks the card shows, on the front and afte
   await expect(back.locator('.rule-focus > strong')).toBeVisible();
   await expect(back.locator('.rule-contrast .form-contrast')).toBeVisible();
   await expect(back.locator('.block-why')).toHaveCount(0);
+  // Regression (post-df8ade7 correction): the rule-focus box must still show BOTH the skill's
+  // rule/theory AND the per-exercise explanation paragraph on reveal, matching pre-UC-10 rule-first
+  // byte-for-byte (Plans/Kotlin/StylesBlueprint.md:176) — a silent drop of the 2nd paragraph
+  // wouldn't be caught by a mere "some rule-focus text exists" check.
+  const ruleParagraphs = back.locator('.rule-focus > p');
+  await expect(ruleParagraphs).toHaveCount(2);
+  await expect(ruleParagraphs.nth(0)).not.toBeEmpty();
+  await expect(ruleParagraphs.nth(1)).not.toBeEmpty();
+  await expect(ruleParagraphs.nth(1)).not.toHaveText(await ruleParagraphs.nth(0).textContent() ?? '');
 
   // Switching style after reveal is a display choice only — same exercise/draft, no new review
   // (ST-04); the Back's Formula/Rule/Contrast box disappears and the "Почему так?" disclosure

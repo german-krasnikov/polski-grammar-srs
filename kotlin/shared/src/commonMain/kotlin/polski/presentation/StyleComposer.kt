@@ -35,7 +35,7 @@ object StyleComposer {
     private fun block(kind: BlockKind, exercise: Exercise, skill: Skill, focus: SkillPresentation, content: SkillStyleContent): Block? =
         when (kind) {
             BlockKind.Formula -> Block.Formula(skill.formula)
-            BlockKind.Rule -> Block.Rule(content.rule ?: skill.theory)
+            BlockKind.Rule -> Block.Rule(content.rule ?: skill.theory, exercise.explanation)
             BlockKind.Table -> Block.Table("", content.table ?: listOf(derivedTableRow(focus)))
             BlockKind.Scene -> Block.Scene(content.scene ?: focus.situations.introduce)
             BlockKind.NativeParallel -> content.nativeParallel.takeIf { it.isNotEmpty() }?.let(Block::NativeParallel)

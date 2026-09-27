@@ -53,6 +53,10 @@ class StyleComposerTest {
             assertEquals(Block.Formula(skill.formula), front.filterIsInstance<Block.Formula>().single())
             val back = StyleComposer.compose(ruleFirst, StylePhase.Back, ex, skill, focus, SkillStyleContent())
             assertEquals(skill.theory, back.filterIsInstance<Block.Rule>().single().text)
+            // Regression (post-df8ade7 correction): the pre-UC-10 rule-focus box always showed a
+            // second paragraph with the per-exercise `explanation` alongside the skill's theory —
+            // Block.Rule must still carry it so rule-first stays byte-identical to that.
+            assertEquals(ex.explanation, back.filterIsInstance<Block.Rule>().single().detail)
             assertEquals(skill.formula, back.filterIsInstance<Block.Formula>().single().text)
 
             val situationFirst = registry.getValue(StyleId.SituationFirst)

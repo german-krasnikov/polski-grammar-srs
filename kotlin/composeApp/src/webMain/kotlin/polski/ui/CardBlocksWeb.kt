@@ -28,7 +28,10 @@ internal fun renderCardBlocks(container: HTMLElement, blocks: List<Block>, phase
                 appendChild(node("small", text = "ЗАПОМНИ"))
                 appendChild(node("strong", text = block.text))
             }
-            is Block.Rule -> ruleFocusBox().appendChild(node("p", text = block.text))
+            is Block.Rule -> ruleFocusBox().apply {
+                appendChild(node("p", text = block.text))
+                appendChild(node("p", text = block.detail))
+            }
             is Block.Contrast -> ruleFocusBox().appendChild(renderContrastMarkup(block))
             is Block.Table -> renderTableBlock(wrap, block)
             is Block.Scene -> renderSceneBlock(wrap, block)

@@ -7,7 +7,10 @@ package polski.presentation
  */
 sealed interface Block {
     data class Formula(val text: String) : Block
-    data class Rule(val text: String) : Block
+    /** [detail] is the per-exercise `Exercise.explanation` — the theory box has always shown it
+     *  alongside [text] (the skill's rule/theory) for rule-first; kept as its own field rather than
+     *  folded into [text] so a host can still tell "the rule" from "this exercise's own note" apart. */
+    data class Rule(val text: String, val detail: String) : Block
     data class Table(val caption: String, val rows: List<TableRow>) : Block
     data class Scene(val text: String) : Block
     data class NativeParallel(val pairs: List<NativeParallelPair>) : Block
