@@ -22141,7 +22141,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "7d3e385422dc006bd119091443b734a3f49096c184a6c6f1feb00bf66397c142",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -22149,25 +22149,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
-      "sourceFingerprint": "691ee427b361e5c4a07fe071b6e3cb66e27a6afcafaef1facf3045ee55612831",
-      "occurrence": 1,
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "serialization-plumbing",
-          "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
-        },
-        {
-          "ordinal": 1,
-          "category": "serialization-plumbing",
-          "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
-        }
-      ]
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "e0a3c6c9a74dc6decffe8a6eb308640acf6827b376877d5f51bd3236903b0b63",
       "occurrence": 1,
       "parts": [
@@ -22195,7 +22177,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData.nouns",
+      "symbol": "CoursePack.nouns",
       "sourceFingerprint": "6d871edc2cb6a26f468a9ce73cdc7fb46af77a4fca9a1efbf62c44b29f8a6d15",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -22203,7 +22185,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "5b430e6702fc0369ecc027be63df8f9d9ce48fb2b126d3fac12f91927853dafa",
       "occurrence": 1,
       "parts": [
@@ -22231,7 +22213,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "799a0b81790231d420cae6e187cb267fcb9ee6bd6a4f513d26e524f396fb1c6b",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -22239,7 +22221,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData.adjectives",
+      "symbol": "CoursePack.adjectives",
       "sourceFingerprint": "2cfc24fe1cfa6a335fa368fcf55464c62a367ff716fb3fa9a99d7802f541d01d",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -22247,7 +22229,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "2ab2c31cdeeccd8b1753801a792cf415d56073248f346f7e39b16a21b8f249fa",
       "occurrence": 1,
       "parts": [
@@ -22270,7 +22252,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "86ef65d07f521c43fe0254cd9af648bc6e7d1b784a8d3a870b6d516c4b821774",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -22278,7 +22260,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData.verbs",
+      "symbol": "CoursePack.verbs",
       "sourceFingerprint": "91109117b4effa68106b3828678617a895e15bb5df4add320fb41f3a5dbcd07f",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -22286,7 +22268,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData.past",
+      "symbol": "CoursePack.past",
       "sourceFingerprint": "c209690cb452c78ae4ba139e1b242569f90221da0535e34cd1f9292c5eb056cd",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -22294,7 +22276,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "e60ed4f46fb1b8f9a5499de2d8862de00a5aacb325b982b85ca3c23ab5198e7d",
       "occurrence": 1,
       "parts": [
@@ -22317,7 +22299,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "dabfdde11b161b12ec598e153c862332ad02a5dc1c1162275a41501d5a8050b4",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -22325,7 +22307,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "5b7603797c8e3abe482e206926a961a77fef9f4f5dcba90e8bbdaa10deec7c5b",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -22333,7 +22315,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "bb0f9fca8372acd5d746757221175ce0e9d03783911c27b67f25d99cf53f532e",
       "occurrence": 1,
       "parts": [
@@ -22366,7 +22348,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "3e9337572d4c50421b1d7851a1c38cae4978c3e1e0917e3434afbe0c868bbc9a",
       "occurrence": 1,
       "parts": [
@@ -22384,7 +22366,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData.skills",
+      "symbol": "CoursePack.skills",
       "sourceFingerprint": "c1f2d920fb86e7ad0c854104e1b0252eaab47badf587ea45372dd594639d2a8e",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -22392,7 +22374,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "8695797b53bdf90004071808d05a8d7a52bf86e120b5af6e307ddfe90b85dfbd",
       "occurrence": 1,
       "parts": [
@@ -22420,7 +22402,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "cd87d7a63977566825b3d14a4a86a65b0d8a6dfdaba888709f566695a99ef69e",
       "occurrence": 1,
       "parts": [
@@ -22443,7 +22425,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "a37e66782d31113c79b5ff924d08e30326e5db37a6febb1d3137c2182bfda1fa",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -22451,7 +22433,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData.sentenceSeeds",
+      "symbol": "CoursePack.sentenceSeeds",
       "sourceFingerprint": "f75d64b991f469454374e5824683b5037ada3494d6d52da978670ca16b243d34",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -22459,7 +22441,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "7768db64200d4c9ef4f19e9c2c5430d7a3a83d96cae322b1e3a55f9eed1bfb7d",
       "occurrence": 1,
       "parts": [
@@ -22477,7 +22459,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "07122a633b422c444b3da3dda29f485ffb6e8bc6b781c1a9ebd710557fe838d9",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -22485,7 +22467,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "cbb0a73527f66ab1b3fdd80c63a7f1d4f68133f6bc30de86f4b2478e2c3104ef",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -22493,7 +22475,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "18a7d20d6be9ffdae118336a1642b31b82fcaca78168b6317625cba9e738b067",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -22501,7 +22483,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData.value",
+      "symbol": "CoursePack.value",
       "sourceFingerprint": "d400bc3a636a783c05ca05961680223fb711264535b6d73a5cb3702836a053c5",
       "occurrence": 1,
       "parts": [
@@ -22519,7 +22501,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData.completion",
+      "symbol": "CoursePack.completion",
       "sourceFingerprint": "ee63af224b5d79ec982d38488632be22896bf4658afff1a28f38c1ed7c2815f0",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -22527,7 +22509,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "90643b19b9c80bd3dc7d2f10c15077dd7f02606d084637e08a1f7ea9aacf3154",
       "occurrence": 1,
       "parts": [
@@ -22545,7 +22527,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "4576ea49837da38eed72f45715398318078276e4c5144e80ba5581a80c9d47b7",
       "occurrence": 1,
       "parts": [
@@ -22563,7 +22545,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "eabd698a121339d5b90274003ce60363ffc47f1ac1118457a438d51fc7157203",
       "occurrence": 1,
       "parts": [
@@ -22581,7 +22563,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "c21c35f47825ce273f7164fe25beb8c087517a4383fa10eb9680c1a27e58040b",
       "occurrence": 1,
       "parts": [
@@ -22604,7 +22586,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "4008165549df776ea219577eecc5fb92177e0934644dfb28b5e2cd73421f82bb",
       "occurrence": 1,
       "parts": [
@@ -22627,7 +22609,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "588c6971992fe1aa0c3ab84b6b09e5d4c27f7bef20c1b74a3aef5c0203f27a9c",
       "occurrence": 1,
       "parts": [
@@ -22645,7 +22627,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "cf89b40e9fc3daa510d4ba75e77c1ea945fc7d940309ccd1555eac85d774cc08",
       "occurrence": 1,
       "parts": [
@@ -22663,7 +22645,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "d24e467cadde8ccec0679fde85874ae103706e4eee50efde9192d2958a7827af",
       "occurrence": 1,
       "parts": [
@@ -22691,7 +22673,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "090be2698f6e66776a86d94f18c38505244c6b2b00e5c98c3ea611d2a76de201",
       "occurrence": 1,
       "parts": [
@@ -22709,7 +22691,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "e4b49c6dfd37552e48ac9cd28e18e7f1a0f105fe293499dae9a3a08b4e61e181",
       "occurrence": 1,
       "parts": [
@@ -22737,7 +22719,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "26140eb00f1deb07039dc33b91bb17e6a37d3c616629d6fa235979e02cbfc98d",
       "occurrence": 1,
       "parts": [
@@ -22765,7 +22747,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData.pipeline",
+      "symbol": "CoursePack.pipeline",
       "sourceFingerprint": "fd02a4f7f2320021bcb4c82b3bc897fa1a275502c8ba183488714b524f885d11",
       "occurrence": 1,
       "parts": [
@@ -22783,7 +22765,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "099d83352de6ab836b6f7c3871fd5f214643deea6e45d13895a0a96ced20b0af",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -22791,7 +22773,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "4e1b71011d5e75af4235b440f900272fc0f76afa3bb34dc6c16a82e64fd1d730",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -22799,7 +22781,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "04aa478790f3420ed771e187cfd0a6b34ad5a779835cde6b2a5312b6663adbe3",
       "occurrence": 1,
       "parts": [
@@ -22827,7 +22809,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "8c9ef3703e23088a0e2c8859cff8748961a78a76badb5319d37891972c6b52da",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -22835,7 +22817,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "3211eeb4a3109990116539c91e8794229d8a57deba682718b071b61cb5bed1ff",
       "occurrence": 1,
       "parts": [
@@ -22858,7 +22840,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData.teaching",
+      "symbol": "CoursePack.teaching",
       "sourceFingerprint": "21e4ec047038a67d3b7c4c312e6bfea8f15c65ecff43b8e1e7d424d91beaa288",
       "occurrence": 1,
       "parts": [
@@ -22876,7 +22858,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData.note",
+      "symbol": "CoursePack.note",
       "sourceFingerprint": "56a4e210abce2aa0902ead64e9018c34c03f0d7a57280f9401bf60f49d1a53b3",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -22884,7 +22866,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "a947fde43c0ab0cac8db8ec5b29173aed159f7a2755fea85f2cf0d308c972b0a",
       "occurrence": 1,
       "parts": [
@@ -22907,7 +22889,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData.teaching",
+      "symbol": "CoursePack.teaching",
       "sourceFingerprint": "7382b5cc4f9ce6a2e54f07eb15cce1634e19047e2b7fa9602f6bc7f5d6ec4578",
       "occurrence": 1,
       "parts": [
@@ -22925,7 +22907,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData.personal",
+      "symbol": "CoursePack.personal",
       "sourceFingerprint": "c24bf5f629f3354031a92bbba520385442e6d3c82784ff52f3eb3419d68d5f32",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -22933,7 +22915,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData.intro",
+      "symbol": "CoursePack.intro",
       "sourceFingerprint": "9840bcf2e32c7a664f10e0b827f46cc116db3a6e0849395d0eb8302b1fc3391f",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -22941,7 +22923,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData.footer",
+      "symbol": "CoursePack.footer",
       "sourceFingerprint": "ac77c519212bc64a3ecf44bc85f79c223af3933708d1da69da0ceef8944b8b62",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -22949,7 +22931,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData.possessive",
+      "symbol": "CoursePack.possessive",
       "sourceFingerprint": "007ffd2fc9218dee37051431cea7a4ffe3275e406061a9e82d33a9b63cab61b0",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -22957,7 +22939,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData.demo",
+      "symbol": "CoursePack.demo",
       "sourceFingerprint": "1ce9f329bf79ca9f3abab72797bdf8aa397c89aca5c5f6d88e9a8ba1c65cdecb",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -22965,7 +22947,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "42a6b5033bbc6f0468b12aa0ef220a88338efc6e447434da4d942a88b84ec902",
       "occurrence": 1,
       "parts": [
@@ -22988,7 +22970,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "d74efcb1fffabcf27cb9ddff9022e163e45b06ff92511c04e36f96efc8fcc345",
       "occurrence": 1,
       "parts": [
@@ -23011,7 +22993,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "20bce592cdfb1834f05894fa2748b3c806b57f01c8e9a89e89982d48a54ffad3",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -23019,7 +23001,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "a0cce457819e479ff27117240dd11a11514b907feb28b24fb9ef3b503271da10",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -23027,7 +23009,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData.id",
+      "symbol": "CoursePack.id",
       "sourceFingerprint": "d42635102d7aa31ecac52f2c9c2696cf636593ab06afa87a69e7661443f00f70",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -23035,7 +23017,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "5ee29ed263a646f405f0ff11cb0d85c898a846d8c0aa22c6f294a1e46eae9c3d",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -23043,7 +23025,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData.cue",
+      "symbol": "CoursePack.cue",
       "sourceFingerprint": "c9b6ad0a80899a1dd3d20b7f1aceda4a5e5e1916a87f26a1495da39e7f395746",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -23051,7 +23033,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "b779e455bb5fbdee6b589ca65b82b3fdba98db3acd38391b0065859db76e8d7c",
       "occurrence": 1,
       "parts": [
@@ -23074,7 +23056,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "708d209397329573fc711f09ddeeaa6dab8e83977fc423452ceb284f3b01a708",
       "occurrence": 1,
       "parts": [
@@ -23097,7 +23079,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "8f2dc1ea4e58aba4c8409104366144d9a6cee26d29e2c281e33dc4a3e6d16aaa",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -23105,7 +23087,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "96fce374fd3692eec1dab0a207a67519b828190fe241ae117f5a20c70dc7442d",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -23113,7 +23095,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "8d7d21e921678b02b1144e3bca531a30bb6048986e48823ea5ce64418f4edae8",
       "occurrence": 1,
       "parts": [
@@ -23136,7 +23118,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "fff72e649a12ab8bdddb8a6ed3cf6c92b0037984974cc1f9e9100c32ef29756c",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -23144,7 +23126,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData.caption",
+      "symbol": "CoursePack.caption",
       "sourceFingerprint": "3206d898263f3c6d8d406aa3caf4711b487a5a6b3d0b4bbd9b076b0a77b7dcab",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -23152,7 +23134,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "7b186610ca34058e08bb83975bddc9cc30b3323e40010725690c65b4398d721e",
       "occurrence": 1,
       "parts": [
@@ -23170,7 +23152,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "061ef9a2a84e0d043fdaa211b14509e01397cd92c75d757b2dd4ff8482039a8f",
       "occurrence": 1,
       "parts": [
@@ -23188,7 +23170,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "a51f4972a5cca6c98aa1b9358d55243c95593981d1cc5fc27084a081876bbec1",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -23196,7 +23178,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "fcc9b94c9aa03965850ee7783c0e1f96a100983fb4b892c1cb853ff9c89ea135",
       "occurrence": 1,
       "parts": [
@@ -23224,7 +23206,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "0c79aa598ecd701336cede9df04a923de192d56a2f231c79e414919a4ca86d31",
       "occurrence": 1,
       "parts": [
@@ -23277,7 +23259,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData.teaching",
+      "symbol": "CoursePack.teaching",
       "sourceFingerprint": "9747dd481b70acb3d380015147022bfe62a1e41e570671911ff28e891bb03319",
       "occurrence": 1,
       "parts": [
@@ -23295,7 +23277,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "d0afc4b7dead1129f67f1ce24a24945621dd9bc203feb51c3ade6b7376470ae4",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -23303,7 +23285,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "1926b15620cc393fb016f3dc11eb1cbbbc0acec022a5a3eee0eca7007aa9eb6b",
       "occurrence": 1,
       "parts": [
@@ -23321,7 +23303,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "424404473a7290ebf71fa33604e064bd6f4ec2e070ced8c416509085f8d0b219",
       "occurrence": 1,
       "parts": [
@@ -23344,7 +23326,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "516ce8825404f4933514187222b653b5aeb728395ba0ceceddaa23b9d45b10b8",
       "occurrence": 1,
       "parts": [
@@ -23362,7 +23344,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "ad8c1c438fef8b9c973053d2e4889b8a87af630d1de5f267f88bc3c370d3b1ec",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -23370,7 +23352,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "3d5ddceeb94ef9eacdccaed2d48b7f161bec62baff3cfbc01d9a6651c8099633",
       "occurrence": 1,
       "parts": [
@@ -23393,7 +23375,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "7addfd3f767a7e48516875d6c4a5057adb2c13b501cd25b1bf26b6158db8f423",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -23401,7 +23383,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "f73f288236738ef959f800d36a8fcb1c33700e6f7f45edec7c5a80a25610ebac",
       "occurrence": 1,
       "parts": [
@@ -23419,7 +23401,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "7f26beb3e7d0e57b40f6c65e0bed4adf9e68a098c5f0d093b812c6c7a30c8e1a",
       "occurrence": 1,
       "parts": [
@@ -23437,7 +23419,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "019113b21548fbf772011a9b7658b0a474ee6cae9ebe001e1393035ded9c416e",
       "occurrence": 1,
       "parts": [
@@ -23455,7 +23437,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData.support",
+      "symbol": "CoursePack.support",
       "sourceFingerprint": "64eb10d6e33df6a65f72bd116fa82c9f29ccf9f5f4282a43070df58dbbec4110",
       "occurrence": 1,
       "parts": [
@@ -23473,7 +23455,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData.title",
+      "symbol": "CoursePack.title",
       "sourceFingerprint": "b9fab1aeee80d81d094e97e63fe20cd978a83b593cfe5cd72d7271749cd0c435",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -23481,7 +23463,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "92a6ff9d197e26c4e565db9303ff4d9a9d405e2fb2db86fae74dd446de754fab",
       "occurrence": 1,
       "parts": [
@@ -23499,7 +23481,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "8dab553bbf89fa2a538272096e7f5b1a36f145978f482f6dcb93245ea42190de",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -23507,7 +23489,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "cefb9daeea7741fd68b15b647a30fd9e76a1800d8d9c266d25a4e2c442c6f7f3",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -23515,7 +23497,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "73020041c26da76d7db1abf8f9f59c05e0a7424fd090f3a38b40114e13bed681",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -23523,7 +23505,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "c8b322c1a0d8e4742202ef76fc4bcaa45f4c2fa90bcec31e20792da35de73aab",
       "occurrence": 1,
       "category": "diagnostic",
@@ -23531,7 +23513,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "696698e8d11842ebfdf5ff95a53edafc05ed63bb736ceee0f280a98672de13c6",
       "occurrence": 1,
       "parts": [
@@ -23549,7 +23531,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "a66b6546bdb0f22c387c7d15d2795a7f36afdfe41a4c9db1bd883e50171533e9",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -23557,7 +23539,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "c19baefb6b7225abc22d80b85267474db7675d49138c2caacfac29080464373d",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -23565,7 +23547,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "9adce0f9525eb9b91ebb8e99416ba916575c7c2e6dd5d65d91954dd661d81ed5",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -23573,7 +23555,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "941f26daf7857ed55a576fcccec1d60e5a07bc4360f11e7ab1dad9f7d161e6dd",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -23581,7 +23563,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "6895aa57a879879010f8f7b225f32685c39f76da2cdd560ad06771f68597cf59",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -23589,7 +23571,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "00ff8cda93e33395452e719eac2c7b879a7ac1d1d6a8b6fb741f2a64206a66e4",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -23597,7 +23579,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "01694fd5ed44772b23b0645666bfd0dfd20b89a55868520c0c8a94075c05a3a2",
       "occurrence": 1,
       "category": "diagnostic",
@@ -23605,7 +23587,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "c2cb9571eed174a55a44d047248d12040de6e1d48f08c8d7db7fa3d0599abef3",
       "occurrence": 1,
       "parts": [
@@ -23633,7 +23615,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "7afe215663969ad6bd41ca927026abe58aa0cf08405d3dfe9244375140833e93",
       "occurrence": 1,
       "parts": [
@@ -23651,7 +23633,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "01c00f918a81f0db543a7edcbabc7f57cbab125647408773d7bbc4319c757bf5",
       "occurrence": 1,
       "parts": [
@@ -23669,7 +23651,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "6ecb3a423b64b1f04bb9733bfc55eac1f0de1ee4e594268925e6c610a99ed706",
       "occurrence": 1,
       "parts": [
@@ -23692,7 +23674,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "f4578e3d75db9709c298320561255cfcdbc30c8d3f8e4c50d58cf053f7633eb3",
       "occurrence": 1,
       "parts": [
@@ -23710,7 +23692,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "0a6ff87908747bcf1f31d32e504a8fd9f3bcd661603bb93e80878c2c568fe668",
       "occurrence": 1,
       "parts": [
@@ -23728,7 +23710,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "c5de4e7e63fba632a971f36dceebfef28418cc51f2800696cf7ed75cc976753b",
       "occurrence": 1,
       "parts": [
@@ -23756,7 +23738,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "2e5ae2cd8a64bc55c868ae23234fc0a13e563166ce7a52cf76ebbdba82618943",
       "occurrence": 1,
       "parts": [
@@ -23774,7 +23756,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "a1bf14598d33f93747b23bef241efec8d540dc34036d1c2174d412d05f568cd5",
       "occurrence": 1,
       "parts": [
@@ -23797,7 +23779,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "1e86d98baf583c304dd05e66866e5a35bb2e81b4c300879cac70af9b9868e197",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -23805,7 +23787,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "72d110629a4f99a614f5a3553808ac99708ebccb9f53ecc8805842cad4e65b77",
       "occurrence": 1,
       "parts": [
@@ -23828,7 +23810,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "b7795e4ae2a57188b60b4c312912b11ea2ef64766078a2c10e9a386ae0a2f47e",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -23836,7 +23818,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "557b535e948fdeae934287e50c4ff0aefb761897ef96d76b63a61670e19c82b6",
       "occurrence": 1,
       "parts": [
@@ -23859,7 +23841,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "01756dfb0320d5603160a3bc0ba87fdec621770667df98f369b2f49dbe6f376d",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -23867,7 +23849,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData.focus",
+      "symbol": "CoursePack.focus",
       "sourceFingerprint": "8ceeb4ba72a68478923cf73f94d75de695f8d71036b048277500eded184b219b",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -23875,7 +23857,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData.methods",
+      "symbol": "CoursePack.methods",
       "sourceFingerprint": "bb0ffe5460ec8ccebd1a3c9ddfae01d7ae64014a64ac6f47ef2ae6d17cb40963",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -23883,7 +23865,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "216cd12a8117e4d751d5df539877355dd18962c4e1ae9c8a571f4b884ad1073e",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -23891,7 +23873,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "55dbbca3698878f6e10b82e921bc5aa02e4fa3d25fd99bad5b4ebb4717517049",
       "occurrence": 1,
       "parts": [
@@ -23909,7 +23891,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "2c8c4b5534b73f01d1722677a1d8133918a08287c2e222a6b561ec6e1b109fdf",
       "occurrence": 1,
       "parts": [
@@ -23927,7 +23909,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "76397b5a798f3cbc3b5ee81dcd78b3a73177cd24d1925ad6bb982310b03c741d",
       "occurrence": 1,
       "parts": [
@@ -23945,7 +23927,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "cf184fbcd6432ff554b679cee32ecf794bacc30e0eb4d223402d3c6afba7a7f1",
       "occurrence": 1,
       "parts": [
@@ -23968,7 +23950,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "9bd281753077b7fc371fda3413790fc1482a8c93d1ab18c19b5e84069226f985",
       "occurrence": 1,
       "parts": [
@@ -23991,7 +23973,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "19dd435e62087ebe76a51e40b0982d8fbfaf532caae7302d665c4c40c1d36fbe",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -23999,7 +23981,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "6792cf90a8d1df557f8359f6277dff016f52a19d53bb482cdfa527a08fff9ec1",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -24007,7 +23989,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData.matrixIntroduction",
+      "symbol": "CoursePack.matrixIntroduction",
       "sourceFingerprint": "1ffe5004fdfc0e4eed6648df38c513ab83d8ad8c57d6f7ddaef0e06a4a591c25",
       "occurrence": 1,
       "parts": [
@@ -24026,7 +24008,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData.webCaseCompositionHeader",
+      "symbol": "CoursePack.webCaseCompositionHeader",
       "sourceFingerprint": "8c1073dda2ca363c8044b230b9d06e647a31066f5e67648c4e8b85e2cc1237e1",
       "occurrence": 1,
       "parts": [
@@ -24045,7 +24027,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "a4eda7847dbefed5b7b522f8c1bdff09111399f136fb57900a3671441c59a6f1",
       "occurrence": 1,
       "parts": [
@@ -24075,7 +24057,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData.maleAccIntro",
+      "symbol": "CoursePack.maleAccIntro",
       "sourceFingerprint": "97053af5bb07627a0dce0ad585d3b82f7c54b2362ec5c155a2843d16eba6eead",
       "occurrence": 1,
       "parts": [
@@ -24094,7 +24076,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "244d58c54e684fcd8a243c14dd844ee31d0471699029891a045a56af9d814be7",
       "occurrence": 1,
       "parts": [
@@ -24124,7 +24106,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "dde77cc95bb9eeca5cbd8df2769b4ce37103e0de8f9f3367be98d2b3ace641c3",
       "occurrence": 1,
       "parts": [
@@ -24142,7 +24124,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "9680b989e4f99e62a0e2f4d4c1de850f393e18acb1ed12aaa0858539df703566",
       "occurrence": 1,
       "parts": [
@@ -24174,7 +24156,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData.vocabularyUnavailableLabel",
+      "symbol": "CoursePack.vocabularyUnavailableLabel",
       "sourceFingerprint": "4705aedf145e938420a95083b054c0e29e8739e696cdc83c95e9f70f9953bb80",
       "occurrence": 1,
       "parts": [
@@ -24193,7 +24175,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "be3964420f970cf371b2546c1413c36e0006e3ff2ffaee30de5e2c61b522dab9",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -24201,7 +24183,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "f79ad32203e6917d2c9307fee3d5442b8c3da8e7d772c9b77eb5754340958699",
       "occurrence": 1,
       "parts": [
@@ -24219,7 +24201,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "b5877322842bf085021c82104831d50d81fa455bc1395682f5633e8193dd9556",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -24227,7 +24209,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "3b8195491e72cb86dfe42d07b58c9d35358c7bbe00ed62c06368205fc2730f9f",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -24235,7 +24217,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "0dd92bb87fe27fed0fe1d5f568ede5e3532097ab8b317d89f2d8abb3365028b0",
       "occurrence": 1,
       "parts": [
@@ -24258,7 +24240,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "e9ffbccda2367a24d9f9d3a218b8f82670db6670f31f780768faa0a2f95820c8",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -24266,7 +24248,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData.id",
+      "symbol": "CoursePack.id",
       "sourceFingerprint": "966cea71fe43eadcbe226d5476a53c393f39262d4824760c5b2b7376e1aac456",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -24274,7 +24256,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData.forms",
+      "symbol": "CoursePack.forms",
       "sourceFingerprint": "2f5af9d8df6afe877291b0b5b854b12b9c11368a1c95a4696297f43f508e9aa2",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -24282,7 +24264,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData.value",
+      "symbol": "CoursePack.value",
       "sourceFingerprint": "0e6bbe11f82b4f7b4f3e3f6b60022438791ab83a6fd7cc8d547ad810b9bce75d",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -24290,7 +24272,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "9924009fd06306925393669114b816bbd497b630920528b67b59fe59c05f763d",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -24298,7 +24280,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "be6c8def42e8309a96f63b8203d2859939a005bf5ccd9d67c656179c6a9483fa",
       "occurrence": 1,
       "parts": [
@@ -24316,7 +24298,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "e290b85d24da2604a042a88ec6a3506ccc78eaa2400f744fcc0284a166172e02",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -24324,7 +24306,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "e438bac1bf247ca882b652a4af66cefe5533ee67be4590638a4d860e628b5686",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -24332,7 +24314,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "96d7e0c40178f9c687ef69343a9a5bdf6b8072eed695d43464b0a31cc472e4e1",
       "occurrence": 1,
       "parts": [
@@ -24355,7 +24337,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData.singular",
+      "symbol": "CoursePack.singular",
       "sourceFingerprint": "293e1bda178e310d9829fd12ea1f346f7a838a6bd3124c47dc38f5c8ad570e46",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -24363,7 +24345,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData.plural",
+      "symbol": "CoursePack.plural",
       "sourceFingerprint": "a1b9f87fca400a2f6c7c561de487754fe8a3be28e7e9c3e28fd14cf5b71d83a7",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -24371,7 +24353,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "98f2bbbf651b19df7ef0f166ee285cedd000b49bef9e21bbf3f6793ecb3cec33",
       "occurrence": 1,
       "parts": [
@@ -24389,7 +24371,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "43f2a8b46f52397af79c981a6fd2a73bf05b792992f95046b5b783510a254c58",
       "occurrence": 1,
       "parts": [
@@ -24407,7 +24389,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData.morphology",
+      "symbol": "CoursePack.morphology",
       "sourceFingerprint": "48b35fe6b50829c324b44a9be2c76587e0c57ac8012e35d8a5973efeca520e9d",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -24415,7 +24397,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "62ccd8a04ff70d1e57b222ee2af8dc2565779865811a1102ae8cd78e032f7c63",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -24423,7 +24405,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData.auxiliary",
+      "symbol": "CoursePack.auxiliary",
       "sourceFingerprint": "847e217cf270386ca6033268d95878d41a56ee12ce24e5554c6153dd3337b2ae",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -24431,7 +24413,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "2f3f8faff99c3a8293933b3d7a8a019567365c16963d61513c1b2d6959639130",
       "occurrence": 1,
       "parts": [
@@ -24449,7 +24431,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData.verbId",
+      "symbol": "CoursePack.verbId",
       "sourceFingerprint": "e178aeb8abd3d05198f1b81e57e8856c1be71991c17e6838f3ba62cef9dad6fb",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -24457,7 +24439,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData.forms",
+      "symbol": "CoursePack.forms",
       "sourceFingerprint": "10d9ce9e6aa5fc2aab20890f8ceac76bd610f67fcbb8277db4a35e15e44fa960",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -24750,7 +24732,7 @@
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/Skills.kt",
       "symbol": "file-scope",
-      "sourceFingerprint": "3139df6f095ab464731f94fa17af33f6ed4bfce4678e8ded3ad1c36fec1647ad",
+      "sourceFingerprint": "214ae6b07c765c7e767d7ece99fbaaf4d59d2249f58dddba0840212b7fba918c",
       "occurrence": 1,
       "category": "diagnostic",
       "reason": "Runtime or validation error text; it is not a learner-facing grammar explanation."
@@ -32744,7 +32726,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "3ad952c5bd4a85b5ff149fab23141d5494d076fbf53d095981bc6aef7252c91c",
       "occurrence": 1,
       "parts": [
@@ -49266,7 +49248,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "d5565fb039aab8042e18e835b3954cf30ccf26902c3b310ab319503122765d20",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -49274,7 +49256,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData",
+      "symbol": "CoursePack",
       "sourceFingerprint": "a72e468e20581cfd21e428e3bdf4252a3933fd57c97279130f2497aaf7984203",
       "occurrence": 1,
       "parts": [
@@ -53637,38 +53619,6 @@
       ]
     },
     {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "file-scope",
-      "sourceFingerprint": "a066dfcba5915aec594ed0c0df50776798e377305d87134ad859ea24dfdc4c0f",
-      "occurrence": 1,
-      "category": "serialization-plumbing",
-      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "file-scope",
-      "sourceFingerprint": "8426d24adffafdfed8e41062b6ad512c8f2d0c2bd922c490492d4d7f5149851e",
-      "occurrence": 1,
-      "category": "serialization-plumbing",
-      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "file-scope",
-      "sourceFingerprint": "397696b8d5e297b04f061fda41597d3a66c297302f5e57ffb9189f6b46543a9a",
-      "occurrence": 1,
-      "category": "serialization-plumbing",
-      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "symbol": "PolishCourseData.source",
-      "sourceFingerprint": "0e06b90d5a98a136b7fa96e5f7e09b28da0a0ec04aa91843cf9b7087c10708df",
-      "occurrence": 1,
-      "category": "serialization-plumbing",
-      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
-    },
-    {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidStylePicker.kt",
       "symbol": "file-scope",
       "sourceFingerprint": "e18c82ef38b98e53414066bd154425260539677f15bff4fa4f165d3e9c128670",
@@ -53707,6 +53657,38 @@
       "occurrence": 1,
       "category": "serialization-plumbing",
       "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "fba3eb9d46eeff411220e1c2f1262e80e5530ac3feaa4989f1d8667b4c4eead7",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Doc comment on CoursePack describing where its content is read from; not learner-facing text."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "653ab22e55c6266461d26f42e5ac096abe878c2b0f03e57e47fd52e657bab9f1",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Doc comment on CoursePack describing where its content is read from; not learner-facing text."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
+      "symbol": "CoursePack",
+      "sourceFingerprint": "4923bf2debea3139355cd61e4a504f3ea4cf13cb4da3227f79557099790fc6ef",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
+      "symbol": "CoursePack.id",
+      "sourceFingerprint": "6a77e2ebdb2e584ac76dbd9a54d940ccd25e5d062bf956293d115f9c18356714",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
     }
   ]
 }

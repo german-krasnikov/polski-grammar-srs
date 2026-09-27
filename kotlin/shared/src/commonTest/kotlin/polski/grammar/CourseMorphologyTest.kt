@@ -4,13 +4,13 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 import polski.data.CoursePossessiveForms
-import polski.data.PolishCourseData
+import polski.data.packRegistry
 import polski.model.*
 
 class CourseMorphologyTest {
     @Test
     fun authoredTablesAreCompleteAndUsedByPublicGrammar() {
-        val owners = PolishCourseData.possessiveForms
+        val owners = packRegistry.active.possessiveForms
         assertEquals(PossessiveId.entries.toSet(), owners.keys)
         for ((id, forms) in owners) when (forms) {
             is CoursePossessiveForms.Invariant -> {
@@ -30,8 +30,8 @@ class CourseMorphologyTest {
             }
         }
         for (number in NumberGram.entries) for (person in Person.entries) {
-            assertEquals(PolishCourseData.futureAuxiliary.forms.getValue(number).getValue(person),
-                verbForm(PolishCourseData.futureAuxiliary.verbId, Tense.FUTURE, person, number))
+            assertEquals(packRegistry.active.futureAuxiliary.forms.getValue(number).getValue(person),
+                verbForm(packRegistry.active.futureAuxiliary.verbId, Tense.FUTURE, person, number))
         }
         assertFailsWith<IllegalStateException> { verbForm("missing", Tense.FUTURE, Person.FIRST, NumberGram.SG) }
         assertFailsWith<IllegalStateException> { verbForm("buyDone", Tense.PRESENT, Person.FIRST, NumberGram.SG) }

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "candidateCount": 4140,
-  "tokenCount": 6896,
+  "candidateCount": 4139,
+  "tokenCount": 6894,
   "rows": [
     {
       "path": "src/training/generator.ts",
@@ -44157,74 +44157,40 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
+      "line": 167,
+      "symbol": "file-scope",
+      "sourceFingerprint": "fba3eb9d46eeff411220e1c2f1262e80e5530ac3feaa4989f1d8667b4c4eead7",
+      "occurrence": 1,
+      "source": "* One course pack's parsed content, read from [source] as schema v1 (a `course.json` under",
+      "tokens": [],
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "serialization-plumbing",
+          "reason": "Doc comment on CoursePack describing where its content is read from; not learner-facing text."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
       "line": 168,
       "symbol": "file-scope",
-      "sourceFingerprint": "a066dfcba5915aec594ed0c0df50776798e377305d87134ad859ea24dfdc4c0f",
+      "sourceFingerprint": "653ab22e55c6266461d26f42e5ac096abe878c2b0f03e57e47fd52e657bab9f1",
       "occurrence": 1,
-      "source": "* UC-02: reached through [CoursePackSource] (`:pack-format`) rather than a fixed generated",
+      "source": "* `courses`, UC-02's [CoursePackSource]). Polish/Russian is the only pack today, so every field below is",
       "tokens": [],
       "parts": [
         {
           "ordinal": 0,
           "category": "serialization-plumbing",
-          "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+          "reason": "Doc comment on CoursePack describing where its content is read from; not learner-facing text."
         }
       ]
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 169,
-      "symbol": "file-scope",
-      "sourceFingerprint": "8426d24adffafdfed8e41062b6ad512c8f2d0c2bd922c490492d4d7f5149851e",
-      "occurrence": 1,
-      "source": "* property — `generateCoursePackSource` (`kotlin/shared/build.gradle.kts`) discovers pl-ru by",
-      "tokens": [],
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "serialization-plumbing",
-          "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
-        }
-      ]
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 170,
-      "symbol": "file-scope",
-      "sourceFingerprint": "397696b8d5e297b04f061fda41597d3a66c297302f5e57ffb9189f6b46543a9a",
-      "occurrence": 1,
-      "source": "* scanning the `courses` directory for a `course.json`, but it is still read here as schema v1.",
-      "tokens": [],
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "serialization-plumbing",
-          "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
-        }
-      ]
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 174,
-      "symbol": "PolishCourseData.source",
-      "sourceFingerprint": "0e06b90d5a98a136b7fa96e5f7e09b28da0a0ec04aa91843cf9b7087c10708df",
-      "occurrence": 1,
-      "source": "val source: CoursePackSource = embeddedCoursePackSources.first { it.id == \"pl-ru\" }",
-      "tokens": [
-        "\"pl-ru\""
-      ],
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "serialization-plumbing",
-          "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
-        }
-      ]
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 176,
-      "symbol": "PolishCourseData",
+      "line": 175,
+      "symbol": "CoursePack",
       "sourceFingerprint": "7d3e385422dc006bd119091443b734a3f49096c184a6c6f1feb00bf66397c142",
       "occurrence": 1,
       "source": "require(pack.getValue(\"schemaVersion\").jsonPrimitive.int == 1)",
@@ -44241,23 +44207,17 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 177,
-      "symbol": "PolishCourseData",
-      "sourceFingerprint": "691ee427b361e5c4a07fe071b6e3cb66e27a6afcafaef1facf3045ee55612831",
+      "line": 176,
+      "symbol": "CoursePack",
+      "sourceFingerprint": "4923bf2debea3139355cd61e4a504f3ea4cf13cb4da3227f79557099790fc6ef",
       "occurrence": 1,
-      "source": "require(pack.string(\"id\") == \"pl-ru\")",
+      "source": "require(pack.string(\"id\") == source.id)",
       "tokens": [
-        "\"id\"",
-        "\"pl-ru\""
+        "\"id\""
       ],
       "parts": [
         {
           "ordinal": 0,
-          "category": "serialization-plumbing",
-          "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
-        },
-        {
-          "ordinal": 1,
           "category": "serialization-plumbing",
           "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
         }
@@ -44265,8 +44225,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 178,
-      "symbol": "PolishCourseData",
+      "line": 177,
+      "symbol": "CoursePack",
       "sourceFingerprint": "e0a3c6c9a74dc6decffe8a6eb308640acf6827b376877d5f51bd3236903b0b63",
       "occurrence": 1,
       "source": "require(pack.string(\"targetLanguage\") == \"pl\" && pack.string(\"nativeLanguage\") == \"ru\")",
@@ -44301,8 +44261,26 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 182,
-      "symbol": "PolishCourseData.nouns",
+      "line": 181,
+      "symbol": "CoursePack.id",
+      "sourceFingerprint": "6a77e2ebdb2e584ac76dbd9a54d940ccd25e5d062bf956293d115f9c18356714",
+      "occurrence": 1,
+      "source": "val id: String by lazy { root.string(\"id\") }",
+      "tokens": [
+        "\"id\""
+      ],
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "serialization-plumbing",
+          "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
+      "line": 183,
+      "symbol": "CoursePack.nouns",
       "sourceFingerprint": "6d871edc2cb6a26f468a9ce73cdc7fb46af77a4fca9a1efbf62c44b29f8a6d15",
       "occurrence": 1,
       "source": "val nouns: List<Noun> by lazy { root.rows(\"nouns\").map { value ->",
@@ -44319,8 +44297,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 183,
-      "symbol": "PolishCourseData",
+      "line": 184,
+      "symbol": "CoursePack",
       "sourceFingerprint": "5b430e6702fc0369ecc027be63df8f9d9ce48fb2b126d3fac12f91927853dafa",
       "occurrence": 1,
       "source": "Noun(value.string(\"id\"), value.string(\"lemma\"), value.string(\"meaning\"), Gender.fromId(value.string(\"gender\")),",
@@ -44355,8 +44333,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 184,
-      "symbol": "PolishCourseData",
+      "line": 185,
+      "symbol": "CoursePack",
       "sourceFingerprint": "799a0b81790231d420cae6e187cb267fcb9ee6bd6a4f513d26e524f396fb1c6b",
       "occurrence": 1,
       "source": "NumberGram.entries.associateWith { number -> value.obj(\"forms\").obj(number.id).caseForms() })",
@@ -44373,8 +44351,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 187,
-      "symbol": "PolishCourseData.adjectives",
+      "line": 188,
+      "symbol": "CoursePack.adjectives",
       "sourceFingerprint": "2cfc24fe1cfa6a335fa368fcf55464c62a367ff716fb3fa9a99d7802f541d01d",
       "occurrence": 1,
       "source": "val adjectives: List<Adjective> by lazy { root.rows(\"adjectives\").map { value ->",
@@ -44391,8 +44369,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 188,
-      "symbol": "PolishCourseData",
+      "line": 189,
+      "symbol": "CoursePack",
       "sourceFingerprint": "2ab2c31cdeeccd8b1753801a792cf415d56073248f346f7e39b16a21b8f249fa",
       "occurrence": 1,
       "source": "Adjective(value.string(\"id\"), value.string(\"lemma\"), value.string(\"meaning\"),",
@@ -44421,8 +44399,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 190,
-      "symbol": "PolishCourseData",
+      "line": 191,
+      "symbol": "CoursePack",
       "sourceFingerprint": "86ef65d07f521c43fe0254cd9af648bc6e7d1b784a8d3a870b6d516c4b821774",
       "occurrence": 1,
       "source": "Gender.entries.associateWith { gender -> value.obj(\"forms\").obj(number.id).obj(gender.id).caseForms() }",
@@ -44439,8 +44417,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 194,
-      "symbol": "PolishCourseData.verbs",
+      "line": 195,
+      "symbol": "CoursePack.verbs",
       "sourceFingerprint": "91109117b4effa68106b3828678617a895e15bb5df4add320fb41f3a5dbcd07f",
       "occurrence": 1,
       "source": "val verbs: List<Verb> by lazy { root.rows(\"verbs\").map { value ->",
@@ -44457,8 +44435,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 195,
-      "symbol": "PolishCourseData.past",
+      "line": 196,
+      "symbol": "CoursePack.past",
       "sourceFingerprint": "c209690cb452c78ae4ba139e1b242569f90221da0535e34cd1f9292c5eb056cd",
       "occurrence": 1,
       "source": "val past = value.obj(\"pastStem\")",
@@ -44475,8 +44453,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 196,
-      "symbol": "PolishCourseData",
+      "line": 197,
+      "symbol": "CoursePack",
       "sourceFingerprint": "e60ed4f46fb1b8f9a5499de2d8862de00a5aacb325b982b85ca3c23ab5198e7d",
       "occurrence": 1,
       "source": "Verb(value.string(\"id\"), value.string(\"lemma\"), value.string(\"meaning\"),",
@@ -44505,8 +44483,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 197,
-      "symbol": "PolishCourseData",
+      "line": 198,
+      "symbol": "CoursePack",
       "sourceFingerprint": "dabfdde11b161b12ec598e153c862332ad02a5dc1c1162275a41501d5a8050b4",
       "occurrence": 1,
       "source": "Aspect.entries.first { it.id == value.string(\"aspect\") },",
@@ -44523,8 +44501,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 198,
-      "symbol": "PolishCourseData",
+      "line": 199,
+      "symbol": "CoursePack",
       "sourceFingerprint": "5b7603797c8e3abe482e206926a961a77fef9f4f5dcba90e8bbdaa10deec7c5b",
       "occurrence": 1,
       "source": "value[\"present\"]?.jsonObject?.let { present ->",
@@ -44541,8 +44519,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 204,
-      "symbol": "PolishCourseData",
+      "line": 205,
+      "symbol": "CoursePack",
       "sourceFingerprint": "bb0f9fca8372acd5d746757221175ce0e9d03783911c27b67f25d99cf53f532e",
       "occurrence": 1,
       "source": "PastStem(past.string(\"m\"), past.string(\"f\"), past.optionalString(\"n\"), past.string(\"mp\"), past.string(\"np\")),",
@@ -44583,8 +44561,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 205,
-      "symbol": "PolishCourseData",
+      "line": 206,
+      "symbol": "CoursePack",
       "sourceFingerprint": "3e9337572d4c50421b1d7851a1c38cae4978c3e1e0917e3434afbe0c868bbc9a",
       "occurrence": 1,
       "source": "FutureType.entries.first { it.id == value.string(\"futureType\") }, value.optionalString(\"perfectivePair\"))",
@@ -44607,8 +44585,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 208,
-      "symbol": "PolishCourseData.skills",
+      "line": 209,
+      "symbol": "CoursePack.skills",
       "sourceFingerprint": "c1f2d920fb86e7ad0c854104e1b0252eaab47badf587ea45372dd594639d2a8e",
       "occurrence": 1,
       "source": "val skills: List<Skill> by lazy { root.rows(\"skills\").map { value ->",
@@ -44625,8 +44603,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 209,
-      "symbol": "PolishCourseData",
+      "line": 210,
+      "symbol": "CoursePack",
       "sourceFingerprint": "8695797b53bdf90004071808d05a8d7a52bf86e120b5af6e307ddfe90b85dfbd",
       "occurrence": 1,
       "source": "Skill(value.string(\"id\"), value.string(\"title\"), value.string(\"group\"), value.string(\"level\"),",
@@ -44661,8 +44639,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 210,
-      "symbol": "PolishCourseData",
+      "line": 211,
+      "symbol": "CoursePack",
       "sourceFingerprint": "cd87d7a63977566825b3d14a4a86a65b0d8a6dfdaba888709f566695a99ef69e",
       "occurrence": 1,
       "source": "value.string(\"formula\"), value.string(\"theory\"), value.string(\"hint\"),",
@@ -44691,8 +44669,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 211,
-      "symbol": "PolishCourseData",
+      "line": 212,
+      "symbol": "CoursePack",
       "sourceFingerprint": "a37e66782d31113c79b5ff924d08e30326e5db37a6febb1d3137c2182bfda1fa",
       "occurrence": 1,
       "source": "value.getValue(\"prerequisites\").jsonArray.map { it.jsonPrimitive.content })",
@@ -44709,8 +44687,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 214,
-      "symbol": "PolishCourseData.sentenceSeeds",
+      "line": 215,
+      "symbol": "CoursePack.sentenceSeeds",
       "sourceFingerprint": "f75d64b991f469454374e5824683b5037ada3494d6d52da978670ca16b243d34",
       "occurrence": 1,
       "source": "val sentenceSeeds: List<SentenceSeed> by lazy { root.rows(\"sentenceSeeds\").map { value ->",
@@ -44727,8 +44705,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 215,
-      "symbol": "PolishCourseData",
+      "line": 216,
+      "symbol": "CoursePack",
       "sourceFingerprint": "7768db64200d4c9ef4f19e9c2c5430d7a3a83d96cae322b1e3a55f9eed1bfb7d",
       "occurrence": 1,
       "source": "SentenceSeed(value.string(\"nounId\"), value.string(\"adjectiveId\"))",
@@ -44751,8 +44729,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 222,
-      "symbol": "PolishCourseData",
+      "line": 223,
+      "symbol": "CoursePack",
       "sourceFingerprint": "07122a633b422c444b3da3dda29f485ffb6e8bc6b781c1a9ebd710557fe838d9",
       "occurrence": 1,
       "source": "root.obj(\"caseSentencePrefixes\").mapValues { (_, value) -> value.jsonPrimitive.content }",
@@ -44769,8 +44747,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 226,
-      "symbol": "PolishCourseData",
+      "line": 227,
+      "symbol": "CoursePack",
       "sourceFingerprint": "cbb0a73527f66ab1b3fdd80c63a7f1d4f68133f6bc30de86f4b2478e2c3104ef",
       "occurrence": 1,
       "source": "root.obj(\"exerciseCopy\").mapValues { (_, value) -> value.jsonPrimitive.content }",
@@ -44787,8 +44765,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 230,
-      "symbol": "PolishCourseData",
+      "line": 231,
+      "symbol": "CoursePack",
       "sourceFingerprint": "18a7d20d6be9ffdae118336a1642b31b82fcaca78168b6317625cba9e738b067",
       "occurrence": 1,
       "source": "root.obj(\"exercisePatterns\").mapValues { (_, value) -> value.jsonPrimitive.content }",
@@ -44805,8 +44783,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 234,
-      "symbol": "PolishCourseData.value",
+      "line": 235,
+      "symbol": "CoursePack.value",
       "sourceFingerprint": "d400bc3a636a783c05ca05961680223fb711264535b6d73a5cb3702836a053c5",
       "occurrence": 1,
       "source": "val value = root.obj(\"training\").obj(\"chainPresentation\")",
@@ -44829,8 +44807,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 235,
-      "symbol": "PolishCourseData.completion",
+      "line": 236,
+      "symbol": "CoursePack.completion",
       "sourceFingerprint": "ee63af224b5d79ec982d38488632be22896bf4658afff1a28f38c1ed7c2815f0",
       "occurrence": 1,
       "source": "val completion = value.obj(\"completion\")",
@@ -44847,8 +44825,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 237,
-      "symbol": "PolishCourseData",
+      "line": 238,
+      "symbol": "CoursePack",
       "sourceFingerprint": "3ad952c5bd4a85b5ff149fab23141d5494d076fbf53d095981bc6aef7252c91c",
       "occurrence": 1,
       "source": "value.rows(\"steps\").map { ChainStep(it.string(\"id\"), it.string(\"label\")) }.requireUniqueIds(ChainStep::id),",
@@ -44877,8 +44855,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 239,
-      "symbol": "PolishCourseData",
+      "line": 240,
+      "symbol": "CoursePack",
       "sourceFingerprint": "90643b19b9c80bd3dc7d2f10c15077dd7f02606d084637e08a1f7ea9aacf3154",
       "occurrence": 1,
       "source": "completion.string(\"title\"), completion.string(\"reactEyebrow\"),",
@@ -44901,8 +44879,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 240,
-      "symbol": "PolishCourseData",
+      "line": 241,
+      "symbol": "CoursePack",
       "sourceFingerprint": "4576ea49837da38eed72f45715398318078276e4c5144e80ba5581a80c9d47b7",
       "occurrence": 1,
       "source": "completion.string(\"reactBody\"), completion.string(\"webBody\"),",
@@ -44925,8 +44903,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 246,
-      "symbol": "PolishCourseData",
+      "line": 247,
+      "symbol": "CoursePack",
       "sourceFingerprint": "eabd698a121339d5b90274003ce60363ffc47f1ac1118457a438d51fc7157203",
       "occurrence": 1,
       "source": "root.obj(\"reference\").rows(\"caseRows\").map { value ->",
@@ -44949,8 +44927,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 247,
-      "symbol": "PolishCourseData",
+      "line": 248,
+      "symbol": "CoursePack",
       "sourceFingerprint": "c21c35f47825ce273f7164fe25beb8c087517a4383fa10eb9680c1a27e58040b",
       "occurrence": 1,
       "source": "CaseReferenceRow(GramCase.fromId(value.string(\"id\")), value.string(\"pl\"), value.string(\"ru\"),",
@@ -44979,8 +44957,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 248,
-      "symbol": "PolishCourseData",
+      "line": 249,
+      "symbol": "CoursePack",
       "sourceFingerprint": "4008165549df776ea219577eecc5fb92177e0934644dfb28b5e2cd73421f82bb",
       "occurrence": 1,
       "source": "value.string(\"question\"), value.string(\"trigger\"), value.optionalString(\"skill\"))",
@@ -45009,8 +44987,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 253,
-      "symbol": "PolishCourseData",
+      "line": 254,
+      "symbol": "CoursePack",
       "sourceFingerprint": "588c6971992fe1aa0c3ab84b6b09e5d4c27f7bef20c1b74a3aef5c0203f27a9c",
       "occurrence": 1,
       "source": "root.obj(\"reference\").obj(\"genderNames\").mapValues { (_, value) -> value.jsonPrimitive.content }",
@@ -45033,8 +45011,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 257,
-      "symbol": "PolishCourseData",
+      "line": 258,
+      "symbol": "CoursePack",
       "sourceFingerprint": "cf89b40e9fc3daa510d4ba75e77c1ea945fc7d940309ccd1555eac85d774cc08",
       "occurrence": 1,
       "source": "root.obj(\"reference\").rows(\"chainRows\").map { value ->",
@@ -45057,8 +45035,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 258,
-      "symbol": "PolishCourseData",
+      "line": 259,
+      "symbol": "CoursePack",
       "sourceFingerprint": "d24e467cadde8ccec0679fde85874ae103706e4eee50efde9192d2958a7827af",
       "occurrence": 1,
       "source": "ReferenceChainRow(value.string(\"label\"), value.string(\"from\"), value.string(\"to\"), value.string(\"change\"))",
@@ -45093,8 +45071,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 265,
-      "symbol": "PolishCourseData",
+      "line": 266,
+      "symbol": "CoursePack",
       "sourceFingerprint": "090be2698f6e66776a86d94f18c38505244c6b2b00e5c98c3ea611d2a76de201",
       "occurrence": 1,
       "source": "root.obj(\"reference\").rows(\"systemCards\").map { value ->",
@@ -45117,8 +45095,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 266,
-      "symbol": "PolishCourseData",
+      "line": 267,
+      "symbol": "CoursePack",
       "sourceFingerprint": "e4b49c6dfd37552e48ac9cd28e18e7f1a0f105fe293499dae9a3a08b4e61e181",
       "occurrence": 1,
       "source": "ReferenceSystemCard(value.string(\"id\"), value.string(\"title\"), value.string(\"explanation\"), value.string(\"example\"))",
@@ -45153,8 +45131,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 268,
-      "symbol": "PolishCourseData",
+      "line": 269,
+      "symbol": "CoursePack",
       "sourceFingerprint": "26140eb00f1deb07039dc33b91bb17e6a37d3c616629d6fa235979e02cbfc98d",
       "occurrence": 1,
       "source": "require(cards.map { it.id } == listOf(\"noun\", \"agreement\", \"verb\", \"modifiers\"))",
@@ -45189,8 +45167,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 273,
-      "symbol": "PolishCourseData.pipeline",
+      "line": 274,
+      "symbol": "CoursePack.pipeline",
       "sourceFingerprint": "fd02a4f7f2320021bcb4c82b3bc897fa1a275502c8ba183488714b524f885d11",
       "occurrence": 1,
       "source": "val pipeline = root.obj(\"reference\").obj(\"pipeline\")",
@@ -45213,8 +45191,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 275,
-      "symbol": "PolishCourseData",
+      "line": 276,
+      "symbol": "CoursePack",
       "sourceFingerprint": "099d83352de6ab836b6f7c3871fd5f214643deea6e45d13895a0a96ced20b0af",
       "occurrence": 1,
       "source": "pipeline.string(\"title\"),",
@@ -45231,8 +45209,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 276,
-      "symbol": "PolishCourseData",
+      "line": 277,
+      "symbol": "CoursePack",
       "sourceFingerprint": "4e1b71011d5e75af4235b440f900272fc0f76afa3bb34dc6c16a82e64fd1d730",
       "occurrence": 1,
       "source": "pipeline.rows(\"steps\").map { step ->",
@@ -45249,8 +45227,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 277,
-      "symbol": "PolishCourseData",
+      "line": 278,
+      "symbol": "CoursePack",
       "sourceFingerprint": "04aa478790f3420ed771e187cfd0a6b34ad5a779835cde6b2a5312b6663adbe3",
       "occurrence": 1,
       "source": "ReferencePipelineStep(step.string(\"id\"), step.string(\"label\"), step.string(\"question\"), step.string(\"example\"))",
@@ -45285,8 +45263,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 279,
-      "symbol": "PolishCourseData",
+      "line": 280,
+      "symbol": "CoursePack",
       "sourceFingerprint": "8c9ef3703e23088a0e2c8859cff8748961a78a76badb5319d37891972c6b52da",
       "occurrence": 1,
       "source": "pipeline.string(\"compactExample\"),",
@@ -45303,8 +45281,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 281,
-      "symbol": "PolishCourseData",
+      "line": 282,
+      "symbol": "CoursePack",
       "sourceFingerprint": "3211eeb4a3109990116539c91e8794229d8a57deba682718b071b61cb5bed1ff",
       "occurrence": 1,
       "source": "require(value.steps.map { it.id } == listOf(\"intent\", \"case\", \"agreement\"))",
@@ -45333,8 +45311,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 286,
-      "symbol": "PolishCourseData.teaching",
+      "line": 287,
+      "symbol": "CoursePack.teaching",
       "sourceFingerprint": "21e4ec047038a67d3b7c4c312e6bfea8f15c65ecff43b8e1e7d424d91beaa288",
       "occurrence": 1,
       "source": "val teaching = root.obj(\"reference\").obj(\"caseTeaching\")",
@@ -45357,8 +45335,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 287,
-      "symbol": "PolishCourseData.note",
+      "line": 288,
+      "symbol": "CoursePack.note",
       "sourceFingerprint": "56a4e210abce2aa0902ead64e9018c34c03f0d7a57280f9401bf60f49d1a53b3",
       "occurrence": 1,
       "source": "val note = teaching.obj(\"caseNote\")",
@@ -45375,8 +45353,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 288,
-      "symbol": "PolishCourseData",
+      "line": 289,
+      "symbol": "CoursePack",
       "sourceFingerprint": "a947fde43c0ab0cac8db8ec5b29173aed159f7a2755fea85f2cf0d308c972b0a",
       "occurrence": 1,
       "source": "CaseTeaching(note.string(\"react\"), note.string(\"compact\"), teaching.string(\"comparisonReadingHint\"))",
@@ -45405,8 +45383,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 292,
-      "symbol": "PolishCourseData.teaching",
+      "line": 293,
+      "symbol": "CoursePack.teaching",
       "sourceFingerprint": "7382b5cc4f9ce6a2e54f07eb15cce1634e19047e2b7fa9602f6bc7f5d6ec4578",
       "occurrence": 1,
       "source": "val teaching = root.obj(\"reference\").obj(\"pronounTeaching\")",
@@ -45429,8 +45407,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 293,
-      "symbol": "PolishCourseData.personal",
+      "line": 294,
+      "symbol": "CoursePack.personal",
       "sourceFingerprint": "c24bf5f629f3354031a92bbba520385442e6d3c82784ff52f3eb3419d68d5f32",
       "occurrence": 1,
       "source": "val personal = teaching.obj(\"personal\")",
@@ -45447,8 +45425,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 294,
-      "symbol": "PolishCourseData.intro",
+      "line": 295,
+      "symbol": "CoursePack.intro",
       "sourceFingerprint": "9840bcf2e32c7a664f10e0b827f46cc116db3a6e0849395d0eb8302b1fc3391f",
       "occurrence": 1,
       "source": "val intro = personal.obj(\"intro\")",
@@ -45465,8 +45443,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 295,
-      "symbol": "PolishCourseData.footer",
+      "line": 296,
+      "symbol": "CoursePack.footer",
       "sourceFingerprint": "ac77c519212bc64a3ecf44bc85f79c223af3933708d1da69da0ceef8944b8b62",
       "occurrence": 1,
       "source": "val footer = personal.obj(\"footer\")",
@@ -45483,8 +45461,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 296,
-      "symbol": "PolishCourseData.possessive",
+      "line": 297,
+      "symbol": "CoursePack.possessive",
       "sourceFingerprint": "007ffd2fc9218dee37051431cea7a4ffe3275e406061a9e82d33a9b63cab61b0",
       "occurrence": 1,
       "source": "val possessive = teaching.obj(\"possessive\")",
@@ -45501,8 +45479,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 297,
-      "symbol": "PolishCourseData.demo",
+      "line": 298,
+      "symbol": "CoursePack.demo",
       "sourceFingerprint": "1ce9f329bf79ca9f3abab72797bdf8aa397c89aca5c5f6d88e9a8ba1c65cdecb",
       "occurrence": 1,
       "source": "val demo = possessive.obj(\"demo\")",
@@ -45519,8 +45497,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 299,
-      "symbol": "PolishCourseData",
+      "line": 300,
+      "symbol": "CoursePack",
       "sourceFingerprint": "42a6b5033bbc6f0468b12aa0ef220a88338efc6e447434da4d942a88b84ec902",
       "occurrence": 1,
       "source": "personal.string(\"title\"), intro.string(\"react\"), intro.string(\"compact\"),",
@@ -45549,8 +45527,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 300,
-      "symbol": "PolishCourseData",
+      "line": 301,
+      "symbol": "CoursePack",
       "sourceFingerprint": "d74efcb1fffabcf27cb9ddff9022e163e45b06ff92511c04e36f96efc8fcc345",
       "occurrence": 1,
       "source": "footer.string(\"react\"), footer.string(\"web\"), footer.string(\"native\"),",
@@ -45579,8 +45557,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 301,
-      "symbol": "PolishCourseData",
+      "line": 302,
+      "symbol": "CoursePack",
       "sourceFingerprint": "20bce592cdfb1834f05894fa2748b3c806b57f01c8e9a89e89982d48a54ffad3",
       "occurrence": 1,
       "source": "personal.getValue(\"pronounIds\").jsonArray.map { it.jsonPrimitive.content },",
@@ -45597,8 +45575,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 302,
-      "symbol": "PolishCourseData",
+      "line": 303,
+      "symbol": "CoursePack",
       "sourceFingerprint": "a0cce457819e479ff27117240dd11a11514b907feb28b24fb9ef3b503271da10",
       "occurrence": 1,
       "source": "teaching.rows(\"contexts\").map { row ->",
@@ -45615,8 +45593,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 303,
-      "symbol": "PolishCourseData.id",
+      "line": 304,
+      "symbol": "CoursePack.id",
       "sourceFingerprint": "d42635102d7aa31ecac52f2c9c2696cf636593ab06afa87a69e7661443f00f70",
       "occurrence": 1,
       "source": "val id = GramCase.fromId(row.string(\"id\"))",
@@ -45633,8 +45611,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 304,
-      "symbol": "PolishCourseData",
+      "line": 305,
+      "symbol": "CoursePack",
       "sourceFingerprint": "5ee29ed263a646f405f0ff11cb0d85c898a846d8c0aa22c6f294a1e46eae9c3d",
       "occurrence": 1,
       "source": "require(GramCase.fromId(row.string(\"caseId\")) == id)",
@@ -45651,8 +45629,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 305,
-      "symbol": "PolishCourseData.cue",
+      "line": 306,
+      "symbol": "CoursePack.cue",
       "sourceFingerprint": "c9b6ad0a80899a1dd3d20b7f1aceda4a5e5e1916a87f26a1495da39e7f395746",
       "occurrence": 1,
       "source": "val cue = row.obj(\"cue\")",
@@ -45669,8 +45647,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 306,
-      "symbol": "PolishCourseData",
+      "line": 307,
+      "symbol": "CoursePack",
       "sourceFingerprint": "b779e455bb5fbdee6b589ca65b82b3fdba98db3acd38391b0065859db76e8d7c",
       "occurrence": 1,
       "source": "PronounContext(id, PronounCue(cue.string(\"full\"), cue.string(\"compact\"), cue.string(\"ios\")),",
@@ -45699,8 +45677,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 307,
-      "symbol": "PolishCourseData",
+      "line": 308,
+      "symbol": "CoursePack",
       "sourceFingerprint": "708d209397329573fc711f09ddeeaa6dab8e83977fc423452ceb284f3b01a708",
       "occurrence": 1,
       "source": "row.string(\"caseName\"), row.optionalString(\"valuePrefix\") ?: \"\",",
@@ -45729,8 +45707,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 308,
-      "symbol": "PolishCourseData",
+      "line": 309,
+      "symbol": "CoursePack",
       "sourceFingerprint": "8f2dc1ea4e58aba4c8409104366144d9a6cee26d29e2c281e33dc4a3e6d16aaa",
       "occurrence": 1,
       "source": "row[\"specialValues\"]?.jsonObject?.mapValues { (_, value) -> value.jsonPrimitive.content } ?: emptyMap())",
@@ -45747,8 +45725,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 310,
-      "symbol": "PolishCourseData",
+      "line": 311,
+      "symbol": "CoursePack",
       "sourceFingerprint": "96fce374fd3692eec1dab0a207a67519b828190fe241ae117f5a20c70dc7442d",
       "occurrence": 1,
       "source": "possessive.string(\"title\"),",
@@ -45765,8 +45743,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 312,
-      "symbol": "PolishCourseData",
+      "line": 313,
+      "symbol": "CoursePack",
       "sourceFingerprint": "8d7d21e921678b02b1144e3bca531a30bb6048986e48823ea5ce64418f4edae8",
       "occurrence": 1,
       "source": "demo.string(\"nounId\"), demo.string(\"adjectiveId\"), NumberGram.fromId(demo.string(\"number\")),",
@@ -45795,8 +45773,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 313,
-      "symbol": "PolishCourseData",
+      "line": 314,
+      "symbol": "CoursePack",
       "sourceFingerprint": "fff72e649a12ab8bdddb8a6ed3cf6c92b0037984974cc1f9e9100c32ef29756c",
       "occurrence": 1,
       "source": "demo.rows(\"cases\").map { row ->",
@@ -45813,8 +45791,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 314,
-      "symbol": "PolishCourseData.caption",
+      "line": 315,
+      "symbol": "CoursePack.caption",
       "sourceFingerprint": "3206d898263f3c6d8d406aa3caf4711b487a5a6b3d0b4bbd9b076b0a77b7dcab",
       "occurrence": 1,
       "source": "val caption = row.obj(\"caption\")",
@@ -45831,8 +45809,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 315,
-      "symbol": "PolishCourseData",
+      "line": 316,
+      "symbol": "CoursePack",
       "sourceFingerprint": "7b186610ca34058e08bb83975bddc9cc30b3323e40010725690c65b4398d721e",
       "occurrence": 1,
       "source": "PossessiveDemoCase(GramCase.fromId(row.string(\"id\")), caption.string(\"web\"),",
@@ -45855,8 +45833,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 316,
-      "symbol": "PolishCourseData",
+      "line": 317,
+      "symbol": "CoursePack",
       "sourceFingerprint": "061ef9a2a84e0d043fdaa211b14509e01397cd92c75d757b2dd4ff8482039a8f",
       "occurrence": 1,
       "source": "caption.string(\"desktop\"), caption.string(\"ios\"))",
@@ -45879,8 +45857,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 318,
-      "symbol": "PolishCourseData",
+      "line": 319,
+      "symbol": "CoursePack",
       "sourceFingerprint": "a51f4972a5cca6c98aa1b9358d55243c95593981d1cc5fc27084a081876bbec1",
       "occurrence": 1,
       "source": "demo.getValue(\"invariableOwnerIds\").jsonArray.map { PossessiveId.fromId(it.jsonPrimitive.content) }.toSet(),",
@@ -45897,8 +45875,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 319,
-      "symbol": "PolishCourseData",
+      "line": 320,
+      "symbol": "CoursePack",
       "sourceFingerprint": "fcc9b94c9aa03965850ee7783c0e1f96a100983fb4b892c1cb853ff9c89ea135",
       "occurrence": 1,
       "source": "demo.obj(\"rule\").string(\"invariable\"), demo.obj(\"rule\").string(\"variable\"),",
@@ -45933,8 +45911,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 322,
-      "symbol": "PolishCourseData",
+      "line": 323,
+      "symbol": "CoursePack",
       "sourceFingerprint": "0c79aa598ecd701336cede9df04a923de192d56a2f231c79e414919a4ca86d31",
       "occurrence": 1,
       "source": "require(value.pronounIds == listOf(\"ja\", \"ty\", \"on\", \"ona\", \"ono\", \"my\", \"wy\", \"oni\", \"one\"))",
@@ -45999,8 +45977,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 329,
-      "symbol": "PolishCourseData.teaching",
+      "line": 330,
+      "symbol": "CoursePack.teaching",
       "sourceFingerprint": "9747dd481b70acb3d380015147022bfe62a1e41e570671911ff28e891bb03319",
       "occurrence": 1,
       "source": "val teaching = root.obj(\"reference\").obj(\"verbTeaching\")",
@@ -46023,8 +46001,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 331,
-      "symbol": "PolishCourseData",
+      "line": 332,
+      "symbol": "CoursePack",
       "sourceFingerprint": "d0afc4b7dead1129f67f1ce24a24945621dd9bc203feb51c3ade6b7376470ae4",
       "occurrence": 1,
       "source": "teaching.rows(\"subjects\").map { subject ->",
@@ -46041,8 +46019,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 332,
-      "symbol": "PolishCourseData",
+      "line": 333,
+      "symbol": "CoursePack",
       "sourceFingerprint": "1926b15620cc393fb016f3dc11eb1cbbbc0acec022a5a3eee0eca7007aa9eb6b",
       "occurrence": 1,
       "source": "VerbSubject(subject.string(\"id\"), Person.fromId(subject.getValue(\"person\").jsonPrimitive.int),",
@@ -46065,8 +46043,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 333,
-      "symbol": "PolishCourseData",
+      "line": 334,
+      "symbol": "CoursePack",
       "sourceFingerprint": "424404473a7290ebf71fa33604e064bd6f4ec2e070ced8c416509085f8d0b219",
       "occurrence": 1,
       "source": "NumberGram.fromId(subject.string(\"number\")), subject.string(\"genderMode\") == \"selected\",",
@@ -46095,8 +46073,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 334,
-      "symbol": "PolishCourseData",
+      "line": 335,
+      "symbol": "CoursePack",
       "sourceFingerprint": "516ce8825404f4933514187222b653b5aeb728395ba0ceceddaa23b9d45b10b8",
       "occurrence": 1,
       "source": "subject.optionalString(\"fixedGender\")?.let(Gender::fromId), subject.obj(\"label\").verbLabel())",
@@ -46119,8 +46097,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 336,
-      "symbol": "PolishCourseData",
+      "line": 337,
+      "symbol": "CoursePack",
       "sourceFingerprint": "ad8c1c438fef8b9c973053d2e4889b8a87af630d1de5f267f88bc3c370d3b1ec",
       "occurrence": 1,
       "source": "teaching.obj(\"genderControlLabel\").verbLabel(),",
@@ -46137,8 +46115,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 337,
-      "symbol": "PolishCourseData",
+      "line": 338,
+      "symbol": "CoursePack",
       "sourceFingerprint": "3d5ddceeb94ef9eacdccaed2d48b7f161bec62baff3cfbc01d9a6651c8099633",
       "occurrence": 1,
       "source": "teaching.rows(\"genderOptions\").map { VerbGenderOption(it.string(\"id\"), it.obj(\"label\").verbLabel()) },",
@@ -46167,8 +46145,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 338,
-      "symbol": "PolishCourseData",
+      "line": 339,
+      "symbol": "CoursePack",
       "sourceFingerprint": "7addfd3f767a7e48516875d6c4a5057adb2c13b501cd25b1bf26b6158db8f423",
       "occurrence": 1,
       "source": "Tense.entries.associateWith { teaching.obj(\"tenseLabels\").obj(it.id).verbLabel() },",
@@ -46185,8 +46163,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 339,
-      "symbol": "PolishCourseData",
+      "line": 340,
+      "symbol": "CoursePack",
       "sourceFingerprint": "f73f288236738ef959f800d36a8fcb1c33700e6f7f45edec7c5a80a25610ebac",
       "occurrence": 1,
       "source": "teaching.obj(\"futureExplanation\").string(\"react\"),",
@@ -46209,8 +46187,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 340,
-      "symbol": "PolishCourseData",
+      "line": 341,
+      "symbol": "CoursePack",
       "sourceFingerprint": "7f26beb3e7d0e57b40f6c65e0bed4adf9e68a098c5f0d093b812c6c7a30c8e1a",
       "occurrence": 1,
       "source": "teaching.obj(\"futureExplanation\").string(\"compact\"),",
@@ -46233,8 +46211,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 345,
-      "symbol": "PolishCourseData",
+      "line": 346,
+      "symbol": "CoursePack",
       "sourceFingerprint": "019113b21548fbf772011a9b7658b0a474ee6cae9ebe001e1393035ded9c416e",
       "occurrence": 1,
       "source": "root.obj(\"reference\").getValue(\"comparisonNounIds\").jsonArray.map { it.jsonPrimitive.content }.also { ids ->",
@@ -46257,8 +46235,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 352,
-      "symbol": "PolishCourseData.support",
+      "line": 353,
+      "symbol": "CoursePack.support",
       "sourceFingerprint": "64eb10d6e33df6a65f72bd116fa82c9f29ccf9f5f4282a43070df58dbbec4110",
       "occurrence": 1,
       "source": "val support = root.obj(\"reference\").obj(\"russianSupport\")",
@@ -46281,8 +46259,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 353,
-      "symbol": "PolishCourseData.title",
+      "line": 354,
+      "symbol": "CoursePack.title",
       "sourceFingerprint": "b9fab1aeee80d81d094e97e63fe20cd978a83b593cfe5cd72d7271749cd0c435",
       "occurrence": 1,
       "source": "val title = support.obj(\"title\")",
@@ -46299,8 +46277,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 355,
-      "symbol": "PolishCourseData",
+      "line": 356,
+      "symbol": "CoursePack",
       "sourceFingerprint": "92a6ff9d197e26c4e565db9303ff4d9a9d405e2fb2db86fae74dd446de754fab",
       "occurrence": 1,
       "source": "title.string(\"full\"), title.string(\"compact\"),",
@@ -46323,8 +46301,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 356,
-      "symbol": "PolishCourseData",
+      "line": 357,
+      "symbol": "CoursePack",
       "sourceFingerprint": "8dab553bbf89fa2a538272096e7f5b1a36f145978f482f6dcb93245ea42190de",
       "occurrence": 1,
       "source": "support.getValue(\"columns\").jsonArray.map { it.jsonPrimitive.content },",
@@ -46341,8 +46319,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 357,
-      "symbol": "PolishCourseData",
+      "line": 358,
+      "symbol": "CoursePack",
       "sourceFingerprint": "cefb9daeea7741fd68b15b647a30fd9e76a1800d8d9c266d25a4e2c442c6f7f3",
       "occurrence": 1,
       "source": "support.rows(\"rows\").mapIndexed { index, row ->",
@@ -46359,8 +46337,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 358,
-      "symbol": "PolishCourseData",
+      "line": 359,
+      "symbol": "CoursePack",
       "sourceFingerprint": "73020041c26da76d7db1abf8f9f59c05e0a7424fd090f3a38b40114e13bed681",
       "occurrence": 1,
       "source": "require(row[\"comparisons\"] != null) {",
@@ -46377,8 +46355,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 359,
-      "symbol": "PolishCourseData",
+      "line": 360,
+      "symbol": "CoursePack",
       "sourceFingerprint": "c8b322c1a0d8e4742202ef76fc4bcaa45f4c2fa90bcec31e20792da35de73aab",
       "occurrence": 1,
       "source": "\"/reference/russianSupport/rows/$index/comparisons: missing comparisons\"",
@@ -46395,8 +46373,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 362,
-      "symbol": "PolishCourseData",
+      "line": 363,
+      "symbol": "CoursePack",
       "sourceFingerprint": "696698e8d11842ebfdf5ff95a53edafc05ed63bb736ceee0f280a98672de13c6",
       "occurrence": 1,
       "source": "row.string(\"id\"), row.string(\"cue\"),",
@@ -46419,8 +46397,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 363,
-      "symbol": "PolishCourseData",
+      "line": 364,
+      "symbol": "CoursePack",
       "sourceFingerprint": "a66b6546bdb0f22c387c7d15d2795a7f36afdfe41a4c9db1bd883e50171533e9",
       "occurrence": 1,
       "source": "row.obj(\"react\").russianSupportTable(),",
@@ -46437,8 +46415,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 364,
-      "symbol": "PolishCourseData",
+      "line": 365,
+      "symbol": "CoursePack",
       "sourceFingerprint": "c19baefb6b7225abc22d80b85267474db7675d49138c2caacfac29080464373d",
       "occurrence": 1,
       "source": "row.obj(\"web\").russianSupportTable(),",
@@ -46455,8 +46433,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 365,
-      "symbol": "PolishCourseData",
+      "line": 366,
+      "symbol": "CoursePack",
       "sourceFingerprint": "9adce0f9525eb9b91ebb8e99416ba916575c7c2e6dd5d65d91954dd661d81ed5",
       "occurrence": 1,
       "source": "row.obj(\"desktop\").russianSupportTable(),",
@@ -46473,8 +46451,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 366,
-      "symbol": "PolishCourseData",
+      "line": 367,
+      "symbol": "CoursePack",
       "sourceFingerprint": "941f26daf7857ed55a576fcccec1d60e5a07bc4360f11e7ab1dad9f7d161e6dd",
       "occurrence": 1,
       "source": "row.string(\"mobileLine\"),",
@@ -46491,8 +46469,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 367,
-      "symbol": "PolishCourseData",
+      "line": 368,
+      "symbol": "CoursePack",
       "sourceFingerprint": "6895aa57a879879010f8f7b225f32685c39f76da2cdd560ad06771f68597cf59",
       "occurrence": 1,
       "source": "row.rows(\"comparisons\").mapIndexed { pairIndex, pair ->",
@@ -46509,8 +46487,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 368,
-      "symbol": "PolishCourseData",
+      "line": 369,
+      "symbol": "CoursePack",
       "sourceFingerprint": "00ff8cda93e33395452e719eac2c7b879a7ac1d1d6a8b6fb741f2a64206a66e4",
       "occurrence": 1,
       "source": "pair.russianSupportComparison(\"/reference/russianSupport/rows/$index/comparisons/$pairIndex\")",
@@ -46527,8 +46505,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 369,
-      "symbol": "PolishCourseData",
+      "line": 370,
+      "symbol": "CoursePack",
       "sourceFingerprint": "01694fd5ed44772b23b0645666bfd0dfd20b89a55868520c0c8a94075c05a3a2",
       "occurrence": 1,
       "source": "}.also { require(it.isNotEmpty()) { \"/reference/russianSupport/rows/$index/comparisons: empty comparisons\" } },",
@@ -46545,8 +46523,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 374,
-      "symbol": "PolishCourseData",
+      "line": 375,
+      "symbol": "CoursePack",
       "sourceFingerprint": "c2cb9571eed174a55a44d047248d12040de6e1d48f08c8d7db7fa3d0599abef3",
       "occurrence": 1,
       "source": "require(value.rows.map { it.id } == listOf(\"accusative\", \"instrumental\", \"locative\", \"possessive\"))",
@@ -46581,8 +46559,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 375,
-      "symbol": "PolishCourseData",
+      "line": 376,
+      "symbol": "CoursePack",
       "sourceFingerprint": "7afe215663969ad6bd41ca927026abe58aa0cf08405d3dfe9244375140833e93",
       "occurrence": 1,
       "source": "require(value.rows.all { it.mobileLine.startsWith(\"${it.cue} → \") })",
@@ -46605,8 +46583,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 380,
-      "symbol": "PolishCourseData",
+      "line": 381,
+      "symbol": "CoursePack",
       "sourceFingerprint": "01c00f918a81f0db543a7edcbabc7f57cbab125647408773d7bbc4319c757bf5",
       "occurrence": 1,
       "source": "root.obj(\"reference\").rows(\"tenseRows\").map { value ->",
@@ -46629,8 +46607,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 381,
-      "symbol": "PolishCourseData",
+      "line": 382,
+      "symbol": "CoursePack",
       "sourceFingerprint": "6ecb3a423b64b1f04bb9733bfc55eac1f0de1ee4e594268925e6c610a99ed706",
       "occurrence": 1,
       "source": "ReferenceTenseRow(value.string(\"label\"), value.string(\"from\"), value.string(\"to\"))",
@@ -46659,8 +46637,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 390,
-      "symbol": "PolishCourseData",
+      "line": 391,
+      "symbol": "CoursePack",
       "sourceFingerprint": "f4578e3d75db9709c298320561255cfcdbc30c8d3f8e4c50d58cf053f7633eb3",
       "occurrence": 1,
       "source": "root.obj(\"reference\").rows(\"aspectRows\").map { value ->",
@@ -46683,8 +46661,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 391,
-      "symbol": "PolishCourseData",
+      "line": 392,
+      "symbol": "CoursePack",
       "sourceFingerprint": "0a6ff87908747bcf1f31d32e504a8fd9f3bcd661603bb93e80878c2c568fe668",
       "occurrence": 1,
       "source": "ReferenceAspectRow(value.string(\"label\"), value.string(\"from\"),",
@@ -46707,8 +46685,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 392,
-      "symbol": "PolishCourseData",
+      "line": 393,
+      "symbol": "CoursePack",
       "sourceFingerprint": "c5de4e7e63fba632a971f36dceebfef28418cc51f2800696cf7ed75cc976753b",
       "occurrence": 1,
       "source": "value.optionalString(\"present\")?.takeUnless { it == \"null\" }, value.string(\"past\"), value.string(\"future\"))",
@@ -46743,8 +46721,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 401,
-      "symbol": "PolishCourseData",
+      "line": 402,
+      "symbol": "CoursePack",
       "sourceFingerprint": "2e5ae2cd8a64bc55c868ae23234fc0a13e563166ce7a52cf76ebbdba82618943",
       "occurrence": 1,
       "source": "root.obj(\"reference\").rows(\"maleAccRows\").map { value ->",
@@ -46767,8 +46745,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 402,
-      "symbol": "PolishCourseData",
+      "line": 403,
+      "symbol": "CoursePack",
       "sourceFingerprint": "a1bf14598d33f93747b23bef241efec8d540dc34036d1c2174d412d05f568cd5",
       "occurrence": 1,
       "source": "MaleAccRow(value.string(\"id\"), value.string(\"label\"), value.string(\"title\"),",
@@ -46797,8 +46775,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 403,
-      "symbol": "PolishCourseData",
+      "line": 404,
+      "symbol": "CoursePack",
       "sourceFingerprint": "1e86d98baf583c304dd05e66866e5a35bb2e81b4c300879cac70af9b9868e197",
       "occurrence": 1,
       "source": "value.rows(\"examples\").map { example ->",
@@ -46815,8 +46793,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 404,
-      "symbol": "PolishCourseData",
+      "line": 405,
+      "symbol": "CoursePack",
       "sourceFingerprint": "72d110629a4f99a614f5a3553808ac99708ebccb9f53ecc8805842cad4e65b77",
       "occurrence": 1,
       "source": "MaleAccExample(example.string(\"from\"), example.string(\"to\"), example.string(\"sentence\"))",
@@ -46845,8 +46823,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 405,
-      "symbol": "PolishCourseData",
+      "line": 406,
+      "symbol": "CoursePack",
       "sourceFingerprint": "b7795e4ae2a57188b60b4c312912b11ea2ef64766078a2c10e9a386ae0a2f47e",
       "occurrence": 1,
       "source": "}, value.string(\"rule\"))",
@@ -46863,8 +46841,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 407,
-      "symbol": "PolishCourseData",
+      "line": 408,
+      "symbol": "CoursePack",
       "sourceFingerprint": "557b535e948fdeae934287e50c4ff0aefb761897ef96d76b63a61670e19c82b6",
       "occurrence": 1,
       "source": "require(rows.map { it.id } == listOf(\"person\", \"animal\", \"object\"))",
@@ -46893,8 +46871,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 413,
-      "symbol": "PolishCourseData",
+      "line": 414,
+      "symbol": "CoursePack",
       "sourceFingerprint": "01756dfb0320d5603160a3bc0ba87fdec621770667df98f369b2f49dbe6f376d",
       "occurrence": 1,
       "source": "root.rows(\"skills\").associate { value ->",
@@ -46911,8 +46889,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 414,
-      "symbol": "PolishCourseData.focus",
+      "line": 415,
+      "symbol": "CoursePack.focus",
       "sourceFingerprint": "8ceeb4ba72a68478923cf73f94d75de695f8d71036b048277500eded184b219b",
       "occurrence": 1,
       "source": "val focus = value.obj(\"focus\")",
@@ -46929,8 +46907,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 415,
-      "symbol": "PolishCourseData.methods",
+      "line": 416,
+      "symbol": "CoursePack.methods",
       "sourceFingerprint": "bb0ffe5460ec8ccebd1a3c9ddfae01d7ae64014a64ac6f47ef2ae6d17cb40963",
       "occurrence": 1,
       "source": "val methods = value.obj(\"methods\")",
@@ -46947,8 +46925,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 416,
-      "symbol": "PolishCourseData",
+      "line": 417,
+      "symbol": "CoursePack",
       "sourceFingerprint": "216cd12a8117e4d751d5df539877355dd18962c4e1ae9c8a571f4b884ad1073e",
       "occurrence": 1,
       "source": "value.string(\"id\") to SkillPresentation(",
@@ -46965,8 +46943,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 417,
-      "symbol": "PolishCourseData",
+      "line": 418,
+      "symbol": "CoursePack",
       "sourceFingerprint": "55dbbca3698878f6e10b82e921bc5aa02e4fa3d25fd99bad5b4ebb4717517049",
       "occurrence": 1,
       "source": "focus.string(\"before\"), focus.string(\"after\"),",
@@ -46989,8 +46967,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 418,
-      "symbol": "PolishCourseData",
+      "line": 419,
+      "symbol": "CoursePack",
       "sourceFingerprint": "2c8c4b5534b73f01d1722677a1d8133918a08287c2e222a6b561ec6e1b109fdf",
       "occurrence": 1,
       "source": "methods.obj(\"logic\").methodPresentation(), methods.obj(\"situations\").methodPresentation(),",
@@ -47013,8 +46991,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 423,
-      "symbol": "PolishCourseData",
+      "line": 424,
+      "symbol": "CoursePack",
       "sourceFingerprint": "d5565fb039aab8042e18e835b3954cf30ccf26902c3b310ab319503122765d20",
       "occurrence": 1,
       "source": "/** Absent on a skill (true for every skill today) means [SkillStyleContent]'s all-derived defaults. */",
@@ -47029,8 +47007,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 425,
-      "symbol": "PolishCourseData",
+      "line": 426,
+      "symbol": "CoursePack",
       "sourceFingerprint": "a72e468e20581cfd21e428e3bdf4252a3933fd57c97279130f2497aaf7984203",
       "occurrence": 1,
       "source": "root.rows(\"skills\").associate { value -> value.string(\"id\") to parseSkillStyleContent(value[\"styleContent\"]) }",
@@ -47059,8 +47037,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 429,
-      "symbol": "PolishCourseData",
+      "line": 430,
+      "symbol": "CoursePack",
       "sourceFingerprint": "76397b5a798f3cbc3b5ee81dcd78b3a73177cd24d1925ad6bb982310b03c741d",
       "occurrence": 1,
       "source": "root.obj(\"vocabulary\").rows(\"items\").map { value ->",
@@ -47083,8 +47061,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 430,
-      "symbol": "PolishCourseData",
+      "line": 431,
+      "symbol": "CoursePack",
       "sourceFingerprint": "cf184fbcd6432ff554b679cee32ecf794bacc30e0eb4d223402d3c6afba7a7f1",
       "occurrence": 1,
       "source": "VocabularyItem(value.string(\"id\"), value.string(\"lemma\"), value.string(\"translation\"),",
@@ -47113,8 +47091,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 431,
-      "symbol": "PolishCourseData",
+      "line": 432,
+      "symbol": "CoursePack",
       "sourceFingerprint": "9bd281753077b7fc371fda3413790fc1482a8c93d1ab18c19b5e84069226f985",
       "occurrence": 1,
       "source": "value.string(\"form\"), value.string(\"example\"), value.string(\"level\"),",
@@ -47143,8 +47121,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 432,
-      "symbol": "PolishCourseData",
+      "line": 433,
+      "symbol": "CoursePack",
       "sourceFingerprint": "19dd435e62087ebe76a51e40b0982d8fbfaf532caae7302d665c4c40c1d36fbe",
       "occurrence": 1,
       "source": "value[\"frequencyRank\"]?.jsonPrimitive?.let { primitive ->",
@@ -47161,8 +47139,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 433,
-      "symbol": "PolishCourseData",
+      "line": 434,
+      "symbol": "CoursePack",
       "sourceFingerprint": "6792cf90a8d1df557f8359f6277dff016f52a19d53bb482cdfa527a08fff9ec1",
       "occurrence": 1,
       "source": "if (primitive.content == \"null\") null else primitive.int",
@@ -47179,8 +47157,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 438,
-      "symbol": "PolishCourseData.matrixIntroduction",
+      "line": 439,
+      "symbol": "CoursePack.matrixIntroduction",
       "sourceFingerprint": "1ffe5004fdfc0e4eed6648df38c513ab83d8ad8c57d6f7ddaef0e06a4a591c25",
       "occurrence": 1,
       "source": "val matrixIntroduction: String by lazy { root.obj(\"reference\").string(\"matrixIntroduction\") }",
@@ -47204,8 +47182,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 439,
-      "symbol": "PolishCourseData.webCaseCompositionHeader",
+      "line": 440,
+      "symbol": "CoursePack.webCaseCompositionHeader",
       "sourceFingerprint": "8c1073dda2ca363c8044b230b9d06e647a31066f5e67648c4e8b85e2cc1237e1",
       "occurrence": 1,
       "source": "val webCaseCompositionHeader: String by lazy { root.obj(\"reference\").string(\"webCaseCompositionHeader\") }",
@@ -47229,8 +47207,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 441,
-      "symbol": "PolishCourseData",
+      "line": 442,
+      "symbol": "CoursePack",
       "sourceFingerprint": "a4eda7847dbefed5b7b522f8c1bdff09111399f136fb57900a3671441c59a6f1",
       "occurrence": 1,
       "source": "root.obj(\"reference\").obj(\"contextHelp\").let { CourseContextHelp(it.string(\"react\"), it.string(\"compact\")) }",
@@ -47267,8 +47245,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 443,
-      "symbol": "PolishCourseData.maleAccIntro",
+      "line": 444,
+      "symbol": "CoursePack.maleAccIntro",
       "sourceFingerprint": "97053af5bb07627a0dce0ad585d3b82f7c54b2362ec5c155a2843d16eba6eead",
       "occurrence": 1,
       "source": "val maleAccIntro: String by lazy { root.obj(\"reference\").string(\"maleAccIntro\") }",
@@ -47292,8 +47270,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 445,
-      "symbol": "PolishCourseData",
+      "line": 446,
+      "symbol": "CoursePack",
       "sourceFingerprint": "244d58c54e684fcd8a243c14dd844ee31d0471699029891a045a56af9d814be7",
       "occurrence": 1,
       "source": "root.obj(\"reference\").obj(\"aspectNoPresent\").let { CourseAspectNoPresent(it.string(\"compact\"), it.string(\"ios\")) }",
@@ -47330,8 +47308,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 448,
-      "symbol": "PolishCourseData",
+      "line": 449,
+      "symbol": "CoursePack",
       "sourceFingerprint": "dde77cc95bb9eeca5cbd8df2769b4ce37103e0de8f9f3367be98d2b3ace641c3",
       "occurrence": 1,
       "source": "root.obj(\"vocabulary\").obj(\"instructions\").let {",
@@ -47354,8 +47332,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 449,
-      "symbol": "PolishCourseData",
+      "line": 450,
+      "symbol": "CoursePack",
       "sourceFingerprint": "9680b989e4f99e62a0e2f4d4c1de850f393e18acb1ed12aaa0858539df703566",
       "occurrence": 1,
       "source": "CourseVocabularyInstructions(it.string(\"react\"), it.string(\"web\"), it.string(\"native\"), it.string(\"ios\"))",
@@ -47394,8 +47372,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 452,
-      "symbol": "PolishCourseData.vocabularyUnavailableLabel",
+      "line": 453,
+      "symbol": "CoursePack.vocabularyUnavailableLabel",
       "sourceFingerprint": "4705aedf145e938420a95083b054c0e29e8739e696cdc83c95e9f70f9953bb80",
       "occurrence": 1,
       "source": "val vocabularyUnavailableLabel: String by lazy { root.obj(\"vocabulary\").string(\"unavailableLabel\") }",
@@ -47419,8 +47397,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 455,
-      "symbol": "PolishCourseData",
+      "line": 456,
+      "symbol": "CoursePack",
       "sourceFingerprint": "be3964420f970cf371b2546c1413c36e0006e3ff2ffaee30de5e2c61b522dab9",
       "occurrence": 1,
       "source": "Json.parseToJsonElement(generatedFrequencyJson).jsonObject.rows(\"items\").mapIndexed { index, value ->",
@@ -47437,8 +47415,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 456,
-      "symbol": "PolishCourseData",
+      "line": 457,
+      "symbol": "CoursePack",
       "sourceFingerprint": "f79ad32203e6917d2c9307fee3d5442b8c3da8e7d772c9b77eb5754340958699",
       "occurrence": 1,
       "source": "FrequencyItem(value.getValue(\"rank\").jsonPrimitive.int, value.string(\"lemma\"),",
@@ -47461,8 +47439,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 457,
-      "symbol": "PolishCourseData",
+      "line": 458,
+      "symbol": "CoursePack",
       "sourceFingerprint": "b5877322842bf085021c82104831d50d81fa455bc1395682f5633e8193dd9556",
       "occurrence": 1,
       "source": "value.getValue(\"count\").jsonPrimitive.int).also { require(it.rank == index + 1) }",
@@ -47479,8 +47457,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 462,
-      "symbol": "PolishCourseData",
+      "line": 463,
+      "symbol": "CoursePack",
       "sourceFingerprint": "3b8195491e72cb86dfe42d07b58c9d35358c7bbe00ed62c06368205fc2730f9f",
       "occurrence": 1,
       "source": "root.obj(\"personalPronouns\").mapValues { (_, value) -> value.jsonObject.caseForms() }",
@@ -47497,8 +47475,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 466,
-      "symbol": "PolishCourseData",
+      "line": 467,
+      "symbol": "CoursePack",
       "sourceFingerprint": "0dd92bb87fe27fed0fe1d5f568ede5e3532097ab8b317d89f2d8abb3365028b0",
       "occurrence": 1,
       "source": "root.rows(\"possessives\").map { Possessive(PossessiveId.fromId(it.string(\"id\")), it.string(\"label\")) }",
@@ -47527,8 +47505,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 470,
-      "symbol": "PolishCourseData",
+      "line": 471,
+      "symbol": "CoursePack",
       "sourceFingerprint": "e9ffbccda2367a24d9f9d3a218b8f82670db6670f31f780768faa0a2f95820c8",
       "occurrence": 1,
       "source": "root.rows(\"possessives\").associate { row ->",
@@ -47545,8 +47523,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 471,
-      "symbol": "PolishCourseData.id",
+      "line": 472,
+      "symbol": "CoursePack.id",
       "sourceFingerprint": "966cea71fe43eadcbe226d5476a53c393f39262d4824760c5b2b7376e1aac456",
       "occurrence": 1,
       "source": "val id = PossessiveId.fromId(row.string(\"id\"))",
@@ -47563,8 +47541,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 472,
-      "symbol": "PolishCourseData.forms",
+      "line": 473,
+      "symbol": "CoursePack.forms",
       "sourceFingerprint": "2f5af9d8df6afe877291b0b5b854b12b9c11368a1c95a4696297f43f508e9aa2",
       "occurrence": 1,
       "source": "val forms = row.obj(\"forms\")",
@@ -47581,8 +47559,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 473,
-      "symbol": "PolishCourseData.value",
+      "line": 474,
+      "symbol": "CoursePack.value",
       "sourceFingerprint": "0e6bbe11f82b4f7b4f3e3f6b60022438791ab83a6fd7cc8d547ad810b9bce75d",
       "occurrence": 1,
       "source": "val value = when (forms.string(\"kind\")) {",
@@ -47599,8 +47577,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 474,
-      "symbol": "PolishCourseData",
+      "line": 475,
+      "symbol": "CoursePack",
       "sourceFingerprint": "9924009fd06306925393669114b816bbd497b630920528b67b59fe59c05f763d",
       "occurrence": 1,
       "source": "\"invariant\" -> {",
@@ -47617,8 +47595,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 476,
-      "symbol": "PolishCourseData",
+      "line": 477,
+      "symbol": "CoursePack",
       "sourceFingerprint": "be6c8def42e8309a96f63b8203d2859939a005bf5ccd9d67c656179c6a9483fa",
       "occurrence": 1,
       "source": "require(forms.keys == setOf(\"kind\", \"value\"))",
@@ -47641,8 +47619,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 477,
-      "symbol": "PolishCourseData",
+      "line": 478,
+      "symbol": "CoursePack",
       "sourceFingerprint": "e290b85d24da2604a042a88ec6a3506ccc78eaa2400f744fcc0284a166172e02",
       "occurrence": 1,
       "source": "CoursePossessiveForms.Invariant(forms.formText(\"value\"))",
@@ -47659,8 +47637,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 479,
-      "symbol": "PolishCourseData",
+      "line": 480,
+      "symbol": "CoursePack",
       "sourceFingerprint": "e438bac1bf247ca882b652a4af66cefe5533ee67be4590638a4d860e628b5686",
       "occurrence": 1,
       "source": "\"declined\" -> {",
@@ -47677,8 +47655,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 481,
-      "symbol": "PolishCourseData",
+      "line": 482,
+      "symbol": "CoursePack",
       "sourceFingerprint": "96d7e0c40178f9c687ef69343a9a5bdf6b8072eed695d43464b0a31cc472e4e1",
       "occurrence": 1,
       "source": "require(forms.keys == setOf(\"kind\", \"sg\", \"pl\"))",
@@ -47707,8 +47685,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 482,
-      "symbol": "PolishCourseData.singular",
+      "line": 483,
+      "symbol": "CoursePack.singular",
       "sourceFingerprint": "293e1bda178e310d9829fd12ea1f346f7a838a6bd3124c47dc38f5c8ad570e46",
       "occurrence": 1,
       "source": "val singular = forms.obj(\"sg\")",
@@ -47725,8 +47703,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 483,
-      "symbol": "PolishCourseData.plural",
+      "line": 484,
+      "symbol": "CoursePack.plural",
       "sourceFingerprint": "a1b9f87fca400a2f6c7c561de487754fe8a3be28e7e9c3e28fd14cf5b71d83a7",
       "occurrence": 1,
       "source": "val plural = forms.obj(\"pl\")",
@@ -47743,8 +47721,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 485,
-      "symbol": "PolishCourseData",
+      "line": 486,
+      "symbol": "CoursePack",
       "sourceFingerprint": "98f2bbbf651b19df7ef0f166ee285cedd000b49bef9e21bbf3f6793ecb3cec33",
       "occurrence": 1,
       "source": "require(plural.keys == setOf(\"m-personal\", \"other\"))",
@@ -47767,8 +47745,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 491,
-      "symbol": "PolishCourseData",
+      "line": 492,
+      "symbol": "CoursePack",
       "sourceFingerprint": "43f2a8b46f52397af79c981a6fd2a73bf05b792992f95046b5b783510a254c58",
       "occurrence": 1,
       "source": "else -> error(\"Unknown possessive kind for ${id.id}\")",
@@ -47791,8 +47769,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 498,
-      "symbol": "PolishCourseData.morphology",
+      "line": 499,
+      "symbol": "CoursePack.morphology",
       "sourceFingerprint": "48b35fe6b50829c324b44a9be2c76587e0c57ac8012e35d8a5973efeca520e9d",
       "occurrence": 1,
       "source": "val morphology = root.obj(\"morphology\")",
@@ -47809,8 +47787,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 499,
-      "symbol": "PolishCourseData",
+      "line": 500,
+      "symbol": "CoursePack",
       "sourceFingerprint": "62ccd8a04ff70d1e57b222ee2af8dc2565779865811a1102ae8cd78e032f7c63",
       "occurrence": 1,
       "source": "require(morphology.keys == setOf(\"futureAuxiliary\"))",
@@ -47827,8 +47805,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 500,
-      "symbol": "PolishCourseData.auxiliary",
+      "line": 501,
+      "symbol": "CoursePack.auxiliary",
       "sourceFingerprint": "847e217cf270386ca6033268d95878d41a56ee12ce24e5554c6153dd3337b2ae",
       "occurrence": 1,
       "source": "val auxiliary = morphology.obj(\"futureAuxiliary\")",
@@ -47845,8 +47823,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 501,
-      "symbol": "PolishCourseData",
+      "line": 502,
+      "symbol": "CoursePack",
       "sourceFingerprint": "2f3f8faff99c3a8293933b3d7a8a019567365c16963d61513c1b2d6959639130",
       "occurrence": 1,
       "source": "require(auxiliary.keys == setOf(\"verbId\", \"forms\"))",
@@ -47869,8 +47847,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 502,
-      "symbol": "PolishCourseData.verbId",
+      "line": 503,
+      "symbol": "CoursePack.verbId",
       "sourceFingerprint": "e178aeb8abd3d05198f1b81e57e8856c1be71991c17e6838f3ba62cef9dad6fb",
       "occurrence": 1,
       "source": "val verbId = auxiliary.string(\"verbId\")",
@@ -47887,8 +47865,8 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 504,
-      "symbol": "PolishCourseData.forms",
+      "line": 505,
+      "symbol": "CoursePack.forms",
       "sourceFingerprint": "10d9ce9e6aa5fc2aab20890f8ceac76bd610f67fcbb8277db4a35e15e44fa960",
       "occurrence": 1,
       "source": "val forms = auxiliary.obj(\"forms\")",
@@ -47905,7 +47883,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 520,
+      "line": 531,
       "symbol": "caseSentencePrefix",
       "sourceFingerprint": "0b3fe1ebe1116652b737aa11f6854e854e03f18a25f48dd852fcfa02bc65299e",
       "occurrence": 1,
@@ -47929,7 +47907,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 546,
+      "line": 557,
       "symbol": "coursePlaceholder",
       "sourceFingerprint": "3b70367b300edb039e8478e4f42c4332f54d7ee289a82099dc273467e9a2df62",
       "occurrence": 1,
@@ -47947,7 +47925,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 551,
+      "line": 562,
       "symbol": "file-scope",
       "sourceFingerprint": "3e4615542bd11f76e1796c77612e5f83f02fe3787baf831af222024dccbcc543",
       "occurrence": 1,
@@ -47965,7 +47943,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 555,
+      "line": 566,
       "symbol": "file-scope",
       "sourceFingerprint": "c828688c7441237723b36157afcd8cf5810f0f01f48479791c7dcbf82f04a4cd",
       "occurrence": 1,
@@ -47983,7 +47961,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 568,
+      "line": 579,
       "symbol": "JsonObject.required",
       "sourceFingerprint": "74819b77d57b6090f29c74a76fef7348e54ff009fc36150a8f2c6d12524c1a12",
       "occurrence": 1,
@@ -48001,7 +47979,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 571,
+      "line": 582,
       "symbol": "JsonObject",
       "sourceFingerprint": "18f432c99aa33608f0d1aed4c77e2eebe4a1e7e4d385ee5452bcaaf42ca7dba0",
       "occurrence": 1,
@@ -48031,7 +48009,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 572,
+      "line": 583,
       "symbol": "JsonObject",
       "sourceFingerprint": "08c5b3d26a4f3dea38352b10d9beee3edc311b59ce1390552dc144008386b0be",
       "occurrence": 1,
@@ -48061,7 +48039,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 576,
+      "line": 587,
       "symbol": "file-scope",
       "sourceFingerprint": "381f740a91e01cbe7f69ecd4305ed14559acb427edc56c08f30bebd05a42536c",
       "occurrence": 1,
@@ -48085,7 +48063,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 579,
+      "line": 590,
       "symbol": "JsonObject.from",
       "sourceFingerprint": "bb7b43090e4a7d0ba265acfa3c71126b2fad79a65c424efb37c9e0d9a95113c9",
       "occurrence": 1,
@@ -48103,7 +48081,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 580,
+      "line": 591,
       "symbol": "JsonObject.to",
       "sourceFingerprint": "87c74eb0fb9fcd6532a710e7d82a9f61aac83cda1abff1f2b5920272d42225ab",
       "occurrence": 1,
@@ -48121,7 +48099,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 584,
+      "line": 595,
       "symbol": "JsonObject.parts",
       "sourceFingerprint": "5d8a9d1bc9a928a8332db94b0eb284e0458c48f632b5a8fa091eec9519a001e7",
       "occurrence": 1,
@@ -48139,7 +48117,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 585,
+      "line": 596,
       "symbol": "JsonObject.parts",
       "sourceFingerprint": "b5cd718ee995a52d03aee47822e7ab291681596417c94454c53417478190a571",
       "occurrence": 1,
@@ -48157,7 +48135,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 586,
+      "line": 597,
       "symbol": "JsonObject.parts",
       "sourceFingerprint": "109b9927cc8d9f1e2ce1eef1a74b8c921b05a2a5a0dbe6e8490d3485be2a257e",
       "occurrence": 1,
@@ -48175,7 +48153,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 588,
+      "line": 599,
       "symbol": "JsonObject.parts",
       "sourceFingerprint": "cdc41f1ec54b0ae214cb640d81d7eb9260bdbbe657c28269945d443c57f5a918",
       "occurrence": 1,
@@ -48193,7 +48171,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 591,
+      "line": 602,
       "symbol": "JsonObject.parts",
       "sourceFingerprint": "818563d39b85124991781edebed212aedd26632fda542244a277c330f20bebee",
       "occurrence": 1,
@@ -48211,7 +48189,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 592,
+      "line": 603,
       "symbol": "JsonObject.parts",
       "sourceFingerprint": "186cac545510d424c39583f8b35cd4d67eaecb677feeb438e4f8c335f80a92ca",
       "occurrence": 1,
@@ -48229,7 +48207,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 602,
+      "line": 613,
       "symbol": "JsonObject.parts",
       "sourceFingerprint": "0043cecd9c03a8d12e272a096b542d8ba46c4abf33abdfe3a95e2aced79edb49",
       "occurrence": 1,
@@ -48247,7 +48225,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 606,
+      "line": 617,
       "symbol": "JsonObject.parts",
       "sourceFingerprint": "f91b482b2046503fdb4ade9dfe01935b7911aecdda09a98b7d2f668faacc382a",
       "occurrence": 1,
@@ -48265,7 +48243,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 613,
+      "line": 624,
       "symbol": "JsonObject.before",
       "sourceFingerprint": "ea3b04b3c0bf454d3c17550bf1f435f480b2c3ded3d7091da199f6201866c340",
       "occurrence": 1,
@@ -48283,7 +48261,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 614,
+      "line": 625,
       "symbol": "JsonObject.after",
       "sourceFingerprint": "ee7c9cb8bc6cabcdb241bc7fa52fe81ff47e137ab6c885fc04e12031f9f9625e",
       "occurrence": 1,
@@ -48301,7 +48279,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 616,
+      "line": 627,
       "symbol": "JsonObject",
       "sourceFingerprint": "79dc02f76c041b1dd136c9d885668535f5f350b267dfca4c45b6018d2e30b771",
       "occurrence": 1,
@@ -48319,7 +48297,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 618,
+      "line": 629,
       "symbol": "JsonObject",
       "sourceFingerprint": "41621c8c78584fecd838e7268825e021bcce8eb606fc5e5a4f52e5611d9d22bf",
       "occurrence": 1,
@@ -48337,7 +48315,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 619,
+      "line": 630,
       "symbol": "JsonObject",
       "sourceFingerprint": "c9e2aa825bdf6164aa1746f88c5fb9a7a1ac1ac34cb1ee183a8bf8eea3ca37c6",
       "occurrence": 1,
@@ -48355,7 +48333,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 621,
+      "line": 632,
       "symbol": "JsonObject",
       "sourceFingerprint": "50616bc5b77fd70cba07b73b83513bf1acc646703208376a243bef9955d46e17",
       "occurrence": 1,
@@ -48373,7 +48351,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 625,
+      "line": 636,
       "symbol": "JsonObject",
       "sourceFingerprint": "b983e8f36577b1ea4ed0f87da63950ea4671607775f433fa55eb9c1ae7d4563b",
       "occurrence": 1,
@@ -48397,7 +48375,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 627,
+      "line": 638,
       "symbol": "means",
       "sourceFingerprint": "e72063f415fb2a9bb005f395179ee9651525cf7136b0034a983e5cfdffa6a6b3",
       "occurrence": 1,
@@ -48413,7 +48391,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 632,
+      "line": 643,
       "symbol": "file-scope",
       "sourceFingerprint": "608f193889a7c0d7791bd7aa9478106ad944b08f6fa8d5d22e0e9529b6212aef",
       "occurrence": 1,
@@ -48431,7 +48409,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 633,
+      "line": 644,
       "symbol": "file-scope",
       "sourceFingerprint": "5632f163f7b839cd99f0bc810984e0ba564edf935b6e089d8dddfe0a74b63ec4",
       "occurrence": 1,
@@ -48455,7 +48433,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 634,
+      "line": 645,
       "symbol": "file-scope",
       "sourceFingerprint": "574002381457aa8457d59d51ab31644e09be98bcd42183136072c8588936d7f1",
       "occurrence": 1,
@@ -48473,7 +48451,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 635,
+      "line": 646,
       "symbol": "file-scope",
       "sourceFingerprint": "aeca3e4e01ab03a6282bfc272847f5ce151ff5661377db4912ffc207cddbc465",
       "occurrence": 1,
@@ -48491,7 +48469,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 636,
+      "line": 647,
       "symbol": "file-scope",
       "sourceFingerprint": "3695fb3a8b745e5d4f1d621c4e04f32711fca2c223962ba628fc573f348af199",
       "occurrence": 1,
@@ -48509,7 +48487,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 637,
+      "line": 648,
       "symbol": "file-scope",
       "sourceFingerprint": "b278d7217949b6b5906c41725f7b160a37dd1c812b0dccd1ac9df6f7b04d7d6b",
       "occurrence": 1,
@@ -48527,7 +48505,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 640,
+      "line": 651,
       "symbol": "JsonObject",
       "sourceFingerprint": "5a410c570faadb93a274fd90b1e700558e935be7ce6a5181770f3b87ab6ba15d",
       "occurrence": 1,
@@ -48557,7 +48535,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 643,
+      "line": 654,
       "symbol": "file-scope",
       "sourceFingerprint": "233f9bcadec6f71f45fd42984dd8cf14f7662c7da152c930fa3277e948933191",
       "occurrence": 1,
@@ -48593,7 +48571,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 646,
+      "line": 657,
       "symbol": "JsonObject",
       "sourceFingerprint": "a4ecbedfdec9461e44d15bfbcb45995246b6c35706e47f71daf3d834ec92b845",
       "occurrence": 1,
@@ -48623,7 +48601,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 649,
+      "line": 660,
       "symbol": "file-scope",
       "sourceFingerprint": "3bd632854b7fe99037f7f9fcfeff44523c4785bb0fa885b2c79782e2037c70de",
       "occurrence": 1,
@@ -48679,9 +48657,9 @@
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/Skills.kt",
       "line": 10,
       "symbol": "file-scope",
-      "sourceFingerprint": "3139df6f095ab464731f94fa17af33f6ed4bfce4678e8ded3ad1c36fec1647ad",
+      "sourceFingerprint": "214ae6b07c765c7e767d7ece99fbaaf4d59d2249f58dddba0840212b7fba918c",
       "occurrence": 1,
-      "source": "PolishCourseData.presentations[id] ?: error(\"Unknown skill presentation $id\")",
+      "source": "packRegistry.active.presentations[id] ?: error(\"Unknown skill presentation $id\")",
       "tokens": [
         "\"Unknown skill presentation $id\""
       ],

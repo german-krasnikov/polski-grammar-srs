@@ -12,13 +12,14 @@ import kotlin.test.assertEquals
  * UniversalCorePlan.md §12 UC-02 acceptance: generalizing `generateCoursePackSource`
  * (`kotlin/shared/build.gradle.kts`) into a pack-directory scan plus `:pack-format`'s
  * `CoursePackSource` must not change what pl-ru's `course.json` produces at runtime.
- * [expectedSkillsJson] is a golden fixture of [PolishCourseData.skills] pinned *before* that
- * refactor — a mismatch here means the scan/`CoursePackSource` change altered the loaded pack,
- * not just how it is plumbed from disk into Kotlin.
+ * [expectedSkillsJson] is a golden fixture of `PolishCourseData.skills` (now [packRegistry]
+ * `.active.skills` — UC-03) pinned *before* that refactor — a mismatch here means the
+ * scan/`CoursePackSource` change altered the loaded pack, not just how it is plumbed from disk
+ * into Kotlin.
  */
 class CoursePackFixtureTest {
     @Test fun skillsSerializeToThePinnedPreRefactorFixture() {
-        assertEquals(expectedSkillsJson, JsonArray(PolishCourseData.skills.map { it.toFixtureJson() }).toString())
+        assertEquals(expectedSkillsJson, JsonArray(packRegistry.active.skills.map { it.toFixtureJson() }).toString())
     }
 }
 

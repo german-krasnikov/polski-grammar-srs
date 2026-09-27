@@ -2,6 +2,11 @@
 
 Новые сверху. Формат: решение → почему → где подробно.
 
+## ADR-16 · 2026-09-27 · UC-03: `CoursePack`/`PackRegistry` вместо `PolishCourseData`
+`internal object PolishCourseData` (`data/CourseData.kt`) стал `internal class CoursePack(source: CoursePackSource)` — тот же набор `by lazy`-полей (nouns/adjectives/verbs/skills/…), плюс `id`. Единственная точка входа теперь `internal val packRegistry: PackRegistry by lazy { PackRegistry(embeddedCoursePackSources.map(::CoursePack)) }`, где `PackRegistry.active` — единственный (pl-ru) пакет; все прежние обращения `PolishCourseData.X` (в `Adjectives/Nouns/Pronouns/Skills/Verbs/Vocabulary.kt`, `grammar/GrammarEngine.kt`, `grammar/GrammarReference.kt`) заменены на `packRegistry.active.X`. Схема v1, авторский `course.json` и все проверки не изменились — файл ещё pl-ru-специфичен, generic-схема (`CoursePack(core, lang, pair)` из §4.1) остаётся задачей UC-05+/UC-12.
+Почему: приёмка `UniversalCorePlan.md` §12 UC-03 требует, чтобы потребители брали активный пакет из реестра, а не из захардкоженного глобального объекта — это готовит почву для UC-04 (`pack.id`/`pack.pairId` вместо литералов `"pl-ru"`) без смены схемы или поведения хостов.
+Подробно: `Plans/Kotlin/UniversalCorePlan.md` §4.1, §12 UC-03; `kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt`.
+
 ## ADR-15 · 2026-09-27 · UC-02: `:pack-format` и сканирование каталога пакетов
 `generateCoursePackSource` (`kotlin/shared/build.gradle.kts`) больше не читает один захардкоженный путь `courses/pl-ru/course.json` — сканирует `courses/*` на подкаталог со своим `course.json` (кроме `schema`/`styles`) и оборачивает содержимое каждого найденного пакета в `EmbeddedCoursePackSource` (новый модуль `:pack-format`, `polski.pack.CoursePackSource`/`PackManifest`). `PolishCourseData` теперь читает pl-ru через `embeddedCoursePackSources.first { it.id == "pl-ru" }`, а не через прямое имя сгенерированного свойства — сама схема v1 не изменилась. Байт-идентичность runtime-результата подтверждена fixture-тестом (`CoursePackFixtureTest`, сериализация `PolishCourseData.skills` пиновалась до рефакторинга и совпала после).
 Почему: приёмка `UniversalCorePlan.md` §12 UC-02 требует, чтобы второй пакет добавлялся каталогом без правки Gradle/Kotlin; закрытый путь к одному файлу был единственным местом, которое такую правку требовало.

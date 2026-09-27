@@ -4,7 +4,7 @@ import polski.data.adjectiveById
 import polski.data.nounById
 import polski.data.verbById
 import polski.data.CoursePossessiveForms
-import polski.data.PolishCourseData
+import polski.data.packRegistry
 import polski.data.caseSentencePrefix
 import polski.model.*
 
@@ -17,7 +17,7 @@ fun adjectiveForm(id: String, gender: Gender, gramCase: GramCase, number: Number
 
 /** Looks up a course-authored possessive; non-personal plural genders share the other paradigm. */
 fun possessiveForm(id: PossessiveId, gender: Gender, number: NumberGram, gramCase: GramCase): String =
-    when (val forms = PolishCourseData.possessiveForms.getValue(id)) {
+    when (val forms = packRegistry.active.possessiveForms.getValue(id)) {
         is CoursePossessiveForms.Invariant -> forms.value
         is CoursePossessiveForms.Declined -> if (number == NumberGram.SG) {
             forms.singular.getValue(gender).getValue(gramCase)
@@ -51,7 +51,7 @@ fun verbForm(id: String, tense: Tense, person: Person, number: NumberGram, gende
         if (verb.aspect == Aspect.PERFECTIVE) error("Perfective verbs have no present tense")
         return present ?: error("No present")
     }
-    val auxiliary = PolishCourseData.futureAuxiliary
+    val auxiliary = packRegistry.active.futureAuxiliary
     val future = auxiliary.forms.getValue(number).getValue(person)
     if (tense == Tense.FUTURE) {
         if (id == auxiliary.verbId) return future

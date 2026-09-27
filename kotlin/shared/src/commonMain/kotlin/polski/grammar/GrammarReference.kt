@@ -2,7 +2,7 @@ package polski.grammar
 
 import polski.model.Gender
 import polski.model.GramCase
-import polski.data.PolishCourseData
+import polski.data.packRegistry
 
 /** Ordered table metadata used by the grammar reference screen. */
 data class CaseRow(
@@ -15,9 +15,9 @@ data class CaseRow(
 )
 
 val caseRows: List<CaseRow> by lazy {
-    PolishCourseData.caseReferenceRows.map { CaseRow(it.id, it.pl, it.ru, it.question, it.trigger, it.skill) }
+    packRegistry.active.caseReferenceRows.map { CaseRow(it.id, it.pl, it.ru, it.question, it.trigger, it.skill) }
 }
 
 val genderNames: Map<Gender, String> by lazy {
-    Gender.entries.associateWith { PolishCourseData.referenceGenderNames.getValue(it.id) }
+    Gender.entries.associateWith { packRegistry.active.referenceGenderNames.getValue(it.id) }
 }

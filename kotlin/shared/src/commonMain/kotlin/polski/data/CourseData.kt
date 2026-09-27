@@ -164,20 +164,21 @@ internal sealed interface CoursePossessiveForms {
 internal data class FutureAuxiliary(val verbId: String, val forms: Map<NumberGram, Map<Person, String>>)
 
 /**
- * The Polish/Russian material is authored in courses/pl-ru/course.json, not in Kotlin source.
- * UC-02: reached through [CoursePackSource] (`:pack-format`) rather than a fixed generated
- * property — `generateCoursePackSource` (`kotlin/shared/build.gradle.kts`) discovers pl-ru by
- * scanning the `courses` directory for a `course.json`, but it is still read here as schema v1.
+ * One course pack's parsed content, read from [source] as schema v1 (a `course.json` under
+ * `courses`, UC-02's [CoursePackSource]). Polish/Russian is the only pack today, so every field below is
+ * still pl-ru-shaped; a second pack would need its own schema before this class stops being
+ * pl-ru-specific.
  */
-internal object PolishCourseData {
+internal class CoursePack(private val source: CoursePackSource) {
     private val root: JsonObject by lazy {
-        val source: CoursePackSource = embeddedCoursePackSources.first { it.id == "pl-ru" }
         Json.parseToJsonElement(source.load()).jsonObject.also { pack ->
             require(pack.getValue("schemaVersion").jsonPrimitive.int == 1)
-            require(pack.string("id") == "pl-ru")
+            require(pack.string("id") == source.id)
             require(pack.string("targetLanguage") == "pl" && pack.string("nativeLanguage") == "ru")
         }
     }
+
+    val id: String by lazy { root.string("id") }
 
     val nouns: List<Noun> by lazy { root.rows("nouns").map { value ->
         Noun(value.string("id"), value.string("lemma"), value.string("meaning"), Gender.fromId(value.string("gender")),
@@ -512,41 +513,51 @@ internal object PolishCourseData {
     }
 }
 
-val courseSentenceSeeds: List<SentenceSeed> by lazy { PolishCourseData.sentenceSeeds }
+/**
+ * UC-03: the single point where consumers reach a [CoursePack] — [active] is the only pack today
+ * (pl-ru), so it stands in for the target/native selection later tasks (UC-04+) will add.
+ */
+internal class PackRegistry(packs: List<CoursePack>) {
+    val active: CoursePack = packs.first()
+}
+
+internal val packRegistry: PackRegistry by lazy { PackRegistry(embeddedCoursePackSources.map(::CoursePack)) }
+
+val courseSentenceSeeds: List<SentenceSeed> by lazy { packRegistry.active.sentenceSeeds }
 
 fun caseSentencePrefix(gramCase: GramCase, number: NumberGram): String {
     require(gramCase != GramCase.VOC)
     val key = if (gramCase == GramCase.NOM) {
         if (number == NumberGram.SG) "nomSg" else "nomPl"
     } else gramCase.id
-    return PolishCourseData.caseSentencePrefixes.getValue(key)
+    return packRegistry.active.caseSentencePrefixes.getValue(key)
 }
 
-fun exerciseCopy(key: String): String = PolishCourseData.exerciseCopy.getValue(key)
-val referenceChainRows: List<ReferenceChainRow> by lazy { PolishCourseData.referenceChainRows }
-val courseChainPresentation: ChainPresentation by lazy { PolishCourseData.chainPresentation }
-val referenceSystemCards: List<ReferenceSystemCard> by lazy { PolishCourseData.referenceSystemCards }
-val referencePipeline: ReferencePipeline by lazy { PolishCourseData.referencePipeline }
-val referenceCaseTeaching: CaseTeaching by lazy { PolishCourseData.referenceCaseTeaching }
-val referenceVerbTeaching: VerbTeaching by lazy { PolishCourseData.referenceVerbTeaching }
-val referencePronounTeaching: PronounTeaching by lazy { PolishCourseData.referencePronounTeaching }
-val comparisonNounIds: List<String> by lazy { PolishCourseData.comparisonNounIds }
-val referenceRussianSupport: RussianSupport by lazy { PolishCourseData.referenceRussianSupport }
-val referenceTenseRows: List<ReferenceTenseRow> by lazy { PolishCourseData.referenceTenseRows }
-val referenceAspectRows: List<ReferenceAspectRow> by lazy { PolishCourseData.referenceAspectRows }
-val maleAccRows: List<MaleAccRow> by lazy { PolishCourseData.maleAccRows }
-val courseMatrixIntroduction: String by lazy { PolishCourseData.matrixIntroduction }
-val courseWebCaseCompositionHeader: String by lazy { PolishCourseData.webCaseCompositionHeader }
-val courseContextHelp: CourseContextHelp by lazy { PolishCourseData.contextHelp }
-val courseMaleAccIntro: String by lazy { PolishCourseData.maleAccIntro }
-val courseAspectNoPresent: CourseAspectNoPresent by lazy { PolishCourseData.aspectNoPresent }
-val courseVocabularyInstructions: CourseVocabularyInstructions by lazy { PolishCourseData.vocabularyInstructions }
-val courseVocabularyUnavailableLabel: String by lazy { PolishCourseData.vocabularyUnavailableLabel }
+fun exerciseCopy(key: String): String = packRegistry.active.exerciseCopy.getValue(key)
+val referenceChainRows: List<ReferenceChainRow> by lazy { packRegistry.active.referenceChainRows }
+val courseChainPresentation: ChainPresentation by lazy { packRegistry.active.chainPresentation }
+val referenceSystemCards: List<ReferenceSystemCard> by lazy { packRegistry.active.referenceSystemCards }
+val referencePipeline: ReferencePipeline by lazy { packRegistry.active.referencePipeline }
+val referenceCaseTeaching: CaseTeaching by lazy { packRegistry.active.referenceCaseTeaching }
+val referenceVerbTeaching: VerbTeaching by lazy { packRegistry.active.referenceVerbTeaching }
+val referencePronounTeaching: PronounTeaching by lazy { packRegistry.active.referencePronounTeaching }
+val comparisonNounIds: List<String> by lazy { packRegistry.active.comparisonNounIds }
+val referenceRussianSupport: RussianSupport by lazy { packRegistry.active.referenceRussianSupport }
+val referenceTenseRows: List<ReferenceTenseRow> by lazy { packRegistry.active.referenceTenseRows }
+val referenceAspectRows: List<ReferenceAspectRow> by lazy { packRegistry.active.referenceAspectRows }
+val maleAccRows: List<MaleAccRow> by lazy { packRegistry.active.maleAccRows }
+val courseMatrixIntroduction: String by lazy { packRegistry.active.matrixIntroduction }
+val courseWebCaseCompositionHeader: String by lazy { packRegistry.active.webCaseCompositionHeader }
+val courseContextHelp: CourseContextHelp by lazy { packRegistry.active.contextHelp }
+val courseMaleAccIntro: String by lazy { packRegistry.active.maleAccIntro }
+val courseAspectNoPresent: CourseAspectNoPresent by lazy { packRegistry.active.aspectNoPresent }
+val courseVocabularyInstructions: CourseVocabularyInstructions by lazy { packRegistry.active.vocabularyInstructions }
+val courseVocabularyUnavailableLabel: String by lazy { packRegistry.active.vocabularyUnavailableLabel }
 
 private val coursePlaceholder = Regex("\\{([A-Za-z][A-Za-z0-9]*)\\}")
 
 fun renderCoursePattern(key: String, values: Map<String, String>): String =
-    coursePlaceholder.replace(PolishCourseData.exercisePatterns.getValue(key)) { match ->
+    coursePlaceholder.replace(packRegistry.active.exercisePatterns.getValue(key)) { match ->
         val name = match.groupValues[1]
         values[name]?.takeIf { it.isNotEmpty() } ?: error("Missing $name for $key")
     }
