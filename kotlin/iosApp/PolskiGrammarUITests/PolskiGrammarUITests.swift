@@ -341,6 +341,40 @@ final class PolskiGrammarUITests: XCTestCase {
         if notice.waitForExistence(timeout: 2) { notice.buttons["ОК"].tap() }
     }
 
+    /// Reads `element`'s on-screen region back out of `app`'s current screenshot and reports
+    /// whether any pixel in it is clearly blue-dominant (blue channel > red channel + margin) —
+    /// the signature of `ContrastHighlightPlan.md` §3's cool `after` accent, and something no red,
+    /// orange or yellow (`before`, or a pre-fix warm `after`) ever produces. `screenshot().image`'s
+    /// raw `.cgImage` ignores `imageOrientation`, which is not always `.up` for a live capture —
+    /// redrawing through `UIGraphicsImageRenderer` first bakes orientation in, so the crop rect
+    /// below can use `element.frame`'s plain top-left points-to-pixels math directly.
+    private func containsCoolAccentPixel(_ app: XCUIApplication, element: XCUIElement) -> Bool {
+        let frame = element.frame
+        guard frame.width > 0, frame.height > 0 else { return false }
+        let raw = app.screenshot().image
+        let format = UIGraphicsImageRendererFormat()
+        format.scale = raw.scale
+        let normalized = UIGraphicsImageRenderer(size: raw.size, format: format).image { _ in raw.draw(at: .zero) }
+        guard let screenshotImage = normalized.cgImage else { return false }
+        let scale = CGFloat(screenshotImage.width) / app.frame.width
+        let pixelRect = CGRect(x: frame.minX * scale, y: frame.minY * scale,
+                                width: frame.width * scale, height: frame.height * scale)
+        guard let cropped = screenshotImage.cropping(to: pixelRect) else { return false }
+        let width = cropped.width, height = cropped.height
+        guard width > 0, height > 0 else { return false }
+        var pixels = [UInt8](repeating: 0, count: width * height * 4)
+        guard let context = CGContext(
+            data: &pixels, width: width, height: height, bitsPerComponent: 8, bytesPerRow: width * 4,
+            space: CGColorSpaceCreateDeviceRGB(), bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue
+        ) else { return false }
+        context.draw(cropped, in: CGRect(x: 0, y: 0, width: width, height: height))
+        for i in stride(from: 0, to: pixels.count, by: 4) {
+            let r = Int(pixels[i]), b = Int(pixels[i + 2])
+            if b > r + 40, b > 100 { return true }
+        }
+        return false
+    }
+
     func testFirstMethodIntroductionKeepsReferenceAnswerHiddenUntilContinue() {
         let app = XCUIApplication()
         app.launch()
@@ -538,6 +572,83 @@ final class PolskiGrammarUITests: XCTestCase {
             }
             XCTAssertTrue(pair.waitForExistence(timeout: 5), name)
         }
+    }
+
+    /// EmphasisUXAudit E6/C2: "Карта системы" cards used to show their `żona → żonę → żony` chain
+    /// as one flat `example` string with no morpheme-level marking. Each card's `steps` (structured
+    /// pack data, C2) now render as one `NativeContrastPairView` per arrow — same "Было: … Стало:
+    /// …" accessible-name contract every other before/after pair in this app already exposes
+    /// (`testNativeContrastSupportPairsHaveOrderedAccessibleNames` above).
+    func testSystemMapCardsShowStepByStepContrastPairs() {
+        let app = XCUIApplication()
+        app.launch()
+        app.buttons["Матрица"].firstMatch.tap()
+        for name in [
+            "Было: żona; Стало: żonę",
+            "Было: żonę; Стало: żony",
+            "Было: moja piękna; Стало: moją piękną",
+            "Было: widzę; Стало: widziałem",
+            "Было: widziałem; Стало: będę widzieć",
+            "Было: Widzę…; Стало: Nie widzę…",
+            "Было: Nie widzę…; Стало: Czy widzę…?",
+        ] {
+            let pair = app.descendants(matching: .any)[name].firstMatch
+            for _ in 0..<18 {
+                if pair.exists { break }
+                app.swipeUp()
+            }
+            XCTAssertTrue(pair.waitForExistence(timeout: 5), name)
+        }
+    }
+
+    /// ContrastHighlightPlan.md §"Контракт выделения" point 3. The accessible-name assertion above
+    /// already proves the data reaches Swift; a screenshot alone only proves *something* renders —
+    /// it does not prove `after` is the required cool accent rather than a warm red/orange/yellow
+    /// (I2 correction: a `.systemOrange` `after` passed an earlier version of this same screenshot-
+    /// plus-accessible-name check unnoticed, `EmphasisUXAudit-2026-09-27.md` E1/E9 class). So beyond
+    /// the screenshots (kept for human review), [containsCoolAccentPixel] actually reads the
+    /// captured pixels: the "Было: żona; Стало: żonę" block must contain a pixel where blue clearly
+    /// exceeds red — `before` (red) and the plain captions never produce one, only a correctly
+    /// cool `after` run does.
+    func testSystemMapCardsRenderDashedBeforeSolidAfterInLightAndDarkTheme() {
+        let app = XCUIApplication()
+        app.launch()
+        app.buttons["Матрица"].firstMatch.tap()
+        let pair = app.descendants(matching: .any)["Было: żona; Стало: żonę"].firstMatch
+        XCTAssertTrue(pair.waitForExistence(timeout: 10))
+
+        func setTheme(_ label: String) {
+            app.buttons["openSettings"].tap()
+            let theme = app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", "Тема")).firstMatch
+            for _ in 0..<7 {
+                if theme.isHittable { break }
+                app.swipeDown()
+            }
+            XCTAssertTrue(theme.isHittable, app.debugDescription)
+            guard !theme.label.contains(label) else {
+                app.buttons["Готово"].tap()
+                return
+            }
+            theme.tap()
+            let option = app.descendants(matching: .any)[label].firstMatch
+            XCTAssertTrue(option.waitForExistence(timeout: 5))
+            option.tap()
+            app.buttons["Готово"].tap()
+        }
+        func captureAndCheckMapCard(_ name: String) {
+            XCTAssertTrue(pair.exists)
+            let shot = XCTAttachment(screenshot: app.screenshot())
+            shot.name = name
+            shot.lifetime = .keepAlways
+            add(shot)
+            XCTAssertTrue(containsCoolAccentPixel(app, element: pair), "\(name): 'after' is not rendered in a cool accent color")
+        }
+
+        setTheme("Светлая")
+        captureAndCheckMapCard("system-map-steps-light")
+        setTheme("Тёмная")
+        captureAndCheckMapCard("system-map-steps-dark")
+        setTheme("Системная") // restore the default for later tests in this run.
     }
 
     func testNativeGeneratedCaseContrastKeepsFullWordsInSemantics() {
@@ -1171,5 +1282,67 @@ final class PolskiGrammarUITests: XCTestCase {
         capture("style-minimal-theory-front")
         XCTAssertTrue(blockShown("styleBlock-whyOnDemand"), app.debugDescription)
         capture("style-minimal-theory-revealed")
+    }
+
+    /// `EmphasisUXAudit-2026-09-27.md` E1/E9 · `ContrastHighlightPlan.md` §"Контракт выделения":
+    /// the main sentence's `before`/`after` spans (front "Исходное предложение", back "Эталон")
+    /// must differ by more than color alone (dashed vs solid underline) and `after` must not be a
+    /// warm red/orange/yellow any more. This doesn't assert pixels (XCUITest has no drawn-line
+    /// introspection) — it captures one screenshot per theme, right after reveal, for visual
+    /// review (dashed red "было" / solid cool "стало"), while a functional check
+    /// (`accessibilityLabel` still carries the full untruncated sentence) guards the rewrite from
+    /// `Text` concatenation to a single `AttributedString` run behind it.
+    func testEmphasisTokensRenderInLightAndDarkTheme() {
+        let app = XCUIApplication()
+        app.launch()
+        resetTrainingProgress(app)
+        app.buttons["Тренировка"].firstMatch.tap()
+        continueIntroductionIfPresent(app)
+        let reveal = app.buttons["revealAnswer"]
+        for _ in 0..<7 {
+            if reveal.exists && reveal.isHittable { break }
+            app.swipeUp()
+        }
+        XCTAssertTrue(reveal.isHittable)
+        reveal.tap()
+        XCTAssertTrue(app.staticTexts["Widzę moją piękną żonę."].waitForExistence(timeout: 5))
+
+        func setTheme(_ label: String) {
+            app.buttons["openSettings"].tap()
+            let theme = app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", "Тема")).firstMatch
+            for _ in 0..<7 {
+                if theme.isHittable { break }
+                app.swipeDown()
+            }
+            XCTAssertTrue(theme.isHittable, app.debugDescription)
+            guard !theme.label.contains(label) else {
+                app.buttons["Готово"].tap()
+                return
+            }
+            theme.tap()
+            let option = app.descendants(matching: .any)[label].firstMatch
+            XCTAssertTrue(option.waitForExistence(timeout: 5))
+            option.tap()
+            app.buttons["Готово"].tap()
+        }
+        func captureRevealedSentence(_ name: String) {
+            XCTAssertTrue(app.staticTexts["Widzę moją piękną żonę."].waitForExistence(timeout: 5))
+            let shot = XCTAttachment(screenshot: app.screenshot())
+            shot.name = name
+            shot.lifetime = .keepAlways
+            add(shot)
+        }
+
+        setTheme("Светлая")
+        captureRevealedSentence("emphasis-tokens-light")
+        // AttributedString(_:).underlineStyle keeps the sentence's full accessible text intact —
+        // the same value the pre-fix `Text` concatenation exposed via `.accessibilityLabel`.
+        XCTAssertTrue(app.staticTexts["Widzę moją piękną żonę."].exists)
+
+        setTheme("Тёмная")
+        captureRevealedSentence("emphasis-tokens-dark")
+        XCTAssertTrue(app.staticTexts["Widzę moją piękną żonę."].exists)
+
+        setTheme("Системная") // restore the default for later tests in this run.
     }
 }

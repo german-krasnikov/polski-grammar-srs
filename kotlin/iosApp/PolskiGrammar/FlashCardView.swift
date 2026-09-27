@@ -81,9 +81,8 @@ struct FlashCardView<RevealButton: View>: View {
     @ViewBuilder private var questionHeader: some View {
         VStack(alignment: .leading, spacing: 12) {
             Text("Исходное предложение").font(.caption).foregroundStyle(.secondary)
-            highlightedSentence(card.rows("sourceParts"), before: true)
+            emphasizedText(card.rows("sourceParts"), role: .before, accessibilityLabel: card.string("source"))
                 .font(.system(.title2, design: .rounded, weight: .semibold))
-                .accessibilityLabel(card.string("source"))
             if introPending {
                 Text("Знакомство с навыком").font(.headline)
                 Text(card.string("methodIntroduce"))
@@ -139,9 +138,8 @@ struct FlashCardView<RevealButton: View>: View {
         VStack(alignment: .leading, spacing: 12) {
             VStack(alignment: .leading, spacing: 12) {
                 Text("Эталон").font(.caption).foregroundStyle(.secondary)
-                highlightedSentence(card.rows("expectedParts"), before: false)
+                emphasizedText(card.rows("expectedParts"), role: .after, accessibilityLabel: card.string("expected"))
                     .font(.system(.title2, design: .rounded, weight: .semibold))
-                    .accessibilityLabel(card.string("expected"))
                 if !card.strings("accepted").isEmpty { Text("Также: \(card.strings("accepted").joined(separator: " / "))") }
                 if state.string("answerMode") == "Typed" {
                     Label(card.bool("correct") ? "Совпадает с правильным вариантом" : "Сравни свой ответ с эталоном",
@@ -195,23 +193,167 @@ struct FlashCardView<RevealButton: View>: View {
     }
 }
 
-private func highlightedSentence(_ parts: [Record], before: Bool) -> Text {
-    parts.reduce(Text("")) { result, part in
-        let fragment = Text(part.string("text"))
-        return result + (part.bool("changed")
-            ? fragment.bold().foregroundColor(Color(uiColor: before ? .systemRed : .systemOrange)).underline()
-            : fragment)
+/// `ContrastHighlightPlan.md` §"Контракт выделения" — the two emphasis roles every before/after
+/// pair on this card uses: `before` (warm red, dashed) is the old, still-correct form; `after`
+/// (cool accent, solid) is the new one. Both tokens live in one place — `Assets.xcassets`'
+/// `EmphasisBefore`/`EmphasisAfter` colorsets (light/dark variants, each ≥4.5:1 against the card's
+/// background in both) — so every call site below shares them instead of each picking its own color.
+/// Not `private`: §3 also forbids a host having "a second, simplified" render path, so
+/// `NativeContrastPairView` (`PolskiGrammarApp.swift`) reuses this enum and [styledParts] below
+/// rather than rolling its own colors, the way its pre-fix `.systemRed`/`.systemOrange` did.
+enum EmphasisRole {
+    case before, after
+
+    var color: Color {
+        switch self {
+        case .before: return Color("EmphasisBefore")
+        case .after: return Color("EmphasisAfter")
+        }
     }
 }
 
-/// A single `EndingPart` run (`{text, changed}`, same shape `highlightedSentence` reads) as `Text`,
-/// [color] marking the changed span — shared by every block view below that shows a before/after
-/// pair (`table`, `changes`, `contrast`).
-private func styledParts(_ parts: [Record], color: UIColor) -> Text {
-    parts.reduce(Text("")) { result, part in
-        let fragment = Text(part.string("text"))
-        return result + (part.bool("changed") ? fragment.bold().foregroundColor(Color(uiColor: color)).underline() : fragment)
+/// One word-internal run: [text] with [changed] marking whether [EmphasisRole] styling applies.
+private struct EmphasisSegment { let text: String; let changed: Bool }
+
+/// One whitespace-delimited word (its own trailing space, if any, kept as the word's own last
+/// segment — see [emphasisWords]) built from one or more `EndingPart` runs, e.g. an unchanged stem
+/// segment followed by a changed ending segment. The atomic unit [WrapLayout] wraps at, so a
+/// changed segment's underline (drawn by [EmphasisWordView]) always travels with its own word.
+private struct EmphasisWord: Identifiable {
+    let id = UUID()
+    let segments: [EmphasisSegment]
+}
+
+/// Splits `EndingPart` runs (`{text, changed}`, `card.rows("sourceParts"|"expectedParts")` or a
+/// style block's `before`/`after` rows) into [EmphasisWord]s on whitespace, keeping each word's own
+/// trailing space glued to it (so [WrapLayout] can space words using the font's own real space
+/// glyph instead of a guessed constant) and preserving which characters are `changed`.
+private func emphasisWords(_ parts: [Record]) -> [EmphasisWord] {
+    var words: [EmphasisWord] = []
+    var current: [EmphasisSegment] = []
+    var hasContent = false
+    for part in parts {
+        let changed = part.bool("changed")
+        var buffer = ""
+        for ch in part.string("text") {
+            buffer.append(ch)
+            if ch.isWhitespace {
+                current.append(EmphasisSegment(text: buffer, changed: changed))
+                buffer = ""
+                if hasContent {
+                    words.append(EmphasisWord(segments: current))
+                    current = []
+                    hasContent = false
+                }
+            } else {
+                hasContent = true
+            }
+        }
+        if !buffer.isEmpty { current.append(EmphasisSegment(text: buffer, changed: changed)) }
     }
+    if !current.isEmpty { words.append(EmphasisWord(segments: current)) }
+    return words
+}
+
+/// A left-to-right flow layout, wrapping to a new line whenever the next child would overflow —
+/// lays out [EmphasisWord]s the way text itself wraps. `spacing` is 0: inter-word space comes from
+/// each word's own trailing-space segment (see [emphasisWords]), not a layout gap.
+private struct WrapLayout: Layout {
+    var spacing: CGFloat = 0
+
+    func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
+        let width = proposal.width ?? .infinity
+        var x: CGFloat = 0, y: CGFloat = 0, lineHeight: CGFloat = 0
+        for subview in subviews {
+            let size = subview.sizeThatFits(.unspecified)
+            if x > 0, x + size.width > width { x = 0; y += lineHeight; lineHeight = 0 }
+            x += size.width + spacing
+            lineHeight = max(lineHeight, size.height)
+        }
+        return CGSize(width: width.isFinite ? width : x, height: y + lineHeight)
+    }
+
+    func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
+        var x = bounds.minX, y = bounds.minY, lineHeight: CGFloat = 0
+        for subview in subviews {
+            let size = subview.sizeThatFits(.unspecified)
+            if x > bounds.minX, x + size.width > bounds.minX + bounds.width { x = bounds.minX; y += lineHeight; lineHeight = 0 }
+            subview.place(at: CGPoint(x: x, y: y), proposal: ProposedViewSize(size))
+            x += size.width + spacing
+            lineHeight = max(lineHeight, size.height)
+        }
+    }
+}
+
+/// A straight horizontal line filling whatever size its view is given — the geometry
+/// [EmphasisWordView] strokes solid (`after`) or dashed (`before`).
+private struct UnderlineShape: Shape {
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+        path.move(to: CGPoint(x: rect.minX, y: rect.midY))
+        path.addLine(to: CGPoint(x: rect.maxX, y: rect.midY))
+        return path
+    }
+}
+
+/// One [EmphasisWord]; each [EmphasisSegment.changed] run is bold, [role]-colored, and underlined
+/// with a hand-drawn [UnderlineShape] — dashed for `before`, solid for `after`. Not
+/// `Text.underline(pattern: .dash)`: confirmed on the iOS 17 simulator
+/// (`EmphasisUXAudit-2026-09-27.md` E9, re-checked against this fix's own first attempt, an
+/// `AttributedString`-backed `Text` with a `.dash` `underlineStyle`) that SwiftUI silently renders
+/// that pattern solid regardless of how the `Text` is built — this shape is the contract's own
+/// required fallback ("Если платформа не рисует пунктир… хост рисует его собственной фигурой").
+private struct EmphasisWordView: View {
+    let word: EmphasisWord
+    let role: EmphasisRole
+
+    var body: some View {
+        HStack(spacing: 0) {
+            ForEach(Array(word.segments.enumerated()), id: \.offset) { _, segment in
+                if segment.changed {
+                    Text(segment.text)
+                        .fontWeight(.bold)
+                        .foregroundColor(role.color)
+                        .overlay(alignment: .bottom) {
+                            UnderlineShape()
+                                .stroke(role.color, style: StrokeStyle(
+                                    lineWidth: 2, dash: role == .before ? [4, 3] : []))
+                                .frame(height: 2)
+                                .offset(y: 4)
+                        }
+                } else {
+                    Text(segment.text)
+                }
+            }
+        }
+    }
+}
+
+/// Renders `EndingPart` runs (`{text, changed}`) as a wrapping sentence/phrase, changed spans
+/// marked per [role] (`ContrastHighlightPlan.md` §"Контракт выделения"). `accessibilityElement`
+/// collapses the many per-word `Text`s this builds back into one spoken label — the same single
+/// element shape the old one-`Text` rendering gave VoiceOver, and every existing
+/// `app.staticTexts[...]` UI test still looks up by that exact label. `.isStaticText` is added
+/// explicitly: unlike a plain `Text` (which carries that trait natively), a generic
+/// `accessibilityElement(children: .ignore)` container defaults to no traits, and XCUITest's
+/// `staticTexts` query — every one of those call sites — matches only elements that carry it.
+private func emphasizedText(_ parts: [Record], role: EmphasisRole, accessibilityLabel: String) -> some View {
+    WrapLayout {
+        ForEach(emphasisWords(parts)) { word in
+            EmphasisWordView(word: word, role: role)
+        }
+    }
+    .accessibilityElement(children: .ignore)
+    .accessibilityAddTraits(.isStaticText)
+    .accessibilityLabel(accessibilityLabel)
+}
+
+/// Shared by every block view below that shows a before/after pair (`table`, `changes`, `contrast`)
+/// — the accessible label is simply every part's own text joined back together, the same content
+/// VoiceOver read off the old concatenated `Text` (no separate string carries it at these call sites).
+/// Not `private`: `NativeContrastPairView` (`PolskiGrammarApp.swift`) reuses it too — see [EmphasisRole].
+func styledParts(_ parts: [Record], role: EmphasisRole) -> some View {
+    emphasizedText(parts, role: role, accessibilityLabel: parts.map { $0.string("text") }.joined())
 }
 
 // MARK: - StylesBlueprint.md §1/§4/S2 — one view per `Block` kind (`BlockKind.name.lowercase-first`
@@ -290,9 +432,9 @@ private struct StyleTableBlock: View {
                             if !row.string("label").isEmpty {
                                 Text(row.string("label")).font(.footnote).foregroundStyle(.secondary)
                             }
-                            styledParts(row.rows("before"), color: .systemRed)
+                            styledParts(row.rows("before"), role: .before)
                             Text("→").foregroundStyle(.secondary)
-                            styledParts(row.rows("after"), color: .systemOrange)
+                            styledParts(row.rows("after"), role: .after)
                         }
                     }
                 }
@@ -415,9 +557,11 @@ private struct StyleChangesBlock: View {
                     Text("Что изменилось").font(.headline)
                     ForEach(Array(items.enumerated()), id: \.offset) { _, item in
                         VStack(alignment: .leading, spacing: 3) {
-                            (styledParts(item.rows("before"), color: .systemRed)
-                             + Text(" → ")
-                             + styledParts(item.rows("after"), color: .systemOrange))
+                            HStack(spacing: 4) {
+                                styledParts(item.rows("before"), role: .before)
+                                Text("→").foregroundStyle(.secondary)
+                                styledParts(item.rows("after"), role: .after)
+                            }
                             Text(item.string("reason")).foregroundStyle(.secondary)
                         }
                     }
@@ -435,9 +579,9 @@ private struct StyleContrastBlock: View {
     let after: [Record]
     var body: some View {
         HStack(spacing: 6) {
-            styledParts(before, color: .systemRed)
+            styledParts(before, role: .before)
             Text("→").foregroundStyle(.secondary)
-            styledParts(after, color: .systemOrange)
+            styledParts(after, role: .after)
         }
         .font(.system(.title3, design: .rounded, weight: .semibold))
         .accessibilityElement(children: .combine)

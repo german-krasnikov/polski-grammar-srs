@@ -836,26 +836,22 @@ private struct TrainingView: View {
 
 }
 
+/// `ContrastHighlightPlan.md` §3: "Хосту запрещено иметь второй, «упрощённый» путь отрисовки" —
+/// this used to color `before`/`after` with raw `.systemRed`/`.systemOrange` instead of the shared
+/// `EmphasisBefore`/`EmphasisAfter` tokens `FlashCardView.swift`'s [EmphasisRole] already defines,
+/// which made `after` warm orange rather than the contract's required cool accent (I2 correction,
+/// `EmphasisUXAudit-2026-09-27.md` E1/E9 class). [styledParts] is that one shared view; every
+/// `Cases`/`Verbs`/`Pronouns`/chain/system-map row below goes through it now, not a second copy.
 private struct NativeContrastPairView: View {
     let pair: Record
-
-    private func markedText(_ parts: [Record], before: Bool) -> Text {
-        parts.reduce(Text("")) { result, part in
-            let fragment = Text(part.string("text"))
-            return result + (part.bool("changed")
-                ? fragment.bold().foregroundColor(Color(uiColor: before ? .systemRed : .systemOrange))
-                    .underline(true, pattern: before ? .dash : .solid)
-                : fragment)
-        }
-    }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 3) {
             Text("Было").font(.caption)
-            markedText(pair.rows("beforeParts"), before: true)
+            styledParts(pair.rows("beforeParts"), role: .before)
             Text("→").font(.caption)
             Text("Стало").font(.caption)
-            markedText(pair.rows("afterParts"), before: false)
+            styledParts(pair.rows("afterParts"), role: .after)
         }
         .accessibilityElement(children: .ignore)
         .accessibilityLabel("Было: \(pair.string("from")); Стало: \(pair.string("to"))")
@@ -907,9 +903,17 @@ private struct MatrixView: View {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(card.string("title")).font(.headline)
                     Text(card.string("explanation"))
-                    Text(card.string("example")).font(.footnote).textSelection(.enabled)
+                    // C2/EmphasisUXAudit E6: the żona → żonę → żony chain used to show as one flat
+                    // `example` string. Each authored `steps` arrow (structured pack data) now
+                    // renders through the same NativeContrastPairView every other before/after pair
+                    // in this app uses — these cards sit outside the exercise reveal gate (they are
+                    // reference material, not an exercise's own answer), so showing every step's
+                    // "Стало" here is the emphasis contract's stated exception, not an answer leak.
+                    ForEach(Array(card.rows("steps").enumerated()), id: \.offset) { step in
+                        NativeContrastPairView(pair: step.element)
+                    }
                 }
-                .accessibilityElement(children: .combine)
+                .accessibilityElement(children: .contain)
             }
         }
         Section("Одна мысль, пять преобразований") {
@@ -1159,6 +1163,8 @@ private struct VocabularyView: View {
                                 model.sendVocabulary(entry.bool("selected") ? "deselect" : "select", entry.string("id"))
                             } label: {
                                 Image(systemName: entry.bool("selected") ? "checkmark.circle.fill" : "circle")
+                                    .frame(minWidth: 44, minHeight: 44)
+                                    .contentShape(Rectangle())
                             }
                             .disabled(!entry.bool("available") || state.bool("busy"))
                             .accessibilityLabel("\(entry.bool("selected") ? "Убрать" : "Добавить") \(entry.string("lemma"))")
