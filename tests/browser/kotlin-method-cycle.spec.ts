@@ -28,7 +28,11 @@ test('first method cycle keeps the draft and stores exactly one rating', async (
   await page.getByRole('button', { name: 'Перейти к заданию' }).click();
   await expect(reference).toBeEnabled();
   await page.getByRole('button', { name: 'Таблица под рукой' }).click();
-  await expect(page.locator('.reference-panel')).toContainText('moją piękną żonę');
+  // Emphasis contract §5: before reveal, the reference panel must not leak this exercise's own
+  // answer — its target row (Biernik here) stays unhighlighted and its form stays hidden.
+  await expect(page.locator('.reference-panel')).not.toContainText('moją piękną żonę');
+  await expect(page.locator('.reference-panel .highlight-row')).toHaveCount(0);
+  await expect(page.locator('.reference-panel')).toContainText('Стало: ?');
   await page.getByRole('button', { name: 'Скрыть таблицу' }).click();
   await page.getByRole('button', { name: 'Напечатать ответ' }).click();
   const answer = page.getByRole('textbox', { name: 'Ответ по-польски' });
