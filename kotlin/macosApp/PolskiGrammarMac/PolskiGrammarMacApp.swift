@@ -119,7 +119,9 @@ struct RatingIntervals: Decodable {
 /// fields instead of one `Decodable`-synthesized property.
 struct BlockJSON: Decodable {
     struct TableRow: Decodable { let label: String; let before: [TrainingSnapshot.HighlightPart]; let after: [TrainingSnapshot.HighlightPart] }
-    struct NativeParallelPair: Decodable { let native: String; let target: String; let note: String; let matches: Bool }
+    /// [targetParts] highlights [target] (S4/M1, EmphasisUXAudit E7) — [native] stays plain prose,
+    /// never highlighted, matching `Block.NativeParallelPair`'s own contract.
+    struct NativeParallelPair: Decodable { let native: String; let target: String; let note: String; let matches: Bool; let targetParts: [TrainingSnapshot.HighlightPart] }
     struct ChangeItem: Decodable { let before: [TrainingSnapshot.HighlightPart]; let after: [TrainingSnapshot.HighlightPart]; let reason: String }
 
     let kind: String
@@ -133,9 +135,14 @@ struct BlockJSON: Decodable {
     let after: [TrainingSnapshot.HighlightPart]?
     let exampleItems: [String]?
     let changeItems: [ChangeItem]?
+    /// S4/M1 (EmphasisUXAudit E7): highlights `text` for `formula`/`rule`/`scene`/`whyOnDemand`,
+    /// the same explicit-pair parts `Block.kt` already attaches — see `MacStyleBlockView`.
+    let parts: [TrainingSnapshot.HighlightPart]?
+    /// `examples` only: parallel to `exampleItems` by index (`itemParts[i]` highlights `exampleItems[i]`).
+    let itemParts: [[TrainingSnapshot.HighlightPart]]?
 
     private enum CodingKeys: String, CodingKey {
-        case kind, text, detail, caption, rows, pairs, collapsedLabel, before, after, items
+        case kind, text, detail, caption, rows, pairs, collapsedLabel, before, after, items, parts, itemParts
     }
 
     init(from decoder: Decoder) throws {
@@ -149,6 +156,8 @@ struct BlockJSON: Decodable {
         collapsedLabel = try c.decodeIfPresent(String.self, forKey: .collapsedLabel)
         before = try c.decodeIfPresent([TrainingSnapshot.HighlightPart].self, forKey: .before)
         after = try c.decodeIfPresent([TrainingSnapshot.HighlightPart].self, forKey: .after)
+        parts = try c.decodeIfPresent([TrainingSnapshot.HighlightPart].self, forKey: .parts)
+        itemParts = try c.decodeIfPresent([[TrainingSnapshot.HighlightPart]].self, forKey: .itemParts)
         if kind == "changes" {
             exampleItems = nil
             changeItems = try c.decodeIfPresent([ChangeItem].self, forKey: .items)

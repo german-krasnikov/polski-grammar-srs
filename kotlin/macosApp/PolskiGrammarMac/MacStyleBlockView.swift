@@ -17,23 +17,27 @@ struct MacStyleBlockView: View {
 
     var body: some View {
         switch block.kind {
-        case "formula": accentBox(caption: "ЗАПОМНИ", text: block.text ?? "")
-        case "rule": accentBox(caption: "ПРАВИЛО", text: block.text ?? "", detail: block.detail)
+        case "formula": accentBox(caption: "ЗАПОМНИ", parts: block.parts ?? [])
+        case "rule": accentBox(caption: "ПРАВИЛО", parts: block.parts ?? [], detail: block.detail)
         case "table": TableBlockBody(caption: block.caption ?? "", rows: block.rows ?? [])
-        case "scene": SceneBlockBody(text: block.text ?? "")
+        case "scene": SceneBlockBody(parts: block.parts ?? [])
         case "nativeParallel": NativeParallelBlockBody(pairs: block.pairs ?? [])
-        case "examples": ExamplesBlockBody(items: block.exampleItems ?? [])
-        case "whyOnDemand": WhyOnDemandBlockBody(text: block.text ?? "", collapsedLabel: block.collapsedLabel?.isEmpty == false ? block.collapsedLabel! : "Почему так?", reduceMotion: reduceMotion)
+        case "examples": ExamplesBlockBody(items: block.exampleItems ?? [], itemParts: block.itemParts ?? [])
+        case "whyOnDemand": WhyOnDemandBlockBody(parts: block.parts ?? [], collapsedLabel: block.collapsedLabel?.isEmpty == false ? block.collapsedLabel! : "Почему так?", reduceMotion: reduceMotion)
         case "changes": ChangesBlockBody(items: block.changeItems ?? [])
         case "contrast": ContrastBlockBody(before: block.before ?? [], after: block.after ?? [])
         default: EmptyView()
         }
     }
 
-    @ViewBuilder private func accentBox(caption: String, text: String, detail: String? = nil) -> some View {
+    /// [parts] renders through [highlightedText] (`before: false`, the same "after"-role token
+    /// every other style block uses for its own explicit-pair prose — mirrors the web reference's
+    /// `appendContrastParts(..., "change-after")` calls in `CardBlocksWeb.kt` for these same block
+    /// kinds; S4/M1, EmphasisUXAudit E7).
+    @ViewBuilder private func accentBox(caption: String, parts: [TrainingSnapshot.HighlightPart], detail: String? = nil) -> some View {
         VStack(alignment: .leading, spacing: 7) {
             Text(caption).font(.caption.weight(.semibold)).tracking(1.1).foregroundStyle(.secondary)
-            Text(text).font(.headline)
+            highlightedText(parts, before: false).font(.headline)
             if let detail, !detail.isEmpty {
                 Text(detail).font(.subheadline).foregroundStyle(.secondary)
             }
@@ -69,11 +73,11 @@ private struct TableBlockBody: View {
 }
 
 private struct SceneBlockBody: View {
-    let text: String
+    let parts: [TrainingSnapshot.HighlightPart]
     var body: some View {
         HStack(alignment: .top, spacing: 10) {
             RoundedRectangle(cornerRadius: 1.5).fill(Color.accentColor.opacity(0.5)).frame(width: 3)
-            Text(text).italic().foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
+            highlightedText(parts, before: false).italic().foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
         }
         .accessibilityElement(children: .combine)
     }
@@ -87,7 +91,7 @@ private struct NativeParallelBlockBody: View {
                 VStack(alignment: .leading, spacing: 4) {
                     HStack(alignment: .top, spacing: 10) {
                         Text(pair.native).frame(maxWidth: .infinity, alignment: .leading)
-                        Text(pair.target).fontWeight(.medium).frame(maxWidth: .infinity, alignment: .leading)
+                        highlightedText(pair.targetParts, before: false).fontWeight(.medium).frame(maxWidth: .infinity, alignment: .leading)
                         matchBadge(pair.matches)
                     }
                     if !pair.note.isEmpty { Text(pair.note).font(.footnote).foregroundStyle(.secondary) }
@@ -110,12 +114,16 @@ private struct NativeParallelBlockBody: View {
 
 private struct ExamplesBlockBody: View {
     let items: [String]
+    /// Parallel to [items] by index (S4/M1, EmphasisUXAudit E7); an out-of-range index (should
+    /// not happen — `Block.Examples.itemParts` is always the same length as `items`) falls back
+    /// to the plain item text rather than crashing.
+    let itemParts: [[TrainingSnapshot.HighlightPart]]
     var body: some View {
         VStack(alignment: .leading, spacing: 5) {
-            ForEach(Array(items.enumerated()), id: \.offset) { _, item in
+            ForEach(Array(items.enumerated()), id: \.offset) { index, item in
                 HStack(alignment: .top, spacing: 6) {
                     Text("•").foregroundStyle(.secondary)
-                    Text(item)
+                    if index < itemParts.count { highlightedText(itemParts[index], before: false) } else { Text(item) }
                 }
                 .accessibilityElement(children: .combine)
             }
@@ -124,7 +132,7 @@ private struct ExamplesBlockBody: View {
 }
 
 private struct WhyOnDemandBlockBody: View {
-    let text: String
+    let parts: [TrainingSnapshot.HighlightPart]
     let collapsedLabel: String
     let reduceMotion: Bool
     @State private var expanded = false
@@ -142,7 +150,7 @@ private struct WhyOnDemandBlockBody: View {
             .accessibilityValue(expanded ? "Развёрнуто" : "Свёрнуто")
             .accessibilityAddTraits(.isButton)
             if expanded {
-                Text(text).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
+                highlightedText(parts, before: false).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
                     .transition(reduceMotion ? .identity : .opacity.combined(with: .move(edge: .top)))
             }
         }

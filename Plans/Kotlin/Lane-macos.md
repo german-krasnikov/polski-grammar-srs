@@ -500,3 +500,61 @@ that part is verified by build + structural code review only, same as the rest o
   session; the toggle wiring and the widened-gate/dispose logic are verified by the Kotlin test (the
   data path) plus structural code review against D5 (the Swift gating/disposal), not an interactive
   click-through — flagging this as the same pre-existing, unresolved gap, not a new one.
+
+## M6 — S4 style-block highlight parts (`MacStyleBlockView.swift`)
+
+**Audit finding**: [EmphasisUXAudit-2026-09-27.md](EmphasisUXAudit-2026-09-27.md) E7 — S4 landed
+`Block.kt`'s `parts`/`itemParts`/`targetParts` fields (`formula`/`rule`/`scene`/`whyOnDemand`/
+`examples`/`nativeParallel`) and `StyleSnapshot.kt`'s `blockToJson` already exports them (both in
+`main` before this task; untouched here). `MacStyleBlockView` had not been updated to read them: it
+rendered `block.text ?? ""` as plain `Text`, so these six block kinds carried no `before`/`after`
+token (dashed-red/solid-teal) on macOS at all, only `table`/`changes`/`contrast` did.
+
+**Change** (`kotlin/macosApp/PolskiGrammarMac/**` only — no `commonMain`/Android/iOS/web files
+touched):
+
+- `PolskiGrammarMacApp.swift`: `BlockJSON` gained `parts: [HighlightPart]?` and
+  `itemParts: [[HighlightPart]]?`, decoded in its existing manual `init(from:)`; `NativeParallelPair`
+  gained `targetParts: [HighlightPart]` (a plain field — that struct still uses the synthesized
+  `Decodable`, and the JSON key already matches).
+- `MacStyleBlockView.swift`: `formula`/`rule`/`scene`/`whyOnDemand` now render their highlighted
+  prose through the shared `highlightedText(_:before:)` (the one M1 rendering path, per contract
+  §3) instead of a plain `Text`; `examples` passes `itemParts[index]` per item (index-guarded, falls
+  back to the plain string if a list were ever shorter — defensive, shouldn't happen since
+  `Block.Examples.itemParts` is always parallel to `items`); `nativeParallel`'s target column
+  highlights `pair.targetParts` instead of showing `pair.target` plain. All six calls pass
+  `before: false` ("after"-role: cool/solid) — the same choice `CardBlocksWeb.kt` (the named web
+  reference) makes for every one of these block kinds via its own hardcoded `"change-after"`
+  default, since the JSON bridge does not carry per-part `EndingPart.side` (only `text`/`changed`;
+  confirmed against `StyleSnapshotTest.kt`, which only asserts `text`) — so, unlike web's in-memory
+  `EndingPart.side`-aware fallback, there is no per-part role signal available on this side of the
+  bridge to render a mixed-role list with today's wire shape. `Rule.detail` stays plain text (`Block.kt`
+  documents `parts` as highlighting `text` only, never `detail`).
+
+**TDD**: no XCTest/XCUITest target exists for this app (same gap M1-M5 already flagged); verified by
+build + launch + screenshot plus structural review against `Block.kt`/`CardBlocksWeb.kt`, the same
+practice as every prior entry in this file.
+
+**Files changed**: `kotlin/macosApp/PolskiGrammarMac/PolskiGrammarMacApp.swift`,
+`kotlin/macosApp/PolskiGrammarMac/MacStyleBlockView.swift`. No project-file regeneration needed (no
+Swift files added/removed).
+
+**Verification**:
+- Build: `xcodebuild -project kotlin/macosApp/PolskiGrammarMac.xcodeproj -scheme PolskiGrammarMac
+  -destination "platform=macOS" -derivedDataPath /private/tmp/lane-macos-dd
+  CODE_SIGNING_ALLOWED=NO build` — **BUILD SUCCEEDED** (arm64, JDK 21 arm64).
+- `:shared:macosArm64Test` — not run: no `commonMain`/`macosMain` Kotlin file was touched.
+- Launched the built `.app` and screenshotted the front training card (rule-first style, due
+  skill `case.dat.f`): renders correctly, no crash, no decode failure (a `BlockJSON` field mismatch
+  would have thrown mid-decode and blanked the whole card, not just this one). The visible `formula`
+  block (`"-a → -ę; прилагательное -a → -ą"`) shows plain text — correct per contract rule 6
+  ("no highlight beats a wrong one"): this mnemonic is an abstract summary, not a literal occurrence
+  of the skill's `focus.focusBefore`/`focusAfter` word, so `styleTextHighlightParts` finds no
+  whole-word match and returns one unmarked part, same as `CardBlocksWeb.kt` would for the same
+  input. Same sandboxed-session Accessibility/Input-Monitoring gap already logged for M1-M5 blocked
+  clicking the style picker or reveal button to reach a skill whose `formula`/`scene`/`examples`/
+  `nativeParallel` text does literally contain its focus pair, so a highlighted (non-empty-match)
+  screenshot of these six block kinds specifically could not be captured this session — flagging
+  this as the same pre-existing, unresolved gap, not a new one; the decode/render path itself is
+  exercised end-to-end by the launch above and is a direct, symmetric mirror of the already-tested
+  `StyleSnapshotTest.kt` export and the already-shipped `CardBlocksWeb.kt` reference.
