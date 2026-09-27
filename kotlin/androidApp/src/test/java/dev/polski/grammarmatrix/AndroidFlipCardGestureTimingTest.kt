@@ -56,7 +56,7 @@ class AndroidFlipCardGestureTimingTest {
                             revealed = revealed,
                             reduceMotion = false,
                             onRate = { ratings += it },
-                            front = { Text("FRONT", Modifier.fillMaxWidth()) },
+                            front = { _ -> Text("FRONT", Modifier.fillMaxWidth()) },
                             back = { Text("BACK") },
                         )
                     }
@@ -88,7 +88,7 @@ class AndroidFlipCardGestureTimingTest {
                             reduceMotion = false,
                             // no gesture surface is composed at all before `showingBack` (the branch the reviewer flagged)
                             onRate = {},
-                            front = { Text("FRONT", Modifier.fillMaxWidth()) },
+                            front = { _ -> Text("FRONT", Modifier.fillMaxWidth()) },
                             back = { Text("BACK") },
                         )
                     }
