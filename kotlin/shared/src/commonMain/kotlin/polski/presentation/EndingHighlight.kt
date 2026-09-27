@@ -47,6 +47,10 @@ data class ContrastPair(
 
 enum class ChangeSide { Before, After }
 
+/** The letters of [word] up to and including its last letter, dropping any trailing punctuation
+ *  (Emphasis contract, rule 1: punctuation never participates in the diff). */
+private fun letterCore(word: String): String = word.substring(0, word.indexOfLast(Char::isLetter) + 1)
+
 /**
  * Distinguishes aligned short suffix changes from a whole-word replacement. [alternations]
  * (default: the active pack's own declared pairs, UC S2) lets a regular stem alternation still
@@ -77,12 +81,10 @@ fun changeHighlightParts(
                 add(EndingPart(word, false))
                 return@forEachIndexed
             }
-            val oldCoreEnd = old.indexOfLast(Char::isLetter) + 1
-            val nextCoreEnd = next.indexOfLast(Char::isLetter) + 1
-            val oldCore = old.substring(0, oldCoreEnd)
-            val nextCore = next.substring(0, nextCoreEnd)
+            val oldCore = letterCore(old)
+            val nextCore = letterCore(next)
             val core = if (side == ChangeSide.Before) oldCore else nextCore
-            val trailing = word.substring(if (side == ChangeSide.Before) oldCoreEnd else nextCoreEnd)
+            val trailing = word.substring(core.length)
             if (oldCore == nextCore) {
                 // Letters are identical; only trailing punctuation differs. Punctuation never
                 // participates in the diff (Emphasis contract, rule 1), so nothing is highlighted.
@@ -108,9 +110,11 @@ fun changeHighlightParts(
 /**
  * Detects a single word inserted into (or deleted from) an otherwise identical word-for-word
  * phrase — e.g. the "Nie"/"Czy" particle in a system-card step ("Widzę…" → "Nie widzę…"). Word
- * case is ignored when aligning (Emphasis contract, rule 1: case never participates in the
- * diff), since a word's capitalisation can shift with its position in the sentence. Returns null
- * when no such single-word alignment exists, so the caller falls back to a whole-phrase change.
+ * case is ignored when aligning, and trailing punctuation is stripped from each word first
+ * (Emphasis contract, rule 1: case and punctuation never participate in the diff), since a word's
+ * capitalisation can shift with its position in the sentence and an unrelated word may separately
+ * gain a trailing punctuation change (e.g. a question mark). Returns null when no such
+ * single-word alignment exists, so the caller falls back to a whole-phrase change.
  */
 private fun singleWordInsertionOrDeletionParts(
     oldWords: List<String>,
@@ -123,7 +127,8 @@ private fun singleWordInsertionOrDeletionParts(
     val shorter = if (insertion) oldWords else newWords
     val extraIndex = longer.indices.firstOrNull { i ->
         val remainder = longer.filterIndexed { j, _ -> j != i }
-        remainder.size == shorter.size && remainder.zip(shorter).all { (a, b) -> a.equals(b, ignoreCase = true) }
+        remainder.size == shorter.size &&
+            remainder.zip(shorter).all { (a, b) -> letterCore(a).equals(letterCore(b), ignoreCase = true) }
     } ?: return null
     val onLongerSide = if (insertion) side == ChangeSide.After else side == ChangeSide.Before
     val words = if (onLongerSide) longer else shorter

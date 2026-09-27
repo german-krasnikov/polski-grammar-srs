@@ -157,6 +157,20 @@ class EndingHighlightTest {
         assertEquals(emptyList(), after.filter(EndingPart::isChanged))
     }
 
+    // C2 review blocker: a single-word insertion combined with a trailing-punctuation-only change
+    // on another word (question row "domu." → "domu?") must still resolve to the single-word
+    // alignment, not fall back to a whole-phrase highlight, since punctuation never participates
+    // in the diff (Emphasis contract, rule 1).
+    @Test
+    fun aSingleInsertedWordSurvivesAlongsideATrailingPunctuationChangeElsewhere() {
+        val before = changeHighlightParts("Moja piękna żona idzie do domu.", "Czy moja piękna żona idzie do domu?", ChangeSide.Before)
+        val after = changeHighlightParts("Moja piękna żona idzie do domu.", "Czy moja piękna żona idzie do domu?", ChangeSide.After)
+        assertEquals("Moja piękna żona idzie do domu.", before.joinToString("") { it.text })
+        assertEquals("Czy moja piękna żona idzie do domu?", after.joinToString("") { it.text })
+        assertEquals(emptyList(), before.filter(EndingPart::isChanged))
+        assertEquals(listOf("Czy"), after.filter(EndingPart::isChanged).map(EndingPart::text))
+    }
+
     // S4 (EmphasisUXAudit E7): a style block's own prose (formula/rule/scene/examples/why) is
     // highlighted only from the skill's explicit `focus.before → focus.after` pair — never parsed
     // heuristically. A literal occurrence of either phrase gets the matching role; free prose that

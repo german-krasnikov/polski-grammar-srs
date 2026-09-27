@@ -224,9 +224,11 @@ class IosMatrixSnapshotTest {
             val row = element.jsonObject
             assertEquals(referenceTenseRows[index].from, row.getValue("from").jsonPrimitive.content)
             assertEquals(referenceTenseRows[index].to, row.getValue("to").jsonPrimitive.content)
-            // Rows 2 ("będzie" inserted) and 3 ("nie" inserted) are pure single-word insertions:
-            // the Emphasis contract requires no before-side span for those, only after.
-            val isPureInsertion = index == 2 || index == 3
+            // Rows 2 ("będzie" inserted), 3 ("nie" inserted) and 4 ("Czy" inserted, plus an
+            // unrelated trailing-punctuation-only change on the last word) are pure single-word
+            // insertions: the Emphasis contract requires no before-side span for those, only
+            // after (C2 review blocker: punctuation must not defeat the single-word alignment).
+            val isPureInsertion = index == 2 || index == 3 || index == 4
             if (index > 0) {
                 assertEquals(!isPureInsertion,
                     row.getValue("beforeParts").jsonArray.any { it.jsonObject.getValue("changed").jsonPrimitive.content == "true" })
