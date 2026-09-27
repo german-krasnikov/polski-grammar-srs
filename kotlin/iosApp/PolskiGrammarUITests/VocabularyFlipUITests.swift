@@ -90,4 +90,28 @@ final class VocabularyFlipUITests: XCTestCase {
         XCTAssertFalse(answerFace.waitForExistence(timeout: 1),
             "a tap must flip the card away, not leave the answer face showing or dispatch a rating")
     }
+
+    /// I3: the vocabulary list row's select toggle (`checkmark.circle.fill`/`circle`) is a plain
+    /// icon-only `Button` — its hit area must meet Apple HIG's 44x44pt minimum, not just the small
+    /// glyph, so it can be tapped reliably.
+    func testVocabularySelectButtonHas44ptTouchTarget() {
+        let app = XCUIApplication()
+        app.launch()
+        app.buttons["Слова"].firstMatch.tap()
+        let select = app.buttons["vocabularySelect-noun.book"]
+        for _ in 0..<8 {
+            if select.exists && select.isHittable { break }
+            app.swipeUp()
+        }
+        XCTAssertTrue(select.waitForExistence(timeout: 5), app.debugDescription)
+        // Rounded: SwiftUI's own layout solver reports the 44pt `.frame(minWidth:minHeight:)` back
+        // as e.g. 43.99999999999994 (double-precision layout noise, not an actual sub-44pt target)
+        // — reproduced consistently, so this rounds rather than masking a real regression.
+        XCTAssertGreaterThanOrEqual(select.frame.width.rounded(), 44, app.debugDescription)
+        XCTAssertGreaterThanOrEqual(select.frame.height.rounded(), 44, app.debugDescription)
+        let capture = XCTAttachment(screenshot: app.screenshot())
+        capture.name = "vocabulary-select-touch-target"
+        capture.lifetime = .keepAlways
+        add(capture)
+    }
 }

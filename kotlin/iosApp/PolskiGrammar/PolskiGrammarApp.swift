@@ -1163,6 +1163,8 @@ private struct VocabularyView: View {
                                 model.sendVocabulary(entry.bool("selected") ? "deselect" : "select", entry.string("id"))
                             } label: {
                                 Image(systemName: entry.bool("selected") ? "checkmark.circle.fill" : "circle")
+                                    .frame(minWidth: 44, minHeight: 44)
+                                    .contentShape(Rectangle())
                             }
                             .disabled(!entry.bool("available") || state.bool("busy"))
                             .accessibilityLabel("\(entry.bool("selected") ? "Убрать" : "Добавить") \(entry.string("lemma"))")
