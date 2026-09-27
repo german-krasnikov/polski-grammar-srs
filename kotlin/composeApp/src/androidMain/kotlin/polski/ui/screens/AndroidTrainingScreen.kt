@@ -68,6 +68,9 @@ internal fun AndroidTrainingScreen(
     reduceMotion: Boolean = false,
 ) {
     val introducing = state.phase == CardPhase.Question && state.introPending
+    // A4: one gate for this whole screen visit, not per card — only the first revealed card
+    // nudges, every later one this screen shows during the same visit just shows the static hint.
+    val swipeNudgeGate = remember { SwipeNudgeGate() }
     Column(verticalArrangement = Arrangement.spacedBy(18.dp)) {
         Surface(
             shape = RoundedCornerShape(28.dp),
@@ -273,8 +276,7 @@ internal fun AndroidTrainingScreen(
                                         }
                                     }
                                     if (swipeRatingEnabled) AndroidStaggeredReveal(2, reduceMotion) {
-                                        Text("Свайп влево — повторить · вправо — вспомнил",
-                                            style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                                        AndroidSwipeHint(swipeNudgeGate, reduceMotion)
                                     }
                                 }
                             }
