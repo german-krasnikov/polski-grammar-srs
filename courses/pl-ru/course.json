@@ -2645,8 +2645,8 @@
       "hint": "moje nowe okno → widzę moje nowe okno",
       "prerequisites": [],
       "focus": {
-        "before": "moje nowe okno",
-        "after": "moje nowe okno"
+        "before": "moje duże morze",
+        "after": "moje duże morze"
       },
       "methods": {
         "logic": {
@@ -2692,8 +2692,8 @@
       "hint": "Widzę kogo? co?",
       "prerequisites": [],
       "focus": {
-        "before": "moja piękna żona",
-        "after": "moją piękną żonę"
+        "before": "moja młoda siostra",
+        "after": "moją młodą siostrę"
       },
       "methods": {
         "logic": {
@@ -2741,8 +2741,8 @@
         "case.acc.f"
       ],
       "focus": {
-        "before": "mój dobry mąż",
-        "after": "mojego dobrego męża"
+        "before": "mój stary sąsiad",
+        "after": "mojego starego sąsiada"
       },
       "methods": {
         "logic": {
@@ -2796,8 +2796,8 @@
         "case.acc.f"
       ],
       "focus": {
-        "before": "Widzę moją piękną żonę.",
-        "after": "Nie widzę mojej pięknej żony."
+        "before": "Widzę moją młodą siostrę.",
+        "after": "Nie widzę mojej młodej siostry."
       },
       "methods": {
         "logic": {
@@ -3276,8 +3276,8 @@
         "case.loc"
       ],
       "focus": {
-        "before": "widzę moją żonę",
-        "after": "widzę ją"
+        "before": "moja żona",
+        "after": "ją"
       },
       "methods": {
         "logic": {
