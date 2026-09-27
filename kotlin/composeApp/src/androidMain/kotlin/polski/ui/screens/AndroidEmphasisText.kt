@@ -13,6 +13,7 @@ import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.PathEffect
+import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextLayoutResult
@@ -41,12 +42,26 @@ fun androidEmphasisAnnotatedText(parts: List<EndingPart>, before: Boolean, color
     }
 
 /**
+ * Fixed cool-accent (teal) colors for the `after` role, validated ≥4.5:1 against both app
+ * backgrounds ([AndroidEmphasisTextTest]). These are **not** sourced from
+ * [MaterialTheme.colorScheme.secondary]: on API 31+, Material You dynamic color derives
+ * `secondary` from the device wallpaper, so it is not guaranteed to stay a cool accent — it can
+ * drift to red/orange/yellow, which the contract forbids for `after`
+ * (EmphasisUXAudit-2026-09-27.md blocker on A1/08a2f4b). `error`, used for `before`, is unaffected:
+ * Material 3's dynamic color spec keeps the error palette fixed regardless of wallpaper.
+ */
+private val emphasisAfterLight = Color(0xFF32685A)
+private val emphasisAfterDark = Color(0xFFB8D8CE)
+
+/** Resolves the `after` role's color. Takes no [ColorScheme][androidx.compose.material3.ColorScheme], so it cannot read a dynamic theme role. */
+fun androidEmphasisAfterColor(dark: Boolean): Color = if (dark) emphasisAfterDark else emphasisAfterLight
+
+/**
  * The one Android rendering path for a before/after contrast fragment, used for both the main
  * sentence (`AndroidTrainingScreen.kt`) and style-block rows (`AndroidStyleBlocks.kt`) — no
  * second, simplified path draws this role anywhere else on this host. `before` = warm red
- * ([MaterialTheme.colorScheme.error]) with a hand-drawn dashed underline; `after` = cool accent
- * ([MaterialTheme.colorScheme.secondary], teal — `colorScheme.primary` is this app's warm
- * brown/orange and the contract forbids red/orange/yellow for `after`) with a native solid
+ * ([MaterialTheme.colorScheme.error], unaffected by dynamic color) with a hand-drawn dashed
+ * underline; `after` = fixed cool accent ([androidEmphasisAfterColor]) with a native solid
  * underline. Compose has no dashed [TextDecoration], so `before`'s line is drawn with
  * [PathEffect.dashPathEffect] instead of relying on the span style.
  */
@@ -58,7 +73,8 @@ fun AndroidEmphasisText(
     style: TextStyle = LocalTextStyle.current,
     fontWeight: FontWeight? = null,
 ) {
-    val color = if (before) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.secondary
+    val dark = MaterialTheme.colorScheme.background.luminance() < 0.5f
+    val color = if (before) MaterialTheme.colorScheme.error else androidEmphasisAfterColor(dark)
     if (!before) {
         Text(text = androidEmphasisAnnotatedText(parts, before, color), style = style, fontWeight = fontWeight, modifier = modifier)
         return

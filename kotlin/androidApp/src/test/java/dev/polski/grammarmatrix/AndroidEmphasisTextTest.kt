@@ -1,12 +1,15 @@
 package dev.polski.grammarmatrix
 
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Test
 import polski.presentation.EndingPart
+import polski.ui.screens.androidEmphasisAfterColor
 import polski.ui.screens.androidEmphasisAnnotatedText
 
 /**
@@ -41,5 +44,30 @@ class AndroidEmphasisTextTest {
     @Test fun unchangedTextCarriesNoSpanStyle() {
         val text = androidEmphasisAnnotatedText(parts, before = true, color = red)
         assertEquals(0, text.spanStyles.count { it.start == 0 && it.end == 3 })
+    }
+
+    // `after`'s color must be a fixed constant, never MaterialTheme.colorScheme.secondary: under
+    // Material You (API 31+) that role is wallpaper-derived and can drift to red/orange/yellow,
+    // the same mechanism that made the old `primary`-based bug warm. androidEmphasisAfterColor
+    // takes no ColorScheme, so it structurally cannot read a dynamic theme role
+    // (EmphasisUXAudit-2026-09-27.md blocker on A1/08a2f4b).
+    @Test fun afterColorIsFixedNotThemeSourced() {
+        assertEquals(Color(0xFF32685A), androidEmphasisAfterColor(dark = false))
+        assertEquals(Color(0xFFB8D8CE), androidEmphasisAfterColor(dark = true))
+    }
+
+    @Test fun afterColorMeetsContrastOnBothAppBackgrounds() {
+        val lightBackground = Color(0xFFF7F4EC)
+        val darkBackground = Color(0xFF101B21)
+        assertTrue(contrastRatio(androidEmphasisAfterColor(dark = false), lightBackground) >= 4.5)
+        assertTrue(contrastRatio(androidEmphasisAfterColor(dark = true), darkBackground) >= 4.5)
+    }
+
+    private fun contrastRatio(a: Color, b: Color): Double {
+        val la = a.luminance().toDouble()
+        val lb = b.luminance().toDouble()
+        val lighter = maxOf(la, lb)
+        val darker = minOf(la, lb)
+        return (lighter + 0.05) / (darker + 0.05)
     }
 }
