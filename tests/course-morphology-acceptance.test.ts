@@ -7,12 +7,18 @@ import course from '../courses/pl-ru/course.json';
 import frequency from '../courses/pl-ru/frequency-top1000.json';
 import { validateCoursePack } from '../scripts/validate-course.mjs';
 
+// Hash last updated for the C4/E11 formula localization (EmphasisUXAudit-2026-09-27): six
+// `skills[].formula` mnemonics moved from English to Russian in courses/pl-ru/course.json.
+// Morphology (nouns/adjectives/verbs/pronouns/possessives) is unchanged; the assertions below
+// still pin that. The hash recorded at the morphology-forms migration (Stage-MorphologyForms-
+// Tester.md, Evidence.md) was `f17084de1f877860701b43614668104c4f5817923465b2d4d70fec44bdacbfb9`
+// and stays correct as history for that stage; it is not re-derived here.
 test('the pre-migration grammar oracle remains pinned and covers every owner slot', () => {
   const sha256 = createHash('sha256')
     .update(readFileSync('tests/fixtures/kotlin-parity/grammar.json'))
     .digest('hex');
   expect(grammar.sourceRevision).toBe('df59774e153a5bdf590fe27bd8780c7bd5457a26');
-  expect(sha256).toBe('f17084de1f877860701b43614668104c4f5817923465b2d4d70fec44bdacbfb9');
+  expect(sha256).toBe('d2ce7ce1968190b76343f4b03f931a46d578156730631fc76dd7e6a937ab9633');
 
   const possessives = grammar.cases.filter(item => item.id.startsWith('G-POSS-'));
   expect(possessives).toHaveLength(490);

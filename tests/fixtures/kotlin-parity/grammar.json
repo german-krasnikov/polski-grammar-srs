@@ -27791,7 +27791,7 @@
         "title": "Biernik · żeński",
         "group": "Przypadki",
         "level": "A1",
-        "formula": "-a → -ę; adjective -a → -ą",
+        "formula": "-a → -ę; прилагательное -a → -ą",
         "theory": "Прямой объект после widzę, mam, lubię, kupuję обычно стоит в Bierniku.",
         "hint": "Widzę kogo? co?",
         "prerequisites": []
@@ -27912,7 +27912,7 @@
         "title": "Czas teraźniejszy",
         "group": "Czasownik",
         "level": "A1",
-        "formula": "person × number → końcówka",
+        "formula": "лицо × число → окончание",
         "theory": "Автоматизируем 6 лиц на высокочастотных глаголах.",
         "hint": "ja/ty/on/my/wy/oni",
         "prerequisites": []
@@ -27928,7 +27928,7 @@
         "title": "Czas przeszły",
         "group": "Czasownik",
         "level": "A2",
-        "formula": "past stem + gender + person",
+        "formula": "основа прошедшего + род + лицо",
         "theory": "В прошедшем времени форма отражает род говорящего/подлежащего и лицо.",
         "hint": "robił-em, robiła-m, robili-śmy",
         "prerequisites": [
@@ -27946,7 +27946,7 @@
         "title": "Czas przyszły",
         "group": "Czasownik",
         "level": "A2",
-        "formula": "będę + infinitive (imperf.) / present-form (perf.)",
+        "formula": "będę + инфинитив (несов.) / форма настоящего (сов.)",
         "theory": "Для несовершенного вида: będę robić. Совершенный вид имеет простое будущее: zrobię.",
         "hint": "będę czytać / kupię",
         "prerequisites": [
@@ -27964,7 +27964,7 @@
         "title": "Aspekt · robić/zrobić",
         "group": "Czasownik",
         "level": "B1",
-        "formula": "process/repetition ↔ completed result",
+        "formula": "процесс/повторение ↔ завершённый результат",
         "theory": "Недоконанный вид описывает процесс/повторяемость, dokonany — завершённый результат.",
         "hint": "robiłem vs zrobiłem",
         "prerequisites": [
@@ -28037,7 +28037,7 @@
         "title": "Единственное → множественное",
         "group": "Предложение",
         "level": "A2",
-        "formula": "Местоимение + прилагательное + существительное → plural",
+        "formula": "Местоимение + прилагательное + существительное → множественное число",
         "theory": "Во множественном числе различай мужскую личную группу и все остальные.",
         "hint": "mojego kolegę → moich kolegów; moją książkę → moje książki",
         "prerequisites": [

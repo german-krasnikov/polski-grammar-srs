@@ -156,12 +156,31 @@ function validateNoChangeAlternatives(exerciseCopy) {
   }
 }
 
+// English grammar prose in a `formula` mnemonic is a leftover, not content: the pack is
+// authored for its own learners (ru UI here), and the mnemonic must read in that language
+// (EmphasisUXAudit-2026-09-27 E11). Case abbreviations (GEN/DAT/ACC/INST/LOC/NOM/VOC) and Polish
+// forms are not English and are not listed here.
+const englishFormulaWords = [
+  'adjective', 'adjectives', 'noun', 'nouns', 'verb', 'verbs', 'pronoun', 'pronouns',
+  'person', 'number', 'gender', 'stem', 'infinitive', 'plural', 'singular',
+  'perfective', 'imperfective', 'perf', 'imperf', 'process', 'repetition', 'completed', 'result',
+  'present-form',
+];
+
+function validateNoEnglishFormulas(skills) {
+  skills.forEach((skill, index) => {
+    const hit = englishFormulaWords.find((word) => new RegExp(`\\b${word}\\b`, 'i').test(skill.formula));
+    if (hit) throw new Error(`/skills/${index}/formula: English word "${hit}" — localize per pack`);
+  });
+}
+
 /** Rejects malformed author data without mutating the pack or the learner's progress. */
 export function validateCoursePack(course, frequency) {
   assertSchema(courseSchema, course, 'course');
   assertSchema(frequencySchema, frequency, 'frequency');
   noHtml(course);
   validateNoChangeAlternatives(course.exerciseCopy);
+  validateNoEnglishFormulas(course.skills);
   validateStyleContent(course.skills);
   validateStyleRecipes();
   validatePatterns(course.exercisePatterns);

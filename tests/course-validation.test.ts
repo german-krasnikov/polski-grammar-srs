@@ -24,6 +24,7 @@ describe('authored pl-ru pack', () => {
     ['self stem alternation', (sample) => { sample.stemAlternations = [{ a: 'o', b: 'o' }]; }, /stemAlternations\/0: a and b must differ/],
     ['duplicate stem alternation (reversed)', (sample) => { sample.stemAlternations = [{ a: 'ó', b: 'o' }, { a: 'o', b: 'ó' }]; }, /stemAlternations\/1: duplicate alternation/],
     ['alternatives via " / " in a FormChange.to copy key', (sample) => { sample.exerciseCopy.aspectTo = 'kupiłem / kupiłam'; }, /exerciseCopy\/aspectTo/],
+    ['English word in a formula mnemonic', (sample) => { sample.skills[0].formula = 'past stem + gender + person'; }, /skills\/0\/formula/],
   ];
   test.each(invalidCases)('rejects %s', (_label, change, message) => {
     const [sample, ranks] = copy();

@@ -61,7 +61,7 @@
   "comparison": "Exact JSON values and array order. Exercise IDs use <generated-id>; original IDs are checked nonempty. FSRS numeric tolerances for Kotlin require later analysis.",
   "files": {
     "grammar": {
-      "sha256": "f17084de1f877860701b43614668104c4f5817923465b2d4d70fec44bdacbfb9",
+      "sha256": "d2ce7ce1968190b76343f4b03f931a46d578156730631fc76dd7e6a937ab9633",
       "caseIds": [
         "G-NOUN-wife-sg-nom",
         "G-NOUN-wife-sg-gen",
