@@ -8,6 +8,7 @@ import polski.data.SkillPresentation
 import polski.data.SkillStyleContent
 import polski.data.presentationBySkillId
 import polski.data.skillById
+import polski.data.styleContentBySkillId
 import polski.model.FormChange
 import polski.model.Exercise
 import polski.model.NumberGram
@@ -65,6 +66,27 @@ class StyleComposerTest {
             val situationFront = StyleComposer.compose(situationFirst, StylePhase.Front, ex, skill, focus, SkillStyleContent())
             assertEquals(focus.situations.introduce, situationFront.filterIsInstance<Block.Scene>().single().text)
         }
+    }
+
+    // I1/S4 (EmphasisUXAudit E7, ContrastHighlightPlan.md "Контракт выделения" §1 whole-word
+    // replacement): real course content, not a synthetic fixture — `pronouns`' own formula text
+    // ("ona → ją / jej / nią / niej") literally quotes `focus.after` ("ją") as a whole word, so
+    // `styleParts` must mark that one word `isChanged`/`side = After` and leave the rest of the
+    // running prose (including the *other* pronoun forms it never claims to highlight) plain.
+    @Test fun realPronounsSkillHighlightsFocusAfterWholeWordInFormulaProse() {
+        val skill = skillById("pronouns")
+        val focus = presentationBySkillId("pronouns")
+        assertEquals("moja żona", focus.focusBefore)
+        assertEquals("ją", focus.focusAfter)
+        val ruleFirst = registry.getValue(StyleId.RuleFirst)
+        val front = StyleComposer.compose(ruleFirst, StylePhase.Front, exercise(), skill, focus, styleContentBySkillId("pronouns"))
+        val formula = front.filterIsInstance<Block.Formula>().single()
+        assertEquals("ona → ją / jej / nią / niej", formula.text)
+        assertEquals(listOf("ona → ", "ją", " / jej / nią / niej"), formula.parts.map { it.text })
+        assertEquals(listOf(false, true, false), formula.parts.map { it.isChanged })
+        assertEquals(ChangeSide.After, formula.parts[1].side)
+        // joins back to the source text exactly (Block.Formula's own contract) — no invented text.
+        assertEquals(formula.text, formula.parts.joinToString("") { it.text })
     }
 
     // ST-03: native-contrast without nativeParallel content resolves to its declared fallback

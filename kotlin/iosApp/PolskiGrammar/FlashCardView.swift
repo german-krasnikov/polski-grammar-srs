@@ -210,10 +210,28 @@ enum EmphasisRole {
         case .after: return Color("EmphasisAfter")
         }
     }
+
+    /// `EndingPart.side` (`StyleSnapshot.kt`'s `endingPartsJson`: `"before"`/`"after"`, or absent)
+    /// wins over the caller's own [defaultRole] when present — a running-prose style block
+    /// (formula/rule/scene/nativeParallel-target/examples/whyOnDemand) can hold a literal
+    /// `focus.before` span and a literal `focus.after` span side by side
+    /// (`styleTextHighlightParts`'s own doc, W3 correction), so one block's changed parts are not
+    /// always the same role the way a homogeneous before/after pair (table/contrast/changes,
+    /// main sentence) already is. [defaultRole] is what every one of those homogeneous callers
+    /// keeps passing — a part with no `side` of its own (every part they ever construct) resolves
+    /// to it, so this is a no-op for them.
+    init(wireSide: String?, defaultRole: EmphasisRole) {
+        switch wireSide {
+        case "before": self = .before
+        case "after": self = .after
+        default: self = defaultRole
+        }
+    }
 }
 
-/// One word-internal run: [text] with [changed] marking whether [EmphasisRole] styling applies.
-private struct EmphasisSegment { let text: String; let changed: Bool }
+/// One word-internal run: [text] with [role] set (from [EmphasisRole.init(wireSide:defaultRole:)])
+/// only on a changed run — nil means plain, unstyled text.
+private struct EmphasisSegment { let text: String; let role: EmphasisRole? }
 
 /// One whitespace-delimited word (its own trailing space, if any, kept as the word's own last
 /// segment — see [emphasisWords]) built from one or more `EndingPart` runs, e.g. an unchanged stem
@@ -224,21 +242,25 @@ private struct EmphasisWord: Identifiable {
     let segments: [EmphasisSegment]
 }
 
-/// Splits `EndingPart` runs (`{text, changed}`, `card.rows("sourceParts"|"expectedParts")` or a
-/// style block's `before`/`after` rows) into [EmphasisWord]s on whitespace, keeping each word's own
-/// trailing space glued to it (so [WrapLayout] can space words using the font's own real space
-/// glyph instead of a guessed constant) and preserving which characters are `changed`.
-private func emphasisWords(_ parts: [Record]) -> [EmphasisWord] {
+/// Splits `EndingPart` runs (`{text, changed, side?}`, `card.rows("sourceParts"|"expectedParts")`,
+/// a style block's `before`/`after` rows, or a running-prose block's own mixed-role `parts`) into
+/// [EmphasisWord]s on whitespace, keeping each word's own trailing space glued to it (so
+/// [WrapLayout] can space words using the font's own real space glyph instead of a guessed
+/// constant) and resolving each changed run's own role via [defaultRole] (see
+/// [EmphasisRole.init(wireSide:defaultRole:)]).
+private func emphasisWords(_ parts: [Record], defaultRole: EmphasisRole) -> [EmphasisWord] {
     var words: [EmphasisWord] = []
     var current: [EmphasisSegment] = []
     var hasContent = false
     for part in parts {
         let changed = part.bool("changed")
+        let role: EmphasisRole? = changed
+            ? EmphasisRole(wireSide: part["side"] as? String, defaultRole: defaultRole) : nil
         var buffer = ""
         for ch in part.string("text") {
             buffer.append(ch)
             if ch.isWhitespace {
-                current.append(EmphasisSegment(text: buffer, changed: changed))
+                current.append(EmphasisSegment(text: buffer, role: role))
                 buffer = ""
                 if hasContent {
                     words.append(EmphasisWord(segments: current))
@@ -249,7 +271,7 @@ private func emphasisWords(_ parts: [Record]) -> [EmphasisWord] {
                 hasContent = true
             }
         }
-        if !buffer.isEmpty { current.append(EmphasisSegment(text: buffer, changed: changed)) }
+        if !buffer.isEmpty { current.append(EmphasisSegment(text: buffer, role: role)) }
     }
     if !current.isEmpty { words.append(EmphasisWord(segments: current)) }
     return words
@@ -305,12 +327,11 @@ private struct UnderlineShape: Shape {
 /// required fallback ("Если платформа не рисует пунктир… хост рисует его собственной фигурой").
 private struct EmphasisWordView: View {
     let word: EmphasisWord
-    let role: EmphasisRole
 
     var body: some View {
         HStack(spacing: 0) {
             ForEach(Array(word.segments.enumerated()), id: \.offset) { _, segment in
-                if segment.changed {
+                if let role = segment.role {
                     Text(segment.text)
                         .fontWeight(.bold)
                         .foregroundColor(role.color)
@@ -339,8 +360,8 @@ private struct EmphasisWordView: View {
 /// `staticTexts` query — every one of those call sites — matches only elements that carry it.
 private func emphasizedText(_ parts: [Record], role: EmphasisRole, accessibilityLabel: String) -> some View {
     WrapLayout {
-        ForEach(emphasisWords(parts)) { word in
-            EmphasisWordView(word: word, role: role)
+        ForEach(emphasisWords(parts, defaultRole: role)) { word in
+            EmphasisWordView(word: word)
         }
     }
     .accessibilityElement(children: .ignore)
@@ -363,14 +384,14 @@ extension FlashCardView {
     @ViewBuilder
     fileprivate func styleBlockView(_ block: Record) -> some View {
         switch block.string("kind") {
-        case "formula": StyleFormulaBlock(text: block.string("text"))
-        case "rule": StyleRuleBlock(text: block.string("text"), detail: block.string("detail"))
+        case "formula": StyleFormulaBlock(text: block.string("text"), parts: block.rows("parts"))
+        case "rule": StyleRuleBlock(text: block.string("text"), detail: block.string("detail"), parts: block.rows("parts"))
         case "table": StyleTableBlock(caption: block.string("caption"), rows: block.rows("rows"))
-        case "scene": StyleSceneBlock(text: block.string("text"))
+        case "scene": StyleSceneBlock(text: block.string("text"), parts: block.rows("parts"))
         case "nativeParallel": StyleNativeParallelBlock(pairs: block.rows("pairs"))
-        case "examples": StyleExamplesBlock(items: block.strings("items"))
+        case "examples": StyleExamplesBlock(items: block.strings("items"), itemParts: block.rowsOfRows("itemParts"))
         case "whyOnDemand": StyleWhyOnDemandBlock(
-            text: block.string("text"), label: block.string("collapsedLabel"), reduceMotion: reduceMotion)
+            text: block.string("text"), parts: block.rows("parts"), label: block.string("collapsedLabel"), reduceMotion: reduceMotion)
         case "changes": StyleChangesBlock(items: block.rows("items"))
         case "contrast": StyleContrastBlock(before: block.rows("before"), after: block.rows("after"))
         default: EmptyView()
@@ -383,10 +404,12 @@ extension FlashCardView {
 /// than unconditionally.
 private struct StyleFormulaBlock: View {
     let text: String
+    let parts: [Record]
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
             Text("ЗАПОМНИ").font(.caption.weight(.semibold))
-            Text(text).font(.headline).bold()
+            emphasizedText(parts, role: .after, accessibilityLabel: text)
+                .font(.headline).bold()
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(14)
@@ -403,9 +426,10 @@ private struct StyleFormulaBlock: View {
 private struct StyleRuleBlock: View {
     let text: String
     let detail: String
+    let parts: [Record]
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text(text)
+            emphasizedText(parts, role: .after, accessibilityLabel: text)
                 .accessibilityIdentifier("styleBlock-rule")
             if !detail.isEmpty {
                 Text(detail)
@@ -448,10 +472,11 @@ private struct StyleTableBlock: View {
 /// `Block.Scene` — a short situation, shown quote-like (situation-first's front block).
 private struct StyleSceneBlock: View {
     let text: String
+    let parts: [Record]
     var body: some View {
         HStack(alignment: .top, spacing: 8) {
             Image(systemName: "quote.opening").foregroundStyle(.secondary).accessibilityHidden(true)
-            Text(text).italic()
+            emphasizedText(parts, role: .after, accessibilityLabel: text).italic()
         }
         .padding(12)
         .background(Color(uiColor: .secondarySystemBackground), in: RoundedRectangle(cornerRadius: 12))
@@ -475,7 +500,8 @@ private struct StyleNativeParallelBlock: View {
                         Text(pair.string("native")).foregroundStyle(.secondary)
                             .frame(maxWidth: .infinity, alignment: .leading)
                         Image(systemName: "arrow.right").font(.caption).foregroundStyle(.tertiary)
-                        Text(pair.string("target")).fontWeight(.semibold)
+                        emphasizedText(pair.rows("targetParts"), role: .after, accessibilityLabel: pair.string("target"))
+                            .fontWeight(.semibold)
                             .frame(maxWidth: .infinity, alignment: .leading)
                         Image(systemName: matches ? "checkmark.circle.fill" : "exclamationmark.triangle.fill")
                             .foregroundStyle(matches ? Color(uiColor: .systemGreen) : Color(uiColor: .systemOrange))
@@ -500,14 +526,24 @@ private struct StyleNativeParallelBlock: View {
 /// nothing rather than an empty heading.
 private struct StyleExamplesBlock: View {
     let items: [String]
+    /// Parallel to [items] by index (`StyleSnapshot.kt`'s `itemParts[i]` joins back to `items[i]`).
+    let itemParts: [[Record]]
     var body: some View {
         Group {
             if !items.isEmpty {
                 VStack(alignment: .leading, spacing: 4) {
-                    ForEach(Array(items.enumerated()), id: \.offset) { _, item in
-                        Text("• \(item)")
+                    ForEach(Array(items.enumerated()), id: \.offset) { index, item in
+                        HStack(alignment: .top, spacing: 4) {
+                            Text("•").accessibilityHidden(true)
+                            emphasizedText(index < itemParts.count ? itemParts[index] : [], role: .after, accessibilityLabel: item)
+                        }
                     }
                 }
+                // Explicit combine (like `StyleTableBlock`/`StyleChangesBlock`): each item is now
+                // its own accessibility element (the bullet is hidden, the emphasized text carries
+                // the label) rather than one plain `Text` per item, so the container needs its own
+                // grouping to still expose one element under `styleBlock-examples`.
+                .accessibilityElement(children: .combine)
                 .accessibilityIdentifier("styleBlock-examples")
             }
         }
@@ -520,6 +556,7 @@ private struct StyleExamplesBlock: View {
 /// same pattern `PolskiGrammarApp.swift`'s `styleFallbackLabel` already uses for style names.
 private struct StyleWhyOnDemandBlock: View {
     let text: String
+    let parts: [Record]
     let label: String
     let reduceMotion: Bool
     @State private var expanded = false
@@ -538,7 +575,7 @@ private struct StyleWhyOnDemandBlock: View {
             .accessibilityIdentifier("styleBlock-whyOnDemand")
             .accessibilityValue(expanded ? "развёрнуто" : "свёрнуто")
             if expanded {
-                Text(text)
+                emphasizedText(parts, role: .after, accessibilityLabel: text)
                     .transition(reduceMotion ? .identity : .opacity.combined(with: .move(edge: .top)))
                     .accessibilityIdentifier("styleBlock-whyOnDemand-text")
             }
