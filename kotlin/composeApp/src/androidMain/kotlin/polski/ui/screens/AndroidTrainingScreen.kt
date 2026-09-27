@@ -32,6 +32,7 @@ import polski.data.courseChainPresentation
 import polski.presentation.chainDisplayCount
 import polski.data.skillById
 import polski.data.presentationBySkillId
+import polski.data.styleContentBySkillId
 import polski.data.skills
 import polski.grammar.caseRows
 import polski.grammar.genderNames
@@ -46,9 +47,10 @@ import polski.presentation.CardEffect
 import polski.presentation.CardPhase
 import polski.presentation.TrainingMode
 import polski.presentation.ChangeSide
+import polski.presentation.StyleComposer
 import polski.presentation.StyleId
+import polski.presentation.StylePhase
 import polski.presentation.StyleRegistry
-import polski.presentation.changeHighlightParts
 import polski.presentation.ContrastPair
 import polski.presentation.sentenceHighlightParts
 import polski.srs.Rating
@@ -146,6 +148,17 @@ internal fun AndroidTrainingScreen(
                 if (exercise != null) AndroidInfoCard("${skillById(exercise.primarySkill).level} · ${skillById(exercise.primarySkill).title}") {
                     val presentation = presentationBySkillId(exercise.primarySkill)
                     val method = if (state.styleId == StyleId.SituationFirst) presentation.situations else presentation.logic
+                    // S2: the composer decides which blocks the card shows — never a literal
+                    // if/else on styleId here. A style whose `requires` isn't met for this skill
+                    // (e.g. NativeContrast with no authored nativeParallel) resolves to its
+                    // declared fallback, same as the settings picker's own hint (AndroidStylePicker.kt).
+                    val skill = skillById(exercise.primarySkill)
+                    val styleContent = styleContentBySkillId(exercise.primarySkill)
+                    val effectiveStyle = StyleRegistry.recipes.getValue(
+                        StyleComposer.resolveEffectiveStyle(StyleRegistry.recipes.getValue(state.styleId), styleContent, StyleRegistry.recipes)
+                    )
+                    val frontBlocks = StyleComposer.compose(effectiveStyle, StylePhase.Front, exercise, skill, presentation, styleContent)
+                    val backBlocks = StyleComposer.compose(effectiveStyle, StylePhase.Back, exercise, skill, presentation, styleContent)
                     // S1: quick switch at the training card's existing method-toggle location, now
                     // all 4 styles — dispatching SetStyle never creates a review or clears the
                     // typed draft (TrainingStore.SetStyle is a plain state copy, see AppAction.kt).
@@ -202,6 +215,11 @@ internal fun AndroidTrainingScreen(
                                         style = MaterialTheme.typography.titleMedium,
                                         color = MaterialTheme.colorScheme.onSecondaryContainer)
                                 }
+                                // S2: Front blocks stay visible across both phases, same as the
+                                // question above them — they are this style's "with the question"
+                                // content (Formula/Table/Scene/NativeParallel/Examples), not tied
+                                // to reveal.
+                                AndroidBlockList(frontBlocks, reduceMotion)
                                 if (state.phase == CardPhase.Question) {
                                     Text(method.retrieve)
                                     AndroidChoiceMenu(
@@ -242,43 +260,15 @@ internal fun AndroidTrainingScreen(
                                     }
                                     AndroidStaggeredReveal(1, reduceMotion) {
                                         Column(verticalArrangement = Arrangement.spacedBy(18.dp)) {
-                                            if (state.styleId == StyleId.SituationFirst) {
-                                                Text(method.feedback)
-                                                Text(exercise.explanation)
-                                            }
-                                            Text("Что изменилось", style = MaterialTheme.typography.titleMedium)
-                                            exercise.changes.forEach { change ->
-                                                Column {
-                                                    Row(horizontalArrangement = Arrangement.spacedBy(5.dp)) {
-                                                        Text(contrastAnnotatedText(changeHighlightParts(change.from, change.to, ChangeSide.Before),
-                                                            MaterialTheme.colorScheme.error))
-                                                        Text("→")
-                                                        Text(contrastAnnotatedText(changeHighlightParts(change.from, change.to, ChangeSide.After),
-                                                            MaterialTheme.colorScheme.primary), fontWeight = FontWeight.Bold)
-                                                    }
-                                                    Text(change.reason, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                                                }
-                                            }
-                                            Surface(shape = RoundedCornerShape(18.dp), color = MaterialTheme.colorScheme.tertiaryContainer,
-                                                modifier = Modifier.fillMaxWidth()) {
-                                                Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                                                    Text("ЗАПОМНИ", style = MaterialTheme.typography.labelMedium,
-                                                        color = MaterialTheme.colorScheme.onTertiaryContainer)
-                                                    Text(skillById(exercise.primarySkill).formula, style = MaterialTheme.typography.titleMedium,
-                                                        fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onTertiaryContainer)
-                                                    if (state.styleId != StyleId.SituationFirst) {
-                                                        Text(method.feedback, color = MaterialTheme.colorScheme.onTertiaryContainer)
-                                                        Text(exercise.explanation, color = MaterialTheme.colorScheme.onTertiaryContainer)
-                                                    }
-                                                    Row(horizontalArrangement = Arrangement.spacedBy(5.dp)) {
-                                                        Text(contrastAnnotatedText(changeHighlightParts(presentation.focusBefore, presentation.focusAfter, ChangeSide.Before),
-                                                            MaterialTheme.colorScheme.error))
-                                                        Text("→")
-                                                        Text(contrastAnnotatedText(changeHighlightParts(presentation.focusBefore, presentation.focusAfter, ChangeSide.After),
-                                                            MaterialTheme.colorScheme.primary))
-                                                    }
-                                                }
-                                            }
+                                            // S2: the lead-in feedback/explanation stay the one
+                                            // non-block string per phase (Plans/Kotlin/StylesBlueprint.md
+                                            // §1) — same text for every style, unlike the old
+                                            // SituationFirst-only branch this replaces. Everything
+                                            // below is the composer's own Back blocks for the
+                                            // effective (post-fallback) style.
+                                            Text(method.feedback)
+                                            Text(exercise.explanation)
+                                            AndroidBlockList(backBlocks, reduceMotion)
                                             Text(method.review)
                                         }
                                     }
