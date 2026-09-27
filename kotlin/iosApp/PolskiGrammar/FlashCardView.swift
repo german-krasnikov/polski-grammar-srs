@@ -222,7 +222,7 @@ extension FlashCardView {
     fileprivate func styleBlockView(_ block: Record) -> some View {
         switch block.string("kind") {
         case "formula": StyleFormulaBlock(text: block.string("text"))
-        case "rule": StyleRuleBlock(text: block.string("text"))
+        case "rule": StyleRuleBlock(text: block.string("text"), detail: block.string("detail"))
         case "table": StyleTableBlock(caption: block.string("caption"), rows: block.rows("rows"))
         case "scene": StyleSceneBlock(text: block.string("text"))
         case "nativeParallel": StyleNativeParallelBlock(pairs: block.rows("pairs"))
@@ -254,12 +254,24 @@ private struct StyleFormulaBlock: View {
     }
 }
 
-/// `Block.Rule` — theory prose, unchanged visual weight from the pre-S2 explanation text.
+/// `Block.Rule` — theory prose (unchanged visual weight from the pre-S2 explanation text), plus
+/// [detail] (`Exercise.explanation`, fix f8742fc) shown underneath as its own sub-element — parity
+/// with web's `CardBlocksWeb.kt` (`Block.Rule` → two `<p>`s) and macOS/Android's own D2 fix, and the
+/// same "container id + `-text`-suffixed sub id" shape [StyleWhyOnDemandBlock] below already uses.
 private struct StyleRuleBlock: View {
     let text: String
+    let detail: String
     var body: some View {
-        Text(text)
-            .accessibilityIdentifier("styleBlock-rule")
+        VStack(alignment: .leading, spacing: 4) {
+            Text(text)
+                .accessibilityIdentifier("styleBlock-rule")
+            if !detail.isEmpty {
+                Text(detail)
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+                    .accessibilityIdentifier("styleBlock-rule-detail")
+            }
+        }
     }
 }
 

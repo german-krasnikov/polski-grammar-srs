@@ -1137,6 +1137,11 @@ final class PolskiGrammarUITests: XCTestCase {
         reveal.tap()
         XCTAssertTrue(blockShown("styleBlock-formula"), app.debugDescription)
         XCTAssertTrue(blockShown("styleBlock-table") || blockShown("styleBlock-formula"), "rule-first front should show table/formula")
+        // D2 (StylesIntegrationTest-2026-09-27.md): the rule block must show the exercise's own
+        // detail (`Block.Rule.detail`), not just the skill's rule text — a distinct sub-element so
+        // this checks real rendered content, not merely that some rule block exists.
+        XCTAssertTrue(blockShown("styleBlock-rule"), "rule-first back should show the rule block — " + app.debugDescription)
+        XCTAssertTrue(blockShown("styleBlock-rule-detail"), "rule-first back should show the exercise's own detail under the rule — " + app.debugDescription)
         capture("style-rule-first-revealed")
 
         // situation-first: scene stays up front (D1 — the front never hides after reveal), and the
@@ -1153,6 +1158,12 @@ final class PolskiGrammarUITests: XCTestCase {
         scrollToTop()
         capture("style-native-contrast-front")
         XCTAssertTrue(blockShown("styleBlock-nativeParallel"), "native-contrast front should show nativeParallel with authored styleContent — " + app.debugDescription)
+        // Real authored detail, not just block presence (report D2's own critique of the Android
+        // pass): `case.acc.f`'s styleContent.nativeParallel[0].note is real content, distinctive
+        // enough to be safe to match on.
+        let noteDetail = app.descendants(matching: .any)
+            .matching(NSPredicate(format: "label CONTAINS %@", "żona→żonę"))
+        XCTAssertTrue(noteDetail.firstMatch.waitForExistence(timeout: 5), "native-contrast pair should show its authored note detail — " + app.debugDescription)
         capture("style-native-contrast-revealed")
 
         selectStyle("Минимум теории")
