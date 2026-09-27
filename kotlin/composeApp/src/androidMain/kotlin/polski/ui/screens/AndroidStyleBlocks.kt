@@ -24,7 +24,6 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import polski.presentation.Block
-import polski.ui.contrastAnnotatedText
 
 /**
  * UC-10/S2 (`Plans/Kotlin/StylesBlueprint.md`§6): renders a [Block] list exactly in the order
@@ -100,9 +99,9 @@ private fun AndroidTableBlock(block: Block.Table) {
             block.rows.forEach { row ->
                 Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     if (row.label.isNotEmpty()) Text(row.label, style = MaterialTheme.typography.labelLarge)
-                    Text(contrastAnnotatedText(row.before, MaterialTheme.colorScheme.error))
+                    AndroidEmphasisText(row.before, before = true)
                     Text("→")
-                    Text(contrastAnnotatedText(row.after, MaterialTheme.colorScheme.primary), fontWeight = FontWeight.Bold)
+                    AndroidEmphasisText(row.after, before = false, fontWeight = FontWeight.Bold)
                 }
             }
         }
@@ -195,9 +194,9 @@ private fun AndroidWhyOnDemandBlock(block: Block.WhyOnDemand, reduceMotion: Bool
 @Composable
 private fun AndroidContrastBlock(block: Block.Contrast) {
     Row(horizontalArrangement = Arrangement.spacedBy(5.dp)) {
-        Text(contrastAnnotatedText(block.before, MaterialTheme.colorScheme.error))
+        AndroidEmphasisText(block.before, before = true)
         Text("→")
-        Text(contrastAnnotatedText(block.after, MaterialTheme.colorScheme.primary), fontWeight = FontWeight.Bold)
+        AndroidEmphasisText(block.after, before = false, fontWeight = FontWeight.Bold)
     }
 }
 
@@ -209,9 +208,9 @@ private fun AndroidChangesBlock(block: Block.Changes) {
         block.items.forEach { change ->
             Column {
                 Row(horizontalArrangement = Arrangement.spacedBy(5.dp)) {
-                    Text(contrastAnnotatedText(change.before, MaterialTheme.colorScheme.error))
+                    AndroidEmphasisText(change.before, before = true)
                     Text("→")
-                    Text(contrastAnnotatedText(change.after, MaterialTheme.colorScheme.primary), fontWeight = FontWeight.Bold)
+                    AndroidEmphasisText(change.after, before = false, fontWeight = FontWeight.Bold)
                 }
                 Text(change.reason, color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
