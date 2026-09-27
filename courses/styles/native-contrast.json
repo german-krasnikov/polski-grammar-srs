@@ -7,7 +7,7 @@
   },
   "blocks": {
     "front": ["nativeParallel"],
-    "back": ["nativeParallel", "changes", "contrast"]
+    "back": ["changes", "contrast"]
   },
   "requires": ["nativeParallel"],
   "fallback": "rule-first"

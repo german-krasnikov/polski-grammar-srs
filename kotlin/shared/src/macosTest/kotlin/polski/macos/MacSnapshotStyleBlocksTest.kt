@@ -66,7 +66,10 @@ class MacSnapshotStyleBlocksTest {
 
         assertNotEquals(ruleFirstBack, situationFirstBack, "rule-first and situation-first must show different back blocks")
         assertNotEquals(ruleFirstBack, minimalTheoryBack, "rule-first and minimal-theory must show different back blocks")
-        assertTrue("formula" in ruleFirstBack && "rule" in ruleFirstBack && "contrast" in ruleFirstBack)
+        assertTrue("rule" in ruleFirstBack && "contrast" in ruleFirstBack)
+        // C3 (EmphasisUXAudit E10): formula already shows on front, which stays visible after
+        // reveal — back must not repeat it, or it would render twice on the revealed card.
+        assertTrue("formula" !in ruleFirstBack)
         assertEquals(listOf("changes", "rule"), situationFirstBack, "situation-first.json's back is [changes, rule] — Rule (from skill.theory) always follows Changes")
         assertTrue("whyOnDemand" in minimalTheoryBack)
         // Changes is exercise data, not style data (ST-05): every style still carries it.

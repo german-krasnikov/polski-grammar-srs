@@ -73,12 +73,15 @@ class AndroidStyleBlocksComposeTest {
         composeRule.setContent {
             MaterialTheme { AndroidBlockList(blocksFor(styleId, StylePhase.Back), reduceMotion = true) }
         }
-        composeRule.onNodeWithText("ЗАПОМНИ").assertExists()
+        // C3 (EmphasisUXAudit E10): rule-first's back no longer repeats Formula ("ЗАПОМНИ") —
+        // it already showed on front, which stays visible after reveal. "Правило" (Rule's own
+        // heading) is the marker unique to rule-first's back among these two styles instead.
+        composeRule.onNodeWithText("Правило").assertExists()
         composeRule.onNodeWithText(skill.theory).assertExists()
 
         styleId = StyleId.MinimalTheory
         composeRule.waitForIdle()
-        composeRule.onNodeWithText("ЗАПОМНИ").assertDoesNotExist()
+        composeRule.onNodeWithText("Правило").assertDoesNotExist()
         composeRule.onNodeWithText("Почему так?").assertExists()
     }
 

@@ -57,7 +57,9 @@ class StyleComposerTest {
             // second paragraph with the per-exercise `explanation` alongside the skill's theory —
             // Block.Rule must still carry it so rule-first stays byte-identical to that.
             assertEquals(ex.explanation, back.filterIsInstance<Block.Rule>().single().detail)
-            assertEquals(skill.formula, back.filterIsInstance<Block.Formula>().single().text)
+            // C3 (EmphasisUXAudit E10): Formula shows once, on Front — Back must not repeat it,
+            // since Front stays visible after reveal.
+            assertTrue(back.filterIsInstance<Block.Formula>().isEmpty())
 
             val situationFirst = registry.getValue(StyleId.SituationFirst)
             val situationFront = StyleComposer.compose(situationFirst, StylePhase.Front, ex, skill, focus, SkillStyleContent())

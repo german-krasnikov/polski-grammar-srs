@@ -16,11 +16,12 @@ class StyleRegistryTest {
         assertEquals(listOf(BlockKind.Changes, BlockKind.Rule), recipe.blocks.getValue(StylePhase.Back))
     }
 
-    // D3: rule-first's Back order must match rule-first.json byte-for-byte (formula, rule,
-    // changes, contrast) — the pre-fix literal used a different order.
+    // D3: rule-first's Back order must match rule-first.json byte-for-byte (rule, changes,
+    // contrast) — the pre-fix literal used a different order. C3 (EmphasisUXAudit E10): Back no
+    // longer repeats Formula, already shown on Front and still visible after reveal.
     @Test fun ruleFirstBackMatchesJsonOrder() {
         val recipe = StyleRegistry.recipes.getValue(StyleId.RuleFirst)
-        assertEquals(listOf(BlockKind.Formula, BlockKind.Rule, BlockKind.Changes, BlockKind.Contrast), recipe.blocks.getValue(StylePhase.Back))
+        assertEquals(listOf(BlockKind.Rule, BlockKind.Changes, BlockKind.Contrast), recipe.blocks.getValue(StylePhase.Back))
     }
 
     // D3: label/description must come from the JSON files, not stay blank (the pre-fix literal
@@ -92,5 +93,19 @@ class StyleRegistryTest {
 
     @Test fun parserNeverThrowsOnAnEmptyRecipeList() {
         assertEquals(emptyList(), parseStyleRecipesJson("[]"))
+    }
+
+    // C3 (EmphasisUXAudit-2026-09-27.md E10): Front stays visible after reveal (both hosts append
+    // Front and Back), so a kind repeated within one phase or shared across Front/Back would
+    // render twice. `scripts/validate-course.mjs`'s `assertNoDuplicateBlockKinds` rejects this at
+    // authoring time; this locks the same invariant on the parsed, built-in recipes.
+    @Test fun noBuiltInRecipeRepeatsABlockKindWithinOrAcrossItsPhases() {
+        for (recipe in StyleRegistry.recipes.values) {
+            val front = recipe.blocks.getValue(StylePhase.Front)
+            val back = recipe.blocks.getValue(StylePhase.Back)
+            assertEquals(front.toSet().size, front.size, "${recipe.id} front repeats a block kind")
+            assertEquals(back.toSet().size, back.size, "${recipe.id} back repeats a block kind")
+            assertTrue(front.intersect(back).isEmpty(), "${recipe.id} shows the same kind on both front and back: ${front.intersect(back)}")
+        }
     }
 }

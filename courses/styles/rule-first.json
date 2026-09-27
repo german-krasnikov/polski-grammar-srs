@@ -7,6 +7,6 @@
   },
   "blocks": {
     "front": ["table", "formula"],
-    "back": ["formula", "rule", "changes", "contrast"]
+    "back": ["rule", "changes", "contrast"]
   }
 }

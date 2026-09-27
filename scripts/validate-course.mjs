@@ -60,6 +60,24 @@ function validateStyleContent(skills) {
   });
 }
 
+/** A block kind repeated within one phase, or shared between front and back, would render the
+ *  same content twice on the revealed card — front blocks stay visible after reveal
+ *  (TrainingWebApp.kt/AndroidTrainingScreen.kt append both), so a kind in both phases duplicates
+ *  on screen (EmphasisUXAudit-2026-09-27.md E10). Exported so it's unit-testable without disk I/O. */
+export function assertNoDuplicateBlockKinds(recipe, path = `/styles/${recipe.id}.json`) {
+  for (const phase of ['front', 'back']) {
+    const seen = new Set();
+    for (const kind of recipe.blocks[phase]) {
+      if (seen.has(kind)) throw new Error(`${path}/blocks/${phase}: duplicate block kind ${kind}`);
+      seen.add(kind);
+    }
+  }
+  const repeated = recipe.blocks.front.find((kind) => recipe.blocks.back.includes(kind));
+  if (repeated) {
+    throw new Error(`${path}/blocks: ${repeated} is in both front and back — front stays visible after reveal, so it would show twice`);
+  }
+}
+
 /** Rejects a recipe set that could crash or leak the answer before reveal: unknown/duplicate
  *  ids, a fallback chain (fallback target with its own requires), or changes/contrast on front. */
 function validateStyleRecipes() {
@@ -73,6 +91,7 @@ function validateStyleRecipes() {
   uniqueBy(recipes, 'id', '/styles');
   const byId = new Map(recipes.map((recipe) => [recipe.id, recipe]));
   for (const recipe of recipes) {
+    assertNoDuplicateBlockKinds(recipe);
     if (recipe.blocks.front.some((kind) => kind === 'changes' || kind === 'contrast')) {
       throw new Error(`/styles/${recipe.id}.json/blocks/front: changes/contrast would leak the answer before reveal`);
     }
