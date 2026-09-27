@@ -56,7 +56,6 @@ import polski.presentation.ContrastPair
 import polski.presentation.sentenceHighlightParts
 import polski.srs.Rating
 import polski.training.sentenceSeeds
-import polski.ui.contrastAnnotatedText
 import polski.ui.ContrastPairText
 
 @Composable
@@ -69,6 +68,9 @@ internal fun AndroidTrainingScreen(
     reduceMotion: Boolean = false,
 ) {
     val introducing = state.phase == CardPhase.Question && state.introPending
+    // A4: one gate for this whole screen visit, not per card — only the first revealed card
+    // nudges, every later one this screen shows during the same visit just shows the static hint.
+    val swipeNudgeGate = remember { SwipeNudgeGate() }
     Column(verticalArrangement = Arrangement.spacedBy(18.dp)) {
         Surface(
             shape = RoundedCornerShape(28.dp),
@@ -170,8 +172,8 @@ internal fun AndroidTrainingScreen(
                     if (state.phase == CardPhase.Question && state.introPending) {
                         Text("Знакомство с навыком", style = MaterialTheme.typography.titleMedium)
                         Text("ИСХОДНОЕ ПРЕДЛОЖЕНИЕ", style = MaterialTheme.typography.labelSmall)
-                        Text(contrastAnnotatedText(sentenceHighlightParts(exercise.source, exercise.changes, ChangeSide.Before),
-                            MaterialTheme.colorScheme.error), style = MaterialTheme.typography.headlineSmall)
+                        AndroidEmphasisText(sentenceHighlightParts(exercise.source, exercise.changes, ChangeSide.Before),
+                            before = true, style = MaterialTheme.typography.headlineSmall)
                         Text(method.introduce)
                         Button(onClick = { dispatch(AppAction.ContinueIntroduction) }, modifier = Modifier.fillMaxWidth()) {
                             Text("Перейти к заданию")
@@ -208,8 +210,8 @@ internal fun AndroidTrainingScreen(
                             ) {
                                 Text("ИСХОДНОЕ ПРЕДЛОЖЕНИЕ", style = MaterialTheme.typography.labelSmall,
                                     color = MaterialTheme.colorScheme.onSurfaceVariant)
-                                Text(contrastAnnotatedText(sentenceHighlightParts(exercise.source, exercise.changes, ChangeSide.Before),
-                                    MaterialTheme.colorScheme.error), style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.SemiBold)
+                                AndroidEmphasisText(sentenceHighlightParts(exercise.source, exercise.changes, ChangeSide.Before),
+                                    before = true, style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.SemiBold)
                                 Surface(shape = RoundedCornerShape(18.dp), color = MaterialTheme.colorScheme.secondaryContainer,
                                     modifier = Modifier.fillMaxWidth()) {
                                     Text("${exercise.prompt}\n${method.promptLead}", modifier = Modifier.padding(16.dp),
@@ -250,8 +252,8 @@ internal fun AndroidTrainingScreen(
                                     AndroidStaggeredReveal(0, reduceMotion) {
                                         Column(verticalArrangement = Arrangement.spacedBy(18.dp)) {
                                             Text("Эталон", style = MaterialTheme.typography.labelLarge)
-                                            Text(contrastAnnotatedText(sentenceHighlightParts(exercise.expected, exercise.changes, ChangeSide.After),
-                                                MaterialTheme.colorScheme.primary), style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.SemiBold)
+                                            AndroidEmphasisText(sentenceHighlightParts(exercise.expected, exercise.changes, ChangeSide.After),
+                                                before = false, style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.SemiBold)
                                             if (exercise.accepted.isNotEmpty()) Text("Также: ${exercise.accepted.joinToString(" / ")}")
                                             if (state.answerMode == AnswerMode.Typed) {
                                                 Text(if (state.evaluation?.correct == true) "Совпадает с правильным вариантом" else "Сравни свой ответ с эталоном")
@@ -274,8 +276,7 @@ internal fun AndroidTrainingScreen(
                                         }
                                     }
                                     if (swipeRatingEnabled) AndroidStaggeredReveal(2, reduceMotion) {
-                                        Text("Свайп влево — повторить · вправо — вспомнил",
-                                            style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                                        AndroidSwipeHint(swipeNudgeGate, reduceMotion)
                                     }
                                 }
                             }

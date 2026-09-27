@@ -49,6 +49,8 @@ fun AndroidVocabularyScreen(
 ) {
     val state by session.state.collectAsState()
     val item = state.currentId?.let { VocabularyCodec.item(state.document, it) }
+    // A4: one gate for this whole screen visit, not per card — see AndroidTrainingScreen.
+    val swipeNudgeGate = remember { SwipeNudgeGate() }
     Column(verticalArrangement = Arrangement.spacedBy(18.dp)) {
         Text("Слова и выражения", style = MaterialTheme.typography.headlineMedium)
         Text("Узнавание и воспроизведение повторяются по отдельным расписаниям.")
@@ -95,7 +97,7 @@ fun AndroidVocabularyScreen(
                     reduceMotion = reduceMotion,
                     onRate = ::rate,
                     front = { flipVisually -> VocabularyFrontFace(item, state.direction, state.typed, state.draft, session, state.revealed, flipVisually) },
-                    back = { VocabularyBackFace(item, state.direction, state.typed, state.draft, enableSwipeRating) },
+                    back = { VocabularyBackFace(item, state.direction, state.typed, state.draft, enableSwipeRating, swipeNudgeGate, reduceMotion) },
                 )
                 // D5: gate the mount itself, not just the trigger — see AndroidTrainingScreen.
                 if (!reduceMotion) AndroidRiveOverlay(cardEffect) { cardEffect = null }
@@ -158,7 +160,10 @@ private fun VocabularyFrontFace(
  * further tap anywhere here that isn't a drag commit only flips the panel back visually.
  */
 @Composable
-private fun VocabularyBackFace(item: VocabularyItem, direction: StudyDirection, typed: Boolean, draft: String, enableSwipeRating: Boolean) {
+private fun VocabularyBackFace(
+    item: VocabularyItem, direction: StudyDirection, typed: Boolean, draft: String,
+    enableSwipeRating: Boolean, swipeNudgeGate: SwipeNudgeGate, reduceMotion: Boolean,
+) {
     val recallPolish = direction == StudyDirection.RussianToPolish
     Card(Modifier.fillMaxWidth(), shape = RoundedCornerShape(24.dp)) {
         Column(Modifier.padding(22.dp), verticalArrangement = Arrangement.spacedBy(14.dp)) {
@@ -168,8 +173,7 @@ private fun VocabularyBackFace(item: VocabularyItem, direction: StudyDirection, 
             Text("Форма: ${item.form}")
             Text("В предложении: ${item.example}")
             if (typed) Text("Твой ответ: ${draft.ifBlank { "не введён" }}. Сравни сам и выбери оценку.")
-            if (enableSwipeRating) Text("Свайп влево — повторить · вправо — вспомнил",
-                style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            if (enableSwipeRating) AndroidSwipeHint(swipeNudgeGate, reduceMotion)
         }
     }
 }

@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -258,6 +259,50 @@ private fun BoxScope.AndroidDragRatingOverlay(progress: Float) {
                 scaleY = scale
             },
         )
+    }
+}
+
+/**
+ * Lets [AndroidSwipeHint] play its wiggle at most once per instance — one gate `remember`ed at the
+ * screen level (not per-card) means the very first revealed card in a screen visit nudges and every
+ * later card that screen shows does not (A4, `EmphasisUXAudit-2026-09-27.md` U2).
+ */
+class SwipeNudgeGate {
+    private var shown = false
+
+    /** `true` the first time this is called; `false` on every call after. */
+    fun consumeFirstTime(): Boolean {
+        if (shown) return false
+        shown = true
+        return true
+    }
+}
+
+/**
+ * Persistent, arrow-marked swipe-rating hint for the revealed card (A4, `EmphasisUXAudit-2026-09-27.md`
+ * U2): ADR-8 keeps phones swipe-only with no rating buttons, so this closes the discoverability gap
+ * for sighted users without adding any — [AndroidRatingDragSurface]'s TalkBack
+ * [CustomAccessibilityAction]s already cover screen-reader users and are unaffected by this. On the
+ * first instance of a fresh [nudgeGate] (and only while [reduceMotion] is `false` — the "Анимации"
+ * toggle), the hint plays one brief left-right wiggle to draw the eye to the swipe direction.
+ */
+@Composable
+fun AndroidSwipeHint(nudgeGate: SwipeNudgeGate, reduceMotion: Boolean) {
+    val offsetX = remember { Animatable(0f) }
+    LaunchedEffect(Unit) {
+        if (!reduceMotion && nudgeGate.consumeFirstTime()) {
+            offsetX.animateTo(-10f, tween(140))
+            offsetX.animateTo(10f, tween(220))
+            offsetX.animateTo(0f, tween(140))
+        }
+    }
+    Row(
+        Modifier.offset { IntOffset(kotlin.math.round(offsetX.value).toInt(), 0) },
+        horizontalArrangement = Arrangement.spacedBy(6.dp),
+    ) {
+        Text("←", style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.error)
+        Text("Повторить · Вспомнил", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        Text("→", style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.primary)
     }
 }
 

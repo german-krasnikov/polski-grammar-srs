@@ -6,13 +6,20 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.clearAndSetSemantics
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.foundation.layout.padding
 import androidx.compose.ui.unit.dp
 import polski.data.courseMatrixIntroduction
 import polski.data.adjectives
@@ -24,6 +31,7 @@ import polski.data.possessives
 import polski.data.verbs
 import polski.data.referenceChainRows
 import polski.data.referenceSystemCards
+import polski.data.ReferenceSystemCard
 import polski.data.referencePipeline
 import polski.data.referenceRussianSupport
 import polski.data.referenceCaseTeaching
@@ -81,7 +89,7 @@ private fun AndroidMapSection(dispatch: (AppAction) -> Unit) {
     AndroidInfoCard(referencePipeline.title) {
         Text(referencePipeline.compactSummary)
         Text(referencePipeline.compactExample)
-        referenceSystemCards.forEach { card -> Text("${card.title}: ${card.explanation} · ${card.example}") }
+        referenceSystemCards.forEach { card -> AndroidSystemMapCard(card) }
     }
     AndroidInfoCard("Одна мысль, пять преобразований") {
         referenceChainRows.forEach { row ->
@@ -103,6 +111,29 @@ private fun AndroidMapSection(dispatch: (AppAction) -> Unit) {
         referenceRussianSupport.rows.forEach { row ->
             Text(row.mobileLine)
             row.comparisons.forEach { ContrastPairText(it) }
+        }
+    }
+}
+
+/** E6 (EmphasisUXAudit-2026-09-27.md, C2 steps): the map-overview card used to flatten
+ *  `card.example` into one prose string. `card.steps` is the same chain, split; render each step
+ *  as its own node with a visible arrow between (`E6` "разметка у явных стрелок"), one merged
+ *  semantics node speaking the chain as one unit (same pattern as `ContrastPairText`). */
+@Composable
+fun AndroidSystemMapCard(card: ReferenceSystemCard) {
+    Surface(shape = RoundedCornerShape(14.dp), color = MaterialTheme.colorScheme.surfaceContainerHigh, modifier = Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+            Text(card.title, style = MaterialTheme.typography.labelLarge, fontWeight = FontWeight.Bold)
+            Text(card.explanation, style = MaterialTheme.typography.bodyMedium)
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(6.dp),
+                modifier = Modifier.clearAndSetSemantics { contentDescription = card.steps.joinToString(" → ") },
+            ) {
+                card.steps.forEachIndexed { index, step ->
+                    Text(step, style = MaterialTheme.typography.bodyLarge, fontWeight = FontWeight.SemiBold)
+                    if (index < card.steps.lastIndex) Text("→", color = MaterialTheme.colorScheme.onSurfaceVariant)
+                }
+            }
         }
     }
 }

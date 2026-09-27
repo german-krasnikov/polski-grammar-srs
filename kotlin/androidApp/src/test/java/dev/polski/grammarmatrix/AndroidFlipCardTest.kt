@@ -7,6 +7,7 @@ import org.junit.Test
 import polski.presentation.CardEffect
 import polski.srs.Rating
 import polski.ui.screens.SingleRatingGate
+import polski.ui.screens.SwipeNudgeGate
 import polski.ui.screens.cardEffectToPlay
 import polski.ui.screens.dragProgress
 import polski.ui.screens.dragRotationDegrees
@@ -106,5 +107,20 @@ class AndroidFlipCardTest {
         assertEquals(2f, dragRotationDegrees(44f, pxPerDegree = 22f))
         assertEquals(8f, dragRotationDegrees(1000f, pxPerDegree = 22f, maxDegrees = 8f))
         assertEquals(-8f, dragRotationDegrees(-1000f, pxPerDegree = 22f, maxDegrees = 8f))
+    }
+
+    // A4 (`Plans/Kotlin/EmphasisUXAudit-2026-09-27.md` U2): the swipe hint's nudge wiggle plays once.
+    @Test fun swipeNudgeGateConsumesFirstTimeExactlyOnce() {
+        val gate = SwipeNudgeGate()
+        assertTrue(gate.consumeFirstTime())
+        assertTrue(!gate.consumeFirstTime())
+        assertTrue(!gate.consumeFirstTime())
+    }
+
+    @Test fun freshSwipeNudgeGatePerScreenAllowsANudgeAgain() {
+        val first = SwipeNudgeGate()
+        assertTrue(first.consumeFirstTime())
+        val secondScreenVisit = SwipeNudgeGate()
+        assertTrue(secondScreenVisit.consumeFirstTime())
     }
 }
