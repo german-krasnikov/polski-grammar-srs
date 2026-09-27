@@ -332,6 +332,15 @@ fun AndroidStaggeredReveal(index: Int, reduceMotion: Boolean, content: @Composab
  * Only one face is composed at a time (split at the 90° midpoint), so the hidden face is never in
  * the accessibility tree and never receives touch.
  *
+ * [front] receives this card's own local flip toggle as its lambda parameter, for a tap that lands
+ * while [revealed] is already `true`: the caller's reveal control still calls its own "reveal"
+ * action on every tap regardless of [revealed] (that call is what makes the *first* tap turn it
+ * true), but session-style state that is already `true` re-writes the same value, a `StateFlow`
+ * never re-emits an equal value, and [LaunchedEffect] never re-fires for a later front visit
+ * (`main @ 25c378c` regression 2, `PostMergeTest-2026-09-27.md`). The caller invokes the parameter
+ * only in that already-revealed case, so the very first reveal still goes through its own reveal
+ * action undisturbed.
+ *
  * Gesture/drag ([AndroidRatingDragSurface]) attaches only once `showingBack` (angle past 90°), not
  * the instant [revealed] turns true: `revealed` flips true the moment the flip *starts*, but
  * `front()` (with its own always-on tap-to-reveal control) keeps rendering and receiving touch for
@@ -346,7 +355,7 @@ fun AndroidFlipCard(
     revealed: Boolean,
     reduceMotion: Boolean,
     onRate: (Rating) -> Unit,
-    front: @Composable () -> Unit,
+    front: @Composable (flipVisually: () -> Unit) -> Unit,
     back: @Composable () -> Unit,
 ) {
     var flipped by remember(itemId) { mutableStateOf(false) }
@@ -365,7 +374,7 @@ fun AndroidFlipCard(
     fun toggleFlip() { scope.launch { setFlipped(!flipped) } }
     val cardContent: @Composable () -> Unit = {
         Box(Modifier.graphicsLayer { rotationY = angle; cameraDistance = 12f * density }) {
-            if (!showingBack) front() else Box(Modifier.graphicsLayer { rotationY = 180f }) { back() }
+            if (!showingBack) front(::toggleFlip) else Box(Modifier.graphicsLayer { rotationY = 180f }) { back() }
         }
     }
     if (showingBack) {

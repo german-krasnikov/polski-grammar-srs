@@ -94,7 +94,7 @@ fun AndroidVocabularyScreen(
                     revealed = state.revealed,
                     reduceMotion = reduceMotion,
                     onRate = ::rate,
-                    front = { VocabularyFrontFace(item, state.direction, state.typed, state.draft, session) },
+                    front = { flipVisually -> VocabularyFrontFace(item, state.direction, state.typed, state.draft, session, state.revealed, flipVisually) },
                     back = { VocabularyBackFace(item, state.direction, state.typed, state.draft, enableSwipeRating) },
                 )
                 // D5: gate the mount itself, not just the trigger — see AndroidTrainingScreen.
@@ -113,14 +113,24 @@ fun AndroidVocabularyScreen(
  * [OutlinedTextField] never reach the prompt's `clickable` (the field consumes its own taps
  * first, the same nested-control precedent already verified for [AndroidTrainingScreen]'s
  * question card).
+ *
+ * A tap here always means "show me the answer face"; while [revealed] is still `false` that is
+ * [VocabularySession.reveal], but once the session already answered `true` once, calling it again
+ * is a silent no-op (`StateFlow` never re-emits an equal value), so `main @ 25c378c` regression 2
+ * left every later visit to this face stuck. [flipVisually] is [AndroidFlipCard]'s own local flip
+ * for exactly that already-revealed case.
  */
 @Composable
-private fun VocabularyFrontFace(item: VocabularyItem, direction: StudyDirection, typed: Boolean, draft: String, session: VocabularySession) {
+private fun VocabularyFrontFace(
+    item: VocabularyItem, direction: StudyDirection, typed: Boolean, draft: String,
+    session: VocabularySession, revealed: Boolean, flipVisually: () -> Unit,
+) {
     val recallPolish = direction == StudyDirection.RussianToPolish
+    fun reveal() { if (revealed) flipVisually() else session.reveal() }
     Card(Modifier.fillMaxWidth(), shape = RoundedCornerShape(24.dp)) {
         Column(Modifier.padding(22.dp), verticalArrangement = Arrangement.spacedBy(14.dp)) {
             Column(
-                Modifier.fillMaxWidth().clickable(onClickLabel = "Показать ответ", role = Role.Button) { session.reveal() },
+                Modifier.fillMaxWidth().clickable(onClickLabel = "Показать ответ", role = Role.Button) { reveal() },
                 verticalArrangement = Arrangement.spacedBy(4.dp),
             ) {
                 Text(if (recallPolish) "Вспомни по-польски" else "Вспомни по-русски", style = MaterialTheme.typography.labelLarge)
@@ -133,7 +143,7 @@ private fun VocabularyFrontFace(item: VocabularyItem, direction: StudyDirection,
             ) { session.setTyped(it == "typed") }
             if (typed) {
                 OutlinedTextField(draft, session::setDraft, label = { Text("Твой ответ") }, modifier = Modifier.fillMaxWidth())
-                Button(onClick = { session.reveal() }, modifier = Modifier.fillMaxWidth()) { Text("Проверить") }
+                Button(onClick = { reveal() }, modifier = Modifier.fillMaxWidth()) { Text("Проверить") }
             }
         }
     }
