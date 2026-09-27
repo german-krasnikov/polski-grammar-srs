@@ -15,6 +15,7 @@ import polski.pack.CoursePackSource
 import polski.presentation.ContrastPair
 import polski.presentation.EndingPart
 import polski.presentation.NativeParallelPair
+import polski.presentation.StemAlternation
 import polski.presentation.TableRow
 
 data class MethodPresentation(
@@ -223,6 +224,10 @@ internal class CoursePack(private val source: CoursePackSource) {
         require(seeds.isNotEmpty() && seeds.distinct().size == seeds.size)
         require(seeds.all { seed -> nouns.any { it.id == seed.nounId } && adjectives.any { it.id == seed.adjectiveId } })
     } }
+
+    /** UC S2: regular stem alternations this pack declares (e.g. Polish `ó~o`), consumed only by
+     * `EndingHighlight.kt`'s reliability check — optional, defaults to none for a pack without any. */
+    val stemAlternations: List<StemAlternation> by lazy { parseStemAlternations(root["stemAlternations"]) }
 
     val caseSentencePrefixes: Map<String, String> by lazy {
         root.obj("caseSentencePrefixes").mapValues { (_, value) -> value.jsonPrimitive.content }
@@ -529,6 +534,7 @@ internal class PackRegistry(packs: List<CoursePack>) {
 internal val packRegistry: PackRegistry by lazy { PackRegistry(embeddedCoursePackSources.map(::CoursePack)) }
 
 val courseSentenceSeeds: List<SentenceSeed> by lazy { packRegistry.active.sentenceSeeds }
+val courseStemAlternations: List<StemAlternation> by lazy { packRegistry.active.stemAlternations }
 
 fun caseSentencePrefix(gramCase: GramCase, number: NumberGram): String {
     require(gramCase != GramCase.VOC)
@@ -643,6 +649,17 @@ private fun JsonObject.verbLabel(): VerbLabel = VerbLabel(string("full"), string
 /** [json] is the optional `skill.styleContent` value as it comes out of `root["styleContent"]` — absent/non-object means the all-derived default. */
 internal fun parseSkillStyleContent(json: JsonElement?): SkillStyleContent =
     (json as? JsonObject)?.toSkillStyleContent() ?: SkillStyleContent()
+
+/** [json] is the optional `stemAlternations` value as it comes out of `root["stemAlternations"]` — absent/non-array means no pack-declared alternation (UC S2). */
+internal fun parseStemAlternations(json: JsonElement?): List<StemAlternation> =
+    (json as? JsonArray)?.map { it.jsonObject.toStemAlternation() } ?: emptyList()
+
+private fun JsonObject.toStemAlternation(): StemAlternation {
+    val a = string("a")
+    val b = string("b")
+    require(a.length == 1 && b.length == 1) { "stemAlternations: a/b must be single characters" }
+    return StemAlternation(a[0], b[0])
+}
 
 private fun JsonObject.toSkillStyleContent(): SkillStyleContent = SkillStyleContent(
     rule = optionalString("rule"),

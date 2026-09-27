@@ -1,9 +1,20 @@
 package polski.presentation
 
+import polski.data.courseStemAlternations
 import polski.model.FormChange
 
 /** Display-only fragment; form text and review identity remain unchanged. */
 data class EndingPart(val text: String, val isEnding: Boolean, val isChanged: Boolean = false)
+
+/**
+ * One regular stem alternation the active language pack declares (e.g. Polish `ó~o`, `ą~ę`),
+ * used only to judge whether an aligned short suffix diff is reliable — never to rewrite any
+ * displayed text. Unordered: [a] and [b] each may appear on either side of the change.
+ */
+data class StemAlternation(val a: Char, val b: Char) {
+    init { require(a != b) { "StemAlternation: a and b must differ" } }
+    fun matches(x: Char, y: Char): Boolean = (x == a && y == b) || (x == b && y == a)
+}
 
 /** Literal forms with lossless display fragments. Generated grammar pairs use the conservative fallback. */
 data class ContrastPair(
@@ -31,8 +42,17 @@ data class ContrastPair(
 
 enum class ChangeSide { Before, After }
 
-/** Distinguishes aligned short suffix changes from a whole-word replacement. */
-fun changeHighlightParts(from: String, to: String, side: ChangeSide): List<EndingPart> {
+/**
+ * Distinguishes aligned short suffix changes from a whole-word replacement. [alternations]
+ * (default: the active pack's own declared pairs, UC S2) lets a regular stem alternation still
+ * count as a reliable aligned prefix instead of falling back to a whole-word change.
+ */
+fun changeHighlightParts(
+    from: String,
+    to: String,
+    side: ChangeSide,
+    alternations: List<StemAlternation> = courseStemAlternations,
+): List<EndingPart> {
     val oldWords = from.split(' ')
     val newWords = to.split(' ')
     val selected = if (side == ChangeSide.Before) oldWords else newWords
@@ -54,7 +74,8 @@ fun changeHighlightParts(from: String, to: String, side: ChangeSide): List<Endin
             val nextCore = next.substring(0, nextCoreEnd)
             val core = if (side == ChangeSide.Before) oldCore else nextCore
             val trailing = word.substring(if (side == ChangeSide.Before) oldCoreEnd else nextCoreEnd)
-            val prefix = oldCore.zip(nextCore).takeWhile { (a, b) -> a == b }.size
+            val prefix = oldCore.zip(nextCore)
+                .takeWhile { (a, b) -> a == b || alternations.any { it.matches(a, b) } }.size
             val oldSuffix = oldCore.substring(prefix)
             val newSuffix = nextCore.substring(prefix)
             val reliable = prefix >= 3 && newSuffix.length in 1..3 && oldSuffix.length <= 3 &&

@@ -21,6 +21,8 @@ describe('authored pl-ru pack', () => {
     ['missing translation', (sample) => { sample.vocabulary.items[0].translation = ''; }, /vocabulary\/items\/0\/translation/],
     ['HTML in a teaching field', (sample) => { sample.skills[0].theory = '<script>alert(1)</script>'; }, /skills\/0\/theory/],
     ['unsupported future conjugation', (sample) => { sample.verbs[0].futureType = 'irregular'; }, /verbs\/0\/futureType/],
+    ['self stem alternation', (sample) => { sample.stemAlternations = [{ a: 'o', b: 'o' }]; }, /stemAlternations\/0: a and b must differ/],
+    ['duplicate stem alternation (reversed)', (sample) => { sample.stemAlternations = [{ a: 'ó', b: 'o' }, { a: 'o', b: 'ó' }]; }, /stemAlternations\/1: duplicate alternation/],
   ];
   test.each(invalidCases)('rejects %s', (_label, change, message) => {
     const [sample, ranks] = copy();

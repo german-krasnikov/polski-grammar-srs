@@ -148,6 +148,16 @@ export function validateCoursePack(course, frequency) {
   for (const id of ownerKinds.keys()) {
     if (!course.possessives.some(owner => owner.id === id)) throw new Error(`/possessives: missing owner ${id}`);
   }
+  // Each declared stem alternation (UC S2) must be a real pair, and pairs are unordered so a↔b
+  // reversed still counts as a duplicate.
+  const seenAlternations = new Set();
+  (course.stemAlternations ?? []).forEach((pair, index) => {
+    const path = `/stemAlternations/${index}`;
+    if (pair.a === pair.b) throw new Error(`${path}: a and b must differ`);
+    const key = [pair.a, pair.b].sort().join('');
+    if (seenAlternations.has(key)) throw new Error(`${path}: duplicate alternation`);
+    seenAlternations.add(key);
+  });
   const auxiliaryId = course.morphology.futureAuxiliary.verbId;
   if (!course.verbs.some(verb => verb.id === auxiliaryId && verb.aspect === 'imperfective')) {
     throw new Error(`/morphology/futureAuxiliary/verbId: unknown or non-imperfective verb ${auxiliaryId}`);

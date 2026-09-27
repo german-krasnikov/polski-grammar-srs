@@ -76,4 +76,46 @@ class EndingHighlightTest {
         assertEquals("Moja żona mówi.", parts.joinToString("") { it.text })
         assertEquals(emptyList(), parts.filter(EndingPart::isChanged))
     }
+
+    // S2: a pack-declared alternation lets a regular stem change (ó~o) resolve to an ending
+    // diff instead of the whole-word fallback, without the core knowing it is Polish.
+    @Test
+    fun aDeclaredAlternationTurnsAStemChangeIntoAReliableEnding() {
+        val óToO = listOf(StemAlternation('ó', 'o'))
+        assertEquals(listOf("ego"), changeHighlightParts("mój", "mojego", ChangeSide.After, óToO)
+            .filter(EndingPart::isEnding).map(EndingPart::text))
+        assertEquals(listOf("ą"), changeHighlightParts("mój", "moją", ChangeSide.After, óToO)
+            .filter(EndingPart::isEnding).map(EndingPart::text))
+        assertEquals(emptyList(), changeHighlightParts("mój", "mojego", ChangeSide.Before, óToO)
+            .filter(EndingPart::isEnding))
+        // The old form is left stable (no old ending survives into the new stem+ending split).
+        assertEquals(emptyList(), changeHighlightParts("mój", "mojego", ChangeSide.Before, óToO)
+            .filter(EndingPart::isChanged))
+    }
+
+    @Test
+    fun withoutADeclaredAlternationTheStemChangeStaysAWholeWordFallback() {
+        assertEquals(emptyList(), changeHighlightParts("mój", "mojego", ChangeSide.After, emptyList())
+            .filter(EndingPart::isEnding))
+        assertEquals(listOf("mojego"), changeHighlightParts("mój", "mojego", ChangeSide.After, emptyList())
+            .filter(EndingPart::isChanged).map(EndingPart::text))
+    }
+
+    // ST-06 (behavioral genericity): an invented, non-Polish alternation pair drives the exact
+    // same reliability logic — nothing in EndingHighlight.kt is coupled to ó/ą/o/e specifically.
+    @Test
+    fun stemAlternationRulesAreGenericNotPolishSpecific() {
+        val invented = listOf(StemAlternation('x', 'y'))
+        assertEquals(listOf("zzz"), changeHighlightParts("abx", "abyzzz", ChangeSide.After, invented)
+            .filter(EndingPart::isEnding).map(EndingPart::text))
+        assertEquals(emptyList(), changeHighlightParts("abx", "abyzzz", ChangeSide.After)
+            .filter(EndingPart::isEnding))
+    }
+
+    // End-to-end: the active course pack (not shared code) supplies the alternation, so callers
+    // that never pass one — every host today — still get it through the default.
+    @Test
+    fun theActivePackAlternationAppliesWithoutCallersPassingIt() {
+        assertEquals(listOf("ego"), endingHighlightParts("mój", "mojego").filter(EndingPart::isEnding).map(EndingPart::text))
+    }
 }
