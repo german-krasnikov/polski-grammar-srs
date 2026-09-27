@@ -422,19 +422,19 @@ final class PolskiGrammarUITests: XCTestCase {
         app.buttons["Тренировка"].firstMatch.tap()
         XCTAssertTrue(app.buttons["continueIntroduction"].waitForExistence(timeout: 20))
         continueIntroductionIfPresent(app)
-        let method = app.buttons.matching(NSPredicate(format: "label CONTAINS %@", "Подача объяснений")).firstMatch
+        let method = app.buttons.matching(NSPredicate(format: "label CONTAINS %@", "Стиль объяснений")).firstMatch
         for _ in 0..<7 {
             if method.isHittable { break }
             app.swipeDown()
         }
         XCTAssertTrue(method.isHittable)
-        if method.label.contains("Живые ситуации") {
+        if !method.label.contains("Через правило") {
             method.tap()
-            let logic = app.descendants(matching: .any)["Схемы и логика"].firstMatch
-            XCTAssertTrue(logic.waitForExistence(timeout: 5))
-            logic.tap()
+            let ruleFirst = app.descendants(matching: .any)["Через правило"].firstMatch
+            XCTAssertTrue(ruleFirst.waitForExistence(timeout: 5))
+            ruleFirst.tap()
         }
-        XCTAssertTrue(method.label.contains("Схемы и логика"))
+        XCTAssertTrue(method.label.contains("Через правило"))
         let mode = app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", "Ответ,")).firstMatch
         for _ in 0..<7 {
             if mode.isHittable { break }
@@ -468,7 +468,7 @@ final class PolskiGrammarUITests: XCTestCase {
         }
         print("METHOD_BEFORE_TAP: method=\(method.frame), keyboard=\(app.keyboards.firstMatch.exists), typed=\(answer.exists)")
         method.tap()
-        let situations = app.descendants(matching: .any)["Живые ситуации"].firstMatch
+        let situations = app.descendants(matching: .any)["Через ситуацию"].firstMatch
         XCTAssertTrue(situations.waitForExistence(timeout: 5), app.debugDescription)
         situations.tap()
         for _ in 0..<8 {
@@ -503,7 +503,7 @@ final class PolskiGrammarUITests: XCTestCase {
         }
         XCTAssertTrue(method.isHittable)
         method.tap()
-        app.descendants(matching: .any)["Схемы и логика"].firstMatch.tap()
+        app.descendants(matching: .any)["Через правило"].firstMatch.tap()
         for _ in 0..<8 {
             if frozen.exists { break }
             app.swipeUp()
@@ -1014,5 +1014,72 @@ final class PolskiGrammarUITests: XCTestCase {
         XCTAssertTrue(total.waitForExistence(timeout: 10))
         let after = Int(total.label.split(separator: ",").last?.trimmingCharacters(in: .whitespaces) ?? "") ?? -1
         XCTAssertEqual(before + 1, after, total.label)
+    }
+
+    /// StylesBlueprint.md §1/§6/S2: switching the training card's style picker changes which
+    /// composed `Block`s show on its already-revealed back — rule-first alone shows `formula`
+    /// there (`StyleRegistry`'s recipes), minimal-theory alone shows `whyOnDemand`, and neither
+    /// shows for situation-first (whose back is `Changes` only). Asserted by each block's own
+    /// `accessibilityIdentifier` (`styleBlock-<kind>`, `FlashCardView.swift`), not by any authored
+    /// text — pl-ru `styleContent` is being written in a separate worktree and isn't in yet.
+    func testSwitchingStyleChangesWhichBlocksShow() {
+        let app = XCUIApplication()
+        app.launch()
+        resetTrainingProgress(app)
+        app.buttons["Тренировка"].firstMatch.tap()
+        XCTAssertTrue(app.buttons["continueIntroduction"].waitForExistence(timeout: 20))
+        continueIntroductionIfPresent(app)
+
+        let picker = app.buttons.matching(NSPredicate(format: "label CONTAINS %@", "Стиль объяснений")).firstMatch
+        func selectStyle(_ label: String) {
+            for _ in 0..<7 {
+                if picker.isHittable { break }
+                app.swipeDown()
+            }
+            XCTAssertTrue(picker.isHittable, app.debugDescription)
+            guard !picker.label.contains(label) else { return }
+            picker.tap()
+            let option = app.descendants(matching: .any)[label].firstMatch
+            XCTAssertTrue(option.waitForExistence(timeout: 5), app.debugDescription)
+            option.tap()
+        }
+        func scrollToTop() { for _ in 0..<10 { app.swipeDown() } }
+        // Hunts downward from the top for `identifier` in the (lazy Form-backed) answer panel —
+        // the same bounded swipeUp hunt every other test in this file already uses to find a
+        // specific row, just returning whether it was ever found instead of asserting it was.
+        func blockShown(_ identifier: String) -> Bool {
+            scrollToTop()
+            let element = app.descendants(matching: .any)[identifier].firstMatch
+            for _ in 0..<10 {
+                if element.exists { return true }
+                app.swipeUp()
+            }
+            return element.exists
+        }
+
+        selectStyle("Через правило")
+        let reveal = app.buttons["revealAnswer"]
+        for _ in 0..<8 {
+            if reveal.isHittable { break }
+            app.swipeUp()
+        }
+        XCTAssertTrue(reveal.waitForExistence(timeout: 5), app.debugDescription)
+        reveal.tap()
+        XCTAssertTrue(blockShown("styleBlock-formula"), app.debugDescription)
+        XCTAssertFalse(blockShown("styleBlock-whyOnDemand"), app.debugDescription)
+
+        // ST-04: switching style on the same already-revealed card is a display choice only —
+        // no new review, no exercise change — so the very same card's back re-composes live.
+        selectStyle("Через ситуацию")
+        XCTAssertFalse(blockShown("styleBlock-formula"), app.debugDescription)
+        XCTAssertFalse(blockShown("styleBlock-whyOnDemand"), app.debugDescription)
+
+        selectStyle("Минимум теории")
+        XCTAssertFalse(blockShown("styleBlock-formula"), app.debugDescription)
+        XCTAssertTrue(blockShown("styleBlock-whyOnDemand"), app.debugDescription)
+
+        selectStyle("Через правило")
+        XCTAssertTrue(blockShown("styleBlock-formula"), app.debugDescription)
+        XCTAssertFalse(blockShown("styleBlock-whyOnDemand"), app.debugDescription)
     }
 }

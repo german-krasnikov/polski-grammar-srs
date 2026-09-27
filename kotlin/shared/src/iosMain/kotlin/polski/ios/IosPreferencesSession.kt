@@ -1,5 +1,6 @@
 package polski.ios
 
+import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
 import platform.Foundation.NSUserDefaults
@@ -11,6 +12,7 @@ import polski.preferences.PreferredStyle
 import polski.preferences.UserPreferencesCodec
 import polski.preferences.UserPreferencesV2
 import polski.presentation.StyleId
+import polski.presentation.StyleRegistry
 import polski.presentation.legacyStyleWireValue
 import polski.presentation.toLegacyWireValue
 
@@ -31,10 +33,21 @@ class IosPreferencesSession(
 
     fun currentSnapshot(): String = buildJsonObject {
         put("schemaVersion", 2)
+        // StylesBlueprint.md §2/S1: recipe label/description are per-language data (empty in CORE
+        // until pl-ru content merges) — Swift falls back to its own copy when a value is "".
+        put("styles", JsonArray(StyleId.entries.map { id ->
+            val recipe = StyleRegistry.recipes[id]
+            buildJsonObject {
+                put("id", id.name)
+                put("label", recipe?.label?.get("ru") ?: "")
+                put("description", recipe?.description?.get("ru") ?: "")
+            }
+        }))
         when (val result = loaded) {
             is PreferencesDecode.Loaded -> {
                 put("status", "Ready")
                 put("method", StyleId.valueOf(result.value.styleId.name).toLegacyWireValue())
+                put("styleId", result.value.styleId.name)
                 put("answerMode", result.value.answerMode.name)
                 put("appearance", result.value.appearance.name)
                 put("motion", result.value.motion.name)
@@ -54,6 +67,7 @@ class IosPreferencesSession(
         val current = (loaded as? PreferencesDecode.Loaded)?.value ?: return "Настройки требуют восстановления"
         val next = when (field) {
             "method" -> current.copy(styleId = legacyStyleWireValue(value)?.let { PreferredStyle.valueOf(it.name) } ?: return "Неизвестный метод")
+            "styleId" -> current.copy(styleId = PreferredStyle.entries.firstOrNull { it.name == value } ?: return "Неизвестный стиль")
             "answerMode" -> current.copy(answerMode = PreferredAnswerMode.entries.firstOrNull { it.name == value } ?: return "Неизвестный способ ответа")
             "appearance" -> current.copy(appearance = Appearance.entries.firstOrNull { it.name == value } ?: return "Неизвестная тема")
             "motion" -> current.copy(motion = Motion.entries.firstOrNull { it.name == value } ?: return "Неизвестное движение")
