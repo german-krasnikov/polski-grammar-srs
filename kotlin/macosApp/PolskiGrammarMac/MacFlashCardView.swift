@@ -46,11 +46,52 @@ struct MacFlashCardView: View {
 
     @ViewBuilder private var frontFace: some View {
         VStack(alignment: .leading, spacing: 8) {
+            styleQuickSwitch
             tapToRevealContent
+            if !state.introPending {
+                frontStyleBlocks
+            }
             if !state.introPending && state.phase == "Question" {
                 answerControls
             }
         }
+    }
+
+    /// UC-10 S2: the current style's `Front`-phase blocks (Formula/Table for rule-first, Scene for
+    /// situation-first, NativeParallel for native-contrast, Examples for minimal-theory), rendered
+    /// generically by `BlockKind` — never a per-style `if` here (`Plans/Kotlin/StylesBlueprint.md`
+    /// §6). Kept present after reveal too: `frontFace` stays mounted alongside `backFace` under D1,
+    /// and `styleBlocksSnapshot` gives Front its own blocks independent of `state.phase` for exactly
+    /// this reason.
+    @ViewBuilder private var frontStyleBlocks: some View {
+        if let blocks = state.styleBlocks?.frontBlocks, !blocks.isEmpty {
+            VStack(alignment: .leading, spacing: 12) {
+                ForEach(Array(blocks.enumerated()), id: \.offset) { _, block in
+                    MacStyleBlockView(block: block, reduceMotion: reduceMotion)
+                }
+            }
+        }
+    }
+
+    /// UC-10 S1: a compact quick switch for the 4 presentation styles, mirroring the `Способ
+    /// ответа` picker's own persist-through-preferences path (`model.preference`, not a direct
+    /// session command) so a style chosen here also becomes the new default. Shown in both
+    /// `Question` and `Revealed` phases — switching only ever `mutate`s `styleId` in
+    /// `TrainingStore` (never creates a review, never touches `draft`/`frozenAnswer`).
+    private var styleQuickSwitch: some View {
+        Picker("Стиль объяснений", selection: Binding(
+            get: { state.styleId },
+            set: { model.preference("styleId", $0) }
+        )) {
+            ForEach(model.preferences?.styles ?? []) { style in
+                Text(style.label).tag(style.id)
+            }
+        }
+        .pickerStyle(.menu)
+        .labelsHidden()
+        .controlSize(.small)
+        .fixedSize()
+        .accessibilityIdentifier("styleQuickSwitch")
     }
 
     // D1: tapping the sentence/task-prompt region reveals the card too, alongside the
@@ -144,33 +185,19 @@ struct MacFlashCardView: View {
             }
             .transition(reduceMotion ? .identity : .revealGroup(delay: 0.05))
 
-            Group {
-                if let changes = exercise.changes, !changes.isEmpty {
-                    VStack(alignment: .leading, spacing: 16) {
-                        Text("Что изменилось").font(.headline)
-                        ForEach(Array(changes.enumerated()), id: \.offset) { _, change in
-                            VStack(alignment: .leading, spacing: 3) {
-                                (Text("Было: ")
-                                 + Text(change.from).foregroundColor(Color(nsColor: .systemRed)).underline()
-                                 + Text(" → Стало: ")
-                                 + highlightedText(change.toParts, before: false))
-                                    .textSelection(.enabled)
-                                Text(change.reason).foregroundStyle(.secondary)
-                            }
-                        }
-                    }
+            // UC-10 S2: the current style's `Back`-phase blocks, rendered generically by
+            // `BlockKind` (`Plans/Kotlin/StylesBlueprint.md` §6) — replaces the previous
+            // hardcoded Changes+Formula pair. `Changes` is exercise data, not style data (ST-05),
+            // so every style's recipe still lists it and it shows the same "Что изменилось" list
+            // as before, just built from the block's own highlighted spans; the feedback/
+            // explanation strings the old Formula box appended are the method lead/review lines
+            // shown elsewhere (`methodFeedback`), not part of any block.
+            VStack(alignment: .leading, spacing: 16) {
+                ForEach(Array((state.styleBlocks?.backBlocks ?? []).enumerated()), id: \.offset) { _, block in
+                    MacStyleBlockView(block: block, reduceMotion: reduceMotion)
                 }
-                if let formula = exercise.formula, !formula.isEmpty {
-                    VStack(alignment: .leading, spacing: 7) {
-                        Text("ЗАПОМНИ").font(.caption.weight(.semibold))
-                        Text(formula).font(.headline)
-                        if let feedback = exercise.methodFeedback, !feedback.isEmpty { Text(feedback) }
-                        if let explanation = exercise.explanation, !explanation.isEmpty { Text(explanation) }
-                    }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(14)
-                    .background(Color.accentColor.opacity(0.12), in: RoundedRectangle(cornerRadius: 12))
-                }
+                if let feedback = exercise.methodFeedback, !feedback.isEmpty { Text(feedback) }
+                if let explanation = exercise.explanation, !explanation.isEmpty { Text(explanation) }
             }
             .transition(reduceMotion ? .identity : .revealGroup(delay: 0.14))
 

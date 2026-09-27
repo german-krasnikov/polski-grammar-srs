@@ -69,6 +69,20 @@ struct TrainingSnapshot: Decodable {
     let phase: String
     let answerMode: String
     let explanationMethod: String
+    /// UC-10 S1: the full 4-value style, read directly (no more Logic/Situations collapse) by
+    /// the Settings picker and the training-card quick switch.
+    let styleId: String
+    /// `null` while there is no current exercise (matches `styleBlocksSnapshot` in `MacSnapshot.kt`).
+    /// UC-10 S2: `frontBlocks`/`backBlocks` are always both present regardless of `phase` — the
+    /// card keeps its front face mounted after reveal too, so it needs its own Front blocks even
+    /// once `phase == "Revealed"` (see `MacFlashCardView`'s D1 expand-reveal).
+    struct StyleBlocks: Decodable {
+        let effectiveStyleId: String
+        let nativeContrastAvailable: Bool
+        let frontBlocks: [BlockJSON]
+        let backBlocks: [BlockJSON]
+    }
+    let styleBlocks: StyleBlocks?
     let draft: String
     let introPending: Bool
     let dueCount: Int
@@ -90,6 +104,52 @@ struct RatingIntervals: Decodable {
     let again: Int64?
     let good: Int64?
     enum CodingKeys: String, CodingKey { case again = "Again"; case good = "Good" }
+}
+
+/// UC-10 S2: one entry of `styleBlocks.frontBlocks`/`backBlocks`, mirroring the flat `kind`-tagged
+/// shape `StyleSnapshot.kt`'s `blockToJson` writes — no sealed Kotlin type crosses the bridge, this
+/// struct just reads `kind` and the fields that kind uses (see `MacStyleBlockView.swift`). `items`
+/// is polymorphic on the Kotlin side (`[String]` for `examples`, `[{before,after,reason}]` for
+/// `changes`), hence the manual `init(from:)` splitting it into two typed, mutually-exclusive
+/// fields instead of one `Decodable`-synthesized property.
+struct BlockJSON: Decodable {
+    struct TableRow: Decodable { let label: String; let before: [TrainingSnapshot.HighlightPart]; let after: [TrainingSnapshot.HighlightPart] }
+    struct NativeParallelPair: Decodable { let native: String; let target: String; let note: String; let matches: Bool }
+    struct ChangeItem: Decodable { let before: [TrainingSnapshot.HighlightPart]; let after: [TrainingSnapshot.HighlightPart]; let reason: String }
+
+    let kind: String
+    let text: String?
+    let caption: String?
+    let rows: [TableRow]?
+    let pairs: [NativeParallelPair]?
+    let collapsedLabel: String?
+    let before: [TrainingSnapshot.HighlightPart]?
+    let after: [TrainingSnapshot.HighlightPart]?
+    let exampleItems: [String]?
+    let changeItems: [ChangeItem]?
+
+    private enum CodingKeys: String, CodingKey {
+        case kind, text, caption, rows, pairs, collapsedLabel, before, after, items
+    }
+
+    init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        kind = try c.decode(String.self, forKey: .kind)
+        text = try c.decodeIfPresent(String.self, forKey: .text)
+        caption = try c.decodeIfPresent(String.self, forKey: .caption)
+        rows = try c.decodeIfPresent([TableRow].self, forKey: .rows)
+        pairs = try c.decodeIfPresent([NativeParallelPair].self, forKey: .pairs)
+        collapsedLabel = try c.decodeIfPresent(String.self, forKey: .collapsedLabel)
+        before = try c.decodeIfPresent([TrainingSnapshot.HighlightPart].self, forKey: .before)
+        after = try c.decodeIfPresent([TrainingSnapshot.HighlightPart].self, forKey: .after)
+        if kind == "changes" {
+            exampleItems = nil
+            changeItems = try c.decodeIfPresent([ChangeItem].self, forKey: .items)
+        } else {
+            changeItems = nil
+            exampleItems = try c.decodeIfPresent([String].self, forKey: .items)
+        }
+    }
 }
 
 struct VocabularySnapshot: Decodable {
@@ -114,9 +174,18 @@ struct VocabularySnapshot: Decodable {
 }
 
 struct PreferencesSnapshot: Decodable {
+    /// UC-10 S1: the 4 style recipes' native-language copy, resolved by `MacPreferencesSession`
+    /// (recipe data first, a host-side Russian fallback while CONTENT's authoring is unmerged) —
+    /// Settings and the training-card quick switch both render this, never a hardcoded 4-case list.
+    struct StyleOption: Decodable, Identifiable {
+        let id: String
+        let label: String
+        let description: String
+    }
     let schemaVersion: Int
     let status: String
-    let method: String?
+    let styles: [StyleOption]
+    let styleId: String?
     let answerMode: String?
     let appearance: String?
     let motion: String?
@@ -309,7 +378,7 @@ final class MacModel: ObservableObject {
     private func consumeVocabulary(_ raw: String) { vocabulary = decode(VocabularySnapshot.self, raw) }
     private func consumePreferences(_ raw: String) {
         preferences = decode(PreferencesSnapshot.self, raw)
-        if let method = preferences?.method { trainingSession.dispatch(command: "method", value: method) }
+        if let styleId = preferences?.styleId { trainingSession.dispatch(command: "styleId", value: styleId) }
         if let mode = preferences?.answerMode { trainingSession.dispatch(command: "answerMode", value: mode) }
     }
     func send(_ command: String, _ value: String = "") { trainingSession.dispatch(command: command, value: value) }
@@ -768,6 +837,39 @@ private struct ProgressViewNative: View {
     }
 }
 
+/// UC-10 S1: replaces the old 2-value "Объяснение" `Picker` (`Logic`/`Situations`) with the 4
+/// style recipes, each row's label/description coming from `model.preferences?.styles` (recipe
+/// data, host-side Russian fallback while CONTENT is unmerged — never hardcoded here). A
+/// native-contrast row gets a secondary hint, not a disabled state, whenever the current exercise's
+/// skill has no `nativeParallel` content: `StyleComposer` already falls back tolerantly rather than
+/// crashing or showing an empty block, so choosing it here is always safe.
+private struct StylePickerRows: View {
+    @ObservedObject var model: MacModel
+    var body: some View {
+        ForEach(model.preferences?.styles ?? []) { style in
+            Button {
+                model.preference("styleId", style.id)
+            } label: {
+                HStack(alignment: .top, spacing: 10) {
+                    Image(systemName: model.preferences?.styleId == style.id ? "largecircle.fill.circle" : "circle")
+                        .foregroundStyle(.tint)
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text(style.label)
+                        Text(style.description).font(.caption).foregroundStyle(.secondary)
+                        if style.id == "NativeContrast" && model.training?.styleBlocks?.nativeContrastAvailable == false {
+                            Text("Недоступно для текущего навыка — будет показан другой стиль")
+                                .font(.caption2).foregroundStyle(.orange)
+                        }
+                    }
+                    Spacer(minLength: 0)
+                }
+            }
+            .buttonStyle(.plain)
+            .accessibilityIdentifier("stylePicker.\(style.id)")
+        }
+    }
+}
+
 private struct MacSettingsView: View {
     @ObservedObject var model: MacModel
     @Environment(\.accessibilityReduceMotion) private var systemReduceMotion
@@ -780,13 +882,7 @@ private struct MacSettingsView: View {
                 Text(model.preferences?.error ?? "Настройки требуют восстановления")
                     .foregroundStyle(.red)
             } else {
-                Picker("Объяснение", selection: Binding(
-                    get: { model.preferences?.method ?? "Logic" },
-                    set: { model.preference("method", $0) }
-                )) {
-                    Text("Логика").tag("Logic")
-                    Text("Ситуации").tag("Situations")
-                }
+                Section("Обучение") { StylePickerRows(model: model) }
                 Picker("Внешний вид", selection: Binding(
                     get: { model.preferences?.appearance ?? "System" },
                     set: { model.preference("appearance", $0) }
