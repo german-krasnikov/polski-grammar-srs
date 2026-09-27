@@ -18,7 +18,7 @@ struct MacStyleBlockView: View {
     var body: some View {
         switch block.kind {
         case "formula": accentBox(caption: "ЗАПОМНИ", text: block.text ?? "")
-        case "rule": accentBox(caption: "ПРАВИЛО", text: block.text ?? "")
+        case "rule": accentBox(caption: "ПРАВИЛО", text: block.text ?? "", detail: block.detail)
         case "table": TableBlockBody(caption: block.caption ?? "", rows: block.rows ?? [])
         case "scene": SceneBlockBody(text: block.text ?? "")
         case "nativeParallel": NativeParallelBlockBody(pairs: block.pairs ?? [])
@@ -30,10 +30,13 @@ struct MacStyleBlockView: View {
         }
     }
 
-    @ViewBuilder private func accentBox(caption: String, text: String) -> some View {
+    @ViewBuilder private func accentBox(caption: String, text: String, detail: String? = nil) -> some View {
         VStack(alignment: .leading, spacing: 7) {
             Text(caption).font(.caption.weight(.semibold)).tracking(1.1).foregroundStyle(.secondary)
             Text(text).font(.headline)
+            if let detail, !detail.isEmpty {
+                Text(detail).font(.subheadline).foregroundStyle(.secondary)
+            }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(14)
