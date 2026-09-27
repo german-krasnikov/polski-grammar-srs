@@ -739,6 +739,8 @@ private class TrainingDomRenderer {
             })
             return
         }
+        val (effective, content) = resolveEffectiveStyleAndContent(state, skill.id)
+        val frontBlocks = StyleComposer.compose(effective, StylePhase.Front, exercise, skill, presentation, content)
         val front = node("div", "card-front").apply {
             appendChild(node("span", "eyebrow", "Исходное предложение"))
             appendChild(node("p", "source-sentence").apply {
@@ -751,6 +753,9 @@ private class TrainingDomRenderer {
                 appendChild(node("p", "method-retrieve", method.retrieve))
                 appendChild(node("small", "method-lead", method.promptLead))
             })
+            // UC-10 web S2: which blocks show here (and in which order) comes entirely from the
+            // resolved style's recipe — a style switch changes this list, never a hardcoded branch.
+            renderCardBlocks(this, frontBlocks, "card-blocks-front")
         }
         if (state.phase == CardPhase.Question) {
             card.appendChild(front)
@@ -852,55 +857,21 @@ private class TrainingDomRenderer {
                 appendChild(node("p", text = state.frozenAnswer?.takeIf(String::isNotEmpty) ?: "Ответ не введён"))
             })
         }
-        val feedbackMethod = polski.data.presentationBySkillId(exercise.primarySkill).let { presentation ->
-            if (state.styleId == StyleId.SituationFirst) presentation.situations else presentation.logic
-        }
-        back.appendChild(node("div", "method-feedback").apply {
-            appendChild(node("h3", text = if (state.styleId == StyleId.SituationFirst) "Сравни смысл и форму" else "Разбор изменений"))
-            appendChild(node("p", text = feedbackMethod.feedback))
-            if (state.styleId == StyleId.SituationFirst) appendChild(node("p", text = exercise.explanation))
-        })
-        back.appendChild(node("div", "change-list").apply {
-            appendChild(node("h3", text = "Что изменилось"))
-            exercise.changes.forEach { change ->
-                appendChild(node("div").apply {
-                    appendChild(node("div", "change-pair").apply {
-                        appendChild(node("span").apply {
-                            appendContrastParts(this, changeHighlightParts(change.from, change.to, ChangeSide.Before), "change-before")
-                        })
-                        appendChild(node("b", text = "→"))
-                        appendChild(node("strong").apply {
-                            appendContrastParts(this, changeHighlightParts(change.from, change.to, ChangeSide.After), "change-after")
-                        })
-                    })
-                    appendChild(node("p", text = change.reason))
-                })
-            }
-        })
-        val rule = node("section", "rule-focus")
-        rule.setAttribute("aria-label", "Ключевое правило")
-        back.appendChild(rule)
-        rule.appendChild(node("small", text = "ЗАПОМНИ"))
-        rule.appendChild(node("strong", text = polski.data.skillById(exercise.primarySkill).formula))
+        val skill = polski.data.skillById(exercise.primarySkill)
         val presentation = polski.data.presentationBySkillId(exercise.primarySkill)
         val method = if (state.styleId == StyleId.SituationFirst) presentation.situations else presentation.logic
-        rule.appendChild(node("p", text = method.introduction))
-        if (state.styleId != StyleId.SituationFirst) rule.appendChild(node("p", text = exercise.explanation))
-        rule.appendChild(node("div", "rule-contrast").apply {
-            setAttribute("lang", "pl")
-            appendChild(node("span", "form-contrast").apply {
-                setAttribute("aria-label", "Было: ${presentation.focusBefore}. Стало: ${presentation.focusAfter}")
-                appendChild(node("span", "form-contrast-before").apply {
-                    setAttribute("aria-hidden", "true")
-                    appendContrastParts(this, changeHighlightParts(presentation.focusBefore, presentation.focusAfter, ChangeSide.Before), "change-before")
-                })
-                appendChild(node("span", "form-contrast-arrow", "→").apply { setAttribute("aria-hidden", "true") })
-                appendChild(node("strong", "form-contrast-after").apply {
-                    setAttribute("aria-hidden", "true")
-                    appendContrastParts(this, changeHighlightParts(presentation.focusBefore, presentation.focusAfter, ChangeSide.After), "change-after")
-                })
-            })
+        back.appendChild(node("div", "method-feedback").apply {
+            appendChild(node("h3", text = if (state.styleId == StyleId.SituationFirst) "Сравни смысл и форму" else "Разбор изменений"))
+            appendChild(node("p", text = method.feedback))
+            if (state.styleId == StyleId.SituationFirst) appendChild(node("p", text = exercise.explanation))
         })
+        // UC-10 web S2: Changes/Formula/Rule/Contrast used to be hardcoded here per 2-way style
+        // check — now they (and Table/NativeParallel/Scene/Examples/WhyOnDemand) come entirely
+        // from the resolved style's composed Back blocks; a style switch changes which of these
+        // sections show, never a branch in this function.
+        val (effective, content) = resolveEffectiveStyleAndContent(state, skill.id)
+        val backBlocks = StyleComposer.compose(effective, StylePhase.Back, exercise, skill, presentation, content)
+        renderCardBlocks(back, backBlocks, "card-blocks-back")
         back.appendChild(node("div", "rating-label", "Когда повторить?"))
         back.appendChild(node("p", "method-review", method.review))
         val ratings = node("div", "ratings")
@@ -972,6 +943,18 @@ internal fun applyCollapsible(wrap: HTMLElement, expanded: Boolean, isToggleEven
     wrap.style.setProperty("grid-template-rows", "")
 }
 
+/**
+ * UC-10 web S2: the [StyleRecipe] a card actually composes from — [StyleId.NativeContrast]
+ * without authored [polski.data.SkillStyleContent.nativeParallel] for this skill resolves to its
+ * declared fallback ([StyleComposer.resolveEffectiveStyle]), same rule Front and Back both use.
+ */
+private fun resolveEffectiveStyleAndContent(state: AppUiState, skillId: String): Pair<StyleRecipe, polski.data.SkillStyleContent> {
+    val content = polski.data.styleContentBySkillId(skillId)
+    val recipe = StyleRegistry.recipes.getValue(state.styleId)
+    val effectiveId = StyleComposer.resolveEffectiveStyle(recipe, content, StyleRegistry.recipes)
+    return StyleRegistry.recipes.getValue(effectiveId) to content
+}
+
 // UX4-13: shared with the vocabulary card's rating buttons, not private to this file any more.
 internal fun intervalLabel(dueMillis: Long, nowMillis: Long): String {
     val minutes = maxOf(1L, (dueMillis - nowMillis + 30_000L) / 60_000L)
@@ -982,20 +965,22 @@ internal fun intervalLabel(dueMillis: Long, nowMillis: Long): String {
     }
 }
 
-private fun appendContrastParts(container: HTMLElement, parts: List<EndingPart>, changedClass: String) {
+// UC-10 web S2: shared with CardBlocksWeb.kt's block renderers (Table/Contrast/Changes reuse the
+// exact same ending-highlight markup this file has always used), so file-private isn't enough.
+internal fun appendContrastParts(container: HTMLElement, parts: List<EndingPart>, changedClass: String) {
     parts.forEach { part ->
         if (part.isChanged) container.appendChild(node("span", if (part.isEnding && changedClass == "change-after") "$changedClass ending-highlight" else changedClass, part.text))
         else container.appendChild(document.createTextNode(part.text))
     }
 }
 
-private fun node(tag: String, className: String = "", text: String? = null): HTMLElement =
+internal fun node(tag: String, className: String = "", text: String? = null): HTMLElement =
     (document.createElement(tag) as HTMLElement).apply {
         this.className = className
         if (text != null) textContent = text
     }
 
-private fun button(
+internal fun button(
     label: String,
     active: Boolean = false,
     pressed: Boolean? = null,

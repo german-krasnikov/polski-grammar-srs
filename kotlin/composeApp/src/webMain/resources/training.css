@@ -112,6 +112,36 @@ details{margin:16px 0;color:var(--muted);font-size:.875rem}summary{cursor:pointe
 .form-contrast{display:inline-flex;align-items:baseline;gap:.42rem;flex-wrap:wrap;line-height:1.45}.form-contrast-before{color:#aebed0}.form-contrast-arrow{color:#8aa3b6}.form-contrast-after{font-weight:700;color:#d9f3df}
 .study-options{display:flex;align-items:end;gap:12px;flex-wrap:wrap}.study-options label{font-size:.75rem}.study-options select{padding:8px 28px 8px 10px}.method-introduction{margin:8px 0;color:#d9e8f7}.method-lead{color:#99b9d0}.rule-contrast{border-top:1px solid #50877c;padding-top:10px;margin-top:4px}.rule-contrast .form-contrast-before{color:#f1d1d1}
 
+/* UC-10 web S2: one block per BlockKind the composer can return — Formula/Rule/Contrast reuse
+   `.rule-focus`/`.rule-contrast` above unchanged; everything below is new. `.block` alone only
+   sets the shared top gap so blocks read as a stack regardless of which kinds a style/skill
+   actually composed. */
+.block{margin-top:20px}
+.block-table-caption{font-size:.875rem;color:var(--muted);margin:0 0 8px}
+.block-table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:9px}
+.block-table-wrap table{border-collapse:collapse;width:100%;min-width:260px;font-size:.85rem}
+.block-table-wrap th,.block-table-wrap td{text-align:left;vertical-align:top;padding:9px 11px;border-bottom:1px solid var(--line)}
+.block-table-wrap thead th{background:var(--table-head);color:var(--text);font-weight:700}
+.block-table-wrap tbody th{background:var(--table-row);font-weight:600}
+.block-table-wrap tbody tr:last-child>*{border-bottom:0}
+.block-table-wrap [lang=pl]{font-weight:500}
+.block-scene-quote{margin:0;padding:16px 20px 16px 36px;border-left:3px solid var(--blue);border-radius:0 12px 12px 0;background:var(--surface);font-style:italic;font-size:1.05rem;line-height:1.6;position:relative}
+.block-scene-quote::before{content:"\201C";position:absolute;left:10px;top:6px;font-size:1.9rem;line-height:1;color:var(--blue);font-style:normal;opacity:.55}
+.native-parallel-row{display:grid;grid-template-columns:1fr 1fr auto;gap:6px 14px;align-items:baseline;padding:10px 0;border-bottom:1px solid var(--line)}
+.native-parallel-row:last-child{border-bottom:0}
+.native-parallel-native{color:var(--muted)}
+.native-parallel-target{font-weight:500}
+.native-parallel-badge{font-size:.7rem;font-weight:600;padding:3px 9px;border-radius:999px;white-space:nowrap;align-self:start;justify-self:end}
+.native-parallel-badge.match{background:#1d3b2c;color:var(--green)}
+.native-parallel-badge.differs{background:#3a2230;color:var(--before)}
+.native-parallel-note{grid-column:1/-1;margin:0;font-size:.8rem;color:var(--muted)}
+.block-examples-list{margin:0;padding-left:22px}
+.block-examples-list li{margin:6px 0}
+.block-why-toggle{background:transparent;border-style:dashed;font-size:.85rem;padding:9px 14px}
+.block-why-content>div{padding:12px 2px 2px;color:var(--muted);font-size:.9rem;line-height:1.6}
+.block-why-content>div>p{margin:0}
+@media(max-width:480px){.native-parallel-row{grid-template-columns:1fr;gap:2px}.native-parallel-badge{justify-self:start;margin-top:2px}}
+
 .vocabulary-page{max-width:1350px;margin:auto}.vocabulary-heading{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:20px}.vocabulary-heading h2{margin:0}.vocabulary-heading p{color:var(--muted);margin:6px 0}.vocabulary-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(330px,470px);gap:20px;align-items:start}.vocabulary-catalog{padding:26px;min-width:0}
 /* UX4-01: the flip's panel now lives on `.card-face` (see above) — this static wrapper around
    `.card-flip` must paint nothing of its own, or the old "static frame, content flips inside"
@@ -146,6 +176,8 @@ details{margin:16px 0;color:var(--muted);font-size:.875rem}summary{cursor:pointe
 :root[data-theme=light] .change-pair>strong{color:var(--green)}
 :root[data-theme=light] .change-pair strong .ending-highlight{color:var(--after)}
 :root[data-theme=light] .form-contrast-before,:root[data-theme=light] .rule-contrast .form-contrast-before{color:var(--before)}
+:root[data-theme=light] .native-parallel-badge.match{background:#d9f2e4;color:var(--green)}
+:root[data-theme=light] .native-parallel-badge.differs{background:#fbe3e3;color:var(--before)}
 :root[data-theme=light] textarea,:root[data-theme=light] .editor-fields input,:root[data-theme=light] .editor-fields select,:root[data-theme=light] .vocabulary-catalog textarea{background:var(--field);color:var(--text);border-color:var(--line)}
 :root[data-theme=light] .ratings button,:root[data-theme=light] .catalog-list,:root[data-theme=light] .chain-review{background:var(--surface);border-color:var(--line);color:var(--text)}
 :root[data-theme=light] .ratings button small,:root[data-theme=light] .ratings button span,:root[data-theme=light] .session-complete>p,:root[data-theme=light] .accepted{color:var(--muted)}
