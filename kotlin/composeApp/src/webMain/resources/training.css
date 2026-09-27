@@ -270,10 +270,9 @@ details{margin:16px 0;color:var(--muted);font-size:.875rem}summary{cursor:pointe
   .ratings button{min-height:0;flex-direction:row;justify-content:space-between;padding:12px 16px}
   .ratings button small{display:none}
 }
-/* P2-14: phones already show the swipe hint ("← Повторить · Вспомнил →") in the card itself once
-   P0-1 makes the gesture actually work there — this footer duplicated it and never mentioned the
-   arrow keys desktop users have. */
-@media(pointer:coarse){.study-help{display:none}}
+/* W4/U3: superseded the old always-hide-on-coarse rule — TrainingWebApp.kt now renders a
+   swipe-worded hint for a coarse pointer instead of the keyboard-worded one, so the footer stays
+   visible there too (see its own doc comment). */
 /* P3-15: `minmax(0,1fr)` (not a fixed track) is what lets a long value wrap instead of forcing the
    label column wider; `max-content` still gives the label exactly the room its longest row needs. */
 .vocabulary-answer dl>div{grid-template-columns:max-content minmax(0,1fr);column-gap:16px}

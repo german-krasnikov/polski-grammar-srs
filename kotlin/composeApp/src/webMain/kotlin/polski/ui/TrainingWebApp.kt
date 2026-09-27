@@ -608,7 +608,14 @@ private class TrainingDomRenderer {
             layout.appendChild(reference)
             renderCaseReferenceWeb(reference, state, dispatch)
         }
-        main.appendChild(node("p", "study-help", "Пробел — ${if (state.introPending) "перейти к заданию" else "показать ответ"} · ← → или 1–2 — оценить"))
+        // W4/U3: a coarse (touch/stylus) pointer has no physical keyboard, so the hint must name
+        // swipe instead of Space/arrows/digits — checked live, not just at narrow widths, per
+        // UX4-11's own precedent one screen up (a resizable fine-pointer desktop window can be
+        // just as narrow as a phone).
+        val action = if (state.introPending) "перейти к заданию" else "показать ответ"
+        val help = if (window.matchMedia("(pointer: coarse)").matches) "Коснитесь — $action · Свайп влево/вправо — оценить"
+        else "Пробел — $action · ← → или 1–2 — оценить"
+        main.appendChild(node("p", "study-help", help))
     }
 
     private fun renderLoadStatus(main: HTMLElement, state: AppUiState, dispatch: (AppAction) -> Unit) {

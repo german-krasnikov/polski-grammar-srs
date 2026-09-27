@@ -198,6 +198,25 @@ test('UX4-11/12: rating buttons stay reachable by keyboard even when visually co
   await context.close();
 });
 
+// W4/U3: the footer hint used to always say "Пробел — показать ответ · ← → или 1–2 — оценить",
+// which names a physical keyboard a touch device doesn't have (audit: `acc-f-front.png` at
+// 390px). A coarse pointer must instead read a swipe/tap hint; a real fine-pointer host keeps
+// the keyboard hint unchanged.
+test('W4/U3: the footer hint names swipe on a coarse pointer, not keyboard keys', async ({ browser, browserName }) => {
+  test.skip(browserName === 'firefox', 'isMobile is not supported in Firefox');
+  const context = await browser.newContext({ ...devices['Pixel 7'], viewport: { width: 390, height: 844 } });
+  const page = await context.newPage();
+  await page.goto('/');
+  expect(await page.evaluate(() => matchMedia('(pointer: coarse)').matches)).toBe(true);
+  await continueIntroductionIfPresent(page);
+  const hint = page.locator('.study-help');
+  await expect(hint).toBeVisible();
+  await expect(hint).not.toContainText('Пробел');
+  await expect(hint).not.toContainText('1–2');
+  await expect(hint).toContainText('Свайп');
+  await context.close();
+});
+
 test('UX4-11: a narrow but fine-pointer desktop window keeps normal, mouse-clickable rating buttons', async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 700 });
   await page.goto('/');
