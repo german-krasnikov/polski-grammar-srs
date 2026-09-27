@@ -188,6 +188,28 @@ class EndingHighlightTest {
         assertEquals(listOf(EndingPart("Прямой объект после глаголов действия обычно стоит в винительном.", false)), parts)
     }
 
+    // Emphasis contract follow-up (EmphasisUXAudit-2026-09-27): a zero-ending truncation — the
+    // after form is exactly the shared prefix with the before ending removed, e.g. genitive
+    // plural `kobiety→kobiet` — must highlight only the removed ending on the before side and
+    // mark the after word changed without falling back to a whole-word highlight.
+    @Test
+    fun zeroEndingTruncationHighlightsOnlyTheRemovedEndingOnTheBeforeSide() {
+        val before = changeHighlightParts("kobiety", "kobiet", ChangeSide.Before)
+        val after = changeHighlightParts("kobiety", "kobiet", ChangeSide.After)
+        assertEquals("kobiety", before.joinToString("") { it.text })
+        assertEquals("kobiet", after.joinToString("") { it.text })
+        assertEquals(listOf("y"), before.filter(EndingPart::isChanged).map(EndingPart::text))
+        assertEquals(listOf("y"), before.filter(EndingPart::isEnding).map(EndingPart::text))
+    }
+
+    @Test
+    fun zeroEndingTruncationMarksTheAfterWordChangedWithoutAPhantomSpan() {
+        val after = changeHighlightParts("abcxyz", "abc", ChangeSide.After)
+        assertEquals("abc", after.joinToString("") { it.text })
+        assertEquals(listOf(EndingPart("abc", false, true, ChangeSide.After)), after)
+        assertEquals(emptyList(), after.filter(EndingPart::isEnding))
+    }
+
     @Test
     fun styleTextWithAnUnchangedPairNeverHighlightsIt() {
         val parts = styleTextHighlightParts("widzę moje duże morze", "moje duże morze", "moje duże morze")

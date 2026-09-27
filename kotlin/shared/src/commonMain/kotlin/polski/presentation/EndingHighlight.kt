@@ -96,11 +96,16 @@ fun changeHighlightParts(
                 .takeWhile { (a, b) -> a == b || alternations.any { it.matches(a, b) } }.size
             val oldSuffix = oldCore.substring(prefix)
             val newSuffix = nextCore.substring(prefix)
-            val reliable = prefix >= 3 && newSuffix.length in 1..3 && oldSuffix.length <= 3 &&
+            val reliable = prefix >= 3 && newSuffix.length in 0..3 && oldSuffix.length <= 3 &&
                 newSuffix.all(Char::isLetter) && oldSuffix.all(Char::isLetter)
             if (reliable) {
-                if (prefix > 0) add(EndingPart(core.substring(0, prefix), false))
-                if (prefix < core.length) add(EndingPart(core.substring(prefix), true, true, side))
+                val suffix = core.substring(prefix)
+                // Zero-ending truncation (e.g. genitive plural `kobiety→kobiet`): the new suffix
+                // is empty, so there is no tail to highlight on the after side. Mark the stem
+                // itself changed instead of adding an empty ("phantom") ending span.
+                val stemIsTheWholeChange = suffix.isEmpty() && side == ChangeSide.After
+                add(EndingPart(core.substring(0, prefix), false, stemIsTheWholeChange, if (stemIsTheWholeChange) side else null))
+                if (suffix.isNotEmpty()) add(EndingPart(suffix, true, true, side))
                 if (trailing.isNotEmpty()) add(EndingPart(trailing, false))
             } else add(EndingPart(word, false, true, side))
         }
