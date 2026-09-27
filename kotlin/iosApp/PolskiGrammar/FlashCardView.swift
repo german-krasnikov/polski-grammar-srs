@@ -198,7 +198,10 @@ struct FlashCardView<RevealButton: View>: View {
 /// (cool accent, solid) is the new one. Both tokens live in one place — `Assets.xcassets`'
 /// `EmphasisBefore`/`EmphasisAfter` colorsets (light/dark variants, each ≥4.5:1 against the card's
 /// background in both) — so every call site below shares them instead of each picking its own color.
-private enum EmphasisRole {
+/// Not `private`: §3 also forbids a host having "a second, simplified" render path, so
+/// `NativeContrastPairView` (`PolskiGrammarApp.swift`) reuses this enum and [styledParts] below
+/// rather than rolling its own colors, the way its pre-fix `.systemRed`/`.systemOrange` did.
+enum EmphasisRole {
     case before, after
 
     var color: Color {
@@ -348,7 +351,8 @@ private func emphasizedText(_ parts: [Record], role: EmphasisRole, accessibility
 /// Shared by every block view below that shows a before/after pair (`table`, `changes`, `contrast`)
 /// — the accessible label is simply every part's own text joined back together, the same content
 /// VoiceOver read off the old concatenated `Text` (no separate string carries it at these call sites).
-private func styledParts(_ parts: [Record], role: EmphasisRole) -> some View {
+/// Not `private`: `NativeContrastPairView` (`PolskiGrammarApp.swift`) reuses it too — see [EmphasisRole].
+func styledParts(_ parts: [Record], role: EmphasisRole) -> some View {
     emphasizedText(parts, role: role, accessibilityLabel: parts.map { $0.string("text") }.joined())
 }
 

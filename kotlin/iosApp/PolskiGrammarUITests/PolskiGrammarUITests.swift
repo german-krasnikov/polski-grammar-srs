@@ -341,6 +341,40 @@ final class PolskiGrammarUITests: XCTestCase {
         if notice.waitForExistence(timeout: 2) { notice.buttons["ОК"].tap() }
     }
 
+    /// Reads `element`'s on-screen region back out of `app`'s current screenshot and reports
+    /// whether any pixel in it is clearly blue-dominant (blue channel > red channel + margin) —
+    /// the signature of `ContrastHighlightPlan.md` §3's cool `after` accent, and something no red,
+    /// orange or yellow (`before`, or a pre-fix warm `after`) ever produces. `screenshot().image`'s
+    /// raw `.cgImage` ignores `imageOrientation`, which is not always `.up` for a live capture —
+    /// redrawing through `UIGraphicsImageRenderer` first bakes orientation in, so the crop rect
+    /// below can use `element.frame`'s plain top-left points-to-pixels math directly.
+    private func containsCoolAccentPixel(_ app: XCUIApplication, element: XCUIElement) -> Bool {
+        let frame = element.frame
+        guard frame.width > 0, frame.height > 0 else { return false }
+        let raw = app.screenshot().image
+        let format = UIGraphicsImageRendererFormat()
+        format.scale = raw.scale
+        let normalized = UIGraphicsImageRenderer(size: raw.size, format: format).image { _ in raw.draw(at: .zero) }
+        guard let screenshotImage = normalized.cgImage else { return false }
+        let scale = CGFloat(screenshotImage.width) / app.frame.width
+        let pixelRect = CGRect(x: frame.minX * scale, y: frame.minY * scale,
+                                width: frame.width * scale, height: frame.height * scale)
+        guard let cropped = screenshotImage.cropping(to: pixelRect) else { return false }
+        let width = cropped.width, height = cropped.height
+        guard width > 0, height > 0 else { return false }
+        var pixels = [UInt8](repeating: 0, count: width * height * 4)
+        guard let context = CGContext(
+            data: &pixels, width: width, height: height, bitsPerComponent: 8, bytesPerRow: width * 4,
+            space: CGColorSpaceCreateDeviceRGB(), bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue
+        ) else { return false }
+        context.draw(cropped, in: CGRect(x: 0, y: 0, width: width, height: height))
+        for i in stride(from: 0, to: pixels.count, by: 4) {
+            let r = Int(pixels[i]), b = Int(pixels[i + 2])
+            if b > r + 40, b > 100 { return true }
+        }
+        return false
+    }
+
     func testFirstMethodIntroductionKeepsReferenceAnswerHiddenUntilContinue() {
         let app = XCUIApplication()
         app.launch()
@@ -567,15 +601,21 @@ final class PolskiGrammarUITests: XCTestCase {
         }
     }
 
-    /// ContrastHighlightPlan.md §"Контракт выделения" point 3, checked visually (the accessible-name
-    /// assertion above already proves the data reaches Swift; this proves `EmphasisRole`'s dashed/
-    /// solid tokens actually render on this screen too, not just on the training sentence —
-    /// `testEmphasisTokensRenderInLightAndDarkTheme` above is this test's sibling for that screen).
+    /// ContrastHighlightPlan.md §"Контракт выделения" point 3. The accessible-name assertion above
+    /// already proves the data reaches Swift; a screenshot alone only proves *something* renders —
+    /// it does not prove `after` is the required cool accent rather than a warm red/orange/yellow
+    /// (I2 correction: a `.systemOrange` `after` passed an earlier version of this same screenshot-
+    /// plus-accessible-name check unnoticed, `EmphasisUXAudit-2026-09-27.md` E1/E9 class). So beyond
+    /// the screenshots (kept for human review), [containsCoolAccentPixel] actually reads the
+    /// captured pixels: the "Было: żona; Стало: żonę" block must contain a pixel where blue clearly
+    /// exceeds red — `before` (red) and the plain captions never produce one, only a correctly
+    /// cool `after` run does.
     func testSystemMapCardsRenderDashedBeforeSolidAfterInLightAndDarkTheme() {
         let app = XCUIApplication()
         app.launch()
         app.buttons["Матрица"].firstMatch.tap()
-        XCTAssertTrue(app.descendants(matching: .any)["Было: żona; Стало: żonę"].firstMatch.waitForExistence(timeout: 10))
+        let pair = app.descendants(matching: .any)["Было: żona; Стало: żonę"].firstMatch
+        XCTAssertTrue(pair.waitForExistence(timeout: 10))
 
         func setTheme(_ label: String) {
             app.buttons["openSettings"].tap()
@@ -595,18 +635,19 @@ final class PolskiGrammarUITests: XCTestCase {
             option.tap()
             app.buttons["Готово"].tap()
         }
-        func captureMapCard(_ name: String) {
-            XCTAssertTrue(app.descendants(matching: .any)["Было: żona; Стало: żonę"].firstMatch.exists)
+        func captureAndCheckMapCard(_ name: String) {
+            XCTAssertTrue(pair.exists)
             let shot = XCTAttachment(screenshot: app.screenshot())
             shot.name = name
             shot.lifetime = .keepAlways
             add(shot)
+            XCTAssertTrue(containsCoolAccentPixel(app, element: pair), "\(name): 'after' is not rendered in a cool accent color")
         }
 
         setTheme("Светлая")
-        captureMapCard("system-map-steps-light")
+        captureAndCheckMapCard("system-map-steps-light")
         setTheme("Тёмная")
-        captureMapCard("system-map-steps-dark")
+        captureAndCheckMapCard("system-map-steps-dark")
         setTheme("Системная") // restore the default for later tests in this run.
     }
 

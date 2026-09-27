@@ -836,26 +836,22 @@ private struct TrainingView: View {
 
 }
 
+/// `ContrastHighlightPlan.md` §3: "Хосту запрещено иметь второй, «упрощённый» путь отрисовки" —
+/// this used to color `before`/`after` with raw `.systemRed`/`.systemOrange` instead of the shared
+/// `EmphasisBefore`/`EmphasisAfter` tokens `FlashCardView.swift`'s [EmphasisRole] already defines,
+/// which made `after` warm orange rather than the contract's required cool accent (I2 correction,
+/// `EmphasisUXAudit-2026-09-27.md` E1/E9 class). [styledParts] is that one shared view; every
+/// `Cases`/`Verbs`/`Pronouns`/chain/system-map row below goes through it now, not a second copy.
 private struct NativeContrastPairView: View {
     let pair: Record
-
-    private func markedText(_ parts: [Record], before: Bool) -> Text {
-        parts.reduce(Text("")) { result, part in
-            let fragment = Text(part.string("text"))
-            return result + (part.bool("changed")
-                ? fragment.bold().foregroundColor(Color(uiColor: before ? .systemRed : .systemOrange))
-                    .underline(true, pattern: before ? .dash : .solid)
-                : fragment)
-        }
-    }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 3) {
             Text("Было").font(.caption)
-            markedText(pair.rows("beforeParts"), before: true)
+            styledParts(pair.rows("beforeParts"), role: .before)
             Text("→").font(.caption)
             Text("Стало").font(.caption)
-            markedText(pair.rows("afterParts"), before: false)
+            styledParts(pair.rows("afterParts"), role: .after)
         }
         .accessibilityElement(children: .ignore)
         .accessibilityLabel("Было: \(pair.string("from")); Стало: \(pair.string("to"))")

@@ -700,3 +700,85 @@ emits. Not started; no Swift files touched for S4.
 
 Not run (lean mode / blocked): S4 (no Swift change made, see above); Android/macOS/web hosts (other
 lanes); `FlipRivePerfUITests` (unrelated, untouched).
+
+## I2 correction — `NativeContrastPairView` was a second, uncorrected render path (E1/E9 class)
+
+A review of commit `08567fd` (the C2 entry above) found it false on its own central claim. The
+`NativeContrastPairView.markedText` C2 extended (`PolskiGrammarApp.swift`, then lines 839-849) did
+**not** reuse `FlashCardView.swift`'s `EmphasisRole`/`EmphasisBefore`/`EmphasisAfter` tokens at all —
+it colored `before`/`after` with raw `Color(uiColor: .systemRed)` / `.systemOrange`. `after` in
+`.systemOrange` is a warm color, not the contract's required cool accent (§3: "холодный акцент …
+не красный/оранжевый/жёлтый") — exactly the E1/E9 bug class commit `eeb5ea6` (I1) had already fixed
+for `FlashCardView`'s own sentence, now reintroduced in this second, older component. §3 also
+separately bans a host having "a second, «упрощённый» путь отрисовки", which a raw-color
+`NativeContrastPairView` alongside a token-based `FlashCardView` literally is — and this component
+backs *every* before/after row in the app (Cases/Verbs/Pronouns/chain rows, not just C2's new steps
+loop), so the bug was pre-existing and wide, not new or scoped to C2 alone.
+
+The C2 paragraph above and the "Visual: light/dark screenshots" table row both state the opposite
+("the same dashed-red-before/solid-teal-after `EmphasisRole` pair view every other before/after
+comparison … already uses", "confirming C2 reuses I1's rendering path rather than a second one",
+"both themes confirmed dashed-red/solid-teal") — both are corrected here, not edited in place, so
+the mistake and its correction both stay on record. The screenshots *were* pulled and viewed, but
+misread: `żonę`/`żony`'s `after` glyphs are orange in both themes on a careful re-look, not teal.
+
+**Root cause of the misread:** no automated check ever inspected color, only the accessible name
+(`"Было: …; Стало: …"`) and a narrated description of two attached screenshots — a good gate for
+"does the pair exist and expose the right text" but not for "is `after` the right hue", which is
+exactly the axis that regressed. That gap is fixed below.
+
+**Fix.** `EmphasisRole` and `styledParts` (`FlashCardView.swift`) dropped their `private` and
+`NativeContrastPairView.body` now calls `styledParts(pair.rows("beforeParts"), role: .before)` /
+`styledParts(..., role: .after)` directly — the exact same view `FlashCardView`'s own table/changes/
+contrast blocks use, not a rebuilt equivalent. `NativeContrastPairView.markedText` is deleted
+entirely; there is one rendering path for a before/after pair on this host now, as §3 requires.
+Two files changed: `FlashCardView.swift` (visibility only), `PolskiGrammarApp.swift`.
+
+**New verification: `containsCoolAccentPixel`.** Added to
+`testSystemMapCardsRenderDashedBeforeSolidAfterInLightAndDarkTheme` (same test, extended) — reads
+the "Было: żona; Стало: żonę" block's own region back out of `app.screenshot()` and asserts it
+contains a pixel with blue clearly exceeding red (`b > r + 40`), which only a genuinely cool `after`
+run produces; `before` (red) and the plain "Было"/"Стало" captions never do. This is the
+"colorset/asset" -class automated check the correction asked for, in the form XCUITest actually
+supports (XCUITest has no drawn-line/attributed-run introspection, so pixel sampling from the
+screenshot is the available mechanism — not source-grepping for `EmphasisRole`, which an XCTest UI
+bundle can exercise but not statically inspect).
+
+Getting this helper right took three iterations, kept here since the failure modes are non-obvious
+and would waste another pass if hit again: (1) a first version cropped `app.screenshot().image
+.cgImage` directly at `element.frame`'s points×scale rect, drew it into a fresh `CGContext`, and
+found nothing but background at the target's own coordinates — cause: `UIImage.cgImage` ignores
+`imageOrientation`, which a live `XCUIScreenshot.image` is not always `.up` for, unlike a PNG that
+has already round-tripped through export (confirmed by loading an already-exported screenshot PNG
+standalone via a `swift <script>.swift` CLI prototype against `ImageIO`/`CoreGraphics` — no
+simulator needed — where the identical crop rect worked immediately); (2) a first fix hypothesized
+`CGImage.cropping(to:)` itself used a bottom-left origin and flipped the rect's Y — this "fixed" the
+crash-shaped symptom (some content now appeared) but was cropping a different, wrong band each time;
+the same local CLI prototype, run against the real exported PNG with both hypotheses side by side,
+showed the *original* top-left math was actually correct and the second bug was still the redraw
+step. The real fix is orientation-normalizing the raw screenshot through
+`UIGraphicsImageRenderer(size:format:).image { raw.draw(at: .zero) }` before taking `.cgImage`, then
+using the plain, unflipped `element.frame` math — verified by re-running RED against the still-buggy
+`.systemOrange` source and confirming the assertion now failed for the right reason (XCTest's own
+failure message plus the exported screenshot, this time genuinely orange in both themes), then GREEN
+against the fix.
+
+**Verification (this correction).** Same working directory/simulator/`-derivedDataPath` as above.
+
+| Check | Command | Result |
+|---|---|---|
+| RED: pixel check against pre-fix `.systemOrange` | `-only-testing:.../testSystemMapCardsRenderDashedBeforeSolidAfterInLightAndDarkTheme` | FAILED both themes — "'after' is not rendered in a cool accent color" (confirmed real: local `CGImage` prototype against the pulled screenshot found the sampled block's own max-warm pixel at `(255, 141, 40)`, i.e. genuinely orange) |
+| GREEN: same test, fix applied | same | PASSED (39.7s) — screenshots re-pulled via `xcresulttool export attachments` and viewed: both themes now show `żona`'s `a` / `żonę`'s `ę` (before) dashed warm red, `żonę`'s `ę` / `żony`'s `y` (after) solid cool blue |
+| Regression: step-chain accessible names | `-only-testing:.../testSystemMapCardsShowStepByStepContrastPairs` | PASSED (22.5s) |
+| Regression: support-row contrast pairs | `-only-testing:.../testNativeContrastSupportPairsHaveOrderedAccessibleNames` | PASSED (38.9s) |
+| Regression: main-sentence emphasis tokens (I1's own test) | `-only-testing:.../testEmphasisTokensRenderInLightAndDarkTheme` | PASSED (63.1s) |
+| Regression: generated case contrast semantics | `-only-testing:.../testNativeGeneratedCaseContrastKeepsFullWordsInSemantics` | PASSED (19.0s) |
+| Regression: matrix/progress round-trip | `-only-testing:.../testNativeTrainingMatrixAndProgress` | PASSED (94.3s) |
+| Regression: case reference compact note | `-only-testing:.../testNativeCasesShowCompactNoteAndOrderedComparisonNouns` | PASSED (36.6s) |
+| Regression: verb/gender control | `-only-testing:.../testNativeVerbGenderControlChangesSelectedSubjectOnly` | PASSED (45.4s) |
+| Regression: pronoun teaching contexts | `-only-testing:.../testNativePronounTeachingShowsCompactContextsAndOwnerDemo` | PASSED (78.9s) |
+
+Not run (lean mode, unaffected by this change): `testInventoryAuthoredMatrixAndVocabularyCopyOnSimulator`,
+`testNativeChainCompletionShowsFiveAnswersAndKeepsFiveRatings` (both already covered by the C2
+verification table above and untouched by this correction's diff), the rest of
+`PolskiGrammarUITests`, `FlipCorrectnessUITests`, `VocabularyFlipUITests`, Android/macOS/web hosts.
