@@ -71,7 +71,8 @@ test('variant C (default motion, Rive enabled): rating creates the overlay and f
 // three variants distinguishable by artificially slowing the main thread, the same technique
 // Chrome DevTools' own performance panel uses.
 for (const rate of [1, 4, 6]) {
-  test(`CPU throttle ${rate}x: reveal + rating stays responsive and long tasks are bounded (variant C)`, async ({ page }) => {
+  test(`CPU throttle ${rate}x: reveal + rating stays responsive and long tasks are bounded (variant C)`, async ({ page, browserName }) => {
+    test.skip(browserName !== 'chromium', 'CDP CPU throttling is available only in Chromium');
     const cdp = await page.context().newCDPSession(page);
     await page.goto('/');
     await page.evaluate(() => {

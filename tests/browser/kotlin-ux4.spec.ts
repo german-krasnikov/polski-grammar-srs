@@ -172,7 +172,8 @@ test('UX4-14: ArrowLeft rates "Again" on the revealed training card, alongside t
 // emulate one, is what actually flips the *style engine's* media evaluation — plain `hasTouch`
 // alone flips `matchMedia()` for script reads but left the stylesheet's own `@media` block
 // unmatched in this same run, which is the resolution recorded here.
-test('UX4-11/12: rating buttons stay reachable by keyboard even when visually collapsed on a real coarse-pointer device', async ({ browser }) => {
+test('UX4-11/12: rating buttons stay reachable by keyboard even when visually collapsed on a real coarse-pointer device', async ({ browser, browserName }) => {
+  test.skip(browserName === 'firefox', 'isMobile is not supported in Firefox');
   const context = await browser.newContext({ ...devices['Pixel 7'], viewport: { width: 390, height: 844 } });
   const page = await context.newPage();
   await page.goto('/');
@@ -286,6 +287,12 @@ test('capture front/back, mid-swipe and tab-switch screenshots for the v4 eviden
       await page.mouse.up();
     }
     await page.getByRole('button', { name: 'Прогресс', exact: true }).click();
+    // UX5: the tab switch slides via RouteSlider over ~320ms — wait for the outgoing layer to be
+    // removed and the incoming one to settle back to a single plain `.route-content` before
+    // shooting, or the PNG captures a mid-slide frame instead of the resting "progress" screen.
+    const routeViewport = page.locator('.route-viewport');
+    await expect.poll(() => routeViewport.locator(':scope > .route-content').count()).toBe(1);
+    await expect.poll(() => routeViewport.locator(':scope > .route-content').evaluate(el => el.getAttribute('style') || '')).toBe('');
     await shoot(viewport, `tabs-progress-${theme}`);
   }
   console.log('UX4 evidence screenshots:', shots.join(', '));
