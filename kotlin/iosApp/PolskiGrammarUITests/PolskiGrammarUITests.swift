@@ -390,8 +390,12 @@ final class PolskiGrammarUITests: XCTestCase {
         }
         XCTAssertTrue(reference.exists)
         XCTAssertFalse(reference.isEnabled)
-        let target = app.descendants(matching: .any)["Было: moja piękna żona; Стало: moją piękną żonę"].firstMatch
-        XCTAssertFalse(target.exists)
+        // ContrastHighlightPlan.md §5 / web fix 804f6c6: this row is the exercise's own target
+        // case, so before reveal its "Стало" must stay masked, never the real inflected answer.
+        let leaked = app.descendants(matching: .any)["Было: moja piękna żona; Стало: moją piękną żonę"].firstMatch
+        let masked = app.descendants(matching: .any)["Было: moja piękna żona; Стало: ?"].firstMatch
+        XCTAssertFalse(leaked.exists)
+        XCTAssertFalse(masked.exists)
         let next = app.buttons["continueIntroduction"]
         for _ in 0..<7 {
             if next.isHittable { break }
@@ -407,10 +411,11 @@ final class PolskiGrammarUITests: XCTestCase {
         XCTAssertTrue(reference.isEnabled)
         reference.tap()
         for _ in 0..<7 {
-            if target.exists { break }
+            if masked.exists { break }
             app.swipeUp()
         }
-        XCTAssertTrue(target.waitForExistence(timeout: 5))
+        XCTAssertTrue(masked.waitForExistence(timeout: 5))
+        XCTAssertFalse(leaked.exists)
 
         let reveal = app.buttons["revealAnswer"]
         for _ in 0..<7 {
@@ -419,6 +424,13 @@ final class PolskiGrammarUITests: XCTestCase {
         }
         XCTAssertTrue(reveal.exists)
         reveal.tap()
+        // Once revealed, this row is allowed to show the real answer.
+        for _ in 0..<7 {
+            if leaked.exists { break }
+            app.swipeUp()
+        }
+        XCTAssertTrue(leaked.waitForExistence(timeout: 5))
+        XCTAssertFalse(masked.exists)
         rateViaSwipe(app, good: true)
         XCTAssertTrue(next.waitForExistence(timeout: 5))
         let neutral = app.buttons["Таблица под рукой"]
@@ -429,7 +441,8 @@ final class PolskiGrammarUITests: XCTestCase {
         XCTAssertTrue(neutral.exists)
         XCTAssertFalse(neutral.isEnabled)
         XCTAssertFalse(app.buttons["Скрыть таблицу"].exists)
-        XCTAssertFalse(target.exists)
+        XCTAssertFalse(leaked.exists)
+        XCTAssertFalse(masked.exists)
         for _ in 0..<7 {
             if next.isHittable { break }
             app.swipeDown()
@@ -442,11 +455,14 @@ final class PolskiGrammarUITests: XCTestCase {
         }
         XCTAssertTrue(restored.waitForExistence(timeout: 5))
         XCTAssertTrue(restored.isEnabled)
+        // This chain step is also an accusative-target exercise (tags = ["past", "acc"]), so
+        // before its own reveal the same row must stay masked, not show the real answer again.
         for _ in 0..<7 {
-            if target.exists { break }
+            if masked.exists { break }
             app.swipeUp()
         }
-        XCTAssertTrue(target.exists)
+        XCTAssertTrue(masked.exists)
+        XCTAssertFalse(leaked.exists)
     }
 
     func testMethodSwitchKeepsTypedDraftThroughRevealAndOneReview() {
