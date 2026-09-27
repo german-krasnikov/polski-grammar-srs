@@ -156,4 +156,27 @@ class EndingHighlightTest {
         assertEquals(emptyList(), before.filter(EndingPart::isChanged))
         assertEquals(emptyList(), after.filter(EndingPart::isChanged))
     }
+
+    // S4 (EmphasisUXAudit E7): a style block's own prose (formula/rule/scene/examples/why) is
+    // highlighted only from the skill's explicit `focus.before → focus.after` pair — never parsed
+    // heuristically. A literal occurrence of either phrase gets the matching role; free prose that
+    // contains neither phrase verbatim stays a single unmarked part.
+    @Test
+    fun styleTextHighlightsOnlyLiteralOccurrencesOfTheExplicitPair() {
+        val parts = styleTextHighlightParts("Widzę mojej siostry, a nie ich.", "mojej", "ich")
+        assertEquals("Widzę mojej siostry, a nie ich.", parts.joinToString("") { it.text })
+        assertEquals(listOf("mojej", "ich"), parts.filter(EndingPart::isChanged).map(EndingPart::text))
+    }
+
+    @Test
+    fun styleTextWithoutTheExplicitPairStaysWhollyUnmarked() {
+        val parts = styleTextHighlightParts("Прямой объект после глаголов действия обычно стоит в винительном.", "moja siostra", "moją siostrę")
+        assertEquals(listOf(EndingPart("Прямой объект после глаголов действия обычно стоит в винительном.", false)), parts)
+    }
+
+    @Test
+    fun styleTextWithAnUnchangedPairNeverHighlightsIt() {
+        val parts = styleTextHighlightParts("widzę moje duże morze", "moje duże morze", "moje duże morze")
+        assertEquals(emptyList(), parts.filter(EndingPart::isChanged))
+    }
 }

@@ -28,8 +28,8 @@ class CourseDataStyleContentTest {
         val content = parseSkillStyleContent(json)
         assertEquals(
             listOf(
-                NativeParallelPair("Не вижу жену.", "Nie widzę żony.", "падеж", matches = false),
-                NativeParallelPair("Не вижу книгу.", "Nie widzę książki.", "падеж 2", matches = false),
+                NativeParallelPair("Не вижу жену.", "Nie widzę żony.", "падеж", matches = false, targetParts = emptyList()),
+                NativeParallelPair("Не вижу книгу.", "Nie widzę książki.", "падеж 2", matches = false, targetParts = emptyList()),
             ),
             content.nativeParallel,
         )

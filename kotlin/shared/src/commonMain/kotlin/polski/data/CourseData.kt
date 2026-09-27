@@ -680,8 +680,10 @@ private fun JsonObject.toSkillStyleContent(): SkillStyleContent = SkillStyleCont
 
 private fun JsonObject.toTableRow(): TableRow = TableRow(string("label"), endingParts("before"), endingParts("after"))
 
+/** [NativeParallelPair.targetParts] is filled in later, at compose time, from the skill's own
+ *  explicit `focus` pair (EmphasisUXAudit E7/S4) — this raw course-data parse knows no exercise. */
 private fun JsonObject.toNativeParallelPair(): NativeParallelPair =
-    NativeParallelPair(string("native"), string("target"), string("note"), getValue("matches").jsonPrimitive.boolean)
+    NativeParallelPair(string("native"), string("target"), string("note"), getValue("matches").jsonPrimitive.boolean, targetParts = emptyList())
 
 private fun JsonObject.endingParts(key: String): List<EndingPart> = rows(key).map { part ->
     EndingPart(part.string("text"), part.getValue("isEnding").jsonPrimitive.boolean, part.getValue("isChanged").jsonPrimitive.boolean)

@@ -3,8 +3,13 @@ package polski.presentation
 import polski.data.courseStemAlternations
 import polski.model.FormChange
 
-/** Display-only fragment; form text and review identity remain unchanged. */
-data class EndingPart(val text: String, val isEnding: Boolean, val isChanged: Boolean = false)
+/** Display-only fragment; form text and review identity remain unchanged. [side] is the role a
+ *  changed fragment plays (Emphasis contract: "before" = warm/dashed, "after" = cool/solid) — set
+ *  only on [isChanged] fragments produced by [changeHighlightParts]; a host must render two
+ *  changed fragments differently when [side] differs, even within one running block of prose
+ *  (EmphasisUXAudit E7/S4/W3 correction: a mixed-role list, e.g. from [styleTextHighlightParts],
+ *  cannot be classed as a single role by its caller alone). */
+data class EndingPart(val text: String, val isEnding: Boolean, val isChanged: Boolean = false, val side: ChangeSide? = null)
 
 /**
  * One regular stem alternation the active language pack declares (e.g. Polish `ó~o`, `ą~ę`),
@@ -56,11 +61,11 @@ fun changeHighlightParts(
     val oldWords = from.split(' ')
     val newWords = to.split(' ')
     if (oldWords.any(String::isEmpty) || newWords.any(String::isEmpty)) {
-        return listOf(EndingPart(if (side == ChangeSide.Before) from else to, false, from != to))
+        return listOf(EndingPart(if (side == ChangeSide.Before) from else to, false, from != to, side))
     }
     if (oldWords.size != newWords.size) {
         return singleWordInsertionOrDeletionParts(oldWords, newWords, side)
-            ?: listOf(EndingPart(if (side == ChangeSide.Before) from else to, false, from != to))
+            ?: listOf(EndingPart(if (side == ChangeSide.Before) from else to, false, from != to, side))
     }
     val selected = if (side == ChangeSide.Before) oldWords else newWords
     return buildList {
@@ -93,9 +98,9 @@ fun changeHighlightParts(
                 newSuffix.all(Char::isLetter) && oldSuffix.all(Char::isLetter)
             if (reliable) {
                 if (prefix > 0) add(EndingPart(core.substring(0, prefix), false))
-                if (prefix < core.length) add(EndingPart(core.substring(prefix), true, true))
+                if (prefix < core.length) add(EndingPart(core.substring(prefix), true, true, side))
                 if (trailing.isNotEmpty()) add(EndingPart(trailing, false))
-            } else add(EndingPart(word, false, true))
+            } else add(EndingPart(word, false, true, side))
         }
     }
 }
@@ -125,7 +130,8 @@ private fun singleWordInsertionOrDeletionParts(
     return buildList {
         words.forEachIndexed { index, word ->
             if (index > 0) add(EndingPart(" ", false))
-            add(EndingPart(word, false, onLongerSide && index == extraIndex))
+            val changed = onLongerSide && index == extraIndex
+            add(EndingPart(word, false, changed, if (changed) side else null))
         }
     }
 }
@@ -160,5 +166,31 @@ fun sentenceHighlightParts(sentence: String, changes: List<FormChange>, side: Ch
             cursor = start + phrase.length
         }
         if (cursor < sentence.length) add(EndingPart(sentence.substring(cursor), false))
+    }
+}
+
+/**
+ * Highlights a style block's own prose ([text]: formula/rule/scene/nativeParallel-target/examples
+ * /why) from one explicit pack pair — a skill's `focus.before`/`focus.after` (UC-10), never the
+ * current exercise's own answer, so a style block carries no more than it always has before reveal
+ * (Emphasis contract §5; EmphasisUXAudit E7). A literal, whole-word occurrence of [from] gets
+ * "before"-role parts, of [to] gets "after"-role parts. Free prose is never parsed heuristically:
+ * when neither phrase occurs verbatim, [text] stays a single unmarked [EndingPart] (contract rule
+ * 6 — no highlight beats a wrong one).
+ */
+fun styleTextHighlightParts(text: String, from: String, to: String): List<EndingPart> {
+    val spans = listOfNotNull(
+        wholePhraseStart(text, from).takeIf { it >= 0 }?.let { Triple(it, from, ChangeSide.Before) },
+        wholePhraseStart(text, to).takeIf { it >= 0 && to != from }?.let { Triple(it, to, ChangeSide.After) },
+    ).sortedBy { it.first }
+    return buildList {
+        var cursor = 0
+        spans.forEach { (start, phrase, side) ->
+            if (start < cursor) return@forEach
+            if (start > cursor) add(EndingPart(text.substring(cursor, start), false))
+            addAll(changeHighlightParts(from, to, side))
+            cursor = start + phrase.length
+        }
+        if (cursor < text.length) add(EndingPart(text.substring(cursor), false))
     }
 }
