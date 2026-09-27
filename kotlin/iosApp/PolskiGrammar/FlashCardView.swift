@@ -1,81 +1,90 @@
 import SwiftUI
 
-/// Native 3D flip card for the training screen (`Plans/Kotlin/FlipCardRivePlan.md` FC-11/13/14).
+/// Task/grammar card for the training screen (`Plans/Kotlin/FlipCardRivePlan.md` D1, replacing the
+/// earlier native 3D flip, FC-11/13/14/FC2-05).
 ///
-/// The flip is purely a host-local visual state (`flipped`): it never dispatches an `AppAction` and
-/// never reads or mutates `CardPhase`/FSRS (contract in the plan's §0). A tap only turns the card
-/// while `phase == "Revealed"` — there is no answer face to show before that, so a tap during
-/// `Question` is a no-op by construction, which is also why a typed answer's `TextField` never needs
-/// its own tap-exclusion: the whole front face ignores taps until revealed. `Reveal` auto-flips the
-/// card to its back once (`onChange(of: state.phase)`); flipping back afterwards is purely visual.
+/// D1: no 3D flip. The question stays on screen and the answer/explanation/rating panel unfolds
+/// below it — a plain SwiftUI insertion transition (`.move(edge: .top)` + opacity), spring-eased,
+/// with a short per-section stagger via [staggeredReveal]. This is purely a host-local visual
+/// state (`revealed`): it never dispatches an `AppAction` itself — only the existing "reveal"
+/// action (from the reveal button, or now also a tap on the question) does, and `revealed` is
+/// always driven downstream of `state.phase` becoming `"Revealed"` (`onChange` below), mirroring
+/// how the old flip's own visual state used to stay downstream of the same phase change.
 ///
-/// Only one face is ever mounted at a time — split at the rotation's halfway point, mirroring the
-/// Android `AndroidFlipCard`'s equivalent split — rather than mounting both permanently: this file's
-/// `TrainingView` embeds the card as a single `Form`/`List` row (see the `.listRowInsets` call site
-/// in `PolskiGrammarApp.swift`, the same pattern already used for `StudyHero`), and a real 3D
-/// transform fights row-splitting if the builder emits more than one top-level child. The back
-/// face's own content carries a `-180°` counter-rotation so its text isn't mirrored once it swaps in
-/// past the 90° mark (the same anti-mirror technique `AndroidFlipCard` uses for `rotationY`).
+/// Reveal happens **exactly once**: the tap gesture that triggers it is only ever attached while
+/// `phase == "Question"` (and not `introPending`, which has no answer yet), so once the phase
+/// flips to `"Revealed"` the gesture is gone and tapping the now-visible answer panel is a no-op —
+/// there is no flip-back, D1 is one-directional. The gesture is attached to [questionHeader] only,
+/// never to an ancestor of the Question-only `Picker`/`TextField` in [answerControls]: those are a
+/// sibling subtree, exactly the split the web host's own tap-vs-controls DOM structure uses
+/// (`TrainingWebApp.kt`'s `front` vs `answer-area`), so the tap gesture can never intercept a tap
+/// meant for the Picker's popup or the TextField's focus — the same class of bug FC2 fixed for the
+/// old flip's tap gesture.
 struct FlashCardView<RevealButton: View>: View {
     @ObservedObject var model: AppModel
     let state: Record
     let card: Record
     @Binding var localDraft: String
     var answerFocused: FocusState<Bool>.Binding
-    /// FC-09/12/14/20's shared gate (system Reduce Motion OR the app's `Motion.Reduced`): snaps the
-    /// flip instead of animating it. Computed once by the caller (`TrainingView.cardMotionReduced`).
+    /// Snaps the reveal instead of animating it: system Reduce Motion OR the app's `Motion.Reduced`
+    /// (computed once by the caller, `TrainingView.cardMotionReduced`).
     let reduceMotion: Bool
     let revealButton: (_ title: String, _ expands: Bool) -> RevealButton
 
-    @State private var flipped = false
-    @State private var showBack = false
-    @State private var rotation: Double = 0
+    @State private var revealed = false
+
+    private var introPending: Bool { state.bool("introPending") && state.string("phase") == "Question" }
+    private var tapToRevealEnabled: Bool { state.string("phase") == "Question" && !introPending }
 
     var body: some View {
-        Group {
-            // `rotation == 0` at rest (showing the front, not mid-flip) skips the `rotation3DEffect`
-            // modifier entirely rather than applying it with `.degrees(0)`: even a nominally-identity
-            // 3D transform ancestor confused a Menu-style Picker's popup anchoring in an XCUITest run
-            // (the "Ответ" answer-mode picker's "Напечатать" option became untappable) — the modifier
-            // is only ever load-bearing while genuinely mid-animation or showing the back.
-            if showBack {
-                backFace.rotation3DEffect(.degrees(-180), axis: (x: 0, y: 1, z: 0))
-                    .rotation3DEffect(.degrees(rotation), axis: (x: 0, y: 1, z: 0), perspective: 0.35)
-            } else if rotation == 0 {
-                frontFace
-            } else {
-                frontFace.rotation3DEffect(.degrees(rotation), axis: (x: 0, y: 1, z: 0), perspective: 0.35)
+        VStack(alignment: .leading, spacing: 12) {
+            questionHeader
+                .contentShape(Rectangle())
+                .onTapGesture { if tapToRevealEnabled { model.send("reveal") } }
+            if state.string("phase") == "Question" {
+                answerControls
+            }
+            if revealed {
+                answerFace
             }
         }
         .onChange(of: state.string("phase")) { _, phase in
-            if phase == "Revealed" { setFlipped(true) }
+            if phase == "Revealed" { setRevealed(true) }
         }
-        // A new exercise is always shown face-up on its question, regardless of how the previous
-        // card was left — never animated, so the next question never visibly "un-flips".
-        .onChange(of: card.string("id")) { _, _ in setFlipped(false, animated: false) }
-        .onAppear { setFlipped(state.string("phase") == "Revealed", animated: false) }
+        // A new exercise is always shown unrevealed, regardless of how the previous card was left
+        // — never animated, so the next question never visibly "un-reveals".
+        .onChange(of: card.string("id")) { _, _ in setRevealed(false, animated: false) }
+        .onAppear { setRevealed(state.string("phase") == "Revealed", animated: false) }
     }
 
-    private func setFlipped(_ newValue: Bool, animated: Bool = true) {
-        flipped = newValue
-        if animated && !reduceMotion {
-            withAnimation(.easeInOut(duration: 0.5)) { rotation = newValue ? 180 : 0 }
-            // Swap the mounted face at the halfway point, once it is edge-on and invisible, matching
-            // AndroidFlipCard's `angle >= 90f` split.
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) { showBack = newValue }
-        } else {
-            rotation = newValue ? 180 : 0
-            showBack = newValue
+    private func setRevealed(_ newValue: Bool, animated: Bool = true) {
+        guard revealed != newValue else { return }
+        guard animated && !reduceMotion else {
+            revealed = newValue
+            return
+        }
+        withAnimation(.spring(response: 0.42, dampingFraction: 0.86)) {
+            revealed = newValue
         }
     }
 
-    @ViewBuilder private var frontFace: some View {
-        let content = VStack(alignment: .leading, spacing: 12) {
+    /// D1's stagger: each answer section gets its own `AnyTransition.animation(...)`, which
+    /// overrides the animation SwiftUI uses for *that view's own insertion* independent of the
+    /// outer `withAnimation` above — the supported way to stagger transitions in SwiftUI. `index`
+    /// zero is the first section to appear; each later one is delayed a little more.
+    private func staggeredReveal(_ index: Int) -> AnyTransition {
+        let animation: Animation? = reduceMotion ? nil
+            : .spring(response: 0.42, dampingFraction: 0.86).delay(Double(index) * 0.05)
+        return .move(edge: .top).combined(with: .opacity).animation(animation)
+    }
+
+    @ViewBuilder private var questionHeader: some View {
+        VStack(alignment: .leading, spacing: 12) {
             Text("Исходное предложение").font(.caption).foregroundStyle(.secondary)
             highlightedSentence(card.rows("sourceParts"), before: true)
                 .font(.system(.title2, design: .rounded, weight: .semibold))
                 .accessibilityLabel(card.string("source"))
-            if state.bool("introPending") && state.string("phase") == "Question" {
+            if introPending {
                 Text("Знакомство с навыком").font(.headline)
                 Text(card.string("methodIntroduce"))
                 Button("Перейти к заданию") { model.send("continueIntroduction") }
@@ -86,69 +95,69 @@ struct FlashCardView<RevealButton: View>: View {
                     .font(.headline)
                     .foregroundStyle(.primary)
                 Text(card.string("methodLead")).font(.footnote).foregroundStyle(.secondary)
-                if state.string("phase") == "Question" {
-                    Text(card.string("methodRetrieve"))
-                    Picker("Ответ", selection: Binding(get: { state.string("answerMode") }, set: { model.send("answerMode", $0) })) {
-                        Text("Вслух / про себя").tag("Oral")
-                        Text("Напечатать").tag("Typed")
-                    }
-                    if state.string("answerMode") == "Typed" {
-                        TextField("Ответ по-польски", text: Binding(get: { localDraft }, set: {
-                            localDraft = $0
-                            model.send("draft", $0)
-                        }), axis: .vertical)
-                            .lineLimit(2...5).textInputAutocapitalization(.sentences)
-                            .focused(answerFocused)
-                            .accessibilityLabel("Ответ по-польски")
-                            .accessibilityIdentifier("typedAnswer")
-                    } else {
-                        Text("Произнеси целое предложение, затем покажи ответ.").foregroundStyle(.secondary)
-                    }
-                    if state.string("answerMode") != "Typed" || !answerFocused.wrappedValue {
-                        revealButton(state.string("answerMode") == "Typed" ? "Проверить ответ" : "Показать ответ", true)
-                    }
-                }
             }
-        }
-        // The tap-to-flip recognizer is only ever attached while `phase == "Revealed"` — exactly
-        // when the Question-only Picker/TextField/reveal button above are absent from this view —
-        // rather than always-attached-but-guarded in its closure. A UI test caught a real
-        // regression from the always-attached form: merely having a `.onTapGesture` ancestor (even
-        // one whose closure is a no-op during Question) broke the `Picker`'s own "Ответ" menu-style
-        // popup, making its "Напечатать" option untappable in XCUITest. Scoping the modifier itself
-        // to Revealed — when there is no competing control underneath — avoids that conflict instead
-        // of merely working around its symptom.
-        if state.string("phase") == "Revealed" {
-            content.contentShape(Rectangle()).onTapGesture { setFlipped(true) }
-        } else {
-            content
         }
     }
 
-    @ViewBuilder private var backFace: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Text("Эталон").font(.caption).foregroundStyle(.secondary)
-            highlightedSentence(card.rows("expectedParts"), before: false)
-                .font(.system(.title2, design: .rounded, weight: .semibold))
-                .accessibilityLabel(card.string("expected"))
-            if !card.strings("accepted").isEmpty { Text("Также: \(card.strings("accepted").joined(separator: " / "))") }
-            if state.string("answerMode") == "Typed" {
-                Label(card.bool("correct") ? "Совпадает с правильным вариантом" : "Сравни свой ответ с эталоном",
-                      systemImage: card.bool("correct") ? "checkmark.circle" : "info.circle")
-                Text(card.string("frozenAnswer").isEmpty ? "Ответ не введён" : card.string("frozenAnswer"))
-            }
-            if state.string("explanationMethod") == "Situations" {
-                Text(card.string("methodFeedback"))
-                Text(card.string("explanation"))
-            }
-            Text("Что изменилось").font(.headline)
-            ForEach(Array(card.rows("changes").enumerated()), id: \.offset) { _, change in
-                VStack(alignment: .leading, spacing: 3) {
-                    (Text("Было: ") + Text(change.string("from")).foregroundColor(Color(uiColor: .systemRed)).underline()
-                     + Text(" → Стало: ") + highlightedNewForm(change))
-                    Text(change.string("reason")).foregroundStyle(.secondary)
+    @ViewBuilder private var answerControls: some View {
+        if !introPending {
+            VStack(alignment: .leading, spacing: 12) {
+                Text(card.string("methodRetrieve"))
+                Picker("Ответ", selection: Binding(get: { state.string("answerMode") }, set: { model.send("answerMode", $0) })) {
+                    Text("Вслух / про себя").tag("Oral")
+                    Text("Напечатать").tag("Typed")
+                }
+                if state.string("answerMode") == "Typed" {
+                    TextField("Ответ по-польски", text: Binding(get: { localDraft }, set: {
+                        localDraft = $0
+                        model.send("draft", $0)
+                    }), axis: .vertical)
+                        .lineLimit(2...5).textInputAutocapitalization(.sentences)
+                        .focused(answerFocused)
+                        .accessibilityLabel("Ответ по-польски")
+                        .accessibilityIdentifier("typedAnswer")
+                } else {
+                    Text("Произнеси целое предложение, затем покажи ответ.").foregroundStyle(.secondary)
+                }
+                if state.string("answerMode") != "Typed" || !answerFocused.wrappedValue {
+                    revealButton(state.string("answerMode") == "Typed" ? "Проверить ответ" : "Показать ответ", true)
                 }
             }
+        }
+    }
+
+    @ViewBuilder private var answerFace: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            VStack(alignment: .leading, spacing: 12) {
+                Text("Эталон").font(.caption).foregroundStyle(.secondary)
+                highlightedSentence(card.rows("expectedParts"), before: false)
+                    .font(.system(.title2, design: .rounded, weight: .semibold))
+                    .accessibilityLabel(card.string("expected"))
+                if !card.strings("accepted").isEmpty { Text("Также: \(card.strings("accepted").joined(separator: " / "))") }
+                if state.string("answerMode") == "Typed" {
+                    Label(card.bool("correct") ? "Совпадает с правильным вариантом" : "Сравни свой ответ с эталоном",
+                          systemImage: card.bool("correct") ? "checkmark.circle" : "info.circle")
+                    Text(card.string("frozenAnswer").isEmpty ? "Ответ не введён" : card.string("frozenAnswer"))
+                }
+                if state.string("explanationMethod") == "Situations" {
+                    Text(card.string("methodFeedback"))
+                    Text(card.string("explanation"))
+                }
+            }
+            .transition(staggeredReveal(0))
+
+            VStack(alignment: .leading, spacing: 6) {
+                Text("Что изменилось").font(.headline)
+                ForEach(Array(card.rows("changes").enumerated()), id: \.offset) { _, change in
+                    VStack(alignment: .leading, spacing: 3) {
+                        (Text("Было: ") + Text(change.string("from")).foregroundColor(Color(uiColor: .systemRed)).underline()
+                         + Text(" → Стало: ") + highlightedNewForm(change))
+                        Text(change.string("reason")).foregroundStyle(.secondary)
+                    }
+                }
+            }
+            .transition(staggeredReveal(1))
+
             VStack(alignment: .leading, spacing: 7) {
                 Text("ЗАПОМНИ").font(.caption.weight(.semibold))
                 Text(card.string("formula")).font(.headline).bold()
@@ -160,44 +169,39 @@ struct FlashCardView<RevealButton: View>: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(14)
             .background(Color.accentColor.opacity(0.12), in: RoundedRectangle(cornerRadius: 16))
+            .transition(staggeredReveal(2))
+
             VStack(alignment: .leading, spacing: 9) {
                 Text("Когда повторить?").font(.headline)
                 Text(card.string("methodReview"))
                 Text("Свайп влево — повторить · вправо — вспомнил")
                     .font(.footnote).foregroundStyle(.secondary)
+                    // See `SwipeToRate`'s own doc comment for why this identifier lives on this
+                    // long-text leaf specifically, and not on the shared gesture container.
                     .accessibilityIdentifier("ratingSwipeArea")
-                HStack(spacing: 8) {
-                    ForEach([("Again", "Повторить"), ("Good", "Вспомнил")], id: \.0) { rating, label in
-                        Button {
-                            model.send("rate", rating)
-                        } label: {
-                            VStack(alignment: .leading, spacing: 3) {
-                                Text(label).fontWeight(.semibold)
-                                Text(formattedDate(card.record("intervals").int64(rating)))
-                                    .font(.caption).foregroundStyle(.secondary)
-                            }
-                            .frame(maxWidth: .infinity, minHeight: 48, alignment: .leading)
-                        }
-                        .buttonStyle(.bordered)
-                        .accessibilityIdentifier("rate\(rating)")
+                    // VoiceOver intercepts raw finger drags for its own navigation, so the swipe
+                    // gesture above is unreachable with VoiceOver on. These two rotor actions,
+                    // reached via VoiceOver's Actions rotor once focus lands on this hint, are the
+                    // only rating path for a VoiceOver user — no visible button is added.
+                    .accessibilityActions {
+                        Button("Повторить") { rate(remembered: false) }
+                        Button("Вспомнил") { rate(remembered: true) }
                     }
-                }
             }
             .padding(.vertical, 4)
+            .transition(staggeredReveal(3))
         }
-        // FC-04/05/07: one gesture on the whole revealed back face (relocated from the narrow
-        // "Когда повторить?" strip) — a tap flips back to the front, a horizontal drag past the
-        // threshold rates. `.simultaneousGesture` (not `.gesture`) keeps this from blocking the
-        // enclosing `Form`'s vertical scroll, exactly as this drag already worked pre-relocation.
-        .contentShape(Rectangle())
-        .onTapGesture { setFlipped(false) }
-        .simultaneousGesture(DragGesture(minimumDistance: 18).onEnded { gesture in
-            guard state.string("phase") == "Revealed" else { return }
-            let x = gesture.translation.width
-            let y = gesture.translation.height
-            guard abs(x) >= 80, abs(x) > abs(y) * 1.5 else { return }
-            model.send("rate", x < 0 ? "Again" : "Good")
-        })
+        // D3: no rating buttons on touch — the whole panel above is the swipe-to-rate gesture
+        // surface. D1 already removed the flip-back tap this container used to share with the old
+        // drag, so there is no reverse action on this panel any more, only the rating drag.
+        .swipeToRate(active: state.string("phase") == "Revealed", reduceMotion: reduceMotion) { remembered in
+            rate(remembered: remembered)
+        }
+    }
+
+    private func rate(remembered: Bool) {
+        guard state.string("phase") == "Revealed" else { return }
+        model.send("rate", remembered ? "Good" : "Again")
     }
 }
 

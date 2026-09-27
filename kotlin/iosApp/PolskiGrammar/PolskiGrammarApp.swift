@@ -81,6 +81,10 @@ extension Dictionary where Key == String, Value == Any {
     func int(_ key: String) -> Int { (self[key] as? NSNumber)?.intValue ?? 0 }
     func int64(_ key: String) -> Int64? { (self[key] as? NSNumber)?.int64Value }
     func bool(_ key: String) -> Bool { (self[key] as? Bool) ?? false }
+    /// Like [bool] but missing-key means enabled, not disabled — for `animationsEnabled`, whose own
+    /// decode default is `true` (see `UserPreferences.kt`), so an empty `preferences` snapshot
+    /// during the first frame of `AppModel.init` never reads as animations-off.
+    func bool(_ key: String, default defaultValue: Bool) -> Bool { (self[key] as? Bool) ?? defaultValue }
     func record(_ key: String) -> Record { self[key] as? Record ?? [:] }
     func rows(_ key: String) -> [Record] { self[key] as? [Record] ?? [] }
     func strings(_ key: String) -> [String] { self[key] as? [String] ?? [] }
@@ -116,14 +120,19 @@ final class AppModel: ObservableObject {
     @Published var resetEffectId: Int64?
     @Published var focusEffectId: Int64?
     @Published var cardEffect: CardEffectEvent?
+    /// D3: the vocabulary card's own decorative Rive rating cue — mirrors [cardEffect] exactly,
+    /// but kept as a separate published property so a training rating never re-triggers the
+    /// vocabulary overlay (and vice versa) purely because `CardEffectEvent` is `Equatable`.
+    @Published var vocabularyCardEffect: CardEffectEvent?
     var focusExerciseId: String?
     private let session = IosSession(defaults: .standard)
-    private let vocabulary = IosVocabularySession()
+    private let vocabulary = IosVocabularySession(defaults: .standard)
     private let preferencesSession = IosPreferencesSession(defaults: .standard)
     private var lastSnapshot = ""
     private var claimedEffects = Set<Int64>()
     private var vocabularyRefreshTimer: Timer?
     private var effectCounter = 0
+    private var vocabularyEffectCounter = 0
 
     init() {
         session.onState = { [weak self] json in
@@ -142,6 +151,14 @@ final class AppModel: ObservableObject {
         }
         vocabulary.onState = { [weak self] json in
             DispatchQueue.main.async { self?.receiveVocabulary(json) }
+        }
+        // D3: mirrors `session.onEffect` above for the vocabulary card's own Rive rating cue.
+        vocabulary.onEffect = { [weak self] name in
+            DispatchQueue.main.async {
+                guard let self else { return }
+                self.vocabularyEffectCounter += 1
+                self.vocabularyCardEffect = CardEffectEvent(id: self.vocabularyEffectCounter, name: name)
+            }
         }
         preferencesSession.onState = { [weak self] json in
             DispatchQueue.main.async { self?.receivePreferences(json) }
@@ -328,6 +345,18 @@ struct PolskiGrammarApp: App {
     @State private var importingPreferences = false
     @State private var exportingPreferences = false
     @State private var preferencesFile: ProgressFile?
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    // D4: direction the *next* tab switch should slide in from — updated in `onChange(of:)`
+    // below, strictly before the switch's own body re-renders with the new `tab`, so the
+    // transition this drives is always keyed by the switch that is actually happening.
+    @State private var pagingEdge: Edge = .trailing
+    private let tabOrder = ["Training", "Matrix", "Progress", "Vocabulary"]
+    private let tabBarItems = [
+        TabBarItem(tag: "Training", title: "Тренировка", icon: "square.stack"),
+        TabBarItem(tag: "Matrix", title: "Матрица", icon: "tablecells"),
+        TabBarItem(tag: "Progress", title: "Прогресс", icon: "chart.bar"),
+        TabBarItem(tag: "Vocabulary", title: "Слова", icon: "character.book.closed"),
+    ]
 
     var body: some Scene {
         WindowGroup {
@@ -337,20 +366,30 @@ struct PolskiGrammarApp: App {
                 if let error = model.state["error"] as? String {
                     ErrorBanner(message: error) { model.send("export") }
                 }
-                TabView(selection: Binding(
-                    get: { model.state.string("tab") },
-                    set: { model.send("tab", $0) }
-                )) {
-                    NavigationStack { TrainingView(model: model).toolbar { settingsToolbar } }
-                        .tabItem { Label("Тренировка", systemImage: "square.stack") }.tag("Training")
-                    NavigationStack { MatrixView(model: model).toolbar { settingsToolbar } }
-                        .tabItem { Label("Матрица", systemImage: "tablecells") }.tag("Matrix")
-                    NavigationStack { ProgressView(model: model, importing: $importing).toolbar { settingsToolbar } }
-                        .tabItem { Label("Прогресс", systemImage: "chart.bar") }.tag("Progress")
-                    NavigationStack { VocabularyView(model: model, importing: $importingVocabulary,
-                        exporting: $exportingVocabulary, exportFile: $vocabularyFile).toolbar { settingsToolbar } }
-                        .tabItem { Label("Слова", systemImage: "character.book.closed") }.tag("Vocabulary")
+                // D4: a custom paging container, not `TabView` — `TabView` swaps tab content
+                // instantly with no transition slot, so there is no way to make old/new content
+                // slide together from it. Only the *active* tab's subtree is mounted (matching
+                // `TabView`'s own accessibility behavior: an inactive tab's elements must not be
+                // independently discoverable), so `.transition` on the `if` below sees a real
+                // insertion/removal, not just a value change, for exactly one tab at a time.
+                ZStack {
+                    ForEach(tabOrder, id: \.self) { tab in
+                        if tab == model.state.string("tab") {
+                            tabContent(tab)
+                                .transition(.asymmetric(
+                                    insertion: .move(edge: pagingEdge),
+                                    removal: .move(edge: pagingEdge == .trailing ? .leading : .trailing)))
+                        }
+                    }
                 }
+                .animation(motionActive ? .easeOut(duration: 0.3) : nil, value: model.state.string("tab"))
+                .onChange(of: model.state.string("tab")) { old, new in
+                    let oldIndex = tabOrder.firstIndex(of: old) ?? 0
+                    let newIndex = tabOrder.firstIndex(of: new) ?? 0
+                    pagingEdge = newIndex >= oldIndex ? .trailing : .leading
+                }
+                Divider()
+                PagingTabBar(selected: model.state.string("tab"), items: tabBarItems) { model.send("tab", $0) }
             }
             .fileImporter(isPresented: $importing, allowedContentTypes: [.json]) { model.importFile($0) }
             .fileExporter(isPresented: $exporting, document: model.exportFile,
@@ -386,6 +425,29 @@ struct PolskiGrammarApp: App {
             }
             .tint(Color(uiColor: .systemTeal))
             .preferredColorScheme(colorScheme)
+        }
+    }
+
+    /// D4/D5: system Reduce Motion, the app's own `Motion.Reduced` setting, or the "Анимации"
+    /// master switch — same gate shape as `TrainingView.cardMotionReduced`, applied here to the
+    /// tab-paging transition.
+    private var motionActive: Bool {
+        !reduceMotion && model.preferences.string("motion") != "Reduced"
+            && model.preferences.bool("animationsEnabled", default: true)
+    }
+
+    @ViewBuilder
+    private func tabContent(_ tab: String) -> some View {
+        switch tab {
+        case "Training":
+            NavigationStack { TrainingView(model: model).toolbar { settingsToolbar } }
+        case "Matrix":
+            NavigationStack { MatrixView(model: model).toolbar { settingsToolbar } }
+        case "Progress":
+            NavigationStack { ProgressView(model: model, importing: $importing).toolbar { settingsToolbar } }
+        default:
+            NavigationStack { VocabularyView(model: model, importing: $importingVocabulary,
+                exporting: $exportingVocabulary, exportFile: $vocabularyFile).toolbar { settingsToolbar } }
         }
     }
 
@@ -463,6 +525,12 @@ private struct IosSettingsView: View {
                     }
                     Text(reduceMotion ? "Система сокращает движение" : "Системное движение активно")
                         .font(.footnote).foregroundStyle(.secondary)
+                    // D5: master switch — off means no card/tab/reveal animation and, per
+                    // `cardMotionReduced`/`motionActive` above, RiveViewModel is never created.
+                    Toggle("Анимации", isOn: Binding(
+                        get: { model.preferences.bool("animationsEnabled", default: true) },
+                        set: { model.setPreference("animationsEnabled", $0 ? "true" : "false") }
+                    ))
                 }
             }
             Section("Данные настроек") {
@@ -565,6 +633,14 @@ private struct TrainingView: View {
                 switch state.string("phase") {
                 case "ChainComplete":
                     Section(state.string("chainCompletionTitle")) {
+                        // FC2-10 (R3, Pick C): one-shot "Tada" celebration on this completion
+                        // screen, never on the card itself, gated the same way the rating cue is.
+                        if !riveEffectsSuppressed {
+                            RiveChainCompleteOverlay()
+                                .frame(height: 120)
+                                .listRowInsets(EdgeInsets())
+                                .listRowBackground(Color.clear)
+                        }
                         ForEach(Array(state.strings("chainAnswers").enumerated()), id: \.offset) { index, answer in
                             Text("\(index + 1). \(answer)")
                         }
@@ -580,6 +656,8 @@ private struct TrainingView: View {
                     if !card.isEmpty {
                         Section("\(card.string("skillLevel")) · \(card.string("skillTitle"))") {
                             ZStack {
+                                // D1: no more native flip, so there is no flip-in-progress ring cue
+                                // to drive here any more (that overlay's own removal is D3's job).
                                 FlashCardView(
                                     model: model, state: state, card: card,
                                     localDraft: $localDraft, answerFocused: $answerFocused,
@@ -599,16 +677,26 @@ private struct TrainingView: View {
                         model.send("reference")
                     }
                     .disabled(introducing)
+                    // D4/UX4-20..22: expand/collapse animated instead of the Form's default
+                    // instant row insert/remove; content is fully removed while collapsed (not
+                    // just visually shrunk), so there is nothing left over for VoiceOver/Tab to
+                    // reach — no separate `inert` step needed, unlike the web host's height trick.
+                    // `Group` (a real expression) is what `.transition` attaches to; the bare
+                    // `if` above it is a ViewBuilder statement, not something modifiers chain onto.
                     if state.bool("showReference") && !introducing {
-                        ForEach(Array(state.rows("referenceRows").enumerated()), id: \.offset) { _, row in
-                            VStack(alignment: .leading, spacing: 4) {
-                                Text(row.string("title")).font(.headline)
-                                NativeContrastPairView(pair: row.record("pair"))
+                        Group {
+                            ForEach(Array(state.rows("referenceRows").enumerated()), id: \.offset) { _, row in
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text(row.string("title")).font(.headline)
+                                    NativeContrastPairView(pair: row.record("pair"))
+                                }
                             }
+                            Button("Все таблицы и схема") { model.send("tab", "Matrix") }
                         }
-                        Button("Все таблицы и схема") { model.send("tab", "Matrix") }
+                        .transition(.opacity.combined(with: .move(edge: .top)))
                     }
                 }
+                .animation(cardMotionReduced ? nil : .easeOut(duration: 0.25), value: state.bool("showReference"))
             }
         }
         .toolbar {
@@ -645,7 +733,10 @@ private struct TrainingView: View {
     /// FC-09/12/14/20's shared reduced-motion gate: system Reduce Motion or the app's own
     /// `Motion.Reduced` setting, the same pair already used by `.animation(...)` below — both the
     /// card flip and the Rive overlay must snap/skip together with everything else this gates.
-    private var cardMotionReduced: Bool { reduceMotion || model.preferences.string("motion") == "Reduced" }
+    private var cardMotionReduced: Bool {
+        reduceMotion || model.preferences.string("motion") == "Reduced"
+            || !model.preferences.bool("animationsEnabled", default: true)
+    }
 
     /// FC-20's Rive gate, plus the debug-only variant-B override (§5): the flip itself keeps
     /// animating in variant B — only the Rive trigger is suppressed — so this is deliberately
@@ -931,7 +1022,14 @@ private struct VocabularyView: View {
     @Binding var exportFile: ProgressFile?
     @State private var editing: Record?
     @State private var deletingId: String?
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     private var state: Record { model.vocabularyState }
+    // D5: system Reduce Motion OR the app's own `Motion.Reduced` gate the vocabulary flip too,
+    // mirroring `TrainingView.cardMotionReduced`.
+    private var cardMotionReduced: Bool {
+        reduceMotion || model.preferences.string("motion") == "Reduced"
+            || !model.preferences.bool("animationsEnabled", default: true)
+    }
 
     var body: some View {
         Form {
@@ -967,54 +1065,13 @@ private struct VocabularyView: View {
                     if state.string("currentId").isEmpty {
                         Text(state.int("selectedCount") == 0 ? "Выберите слова для тренировки" : "На сейчас всё повторено")
                     } else {
-                        let card = state.record("current")
-                        let polishAnswer = state.string("direction") == "ru-pl"
-                        Text(polishAnswer ? "Вспомни по-польски" : "Вспомни по-русски")
-                            .font(.caption).foregroundStyle(.secondary)
-                        Text(polishAnswer ? card.string("translation") : card.string("lemma"))
-                            .font(.title2.weight(.semibold))
-                        if !state.bool("revealed") {
-                            Toggle("Напечатать ответ", isOn: Binding(
-                                get: { state.bool("typed") },
-                                set: { model.sendVocabulary("typed", $0 ? "true" : "false") }
-                            ))
-                            if state.bool("typed") {
-                                TextField("Твой ответ", text: Binding(
-                                    get: { state.string("draft") },
-                                    set: { model.sendVocabulary("draft", $0) }
-                                ))
-                                .textInputAutocapitalization(.never)
-                            }
-                            Button("Показать ответ") { model.sendVocabulary("reveal") }
-                                .accessibilityIdentifier("vocabularyReveal")
-                        } else {
-                            Text(polishAnswer ? card.string("lemma") : card.string("translation"))
-                                .font(.title2.weight(.bold))
-                            LabeledContent("Перевод", value: card.string("translation"))
-                            LabeledContent("Форма", value: card.string("form"))
-                            Text(card.string("example"))
-                                .font(.callout)
-                            if state.bool("typed") {
-                                Text("Твой ответ: \(state.string("draft")). Сравни сам и выбери оценку.")
-                                    .font(.footnote)
-                            }
-                            HStack {
-                                Button("Повторить") { model.sendVocabulary("again") }
-                                    .buttonStyle(.bordered)
-                                    .accessibilityIdentifier("vocabularyAgain")
-                                Spacer()
-                                Button("Вспомнил") { model.sendVocabulary("good") }
-                                    .buttonStyle(.borderedProminent)
-                                    .accessibilityIdentifier("vocabularyGood")
-                            }
-                            .disabled(state.bool("busy"))
-                            .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                                Button("Повторить") { model.sendVocabulary("again") }.tint(.orange)
-                            }
-                            .swipeActions(edge: .leading, allowsFullSwipe: true) {
-                                Button("Вспомнил") { model.sendVocabulary("good") }.tint(.green)
-                            }
+                        ZStack {
+                            VocabularyCardView(model: model, state: state, card: state.record("current"),
+                                               reduceMotion: cardMotionReduced)
+                            RiveEffectOverlay(effect: model.vocabularyCardEffect, reduceMotion: cardMotionReduced)
                         }
+                        .listRowInsets(EdgeInsets())
+                        .listRowBackground(Color.clear)
                     }
                 }
                 Section("Мой словарь · \(state.int("selectedCount"))") {

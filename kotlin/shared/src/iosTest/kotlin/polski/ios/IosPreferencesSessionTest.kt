@@ -8,11 +8,15 @@ import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 import platform.Foundation.NSUserDefaults
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.boolean
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 import polski.preferences.PreferencesDecode
 import polski.preferences.UserPreferencesCodec
 import polski.preferences.UserPreferencesV2
+
+private fun IosPreferencesSession.snapshotBool(key: String) =
+    Json.parseToJsonElement(currentSnapshot()).jsonObject.getValue(key).jsonPrimitive.boolean
 
 class IosPreferencesSessionTest {
     @Test
@@ -71,6 +75,27 @@ class IosPreferencesSessionTest {
             val saved = assertIs<PreferencesDecode.Loaded>(UserPreferencesCodec.decode(assertNotNull(session.exportJson()))).value
             assertEquals(87, saved.glassTintPercent)
             assertEquals("Dark", saved.appearance.name)
+        } finally {
+            defaults.removePersistentDomainForName(suite)
+        }
+    }
+
+    @Test
+    fun animationsEnabledDefaultsToTrueAndPersistsAcrossRestart() {
+        val suite = "polski-ios-preferences-animations-${Random.nextLong()}"
+        val defaults = assertNotNull(NSUserDefaults(suiteName = suite))
+        defaults.removePersistentDomainForName(suite)
+        try {
+            val session = IosPreferencesSession(defaults)
+            assertEquals(true, session.snapshotBool("animationsEnabled"))
+            assertEquals("Неверное значение", session.set(field = "animationsEnabled", value = "maybe"))
+            assertNull(session.set(field = "animationsEnabled", value = "false"))
+            assertEquals(false, session.snapshotBool("animationsEnabled"))
+
+            val restarted = IosPreferencesSession(defaults)
+            assertEquals(false, restarted.snapshotBool("animationsEnabled"))
+            val saved = assertIs<PreferencesDecode.Loaded>(UserPreferencesCodec.decode(assertNotNull(restarted.exportJson()))).value
+            assertEquals(false, saved.animationsEnabled)
         } finally {
             defaults.removePersistentDomainForName(suite)
         }

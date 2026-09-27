@@ -100,26 +100,6 @@ final class FlipRivePerfUITests: XCTestCase {
         XCTAssertTrue(back.waitForExistence(timeout: 5), app.debugDescription)
     }
 
-    /// One flip round trip: back-face -> front-face -> back-face, ending in the same state it
-    /// started in so the next iteration is repeatable.
-    private func flipRoundTrip(_ app: XCUIApplication) {
-        let back = app.staticTexts["Эталон"]
-        let front = app.staticTexts["Исходное предложение"]
-        XCTAssertTrue(back.exists, app.debugDescription)
-        back.tap()
-        for _ in 0..<7 {
-            if front.exists { break }
-            app.swipeUp()
-        }
-        XCTAssertTrue(front.waitForExistence(timeout: 5), app.debugDescription)
-        front.tap()
-        for _ in 0..<7 {
-            if back.exists { break }
-            app.swipeUp()
-        }
-        XCTAssertTrue(back.waitForExistence(timeout: 5), app.debugDescription)
-    }
-
     /// Swipe-rates the currently revealed card (alternating direction like the existing
     /// `testBinaryRatingSwipesAdvanceOnceInEachDirection`), then re-reveals the next card so the
     /// next iteration starts from the same "back visible" state.
@@ -138,12 +118,10 @@ final class FlipRivePerfUITests: XCTestCase {
         resetTrainingProgress(app)
         revealCurrentCard(app)
 
+        // D1 removed the native flip these variants used to re-flip 5x on the same revealed card
+        // (there is no reverse tap any more to make that repeatable) — reveal cost is still
+        // covered below, inside each rate cycle's own `revealCurrentCard` call.
         mark("\(name)_baseline")
-        for i in 0..<5 {
-            mark("\(name)_flip\(i)_start")
-            flipRoundTrip(app)
-            mark("\(name)_flip\(i)_end")
-        }
         for i in 0..<5 {
             mark("\(name)_rate\(i)_start")
             swipeRateAndReveal(app, left: i % 2 == 0)

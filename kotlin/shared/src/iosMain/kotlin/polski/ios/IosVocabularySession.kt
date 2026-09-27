@@ -12,12 +12,14 @@ import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
 import kotlin.time.Clock
+import platform.Foundation.NSUserDefaults
 import platform.Foundation.NSUUID
 import polski.data.VocabularyItem
 import polski.data.frequencyItems
 import polski.data.vocabularyItems
 import polski.data.courseVocabularyInstructions
 import polski.data.courseVocabularyUnavailableLabel
+import polski.presentation.cardEffectFor
 import polski.srs.FsrsScheduler
 import polski.srs.Rating
 import polski.vocabulary.StudyDirection
@@ -25,16 +27,28 @@ import polski.vocabulary.VocabularyCodec
 import polski.vocabulary.VocabularySession
 import polski.vocabulary.VocabularyUiState
 
-/** Scene-owned SwiftUI bridge. Kotlin alone owns review scheduling and durable writes. */
-class IosVocabularySession {
+/**
+ * Scene-owned SwiftUI bridge. Kotlin alone owns review scheduling and durable writes.
+ * [defaults] is injectable (mirrors [IosSession]) so a test can point it at an isolated suite
+ * instead of the real device's `standardUserDefaults`.
+ */
+class IosVocabularySession(defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults) {
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
-    private val session = VocabularySession(IosVocabularyRepository(), FsrsScheduler(),
+    private val session = VocabularySession(IosVocabularyRepository(defaults), FsrsScheduler(),
         { Clock.System.now() }, { "user.${NSUUID().UUIDString.lowercase()}" })
     var onState: ((String) -> Unit)? = null
         set(value) {
             field = value
             value?.invoke(snapshot(session.state.value))
         }
+
+    /**
+     * Fires once per accepted rating with a [polski.presentation.CardEffect] name
+     * (`Remembered`/`Again`), for the host's decorative Rive overlay on the vocabulary card
+     * (`Plans/Kotlin/FlipCardRivePlan.md` D3) — mirrors [IosSession.onEffect] exactly, so
+     * [cardEffectFor] stays the single source of truth for both cards.
+     */
+    var onEffect: ((String) -> Unit)? = null
 
     init {
         scope.launch { session.state.collect { onState?.invoke(snapshot(it)) } }
@@ -52,8 +66,8 @@ class IosVocabularySession {
             "draft" -> session.setDraft(value)
             "reveal" -> session.reveal()
             "refresh" -> session.refresh()
-            "again" -> scope.launch { session.rate(Rating.Again) }
-            "good" -> scope.launch { session.rate(Rating.Good) }
+            "again" -> scope.launch { if (session.rate(Rating.Again)) onEffect?.invoke(cardEffectFor(Rating.Again).name) }
+            "good" -> scope.launch { if (session.rate(Rating.Good)) onEffect?.invoke(cardEffectFor(Rating.Good).name) }
             "select" -> scope.launch { session.select(value, true) }
             "deselect" -> scope.launch { session.select(value, false) }
             "delete" -> scope.launch { session.deleteCustom(value) }
@@ -69,7 +83,7 @@ class IosVocabularySession {
         scope.launch { completion(session.importJson(raw)) }
     }
 
-    fun close() { onState = null; scope.cancel() }
+    fun close() { onState = null; onEffect = null; scope.cancel() }
 
     private fun snapshot(state: VocabularyUiState): String = buildJsonObject {
         put("instructions", courseVocabularyInstructions.ios)
