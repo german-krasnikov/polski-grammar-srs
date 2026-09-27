@@ -41,6 +41,7 @@ import polski.model.SentenceSeed
 import polski.model.Tense
 import polski.presentation.AppAction
 import polski.presentation.AppUiState
+import polski.presentation.CardPhase
 import polski.presentation.MatrixSection
 import polski.presentation.ChangeSide
 import polski.presentation.ContrastPair
@@ -73,9 +74,15 @@ internal fun renderMatrixWeb(root: HTMLElement, state: AppUiState, dispatch: (Ap
     }
 }
 
-/** The current card's seven forms remain visible without changing the exercise or matrix selection. */
+/**
+ * The current card's seven forms remain visible without changing the exercise or matrix
+ * selection. Emphasis contract §5: before reveal, the row that matches this exercise's own
+ * target case is the answer, so it stays unhighlighted and its "Стало" form stays hidden; every
+ * other row is unrelated reference material and shows normally.
+ */
 internal fun renderCaseReferenceWeb(root: HTMLElement, state: AppUiState, dispatch: (AppAction) -> Unit) {
     val exercise = state.exercise ?: return
+    val revealed = state.phase == CardPhase.Revealed
     val noun = nounById(exercise.nounId)
     root.matrixAdd("h3", "Таблица этого предложения")
     root.matrixAdd("p", "Можно подсматривать · ${noun.lemma} · ${genderNames.getValue(noun.gender)} · ${if (exercise.number == NumberGram.SG) "ед. ч." else "мн. ч."}")
@@ -88,13 +95,17 @@ internal fun renderCaseReferenceWeb(root: HTMLElement, state: AppUiState, dispat
     val body = table.matrixAdd("tbody")
     caseRows.forEach { row ->
         val tr = body.matrixAdd("tr")
-        if (row.id.id in exercise.tags) tr.className = "highlight-row"
+        val isTarget = row.id.id in exercise.tags
+        if (isTarget && revealed) tr.className = "highlight-row"
         tr.matrixAdd("th", "${row.pl} · ${row.ru}").setAttribute("scope", "row")
         tr.matrixAdd("td").apply {
             setAttribute("lang", "pl")
-            matrixContrast(this,
-                nounPhrase(exercise.nounId, GramCase.NOM, exercise.number, exercise.adjectiveId, exercise.possessive),
-                nounPhrase(exercise.nounId, row.id, exercise.number, exercise.adjectiveId, exercise.possessive))
+            val from = nounPhrase(exercise.nounId, GramCase.NOM, exercise.number, exercise.adjectiveId, exercise.possessive)
+            if (isTarget && !revealed) {
+                matrixContrastMasked(this, from)
+            } else {
+                matrixContrast(this, from, nounPhrase(exercise.nounId, row.id, exercise.number, exercise.adjectiveId, exercise.possessive))
+            }
         }
     }
     root.matrixAdd("p", courseContextHelp.compact, "muted small")
@@ -106,11 +117,11 @@ private fun renderMap(root: HTMLElement, dispatch: (AppAction) -> Unit) {
     pipeline.matrixAdd("p", referencePipeline.compactSummary)
     pipeline.matrixAdd("p", referencePipeline.compactExample)
     val system = pipeline.matrixAdd("div", cls = "system-grid")
-    referenceSystemCards.forEach { (_, title, explanation, example) ->
+    referenceSystemCards.forEach { (_, title, explanation, _, steps) ->
         val article = system.matrixAdd("article")
         article.matrixAdd("h4", title)
         article.matrixAdd("p", explanation)
-        article.matrixAdd("code", example)
+        renderSystemCardSteps(article.matrixAdd("code").apply { setAttribute("lang", "pl") }, steps)
     }
 
     val chain = root.matrixSection("Одна мысль, пять преобразований")
@@ -343,6 +354,42 @@ private fun HTMLElement.matrixTable(
 
 private fun matrixContrast(cell: HTMLElement, before: String, after: String) =
     matrixContrast(cell, ContrastPair.generated(before, after))
+
+/**
+ * EmphasisUXAudit E6/C2, contract §4 ("стрелки карты системы: в данных цепочка шагов, а не
+ * строка"): [steps] is the pack's own explicit chain (never re-parsed from the joined arrow
+ * string). The first step is the chain's origin and stays plain; every later step highlights only
+ * its own change from the step right before it, with the same `change-after` token every other
+ * "Стало" surface already uses — no second, simplified highlight path for this one surface.
+ */
+private fun renderSystemCardSteps(code: HTMLElement, steps: List<String>) {
+    code.matrixAdd("span", steps.first())
+    steps.zipWithNext().forEach { (from, to) ->
+        code.appendChild(document.createTextNode(" → "))
+        val after = code.matrixAdd("span")
+        ContrastPair.generated(from, to).parts(ChangeSide.After).forEach { part ->
+            after.matrixAdd("span", part.text, if (part.isChanged) "change-after" else null)
+        }
+    }
+}
+
+/**
+ * Emphasis contract §5 ("панелей «под рукой»: целевая строка не подсвечивается, её «стало»
+ * скрыто"): this exercise's own target row before reveal. Only the already-known "Было" form
+ * shows; the answer ("Стало") is withheld from visible text, `aria-label` and the screen-reader
+ * span alike, so no host surface (visual, a11y tree or DOM text) leaks it ahead of reveal.
+ */
+private fun matrixContrastMasked(cell: HTMLElement, before: String) {
+    val pair = cell.matrixAdd("span", cls = "form-contrast form-contrast-masked")
+    pair.setAttribute("role", "group")
+    pair.setAttribute("aria-label", "Было: $before. Ответ скрыт до проверки.")
+    pair.matrixAdd("span", "Было:", "form-contrast-label").setAttribute("aria-hidden", "true")
+    val old = pair.matrixAdd("span", before, "form-contrast-before")
+    old.setAttribute("lang", "pl")
+    old.setAttribute("aria-hidden", "true")
+    pair.matrixAdd("span", "→", "form-contrast-arrow").setAttribute("aria-hidden", "true")
+    pair.matrixAdd("span", "Стало: ?", "form-contrast-label").setAttribute("aria-hidden", "true")
+}
 
 private var contrastSemanticSerial = 0
 

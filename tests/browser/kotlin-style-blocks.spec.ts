@@ -87,6 +87,63 @@ test('switching style changes which blocks the card shows, on the front and afte
 // [changes, rule] — courses/styles/*.json is now the single source of truth StyleRegistry loads
 // (kotlin/shared/build.gradle.kts), so the rule must render after reveal, not just the exercise's
 // Changes diff (the pre-fix hand-written registry back was [Changes] only, dropping Rule).
+// W3 (EmphasisUXAudit E7, using shared S4 `Block.*.parts`/`targetParts`): a style block's own
+// prose highlights only a literal, whole-word occurrence of the skill's explicit
+// `focus.before`/`focus.after` pair — never the current exercise's own answer. "Zaimki osobowe"
+// (pronouns) is the one real skill whose formula ("ona → ją / jej / nią / niej") and first
+// nativeParallel target ("Znam ją.") both literally contain its `focus.after` ("ją"), so this
+// exercises the real render path end to end instead of only the shared unit fixtures.
+test('style blocks highlight a literal occurrence of the skill\'s own focus pair, per block kind', async ({ page }) => {
+  await page.getByRole('button', { name: 'Отдельный навык' }).click();
+  await page.getByRole('button', { name: 'Zaimki osobowe · A2' }).click();
+  await continueIntroductionIfPresent(page);
+  const method = page.getByRole('combobox', { name: 'Подача объяснений' });
+  const front = page.locator('.card-front');
+
+  // Formula: "ona → ją / jej / nią / niej" — only the standalone word "ją" is marked, the rest
+  // of the formula's own text is still present around it (no text lost/duplicated).
+  await method.selectOption('RuleFirst');
+  const formula = front.locator('.rule-focus strong');
+  await expect(formula).toBeVisible();
+  await expect(formula.locator('.change-after')).toHaveText('ją');
+  await expect(formula).toHaveText('ona → ją / jej / nią / niej');
+
+  // NativeParallel target: "Znam ją." highlights "ją"; the native (L1) side of the same row is
+  // never colored (Emphasis contract §4 — родная сторона nativeParallel не красится).
+  await method.selectOption('NativeContrast');
+  const firstRow = front.locator('.native-parallel-row').first();
+  await expect(firstRow.locator('.native-parallel-target')).toHaveText('Znam ją.');
+  await expect(firstRow.locator('.native-parallel-target .change-after')).toHaveText('ją');
+  await expect(firstRow.locator('.native-parallel-native .change-after')).toHaveCount(0);
+  await expect(firstRow.locator('.native-parallel-native .change-before')).toHaveCount(0);
+
+  // Scene: none of this skill's own scene text literally repeats "moja żona" or "ją" (contract
+  // rule 6: no highlight beats a wrong one), so it still renders in full with zero invented marks.
+  await method.selectOption('SituationFirst');
+  await expect(front.locator('.block-scene-quote')).not.toHaveText('');
+  await expect(front.locator('.block-scene-quote .change-before, .block-scene-quote .change-after')).toHaveCount(0);
+
+  // Examples: same "no literal match, no invented mark" check, across both list items.
+  await method.selectOption('MinimalTheory');
+  const examples = front.locator('.block-examples-list li');
+  await expect(examples).toHaveCount(2);
+  await expect(examples.locator('.change-before, .change-after')).toHaveCount(0);
+
+  // WhyOnDemand and Rule live on the Back; switching style after reveal is a display choice only
+  // (no new review), so one reveal covers both without spending a second rating.
+  await page.getByRole('button', { name: 'Показать ответ' }).click();
+  const back = page.locator('.card-back');
+  await page.getByRole('button', { name: 'Почему так?' }).click();
+  const why = back.locator('.block-why-content p');
+  await expect(why).not.toHaveText('');
+  await expect(why.locator('.change-before, .change-after')).toHaveCount(0);
+
+  await method.selectOption('RuleFirst');
+  const rule = back.locator('.rule-focus > p').first();
+  await expect(rule).not.toHaveText('');
+  await expect(rule.locator('.change-before, .change-after')).toHaveCount(0);
+});
+
 test('situation-first back shows the rule alongside the changes after reveal', async ({ page }) => {
   const method = page.getByRole('combobox', { name: 'Подача объяснений' });
   await method.selectOption('SituationFirst');
