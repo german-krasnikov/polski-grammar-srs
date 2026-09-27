@@ -18,6 +18,22 @@ import kotlin.test.assertTrue
  * live path; this only proves the data is a faithful, checkable copy of what those branches do,
  * so a future generic engine (UC-07) can be verified against it instead of against prose.
  *
+ * `focus` and `lexicalFilter` are checked against actual branch parameters/conditions for all 16
+ * skills. `fixed` is a genuine branch parameter — and checked as one — only for `verb.present`/
+ * `verb.past`/`verb.future` (`verbForm(..., Person.THIRD, NumberGram.SG, ...)`, :101-102),
+ * `sentence.question`'s `Person` and `sentence.plural`'s `Case` (the literal `GramCase.ACC` passed
+ * to [ExerciseFactory.phrase]). For the other 9 non-empty `fixed` entries — `case.acc.*`,
+ * `case.gen.neg`, `case.inst`/`case.loc`/`case.dat`, `agreement.my`, `pronouns`, `aspect` —
+ * `ExerciseFactory`'s branch calls `nounPhrase`/`caseSentence`/`phrase`, none of which take a
+ * Tense/Person/Number argument at all, so those axes are not something the branch fixes; the
+ * `Tense: Pres, Person: 1, Number: Sing` triple (`Case: Acc` too for `agreement.my`/`pronouns`) is
+ * read off the hardcoded `"seenAcc"` course pattern ("Widzę {acc}.", `course.json:3609`) that those
+ * branches render as their source/expected sentence, and `aspect`'s `Person: 1, Number: Sing` off
+ * its hardcoded `aspectFrom`/`aspectTo` copy strings ("kupuję"/"kupiłem", `course.json:3574-3575`).
+ * [templateInferredFixedSkillsMatchTheHardcodedPatternTheyAreReadFrom] pins that inferred group
+ * against the literal patterns instead of leaving it unverified; it is not a code-branch-parameter
+ * check, and is not claimed to be one.
+ *
  * `level`/`prerequisites` are cross-checked against the shipped pack ([skillById]) rather than a
  * second hardcoded copy, so a `course.json` edit cannot silently drift from this file unnoticed.
  * The gender/nounId filter sets are cross-checked against real enum ids ([Gender]) or pinned
@@ -79,6 +95,8 @@ class CurriculumReaderTest {
     }
 
     // ExerciseFactory.kt:98-102 — fromTense flips relative to Tense.PRESENT; :53 filters all three.
+    // :101-102 also pass Person.THIRD/NumberGram.SG to verbForm literally, so `fixed` is a real
+    // branch parameter here (unlike the template-inferred group below).
     @Test fun tenseSkillsFocusOnTenseWithTheCodesFromToFlip() {
         val tenses = listOf(
             Triple("verb.present", "Past", "Pres"),
@@ -89,7 +107,32 @@ class CurriculumReaderTest {
             val spec = byId.getValue(id)
             assertEquals(FeatureFocus(FeatureKey("Tense"), FeatureValue(from), FeatureValue(to)), spec.focus, id)
             assertEquals(LexicalFilter("noun", mapOf("nounId" to filteredNounIds)), spec.lexicalFilter, id)
+            assertEquals(FeatureValue("3"), spec.fixed[FeatureKey("Person")], id)
+            assertEquals(FeatureValue("Sing"), spec.fixed[FeatureKey("Number")], id)
         }
+    }
+
+    // course.json:3609,3574-3575 — the "seenAcc" pattern ("Widzę {acc}.") and the `aspect` skill's
+    // own hardcoded copy strings are both 1st-person-singular-present Polish, which is what these
+    // 9 skills' `fixed` triple is actually read off. None of ExerciseFactory.kt's branches for
+    // these skills (case.acc.*/case.gen.neg/case.inst/case.loc/case.dat/agreement.my/pronouns call
+    // `nounPhrase`/`caseSentence`/`phrase`; `aspect` returns hardcoded exerciseCopy strings) takes a
+    // Tense/Person/Number argument, so this pins the data against the literal template it was read
+    // from rather than against a branch parameter that doesn't exist.
+    @Test fun templateInferredFixedSkillsMatchTheHardcodedPatternTheyAreReadFrom() {
+        val seenAccGroup = listOf("case.acc.n", "case.acc.f", "case.acc.m", "case.gen.neg", "case.inst", "case.loc", "case.dat", "agreement.my", "pronouns")
+        for (id in seenAccGroup) {
+            val fixed = byId.getValue(id).fixed
+            assertEquals(FeatureValue("Pres"), fixed[FeatureKey("Tense")], id)
+            assertEquals(FeatureValue("1"), fixed[FeatureKey("Person")], id)
+            assertEquals(FeatureValue("Sing"), fixed[FeatureKey("Number")], id)
+        }
+        for (id in listOf("agreement.my", "pronouns")) {
+            assertEquals(FeatureValue("Acc"), byId.getValue(id).fixed[FeatureKey("Case")], id)
+        }
+        val aspectFixed = byId.getValue("aspect").fixed
+        assertEquals(FeatureValue("1"), aspectFixed[FeatureKey("Person")])
+        assertEquals(FeatureValue("Sing"), aspectFixed[FeatureKey("Number")])
     }
 
     // ExerciseFactory.kt:117-121 — pronouns is in the filtered branch (:53) too, but substitutes a
@@ -101,18 +144,28 @@ class CurriculumReaderTest {
     }
 
     // ExerciseFactory.kt:123-125 — source pattern "Widzisz {acc}." is 2nd person present; Mood Decl→YesNoQ.
+    // Only `Person` is a real branch fact (the 2nd-person form is literally what "Widzisz" is);
+    // `Tense`/`Number` below are the same template-inferred kind as
+    // templateInferredFixedSkillsMatchTheHardcodedPatternTheyAreReadFrom, pinned so they can't
+    // drift silently, not asserted as branch parameters.
     @Test fun questionFocusesOnMoodAtSecondPersonPresent() {
         val spec = byId.getValue("sentence.question")
         assertEquals(FeatureFocus(FeatureKey("Mood"), FeatureValue("Decl"), FeatureValue("YesNoQ")), spec.focus)
         assertEquals(FeatureValue("2"), spec.fixed[FeatureKey("Person")])
+        assertEquals(FeatureValue("Pres"), spec.fixed[FeatureKey("Tense")])
+        assertEquals(FeatureValue("Sing"), spec.fixed[FeatureKey("Number")])
         assertNull(spec.lexicalFilter)
     }
 
-    // ExerciseFactory.kt:126-131 — Number Sing→Plur, Case stays Acc (`phrase(seed, GramCase.ACC, ...)`).
+    // ExerciseFactory.kt:126-131 — Number Sing→Plur, Case stays Acc (`phrase(seed, GramCase.ACC, ...)`,
+    // a real branch parameter). `Tense`/`Person` below are read off the "seenAcc" source pattern
+    // (:128), same template-inferred kind as templateInferredFixedSkillsMatchTheHardcodedPatternTheyAreReadFrom.
     @Test fun pluralFocusesOnNumberWithCaseHeldFixedAtAcc() {
         val spec = byId.getValue("sentence.plural")
         assertEquals(FeatureFocus(FeatureKey("Number"), FeatureValue("Sing"), FeatureValue("Plur")), spec.focus)
         assertEquals(FeatureValue("Acc"), spec.fixed[FeatureKey("Case")])
+        assertEquals(FeatureValue("Pres"), spec.fixed[FeatureKey("Tense")])
+        assertEquals(FeatureValue("1"), spec.fixed[FeatureKey("Person")])
         assertNull(spec.lexicalFilter)
     }
 
@@ -123,6 +176,9 @@ class CurriculumReaderTest {
             assertNull(byId.getValue(id).focus, id)
             assertNull(byId.getValue(id).lexicalFilter, id)
         }
+        // "mixed" changes both a verb form and a case at once (ExerciseFactory.kt:132-136), so no
+        // single axis is held fixed either.
+        assertEquals(emptyMap(), byId.getValue("mixed").fixed)
     }
 
     @Test fun everyLexicalFilterCandidateListIsNonEmpty() {
