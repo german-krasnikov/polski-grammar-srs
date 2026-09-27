@@ -3,7 +3,7 @@ plugins {
     alias(libs.plugins.android.kmp.library)
 }
 
-val courseFile = layout.projectDirectory.file("../../courses/pl-ru/course.json")
+val coursesDirectory = layout.projectDirectory.dir("../../courses")
 val frequencyFile = layout.projectDirectory.file("../../courses/pl-ru/frequency-top1000.json")
 // UC-10/StylesBlueprint.md §2/§4: every JSON file under here is a presentation-style recipe,
 // inlined below the same way course.json is. Listing files by directory scan (not a fixed
@@ -12,7 +12,10 @@ val frequencyFile = layout.projectDirectory.file("../../courses/pl-ru/frequency-
 val stylesDirectory = layout.projectDirectory.dir("../../courses/styles")
 val generatedCourseDirectory = layout.buildDirectory.dir("generated/course/kotlin")
 val generateCoursePackSource by tasks.registering {
-    inputs.file(courseFile)
+    // UniversalCorePlan.md §4.2/§12 UC-02: pack ids are discovered by scanning `courses/*` for a
+    // `course.json`, not read from one hardcoded path — adding `courses/<id>/course.json` needs no
+    // Gradle/Kotlin edit to become an embedded CoursePackSource. `schema`/`styles` aren't packs.
+    inputs.dir(coursesDirectory)
     inputs.file(frequencyFile)
     inputs.dir(stylesDirectory)
     outputs.dir(generatedCourseDirectory)
@@ -36,7 +39,20 @@ val generateCoursePackSource by tasks.registering {
                     .replace("\n", "\\n")
             }
         }
-        val chunks = literalChunks(courseFile.asFile.readText())
+        fun literalBuildString(chunks: List<String>): String =
+            "buildString {\n" + chunks.joinToString("\n") { "    append(\"$it\")" } + "\n}"
+
+        // UC-02: a pack directory is any immediate child of `courses/` (other than the shared
+        // `schema`/`styles` directories) that has its own `course.json` — pl-ru is the only one
+        // today, read as schema v1 like before; a second pack directory needs no edit here.
+        val packDirs = (coursesDirectory.asFile.listFiles { file -> file.isDirectory } ?: emptyArray())
+            .filter { dir -> dir.name != "schema" && dir.name != "styles" && dir.resolve("course.json").isFile }
+            .sortedBy { it.name }
+        val packSourceLiterals = packDirs.joinToString(",\n") { dir ->
+            val chunks = literalChunks(dir.resolve("course.json").readText())
+            "    EmbeddedCoursePackSource(\"${dir.name}\", ${literalBuildString(chunks)})"
+        }
+
         val frequencyChunks = literalChunks(frequencyFile.asFile.readText())
         val styleFiles = (stylesDirectory.asFile.listFiles { file -> file.extension == "json" } ?: emptyArray())
             .sortedBy { it.name }
@@ -44,12 +60,16 @@ val generateCoursePackSource by tasks.registering {
         val styleChunks = literalChunks(stylesJson)
         val target = generatedCourseDirectory.get().file("polski/data/GeneratedCourseJson.kt").asFile
         target.parentFile.mkdirs()
-        target.writeText("package polski.data\n\ninternal val generatedCourseJson = buildString {\n" +
-            chunks.joinToString("\n") { "    append(\"$it\")" } + "\n}\n" +
-            "internal val generatedFrequencyJson = buildString {\n" +
-            frequencyChunks.joinToString("\n") { "    append(\"$it\")" } + "\n}\n" +
-            "internal val generatedStylesJson = buildString {\n" +
-            styleChunks.joinToString("\n") { "    append(\"$it\")" } + "\n}\n")
+        target.writeText(
+            "package polski.data\n\n" +
+                "import polski.pack.EmbeddedCoursePackSource\n" +
+                "import polski.pack.PackManifest\n\n" +
+                "internal val embeddedCoursePackSources: List<EmbeddedCoursePackSource> = listOf(\n" +
+                packSourceLiterals + "\n)\n" +
+                "internal val coursePackManifest: PackManifest = PackManifest(embeddedCoursePackSources.map { it.id })\n" +
+                "internal val generatedFrequencyJson = " + literalBuildString(frequencyChunks) + "\n" +
+                "internal val generatedStylesJson = " + literalBuildString(styleChunks) + "\n",
+        )
     }
 }
 kotlin {
@@ -93,6 +113,9 @@ kotlin {
             // UniversalCorePlan.md §4.1 UC-01: model/Grammar.kt's Polish enums are a thin adapter
             // over the universal core's open FeatureKey/FeatureValue catalog.
             api(project(":core-model"))
+            // UniversalCorePlan.md §4.1 UC-02: CoursePackSource is the seam generateCoursePackSource
+            // (above) generates against — pl-ru is read as v1 through it, same as before.
+            api(project(":pack-format"))
         }
         commonTest.dependencies {
             implementation(kotlin("test"))

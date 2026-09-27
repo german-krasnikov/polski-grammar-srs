@@ -16,4 +16,4 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "polski-grammar-kotlin"
-include(":shared", ":composeApp", ":androidApp", ":core-model")
+include(":shared", ":composeApp", ":androidApp", ":core-model", ":pack-format")

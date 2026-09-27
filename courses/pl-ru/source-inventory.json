@@ -7710,798 +7710,814 @@
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
       "owner": "production source audit",
       "migrationStatus": "classified in inventory-decisions.json; review Evidence.md for acceptance",
-      "sha256": "03a89f35550858b1a55b7213cc4a66d781aa346e8134affd9f865e6e5a93b26a",
+      "sha256": "ba8fb0cdd735cc0496f490e20d55195e52760dd557e7d516ad91e4545f622dbf",
       "literalLines": [
         {
-          "line": 36,
+          "line": 37,
           "source": "* instead (see the field-by-field derivation table in `Plans/Kotlin/StylesBlueprint.md`§3)."
         },
         {
-          "line": 63,
+          "line": 64,
           "source": "val summary: String get() = steps.joinToString(\" → \") { it.label }"
         },
         {
-          "line": 68,
+          "line": 69,
           "source": "val compactSummary: String get() = steps.joinToString(\" → \") { it.question }"
         },
         {
-          "line": 101,
+          "line": 102,
           "source": "specialValues[pronounId] ?: \"$valuePrefix${forms.getValue(id)}\""
         },
         {
-          "line": 103,
+          "line": 104,
           "source": "\"${cue.compact} ${if (id == GramCase.LOC) forms.getValue(id) else value(pronounId, forms)}\""
         },
         {
+          "line": 168,
+          "source": "* UC-02: reached through [CoursePackSource] (`:pack-format`) rather than a fixed generated"
+        },
+        {
           "line": 169,
-          "source": "require(pack.getValue(\"schemaVersion\").jsonPrimitive.int == 1)"
+          "source": "* property — `generateCoursePackSource` (`kotlin/shared/build.gradle.kts`) discovers pl-ru by"
         },
         {
           "line": 170,
-          "source": "require(pack.string(\"id\") == \"pl-ru\")"
+          "source": "* scanning the `courses` directory for a `course.json`, but it is still read here as schema v1."
         },
         {
-          "line": 171,
-          "source": "require(pack.string(\"targetLanguage\") == \"pl\" && pack.string(\"nativeLanguage\") == \"ru\")"
-        },
-        {
-          "line": 175,
-          "source": "val nouns: List<Noun> by lazy { root.rows(\"nouns\").map { value ->"
+          "line": 174,
+          "source": "val source: CoursePackSource = embeddedCoursePackSources.first { it.id == \"pl-ru\" }"
         },
         {
           "line": 176,
-          "source": "Noun(value.string(\"id\"), value.string(\"lemma\"), value.string(\"meaning\"), Gender.fromId(value.string(\"gender\")),"
+          "source": "require(pack.getValue(\"schemaVersion\").jsonPrimitive.int == 1)"
         },
         {
           "line": 177,
-          "source": "NumberGram.entries.associateWith { number -> value.obj(\"forms\").obj(number.id).caseForms() })"
+          "source": "require(pack.string(\"id\") == \"pl-ru\")"
         },
         {
-          "line": 180,
-          "source": "val adjectives: List<Adjective> by lazy { root.rows(\"adjectives\").map { value ->"
+          "line": 178,
+          "source": "require(pack.string(\"targetLanguage\") == \"pl\" && pack.string(\"nativeLanguage\") == \"ru\")"
         },
         {
-          "line": 181,
-          "source": "Adjective(value.string(\"id\"), value.string(\"lemma\"), value.string(\"meaning\"),"
+          "line": 182,
+          "source": "val nouns: List<Noun> by lazy { root.rows(\"nouns\").map { value ->"
         },
         {
           "line": 183,
-          "source": "Gender.entries.associateWith { gender -> value.obj(\"forms\").obj(number.id).obj(gender.id).caseForms() }"
+          "source": "Noun(value.string(\"id\"), value.string(\"lemma\"), value.string(\"meaning\"), Gender.fromId(value.string(\"gender\")),"
+        },
+        {
+          "line": 184,
+          "source": "NumberGram.entries.associateWith { number -> value.obj(\"forms\").obj(number.id).caseForms() })"
         },
         {
           "line": 187,
-          "source": "val verbs: List<Verb> by lazy { root.rows(\"verbs\").map { value ->"
+          "source": "val adjectives: List<Adjective> by lazy { root.rows(\"adjectives\").map { value ->"
         },
         {
           "line": 188,
-          "source": "val past = value.obj(\"pastStem\")"
-        },
-        {
-          "line": 189,
-          "source": "Verb(value.string(\"id\"), value.string(\"lemma\"), value.string(\"meaning\"),"
+          "source": "Adjective(value.string(\"id\"), value.string(\"lemma\"), value.string(\"meaning\"),"
         },
         {
           "line": 190,
-          "source": "Aspect.entries.first { it.id == value.string(\"aspect\") },"
+          "source": "Gender.entries.associateWith { gender -> value.obj(\"forms\").obj(number.id).obj(gender.id).caseForms() }"
         },
         {
-          "line": 191,
-          "source": "value[\"present\"]?.jsonObject?.let { present ->"
+          "line": 194,
+          "source": "val verbs: List<Verb> by lazy { root.rows(\"verbs\").map { value ->"
+        },
+        {
+          "line": 195,
+          "source": "val past = value.obj(\"pastStem\")"
+        },
+        {
+          "line": 196,
+          "source": "Verb(value.string(\"id\"), value.string(\"lemma\"), value.string(\"meaning\"),"
         },
         {
           "line": 197,
-          "source": "PastStem(past.string(\"m\"), past.string(\"f\"), past.optionalString(\"n\"), past.string(\"mp\"), past.string(\"np\")),"
+          "source": "Aspect.entries.first { it.id == value.string(\"aspect\") },"
         },
         {
           "line": 198,
-          "source": "FutureType.entries.first { it.id == value.string(\"futureType\") }, value.optionalString(\"perfectivePair\"))"
-        },
-        {
-          "line": 201,
-          "source": "val skills: List<Skill> by lazy { root.rows(\"skills\").map { value ->"
-        },
-        {
-          "line": 202,
-          "source": "Skill(value.string(\"id\"), value.string(\"title\"), value.string(\"group\"), value.string(\"level\"),"
-        },
-        {
-          "line": 203,
-          "source": "value.string(\"formula\"), value.string(\"theory\"), value.string(\"hint\"),"
+          "source": "value[\"present\"]?.jsonObject?.let { present ->"
         },
         {
           "line": 204,
-          "source": "value.getValue(\"prerequisites\").jsonArray.map { it.jsonPrimitive.content })"
+          "source": "PastStem(past.string(\"m\"), past.string(\"f\"), past.optionalString(\"n\"), past.string(\"mp\"), past.string(\"np\")),"
         },
         {
-          "line": 207,
-          "source": "val sentenceSeeds: List<SentenceSeed> by lazy { root.rows(\"sentenceSeeds\").map { value ->"
+          "line": 205,
+          "source": "FutureType.entries.first { it.id == value.string(\"futureType\") }, value.optionalString(\"perfectivePair\"))"
         },
         {
           "line": 208,
-          "source": "SentenceSeed(value.string(\"nounId\"), value.string(\"adjectiveId\"))"
+          "source": "val skills: List<Skill> by lazy { root.rows(\"skills\").map { value ->"
+        },
+        {
+          "line": 209,
+          "source": "Skill(value.string(\"id\"), value.string(\"title\"), value.string(\"group\"), value.string(\"level\"),"
+        },
+        {
+          "line": 210,
+          "source": "value.string(\"formula\"), value.string(\"theory\"), value.string(\"hint\"),"
+        },
+        {
+          "line": 211,
+          "source": "value.getValue(\"prerequisites\").jsonArray.map { it.jsonPrimitive.content })"
+        },
+        {
+          "line": 214,
+          "source": "val sentenceSeeds: List<SentenceSeed> by lazy { root.rows(\"sentenceSeeds\").map { value ->"
         },
         {
           "line": 215,
+          "source": "SentenceSeed(value.string(\"nounId\"), value.string(\"adjectiveId\"))"
+        },
+        {
+          "line": 222,
           "source": "root.obj(\"caseSentencePrefixes\").mapValues { (_, value) -> value.jsonPrimitive.content }"
         },
         {
-          "line": 219,
+          "line": 226,
           "source": "root.obj(\"exerciseCopy\").mapValues { (_, value) -> value.jsonPrimitive.content }"
         },
         {
-          "line": 223,
+          "line": 230,
           "source": "root.obj(\"exercisePatterns\").mapValues { (_, value) -> value.jsonPrimitive.content }"
         },
         {
-          "line": 227,
+          "line": 234,
           "source": "val value = root.obj(\"training\").obj(\"chainPresentation\")"
         },
         {
-          "line": 228,
+          "line": 235,
           "source": "val completion = value.obj(\"completion\")"
         },
         {
-          "line": 230,
+          "line": 237,
           "source": "value.rows(\"steps\").map { ChainStep(it.string(\"id\"), it.string(\"label\")) }.requireUniqueIds(ChainStep::id),"
         },
         {
-          "line": 232,
+          "line": 239,
           "source": "completion.string(\"title\"), completion.string(\"reactEyebrow\"),"
         },
         {
-          "line": 233,
+          "line": 240,
           "source": "completion.string(\"reactBody\"), completion.string(\"webBody\"),"
         },
         {
-          "line": 239,
+          "line": 246,
           "source": "root.obj(\"reference\").rows(\"caseRows\").map { value ->"
         },
         {
-          "line": 240,
+          "line": 247,
           "source": "CaseReferenceRow(GramCase.fromId(value.string(\"id\")), value.string(\"pl\"), value.string(\"ru\"),"
         },
         {
-          "line": 241,
+          "line": 248,
           "source": "value.string(\"question\"), value.string(\"trigger\"), value.optionalString(\"skill\"))"
         },
         {
-          "line": 246,
+          "line": 253,
           "source": "root.obj(\"reference\").obj(\"genderNames\").mapValues { (_, value) -> value.jsonPrimitive.content }"
         },
         {
-          "line": 250,
+          "line": 257,
           "source": "root.obj(\"reference\").rows(\"chainRows\").map { value ->"
         },
         {
-          "line": 251,
+          "line": 258,
           "source": "ReferenceChainRow(value.string(\"label\"), value.string(\"from\"), value.string(\"to\"), value.string(\"change\"))"
         },
         {
-          "line": 258,
+          "line": 265,
           "source": "root.obj(\"reference\").rows(\"systemCards\").map { value ->"
         },
         {
-          "line": 259,
+          "line": 266,
           "source": "ReferenceSystemCard(value.string(\"id\"), value.string(\"title\"), value.string(\"explanation\"), value.string(\"example\"))"
         },
         {
-          "line": 261,
+          "line": 268,
           "source": "require(cards.map { it.id } == listOf(\"noun\", \"agreement\", \"verb\", \"modifiers\"))"
         },
         {
-          "line": 266,
+          "line": 273,
           "source": "val pipeline = root.obj(\"reference\").obj(\"pipeline\")"
         },
         {
-          "line": 268,
+          "line": 275,
           "source": "pipeline.string(\"title\"),"
         },
         {
-          "line": 269,
+          "line": 276,
           "source": "pipeline.rows(\"steps\").map { step ->"
         },
         {
-          "line": 270,
+          "line": 277,
           "source": "ReferencePipelineStep(step.string(\"id\"), step.string(\"label\"), step.string(\"question\"), step.string(\"example\"))"
         },
         {
-          "line": 272,
+          "line": 279,
           "source": "pipeline.string(\"compactExample\"),"
         },
         {
-          "line": 274,
+          "line": 281,
           "source": "require(value.steps.map { it.id } == listOf(\"intent\", \"case\", \"agreement\"))"
         },
         {
-          "line": 279,
+          "line": 286,
           "source": "val teaching = root.obj(\"reference\").obj(\"caseTeaching\")"
         },
         {
-          "line": 280,
+          "line": 287,
           "source": "val note = teaching.obj(\"caseNote\")"
         },
         {
-          "line": 281,
+          "line": 288,
           "source": "CaseTeaching(note.string(\"react\"), note.string(\"compact\"), teaching.string(\"comparisonReadingHint\"))"
         },
         {
-          "line": 285,
+          "line": 292,
           "source": "val teaching = root.obj(\"reference\").obj(\"pronounTeaching\")"
         },
         {
-          "line": 286,
+          "line": 293,
           "source": "val personal = teaching.obj(\"personal\")"
         },
         {
-          "line": 287,
+          "line": 294,
           "source": "val intro = personal.obj(\"intro\")"
         },
         {
-          "line": 288,
+          "line": 295,
           "source": "val footer = personal.obj(\"footer\")"
         },
         {
-          "line": 289,
+          "line": 296,
           "source": "val possessive = teaching.obj(\"possessive\")"
         },
         {
-          "line": 290,
+          "line": 297,
           "source": "val demo = possessive.obj(\"demo\")"
         },
         {
-          "line": 292,
+          "line": 299,
           "source": "personal.string(\"title\"), intro.string(\"react\"), intro.string(\"compact\"),"
         },
         {
-          "line": 293,
+          "line": 300,
           "source": "footer.string(\"react\"), footer.string(\"web\"), footer.string(\"native\"),"
         },
         {
-          "line": 294,
+          "line": 301,
           "source": "personal.getValue(\"pronounIds\").jsonArray.map { it.jsonPrimitive.content },"
         },
         {
-          "line": 295,
+          "line": 302,
           "source": "teaching.rows(\"contexts\").map { row ->"
         },
         {
-          "line": 296,
+          "line": 303,
           "source": "val id = GramCase.fromId(row.string(\"id\"))"
         },
         {
-          "line": 297,
+          "line": 304,
           "source": "require(GramCase.fromId(row.string(\"caseId\")) == id)"
         },
         {
-          "line": 298,
+          "line": 305,
           "source": "val cue = row.obj(\"cue\")"
         },
         {
-          "line": 299,
+          "line": 306,
           "source": "PronounContext(id, PronounCue(cue.string(\"full\"), cue.string(\"compact\"), cue.string(\"ios\")),"
         },
         {
-          "line": 300,
+          "line": 307,
           "source": "row.string(\"caseName\"), row.optionalString(\"valuePrefix\") ?: \"\","
         },
         {
-          "line": 301,
+          "line": 308,
           "source": "row[\"specialValues\"]?.jsonObject?.mapValues { (_, value) -> value.jsonPrimitive.content } ?: emptyMap())"
         },
         {
-          "line": 303,
+          "line": 310,
           "source": "possessive.string(\"title\"),"
         },
         {
-          "line": 305,
+          "line": 312,
           "source": "demo.string(\"nounId\"), demo.string(\"adjectiveId\"), NumberGram.fromId(demo.string(\"number\")),"
         },
         {
-          "line": 306,
+          "line": 313,
           "source": "demo.rows(\"cases\").map { row ->"
         },
         {
-          "line": 307,
+          "line": 314,
           "source": "val caption = row.obj(\"caption\")"
         },
         {
-          "line": 308,
+          "line": 315,
           "source": "PossessiveDemoCase(GramCase.fromId(row.string(\"id\")), caption.string(\"web\"),"
         },
         {
-          "line": 309,
+          "line": 316,
           "source": "caption.string(\"desktop\"), caption.string(\"ios\"))"
         },
         {
-          "line": 311,
+          "line": 318,
           "source": "demo.getValue(\"invariableOwnerIds\").jsonArray.map { PossessiveId.fromId(it.jsonPrimitive.content) }.toSet(),"
         },
         {
-          "line": 312,
+          "line": 319,
           "source": "demo.obj(\"rule\").string(\"invariable\"), demo.obj(\"rule\").string(\"variable\"),"
         },
         {
-          "line": 315,
+          "line": 322,
           "source": "require(value.pronounIds == listOf(\"ja\", \"ty\", \"on\", \"ona\", \"ono\", \"my\", \"wy\", \"oni\", \"one\"))"
         },
         {
-          "line": 322,
+          "line": 329,
           "source": "val teaching = root.obj(\"reference\").obj(\"verbTeaching\")"
         },
         {
-          "line": 324,
+          "line": 331,
           "source": "teaching.rows(\"subjects\").map { subject ->"
         },
         {
-          "line": 325,
+          "line": 332,
           "source": "VerbSubject(subject.string(\"id\"), Person.fromId(subject.getValue(\"person\").jsonPrimitive.int),"
         },
         {
-          "line": 326,
+          "line": 333,
           "source": "NumberGram.fromId(subject.string(\"number\")), subject.string(\"genderMode\") == \"selected\","
         },
         {
-          "line": 327,
+          "line": 334,
           "source": "subject.optionalString(\"fixedGender\")?.let(Gender::fromId), subject.obj(\"label\").verbLabel())"
         },
         {
-          "line": 329,
+          "line": 336,
           "source": "teaching.obj(\"genderControlLabel\").verbLabel(),"
         },
         {
-          "line": 330,
+          "line": 337,
           "source": "teaching.rows(\"genderOptions\").map { VerbGenderOption(it.string(\"id\"), it.obj(\"label\").verbLabel()) },"
         },
         {
-          "line": 331,
+          "line": 338,
           "source": "Tense.entries.associateWith { teaching.obj(\"tenseLabels\").obj(it.id).verbLabel() },"
         },
         {
-          "line": 332,
+          "line": 339,
           "source": "teaching.obj(\"futureExplanation\").string(\"react\"),"
         },
         {
-          "line": 333,
+          "line": 340,
           "source": "teaching.obj(\"futureExplanation\").string(\"compact\"),"
         },
         {
-          "line": 338,
+          "line": 345,
           "source": "root.obj(\"reference\").getValue(\"comparisonNounIds\").jsonArray.map { it.jsonPrimitive.content }.also { ids ->"
         },
         {
-          "line": 345,
+          "line": 352,
           "source": "val support = root.obj(\"reference\").obj(\"russianSupport\")"
         },
         {
-          "line": 346,
+          "line": 353,
           "source": "val title = support.obj(\"title\")"
         },
         {
-          "line": 348,
+          "line": 355,
           "source": "title.string(\"full\"), title.string(\"compact\"),"
         },
         {
-          "line": 349,
+          "line": 356,
           "source": "support.getValue(\"columns\").jsonArray.map { it.jsonPrimitive.content },"
         },
         {
-          "line": 350,
+          "line": 357,
           "source": "support.rows(\"rows\").mapIndexed { index, row ->"
         },
         {
-          "line": 351,
+          "line": 358,
           "source": "require(row[\"comparisons\"] != null) {"
         },
         {
-          "line": 352,
+          "line": 359,
           "source": "\"/reference/russianSupport/rows/$index/comparisons: missing comparisons\""
         },
         {
-          "line": 355,
+          "line": 362,
           "source": "row.string(\"id\"), row.string(\"cue\"),"
         },
         {
-          "line": 356,
+          "line": 363,
           "source": "row.obj(\"react\").russianSupportTable(),"
         },
         {
-          "line": 357,
+          "line": 364,
           "source": "row.obj(\"web\").russianSupportTable(),"
         },
         {
-          "line": 358,
+          "line": 365,
           "source": "row.obj(\"desktop\").russianSupportTable(),"
         },
         {
-          "line": 359,
+          "line": 366,
           "source": "row.string(\"mobileLine\"),"
         },
         {
-          "line": 360,
+          "line": 367,
           "source": "row.rows(\"comparisons\").mapIndexed { pairIndex, pair ->"
         },
         {
-          "line": 361,
+          "line": 368,
           "source": "pair.russianSupportComparison(\"/reference/russianSupport/rows/$index/comparisons/$pairIndex\")"
         },
         {
-          "line": 362,
+          "line": 369,
           "source": "}.also { require(it.isNotEmpty()) { \"/reference/russianSupport/rows/$index/comparisons: empty comparisons\" } },"
         },
         {
-          "line": 367,
+          "line": 374,
           "source": "require(value.rows.map { it.id } == listOf(\"accusative\", \"instrumental\", \"locative\", \"possessive\"))"
         },
         {
-          "line": 368,
+          "line": 375,
           "source": "require(value.rows.all { it.mobileLine.startsWith(\"${it.cue} → \") })"
         },
         {
-          "line": 373,
+          "line": 380,
           "source": "root.obj(\"reference\").rows(\"tenseRows\").map { value ->"
         },
         {
-          "line": 374,
+          "line": 381,
           "source": "ReferenceTenseRow(value.string(\"label\"), value.string(\"from\"), value.string(\"to\"))"
         },
         {
-          "line": 383,
+          "line": 390,
           "source": "root.obj(\"reference\").rows(\"aspectRows\").map { value ->"
         },
         {
-          "line": 384,
+          "line": 391,
           "source": "ReferenceAspectRow(value.string(\"label\"), value.string(\"from\"),"
         },
         {
-          "line": 385,
+          "line": 392,
           "source": "value.optionalString(\"present\")?.takeUnless { it == \"null\" }, value.string(\"past\"), value.string(\"future\"))"
         },
         {
-          "line": 394,
+          "line": 401,
           "source": "root.obj(\"reference\").rows(\"maleAccRows\").map { value ->"
         },
         {
-          "line": 395,
+          "line": 402,
           "source": "MaleAccRow(value.string(\"id\"), value.string(\"label\"), value.string(\"title\"),"
         },
         {
-          "line": 396,
+          "line": 403,
           "source": "value.rows(\"examples\").map { example ->"
         },
         {
-          "line": 397,
+          "line": 404,
           "source": "MaleAccExample(example.string(\"from\"), example.string(\"to\"), example.string(\"sentence\"))"
         },
         {
-          "line": 398,
+          "line": 405,
           "source": "}, value.string(\"rule\"))"
         },
         {
-          "line": 400,
+          "line": 407,
           "source": "require(rows.map { it.id } == listOf(\"person\", \"animal\", \"object\"))"
         },
         {
-          "line": 406,
+          "line": 413,
           "source": "root.rows(\"skills\").associate { value ->"
         },
         {
-          "line": 407,
+          "line": 414,
           "source": "val focus = value.obj(\"focus\")"
         },
         {
-          "line": 408,
+          "line": 415,
           "source": "val methods = value.obj(\"methods\")"
         },
         {
-          "line": 409,
+          "line": 416,
           "source": "value.string(\"id\") to SkillPresentation("
         },
         {
-          "line": 410,
+          "line": 417,
           "source": "focus.string(\"before\"), focus.string(\"after\"),"
         },
         {
-          "line": 411,
+          "line": 418,
           "source": "methods.obj(\"logic\").methodPresentation(), methods.obj(\"situations\").methodPresentation(),"
         },
         {
-          "line": 416,
+          "line": 423,
           "source": "/** Absent on a skill (true for every skill today) means [SkillStyleContent]'s all-derived defaults. */"
         },
         {
-          "line": 418,
+          "line": 425,
           "source": "root.rows(\"skills\").associate { value -> value.string(\"id\") to parseSkillStyleContent(value[\"styleContent\"]) }"
         },
         {
-          "line": 422,
+          "line": 429,
           "source": "root.obj(\"vocabulary\").rows(\"items\").map { value ->"
         },
         {
-          "line": 423,
+          "line": 430,
           "source": "VocabularyItem(value.string(\"id\"), value.string(\"lemma\"), value.string(\"translation\"),"
         },
         {
-          "line": 424,
+          "line": 431,
           "source": "value.string(\"form\"), value.string(\"example\"), value.string(\"level\"),"
         },
         {
-          "line": 425,
+          "line": 432,
           "source": "value[\"frequencyRank\"]?.jsonPrimitive?.let { primitive ->"
         },
         {
-          "line": 426,
+          "line": 433,
           "source": "if (primitive.content == \"null\") null else primitive.int"
         },
         {
-          "line": 431,
+          "line": 438,
           "source": "val matrixIntroduction: String by lazy { root.obj(\"reference\").string(\"matrixIntroduction\") }"
         },
         {
-          "line": 432,
+          "line": 439,
           "source": "val webCaseCompositionHeader: String by lazy { root.obj(\"reference\").string(\"webCaseCompositionHeader\") }"
         },
         {
-          "line": 434,
+          "line": 441,
           "source": "root.obj(\"reference\").obj(\"contextHelp\").let { CourseContextHelp(it.string(\"react\"), it.string(\"compact\")) }"
         },
         {
-          "line": 436,
+          "line": 443,
           "source": "val maleAccIntro: String by lazy { root.obj(\"reference\").string(\"maleAccIntro\") }"
         },
         {
-          "line": 438,
+          "line": 445,
           "source": "root.obj(\"reference\").obj(\"aspectNoPresent\").let { CourseAspectNoPresent(it.string(\"compact\"), it.string(\"ios\")) }"
         },
         {
-          "line": 441,
+          "line": 448,
           "source": "root.obj(\"vocabulary\").obj(\"instructions\").let {"
         },
         {
-          "line": 442,
+          "line": 449,
           "source": "CourseVocabularyInstructions(it.string(\"react\"), it.string(\"web\"), it.string(\"native\"), it.string(\"ios\"))"
         },
         {
-          "line": 445,
+          "line": 452,
           "source": "val vocabularyUnavailableLabel: String by lazy { root.obj(\"vocabulary\").string(\"unavailableLabel\") }"
         },
         {
-          "line": 448,
+          "line": 455,
           "source": "Json.parseToJsonElement(generatedFrequencyJson).jsonObject.rows(\"items\").mapIndexed { index, value ->"
         },
         {
-          "line": 449,
+          "line": 456,
           "source": "FrequencyItem(value.getValue(\"rank\").jsonPrimitive.int, value.string(\"lemma\"),"
         },
         {
-          "line": 450,
+          "line": 457,
           "source": "value.getValue(\"count\").jsonPrimitive.int).also { require(it.rank == index + 1) }"
         },
         {
-          "line": 455,
+          "line": 462,
           "source": "root.obj(\"personalPronouns\").mapValues { (_, value) -> value.jsonObject.caseForms() }"
         },
         {
-          "line": 459,
+          "line": 466,
           "source": "root.rows(\"possessives\").map { Possessive(PossessiveId.fromId(it.string(\"id\")), it.string(\"label\")) }"
         },
         {
-          "line": 463,
+          "line": 470,
           "source": "root.rows(\"possessives\").associate { row ->"
         },
         {
-          "line": 464,
+          "line": 471,
           "source": "val id = PossessiveId.fromId(row.string(\"id\"))"
         },
         {
-          "line": 465,
+          "line": 472,
           "source": "val forms = row.obj(\"forms\")"
         },
         {
-          "line": 466,
+          "line": 473,
           "source": "val value = when (forms.string(\"kind\")) {"
         },
         {
-          "line": 467,
+          "line": 474,
           "source": "\"invariant\" -> {"
         },
         {
-          "line": 469,
+          "line": 476,
           "source": "require(forms.keys == setOf(\"kind\", \"value\"))"
         },
         {
-          "line": 470,
+          "line": 477,
           "source": "CoursePossessiveForms.Invariant(forms.formText(\"value\"))"
         },
         {
-          "line": 472,
+          "line": 479,
           "source": "\"declined\" -> {"
         },
         {
-          "line": 474,
+          "line": 481,
           "source": "require(forms.keys == setOf(\"kind\", \"sg\", \"pl\"))"
         },
         {
-          "line": 475,
+          "line": 482,
           "source": "val singular = forms.obj(\"sg\")"
         },
         {
-          "line": 476,
+          "line": 483,
           "source": "val plural = forms.obj(\"pl\")"
         },
         {
-          "line": 478,
+          "line": 485,
           "source": "require(plural.keys == setOf(\"m-personal\", \"other\"))"
         },
         {
-          "line": 484,
+          "line": 491,
           "source": "else -> error(\"Unknown possessive kind for ${id.id}\")"
         },
         {
-          "line": 491,
+          "line": 498,
           "source": "val morphology = root.obj(\"morphology\")"
         },
         {
-          "line": 492,
+          "line": 499,
           "source": "require(morphology.keys == setOf(\"futureAuxiliary\"))"
         },
         {
-          "line": 493,
+          "line": 500,
           "source": "val auxiliary = morphology.obj(\"futureAuxiliary\")"
         },
         {
-          "line": 494,
+          "line": 501,
           "source": "require(auxiliary.keys == setOf(\"verbId\", \"forms\"))"
         },
         {
-          "line": 495,
+          "line": 502,
           "source": "val verbId = auxiliary.string(\"verbId\")"
         },
         {
-          "line": 497,
+          "line": 504,
           "source": "val forms = auxiliary.obj(\"forms\")"
         },
         {
-          "line": 513,
+          "line": 520,
           "source": "if (number == NumberGram.SG) \"nomSg\" else \"nomPl\""
         },
         {
-          "line": 539,
+          "line": 546,
           "source": "private val coursePlaceholder = Regex(\"\\\\{([A-Za-z][A-Za-z0-9]*)\\\\}\")"
         },
         {
-          "line": 544,
+          "line": 551,
           "source": "values[name]?.takeIf { it.isNotEmpty() } ?: error(\"Missing $name for $key\")"
         },
         {
-          "line": 548,
+          "line": 555,
           "source": "(get(key) as? JsonPrimitive)?.content?.takeIf(String::isNotEmpty) ?: error(\"Missing course field $key\")"
         },
         {
-          "line": 561,
+          "line": 568,
           "source": "require(value.isNotBlank()) { \"Invalid method stage: $field\" }"
         },
         {
-          "line": 564,
+          "line": 571,
           "source": "required(\"introduction\"), required(\"promptLead\"), required(\"introduce\"),"
         },
         {
-          "line": 565,
+          "line": 572,
           "source": "required(\"retrieve\"), required(\"feedback\"), required(\"review\"),"
         },
         {
-          "line": 569,
+          "line": 576,
           "source": "RussianSupportTable(string(\"construction\"), string(\"check\"))"
         },
         {
-          "line": 572,
+          "line": 579,
           "source": "val from = string(\"from\")"
         },
         {
-          "line": 573,
+          "line": 580,
           "source": "val to = string(\"to\")"
         },
         {
-          "line": 577,
+          "line": 584,
           "source": "part.string(\"text\"),"
         },
         {
-          "line": 578,
+          "line": 585,
           "source": "part.getValue(\"isEnding\").jsonPrimitive.boolean,"
         },
         {
-          "line": 579,
+          "line": 586,
           "source": "part.getValue(\"isChanged\").jsonPrimitive.boolean,"
         },
         {
-          "line": 581,
+          "line": 588,
           "source": "require(piece.text.isNotEmpty()) { \"$path/$key/$index/text: empty segment\" }"
         },
         {
-          "line": 584,
+          "line": 591,
           "source": "require(pieces.isNotEmpty() && pieces.joinToString(\"\") { it.text } == form) {"
         },
         {
-          "line": 585,
+          "line": 592,
           "source": "\"$path/$key: segments must reassemble exactly\""
         },
         {
-          "line": 595,
+          "line": 602,
           "source": "\"$path/$key/$index/isEnding: invalid ending span\""
         },
         {
-          "line": 599,
+          "line": 606,
           "source": "\"$path/$key/$index/isChanged: replacement must mark a whole word\""
         },
         {
-          "line": 606,
+          "line": 613,
           "source": "val before = parts(\"beforeParts\", from)"
         },
         {
-          "line": 607,
+          "line": 614,
           "source": "val after = parts(\"afterParts\", to)"
         },
         {
-          "line": 609,
+          "line": 616,
           "source": "\"$path: both changed forms need marked spans\""
         },
         {
-          "line": 611,
+          "line": 618,
           "source": "require(before.filterNot { it.isChanged }.joinToString(\"\") { it.text } =="
         },
         {
-          "line": 612,
+          "line": 619,
           "source": "after.filterNot { it.isChanged }.joinToString(\"\") { it.text } &&"
         },
         {
-          "line": 614,
+          "line": 621,
           "source": "\"$path: unchanged fragments must agree on both sides\""
         },
         {
-          "line": 618,
+          "line": 625,
           "source": "private fun JsonObject.verbLabel(): VerbLabel = VerbLabel(string(\"full\"), string(\"compact\"))"
         },
         {
-          "line": 620,
+          "line": 627,
           "source": "/** [json] is the optional `skill.styleContent` value as it comes out of `root[\"styleContent\"]` — absent/non-object means the all-derived default. */"
         },
         {
-          "line": 625,
+          "line": 632,
           "source": "rule = optionalString(\"rule\"),"
         },
         {
-          "line": 626,
+          "line": 633,
           "source": "table = (get(\"table\") as? JsonObject)?.rows(\"rows\")?.map { it.toTableRow() },"
         },
         {
-          "line": 627,
+          "line": 634,
           "source": "scene = optionalString(\"scene\"),"
         },
         {
-          "line": 628,
+          "line": 635,
           "source": "nativeParallel = (get(\"nativeParallel\") as? JsonArray)?.map { it.jsonObject.toNativeParallelPair() } ?: emptyList(),"
         },
         {
-          "line": 629,
+          "line": 636,
           "source": "examples = (get(\"examples\") as? JsonArray)?.map { it.jsonPrimitive.content } ?: emptyList(),"
         },
         {
-          "line": 630,
+          "line": 637,
           "source": "why = optionalString(\"why\"),"
         },
         {
-          "line": 633,
+          "line": 640,
           "source": "private fun JsonObject.toTableRow(): TableRow = TableRow(string(\"label\"), endingParts(\"before\"), endingParts(\"after\"))"
         },
         {
-          "line": 636,
+          "line": 643,
           "source": "NativeParallelPair(string(\"native\"), string(\"target\"), string(\"note\"), getValue(\"matches\").jsonPrimitive.boolean)"
         },
         {
-          "line": 639,
+          "line": 646,
           "source": "EndingPart(part.string(\"text\"), part.getValue(\"isEnding\").jsonPrimitive.boolean, part.getValue(\"isChanged\").jsonPrimitive.boolean)"
         },
         {
-          "line": 642,
+          "line": 649,
           "source": "require(items.isNotEmpty() && items.map(id).distinct().size == items.size) { \"Duplicate or missing course IDs\" }"
         }
       ]
@@ -13161,18 +13177,30 @@
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidStylePicker.kt",
       "owner": "production source audit",
       "migrationStatus": "classified in inventory-decisions.json; review Evidence.md for acceptance",
-      "sha256": "efcf75bc15837043ceb498794574c8284a77d425299a76892cddd8fe7d3e82dd",
+      "sha256": "dff5c1445e44424cad900669b8bbc75fdb7452de35c31bb9a760a6bb87421cfe",
       "literalLines": [
         {
-          "line": 24,
-          "source": "* fallback hint: a style whose `requires` isn't met for that one skill stays selectable — it is a"
+          "line": 25,
+          "source": "* `requires` isn't met for that one skill stays selectable — it is a preference across all 16"
         },
         {
-          "line": 26,
-          "source": "* back to, so picking \"Через сравнение с родным\" is never a silent no-op."
+          "line": 27,
+          "source": "* \"Через сравнение с родным\" is never a silent no-op."
         },
         {
-          "line": 54,
+          "line": 29,
+          "source": "* UC-01: [StyleRegistry] itself is open to any recipe id a new `courses/styles` JSON file declares,"
+        },
+        {
+          "line": 30,
+          "source": "* but this picker stays bounded to the 4 built-in ids (matching Desktop's and Web's own pickers)"
+        },
+        {
+          "line": 31,
+          "source": "* because `AndroidSessionViewModel.persistStyle` persists through the still-closed"
+        },
+        {
+          "line": 61,
           "source": "\"Пока не хватает материалов для этого навыка — показывается «${styleLabel(registry.getValue(fallbackId))}».\","
         }
       ]
@@ -16093,7 +16121,7 @@
       "path": "kotlin/androidApp/src/main/java/dev/polski/grammarmatrix/AndroidSessionViewModel.kt",
       "owner": "production source audit",
       "migrationStatus": "classified in inventory-decisions.json; review Evidence.md for acceptance",
-      "sha256": "b72a4126ce32618cfab5ef4604f8508b18732fb4a891bebf3fab66d8444ac2e7",
+      "sha256": "5586c36cb0d931bffeb92f645b7d96f68ae9cf3cab7078ae74bd7888bd22d259",
       "literalLines": [
         {
           "line": 53,
@@ -16112,99 +16140,99 @@
           "source": "TimeCapture(now, SimpleDateFormat(\"yyyy-MM-dd\", Locale.ROOT).format(Date(now.toEpochMilliseconds())))"
         },
         {
-          "line": 117,
+          "line": 120,
           "source": "/** D5: off disposes/never loads Rive and makes all motion instant (see `motionReduced` in MainActivity). */"
         },
         {
-          "line": 155,
+          "line": 158,
           "source": "val stream = appContext.contentResolver.openOutputStream(uri, \"wt\")"
         },
         {
-          "line": 156,
+          "line": 159,
           "source": "?: error(\"Не удалось открыть файл для экспорта\")"
         },
         {
-          "line": 160,
+          "line": 163,
           "source": "notice = \"Прогресс экспортирован\""
         },
         {
-          "line": 163,
+          "line": 166,
           "source": "store.dispatch(AppAction.EffectAcknowledged(effect.id, EffectOutcome.Failed(error.message ?: \"Экспорт не удался\")))"
         },
         {
-          "line": 164,
+          "line": 167,
           "source": "notice = error.message ?: \"Экспорт не удался\""
         },
         {
-          "line": 172,
+          "line": 175,
           "source": "notice = \"Дождитесь сохранения прогресса или экспортируйте JSON перед импортом\""
         },
         {
-          "line": 178,
+          "line": 181,
           "source": "val stream = appContext.contentResolver.openInputStream(uri) ?: error(\"Не удалось открыть JSON\")"
         },
         {
-          "line": 183,
+          "line": 186,
           "source": "notice = \"Неподходящий JSON: ${decoded.reason}\""
         },
         {
-          "line": 187,
+          "line": 190,
           "source": "notice = \"Неподдерживаемая версия ${decoded.version}\""
         },
         {
-          "line": 193,
+          "line": 196,
           "source": "notice = \"Дождитесь сохранения прогресса или экспортируйте JSON перед импортом\""
         },
         {
-          "line": 202,
+          "line": 205,
           "source": "ImportResult.Imported -> notice = \"Прогресс импортирован\""
         },
         {
-          "line": 203,
+          "line": 206,
           "source": "is ImportResult.Invalid -> notice = \"Неподходящий JSON: ${result.reason}\""
         },
         {
-          "line": 204,
+          "line": 207,
           "source": "is ImportResult.Unsupported -> notice = \"Неподдерживаемая версия ${result.version}\""
         },
         {
-          "line": 205,
+          "line": 208,
           "source": "is ImportResult.Failed -> notice = result.cause.message ?: \"Импорт не удался\""
         },
         {
-          "line": 209,
+          "line": 212,
           "source": "notice = error.message ?: \"Не удалось прочитать файл\""
         },
         {
-          "line": 224,
+          "line": 227,
           "source": "val stream = appContext.contentResolver.openInputStream(uri) ?: error(\"Не удалось открыть словарь\")"
         },
         {
-          "line": 227,
+          "line": 230,
           "source": "if (vocabulary.importJson(raw)) notice = \"Словарь импортирован\""
         },
         {
-          "line": 230,
+          "line": 233,
           "source": "notice = error.message ?: \"Импорт словаря не удался\""
         },
         {
-          "line": 241,
+          "line": 244,
           "source": "val stream = appContext.contentResolver.openOutputStream(uri, \"wt\")"
         },
         {
-          "line": 242,
+          "line": 245,
           "source": "?: error(\"Не удалось открыть файл словаря\")"
         },
         {
-          "line": 245,
+          "line": 248,
           "source": "notice = \"Словарь экспортирован\""
         },
         {
-          "line": 248,
+          "line": 251,
           "source": "notice = error.message ?: \"Экспорт словаря не удался\""
         },
         {
-          "line": 259,
+          "line": 262,
           "source": "@Suppress(\"UNCHECKED_CAST\")"
         }
       ]

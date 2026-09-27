@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "candidateCount": 4133,
-  "tokenCount": 6889,
+  "candidateCount": 4140,
+  "tokenCount": 6896,
   "rows": [
     {
       "path": "src/training/generator.ts",
@@ -44051,7 +44051,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 36,
+      "line": 37,
       "symbol": "file-scope",
       "sourceFingerprint": "c7ec7fc53f39c7fb2607f804a342b112c7143f11b0cf3586404a7f91fa1c2e14",
       "occurrence": 1,
@@ -44067,7 +44067,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 63,
+      "line": 64,
       "symbol": "ChainPresentation.summary",
       "sourceFingerprint": "ca6564ec9a41614664fb6e8bdc015df9ba2da92f5651babab2c540a1ea99ea8c",
       "occurrence": 1,
@@ -44085,7 +44085,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 68,
+      "line": 69,
       "symbol": "ReferencePipeline.compactSummary",
       "sourceFingerprint": "e67368e451243a123bf615b8656cf1b3167d520f470feee959afc09938f2e597",
       "occurrence": 1,
@@ -44103,7 +44103,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 101,
+      "line": 102,
       "symbol": "PronounContext",
       "sourceFingerprint": "81e2f7ab1abd6dd9ebb3cd7f06def9c2d7e8f17e3b03bdc1ce695a450fb9b6d2",
       "occurrence": 1,
@@ -44127,7 +44127,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 103,
+      "line": 104,
       "symbol": "PronounContext",
       "sourceFingerprint": "b6c825837d61c99060576a2aea1cd4e2941541119fade5497ab99ea2b6a3353c",
       "occurrence": 1,
@@ -44157,7 +44157,73 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
+      "line": 168,
+      "symbol": "file-scope",
+      "sourceFingerprint": "a066dfcba5915aec594ed0c0df50776798e377305d87134ad859ea24dfdc4c0f",
+      "occurrence": 1,
+      "source": "* UC-02: reached through [CoursePackSource] (`:pack-format`) rather than a fixed generated",
+      "tokens": [],
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "serialization-plumbing",
+          "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
       "line": 169,
+      "symbol": "file-scope",
+      "sourceFingerprint": "8426d24adffafdfed8e41062b6ad512c8f2d0c2bd922c490492d4d7f5149851e",
+      "occurrence": 1,
+      "source": "* property — `generateCoursePackSource` (`kotlin/shared/build.gradle.kts`) discovers pl-ru by",
+      "tokens": [],
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "serialization-plumbing",
+          "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
+      "line": 170,
+      "symbol": "file-scope",
+      "sourceFingerprint": "397696b8d5e297b04f061fda41597d3a66c297302f5e57ffb9189f6b46543a9a",
+      "occurrence": 1,
+      "source": "* scanning the `courses` directory for a `course.json`, but it is still read here as schema v1.",
+      "tokens": [],
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "serialization-plumbing",
+          "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
+      "line": 174,
+      "symbol": "PolishCourseData.source",
+      "sourceFingerprint": "0e06b90d5a98a136b7fa96e5f7e09b28da0a0ec04aa91843cf9b7087c10708df",
+      "occurrence": 1,
+      "source": "val source: CoursePackSource = embeddedCoursePackSources.first { it.id == \"pl-ru\" }",
+      "tokens": [
+        "\"pl-ru\""
+      ],
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "serialization-plumbing",
+          "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
+      "line": 176,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "7d3e385422dc006bd119091443b734a3f49096c184a6c6f1feb00bf66397c142",
       "occurrence": 1,
@@ -44175,7 +44241,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 170,
+      "line": 177,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "691ee427b361e5c4a07fe071b6e3cb66e27a6afcafaef1facf3045ee55612831",
       "occurrence": 1,
@@ -44199,7 +44265,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 171,
+      "line": 178,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "e0a3c6c9a74dc6decffe8a6eb308640acf6827b376877d5f51bd3236903b0b63",
       "occurrence": 1,
@@ -44235,7 +44301,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 175,
+      "line": 182,
       "symbol": "PolishCourseData.nouns",
       "sourceFingerprint": "6d871edc2cb6a26f468a9ce73cdc7fb46af77a4fca9a1efbf62c44b29f8a6d15",
       "occurrence": 1,
@@ -44253,7 +44319,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 176,
+      "line": 183,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "5b430e6702fc0369ecc027be63df8f9d9ce48fb2b126d3fac12f91927853dafa",
       "occurrence": 1,
@@ -44289,7 +44355,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 177,
+      "line": 184,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "799a0b81790231d420cae6e187cb267fcb9ee6bd6a4f513d26e524f396fb1c6b",
       "occurrence": 1,
@@ -44307,7 +44373,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 180,
+      "line": 187,
       "symbol": "PolishCourseData.adjectives",
       "sourceFingerprint": "2cfc24fe1cfa6a335fa368fcf55464c62a367ff716fb3fa9a99d7802f541d01d",
       "occurrence": 1,
@@ -44325,7 +44391,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 181,
+      "line": 188,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "2ab2c31cdeeccd8b1753801a792cf415d56073248f346f7e39b16a21b8f249fa",
       "occurrence": 1,
@@ -44355,7 +44421,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 183,
+      "line": 190,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "86ef65d07f521c43fe0254cd9af648bc6e7d1b784a8d3a870b6d516c4b821774",
       "occurrence": 1,
@@ -44373,7 +44439,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 187,
+      "line": 194,
       "symbol": "PolishCourseData.verbs",
       "sourceFingerprint": "91109117b4effa68106b3828678617a895e15bb5df4add320fb41f3a5dbcd07f",
       "occurrence": 1,
@@ -44391,7 +44457,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 188,
+      "line": 195,
       "symbol": "PolishCourseData.past",
       "sourceFingerprint": "c209690cb452c78ae4ba139e1b242569f90221da0535e34cd1f9292c5eb056cd",
       "occurrence": 1,
@@ -44409,7 +44475,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 189,
+      "line": 196,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "e60ed4f46fb1b8f9a5499de2d8862de00a5aacb325b982b85ca3c23ab5198e7d",
       "occurrence": 1,
@@ -44439,7 +44505,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 190,
+      "line": 197,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "dabfdde11b161b12ec598e153c862332ad02a5dc1c1162275a41501d5a8050b4",
       "occurrence": 1,
@@ -44457,7 +44523,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 191,
+      "line": 198,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "5b7603797c8e3abe482e206926a961a77fef9f4f5dcba90e8bbdaa10deec7c5b",
       "occurrence": 1,
@@ -44475,7 +44541,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 197,
+      "line": 204,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "bb0f9fca8372acd5d746757221175ce0e9d03783911c27b67f25d99cf53f532e",
       "occurrence": 1,
@@ -44517,7 +44583,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 198,
+      "line": 205,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "3e9337572d4c50421b1d7851a1c38cae4978c3e1e0917e3434afbe0c868bbc9a",
       "occurrence": 1,
@@ -44541,7 +44607,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 201,
+      "line": 208,
       "symbol": "PolishCourseData.skills",
       "sourceFingerprint": "c1f2d920fb86e7ad0c854104e1b0252eaab47badf587ea45372dd594639d2a8e",
       "occurrence": 1,
@@ -44559,7 +44625,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 202,
+      "line": 209,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "8695797b53bdf90004071808d05a8d7a52bf86e120b5af6e307ddfe90b85dfbd",
       "occurrence": 1,
@@ -44595,7 +44661,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 203,
+      "line": 210,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "cd87d7a63977566825b3d14a4a86a65b0d8a6dfdaba888709f566695a99ef69e",
       "occurrence": 1,
@@ -44625,7 +44691,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 204,
+      "line": 211,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "a37e66782d31113c79b5ff924d08e30326e5db37a6febb1d3137c2182bfda1fa",
       "occurrence": 1,
@@ -44643,7 +44709,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 207,
+      "line": 214,
       "symbol": "PolishCourseData.sentenceSeeds",
       "sourceFingerprint": "f75d64b991f469454374e5824683b5037ada3494d6d52da978670ca16b243d34",
       "occurrence": 1,
@@ -44661,7 +44727,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 208,
+      "line": 215,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "7768db64200d4c9ef4f19e9c2c5430d7a3a83d96cae322b1e3a55f9eed1bfb7d",
       "occurrence": 1,
@@ -44685,7 +44751,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 215,
+      "line": 222,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "07122a633b422c444b3da3dda29f485ffb6e8bc6b781c1a9ebd710557fe838d9",
       "occurrence": 1,
@@ -44703,7 +44769,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 219,
+      "line": 226,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "cbb0a73527f66ab1b3fdd80c63a7f1d4f68133f6bc30de86f4b2478e2c3104ef",
       "occurrence": 1,
@@ -44721,7 +44787,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 223,
+      "line": 230,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "18a7d20d6be9ffdae118336a1642b31b82fcaca78168b6317625cba9e738b067",
       "occurrence": 1,
@@ -44739,7 +44805,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 227,
+      "line": 234,
       "symbol": "PolishCourseData.value",
       "sourceFingerprint": "d400bc3a636a783c05ca05961680223fb711264535b6d73a5cb3702836a053c5",
       "occurrence": 1,
@@ -44763,7 +44829,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 228,
+      "line": 235,
       "symbol": "PolishCourseData.completion",
       "sourceFingerprint": "ee63af224b5d79ec982d38488632be22896bf4658afff1a28f38c1ed7c2815f0",
       "occurrence": 1,
@@ -44781,7 +44847,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 230,
+      "line": 237,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "3ad952c5bd4a85b5ff149fab23141d5494d076fbf53d095981bc6aef7252c91c",
       "occurrence": 1,
@@ -44811,7 +44877,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 232,
+      "line": 239,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "90643b19b9c80bd3dc7d2f10c15077dd7f02606d084637e08a1f7ea9aacf3154",
       "occurrence": 1,
@@ -44835,7 +44901,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 233,
+      "line": 240,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "4576ea49837da38eed72f45715398318078276e4c5144e80ba5581a80c9d47b7",
       "occurrence": 1,
@@ -44859,7 +44925,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 239,
+      "line": 246,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "eabd698a121339d5b90274003ce60363ffc47f1ac1118457a438d51fc7157203",
       "occurrence": 1,
@@ -44883,7 +44949,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 240,
+      "line": 247,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "c21c35f47825ce273f7164fe25beb8c087517a4383fa10eb9680c1a27e58040b",
       "occurrence": 1,
@@ -44913,7 +44979,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 241,
+      "line": 248,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "4008165549df776ea219577eecc5fb92177e0934644dfb28b5e2cd73421f82bb",
       "occurrence": 1,
@@ -44943,7 +45009,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 246,
+      "line": 253,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "588c6971992fe1aa0c3ab84b6b09e5d4c27f7bef20c1b74a3aef5c0203f27a9c",
       "occurrence": 1,
@@ -44967,7 +45033,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 250,
+      "line": 257,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "cf89b40e9fc3daa510d4ba75e77c1ea945fc7d940309ccd1555eac85d774cc08",
       "occurrence": 1,
@@ -44991,7 +45057,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 251,
+      "line": 258,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "d24e467cadde8ccec0679fde85874ae103706e4eee50efde9192d2958a7827af",
       "occurrence": 1,
@@ -45027,7 +45093,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 258,
+      "line": 265,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "090be2698f6e66776a86d94f18c38505244c6b2b00e5c98c3ea611d2a76de201",
       "occurrence": 1,
@@ -45051,7 +45117,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 259,
+      "line": 266,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "e4b49c6dfd37552e48ac9cd28e18e7f1a0f105fe293499dae9a3a08b4e61e181",
       "occurrence": 1,
@@ -45087,7 +45153,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 261,
+      "line": 268,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "26140eb00f1deb07039dc33b91bb17e6a37d3c616629d6fa235979e02cbfc98d",
       "occurrence": 1,
@@ -45123,7 +45189,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 266,
+      "line": 273,
       "symbol": "PolishCourseData.pipeline",
       "sourceFingerprint": "fd02a4f7f2320021bcb4c82b3bc897fa1a275502c8ba183488714b524f885d11",
       "occurrence": 1,
@@ -45147,7 +45213,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 268,
+      "line": 275,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "099d83352de6ab836b6f7c3871fd5f214643deea6e45d13895a0a96ced20b0af",
       "occurrence": 1,
@@ -45165,7 +45231,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 269,
+      "line": 276,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "4e1b71011d5e75af4235b440f900272fc0f76afa3bb34dc6c16a82e64fd1d730",
       "occurrence": 1,
@@ -45183,7 +45249,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 270,
+      "line": 277,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "04aa478790f3420ed771e187cfd0a6b34ad5a779835cde6b2a5312b6663adbe3",
       "occurrence": 1,
@@ -45219,7 +45285,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 272,
+      "line": 279,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "8c9ef3703e23088a0e2c8859cff8748961a78a76badb5319d37891972c6b52da",
       "occurrence": 1,
@@ -45237,7 +45303,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 274,
+      "line": 281,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "3211eeb4a3109990116539c91e8794229d8a57deba682718b071b61cb5bed1ff",
       "occurrence": 1,
@@ -45267,7 +45333,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 279,
+      "line": 286,
       "symbol": "PolishCourseData.teaching",
       "sourceFingerprint": "21e4ec047038a67d3b7c4c312e6bfea8f15c65ecff43b8e1e7d424d91beaa288",
       "occurrence": 1,
@@ -45291,7 +45357,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 280,
+      "line": 287,
       "symbol": "PolishCourseData.note",
       "sourceFingerprint": "56a4e210abce2aa0902ead64e9018c34c03f0d7a57280f9401bf60f49d1a53b3",
       "occurrence": 1,
@@ -45309,7 +45375,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 281,
+      "line": 288,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "a947fde43c0ab0cac8db8ec5b29173aed159f7a2755fea85f2cf0d308c972b0a",
       "occurrence": 1,
@@ -45339,7 +45405,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 285,
+      "line": 292,
       "symbol": "PolishCourseData.teaching",
       "sourceFingerprint": "7382b5cc4f9ce6a2e54f07eb15cce1634e19047e2b7fa9602f6bc7f5d6ec4578",
       "occurrence": 1,
@@ -45363,7 +45429,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 286,
+      "line": 293,
       "symbol": "PolishCourseData.personal",
       "sourceFingerprint": "c24bf5f629f3354031a92bbba520385442e6d3c82784ff52f3eb3419d68d5f32",
       "occurrence": 1,
@@ -45381,7 +45447,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 287,
+      "line": 294,
       "symbol": "PolishCourseData.intro",
       "sourceFingerprint": "9840bcf2e32c7a664f10e0b827f46cc116db3a6e0849395d0eb8302b1fc3391f",
       "occurrence": 1,
@@ -45399,7 +45465,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 288,
+      "line": 295,
       "symbol": "PolishCourseData.footer",
       "sourceFingerprint": "ac77c519212bc64a3ecf44bc85f79c223af3933708d1da69da0ceef8944b8b62",
       "occurrence": 1,
@@ -45417,7 +45483,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 289,
+      "line": 296,
       "symbol": "PolishCourseData.possessive",
       "sourceFingerprint": "007ffd2fc9218dee37051431cea7a4ffe3275e406061a9e82d33a9b63cab61b0",
       "occurrence": 1,
@@ -45435,7 +45501,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 290,
+      "line": 297,
       "symbol": "PolishCourseData.demo",
       "sourceFingerprint": "1ce9f329bf79ca9f3abab72797bdf8aa397c89aca5c5f6d88e9a8ba1c65cdecb",
       "occurrence": 1,
@@ -45453,7 +45519,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 292,
+      "line": 299,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "42a6b5033bbc6f0468b12aa0ef220a88338efc6e447434da4d942a88b84ec902",
       "occurrence": 1,
@@ -45483,7 +45549,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 293,
+      "line": 300,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "d74efcb1fffabcf27cb9ddff9022e163e45b06ff92511c04e36f96efc8fcc345",
       "occurrence": 1,
@@ -45513,7 +45579,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 294,
+      "line": 301,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "20bce592cdfb1834f05894fa2748b3c806b57f01c8e9a89e89982d48a54ffad3",
       "occurrence": 1,
@@ -45531,7 +45597,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 295,
+      "line": 302,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "a0cce457819e479ff27117240dd11a11514b907feb28b24fb9ef3b503271da10",
       "occurrence": 1,
@@ -45549,7 +45615,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 296,
+      "line": 303,
       "symbol": "PolishCourseData.id",
       "sourceFingerprint": "d42635102d7aa31ecac52f2c9c2696cf636593ab06afa87a69e7661443f00f70",
       "occurrence": 1,
@@ -45567,7 +45633,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 297,
+      "line": 304,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "5ee29ed263a646f405f0ff11cb0d85c898a846d8c0aa22c6f294a1e46eae9c3d",
       "occurrence": 1,
@@ -45585,7 +45651,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 298,
+      "line": 305,
       "symbol": "PolishCourseData.cue",
       "sourceFingerprint": "c9b6ad0a80899a1dd3d20b7f1aceda4a5e5e1916a87f26a1495da39e7f395746",
       "occurrence": 1,
@@ -45603,7 +45669,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 299,
+      "line": 306,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "b779e455bb5fbdee6b589ca65b82b3fdba98db3acd38391b0065859db76e8d7c",
       "occurrence": 1,
@@ -45633,7 +45699,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 300,
+      "line": 307,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "708d209397329573fc711f09ddeeaa6dab8e83977fc423452ceb284f3b01a708",
       "occurrence": 1,
@@ -45663,7 +45729,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 301,
+      "line": 308,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "8f2dc1ea4e58aba4c8409104366144d9a6cee26d29e2c281e33dc4a3e6d16aaa",
       "occurrence": 1,
@@ -45681,7 +45747,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 303,
+      "line": 310,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "96fce374fd3692eec1dab0a207a67519b828190fe241ae117f5a20c70dc7442d",
       "occurrence": 1,
@@ -45699,7 +45765,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 305,
+      "line": 312,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "8d7d21e921678b02b1144e3bca531a30bb6048986e48823ea5ce64418f4edae8",
       "occurrence": 1,
@@ -45729,7 +45795,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 306,
+      "line": 313,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "fff72e649a12ab8bdddb8a6ed3cf6c92b0037984974cc1f9e9100c32ef29756c",
       "occurrence": 1,
@@ -45747,7 +45813,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 307,
+      "line": 314,
       "symbol": "PolishCourseData.caption",
       "sourceFingerprint": "3206d898263f3c6d8d406aa3caf4711b487a5a6b3d0b4bbd9b076b0a77b7dcab",
       "occurrence": 1,
@@ -45765,7 +45831,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 308,
+      "line": 315,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "7b186610ca34058e08bb83975bddc9cc30b3323e40010725690c65b4398d721e",
       "occurrence": 1,
@@ -45789,7 +45855,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 309,
+      "line": 316,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "061ef9a2a84e0d043fdaa211b14509e01397cd92c75d757b2dd4ff8482039a8f",
       "occurrence": 1,
@@ -45813,7 +45879,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 311,
+      "line": 318,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "a51f4972a5cca6c98aa1b9358d55243c95593981d1cc5fc27084a081876bbec1",
       "occurrence": 1,
@@ -45831,7 +45897,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 312,
+      "line": 319,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "fcc9b94c9aa03965850ee7783c0e1f96a100983fb4b892c1cb853ff9c89ea135",
       "occurrence": 1,
@@ -45867,7 +45933,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 315,
+      "line": 322,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "0c79aa598ecd701336cede9df04a923de192d56a2f231c79e414919a4ca86d31",
       "occurrence": 1,
@@ -45933,7 +45999,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 322,
+      "line": 329,
       "symbol": "PolishCourseData.teaching",
       "sourceFingerprint": "9747dd481b70acb3d380015147022bfe62a1e41e570671911ff28e891bb03319",
       "occurrence": 1,
@@ -45957,7 +46023,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 324,
+      "line": 331,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "d0afc4b7dead1129f67f1ce24a24945621dd9bc203feb51c3ade6b7376470ae4",
       "occurrence": 1,
@@ -45975,7 +46041,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 325,
+      "line": 332,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "1926b15620cc393fb016f3dc11eb1cbbbc0acec022a5a3eee0eca7007aa9eb6b",
       "occurrence": 1,
@@ -45999,7 +46065,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 326,
+      "line": 333,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "424404473a7290ebf71fa33604e064bd6f4ec2e070ced8c416509085f8d0b219",
       "occurrence": 1,
@@ -46029,7 +46095,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 327,
+      "line": 334,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "516ce8825404f4933514187222b653b5aeb728395ba0ceceddaa23b9d45b10b8",
       "occurrence": 1,
@@ -46053,7 +46119,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 329,
+      "line": 336,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "ad8c1c438fef8b9c973053d2e4889b8a87af630d1de5f267f88bc3c370d3b1ec",
       "occurrence": 1,
@@ -46071,7 +46137,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 330,
+      "line": 337,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "3d5ddceeb94ef9eacdccaed2d48b7f161bec62baff3cfbc01d9a6651c8099633",
       "occurrence": 1,
@@ -46101,7 +46167,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 331,
+      "line": 338,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "7addfd3f767a7e48516875d6c4a5057adb2c13b501cd25b1bf26b6158db8f423",
       "occurrence": 1,
@@ -46119,7 +46185,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 332,
+      "line": 339,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "f73f288236738ef959f800d36a8fcb1c33700e6f7f45edec7c5a80a25610ebac",
       "occurrence": 1,
@@ -46143,7 +46209,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 333,
+      "line": 340,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "7f26beb3e7d0e57b40f6c65e0bed4adf9e68a098c5f0d093b812c6c7a30c8e1a",
       "occurrence": 1,
@@ -46167,7 +46233,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 338,
+      "line": 345,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "019113b21548fbf772011a9b7658b0a474ee6cae9ebe001e1393035ded9c416e",
       "occurrence": 1,
@@ -46191,7 +46257,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 345,
+      "line": 352,
       "symbol": "PolishCourseData.support",
       "sourceFingerprint": "64eb10d6e33df6a65f72bd116fa82c9f29ccf9f5f4282a43070df58dbbec4110",
       "occurrence": 1,
@@ -46215,7 +46281,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 346,
+      "line": 353,
       "symbol": "PolishCourseData.title",
       "sourceFingerprint": "b9fab1aeee80d81d094e97e63fe20cd978a83b593cfe5cd72d7271749cd0c435",
       "occurrence": 1,
@@ -46233,7 +46299,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 348,
+      "line": 355,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "92a6ff9d197e26c4e565db9303ff4d9a9d405e2fb2db86fae74dd446de754fab",
       "occurrence": 1,
@@ -46257,7 +46323,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 349,
+      "line": 356,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "8dab553bbf89fa2a538272096e7f5b1a36f145978f482f6dcb93245ea42190de",
       "occurrence": 1,
@@ -46275,7 +46341,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 350,
+      "line": 357,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "cefb9daeea7741fd68b15b647a30fd9e76a1800d8d9c266d25a4e2c442c6f7f3",
       "occurrence": 1,
@@ -46293,7 +46359,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 351,
+      "line": 358,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "73020041c26da76d7db1abf8f9f59c05e0a7424fd090f3a38b40114e13bed681",
       "occurrence": 1,
@@ -46311,7 +46377,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 352,
+      "line": 359,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "c8b322c1a0d8e4742202ef76fc4bcaa45f4c2fa90bcec31e20792da35de73aab",
       "occurrence": 1,
@@ -46329,7 +46395,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 355,
+      "line": 362,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "696698e8d11842ebfdf5ff95a53edafc05ed63bb736ceee0f280a98672de13c6",
       "occurrence": 1,
@@ -46353,7 +46419,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 356,
+      "line": 363,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "a66b6546bdb0f22c387c7d15d2795a7f36afdfe41a4c9db1bd883e50171533e9",
       "occurrence": 1,
@@ -46371,7 +46437,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 357,
+      "line": 364,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "c19baefb6b7225abc22d80b85267474db7675d49138c2caacfac29080464373d",
       "occurrence": 1,
@@ -46389,7 +46455,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 358,
+      "line": 365,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "9adce0f9525eb9b91ebb8e99416ba916575c7c2e6dd5d65d91954dd661d81ed5",
       "occurrence": 1,
@@ -46407,7 +46473,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 359,
+      "line": 366,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "941f26daf7857ed55a576fcccec1d60e5a07bc4360f11e7ab1dad9f7d161e6dd",
       "occurrence": 1,
@@ -46425,7 +46491,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 360,
+      "line": 367,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "6895aa57a879879010f8f7b225f32685c39f76da2cdd560ad06771f68597cf59",
       "occurrence": 1,
@@ -46443,7 +46509,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 361,
+      "line": 368,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "00ff8cda93e33395452e719eac2c7b879a7ac1d1d6a8b6fb741f2a64206a66e4",
       "occurrence": 1,
@@ -46461,7 +46527,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 362,
+      "line": 369,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "01694fd5ed44772b23b0645666bfd0dfd20b89a55868520c0c8a94075c05a3a2",
       "occurrence": 1,
@@ -46479,7 +46545,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 367,
+      "line": 374,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "c2cb9571eed174a55a44d047248d12040de6e1d48f08c8d7db7fa3d0599abef3",
       "occurrence": 1,
@@ -46515,7 +46581,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 368,
+      "line": 375,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "7afe215663969ad6bd41ca927026abe58aa0cf08405d3dfe9244375140833e93",
       "occurrence": 1,
@@ -46539,7 +46605,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 373,
+      "line": 380,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "01c00f918a81f0db543a7edcbabc7f57cbab125647408773d7bbc4319c757bf5",
       "occurrence": 1,
@@ -46563,7 +46629,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 374,
+      "line": 381,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "6ecb3a423b64b1f04bb9733bfc55eac1f0de1ee4e594268925e6c610a99ed706",
       "occurrence": 1,
@@ -46593,7 +46659,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 383,
+      "line": 390,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "f4578e3d75db9709c298320561255cfcdbc30c8d3f8e4c50d58cf053f7633eb3",
       "occurrence": 1,
@@ -46617,7 +46683,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 384,
+      "line": 391,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "0a6ff87908747bcf1f31d32e504a8fd9f3bcd661603bb93e80878c2c568fe668",
       "occurrence": 1,
@@ -46641,7 +46707,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 385,
+      "line": 392,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "c5de4e7e63fba632a971f36dceebfef28418cc51f2800696cf7ed75cc976753b",
       "occurrence": 1,
@@ -46677,7 +46743,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 394,
+      "line": 401,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "2e5ae2cd8a64bc55c868ae23234fc0a13e563166ce7a52cf76ebbdba82618943",
       "occurrence": 1,
@@ -46701,7 +46767,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 395,
+      "line": 402,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "a1bf14598d33f93747b23bef241efec8d540dc34036d1c2174d412d05f568cd5",
       "occurrence": 1,
@@ -46731,7 +46797,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 396,
+      "line": 403,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "1e86d98baf583c304dd05e66866e5a35bb2e81b4c300879cac70af9b9868e197",
       "occurrence": 1,
@@ -46749,7 +46815,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 397,
+      "line": 404,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "72d110629a4f99a614f5a3553808ac99708ebccb9f53ecc8805842cad4e65b77",
       "occurrence": 1,
@@ -46779,7 +46845,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 398,
+      "line": 405,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "b7795e4ae2a57188b60b4c312912b11ea2ef64766078a2c10e9a386ae0a2f47e",
       "occurrence": 1,
@@ -46797,7 +46863,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 400,
+      "line": 407,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "557b535e948fdeae934287e50c4ff0aefb761897ef96d76b63a61670e19c82b6",
       "occurrence": 1,
@@ -46827,7 +46893,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 406,
+      "line": 413,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "01756dfb0320d5603160a3bc0ba87fdec621770667df98f369b2f49dbe6f376d",
       "occurrence": 1,
@@ -46845,7 +46911,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 407,
+      "line": 414,
       "symbol": "PolishCourseData.focus",
       "sourceFingerprint": "8ceeb4ba72a68478923cf73f94d75de695f8d71036b048277500eded184b219b",
       "occurrence": 1,
@@ -46863,7 +46929,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 408,
+      "line": 415,
       "symbol": "PolishCourseData.methods",
       "sourceFingerprint": "bb0ffe5460ec8ccebd1a3c9ddfae01d7ae64014a64ac6f47ef2ae6d17cb40963",
       "occurrence": 1,
@@ -46881,7 +46947,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 409,
+      "line": 416,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "216cd12a8117e4d751d5df539877355dd18962c4e1ae9c8a571f4b884ad1073e",
       "occurrence": 1,
@@ -46899,7 +46965,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 410,
+      "line": 417,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "55dbbca3698878f6e10b82e921bc5aa02e4fa3d25fd99bad5b4ebb4717517049",
       "occurrence": 1,
@@ -46923,7 +46989,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 411,
+      "line": 418,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "2c8c4b5534b73f01d1722677a1d8133918a08287c2e222a6b561ec6e1b109fdf",
       "occurrence": 1,
@@ -46947,7 +47013,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 416,
+      "line": 423,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "d5565fb039aab8042e18e835b3954cf30ccf26902c3b310ab319503122765d20",
       "occurrence": 1,
@@ -46963,7 +47029,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 418,
+      "line": 425,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "a72e468e20581cfd21e428e3bdf4252a3933fd57c97279130f2497aaf7984203",
       "occurrence": 1,
@@ -46993,7 +47059,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 422,
+      "line": 429,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "76397b5a798f3cbc3b5ee81dcd78b3a73177cd24d1925ad6bb982310b03c741d",
       "occurrence": 1,
@@ -47017,7 +47083,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 423,
+      "line": 430,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "cf184fbcd6432ff554b679cee32ecf794bacc30e0eb4d223402d3c6afba7a7f1",
       "occurrence": 1,
@@ -47047,7 +47113,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 424,
+      "line": 431,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "9bd281753077b7fc371fda3413790fc1482a8c93d1ab18c19b5e84069226f985",
       "occurrence": 1,
@@ -47077,7 +47143,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 425,
+      "line": 432,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "19dd435e62087ebe76a51e40b0982d8fbfaf532caae7302d665c4c40c1d36fbe",
       "occurrence": 1,
@@ -47095,7 +47161,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 426,
+      "line": 433,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "6792cf90a8d1df557f8359f6277dff016f52a19d53bb482cdfa527a08fff9ec1",
       "occurrence": 1,
@@ -47113,7 +47179,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 431,
+      "line": 438,
       "symbol": "PolishCourseData.matrixIntroduction",
       "sourceFingerprint": "1ffe5004fdfc0e4eed6648df38c513ab83d8ad8c57d6f7ddaef0e06a4a591c25",
       "occurrence": 1,
@@ -47138,7 +47204,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 432,
+      "line": 439,
       "symbol": "PolishCourseData.webCaseCompositionHeader",
       "sourceFingerprint": "8c1073dda2ca363c8044b230b9d06e647a31066f5e67648c4e8b85e2cc1237e1",
       "occurrence": 1,
@@ -47163,7 +47229,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 434,
+      "line": 441,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "a4eda7847dbefed5b7b522f8c1bdff09111399f136fb57900a3671441c59a6f1",
       "occurrence": 1,
@@ -47201,7 +47267,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 436,
+      "line": 443,
       "symbol": "PolishCourseData.maleAccIntro",
       "sourceFingerprint": "97053af5bb07627a0dce0ad585d3b82f7c54b2362ec5c155a2843d16eba6eead",
       "occurrence": 1,
@@ -47226,7 +47292,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 438,
+      "line": 445,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "244d58c54e684fcd8a243c14dd844ee31d0471699029891a045a56af9d814be7",
       "occurrence": 1,
@@ -47264,7 +47330,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 441,
+      "line": 448,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "dde77cc95bb9eeca5cbd8df2769b4ce37103e0de8f9f3367be98d2b3ace641c3",
       "occurrence": 1,
@@ -47288,7 +47354,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 442,
+      "line": 449,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "9680b989e4f99e62a0e2f4d4c1de850f393e18acb1ed12aaa0858539df703566",
       "occurrence": 1,
@@ -47328,7 +47394,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 445,
+      "line": 452,
       "symbol": "PolishCourseData.vocabularyUnavailableLabel",
       "sourceFingerprint": "4705aedf145e938420a95083b054c0e29e8739e696cdc83c95e9f70f9953bb80",
       "occurrence": 1,
@@ -47353,7 +47419,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 448,
+      "line": 455,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "be3964420f970cf371b2546c1413c36e0006e3ff2ffaee30de5e2c61b522dab9",
       "occurrence": 1,
@@ -47371,7 +47437,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 449,
+      "line": 456,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "f79ad32203e6917d2c9307fee3d5442b8c3da8e7d772c9b77eb5754340958699",
       "occurrence": 1,
@@ -47395,7 +47461,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 450,
+      "line": 457,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "b5877322842bf085021c82104831d50d81fa455bc1395682f5633e8193dd9556",
       "occurrence": 1,
@@ -47413,7 +47479,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 455,
+      "line": 462,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "3b8195491e72cb86dfe42d07b58c9d35358c7bbe00ed62c06368205fc2730f9f",
       "occurrence": 1,
@@ -47431,7 +47497,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 459,
+      "line": 466,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "0dd92bb87fe27fed0fe1d5f568ede5e3532097ab8b317d89f2d8abb3365028b0",
       "occurrence": 1,
@@ -47461,7 +47527,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 463,
+      "line": 470,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "e9ffbccda2367a24d9f9d3a218b8f82670db6670f31f780768faa0a2f95820c8",
       "occurrence": 1,
@@ -47479,7 +47545,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 464,
+      "line": 471,
       "symbol": "PolishCourseData.id",
       "sourceFingerprint": "966cea71fe43eadcbe226d5476a53c393f39262d4824760c5b2b7376e1aac456",
       "occurrence": 1,
@@ -47497,7 +47563,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 465,
+      "line": 472,
       "symbol": "PolishCourseData.forms",
       "sourceFingerprint": "2f5af9d8df6afe877291b0b5b854b12b9c11368a1c95a4696297f43f508e9aa2",
       "occurrence": 1,
@@ -47515,7 +47581,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 466,
+      "line": 473,
       "symbol": "PolishCourseData.value",
       "sourceFingerprint": "0e6bbe11f82b4f7b4f3e3f6b60022438791ab83a6fd7cc8d547ad810b9bce75d",
       "occurrence": 1,
@@ -47533,7 +47599,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 467,
+      "line": 474,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "9924009fd06306925393669114b816bbd497b630920528b67b59fe59c05f763d",
       "occurrence": 1,
@@ -47551,7 +47617,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 469,
+      "line": 476,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "be6c8def42e8309a96f63b8203d2859939a005bf5ccd9d67c656179c6a9483fa",
       "occurrence": 1,
@@ -47575,7 +47641,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 470,
+      "line": 477,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "e290b85d24da2604a042a88ec6a3506ccc78eaa2400f744fcc0284a166172e02",
       "occurrence": 1,
@@ -47593,7 +47659,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 472,
+      "line": 479,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "e438bac1bf247ca882b652a4af66cefe5533ee67be4590638a4d860e628b5686",
       "occurrence": 1,
@@ -47611,7 +47677,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 474,
+      "line": 481,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "96d7e0c40178f9c687ef69343a9a5bdf6b8072eed695d43464b0a31cc472e4e1",
       "occurrence": 1,
@@ -47641,7 +47707,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 475,
+      "line": 482,
       "symbol": "PolishCourseData.singular",
       "sourceFingerprint": "293e1bda178e310d9829fd12ea1f346f7a838a6bd3124c47dc38f5c8ad570e46",
       "occurrence": 1,
@@ -47659,7 +47725,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 476,
+      "line": 483,
       "symbol": "PolishCourseData.plural",
       "sourceFingerprint": "a1b9f87fca400a2f6c7c561de487754fe8a3be28e7e9c3e28fd14cf5b71d83a7",
       "occurrence": 1,
@@ -47677,7 +47743,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 478,
+      "line": 485,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "98f2bbbf651b19df7ef0f166ee285cedd000b49bef9e21bbf3f6793ecb3cec33",
       "occurrence": 1,
@@ -47701,7 +47767,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 484,
+      "line": 491,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "43f2a8b46f52397af79c981a6fd2a73bf05b792992f95046b5b783510a254c58",
       "occurrence": 1,
@@ -47725,7 +47791,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 491,
+      "line": 498,
       "symbol": "PolishCourseData.morphology",
       "sourceFingerprint": "48b35fe6b50829c324b44a9be2c76587e0c57ac8012e35d8a5973efeca520e9d",
       "occurrence": 1,
@@ -47743,7 +47809,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 492,
+      "line": 499,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "62ccd8a04ff70d1e57b222ee2af8dc2565779865811a1102ae8cd78e032f7c63",
       "occurrence": 1,
@@ -47761,7 +47827,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 493,
+      "line": 500,
       "symbol": "PolishCourseData.auxiliary",
       "sourceFingerprint": "847e217cf270386ca6033268d95878d41a56ee12ce24e5554c6153dd3337b2ae",
       "occurrence": 1,
@@ -47779,7 +47845,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 494,
+      "line": 501,
       "symbol": "PolishCourseData",
       "sourceFingerprint": "2f3f8faff99c3a8293933b3d7a8a019567365c16963d61513c1b2d6959639130",
       "occurrence": 1,
@@ -47803,7 +47869,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 495,
+      "line": 502,
       "symbol": "PolishCourseData.verbId",
       "sourceFingerprint": "e178aeb8abd3d05198f1b81e57e8856c1be71991c17e6838f3ba62cef9dad6fb",
       "occurrence": 1,
@@ -47821,7 +47887,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 497,
+      "line": 504,
       "symbol": "PolishCourseData.forms",
       "sourceFingerprint": "10d9ce9e6aa5fc2aab20890f8ceac76bd610f67fcbb8277db4a35e15e44fa960",
       "occurrence": 1,
@@ -47839,7 +47905,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 513,
+      "line": 520,
       "symbol": "caseSentencePrefix",
       "sourceFingerprint": "0b3fe1ebe1116652b737aa11f6854e854e03f18a25f48dd852fcfa02bc65299e",
       "occurrence": 1,
@@ -47863,7 +47929,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 539,
+      "line": 546,
       "symbol": "coursePlaceholder",
       "sourceFingerprint": "3b70367b300edb039e8478e4f42c4332f54d7ee289a82099dc273467e9a2df62",
       "occurrence": 1,
@@ -47881,7 +47947,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 544,
+      "line": 551,
       "symbol": "file-scope",
       "sourceFingerprint": "3e4615542bd11f76e1796c77612e5f83f02fe3787baf831af222024dccbcc543",
       "occurrence": 1,
@@ -47899,7 +47965,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 548,
+      "line": 555,
       "symbol": "file-scope",
       "sourceFingerprint": "c828688c7441237723b36157afcd8cf5810f0f01f48479791c7dcbf82f04a4cd",
       "occurrence": 1,
@@ -47917,7 +47983,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 561,
+      "line": 568,
       "symbol": "JsonObject.required",
       "sourceFingerprint": "74819b77d57b6090f29c74a76fef7348e54ff009fc36150a8f2c6d12524c1a12",
       "occurrence": 1,
@@ -47935,7 +48001,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 564,
+      "line": 571,
       "symbol": "JsonObject",
       "sourceFingerprint": "18f432c99aa33608f0d1aed4c77e2eebe4a1e7e4d385ee5452bcaaf42ca7dba0",
       "occurrence": 1,
@@ -47965,7 +48031,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 565,
+      "line": 572,
       "symbol": "JsonObject",
       "sourceFingerprint": "08c5b3d26a4f3dea38352b10d9beee3edc311b59ce1390552dc144008386b0be",
       "occurrence": 1,
@@ -47995,7 +48061,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 569,
+      "line": 576,
       "symbol": "file-scope",
       "sourceFingerprint": "381f740a91e01cbe7f69ecd4305ed14559acb427edc56c08f30bebd05a42536c",
       "occurrence": 1,
@@ -48019,7 +48085,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 572,
+      "line": 579,
       "symbol": "JsonObject.from",
       "sourceFingerprint": "bb7b43090e4a7d0ba265acfa3c71126b2fad79a65c424efb37c9e0d9a95113c9",
       "occurrence": 1,
@@ -48037,7 +48103,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 573,
+      "line": 580,
       "symbol": "JsonObject.to",
       "sourceFingerprint": "87c74eb0fb9fcd6532a710e7d82a9f61aac83cda1abff1f2b5920272d42225ab",
       "occurrence": 1,
@@ -48055,7 +48121,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 577,
+      "line": 584,
       "symbol": "JsonObject.parts",
       "sourceFingerprint": "5d8a9d1bc9a928a8332db94b0eb284e0458c48f632b5a8fa091eec9519a001e7",
       "occurrence": 1,
@@ -48073,7 +48139,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 578,
+      "line": 585,
       "symbol": "JsonObject.parts",
       "sourceFingerprint": "b5cd718ee995a52d03aee47822e7ab291681596417c94454c53417478190a571",
       "occurrence": 1,
@@ -48091,7 +48157,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 579,
+      "line": 586,
       "symbol": "JsonObject.parts",
       "sourceFingerprint": "109b9927cc8d9f1e2ce1eef1a74b8c921b05a2a5a0dbe6e8490d3485be2a257e",
       "occurrence": 1,
@@ -48109,7 +48175,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 581,
+      "line": 588,
       "symbol": "JsonObject.parts",
       "sourceFingerprint": "cdc41f1ec54b0ae214cb640d81d7eb9260bdbbe657c28269945d443c57f5a918",
       "occurrence": 1,
@@ -48127,7 +48193,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 584,
+      "line": 591,
       "symbol": "JsonObject.parts",
       "sourceFingerprint": "818563d39b85124991781edebed212aedd26632fda542244a277c330f20bebee",
       "occurrence": 1,
@@ -48145,7 +48211,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 585,
+      "line": 592,
       "symbol": "JsonObject.parts",
       "sourceFingerprint": "186cac545510d424c39583f8b35cd4d67eaecb677feeb438e4f8c335f80a92ca",
       "occurrence": 1,
@@ -48163,7 +48229,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 595,
+      "line": 602,
       "symbol": "JsonObject.parts",
       "sourceFingerprint": "0043cecd9c03a8d12e272a096b542d8ba46c4abf33abdfe3a95e2aced79edb49",
       "occurrence": 1,
@@ -48181,7 +48247,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 599,
+      "line": 606,
       "symbol": "JsonObject.parts",
       "sourceFingerprint": "f91b482b2046503fdb4ade9dfe01935b7911aecdda09a98b7d2f668faacc382a",
       "occurrence": 1,
@@ -48199,7 +48265,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 606,
+      "line": 613,
       "symbol": "JsonObject.before",
       "sourceFingerprint": "ea3b04b3c0bf454d3c17550bf1f435f480b2c3ded3d7091da199f6201866c340",
       "occurrence": 1,
@@ -48217,7 +48283,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 607,
+      "line": 614,
       "symbol": "JsonObject.after",
       "sourceFingerprint": "ee7c9cb8bc6cabcdb241bc7fa52fe81ff47e137ab6c885fc04e12031f9f9625e",
       "occurrence": 1,
@@ -48235,7 +48301,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 609,
+      "line": 616,
       "symbol": "JsonObject",
       "sourceFingerprint": "79dc02f76c041b1dd136c9d885668535f5f350b267dfca4c45b6018d2e30b771",
       "occurrence": 1,
@@ -48253,7 +48319,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 611,
+      "line": 618,
       "symbol": "JsonObject",
       "sourceFingerprint": "41621c8c78584fecd838e7268825e021bcce8eb606fc5e5a4f52e5611d9d22bf",
       "occurrence": 1,
@@ -48271,7 +48337,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 612,
+      "line": 619,
       "symbol": "JsonObject",
       "sourceFingerprint": "c9e2aa825bdf6164aa1746f88c5fb9a7a1ac1ac34cb1ee183a8bf8eea3ca37c6",
       "occurrence": 1,
@@ -48289,7 +48355,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 614,
+      "line": 621,
       "symbol": "JsonObject",
       "sourceFingerprint": "50616bc5b77fd70cba07b73b83513bf1acc646703208376a243bef9955d46e17",
       "occurrence": 1,
@@ -48307,7 +48373,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 618,
+      "line": 625,
       "symbol": "JsonObject",
       "sourceFingerprint": "b983e8f36577b1ea4ed0f87da63950ea4671607775f433fa55eb9c1ae7d4563b",
       "occurrence": 1,
@@ -48331,7 +48397,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 620,
+      "line": 627,
       "symbol": "means",
       "sourceFingerprint": "e72063f415fb2a9bb005f395179ee9651525cf7136b0034a983e5cfdffa6a6b3",
       "occurrence": 1,
@@ -48347,7 +48413,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 625,
+      "line": 632,
       "symbol": "file-scope",
       "sourceFingerprint": "608f193889a7c0d7791bd7aa9478106ad944b08f6fa8d5d22e0e9529b6212aef",
       "occurrence": 1,
@@ -48365,7 +48431,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 626,
+      "line": 633,
       "symbol": "file-scope",
       "sourceFingerprint": "5632f163f7b839cd99f0bc810984e0ba564edf935b6e089d8dddfe0a74b63ec4",
       "occurrence": 1,
@@ -48389,7 +48455,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 627,
+      "line": 634,
       "symbol": "file-scope",
       "sourceFingerprint": "574002381457aa8457d59d51ab31644e09be98bcd42183136072c8588936d7f1",
       "occurrence": 1,
@@ -48407,7 +48473,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 628,
+      "line": 635,
       "symbol": "file-scope",
       "sourceFingerprint": "aeca3e4e01ab03a6282bfc272847f5ce151ff5661377db4912ffc207cddbc465",
       "occurrence": 1,
@@ -48425,7 +48491,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 629,
+      "line": 636,
       "symbol": "file-scope",
       "sourceFingerprint": "3695fb3a8b745e5d4f1d621c4e04f32711fca2c223962ba628fc573f348af199",
       "occurrence": 1,
@@ -48443,7 +48509,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 630,
+      "line": 637,
       "symbol": "file-scope",
       "sourceFingerprint": "b278d7217949b6b5906c41725f7b160a37dd1c812b0dccd1ac9df6f7b04d7d6b",
       "occurrence": 1,
@@ -48461,7 +48527,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 633,
+      "line": 640,
       "symbol": "JsonObject",
       "sourceFingerprint": "5a410c570faadb93a274fd90b1e700558e935be7ce6a5181770f3b87ab6ba15d",
       "occurrence": 1,
@@ -48491,7 +48557,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 636,
+      "line": 643,
       "symbol": "file-scope",
       "sourceFingerprint": "233f9bcadec6f71f45fd42984dd8cf14f7662c7da152c930fa3277e948933191",
       "occurrence": 1,
@@ -48527,7 +48593,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 639,
+      "line": 646,
       "symbol": "JsonObject",
       "sourceFingerprint": "a4ecbedfdec9461e44d15bfbcb45995246b6c35706e47f71daf3d834ec92b845",
       "occurrence": 1,
@@ -48557,7 +48623,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
-      "line": 642,
+      "line": 649,
       "symbol": "file-scope",
       "sourceFingerprint": "3bd632854b7fe99037f7f9fcfeff44523c4785bb0fa885b2c79782e2037c70de",
       "occurrence": 1,
@@ -69281,11 +69347,11 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidStylePicker.kt",
-      "line": 24,
+      "line": 25,
       "symbol": "file-scope",
-      "sourceFingerprint": "839ce24993e826daeddbf4c2fdb404a391595ff0a7d1b5c1449b765e655d8f3c",
+      "sourceFingerprint": "e18c82ef38b98e53414066bd154425260539677f15bff4fa4f165d3e9c128670",
       "occurrence": 1,
-      "source": "* fallback hint: a style whose `requires` isn't met for that one skill stays selectable — it is a",
+      "source": "* `requires` isn't met for that one skill stays selectable — it is a preference across all 16",
       "tokens": [],
       "parts": [
         {
@@ -69297,23 +69363,71 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidStylePicker.kt",
-      "line": 26,
+      "line": 27,
       "symbol": "file-scope",
-      "sourceFingerprint": "641a80ea7a549659565f2e985ef4ddae02e34943a71ac1fa6197c2f212c6dd19",
+      "sourceFingerprint": "a601d244f6393b7b9bfbb2cb630498e4defab1fac95d5e4773843cd22bdf63f6",
       "occurrence": 1,
-      "source": "* back to, so picking \"Через сравнение с родным\" is never a silent no-op.",
+      "source": "* \"Через сравнение с родным\" is never a silent no-op.",
       "tokens": [],
       "parts": [
         {
           "ordinal": 0,
-          "category": "ui-localization-chrome",
-          "reason": "Host UI chrome text shown to the user; moves to ui-strings tables (UC-13)."
+          "category": "serialization-plumbing",
+          "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
         }
       ]
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidStylePicker.kt",
-      "line": 54,
+      "line": 29,
+      "symbol": "file-scope",
+      "sourceFingerprint": "11f18dbe9d47463036a6a5a1219f43864bc51a5720681daa709d8ace2fd4d407",
+      "occurrence": 1,
+      "source": "* UC-01: [StyleRegistry] itself is open to any recipe id a new `courses/styles` JSON file declares,",
+      "tokens": [],
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "serialization-plumbing",
+          "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidStylePicker.kt",
+      "line": 30,
+      "symbol": "file-scope",
+      "sourceFingerprint": "7d7065e68444877ed974e7c74a881a9cfcd210a0644e8cbde7beaa8279436bdf",
+      "occurrence": 1,
+      "source": "* but this picker stays bounded to the 4 built-in ids (matching Desktop's and Web's own pickers)",
+      "tokens": [],
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "serialization-plumbing",
+          "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidStylePicker.kt",
+      "line": 31,
+      "symbol": "file-scope",
+      "sourceFingerprint": "23ae540c21aeedd9acbb8f3107b9e3dca15fe9f3ab59646fb9e9629f842bd5af",
+      "occurrence": 1,
+      "source": "* because `AndroidSessionViewModel.persistStyle` persists through the still-closed",
+      "tokens": [],
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "serialization-plumbing",
+          "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidStylePicker.kt",
+      "line": 61,
       "symbol": "AndroidStylePicker",
       "sourceFingerprint": "7406ea3a5eb44a0cf310dbe3fe0642262d7c280c308b5728d88e76ac0f766c30",
       "occurrence": 1,
@@ -82643,7 +82757,7 @@
     },
     {
       "path": "kotlin/androidApp/src/main/java/dev/polski/grammarmatrix/AndroidSessionViewModel.kt",
-      "line": 117,
+      "line": 120,
       "symbol": "AndroidSessionViewModel",
       "sourceFingerprint": "f780df57e14f84887840cf54aa8ef16e75cbb59a70a75aac6cb44c7ba5d58bfd",
       "occurrence": 1,
@@ -82659,7 +82773,7 @@
     },
     {
       "path": "kotlin/androidApp/src/main/java/dev/polski/grammarmatrix/AndroidSessionViewModel.kt",
-      "line": 155,
+      "line": 158,
       "symbol": "AndroidSessionViewModel.finishExport.stream",
       "sourceFingerprint": "32768ad5168e8fcf1e993d281dee54ae5db3bb958e9e9611892f7811e3c99cb1",
       "occurrence": 1,
@@ -82677,7 +82791,7 @@
     },
     {
       "path": "kotlin/androidApp/src/main/java/dev/polski/grammarmatrix/AndroidSessionViewModel.kt",
-      "line": 156,
+      "line": 159,
       "symbol": "AndroidSessionViewModel.finishExport",
       "sourceFingerprint": "fa4c5fad56cb3bb48fc324fb378bf26f67b8037d9accbb6753556746bbe7e6f0",
       "occurrence": 1,
@@ -82695,7 +82809,7 @@
     },
     {
       "path": "kotlin/androidApp/src/main/java/dev/polski/grammarmatrix/AndroidSessionViewModel.kt",
-      "line": 160,
+      "line": 163,
       "symbol": "AndroidSessionViewModel.finishExport",
       "sourceFingerprint": "8b4b198ae9e30c1cafae1042bbd31a705e8d142d556307a4bfe2a906ac65a57e",
       "occurrence": 1,
@@ -82713,7 +82827,7 @@
     },
     {
       "path": "kotlin/androidApp/src/main/java/dev/polski/grammarmatrix/AndroidSessionViewModel.kt",
-      "line": 163,
+      "line": 166,
       "symbol": "AndroidSessionViewModel.finishExport",
       "sourceFingerprint": "7f6a20a84d3aced0b63ed09c8dcba57188b21d37cbab75d8095b5e1f4e1adb59",
       "occurrence": 1,
@@ -82731,7 +82845,7 @@
     },
     {
       "path": "kotlin/androidApp/src/main/java/dev/polski/grammarmatrix/AndroidSessionViewModel.kt",
-      "line": 164,
+      "line": 167,
       "symbol": "AndroidSessionViewModel.finishExport",
       "sourceFingerprint": "08f220f076d4d7e15f4cd2d30f1c91dd74aa2a168b80933b94960eaaff28dc54",
       "occurrence": 1,
@@ -82749,7 +82863,7 @@
     },
     {
       "path": "kotlin/androidApp/src/main/java/dev/polski/grammarmatrix/AndroidSessionViewModel.kt",
-      "line": 172,
+      "line": 175,
       "symbol": "AndroidSessionViewModel.importFrom",
       "sourceFingerprint": "d1bf52abd8f0e6bf6926ad43634b956ad21b0013095875cca08406bff44bad54",
       "occurrence": 1,
@@ -82767,7 +82881,7 @@
     },
     {
       "path": "kotlin/androidApp/src/main/java/dev/polski/grammarmatrix/AndroidSessionViewModel.kt",
-      "line": 178,
+      "line": 181,
       "symbol": "AndroidSessionViewModel.importFrom.stream",
       "sourceFingerprint": "0b6e7fec610f3628d3f9c3beba148203fd721d680ba2073712bbc7e5a1a26e17",
       "occurrence": 1,
@@ -82785,7 +82899,7 @@
     },
     {
       "path": "kotlin/androidApp/src/main/java/dev/polski/grammarmatrix/AndroidSessionViewModel.kt",
-      "line": 183,
+      "line": 186,
       "symbol": "AndroidSessionViewModel.importFrom",
       "sourceFingerprint": "6a9f1a227d94a79b7ec83c175b156a94d39776532e822de77ccc5782e07923e2",
       "occurrence": 1,
@@ -82809,7 +82923,7 @@
     },
     {
       "path": "kotlin/androidApp/src/main/java/dev/polski/grammarmatrix/AndroidSessionViewModel.kt",
-      "line": 187,
+      "line": 190,
       "symbol": "AndroidSessionViewModel.importFrom",
       "sourceFingerprint": "aa67d4c437a868c82727317dfe7039713264e5e87a7ba12cae47a696c09ec81e",
       "occurrence": 1,
@@ -82833,7 +82947,7 @@
     },
     {
       "path": "kotlin/androidApp/src/main/java/dev/polski/grammarmatrix/AndroidSessionViewModel.kt",
-      "line": 193,
+      "line": 196,
       "symbol": "AndroidSessionViewModel.importFrom",
       "sourceFingerprint": "d1bf52abd8f0e6bf6926ad43634b956ad21b0013095875cca08406bff44bad54",
       "occurrence": 2,
@@ -82851,7 +82965,7 @@
     },
     {
       "path": "kotlin/androidApp/src/main/java/dev/polski/grammarmatrix/AndroidSessionViewModel.kt",
-      "line": 202,
+      "line": 205,
       "symbol": "AndroidSessionViewModel.importFrom",
       "sourceFingerprint": "2ff102137a7c119b1a7f7bd31ab2e5f6702d8df0598edf87765d4d0f613d6d78",
       "occurrence": 1,
@@ -82869,7 +82983,7 @@
     },
     {
       "path": "kotlin/androidApp/src/main/java/dev/polski/grammarmatrix/AndroidSessionViewModel.kt",
-      "line": 203,
+      "line": 206,
       "symbol": "AndroidSessionViewModel.importFrom",
       "sourceFingerprint": "f5475454c534ca84e0451fcdbce0151523bfd3e6ccb568cc5f2682e1b2a490b2",
       "occurrence": 1,
@@ -82893,7 +83007,7 @@
     },
     {
       "path": "kotlin/androidApp/src/main/java/dev/polski/grammarmatrix/AndroidSessionViewModel.kt",
-      "line": 204,
+      "line": 207,
       "symbol": "AndroidSessionViewModel.importFrom",
       "sourceFingerprint": "7f879bf4bd15fecb262af19f2a037b27d1f9303e4e15e422d6fd6084f42010a0",
       "occurrence": 1,
@@ -82917,7 +83031,7 @@
     },
     {
       "path": "kotlin/androidApp/src/main/java/dev/polski/grammarmatrix/AndroidSessionViewModel.kt",
-      "line": 205,
+      "line": 208,
       "symbol": "AndroidSessionViewModel.importFrom",
       "sourceFingerprint": "40b7d2a2c76e8a6f6c831b5493b98ae89ace82dc76b77c19bd445b1c57928313",
       "occurrence": 1,
@@ -82935,7 +83049,7 @@
     },
     {
       "path": "kotlin/androidApp/src/main/java/dev/polski/grammarmatrix/AndroidSessionViewModel.kt",
-      "line": 209,
+      "line": 212,
       "symbol": "AndroidSessionViewModel.importFrom",
       "sourceFingerprint": "00522ccd38ca4caf2500dc06c8db49a0a0c2af788582684745f456340fb8176f",
       "occurrence": 1,
@@ -82953,7 +83067,7 @@
     },
     {
       "path": "kotlin/androidApp/src/main/java/dev/polski/grammarmatrix/AndroidSessionViewModel.kt",
-      "line": 224,
+      "line": 227,
       "symbol": "AndroidSessionViewModel.importVocabularyFrom.stream",
       "sourceFingerprint": "fad8715eeead555f84cc40bccb20ba25f47e5a5b4014f467ec67def225dc6446",
       "occurrence": 1,
@@ -82971,7 +83085,7 @@
     },
     {
       "path": "kotlin/androidApp/src/main/java/dev/polski/grammarmatrix/AndroidSessionViewModel.kt",
-      "line": 227,
+      "line": 230,
       "symbol": "AndroidSessionViewModel.importVocabularyFrom",
       "sourceFingerprint": "2c2ab4dd6abedefa8efcc32d78679565c0bab3f978f94a43281cddedf6ed8420",
       "occurrence": 1,
@@ -82989,7 +83103,7 @@
     },
     {
       "path": "kotlin/androidApp/src/main/java/dev/polski/grammarmatrix/AndroidSessionViewModel.kt",
-      "line": 230,
+      "line": 233,
       "symbol": "AndroidSessionViewModel.importVocabularyFrom",
       "sourceFingerprint": "7b9786c4b36bdbb010108c417c93edf68000e6f555d1e445f56b2deb0736dc9e",
       "occurrence": 1,
@@ -83007,7 +83121,7 @@
     },
     {
       "path": "kotlin/androidApp/src/main/java/dev/polski/grammarmatrix/AndroidSessionViewModel.kt",
-      "line": 241,
+      "line": 244,
       "symbol": "AndroidSessionViewModel.exportVocabularyTo.stream",
       "sourceFingerprint": "32768ad5168e8fcf1e993d281dee54ae5db3bb958e9e9611892f7811e3c99cb1",
       "occurrence": 1,
@@ -83025,7 +83139,7 @@
     },
     {
       "path": "kotlin/androidApp/src/main/java/dev/polski/grammarmatrix/AndroidSessionViewModel.kt",
-      "line": 242,
+      "line": 245,
       "symbol": "AndroidSessionViewModel.exportVocabularyTo",
       "sourceFingerprint": "9af060d7708582c95b0e7cb9d50080371931000d105dc328d7fa0cf26c49533b",
       "occurrence": 1,
@@ -83043,7 +83157,7 @@
     },
     {
       "path": "kotlin/androidApp/src/main/java/dev/polski/grammarmatrix/AndroidSessionViewModel.kt",
-      "line": 245,
+      "line": 248,
       "symbol": "AndroidSessionViewModel.exportVocabularyTo",
       "sourceFingerprint": "545a9b52731fc78081884202476e383c2122ab0b3f87a1d5bee7fa8492bbb5c5",
       "occurrence": 1,
@@ -83061,7 +83175,7 @@
     },
     {
       "path": "kotlin/androidApp/src/main/java/dev/polski/grammarmatrix/AndroidSessionViewModel.kt",
-      "line": 248,
+      "line": 251,
       "symbol": "AndroidSessionViewModel.exportVocabularyTo",
       "sourceFingerprint": "2ad629bdb5119dd760f051788a3809b980df58b67e2967793049862e92d69dcc",
       "occurrence": 1,
@@ -83079,7 +83193,7 @@
     },
     {
       "path": "kotlin/androidApp/src/main/java/dev/polski/grammarmatrix/AndroidSessionViewModel.kt",
-      "line": 259,
+      "line": 262,
       "symbol": "AndroidSessionViewModel.Factory",
       "sourceFingerprint": "bd5948c3c977eac6e156503fe580451bc46fefd9427f282260af39e69d335f22",
       "occurrence": 1,

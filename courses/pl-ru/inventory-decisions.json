@@ -50793,22 +50793,6 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidStylePicker.kt",
-      "symbol": "file-scope",
-      "sourceFingerprint": "839ce24993e826daeddbf4c2fdb404a391595ff0a7d1b5c1449b765e655d8f3c",
-      "occurrence": 1,
-      "category": "serialization-plumbing",
-      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
-    },
-    {
-      "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidStylePicker.kt",
-      "symbol": "file-scope",
-      "sourceFingerprint": "641a80ea7a549659565f2e985ef4ddae02e34943a71ac1fa6197c2f212c6dd19",
-      "occurrence": 1,
-      "category": "ui-localization-chrome",
-      "reason": "Host UI chrome text shown to the user; moves to ui-strings tables (UC-13)."
-    },
-    {
-      "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidStylePicker.kt",
       "symbol": "AndroidStylePicker",
       "sourceFingerprint": "7406ea3a5eb44a0cf310dbe3fe0642262d7c280c308b5728d88e76ac0f766c30",
       "occurrence": 1,
@@ -53651,6 +53635,78 @@
           "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
         }
       ]
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "a066dfcba5915aec594ed0c0df50776798e377305d87134ad859ea24dfdc4c0f",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "8426d24adffafdfed8e41062b6ad512c8f2d0c2bd922c490492d4d7f5149851e",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "397696b8d5e297b04f061fda41597d3a66c297302f5e57ffb9189f6b46543a9a",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt",
+      "symbol": "PolishCourseData.source",
+      "sourceFingerprint": "0e06b90d5a98a136b7fa96e5f7e09b28da0a0ec04aa91843cf9b7087c10708df",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidStylePicker.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "e18c82ef38b98e53414066bd154425260539677f15bff4fa4f165d3e9c128670",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidStylePicker.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "a601d244f6393b7b9bfbb2cb630498e4defab1fac95d5e4773843cd22bdf63f6",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidStylePicker.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "11f18dbe9d47463036a6a5a1219f43864bc51a5720681daa709d8ace2fd4d407",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidStylePicker.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "7d7065e68444877ed974e7c74a881a9cfcd210a0644e8cbde7beaa8279436bdf",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidStylePicker.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "23ae540c21aeedd9acbb8f3107b9e3dca15fe9f3ab59646fb9e9629f842bd5af",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
     }
   ]
 }

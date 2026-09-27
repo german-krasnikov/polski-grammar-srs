@@ -11,6 +11,7 @@ import kotlinx.serialization.json.jsonArray
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 import polski.model.*
+import polski.pack.CoursePackSource
 import polski.presentation.ContrastPair
 import polski.presentation.EndingPart
 import polski.presentation.NativeParallelPair
@@ -162,10 +163,16 @@ internal sealed interface CoursePossessiveForms {
 
 internal data class FutureAuxiliary(val verbId: String, val forms: Map<NumberGram, Map<Person, String>>)
 
-/** The Polish/Russian material is authored in courses/pl-ru/course.json, not in Kotlin source. */
+/**
+ * The Polish/Russian material is authored in courses/pl-ru/course.json, not in Kotlin source.
+ * UC-02: reached through [CoursePackSource] (`:pack-format`) rather than a fixed generated
+ * property — `generateCoursePackSource` (`kotlin/shared/build.gradle.kts`) discovers pl-ru by
+ * scanning the `courses` directory for a `course.json`, but it is still read here as schema v1.
+ */
 internal object PolishCourseData {
     private val root: JsonObject by lazy {
-        Json.parseToJsonElement(generatedCourseJson).jsonObject.also { pack ->
+        val source: CoursePackSource = embeddedCoursePackSources.first { it.id == "pl-ru" }
+        Json.parseToJsonElement(source.load()).jsonObject.also { pack ->
             require(pack.getValue("schemaVersion").jsonPrimitive.int == 1)
             require(pack.string("id") == "pl-ru")
             require(pack.string("targetLanguage") == "pl" && pack.string("nativeLanguage") == "ru")

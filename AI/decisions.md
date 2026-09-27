@@ -2,6 +2,11 @@
 
 Новые сверху. Формат: решение → почему → где подробно.
 
+## ADR-15 · 2026-09-27 · UC-02: `:pack-format` и сканирование каталога пакетов
+`generateCoursePackSource` (`kotlin/shared/build.gradle.kts`) больше не читает один захардкоженный путь `courses/pl-ru/course.json` — сканирует `courses/*` на подкаталог со своим `course.json` (кроме `schema`/`styles`) и оборачивает содержимое каждого найденного пакета в `EmbeddedCoursePackSource` (новый модуль `:pack-format`, `polski.pack.CoursePackSource`/`PackManifest`). `PolishCourseData` теперь читает pl-ru через `embeddedCoursePackSources.first { it.id == "pl-ru" }`, а не через прямое имя сгенерированного свойства — сама схема v1 не изменилась. Байт-идентичность runtime-результата подтверждена fixture-тестом (`CoursePackFixtureTest`, сериализация `PolishCourseData.skills` пиновалась до рефакторинга и совпала после).
+Почему: приёмка `UniversalCorePlan.md` §12 UC-02 требует, чтобы второй пакет добавлялся каталогом без правки Gradle/Kotlin; закрытый путь к одному файлу был единственным местом, которое такую правку требовало.
+Подробно: `Plans/Kotlin/UniversalCorePlan.md` §4.1, §4.2, §12 UC-02; `kotlin/pack-format/`, `kotlin/shared/build.gradle.kts`, `kotlin/shared/src/commonTest/kotlin/polski/data/CoursePackFixtureTest.kt`.
+
 ## ADR-14 · 2026-09-27 · UC-01-correction: Android-пикер стилей остаётся закрытым, `persistStyle` — терпимым
 `AndroidStylePicker` перечисляет `builtInStyleIds` (как и Web/Desktop-пикеры), а не все ключи `StyleRegistry` — `AndroidSessionViewModel.persistStyle` до сих пор пишет через закрытый 4-значный enum `PreferredStyle`, и `PreferredStyle.valueOf(styleId.value)` без обработки падал на любом id вне этих 4. `persistStyle` дополнительно сделан терпимым (`PreferredStyle.entries.firstOrNull { it.name == styleId.value } ?: return` — no-op вместо падения) на случай, если `AppUiState.styleId` получит внешний id не через этот пикер.
 Почему: ADR-13 открыл `StyleId`/`StyleRegistry`, но `AndroidStylePicker` был расширен до `registry.keys.forEach` в том же коммите без сопоставления с `PreferredStyle` — 5-й `courses/styles/*.json` рецепт ронял приложение на первом же выборе стиля в Android-настройках. Автообнаружение новых стилей во всех хостах — отдельная задача.
