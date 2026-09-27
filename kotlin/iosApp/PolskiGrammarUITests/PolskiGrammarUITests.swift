@@ -1172,4 +1172,66 @@ final class PolskiGrammarUITests: XCTestCase {
         XCTAssertTrue(blockShown("styleBlock-whyOnDemand"), app.debugDescription)
         capture("style-minimal-theory-revealed")
     }
+
+    /// `EmphasisUXAudit-2026-09-27.md` E1/E9 · `ContrastHighlightPlan.md` §"Контракт выделения":
+    /// the main sentence's `before`/`after` spans (front "Исходное предложение", back "Эталон")
+    /// must differ by more than color alone (dashed vs solid underline) and `after` must not be a
+    /// warm red/orange/yellow any more. This doesn't assert pixels (XCUITest has no drawn-line
+    /// introspection) — it captures one screenshot per theme, right after reveal, for visual
+    /// review (dashed red "было" / solid cool "стало"), while a functional check
+    /// (`accessibilityLabel` still carries the full untruncated sentence) guards the rewrite from
+    /// `Text` concatenation to a single `AttributedString` run behind it.
+    func testEmphasisTokensRenderInLightAndDarkTheme() {
+        let app = XCUIApplication()
+        app.launch()
+        resetTrainingProgress(app)
+        app.buttons["Тренировка"].firstMatch.tap()
+        continueIntroductionIfPresent(app)
+        let reveal = app.buttons["revealAnswer"]
+        for _ in 0..<7 {
+            if reveal.exists && reveal.isHittable { break }
+            app.swipeUp()
+        }
+        XCTAssertTrue(reveal.isHittable)
+        reveal.tap()
+        XCTAssertTrue(app.staticTexts["Widzę moją piękną żonę."].waitForExistence(timeout: 5))
+
+        func setTheme(_ label: String) {
+            app.buttons["openSettings"].tap()
+            let theme = app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", "Тема")).firstMatch
+            for _ in 0..<7 {
+                if theme.isHittable { break }
+                app.swipeDown()
+            }
+            XCTAssertTrue(theme.isHittable, app.debugDescription)
+            guard !theme.label.contains(label) else {
+                app.buttons["Готово"].tap()
+                return
+            }
+            theme.tap()
+            let option = app.descendants(matching: .any)[label].firstMatch
+            XCTAssertTrue(option.waitForExistence(timeout: 5))
+            option.tap()
+            app.buttons["Готово"].tap()
+        }
+        func captureRevealedSentence(_ name: String) {
+            XCTAssertTrue(app.staticTexts["Widzę moją piękną żonę."].waitForExistence(timeout: 5))
+            let shot = XCTAttachment(screenshot: app.screenshot())
+            shot.name = name
+            shot.lifetime = .keepAlways
+            add(shot)
+        }
+
+        setTheme("Светлая")
+        captureRevealedSentence("emphasis-tokens-light")
+        // AttributedString(_:).underlineStyle keeps the sentence's full accessible text intact —
+        // the same value the pre-fix `Text` concatenation exposed via `.accessibilityLabel`.
+        XCTAssertTrue(app.staticTexts["Widzę moją piękną żonę."].exists)
+
+        setTheme("Тёмная")
+        captureRevealedSentence("emphasis-tokens-dark")
+        XCTAssertTrue(app.staticTexts["Widzę moją piękną żonę."].exists)
+
+        setTheme("Системная") // restore the default for later tests in this run.
+    }
 }
