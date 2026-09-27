@@ -57,7 +57,12 @@ private fun AndroidBlock(block: Block, reduceMotion: Boolean) {
     }
 }
 
-/** As today's "ЗАПОМНИ" memo box: the skill's formula, bold, on a tertiary surface. */
+/**
+ * As today's "ЗАПОМНИ" memo box: the skill's formula, bold, on a tertiary surface. [block.parts]
+ * (S4/E7) highlights the pack's explicit before/after pair through [AndroidEmphasisText] — the
+ * same single rendering path the main sentence uses — instead of the plain [Block.Formula.text]
+ * this box showed before.
+ */
 @Composable
 private fun AndroidFormulaBlock(block: Block.Formula) {
     Surface(shape = RoundedCornerShape(18.dp), color = MaterialTheme.colorScheme.tertiaryContainer, modifier = Modifier.fillMaxWidth()) {
@@ -67,15 +72,16 @@ private fun AndroidFormulaBlock(block: Block.Formula) {
                 color = MaterialTheme.colorScheme.onTertiaryContainer,
                 modifier = Modifier.semantics { heading() },
             )
-            Text(
-                block.text, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.onTertiaryContainer,
+            AndroidEmphasisText(
+                block.parts, before = false, style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onTertiaryContainer,
             )
         }
     }
 }
 
-/** As today: a plain rule/theory paragraph, now its own labelled section instead of buried inside the formula box. */
+/** As today: a plain rule/theory paragraph, now its own labelled section instead of buried inside
+ *  the formula box. [block.parts] (S4/E7) highlights [Block.Rule.text] the same way as [AndroidFormulaBlock]. */
 @Composable
 private fun AndroidRuleBlock(block: Block.Rule) {
     Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
@@ -83,7 +89,7 @@ private fun AndroidRuleBlock(block: Block.Rule) {
             "Правило", style = MaterialTheme.typography.labelMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.semantics { heading() },
         )
-        Text(block.text, style = MaterialTheme.typography.bodyMedium)
+        AndroidEmphasisText(block.parts, before = false, style = MaterialTheme.typography.bodyMedium)
         Text(block.detail, style = MaterialTheme.typography.bodyMedium)
     }
 }
@@ -108,21 +114,26 @@ private fun AndroidTableBlock(block: Block.Table) {
     }
 }
 
-/** Quote-like scene card for a short situational lead-in. */
+/** Quote-like scene card for a short situational lead-in. [block.parts] (S4/E7) highlights
+ *  [Block.Scene.text] the same way as [AndroidFormulaBlock]. */
 @Composable
 private fun AndroidSceneBlock(block: Block.Scene) {
     Surface(shape = RoundedCornerShape(18.dp), color = MaterialTheme.colorScheme.secondaryContainer, modifier = Modifier.fillMaxWidth()) {
         Row(Modifier.padding(16.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             Text("“", style = MaterialTheme.typography.headlineSmall, color = MaterialTheme.colorScheme.onSecondaryContainer)
-            Text(
-                block.text, style = MaterialTheme.typography.bodyLarge, fontStyle = FontStyle.Italic,
-                color = MaterialTheme.colorScheme.onSecondaryContainer,
+            AndroidEmphasisText(
+                block.parts, before = false, style = MaterialTheme.typography.bodyLarge,
+                fontStyle = FontStyle.Italic, color = MaterialTheme.colorScheme.onSecondaryContainer,
             )
         }
     }
 }
 
-/** Two-column native ↔ target row per pair, with a match/differs badge (`pair.matches`). */
+/**
+ * Two-column native ↔ target row per pair, with a match/differs badge (`pair.matches`). The
+ * native (L1) side is never highlighted (Emphasis contract §4, EmphasisUXAudit E7): only
+ * [Block.NativeParallelPair.targetParts] carries the pack's explicit before/after pair.
+ */
 @Composable
 private fun AndroidNativeParallelBlock(block: Block.NativeParallel) {
     Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
@@ -135,7 +146,10 @@ private fun AndroidNativeParallelBlock(block: Block.NativeParallel) {
                 Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                     Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                         Text(pair.native, style = MaterialTheme.typography.bodyMedium, modifier = Modifier.weight(1f))
-                        Text(pair.target, style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.SemiBold, modifier = Modifier.weight(1f))
+                        AndroidEmphasisText(
+                            pair.targetParts, before = false, style = MaterialTheme.typography.bodyMedium,
+                            fontWeight = FontWeight.SemiBold, modifier = Modifier.weight(1f),
+                        )
                     }
                     Text(
                         if (pair.matches) "Совпадает" else "Отличается",
@@ -151,7 +165,8 @@ private fun AndroidNativeParallelBlock(block: Block.NativeParallel) {
     }
 }
 
-/** Extra examples, no breakdown — the card itself is already the one worked example. */
+/** Extra examples, no breakdown — the card itself is already the one worked example. [block.itemParts]
+ *  (S4/E7) highlights each entry the same way as [AndroidFormulaBlock], indexed with [block.items]. */
 @Composable
 private fun AndroidExamplesBlock(block: Block.Examples) {
     if (block.items.isEmpty()) return
@@ -160,14 +175,20 @@ private fun AndroidExamplesBlock(block: Block.Examples) {
             "Примеры", style = MaterialTheme.typography.labelMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.semantics { heading() },
         )
-        block.items.forEach { Text("• $it", style = MaterialTheme.typography.bodyMedium) }
+        block.items.forEachIndexed { index, _ ->
+            Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+                Text("•", style = MaterialTheme.typography.bodyMedium)
+                AndroidEmphasisText(block.itemParts[index], before = false, style = MaterialTheme.typography.bodyMedium)
+            }
+        }
     }
 }
 
 /**
  * Collapsed-by-default disclosure. [reduceMotion] only drops [AndroidCollapsible]'s expand
  * animation (same contract as the reference-table toggle) — the toggle itself, and the
- * `stateDescription` a screen reader announces, work identically either way.
+ * `stateDescription` a screen reader announces, work identically either way. [block.parts]
+ * (S4/E7) highlights [Block.WhyOnDemand.text] the same way as [AndroidFormulaBlock].
  */
 @Composable
 private fun AndroidWhyOnDemandBlock(block: Block.WhyOnDemand, reduceMotion: Boolean) {
@@ -185,7 +206,10 @@ private fun AndroidWhyOnDemandBlock(block: Block.WhyOnDemand, reduceMotion: Bool
             Text(label, style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary)
         }
         AndroidCollapsible(visible = expanded, reduceMotion = reduceMotion) {
-            Text(block.text, style = MaterialTheme.typography.bodyMedium, modifier = Modifier.padding(top = 6.dp))
+            AndroidEmphasisText(
+                block.parts, before = false, style = MaterialTheme.typography.bodyMedium,
+                modifier = Modifier.padding(top = 6.dp),
+            )
         }
     }
 }

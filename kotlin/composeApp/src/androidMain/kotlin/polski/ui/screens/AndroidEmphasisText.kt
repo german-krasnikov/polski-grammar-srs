@@ -19,10 +19,12 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
+import polski.presentation.ChangeSide
 import polski.presentation.EndingPart
 
 /**
@@ -31,13 +33,21 @@ import polski.presentation.EndingPart
  * distinction from. `after` gets a native solid underline; `before`'s dashed line has no Compose
  * [TextDecoration] equivalent, so its span carries none — [AndroidEmphasisText] draws it itself.
  * Both bold the changed fragment; unchanged text carries no span style (E1, EmphasisUXAudit-2026-09-27.md).
+ *
+ * Each changed part's own [EndingPart.side] decides its role, not the call-wide [before] — a style
+ * block's prose can carry both roles in one running list (`styleTextHighlightParts`, S4/E7:
+ * "mixed-role list ... cannot be classed as a single role by its caller alone"). [before] is only
+ * the fallback for a changed part with no [EndingPart.side] of its own.
  */
-fun androidEmphasisAnnotatedText(parts: List<EndingPart>, before: Boolean, color: Color): AnnotatedString =
+fun androidEmphasisAnnotatedText(parts: List<EndingPart>, before: Boolean, beforeColor: Color, afterColor: Color): AnnotatedString =
     buildAnnotatedString {
         parts.forEach { part ->
-            if (part.isChanged) withStyle(SpanStyle(color = color, fontWeight = FontWeight.Bold,
-                textDecoration = if (before) null else TextDecoration.Underline)) { append(part.text) }
-            else append(part.text)
+            if (part.isChanged) {
+                val side = part.side ?: if (before) ChangeSide.Before else ChangeSide.After
+                val color = if (side == ChangeSide.Before) beforeColor else afterColor
+                withStyle(SpanStyle(color = color, fontWeight = FontWeight.Bold,
+                    textDecoration = if (side == ChangeSide.Before) null else TextDecoration.Underline)) { append(part.text) }
+            } else append(part.text)
         }
     }
 
@@ -57,13 +67,17 @@ private val emphasisAfterDark = Color(0xFFB8D8CE)
 fun androidEmphasisAfterColor(dark: Boolean): Color = if (dark) emphasisAfterDark else emphasisAfterLight
 
 /**
- * The one Android rendering path for a before/after contrast fragment, used for both the main
- * sentence (`AndroidTrainingScreen.kt`) and style-block rows (`AndroidStyleBlocks.kt`) — no
+ * The one Android rendering path for a before/after contrast fragment, used for the main sentence
+ * (`AndroidTrainingScreen.kt`) and every style-block kind that highlights prose
+ * (`AndroidStyleBlocks.kt`: Formula/Rule/Scene/NativeParallel/Examples/WhyOnDemand, S4/E7) — no
  * second, simplified path draws this role anywhere else on this host. `before` = warm red
  * ([MaterialTheme.colorScheme.error], unaffected by dynamic color) with a hand-drawn dashed
  * underline; `after` = fixed cool accent ([androidEmphasisAfterColor]) with a native solid
  * underline. Compose has no dashed [TextDecoration], so `before`'s line is drawn with
- * [PathEffect.dashPathEffect] instead of relying on the span style.
+ * [PathEffect.dashPathEffect] instead of relying on the span style. Each part's role comes from its
+ * own [EndingPart.side] when set (a style block's prose can carry both roles in one [parts] list);
+ * [before] is only the fallback default and the initial role for the whole call's un-sided parts.
+ * [color]/[fontStyle] style the *unchanged* text the same way `Text(block.text, ...)` used to.
  */
 @Composable
 fun AndroidEmphasisText(
@@ -72,26 +86,34 @@ fun AndroidEmphasisText(
     modifier: Modifier = Modifier,
     style: TextStyle = LocalTextStyle.current,
     fontWeight: FontWeight? = null,
+    color: Color = Color.Unspecified,
+    fontStyle: FontStyle? = null,
 ) {
     val dark = MaterialTheme.colorScheme.background.luminance() < 0.5f
-    val color = if (before) MaterialTheme.colorScheme.error else androidEmphasisAfterColor(dark)
-    if (!before) {
-        Text(text = androidEmphasisAnnotatedText(parts, before, color), style = style, fontWeight = fontWeight, modifier = modifier)
+    val beforeColor = MaterialTheme.colorScheme.error
+    val afterColor = androidEmphasisAfterColor(dark)
+    fun roleOf(part: EndingPart) = part.side ?: if (before) ChangeSide.Before else ChangeSide.After
+    val hasBeforeRole = parts.any { it.isChanged && roleOf(it) == ChangeSide.Before }
+    if (!hasBeforeRole) {
+        Text(text = androidEmphasisAnnotatedText(parts, before, beforeColor, afterColor), style = style,
+            fontWeight = fontWeight, color = color, fontStyle = fontStyle, modifier = modifier)
         return
     }
     var layout by remember { mutableStateOf<TextLayoutResult?>(null) }
-    val changedIndices = remember(parts) {
+    val dashedIndices = remember(parts, before) {
         parts.flatMapIndexed { index, part ->
-            if (!part.isChanged) emptyList() else {
+            if (!part.isChanged || roleOf(part) != ChangeSide.Before) emptyList() else {
                 val start = parts.take(index).sumOf { it.text.length }
                 (start until start + part.text.length).toList()
             }
         }
     }
     Text(
-        text = androidEmphasisAnnotatedText(parts, before, color),
+        text = androidEmphasisAnnotatedText(parts, before, beforeColor, afterColor),
         style = style,
         fontWeight = fontWeight,
+        color = color,
+        fontStyle = fontStyle,
         onTextLayout = { layout = it },
         modifier = modifier.drawWithContent {
             drawContent()
@@ -100,11 +122,11 @@ fun AndroidEmphasisText(
             // with Polish diacritics (ą, ę).
             val effect = PathEffect.dashPathEffect(floatArrayOf(3.dp.toPx(), 2.dp.toPx()))
             val offset = 3.dp.toPx()
-            changedIndices.forEach { index ->
+            dashedIndices.forEach { index ->
                 if (index >= textLayout.layoutInput.text.length) return@forEach
                 val box = textLayout.getBoundingBox(index)
                 val y = box.bottom + offset
-                drawLine(color, Offset(box.left, y), Offset(box.right, y),
+                drawLine(beforeColor, Offset(box.left, y), Offset(box.right, y),
                     strokeWidth = 2.dp.toPx(), pathEffect = effect)
             }
         },
