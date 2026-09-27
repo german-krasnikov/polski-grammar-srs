@@ -19,7 +19,9 @@
     "vocabulary:editorial:check": "node scripts/validate-vocabulary-editorial.mjs",
     "vocabulary:editorial:strict": "node scripts/validate-vocabulary-editorial.mjs --strict",
     "course:inventory:check": "node scripts/inventory-course.mjs --check",
-    "course:inventory:decisions:check": "node scripts/check-course-inventory.mjs --check"
+    "course:inventory:decisions:check": "node scripts/check-course-inventory.mjs --check",
+    "pack:build": "node scripts/build-pack.mjs",
+    "pack:build:check": "node scripts/build-pack.mjs --check"
   },
   "dependencies": {
     "react": "^19.1.1",

@@ -2,6 +2,25 @@
 
 Новые сверху. Формат: решение → почему → где подробно.
 
+## ADR-16 · 2026-09-27 · UC-05: `:core-engine` (Morphology/TableMorphology) + `forms.generated.json`
+Новый модуль `:core-engine` (через `polski.kmp-common`, зависит только от `:core-model`) вводит `Morphology`
+(`fun form(lexeme, bundle): String`) и `TableMorphology` — чистый lookup, без правил в рантайме. `scripts/build-pack.mjs`
+(NEW, Node, по образцу `validate-course.mjs`) материализует noun/adjective/verb/possessive формы из
+`courses/pl-ru/course.json` в `courses/pl-ru/forms.generated.json` (лексема с префиксом категории, например
+`noun:wife`/`verb:have`/`possessive:my`, → список `{bundle, form}`); `--check` пересчитывает и сверяет побайтно с
+`tests/fixtures/core-golden/grammar.json`. `forms.generated.json` встроен в `:shared`'s `commonTest` (новая задача
+`generateFormsFixtureSource`, тот же приём встраивания JSON-в-Kotlin-строку, что `generateCoursePackSource`) —
+`TableMorphologyParityTest` строит `TableMorphology` из этого встроенного JSON и проверяет побайтное совпадение с
+`GrammarEngine` на каждой лексеме × наборе признаков (носители — существующие `nouns`/`adjectives`/`verbs`/`possessives`).
+`GrammarEngine`/`ExerciseFactory` остаются живым путём — переключение (UC-07/08) не входит в эту задачу;
+`ExerciseFactory.kt` не тронут (параллельная задача UC-06).
+Почему: приёмка `UniversalCorePlan.md` §12 UC-05 требует именно эту пару (таблица + конвертер) до
+`ConstructionRealizer`/`ExerciseGenerator` (UC-07), и явно фиксирует риск §6 — golden-фикстуры зафиксированы на
+коммите `a4b4aec`, поэтому «побайтное совпадение» проверяемо, а не плывущая цель.
+Подробно: `Plans/Kotlin/UniversalCorePlan.md` §5.1, §5.3.1, §8, §12 UC-05; `scripts/build-pack.mjs`;
+`kotlin/core-engine/src/commonMain/kotlin/polski/core/engine/Morphology.kt`;
+`kotlin/shared/src/commonTest/kotlin/polski/grammar/TableMorphologyParityTest.kt`.
+
 ## ADR-15 · 2026-09-27 · Второй пакет — английский для русскоязычных (en-ru) + «Лайфхаки» вне ядра
 Проверка ядра — пакет `en-ru` (вместо рекомендованного в плане zh), использующий всё: 4 стиля, правила, карты слов, таблицы, подсветку, L1-сравнение с русским. Ядро должно поддерживать любую пару «родной → изучаемый» (ru→pl, ru→en, pl→en, en→ru …); найденные при этом упущения ядра дорабатываются в ядре, а не обходятся в пакете.
 **Лайфхаки — вне ядра.** Это приёмы, которые облегчают понимание темы носителю конкретного родного языка при изучении конкретного целевого (у ru→en одни, у ru→pl другие, у pl→en третьи). Живут в слое пары (`pairs/<target>-<native>/lifehacks`), привязаны к навыку/теме, имеют источник и статус проверки (`editorial` — отобраны редакцией по исследованиям; `community` — проверены пользователями: «помогло / не помогло»). Сейчас — только статичные отобранные лайфхаки; приём и проверка лайфхаков от пользователей требуют сервера и идут отдельной задачей через зарезервированный порт (`LifehackProvider`), ядро от неё не зависит.

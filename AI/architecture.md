@@ -9,6 +9,10 @@ courses/*/course.json ──(build: generateCoursePackSource scans courses/*, UC
 kotlin/build-logic         convention-плагин polski.kmp-common — 7 KMP-таргетов для новых :core-* модулей
 kotlin/core-model          FeatureKey/FeatureValue/FeatureBundle, Construction, SkillSpec (UC-01, первый :core-* модуль)
 kotlin/pack-format         CoursePackSource/EmbeddedCoursePackSource/PackManifest (UC-02) — раздача сырого JSON пакета по id
+kotlin/core-engine         Morphology/TableMorphology (UC-05) — табличный lookup формы по (lexeme, FeatureBundle);
+                           forms.generated.json (scripts/build-pack.mjs, из courses/pl-ru/course.json) доказанно
+                           совпадает с GrammarEngine на каждой лексеме × наборе признаков и с tests/fixtures/core-golden
+                           (TableMorphologyParityTest, kotlin/shared/src/commonTest); GrammarEngine остаётся живым путём
 kotlin/shared (commonMain)
   model, data, grammar      польские данные и морфология (GrammarEngine, ExerciseFactory); model/Grammar.kt — тонкий адаптер над :core-model
   srs                       FSRS (порт ts-fsrs 5.4.2)
@@ -47,7 +51,7 @@ kotlin/macosApp             SwiftUI macOS
 
 ```text
 :core-model         FeatureBundle (UD/UniMorph), Construction, SkillSpec, порты будущего
-:core-engine        ConstructionRealizer, TemplateInterpreter (≤10 операторов), ExerciseGenerator, MatrixTableEngine
+:core-engine        Morphology/TableMorphology (готово, UC-05); ConstructionRealizer, TemplateInterpreter (≤10 операторов), ExerciseGenerator, MatrixTableEngine — впереди (UC-07)
 :core-srs           FSRS
 :core-progress      прогресс по pack.id
 :core-presentation  сессии, StyleComposer (стили → блоки)

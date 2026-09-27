@@ -10,7 +10,35 @@ val frequencyFile = layout.projectDirectory.file("../../courses/pl-ru/frequency-
 // filename list) means a new recipe file needs no Gradle/Kotlin edit to reach StyleRegistry —
 // only the JSON file.
 val stylesDirectory = layout.projectDirectory.dir("../../courses/styles")
+val formsFixtureFile = layout.projectDirectory.file("../../courses/pl-ru/forms.generated.json")
 val generatedCourseDirectory = layout.buildDirectory.dir("generated/course/kotlin")
+val generatedFormsFixtureDirectory = layout.buildDirectory.dir("generated/formsFixture/kotlin")
+
+// Shared by generateCoursePackSource and generateFormsFixtureSource below: a JS/Wasm-safe way to
+// embed a JSON file's bytes as a Kotlin string constant, so commonTest/commonMain never do file
+// I/O at runtime (browser targets have none) — the same technique for both, just different inputs.
+fun literalChunks(source: String): List<String> {
+    val rawChunks = mutableListOf<String>()
+    var start = 0
+    while (start < source.length) {
+        var end = minOf(start + 8000, source.length)
+        // Never split a UTF-16 surrogate pair across two chunks.
+        if (end < source.length && Character.isHighSurrogate(source[end - 1]) && Character.isLowSurrogate(source[end])) {
+            end -= 1
+        }
+        rawChunks += source.substring(start, end)
+        start = end
+    }
+    return rawChunks.map { chunk ->
+        chunk.replace("\\", "\\\\")
+            .replace("\"", "\\\"")
+            .replace("$", "\\$")
+            .replace("\n", "\\n")
+    }
+}
+fun literalBuildString(chunks: List<String>): String =
+    "buildString {\n" + chunks.joinToString("\n") { "    append(\"$it\")" } + "\n}"
+
 val generateCoursePackSource by tasks.registering {
     // UniversalCorePlan.md §4.2/§12 UC-02: pack ids are discovered by scanning `courses/*` for a
     // `course.json`, not read from one hardcoded path — adding `courses/<id>/course.json` needs no
@@ -20,28 +48,6 @@ val generateCoursePackSource by tasks.registering {
     inputs.dir(stylesDirectory)
     outputs.dir(generatedCourseDirectory)
     doLast {
-        fun literalChunks(source: String): List<String> {
-            val rawChunks = mutableListOf<String>()
-            var start = 0
-            while (start < source.length) {
-                var end = minOf(start + 8000, source.length)
-                // Never split a UTF-16 surrogate pair across two chunks.
-                if (end < source.length && Character.isHighSurrogate(source[end - 1]) && Character.isLowSurrogate(source[end])) {
-                    end -= 1
-                }
-                rawChunks += source.substring(start, end)
-                start = end
-            }
-            return rawChunks.map { chunk ->
-                chunk.replace("\\", "\\\\")
-                    .replace("\"", "\\\"")
-                    .replace("$", "\\$")
-                    .replace("\n", "\\n")
-            }
-        }
-        fun literalBuildString(chunks: List<String>): String =
-            "buildString {\n" + chunks.joinToString("\n") { "    append(\"$it\")" } + "\n}"
-
         // UC-02: a pack directory is any immediate child of `courses/` (other than the shared
         // `schema`/`styles` directories) that has its own `course.json` — pl-ru is the only one
         // today, read as schema v1 like before; a second pack directory needs no edit here.
@@ -72,6 +78,24 @@ val generateCoursePackSource by tasks.registering {
         )
     }
 }
+
+// UniversalCorePlan.md §5.3/§12 UC-05: forms.generated.json (scripts/build-pack.mjs) is test-only
+// data today — GrammarEngine stays the live path — so it's embedded into commonTest, not
+// commonMain, the same way generateCoursePackSource embeds course.json for commonMain.
+val generateFormsFixtureSource by tasks.registering {
+    inputs.file(formsFixtureFile)
+    outputs.dir(generatedFormsFixtureDirectory)
+    doLast {
+        val chunks = literalChunks(formsFixtureFile.asFile.readText())
+        val target = generatedFormsFixtureDirectory.get().file("polski/grammar/GeneratedFormsFixtureJson.kt").asFile
+        target.parentFile.mkdirs()
+        target.writeText(
+            "package polski.grammar\n\n" +
+                "internal val generatedFormsFixtureJson = " + literalBuildString(chunks) + "\n",
+        )
+    }
+}
+
 kotlin {
     jvmToolchain(21)
     jvm("desktop")
@@ -117,9 +141,15 @@ kotlin {
             // (above) generates against — pl-ru is read as v1 through it, same as before.
             api(project(":pack-format"))
         }
+        commonTest {
+            kotlin.srcDir(generateFormsFixtureSource.map { it.outputs.files.singleFile })
+        }
         commonTest.dependencies {
             implementation(kotlin("test"))
             implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.10.2")
+            // UniversalCorePlan.md §12 UC-05: TableMorphology, compared against GrammarEngine —
+            // test-only, since GrammarEngine remains the live path until UC-07/08.
+            implementation(project(":core-engine"))
         }
     }
 }
