@@ -50,7 +50,7 @@ class StyleComposerTest {
             val ex = exercise().copy(primarySkill = id)
             val ruleFirst = registry.getValue(StyleId.RuleFirst)
             val front = StyleComposer.compose(ruleFirst, StylePhase.Front, ex, skill, focus, SkillStyleContent())
-            assertEquals(Block.Formula(skill.formula), front.filterIsInstance<Block.Formula>().single())
+            assertEquals(skill.formula, front.filterIsInstance<Block.Formula>().single().text)
             val back = StyleComposer.compose(ruleFirst, StylePhase.Back, ex, skill, focus, SkillStyleContent())
             assertEquals(skill.theory, back.filterIsInstance<Block.Rule>().single().text)
             // Regression (post-df8ade7 correction): the pre-UC-10 rule-focus box always showed a
@@ -75,12 +75,19 @@ class StyleComposerTest {
         val empty = SkillStyleContent()
         assertEquals(StyleId.RuleFirst, StyleComposer.resolveEffectiveStyle(nativeContrast, empty, registry))
 
-        val withPair = SkillStyleContent(nativeParallel = listOf(NativeParallelPair("native", "target", "note", matches = false)))
+        val withPair = SkillStyleContent(nativeParallel = listOf(
+            NativeParallelPair("native", "target", "note", matches = false, targetParts = emptyList()),
+        ))
         assertEquals(StyleId.NativeContrast, StyleComposer.resolveEffectiveStyle(nativeContrast, withPair, registry))
         val skill = skillById("case.gen.neg")
         val focus = presentationBySkillId("case.gen.neg")
         val front = StyleComposer.compose(nativeContrast, StylePhase.Front, exercise(), skill, focus, withPair)
-        assertEquals(listOf(NativeParallelPair("native", "target", "note", false)), front.filterIsInstance<Block.NativeParallel>().single().pairs)
+        // "target" contains neither focus.focusBefore nor focus.focusAfter verbatim, so it stays a
+        // single unmarked part — the explicit-pair contract never invents a highlight (S4).
+        assertEquals(
+            listOf(NativeParallelPair("native", "target", "note", false, targetParts = listOf(EndingPart("target", false)))),
+            front.filterIsInstance<Block.NativeParallel>().single().pairs,
+        )
     }
 
     // ST-04 (composer half; TrainingStore's own invariant is covered in TrainingStoreTest):
@@ -148,6 +155,99 @@ class StyleComposerTest {
         val table = StyleComposer.compose(ruleFirst, StylePhase.Front, fakeExercise, fakeSkill, fakePresentation, SkillStyleContent())
             .filterIsInstance<Block.Table>().single()
         assertEquals("", table.rows.single().label)
+    }
+
+    // S4 (EmphasisUXAudit E7): Formula/Rule/Scene/NativeParallel(target)/Examples/WhyOnDemand each
+    // carry highlight parts of their own text, computed from the skill's explicit
+    // `focus.before`/`focus.after` pair — never parsed heuristically, never the native side of a
+    // NativeParallel pair.
+    @Test fun styleBlocksCarryPartsForTheirOwnTextFromTheExplicitFocusPair() {
+        val fakeSkill = Skill(
+            "core.made-up.axis", "Made-up axis", "group", "A1",
+            "See mojej become ich here.", "Rule: mojej changes to ich here.", "hint", emptyList(),
+        )
+        val fakePresentation = SkillPresentation(
+            "mojej", "ich",
+            MethodPresentation("intro", "lead", "Logic mojej to ich.", "retrieve", "feedback", "review"),
+            MethodPresentation("intro", "lead", "In this scene mojej becomes ich naturally.", "retrieve", "feedback", "review"),
+        )
+        val content = SkillStyleContent(
+            nativeParallel = listOf(NativeParallelPair("native mojej ich", "target mojej ich", "note", true, emptyList())),
+            examples = listOf("Use mojej here.", "Use ich there."),
+        )
+        val fakeExercise = Exercise(
+            "fake-1", "core.made-up.axis", "source sentence", "prompt", "expected sentence",
+            explanation = "explanation", tags = emptyList(), nounId = "n", adjectiveId = "a",
+            possessive = PossessiveId.MY, number = NumberGram.SG, changes = listOf(FormChange("x", "y", "because")),
+        )
+
+        val formula = StyleComposer.compose(registry.getValue(StyleId.RuleFirst), StylePhase.Front, fakeExercise, fakeSkill, fakePresentation, content)
+            .filterIsInstance<Block.Formula>().single()
+        assertEquals(fakeSkill.formula, formula.parts.joinToString("") { it.text })
+        assertEquals(listOf("mojej", "ich"), formula.parts.filter(EndingPart::isChanged).map(EndingPart::text))
+        // W3 correction (blocker 2): "mojej" is the skill's own `focus.before` and must carry the
+        // "before" role (warm/dashed), "ich" is `focus.after` and must carry "after" (cool/solid)
+        // — even though both sit in the same running text, a host cannot tell them apart from a
+        // single caller-supplied class for the whole block.
+        assertEquals(listOf(ChangeSide.Before, ChangeSide.After), formula.parts.filter(EndingPart::isChanged).map(EndingPart::side))
+
+        val rule = StyleComposer.compose(registry.getValue(StyleId.RuleFirst), StylePhase.Back, fakeExercise, fakeSkill, fakePresentation, content)
+            .filterIsInstance<Block.Rule>().single()
+        assertEquals(fakeSkill.theory, rule.parts.joinToString("") { it.text })
+        assertEquals(listOf("mojej", "ich"), rule.parts.filter(EndingPart::isChanged).map(EndingPart::text))
+        assertEquals(listOf(ChangeSide.Before, ChangeSide.After), rule.parts.filter(EndingPart::isChanged).map(EndingPart::side))
+
+        val scene = StyleComposer.compose(registry.getValue(StyleId.SituationFirst), StylePhase.Front, fakeExercise, fakeSkill, fakePresentation, content)
+            .filterIsInstance<Block.Scene>().single()
+        assertEquals(fakePresentation.situations.introduce, scene.parts.joinToString("") { it.text })
+        assertEquals(listOf("mojej", "ich"), scene.parts.filter(EndingPart::isChanged).map(EndingPart::text))
+        assertEquals(listOf(ChangeSide.Before, ChangeSide.After), scene.parts.filter(EndingPart::isChanged).map(EndingPart::side))
+
+        val nativeParallel = StyleComposer.compose(registry.getValue(StyleId.NativeContrast), StylePhase.Front, fakeExercise, fakeSkill, fakePresentation, content)
+            .filterIsInstance<Block.NativeParallel>().single().pairs.single()
+        assertEquals("target mojej ich", nativeParallel.targetParts.joinToString("") { it.text })
+        assertEquals(listOf("mojej", "ich"), nativeParallel.targetParts.filter(EndingPart::isChanged).map(EndingPart::text))
+        assertEquals(listOf(ChangeSide.Before, ChangeSide.After), nativeParallel.targetParts.filter(EndingPart::isChanged).map(EndingPart::side))
+        // Native (L1) prose is never highlighted (EmphasisUXAudit E7) — the model gives it no parts field at all.
+
+        val examplesBlock = StyleComposer.compose(registry.getValue(StyleId.MinimalTheory), StylePhase.Front, fakeExercise, fakeSkill, fakePresentation, content)
+            .filterIsInstance<Block.Examples>().single()
+        assertEquals(listOf("Use mojej here.", "Use ich there."), examplesBlock.items)
+        assertEquals(listOf("mojej"), examplesBlock.itemParts[0].filter(EndingPart::isChanged).map(EndingPart::text))
+        assertEquals(listOf(ChangeSide.Before), examplesBlock.itemParts[0].filter(EndingPart::isChanged).map(EndingPart::side))
+        assertEquals(listOf("ich"), examplesBlock.itemParts[1].filter(EndingPart::isChanged).map(EndingPart::text))
+        assertEquals(listOf(ChangeSide.After), examplesBlock.itemParts[1].filter(EndingPart::isChanged).map(EndingPart::side))
+
+        val why = StyleComposer.compose(registry.getValue(StyleId.MinimalTheory), StylePhase.Back, fakeExercise, fakeSkill, fakePresentation, content)
+            .filterIsInstance<Block.WhyOnDemand>().single()
+        assertEquals(fakeSkill.theory, why.parts.joinToString("") { it.text })
+        assertEquals(listOf("mojej", "ich"), why.parts.filter(EndingPart::isChanged).map(EndingPart::text))
+        assertEquals(listOf(ChangeSide.Before, ChangeSide.After), why.parts.filter(EndingPart::isChanged).map(EndingPart::side))
+    }
+
+    // S4 (EmphasisUXAudit E7, Emphasis contract §5 no-leak): a front block's highlight comes only
+    // from the skill's own `focus` pair, never from the current exercise's actual answer — so two
+    // exercises with different changes/expected on the same skill/content compose byte-identical
+    // Formula/Scene/NativeParallel/Examples parts. Nothing exercise-specific ever reaches a front
+    // block before reveal.
+    @Test fun frontBlockPartsNeverDependOnTheCurrentExercisesOwnAnswer() {
+        val skill = skillById("case.gen.neg")
+        val focus = presentationBySkillId("case.gen.neg")
+        val content = SkillStyleContent(
+            nativeParallel = listOf(NativeParallelPair("native", "target text", "note", true, emptyList())),
+            examples = listOf("An example sentence."),
+        )
+        val exerciseA = exercise(changes = listOf(FormChange("psa", "psa", "A")))
+        val exerciseB = exercise(changes = listOf(FormChange("mam", "nie mam", "B"))).copy(expected = "totally different expected sentence")
+
+        for (recipe in listOf(StyleId.RuleFirst, StyleId.SituationFirst, StyleId.NativeContrast, StyleId.MinimalTheory)) {
+            val effective = registry.getValue(StyleComposer.resolveEffectiveStyle(registry.getValue(recipe), content, registry))
+            val frontA = StyleComposer.compose(effective, StylePhase.Front, exerciseA, skill, focus, content)
+                .filterNot { it is Block.Table } // Table is exempt (reference material, §4) and out of S4's scope
+            val frontB = StyleComposer.compose(effective, StylePhase.Front, exerciseB, skill, focus, content)
+                .filterNot { it is Block.Table }
+            assertEquals(frontA, frontB, "front blocks for $recipe must not depend on the exercise's own changes/expected")
+        }
     }
 
     // §2 validator invariant: whatever a recipe names as its fallback must itself have empty requires.

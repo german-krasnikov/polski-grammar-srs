@@ -967,10 +967,22 @@ internal fun intervalLabel(dueMillis: Long, nowMillis: Long): String {
 
 // UC-10 web S2: shared with CardBlocksWeb.kt's block renderers (Table/Contrast/Changes reuse the
 // exact same ending-highlight markup this file has always used), so file-private isn't enough.
+// [changedClass] is only the fallback for a part with no [EndingPart.side] of its own (none of
+// today's callers construct one, but nothing here requires they do): a part that does carry a
+// side is a mixed-role block's own signal for which role it plays (Emphasis contract: "before" =
+// warm/dashed, "after" = cool/solid) and always wins over the caller's single class, since one
+// block's running text (Formula/Rule/Scene/Examples/WhyOnDemand/NativeParallel-target) can hold a
+// literal focus.before span and a literal focus.after span side by side (W3 correction, blocker 2).
 internal fun appendContrastParts(container: HTMLElement, parts: List<EndingPart>, changedClass: String) {
     parts.forEach { part ->
-        if (part.isChanged) container.appendChild(node("span", if (part.isEnding && changedClass == "change-after") "$changedClass ending-highlight" else changedClass, part.text))
-        else container.appendChild(document.createTextNode(part.text))
+        if (part.isChanged) {
+            val cls = when (part.side) {
+                ChangeSide.Before -> "change-before"
+                ChangeSide.After -> "change-after"
+                null -> changedClass
+            }
+            container.appendChild(node("span", if (part.isEnding && cls == "change-after") "$cls ending-highlight" else cls, part.text))
+        } else container.appendChild(document.createTextNode(part.text))
     }
 }
 

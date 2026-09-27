@@ -19,8 +19,10 @@ private fun endingPartsJson(parts: List<EndingPart>): JsonArray = JsonArray(part
 })
 
 private fun blockToJson(block: Block): JsonObject = when (block) {
-    is Block.Formula -> buildJsonObject { put("kind", "formula"); put("text", block.text) }
-    is Block.Rule -> buildJsonObject { put("kind", "rule"); put("text", block.text); put("detail", block.detail) }
+    is Block.Formula -> buildJsonObject { put("kind", "formula"); put("text", block.text); put("parts", endingPartsJson(block.parts)) }
+    is Block.Rule -> buildJsonObject {
+        put("kind", "rule"); put("text", block.text); put("detail", block.detail); put("parts", endingPartsJson(block.parts))
+    }
     is Block.Table -> buildJsonObject {
         put("kind", "table")
         put("caption", block.caption)
@@ -28,15 +30,24 @@ private fun blockToJson(block: Block): JsonObject = when (block) {
             buildJsonObject { put("label", row.label); put("before", endingPartsJson(row.before)); put("after", endingPartsJson(row.after)) }
         }))
     }
-    is Block.Scene -> buildJsonObject { put("kind", "scene"); put("text", block.text) }
+    is Block.Scene -> buildJsonObject { put("kind", "scene"); put("text", block.text); put("parts", endingPartsJson(block.parts)) }
     is Block.NativeParallel -> buildJsonObject {
         put("kind", "nativeParallel")
         put("pairs", JsonArray(block.pairs.map { pair ->
-            buildJsonObject { put("native", pair.native); put("target", pair.target); put("note", pair.note); put("matches", pair.matches) }
+            buildJsonObject {
+                put("native", pair.native); put("target", pair.target); put("note", pair.note); put("matches", pair.matches)
+                put("targetParts", endingPartsJson(pair.targetParts))
+            }
         }))
     }
-    is Block.Examples -> buildJsonObject { put("kind", "examples"); put("items", JsonArray(block.items.map(::JsonPrimitive))) }
-    is Block.WhyOnDemand -> buildJsonObject { put("kind", "whyOnDemand"); put("text", block.text); put("collapsedLabel", block.collapsedLabel) }
+    is Block.Examples -> buildJsonObject {
+        put("kind", "examples")
+        put("items", JsonArray(block.items.map(::JsonPrimitive)))
+        put("itemParts", JsonArray(block.itemParts.map(::endingPartsJson)))
+    }
+    is Block.WhyOnDemand -> buildJsonObject {
+        put("kind", "whyOnDemand"); put("text", block.text); put("collapsedLabel", block.collapsedLabel); put("parts", endingPartsJson(block.parts))
+    }
     is Block.Changes -> buildJsonObject {
         put("kind", "changes")
         put("items", JsonArray(block.items.map { item ->

@@ -34,13 +34,15 @@ object StyleComposer {
 
     private fun block(kind: BlockKind, exercise: Exercise, skill: Skill, focus: SkillPresentation, content: SkillStyleContent): Block? =
         when (kind) {
-            BlockKind.Formula -> Block.Formula(skill.formula)
-            BlockKind.Rule -> Block.Rule(content.rule ?: skill.theory, exercise.explanation)
+            BlockKind.Formula -> Block.Formula(skill.formula, styleParts(skill.formula, focus))
+            BlockKind.Rule -> (content.rule ?: skill.theory).let { text -> Block.Rule(text, exercise.explanation, styleParts(text, focus)) }
             BlockKind.Table -> Block.Table("", content.table ?: listOf(derivedTableRow(focus)))
-            BlockKind.Scene -> Block.Scene(content.scene ?: focus.situations.introduce)
-            BlockKind.NativeParallel -> content.nativeParallel.takeIf { it.isNotEmpty() }?.let(Block::NativeParallel)
-            BlockKind.Examples -> Block.Examples(content.examples)
-            BlockKind.WhyOnDemand -> Block.WhyOnDemand(content.why ?: skill.theory)
+            BlockKind.Scene -> (content.scene ?: focus.situations.introduce).let { text -> Block.Scene(text, styleParts(text, focus)) }
+            BlockKind.NativeParallel -> content.nativeParallel.takeIf { it.isNotEmpty() }
+                ?.map { pair -> pair.copy(targetParts = styleParts(pair.target, focus)) }
+                ?.let(Block::NativeParallel)
+            BlockKind.Examples -> Block.Examples(content.examples, content.examples.map { text -> styleParts(text, focus) })
+            BlockKind.WhyOnDemand -> (content.why ?: skill.theory).let { text -> Block.WhyOnDemand(text, styleParts(text, focus)) }
             BlockKind.Changes -> Block.Changes(exercise.changes.map { change ->
                 ChangeItem(
                     changeHighlightParts(change.from, change.to, ChangeSide.Before),
@@ -53,6 +55,13 @@ object StyleComposer {
                 changeHighlightParts(focus.focusBefore, focus.focusAfter, ChangeSide.After),
             )
         }
+
+    /** [styleTextHighlightParts] against the skill's own `focus.before`/`focus.after` — the same
+     *  explicit, non-exercise-specific pair [Block.Table]/[Block.Contrast] already draw from, so a
+     *  style block's prose never carries the current exercise's own answer (EmphasisUXAudit E7/S4,
+     *  Emphasis contract §5: no leak, front or back). */
+    private fun styleParts(text: String, focus: SkillPresentation): List<EndingPart> =
+        styleTextHighlightParts(text, focus.focusBefore, focus.focusAfter)
 
     /** Label is "" (no per-skill [SkillStyleContent.table] to draw it from) — see UC-09 for a real
      *  multi-row table; CORE names no language here, so it never guesses a caption like "before → after". */
