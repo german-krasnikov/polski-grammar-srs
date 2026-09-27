@@ -125,11 +125,24 @@ function validatePatterns(patterns) {
   }
 }
 
+/** A "*To" exerciseCopy key feeds FormChange.to verbatim (ExerciseFactory.kt, generator.ts). It
+ *  must be one literal matching `expected`; alternatives (e.g. gender variants) belong in
+ *  `accepted` instead, or `wholePhraseStart` cannot find the change in the rendered sentence and
+ *  the ending highlight silently disappears (EmphasisUXAudit-2026-09-27 E4). */
+function validateNoChangeAlternatives(exerciseCopy) {
+  for (const [key, value] of Object.entries(exerciseCopy)) {
+    if (key.endsWith('To') && typeof value === 'string' && value.includes(' / ')) {
+      throw new Error(`/exerciseCopy/${key}: FormChange.to must be a single literal, not alternatives joined by ' / '`);
+    }
+  }
+}
+
 /** Rejects malformed author data without mutating the pack or the learner's progress. */
 export function validateCoursePack(course, frequency) {
   assertSchema(courseSchema, course, 'course');
   assertSchema(frequencySchema, frequency, 'frequency');
   noHtml(course);
+  validateNoChangeAlternatives(course.exerciseCopy);
   validateStyleContent(course.skills);
   validateStyleRecipes();
   validatePatterns(course.exercisePatterns);

@@ -3568,7 +3568,7 @@
     "aspectAccepted": "Wczoraj kupiłam nową książkę.",
     "aspectExplanation": "Процесс kupować → завершённый результат kupić. Форма kupiłam также правильная.",
     "aspectFrom": "kupuję",
-    "aspectTo": "kupiłem / kupiłam",
+    "aspectTo": "kupiłem",
     "aspectReason": "Совершенный вид + прошедшее время.",
     "pronounPrompt": "Замени всю группу после «Widzę» одним личным местоимением.",
     "pronounExplanation": "Местоимение заменяет всю группу слов и остаётся в Bierniku.",
@@ -3597,7 +3597,7 @@
     "questionChangeFrom": "Widzisz",
     "questionChangeTo": "Czy widzisz",
     "mixedChangeFrom": "Widzę",
-    "mixedChangeTo": "Nie widziałeś / Nie widziałaś",
+    "mixedChangeTo": "Nie widziałeś",
     "chainPastChangeFrom": "Widzę",
     "chainPastChangeTo": "Widziałem"
   },

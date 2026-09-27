@@ -57,7 +57,7 @@
     "src/progress/storage.ts": "6c30ef75b1965f11823e6761e5a13d8b8ef9e545202ad2126543b3ca41d5c46a",
     "src/progress/review.ts": "09eaec99309ff0ac28ef3a60e8628ed2e1987bb7381961d6fb540a984811eede"
   },
-  "lockSha256": "00de78705bb56f8a33738b8550bbe28f35eeca3d9612bfa1d7159018eef14cf4",
+  "lockSha256": "bb539b80c7ce45a8e6784761325916efac4fd6690ff4e3b8848a3674f3fc755c",
   "comparison": "Exact JSON values and array order. Exercise IDs use <generated-id>; original IDs are checked nonempty. FSRS numeric tolerances for Kotlin require later analysis.",
   "files": {
     "grammar": {
@@ -2045,7 +2045,7 @@
       ]
     },
     "exercises": {
-      "sha256": "b835ac83115801b0ef2ee41c893e7123048eca44a66c4901f93e46a8718261ae",
+      "sha256": "a3dd3261ca405064e2eb4c3bfd13d82aa216e0a8a891a3f6465d03cad8da5dd3",
       "caseIds": [
         "C-01-01",
         "C-01-02",
@@ -2162,7 +2162,7 @@
       ]
     },
     "evaluation": {
-      "sha256": "716ae6b417b228bc7faddae6c9ccff07475f05d11c07b587c602b65b3c736ae2",
+      "sha256": "77af2cde30a44ca8b01cfd87249d9a95997c054a7ffe635d5181f227600de6ba",
       "caseIds": [
         "A-exact",
         "A-accepted",

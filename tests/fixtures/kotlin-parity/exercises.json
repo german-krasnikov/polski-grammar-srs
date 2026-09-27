@@ -3772,7 +3772,7 @@
           "changes": [
             {
               "from": "kupuję",
-              "to": "kupiłem / kupiłam",
+              "to": "kupiłem",
               "reason": "Совершенный вид + прошедшее время."
             }
           ],
@@ -3819,7 +3819,7 @@
           "changes": [
             {
               "from": "kupuję",
-              "to": "kupiłem / kupiłam",
+              "to": "kupiłem",
               "reason": "Совершенный вид + прошедшее время."
             }
           ],
@@ -3863,7 +3863,7 @@
           "changes": [
             {
               "from": "kupuję",
-              "to": "kupiłem / kupiłam",
+              "to": "kupiłem",
               "reason": "Совершенный вид + прошедшее время."
             }
           ],
@@ -4039,7 +4039,7 @@
           "changes": [
             {
               "from": "Widzę",
-              "to": "Nie widziałeś / Nie widziałaś",
+              "to": "Nie widziałeś",
               "reason": "Лицо + время + отрицание"
             },
             {
@@ -4092,7 +4092,7 @@
           "changes": [
             {
               "from": "Widzę",
-              "to": "Nie widziałeś / Nie widziałaś",
+              "to": "Nie widziałeś",
               "reason": "Лицо + время + отрицание"
             },
             {
@@ -4142,7 +4142,7 @@
           "changes": [
             {
               "from": "Widzę",
-              "to": "Nie widziałeś / Nie widziałaś",
+              "to": "Nie widziałeś",
               "reason": "Лицо + время + отрицание"
             },
             {
@@ -4545,7 +4545,7 @@
           "changes": [
             {
               "from": "kupuję",
-              "to": "kupiłem / kupiłam",
+              "to": "kupiłem",
               "reason": "Совершенный вид + прошедшее время."
             }
           ],
@@ -4592,7 +4592,7 @@
           "changes": [
             {
               "from": "Widzę",
-              "to": "Nie widziałeś / Nie widziałaś",
+              "to": "Nie widziałeś",
               "reason": "Лицо + время + отрицание"
             },
             {
