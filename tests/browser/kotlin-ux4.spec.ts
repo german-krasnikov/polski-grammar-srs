@@ -221,6 +221,13 @@ test('UX4-11: a narrow but fine-pointer desktop window keeps normal, mouse-click
   await page.setViewportSize({ width: 320, height: 700 });
   await page.goto('/');
   await continueIntroductionIfPresent(page);
+  // W4/U3 fine-pointer half: a real (non-emulated) Playwright context is `pointer: fine`, so the
+  // footer hint must still name the keyboard, not swipe — the coarse-pointer half above only
+  // covers the touch branch of TrainingWebApp.kt's ternary, never this one.
+  expect(await page.evaluate(() => matchMedia('(pointer: coarse)').matches)).toBe(false);
+  const hint = page.locator('.study-help');
+  await expect(hint).toContainText('Пробел');
+  await expect(hint).not.toContainText('Свайп');
   await page.getByRole('button', { name: 'Показать ответ' }).click();
   const again = page.getByRole('button', { name: /Повторить/ });
   const box = await again.boundingBox();
