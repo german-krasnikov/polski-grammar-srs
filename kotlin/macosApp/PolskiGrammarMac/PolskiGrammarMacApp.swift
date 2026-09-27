@@ -7,6 +7,14 @@ struct TrainingSnapshot: Decodable {
     struct HighlightPart: Decodable {
         let text: String
         let changed: Bool
+        /// "before"/"after", or absent — set only when [StyleSnapshot.kt]'s `endingPartsJson` has
+        /// a non-null `EndingPart.side` (W3 correction, EmphasisUXAudit E7/S4): a style block's own
+        /// prose can mix a Before-role fragment and an After-role fragment in one `parts` list, so
+        /// each part must carry its own role rather than relying on one block-level default. Every
+        /// other caller (exercise `sourceParts`/`toParts`/`beforeParts`/`afterParts`) never mixes
+        /// roles within a list, so this stays absent there and `highlightedText`'s `before`
+        /// parameter is still what renders them.
+        let side: String?
     }
     struct FormChange: Decodable {
         let from: String
@@ -119,7 +127,9 @@ struct RatingIntervals: Decodable {
 /// fields instead of one `Decodable`-synthesized property.
 struct BlockJSON: Decodable {
     struct TableRow: Decodable { let label: String; let before: [TrainingSnapshot.HighlightPart]; let after: [TrainingSnapshot.HighlightPart] }
-    struct NativeParallelPair: Decodable { let native: String; let target: String; let note: String; let matches: Bool }
+    /// [targetParts] highlights [target] (S4/M1, EmphasisUXAudit E7) — [native] stays plain prose,
+    /// never highlighted, matching `Block.NativeParallelPair`'s own contract.
+    struct NativeParallelPair: Decodable { let native: String; let target: String; let note: String; let matches: Bool; let targetParts: [TrainingSnapshot.HighlightPart] }
     struct ChangeItem: Decodable { let before: [TrainingSnapshot.HighlightPart]; let after: [TrainingSnapshot.HighlightPart]; let reason: String }
 
     let kind: String
@@ -133,9 +143,14 @@ struct BlockJSON: Decodable {
     let after: [TrainingSnapshot.HighlightPart]?
     let exampleItems: [String]?
     let changeItems: [ChangeItem]?
+    /// S4/M1 (EmphasisUXAudit E7): highlights `text` for `formula`/`rule`/`scene`/`whyOnDemand`,
+    /// the same explicit-pair parts `Block.kt` already attaches — see `MacStyleBlockView`.
+    let parts: [TrainingSnapshot.HighlightPart]?
+    /// `examples` only: parallel to `exampleItems` by index (`itemParts[i]` highlights `exampleItems[i]`).
+    let itemParts: [[TrainingSnapshot.HighlightPart]]?
 
     private enum CodingKeys: String, CodingKey {
-        case kind, text, detail, caption, rows, pairs, collapsedLabel, before, after, items
+        case kind, text, detail, caption, rows, pairs, collapsedLabel, before, after, items, parts, itemParts
     }
 
     init(from decoder: Decoder) throws {
@@ -149,6 +164,8 @@ struct BlockJSON: Decodable {
         collapsedLabel = try c.decodeIfPresent(String.self, forKey: .collapsedLabel)
         before = try c.decodeIfPresent([TrainingSnapshot.HighlightPart].self, forKey: .before)
         after = try c.decodeIfPresent([TrainingSnapshot.HighlightPart].self, forKey: .after)
+        parts = try c.decodeIfPresent([TrainingSnapshot.HighlightPart].self, forKey: .parts)
+        itemParts = try c.decodeIfPresent([[TrainingSnapshot.HighlightPart]].self, forKey: .itemParts)
         if kind == "changes" {
             exampleItems = nil
             changeItems = try c.decodeIfPresent([ChangeItem].self, forKey: .items)
@@ -764,14 +781,20 @@ private func systemCardChain(_ steps: [TrainingSnapshot.Matrix.ContrastPair]) ->
 /// the worst case for this card). This is the *only* place this app turns a `HighlightPart` list
 /// into styled `Text` (every call site above and in `MacStyleBlockView.swift` goes through it), so
 /// there is one rendering path, not a second "simplified" one (contract §3).
+///
+/// [before] is only the *fallback* role for a part with no [TrainingSnapshot.HighlightPart.side]
+/// of its own: a part that does carry a side always wins, since a mixed-role list (a style block's
+/// own prose holding both a literal `focus.before` and a literal `focus.after` fragment) needs each
+/// part's own role, not one role for the whole list (W3 correction, EmphasisUXAudit E7/S4) — the
+/// same resolution order as the web reference's `appendContrastParts` (`TrainingWebApp.kt`).
 func highlightedText(_ parts: [TrainingSnapshot.HighlightPart], before: Bool) -> Text {
     parts.reduce(Text("")) { result, part in
         let fragment = Text(part.text)
-        return result + (part.changed
-            ? fragment.bold()
-                .foregroundColor(before ? .emphasisBefore : .emphasisAfter)
-                .underline(true, pattern: before ? .dash : .solid)
-            : fragment)
+        guard part.changed else { return result + fragment }
+        let isBefore = part.side.map { $0 == "before" } ?? before
+        return result + fragment.bold()
+            .foregroundColor(isBefore ? .emphasisBefore : .emphasisAfter)
+            .underline(true, pattern: isBefore ? .dash : .solid)
     }
 }
 
