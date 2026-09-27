@@ -281,15 +281,14 @@ internal class VocabularyWebController {
         val toggleId = "vocabulary-catalog-toggle"
         val collapsibleId = "vocabulary-catalog-collapsible"
         header.button(if (catalogVisible) "Скрыть каталог" else "Открыть каталог") {
-            // UX4-21: move focus out of the collapsing content BEFORE it becomes inert, never
-            // after — otherwise focus would briefly sit on a node about to leave the tab order.
-            if (catalogVisible) {
-                val collapsing = kotlinx.browser.document.getElementById(collapsibleId)
-                val active = kotlinx.browser.document.activeElement
-                if (collapsing != null && active != null && collapsing.contains(active)) {
-                    (kotlinx.browser.document.getElementById(toggleId) as? HTMLElement)?.focus()
-                }
-            }
+            // UX4-21/22: explicitly move focus onto the toggle BEFORE its content becomes inert,
+            // never after. Chromium/Firefox focus a clicked <button> by default, but WebKit does
+            // not — WebKit only blurs whatever was previously focused (e.g. an open <select>
+            // inside the collapsing content) as part of handling the click, leaving focus on
+            // `body`. Relying on the default leaves nothing to reclaim once the whole subtree
+            // rebuilds, so blur the old target and focus the toggle ourselves either way.
+            (kotlinx.browser.document.activeElement as? HTMLElement)?.takeIf { it.id != toggleId }?.blur()
+            (kotlinx.browser.document.getElementById(toggleId) as? HTMLElement)?.focus()
             catalogVisible = !catalogVisible; catalogToggledThisRender = true; refresh()
         }.apply { id = toggleId; setAttribute("aria-expanded", catalogVisible.toString()) }
         val collapsible = section.add("div", cls = "collapsible catalog-collapsible")
