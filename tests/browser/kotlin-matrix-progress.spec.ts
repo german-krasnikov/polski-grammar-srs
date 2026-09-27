@@ -135,3 +135,29 @@ test('320px large text keeps the page bounded and lets the comparison table scro
   await expect(page.locator('#matrix-number')).toBeFocused();
   expect(await page.locator('#matrix-number').evaluate(element => getComputedStyle(element).outlineStyle)).not.toBe('none');
 });
+
+// W3 (EmphasisUXAudit E6, using shared C2 `ReferenceSystemCard.steps`): the system-map cards
+// highlight each step-to-step change from the pack's own explicit steps chain — never re-parsed
+// from the joined `example` arrow string — with the same `change-after` token every other "Стало"
+// surface uses. The origin step stays plain; each later step marks only its own change from the
+// step right before it.
+test('system-map cards highlight each step transition from the pack\'s own steps chain', async ({ page }) => {
+  await page.goto('/');
+  await page.getByRole('button', { name: 'Таблицы и схема' }).click();
+  const cards = page.locator('.system-grid article');
+  await expect(cards).toHaveCount(4);
+
+  const noun = cards.filter({ hasText: 'żona' });
+  await expect(noun.locator('code')).toHaveText('żona → żonę → żony');
+  const nounHighlights = noun.locator('code .change-after');
+  await expect(nounHighlights).toHaveCount(2);
+  await expect(nounHighlights.nth(0)).toHaveText('ę');
+  await expect(nounHighlights.nth(1)).toHaveText('y');
+
+  const modifiers = cards.nth(3);
+  await expect(modifiers.locator('code')).toHaveText('Widzę… → Nie widzę… → Czy widzę…?');
+  const modifierHighlights = modifiers.locator('code .change-after');
+  await expect(modifierHighlights).toHaveCount(2);
+  await expect(modifierHighlights.nth(0)).toHaveText('Nie');
+  await expect(modifierHighlights.nth(1)).toHaveText('Czy');
+});

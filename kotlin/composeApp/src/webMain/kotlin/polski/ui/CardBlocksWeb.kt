@@ -26,10 +26,10 @@ internal fun renderCardBlocks(container: HTMLElement, blocks: List<Block>, phase
         when (block) {
             is Block.Formula -> ruleFocusBox().apply {
                 appendChild(node("small", text = "ЗАПОМНИ"))
-                appendChild(node("strong", text = block.text))
+                appendChild(node("strong").also { appendContrastParts(it, block.parts, "change-after") })
             }
             is Block.Rule -> ruleFocusBox().apply {
-                appendChild(node("p", text = block.text))
+                appendChild(node("p").also { appendContrastParts(it, block.parts, "change-after") })
                 appendChild(node("p", text = block.detail))
             }
             is Block.Contrast -> ruleFocusBox().appendChild(renderContrastMarkup(block))
@@ -98,7 +98,9 @@ private fun renderSceneBlock(container: HTMLElement, block: Block.Scene) {
     val section = node("section", "block block-scene")
     section.setAttribute("aria-label", "Сцена")
     container.appendChild(section)
-    section.appendChild(node("blockquote", "block-scene-quote", block.text).apply { setAttribute("lang", "pl") })
+    val quote = node("blockquote", "block-scene-quote").apply { setAttribute("lang", "pl") }
+    section.appendChild(quote)
+    appendContrastParts(quote, block.parts, "change-after")
 }
 
 // UC-10 web S2 new visual: a native ↔ target row per pair, with a match/differs badge — the
@@ -112,7 +114,9 @@ private fun renderNativeParallelBlock(container: HTMLElement, block: Block.Nativ
         val row = node("div", "native-parallel-row")
         section.appendChild(row)
         row.appendChild(node("span", "native-parallel-native", pair.native))
-        row.appendChild(node("span", "native-parallel-target", pair.target).apply { setAttribute("lang", "pl") })
+        val target = node("span", "native-parallel-target").apply { setAttribute("lang", "pl") }
+        row.appendChild(target)
+        appendContrastParts(target, pair.targetParts, "change-after")
         row.appendChild(node(
             "span",
             if (pair.matches) "native-parallel-badge match" else "native-parallel-badge differs",
@@ -131,7 +135,11 @@ private fun renderExamplesBlock(container: HTMLElement, block: Block.Examples) {
     container.appendChild(section)
     val list = node("ul", "block-examples-list")
     section.appendChild(list)
-    block.items.forEach { item -> list.appendChild(node("li", text = item).apply { setAttribute("lang", "pl") }) }
+    block.items.forEachIndexed { index, _ ->
+        val item = node("li").apply { setAttribute("lang", "pl") }
+        list.appendChild(item)
+        appendContrastParts(item, block.itemParts[index], "change-after")
+    }
 }
 
 // UC-10 web S2 new visual: collapsed by default (native <button>/aria-expanded disclosure, same
@@ -147,7 +155,7 @@ private fun renderWhyOnDemandBlock(container: HTMLElement, block: Block.WhyOnDem
     content.id = "training-why-on-demand"
     val inner = node("div")
     content.appendChild(inner)
-    inner.appendChild(node("p", text = block.text))
+    inner.appendChild(node("p").also { appendContrastParts(it, block.parts, "change-after") })
     applyCollapsible(content, expanded = false, isToggleEvent = false)
     lateinit var toggle: HTMLButtonElement
     toggle = button(label, extraClass = "block-why-toggle") {

@@ -117,11 +117,11 @@ private fun renderMap(root: HTMLElement, dispatch: (AppAction) -> Unit) {
     pipeline.matrixAdd("p", referencePipeline.compactSummary)
     pipeline.matrixAdd("p", referencePipeline.compactExample)
     val system = pipeline.matrixAdd("div", cls = "system-grid")
-    referenceSystemCards.forEach { (_, title, explanation, example) ->
+    referenceSystemCards.forEach { (_, title, explanation, _, steps) ->
         val article = system.matrixAdd("article")
         article.matrixAdd("h4", title)
         article.matrixAdd("p", explanation)
-        article.matrixAdd("code", example)
+        renderSystemCardSteps(article.matrixAdd("code").apply { setAttribute("lang", "pl") }, steps)
     }
 
     val chain = root.matrixSection("Одна мысль, пять преобразований")
@@ -354,6 +354,24 @@ private fun HTMLElement.matrixTable(
 
 private fun matrixContrast(cell: HTMLElement, before: String, after: String) =
     matrixContrast(cell, ContrastPair.generated(before, after))
+
+/**
+ * EmphasisUXAudit E6/C2, contract §4 ("стрелки карты системы: в данных цепочка шагов, а не
+ * строка"): [steps] is the pack's own explicit chain (never re-parsed from the joined arrow
+ * string). The first step is the chain's origin and stays plain; every later step highlights only
+ * its own change from the step right before it, with the same `change-after` token every other
+ * "Стало" surface already uses — no second, simplified highlight path for this one surface.
+ */
+private fun renderSystemCardSteps(code: HTMLElement, steps: List<String>) {
+    code.matrixAdd("span", steps.first())
+    steps.zipWithNext().forEach { (from, to) ->
+        code.appendChild(document.createTextNode(" → "))
+        val after = code.matrixAdd("span")
+        ContrastPair.generated(from, to).parts(ChangeSide.After).forEach { part ->
+            after.matrixAdd("span", part.text, if (part.isChanged) "change-after" else null)
+        }
+    }
+}
 
 /**
  * Emphasis contract §5 ("панелей «под рукой»: целевая строка не подсвечивается, её «стало»
