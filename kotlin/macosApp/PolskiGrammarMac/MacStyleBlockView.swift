@@ -30,10 +30,10 @@ struct MacStyleBlockView: View {
         }
     }
 
-    /// [parts] renders through [highlightedText] (`before: false`, the same "after"-role token
-    /// every other style block uses for its own explicit-pair prose — mirrors the web reference's
-    /// `appendContrastParts(..., "change-after")` calls in `CardBlocksWeb.kt` for these same block
-    /// kinds; S4/M1, EmphasisUXAudit E7).
+    /// [parts] renders through [highlightedText] with `before: false` as its *fallback* role only
+    /// — a part with its own `side` (a mixed Before+After list, W3 correction) wins over that
+    /// default, same as the web reference's `appendContrastParts(..., "change-after")` calls in
+    /// `CardBlocksWeb.kt` for these same block kinds (S4/M1, EmphasisUXAudit E7).
     @ViewBuilder private func accentBox(caption: String, parts: [TrainingSnapshot.HighlightPart], detail: String? = nil) -> some View {
         VStack(alignment: .leading, spacing: 7) {
             Text(caption).font(.caption.weight(.semibold)).tracking(1.1).foregroundStyle(.secondary)

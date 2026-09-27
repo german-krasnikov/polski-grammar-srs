@@ -14,8 +14,19 @@ import kotlinx.serialization.json.put
  */
 fun blocksToJson(blocks: List<Block>): JsonArray = JsonArray(blocks.map(::blockToJson))
 
+/**
+ * [EndingPart.side] rides along whenever set (W3 correction, EmphasisUXAudit E7/S4): a style
+ * block's own prose (`Block.Formula`/`Rule`/`Scene`/`WhyOnDemand`/`Examples`/`NativeParallel`-
+ * target) can mix a literal `focus.before` fragment and a literal `focus.after` fragment in one
+ * running `parts` list ([styleTextHighlightParts]), and a host must render the two differently —
+ * it cannot infer that from one block-level default the way it safely can for the exercise-level
+ * `sourceParts`/`toParts`/`beforeParts`/`afterParts` fields, which never mix roles within a list.
+ */
 private fun endingPartsJson(parts: List<EndingPart>): JsonArray = JsonArray(parts.map { part ->
-    buildJsonObject { put("text", part.text); put("changed", part.isChanged) }
+    buildJsonObject {
+        put("text", part.text); put("changed", part.isChanged)
+        part.side?.let { put("side", if (it == ChangeSide.Before) "before" else "after") }
+    }
 })
 
 private fun blockToJson(block: Block): JsonObject = when (block) {

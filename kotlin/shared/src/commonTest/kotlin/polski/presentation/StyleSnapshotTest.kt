@@ -44,4 +44,21 @@ class StyleSnapshotTest {
         // The native side carries no parallel "nativeParts" key — the model gives L1 prose no parts field at all.
         assertEquals(false, exportedPair.containsKey("nativeParts"))
     }
+
+    /**
+     * W3 correction (blocker fix): [styleTextHighlightParts] can legitimately return a "mojej"
+     * (Before-role) fragment and an "ich" (After-role) fragment in the same running prose block —
+     * a host must tell them apart per-part, not by one block-level default, so `side` must survive
+     * the JSON bridge (`EndingPart.side`, EndingHighlight.kt's own "W3 correction" KDoc).
+     */
+    @Test fun formulaExportsEachPartsOwnSide() {
+        val mixedRoleParts = listOf(
+            EndingPart("mojej", false, true, ChangeSide.Before),
+            EndingPart(" and ", false),
+            EndingPart("ich", false, true, ChangeSide.After),
+        )
+        val json = blocksToJson(listOf(Block.Formula("mojej and ich", mixedRoleParts))).single().jsonObject
+        val sides = json["parts"]!!.jsonArray.map { it.jsonObject["side"]?.jsonPrimitive?.content }
+        assertEquals(listOf("before", null, "after"), sides)
+    }
 }
