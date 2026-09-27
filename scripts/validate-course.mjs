@@ -37,13 +37,19 @@ function noHtml(value, path = '') {
   }
 }
 
-/** Rejects a skill missing native-contrast content, an accidental empty array, or an empty table. */
+/** Rejects an accidental empty array or empty table in a skill's optional styleContent.
+ *  styleContent itself, and nativeParallel within it, are never required here: a skill with
+ *  no authored nativeParallel is a normal, supported state (StylesBlueprint.md §2-§3, ST-03) —
+ *  StyleComposer.resolveEffectiveStyle (CORE) falls the native-contrast style back to rule-first
+ *  for that skill at runtime, so this generic validator must not make partial coverage a
+ *  build-time error for pl-ru or for any future pack. */
 function validateStyleContent(skills) {
   skills.forEach((skill, index) => {
     const path = `/skills/${index}/styleContent`;
     const content = skill.styleContent;
-    if (!content?.nativeParallel?.length) {
-      throw new Error(`${path}/nativeParallel: every skill needs at least one native ↔ target pair`);
+    if (!content) return;
+    if (content.nativeParallel && content.nativeParallel.length === 0) {
+      throw new Error(`${path}/nativeParallel: omit the field instead of an empty list`);
     }
     if (content.examples && content.examples.length === 0) {
       throw new Error(`${path}/examples: omit the field instead of an empty list`);
