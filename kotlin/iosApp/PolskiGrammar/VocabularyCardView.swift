@@ -53,8 +53,7 @@ struct VocabularyCardView: View {
         .shadow(color: .black.opacity(0.08), radius: 6, y: 2)
         .rotation3DEffect(.degrees(flipped ? 180 : 0), axis: (x: 0, y: 1, z: 0))
         .swipeToRate(active: showBack, reduceMotion: reduceMotion, cornerRadius: 20) { remembered in
-            guard !state.bool("busy") else { return }
-            model.sendVocabulary(remembered ? "good" : "again")
+            rate(remembered: remembered)
         }
         // A new due item always starts question-side-up, never inheriting the previous item's
         // face — never animated, so the next card never visibly "un-reveals" (mirrors D1's own
@@ -119,6 +118,14 @@ struct VocabularyCardView: View {
             Text("Свайп влево — повторить · вправо — вспомнил")
                 .font(.footnote).foregroundStyle(.secondary)
                 .accessibilityIdentifier("ratingSwipeArea")
+                // VoiceOver intercepts raw finger drags for its own navigation, so the swipe
+                // gesture on the outer container is unreachable with VoiceOver on. These two rotor
+                // actions, reached via VoiceOver's Actions rotor once focus lands on this hint, are
+                // the only rating path for a VoiceOver user — no visible button is added.
+                .accessibilityActions {
+                    Button("Повторить") { rate(remembered: false) }
+                    Button("Вспомнил") { rate(remembered: true) }
+                }
         }
         // Undoes the outer panel's own 180° rotation so the back face's own content reads
         // normally rather than mirrored — the standard SwiftUI 3D-flip counter-rotation.
@@ -128,6 +135,11 @@ struct VocabularyCardView: View {
     }
 
     private func toggleFlip() { setFlipped(!flipped) }
+
+    private func rate(remembered: Bool) {
+        guard !state.bool("busy") else { return }
+        model.sendVocabulary(remembered ? "good" : "again")
+    }
 
     private func setFlipped(_ newValue: Bool, animated: Bool = true) {
         guard flipped != newValue else { return }

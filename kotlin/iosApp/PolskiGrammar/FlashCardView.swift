@@ -179,6 +179,14 @@ struct FlashCardView<RevealButton: View>: View {
                     // See `SwipeToRate`'s own doc comment for why this identifier lives on this
                     // long-text leaf specifically, and not on the shared gesture container.
                     .accessibilityIdentifier("ratingSwipeArea")
+                    // VoiceOver intercepts raw finger drags for its own navigation, so the swipe
+                    // gesture above is unreachable with VoiceOver on. These two rotor actions,
+                    // reached via VoiceOver's Actions rotor once focus lands on this hint, are the
+                    // only rating path for a VoiceOver user — no visible button is added.
+                    .accessibilityActions {
+                        Button("Повторить") { rate(remembered: false) }
+                        Button("Вспомнил") { rate(remembered: true) }
+                    }
             }
             .padding(.vertical, 4)
             .transition(staggeredReveal(3))
@@ -187,9 +195,13 @@ struct FlashCardView<RevealButton: View>: View {
         // surface. D1 already removed the flip-back tap this container used to share with the old
         // drag, so there is no reverse action on this panel any more, only the rating drag.
         .swipeToRate(active: state.string("phase") == "Revealed", reduceMotion: reduceMotion) { remembered in
-            guard state.string("phase") == "Revealed" else { return }
-            model.send("rate", remembered ? "Good" : "Again")
+            rate(remembered: remembered)
         }
+    }
+
+    private func rate(remembered: Bool) {
+        guard state.string("phase") == "Revealed" else { return }
+        model.send("rate", remembered ? "Good" : "Again")
     }
 }
 

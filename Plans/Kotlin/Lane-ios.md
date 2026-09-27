@@ -287,6 +287,76 @@ commit (`7adcdcc`, via `git stash`) passes; against my first `SwipeToRate` cut (
 shared container, `minimumDistance: 10`, no `continueIntroductionIfPresent` wait) it failed two
 different ways before each fix above, described inline.
 
+## I3 correction — VoiceOver rating path (reviewer blocker on commit `177166b`)
+
+**Blocker:** I3's `SwipeToRate` is a bare `DragGesture` with no accessibility counterpart.
+VoiceOver intercepts raw finger drags for its own navigation (it never forwards them to the app),
+so a VoiceOver user had no way at all to rate a card once the two rating buttons were removed —
+`SwipeToRate.swift`, `FlashCardView.answerFace`'s and `VocabularyCardView`'s own call sites.
+
+**Fix:** both call sites' `ratingSwipeArea` hint `Text` (the one long-text leaf, not the shared
+gesture container — see that leaf's own doc comment for why it, specifically, carries per-element
+accessibility state) now also carries two custom accessibility actions, "Повторить" (`remembered:
+false`) and "Вспомнил" (`remembered: true`), reachable via VoiceOver's Actions rotor once VoiceOver
+focus lands on that hint — no visible button is added, keeping D3's "no rating buttons on touch"
+intact. Each call site's own rating logic (previously inlined in `swipeToRate`'s trailing closure)
+is factored into a private `rate(remembered:)` on the view itself, reused by both the accessibility
+actions and the drag's own `onRate` closure, so there is exactly one rating code path per card, not
+two: `FlashCardView.rate` keeps the existing `phase == "Revealed"` guard, `VocabularyCardView.rate`
+keeps the existing `!busy` guard.
+
+**API choice, reproduced:** `.accessibilityAction(named:) { }` (attached directly, two calls) is
+what a first cut used and is what the correction's own suggested direction names — but it
+reproducibly broke `testBinaryRatingSwipesAdvanceOnceInEachDirection` 4/4 times (fresh install
+each time): after the first `rating.swipeLeft()`, `continueIntroductionIfPresent`'s tap on
+"Перейти к заданию" (the next card's intro-continue button, wholly unrelated to the rating panel)
+silently had no effect, leaving that button on screen and failing the next `revealAnswer` lookup.
+Every one of those failures logged the same runtime note right at the failure point:
+`Automation type mismatch: computed Button from legacy attributes vs PopUpButton from modern
+attribute` — an XCTest accessibility-snapshot artifact, reproduced correlating with *every* run in
+this session that had any `.accessibilityAction`/`.accessibilityActions` anywhere on screen and
+*no* run without one (checked across this session's own run logs). Switching to the ViewBuilder
+form, `.accessibilityActions { Button(...) { } }`, cut the failure rate sharply (2/2 solo passes)
+but not to zero — it still failed once more in a 7-test batch run, same symptom, same line. Since
+this is an XCTest automation-snapshot instability, not a VoiceOver or product behavior difference
+(a real VoiceOver user's rotor action is unaffected either way), the fix that actually eliminated
+it was hardening the test helper itself: `continueIntroductionIfPresent`'s final `next.tap()` is
+now a bounded tap-and-verify retry (up to 3 attempts, each re-checking `next.exists` /
+`waitForExistence` after tapping) instead of one unconditional tap — 3/3 solo passes and 1/1 clean
+7-test batch pass afterwards, described inline in that helper's own comment.
+
+## Verification (I3 correction)
+
+Working directory: `/Users/german/Work/JS/polski-lanes/ios/kotlin`. Same
+`JAVA_HOME`/simulator/`-derivedDataPath` as above. Every UI run below used a freshly `xcrun simctl
+uninstall`ed app first.
+
+| Check | Command | Result |
+|---|---|---|
+| iOS build | `xcodebuild ... build` (after each edit below) | PASS at each step |
+| Bisect: `.accessibilityAction(named:)` (first cut) | `-only-testing:.../testBinaryRatingSwipesAdvanceOnceInEachDirection` ×4 | FAIL ×4, same symptom (`continueIntroductionIfPresent`'s tap on the next card's intro button silently no-ops) |
+| Bisect: extraction only, no accessibility action at all | same test ×2 | PASS ×2 (confirms the `rate(remembered:)` extraction itself is not the cause) |
+| Bisect: `.accessibilityActions { Button }` (before hardening `continueIntroductionIfPresent`) | same test ×2 solo, then ×1 inside the 7-test batch below | PASS ×2 solo, FAIL ×1 in the batch (same symptom) |
+| Baseline (pre-I3-correction `HEAD`, `177166b`, `git stash`) | same test ×3 | PASS ×3 — confirms the instability is not pre-existing flakiness at this rate |
+| Final: `.accessibilityActions { Button }` + hardened `continueIntroductionIfPresent` retry | same test, solo | PASS ×3 |
+| Final, combined regression | `testBinaryRatingSwipesAdvanceOnceInEachDirection`, `testTappingRevealedCardDoesNothingThenRatingCountsOnce`, `testTypedPolishAnswerUsesNativeInput`, `testNativeTrainingMatrixAndProgress`, `testSaveFailureShowsErrorBannerOnEveryTabWithExportReachable`, `testFirstMethodIntroductionKeepsReferenceAnswerHiddenUntilContinue`, `testNativeVocabularyRevealAndBinaryRating` (one `xcodebuild test` invocation) | PASS 7/7 |
+| iOS regression: D1/D2 flip suites | `-only-testing:PolskiGrammarUITests/FlipCorrectnessUITests`, `-only-testing:PolskiGrammarUITests/VocabularyFlipUITests` | PASS 4/4 |
+| Not run (lean mode) | `FlipRivePerfUITests` (unrelated); Android/macOS/web hosts (this lane's own scope is iOS only); Kotlin `shared` tests (untouched by this correction — no Kotlin file changed) | — |
+
+**Verification gap, disclosed rather than papered over:** confirming the fix from an actual
+VoiceOver user's perspective (Accessibility Inspector or VoiceOver-on pass, as the correction
+asked) needs interactive Simulator/device access this environment does not have — there is no
+public XCTest API to invoke a named `UIAccessibilityCustomAction` or to drive the real VoiceOver
+engine headlessly (checked: `XCUIElementAttributes` exposes no actions property, and
+`XCUIAccessibilityAuditType.action` — the one audit type that flags "gesture with no accessible
+action alternative" — is compiled out entirely on iOS/watchOS/tvOS/Simulator, macOS/Mac Catalyst
+only, confirmed against `XCUIAccessibilityAuditTypes.h`). What is verified, automatically and
+reproducibly, is: (1) code review — the two actions on each `ratingSwipeArea` element call the same
+guarded `rate(remembered:)` the drag itself calls, so a rotor invocation rates exactly like a
+successful swipe would; (2) the fix does not destabilize the touch rating path it sits next to
+(table above). An interactive Accessibility Inspector pass on a real Mac/simulator session remains
+the one remaining check for a human (or a session with Simulator UI access) to do.
+
 ## Open follow-ups (not this task)
 
 - D4 (tab/screen paging) and D5 (the `UserPreferences.animationsEnabled` toggle's own iOS wiring,

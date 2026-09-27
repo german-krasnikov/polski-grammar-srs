@@ -248,7 +248,19 @@ final class PolskiGrammarUITests: XCTestCase {
             // reproduced an occasional miss at 0.5s under load, never at 1.5s.
             _ = next.waitForExistence(timeout: 1.5)
         }
-        if next.exists { next.tap() }
+        // A bounded tap-and-verify retry, not a single unconditional tap: reproduced this
+        // specific button occasionally swallowing one synthesized tap with no effect (the
+        // accessibility hierarchy snapshot briefly reports an "Automation type mismatch" —
+        // Button vs PopUpButton — right around here once anything elsewhere on screen carries a
+        // custom `.accessibilityActions`, e.g. the answer panel's own VoiceOver rating actions),
+        // leaving the intro screen showing with `next` still present afterwards. Retrying the tap
+        // up to 3 times, each time re-checking `next.exists`, costs nothing when the first tap
+        // already worked (the loop exits immediately) and reliably recovers when it didn't.
+        for _ in 0..<3 {
+            guard next.exists else { return }
+            next.tap()
+            if !next.waitForExistence(timeout: 1) { return }
+        }
     }
 
     private func resetTrainingProgress(_ app: XCUIApplication) {
