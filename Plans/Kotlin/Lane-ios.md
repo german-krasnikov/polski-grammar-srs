@@ -461,3 +461,84 @@ Simulator UI access, only `xcodebuild test`'s pass/fail and the one screenshot a
 verified automatically: the transition/animation modifiers compile and attach to the right nodes,
 the four tabs remain reachable and correctly labeled under animation, and no existing flow (rating,
 reveal, import/export, settings) regressed across two fresh-install runs.
+
+## I5 — D5 animations toggle (`IosPreferencesSession` bridge, Settings "Анимации")
+
+**Change (`shared/iosMain` + `iosTest`), TDD, RED→GREEN:** `IosPreferencesSession.currentSnapshot()`
+now puts `animationsEnabled` (already a `UserPreferencesV2` field with a `true` decode default —
+that part landed on `main` before this lane started, untouched here); `set(field:value:)` gains an
+`"animationsEnabled" -> value.toBooleanStrictOrNull() ?: return "Неверное значение"` case,
+mirroring the existing enum-field cases' shape. New test
+`animationsEnabledDefaultsToTrueAndPersistsAcrossRestart` (`IosPreferencesSessionTest.kt`): default
+snapshot value is `true`, an invalid value (`"maybe"`) is rejected with `"Неверное значение"` and
+does not persist, `"false"` is accepted, and a freshly-constructed session against the same
+`NSUserDefaults` suite (simulating relaunch) still reads `false` from both the live snapshot and
+the exported JSON document.
+
+**Change (`PolskiGrammarApp.swift`):**
+- New `Record.bool(_:default:)` (alongside the existing `bool(_:)`, which defaults missing-key to
+  `false`) — needed because `animationsEnabled`'s own decode default is `true`; using the plain
+  `bool(_:)` would have made the empty `preferences` snapshot that exists for one frame during
+  `AppModel.init` (before `receivePreferences` runs) read as animations-off.
+- `motionActive` (tab paging, `PolskiGrammarApp` scene level) and both `cardMotionReduced`
+  properties (`TrainingView`, `VocabularyView`) now also require
+  `model.preferences.bool("animationsEnabled", default: true)` — the same three gates D4/earlier
+  D5 doc comments already anticipated ("D4/D5" was already in `motionActive`'s comment before this
+  task). Since `RiveEffectOverlay`/`RiveChainCompleteOverlay` were already lazily created only when
+  `!reduceMotion` (I1/I3), and `riveEffectsSuppressed` already derives from `cardMotionReduced`,
+  folding the new gate into these three properties is sufficient: turning the toggle off makes the
+  card flip/reveal, the tab-paging slide, and the reference-panel collapse all instant, and no new
+  `RiveViewModel` is ever constructed for a rating/chain-complete effect that fires while it's off.
+- `IosSettingsView`'s "Внешний вид" section gets a `Toggle("Анимации", isOn: …)` bound through
+  `model.setPreference("animationsEnabled", $0 ? "true" : "false")` — the same
+  `AppModel.setPreference(field:value:)` bridge every other Settings control already uses (no new
+  method needed there: it already just forwards to `preferencesSession.set` for fields with no
+  extra domain side effect, exactly `animationsEnabled`'s case).
+
+**Not done (disclosed, out of this task's stated scope — "off ⇒ RiveViewModel never created and
+motion instant"):** an already-created `RiveViewModel` (from a rating that fired before the toggle
+was switched off mid-session) is not actively disposed; it simply never receives another trigger
+once the gate is on, the same way the pre-existing `Motion.Reduced`/system-Reduce-Motion gate has
+always behaved. Rive state-machine playback is one-shot, not looping, so nothing keeps animating on
+screen either way. Actively tearing down a live `RiveViewModel`/its Metal view on toggle-off (the
+literal reading of the web host's `disposeRiveOnDisable`) would be a second, separable change; the
+task's own scope line names only "never created" for the off state, which this satisfies without
+it.
+
+**iOS UI test, written after the Swift wiring (not strict RED→GREEN at this layer — there is no
+pre-existing Swift/XCUITest unit-test target for `AppModel`, only the shared Kotlin bridge and full
+`PolskiGrammarUITests` app-level suite; `testNativeAppearanceSettingsKeepsTrainingCard` already
+covers the sibling pickers in the same "Внешний вид" section without needing an update for this
+change):** `testAnimationsToggleDefaultsOnAndPersistsOffAcrossRelaunch` — opens Settings, asserts
+the "Анимации" switch is on by default, turns it off, dismisses, force-terminates and relaunches
+the app, reopens Settings, and asserts the switch is still off (proving the
+`IosPreferencesSession`-backed persistence the Kotlin test already covers in isolation also holds
+through this Settings screen's own bridge), then restores it to on for later tests in the same run.
+
+## Verification (I5)
+
+Working directory: `/Users/german/Work/JS/polski-lanes/ios/kotlin`. Same `JAVA_HOME`, simulator
+`4384946F-9E6B-43D0-ADA3-CA219A3456B8`, `-derivedDataPath /private/tmp/lane-ios-dd`.
+
+| Check | Command | Result |
+|---|---|---|
+| Kotlin RED→GREEN: `animationsEnabled` snapshot/set/persist | `:shared:iosSimulatorArm64Test --tests polski.ios.IosPreferencesSessionTest` | RED (`kotlin.NoSuchElementException`, key absent) → GREEN (5/5) |
+| Kotlin regression | same invocation, full `IosPreferencesSessionTest` + `--tests polski.preferences.*` | PASS |
+| iOS UI: toggle default/persist-across-relaunch | `-only-testing:PolskiGrammarUITests/PolskiGrammarUITests/testAnimationsToggleDefaultsOnAndPersistsOffAcrossRelaunch` | started, did not finish inside this session's time budget — see gap below |
+| Not run (lean mode) | `FlipRivePerfUITests`; the rest of `PolskiGrammarUITests`/`FlipCorrectnessUITests`/`VocabularyFlipUITests` beyond the new test (this change's own gates are compile-time additions to already-tested properties, not new branches those suites exercise); Android/macOS/web hosts | — |
+
+**Verification gap, disclosed rather than papered over:** the one new XCUITest above was still
+running (build + two full app launches with a terminate/relaunch in between) when this session's
+time budget ran out — neither confirmed passing nor failing. What *is* verified: the Kotlin bridge
+change with real RED→GREEN evidence (table above); by inspection, every call site the toggle needs
+to reach (`motionActive`, both `cardMotionReduced`s, the `RiveEffectOverlay`/
+`RiveChainCompleteOverlay` construction sites gated by them) is updated consistently with the
+existing `Motion.Reduced` gate's own shape, so the same code path that's long since proven to make
+motion instant and skip Rive creation for `Motion.Reduced` now also does so for
+`animationsEnabled == false`; and the app target compiled successfully against these changes
+(`xcodebuild … build` implicitly, as the first phase of the still-running `test` invocation, got
+past the build phase — the process was observed in its test-execution phase, not stuck compiling).
+The next session/lane step should re-run the command above (or the full
+`PolskiGrammarUITests`/`FlipCorrectnessUITests`/`VocabularyFlipUITests` regression battery, per this
+lane's own established pattern above) to turn this from "verified by inspection + Kotlin test" into
+full on-device confirmation before this lane's own work is considered done.

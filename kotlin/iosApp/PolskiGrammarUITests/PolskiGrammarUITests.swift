@@ -20,6 +20,32 @@ final class PolskiGrammarUITests: XCTestCase {
         XCTAssertTrue(app.staticTexts["To jest moja piękna żona."].exists)
     }
 
+    /// D5: the "Анимации" master switch defaults on and persists off across a relaunch, via the
+    /// same `IosPreferencesSession` JSON document `NSUserDefaults`-backs every other setting with
+    /// (`testNativeAppearanceSettingsKeepsTrainingCard` above covers the sibling pickers in the
+    /// same section).
+    func testAnimationsToggleDefaultsOnAndPersistsOffAcrossRelaunch() {
+        let app = XCUIApplication()
+        app.launch()
+        XCTAssertTrue(app.staticTexts["To jest moja piękna żona."].waitForExistence(timeout: 20))
+        app.buttons["openSettings"].tap()
+        let toggle = app.switches["Анимации"]
+        XCTAssertTrue(toggle.waitForExistence(timeout: 5))
+        XCTAssertEqual(toggle.value as? String, "1")
+        toggle.tap()
+        XCTAssertEqual(toggle.value as? String, "0")
+        app.buttons["Готово"].tap()
+
+        app.terminate()
+        app.launch()
+        XCTAssertTrue(app.staticTexts["To jest moja piękna żona."].waitForExistence(timeout: 20))
+        app.buttons["openSettings"].tap()
+        let toggleAfterRelaunch = app.switches["Анимации"]
+        XCTAssertTrue(toggleAfterRelaunch.waitForExistence(timeout: 5))
+        XCTAssertEqual(toggleAfterRelaunch.value as? String, "0")
+        toggleAfterRelaunch.tap() // restore the default so later tests in the same run see it on.
+    }
+
     /// C1: a progress save failure must stay visible above every tab (not just Progress), with
     /// the export action reachable, even though loadStatus stays Ready. `IosProgressRepository`
     /// exposes an opt-in UI-test seam (`POLSKI_UITEST_FORCE_SAVE_FAILURE`) to force that failure

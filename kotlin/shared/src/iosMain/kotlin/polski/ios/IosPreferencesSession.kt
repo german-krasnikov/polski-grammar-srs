@@ -35,6 +35,7 @@ class IosPreferencesSession(
                 put("answerMode", result.value.answerMode.name)
                 put("appearance", result.value.appearance.name)
                 put("motion", result.value.motion.name)
+                put("animationsEnabled", result.value.animationsEnabled)
             }
             is PreferencesDecode.RecoveryRequired -> {
                 put("status", "RecoveryRequired")
@@ -53,6 +54,7 @@ class IosPreferencesSession(
             "answerMode" -> current.copy(answerMode = PreferredAnswerMode.entries.firstOrNull { it.name == value } ?: return "Неизвестный способ ответа")
             "appearance" -> current.copy(appearance = Appearance.entries.firstOrNull { it.name == value } ?: return "Неизвестная тема")
             "motion" -> current.copy(motion = Motion.entries.firstOrNull { it.name == value } ?: return "Неизвестное движение")
+            "animationsEnabled" -> current.copy(animationsEnabled = value.toBooleanStrictOrNull() ?: return "Неверное значение")
             else -> return "Неизвестная настройка"
         }
         return write(UserPreferencesCodec.encode(next), next)

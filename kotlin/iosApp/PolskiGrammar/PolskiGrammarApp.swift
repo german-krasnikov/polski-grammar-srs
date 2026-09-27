@@ -81,6 +81,10 @@ extension Dictionary where Key == String, Value == Any {
     func int(_ key: String) -> Int { (self[key] as? NSNumber)?.intValue ?? 0 }
     func int64(_ key: String) -> Int64? { (self[key] as? NSNumber)?.int64Value }
     func bool(_ key: String) -> Bool { (self[key] as? Bool) ?? false }
+    /// Like [bool] but missing-key means enabled, not disabled — for `animationsEnabled`, whose own
+    /// decode default is `true` (see `UserPreferences.kt`), so an empty `preferences` snapshot
+    /// during the first frame of `AppModel.init` never reads as animations-off.
+    func bool(_ key: String, default defaultValue: Bool) -> Bool { (self[key] as? Bool) ?? defaultValue }
     func record(_ key: String) -> Record { self[key] as? Record ?? [:] }
     func rows(_ key: String) -> [Record] { self[key] as? [Record] ?? [] }
     func strings(_ key: String) -> [String] { self[key] as? [String] ?? [] }
@@ -424,9 +428,13 @@ struct PolskiGrammarApp: App {
         }
     }
 
-    /// D4/D5: system Reduce Motion or the app's own `Motion.Reduced` setting — same gate shape as
-    /// `TrainingView.cardMotionReduced`, applied here to the tab-paging transition.
-    private var motionActive: Bool { !reduceMotion && model.preferences.string("motion") != "Reduced" }
+    /// D4/D5: system Reduce Motion, the app's own `Motion.Reduced` setting, or the "Анимации"
+    /// master switch — same gate shape as `TrainingView.cardMotionReduced`, applied here to the
+    /// tab-paging transition.
+    private var motionActive: Bool {
+        !reduceMotion && model.preferences.string("motion") != "Reduced"
+            && model.preferences.bool("animationsEnabled", default: true)
+    }
 
     @ViewBuilder
     private func tabContent(_ tab: String) -> some View {
@@ -517,6 +525,12 @@ private struct IosSettingsView: View {
                     }
                     Text(reduceMotion ? "Система сокращает движение" : "Системное движение активно")
                         .font(.footnote).foregroundStyle(.secondary)
+                    // D5: master switch — off means no card/tab/reveal animation and, per
+                    // `cardMotionReduced`/`motionActive` above, RiveViewModel is never created.
+                    Toggle("Анимации", isOn: Binding(
+                        get: { model.preferences.bool("animationsEnabled", default: true) },
+                        set: { model.setPreference("animationsEnabled", $0 ? "true" : "false") }
+                    ))
                 }
             }
             Section("Данные настроек") {
@@ -719,7 +733,10 @@ private struct TrainingView: View {
     /// FC-09/12/14/20's shared reduced-motion gate: system Reduce Motion or the app's own
     /// `Motion.Reduced` setting, the same pair already used by `.animation(...)` below — both the
     /// card flip and the Rive overlay must snap/skip together with everything else this gates.
-    private var cardMotionReduced: Bool { reduceMotion || model.preferences.string("motion") == "Reduced" }
+    private var cardMotionReduced: Bool {
+        reduceMotion || model.preferences.string("motion") == "Reduced"
+            || !model.preferences.bool("animationsEnabled", default: true)
+    }
 
     /// FC-20's Rive gate, plus the debug-only variant-B override (§5): the flip itself keeps
     /// animating in variant B — only the Rive trigger is suppressed — so this is deliberately
@@ -1009,7 +1026,10 @@ private struct VocabularyView: View {
     private var state: Record { model.vocabularyState }
     // D5: system Reduce Motion OR the app's own `Motion.Reduced` gate the vocabulary flip too,
     // mirroring `TrainingView.cardMotionReduced`.
-    private var cardMotionReduced: Bool { reduceMotion || model.preferences.string("motion") == "Reduced" }
+    private var cardMotionReduced: Bool {
+        reduceMotion || model.preferences.string("motion") == "Reduced"
+            || !model.preferences.bool("animationsEnabled", default: true)
+    }
 
     var body: some View {
         Form {
