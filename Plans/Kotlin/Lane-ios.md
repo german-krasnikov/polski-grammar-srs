@@ -364,3 +364,100 @@ the one remaining check for a human (or a session with Simulator UI access) to d
 - `THIRD_PARTY/credits.md` / `Plans/Kotlin/RiveCatalog.md` still list `rings.riv` for "Android and
   iOS" — each host's own D3 pass should update its own line once all three have landed, to avoid
   a three-way merge conflict on the same lines right now.
+
+## I4 — D4 tab paging + animated reference-panel collapsible
+
+**Change (tab paging, `PolskiGrammarApp.swift` + new `PagingTabBar.swift`):** replaced the plain
+SwiftUI `TabView` with a custom paging container — `TabView` swaps tab content instantly with no
+transition slot at all, so there is no way to make old/new content visibly slide together from it
+(confirmed by inspection, not assumed: a `TabView` tab switch is a UIKit root-view swap, not
+something `.transition`/`.animation` on a child can hook). The new container is a `ZStack` over
+`tabOrder` (`["Training", "Matrix", "Progress", "Vocabulary"]`) that mounts **only** the active
+tab's subtree (`if tab == model.state.string("tab")`) — matching `TabView`'s own accessibility
+contract, where an inactive tab's elements are not independently discoverable (this is what keeps
+the very large number of existing `app.buttons["Тренировка"].firstMatch.tap()`-style lookups
+throughout the UI test suite from becoming ambiguous or from finding leftover elements of a tab
+that isn't showing — a permanently-mounted side-by-side pager, the other standard approach, was
+rejected specifically for this reason: it would keep every tab's Form/NavigationStack attached to
+the accessibility tree simultaneously). `.transition(.asymmetric(insertion: .move(edge:
+pagingEdge), removal: .move(edge: pagingEdge's opposite)))` drives the actual slide; `pagingEdge`
+is computed in `.onChange(of: model.state.string("tab"))` from `tabOrder.firstIndex` of the old vs.
+new tab (later index ⇒ slide in from `.trailing`, matching "old and new slide together in the
+direction of the chosen tab"). `.animation(motionActive ? .easeOut(duration: 0.3) : nil, value:
+model.state.string("tab"))` — not `withAnimation` around the `model.send("tab", …)` call — because
+the model's own state update arrives through `IosSession.onState`'s `DispatchQueue.main.async`,
+outside any `withAnimation` transaction that wrapped the call that triggered it; `.animation(_,
+value:)` ties the animation to the value's diff itself, regardless of when the write actually
+lands, matching the pattern `TrainingView.cardMotionReduced`/`.animation(_, value:
+state.string("phase"))` already uses one call up. `motionActive` mirrors that same gate (system
+Reduce Motion or `Motion.Reduced`), added at the `PolskiGrammarApp` scene level the same way
+`scenePhase` already is (`@Environment` works on an `App`, not only a `View`).
+
+**New `PagingTabBar.swift`:** replaces `TabView`'s own tab-bar chrome one-for-one — same four
+labels/icons/tags, same tap contract. Each button's `.accessibilityLabel(item.title)` is set
+explicitly (overriding whatever combined icon+text label SwiftUI would otherwise compute for a
+`Button` containing both an `Image` and a `Text`), so `app.buttons["Тренировка"]` etc. keep
+resolving to exactly one element with exactly that name — unchanged from what `Label(title,
+systemImage:)`'s `.tabItem` produced. `generate_project.rb` hardcodes its source file list (not a
+directory glob), so it needed one line added for the new file — found by the project failing to
+build with "cannot find 'TabBarItem' in scope" until that line was added, not by inspection first.
+
+**Trade-off, disclosed:** mounting only the active tab's subtree (needed for the accessibility
+reason above) means each tab's own local `@State` that used to survive a round trip through
+another tab (because `TabView` keeps every tab's view alive) now resets when you leave and come
+back — concretely, `MatrixView.comparisonCase` (the "Сравнение типов склонения" filter, not
+model-persisted) goes back to `"NOM"`. `TrainingView.localDraft`/`answerFocused` and
+`VocabularyView.editing`/`deletingId` are unaffected (already resynced from model state on
+`onAppear`, or tied to a sheet/alert that would close on leaving the tab anyway). No test in the
+suite exercises `comparisonCase` surviving a tab round trip; flagged here rather than silently
+accepted.
+
+**Change (animated collapsible, `TrainingView`'s reference panel):** the existing "Таблица под
+рукой"/"Скрыть таблицу" toggle's content (`referenceRows` + "Все таблицы и схема") is unchanged in
+its own logic — same `model.send("reference")`, same `showReference`/`introPending` gating — only
+*how it appears* changes. `Group { … }.transition(.opacity.combined(with: .move(edge: .top)))` on
+the conditional content, `.animation(cardMotionReduced ? nil : .easeOut(duration: 0.25), value:
+state.bool("showReference"))` on the enclosing `Section` (a bare `if` isn't an expression you can
+chain `.transition` onto directly — that's a real compiler error, "cannot infer contextual base in
+reference to member 'transition'", not a style choice — `Group` is what makes it one). No `inert`/
+`aria-hidden`-equivalent step was needed here, unlike the web host's own version of this same panel
+(`FlipCardRivePlan.md` §17.5, UX4-21): collapsed content is fully removed from the SwiftUI tree
+(`Form` row deletion), not shrunk to zero height while still mounted, so there is nothing left for
+VoiceOver or Tab focus to reach either way.
+
+**Not touched (kept in scope):** `showSkillPicker`'s `ChoiceMenu` and the `mode == "Chain"` block in
+the same top `Section` — the task named the reference panel's own web-plan precedent
+(`reference-panel`, §17.5) as the collapsible to match; these two are a different, unnamed pattern
+and adding animation to them wasn't asked for.
+
+## Verification (I4)
+
+Working directory: `/Users/german/Work/JS/polski-lanes/ios/kotlin`. Same `JAVA_HOME`, simulator
+`4384946F-9E6B-43D0-ADA3-CA219A3456B8`, `-derivedDataPath /private/tmp/lane-ios-dd`.
+
+| Check | Command | Result |
+|---|---|---|
+| Ruby project regen | `arch -arm64 ruby kotlin/iosApp/generate_project.rb` (after adding `PagingTabBar.swift` to its hardcoded file list) | PASS |
+| iOS build | `xcodebuild ... build` | FAIL → FAIL (different error) → PASS, see compiler-error notes above |
+| iOS: reference-panel toggle, fresh install | `-only-testing:.../testFirstMethodIntroductionKeepsReferenceAnswerHiddenUntilContinue` | PASS (49.9s) |
+| iOS: tab-paging regression batch 1 (no fresh install between) | `FlipCorrectnessUITests`, `VocabularyFlipUITests`, `testBinaryRatingSwipesAdvanceOnceInEachDirection`, `testNativeTrainingMatrixAndProgress`, `testNativeVocabularyRevealAndBinaryRating`, `testSaveFailureShowsErrorBannerOnEveryTabWithExportReachable` | 7/8 PASS, 1 FAIL (`testNativeVocabularyRevealAndBinaryRating`) |
+| Bisect: same vocabulary test, fresh install, solo | same test | PASS (26.0s) — confirms the batch-1 failure was leftover app state from the *preceding* tests in that same batch (this test's own I3 evidence already documents it needs a fresh install; not a D4 regression) |
+| iOS: tab-paging regression batch 2, fresh install | `FlipCorrectnessUITests` (2), `VocabularyFlipUITests` (2), `testBinaryRatingSwipesAdvanceOnceInEachDirection`, `testNativeTrainingMatrixAndProgress`, `testSaveFailureShowsErrorBannerOnEveryTabWithExportReachable` | PASS 7/7 |
+| Not run (lean mode) | `FlipRivePerfUITests` (long perf measurement, unrelated); `testNativeCasesShowCompactNoteAndOrderedComparisonNouns` and the rest of `PolskiGrammarUITests` not touched by tab paging (checked by reading: none of them tab away from Matrix and back, so `comparisonCase`'s reset doesn't affect them); Android/macOS/web hosts (this lane's own scope is iOS only) | — |
+
+RED evidence: none in the TDD sense — there is no existing runner/assertion for "content slides
+when switching tabs" or "reference panel animates" to turn red first (SwiftUI's own transition/
+animation timing isn't something XCUITest asserts on in this suite, and adding a new one for it
+was out of this task's small scope). What is verified, reproducibly, is the negative space: the
+build errors above (`cannot find 'TabBarItem' in scope`, then `cannot infer contextual base in
+reference to member 'transition'`) are real compiler-rejected first cuts, not invented after the
+fact, and the batch-1/batch-2/bisect sequence above is genuine regression evidence, not assumed.
+
+**Verification gap, disclosed:** confirming the slide direction/duration and the panel's
+height/opacity curve *look* right (the ~300ms/easeOut timing, "no jank, no flashes") needs an
+actual Simulator visual check or a screen recording — this environment has no interactive
+Simulator UI access, only `xcodebuild test`'s pass/fail and the one screenshot attachment
+`testNativeVocabularyRevealAndBinaryRating` already takes (unrelated to this feature). What is
+verified automatically: the transition/animation modifiers compile and attach to the right nodes,
+the four tabs remain reachable and correctly labeled under animation, and no existing flow (rating,
+reveal, import/export, settings) regressed across two fresh-install runs.

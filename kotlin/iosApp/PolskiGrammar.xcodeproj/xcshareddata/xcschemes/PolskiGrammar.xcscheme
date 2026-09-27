@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "FB44DB4E577994D6812B3719"
+               BlueprintIdentifier = "B0837426DE306D7B232EFA57"
                BuildableName = "PolskiGrammar.app"
                BlueprintName = "PolskiGrammar"
                ReferencedContainer = "container:PolskiGrammar.xcodeproj">
@@ -28,7 +28,7 @@
             buildForAnalyzing = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E0A681CEBE42981E9E8B27E5"
+               BlueprintIdentifier = "CAFF708A617B28ABC37CA478"
                BuildableName = "PolskiGrammarUITests.xctest"
                BlueprintName = "PolskiGrammarUITests"
                ReferencedContainer = "container:PolskiGrammar.xcodeproj">
@@ -44,7 +44,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "FB44DB4E577994D6812B3719"
+            BlueprintIdentifier = "B0837426DE306D7B232EFA57"
             BuildableName = "PolskiGrammar.app"
             BlueprintName = "PolskiGrammar"
             ReferencedContainer = "container:PolskiGrammar.xcodeproj">
@@ -55,7 +55,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E0A681CEBE42981E9E8B27E5"
+               BlueprintIdentifier = "CAFF708A617B28ABC37CA478"
                BuildableName = "PolskiGrammarUITests.xctest"
                BlueprintName = "PolskiGrammarUITests"
                ReferencedContainer = "container:PolskiGrammar.xcodeproj">
@@ -77,7 +77,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "FB44DB4E577994D6812B3719"
+            BlueprintIdentifier = "B0837426DE306D7B232EFA57"
             BuildableName = "PolskiGrammar.app"
             BlueprintName = "PolskiGrammar"
             ReferencedContainer = "container:PolskiGrammar.xcodeproj">
@@ -94,7 +94,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "FB44DB4E577994D6812B3719"
+            BlueprintIdentifier = "B0837426DE306D7B232EFA57"
             BuildableName = "PolskiGrammar.app"
             BlueprintName = "PolskiGrammar"
             ReferencedContainer = "container:PolskiGrammar.xcodeproj">

@@ -341,6 +341,18 @@ struct PolskiGrammarApp: App {
     @State private var importingPreferences = false
     @State private var exportingPreferences = false
     @State private var preferencesFile: ProgressFile?
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    // D4: direction the *next* tab switch should slide in from — updated in `onChange(of:)`
+    // below, strictly before the switch's own body re-renders with the new `tab`, so the
+    // transition this drives is always keyed by the switch that is actually happening.
+    @State private var pagingEdge: Edge = .trailing
+    private let tabOrder = ["Training", "Matrix", "Progress", "Vocabulary"]
+    private let tabBarItems = [
+        TabBarItem(tag: "Training", title: "Тренировка", icon: "square.stack"),
+        TabBarItem(tag: "Matrix", title: "Матрица", icon: "tablecells"),
+        TabBarItem(tag: "Progress", title: "Прогресс", icon: "chart.bar"),
+        TabBarItem(tag: "Vocabulary", title: "Слова", icon: "character.book.closed"),
+    ]
 
     var body: some Scene {
         WindowGroup {
@@ -350,20 +362,30 @@ struct PolskiGrammarApp: App {
                 if let error = model.state["error"] as? String {
                     ErrorBanner(message: error) { model.send("export") }
                 }
-                TabView(selection: Binding(
-                    get: { model.state.string("tab") },
-                    set: { model.send("tab", $0) }
-                )) {
-                    NavigationStack { TrainingView(model: model).toolbar { settingsToolbar } }
-                        .tabItem { Label("Тренировка", systemImage: "square.stack") }.tag("Training")
-                    NavigationStack { MatrixView(model: model).toolbar { settingsToolbar } }
-                        .tabItem { Label("Матрица", systemImage: "tablecells") }.tag("Matrix")
-                    NavigationStack { ProgressView(model: model, importing: $importing).toolbar { settingsToolbar } }
-                        .tabItem { Label("Прогресс", systemImage: "chart.bar") }.tag("Progress")
-                    NavigationStack { VocabularyView(model: model, importing: $importingVocabulary,
-                        exporting: $exportingVocabulary, exportFile: $vocabularyFile).toolbar { settingsToolbar } }
-                        .tabItem { Label("Слова", systemImage: "character.book.closed") }.tag("Vocabulary")
+                // D4: a custom paging container, not `TabView` — `TabView` swaps tab content
+                // instantly with no transition slot, so there is no way to make old/new content
+                // slide together from it. Only the *active* tab's subtree is mounted (matching
+                // `TabView`'s own accessibility behavior: an inactive tab's elements must not be
+                // independently discoverable), so `.transition` on the `if` below sees a real
+                // insertion/removal, not just a value change, for exactly one tab at a time.
+                ZStack {
+                    ForEach(tabOrder, id: \.self) { tab in
+                        if tab == model.state.string("tab") {
+                            tabContent(tab)
+                                .transition(.asymmetric(
+                                    insertion: .move(edge: pagingEdge),
+                                    removal: .move(edge: pagingEdge == .trailing ? .leading : .trailing)))
+                        }
+                    }
                 }
+                .animation(motionActive ? .easeOut(duration: 0.3) : nil, value: model.state.string("tab"))
+                .onChange(of: model.state.string("tab")) { old, new in
+                    let oldIndex = tabOrder.firstIndex(of: old) ?? 0
+                    let newIndex = tabOrder.firstIndex(of: new) ?? 0
+                    pagingEdge = newIndex >= oldIndex ? .trailing : .leading
+                }
+                Divider()
+                PagingTabBar(selected: model.state.string("tab"), items: tabBarItems) { model.send("tab", $0) }
             }
             .fileImporter(isPresented: $importing, allowedContentTypes: [.json]) { model.importFile($0) }
             .fileExporter(isPresented: $exporting, document: model.exportFile,
@@ -399,6 +421,25 @@ struct PolskiGrammarApp: App {
             }
             .tint(Color(uiColor: .systemTeal))
             .preferredColorScheme(colorScheme)
+        }
+    }
+
+    /// D4/D5: system Reduce Motion or the app's own `Motion.Reduced` setting — same gate shape as
+    /// `TrainingView.cardMotionReduced`, applied here to the tab-paging transition.
+    private var motionActive: Bool { !reduceMotion && model.preferences.string("motion") != "Reduced" }
+
+    @ViewBuilder
+    private func tabContent(_ tab: String) -> some View {
+        switch tab {
+        case "Training":
+            NavigationStack { TrainingView(model: model).toolbar { settingsToolbar } }
+        case "Matrix":
+            NavigationStack { MatrixView(model: model).toolbar { settingsToolbar } }
+        case "Progress":
+            NavigationStack { ProgressView(model: model, importing: $importing).toolbar { settingsToolbar } }
+        default:
+            NavigationStack { VocabularyView(model: model, importing: $importingVocabulary,
+                exporting: $exportingVocabulary, exportFile: $vocabularyFile).toolbar { settingsToolbar } }
         }
     }
 
@@ -622,16 +663,26 @@ private struct TrainingView: View {
                         model.send("reference")
                     }
                     .disabled(introducing)
+                    // D4/UX4-20..22: expand/collapse animated instead of the Form's default
+                    // instant row insert/remove; content is fully removed while collapsed (not
+                    // just visually shrunk), so there is nothing left over for VoiceOver/Tab to
+                    // reach — no separate `inert` step needed, unlike the web host's height trick.
+                    // `Group` (a real expression) is what `.transition` attaches to; the bare
+                    // `if` above it is a ViewBuilder statement, not something modifiers chain onto.
                     if state.bool("showReference") && !introducing {
-                        ForEach(Array(state.rows("referenceRows").enumerated()), id: \.offset) { _, row in
-                            VStack(alignment: .leading, spacing: 4) {
-                                Text(row.string("title")).font(.headline)
-                                NativeContrastPairView(pair: row.record("pair"))
+                        Group {
+                            ForEach(Array(state.rows("referenceRows").enumerated()), id: \.offset) { _, row in
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text(row.string("title")).font(.headline)
+                                    NativeContrastPairView(pair: row.record("pair"))
+                                }
                             }
+                            Button("Все таблицы и схема") { model.send("tab", "Matrix") }
                         }
-                        Button("Все таблицы и схема") { model.send("tab", "Matrix") }
+                        .transition(.opacity.combined(with: .move(edge: .top)))
                     }
                 }
+                .animation(cardMotionReduced ? nil : .easeOut(duration: 0.25), value: state.bool("showReference"))
             }
         }
         .toolbar {

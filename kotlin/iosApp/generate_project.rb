@@ -9,7 +9,7 @@ project.root_object.development_region = 'ru'
 
 target = project.new_target(:application, 'PolskiGrammar', :ios, '17.0')
 source = project.main_group.new_group('PolskiGrammar', 'PolskiGrammar')
-%w[PolskiGrammarApp.swift FlashCardView.swift VocabularyCardView.swift SwipeToRate.swift RiveEffectOverlay.swift].each do |file|
+%w[PolskiGrammarApp.swift FlashCardView.swift VocabularyCardView.swift SwipeToRate.swift RiveEffectOverlay.swift PagingTabBar.swift].each do |file|
   target.source_build_phase.add_file_reference(source.new_file(file))
 end
 assets_ref = source.new_file('Assets.xcassets')
