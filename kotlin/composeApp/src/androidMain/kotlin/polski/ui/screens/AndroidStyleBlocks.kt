@@ -85,6 +85,7 @@ private fun AndroidRuleBlock(block: Block.Rule) {
             color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.semantics { heading() },
         )
         Text(block.text, style = MaterialTheme.typography.bodyMedium)
+        Text(block.detail, style = MaterialTheme.typography.bodyMedium)
     }
 }
 

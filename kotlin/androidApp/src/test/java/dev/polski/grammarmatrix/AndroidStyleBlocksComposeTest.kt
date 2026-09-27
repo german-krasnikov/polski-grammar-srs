@@ -81,4 +81,13 @@ class AndroidStyleBlocksComposeTest {
         composeRule.onNodeWithText("ЗАПОМНИ").assertDoesNotExist()
         composeRule.onNodeWithText("Почему так?").assertExists()
     }
+
+    /** D2 (`StylesIntegrationTest-2026-09-27.md`): rule-first back must show both `Rule.text` and `Rule.detail`. */
+    @Test fun ruleFirstBackShowsBothRuleTextAndDetail() {
+        composeRule.setContent {
+            MaterialTheme { AndroidBlockList(blocksFor(StyleId.RuleFirst, StylePhase.Back), reduceMotion = true) }
+        }
+        composeRule.onNodeWithText(skill.theory).assertExists()
+        composeRule.onNodeWithText(exercise.explanation).assertExists()
+    }
 }
