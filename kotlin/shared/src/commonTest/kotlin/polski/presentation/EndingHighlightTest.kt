@@ -2,6 +2,7 @@ package polski.presentation
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFalse
 import polski.model.FormChange
 
 class EndingHighlightTest {
@@ -55,6 +56,17 @@ class EndingHighlightTest {
         assertEquals(listOf("robić"), old.filter(EndingPart::isChanged).map(EndingPart::text))
         assertEquals(listOf("robiłem / robiłam"), new.filter(EndingPart::isChanged).map(EndingPart::text))
         assertEquals(emptyList(), new.filter(EndingPart::isEnding))
+    }
+
+    @Test
+    fun stripsTrailingPunctuationBeforeEndingDiff() {
+        listOf(".", "?", "!").forEach { punct ->
+            val parts = endingHighlightParts("żona$punct", "żonę$punct")
+            assertEquals("żonę$punct", parts.joinToString("") { it.text })
+            assertEquals(listOf("ę"), parts.filter(EndingPart::isEnding).map(EndingPart::text))
+            assertEquals(punct, parts.last().text)
+            assertFalse(parts.last().isChanged)
+        }
     }
 
     @Test

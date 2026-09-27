@@ -48,14 +48,21 @@ fun changeHighlightParts(from: String, to: String, side: ChangeSide): List<Endin
                 add(EndingPart(word, false))
                 return@forEachIndexed
             }
-            val prefix = old.zip(next).takeWhile { (a, b) -> a == b }.size
-            val oldSuffix = old.substring(prefix)
-            val newSuffix = next.substring(prefix)
+            val oldCoreEnd = old.indexOfLast(Char::isLetter) + 1
+            val nextCoreEnd = next.indexOfLast(Char::isLetter) + 1
+            val oldCore = old.substring(0, oldCoreEnd)
+            val nextCore = next.substring(0, nextCoreEnd)
+            val core = if (side == ChangeSide.Before) oldCore else nextCore
+            val trailing = word.substring(if (side == ChangeSide.Before) oldCoreEnd else nextCoreEnd)
+            val prefix = oldCore.zip(nextCore).takeWhile { (a, b) -> a == b }.size
+            val oldSuffix = oldCore.substring(prefix)
+            val newSuffix = nextCore.substring(prefix)
             val reliable = prefix >= 3 && newSuffix.length in 1..3 && oldSuffix.length <= 3 &&
                 newSuffix.all(Char::isLetter) && oldSuffix.all(Char::isLetter)
             if (reliable) {
-                if (prefix > 0) add(EndingPart(word.substring(0, prefix), false))
-                if (prefix < word.length) add(EndingPart(word.substring(prefix), true, true))
+                if (prefix > 0) add(EndingPart(core.substring(0, prefix), false))
+                if (prefix < core.length) add(EndingPart(core.substring(prefix), true, true))
+                if (trailing.isNotEmpty()) add(EndingPart(trailing, false))
             } else add(EndingPart(word, false, true))
         }
     }
