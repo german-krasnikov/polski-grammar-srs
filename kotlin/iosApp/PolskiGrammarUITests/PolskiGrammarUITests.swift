@@ -32,7 +32,7 @@ final class PolskiGrammarUITests: XCTestCase {
         let toggle = app.switches["Анимации"]
         XCTAssertTrue(toggle.waitForExistence(timeout: 5))
         XCTAssertEqual(toggle.value as? String, "1")
-        toggle.tap()
+        tapAnimationsSwitch(toggle)
         XCTAssertEqual(toggle.value as? String, "0")
         app.buttons["Готово"].tap()
 
@@ -43,7 +43,16 @@ final class PolskiGrammarUITests: XCTestCase {
         let toggleAfterRelaunch = app.switches["Анимации"]
         XCTAssertTrue(toggleAfterRelaunch.waitForExistence(timeout: 5))
         XCTAssertEqual(toggleAfterRelaunch.value as? String, "0")
-        toggleAfterRelaunch.tap() // restore the default so later tests in the same run see it on.
+        tapAnimationsSwitch(toggleAfterRelaunch) // restore the default so later tests in the same run see it on.
+    }
+
+    /// Form/List wraps a `Toggle` row in an outer, whole-row accessibility element (for VoiceOver)
+    /// that shares the same label and `Switch` type as the real `UISwitch` nested inside it — so
+    /// `app.switches["Анимации"]` resolves to that outer wrapper, and `.tap()` on it synthesizes a
+    /// coordinate tap at the row's center, which lands left of the actual control and does nothing.
+    /// Descending into its own `switches` query reaches the real, trailing-edge switch instead.
+    private func tapAnimationsSwitch(_ outerRow: XCUIElement) {
+        outerRow.switches.firstMatch.tap()
     }
 
     /// C1: a progress save failure must stay visible above every tab (not just Progress), with
