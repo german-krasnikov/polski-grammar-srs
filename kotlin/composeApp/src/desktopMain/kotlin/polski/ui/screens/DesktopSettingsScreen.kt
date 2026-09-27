@@ -23,6 +23,8 @@ import polski.preferences.PreferredAnswerMode
 import polski.preferences.PreferredStyle
 import polski.presentation.AnswerMode
 import polski.presentation.StyleId
+import polski.presentation.StyleRegistry
+import polski.presentation.builtInStyleIds
 
 /** Mac-only settings destination; actions are owned by the window and its repositories. */
 @Composable
@@ -59,8 +61,9 @@ internal fun DesktopSettingsScreen(
             Text("Польский ↔ русский · активный курс")
             Text("Подача объяснений")
             Row(Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                TabButton("Схемы и логика", preferences.value.styleId == PreferredStyle.RuleFirst) { onStyle(StyleId.RuleFirst) }
-                TabButton("Живые ситуации", preferences.value.styleId == PreferredStyle.SituationFirst) { onStyle(StyleId.SituationFirst) }
+                builtInStyleIds.forEach { id ->
+                    TabButton(styleLabel(id), preferences.value.styleId == PreferredStyle.valueOf(id.value)) { onStyle(id) }
+                }
             }
             Text("Способ ответа")
             Row(Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -115,6 +118,18 @@ internal fun DesktopSettingsScreen(
         }
     }
 }
+
+/** U1 fix (EmphasisUXAudit): mirrors web's/Android's `styleLabel` — prefer the recipe's own "ru"
+ *  content label, falling back to this Russian copy while a style's content isn't authored yet. */
+private val fallbackStyleLabel: Map<StyleId, String> = mapOf(
+    StyleId.RuleFirst to "Схемы и логика",
+    StyleId.SituationFirst to "Живые ситуации",
+    StyleId.NativeContrast to "Через сравнение с родным",
+    StyleId.MinimalTheory to "Минимум теории",
+)
+
+private fun styleLabel(id: StyleId): String =
+    StyleRegistry.recipes[id]?.label?.get("ru")?.takeIf { it.isNotBlank() } ?: fallbackStyleLabel.getValue(id)
 
 @Composable
 private fun SettingsCard(title: String, content: @Composable () -> Unit) {

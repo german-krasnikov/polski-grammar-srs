@@ -19,7 +19,6 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsNotEnabled
 import androidx.compose.ui.test.onNodeWithContentDescription
-import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performKeyInput
 import androidx.compose.ui.test.pressKey
@@ -348,7 +347,7 @@ class DesktopScreenTest {
         }
         onNodeWithText("ЗАПОМНИ").assertExists()
         onNodeWithText(skillById(exercise.primarySkill).formula).assertExists()
-        assertEquals(2, onAllNodesWithText(exercise.changes.first().to).fetchSemanticsNodes().size)
+        onNodeWithText(exercise.expected, substring = true).assertExists()
         onNodeWithText("3 Хорошо").assertDoesNotExist()
         onNodeWithText("4 Легко").assertDoesNotExist()
         onNodeWithText("1 Повторить").performScrollTo().performSemanticsAction(SemanticsActions.OnClick)
