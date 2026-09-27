@@ -57,6 +57,7 @@ import polski.presentation.sentenceHighlightParts
 import polski.srs.Rating
 import polski.training.sentenceSeeds
 import polski.ui.ContrastPairText
+import polski.ui.ContrastPairTextMasked
 
 @Composable
 internal fun AndroidTrainingScreen(
@@ -302,18 +303,32 @@ internal fun AndroidTrainingScreen(
     }
 }
 
+/**
+ * Emphasis contract §5 ("панелей «под рукой»: целевая строка не подсвечивается, её «стало»
+ * скрыто"): the row matching this exercise's own target case (`row.id.id in exercise.tags`) is
+ * the answer, so before reveal it stays masked (mirrors `matrixContrastMasked` in the web target,
+ * fixed in 804f6c6 / EmphasisUXAudit E8); every other row is unrelated reference material and
+ * shows its form freely. Public (not `private`) so it can be exercised directly for every skill.
+ */
 @Composable
-private fun AndroidCaseReference(state: AppUiState, dispatch: (AppAction) -> Unit) {
+fun AndroidCaseReference(state: AppUiState, dispatch: (AppAction) -> Unit) {
     val exercise = state.exercise ?: return
     val noun = nounById(exercise.nounId)
+    val revealed = state.phase == CardPhase.Revealed
     AndroidInfoCard("Таблица этого предложения") {
         Text("${noun.lemma} · ${genderNames.getValue(noun.gender)} · ${if (exercise.number == NumberGram.SG) "ед. ч." else "мн. ч."}")
         caseRows.forEach { row ->
+            val isTarget = row.id.id in exercise.tags
             Text("${row.pl} · ${row.ru}", style = MaterialTheme.typography.labelLarge)
-            ContrastPairText(ContrastPair.generated(
-                nounPhrase(exercise.nounId, GramCase.NOM, exercise.number, exercise.adjectiveId, exercise.possessive),
-                nounPhrase(exercise.nounId, row.id, exercise.number, exercise.adjectiveId, exercise.possessive),
-            ))
+            val from = nounPhrase(exercise.nounId, GramCase.NOM, exercise.number, exercise.adjectiveId, exercise.possessive)
+            if (isTarget && !revealed) {
+                ContrastPairTextMasked(from)
+            } else {
+                ContrastPairText(ContrastPair.generated(
+                    from,
+                    nounPhrase(exercise.nounId, row.id, exercise.number, exercise.adjectiveId, exercise.possessive),
+                ))
+            }
         }
         Text(courseContextHelp.compact)
         OutlinedButton(onClick = { dispatch(AppAction.SelectTab(AppTab.Matrix)) }, modifier = Modifier.fillMaxWidth()) {
