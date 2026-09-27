@@ -7,6 +7,7 @@ import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.booleanOrNull
 import kotlinx.serialization.json.intOrNull
+import polski.data.packRegistry
 
 sealed interface PreferencesDecode {
     data class Loaded(val value: UserPreferencesV2) : PreferencesDecode
@@ -30,7 +31,7 @@ object UserPreferencesCodec {
         if (root.keys.any { it !in allowedFields }) return invalid(raw, "Unknown preference field")
         val defaults = UserPreferencesV2()
         val pair = root.optionalString("coursePair", defaults.coursePair) ?: return invalid(raw, "Invalid coursePair")
-        if (pair != "pl-ru") return invalid(raw, "Unsupported coursePair")
+        if (pair != packRegistry.active.pairId) return invalid(raw, "Unsupported coursePair")
         // v1/v2 wrote `explanationMethod: "Logic"/"Situations"`; v3 writes `styleId` directly with all 4 names.
         val style = if (version <= 2) root.legacyStyleId(defaults.styleId) ?: return invalid(raw, "Invalid explanationMethod")
             else root.optionalEnum("styleId", defaults.styleId) ?: return invalid(raw, "Invalid styleId")
@@ -53,7 +54,7 @@ object UserPreferencesCodec {
     }
 
     fun encode(value: UserPreferencesV2): String {
-        require(value.schemaVersion == 3 && value.coursePair == "pl-ru" && validReminder(value.reminder) && value.glassTintPercent in 0..100)
+        require(value.schemaVersion == 3 && value.coursePair == packRegistry.active.pairId && validReminder(value.reminder) && value.glassTintPercent in 0..100)
         val reminder = value.reminder
         val root = JsonObject(mapOf(
             "schemaVersion" to JsonPrimitive(3),

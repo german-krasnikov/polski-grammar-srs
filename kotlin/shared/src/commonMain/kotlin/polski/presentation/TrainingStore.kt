@@ -26,6 +26,7 @@ import polski.progress.ProgressRepository
 import polski.progress.ReviewReducer
 import polski.progress.ReviewResult
 import polski.progress.SaveResult
+import polski.progress.SkillQueue
 import polski.srs.Scheduler
 import polski.training.DueSkillCard
 import polski.training.ExerciseFactory
@@ -53,7 +54,10 @@ class TrainingStore(
     private val scope = CoroutineScope(ownerScope.coroutineContext + SupervisorJob(ownerScope.coroutineContext[Job]))
     private val writes = Channel<Write>(Channel.UNLIMITED)
     private val knownSkillIds = skills.map { it.id }
-    private val reviewReducer = ReviewReducer(scheduler, knownSkillIds.toSet())
+    private val knownSkillIdSet = knownSkillIds.toSet()
+    private val reviewReducer = ReviewReducer(scheduler, knownSkillIdSet)
+    /** UniversalCorePlan.md §6: the active pack's skills only — see [SkillQueue]. */
+    private val skillQueue = SkillQueue { it in knownSkillIdSet }
     private var document: ProgressDocument? = null
     private var recoveryRaw: String? = null
     private var nextEffectId = 0L
@@ -245,8 +249,7 @@ class TrainingStore(
     private fun startSchedule() {
         val captured = time.capture()
         val progress = document?.progress ?: return
-        val due = progress.cards.filter { scheduler.isDue(it, captured.at) }
-        val exercise = due.minByOrNull { it.card.due }?.let { exerciseFactory.generateForSkill(it.skillId) }
+        val exercise = skillQueue.next(progress.cards, scheduler, captured.at)?.let { exerciseFactory.generateForSkill(it.skillId) }
         mutableState.value = project(state.value.copy(
             tab = AppTab.Training, mode = TrainingMode.Schedule, focusedSkillId = null,
             showSkillPicker = false, exercise = exercise,
@@ -315,7 +318,7 @@ class TrainingStore(
             TrainingMode.Chain -> current.chain.getOrNull(current.chainIndex + 1)
             TrainingMode.Focused -> exerciseFactory.generateForSkill(current.focusedSkillId ?: exercise.primarySkill)
             TrainingMode.Schedule -> {
-                val due = result.document.progress.cards.filter { scheduler.isDue(it, captured.at) }
+                val due = skillQueue.due(result.document.progress.cards, scheduler, captured.at)
                 val nextId = due.takeIf { it.isNotEmpty() }?.let { cards ->
                     nextSkillId(cards.map { DueSkillCard(it.skillId, it.card.due.toEpochMilliseconds()) })
                 }
@@ -343,8 +346,7 @@ class TrainingStore(
         val doc = document ?: return
         val projected = project(current, doc, captured)
         if (current.mode == TrainingMode.Schedule && current.phase == CardPhase.NoDue && projected.dueCount > 0) {
-            val due = doc.progress.cards.filter { scheduler.isDue(it, captured.at) }
-            val exercise = due.minByOrNull { it.card.due }?.let { exerciseFactory.generateForSkill(it.skillId) }
+            val exercise = skillQueue.next(doc.progress.cards, scheduler, captured.at)?.let { exerciseFactory.generateForSkill(it.skillId) }
             mutableState.value = project(projected.copy(
                 exercise = exercise, phase = CardPhase.Question,
                 introPending = needsIntroduction(exercise, doc),
@@ -355,8 +357,8 @@ class TrainingStore(
 
     private fun project(base: AppUiState, doc: ProgressDocument, captured: TimeCapture): AppUiState {
         val cards = doc.progress.cards
-        val due = cards.count { scheduler.isDue(it, captured.at) }
-        val next = cards.filter { it.card.due > captured.at }.minOfOrNull { it.card.due }
+        val due = skillQueue.due(cards, scheduler, captured.at).size
+        val next = skillQueue.nextDueAt(cards, captured.at)
         val interval = base.exercise?.let { exercise ->
             cards.firstOrNull { it.skillId == exercise.primarySkill }?.let { scheduler.preview(it, captured.at) }
         }

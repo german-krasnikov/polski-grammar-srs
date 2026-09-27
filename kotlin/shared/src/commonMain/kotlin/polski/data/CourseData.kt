@@ -180,6 +180,11 @@ internal class CoursePack(private val source: CoursePackSource) {
 
     val id: String by lazy { root.string("id") }
 
+    /** UC-04: vocabulary's pair scope (`${target}-${native}`) — v1 packs have `id == pairId`
+     * (one pack per pair), but the two stay conceptually distinct for a future schema where a
+     * pack id could version content without changing the pair. */
+    val pairId: String by lazy { "${root.string("targetLanguage")}-${root.string("nativeLanguage")}" }
+
     val nouns: List<Noun> by lazy { root.rows("nouns").map { value ->
         Noun(value.string("id"), value.string("lemma"), value.string("meaning"), Gender.fromId(value.string("gender")),
             NumberGram.entries.associateWith { number -> value.obj("forms").obj(number.id).caseForms() })

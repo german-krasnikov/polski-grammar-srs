@@ -1,0 +1,4629 @@
+{
+  "schemaVersion": 1,
+  "sourceRevision": "df59774e153a5bdf590fe27bd8780c7bd5457a26",
+  "cases": [
+    {
+      "id": "C-01-01",
+      "input": {
+        "seed": {
+          "nounId": "wife",
+          "adjectiveId": "beautiful"
+        },
+        "step": 1
+      },
+      "expected": {
+        "id": "<generated-id>",
+        "primarySkill": "case.acc.f",
+        "source": "To jest moja piękna żona.",
+        "prompt": "Скажи, что видишь это. Начни с «Widzę…».",
+        "expected": "Widzę moją piękną żonę.",
+        "explanation": "Widzę → Biernik.",
+        "changes": [
+          {
+            "from": "moja piękna żona",
+            "to": "moją piękną żonę",
+            "reason": "Widzę → Biernik."
+          }
+        ],
+        "nounId": "wife",
+        "adjectiveId": "beautiful",
+        "possessive": "my",
+        "number": "sg",
+        "tags": [
+          "acc"
+        ]
+      },
+      "context": {
+        "randomDraws": [
+          0.11
+        ],
+        "drawsUsed": 1
+      }
+    },
+    {
+      "id": "C-01-02",
+      "input": {
+        "seed": {
+          "nounId": "wife",
+          "adjectiveId": "beautiful"
+        },
+        "step": 2
+      },
+      "expected": {
+        "id": "<generated-id>",
+        "primarySkill": "verb.past",
+        "source": "Widzę moją piękną żonę.",
+        "prompt": "Перенеси предложение в прошедшее время. Говори от мужского лица.",
+        "expected": "Widziałem moją piękną żonę.",
+        "explanation": "Меняется только время глагола.",
+        "changes": [
+          {
+            "from": "Widzę",
+            "to": "Widziałem",
+            "reason": "Меняется только время глагола."
+          }
+        ],
+        "nounId": "wife",
+        "adjectiveId": "beautiful",
+        "possessive": "my",
+        "number": "sg",
+        "tags": [
+          "past",
+          "acc"
+        ]
+      },
+      "context": {
+        "randomDraws": [
+          0.22
+        ],
+        "drawsUsed": 1
+      }
+    },
+    {
+      "id": "C-01-03",
+      "input": {
+        "seed": {
+          "nounId": "wife",
+          "adjectiveId": "beautiful"
+        },
+        "step": 3
+      },
+      "expected": {
+        "id": "<generated-id>",
+        "primarySkill": "case.gen.neg",
+        "source": "Widziałem moją piękną żonę.",
+        "prompt": "Теперь сделай это предложение отрицательным.",
+        "expected": "Nie widziałem mojej pięknej żony.",
+        "explanation": "Отрицание → Biernik меняется на Dopełniacz.",
+        "changes": [
+          {
+            "from": "moją piękną żonę",
+            "to": "mojej pięknej żony",
+            "reason": "Отрицание → Biernik меняется на Dopełniacz."
+          }
+        ],
+        "nounId": "wife",
+        "adjectiveId": "beautiful",
+        "possessive": "my",
+        "number": "sg",
+        "tags": [
+          "gen",
+          "negation"
+        ]
+      },
+      "context": {
+        "randomDraws": [
+          0.33
+        ],
+        "drawsUsed": 1
+      }
+    },
+    {
+      "id": "C-01-04",
+      "input": {
+        "seed": {
+          "nounId": "wife",
+          "adjectiveId": "beautiful"
+        },
+        "step": 4
+      },
+      "expected": {
+        "id": "<generated-id>",
+        "primarySkill": "agreement.my",
+        "source": "Nie widziałem mojej pięknej żony.",
+        "prompt": "Замени «мой / моя» на «их».",
+        "expected": "Nie widziałem ich pięknej żony.",
+        "explanation": "ich не склоняется; прилагательное и существительное остаются в Dopełniaczu.",
+        "changes": [
+          {
+            "from": "mojej pięknej żony",
+            "to": "ich pięknej żony",
+            "reason": "ich не склоняется; прилагательное и существительное остаются в Dopełniaczu."
+          }
+        ],
+        "nounId": "wife",
+        "adjectiveId": "beautiful",
+        "possessive": "their",
+        "number": "sg",
+        "tags": [
+          "gen",
+          "agreement"
+        ]
+      },
+      "context": {
+        "randomDraws": [
+          0.44
+        ],
+        "drawsUsed": 1
+      }
+    },
+    {
+      "id": "C-01-05",
+      "input": {
+        "seed": {
+          "nounId": "wife",
+          "adjectiveId": "beautiful"
+        },
+        "step": 5
+      },
+      "expected": {
+        "id": "<generated-id>",
+        "primarySkill": "case.loc",
+        "source": "Nie widziałem ich pięknej żony.",
+        "prompt": "Теперь скажи, что говоришь об этом. Начни с «Mówię o…».",
+        "expected": "Mówię o ich pięknej żonie.",
+        "explanation": "o → Miejscownik. Сохрани владельца «их».",
+        "changes": [
+          {
+            "from": "ich pięknej żony",
+            "to": "ich pięknej żonie",
+            "reason": "o → Miejscownik. Сохрани владельца «их»."
+          }
+        ],
+        "nounId": "wife",
+        "adjectiveId": "beautiful",
+        "possessive": "their",
+        "number": "sg",
+        "tags": [
+          "loc"
+        ]
+      },
+      "context": {
+        "randomDraws": [
+          0.55
+        ],
+        "drawsUsed": 1
+      }
+    },
+    {
+      "id": "C-02-01",
+      "input": {
+        "seed": {
+          "nounId": "husband",
+          "adjectiveId": "good"
+        },
+        "step": 1
+      },
+      "expected": {
+        "id": "<generated-id>",
+        "primarySkill": "case.acc.m",
+        "source": "To jest mój dobry mąż.",
+        "prompt": "Скажи, что видишь это. Начни с «Widzę…».",
+        "expected": "Widzę mojego dobrego męża.",
+        "explanation": "Widzę → Biernik.",
+        "changes": [
+          {
+            "from": "mój dobry mąż",
+            "to": "mojego dobrego męża",
+            "reason": "Widzę → Biernik."
+          }
+        ],
+        "nounId": "husband",
+        "adjectiveId": "good",
+        "possessive": "my",
+        "number": "sg",
+        "tags": [
+          "acc"
+        ]
+      },
+      "context": {
+        "randomDraws": [
+          0.11
+        ],
+        "drawsUsed": 1
+      }
+    },
+    {
+      "id": "C-02-02",
+      "input": {
+        "seed": {
+          "nounId": "husband",
+          "adjectiveId": "good"
+        },
+        "step": 2
+      },
+      "expected": {
+        "id": "<generated-id>",
+        "primarySkill": "verb.past",
+        "source": "Widzę mojego dobrego męża.",
+        "prompt": "Перенеси предложение в прошедшее время. Говори от мужского лица.",
+        "expected": "Widziałem mojego dobrego męża.",
+        "explanation": "Меняется только время глагола.",
+        "changes": [
+          {
+            "from": "Widzę",
+            "to": "Widziałem",
+            "reason": "Меняется только время глагола."
+          }
+        ],
+        "nounId": "husband",
+        "adjectiveId": "good",
+        "possessive": "my",
+        "number": "sg",
+        "tags": [
+          "past",
+          "acc"
+        ]
+      },
+      "context": {
+        "randomDraws": [
+          0.22
+        ],
+        "drawsUsed": 1
+      }
+    },
+    {
+      "id": "C-02-03",
+      "input": {
+        "seed": {
+          "nounId": "husband",
+          "adjectiveId": "good"
+        },
+        "step": 3
+      },
+      "expected": {
+        "id": "<generated-id>",
+        "primarySkill": "case.gen.neg",
+        "source": "Widziałem mojego dobrego męża.",
+        "prompt": "Теперь сделай это предложение отрицательным.",
+        "expected": "Nie widziałem mojego dobrego męża.",
+        "explanation": "Отрицание → Biernik меняется на Dopełniacz.",
+        "changes": [
+          {
+            "from": "mojego dobrego męża",
+            "to": "mojego dobrego męża",
+            "reason": "Отрицание → Biernik меняется на Dopełniacz."
+          }
+        ],
+        "nounId": "husband",
+        "adjectiveId": "good",
+        "possessive": "my",
+        "number": "sg",
+        "tags": [
+          "gen",
+          "negation"
+        ]
+      },
+      "context": {
+        "randomDraws": [
+          0.33
+        ],
+        "drawsUsed": 1
+      }
+    },
+    {
+      "id": "C-02-04",
+      "input": {
+        "seed": {
+          "nounId": "husband",
+          "adjectiveId": "good"
+        },
+        "step": 4
+      },
+      "expected": {
+        "id": "<generated-id>",
+        "primarySkill": "agreement.my",
+        "source": "Nie widziałem mojego dobrego męża.",
+        "prompt": "Замени «мой / моя» на «их».",
+        "expected": "Nie widziałem ich dobrego męża.",
+        "explanation": "ich не склоняется; прилагательное и существительное остаются в Dopełniaczu.",
+        "changes": [
+          {
+            "from": "mojego dobrego męża",
+            "to": "ich dobrego męża",
+            "reason": "ich не склоняется; прилагательное и существительное остаются в Dopełniaczu."
+          }
+        ],
+        "nounId": "husband",
+        "adjectiveId": "good",
+        "possessive": "their",
+        "number": "sg",
+        "tags": [
+          "gen",
+          "agreement"
+        ]
+      },
+      "context": {
+        "randomDraws": [
+          0.44
+        ],
+        "drawsUsed": 1
+      }
+    },
+    {
+      "id": "C-02-05",
+      "input": {
+        "seed": {
+          "nounId": "husband",
+          "adjectiveId": "good"
+        },
+        "step": 5
+      },
+      "expected": {
+        "id": "<generated-id>",
+        "primarySkill": "case.loc",
+        "source": "Nie widziałem ich dobrego męża.",
+        "prompt": "Теперь скажи, что говоришь об этом. Начни с «Mówię o…».",
+        "expected": "Mówię o ich dobrym mężu.",
+        "explanation": "o → Miejscownik. Сохрани владельца «их».",
+        "changes": [
+          {
+            "from": "ich dobrego męża",
+            "to": "ich dobrym mężu",
+            "reason": "o → Miejscownik. Сохрани владельца «их»."
+          }
+        ],
+        "nounId": "husband",
+        "adjectiveId": "good",
+        "possessive": "their",
+        "number": "sg",
+        "tags": [
+          "loc"
+        ]
+      },
+      "context": {
+        "randomDraws": [
+          0.55
+        ],
+        "drawsUsed": 1
+      }
+    },
+    {
+      "id": "C-03-01",
+      "input": {
+        "seed": {
+          "nounId": "friendM",
+          "adjectiveId": "good"
+        },
+        "step": 1
+      },
+      "expected": {
+        "id": "<generated-id>",
+        "primarySkill": "case.acc.m",
+        "source": "To jest mój dobry kolega.",
+        "prompt": "Скажи, что видишь это. Начни с «Widzę…».",
+        "expected": "Widzę mojego dobrego kolegę.",
+        "explanation": "Widzę → Biernik.",
+        "changes": [
+          {
+            "from": "mój dobry kolega",
+            "to": "mojego dobrego kolegę",
+            "reason": "Widzę → Biernik."
+          }
+        ],
+        "nounId": "friendM",
+        "adjectiveId": "good",
+        "possessive": "my",
+        "number": "sg",
+        "tags": [
+          "acc"
+        ]
+      },
+      "context": {
+        "randomDraws": [
+          0.11
+        ],
+        "drawsUsed": 1
+      }
+    },
+    {
+      "id": "C-03-02",
+      "input": {
+        "seed": {
+          "nounId": "friendM",
+          "adjectiveId": "good"
+        },
+        "step": 2
+      },
+      "expected": {
+        "id": "<generated-id>",
+        "primarySkill": "verb.past",
+        "source": "Widzę mojego dobrego kolegę.",
+        "prompt": "Перенеси предложение в прошедшее время. Говори от мужского лица.",
+        "expected": "Widziałem mojego dobrego kolegę.",
+        "explanation": "Меняется только время глагола.",
+        "changes": [
+          {
+            "from": "Widzę",
+            "to": "Widziałem",
+            "reason": "Меняется только время глагола."
+          }
+        ],
+        "nounId": "friendM",
+        "adjectiveId": "good",
+        "possessive": "my",
+        "number": "sg",
+        "tags": [
+          "past",
+          "acc"
+        ]
+      },
+      "context": {
+        "randomDraws": [
+          0.22
+        ],
+        "drawsUsed": 1
+      }
+    },
+    {
+      "id": "C-03-03",
+      "input": {
+        "seed": {
+          "nounId": "friendM",
+          "adjectiveId": "good"
+        },
+        "step": 3
+      },
+      "expected": {
+        "id": "<generated-id>",
+        "primarySkill": "case.gen.neg",
+        "source": "Widziałem mojego dobrego kolegę.",
+        "prompt": "Теперь сделай это предложение отрицательным.",
+        "expected": "Nie widziałem mojego dobrego kolegi.",
+        "explanation": "Отрицание → Biernik меняется на Dopełniacz.",
+        "changes": [
+          {
+            "from": "mojego dobrego kolegę",
+            "to": "mojego dobrego kolegi",
+            "reason": "Отрицание → Biernik меняется на Dopełniacz."
+          }
+        ],
+        "nounId": "friendM",
+        "adjectiveId": "good",
+        "possessive": "my",
+        "number": "sg",
+        "tags": [
+          "gen",
+          "negation"
+        ]
+      },
+      "context": {
+        "randomDraws": [
+          0.33
+        ],
+        "drawsUsed": 1
+      }
+    },
+    {
+      "id": "C-03-04",
+      "input": {
+        "seed": {
+          "nounId": "friendM",
+          "adjectiveId": "good"
+        },
+        "step": 4
+      },
+      "expected": {
+        "id": "<generated-id>",
+        "primarySkill": "agreement.my",
+        "source": "Nie widziałem mojego dobrego kolegi.",
+        "prompt": "Замени «мой / моя» на «их».",
+        "expected": "Nie widziałem ich dobrego kolegi.",
+        "explanation": "ich не склоняется; прилагательное и существительное остаются в Dopełniaczu.",
+        "changes": [
+          {
+            "from": "mojego dobrego kolegi",
+            "to": "ich dobrego kolegi",
+            "reason": "ich не склоняется; прилагательное и существительное остаются в Dopełniaczu."
+          }
+        ],
+        "nounId": "friendM",
+        "adjectiveId": "good",
+        "possessive": "their",
+        "number": "sg",
+        "tags": [
+          "gen",
+          "agreement"
+        ]
+      },
+      "context": {
+        "randomDraws": [
+          0.44
+        ],
+        "drawsUsed": 1
+      }
+    },
+    {
+      "id": "C-03-05",
+      "input": {
+        "seed": {
+          "nounId": "friendM",
+          "adjectiveId": "good"
+        },
+        "step": 5
+      },
+      "expected": {
+        "id": "<generated-id>",
+        "primarySkill": "case.loc",
+        "source": "Nie widziałem ich dobrego kolegi.",
+        "prompt": "Теперь скажи, что говоришь об этом. Начни с «Mówię o…».",
+        "expected": "Mówię o ich dobrym koledze.",
+        "explanation": "o → Miejscownik. Сохрани владельца «их».",
+        "changes": [
+          {
+            "from": "ich dobrego kolegi",
+            "to": "ich dobrym koledze",
+            "reason": "o → Miejscownik. Сохрани владельца «их»."
+          }
+        ],
+        "nounId": "friendM",
+        "adjectiveId": "good",
+        "possessive": "their",
+        "number": "sg",
+        "tags": [
+          "loc"
+        ]
+      },
+      "context": {
+        "randomDraws": [
+          0.55
+        ],
+        "drawsUsed": 1
+      }
+    },
+    {
+      "id": "C-04-01",
+      "input": {
+        "seed": {
+          "nounId": "son",
+          "adjectiveId": "small"
+        },
+        "step": 1
+      },
+      "expected": {
+        "id": "<generated-id>",
+        "primarySkill": "case.acc.m",
+        "source": "To jest mój mały syn.",
+        "prompt": "Скажи, что видишь это. Начни с «Widzę…».",
+        "expected": "Widzę mojego małego syna.",
+        "explanation": "Widzę → Biernik.",
+        "changes": [
+          {
+            "from": "mój mały syn",
+            "to": "mojego małego syna",
+            "reason": "Widzę → Biernik."
+          }
+        ],
+        "nounId": "son",
+        "adjectiveId": "small",
+        "possessive": "my",
+        "number": "sg",
+        "tags": [
+          "acc"
+        ]
+      },
+      "context": {
+        "randomDraws": [
+          0.11
+        ],
+        "drawsUsed": 1
+      }
+    },
+    {
+      "id": "C-04-02",
+      "input": {
+        "seed": {
+          "nounId": "son",
+          "adjectiveId": "small"
+        },
+        "step": 2
+      },
+      "expected": {
+        "id": "<generated-id>",
+        "primarySkill": "verb.past",
+        "source": "Widzę mojego małego syna.",
+        "prompt": "Перенеси предложение в прошедшее время. Говори от мужского лица.",
+        "expected": "Widziałem mojego małego syna.",
+        "explanation": "Меняется только время глагола.",
+        "changes": [
+          {
+            "from": "Widzę",
+            "to": "Widziałem",
+            "reason": "Меняется только время глагола."
+          }
+        ],
+        "nounId": "son",
+        "adjectiveId": "small",
+        "possessive": "my",
+        "number": "sg",
+        "tags": [
+          "past",
+          "acc"
+        ]
+      },
+      "context": {
+        "randomDraws": [
+          0.22
+        ],
+        "drawsUsed": 1
+      }
+    },
+    {
+      "id": "C-04-03",
+      "input": {
+        "seed": {
+          "nounId": "son",
+          "adjectiveId": "small"
+        },
+        "step": 3
+      },
+      "expected": {
+        "id": "<generated-id>",
+        "primarySkill": "case.gen.neg",
+        "source": "Widziałem mojego małego syna.",
+        "prompt": "Теперь сделай это предложение отрицательным.",
+        "expected": "Nie widziałem mojego małego syna.",
+        "explanation": "Отрицание → Biernik меняется на Dopełniacz.",
+        "changes": [
+          {
+            "from": "mojego małego syna",
+            "to": "mojego małego syna",
+            "reason": "Отрицание → Biernik меняется на Dopełniacz."
+          }
+        ],
+        "nounId": "son",
+        "adjectiveId": "small",
+        "possessive": "my",
+        "number": "sg",
+        "tags": [
+          "gen",
+          "negation"
+        ]
+      },
+      "context": {
+        "randomDraws": [
+          0.33
+        ],
+        "drawsUsed": 1
+      }
+    },
+    {
+      "id": "C-04-04",
+      "input": {
+        "seed": {
+          "nounId": "son",
+          "adjectiveId": "small"
+        },
+        "step": 4
+      },
+      "expected": {
+        "id": "<generated-id>",
+        "primarySkill": "agreement.my",
+        "source": "Nie widziałem mojego małego syna.",
+        "prompt": "Замени «мой / моя» на «их».",
+        "expected": "Nie widziałem ich małego syna.",
+        "explanation": "ich не склоняется; прилагательное и существительное остаются в Dopełniaczu.",
+        "changes": [
+          {
+            "from": "mojego małego syna",
+            "to": "ich małego syna",
+            "reason": "ich не склоняется; прилагательное и существительное остаются в Dopełniaczu."
+          }
+        ],
+        "nounId": "son",
+        "adjectiveId": "small",
+        "possessive": "their",
+        "number": "sg",
+        "tags": [
+          "gen",
+          "agreement"
+        ]
+      },
+      "context": {
+        "randomDraws": [
+          0.44
+        ],
+        "drawsUsed": 1
+      }
+    },
+    {
+      "id": "C-04-05",
+      "input": {
+        "seed": {
+          "nounId": "son",
+          "adjectiveId": "small"
+        },
+        "step": 5
+      },
+      "expected": {
+        "id": "<generated-id>",
+        "primarySkill": "case.loc",
+        "source": "Nie widziałem ich małego syna.",
+        "prompt": "Теперь скажи, что говоришь об этом. Начни с «Mówię o…».",
+        "expected": "Mówię o ich małym synu.",
+        "explanation": "o → Miejscownik. Сохрани владельца «их».",
+        "changes": [
+          {
+            "from": "ich małego syna",
+            "to": "ich małym synu",
+            "reason": "o → Miejscownik. Сохрани владельца «их»."
+          }
+        ],
+        "nounId": "son",
+        "adjectiveId": "small",
+        "possessive": "their",
+        "number": "sg",
+        "tags": [
+          "loc"
+        ]
+      },
+      "context": {
+        "randomDraws": [
+          0.55
+        ],
+        "drawsUsed": 1
+      }
+    },
+    {
+      "id": "C-05-01",
+      "input": {
+        "seed": {
+          "nounId": "dog",
+          "adjectiveId": "good"
+        },
+        "step": 1
+      },
+      "expected": {
+        "id": "<generated-id>",
+        "primarySkill": "case.acc.m",
+        "source": "To jest mój dobry pies.",
+        "prompt": "Скажи, что видишь это. Начни с «Widzę…».",
+        "expected": "Widzę mojego dobrego psa.",
+        "explanation": "Widzę → Biernik.",
+        "changes": [
+          {
+            "from": "mój dobry pies",
+            "to": "mojego dobrego psa",
+            "reason": "Widzę → Biernik."
+          }
+        ],
+        "nounId": "dog",
+        "adjectiveId": "good",
+        "possessive": "my",
+        "number": "sg",
+        "tags": [
+          "acc"
+        ]
+      },
+      "context": {
+        "randomDraws": [
+          0.11
+        ],
+        "drawsUsed": 1
+      }
+    },
+    {
+      "id": "C-05-02",
+      "input": {
+        "seed": {
+          "nounId": "dog",
+          "adjectiveId": "good"
+        },
+        "step": 2
+      },
+      "expected": {
+        "id": "<generated-id>",
+        "primarySkill": "verb.past",
+        "source": "Widzę mojego dobrego psa.",
+        "prompt": "Перенеси предложение в прошедшее время. Говори от мужского лица.",
+        "expected": "Widziałem mojego dobrego psa.",
+        "explanation": "Меняется только время глагола.",
+        "changes": [
+          {
+            "from": "Widzę",
+            "to": "Widziałem",
+            "reason": "Меняется только время глагола."
+          }
+        ],
+        "nounId": "dog",
+        "adjectiveId": "good",
+        "possessive": "my",
+        "number": "sg",
+        "tags": [
+          "past",
+          "acc"
+        ]
+      },
+      "context": {
+        "randomDraws": [
+          0.22
+        ],
+        "drawsUsed": 1
+      }
+    },
+    {
+      "id": "C-05-03",
+      "input": {
+        "seed": {
+          "nounId": "dog",
+          "adjectiveId": "good"
+        },
+        "step": 3
+      },
+      "expected": {
+        "id": "<generated-id>",
+        "primarySkill": "case.gen.neg",
+        "source": "Widziałem mojego dobrego psa.",
+        "prompt": "Теперь сделай это предложение отрицательным.",
+        "expected": "Nie widziałem mojego dobrego psa.",
+        "explanation": "Отрицание → Biernik меняется на Dopełniacz.",
+        "changes": [
+          {
+            "from": "mojego dobrego psa",
+            "to": "mojego dobrego psa",
+            "reason": "Отрицание → Biernik меняется на Dopełniacz."
+          }
+        ],
+        "nounId": "dog",
+        "adjectiveId": "good",
+        "possessive": "my",
+        "number": "sg",
+        "tags": [
+          "gen",
+          "negation"
+        ]
+      },
+      "context": {
+        "randomDraws": [
+          0.33
+        ],
+        "drawsUsed": 1
+      }
+    },
+    {
+      "id": "C-05-04",
+      "input": {
+        "seed": {
+          "nounId": "dog",
+          "adjectiveId": "good"
+        },
+        "step": 4
+      },
+      "expected": {
+        "id": "<generated-id>",
+        "primarySkill": "agreement.my",
+        "source": "Nie widziałem mojego dobrego psa.",
+        "prompt": "Замени «мой / моя» на «их».",
+        "expected": "Nie widziałem ich dobrego psa.",
+        "explanation": "ich не склоняется; прилагательное и существительное остаются в Dopełniaczu.",
+        "changes": [
+          {
+            "from": "mojego dobrego psa",
+            "to": "ich dobrego psa",
+            "reason": "ich не склоняется; прилагательное и существительное остаются в Dopełniaczu."
+          }
+        ],
+        "nounId": "dog",
+        "adjectiveId": "good",
+        "possessive": "their",
+        "number": "sg",
+        "tags": [
+          "gen",
+          "agreement"
+        ]
+      },
+      "context": {
+        "randomDraws": [
+          0.44
+        ],
+        "drawsUsed": 1
+      }
+    },
+    {
+      "id": "C-05-05",
+      "input": {
+        "seed": {
+          "nounId": "dog",
+          "adjectiveId": "good"
+        },
+        "step": 5
+      },
+      "expected": {
+        "id": "<generated-id>",
+        "primarySkill": "case.loc",
+        "source": "Nie widziałem ich dobrego psa.",
+        "prompt": "Теперь скажи, что говоришь об этом. Начни с «Mówię o…».",
+        "expected": "Mówię o ich dobrym psie.",
+        "explanation": "o → Miejscownik. Сохрани владельца «их».",
+        "changes": [
+          {
+            "from": "ich dobrego psa",
+            "to": "ich dobrym psie",
+            "reason": "o → Miejscownik. Сохрани владельца «их»."
+          }
+        ],
+        "nounId": "dog",
+        "adjectiveId": "good",
+        "possessive": "their",
+        "number": "sg",
+        "tags": [
+          "loc"
+        ]
+      },
+      "context": {
+        "randomDraws": [
+          0.55
+        ],
+        "drawsUsed": 1
+      }
+    },
+    {
+      "id": "C-06-01",
+      "input": {
+        "seed": {
+          "nounId": "cat",
+          "adjectiveId": "small"
+        },
+        "step": 1
+      },
+      "expected": {
+        "id": "<generated-id>",
+        "primarySkill": "case.acc.m",
+        "source": "To jest mój mały kot.",
+        "prompt": "Скажи, что видишь это. Начни с «Widzę…».",
+        "expected": "Widzę mojego małego kota.",
+        "explanation": "Widzę → Biernik.",
+        "changes": [
+          {
+            "from": "mój mały kot",
+            "to": "mojego małego kota",
+            "reason": "Widzę → Biernik."
+          }
+        ],
+        "nounId": "cat",
+        "adjectiveId": "small",
+        "possessive": "my",
+        "number": "sg",
+        "tags": [
+          "acc"
+        ]
+      },
+      "context": {
+        "randomDraws": [
+          0.11
+        ],
+        "drawsUsed": 1
+      }
+    },
+    {
+      "id": "C-06-02",
+      "input": {
+        "seed": {
+          "nounId": "cat",
+          "adjectiveId": "small"
+        },
+        "step": 2
+      },
+      "expected": {
+        "id": "<generated-id>",
+        "primarySkill": "verb.past",
+        "source": "Widzę mojego małego kota.",
+        "prompt": "Перенеси предложение в прошедшее время. Говори от мужского лица.",
+        "expected": "Widziałem mojego małego kota.",
+        "explanation": "Меняется только время глагола.",
+        "changes": [
+          {
+            "from": "Widzę",
+            "to": "Widziałem",
+            "reason": "Меняется только время глагола."
+          }
+        ],
+        "nounId": "cat",
+        "adjectiveId": "small",
+        "possessive": "my",
+        "number": "sg",
+        "tags": [
+          "past",
+          "acc"
+        ]
+      },
+      "context": {
+        "randomDraws": [
+          0.22
+        ],
+        "drawsUsed": 1
+      }
+    },
+    {
+      "id": "C-06-03",
+      "input": {
+        "seed": {
+          "nounId": "cat",
+          "adjectiveId": "small"
+        },
+        "step": 3
+      },
+      "expected": {
+        "id": "<generated-id>",
+        "primarySkill": "case.gen.neg",
+        "source": "Widziałem mojego małego kota.",
+        "prompt": "Теперь сделай это предложение отрицательным.",
+        "expected": "Nie widziałem mojego małego kota.",
+        "explanation": "Отрицание → Biernik меняется на Dopełniacz.",
+        "changes": [
+          {
+            "from": "mojego małego kota",
+            "to": "mojego małego kota",
+            "reason": "Отрицание → Biernik меняется на Dopełniacz."
+          }
+        ],
+        "nounId": "cat",
+        "adjectiveId": "small",
+        "possessive": "my",
+        "number": "sg",
+        "tags": [
+          "gen",
+          "negation"
+        ]
+      },
+      "context": {
+        "randomDraws": [
+          0.33
+        ],
+        "drawsUsed": 1
+      }
+    },
+    {
+      "id": "C-06-04",
+      "input": {
+        "seed": {
+          "nounId": "cat",
+          "adjectiveId": "small"
+        },
+        "step": 4
+      },
+      "expected": {
+        "id": "<generated-id>",
+        "primarySkill": "agreement.my",
+        "source": "Nie widziałem mojego małego kota.",
+        "prompt": "Замени «мой / моя» на «их».",
+        "expected": "Nie widziałem ich małego kota.",
+        "explanation": "ich не склоняется; прилагательное и существительное остаются в Dopełniaczu.",
+        "changes": [
+          {
+            "from": "mojego małego kota",
+            "to": "ich małego kota",
+            "reason": "ich не склоняется; прилагательное и существительное остаются в Dopełniaczu."
+          }
+        ],
+        "nounId": "cat",
+        "adjectiveId": "small",
+        "possessive": "their",
+        "number": "sg",
+        "tags": [
+          "gen",
+          "agreement"
+        ]
+      },
+      "context": {
+        "randomDraws": [
+          0.44
+        ],
+        "drawsUsed": 1
+      }
+    },
+    {
+      "id": "C-06-05",
+      "input": {
+        "seed": {
+          "nounId": "cat",
+          "adjectiveId": "small"
+        },
+        "step": 5
+      },
+      "expected": {
+        "id": "<generated-id>",
+        "primarySkill": "case.loc",
+        "source": "Nie widziałem ich małego kota.",
+        "prompt": "Теперь скажи, что говоришь об этом. Начни с «Mówię o…».",
+        "expected": "Mówię o ich małym kocie.",
+        "explanation": "o → Miejscownik. Сохрани владельца «их».",
+        "changes": [
+          {
+            "from": "ich małego kota",
+            "to": "ich małym kocie",
+            "reason": "o → Miejscownik. Сохрани владельца «их»."
+          }
+        ],
+        "nounId": "cat",
+        "adjectiveId": "small",
+        "possessive": "their",
+        "number": "sg",
+        "tags": [
+          "loc"
+        ]
+      },
+      "context": {
+        "randomDraws": [
+          0.55
+        ],
+        "drawsUsed": 1
+      }
+    },
+    {
+      "id": "C-07-01",
+      "input": {
+        "seed": {
+          "nounId": "book",
+          "adjectiveId": "new"
+        },
+        "step": 1
+      },
+      "expected": {
+        "id": "<generated-id>",
+        "primarySkill": "case.acc.f",
+        "source": "To jest moja nowa książka.",
+        "prompt": "Скажи, что видишь это. Начни с «Widzę…».",
+        "expected": "Widzę moją nową książkę.",
+        "explanation": "Widzę → Biernik.",
+        "changes": [
+          {
+            "from": "moja nowa książka",
+            "to": "moją nową książkę",
+            "reason": "Widzę → Biernik."
+          }
+        ],
+        "nounId": "book",
+        "adjectiveId": "new",
+        "possessive": "my",
+        "number": "sg",
+        "tags": [
+          "acc"
+        ]
+      },
+      "context": {
+        "randomDraws": [
+          0.11
+        ],
+        "drawsUsed": 1
+      }
+    },
+    {
+      "id": "C-07-02",
+      "input": {
+        "seed": {
+          "nounId": "book",
+          "adjectiveId": "new"
+        },
+        "step": 2
+      },
+      "expected": {
+        "id": "<generated-id>",
+        "primarySkill": "verb.past",
+        "source": "Widzę moją nową książkę.",
+        "prompt": "Перенеси предложение в прошедшее время. Говори от мужского лица.",
+        "expected": "Widziałem moją nową książkę.",
+        "explanation": "Меняется только время глагола.",
+        "changes": [
+          {
+            "from": "Widzę",
+            "to": "Widziałem",
+            "reason": "Меняется только время глагола."
+          }
+        ],
+        "nounId": "book",
+        "adjectiveId": "new",
+        "possessive": "my",
+        "number": "sg",
+        "tags": [
+          "past",
+          "acc"
+        ]
+      },
+      "context": {
+        "randomDraws": [
+          0.22
+        ],
+        "drawsUsed": 1
+      }
+    },
+    {
+      "id": "C-07-03",
+      "input": {
+        "seed": {
+          "nounId": "book",
+          "adjectiveId": "new"
+        },
+        "step": 3
+      },
+      "expected": {
+        "id": "<generated-id>",
+        "primarySkill": "case.gen.neg",
+        "source": "Widziałem moją nową książkę.",
+        "prompt": "Теперь сделай это предложение отрицательным.",
+        "expected": "Nie widziałem mojej nowej książki.",
+        "explanation": "Отрицание → Biernik меняется на Dopełniacz.",
+        "changes": [
+          {
+            "from": "moją nową książkę",
+            "to": "mojej nowej książki",
+            "reason": "Отрицание → Biernik меняется на Dopełniacz."
+          }
+        ],
+        "nounId": "book",
+        "adjectiveId": "new",
+        "possessive": "my",
+        "number": "sg",
+        "tags": [
+          "gen",
+          "negation"
+        ]
+      },
+      "context": {
+        "randomDraws": [
+          0.33
+        ],
+        "drawsUsed": 1
+      }
+    },
+    {
+      "id": "C-07-04",
+      "input": {
+        "seed": {
+          "nounId": "book",
+          "adjectiveId": "new"
+        },
+        "step": 4
+      },
+      "expected": {
+        "id": "<generated-id>",
+        "primarySkill": "agreement.my",
+        "source": "Nie widziałem mojej nowej książki.",
+        "prompt": "Замени «мой / моя» на «их».",
+        "expected": "Nie widziałem ich nowej książki.",
+        "explanation": "ich не склоняется; прилагательное и существительное остаются в Dopełniaczu.",
+        "changes": [
+          {
+            "from": "mojej nowej książki",
+            "to": "ich nowej książki",
+            "reason": "ich не склоняется; прилагательное и существительное остаются в Dopełniaczu."
+          }
+        ],
+        "nounId": "book",
+        "adjectiveId": "new",
+        "possessive": "their",
+        "number": "sg",
+        "tags": [
+          "gen",
+          "agreement"
+        ]
+      },
+      "context": {
+        "randomDraws": [
+          0.44
+        ],
+        "drawsUsed": 1
+      }
+    },
+    {
+      "id": "C-07-05",
+      "input": {
+        "seed": {
+          "nounId": "book",
+          "adjectiveId": "new"
+        },
+        "step": 5
+      },
+      "expected": {
+        "id": "<generated-id>",
+        "primarySkill": "case.loc",
+        "source": "Nie widziałem ich nowej książki.",
+        "prompt": "Теперь скажи, что говоришь об этом. Начни с «Mówię o…».",
+        "expected": "Mówię o ich nowej książce.",
+        "explanation": "o → Miejscownik. Сохрани владельца «их».",
+        "changes": [
+          {
+            "from": "ich nowej książki",
+            "to": "ich nowej książce",
+            "reason": "o → Miejscownik. Сохрани владельца «их»."
+          }
+        ],
+        "nounId": "book",
+        "adjectiveId": "new",
+        "possessive": "their",
+        "number": "sg",
+        "tags": [
+          "loc"
+        ]
+      },
+      "context": {
+        "randomDraws": [
+          0.55
+        ],
+        "drawsUsed": 1
+      }
+    },
+    {
+      "id": "C-08-01",
+      "input": {
+        "seed": {
+          "nounId": "car",
+          "adjectiveId": "new"
+        },
+        "step": 1
+      },
+      "expected": {
+        "id": "<generated-id>",
+        "primarySkill": "case.acc.m",
+        "source": "To jest mój nowy samochód.",
+        "prompt": "Скажи, что видишь это. Начни с «Widzę…».",
+        "expected": "Widzę mój nowy samochód.",
+        "explanation": "Widzę → Biernik.",
+        "changes": [
+          {
+            "from": "mój nowy samochód",
+            "to": "mój nowy samochód",
+            "reason": "Widzę → Biernik."
+          }
+        ],
+        "nounId": "car",
+        "adjectiveId": "new",
+        "possessive": "my",
+        "number": "sg",
+        "tags": [
+          "acc"
+        ]
+      },
+      "context": {
+        "randomDraws": [
+          0.11
+        ],
+        "drawsUsed": 1
+      }
+    },
+    {
+      "id": "C-08-02",
+      "input": {
+        "seed": {
+          "nounId": "car",
+          "adjectiveId": "new"
+        },
+        "step": 2
+      },
+      "expected": {
+        "id": "<generated-id>",
+        "primarySkill": "verb.past",
+        "source": "Widzę mój nowy samochód.",
+        "prompt": "Перенеси предложение в прошедшее время. Говори от мужского лица.",
+        "expected": "Widziałem mój nowy samochód.",
+        "explanation": "Меняется только время глагола.",
+        "changes": [
+          {
+            "from": "Widzę",
+            "to": "Widziałem",
+            "reason": "Меняется только время глагола."
+          }
+        ],
+        "nounId": "car",
+        "adjectiveId": "new",
+        "possessive": "my",
+        "number": "sg",
+        "tags": [
+          "past",
+          "acc"
+        ]
+      },
+      "context": {
+        "randomDraws": [
+          0.22
+        ],
+        "drawsUsed": 1
+      }
+    },
+    {
+      "id": "C-08-03",
+      "input": {
+        "seed": {
+          "nounId": "car",
+          "adjectiveId": "new"
+        },
+        "step": 3
+      },
+      "expected": {
+        "id": "<generated-id>",
+        "primarySkill": "case.gen.neg",
+        "source": "Widziałem mój nowy samochód.",
+        "prompt": "Теперь сделай это предложение отрицательным.",
+        "expected": "Nie widziałem mojego nowego samochodu.",
+        "explanation": "Отрицание → Biernik меняется на Dopełniacz.",
+        "changes": [
+          {
+            "from": "mój nowy samochód",
+            "to": "mojego nowego samochodu",
+            "reason": "Отрицание → Biernik меняется на Dopełniacz."
+          }
+        ],
+        "nounId": "car",
+        "adjectiveId": "new",
+        "possessive": "my",
+        "number": "sg",
+        "tags": [
+          "gen",
+          "negation"
+        ]
+      },
+      "context": {
+        "randomDraws": [
+          0.33
+        ],
+        "drawsUsed": 1
+      }
+    },
+    {
+      "id": "C-08-04",
+      "input": {
+        "seed": {
+          "nounId": "car",
+          "adjectiveId": "new"
+        },
+        "step": 4
+      },
+      "expected": {
+        "id": "<generated-id>",
+        "primarySkill": "agreement.my",
+        "source": "Nie widziałem mojego nowego samochodu.",
+        "prompt": "Замени «мой / моя» на «их».",
+        "expected": "Nie widziałem ich nowego samochodu.",
+        "explanation": "ich не склоняется; прилагательное и существительное остаются в Dopełniaczu.",
+        "changes": [
+          {
+            "from": "mojego nowego samochodu",
+            "to": "ich nowego samochodu",
+            "reason": "ich не склоняется; прилагательное и существительное остаются в Dopełniaczu."
+          }
+        ],
+        "nounId": "car",
+        "adjectiveId": "new",
+        "possessive": "their",
+        "number": "sg",
+        "tags": [
+          "gen",
+          "agreement"
+        ]
+      },
+      "context": {
+        "randomDraws": [
+          0.44
+        ],
+        "drawsUsed": 1
+      }
+    },
+    {
+      "id": "C-08-05",
+      "input": {
+        "seed": {
+          "nounId": "car",
+          "adjectiveId": "new"
+        },
+        "step": 5
+      },
+      "expected": {
+        "id": "<generated-id>",
+        "primarySkill": "case.loc",
+        "source": "Nie widziałem ich nowego samochodu.",
+        "prompt": "Теперь скажи, что говоришь об этом. Начни с «Mówię o…».",
+        "expected": "Mówię o ich nowym samochodzie.",
+        "explanation": "o → Miejscownik. Сохрани владельца «их».",
+        "changes": [
+          {
+            "from": "ich nowego samochodu",
+            "to": "ich nowym samochodzie",
+            "reason": "o → Miejscownik. Сохрани владельца «их»."
+          }
+        ],
+        "nounId": "car",
+        "adjectiveId": "new",
+        "possessive": "their",
+        "number": "sg",
+        "tags": [
+          "loc"
+        ]
+      },
+      "context": {
+        "randomDraws": [
+          0.55
+        ],
+        "drawsUsed": 1
+      }
+    },
+    {
+      "id": "C-09-01",
+      "input": {
+        "seed": {
+          "nounId": "house",
+          "adjectiveId": "new"
+        },
+        "step": 1
+      },
+      "expected": {
+        "id": "<generated-id>",
+        "primarySkill": "case.acc.m",
+        "source": "To jest mój nowy dom.",
+        "prompt": "Скажи, что видишь это. Начни с «Widzę…».",
+        "expected": "Widzę mój nowy dom.",
+        "explanation": "Widzę → Biernik.",
+        "changes": [
+          {
+            "from": "mój nowy dom",
+            "to": "mój nowy dom",
+            "reason": "Widzę → Biernik."
+          }
+        ],
+        "nounId": "house",
+        "adjectiveId": "new",
+        "possessive": "my",
+        "number": "sg",
+        "tags": [
+          "acc"
+        ]
+      },
+      "context": {
+        "randomDraws": [
+          0.11
+        ],
+        "drawsUsed": 1
+      }
+    },
+    {
+      "id": "C-09-02",
+      "input": {
+        "seed": {
+          "nounId": "house",
+          "adjectiveId": "new"
+        },
+        "step": 2
+      },
+      "expected": {
+        "id": "<generated-id>",
+        "primarySkill": "verb.past",
+        "source": "Widzę mój nowy dom.",
+        "prompt": "Перенеси предложение в прошедшее время. Говори от мужского лица.",
+        "expected": "Widziałem mój nowy dom.",
+        "explanation": "Меняется только время глагола.",
+        "changes": [
+          {
+            "from": "Widzę",
+            "to": "Widziałem",
+            "reason": "Меняется только время глагола."
+          }
+        ],
+        "nounId": "house",
+        "adjectiveId": "new",
+        "possessive": "my",
+        "number": "sg",
+        "tags": [
+          "past",
+          "acc"
+        ]
+      },
+      "context": {
+        "randomDraws": [
+          0.22
+        ],
+        "drawsUsed": 1
+      }
+    },
+    {
+      "id": "C-09-03",
+      "input": {
+        "seed": {
+          "nounId": "house",
+          "adjectiveId": "new"
+        },
+        "step": 3
+      },
+      "expected": {
+        "id": "<generated-id>",
+        "primarySkill": "case.gen.neg",
+        "source": "Widziałem mój nowy dom.",
+        "prompt": "Теперь сделай это предложение отрицательным.",
+        "expected": "Nie widziałem mojego nowego domu.",
+        "explanation": "Отрицание → Biernik меняется на Dopełniacz.",
+        "changes": [
+          {
+            "from": "mój nowy dom",
+            "to": "mojego nowego domu",
+            "reason": "Отрицание → Biernik меняется на Dopełniacz."
+          }
+        ],
+        "nounId": "house",
+        "adjectiveId": "new",
+        "possessive": "my",
+        "number": "sg",
+        "tags": [
+          "gen",
+          "negation"
+        ]
+      },
+      "context": {
+        "randomDraws": [
+          0.33
+        ],
+        "drawsUsed": 1
+      }
+    },
+    {
+      "id": "C-09-04",
+      "input": {
+        "seed": {
+          "nounId": "house",
+          "adjectiveId": "new"
+        },
+        "step": 4
+      },
+      "expected": {
+        "id": "<generated-id>",
+        "primarySkill": "agreement.my",
+        "source": "Nie widziałem mojego nowego domu.",
+        "prompt": "Замени «мой / моя» на «их».",
+        "expected": "Nie widziałem ich nowego domu.",
+        "explanation": "ich не склоняется; прилагательное и существительное остаются в Dopełniaczu.",
+        "changes": [
+          {
+            "from": "mojego nowego domu",
+            "to": "ich nowego domu",
+            "reason": "ich не склоняется; прилагательное и существительное остаются в Dopełniaczu."
+          }
+        ],
+        "nounId": "house",
+        "adjectiveId": "new",
+        "possessive": "their",
+        "number": "sg",
+        "tags": [
+          "gen",
+          "agreement"
+        ]
+      },
+      "context": {
+        "randomDraws": [
+          0.44
+        ],
+        "drawsUsed": 1
+      }
+    },
+    {
+      "id": "C-09-05",
+      "input": {
+        "seed": {
+          "nounId": "house",
+          "adjectiveId": "new"
+        },
+        "step": 5
+      },
+      "expected": {
+        "id": "<generated-id>",
+        "primarySkill": "case.loc",
+        "source": "Nie widziałem ich nowego domu.",
+        "prompt": "Теперь скажи, что говоришь об этом. Начни с «Mówię o…».",
+        "expected": "Mówię o ich nowym domu.",
+        "explanation": "o → Miejscownik. Сохрани владельца «их».",
+        "changes": [
+          {
+            "from": "ich nowego domu",
+            "to": "ich nowym domu",
+            "reason": "o → Miejscownik. Сохрани владельца «их»."
+          }
+        ],
+        "nounId": "house",
+        "adjectiveId": "new",
+        "possessive": "their",
+        "number": "sg",
+        "tags": [
+          "loc"
+        ]
+      },
+      "context": {
+        "randomDraws": [
+          0.55
+        ],
+        "drawsUsed": 1
+      }
+    },
+    {
+      "id": "C-10-01",
+      "input": {
+        "seed": {
+          "nounId": "phone",
+          "adjectiveId": "new"
+        },
+        "step": 1
+      },
+      "expected": {
+        "id": "<generated-id>",
+        "primarySkill": "case.acc.m",
+        "source": "To jest mój nowy telefon.",
+        "prompt": "Скажи, что видишь это. Начни с «Widzę…».",
+        "expected": "Widzę mój nowy telefon.",
+        "explanation": "Widzę → Biernik.",
+        "changes": [
+          {
+            "from": "mój nowy telefon",
+            "to": "mój nowy telefon",
+            "reason": "Widzę → Biernik."
+          }
+        ],
+        "nounId": "phone",
+        "adjectiveId": "new",
+        "possessive": "my",
+        "number": "sg",
+        "tags": [
+          "acc"
+        ]
+      },
+      "context": {
+        "randomDraws": [
+          0.11
+        ],
+        "drawsUsed": 1
+      }
+    },
+    {
+      "id": "C-10-02",
+      "input": {
+        "seed": {
+          "nounId": "phone",
+          "adjectiveId": "new"
+        },
+        "step": 2
+      },
+      "expected": {
+        "id": "<generated-id>",
+        "primarySkill": "verb.past",
+        "source": "Widzę mój nowy telefon.",
+        "prompt": "Перенеси предложение в прошедшее время. Говори от мужского лица.",
+        "expected": "Widziałem mój nowy telefon.",
+        "explanation": "Меняется только время глагола.",
+        "changes": [
+          {
+            "from": "Widzę",
+            "to": "Widziałem",
+            "reason": "Меняется только время глагола."
+          }
+        ],
+        "nounId": "phone",
+        "adjectiveId": "new",
+        "possessive": "my",
+        "number": "sg",
+        "tags": [
+          "past",
+          "acc"
+        ]
+      },
+      "context": {
+        "randomDraws": [
+          0.22
+        ],
+        "drawsUsed": 1
+      }
+    },
+    {
+      "id": "C-10-03",
+      "input": {
+        "seed": {
+          "nounId": "phone",
+          "adjectiveId": "new"
+        },
+        "step": 3
+      },
+      "expected": {
+        "id": "<generated-id>",
+        "primarySkill": "case.gen.neg",
+        "source": "Widziałem mój nowy telefon.",
+        "prompt": "Теперь сделай это предложение отрицательным.",
+        "expected": "Nie widziałem mojego nowego telefonu.",
+        "explanation": "Отрицание → Biernik меняется на Dopełniacz.",
+        "changes": [
+          {
+            "from": "mój nowy telefon",
+            "to": "mojego nowego telefonu",
+            "reason": "Отрицание → Biernik меняется на Dopełniacz."
+          }
+        ],
+        "nounId": "phone",
+        "adjectiveId": "new",
+        "possessive": "my",
+        "number": "sg",
+        "tags": [
+          "gen",
+          "negation"
+        ]
+      },
+      "context": {
+        "randomDraws": [
+          0.33
+        ],
+        "drawsUsed": 1
+      }
+    },
+    {
+      "id": "C-10-04",
+      "input": {
+        "seed": {
+          "nounId": "phone",
+          "adjectiveId": "new"
+        },
+        "step": 4
+      },
+      "expected": {
+        "id": "<generated-id>",
+        "primarySkill": "agreement.my",
+        "source": "Nie widziałem mojego nowego telefonu.",
+        "prompt": "Замени «мой / моя» на «их».",
+        "expected": "Nie widziałem ich nowego telefonu.",
+        "explanation": "ich не склоняется; прилагательное и существительное остаются в Dopełniaczu.",
+        "changes": [
+          {
+            "from": "mojego nowego telefonu",
+            "to": "ich nowego telefonu",
+            "reason": "ich не склоняется; прилагательное и существительное остаются в Dopełniaczu."
+          }
+        ],
+        "nounId": "phone",
+        "adjectiveId": "new",
+        "possessive": "their",
+        "number": "sg",
+        "tags": [
+          "gen",
+          "agreement"
+        ]
+      },
+      "context": {
+        "randomDraws": [
+          0.44
+        ],
+        "drawsUsed": 1
+      }
+    },
+    {
+      "id": "C-10-05",
+      "input": {
+        "seed": {
+          "nounId": "phone",
+          "adjectiveId": "new"
+        },
+        "step": 5
+      },
+      "expected": {
+        "id": "<generated-id>",
+        "primarySkill": "case.loc",
+        "source": "Nie widziałem ich nowego telefonu.",
+        "prompt": "Теперь скажи, что говоришь об этом. Начни с «Mówię o…».",
+        "expected": "Mówię o ich nowym telefonie.",
+        "explanation": "o → Miejscownik. Сохрани владельца «их».",
+        "changes": [
+          {
+            "from": "ich nowego telefonu",
+            "to": "ich nowym telefonie",
+            "reason": "o → Miejscownik. Сохрани владельца «их»."
+          }
+        ],
+        "nounId": "phone",
+        "adjectiveId": "new",
+        "possessive": "their",
+        "number": "sg",
+        "tags": [
+          "loc"
+        ]
+      },
+      "context": {
+        "randomDraws": [
+          0.55
+        ],
+        "drawsUsed": 1
+      }
+    },
+    {
+      "id": "C-11-01",
+      "input": {
+        "seed": {
+          "nounId": "child",
+          "adjectiveId": "small"
+        },
+        "step": 1
+      },
+      "expected": {
+        "id": "<generated-id>",
+        "primarySkill": "case.acc.n",
+        "source": "To jest moje małe dziecko.",
+        "prompt": "Скажи, что видишь это. Начни с «Widzę…».",
+        "expected": "Widzę moje małe dziecko.",
+        "explanation": "Widzę → Biernik.",
+        "changes": [
+          {
+            "from": "moje małe dziecko",
+            "to": "moje małe dziecko",
+            "reason": "Widzę → Biernik."
+          }
+        ],
+        "nounId": "child",
+        "adjectiveId": "small",
+        "possessive": "my",
+        "number": "sg",
+        "tags": [
+          "acc"
+        ]
+      },
+      "context": {
+        "randomDraws": [
+          0.11
+        ],
+        "drawsUsed": 1
+      }
+    },
+    {
+      "id": "C-11-02",
+      "input": {
+        "seed": {
+          "nounId": "child",
+          "adjectiveId": "small"
+        },
+        "step": 2
+      },
+      "expected": {
+        "id": "<generated-id>",
+        "primarySkill": "verb.past",
+        "source": "Widzę moje małe dziecko.",
+        "prompt": "Перенеси предложение в прошедшее время. Говори от мужского лица.",
+        "expected": "Widziałem moje małe dziecko.",
+        "explanation": "Меняется только время глагола.",
+        "changes": [
+          {
+            "from": "Widzę",
+            "to": "Widziałem",
+            "reason": "Меняется только время глагола."
+          }
+        ],
+        "nounId": "child",
+        "adjectiveId": "small",
+        "possessive": "my",
+        "number": "sg",
+        "tags": [
+          "past",
+          "acc"
+        ]
+      },
+      "context": {
+        "randomDraws": [
+          0.22
+        ],
+        "drawsUsed": 1
+      }
+    },
+    {
+      "id": "C-11-03",
+      "input": {
+        "seed": {
+          "nounId": "child",
+          "adjectiveId": "small"
+        },
+        "step": 3
+      },
+      "expected": {
+        "id": "<generated-id>",
+        "primarySkill": "case.gen.neg",
+        "source": "Widziałem moje małe dziecko.",
+        "prompt": "Теперь сделай это предложение отрицательным.",
+        "expected": "Nie widziałem mojego małego dziecka.",
+        "explanation": "Отрицание → Biernik меняется на Dopełniacz.",
+        "changes": [
+          {
+            "from": "moje małe dziecko",
+            "to": "mojego małego dziecka",
+            "reason": "Отрицание → Biernik меняется на Dopełniacz."
+          }
+        ],
+        "nounId": "child",
+        "adjectiveId": "small",
+        "possessive": "my",
+        "number": "sg",
+        "tags": [
+          "gen",
+          "negation"
+        ]
+      },
+      "context": {
+        "randomDraws": [
+          0.33
+        ],
+        "drawsUsed": 1
+      }
+    },
+    {
+      "id": "C-11-04",
+      "input": {
+        "seed": {
+          "nounId": "child",
+          "adjectiveId": "small"
+        },
+        "step": 4
+      },
+      "expected": {
+        "id": "<generated-id>",
+        "primarySkill": "agreement.my",
+        "source": "Nie widziałem mojego małego dziecka.",
+        "prompt": "Замени «мой / моя» на «их».",
+        "expected": "Nie widziałem ich małego dziecka.",
+        "explanation": "ich не склоняется; прилагательное и существительное остаются в Dopełniaczu.",
+        "changes": [
+          {
+            "from": "mojego małego dziecka",
+            "to": "ich małego dziecka",
+            "reason": "ich не склоняется; прилагательное и существительное остаются в Dopełniaczu."
+          }
+        ],
+        "nounId": "child",
+        "adjectiveId": "small",
+        "possessive": "their",
+        "number": "sg",
+        "tags": [
+          "gen",
+          "agreement"
+        ]
+      },
+      "context": {
+        "randomDraws": [
+          0.44
+        ],
+        "drawsUsed": 1
+      }
+    },
+    {
+      "id": "C-11-05",
+      "input": {
+        "seed": {
+          "nounId": "child",
+          "adjectiveId": "small"
+        },
+        "step": 5
+      },
+      "expected": {
+        "id": "<generated-id>",
+        "primarySkill": "case.loc",
+        "source": "Nie widziałem ich małego dziecka.",
+        "prompt": "Теперь скажи, что говоришь об этом. Начни с «Mówię o…».",
+        "expected": "Mówię o ich małym dziecku.",
+        "explanation": "o → Miejscownik. Сохрани владельца «их».",
+        "changes": [
+          {
+            "from": "ich małego dziecka",
+            "to": "ich małym dziecku",
+            "reason": "o → Miejscownik. Сохрани владельца «их»."
+          }
+        ],
+        "nounId": "child",
+        "adjectiveId": "small",
+        "possessive": "their",
+        "number": "sg",
+        "tags": [
+          "loc"
+        ]
+      },
+      "context": {
+        "randomDraws": [
+          0.55
+        ],
+        "drawsUsed": 1
+      }
+    },
+    {
+      "id": "C-12-01",
+      "input": {
+        "seed": {
+          "nounId": "window",
+          "adjectiveId": "new"
+        },
+        "step": 1
+      },
+      "expected": {
+        "id": "<generated-id>",
+        "primarySkill": "case.acc.n",
+        "source": "To jest moje nowe okno.",
+        "prompt": "Скажи, что видишь это. Начни с «Widzę…».",
+        "expected": "Widzę moje nowe okno.",
+        "explanation": "Widzę → Biernik.",
+        "changes": [
+          {
+            "from": "moje nowe okno",
+            "to": "moje nowe okno",
+            "reason": "Widzę → Biernik."
+          }
+        ],
+        "nounId": "window",
+        "adjectiveId": "new",
+        "possessive": "my",
+        "number": "sg",
+        "tags": [
+          "acc"
+        ]
+      },
+      "context": {
+        "randomDraws": [
+          0.11
+        ],
+        "drawsUsed": 1
+      }
+    },
+    {
+      "id": "C-12-02",
+      "input": {
+        "seed": {
+          "nounId": "window",
+          "adjectiveId": "new"
+        },
+        "step": 2
+      },
+      "expected": {
+        "id": "<generated-id>",
+        "primarySkill": "verb.past",
+        "source": "Widzę moje nowe okno.",
+        "prompt": "Перенеси предложение в прошедшее время. Говори от мужского лица.",
+        "expected": "Widziałem moje nowe okno.",
+        "explanation": "Меняется только время глагола.",
+        "changes": [
+          {
+            "from": "Widzę",
+            "to": "Widziałem",
+            "reason": "Меняется только время глагола."
+          }
+        ],
+        "nounId": "window",
+        "adjectiveId": "new",
+        "possessive": "my",
+        "number": "sg",
+        "tags": [
+          "past",
+          "acc"
+        ]
+      },
+      "context": {
+        "randomDraws": [
+          0.22
+        ],
+        "drawsUsed": 1
+      }
+    },
+    {
+      "id": "C-12-03",
+      "input": {
+        "seed": {
+          "nounId": "window",
+          "adjectiveId": "new"
+        },
+        "step": 3
+      },
+      "expected": {
+        "id": "<generated-id>",
+        "primarySkill": "case.gen.neg",
+        "source": "Widziałem moje nowe okno.",
+        "prompt": "Теперь сделай это предложение отрицательным.",
+        "expected": "Nie widziałem mojego nowego okna.",
+        "explanation": "Отрицание → Biernik меняется на Dopełniacz.",
+        "changes": [
+          {
+            "from": "moje nowe okno",
+            "to": "mojego nowego okna",
+            "reason": "Отрицание → Biernik меняется на Dopełniacz."
+          }
+        ],
+        "nounId": "window",
+        "adjectiveId": "new",
+        "possessive": "my",
+        "number": "sg",
+        "tags": [
+          "gen",
+          "negation"
+        ]
+      },
+      "context": {
+        "randomDraws": [
+          0.33
+        ],
+        "drawsUsed": 1
+      }
+    },
+    {
+      "id": "C-12-04",
+      "input": {
+        "seed": {
+          "nounId": "window",
+          "adjectiveId": "new"
+        },
+        "step": 4
+      },
+      "expected": {
+        "id": "<generated-id>",
+        "primarySkill": "agreement.my",
+        "source": "Nie widziałem mojego nowego okna.",
+        "prompt": "Замени «мой / моя» на «их».",
+        "expected": "Nie widziałem ich nowego okna.",
+        "explanation": "ich не склоняется; прилагательное и существительное остаются в Dopełniaczu.",
+        "changes": [
+          {
+            "from": "mojego nowego okna",
+            "to": "ich nowego okna",
+            "reason": "ich не склоняется; прилагательное и существительное остаются в Dopełniaczu."
+          }
+        ],
+        "nounId": "window",
+        "adjectiveId": "new",
+        "possessive": "their",
+        "number": "sg",
+        "tags": [
+          "gen",
+          "agreement"
+        ]
+      },
+      "context": {
+        "randomDraws": [
+          0.44
+        ],
+        "drawsUsed": 1
+      }
+    },
+    {
+      "id": "C-12-05",
+      "input": {
+        "seed": {
+          "nounId": "window",
+          "adjectiveId": "new"
+        },
+        "step": 5
+      },
+      "expected": {
+        "id": "<generated-id>",
+        "primarySkill": "case.loc",
+        "source": "Nie widziałem ich nowego okna.",
+        "prompt": "Теперь скажи, что говоришь об этом. Начни с «Mówię o…».",
+        "expected": "Mówię o ich nowym oknie.",
+        "explanation": "o → Miejscownik. Сохрани владельца «их».",
+        "changes": [
+          {
+            "from": "ich nowego okna",
+            "to": "ich nowym oknie",
+            "reason": "o → Miejscownik. Сохрани владельца «их»."
+          }
+        ],
+        "nounId": "window",
+        "adjectiveId": "new",
+        "possessive": "their",
+        "number": "sg",
+        "tags": [
+          "loc"
+        ]
+      },
+      "context": {
+        "randomDraws": [
+          0.55
+        ],
+        "drawsUsed": 1
+      }
+    },
+    {
+      "id": "E-case.acc.n-preferred",
+      "input": {
+        "skillId": "case.acc.n",
+        "preferred": {
+          "nounId": "wife",
+          "adjectiveId": "beautiful"
+        }
+      },
+      "expected": {
+        "exercise": {
+          "id": "<generated-id>",
+          "primarySkill": "case.acc.n",
+          "source": "To jest moje małe dziecko.",
+          "prompt": "Скажи, что ты видишь этого человека или этот предмет. Начни с «Widzę…».",
+          "expected": "Widzę moje małe dziecko.",
+          "explanation": "Widzę требует Biernik. Согласуй притяжательное местоимение, прилагательное и существительное.",
+          "changes": [
+            {
+              "from": "moje małe dziecko",
+              "to": "moje małe dziecko",
+              "reason": "Biernik совпадает с Mianownikiem: группа сохраняет базовую форму."
+            }
+          ],
+          "nounId": "child",
+          "adjectiveId": "small",
+          "possessive": "my",
+          "number": "sg",
+          "tags": [
+            "acc",
+            "n"
+          ]
+        },
+        "drawsUsed": 2
+      },
+      "context": {
+        "randomDraws": [
+          0.34,
+          0.72,
+          0.18
+        ],
+        "nowIso": "2026-02-03T12:00:00.000Z"
+      }
+    },
+    {
+      "id": "E-case.acc.n-fallback",
+      "input": {
+        "skillId": "case.acc.n",
+        "preferred": {
+          "nounId": "window",
+          "adjectiveId": "new"
+        }
+      },
+      "expected": {
+        "exercise": {
+          "id": "<generated-id>",
+          "primarySkill": "case.acc.n",
+          "source": "To jest moje nowe okno.",
+          "prompt": "Скажи, что ты видишь этого человека или этот предмет. Начни с «Widzę…».",
+          "expected": "Widzę moje nowe okno.",
+          "explanation": "Widzę требует Biernik. Согласуй притяжательное местоимение, прилагательное и существительное.",
+          "changes": [
+            {
+              "from": "moje nowe okno",
+              "to": "moje nowe okno",
+              "reason": "Biernik совпадает с Mianownikiem: группа сохраняет базовую форму."
+            }
+          ],
+          "nounId": "window",
+          "adjectiveId": "new",
+          "possessive": "my",
+          "number": "sg",
+          "tags": [
+            "acc",
+            "n"
+          ]
+        },
+        "drawsUsed": 1
+      },
+      "context": {
+        "randomDraws": [
+          0.34,
+          0.72,
+          0.18
+        ],
+        "nowIso": "2026-02-03T12:00:00.000Z"
+      }
+    },
+    {
+      "id": "E-case.acc.n-random",
+      "input": {
+        "skillId": "case.acc.n",
+        "preferred": null
+      },
+      "expected": {
+        "exercise": {
+          "id": "<generated-id>",
+          "primarySkill": "case.acc.n",
+          "source": "To jest moje małe dziecko.",
+          "prompt": "Скажи, что ты видишь этого человека или этот предмет. Начни с «Widzę…».",
+          "expected": "Widzę moje małe dziecko.",
+          "explanation": "Widzę требует Biernik. Согласуй притяжательное местоимение, прилагательное и существительное.",
+          "changes": [
+            {
+              "from": "moje małe dziecko",
+              "to": "moje małe dziecko",
+              "reason": "Biernik совпадает с Mianownikiem: группа сохраняет базовую форму."
+            }
+          ],
+          "nounId": "child",
+          "adjectiveId": "small",
+          "possessive": "my",
+          "number": "sg",
+          "tags": [
+            "acc",
+            "n"
+          ]
+        },
+        "drawsUsed": 2
+      },
+      "context": {
+        "randomDraws": [
+          0.34,
+          0.72,
+          0.18
+        ],
+        "nowIso": "2026-02-03T12:00:00.000Z"
+      }
+    },
+    {
+      "id": "E-case.acc.f-preferred",
+      "input": {
+        "skillId": "case.acc.f",
+        "preferred": {
+          "nounId": "wife",
+          "adjectiveId": "beautiful"
+        }
+      },
+      "expected": {
+        "exercise": {
+          "id": "<generated-id>",
+          "primarySkill": "case.acc.f",
+          "source": "To jest moja piękna żona.",
+          "prompt": "Скажи, что ты видишь этого человека или этот предмет. Начни с «Widzę…».",
+          "expected": "Widzę moją piękną żonę.",
+          "explanation": "Widzę требует Biernik. Согласуй притяжательное местоимение, прилагательное и существительное.",
+          "changes": [
+            {
+              "from": "moja piękna żona",
+              "to": "moją piękną żonę",
+              "reason": "Изменяется вся группа слов."
+            }
+          ],
+          "nounId": "wife",
+          "adjectiveId": "beautiful",
+          "possessive": "my",
+          "number": "sg",
+          "tags": [
+            "acc",
+            "f"
+          ]
+        },
+        "drawsUsed": 1
+      },
+      "context": {
+        "randomDraws": [
+          0.34,
+          0.72,
+          0.18
+        ],
+        "nowIso": "2026-02-03T12:00:00.000Z"
+      }
+    },
+    {
+      "id": "E-case.acc.f-fallback",
+      "input": {
+        "skillId": "case.acc.f",
+        "preferred": {
+          "nounId": "window",
+          "adjectiveId": "new"
+        }
+      },
+      "expected": {
+        "exercise": {
+          "id": "<generated-id>",
+          "primarySkill": "case.acc.f",
+          "source": "To jest moja piękna żona.",
+          "prompt": "Скажи, что ты видишь этого человека или этот предмет. Начни с «Widzę…».",
+          "expected": "Widzę moją piękną żonę.",
+          "explanation": "Widzę требует Biernik. Согласуй притяжательное местоимение, прилагательное и существительное.",
+          "changes": [
+            {
+              "from": "moja piękna żona",
+              "to": "moją piękną żonę",
+              "reason": "Изменяется вся группа слов."
+            }
+          ],
+          "nounId": "wife",
+          "adjectiveId": "beautiful",
+          "possessive": "my",
+          "number": "sg",
+          "tags": [
+            "acc",
+            "f"
+          ]
+        },
+        "drawsUsed": 2
+      },
+      "context": {
+        "randomDraws": [
+          0.34,
+          0.72,
+          0.18
+        ],
+        "nowIso": "2026-02-03T12:00:00.000Z"
+      }
+    },
+    {
+      "id": "E-case.acc.f-random",
+      "input": {
+        "skillId": "case.acc.f",
+        "preferred": null
+      },
+      "expected": {
+        "exercise": {
+          "id": "<generated-id>",
+          "primarySkill": "case.acc.f",
+          "source": "To jest moja piękna żona.",
+          "prompt": "Скажи, что ты видишь этого человека или этот предмет. Начни с «Widzę…».",
+          "expected": "Widzę moją piękną żonę.",
+          "explanation": "Widzę требует Biernik. Согласуй притяжательное местоимение, прилагательное и существительное.",
+          "changes": [
+            {
+              "from": "moja piękna żona",
+              "to": "moją piękną żonę",
+              "reason": "Изменяется вся группа слов."
+            }
+          ],
+          "nounId": "wife",
+          "adjectiveId": "beautiful",
+          "possessive": "my",
+          "number": "sg",
+          "tags": [
+            "acc",
+            "f"
+          ]
+        },
+        "drawsUsed": 2
+      },
+      "context": {
+        "randomDraws": [
+          0.34,
+          0.72,
+          0.18
+        ],
+        "nowIso": "2026-02-03T12:00:00.000Z"
+      }
+    },
+    {
+      "id": "E-case.acc.m-preferred",
+      "input": {
+        "skillId": "case.acc.m",
+        "preferred": {
+          "nounId": "wife",
+          "adjectiveId": "beautiful"
+        }
+      },
+      "expected": {
+        "exercise": {
+          "id": "<generated-id>",
+          "primarySkill": "case.acc.m",
+          "source": "To jest mój mały syn.",
+          "prompt": "Скажи, что ты видишь этого человека или этот предмет. Начни с «Widzę…».",
+          "expected": "Widzę mojego małego syna.",
+          "explanation": "Widzę требует Biernik. Согласуй притяжательное местоимение, прилагательное и существительное.",
+          "changes": [
+            {
+              "from": "mój mały syn",
+              "to": "mojego małego syna",
+              "reason": "Изменяется вся группа слов."
+            }
+          ],
+          "nounId": "son",
+          "adjectiveId": "small",
+          "possessive": "my",
+          "number": "sg",
+          "tags": [
+            "acc",
+            "m-personal"
+          ]
+        },
+        "drawsUsed": 2
+      },
+      "context": {
+        "randomDraws": [
+          0.34,
+          0.72,
+          0.18
+        ],
+        "nowIso": "2026-02-03T12:00:00.000Z"
+      }
+    },
+    {
+      "id": "E-case.acc.m-fallback",
+      "input": {
+        "skillId": "case.acc.m",
+        "preferred": {
+          "nounId": "window",
+          "adjectiveId": "new"
+        }
+      },
+      "expected": {
+        "exercise": {
+          "id": "<generated-id>",
+          "primarySkill": "case.acc.m",
+          "source": "To jest mój mały syn.",
+          "prompt": "Скажи, что ты видишь этого человека или этот предмет. Начни с «Widzę…».",
+          "expected": "Widzę mojego małego syna.",
+          "explanation": "Widzę требует Biernik. Согласуй притяжательное местоимение, прилагательное и существительное.",
+          "changes": [
+            {
+              "from": "mój mały syn",
+              "to": "mojego małego syna",
+              "reason": "Изменяется вся группа слов."
+            }
+          ],
+          "nounId": "son",
+          "adjectiveId": "small",
+          "possessive": "my",
+          "number": "sg",
+          "tags": [
+            "acc",
+            "m-personal"
+          ]
+        },
+        "drawsUsed": 2
+      },
+      "context": {
+        "randomDraws": [
+          0.34,
+          0.72,
+          0.18
+        ],
+        "nowIso": "2026-02-03T12:00:00.000Z"
+      }
+    },
+    {
+      "id": "E-case.acc.m-random",
+      "input": {
+        "skillId": "case.acc.m",
+        "preferred": null
+      },
+      "expected": {
+        "exercise": {
+          "id": "<generated-id>",
+          "primarySkill": "case.acc.m",
+          "source": "To jest mój mały syn.",
+          "prompt": "Скажи, что ты видишь этого человека или этот предмет. Начни с «Widzę…».",
+          "expected": "Widzę mojego małego syna.",
+          "explanation": "Widzę требует Biernik. Согласуй притяжательное местоимение, прилагательное и существительное.",
+          "changes": [
+            {
+              "from": "mój mały syn",
+              "to": "mojego małego syna",
+              "reason": "Изменяется вся группа слов."
+            }
+          ],
+          "nounId": "son",
+          "adjectiveId": "small",
+          "possessive": "my",
+          "number": "sg",
+          "tags": [
+            "acc",
+            "m-personal"
+          ]
+        },
+        "drawsUsed": 2
+      },
+      "context": {
+        "randomDraws": [
+          0.34,
+          0.72,
+          0.18
+        ],
+        "nowIso": "2026-02-03T12:00:00.000Z"
+      }
+    },
+    {
+      "id": "E-case.gen.neg-preferred",
+      "input": {
+        "skillId": "case.gen.neg",
+        "preferred": {
+          "nounId": "wife",
+          "adjectiveId": "beautiful"
+        }
+      },
+      "expected": {
+        "exercise": {
+          "id": "<generated-id>",
+          "primarySkill": "case.gen.neg",
+          "source": "Widzę moją piękną żonę.",
+          "prompt": "Сделай всё предложение отрицательным.",
+          "expected": "Nie widzę mojej pięknej żony.",
+          "explanation": "Отрицание widzę переводит прямой объект из Biernika в Dopełniacz.",
+          "changes": [
+            {
+              "from": "moją piękną żonę",
+              "to": "mojej pięknej żony",
+              "reason": "Biernik → Dopełniacz"
+            }
+          ],
+          "nounId": "wife",
+          "adjectiveId": "beautiful",
+          "possessive": "my",
+          "number": "sg",
+          "tags": [
+            "gen",
+            "negation"
+          ]
+        },
+        "drawsUsed": 1
+      },
+      "context": {
+        "randomDraws": [
+          0.34,
+          0.72,
+          0.18
+        ],
+        "nowIso": "2026-02-03T12:00:00.000Z"
+      }
+    },
+    {
+      "id": "E-case.gen.neg-fallback",
+      "input": {
+        "skillId": "case.gen.neg",
+        "preferred": {
+          "nounId": "window",
+          "adjectiveId": "new"
+        }
+      },
+      "expected": {
+        "exercise": {
+          "id": "<generated-id>",
+          "primarySkill": "case.gen.neg",
+          "source": "Widzę moje nowe okno.",
+          "prompt": "Сделай всё предложение отрицательным.",
+          "expected": "Nie widzę mojego nowego okna.",
+          "explanation": "Отрицание widzę переводит прямой объект из Biernika в Dopełniacz.",
+          "changes": [
+            {
+              "from": "moje nowe okno",
+              "to": "mojego nowego okna",
+              "reason": "Biernik → Dopełniacz"
+            }
+          ],
+          "nounId": "window",
+          "adjectiveId": "new",
+          "possessive": "my",
+          "number": "sg",
+          "tags": [
+            "gen",
+            "negation"
+          ]
+        },
+        "drawsUsed": 1
+      },
+      "context": {
+        "randomDraws": [
+          0.34,
+          0.72,
+          0.18
+        ],
+        "nowIso": "2026-02-03T12:00:00.000Z"
+      }
+    },
+    {
+      "id": "E-case.gen.neg-random",
+      "input": {
+        "skillId": "case.gen.neg",
+        "preferred": null
+      },
+      "expected": {
+        "exercise": {
+          "id": "<generated-id>",
+          "primarySkill": "case.gen.neg",
+          "source": "Widzę mojego dobrego psa.",
+          "prompt": "Сделай всё предложение отрицательным.",
+          "expected": "Nie widzę mojego dobrego psa.",
+          "explanation": "Отрицание widzę переводит прямой объект из Biernika в Dopełniacz.",
+          "changes": [
+            {
+              "from": "mojego dobrego psa",
+              "to": "mojego dobrego psa",
+              "reason": "Biernik → Dopełniacz"
+            }
+          ],
+          "nounId": "dog",
+          "adjectiveId": "good",
+          "possessive": "my",
+          "number": "sg",
+          "tags": [
+            "gen",
+            "negation"
+          ]
+        },
+        "drawsUsed": 2
+      },
+      "context": {
+        "randomDraws": [
+          0.34,
+          0.72,
+          0.18
+        ],
+        "nowIso": "2026-02-03T12:00:00.000Z"
+      }
+    },
+    {
+      "id": "E-case.inst-preferred",
+      "input": {
+        "skillId": "case.inst",
+        "preferred": {
+          "nounId": "wife",
+          "adjectiveId": "beautiful"
+        }
+      },
+      "expected": {
+        "exercise": {
+          "id": "<generated-id>",
+          "primarySkill": "case.inst",
+          "source": "Widzę moją piękną żonę.",
+          "prompt": "Скажи, что идёшь вместе с этим человеком. Начни с «Idę z…».",
+          "expected": "Idę z moją piękną żoną.",
+          "explanation": "Новая конструкция задаёт падеж всей группы: местоимение + прилагательное + существительное.",
+          "changes": [
+            {
+              "from": "moją piękną żonę",
+              "to": "moją piękną żoną",
+              "reason": "z kim? czym? — Narzędnik"
+            }
+          ],
+          "nounId": "wife",
+          "adjectiveId": "beautiful",
+          "possessive": "my",
+          "number": "sg",
+          "tags": [
+            "inst"
+          ]
+        },
+        "drawsUsed": 1
+      },
+      "context": {
+        "randomDraws": [
+          0.34,
+          0.72,
+          0.18
+        ],
+        "nowIso": "2026-02-03T12:00:00.000Z"
+      }
+    },
+    {
+      "id": "E-case.inst-fallback",
+      "input": {
+        "skillId": "case.inst",
+        "preferred": {
+          "nounId": "window",
+          "adjectiveId": "new"
+        }
+      },
+      "expected": {
+        "exercise": {
+          "id": "<generated-id>",
+          "primarySkill": "case.inst",
+          "source": "Widzę mojego dobrego męża.",
+          "prompt": "Скажи, что идёшь вместе с этим человеком. Начни с «Idę z…».",
+          "expected": "Idę z moim dobrym mężem.",
+          "explanation": "Новая конструкция задаёт падеж всей группы: местоимение + прилагательное + существительное.",
+          "changes": [
+            {
+              "from": "mojego dobrego męża",
+              "to": "moim dobrym mężem",
+              "reason": "z kim? czym? — Narzędnik"
+            }
+          ],
+          "nounId": "husband",
+          "adjectiveId": "good",
+          "possessive": "my",
+          "number": "sg",
+          "tags": [
+            "inst"
+          ]
+        },
+        "drawsUsed": 2
+      },
+      "context": {
+        "randomDraws": [
+          0.34,
+          0.72,
+          0.18
+        ],
+        "nowIso": "2026-02-03T12:00:00.000Z"
+      }
+    },
+    {
+      "id": "E-case.inst-random",
+      "input": {
+        "skillId": "case.inst",
+        "preferred": null
+      },
+      "expected": {
+        "exercise": {
+          "id": "<generated-id>",
+          "primarySkill": "case.inst",
+          "source": "Widzę mojego dobrego męża.",
+          "prompt": "Скажи, что идёшь вместе с этим человеком. Начни с «Idę z…».",
+          "expected": "Idę z moim dobrym mężem.",
+          "explanation": "Новая конструкция задаёт падеж всей группы: местоимение + прилагательное + существительное.",
+          "changes": [
+            {
+              "from": "mojego dobrego męża",
+              "to": "moim dobrym mężem",
+              "reason": "z kim? czym? — Narzędnik"
+            }
+          ],
+          "nounId": "husband",
+          "adjectiveId": "good",
+          "possessive": "my",
+          "number": "sg",
+          "tags": [
+            "inst"
+          ]
+        },
+        "drawsUsed": 2
+      },
+      "context": {
+        "randomDraws": [
+          0.34,
+          0.72,
+          0.18
+        ],
+        "nowIso": "2026-02-03T12:00:00.000Z"
+      }
+    },
+    {
+      "id": "E-case.loc-preferred",
+      "input": {
+        "skillId": "case.loc",
+        "preferred": {
+          "nounId": "wife",
+          "adjectiveId": "beautiful"
+        }
+      },
+      "expected": {
+        "exercise": {
+          "id": "<generated-id>",
+          "primarySkill": "case.loc",
+          "source": "Widzę moją piękną żonę.",
+          "prompt": "Теперь скажи, что говоришь об этом. Начни с «Mówię o…».",
+          "expected": "Mówię o mojej pięknej żonie.",
+          "explanation": "Новая конструкция задаёт падеж всей группы: местоимение + прилагательное + существительное.",
+          "changes": [
+            {
+              "from": "moją piękną żonę",
+              "to": "mojej pięknej żonie",
+              "reason": "o kim? czym? — Miejscownik"
+            }
+          ],
+          "nounId": "wife",
+          "adjectiveId": "beautiful",
+          "possessive": "my",
+          "number": "sg",
+          "tags": [
+            "loc"
+          ]
+        },
+        "drawsUsed": 1
+      },
+      "context": {
+        "randomDraws": [
+          0.34,
+          0.72,
+          0.18
+        ],
+        "nowIso": "2026-02-03T12:00:00.000Z"
+      }
+    },
+    {
+      "id": "E-case.loc-fallback",
+      "input": {
+        "skillId": "case.loc",
+        "preferred": {
+          "nounId": "window",
+          "adjectiveId": "new"
+        }
+      },
+      "expected": {
+        "exercise": {
+          "id": "<generated-id>",
+          "primarySkill": "case.loc",
+          "source": "Widzę moje nowe okno.",
+          "prompt": "Теперь скажи, что говоришь об этом. Начни с «Mówię o…».",
+          "expected": "Mówię o moim nowym oknie.",
+          "explanation": "Новая конструкция задаёт падеж всей группы: местоимение + прилагательное + существительное.",
+          "changes": [
+            {
+              "from": "moje nowe okno",
+              "to": "moim nowym oknie",
+              "reason": "o kim? czym? — Miejscownik"
+            }
+          ],
+          "nounId": "window",
+          "adjectiveId": "new",
+          "possessive": "my",
+          "number": "sg",
+          "tags": [
+            "loc"
+          ]
+        },
+        "drawsUsed": 1
+      },
+      "context": {
+        "randomDraws": [
+          0.34,
+          0.72,
+          0.18
+        ],
+        "nowIso": "2026-02-03T12:00:00.000Z"
+      }
+    },
+    {
+      "id": "E-case.loc-random",
+      "input": {
+        "skillId": "case.loc",
+        "preferred": null
+      },
+      "expected": {
+        "exercise": {
+          "id": "<generated-id>",
+          "primarySkill": "case.loc",
+          "source": "Widzę mojego dobrego psa.",
+          "prompt": "Теперь скажи, что говоришь об этом. Начни с «Mówię o…».",
+          "expected": "Mówię o moim dobrym psie.",
+          "explanation": "Новая конструкция задаёт падеж всей группы: местоимение + прилагательное + существительное.",
+          "changes": [
+            {
+              "from": "mojego dobrego psa",
+              "to": "moim dobrym psie",
+              "reason": "o kim? czym? — Miejscownik"
+            }
+          ],
+          "nounId": "dog",
+          "adjectiveId": "good",
+          "possessive": "my",
+          "number": "sg",
+          "tags": [
+            "loc"
+          ]
+        },
+        "drawsUsed": 2
+      },
+      "context": {
+        "randomDraws": [
+          0.34,
+          0.72,
+          0.18
+        ],
+        "nowIso": "2026-02-03T12:00:00.000Z"
+      }
+    },
+    {
+      "id": "E-case.dat-preferred",
+      "input": {
+        "skillId": "case.dat",
+        "preferred": {
+          "nounId": "wife",
+          "adjectiveId": "beautiful"
+        }
+      },
+      "expected": {
+        "exercise": {
+          "id": "<generated-id>",
+          "primarySkill": "case.dat",
+          "source": "Widzę moją piękną żonę.",
+          "prompt": "Скажи, что даришь этому человеку подарок. Начни с «Daję prezent…».",
+          "expected": "Daję prezent mojej pięknej żonie.",
+          "explanation": "Новая конструкция задаёт падеж всей группы: местоимение + прилагательное + существительное.",
+          "changes": [
+            {
+              "from": "moją piękną żonę",
+              "to": "mojej pięknej żonie",
+              "reason": "komu? czemu? — Celownik"
+            }
+          ],
+          "nounId": "wife",
+          "adjectiveId": "beautiful",
+          "possessive": "my",
+          "number": "sg",
+          "tags": [
+            "dat"
+          ]
+        },
+        "drawsUsed": 1
+      },
+      "context": {
+        "randomDraws": [
+          0.34,
+          0.72,
+          0.18
+        ],
+        "nowIso": "2026-02-03T12:00:00.000Z"
+      }
+    },
+    {
+      "id": "E-case.dat-fallback",
+      "input": {
+        "skillId": "case.dat",
+        "preferred": {
+          "nounId": "window",
+          "adjectiveId": "new"
+        }
+      },
+      "expected": {
+        "exercise": {
+          "id": "<generated-id>",
+          "primarySkill": "case.dat",
+          "source": "Widzę mojego dobrego męża.",
+          "prompt": "Скажи, что даришь этому человеку подарок. Начни с «Daję prezent…».",
+          "expected": "Daję prezent mojemu dobremu mężowi.",
+          "explanation": "Новая конструкция задаёт падеж всей группы: местоимение + прилагательное + существительное.",
+          "changes": [
+            {
+              "from": "mojego dobrego męża",
+              "to": "mojemu dobremu mężowi",
+              "reason": "komu? czemu? — Celownik"
+            }
+          ],
+          "nounId": "husband",
+          "adjectiveId": "good",
+          "possessive": "my",
+          "number": "sg",
+          "tags": [
+            "dat"
+          ]
+        },
+        "drawsUsed": 2
+      },
+      "context": {
+        "randomDraws": [
+          0.34,
+          0.72,
+          0.18
+        ],
+        "nowIso": "2026-02-03T12:00:00.000Z"
+      }
+    },
+    {
+      "id": "E-case.dat-random",
+      "input": {
+        "skillId": "case.dat",
+        "preferred": null
+      },
+      "expected": {
+        "exercise": {
+          "id": "<generated-id>",
+          "primarySkill": "case.dat",
+          "source": "Widzę mojego dobrego męża.",
+          "prompt": "Скажи, что даришь этому человеку подарок. Начни с «Daję prezent…».",
+          "expected": "Daję prezent mojemu dobremu mężowi.",
+          "explanation": "Новая конструкция задаёт падеж всей группы: местоимение + прилагательное + существительное.",
+          "changes": [
+            {
+              "from": "mojego dobrego męża",
+              "to": "mojemu dobremu mężowi",
+              "reason": "komu? czemu? — Celownik"
+            }
+          ],
+          "nounId": "husband",
+          "adjectiveId": "good",
+          "possessive": "my",
+          "number": "sg",
+          "tags": [
+            "dat"
+          ]
+        },
+        "drawsUsed": 2
+      },
+      "context": {
+        "randomDraws": [
+          0.34,
+          0.72,
+          0.18
+        ],
+        "nowIso": "2026-02-03T12:00:00.000Z"
+      }
+    },
+    {
+      "id": "E-agreement.my-preferred",
+      "input": {
+        "skillId": "agreement.my",
+        "preferred": {
+          "nounId": "wife",
+          "adjectiveId": "beautiful"
+        }
+      },
+      "expected": {
+        "exercise": {
+          "id": "<generated-id>",
+          "primarySkill": "agreement.my",
+          "source": "Widzę moją piękną żonę.",
+          "prompt": "Замени «мой / моя» на «её». Сохрани время и смысл предложения.",
+          "expected": "Widzę jej piękną żonę.",
+          "explanation": "mój, twój, nasz, wasz согласуются с предметом обладания. jego, jej, ich не склоняются.",
+          "changes": [
+            {
+              "from": "moją piękną żonę",
+              "to": "jej piękną żonę",
+              "reason": "Меняем владельца, сохраняем Biernik."
+            }
+          ],
+          "nounId": "wife",
+          "adjectiveId": "beautiful",
+          "possessive": "her",
+          "number": "sg",
+          "tags": [
+            "agreement",
+            "acc"
+          ]
+        },
+        "drawsUsed": 2
+      },
+      "context": {
+        "randomDraws": [
+          0.34,
+          0.72,
+          0.18
+        ],
+        "nowIso": "2026-02-03T12:00:00.000Z"
+      }
+    },
+    {
+      "id": "E-agreement.my-fallback",
+      "input": {
+        "skillId": "agreement.my",
+        "preferred": {
+          "nounId": "window",
+          "adjectiveId": "new"
+        }
+      },
+      "expected": {
+        "exercise": {
+          "id": "<generated-id>",
+          "primarySkill": "agreement.my",
+          "source": "Widzę moje nowe okno.",
+          "prompt": "Замени «мой / моя» на «её». Сохрани время и смысл предложения.",
+          "expected": "Widzę jej nowe okno.",
+          "explanation": "mój, twój, nasz, wasz согласуются с предметом обладания. jego, jej, ich не склоняются.",
+          "changes": [
+            {
+              "from": "moje nowe okno",
+              "to": "jej nowe okno",
+              "reason": "Меняем владельца, сохраняем Biernik."
+            }
+          ],
+          "nounId": "window",
+          "adjectiveId": "new",
+          "possessive": "her",
+          "number": "sg",
+          "tags": [
+            "agreement",
+            "acc"
+          ]
+        },
+        "drawsUsed": 2
+      },
+      "context": {
+        "randomDraws": [
+          0.34,
+          0.72,
+          0.18
+        ],
+        "nowIso": "2026-02-03T12:00:00.000Z"
+      }
+    },
+    {
+      "id": "E-agreement.my-random",
+      "input": {
+        "skillId": "agreement.my",
+        "preferred": null
+      },
+      "expected": {
+        "exercise": {
+          "id": "<generated-id>",
+          "primarySkill": "agreement.my",
+          "source": "Widzę mojego dobrego psa.",
+          "prompt": "Замени «мой / моя» на «ваш / ваша». Сохрани время и смысл предложения.",
+          "expected": "Widzę waszego dobrego psa.",
+          "explanation": "mój, twój, nasz, wasz согласуются с предметом обладания. jego, jej, ich не склоняются.",
+          "changes": [
+            {
+              "from": "mojego dobrego psa",
+              "to": "waszego dobrego psa",
+              "reason": "Меняем владельца, сохраняем Biernik."
+            }
+          ],
+          "nounId": "dog",
+          "adjectiveId": "good",
+          "possessive": "yourPlural",
+          "number": "sg",
+          "tags": [
+            "agreement",
+            "acc"
+          ]
+        },
+        "drawsUsed": 3
+      },
+      "context": {
+        "randomDraws": [
+          0.34,
+          0.72,
+          0.18
+        ],
+        "nowIso": "2026-02-03T12:00:00.000Z"
+      }
+    },
+    {
+      "id": "E-verb.present-preferred",
+      "input": {
+        "skillId": "verb.present",
+        "preferred": {
+          "nounId": "wife",
+          "adjectiveId": "beautiful"
+        }
+      },
+      "expected": {
+        "exercise": {
+          "id": "<generated-id>",
+          "primarySkill": "verb.present",
+          "source": "Moja piękna żona szła do domu.",
+          "prompt": "Перенеси всё предложение в настоящее время.",
+          "expected": "Moja piękna żona idzie do domu.",
+          "explanation": "Подлежащее остаётся в Mianowniku. В прошедшем времени глагол согласуется с ним по роду.",
+          "changes": [
+            {
+              "from": "szła",
+              "to": "idzie",
+              "reason": "Меняется время глагола, остальные слова сохраняются."
+            }
+          ],
+          "nounId": "wife",
+          "adjectiveId": "beautiful",
+          "possessive": "my",
+          "number": "sg",
+          "tags": [
+            "verb",
+            "present",
+            "nom"
+          ],
+          "accepted": []
+        },
+        "drawsUsed": 1
+      },
+      "context": {
+        "randomDraws": [
+          0.34,
+          0.72,
+          0.18
+        ],
+        "nowIso": "2026-02-03T12:00:00.000Z"
+      }
+    },
+    {
+      "id": "E-verb.present-fallback",
+      "input": {
+        "skillId": "verb.present",
+        "preferred": {
+          "nounId": "window",
+          "adjectiveId": "new"
+        }
+      },
+      "expected": {
+        "exercise": {
+          "id": "<generated-id>",
+          "primarySkill": "verb.present",
+          "source": "Mój dobry mąż szedł do domu.",
+          "prompt": "Перенеси всё предложение в настоящее время.",
+          "expected": "Mój dobry mąż idzie do domu.",
+          "explanation": "Подлежащее остаётся в Mianowniku. В прошедшем времени глагол согласуется с ним по роду.",
+          "changes": [
+            {
+              "from": "szedł",
+              "to": "idzie",
+              "reason": "Меняется время глагола, остальные слова сохраняются."
+            }
+          ],
+          "nounId": "husband",
+          "adjectiveId": "good",
+          "possessive": "my",
+          "number": "sg",
+          "tags": [
+            "verb",
+            "present",
+            "nom"
+          ],
+          "accepted": []
+        },
+        "drawsUsed": 2
+      },
+      "context": {
+        "randomDraws": [
+          0.34,
+          0.72,
+          0.18
+        ],
+        "nowIso": "2026-02-03T12:00:00.000Z"
+      }
+    },
+    {
+      "id": "E-verb.present-random",
+      "input": {
+        "skillId": "verb.present",
+        "preferred": null
+      },
+      "expected": {
+        "exercise": {
+          "id": "<generated-id>",
+          "primarySkill": "verb.present",
+          "source": "Mój dobry mąż szedł do domu.",
+          "prompt": "Перенеси всё предложение в настоящее время.",
+          "expected": "Mój dobry mąż idzie do domu.",
+          "explanation": "Подлежащее остаётся в Mianowniku. В прошедшем времени глагол согласуется с ним по роду.",
+          "changes": [
+            {
+              "from": "szedł",
+              "to": "idzie",
+              "reason": "Меняется время глагола, остальные слова сохраняются."
+            }
+          ],
+          "nounId": "husband",
+          "adjectiveId": "good",
+          "possessive": "my",
+          "number": "sg",
+          "tags": [
+            "verb",
+            "present",
+            "nom"
+          ],
+          "accepted": []
+        },
+        "drawsUsed": 2
+      },
+      "context": {
+        "randomDraws": [
+          0.34,
+          0.72,
+          0.18
+        ],
+        "nowIso": "2026-02-03T12:00:00.000Z"
+      }
+    },
+    {
+      "id": "E-verb.past-preferred",
+      "input": {
+        "skillId": "verb.past",
+        "preferred": {
+          "nounId": "wife",
+          "adjectiveId": "beautiful"
+        }
+      },
+      "expected": {
+        "exercise": {
+          "id": "<generated-id>",
+          "primarySkill": "verb.past",
+          "source": "Moja piękna żona idzie do domu.",
+          "prompt": "Перенеси всё предложение в прошедшее время.",
+          "expected": "Moja piękna żona szła do domu.",
+          "explanation": "Подлежащее остаётся в Mianowniku. В прошедшем времени глагол согласуется с ним по роду.",
+          "changes": [
+            {
+              "from": "idzie",
+              "to": "szła",
+              "reason": "Меняется время глагола, остальные слова сохраняются."
+            }
+          ],
+          "nounId": "wife",
+          "adjectiveId": "beautiful",
+          "possessive": "my",
+          "number": "sg",
+          "tags": [
+            "verb",
+            "past",
+            "nom"
+          ],
+          "accepted": []
+        },
+        "drawsUsed": 1
+      },
+      "context": {
+        "randomDraws": [
+          0.34,
+          0.72,
+          0.18
+        ],
+        "nowIso": "2026-02-03T12:00:00.000Z"
+      }
+    },
+    {
+      "id": "E-verb.past-fallback",
+      "input": {
+        "skillId": "verb.past",
+        "preferred": {
+          "nounId": "window",
+          "adjectiveId": "new"
+        }
+      },
+      "expected": {
+        "exercise": {
+          "id": "<generated-id>",
+          "primarySkill": "verb.past",
+          "source": "Mój dobry mąż idzie do domu.",
+          "prompt": "Перенеси всё предложение в прошедшее время.",
+          "expected": "Mój dobry mąż szedł do domu.",
+          "explanation": "Подлежащее остаётся в Mianowniku. В прошедшем времени глагол согласуется с ним по роду.",
+          "changes": [
+            {
+              "from": "idzie",
+              "to": "szedł",
+              "reason": "Меняется время глагола, остальные слова сохраняются."
+            }
+          ],
+          "nounId": "husband",
+          "adjectiveId": "good",
+          "possessive": "my",
+          "number": "sg",
+          "tags": [
+            "verb",
+            "past",
+            "nom"
+          ],
+          "accepted": []
+        },
+        "drawsUsed": 2
+      },
+      "context": {
+        "randomDraws": [
+          0.34,
+          0.72,
+          0.18
+        ],
+        "nowIso": "2026-02-03T12:00:00.000Z"
+      }
+    },
+    {
+      "id": "E-verb.past-random",
+      "input": {
+        "skillId": "verb.past",
+        "preferred": null
+      },
+      "expected": {
+        "exercise": {
+          "id": "<generated-id>",
+          "primarySkill": "verb.past",
+          "source": "Mój dobry mąż idzie do domu.",
+          "prompt": "Перенеси всё предложение в прошедшее время.",
+          "expected": "Mój dobry mąż szedł do domu.",
+          "explanation": "Подлежащее остаётся в Mianowniku. В прошедшем времени глагол согласуется с ним по роду.",
+          "changes": [
+            {
+              "from": "idzie",
+              "to": "szedł",
+              "reason": "Меняется время глагола, остальные слова сохраняются."
+            }
+          ],
+          "nounId": "husband",
+          "adjectiveId": "good",
+          "possessive": "my",
+          "number": "sg",
+          "tags": [
+            "verb",
+            "past",
+            "nom"
+          ],
+          "accepted": []
+        },
+        "drawsUsed": 2
+      },
+      "context": {
+        "randomDraws": [
+          0.34,
+          0.72,
+          0.18
+        ],
+        "nowIso": "2026-02-03T12:00:00.000Z"
+      }
+    },
+    {
+      "id": "E-verb.future-preferred",
+      "input": {
+        "skillId": "verb.future",
+        "preferred": {
+          "nounId": "wife",
+          "adjectiveId": "beautiful"
+        }
+      },
+      "expected": {
+        "exercise": {
+          "id": "<generated-id>",
+          "primarySkill": "verb.future",
+          "source": "Moja piękna żona idzie do domu.",
+          "prompt": "Перенеси всё предложение в будущее время. Сохрани несовершенный вид.",
+          "expected": "Moja piękna żona będzie iść do domu.",
+          "explanation": "Подлежащее остаётся в Mianowniku. В прошедшем времени глагол согласуется с ним по роду.",
+          "changes": [
+            {
+              "from": "idzie",
+              "to": "będzie iść",
+              "reason": "Меняется время глагола, остальные слова сохраняются."
+            }
+          ],
+          "nounId": "wife",
+          "adjectiveId": "beautiful",
+          "possessive": "my",
+          "number": "sg",
+          "tags": [
+            "verb",
+            "future",
+            "nom"
+          ],
+          "accepted": [
+            "Moja piękna żona będzie szła do domu."
+          ]
+        },
+        "drawsUsed": 1
+      },
+      "context": {
+        "randomDraws": [
+          0.34,
+          0.72,
+          0.18
+        ],
+        "nowIso": "2026-02-03T12:00:00.000Z"
+      }
+    },
+    {
+      "id": "E-verb.future-fallback",
+      "input": {
+        "skillId": "verb.future",
+        "preferred": {
+          "nounId": "window",
+          "adjectiveId": "new"
+        }
+      },
+      "expected": {
+        "exercise": {
+          "id": "<generated-id>",
+          "primarySkill": "verb.future",
+          "source": "Mój dobry mąż idzie do domu.",
+          "prompt": "Перенеси всё предложение в будущее время. Сохрани несовершенный вид.",
+          "expected": "Mój dobry mąż będzie iść do domu.",
+          "explanation": "Подлежащее остаётся в Mianowniku. В прошедшем времени глагол согласуется с ним по роду.",
+          "changes": [
+            {
+              "from": "idzie",
+              "to": "będzie iść",
+              "reason": "Меняется время глагола, остальные слова сохраняются."
+            }
+          ],
+          "nounId": "husband",
+          "adjectiveId": "good",
+          "possessive": "my",
+          "number": "sg",
+          "tags": [
+            "verb",
+            "future",
+            "nom"
+          ],
+          "accepted": [
+            "Mój dobry mąż będzie szedł do domu."
+          ]
+        },
+        "drawsUsed": 2
+      },
+      "context": {
+        "randomDraws": [
+          0.34,
+          0.72,
+          0.18
+        ],
+        "nowIso": "2026-02-03T12:00:00.000Z"
+      }
+    },
+    {
+      "id": "E-verb.future-random",
+      "input": {
+        "skillId": "verb.future",
+        "preferred": null
+      },
+      "expected": {
+        "exercise": {
+          "id": "<generated-id>",
+          "primarySkill": "verb.future",
+          "source": "Mój dobry mąż idzie do domu.",
+          "prompt": "Перенеси всё предложение в будущее время. Сохрани несовершенный вид.",
+          "expected": "Mój dobry mąż będzie iść do domu.",
+          "explanation": "Подлежащее остаётся в Mianowniku. В прошедшем времени глагол согласуется с ним по роду.",
+          "changes": [
+            {
+              "from": "idzie",
+              "to": "będzie iść",
+              "reason": "Меняется время глагола, остальные слова сохраняются."
+            }
+          ],
+          "nounId": "husband",
+          "adjectiveId": "good",
+          "possessive": "my",
+          "number": "sg",
+          "tags": [
+            "verb",
+            "future",
+            "nom"
+          ],
+          "accepted": [
+            "Mój dobry mąż będzie szedł do domu."
+          ]
+        },
+        "drawsUsed": 2
+      },
+      "context": {
+        "randomDraws": [
+          0.34,
+          0.72,
+          0.18
+        ],
+        "nowIso": "2026-02-03T12:00:00.000Z"
+      }
+    },
+    {
+      "id": "E-aspect-preferred",
+      "input": {
+        "skillId": "aspect",
+        "preferred": {
+          "nounId": "wife",
+          "adjectiveId": "beautiful"
+        }
+      },
+      "expected": {
+        "exercise": {
+          "id": "<generated-id>",
+          "primarySkill": "aspect",
+          "source": "Dzisiaj kupuję nową książkę.",
+          "prompt": "Скажи, что вчера уже купил эту книгу: завершённый результат. Начни с «Wczoraj…».",
+          "expected": "Wczoraj kupiłem nową książkę.",
+          "explanation": "Процесс kupować → завершённый результат kupić. Форма kupiłam также правильная.",
+          "changes": [
+            {
+              "from": "kupuję",
+              "to": "kupiłem / kupiłam",
+              "reason": "Совершенный вид + прошедшее время."
+            }
+          ],
+          "nounId": "book",
+          "adjectiveId": "new",
+          "possessive": "my",
+          "number": "sg",
+          "tags": [
+            "aspect",
+            "past"
+          ],
+          "accepted": [
+            "Wczoraj kupiłam nową książkę."
+          ]
+        },
+        "drawsUsed": 1
+      },
+      "context": {
+        "randomDraws": [
+          0.34,
+          0.72,
+          0.18
+        ],
+        "nowIso": "2026-02-03T12:00:00.000Z"
+      }
+    },
+    {
+      "id": "E-aspect-fallback",
+      "input": {
+        "skillId": "aspect",
+        "preferred": {
+          "nounId": "window",
+          "adjectiveId": "new"
+        }
+      },
+      "expected": {
+        "exercise": {
+          "id": "<generated-id>",
+          "primarySkill": "aspect",
+          "source": "Dzisiaj kupuję nową książkę.",
+          "prompt": "Скажи, что вчера уже купил эту книгу: завершённый результат. Начни с «Wczoraj…».",
+          "expected": "Wczoraj kupiłem nową książkę.",
+          "explanation": "Процесс kupować → завершённый результат kupić. Форма kupiłam также правильная.",
+          "changes": [
+            {
+              "from": "kupuję",
+              "to": "kupiłem / kupiłam",
+              "reason": "Совершенный вид + прошедшее время."
+            }
+          ],
+          "nounId": "book",
+          "adjectiveId": "new",
+          "possessive": "my",
+          "number": "sg",
+          "tags": [
+            "aspect",
+            "past"
+          ],
+          "accepted": [
+            "Wczoraj kupiłam nową książkę."
+          ]
+        },
+        "drawsUsed": 1
+      },
+      "context": {
+        "randomDraws": [
+          0.34,
+          0.72,
+          0.18
+        ],
+        "nowIso": "2026-02-03T12:00:00.000Z"
+      }
+    },
+    {
+      "id": "E-aspect-random",
+      "input": {
+        "skillId": "aspect",
+        "preferred": null
+      },
+      "expected": {
+        "exercise": {
+          "id": "<generated-id>",
+          "primarySkill": "aspect",
+          "source": "Dzisiaj kupuję nową książkę.",
+          "prompt": "Скажи, что вчера уже купил эту книгу: завершённый результат. Начни с «Wczoraj…».",
+          "expected": "Wczoraj kupiłem nową książkę.",
+          "explanation": "Процесс kupować → завершённый результат kupić. Форма kupiłam также правильная.",
+          "changes": [
+            {
+              "from": "kupuję",
+              "to": "kupiłem / kupiłam",
+              "reason": "Совершенный вид + прошедшее время."
+            }
+          ],
+          "nounId": "book",
+          "adjectiveId": "new",
+          "possessive": "my",
+          "number": "sg",
+          "tags": [
+            "aspect",
+            "past"
+          ],
+          "accepted": [
+            "Wczoraj kupiłam nową książkę."
+          ]
+        },
+        "drawsUsed": 2
+      },
+      "context": {
+        "randomDraws": [
+          0.34,
+          0.72,
+          0.18
+        ],
+        "nowIso": "2026-02-03T12:00:00.000Z"
+      }
+    },
+    {
+      "id": "E-pronouns-preferred",
+      "input": {
+        "skillId": "pronouns",
+        "preferred": {
+          "nounId": "wife",
+          "adjectiveId": "beautiful"
+        }
+      },
+      "expected": {
+        "exercise": {
+          "id": "<generated-id>",
+          "primarySkill": "pronouns",
+          "source": "Widzę moją piękną żonę.",
+          "prompt": "Замени всю группу после «Widzę» одним личным местоимением.",
+          "expected": "Widzę ją.",
+          "explanation": "Местоимение заменяет всю группу слов и остаётся в Bierniku.",
+          "changes": [
+            {
+              "from": "moją piękną żonę",
+              "to": "ją",
+              "reason": "кого? что?"
+            }
+          ],
+          "nounId": "wife",
+          "adjectiveId": "beautiful",
+          "possessive": "my",
+          "number": "sg",
+          "tags": [
+            "pronoun",
+            "acc"
+          ]
+        },
+        "drawsUsed": 1
+      },
+      "context": {
+        "randomDraws": [
+          0.34,
+          0.72,
+          0.18
+        ],
+        "nowIso": "2026-02-03T12:00:00.000Z"
+      }
+    },
+    {
+      "id": "E-pronouns-fallback",
+      "input": {
+        "skillId": "pronouns",
+        "preferred": {
+          "nounId": "window",
+          "adjectiveId": "new"
+        }
+      },
+      "expected": {
+        "exercise": {
+          "id": "<generated-id>",
+          "primarySkill": "pronouns",
+          "source": "Widzę mojego dobrego męża.",
+          "prompt": "Замени всю группу после «Widzę» одним личным местоимением.",
+          "expected": "Widzę go.",
+          "explanation": "Местоимение заменяет всю группу слов и остаётся в Bierniku.",
+          "changes": [
+            {
+              "from": "mojego dobrego męża",
+              "to": "go",
+              "reason": "кого? что?"
+            }
+          ],
+          "nounId": "husband",
+          "adjectiveId": "good",
+          "possessive": "my",
+          "number": "sg",
+          "tags": [
+            "pronoun",
+            "acc"
+          ]
+        },
+        "drawsUsed": 2
+      },
+      "context": {
+        "randomDraws": [
+          0.34,
+          0.72,
+          0.18
+        ],
+        "nowIso": "2026-02-03T12:00:00.000Z"
+      }
+    },
+    {
+      "id": "E-pronouns-random",
+      "input": {
+        "skillId": "pronouns",
+        "preferred": null
+      },
+      "expected": {
+        "exercise": {
+          "id": "<generated-id>",
+          "primarySkill": "pronouns",
+          "source": "Widzę mojego dobrego męża.",
+          "prompt": "Замени всю группу после «Widzę» одним личным местоимением.",
+          "expected": "Widzę go.",
+          "explanation": "Местоимение заменяет всю группу слов и остаётся в Bierniku.",
+          "changes": [
+            {
+              "from": "mojego dobrego męża",
+              "to": "go",
+              "reason": "кого? что?"
+            }
+          ],
+          "nounId": "husband",
+          "adjectiveId": "good",
+          "possessive": "my",
+          "number": "sg",
+          "tags": [
+            "pronoun",
+            "acc"
+          ]
+        },
+        "drawsUsed": 2
+      },
+      "context": {
+        "randomDraws": [
+          0.34,
+          0.72,
+          0.18
+        ],
+        "nowIso": "2026-02-03T12:00:00.000Z"
+      }
+    },
+    {
+      "id": "E-mixed-preferred",
+      "input": {
+        "skillId": "mixed",
+        "preferred": {
+          "nounId": "wife",
+          "adjectiveId": "beautiful"
+        }
+      },
+      "expected": {
+        "exercise": {
+          "id": "<generated-id>",
+          "primarySkill": "mixed",
+          "source": "Widzę moją piękną żonę.",
+          "prompt": "Скажи «ты не видел…» в прошедшем времени. Сохрани «мой / моя».",
+          "expected": "Nie widziałeś mojej pięknej żony.",
+          "explanation": "TY + прошедшее время + отрицание. Отрицание требует Dopełniacza всей группы слов.",
+          "changes": [
+            {
+              "from": "Widzę",
+              "to": "Nie widziałeś / Nie widziałaś",
+              "reason": "Лицо + время + отрицание"
+            },
+            {
+              "from": "moją piękną żonę",
+              "to": "mojej pięknej żony",
+              "reason": "Biernik → Dopełniacz"
+            }
+          ],
+          "nounId": "wife",
+          "adjectiveId": "beautiful",
+          "possessive": "my",
+          "number": "sg",
+          "tags": [
+            "mixed",
+            "gen",
+            "past"
+          ],
+          "accepted": [
+            "Nie widziałaś mojej pięknej żony."
+          ]
+        },
+        "drawsUsed": 1
+      },
+      "context": {
+        "randomDraws": [
+          0.34,
+          0.72,
+          0.18
+        ],
+        "nowIso": "2026-02-03T12:00:00.000Z"
+      }
+    },
+    {
+      "id": "E-mixed-fallback",
+      "input": {
+        "skillId": "mixed",
+        "preferred": {
+          "nounId": "window",
+          "adjectiveId": "new"
+        }
+      },
+      "expected": {
+        "exercise": {
+          "id": "<generated-id>",
+          "primarySkill": "mixed",
+          "source": "Widzę moje nowe okno.",
+          "prompt": "Скажи «ты не видел…» в прошедшем времени. Сохрани «мой / моя».",
+          "expected": "Nie widziałeś mojego nowego okna.",
+          "explanation": "TY + прошедшее время + отрицание. Отрицание требует Dopełniacza всей группы слов.",
+          "changes": [
+            {
+              "from": "Widzę",
+              "to": "Nie widziałeś / Nie widziałaś",
+              "reason": "Лицо + время + отрицание"
+            },
+            {
+              "from": "moje nowe okno",
+              "to": "mojego nowego okna",
+              "reason": "Biernik → Dopełniacz"
+            }
+          ],
+          "nounId": "window",
+          "adjectiveId": "new",
+          "possessive": "my",
+          "number": "sg",
+          "tags": [
+            "mixed",
+            "gen",
+            "past"
+          ],
+          "accepted": [
+            "Nie widziałaś mojego nowego okna."
+          ]
+        },
+        "drawsUsed": 1
+      },
+      "context": {
+        "randomDraws": [
+          0.34,
+          0.72,
+          0.18
+        ],
+        "nowIso": "2026-02-03T12:00:00.000Z"
+      }
+    },
+    {
+      "id": "E-mixed-random",
+      "input": {
+        "skillId": "mixed",
+        "preferred": null
+      },
+      "expected": {
+        "exercise": {
+          "id": "<generated-id>",
+          "primarySkill": "mixed",
+          "source": "Widzę mojego dobrego psa.",
+          "prompt": "Скажи «ты не видел…» в прошедшем времени. Сохрани «мой / моя».",
+          "expected": "Nie widziałeś mojego dobrego psa.",
+          "explanation": "TY + прошедшее время + отрицание. Отрицание требует Dopełniacza всей группы слов.",
+          "changes": [
+            {
+              "from": "Widzę",
+              "to": "Nie widziałeś / Nie widziałaś",
+              "reason": "Лицо + время + отрицание"
+            },
+            {
+              "from": "mojego dobrego psa",
+              "to": "mojego dobrego psa",
+              "reason": "Biernik → Dopełniacz"
+            }
+          ],
+          "nounId": "dog",
+          "adjectiveId": "good",
+          "possessive": "my",
+          "number": "sg",
+          "tags": [
+            "mixed",
+            "gen",
+            "past"
+          ],
+          "accepted": [
+            "Nie widziałaś mojego dobrego psa."
+          ]
+        },
+        "drawsUsed": 2
+      },
+      "context": {
+        "randomDraws": [
+          0.34,
+          0.72,
+          0.18
+        ],
+        "nowIso": "2026-02-03T12:00:00.000Z"
+      }
+    },
+    {
+      "id": "E-sentence.question-preferred",
+      "input": {
+        "skillId": "sentence.question",
+        "preferred": {
+          "nounId": "wife",
+          "adjectiveId": "beautiful"
+        }
+      },
+      "expected": {
+        "exercise": {
+          "id": "<generated-id>",
+          "primarySkill": "sentence.question",
+          "source": "Widzisz moją piękną żonę.",
+          "prompt": "Сделай вопрос, на который можно ответить «да» или «нет». Начни с «Czy…».",
+          "expected": "Czy widzisz moją piękną żonę?",
+          "explanation": "Czy превращает утверждение в общий вопрос. Падеж объекта сохраняется.",
+          "changes": [
+            {
+              "from": "Widzisz",
+              "to": "Czy widzisz",
+              "reason": "Добавь вопросительное czy."
+            }
+          ],
+          "nounId": "wife",
+          "adjectiveId": "beautiful",
+          "possessive": "my",
+          "number": "sg",
+          "tags": [
+            "question",
+            "acc"
+          ]
+        },
+        "drawsUsed": 1
+      },
+      "context": {
+        "randomDraws": [
+          0.34,
+          0.72,
+          0.18
+        ],
+        "nowIso": "2026-02-03T12:00:00.000Z"
+      }
+    },
+    {
+      "id": "E-sentence.question-fallback",
+      "input": {
+        "skillId": "sentence.question",
+        "preferred": {
+          "nounId": "window",
+          "adjectiveId": "new"
+        }
+      },
+      "expected": {
+        "exercise": {
+          "id": "<generated-id>",
+          "primarySkill": "sentence.question",
+          "source": "Widzisz moje nowe okno.",
+          "prompt": "Сделай вопрос, на который можно ответить «да» или «нет». Начни с «Czy…».",
+          "expected": "Czy widzisz moje nowe okno?",
+          "explanation": "Czy превращает утверждение в общий вопрос. Падеж объекта сохраняется.",
+          "changes": [
+            {
+              "from": "Widzisz",
+              "to": "Czy widzisz",
+              "reason": "Добавь вопросительное czy."
+            }
+          ],
+          "nounId": "window",
+          "adjectiveId": "new",
+          "possessive": "my",
+          "number": "sg",
+          "tags": [
+            "question",
+            "acc"
+          ]
+        },
+        "drawsUsed": 1
+      },
+      "context": {
+        "randomDraws": [
+          0.34,
+          0.72,
+          0.18
+        ],
+        "nowIso": "2026-02-03T12:00:00.000Z"
+      }
+    },
+    {
+      "id": "E-sentence.question-random",
+      "input": {
+        "skillId": "sentence.question",
+        "preferred": null
+      },
+      "expected": {
+        "exercise": {
+          "id": "<generated-id>",
+          "primarySkill": "sentence.question",
+          "source": "Widzisz mojego dobrego psa.",
+          "prompt": "Сделай вопрос, на который можно ответить «да» или «нет». Начни с «Czy…».",
+          "expected": "Czy widzisz mojego dobrego psa?",
+          "explanation": "Czy превращает утверждение в общий вопрос. Падеж объекта сохраняется.",
+          "changes": [
+            {
+              "from": "Widzisz",
+              "to": "Czy widzisz",
+              "reason": "Добавь вопросительное czy."
+            }
+          ],
+          "nounId": "dog",
+          "adjectiveId": "good",
+          "possessive": "my",
+          "number": "sg",
+          "tags": [
+            "question",
+            "acc"
+          ]
+        },
+        "drawsUsed": 2
+      },
+      "context": {
+        "randomDraws": [
+          0.34,
+          0.72,
+          0.18
+        ],
+        "nowIso": "2026-02-03T12:00:00.000Z"
+      }
+    },
+    {
+      "id": "E-sentence.plural-preferred",
+      "input": {
+        "skillId": "sentence.plural",
+        "preferred": {
+          "nounId": "wife",
+          "adjectiveId": "beautiful"
+        }
+      },
+      "expected": {
+        "exercise": {
+          "id": "<generated-id>",
+          "primarySkill": "sentence.plural",
+          "source": "Widzę moją piękną żonę.",
+          "prompt": "Поставь всю группу после «Widzę» во множественное число.",
+          "expected": "Widzę moje piękne żony.",
+          "explanation": "Во множественном числе мужские личные формы отличаются от остальных: moich dobrych kolegów, но moje nowe książki.",
+          "changes": [
+            {
+              "from": "moją piękną żonę",
+              "to": "moje piękne żony",
+              "reason": "Меняются число и согласование всей группы."
+            }
+          ],
+          "nounId": "wife",
+          "adjectiveId": "beautiful",
+          "possessive": "my",
+          "number": "pl",
+          "tags": [
+            "plural",
+            "acc"
+          ]
+        },
+        "drawsUsed": 1
+      },
+      "context": {
+        "randomDraws": [
+          0.34,
+          0.72,
+          0.18
+        ],
+        "nowIso": "2026-02-03T12:00:00.000Z"
+      }
+    },
+    {
+      "id": "E-sentence.plural-fallback",
+      "input": {
+        "skillId": "sentence.plural",
+        "preferred": {
+          "nounId": "window",
+          "adjectiveId": "new"
+        }
+      },
+      "expected": {
+        "exercise": {
+          "id": "<generated-id>",
+          "primarySkill": "sentence.plural",
+          "source": "Widzę moje nowe okno.",
+          "prompt": "Поставь всю группу после «Widzę» во множественное число.",
+          "expected": "Widzę moje nowe okna.",
+          "explanation": "Во множественном числе мужские личные формы отличаются от остальных: moich dobrych kolegów, но moje nowe książki.",
+          "changes": [
+            {
+              "from": "moje nowe okno",
+              "to": "moje nowe okna",
+              "reason": "Меняются число и согласование всей группы."
+            }
+          ],
+          "nounId": "window",
+          "adjectiveId": "new",
+          "possessive": "my",
+          "number": "pl",
+          "tags": [
+            "plural",
+            "acc"
+          ]
+        },
+        "drawsUsed": 1
+      },
+      "context": {
+        "randomDraws": [
+          0.34,
+          0.72,
+          0.18
+        ],
+        "nowIso": "2026-02-03T12:00:00.000Z"
+      }
+    },
+    {
+      "id": "E-sentence.plural-random",
+      "input": {
+        "skillId": "sentence.plural",
+        "preferred": null
+      },
+      "expected": {
+        "exercise": {
+          "id": "<generated-id>",
+          "primarySkill": "sentence.plural",
+          "source": "Widzę mojego dobrego psa.",
+          "prompt": "Поставь всю группу после «Widzę» во множественное число.",
+          "expected": "Widzę moje dobre psy.",
+          "explanation": "Во множественном числе мужские личные формы отличаются от остальных: moich dobrych kolegów, но moje nowe książki.",
+          "changes": [
+            {
+              "from": "mojego dobrego psa",
+              "to": "moje dobre psy",
+              "reason": "Меняются число и согласование всей группы."
+            }
+          ],
+          "nounId": "dog",
+          "adjectiveId": "good",
+          "possessive": "my",
+          "number": "pl",
+          "tags": [
+            "plural",
+            "acc"
+          ]
+        },
+        "drawsUsed": 2
+      },
+      "context": {
+        "randomDraws": [
+          0.34,
+          0.72,
+          0.18
+        ],
+        "nowIso": "2026-02-03T12:00:00.000Z"
+      }
+    },
+    {
+      "id": "E-agreement.my-accepted",
+      "input": {
+        "skillId": "agreement.my",
+        "preferred": {
+          "nounId": "wife",
+          "adjectiveId": "beautiful"
+        }
+      },
+      "expected": {
+        "exercise": {
+          "id": "<generated-id>",
+          "primarySkill": "agreement.my",
+          "source": "Widzę moją piękną żonę.",
+          "prompt": "Замени «мой / моя» на «его». Сохрани время и смысл предложения.",
+          "expected": "Widzę jego piękną żonę.",
+          "explanation": "mój, twój, nasz, wasz согласуются с предметом обладания. jego, jej, ich не склоняются.",
+          "changes": [
+            {
+              "from": "moją piękną żonę",
+              "to": "jego piękną żonę",
+              "reason": "Меняем владельца, сохраняем Biernik."
+            }
+          ],
+          "nounId": "wife",
+          "adjectiveId": "beautiful",
+          "possessive": "his",
+          "number": "sg",
+          "tags": [
+            "agreement",
+            "acc"
+          ]
+        },
+        "drawsUsed": 2
+      },
+      "context": {
+        "nowIso": "2026-02-03T12:00:00.000Z",
+        "randomDraws": [
+          0.2,
+          0.4,
+          0.6
+        ]
+      }
+    },
+    {
+      "id": "E-verb.future-accepted",
+      "input": {
+        "skillId": "verb.future",
+        "preferred": {
+          "nounId": "husband",
+          "adjectiveId": "good"
+        }
+      },
+      "expected": {
+        "exercise": {
+          "id": "<generated-id>",
+          "primarySkill": "verb.future",
+          "source": "Mój dobry mąż idzie do domu.",
+          "prompt": "Перенеси всё предложение в будущее время. Сохрани несовершенный вид.",
+          "expected": "Mój dobry mąż będzie iść do domu.",
+          "explanation": "Подлежащее остаётся в Mianowniku. В прошедшем времени глагол согласуется с ним по роду.",
+          "changes": [
+            {
+              "from": "idzie",
+              "to": "będzie iść",
+              "reason": "Меняется время глагола, остальные слова сохраняются."
+            }
+          ],
+          "nounId": "husband",
+          "adjectiveId": "good",
+          "possessive": "my",
+          "number": "sg",
+          "tags": [
+            "verb",
+            "future",
+            "nom"
+          ],
+          "accepted": [
+            "Mój dobry mąż będzie szedł do domu."
+          ]
+        },
+        "drawsUsed": 1
+      },
+      "context": {
+        "nowIso": "2026-02-03T12:00:00.000Z",
+        "randomDraws": [
+          0.2,
+          0.4,
+          0.6
+        ]
+      }
+    },
+    {
+      "id": "E-aspect-accepted",
+      "input": {
+        "skillId": "aspect",
+        "preferred": {
+          "nounId": "book",
+          "adjectiveId": "new"
+        }
+      },
+      "expected": {
+        "exercise": {
+          "id": "<generated-id>",
+          "primarySkill": "aspect",
+          "source": "Dzisiaj kupuję nową książkę.",
+          "prompt": "Скажи, что вчера уже купил эту книгу: завершённый результат. Начни с «Wczoraj…».",
+          "expected": "Wczoraj kupiłem nową książkę.",
+          "explanation": "Процесс kupować → завершённый результат kupić. Форма kupiłam также правильная.",
+          "changes": [
+            {
+              "from": "kupuję",
+              "to": "kupiłem / kupiłam",
+              "reason": "Совершенный вид + прошедшее время."
+            }
+          ],
+          "nounId": "book",
+          "adjectiveId": "new",
+          "possessive": "my",
+          "number": "sg",
+          "tags": [
+            "aspect",
+            "past"
+          ],
+          "accepted": [
+            "Wczoraj kupiłam nową książkę."
+          ]
+        },
+        "drawsUsed": 1
+      },
+      "context": {
+        "nowIso": "2026-02-03T12:00:00.000Z",
+        "randomDraws": [
+          0.2,
+          0.4,
+          0.6
+        ]
+      }
+    },
+    {
+      "id": "E-mixed-accepted",
+      "input": {
+        "skillId": "mixed",
+        "preferred": {
+          "nounId": "wife",
+          "adjectiveId": "beautiful"
+        }
+      },
+      "expected": {
+        "exercise": {
+          "id": "<generated-id>",
+          "primarySkill": "mixed",
+          "source": "Widzę moją piękną żonę.",
+          "prompt": "Скажи «ты не видел…» в прошедшем времени. Сохрани «мой / моя».",
+          "expected": "Nie widziałeś mojej pięknej żony.",
+          "explanation": "TY + прошедшее время + отрицание. Отрицание требует Dopełniacza всей группы слов.",
+          "changes": [
+            {
+              "from": "Widzę",
+              "to": "Nie widziałeś / Nie widziałaś",
+              "reason": "Лицо + время + отрицание"
+            },
+            {
+              "from": "moją piękną żonę",
+              "to": "mojej pięknej żony",
+              "reason": "Biernik → Dopełniacz"
+            }
+          ],
+          "nounId": "wife",
+          "adjectiveId": "beautiful",
+          "possessive": "my",
+          "number": "sg",
+          "tags": [
+            "mixed",
+            "gen",
+            "past"
+          ],
+          "accepted": [
+            "Nie widziałaś mojej pięknej żony."
+          ]
+        },
+        "drawsUsed": 1
+      },
+      "context": {
+        "nowIso": "2026-02-03T12:00:00.000Z",
+        "randomDraws": [
+          0.2,
+          0.4,
+          0.6
+        ]
+      }
+    }
+  ]
+}

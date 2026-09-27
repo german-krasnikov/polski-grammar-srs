@@ -14,6 +14,7 @@ import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 import kotlinx.serialization.json.put
 import polski.data.VocabularyItem
+import polski.data.packRegistry
 import polski.data.vocabularyItems
 import polski.srs.CardDecodeResult
 import polski.srs.Rating
@@ -33,9 +34,11 @@ data class VocabularyDocument(
 )
 
 object VocabularyCodec {
-    const val key = "polski-vocabulary-pl-ru-v1"
+    /** UC-04: was the literal `"pl-ru"` — now the active pack's [polski.data.CoursePack.pairId],
+     * same wire value until a second pack exists. */
+    val key: String by lazy { "polski-vocabulary-${packRegistry.active.pairId}-v1" }
 
-    fun cardKey(id: String, direction: StudyDirection): String = "pl-ru:vocabulary:${direction.wire}:$id"
+    fun cardKey(id: String, direction: StudyDirection): String = "${packRegistry.active.pairId}:vocabulary:${direction.wire}:$id"
 
     fun dueIds(document: VocabularyDocument, direction: StudyDirection, scheduler: Scheduler, at: Instant): List<String> =
         document.selectedIds.filter { id ->
@@ -93,13 +96,14 @@ object VocabularyCodec {
         }
         require(document.selectedIds.distinct().size == document.selectedIds.size)
         require(document.selectedIds.all { item(document, it) != null })
-        require(document.cards.keys.all { it.startsWith("pl-ru:vocabulary:ru-pl:") || it.startsWith("pl-ru:vocabulary:pl-ru:") })
+        val pairId = packRegistry.active.pairId
+        require(document.cards.keys.all { it.startsWith("$pairId:vocabulary:ru-pl:") || it.startsWith("$pairId:vocabulary:pl-ru:") })
         return document
     }
 
     fun decode(raw: String): VocabularyDocument {
         val root = Json.parseToJsonElement(raw).jsonObject
-        require(root.getValue("version").jsonPrimitive.int == 1 && root.getValue("pair").jsonPrimitive.content == "pl-ru")
+        require(root.getValue("version").jsonPrimitive.int == 1 && root.getValue("pair").jsonPrimitive.content == packRegistry.active.pairId)
         val selected = root.getValue("selectedIds").jsonArray.map { it.jsonPrimitive.content }
         val custom = root.getValue("custom").jsonArray.map { element ->
             val value = element.jsonObject
@@ -123,7 +127,7 @@ object VocabularyCodec {
     fun encode(document: VocabularyDocument): String = buildJsonObject {
         validate(document)
         put("version", 1)
-        put("pair", "pl-ru")
+        put("pair", packRegistry.active.pairId)
         put("selectedIds", buildJsonArray { document.selectedIds.forEach { add(JsonPrimitive(it)) } })
         put("custom", buildJsonArray { document.custom.forEach { item -> add(buildJsonObject {
             put("id", item.id); put("lemma", item.lemma); put("translation", item.translation)

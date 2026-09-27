@@ -1,5 +1,7 @@
 package polski.preferences
 
+import polski.data.packRegistry
+
 /** UC-10: a display preference, not a diagnosis — задания, FSRS и оценки одинаковы во всех стилях. */
 enum class PreferredStyle { RuleFirst, SituationFirst, NativeContrast, MinimalTheory }
 enum class PreferredAnswerMode { Oral, Typed }
@@ -21,7 +23,8 @@ data class ReminderPreferences(
  */
 data class UserPreferencesV2(
     val schemaVersion: Int = 3,
-    val coursePair: String = "pl-ru",
+    /** UC-04: was the literal `"pl-ru"` — now the active pack's [polski.data.CoursePack.pairId]. */
+    val coursePair: String = packRegistry.active.pairId,
     val styleId: PreferredStyle = PreferredStyle.RuleFirst,
     val answerMode: PreferredAnswerMode = PreferredAnswerMode.Oral,
     val appearance: Appearance = Appearance.System,

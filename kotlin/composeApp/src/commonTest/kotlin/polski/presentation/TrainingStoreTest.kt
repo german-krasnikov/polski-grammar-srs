@@ -322,6 +322,23 @@ class TrainingStoreTest {
         store.close()
     }
 
+    /** UniversalCorePlan.md §6: a card for a skillId outside the active pack (e.g. left over from
+     *  a future multi-pack switch) must never reach [polski.training.ExerciseFactory] — it used to
+     *  crash the whole store instead of just being skipped as not-yet-actionable. */
+    @Test
+    fun scheduleSkipsForeignSkillIdInsteadOfCrashing() = runTest {
+        val base = ProgressCodec.fresh(skills.map { it.id }, at, "2026-09-23", scheduler)
+        val foreignCard = StoredCard("zh:verb.tense", SrsCard(Instant.fromEpochMilliseconds(at.toEpochMilliseconds() - 3_600_000L)))
+        val withForeign = base.copy(progress = base.progress.copy(cards = base.progress.cards + foreignCard))
+        val store = newStore(FakeRepository(withForeign), backgroundScope)
+        store.start()
+        assertEquals(skills.size, store.state.value.dueCount)
+        store.dispatch(AppAction.StartSchedule)
+        assertEquals(CardPhase.Question, store.state.value.phase)
+        assertTrue(store.state.value.exercise!!.primarySkill in skills.map { it.id })
+        store.close()
+    }
+
     @Test
     fun invalidLoadPreservesRawForExportAndBlocksReview() = runTest {
         val repo = FakeRepository(ProgressCodec.fresh(skills.map { it.id }, at, "2026-09-23", scheduler))
