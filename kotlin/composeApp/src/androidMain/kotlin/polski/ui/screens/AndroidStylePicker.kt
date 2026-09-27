@@ -17,13 +17,20 @@ import polski.data.styleContentBySkillId
 import polski.presentation.StyleComposer
 import polski.presentation.StyleId
 import polski.presentation.StyleRegistry
+import polski.presentation.builtInStyleIds
 
 /**
- * UC-10/S1 settings picker for [StyleId] — the 4 recipes from [StyleRegistry], never a literal
- * list owned by this composable. [currentSkillId] (the exercise on screen, if any) drives the
- * fallback hint: a style whose `requires` isn't met for that one skill stays selectable — it is a
- * preference across all 16 skills, not just this one — but shows which style it currently falls
- * back to, so picking "Через сравнение с родным" is never a silent no-op.
+ * UC-10/S1 settings picker for [StyleId] — the 4 [builtInStyleIds], never a hand-written literal
+ * list. [currentSkillId] (the exercise on screen, if any) drives the fallback hint: a style whose
+ * `requires` isn't met for that one skill stays selectable — it is a preference across all 16
+ * skills, not just this one — but shows which style it currently falls back to, so picking
+ * "Через сравнение с родным" is never a silent no-op.
+ *
+ * UC-01: [StyleRegistry] itself is open to any recipe id a new `courses/styles` JSON file declares,
+ * but this picker stays bounded to the 4 built-in ids (matching Desktop's and Web's own pickers)
+ * because `AndroidSessionViewModel.persistStyle` persists through the still-closed
+ * [polski.preferences.PreferredStyle] enum — enumerating every registry id here would let this
+ * picker dispatch an id no host can persist. Auto-discovering new styles is a later task.
  */
 @Composable
 fun AndroidStylePicker(
@@ -35,7 +42,7 @@ fun AndroidStylePicker(
     val registry = StyleRegistry.recipes
     val content = currentSkillId?.let(::styleContentBySkillId)
     Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
-        registry.keys.forEach { styleId ->
+        builtInStyleIds.forEach { styleId ->
             val recipe = registry.getValue(styleId)
             val fallbackId = content?.let { StyleComposer.resolveEffectiveStyle(recipe, it, registry) }?.takeIf { it != styleId }
             Row(

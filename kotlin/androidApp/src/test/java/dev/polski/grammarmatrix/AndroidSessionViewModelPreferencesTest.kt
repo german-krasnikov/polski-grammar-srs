@@ -16,6 +16,7 @@ import org.robolectric.RuntimeEnvironment
 import polski.preferences.Motion
 import polski.preferences.PreferencesLoad
 import polski.preferences.UserPreferencesV2
+import polski.presentation.StyleId
 
 /** M9: Android settings gained Motion and swipe-rating toggles bound to the shared preferences document. */
 @RunWith(RobolectricTestRunner::class)
@@ -46,6 +47,18 @@ class AndroidSessionViewModelPreferencesTest {
         session.setSwipeRatingEnabled(false)
         assertEquals(false, session.preferences.swipeRatingEnabled)
         awaitSaved(context) { !it.swipeRatingEnabled }
+    }
+
+    // UC-01 correction: StyleId is open (any StyleRegistry recipe id), but PreferredStyle stays the
+    // closed 4-value enum — persistStyle must not crash when StyleRegistry loads a 5th recipe
+    // whose id PreferredStyle doesn't know, since AppUiState.styleId (and this LaunchedEffect
+    // call) accepts any StyleId regardless of which picker is on screen.
+    @Test fun persistingAnUnknownStyleIdDoesNotCrashAndLeavesPreferencesUnchanged() = runBlocking {
+        val context = isolatedContext()
+        val session = AndroidSessionViewModel(context)
+        val before = session.preferences.styleId
+        session.persistStyle(StyleId("FutureStyle"))
+        assertEquals(before, session.preferences.styleId)
     }
 
     /** The save happens on a background dispatcher launched by the ViewModel, so poll for it like the file it writes to. */

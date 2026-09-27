@@ -98,8 +98,11 @@ class AndroidSessionViewModel(context: Context) : ViewModel() {
         updatePreferences(preferences.copy(appearance = appearance))
     }
 
+    // UC-01 correction: StyleId is open (any StyleRegistry recipe id), but PreferredStyle is
+    // still the closed 4-value enum backing the persisted document — an id outside its entries
+    // (e.g. a 5th-style fixture) is a no-op here rather than an unguarded valueOf() crash.
     fun persistStyle(styleId: StyleId) {
-        val preferred = PreferredStyle.valueOf(styleId.value)
+        val preferred = PreferredStyle.entries.firstOrNull { it.name == styleId.value } ?: return
         if (preferences.styleId == preferred) return
         updatePreferences(preferences.copy(styleId = preferred))
     }
