@@ -39,4 +39,31 @@ class NoLanguageLiteralsTest {
         }
         assertTrue(offenders.isEmpty(), "Polish/Cyrillic literal(s) found in :core-engine source:\n${offenders.joinToString("\n")}")
     }
+
+    /** Strips `/* ... */` and `// ...` so KDoc prose (which legitimately spells out example literals in backticks) never self-matches. */
+    private fun codeOnly(text: String): String =
+        Regex("/\\*.*?\\*/", RegexOption.DOT_MATCHES_ALL).replace(text, "").lineSequence().joinToString("\n") { it.substringBefore("//") }
+
+    /**
+     * UniversalCorePlan.md §1.3 principle #3 / UC-14 acceptance ("Ноль правок :core-*" for a second
+     * language): a hardcoded lexeme id (which verb a tense skill drills, which possessive is the
+     * unmarked default owner) or a hardcoded punctuation mark is exactly the kind of pack-specific
+     * content decision that must come from `exercise-recipes.json`/`realization.json` through a
+     * constructor port or recipe field ([ExerciseGenerator]'s `defaultOwnerLexeme`/`verbLexeme`,
+     * [TextSpec.Prefixed]'s `punct`) — never a Kotlin string literal, even an ASCII one that passes
+     * [commonMainContainsNoPolishLetterOrCyrillicText] above.
+     */
+    @Test fun commonMainContainsNoHardcodedLexemeOrPunctuationLiteral() {
+        val bannedLiterals = listOf("\"go\"", "\"my\"", "\"!\"")
+        val files = sourceFiles()
+        val offenders = files.mapNotNull { file ->
+            val code = codeOnly(file.readText())
+            val hits = bannedLiterals.filter { it in code }
+            if (hits.isEmpty()) null else "${file.path}: ${hits.joinToString()}"
+        }
+        assertTrue(
+            offenders.isEmpty(),
+            "Hardcoded lexeme-id/punctuation literal(s) found in :core-engine source (belongs in pack data instead):\n${offenders.joinToString("\n")}",
+        )
+    }
 }

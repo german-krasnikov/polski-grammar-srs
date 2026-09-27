@@ -1,10 +1,13 @@
 {
   "schemaVersion": 1,
   "$comment": "UniversalCorePlan.md §3.1/§5.1/§12 UC-07: the wiring ExerciseGenerator reads instead of ExerciseFactory.kt's per-skill `when(skillId)` branches. Every string outside a construction/feature/case identifier is an opaque exerciseCopy/exercisePattern KEY (polski.data), resolved through a port at runtime — no Polish or Russian text is ever written here.",
+  "$comment_defaults": "Pack-level defaults ExerciseGenerator threads through instead of a Kotlin literal (UniversalCorePlan.md §1.3 principle #3): defaultOwnerLexeme is pl-ru's unmarked possessive owner (used whenever a recipe doesn't draw or override one); verbLexeme is the single verb verb.present/past/future drill.",
+  "defaultOwnerLexeme": "my",
+  "verbLexeme": "go",
   "skills": {
     "case.acc.n": {
       "skillId": "case.acc.n",
-      "source": { "type": "prefixed", "spec": { "construction": "core.argument.case-role", "bundle": { "Number": "sg", "Case": "nom" } }, "prefixCase": "nom" },
+      "source": { "type": "prefixed", "spec": { "construction": "core.argument.case-role", "bundle": { "Number": "sg", "Case": "nom" } }, "prefixCase": "nom", "punct": "." },
       "expected": { "type": "pattern", "key": "seenAcc", "values": { "acc": { "type": "phrase", "spec": { "construction": "core.argument.case-role", "bundle": { "Number": "sg", "Case": "acc" } } } } },
       "promptKey": "accPrompt",
       "explanationKey": "accExplanation",
@@ -24,7 +27,7 @@
     },
     "case.acc.f": {
       "skillId": "case.acc.f",
-      "source": { "type": "prefixed", "spec": { "construction": "core.argument.case-role", "bundle": { "Number": "sg", "Case": "nom" } }, "prefixCase": "nom" },
+      "source": { "type": "prefixed", "spec": { "construction": "core.argument.case-role", "bundle": { "Number": "sg", "Case": "nom" } }, "prefixCase": "nom", "punct": "." },
       "expected": { "type": "pattern", "key": "seenAcc", "values": { "acc": { "type": "phrase", "spec": { "construction": "core.argument.case-role", "bundle": { "Number": "sg", "Case": "acc" } } } } },
       "promptKey": "accPrompt",
       "explanationKey": "accExplanation",
@@ -44,7 +47,7 @@
     },
     "case.acc.m": {
       "skillId": "case.acc.m",
-      "source": { "type": "prefixed", "spec": { "construction": "core.argument.case-role", "bundle": { "Number": "sg", "Case": "nom" } }, "prefixCase": "nom" },
+      "source": { "type": "prefixed", "spec": { "construction": "core.argument.case-role", "bundle": { "Number": "sg", "Case": "nom" } }, "prefixCase": "nom", "punct": "." },
       "expected": { "type": "pattern", "key": "seenAcc", "values": { "acc": { "type": "phrase", "spec": { "construction": "core.argument.case-role", "bundle": { "Number": "sg", "Case": "acc" } } } } },
       "promptKey": "accPrompt",
       "explanationKey": "accExplanation",
@@ -305,7 +308,7 @@
   "firstSkillByGender": { "f": "case.acc.f", "n": "case.acc.n", "default": "case.acc.m" },
   "chain": [
     {
-      "source": { "type": "prefixed", "spec": { "construction": "core.argument.case-role", "bundle": { "Number": "sg", "Case": "nom" } }, "prefixCase": "nom" },
+      "source": { "type": "prefixed", "spec": { "construction": "core.argument.case-role", "bundle": { "Number": "sg", "Case": "nom" } }, "prefixCase": "nom", "punct": "." },
       "expected": { "type": "pattern", "key": "seenAcc", "values": { "acc": { "type": "phrase", "spec": { "construction": "core.argument.case-role", "bundle": { "Number": "sg", "Case": "acc" } } } } },
       "promptKey": "chainAccPrompt",
       "explanationKey": "chainAccReason",

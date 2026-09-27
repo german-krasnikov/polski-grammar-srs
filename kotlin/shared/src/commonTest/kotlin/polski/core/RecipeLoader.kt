@@ -53,6 +53,9 @@ data class RecipeSet(
     val skills: Map<String, SkillRecipe>,
     val chain: List<ChainStepRecipe>,
     val firstSkillByGender: Map<String, String>,
+    /** The pack's own defaults (UniversalCorePlan.md §1.3 principle #3) — never assumed by `:core-engine` itself. */
+    val defaultOwnerLexeme: String,
+    val verbLexeme: String,
 )
 
 fun parseRecipes(json: String): RecipeSet {
@@ -61,6 +64,8 @@ fun parseRecipes(json: String): RecipeSet {
         skills = root.getValue("skills").jsonObject.mapValues { (id, v) -> v.jsonObject.toSkillRecipe(id) },
         chain = root.getValue("chain").jsonArray.map { it.jsonObject.toChainStep() },
         firstSkillByGender = root.getValue("firstSkillByGender").jsonObject.toStringMap(),
+        defaultOwnerLexeme = root.getValue("defaultOwnerLexeme").jsonPrimitive.content,
+        verbLexeme = root.getValue("verbLexeme").jsonPrimitive.content,
     )
 }
 
@@ -87,7 +92,7 @@ private fun JsonObject.toChainStep(): ChainStepRecipe = ChainStepRecipe(
     explanationKey = getValue("explanationKey").jsonPrimitive.content,
     changes = getValue("changes").jsonArray.map { it.jsonObject.toChangeSpec() },
     tags = this["tags"]?.jsonArray?.map { it.jsonPrimitive.content } ?: emptyList(),
-    ownerOut = this["ownerOut"]?.jsonPrimitive?.content ?: "my",
+    ownerOut = getValue("ownerOut").jsonPrimitive.content,
 )
 
 private fun JsonObject.toOwnerDraw(): OwnerDraw = OwnerDraw(
@@ -129,7 +134,7 @@ private fun JsonObject.toTextSpec(): TextSpec = when (getValue("type").jsonPrimi
     "direct" -> TextSpec.Direct(getValue("value").jsonObject.toTextValue())
     "pattern" -> TextSpec.Pattern(getValue("key").jsonPrimitive.content, getValue("values").jsonObject.mapValues { (_, v) -> v.jsonObject.toTextValue() })
     "concat" -> TextSpec.Concat(getValue("parts").jsonArray.map { it.jsonObject.toTextValue() })
-    "prefixed" -> TextSpec.Prefixed(getValue("spec").jsonObject.toPhraseSpec(), getValue("prefixCase").jsonPrimitive.content)
+    "prefixed" -> TextSpec.Prefixed(getValue("spec").jsonObject.toPhraseSpec(), getValue("prefixCase").jsonPrimitive.content, getValue("punct").jsonPrimitive.content)
     else -> error("Unknown TextSpec type in $this")
 }
 

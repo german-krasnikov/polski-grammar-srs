@@ -38,8 +38,12 @@ sealed interface TextSpec {
     /** Concatenates [parts] with no separator (e.g. agreement.my's "Replace 'my' with «" + label + "»."). */
     data class Concat(val parts: List<TextValue>) : TextSpec
 
-    /** A [ConstructionTemplate]'s own realized case sentence: `prefix + " " + phrase + "."`. */
-    data class Prefixed(val spec: PhraseSpec, val prefixCase: String) : TextSpec
+    /**
+     * A [ConstructionTemplate]'s own realized case sentence: `prefix + " " + phrase + punct`, or
+     * (for [prefixCase] `"voc"`) a capitalized phrase alone followed by [punct] — a pack's own
+     * sentence-terminal mark (`"."`, `"!"`, ...), never a Kotlin literal.
+     */
+    data class Prefixed(val spec: PhraseSpec, val prefixCase: String, val punct: String) : TextSpec
 }
 
 data class ReasonRule(val whenClass: String, val key: String)
@@ -90,9 +94,9 @@ data class SkillRecipe(
 /**
  * One `generateChain` step — always realized against the caller-given seed, never a candidate
  * draw. Every [TextValue.Phrase] names its own owner via [PhraseSpec.ownerLexeme] where it differs
- * from the default `"my"` (e.g. the chain's last two steps, after `agreement.my` swaps the owner
- * to `"their"`) — a step has no single owner of its own, since its `source` still reflects the
- * *previous* step's owner while its `expected` may introduce a new one.
+ * from the pack's default owner lexeme (e.g. the chain's last two steps, after `agreement.my`
+ * swaps the owner to `"their"`) — a step has no single owner of its own, since its `source` still
+ * reflects the *previous* step's owner while its `expected` may introduce a new one.
  */
 data class ChainStepRecipe(
     val skillId: String,
@@ -102,6 +106,6 @@ data class ChainStepRecipe(
     val explanationKey: String,
     val changes: List<ChangeSpec>,
     val tags: List<String> = emptyList(),
-    /** The step's *resulting* owner (`CoreExercise.slots["owner"]`) — independent of any per-[TextValue.Phrase] owner override above. */
-    val ownerOut: String = "my",
+    /** The step's *resulting* owner (`CoreExercise.slots["owner"]`) — independent of any per-[TextValue.Phrase] owner override above; the pack recipe supplies it explicitly (no engine-side default). */
+    val ownerOut: String,
 )

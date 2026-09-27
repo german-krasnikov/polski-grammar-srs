@@ -85,6 +85,8 @@ fun uc07Generator(draws: List<Double>): ExerciseGenerator = ExerciseGenerator(
     casePrefix = CasePrefix { caseId, numberId -> caseSentencePrefix(GramCase.fromId(caseId), NumberGram.fromId(numberId)) },
     pronouns = PronounForms { key, caseId -> personalPronouns.getValue(key).getValue(GramCase.fromId(caseId)) },
     textCase = TextCase { value -> capitalize(value) },
+    defaultOwnerLexeme = uc07RecipeSet.defaultOwnerLexeme,
+    verbLexeme = uc07RecipeSet.verbLexeme,
 )
 
 /** The chain's 5 fixed steps with step 1's skill resolved for [nounId]'s own gender (UniversalCorePlan.md §5.3). */

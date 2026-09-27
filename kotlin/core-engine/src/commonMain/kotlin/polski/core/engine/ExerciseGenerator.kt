@@ -46,8 +46,11 @@ fun interface TextCase {
  * UniversalCorePlan.md §5.1/§5.3/§12 UC-07: the generic replacement for `ExerciseFactory.kt`'s
  * `when(skillId)` branches. [skills] is a language's `curriculum.json` (`SkillSpec`s, UC-06);
  * [recipes] is its `exercise-recipes.json` wiring (this task, [SkillRecipe]); [seeds] is its
- * sentence-seed pool. Every other dependency is a port — no lexeme text, no copy string and no
- * language-specific rule is ever hardcoded here.
+ * sentence-seed pool. [defaultOwnerLexeme]/[verbLexeme] are that same file's pack-level defaults
+ * (which possessive is the unmarked default owner; which verb a tense skill drills) — a
+ * pack-specific content choice, so it is read from data rather than assumed here. Every other
+ * dependency is a port — no lexeme text, no copy string and no language-specific rule is ever
+ * hardcoded here.
  */
 class ExerciseGenerator(
     private val realizer: ConstructionRealizer,
@@ -63,6 +66,8 @@ class ExerciseGenerator(
     private val casePrefix: CasePrefix,
     private val pronouns: PronounForms,
     private val textCase: TextCase,
+    private val defaultOwnerLexeme: String,
+    private val verbLexeme: String,
 ) {
     private fun <T> pick(items: List<T>): T {
         val draw = random.nextDouble()
@@ -120,7 +125,7 @@ class ExerciseGenerator(
         is TextSpec.Prefixed -> {
             val phraseText = resolvePhrase(spec.spec, lexicalSlots)
             val numberId = spec.spec.bundle["Number"] ?: "sg"
-            if (spec.prefixCase == "voc") "${textCase.capitalizeFirst(phraseText)}!" else "${casePrefix.of(spec.prefixCase, numberId)} $phraseText."
+            if (spec.prefixCase == "voc") "${textCase.capitalizeFirst(phraseText)}${spec.punct}" else "${casePrefix.of(spec.prefixCase, numberId)} $phraseText${spec.punct}"
         }
     }
 
@@ -147,14 +152,14 @@ class ExerciseGenerator(
         return CoreFormChange(from, to, copy.text(reasonKey))
     }
 
-    private fun lexicalSlotsFor(nounId: String, adjectiveId: String, owner: String = "my"): Map<String, String> =
-        mapOf("noun" to nounId, "adjective" to adjectiveId, "owner" to owner, "verb" to "go")
+    private fun lexicalSlotsFor(nounId: String, adjectiveId: String, owner: String = defaultOwnerLexeme): Map<String, String> =
+        mapOf("noun" to nounId, "adjective" to adjectiveId, "owner" to owner, "verb" to verbLexeme)
 
     private fun staticExercise(skillId: String, s: StaticExercise): CoreExercise = CoreExercise(
         id = newId(), primarySkill = skillId, source = copy.text(s.sourceKey), prompt = copy.text(s.promptKey),
         expected = copy.text(s.expectedKey), accepted = s.acceptedKeys.map(copy::text), explanation = copy.text(s.explanationKey),
         tags = s.tags, changes = listOf(CoreFormChange(copy.text(s.changeFromKey), copy.text(s.changeToKey), copy.text(s.changeReasonKey))),
-        slots = mapOf("noun" to s.nounId, "adjective" to s.adjectiveId, "owner" to "my", "number" to "sg"),
+        slots = mapOf("noun" to s.nounId, "adjective" to s.adjectiveId, "owner" to defaultOwnerLexeme, "number" to "sg"),
     )
 
     fun generateForSkill(skillId: String, preferredSeed: Map<String, String>? = null): CoreExercise {
@@ -166,7 +171,7 @@ class ExerciseGenerator(
         val staticOverride = recipe.staticOverride
         if (staticOverride != null) return staticExercise(skillId, staticOverride)
 
-        var owner = "my"
+        var owner = defaultOwnerLexeme
         val prompt: String
         val draw = recipe.ownerDraw
         if (draw != null) {
