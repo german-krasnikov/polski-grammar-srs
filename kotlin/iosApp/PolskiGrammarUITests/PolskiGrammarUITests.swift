@@ -1345,4 +1345,137 @@ final class PolskiGrammarUITests: XCTestCase {
 
         setTheme("Системная") // restore the default for later tests in this run.
     }
+
+    /// I1 (EmphasisUXAudit E7/S4, ContrastHighlightPlan.md "Контракт выделения" §4): Formula/Rule/
+    /// Scene/NativeParallel/Examples/WhyOnDemand now carry the same explicit-pair `parts` the main
+    /// sentence/table/contrast/changes blocks already render — `styleBlockView`'s `formula`/`rule`/
+    /// `scene`/`nativeParallel`/`examples`/`whyOnDemand` cases must actually paint them through the
+    /// same `emphasizedText` SwiftUI path the sentence uses (bold + role-colored + role-underlined
+    /// per changed run), not just show the block's identifier
+    /// (`testFourStylesShowIntendedBlocksWithRealContent` already covers plain presence). This
+    /// checks the one thing that path can silently break — the accessible text staying byte-for-
+    /// byte the block's own full source string once it's rebuilt from many per-run `Text`s instead
+    /// of one plain `Text` — across all 6 kinds and all 4 styles, on the queue's first (always
+    /// deterministic, per every other test in this file) card, plus one screenshot per style in
+    /// each theme for visual review of the actual color/underline. A pixel-level "is it really the
+    /// cool `after` accent" check (the way `testSystemMapCardsRenderDashedBeforeSolidAfterInLightAndDarkTheme`
+    /// checks the map card) needs *authored* content whose skill.focus phrase is literally quoted
+    /// inside that block's own prose — true only for a couple of skills deep in the due queue
+    /// (`pronouns`), unreachable without a long, flaky hunt (confirmed: the queue interleaves each
+    /// skill's own multi-step introduction chain and vocabulary-set screens, so even 20 rounds of
+    /// reveal+rate never leaves the very first skill). That pixel-level proof instead lives at the
+    /// shared-model layer, against real course data, deterministically:
+    /// `StyleComposerTest.realPronounsSkillHighlightsFocusAfterWholeWordInFormulaProse` and
+    /// `StyleSnapshotTest.exportedPartsCarryEachOwnSideForAMixedRoleBlock`.
+    func testStyleBlockPartsRenderHighlightedRunsPerKindInLightAndDarkTheme() {
+        let app = XCUIApplication()
+        app.launch()
+        resetTrainingProgress(app)
+        app.buttons["Тренировка"].firstMatch.tap()
+        XCTAssertTrue(app.buttons["continueIntroduction"].waitForExistence(timeout: 20))
+        continueIntroductionIfPresent(app)
+
+        let picker = app.buttons.matching(NSPredicate(format: "label CONTAINS %@", "Стиль объяснений")).firstMatch
+        func selectStyle(_ label: String) {
+            for _ in 0..<7 {
+                if picker.isHittable { break }
+                app.swipeDown()
+            }
+            XCTAssertTrue(picker.isHittable, app.debugDescription)
+            guard !picker.label.contains(label) else { return }
+            picker.tap()
+            let option = app.descendants(matching: .any)[label].firstMatch
+            XCTAssertTrue(option.waitForExistence(timeout: 5), app.debugDescription)
+            option.tap()
+        }
+        func scrollToTop() { for _ in 0..<10 { app.swipeDown() } }
+        func reveal() {
+            let button = app.buttons["revealAnswer"]
+            for _ in 0..<8 {
+                if button.isHittable { break }
+                app.swipeUp()
+            }
+            if button.waitForExistence(timeout: 5) { button.tap() }
+        }
+        func capture(_ name: String) {
+            let shot = XCTAttachment(screenshot: app.screenshot())
+            shot.name = name
+            shot.lifetime = .keepAlways
+            add(shot)
+        }
+        // Every block's own accessible text must equal its full source string untruncated — the
+        // one thing rebuilding it from many per-run `Text`s (bold/colored/underlined) instead of a
+        // single plain `Text` could silently drop or reorder (a trailing word, a lost space between
+        // words, a duplicated run). `label` is compared, not merely existence.
+        func assertFullText(_ identifier: String, contains expected: String) {
+            let element = app.descendants(matching: .any)[identifier].firstMatch
+            XCTAssertTrue(element.waitForExistence(timeout: 5), "\(identifier): " + app.debugDescription)
+            XCTAssertTrue(element.label.contains(expected), "\(identifier) label '\(element.label)' must contain '\(expected)'")
+        }
+
+        // rule-first front: Formula (skill.formula, byte-for-byte — `ruleFirstAndSituationFirstDeriveTodaysText`
+        // proves the shared-model side against this same real skill's own text).
+        selectStyle("Через правило")
+        scrollToTop()
+        assertFullText("styleBlock-formula", contains: "-a → -ę")
+        reveal()
+        scrollToTop()
+        assertFullText("styleBlock-rule", contains: "Прямой объект после widzę, mam, lubię, kupuję")
+
+        func captureTheme(_ label: String, _ name: String) {
+            app.buttons["openSettings"].tap()
+            let theme = app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", "Тема")).firstMatch
+            for _ in 0..<7 {
+                if theme.isHittable { break }
+                app.swipeDown()
+            }
+            XCTAssertTrue(theme.isHittable, app.debugDescription)
+            if !theme.label.contains(label) {
+                theme.tap()
+                let option = app.descendants(matching: .any)[label].firstMatch
+                XCTAssertTrue(option.waitForExistence(timeout: 5))
+                option.tap()
+            }
+            app.buttons["Готово"].tap()
+            scrollToTop()
+            capture(name)
+        }
+        captureTheme("Светлая", "style-blocks-rule-first-light")
+        captureTheme("Тёмная", "style-blocks-rule-first-dark")
+        captureTheme("Системная", "style-blocks-rule-first-system") // restore the default for later tests.
+
+        // situation-first front: Scene (methods.situations.introduce).
+        selectStyle("Через ситуацию")
+        scrollToTop()
+        assertFullText("styleBlock-scene", contains: "Ты сообщаешь, кого или что видишь")
+        capture("style-blocks-scene")
+
+        // native-contrast front: NativeParallel (styleContent.nativeParallel — real authored pair).
+        selectStyle("Через сравнение с родным")
+        scrollToTop()
+        XCTAssertTrue(app.descendants(matching: .any)["styleBlock-nativeParallel"].firstMatch.waitForExistence(timeout: 5), app.debugDescription)
+        // Each pair is its own accessibility element carrying `native; target; matches/differs;
+        // note` (`StyleNativeParallelBlock`'s own `.accessibilityLabel`), not the outer container —
+        // same lookup-by-content pattern `testFourStylesShowIntendedBlocksWithRealContent` already
+        // uses for this exact skill's own authored pair.
+        let targetPair = app.descendants(matching: .any).matching(NSPredicate(format: "label CONTAINS %@", "Widzę moją dobrą żonę"))
+        XCTAssertTrue(targetPair.firstMatch.waitForExistence(timeout: 5), app.debugDescription)
+        capture("style-blocks-nativeParallel")
+
+        // minimal-theory front: Examples (styleContent.examples). Back: WhyOnDemand (collapsed by
+        // default — expand it, matching `StyleWhyOnDemandBlock`'s own toggle contract).
+        selectStyle("Минимум теории")
+        scrollToTop()
+        assertFullText("styleBlock-examples", contains: "Mam nową książkę.")
+        capture("style-blocks-examples")
+        let whyToggle = app.buttons["styleBlock-whyOnDemand"]
+        for _ in 0..<8 {
+            if whyToggle.isHittable { break }
+            app.swipeUp()
+        }
+        XCTAssertTrue(whyToggle.waitForExistence(timeout: 5), app.debugDescription)
+        whyToggle.tap()
+        assertFullText("styleBlock-whyOnDemand-text", contains: "Прямой объект после глаголов действия")
+        capture("style-blocks-whyOnDemand")
+    }
 }

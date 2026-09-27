@@ -44,4 +44,23 @@ class StyleSnapshotTest {
         // The native side carries no parallel "nativeParts" key — the model gives L1 prose no parts field at all.
         assertEquals(false, exportedPair.containsKey("nativeParts"))
     }
+
+    // I1 (EmphasisUXAudit E7/S4/W3 correction): a running-prose block's own `parts` can hold a
+    // literal `focus.before` span *and* a literal `focus.after` span side by side — [EndingPart]'s
+    // own doc says a host "must render two changed fragments differently when side differs, even
+    // within one running block of prose". A host bridged through this JSON (iOS/macOS) only has
+    // that signal if `side` itself crosses the wire — it must ride along per part, distinct from
+    // the caller's own default role, and be entirely absent from an unmarked part.
+    @Test fun exportedPartsCarryEachOwnSideForAMixedRoleBlock() {
+        val mixed = listOf(
+            EndingPart("mojej", false, true, ChangeSide.Before),
+            EndingPart(" became ", false),
+            EndingPart("ich", false, true, ChangeSide.After),
+        )
+        val json = blocksToJson(listOf(Block.Formula("mojej became ich", mixed))).single().jsonObject
+        val exported = json["parts"]!!.jsonArray.map { it.jsonObject }
+        assertEquals("before", exported[0]["side"]?.jsonPrimitive?.content)
+        assertEquals(false, exported[1].containsKey("side"))
+        assertEquals("after", exported[2]["side"]?.jsonPrimitive?.content)
+    }
 }

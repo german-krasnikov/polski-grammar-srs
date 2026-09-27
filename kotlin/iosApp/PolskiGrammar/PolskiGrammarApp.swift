@@ -87,6 +87,9 @@ extension Dictionary where Key == String, Value == Any {
     func bool(_ key: String, default defaultValue: Bool) -> Bool { (self[key] as? Bool) ?? defaultValue }
     func record(_ key: String) -> Record { self[key] as? Record ?? [:] }
     func rows(_ key: String) -> [Record] { self[key] as? [Record] ?? [] }
+    /// Like [rows], one level deeper — `Block.Examples.itemParts` (`StyleSnapshot.kt`'s
+    /// `List<List<EndingPart>>`), one `[Record]` of `EndingPart` rows per example item.
+    func rowsOfRows(_ key: String) -> [[Record]] { self[key] as? [[Record]] ?? [] }
     func strings(_ key: String) -> [String] { self[key] as? [String] ?? [] }
 }
 

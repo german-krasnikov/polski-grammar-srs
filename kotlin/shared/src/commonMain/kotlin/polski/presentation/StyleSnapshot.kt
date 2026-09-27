@@ -14,8 +14,17 @@ import kotlinx.serialization.json.put
  */
 fun blocksToJson(blocks: List<Block>): JsonArray = JsonArray(blocks.map(::blockToJson))
 
+/** [EndingPart.side] rides along as `"before"`/`"after"` (omitted when null) — a running-prose block
+ *  (formula/rule/scene/nativeParallel-target/examples/whyOnDemand) can hold a literal `focus.before`
+ *  span and a literal `focus.after` span side by side ([styleTextHighlightParts]'s own doc, W3
+ *  correction), so the role isn't the same for every changed part in one block the way it is for a
+ *  homogeneous before/after pair (table/contrast/changes rows) — the host needs each part's own side
+ *  to render two changed fragments differently within that one block ([EndingPart]'s own doc). */
 private fun endingPartsJson(parts: List<EndingPart>): JsonArray = JsonArray(parts.map { part ->
-    buildJsonObject { put("text", part.text); put("changed", part.isChanged) }
+    buildJsonObject {
+        put("text", part.text); put("changed", part.isChanged)
+        part.side?.let { put("side", if (it == ChangeSide.Before) "before" else "after") }
+    }
 })
 
 private fun blockToJson(block: Block): JsonObject = when (block) {
