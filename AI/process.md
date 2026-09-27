@@ -22,7 +22,7 @@ export ANDROID_HOME=$HOME/Library/Android/sdk
 | Цель | Команда |
 | --- | --- |
 | Shared-тесты | `./gradlew :shared:jsBrowserTest :shared:wasmJsBrowserTest :shared:desktopTest :shared:iosSimulatorArm64Test :shared:macosArm64Test` (из `kotlin/`) |
-| Web | `./gradlew :composeApp:composeCompatibilityBrowserDistribution`, затем `KOTLIN_SPIKE_BRANCH=wasm\|js npx playwright test --config=playwright.kotlin.config.ts` |
+| Web | `./gradlew :composeApp:composeCompatibilityBrowserDistribution`, затем `KOTLIN_SPIKE_DIST=kotlin/composeApp/build/dist/composeWebCompatibility/productionExecutable KOTLIN_SPIKE_BRANCH=wasm\|js npx playwright test --config=playwright.kotlin.config.ts` |
 | Android | `./gradlew :androidApp:testDebugUnitTest :androidApp:assembleDebug`; эмулятор `Polski_ARM35` (`-gpu swiftshader_indirect`), проверка через `adb` + `uiautomator dump` |
 | iOS | `arch -arm64 ruby kotlin/iosApp/generate_project.rb`; `xcodebuild … -scheme PolskiGrammar -destination 'platform=iOS Simulator,id=<id>' test` |
 | macOS | `xcodebuild -project kotlin/macosApp/PolskiGrammarMac.xcodeproj -scheme PolskiGrammarMac -destination 'platform=macOS' build` |
