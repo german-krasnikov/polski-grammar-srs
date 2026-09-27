@@ -443,6 +443,11 @@ test('narrow layout keeps the next training action visible and the document with
   await page.setViewportSize({ width: 320, height: 700 });
   for (const route of ['training', 'vocabulary', 'matrix', 'progress', 'settings']) {
     await page.goto(`/#/${route}`);
+    if (route === 'training') {
+      // Chain mode renders `.chain-header ol`, the widest content at this breakpoint; pin it so
+      // this check deterministically covers it instead of whatever mode happened to persist.
+      await page.getByRole('button', { name: 'Цепочка предложений' }).click();
+    }
     await expect(page.getByRole('button', { name: 'Настройки', exact: true })).toBeVisible();
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
     expect(overflow, `${route} document overflow`).toBeLessThanOrEqual(1);
