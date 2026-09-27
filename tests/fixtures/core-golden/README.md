@@ -1,6 +1,6 @@
 # Core-golden fixtures (UniversalCorePlan.md §6/§12 UC-04)
 
-Pinned at commit: `<filled in by the follow-up commit that adds this line>`
+Pinned at commit: `a4b4aec` (UC-04, "pack.pairId instead of \"pl-ru\" literals; SkillQueue fixes foreign-skillId crash")
 
 ## What this is
 
