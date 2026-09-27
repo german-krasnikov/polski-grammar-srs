@@ -85,17 +85,21 @@ class MacSnapshotStyleBlocksTest {
         assertEquals(listOf("scene"), situationFirstFront)
     }
 
+    // CONTENT has since authored `nativeParallel` for every real skill (UC-10 §3/ST-11), so the
+    // session's current skill never lacks it any more and NativeContrast no longer falls back to
+    // RuleFirst on the real course — StyleComposerTest.nativeContrastFallsBackWithoutContentAndComposesWithIt
+    // still covers the fallback itself with a literal SkillStyleContent() fixture. This now checks
+    // the other half: with real authored content, NativeContrast shows its own blocks, not RuleFirst's.
     @Test
-    fun nativeContrastWithoutSkillContentFallsBackToRuleFirstsBlocks() = withSession { session ->
+    fun nativeContrastWithRealSkillContentDoesNotFallBackToRuleFirst() = withSession { session ->
         session.dispatch("styleId", "RuleFirst")
         val ruleFirstFront = blockKinds(session, "frontBlocks")
-        val ruleFirstBack = blockKinds(session, "backBlocks")
 
         session.dispatch("styleId", "NativeContrast")
 
-        assertEquals("RuleFirst", state(session).getValue("styleBlocks").jsonObject.getValue("effectiveStyleId").jsonPrimitive.content)
-        assertEquals(ruleFirstFront, blockKinds(session, "frontBlocks"))
-        assertEquals(ruleFirstBack, blockKinds(session, "backBlocks"))
+        assertEquals("NativeContrast", state(session).getValue("styleBlocks").jsonObject.getValue("effectiveStyleId").jsonPrimitive.content)
+        assertEquals(listOf("nativeParallel"), blockKinds(session, "frontBlocks"))
+        assertNotEquals(ruleFirstFront, blockKinds(session, "frontBlocks"))
     }
 
     @Test
