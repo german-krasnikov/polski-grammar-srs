@@ -7,6 +7,6 @@
   },
   "blocks": {
     "front": ["scene"],
-    "back": ["changes"]
+    "back": ["changes", "rule"]
   }
 }

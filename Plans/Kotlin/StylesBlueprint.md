@@ -18,7 +18,7 @@ sealed interface Block {
     data class Scene(val text: String) : Block                                 // короткая сцена
     data class NativeParallel(val pairs: List<NativeParallelPair>) : Block     // L1 ↔ target
     data class Examples(val items: List<String>) : Block                       // доп. примеры без разбора
-    data class WhyOnDemand(val text: String, val collapsedLabel: String = "Почему так?") : Block
+    data class WhyOnDemand(val text: String, val collapsedLabel: String = "") : Block  // "" — CORE names no language (ST-06)
     data class Changes(val items: List<ChangeItem>) : Block                    // exercise.changes, диф
     data class Contrast(val before: List<EndingPart>, val after: List<EndingPart>) : Block // focus было→стало
 }
@@ -37,7 +37,7 @@ data class NativeParallelPair(val native: String, val target: String, val note: 
 |---|---|---|
 | Formula | rule-first | rule-first (повтор) |
 | Table | rule-first | — |
-| Rule | — | rule-first |
+| Rule | — | rule-first, situation-first |
 | Scene | situation-first | — |
 | NativeParallel | native-contrast | native-contrast (повтор) |
 | Examples | minimal-theory | — |
@@ -76,7 +76,7 @@ data class NativeParallelPair(val native: String, val target: String, val note: 
 | Поле | Выводится (derive) из | Когда нужен авторский текст |
 |---|---|---|
 | `rule` | `skill.theory` | Никогда для MVP; переопределение — редакторская правка тона |
-| `table` | `EndingHighlight.ContrastPair.generated(focus.before, focus.after)` как одна строка `"Было → Стало"` | Настоящая многострочная таблица склонения — позже, вместе с `table-specs.json` (UC-09), не в этой задаче |
+| `table` | `EndingHighlight.ContrastPair.generated(focus.before, focus.after)` как одна строка с пустой подписью `""` (CORE не называет язык, ST-06) | Настоящая многострочная таблица склонения — позже, вместе с `table-specs.json` (UC-09), не в этой задаче |
 | `scene` | `methods.situations.introduce` (уже авторский текст, тот же цикл) | Никогда для MVP |
 | `nativeParallel` | — (нет универсального источника; `reference.russianSupport` покрывает только 4 из 16 навыков и другой формат экрана) | **Да** — обязателен для содержательного `native-contrast`; без него — задекларированный fallback на `rule-first` (§2), не крах |
 | `examples` | `[]` (сама карточка = единственный пример) | Опционально — 1-2 доп. примера обогащают `minimal-theory`, не обязательны |
