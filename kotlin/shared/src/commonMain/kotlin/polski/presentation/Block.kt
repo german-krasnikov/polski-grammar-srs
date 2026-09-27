@@ -12,7 +12,8 @@ sealed interface Block {
     data class Scene(val text: String) : Block
     data class NativeParallel(val pairs: List<NativeParallelPair>) : Block
     data class Examples(val items: List<String>) : Block
-    data class WhyOnDemand(val text: String, val collapsedLabel: String = "Почему так?") : Block
+    /** [collapsedLabel] defaults to "" — CORE names no language; a host/skill supplies real UI text. */
+    data class WhyOnDemand(val text: String, val collapsedLabel: String = "") : Block
     data class Changes(val items: List<ChangeItem>) : Block
     data class Contrast(val before: List<EndingPart>, val after: List<EndingPart>) : Block
 }

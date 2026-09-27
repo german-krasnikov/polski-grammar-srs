@@ -54,9 +54,11 @@ object StyleComposer {
             )
         }
 
+    /** Label is "" (no per-skill [SkillStyleContent.table] to draw it from) — see UC-09 for a real
+     *  multi-row table; CORE names no language here, so it never guesses a caption like "before → after". */
     private fun derivedTableRow(focus: SkillPresentation): TableRow {
         val pair = ContrastPair.generated(focus.focusBefore, focus.focusAfter)
-        return TableRow("Было → Стало", pair.parts(ChangeSide.Before), pair.parts(ChangeSide.After))
+        return TableRow("", pair.parts(ChangeSide.Before), pair.parts(ChangeSide.After))
     }
 
     /** Every [BlockKind] but [BlockKind.NativeParallel] is always derivable (see [SkillStyleContent]'s doc). */

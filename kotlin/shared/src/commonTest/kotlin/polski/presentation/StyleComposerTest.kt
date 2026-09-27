@@ -130,6 +130,18 @@ class StyleComposerTest {
         }
         val front = StyleComposer.compose(registry.getValue(StyleId.SituationFirst), StylePhase.Front, fakeExercise, fakeSkill, fakePresentation, SkillStyleContent())
         assertEquals("a short invented scene", front.filterIsInstance<Block.Scene>().single().text)
+
+        // Derived defaults must carry no natural-language literal: a WhyOnDemand/Table shown for
+        // this made-up, non-Russian pair must not surface Russian UI chrome baked into CORE.
+        val minimalTheory = registry.getValue(StyleId.MinimalTheory)
+        val why = StyleComposer.compose(minimalTheory, StylePhase.Back, fakeExercise, fakeSkill, fakePresentation, SkillStyleContent())
+            .filterIsInstance<Block.WhyOnDemand>().single()
+        assertEquals("", why.collapsedLabel)
+
+        val ruleFirst = registry.getValue(StyleId.RuleFirst)
+        val table = StyleComposer.compose(ruleFirst, StylePhase.Front, fakeExercise, fakeSkill, fakePresentation, SkillStyleContent())
+            .filterIsInstance<Block.Table>().single()
+        assertEquals("", table.rows.single().label)
     }
 
     // §2 validator invariant: whatever a recipe names as its fallback must itself have empty requires.
