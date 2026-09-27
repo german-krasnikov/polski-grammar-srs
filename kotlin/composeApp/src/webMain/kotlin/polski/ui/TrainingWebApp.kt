@@ -570,13 +570,15 @@ private class TrainingDomRenderer {
         val methodSelect = document.createElement("select") as HTMLSelectElement
         methodSelect.id = "explanation-method"
         methodSelect.setAttribute("aria-label", "Подача объяснений")
-        listOf("logic" to "Схемы и логика", "situations" to "Живые ситуации").forEach { (value, title) ->
-            methodSelect.appendChild(node("option", text = title).apply { setAttribute("value", value) })
+        StyleId.entries.forEach { styleId ->
+            methodSelect.appendChild(node("option", text = styleLabel(styleId)).apply { setAttribute("value", styleId.name) })
         }
-        methodSelect.value = if (state.styleId == StyleId.SituationFirst) "situations" else "logic"
+        methodSelect.value = state.styleId.name
+        // UC-10: a compact quick switch over the same 4 styles as Settings — dispatching SetStyle
+        // is a display choice only (TrainingStore.SetStyle), never creates a review and never
+        // touches draft/frozenAnswer/exercise/phase.
         methodSelect.addEventListener("change", {
-            val styleId = if (methodSelect.value == "situations") StyleId.SituationFirst else StyleId.RuleFirst
-            dispatch(AppAction.SetStyle(styleId))
+            dispatch(AppAction.SetStyle(StyleId.valueOf(methodSelect.value)))
         })
         methodLabel.appendChild(methodSelect)
         options.appendChild(button(if (state.showReference && !state.introPending) "Скрыть таблицу" else "Таблица под рукой") {

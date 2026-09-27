@@ -22,7 +22,7 @@ test('first method cycle keeps the draft and stores exactly one rating', async (
   const reference = page.getByRole('button', { name: 'Таблица под рукой' });
   await expect(reference).toBeDisabled();
   await expect(page.locator('.reference-panel')).toHaveCount(0);
-  await method.selectOption('situations');
+  await method.selectOption('SituationFirst');
   await expect(page.locator('.method-introduce')).toContainText('кого или что видишь');
   await expect(source).toHaveText('To jest moja piękna żona.');
   await page.getByRole('button', { name: 'Перейти к заданию' }).click();
@@ -33,12 +33,12 @@ test('first method cycle keeps the draft and stores exactly one rating', async (
   await page.getByRole('button', { name: 'Напечатать ответ' }).click();
   const answer = page.getByRole('textbox', { name: 'Ответ по-польски' });
   await answer.fill('Moja próba');
-  await method.selectOption('logic');
+  await method.selectOption('RuleFirst');
   await expect(answer).toHaveValue('Moja próba');
   await page.getByRole('button', { name: 'Проверить и показать ответ' }).click();
   await expect(page.locator('.answer-sentence')).toHaveText('Widzę moją piękną żonę.');
   await expect(page.locator('.method-feedback h3')).toHaveText('Разбор изменений');
-  await method.selectOption('situations');
+  await method.selectOption('SituationFirst');
   await expect(page.locator('.method-feedback h3')).toHaveText('Сравни смысл и форму');
   await expect(page.locator('.typed-result p')).toHaveText('Moja próba');
   expect(await page.evaluate(key => JSON.parse(localStorage.getItem(key) ?? '{}').totalReviews, progressKey)).toBe(0);
@@ -51,5 +51,5 @@ test('first method cycle keeps the draft and stores exactly one rating', async (
   await page.getByRole('button', { name: 'Перейти к заданию' }).click();
   await expect(page.locator('.reference-panel')).toBeVisible();
   await page.reload();
-  await expect(page.getByRole('combobox', { name: 'Подача объяснений' })).toHaveValue('situations');
+  await expect(page.getByRole('combobox', { name: 'Подача объяснений' })).toHaveValue('SituationFirst');
 });

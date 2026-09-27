@@ -53,14 +53,14 @@ async function preferencesReadFaultOutcome(page: import('@playwright/test').Page
 test('legacy method migrates once and settings route preserves the question draft', async ({ page }) => {
   await page.addInitScript(() => localStorage.setItem('polski-explanation-method-v1', 'situations'));
   await page.goto('/#/training');
-  await expect(page.getByRole('combobox', { name: 'Подача объяснений' })).toHaveValue('situations');
+  await expect(page.getByRole('combobox', { name: 'Подача объяснений' })).toHaveValue('SituationFirst');
   await page.getByRole('button', { name: 'Перейти к заданию' }).click();
   await page.getByRole('button', { name: 'Напечатать ответ' }).click();
   await page.getByRole('textbox', { name: 'Ответ по-польски' }).fill('Moja próba');
   const before = await page.evaluate(key => localStorage.getItem(key), progressKey);
   await page.getByRole('button', { name: 'Настройки' }).click();
   await expect(page).toHaveURL(/#\/settings$/);
-  await expect(page.getByRole('combobox', { name: 'Подача объяснений в настройках' })).toHaveValue('SituationFirst');
+  await expect(page.getByRole('combobox', { name: 'Стиль объяснений' })).toHaveValue('SituationFirst');
   await page.getByRole('combobox', { name: 'Тема' }).selectOption('Light');
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
   await page.goBack();
@@ -88,6 +88,41 @@ test('legacy tint is preserved in settings JSON without an optical control', asy
   expect(await page.evaluate(key => JSON.parse(localStorage.getItem(key)!).glassTintPercent, preferencesKey)).toBe(17);
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
   await expect(page.locator('#settings-glass-tint')).toHaveCount(0);
+});
+
+// UC-10 S1: the picker now offers all 4 style recipes (replacing the old 2-value Logic/Situations
+// selector), shows a one-line description of the selected style, and — since no skill has authored
+// `styleContent.nativeParallel` yet — a fallback hint naming native-contrast's current stand-in.
+test('style picker offers all 4 recipes with a description and a native-contrast fallback hint', async ({ page }) => {
+  await page.goto('/#/settings');
+  const picker = page.getByRole('combobox', { name: 'Стиль объяснений' });
+  await expect(picker).toHaveValue('RuleFirst');
+  const optionValues = await picker.locator('option').evaluateAll(options => options.map(option => (option as HTMLOptionElement).value));
+  expect(optionValues).toEqual(['RuleFirst', 'SituationFirst', 'NativeContrast', 'MinimalTheory']);
+  await expect(page.locator('.settings-style-description')).toHaveText('Формула и таблица окончаний, затем разбор изменений и правило.');
+  await expect(page.locator('.settings-style-fallback-hint')).toContainText('«Через сравнение с родным» пока недоступен для текущего навыка');
+  await picker.selectOption('NativeContrast');
+  await expect(page.locator('.settings-style-description')).toHaveText('По-родному так → по-изучаемому так, где сходится и где отличается.');
+  expect(await page.evaluate(key => JSON.parse(localStorage.getItem(key) ?? '{}').styleId, preferencesKey)).toBe('NativeContrast');
+  await page.reload();
+  await expect(picker).toHaveValue('NativeContrast');
+});
+
+test('the card quick switch offers the same 4 styles and never creates a review or clears the draft', async ({ page }) => {
+  await page.goto('/#/training');
+  const quickSwitch = page.getByRole('combobox', { name: 'Подача объяснений' });
+  const optionValues = await quickSwitch.locator('option').evaluateAll(options => options.map(option => (option as HTMLOptionElement).value));
+  expect(optionValues).toEqual(['RuleFirst', 'SituationFirst', 'NativeContrast', 'MinimalTheory']);
+  await page.getByRole('button', { name: 'Перейти к заданию' }).click();
+  await page.getByRole('button', { name: 'Напечатать ответ' }).click();
+  await page.getByRole('textbox', { name: 'Ответ по-польски' }).fill('Moja próba');
+  await quickSwitch.selectOption('MinimalTheory');
+  await expect(quickSwitch).toHaveValue('MinimalTheory');
+  await expect(page.getByRole('textbox', { name: 'Ответ по-польски' })).toHaveValue('Moja próba');
+  expect(await page.evaluate(key => JSON.parse(localStorage.getItem(key) ?? '{}').totalReviews, progressKey)).toBe(0);
+  await quickSwitch.selectOption('NativeContrast');
+  await expect(page.getByRole('textbox', { name: 'Ответ по-польски' })).toHaveValue('Moja próba');
+  expect(await page.evaluate(key => JSON.parse(localStorage.getItem(key) ?? '{}').totalReviews, progressKey)).toBe(0);
 });
 
 test('direct Settings link and browser history keep four destinations available', async ({ page }) => {
@@ -128,7 +163,7 @@ test('unreadable future settings stay exportable and cannot be overwritten by a 
   await page.addInitScript(value => localStorage.setItem('polski-preferences-v1', value), raw);
   await page.goto('/#/settings');
   await expect(page.getByRole('status')).toContainText('восстановления');
-  await page.getByRole('combobox', { name: 'Подача объяснений в настройках' }).selectOption('SituationFirst');
+  await page.getByRole('combobox', { name: 'Стиль объяснений' }).selectOption('SituationFirst');
   expect(await page.evaluate(key => localStorage.getItem(key), preferencesKey)).toBe(raw);
   await expect(page.getByRole('status')).toContainText('Сохраните исходный JSON');
 });

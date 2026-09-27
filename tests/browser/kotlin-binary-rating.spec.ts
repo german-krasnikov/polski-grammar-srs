@@ -46,11 +46,11 @@ test('switching explanation style preserves the current typed draft', async ({ p
   await continueIntroductionIfPresent(page);
   await page.getByRole('button', { name: 'Напечатать ответ' }).click();
   await page.getByRole('textbox', { name: 'Ответ по-польски' }).fill('Moja próba');
-  await page.getByRole('combobox', { name: 'Подача объяснений' }).selectOption('situations');
+  await page.getByRole('combobox', { name: 'Подача объяснений' }).selectOption('SituationFirst');
   await expect(page.locator('.method-retrieve')).toContainText('Представь ситуацию и скажи целое предложение самостоятельно.');
   await expect(page.getByRole('textbox', { name: 'Ответ по-польски' })).toHaveValue('Moja próba');
   await page.reload();
-  await expect(page.getByRole('combobox', { name: 'Подача объяснений' })).toHaveValue('situations');
+  await expect(page.getByRole('combobox', { name: 'Подача объяснений' })).toHaveValue('SituationFirst');
 });
 
 test('wrong typed answer leaves the two scheduling choices to the learner', async ({ page }) => {

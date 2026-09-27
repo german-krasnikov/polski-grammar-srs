@@ -33,9 +33,14 @@ internal fun renderSettingsWeb(
     val learning = settingsNode("section", "card settings-panel")
     learning.appendChild(settingsNode("h3", text = "Обучение"))
     root.appendChild(learning)
-    learning.appendChild(settingsSelect("Подача объяснений в настройках", "settings-method", listOf("RuleFirst" to "Схемы и логика", "SituationFirst" to "Живые ситуации"), preferences.value.styleId.name) { selected ->
-        preferences.setStyle(if (selected == "SituationFirst") StyleId.SituationFirst else StyleId.RuleFirst, store)
+    val currentStyleId = StyleId.valueOf(preferences.value.styleId.name)
+    learning.appendChild(settingsSelect("Стиль объяснений", "settings-method", StyleId.entries.map { it.name to styleLabel(it) }, currentStyleId.name) { selected ->
+        preferences.setStyle(StyleId.valueOf(selected), store)
     })
+    learning.appendChild(settingsNode("p", "muted settings-style-description", styleDescription(currentStyleId)))
+    nativeContrastFallbackHint(store.state.value.exercise?.primarySkill)?.let { hint ->
+        learning.appendChild(settingsNode("p", "muted settings-style-fallback-hint", hint))
+    }
     learning.appendChild(settingsSelect("Способ ответа", "settings-answer-mode", listOf("Oral" to "Вслух или про себя", "Typed" to "Напечатать"), preferences.value.answerMode.name) { selected ->
         preferences.setAnswerMode(if (selected == "Typed") AnswerMode.Typed else AnswerMode.Oral, store)
     })
