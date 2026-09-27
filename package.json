@@ -15,7 +15,7 @@
     "test:browser": "playwright test",
     "preview": "vite preview",
     "typecheck": "tsc -b",
-    "course:validate": "node scripts/validate-course.mjs && node scripts/validate-vocabulary-editorial.mjs --strict",
+    "course:validate": "node scripts/validate-course.mjs && node scripts/validate-vocabulary-editorial.mjs --strict && node scripts/validate-curriculum.mjs",
     "vocabulary:editorial:check": "node scripts/validate-vocabulary-editorial.mjs",
     "vocabulary:editorial:strict": "node scripts/validate-vocabulary-editorial.mjs --strict",
     "course:inventory:check": "node scripts/inventory-course.mjs --check",

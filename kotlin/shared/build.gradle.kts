@@ -11,6 +11,9 @@ val frequencyFile = layout.projectDirectory.file("../../courses/pl-ru/frequency-
 // only the JSON file.
 val stylesDirectory = layout.projectDirectory.dir("../../courses/styles")
 val formsFixtureFile = layout.projectDirectory.file("../../courses/pl-ru/forms.generated.json")
+// UniversalCorePlan.md §3.1/§12 UC-06: `lang/<code>/curriculum.json` — scanned the same way as
+// `packDirs` below, so a second target language's curriculum needs no Gradle/Kotlin edit.
+val langDirectory = layout.projectDirectory.dir("../../courses/lang")
 val generatedCourseDirectory = layout.buildDirectory.dir("generated/course/kotlin")
 val generatedFormsFixtureDirectory = layout.buildDirectory.dir("generated/formsFixture/kotlin")
 
@@ -46,6 +49,7 @@ val generateCoursePackSource by tasks.registering {
     inputs.dir(coursesDirectory)
     inputs.file(frequencyFile)
     inputs.dir(stylesDirectory)
+    inputs.dir(langDirectory)
     outputs.dir(generatedCourseDirectory)
     doLast {
         // UC-02: a pack directory is any immediate child of `courses/` (other than the shared
@@ -64,6 +68,17 @@ val generateCoursePackSource by tasks.registering {
             .sortedBy { it.name }
         val stylesJson = "[" + styleFiles.joinToString(",") { it.readText() } + "]"
         val styleChunks = literalChunks(stylesJson)
+
+        // UC-06: any `lang/<code>/curriculum.json` becomes an entry keyed by <code> — pl is the
+        // only one today, but a new target language's curriculum needs no edit here.
+        val langDirs = (langDirectory.asFile.listFiles { file -> file.isDirectory } ?: emptyArray())
+            .filter { dir -> dir.resolve("curriculum.json").isFile }
+            .sortedBy { it.name }
+        val curriculumEntryLiterals = langDirs.joinToString(",\n") { dir ->
+            val chunks = literalChunks(dir.resolve("curriculum.json").readText())
+            "    \"${dir.name}\" to ${literalBuildString(chunks)}"
+        }
+
         val target = generatedCourseDirectory.get().file("polski/data/GeneratedCourseJson.kt").asFile
         target.parentFile.mkdirs()
         target.writeText(
@@ -74,7 +89,9 @@ val generateCoursePackSource by tasks.registering {
                 packSourceLiterals + "\n)\n" +
                 "internal val coursePackManifest: PackManifest = PackManifest(embeddedCoursePackSources.map { it.id })\n" +
                 "internal val generatedFrequencyJson = " + literalBuildString(frequencyChunks) + "\n" +
-                "internal val generatedStylesJson = " + literalBuildString(styleChunks) + "\n",
+                "internal val generatedStylesJson = " + literalBuildString(styleChunks) + "\n" +
+                "internal val generatedCurriculumJsonByLang: Map<String, String> = mapOf(\n" +
+                curriculumEntryLiterals + "\n)\n",
         )
     }
 }

@@ -6,6 +6,7 @@ Kotlin Multiplatform: общее ядро + нативный UI на каждо�
 
 ```text
 courses/*/course.json ──(build: generateCoursePackSource scans courses/*, UC-02)──► kotlin/shared (через :pack-format CoursePackSource)
+courses/lang/<code>/curriculum.json ──(тот же generateCoursePackSource, сканирует courses/lang/*, UC-06)──► polski.training.plCurriculum (parallel data — ExerciseFactory остаётся живым путём)
 kotlin/build-logic         convention-плагин polski.kmp-common — 7 KMP-таргетов для новых :core-* модулей
 kotlin/core-model          FeatureKey/FeatureValue/FeatureBundle, Construction, SkillSpec (UC-01, первый :core-* модуль)
 kotlin/pack-format         CoursePackSource/EmbeddedCoursePackSource/PackManifest (UC-02) — раздача сырого JSON пакета по id
@@ -50,7 +51,7 @@ kotlin/macosApp             SwiftUI macOS
 Подход — гибридный ([UniversalCorePlan.md](../Plans/Kotlin/UniversalCorePlan.md)). Gradle-модуль заводится только на границе кода/API; языки и пары — данные.
 
 ```text
-:core-model         FeatureBundle (UD/UniMorph), Construction, SkillSpec, порты будущего
+:core-model         FeatureBundle (UD/UniMorph), Construction, SkillSpec (+ LexicalFilter, UC-06), порты будущего
 :core-engine        Morphology/TableMorphology (готово, UC-05); ConstructionRealizer, TemplateInterpreter (≤10 операторов), ExerciseGenerator, MatrixTableEngine — впереди (UC-07)
 :core-srs           FSRS
 :core-progress      прогресс по pack.id

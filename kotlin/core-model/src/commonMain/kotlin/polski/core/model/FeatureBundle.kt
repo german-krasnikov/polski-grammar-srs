@@ -36,8 +36,20 @@ data class Construction(
 data class FeatureFocus(val feature: FeatureKey, val from: FeatureValue, val to: FeatureValue)
 
 /**
- * A drillable skill: the [Construction] it exercises, the axis it [focus]es on (if any), and the
- * other axes it holds [fixed] while doing so (UniversalCorePlan.md §3.2, `lang/pl/curriculum.json`).
+ * Restricts which lexical candidates a [SkillSpec] draws from — e.g. pl's `case.acc.f` restricts
+ * the noun [slot] to a `gender` value, `case.inst` restricts it to a `nounId` set
+ * (`ExerciseFactory.kt`'s per-skill `sentenceSeeds.filter { ... }`, UniversalCorePlan.md §3.2,
+ * §12 UC-06). Each `where` entry names a candidate property and the values it must be one of;
+ * `null` on [SkillSpec.lexicalFilter] means the skill draws from every candidate, unfiltered.
+ */
+data class LexicalFilter(val slot: String, val where: Map<String, List<String>>)
+
+/**
+ * A drillable skill: the [Construction] it exercises, the axis it [focus]es on (if any), the
+ * other axes it holds [fixed] while doing so, and the candidates [lexicalFilter] restricts it to
+ * (UniversalCorePlan.md §3.2, `lang/pl/curriculum.json`). [focus] is `null` for a skill whose
+ * code has no single feature-value flip — a random pick among several targets, a lexical
+ * substitution, or a composite of several changes at once.
  * [id] is stable across engine changes (UniversalCorePlan.md §1.7) — core code never renames it.
  */
 data class SkillSpec(
@@ -45,6 +57,7 @@ data class SkillSpec(
     val construction: String,
     val focus: FeatureFocus? = null,
     val fixed: FeatureBundle = emptyMap(),
+    val lexicalFilter: LexicalFilter? = null,
     val level: String? = null,
     val prerequisites: List<String> = emptyList(),
 )

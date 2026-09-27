@@ -1,0 +1,146 @@
+[
+  {
+    "id": "case.acc.n",
+    "construction": "core.argument.case-role",
+    "focus": { "feature": "Case", "from": "Nom", "to": "Acc" },
+    "fixed": { "Tense": "Pres", "Person": "1", "Number": "Sing" },
+    "lexicalFilter": { "slot": "noun", "where": { "gender": ["n"] } },
+    "level": "A1",
+    "prerequisites": []
+  },
+  {
+    "id": "case.acc.f",
+    "construction": "core.argument.case-role",
+    "focus": { "feature": "Case", "from": "Nom", "to": "Acc" },
+    "fixed": { "Tense": "Pres", "Person": "1", "Number": "Sing" },
+    "lexicalFilter": { "slot": "noun", "where": { "gender": ["f"] } },
+    "level": "A1",
+    "prerequisites": []
+  },
+  {
+    "id": "case.acc.m",
+    "construction": "core.argument.case-role",
+    "focus": { "feature": "Case", "from": "Nom", "to": "Acc" },
+    "fixed": { "Tense": "Pres", "Person": "1", "Number": "Sing" },
+    "lexicalFilter": { "slot": "noun", "where": { "gender": ["m-personal", "m-animate", "m-inanimate"] } },
+    "level": "A2",
+    "prerequisites": ["case.acc.f"]
+  },
+  {
+    "id": "case.gen.neg",
+    "construction": "core.sentence.polarity",
+    "focus": { "feature": "Polarity", "from": "Pos", "to": "Neg" },
+    "fixed": { "Tense": "Pres", "Person": "1", "Number": "Sing" },
+    "lexicalFilter": null,
+    "level": "A2",
+    "prerequisites": ["case.acc.f"]
+  },
+  {
+    "id": "case.inst",
+    "construction": "core.argument.case-role",
+    "focus": { "feature": "Case", "from": "Acc", "to": "Inst" },
+    "fixed": { "Tense": "Pres", "Person": "1", "Number": "Sing" },
+    "lexicalFilter": { "slot": "noun", "where": { "nounId": ["wife", "husband", "friendM", "son", "child"] } },
+    "level": "A1",
+    "prerequisites": []
+  },
+  {
+    "id": "case.loc",
+    "construction": "core.argument.case-role",
+    "focus": { "feature": "Case", "from": "Acc", "to": "Loc" },
+    "fixed": { "Tense": "Pres", "Person": "1", "Number": "Sing" },
+    "lexicalFilter": null,
+    "level": "A2",
+    "prerequisites": ["case.inst"]
+  },
+  {
+    "id": "case.dat",
+    "construction": "core.argument.case-role",
+    "focus": { "feature": "Case", "from": "Acc", "to": "Dat" },
+    "fixed": { "Tense": "Pres", "Person": "1", "Number": "Sing" },
+    "lexicalFilter": { "slot": "noun", "where": { "nounId": ["wife", "husband", "friendM", "son", "child"] } },
+    "level": "A2",
+    "prerequisites": []
+  },
+  {
+    "id": "agreement.my",
+    "construction": "core.agreement.possessive",
+    "focus": null,
+    "fixed": { "Case": "Acc", "Tense": "Pres", "Person": "1", "Number": "Sing" },
+    "lexicalFilter": null,
+    "level": "A2",
+    "prerequisites": ["case.acc.f", "case.gen.neg"]
+  },
+  {
+    "id": "verb.present",
+    "construction": "core.verb.tense",
+    "focus": { "feature": "Tense", "from": "Past", "to": "Pres" },
+    "fixed": { "Person": "3", "Number": "Sing" },
+    "lexicalFilter": { "slot": "noun", "where": { "nounId": ["wife", "husband", "friendM", "son", "child"] } },
+    "level": "A1",
+    "prerequisites": []
+  },
+  {
+    "id": "verb.past",
+    "construction": "core.verb.tense",
+    "focus": { "feature": "Tense", "from": "Pres", "to": "Past" },
+    "fixed": { "Person": "3", "Number": "Sing" },
+    "lexicalFilter": { "slot": "noun", "where": { "nounId": ["wife", "husband", "friendM", "son", "child"] } },
+    "level": "A2",
+    "prerequisites": ["verb.present"]
+  },
+  {
+    "id": "verb.future",
+    "construction": "core.verb.tense",
+    "focus": { "feature": "Tense", "from": "Pres", "to": "Fut" },
+    "fixed": { "Person": "3", "Number": "Sing" },
+    "lexicalFilter": { "slot": "noun", "where": { "nounId": ["wife", "husband", "friendM", "son", "child"] } },
+    "level": "A2",
+    "prerequisites": ["verb.present"]
+  },
+  {
+    "id": "aspect",
+    "construction": "core.composite",
+    "focus": null,
+    "fixed": { "Person": "1", "Number": "Sing" },
+    "lexicalFilter": null,
+    "level": "B1",
+    "prerequisites": ["verb.past", "verb.future"]
+  },
+  {
+    "id": "pronouns",
+    "construction": "core.argument.case-role",
+    "focus": null,
+    "fixed": { "Case": "Acc", "Tense": "Pres", "Person": "1", "Number": "Sing" },
+    "lexicalFilter": { "slot": "noun", "where": { "nounId": ["wife", "husband", "friendM", "son", "child"] } },
+    "level": "A2",
+    "prerequisites": ["case.inst", "case.loc"]
+  },
+  {
+    "id": "mixed",
+    "construction": "core.composite",
+    "focus": null,
+    "fixed": {},
+    "lexicalFilter": null,
+    "level": "B1",
+    "prerequisites": ["agreement.my", "verb.past"]
+  },
+  {
+    "id": "sentence.question",
+    "construction": "core.sentence.mood",
+    "focus": { "feature": "Mood", "from": "Decl", "to": "YesNoQ" },
+    "fixed": { "Tense": "Pres", "Person": "2", "Number": "Sing" },
+    "lexicalFilter": null,
+    "level": "A1",
+    "prerequisites": []
+  },
+  {
+    "id": "sentence.plural",
+    "construction": "core.number",
+    "focus": { "feature": "Number", "from": "Sing", "to": "Plur" },
+    "fixed": { "Case": "Acc", "Tense": "Pres", "Person": "1" },
+    "lexicalFilter": null,
+    "level": "A2",
+    "prerequisites": ["case.acc.m", "agreement.my"]
+  }
+]
