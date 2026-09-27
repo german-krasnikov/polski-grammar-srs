@@ -211,7 +211,10 @@ final class PolskiGrammarUITests: XCTestCase {
         let settings = app.buttons["openSettings"]
         XCTAssertTrue(settings.waitForExistence(timeout: 5))
         settings.tap()
-        let mode = app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", "Ответ,")).firstMatch
+        // Not a label-based query: the training screen underneath this sheet has its own
+        // "Ответ" picker (FlashCardView) that stays mounted and shares the label, so
+        // `label BEGINSWITH "Ответ,"` matched it instead of the Settings one 3/3 on iPhone.
+        let mode = app.descendants(matching: .any)["settingsAnswerModePicker"].firstMatch
         for _ in 0..<7 {
             if mode.isHittable { break }
             app.swipeUp()
