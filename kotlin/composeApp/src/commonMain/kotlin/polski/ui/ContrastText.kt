@@ -54,6 +54,24 @@ fun ContrastPairText(pair: ContrastPair, modifier: Modifier = Modifier) {
     }
 }
 
+/**
+ * This exercise's own target row before reveal (Emphasis contract §5, EmphasisUXAudit E8):
+ * only the already-known "Было" form is shown — the answer ("Стало") is withheld from visible
+ * text, semantics and every other host surface alike, mirroring `matrixContrastMasked` in the
+ * web target (804f6c6). [before] itself is never the leak — it is the exercise's own nominative
+ * form, already visible elsewhere on the card — so the contentDescription may name it freely.
+ */
+@Composable
+fun ContrastPairTextMasked(before: String, modifier: Modifier = Modifier) {
+    Column(modifier.clearAndSetSemantics {
+        contentDescription = "Было: $before. Ответ скрыт до проверки."
+    }, verticalArrangement = Arrangement.spacedBy(2.dp)) {
+        Text("Было: $before", style = MaterialTheme.typography.bodyMedium)
+        Text("→", style = MaterialTheme.typography.bodyLarge)
+        Text("Стало: ?", style = MaterialTheme.typography.bodyMedium)
+    }
+}
+
 @Composable
 private fun MarkedContrastText(parts: List<EndingPart>, color: Color, dashed: Boolean) {
     var layout by androidx.compose.runtime.remember { mutableStateOf<TextLayoutResult?>(null) }
