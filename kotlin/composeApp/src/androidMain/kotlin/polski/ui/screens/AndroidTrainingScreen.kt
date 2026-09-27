@@ -47,6 +47,7 @@ import polski.presentation.CardPhase
 import polski.presentation.TrainingMode
 import polski.presentation.ChangeSide
 import polski.presentation.StyleId
+import polski.presentation.StyleRegistry
 import polski.presentation.changeHighlightParts
 import polski.presentation.ContrastPair
 import polski.presentation.sentenceHighlightParts
@@ -145,9 +146,11 @@ internal fun AndroidTrainingScreen(
                 if (exercise != null) AndroidInfoCard("${skillById(exercise.primarySkill).level} · ${skillById(exercise.primarySkill).title}") {
                     val presentation = presentationBySkillId(exercise.primarySkill)
                     val method = if (state.styleId == StyleId.SituationFirst) presentation.situations else presentation.logic
+                    // S1: quick switch at the training card's existing method-toggle location, now
+                    // all 4 styles — dispatching SetStyle never creates a review or clears the
+                    // typed draft (TrainingStore.SetStyle is a plain state copy, see AppAction.kt).
                     AndroidChoiceMenu("Подача", state.styleId.name,
-                        listOf(StyleId.RuleFirst.name to "Схемы и логика",
-                            StyleId.SituationFirst.name to "Живые ситуации")) {
+                        StyleId.entries.map { it.name to styleLabel(StyleRegistry.recipes.getValue(it)) }) {
                         dispatch(AppAction.SetStyle(StyleId.valueOf(it)))
                     }
                     if (state.phase == CardPhase.Question && state.introPending) {

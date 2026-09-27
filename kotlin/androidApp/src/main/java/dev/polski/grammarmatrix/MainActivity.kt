@@ -79,7 +79,9 @@ import polski.presentation.EffectOutcome
 import polski.presentation.UiEffect
 import polski.preferences.Motion
 import polski.preferences.UserPreferencesV2
+import polski.presentation.StyleId
 import polski.ui.screens.AndroidContent
+import polski.ui.screens.AndroidStylePicker
 import polski.ui.screens.AndroidTabContent
 import polski.ui.screens.AndroidVocabularyScreen
 import polski.ui.screens.RiveMeasurementVariant
@@ -284,7 +286,7 @@ private fun AndroidScreen(
             ) {
                 session.notice?.let { Text(it, color = MaterialTheme.colorScheme.primary) }
                 state.error?.let { Text(it, color = MaterialTheme.colorScheme.error) }
-                if (showSettings) AndroidSettingsScreen(session)
+                if (showSettings) AndroidSettingsScreen(session, state.styleId, state.exercise?.primarySkill, store::dispatch)
                 // D4: the four bottom-nav tabs slide past each other horizontally instead of
                 // popping; AndroidTabContent's branch parameter (not the ambient `state.tab`,
                 // already at its new value) decides which screen each side of the slide renders.
@@ -306,9 +308,26 @@ private fun AndroidScreen(
 }
 
 @Composable
-private fun AndroidSettingsScreen(session: AndroidSessionViewModel) {
+private fun AndroidSettingsScreen(
+    session: AndroidSessionViewModel,
+    styleId: StyleId,
+    currentSkillId: String?,
+    dispatch: (AppAction) -> Unit,
+) {
     Column(verticalArrangement = Arrangement.spacedBy(14.dp)) {
         Text("Настройки", style = MaterialTheme.typography.headlineSmall)
+        // S1: replaces the old 2-way Logic/Situations selector — 4 styles, sourced from
+        // StyleRegistry (label/description), persisted via UserPreferencesV3.styleId through the
+        // same store dispatch the training card's quick switch uses (AndroidScreen's
+        // LaunchedEffect(state.styleId) is what actually calls session.persistStyle).
+        Text("Обучение", style = MaterialTheme.typography.titleMedium)
+        Text("Стиль объяснений", color = MaterialTheme.colorScheme.onSurfaceVariant)
+        AndroidStylePicker(
+            selected = styleId,
+            currentSkillId = currentSkillId,
+            enabled = session.preferencesError == null,
+            onSelect = { dispatch(AppAction.SetStyle(it)) },
+        )
         Text("Оформление", style = MaterialTheme.typography.titleMedium)
         SingleChoiceSegmentedButtonRow(modifier = Modifier.fillMaxWidth()) {
             Appearance.entries.forEachIndexed { index, appearance ->
