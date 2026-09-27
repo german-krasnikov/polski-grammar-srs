@@ -163,6 +163,17 @@ class IosMatrixSnapshotTest {
             assertEquals(referenceSystemCards[index].title, card.getValue("title").jsonPrimitive.content)
             assertEquals(referenceSystemCards[index].explanation, card.getValue("explanation").jsonPrimitive.content)
             assertEquals(referenceSystemCards[index].example, card.getValue("example").jsonPrimitive.content)
+            val steps = card.getValue("steps").jsonArray
+            assertEquals(referenceSystemCards[index].steps.size - 1, steps.size)
+            steps.forEachIndexed { stepIndex, stepElement ->
+                val pair = stepElement.jsonObject
+                val from = referenceSystemCards[index].steps[stepIndex]
+                val to = referenceSystemCards[index].steps[stepIndex + 1]
+                assertEquals(from, pair.getValue("from").jsonPrimitive.content)
+                assertEquals(to, pair.getValue("to").jsonPrimitive.content)
+                assertEquals(from, pair.getValue("beforeParts").jsonArray.joinToString("") { it.jsonObject.getValue("text").jsonPrimitive.content })
+                assertEquals(to, pair.getValue("afterParts").jsonArray.joinToString("") { it.jsonObject.getValue("text").jsonPrimitive.content })
+            }
         }
     }
 

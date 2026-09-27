@@ -64,7 +64,10 @@ data class ChainCompletion(val title: String, val reactEyebrow: String, val reac
 data class ChainPresentation(val steps: List<ChainStep>, val completion: ChainCompletion) {
     val summary: String get() = steps.joinToString(" → ") { it.label }
 }
-data class ReferenceSystemCard(val id: String, val title: String, val explanation: String, val example: String)
+/** [steps] is the same arrow chain as [example] (`steps.joinToString(" → ") == example`), kept
+ * structured so a host can highlight each consecutive pair with [polski.presentation.ContrastPair]
+ * instead of parsing the prose arrow (EmphasisUXAudit E6). */
+data class ReferenceSystemCard(val id: String, val title: String, val explanation: String, val example: String, val steps: List<String>)
 data class ReferencePipelineStep(val id: String, val label: String, val question: String, val example: String)
 data class ReferencePipeline(val title: String, val steps: List<ReferencePipelineStep>, val compactExample: String) {
     val compactSummary: String get() = steps.joinToString(" → ") { it.question }
@@ -273,8 +276,13 @@ internal class CoursePack(private val source: CoursePackSource) {
     }
 
     val referenceSystemCards: List<ReferenceSystemCard> by lazy {
-        root.obj("reference").rows("systemCards").map { value ->
-            ReferenceSystemCard(value.string("id"), value.string("title"), value.string("explanation"), value.string("example"))
+        root.obj("reference").rows("systemCards").mapIndexed { index, value ->
+            val steps = value.getValue("steps").jsonArray.map { it.jsonPrimitive.content }
+            val example = value.string("example")
+            require(steps.size >= 2 && steps.joinToString(" → ") == example) {
+                "/reference/systemCards/$index/steps: must join with ' → ' into example"
+            }
+            ReferenceSystemCard(value.string("id"), value.string("title"), value.string("explanation"), example, steps)
         }.also { cards ->
             require(cards.map { it.id } == listOf("noun", "agreement", "verb", "modifiers"))
         }

@@ -582,12 +582,17 @@
           "items": {
             "type": "object",
             "additionalProperties": false,
-            "required": ["id", "title", "explanation", "example"],
+            "required": ["id", "title", "explanation", "example", "steps"],
             "properties": {
               "id": { "enum": ["noun", "agreement", "verb", "modifiers"] },
               "title": { "$ref": "#/$defs/text" },
               "explanation": { "$ref": "#/$defs/text" },
-              "example": { "$ref": "#/$defs/text" }
+              "example": { "$ref": "#/$defs/text" },
+              "steps": {
+                "type": "array",
+                "minItems": 2,
+                "items": { "$ref": "#/$defs/text" }
+              }
             }
           }
         },

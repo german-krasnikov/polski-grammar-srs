@@ -238,6 +238,7 @@ private fun matrixSnapshot(state: AppUiState): JsonElement {
         put("systemCards", JsonArray(referenceSystemCards.map { card -> buildJsonObject {
             put("id", card.id); put("title", card.title)
             put("explanation", card.explanation); put("example", card.example)
+            put("steps", JsonArray(card.steps.zipWithNext { from, to -> pairSnapshot(ContrastPair.generated(from, to)) }))
         } }))
         put("chainRows", JsonArray(referenceChainRows.map { row -> buildJsonObject {
             put("label", row.label); put("from", row.from); put("to", row.to); put("change", row.change)

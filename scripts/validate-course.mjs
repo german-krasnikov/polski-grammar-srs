@@ -321,6 +321,9 @@ export function validateCoursePack(course, frequency) {
     if (card.id !== expectedSystemCardIds[index]) {
       throw new Error(`/reference/systemCards/${index}/id: expected ${expectedSystemCardIds[index]}`);
     }
+    if (card.steps.join(' → ') !== card.example) {
+      throw new Error(`/reference/systemCards/${index}/steps: must join with ' → ' into example`);
+    }
   });
   uniqueBy(course.reference.maleAccRows, 'id', '/reference/maleAccRows');
   const expectedAccTypes = ['person', 'animal', 'object'];
