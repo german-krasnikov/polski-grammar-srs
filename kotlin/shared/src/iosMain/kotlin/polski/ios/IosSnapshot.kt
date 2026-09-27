@@ -51,6 +51,7 @@ import polski.presentation.changeHighlightParts
 import polski.presentation.sentenceHighlightParts
 import polski.presentation.ChangeSide
 import polski.presentation.ContrastPair
+import polski.presentation.EndingPart
 import polski.data.presentationBySkillId
 import polski.data.styleContentBySkillId
 import polski.presentation.StyleComposer
@@ -139,12 +140,23 @@ internal fun snapshot(state: AppUiState): String = buildJsonObject {
         }
         }
     } } ?: JsonNull)
+    // Emphasis contract §5 / web fix 804f6c6: before reveal, the row matching this exercise's own
+    // target case is the answer, so its form stays masked; every other row is unrelated reference
+    // material and shows normally.
+    val revealed = state.phase == CardPhase.Revealed
     put("referenceRows", JsonArray(if (state.showReference && !state.introPending) state.exercise?.let { exercise -> caseRows.map { row -> buildJsonObject {
         put("title", "${row.pl} · ${row.ru}")
-        val form = nounPhrase(exercise.nounId, row.id, exercise.number, exercise.adjectiveId, exercise.possessive)
-        put("text", form)
-        put("pair", pairSnapshot(ContrastPair.generated(
-            nounPhrase(exercise.nounId, GramCase.NOM, exercise.number, exercise.adjectiveId, exercise.possessive), form)))
+        val from = nounPhrase(exercise.nounId, GramCase.NOM, exercise.number, exercise.adjectiveId, exercise.possessive)
+        val isTarget = row.id.id in exercise.tags
+        if (isTarget && !revealed) {
+            put("text", referenceMaskPlaceholder)
+            put("pair", pairSnapshot(ContrastPair(from, referenceMaskPlaceholder,
+                listOf(EndingPart(from, isEnding = false)), listOf(EndingPart(referenceMaskPlaceholder, isEnding = false)))))
+        } else {
+            val form = nounPhrase(exercise.nounId, row.id, exercise.number, exercise.adjectiveId, exercise.possessive)
+            put("text", form)
+            put("pair", pairSnapshot(ContrastPair.generated(from, form)))
+        }
     } } } ?: emptyList() else emptyList()))
     put("matrix", matrixSnapshot(state))
     put("progress", JsonArray(state.progress?.cards?.mapNotNull { card ->
@@ -195,6 +207,9 @@ private fun styleBlocksSnapshot(state: AppUiState): JsonElement {
         put("back", blocksToJson(StyleComposer.compose(effective, StylePhase.Back, exercise, skill, focus, content)))
     }
 }
+
+/** Emphasis contract §5: what the target row's "Стало" shows before reveal — never the answer. */
+private const val referenceMaskPlaceholder = "?"
 
 private fun pairSnapshot(pair: ContrastPair): JsonObject = buildJsonObject {
     put("from", pair.from)
