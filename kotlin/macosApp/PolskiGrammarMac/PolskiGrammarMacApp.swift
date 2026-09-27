@@ -119,6 +119,7 @@ struct BlockJSON: Decodable {
 
     let kind: String
     let text: String?
+    let detail: String?
     let caption: String?
     let rows: [TableRow]?
     let pairs: [NativeParallelPair]?
@@ -129,13 +130,14 @@ struct BlockJSON: Decodable {
     let changeItems: [ChangeItem]?
 
     private enum CodingKeys: String, CodingKey {
-        case kind, text, caption, rows, pairs, collapsedLabel, before, after, items
+        case kind, text, detail, caption, rows, pairs, collapsedLabel, before, after, items
     }
 
     init(from decoder: Decoder) throws {
         let c = try decoder.container(keyedBy: CodingKeys.self)
         kind = try c.decode(String.self, forKey: .kind)
         text = try c.decodeIfPresent(String.self, forKey: .text)
+        detail = try c.decodeIfPresent(String.self, forKey: .detail)
         caption = try c.decodeIfPresent(String.self, forKey: .caption)
         rows = try c.decodeIfPresent([TableRow].self, forKey: .rows)
         pairs = try c.decodeIfPresent([NativeParallelPair].self, forKey: .pairs)
