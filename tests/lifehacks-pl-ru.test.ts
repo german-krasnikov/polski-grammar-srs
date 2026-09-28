@@ -39,7 +39,7 @@ describe('pl-ru lifehacks.json (EnRuPackPlan.md §4.4/§6 EN-20)', () => {
     ['unprefixed id', (data: typeof lifehacks) => { data.lifehacks[0].id = 'not-prefixed'; }, /must be prefixed/],
     ['duplicate id', (data: typeof lifehacks) => { data.lifehacks[1].id = data.lifehacks[0].id; }, /duplicate id/],
     ['unknown skillId', (data: typeof lifehacks) => { data.lifehacks[0].skillId = 'does-not-exist'; }, /not a known curriculum skill/],
-    ['null skillId without topic', (data: typeof lifehacks) => { data.lifehacks[0].skillId = null; }, /needs a non-empty topic/],
+    ['null skillId without topic', (data: typeof lifehacks) => { (data.lifehacks[0] as { skillId: string | null }).skillId = null; }, /needs a non-empty topic/],
     ['empty citation', (data: typeof lifehacks) => { data.lifehacks[0].source.citation = '   '; }, /source\/citation/],
     ['placeholder citation', (data: typeof lifehacks) => { data.lifehacks[0].source.citation = 'TBD'; }, /empty or placeholder citation/],
     ['pairId mismatch', (data: typeof lifehacks) => { data.pairId = 'en-ru'; }, /expected "pl-ru"/],

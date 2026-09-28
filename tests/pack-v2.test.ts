@@ -92,7 +92,7 @@ describe('EN-11: lang/en lang.json + lexicon.json + prepositions.json', () => {
 
   test('lang/en/lexicon.json has the 5 required lexical categories, each internally consistent', async () => {
     const enLexicon = await import('../courses/lang/en/lexicon.json');
-    const lex = enLexicon.default as {
+    const lex = enLexicon.default as unknown as {
       nouns: Array<{ id: string; forms: { sg: string; pl: string } }>;
       adjectives: Array<{ id: string; forms: { invariant: string } }>;
       verbs: Array<{ id: string; lemma: string; present3sg?: string }>;
