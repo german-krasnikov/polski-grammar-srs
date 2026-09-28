@@ -214,3 +214,43 @@ describe('EN-12: lang/en/curriculum.json — 16 SkillSpec (EnRuPackPlan.md §1.2
     }
   });
 });
+
+describe('EN-18: nativeParallel coverage for all 16 en-ru skills (EnRuPackPlan.md §2.2/§6)', () => {
+  type NativeParallelPair = { native: string; target: string; note: string; matches: boolean };
+  type EnRuSkill = { id: string; styleContent?: { nativeParallel?: NativeParallelPair[] } };
+
+  test('every one of the 16 skills has a non-empty, well-formed nativeParallel (native-contrast renders its own content, not the rule-first fallback)', async () => {
+    const enRuPair = (await import('../courses/pairs/en-ru/pair.json')).default as unknown as { skills: EnRuSkill[] };
+    expect(enRuPair.skills.length).toBe(16);
+    for (const skill of enRuPair.skills) {
+      const pairs = skill.styleContent?.nativeParallel;
+      expect(pairs, skill.id).toBeDefined();
+      expect(pairs!.length, skill.id).toBeGreaterThan(0);
+      for (const pair of pairs!) {
+        expect(pair.native.trim().length, `${skill.id}.native`).toBeGreaterThan(0);
+        expect(pair.target.trim().length, `${skill.id}.target`).toBeGreaterThan(0);
+        expect(pair.note.trim().length, `${skill.id}.note`).toBeGreaterThan(0);
+        expect(typeof pair.matches, `${skill.id}.matches`).toBe('boolean');
+      }
+    }
+  });
+
+  test('at least one skill authentically shows a match (typological contrast is not always "everything differs")', async () => {
+    const enRuPair = (await import('../courses/pairs/en-ru/pair.json')).default as unknown as { skills: EnRuSkill[] };
+    const anyMatch = enRuPair.skills.some((skill) => (skill.styleContent?.nativeParallel ?? []).some((pair) => pair.matches));
+    expect(anyMatch).toBe(true);
+  });
+
+  test('no nativeParallel.target sentence is copy-pasted verbatim across two different skills (each is authored for its own contrast)', async () => {
+    const enRuPair = (await import('../courses/pairs/en-ru/pair.json')).default as unknown as { skills: EnRuSkill[] };
+    const seen = new Map<string, string>();
+    for (const skill of enRuPair.skills) {
+      for (const pair of skill.styleContent?.nativeParallel ?? []) {
+        const key = pair.target.trim().toLowerCase();
+        const owner = seen.get(key);
+        expect(owner, `"${pair.target}" reused verbatim in ${skill.id} (first seen in ${owner})`).toBeUndefined();
+        seen.set(key, skill.id);
+      }
+    }
+  });
+});
