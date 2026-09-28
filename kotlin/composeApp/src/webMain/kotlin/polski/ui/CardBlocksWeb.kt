@@ -11,8 +11,14 @@ import polski.presentation.Block
  * here. Formula/Rule/Contrast share one visual box (today's `.rule-focus`/`.rule-contrast`, byte-
  * identical to the pre-UC-10 markup those classes already had) since a recipe emits them as the
  * card's single "key rule" area; every other kind gets its own accessible section.
+ *
+ * [langCode] is the active pack's own target-language BCP-47 code (EnRuAcceptance-2026-09-28.md
+ * §7 item 2/3): every block below renders the active pack's real target-language text, so its
+ * `lang` attribute must follow suit instead of the literal "pl" this used to hardcode — same fix
+ * as [TrainingWebApp]'s `activeTargetLangCode()`, threaded through since this renderer has no
+ * pack access of its own.
  */
-internal fun renderCardBlocks(container: HTMLElement, blocks: List<Block>, phaseClass: String) {
+internal fun renderCardBlocks(container: HTMLElement, blocks: List<Block>, phaseClass: String, langCode: String) {
     if (blocks.isEmpty()) return
     val wrap = node("div", "card-blocks $phaseClass")
     container.appendChild(wrap)
@@ -32,22 +38,22 @@ internal fun renderCardBlocks(container: HTMLElement, blocks: List<Block>, phase
                 appendChild(node("p").also { appendContrastParts(it, block.parts, "change-after") })
                 appendChild(node("p", text = block.detail))
             }
-            is Block.Contrast -> ruleFocusBox().appendChild(renderContrastMarkup(block))
-            is Block.Table -> renderTableBlock(wrap, block)
-            is Block.Scene -> renderSceneBlock(wrap, block)
-            is Block.NativeParallel -> renderNativeParallelBlock(wrap, block)
-            is Block.Examples -> renderExamplesBlock(wrap, block)
+            is Block.Contrast -> ruleFocusBox().appendChild(renderContrastMarkup(block, langCode))
+            is Block.Table -> renderTableBlock(wrap, block, langCode)
+            is Block.Scene -> renderSceneBlock(wrap, block, langCode)
+            is Block.NativeParallel -> renderNativeParallelBlock(wrap, block, langCode)
+            is Block.Examples -> renderExamplesBlock(wrap, block, langCode)
             is Block.WhyOnDemand -> renderWhyOnDemandBlock(wrap, block)
             is Block.Changes -> renderChangesBlock(wrap, block)
         }
     }
 }
 
-private fun renderContrastMarkup(block: Block.Contrast): HTMLElement {
+private fun renderContrastMarkup(block: Block.Contrast, langCode: String): HTMLElement {
     val beforeText = block.before.joinToString("") { it.text }
     val afterText = block.after.joinToString("") { it.text }
     return node("div", "rule-contrast").apply {
-        setAttribute("lang", "pl")
+        setAttribute("lang", langCode)
         appendChild(node("span", "form-contrast").apply {
             setAttribute("aria-label", "Было: $beforeText. Стало: $afterText")
             appendChild(node("span", "form-contrast-before").apply {
@@ -65,7 +71,7 @@ private fun renderContrastMarkup(block: Block.Contrast): HTMLElement {
 
 // UC-10 web S2 new visual: a compact endings table, own container (not `.table-scroll`, which is
 // tuned for the much wider Matrix/reference tables) so a 2-3 column table stays legible at 320px.
-private fun renderTableBlock(container: HTMLElement, block: Block.Table) {
+private fun renderTableBlock(container: HTMLElement, block: Block.Table, langCode: String) {
     val caption = block.caption.takeIf(String::isNotBlank)
     val section = node("section", "block block-table")
     section.setAttribute("aria-label", caption ?: "Таблица окончаний")
@@ -88,24 +94,24 @@ private fun renderTableBlock(container: HTMLElement, block: Block.Table) {
         val tr = node("tr")
         body.appendChild(tr)
         tr.appendChild(node("th", text = row.label).apply { setAttribute("scope", "row") })
-        tr.appendChild(node("td").apply { setAttribute("lang", "pl"); appendContrastParts(this, row.before, "change-before") })
-        tr.appendChild(node("td").apply { setAttribute("lang", "pl"); appendContrastParts(this, row.after, "change-after") })
+        tr.appendChild(node("td").apply { setAttribute("lang", langCode); appendContrastParts(this, row.before, "change-before") })
+        tr.appendChild(node("td").apply { setAttribute("lang", langCode); appendContrastParts(this, row.after, "change-after") })
     }
 }
 
 // UC-10 web S2 new visual: a quote-like card for the situation-first "scene" text.
-private fun renderSceneBlock(container: HTMLElement, block: Block.Scene) {
+private fun renderSceneBlock(container: HTMLElement, block: Block.Scene, langCode: String) {
     val section = node("section", "block block-scene")
     section.setAttribute("aria-label", "Сцена")
     container.appendChild(section)
-    val quote = node("blockquote", "block-scene-quote").apply { setAttribute("lang", "pl") }
+    val quote = node("blockquote", "block-scene-quote").apply { setAttribute("lang", langCode) }
     section.appendChild(quote)
     appendContrastParts(quote, block.parts, "change-after")
 }
 
 // UC-10 web S2 new visual: a native ↔ target row per pair, with a match/differs badge — the
 // content a native-contrast style needs to actually justify itself over rule-first.
-private fun renderNativeParallelBlock(container: HTMLElement, block: Block.NativeParallel) {
+private fun renderNativeParallelBlock(container: HTMLElement, block: Block.NativeParallel, langCode: String) {
     if (block.pairs.isEmpty()) return
     val section = node("section", "block block-native-parallel")
     section.setAttribute("aria-label", "Сравнение с родным")
@@ -114,7 +120,7 @@ private fun renderNativeParallelBlock(container: HTMLElement, block: Block.Nativ
         val row = node("div", "native-parallel-row")
         section.appendChild(row)
         row.appendChild(node("span", "native-parallel-native", pair.native))
-        val target = node("span", "native-parallel-target").apply { setAttribute("lang", "pl") }
+        val target = node("span", "native-parallel-target").apply { setAttribute("lang", langCode) }
         row.appendChild(target)
         appendContrastParts(target, pair.targetParts, "change-after")
         row.appendChild(node(
@@ -128,7 +134,7 @@ private fun renderNativeParallelBlock(container: HTMLElement, block: Block.Nativ
 
 // UC-10 web S2 new visual: a plain list — the card itself is already the primary example, these
 // are just extra ones, so no highlighting/analysis chrome.
-private fun renderExamplesBlock(container: HTMLElement, block: Block.Examples) {
+private fun renderExamplesBlock(container: HTMLElement, block: Block.Examples, langCode: String) {
     if (block.items.isEmpty()) return
     val section = node("section", "block block-examples")
     section.setAttribute("aria-label", "Примеры")
@@ -136,7 +142,7 @@ private fun renderExamplesBlock(container: HTMLElement, block: Block.Examples) {
     val list = node("ul", "block-examples-list")
     section.appendChild(list)
     block.items.forEachIndexed { index, _ ->
-        val item = node("li").apply { setAttribute("lang", "pl") }
+        val item = node("li").apply { setAttribute("lang", langCode) }
         list.appendChild(item)
         appendContrastParts(item, block.itemParts[index], "change-after")
     }

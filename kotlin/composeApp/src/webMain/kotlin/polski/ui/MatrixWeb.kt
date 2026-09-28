@@ -79,8 +79,9 @@ internal fun renderMatrixWeb(root: HTMLElement, state: AppUiState, dispatch: (Ap
     // (ADR-36: [nouns] is honestly empty, not fabricated, for such a pack). Wiring a rich
     // en-ru-specific reference screen is separate, unstarted work (ADR-36's own scope note); this
     // guard's only job is to make that absence a calm placeholder instead of a crash. [renderVerbs]
-    // is unaffected — EN-24's English verb/do-support tables already read en's own, pack-independent
-    // data and work regardless of which pack is active.
+    // is always called (its own `verbs.isEmpty()` guard inside handles the caseless-pack case the
+    // same way) since it also unconditionally appends EN-24's pack-independent English verb/
+    // do-support tables, which work regardless of which pack is active.
     val hasCaseSystem = nouns.isNotEmpty()
     when (state.matrixSelection.section) {
         MatrixSection.Map -> if (hasCaseSystem) renderMap(root, dispatch) else renderNoCaseSystemNotice(root)
@@ -91,7 +92,13 @@ internal fun renderMatrixWeb(root: HTMLElement, state: AppUiState, dispatch: (Ap
 }
 
 private fun renderNoCaseSystemNotice(root: HTMLElement) {
-    root.matrixAdd("p", "muted", "Для текущего курса эта таблица недоступна: в этом языке нет падежей/рода. Открой «Времена и лица» — таблица глаголов и do-support работает для любого курса.")
+    // matrixAdd's positional params are (tag, text, cls) — this used to pass "muted" as the text
+    // and the actual notice as the class, so the notice never appeared as visible text (only as
+    // an invalid CSS class name) for any of the 4 caseless-pack placeholders (Map/Cases/Pronouns,
+    // now also Verbs) this renders for. Not one of this task's 2 assigned blockers, but found
+    // while verifying blocker 1's fix (the only path that made this render observable) and in
+    // the same file/feature area, so fixed alongside it rather than left broken.
+    root.matrixAdd("p", "Для текущего курса эта таблица недоступна: в этом языке нет падежей/рода. Открой «Времена и лица» — таблица глаголов и do-support работает для любого курса.", "muted")
 }
 
 /**
@@ -277,64 +284,76 @@ private fun renderCases(root: HTMLElement, state: AppUiState, dispatch: (AppActi
     )
 }
 
+// EnRuAcceptance-2026-09-28.md §7 item 1/3 (blocker fix): `verbs` (packRegistry.active.verbs) is
+// honestly empty for a caseless/aspect-less pack like en-ru — same reasoning as `hasCaseSystem`
+// above, and the same absence the shared `verbsTable()` KDoc documents. This function used to
+// build the pl aspect/tense grid unconditionally, so with en-ru active and the default
+// `verbId = "do"` it crashed inside `verbById("do")` the moment the engine evaluated a cell. Gate
+// the whole pl-conjugation portion behind `verbs.isNotEmpty()`, same pattern as Map/Cases/Pronouns,
+// and fall through to a calm notice instead. `renderEnglishVerbMatrix` stays unconditional — EN-24
+// already reads its own pack-independent data and works regardless of which pack is active.
 private fun renderVerbs(root: HTMLElement, state: AppUiState, dispatch: (AppAction) -> Unit) {
-    val selected = state.matrixSelection
-    val section = root.matrixSection("Лицо × число × время")
-    val controls = section.matrixAdd("div", cls = "table-controls")
-    controls.matrixSelect("Глагол", "matrix-verb", selected.verbId,
-        verbs.filter { it.aspect == Aspect.IMPERFECTIVE }.map { it.id to "${it.lemma} — ${it.meaning}" }) {
-        dispatch(AppAction.SetMatrixSelection(selected.copy(verbId = it)))
-    }
-    val teaching = referenceVerbTeaching
-    controls.matrixSelect(teaching.genderControlLabel.full, "matrix-gender", if (selected.feminineGroup) "f" else "m",
-        teaching.genderOptions.map { it.id to it.label.full }) {
-        dispatch(AppAction.SetMatrixSelection(selected.copy(feminineGroup = it == "f")))
-    }
-    section.matrixTable(
-        MatrixTableEngine.build(
-            rowAxis = teaching.subjects,
-            rowHeaderLabel = "Кто",
-            rowHeader = { it.label.full },
-            columns = listOf(Tense.PRESENT, Tense.PAST, Tense.FUTURE).map { tense ->
-                MatrixColumn(
-                    teaching.tenseLabels.getValue(tense).full,
-                    { subject -> verbForm(selected.verbId, tense, subject.person, subject.number, subject.gender(selected.feminineGroup)) },
-                    contrastFrom = { verbs.first { it.id == selected.verbId }.lemma },
-                )
-            },
-        ).toViewModel(),
-    )
-    section.matrixAdd("p", teaching.compactFutureExplanation)
+    if (verbs.isEmpty()) {
+        renderNoCaseSystemNotice(root)
+    } else {
+        val selected = state.matrixSelection
+        val section = root.matrixSection("Лицо × число × время")
+        val controls = section.matrixAdd("div", cls = "table-controls")
+        controls.matrixSelect("Глагол", "matrix-verb", selected.verbId,
+            verbs.filter { it.aspect == Aspect.IMPERFECTIVE }.map { it.id to "${it.lemma} — ${it.meaning}" }) {
+            dispatch(AppAction.SetMatrixSelection(selected.copy(verbId = it)))
+        }
+        val teaching = referenceVerbTeaching
+        controls.matrixSelect(teaching.genderControlLabel.full, "matrix-gender", if (selected.feminineGroup) "f" else "m",
+            teaching.genderOptions.map { it.id to it.label.full }) {
+            dispatch(AppAction.SetMatrixSelection(selected.copy(feminineGroup = it == "f")))
+        }
+        section.matrixTable(
+            MatrixTableEngine.build(
+                rowAxis = teaching.subjects,
+                rowHeaderLabel = "Кто",
+                rowHeader = { it.label.full },
+                columns = listOf(Tense.PRESENT, Tense.PAST, Tense.FUTURE).map { tense ->
+                    MatrixColumn(
+                        teaching.tenseLabels.getValue(tense).full,
+                        { subject -> verbForm(selected.verbId, tense, subject.person, subject.number, subject.gender(selected.feminineGroup)) },
+                        contrastFrom = { verbs.first { it.id == selected.verbId }.lemma },
+                    )
+                },
+            ).toViewModel(),
+        )
+        section.matrixAdd("p", teaching.compactFutureExplanation)
 
-    val sentence = root.matrixSection("Время меняется, предложение остаётся целым")
-    sentence.matrixTable(
-        MatrixTableEngine.build(
-            rowAxis = referenceTenseRows,
-            rowHeaderLabel = "Операция",
-            rowHeader = { it.label },
-            columns = listOf(MatrixColumn("Предложение", { it.to }, contrastFrom = { it.from })),
-        ).toViewModel(),
-    )
-    sentence.matrixButton("Тренировать времена предложениями") {
-        dispatch(AppAction.ChooseSkill("verb.past", SentenceSeed("wife", "beautiful")))
-    }
-    val aspect = root.matrixSection("Вид: процесс или результат")
-    aspect.matrixTable(
-        MatrixTableEngine.build(
-            rowAxis = referenceAspectRows,
-            rowHeaderLabel = "Смысл",
-            rowHeader = { it.label },
-            columns = listOf(
-                MatrixColumn(
-                    "Настоящее",
-                    { it.present ?: courseAspectNoPresent.compact },
-                    contrastFrom = { row -> if (row.present == null) null else row.from },
+        val sentence = root.matrixSection("Время меняется, предложение остаётся целым")
+        sentence.matrixTable(
+            MatrixTableEngine.build(
+                rowAxis = referenceTenseRows,
+                rowHeaderLabel = "Операция",
+                rowHeader = { it.label },
+                columns = listOf(MatrixColumn("Предложение", { it.to }, contrastFrom = { it.from })),
+            ).toViewModel(),
+        )
+        sentence.matrixButton("Тренировать времена предложениями") {
+            dispatch(AppAction.ChooseSkill("verb.past", SentenceSeed("wife", "beautiful")))
+        }
+        val aspect = root.matrixSection("Вид: процесс или результат")
+        aspect.matrixTable(
+            MatrixTableEngine.build(
+                rowAxis = referenceAspectRows,
+                rowHeaderLabel = "Смысл",
+                rowHeader = { it.label },
+                columns = listOf(
+                    MatrixColumn(
+                        "Настоящее",
+                        { it.present ?: courseAspectNoPresent.compact },
+                        contrastFrom = { row -> if (row.present == null) null else row.from },
+                    ),
+                    MatrixColumn("Прошедшее", { it.past }, contrastFrom = { it.from }),
+                    MatrixColumn("Будущее", { it.future }, contrastFrom = { it.from }),
                 ),
-                MatrixColumn("Прошедшее", { it.past }, contrastFrom = { it.from }),
-                MatrixColumn("Будущее", { it.future }, contrastFrom = { it.from }),
-            ),
-        ).toViewModel(),
-    )
+            ).toViewModel(),
+        )
+    }
     renderEnglishVerbMatrix(root)
 }
 

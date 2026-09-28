@@ -173,7 +173,7 @@ internal class VocabularyWebController {
         }
         val layout = page.add("div", cls = "vocabulary-layout")
         renderCard(layout.add("section", cls = "card vocabulary-card"), outerRoot, swipeRatingEnabled, languages, refresh)
-        renderCatalog(layout.add("section", cls = "card vocabulary-catalog"), refresh)
+        renderCatalog(layout.add("section", cls = "card vocabulary-catalog"), languages, refresh)
         page.add("p", cls = "muted small").apply {
             add("span", "Частотные ранги и counts: ")
             add("a", "Leksjo / NKJP, CC BY 4.0").apply {
@@ -319,7 +319,7 @@ internal class VocabularyWebController {
         }
     }
 
-    private fun renderCatalog(section: HTMLElement, refresh: () -> Unit) {
+    private fun renderCatalog(section: HTMLElement, languages: ActivePackLanguages, refresh: () -> Unit) {
         val header = section.add("div", cls = "catalog-toolbar")
         header.add("h3", "Мой словарь · ${document.selectedIds.size}")
         val toggleId = "vocabulary-catalog-toggle"
@@ -372,7 +372,7 @@ internal class VocabularyWebController {
                 if (item != null) commit(VocabularyCodec.select(document, item.id, checkbox.checked), refresh)
             })
             row.add("span").apply {
-                add("b", lemma).setAttribute("lang", "pl")
+                add("b", lemma).setAttribute("lang", languages.targetLang)
                 add("small", item?.translation ?: courseVocabularyUnavailableLabel)
             }
             if (rank != null) row.add("small", "№ $rank")

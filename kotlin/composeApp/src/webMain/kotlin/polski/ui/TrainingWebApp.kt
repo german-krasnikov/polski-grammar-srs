@@ -782,7 +782,7 @@ private class TrainingDomRenderer {
             })
             // UC-10 web S2: which blocks show here (and in which order) comes entirely from the
             // resolved style's recipe — a style switch changes this list, never a hardcoded branch.
-            renderCardBlocks(this, frontBlocks, "card-blocks-front")
+            renderCardBlocks(this, frontBlocks, "card-blocks-front", activeTargetLangCode())
         }
         if (state.phase == CardPhase.Question) {
             card.appendChild(front)
@@ -898,7 +898,7 @@ private class TrainingDomRenderer {
         // sections show, never a branch in this function.
         val (effective, content) = resolveEffectiveStyleAndContent(state, skill.id)
         val backBlocks = StyleComposer.compose(effective, StylePhase.Back, exercise, skill, presentation, content)
-        renderCardBlocks(back, backBlocks, "card-blocks-back")
+        renderCardBlocks(back, backBlocks, "card-blocks-back", activeTargetLangCode())
         // EN-21 (EnRuPackPlan.md §4.3): the lifehack block is deliberately outside StyleComposer's
         // output — same for every style, so it always renders after the back blocks, never inside
         // whichever ones the active style composed.
