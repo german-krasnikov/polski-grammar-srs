@@ -171,6 +171,10 @@ internal fun AndroidTrainingScreen(
                         builtInStyleIds.map { it.value to styleLabel(StyleRegistry.recipes.getValue(it)) }) {
                         dispatch(AppAction.SetStyle(StyleId(it)))
                     }
+                    // Front-of-card task (1, EnRuPackPlan.md §4.3/ADR-46): a non-spoiling badge,
+                    // outside the clickable front Column below (`Reveal` fires from that Column's
+                    // own modifier, not from here), so a tap on the badge can never reveal.
+                    AndroidLifehackBadge(skill.id)
                     if (state.phase == CardPhase.Question && state.introPending) {
                         Text("Знакомство с навыком", style = MaterialTheme.typography.titleMedium)
                         Text("ИСХОДНОЕ ПРЕДЛОЖЕНИЕ", style = MaterialTheme.typography.labelSmall)

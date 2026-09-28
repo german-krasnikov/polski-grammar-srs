@@ -10,8 +10,10 @@ import org.junit.Assert.assertEquals
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import androidx.compose.ui.test.onNodeWithContentDescription
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.GraphicsMode
+import polski.ui.screens.AndroidLifehackBadge
 import polski.ui.screens.AndroidLifehackBlock
 
 /**
@@ -50,5 +52,24 @@ class AndroidLifehackBlockComposeTest {
         }
         composeRule.onAllNodesWithText(caption).onFirst().performClick()
         composeRule.onNodeWithText(citationStart, substring = true).assertExists()
+    }
+
+    // Item (1) of the front-card badge task: a small non-spoiling "есть лайфхак" marker, shown
+    // before Reveal, that never leaks the tip's own text and has an accessible label for TalkBack.
+    private val badgeLabel = "Есть лайфхак для этого навыка"
+
+    @Test fun badgeShowsWithAnAccessibleLabelForASkillWithAnAuthoredLifehack() {
+        composeRule.setContent {
+            MaterialTheme { AndroidLifehackBadge(skillId = "case.gen.neg") }
+        }
+        composeRule.onNodeWithContentDescription(badgeLabel).assertExists()
+        composeRule.onNodeWithText(citationStart, substring = true).assertDoesNotExist()
+    }
+
+    @Test fun badgeComposesNothingForASkillWithNoAuthoredLifehack() {
+        composeRule.setContent {
+            MaterialTheme { AndroidLifehackBadge(skillId = "no.such.skill.exists") }
+        }
+        composeRule.onNodeWithContentDescription(badgeLabel).assertDoesNotExist()
     }
 }

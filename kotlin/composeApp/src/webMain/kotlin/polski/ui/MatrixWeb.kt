@@ -88,6 +88,10 @@ internal fun renderMatrixWeb(root: HTMLElement, state: AppUiState, dispatch: (Ap
         MatrixSection.Cases -> if (hasCaseSystem) renderCases(root, state, dispatch) else renderNoCaseSystemNotice(root)
         MatrixSection.Verbs -> renderVerbs(root, state, dispatch)
         MatrixSection.Pronouns -> if (hasCaseSystem) renderPronouns(root, dispatch) else renderNoCaseSystemNotice(root)
+        // EnRuPackPlan.md §4.3/ADR-46: the "Лайфхаки" sub-section is this task's Android-only
+        // scope (`AndroidLifehacksSection`) — the nav above never offers it on web, so this arm
+        // exists only to keep MatrixSection's `when` exhaustive.
+        MatrixSection.Lifehacks -> {}
     }
 }
 

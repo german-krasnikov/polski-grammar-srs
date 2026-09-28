@@ -10,7 +10,7 @@ enum class TrainingMode { Chain, Schedule, Focused }
 enum class AppTab { Training, Vocabulary, Matrix, Progress }
 enum class AnswerMode { Oral, Typed }
 enum class CardPhase { Question, Revealed, ChainComplete, NoDue }
-enum class MatrixSection { Map, Cases, Verbs, Pronouns }
+enum class MatrixSection { Map, Cases, Verbs, Pronouns, Lifehacks }
 enum class LoadStatus { Loading, Ready, MigrationAvailable, RecoveryRequired, Unavailable }
 
 /** Selection is reset on each entry to the matrix tab. */

@@ -88,6 +88,10 @@ internal fun MatrixScreen(state: AppUiState, dispatch: (AppAction) -> Unit) {
             MatrixSection.Cases -> CasesDesktop(state, dispatch)
             MatrixSection.Verbs -> VerbsDesktop(state, dispatch)
             MatrixSection.Pronouns -> PronounsDesktop(dispatch)
+            // EnRuPackPlan.md §4.3/ADR-46: the "Лайфхаки" sub-section is this task's Android-only
+            // scope (`AndroidLifehacksSection`) — the picker above never offers it on desktop, so
+            // this arm exists only to keep MatrixSection's `when` exhaustive.
+            MatrixSection.Lifehacks -> {}
         }
     }
 }

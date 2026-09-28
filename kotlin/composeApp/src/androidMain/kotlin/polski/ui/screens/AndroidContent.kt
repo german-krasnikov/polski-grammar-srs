@@ -36,7 +36,7 @@ fun AndroidContent(
     when {
         state.loadStatus != LoadStatus.Ready -> AndroidRecoveryScreen(state, dispatch)
         state.tab == AppTab.Training -> AndroidTrainingScreen(state, dispatch, focusReveal, formatDate, swipeRatingEnabled, reduceMotion)
-        state.tab == AppTab.Matrix -> AndroidMatrixScreen(state, dispatch)
+        state.tab == AppTab.Matrix -> AndroidMatrixScreen(state, dispatch, reduceMotion)
         else -> AndroidProgressScreen(state, formatDate, dispatch)
     }
 }
