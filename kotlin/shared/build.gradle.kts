@@ -14,6 +14,9 @@ val formsFixtureFile = layout.projectDirectory.file("../../courses/pl-ru/forms.g
 // UniversalCorePlan.md §3.1/§12 UC-06: `lang/<code>/curriculum.json` — scanned the same way as
 // `packDirs` below, so a second target language's curriculum needs no Gradle/Kotlin edit.
 val langDirectory = layout.projectDirectory.dir("../../courses/lang")
+// EN-04/ADR-20 UC-12: the v2 layer files `CoursePackLoader` reconstructs a v1 `CoursePack` from —
+// `lang/<code>/lexicon.json` (scanned below alongside curriculum.json) and `pairs/<pairId>/pair.json`.
+val pairsDirectory = layout.projectDirectory.dir("../../courses/pairs")
 val generatedCourseDirectory = layout.buildDirectory.dir("generated/course/kotlin")
 val generatedFormsFixtureDirectory = layout.buildDirectory.dir("generated/formsFixture/kotlin")
 
@@ -50,6 +53,7 @@ val generateCoursePackSource by tasks.registering {
     inputs.file(frequencyFile)
     inputs.dir(stylesDirectory)
     inputs.dir(langDirectory)
+    inputs.dir(pairsDirectory)
     outputs.dir(generatedCourseDirectory)
     doLast {
         // UC-02: a pack directory is any immediate child of `courses/` (other than the shared
@@ -79,6 +83,24 @@ val generateCoursePackSource by tasks.registering {
             "    \"${dir.name}\" to ${literalBuildString(chunks)}"
         }
 
+        // EN-04/ADR-20 UC-12: `lang/<code>/lexicon.json` + `pairs/<pairId>/pair.json` — the two v2
+        // layer files `CoursePackLoader` reconstructs a v1-shaped pack from; scanned the same way
+        // as curriculum.json above, so a second pack's files need no Gradle/Kotlin edit.
+        val lexiconDirs = (langDirectory.asFile.listFiles { file -> file.isDirectory } ?: emptyArray())
+            .filter { dir -> dir.resolve("lexicon.json").isFile }
+            .sortedBy { it.name }
+        val lexiconEntryLiterals = lexiconDirs.joinToString(",\n") { dir ->
+            val chunks = literalChunks(dir.resolve("lexicon.json").readText())
+            "    \"${dir.name}\" to ${literalBuildString(chunks)}"
+        }
+        val pairDirs = (pairsDirectory.asFile.listFiles { file -> file.isDirectory } ?: emptyArray())
+            .filter { dir -> dir.resolve("pair.json").isFile }
+            .sortedBy { it.name }
+        val pairEntryLiterals = pairDirs.joinToString(",\n") { dir ->
+            val chunks = literalChunks(dir.resolve("pair.json").readText())
+            "    \"${dir.name}\" to ${literalBuildString(chunks)}"
+        }
+
         val target = generatedCourseDirectory.get().file("polski/data/GeneratedCourseJson.kt").asFile
         target.parentFile.mkdirs()
         target.writeText(
@@ -91,7 +113,11 @@ val generateCoursePackSource by tasks.registering {
                 "internal val generatedFrequencyJson = " + literalBuildString(frequencyChunks) + "\n" +
                 "internal val generatedStylesJson = " + literalBuildString(styleChunks) + "\n" +
                 "internal val generatedCurriculumJsonByLang: Map<String, String> = mapOf(\n" +
-                curriculumEntryLiterals + "\n)\n",
+                curriculumEntryLiterals + "\n)\n" +
+                "internal val generatedLexiconJsonByLang: Map<String, String> = mapOf(\n" +
+                lexiconEntryLiterals + "\n)\n" +
+                "internal val generatedPairJsonByPairId: Map<String, String> = mapOf(\n" +
+                pairEntryLiterals + "\n)\n",
         )
     }
 }
