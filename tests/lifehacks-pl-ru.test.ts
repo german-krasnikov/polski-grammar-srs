@@ -6,20 +6,21 @@ import curriculum from '../courses/lang/pl/curriculum.json';
 const curriculumIds = (curriculum as unknown as Array<{ id: string }>).map((skill) => skill.id);
 const copy = () => structuredClone(lifehacks);
 
-// EnRuPackPlan.md §4.4/§6 EN-20: pl-ru's first, deliberately incomplete lifehacks set — 5 records
-// on the 5 skills the plan names (most typologically unexpected transfer points for a ru-speaker
-// learning pl), not full 16-skill coverage (that is an explicit future task, see plan §7).
-const EXPECTED_SKILLS = ['case.gen.neg', 'case.inst', 'agreement.my', 'aspect', 'mixed'];
-
-describe('pl-ru lifehacks.json (EnRuPackPlan.md §4.4/§6 EN-20)', () => {
+// EnRuPackPlan.md §4.4/§6 EN-20 authored a deliberately incomplete first set (5 records on the 5
+// most typologically unexpected skills). This later task closes the rest of §7's open item ("full
+// coverage of all 16 pl-ru skills") — every lang/pl/curriculum.json skill now has at least 2.
+describe('pl-ru lifehacks.json (full 16-skill coverage, EnRuPackPlan.md §4.4/§7 follow-up)', () => {
   test('validates schema and resolves every skillId against lang/pl/curriculum.json', () => {
     expect(() => validateLifehacks('pl-ru', copy(), curriculumIds)).not.toThrow();
   });
 
-  test('has exactly 5 records, one per the plan-named skill, no more', () => {
-    expect(lifehacks.lifehacks).toHaveLength(5);
-    const covered = lifehacks.lifehacks.map((lifehack) => lifehack.skillId);
-    expect(new Set(covered)).toEqual(new Set(EXPECTED_SKILLS));
+  test('covers every one of the 16 pl curriculum skills at least twice', () => {
+    const counts = new Map<string, number>();
+    for (const lifehack of lifehacks.lifehacks) {
+      if (lifehack.skillId === null) continue;
+      counts.set(lifehack.skillId, (counts.get(lifehack.skillId) ?? 0) + 1);
+    }
+    for (const id of curriculumIds) expect(counts.get(id) ?? 0).toBeGreaterThanOrEqual(2);
   });
 
   test('every lifehack has a real, non-placeholder source.citation', () => {
