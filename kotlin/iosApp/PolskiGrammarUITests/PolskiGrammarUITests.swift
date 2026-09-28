@@ -88,6 +88,19 @@ final class PolskiGrammarUITests: XCTestCase {
         let targetPickerAfterRelaunch = app.descendants(matching: .any)["settingsTargetPicker"].firstMatch
         XCTAssertTrue(targetPickerAfterRelaunch.waitForExistence(timeout: 5), app.debugDescription)
         XCTAssertTrue(targetPickerAfterRelaunch.label.contains("Английский"), targetPickerAfterRelaunch.label)
+
+        // Restore pl-ru before finishing: this is the only test in the suite that switches the
+        // active course pack, and every other test (including this file's own first assertion)
+        // assumes a cold app starts on pl-ru. Left on en-ru, the switch above leaks into every
+        // later test method in the same run and into any later run reusing the same installed
+        // app — this is what made the first assertion of this very test fail against a leftover
+        // en-ru session from an earlier manual run, mistaken at first for a product regression.
+        // Mirrors `testAnimationsToggleDefaultsOnAndPersistsOffAcrossRelaunch` restoring its
+        // toggle for the identical reason.
+        targetPickerAfterRelaunch.tap()
+        XCTAssertTrue(app.buttons["Польский"].waitForExistence(timeout: 5), app.debugDescription)
+        app.buttons["Польский"].tap()
+        XCTAssertTrue(targetPickerAfterRelaunch.label.contains("Польский"), targetPickerAfterRelaunch.label)
         app.buttons["Готово"].tap()
     }
 
