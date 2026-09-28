@@ -217,51 +217,80 @@ fun AndroidCasesSection(state: AppUiState, dispatch: (AppAction) -> Unit) {
     }
 }
 
+// EnRuAcceptance-2026-09-28.md §7 (Android lane, live repro on emulator-5554): `verbs`
+// (packRegistry.active.verbs) is honestly empty for a caseless/aspect-less pack like en-ru — same
+// reasoning as MatrixWeb.kt's `renderVerbs` (`verbs.isEmpty() -> renderNoCaseSystemNotice`). This
+// function used to build the whole pl aspect/tense grid unconditionally, so with en-ru active it
+// crashed with `NoSuchElementException` inside `verbs.first { it.id == selected.verbId }` the
+// moment the screen composed. Gate the pl-conjugation portion behind `verbs.isNotEmpty()`, same
+// pattern and same calm-notice text as the web fix, and fall through to it instead of crashing.
+// `AndroidEnglishVerbMatrix` stays unconditional — EN-24 already reads its own pack-independent
+// data (`lang/en/forms.generated.json`) and works regardless of which pack is active.
 /** Public — see [AndroidCasesSection]. */
 @Composable
 fun AndroidVerbsSection(state: AppUiState, dispatch: (AppAction) -> Unit) {
     val selected = state.matrixSelection
-    AndroidInfoCard("Лицо × число × время") {
-        AndroidChoiceMenu("Глагол", selected.verbId, verbs.filter { it.aspect == Aspect.IMPERFECTIVE }.map { it.id to "${it.lemma} — ${it.meaning}" }) {
-            dispatch(AppAction.SetMatrixSelection(selected.copy(verbId = it)))
+    if (verbs.isEmpty()) {
+        AndroidNoCaseSystemNotice()
+    } else {
+        AndroidInfoCard("Лицо × число × время") {
+            AndroidChoiceMenu("Глагол", selected.verbId, verbs.filter { it.aspect == Aspect.IMPERFECTIVE }.map { it.id to "${it.lemma} — ${it.meaning}" }) {
+                dispatch(AppAction.SetMatrixSelection(selected.copy(verbId = it)))
+            }
+            AndroidChoiceMenu(referenceVerbTeaching.genderControlLabel.compact, if (selected.feminineGroup) "f" else "m",
+                referenceVerbTeaching.genderOptions.map { it.id to it.label.compact }) {
+                dispatch(AppAction.SetMatrixSelection(selected.copy(feminineGroup = it == "f")))
+            }
+            Text(referenceVerbTeaching.compactFutureExplanation)
         }
-        AndroidChoiceMenu(referenceVerbTeaching.genderControlLabel.compact, if (selected.feminineGroup) "f" else "m",
-            referenceVerbTeaching.genderOptions.map { it.id to it.label.compact }) {
-            dispatch(AppAction.SetMatrixSelection(selected.copy(feminineGroup = it == "f")))
-        }
-        Text(referenceVerbTeaching.compactFutureExplanation)
-    }
-    val lemma = verbs.first { it.id == selected.verbId }.lemma
-    // UC-09 part 2/2: rowAxis = subjects, one column per tense — same shape as MatrixTableEngineTest.
-    val verbsTable = MatrixTableEngine.build(
-        rowAxis = referenceVerbTeaching.subjects,
-        rowHeaderLabel = "Кто",
-        rowHeader = { subject -> subject.label.compact },
-        columns = listOf(Tense.PRESENT, Tense.PAST, Tense.FUTURE).map { tense ->
-            MatrixColumn(referenceVerbTeaching.tenseLabels.getValue(tense).compact,
-                { subject -> verbForm(selected.verbId, tense, subject.person, subject.number, subject.gender(selected.feminineGroup)) },
-                contrastFrom = { lemma })
-        },
-    ).toViewModel()
-    verbsTable.rows.forEach { row ->
-        AndroidInfoCard(row.header) {
-            row.cells.forEachIndexed { i, cell ->
-                Text(verbsTable.columnHeaders[i])
-                ContrastPairText(requireNotNull(cell.contrast))
+        val lemma = verbs.first { it.id == selected.verbId }.lemma
+        // UC-09 part 2/2: rowAxis = subjects, one column per tense — same shape as MatrixTableEngineTest.
+        val verbsTable = MatrixTableEngine.build(
+            rowAxis = referenceVerbTeaching.subjects,
+            rowHeaderLabel = "Кто",
+            rowHeader = { subject -> subject.label.compact },
+            columns = listOf(Tense.PRESENT, Tense.PAST, Tense.FUTURE).map { tense ->
+                MatrixColumn(referenceVerbTeaching.tenseLabels.getValue(tense).compact,
+                    { subject -> verbForm(selected.verbId, tense, subject.person, subject.number, subject.gender(selected.feminineGroup)) },
+                    contrastFrom = { lemma })
+            },
+        ).toViewModel()
+        verbsTable.rows.forEach { row ->
+            AndroidInfoCard(row.header) {
+                row.cells.forEachIndexed { i, cell ->
+                    Text(verbsTable.columnHeaders[i])
+                    ContrastPairText(requireNotNull(cell.contrast))
+                }
             }
         }
-    }
-    AndroidInfoCard("Время меняется, предложение остаётся целым") {
-        referenceTenseRows.forEach { ReferenceTenseComparison(it) }
-        OutlinedButton(
-            onClick = { dispatch(AppAction.ChooseSkill("verb.past", SentenceSeed("wife", "beautiful"))) },
-            modifier = Modifier.fillMaxWidth(),
-        ) { Text("Тренировать времена") }
-    }
-    AndroidInfoCard("Вид: процесс или результат") {
-        referenceAspectRows.forEach { ReferenceAspectComparison(it) }
+        AndroidInfoCard("Время меняется, предложение остаётся целым") {
+            referenceTenseRows.forEach { ReferenceTenseComparison(it) }
+            OutlinedButton(
+                onClick = { dispatch(AppAction.ChooseSkill("verb.past", SentenceSeed("wife", "beautiful"))) },
+                modifier = Modifier.fillMaxWidth(),
+            ) { Text("Тренировать времена") }
+        }
+        AndroidInfoCard("Вид: процесс или результат") {
+            referenceAspectRows.forEach { ReferenceAspectComparison(it) }
+        }
     }
     AndroidEnglishVerbMatrix()
+}
+
+/**
+ * Same calm-placeholder text as `MatrixWeb.kt`'s `renderNoCaseSystemNotice` (EnRuAcceptance-2026-09-28.md
+ * §7 item 3): a caseless/aspect-less pack like en-ru genuinely has no pl declension/conjugation
+ * data (ADR-36 — [verbs]/[polski.data.nouns] are honestly empty, not fabricated), so this is a
+ * calm notice instead of a crash, not a full en-ru-specific reference screen (separate, unstarted
+ * work).
+ */
+@Composable
+private fun AndroidNoCaseSystemNotice() {
+    Text(
+        "Для текущего курса эта таблица недоступна: в этом языке нет падежей/рода. Открой «Времена и лица» — таблица глаголов и do-support работает для любого курса.",
+        style = MaterialTheme.typography.bodyMedium,
+        color = MaterialTheme.colorScheme.onSurfaceVariant,
+    )
 }
 
 /**
