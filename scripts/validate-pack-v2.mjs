@@ -16,8 +16,9 @@
 // match lang/en/curriculum.json's exactly, and every opaque copy/pattern key
 // lang/en/exercise-recipes.json (EN-14) references resolves in the pair's own
 // exerciseCopy/exercisePatterns (checkPairSkillIdsMatchCurriculum/checkRecipeCopyResolves below).
-// Finally (EnRuPackPlan.md §6 EN-19) it validates pairs/en-ru/lifehacks.json against
-// lifehacks-v1.schema.json and resolves every skillId against lang/en/curriculum.json.
+// Finally (EnRuPackPlan.md §6 EN-19/EN-20) it validates both pairs/en-ru/lifehacks.json and
+// pairs/pl-ru/lifehacks.json against lifehacks-v1.schema.json, each resolving every skillId
+// against its own language's curriculum.json.
 //
 // Usage: node scripts/validate-pack-v2.mjs
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
@@ -201,6 +202,14 @@ export function validatePackV2() {
   const reconstructed = reconstructCoursePack(lexicon, pair);
   assertSchema(readJson('courses/schema/course-pack-v1.schema.json'), reconstructed, '/reconstructed-v2-pack');
   validateCoursePack(reconstructed, frequency);
+
+  // pl-ru (EnRuPackPlan.md §6 EN-20): pairs/pl-ru/lifehacks.json against lifehacks-v1.schema.json,
+  // with every skillId resolved against lang/pl/curriculum.json's own ids — same schema/checks as
+  // en-ru's EN-19 lifehacks below, just a smaller, deliberately incomplete first set (5 of 15 pl
+  // skills, see plan §4.4/§7).
+  const plCurriculum = readJson('courses/lang/pl/curriculum.json');
+  const plRuLifehacks = readJson('courses/pairs/pl-ru/lifehacks.json');
+  validateLifehacks('pl-ru', plRuLifehacks, plCurriculum.map((skill) => skill.id));
 
   // en-ru (EnRuPackPlan.md §6 EN-17): the pair-pack-v1 layer only — en-ru has no v1 course.json to
   // reconstruct against, so this stays the loose pair-pack-v1.schema.json shape check plus the two
