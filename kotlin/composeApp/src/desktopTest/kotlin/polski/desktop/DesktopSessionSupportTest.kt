@@ -42,6 +42,8 @@ class DesktopSessionSupportTest {
                 val scope = CoroutineScope(SupervisorJob() + Dispatchers.Unconfined)
                 val store = buildTrainingStoreOrRollback(goodPackId) {
                     attempts++
+                    // en-ru builds for real since ADR-39; simulate an unbuildable pack so the rollback stays covered.
+                    check(activeCoursePackId != "en-ru") { "simulated unbuildable pack" }
                     TrainingStore(
                         repository, scheduler,
                         PlExerciseEngine(RandomSource { Random.nextDouble() }, ExerciseIdFactory { "t-$attempts" }),
