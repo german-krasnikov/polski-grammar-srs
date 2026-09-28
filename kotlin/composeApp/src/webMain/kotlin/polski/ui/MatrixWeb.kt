@@ -31,6 +31,8 @@ import polski.grammar.genderNames
 import polski.grammar.nounPhrase
 import polski.grammar.possessiveForm
 import polski.grammar.verbForm
+import polski.core.engine.MatrixColumn
+import polski.core.engine.MatrixTableEngine
 import polski.model.Aspect
 import polski.model.Gender
 import polski.model.GramCase
@@ -45,6 +47,9 @@ import polski.presentation.CardPhase
 import polski.presentation.MatrixSection
 import polski.presentation.ChangeSide
 import polski.presentation.ContrastPair
+import polski.presentation.MatrixTableCell
+import polski.presentation.MatrixTableViewModel
+import polski.presentation.toViewModel
 
 /** Browser-semantic matrix: real selectors and tables, with the same seven case rows as the shared engine. */
 internal fun renderMatrixWeb(root: HTMLElement, state: AppUiState, dispatch: (AppAction) -> Unit) {
@@ -126,9 +131,15 @@ private fun renderMap(root: HTMLElement, dispatch: (AppAction) -> Unit) {
 
     val chain = root.matrixSection("Одна мысль, пять преобразований")
     chain.matrixTable(
-        listOf("Операция", "Целое предложение", "Что изменилось"),
-        referenceChainRows.map { listOf(it.label, it.to, it.change) },
-        contrastFrom = { row, column -> if (column == 1) referenceChainRows[row].from else null },
+        MatrixTableEngine.build(
+            rowAxis = referenceChainRows,
+            rowHeaderLabel = "Операция",
+            rowHeader = { it.label },
+            columns = listOf(
+                MatrixColumn("Целое предложение", { it.to }, contrastFrom = { it.from }),
+                MatrixColumn("Что изменилось", { it.change }),
+            ),
+        ).toViewModel(),
     )
     chain.matrixButton("Тренировать эту цепочку") {
         dispatch(AppAction.ChooseSkill("chain", SentenceSeed("wife", "beautiful")))
@@ -156,10 +167,17 @@ private fun renderMap(root: HTMLElement, dispatch: (AppAction) -> Unit) {
 
     val support = root.matrixSection(referenceRussianSupport.fullTitle)
     support.matrixTable(
-        referenceRussianSupport.columns,
-        referenceRussianSupport.rows.map { row -> listOf(row.cue, row.web.construction, row.web.check) },
+        MatrixTableEngine.build(
+            rowAxis = referenceRussianSupport.rows,
+            rowHeaderLabel = referenceRussianSupport.columns[0],
+            rowHeader = { it.cue },
+            columns = listOf(
+                MatrixColumn(referenceRussianSupport.columns[1], { it.web.construction }),
+                MatrixColumn(referenceRussianSupport.columns[2], { it.web.check }),
+            ),
+        ).toViewModel(),
         renderCell = { rowIndex, column, cell ->
-            if (column == 1) {
+            if (column == 0) {
                 val comparisons = cell.matrixAdd("div", cls = "support-comparisons")
                 referenceRussianSupport.rows[rowIndex].comparisons.forEach { pair ->
                     matrixContrast(comparisons, pair)
@@ -193,20 +211,24 @@ private fun renderCases(root: HTMLElement, state: AppUiState, dispatch: (AppActi
     val owner = PossessiveId.fromId(selected.ownerId)
     val seed = SentenceSeed(selected.nounId, selected.adjectiveId)
     section.matrixTable(
-        listOf("Падеж · русская опора", "Вопрос / конструкция", courseWebCaseCompositionHeader, "Целое предложение"),
-        caseRows.map { row ->
-            listOf(
-                "${row.pl} · ${row.ru}",
-                "${row.question} · ${row.trigger}",
-                nounPhrase(selected.nounId, row.id, number, selected.adjectiveId, owner),
-                caseSentence(seed, row.id, owner, number),
-            )
-        },
-        contrastFrom = { _, column -> when (column) {
-            2 -> nounPhrase(selected.nounId, GramCase.NOM, number, selected.adjectiveId, owner)
-            3 -> caseSentence(seed, GramCase.NOM, owner, number)
-            else -> null
-        } },
+        MatrixTableEngine.build(
+            rowAxis = caseRows,
+            rowHeaderLabel = "Падеж · русская опора",
+            rowHeader = { "${it.pl} · ${it.ru}" },
+            columns = listOf(
+                MatrixColumn("Вопрос / конструкция", { "${it.question} · ${it.trigger}" }),
+                MatrixColumn(
+                    courseWebCaseCompositionHeader,
+                    { nounPhrase(selected.nounId, it.id, number, selected.adjectiveId, owner) },
+                    contrastFrom = { nounPhrase(selected.nounId, GramCase.NOM, number, selected.adjectiveId, owner) },
+                ),
+                MatrixColumn(
+                    "Целое предложение",
+                    { caseSentence(seed, it.id, owner, number) },
+                    contrastFrom = { caseSentence(seed, GramCase.NOM, owner, number) },
+                ),
+            ),
+        ).toViewModel(),
     )
     section.matrixAdd("p", referenceCaseTeaching.compactNote)
     section.matrixButton("Тренировать отрицание с этим словом") {
@@ -217,13 +239,20 @@ private fun renderCases(root: HTMLElement, state: AppUiState, dispatch: (AppActi
     comparison.matrixAdd("p", referenceCaseTeaching.comparisonReadingHint)
     val comparisonIds = comparisonNounIds
     comparison.matrixTable(
-        listOf("Падеж") + comparisonIds.map { id ->
-            val noun = nounById(id)
-            "${noun.lemma} · ${genderNames.getValue(noun.gender)}"
-        },
-        caseRows.map { row -> listOf(row.pl) + comparisonIds.map { nounById(it).forms.getValue(number).getValue(row.id) } },
+        MatrixTableEngine.build(
+            rowAxis = caseRows,
+            rowHeaderLabel = "Падеж",
+            rowHeader = { it.pl },
+            columns = comparisonIds.map { id ->
+                val noun = nounById(id)
+                MatrixColumn(
+                    "${noun.lemma} · ${genderNames.getValue(noun.gender)}",
+                    { row -> nounById(id).forms.getValue(number).getValue(row.id) },
+                    contrastFrom = { nounById(id).forms.getValue(number).getValue(GramCase.NOM) },
+                )
+            },
+        ).toViewModel(),
         "comparison-table",
-        contrastFrom = { row, column -> if (column > 0) nounById(comparisonIds[column - 1]).forms.getValue(number).getValue(GramCase.NOM) else null },
     )
 }
 
@@ -241,29 +270,50 @@ private fun renderVerbs(root: HTMLElement, state: AppUiState, dispatch: (AppActi
         dispatch(AppAction.SetMatrixSelection(selected.copy(feminineGroup = it == "f")))
     }
     section.matrixTable(
-        listOf("Кто") + listOf(Tense.PRESENT, Tense.PAST, Tense.FUTURE).map { teaching.tenseLabels.getValue(it).full },
-        teaching.subjects.map { subject ->
-            listOf(subject.label.full) + listOf(Tense.PRESENT, Tense.PAST, Tense.FUTURE).map { tense ->
-                verbForm(selected.verbId, tense, subject.person, subject.number, subject.gender(selected.feminineGroup))
-            }
-        },
-        contrastFrom = { _, column -> if (column > 0) verbs.first { it.id == selected.verbId }.lemma else null },
+        MatrixTableEngine.build(
+            rowAxis = teaching.subjects,
+            rowHeaderLabel = "Кто",
+            rowHeader = { it.label.full },
+            columns = listOf(Tense.PRESENT, Tense.PAST, Tense.FUTURE).map { tense ->
+                MatrixColumn(
+                    teaching.tenseLabels.getValue(tense).full,
+                    { subject -> verbForm(selected.verbId, tense, subject.person, subject.number, subject.gender(selected.feminineGroup)) },
+                    contrastFrom = { verbs.first { it.id == selected.verbId }.lemma },
+                )
+            },
+        ).toViewModel(),
     )
     section.matrixAdd("p", teaching.compactFutureExplanation)
 
     val sentence = root.matrixSection("Время меняется, предложение остаётся целым")
-    sentence.matrixTable(listOf("Операция", "Предложение"),
-        referenceTenseRows.map { listOf(it.label, it.to) },
-        contrastFrom = { row, column -> if (column == 1) referenceTenseRows[row].from else null })
+    sentence.matrixTable(
+        MatrixTableEngine.build(
+            rowAxis = referenceTenseRows,
+            rowHeaderLabel = "Операция",
+            rowHeader = { it.label },
+            columns = listOf(MatrixColumn("Предложение", { it.to }, contrastFrom = { it.from })),
+        ).toViewModel(),
+    )
     sentence.matrixButton("Тренировать времена предложениями") {
         dispatch(AppAction.ChooseSkill("verb.past", SentenceSeed("wife", "beautiful")))
     }
     val aspect = root.matrixSection("Вид: процесс или результат")
-    aspect.matrixTable(listOf("Смысл", "Настоящее", "Прошедшее", "Будущее"),
-        referenceAspectRows.map { listOf(it.label, it.present ?: courseAspectNoPresent.compact, it.past, it.future) },
-        contrastFrom = { row, column ->
-            if (column > 0 && !(column == 1 && referenceAspectRows[row].present == null)) referenceAspectRows[row].from else null
-        })
+    aspect.matrixTable(
+        MatrixTableEngine.build(
+            rowAxis = referenceAspectRows,
+            rowHeaderLabel = "Смысл",
+            rowHeader = { it.label },
+            columns = listOf(
+                MatrixColumn(
+                    "Настоящее",
+                    { it.present ?: courseAspectNoPresent.compact },
+                    contrastFrom = { row -> if (row.present == null) null else row.from },
+                ),
+                MatrixColumn("Прошедшее", { it.past }, contrastFrom = { it.from }),
+                MatrixColumn("Будущее", { it.future }, contrastFrom = { it.from }),
+            ),
+        ).toViewModel(),
+    )
 }
 
 private fun renderPronouns(root: HTMLElement, dispatch: (AppAction) -> Unit) {
@@ -271,23 +321,34 @@ private fun renderPronouns(root: HTMLElement, dispatch: (AppAction) -> Unit) {
     val personal = root.matrixSection(teaching.personalTitle)
     personal.matrixAdd("p", teaching.compactIntro)
     personal.matrixTable(
-        listOf("Кто") + teaching.contexts.map { "${it.cue.full} · ${it.caseName}" },
-        teaching.pronounIds.map { id -> listOf(id) + teaching.contexts.map { it.value(id, personalPronouns.getValue(id)) } },
-        contrastFrom = { row, column -> if (column > 0) teaching.pronounIds[row] else null },
+        MatrixTableEngine.build(
+            rowAxis = teaching.pronounIds,
+            rowHeaderLabel = "Кто",
+            rowHeader = { it },
+            columns = teaching.contexts.map { context ->
+                MatrixColumn(
+                    "${context.cue.full} · ${context.caseName}",
+                    { id -> context.value(id, personalPronouns.getValue(id)) },
+                    contrastFrom = { id -> id },
+                )
+            },
+        ).toViewModel(),
     )
     personal.matrixAdd("p", teaching.webFooter)
 
     val owners = root.matrixSection(teaching.possessiveTitle)
     owners.matrixTable(
-        listOf("Кому принадлежит") + teaching.demo.cases.map { it.web } + "Правило",
-        possessives.map { possessive ->
-            listOf(possessive.label) + teaching.demo.cases.map { teaching.demo.phrase(possessive.id, it.id) } +
-                listOf(teaching.demo.rule(possessive.id))
-        },
-        contrastFrom = { row, column -> if (column in 1..3) {
-            val id = possessives[row].id
-            teaching.demo.phrase(id, GramCase.NOM)
-        } else null },
+        MatrixTableEngine.build(
+            rowAxis = possessives,
+            rowHeaderLabel = "Кому принадлежит",
+            rowHeader = { it.label },
+            columns = teaching.demo.cases.map { case ->
+                MatrixColumn<polski.data.Possessive>(case.web, { p -> teaching.demo.phrase(p.id, case.id) }, contrastFrom = { p -> teaching.demo.phrase(p.id, GramCase.NOM) })
+            } + MatrixColumn<polski.data.Possessive>(
+                "Правило",
+                { p -> teaching.demo.rule(p.id) },
+            ),
+        ).toViewModel(),
     )
     owners.matrixButton("Тренировать смену владельца") {
         dispatch(AppAction.ChooseSkill("agreement.my", SentenceSeed(teaching.demo.nounId, teaching.demo.adjectiveId)))
@@ -329,25 +390,32 @@ private fun HTMLElement.matrixSelect(
     select.addEventListener("change", { onChange(select.value) })
 }
 
+/**
+ * UniversalCorePlan.md §5.3.3 UC-09: renders any [MatrixTableViewModel] — this is the one table
+ * renderer the whole matrix page shares. Every section builds its row/column shape and highlight
+ * base with `:core-engine`'s `MatrixTableEngine` (language/pack-agnostic) and attaches contrast
+ * with `toViewModel()` (ContrastHighlightPlan.md §4); this function only turns the already-resolved
+ * [MatrixTableCell]s into DOM, the same as it always did for hand-built header/row lists.
+ */
 private fun HTMLElement.matrixTable(
-    headers: List<String>, rows: List<List<String>>, tableClass: String = "",
-    contrastFrom: ((row: Int, column: Int) -> String?)? = null,
+    vm: MatrixTableViewModel, tableClass: String = "",
     renderCell: ((row: Int, column: Int, cell: HTMLElement) -> Unit)? = null,
 ) {
     val scroll = matrixAdd("div", cls = "table-scroll")
     val table = scroll.matrixAdd("table", cls = tableClass)
     val headerRow = table.matrixAdd("thead").matrixAdd("tr")
-    headers.forEach { title -> headerRow.matrixAdd("th", title).setAttribute("scope", "col") }
+    headerRow.matrixAdd("th", vm.rowHeaderLabel).setAttribute("scope", "col")
+    vm.columnHeaders.forEach { title -> headerRow.matrixAdd("th", title).setAttribute("scope", "col") }
     val body = table.matrixAdd("tbody")
-    rows.forEachIndexed { rowIndex, cells ->
-        val row = body.matrixAdd("tr")
-        cells.forEachIndexed { index, value ->
-            val before = contrastFrom?.invoke(rowIndex, index)
-            val cell = row.matrixAdd(if (index == 0) "th" else "td", if (before == null) value else null)
-            if (index == 0) cell.setAttribute("scope", "row")
-            else if (value.any { it in "ąćęłńóśźżĄĆĘŁŃÓŚŹŻ" }) cell.setAttribute("lang", "pl")
-            if (before != null) matrixContrast(cell, before, value)
-            renderCell?.invoke(rowIndex, index, cell)
+    vm.rows.forEachIndexed { rowIndex, row ->
+        val tr = body.matrixAdd("tr")
+        tr.matrixAdd("th", row.header).setAttribute("scope", "row")
+        row.cells.forEachIndexed { colIndex, cellVm ->
+            val contrast = cellVm.contrast
+            val cell = tr.matrixAdd("td", if (contrast == null) cellVm.value else null)
+            if (cellVm.value.any { it in "ąćęłńóśźżĄĆĘŁŃÓŚŹŻ" }) cell.setAttribute("lang", "pl")
+            if (contrast != null) matrixContrast(cell, contrast)
+            renderCell?.invoke(rowIndex, colIndex, cell)
         }
     }
 }
