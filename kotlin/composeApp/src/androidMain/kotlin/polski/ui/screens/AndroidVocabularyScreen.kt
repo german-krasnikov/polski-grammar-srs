@@ -27,6 +27,7 @@ import polski.data.VocabularyItem
 import polski.presentation.CardEffect
 import polski.srs.Rating
 import polski.vocabulary.StudyDirection
+import polski.vocabulary.builtInStudyDirections
 import polski.vocabulary.VocabularyCodec
 import polski.vocabulary.VocabularyLoadStatus
 import polski.vocabulary.VocabularySession
@@ -71,9 +72,9 @@ fun AndroidVocabularyScreen(
 
         AndroidChoiceMenu(
             "Направление",
-            state.direction.name,
-            listOf(StudyDirection.RussianToPolish.name to "Русский → польский", StudyDirection.PolishToRussian.name to "Польский → русский"),
-        ) { session.setDirection(StudyDirection.valueOf(it)) }
+            state.direction.wire,
+            listOf(StudyDirection.RussianToPolish.wire to "Русский → польский", StudyDirection.PolishToRussian.wire to "Польский → русский"),
+        ) { wire -> builtInStudyDirections.firstOrNull { it.wire == wire }?.let(session::setDirection) }
 
         if (item == null) {
             Card(Modifier.fillMaxWidth(), shape = RoundedCornerShape(24.dp)) {

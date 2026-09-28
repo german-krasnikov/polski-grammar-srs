@@ -25,7 +25,24 @@ import polski.srs.SrsCard
 import polski.srs.SrsCardWire
 import polski.srs.StoredCard
 
-enum class StudyDirection(val wire: String) { RussianToPolish("ru-pl"), PolishToRussian("pl-ru") }
+/**
+ * Which side of a pack's pair the learner recalls (native → target, or target → native).
+ * EN-09 (gap F, `Plans/Kotlin/EnRuPackPlan.md` §5) opened this from a closed 2-value enum to a
+ * string-backed id — the same pattern [polski.presentation.StyleId] used for UC-01 — so a second
+ * pack's pair (`"en-ru"/"ru-en"`) is just a new [StudyDirection], not a Kotlin change here. [wire]
+ * keeps the exact `"ru-pl"/"pl-ru"` bytes the old enum's [wire] produced, so every persisted card
+ * key ([VocabularyCodec.cardKey]) and the wire format hosts already speak stay byte-identical.
+ */
+data class StudyDirection(val wire: String) {
+    companion object {
+        val RussianToPolish = StudyDirection("ru-pl")
+        val PolishToRussian = StudyDirection("pl-ru")
+    }
+}
+
+/** The 2 built-in directions in the old enum's declaration order — replaces `StudyDirection.entries`
+ *  for hosts that need to iterate or look one up by [StudyDirection.wire]. */
+val builtInStudyDirections: List<StudyDirection> = listOf(StudyDirection.RussianToPolish, StudyDirection.PolishToRussian)
 
 data class VocabularyDocument(
     val selectedIds: List<String> = emptyList(),

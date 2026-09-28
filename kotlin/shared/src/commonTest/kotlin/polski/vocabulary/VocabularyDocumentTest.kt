@@ -138,6 +138,22 @@ class VocabularyDocumentTest {
         assertEquals(legacy, VocabularyCodec.merge(VocabularyDocument(), legacy))
     }
 
+    /** EN-09 (gap F, `Plans/Kotlin/EnRuPackPlan.md` §5): [StudyDirection] is now string-backed, so a
+     *  second pack's pair builds its own direction without any Kotlin change here — while pl-ru's
+     *  built-in constants keep their exact `"ru-pl"/"pl-ru"` wire bytes. */
+    @Test
+    fun opensToASecondPacksDirectionWithoutTouchingTheBuiltIns() {
+        val enToRu = StudyDirection("en-ru")
+        val ruToEn = StudyDirection("ru-en")
+        assertEquals("en-ru", enToRu.wire)
+        assertEquals("ru-en", ruToEn.wire)
+        assertEquals("pl-ru:vocabulary:en-ru:noun.wife", VocabularyCodec.cardKey("noun.wife", enToRu))
+        assertEquals("pl-ru:vocabulary:ru-en:noun.wife", VocabularyCodec.cardKey("noun.wife", ruToEn))
+        assertEquals(builtInStudyDirections, listOf(StudyDirection.RussianToPolish, StudyDirection.PolishToRussian))
+        assertEquals("ru-pl", StudyDirection.RussianToPolish.wire)
+        assertEquals("pl-ru", StudyDirection.PolishToRussian.wire)
+    }
+
     @Test
     fun importedBackupCannotContainTwoCustomIdsWithOneLemma() {
         val first = VocabularyItem("user.00000000-0000-4000-8000-000000000001", "szkoła", "школа",

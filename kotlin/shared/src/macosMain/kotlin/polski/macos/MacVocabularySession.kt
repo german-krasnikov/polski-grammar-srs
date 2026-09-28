@@ -22,7 +22,7 @@ import polski.presentation.cardEffectFor
 import polski.srs.FsrsScheduler
 import polski.srs.Rating
 import polski.srs.SchedulePreview
-import polski.vocabulary.StudyDirection
+import polski.vocabulary.builtInStudyDirections
 import polski.vocabulary.VocabularyCodec
 import polski.vocabulary.VocabularySession
 import polski.vocabulary.VocabularyUiState
@@ -52,7 +52,7 @@ class MacVocabularySession(directory: String) {
 
     fun dispatch(command: String, value: String = "") {
         when (command) {
-            "direction" -> StudyDirection.entries.firstOrNull { it.wire == value }?.let(session::setDirection)
+            "direction" -> builtInStudyDirections.firstOrNull { it.wire == value }?.let(session::setDirection)
             "filter" -> if (value in listOf("A1", "A2", "B1", "100", "500", "1000", "mine")) session.setFilter(value)
             "typed" -> session.setTyped(value == "true")
             "draft" -> session.setDraft(value)
