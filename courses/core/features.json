@@ -3,7 +3,7 @@
   "$comment": "UniversalCorePlan.md §3.1/§3.2/§12 UC-12: language-independent feature keys and their closed value sets, grounded in courses/lang/pl/curriculum.json's actual focus/fixed literals (kotlin/shared/.../model/Grammar.kt's own enums use a separate, lowercase vocabulary for a different, older code path and are not this file's source). scripts/validate-pack-v2.mjs checks every curriculum skill's focus.feature/fixed key and value against this file, and every used key against lang/<code>/lang.json's usesFeatures.",
   "features": {
     "Case": {
-      "values": ["Nom", "Gen", "Dat", "Acc", "Inst", "Loc", "Voc"],
+      "values": ["Nom", "Gen", "Dat", "Acc", "Inst", "Loc", "Voc", "Subj", "Obj", "In", "With", "To", "About", "Of"],
       "gloss": { "ru": "падеж", "en": "case" }
     },
     "Number": {
@@ -25,6 +25,10 @@
     "Mood": {
       "values": ["Decl", "YesNoQ"],
       "gloss": { "ru": "наклонение/тип предложения", "en": "mood / sentence type" }
+    },
+    "Aspect": {
+      "values": ["Simple", "Continuous", "Perfect"],
+      "gloss": { "ru": "аспект (простой/длительный/совершённый)", "en": "aspect (simple/continuous/perfect)" }
     }
   }
 }

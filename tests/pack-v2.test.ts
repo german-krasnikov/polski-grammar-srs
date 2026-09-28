@@ -47,6 +47,19 @@ describe('UC-12 schema v2 split', () => {
     }
   });
 
+  test('EN-01: core/features.json additively carries en Case-roles + Aspect without touching pl values', () => {
+    // Gap C (Plans/Kotlin/EnRuPackPlan.md §5): Case.values gains en's role values, a new
+    // Aspect key appears, and none of the original pl values are removed or reordered away.
+    const plCaseValues = ['Nom', 'Gen', 'Dat', 'Acc', 'Inst', 'Loc', 'Voc'];
+    for (const value of plCaseValues) expect(features.features.Case.values).toContain(value);
+
+    const enCaseRoles = ['Subj', 'Obj', 'In', 'With', 'To', 'About', 'Of'];
+    for (const value of enCaseRoles) expect(features.features.Case.values).toContain(value);
+
+    expect(features.features).toHaveProperty('Aspect');
+    expect(features.features.Aspect.values).toEqual(['Simple', 'Continuous', 'Perfect']);
+  });
+
   test('rejects a curriculum skill referencing an unregistered construction', async () => {
     const fs = await import('node:fs');
     const url = new URL('../courses/lang/pl/curriculum.json', import.meta.url);
