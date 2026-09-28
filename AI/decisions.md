@@ -2,6 +2,68 @@
 
 Новые сверху. Формат: решение → почему → где подробно.
 
+## ADR-31 · 2026-09-28 · EN-24 (iOS): English-таблица на `MatrixView` (SwiftUI), `enVerbForm` вынесен в `:shared` commonMain
+
+Plans/Kotlin/EnRuPackPlan.md §5 гэп H / §6 EN-24: план буквально ограничивает EN-24 web-минимумом
+(ADR-28) и называет 4 остальных хоста «задокументированным, явным техдолгом»; эта задача — тот
+следующий шаг для iOS (тот же класс работы, что ADR-23/24/25 уже сделали по хостам для UC-09
+part 2/2), не блокирующий релиз en-ru, но закрывающий один из четырёх хостов.
+
+`IosSnapshot.kt`'s `matrixSnapshot` получил два новых поля рядом с существующими pl-таблицами
+(`verbsRows`/`tenseRows`) — `englishExampleLemma`/`englishVerbsRows`/`englishDoSupportRows` — той же
+формы `MatrixTableEngine.build(...).toViewModel()`, что уже используют все 8 pl-таблиц с ADR-24, на
+том же зафиксированном примере-глаголе `"see"` (`enPersonalPronouns` × Present/Past/Future), что и
+web (ADR-28): без нового ad hoc построения ячеек, engine не знает, что это английский. Do-support
+таблица не несёт `futurePair` вовсе (плана §5 гэп H — у будущего нет do-support), а не пустую пару —
+Swift-сторона печатает статический текст «не нужен — только will» для этого столбца, как и web.
+
+Один реальный найденный дубль: `enVerbForm` (маппинг pronounId→Person/Number + вызов
+`enMorphology.form`) раньше был приватной функцией внутри `MatrixWeb.kt` (webMain, `:composeApp`),
+недоступной `:shared`'s `iosMain`. Вынесен в `:shared` commonMain (`EnLexicon.kt`) как публичная
+функция — `MatrixWeb.kt` теперь тоже вызывает её через импорт вместо копии; один источник форм для
+обоих хостов, а не вторая ручная копия. `MatrixView.swift` получил новый `@ViewBuilder private var
+english` с собственной Russian-language картой лейблов времён (`englishTenseLabel`) — **намеренно
+не** `matrix.record("verbTenseLabels")`, потому что та карта несёт польские глоссы («Teraz» и т.п.)
+для заголовков pl-таблицы; переиспользование дало бы реальный a11y/correctness-баг на английской
+таблице (тот же класс проблемы, что ADR-28 исправил для `lang="pl"` на web).
+
+Wire-контракт `MatrixView` (SwiftUI) читает как обычно именованные поля — никакого универсального
+grid-рендерера не вводилось (тот же осознанный скоуп, что ADR-24 зафиксировала для остальных 8
+таблиц).
+
+Проверено (worktree `polski-lanes/ios`, branch `lane-ios`): `:shared:iosSimulatorArm64Test` —
+зелёный, включая новый `IosMatrixSnapshotTest.nativeMatrixReceivesTheEnglishExampleVerbAndDoSupportRows`
+(RED→GREEN подтверждён живьём: тест падал с `NoSuchElementException` на `englishExampleLemma` до
+реализации); `:shared:desktopTest`/`:shared:macosArm64Test` — зелёные (регрессия pl не задета);
+`:composeApp:compileKotlinJs`/`compileKotlinWasmJs` — `BUILD SUCCESSFUL` после переноса `enVerbForm`
+(web behavior не изменилось, тот же вызов через новый импорт); `:composeApp:desktopTest` — зелёный.
+`xcodebuild build`/`test` (iPhone 17 Pro Simulator `4384946F-9E6B-43D0-ADA3-CA219A3456B8`,
+`CODE_SIGNING_ALLOWED=NO`): новый `testEnglishMatrixTableShowsRealFormsAndDoSupportSplit` —
+`** TEST SUCCEEDED **` (0 failures), реальные `he→sees/saw`, `do/does`-раскол и инвариантный `did`
+проверены живьём со скриншотами (`Plans/Kotlin/artifacts/ios/en24-matrix-english-verbs.png`,
+`en24-matrix-do-support.png`); 3 соседних существующих Matrix UI-теста
+(`testNativeVerbGenderControlChangesSelectedSubjectOnly`,
+`testNativeCasesShowCompactNoteAndOrderedComparisonNouns`,
+`testNativePronounTeachingShowsCompactContextsAndOwnerDemo`) — `** TEST SUCCEEDED **`, 0 failures
+(регрессия на существующие pl-таблицы того же экрана не обнаружена). Первый прогон нового UI-теста
+ловил стабильно устаревший инкрементальный кеш `PolskiGrammarUITests`-таргета (Xcode/SwiftDriver
+собрал бинарник со старым 12-итерационным циклом свайпов после правки исходника на 30) — починено
+явной очисткой `PolskiGrammarUITests.build` перед пересборкой; зафиксировано здесь, чтобы не
+перепутать со флаки-скроллом при следующей похожей правке этого файла. Не прогнано: Android/web/
+desktop/macOS-хосты (вне лейна этой задачи — iOS only per план §6); `npm test`/`course:validate`
+(контент не менялся, только хост-код и один commonMain-рефакторинг без изменения публичного JSON
+для pl).
+
+Почему: план явно относит host-переключение остальных 4 хостов на UC-09 к отдельным задачам, но
+явно приглашает делать их по одному (ADR-23/24/25 уже сделали Android/iOS-pl/macOS+Desktop);
+изменение здесь — тот же паттерн для EN-24 конкретно на iOS, тем же минимальным объёмом, что и web.
+
+Подробно: `Plans/Kotlin/EnRuPackPlan.md` §5 гэп H, §6 EN-24; ADR-28 (web), ADR-24 (iOS pl UC-09);
+`kotlin/shared/src/iosMain/kotlin/polski/ios/IosSnapshot.kt`;
+`kotlin/shared/src/commonMain/kotlin/polski/data/EnLexicon.kt`;
+`kotlin/iosApp/PolskiGrammar/PolskiGrammarApp.swift` (`MatrixView.english`);
+`kotlin/iosApp/PolskiGrammarUITests/PolskiGrammarUITests.swift`.
+
 ## ADR-30 · 2026-09-28 · EN-22 (iOS): target/native-пикеры, production `packRegistry` с реальным en-ru, безопасный порядок реселекта
 
 iOS-часть EN-22 (`Plans/Kotlin/EnRuPackPlan.md`§6): пикеры «Изучаемый язык»/«Родной язык» рядом с

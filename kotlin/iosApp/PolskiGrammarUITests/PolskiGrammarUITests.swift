@@ -954,6 +954,46 @@ final class PolskiGrammarUITests: XCTestCase {
         XCTAssertTrue(robilChange.waitForExistence(timeout: 5))
     }
 
+    // EN-24 (UC-09 part 2/2, ios lane, EnRuPackPlan.md §5 gap H / §6): the iOS matrix host's own
+    // live English table + do-support split, mirroring web's `kotlin-en-matrix.spec.ts` — real,
+    // irregular `forms.generated.json(en)` values through `MatrixTableViewModel`, not a mock.
+    func testEnglishMatrixTableShowsRealFormsAndDoSupportSplit() {
+        let app = XCUIApplication()
+        app.launch()
+        app.buttons["Матрица"].firstMatch.tap()
+        let section = app.buttons.matching(NSPredicate(format: "label CONTAINS %@", "Раздел")).firstMatch
+        XCTAssertTrue(section.waitForExistence(timeout: 10))
+        section.tap()
+        app.buttons["Времена и лица"].tap()
+
+        let heSees = app.descendants(matching: .any)["Было: see; Стало: sees"].firstMatch
+        for _ in 0..<30 {
+            if heSees.exists { break }
+            app.swipeUp()
+        }
+        XCTAssertTrue(heSees.waitForExistence(timeout: 5))
+        XCTAssertTrue(app.descendants(matching: .any)["Было: see; Стало: saw"].firstMatch.exists)
+        // UC-09 (ios host, EN-24 minimum slice): visual evidence the English matrix table is real,
+        // MatrixTableViewModel-sourced content, not a mock.
+        let englishCapture = XCTAttachment(screenshot: app.screenshot())
+        englishCapture.name = "matrix-english-verbs-uc09"
+        englishCapture.lifetime = .keepAlways
+        add(englishCapture)
+
+        let doDoes = app.descendants(matching: .any)["Было: do; Стало: does"].firstMatch
+        for _ in 0..<30 {
+            if doDoes.exists { break }
+            app.swipeUp()
+        }
+        XCTAssertTrue(doDoes.waitForExistence(timeout: 5))
+        XCTAssertTrue(app.descendants(matching: .any)["Было: do; Стало: did"].firstMatch.exists)
+        XCTAssertTrue(app.staticTexts["не нужен — только will"].exists)
+        let doSupportCapture = XCTAttachment(screenshot: app.screenshot())
+        doSupportCapture.name = "matrix-do-support-uc09"
+        doSupportCapture.lifetime = .keepAlways
+        add(doSupportCapture)
+    }
+
     func testNativeCasesShowCompactNoteAndOrderedComparisonNouns() {
         let app = XCUIApplication()
         app.launch()

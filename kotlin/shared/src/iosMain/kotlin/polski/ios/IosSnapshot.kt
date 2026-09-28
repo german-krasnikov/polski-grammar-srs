@@ -8,6 +8,9 @@ import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
 import polski.data.adjectives
+import polski.data.enPersonalPronouns
+import polski.data.enVerbForm
+import polski.data.enVerbs
 import polski.data.nounById
 import polski.data.nouns
 import polski.data.personalPronouns
@@ -424,6 +427,50 @@ private fun matrixSnapshot(state: AppUiState): JsonElement {
             put("title", subject.label.compact)
             verbTenses.forEachIndexed { colIndex, tense ->
                 val cell = verbsTable.rows[i].cells[colIndex]
+                put(tense.id, cell.value)
+                put("${tense.id}Pair", pairSnapshot(requireNotNull(cell.contrast)))
+            }
+        } }))
+        // EN-24 (UC-09 part 2/2, ios lane, EnRuPackPlan.md §5 gap H / §6): mirrors the web host's
+        // `renderEnglishVerbMatrix` (ADR-28) — the one live English matrix (Present/Past/Future ×
+        // person, fixed example verb "see") plus a do-support table, both read through
+        // `enVerbForm` (`:shared` commonMain, shared with the web host — not re-derived here) and
+        // the same MatrixTableEngine/MatrixTableViewModel every pl table above already uses.
+        val englishExampleVerbId = "see"
+        val englishExampleLemma = enVerbs.first { it.id == englishExampleVerbId }.lemma
+        put("englishExampleLemma", englishExampleLemma)
+        val englishTenses = listOf(Tense.PRESENT, Tense.PAST, Tense.FUTURE)
+        val englishVerbsTable = MatrixTableEngine.build(
+            rowAxis = enPersonalPronouns,
+            rowHeaderLabel = "Кто",
+            rowHeader = { it.subject },
+            columns = englishTenses.map { tense ->
+                MatrixColumn(tense.id, { pronoun -> enVerbForm(englishExampleVerbId, tense, pronoun.id) }, contrastFrom = { englishExampleLemma })
+            },
+        ).toViewModel()
+        put("englishVerbsRows", JsonArray(enPersonalPronouns.mapIndexed { i, pronoun -> buildJsonObject {
+            put("title", pronoun.subject)
+            englishTenses.forEachIndexed { colIndex, tense ->
+                val cell = englishVerbsTable.rows[i].cells[colIndex]
+                put(tense.id, cell.value)
+                put("${tense.id}Pair", pairSnapshot(requireNotNull(cell.contrast)))
+            }
+        } }))
+        // "do"/"does" (Present) and invariant "did" (Past); the future column has no do-support at
+        // all (plan §5 gap H — future is built with "will" alone) so it carries no pair, unlike
+        // every other matrix cell above.
+        val englishDoSupportTable = MatrixTableEngine.build(
+            rowAxis = enPersonalPronouns,
+            rowHeaderLabel = "Кто",
+            rowHeader = { it.subject },
+            columns = listOf(Tense.PRESENT, Tense.PAST).map { tense ->
+                MatrixColumn(tense.id, { pronoun -> enVerbForm("do", tense, pronoun.id) }, contrastFrom = { "do" })
+            },
+        ).toViewModel()
+        put("englishDoSupportRows", JsonArray(enPersonalPronouns.mapIndexed { i, pronoun -> buildJsonObject {
+            put("title", pronoun.subject)
+            listOf(Tense.PRESENT, Tense.PAST).forEachIndexed { colIndex, tense ->
+                val cell = englishDoSupportTable.rows[i].cells[colIndex]
                 put(tense.id, cell.value)
                 put("${tense.id}Pair", pairSnapshot(requireNotNull(cell.contrast)))
             }

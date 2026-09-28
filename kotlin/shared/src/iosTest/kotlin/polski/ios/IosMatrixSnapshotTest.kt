@@ -22,6 +22,8 @@ import polski.model.NumberGram
 import polski.data.referenceTenseRows
 import polski.data.referenceAspectRows
 import polski.data.maleAccRows
+import polski.data.enPersonalPronouns
+import polski.data.enVerbForm
 import polski.presentation.AppUiState
 
 class IosMatrixSnapshotTest {
@@ -265,6 +267,47 @@ class IosMatrixSnapshotTest {
                 })
             }
         }
+    }
+
+    // EN-24 (UC-09 part 2/2, ios lane, EnRuPackPlan.md §5 gap H / §6): the iOS matrix host's own
+    // live English table, mirroring the web host's `kotlin-en-matrix.spec.ts` — real, irregular
+    // `forms.generated.json(en)` values (not a mock), read through the same [enVerbForm] the web
+    // host now also calls (promoted to `:shared` commonMain by this task, not duplicated).
+    @Test
+    fun nativeMatrixReceivesTheEnglishExampleVerbAndDoSupportRows() {
+        val matrix = Json.parseToJsonElement(snapshot(AppUiState())).jsonObject.getValue("matrix").jsonObject
+        assertEquals("see", matrix.getValue("englishExampleLemma").jsonPrimitive.content)
+
+        val verbRows = matrix.getValue("englishVerbsRows").jsonArray
+        assertEquals(enPersonalPronouns.size, verbRows.size)
+        verbRows.forEachIndexed { index, element ->
+            val row = element.jsonObject
+            assertEquals(enPersonalPronouns[index].subject, row.getValue("title").jsonPrimitive.content)
+            listOf("present", "past", "future").forEach { tenseId ->
+                val pair = row.getValue("${tenseId}Pair").jsonObject
+                assertEquals("see", pair.getValue("from").jsonPrimitive.content)
+            }
+        }
+        fun rowFor(subject: String) = verbRows.first { it.jsonObject.getValue("title").jsonPrimitive.content == subject }.jsonObject
+        assertEquals("see", rowFor("I").getValue("presentPair").jsonObject.getValue("to").jsonPrimitive.content)
+        assertEquals("saw", rowFor("I").getValue("pastPair").jsonObject.getValue("to").jsonPrimitive.content)
+        assertEquals("will see", rowFor("I").getValue("futurePair").jsonObject.getValue("to").jsonPrimitive.content)
+        assertEquals("sees", rowFor("he").getValue("presentPair").jsonObject.getValue("to").jsonPrimitive.content)
+        assertEquals("saw", rowFor("he").getValue("pastPair").jsonObject.getValue("to").jsonPrimitive.content)
+        assertEquals("see", rowFor("we").getValue("presentPair").jsonObject.getValue("to").jsonPrimitive.content)
+
+        val doRows = matrix.getValue("englishDoSupportRows").jsonArray
+        assertEquals(enPersonalPronouns.size, doRows.size)
+        fun doRowFor(subject: String) = doRows.first { it.jsonObject.getValue("title").jsonPrimitive.content == subject }.jsonObject
+        assertEquals("do", doRowFor("I").getValue("presentPair").jsonObject.getValue("to").jsonPrimitive.content)
+        assertEquals("does", doRowFor("he").getValue("presentPair").jsonObject.getValue("to").jsonPrimitive.content)
+        assertEquals("did", doRowFor("I").getValue("pastPair").jsonObject.getValue("to").jsonPrimitive.content)
+        assertEquals("did", doRowFor("he").getValue("pastPair").jsonObject.getValue("to").jsonPrimitive.content)
+        // No future do-support (plan §5 gap H): the do-support rows carry no `futurePair` at all.
+        doRows.forEach { assertTrue(!it.jsonObject.containsKey("futurePair")) }
+
+        // Cross-check against the exact function both hosts share, not a re-derived expectation.
+        assertEquals(enVerbForm("see", Tense.PAST, "he"), rowFor("he").getValue("pastPair").jsonObject.getValue("to").jsonPrimitive.content)
     }
 
     @Test

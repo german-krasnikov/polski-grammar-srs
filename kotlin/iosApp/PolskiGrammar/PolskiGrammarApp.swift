@@ -1056,6 +1056,43 @@ private struct MatrixView: View {
                 comparisonRow(entry.element)
             }
         }
+        english
+    }
+
+    // EN-24 (UC-09 part 2/2, ios lane, EnRuPackPlan.md §5 gap H / §6): mirrors the web host's
+    // `renderEnglishVerbMatrix` (ADR-28) — the one live English matrix table (fixed example verb
+    // "see", no selector — a minimum slice, not a full English matrix UI) plus a do-support table,
+    // both fed by `IosSnapshot.kt`'s `enVerbForm` (shared with the web host). Deliberately not
+    // `matrix.record("verbTenseLabels")` above — that map holds Polish glosses ("Teraz" etc.) for
+    // pl's own tense column headers, which would be a real a11y/correctness bug on an English
+    // table (the same class of bug ADR-28 fixed for `lang="pl"` on the web host).
+    private static let englishTenseLabel: [String: String] = ["present": "Настоящее", "past": "Прошедшее", "future": "Будущее"]
+
+    @ViewBuilder private var english: some View {
+        Section("English: лицо × время (\"\(matrix.string("englishExampleLemma"))\")") {
+            Text("Формы читаются из forms.generated.json(en) тем же MatrixTableViewModel, что и польские таблицы выше — движок не знает, что это английский.")
+        }
+        ForEach(Array(matrix.rows("englishVerbsRows").enumerated()), id: \.offset) { _, row in
+            Section(row.string("title")) {
+                ForEach(["present", "past", "future"], id: \.self) { tense in
+                    Text(Self.englishTenseLabel[tense] ?? tense).font(.subheadline)
+                    NativeContrastPairView(pair: row.record("\(tense)Pair"))
+                }
+            }
+        }
+        Section("do-support: вопрос и отрицание") {
+            Text("«do/does/did» встаёт перед подлежащим (Do you see…?) или перед «not» (I do not see…). У будущего своего do-support нет — вопрос и отрицание строятся через «will» само по себе.")
+        }
+        ForEach(Array(matrix.rows("englishDoSupportRows").enumerated()), id: \.offset) { _, row in
+            Section(row.string("title")) {
+                ForEach(["present", "past"], id: \.self) { tense in
+                    Text(Self.englishTenseLabel[tense] ?? tense).font(.subheadline)
+                    NativeContrastPairView(pair: row.record("\(tense)Pair"))
+                }
+                Text(Self.englishTenseLabel["future"] ?? "future").font(.subheadline)
+                Text("не нужен — только will").font(.footnote).foregroundStyle(.secondary)
+            }
+        }
     }
 
     @ViewBuilder private var pronouns: some View {
