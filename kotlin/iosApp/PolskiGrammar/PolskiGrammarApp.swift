@@ -133,6 +133,17 @@ private func styleOptions(_ preferences: Record) -> [StyleOption] {
 private let courseLanguageLabel: [String: String] = ["pl": "Польский", "en": "Английский", "ru": "Русский"]
 private func courseLanguageName(_ code: String) -> String { courseLanguageLabel[code] ?? code }
 
+// EnRuAcceptance-2026-09-28.md §7 item 4: the vocabulary screen's own 2 small Russian phrasings
+// that need a language's name lowercase (mid-clause, e.g. "Русский → польский") or as the
+// instrumental adverb ("Вспомни по-польски") — [courseLanguageLabel] above is capitalized (a
+// Settings picker's own leading word), so neither reuses it. Same fallback-to-code pattern.
+private let courseLanguageLower: [String: String] = ["pl": "польский", "en": "английский", "ru": "русский"]
+// internal (not `private`): also read by `VocabularyCardView`'s own reveal hint, a separate file.
+let courseLanguageAdverb: [String: String] = ["pl": "польски", "en": "английски", "ru": "русски"]
+private func courseDirectionLabel(from: String, to: String) -> String {
+    "\((courseLanguageLower[from] ?? from).prefix(1).uppercased() + (courseLanguageLower[from] ?? from).dropFirst()) → \(courseLanguageLower[to] ?? to)"
+}
+
 /// The distinct values of [key] ("target"/"native") across every row of `preferences`'s
 /// `coursePacks`, in first-seen order — the real option list for one of the two EN-22 pickers.
 private func coursePackValues(_ preferences: Record, _ key: String) -> [String] {
@@ -386,6 +397,12 @@ final class AppModel: ObservableObject {
         guard let data = json.data(using: .utf8),
               let parsed = (try? JSONSerialization.jsonObject(with: data)) as? Record else { return }
         preferences = parsed
+        // ADR-38 (EnRuAcceptance §7 item 2, blocker 2 correction): `packSwitchWarning` is a
+        // one-shot field — present only on the snapshot right after a training bridge elsewhere
+        // rolled back a pack switch that `set` had accepted. Surfacing it through the same
+        // `notice` alert every other Settings error already uses is what makes that self-
+        // correction visible instead of silent (see `IosPreferencesSession.reconcileWithActivePack`).
+        if let warning = parsed["packSwitchWarning"] as? String, !warning.isEmpty { notice = warning }
     }
 }
 
@@ -1201,12 +1218,21 @@ private struct VocabularyView: View {
                 }
             } else {
                 Section("Направление") {
+                    // EnRuAcceptance-2026-09-28.md §7 item 4: was a hardcoded `"ru-pl"/"pl-ru"`
+                    // pair. Tags/labels read `state`'s own `target`/`native` (this bridge's own
+                    // snapshot, `IosVocabularySession`'s — see its own comment), never
+                    // `model.preferences`: that Settings-owned copy can briefly lag behind (or get
+                    // self-corrected after) a pack switch this screen's own `state` already
+                    // reflects, which would tag a segment with a pair `state.string("direction")`
+                    // never actually carries — reproduced live, both segments then show unselected.
+                    // pl-ru keeps the exact same 2 tags/labels it always had.
                     Picker("Учить", selection: Binding(
                         get: { state.string("direction") },
                         set: { model.sendVocabulary("direction", $0) }
                     )) {
-                        Text("Русский → польский").tag("ru-pl")
-                        Text("Польский → русский").tag("pl-ru")
+                        let target = state.string("target"), native = state.string("native")
+                        Text(courseDirectionLabel(from: native, to: target)).tag("\(native)-\(target)")
+                        Text(courseDirectionLabel(from: target, to: native)).tag("\(target)-\(native)")
                     }
                     .pickerStyle(.segmented)
                 }

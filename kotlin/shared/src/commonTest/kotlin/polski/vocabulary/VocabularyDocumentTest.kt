@@ -154,6 +154,30 @@ class VocabularyDocumentTest {
         assertEquals("pl-ru", StudyDirection.PolishToRussian.wire)
     }
 
+    /** EnRuAcceptance-2026-09-28.md §7 item 4: [activeStudyDirections] generalizes
+     *  [builtInStudyDirections] to whichever pack is active, and a card reviewed under one of an
+     *  en-ru session's own directions must survive [VocabularyCodec.encode]'s [VocabularyCodec.validate]
+     *  call — before this fix, `validate` accepted only the literal `ru-pl`/`pl-ru` wires, so rating
+     *  any en-ru card threw. */
+    @Test
+    fun activeStudyDirectionsTracksTheActivePackAndSurvivesEncode() {
+        assertEquals(builtInStudyDirections, activeStudyDirections)
+        try {
+            polski.data.selectCoursePack("en-ru")
+            assertEquals(listOf(StudyDirection("ru-en"), StudyDirection("en-ru")), activeStudyDirections)
+            val direction = activeStudyDirections.first()
+            val reviewed = VocabularyCodec.review(
+                VocabularyCodec.select(VocabularyDocument(), "noun.wife", true),
+                "noun.wife", direction, Rating.Good, scheduler, at,
+            )
+            assertEquals("en-ru:vocabulary:ru-en:noun.wife", VocabularyCodec.cardKey("noun.wife", direction))
+            assertEquals(reviewed, VocabularyCodec.decode(VocabularyCodec.encode(reviewed)))
+        } finally {
+            polski.data.selectCoursePack("pl-ru")
+        }
+        assertEquals(builtInStudyDirections, activeStudyDirections)
+    }
+
     @Test
     fun importedBackupCannotContainTwoCustomIdsWithOneLemma() {
         val first = VocabularyItem("user.00000000-0000-4000-8000-000000000001", "szkoła", "школа",

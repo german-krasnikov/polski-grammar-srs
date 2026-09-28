@@ -73,3 +73,36 @@ SwiftUI keeps the platform tab bar, Form controls, safe areas, Dynamic Type text
 | Android / web / desktop / macOS hosts | **NOT RUN** — iOS-only lane per the plan's task table; still open per-host work, not silent |
 
 See [decisions.md ADR-34](../../AI/decisions.md) for the full contract.
+
+## EnRuAcceptance-2026-09-28 §7 item 2 (iOS lane): target/native pickers genuinely offer en-ru; the shared self-correction is now visible
+
+ADR-36 already made en-ru parse completely (`usableCourseSelections`), and ADR-37/38 already made
+`IosSession`/`IosPreferencesSession` degrade softly and self-correct when a switch to it can't
+actually build a working exercise engine (`courses/lang/en/forms.generated.json` has no
+noun/adjective/possessive forms yet — a separate, out-of-lane content gap, unchanged here). What
+was still missing on this host: `AppModel.receivePreferences` silently dropped the one-shot
+`packSwitchWarning` field the shared bridge already produced, so the self-correction happened but
+nothing on screen ever told the user. `PolskiGrammarApp.swift`'s `receivePreferences` now surfaces
+it through the same `notice` alert every other Settings error already uses. The stale
+`testCoursePickersListOnlyUsablePacks` (asserted "Английский" must NOT be offered, written before
+ADR-36) is replaced by `testSelectingEnglishTargetIsOfferedAndSelfCorrectsWithAVisibleNoticeOnRelaunch`,
+which proves the whole host-visible contract live: the picker offers English, picking it is
+accepted, and on relaunch the app is never silently stuck — Polish keeps training and an alert
+names exactly why the switch didn't stick. No host-side hardcoded `"pl"`/`PackEngine("pl")` was
+found in `kotlin/iosApp` or `iosMain` (the wiring to `packRegistry.active` was already done pre-existing).
+
+| Check | Result |
+| --- | --- |
+| RED: unmodified `testCoursePickersListOnlyUsablePacks` on iPhone 17 Pro Simulator | **FAIL** (expected, proves the stale assertion): `XCTAssertFalse failed - en-ru must not be offered while it is unusable` — "Английский" now exists |
+| GREEN: `testSelectingEnglishTargetIsOfferedAndSelfCorrectsWithAVisibleNoticeOnRelaunch` | **PASS**: `** TEST SUCCEEDED **`, 29.4s |
+| Regression: `testNativeAppearanceSettingsKeepsTrainingCard`, `testAnimationsToggleDefaultsOnAndPersistsOffAcrossRelaunch`, `testAnswerModeChosenInSettingsSurvivesAppRestart` | **PASS**: `** TEST SUCCEEDED **`, 0 failures |
+| Screenshots | [en22-target-picker-offers-english.png](artifacts/ios/en22-target-picker-offers-english.png), [en22-pack-switch-warning-self-correction.png](artifacts/ios/en22-pack-switch-warning-self-correction.png) |
+| `:shared` Kotlin sources | unchanged — this is a Swift-host-only fix (`PolskiGrammarApp.swift` + the UI test) |
+| Android / web / desktop / macOS hosts | **NOT RUN** — iOS-only lane; each host still needs its own `packSwitchWarning` wiring |
+
+**Not fixed here, by design (out of this lane's scope):** `courses/lang/en/forms.generated.json` has
+no noun/adjective/possessive forms (only verbs, from `scripts/build-pack-en.mjs`), so selecting
+en-ru is accepted by every host's picker but never actually builds a working training session yet —
+this is the still-open content gap ADR-37 documented. Until it closes, "select English and train
+all 16 skills" stays unreachable on every host, iOS included; what this change closes is only the
+picker's own honesty and the self-correction's visibility.

@@ -39,7 +39,13 @@ struct VocabularyCardView: View {
     @State private var showBack = false
 
     private var revealed: Bool { state.bool("revealed") }
-    private var polishAnswer: Bool { state.string("direction") == "ru-pl" }
+    // EnRuAcceptance-2026-09-28.md §7 item 4: was `state.string("direction") == "ru-pl"` — only
+    // ever true for pl-ru. `direction.wire` is always `"{promptLanguage}-{answerLanguage}"`
+    // ([polski.vocabulary.activeStudyDirections]'s own construction), and the prompt is the native
+    // language exactly when this direction recalls the target — the same condition, generalized.
+    // Reads `state`'s own `target`/`native` (this exact snapshot's pack), not `model.preferences` —
+    // see `VocabularyView`'s own comment for why that distinction is load-bearing.
+    private var recallsTarget: Bool { state.string("direction") == "\(state.string("native"))-\(state.string("target"))" }
     private let flipDuration = 0.5
 
     var body: some View {
@@ -66,9 +72,9 @@ struct VocabularyCardView: View {
     @ViewBuilder private var questionFace: some View {
         VStack(alignment: .leading, spacing: 12) {
             VStack(alignment: .leading, spacing: 4) {
-                Text(polishAnswer ? "Вспомни по-польски" : "Вспомни по-русски")
+                Text("Вспомни по-\(courseLanguageAdverb[recallsTarget ? state.string("target") : state.string("native")] ?? "")")
                     .font(.caption).foregroundStyle(.secondary)
-                Text(polishAnswer ? card.string("translation") : card.string("lemma"))
+                Text(recallsTarget ? card.string("translation") : card.string("lemma"))
                     .font(.title2.weight(.semibold))
             }
             .contentShape(Rectangle())
@@ -98,7 +104,7 @@ struct VocabularyCardView: View {
 
     @ViewBuilder private var answerFace: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text(polishAnswer ? card.string("lemma") : card.string("translation"))
+            Text(recallsTarget ? card.string("lemma") : card.string("translation"))
                 .font(.title2.weight(.bold))
                 // A stable, non-button tap target for the visual-flip-back UI test — deliberately
                 // not a button and not wired to any action itself; the whole answer face's own

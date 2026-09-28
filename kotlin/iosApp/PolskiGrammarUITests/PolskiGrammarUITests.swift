@@ -21,27 +21,61 @@ final class PolskiGrammarUITests: XCTestCase {
     }
 
     /**
-     * EN-22 (Plans/Kotlin/EnRuPackPlan.md §6) + ADR-35: the "Изучаемый язык"/"Родной язык" pickers
-     * next to the style picker list only packs whose content fully parses (`coursePacks` from
-     * `availableCoursePacks`, never a hardcoded pair). en-ru is registered but not usable until
-     * `CoursePack`'s schema is generalized, so only "Польский" is offered and pl-ru keeps working.
+     * EN-22 (Plans/Kotlin/EnRuPackPlan.md §6) + ADR-36 (EnRuAcceptance-2026-09-28.md §7 item 1):
+     * `CoursePack`'s schema is now language-agnostic, so en-ru parses completely and
+     * `usableCourseSelections` — read here through `coursePacks`, never a hardcoded pl/en pair —
+     * offers "Английский" alongside "Польский". Picking it is accepted (§7 item 1 unblocks the
+     * picker itself), but ADR-37/38 (§7 item 2, blocker 2) document a separate, out-of-lane content
+     * gap: `courses/lang/en/forms.generated.json` has no noun/adjective/possessive forms yet, so
+     * `IosSession.rebuildIfCourseSwitched` cannot actually build an en-ru exercise engine — it
+     * degrades softly (rolls `packRegistry.active` back to pl-ru instead of crashing) rather than
+     * masking the gap, and `IosPreferencesSession.reconcileWithActivePack` self-corrects the
+     * persisted target/native and surfaces a one-shot `packSwitchWarning`. This test proves the
+     * whole host-visible contract: the picker really offers English (not a hardcoded pl/en pair
+     * behind a stale gate), and picking it is never a silent no-op or a crash — training keeps
+     * working in Polish and the host tells the user why the switch didn't stick.
      */
-    func testCoursePickersListOnlyUsablePacks() {
+    func testSelectingEnglishTargetIsOfferedAndSelfCorrectsWithAVisibleNoticeOnRelaunch() {
         let app = XCUIApplication()
         app.launch()
         XCTAssertTrue(app.staticTexts["To jest moja piękna żona."].waitForExistence(timeout: 20))
+        continueIntroductionIfPresent(app)
         app.buttons["openSettings"].tap()
         XCTAssertTrue(app.staticTexts["Курс"].waitForExistence(timeout: 5))
 
-        let targetRow = app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", "Изучаемый язык,")).firstMatch
-        XCTAssertTrue(targetRow.waitForExistence(timeout: 5), app.debugDescription)
-        XCTAssertTrue(targetRow.label.contains("Польский"), targetRow.label)
-        targetRow.tap()
+        let targetPicker = app.descendants(matching: .any)["settingsTargetPicker"].firstMatch
+        XCTAssertTrue(targetPicker.waitForExistence(timeout: 5), app.debugDescription)
+        targetPicker.tap()
         XCTAssertTrue(app.buttons["Польский"].waitForExistence(timeout: 5), app.debugDescription)
-        XCTAssertFalse(app.buttons["Английский"].exists, "en-ru must not be offered while it is unusable")
-        app.buttons["Польский"].tap()
+        XCTAssertTrue(app.buttons["Английский"].exists, "en-ru now parses completely (ADR-36) and must be offered")
+        let offeredCapture = XCTAttachment(screenshot: app.screenshot())
+        offeredCapture.name = "en-ru-offered-in-target-picker"
+        offeredCapture.lifetime = .keepAlways
+        add(offeredCapture)
+        app.buttons["Английский"].tap()
         app.buttons["Готово"].tap()
-        XCTAssertTrue(app.staticTexts["To jest moja piękna żona."].exists)
+
+        // The rollback is discovered building the training session on next launch, before
+        // Settings is reopened — the alert must appear without any further navigation.
+        app.terminate()
+        app.launch()
+        XCTAssertTrue(app.staticTexts["To jest moja piękna żona."].waitForExistence(timeout: 20),
+            "training keeps working in Polish — never stuck on a pack that can't build")
+        let warning = app.alerts["Сообщение"]
+        XCTAssertTrue(warning.waitForExistence(timeout: 5), app.debugDescription)
+        XCTAssertTrue(warning.staticTexts["Пакет «en-ru» пока не может обучать — вернулись к «pl-ru»"].exists,
+            warning.debugDescription)
+        let warningCapture = XCTAttachment(screenshot: app.screenshot())
+        warningCapture.name = "pack-switch-warning-self-correction"
+        warningCapture.lifetime = .keepAlways
+        add(warningCapture)
+        warning.buttons["ОК"].tap()
+
+        app.buttons["openSettings"].tap()
+        let targetPickerAfterRelaunch = app.descendants(matching: .any)["settingsTargetPicker"].firstMatch
+        XCTAssertTrue(targetPickerAfterRelaunch.waitForExistence(timeout: 5), app.debugDescription)
+        XCTAssertTrue(targetPickerAfterRelaunch.label.contains("Польский"), targetPickerAfterRelaunch.label)
+        app.buttons["Готово"].tap()
     }
 
     /// D5: the "Анимации" master switch defaults on and persists off across a relaunch, via the

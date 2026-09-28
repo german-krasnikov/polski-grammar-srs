@@ -23,7 +23,7 @@ import polski.data.courseVocabularyUnavailableLabel
 import polski.presentation.cardEffectFor
 import polski.srs.FsrsScheduler
 import polski.srs.Rating
-import polski.vocabulary.builtInStudyDirections
+import polski.vocabulary.activeStudyDirections
 import polski.vocabulary.VocabularyCodec
 import polski.vocabulary.VocabularySession
 import polski.vocabulary.VocabularyUiState
@@ -82,7 +82,9 @@ class IosVocabularySession(private val defaults: NSUserDefaults = NSUserDefaults
     fun dispatch(command: String, value: String = "") {
         rebuildIfCourseSwitched()
         when (command) {
-            "direction" -> builtInStudyDirections.firstOrNull { it.wire == value }?.let(session::setDirection)
+            // EnRuAcceptance-2026-09-28.md §7 item 4: was `builtInStudyDirections` — pl-ru's own 2
+            // wires only, so an en-ru direction from the host's picker was silently dropped.
+            "direction" -> activeStudyDirections.firstOrNull { it.wire == value }?.let(session::setDirection)
             "filter" -> if (value in listOf("A1", "A2", "B1", "100", "500", "1000", "mine")) session.setFilter(value)
             "typed" -> session.setTyped(value == "true")
             "draft" -> session.setDraft(value)
@@ -111,6 +113,15 @@ class IosVocabularySession(private val defaults: NSUserDefaults = NSUserDefaults
         put("instructions", courseVocabularyInstructions.ios)
         put("unavailableLabel", courseVocabularyUnavailableLabel)
         put("loadStatus", state.loadStatus.name)
+        // EnRuAcceptance-2026-09-28.md §7 item 4: the pack this exact [state] belongs to — always
+        // in sync with [state.direction]/[state.document] because [rebuildIfCourseSwitched] (called
+        // right before every snapshot) only ever rebuilds [session] to match
+        // [polski.data.activeCoursePackId] at that same instant. The Swift picker reads these
+        // instead of `model.preferences`' own target/native, which can briefly lag behind (or
+        // self-correct after) this bridge's own pack switch — see `VocabularyView`'s own comment.
+        val pairId = polski.data.activeCoursePackId
+        put("target", pairId.substringBefore('-'))
+        put("native", pairId.substringAfter('-'))
         put("direction", state.direction.wire)
         put("filter", state.filter)
         put("currentId", state.currentId?.let(::JsonPrimitive) ?: JsonNull)

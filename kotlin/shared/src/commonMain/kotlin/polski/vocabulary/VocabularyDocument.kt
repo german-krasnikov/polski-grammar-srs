@@ -53,16 +53,15 @@ data class StudyDirection(val wire: String) {
 val builtInStudyDirections: List<StudyDirection> = listOf(StudyDirection.RussianToPolish, StudyDirection.PolishToRussian)
 
 /**
- * The 2 [StudyDirection]s for whichever pack is active right now — native shown/target recalled
- * first, target shown/native recalled second, the same order [builtInStudyDirections] already
- * fixed for pl-ru, generalized from [polski.data.CoursePack.nativeLanguage]/`targetLanguage`
- * instead of a hand-written pl literal (EnRuAcceptance-2026-09-28.md §7 item 4: a vocabulary UI
- * can now offer the active pack's real pair, e.g. `"ru-en"/"en-ru"`, not pl-ru's alone). For
- * pl-ru this is byte-identical to [builtInStudyDirections]. Read fresh, not cached: the active
- * pack can change mid-process (EN-22).
+ * The 2 [StudyDirection]s for whichever pack is active right now — native→target first,
+ * target→native second, the same order [builtInStudyDirections] fixes for pl-ru (byte-identical
+ * there), built from [StudyDirection.nativeToTarget]/[StudyDirection.targetToNative]
+ * (EnRuAcceptance-2026-09-28.md §7 item 4; en-ru gets `["ru-en", "en-ru"]`, see
+ * [VocabularyDocumentTest.opensToASecondPacksDirectionWithoutTouchingTheBuiltIns]). Read fresh,
+ * not cached: the active pack can change mid-process (EN-22).
  */
 val activeStudyDirections: List<StudyDirection> get() = packRegistry.active.let { pack ->
-    listOf(StudyDirection("${pack.nativeLanguage}-${pack.targetLanguage}"), StudyDirection("${pack.targetLanguage}-${pack.nativeLanguage}"))
+    listOf(StudyDirection.nativeToTarget(pack.targetLanguage, pack.nativeLanguage), StudyDirection.targetToNative(pack.targetLanguage, pack.nativeLanguage))
 }
 
 data class VocabularyDocument(
@@ -138,10 +137,9 @@ object VocabularyCodec {
         }
         require(document.selectedIds.distinct().size == document.selectedIds.size)
         require(document.selectedIds.all { item(document, it) != null })
-        val pack = packRegistry.active
-        val forward = StudyDirection.nativeToTarget(pack.targetLanguage, pack.nativeLanguage).wire
-        val backward = StudyDirection.targetToNative(pack.targetLanguage, pack.nativeLanguage).wire
-        require(document.cards.keys.all { it.startsWith("${pack.pairId}:vocabulary:$forward:") || it.startsWith("${pack.pairId}:vocabulary:$backward:") })
+        // EnRuAcceptance-2026-09-28.md §7 item 4: allowed wires follow the active pack, not pl-ru's literal pair.
+        val wires = activeStudyDirections.map(StudyDirection::wire)
+        require(document.cards.keys.all { key -> wires.any { key.startsWith("${packRegistry.active.pairId}:vocabulary:$it:") } })
         return document
     }
 
