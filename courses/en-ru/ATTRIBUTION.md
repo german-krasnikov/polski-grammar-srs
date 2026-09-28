@@ -19,6 +19,10 @@ Unlike `pl-ru/frequency-top1000.json` (built from NKJP's lemma-annotated corpus,
 
 Frequency rank and language-learning level answer different questions, same as for pl-ru: this file is a discovery list, not a set of ready-to-study cards. Card selection, translation and review happen in `vocabulary-editorial.json` (a later task).
 
+## Skill and exercise content (EnRuPackPlan.md §6 EN-17)
+
+The English/Russian skill texts in `courses/pairs/en-ru/pair.json` — `formula`/`theory`/`hint`, the `logic`/`situations` method prose, `styleContent` (`examples`/`why`, and the `nativeParallel` pairs the plan itself specifies for `role.object`/`polarity.present`/`verb.presentContinuous`/`mood.question`/`possessive.my`/`role.location`) and every `exerciseCopy`/`exercisePatterns` string — were authored for this course, the same "project-authored" status `pl-ru/ATTRIBUTION.md` records for its own skill texts. `vocabulary-editorial.json`'s 30 approved cards record their own per-field provenance and `reviewSources` individually; this file does not restate them.
+
 ## Known extraction artifacts (linguist self-check, 2026-09-28)
 
 The source's stripping of punctuation/digits does not fully clean wiki-markup remnants. Four ranked entries are not real English words: `gt` (rank 485, likely `&gt;`), `lt` (rank 492, likely `&lt;`), `p` (rank 702) and `f` (rank 704) (likely stripped page/folio abbreviations). Two entries keep a possessive apostrophe despite the source's stated apostrophe normalization: `women's` (rank 432) and `men's` (rank 643). None of these were edited or removed — the file stays byte-faithful to the source's first 1,000 ranked lines, same policy as `pl-ru/frequency-top1000.json` ("retaining their order"); filtering is editorial judgment that belongs to `vocabulary-editorial.json` card selection, not to this discovery list. Recorded here so that later task does not treat these six ranks as real lemmas.

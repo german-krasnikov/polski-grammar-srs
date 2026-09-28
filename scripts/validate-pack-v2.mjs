@@ -1,19 +1,21 @@
 // UniversalCorePlan.md §3.1/§8.2/§12 UC-12: validates the schema-v2 layer files (core/*.json,
-// every lang/<code>/lang.json + lexicon.json + prepositions.json it finds, pairs/pl-ru/pair.json)
-// against their own schemas, then the cross-checks §8.2 names: a skill's `construction` exists in
-// core/constructions.json, a feature value used by curriculum.json is declared both in
-// core/features.json and in that language's lang.json `usesFeatures`, and curriculum.json's
-// `lexicalFilter` references resolve against the actual lexicon. Those three cross-checks only run
-// for a language that actually has a curriculum.json yet (EnRuPackPlan.md §6 EN-12) — today that's
-// pl only; lang/en (EN-11) gets the lang.json/lexicon.json/prepositions.json schema+cross-checks
-// below but not these, honestly, rather than a no-op pretending to check something that doesn't
-// exist yet. It also proves pl-ru's lexicon.json + pair.json reconstruct a pack that is itself a
-// valid v1 pack (reusing course-pack-v1.schema.json and validateCoursePack — see
-// scripts/migrate-v1-to-v2.mjs's own `--check` for the exact-reconstruction proof; this script
+// every lang/<code>/lang.json + lexicon.json + prepositions.json it finds, pairs/pl-ru/pair.json
+// and pairs/en-ru/pair.json) against their own schemas, then the cross-checks §8.2 names: a
+// skill's `construction` exists in core/constructions.json, a feature value used by curriculum.json
+// is declared both in core/features.json and in that language's lang.json `usesFeatures`, and
+// curriculum.json's `lexicalFilter` references resolve against the actual lexicon. Those three
+// cross-checks only run for a language that actually has a curriculum.json (EnRuPackPlan.md §6
+// EN-12) — today that's pl and en both. It also proves pl-ru's lexicon.json + pair.json reconstruct
+// a pack that is itself a valid v1 pack (reusing course-pack-v1.schema.json and validateCoursePack —
+// see scripts/migrate-v1-to-v2.mjs's own `--check` for the exact-reconstruction proof; this script
 // re-validates the *content*, not just the shape, of that reconstruction). That v1 bridge is
 // pl-ru-specific by construction (course-pack-v1.schema.json's own case-label vocabulary is pl's 7
-// cases, not a generic Case-role table — EnRuPackPlan.md §0 point 3) and is not generalized here;
-// a second pair goes through the v2 layers directly once its own loader exists (EN-04/EN-05).
+// cases, not a generic Case-role table — EnRuPackPlan.md §0 point 3) and is not generalized here.
+// en-ru has no v1 course.json to reconstruct, so it instead gets EN-17's own acceptance directly:
+// pairs/en-ru/pair.json validates against the loose pair-pack-v1.schema.json, its 16 skill ids
+// match lang/en/curriculum.json's exactly, and every opaque copy/pattern key
+// lang/en/exercise-recipes.json (EN-14) references resolves in the pair's own
+// exerciseCopy/exercisePatterns (checkPairSkillIdsMatchCurriculum/checkRecipeCopyResolves below).
 //
 // Usage: node scripts/validate-pack-v2.mjs
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
@@ -92,6 +94,50 @@ function checkPrepositionsCoverRoles(langCode, lang, prepositions) {
   for (const value of covered) if (!declared.has(value)) throw new Error(`/lang/${langCode}/prepositions.json/role/forms/${value}: not a case value lang/${langCode}/lang.json declares`);
 }
 
+/** EnRuPackPlan.md §6 EN-17: `pairs/<id>/pair.json`'s own 16 skill ids must be exactly
+ *  `lang/<targetCode>/curriculum.json`'s ids (same set, same order) — the acceptance this task names. */
+function checkPairSkillIdsMatchCurriculum(pairId, pair, curriculum) {
+  const pairIds = pair.skills.map((skill) => skill.id);
+  const curriculumIds = curriculum.map((skill) => skill.id);
+  if (JSON.stringify(pairIds) !== JSON.stringify(curriculumIds)) {
+    throw new Error(`/pairs/${pairId}/pair.json/skills: ids [${pairIds}] must match lang/curriculum.json's ids [${curriculumIds}] exactly (same set, same order)`);
+  }
+}
+
+/**
+ * Walks a `lang/<code>/exercise-recipes.json` wiring and collects every opaque string it names:
+ * a `{"type":"pattern","key":...}` node names an `exercisePatterns` key; a `{"type":"copy"|"fixed","key":...}`
+ * node, any `...Key`/`...Keys` field and `ownerDraw.labelKeys`' values each name an `exerciseCopy` key.
+ * Generic over the recipe JSON shape (no skill/construction names hardcoded) so it applies to any lang.
+ */
+function collectRecipeKeys(recipes) {
+  const copyKeys = new Set();
+  const patternKeys = new Set();
+  const walk = (node) => {
+    if (Array.isArray(node)) { node.forEach(walk); return; }
+    if (!node || typeof node !== 'object') return;
+    if (node.type === 'pattern' && typeof node.key === 'string') patternKeys.add(node.key);
+    if ((node.type === 'copy' || node.type === 'fixed') && typeof node.key === 'string') copyKeys.add(node.key);
+    for (const [key, value] of Object.entries(node)) {
+      if (key.endsWith('Key') && typeof value === 'string') copyKeys.add(value);
+      else if (key.endsWith('Keys') && Array.isArray(value)) value.forEach((entry) => copyKeys.add(entry));
+      else if (key === 'labelKeys' && value && typeof value === 'object') Object.values(value).forEach((entry) => copyKeys.add(entry));
+      walk(value);
+    }
+  };
+  walk(recipes);
+  return { copyKeys, patternKeys };
+}
+
+/** EnRuPackPlan.md §6 EN-17: every opaque copy/pattern key `lang/<code>/exercise-recipes.json` (EN-14)
+ *  references must resolve in the pair's own `exerciseCopy`/`exercisePatterns` — the last-mile check that
+ *  EN-17's content actually satisfies EN-14's wiring, not just the loose pair-pack-v1 shape. */
+function checkRecipeCopyResolves(langCode, pairId, recipes, pair) {
+  const { copyKeys, patternKeys } = collectRecipeKeys(recipes);
+  for (const key of copyKeys) if (!(key in pair.exerciseCopy)) throw new Error(`/pairs/${pairId}/pair.json/exerciseCopy/${key}: missing — referenced by lang/${langCode}/exercise-recipes.json`);
+  for (const key of patternKeys) if (!(key in pair.exercisePatterns)) throw new Error(`/pairs/${pairId}/pair.json/exercisePatterns/${key}: missing — referenced by lang/${langCode}/exercise-recipes.json`);
+}
+
 /**
  * Every `courses/lang/<code>/` directory with a lang.json: schema-validate lang.json (always),
  * lexicon.json and prepositions.json (whichever exist), and — only once a curriculum.json exists
@@ -152,6 +198,17 @@ export function validatePackV2() {
   const reconstructed = reconstructCoursePack(lexicon, pair);
   assertSchema(readJson('courses/schema/course-pack-v1.schema.json'), reconstructed, '/reconstructed-v2-pack');
   validateCoursePack(reconstructed, frequency);
+
+  // en-ru (EnRuPackPlan.md §6 EN-17): the pair-pack-v1 layer only — en-ru has no v1 course.json to
+  // reconstruct against, so this stays the loose pair-pack-v1.schema.json shape check plus the two
+  // cross-checks EN-17's own acceptance names, not pl-ru's full v1-bridge reconstruction above.
+  const pairSchema = readJson('courses/schema/pair-pack-v1.schema.json');
+  const enRuPair = readJson('courses/pairs/en-ru/pair.json');
+  const enCurriculum = readJson('courses/lang/en/curriculum.json');
+  const enRecipes = readJson('courses/lang/en/exercise-recipes.json');
+  assertSchema(pairSchema, enRuPair, '/pairs/en-ru/pair.json');
+  checkPairSkillIdsMatchCurriculum('en-ru', enRuPair, enCurriculum);
+  checkRecipeCopyResolves('en', 'en-ru', enRecipes, enRuPair);
 
   return true;
 }
