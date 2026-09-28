@@ -11,6 +11,8 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.JsonObject
+import polski.data.activePackSkillIds
+import polski.data.packRegistry
 import polski.data.skills
 import polski.data.nouns
 import polski.data.adjectives
@@ -56,8 +58,9 @@ class TrainingStore(
     private val knownSkillIds = skills.map { it.id }
     private val knownSkillIdSet = knownSkillIds.toSet()
     private val reviewReducer = ReviewReducer(scheduler, knownSkillIdSet)
-    /** UniversalCorePlan.md §6: the active pack's skills only — see [SkillQueue]. */
-    private val skillQueue = SkillQueue { it in knownSkillIdSet }
+    /** UniversalCorePlan.md §6/EN-10: the active pack's skills only, re-read from [packRegistry]
+     * on every call (see [activePackSkillIds]) rather than this store's own frozen [knownSkillIdSet]. */
+    private val skillQueue = SkillQueue { it in activePackSkillIds(packRegistry) }
     private var document: ProgressDocument? = null
     private var recoveryRaw: String? = null
     private var nextEffectId = 0L
