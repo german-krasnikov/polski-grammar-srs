@@ -2,6 +2,54 @@
 
 Новые сверху. Формат: решение → почему → где подробно.
 
+## ADR-30 · 2026-09-28 · EN-22 (android): `packRegistry` реально встраивает en-ru + `usableCourseSelections` — пикер предлагает только реально парсящийся пакет, переключение — через перезапуск процесса
+
+`Plans/Kotlin/EnRuPackPlan.md` §6 EN-22, android-часть. Два независимых, но связанных решения,
+найденных по ходу задачи (не в самом плане):
+
+**1. `packRegistry` (`CourseData.kt`) до этой задачи встраивал только v1-пакеты
+(`courses/<id>/course.json`) — то есть ровно один pl-ru; en-ru (EN-04..EN-20, только v2-слои,
+`lang/en/lexicon.json` + `pairs/en-ru/pair.json`) физически не мог быть выбран, `PackRegistry.select`
+кидал бы `Unknown pack pairId`.** Публичная продакшн-`packRegistry` теперь = v1-пакеты + любой
+`pairId` из `generatedPairJsonByPairId`, которого нет среди v1 (реконструирован
+`CoursePackLoader.fromV2Layers`, EN-04) — pl-ru всегда первый/дефолтный, en-ru добавляется без
+дублирования. Новые публичные точки для хостов: `availableCourseSelections` (каждый
+встроенный пакет), `selectActiveCoursePack(pairId)` (переключает, no-op на неизвестный/уже активный).
+
+**2. Обнаружен реальный core-гэп, не входящий в EN-22 (и ни в одну задачу плана): схема
+`CoursePack` (v1, ~35 полей) написана только под pl-ru и требует рода/падежа почти everywhere
+(`Noun.gender`, `possessiveForms`/`futureAuxiliary`/референс-таблицы с ключами по падежу/роду,
+закрытый `PossessiveId` не знает `its`).** У английского нет ни рода, ни падежа
+(`lang/en/lexicon.json` корректно их не содержит — это не недостающий факт контента, а другая
+грамматика) — попытка `packRegistry.select("en-ru")` вживую ломает ~30 из ~35 полей
+`CoursePack` (`IllegalStateException`/`NoSuchElementException` на `.nouns`, `.adjectives`,
+`.verbs`, `.possessiveForms`, `.futureAuxiliary`, все `reference*`-таблицы — точный список см.
+`EnRuPackSwitchTest`/`CourseData.kt`'s `parsesCompletely()`). Добавлять «факты» контенту, чтобы
+эти поля не падали, значит изобретать несуществующую английскую грамматику — прямо запрещено
+инструкцией задачи. Решение: `usableCourseSelections` — рантайм-проба одноразового `CoursePack`
+(никогда не через сам `packRegistry`, чтобы сломанный пакет не попал в process-wide кэш) по всем
+полям; `selectActiveCoursePack` переключает только то, что прошло пробу. Сегодня это только
+pl-ru — пикер на Android (`AndroidCoursePicker.kt`) предложит en-ru сам, без правки хоста, в тот
+день, когда `CoursePack`'ную схему обобщат под pl-агностичный пакет (отдельная, ещё не заведённая
+задача).
+
+Отдельно: переключение пакета — не in-place мутация состояния, а рестарт процесса
+(`MainActivity.restartApp`), потому что каждый `by lazy { packRegistry.active.* }` в
+`CourseData.kt`/`Nouns.kt`/`Adjectives.kt`/`Verbs.kt`/`Skills.kt` кэшируется на весь процесс при
+первом чтении — переключение `packRegistry.active` после этого меняет только указатель, не то,
+что уже показано. `AndroidSessionViewModel`'s ранний `init`-блок вызывает
+`selectActiveCoursePack` из persisted `target`/`native` до первого чтения курсовых данных;
+`UserPreferencesCodec.peekTargetNative`/`AndroidUserPreferencesStore.peekTargetNative` — сырое
+чтение без валидации против текущего `packRegistry.active` (у `decode()` эта валидация есть и
+иначе не даёт даже долистать до `select`).
+
+Проверено: `:shared:desktopTest` (348/348, включая новый `EnRuPackSwitchTest` +
+`UserPreferencesCodecTest`'s `peekTargetNative*`), `:shared:compileKotlin{Js,WasmJs,MacosArm64}`,
+`:androidApp:testDebugUnitTest` (88/88), `:androidApp:assembleDebug` — зелёные; живой прогон на
+`emulator-5554`: чистая установка грузится в pl-ru без изменений, «Настройки» показывают новый
+блок «Курс» (только Польский/Русский — en-ru корректно скрыт), повторный выбор уже активного
+курса — no-op без рестарта, вкладки Тренировка/Матрица/Слова не падают.
+
 ## ADR-29 · 2026-09-28 · EN-21 (android): `AndroidLifehackBlock` — тот же сворачиваемый блок «Лайфхак», что web (ADR-27), теперь на Android-хосте
 
 `kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidLifehackBlock.kt`: android-часть
