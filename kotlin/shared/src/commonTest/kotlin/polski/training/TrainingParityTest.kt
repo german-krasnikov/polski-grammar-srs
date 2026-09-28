@@ -36,7 +36,7 @@ class TrainingParityTest {
         run { // C-01-03
             val factory = factory(listOf(0.33))
             val actual = factory.generateChain(SentenceSeed("wife", "beautiful"))[2]
-            assertEquals(Exercise("generated", "case.gen.neg", "Widziałem moją piękną żonę.", "Теперь сделай это предложение отрицательным.", "Nie widziałem mojej pięknej żony.", listOf(), "Отрицание → Biernik меняется на Dopełniacz.", listOf("gen", "negation"), "wife", "beautiful", PossessiveId.fromId("my"), NumberGram.fromId("sg"), listOf(FormChange("", "Nie", "Добавь отрицание nie."), FormChange("moją piękną żonę", "mojej pięknej żony", "Отрицание → Biernik меняется на Dopełniacz."))), actual, "C-01-03")
+            assertEquals(Exercise("generated", "case.gen.neg", "Widziałem moją piękną żonę.", "Теперь сделай это предложение отрицательным.", "Nie widziałem mojej pięknej żony.", listOf(), "Отрицание → Biernik меняется на Dopełniacz.", listOf("gen", "negation"), "wife", "beautiful", PossessiveId.fromId("my"), NumberGram.fromId("sg"), listOf(FormChange("moją piękną żonę", "mojej pięknej żony", "Отрицание → Biernik меняется на Dopełniacz."))), actual, "C-01-03")
         }
         run { // C-01-04
             val factory = factory(listOf(0.44))
@@ -61,7 +61,7 @@ class TrainingParityTest {
         run { // C-02-03
             val factory = factory(listOf(0.33))
             val actual = factory.generateChain(SentenceSeed("husband", "good"))[2]
-            assertEquals(Exercise("generated", "case.gen.neg", "Widziałem mojego dobrego męża.", "Теперь сделай это предложение отрицательным.", "Nie widziałem mojego dobrego męża.", listOf(), "Отрицание → Biernik меняется на Dopełniacz.", listOf("gen", "negation"), "husband", "good", PossessiveId.fromId("my"), NumberGram.fromId("sg"), listOf(FormChange("", "Nie", "Добавь отрицание nie."), FormChange("mojego dobrego męża", "mojego dobrego męża", "Отрицание → Biernik меняется на Dopełniacz."))), actual, "C-02-03")
+            assertEquals(Exercise("generated", "case.gen.neg", "Widziałem mojego dobrego męża.", "Теперь сделай это предложение отрицательным.", "Nie widziałem mojego dobrego męża.", listOf(), "Отрицание → Biernik меняется на Dopełniacz.", listOf("gen", "negation"), "husband", "good", PossessiveId.fromId("my"), NumberGram.fromId("sg"), listOf(FormChange("mojego dobrego męża", "mojego dobrego męża", "Отрицание → Biernik меняется на Dopełniacz."))), actual, "C-02-03")
         }
         run { // C-02-04
             val factory = factory(listOf(0.44))
@@ -86,7 +86,7 @@ class TrainingParityTest {
         run { // C-03-03
             val factory = factory(listOf(0.33))
             val actual = factory.generateChain(SentenceSeed("friendM", "good"))[2]
-            assertEquals(Exercise("generated", "case.gen.neg", "Widziałem mojego dobrego kolegę.", "Теперь сделай это предложение отрицательным.", "Nie widziałem mojego dobrego kolegi.", listOf(), "Отрицание → Biernik меняется на Dopełniacz.", listOf("gen", "negation"), "friendM", "good", PossessiveId.fromId("my"), NumberGram.fromId("sg"), listOf(FormChange("", "Nie", "Добавь отрицание nie."), FormChange("mojego dobrego kolegę", "mojego dobrego kolegi", "Отрицание → Biernik меняется на Dopełniacz."))), actual, "C-03-03")
+            assertEquals(Exercise("generated", "case.gen.neg", "Widziałem mojego dobrego kolegę.", "Теперь сделай это предложение отрицательным.", "Nie widziałem mojego dobrego kolegi.", listOf(), "Отрицание → Biernik меняется на Dopełniacz.", listOf("gen", "negation"), "friendM", "good", PossessiveId.fromId("my"), NumberGram.fromId("sg"), listOf(FormChange("mojego dobrego kolegę", "mojego dobrego kolegi", "Отрицание → Biernik меняется на Dopełniacz."))), actual, "C-03-03")
         }
         run { // C-03-04
             val factory = factory(listOf(0.44))
@@ -111,7 +111,7 @@ class TrainingParityTest {
         run { // C-04-03
             val factory = factory(listOf(0.33))
             val actual = factory.generateChain(SentenceSeed("son", "small"))[2]
-            assertEquals(Exercise("generated", "case.gen.neg", "Widziałem mojego małego syna.", "Теперь сделай это предложение отрицательным.", "Nie widziałem mojego małego syna.", listOf(), "Отрицание → Biernik меняется на Dopełniacz.", listOf("gen", "negation"), "son", "small", PossessiveId.fromId("my"), NumberGram.fromId("sg"), listOf(FormChange("", "Nie", "Добавь отрицание nie."), FormChange("mojego małego syna", "mojego małego syna", "Отрицание → Biernik меняется на Dopełniacz."))), actual, "C-04-03")
+            assertEquals(Exercise("generated", "case.gen.neg", "Widziałem mojego małego syna.", "Теперь сделай это предложение отрицательным.", "Nie widziałem mojego małego syna.", listOf(), "Отрицание → Biernik меняется на Dopełniacz.", listOf("gen", "negation"), "son", "small", PossessiveId.fromId("my"), NumberGram.fromId("sg"), listOf(FormChange("mojego małego syna", "mojego małego syna", "Отрицание → Biernik меняется на Dopełniacz."))), actual, "C-04-03")
         }
         run { // C-04-04
             val factory = factory(listOf(0.44))
@@ -136,7 +136,7 @@ class TrainingParityTest {
         run { // C-05-03
             val factory = factory(listOf(0.33))
             val actual = factory.generateChain(SentenceSeed("dog", "good"))[2]
-            assertEquals(Exercise("generated", "case.gen.neg", "Widziałem mojego dobrego psa.", "Теперь сделай это предложение отрицательным.", "Nie widziałem mojego dobrego psa.", listOf(), "Отрицание → Biernik меняется на Dopełniacz.", listOf("gen", "negation"), "dog", "good", PossessiveId.fromId("my"), NumberGram.fromId("sg"), listOf(FormChange("", "Nie", "Добавь отрицание nie."), FormChange("mojego dobrego psa", "mojego dobrego psa", "Отрицание → Biernik меняется на Dopełniacz."))), actual, "C-05-03")
+            assertEquals(Exercise("generated", "case.gen.neg", "Widziałem mojego dobrego psa.", "Теперь сделай это предложение отрицательным.", "Nie widziałem mojego dobrego psa.", listOf(), "Отрицание → Biernik меняется на Dopełniacz.", listOf("gen", "negation"), "dog", "good", PossessiveId.fromId("my"), NumberGram.fromId("sg"), listOf(FormChange("mojego dobrego psa", "mojego dobrego psa", "Отрицание → Biernik меняется на Dopełniacz."))), actual, "C-05-03")
         }
         run { // C-05-04
             val factory = factory(listOf(0.44))
@@ -161,7 +161,7 @@ class TrainingParityTest {
         run { // C-06-03
             val factory = factory(listOf(0.33))
             val actual = factory.generateChain(SentenceSeed("cat", "small"))[2]
-            assertEquals(Exercise("generated", "case.gen.neg", "Widziałem mojego małego kota.", "Теперь сделай это предложение отрицательным.", "Nie widziałem mojego małego kota.", listOf(), "Отрицание → Biernik меняется на Dopełniacz.", listOf("gen", "negation"), "cat", "small", PossessiveId.fromId("my"), NumberGram.fromId("sg"), listOf(FormChange("", "Nie", "Добавь отрицание nie."), FormChange("mojego małego kota", "mojego małego kota", "Отрицание → Biernik меняется на Dopełniacz."))), actual, "C-06-03")
+            assertEquals(Exercise("generated", "case.gen.neg", "Widziałem mojego małego kota.", "Теперь сделай это предложение отрицательным.", "Nie widziałem mojego małego kota.", listOf(), "Отрицание → Biernik меняется на Dopełniacz.", listOf("gen", "negation"), "cat", "small", PossessiveId.fromId("my"), NumberGram.fromId("sg"), listOf(FormChange("mojego małego kota", "mojego małego kota", "Отрицание → Biernik меняется на Dopełniacz."))), actual, "C-06-03")
         }
         run { // C-06-04
             val factory = factory(listOf(0.44))
@@ -186,7 +186,7 @@ class TrainingParityTest {
         run { // C-07-03
             val factory = factory(listOf(0.33))
             val actual = factory.generateChain(SentenceSeed("book", "new"))[2]
-            assertEquals(Exercise("generated", "case.gen.neg", "Widziałem moją nową książkę.", "Теперь сделай это предложение отрицательным.", "Nie widziałem mojej nowej książki.", listOf(), "Отрицание → Biernik меняется на Dopełniacz.", listOf("gen", "negation"), "book", "new", PossessiveId.fromId("my"), NumberGram.fromId("sg"), listOf(FormChange("", "Nie", "Добавь отрицание nie."), FormChange("moją nową książkę", "mojej nowej książki", "Отрицание → Biernik меняется на Dopełniacz."))), actual, "C-07-03")
+            assertEquals(Exercise("generated", "case.gen.neg", "Widziałem moją nową książkę.", "Теперь сделай это предложение отрицательным.", "Nie widziałem mojej nowej książki.", listOf(), "Отрицание → Biernik меняется на Dopełniacz.", listOf("gen", "negation"), "book", "new", PossessiveId.fromId("my"), NumberGram.fromId("sg"), listOf(FormChange("moją nową książkę", "mojej nowej książki", "Отрицание → Biernik меняется на Dopełniacz."))), actual, "C-07-03")
         }
         run { // C-07-04
             val factory = factory(listOf(0.44))
@@ -211,7 +211,7 @@ class TrainingParityTest {
         run { // C-08-03
             val factory = factory(listOf(0.33))
             val actual = factory.generateChain(SentenceSeed("car", "new"))[2]
-            assertEquals(Exercise("generated", "case.gen.neg", "Widziałem mój nowy samochód.", "Теперь сделай это предложение отрицательным.", "Nie widziałem mojego nowego samochodu.", listOf(), "Отрицание → Biernik меняется на Dopełniacz.", listOf("gen", "negation"), "car", "new", PossessiveId.fromId("my"), NumberGram.fromId("sg"), listOf(FormChange("", "Nie", "Добавь отрицание nie."), FormChange("mój nowy samochód", "mojego nowego samochodu", "Отрицание → Biernik меняется на Dopełniacz."))), actual, "C-08-03")
+            assertEquals(Exercise("generated", "case.gen.neg", "Widziałem mój nowy samochód.", "Теперь сделай это предложение отрицательным.", "Nie widziałem mojego nowego samochodu.", listOf(), "Отрицание → Biernik меняется на Dopełniacz.", listOf("gen", "negation"), "car", "new", PossessiveId.fromId("my"), NumberGram.fromId("sg"), listOf(FormChange("mój nowy samochód", "mojego nowego samochodu", "Отрицание → Biernik меняется на Dopełniacz."))), actual, "C-08-03")
         }
         run { // C-08-04
             val factory = factory(listOf(0.44))
@@ -236,7 +236,7 @@ class TrainingParityTest {
         run { // C-09-03
             val factory = factory(listOf(0.33))
             val actual = factory.generateChain(SentenceSeed("house", "new"))[2]
-            assertEquals(Exercise("generated", "case.gen.neg", "Widziałem mój nowy dom.", "Теперь сделай это предложение отрицательным.", "Nie widziałem mojego nowego domu.", listOf(), "Отрицание → Biernik меняется на Dopełniacz.", listOf("gen", "negation"), "house", "new", PossessiveId.fromId("my"), NumberGram.fromId("sg"), listOf(FormChange("", "Nie", "Добавь отрицание nie."), FormChange("mój nowy dom", "mojego nowego domu", "Отрицание → Biernik меняется на Dopełniacz."))), actual, "C-09-03")
+            assertEquals(Exercise("generated", "case.gen.neg", "Widziałem mój nowy dom.", "Теперь сделай это предложение отрицательным.", "Nie widziałem mojego nowego domu.", listOf(), "Отрицание → Biernik меняется на Dopełniacz.", listOf("gen", "negation"), "house", "new", PossessiveId.fromId("my"), NumberGram.fromId("sg"), listOf(FormChange("mój nowy dom", "mojego nowego domu", "Отрицание → Biernik меняется на Dopełniacz."))), actual, "C-09-03")
         }
         run { // C-09-04
             val factory = factory(listOf(0.44))
@@ -261,7 +261,7 @@ class TrainingParityTest {
         run { // C-10-03
             val factory = factory(listOf(0.33))
             val actual = factory.generateChain(SentenceSeed("phone", "new"))[2]
-            assertEquals(Exercise("generated", "case.gen.neg", "Widziałem mój nowy telefon.", "Теперь сделай это предложение отрицательным.", "Nie widziałem mojego nowego telefonu.", listOf(), "Отрицание → Biernik меняется на Dopełniacz.", listOf("gen", "negation"), "phone", "new", PossessiveId.fromId("my"), NumberGram.fromId("sg"), listOf(FormChange("", "Nie", "Добавь отрицание nie."), FormChange("mój nowy telefon", "mojego nowego telefonu", "Отрицание → Biernik меняется на Dopełniacz."))), actual, "C-10-03")
+            assertEquals(Exercise("generated", "case.gen.neg", "Widziałem mój nowy telefon.", "Теперь сделай это предложение отрицательным.", "Nie widziałem mojego nowego telefonu.", listOf(), "Отрицание → Biernik меняется на Dopełniacz.", listOf("gen", "negation"), "phone", "new", PossessiveId.fromId("my"), NumberGram.fromId("sg"), listOf(FormChange("mój nowy telefon", "mojego nowego telefonu", "Отрицание → Biernik меняется на Dopełniacz."))), actual, "C-10-03")
         }
         run { // C-10-04
             val factory = factory(listOf(0.44))
@@ -286,7 +286,7 @@ class TrainingParityTest {
         run { // C-11-03
             val factory = factory(listOf(0.33))
             val actual = factory.generateChain(SentenceSeed("child", "small"))[2]
-            assertEquals(Exercise("generated", "case.gen.neg", "Widziałem moje małe dziecko.", "Теперь сделай это предложение отрицательным.", "Nie widziałem mojego małego dziecka.", listOf(), "Отрицание → Biernik меняется на Dopełniacz.", listOf("gen", "negation"), "child", "small", PossessiveId.fromId("my"), NumberGram.fromId("sg"), listOf(FormChange("", "Nie", "Добавь отрицание nie."), FormChange("moje małe dziecko", "mojego małego dziecka", "Отрицание → Biernik меняется на Dopełniacz."))), actual, "C-11-03")
+            assertEquals(Exercise("generated", "case.gen.neg", "Widziałem moje małe dziecko.", "Теперь сделай это предложение отрицательным.", "Nie widziałem mojego małego dziecka.", listOf(), "Отрицание → Biernik меняется на Dopełniacz.", listOf("gen", "negation"), "child", "small", PossessiveId.fromId("my"), NumberGram.fromId("sg"), listOf(FormChange("moje małe dziecko", "mojego małego dziecka", "Отрицание → Biernik меняется на Dopełniacz."))), actual, "C-11-03")
         }
         run { // C-11-04
             val factory = factory(listOf(0.44))
@@ -311,7 +311,7 @@ class TrainingParityTest {
         run { // C-12-03
             val factory = factory(listOf(0.33))
             val actual = factory.generateChain(SentenceSeed("window", "new"))[2]
-            assertEquals(Exercise("generated", "case.gen.neg", "Widziałem moje nowe okno.", "Теперь сделай это предложение отрицательным.", "Nie widziałem mojego nowego okna.", listOf(), "Отрицание → Biernik меняется на Dopełniacz.", listOf("gen", "negation"), "window", "new", PossessiveId.fromId("my"), NumberGram.fromId("sg"), listOf(FormChange("", "Nie", "Добавь отрицание nie."), FormChange("moje nowe okno", "mojego nowego okna", "Отрицание → Biernik меняется на Dopełniacz."))), actual, "C-12-03")
+            assertEquals(Exercise("generated", "case.gen.neg", "Widziałem moje nowe okno.", "Теперь сделай это предложение отрицательным.", "Nie widziałem mojego nowego okna.", listOf(), "Отрицание → Biernik меняется на Dopełniacz.", listOf("gen", "negation"), "window", "new", PossessiveId.fromId("my"), NumberGram.fromId("sg"), listOf(FormChange("moje nowe okno", "mojego nowego okna", "Отрицание → Biernik меняется на Dopełniacz."))), actual, "C-12-03")
         }
         run { // C-12-04
             val factory = factory(listOf(0.44))
@@ -371,17 +371,17 @@ class TrainingParityTest {
         run { // E-case.gen.neg-preferred
             val factory = factory(listOf(0.34, 0.72, 0.18))
             val actual = factory.generateForSkill("case.gen.neg", SentenceSeed("wife", "beautiful"))
-            assertEquals(Exercise("generated", "case.gen.neg", "Widzę moją piękną żonę.", "Сделай всё предложение отрицательным.", "Nie widzę mojej pięknej żony.", listOf(), "Отрицание widzę переводит прямой объект из Biernika в Dopełniacz.", listOf("gen", "negation"), "wife", "beautiful", PossessiveId.fromId("my"), NumberGram.fromId("sg"), listOf(FormChange("", "Nie", "Добавь отрицание nie."), FormChange("moją piękną żonę", "mojej pięknej żony", "Biernik → Dopełniacz"))), actual, "E-case.gen.neg-preferred")
+            assertEquals(Exercise("generated", "case.gen.neg", "Widzę moją piękną żonę.", "Сделай всё предложение отрицательным.", "Nie widzę mojej pięknej żony.", listOf(), "Отрицание widzę переводит прямой объект из Biernika в Dopełniacz.", listOf("gen", "negation"), "wife", "beautiful", PossessiveId.fromId("my"), NumberGram.fromId("sg"), listOf(FormChange("moją piękną żonę", "mojej pięknej żony", "Biernik → Dopełniacz"))), actual, "E-case.gen.neg-preferred")
         }
         run { // E-case.gen.neg-fallback
             val factory = factory(listOf(0.34, 0.72, 0.18))
             val actual = factory.generateForSkill("case.gen.neg", SentenceSeed("window", "new"))
-            assertEquals(Exercise("generated", "case.gen.neg", "Widzę moje nowe okno.", "Сделай всё предложение отрицательным.", "Nie widzę mojego nowego okna.", listOf(), "Отрицание widzę переводит прямой объект из Biernika в Dopełniacz.", listOf("gen", "negation"), "window", "new", PossessiveId.fromId("my"), NumberGram.fromId("sg"), listOf(FormChange("", "Nie", "Добавь отрицание nie."), FormChange("moje nowe okno", "mojego nowego okna", "Biernik → Dopełniacz"))), actual, "E-case.gen.neg-fallback")
+            assertEquals(Exercise("generated", "case.gen.neg", "Widzę moje nowe okno.", "Сделай всё предложение отрицательным.", "Nie widzę mojego nowego okna.", listOf(), "Отрицание widzę переводит прямой объект из Biernika в Dopełniacz.", listOf("gen", "negation"), "window", "new", PossessiveId.fromId("my"), NumberGram.fromId("sg"), listOf(FormChange("moje nowe okno", "mojego nowego okna", "Biernik → Dopełniacz"))), actual, "E-case.gen.neg-fallback")
         }
         run { // E-case.gen.neg-random
             val factory = factory(listOf(0.34, 0.72, 0.18))
             val actual = factory.generateForSkill("case.gen.neg", null)
-            assertEquals(Exercise("generated", "case.gen.neg", "Widzę mojego dobrego psa.", "Сделай всё предложение отрицательным.", "Nie widzę mojego dobrego psa.", listOf(), "Отрицание widzę переводит прямой объект из Biernika в Dopełniacz.", listOf("gen", "negation"), "dog", "good", PossessiveId.fromId("my"), NumberGram.fromId("sg"), listOf(FormChange("", "Nie", "Добавь отрицание nie."), FormChange("mojego dobrego psa", "mojego dobrego psa", "Biernik → Dopełniacz"))), actual, "E-case.gen.neg-random")
+            assertEquals(Exercise("generated", "case.gen.neg", "Widzę mojego dobrego psa.", "Сделай всё предложение отрицательным.", "Nie widzę mojego dobrego psa.", listOf(), "Отрицание widzę переводит прямой объект из Biernika в Dopełniacz.", listOf("gen", "negation"), "dog", "good", PossessiveId.fromId("my"), NumberGram.fromId("sg"), listOf(FormChange("mojego dobrego psa", "mojego dobrego psa", "Biernik → Dopełniacz"))), actual, "E-case.gen.neg-random")
         }
         run { // E-case.inst-preferred
             val factory = factory(listOf(0.34, 0.72, 0.18))
@@ -536,17 +536,17 @@ class TrainingParityTest {
         run { // E-sentence.question-preferred
             val factory = factory(listOf(0.34, 0.72, 0.18))
             val actual = factory.generateForSkill("sentence.question", SentenceSeed("wife", "beautiful"))
-            assertEquals(Exercise("generated", "sentence.question", "Widzisz moją piękną żonę.", "Сделай вопрос, на который можно ответить «да» или «нет». Начни с «Czy…».", "Czy widzisz moją piękną żonę?", listOf(), "Czy превращает утверждение в общий вопрос. Падеж объекта сохраняется.", listOf("question", "acc"), "wife", "beautiful", PossessiveId.fromId("my"), NumberGram.fromId("sg"), listOf(FormChange("", "Czy", "Добавь вопросительное czy."))), actual, "E-sentence.question-preferred")
+            assertEquals(Exercise("generated", "sentence.question", "Widzisz moją piękną żonę.", "Сделай вопрос, на который можно ответить «да» или «нет». Начни с «Czy…».", "Czy widzisz moją piękną żonę?", listOf(), "Czy превращает утверждение в общий вопрос. Падеж объекта сохраняется.", listOf("question", "acc"), "wife", "beautiful", PossessiveId.fromId("my"), NumberGram.fromId("sg"), listOf(FormChange("Widzisz", "Czy widzisz", "Добавь вопросительное czy."))), actual, "E-sentence.question-preferred")
         }
         run { // E-sentence.question-fallback
             val factory = factory(listOf(0.34, 0.72, 0.18))
             val actual = factory.generateForSkill("sentence.question", SentenceSeed("window", "new"))
-            assertEquals(Exercise("generated", "sentence.question", "Widzisz moje nowe okno.", "Сделай вопрос, на который можно ответить «да» или «нет». Начни с «Czy…».", "Czy widzisz moje nowe okno?", listOf(), "Czy превращает утверждение в общий вопрос. Падеж объекта сохраняется.", listOf("question", "acc"), "window", "new", PossessiveId.fromId("my"), NumberGram.fromId("sg"), listOf(FormChange("", "Czy", "Добавь вопросительное czy."))), actual, "E-sentence.question-fallback")
+            assertEquals(Exercise("generated", "sentence.question", "Widzisz moje nowe okno.", "Сделай вопрос, на который можно ответить «да» или «нет». Начни с «Czy…».", "Czy widzisz moje nowe okno?", listOf(), "Czy превращает утверждение в общий вопрос. Падеж объекта сохраняется.", listOf("question", "acc"), "window", "new", PossessiveId.fromId("my"), NumberGram.fromId("sg"), listOf(FormChange("Widzisz", "Czy widzisz", "Добавь вопросительное czy."))), actual, "E-sentence.question-fallback")
         }
         run { // E-sentence.question-random
             val factory = factory(listOf(0.34, 0.72, 0.18))
             val actual = factory.generateForSkill("sentence.question", null)
-            assertEquals(Exercise("generated", "sentence.question", "Widzisz mojego dobrego psa.", "Сделай вопрос, на который можно ответить «да» или «нет». Начни с «Czy…».", "Czy widzisz mojego dobrego psa?", listOf(), "Czy превращает утверждение в общий вопрос. Падеж объекта сохраняется.", listOf("question", "acc"), "dog", "good", PossessiveId.fromId("my"), NumberGram.fromId("sg"), listOf(FormChange("", "Czy", "Добавь вопросительное czy."))), actual, "E-sentence.question-random")
+            assertEquals(Exercise("generated", "sentence.question", "Widzisz mojego dobrego psa.", "Сделай вопрос, на который можно ответить «да» или «нет». Начни с «Czy…».", "Czy widzisz mojego dobrego psa?", listOf(), "Czy превращает утверждение в общий вопрос. Падеж объекта сохраняется.", listOf("question", "acc"), "dog", "good", PossessiveId.fromId("my"), NumberGram.fromId("sg"), listOf(FormChange("Widzisz", "Czy widzisz", "Добавь вопросительное czy."))), actual, "E-sentence.question-random")
         }
         run { // E-sentence.plural-preferred
             val factory = factory(listOf(0.34, 0.72, 0.18))

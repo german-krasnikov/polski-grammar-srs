@@ -73,7 +73,6 @@
       "promptKey": "genNegPrompt",
       "explanationKey": "genNegExplanation",
       "changes": [
-        { "from": { "type": "literal", "value": "" }, "to": { "type": "copy", "key": "negationParticle" }, "reason": { "type": "fixed", "key": "negationInsertionReason" } },
         {
           "from": { "type": "phrase", "spec": { "construction": "core.argument.case-role", "bundle": { "Number": "sg", "Case": "acc" } } },
           "to": { "type": "phrase", "spec": { "construction": "core.sentence.polarity", "bundle": { "Number": "sg", "Polarity": "neg" } } },
@@ -261,7 +260,7 @@
       "promptKey": "questionPrompt",
       "explanationKey": "questionExplanation",
       "changes": [
-        { "from": { "type": "literal", "value": "" }, "to": { "type": "copy", "key": "questionParticle" }, "reason": { "type": "fixed", "key": "questionReason" } }
+        { "from": { "type": "copy", "key": "questionChangeFrom" }, "to": { "type": "copy", "key": "questionChangeTo" }, "reason": { "type": "fixed", "key": "questionReason" } }
       ],
       "tags": ["question", "acc"]
     },
@@ -341,7 +340,6 @@
       "promptKey": "chainNegPrompt",
       "explanationKey": "chainNegReason",
       "changes": [
-        { "from": { "type": "literal", "value": "" }, "to": { "type": "copy", "key": "negationParticle" }, "reason": { "type": "fixed", "key": "negationInsertionReason" } },
         {
           "from": { "type": "phrase", "spec": { "construction": "core.argument.case-role", "bundle": { "Number": "sg", "Case": "acc" } } },
           "to": { "type": "phrase", "spec": { "construction": "core.sentence.polarity", "bundle": { "Number": "sg", "Polarity": "neg" } } },
