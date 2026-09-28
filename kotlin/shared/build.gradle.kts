@@ -101,6 +101,17 @@ val generateCoursePackSource by tasks.registering {
             "    \"${dir.name}\" to ${literalBuildString(chunks)}"
         }
 
+        // EN-21/ADR-15: `pairs/<pairId>/lifehacks.json` — pair-scoped, outside core, scanned the
+        // same way as pair.json above so a pack without lifehacks (or a future 3rd pack) needs no
+        // Gradle/Kotlin edit; [polski.presentation.StaticPackLifehackProvider] reads this map.
+        val lifehackDirs = (pairsDirectory.asFile.listFiles { file -> file.isDirectory } ?: emptyArray())
+            .filter { dir -> dir.resolve("lifehacks.json").isFile }
+            .sortedBy { it.name }
+        val lifehackEntryLiterals = lifehackDirs.joinToString(",\n") { dir ->
+            val chunks = literalChunks(dir.resolve("lifehacks.json").readText())
+            "    \"${dir.name}\" to ${literalBuildString(chunks)}"
+        }
+
         val target = generatedCourseDirectory.get().file("polski/data/GeneratedCourseJson.kt").asFile
         target.parentFile.mkdirs()
         target.writeText(
@@ -117,7 +128,9 @@ val generateCoursePackSource by tasks.registering {
                 "internal val generatedLexiconJsonByLang: Map<String, String> = mapOf(\n" +
                 lexiconEntryLiterals + "\n)\n" +
                 "internal val generatedPairJsonByPairId: Map<String, String> = mapOf(\n" +
-                pairEntryLiterals + "\n)\n",
+                pairEntryLiterals + "\n)\n" +
+                "internal val generatedLifehacksJsonByPairId: Map<String, String> = mapOf(\n" +
+                lifehackEntryLiterals + "\n)\n",
         )
     }
 }

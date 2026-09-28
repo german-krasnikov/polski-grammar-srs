@@ -39,7 +39,9 @@ kotlin/shared (commonMain)
   srs                       FSRS (порт ts-fsrs 5.4.2)
   progress, vocabulary      документы прогресса/словаря, кодеки, репозитории
   preferences               UserPreferences (тема, движение, animationsEnabled, методика…)
-  presentation              TrainingStore (единственный владелец сессии), AppAction/AppUiState, CardEffect
+  presentation              TrainingStore (единственный владелец сессии), AppAction/AppUiState, CardEffect;
+                           Lifehack/LifehackProvider/StaticPackLifehackProvider (ADR-27, EN-21) — читает
+                           `pairs/<pairId>/lifehacks.json` через generatedLifehacksJsonByPairId
   iosMain / macosMain       Swift-мосты (IosSession, MacSession, snapshots)
 kotlin/composeApp
   webMain                   Kotlin/JS + Wasm, семантический DOM/CSS (не Compose UI)
@@ -85,6 +87,6 @@ styles/*.json                      стили подачи как данные
 
 Зависимости: ядро не знает ни одного языка; хосты зависят от ядра и выбранных пакетов. Новый язык — ноль правок в `:core-*`, `:pack-format`, `:morph-api`.
 
-Зарезервированные интерфейсы (без реализации): `AudioProvider`, `AnswerInput.Spoken` + `SpeechRecognizer`, `ExplanationProvider`, `HintProvider`.
+Зарезервированные интерфейсы (без реализации): `AudioProvider`, `AnswerInput.Spoken` + `SpeechRecognizer`, `ExplanationProvider`, `HintProvider`. `LifehackProvider` (тот же паттерн) реализован — см. ADR-27.
 
 Совместимость `pl-ru`: ID навыков не меняются, ключи прогресса v1 сохраняются, настройки v2→v3 читаются без потерь. Переход на новый движок проходит только через эталонные фикстуры, зафиксированные на коммите.

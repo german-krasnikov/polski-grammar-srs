@@ -2,6 +2,36 @@
 
 Новые сверху. Формат: решение → почему → где подробно.
 
+## ADR-27 · 2026-09-28 · EN-21 (core+web): `LifehackProvider`-порт + `StaticPackLifehackProvider` + web-блок «Лайфхак»
+
+`Lifehack`/`LifehackSource`/`LifehackStatus` + `fun interface LifehackProvider { fun forSkill(skillId: String): List<Lifehack> }`
+(`kotlin/shared/src/commonMain/kotlin/polski/presentation/Lifehack.kt`) — тот же зарезервированный
+порт-паттерн, что `AudioProvider`/`ExplanationProvider` (UniversalCorePlan.md §5.4), но с реальной
+реализацией сразу: `StaticPackLifehackProvider` (объект, не класс с захваченным `pairId` — читает
+`polski.data.packRegistry.active.pairId` заново на каждый вызов, поэтому переживёт будущий EN-22
+пикер без переподключения) парсит `pairs/<pairId>/lifehacks.json`, embedded тем же механизмом, что
+`pair.json` (`generateCoursePackSource`, `kotlin/shared/build.gradle.kts` → новый
+`generatedLifehacksJsonByPairId`). Веб (`kotlin/composeApp/src/webMain/kotlin/polski/ui/CardBlocksWeb.kt`,
+`TrainingWebApp.kt`): свой, всегда одинаковый сворачиваемый блок после `back`-блоков стиля (не 10-й
+`BlockKind` — ADR-15/EnRuPackPlan.md §4.3 прямо запрещает это), источник —
+`StaticPackLifehackProvider.forSkill(skill.id)`; пусто → блок не рендерится вообще. Подпись
+`«Лайфхак · источник: <editorial/community>»` видна сразу (не только при раскрытии) — то же
+требование §4.3 «нецветовая опора обязательна», перенесённое на атрибуцию.
+
+Почему `forSkill` фильтрует только по точному совпадению `skillId` (не строит отдельный путь для
+кросс-скилловых `skillId: null`+`topic`): единственный вызывающий сегодня — карточка одного навыка;
+кросс-скилловый рендер вне скоупа EN-21's web-задачи, ничего не обходит контракт схемы (запись с
+`skillId: null` просто никогда не совпадёт ни с одним реальным id).
+
+Пакет pl-ru получил веб-блок бесплатно: `packRegistry.active` сегодня всегда pl-ru (EN-22 пикер ещё
+не подключён), а `courses/pairs/pl-ru/lifehacks.json` (EN-20, 5 записей) уже непустой для
+`case.gen.neg`/`case.inst`/`agreement.my`/`aspect`/`mixed` — это ожидаемое, а не побочное поведение
+плана (§4.4: pl-ru's первый набор существует именно чтобы блок было чем проверить уже сейчас), и не
+нарушает HARD-инвариант «pl-ru byte-identical» — тот инвариант про генерацию упражнений/ответов
+(`TrainingParityTest`/`GrammarParityTest`), не про отсутствие новых информационных блоков в UI.
+
+Подробно: `Plans/Kotlin/EnRuPackPlan.md` §4.2/§4.3/§6 (EN-21); `kotlin/shared/src/commonTest/kotlin/polski/presentation/LifehackTest.kt`.
+
 ## ADR-26 · 2026-09-28 · EN-11: `lang/en/{lang,lexicon,prepositions}.json` + `validate-pack-v2.mjs` генерализован на `lang/*`
 
 Первый реальный второй язык в `courses/lang/`. Три новых файла (`lang.json`/`lexicon.json`/новая
