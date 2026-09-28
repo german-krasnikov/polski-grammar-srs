@@ -68,9 +68,13 @@ struct MacVocabularyCardView: View {
     }
 
     @ViewBuilder private var frontFace: some View {
+        // EnRuAcceptance-2026-09-28.md §7 item 4: the prompt is direction-dependent — the native
+        // word (`item.translation`) when `state.recallTarget` asks the learner to produce the
+        // target one, `item.lemma` (the target word) otherwise — never a fixed "always lemma"
+        // front regardless of `state.direction`, which silently ignored the direction picker.
         let content = VStack(alignment: .leading, spacing: 8) {
-            Text("Слово").font(.caption.weight(.semibold)).tracking(1.4).foregroundStyle(.secondary)
-            Text(item.lemma).font(.title2.bold())
+            Text(state.promptCaption).font(.caption.weight(.semibold)).tracking(1.4).foregroundStyle(.secondary)
+            Text(state.recallTarget ? item.translation : item.lemma).font(.title2.bold())
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .contentShape(Rectangle())
@@ -90,7 +94,9 @@ struct MacVocabularyCardView: View {
 
     @ViewBuilder private var backFace: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text(item.translation)
+            // The revealed answer word — `item.lemma` (target) when `state.recallTarget` asked
+            // for it, matching whichever word `frontFace` did NOT already show as the prompt.
+            Text(state.recallTarget ? item.lemma : item.translation).font(.title3.bold())
             Text(item.form)
             Text(item.example)
             HStack {

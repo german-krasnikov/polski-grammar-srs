@@ -25,7 +25,7 @@ enum class VocabularyLoadStatus { Loading, Ready, RecoveryRequired, Unavailable 
 data class VocabularyUiState(
     val loadStatus: VocabularyLoadStatus = VocabularyLoadStatus.Loading,
     val document: VocabularyDocument = VocabularyDocument(),
-    val direction: StudyDirection = StudyDirection.RussianToPolish,
+    val direction: StudyDirection = defaultStudyDirection(),
     val filter: String = "A1",
     val currentId: String? = null,
     val revealed: Boolean = false,
@@ -59,7 +59,7 @@ class VocabularySession(
                 mutableState.value = decoded.fold(
                     onSuccess = { document -> VocabularyUiState(
                         loadStatus = VocabularyLoadStatus.Ready, document = document,
-                        currentId = nextId(document, StudyDirection.RussianToPolish),
+                        currentId = nextId(document, defaultStudyDirection()),
                     ) },
                     onFailure = { error -> VocabularyUiState(
                         loadStatus = VocabularyLoadStatus.RecoveryRequired, recoveryRaw = raw,

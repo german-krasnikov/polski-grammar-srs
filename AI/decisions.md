@@ -2,6 +2,75 @@
 
 Новые сверху. Формат: решение → почему → где подробно.
 
+## ADR-40 · 2026-09-28 · EnRuAcceptance §7 item 4: словарь macOS/desktop-preview открыт для en-ru — `StudyDirection` был открытым типом, UI и дефолт направления — нет
+
+`StudyDirection` (EN-09) уже был string-backed, но три места вокруг него всё ещё были
+жёстко на pl-ru:
+
+1. **Дефолт направления.** `VocabularyUiState`'s `direction` и `VocabularySession.start()`'s
+   `nextId(...)` литерально ссылались на `StudyDirection.RussianToPolish` ("ru-pl") — не
+   производное от активного пакета. Для en-ru "ru-pl" не входит даже в собственную пару
+   пакета ("ru-en"/"en-ru"), так что свежая сессия открывалась на направлении, которого пакет
+   вообще не предлагает, а подбор due-карточки не мог ничего найти. Новый `defaultStudyDirection()`
+   (`polski/vocabulary/VocabularyDocument.kt`) читает `packRegistry.active` живьём — для pl-ru
+   даёт побайтово тот же "ru-pl", что и раньше.
+2. **macOS-бридж.** `MacVocabularySession.dispatch("direction", …)` смотрел направление в
+   `builtInStudyDirections` — списке ровно из 2 pl-ru-констант, так что "en-ru"/"ru-en" от хоста
+   тихо игнорировались. Теперь ищет среди `studyDirectionOptions(pack.target, pack.native)` —
+   собственной пары активного пакета.
+3. **UI.** Ни на одном из двух хостов этой лейны не было интерфейса, который бы вообще менял
+   `direction`: `VocabularyView.swift` (macOS) не рисовал пикер направления вовсе — карточка
+   молча всегда показывала `item.lemma` спереди / `item.translation` сзади, независимо от
+   `state.direction` (расхождение с дефолтным направлением существовало и для pl-ru, просто
+   незаметно, т.к. дефолт для pl-ru тогда ещё не читался нигде). `VocabularyScreen.kt`
+   (commonMain, реально используется только Desktop-превью — у Android свой экран) пикер
+   рисовал, но с хардкодом `StudyDirection.RussianToPolish`/`PolishToRussian` и текстом
+   "Русский → польский"/"Польский → русский".
+
+Решение — 3 новые функции на `StudyDirection` в `polski/vocabulary/VocabularyDocument.kt`
+(`studyDirectionOptions`, `recallsTarget`, `recallCaption`, `answerLanguageLabel`), каждая
+принимает голые `target`/`native`-коды и возвращает готовый Kotlin-объект/строку — ни один
+хост не хранит своей таблицы языковых имён. `activeCoursePackOption` (`CourseData.kt`) —
+публичный доступ к `target`/`native` активного пакета (`packRegistry` сам `internal`).
+`MacVocabularySession.snapshot()` кладёt `directionOptions`/`promptCaption`/`recallTarget` в
+JSON, так что Swift-карточка (`MacVocabularyCardView`) и пикер (`VocabularyView`) вообще не
+знают языковых кодов — только читают готовые поля. Desktop `VocabularyScreen.kt` делает то же
+самое напрямую через shared-функции.
+
+pl-ru: все и подписи, и дефолт направления, и `cardKey`/`VocabularyCodec.key` побайтово не
+изменились (`VocabularyDocumentTest`, `VocabularySessionTest`, `DesktopVocabularyAcceptanceTest`
+это фиксируют). Видимое изменение для существующих pl-ru пользователей macOS: карточка теперь
+действительно уважает `direction` (раньше игнорировала его полностью) — при первом открытии
+после обновления фронт покажет русское слово вместо польского (дефолтное направление всегда
+было "ru-pl" = recall target, просто раньше контент это игнорировал); переключение направления
+теперь физически возможно там, где раньше пикера не было вовсе.
+
+Не входит: iOS (`IosVocabularySession`/`VocabularyCardView.swift`) и Android
+(`AndroidVocabularyScreen.kt`) используют тот же хардкод `builtInStudyDirections`/`"ru-pl"` —
+осознанно не тронуты (`lane-ios`/`lane-android`, чужой worktree).
+
+Где: `kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt`,
+`VocabularySession.kt`, `kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt`
+(`activeCoursePackOption`), `kotlin/shared/src/macosMain/kotlin/polski/macos/MacVocabularySession.kt`,
+`kotlin/macosApp/PolskiGrammarMac/{MacVocabularyCardView,PolskiGrammarMacApp}.swift`,
+`kotlin/composeApp/src/commonMain/kotlin/polski/ui/screens/VocabularyScreen.kt`. Тесты (новые):
+`VocabularyDocumentTest.derivesBothDirectionsAndLabelsForAnyPacksTargetAndNative`,
+`.recallHelpersGeneralizeBeyondPlRusHardcodedWires`,
+`VocabularySessionTest.startsOnTheActivePacksOwnNativeToTargetDirectionNotAHardcodedPlRuOne`,
+`MacVocabularySessionTest.snapshotExposesTheActivePacksOwnDirectionOptionsAndPromptCaption` (real
+K/N `:shared:macosArm64Test`), `DesktopVocabularyAcceptanceTest.enRuPackOffersItsOwnDirectionsAndFlipContent`
+(real Compose UI test: switches the active pack, clicks the rendered direction chip, asserts the
+flipped copy). Проверено: `:shared:desktopTest` (362/362), `:composeApp:desktopTest` (62/62),
+`:shared:macosArm64Test` (388/388), `:androidApp:testDebugUnitTest` (green, unaffected). macOS
+native app (`xcodebuild … PolskiGrammarMac … build`, `CODE_SIGNING_ALLOWED=NO`) — `**BUILD
+SUCCEEDED**`; launched (`open -a …/PolskiGrammarMac.app`), скриншот подтверждает pl-ru экран
+рендерится без изменений/падений. Desktop preview (`:composeApp:run`) — окно открылось, скриншот
+подтверждает то же. Живой клик по пикеру направления через `cliclick`/`osascript` в обоих окнах —
+**NOT_RUN**: тот же пробел Accessibility-доступа, что уже задокументирован в ADR-39 (`cliclick`
+само печатает "Accessibility privileges not enabled", клики не доходят ни до SwiftUI, ни до
+AWT-окна) — компенсировано `MacVocabularySessionTest`/`DesktopVocabularyAcceptanceTest` выше,
+которые проверяют ровно тот же код через реальные (K/N и Compose-UI-test) прогоны, а не мок.
+
 ## ADR-39 · 2026-09-28 · EnRuAcceptance §7 item 2, третий пробел ADR-37/38: JVM Compose Desktop preview не пересобирал/не откатывал сессию при смене пакета
 
 ADR-37/38 закрыли пересборку-с-откатом только для *нативных* macOS/iOS бриджей (`MacSession`/

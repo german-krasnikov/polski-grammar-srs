@@ -2,6 +2,7 @@ package polski.macos
 
 import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.jsonArray
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 import kotlin.test.Test
@@ -99,5 +100,31 @@ class MacVocabularySessionTest {
         awaitEffect(effects, 1)
 
         assertEquals(listOf("Again"), effects)
+    }
+
+    /** EnRuAcceptance-2026-09-28.md §7 item 4: the snapshot must expose the active pack's own 2
+     *  study directions (never a hardcoded pl-ru list) plus a ready-made prompt caption and a
+     *  `recallTarget` flag — a Swift card needs exactly this, no language names of its own. */
+    @Test
+    fun snapshotExposesTheActivePacksOwnDirectionOptionsAndPromptCaption() = withSession { session ->
+        val initial = state(session)
+        val options = initial.getValue("directionOptions").jsonArray.map {
+            it.jsonObject.getValue("wire").jsonPrimitive.content to it.jsonObject.getValue("label").jsonPrimitive.content
+        }
+        assertEquals(listOf("ru-pl" to "Русский → польский", "pl-ru" to "Польский → русский"), options)
+        assertEquals("ru-pl", initial.getValue("direction").jsonPrimitive.content)
+        assertEquals("Вспомни по-польски", initial.getValue("promptCaption").jsonPrimitive.content)
+        assertEquals("true", initial.getValue("recallTarget").jsonPrimitive.content)
+
+        session.dispatch("direction", "pl-ru")
+        val flipped = state(session)
+        assertEquals("pl-ru", flipped.getValue("direction").jsonPrimitive.content)
+        assertEquals("Вспомни по-русски", flipped.getValue("promptCaption").jsonPrimitive.content)
+        assertEquals("false", flipped.getValue("recallTarget").jsonPrimitive.content)
+
+        // Only the active pack's own 2 wires are ever accepted — an unknown wire is a silent no-op,
+        // the same contract `builtInStudyDirections`'s own lookup already had.
+        session.dispatch("direction", "en-ru")
+        assertEquals("pl-ru", state(session).getValue("direction").jsonPrimitive.content)
     }
 }

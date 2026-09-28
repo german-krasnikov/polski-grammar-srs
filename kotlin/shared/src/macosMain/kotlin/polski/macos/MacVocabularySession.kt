@@ -15,6 +15,7 @@ import kotlinx.serialization.json.put
 import kotlin.time.Clock
 import platform.Foundation.NSUUID
 import polski.data.VocabularyItem
+import polski.data.activeCoursePackOption
 import polski.data.frequencyItems
 import polski.data.vocabularyItems
 import polski.data.courseVocabularyInstructions
@@ -23,10 +24,12 @@ import polski.presentation.cardEffectFor
 import polski.srs.FsrsScheduler
 import polski.srs.Rating
 import polski.srs.SchedulePreview
-import polski.vocabulary.builtInStudyDirections
 import polski.vocabulary.VocabularyCodec
 import polski.vocabulary.VocabularySession
 import polski.vocabulary.VocabularyUiState
+import polski.vocabulary.recallCaption
+import polski.vocabulary.recallsTarget
+import polski.vocabulary.studyDirectionOptions
 
 /** Scene-owned SwiftUI bridge. Kotlin alone owns review scheduling and durable writes. */
 class MacVocabularySession(private val directory: String) {
@@ -78,7 +81,11 @@ class MacVocabularySession(private val directory: String) {
     fun dispatch(command: String, value: String = "") {
         rebuildIfCourseSwitched()
         when (command) {
-            "direction" -> builtInStudyDirections.firstOrNull { it.wire == value }?.let(session::setDirection)
+            // EnRuAcceptance-2026-09-28.md §7 item 4: only the active pack's own 2 directions
+            // (`studyDirectionOptions`) are ever accepted — was `builtInStudyDirections`, a
+            // hardcoded pl-ru pair that silently dropped en-ru's own "en-ru"/"ru-en" wires.
+            "direction" -> activeCoursePackOption.let { pack -> studyDirectionOptions(pack.target, pack.native) }
+                .map { it.direction }.firstOrNull { it.wire == value }?.let(session::setDirection)
             "filter" -> if (value in listOf("A1", "A2", "B1", "100", "500", "1000", "mine")) session.setFilter(value)
             "typed" -> session.setTyped(value == "true")
             "draft" -> session.setDraft(value)
@@ -118,6 +125,15 @@ class MacVocabularySession(private val directory: String) {
         put("unavailableLabel", courseVocabularyUnavailableLabel)
         put("loadStatus", state.loadStatus.name)
         put("direction", state.direction.wire)
+        // EnRuAcceptance-2026-09-28.md §7 item 4: the active pack's own 2 directions (never a
+        // hardcoded pl-ru pair) plus the ready-made copy a card needs to render either one
+        // without knowing any language code itself.
+        val pack = activeCoursePackOption
+        put("directionOptions", JsonArray(studyDirectionOptions(pack.target, pack.native).map { option ->
+            buildJsonObject { put("wire", option.direction.wire); put("label", option.label) }
+        }))
+        put("promptCaption", state.direction.recallCaption(pack.target, pack.native))
+        put("recallTarget", state.direction.recallsTarget(pack.target, pack.native))
         put("filter", state.filter)
         put("currentId", state.currentId?.let(::JsonPrimitive) ?: JsonNull)
         put("revealed", state.revealed)

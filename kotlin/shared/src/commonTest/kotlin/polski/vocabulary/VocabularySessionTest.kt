@@ -78,6 +78,37 @@ class VocabularySessionTest {
         assertTrue(session.state.value.document.selectedIds.isEmpty())
         assertTrue(key in session.state.value.document.cards)
     }
+
+    /** EnRuAcceptance-2026-09-28.md §7 item 4: a fresh session (no saved document yet, or one
+     *  loaded from disk) must open on the *active pack's own* native→target direction — was the
+     *  literal [StudyDirection.RussianToPolish] ("ru-pl"), which is not even one of en-ru's own 2
+     *  directions ("ru-en"/"en-ru"), so a host built for en-ru silently opened on a direction that
+     *  pack never offers and whose due-card lookup could never match anything. pl-ru itself is
+     *  unaffected: its own native→target direction stays the exact same "ru-pl". */
+    @Test
+    fun startsOnTheActivePacksOwnNativeToTargetDirectionNotAHardcodedPlRuOne() = runTest {
+        assertEquals(StudyDirection.RussianToPolish, VocabularySession(
+            MemoryVocabularyRepository(), FsrsScheduler(), { at }, { "user.1" },
+        ).let { it.start(); it }.state.value.direction)
+
+        polski.data.selectCoursePack("en-ru")
+        try {
+            val session = VocabularySession(MemoryVocabularyRepository(), FsrsScheduler(), { at }, { "user.2" })
+            session.start()
+            assertEquals(StudyDirection("ru-en"), session.state.value.direction)
+
+            // A loaded (non-empty) document must open on the same pack-derived direction too, not
+            // only the empty-document path.
+            val loaded = VocabularySession(
+                MemoryVocabularyRepository(VocabularyCodec.encode(VocabularyCodec.select(VocabularyDocument(), "noun.wife", true))),
+                FsrsScheduler(), { at }, { "user.3" },
+            )
+            loaded.start()
+            assertEquals(StudyDirection("ru-en"), loaded.state.value.direction)
+        } finally {
+            polski.data.selectCoursePack("pl-ru")
+        }
+    }
 }
 
 private class MemoryVocabularyRepository(var raw: String? = null) : VocabularyRepository {
