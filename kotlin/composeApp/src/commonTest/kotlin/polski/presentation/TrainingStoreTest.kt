@@ -24,9 +24,9 @@ import polski.srs.SchedulePreview
 import polski.srs.Scheduler
 import polski.srs.SrsCard
 import polski.srs.StoredCard
-import polski.training.ExerciseFactory
-import polski.training.ExerciseIdFactory
-import polski.training.RandomSource
+import polski.training.PlExerciseEngine
+import polski.core.engine.ExerciseIdFactory
+import polski.core.engine.RandomSource
 import polski.training.sentenceSeeds
 
 @OptIn(ExperimentalCoroutinesApi::class)
@@ -323,7 +323,7 @@ class TrainingStoreTest {
     }
 
     /** UniversalCorePlan.md §6: a card for a skillId outside the active pack (e.g. left over from
-     *  a future multi-pack switch) must never reach [polski.training.ExerciseFactory] — it used to
+     *  a future multi-pack switch) must never reach [polski.training.PlExerciseEngine] — it used to
      *  crash the whole store instead of just being skipped as not-yet-actionable. */
     @Test
     fun scheduleSkipsForeignSkillIdInsteadOfCrashing() = runTest {
@@ -471,7 +471,7 @@ class TrainingStoreTest {
         var id = 0
         return TrainingStore(
             repo, scheduler,
-            ExerciseFactory(RandomSource { 0.0 }, ExerciseIdFactory { "exercise-${++id}" }),
+            PlExerciseEngine(RandomSource { 0.0 }, ExerciseIdFactory { "exercise-${++id}" }),
             clock, scope,
         )
     }

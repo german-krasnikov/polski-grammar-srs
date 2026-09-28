@@ -15,9 +15,9 @@ import polski.data.skills
 import polski.grammar.caseRows
 import polski.presentation.AppUiState
 import polski.presentation.CardPhase
-import polski.training.ExerciseFactory
-import polski.training.ExerciseIdFactory
-import polski.training.RandomSource
+import polski.training.PlExerciseEngine
+import polski.core.engine.ExerciseIdFactory
+import polski.core.engine.RandomSource
 import polski.ui.screens.AndroidCaseReference
 
 /**
@@ -32,7 +32,7 @@ import polski.ui.screens.AndroidCaseReference
 class AndroidCaseReferenceLeakTest {
     @get:Rule val composeRule = createComposeRule()
 
-    private val factory = ExerciseFactory(RandomSource { 0.0 }, ExerciseIdFactory { "leak-fixture" })
+    private val factory = PlExerciseEngine(RandomSource { 0.0 }, ExerciseIdFactory { "leak-fixture" })
 
     @Test fun noSkillLeaksItsTargetCaseAnswerBeforeReveal() {
         var state by mutableStateOf(AppUiState(exercise = factory.generateForSkill(skills.first().id), phase = CardPhase.Question))

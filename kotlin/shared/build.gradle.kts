@@ -101,9 +101,9 @@ val generateCoursePackSource by tasks.registering {
     }
 }
 
-// UniversalCorePlan.md §5.3/§12 UC-05: forms.generated.json (scripts/build-pack.mjs) is test-only
-// data today — GrammarEngine stays the live path — so it's embedded into commonTest, not
-// commonMain, the same way generateCoursePackSource embeds course.json for commonMain.
+// UniversalCorePlan.md §5.3/§12 UC-08: forms.generated.json/realization.json/exercise-recipes.json
+// (scripts/build-pack.mjs) back the live pl-ru engine (polski.core.PlEngine.kt) now, so they're
+// embedded into commonMain, the same way generateCoursePackSource embeds course.json.
 val generateFormsFixtureSource by tasks.registering {
     inputs.file(formsFixtureFile)
     inputs.file(realizationFixtureFile)
@@ -163,6 +163,7 @@ kotlin {
             // compile*MainKotlinMetadata — as a task dependency, not just tasks whose
             // name happens to match a "compileKotlin*" prefix.
             kotlin.srcDir(generateCoursePackSource.map { it.outputs.files.singleFile })
+            kotlin.srcDir(generateFormsFixtureSource.map { it.outputs.files.singleFile })
         }
         commonMain.dependencies {
             implementation(libs.kotlinx.serialization.json)
@@ -173,16 +174,14 @@ kotlin {
             // UniversalCorePlan.md §4.1 UC-02: CoursePackSource is the seam generateCoursePackSource
             // (above) generates against — pl-ru is read as v1 through it, same as before.
             api(project(":pack-format"))
-        }
-        commonTest {
-            kotlin.srcDir(generateFormsFixtureSource.map { it.outputs.files.singleFile })
+            // UniversalCorePlan.md §12 UC-08: ExerciseGenerator/TableMorphology are the live pl-ru
+            // engine now (polski.core.PlEngine.kt) — api so hosts (:composeApp/:androidApp) can
+            // build ports (RandomSource/ExerciseIdFactory) against :core-engine's own types.
+            api(project(":core-engine"))
         }
         commonTest.dependencies {
             implementation(kotlin("test"))
             implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.10.2")
-            // UniversalCorePlan.md §12 UC-05: TableMorphology, compared against GrammarEngine —
-            // test-only, since GrammarEngine remains the live path until UC-07/08.
-            implementation(project(":core-engine"))
         }
     }
 }

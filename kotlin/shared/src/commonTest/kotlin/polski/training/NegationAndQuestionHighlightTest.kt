@@ -4,6 +4,8 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 import polski.model.SentenceSeed
+import polski.core.engine.ExerciseIdFactory
+import polski.core.engine.RandomSource
 import polski.presentation.ChangeSide
 import polski.presentation.EndingPart
 import polski.presentation.sentenceHighlightParts
@@ -15,7 +17,7 @@ import polski.presentation.sentenceHighlightParts
  */
 class NegationAndQuestionHighlightTest {
     private class FixedDraw : RandomSource { override fun nextDouble(): Double = 0.0 }
-    private fun factory() = ExerciseFactory(FixedDraw(), ExerciseIdFactory { "generated" })
+    private fun factory() = PlExerciseEngine(FixedDraw(), ExerciseIdFactory { "generated" })
 
     @Test
     fun negationParticleIsHighlightedAfterRevealOnlyForCaseGenNeg() {

@@ -35,9 +35,9 @@ import polski.preferences.PreferredStyle
 import polski.presentation.*
 import polski.srs.FsrsScheduler
 import polski.srs.Rating
-import polski.training.ExerciseFactory
-import polski.training.ExerciseIdFactory
-import polski.training.RandomSource
+import polski.training.PlExerciseEngine
+import polski.core.engine.ExerciseIdFactory
+import polski.core.engine.RandomSource
 
 /** One browser session, one DOM host and one listener/timer set per Compose mount. */
 @Composable
@@ -53,7 +53,7 @@ fun TrainingWebApp() {
         var nextId = 0L
         TrainingStore(
             WebProgressRepository(scheduler), scheduler,
-            ExerciseFactory(RandomSource { Random.nextDouble() }, ExerciseIdFactory { "web-${++nextId}" }),
+            PlExerciseEngine(RandomSource { Random.nextDouble() }, ExerciseIdFactory { "web-${++nextId}" }),
             TimeSource {
                 val at = Clock.System.now()
                 TimeCapture(at, BrowserLocalDayProvider().localDay(at))

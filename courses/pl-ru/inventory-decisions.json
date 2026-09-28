@@ -5609,1699 +5609,6 @@
       ]
     },
     {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory",
-      "sourceFingerprint": "f4b937bc54d0822b7ab30bb86647c1a2b68731b2e8617e1f71b6e62d2c3c40f4",
-      "occurrence": 1,
-      "category": "diagnostic",
-      "reason": "Runtime or validation error text; it is not a learner-facing grammar explanation."
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory",
-      "sourceFingerprint": "a9d6f97d9b715d42331c2890afc482cf7e4bbea11b6071ce51bfba610bbe9904",
-      "occurrence": 1,
-      "category": "diagnostic",
-      "reason": "Runtime or validation error text; it is not a learner-facing grammar explanation."
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateForSkill",
-      "sourceFingerprint": "b048261ae4a76443c86ada27a5600e0faf14e3fb3955fd8103dcd2dd61519e89",
-      "occurrence": 1,
-      "category": "runtime-morphology",
-      "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateForSkill",
-      "sourceFingerprint": "d0285328832945bd700a95176ab70edd20f702bee244f20537cfa8d617517580",
-      "occurrence": 1,
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 1,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        }
-      ]
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateForSkill",
-      "sourceFingerprint": "3fe73234feed57b8733073006a2c3b6630262a386b45105cbeec40e8246978a9",
-      "occurrence": 1,
-      "category": "runtime-morphology",
-      "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateForSkill",
-      "sourceFingerprint": "ddd6d142082ceb157340558812e60f0841a4a9e14f5db19e21f8f62e57a2e1cc",
-      "occurrence": 1,
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 1,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 2,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 3,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 4,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 5,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        }
-      ]
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateForSkill",
-      "sourceFingerprint": "ece39ad3203e35bc1aebfb42b6448450d5a378c0f57d7ea5dbc6c587fc8d7575",
-      "occurrence": 1,
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 1,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 2,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 3,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 4,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        }
-      ]
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateForSkill",
-      "sourceFingerprint": "707965b9d153c6722160349a0b681045ae9ce3166474ef0394fda79cf681c47c",
-      "occurrence": 1,
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 1,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 2,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        }
-      ]
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateForSkill",
-      "sourceFingerprint": "ed7c0af08cffa66c20ba58b23ebf1091363610b6eaad5edcedde3c519a71ef5e",
-      "occurrence": 1,
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 1,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        }
-      ]
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateForSkill",
-      "sourceFingerprint": "fd349ab42b729666c164b5e82314b9fe55dcf1417d29fee935aa7d1205fec4d1",
-      "occurrence": 1,
-      "category": "runtime-morphology",
-      "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateForSkill",
-      "sourceFingerprint": "f668aa34621cb473660204c03cd0e3071385142c1cd30362d28baac1c93de040",
-      "occurrence": 1,
-      "category": "runtime-morphology",
-      "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateForSkill",
-      "sourceFingerprint": "c95d9fb3e5b819d78a206fe31ed08d904d7860c8246d53a9edc5c927fc3dae41",
-      "occurrence": 1,
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 1,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 2,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 3,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 4,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        }
-      ]
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateForSkill",
-      "sourceFingerprint": "1167dcf92cfaac541f12451dbf8145dc7cbd919359c869dd379e7792d0047643",
-      "occurrence": 1,
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 1,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 2,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 3,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 4,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 5,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 6,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        }
-      ]
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateForSkill",
-      "sourceFingerprint": "5930e09ef32b280b5b2df354b3d57ca5e0e506ada20b8ba783cbff98cac82920",
-      "occurrence": 1,
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "serialization-plumbing",
-          "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
-        },
-        {
-          "ordinal": 1,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 2,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 3,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 4,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 5,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        }
-      ]
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateForSkill",
-      "sourceFingerprint": "ec32e8f28faad29d0c3807825a7071fdb759a742d5e5236f3b9683280da24bb2",
-      "occurrence": 1,
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 1,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 2,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        }
-      ]
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateForSkill",
-      "sourceFingerprint": "3435be606e167775c324f9bd0be6549ded6f20a2debee86999d82654f4a0e3bf",
-      "occurrence": 1,
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 1,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 2,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        }
-      ]
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateForSkill",
-      "sourceFingerprint": "314faa944d8b790e07bd2887253ff9493967c48739db5cc8980edde3672d9382",
-      "occurrence": 1,
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 1,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 2,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        }
-      ]
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateForSkill",
-      "sourceFingerprint": "6745931045d3968e520e5bd84107e8d4a168d37f299d30b53df1cf7bfd599bf7",
-      "occurrence": 1,
-      "category": "runtime-morphology",
-      "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateForSkill",
-      "sourceFingerprint": "5fd7271ef022f1a307a09ad667713fecd483db097fef96d2782feaa2071b37c6",
-      "occurrence": 1,
-      "category": "runtime-morphology",
-      "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateForSkill",
-      "sourceFingerprint": "32714ee2acfdf356a19799566986e9228db1de94bf82d4a55b712009ad705091",
-      "occurrence": 1,
-      "category": "runtime-morphology",
-      "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateForSkill",
-      "sourceFingerprint": "ae5046212f522fb25b996caa6f7897e6136585d3c295dd45d99604ce4736e393",
-      "occurrence": 1,
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 1,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 2,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 3,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 4,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 5,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        }
-      ]
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateForSkill",
-      "sourceFingerprint": "cadd587f33d683f47eef4ac6ed1e05e42fbb75403a1e604e05180db3e8d75d63",
-      "occurrence": 1,
-      "category": "runtime-morphology",
-      "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateForSkill.label",
-      "sourceFingerprint": "4bef0aaffe5f800a0c44785216ac5570e1a255f39cacc24274e9882cf499f8c7",
-      "occurrence": 1,
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 1,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        }
-      ]
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateForSkill",
-      "sourceFingerprint": "0ff1d4dbbcd168ee8216094a1532a6aeb8d6a142cbb46b093dac78095fb087c6",
-      "occurrence": 1,
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 1,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        }
-      ]
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateForSkill",
-      "sourceFingerprint": "d8d4cc5c13d672e7a417193028f3be7e3f4567c8d4891e5f666322f197b49c97",
-      "occurrence": 1,
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 1,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        }
-      ]
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateForSkill",
-      "sourceFingerprint": "6aebbc276e2defc51da836206c9a2c698f931cf5a8ab4fd4a18d3ca341b343c6",
-      "occurrence": 1,
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 1,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 2,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 3,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        }
-      ]
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateForSkill",
-      "sourceFingerprint": "de951b163ab2dc376ce3891f31f587369e50e0fe983afd845babe73369b09590",
-      "occurrence": 1,
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 1,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 2,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 3,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        }
-      ]
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateForSkill",
-      "sourceFingerprint": "db7fad8f820da23857ee84e19fdd89586c43e5a68a3724105d6d02eeb7b8a793",
-      "occurrence": 1,
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 1,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        }
-      ]
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateForSkill",
-      "sourceFingerprint": "8ea6ef57f2385057d9030e68d92fcfd9bd8ca329930108863235139b2c41ae24",
-      "occurrence": 1,
-      "category": "runtime-morphology",
-      "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateForSkill.tense",
-      "sourceFingerprint": "6249f1bb797e581ca004e08b69dbd9e2b992b8a10578c94fc10e1e65fc7f5d2b",
-      "occurrence": 1,
-      "category": "runtime-morphology",
-      "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateForSkill.from",
-      "sourceFingerprint": "e8164880931eab47a25b4b2de95951abedd2401d83aad4a5dbc9efca119cb87f",
-      "occurrence": 1,
-      "category": "runtime-morphology",
-      "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateForSkill.to",
-      "sourceFingerprint": "c12648ae2d1e3a4c0f5430bbf118f22ea35dc2507dd1efd2dd5b14b488a4903a",
-      "occurrence": 1,
-      "category": "runtime-morphology",
-      "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateForSkill",
-      "sourceFingerprint": "f3f57c2704bab215efb6b48701e94735e18c467d7d563c961834198b6f84c324",
-      "occurrence": 1,
-      "category": "runtime-morphology",
-      "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateForSkill",
-      "sourceFingerprint": "c5ec3507b2ecc1883102f6d00f806710c9992c9f0d9d72b0e3fe6aeb768101e2",
-      "occurrence": 1,
-      "category": "runtime-morphology",
-      "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateForSkill",
-      "sourceFingerprint": "958bc7260015520c93ff28773919f357cc3e755641a4f3646e58e48abccd0576",
-      "occurrence": 1,
-      "category": "runtime-morphology",
-      "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateForSkill.accepted",
-      "sourceFingerprint": "009e6550a35650c4e249831af2855383d591e5aaf9d7723bfac942c6d71d6c57",
-      "occurrence": 1,
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 1,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 2,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 3,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        }
-      ]
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateForSkill",
-      "sourceFingerprint": "3a6ca0e48a4e15d46af20b2eff7d0723d049232ba5c90b740daf4d82858e733a",
-      "occurrence": 1,
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 1,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 2,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 3,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 4,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 5,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        }
-      ]
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateForSkill",
-      "sourceFingerprint": "0ac8ad7b31557554363c934d6ef16bac95cf51e94ff4864f1304a3a00219914e",
-      "occurrence": 1,
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 1,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        }
-      ]
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateForSkill",
-      "sourceFingerprint": "1820ab49c2c758fe63099510064d3ebebe3f36b891d735a8cd101fb917889b8c",
-      "occurrence": 1,
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 1,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        }
-      ]
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateForSkill",
-      "sourceFingerprint": "77da3d4c0cb0ee55d0d738c70507264bdfd14c2ba9bf135e5ff1ca26cc68a606",
-      "occurrence": 1,
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 1,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 2,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        }
-      ]
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateForSkill",
-      "sourceFingerprint": "7bd3d8c1defc87610456fe44ce1ae8788e00eea7622d1a9f2ec7c53443313632",
-      "occurrence": 1,
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 1,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        }
-      ]
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateForSkill",
-      "sourceFingerprint": "3a94d255705e585f1847f9155b21609a6c7c94943fd14df680f0a148591b5285",
-      "occurrence": 1,
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 1,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 2,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        }
-      ]
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateForSkill",
-      "sourceFingerprint": "75bfa2f2abd9180a29a8f85045e84300ca16338885f71d0c6faa35a521416a92",
-      "occurrence": 1,
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 1,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 2,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 3,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 4,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        }
-      ]
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateForSkill",
-      "sourceFingerprint": "c5bd031d49b0827e76867a117f623f86b59ba25a67f4cd4ac2408f8aadfcfdf1",
-      "occurrence": 1,
-      "category": "runtime-morphology",
-      "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateForSkill.key",
-      "sourceFingerprint": "234df781c4fd1654e8c2d5927434077986c3090c362667a325a644848b3431b0",
-      "occurrence": 1,
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 1,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 2,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        }
-      ]
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateForSkill",
-      "sourceFingerprint": "a0e83dc12e21e5439c103f1fbc3bb023adce7a4470107ac5744cdb3dab10c9f8",
-      "occurrence": 1,
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 1,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 2,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 3,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 4,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        }
-      ]
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateForSkill",
-      "sourceFingerprint": "a441f0387ffe8e82fbb2081d4df3a26f54acbfa4f7a54dd9c564ddc33224632b",
-      "occurrence": 1,
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 1,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 2,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 3,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        }
-      ]
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateForSkill",
-      "sourceFingerprint": "f5adc9d244c5af2492ce02d7bbcf9f4111da7d5b395e19ff78ad385e216e65b2",
-      "occurrence": 1,
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 1,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 2,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 3,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        }
-      ]
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateForSkill",
-      "sourceFingerprint": "fcb46d8ecca0ce0dca9115f942c65230f4b25effd62e2f0d680d99210816d4a8",
-      "occurrence": 1,
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 1,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 2,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        }
-      ]
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateForSkill",
-      "sourceFingerprint": "9abca7a3890d7b1d03da20b2340d94e697db149bfb83531b80f44538e4c0ea25",
-      "occurrence": 1,
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "serialization-plumbing",
-          "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
-        },
-        {
-          "ordinal": 1,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 2,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 3,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 4,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        }
-      ]
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateForSkill",
-      "sourceFingerprint": "ff2453561b672baf41d9d32193a181f6309c41fbbb4579d0792e20bd41607bbc",
-      "occurrence": 1,
-      "category": "runtime-morphology",
-      "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateForSkill",
-      "sourceFingerprint": "8566df3f21ba413662444d1a28eac9fd59febe88209d0e241c7c714539a6da1a",
-      "occurrence": 1,
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 1,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 2,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 3,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 4,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        }
-      ]
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateForSkill",
-      "sourceFingerprint": "48755e0e04a1948e31e3db46a5c04b1f8e356bd2541665601bd8e56a512f3e65",
-      "occurrence": 1,
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 1,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        }
-      ]
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateForSkill",
-      "sourceFingerprint": "154601023ef97628f41fe734808624f443f5cf8ba58e2806317e5c163ccfd7f3",
-      "occurrence": 1,
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 1,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        }
-      ]
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateForSkill",
-      "sourceFingerprint": "1643e48417adf6675d4c4be5a36272a6431455249492d614c491b39ac2791c81",
-      "occurrence": 1,
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 1,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 2,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 3,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        }
-      ]
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateForSkill",
-      "sourceFingerprint": "7267c675e85f182adc81b01fcecb4a765b2012ed682a28a9b2c0d083c10ac32c",
-      "occurrence": 1,
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 1,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 2,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        }
-      ]
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateForSkill",
-      "sourceFingerprint": "53f3eb292cb3034da1700c045453283b0cfb4710c8dfa4fdacdf1e11f54629f8",
-      "occurrence": 1,
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 1,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 2,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        }
-      ]
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateForSkill",
-      "sourceFingerprint": "1f7125ac1f9989e16c967b7d098bafaa03ef640b66cd702ea4807e0d568b0b9c",
-      "occurrence": 1,
-      "category": "runtime-morphology",
-      "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateForSkill",
-      "sourceFingerprint": "7cc8c436670041112527139fad7df7be006e8f3b65205ab074f65ba243144a74",
-      "occurrence": 1,
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 1,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 2,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 3,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 4,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        }
-      ]
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateForSkill",
-      "sourceFingerprint": "e5691f0c9aa7e0a12918dc77b310e8544e0a72184d0fddf97b7e20edb978816a",
-      "occurrence": 1,
-      "category": "diagnostic",
-      "reason": "Runtime or validation error text; it is not a learner-facing grammar explanation."
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateChain.firstSkill",
-      "sourceFingerprint": "60c2fa9276301bf6618c60e0a11941c5008c18be394c747780a58d30c8c5d74f",
-      "occurrence": 1,
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 1,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 2,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        }
-      ]
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateChain",
-      "sourceFingerprint": "4d54d58ae45781bb63872a02566a20ce1cf34aefe49fa30d7b6762ba6ed14f9f",
-      "occurrence": 1,
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 1,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 2,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        }
-      ]
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateChain",
-      "sourceFingerprint": "798901adc00710d4ded9e8e698c96c3e4fd996b8840a9383a6a8e1c21fe06467",
-      "occurrence": 1,
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 1,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        }
-      ]
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateChain",
-      "sourceFingerprint": "154c19df5e691d7cd38ffadf9308bef102234e5610bc616990a663a53de0dcf8",
-      "occurrence": 1,
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 1,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 2,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 3,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 4,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 5,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 6,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 7,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        }
-      ]
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateChain",
-      "sourceFingerprint": "2b58f82ea625b1559084d604f242b6ccf6cce1c60cce83b746b65cc40eb87750",
-      "occurrence": 1,
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 1,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 2,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        }
-      ]
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateChain",
-      "sourceFingerprint": "1da3db00e1b2cbe7e36680afb7be4381f91c0ecf66b5c572ed2bfaf44091eaf4",
-      "occurrence": 1,
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 1,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 2,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 3,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 4,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 5,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 6,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        }
-      ]
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateChain",
-      "sourceFingerprint": "2ac6a5b55a0c7d8335ccaf369d64cc688e43225fa7b04b8bf795b2cd4b5e2f72",
-      "occurrence": 1,
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "serialization-plumbing",
-          "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
-        },
-        {
-          "ordinal": 1,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 2,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 3,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 4,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 5,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        }
-      ]
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateChain",
-      "sourceFingerprint": "d5a80f24588556e234d86dbf76b69233e9a483eebb76becfdf7a435aa207fdc8",
-      "occurrence": 1,
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 1,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 2,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 3,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 4,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 5,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        }
-      ]
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateChain",
-      "sourceFingerprint": "c30d2d0b40ef9e5ddddb12a09b7b8f6a743a937fbfca6460862e7224f8e20eb0",
-      "occurrence": 1,
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 1,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 2,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        }
-      ]
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateChain",
-      "sourceFingerprint": "7dec772105b099f61f40166c901a4df108b84ad969adc61318254fd920d1de0d",
-      "occurrence": 1,
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 1,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 2,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 3,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 4,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 5,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        }
-      ]
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
-      "symbol": "ExerciseFactory.generateChain",
-      "sourceFingerprint": "962b1e39f05986217d72df7fdb4331e2c31c71a93a4646429abb82ffc7351da4",
-      "occurrence": 1,
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        },
-        {
-          "ordinal": 1,
-          "category": "runtime-morphology",
-          "reason": "Exercise selection, skill identifier, sentence assembly or generator branch; lesson copy comes from the course pack."
-        }
-      ]
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/grammar/GrammarEngine.kt",
-      "symbol": "file-scope",
-      "sourceFingerprint": "76b123548375071d1ab642d6709662351e9becb2a4c7e6e61d174e1f5e4f8506",
-      "occurrence": 1,
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "runtime-morphology",
-          "reason": "Morphology branch, ending, agreement key or generated-form assembly; fixed examples/forms are supplied by the pack."
-        },
-        {
-          "ordinal": 1,
-          "category": "runtime-morphology",
-          "reason": "Morphology branch, ending, agreement key or generated-form assembly; fixed examples/forms are supplied by the pack."
-        }
-      ]
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/grammar/GrammarEngine.kt",
-      "symbol": "file-scope",
-      "sourceFingerprint": "19c4fc53eab2cdd09413b59a4983c0dfecaf5d10570f3b3b3916e8e932f854d0",
-      "occurrence": 1,
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "runtime-morphology",
-          "reason": "Morphology branch, ending, agreement key or generated-form assembly; fixed examples/forms are supplied by the pack."
-        },
-        {
-          "ordinal": 1,
-          "category": "runtime-morphology",
-          "reason": "Morphology branch, ending, agreement key or generated-form assembly; fixed examples/forms are supplied by the pack."
-        }
-      ]
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/grammar/GrammarEngine.kt",
-      "symbol": "file-scope",
-      "sourceFingerprint": "e5053af6ee645c512f8efd2e9e5b7a276bb7b397fd77707371605527b03c6dbf",
-      "occurrence": 1,
-      "category": "runtime-morphology",
-      "reason": "Morphology branch, ending, agreement key or generated-form assembly; fixed examples/forms are supplied by the pack."
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/grammar/GrammarEngine.kt",
-      "symbol": "verbForm",
-      "sourceFingerprint": "b574b74b656fe6e16aabac32ae76310f0131d2a169b7e4028b45755cf665dfef",
-      "occurrence": 1,
-      "category": "runtime-morphology",
-      "reason": "Morphology branch, ending, agreement key or generated-form assembly; fixed examples/forms are supplied by the pack."
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/grammar/GrammarEngine.kt",
-      "symbol": "verbForm",
-      "sourceFingerprint": "1bce33c8287505965ac54eedb16e2dcd75808b065272b419aa07cb9ea07df677",
-      "occurrence": 1,
-      "category": "runtime-morphology",
-      "reason": "Morphology branch, ending, agreement key or generated-form assembly; fixed examples/forms are supplied by the pack."
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/grammar/GrammarEngine.kt",
-      "symbol": "verbForm",
-      "sourceFingerprint": "2f0395736f9300352e108dbf613cdd8e26d07e6452897db04c68729c696e1dab",
-      "occurrence": 1,
-      "category": "runtime-morphology",
-      "reason": "Morphology branch, ending, agreement key or generated-form assembly; fixed examples/forms are supplied by the pack."
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/grammar/GrammarEngine.kt",
-      "symbol": "verbForm",
-      "sourceFingerprint": "c06d4a1bc262b07d39b8fadd6a0be3ea02df77dd78baab2e8d37620c6b699598",
-      "occurrence": 1,
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "runtime-morphology",
-          "reason": "Morphology branch, ending, agreement key or generated-form assembly; fixed examples/forms are supplied by the pack."
-        },
-        {
-          "ordinal": 1,
-          "category": "runtime-morphology",
-          "reason": "Morphology branch, ending, agreement key or generated-form assembly; fixed examples/forms are supplied by the pack."
-        }
-      ]
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/grammar/GrammarEngine.kt",
-      "symbol": "verbForm",
-      "sourceFingerprint": "f1abe8e8abcff6f471ddf0b0e4e4682ae4ec910ab0739c948bb75cb26601bd8a",
-      "occurrence": 1,
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "runtime-morphology",
-          "reason": "Morphology branch, ending, agreement key or generated-form assembly; fixed examples/forms are supplied by the pack."
-        },
-        {
-          "ordinal": 1,
-          "category": "runtime-morphology",
-          "reason": "Morphology branch, ending, agreement key or generated-form assembly; fixed examples/forms are supplied by the pack."
-        }
-      ]
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/grammar/GrammarEngine.kt",
-      "symbol": "verbForm",
-      "sourceFingerprint": "3ffa69336bee321889fd133732dd4caf0788d52da983a02253371307f37e9aa7",
-      "occurrence": 1,
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "runtime-morphology",
-          "reason": "Morphology branch, ending, agreement key or generated-form assembly; fixed examples/forms are supplied by the pack."
-        },
-        {
-          "ordinal": 1,
-          "category": "runtime-morphology",
-          "reason": "Morphology branch, ending, agreement key or generated-form assembly; fixed examples/forms are supplied by the pack."
-        }
-      ]
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/grammar/GrammarEngine.kt",
-      "symbol": "verbForm",
-      "sourceFingerprint": "f354c64b98658782c82dac266fd6bef23b122e7a672144278f55823f3c694b99",
-      "occurrence": 1,
-      "category": "runtime-morphology",
-      "reason": "Morphology branch, ending, agreement key or generated-form assembly; fixed examples/forms are supplied by the pack."
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/grammar/GrammarEngine.kt",
-      "symbol": "verbForm",
-      "sourceFingerprint": "d361f1830aea57b6ba14c8a61fcc14a0fb314dac9468ae1104f02d41cd95e961",
-      "occurrence": 1,
-      "category": "runtime-morphology",
-      "reason": "Morphology branch, ending, agreement key or generated-form assembly; fixed examples/forms are supplied by the pack."
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/grammar/GrammarEngine.kt",
-      "symbol": "verbForm",
-      "sourceFingerprint": "8ea7498fbdb90e57a44cf13783697c376d14ec474b7e35f61b73586ab85552c1",
-      "occurrence": 1,
-      "category": "runtime-morphology",
-      "reason": "Morphology branch, ending, agreement key or generated-form assembly; fixed examples/forms are supplied by the pack."
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/grammar/GrammarEngine.kt",
-      "symbol": "verbForm",
-      "sourceFingerprint": "f354c64b98658782c82dac266fd6bef23b122e7a672144278f55823f3c694b99",
-      "occurrence": 2,
-      "category": "runtime-morphology",
-      "reason": "Morphology branch, ending, agreement key or generated-form assembly; fixed examples/forms are supplied by the pack."
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/grammar/GrammarEngine.kt",
-      "symbol": "caseSentence",
-      "sourceFingerprint": "23f7f629f9d8ec026dee0d8752321eb68567ad6ef643605208cadda0b76e0386",
-      "occurrence": 1,
-      "category": "runtime-morphology",
-      "reason": "Morphology branch, ending, agreement key or generated-form assembly; fixed examples/forms are supplied by the pack."
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/grammar/GrammarEngine.kt",
-      "symbol": "caseSentence",
-      "sourceFingerprint": "a083f7feb09991e60b75bd54526956f9d0cf9293571e82472bcae706fcfeeb42",
-      "occurrence": 1,
-      "category": "runtime-morphology",
-      "reason": "Morphology branch, ending, agreement key or generated-form assembly; fixed examples/forms are supplied by the pack."
-    },
-    {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosSnapshot.kt",
       "symbol": "snapshot",
       "sourceFingerprint": "229257116717359d259d8c5a678f409a1ff771abc7ddb444098eadbf8e5fd1be",
@@ -11704,24 +10011,6 @@
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/MatrixWeb.kt",
       "symbol": "matrixContrast",
       "sourceFingerprint": "bb51f7a577d958c34d2148e23e80a373328be695514a36d7526b9d05edc5c2ce",
-      "occurrence": 1,
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "serialization-plumbing",
-          "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
-        },
-        {
-          "ordinal": 1,
-          "category": "serialization-plumbing",
-          "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
-        }
-      ]
-    },
-    {
-      "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/TrainingWebApp.kt",
-      "symbol": "TrainingWebApp",
-      "sourceFingerprint": "df1a9e19821cefa65ac38fd086eb79ad72151b5e692c3807197f11ae63c04e5f",
       "occurrence": 1,
       "parts": [
         {
@@ -33181,14 +31470,6 @@
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/model/Grammar.kt",
       "symbol": "file-scope",
-      "sourceFingerprint": "d0f11db1e9ddb7c39015c4cfc252e790398e2d56e47c3d1dee4ecae560072794",
-      "occurrence": 1,
-      "category": "serialization-plumbing",
-      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
-    },
-    {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/model/Grammar.kt",
-      "symbol": "file-scope",
       "sourceFingerprint": "2d63bdbb312f614d51617bfd34e9a4313a0ee8adcab88a79e7dbe80feb2aad16",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -38206,24 +36487,6 @@
     {
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosSession.kt",
       "symbol": "IosSession",
-      "sourceFingerprint": "88b8b06580b0152739a7dacacd3f333f00dd638b9b11f66f91ea6601b7667be8",
-      "occurrence": 1,
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "serialization-plumbing",
-          "reason": "Persistence, scheduling, model, or platform identifier used for application behavior."
-        },
-        {
-          "ordinal": 1,
-          "category": "serialization-plumbing",
-          "reason": "Persistence, scheduling, model, or platform identifier used for application behavior."
-        }
-      ]
-    },
-    {
-      "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosSession.kt",
-      "symbol": "IosSession",
       "sourceFingerprint": "e703bd677f73e3fcbd3057cfda644d3bdb295e1d9dc156543ca845c1000f2a45",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -39741,24 +38004,6 @@
       "occurrence": 1,
       "category": "ui-localization-chrome",
       "reason": "«Дождитесь сохранения прогресса или экспортируйте JSON» explains application storage, import/export, or recovery state; it is unrelated to the pl-ru lesson corpus."
-    },
-    {
-      "path": "kotlin/shared/src/macosMain/kotlin/polski/macos/MacSession.kt",
-      "symbol": "MacSession",
-      "sourceFingerprint": "9e5c03d9eaadb98b5f050fda3d460f13cbc5db9447ea039fa49a625b82310fc2",
-      "occurrence": 1,
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "serialization-plumbing",
-          "reason": "Persistence, scheduling, model, or platform identifier used for application behavior."
-        },
-        {
-          "ordinal": 1,
-          "category": "serialization-plumbing",
-          "reason": "Persistence, scheduling, model, or platform identifier used for application behavior."
-        }
-      ]
     },
     {
       "path": "kotlin/shared/src/macosMain/kotlin/polski/macos/MacSession.kt",
@@ -44791,24 +43036,6 @@
         },
         {
           "ordinal": 3,
-          "category": "serialization-plumbing",
-          "reason": "Host CSS/DOM key, accessibility attribute, action identifier or pack field lookup."
-        }
-      ]
-    },
-    {
-      "path": "kotlin/composeApp/src/desktopMain/kotlin/polski/desktop/Main.kt",
-      "symbol": "DesktopSession",
-      "sourceFingerprint": "d91fa53af1ca08a278b975d06145a919f5ca76b7049ea053bfcbe8ddd622cff4",
-      "occurrence": 1,
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "serialization-plumbing",
-          "reason": "Host CSS/DOM key, accessibility attribute, action identifier or pack field lookup."
-        },
-        {
-          "ordinal": 1,
           "category": "serialization-plumbing",
           "reason": "Host CSS/DOM key, accessibility attribute, action identifier or pack field lookup."
         }
@@ -51525,24 +49752,6 @@
     {
       "path": "kotlin/androidApp/src/main/java/dev/polski/grammarmatrix/AndroidSessionViewModel.kt",
       "symbol": "AndroidSessionViewModel",
-      "sourceFingerprint": "9b3c17c6475c19bd3d05583daedffe41ea4fdd3056af5c95263d8d3abb5b7729",
-      "occurrence": 1,
-      "parts": [
-        {
-          "ordinal": 0,
-          "category": "serialization-plumbing",
-          "reason": "Persistence, scheduling, model, or platform identifier used for application behavior."
-        },
-        {
-          "ordinal": 1,
-          "category": "serialization-plumbing",
-          "reason": "Persistence, scheduling, model, or platform identifier used for application behavior."
-        }
-      ]
-    },
-    {
-      "path": "kotlin/androidApp/src/main/java/dev/polski/grammarmatrix/AndroidSessionViewModel.kt",
-      "symbol": "AndroidSessionViewModel",
       "sourceFingerprint": "f81fb9bf5b908963440bfb392473b62595feb7b059ac4c0fc68ec89370648b84",
       "occurrence": 1,
       "category": "serialization-plumbing",
@@ -55696,6 +53905,1277 @@
       "path": "kotlin/iosApp/PolskiGrammar/VocabularyCardView.swift",
       "symbol": "VocabularyCardView.setFlipped",
       "sourceFingerprint": "ab2827862b34e3303f54ff1b13fc4514860235ff29473b57102636746ab1dd03",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/PlExerciseEngine.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "30164eef14a2b15769f581a082a2a964ed9b9da62a8c9fc534c4ce58c47708a2",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/PlExerciseEngine.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "9afae6b8ab6256af44da3f9847b2a93280583ca810286dffe81aaa4993b11099",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/PlExerciseEngine.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "0c1a5d6202002e93127eae65d0940e5eded0766df1cdf84e80c3cf7a4c6ed91b",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/PlExerciseEngine.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "8d005ae34bd89b0cf7fdd87b903bd205982da5e815cee7cf787d610cb83d1d7b",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/PlExerciseEngine.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "691db97c03ac30db310d8c0aea246df25a79c044f493a7b5943f771e2ddcd15f",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/PlExerciseEngine.kt",
+      "symbol": "SentenceSeed",
+      "sourceFingerprint": "319aa183a558aee0c9299ccd02411960bfe1f679e85aa734a460c5e11df2b19c",
+      "occurrence": 1,
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "serialization-plumbing",
+          "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+        },
+        {
+          "ordinal": 1,
+          "category": "serialization-plumbing",
+          "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/PlExerciseEngine.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "f0c1f9eac24ca7f18fde72469da2259e2cf2dec848e40da13e1a451120f2454a",
+      "occurrence": 1,
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "serialization-plumbing",
+          "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+        },
+        {
+          "ordinal": 1,
+          "category": "serialization-plumbing",
+          "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/PlExerciseEngine.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "b6b0236ed1982007ee2ec2392f86e34ffff4df3e31188437a2f2752e956f6b5b",
+      "occurrence": 1,
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "serialization-plumbing",
+          "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+        },
+        {
+          "ordinal": 1,
+          "category": "serialization-plumbing",
+          "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/grammar/PackMorphology.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "04f487c2898154e49de936724ee2313fb9b36e0ea974113a014b7401d0058642",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/grammar/PackMorphology.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "f0cc495d361f86de00c6620c24c7a503296fca0c97b18050103ef7c5e2cea5ee",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/grammar/PackMorphology.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "535393ef42588d582db1f96badcabc4493e233e3c20fb6d9d6682eecc3cd101f",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/grammar/PackMorphology.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "34e7dae85eda6515193bc3474d69ec6b6dfc499115295d6eac65d68aea239564",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/grammar/PackMorphology.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "6bbb706f44a7f891ba67bdd8829020cc7107edd3cbf221335d41d5b7035db711",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/grammar/PackMorphology.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "cd57f430e5533dcf3aa064daac3d973bb1f5156c668f0e46a81ed58f5d4cf605",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/grammar/PackMorphology.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "7a08c324ae1e6d96ac89262a8225e040f9efebce7891ded41f1210ace6d6f0d1",
+      "occurrence": 1,
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "serialization-plumbing",
+          "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+        },
+        {
+          "ordinal": 1,
+          "category": "serialization-plumbing",
+          "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/grammar/PackMorphology.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "e5053af6ee645c512f8efd2e9e5b7a276bb7b397fd77707371605527b03c6dbf",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/grammar/PackMorphology.kt",
+      "symbol": "verbForm",
+      "sourceFingerprint": "3217187122a45cccc3139f24b10493e69af61482d7490f1d77230b984c22d817",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/grammar/PackMorphology.kt",
+      "symbol": "verbForm",
+      "sourceFingerprint": "04979899ae38f29ab0cfe9fa1a12d178c5a3b7869c91294aa1b9769ce877f525",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/grammar/PackMorphology.kt",
+      "symbol": "caseSentence",
+      "sourceFingerprint": "23f7f629f9d8ec026dee0d8752321eb68567ad6ef643605208cadda0b76e0386",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/grammar/PackMorphology.kt",
+      "symbol": "caseSentence",
+      "sourceFingerprint": "a083f7feb09991e60b75bd54526956f9d0cf9293571e82472bcae706fcfeeb42",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/PlEngine.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "fbd6962fc95b49eba1cffc2a1eb1f01ba859019d55ddb03121e789e14d489da3",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/PlEngine.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "3bb4247a4ba0e7d8519cc7734104cb20b0e6058be752a58ea34b6667900a4903",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/PlEngine.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "889e9aa0bd7786ae7bdc03b3fae179a07c4f083d0d12fb87cd5079422af1df6b",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/PlEngine.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "e60ccc27fc3cd4243f40b2385b570c81f81b2cc418d20f173956e43234a08ea7",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/PlEngine.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "6823b3586511429c9e05ee2c23bbe7aa4edff331ed94317f8ec14c6186dffd3f",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/PlEngine.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "d4449e6742d2c5832cd6735f0aa99dd52ae2772f0ebe1042fbc31f18ebc62428",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/PlEngine.kt",
+      "symbol": "bundle",
+      "sourceFingerprint": "bba108bf26391ed926c6db3d8fde8bef6baf8e564c97302d269d8f73c0d22a8e",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/PlEngine.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "024cf1b52fa4885ea1a672d817ec0d92fe8e3dfd11067e1c830cd534511af82e",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/PlEngine.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "7bfee4acd16164ed03dc42baa574f0af43c5d5daba5f85a0dc1771620a188b5f",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/PlEngine.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "7c0b780c7bdd877fcbe54b4488e859287bc4b511a0a0fd503c19680a1342bf2c",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/PlEngine.kt",
+      "symbol": "plLexemeFeatures",
+      "sourceFingerprint": "13ca24ea48c4732a076077d6628e1fb0742e4d9324e2bc1093fef21524e57ac1",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/PlEngine.kt",
+      "symbol": "plSeeds",
+      "sourceFingerprint": "7575f24956fa804ed2d8851f74fab41a490ca3ccba8bf1a257c5562fb0ea7227",
+      "occurrence": 1,
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "serialization-plumbing",
+          "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+        },
+        {
+          "ordinal": 1,
+          "category": "serialization-plumbing",
+          "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/PlEngine.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "18b9b8163a5fcac4d3a96fc0fc1f1b3e3588f3b3f2144e76ea696abee1c914ea",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/PlEngine.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "b236fbb8434f40cf4f9531e7e780774c8e50e28b5618faddc21ea5e1d4c8cd56",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/PlEngine.kt",
+      "symbol": "plChainSteps.firstSkill",
+      "sourceFingerprint": "6298c4563634cd4c5d41b9bc48e92d5d65db67c0a957135e3df6a70713309a00",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "2acc70f58ef7cc6e468bb832c38a4c31af03d091d25dab1d6c2f7775f4fe9107",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "e7063d6455430c373ae2499880942ce359eaa867a9a59e1b128f70e97cb2c385",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "178a744b475196391026340ffbba2854821b82ec26f9bc1a25ac0a65bc9390d4",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "7b1e3a7df8a4f6957ca0181c2e3e19ebb015bc547936c6c6e9f4fcff9aaf4900",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "69f492b1430e414bfb843c5dfdaa8ee93ab8c99830227def20d2493ca871ba4e",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "8adf07557e1922a0b647aecddcf33b06fc0edfba0b8eec76d78e263192f8632a",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "87e7e0d143884ab847182f64bfe05986f5362c5a19b48832dd88a41026c30c9b",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "12a9e79885d011f4dbb487af8b761aba743cfb038538cc02ddc754d85908a0ce",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "9d77b1975150b7831affca8910d47bf3211d28c61ecede17dae86e70695639f5",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "c7243c6c537416df016fd38a47fd886a54b5f895dca4f6ccb00688bd3b5cfe41",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "23c231a2bf99fc275c007de4b2b77e24fdec7b50c2c984d3141c753dc0d0307a",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "3b3b8826d91cee26f1049bbfdf8deb273f584b075489305308af7e3ba91bf252",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "4b8ab51d7c160515cd9562f26300c9bb963540e1c7c0fb958017414c4395bc65",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "2eecae1f2fc94edabaa0b541e5efd3090e35a257f19886d58d69871064ce31f6",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "2883a816bdb13763b63241c0d62ec7c8e937cd7235d822222ca93d1878259b7e",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "e1ba299a58aa1240d7ef54f89ec339212c5c221591bb7a5966c625b1e996e980",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "7a5542325ea1fd069a0319cb93dd2c57da392d467dad0ecf2e8de37a9cb73c89",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "parseRecipes",
+      "sourceFingerprint": "bc3df1f3b29e32da0a6c59bab0d77e77acc72ceb36778317b4f4230f19644de5",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "parseRecipes",
+      "sourceFingerprint": "c36c78c09fb4db0ada742288ea944be06e6f658840f9ec5063f3a9a262be3da3",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "parseRecipes",
+      "sourceFingerprint": "a3bf04290588174d956d3241b0a31e44e6cf77543b3c7589bb83fafaba580af7",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "parseRecipes",
+      "sourceFingerprint": "501f496a87fb0afa0c85186d5a349f0b4deb02f616c7a9dad96675a6dee9d116",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "parseRecipes",
+      "sourceFingerprint": "55668bf075ffa3f70af032df3ca25b114fa0b040ca34ed110dcec60bedf7a485",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "47dce28343ea23198105737a7ff4b37858d792808d0ac455610561055c279312",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "ec034b0db5cf3781517315e63941f968e4366bc7693f40fc5c3aef158cd01536",
+      "occurrence": 1,
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "serialization-plumbing",
+          "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+        },
+        {
+          "ordinal": 1,
+          "category": "serialization-plumbing",
+          "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "944e10d171f09ebc8cb9736c32bde16f2a3f2cfa99fb156d6e9fe4e4ba84e5cb",
+      "occurrence": 1,
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "serialization-plumbing",
+          "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+        },
+        {
+          "ordinal": 1,
+          "category": "serialization-plumbing",
+          "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "25f59cda1bf8acb04d20f10b424f3de5200e0fd6fae020d5a3a9db9fa1b87f11",
+      "occurrence": 1,
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "serialization-plumbing",
+          "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+        },
+        {
+          "ordinal": 1,
+          "category": "serialization-plumbing",
+          "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "42834113e6096cda363d47dee09aaadcce49163f8c63b66051a8f9b1310b44f6",
+      "occurrence": 1,
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "serialization-plumbing",
+          "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+        },
+        {
+          "ordinal": 1,
+          "category": "serialization-plumbing",
+          "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "4dcf417981d02dee8fef460aa6d5b5e36b372c115b84dde6bb7b7f36aaf22637",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "4b5e69ba446dabe2bb84238cda0306ca4439b1c86169b242856417b7ce8b5eb0",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "b812429f4341418c44d73825cbf642bd320cec9fa86a27d458cb80179dd5d11b",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "6b590ae4227738ca2b908d5fd40856fd96ed843396c4603c0aaa97aa8c267e94",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "1cec72518dea048b45d7cc2505b9356e4d1d281f9c4878bc2a276409ca8e8619",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "e292c21c632d68ca2306d225ed7e0007bb721cf7aba65b3920fe62a9747c454d",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "707f24b150abbfb1a466fb2045837f9a6b350983677798cc1bf99fcc8358ad41",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "c172e6c22bfbc21146e97b95dcf68c4fcb3b6e323b5d047ae369439e014562ee",
+      "occurrence": 1,
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "serialization-plumbing",
+          "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+        },
+        {
+          "ordinal": 1,
+          "category": "serialization-plumbing",
+          "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "63ae6d1e977661e3f36e6f75298aecb72c9354e5bfcf934e8a1c522683c4066b",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "1d88b2cff396fddc40dc5797feaaf7fd4cd0d40fb71ebd02d651518efed3cd15",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "c3521a0118c9ae3e4e98f375a63b86894f183d145518f851a63e55b9a3eb5a48",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "72cac0192ac24792b4b96b41bf6b679a1e634922ae72825b1e487610773496e8",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "500d241b51d0c4453078e4209e14d911fa30cd1d781ba361c67411aee674b4d9",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "b812429f4341418c44d73825cbf642bd320cec9fa86a27d458cb80179dd5d11b",
+      "occurrence": 2,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "a91797ee3a6f10b3355ea593349da3f94115a20dec016570616ed6f9823b5d8b",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "065fa886f6b0fb1035b5d27498546b9a3e20f73ccd6282d88c82d57dd7141ad7",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "deaf99e9ecf530e26203b76424837303cb8cd042af166d20088cc57aed18829c",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "d31fb559de983665870f80f873504d7719aced20ae5a5acb73397946eeaebdeb",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "d922384bbc4e211b11ba697168d72797ef929349f4fd4e82e1781101a3f4661e",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "862c75150d2ec7e22a3c072d013180ec0c7b2314a2e42589cf9651051b40edbf",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "c3521a0118c9ae3e4e98f375a63b86894f183d145518f851a63e55b9a3eb5a48",
+      "occurrence": 2,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "9707b6c9a7330c94fc8c4bf6fa56b3665f27f9e2ca7506e5b1fd348e4599ef05",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "72cac0192ac24792b4b96b41bf6b679a1e634922ae72825b1e487610773496e8",
+      "occurrence": 2,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "70f43aa696bbbf61ae28653a602eb083f910f20e96b3a3326276a834c645f3a4",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "68186dea734ad1f90226f0cbd05eb8d6334b8c38daca834b6b95e52ef226f55c",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "bf5ad694fcb89daa9959be26ae176052c421dddb7889117ebe4faf83a0fc1d00",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "abfb2ebea974ae3143fdebda1920b23eacb4d17aea4b84c4297deb78e43df5c6",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "d15df9fd74eb40e18d3dc2ab585dbab216be9119a923c2082651a49a0c3676f1",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "da91f50c6afaa5d5dba0e6504289fb84e18c656d9dcb1a22c65c3720dc20b3f4",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "c04429d97b88e85c08148f770aa3e8964ad3c3bce66354262fc1351adefc16ee",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "bcd5a112ce1374d0f3b97f18d4528ff909f18cb4683522ef82371d562a347c64",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "95dad2a0309ca09588794fc0382f87219352134dbb1dded27d772ebe37d344bd",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "3f1c1f1a6201ae9a46ac99c56fb98b0f5b2b1283d2646993a6e62dc6d1d4c6d2",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "JsonObject",
+      "sourceFingerprint": "078d29db59736233722d320a9605a4210b6a78716354202a2cbf46e8a68da79c",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "JsonObject",
+      "sourceFingerprint": "7ab8d94fbefb38b4e1a7de1e3699f64271b72991e8d9b4ac421362c5dd2b6a63",
+      "occurrence": 1,
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "serialization-plumbing",
+          "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+        },
+        {
+          "ordinal": 1,
+          "category": "serialization-plumbing",
+          "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "JsonObject",
+      "sourceFingerprint": "a13cad272ed5f91aa74e3107da424b2dba86ad6f6528b0aa4f74c7f5d58ff807",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "JsonObject",
+      "sourceFingerprint": "854b36bafcd52c4edbe6786a279be361ea72684e3a1c22f70228aa41658524d8",
+      "occurrence": 1,
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "serialization-plumbing",
+          "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+        },
+        {
+          "ordinal": 1,
+          "category": "serialization-plumbing",
+          "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+        },
+        {
+          "ordinal": 2,
+          "category": "serialization-plumbing",
+          "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "JsonObject",
+      "sourceFingerprint": "cbb3baa99e365d068a5db23eb7df2611964f2e53dbd69aa46e58267fe2937fc3",
+      "occurrence": 1,
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "serialization-plumbing",
+          "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+        },
+        {
+          "ordinal": 1,
+          "category": "serialization-plumbing",
+          "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "JsonObject",
+      "sourceFingerprint": "fa3c42016d32c0a6ace08e02807f40f8aa43736a8cfe4aaa437aeced35191910",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "JsonObject",
+      "sourceFingerprint": "c74647294283b92771a9a5a35bc268d6ea5bf31e851a0c6c2e16152d692f37cd",
+      "occurrence": 1,
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "serialization-plumbing",
+          "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+        },
+        {
+          "ordinal": 1,
+          "category": "serialization-plumbing",
+          "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "JsonObject",
+      "sourceFingerprint": "a78f15d435173eeae605b9c303bff3a87e3e558a6a5a0b858aa82292a65d779d",
+      "occurrence": 1,
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "serialization-plumbing",
+          "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+        },
+        {
+          "ordinal": 1,
+          "category": "serialization-plumbing",
+          "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+        },
+        {
+          "ordinal": 2,
+          "category": "serialization-plumbing",
+          "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "JsonObject",
+      "sourceFingerprint": "4776380049b2bc92345159c5610b18ffa71879317476cfe11f9c7bfd2d282a1f",
+      "occurrence": 1,
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "serialization-plumbing",
+          "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+        },
+        {
+          "ordinal": 1,
+          "category": "serialization-plumbing",
+          "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "JsonObject",
+      "sourceFingerprint": "fdc8272c087103f8a95db047ea04d1d0c9c3a14339064e09dc8fda4954407c02",
+      "occurrence": 1,
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "serialization-plumbing",
+          "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+        },
+        {
+          "ordinal": 1,
+          "category": "serialization-plumbing",
+          "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+        },
+        {
+          "ordinal": 2,
+          "category": "serialization-plumbing",
+          "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+        },
+        {
+          "ordinal": 3,
+          "category": "serialization-plumbing",
+          "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "JsonObject",
+      "sourceFingerprint": "478ab98068666e69b995881ddda8552e0551b794b14260f0797ae10ede65a233",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "JsonObject",
+      "sourceFingerprint": "15a08a819a7fc39eea36025a6460f7ed8774057182bef23fbd606b395a78e2e8",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "JsonObject",
+      "sourceFingerprint": "f270ce87a0e606f8a471c0700817338a19bd32fb13c81de3b4c54a03049c1ab3",
+      "occurrence": 1,
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "serialization-plumbing",
+          "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+        },
+        {
+          "ordinal": 1,
+          "category": "serialization-plumbing",
+          "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "JsonObject",
+      "sourceFingerprint": "617101e5eec058dc3391018a5aa229208014ef095b59c3f6c9274f18a540ccfc",
+      "occurrence": 1,
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "serialization-plumbing",
+          "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+        },
+        {
+          "ordinal": 1,
+          "category": "serialization-plumbing",
+          "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "JsonObject",
+      "sourceFingerprint": "6245b2f1586fa32a3d3c1f7f9a1b8ad88629f2d6a713621b37c49cb4d3a9bd0a",
+      "occurrence": 1,
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "serialization-plumbing",
+          "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+        },
+        {
+          "ordinal": 1,
+          "category": "serialization-plumbing",
+          "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "JsonObject",
+      "sourceFingerprint": "e991c99e1c3eaf4fa32ca466f047c81361cd94c1435e2c5c4271286d948e62f3",
+      "occurrence": 1,
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "serialization-plumbing",
+          "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+        },
+        {
+          "ordinal": 1,
+          "category": "serialization-plumbing",
+          "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "JsonObject",
+      "sourceFingerprint": "f8e8f5a35b88e6ee359af82b829d8b4023da2de08ac71470d317c6b755115818",
+      "occurrence": 1,
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "serialization-plumbing",
+          "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+        },
+        {
+          "ordinal": 1,
+          "category": "serialization-plumbing",
+          "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+        },
+        {
+          "ordinal": 2,
+          "category": "serialization-plumbing",
+          "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "JsonObject",
+      "sourceFingerprint": "1bfd28109c17cdfa67db1a0bc5147e3cbfced75cb4df634e983132bcbb340e18",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "240c44b6d5dbb61ff41c9cd3d0eff9d78fbc976de3cc05025c54d099d97956df",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "cba6df8c081e6422278225d6f8980b1fdca86e2ca012db89550bc60c485e12b3",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "6c8b6ac06138e9edc8cc9a7abd69726443f3b28d52d2b3fb0b9fceed9c392506",
+      "occurrence": 1,
+      "category": "serialization-plumbing",
+      "reason": "Course-pack adapter field, schema key, enum identifier or bridge value; authored content is loaded from course.json."
+    },
+    {
+      "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/TrainingWebApp.kt",
+      "symbol": "TrainingWebApp",
+      "sourceFingerprint": "14b2105d01d875b8b5b40a3348431b1ca7607717ab4116d3b09b64b921009af4",
+      "occurrence": 1,
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "serialization-plumbing",
+          "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+        },
+        {
+          "ordinal": 1,
+          "category": "serialization-plumbing",
+          "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosSession.kt",
+      "symbol": "IosSession",
+      "sourceFingerprint": "80c7e0852855c1f8636ce62cb2dbcd1e74b804b6052eeed0c92a93409e463181",
+      "occurrence": 1,
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "serialization-plumbing",
+          "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+        },
+        {
+          "ordinal": 1,
+          "category": "serialization-plumbing",
+          "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/shared/src/macosMain/kotlin/polski/macos/MacSession.kt",
+      "symbol": "MacSession",
+      "sourceFingerprint": "2cb8a0ff0f9c23af05fa02c1cdd7ac9d20a88ba1c4d7ec088295e997668d9f35",
+      "occurrence": 1,
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "serialization-plumbing",
+          "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+        },
+        {
+          "ordinal": 1,
+          "category": "serialization-plumbing",
+          "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/composeApp/src/desktopMain/kotlin/polski/desktop/Main.kt",
+      "symbol": "DesktopSession",
+      "sourceFingerprint": "b45a8185e6f783a6c5e08de81327a7443699e24b7b99676eea7c889f4c42be3f",
+      "occurrence": 1,
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "serialization-plumbing",
+          "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+        },
+        {
+          "ordinal": 1,
+          "category": "serialization-plumbing",
+          "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/androidApp/src/main/java/dev/polski/grammarmatrix/AndroidSessionViewModel.kt",
+      "symbol": "AndroidSessionViewModel",
+      "sourceFingerprint": "48a202793299bd8805f370a1afd6f344820910d0815ddcbe99641d1bb920028a",
+      "occurrence": 1,
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "serialization-plumbing",
+          "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+        },
+        {
+          "ordinal": 1,
+          "category": "serialization-plumbing",
+          "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/model/Grammar.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "62ece9ae9756a8ac2035d84f972305431c7f3aedb3ea7b3601aef3395fa73b8b",
       "occurrence": 1,
       "category": "serialization-plumbing",
       "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."

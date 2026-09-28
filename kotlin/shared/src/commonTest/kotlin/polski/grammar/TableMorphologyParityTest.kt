@@ -45,15 +45,17 @@ private fun entryCount(json: String): Int =
 
 /**
  * UniversalCorePlan.md §12 UC-05 acceptance: "verb/noun/adjective/possessive forms from
- * TableMorphology equal GrammarEngine for every lexeme × feature bundle (exhaustive test) and
- * match tests/fixtures/core-golden". [TableMorphology] here is built from `forms.generated.json`
- * itself (embedded at build time by `generateFormsFixtureSource`, `shared/build.gradle.kts` —
- * scripts/build-pack.mjs's actual output, not a re-derivation), so this proves both that the
- * converter's data loads correctly through the real :core-engine contract, and that every
- * materialized form agrees with [GrammarEngine]'s computed form. `scripts/build-pack.mjs --check`
- * separately proves forms.generated.json agrees with tests/fixtures/core-golden/grammar.json
- * byte-for-byte, so this test doesn't re-load that fixture — GrammarEngine's own agreement with
- * core-golden is already `GrammarParityTest`'s job.
+ * TableMorphology equal [polski.grammar]'s public morphology functions for every lexeme × feature
+ * bundle (exhaustive test) and match tests/fixtures/core-golden". [TableMorphology] here is built
+ * from `forms.generated.json` itself (embedded at build time by `generateFormsFixtureSource`,
+ * `shared/build.gradle.kts` — scripts/build-pack.mjs's actual output, not a re-derivation), so
+ * this proves both that the converter's data loads correctly through the real :core-engine
+ * contract, and that every materialized form agrees with `nounForm`/`adjectiveForm`/
+ * `possessiveForm`/`verbForm` (`PackMorphology.kt`, UC-08: also `TableMorphology`-backed, but a
+ * separately-parsed instance — this still guards against the two ever silently diverging).
+ * `scripts/build-pack.mjs --check` separately proves forms.generated.json agrees with
+ * tests/fixtures/core-golden/grammar.json byte-for-byte, so this test doesn't re-load that
+ * fixture — that fixture's own agreement with the live functions is `GrammarParityTest`'s job.
  */
 class TableMorphologyParityTest {
     private val morphology: TableMorphology = TableMorphology(parseForms(generatedFormsFixtureJson))

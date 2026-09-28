@@ -1,6 +1,8 @@
 package polski.training
 
 import kotlin.test.*
+import polski.core.engine.ExerciseIdFactory
+import polski.core.engine.RandomSource
 import polski.model.*
 import polski.data.skills
 
@@ -10,7 +12,7 @@ class TrainingParityTest {
         private var index = 0
         override fun nextDouble(): Double = values[(index++).coerceAtMost(values.lastIndex)]
     }
-    private fun factory(draws: List<Double>) = ExerciseFactory(Draws(draws), ExerciseIdFactory { "generated" })
+    private fun factory(draws: List<Double>) = PlExerciseEngine(Draws(draws), ExerciseIdFactory { "generated" })
     @Test fun metadataAndChainLinks() {
         assertEquals(16, skills.size)
         assertEquals(12, sentenceSeeds.size)
@@ -619,8 +621,8 @@ class TrainingParityTest {
         assertFailsWith<IllegalStateException> { nextSkillId(emptyList()) }
     }
     @Test fun portsAndUtf16Distance() {
-        assertFailsWith<IllegalArgumentException> { ExerciseFactory(RandomSource { 1.0 }, ExerciseIdFactory { "id" }).generateForSkill("mixed") }
-        assertFailsWith<IllegalArgumentException> { ExerciseFactory(RandomSource { 0.0 }, ExerciseIdFactory { "" }).generateChain() }
+        assertFailsWith<IllegalArgumentException> { PlExerciseEngine(RandomSource { 1.0 }, ExerciseIdFactory { "id" }).generateForSkill("mixed") }
+        assertFailsWith<IllegalArgumentException> { PlExerciseEngine(RandomSource { 0.0 }, ExerciseIdFactory { "" }).generateChain() }
         val ex = factory(listOf(0.0)).generateForSkill("mixed").copy(expected = "a", accepted = emptyList())
         assertEquals(2, evaluate("😀", ex).distance)
         assertEquals(1, evaluate("b", ex.copy(expected = "aaaa", accepted = listOf("bb"))).distance)

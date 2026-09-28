@@ -14,16 +14,16 @@ import polski.presentation.AppTab
 import polski.presentation.AppUiState
 import polski.presentation.CardPhase
 import polski.presentation.LoadStatus
-import polski.training.ExerciseFactory
-import polski.training.ExerciseIdFactory
-import polski.training.RandomSource
+import polski.training.PlExerciseEngine
+import polski.core.engine.ExerciseIdFactory
+import polski.core.engine.RandomSource
 import polski.training.sentenceSeeds
 import polski.ui.screens.TrainingScreen
 
 class ChainCompletionProgressTest {
     @OptIn(ExperimentalTestApi::class)
     @Test fun completedNativeChainDisplaysAllFiveSteps() = runComposeUiTest {
-        val chain = ExerciseFactory(RandomSource { 0.1 }, ExerciseIdFactory { "chain-progress" })
+        val chain = PlExerciseEngine(RandomSource { 0.1 }, ExerciseIdFactory { "chain-progress" })
             .generateChain(sentenceSeeds.first())
         setContent {
             MaterialTheme {

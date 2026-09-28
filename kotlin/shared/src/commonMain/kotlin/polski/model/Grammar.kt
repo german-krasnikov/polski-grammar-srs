@@ -44,8 +44,8 @@ data class Skill(val id: String, val title: String, val group: String, val level
 
 /**
  * UniversalCorePlan.md §1/§4.1 (UC-01): pl's closed enums stay the engine's actual grammar model
- * (`fromId`, `.id` unchanged, still the only types [polski.grammar.GrammarEngine]/
- * [polski.training.ExerciseFactory] use) — these are a thin adapter declaring the subset of the
+ * (`fromId`, `.id` unchanged, still the only types `polski.grammar` (`PackMorphology.kt`)/
+ * [polski.training.PlExerciseEngine] use) — these are a thin adapter declaring the subset of the
  * universal core's open [FeatureKey]/[FeatureValue] catalog pl uses, not a second grammar model.
  */
 val CaseFeature = FeatureKey("Case")

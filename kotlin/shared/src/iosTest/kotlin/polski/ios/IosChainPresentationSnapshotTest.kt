@@ -8,14 +8,14 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import polski.presentation.AppUiState
 import polski.presentation.CardPhase
-import polski.training.ExerciseFactory
-import polski.training.ExerciseIdFactory
-import polski.training.RandomSource
+import polski.training.PlExerciseEngine
+import polski.core.engine.ExerciseIdFactory
+import polski.core.engine.RandomSource
 import polski.training.sentenceSeeds
 
 class IosChainPresentationSnapshotTest {
     @Test fun completionSnapshotShowsAllFiveRatedSteps() {
-        val chain = ExerciseFactory(RandomSource { 0.1 }, ExerciseIdFactory { "ios-display" })
+        val chain = PlExerciseEngine(RandomSource { 0.1 }, ExerciseIdFactory { "ios-display" })
             .generateChain(sentenceSeeds.first())
         val state = AppUiState(chain = chain, chainIndex = 4, phase = CardPhase.ChainComplete)
         val snapshot = Json.parseToJsonElement(snapshot(state)).jsonObject

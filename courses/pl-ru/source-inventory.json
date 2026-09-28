@@ -859,361 +859,97 @@
       ]
     },
     {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/ExerciseFactory.kt",
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/training/PlExerciseEngine.kt",
       "owner": "production source audit",
       "migrationStatus": "classified in inventory-decisions.json; review Evidence.md for acceptance",
-      "sha256": "d8fb5cdf963b9154f323a38d9a0c0f06edefebbef78f2a7dc6564b5aca5bcb36",
+      "sha256": "9a2dff7fc095c0b1fc5b024d0d20ba8a6a5e1b3c97592e57235c9a82323841b5",
       "literalLines": [
         {
-          "line": 28,
-          "source": "require(draw >= 0.0 && draw < 1.0) { \"RandomSource must return [0, 1)\" }"
+          "line": 18,
+          "source": "* UniversalCorePlan.md §5.3/§12 UC-08: the live pl-ru exercise generator — `:core-engine`'s"
         },
         {
-          "line": 43,
-          "source": "require(id.isNotEmpty()) { \"Exercise ID must be nonempty\" }"
+          "line": 19,
+          "source": "* generic `ExerciseGenerator` (`polski.core.plExerciseGenerator`), wired to pl's own pack data,"
         },
         {
-          "line": 50,
-          "source": "\"case.acc.f\" -> sentenceSeeds.filter { nounById(it.nounId).gender == Gender.F }"
+          "line": 20,
+          "source": "* exposed with the exact shape `TrainingStore`/every host already calls. Replaces the deleted"
         },
         {
-          "line": 51,
-          "source": "\"case.acc.m\" -> sentenceSeeds.filter { nounById(it.nounId).gender.id.startsWith(\"m-\") }"
+          "line": 21,
+          "source": "* `ExerciseFactory`'s hand-written `when(skillId)` branches; `TrainingParityTest` (pinned literal"
         },
         {
-          "line": 52,
-          "source": "\"case.acc.n\" -> sentenceSeeds.filter { nounById(it.nounId).gender == Gender.N }"
+          "line": 22,
+          "source": "* `Exercise` values from the React oracle) is this replacement's permanent byte-parity guard."
         },
         {
-          "line": 53,
-          "source": "\"case.inst\", \"case.dat\", \"pronouns\", \"verb.present\", \"verb.past\", \"verb.future\" ->"
+          "line": 34,
+          "source": "private fun SentenceSeed.toSlots(): Map<String, String> = mapOf(\"noun\" to nounId, \"adjective\" to adjectiveId)"
         },
         {
-          "line": 54,
-          "source": "sentenceSeeds.filter { it.nounId in setOf(\"wife\", \"husband\", \"friendM\", \"son\", \"child\") }"
+          "line": 39,
+          "source": "nounId = slots.getValue(\"noun\"), adjectiveId = slots.getValue(\"adjective\"),"
         },
         {
-          "line": 63,
-          "source": "if (skillId in setOf(\"case.acc.f\", \"case.acc.m\", \"case.acc.n\")) {"
-        },
-        {
-          "line": 65,
-          "source": "noun.lemma.endsWith('a') && noun.gender == Gender.M_PERSONAL -> exerciseCopy(\"accReasonPersonalA\")"
-        },
-        {
-          "line": 66,
-          "source": "noun.gender == Gender.M_INANIMATE || noun.gender == Gender.N -> exerciseCopy(\"accReasonUnchanged\")"
-        },
-        {
-          "line": 67,
-          "source": "else -> exerciseCopy(\"accReasonChanged\")"
-        },
-        {
-          "line": 69,
-          "source": "return card(skillId, seed, caseSentence(seed, GramCase.NOM), exerciseCopy(\"accPrompt\"), sentence(\"seenAcc\", \"acc\" to acc), exerciseCopy(\"accExplanation\"), change(nom, acc, reason), tags = listOf(\"acc\", noun.gender.id))"
-        },
-        {
-          "line": 71,
-          "source": "if (skillId == \"case.gen.neg\") return card(skillId, seed, sentence(\"seenAcc\", \"acc\" to acc), exerciseCopy(\"genNegPrompt\"), sentence(\"seenGenNeg\", \"gen\" to gen), exerciseCopy(\"genNegExplanation\"),"
-        },
-        {
-          "line": 72,
-          "source": "listOf(FormChange(\"\", exerciseCopy(\"negationParticle\"), exerciseCopy(\"negationInsertionReason\")), FormChange(acc, gen, exerciseCopy(\"genNegReason\"))), tags = listOf(\"gen\", \"negation\"))"
-        },
-        {
-          "line": 74,
-          "source": "\"case.inst\" -> Triple(GramCase.INST, exerciseCopy(\"instStart\"), exerciseCopy(\"instPrompt\"))"
-        },
-        {
-          "line": 75,
-          "source": "\"case.loc\" -> Triple(GramCase.LOC, exerciseCopy(\"locStart\"), exerciseCopy(\"locPrompt\"))"
-        },
-        {
-          "line": 76,
-          "source": "\"case.dat\" -> Triple(GramCase.DAT, exerciseCopy(\"datStart\"), exerciseCopy(\"datPrompt\"))"
-        },
-        {
-          "line": 82,
-          "source": "GramCase.INST -> exerciseCopy(\"instReason\")"
-        },
-        {
-          "line": 83,
-          "source": "GramCase.LOC -> exerciseCopy(\"locReason\")"
-        },
-        {
-          "line": 84,
-          "source": "else -> exerciseCopy(\"datReason\")"
-        },
-        {
-          "line": 86,
-          "source": "return card(skillId, seed, sentence(\"seenAcc\", \"acc\" to acc), drill.third, sentence(\"caseDrill\", \"start\" to drill.second, \"target\" to target), exerciseCopy(\"caseDrillExplanation\"), change(acc, target, reason), tags = listOf(drill.first.id))"
-        },
-        {
-          "line": 88,
-          "source": "if (skillId == \"agreement.my\") {"
-        },
-        {
-          "line": 90,
-          "source": "val label = mapOf(PossessiveId.YOUR to exerciseCopy(\"ownerYour\"), PossessiveId.HIS to exerciseCopy(\"ownerHis\"),"
-        },
-        {
-          "line": 91,
-          "source": "PossessiveId.HER to exerciseCopy(\"ownerHer\"), PossessiveId.OUR to exerciseCopy(\"ownerOur\"),"
-        },
-        {
-          "line": 92,
-          "source": "PossessiveId.YOUR_PLURAL to exerciseCopy(\"ownerYourPlural\"), PossessiveId.THEIR to exerciseCopy(\"ownerTheir\")).getValue(owner)"
-        },
-        {
-          "line": 94,
-          "source": "return card(skillId, seed, sentence(\"seenAcc\", \"acc\" to acc), exerciseCopy(\"ownerPromptPrefix\") + label + exerciseCopy(\"ownerPromptSuffix\"),"
-        },
-        {
-          "line": 95,
-          "source": "sentence(\"seenAcc\", \"acc\" to target), exerciseCopy(\"ownerExplanation\"), change(acc, target, exerciseCopy(\"ownerReason\")),"
-        },
-        {
-          "line": 96,
-          "source": "possessive = owner, tags = listOf(\"agreement\", \"acc\"))"
-        },
-        {
-          "line": 98,
-          "source": "if (skillId.startsWith(\"verb.\")) {"
-        },
-        {
-          "line": 99,
-          "source": "val tense = Tense.fromId(skillId.substringAfter('.'))"
-        },
-        {
-          "line": 101,
-          "source": "val from = verbForm(\"go\", fromTense, Person.THIRD, NumberGram.SG, noun.gender)"
-        },
-        {
-          "line": 102,
-          "source": "val to = verbForm(\"go\", tense, Person.THIRD, NumberGram.SG, noun.gender)"
-        },
-        {
-          "line": 104,
-          "source": "Tense.PAST -> exerciseCopy(\"verbPastPrompt\")"
-        },
-        {
-          "line": 105,
-          "source": "Tense.FUTURE -> exerciseCopy(\"verbFuturePrompt\")"
-        },
-        {
-          "line": 106,
-          "source": "Tense.PRESENT -> exerciseCopy(\"verbPresentPrompt\")"
-        },
-        {
-          "line": 108,
-          "source": "val accepted = if (tense == Tense.FUTURE) listOf(sentence(\"verbFutureAccepted\", \"nom\" to capitalize(nom), \"past\" to verbForm(\"go\", Tense.PAST, Person.THIRD, NumberGram.SG, noun.gender))) else emptyList()"
-        },
-        {
-          "line": 109,
-          "source": "return card(skillId, seed, sentence(\"verbSentence\", \"nom\" to capitalize(nom), \"verb\" to from), prompt, sentence(\"verbSentence\", \"nom\" to capitalize(nom), \"verb\" to to),"
-        },
-        {
-          "line": 110,
-          "source": "exerciseCopy(\"verbExplanation\"), change(from, to, exerciseCopy(\"verbReason\")), accepted = accepted,"
-        },
-        {
-          "line": 111,
-          "source": "tags = listOf(\"verb\", tense.id, \"nom\"))"
-        },
-        {
-          "line": 113,
-          "source": "if (skillId == \"aspect\") return card(skillId, seed, exerciseCopy(\"aspectSource\"), exerciseCopy(\"aspectPrompt\"),"
-        },
-        {
-          "line": 114,
-          "source": "exerciseCopy(\"aspectExpected\"), exerciseCopy(\"aspectExplanation\"),"
-        },
-        {
-          "line": 115,
-          "source": "change(exerciseCopy(\"aspectFrom\"), exerciseCopy(\"aspectTo\"), exerciseCopy(\"aspectReason\")),"
-        },
-        {
-          "line": 116,
-          "source": "accepted = listOf(exerciseCopy(\"aspectAccepted\")), nounId = \"book\", adjectiveId = \"new\", tags = listOf(\"aspect\", \"past\"))"
-        },
-        {
-          "line": 117,
-          "source": "if (skillId == \"pronouns\") {"
-        },
-        {
-          "line": 118,
-          "source": "val key = when (noun.gender) { Gender.F -> \"ona\"; Gender.N -> \"ono\"; else -> \"on\" }"
-        },
-        {
-          "line": 120,
-          "source": "return card(skillId, seed, sentence(\"seenAcc\", \"acc\" to acc), exerciseCopy(\"pronounPrompt\"), sentence(\"seenAcc\", \"acc\" to pronoun),"
-        },
-        {
-          "line": 121,
-          "source": "exerciseCopy(\"pronounExplanation\"), change(acc, pronoun, exerciseCopy(\"pronounReason\")), tags = listOf(\"pronoun\", \"acc\"))"
-        },
-        {
-          "line": 123,
-          "source": "if (skillId == \"sentence.question\") return card(skillId, seed, sentence(\"questionSource\", \"acc\" to acc), exerciseCopy(\"questionPrompt\"),"
-        },
-        {
-          "line": 124,
-          "source": "sentence(\"questionExpected\", \"acc\" to acc), exerciseCopy(\"questionExplanation\"),"
-        },
-        {
-          "line": 125,
-          "source": "change(\"\", exerciseCopy(\"questionParticle\"), exerciseCopy(\"questionReason\")), tags = listOf(\"question\", \"acc\"))"
-        },
-        {
-          "line": 126,
-          "source": "if (skillId == \"sentence.plural\") {"
-        },
-        {
-          "line": 128,
-          "source": "return card(skillId, seed, sentence(\"seenAcc\", \"acc\" to acc), exerciseCopy(\"pluralPrompt\"), sentence(\"seenAcc\", \"acc\" to target),"
-        },
-        {
-          "line": 129,
-          "source": "exerciseCopy(\"pluralExplanation\"), change(acc, target, exerciseCopy(\"pluralReason\")),"
-        },
-        {
-          "line": 130,
-          "source": "number = NumberGram.PL, tags = listOf(\"plural\", \"acc\"))"
-        },
-        {
-          "line": 132,
-          "source": "if (skillId == \"mixed\") return card(skillId, seed, sentence(\"seenAcc\", \"acc\" to acc), exerciseCopy(\"mixedPrompt\"),"
-        },
-        {
-          "line": 133,
-          "source": "sentence(\"mixedMale\", \"gen\" to gen), exerciseCopy(\"mixedExplanation\"),"
-        },
-        {
-          "line": 134,
-          "source": "listOf(FormChange(exerciseCopy(\"mixedChangeFrom\"), exerciseCopy(\"mixedChangeTo\"), exerciseCopy(\"mixedVerbReason\")),"
-        },
-        {
-          "line": 135,
-          "source": "FormChange(acc, gen, exerciseCopy(\"mixedNounReason\"))),"
-        },
-        {
-          "line": 136,
-          "source": "accepted = listOf(sentence(\"mixedFemale\", \"gen\" to gen)), tags = listOf(\"mixed\", \"gen\", \"past\"))"
-        },
-        {
-          "line": 137,
-          "source": "error(\"Unknown skill $skillId\")"
-        },
-        {
-          "line": 148,
-          "source": "val firstSkill = when (nounById(seed.nounId).gender) { Gender.F -> \"case.acc.f\"; Gender.N -> \"case.acc.n\"; else -> \"case.acc.m\" }"
-        },
-        {
-          "line": 150,
-          "source": "step(firstSkill, caseSentence(seed, GramCase.NOM), exerciseCopy(\"chainAccPrompt\"), sentence(\"seenAcc\", \"acc\" to acc), nom, acc,"
-        },
-        {
-          "line": 151,
-          "source": "exerciseCopy(\"chainAccReason\"), tags = listOf(\"acc\")),"
-        },
-        {
-          "line": 152,
-          "source": "step(\"verb.past\", sentence(\"seenAcc\", \"acc\" to acc), exerciseCopy(\"chainPastPrompt\"), sentence(\"chainPast\", \"acc\" to acc), exerciseCopy(\"chainPastChangeFrom\"), exerciseCopy(\"chainPastChangeTo\"),"
-        },
-        {
-          "line": 153,
-          "source": "exerciseCopy(\"chainPastReason\"), tags = listOf(\"past\", \"acc\")),"
-        },
-        {
-          "line": 154,
-          "source": "card(\"case.gen.neg\", seed, sentence(\"chainPast\", \"acc\" to acc), exerciseCopy(\"chainNegPrompt\"), sentence(\"chainNeg\", \"gen\" to gen), exerciseCopy(\"chainNegReason\"),"
-        },
-        {
-          "line": 155,
-          "source": "listOf(FormChange(\"\", exerciseCopy(\"negationParticle\"), exerciseCopy(\"negationInsertionReason\")), FormChange(acc, gen, exerciseCopy(\"chainNegReason\"))), tags = listOf(\"gen\", \"negation\")),"
-        },
-        {
-          "line": 156,
-          "source": "step(\"agreement.my\", sentence(\"chainNeg\", \"gen\" to gen), exerciseCopy(\"chainOwnerPrompt\"), sentence(\"chainOwner\", \"theirGen\" to theirGen),"
-        },
-        {
-          "line": 157,
-          "source": "gen, theirGen, exerciseCopy(\"chainOwnerReason\"), PossessiveId.THEIR, listOf(\"gen\", \"agreement\")),"
-        },
-        {
-          "line": 158,
-          "source": "step(\"case.loc\", sentence(\"chainOwner\", \"theirGen\" to theirGen), exerciseCopy(\"chainLocPrompt\"), sentence(\"chainLoc\", \"theirLoc\" to theirLoc),"
-        },
-        {
-          "line": 159,
-          "source": "theirGen, theirLoc, exerciseCopy(\"chainLocReason\"), PossessiveId.THEIR, listOf(\"loc\")),"
+          "line": 40,
+          "source": "possessive = PossessiveId.fromId(slots.getValue(\"owner\")), number = NumberGram.fromId(slots.getValue(\"number\")),"
         }
       ]
     },
     {
-      "path": "kotlin/shared/src/commonMain/kotlin/polski/grammar/GrammarEngine.kt",
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/grammar/PackMorphology.kt",
       "owner": "production source audit",
       "migrationStatus": "classified in inventory-decisions.json; review Evidence.md for acceptance",
-      "sha256": "97c3a70015fe7cfc49e0114538ae8f93acfb5fe547633e34cacaa288f769c629",
+      "sha256": "d669fafc3d5daa3ac744cb4f4db6fb95d39e38c886f7f0e6c4dc4088fe7a1c25",
       "literalLines": [
         {
-          "line": 16,
-          "source": "?: error(\"No adjective form $id/${gender.id}\")"
+          "line": 23,
+          "source": "* UniversalCorePlan.md §5.1/§5.3/§12 UC-08: pl's morphology (noun/adjective/possessive/verb forms"
         },
         {
           "line": 25,
-          "source": "forms.plural.getValue(if (gender == Gender.M_PERSONAL) \"m-personal\" else \"other\").getValue(gramCase)"
+          "source": "* [plMorphology] (`:core-engine`'s `TableMorphology`, built from `forms.generated.json`) instead"
         },
         {
-          "line": 44,
+          "line": 26,
+          "source": "* of the deleted `GrammarEngine`'s hand-written declension/suffix rules. Exhaustively proven"
+        },
+        {
+          "line": 28,
+          "source": "* `TableMorphologyParityTest`/`GrammarParityTest` before this switch."
+        },
+        {
+          "line": 31,
+          "source": "plMorphology.form(\"noun:$id\", mapOf(NumberFeature to number.toFeatureValue(), CaseFeature to gramCase.toFeatureValue()))"
+        },
+        {
+          "line": 35,
+          "source": "\"adjective:$id\","
+        },
+        {
+          "line": 42,
+          "source": "\"possessive:${id.id}\","
+        },
+        {
+          "line": 61,
           "source": "return parts.joinToString(\" \")"
         },
         {
-          "line": 51,
-          "source": "if (verb.aspect == Aspect.PERFECTIVE) error(\"Perfective verbs have no present tense\")"
+          "line": 67,
+          "source": "if (tense == Tense.PRESENT && verb.aspect == Aspect.PERFECTIVE) error(\"Perfective verbs have no present tense\")"
         },
         {
-          "line": 52,
-          "source": "return present ?: error(\"No present\")"
+          "line": 74,
+          "source": "return plMorphology.form(\"verb:$id\", bundle)"
         },
         {
-          "line": 58,
-          "source": "if (verb.futureType == FutureType.PRESENT) return present ?: error(\"No future\")"
-        },
-        {
-          "line": 59,
-          "source": "return \"$future ${verb.lemma}\""
-        },
-        {
-          "line": 64,
-          "source": "Person.FIRST -> if (shortSuffix) \"m\" else \"em\""
-        },
-        {
-          "line": 65,
-          "source": "Person.SECOND -> if (shortSuffix) \"ś\" else \"eś\""
-        },
-        {
-          "line": 66,
-          "source": "Person.THIRD -> \"\""
-        },
-        {
-          "line": 70,
-          "source": "Person.FIRST -> \"śmy\""
-        },
-        {
-          "line": 71,
-          "source": "Person.SECOND -> \"ście\""
-        },
-        {
-          "line": 72,
-          "source": "Person.THIRD -> \"\""
-        },
-        {
-          "line": 89,
+          "line": 79,
           "source": "if (gramCase == GramCase.VOC) return capitalize(phrase) + \"!\""
         },
         {
-          "line": 91,
+          "line": 81,
           "source": "return \"$prefix $phrase.\""
         }
       ]
@@ -2594,11 +2330,11 @@
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/TrainingWebApp.kt",
       "owner": "production source audit",
       "migrationStatus": "classified in inventory-decisions.json; review Evidence.md for acceptance",
-      "sha256": "68722bbefeda5926dea0cc9c4cd4fcff7c389c220583f1deb15624e5ea2dd836",
+      "sha256": "188acb630b71a3f7d4d3a23f583f1277839f27690af85c23df3dbc26a32cea9b",
       "literalLines": [
         {
           "line": 56,
-          "source": "ExerciseFactory(RandomSource { Random.nextDouble() }, ExerciseIdFactory { \"web-${++nextId}\" }),"
+          "source": "PlExerciseEngine(RandomSource { Random.nextDouble() }, ExerciseIdFactory { \"web-${++nextId}\" }),"
         },
         {
           "line": 96,
@@ -9444,6 +9180,406 @@
       ]
     },
     {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/PlEngine.kt",
+      "owner": "production source audit",
+      "migrationStatus": "classified in inventory-decisions.json; review Evidence.md for acceptance",
+      "sha256": "69eeb438abe731828492fead7dd6e8c119fd39cb6998375de17519302275a0b7",
+      "literalLines": [
+        {
+          "line": 34,
+          "source": "* UniversalCorePlan.md §5.1/§5.3/§12 UC-08: pl-ru's real pack data"
+        },
+        {
+          "line": 35,
+          "source": "* (`courses/lang/pl/curriculum.json`, UC-06; `realization.json`/`exercise-recipes.json`, UC-07;"
+        },
+        {
+          "line": 36,
+          "source": "* `forms.generated.json`, UC-05) wired to `:core-engine`'s generic `TableMorphology`/"
+        },
+        {
+          "line": 37,
+          "source": "* `ConstructionRealizer`/`ExerciseGenerator` — the live path, replacing the deleted"
+        },
+        {
+          "line": 38,
+          "source": "* `GrammarEngine`/`ExerciseFactory`'s hand-written rules. [polski.grammar]'s morphology functions"
+        },
+        {
+          "line": 43,
+          "source": "Json.parseToJsonElement(json).jsonObject[\"forms\"]!!.jsonObject.mapValues { (_, entries) ->"
+        },
+        {
+          "line": 45,
+          "source": "val bundle: FeatureBundle = entry.jsonObject[\"bundle\"]!!.jsonObject"
+        },
+        {
+          "line": 48,
+          "source": "bundle to entry.jsonObject[\"form\"]!!.jsonPrimitive.content"
+        },
+        {
+          "line": 55,
+          "source": "/** The pack's own [TableMorphology] — also the source of every matrix/reference form (UC-08). */"
+        },
+        {
+          "line": 58,
+          "source": "/** A noun's inherent `Gender` (§5.1's [LexemeFeatures]) — the only cross-slot agreement fact pl needs. */"
+        },
+        {
+          "line": 59,
+          "source": "val plLexemeFeatures = LexemeFeatures { nounId -> mapOf(FeatureKey(\"Gender\") to FeatureValue(nounById(nounId).gender.id)) }"
+        },
+        {
+          "line": 62,
+          "source": "private val plSeeds by lazy { courseSentenceSeeds.map { mapOf(\"noun\" to it.nounId, \"adjective\" to it.adjectiveId) } }"
+        },
+        {
+          "line": 64,
+          "source": "/** Builds the live [ExerciseGenerator] for one session's [random]/[ids] ports. */"
+        },
+        {
+          "line": 83,
+          "source": "/** The chain's 5 fixed steps with step 1's skill resolved for [nounId]'s own gender (UniversalCorePlan.md §5.3). */"
+        },
+        {
+          "line": 86,
+          "source": "val firstSkill = plRecipeSet.firstSkillByGender[gender] ?: plRecipeSet.firstSkillByGender.getValue(\"default\")"
+        }
+      ]
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/core/RecipeLoader.kt",
+      "owner": "production source audit",
+      "migrationStatus": "classified in inventory-decisions.json; review Evidence.md for acceptance",
+      "sha256": "fc41ee6fc18952856c41468e6d55a11128a8862c9fa28fe4cf1d29a5ac0eee80",
+      "literalLines": [
+        {
+          "line": 24,
+          "source": "* UniversalCorePlan.md §3.1/§5.1/§12 UC-07/UC-08: parses `lang/pl/realization.json`/`exercise-"
+        },
+        {
+          "line": 25,
+          "source": "* recipes.json` (embedded at build time by `shared/build.gradle.kts`'s `generateFormsFixtureSource`)"
+        },
+        {
+          "line": 26,
+          "source": "* into the plain [ConstructionTemplate]/[SkillRecipe]/[ChainStepRecipe] `:core-engine` types —"
+        },
+        {
+          "line": 27,
+          "source": "* manual `JsonElement` navigation, matching `polski.training.Curriculum`'s convention (no"
+        },
+        {
+          "line": 28,
+          "source": "* `@Serializable` compiler plugin applied). Pure parsing; every Polish/Russian string it touches"
+        },
+        {
+          "line": 32,
+          "source": "Json.parseToJsonElement(json).jsonObject.getValue(\"constructions\").jsonObject.mapValues { (_, v) -> v.jsonObject.toTemplate() }"
+        },
+        {
+          "line": 35,
+          "source": "slots = getValue(\"slots\").jsonArray.map { it.jsonObject.toSlot() },"
+        },
+        {
+          "line": 36,
+          "source": "govFeature = this[\"govFeature\"]?.jsonPrimitive?.contentOrNull,"
+        },
+        {
+          "line": 37,
+          "source": "govDefault = this[\"govDefault\"]?.jsonPrimitive?.contentOrNull,"
+        },
+        {
+          "line": 38,
+          "source": "govWhen = this[\"govWhen\"]?.jsonObject?.toStringMap() ?: emptyMap(),"
+        },
+        {
+          "line": 42,
+          "source": "name = getValue(\"name\").jsonPrimitive.content,"
+        },
+        {
+          "line": 43,
+          "source": "category = getValue(\"category\").jsonPrimitive.content,"
+        },
+        {
+          "line": 44,
+          "source": "optional = this[\"optional\"]?.jsonPrimitive?.boolean ?: false,"
+        },
+        {
+          "line": 45,
+          "source": "requiredFeatures = this[\"requiredFeatures\"]?.jsonArray?.map { it.jsonPrimitive.content } ?: emptyList(),"
+        },
+        {
+          "line": 46,
+          "source": "requiredFeaturesWhen = this[\"requiredFeaturesWhen\"]?.jsonObject?.mapValues { (_, v) -> v.jsonArray.map { it.jsonPrimitive.content } } ?: emptyMap(),"
+        },
+        {
+          "line": 47,
+          "source": "agreementSource = this[\"agreementSource\"]?.jsonPrimitive?.contentOrNull,"
+        },
+        {
+          "line": 56,
+          "source": "/** The pack's own defaults (UniversalCorePlan.md §1.3 principle #3) — never assumed by `:core-engine` itself. */"
+        },
+        {
+          "line": 64,
+          "source": "skills = root.getValue(\"skills\").jsonObject.mapValues { (id, v) -> v.jsonObject.toSkillRecipe(id) },"
+        },
+        {
+          "line": 65,
+          "source": "chain = root.getValue(\"chain\").jsonArray.map { it.jsonObject.toChainStep() },"
+        },
+        {
+          "line": 66,
+          "source": "firstSkillByGender = root.getValue(\"firstSkillByGender\").jsonObject.toStringMap(),"
+        },
+        {
+          "line": 67,
+          "source": "defaultOwnerLexeme = root.getValue(\"defaultOwnerLexeme\").jsonPrimitive.content,"
+        },
+        {
+          "line": 68,
+          "source": "verbLexeme = root.getValue(\"verbLexeme\").jsonPrimitive.content,"
+        },
+        {
+          "line": 73,
+          "source": "skillId = this[\"skillId\"]?.jsonPrimitive?.content ?: id,"
+        },
+        {
+          "line": 74,
+          "source": "source = this[\"source\"]?.jsonObject?.toTextSpec() ?: TextSpec.Direct(TextValue.Literal(\"\")),"
+        },
+        {
+          "line": 75,
+          "source": "expected = this[\"expected\"]?.jsonObject?.toTextSpec() ?: TextSpec.Direct(TextValue.Literal(\"\")),"
+        },
+        {
+          "line": 76,
+          "source": "promptKey = this[\"promptKey\"]?.jsonPrimitive?.content ?: \"\","
+        },
+        {
+          "line": 77,
+          "source": "explanationKey = this[\"explanationKey\"]?.jsonPrimitive?.content ?: \"\","
+        },
+        {
+          "line": 78,
+          "source": "changes = this[\"changes\"]?.jsonArray?.map { it.jsonObject.toChangeSpec() } ?: emptyList(),"
+        },
+        {
+          "line": 79,
+          "source": "accepted = this[\"accepted\"]?.jsonArray?.map { it.jsonObject.toTextSpec() } ?: emptyList(),"
+        },
+        {
+          "line": 80,
+          "source": "tags = this[\"tags\"]?.jsonArray?.map { it.jsonPrimitive.content } ?: emptyList(),"
+        },
+        {
+          "line": 81,
+          "source": "includeNounGenderTag = this[\"includeNounGenderTag\"]?.jsonPrimitive?.boolean ?: false,"
+        },
+        {
+          "line": 82,
+          "source": "ownerDraw = this[\"ownerDraw\"]?.jsonObject?.toOwnerDraw(),"
+        },
+        {
+          "line": 83,
+          "source": "numberOverride = this[\"numberOverride\"]?.jsonPrimitive?.contentOrNull,"
+        },
+        {
+          "line": 84,
+          "source": "staticOverride = this[\"staticOverride\"]?.jsonObject?.toStaticExercise(),"
+        },
+        {
+          "line": 88,
+          "source": "skillId = this[\"skillId\"]?.jsonPrimitive?.content ?: \"\","
+        },
+        {
+          "line": 89,
+          "source": "source = getValue(\"source\").jsonObject.toTextSpec(),"
+        },
+        {
+          "line": 90,
+          "source": "expected = getValue(\"expected\").jsonObject.toTextSpec(),"
+        },
+        {
+          "line": 91,
+          "source": "promptKey = getValue(\"promptKey\").jsonPrimitive.content,"
+        },
+        {
+          "line": 92,
+          "source": "explanationKey = getValue(\"explanationKey\").jsonPrimitive.content,"
+        },
+        {
+          "line": 93,
+          "source": "changes = getValue(\"changes\").jsonArray.map { it.jsonObject.toChangeSpec() },"
+        },
+        {
+          "line": 94,
+          "source": "tags = this[\"tags\"]?.jsonArray?.map { it.jsonPrimitive.content } ?: emptyList(),"
+        },
+        {
+          "line": 95,
+          "source": "ownerOut = getValue(\"ownerOut\").jsonPrimitive.content,"
+        },
+        {
+          "line": 99,
+          "source": "pool = getValue(\"pool\").jsonArray.map { it.jsonPrimitive.content },"
+        },
+        {
+          "line": 100,
+          "source": "labelKeys = getValue(\"labelKeys\").jsonObject.toStringMap(),"
+        },
+        {
+          "line": 101,
+          "source": "promptPrefixKey = getValue(\"promptPrefixKey\").jsonPrimitive.content,"
+        },
+        {
+          "line": 102,
+          "source": "promptSuffixKey = getValue(\"promptSuffixKey\").jsonPrimitive.content,"
+        },
+        {
+          "line": 106,
+          "source": "sourceKey = getValue(\"sourceKey\").jsonPrimitive.content,"
+        },
+        {
+          "line": 107,
+          "source": "promptKey = getValue(\"promptKey\").jsonPrimitive.content,"
+        },
+        {
+          "line": 108,
+          "source": "expectedKey = getValue(\"expectedKey\").jsonPrimitive.content,"
+        },
+        {
+          "line": 109,
+          "source": "explanationKey = getValue(\"explanationKey\").jsonPrimitive.content,"
+        },
+        {
+          "line": 110,
+          "source": "acceptedKeys = getValue(\"acceptedKeys\").jsonArray.map { it.jsonPrimitive.content },"
+        },
+        {
+          "line": 111,
+          "source": "changeFromKey = getValue(\"changeFromKey\").jsonPrimitive.content,"
+        },
+        {
+          "line": 112,
+          "source": "changeToKey = getValue(\"changeToKey\").jsonPrimitive.content,"
+        },
+        {
+          "line": 113,
+          "source": "changeReasonKey = getValue(\"changeReasonKey\").jsonPrimitive.content,"
+        },
+        {
+          "line": 114,
+          "source": "nounId = getValue(\"nounId\").jsonPrimitive.content,"
+        },
+        {
+          "line": 115,
+          "source": "adjectiveId = getValue(\"adjectiveId\").jsonPrimitive.content,"
+        },
+        {
+          "line": 116,
+          "source": "tags = getValue(\"tags\").jsonArray.map { it.jsonPrimitive.content },"
+        },
+        {
+          "line": 120,
+          "source": "from = getValue(\"from\").jsonObject.toTextValue(),"
+        },
+        {
+          "line": 121,
+          "source": "to = getValue(\"to\").jsonObject.toTextValue(),"
+        },
+        {
+          "line": 122,
+          "source": "reason = getValue(\"reason\").jsonObject.toReasonSpec(),"
+        },
+        {
+          "line": 125,
+          "source": "private fun JsonObject.toReasonSpec(): ReasonSpec = when (getValue(\"type\").jsonPrimitive.content) {"
+        },
+        {
+          "line": 126,
+          "source": "\"fixed\" -> ReasonSpec.Fixed(getValue(\"key\").jsonPrimitive.content)"
+        },
+        {
+          "line": 127,
+          "source": "\"classified\" -> ReasonSpec.Classified("
+        },
+        {
+          "line": 128,
+          "source": "getValue(\"rules\").jsonArray.map { it.jsonObject.let { rule -> ReasonRule(rule.getValue(\"whenClass\").jsonPrimitive.content, rule.getValue(\"key\").jsonPrimitive.content) } },"
+        },
+        {
+          "line": 130,
+          "source": "else -> error(\"Unknown reason type in ${this}\")"
+        },
+        {
+          "line": 133,
+          "source": "private fun JsonObject.toTextSpec(): TextSpec = when (getValue(\"type\").jsonPrimitive.content) {"
+        },
+        {
+          "line": 134,
+          "source": "\"direct\" -> TextSpec.Direct(getValue(\"value\").jsonObject.toTextValue())"
+        },
+        {
+          "line": 135,
+          "source": "\"pattern\" -> TextSpec.Pattern(getValue(\"key\").jsonPrimitive.content, getValue(\"values\").jsonObject.mapValues { (_, v) -> v.jsonObject.toTextValue() })"
+        },
+        {
+          "line": 136,
+          "source": "\"concat\" -> TextSpec.Concat(getValue(\"parts\").jsonArray.map { it.jsonObject.toTextValue() })"
+        },
+        {
+          "line": 137,
+          "source": "\"prefixed\" -> TextSpec.Prefixed(getValue(\"spec\").jsonObject.toPhraseSpec(), getValue(\"prefixCase\").jsonPrimitive.content, getValue(\"punct\").jsonPrimitive.content)"
+        },
+        {
+          "line": 138,
+          "source": "else -> error(\"Unknown TextSpec type in $this\")"
+        },
+        {
+          "line": 141,
+          "source": "private fun JsonObject.toTextValue(): TextValue = when (getValue(\"type\").jsonPrimitive.content) {"
+        },
+        {
+          "line": 142,
+          "source": "\"copy\" -> TextValue.Copy(getValue(\"key\").jsonPrimitive.content)"
+        },
+        {
+          "line": 143,
+          "source": "\"literal\" -> TextValue.Literal(getValue(\"value\").jsonPrimitive.content)"
+        },
+        {
+          "line": 144,
+          "source": "\"phrase\" -> TextValue.Phrase(getValue(\"spec\").jsonObject.toPhraseSpec())"
+        },
+        {
+          "line": 145,
+          "source": "\"capitalized\" -> TextValue.Capitalized(getValue(\"inner\").jsonObject.toTextValue())"
+        },
+        {
+          "line": 146,
+          "source": "\"pronoun\" -> TextValue.Pronoun(getValue(\"genderToKey\").jsonObject.toStringMap(), getValue(\"case\").jsonPrimitive.content)"
+        },
+        {
+          "line": 147,
+          "source": "else -> error(\"Unknown TextValue type in $this\")"
+        },
+        {
+          "line": 151,
+          "source": "construction = getValue(\"construction\").jsonPrimitive.content,"
+        },
+        {
+          "line": 152,
+          "source": "bundle = getValue(\"bundle\").jsonObject.toStringMap(),"
+        },
+        {
+          "line": 153,
+          "source": "ownerLexeme = this[\"ownerLexeme\"]?.jsonPrimitive?.contentOrNull,"
+        }
+      ]
+    },
+    {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/model/Exercise.kt",
       "owner": "production source audit",
       "migrationStatus": "classified in inventory-decisions.json; review Evidence.md for acceptance",
@@ -9454,7 +9590,7 @@
       "path": "kotlin/shared/src/commonMain/kotlin/polski/model/Grammar.kt",
       "owner": "production source audit",
       "migrationStatus": "classified in inventory-decisions.json; review Evidence.md for acceptance",
-      "sha256": "d7043da42e3a9decb6c8067a932d8f5f6a8338c76650169cb51ed07f7c0ad829",
+      "sha256": "cb30f3fe410138b84c5614141cfaca5f99f67168307ca187ad113b6c33faa0c1",
       "literalLines": [
         {
           "line": 7,
@@ -9514,7 +9650,7 @@
         },
         {
           "line": 47,
-          "source": "* (`fromId`, `.id` unchanged, still the only types [polski.grammar.GrammarEngine]/"
+          "source": "* (`fromId`, `.id` unchanged, still the only types `polski.grammar` (`PackMorphology.kt`)/"
         },
         {
           "line": 49,
@@ -10318,7 +10454,7 @@
       "path": "kotlin/shared/src/commonMain/kotlin/polski/presentation/TrainingStore.kt",
       "owner": "production source audit",
       "migrationStatus": "classified in inventory-decisions.json; review Evidence.md for acceptance",
-      "sha256": "ddb1a20d9cb41382892d4204afc04048d4301d440f403ef517e4cdc1ea3b9d36",
+      "sha256": "2fc16aeb7efa8d6271fa203bb28f5283fb1688a641f11c4b9c6426d38ecd1ffd",
       "literalLines": [
         {
           "line": 59,
@@ -11529,7 +11665,7 @@
       "path": "kotlin/shared/src/iosMain/kotlin/polski/ios/IosSession.kt",
       "owner": "production source audit",
       "migrationStatus": "classified in inventory-decisions.json; review Evidence.md for acceptance",
-      "sha256": "4b347002af1685e023503d11d41b4589cc15e0cf58e35f35662baf97f723a349",
+      "sha256": "b4fc40e5f828cbed90742304d9ae5bdf63a6d7feabdc7e03606b642ee3a81b2f",
       "literalLines": [
         {
           "line": 34,
@@ -11673,7 +11809,7 @@
         },
         {
           "line": 164,
-          "source": "ExerciseFactory(RandomSource { Random.nextDouble() }, ExerciseIdFactory { \"ios-${++nextId}\" }),"
+          "source": "PlExerciseEngine(RandomSource { Random.nextDouble() }, ExerciseIdFactory { \"ios-${++nextId}\" }),"
         },
         {
           "line": 168,
@@ -12177,7 +12313,7 @@
       "path": "kotlin/shared/src/macosMain/kotlin/polski/macos/MacSession.kt",
       "owner": "production source audit",
       "migrationStatus": "classified in inventory-decisions.json; review Evidence.md for acceptance",
-      "sha256": "ef1d087bdb7a150a9c25cc63756c6db870a6f6982621e85eb33a045a1b34fc10",
+      "sha256": "ca5ee1888480d808924f47be88f63e2f0fb595cf7f07540818e788cc0cd8d3ad",
       "literalLines": [
         {
           "line": 37,
@@ -12289,7 +12425,7 @@
         },
         {
           "line": 158,
-          "source": "ExerciseFactory(RandomSource { Random.nextDouble() }, ExerciseIdFactory { \"mac-${++nextId}\" }),"
+          "source": "PlExerciseEngine(RandomSource { Random.nextDouble() }, ExerciseIdFactory { \"mac-${++nextId}\" }),"
         },
         {
           "line": 162,
@@ -14352,7 +14488,7 @@
       "path": "kotlin/composeApp/src/desktopMain/kotlin/polski/desktop/Main.kt",
       "owner": "production source audit",
       "migrationStatus": "classified in inventory-decisions.json; review Evidence.md for acceptance",
-      "sha256": "35eaca3a850d579d85221b0f799446b7e5b5b3fec42b8fcdbb471b89c59e6208",
+      "sha256": "a275f361839db1560a7a052eaf3140d34fb91ccb089ba6c6eb9241a7ce49ce82",
       "literalLines": [
         {
           "line": 119,
@@ -14372,7 +14508,7 @@
         },
         {
           "line": 159,
-          "source": "ExerciseFactory(RandomSource { Random.nextDouble() }, ExerciseIdFactory { \"desktop-${++nextId}\" }),"
+          "source": "PlExerciseEngine(RandomSource { Random.nextDouble() }, ExerciseIdFactory { \"desktop-${++nextId}\" }),"
         },
         {
           "line": 174,
@@ -16821,7 +16957,7 @@
       "path": "kotlin/androidApp/src/main/java/dev/polski/grammarmatrix/AndroidSessionViewModel.kt",
       "owner": "production source audit",
       "migrationStatus": "classified in inventory-decisions.json; review Evidence.md for acceptance",
-      "sha256": "5586c36cb0d931bffeb92f645b7d96f68ae9cf3cab7078ae74bd7888bd22d259",
+      "sha256": "d78ab51a342904f2caa8cbefa109fa3967b9fd5fdde662bc7a1e83a01bcb7c12",
       "literalLines": [
         {
           "line": 53,
@@ -16833,7 +16969,7 @@
         },
         {
           "line": 87,
-          "source": "ExerciseFactory(RandomSource { Random.nextDouble() }, ExerciseIdFactory { \"android-${++nextId}\" }),"
+          "source": "PlExerciseEngine(RandomSource { Random.nextDouble() }, ExerciseIdFactory { \"android-${++nextId}\" }),"
         },
         {
           "line": 90,

@@ -12,9 +12,9 @@ import polski.grammar.nounPhrase
 import polski.model.GramCase
 import polski.presentation.AppUiState
 import polski.presentation.CardPhase
-import polski.training.ExerciseFactory
-import polski.training.ExerciseIdFactory
-import polski.training.RandomSource
+import polski.training.PlExerciseEngine
+import polski.core.engine.ExerciseIdFactory
+import polski.core.engine.RandomSource
 import polski.training.sentenceSeeds
 
 // ContrastHighlightPlan.md §5 ("панелей «под рукой»: целевая строка не подсвечивается, её «стало»
@@ -23,7 +23,7 @@ import polski.training.sentenceSeeds
 class IosReferencePanelLeakTest {
     @Test
     fun referenceRowMatchingTargetCaseHidesItsFormBeforeReveal() {
-        val exercise = ExerciseFactory(RandomSource { 0.1 }, ExerciseIdFactory { "ios-ref-leak" })
+        val exercise = PlExerciseEngine(RandomSource { 0.1 }, ExerciseIdFactory { "ios-ref-leak" })
             .generateChain(sentenceSeeds.first()).first { it.tags.any { tag -> GramCase.entries.any { it.id == tag } } }
         val targetCase = GramCase.entries.first { it.id in exercise.tags }
         val expectedForm = nounPhrase(exercise.nounId, targetCase, exercise.number, exercise.adjectiveId, exercise.possessive)

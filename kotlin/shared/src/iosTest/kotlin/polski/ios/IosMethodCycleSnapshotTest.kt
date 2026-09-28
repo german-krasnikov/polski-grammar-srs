@@ -13,15 +13,15 @@ import polski.presentation.AnswerMode
 import polski.presentation.CardPhase
 import polski.presentation.StyleId
 import polski.presentation.StyleRegistry
-import polski.training.ExerciseFactory
-import polski.training.ExerciseIdFactory
-import polski.training.RandomSource
+import polski.training.PlExerciseEngine
+import polski.core.engine.ExerciseIdFactory
+import polski.core.engine.RandomSource
 import polski.training.sentenceSeeds
 
 class IosMethodCycleSnapshotTest {
     @Test
     fun introQuestionAndFeedbackExposeOnlyTheirOwnMethodCopy() {
-        val exercise = ExerciseFactory(RandomSource { 0.1 }, ExerciseIdFactory { "ios-cycle" })
+        val exercise = PlExerciseEngine(RandomSource { 0.1 }, ExerciseIdFactory { "ios-cycle" })
             .generateChain(sentenceSeeds.first()).first()
         val presentation = presentationBySkillId(exercise.primarySkill)
         val base = AppUiState(exercise = exercise, chain = listOf(exercise), phase = CardPhase.Question,

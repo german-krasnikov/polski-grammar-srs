@@ -27,9 +27,9 @@ import polski.presentation.TrainingStore
 import polski.presentation.cardEffectFor
 import polski.srs.FsrsScheduler
 import polski.srs.Rating
-import polski.training.ExerciseFactory
-import polski.training.ExerciseIdFactory
-import polski.training.RandomSource
+import polski.training.PlExerciseEngine
+import polski.core.engine.ExerciseIdFactory
+import polski.core.engine.RandomSource
 
 /** SwiftUI's one scene-owned entry point. Call [close] when the scene owner is released. */
 class IosSession(private val defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults) {
@@ -161,7 +161,7 @@ class IosSession(private val defaults: NSUserDefaults = NSUserDefaults.standardU
 
     private fun newStore(): TrainingStore = TrainingStore(
         repository, scheduler,
-        ExerciseFactory(RandomSource { Random.nextDouble() }, ExerciseIdFactory { "ios-${++nextId}" }),
+        PlExerciseEngine(RandomSource { Random.nextDouble() }, ExerciseIdFactory { "ios-${++nextId}" }),
         TimeSource {
             val now = Clock.System.now()
             val formatter = NSDateFormatter().apply {

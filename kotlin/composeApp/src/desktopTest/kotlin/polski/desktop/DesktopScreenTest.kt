@@ -55,9 +55,9 @@ import polski.presentation.MatrixSelection
 import polski.progress.ProgressCodec
 import polski.srs.FsrsScheduler
 import polski.srs.Rating
-import polski.training.ExerciseFactory
-import polski.training.ExerciseIdFactory
-import polski.training.RandomSource
+import polski.training.PlExerciseEngine
+import polski.core.engine.ExerciseIdFactory
+import polski.core.engine.RandomSource
 import polski.training.sentenceSeeds
 import polski.ui.screens.MatrixScreen
 import polski.ui.screens.ProgressScreen
@@ -67,7 +67,7 @@ class DesktopScreenTest {
     @OptIn(ExperimentalTestApi::class)
     @Test
     fun spaceOnFocusedMethodButtonDoesNotRevealCard() = runComposeUiTest {
-        val exercise = ExerciseFactory(RandomSource { 0.1 }, ExerciseIdFactory { "desktop-space-focus" })
+        val exercise = PlExerciseEngine(RandomSource { 0.1 }, ExerciseIdFactory { "desktop-space-focus" })
             .generateChain(sentenceSeeds.first()).first()
         val actions = mutableListOf<AppAction>()
         setContent {
@@ -90,7 +90,7 @@ class DesktopScreenTest {
     @OptIn(ExperimentalTestApi::class)
     @Test
     fun narrowLargeTextStillExposesExplicitReveal() = runComposeUiTest {
-        val exercise = ExerciseFactory(RandomSource { 0.1 }, ExerciseIdFactory { "desktop-narrow" })
+        val exercise = PlExerciseEngine(RandomSource { 0.1 }, ExerciseIdFactory { "desktop-narrow" })
             .generateChain(sentenceSeeds.first()).first()
         val actions = mutableListOf<AppAction>()
         setContent {
@@ -115,7 +115,7 @@ class DesktopScreenTest {
     @OptIn(ExperimentalTestApi::class)
     @Test
     fun typedDraftSurvivesMethodSwitchUntilExplicitReveal() = runComposeUiTest {
-        val exercise = ExerciseFactory(RandomSource { 0.1 }, ExerciseIdFactory { "desktop-typed" })
+        val exercise = PlExerciseEngine(RandomSource { 0.1 }, ExerciseIdFactory { "desktop-typed" })
             .generateChain(sentenceSeeds.first()).first()
         var state by mutableStateOf(AppUiState(
             loadStatus = LoadStatus.Ready,
@@ -153,7 +153,7 @@ class DesktopScreenTest {
     @OptIn(ExperimentalTestApi::class)
     @Test
     fun firstEncounterShowsSourceAndIntroductionBeforeSameExercise() = runComposeUiTest {
-        val exercise = ExerciseFactory(RandomSource { 0.1 }, ExerciseIdFactory { "desktop-method-cycle" })
+        val exercise = PlExerciseEngine(RandomSource { 0.1 }, ExerciseIdFactory { "desktop-method-cycle" })
             .generateChain(sentenceSeeds.first()).first()
         var state by mutableStateOf(AppUiState(loadStatus = LoadStatus.Ready, exercise = exercise,
             chain = listOf(exercise), introPending = true, showReference = true, phase = CardPhase.Question))
@@ -199,7 +199,7 @@ class DesktopScreenTest {
     @OptIn(ExperimentalTestApi::class)
     @Test
     fun chainHeaderAndCompletionUseNativeCopyWithFiveAnswers() = runComposeUiTest {
-        val chain = ExerciseFactory(RandomSource { 0.1 }, ExerciseIdFactory { "desktop-chain-step" })
+        val chain = PlExerciseEngine(RandomSource { 0.1 }, ExerciseIdFactory { "desktop-chain-step" })
             .generateChain(sentenceSeeds.first())
         var state by mutableStateOf(AppUiState(loadStatus = LoadStatus.Ready, tab = AppTab.Training,
             chain = chain, exercise = chain.first(), phase = CardPhase.Question))
@@ -308,7 +308,7 @@ class DesktopScreenTest {
     @OptIn(ExperimentalTestApi::class)
     @Test
     fun trainingFrontKeepsAnswerHiddenUntilRevealAction() = runComposeUiTest {
-        val exercise = ExerciseFactory(RandomSource { 0.1 }, ExerciseIdFactory { "desktop-ui-card" })
+        val exercise = PlExerciseEngine(RandomSource { 0.1 }, ExerciseIdFactory { "desktop-ui-card" })
             .generateChain(sentenceSeeds.first()).first()
         val actions = mutableListOf<AppAction>()
         setContent {
@@ -329,7 +329,7 @@ class DesktopScreenTest {
     @OptIn(ExperimentalTestApi::class)
     @Test
     fun revealedTrainingHighlightsRuleAndOffersOnlyTwoRatings() = runComposeUiTest {
-        val exercise = ExerciseFactory(RandomSource { 0.1 }, ExerciseIdFactory { "desktop-ui-card" })
+        val exercise = PlExerciseEngine(RandomSource { 0.1 }, ExerciseIdFactory { "desktop-ui-card" })
             .generateChain(sentenceSeeds.first()).first()
         val actions = mutableListOf<AppAction>()
         setContent {

@@ -88,9 +88,9 @@ import polski.presentation.TrainingStore
 import polski.presentation.UiEffect
 import polski.srs.FsrsScheduler
 import polski.srs.Rating
-import polski.training.ExerciseFactory
-import polski.training.ExerciseIdFactory
-import polski.training.RandomSource
+import polski.training.PlExerciseEngine
+import polski.core.engine.ExerciseIdFactory
+import polski.core.engine.RandomSource
 import polski.training.sentenceSeeds
 import polski.ui.screens.MatrixScreen
 import polski.ui.screens.CaseReferenceScreen
@@ -156,7 +156,7 @@ private fun DesktopSession(
         var nextId = 0L
         TrainingStore(
             repository, scheduler,
-            ExerciseFactory(RandomSource { Random.nextDouble() }, ExerciseIdFactory { "desktop-${++nextId}" }),
+            PlExerciseEngine(RandomSource { Random.nextDouble() }, ExerciseIdFactory { "desktop-${++nextId}" }),
             TimeSource {
                 val at = Clock.System.now()
                 val localDay = java.time.Instant.ofEpochMilli(at.toEpochMilliseconds())

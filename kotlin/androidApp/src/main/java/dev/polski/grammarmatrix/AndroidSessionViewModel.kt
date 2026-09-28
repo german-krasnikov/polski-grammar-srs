@@ -28,9 +28,9 @@ import polski.presentation.UiEffect
 import polski.progress.DecodeResult
 import polski.progress.ProgressCodec
 import polski.srs.FsrsScheduler
-import polski.training.ExerciseFactory
-import polski.training.ExerciseIdFactory
-import polski.training.RandomSource
+import polski.training.PlExerciseEngine
+import polski.core.engine.ExerciseIdFactory
+import polski.core.engine.RandomSource
 import polski.vocabulary.VocabularySession
 import polski.preferences.Appearance
 import polski.preferences.Motion
@@ -84,7 +84,7 @@ class AndroidSessionViewModel(context: Context) : ViewModel() {
     private fun newStore() = TrainingStore(
         repository,
         scheduler,
-        ExerciseFactory(RandomSource { Random.nextDouble() }, ExerciseIdFactory { "android-${++nextId}" }),
+        PlExerciseEngine(RandomSource { Random.nextDouble() }, ExerciseIdFactory { "android-${++nextId}" }),
         TimeSource {
             val now = Clock.System.now()
             TimeCapture(now, SimpleDateFormat("yyyy-MM-dd", Locale.ROOT).format(Date(now.toEpochMilliseconds())))

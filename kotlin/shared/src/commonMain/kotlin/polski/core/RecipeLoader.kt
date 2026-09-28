@@ -21,12 +21,12 @@ import polski.core.engine.TextSpec
 import polski.core.engine.TextValue
 
 /**
- * UniversalCorePlan.md §3.1/§5.1/§12 UC-07: parses `lang/pl/realization.json`/`exercise-
- * recipes.json` (embedded at build time by `shared/build.gradle.kts`'s `generateFormsFixtureSource`,
- * test-only until UC-08) into the plain [ConstructionTemplate]/[SkillRecipe]/[ChainStepRecipe]
- * `:core-engine` types — manual `JsonElement` navigation, matching `polski.training.Curriculum`'s
- * convention (no `@Serializable` compiler plugin applied). Pure parsing; every Polish/Russian
- * string it touches is an opaque copy-key, never interpreted here.
+ * UniversalCorePlan.md §3.1/§5.1/§12 UC-07/UC-08: parses `lang/pl/realization.json`/`exercise-
+ * recipes.json` (embedded at build time by `shared/build.gradle.kts`'s `generateFormsFixtureSource`)
+ * into the plain [ConstructionTemplate]/[SkillRecipe]/[ChainStepRecipe] `:core-engine` types —
+ * manual `JsonElement` navigation, matching `polski.training.Curriculum`'s convention (no
+ * `@Serializable` compiler plugin applied). Pure parsing; every Polish/Russian string it touches
+ * is an opaque copy-key, never interpreted here.
  */
 fun parseConstructionTemplates(json: String): Map<String, ConstructionTemplate> =
     Json.parseToJsonElement(json).jsonObject.getValue("constructions").jsonObject.mapValues { (_, v) -> v.jsonObject.toTemplate() }

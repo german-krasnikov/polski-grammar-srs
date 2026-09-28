@@ -14,9 +14,10 @@ import kotlin.test.assertTrue
 /**
  * UniversalCorePlan.md §12 UC-06: `lang/pl/curriculum.json`'s 16 [polski.core.model.SkillSpec]
  * entries must carry the same `focus`/`fixed`/`lexicalFilter` as `ExerciseFactory.kt`'s
- * `when(skillId)` branches (:49-136) they are derived from — ExerciseFactory itself stays the
- * live path; this only proves the data is a faithful, checkable copy of what those branches do,
- * so a future generic engine (UC-07) can be verified against it instead of against prose.
+ * `when(skillId)` branches (:49-136) they are derived from — historical: `ExerciseFactory.kt`
+ * itself is deleted (UC-08), replaced by `polski.training.PlExerciseEngine`; this only proves
+ * the data is a faithful, checkable copy of what those branches did, which is what the generic
+ * engine (UC-07/UC-08) was verified against instead of against prose.
  *
  * `focus` and `lexicalFilter` are checked against actual branch parameters/conditions for all 16
  * skills. `fixed` is a genuine branch parameter — and checked as one — only for `verb.present`/

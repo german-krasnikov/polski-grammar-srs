@@ -30,9 +30,9 @@ import polski.presentation.TrainingStore
 import polski.presentation.cardEffectFor
 import polski.srs.FsrsScheduler
 import polski.srs.Rating
-import polski.training.ExerciseFactory
-import polski.training.ExerciseIdFactory
-import polski.training.RandomSource
+import polski.training.PlExerciseEngine
+import polski.core.engine.ExerciseIdFactory
+import polski.core.engine.RandomSource
 
 /** One SwiftUI window's semantic bridge. Swift never calculates ratings or FSRS dates. */
 class MacSession(directory: String) {
@@ -155,7 +155,7 @@ class MacSession(directory: String) {
 
     private fun newStore(): TrainingStore = TrainingStore(
         repository, scheduler,
-        ExerciseFactory(RandomSource { Random.nextDouble() }, ExerciseIdFactory { "mac-${++nextId}" }),
+        PlExerciseEngine(RandomSource { Random.nextDouble() }, ExerciseIdFactory { "mac-${++nextId}" }),
         TimeSource {
             val now = Clock.System.now()
             val formatter = NSDateFormatter().apply {
