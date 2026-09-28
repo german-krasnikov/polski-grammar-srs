@@ -13,6 +13,7 @@ const plSource = {
   repository: 'https://github.com/KubaCiolo/leksjo-dane',
   csvUrl: 'https://github.com/KubaCiolo/leksjo-dane/blob/01782aa92cc842d0d3199079eba47ecbf05879e1/dane/nkjp-frekwencja.csv',
   revision: '01782aa92cc842d0d3199079eba47ecbf05879e1',
+  license: 'CC BY 4.0',
   csvSha256: '4cd43eb6acb22fe19c83cdcdd408dc8519f0b583627ee3f00f31079871a208ca',
   jsonSha256: '4549d27b90ec4bb3e1ca9db55fcdd2256b91e28a25f0474cbd55f6a94e2a9a70',
 };
