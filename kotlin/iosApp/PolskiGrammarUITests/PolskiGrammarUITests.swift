@@ -1793,4 +1793,79 @@ final class PolskiGrammarUITests: XCTestCase {
         let expandedText = app.staticTexts.matching(NSPredicate(format: "label CONTAINS %@", "«je»")).firstMatch
         XCTAssertTrue(expandedText.waitForExistence(timeout: 5), app.debugDescription)
     }
+
+    /// EnRuPackPlan.md §4.2/§4.3, this task: a non-spoiling front-side hint, sourced from
+    /// `exercise.hasLifehack` (`IosSnapshot.kt`) — the pl-ru default skill on cold start now has
+    /// full 16-skill lifehack coverage (`27b4f4d`), so no `selectSkill` detour is needed. The badge
+    /// must never leak the tip text before reveal, and tapping it must not itself trigger reveal
+    /// (it sits inside `questionHeader`, which has its own tap-to-reveal gesture).
+    func testTaskCardShowsNonSpoilingLifehackBadgeOnFrontThatDoesNotReveal() {
+        let app = XCUIApplication()
+        app.launch()
+        XCTAssertTrue(app.staticTexts["To jest moja piękna żona."].waitForExistence(timeout: 20))
+        continueIntroductionIfPresent(app)
+        let badge = app.staticTexts["Есть лайфхак для этого навыка"]
+        for _ in 0..<7 {
+            if badge.exists { break }
+            app.swipeUp()
+        }
+        XCTAssertTrue(badge.waitForExistence(timeout: 5), app.debugDescription)
+        XCTAssertFalse(app.staticTexts["Эталон"].exists, "badge must not itself leak the answer face")
+        let capture = XCTAttachment(screenshot: app.screenshot())
+        capture.name = "lifehack-badge-front"
+        capture.lifetime = .keepAlways
+        add(capture)
+
+        badge.tap()
+        XCTAssertFalse(app.staticTexts["Эталон"].exists, "tapping the badge must not reveal the answer")
+        XCTAssertTrue(app.buttons["revealAnswer"].exists, "reveal control must remain offered, untouched")
+    }
+
+    /// EnRuPackPlan.md §4.3, this task: the pack-wide "Лайфхаки" section inside the Matrix tab —
+    /// a `Раздел` Picker option, not a new top-level tab — listing every skill's authored tips in
+    /// curriculum order (`pair.json`'s `skills[]` order, `LifehackProvider.listAll()`), each group
+    /// collapsible, mirroring the per-skill back-face disclosure (`LifehackEntryView`). pl-ru now has
+    /// full 16-skill coverage, so both the first (`case.acc.n`) and the last (`sentence.plural`)
+    /// curriculum skill have a group — proving curriculum order, not e.g. alphabetical Russian-title
+    /// order (which would put `agreement.my`'s "Мой, твой…" before any "Biernik" title).
+    func testMatrixLifehacksSectionListsAllSkillsInCurriculumOrderWithCollapsibleGroups() {
+        let app = XCUIApplication()
+        app.launch()
+        XCTAssertTrue(app.staticTexts["To jest moja piękna żona."].waitForExistence(timeout: 20))
+        continueIntroductionIfPresent(app)
+        app.buttons["Матрица"].firstMatch.tap()
+        let section = app.buttons.matching(NSPredicate(format: "label CONTAINS %@", "Раздел")).firstMatch
+        for _ in 0..<7 {
+            if section.isHittable { break }
+            app.swipeUp()
+        }
+        XCTAssertTrue(section.waitForExistence(timeout: 10), app.debugDescription)
+        section.tap()
+        let option = app.buttons["Лайфхаки"]
+        XCTAssertTrue(option.waitForExistence(timeout: 5), app.debugDescription)
+        option.tap()
+
+        let firstTitle = app.staticTexts["Biernik · средний род"]
+        for _ in 0..<7 {
+            if firstTitle.exists { break }
+            app.swipeUp()
+        }
+        XCTAssertTrue(firstTitle.waitForExistence(timeout: 5), app.debugDescription)
+
+        let toggle = app.buttons.matching(NSPredicate(format: "label == %@", "Лайфхак · источник: editorial")).firstMatch
+        XCTAssertTrue(toggle.waitForExistence(timeout: 5), app.debugDescription)
+        XCTAssertEqual(toggle.value as? String, "свёрнуто")
+        toggle.tap()
+        XCTAssertEqual(toggle.value as? String, "развёрнуто")
+        let captureExpanded = XCTAttachment(screenshot: app.screenshot())
+        captureExpanded.name = "matrix-lifehacks-section-expanded"
+        captureExpanded.lifetime = .keepAlways
+        add(captureExpanded)
+
+        for _ in 0..<25 {
+            if app.staticTexts["Единственное → множественное"].exists { break }
+            app.swipeUp()
+        }
+        XCTAssertTrue(app.staticTexts["Единственное → множественное"].waitForExistence(timeout: 5), app.debugDescription)
+    }
 }

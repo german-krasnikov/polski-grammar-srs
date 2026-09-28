@@ -934,23 +934,40 @@ private struct NativeContrastPairView: View {
 private struct MatrixView: View {
     @ObservedObject var model: AppModel
     @State private var comparisonCase = "NOM"
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    // This task's "Лайфхаки" listing (EnRuPackPlan.md §4.3) is a `Раздел` option like the other
+    // 4, but it has no counterpart in the shared `MatrixSection` enum (`AppUiState.kt`) — the
+    // `lifehackGroups` data it reads is a top-level, section-independent snapshot field (always
+    // fully computed, ADR-46), so there is nothing for a 5th bridged section to select. Kept as
+    // pure host-local UI state instead of growing the shared enum for a selection Kotlin never
+    // needs to know: non-nil overrides the bridge-driven `matrix.section` below; picking any of
+    // the other 4 options clears it back to `nil` and dispatches to the bridge as before.
+    @State private var localSection: String? = nil
     private var matrix: Record { model.state.record("matrix") }
+    private var section: String { localSection ?? matrix.string("section") }
 
     var body: some View {
         Form {
             Section {
                 Text(matrix.string("matrixIntroduction"))
-                Picker("Раздел", selection: Binding(get: { matrix.string("section") }, set: { model.send("matrixSection", $0) })) {
+                Picker("Раздел", selection: Binding(get: { section }, set: { newValue in
+                    if newValue == "Lifehacks" { localSection = "Lifehacks" } else {
+                        localSection = nil
+                        model.send("matrixSection", newValue)
+                    }
+                })) {
                     Text("Карта системы").tag("Map")
                     Text("Падежи и окончания").tag("Cases")
                     Text("Времена и лица").tag("Verbs")
                     Text("Местоимения").tag("Pronouns")
+                    Text("Лайфхаки").tag("Lifehacks")
                 }
             }
-            switch matrix.string("section") {
+            switch section {
             case "Cases": cases
             case "Verbs": verbs
             case "Pronouns": pronouns
+            case "Lifehacks": lifehacks
             default: map
             }
         }
@@ -1142,6 +1159,32 @@ private struct MatrixView: View {
                 }.accessibilityElement(children: .combine)
             }
             Button("Тренировать смену владельца") { model.send("skill", "agreement.my") }
+        }
+    }
+
+    /// EnRuPackPlan.md §4.3's pack-wide "Лайфхаки" listing, from `IosSnapshot.kt`'s top-level
+    /// `lifehackGroups` (`LifehackProvider.listAll()`, ADR-46) — one `Form` `Section` per skill/
+    /// topic that actually has an authored tip, already in curriculum order (real skill titles),
+    /// each with its own collapsible entries (same [LifehackEntryView] the per-skill card back
+    /// face uses, `FlashCardView.swift`). Works for whichever pack is active (pl-ru or en-ru,
+    /// EN-22's picker) — this reads nothing pack-specific itself. Absent entirely (no empty
+    /// section) when the active pack has no authored lifehacks at all yet.
+    @ViewBuilder private var lifehacks: some View {
+        let groups = model.state.rows("lifehackGroups")
+        if groups.isEmpty {
+            Section("Лайфхаки") {
+                Text("Для этого набора лайфхаков пока нет.").foregroundStyle(.secondary)
+            }
+        } else {
+            ForEach(Array(groups.enumerated()), id: \.offset) { groupIndex, group in
+                Section(group.string("title")) {
+                    let hacks = group.rows("lifehacks")
+                    ForEach(Array(hacks.enumerated()), id: \.offset) { index, hack in
+                        LifehackEntryView(hack: hack, index: index, reduceMotion: reduceMotion,
+                            identifierPrefix: "matrixLifehack-\(groupIndex)")
+                    }
+                }
+            }
         }
     }
 }

@@ -80,6 +80,10 @@ struct FlashCardView<RevealButton: View>: View {
 
     @ViewBuilder private var questionHeader: some View {
         VStack(alignment: .leading, spacing: 12) {
+            // EnRuPackPlan.md §4.2/§4.3: cheap, non-spoiling front-side hint (`exercise.hasLifehack`,
+            // `IosSnapshot.kt`) — never the tip text itself, just "a tip exists" — so it may show
+            // before reveal (unlike `answerFace`'s own `LifehackEntryView` list, gated by phase).
+            if card.bool("hasLifehack") { LifehackBadge() }
             Text("Исходное предложение").font(.caption).foregroundStyle(.secondary)
             emphasizedText(card.rows("sourceParts"), role: .before, accessibilityLabel: card.string("source"))
                 .font(.system(.title2, design: .rounded, weight: .semibold))
@@ -595,17 +599,40 @@ private struct StyleWhyOnDemandBlock: View {
     }
 }
 
-/// EN-21 (`Plans/Kotlin/EnRuPackPlan.md` §4.2/§4.3): one collapsible L1-transfer tip from
-/// `IosSnapshot.kt`'s `lifehacksSnapshot` (`{id, text, citation, url?, statusLabel}`). Collapsed by
-/// default, the same disclosure mechanic [StyleWhyOnDemandBlock] uses. Its toggle's own label IS
-/// the source-attribution caption ("Лайфхак · источник: editorial|community") — visible whether
-/// collapsed or expanded, and exactly what VoiceOver announces as the control's accessible name
-/// (plan §6 acceptance: "VoiceOver/screen-reader читает подпись источника") — the citation (and
-/// link, if any) only appears once expanded, mirroring `LifehackWeb.kt`'s web rendering.
-private struct LifehackEntryView: View {
+/// EnRuPackPlan.md §4.2/§4.3: a small, always-text (no emoji in the accessible name) front-side
+/// hint — never the tip text itself, only "this skill has one". Swallows its own tap
+/// (`.onTapGesture {}`, an empty handler still wins the hit-test over an ancestor's gesture) so
+/// tapping the badge can never bubble into `questionHeader`'s own tap-to-reveal gesture — this
+/// task's "tapping it does not reveal" requirement — without needing a `Button` that would read
+/// as an actionable control to VoiceOver despite doing nothing.
+private struct LifehackBadge: View {
+    var body: some View {
+        Text("💡 Есть лайфхак")
+            .font(.caption.weight(.semibold))
+            .padding(.horizontal, 10).padding(.vertical, 4)
+            .background(Color(uiColor: .systemYellow).opacity(0.22), in: Capsule())
+            .accessibilityLabel("Есть лайфхак для этого навыка")
+            .accessibilityIdentifier("lifehackBadge")
+            .onTapGesture {}
+    }
+}
+
+/// EN-21 (`Plans/Kotlin/EnRuPackPlan.md` §4.2/§4.3): one collapsible L1-transfer tip
+/// (`{id, text, citation, url?, statusLabel}`) — [answerFace] passes one from `IosSnapshot.kt`'s
+/// per-skill `lifehacksSnapshot`, the pack-wide "Лайфхаки" Matrix section (`PolskiGrammarApp.swift`)
+/// one from `lifehackGroups`, same wire shape. Collapsed by default, the same disclosure mechanic
+/// [StyleWhyOnDemandBlock] uses. Its toggle's own label IS the source-attribution caption
+/// ("Лайфхак · источник: editorial|community") — visible whether collapsed or expanded, and
+/// exactly what VoiceOver announces as the control's accessible name (plan §6 acceptance:
+/// "VoiceOver/screen-reader читает подпись источника") — the citation (and link, if any) only
+/// appears once expanded, mirroring `LifehackWeb.kt`'s web rendering. Not `private` — reused by
+/// both call sites above; [identifierPrefix] keeps each call site's `accessibilityIdentifier`s
+/// unique (the Matrix section renders many groups, each restarting [index] at 0).
+struct LifehackEntryView: View {
     let hack: Record
     let index: Int
     let reduceMotion: Bool
+    var identifierPrefix: String = "lifehack"
     @State private var expanded = false
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
@@ -622,11 +649,11 @@ private struct LifehackEntryView: View {
             // Inside a List row, default-style buttons all fire on any tap in the row; borderless
             // keeps each entry's toggle independent once a skill has 2+ lifehacks.
             .buttonStyle(.borderless)
-            .accessibilityIdentifier("lifehack-toggle-\(index)")
+            .accessibilityIdentifier("\(identifierPrefix)-toggle-\(index)")
             .accessibilityValue(expanded ? "развёрнуто" : "свёрнуто")
             if expanded {
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(hack.string("text")).accessibilityIdentifier("lifehack-text-\(index)")
+                    Text(hack.string("text")).accessibilityIdentifier("\(identifierPrefix)-text-\(index)")
                     if let url = hack["url"] as? String, let link = URL(string: url) {
                         HStack(spacing: 4) {
                             Text(hack.string("citation"))
