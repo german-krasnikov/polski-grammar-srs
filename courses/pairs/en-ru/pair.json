@@ -767,7 +767,7 @@
           }
         ],
         "examples": [
-          "I read new books.",
+          "I read a new book.",
           "I am reading a new book.",
           "I have read a new book."
         ],
@@ -917,7 +917,7 @@
     "tenseContrastPrompt": "Скажи, что ты уже прочитал эту книгу — результат сейчас есть, а не процесс. Начни с «I have…».",
     "tenseContrastExpected": "I have read a new book.",
     "tenseContrastAccepted": "I've read a new book.",
-    "tenseContrastExplanation": "I read new books (Simple — привычка/факт вообще) → I am reading a new book (Continuous — процесс, идёт сейчас) → I have read a new book (Perfect — результат уже есть, важен для настоящего момента). Одно и то же событие можно описать тремя разными «временами»: разница не в моменте времени, а в том, что говорящий хочет подчеркнуть.",
+    "tenseContrastExplanation": "I read a new book (Simple — привычка/факт вообще) → I am reading a new book (Continuous — процесс, идёт сейчас) → I have read a new book (Perfect — результат уже есть, важен для настоящего момента). Одно и то же событие можно описать тремя разными «временами»: разница не в моменте времени, а в том, что говорящий хочет подчеркнуть.",
     "tenseContrastFrom": "am reading",
     "tenseContrastTo": "have read",
     "tenseContrastReason": "Continuous (процесс) → Perfect (результат, значимый сейчас): подчёркиваем не «что происходит», а «что уже сделано».",

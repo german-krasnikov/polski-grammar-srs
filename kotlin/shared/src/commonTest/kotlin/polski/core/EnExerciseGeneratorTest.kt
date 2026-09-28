@@ -47,6 +47,10 @@ class EnExerciseGeneratorTest {
         mapOf("noun" to "house", "adjective" to "beautiful"),
         mapOf("noun" to "book", "adjective" to "new"),
         mapOf("noun" to "car", "adjective" to "good"),
+        // Animate recipient for en:role.recipient's curriculum lexicalFilter (EnRuAcceptance
+        // report §7 item 5) — the other three seeds are all inanimate, so this is the only
+        // candidate that filter admits.
+        mapOf("noun" to "friend", "adjective" to "good"),
     )
 
     // Transcribed from lang/en/lexicon.json + prepositions.json (EnRuPackPlan.md §1.3/§5 gap A) —
@@ -56,6 +60,7 @@ class EnExerciseGeneratorTest {
             "noun:house" to mapOf(bundle("Number" to "sg") to "house", bundle("Number" to "pl") to "houses"),
             "noun:book" to mapOf(bundle("Number" to "sg") to "book", bundle("Number" to "pl") to "books"),
             "noun:car" to mapOf(bundle("Number" to "sg") to "car", bundle("Number" to "pl") to "cars"),
+            "noun:friend" to mapOf(bundle("Number" to "sg") to "friend", bundle("Number" to "pl") to "friends"),
             "adjective:beautiful" to mapOf(empty to "beautiful"),
             "adjective:new" to mapOf(empty to "new"),
             "adjective:good" to mapOf(empty to "good"),
@@ -174,6 +179,17 @@ class EnExerciseGeneratorTest {
 
         val role = generator().generateForSkill("en:role.location", preferredSeed = seeds.first())
         assertEquals("<roleDrill: start=[roleLocationStart], target=in my beautiful house>", role.expected)
+    }
+
+    // EnRuAcceptance-2026-09-28.md §7 item 5: en:role.recipient's curriculum lexicalFilter must
+    // restrict the noun draw to animate recipients, so a gift/message can never be addressed to a
+    // house/car/book. preferredSeed is the inanimate "house" seed on purpose: the filter must
+    // reject it and fall back to the pool's one animate seed ("friend") instead of handing back an
+    // inanimate recipient or crashing on an empty candidate list.
+    @Test
+    fun roleRecipientDrawsOnlyAnimateRecipients() {
+        val recipient = generator().generateForSkill("en:role.recipient", preferredSeed = seeds.first())
+        assertEquals("<roleDrill: start=[roleRecipientStart], target=to my good friend>", recipient.expected)
     }
 
     @Test

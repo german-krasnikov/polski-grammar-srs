@@ -76,7 +76,7 @@
     "construction": "core.argument.case-role",
     "focus": { "feature": "Case", "from": "Obj", "to": "To" },
     "fixed": { "Tense": "Pres", "Person": "1", "Number": "Sing" },
-    "lexicalFilter": null,
+    "lexicalFilter": { "slot": "noun", "where": { "nounId": ["wife", "husband", "friend", "son", "dog", "cat", "child"] } },
     "level": "A2",
     "prerequisites": ["en:role.instrument"]
   },
