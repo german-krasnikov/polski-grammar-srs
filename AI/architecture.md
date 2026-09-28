@@ -64,7 +64,7 @@ kotlin/macosApp             SwiftUI macOS
 
 ```text
 :core-model         FeatureBundle (UD/UniMorph), Construction, SkillSpec (+ LexicalFilter, UC-06), порты будущего
-:core-engine        Morphology/TableMorphology (UC-05); ConstructionRealizer/TemplateInterpreter (≤10 операторов)/ExerciseGenerator (UC-07) — единственный движок с UC-08 (:shared зависит на :core-engine как api, хосты переключены, GrammarEngine/ExerciseFactory удалены); MatrixTableEngine (UC-09, ADR-21/22) — generic row-axis×columns builder, обобщает приватный matrixTable-хелпер MatrixWeb.kt; polski.presentation.MatrixTableViewModel (:shared) навешивает ContrastPair-подсветку сверху. Web (MatrixWeb.kt) переключён на MatrixTableEngine+toViewModel (ADR-22, часть 2/2 для web); Desktop/Android/iOS/macOS хосты пока НЕ переключены — следующие шаги по хостам; matrix/reference экраны сегодня читают формы через TableMorphology (polski.grammar.PackMorphology)
+:core-engine        Morphology/TableMorphology (UC-05); ConstructionRealizer/TemplateInterpreter (≤10 операторов)/ExerciseGenerator (UC-07) — единственный движок с UC-08 (:shared зависит на :core-engine как api, хосты переключены, GrammarEngine/ExerciseFactory удалены); MatrixTableEngine (UC-09, ADR-21) — generic row-axis×columns builder; polski.presentation.MatrixTableViewModel (:shared) навешивает ContrastPair-подсветку сверху. UC-09 часть 2/2: хосты рендерят матрицы через MatrixTableEngine.build(...).toViewModel() (web, Android, iOS, macOS — см. ADR-22 и следующие); layout каждого хоста не менялся
 :core-srs           FSRS
 :core-progress      прогресс по pack.id
 :core-presentation  сессии, StyleComposer (стили → блоки)
