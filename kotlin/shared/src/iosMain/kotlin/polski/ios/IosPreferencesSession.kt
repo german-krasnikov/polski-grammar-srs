@@ -4,6 +4,7 @@ import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
 import platform.Foundation.NSUserDefaults
+import polski.data.activeCoursePackId
 import polski.data.availableCoursePacks
 import polski.data.selectActiveCoursePack
 import polski.data.selectCoursePack
@@ -35,6 +36,7 @@ class IosPreferencesSession(
             styleId = if (defaults.stringForKey("explanationMethod") == "Situations")
                 PreferredStyle.SituationFirst else PreferredStyle.RuleFirst,
         ))
+    private var lastPackSwitchWarning: String? = null
 
     /**
      * EN-22: re-applies whatever target/native was saved from a previous run — called once by the
@@ -51,43 +53,73 @@ class IosPreferencesSession(
     var onState: ((String) -> Unit)? = null
         set(value) { field = value; value?.invoke(currentSnapshot()) }
 
-    fun currentSnapshot(): String = buildJsonObject {
-        put("schemaVersion", 2)
-        // StylesBlueprint.md §2/S1: recipe label/description are per-language data (empty in CORE
-        // until pl-ru content merges) — Swift falls back to its own copy when a value is "".
-        put("styles", JsonArray(builtInStyleIds.map { id ->
-            val recipe = StyleRegistry.recipes[id]
-            buildJsonObject {
-                put("id", id.value)
-                put("label", recipe?.label?.get("ru") ?: "")
-                put("description", recipe?.description?.get("ru") ?: "")
+    fun currentSnapshot(): String {
+        reconcileWithActivePack()
+        val json = buildJsonObject {
+            put("schemaVersion", 2)
+            // StylesBlueprint.md §2/S1: recipe label/description are per-language data (empty in
+            // CORE until pl-ru content merges) — Swift falls back to its own copy when a value is "".
+            put("styles", JsonArray(builtInStyleIds.map { id ->
+                val recipe = StyleRegistry.recipes[id]
+                buildJsonObject {
+                    put("id", id.value)
+                    put("label", recipe?.label?.get("ru") ?: "")
+                    put("description", recipe?.description?.get("ru") ?: "")
+                }
+            }))
+            // EN-22: every usable pack's own (target, native) — the real option list for the
+            // Settings target/native pickers, never a hardcoded pl/en literal pair.
+            put("coursePacks", JsonArray(availableCoursePacks.map { pack ->
+                buildJsonObject { put("target", pack.target); put("native", pack.native) }
+            }))
+            when (val result = loaded) {
+                is PreferencesDecode.Loaded -> {
+                    put("status", "Ready")
+                    // PreferredStyle's `.name` (preferences enum) and StyleId's `.value` share the
+                    // same PascalCase wire vocabulary for the 4 built-in styles by construction.
+                    put("method", StyleId(result.value.styleId.name).toLegacyWireValue())
+                    put("styleId", result.value.styleId.name)
+                    put("target", result.value.target)
+                    put("native", result.value.native)
+                    put("answerMode", result.value.answerMode.name)
+                    put("appearance", result.value.appearance.name)
+                    put("motion", result.value.motion.name)
+                    put("animationsEnabled", result.value.animationsEnabled)
+                    lastPackSwitchWarning?.let { put("packSwitchWarning", it) }
+                }
+                is PreferencesDecode.RecoveryRequired -> {
+                    put("status", "RecoveryRequired")
+                    put("error", result.reason)
+                }
             }
-        }))
-        // EN-22: every usable pack's own (target, native) — the real option list for the
-        // Settings target/native pickers, never a hardcoded pl/en literal pair.
-        put("coursePacks", JsonArray(availableCoursePacks.map { pack ->
-            buildJsonObject { put("target", pack.target); put("native", pack.native) }
-        }))
-        when (val result = loaded) {
-            is PreferencesDecode.Loaded -> {
-                put("status", "Ready")
-                // PreferredStyle's `.name` (preferences enum) and StyleId's `.value` share the
-                // same PascalCase wire vocabulary for the 4 built-in styles by construction.
-                put("method", StyleId(result.value.styleId.name).toLegacyWireValue())
-                put("styleId", result.value.styleId.name)
-                put("target", result.value.target)
-                put("native", result.value.native)
-                put("answerMode", result.value.answerMode.name)
-                put("appearance", result.value.appearance.name)
-                put("motion", result.value.motion.name)
-                put("animationsEnabled", result.value.animationsEnabled)
-            }
-            is PreferencesDecode.RecoveryRequired -> {
-                put("status", "RecoveryRequired")
-                put("error", result.reason)
-            }
-        }
-    }.toString()
+        }.toString()
+        lastPackSwitchWarning = null
+        return json
+    }
+
+    /**
+     * ADR-37 correction (EnRuAcceptance §7 item 2, blocker 2): mirrors
+     * [polski.macos.MacPreferencesSession.reconcileWithActivePack] — see its KDoc. A pack switch
+     * [set] accepted (past its own [availableCoursePacks] parses-only check) can still be rolled
+     * back later by [IosSession.rebuildIfCourseSwitched] on a different bridge instance, straight
+     * against the shared [polski.data.packRegistry]; this bridge's own persisted [loaded] never
+     * hears about it otherwise. Writes directly to [defaults] (not through [write], which would
+     * recurse back into [currentSnapshot]).
+     */
+    private fun reconcileWithActivePack() {
+        val prefs = (loaded as? PreferencesDecode.Loaded)?.value ?: return
+        val requestedPairId = "${prefs.target}-${prefs.native}"
+        if (requestedPairId == activeCoursePackId) return
+        val actual = availableCoursePacks.firstOrNull { it.pairId == activeCoursePackId } ?: return
+        val corrected = prefs.copy(target = actual.target, native = actual.native)
+        val raw = UserPreferencesCodec.encode(corrected)
+        try {
+            defaults.setObject(raw, forKey = key)
+            check(defaults.synchronize() && defaults.stringForKey(key) == raw)
+            loaded = PreferencesDecode.Loaded(corrected)
+            lastPackSwitchWarning = "Пакет «$requestedPairId» пока не может обучать — вернулись к «${actual.pairId}»"
+        } catch (_: Throwable) { /* leave loaded/defaults as they were; next snapshot retries */ }
+    }
 
     fun exportJson(): String? = defaults.stringForKey(key)
         ?: (loaded as? PreferencesDecode.Loaded)?.value?.let(UserPreferencesCodec::encode)

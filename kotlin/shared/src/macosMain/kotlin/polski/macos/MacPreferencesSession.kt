@@ -4,6 +4,7 @@ import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
+import polski.data.activeCoursePackId
 import polski.data.availableCoursePacks
 import polski.data.selectCoursePack
 import polski.preferences.Appearance
@@ -20,33 +21,40 @@ import polski.presentation.StyleRegistry
 class MacPreferencesSession(directory: String) {
     private val repository = MacPreferencesRepository(directory)
     private var loaded = repository.load()
+    private var lastPackSwitchWarning: String? = null
     var onState: ((String) -> Unit)? = null
         set(value) { field = value; value?.invoke(currentSnapshot()) }
 
     init { syncActivePack() }
 
-    fun currentSnapshot(): String = buildJsonObject {
-        put("schemaVersion", 2)
-        put("styles", styleCatalogJson())
-        put("packs", packOptionsJson())
-        when (val result = loaded) {
-            is PreferencesDecode.Loaded -> {
-                put("status", "Ready")
-                put("target", result.value.target)
-                put("native", result.value.native)
-                put("styleId", result.value.styleId.name)
-                put("answerMode", result.value.answerMode.name)
-                put("appearance", result.value.appearance.name)
-                put("motion", result.value.motion.name)
-                put("glassTintPercent", result.value.glassTintPercent)
-                put("animationsEnabled", result.value.animationsEnabled)
+    fun currentSnapshot(): String {
+        reconcileWithActivePack()
+        val json = buildJsonObject {
+            put("schemaVersion", 2)
+            put("styles", styleCatalogJson())
+            put("packs", packOptionsJson())
+            when (val result = loaded) {
+                is PreferencesDecode.Loaded -> {
+                    put("status", "Ready")
+                    put("target", result.value.target)
+                    put("native", result.value.native)
+                    put("styleId", result.value.styleId.name)
+                    put("answerMode", result.value.answerMode.name)
+                    put("appearance", result.value.appearance.name)
+                    put("motion", result.value.motion.name)
+                    put("glassTintPercent", result.value.glassTintPercent)
+                    put("animationsEnabled", result.value.animationsEnabled)
+                    lastPackSwitchWarning?.let { put("packSwitchWarning", it) }
+                }
+                is PreferencesDecode.RecoveryRequired -> {
+                    put("status", "RecoveryRequired")
+                    put("error", result.reason)
+                }
             }
-            is PreferencesDecode.RecoveryRequired -> {
-                put("status", "RecoveryRequired")
-                put("error", result.reason)
-            }
-        }
-    }.toString()
+        }.toString()
+        lastPackSwitchWarning = null
+        return json
+    }
 
     fun exportJson(): String? = repository.raw() ?: (loaded as? PreferencesDecode.Loaded)?.value?.let(UserPreferencesCodec::encode)
     fun recoveryRaw(): String? = repository.raw()
@@ -79,6 +87,34 @@ class MacPreferencesSession(directory: String) {
         val prefs = (loaded as? PreferencesDecode.Loaded)?.value ?: return
         val pairId = "${prefs.target}-${prefs.native}"
         if (availableCoursePacks.any { it.pairId == pairId }) selectCoursePack(pairId)
+    }
+
+    /**
+     * ADR-37 correction (EnRuAcceptance §7 item 2, blocker 2): a pack switch this bridge accepted
+     * (past [set]'s own [availableCoursePacks] check, which only probes that a pack *parses*, not
+     * that its engine can actually build a session) can still be rolled back later by
+     * [MacSession.rebuildIfCourseSwitched] on a *different* bridge instance, straight against the
+     * shared [polski.data.packRegistry] — this bridge's own persisted [loaded] never hears about
+     * it. Left alone, Settings keeps reporting the picked-but-broken pack forever (surviving
+     * restarts, since [syncActivePack] just re-selects the same broken pack on the next launch and
+     * it fails again the same way), while Training quietly serves the rolled-back pack with no
+     * explanation anywhere.
+     *
+     * Called at the top of every [currentSnapshot]: when the persisted target/native no longer
+     * names the pack that is really active, this corrects the persisted value to match reality —
+     * the same self-healing [MacSession]'s own rollback already applies one layer down — and
+     * records a one-shot [lastPackSwitchWarning] the very next snapshot reports and then clears.
+     */
+    private fun reconcileWithActivePack() {
+        val prefs = (loaded as? PreferencesDecode.Loaded)?.value ?: return
+        val requestedPairId = "${prefs.target}-${prefs.native}"
+        if (requestedPairId == activeCoursePackId) return
+        val actual = availableCoursePacks.firstOrNull { it.pairId == activeCoursePackId } ?: return
+        val corrected = prefs.copy(target = actual.target, native = actual.native)
+        if (repository.save(corrected) == null) {
+            loaded = PreferencesDecode.Loaded(corrected)
+            lastPackSwitchWarning = "Пакет «$requestedPairId» пока не может обучать — вернулись к «${actual.pairId}»"
+        }
     }
 
     fun importJson(raw: String): String? {

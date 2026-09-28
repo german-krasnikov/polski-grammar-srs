@@ -97,4 +97,55 @@ class MacPreferencesSessionTest {
             session.set("target", "pl")
         }
     }
+
+    /**
+     * EnRuAcceptance §7 item 2 (ADR-37 correction blocker 2): [MacSession.rebuildIfCourseSwitched]
+     * rolls the process-wide active pack back to pl-ru when en-ru's engine can't build a session
+     * yet ([polski.data.usableCourseSelections] only probes parsing, not real generation) — that
+     * rollback happens on a *different* bridge instance and only ever touches
+     * [polski.data.packRegistry], never this session's own persisted preferences. This reproduces
+     * that exact rollback ([polski.data.selectCoursePack] straight to pl-ru, the same call
+     * [MacSession] makes) and asserts a later [MacPreferencesSession.currentSnapshot] notices the
+     * mismatch, reports pl-ru (not the stale, silently-broken "en" Settings kept claiming before
+     * this fix) with a warning explaining why, and persists that correction to disk so a fresh
+     * session over the same directory (a simulated app restart) reports it too, with no warning
+     * left over once nothing is out of sync any more.
+     */
+    @Test fun currentSnapshotSelfCorrectsAfterAnExternalRollbackOfTheActivePack() = withSession { session ->
+        try {
+            assertNull(session.set("target", "en"))
+            assertEquals("en-ru", polski.data.activeCoursePackId)
+
+            polski.data.selectCoursePack("pl-ru")
+
+            val snapshot = snapshotOf(session)
+            assertEquals("pl", snapshot.getValue("target").jsonPrimitive.content)
+            assertEquals("ru", snapshot.getValue("native").jsonPrimitive.content)
+            assertEquals(true, "packSwitchWarning" in snapshot)
+
+            val again = snapshotOf(session)
+            assertEquals(false, "packSwitchWarning" in again)
+        } finally {
+            session.set("target", "pl")
+        }
+    }
+
+    @Test fun theRollbackCorrectionSurvivesAFreshSessionOverTheSameDirectory() {
+        val directory = platform.Foundation.NSTemporaryDirectory() +
+            "polski-mac-prefs-session-${platform.Foundation.NSUUID().UUIDString}"
+        try {
+            val first = MacPreferencesSession(directory)
+            assertNull(first.set("target", "en"))
+            polski.data.selectCoursePack("pl-ru")
+            snapshotOf(first) // triggers reconciliation, persists the correction
+
+            val second = MacPreferencesSession(directory)
+            val snapshot = snapshotOf(second)
+            assertEquals("pl", snapshot.getValue("target").jsonPrimitive.content)
+            assertEquals("ru", snapshot.getValue("native").jsonPrimitive.content)
+        } finally {
+            polski.data.selectCoursePack("pl-ru")
+            platform.Foundation.NSFileManager.defaultManager.removeItemAtPath(directory, null)
+        }
+    }
 }

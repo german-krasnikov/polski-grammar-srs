@@ -158,6 +158,46 @@ class IosPreferencesSessionTest {
         }
     }
 
+    /**
+     * EnRuAcceptance §7 item 2 (ADR-37 correction blocker 2): [IosSession.rebuildIfCourseSwitched]
+     * rolls the process-wide active pack back to pl-ru when en-ru's engine can't build a session
+     * yet — that rollback happens on a *different* bridge instance and only ever touches
+     * [packRegistry], never this session's own persisted `NSUserDefaults` document. Simulating that
+     * exact rollback ([packRegistry.select] straight to pl-ru) must make a later [currentSnapshot]
+     * notice the mismatch, report pl-ru (not the stale "en" it kept claiming before this fix) with
+     * a one-shot warning, and persist the correction so a fresh session over the same defaults
+     * suite (a simulated app restart) reports it too.
+     */
+    @Test
+    fun currentSnapshotSelfCorrectsAfterAnExternalRollbackOfTheActivePack() {
+        val suite = "polski-ios-preferences-rollback-${Random.nextLong()}"
+        val defaults = assertNotNull(NSUserDefaults(suiteName = suite))
+        defaults.removePersistentDomainForName(suite)
+        try {
+            val session = IosPreferencesSession(defaults)
+            assertNull(session.set(field = "target", value = "en"))
+            assertEquals("en-ru", packRegistry.active.pairId)
+
+            packRegistry.select("pl-ru")
+
+            val snapshot = Json.parseToJsonElement(session.currentSnapshot()).jsonObject
+            assertEquals("pl", snapshot.getValue("target").jsonPrimitive.content)
+            assertEquals("ru", snapshot.getValue("native").jsonPrimitive.content)
+            assertEquals(true, "packSwitchWarning" in snapshot)
+
+            val again = Json.parseToJsonElement(session.currentSnapshot()).jsonObject
+            assertEquals(false, "packSwitchWarning" in again)
+
+            val restarted = IosPreferencesSession(defaults)
+            val restartedSnapshot = Json.parseToJsonElement(restarted.currentSnapshot()).jsonObject
+            assertEquals("pl", restartedSnapshot.getValue("target").jsonPrimitive.content)
+            assertEquals("ru", restartedSnapshot.getValue("native").jsonPrimitive.content)
+        } finally {
+            packRegistry.select("pl-ru")
+            defaults.removePersistentDomainForName(suite)
+        }
+    }
+
     /** A saved, now-usable pair (en-ru) is applied on cold start, same as pl-ru always was. */
     @Test
     fun reapplySavedCoursePackAppliesAUsableSavedPack() {

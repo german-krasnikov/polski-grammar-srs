@@ -2,6 +2,46 @@
 
 Новые сверху. Формат: решение → почему → где подробно.
 
+## ADR-38 · 2026-09-28 · EnRuAcceptance §7 item 2, коррекция ADR-37 (blocker 2): Settings-снимок сам исправляется после отката пакета тренировочным бриджем
+
+Ревью ADR-37's коммита (7bca546) вскрыло второй пробел вдобавок к уже честно задокументированному
+контентному (blocker 1, не устранён здесь — вне разрешённых путей этой лейны). `MacPreferencesSession.set`/
+`IosPreferencesSession.set` пишут `target`/`native` на диск/в `NSUserDefaults` и синхронно переключают
+`polski.data.packRegistry.active` **до** того, как `MacSession`/`IosSession.rebuildIfCourseSwitched`
+вообще пытается пересобрать `TrainingStore` для нового пакета — в момент `set()` переключение выглядит
+успешным (`usableCourseSelections` проверяет только парсинг, не реальную генерацию). Когда пересборка
+`store` позже (на следующем `dispatch`/`currentSnapshot` тренировочного бриджа — **другого** объекта)
+падает и откатывает `packRegistry.active` обратно, `MacPreferencesSession`/`IosPreferencesSession` об
+этом откате не знают: их собственный `loaded` (persisted-документ) как хранил `target=en`, так и хранит
+— Settings бесконечно показывает «English» (переживает перезапуск приложения, поскольку `syncActivePack`/
+`reapplySavedCoursePack` на каждом холодном старте просто выбирают тот же самый несобираемый пакет
+заново), пока Training молча продолжает показывать пакет, к которому реально откатились, без единой
+подсказки где-либо.
+
+Решение: `reconcileWithActivePack()` (новый приватный метод, идентичный на обоих хостах) вызывается в
+начале каждого `currentSnapshot()`. Если persisted `target-native` не совпадает с реально активным
+`polski.data.activeCoursePackId` — значит пересборка где-то в другом бридже откатила пакет — метод
+переписывает persisted-документ на реально активный пакет (тот же файл/`NSUserDefaults`-ключ, что и
+обычный `set()`, так что коррекция переживает перезапуск) и на один-единственный следующий снимок
+добавляет поле `"packSwitchWarning"` с объяснением, затем сбрасывает его — не постоянный статус,
+а одноразовое уведомление, чтобы хост мог показать тост/алерт, не ломая существующих потребителей
+снимка (поле отсутствует, когда всё синхронно, как раньше). iOS-версия пишет прямо в `NSUserDefaults`,
+а не через `write()`, чтобы не рекурсировать обратно в `currentSnapshot()`.
+
+Не решает blocker 1 (контентный пробел en-ru `forms.generated.json`/`scripts/build-pack-en.mjs`) —
+это по-прежнему отдельная, вне-лейновая задача; пока она не закрыта, эта коррекция гарантирует только
+то, что пользователь **видит правду** (Settings синхронизируется с реально активным пакетом и получает
+объяснение), а не то, что переключение на en-ru реально работает.
+
+Где: `kotlin/shared/src/macosMain/kotlin/polski/macos/MacPreferencesSession.kt`,
+`kotlin/shared/src/iosMain/kotlin/polski/ios/IosPreferencesSession.kt`. Тесты (новые):
+`MacPreferencesSessionTest.currentSnapshotSelfCorrectsAfterAnExternalRollbackOfTheActivePack`,
+`.theRollbackCorrectionSurvivesAFreshSessionOverTheSameDirectory`,
+`IosPreferencesSessionTest.currentSnapshotSelfCorrectsAfterAnExternalRollbackOfTheActivePack`.
+
+Проверено: `:shared:macosArm64Test`, `:shared:iosSimulatorArm64Test`, `:shared:desktopTest` — все
+green (см. отчёт разработчика для точных команд/директорий).
+
 ## ADR-37 · 2026-09-28 · EnRuAcceptance §7 item 2: сессии macOS/iOS и словарь пересобираются при смене пакета; вскрыт отдельный, не устранённый здесь пробел контента en
 
 `Plans/Kotlin/EnRuAcceptance-2026-09-28.md` §7 item 2: `PackEngine`/`plExerciseGenerator`/`plChainSteps`
