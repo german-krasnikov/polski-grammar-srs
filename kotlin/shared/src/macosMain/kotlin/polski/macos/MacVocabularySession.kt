@@ -2,6 +2,7 @@ package polski.macos
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.collect
@@ -28,29 +29,54 @@ import polski.vocabulary.VocabularySession
 import polski.vocabulary.VocabularyUiState
 
 /** Scene-owned SwiftUI bridge. Kotlin alone owns review scheduling and durable writes. */
-class MacVocabularySession(directory: String) {
+class MacVocabularySession(private val directory: String) {
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
     private val scheduler = FsrsScheduler()
-    private val session = VocabularySession(MacVocabularyRepository(directory), scheduler,
-        { Clock.System.now() }, { "user.${NSUUID().UUIDString.lowercase()}" })
+    private var session = newSession()
+    // EnRuAcceptance-2026-09-28.md §7 item 2: mirrors `MacSession.storePackId`/
+    // `rebuildIfCourseSwitched` — [MacVocabularyRepository]'s own storage path is now
+    // pack-namespaced (fresh `VocabularyCodec.key`/file per active pack), but this bridge's
+    // in-memory [session] still needs an explicit restart to actually load the newly active
+    // pack's own document instead of continuing to serve the previous pack's one.
+    private var sessionPackId = polski.data.activeCoursePackId
+    private var observer: Job? = null
     var onState: ((String) -> Unit)? = null
         set(value) {
             field = value
+            rebuildIfCourseSwitched()
             value?.invoke(snapshot(session.state.value))
         }
 
     /** D3: mirrors [MacSession.onEffect] for the vocabulary card's decorative Rive rating overlay. */
     var onEffect: ((String) -> Unit)? = null
 
-    init {
-        scope.launch { session.state.collect { onState?.invoke(snapshot(it)) } }
+    init { observeAndStart() }
+
+    private fun newSession(): VocabularySession = VocabularySession(MacVocabularyRepository(directory), scheduler,
+        { Clock.System.now() }, { "user.${NSUUID().UUIDString.lowercase()}" })
+
+    private fun observeAndStart() {
+        observer = scope.launch { session.state.collect { onState?.invoke(snapshot(it)) } }
         scope.launch { session.start() }
     }
 
-    fun currentSnapshot(): String = snapshot(session.state.value)
+    /** Unlike `MacSession.rebuildIfCourseSwitched`, [newSession] never eagerly generates content,
+     *  so no failure fallback is needed — the new pack's own document simply loads (or starts
+     *  empty) the next time [VocabularySession.start] runs. */
+    private fun rebuildIfCourseSwitched() {
+        val current = polski.data.activeCoursePackId
+        if (current == sessionPackId) return
+        sessionPackId = current
+        observer?.cancel()
+        session = newSession()
+        observeAndStart()
+    }
+
+    fun currentSnapshot(): String { rebuildIfCourseSwitched(); return snapshot(session.state.value) }
     fun exportJson(): String? = session.exportJson()
 
     fun dispatch(command: String, value: String = "") {
+        rebuildIfCourseSwitched()
         when (command) {
             "direction" -> builtInStudyDirections.firstOrNull { it.wire == value }?.let(session::setDirection)
             "filter" -> if (value in listOf("A1", "A2", "B1", "100", "500", "1000", "mine")) session.setFilter(value)

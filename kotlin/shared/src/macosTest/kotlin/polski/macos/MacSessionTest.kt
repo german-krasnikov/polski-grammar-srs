@@ -141,4 +141,38 @@ class MacSessionTest {
 
         assertEquals(listOf("Again"), effects)
     }
+
+    /**
+     * EnRuAcceptance-2026-09-28.md §7 item 2: `MacPreferencesSession.set("target"/"native", ...)`
+     * flips `polski.data.packRegistry`'s process-wide active pack synchronously and independently
+     * of this session — its own `TrainingStore` (built once, at construction) must notice on its
+     * very next [MacSession.dispatch]/[MacSession.currentSnapshot] and rebuild for the newly
+     * active pack, the same way [MacSession.importJson] already rebuilds after a progress import.
+     *
+     * Today en-ru's own content can't actually build a working exercise engine yet — a *deeper*
+     * root cause this task uncovered but does not fix (`courses/lang/en/forms.generated.json`
+     * only has verb forms; every construction needing a noun/adjective/possessive form throws in
+     * `:core-engine`, still outside `usableCourseSelections`'s parse-only probe). That must not
+     * crash this bridge: this pins the fallback contract instead — no crash, the active pack
+     * rolls back to the one this session can actually run, and its progress stays exactly where
+     * it was. Once that content gap closes, the exact same rebuild path starts succeeding with no
+     * further change here.
+     */
+    @Test
+    fun switchingToAPackWhoseEngineCannotBuildYetDoesNotCrashAndRollsBackToTheWorkingPack() = withSession { session ->
+        session.dispatch("continueIntroduction")
+        val beforeId = exerciseId(session)
+        try {
+            polski.data.selectCoursePack("en-ru")
+
+            session.dispatch("refresh")
+
+            assertEquals("pl-ru", polski.data.activeCoursePackId,
+                "a pack this session can't actually build must be rolled back, not left mismatched")
+            assertEquals(beforeId, exerciseId(session), "the working session's own progress/exercise must be untouched")
+            assertEquals("Question", phase(session))
+        } finally {
+            polski.data.selectCoursePack("pl-ru")
+        }
+    }
 }

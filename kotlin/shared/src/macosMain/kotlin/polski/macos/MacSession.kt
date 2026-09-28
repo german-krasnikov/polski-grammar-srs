@@ -41,13 +41,19 @@ class MacSession(directory: String) {
     private val repository = MacProgressRepository(directory, scheduler)
     private var nextId = 0L
     private var store = newStore()
+    // EnRuAcceptance-2026-09-28.md §7 item 2: [MacPreferencesSession.set] flips
+    // `polski.data.packRegistry`'s active pack directly and synchronously, independent of this
+    // session — [store] was built once, at construction, for whichever pack was active then. This
+    // field remembers that pack, so [rebuildIfCourseSwitched] can tell a later switch apart from
+    // no change at all and rebuild [store] for the new pack (see its own KDoc).
+    private var storePackId = polski.data.activeCoursePackId
     private var observer: Job? = null
     private var closed = false
 
     var onState: ((String) -> Unit)? = null
         set(value) {
             field = value
-            if (value != null && !closed) value(snapshot(store.state.value))
+            if (value != null && !closed) { rebuildIfCourseSwitched(); value(snapshot(store.state.value)) }
         }
 
     /**
@@ -62,7 +68,7 @@ class MacSession(directory: String) {
 
     init { observeAndStart() }
 
-    fun currentSnapshot(): String = snapshot(store.state.value)
+    fun currentSnapshot(): String { rebuildIfCourseSwitched(); return snapshot(store.state.value) }
     fun exportJson(): String? = store.state.value.progress?.let { progress ->
         polski.progress.ProgressCodec.encodeLegacyV1(polski.progress.ProgressDocument(progress))
     }
@@ -70,6 +76,7 @@ class MacSession(directory: String) {
     /** Values carrying a card ID reject stale taps after the question changes. */
     fun dispatch(command: String, value: String = "") {
         if (closed) return
+        rebuildIfCourseSwitched()
         val current = store.state.value
         val action: AppAction = when (command) {
             "tab" -> AppTab.entries.firstOrNull { it.name == value }?.let(AppAction::SelectTab)
@@ -156,6 +163,44 @@ class MacSession(directory: String) {
     private fun observeAndStart() {
         observer = scope.launch { store.state.collect { onState?.invoke(snapshot(it)) } }
         scope.launch { store.start() }
+    }
+
+    /**
+     * EnRuAcceptance-2026-09-28.md §7 item 2: [store]'s own [PlExerciseEngine]/known-skill-id list
+     * are resolved once, at construction, from whichever pack was active then — switching packs
+     * afterwards (`MacPreferencesSession.set`) never touches this session. Left unrebuilt, the next
+     * snapshot crashes outright: `MacSnapshot` looks up the still-displayed (old-pack) exercise's
+     * skill in the now-active pack's own [polski.data.skills] and finds nothing
+     * ([polski.data.skillById] `error()`s on a miss). Called from every entry point a host can
+     * reach after a switch ([dispatch]/[currentSnapshot]/the [onState] setter) — a no-op when the
+     * active pack still matches [storePackId]. Rebuilding discards no durable progress: it only
+     * replaces the in-memory [TrainingStore], and [store.start] reloads the one shared,
+     * pack-namespaced document ([polski.progress.ProgressRepository]) the same way
+     * [importJson] already does.
+     *
+     * A pack whose own content can't actually build a working exercise engine yet (parseable but
+     * incomplete — `usableCourseSelections` only probes parsing, not `:core-engine` realization;
+     * see `EnRuAcceptance-2026-09-28.md` §7 item 2's own findings) must not crash this bridge:
+     * [newStore] is attempted inside [runCatching], and a failure rolls the *active* pack back to
+     * [storePackId] rather than leaving [store] and the now-global active pack mismatched — every
+     * later snapshot reads pack-fresh globals (`polski.data.skills` and friends) straight off
+     * [store]'s own still-displayed exercise, and a mismatch there crashes outright
+     * ([polski.data.skillById] `error()`s on a miss). The next switch attempt (any later
+     * [dispatch]/[currentSnapshot]) retries on its own once that pack's content is complete.
+     */
+    private fun rebuildIfCourseSwitched() {
+        val current = polski.data.activeCoursePackId
+        if (current == storePackId) return
+        val rebuilt = runCatching { newStore() }.getOrNull()
+        if (rebuilt == null) {
+            runCatching { polski.data.selectCoursePack(storePackId) }
+            return
+        }
+        storePackId = current
+        observer?.cancel()
+        store.close()
+        store = rebuilt
+        observeAndStart()
     }
 
     private fun newStore(): TrainingStore = TrainingStore(

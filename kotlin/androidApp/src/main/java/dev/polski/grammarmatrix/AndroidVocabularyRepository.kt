@@ -9,13 +9,20 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
+import polski.data.activeCoursePackId
 import polski.vocabulary.VocabularyCodec
 import polski.vocabulary.VocabularyRepository
 
 /** Vocabulary lives beside, and never overwrites, the grammar progress document. */
 class AndroidVocabularyRepository(context: Context) : VocabularyRepository {
     private val directory = context.applicationContext.filesDir
-    private val document = AtomicFile(File(directory, "vocabulary-v1.json"))
+    // EnRuAcceptance-2026-09-28.md §7 item 2: pl-ru keeps this exact, already-shipped filename;
+    // any other active pack gets its own pack-namespaced file — read fresh (this repository is
+    // reconstructed on every cold restart, `AndroidSessionViewModel`'s own EN-22 switch
+    // mechanism, but the active pack must still pick the right file on that very first read).
+    private val document: AtomicFile get() = activeCoursePackId.let { pairId ->
+        AtomicFile(File(directory, if (pairId == "pl-ru") "vocabulary-v1.json" else "vocabulary-$pairId-v1.json"))
+    }
     private val lock = Mutex()
 
     override suspend fun loadRaw(): String? = withContext(Dispatchers.IO) {

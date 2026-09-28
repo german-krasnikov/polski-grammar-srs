@@ -163,4 +163,22 @@ class VocabularyDocumentTest {
             VocabularyCodec.merge(VocabularyDocument(), VocabularyDocument(custom = listOf(first, second)))
         }
     }
+
+    /** EnRuAcceptance-2026-09-28.md §7 item 2: unlike [cardKey]/[decode]/[encode] (plain `fun`s that
+     *  already read [polski.data.packRegistry] fresh), [VocabularyCodec.key] was still `by lazy` —
+     *  frozen to whichever pack was active the first time any test in this process touched it. A
+     *  host's vocabulary repository reads this key to load/save, so a frozen key would keep reading
+     *  and writing the pl-ru document forever, even after [polski.data.selectCoursePack] switches
+     *  the active pack to en-ru. */
+    @Test
+    fun keyTracksTheActivePackAcrossASwitch() {
+        assertEquals("polski-vocabulary-pl-ru-v1", VocabularyCodec.key)
+        try {
+            polski.data.selectCoursePack("en-ru")
+            assertEquals("polski-vocabulary-en-ru-v1", VocabularyCodec.key)
+        } finally {
+            polski.data.selectCoursePack("pl-ru")
+        }
+        assertEquals("polski-vocabulary-pl-ru-v1", VocabularyCodec.key)
+    }
 }

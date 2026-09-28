@@ -12,6 +12,7 @@ import platform.Foundation.NSUUID
 import platform.Foundation.stringWithContentsOfFile
 import platform.Foundation.writeToFile
 import platform.posix.rename
+import polski.data.activeCoursePackId
 import polski.vocabulary.VocabularyCodec
 import polski.vocabulary.VocabularyRepository
 
@@ -19,7 +20,13 @@ import polski.vocabulary.VocabularyRepository
 @OptIn(ExperimentalForeignApi::class)
 class MacVocabularyRepository(private val directory: String) : VocabularyRepository {
     private val lock = Mutex()
-    private val file = "$directory/vocabulary-v1.json"
+    // EnRuAcceptance-2026-09-28.md §7 item 2: pl-ru keeps this exact, already-shipped filename
+    // (also the one the JVM preview reads/writes — see the class KDoc) so no existing document is
+    // orphaned; any other active pack gets its own pack-namespaced file, read fresh on every call
+    // so a pack switch actually loads/saves that pack's own document.
+    private val file: String get() = activeCoursePackId.let { pairId ->
+        if (pairId == "pl-ru") "$directory/vocabulary-v1.json" else "$directory/vocabulary-$pairId-v1.json"
+    }
 
     override suspend fun loadRaw(): String? = withContext(Dispatchers.Default) {
         lock.withLock { read(file) }

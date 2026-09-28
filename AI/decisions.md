@@ -2,6 +2,65 @@
 
 Новые сверху. Формат: решение → почему → где подробно.
 
+## ADR-37 · 2026-09-28 · EnRuAcceptance §7 item 2: сессии macOS/iOS и словарь пересобираются при смене пакета; вскрыт отдельный, не устранённый здесь пробел контента en
+
+`Plans/Kotlin/EnRuAcceptance-2026-09-28.md` §7 item 2: `PackEngine`/`plExerciseGenerator`/`plChainSteps`
+(`PlEngine.kt`) уже читали `packRegistry.active` живьём — эта часть была закрыта раньше (до этой
+задачи). Реальный пробел был на уровень выше: `TrainingStore`/`VocabularySession`, которые держат
+`MacSession`/`IosSession`/`MacVocabularySession`/`IosVocabularySession`, строятся **один раз**, при
+создании бриджа, и Settings (`MacPreferencesSession.set`/`IosPreferencesSession.set`) зовёт
+`selectCoursePack` напрямую, синхронно, в обход этих объектов — они об этом не узнают. Диагностика
+(commonTest `PlExerciseEngine(...).generateChain()` с активным en-ru) и уже существующий, но красный
+`IosSessionTest.currentSnapshotAfterSwitchingActivePackToEnRuDoesNotThrow` подтвердили не только
+«застревание» на старом пакете, но реальный крэш: `MacSnapshot`/`IosSnapshot` читают
+`polski.data.skills`/`skillById` живьём (активный пакет), а `store`'s экземпляр упражнения — от
+старого пакета; несовпадение падает в `skillById`'s `error()`.
+
+Решение, часть 1 (пересборка сессии): `MacSession`/`IosSession` и `MacVocabularySession`/
+`IosVocabularySession` запоминают, для какого `activeCoursePackId` собран их `store`/`session`, и
+на каждой точке входа хоста (`dispatch`/`currentSnapshot`/`onState`-сеттер) сверяют его с реально
+активным — расхождение пересобирает `TrainingStore`/`VocabularySession` заново (`newStore`/
+`newSession`), тем же способом, каким `importJson` уже пересобирает store после импорта. Прогресс
+не теряется: оба хранилища ре-читают один и тот же документ, `TrainingStore`'s собственный
+skill-id-namespace (en-ru куррикулум уже сам себя префиксует `en:`) и `SkillQueue`'s
+`activePackFilter` (уже подключён) держат прогресс пакетов раздельно без отдельных файлов.
+
+Решение, часть 2 (общая фабрика хранилища словаря): `VocabularyCodec.key` был `by lazy` — единственный
+`val` в этом файле, который EN-22-рефакторинг пропустил (`cardKey`/`decode`/`encode` уже читали
+`packRegistry.active` живьём) — застывал на первом же обращении в процессе и не переключался вообще.
+`IosVocabularyRepository`/`AndroidVocabularyRepository` хуже: держали буквальный `"...-pl-ru-v1"`/
+`"vocabulary-v1.json"`, не через кодек вовсе. `MacVocabularyRepository` — фиксированное имя файла.
+Итог один: второй пакет читал/писал в ФАЙЛ первого, а `VocabularyCodec.decode`'s собственная проверка
+`pair == packRegistry.active.pairId` затем отвергала документ при следующем переключении. Фикс:
+`key`/имя файла читаются живьём от активного пакета; pl-ru везде сохраняет ровно старое, уже
+поставленное имя/ключ (обратная совместимость побайтово), другой пакет получает свой собственный.
+
+Решение, часть 3 (обнаруженный, НЕ устранённый здесь пробел): пересборка `TrainingStore` для en-ru
+сама вскрыла более глубокую причину — `courses/lang/en/forms.generated.json` содержит только формы
+глаголов (`scripts/build-pack-en.mjs` материализует только `lexicon.verbs`); ни один noun/adjective/
+possessive/aux не имеет записи в таблице. `:core-engine`'s `ConstructionRealizer` требует форму для
+каждого лексического слота через `TableMorphology.form()` без запасного варианта — первое же
+построение цепочки (`TrainingStore`'s `initialChain`, безусловно при каждом создании) падает с
+`no form for lexeme="possessive:my"` (тот же механизм отваливается на noun/adjective в любом другом
+упражнении). `usableCourseSelections` (ADR-35/36) проверяет только парсинг `CoursePack`, никогда не
+пробует реальную генерацию — пробел её не ловит. Это НЕ пробел этой задачи и не решён здесь: правка
+требует записи в `courses/lang/en/forms.generated.json` (вне границ этой лейны/задачи) — вероятно,
+расширением `scripts/build-pack-en.mjs`, читающим уже существующие `lexicon.json`'s `nouns[].forms`
+(`{sg,pl}`), `adjectives[].forms` (`{invariant}`) и `possessives[].forms` (`{kind:"invariant",value}`)
+— данные уже авторизованы контентом, значит фикс механический, не выдуманный факт, но физически
+пишет в `courses/lang/en/`, вне разрешённых путей этой задачи. До этого фикса en-ru физически не
+может обучать ни одному навыку ни на одном хосте (даже Android'а холодный рестарт), хотя
+`usableCourseSelections`/пикеры корректно продолжают предлагать его (ADR-36's контракт не отменён).
+Сессионные бриджи (часть 1) деградируют мягко — откатывают активный пакет к тому, что реально
+работает, без крэша — вместо попытки замаскировать пробел.
+
+Где: `kotlin/shared/src/macosMain/kotlin/polski/macos/MacSession.kt`,
+`MacVocabularySession.kt`, `MacVocabularyRepository.kt`; `kotlin/shared/src/iosMain/kotlin/polski/ios/
+IosSession.kt`, `IosVocabularySession.kt`, `IosVocabularyRepository.kt`; `kotlin/androidApp/.../
+AndroidVocabularyRepository.kt`; `kotlin/shared/src/commonMain/kotlin/polski/vocabulary/
+VocabularyDocument.kt`. Тесты: `MacSessionTest`/`MacVocabularyRepositoryTest`/`IosSessionTest`/
+`VocabularyDocumentTest`.
+
 ## ADR-36 · 2026-09-28 · EnRuAcceptance §7 item 1: `CoursePack` больше не хардкодит pl-грамматику; активный-пакет-без-reference деградирует до пустого, а не падает
 
 `Plans/Kotlin/EnRuAcceptance-2026-09-28.md` §2/§7: `CoursePack`'s v1-схема писалась только под pl-ru

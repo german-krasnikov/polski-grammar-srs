@@ -13,7 +13,11 @@ class IosVocabularyRepository(
     private val defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults,
 ) : VocabularyRepository {
     private val lock = Mutex()
-    private val key = "polski-vocabulary-pl-ru-v1"
+    // EnRuAcceptance-2026-09-28.md §7 item 2: was the literal "polski-vocabulary-pl-ru-v1" —
+    // now [VocabularyCodec.key], read fresh on every call so a pack switch loads/saves that
+    // pack's own, separately-namespaced document (pl-ru's own key is the exact same bytes as
+    // before; en-ru gets its own "polski-vocabulary-en-ru-v1").
+    private val key: String get() = VocabularyCodec.key
     private val backupKey = "polski-vocabulary-import-backup-latest"
 
     override suspend fun loadRaw(): String? = withContext(Dispatchers.Default) {

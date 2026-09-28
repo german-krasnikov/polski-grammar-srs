@@ -43,6 +43,11 @@ class IosSessionTest {
      * [session]'s `currentSnapshot()` called *after* `packRegistry` is switched to en-ru (as
      * `AppModel.init()` now does, `reapplySavedCoursePack()` before `session.currentSnapshot()`)
      * must not throw, even though the first call already happened with pl-ru active.
+     *
+     * EnRuAcceptance-2026-09-28.md §7 item 2: en-ru now passes `usableCourseSelections` (item 1),
+     * so [selectActiveCoursePack] genuinely switches the active pack here, not the no-op ADR-35
+     * described when this test was written — this is now the real regression this task fixed
+     * ([IosSession.rebuildIfCourseSwitched]'s own KDoc has the full root cause and fallback).
      */
     @Test
     fun currentSnapshotAfterSwitchingActivePackToEnRuDoesNotThrow() {
@@ -52,7 +57,7 @@ class IosSessionTest {
         try {
             val session = IosSession(defaults)
             session.currentSnapshot() // mirrors the first, pl-active call `onState`'s setter makes
-            selectActiveCoursePack("en-ru") // the host path; a no-op while en-ru is unusable (ADR-35)
+            selectActiveCoursePack("en-ru") // the host path — a real switch now (item 1)
             session.currentSnapshot() // mirrors AppModel.init()'s explicit call after reapply
             session.close()
         } finally {

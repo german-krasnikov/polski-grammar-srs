@@ -2,6 +2,7 @@ package polski.ios
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.collect
@@ -32,13 +33,17 @@ import polski.vocabulary.VocabularyUiState
  * [defaults] is injectable (mirrors [IosSession]) so a test can point it at an isolated suite
  * instead of the real device's `standardUserDefaults`.
  */
-class IosVocabularySession(defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults) {
+class IosVocabularySession(private val defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults) {
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
-    private val session = VocabularySession(IosVocabularyRepository(defaults), FsrsScheduler(),
-        { Clock.System.now() }, { "user.${NSUUID().UUIDString.lowercase()}" })
+    private var session = newSession()
+    // EnRuAcceptance-2026-09-28.md §7 item 2: mirrors `MacVocabularySession.sessionPackId` — see
+    // its own KDoc for why this in-memory session needs an explicit restart on a pack switch.
+    private var sessionPackId = polski.data.activeCoursePackId
+    private var observer: Job? = null
     var onState: ((String) -> Unit)? = null
         set(value) {
             field = value
+            rebuildIfCourseSwitched()
             value?.invoke(snapshot(session.state.value))
         }
 
@@ -50,15 +55,32 @@ class IosVocabularySession(defaults: NSUserDefaults = NSUserDefaults.standardUse
      */
     var onEffect: ((String) -> Unit)? = null
 
-    init {
-        scope.launch { session.state.collect { onState?.invoke(snapshot(it)) } }
+    init { observeAndStart() }
+
+    private fun newSession(): VocabularySession = VocabularySession(IosVocabularyRepository(defaults), FsrsScheduler(),
+        { Clock.System.now() }, { "user.${NSUUID().UUIDString.lowercase()}" })
+
+    private fun observeAndStart() {
+        observer = scope.launch { session.state.collect { onState?.invoke(snapshot(it)) } }
         scope.launch { session.start() }
     }
 
-    fun currentSnapshot(): String = snapshot(session.state.value)
+    /** Unlike `IosSession.rebuildIfCourseSwitched`, [newSession] never eagerly generates content,
+     *  so no failure fallback is needed. */
+    private fun rebuildIfCourseSwitched() {
+        val current = polski.data.activeCoursePackId
+        if (current == sessionPackId) return
+        sessionPackId = current
+        observer?.cancel()
+        session = newSession()
+        observeAndStart()
+    }
+
+    fun currentSnapshot(): String { rebuildIfCourseSwitched(); return snapshot(session.state.value) }
     fun exportJson(): String? = session.exportJson()
 
     fun dispatch(command: String, value: String = "") {
+        rebuildIfCourseSwitched()
         when (command) {
             "direction" -> builtInStudyDirections.firstOrNull { it.wire == value }?.let(session::setDirection)
             "filter" -> if (value in listOf("A1", "A2", "B1", "100", "500", "1000", "mine")) session.setFilter(value)

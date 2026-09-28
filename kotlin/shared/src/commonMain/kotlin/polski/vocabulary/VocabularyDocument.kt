@@ -51,9 +51,13 @@ data class VocabularyDocument(
 )
 
 object VocabularyCodec {
-    /** UC-04: was the literal `"pl-ru"` — now the active pack's [polski.data.CoursePack.pairId],
-     * same wire value until a second pack exists. */
-    val key: String by lazy { "polski-vocabulary-${packRegistry.active.pairId}-v1" }
+    /** UC-04: was the literal `"pl-ru"` — now the active pack's [polski.data.CoursePack.pairId].
+     * EnRuAcceptance-2026-09-28.md §7 item 2: read fresh (was `by lazy`, which froze this to
+     * whichever pack was active on first read for the rest of the process) so a host's vocabulary
+     * repository keeps loading/saving the right pack's own document after
+     * [polski.data.selectCoursePack] switches the active pack — same fix [polski.data.skills] and
+     * the rest of `CourseData.kt`'s per-pack `val`s already applied. */
+    val key: String get() = "polski-vocabulary-${packRegistry.active.pairId}-v1"
 
     fun cardKey(id: String, direction: StudyDirection): String = "${packRegistry.active.pairId}:vocabulary:${direction.wire}:$id"
 

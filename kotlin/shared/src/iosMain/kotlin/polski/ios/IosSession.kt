@@ -38,12 +38,15 @@ class IosSession(private val defaults: NSUserDefaults = NSUserDefaults.standardU
     private val repository = IosProgressRepository(scheduler, defaults)
     private var nextId = 0L
     private var store = newStore()
+    // EnRuAcceptance-2026-09-28.md §7 item 2: mirrors `MacSession.storePackId` — see
+    // [rebuildIfCourseSwitched]'s own KDoc for why this bridge must track it.
+    private var storePackId = polski.data.activeCoursePackId
     private var observer: Job? = null
     private var closed = false
     var onState: ((String) -> Unit)? = null
         set(value) {
             field = value
-            if (value != null) value(snapshot(store.state.value))
+            if (value != null) { rebuildIfCourseSwitched(); value(snapshot(store.state.value)) }
         }
 
     /**
@@ -58,11 +61,12 @@ class IosSession(private val defaults: NSUserDefaults = NSUserDefaults.standardU
 
     init { observeAndStart() }
 
-    fun currentSnapshot(): String = snapshot(store.state.value)
+    fun currentSnapshot(): String { rebuildIfCourseSwitched(); return snapshot(store.state.value) }
 
     /** Commands are semantic host actions; malformed values are ignored without changing session state. */
     fun dispatch(command: String, value: String = "") {
         if (closed) return
+        rebuildIfCourseSwitched()
         val action: AppAction = when (command) {
             "tab" -> AppTab.entries.firstOrNull { it.name == value }?.let(AppAction::SelectTab)
             "chain" -> AppAction.StartChain()
@@ -157,6 +161,24 @@ class IosSession(private val defaults: NSUserDefaults = NSUserDefaults.standardU
     private fun observeAndStart() {
         observer = scope.launch { store.state.collect { onState?.invoke(snapshot(it)) } }
         scope.launch { store.start() }
+    }
+
+    /** Mirrors `MacSession.rebuildIfCourseSwitched` exactly — see its own KDoc for the full
+     *  rationale (EnRuAcceptance-2026-09-28.md §7 item 2), including the fallback for a pack
+     *  whose content can't build a working exercise engine yet. */
+    private fun rebuildIfCourseSwitched() {
+        val current = polski.data.activeCoursePackId
+        if (current == storePackId) return
+        val rebuilt = runCatching { newStore() }.getOrNull()
+        if (rebuilt == null) {
+            runCatching { polski.data.selectCoursePack(storePackId) }
+            return
+        }
+        storePackId = current
+        observer?.cancel()
+        store.close()
+        store = rebuilt
+        observeAndStart()
     }
 
     private fun newStore(): TrainingStore = TrainingStore(
