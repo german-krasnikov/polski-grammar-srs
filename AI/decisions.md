@@ -2,6 +2,48 @@
 
 Новые сверху. Формат: решение → почему → где подробно.
 
+## ADR-47 · 2026-09-28 · iOS: front-side "есть лайфхак" badge + Matrix "Лайфхаки" листинг — host-local `Раздел`, не 5-е значение `MatrixSection`
+
+`ADR-46` уже дала iOS весь нужный wire-контракт (`exercise.hasLifehack`, top-level `lifehackGroups`)
+— эта задача чисто хостовая (`EnRuPackPlan.md` §4.2/§4.3): (1) `FlashCardView`'s `questionHeader`
+рисует некликабельный по смыслу бейдж `LifehackBadge` ("💡 Есть лайфхак", явный
+`accessibilityLabel` без эмодзи-шума) при `card.bool("hasLifehack")`, до `Reveal` — сам не
+раскрывает ответ: `.onTapGesture {}` на бейдже глотает тап раньше, чем он всплывёт до
+`questionHeader`'s собственного tap-to-reveal (проверено живым `XCUITest`: тап по бейджу не
+показывает "Эталон"). (2) `MatrixView` получила 5-й пункт Picker'а `Раздел` — "Лайфхаки", читающий
+`lifehackGroups` целиком (curriculum order уже гарантирован `LifehackProvider.listAll()`), каждая
+группа — `Form` `Section` с уже существующим `LifehackEntryView` (был `private` в
+`FlashCardView.swift`, стал `internal` — переиспользован, не задублирован).
+
+Решение: НЕ добавлять 5-е значение в `MatrixSection` (`AppUiState.kt`) ради этого пункта Picker'а.
+`lifehackGroups` — не завязанный на секцию, всегда полностью посчитанный top-level snapshot-филд
+(в отличие от `matrix.nouns`/`matrix.verbId` и т.п., которые реально требуют выбора хостом через
+bridge-экшен `matrixSection`), так что Kotlin-стороне физически нечего выбирать. Растить закрытый
+shared enum ради чисто host-local UI-переключателя — лишняя shared-правка в лейне, которая по
+правилам задачи трогает только iOS: вместо этого `MatrixView` держит `@State private var
+localSection: String?` — `nil` значит "верить `matrix.section` из bridge", любое другое
+("Lifehacks") — host-local override, который никогда не уходит в `model.send("matrixSection", …)`.
+Выбор любого из 4 старых пунктов сбрасывает override обратно в `nil` и шлёт экшен как раньше —
+побайтово то же поведение для Cases/Verbs/Pronouns/Map, что было до этой задачи.
+
+Проверено (живой `xcodebuild test`, симулятор `4384946F-9E6B-43D0-ADA3-CA219A3456B8`): 2 новых
+теста (`testTaskCardShowsNonSpoilingLifehackBadgeOnFrontThatDoesNotReveal`,
+`testMatrixLifehacksSectionListsAllSkillsInCurriculumOrderWithCollapsibleGroups`) — честный RED
+сначала (тесты писались против ещё не пересобранного бинарника — `PolskiGrammar.app` мтайм
+21:06:59 против правок файлов 21:08:19/21:08:39, тот же живой прогон подтвердил отсутствие бейджа
+и пункта "Лайфхаки" в Picker'е до правки), затем GREEN 2/2 после пересборки. Регрессия — те же 3
+уже существующих лайфхак-теста (`testLifehackBlockShowsCollapsedWithAttributionAndExpandsToShow
+CitationAndLink`, `.WithNoSourceUrlStillShowsCitationWithoutLink`,
+`testSkillWithTwoAuthoredLifehacksShowsTwoIndependentEntries`) + 2 существующих Matrix-теста
+(`testNativeCasesShowCompactNoteAndOrderedComparisonNouns`, `testNativeTrainingMatrixAndProgress`)
+— все 5/5 green, `LifehackEntryView`'s новый опциональный `identifierPrefix` (дефолт `"lifehack"`)
+не меняет старые accessibility-идентификаторы.
+
+Где: `kotlin/iosApp/PolskiGrammar/FlashCardView.swift` (`LifehackBadge`, `LifehackEntryView` не
+`private`), `kotlin/iosApp/PolskiGrammar/PolskiGrammarApp.swift` (`MatrixView`'s `lifehacks`).
+Тесты: `kotlin/iosApp/PolskiGrammarUITests/PolskiGrammarUITests.swift`. Не входит: Android/macOS/web
+— другие лейны/хосты, `lane-ios` их не трогает.
+
 ## ADR-46 · 2026-09-28 · `LifehackProvider`: пакетный листинг + `hasLifehacks` — `fun interface` → обычный interface
 
 `EnRuPackPlan.md` §4.2/§4.3 предполагала только `forSkill(skillId)` (карточка одного навыка). Для
