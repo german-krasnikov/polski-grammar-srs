@@ -200,6 +200,17 @@ final class AppModel: ObservableObject {
     private var vocabularyEffectCounter = 0
 
     init() {
+        // EnRuAcceptance-2026-09-28.md §7 item 2 (iOS false-green fix): must run before any
+        // bridge's `onState` is assigned below. `preferencesSession.onState`'s setter eagerly
+        // calls `currentSnapshot()` (see its own KDoc), which reconciles the persisted
+        // target/native against `activeCoursePackId` — while the active pack was still the
+        // process-default pl-ru, that reconciliation always found a "mismatch" and immediately
+        // self-corrected a genuinely persisted en-ru choice back to pl-ru before this method
+        // (the only thing that actually switches the active pack) ever ran, so a real, working
+        // en-ru pack silently reverted on every cold start. `session.onState`'s own setter also
+        // triggers a rebuild (`IosSession.rebuildIfCourseSwitched`), so running this first makes
+        // that first rebuild the real one, instead of a second, redundant one below.
+        preferencesSession.reapplySavedCoursePack()
         session.onState = { [weak self] json in
             DispatchQueue.main.async { self?.receive(json) }
         }
@@ -228,9 +239,6 @@ final class AppModel: ObservableObject {
         preferencesSession.onState = { [weak self] json in
             DispatchQueue.main.async { self?.receivePreferences(json) }
         }
-        // EN-22: must run after `session.onState` above (already forced) — see
-        // `reapplySavedCoursePack`'s own doc for why this exact ordering is load-bearing.
-        preferencesSession.reapplySavedCoursePack()
         receive(session.currentSnapshot())
         receiveVocabulary(vocabulary.currentSnapshot())
         receivePreferences(preferencesSession.currentSnapshot())

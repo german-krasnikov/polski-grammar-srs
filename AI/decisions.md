@@ -2,6 +2,66 @@
 
 Новые сверху. Формат: решение → почему → где подробно.
 
+## ADR-43 · 2026-09-28 · EnRuAcceptance §7 item 2 (lane-ios, false-green фикс): en-ru реально остаётся активным после релонча — баг был не в `rebuildIfCourseSwitched`, а в порядке `AppModel.init()`
+
+`EnRuAcceptance-2026-09-28.md` §7 item 2's исходная находка для этой лейны обвиняла
+`IosSession.rebuildIfCourseSwitched`'s `runCatching { newStore() }.getOrNull()` — мол, тот молча
+глотает реальное исключение при сборке en-ru, и `testSelectingEnglishTargetIsOfferedAndSelfCorrects
+WithAVisibleNoticeOnRelaunch` (`PolskiGrammarUITests.swift`) — false-green: он всё ещё проверяет
+докоммит-1e5e445/ADR-37 контракт («откат с предупреждением»), хотя `PlExerciseEngine` для en-ru
+теперь строится по-настоящему (ADR-39, тот же класс, что живьём работает на Android). Диагностика
+живым прогоном на симуляторе (`4384946F-9E6B-43D0-ADA3-CA219A3456B8`, временный `NSLog` в
+`rebuildIfCourseSwitched`, `xcrun simctl spawn … log stream`) опровергла эту гипотезу: на релонче
+`rebuildIfCourseSwitched` вообще ни разу не видит `activeCoursePackId == "en-ru"` — он остаётся
+`"pl-ru"` весь процесс, попытки пересборки для en-ru не было вовсе, значит никакое исключение не
+глоталось.
+
+Настоящая причина — в `PolskiGrammarApp.swift`'s `AppModel.init()`: `preferencesSession.onState =
+{...}` присваивался (сеттер который eagerly зовёт `currentSnapshot()` →
+`reconcileWithActivePack()`, см. `IosPreferencesSession.kt`) **до** вызова
+`preferencesSession.reapplySavedCoursePack()` — единственного места, которое реально переключает
+активный пакет. На каждом холодном старте с персистентным `target=en` эта первая, слишком ранняя
+`reconcileWithActivePack()` видела ещё дефолтный `pl-ru` активным, делала вывод, что переключение
+«не удалось», и тут же переписывала персистентный `target`/`native` обратно на `pl-ru` — раньше, чем
+`reapplySavedCoursePack()` вообще успевал запуститься. Старый комментарий на вызове
+(«must run after `session.onState` above») был буквально неверен для правильной причины: порядок,
+от которого реально зависело поведение, — это порядок относительно `preferencesSession.onState`,
+не `session.onState`. `MacPreferencesSession` этой ловушки не имеет вовсе: она применяет
+сохранённый пакет синхронно в собственном `init { syncActivePack() }`, а не отдельным,
+порядко-зависимым вызовом хоста.
+
+Решение: переставить `preferencesSession.reapplySavedCoursePack()` в самое начало
+`AppModel.init()`, до присваивания любого бриджа `onState`. `IosPreferencesSession.
+reapplySavedCoursePack`'s KDoc переписан, чтобы явно требовать этот порядок и объяснять, почему
+обратный порядок откатывает рабочий пакет. `IosSession.rebuildIfCourseSwitched` не тронут —
+`runCatching { newStore() }.getOrNull()` там ровно тот же приём, что `MacSession`'s версия
+(byte-identical), и остаётся законной защитой на случай пакета, который действительно не строится;
+он никогда не был источником этого дефекта.
+
+`PolskiGrammarUITests.testSelectingEnglishTargetIsOfferedAndSelfCorrectsWithAVisibleNoticeOnRelaunch`
+переименован и переписан в `testSelectingEnglishTargetSticksAcrossRelaunchAndServesRealEnglishContent`
+— положительный контракт (нет `packSwitchWarning`, нет отката на старую польскую фразу, пикер после
+релонча показывает «Английский», карточка показывает реальный английский текст без кириллицы/
+польских диакритиков — тот же `CYRILLIC_OR_POLISH`-приём, что `kotlin-en-course-switch.spec.ts`),
+вместо контракта отката, чья предпосылка (ADR-39) уже закрылась.
+
+Проверено: живой `xcodebuild test` на `4384946F-9E6B-43D0-ADA3-CA219A3456B8` (derivedData
+`/private/tmp/claude-501/usable-dd`) — RED-диагностика (временный `NSLog`) подтвердила
+`activeCoursePackId` остаётся `pl-ru` весь релонч при старом порядке; после фикса новый тест
+**PASSED**: без alert «Сообщение», без старой польской фразы, найден реальный латинский текст на
+карточке, `settingsTargetPicker` после релонча — «Английский». `:shared:iosSimulatorArm64Test`
+400/400 (без изменений в `:shared`, кроме удалённого временного диагностического теста). Регрессия:
+`testAnimationsToggleDefaultsOnAndPersistsOffAcrossRelaunch`,
+`testAnswerModeChosenInSettingsSurvivesAppRestart`, `testNativeAppearanceSettingsKeepsTrainingCard`,
+`testSaveFailureShowsErrorBannerOnEveryTabWithExportReachable`,
+`testNativeChainCompletionShowsFiveAnswersAndKeepsFiveRatings`, `testNativeTrainingMatrixAndProgress`
+— см. отчёт разработчика для точного результата этого прогона.
+
+Где: `kotlin/iosApp/PolskiGrammar/PolskiGrammarApp.swift` (`AppModel.init()` — переупорядочен),
+`kotlin/shared/src/iosMain/kotlin/polski/ios/IosPreferencesSession.kt` (KDoc only),
+`kotlin/iosApp/PolskiGrammarUITests/PolskiGrammarUITests.swift` (тест переписан). pl-ru golden/parity
+не тронуты; `:shared` production-код не менялся — это чисто хост-wiring фикс.
+
 ## ADR-42 · 2026-09-28 · EnRuAcceptance §7 item 4: словарь macOS/desktop-preview открыт для en-ru — `StudyDirection` был открытым типом, UI и дефолт направления — нет
 
 `StudyDirection` (EN-09) уже был string-backed, но три места вокруг него всё ещё были

@@ -21,21 +21,30 @@ final class PolskiGrammarUITests: XCTestCase {
     }
 
     /**
-     * EN-22 (Plans/Kotlin/EnRuPackPlan.md §6) + ADR-36 (EnRuAcceptance-2026-09-28.md §7 item 1):
-     * `CoursePack`'s schema is now language-agnostic, so en-ru parses completely and
-     * `usableCourseSelections` — read here through `coursePacks`, never a hardcoded pl/en pair —
-     * offers "Английский" alongside "Польский". Picking it is accepted (§7 item 1 unblocks the
-     * picker itself), but ADR-37/38 (§7 item 2, blocker 2) document a separate, out-of-lane content
-     * gap: `courses/lang/en/forms.generated.json` has no noun/adjective/possessive forms yet, so
-     * `IosSession.rebuildIfCourseSwitched` cannot actually build an en-ru exercise engine — it
-     * degrades softly (rolls `packRegistry.active` back to pl-ru instead of crashing) rather than
-     * masking the gap, and `IosPreferencesSession.reconcileWithActivePack` self-corrects the
-     * persisted target/native and surfaces a one-shot `packSwitchWarning`. This test proves the
-     * whole host-visible contract: the picker really offers English (not a hardcoded pl/en pair
-     * behind a stale gate), and picking it is never a silent no-op or a crash — training keeps
-     * working in Polish and the host tells the user why the switch didn't stick.
+     * EN-22 (Plans/Kotlin/EnRuPackPlan.md §6) + ADR-36/39 (EnRuAcceptance-2026-09-28.md §7 items
+     * 1/2): `CoursePack`'s schema is language-agnostic and `lang/en/forms.generated.json` now
+     * materializes every category `ConstructionRealizer` needs (ADR-39), so en-ru both parses
+     * *and* actually builds a real training session — `usableCourseSelections` (read here through
+     * `coursePacks`) offers "Английский" alongside "Польский", and picking it must stick across a
+     * relaunch, not self-correct back to pl-ru.
+     *
+     * This replaces a false-green predecessor of the same name: it asserted the *old*, since-fixed
+     * ADR-37/38 rollback contract (en-ru silently reverting with a `packSwitchWarning`), and kept
+     * passing after ADR-39 closed that content gap — because a *different*, iOS-only bug produced
+     * the exact same symptom for an unrelated reason. `AppModel.init()` assigned
+     * `preferencesSession.onState` (whose setter eagerly calls `currentSnapshot()`, which reconciles
+     * the persisted target/native against `activeCoursePackId`) *before* calling
+     * `preferencesSession.reapplySavedCoursePack()` (the only thing that actually switches the
+     * active pack) — so on every cold start with a persisted non-default target, reconciliation
+     * always saw the still-default pl-ru pack, concluded the switch had failed, and reverted the
+     * genuinely-persisted en-ru choice before it was ever applied. Confirmed live on-device: the
+     * predecessor test passed while `IosSession.rebuildIfCourseSwitched`'s own rebuild was never
+     * even attempted (diagnostic `NSLog` showed `activeCoursePackId` staying `pl-ru` throughout the
+     * relaunch). Fixed by reordering `AppModel.init()` (`reapplySavedCoursePack()` first); mirrors
+     * `MacPreferencesSession`, which sidesteps this whole hazard by applying the saved pack
+     * synchronously in its own `init` block instead of a separately-ordered host call.
      */
-    func testSelectingEnglishTargetIsOfferedAndSelfCorrectsWithAVisibleNoticeOnRelaunch() {
+    func testSelectingEnglishTargetSticksAcrossRelaunchAndServesRealEnglishContent() {
         let app = XCUIApplication()
         app.launch()
         XCTAssertTrue(app.staticTexts["To jest moja piękna żona."].waitForExistence(timeout: 20))
@@ -47,7 +56,7 @@ final class PolskiGrammarUITests: XCTestCase {
         XCTAssertTrue(targetPicker.waitForExistence(timeout: 5), app.debugDescription)
         targetPicker.tap()
         XCTAssertTrue(app.buttons["Польский"].waitForExistence(timeout: 5), app.debugDescription)
-        XCTAssertTrue(app.buttons["Английский"].exists, "en-ru now parses completely (ADR-36) and must be offered")
+        XCTAssertTrue(app.buttons["Английский"].exists, "en-ru parses completely (ADR-36) and must be offered")
         let offeredCapture = XCTAttachment(screenshot: app.screenshot())
         offeredCapture.name = "en-ru-offered-in-target-picker"
         offeredCapture.lifetime = .keepAlways
@@ -55,26 +64,30 @@ final class PolskiGrammarUITests: XCTestCase {
         app.buttons["Английский"].tap()
         app.buttons["Готово"].tap()
 
-        // The rollback is discovered building the training session on next launch, before
-        // Settings is reopened — the alert must appear without any further navigation.
+        // The real switch is discovered building the training session on next launch, before
+        // Settings is reopened — no alert may appear, and the switch must have already stuck.
         app.terminate()
         app.launch()
-        XCTAssertTrue(app.staticTexts["To jest moja piękna żona."].waitForExistence(timeout: 20),
-            "training keeps working in Polish — never stuck on a pack that can't build")
-        let warning = app.alerts["Сообщение"]
-        XCTAssertTrue(warning.waitForExistence(timeout: 5), app.debugDescription)
-        XCTAssertTrue(warning.staticTexts["Пакет «en-ru» пока не может обучать — вернулись к «pl-ru»"].exists,
-            warning.debugDescription)
-        let warningCapture = XCTAttachment(screenshot: app.screenshot())
-        warningCapture.name = "pack-switch-warning-self-correction"
-        warningCapture.lifetime = .keepAlways
-        add(warningCapture)
-        warning.buttons["ОК"].tap()
+        XCTAssertFalse(app.staticTexts["To jest moja piękna żona."].waitForExistence(timeout: 5),
+            "en-ru now builds for real (ADR-39) — must not silently stay on the old pl-ru sentence")
+        XCTAssertFalse(app.alerts["Сообщение"].waitForExistence(timeout: 2),
+            "en-ru must not roll back — no self-correction notice is expected")
+        continueIntroductionIfPresent(app)
+        // A real English sentence, not a mock: purely-Latin card text (no Cyrillic/Polish
+        // diacritics), mirroring `kotlin-en-course-switch.spec.ts`'s `CYRILLIC_OR_POLISH` check —
+        // deliberately not a hardcoded exact sentence, since chain seed order is not this test's
+        // contract.
+        let englishSentence = app.staticTexts.matching(NSPredicate(format: "label MATCHES %@", "^[A-Za-z][A-Za-z '.,-]{2,}$"))
+        XCTAssertTrue(englishSentence.firstMatch.waitForExistence(timeout: 10), app.debugDescription)
+        let enCapture = XCTAttachment(screenshot: app.screenshot())
+        enCapture.name = "en-ru-real-english-content-after-relaunch"
+        enCapture.lifetime = .keepAlways
+        add(enCapture)
 
         app.buttons["openSettings"].tap()
         let targetPickerAfterRelaunch = app.descendants(matching: .any)["settingsTargetPicker"].firstMatch
         XCTAssertTrue(targetPickerAfterRelaunch.waitForExistence(timeout: 5), app.debugDescription)
-        XCTAssertTrue(targetPickerAfterRelaunch.label.contains("Польский"), targetPickerAfterRelaunch.label)
+        XCTAssertTrue(targetPickerAfterRelaunch.label.contains("Английский"), targetPickerAfterRelaunch.label)
         app.buttons["Готово"].tap()
     }
 

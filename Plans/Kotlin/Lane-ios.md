@@ -782,3 +782,70 @@ Not run (lean mode, unaffected by this change): `testInventoryAuthoredMatrixAndV
 `testNativeChainCompletionShowsFiveAnswersAndKeepsFiveRatings` (both already covered by the C2
 verification table above and untouched by this correction's diff), the rest of
 `PolskiGrammarUITests`, `FlipCorrectnessUITests`, `VocabularyFlipUITests`, Android/macOS/web hosts.
+
+## EnRuAcceptance-2026-09-28 §7 item 2 correction — false-green fix: en-ru now really stays active across a relaunch (ADR-43)
+
+**Task.** `EnRuAcceptance-2026-09-28.md` §7's iOS finding said: selecting target=English/native=
+Russian in Settings does not actually enable en-ru training on iOS — on relaunch the app silently
+rolls back to pl-ru with a notice. Evidence cited: the unmodified, live-passing
+`testSelectingEnglishTargetIsOfferedAndSelfCorrectsWithAVisibleNoticeOnRelaunch` (rollback really
+happens), and a hypothesis that `IosSession.rebuildIfCourseSwitched`'s `runCatching { newStore() }
+.getOrNull()` silently swallows a real build exception, hiding a false-green test (the docstring's
+own cited root cause — missing `forms.generated.json` fields — was already fixed in `1e5e445`).
+
+**Investigation (RED, live device).** Reproduced the reported rollback exactly: fresh install,
+`xcodebuild test -only-testing:.../testSelectingEnglishTargetIsOfferedAndSelfCorrectsWithAVisible
+NoticeOnRelaunch` on `4384946F-9E6B-43D0-ADA3-CA219A3456B8` — **PASSED** (i.e. the rollback the test
+asserts really happened), confirming the report. Before assuming the cited hypothesis, verified it
+directly: `:shared:iosSimulatorArm64Test`, a new diagnostic test calling `IosSession` the same way
+the host does (switch to en-ru, call `currentSnapshot()` twice) — **PASSED**, en-ru stayed active,
+no exception thrown by `newStore()` at the Kotlin level. This ruled out the cited hypothesis: the
+shared `PlExerciseEngine`/`TrainingStore` build en-ru successfully (ADR-39 already fixed the real
+content gap on `main`), so `rebuildIfCourseSwitched` was never the true cause.
+
+Added a temporary `NSLog` inside `IosSession.rebuildIfCourseSwitched` (both an unconditional
+"check" line and an `onFailure` line), rebuilt, and captured device logs live with `xcrun simctl
+spawn 4384946F-9E6B-43D0-ADA3-CA219A3456B8 log stream --level debug --predicate 'process ==
+"PolskiGrammar"'` while re-running the same UI test. Result: on the post-switch relaunch,
+`rebuildIfCourseSwitched` logged `current=pl-ru stored=pl-ru` for every single check across the
+whole process lifetime — the en-ru rebuild was **never even attempted**, so no exception could have
+been swallowed. Traced this to `PolskiGrammarApp.swift`'s `AppModel.init()`: it assigned
+`preferencesSession.onState` (whose setter eagerly calls `currentSnapshot()`, which runs
+`IosPreferencesSession.reconcileWithActivePack()`) *before* calling `preferencesSession.
+reapplySavedCoursePack()` — the only call that actually switches `packRegistry.active`. On every
+cold start with a persisted `target=en`, that first, too-early `reconcileWithActivePack()` saw the
+still-default `pl-ru` active, concluded the switch had failed, and rewrote the persisted
+target/native back to `pl-ru` before `reapplySavedCoursePack()` ever ran — a genuinely working
+en-ru choice reverted for a reason that had nothing to do with `newStore()`.
+
+**Fix.** Moved `preferencesSession.reapplySavedCoursePack()` to the very first line of
+`AppModel.init()`, before any bridge's `onState` is assigned. Removed the temporary `NSLog` calls
+(`IosSession.rebuildIfCourseSwitched` is back to byte-identical with `MacSession`'s). Updated
+`IosPreferencesSession.reapplySavedCoursePack`'s KDoc to state the real ordering requirement.
+Rewrote the false-green test into
+`testSelectingEnglishTargetSticksAcrossRelaunchAndServesRealEnglishContent` — a positive contract
+(no `packSwitchWarning` alert, old Polish sentence absent, a real Latin-only sentence renders, the
+picker still shows "Английский" after relaunch), replacing the assertion of a rollback contract
+whose premise (ADR-37/38) had already closed. Full rationale: `AI/decisions.md` ADR-43.
+
+**Verification.** Working directory `/Users/german/Work/JS/polski-lanes/ios/kotlin`.
+`JAVA_HOME=$(/usr/libexec/java_home -v 21 -a arm64)`, simulator
+`4384946F-9E6B-43D0-ADA3-CA219A3456B8`, `-derivedDataPath /private/tmp/claude-501/usable-dd`, fresh
+`xcrun simctl uninstall` before each run.
+
+| Check | Command | Result |
+|---|---|---|
+| RED (confirms the reported symptom): unmodified predecessor test, clean install | `-only-testing:.../testSelectingEnglishTargetIsOfferedAndSelfCorrectsWithAVisibleNoticeOnRelaunch` | **PASS** (proves the rollback the test asserts really happens) — 29.3s |
+| Diagnostic: `IosSession` alone, Kotlin-level, switch to en-ru + `currentSnapshot()` twice | `:shared:iosSimulatorArm64Test --tests IosSessionTest.*` | **PASS** — en-ru stays active, no exception; rules out `rebuildIfCourseSwitched` as the cause |
+| Diagnostic: live device log capture (`NSLog` + `log stream`) across the relaunch | same predecessor test, instrumented build | confirms `activeCoursePackId` logs `pl-ru`/`pl-ru` for every check — en-ru rebuild never attempted |
+| GREEN: rewritten positive test, fix applied | `-only-testing:.../testSelectingEnglishTargetSticksAcrossRelaunchAndServesRealEnglishContent` | **PASS**, `** TEST SUCCEEDED **`, 35.5s — no alert, old sentence absent, real English text found, picker shows "Английский" after relaunch |
+| `:shared:iosSimulatorArm64Test` (full suite, after diagnostic test removed) | `./gradlew :shared:iosSimulatorArm64Test` | **PASS** — 400/400, `:shared` production code unchanged |
+| Regression (one combined `xcodebuild test` run, 6 tests) | `-only-testing:.../testAnimationsToggleDefaultsOnAndPersistsOffAcrossRelaunch -only-testing:.../testAnswerModeChosenInSettingsSurvivesAppRestart -only-testing:.../testNativeAppearanceSettingsKeepsTrainingCard -only-testing:.../testSaveFailureShowsErrorBannerOnEveryTabWithExportReachable -only-testing:.../testNativeChainCompletionShowsFiveAnswersAndKeepsFiveRatings -only-testing:.../testNativeTrainingMatrixAndProgress` | **PASS**: `** TEST SUCCEEDED **`, "Executed 6 tests, with 0 failures (0 unexpected) in 356.4 seconds" |
+| Screenshots | `en-ru-offered-in-target-picker`, `en-ru-real-english-content-after-relaunch` (XCTAttachments on the rewritten test) |
+
+**Not touched:** `:shared` production Kotlin (`IosSession.kt` reverted to its pre-diagnosis,
+byte-identical state); pl-ru golden/parity fixtures; Android/web/desktop/macOS hosts (each already
+has its own working, unrelated pack-switch wiring per ADR-38/40/41/42). Diff scope: `PolskiGrammar
+App.swift` (init reorder, 1 line moved + comment), `IosPreferencesSession.kt` (KDoc only),
+`PolskiGrammarUITests.swift` (one test rewritten), `AI/decisions.md` (ADR-43), `Plans/Kotlin/iOS.md`
+(status section appended).
