@@ -10,11 +10,8 @@ enum class TrainingMode { Chain, Schedule, Focused }
 enum class AppTab { Training, Vocabulary, Matrix, Progress }
 enum class AnswerMode { Oral, Typed }
 enum class CardPhase { Question, Revealed, ChainComplete, NoDue }
-// `Lifehacks` (web-only Matrix sub-section today, EnRuPackPlan.md §4.3 follow-up) is a real
-// section like the other four so it shares the same reset-on-tab-entry/highlight/deep-link
-// machinery below — Desktop/Android's own menus don't offer a button for it yet (their own
-// follow-up), so their `when (section)` branches are unreachable no-ops kept only to satisfy the
-// compiler (K2 makes a non-exhaustive `when` over an enum an error even as a plain statement).
+// `Lifehacks` (EnRuPackPlan.md §4.3): a Matrix sub-section like the other four, so it shares the
+// reset-on-tab-entry/highlight/deep-link machinery below.
 enum class MatrixSection { Map, Cases, Verbs, Pronouns, Lifehacks }
 enum class LoadStatus { Loading, Ready, MigrationAvailable, RecoveryRequired, Unavailable }
 

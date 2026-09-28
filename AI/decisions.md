@@ -2,6 +2,48 @@
 
 Новые сверху. Формат: решение → почему → где подробно.
 
+## ADR-47 · 2026-09-28 · Android: фронт-бейдж «Есть лайфхак» + `MatrixSection.Lifehacks` поверх ADR-46's `listAll`/`hasLifehacks`
+
+ADR-46 подготовила данные (`hasLifehacks`, `listAll`) но явно оставила хостовый рендер вне
+своего скоупа. Эта задача — только android-часть: `AndroidLifehackBadge` (не-спойлерный бейдж
+на лицевой стороне карточки) и `AndroidLifehacksSection` (пакетный листинг внутри Matrix).
+
+Бейдж — не `clickable`: он живёт в `AndroidTrainingScreen.kt` **до** clickable-модификатора
+фронтового `Column` (который открывает `Reveal`), а не внутри него — «тап не открывает ответ»
+становится структурным свойством разметки, а не поведением, которое нужно явно гасить через
+`consumeClicks`/`stopPropagation`-эквивалент. Текст/цитата лайфхака никогда не читаются этим
+composable — он вызывает только дешёвый `hasLifehacks(skillId)`, не `forSkill(skillId)`
+(ровно то разделение, ради которого ADR-46 завела отдельный метод).
+
+Листинг — новое значение `MatrixSection.Lifehacks`, не новый `AppTab`: EnRuPackPlan.md §4.3 уже
+называет размещение внутри Matrix «под-раздел, не новая вкладка», а `AndroidMatrixScreen`'s
+существующий паттерн (`AndroidChoiceMenu` + `when`-переключатель между Map/Cases/Verbs/Pronouns)
+уже ровно то место, где такой под-раздел живёт без новой инфраструктуры. Группы —
+`AndroidCollapsible`, свёрнуты по умолчанию; каждая запись внутри группы переиспользует
+`AndroidLifehackBlock`'s собственный `AndroidOneLifehack` (тот же collapsed-caption/цитата
+контракт), а не второй параллельный рендер атрибуции.
+
+`MatrixSection` — `commonMain`-enum, так что добавление `Lifehacks` задело exhaustive `when` на
+web (`MatrixWeb.kt`) и desktop (`MatrixScreen.kt`) — оба получили пустую арму с комментарием
+«эта задача — android-only scope», чтобы не оставлять другие хосты не собирающимися; их
+собственные пикеры `Lifehacks` не предлагают, так что ветка недостижима с этих хостов сегодня.
+
+Проверено: `:androidApp:testDebugUnitTest` (97/97, включая новые
+`AndroidLifehackBlockComposeTest`'s 2 badge-кейса и новый `AndroidLifehacksSectionComposeTest`,
+2/2), `:shared:desktopTest`+`:composeApp:desktopTest`, `:composeApp:composeCompatibilityBrowserDistribution`
+(js+wasm) — все `BUILD SUCCESSFUL`. Живой прогон на `emulator-5554` (en-ru и pl-ru, после
+переключения в «Настройки»): бейдж на лицевой стороне карточки для навыка с авторским лайфхаком,
+листинг «Лайфхаки» с реальными заголовками навыков в порядке curriculum, разворачивание группы и
+одной записи до цитаты/ссылки — на обоих пакетах.
+
+Где: `kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidLifehackBlock.kt`
+(`AndroidLifehackBadge`, `AndroidLifehacksSection`, `AndroidLifehackGroupCard`),
+`AndroidTrainingScreen.kt`, `AndroidMatrixScreen.kt`, `AndroidContent.kt`;
+`kotlin/shared/src/commonMain/kotlin/polski/presentation/AppUiState.kt` (`MatrixSection.Lifehacks`);
+`kotlin/composeApp/src/desktopMain/.../MatrixScreen.kt`, `kotlin/composeApp/src/webMain/.../MatrixWeb.kt`
+(exhaustiveness-only arms); тесты в `kotlin/androidApp/src/test/java/dev/polski/grammarmatrix/`.
+Не входит: листинг/бейдж на web/desktop/ios/macos (отдельная задача per-host, как и оставила ADR-46).
+
 ## ADR-46 · 2026-09-28 · `LifehackProvider`: пакетный листинг + `hasLifehacks` — `fun interface` → обычный interface
 
 `EnRuPackPlan.md` §4.2/§4.3 предполагала только `forSkill(skillId)` (карточка одного навыка). Для

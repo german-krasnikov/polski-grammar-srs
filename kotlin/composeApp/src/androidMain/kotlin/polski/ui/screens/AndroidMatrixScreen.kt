@@ -71,7 +71,7 @@ import polski.model.TenseFeature
 import polski.model.toFeatureValue
 
 @Composable
-internal fun AndroidMatrixScreen(state: AppUiState, dispatch: (AppAction) -> Unit) {
+internal fun AndroidMatrixScreen(state: AppUiState, dispatch: (AppAction) -> Unit, reduceMotion: Boolean = false) {
     Column(verticalArrangement = Arrangement.spacedBy(14.dp)) {
         Text("Грамматическая матрица", style = MaterialTheme.typography.headlineSmall)
         Text(courseMatrixIntroduction)
@@ -83,6 +83,10 @@ internal fun AndroidMatrixScreen(state: AppUiState, dispatch: (AppAction) -> Uni
                 MatrixSection.Cases.name to "Падежи и окончания",
                 MatrixSection.Verbs.name to "Времена и лица",
                 MatrixSection.Pronouns.name to "Местоимения",
+                // EnRuPackPlan.md §4.3/ADR-46: a sub-section here, not a new top-level `AppTab` —
+                // the listing (StaticPackLifehackProvider.listAll) is Matrix reference material,
+                // same status as Cases/Verbs/Pronouns, not its own destination.
+                MatrixSection.Lifehacks.name to "Лайфхаки",
             ),
         ) { dispatch(AppAction.SelectMatrixSection(MatrixSection.valueOf(it))) }
         when (state.matrixSelection.section) {
@@ -90,10 +94,7 @@ internal fun AndroidMatrixScreen(state: AppUiState, dispatch: (AppAction) -> Uni
             MatrixSection.Cases -> AndroidCasesSection(state, dispatch)
             MatrixSection.Verbs -> AndroidVerbsSection(state, dispatch)
             MatrixSection.Pronouns -> AndroidPronounsSection(dispatch)
-            // Web-only sub-section today (the menu above doesn't offer it on this host, so this
-            // branch is unreachable from the UI) — kept here only to satisfy the shared enum's
-            // exhaustive `when`. An Android "Лайфхаки" section is separate, unstarted follow-up work.
-            MatrixSection.Lifehacks -> Unit
+            MatrixSection.Lifehacks -> AndroidLifehacksSection(reduceMotion)
         }
     }
 }

@@ -18,11 +18,15 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.semantics.clearAndSetSemantics
+import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import polski.presentation.Lifehack
+import polski.presentation.LifehackGroup
 import polski.presentation.LifehackStatus
 import polski.presentation.StaticPackLifehackProvider
 
@@ -43,6 +47,28 @@ fun AndroidLifehackBlock(skillId: String, reduceMotion: Boolean) {
     if (lifehacks.isEmpty()) return
     Column(Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(10.dp)) {
         lifehacks.forEach { hack -> AndroidOneLifehack(hack, reduceMotion) }
+    }
+}
+
+/**
+ * Front-of-card task item (1): a small, non-spoiling "есть лайфхак" marker, shown next to the
+ * skill title before [AndroidLifehackBlock] ever reveals anything — [StaticPackLifehackProvider.hasLifehacks]
+ * is the cheap existence check ADR-46 added exactly for this, so no [Lifehack] text/citation is
+ * ever built or read here. Composes nothing for a skill with no authored tip, same "empty -> no
+ * frame" contract as [AndroidLifehackBlock]. Not `clickable` — there is nothing to toggle, so a
+ * tap on it can never reveal the card by construction, not by convention. [clearAndSetSemantics]
+ * collapses the emoji + label into the one name TalkBack announces, instead of reading the emoji
+ * glyph and the label as two separate nodes.
+ */
+@Composable
+fun AndroidLifehackBadge(skillId: String) {
+    if (!StaticPackLifehackProvider.hasLifehacks(skillId)) return
+    Row(
+        Modifier.clearAndSetSemantics { contentDescription = "Есть лайфхак для этого навыка" },
+        horizontalArrangement = Arrangement.spacedBy(6.dp),
+    ) {
+        Text("💡", style = MaterialTheme.typography.labelLarge)
+        Text("Есть лайфхак", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary)
     }
 }
 
@@ -88,6 +114,61 @@ private fun AndroidOneLifehack(hack: Lifehack, reduceMotion: Boolean) {
                             modifier = Modifier.clickable { uriHandler.openUri(url) },
                         )
                     }
+                }
+            }
+        }
+    }
+}
+
+/**
+ * Matrix task item (2): every lifehack of the active pack ([StaticPackLifehackProvider.listAll]),
+ * one collapsible group per skill (curriculum order, real skill title) or cross-skill topic,
+ * collapsed by default — a level above [AndroidLifehackBlock]'s single-skill card block, reusing
+ * [AndroidOneLifehack] for each group's own entries so source/status attribution and the
+ * collapsed-citation contract stay exactly one implementation. Empty pack -> a calm notice, the
+ * same pattern [AndroidNoCaseSystemNotice] uses for a caseless pack's Cases/Pronouns sections,
+ * never an empty frame.
+ */
+@Composable
+fun AndroidLifehacksSection(reduceMotion: Boolean) {
+    val groups = remember { StaticPackLifehackProvider.listAll() }
+    if (groups.isEmpty()) {
+        Text(
+            "Для текущего курса лайфхаков пока нет.",
+            style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant,
+        )
+        return
+    }
+    Column(Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(14.dp)) {
+        groups.forEach { group -> AndroidLifehackGroupCard(group, reduceMotion) }
+    }
+}
+
+@Composable
+private fun AndroidLifehackGroupCard(group: LifehackGroup, reduceMotion: Boolean) {
+    var expanded by remember(group.skillId, group.topic) { mutableStateOf(false) }
+    Surface(
+        shape = RoundedCornerShape(18.dp), color = MaterialTheme.colorScheme.surfaceContainerHigh,
+        modifier = Modifier.fillMaxWidth(),
+    ) {
+        Column(Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            Row(
+                Modifier
+                    .fillMaxWidth()
+                    .clickable(interactionSource = remember { MutableInteractionSource() }, indication = null) { expanded = !expanded }
+                    .semantics { stateDescription = if (expanded) "развёрнуто" else "свёрнуто" },
+                horizontalArrangement = Arrangement.spacedBy(6.dp),
+            ) {
+                Text(if (expanded) "▾" else "▸", color = MaterialTheme.colorScheme.primary)
+                Text(
+                    group.title, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold,
+                    modifier = Modifier.weight(1f),
+                )
+                Text("${group.lifehacks.size}", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            }
+            AndroidCollapsible(visible = expanded, reduceMotion = reduceMotion) {
+                Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                    group.lifehacks.forEach { hack -> AndroidOneLifehack(hack, reduceMotion) }
                 }
             }
         }

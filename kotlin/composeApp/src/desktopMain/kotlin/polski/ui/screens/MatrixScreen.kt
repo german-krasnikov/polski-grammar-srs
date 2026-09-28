@@ -88,10 +88,8 @@ internal fun MatrixScreen(state: AppUiState, dispatch: (AppAction) -> Unit) {
             MatrixSection.Cases -> CasesDesktop(state, dispatch)
             MatrixSection.Verbs -> VerbsDesktop(state, dispatch)
             MatrixSection.Pronouns -> PronounsDesktop(dispatch)
-            // Web-only sub-section today (no button above offers it on this host, so this branch
-            // is unreachable from the UI) — kept here only to satisfy the shared enum's exhaustive
-            // `when`. A Desktop "Лайфхаки" section is separate, unstarted follow-up work.
-            MatrixSection.Lifehacks -> Unit
+            // The retained JVM Desktop preview has no "Лайфхаки" picker entry; arm kept for exhaustiveness.
+            MatrixSection.Lifehacks -> {}
         }
     }
 }
