@@ -112,7 +112,7 @@
     "construction": "core.argument.case-role",
     "focus": null,
     "fixed": { "Case": "Obj", "Tense": "Pres", "Person": "1", "Number": "Sing" },
-    "lexicalFilter": null,
+    "lexicalFilter": { "slot": "noun", "where": { "nounId": ["book", "work", "dog", "cat", "car", "house", "phone", "window"] } },
     "level": "A2",
     "prerequisites": ["en:role.instrument", "en:role.location"]
   },

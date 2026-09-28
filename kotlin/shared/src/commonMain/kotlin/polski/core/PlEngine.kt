@@ -89,6 +89,7 @@ internal class PackEngine(langId: String) {
         textCase = TextCase { value -> polski.grammar.capitalize(value) },
         defaultOwnerLexeme = recipeSet.defaultOwnerLexeme,
         verbLexeme = recipeSet.verbLexeme,
+        constantSlots = recipeSet.constantSlots,
     )
 
     /** The chain's 5 fixed steps with step 1's skill resolved for [nounId]'s own gender (UniversalCorePlan.md §5.3). */

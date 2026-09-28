@@ -21,6 +21,7 @@
     "pack:validate:v2": "node scripts/validate-pack-v2.mjs",
     "vocabulary:editorial:check": "node scripts/validate-vocabulary-editorial.mjs",
     "vocabulary:editorial:strict": "node scripts/validate-vocabulary-editorial.mjs --strict",
+    "lifehacks:check": "node scripts/validate-lifehacks.mjs en-ru",
     "course:inventory:check": "node scripts/inventory-course.mjs --check",
     "course:inventory:decisions:check": "node scripts/check-course-inventory.mjs --check",
     "pack:build": "node scripts/build-pack.mjs",
