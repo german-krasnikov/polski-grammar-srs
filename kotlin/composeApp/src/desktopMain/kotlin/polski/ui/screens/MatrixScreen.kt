@@ -28,7 +28,6 @@ import polski.data.courseContextHelp
 import polski.data.adjectives
 import polski.data.nounById
 import polski.data.nouns
-import polski.data.personalPronouns
 import polski.data.referencePronounTeaching
 import polski.data.possessives
 import polski.data.verbs
@@ -38,7 +37,6 @@ import polski.data.referencePipeline
 import polski.data.referenceRussianSupport
 import polski.data.referenceCaseTeaching
 import polski.data.referenceVerbTeaching
-import polski.data.comparisonNounIds
 import polski.data.referenceTenseRows
 import polski.data.referenceAspectRows
 import polski.data.maleAccRows
@@ -48,24 +46,23 @@ import polski.ui.ReferenceAspectComparison
 import polski.ui.MaleAccComparison
 import polski.ui.ContrastPairText
 import polski.grammar.caseRows
-import polski.grammar.caseSentence
 import polski.grammar.genderNames
 import polski.grammar.nounPhrase
-import polski.grammar.possessiveForm
-import polski.grammar.verbForm
 import polski.model.Aspect
-import polski.model.Gender
 import polski.model.GramCase
 import polski.model.NumberGram
-import polski.model.Person
-import polski.model.PossessiveId
 import polski.model.SentenceSeed
-import polski.model.Tense
 import polski.presentation.AppAction
 import polski.presentation.AppTab
 import polski.presentation.AppUiState
 import polski.presentation.MatrixSection
+import polski.presentation.MatrixTableViewModel
 import polski.presentation.ContrastPair
+import polski.presentation.casesFullTable
+import polski.presentation.comparisonTable
+import polski.presentation.personalPronounsTable
+import polski.presentation.possessivesTable
+import polski.presentation.verbsTable
 
 @Composable
 internal fun MatrixScreen(state: AppUiState, dispatch: (AppAction) -> Unit) {
@@ -159,34 +156,13 @@ private fun CasesDesktop(state: AppUiState, dispatch: (AppAction) -> Unit) {
                 dispatch(AppAction.SetMatrixSelection(selected.copy(numberId = it)))
             }
         }
-        val number = NumberGram.fromId(selected.numberId)
-        val owner = PossessiveId.fromId(selected.ownerId)
         val seed = SentenceSeed(selected.nounId, selected.adjectiveId)
-        MatrixTable(
-            listOf("Падеж · русская опора", "Вопрос / конструкция", "Вся группа слов", "Целое предложение"),
-            caseRows.map { row -> listOf(
-                "${row.pl} · ${row.ru}",
-                "${row.question} · ${row.trigger}",
-                nounPhrase(selected.nounId, row.id, number, selected.adjectiveId, owner),
-                caseSentence(seed, row.id, owner, number),
-            ) },
-            contrastFrom = { _, column -> when (column) {
-                2 -> nounPhrase(selected.nounId, GramCase.NOM, number, selected.adjectiveId, owner)
-                3 -> caseSentence(seed, GramCase.NOM, owner, number)
-                else -> null
-            } },
-        )
+        MatrixTableView(casesFullTable(selected))
         Text(referenceCaseTeaching.compactNote)
         OutlinedButton(onClick = { dispatch(AppAction.ChooseSkill("case.gen.neg", seed)) }) { Text("Тренировать отрицание") }
     }
     MatrixCard("Сравнение типов склонения") {
-        val number = NumberGram.fromId(selected.numberId)
-        val ids = comparisonNounIds
-        MatrixTable(
-            listOf("Падеж") + ids.map { nounById(it).lemma },
-            caseRows.map { row -> listOf(row.pl) + ids.map { nounById(it).forms.getValue(number).getValue(row.id) } },
-            contrastFrom = { _, column -> if (column > 0) nounById(ids[column - 1]).forms.getValue(number).getValue(GramCase.NOM) else null },
-        )
+        MatrixTableView(comparisonTable(selected))
     }
 }
 
@@ -203,13 +179,7 @@ private fun VerbsDesktop(state: AppUiState, dispatch: (AppAction) -> Unit) {
                 dispatch(AppAction.SetMatrixSelection(selected.copy(feminineGroup = it == "f")))
             }
         }
-        MatrixTable(
-            listOf("Кто") + listOf(Tense.PRESENT, Tense.PAST, Tense.FUTURE).map { referenceVerbTeaching.tenseLabels.getValue(it).compact },
-            referenceVerbTeaching.subjects.map { subject -> listOf(subject.label.compact) + listOf(Tense.PRESENT, Tense.PAST, Tense.FUTURE).map { tense ->
-                verbForm(selected.verbId, tense, subject.person, subject.number, subject.gender(selected.feminineGroup))
-            } },
-            contrastFrom = { _, column -> if (column > 0) verbs.first { it.id == selected.verbId }.lemma else null },
-        )
+        MatrixTableView(verbsTable(selected))
         Text(referenceVerbTeaching.compactFutureExplanation)
     }
     MatrixCard("Время меняется, предложение остаётся целым") {
@@ -228,23 +198,11 @@ private fun PronounsDesktop(dispatch: (AppAction) -> Unit) {
     val teaching = referencePronounTeaching
     MatrixCard(teaching.personalTitle) {
         Text(teaching.compactIntro)
-        MatrixTable(
-            listOf("Кто") + teaching.contexts.map { it.cue.compact },
-            teaching.pronounIds.map { id -> listOf(id) + teaching.contexts.map { it.value(id, personalPronouns.getValue(id)) } },
-            contrastFrom = { row, column -> if (column > 0) teaching.pronounIds[row] else null },
-        )
+        MatrixTableView(personalPronounsTable())
         Text(teaching.nativeFooter)
     }
     MatrixCard(teaching.possessiveTitle) {
-        MatrixTable(
-            listOf("Кому принадлежит") + teaching.demo.cases.map { it.desktop } + "Правило",
-            possessives.map { possessive ->
-                listOf(possessive.label) + teaching.demo.cases.map { teaching.demo.phrase(possessive.id, it.id) } +
-                    listOf(teaching.demo.rule(possessive.id))
-            },
-            contrastFrom = { row, column -> if (column in 1..teaching.demo.cases.size)
-                teaching.demo.phrase(possessives[row].id, GramCase.NOM) else null },
-        )
+        MatrixTableView(possessivesTable())
         OutlinedButton(onClick = { dispatch(AppAction.ChooseSkill("agreement.my", SentenceSeed(teaching.demo.nounId, teaching.demo.adjectiveId))) }) {
             Text("Тренировать смену владельца")
         }
@@ -272,6 +230,35 @@ private fun OptionSelector(label: String, selected: String, options: List<Pair<S
             options.forEach { (id, title) ->
                 DropdownMenuItem(text = { Text(title) }, onClick = { expanded = false; onSelect(id) })
             }
+        }
+    }
+}
+
+/** UC-09 part 2/2: renders any [MatrixTableViewModel] engine build — same layout/widths as the
+ *  ad-hoc [MatrixTable] below, driven by the shared row/column/contrast shape instead of a
+ *  per-call-site `headers`/`rows`/`contrastFrom` triple. */
+@Composable
+private fun MatrixTableView(model: MatrixTableViewModel) {
+    val widths = (listOf(model.rowHeaderLabel) + model.columnHeaders).mapIndexed { index, _ -> if (index == 0) 170.dp else 220.dp }
+    Column(Modifier.fillMaxWidth().horizontalScroll(rememberScrollState())) {
+        Row {
+            Text(model.rowHeaderLabel, modifier = Modifier.width(widths[0]).padding(8.dp), style = MaterialTheme.typography.labelLarge)
+            model.columnHeaders.forEachIndexed { index, header ->
+                Text(header, modifier = Modifier.width(widths[index + 1]).padding(8.dp), style = MaterialTheme.typography.labelLarge)
+            }
+        }
+        HorizontalDivider()
+        model.rows.forEach { row ->
+            Row {
+                Column(Modifier.width(widths[0]).padding(8.dp)) { Text(row.header) }
+                row.cells.forEachIndexed { index, cell ->
+                    Column(Modifier.width(widths[index + 1]).padding(8.dp)) {
+                        val contrast = cell.contrast
+                        if (contrast == null) Text(cell.value) else ContrastPairText(contrast)
+                    }
+                }
+            }
+            HorizontalDivider()
         }
     }
 }
