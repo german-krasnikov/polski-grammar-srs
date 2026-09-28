@@ -879,6 +879,10 @@ private class TrainingDomRenderer {
         val (effective, content) = resolveEffectiveStyleAndContent(state, skill.id)
         val backBlocks = StyleComposer.compose(effective, StylePhase.Back, exercise, skill, presentation, content)
         renderCardBlocks(back, backBlocks, "card-blocks-back")
+        // EN-21 (EnRuPackPlan.md §4.3): the lifehack block is deliberately outside StyleComposer's
+        // output — same for every style, so it always renders after the back blocks, never inside
+        // whichever ones the active style composed.
+        renderLifehackBlock(back, skill.id)
         back.appendChild(node("div", "rating-label", "Когда повторить?"))
         back.appendChild(node("p", "method-review", method.review))
         val ratings = node("div", "ratings")
