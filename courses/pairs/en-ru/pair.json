@@ -718,14 +718,14 @@
       "level": "B1",
       "formula": "Комбинация: время (Present → Past) + владелец (my → другое притяжательное) в одном предложении.",
       "theory": "На уровне B1 нужно менять несколько вещей одновременно: и время глагола, и притяжательное местоимение, без пошаговых подсказок, как на A1-A2.",
-      "hint": "I see my beautiful house. → I walked his beautiful house.",
+      "hint": "I see my beautiful house. → I saw his beautiful house.",
       "prerequisites": [
         "en:possessive.my",
         "en:verb.pastSimple"
       ],
       "focus": {
         "before": "I see my beautiful house.",
-        "after": "I walked his beautiful house."
+        "after": "I saw his beautiful house."
       },
       "methods": {
         "logic": {
@@ -854,7 +854,7 @@
     "mixedPrompt": "Перенеси предложение в прошедшее время и замени владельца.",
     "mixedExplanation": "Здесь два изменения сразу: время глагола и притяжательное местоимение; каждое меняется по своему собственному правилу, независимо от другого.",
     "mixedVerbFrom": "see",
-    "mixedVerbTo": "walked",
+    "mixedVerbTo": "saw",
     "mixedVerbReason": "Меняется время глагола: настоящее → прошедшее.",
     "mixedOwnerReason": "Меняется владелец; остальная форма существительного и прилагательного не меняется.",
     "mixedOwnerPromptPrefix": "Замени «мой» на «",
@@ -872,11 +872,11 @@
     "chainPastPrompt": "Перенеси предложение в прошедшее время.",
     "chainPastReason": "Меняется время глагола: настоящее → прошедшее, дополнение не меняется.",
     "chainPastChangeFrom": "see",
-    "chainPastChangeTo": "walked",
+    "chainPastChangeTo": "saw",
     "chainNegPrompt": "Сделай предложение отрицательным, сохранив прошедшее время.",
     "chainNegReason": "Добавлен did not перед базовой формой глагола.",
-    "chainNegChangeFrom": "walked",
-    "chainNegChangeTo": "did not walk",
+    "chainNegChangeFrom": "saw",
+    "chainNegChangeTo": "did not see",
     "chainOwnerPrompt": "Замени владельца на «her». Сохрани отрицание и прошедшее время.",
     "chainOwnerReason": "Меняется владелец; остальная фраза, включая отрицание, не меняется.",
     "chainLocPrompt": "Скажи, что находишься внутри этого. Начни с «I stayed in…».",
@@ -888,8 +888,8 @@
     "verbSentence": "{subj} {verb}.",
     "subjectVerb": "I {verb}.",
     "roleDrill": "{start} {target}.",
-    "chainPast": "I walked {obj}.",
-    "chainNeg": "I did not walk {obj}."
+    "chainPast": "I saw {obj}.",
+    "chainNeg": "I did not see {obj}."
   },
   "vocabulary": {
     "source": "curated from courses/lang/en/lexicon.json's genuinely-authored lexemes; editorial cards from courses/pairs/en-ru/vocabulary-editorial.json (EN-15/EN-16), examples authored for this course",
