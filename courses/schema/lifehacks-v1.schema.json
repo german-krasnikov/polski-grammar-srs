@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Polski pair lifehacks v1",
+  "description": "EnRuPackPlan.md §4.1/§6 EN-19: pair-scoped L1-transfer tips, outside core (ADR-15). One file per pair: courses/pairs/<pairId>/lifehacks.json.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "pairId", "lifehacks"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "pairId": { "type": "string", "pattern": "^[a-z]{2}-[a-z]{2}$" },
+    "lifehacks": { "type": "array", "items": { "$ref": "#/$defs/lifehack" }, "minItems": 1 }
+  },
+  "$defs": {
+    "text": { "type": "string", "minLength": 1, "pattern": "\\S" },
+    "lifehack": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "skillId", "topic", "text", "source", "status", "votes"],
+      "properties": {
+        "id": { "$ref": "#/$defs/text" },
+        "skillId": { "type": ["string", "null"] },
+        "topic": { "type": ["string", "null"] },
+        "text": { "$ref": "#/$defs/text" },
+        "source": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "citation"],
+          "properties": {
+            "kind": { "enum": ["research", "teaching-practice", "project-authored"] },
+            "citation": { "$ref": "#/$defs/text" },
+            "url": { "type": "string", "pattern": "^https://[^ ]+$" }
+          }
+        },
+        "status": { "enum": ["editorial", "community"] },
+        "votes": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["helpful", "notHelpful"],
+          "properties": {
+            "helpful": { "const": 0 },
+            "notHelpful": { "const": 0 }
+          }
+        }
+      }
+    }
+  }
+}

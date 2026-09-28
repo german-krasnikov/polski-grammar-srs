@@ -1,0 +1,294 @@
+{
+  "schemaVersion": 1,
+  "pairId": "en-ru",
+  "lifehacks": [
+    {
+      "id": "en-ru.role.object.article",
+      "skillId": "en:role.object",
+      "topic": null,
+      "text": "В русском нет артиклей вообще — при переводе на английский почти любое единственное исчисляемое существительное без «this/my/the» требует «a»: «дом» → «a house», не «house».",
+      "source": { "kind": "research", "citation": "Master, P. (1997). The English article system: acquisition, function, and pedagogy. System, 25(2), 215–232.", "url": "https://doi.org/10.1016/S0346-251X(96)00063-8" },
+      "status": "editorial",
+      "votes": { "helpful": 0, "notHelpful": 0 }
+    },
+    {
+      "id": "en-ru.role.object.wordorder",
+      "skillId": "en:role.object",
+      "topic": null,
+      "text": "В русском грамматическая роль (кто субъект, кто объект) видна по падежному окончанию, а порядок слов свободный: «Мальчик видит собаку» и «Собаку видит мальчик» грамматичны и означают одно и то же. В английском падежных окончаний у существительных нет — роль определяется только порядком слов (SVO), поэтому «The dog sees the boy» и «The boy sees the dog» — два разных, противоположных по смыслу предложения.",
+      "source": { "kind": "research", "citation": "Comrie, B. (1981). Language Universals and Linguistic Typology (2nd ed.). University of Chicago Press — типология кодирования грамматических отношений порядком слов вместо падежа." },
+      "status": "editorial",
+      "votes": { "helpful": 0, "notHelpful": 0 }
+    },
+    {
+      "id": "en-ru.verb.presentsimple.3rd-s",
+      "skillId": "en:verb.presentSimple",
+      "topic": null,
+      "text": "В русском настоящее время последовательно изменяется по всем лицам (я вижу / ты видишь / он видит) — окончание никогда не «выпадает». В английском реально маркируется только 3-е лицо единственного числа (-s: he sees), а I/you/we/they see остаются без окончания. Отсюда систематическое или пропуск -s (по аналогии с «немаркированными» формами), или, наоборот, его добавление не туда.",
+      "source": { "kind": "research", "citation": "Prévost, P., & White, L. (2000). Missing surface inflection or impairment in second language acquisition? Evidence from tense and agreement. Second Language Research, 16(2), 103–133 — общая для L2 английского тенденция непоследовательной маркировки согласования (Missing Surface Inflection), к которой типологически относится и пропуск -s носителями языков с иной моделью согласования." },
+      "status": "editorial",
+      "votes": { "helpful": 0, "notHelpful": 0 }
+    },
+    {
+      "id": "en-ru.verb.presentsimple.habitual",
+      "skillId": "en:verb.presentSimple",
+      "topic": null,
+      "text": "Present Simple — это специально «немаркированное по аспекту» время для привычных и постоянных действий (I work here). Русское настоящее время само по себе не различает разовость и длительность: «работаю» покрывает и привычку, и процесс прямо сейчас. Отсюда риск выбрать Present Simple там, где по-английски обязателен Present Continuous.",
+      "source": { "kind": "research", "citation": "Comrie, B. (1976). Aspect: An Introduction to the Study of Verbal Aspect and Related Problems. Cambridge University Press." },
+      "status": "editorial",
+      "votes": { "helpful": 0, "notHelpful": 0 }
+    },
+    {
+      "id": "en-ru.possessive.my.invariant",
+      "skillId": "en:possessive.my",
+      "topic": null,
+      "text": "Русское «мой/моя/моё/мои» согласуется с обладаемым по роду, числу и падежу («мой дом», «моя книга», «моё окно»). Английское «my» — одна неизменяемая форма для всего: «my house», «my book», «my window». Согласовывать «my» с существительным не нужно вообще — это частый источник избыточных попыток «просклонять» притяжательное местоимение.",
+      "source": { "kind": "research", "citation": "Timberlake, A. (2004). A Reference Grammar of Russian. Cambridge University Press — парадигма согласования притяжательного «мой» по роду/числу/падежу обладаемого." },
+      "status": "editorial",
+      "votes": { "helpful": 0, "notHelpful": 0 }
+    },
+    {
+      "id": "en-ru.possessive.my.gender-transfer",
+      "skillId": "en:possessive.my",
+      "topic": null,
+      "text": "«His/her» в английском согласуются с родом ВЛАДЕЛЬЦА, не предмета — как и русские «его/её». Расхождения тут нет, но привычка искать согласование «с чем-нибудь» может дать сбой: если предмет по-русски грамматически «противоположного» рода (ручка — женский род), учащийся иногда ошибочно тянет род предмета на местоимение (*her pen про ручку мужчины), хотя должен ориентироваться только на пол владельца.",
+      "source": { "kind": "research", "citation": "Corbett, G. G. (1991). Gender. Cambridge University Press — согласовательные класс и перенос привычки грамматического согласования по роду." },
+      "status": "editorial",
+      "votes": { "helpful": 0, "notHelpful": 0 }
+    },
+    {
+      "id": "en-ru.mood.question.do-inversion",
+      "skillId": "en:mood.question",
+      "topic": null,
+      "text": "В русском вопрос образуется интонацией или частицей «ли», порядок слов может не меняться: «Ты видишь дом» → «Ты видишь дом?». В английском вопрос требует вспомогательного глагола, которого нет в утверждении, и его выноса перед подлежащим: «You see the house» → «Do you see the house?». Учащиеся часто пытаются вопрос через интонацию, оставляя порядок слов утверждения.",
+      "source": { "kind": "research", "citation": "White, L. (2003). Second Language Acquisition and Universal Grammar. Cambridge University Press — усвоение функциональной категории do-support при отсутствии прямого аналога в родном языке." },
+      "status": "editorial",
+      "votes": { "helpful": 0, "notHelpful": 0 }
+    },
+    {
+      "id": "en-ru.mood.question.wh-inversion",
+      "skillId": "en:mood.question",
+      "topic": null,
+      "text": "После вопросительного слова в английском тоже нужна инверсия вспомогательного глагола: «What do you see?», а не «What you see?». В русском вопросительное слово просто ставится в начало, порядок остального предложения не трогается: «Что ты видишь?».",
+      "source": { "kind": "research", "citation": "Huddleston, R., & Pullum, G. K. (2002). The Cambridge Grammar of the English Language. Cambridge University Press — subject-auxiliary inversion в wh-вопросах." },
+      "status": "editorial",
+      "votes": { "helpful": 0, "notHelpful": 0 }
+    },
+    {
+      "id": "en-ru.role.location.in-at-on",
+      "skillId": "en:role.location",
+      "topic": null,
+      "text": "Русские предлоги места «в»/«на» не совпадают 1:1 с английскими in/at/on: «на почте» (буквально «на») — «at the post office» (не «on»), «в школе» — «at school» (не «in», если речь о посещении как деятельности, не о здании). Прямой перевод предлога систематически даёт неверный результат — предлог места нужно запоминать пословно с существительным, не выводить по русской модели.",
+      "source": { "kind": "research", "citation": "Jarvis, S., & Pavlenko, A. (2008). Crosslinguistic Influence in Language and Cognition. Routledge — перенос пространственных категорий и их предложного оформления между языками." },
+      "status": "editorial",
+      "votes": { "helpful": 0, "notHelpful": 0 }
+    },
+    {
+      "id": "en-ru.role.location.article",
+      "skillId": "en:role.location",
+      "topic": null,
+      "text": "«At the theater» требует артикля, у русского «в театре» артикля нет вообще. Это тот же article-гэп, что и у role.object (см. соответствующий совет), но именно с локативными существительными его легко упустить, потому что внимание уходит на выбор предлога, а не артикля.",
+      "source": { "kind": "research", "citation": "Ionin, T., Ko, H., & Wexler, K. (2004). Article Semantics in L2 Acquisition: The Role of Specificity. Language Acquisition, 12(1), 3–69 — усвоение системы артиклей носителями языков без артиклей, включая русский." },
+      "status": "editorial",
+      "votes": { "helpful": 0, "notHelpful": 0 }
+    },
+    {
+      "id": "en-ru.role.instrument.with",
+      "skillId": "en:role.instrument",
+      "topic": null,
+      "text": "Русский творительный падеж выражает орудие действия без предлога: «резать ножОМ». Английский творительной падежной формы не имеет — та же роль всегда выражается предлогом «with»: «cut it with a knife». Без «with» предложение по-английски грамматически неполно, хотя по-русски беспредложная форма — норма.",
+      "source": { "kind": "research", "citation": "Timberlake, A. (2004). A Reference Grammar of Russian. Cambridge University Press — беспредложное инструментальное значение творительного падежа." },
+      "status": "editorial",
+      "votes": { "helpful": 0, "notHelpful": 0 }
+    },
+    {
+      "id": "en-ru.role.instrument.omission",
+      "skillId": "en:role.instrument",
+      "topic": null,
+      "text": "Из-за привычки к беспредложному творительному падежу учащиеся систематически пробуют пропустить «with» вообще: «I cut it a knife» вместо «I cut it with a knife». Это одна из самых частых и хорошо документированных ошибок переноса из безартиклевых, падежных языков в практике преподавания английского как иностранного.",
+      "source": { "kind": "teaching-practice", "citation": "Систематически фиксируется в практике преподавания английского как иностранного (TEFL/TESOL) как ошибка переноса из языков с беспредложным выражением инструмента падежом — документируется в материалах по типичным ошибкам учащихся с учётом родного языка (Cambridge Assessment English, TKT: Teaching Knowledge Test)." },
+      "status": "editorial",
+      "votes": { "helpful": 0, "notHelpful": 0 }
+    },
+    {
+      "id": "en-ru.polarity.present.do-support",
+      "skillId": "en:polarity.present",
+      "topic": null,
+      "text": "Отрицание в английском несёт вспомогательный «do/does», а не сам смысловой глагол: «I don't see», а не «I not see». Смысловой глагол в отрицании всегда в базовой форме — «do/does» берёт на себя время и лицо. В русском отрицательная частица «не» просто ставится перед смысловым глаголом без вспомогательного слова, поэтому первая интуиция — перенести именно эту модель.",
+      "source": { "kind": "research", "citation": "Lightbown, P. M., & Spada, N. (2013). How Languages Are Learned (4th ed.). Oxford University Press — do-support как типичная точка ошибки при отсутствии аналогичной вспомогательной конструкции в родном языке." },
+      "status": "editorial",
+      "votes": { "helpful": 0, "notHelpful": 0 }
+    },
+    {
+      "id": "en-ru.polarity.present.contraction",
+      "skillId": "en:polarity.present",
+      "topic": null,
+      "text": "«Don't/doesn't» — это одна фонетическая и орфографическая единица, а не «do» плюс отдельное слово «not» с паузой между ними. Русское «не» всегда отдельное, самостоятельно произносимое слово — учащиеся иногда произносят «do not» медленно и раздельно там, где естественная английская речь почти всегда даёт слитную форму.",
+      "source": { "kind": "research", "citation": "Odlin, T. (1989). Language Transfer: Cross-Linguistic Influence in Language Learning. Cambridge University Press — перенос границ морфем и словоформ между языками." },
+      "status": "editorial",
+      "votes": { "helpful": 0, "notHelpful": 0 }
+    },
+    {
+      "id": "en-ru.verb.pastsimple.irregular",
+      "skillId": "en:verb.pastSimple",
+      "topic": null,
+      "text": "Правильные глаголы получают -ed (walk → walked), но частотные неправильные глаголы (go → went, see → saw) меняют форму непредсказуемо и должны запоминаться как отдельный факт словаря, а не выводиться правилом — в отличие от русского прошедшего времени, где показатель -л- работает почти без исключений для всех глаголов.",
+      "source": { "kind": "research", "citation": "Huddleston, R., & Pullum, G. K. (2002). The Cambridge Grammar of the English Language. Cambridge University Press — морфология правильных и неправильных форм прошедшего времени." },
+      "status": "editorial",
+      "votes": { "helpful": 0, "notHelpful": 0 }
+    },
+    {
+      "id": "en-ru.verb.pastsimple.no-person",
+      "skillId": "en:verb.pastSimple",
+      "topic": null,
+      "text": "Здесь английский проще русского: Past Simple не меняется по лицу и числу (I/he/we/they walked — одна форма), тогда как русское прошедшее время меняется по роду и числу (читал/читала/читали). Учащиеся иногда по инерции ищут «свою» форму глагола для каждого лица и напрасно усложняют себе задачу — достаточно выучить одну форму на глагол.",
+      "source": { "kind": "research", "citation": "Comrie, B. (1981). Language Universals and Linguistic Typology (2nd ed.). University of Chicago Press — типология согласования глагола по лицу/роду/числу." },
+      "status": "editorial",
+      "votes": { "helpful": 0, "notHelpful": 0 }
+    },
+    {
+      "id": "en-ru.role.recipient.to",
+      "skillId": "en:role.recipient",
+      "topic": null,
+      "text": "Русский дательный падеж выражает получателя без предлога через окончание: «дать книгу другУ». В английском той же роли соответствует только предлог «to»: «give the book to a friend» — падежного окончания, которое взяло бы эту роль на себя, у английского существительного нет.",
+      "source": { "kind": "research", "citation": "Timberlake, A. (2004). A Reference Grammar of Russian. Cambridge University Press — дательный падеж как беспредложный маркер получателя." },
+      "status": "editorial",
+      "votes": { "helpful": 0, "notHelpful": 0 }
+    },
+    {
+      "id": "en-ru.role.recipient.word-order",
+      "skillId": "en:role.recipient",
+      "topic": null,
+      "text": "В «give a friend the book» (без «to») получатель и предмет различаются только порядком слов — получатель всегда идёт первым. В русском такой альтернативы вообще не нужно: дательный падеж однозначно маркирует получателя независимо от порядка слов, поэтому порядок в этой английской конструкции нельзя менять свободно, как в русском.",
+      "source": { "kind": "research", "citation": "Huddleston, R., & Pullum, G. K. (2002). The Cambridge Grammar of the English Language. Cambridge University Press — двойное дополнение (double object construction) и порядок слов." },
+      "status": "editorial",
+      "votes": { "helpful": 0, "notHelpful": 0 }
+    },
+    {
+      "id": "en-ru.number.plural.irregular",
+      "skillId": "en:number.plural",
+      "topic": null,
+      "text": "Большинство существительных получают -s/-es (book → books), но частотные слова меняют форму непредсказуемо (child → children, man → men, mouse → mice) — это факты словаря, которые нужно выучить отдельно, правило -s на них не работает, как и в русском множественное число не для всех существительных образуется одинаково регулярным способом.",
+      "source": { "kind": "research", "citation": "Huddleston, R., & Pullum, G. K. (2002). The Cambridge Grammar of the English Language. Cambridge University Press — регулярная и нерегулярная морфология множественного числа." },
+      "status": "editorial",
+      "votes": { "helpful": 0, "notHelpful": 0 }
+    },
+    {
+      "id": "en-ru.number.plural.countability",
+      "skillId": "en:number.plural",
+      "topic": null,
+      "text": "Исчисляемость слова не всегда совпадает между языками: «news» в английском — неисчисляемое и грамматически единственное («The news is good»), а русское «новости» — множественное. «Advice» — неисчисляемое единственное, а русское «советы» обычно множественное. Множественное число нельзя переносить по русской интуиции слово в слово — категорию исчисляемости нужно проверять для каждого конкретного слова.",
+      "source": { "kind": "research", "citation": "Jarvis, S., & Pavlenko, A. (2008). Crosslinguistic Influence in Language and Cognition. Routledge — перенос категорий исчисляемости и числа между языками." },
+      "status": "editorial",
+      "votes": { "helpful": 0, "notHelpful": 0 }
+    },
+    {
+      "id": "en-ru.polarity.past.bare-verb",
+      "skillId": "en:polarity.past",
+      "topic": null,
+      "text": "В отрицании прошедшего времени время маркирует только вспомогательный «did», а смысловой глагол возвращается в базовую форму: «I didn't go», а не «I didn't went». Двойная маркировка прошедшего времени (и на «did», и на смысловом глаголе) — одна из самых частых ошибок именно потому, что она выглядит «более правильной» по интуиции.",
+      "source": { "kind": "research", "citation": "Prévost, P., & White, L. (2000). Missing surface inflection or impairment in second language acquisition? Second Language Research, 16(2), 103–133 — избыточная и непоследовательная маркировка времени в межъязыковых системах учащихся." },
+      "status": "editorial",
+      "votes": { "helpful": 0, "notHelpful": 0 }
+    },
+    {
+      "id": "en-ru.polarity.past.n-t",
+      "skillId": "en:polarity.past",
+      "topic": null,
+      "text": "«Didn't» — вспомогательный глагол «did» плюс отрицательная частица «not», слитые в одну форму. В устной практике «didn't» почти всегда произносится как единая слитная форма — как и в present-отрицании, ошибочно проговаривать «did not» раздельно и медленно там, где естественнее слитная форма.",
+      "source": { "kind": "teaching-practice", "citation": "Систематически фиксируется в практике преподавания английского как иностранного (TEFL/TESOL) как перенос интонационной модели отдельно стоящей отрицательной частицы из родного языка — документируется в материалах по типичным ошибкам учащихся (Cambridge Assessment English, TKT: Teaching Knowledge Test)." },
+      "status": "editorial",
+      "votes": { "helpful": 0, "notHelpful": 0 }
+    },
+    {
+      "id": "en-ru.verb.futuresimple.will-invariant",
+      "skillId": "en:verb.futureSimple",
+      "topic": null,
+      "text": "«Will» не изменяется по лицам и числам — одна форма для всех: I/you/he/we/they will go. Русское будущее время несовершенного вида спрягается полностью: буду/будешь/будет/будем/будете/будут. Учащиеся иногда по привычке ищут для «will» соответствующую форму под каждое лицо — искать не нужно, форма одна.",
+      "source": { "kind": "research", "citation": "Timberlake, A. (2004). A Reference Grammar of Russian. Cambridge University Press — парадигма спряжения будущего времени несовершенного вида (буду + инфинитив)." },
+      "status": "editorial",
+      "votes": { "helpful": 0, "notHelpful": 0 }
+    },
+    {
+      "id": "en-ru.verb.futuresimple.aspect-gap",
+      "skillId": "en:verb.futureSimple",
+      "topic": null,
+      "text": "Русское будущее время различает совершенный и несовершенный вид (сделаю vs буду делать) — два разных грамматических способа говорить о будущем действии с разным значением завершённости. Английское «will» такого различия сам по себе не делает — оно покрывает оба случая одной формой, поэтому пытаться найти для «will» аналог видовой пары бессмысленно.",
+      "source": { "kind": "research", "citation": "Comrie, B. (1976). Aspect: An Introduction to the Study of Verbal Aspect and Related Problems. Cambridge University Press — вид как категория, не совпадающая по границам между языками." },
+      "status": "editorial",
+      "votes": { "helpful": 0, "notHelpful": 0 }
+    },
+    {
+      "id": "en-ru.pronouns.you-collapse",
+      "skillId": "en:pronouns",
+      "topic": null,
+      "text": "Английское «you» — одна форма и для «ты», и для «вы» (и вежливого, и множественного числа). Различие ты/вы, которое в русском обязательно нужно выбрать, в английском местоимении никак не выражается — оно снимается контекстом или обращением, а не отдельной формой местоимения.",
+      "source": { "kind": "research", "citation": "Brown, R., & Gilman, A. (1960). The pronouns of power and solidarity. In T. A. Sebeok (Ed.), Style in Language. MIT Press — классическое описание T/V-различия местоимений и языков, где оно отсутствует." },
+      "status": "editorial",
+      "votes": { "helpful": 0, "notHelpful": 0 }
+    },
+    {
+      "id": "en-ru.pronouns.it-not-grammatical-gender",
+      "skillId": "en:pronouns",
+      "topic": null,
+      "text": "В русском предмет заменяется местоимением по грамматическому роду существительного: «стол» (муж. р.) → «он», «ручка» (жен. р.) → «она». В английском все неживые предметы, независимо от рода русского слова-эквивалента, заменяются одним «it» — грамматического рода у английских существительных нет вообще, и переносить род русского слова на выбор местоимения не нужно.",
+      "source": { "kind": "research", "citation": "Corbett, G. G. (1991). Gender. Cambridge University Press — согласовательный класс «род» и его отсутствие в системе местоимений английского для неодушевлённых предметов." },
+      "status": "editorial",
+      "votes": { "helpful": 0, "notHelpful": 0 }
+    },
+    {
+      "id": "en-ru.verb.presentcontinuous.stative",
+      "skillId": "en:verb.presentContinuous",
+      "topic": null,
+      "text": "Глаголы состояния (know, like, love, want, believe) в английском обычно не берут -ing, даже когда речь о текущем моменте: «I know», не «I am knowing». Русский язык такого лексического ограничения не делает — «-ing»-форму приходится проверять по конкретному глаголу, не выводить из одной общей грамматической логики.",
+      "source": { "kind": "research", "citation": "Comrie, B. (1976). Aspect: An Introduction to the Study of Verbal Aspect and Related Problems. Cambridge University Press — лексический класс стативных глаголов и их несовместимость с прогрессивом." },
+      "status": "editorial",
+      "votes": { "helpful": 0, "notHelpful": 0 }
+    },
+    {
+      "id": "en-ru.verb.presentcontinuous.overgeneralize",
+      "skillId": "en:verb.presentContinuous",
+      "topic": null,
+      "text": "Поскольку русское настоящее время не различает привычное действие и действие в процессе, есть и обратный риск: перенести это несовпадение на английский и начать применять -ing к привычным действиям («I am working here every day» вместо «I work here every day»). -ing маркирует именно процесс, ограниченный текущим отрезком времени, а не привычку.",
+      "source": { "kind": "research", "citation": "Odlin, T. (1989). Language Transfer: Cross-Linguistic Influence in Language Learning. Cambridge University Press — перенос аспектуальных категорий родного языка на грамматику второго языка." },
+      "status": "editorial",
+      "votes": { "helpful": 0, "notHelpful": 0 }
+    },
+    {
+      "id": "en-ru.tense.contrast.aspect-not-tense",
+      "skillId": "en:tense.contrast",
+      "topic": null,
+      "text": "Simple/Continuous в английском — это ось Aspect, отдельная от оси Tense (Present/Past/Future); одно и то же время может быть и Simple, и Continuous. Русский совершенный/несовершенный вид — тоже отдельная от времени категория, но границы между «завершённость» (русский вид) и «процесс в моменте» (английский прогрессив) не совпадают 1:1 — прямое отождествление двух систем даёт систематические ошибки в обе стороны.",
+      "source": { "kind": "research", "citation": "Comrie, B. (1976). Aspect: An Introduction to the Study of Verbal Aspect and Related Problems. Cambridge University Press — несовпадение границ аспектуальных систем между языками." },
+      "status": "editorial",
+      "votes": { "helpful": 0, "notHelpful": 0 }
+    },
+    {
+      "id": "en-ru.tense.contrast.two-axes",
+      "skillId": "en:tense.contrast",
+      "topic": null,
+      "text": "Полезно держать в голове две независимые оси одновременно: «когда» (Present/Past/Future) и «как» (Simple/Continuous), а не искать для каждой русской видо-временной формы одну готовую английскую. Такой перенос «один русский ярлык → один английский ярлык» — систематический источник ошибок именно потому, что оси в двух языках не совпадают по количеству и границам значений.",
+      "source": { "kind": "research", "citation": "Odlin, T. (1989). Language Transfer: Cross-Linguistic Influence in Language Learning. Cambridge University Press — межъязыковой перенос грамматических категорий по принципу прямого соответствия." },
+      "status": "editorial",
+      "votes": { "helpful": 0, "notHelpful": 0 }
+    },
+    {
+      "id": "en-ru.mixed.interleaving",
+      "skillId": "en:mixed",
+      "topic": null,
+      "text": "Упражнения, где вперемешку встречаются разные конструкции (mixed), сложнее блочной тренировки «одно и то же по одной теме подряд» — но именно эта сложность и даёт более прочное запоминание на дистанции, потому что заставляет каждый раз заново распознавать, какое правило применить, а не действовать по инерции предыдущего задания.",
+      "source": { "kind": "research", "citation": "Rohrer, D., & Taylor, K. (2007). The shuffling of mathematics problems improves learning. Instructional Science, 35(6), 481–498 — эффект интерливинга (chередование задач разных типов) для долговременного запоминания." },
+      "status": "editorial",
+      "votes": { "helpful": 0, "notHelpful": 0 }
+    },
+    {
+      "id": "en-ru.mixed.cognitive-load",
+      "skillId": "en:mixed",
+      "topic": null,
+      "text": "Когда в одном предложении нужно одновременно решить и время, и отрицание, и порядок слов (вопрос), нагрузка распределяется — полезно сначала мысленно зафиксировать время и полярность отдельно от порядка слов, а затем собирать предложение по частям, а не пытаться удержать все решения одновременно.",
+      "source": { "kind": "research", "citation": "Sweller, J. (1988). Cognitive load during problem solving: Effects on learning. Cognitive Science, 12(2), 257–285 — управление когнитивной нагрузкой при одновременном применении нескольких правил." },
+      "status": "editorial",
+      "votes": { "helpful": 0, "notHelpful": 0 }
+    }
+  ]
+}

@@ -16,6 +16,8 @@
 // match lang/en/curriculum.json's exactly, and every opaque copy/pattern key
 // lang/en/exercise-recipes.json (EN-14) references resolves in the pair's own
 // exerciseCopy/exercisePatterns (checkPairSkillIdsMatchCurriculum/checkRecipeCopyResolves below).
+// Finally (EnRuPackPlan.md §6 EN-19) it validates pairs/en-ru/lifehacks.json against
+// lifehacks-v1.schema.json and resolves every skillId against lang/en/curriculum.json.
 //
 // Usage: node scripts/validate-pack-v2.mjs
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
@@ -23,6 +25,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import Ajv2020 from 'ajv/dist/2020.js';
 import { validateCoursePack } from './validate-course.mjs';
 import { reconstructCoursePack } from './migrate-v1-to-v2.mjs';
+import { validateLifehacks } from './validate-lifehacks.mjs';
 
 const root = new URL('../', import.meta.url);
 const readJson = (relativePath) => JSON.parse(readFileSync(new URL(relativePath, root), 'utf8'));
@@ -209,6 +212,11 @@ export function validatePackV2() {
   assertSchema(pairSchema, enRuPair, '/pairs/en-ru/pair.json');
   checkPairSkillIdsMatchCurriculum('en-ru', enRuPair, enCurriculum);
   checkRecipeCopyResolves('en', 'en-ru', enRecipes, enRuPair);
+
+  // en-ru (EnRuPackPlan.md §6 EN-19): pairs/en-ru/lifehacks.json against lifehacks-v1.schema.json,
+  // with every skillId resolved against lang/en/curriculum.json's own ids.
+  const enRuLifehacks = readJson('courses/pairs/en-ru/lifehacks.json');
+  validateLifehacks('en-ru', enRuLifehacks, enCurriculum.map((skill) => skill.id));
 
   return true;
 }
