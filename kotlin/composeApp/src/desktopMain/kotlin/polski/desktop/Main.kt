@@ -70,6 +70,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlin.random.Random
 import kotlin.time.Clock
+import polski.data.activeCoursePackId
 import polski.data.nounById
 import polski.data.skillById
 import polski.data.skills
@@ -152,9 +153,17 @@ private fun DesktopSession(
     onImported: () -> Unit,
 ) {
     val scope = rememberCoroutineScope()
-    val store = remember(generation) {
+    // EnRuAcceptance-2026-09-28.md §7 item 2 parity (ADR-37): [preferences.setTarget]/[setNative]
+    // flip `polski.data.packRegistry`'s shared active pack synchronously, past their own
+    // "does this pack parse" check — not past "can this pack's engine actually build a session"
+    // (TrainingStore's `generateChain()` init property can still throw; DesktopSessionSupportTest).
+    // Keying on target/native (not just [generation]) rebuilds [store] for the switch, and
+    // [buildTrainingStoreOrRollback] rolls the active pack back to [lastGoodPackId] rather than
+    // crash when the switch can't actually build yet.
+    var lastGoodPackId by remember { mutableStateOf(activeCoursePackId) }
+    val store = remember(generation, preferences.value.target, preferences.value.native) {
         var nextId = 0L
-        TrainingStore(
+        fun build() = TrainingStore(
             repository, scheduler,
             PlExerciseEngine(RandomSource { Random.nextDouble() }, ExerciseIdFactory { "desktop-${++nextId}" }),
             TimeSource {
@@ -167,6 +176,7 @@ private fun DesktopSession(
             StyleId(preferences.value.styleId.name),
             if (preferences.value.answerMode == PreferredAnswerMode.Typed) AnswerMode.Typed else AnswerMode.Oral,
         )
+        buildTrainingStoreOrRollback(lastGoodPackId, ::build)
     }
     val state by store.state.collectAsState()
     val vocabulary = remember {
@@ -179,6 +189,11 @@ private fun DesktopSession(
     var notice by remember { mutableStateOf<String?>(null) }
 
     LaunchedEffect(store) {
+        // Reflects whichever pack [store] actually ended up built for (the requested one, or the
+        // rollback) and, when that differs from what Settings still persists, self-corrects it and
+        // surfaces the same explanation the native macOS/iOS hosts show (ADR-38 parity).
+        lastGoodPackId = activeCoursePackId
+        preferences.reconcileWithActivePack()?.let { notice = it }
         store.start()
         while (true) {
             delay(30_000)

@@ -2,6 +2,56 @@
 
 Новые сверху. Формат: решение → почему → где подробно.
 
+## ADR-39 · 2026-09-28 · EnRuAcceptance §7 item 2, третий пробел ADR-37/38: JVM Compose Desktop preview не пересобирал/не откатывал сессию при смене пакета
+
+ADR-37/38 закрыли пересборку-с-откатом только для *нативных* macOS/iOS бриджей (`MacSession`/
+`IosSession`, `MacPreferencesSession`/`IosPreferencesSession`). У JVM Compose Desktop preview
+(`kotlin/composeApp/src/desktopMain`) нет своего session-бриджа — `Main.kt`'s `DesktopSession`
+строил `TrainingStore` напрямую, `remember`-нутым только по счётчику импорта (`generation`), никогда
+не по смене пакета. Это означало два реальных дефекта, не гипотетических: (1) после выбора
+«Английский» в Settings `store` оставался старым (тренировка молча продолжала показывать польский —
+нарушение «selecting English rebuilds training»); (2) как только что-то заставляло Compose
+пересобрать `store` заново (или `dispatch` доходил до `exerciseEngine.generateForSkill`, которое
+живьём читает `packRegistry.active`), сборка для en-ru бросает `IllegalStateException` (en-ru's
+`forms.generated.json` — пока только глагольные формы, ADR-37 blocker 1, контент-пробел вне этой
+лейны) — необработанное исключение в Compose-эффекте, а не откат.
+
+Живьём подтверждено (временный `:shared:desktopTest` probe, удалён из финального diff): выбор en-ru
+сегодня ломает 15 из 16 en-skills на `TableMorphology: no form for lexeme="possessive:my"` и т.п.;
+`TrainingStore`'s `initialChain = exerciseEngine.generateChain()` — eager-свойство конструктора, так
+что сборка `TrainingStore` для en-ru бросает исключение сразу же, тем же способом, что уже поймал
+`MacSession.rebuildIfCourseSwitched`.
+
+Решение: тот же рецепт, что ADR-37/38 уже применили к нативным хостам, третий раз — для JVM preview.
+`buildTrainingStoreOrRollback(lastGoodPackId, build)` (`DesktopSessionSupport.kt`, `internal`, чисто
+функция без Compose-зависимостей — напрямую тестируема) пробует `build()` один раз; при падении
+откатывает `polski.data.packRegistry`'s активный пакет на `lastGoodPackId` и пересобирает. `Main.kt`'s
+`DesktopSession` теперь `remember`-ит `store` также по `preferences.value.target`/`.native` (не
+только по `generation`), зовёт этот хелпер, и в уже существующем `LaunchedEffect(store)` сверяет,
+какой пакет реально стал активным, с тем, что просит `DesktopPreferencesController`; расхождение
+(откат произошёл) чинит через новый `DesktopPreferencesController.reconcileWithActivePack()` — тот же
+текст предупреждения, что `MacPreferencesSession`/`IosPreferencesSession` уже показывают — и выводит
+его через уже существующий `notice`-тост, а не новый UI-элемент.
+
+Не решает ADR-37 blocker 1 (контент-пробел `courses/lang/en/forms.generated.json`) — вне разрешённых
+путей этой лейны (`lane-macos`, worktree `/Users/german/Work/JS/polski-lanes/macos`); пока он открыт,
+эта коррекция гарантирует только то, что JVM preview честно откатывается и объясняет откат, как уже
+делают нативные macOS/iOS хосты, а не молча показывает устаревшие карточки или падает.
+
+Где: `kotlin/composeApp/src/desktopMain/kotlin/polski/desktop/DesktopSessionSupport.kt` (новый),
+`Main.kt`, `DesktopPreferencesController.kt`. Тесты (новые): `DesktopSessionSupportTest` (2 теста —
+откат при поломке, отсутствие лишних попыток при рабочем пакете), `DesktopPreferencesControllerTest.
+reconcileWithActivePackCorrectsPersistedChoiceAfterAnExternalRollback`,
+`DesktopSettingsScreenTest` (расширен: пикер теперь реально показывает «Английский», а не только
+«Польский»/«Русский», поскольку en-ru теперь проходит `parsesCompletely()`, ADR-37).
+
+Проверено: `:composeApp:desktopTest` (61/61), `:shared:desktopTest` (359/359), `:shared:macosArm64Test`
+(BUILD SUCCESSFUL), `:composeApp:compileKotlinDesktop`; локальный запуск `:composeApp:run` — окно
+живьём открылось, польская карточка отрисована (скриншот в отчёте разработчика). Английский пикер и
+живой откат в самом окне не кликались автоматизированно (Accessibility-права недоступны в этом
+окружении для `cliclick`/`osascript`) — это NOT_RUN, компенсировано покомпонентными тестами выше,
+которые проверяют ровно тот же путь кода, что и реальный клик.
+
 ## ADR-38 · 2026-09-28 · EnRuAcceptance §7 item 2, коррекция ADR-37 (blocker 2): Settings-снимок сам исправляется после отката пакета тренировочным бриджем
 
 Ревью ADR-37's коммита (7bca546) вскрыло второй пробел вдобавок к уже честно задокументированному
