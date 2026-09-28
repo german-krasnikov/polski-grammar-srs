@@ -2,6 +2,10 @@
 
 Новые сверху. Формат: решение → почему → где подробно.
 
+## ADR-45 · 2026-09-28 · GitHub Pages публикует Kotlin web; React — по /react/
+По решению пользователя сайт https://german-krasnikov.github.io/polski-grammar-srs/ собирается из Kotlin (`composeCompatibilityBrowserDistribution`, JS + Wasm) в `deploy.yml`; React-сборка публикуется рядом по `/react/` как копия для отката. Перед публикацией CI прогоняет `npm test` и проверку курса.
+Почему: переход на Kotlin завершён (ADR-5), вся новая функциональность (en-ru, 4 стиля, новые карточки) есть только в Kotlin-версии.
+
 ## ADR-44 · 2026-09-28 · Закрытие ADR-22's `.change-before`/`.change-after`-разрыва: 2 из 3 были тестовым багом, 3-й уже исправлен
 
 ADR-22 задокументировал 2 падения (`kotlin-parity-matrix.spec.ts`'s "tense comparison"/"aspect

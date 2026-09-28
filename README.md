@@ -84,6 +84,6 @@ npm run preview
 
 Публичный репозиторий: [german-krasnikov/polski-grammar-srs](https://github.com/german-krasnikov/polski-grammar-srs). Видимость изменена с разрешения владельца 14 сентября 2026 года для использования GitHub Pages.
 
-Workflow `.github/workflows/deploy.yml` автоматически выполняет `npm ci`, тесты и production-сборку после push в `main`, затем публикует сайт в GitHub Pages. Его также можно запустить вручную через Actions → Deploy to GitHub Pages → Run workflow. `base: './'` поддерживает путь репозитория.
+Workflow `.github/workflows/deploy.yml` после push в `main` (или вручную: Actions → Deploy to GitHub Pages → Run workflow) выполняет `npm ci`, тесты и проверку курса, собирает Kotlin web-приложение (`./gradlew :composeApp:composeCompatibilityBrowserDistribution`, JS + Wasm) и публикует его в корне сайта. Прежняя React-версия публикуется рядом по адресу **https://german-krasnikov.github.io/polski-grammar-srs/react/** как копия для отката. Все пути относительные, поэтому сайт работает из подпути репозитория.
 
 Локальный запуск работает независимо от хостинга. Состояние проверки — в [docs/verification.md](docs/verification.md), исходные требования — в [docs/product-contract.md](docs/product-contract.md).

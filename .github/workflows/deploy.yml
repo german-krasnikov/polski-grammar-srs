@@ -19,13 +19,30 @@ jobs:
         with:
           node-version-file: .nvmrc
           cache: npm
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
       - run: npm ci --no-audit --no-fund
       - run: npm test
+      # React baseline (also runs course:validate); published under /react/ as a rollback copy.
       - run: npm run build
+      - name: Verify Gradle wrapper JAR
+        working-directory: kotlin
+        run: echo '7d3a4ac4de1c32b59bc6a4eb8ecb8e612ccd0cf1ae1e99f66902da64df296172  gradle/wrapper/gradle-wrapper.jar' | sha256sum --check
+      - name: Build Kotlin web app (JS + Wasm)
+        working-directory: kotlin
+        run: ./gradlew :composeApp:composeCompatibilityBrowserDistribution
+      - name: Assemble site (Kotlin at root, React at /react/)
+        run: |
+          mkdir site
+          cp -R kotlin/composeApp/build/dist/composeWebCompatibility/productionExecutable/. site/
+          cp -R dist site/react
+          touch site/.nojekyll
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: ./dist
+          path: ./site
   deploy:
     environment:
       name: github-pages
