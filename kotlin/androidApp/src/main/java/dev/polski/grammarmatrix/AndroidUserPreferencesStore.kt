@@ -55,4 +55,10 @@ internal class AndroidUserPreferencesStore(context: Context) {
     }
 
     fun recoveryRaw(): String? = invalidRaw
+
+    /** EN-22: a synchronous peek at cold start, before [AndroidSessionViewModel] first touches
+     * any course-pack-derived global — see [UserPreferencesCodec.peekTargetNative]. SharedPreferences
+     * reads are in-memory after the process's first access, so this isn't a real disk read. */
+    fun peekTargetNative(): Pair<String, String>? =
+        storage.getString("document", null)?.let(UserPreferencesCodec::peekTargetNative)
 }

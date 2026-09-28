@@ -556,9 +556,83 @@ internal class PackRegistry(private val packs: List<CoursePack>) {
     fun select(pairId: String) {
         active = requireNotNull(packs.firstOrNull { it.pairId == pairId }) { "Unknown pack pairId: $pairId" }
     }
+
+    /** EN-22: every registered pack's languages, in registration order (pl-ru first) — the
+     * target/native pickers' data source, so a picker never offers a pack this build doesn't embed. */
+    fun targetNativePairs(): List<Pair<String, String>> = packs.map { it.targetLanguage to it.nativeLanguage }
 }
 
-internal val packRegistry: PackRegistry by lazy { PackRegistry(embeddedCoursePackSources.map(::CoursePack)) }
+/** EN-04/EN-22: v1 packs (a real `courses/<id>/course.json`) first, then any pair this build has
+ * v2 layers for (`lang/<target>/lexicon.json` + `pairs/<pairId>/pair.json`) but no v1 file of its
+ * own — reconstructed by [CoursePackLoader], the same content [CoursePackLoaderTest] proves is
+ * byte-identical to a hand-written v1 pack. pl-ru ships as v1 today, so it is never duplicated
+ * here; en-ru (EN-11..EN-20) has no `courses/en-ru/course.json` and so is only ever reached this
+ * way — without this, [packRegistry] would embed pl-ru alone and en-ru could never be selected. */
+private val v2OnlyCoursePackSources: List<CoursePackSource> by lazy {
+    generatedPairJsonByPairId.keys.filter { pairId -> embeddedCoursePackSources.none { it.id == pairId } }
+        .sorted()
+        .map { pairId ->
+            CoursePackLoader.fromV2Layers(pairId, generatedLexiconJsonByLang.getValue(pairId.substringBefore("-")),
+                generatedPairJsonByPairId.getValue(pairId))
+        }
+}
+
+internal val packRegistry: PackRegistry by lazy {
+    PackRegistry((embeddedCoursePackSources + v2OnlyCoursePackSources).map(::CoursePack))
+}
+
+/** EN-22: `(target, native)` for every pack this build actually embeds, pl-ru first — every pack
+ * that exists, not necessarily one a picker may safely offer yet (see [usableCourseSelections]). */
+val availableCourseSelections: List<Pair<String, String>> by lazy { packRegistry.targetNativePairs() }
+
+/**
+ * EN-22: the (possibly smaller) subset of [availableCourseSelections] whose full [CoursePack]
+ * content actually parses today — a runtime probe of a throwaway instance (never touching
+ * [packRegistry]'s own singleton, so a broken pack is never read through the real, process-wide
+ * cached path [selectActiveCoursePack] warns about), covering every field a host's
+ * Training/Vocabulary/Matrix/reference screens read.
+ *
+ * en-ru fails this probe: `lang/en/lexicon.json` correctly has no grammatical gender or case
+ * (English has neither) — but [CoursePack]'s schema was written for pl-ru alone and requires both
+ * throughout (`Noun.gender`, case-keyed `possessiveForms`/`futureAuxiliary`/reference rows,
+ * [PossessiveId]'s closed set not even knowing `its`…). Content can't fix this without inventing
+ * false grammar; only generalizing [CoursePack]'s schema can, a real gap this task didn't create
+ * and isn't scoped to fix (`Plans/Kotlin/EnRuPackPlan.md`'s task table names no task for it) — a
+ * build that lands that generalization needs no picker change, since this probe passes on its own.
+ */
+val usableCourseSelections: List<Pair<String, String>> by lazy {
+    (embeddedCoursePackSources + v2OnlyCoursePackSources).mapNotNull { source ->
+        val pack = CoursePack(source)
+        pack.takeIf { it.parsesCompletely() }?.let { it.targetLanguage to it.nativeLanguage }
+    }
+}
+
+private fun CoursePack.parsesCompletely(): Boolean = runCatching {
+    nouns; adjectives; verbs; skills; sentenceSeeds; stemAlternations; caseSentencePrefixes
+    exerciseCopy; exercisePatterns; chainPresentation; caseReferenceRows; referenceGenderNames
+    referenceChainRows; referenceSystemCards; referencePipeline; referenceCaseTeaching
+    referencePronounTeaching; referenceVerbTeaching; comparisonNounIds; referenceRussianSupport
+    referenceTenseRows; referenceAspectRows; maleAccRows; presentations; styleContent; vocabulary
+    matrixIntroduction; webCaseCompositionHeader; contextHelp; maleAccIntro; aspectNoPresent
+    vocabularyInstructions; vocabularyUnavailableLabel; frequency; personalPronouns; possessives
+    possessiveForms; futureAuxiliary
+}.isSuccess
+
+/**
+ * EN-22 host entrypoint: switches the active pack to [pairId] (`"target-native"`) when this build
+ * embeds it *and* [usableCourseSelections] finds it safe to read; any other [pairId] — unknown,
+ * or embedded but not yet parseable — is a no-op, never a crash. Must run before the first read
+ * of any pack-derived global in this file (or [skills]/[nouns]/[adjectives]/[verbs]/…) — every
+ * one of those is cached for the process's whole lifetime once touched, so switching after that
+ * point changes [packRegistry.active] but not what the running app shows; a host applies a
+ * persisted switch on its next cold start, before it first touches course data (see
+ * `AndroidSessionViewModel`'s early `init` block).
+ */
+fun selectActiveCoursePack(pairId: String) {
+    if (packRegistry.active.pairId == pairId) return
+    if (usableCourseSelections.none { (target, native) -> "$target-$native" == pairId }) return
+    runCatching { packRegistry.select(pairId) }
+}
 
 val courseSentenceSeeds: List<SentenceSeed> by lazy { packRegistry.active.sentenceSeeds }
 val courseStemAlternations: List<StemAlternation> by lazy { packRegistry.active.stemAlternations }

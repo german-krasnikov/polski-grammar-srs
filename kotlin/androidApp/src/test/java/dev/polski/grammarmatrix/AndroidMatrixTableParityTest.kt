@@ -11,7 +11,10 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.GraphicsMode
+import polski.core.enMorphology
 import polski.data.comparisonNounIds
+import polski.data.enPersonalPronouns
+import polski.data.enVerbs
 import polski.data.nounById
 import polski.data.personalPronouns
 import polski.data.possessives
@@ -23,10 +26,15 @@ import polski.grammar.caseSentence
 import polski.grammar.nounPhrase
 import polski.grammar.verbForm
 import polski.model.GramCase
+import polski.model.NumberFeature
 import polski.model.NumberGram
+import polski.model.Person
+import polski.model.PersonFeature
 import polski.model.PossessiveId
 import polski.model.SentenceSeed
 import polski.model.Tense
+import polski.model.TenseFeature
+import polski.model.toFeatureValue
 import polski.presentation.AppUiState
 import polski.ui.screens.AndroidCasesSection
 import polski.ui.screens.AndroidPronounsSection
@@ -93,6 +101,48 @@ class AndroidMatrixTableParityTest {
                 composeRule.existsDescribedAs("Было: $lemma. Стало: $form")
             }
         }
+    }
+
+    /**
+     * EN-24 android (Plans/Kotlin/EnRuPackPlan.md §5 gap H / §6): same acceptance as the web slice
+     * (ADR-28) — a live English matrix, read from `lang/en/forms.generated.json` through
+     * [enMorphology], via the exact same `MatrixTableEngine`/`MatrixTableViewModel` the pl tables
+     * above already use. Fixed to one example verb ("see"), no selector — a minimum slice, not a
+     * full English matrix UI.
+     */
+    @Test fun verbsSectionShowsEnglishVerbMatrixAndDoSupportViaMatrixTableEngine() {
+        val state = AppUiState()
+        composeRule.setContent { MaterialTheme { AndroidVerbsSection(state, dispatch = {}) } }
+        val exampleLemma = enVerbs.first { it.id == "see" }.lemma
+        composeRule.existsWithText("English: лицо × время (\"$exampleLemma\")")
+        enPersonalPronouns.forEach { pronoun ->
+            listOf(Tense.PRESENT, Tense.PAST, Tense.FUTURE).forEach { tense ->
+                val form = enVerbFormForTest("see", tense, pronoun.id)
+                composeRule.existsDescribedAs("Было: $exampleLemma. Стало: $form")
+            }
+            val doPresent = enVerbFormForTest("do", Tense.PRESENT, pronoun.id)
+            val doPast = enVerbFormForTest("do", Tense.PAST, pronoun.id)
+            composeRule.existsDescribedAs("Было: do. Стало: $doPresent")
+            composeRule.existsDescribedAs("Было: do. Стало: $doPast")
+        }
+    }
+
+    private val enPersonNumberByPronounIdForTest = mapOf(
+        "I" to (Person.FIRST to NumberGram.SG),
+        "you" to (Person.SECOND to NumberGram.SG),
+        "he" to (Person.THIRD to NumberGram.SG),
+        "she" to (Person.THIRD to NumberGram.SG),
+        "it" to (Person.THIRD to NumberGram.SG),
+        "we" to (Person.FIRST to NumberGram.PL),
+        "they" to (Person.THIRD to NumberGram.PL),
+    )
+
+    private fun enVerbFormForTest(verbId: String, tense: Tense, pronounId: String): String {
+        val (person, number) = enPersonNumberByPronounIdForTest.getValue(pronounId)
+        return enMorphology.form(
+            "verb:$verbId",
+            mapOf(TenseFeature to tense.toFeatureValue(), PersonFeature to person.toFeatureValue(), NumberFeature to number.toFeatureValue()),
+        )
     }
 
     @Test fun pronounsSectionShowsEveryPronounContextAndPossessiveCase() {

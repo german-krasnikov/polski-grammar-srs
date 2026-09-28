@@ -4,6 +4,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertIs
 import kotlin.test.assertTrue
+import polski.data.packRegistry
 
 class UserPreferencesCodecTest {
     @Test fun defaultsAndExplicitChoicesRoundTrip() {
@@ -129,5 +130,39 @@ class UserPreferencesCodecTest {
         )) {
             assertIs<PreferencesDecode.RecoveryRequired>(UserPreferencesCodec.decode(raw))
         }
+    }
+
+    // EN-22: a persisted target/native switch (e.g. en-ru) makes decode() itself return
+    // RecoveryRequired (the test right above this one) until the active pack really is en-ru —
+    // peekTargetNative is the one entrypoint a host's cold start can call first, before it selects
+    // that pack, to know which one to select. It skips every other field's validation on purpose.
+    @Test fun peekTargetNativeReadsBothWireShapesWithoutValidatingAgainstTheActivePack() {
+        assertEquals("pl" to "ru", UserPreferencesCodec.peekTargetNative("""{"schemaVersion":3,"coursePair":"pl-ru"}"""))
+        assertEquals("en" to "ru", UserPreferencesCodec.peekTargetNative("""{"schemaVersion":3,"coursePair":"en-ru"}"""))
+        assertEquals("en" to "ru", UserPreferencesCodec.peekTargetNative("""{"schemaVersion":4,"target":"en","native":"ru"}"""))
+    }
+
+    // EN-22 fix: a real course switch persists `target`/`native` for the pack the user is
+    // switching *to*, before the process restart that actually moves `packRegistry.active` there
+    // (see AndroidSessionViewModel.persistCourseSelectionAndRestart). encode() must accept that
+    // document on its own terms — it must not require value.target/native to already equal
+    // packRegistry.active's own languages, or every real switch would throw here and roll back
+    // (ADR-30/blocker: this used to be masked because only one usable pack ever existed).
+    @Test fun encodeAcceptsATargetNativeDifferentFromTheCurrentlyActivePackAsLongAsItIsUsable() {
+        packRegistry.select("en-ru")
+        try {
+            val encoded = UserPreferencesCodec.encode(UserPreferencesV2(target = "pl", native = "ru"))
+            assertTrue(encoded.contains("\"coursePair\":\"pl-ru\""))
+        } finally {
+            packRegistry.select("pl-ru")
+        }
+    }
+
+    @Test fun peekTargetNativeIsNullForAnyMissingOrMalformedDocument() {
+        assertEquals(null, UserPreferencesCodec.peekTargetNative("not json"))
+        assertEquals(null, UserPreferencesCodec.peekTargetNative("""{"schemaVersion":1}"""))
+        assertEquals(null, UserPreferencesCodec.peekTargetNative("""{"schemaVersion":1,"coursePair":"pl"}"""))
+        assertEquals(null, UserPreferencesCodec.peekTargetNative("""{"schemaVersion":4,"target":"en"}"""))
+        assertEquals(null, UserPreferencesCodec.peekTargetNative("""{}"""))
     }
 }

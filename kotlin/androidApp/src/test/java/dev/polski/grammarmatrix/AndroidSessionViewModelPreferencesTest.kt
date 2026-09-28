@@ -61,6 +61,28 @@ class AndroidSessionViewModelPreferencesTest {
         assertEquals(before, session.preferences.styleId)
     }
 
+    // EN-22: selecting the pack the app is already on (pl-ru, the only usable one today —
+    // usableCourseSelections filters en-ru out until CoursePack's schema is generalized, its own
+    // shared-module test) persists nothing and never calls restart — same-pack is a no-op exactly
+    // like every other picker here (persistStyle above), not a needless relaunch.
+    @Test fun selectingTheAlreadyActiveCourseNeitherPersistsNorRestarts() = runBlocking {
+        val context = isolatedContext()
+        val session = AndroidSessionViewModel(context)
+        var restarted = false
+        session.persistCourseSelectionAndRestart("pl", "ru") { restarted = true }
+        assertEquals(false, restarted)
+    }
+
+    // Cold start reads a persisted target/native (via peekTargetNative) before touching any
+    // course-pack-derived global — this proves that read doesn't crash/misbehave for the ordinary
+    // case (nothing persisted yet, a fresh install) and the session still boots to pl-ru.
+    @Test fun aFreshInstallWithNoPersistedCourseStillBootsToPlRu() = runBlocking {
+        val context = isolatedContext()
+        val session = AndroidSessionViewModel(context)
+        assertEquals("pl", session.preferences.target)
+        assertEquals("ru", session.preferences.native)
+    }
+
     /** The save happens on a background dispatcher launched by the ViewModel, so poll for it like the file it writes to. */
     private suspend fun awaitSaved(context: Context, matches: (UserPreferencesV2) -> Boolean) {
         withTimeout(2_000) {

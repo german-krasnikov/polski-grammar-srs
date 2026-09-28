@@ -8,6 +8,7 @@ import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.booleanOrNull
 import kotlinx.serialization.json.intOrNull
 import polski.data.packRegistry
+import polski.data.usableCourseSelections
 
 sealed interface PreferencesDecode {
     data class Loaded(val value: UserPreferencesV2) : PreferencesDecode
@@ -25,6 +26,28 @@ object UserPreferencesCodec {
      * decoded tolerantly so a future `target`/`native`-shaped export is never treated as garbage. */
     private val fieldsV4 = fieldsV3 - "coursePair" + "target" + "native"
     private val reminderFields = setOf("enabled", "localTime", "days", "quietStart", "quietEnd")
+
+    /**
+     * EN-22: the target/native half of a persisted document, read without checking it against
+     * [packRegistry.active] the way [decode] does — a host's cold start needs this *before*
+     * calling [polski.data.selectActiveCoursePack] with the result, so [decode]'s own check would
+     * otherwise always fail for a persisted pack switch (the active pack is still the old one at
+     * that point). Tolerant of both wire shapes (`coursePair` through v3, `target`/`native` from
+     * v4); null for any missing/malformed document, same as "leave the default pack active".
+     */
+    fun peekTargetNative(raw: String): Pair<String, String>? {
+        val root = try { json.parseToJsonElement(raw) as? JsonObject } catch (_: Exception) { null } ?: return null
+        val version = root.number("schemaVersion") ?: return null
+        return if (version <= 3) {
+            val joined = (root["coursePair"] as? JsonPrimitive)?.takeIf { it.isString }?.content ?: return null
+            val parts = joined.split("-", limit = 2)
+            if (parts.size != 2) null else parts[0] to parts[1]
+        } else {
+            val target = (root["target"] as? JsonPrimitive)?.takeIf { it.isString }?.content ?: return null
+            val native = (root["native"] as? JsonPrimitive)?.takeIf { it.isString }?.content ?: return null
+            target to native
+        }
+    }
 
     fun decode(raw: String): PreferencesDecode {
         val root = try { json.parseToJsonElement(raw) as? JsonObject }
@@ -69,7 +92,15 @@ object UserPreferencesCodec {
     }
 
     fun encode(value: UserPreferencesV2): String {
-        require(value.schemaVersion == 3 && value.target == packRegistry.active.targetLanguage && value.native == packRegistry.active.nativeLanguage && validReminder(value.reminder) && value.glassTintPercent in 0..100)
+        // EN-22 fix: a real course switch (AndroidSessionViewModel.persistCourseSelectionAndRestart)
+        // persists the target/native pair the user is switching *to* — packRegistry.active only
+        // catches up on the next cold start (see peekTargetNative's KDoc). Requiring value.target/
+        // native to already equal packRegistry.active here made every genuine switch throw and
+        // roll back; the invariant this require actually needs to protect is "never persist a pair
+        // this build can't safely load", which usableCourseSelections already states precisely.
+        // decode() separately checks the persisted pair against packRegistry.active — that's the
+        // right place for the "does this match what's active" question, not here.
+        require(value.schemaVersion == 3 && (value.target to value.native) in usableCourseSelections && validReminder(value.reminder) && value.glassTintPercent in 0..100)
         val reminder = value.reminder
         val root = JsonObject(mapOf(
             "schemaVersion" to JsonPrimitive(3),

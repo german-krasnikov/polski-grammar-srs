@@ -2,6 +2,146 @@
 
 Новые сверху. Формат: решение → почему → где подробно.
 
+## ADR-31 · 2026-09-28 · EN-22 (android), исправление после code-review ADR-30: `UserPreferencesCodec.encode()` больше не требует `target`/`native` равными текущему `packRegistry.active`
+
+Ревью нашло реальный баг в ADR-30: `persistCourseSelectionAndRestart` (`AndroidSessionViewModel.kt`)
+персистит `preferences.copy(target = target, native = native)` для пары, на которую переключается
+пользователь, — а `packRegistry.active` по конструкции переключается только на следующем холодном
+старте (см. `peekTargetNative`'s KDoc). `UserPreferencesCodec.encode()`'s `require` при этом
+проверял `value.target == packRegistry.active.targetLanguage && value.native == ...
+.nativeLanguage` — то есть буквально требовал, чтобы персистимая пара уже совпадала с ещё не
+переключённым активным пакетом. Любое реальное переключение (target/native ≠ текущий активный)
+гарантированно падало на `require`, ловилось в `AndroidUserPreferencesStore.saveUnlocked` и
+превращалось в `PreferencesSave.WriteFailed` — откат `preferences` + `preferencesError`, без
+`restart()`. Единственный тест на `persistCourseSelectionAndRestart`
+(`selectingTheAlreadyActiveCourseNeitherPersistsNorRestarts`) передавал ту же пару, что уже
+активна, — no-op-гвард `if (preferences.target == target && preferences.native == native) return`
+возвращался раньше `save()`, `encode()` не вызывался, баг был замаскирован тем, что
+`usableCourseSelections` сегодня содержит только pl-ru (см. ADR-30 п.2 — пикер физически не может
+предложить другую пару).
+
+Исправление: `encode()`'s инвариант для target/native ослаблен с «равен активному пакету» до «пара
+входит в `usableCourseSelections`» (`(value.target to value.native) in usableCourseSelections`,
+`polski/preferences/UserPreferencesCodec.kt`). Это тот же самый практический гарант — писать
+только заведомо загружаемую пару — но без привязки к тому, какая пара активна прямо сейчас; вопрос
+«совпадает ли персистентный документ с активным пакетом» по-прежнему решает `decode()`'s
+собственная проверка (не менялась — она верна по конструкции: `AndroidSessionViewModel`'s ранний
+`init` вызывает `selectActiveCoursePack` из `peekTargetNative` до первого `load()`/`decode()`).
+
+Тест: `UserPreferencesCodecTest.encodeAcceptsATargetNativeDifferentFromTheCurrentlyActivePackAsLongAsItIsUsable`
+(`:shared` commonTest) — временно `packRegistry.select("en-ru")` (реальный singleton, `internal`,
+доступен из commonTest того же модуля — тот же приём, что `EnRuPackSwitchTest`), затем
+`encode(UserPreferencesV2(target = "pl", native = "ru"))` должен не бросать, хотя `pl-ru` уже не
+активен; `finally` возвращает `active` на `pl-ru`, чтобы не отравить остальные тесты процесса. RED
+до правки: `IllegalArgumentException` на старом `require`; GREEN после.
+
+Живой второй usable-пакет по-прежнему не существует (ADR-30 п.2 — en-ru не проходит
+`parsesCompletely()`), так что настоящий сквозной Android-тест «переключение на другую пару
+реально перезапускает» появится только вместе с этим будущим core-гэпом; до тех пор корректность
+доказывается на уровне `UserPreferencesCodec` напрямую, как выше.
+
+Проверено: `:shared:desktopTest` / `:shared:jsBrowserTest` / `:shared:wasmJsBrowserTest` /
+`:shared:macosArm64Test` (все зелёные, включая новый тест), `:androidApp:testDebugUnitTest`,
+`:androidApp:assembleDebug` — зелёные; живой прогон на `emulator-5554`: чистый запуск грузится в
+pl-ru, «Настройки» → «Курс» по-прежнему показывает только Польский/Русский (en-ru скрыт, как и
+раньше) — фикс не меняет видимое поведение, только чинит инвариант для будущего второго usable-пакета.
+
+## ADR-30 · 2026-09-28 · EN-22 (android): `packRegistry` реально встраивает en-ru + `usableCourseSelections` — пикер предлагает только реально парсящийся пакет, переключение — через перезапуск процесса
+
+`Plans/Kotlin/EnRuPackPlan.md` §6 EN-22, android-часть. Два независимых, но связанных решения,
+найденных по ходу задачи (не в самом плане):
+
+**1. `packRegistry` (`CourseData.kt`) до этой задачи встраивал только v1-пакеты
+(`courses/<id>/course.json`) — то есть ровно один pl-ru; en-ru (EN-04..EN-20, только v2-слои,
+`lang/en/lexicon.json` + `pairs/en-ru/pair.json`) физически не мог быть выбран, `PackRegistry.select`
+кидал бы `Unknown pack pairId`.** Публичная продакшн-`packRegistry` теперь = v1-пакеты + любой
+`pairId` из `generatedPairJsonByPairId`, которого нет среди v1 (реконструирован
+`CoursePackLoader.fromV2Layers`, EN-04) — pl-ru всегда первый/дефолтный, en-ru добавляется без
+дублирования. Новые публичные точки для хостов: `availableCourseSelections` (каждый
+встроенный пакет), `selectActiveCoursePack(pairId)` (переключает, no-op на неизвестный/уже активный).
+
+**2. Обнаружен реальный core-гэп, не входящий в EN-22 (и ни в одну задачу плана): схема
+`CoursePack` (v1, ~35 полей) написана только под pl-ru и требует рода/падежа почти everywhere
+(`Noun.gender`, `possessiveForms`/`futureAuxiliary`/референс-таблицы с ключами по падежу/роду,
+закрытый `PossessiveId` не знает `its`).** У английского нет ни рода, ни падежа
+(`lang/en/lexicon.json` корректно их не содержит — это не недостающий факт контента, а другая
+грамматика) — попытка `packRegistry.select("en-ru")` вживую ломает ~30 из ~35 полей
+`CoursePack` (`IllegalStateException`/`NoSuchElementException` на `.nouns`, `.adjectives`,
+`.verbs`, `.possessiveForms`, `.futureAuxiliary`, все `reference*`-таблицы — точный список см.
+`EnRuPackSwitchTest`/`CourseData.kt`'s `parsesCompletely()`). Добавлять «факты» контенту, чтобы
+эти поля не падали, значит изобретать несуществующую английскую грамматику — прямо запрещено
+инструкцией задачи. Решение: `usableCourseSelections` — рантайм-проба одноразового `CoursePack`
+(никогда не через сам `packRegistry`, чтобы сломанный пакет не попал в process-wide кэш) по всем
+полям; `selectActiveCoursePack` переключает только то, что прошло пробу. Сегодня это только
+pl-ru — пикер на Android (`AndroidCoursePicker.kt`) предложит en-ru сам, без правки хоста, в тот
+день, когда `CoursePack`'ную схему обобщат под pl-агностичный пакет (отдельная, ещё не заведённая
+задача).
+
+Отдельно: переключение пакета — не in-place мутация состояния, а рестарт процесса
+(`MainActivity.restartApp`), потому что каждый `by lazy { packRegistry.active.* }` в
+`CourseData.kt`/`Nouns.kt`/`Adjectives.kt`/`Verbs.kt`/`Skills.kt` кэшируется на весь процесс при
+первом чтении — переключение `packRegistry.active` после этого меняет только указатель, не то,
+что уже показано. `AndroidSessionViewModel`'s ранний `init`-блок вызывает
+`selectActiveCoursePack` из persisted `target`/`native` до первого чтения курсовых данных;
+`UserPreferencesCodec.peekTargetNative`/`AndroidUserPreferencesStore.peekTargetNative` — сырое
+чтение без валидации против текущего `packRegistry.active` (у `decode()` эта валидация есть и
+иначе не даёт даже долистать до `select`).
+
+Проверено: `:shared:desktopTest` (348/348, включая новый `EnRuPackSwitchTest` +
+`UserPreferencesCodecTest`'s `peekTargetNative*`), `:shared:compileKotlin{Js,WasmJs,MacosArm64}`,
+`:androidApp:testDebugUnitTest` (88/88), `:androidApp:assembleDebug` — зелёные; живой прогон на
+`emulator-5554`: чистая установка грузится в pl-ru без изменений, «Настройки» показывают новый
+блок «Курс» (только Польский/Русский — en-ru корректно скрыт), повторный выбор уже активного
+курса — no-op без рестарта, вкладки Тренировка/Матрица/Слова не падают.
+
+## ADR-29 · 2026-09-28 · EN-21 (android): `AndroidLifehackBlock` — тот же сворачиваемый блок «Лайфхак», что web (ADR-27), теперь на Android-хосте
+
+`kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidLifehackBlock.kt`: android-часть
+EN-21 (`Plans/Kotlin/EnRuPackPlan.md` §4.3/§6) поверх уже готового `LifehackProvider`-порта и
+`StaticPackLifehackProvider` (ADR-27, `:shared`, без изменений) — здесь только UI-проводка, никакой
+новой архитектуры. Как и на web: лайфхак не 10-й `BlockKind` (ADR-15 прямо запрещает это), поэтому
+не идёт через `AndroidBlockList`/`StyleComposer` — `AndroidTrainingScreen.kt` вызывает
+`AndroidLifehackBlock(skill.id, reduceMotion)` один раз, сразу после `AndroidBlockList(backBlocks,
+reduceMotion)`, вне `if (state.phase == CardPhase.Revealed)`'s style-блоков, но внутри той же
+Revealed-ветки — тот же порядок «после back-блоков стиля», что `LifehackWeb.kt`'s
+`renderLifehackBlock`. Пусто (`StaticPackLifehackProvider.forSkill(skillId)` — пустой список) →
+composable не рисует вообще ничего (`if (lifehacks.isEmpty()) return`), не пустую рамку.
+
+Один `AndroidCollapsible` (уже существующий D4-компонент, `AndroidWidgets.kt`) на каждый
+[`Lifehack`], свёрнут по умолчанию; переключатель — обычный `clickable` `Row` с `caption`
+(`«Лайфхак · источник: editorial/community»`) как единственным видимым текстом строки и
+`Modifier.semantics { stateDescription = "развёрнуто"/"свёрнуто" }` — тот же паттерн, что
+`AndroidWhyOnDemandBlock` уже использует для своего toggle, так что TalkBack читает подпись
+источника независимо от состояния разворота, как и требует приёмка EN-21. Текст лайфхака и
+цитата/ссылка показываются только после разворота (`AndroidCollapsible`), ссылка — обычный
+`Text(..., Modifier.clickable { LocalUriHandler.current.openUri(url) })`, подчёркнутый, на **своей
+собственной строке** под цитатой: первая попытка (цитата и ссылка в одном `Row`) ломалась визуально
+— длинная цитата уже переносится на несколько строк внутри `Text`, забирая себе всю доступную
+ширину `Row`, и второму `Text` оставалось несколько `dp`, из-за чего «— источник» переносился по
+одной букве на строку (найдено и исправлено живьём на эмуляторе, не только в юнит-тесте — Compose
+UI-тест на JVM/Robolectric не ловит this конкретный wrap, т.к. использует ту же ширину, что и
+устройство, но скриншот-осмотр — единственный способ реально увидеть перенос).
+
+Почему не переиспользован web'овский `renderLifehackBlock` буквально: разные UI-тулкиты (DOM vs
+Compose), тот же паттерн («после back-блоков, коллапс по умолчанию, подпись видна всегда, пусто →
+ничего»), а не общий код — ровно то же соотношение, что уже у `AndroidBlockList`/`LifehackWeb.kt`'s
+`renderCardBlocks` для остальных 9 `BlockKind`.
+
+Проверено: `:androidApp:testDebugUnitTest` (новый `AndroidLifehackBlockComposeTest`, 3/3 — RED
+подтверждён отдельно временной no-op заглушкой перед реализацией, затем GREEN; остальные существующие
+android-тесты не регрессировали) зелёный; `:androidApp:assembleDebug` — `BUILD SUCCESSFUL`; живой
+смоук на `emulator-5554` (Single-skill режим → `case.gen.neg`, у которого есть pl-ru's EN-20
+авторский лайфхак) — блок появляется после «Что изменилось», свёрнут по умолчанию, разворачивается
+по тапу, ссылка «Источник» реально открывает `https://www.slavica.com/grammar-of-contemporary-polish.html`
+в системном WebView-тестере; скриншоты в `/private/tmp/claude-501/.../scratchpad/en21-android/`.
+Не менялись `:core-*`/`:shared`/`:pack-format` — pl-ru byte-identical инвариант не затронут по
+построению (ноль правок вне android-хоста). iOS/macOS/desktop — вне скоупа этого лейна (отдельные
+worktree-лейны), техдолг остаётся явным, как и было до этой задачи.
+
+Подробно: `Plans/Kotlin/EnRuPackPlan.md` §4.3/§6 (EN-21); ADR-27 (core+web часть той же задачи);
+`kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidLifehackBlock.kt`;
+`kotlin/androidApp/src/test/java/dev/polski/grammarmatrix/AndroidLifehackBlockComposeTest.kt`.
+
 ## ADR-28 · 2026-09-28 · EN-24 (web): UC-09 часть 2/2 минимум — English-таблица на `MatrixWeb.kt`, `forms.generated.json(en)`
 
 Plans/Kotlin/EnRuPackPlan.md §5 гэп H / §6 EN-24: минимальный слайс — хотя бы одна живая английская
