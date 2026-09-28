@@ -2,6 +2,66 @@
 
 Новые сверху. Формат: решение → почему → где подробно.
 
+## ADR-26 · 2026-09-28 · EN-11: `lang/en/{lang,lexicon,prepositions}.json` + `validate-pack-v2.mjs` генерализован на `lang/*`
+
+Первый реальный второй язык в `courses/lang/`. Три новых файла (`lang.json`/`lexicon.json`/новая
+лексическая категория `prepositions.json`), новая `morphology-notes.md` (авторские заметки, не
+читается кодом/валидатором — то же решение, что уже принято для pl: таблица форм в runtime, правило
+только на этапе авторинга) — данные буквально по EnRuPackPlan.md §1.3, ноль правок кода ради
+контента (план's критерий приёмки).
+
+**Новые схемы:** `courses/schema/lexicon-v1.schema.json` (первая схема, которая проверяет
+`lexicon.json`'s собственную форму независимо от pl-специфичной v1-реконструкции — `nouns`/
+`adjectives`/`verbs`/`personalPronouns`/`possessives` обязательны, `forms`' внутренняя форма
+намеренно не типизирована жёстко: у pl это глубокие Case×Number(×Gender) таблицы, у en — плоские
+`invariant`/Number-only строки, оба валидны для `TableMorphology` без единой правки `:core-engine`,
+гэп B плана буквально «это не гэп»); `courses/schema/prepositions-v1.schema.json` (новая категория,
+`forms`-ключи — значения языка's `case`, не pl-стиль морфологический падеж).
+
+**`scripts/validate-pack-v2.mjs` генерализован**, а не задокументирован как «останется pl-only»:
+скрипт теперь сканирует `courses/lang/*` и для каждого найденного языка схема-проверяет `lang.json`
+(уже был generic до этой задачи) + `lexicon.json`/`prepositions.json` (новые схемы) + кросс-чек
+«таблица предлогов покрывает ровно `lang.json`'s `case`-значения»; §8.2 кросс-чеки
+(`construction`/`focus`/`fixed`/`lexicalFilter` резолвятся) запускаются для языка только если у него
+уже есть `curriculum.json` — сегодня только pl (EN-12 для en — следующая задача), это честная
+граница, а не тихий no-op под видом «generalized». `checkConstructionsResolve`/`checkFeaturesResolve`/
+`checkLexicalFiltersResolve` параметризованы `langCode` для путей в сообщениях об ошибках — для pl
+даёт байтово тот же текст ошибки, что и раньше (`tests/pack-v2.test.ts`'s
+`rejects a curriculum skill referencing an unregistered construction` не менялся и зелёный).
+
+**pl-ru's v1-мост (реконструкция `lexicon+pair` → `course-pack-v1.schema.json` → `validateCoursePack`)
+НЕ генерализован** — сознательно, задокументировано прямо в файле: `course-pack-v1.schema.json`'s
+собственный словарь падежных меток (`nom`/`gen`/`dat`/`acc`/`inst`/`loc`/`voc` как ключи объекта, не
+значения generic `Case`) и `personalPronouns`'s обязательные `ja`/`ty`/`on`/... — буквально
+pl-специфичный legacy-формат (EnRuPackPlan.md §0 пункт 3: «только `curriculum.json` реально
+language-agnostic сегодня»); притворяться, что en может пройти через ту же реконструкцию без
+`pair.json`/`curriculum.json` (которых у en ещё нет, EN-12/EN-17) и без переписывания самой v1-схемы
+— значило бы либо изобрести несуществующие поля, либо тихо не проверить en вообще. En идёт по
+чистому v2-пути (EN-04/EN-05, гэп G) — этот ADR его не строит, только не блокирует данными.
+
+**Тесты:** `tests/pack-v2.test.ts`, новый `describe('EN-11: ...')` (5 тестов: lang.json-значения,
+`validatePackV2()` не падает на новых слоях, внутренняя консистентность lexicon.json, полное
+покрытие ролей в prepositions.json, `validatePackV2()` реально падает на испорченном
+`lang/en/lexicon.json` с путём `/lang/en/lexicon.json` в сообщении). RED подтверждён живым прогоном
+до создания файлов (`Cannot find module '.../lang/en/lang.json'` — 4/13 упавших, не «не
+скомпилировалось», отсутствующая доставка), GREEN после — 13/13.
+
+Лингвист-ревью (носитель en/ru, см. агент-роль этой задачи): все 14 существительных/7
+прилагательных/10 глаголов/7 личных местоимений/7 притяжательных проверены вручную —
+`morphology-notes.md` фиксирует осознанные отклонения (`be`'s presentSg1/presentPl/pastPl,
+`will`'s единственное поле, `your` без отдельного `yourPlural`-аналога, `child→children`/
+`wife→wives`/`woman→women` как неправильные формы, не правило).
+
+Проверено: `npm test` — 38/38 файлов, 226/226 тестов (было 221/9 до задачи — +5 EN-11-тестов зелёные,
+0 регрессий); `npm run course:validate` — `PASS pack v2`; `npm run typecheck` — та же 1
+предсуществующая ошибка (`style-recipe-validation.test.ts`, не эта задача, подтверждено `git stash`
+на baseline `bc14bf3`), 0 новых ошибок типов.
+
+Подробно: `Plans/Kotlin/EnRuPackPlan.md` §1.3, §5 (гэпы A/B/C), §6 (EN-11);
+`courses/lang/en/{lang,lexicon,prepositions}.json`, `courses/lang/en/morphology-notes.md`,
+`courses/schema/{lexicon-v1,prepositions-v1}.schema.json`, `scripts/validate-pack-v2.mjs`,
+`tests/pack-v2.test.ts`.
+
 ## ADR-25 · 2026-09-28 · UC-09 (часть 2/2, lane macos): macOS + Compose Desktop переключены на `MatrixTableViewModel`
 Пять `MatrixTableViewModel`-билдеров в новом `kotlin/shared/src/commonMain/kotlin/polski/presentation/MatrixTables.kt` (`casesFullTable`/`comparisonTable`/`verbsTable`/`personalPronounsTable`/`possessivesTable`) — буквальная транскрипция пяти таблиц, которые desktop's `MatrixScreen.kt` (`CasesDesktop`/`VerbsDesktop`/`PronounsDesktop`) и macOS's `matrixSnapshot` (`MacSnapshot.kt`) до этого строили каждый по-своему вручную поверх одних и тех же `caseRows`/`nounPhrase`/`caseSentence`/`verbForm`/`referenceVerbTeaching`/`referencePronounTeaching`/`possessives` — те же заголовки, те же строки, та же `contrastFrom`-база на столбец, теперь один источник для обоих хостов. Матрицы pipeline-карточек/male-acc grid/chain/русской опоры (ADR-21 boundary) не тронуты — они остаются на прежнем ad-hoc пути на обоих хостах.
 Новый `kotlin/shared/src/commonMain/kotlin/polski/presentation/MatrixTableSnapshot.kt`: `MatrixTableViewModel.toJson()` — единый wire-формат (rowHeaderLabel/columnHeaders/rows[{header,cells[{value,contrast?}]}]), `contrastPairJson(ContrastPair)` вынесен из `MacSnapshot.kt`'s `pairSnapshot` (теперь однострочный делегат) как общая форма для *любой* «было → стало» пары на снапшоте, не только матричной.

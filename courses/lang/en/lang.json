@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 1,
+  "$comment": "Plans/Kotlin/EnRuPackPlan.md §0/§1.1/§5 gap C: en's language profile. `case` is a role vocabulary (Subj/Obj/In/With/To/About/Of), not morphological case — en has no noun/adjective declension; the role is realized by word order (Subj/Obj) or by a preposition (lang/en/prepositions.json's `role` entry, one per remaining value). `Aspect` (Simple/Continuous/Perfect) is additive to core/features.json (EN-01) and has no pl equivalent (pl's aspect is lexical, not this grammatical feature).",
+  "code": "en",
+  "usesFeatures": ["Case", "Number", "Person", "Tense", "Polarity", "Mood", "Aspect"],
+  "case": ["Subj", "Obj", "In", "With", "To", "About", "Of"],
+  "answerPolicy": "typed"
+}

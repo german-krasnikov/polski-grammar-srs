@@ -10,6 +10,14 @@ courses/core/*.json, courses/lang/pl/{lang,lexicon}.json, courses/pairs/pl-ru/pa
   template-op/exercise-kind фактов; validate-pack-v2.mjs — cross-checks §8.2. course.json НЕ переехал/не удалён (план §6) —
   остаётся живым входом для Gradle/React ниже; Kotlin-загрузчик v2-слоёв («CoursePackLoader») не построен — план §6/
   kotlin/pack-format/.../CoursePackSource.kt
+courses/lang/en/{lang,lexicon,prepositions}.json (ADR-26, EnRuPackPlan.md §1.3/§6 EN-11) — первый второй язык; чистый
+  v2, без course.json/v1-моста (тот мост pl-ru-специфичен, см. ниже). validate-pack-v2.mjs сканирует courses/lang/*
+  и схема-проверяет lang.json/lexicon.json (courses/schema/lexicon-v1.schema.json, новая)/prepositions.json
+  (courses/schema/prepositions-v1.schema.json, новая категория для case-role→предлог) для КАЖДОГО найденного языка;
+  §8.2 cross-checks (construction/focus/fixed/lexicalFilter) запускаются только если у языка уже есть curriculum.json
+  (пока только pl — EN-12 добавит его для en). reconstructCoursePack→course-pack-v1.schema.json→validateCoursePack
+  остаётся ЖЁСТКО pl-ru-специфичным (v1-схема буквально кодирует pl'ские падежные метки как ключи объекта) — не
+  генерализован, en идёт мимо него до EN-04/EN-05 (:core-engine v2-загрузчик, гэп G).
 courses/*/course.json ──(build: generateCoursePackSource scans courses/*, UC-02)──► kotlin/shared (через :pack-format CoursePackSource)
 courses/lang/<code>/curriculum.json ──(тот же generateCoursePackSource, сканирует courses/lang/*, UC-06)──► polski.training.plCurriculum ──► polski.core.plExerciseGenerator (UC-08, живой путь)
 kotlin/build-logic         convention-плагин polski.kmp-common — 7 KMP-таргетов для новых :core-* модулей

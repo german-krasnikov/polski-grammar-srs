@@ -75,3 +75,65 @@ describe('UC-12 schema v2 split', () => {
     }
   });
 });
+
+describe('EN-11: lang/en lang.json + lexicon.json + prepositions.json', () => {
+  test('lang/en/lang.json declares en Case-roles + Aspect (uses EN-01)', async () => {
+    const enLang = await import('../courses/lang/en/lang.json');
+    expect(enLang.default.code).toBe('en');
+    expect(enLang.default.usesFeatures).toEqual(
+      expect.arrayContaining(['Case', 'Number', 'Person', 'Tense', 'Polarity', 'Mood', 'Aspect']),
+    );
+    expect(enLang.default.case).toEqual(expect.arrayContaining(['Subj', 'Obj', 'In', 'With', 'To', 'About', 'Of']));
+  });
+
+  test('validatePackV2 also validates the checked-in lang/en layers (generalized, not pl-only)', () => {
+    expect(() => validatePackV2()).not.toThrow();
+  });
+
+  test('lang/en/lexicon.json has the 5 required lexical categories, each internally consistent', async () => {
+    const enLexicon = await import('../courses/lang/en/lexicon.json');
+    const lex = enLexicon.default as {
+      nouns: Array<{ id: string; forms: { sg: string; pl: string } }>;
+      adjectives: Array<{ id: string; forms: { invariant: string } }>;
+      verbs: Array<{ id: string; lemma: string; present3sg?: string }>;
+      personalPronouns: Record<string, { subject: string; object: string }>;
+      possessives: Array<{ id: string; forms: { kind: string } }>;
+    };
+    expect(lex.nouns.length).toBeGreaterThan(0);
+    for (const noun of lex.nouns) {
+      expect(noun.forms.sg.length).toBeGreaterThan(0);
+      expect(noun.forms.pl.length).toBeGreaterThan(0);
+    }
+    for (const adjective of lex.adjectives) expect(adjective.forms.invariant.length).toBeGreaterThan(0);
+    for (const possessive of lex.possessives) expect(possessive.forms.kind).toBe('invariant');
+    // do/be/have/will are auxiliaries as plain verbs[] rows (EnRuPackPlan.md §1.3), not a separate file.
+    for (const auxId of ['do', 'be', 'have', 'will']) expect(lex.verbs.map((v) => v.id)).toContain(auxId);
+    // English personal pronouns collapse pl's 9-way ja/ty/on/ona/ono/my/wy/oni/one split to 7 (no gender split on "they").
+    expect(Object.keys(lex.personalPronouns).sort()).toEqual(['I', 'he', 'it', 'she', 'they', 'we', 'you'].sort());
+  });
+
+  test('lang/en/prepositions.json role table covers exactly lang.json case values, empty string for Subj/Obj', async () => {
+    const enLang = await import('../courses/lang/en/lang.json');
+    const enPrepositions = await import('../courses/lang/en/prepositions.json');
+    const role = enPrepositions.default.prepositions.find((p: { id: string }) => p.id === 'role');
+    if (!role) throw new Error('lang/en/prepositions.json has no "role" entry');
+    expect(Object.keys(role.forms).sort()).toEqual([...enLang.default.case].sort());
+    expect(role.forms.Subj).toBe('');
+    expect(role.forms.Obj).toBe('');
+    expect(role.forms.With).toBe('with');
+  });
+
+  test('rejects a malformed lang/en/lexicon.json (missing required category)', async () => {
+    const fs = await import('node:fs');
+    const url = new URL('../courses/lang/en/lexicon.json', import.meta.url);
+    const original = fs.readFileSync(url, 'utf8');
+    try {
+      const broken = JSON.parse(original);
+      delete broken.possessives;
+      fs.writeFileSync(url, JSON.stringify(broken));
+      expect(() => validatePackV2()).toThrow(/lang\/en\/lexicon\.json/);
+    } finally {
+      fs.writeFileSync(url, original);
+    }
+  });
+});

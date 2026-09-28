@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "$comment": "Plans/Kotlin/EnRuPackPlan.md §1.1/§1.3/§5 gap A: the `role` entry maps every lang.json `case` (role) value to the preposition that realizes it — empty string for Subj/Obj (word order alone, no preposition). scripts/validate-pack-v2.mjs checks this entry's forms keys equal lang/en/lang.json's `case` array exactly.",
+  "prepositions": [
+    {
+      "id": "role",
+      "forms": {
+        "Subj": "",
+        "Obj": "",
+        "In": "in",
+        "With": "with",
+        "To": "to",
+        "About": "about",
+        "Of": "of"
+      }
+    }
+  ]
+}
