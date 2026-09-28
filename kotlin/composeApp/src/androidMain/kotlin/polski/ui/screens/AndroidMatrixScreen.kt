@@ -58,7 +58,9 @@ import polski.model.Tense
 import polski.presentation.AppAction
 import polski.presentation.AppUiState
 import polski.presentation.MatrixSection
-import polski.presentation.ContrastPair
+import polski.presentation.toViewModel
+import polski.core.engine.MatrixColumn
+import polski.core.engine.MatrixTableEngine
 
 @Composable
 internal fun AndroidMatrixScreen(state: AppUiState, dispatch: (AppAction) -> Unit) {
@@ -138,8 +140,10 @@ fun AndroidSystemMapCard(card: ReferenceSystemCard) {
     }
 }
 
+/** Public (not `private`), like [AndroidCaseReference]/[AndroidSystemMapCard], so UC-09's table
+ *  parity can be exercised directly in Compose tests from `androidApp`. */
 @Composable
-private fun AndroidCasesSection(state: AppUiState, dispatch: (AppAction) -> Unit) {
+fun AndroidCasesSection(state: AppUiState, dispatch: (AppAction) -> Unit) {
     val selected = state.matrixSelection
     AndroidInfoCard("Выбери группу слов") {
         AndroidChoiceMenu("Слово", selected.nounId, nouns.map { it.id to "${it.lemma} — ${it.meaning}" }) {
@@ -160,12 +164,24 @@ private fun AndroidCasesSection(state: AppUiState, dispatch: (AppAction) -> Unit
     val seed = SentenceSeed(selected.nounId, selected.adjectiveId)
     val basePhrase = nounPhrase(selected.nounId, GramCase.NOM, number, selected.adjectiveId, owner)
     val baseSentence = caseSentence(seed, GramCase.NOM, owner, number)
-    caseRows.forEach { row ->
-        AndroidInfoCard("${row.pl} · ${row.ru}") {
-            Text("${row.question} · ${row.trigger}", style = MaterialTheme.typography.labelLarge)
-            ContrastPairText(ContrastPair.generated(basePhrase,
-                nounPhrase(selected.nounId, row.id, number, selected.adjectiveId, owner)))
-            ContrastPairText(ContrastPair.generated(baseSentence, caseSentence(seed, row.id, owner, number)))
+    // UC-09 part 2/2: this table's cells now come from MatrixTableEngine (rowAxis = caseRows)
+    // instead of calling nounPhrase/caseSentence inline per card — same values, one engine.
+    val casesTable = MatrixTableEngine.build(
+        rowAxis = caseRows,
+        rowHeaderLabel = "Падеж · русская опора",
+        rowHeader = { row -> "${row.pl} · ${row.ru}" },
+        columns = listOf(
+            MatrixColumn("Вопрос / конструкция", { row -> "${row.question} · ${row.trigger}" }),
+            MatrixColumn("Фраза", { row -> nounPhrase(selected.nounId, row.id, number, selected.adjectiveId, owner) },
+                contrastFrom = { basePhrase }),
+            MatrixColumn("Предложение", { row -> caseSentence(seed, row.id, owner, number) }, contrastFrom = { baseSentence }),
+        ),
+    ).toViewModel()
+    casesTable.rows.forEach { row ->
+        AndroidInfoCard(row.header) {
+            Text(row.cells[0].value, style = MaterialTheme.typography.labelLarge)
+            ContrastPairText(requireNotNull(row.cells[1].contrast))
+            ContrastPairText(requireNotNull(row.cells[2].contrast))
         }
     }
     Text(referenceCaseTeaching.compactNote)
@@ -177,17 +193,25 @@ private fun AndroidCasesSection(state: AppUiState, dispatch: (AppAction) -> Unit
         AndroidChoiceMenu("Падеж для сравнения", comparisonCase.name, caseRows.map { it.id.name to it.pl }) {
             comparisonCase = GramCase.valueOf(it)
         }
-        comparisonNounIds.forEach { id ->
-            val noun = nounById(id)
-            Text(noun.lemma)
-            ContrastPairText(ContrastPair.generated(noun.forms.getValue(number).getValue(GramCase.NOM),
-                noun.forms.getValue(number).getValue(comparisonCase)))
+        val comparisonTable = MatrixTableEngine.build(
+            rowAxis = comparisonNounIds,
+            rowHeaderLabel = "Слово",
+            rowHeader = { id -> nounById(id).lemma },
+            columns = listOf(
+                MatrixColumn(comparisonCase.name, { id -> nounById(id).forms.getValue(number).getValue(comparisonCase) },
+                    contrastFrom = { id -> nounById(id).forms.getValue(number).getValue(GramCase.NOM) }),
+            ),
+        ).toViewModel()
+        comparisonTable.rows.forEach { row ->
+            Text(row.header)
+            ContrastPairText(requireNotNull(row.cells[0].contrast))
         }
     }
 }
 
+/** Public — see [AndroidCasesSection]. */
 @Composable
-private fun AndroidVerbsSection(state: AppUiState, dispatch: (AppAction) -> Unit) {
+fun AndroidVerbsSection(state: AppUiState, dispatch: (AppAction) -> Unit) {
     val selected = state.matrixSelection
     AndroidInfoCard("Лицо × число × время") {
         AndroidChoiceMenu("Глагол", selected.verbId, verbs.filter { it.aspect == Aspect.IMPERFECTIVE }.map { it.id to "${it.lemma} — ${it.meaning}" }) {
@@ -199,12 +223,23 @@ private fun AndroidVerbsSection(state: AppUiState, dispatch: (AppAction) -> Unit
         }
         Text(referenceVerbTeaching.compactFutureExplanation)
     }
-    referenceVerbTeaching.subjects.forEach { subject ->
-        AndroidInfoCard(subject.label.compact) {
-            listOf(Tense.PRESENT, Tense.PAST, Tense.FUTURE).forEach { tense ->
-                Text(referenceVerbTeaching.tenseLabels.getValue(tense).compact)
-                ContrastPairText(ContrastPair.generated(verbs.first { it.id == selected.verbId }.lemma,
-                    verbForm(selected.verbId, tense, subject.person, subject.number, subject.gender(selected.feminineGroup))))
+    val lemma = verbs.first { it.id == selected.verbId }.lemma
+    // UC-09 part 2/2: rowAxis = subjects, one column per tense — same shape as MatrixTableEngineTest.
+    val verbsTable = MatrixTableEngine.build(
+        rowAxis = referenceVerbTeaching.subjects,
+        rowHeaderLabel = "Кто",
+        rowHeader = { subject -> subject.label.compact },
+        columns = listOf(Tense.PRESENT, Tense.PAST, Tense.FUTURE).map { tense ->
+            MatrixColumn(referenceVerbTeaching.tenseLabels.getValue(tense).compact,
+                { subject -> verbForm(selected.verbId, tense, subject.person, subject.number, subject.gender(selected.feminineGroup)) },
+                contrastFrom = { lemma })
+        },
+    ).toViewModel()
+    verbsTable.rows.forEach { row ->
+        AndroidInfoCard(row.header) {
+            row.cells.forEachIndexed { i, cell ->
+                Text(verbsTable.columnHeaders[i])
+                ContrastPairText(requireNotNull(cell.contrast))
             }
         }
     }
@@ -220,30 +255,50 @@ private fun AndroidVerbsSection(state: AppUiState, dispatch: (AppAction) -> Unit
     }
 }
 
+/** Public — see [AndroidCasesSection]. */
 @Composable
-private fun AndroidPronounsSection(dispatch: (AppAction) -> Unit) {
+fun AndroidPronounsSection(dispatch: (AppAction) -> Unit) {
     val teaching = referencePronounTeaching
     Text(teaching.compactIntro)
-    teaching.pronounIds.forEach { id ->
-        val forms = personalPronouns.getValue(id)
-        AndroidInfoCard(id) {
-            teaching.contexts.forEach { context ->
-                Text(context.cue.compact)
-                ContrastPairText(ContrastPair.generated(id,
-                    if (context.id == GramCase.LOC) forms.getValue(GramCase.LOC) else context.value(id, forms)))
+    // UC-09 part 2/2: rowAxis = pronoun ids, one column per teaching context.
+    val personalTable = MatrixTableEngine.build(
+        rowAxis = teaching.pronounIds,
+        rowHeaderLabel = "Кто",
+        rowHeader = { id -> id },
+        columns = teaching.contexts.map { context ->
+            MatrixColumn(context.cue.compact, { id ->
+                val forms = personalPronouns.getValue(id)
+                if (context.id == GramCase.LOC) forms.getValue(GramCase.LOC) else context.value(id, forms)
+            }, contrastFrom = { id -> id })
+        },
+    ).toViewModel()
+    personalTable.rows.forEach { row ->
+        AndroidInfoCard(row.header) {
+            row.cells.forEachIndexed { i, cell ->
+                Text(personalTable.columnHeaders[i])
+                ContrastPairText(requireNotNull(cell.contrast))
             }
         }
     }
     Text(teaching.nativeFooter)
     Text(teaching.possessiveTitle, style = MaterialTheme.typography.titleLarge)
-    possessives.forEach { possessive ->
-        AndroidInfoCard(possessive.label) {
-            teaching.demo.cases.forEach { row ->
-                Text(row.id.name)
-                ContrastPairText(ContrastPair.generated(teaching.demo.phrase(possessive.id, GramCase.NOM),
-                    teaching.demo.phrase(possessive.id, row.id)))
+    // UC-09 part 2/2: rowAxis = possessives, one column per demo case.
+    val possessiveTable = MatrixTableEngine.build(
+        rowAxis = possessives,
+        rowHeaderLabel = "Кому принадлежит",
+        rowHeader = { possessive -> possessive.label },
+        columns = teaching.demo.cases.map { demoCase ->
+            MatrixColumn(demoCase.id.name, { possessive -> teaching.demo.phrase(possessive.id, demoCase.id) },
+                contrastFrom = { possessive -> teaching.demo.phrase(possessive.id, GramCase.NOM) })
+        },
+    ).toViewModel()
+    possessiveTable.rows.forEachIndexed { rowIndex, row ->
+        AndroidInfoCard(row.header) {
+            row.cells.forEachIndexed { i, cell ->
+                Text(possessiveTable.columnHeaders[i])
+                ContrastPairText(requireNotNull(cell.contrast))
             }
-            Text(teaching.demo.rule(possessive.id))
+            Text(teaching.demo.rule(possessives[rowIndex].id))
         }
     }
     OutlinedButton(
