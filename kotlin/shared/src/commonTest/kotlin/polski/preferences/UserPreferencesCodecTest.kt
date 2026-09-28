@@ -130,4 +130,22 @@ class UserPreferencesCodecTest {
             assertIs<PreferencesDecode.RecoveryRequired>(UserPreferencesCodec.decode(raw))
         }
     }
+
+    // EN-22: a persisted target/native switch (e.g. en-ru) makes decode() itself return
+    // RecoveryRequired (the test right above this one) until the active pack really is en-ru —
+    // peekTargetNative is the one entrypoint a host's cold start can call first, before it selects
+    // that pack, to know which one to select. It skips every other field's validation on purpose.
+    @Test fun peekTargetNativeReadsBothWireShapesWithoutValidatingAgainstTheActivePack() {
+        assertEquals("pl" to "ru", UserPreferencesCodec.peekTargetNative("""{"schemaVersion":3,"coursePair":"pl-ru"}"""))
+        assertEquals("en" to "ru", UserPreferencesCodec.peekTargetNative("""{"schemaVersion":3,"coursePair":"en-ru"}"""))
+        assertEquals("en" to "ru", UserPreferencesCodec.peekTargetNative("""{"schemaVersion":4,"target":"en","native":"ru"}"""))
+    }
+
+    @Test fun peekTargetNativeIsNullForAnyMissingOrMalformedDocument() {
+        assertEquals(null, UserPreferencesCodec.peekTargetNative("not json"))
+        assertEquals(null, UserPreferencesCodec.peekTargetNative("""{"schemaVersion":1}"""))
+        assertEquals(null, UserPreferencesCodec.peekTargetNative("""{"schemaVersion":1,"coursePair":"pl"}"""))
+        assertEquals(null, UserPreferencesCodec.peekTargetNative("""{"schemaVersion":4,"target":"en"}"""))
+        assertEquals(null, UserPreferencesCodec.peekTargetNative("""{}"""))
+    }
 }

@@ -26,6 +26,28 @@ object UserPreferencesCodec {
     private val fieldsV4 = fieldsV3 - "coursePair" + "target" + "native"
     private val reminderFields = setOf("enabled", "localTime", "days", "quietStart", "quietEnd")
 
+    /**
+     * EN-22: the target/native half of a persisted document, read without checking it against
+     * [packRegistry.active] the way [decode] does — a host's cold start needs this *before*
+     * calling [polski.data.selectActiveCoursePack] with the result, so [decode]'s own check would
+     * otherwise always fail for a persisted pack switch (the active pack is still the old one at
+     * that point). Tolerant of both wire shapes (`coursePair` through v3, `target`/`native` from
+     * v4); null for any missing/malformed document, same as "leave the default pack active".
+     */
+    fun peekTargetNative(raw: String): Pair<String, String>? {
+        val root = try { json.parseToJsonElement(raw) as? JsonObject } catch (_: Exception) { null } ?: return null
+        val version = root.number("schemaVersion") ?: return null
+        return if (version <= 3) {
+            val joined = (root["coursePair"] as? JsonPrimitive)?.takeIf { it.isString }?.content ?: return null
+            val parts = joined.split("-", limit = 2)
+            if (parts.size != 2) null else parts[0] to parts[1]
+        } else {
+            val target = (root["target"] as? JsonPrimitive)?.takeIf { it.isString }?.content ?: return null
+            val native = (root["native"] as? JsonPrimitive)?.takeIf { it.isString }?.content ?: return null
+            target to native
+        }
+    }
+
     fun decode(raw: String): PreferencesDecode {
         val root = try { json.parseToJsonElement(raw) as? JsonObject }
         catch (_: Exception) { null } ?: return invalid(raw, "Expected preferences object")

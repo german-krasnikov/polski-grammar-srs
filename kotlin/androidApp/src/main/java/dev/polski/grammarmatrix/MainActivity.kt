@@ -3,6 +3,7 @@ package dev.polski.grammarmatrix
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Build
 import androidx.activity.ComponentActivity
@@ -81,6 +82,7 @@ import polski.preferences.Motion
 import polski.preferences.UserPreferencesV2
 import polski.presentation.StyleId
 import polski.ui.screens.AndroidContent
+import polski.ui.screens.AndroidCoursePicker
 import polski.ui.screens.AndroidStylePicker
 import polski.ui.screens.AndroidTabContent
 import polski.ui.screens.AndroidVocabularyScreen
@@ -316,6 +318,22 @@ private fun AndroidSettingsScreen(
 ) {
     Column(verticalArrangement = Arrangement.spacedBy(14.dp)) {
         Text("Настройки", style = MaterialTheme.typography.headlineSmall)
+        // EN-22: target/native pickers next to the style picker below. A course switch can't just
+        // flip a preference in place (every `packRegistry.active`-derived global is cached for the
+        // process's lifetime once touched) — persistCourseSelectionAndRestart persists, then
+        // relaunches the app so its cold start applies the new pack before anything reads course
+        // data. Options come from usableCourseSelections, so this stays pl-ru-only until a real
+        // core gap (CoursePack's pl-shaped schema) is generalized for a structurally different pack.
+        Text("Курс", style = MaterialTheme.typography.titleMedium)
+        val context = androidx.compose.ui.platform.LocalContext.current
+        AndroidCoursePicker(
+            selectedTarget = session.preferences.target,
+            selectedNative = session.preferences.native,
+            enabled = session.preferencesError == null,
+            onSelect = { target, native ->
+                session.persistCourseSelectionAndRestart(target, native) { restartApp(context) }
+            },
+        )
         // S1: replaces the old 2-way Logic/Situations selector — 4 styles, sourced from
         // StyleRegistry (label/description), persisted via UserPreferencesV3.styleId through the
         // same store dispatch the training card's quick switch uses (AndroidScreen's
@@ -416,3 +434,14 @@ internal fun resolveDarkAppearance(appearance: Appearance, systemDark: Boolean):
 
 private fun androidDate(millis: Long): String =
     SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault()).format(Date(millis))
+
+/** EN-22: relaunches the app in a fresh process — the only way every `by lazy { packRegistry.active.* }`
+ * global in :shared re-evaluates against a just-switched pack (Activity recreation alone keeps the
+ * same JVM statics). The launcher intent re-enters normally; [AndroidSessionViewModel]'s own early
+ * `init` block applies the persisted course selection before anything touches course data. */
+internal fun restartApp(context: android.content.Context) {
+    val intent = context.packageManager.getLaunchIntentForPackage(context.packageName)
+        ?.apply { addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK) }
+    if (intent != null) context.startActivity(intent)
+    Runtime.getRuntime().exit(0)
+}

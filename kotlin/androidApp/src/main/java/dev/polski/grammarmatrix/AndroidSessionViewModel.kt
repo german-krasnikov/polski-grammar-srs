@@ -38,11 +38,16 @@ import polski.preferences.PreferencesLoad
 import polski.preferences.PreferencesSave
 import polski.preferences.PreferredStyle
 import polski.preferences.UserPreferencesV2
+import polski.data.selectActiveCoursePack
 
 class AndroidSessionViewModel(context: Context) : ViewModel() {
     private val appContext = context.applicationContext
     private val scheduler = FsrsScheduler()
     private val preferencesStore = AndroidUserPreferencesStore(appContext)
+    // EN-22: must run before anything below touches course data (`store`'s own initializer, next)
+    // — every `packRegistry.active`-derived global in :shared is cached for the process's whole
+    // lifetime on first read, so a pack switch has to land before that first read, not after.
+    init { preferencesStore.peekTargetNative()?.let { (target, native) -> selectActiveCoursePack("$target-$native") } }
     private var savedPreferences = UserPreferencesV2()
     var preferences by mutableStateOf(UserPreferencesV2())
         private set
@@ -105,6 +110,32 @@ class AndroidSessionViewModel(context: Context) : ViewModel() {
         val preferred = PreferredStyle.entries.firstOrNull { it.name == styleId.value } ?: return
         if (preferences.styleId == preferred) return
         updatePreferences(preferences.copy(styleId = preferred))
+    }
+
+    /**
+     * EN-22: unlike every other setting here, a course switch can't just update in-memory state —
+     * it changes hundreds of process-wide cached values (every `by lazy { packRegistry.active.* }`
+     * global CourseData.kt declares), which only re-evaluate on a fresh process. So this persists
+     * [target]/[native], and only on a successful write calls [restart] (an app relaunch the
+     * caller performs — see `MainActivity.restartApp`); a failed write leaves the current pack
+     * untouched and reports [preferencesError], same as [updatePreferences]. A restart's own cold
+     * start is what actually calls [selectActiveCoursePack] (via this class's own early `init`),
+     * before anything touches course data.
+     */
+    fun persistCourseSelectionAndRestart(target: String, native: String, restart: () -> Unit) {
+        if (preferences.target == target && preferences.native == native) return
+        val next = preferences.copy(target = target, native = native)
+        val previous = preferences
+        preferences = next
+        viewModelScope.launch {
+            when (val result = preferencesStore.save(next)) {
+                PreferencesSave.Saved -> restart()
+                is PreferencesSave.WriteFailed -> {
+                    preferences = previous
+                    preferencesError = result.reason
+                }
+            }
+        }
     }
 
     fun setMotion(motion: Motion) {
