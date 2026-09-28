@@ -44,6 +44,19 @@ data class StudyDirection(val wire: String) {
  *  for hosts that need to iterate or look one up by [StudyDirection.wire]. */
 val builtInStudyDirections: List<StudyDirection> = listOf(StudyDirection.RussianToPolish, StudyDirection.PolishToRussian)
 
+/**
+ * The 2 [StudyDirection]s for whichever pack is active right now — native shown/target recalled
+ * first, target shown/native recalled second, the same order [builtInStudyDirections] already
+ * fixed for pl-ru, generalized from [polski.data.CoursePack.nativeLanguage]/`targetLanguage`
+ * instead of a hand-written pl literal (EnRuAcceptance-2026-09-28.md §7 item 4: a vocabulary UI
+ * can now offer the active pack's real pair, e.g. `"ru-en"/"en-ru"`, not pl-ru's alone). For
+ * pl-ru this is byte-identical to [builtInStudyDirections]. Read fresh, not cached: the active
+ * pack can change mid-process (EN-22).
+ */
+val activeStudyDirections: List<StudyDirection> get() = packRegistry.active.let { pack ->
+    listOf(StudyDirection("${pack.nativeLanguage}-${pack.targetLanguage}"), StudyDirection("${pack.targetLanguage}-${pack.nativeLanguage}"))
+}
+
 data class VocabularyDocument(
     val selectedIds: List<String> = emptyList(),
     val custom: List<VocabularyItem> = emptyList(),

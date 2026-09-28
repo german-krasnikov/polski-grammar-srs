@@ -27,10 +27,23 @@ import polski.data.VocabularyItem
 import polski.presentation.CardEffect
 import polski.srs.Rating
 import polski.vocabulary.StudyDirection
-import polski.vocabulary.builtInStudyDirections
+import polski.vocabulary.activeStudyDirections
 import polski.vocabulary.VocabularyCodec
 import polski.vocabulary.VocabularyLoadStatus
 import polski.vocabulary.VocabularySession
+
+/** Full language name for a direction label, e.g. "Русский → английский" (EnRuAcceptance
+ *  -2026-09-28.md §7 item 4) — [wire] before the `-` is who's shown, capitalized as the label's
+ *  leading word; after it is who's recalled, lowercased mid-label. pl-ru keeps producing the
+ *  exact strings this screen always has ("Русский → польский"/"Польский → русский"). */
+private val directionLanguageNames = mapOf("pl" to "Польский", "en" to "Английский", "ru" to "Русский")
+private fun directionLanguageName(code: String): String = directionLanguageNames[code] ?: code
+private fun directionLabel(direction: StudyDirection): String {
+    val (shown, recalled) = direction.wire.split("-", limit = 2)
+    return "${directionLanguageName(shown)} → ${directionLanguageName(recalled).lowercase()}"
+}
+private val recallAdverbs = mapOf("pl" to "по-польски", "ru" to "по-русски", "en" to "по-английски")
+private fun recallAdverb(code: String): String = recallAdverbs[code] ?: code
 
 /**
  * Android's own vocabulary screen (D2, `Plans/Kotlin/FlipCardRivePlan.md` §16.0-B): the review
@@ -73,8 +86,8 @@ fun AndroidVocabularyScreen(
         AndroidChoiceMenu(
             "Направление",
             state.direction.wire,
-            listOf(StudyDirection.RussianToPolish.wire to "Русский → польский", StudyDirection.PolishToRussian.wire to "Польский → русский"),
-        ) { wire -> builtInStudyDirections.firstOrNull { it.wire == wire }?.let(session::setDirection) }
+            activeStudyDirections.map { it.wire to directionLabel(it) },
+        ) { wire -> activeStudyDirections.firstOrNull { it.wire == wire }?.let(session::setDirection) }
 
         if (item == null) {
             Card(Modifier.fillMaxWidth(), shape = RoundedCornerShape(24.dp)) {
@@ -128,7 +141,10 @@ private fun VocabularyFrontFace(
     item: VocabularyItem, direction: StudyDirection, typed: Boolean, draft: String,
     session: VocabularySession, revealed: Boolean, flipVisually: () -> Unit,
 ) {
-    val recallPolish = direction == StudyDirection.RussianToPolish
+    // The active pack's own first direction always recalls its target language (the [item.lemma]
+    // side) — [activeStudyDirections]'s own fixed order, generalized from pl-ru's `recallPolish`.
+    val recallsLemma = direction == activeStudyDirections.first()
+    val recalledCode = direction.wire.substringAfter("-")
     fun reveal() { if (revealed) flipVisually() else session.reveal() }
     Card(Modifier.fillMaxWidth(), shape = RoundedCornerShape(24.dp)) {
         Column(Modifier.padding(22.dp), verticalArrangement = Arrangement.spacedBy(14.dp)) {
@@ -136,8 +152,8 @@ private fun VocabularyFrontFace(
                 Modifier.fillMaxWidth().clickable(onClickLabel = "Показать ответ", role = Role.Button) { reveal() },
                 verticalArrangement = Arrangement.spacedBy(4.dp),
             ) {
-                Text(if (recallPolish) "Вспомни по-польски" else "Вспомни по-русски", style = MaterialTheme.typography.labelLarge)
-                Text(if (recallPolish) item.translation else item.lemma, style = MaterialTheme.typography.headlineMedium)
+                Text("Вспомни ${recallAdverb(recalledCode)}", style = MaterialTheme.typography.labelLarge)
+                Text(if (recallsLemma) item.translation else item.lemma, style = MaterialTheme.typography.headlineMedium)
             }
             AndroidChoiceMenu(
                 "Ответ",
@@ -165,11 +181,12 @@ private fun VocabularyBackFace(
     item: VocabularyItem, direction: StudyDirection, typed: Boolean, draft: String,
     enableSwipeRating: Boolean, swipeNudgeGate: SwipeNudgeGate, reduceMotion: Boolean,
 ) {
-    val recallPolish = direction == StudyDirection.RussianToPolish
+    val recallsLemma = direction == activeStudyDirections.first()
+    val recalledCode = direction.wire.substringAfter("-")
     Card(Modifier.fillMaxWidth(), shape = RoundedCornerShape(24.dp)) {
         Column(Modifier.padding(22.dp), verticalArrangement = Arrangement.spacedBy(14.dp)) {
-            Text(if (recallPolish) "Эталон · польский" else "Эталон · русский", style = MaterialTheme.typography.labelLarge)
-            Text(if (recallPolish) item.lemma else item.translation, style = MaterialTheme.typography.headlineSmall)
+            Text("Эталон · ${directionLanguageName(recalledCode).lowercase()}", style = MaterialTheme.typography.labelLarge)
+            Text(if (recallsLemma) item.lemma else item.translation, style = MaterialTheme.typography.headlineSmall)
             Text("Перевод: ${item.translation}")
             Text("Форма: ${item.form}")
             Text("В предложении: ${item.example}")

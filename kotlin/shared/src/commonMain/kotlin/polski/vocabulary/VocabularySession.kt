@@ -25,7 +25,7 @@ enum class VocabularyLoadStatus { Loading, Ready, RecoveryRequired, Unavailable 
 data class VocabularyUiState(
     val loadStatus: VocabularyLoadStatus = VocabularyLoadStatus.Loading,
     val document: VocabularyDocument = VocabularyDocument(),
-    val direction: StudyDirection = StudyDirection.RussianToPolish,
+    val direction: StudyDirection = activeStudyDirections.first(),
     val filter: String = "A1",
     val currentId: String? = null,
     val revealed: Boolean = false,
@@ -52,14 +52,18 @@ class VocabularySession(
         try {
             val raw = repository.loadRaw()
             savedRaw = raw
+            // EnRuAcceptance-2026-09-28.md §7 item 4: read once per start() so a fresh session's
+            // default (and the `currentId` picked for it) both name the pack really active right
+            // now, not pl-ru's `RussianToPolish` regardless of which pack that is.
+            val defaultDirection = activeStudyDirections.first()
             if (raw == null) {
-                mutableState.value = VocabularyUiState(loadStatus = VocabularyLoadStatus.Ready)
+                mutableState.value = VocabularyUiState(loadStatus = VocabularyLoadStatus.Ready, direction = defaultDirection)
             } else {
                 val decoded = runCatching { VocabularyCodec.decode(raw) }
                 mutableState.value = decoded.fold(
                     onSuccess = { document -> VocabularyUiState(
-                        loadStatus = VocabularyLoadStatus.Ready, document = document,
-                        currentId = nextId(document, StudyDirection.RussianToPolish),
+                        loadStatus = VocabularyLoadStatus.Ready, document = document, direction = defaultDirection,
+                        currentId = nextId(document, defaultDirection),
                     ) },
                     onFailure = { error -> VocabularyUiState(
                         loadStatus = VocabularyLoadStatus.RecoveryRequired, recoveryRaw = raw,
