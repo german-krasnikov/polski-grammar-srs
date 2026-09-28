@@ -37,6 +37,10 @@ struct TrainingSnapshot: Decodable {
         /// D3's rating-button interval preview (`MacSnapshot.kt`'s `intervals`), keyed by
         /// `Rating.name` — only `Again`/`Good` are ever shown (see `RatingIntervals`).
         let intervals: RatingIntervals?
+        /// EnRuPackPlan.md §4.2 (host-side follow-up): cheap enough to compute even on the front
+        /// (unrevealed) face — drives `MacFlashCardView`'s non-spoiling "💡 Есть лайфхак" badge.
+        /// Never the lifehack's own text — that stays gated behind `styleBlocks.lifehacks`.
+        let hasLifehack: Bool
     }
     struct Matrix: Decodable {
         struct ContrastPair: Decodable {
@@ -128,7 +132,18 @@ struct TrainingSnapshot: Decodable {
     let matrix: Matrix
     let progress: [Skill]
     let effects: [Effect]
+    /// EnRuPackPlan.md §4.3 (host-side follow-up): every lifehack the active pack has, grouped by
+    /// skill/topic in curriculum order with real skill titles (`MacSnapshot.kt`'s `lifehackGroups`,
+    /// `StaticPackLifehackProvider.listAll()`) — feeds the Matrix screen's "Лайфхаки" sub-section,
+    /// not `styleBlocks.lifehacks` (that stays the per-card back-face block for the active skill
+    /// only). Follows whichever pack is active (pl-ru/en-ru), same as every other snapshot field.
+    let lifehackGroups: [LifehackGroupJSON]
 }
+
+/// One `MacSnapshot.kt` `lifehackGroups[]` entry — `skillId`/`topic` are mutually exclusive
+/// (schema `lifehacks-v1`), `title` is always the real curriculum skill title or the cross-skill
+/// topic name, and `lifehacks` reuses the same [LifehackJSON] wire shape as `styleBlocks.lifehacks`.
+struct LifehackGroupJSON: Decodable { let skillId: String?; let topic: String?; let title: String; let lifehacks: [LifehackJSON] }
 
 /// D3's rating-button interval preview, shared by [TrainingSnapshot.Exercise] and
 /// [VocabularySnapshot] — only `Again`/`Good` are ever surfaced as rating choices.
@@ -757,19 +772,38 @@ private struct TrainingView: View {
 
 private struct MatrixView: View {
     @ObservedObject var model: MacModel
+    @Environment(\.accessibilityReduceMotion) private var systemReduceMotion
+    /// EnRuPackPlan.md §4.3 (host-side follow-up): "Лайфхаки" is a sub-section of this same
+    /// picker, not a new top-level tab and not a new `MatrixSection` case — a lifehack listing
+    /// only ever reads `training.lifehackGroups`, it never touches `matrix.section`/dispatches
+    /// `matrixSection`, so it stays local view state instead of a shared-enum change every host's
+    /// `switch matrix.section` would then need (web/android/ios/desktop all share that enum).
+    @State private var showLifehacks = false
+    private var reduceMotion: Bool { systemReduceMotion || model.preferences?.motion == "Reduced" || model.preferences?.animationsEnabled == false }
+
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 18) {
                 if let matrix = model.training?.matrix {
                     Text(matrix.matrixIntroduction).font(.title3).textSelection(.enabled)
-                    Picker("Раздел", selection: Binding(get: { matrix.section }, set: { model.send("matrixSection", $0) })) {
+                    Picker("Раздел", selection: Binding(
+                        get: { showLifehacks ? "Lifehacks" : matrix.section },
+                        set: { value in
+                            if value == "Lifehacks" { showLifehacks = true }
+                            else { showLifehacks = false; model.send("matrixSection", value) }
+                        }
+                    )) {
                         Text("Карта").tag("Map")
                         Text("Падежи").tag("Cases")
                         Text("Глаголы").tag("Verbs")
                         Text("Местоимения").tag("Pronouns")
+                        Text("Лайфхаки").tag("Lifehacks")
                     }.pickerStyle(.segmented)
                         .padding(3)
 
+                    if showLifehacks {
+                        MacLifehacksMatrixSection(groups: model.training?.lifehackGroups ?? [], reduceMotion: reduceMotion)
+                    } else {
                     switch matrix.section {
                     case "Cases":
                         GroupBox("Все семь падежей на одной группе слов") {
@@ -803,6 +837,7 @@ private struct MatrixView: View {
                                 }.frame(maxWidth: .infinity, alignment: .leading)
                             }
                         }
+                    }
                     }
                 }
             }

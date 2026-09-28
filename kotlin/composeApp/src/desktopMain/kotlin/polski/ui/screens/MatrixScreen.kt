@@ -1,6 +1,8 @@
 package polski.ui.screens
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -22,6 +24,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.unit.dp
 import polski.data.courseMatrixIntroduction
 import polski.data.courseContextHelp
@@ -55,9 +59,11 @@ import polski.model.SentenceSeed
 import polski.presentation.AppAction
 import polski.presentation.AppTab
 import polski.presentation.AppUiState
+import polski.presentation.LifehackGroup
 import polski.presentation.MatrixSection
 import polski.presentation.MatrixTableViewModel
 import polski.presentation.ContrastPair
+import polski.presentation.StaticPackLifehackProvider
 import polski.presentation.casesFullTable
 import polski.presentation.comparisonTable
 import polski.presentation.enDoSupportTable
@@ -77,6 +83,7 @@ internal fun MatrixScreen(state: AppUiState, dispatch: (AppAction) -> Unit) {
                 MatrixSection.Cases to "Падежи и окончания",
                 MatrixSection.Verbs to "Времена и лица",
                 MatrixSection.Pronouns to "Местоимения",
+                MatrixSection.Lifehacks to "Лайфхаки",
             ).forEach { (section, label) ->
                 OutlinedButton(onClick = { dispatch(AppAction.SelectMatrixSection(section)) }) {
                     Text(if (state.matrixSelection.section == section) "• $label" else label)
@@ -88,8 +95,44 @@ internal fun MatrixScreen(state: AppUiState, dispatch: (AppAction) -> Unit) {
             MatrixSection.Cases -> CasesDesktop(state, dispatch)
             MatrixSection.Verbs -> VerbsDesktop(state, dispatch)
             MatrixSection.Pronouns -> PronounsDesktop(dispatch)
-            // The retained JVM Desktop preview has no "Лайфхаки" picker entry; arm kept for exhaustiveness.
-            MatrixSection.Lifehacks -> {}
+            MatrixSection.Lifehacks -> LifehacksDesktop()
+        }
+    }
+}
+
+/** EnRuPackPlan.md §4.3: every lifehack the active pack has, grouped by skill in curriculum
+ *  order (real skill titles) — [StaticPackLifehackProvider.listAll] already does the grouping
+ *  and ordering, so this is only presentation. Absent entirely (no empty card) when the active
+ *  pack has no lifehacks at all; each group is independently collapsible, and each lifehack
+ *  inside a group keeps its own [DesktopLifehackBlock] disclosure (source/status attribution
+ *  always visible, text/citation only once expanded). Works for whichever pack is active
+ *  (pl-ru/en-ru) — [StaticPackLifehackProvider] already follows `packRegistry.active`. */
+@Composable
+private fun LifehacksDesktop() {
+    val groups = StaticPackLifehackProvider.listAll()
+    if (groups.isEmpty()) {
+        MatrixCard("Лайфхаки") { Text("Для активного набора лайфхаков пока нет.") }
+        return
+    }
+    groups.forEach { group -> LifehackGroupCard(group) }
+}
+
+@Composable
+private fun LifehackGroupCard(group: LifehackGroup) {
+    var expanded by remember(group.skillId, group.topic) { mutableStateOf(true) }
+    Card(Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(18.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            Row(
+                Modifier
+                    .fillMaxWidth()
+                    .clickable(interactionSource = remember { MutableInteractionSource() }, indication = null) { expanded = !expanded }
+                    .semantics { stateDescription = if (expanded) "развёрнуто" else "свёрнуто" },
+                horizontalArrangement = Arrangement.spacedBy(6.dp),
+            ) {
+                Text(if (expanded) "▾" else "▸", color = MaterialTheme.colorScheme.primary)
+                Text(group.title, style = MaterialTheme.typography.titleLarge)
+            }
+            if (expanded) DesktopLifehackBlock(group.lifehacks)
         }
     }
 }

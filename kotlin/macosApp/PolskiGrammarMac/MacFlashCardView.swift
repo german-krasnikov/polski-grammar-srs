@@ -47,6 +47,7 @@ struct MacFlashCardView: View {
     @ViewBuilder private var frontFace: some View {
         VStack(alignment: .leading, spacing: 8) {
             styleQuickSwitch
+            lifehackBadge
             tapToRevealContent
             if !state.introPending {
                 frontStyleBlocks
@@ -92,6 +93,23 @@ struct MacFlashCardView: View {
         .controlSize(.small)
         .fixedSize()
         .accessibilityIdentifier("styleQuickSwitch")
+    }
+
+    /// EnRuPackPlan.md §4.2 (host-side follow-up): a small, non-spoiling badge — `exercise.hasLifehack`
+    /// is cheap and never exposes the lifehack's own text/citation (that stays gated behind
+    /// `MacLifehackListView` on the revealed back). A plain `Text`, sibling of `tapToRevealContent`
+    /// (not nested inside it), so it carries no gesture of its own and tapping it can never reveal
+    /// the card — only the reveal button/prompt tap and ⌘Return do that.
+    @ViewBuilder private var lifehackBadge: some View {
+        if exercise.hasLifehack {
+            HStack(spacing: 5) {
+                Text("💡").accessibilityHidden(true)
+                Text("Есть лайфхак").font(.caption.weight(.medium)).foregroundStyle(.secondary)
+            }
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel("Есть лайфхак")
+            .accessibilityIdentifier("lifehackBadge")
+        }
     }
 
     // D1: tapping the sentence/task-prompt region reveals the card too, alongside the

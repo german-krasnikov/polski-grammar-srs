@@ -15,6 +15,7 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.input.key.Key
 import androidx.compose.ui.test.ExperimentalTestApi
 import androidx.compose.ui.test.assertCountEquals
+import androidx.compose.ui.test.assertHasNoClickAction
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.assertIsEnabled
@@ -54,6 +55,7 @@ import polski.presentation.StyleId
 import polski.presentation.LoadStatus
 import polski.presentation.MatrixSection
 import polski.presentation.MatrixSelection
+import polski.presentation.StaticPackLifehackProvider
 import polski.progress.ProgressCodec
 import polski.srs.FsrsScheduler
 import polski.srs.Rating
@@ -441,5 +443,65 @@ class DesktopScreenTest {
             }
         }
         onAllNodesWithText("Лайфхак · источник: editorial").assertCountEquals(2)
+    }
+
+    // EnRuPackPlan.md §4.2 (host-side follow-up, "this host" macOS slice): a non-spoiling front
+    // badge — hasLifehacks(skillId) is cheap and safe to check before reveal since it never
+    // exposes the lifehack's own text/citation, unlike styleBlocks.lifehacks (Revealed-only).
+    @OptIn(ExperimentalTestApi::class)
+    @Test
+    fun frontOfCardShowsANonSpoilingLifehackBadgeBeforeReveal() = runComposeUiTest {
+        val exercise = PlExerciseEngine(RandomSource { 0.1 }, ExerciseIdFactory { "desktop-lifehack-badge" })
+            .generateForSkill("case.inst")
+        val actions = mutableListOf<AppAction>()
+        setContent {
+            MaterialTheme {
+                Column(Modifier.verticalScroll(rememberScrollState())) {
+                    TrainingScreen(
+                        AppUiState(loadStatus = LoadStatus.Ready, phase = CardPhase.Question,
+                            exercise = exercise, chain = listOf(exercise)),
+                        actions::add,
+                        FocusRequester(),
+                        { "test-date" },
+                    )
+                }
+            }
+        }
+        onNodeWithText("💡 Есть лайфхак").assertExists().assertHasNoClickAction()
+        onNodeWithText("Лайфхак · источник: editorial").assertDoesNotExist()
+        onNodeWithText("Bielec, D. (1998)", substring = true).assertDoesNotExist()
+    }
+
+    // EnRuPackPlan.md §4.3 (host-side follow-up): a pack-wide "Лайфхаки" section inside the
+    // existing Matrix section picker (not a new top-level tab), grouped by skill in curriculum
+    // order with real skill titles, each hack collapsible on its own — same disclosure the
+    // per-card lifehack block already uses.
+    @OptIn(ExperimentalTestApi::class)
+    @Test
+    fun matrixLifehacksSectionListsGroupsByCurriculumOrderWithCollapsibleEntries() = runComposeUiTest {
+        // The first curriculum-order group and its first hack's own citation, read straight from
+        // the provider — real content, never hardcoded ids/citations that would drift out of sync
+        // with `courses/pairs/pl-ru/lifehacks.json`.
+        val firstGroup = StaticPackLifehackProvider.listAll().first()
+        val firstCitation = firstGroup.lifehacks.first().source.citation
+        var state by mutableStateOf(AppUiState(loadStatus = LoadStatus.Ready, tab = AppTab.Matrix))
+        val dispatch: (AppAction) -> Unit = { action ->
+            if (action is AppAction.SelectMatrixSection) state = state.copy(matrixSelection = state.matrixSelection.copy(section = action.section))
+        }
+        setContent {
+            MaterialTheme {
+                Column(Modifier.verticalScroll(rememberScrollState())) { MatrixScreen(state, dispatch) }
+            }
+        }
+        onNodeWithText(firstGroup.title).assertDoesNotExist()
+        onNodeWithText("Лайфхаки").performScrollTo().performClick()
+        waitForIdle()
+        onNodeWithText(firstGroup.title).assertExists()
+        onAllNodesWithText("Лайфхак · источник: editorial")[0].performScrollTo().performClick()
+        onNodeWithText(firstCitation, substring = true).assertExists()
+
+        onNodeWithText("Падежи и окончания").performScrollTo().performClick()
+        waitForIdle()
+        onNodeWithText(firstGroup.title).assertDoesNotExist()
     }
 }

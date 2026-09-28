@@ -23,6 +23,36 @@ struct MacLifehackListView: View {
     }
 }
 
+/// EnRuPackPlan.md §4.3 (host-side follow-up): the Matrix screen's pack-wide "Лайфхаки"
+/// sub-section — every lifehack the active pack has, grouped by skill/topic in curriculum order
+/// with real skill titles (`MacSnapshot.kt`'s `lifehackGroups`, already ordered/grouped). Each
+/// group is independently collapsible via the native `DisclosureGroup` (system-styled, respects
+/// light/dark automatically, VoiceOver announces expanded/collapsed on its own); each lifehack
+/// inside a group keeps [MacLifehackListView]'s own per-entry disclosure, so a group's source
+/// attribution is visible as soon as the group opens and the text/citation only once expanded.
+/// Absent entirely (not an empty section) when the active pack has no lifehacks at all — mirrors
+/// every other lifehack render path's "пусто -> ничего не рисуется" rule.
+struct MacLifehacksMatrixSection: View {
+    let groups: [LifehackGroupJSON]
+    let reduceMotion: Bool
+
+    var body: some View {
+        if groups.isEmpty {
+            Text("Для активного набора лайфхаков пока нет.").foregroundStyle(.secondary)
+        } else {
+            VStack(alignment: .leading, spacing: 10) {
+                ForEach(Array(groups.enumerated()), id: \.offset) { _, group in
+                    DisclosureGroup(group.title) {
+                        MacLifehackListView(lifehacks: group.lifehacks, reduceMotion: reduceMotion)
+                            .padding(.top, 6)
+                    }
+                    .accessibilityIdentifier("lifehackGroup")
+                }
+            }
+        }
+    }
+}
+
 private struct MacLifehackView: View {
     let hack: LifehackJSON
     let reduceMotion: Bool

@@ -86,6 +86,12 @@ web (`MatrixWeb.kt`) и desktop (`MatrixScreen.kt`) — оба получили 
 (exhaustiveness-only arms); тесты в `kotlin/androidApp/src/test/java/dev/polski/grammarmatrix/`.
 Не входит: листинг/бейдж на web/desktop/ios/macos (отдельная задача per-host, как и оставила ADR-46).
 
+Интеграция (merge lane-android/ios/macos): `MatrixSection.Lifehacks` — общий путь для Compose-хостов:
+web (`renderLifehackMatrixSection`) и JVM Desktop preview (`LifehacksDesktop`, вместо локального
+`showLifehacks` из lane-macos) рендерят его через обычный `SelectMatrixSection`. SwiftUI-хосты
+(iOS/macOS) оставлены с host-local override пункта Picker'а (ADR-48): `lifehackGroups` не зависит от
+секции, так что bridge-экшен им не нужен.
+
 ## ADR-46 · 2026-09-28 · `LifehackProvider`: пакетный листинг + `hasLifehacks` — `fun interface` → обычный interface
 
 `EnRuPackPlan.md` §4.2/§4.3 предполагала только `forSkill(skillId)` (карточка одного навыка). Для
