@@ -178,6 +178,45 @@ class VocabularyDocumentTest {
         assertEquals(builtInStudyDirections, activeStudyDirections)
     }
 
+    /** EnRuAcceptance-2026-09-28.md §7 item 4: a vocabulary direction picker must offer any pack's
+     *  own pair, not a hardcoded pl-ru 2-case list — [studyDirectionOptions] derives both
+     *  directions (and their display labels) from a bare target/native code pair. pl-ru's own
+     *  option wires/order stay byte-identical to [builtInStudyDirections]. */
+    @Test
+    fun derivesBothDirectionsAndLabelsForAnyPacksTargetAndNative() {
+        val plRu = studyDirectionOptions("pl", "ru")
+        assertEquals(listOf(StudyDirection.RussianToPolish, StudyDirection.PolishToRussian), plRu.map { it.direction })
+        assertEquals(listOf("Русский → польский", "Польский → русский"), plRu.map { it.label })
+
+        val enRu = studyDirectionOptions("en", "ru")
+        assertEquals(listOf(StudyDirection("ru-en"), StudyDirection("en-ru")), enRu.map { it.direction })
+        assertEquals(listOf("Русский → английский", "Английский → русский"), enRu.map { it.label })
+    }
+
+    /** EnRuAcceptance-2026-09-28.md §7 item 4: a card host needs exactly one boolean (never a raw
+     *  `"ru-pl"` string compare, which only ever matched pl-ru) to know whether [item] the learner
+     *  must recall is [VocabularyItem.lemma] (the target word) or [VocabularyItem.translation] (the
+     *  native one), plus a ready-made "Вспомни по-…" caption and the revealed answer's own language
+     *  name — for any pack's target/native pair, not only pl-ru's. */
+    @Test
+    fun recallHelpersGeneralizeBeyondPlRusHardcodedWires() {
+        assertEquals(true, StudyDirection.RussianToPolish.recallsTarget("pl", "ru"))
+        assertEquals(false, StudyDirection.PolishToRussian.recallsTarget("pl", "ru"))
+        assertEquals("Вспомни по-польски", StudyDirection.RussianToPolish.recallCaption("pl", "ru"))
+        assertEquals("Вспомни по-русски", StudyDirection.PolishToRussian.recallCaption("pl", "ru"))
+        assertEquals("польский", StudyDirection.RussianToPolish.answerLanguageLabel("pl", "ru"))
+        assertEquals("русский", StudyDirection.PolishToRussian.answerLanguageLabel("pl", "ru"))
+
+        val ruToEn = StudyDirection("ru-en")
+        val enToRu = StudyDirection("en-ru")
+        assertEquals(true, ruToEn.recallsTarget("en", "ru"))
+        assertEquals(false, enToRu.recallsTarget("en", "ru"))
+        assertEquals("Вспомни по-английски", ruToEn.recallCaption("en", "ru"))
+        assertEquals("Вспомни по-русски", enToRu.recallCaption("en", "ru"))
+        assertEquals("английский", ruToEn.answerLanguageLabel("en", "ru"))
+        assertEquals("русский", enToRu.answerLanguageLabel("en", "ru"))
+    }
+
     @Test
     fun importedBackupCannotContainTwoCustomIdsWithOneLemma() {
         val first = VocabularyItem("user.00000000-0000-4000-8000-000000000001", "szkoła", "школа",

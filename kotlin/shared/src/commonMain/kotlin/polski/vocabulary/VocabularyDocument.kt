@@ -64,6 +64,69 @@ val activeStudyDirections: List<StudyDirection> get() = packRegistry.active.let 
     listOf(StudyDirection.nativeToTarget(pack.targetLanguage, pack.nativeLanguage), StudyDirection.targetToNative(pack.targetLanguage, pack.nativeLanguage))
 }
 
+/** One selectable direction for a vocabulary review, paired with its own display label. */
+data class StudyDirectionOption(val direction: StudyDirection, val label: String)
+
+/** Human name for a target/native language code — the same small display-name map every host's
+ *  own target/native course picker already keeps (e.g. `MacPreferencesSession`'s own
+ *  `languageDisplayNames`); [studyDirectionOptions] needs the same names to label a direction for
+ *  any pack, not just pl-ru's hardcoded two. */
+private val languageDisplayNames = mapOf("pl" to "Польский", "en" to "Английский", "ru" to "Русский")
+
+/**
+ * EnRuAcceptance-2026-09-28.md §7 item 4: the 2 study directions of a pack's own [target]/[native]
+ * pair, in the same (native→target, target→native) order [builtInStudyDirections] hardcodes for
+ * pl-ru — `studyDirectionOptions("pl", "ru")` returns pl-ru's own byte-identical wires and labels
+ * ("ru-pl" "Русский → польский", "pl-ru" "Польский → русский"); any other pack (e.g. `"en"`/`"ru"`)
+ * gets its own pair the same way, so a direction picker built from this never needs a hardcoded
+ * 2-case list again.
+ */
+fun studyDirectionOptions(target: String, native: String): List<StudyDirectionOption> {
+    fun label(from: String, to: String) = "${languageDisplayNames[from] ?: from} → ${(languageDisplayNames[to] ?: to).lowercase()}"
+    return listOf(
+        StudyDirectionOption(StudyDirection.nativeToTarget(target, native), label(native, target)),
+        StudyDirectionOption(StudyDirection.targetToNative(target, native), label(target, native)),
+    )
+}
+
+/** "по-{language}" adverb form ("по-польски", "по-русски", "по-английски") for [recallCaption] —
+ *  grounded only in the 3 language codes any pack in this build actually uses. */
+private val languageAdverbs = mapOf("pl" to "польски", "ru" to "русски", "en" to "английски")
+
+/**
+ * EnRuAcceptance-2026-09-28.md §7 item 4: whether [this] direction asks the learner to see the
+ * native word and recall/produce the target one — [VocabularyItem.lemma] is always the target
+ * word and [VocabularyItem.translation] always the native one (every pack's own `course.json`/
+ * `pair.json` `vocabulary.items` is authored that way), so this single boolean is everything a
+ * card needs to pick which field is the prompt and which is the revealed answer, for any pack's
+ * [target]/[native] — not the `wire == "ru-pl"` compare a pl-ru-only card would hardcode.
+ */
+fun StudyDirection.recallsTarget(target: String, native: String): Boolean = this == StudyDirection.nativeToTarget(target, native)
+
+/** "Вспомни по-…" prompt caption for whichever language [this] direction asks the learner to
+ *  produce. */
+fun StudyDirection.recallCaption(target: String, native: String): String {
+    val code = if (recallsTarget(target, native)) target else native
+    return "Вспомни по-${languageAdverbs[code] ?: code}"
+}
+
+/** Nominative, lowercase name of whichever language [this] direction reveals as the answer —
+ *  e.g. "польский" recalling target pl, "русский" recalling native ru. */
+fun StudyDirection.answerLanguageLabel(target: String, native: String): String {
+    val code = if (recallsTarget(target, native)) target else native
+    return (languageDisplayNames[code] ?: code).lowercase()
+}
+
+/**
+ * EnRuAcceptance-2026-09-28.md §7 item 4: the active pack's own native→target direction — pl-ru's
+ * own byte-identical [StudyDirection.RussianToPolish] ("ru-pl") while pl-ru is active, e.g. en-ru's
+ * own "ru-en" once en-ru is. The sensible default for a fresh [VocabularyUiState] or a just-loaded
+ * document with no direction choice of its own yet; reads [packRegistry.active] live, the same
+ * discipline [VocabularyCodec.key]/[VocabularyCodec.cardKey] already apply, so a session that
+ * starts after a pack switch never opens on the *previous* pack's own hardcoded direction.
+ */
+fun defaultStudyDirection(): StudyDirection = activeStudyDirections.first()
+
 data class VocabularyDocument(
     val selectedIds: List<String> = emptyList(),
     val custom: List<VocabularyItem> = emptyList(),

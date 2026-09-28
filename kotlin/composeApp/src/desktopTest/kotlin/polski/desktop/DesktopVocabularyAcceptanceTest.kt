@@ -15,6 +15,8 @@ import kotlin.test.assertFails
 import kotlinx.coroutines.runBlocking
 import polski.srs.FsrsScheduler
 import polski.data.VocabularyItem
+import polski.data.activeCoursePackId
+import polski.data.selectCoursePack
 import polski.ui.screens.VocabularyScreen
 import polski.vocabulary.VocabularyCodec
 import polski.vocabulary.VocabularyDocument
@@ -86,6 +88,37 @@ class DesktopVocabularyAcceptanceTest {
         session.setFilter("mine")
         waitForIdle()
         onNodeWithContentDescription("w: в (собственное)").assertIsEnabled()
+    }
+
+    /** EnRuAcceptance-2026-09-28.md §7 item 4: the vocabulary screen must offer en-ru's own real
+     *  directions/copy — was hardcoded to pl-ru's "Русский → польский"/"Польский → русский" pair,
+     *  so switching the active pack to en-ru never changed what this screen showed. */
+    @OptIn(ExperimentalTestApi::class)
+    @Test
+    fun enRuPackOffersItsOwnDirectionsAndFlipContent() = runComposeUiTest {
+        val goodPackId = activeCoursePackId
+        selectCoursePack("en-ru")
+        try {
+            val repository = InMemoryRepository()
+            val session = VocabularySession(repository, FsrsScheduler(),
+                { Instant.parse("2026-09-24T12:00:00Z") }, { "user.00000000-0000-4000-8000-000000000002" })
+            runBlocking {
+                session.start()
+                session.select("noun.wife", true)
+            }
+            setContent { MaterialTheme { VocabularyScreen(session, {}, {}, {}) } }
+
+            onNodeWithText("Русский → английский").assertExists()
+            onNodeWithText("Английский → русский").assertExists()
+            onNodeWithText("Вспомни по-английски").assertExists()
+            onNodeWithText("Показать ответ").performClick()
+            waitForIdle()
+            onNodeWithText("Эталон · английский").assertExists()
+
+            onNodeWithText("Английский → русский").performClick()
+            waitForIdle()
+            onNodeWithText("Вспомни по-русски").assertExists()
+        } finally { selectCoursePack(goodPackId) }
     }
 
     private class InMemoryRepository : VocabularyRepository {

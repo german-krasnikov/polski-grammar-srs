@@ -2,6 +2,125 @@
 
 Новые сверху. Формат: решение → почему → где подробно.
 
+## ADR-42 · 2026-09-28 · EnRuAcceptance §7 item 4: словарь macOS/desktop-preview открыт для en-ru — `StudyDirection` был открытым типом, UI и дефолт направления — нет
+
+`StudyDirection` (EN-09) уже был string-backed, но три места вокруг него всё ещё были
+жёстко на pl-ru:
+
+1. **Дефолт направления.** `VocabularyUiState`'s `direction` и `VocabularySession.start()`'s
+   `nextId(...)` литерально ссылались на `StudyDirection.RussianToPolish` ("ru-pl") — не
+   производное от активного пакета. Для en-ru "ru-pl" не входит даже в собственную пару
+   пакета ("ru-en"/"en-ru"), так что свежая сессия открывалась на направлении, которого пакет
+   вообще не предлагает, а подбор due-карточки не мог ничего найти. Новый `defaultStudyDirection()`
+   (`polski/vocabulary/VocabularyDocument.kt`) читает `packRegistry.active` живьём — для pl-ru
+   даёт побайтово тот же "ru-pl", что и раньше.
+2. **macOS-бридж.** `MacVocabularySession.dispatch("direction", …)` смотрел направление в
+   `builtInStudyDirections` — списке ровно из 2 pl-ru-констант, так что "en-ru"/"ru-en" от хоста
+   тихо игнорировались. Теперь ищет среди `studyDirectionOptions(pack.target, pack.native)` —
+   собственной пары активного пакета.
+3. **UI.** Ни на одном из двух хостов этой лейны не было интерфейса, который бы вообще менял
+   `direction`: `VocabularyView.swift` (macOS) не рисовал пикер направления вовсе — карточка
+   молча всегда показывала `item.lemma` спереди / `item.translation` сзади, независимо от
+   `state.direction` (расхождение с дефолтным направлением существовало и для pl-ru, просто
+   незаметно, т.к. дефолт для pl-ru тогда ещё не читался нигде). `VocabularyScreen.kt`
+   (commonMain, реально используется только Desktop-превью — у Android свой экран) пикер
+   рисовал, но с хардкодом `StudyDirection.RussianToPolish`/`PolishToRussian` и текстом
+   "Русский → польский"/"Польский → русский".
+
+Решение — 3 новые функции на `StudyDirection` в `polski/vocabulary/VocabularyDocument.kt`
+(`studyDirectionOptions`, `recallsTarget`, `recallCaption`, `answerLanguageLabel`), каждая
+принимает голые `target`/`native`-коды и возвращает готовый Kotlin-объект/строку — ни один
+хост не хранит своей таблицы языковых имён. `activeCoursePackOption` (`CourseData.kt`) —
+публичный доступ к `target`/`native` активного пакета (`packRegistry` сам `internal`).
+`MacVocabularySession.snapshot()` кладёt `directionOptions`/`promptCaption`/`recallTarget` в
+JSON, так что Swift-карточка (`MacVocabularyCardView`) и пикер (`VocabularyView`) вообще не
+знают языковых кодов — только читают готовые поля. Desktop `VocabularyScreen.kt` делает то же
+самое напрямую через shared-функции.
+
+pl-ru: все и подписи, и дефолт направления, и `cardKey`/`VocabularyCodec.key` побайтово не
+изменились (`VocabularyDocumentTest`, `VocabularySessionTest`, `DesktopVocabularyAcceptanceTest`
+это фиксируют). Видимое изменение для существующих pl-ru пользователей macOS: карточка теперь
+действительно уважает `direction` (раньше игнорировала его полностью) — при первом открытии
+после обновления фронт покажет русское слово вместо польского (дефолтное направление всегда
+было "ru-pl" = recall target, просто раньше контент это игнорировал); переключение направления
+теперь физически возможно там, где раньше пикера не было вовсе.
+
+Не входит: iOS (`IosVocabularySession`/`VocabularyCardView.swift`) и Android
+(`AndroidVocabularyScreen.kt`) используют тот же хардкод `builtInStudyDirections`/`"ru-pl"` —
+осознанно не тронуты (`lane-ios`/`lane-android`, чужой worktree).
+
+Где: `kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt`,
+`VocabularySession.kt`, `kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt`
+(`activeCoursePackOption`), `kotlin/shared/src/macosMain/kotlin/polski/macos/MacVocabularySession.kt`,
+`kotlin/macosApp/PolskiGrammarMac/{MacVocabularyCardView,PolskiGrammarMacApp}.swift`,
+`kotlin/composeApp/src/commonMain/kotlin/polski/ui/screens/VocabularyScreen.kt`. Тесты (новые):
+`VocabularyDocumentTest.derivesBothDirectionsAndLabelsForAnyPacksTargetAndNative`,
+`.recallHelpersGeneralizeBeyondPlRusHardcodedWires`,
+`VocabularySessionTest.startsOnTheActivePacksOwnNativeToTargetDirectionNotAHardcodedPlRuOne`,
+`MacVocabularySessionTest.snapshotExposesTheActivePacksOwnDirectionOptionsAndPromptCaption` (real
+K/N `:shared:macosArm64Test`), `DesktopVocabularyAcceptanceTest.enRuPackOffersItsOwnDirectionsAndFlipContent`
+(real Compose UI test: switches the active pack, clicks the rendered direction chip, asserts the
+flipped copy). Проверено: `:shared:desktopTest` (362/362), `:composeApp:desktopTest` (62/62),
+`:shared:macosArm64Test` (388/388), `:androidApp:testDebugUnitTest` (green, unaffected). macOS
+native app (`xcodebuild … PolskiGrammarMac … build`, `CODE_SIGNING_ALLOWED=NO`) — `**BUILD
+SUCCEEDED**`; launched (`open -a …/PolskiGrammarMac.app`), скриншот подтверждает pl-ru экран
+рендерится без изменений/падений. Desktop preview (`:composeApp:run`) — окно открылось, скриншот
+подтверждает то же. Живой клик по пикеру направления через `cliclick`/`osascript` в обоих окнах —
+**NOT_RUN**: тот же пробел Accessibility-доступа, что уже задокументирован в ADR-41 (`cliclick`
+само печатает "Accessibility privileges not enabled", клики не доходят ни до SwiftUI, ни до
+AWT-окна) — компенсировано `MacVocabularySessionTest`/`DesktopVocabularyAcceptanceTest` выше,
+которые проверяют ровно тот же код через реальные (K/N и Compose-UI-test) прогоны, а не мок.
+
+## ADR-41 · 2026-09-28 · EnRuAcceptance §7 item 2, третий пробел ADR-37/38: JVM Compose Desktop preview не пересобирал/не откатывал сессию при смене пакета
+
+ADR-37/38 закрыли пересборку-с-откатом только для *нативных* macOS/iOS бриджей (`MacSession`/
+`IosSession`, `MacPreferencesSession`/`IosPreferencesSession`). У JVM Compose Desktop preview
+(`kotlin/composeApp/src/desktopMain`) нет своего session-бриджа — `Main.kt`'s `DesktopSession`
+строил `TrainingStore` напрямую, `remember`-нутым только по счётчику импорта (`generation`), никогда
+не по смене пакета. Это означало два реальных дефекта, не гипотетических: (1) после выбора
+«Английский» в Settings `store` оставался старым (тренировка молча продолжала показывать польский —
+нарушение «selecting English rebuilds training»); (2) как только что-то заставляло Compose
+пересобрать `store` заново (или `dispatch` доходил до `exerciseEngine.generateForSkill`, которое
+живьём читает `packRegistry.active`), сборка для en-ru бросает `IllegalStateException` (en-ru's
+`forms.generated.json` — пока только глагольные формы, ADR-37 blocker 1, контент-пробел вне этой
+лейны) — необработанное исключение в Compose-эффекте, а не откат.
+
+Живьём подтверждено (временный `:shared:desktopTest` probe, удалён из финального diff): выбор en-ru
+сегодня ломает 15 из 16 en-skills на `TableMorphology: no form for lexeme="possessive:my"` и т.п.;
+`TrainingStore`'s `initialChain = exerciseEngine.generateChain()` — eager-свойство конструктора, так
+что сборка `TrainingStore` для en-ru бросает исключение сразу же, тем же способом, что уже поймал
+`MacSession.rebuildIfCourseSwitched`.
+
+Решение: тот же рецепт, что ADR-37/38 уже применили к нативным хостам, третий раз — для JVM preview.
+`buildTrainingStoreOrRollback(lastGoodPackId, build)` (`DesktopSessionSupport.kt`, `internal`, чисто
+функция без Compose-зависимостей — напрямую тестируема) пробует `build()` один раз; при падении
+откатывает `polski.data.packRegistry`'s активный пакет на `lastGoodPackId` и пересобирает. `Main.kt`'s
+`DesktopSession` теперь `remember`-ит `store` также по `preferences.value.target`/`.native` (не
+только по `generation`), зовёт этот хелпер, и в уже существующем `LaunchedEffect(store)` сверяет,
+какой пакет реально стал активным, с тем, что просит `DesktopPreferencesController`; расхождение
+(откат произошёл) чинит через новый `DesktopPreferencesController.reconcileWithActivePack()` — тот же
+текст предупреждения, что `MacPreferencesSession`/`IosPreferencesSession` уже показывают — и выводит
+его через уже существующий `notice`-тост, а не новый UI-элемент.
+
+Не решает ADR-37 blocker 1 (контент-пробел `courses/lang/en/forms.generated.json`) — вне разрешённых
+путей этой лейны (`lane-macos`, worktree `/Users/german/Work/JS/polski-lanes/macos`); пока он открыт,
+эта коррекция гарантирует только то, что JVM preview честно откатывается и объясняет откат, как уже
+делают нативные macOS/iOS хосты, а не молча показывает устаревшие карточки или падает.
+
+Где: `kotlin/composeApp/src/desktopMain/kotlin/polski/desktop/DesktopSessionSupport.kt` (новый),
+`Main.kt`, `DesktopPreferencesController.kt`. Тесты (новые): `DesktopSessionSupportTest` (2 теста —
+откат при поломке, отсутствие лишних попыток при рабочем пакете), `DesktopPreferencesControllerTest.
+reconcileWithActivePackCorrectsPersistedChoiceAfterAnExternalRollback`,
+`DesktopSettingsScreenTest` (расширен: пикер теперь реально показывает «Английский», а не только
+«Польский»/«Русский», поскольку en-ru теперь проходит `parsesCompletely()`, ADR-37).
+
+Проверено: `:composeApp:desktopTest` (61/61), `:shared:desktopTest` (359/359), `:shared:macosArm64Test`
+(BUILD SUCCESSFUL), `:composeApp:compileKotlinDesktop`; локальный запуск `:composeApp:run` — окно
+живьём открылось, польская карточка отрисована (скриншот в отчёте разработчика). Английский пикер и
+живой откат в самом окне не кликались автоматизированно (Accessibility-права недоступны в этом
+окружении для `cliclick`/`osascript`) — это NOT_RUN, компенсировано покомпонентными тестами выше,
+которые проверяют ровно тот же путь кода, что и реальный клик.
+
 ## ADR-40 · 2026-09-28 · EnRuAcceptance §7 item 2 (lane-android): cold-start пробует реальную сборку цепочки перед тем, как читать активный пакет — откат вместо краш-цикла
 
 `Plans/Kotlin/EnRuAcceptance-2026-09-28.md` §7 item 1 (генерализация схемы `CoursePack`, ADR-36)

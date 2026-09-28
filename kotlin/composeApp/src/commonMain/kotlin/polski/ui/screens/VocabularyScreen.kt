@@ -35,16 +35,20 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import polski.data.activeCoursePackOption
 import polski.data.courseVocabularyInstructions
 import polski.data.courseVocabularyUnavailableLabel
 import polski.data.VocabularyItem
 import polski.data.frequencyItems
 import polski.data.vocabularyItems
 import polski.srs.Rating
-import polski.vocabulary.StudyDirection
 import polski.vocabulary.VocabularyCodec
 import polski.vocabulary.VocabularyLoadStatus
 import polski.vocabulary.VocabularySession
+import polski.vocabulary.answerLanguageLabel
+import polski.vocabulary.recallCaption
+import polski.vocabulary.recallsTarget
+import polski.vocabulary.studyDirectionOptions
 
 private data class CatalogEntry(val rank: Int?, val lemma: String, val item: VocabularyItem?)
 
@@ -78,15 +82,17 @@ fun VocabularyScreen(session: VocabularySession, onImport: () -> Unit, onExport:
             return@Column
         }
 
+        // EnRuAcceptance-2026-09-28.md §7 item 4: the active pack's own 2 directions, never a
+        // hardcoded pl-ru pair — en-ru offers its own real "Русский → английский"/"Английский →
+        // русский" choice here the same way.
+        val pack = activeCoursePackOption
+        val directionOptions = remember(pack.target, pack.native) { studyDirectionOptions(pack.target, pack.native) }
         val directionModifier = if (enableSwipeRating) Modifier.fillMaxWidth() else Modifier
         val directionContent: @Composable () -> Unit = {
-            VocabularyChoice("Русский → польский", state.direction == StudyDirection.RussianToPolish,
-                directionModifier) {
-                session.setDirection(StudyDirection.RussianToPolish)
-            }
-            VocabularyChoice("Польский → русский", state.direction == StudyDirection.PolishToRussian,
-                directionModifier) {
-                session.setDirection(StudyDirection.PolishToRussian)
+            directionOptions.forEach { option ->
+                VocabularyChoice(option.label, state.direction == option.direction, directionModifier) {
+                    session.setDirection(option.direction)
+                }
             }
         }
         if (enableSwipeRating) Column(verticalArrangement = Arrangement.spacedBy(8.dp)) { directionContent() }
@@ -114,10 +120,9 @@ fun VocabularyScreen(session: VocabularySession, onImport: () -> Unit, onExport:
                         style = MaterialTheme.typography.titleLarge)
                     Text("Отметь готовые карточки в каталоге. История каждого направления сохраняется отдельно.")
                 } else {
-                    val recallPolish = state.direction == StudyDirection.RussianToPolish
-                    Text(if (recallPolish) "Вспомни по-польски" else "Вспомни по-русски",
-                        style = MaterialTheme.typography.labelLarge)
-                    Text(if (recallPolish) item.translation else item.lemma, style = MaterialTheme.typography.headlineMedium)
+                    val recallTarget = state.direction.recallsTarget(pack.target, pack.native)
+                    Text(state.direction.recallCaption(pack.target, pack.native), style = MaterialTheme.typography.labelLarge)
+                    Text(if (recallTarget) item.translation else item.lemma, style = MaterialTheme.typography.headlineMedium)
                     if (!state.revealed) {
                         val answerModeContent: @Composable () -> Unit = {
                             VocabularyChoice("Ответ вслух / про себя", !state.typed,
@@ -131,9 +136,9 @@ fun VocabularyScreen(session: VocabularySession, onImport: () -> Unit, onExport:
                             label = { Text("Твой ответ") }, modifier = Modifier.fillMaxWidth())
                         Button(onClick = { session.reveal() }, enabled = !state.busy) { Text("Показать ответ") }
                     } else {
-                        Text(if (recallPolish) "Эталон · польский" else "Эталон · русский",
+                        Text("Эталон · ${state.direction.answerLanguageLabel(pack.target, pack.native)}",
                             style = MaterialTheme.typography.labelLarge)
-                        Text(if (recallPolish) item.lemma else item.translation,
+                        Text(if (recallTarget) item.lemma else item.translation,
                             style = MaterialTheme.typography.headlineSmall)
                         Text("Перевод: ${item.translation}")
                         Text("Форма: ${item.form}")

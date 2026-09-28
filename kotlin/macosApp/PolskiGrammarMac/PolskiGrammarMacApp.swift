@@ -203,8 +203,20 @@ struct LifehackJSON: Decodable { let text: String; let citation: String; let url
 struct VocabularySnapshot: Decodable {
     struct Item: Decodable { let id: String; let lemma: String; let translation: String; let form: String; let example: String; let level: String }
     struct Entry: Decodable { let id: String; let lemma: String; let translation: String; let level: String; let selected: Bool; let available: Bool }
+    /// EnRuAcceptance-2026-09-28.md §7 item 4: one direction the active pack's own [VocabularySnapshot.direction]
+    /// can be set to — built from `polski.vocabulary.studyDirectionOptions`, never a hardcoded
+    /// pl-ru 2-case list, so a second pack (en-ru) offers its own real "ru-en"/"en-ru" pair.
+    struct DirectionOption: Decodable, Identifiable { let wire: String; let label: String; var id: String { wire } }
     let loadStatus: String
     let direction: String
+    /// The active pack's own 2 [DirectionOption]s — the direction picker's real option list.
+    let directionOptions: [DirectionOption]
+    /// "Вспомни по-…" — which language [direction] asks the learner to produce, computed in
+    /// Kotlin so this view never needs its own language-name table.
+    let promptCaption: String
+    /// Whether [direction] asks for the target word (`item.lemma`) as the revealed answer, rather
+    /// than the native one (`item.translation`) — see `MacVocabularyCardView`.
+    let recallTarget: Bool
     let filter: String
     let currentId: String?
     let current: Item?
@@ -904,6 +916,15 @@ private struct VocabularyView: View {
                 if let state = model.vocabulary {
                     Text(state.instructions).foregroundStyle(.secondary)
                     if let error = state.error { Text(error).foregroundStyle(.red) }
+                    // EnRuAcceptance-2026-09-28.md §7 item 4: the active pack's own 2 directions
+                    // (`state.directionOptions`), never a hardcoded "Русский → польский"/"Польский
+                    // → русский" pair — en-ru now offers its own real "Русский → английский"/
+                    // "Английский → русский" choice here the same way.
+                    Picker("Направление", selection: Binding(get: { state.direction }, set: { model.vocab("direction", $0) })) {
+                        ForEach(state.directionOptions) { option in Text(option.label).tag(option.wire) }
+                    }.pickerStyle(.segmented)
+                        .padding(3)
+                        .accessibilityIdentifier("vocabularyDirection")
                     Picker("Список", selection: Binding(get: { state.filter }, set: { model.vocab("filter", $0) })) {
                         ForEach(["A1", "A2", "B1", "100", "500", "1000", "mine"], id: \.self) { value in Text(value).tag(value) }
                     }.pickerStyle(.segmented)

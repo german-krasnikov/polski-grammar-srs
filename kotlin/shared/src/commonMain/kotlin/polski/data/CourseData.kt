@@ -721,6 +721,12 @@ val availableCoursePacks: List<CoursePackOption> get() =
 /** [CoursePack.pairId] of the pack currently serving content. */
 val activeCoursePackId: String get() = packRegistry.active.pairId
 
+/** The currently active pack's own [CoursePackOption] — a public target/native pair (`internal`
+ *  [packRegistry] is not visible outside `:shared`) for a vocabulary direction picker or any other
+ *  consumer that needs the active pack's languages without an `availableCoursePacks` lookup. */
+val activeCoursePackOption: CoursePackOption get() =
+    CoursePackOption(packRegistry.active.pairId, packRegistry.active.targetLanguage, packRegistry.active.nativeLanguage)
+
 /** Switches the active pack; throws for a [pairId] not in [availableCoursePacks]. */
 fun selectCoursePack(pairId: String) {
     require(availableCoursePacks.any { it.pairId == pairId }) { "Unusable pack pairId: $pairId" }

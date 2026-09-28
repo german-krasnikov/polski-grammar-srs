@@ -3,6 +3,7 @@ package polski.desktop
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import polski.data.activeCoursePackId
 import polski.data.availableCoursePacks
 import polski.data.selectCoursePack
 import polski.preferences.Appearance
@@ -52,6 +53,27 @@ internal class DesktopPreferencesController(private val repository: DesktopPrefe
     private fun syncActivePack() {
         val pairId = "${value.target}-${value.native}"
         if (availableCoursePacks.any { it.pairId == pairId }) selectCoursePack(pairId)
+    }
+
+    /**
+     * EnRuAcceptance-2026-09-28.md §7 item 2 parity (ADR-38), Desktop-preview lane:
+     * `Main.kt`'s `buildTrainingStoreOrRollback` can roll `polski.data.packRegistry`'s shared
+     * active pack back to a pack this controller never chose (its own [availableCoursePacks] check
+     * in [setTarget]/[setNative] only probes that a pack *parses*, not that its engine can actually
+     * build a session) — that rollback never reaches this controller's own persisted [value], so
+     * Settings would otherwise keep reporting the picked-but-broken pack forever while Training
+     * silently serves the rolled-back one with no explanation. Call right after a store rebuild:
+     * when persisted target/native no longer names the pack that is really active, corrects the
+     * persisted document to match reality (survives restart, same write path as [setTarget]) and
+     * returns a one-shot explanation to show; returns null when nothing is out of sync.
+     */
+    fun reconcileWithActivePack(): String? {
+        val requestedPairId = "${value.target}-${value.native}"
+        val actualPairId = activeCoursePackId
+        if (requestedPairId == actualPairId) return null
+        val actual = availableCoursePacks.firstOrNull { it.pairId == actualPairId } ?: return null
+        save(value.copy(target = actual.target, native = actual.native))
+        return "Пакет «$requestedPairId» пока не может обучать — вернулись к «${actual.pairId}»"
     }
 
     fun setStyle(styleId: StyleId, dispatch: (AppAction) -> Unit) {

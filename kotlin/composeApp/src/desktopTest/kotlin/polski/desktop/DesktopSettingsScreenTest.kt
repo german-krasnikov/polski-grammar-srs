@@ -33,13 +33,17 @@ class DesktopSettingsScreenTest {
                         onPreferencesImport = {}, onPreferencesExport = {})
                 }
             }
-            // EN-22: target/native pickers next to the style picker, built from
-            // `availableCoursePacks` — only pl-ru is registered today, so one real, already-selected
-            // "Польский"/"Русский" row each (see `polski.data.packRegistry`'s own KDoc for why).
+            // EN-22 / EnRuAcceptance-2026-09-28.md §7 item 1: target/native pickers built from
+            // `availableCoursePacks`, never a hardcoded "pl"/"en" case list — en-ru now parses
+            // completely, so a second, real "Английский" target row is listed alongside "Польский"
+            // (both packs' native is "ru", so that row stays a single button).
             onAllNodesWithText("Польский").assertCountEquals(1)
+            onAllNodesWithText("Английский").assertCountEquals(1)
             onAllNodesWithText("Русский").assertCountEquals(1)
             onNodeWithText("Польский").performClick()
             assertEquals("pl", target)
+            onNodeWithText("Английский").performClick()
+            assertEquals("en", target)
             onNodeWithText("Русский").performClick()
             assertEquals("ru", native)
             onAllNodesWithText("Недоступно на Mac в этой сборке").assertCountEquals(1)
