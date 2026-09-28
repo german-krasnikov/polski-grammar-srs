@@ -755,6 +755,7 @@ private class TrainingDomRenderer {
         if (state.introPending && state.phase == CardPhase.Question) {
             card.appendChild(node("div", "card-front method-introduce").apply {
                 appendChild(node("span", "eyebrow", if (state.styleId == StyleId.SituationFirst) "Сцена и намерение" else "Признаки и операция"))
+                renderLifehackBadge(this, skill.id)
                 appendChild(node("p", "source-sentence").apply {
                     setAttribute("lang", activeTargetLangCode())
                     appendContrastParts(this, sentenceHighlightParts(exercise.source, exercise.changes, ChangeSide.Before), "change-before")
@@ -770,6 +771,7 @@ private class TrainingDomRenderer {
         val frontBlocks = StyleComposer.compose(effective, StylePhase.Front, exercise, skill, presentation, content)
         val front = node("div", "card-front").apply {
             appendChild(node("span", "eyebrow", "Исходное предложение"))
+            renderLifehackBadge(this, skill.id)
             appendChild(node("p", "source-sentence").apply {
                 setAttribute("lang", activeTargetLangCode())
                 appendContrastParts(this, sentenceHighlightParts(exercise.source, exercise.changes, ChangeSide.Before), "change-before")

@@ -84,3 +84,58 @@ test('a skill with two authored lifehacks shows two independent collapsible entr
   await expect(secondContent).not.toHaveClass(/expanded/);
   await expect(firstContent.locator('.lifehack-text')).toContainText('«je»');
 });
+
+// This host follow-up: a small "Есть лайфхак" badge on the FRONT of the task card (before reveal),
+// naming only that a tip exists — never its text — and not itself triggering the whole front's
+// tap-to-reveal gesture.
+test('the front of the card shows a non-spoiling "Есть лайфхак" badge, and tapping it does not reveal the card', async ({ page }) => {
+  await page.getByRole('button', { name: 'Отдельный навык' }).click();
+  await page.getByRole('button', { name: 'Dopełniacz · negacja · A2' }).click();
+  await continueIntroductionIfPresent(page);
+  const badge = page.locator('.card-front .lifehack-badge');
+  await expect(badge).toBeVisible();
+  await expect(badge).toHaveAccessibleName(/Есть лайфхак/);
+  // The lifehack's own text (asserted above, "падеж при отрицании") must not leak into the badge.
+  await expect(badge).not.toContainText('падеж при отрицании');
+  await badge.click();
+  await expect(page.locator('.card-back')).toHaveCount(0); // still unrevealed
+  await expect(page.getByRole('button', { name: 'Показать ответ' })).toBeVisible();
+});
+
+// This host follow-up: the "Лайфхаки" sub-section of "Таблицы и схема" — every skill's tips,
+// grouped and collapsed by default, in curriculum order.
+test('Matrix "Лайфхаки" sub-section groups every skill\'s tips, collapsed by default', async ({ page }) => {
+  await page.goto('/#/matrix');
+  await page.getByRole('button', { name: 'Лайфхаки', exact: true }).click();
+  const groups = page.locator('.matrix-page .lifehack-toggle');
+  await expect(groups.first()).toBeVisible();
+  const groupCount = await groups.count();
+  expect(groupCount).toBeGreaterThanOrEqual(16); // pl-ru has full 16-skill coverage (§4.4 follow-up)
+
+  const firstToggle = groups.first();
+  const firstContent = page.locator('.matrix-page .lifehack-content').first();
+  await expect(firstToggle).toHaveAttribute('aria-expanded', 'false');
+  await expect(firstContent).toHaveAttribute('inert', '');
+  await firstToggle.click();
+  await expect(firstToggle).toHaveAttribute('aria-expanded', 'true');
+  await expect(firstContent).not.toHaveAttribute('inert', '');
+  await expect(firstContent.locator('.lifehack-source-label').first()).toContainText('Лайфхак · источник:');
+  await expect(firstContent.locator('.lifehack-text').first()).not.toBeEmpty();
+});
+
+// EnRuPackPlan.md §4.4: en-ru has its own ~2-per-skill set — the same web code path
+// (StaticPackLifehackProvider reads `packRegistry.active`), so switching the active pack in
+// Settings must switch both the front badge and the Matrix "Лайфхаки" listing, not just pl-ru's.
+test('lifehacks (badge + Matrix section) also render for the en-ru pack once selected in Settings', async ({ page }) => {
+  await page.goto('/#/settings');
+  await page.getByRole('combobox', { name: 'Изучаемый язык' }).selectOption('en');
+  await page.getByRole('button', { name: 'Вернуться к карточке' }).click();
+  await continueIntroductionIfPresent(page);
+  await expect(page.locator('.card-front .lifehack-badge')).toBeVisible();
+
+  await page.getByRole('button', { name: 'Таблицы и схема' }).click();
+  await page.getByRole('button', { name: 'Лайфхаки', exact: true }).click();
+  const groups = page.locator('.matrix-page .lifehack-toggle');
+  const groupCount = await groups.count();
+  expect(groupCount).toBeGreaterThanOrEqual(16);
+});

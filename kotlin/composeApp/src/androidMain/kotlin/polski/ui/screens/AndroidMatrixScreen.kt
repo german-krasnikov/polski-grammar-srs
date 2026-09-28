@@ -90,6 +90,10 @@ internal fun AndroidMatrixScreen(state: AppUiState, dispatch: (AppAction) -> Uni
             MatrixSection.Cases -> AndroidCasesSection(state, dispatch)
             MatrixSection.Verbs -> AndroidVerbsSection(state, dispatch)
             MatrixSection.Pronouns -> AndroidPronounsSection(dispatch)
+            // Web-only sub-section today (the menu above doesn't offer it on this host, so this
+            // branch is unreachable from the UI) — kept here only to satisfy the shared enum's
+            // exhaustive `when`. An Android "Лайфхаки" section is separate, unstarted follow-up work.
+            MatrixSection.Lifehacks -> Unit
         }
     }
 }

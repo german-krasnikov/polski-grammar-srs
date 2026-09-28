@@ -66,6 +66,7 @@ internal fun renderMatrixWeb(root: HTMLElement, state: AppUiState, dispatch: (Ap
         MatrixSection.Cases to "Падежи и окончания",
         MatrixSection.Verbs to "Времена и лица",
         MatrixSection.Pronouns to "Местоимения",
+        MatrixSection.Lifehacks to "Лайфхаки",
     ).forEach { (section, label) ->
         nav.matrixButton(label, "matrix-section-${section.name.lowercase()}") {
             dispatch(AppAction.SelectMatrixSection(section))
@@ -88,6 +89,7 @@ internal fun renderMatrixWeb(root: HTMLElement, state: AppUiState, dispatch: (Ap
         MatrixSection.Cases -> if (hasCaseSystem) renderCases(root, state, dispatch) else renderNoCaseSystemNotice(root)
         MatrixSection.Verbs -> renderVerbs(root, state, dispatch)
         MatrixSection.Pronouns -> if (hasCaseSystem) renderPronouns(root, dispatch) else renderNoCaseSystemNotice(root)
+        MatrixSection.Lifehacks -> renderLifehackMatrixSection(root)
     }
 }
 
@@ -443,18 +445,20 @@ private fun renderPronouns(root: HTMLElement, dispatch: (AppAction) -> Unit) {
     }
 }
 
-private fun HTMLElement.matrixSection(title: String): HTMLElement = matrixAdd("section", cls = "card matrix-section").apply {
+// Shared with LifehackWeb.kt's `renderLifehackMatrixSection` (the "Лайфхаки" sub-section reuses
+// this file's card/section/button DOM helpers rather than duplicating them).
+internal fun HTMLElement.matrixSection(title: String): HTMLElement = matrixAdd("section", cls = "card matrix-section").apply {
     matrixAdd("h3", title)
 }
 
-private fun HTMLElement.matrixAdd(tag: String, text: String? = null, cls: String? = null): HTMLElement =
+internal fun HTMLElement.matrixAdd(tag: String, text: String? = null, cls: String? = null): HTMLElement =
     (document.createElement(tag) as HTMLElement).also {
         if (text != null) it.textContent = text
         if (cls != null) it.className = cls
         appendChild(it)
     }
 
-private fun HTMLElement.matrixButton(label: String, id: String? = null, action: () -> Unit): HTMLElement =
+internal fun HTMLElement.matrixButton(label: String, id: String? = null, action: () -> Unit): HTMLElement =
     matrixAdd("button", label).apply {
         if (id != null) this.id = id
         addEventListener("click", { action() })
