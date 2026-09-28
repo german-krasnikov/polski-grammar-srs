@@ -2,6 +2,58 @@
 
 Новые сверху. Формат: решение → почему → где подробно.
 
+## ADR-29 · 2026-09-28 · EN-21 (iOS): «Лайфхак»-блок на `FlashCardView`, читает `LifehackProvider` через `styleBlocks.lifehacks`
+
+iOS-часть EN-21 (ADR-27 уже покрыла core+web; эта задача — тот же блок, но на SwiftUI-хосте, не
+новый порт). `IosSnapshot.kt`'s `styleBlocksSnapshot` получила `lifehacksSnapshot(skillId)` —
+`StaticPackLifehackProvider.forSkill(exercise.primarySkill)`, сериализованный в
+`{id, text, citation, url?, statusLabel}` и положенный в `styleBlocks.lifehacks`, **рядом** с
+`front`/`back`, а не внутри них: EnRuPackPlan.md §4.3 прямо запрещает 10-й `BlockKind`, тот же
+инвариант, который уже провела web-реализация через отдельный `renderLifehackBlock` вызов вне
+`StyleComposer`. `FlashCardView.swift`'s `answerFace` читает `state.record("styleBlocks").rows("lifehacks")`
+и рендерит один `LifehackEntryView` на запись **после** цикла по `back`-блокам стиля и **перед**
+секцией «Когда повторить?» — тот же порядок, что `TrainingWebApp.kt` уже держит для web
+(`renderCardBlocks(back, backBlocks, …)` → `renderLifehackBlock(back, skill.id)` → «Когда
+повторить»). Пустой список → `ForEach` не рендерит ничего (не пустая секция) — то же «пусто = нет
+блока вообще» правило.
+
+`LifehackEntryView` — тот же collapsed-by-default disclosure-паттерн, что уже `StyleWhyOnDemandBlock`
+использует (`@State private var expanded`, `withAnimation` под `reduceMotion`-флагом). Toggle-кнопки
+текст **и есть** подпись атрибуции («Лайфхак · источник: editorial|community») — видна свёрнутой и
+развёрнутой, и это ровно то, что VoiceOver объявляет как имя элемента управления (план §6 приёмка
+"VoiceOver/screen-reader читает подпись источника" — доказано не отдельным assertion'ом, а тем, что
+XCUITest находит кнопку по этой самой строке через `app.buttons["Лайфхак · источник: editorial"]`).
+Цитата и (опциональная) ссылка показываются только при раскрытии.
+
+Живая находка при первом прогоне UI-теста (RED, не гипотеза): SwiftUI `Link` в accessibility-снимке
+этого симулятора экспонируется как обычный `Button`, не `XCUIElementTypeLink` —
+`app.links["источник"]` никогда не резолвился (5s таймаут), `app.descendants(matching: .any)[...]`
+резолвится сразу. Тест исправлен на широкий `.descendants` запрос — тот же приём, что уже
+`typedAnswer`/`totalReviews` в этом файле используют по той же причине; продукционный код (`Link`)
+не менялся, баг был только в тесте.
+
+Проверено: `:shared:desktopTest`/`:core-engine:desktopTest` (полный прогон после `--rerun-tasks` —
+инкрементальный кэш компилятора был разово испорчен несвязанной предыдущей сборкой, чистый прогон
+зелёный, `LifehackTest` в их числе), `:shared:iosSimulatorArm64Test` — `BUILD SUCCESSFUL`.
+`xcodebuild test` на iPhone 17 Pro Simulator (`4384946F-9E6B-43D0-ADA3-CA219A3456B8`, iOS 26),
+`-only-testing` на трёх новых XCUITest — **3/3 passed** (`testLifehackBlockShowsCollapsedWithAttributionAndExpandsToShowCitationAndLink`,
+`testLifehackBlockWithNoSourceUrlStillShowsCitationWithoutLink` — `case.inst`, без `source.url`, цитата
+без ссылки, `testSkillWithNoAuthoredLifehackShowsNoLifehackBlockAtAll` — `pronouns`, блок отсутствует
+и на Front, и на Back), со скриншотами (`en21-lifehack-collapsed`/`en21-lifehack-expanded`,
+`keepAlways`). Активный пакет на iOS сегодня — pl-ru (`packs.first()`, EN-22 ещё не подключён), те же
+5 реальных записей EN-20 (`case.gen.neg`/`case.inst`/…), которыми уже проверен web
+(`tests/browser/kotlin-lifehack-block.spec.ts`) — не фикстура. Не прогнано: Android/macOS/Web этой
+задачей не тронуты (iOS-only wiring, тот же скоуп, что ADR-22..25 держали по хостам).
+
+Почему: план явно разбивает EN-21 по хостам («core+web, android+ios+macos» в задаче EN-21, волна 5
+— «все параллельны друг другу»); ADR-27 закрыла core+web, это — iOS-лейн того же тикета, без нового
+порта или структурного решения (используется уже существующий `LifehackProvider`), поэтому
+архитектурная схема (`AI/architecture.md`) не менялась — там уже зафиксировано, что `LifehackProvider`
+реализован (см. ADR-27), а не то, какие хосты его рендерят.
+
+Подробно: `Plans/Kotlin/EnRuPackPlan.md` §4.2/§4.3/§6 (EN-21); `kotlin/shared/src/iosMain/kotlin/polski/ios/IosSnapshot.kt`;
+`kotlin/iosApp/PolskiGrammar/FlashCardView.swift`; `kotlin/iosApp/PolskiGrammarUITests/PolskiGrammarUITests.swift`.
+
 ## ADR-28 · 2026-09-28 · EN-24 (web): UC-09 часть 2/2 минимум — English-таблица на `MatrixWeb.kt`, `forms.generated.json(en)`
 
 Plans/Kotlin/EnRuPackPlan.md §5 гэп H / §6 EN-24: минимальный слайс — хотя бы одна живая английская

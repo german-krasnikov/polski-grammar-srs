@@ -56,6 +56,8 @@ import polski.data.presentationBySkillId
 import polski.data.styleContentBySkillId
 import polski.core.engine.MatrixColumn
 import polski.core.engine.MatrixTableEngine
+import polski.presentation.LifehackStatus
+import polski.presentation.StaticPackLifehackProvider
 import polski.presentation.StyleComposer
 import polski.presentation.StyleId
 import polski.presentation.StylePhase
@@ -208,8 +210,23 @@ private fun styleBlocksSnapshot(state: AppUiState): JsonElement {
         put("nativeContrastFallback", nativeContrastFallback)
         put("front", blocksToJson(StyleComposer.compose(effective, StylePhase.Front, exercise, skill, focus, content)))
         put("back", blocksToJson(StyleComposer.compose(effective, StylePhase.Back, exercise, skill, focus, content)))
+        put("lifehacks", lifehacksSnapshot(exercise.primarySkill))
     }
 }
+
+/** EN-21 (`EnRuPackPlan.md` §4.3): not a [StyleComposer] block — §4.3's whole point is that this
+ *  list is the same regardless of [effective] above, so it sits beside `front`/`back` rather than
+ *  inside either. Empty for a skill with no authored tip (`StaticPackLifehackProvider.forSkill`),
+ *  and [FlashCardView]'s renderer must skip the section entirely on empty, never draw an empty
+ *  frame — the same rule `LifehackWeb.kt`'s `renderLifehackBlock` already follows. */
+private fun lifehacksSnapshot(skillId: String): JsonElement =
+    JsonArray(StaticPackLifehackProvider.forSkill(skillId).map { hack -> buildJsonObject {
+        put("id", hack.id)
+        put("text", hack.text)
+        put("citation", hack.source.citation)
+        put("url", hack.source.url?.let(::JsonPrimitive) ?: JsonNull)
+        put("statusLabel", when (hack.status) { LifehackStatus.Editorial -> "editorial"; LifehackStatus.Community -> "community" })
+    } })
 
 /** Emphasis contract §5: what the target row's "Стало" shows before reveal — never the answer. */
 private const val referenceMaskPlaceholder = "?"

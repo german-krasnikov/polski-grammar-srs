@@ -135,6 +135,10 @@ struct FlashCardView<RevealButton: View>: View {
         // sections — which style/blocks show here now comes entirely from the composer (a style
         // without Formula, e.g. situation-first, simply has no amber box any more).
         let blocks = state.record("styleBlocks").rows("back")
+        // EN-21 (`Plans/Kotlin/EnRuPackPlan.md` §4.3): not a style block — see `styleBlockView`'s
+        // own doc — so it is read from `styleBlocks.lifehacks` (a sibling of `front`/`back` set by
+        // `IosSnapshot.kt`'s `lifehacksSnapshot`), not from `blocks` above.
+        let lifehacks = state.record("styleBlocks").rows("lifehacks")
         VStack(alignment: .leading, spacing: 12) {
             VStack(alignment: .leading, spacing: 12) {
                 Text("Эталон").font(.caption).foregroundStyle(.secondary)
@@ -159,6 +163,14 @@ struct FlashCardView<RevealButton: View>: View {
                     .transition(staggeredReveal(index + 1))
             }
 
+            // EN-21: always after the resolved style's own back blocks, for every style — never
+            // inside `styleBlockView`'s switch (it isn't a `Block.*` kind, see `lifehacks`'s doc
+            // above) — and entirely absent, not an empty section, when `lifehacks` is empty.
+            ForEach(Array(lifehacks.enumerated()), id: \.offset) { index, hack in
+                LifehackEntryView(hack: hack, index: index, reduceMotion: reduceMotion)
+                    .transition(staggeredReveal(blocks.count + 1 + index))
+            }
+
             VStack(alignment: .leading, spacing: 9) {
                 Text("Когда повторить?").font(.headline)
                 Text(card.string("methodReview"))
@@ -177,7 +189,7 @@ struct FlashCardView<RevealButton: View>: View {
                     }
             }
             .padding(.vertical, 4)
-            .transition(staggeredReveal(blocks.count + 1))
+            .transition(staggeredReveal(blocks.count + lifehacks.count + 1))
         }
         // D3: no rating buttons on touch — the whole panel above is the swipe-to-rate gesture
         // surface. D1 already removed the flip-back tap this container used to share with the old
@@ -578,6 +590,51 @@ private struct StyleWhyOnDemandBlock: View {
                 emphasizedText(parts, role: .after, accessibilityLabel: text)
                     .transition(reduceMotion ? .identity : .opacity.combined(with: .move(edge: .top)))
                     .accessibilityIdentifier("styleBlock-whyOnDemand-text")
+            }
+        }
+    }
+}
+
+/// EN-21 (`Plans/Kotlin/EnRuPackPlan.md` §4.2/§4.3): one collapsible L1-transfer tip from
+/// `IosSnapshot.kt`'s `lifehacksSnapshot` (`{id, text, citation, url?, statusLabel}`). Collapsed by
+/// default, the same disclosure mechanic [StyleWhyOnDemandBlock] uses. Its toggle's own label IS
+/// the source-attribution caption ("Лайфхак · источник: editorial|community") — visible whether
+/// collapsed or expanded, and exactly what VoiceOver announces as the control's accessible name
+/// (plan §6 acceptance: "VoiceOver/screen-reader читает подпись источника") — the citation (and
+/// link, if any) only appears once expanded, mirroring `LifehackWeb.kt`'s web rendering.
+private struct LifehackEntryView: View {
+    let hack: Record
+    let index: Int
+    let reduceMotion: Bool
+    @State private var expanded = false
+    var body: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Button {
+                if reduceMotion { expanded.toggle() } else {
+                    withAnimation(.easeOut(duration: 0.25)) { expanded.toggle() }
+                }
+            } label: {
+                HStack(spacing: 4) {
+                    Text("Лайфхак · источник: \(hack.string("statusLabel"))")
+                    Image(systemName: expanded ? "chevron.up" : "chevron.down")
+                }
+            }
+            .accessibilityIdentifier("lifehack-toggle-\(index)")
+            .accessibilityValue(expanded ? "развёрнуто" : "свёрнуто")
+            if expanded {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(hack.string("text")).accessibilityIdentifier("lifehack-text-\(index)")
+                    if let url = hack["url"] as? String, let link = URL(string: url) {
+                        HStack(spacing: 4) {
+                            Text(hack.string("citation"))
+                            Link("источник", destination: link)
+                        }
+                        .font(.footnote).foregroundStyle(.secondary)
+                    } else {
+                        Text(hack.string("citation")).font(.footnote).foregroundStyle(.secondary)
+                    }
+                }
+                .transition(reduceMotion ? .identity : .opacity.combined(with: .move(edge: .top)))
             }
         }
     }
