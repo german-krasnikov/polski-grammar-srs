@@ -2,6 +2,50 @@
 
 Новые сверху. Формат: решение → почему → где подробно.
 
+## ADR-31 · 2026-09-28 · EN-22 (android), исправление после code-review ADR-30: `UserPreferencesCodec.encode()` больше не требует `target`/`native` равными текущему `packRegistry.active`
+
+Ревью нашло реальный баг в ADR-30: `persistCourseSelectionAndRestart` (`AndroidSessionViewModel.kt`)
+персистит `preferences.copy(target = target, native = native)` для пары, на которую переключается
+пользователь, — а `packRegistry.active` по конструкции переключается только на следующем холодном
+старте (см. `peekTargetNative`'s KDoc). `UserPreferencesCodec.encode()`'s `require` при этом
+проверял `value.target == packRegistry.active.targetLanguage && value.native == ...
+.nativeLanguage` — то есть буквально требовал, чтобы персистимая пара уже совпадала с ещё не
+переключённым активным пакетом. Любое реальное переключение (target/native ≠ текущий активный)
+гарантированно падало на `require`, ловилось в `AndroidUserPreferencesStore.saveUnlocked` и
+превращалось в `PreferencesSave.WriteFailed` — откат `preferences` + `preferencesError`, без
+`restart()`. Единственный тест на `persistCourseSelectionAndRestart`
+(`selectingTheAlreadyActiveCourseNeitherPersistsNorRestarts`) передавал ту же пару, что уже
+активна, — no-op-гвард `if (preferences.target == target && preferences.native == native) return`
+возвращался раньше `save()`, `encode()` не вызывался, баг был замаскирован тем, что
+`usableCourseSelections` сегодня содержит только pl-ru (см. ADR-30 п.2 — пикер физически не может
+предложить другую пару).
+
+Исправление: `encode()`'s инвариант для target/native ослаблен с «равен активному пакету» до «пара
+входит в `usableCourseSelections`» (`(value.target to value.native) in usableCourseSelections`,
+`polski/preferences/UserPreferencesCodec.kt`). Это тот же самый практический гарант — писать
+только заведомо загружаемую пару — но без привязки к тому, какая пара активна прямо сейчас; вопрос
+«совпадает ли персистентный документ с активным пакетом» по-прежнему решает `decode()`'s
+собственная проверка (не менялась — она верна по конструкции: `AndroidSessionViewModel`'s ранний
+`init` вызывает `selectActiveCoursePack` из `peekTargetNative` до первого `load()`/`decode()`).
+
+Тест: `UserPreferencesCodecTest.encodeAcceptsATargetNativeDifferentFromTheCurrentlyActivePackAsLongAsItIsUsable`
+(`:shared` commonTest) — временно `packRegistry.select("en-ru")` (реальный singleton, `internal`,
+доступен из commonTest того же модуля — тот же приём, что `EnRuPackSwitchTest`), затем
+`encode(UserPreferencesV2(target = "pl", native = "ru"))` должен не бросать, хотя `pl-ru` уже не
+активен; `finally` возвращает `active` на `pl-ru`, чтобы не отравить остальные тесты процесса. RED
+до правки: `IllegalArgumentException` на старом `require`; GREEN после.
+
+Живой второй usable-пакет по-прежнему не существует (ADR-30 п.2 — en-ru не проходит
+`parsesCompletely()`), так что настоящий сквозной Android-тест «переключение на другую пару
+реально перезапускает» появится только вместе с этим будущим core-гэпом; до тех пор корректность
+доказывается на уровне `UserPreferencesCodec` напрямую, как выше.
+
+Проверено: `:shared:desktopTest` / `:shared:jsBrowserTest` / `:shared:wasmJsBrowserTest` /
+`:shared:macosArm64Test` (все зелёные, включая новый тест), `:androidApp:testDebugUnitTest`,
+`:androidApp:assembleDebug` — зелёные; живой прогон на `emulator-5554`: чистый запуск грузится в
+pl-ru, «Настройки» → «Курс» по-прежнему показывает только Польский/Русский (en-ru скрыт, как и
+раньше) — фикс не меняет видимое поведение, только чинит инвариант для будущего второго usable-пакета.
+
 ## ADR-30 · 2026-09-28 · EN-22 (android): `packRegistry` реально встраивает en-ru + `usableCourseSelections` — пикер предлагает только реально парсящийся пакет, переключение — через перезапуск процесса
 
 `Plans/Kotlin/EnRuPackPlan.md` §6 EN-22, android-часть. Два независимых, но связанных решения,
