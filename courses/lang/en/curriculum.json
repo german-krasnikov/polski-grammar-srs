@@ -1,0 +1,146 @@
+[
+  {
+    "id": "en:role.object",
+    "construction": "core.argument.case-role",
+    "focus": { "feature": "Case", "from": "Subj", "to": "Obj" },
+    "fixed": { "Tense": "Pres", "Person": "1", "Number": "Sing" },
+    "lexicalFilter": null,
+    "level": "A1",
+    "prerequisites": []
+  },
+  {
+    "id": "en:verb.presentSimple",
+    "construction": "core.verb.tense",
+    "focus": { "feature": "Tense", "from": "Past", "to": "Pres" },
+    "fixed": { "Person": "3", "Number": "Sing", "Aspect": "Simple" },
+    "lexicalFilter": null,
+    "level": "A1",
+    "prerequisites": []
+  },
+  {
+    "id": "en:possessive.my",
+    "construction": "core.agreement.possessive",
+    "focus": null,
+    "fixed": { "Case": "Obj", "Tense": "Pres", "Person": "1", "Number": "Sing" },
+    "lexicalFilter": null,
+    "level": "A1",
+    "prerequisites": ["en:role.object"]
+  },
+  {
+    "id": "en:mood.question",
+    "construction": "core.sentence.mood",
+    "focus": { "feature": "Mood", "from": "Decl", "to": "YesNoQ" },
+    "fixed": { "Tense": "Pres", "Person": "2", "Number": "Sing", "Aspect": "Simple" },
+    "lexicalFilter": null,
+    "level": "A1",
+    "prerequisites": ["en:verb.presentSimple"]
+  },
+  {
+    "id": "en:role.location",
+    "construction": "core.argument.case-role",
+    "focus": { "feature": "Case", "from": "Obj", "to": "In" },
+    "fixed": { "Tense": "Pres", "Person": "1", "Number": "Sing" },
+    "lexicalFilter": null,
+    "level": "A1",
+    "prerequisites": ["en:role.object"]
+  },
+  {
+    "id": "en:role.instrument",
+    "construction": "core.argument.case-role",
+    "focus": { "feature": "Case", "from": "Obj", "to": "With" },
+    "fixed": { "Tense": "Pres", "Person": "1", "Number": "Sing" },
+    "lexicalFilter": null,
+    "level": "A2",
+    "prerequisites": ["en:role.object"]
+  },
+  {
+    "id": "en:polarity.present",
+    "construction": "core.sentence.polarity",
+    "focus": { "feature": "Polarity", "from": "Pos", "to": "Neg" },
+    "fixed": { "Tense": "Pres", "Person": "1", "Number": "Sing", "Aspect": "Simple" },
+    "lexicalFilter": null,
+    "level": "A2",
+    "prerequisites": ["en:role.object"]
+  },
+  {
+    "id": "en:verb.pastSimple",
+    "construction": "core.verb.tense",
+    "focus": { "feature": "Tense", "from": "Pres", "to": "Past" },
+    "fixed": { "Person": "3", "Number": "Sing", "Aspect": "Simple" },
+    "lexicalFilter": null,
+    "level": "A2",
+    "prerequisites": ["en:verb.presentSimple"]
+  },
+  {
+    "id": "en:role.recipient",
+    "construction": "core.argument.case-role",
+    "focus": { "feature": "Case", "from": "Obj", "to": "To" },
+    "fixed": { "Tense": "Pres", "Person": "1", "Number": "Sing" },
+    "lexicalFilter": null,
+    "level": "A2",
+    "prerequisites": ["en:role.instrument"]
+  },
+  {
+    "id": "en:number.plural",
+    "construction": "core.number",
+    "focus": { "feature": "Number", "from": "Sing", "to": "Plur" },
+    "fixed": { "Case": "Obj", "Tense": "Pres", "Person": "1" },
+    "lexicalFilter": null,
+    "level": "A2",
+    "prerequisites": ["en:role.object", "en:possessive.my"]
+  },
+  {
+    "id": "en:polarity.past",
+    "construction": "core.sentence.polarity",
+    "focus": { "feature": "Polarity", "from": "Pos", "to": "Neg" },
+    "fixed": { "Tense": "Past", "Person": "1", "Number": "Sing", "Aspect": "Simple" },
+    "lexicalFilter": null,
+    "level": "A2",
+    "prerequisites": ["en:polarity.present", "en:verb.pastSimple"]
+  },
+  {
+    "id": "en:verb.futureSimple",
+    "construction": "core.verb.tense",
+    "focus": { "feature": "Tense", "from": "Pres", "to": "Fut" },
+    "fixed": { "Person": "3", "Number": "Sing", "Aspect": "Simple" },
+    "lexicalFilter": null,
+    "level": "A2",
+    "prerequisites": ["en:verb.pastSimple"]
+  },
+  {
+    "id": "en:pronouns",
+    "construction": "core.argument.case-role",
+    "focus": null,
+    "fixed": { "Case": "Obj", "Tense": "Pres", "Person": "1", "Number": "Sing" },
+    "lexicalFilter": null,
+    "level": "A2",
+    "prerequisites": ["en:role.instrument", "en:role.location"]
+  },
+  {
+    "id": "en:verb.presentContinuous",
+    "construction": "core.verb.tense",
+    "focus": { "feature": "Aspect", "from": "Simple", "to": "Continuous" },
+    "fixed": { "Tense": "Pres", "Person": "3", "Number": "Sing" },
+    "lexicalFilter": null,
+    "level": "B1",
+    "prerequisites": ["en:verb.presentSimple"]
+  },
+  {
+    "id": "en:tense.contrast",
+    "construction": "core.composite",
+    "focus": null,
+    "fixed": { "Person": "1", "Number": "Sing" },
+    "lexicalFilter": null,
+    "level": "B1",
+    "prerequisites": ["en:verb.futureSimple", "en:verb.presentContinuous"]
+  },
+  {
+    "id": "en:mixed",
+    "construction": "core.composite",
+    "focus": null,
+    "fixed": {},
+    "lexicalFilter": null,
+    "level": "B1",
+    "prerequisites": ["en:possessive.my", "en:verb.pastSimple"]
+  }
+]
