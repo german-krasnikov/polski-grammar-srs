@@ -96,8 +96,13 @@ class ExerciseGenerator(
 
     private fun newId(): String = ids.newId().also { require(it.isNotEmpty()) { "Exercise ID must be nonempty" } }
 
-    private fun genderOf(nounId: String): String =
-        lexemeFeatures.of(nounId)[FeatureKey("Gender")]?.name ?: error("ExerciseGenerator: lexeme \"$nounId\" has no Gender")
+    /**
+     * A noun's inherent `Gender`, or `null` for a pack (e.g. en, EnRuPackPlan.md §1.1) whose
+     * [LexemeFeatures] carries no such feature at all — English has no grammatical gender, so
+     * [pronounKeyFor] treats a missing feature exactly like an unmapped value: it falls back to
+     * [TextValue.Pronoun.genderToKey]'s own `"default"` entry, never a hardcoded assumption here.
+     */
+    private fun genderOf(nounId: String): String? = lexemeFeatures.of(nounId)[FeatureKey("Gender")]?.name
 
     private fun matchesFilter(candidate: Map<String, String>, filter: LexicalFilter): Boolean = filter.where.all { (property, values) ->
         val idProperty = "${filter.slot}Id"
@@ -139,7 +144,7 @@ class ExerciseGenerator(
     private fun pronounKeyFor(genderToKey: Map<String, String>, lexicalSlots: Map<String, String>): String {
         val nounId = lexicalSlots.getValue("noun")
         val gender = genderOf(nounId)
-        return genderToKey[gender] ?: genderToKey.getValue("default")
+        return (gender?.let(genderToKey::get)) ?: genderToKey.getValue("default")
     }
 
     private fun resolveSpec(spec: TextSpec, lexicalSlots: Map<String, String>): String = when (spec) {

@@ -9,6 +9,7 @@ import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 import polski.core.engine.ChainStepRecipe
 import polski.core.engine.ChangeSpec
+import polski.core.engine.ConstantSlot
 import polski.core.engine.ConstructionTemplate
 import polski.core.engine.OwnerDraw
 import polski.core.engine.PhraseSpec
@@ -57,6 +58,8 @@ data class RecipeSet(
     /** The pack's own defaults (UniversalCorePlan.md §1.3 principle #3) — never assumed by `:core-engine` itself. */
     val defaultOwnerLexeme: String,
     val verbLexeme: String,
+    /** EnRuPackPlan.md §5 gap A/EN-14: further pack-constant lexical slots beyond `owner`/`verb` (`prep`/`aux`/`neg`/...), each present unconditionally or conditionally per [ConstantSlot]. Absent from pl's own file, so this defaults to empty and pl's behavior is unchanged. */
+    val constantSlots: List<ConstantSlot> = emptyList(),
 )
 
 fun parseRecipes(json: String): RecipeSet {
@@ -67,8 +70,16 @@ fun parseRecipes(json: String): RecipeSet {
         firstSkillByGender = root.getValue("firstSkillByGender").jsonObject.toStringMap(),
         defaultOwnerLexeme = root.getValue("defaultOwnerLexeme").jsonPrimitive.content,
         verbLexeme = root.getValue("verbLexeme").jsonPrimitive.content,
+        constantSlots = root["constantSlots"]?.jsonArray?.map { it.jsonObject.toConstantSlot() } ?: emptyList(),
     )
 }
+
+private fun JsonObject.toConstantSlot(): ConstantSlot = ConstantSlot(
+    slot = getValue("slot").jsonPrimitive.content,
+    lexeme = getValue("lexeme").jsonPrimitive.content,
+    whenFeature = this["whenFeature"]?.jsonPrimitive?.contentOrNull,
+    whenValues = this["whenValues"]?.jsonArray?.map { it.jsonPrimitive.content } ?: emptyList(),
+)
 
 private fun JsonObject.toSkillRecipe(id: String): SkillRecipe = SkillRecipe(
     skillId = this["skillId"]?.jsonPrimitive?.content ?: id,
