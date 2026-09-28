@@ -36,6 +36,7 @@ private fun JsonObject.toTemplate(): ConstructionTemplate = ConstructionTemplate
     govFeature = this["govFeature"]?.jsonPrimitive?.contentOrNull,
     govDefault = this["govDefault"]?.jsonPrimitive?.contentOrNull,
     govWhen = this["govWhen"]?.jsonObject?.toStringMap() ?: emptyMap(),
+    orderWhen = this["orderWhen"]?.jsonObject?.mapValues { (_, v) -> v.jsonArray.map { slot -> slot.jsonObject.toSlot() } } ?: emptyMap(),
 )
 
 private fun JsonObject.toSlot(): SlotTemplate = SlotTemplate(
