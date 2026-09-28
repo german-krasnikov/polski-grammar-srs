@@ -13,7 +13,7 @@
         "repository": { "$ref": "#/$defs/text" },
         "csvUrl": { "type": "string", "pattern": "^https://[^ ]+$" },
         "revision": { "type": "string", "pattern": "^[a-f0-9]{40}$" },
-        "license": { "const": "CC BY 4.0" },
+        "license": { "$ref": "#/$defs/text" },
         "attribution": { "$ref": "#/$defs/text" },
         "csvSha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
         "jsonSha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },

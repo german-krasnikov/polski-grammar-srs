@@ -8,7 +8,8 @@ const readJson = path => JSON.parse(readFileSync(new URL(path, root), 'utf8'));
 const schema = readJson('courses/schema/vocabulary-editorial-v1.schema.json');
 const baseline = readJson('tests/fixtures/vocabulary-baseline-32.json');
 const validateSchema = new Ajv2020({ allErrors: true, strict: true }).compile(schema);
-const source = {
+// pl-ru's pinned frequencySource values (default expectation, kept for backward compatibility).
+const plSource = {
   repository: 'https://github.com/KubaCiolo/leksjo-dane',
   csvUrl: 'https://github.com/KubaCiolo/leksjo-dane/blob/01782aa92cc842d0d3199079eba47ecbf05879e1/dane/nkjp-frekwencja.csv',
   revision: '01782aa92cc842d0d3199079eba47ecbf05879e1',
@@ -17,19 +18,26 @@ const source = {
 };
 const baselineById = new Map(baseline.cards.map(card => [card.id, card]));
 
-/** Checks authoring provenance and pack agreement; strict mode is the V2 release gate. */
-export function validateVocabularyEditorial(course, frequency, journal, { strict = false, frequencyBytes } = {}) {
+/**
+ * Checks authoring provenance and pack agreement; strict mode is the V2 release gate.
+ * `course` is nullable: pass null/undefined to validate an editorial journal on its own,
+ * before its pack's pair.json exists yet or wires any card into `vocabulary.items` (the
+ * authoring-ahead-of-wiring stage every pack's editorial journal goes through first).
+ * `expectedFrequencySource` pins known-good frequencySource values for one pack; it
+ * defaults to pl-ru's so existing callers are unaffected — a second pack passes its own.
+ */
+export function validateVocabularyEditorial(course, frequency, journal, { strict = false, frequencyBytes, expectedFrequencySource = plSource } = {}) {
   if (!validateSchema(journal)) {
     const error = validateSchema.errors[0];
     const suffix = error.keyword === 'required' ? `/${error.params.missingProperty}` : '';
     throw new Error(`editorial${error.instancePath}${suffix}: ${error.message}`);
   }
-  for (const [key, value] of Object.entries(source)) {
+  for (const [key, value] of Object.entries(expectedFrequencySource)) {
     if (journal.frequencySource[key] !== value) throw new Error(`frequencySource/${key}: source revision or hash drift`);
   }
   if (frequencyBytes) {
     const digest = createHash('sha256').update(frequencyBytes).digest('hex');
-    if (digest !== source.jsonSha256) throw new Error('frequencySource/jsonSha256: local index drift');
+    if (digest !== expectedFrequencySource.jsonSha256) throw new Error('frequencySource/jsonSha256: local index drift');
   }
   const byId = new Map();
   const byLemma = new Set();
@@ -63,19 +71,21 @@ export function validateVocabularyEditorial(course, frequency, journal, { strict
       throw new Error(`${path}/status: only legacy cards may await independent review`);
     }
   });
-  const runtimeIds = new Set();
-  course.vocabulary.items.forEach((item, index) => {
-    if (runtimeIds.has(item.id)) throw new Error(`vocabulary/items/${index}/id: duplicate id`);
-    runtimeIds.add(item.id);
-    const card = byId.get(item.id);
-    if (!card) throw new Error(`vocabulary/items/${index}/id: missing editorial card`);
-    for (const [field, editorialField] of [['lemma', 'lemma'], ['frequencyRank', 'rank'],
-      ['translation', 'translation'], ['form', 'form'], ['example', 'example'], ['level', 'level']]) {
-      if (item[field] !== card[editorialField]) throw new Error(`cards/${journal.cards.indexOf(card)}/${editorialField}: runtime mismatch`);
+  if (course) {
+    const runtimeIds = new Set();
+    course.vocabulary.items.forEach((item, index) => {
+      if (runtimeIds.has(item.id)) throw new Error(`vocabulary/items/${index}/id: duplicate id`);
+      runtimeIds.add(item.id);
+      const card = byId.get(item.id);
+      if (!card) throw new Error(`vocabulary/items/${index}/id: missing editorial card`);
+      for (const [field, editorialField] of [['lemma', 'lemma'], ['frequencyRank', 'rank'],
+        ['translation', 'translation'], ['form', 'form'], ['example', 'example'], ['level', 'level']]) {
+        if (item[field] !== card[editorialField]) throw new Error(`cards/${journal.cards.indexOf(card)}/${editorialField}: runtime mismatch`);
+      }
+    });
+    for (const card of journal.cards) {
+      if (!runtimeIds.has(card.id)) throw new Error(`cards/${journal.cards.indexOf(card)}/id: stale editorial card`);
     }
-  });
-  for (const card of journal.cards) {
-    if (!runtimeIds.has(card.id)) throw new Error(`cards/${journal.cards.indexOf(card)}/id: stale editorial card`);
   }
   const candidateRanks = new Set();
   journal.candidates.forEach((candidate, index) => {
