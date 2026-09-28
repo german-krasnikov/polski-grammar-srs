@@ -386,6 +386,12 @@ final class AppModel: ObservableObject {
         guard let data = json.data(using: .utf8),
               let parsed = (try? JSONSerialization.jsonObject(with: data)) as? Record else { return }
         preferences = parsed
+        // ADR-38 (EnRuAcceptance §7 item 2, blocker 2 correction): `packSwitchWarning` is a
+        // one-shot field — present only on the snapshot right after a training bridge elsewhere
+        // rolled back a pack switch that `set` had accepted. Surfacing it through the same
+        // `notice` alert every other Settings error already uses is what makes that self-
+        // correction visible instead of silent (see `IosPreferencesSession.reconcileWithActivePack`).
+        if let warning = parsed["packSwitchWarning"] as? String, !warning.isEmpty { notice = warning }
     }
 }
 
