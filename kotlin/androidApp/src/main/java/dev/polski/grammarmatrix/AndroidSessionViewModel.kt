@@ -44,10 +44,24 @@ class AndroidSessionViewModel(context: Context) : ViewModel() {
     private val appContext = context.applicationContext
     private val scheduler = FsrsScheduler()
     private val preferencesStore = AndroidUserPreferencesStore(appContext)
-    // EN-22: must run before anything below touches course data (`store`'s own initializer, next)
-    // — every `packRegistry.active`-derived global in :shared is cached for the process's whole
-    // lifetime on first read, so a pack switch has to land before that first read, not after.
-    init { preferencesStore.peekTargetNative()?.let { (target, native) -> selectActiveCoursePack("$target-$native") } }
+    // EN-22: must run before anything below touches course data (`preferences`'s own initializer,
+    // next) — every `packRegistry.active`-derived global in :shared is cached for the process's
+    // whole lifetime on first read, so a pack switch has to land before that first read, not after.
+    // The pack active *before* this switch is remembered: a pack can pass `usableCourseSelections`
+    // (its `CoursePack` schema parses, EnRuAcceptance-2026-09-28.md §7 item 1) yet still fail to
+    // build a real exercise chain (item 2's own separate content gap — e.g.
+    // `courses/lang/en/forms.generated.json` has only verb forms today, so `possessive:my` etc.
+    // have no form to realize). Probing that with the *same* generator `newStore()` uses below,
+    // synchronously, right here — before `preferences`'s own field default reads
+    // `packRegistry.active` — means a failed probe rolls back to exactly [bootPairId], never a
+    // hardcoded pl-ru literal, and every field below (including `preferences`'s default) sees the
+    // pack that's really usable. Mirrors `MacSession`/`IosSession`'s own `rebuildIfCourseSwitched`
+    // (ADR-37/38) for the identical gap, adapted to Android's cold-start-based switch (ADR-30).
+    private val bootPairId = polski.data.activeCoursePackId
+    init {
+        preferencesStore.peekTargetNative()?.let { (target, native) -> selectActiveCoursePack("$target-$native") }
+        if (runCatching { probeChainBuilds() }.isFailure) selectActiveCoursePack(bootPairId)
+    }
     private var savedPreferences = UserPreferencesV2()
     var preferences by mutableStateOf(UserPreferencesV2())
         private set
@@ -69,10 +83,26 @@ class AndroidSessionViewModel(context: Context) : ViewModel() {
         viewModelScope.launch {
             when (val loaded = preferencesStore.load()) {
                 is PreferencesLoad.Loaded -> {
-                    preferences = loaded.value
-                    savedPreferences = loaded.value
+                    // EnRuAcceptance-2026-09-28.md §7 item 2 (ADR-38's own contract, mirrored here):
+                    // the persisted document can name a pack that isn't the one really active —
+                    // the early `init`'s [probeChainBuilds] rollback above already keeps every
+                    // *field default* honest, but `preferencesStore.load()` decodes the raw
+                    // persisted value verbatim (any *registered* pack decodes, per
+                    // `UserPreferencesCodec`'s own contract) — so a stale/broken persisted choice
+                    // would otherwise overwrite the correct default the moment this load lands.
+                    // Settings must show the truth, not a choice Training silently ignores.
+                    // Corrected value is also saved back, so a later cold start doesn't retry it.
+                    val (activeTarget, activeNative) = polski.data.activeCoursePackId.split("-", limit = 2)
+                        .let { it[0] to it[1] }
+                    val reconciled = if (loaded.value.target != activeTarget || loaded.value.native != activeNative) {
+                        notice = "Выбранный курс сейчас недоступен для обучения — включён предыдущий"
+                        loaded.value.copy(target = activeTarget, native = activeNative)
+                    } else loaded.value
+                    preferences = reconciled
+                    savedPreferences = reconciled
                     preferencesError = null
-                    val preferred = StyleId(loaded.value.styleId.name)
+                    if (reconciled !== loaded.value) preferencesStore.save(reconciled)
+                    val preferred = StyleId(reconciled.styleId.name)
                     if (store.state.value.styleId != preferred) {
                         store.dispatch(AppAction.SetStyle(preferred))
                     }
@@ -84,6 +114,14 @@ class AndroidSessionViewModel(context: Context) : ViewModel() {
         }
         viewModelScope.launch { store.start() }
         viewModelScope.launch { vocabulary.start() }
+    }
+
+    /** Builds and immediately discards one chain — the same construction [newStore] does, minus
+     *  `TrainingStore`'s repository/scope wiring — so a pack that parses ([usableCourseSelections])
+     *  but can't actually realize a chain (EnRuAcceptance §7 item 2) is caught before any real
+     *  field reads the active pack, not after. No progress/session side effect either way. */
+    private fun probeChainBuilds() {
+        PlExerciseEngine(RandomSource { Random.nextDouble() }, ExerciseIdFactory { "probe" }).generateChain()
     }
 
     private fun newStore() = TrainingStore(
