@@ -24,6 +24,7 @@ import polski.data.courseSentenceSeeds
 import polski.data.exerciseCopy
 import polski.data.generatedCurriculumJsonByLang
 import polski.data.nounById
+import polski.data.packRegistry
 import polski.data.personalPronouns
 import polski.data.renderCoursePattern
 import polski.grammar.generatedFormsFixtureJson
@@ -108,25 +109,36 @@ internal class PackEngine(langId: String) {
     }
 }
 
-private val plEngine by lazy { PackEngine("pl") }
+/** One [PackEngine] per `langId`, built at most once each — [activeEngine] and [enMorphology] share it. */
+private val engines = mutableMapOf<String, PackEngine>()
+private fun engineFor(langId: String): PackEngine = engines.getOrPut(langId) { PackEngine(langId) }
 
-/** The pack's own [TableMorphology] — also the source of every matrix/reference form (UC-08). */
-val plMorphology: TableMorphology get() = plEngine.morphology
+/**
+ * EN-22 (gap G): the `plX`-named functions below keep their pl-hardcoded names for host source
+ * compatibility (EN-07's own promise), but now resolve to whichever pack [packRegistry.active] is
+ * — pl-ru by default, unchanged — instead of always building `PackEngine("pl")`. Once a second pack
+ * is safely selectable (see `packRegistry`'s own KDoc for why en-ru isn't wired in yet), a host's
+ * preferences bridge calling `selectCoursePack` makes every one of these return that pack's own
+ * engine on the very next call, no restart needed.
+ */
+private val activeEngine: PackEngine get() = engineFor(packRegistry.active.targetLanguage)
 
-/** A noun's inherent `Gender` (§5.1's [LexemeFeatures]) — the only cross-slot agreement fact pl needs. */
-val plLexemeFeatures: LexemeFeatures get() = plEngine.lexemeFeatures
+/** The active pack's own [TableMorphology] — also the source of every matrix/reference form (UC-08). */
+val plMorphology: TableMorphology get() = activeEngine.morphology
+
+/** A noun's inherent `Gender` (§5.1's [LexemeFeatures]) — the only cross-slot agreement fact this pack needs. */
+val plLexemeFeatures: LexemeFeatures get() = activeEngine.lexemeFeatures
 
 /** Builds the live [ExerciseGenerator] for one session's [random]/[ids] ports. */
-fun plExerciseGenerator(random: RandomSource, ids: ExerciseIdFactory): ExerciseGenerator = plEngine.exerciseGenerator(random, ids)
+fun plExerciseGenerator(random: RandomSource, ids: ExerciseIdFactory): ExerciseGenerator = activeEngine.exerciseGenerator(random, ids)
 
 /** The chain's 5 fixed steps with step 1's skill resolved for [nounId]'s own gender (UniversalCorePlan.md §5.3). */
-fun plChainSteps(nounId: String): List<ChainStepRecipe> = plEngine.chainSteps(nounId)
+fun plChainSteps(nounId: String): List<ChainStepRecipe> = activeEngine.chainSteps(nounId)
 
 /**
  * EN-24 (UC-09 part 2/2 minimum): en's own [TableMorphology], sourced from
- * `lang/en/forms.generated.json` — independent of [polski.data.packRegistry]'s active pack
- * (pack-switching hosts to en-ru is EN-22, not this task), so the web matrix's English table
- * always has real forms to show regardless of which pack is currently active.
+ * `lang/en/forms.generated.json` — independent of [polski.data.packRegistry]'s active pack, so the
+ * web matrix's English table always has real forms to show regardless of which pack is currently
+ * active. Shares [engines]' cache with [activeEngine], so selecting en-ru builds no second instance.
  */
-private val enEngine by lazy { PackEngine("en") }
-val enMorphology: TableMorphology get() = enEngine.morphology
+val enMorphology: TableMorphology get() = engineFor("en").morphology

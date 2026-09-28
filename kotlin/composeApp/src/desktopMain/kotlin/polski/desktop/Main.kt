@@ -387,6 +387,7 @@ private fun DesktopSession(
                 }
                 when {
                     settingsOpen -> DesktopSettingsScreen(preferences, macSystemStatus, onClose = { onSettings(false) },
+                        onTarget = preferences::setTarget, onNative = preferences::setNative,
                         onStyle = { preferences.setStyle(it, store::dispatch) },
                         onAnswerMode = { preferences.setAnswerMode(it, state.phase, store::dispatch) },
                         onAppearance = preferences::setAppearance, onMotion = preferences::setMotion,

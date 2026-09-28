@@ -4,6 +4,8 @@ import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
+import polski.data.availableCoursePacks
+import polski.data.selectCoursePack
 import polski.preferences.Appearance
 import polski.preferences.Motion
 import polski.preferences.PreferencesDecode
@@ -21,12 +23,17 @@ class MacPreferencesSession(directory: String) {
     var onState: ((String) -> Unit)? = null
         set(value) { field = value; value?.invoke(currentSnapshot()) }
 
+    init { syncActivePack() }
+
     fun currentSnapshot(): String = buildJsonObject {
         put("schemaVersion", 2)
         put("styles", styleCatalogJson())
+        put("packs", packOptionsJson())
         when (val result = loaded) {
             is PreferencesDecode.Loaded -> {
                 put("status", "Ready")
+                put("target", result.value.target)
+                put("native", result.value.native)
                 put("styleId", result.value.styleId.name)
                 put("answerMode", result.value.answerMode.name)
                 put("appearance", result.value.appearance.name)
@@ -47,6 +54,8 @@ class MacPreferencesSession(directory: String) {
     fun set(field: String, value: String): String? {
         val current = (loaded as? PreferencesDecode.Loaded)?.value ?: return "Настройки требуют восстановления"
         val next: UserPreferencesV2 = when (field) {
+            "target" -> current.copy(target = value.takeIf { candidate -> availableCoursePacks.any { it.target == candidate } } ?: return "Неизвестный изучаемый язык")
+            "native" -> current.copy(native = value.takeIf { candidate -> availableCoursePacks.any { it.native == candidate } } ?: return "Неизвестный родной язык")
             "styleId" -> current.copy(styleId = PreferredStyle.entries.firstOrNull { it.name == value } ?: return "Неизвестный стиль")
             "answerMode" -> current.copy(answerMode = PreferredAnswerMode.entries.firstOrNull { it.name == value } ?: return "Неизвестный способ ответа")
             "appearance" -> current.copy(appearance = Appearance.entries.firstOrNull { it.name == value } ?: return "Неизвестная тема")
@@ -56,8 +65,20 @@ class MacPreferencesSession(directory: String) {
             else -> return "Неизвестная настройка"
         }
         val error = repository.save(next)
-        if (error == null) { loaded = PreferencesDecode.Loaded(next); onState?.invoke(currentSnapshot()) }
+        if (error == null) { loaded = PreferencesDecode.Loaded(next); syncActivePack(); onState?.invoke(currentSnapshot()) }
         return error
+    }
+
+    /**
+     * EN-22: makes `target`/`native` a real pack switch, not just a saved preference — a
+     * `pairId` [availableCoursePacks] doesn't have (only pl-ru is registered today; see
+     * `polski.data.packRegistry`'s own KDoc) is left as the still-active pack rather than thrown,
+     * since this runs on every load/save, not only on a picker change.
+     */
+    private fun syncActivePack() {
+        val prefs = (loaded as? PreferencesDecode.Loaded)?.value ?: return
+        val pairId = "${prefs.target}-${prefs.native}"
+        if (availableCoursePacks.any { it.pairId == pairId }) selectCoursePack(pairId)
     }
 
     fun importJson(raw: String): String? {
@@ -86,5 +107,19 @@ private fun styleCatalogJson(): JsonArray = JsonArray(styleFallbackCopy.keys.map
         put("id", id.value)
         put("label", recipe?.label?.get("ru")?.takeIf { it.isNotBlank() } ?: fallback.first)
         put("description", recipe?.description?.get("ru")?.takeIf { it.isNotBlank() } ?: fallback.second)
+    }
+})
+
+/** EN-22: a language code's Russian display name for the target/native pickers — every code
+ *  [polski.data.availableCoursePacks] can report today or once a second pack is wired in. */
+private val languageDisplayNames: Map<String, String> = mapOf("pl" to "Польский", "en" to "Английский", "ru" to "Русский")
+
+private fun packOptionsJson(): JsonArray = JsonArray(availableCoursePacks.map { pack ->
+    buildJsonObject {
+        put("pairId", pack.pairId)
+        put("target", pack.target)
+        put("native", pack.native)
+        put("targetLabel", languageDisplayNames[pack.target] ?: pack.target)
+        put("nativeLabel", languageDisplayNames[pack.native] ?: pack.native)
     }
 })

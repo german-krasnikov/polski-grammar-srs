@@ -543,8 +543,8 @@ internal class CoursePack(private val source: CoursePackSource) {
 /**
  * UC-03/EN-06: the single point where consumers reach a [CoursePack], keyed by [CoursePack.pairId].
  * [active] defaults to the first registered pack (pl-ru today, unchanged behavior) until
- * [select] switches it — no production caller does that yet; wiring a real picker to this is
- * EN-08/EN-10/EN-22, not this task.
+ * [select] switches it — EN-22 wires a real host picker to [selectCoursePack]/[select], driven by
+ * `UserPreferencesV2.target`/`native`.
  */
 internal class PackRegistry(private val packs: List<CoursePack>) {
     init { require(packs.isNotEmpty() && packs.map { it.pairId }.distinct().size == packs.size) }
@@ -556,12 +556,48 @@ internal class PackRegistry(private val packs: List<CoursePack>) {
     fun select(pairId: String) {
         active = requireNotNull(packs.firstOrNull { it.pairId == pairId }) { "Unknown pack pairId: $pairId" }
     }
+
+    /** EN-22: every registered pack, for [availableCoursePacks] to build its option list from. */
+    fun all(): List<CoursePack> = packs
 }
 
+/**
+ * EN-22 investigation (Plans/Kotlin/EnRuPackPlan.md §6, gap G): [CoursePackLoader] can reconstruct
+ * a v1-shaped [CoursePackSource] for a v2-only pack (en-ru, ADR-20/EN-04), but [CoursePack]'s own
+ * `nouns`/`adjectives`/`verbs`/`personalPronouns`/`possessives` parsers below (UC-08) are written
+ * for pl's v1 lexicon shape specifically (mandatory `gender`, per-[GramCase] declension tables,
+ * Polish gendered past-stem verb forms) — `lang/en/lexicon.json` uses a deliberately simpler,
+ * genuinely different shape for every one of those five (flat `sg`/`pl` noun forms with no gender,
+ * a single invariant adjective string, `present3sg`/`past`/`pastParticiple`/`ing` verb fields, ...).
+ * Feeding it through [CoursePackLoader.fromV2Layers] compiles but throws
+ * `IllegalStateException: Missing course field gender` the moment anything reads `.nouns` — this is
+ * a real, separate, un-scoped core-schema gap (not in EnRuPackPlan.md §5's gaps A-H, and larger
+ * than EN-22's stated EN-08/EN-10 dependencies), so wiring it into the production registry is left
+ * out here; [CoursePackOption]/[availableCoursePacks]/[selectCoursePack] below are real,
+ * already-working infrastructure that needs no further change once that gap is fixed elsewhere —
+ * a second [PackRegistry] entry would then just appear in [availableCoursePacks] on its own.
+ */
 internal val packRegistry: PackRegistry by lazy { PackRegistry(embeddedCoursePackSources.map(::CoursePack)) }
 
-val courseSentenceSeeds: List<SentenceSeed> by lazy { packRegistry.active.sentenceSeeds }
-val courseStemAlternations: List<StemAlternation> by lazy { packRegistry.active.stemAlternations }
+/** EN-22: one registered pack's id + languages, for a host's target/native pickers to list. */
+data class CoursePackOption(val pairId: String, val target: String, val native: String)
+
+/** Every pack [selectCoursePack] can switch to, pl-ru first (today's default active pack). */
+val availableCoursePacks: List<CoursePackOption> get() =
+    packRegistry.all().map { CoursePackOption(it.pairId, it.targetLanguage, it.nativeLanguage) }
+
+/** [CoursePack.pairId] of the pack currently serving content. */
+val activeCoursePackId: String get() = packRegistry.active.pairId
+
+/** Switches the active pack; throws for a [pairId] not in [availableCoursePacks] (same as [PackRegistry.select]). */
+fun selectCoursePack(pairId: String) { packRegistry.select(pairId) }
+
+// EN-22: every val below was `by lazy` (frozen at first access) — read fresh now so a later
+// selectCoursePack (host picker, this task) actually changes what these return; see Skills.kt's
+// `skills` KDoc for the same fix's original writeup. `caseSentencePrefix`/`exerciseCopy` above were
+// already plain `fun`s reading `packRegistry.active` fresh, so they needed no change.
+val courseSentenceSeeds: List<SentenceSeed> get() = packRegistry.active.sentenceSeeds
+val courseStemAlternations: List<StemAlternation> get() = packRegistry.active.stemAlternations
 
 fun caseSentencePrefix(gramCase: GramCase, number: NumberGram): String {
     require(gramCase != GramCase.VOC)
@@ -572,25 +608,25 @@ fun caseSentencePrefix(gramCase: GramCase, number: NumberGram): String {
 }
 
 fun exerciseCopy(key: String): String = packRegistry.active.exerciseCopy.getValue(key)
-val referenceChainRows: List<ReferenceChainRow> by lazy { packRegistry.active.referenceChainRows }
-val courseChainPresentation: ChainPresentation by lazy { packRegistry.active.chainPresentation }
-val referenceSystemCards: List<ReferenceSystemCard> by lazy { packRegistry.active.referenceSystemCards }
-val referencePipeline: ReferencePipeline by lazy { packRegistry.active.referencePipeline }
-val referenceCaseTeaching: CaseTeaching by lazy { packRegistry.active.referenceCaseTeaching }
-val referenceVerbTeaching: VerbTeaching by lazy { packRegistry.active.referenceVerbTeaching }
-val referencePronounTeaching: PronounTeaching by lazy { packRegistry.active.referencePronounTeaching }
-val comparisonNounIds: List<String> by lazy { packRegistry.active.comparisonNounIds }
-val referenceRussianSupport: RussianSupport by lazy { packRegistry.active.referenceRussianSupport }
-val referenceTenseRows: List<ReferenceTenseRow> by lazy { packRegistry.active.referenceTenseRows }
-val referenceAspectRows: List<ReferenceAspectRow> by lazy { packRegistry.active.referenceAspectRows }
-val maleAccRows: List<MaleAccRow> by lazy { packRegistry.active.maleAccRows }
-val courseMatrixIntroduction: String by lazy { packRegistry.active.matrixIntroduction }
-val courseWebCaseCompositionHeader: String by lazy { packRegistry.active.webCaseCompositionHeader }
-val courseContextHelp: CourseContextHelp by lazy { packRegistry.active.contextHelp }
-val courseMaleAccIntro: String by lazy { packRegistry.active.maleAccIntro }
-val courseAspectNoPresent: CourseAspectNoPresent by lazy { packRegistry.active.aspectNoPresent }
-val courseVocabularyInstructions: CourseVocabularyInstructions by lazy { packRegistry.active.vocabularyInstructions }
-val courseVocabularyUnavailableLabel: String by lazy { packRegistry.active.vocabularyUnavailableLabel }
+val referenceChainRows: List<ReferenceChainRow> get() = packRegistry.active.referenceChainRows
+val courseChainPresentation: ChainPresentation get() = packRegistry.active.chainPresentation
+val referenceSystemCards: List<ReferenceSystemCard> get() = packRegistry.active.referenceSystemCards
+val referencePipeline: ReferencePipeline get() = packRegistry.active.referencePipeline
+val referenceCaseTeaching: CaseTeaching get() = packRegistry.active.referenceCaseTeaching
+val referenceVerbTeaching: VerbTeaching get() = packRegistry.active.referenceVerbTeaching
+val referencePronounTeaching: PronounTeaching get() = packRegistry.active.referencePronounTeaching
+val comparisonNounIds: List<String> get() = packRegistry.active.comparisonNounIds
+val referenceRussianSupport: RussianSupport get() = packRegistry.active.referenceRussianSupport
+val referenceTenseRows: List<ReferenceTenseRow> get() = packRegistry.active.referenceTenseRows
+val referenceAspectRows: List<ReferenceAspectRow> get() = packRegistry.active.referenceAspectRows
+val maleAccRows: List<MaleAccRow> get() = packRegistry.active.maleAccRows
+val courseMatrixIntroduction: String get() = packRegistry.active.matrixIntroduction
+val courseWebCaseCompositionHeader: String get() = packRegistry.active.webCaseCompositionHeader
+val courseContextHelp: CourseContextHelp get() = packRegistry.active.contextHelp
+val courseMaleAccIntro: String get() = packRegistry.active.maleAccIntro
+val courseAspectNoPresent: CourseAspectNoPresent get() = packRegistry.active.aspectNoPresent
+val courseVocabularyInstructions: CourseVocabularyInstructions get() = packRegistry.active.vocabularyInstructions
+val courseVocabularyUnavailableLabel: String get() = packRegistry.active.vocabularyUnavailableLabel
 
 private val coursePlaceholder = Regex("\\{([A-Za-z][A-Za-z0-9]*)\\}")
 

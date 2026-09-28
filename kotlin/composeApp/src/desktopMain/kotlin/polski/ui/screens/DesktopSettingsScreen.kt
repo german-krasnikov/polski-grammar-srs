@@ -14,6 +14,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import polski.data.availableCoursePacks
 import polski.desktop.DesktopPreferencesController
 import polski.desktop.DesktopPreferencesStatus
 import polski.desktop.MacSystemStatus
@@ -32,6 +33,8 @@ internal fun DesktopSettingsScreen(
     preferences: DesktopPreferencesController,
     macSystemStatus: MacSystemStatus,
     onClose: () -> Unit,
+    onTarget: (String) -> Unit,
+    onNative: (String) -> Unit,
     onStyle: (StyleId) -> Unit,
     onAnswerMode: (AnswerMode) -> Unit,
     onAppearance: (Appearance) -> Unit,
@@ -58,7 +61,22 @@ internal fun DesktopSettingsScreen(
         Text(status, color = if (preferences.status == DesktopPreferencesStatus.Loaded)
             MaterialTheme.colorScheme.onSurfaceVariant else MaterialTheme.colorScheme.error)
         SettingsCard("Курс и практика") {
-            Text("Польский ↔ русский · активный курс")
+            // EN-22 (Plans/Kotlin/EnRuPackPlan.md §6): built from `availableCoursePacks`, never a
+            // hardcoded "pl"/"en" case list, so it grows on its own once a second pack is safely
+            // registered (see `polski.data.packRegistry`'s own KDoc for why en-ru isn't yet) — today
+            // that list has exactly pl-ru, so both rows show one real, already-selected option.
+            Text("Изучаемый язык")
+            Row(Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                availableCoursePacks.distinctBy { it.target }.forEach { pack ->
+                    TabButton(languageLabel(pack.target), preferences.value.target == pack.target) { onTarget(pack.target) }
+                }
+            }
+            Text("Родной язык")
+            Row(Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                availableCoursePacks.distinctBy { it.native }.forEach { pack ->
+                    TabButton(languageLabel(pack.native), preferences.value.native == pack.native) { onNative(pack.native) }
+                }
+            }
             Text("Подача объяснений")
             Row(Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 builtInStyleIds.forEach { id ->
@@ -130,6 +148,10 @@ private val fallbackStyleLabel: Map<StyleId, String> = mapOf(
 
 private fun styleLabel(id: StyleId): String =
     StyleRegistry.recipes[id]?.label?.get("ru")?.takeIf { it.isNotBlank() } ?: fallbackStyleLabel.getValue(id)
+
+/** EN-22: a language code's Russian display name for the target/native pickers. */
+private val languageDisplayNames: Map<String, String> = mapOf("pl" to "Польский", "en" to "Английский", "ru" to "Русский")
+private fun languageLabel(code: String): String = languageDisplayNames[code] ?: code
 
 @Composable
 private fun SettingsCard(title: String, content: @Composable () -> Unit) {

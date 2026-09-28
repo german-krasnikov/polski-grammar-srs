@@ -2,7 +2,12 @@ package polski.data
 
 import polski.model.Skill
 
-val skills: List<Skill> by lazy { packRegistry.active.skills }
+/**
+ * EN-22: was `by lazy` (frozen at first access); now read fresh on every call so
+ * [PackRegistry.select] — wired to a real host picker as of this task — takes effect immediately,
+ * matching [activePackSkillIds] below which already reads fresh for the same reason.
+ */
+val skills: List<Skill> get() = packRegistry.active.skills
 
 fun skillById(id: String): Skill = skills.firstOrNull { it.id == id } ?: error("Unknown skill $id")
 

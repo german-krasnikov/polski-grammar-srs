@@ -225,9 +225,23 @@ struct PreferencesSnapshot: Decodable {
         let label: String
         let description: String
     }
+    /// EN-22: one pack `MacPreferencesSession.selectCoursePack` can actually switch to — pl-ru is
+    /// the only real one today (`polski.data.packRegistry`'s own KDoc has why en-ru isn't wired in
+    /// yet), so the target/native pickers below render exactly this list, never a hardcoded 2-case one.
+    struct PackOption: Decodable, Identifiable {
+        let pairId: String
+        let target: String
+        let native: String
+        let targetLabel: String
+        let nativeLabel: String
+        var id: String { pairId }
+    }
     let schemaVersion: Int
     let status: String
     let styles: [StyleOption]
+    let packs: [PackOption]
+    let target: String?
+    let native: String?
     let styleId: String?
     let answerMode: String?
     let appearance: String?
@@ -956,6 +970,40 @@ private struct ProgressViewNative: View {
     }
 }
 
+/// EN-22 (Plans/Kotlin/EnRuPackPlan.md §6): target/native pickers next to the style picker —
+/// `MacPreferencesSession.set("target"/"native", …)` really switches `polski.data.packRegistry`'s
+/// active pack (EN-06/EN-08), not just a saved preference. Built from `model.preferences?.packs`
+/// (never a hardcoded pl/en case list) so it grows on its own once a second pack is safely
+/// registered; today that list has exactly pl-ru, so both pickers render one disabled-looking but
+/// real option — the existing pl-ru choice is unaffected either way.
+private struct TargetNativePickers: View {
+    @ObservedObject var model: MacModel
+    private var targets: [PreferencesSnapshot.PackOption] {
+        var seen = Set<String>()
+        return (model.preferences?.packs ?? []).filter { seen.insert($0.target).inserted }
+    }
+    private var natives: [PreferencesSnapshot.PackOption] {
+        var seen = Set<String>()
+        return (model.preferences?.packs ?? []).filter { seen.insert($0.native).inserted }
+    }
+    var body: some View {
+        Picker("Изучаемый язык", selection: Binding(
+            get: { model.preferences?.target ?? "pl" },
+            set: { model.preference("target", $0) }
+        )) {
+            ForEach(targets) { pack in Text(pack.targetLabel).tag(pack.target) }
+        }
+        .accessibilityIdentifier("targetPicker")
+        Picker("Родной язык", selection: Binding(
+            get: { model.preferences?.native ?? "ru" },
+            set: { model.preference("native", $0) }
+        )) {
+            ForEach(natives) { pack in Text(pack.nativeLabel).tag(pack.native) }
+        }
+        .accessibilityIdentifier("nativePicker")
+    }
+}
+
 /// UC-10 S1: replaces the old 2-value "Объяснение" `Picker` (`Logic`/`Situations`) with the 4
 /// style recipes, each row's label/description coming from `model.preferences?.styles` (recipe
 /// data, host-side Russian fallback while CONTENT is unmerged — never hardcoded here). A
@@ -1001,6 +1049,7 @@ private struct MacSettingsView: View {
                 Text(model.preferences?.error ?? "Настройки требуют восстановления")
                     .foregroundStyle(.red)
             } else {
+                Section("Язык") { TargetNativePickers(model: model) }
                 Section("Обучение") { StylePickerRows(model: model) }
                 Picker("Внешний вид", selection: Binding(
                     get: { model.preferences?.appearance ?? "System" },
