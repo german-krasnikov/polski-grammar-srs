@@ -54,12 +54,15 @@ import polski.presentation.ContrastPair
 import polski.presentation.EndingPart
 import polski.data.presentationBySkillId
 import polski.data.styleContentBySkillId
+import polski.core.engine.MatrixColumn
+import polski.core.engine.MatrixTableEngine
 import polski.presentation.StyleComposer
 import polski.presentation.StyleId
 import polski.presentation.StylePhase
 import polski.presentation.StyleRegistry
 import polski.presentation.blocksToJson
 import polski.presentation.toLegacyWireValue
+import polski.presentation.toViewModel
 import polski.srs.Rating
 import polski.training.sentenceSeeds
 
@@ -257,40 +260,55 @@ private fun matrixSnapshot(state: AppUiState): JsonElement {
             put("explanation", card.explanation); put("example", card.example)
             put("steps", JsonArray(card.steps.zipWithNext { from, to -> pairSnapshot(ContrastPair.generated(from, to)) }))
         } }))
-        put("chainRows", JsonArray(referenceChainRows.map { row -> buildJsonObject {
+        val chainTable = MatrixTableEngine.build(
+            rowAxis = referenceChainRows,
+            rowHeaderLabel = "Операция",
+            rowHeader = { it.label },
+            columns = listOf(
+                MatrixColumn("Целое предложение", { it.to }, contrastFrom = { it.from }),
+                MatrixColumn("Что изменилось", { it.change }),
+            ),
+        ).toViewModel()
+        put("chainRows", JsonArray(referenceChainRows.mapIndexed { i, row -> buildJsonObject {
             put("label", row.label); put("from", row.from); put("to", row.to); put("change", row.change)
-            put("beforeParts", JsonArray(changeHighlightParts(row.from, row.to, ChangeSide.Before).map { part -> buildJsonObject {
-                put("text", part.text); put("changed", part.isChanged)
-            } }))
-            put("afterParts", JsonArray(changeHighlightParts(row.from, row.to, ChangeSide.After).map { part -> buildJsonObject {
-                put("text", part.text); put("changed", part.isChanged)
-            } }))
+            val pairJson = pairSnapshot(requireNotNull(chainTable.rows[i].cells[0].contrast))
+            put("beforeParts", pairJson.getValue("beforeParts")); put("afterParts", pairJson.getValue("afterParts"))
         } }))
-        put("tenseRows", JsonArray(referenceTenseRows.map { row -> buildJsonObject {
+        val tenseTable = MatrixTableEngine.build(
+            rowAxis = referenceTenseRows,
+            rowHeaderLabel = "Операция",
+            rowHeader = { it.label },
+            columns = listOf(MatrixColumn("Предложение", { it.to }, contrastFrom = { it.from })),
+        ).toViewModel()
+        put("tenseRows", JsonArray(referenceTenseRows.mapIndexed { i, row -> buildJsonObject {
             put("label", row.label); put("from", row.from); put("to", row.to)
-            put("beforeParts", JsonArray(changeHighlightParts(row.from, row.to, ChangeSide.Before).map { part -> buildJsonObject {
-                put("text", part.text); put("changed", part.isChanged)
-            } }))
-            put("afterParts", JsonArray(changeHighlightParts(row.from, row.to, ChangeSide.After).map { part -> buildJsonObject {
-                put("text", part.text); put("changed", part.isChanged)
-            } }))
+            val pairJson = pairSnapshot(requireNotNull(tenseTable.rows[i].cells[0].contrast))
+            put("beforeParts", pairJson.getValue("beforeParts")); put("afterParts", pairJson.getValue("afterParts"))
         } }))
-        put("aspectRows", JsonArray(referenceAspectRows.map { row -> buildJsonObject {
+        val aspectTable = MatrixTableEngine.build(
+            rowAxis = referenceAspectRows,
+            rowHeaderLabel = "Смысл",
+            rowHeader = { it.label },
+            columns = listOf(
+                MatrixColumn("Настоящее", { it.present ?: "" }, contrastFrom = { row -> if (row.present == null) null else row.from }),
+                MatrixColumn("Прошедшее", { it.past }, contrastFrom = { it.from }),
+                MatrixColumn("Будущее", { it.future }, contrastFrom = { it.from }),
+            ),
+        ).toViewModel()
+        put("aspectRows", JsonArray(referenceAspectRows.mapIndexed { i, row -> buildJsonObject {
             put("label", row.label); put("from", row.from)
-            put("entries", JsonArray(listOf(
-                "Настоящее" to row.present, "Прошедшее" to row.past, "Будущее" to row.future,
-            ).map { (label, form) -> buildJsonObject {
-                put("label", label); put("available", form != null)
-                if (form != null) {
-                    put("from", row.from); put("to", form)
-                    put("beforeParts", JsonArray(changeHighlightParts(row.from, form, ChangeSide.Before).map { part -> buildJsonObject {
-                        put("text", part.text); put("changed", part.isChanged)
-                    } }))
-                    put("afterParts", JsonArray(changeHighlightParts(row.from, form, ChangeSide.After).map { part -> buildJsonObject {
-                        put("text", part.text); put("changed", part.isChanged)
-                    } }))
+            put("entries", JsonArray(listOf("Настоящее", "Прошедшее", "Будущее").mapIndexed { colIndex, label ->
+                val cell = aspectTable.rows[i].cells[colIndex]
+                buildJsonObject {
+                    put("label", label); put("available", cell.contrast != null)
+                    val contrast = cell.contrast
+                    if (contrast != null) {
+                        val pairJson = pairSnapshot(contrast)
+                        put("from", contrast.from); put("to", cell.value)
+                        put("beforeParts", pairJson.getValue("beforeParts")); put("afterParts", pairJson.getValue("afterParts"))
+                    }
                 }
-            } }))
+            }))
         } }))
         put("maleAccRows", JsonArray(maleAccRows.map { row -> buildJsonObject {
             put("label", row.label); put("title", row.title); put("rule", row.rule)
@@ -305,26 +323,63 @@ private fun matrixSnapshot(state: AppUiState): JsonElement {
                 } }))
             } }))
         } }))
-        put("cases", JsonArray(caseRows.map { row -> buildJsonObject {
+        // UniversalCorePlan.md §5.3.3/§12 UC-09 (host wiring, part 2/2, iOS): every table below is
+        // built through the same :core-engine MatrixTableEngine + MatrixTableViewModel that
+        // MatrixTableViewModelTest already proves byte-identical to the pack's own grammar
+        // functions — this snapshot no longer re-derives cell values by hand, it reads them off
+        // the exported view model. The wire JSON shape Swift already binds to (named per-section
+        // fields, not a generic grid) is unchanged on purpose: that shape is covered by
+        // IosMatrixSnapshotTest and the SwiftUI screens/screenshots, and switching it is a
+        // separate, host-visible change with its own risk (ContrastHighlightPlan.md scopes only
+        // the *engine* switch here, not a host UI rewrite).
+        val casesTable = MatrixTableEngine.build(
+            rowAxis = caseRows,
+            rowHeaderLabel = "Падеж · русская опора",
+            rowHeader = { "${it.pl} · ${it.ru}" },
+            columns = listOf(
+                MatrixColumn("Вопрос / конструкция", { "${it.question} · ${it.trigger}" }),
+                MatrixColumn(
+                    "Целая группа слов",
+                    { nounPhrase(selection.nounId, it.id, number, selection.adjectiveId, owner) },
+                    contrastFrom = { nounPhrase(selection.nounId, GramCase.NOM, number, selection.adjectiveId, owner) },
+                ),
+                MatrixColumn(
+                    "Целое предложение",
+                    { caseSentence(seed, it.id, owner, number) },
+                    contrastFrom = { caseSentence(seed, GramCase.NOM, owner, number) },
+                ),
+            ),
+        ).toViewModel()
+        put("cases", JsonArray(caseRows.mapIndexed { i, row -> buildJsonObject {
             put("title", "${row.pl} · ${row.ru}")
             put("question", row.question); put("trigger", row.trigger)
-            val phrase = nounPhrase(selection.nounId, row.id, number, selection.adjectiveId, owner)
-            val sentence = caseSentence(seed, row.id, owner, number)
-            put("phrase", phrase); put("sentence", sentence)
-            put("phrasePair", pairSnapshot(ContrastPair.generated(
-                nounPhrase(selection.nounId, GramCase.NOM, number, selection.adjectiveId, owner), phrase)))
-            put("sentencePair", pairSnapshot(ContrastPair.generated(caseSentence(seed, GramCase.NOM, owner, number), sentence)))
+            val phraseCell = casesTable.rows[i].cells[1]
+            val sentenceCell = casesTable.rows[i].cells[2]
+            put("phrase", phraseCell.value); put("sentence", sentenceCell.value)
+            put("phrasePair", pairSnapshot(requireNotNull(phraseCell.contrast)))
+            put("sentencePair", pairSnapshot(requireNotNull(sentenceCell.contrast)))
         } }))
         put("comparisonCases", JsonArray(caseRows.map { choice(it.id.name, it.pl) }))
-        put("comparison", JsonArray(comparisonNounIds.map { id ->
+        val comparisonTable = MatrixTableEngine.build(
+            rowAxis = GramCase.entries,
+            rowHeaderLabel = "Падеж",
+            rowHeader = { it.name },
+            columns = comparisonNounIds.map { id ->
+                MatrixColumn(
+                    nounById(id).lemma,
+                    { gramCase -> nounById(id).forms.getValue(number).getValue(gramCase) },
+                    contrastFrom = { nounById(id).forms.getValue(number).getValue(GramCase.NOM) },
+                )
+            },
+        ).toViewModel()
+        put("comparison", JsonArray(comparisonNounIds.mapIndexed { colIndex, id ->
             val noun = nounById(id)
             buildJsonObject {
                 put("title", noun.lemma)
-                GramCase.entries.forEach { gramCase ->
-                    val form = noun.forms.getValue(number).getValue(gramCase)
-                    put(gramCase.name, form)
-                    put("${gramCase.name}pair", pairSnapshot(ContrastPair.generated(
-                        noun.forms.getValue(number).getValue(GramCase.NOM), form)))
+                GramCase.entries.forEachIndexed { rowIndex, gramCase ->
+                    val cell = comparisonTable.rows[rowIndex].cells[colIndex]
+                    put(gramCase.name, cell.value)
+                    put("${gramCase.name}pair", pairSnapshot(requireNotNull(cell.contrast)))
                 }
             }
         }))
@@ -334,12 +389,26 @@ private fun matrixSnapshot(state: AppUiState): JsonElement {
         put("verbTenseLabels", buildJsonObject {
             Tense.entries.forEach { tense -> put(tense.id, referenceVerbTeaching.tenseLabels.getValue(tense).compact) }
         })
-        put("verbsRows", JsonArray(referenceVerbTeaching.subjects.map { subject -> buildJsonObject {
+        val verbTenses = listOf(Tense.PRESENT, Tense.PAST, Tense.FUTURE)
+        val verbLemma = verbs.first { it.id == selection.verbId }.lemma
+        val verbsTable = MatrixTableEngine.build(
+            rowAxis = referenceVerbTeaching.subjects,
+            rowHeaderLabel = "Кто",
+            rowHeader = { it.label.compact },
+            columns = verbTenses.map { tense ->
+                MatrixColumn(
+                    tense.id,
+                    { subject -> verbForm(selection.verbId, tense, subject.person, subject.number, subject.gender(selection.feminineGroup)) },
+                    contrastFrom = { verbLemma },
+                )
+            },
+        ).toViewModel()
+        put("verbsRows", JsonArray(referenceVerbTeaching.subjects.mapIndexed { i, subject -> buildJsonObject {
             put("title", subject.label.compact)
-            listOf(Tense.PRESENT, Tense.PAST, Tense.FUTURE).forEach { tense ->
-                val form = verbForm(selection.verbId, tense, subject.person, subject.number, subject.gender(selection.feminineGroup))
-                put(tense.id, form)
-                put("${tense.id}Pair", pairSnapshot(ContrastPair.generated(verbs.first { it.id == selection.verbId }.lemma, form)))
+            verbTenses.forEachIndexed { colIndex, tense ->
+                val cell = verbsTable.rows[i].cells[colIndex]
+                put(tense.id, cell.value)
+                put("${tense.id}Pair", pairSnapshot(requireNotNull(cell.contrast)))
             }
         } }))
         put("pronounIntro", referencePronounTeaching.compactIntro)
@@ -353,23 +422,48 @@ private fun matrixSnapshot(state: AppUiState): JsonElement {
             put("id", row.id.id)
             put("iosCaption", row.ios)
         } }))
-        put("pronouns", JsonArray(referencePronounTeaching.pronounIds.map { id ->
-            val forms = personalPronouns.getValue(id)
-            buildJsonObject {
+        // The LOC context's own column keeps the raw locative form instead of `context.value`'s
+        // preposition prefix — the same override Android's `androidLine` applies (CourseData.kt)
+        // — so this host-specific choice lives in the column definition, not a second copy of the
+        // table shape; every other context column reads through the pack's own `context.value`.
+        val pronounsTable = MatrixTableEngine.build(
+            rowAxis = referencePronounTeaching.pronounIds,
+            rowHeaderLabel = "Кто",
+            rowHeader = { it },
+            columns = referencePronounTeaching.contexts.map { context ->
+                MatrixColumn(
+                    context.id.id,
+                    { id -> if (context.id == GramCase.LOC) personalPronouns.getValue(id).getValue(GramCase.LOC) else context.value(id, personalPronouns.getValue(id)) },
+                    contrastFrom = { id -> id },
+                )
+            },
+        ).toViewModel()
+        put("pronouns", JsonArray(referencePronounTeaching.pronounIds.mapIndexed { i, id -> buildJsonObject {
             put("title", id)
-            referencePronounTeaching.contexts.forEach { context ->
-                val form = if (context.id == GramCase.LOC) forms.getValue(GramCase.LOC) else context.value(id, forms)
-                put(context.id.id, form)
-                put("${context.id.id}pair", pairSnapshot(ContrastPair.generated(id, form)))
+            referencePronounTeaching.contexts.forEachIndexed { colIndex, context ->
+                val cell = pronounsTable.rows[i].cells[colIndex]
+                put(context.id.id, cell.value)
+                put("${context.id.id}pair", pairSnapshot(requireNotNull(cell.contrast)))
             }
         } }))
-        put("possessives", JsonArray(possessives.map { possessive -> buildJsonObject {
+        val possessivesTable = MatrixTableEngine.build(
+            rowAxis = possessives,
+            rowHeaderLabel = "Кому принадлежит",
+            rowHeader = { it.label },
+            columns = referencePronounTeaching.demo.cases.map { case ->
+                MatrixColumn(
+                    case.id.id,
+                    { p -> referencePronounTeaching.demo.phrase(p.id, case.id) },
+                    contrastFrom = { p -> referencePronounTeaching.demo.phrase(p.id, GramCase.NOM) },
+                )
+            },
+        ).toViewModel()
+        put("possessives", JsonArray(possessives.mapIndexed { i, possessive -> buildJsonObject {
             put("title", possessive.label)
-            referencePronounTeaching.demo.cases.forEach { row ->
-                val phrase = referencePronounTeaching.demo.phrase(possessive.id, row.id)
-                put(row.id.id, phrase)
-                put("${row.id.id}pair", pairSnapshot(ContrastPair.generated(
-                    referencePronounTeaching.demo.phrase(possessive.id, GramCase.NOM), phrase)))
+            referencePronounTeaching.demo.cases.forEachIndexed { colIndex, row ->
+                val cell = possessivesTable.rows[i].cells[colIndex]
+                put(row.id.id, cell.value)
+                put("${row.id.id}pair", pairSnapshot(requireNotNull(cell.contrast)))
             }
         } }))
     }
