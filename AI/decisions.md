@@ -2,6 +2,62 @@
 
 Новые сверху. Формат: решение → почему → где подробно.
 
+## ADR-39 · 2026-09-28 · EnRuAcceptance §7 item 2 (lane-android): cold-start пробует реальную сборку цепочки перед тем, как читать активный пакет — откат вместо краш-цикла
+
+`Plans/Kotlin/EnRuAcceptance-2026-09-28.md` §7 item 1 (генерализация схемы `CoursePack`, ADR-36)
+уже сделала `en-ru` частью `usableCourseSelections` — `AndroidCoursePicker.kt` (данные читает живьём,
+без правок) сам начал показывать «Английский» рядом с «Польский». Живая проверка на `emulator-5554`
+вскрыла именно тот пробел, что ADR-37 уже задокументировала для macOS/iOS (item 2, «не устранено
+здесь», вне разрешённых путей этой лейны): `courses/lang/en/forms.generated.json` содержит только
+формы глаголов — ни noun/adjective/possessive/aux. Выбор «Английский» в Settings сохраняет
+`target=en`/`native=ru`, `restart()` перезапускает процесс, и на холодном старте
+`AndroidSessionViewModel`'s собственный ранний `init` выбирает `en-ru` активным (он проходит
+`usableCourseSelections` — схема парсится) — но `store`'s безусловная сборка (`TrainingStore`'s
+`initialChain = exerciseEngine.generateChain()`) падает: `TableMorphology: no form for
+lexeme="possessive:my" bundle={}` (тот же класс ошибки, что `IosSessionTest`'s уже известный
+разрыв). Без обработки это не деградация, а реальный краш конструктора `ViewModel` — и, что хуже,
+краш-цикл: следующий холодный старт читает тот же персистентный `target=en` и падает снова,
+бесповоротно (без `pm clear`).
+
+Решение (тот же приём, что `MacSession`/`IosSession`'s `rebuildIfCourseSwitched`, ADR-37/38,
+адаптированный под перезапуск-based переключение Android, ADR-30): новый `probeChainBuilds()`
+строит и сразу отбрасывает одну цепочку тем же генератором, что и `newStore()` (без
+`TrainingStore`'s repository/scope — не трогает прогресс), синхронно в раннем `init`-блоке, **до**
+того как `preferences`'s собственный `by mutableStateOf(UserPreferencesV2())`-дефолт впервые
+прочитает `packRegistry.active` (порядок полей в классе — не побочный эффект, а часть исправления:
+более ранняя версия отката в `buildInitialStore()` создавала `store` correctly, но `preferences`'s
+дефолт уже успевал зафиксировать сломанный `target=en` до отката). Провал пробы откатывает
+`packRegistry.active` на `bootPairId` — пакет, реально активный до этой попытки переключения,
+никогда не хардкод `"pl-ru"`. Второй, отдельный слой (та же идея, что ADR-38's
+`packSwitchWarning`): `preferencesStore.load()`'s асинхронная ветка декодирует персистентный
+документ буквально (любой *зарегистрированный* пакет — не обязательно активный), сверяет с реально
+активным пакетом и, если они разошлись, переписывает `preferences`/persisted-документ на реально
+активный и показывает один баннер (`session.notice`, уже существующий UI-механизм в
+`MainActivity.kt`) — «Выбранный курс сейчас недоступен для обучения — включён предыдущий», без
+привязки к конкретному языку (честно, не выдуманный факт про то, что именно сломалось).
+
+Живая проверка на `emulator-5554` (скриншоты `Plans/Kotlin/artifacts/android/en22-*.png` — новые
+этим ADR): чистая установка → «Настройки» показывает «Английский» рядом с «Польский» (впервые,
+`en22-settings-lists-english.png`) → выбор «Английский» перезапускает процесс, **не падает**,
+показывает баннер и возвращается к Training на польском (`en22-rollback-after-select-english.png`)
+→ «Настройки» сразу показывают «Польский» снова, не «Английский» (`en22-settings-self-
+corrected.png`) → принудительная остановка + повторный холодный старт остаётся на польском без
+баннера и без цикла (`en22-relaunch-stays-polish.png`) — персистентный документ реально исправлен
+на диске, не только в памяти.
+
+Не решает контентный пробел (`forms.generated.json` для en) — это, как и в ADR-37, отдельная,
+вне-лейновая задача (content/core), не в разрешённых путях lane-android. После неё
+`probeChainBuilds()` просто перестаёт когда-либо откатывать en-ru — код не меняется.
+
+Где: `kotlin/androidApp/src/main/java/dev/polski/grammarmatrix/AndroidSessionViewModel.kt`,
+`kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidCoursePicker.kt` (KDoc only).
+Тесты: `AndroidSessionViewModelPreferencesTest.aPersistedTargetThatFailsToBuildATrainingChainRollsBackInsteadOfCrashing`
+(RED до правки — `IllegalStateException` строила `AndroidSessionViewModel`; GREEN после).
+
+Проверено: `:androidApp:testDebugUnitTest` (все зелёные, включая новый тест),
+`:androidApp:assembleDebug` — `BUILD SUCCESSFUL`; живой прогон на `emulator-5554` выше.
+`:shared`/`:composeApp` не менялись этой лейной (core-фикс §7 item 1 уже был в `main` при мёрдже).
+
 ## ADR-38 · 2026-09-28 · EnRuAcceptance §7 item 2, коррекция ADR-37 (blocker 2): Settings-снимок сам исправляется после отката пакета тренировочным бриджем
 
 Ревью ADR-37's коммита (7bca546) вскрыло второй пробел вдобавок к уже честно задокументированному

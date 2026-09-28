@@ -20,12 +20,14 @@ private fun languageLabel(code: String): String = languageLabels[code] ?: code
 
 /**
  * EN-22: target/native pickers next to the existing style picker (AndroidStylePicker.kt) — driven
- * by [usableCourseSelections], the packs this build both embeds *and* can safely make active
- * today (see that val's own KDoc — pl-ru only, until a real core gap in [polski.data.CoursePack]'s
- * pl-shaped schema is generalized for a structurally different pack). Never a hand-written
- * language list: a second pack starts showing here the moment it passes that probe, no picker
- * change needed. [selected] is the persisted choice even if it's since fallen out of
- * [usableCourseSelections] (a build downgrade) — it just then renders selected but unlisted.
+ * by [usableCourseSelections], the packs this build both embeds *and* can safely make active today
+ * (see that val's own KDoc). Never a hand-written language list: a pack starts showing here the
+ * moment it passes that probe, no picker change needed — pl-ru and en-ru both do today
+ * (EnRuAcceptance-2026-09-28.md §7 item 1). [selected] is the persisted choice even if it's since
+ * fallen out of [usableCourseSelections] (a build downgrade) — it just then renders selected but
+ * unlisted. A pack listed here can still fail to build a real training chain the moment it's
+ * chosen (item 2's own separate content gap) — `AndroidSessionViewModel` degrades that gracefully
+ * (rolls back, self-corrects Settings), it never reaches this composable as a crash.
  */
 @Composable
 fun AndroidCoursePicker(selectedTarget: String, selectedNative: String, enabled: Boolean, onSelect: (target: String, native: String) -> Unit) {
