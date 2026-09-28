@@ -43,14 +43,32 @@ fun interface TextCase {
 }
 
 /**
+ * EnRuPackPlan.md §5 gap A: a lexical slot [ExerciseGenerator] fills from a pack-level constant
+ * lexeme rather than from the drilled seed (`prep:role`, `aux:do`, `neg:not`, ...) — present in
+ * every phrase when [whenFeature] is `null` (the existing `owner`/`verb` shape, generalized), or
+ * only in the phrases whose own resolved [PhraseSpec.bundle] carries [whenFeature] as one of
+ * [whenValues] (e.g. English's `neg` slot only when `Polarity=Neg`). Presence is therefore decided
+ * per phrase, not once per exercise — two phrases in the same exercise (a chain step's `source`
+ * and `expected`, say) can resolve different bundles and so disagree on whether the slot exists.
+ */
+data class ConstantSlot(
+    val slot: String,
+    val lexeme: String,
+    val whenFeature: String? = null,
+    val whenValues: List<String> = emptyList(),
+)
+
+/**
  * UniversalCorePlan.md §5.1/§5.3/§12 UC-07: the generic replacement for `ExerciseFactory.kt`'s
  * `when(skillId)` branches. [skills] is a language's `curriculum.json` (`SkillSpec`s, UC-06);
  * [recipes] is its `exercise-recipes.json` wiring (this task, [SkillRecipe]); [seeds] is its
  * sentence-seed pool. [defaultOwnerLexeme]/[verbLexeme] are that same file's pack-level defaults
  * (which possessive is the unmarked default owner; which verb a tense skill drills) — a
- * pack-specific content choice, so it is read from data rather than assumed here. Every other
- * dependency is a port — no lexeme text, no copy string and no language-specific rule is ever
- * hardcoded here.
+ * pack-specific content choice, so it is read from data rather than assumed here.
+ * [constantSlots] (EnRuPackPlan.md §5 gap A) adds further pack-constant slots beyond `owner`/
+ * `verb`, each present unconditionally or conditionally per [ConstantSlot]; pl needs none, so the
+ * default is empty and pl's behavior is unchanged. Every other dependency is a port — no lexeme
+ * text, no copy string and no language-specific rule is ever hardcoded here.
  */
 class ExerciseGenerator(
     private val realizer: ConstructionRealizer,
@@ -68,6 +86,7 @@ class ExerciseGenerator(
     private val textCase: TextCase,
     private val defaultOwnerLexeme: String,
     private val verbLexeme: String,
+    private val constantSlots: List<ConstantSlot> = emptyList(),
 ) {
     private fun <T> pick(items: List<T>): T {
         val draw = random.nextDouble()
@@ -96,8 +115,13 @@ class ExerciseGenerator(
     private fun bundleOf(features: Map<String, String>): Map<FeatureKey, FeatureValue> =
         features.entries.associate { (key, value) -> FeatureKey(key) to FeatureValue(value) }
 
+    private fun constantSlotsFor(bundle: Map<String, String>): Map<String, String> = constantSlots
+        .filter { it.whenFeature == null || bundle[it.whenFeature] in it.whenValues }
+        .associate { it.slot to it.lexeme }
+
     private fun resolvePhrase(spec: PhraseSpec, lexicalSlots: Map<String, String>): String {
-        val slots = if (spec.ownerLexeme == null) lexicalSlots else lexicalSlots + ("owner" to spec.ownerLexeme)
+        val withOwner = if (spec.ownerLexeme == null) lexicalSlots else lexicalSlots + ("owner" to spec.ownerLexeme)
+        val slots = withOwner + constantSlotsFor(spec.bundle)
         return realizer.realize(spec.construction, bundleOf(spec.bundle), slots).text
     }
 
