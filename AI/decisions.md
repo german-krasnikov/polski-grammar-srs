@@ -2,6 +2,51 @@
 
 Новые сверху. Формат: решение → почему → где подробно.
 
+## ADR-46 · 2026-09-28 · `LifehackProvider`: пакетный листинг + `hasLifehacks` — `fun interface` → обычный interface
+
+`EnRuPackPlan.md` §4.2/§4.3 предполагала только `forSkill(skillId)` (карточка одного навыка). Для
+пакетной секции «Лайфхаки» (все лайфхаки активного пакета сразу, сгруппированные по навыку/теме) и
+для дешёвого бейджа «есть лайфхак» на лицевой стороне карточки нужны 2 новых метода:
+`hasLifehacks(skillId): Boolean` (по умолчанию `forSkill(id).isNotEmpty()`, у
+`StaticPackLifehackProvider` — собственный дешёвый `any` без сборки списка) и
+`listAll(): List<LifehackGroup>`.
+
+`listAll()` не имеет осмысленного дефолта через один `forSkill` — ему нужен порядок curriculum
+(`polski.data.skills`, то есть порядок `pair.json`'s `skills[]`, не порядок записей в
+`lifehacks.json`) и реальный `title` навыка. Второй абстрактный метод без дефолта — `fun interface`
+(SAM, ровно один абстрактный член) перестаёт компилироваться (`FUN_INTERFACE_WRONG_COUNT_OF_ABSTRACT_MEMBERS`).
+Проверено: ни один вызывающий код в репозитории не создавал `LifehackProvider` через
+SAM-лямбду (`LifehackProvider { ... }`) — единственная реализация (`StaticPackLifehackProvider`) —
+`object`. Смена `fun interface` → `interface` безопасна, ничего не ломает.
+
+Группировка: сначала по навыку (только те, где реально есть лайфхак — не пустая заглушка), в
+порядке curriculum, с реальным `title` навыка; затем кросс-скилловые записи (`skillId == null`,
+`topic` — схема `lifehacks-v1` это резервирует, сегодня ни в pl-ru, ни в en-ru таких записей нет) —
+по алфавиту темы, поскольку curriculum не имеет мнения о порядке тем.
+
+Экспорт: `MacSnapshot.kt`/`IosSnapshot.kt` получили `hasLifehack` в `skills[]` и в `exercise` (для
+бейджа на лицевой стороне до `Reveal`) и новое пакетное поле `lifehackGroups` (skillId/topic/title/
+lifehacks[]) — тем же wire-форматом одного лайфхака, что уже отдаёт `styleBlocks.lifehacks`
+(рефакторинг в общий `lifehackJson`/`lifehacksJsonFor`, чтобы 2 места не расходились). Только данные
+в снапшоте — новый SwiftUI-экран для листинга не входит в эту задачу (Swift `Decodable`-структуры
+не объявляют строгий `CodingKeys`, так что новые ключи в JSON их не ломают).
+
+Проверено: `:shared:desktopTest`/`:shared:macosArm64Test`/`:shared:iosSimulatorArm64Test`/
+`:shared:jsBrowserTest`/`:shared:wasmJsBrowserTest`/`:androidApp:testDebugUnitTest`/
+`:composeApp:desktopTest` — все green (3 новых `LifehackTest` кейса, включая переключение
+pl-ru↔en-ru с восстановлением активного пакета в `finally`, тем же паттерном, что
+`EnRuStudyDirectionTest`). `:composeApp:composeCompatibilityBrowserDistribution` (js+wasm) собран;
+`kotlin-lifehack-block.spec.ts`/`kotlin-en-course-switch.spec.ts` (chromium, js) 7/7 PASS — web не
+затронут содержательно (та же `forSkill`, что раньше). `npm run build` (`course:validate`+`tsc -b`+
+`vite build`) PASS.
+
+Где: `kotlin/shared/src/commonMain/kotlin/polski/presentation/Lifehack.kt`,
+`kotlin/shared/src/commonTest/kotlin/polski/presentation/LifehackTest.kt`,
+`kotlin/shared/src/macosMain/kotlin/polski/macos/MacSnapshot.kt`,
+`kotlin/shared/src/iosMain/kotlin/polski/ios/IosSnapshot.kt`. Не входит: Android/web UI для нового
+листинга/бейджа (данные готовы, хостовый рендер — отдельная задача); полное покрытие всех 16 pl-ru
+skills лайфхаками (§4.4, отдельная задача).
+
 ## ADR-45 · 2026-09-28 · GitHub Pages публикует Kotlin web; React — по /react/
 По решению пользователя сайт https://german-krasnikov.github.io/polski-grammar-srs/ собирается из Kotlin (`composeCompatibilityBrowserDistribution`, JS + Wasm) в `deploy.yml`; React-сборка публикуется рядом по `/react/` как копия для отката. Перед публикацией CI прогоняет `npm test` и проверку курса.
 Почему: переход на Kotlin завершён (ADR-5), вся новая функциональность (en-ru, 4 стиля, новые карточки) есть только в Kotlin-версии.

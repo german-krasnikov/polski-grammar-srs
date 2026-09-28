@@ -104,6 +104,17 @@ internal fun snapshot(state: AppUiState): String = buildJsonObject {
     put("skills", JsonArray(skills.map { skill -> buildJsonObject {
         put("id", skill.id); put("title", skill.title); put("group", skill.group)
         put("level", skill.level); put("formula", skill.formula); put("theory", skill.theory)
+        put("hasLifehack", StaticPackLifehackProvider.hasLifehacks(skill.id))
+    } }))
+    // EnRuPackPlan.md §4.3's pack-wide "Лайфхаки" listing (not the per-skill card block below,
+    // which stays inside styleBlocksSnapshot) — every skill/topic the active pack's own
+    // lifehacks.json actually covers, in curriculum order, so a settings/reference screen can
+    // draw one section without recomputing the grouping itself.
+    put("lifehackGroups", JsonArray(StaticPackLifehackProvider.listAll().map { group -> buildJsonObject {
+        put("skillId", group.skillId?.let(::JsonPrimitive) ?: JsonNull)
+        put("topic", group.topic?.let(::JsonPrimitive) ?: JsonNull)
+        put("title", group.title)
+        put("lifehacks", lifehacksJsonFor(group.lifehacks))
     } }))
     put("chainAnswers", JsonArray(if (state.phase == CardPhase.ChainComplete) state.chain.map { JsonPrimitive(it.expected) } else emptyList()))
     put("exercise", state.exercise?.let { exercise -> buildJsonObject {
@@ -113,6 +124,10 @@ internal fun snapshot(state: AppUiState): String = buildJsonObject {
         put("skillId", exercise.primarySkill)
         put("skillTitle", skillById(exercise.primarySkill).title)
         put("skillLevel", skillById(exercise.primarySkill).level)
+        // EnRuPackPlan.md §4.2: cheap enough to compute even on the front (unrevealed) face — a
+        // front-side badge can hint "this skill has a lifehack" before the back's own full list
+        // (styleBlocksSnapshot's "lifehacks") ever renders.
+        put("hasLifehack", StaticPackLifehackProvider.hasLifehacks(exercise.primarySkill))
         put("source", exercise.source)
         put("sourceParts", JsonArray(sentenceHighlightParts(exercise.source, exercise.changes, ChangeSide.Before).map { part -> buildJsonObject {
             put("text", part.text); put("changed", part.isChanged)
@@ -223,8 +238,12 @@ private fun styleBlocksSnapshot(state: AppUiState): JsonElement {
  *  inside either. Empty for a skill with no authored tip (`StaticPackLifehackProvider.forSkill`),
  *  and [FlashCardView]'s renderer must skip the section entirely on empty, never draw an empty
  *  frame — the same rule `LifehackWeb.kt`'s `renderLifehackBlock` already follows. */
-private fun lifehacksSnapshot(skillId: String): JsonElement =
-    JsonArray(StaticPackLifehackProvider.forSkill(skillId).map { hack -> buildJsonObject {
+private fun lifehacksSnapshot(skillId: String): JsonElement = lifehacksJsonFor(StaticPackLifehackProvider.forSkill(skillId))
+
+/** Shared by the per-skill back-face block above and [lifehackGroups]'s pack-wide listing — one
+ *  wire shape for a [polski.presentation.Lifehack], so the two never drift apart. */
+private fun lifehacksJsonFor(hacks: List<polski.presentation.Lifehack>): JsonArray =
+    JsonArray(hacks.map { hack -> buildJsonObject {
         put("id", hack.id)
         put("text", hack.text)
         put("citation", hack.source.citation)
