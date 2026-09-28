@@ -52,13 +52,21 @@ private fun activePackLanguages(): ActivePackLanguages {
     return ActivePackLanguages(pack?.target ?: "pl", pack?.native ?: "ru")
 }
 
+/** EnRuAcceptance-2026-09-28.md §7 item 4: the active pack's own two [StudyDirection]s — was a
+ *  hardcoded [StudyDirection.RussianToPolish]/[PolishToRussian] pair everywhere below, so switching
+ *  Settings to en-ru still saved/rated cards under pl-ru's own direction wires. Generalizes via
+ *  [StudyDirection.nativeToTarget]/[targetToNative] (pl-ru's own pair, byte-identical, is exactly
+ *  what those two produce for target="pl"/native="ru"). */
+private fun ActivePackLanguages.nativeToTarget() = StudyDirection.nativeToTarget(targetCode, nativeCode)
+private fun ActivePackLanguages.targetToNative() = StudyDirection.targetToNative(targetCode, nativeCode)
+
 /** Browser adapter for the shared vocabulary document; it never writes legacy grammar progress. */
 internal class VocabularyWebController {
     private val scheduler = FsrsScheduler()
     private var document: VocabularyDocument = VocabularyDocument()
     private var recoveryRaw: String? = null
     private var error: String? = null
-    private var direction = StudyDirection.RussianToPolish
+    private var direction = activePackLanguages().nativeToTarget()
     private var filter = "A1"
     private var catalogVisible = true
     // v4/UX4-20: true only for the render() call right after the catalog toggle button was
@@ -125,7 +133,7 @@ internal class VocabularyWebController {
      *  must NOT touch (a plain storage-event reload keeps whichever card/direction is on screen). */
     private fun reloadForActivePack() {
         loadedForPackId = activeCoursePackId
-        direction = StudyDirection.RussianToPolish
+        direction = activePackLanguages().nativeToTarget()
         revealed = false; flipped = false; flippedItemId = null; draft = ""
         reload()
     }
@@ -158,13 +166,15 @@ internal class VocabularyWebController {
             add("p", "Отмечай слова в каталоге. Узнавание и воспроизведение повторяются по отдельным расписаниям.")
         }
         val languages = activePackLanguages()
+        val forward = languages.nativeToTarget()
+        val backward = languages.targetToNative()
         val directionLabel = heading.add("label", "Направление")
         val directionSelect = directionLabel.select("Направление карточки", listOf(
-            StudyDirection.RussianToPolish.wire to "${languages.nativeAdjective.replaceFirstChar(Char::uppercase)} → ${languages.targetAdjective}",
-            StudyDirection.PolishToRussian.wire to "${languages.targetAdjective.replaceFirstChar(Char::uppercase)} → ${languages.nativeAdjective}",
+            forward.wire to "${languages.nativeAdjective.replaceFirstChar(Char::uppercase)} → ${languages.targetAdjective}",
+            backward.wire to "${languages.targetAdjective.replaceFirstChar(Char::uppercase)} → ${languages.nativeAdjective}",
         ), direction.wire)
         directionSelect.addEventListener("change", {
-            direction = if (directionSelect.value == "pl-ru") StudyDirection.PolishToRussian else StudyDirection.RussianToPolish
+            direction = if (directionSelect.value == backward.wire) backward else forward
             revealed = false; draft = ""; refresh()
         })
         error?.let { page.add("p", it, "notice").setAttribute("role", "alert") }
@@ -215,10 +225,11 @@ internal class VocabularyWebController {
         // is the mouse/touch convenience that reveals from a click anywhere else on the card, and
         // is not itself an accessibility affordance (it excludes editable/button descendants via
         // `installTapGesture`'s own `editableTarget` guard, same as training's question card).
+        val isNativeToTarget = direction == languages.nativeToTarget()
         val promptBlock = front.add("div", cls = "vocabulary-prompt-block")
-        promptBlock.add("span", "Вспомни ${if (direction == StudyDirection.RussianToPolish) languages.targetAdverb else languages.nativeAdverb}", "eyebrow")
-        promptBlock.add("p", if (direction == StudyDirection.RussianToPolish) item.translation else item.lemma, "vocabulary-prompt")
-            .setAttribute("lang", if (direction == StudyDirection.RussianToPolish) languages.nativeLang else languages.targetLang)
+        promptBlock.add("span", "Вспомни ${if (isNativeToTarget) languages.targetAdverb else languages.nativeAdverb}", "eyebrow")
+        promptBlock.add("p", if (isNativeToTarget) item.translation else item.lemma, "vocabulary-prompt")
+            .setAttribute("lang", if (isNativeToTarget) languages.nativeLang else languages.targetLang)
         if (!revealed) {
             // UX5: no "Показать ответ" button in oral mode any more — the whole card reveals on a
             // click/tap (installTapGesture below) or Space (VocabularyWebController.spaceReveal);
@@ -279,9 +290,10 @@ internal class VocabularyWebController {
     }
 
     private fun renderRevealedAnswer(flip: HTMLElement, answer: HTMLElement, outerRoot: HTMLElement, item: VocabularyItem, swipeRatingEnabled: Boolean, languages: ActivePackLanguages, refresh: () -> Unit) {
-        answer.add("span", "Эталон · ${if (direction == StudyDirection.RussianToPolish) languages.targetAdjective else languages.nativeAdjective}", "eyebrow")
-        answer.add("p", if (direction == StudyDirection.RussianToPolish) item.lemma else item.translation)
-            .setAttribute("lang", if (direction == StudyDirection.RussianToPolish) languages.targetLang else languages.nativeLang)
+        val isNativeToTarget = direction == languages.nativeToTarget()
+        answer.add("span", "Эталон · ${if (isNativeToTarget) languages.targetAdjective else languages.nativeAdjective}", "eyebrow")
+        answer.add("p", if (isNativeToTarget) item.lemma else item.translation)
+            .setAttribute("lang", if (isNativeToTarget) languages.targetLang else languages.nativeLang)
         val description = answer.add("dl")
         description.detail("Перевод", item.translation)
         description.detail("Форма", item.form, languages.targetLang)

@@ -37,6 +37,14 @@ data class StudyDirection(val wire: String) {
     companion object {
         val RussianToPolish = StudyDirection("ru-pl")
         val PolishToRussian = StudyDirection("pl-ru")
+
+        /** Generalizes [RussianToPolish]/[PolishToRussian] (themselves this exact pair for pl-ru's
+         *  own native="ru"/target="pl") to any pack's own (target, native) codes —
+         *  EnRuAcceptance-2026-09-28.md §7 item 4: a second pack's UI needs no new named
+         *  [StudyDirection] constants of its own, just its [polski.data.CoursePack.targetLanguage]/
+         *  [polski.data.CoursePack.nativeLanguage]. */
+        fun nativeToTarget(target: String, native: String) = StudyDirection("$native-$target")
+        fun targetToNative(target: String, native: String) = StudyDirection("$target-$native")
     }
 }
 
@@ -117,8 +125,10 @@ object VocabularyCodec {
         }
         require(document.selectedIds.distinct().size == document.selectedIds.size)
         require(document.selectedIds.all { item(document, it) != null })
-        val pairId = packRegistry.active.pairId
-        require(document.cards.keys.all { it.startsWith("$pairId:vocabulary:ru-pl:") || it.startsWith("$pairId:vocabulary:pl-ru:") })
+        val pack = packRegistry.active
+        val forward = StudyDirection.nativeToTarget(pack.targetLanguage, pack.nativeLanguage).wire
+        val backward = StudyDirection.targetToNative(pack.targetLanguage, pack.nativeLanguage).wire
+        require(document.cards.keys.all { it.startsWith("${pack.pairId}:vocabulary:$forward:") || it.startsWith("${pack.pairId}:vocabulary:$backward:") })
         return document
     }
 

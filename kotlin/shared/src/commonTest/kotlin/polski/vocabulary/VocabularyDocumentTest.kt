@@ -181,4 +181,30 @@ class VocabularyDocumentTest {
         }
         assertEquals("polski-vocabulary-pl-ru-v1", VocabularyCodec.key)
     }
+
+    /** EnRuAcceptance-2026-09-28.md §7 item 4: [validate] hardcoded pl-ru's own "ru-pl"/"pl-ru"
+     *  direction wires, so a review under any other pack's own directions (en-ru's "ru-en"/"en-ru")
+     *  failed `require` even though [StudyDirection] itself has been open-typed since EN-09 — the
+     *  UI had nowhere safe to route a non-pl-ru direction to. [StudyDirection.nativeToTarget]/
+     *  [StudyDirection.targetToNative] generalize [StudyDirection.RussianToPolish]/[PolishToRussian]
+     *  (themselves that exact pair for pl-ru's own native=ru/target=pl) to any pack. */
+    @Test
+    fun reviewsAndRoundTripsUnderANonPlRuActivePacksOwnDirections() {
+        try {
+            polski.data.selectCoursePack("en-ru")
+            val pack = polski.data.packRegistry.active
+            val forward = StudyDirection.nativeToTarget(pack.targetLanguage, pack.nativeLanguage)
+            val backward = StudyDirection.targetToNative(pack.targetLanguage, pack.nativeLanguage)
+            assertEquals("ru-en", forward.wire)
+            assertEquals("en-ru", backward.wire)
+            val selected = VocabularyCodec.select(VocabularyDocument(), "noun.wife", true)
+            val reviewed = VocabularyCodec.review(selected, "noun.wife", forward, Rating.Good, scheduler, at)
+            assertEquals(1, reviewed.cards.getValue(VocabularyCodec.cardKey("noun.wife", forward)).reps)
+            assertEquals(reviewed, VocabularyCodec.decode(VocabularyCodec.encode(reviewed)))
+            val alsoBackward = VocabularyCodec.review(reviewed, "noun.wife", backward, Rating.Good, scheduler, at)
+            assertEquals(alsoBackward, VocabularyCodec.decode(VocabularyCodec.encode(alsoBackward)))
+        } finally {
+            polski.data.selectCoursePack("pl-ru")
+        }
+    }
 }

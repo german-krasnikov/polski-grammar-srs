@@ -86,18 +86,90 @@ test('Vocabulary direction picker follows the active pack, and switching back to
   await page.getByRole('button', { name: 'Открыть словарь и импорт или экспорт JSON' }).click();
   await expect(page).toHaveURL(/#\/vocabulary$/);
   const direction = page.getByRole('combobox', { name: 'Направление карточки' });
-  expect(await direction.locator('option').allTextContents()).toEqual(['Русский → английский', 'Английский → русский']);
+  // UX5's route slide defers the incoming route's own DOM (a macrotask plus two rAFs, see
+  // TrainingWebApp.kt's `commitRouteBookkeeping`/`slider.start` doc comment) past the moment the
+  // URL itself updates — `toHaveText` polls until the slide settles and the real options land,
+  // where a one-shot `allTextContents()` right after `toHaveURL` could read the still-empty select.
+  await expect(direction.locator('option')).toHaveText(['Русский → английский', 'Английский → русский']);
 
   await page.getByRole('button', { name: 'Настройки' }).click();
   await expect(page).toHaveURL(/#\/settings$/);
   await page.getByRole('combobox', { name: 'Изучаемый язык' }).selectOption('pl');
   await page.getByRole('button', { name: 'Открыть словарь и импорт или экспорт JSON' }).click();
   await expect(page).toHaveURL(/#\/vocabulary$/);
-  expect(await page.getByRole('combobox', { name: 'Направление карточки' }).locator('option').allTextContents())
-    .toEqual(['Русский → польский', 'Польский → русский']);
+  await expect(page.getByRole('combobox', { name: 'Направление карточки' }).locator('option'))
+    .toHaveText(['Русский → польский', 'Польский → русский']);
 
   await page.getByRole('button', { name: 'Карточки' }).click();
   await expect(page).toHaveURL(/#\/training$/);
   await continueIntroductionIfPresent(page);
   await expect(page.locator('.source-sentence')).toHaveAttribute('lang', 'pl');
+});
+
+// EnRuAcceptance-2026-09-28.md §7 item 4: the direction picker's OWN options already followed the
+// active pack (the test above), but [StudyDirection] itself stayed hardcoded to
+// RussianToPolish/PolishToRussian everywhere the card actually reads/writes — selecting either
+// en-ru option still saved/rated under pl-ru's own "ru-pl"/"pl-ru" wire. Proves the whole real user
+// flow (catalog selection, flip/reveal, swipe rating) works for en-ru's own two directions and pl-ru
+// stays untouched — not just that the select shows the right labels.
+test('Vocabulary catalog selection, flip/reveal and swipe rating work end to end for en-ru; pl-ru is untouched', async ({ page }) => {
+  await page.goto('/#/settings');
+  await page.getByRole('combobox', { name: 'Изучаемый язык' }).selectOption('en');
+  await page.getByRole('button', { name: 'Открыть словарь и импорт или экспорт JSON' }).click();
+  await expect(page).toHaveURL(/#\/vocabulary$/);
+
+  const catalogRow = page.locator('.catalog-row').first();
+  await expect(catalogRow).toBeVisible();
+  const lemma = (await catalogRow.locator('b').textContent())!;
+  await catalogRow.getByRole('checkbox').check();
+
+  // Forward (ru→en): prompt is Russian, revealed answer is the English lemma just selected.
+  const card = page.getByRole('region', { name: 'Карточка слова' });
+  await expect(card).toBeVisible();
+  await expect(page.locator('.vocabulary-prompt')).toHaveAttribute('lang', 'ru');
+  await page.getByRole('button', { name: 'Показать ответ' }).click();
+  const answer = page.locator('.vocabulary-answer p').first();
+  await expect(answer).toHaveAttribute('lang', 'en');
+  await expect(answer).toHaveText(lemma);
+
+  // Real 3D flip (v3/B) — clicking the revealed face toggles which side faces forward, purely
+  // visually, the same FlipCard the training card's own flip uses.
+  const flip = page.locator('.card-flip');
+  const inner = flip.locator('.card-flip-inner');
+  const beforeFlip = await inner.evaluate(el => (el as HTMLElement).style.transform);
+  await flip.click();
+  await expect.poll(() => inner.evaluate(el => (el as HTMLElement).style.transform)).not.toBe(beforeFlip);
+  await flip.click();
+  await expect.poll(() => inner.evaluate(el => (el as HTMLElement).style.transform)).toBe(beforeFlip);
+
+  // Swipe right on the flip zone (vocabulary's own swipe surface, see installSwipeCard's doc
+  // comment) rates "Вспомнил" — same >75px rightward drag kotlin-preferences-settings.spec.ts's
+  // grammar swipe test already uses, dispatched as a touch pointer sequence.
+  await flip.dispatchEvent('pointerdown', { clientX: 100, clientY: 100, pointerId: 1, pointerType: 'touch', isPrimary: true });
+  await flip.dispatchEvent('pointerup', { clientX: 260, clientY: 102, pointerId: 1, pointerType: 'touch', isPrimary: true });
+
+  // installSwipeCard commits the rating only after its own fly-out transition (220ms, see
+  // SWIPE_COMMIT_TRANSITION_MS) — wait for the card itself to leave the revealed face rather than
+  // reading localStorage before that timeout has fired.
+  await expect(page.locator('.vocabulary-answer')).toHaveCount(0);
+  const afterForward = await page.evaluate(() => JSON.parse(localStorage.getItem('polski-vocabulary-en-ru-v1')!));
+  const forwardKey = Object.keys(afterForward.cards).find(key => key.startsWith('en-ru:vocabulary:ru-en:'));
+  expect(forwardKey).toBeDefined();
+  expect(afterForward.cards[forwardKey!].reps).toBe(1);
+
+  // Backward (en→ru): switch direction, reveal, rate with the explicit button this time.
+  await page.getByRole('combobox', { name: 'Направление карточки' }).selectOption('en-ru');
+  await expect(page.locator('.vocabulary-prompt')).toHaveAttribute('lang', 'en');
+  await page.getByRole('button', { name: 'Показать ответ' }).click();
+  await expect(page.locator('.vocabulary-answer p').first()).toHaveAttribute('lang', 'ru');
+  await page.getByRole('button', { name: 'Вспомнил' }).click();
+
+  const afterBoth = await page.evaluate(() => JSON.parse(localStorage.getItem('polski-vocabulary-en-ru-v1')!));
+  const backwardKey = Object.keys(afterBoth.cards).find(key => key.startsWith('en-ru:vocabulary:en-ru:'));
+  expect(backwardKey).toBeDefined();
+  expect(afterBoth.cards[backwardKey!].reps).toBe(1);
+  expect(Object.keys(afterBoth.cards)).toHaveLength(2);
+
+  // pl-ru's own document was never touched by any of the above.
+  expect(await page.evaluate(() => localStorage.getItem('polski-vocabulary-pl-ru-v1'))).toBeNull();
 });
