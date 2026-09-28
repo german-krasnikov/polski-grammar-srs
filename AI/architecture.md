@@ -5,6 +5,11 @@
 Kotlin Multiplatform: общее ядро + нативный UI на каждой платформе. React-версия (`src/`) — исторический эталон, переход на Kotlin завершён.
 
 ```text
+courses/core/*.json, courses/lang/pl/{lang,lexicon}.json, courses/pairs/pl-ru/pair.json   schema v2 (UC-12) — механическое
+  разбиение courses/pl-ru/course.json (scripts/migrate-v1-to-v2.mjs) + формализация уже существующих Construction/
+  template-op/exercise-kind фактов; validate-pack-v2.mjs — cross-checks §8.2. course.json НЕ переехал/не удалён (план §6) —
+  остаётся живым входом для Gradle/React ниже; Kotlin-загрузчик v2-слоёв («CoursePackLoader») не построен — план §6/
+  kotlin/pack-format/.../CoursePackSource.kt
 courses/*/course.json ──(build: generateCoursePackSource scans courses/*, UC-02)──► kotlin/shared (через :pack-format CoursePackSource)
 courses/lang/<code>/curriculum.json ──(тот же generateCoursePackSource, сканирует courses/lang/*, UC-06)──► polski.training.plCurriculum ──► polski.core.plExerciseGenerator (UC-08, живой путь)
 kotlin/build-logic         convention-плагин polski.kmp-common — 7 KMP-таргетов для новых :core-* модулей

@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Pair pack (pair.json) v1",
+  "$comment": "UniversalCorePlan.md §3.1/§6/§12 UC-12: pair.json is course-pack-v1.schema.json's fields minus lang/<code>/lexicon.json's (nouns/adjectives/verbs/personalPronouns/possessives/morphology/stemAlternations) — the pl-ru pair's own copy, skills content, reference/training screens and vocabulary. This schema checks the layer's own shape; scripts/validate-pack-v2.mjs additionally reconstructs the full v1 pack (lexicon + pair) and revalidates it against course-pack-v1.schema.json plus validateCoursePack's existing invariants, so nothing here duplicates or drifts from that stricter, already-tested check.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion", "id", "targetLanguage", "nativeLanguage", "title",
+    "training", "reference", "skills", "sentenceSeeds", "caseSentencePrefixes",
+    "exerciseCopy", "exercisePatterns", "vocabulary", "contentVersion", "attribution"
+  ],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "id": { "type": "string", "minLength": 1 },
+    "targetLanguage": { "type": "string", "minLength": 1 },
+    "nativeLanguage": { "type": "string", "minLength": 1 },
+    "title": { "type": "string", "minLength": 1 },
+    "contentVersion": { "type": "integer", "minimum": 1 },
+    "attribution": { "type": "string", "minLength": 1 },
+    "training": { "type": "object" },
+    "reference": { "type": "object" },
+    "skills": { "type": "array", "minItems": 1, "items": { "type": "object" } },
+    "sentenceSeeds": { "type": "array" },
+    "caseSentencePrefixes": { "type": "object" },
+    "exerciseCopy": { "type": "object" },
+    "exercisePatterns": { "type": "object" },
+    "vocabulary": { "type": "object" }
+  }
+}

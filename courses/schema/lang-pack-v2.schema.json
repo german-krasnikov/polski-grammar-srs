@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Language profile (lang.json) v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "code", "usesFeatures", "answerPolicy"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "$comment": { "type": "string" },
+    "code": { "type": "string", "pattern": "^[a-z]{2,3}$" },
+    "usesFeatures": {
+      "description": "Subset of core/features.json's keys this language's curriculum/realization actually reference — validate-pack-v2.mjs checks every curriculum focus/fixed key against this list.",
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "type": "string" }
+    },
+    "case": {
+      "description": "Case values this language declines by, in the language's own vocabulary (empty for a caseless language, e.g. hypothetical en/zh).",
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string" }
+    },
+    "answerPolicy": {
+      "description": "core/model's AnswerInput variants this language accepts today. Only 'typed' exists until AnswerInput.Spoken (UniversalCorePlan.md §5.4) is wired to a real provider.",
+      "type": "string",
+      "enum": ["typed"]
+    }
+  }
+}

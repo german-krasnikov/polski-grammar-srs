@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "$comment": "UniversalCorePlan.md §5.2/§10.3/§12 UC-12: the hard ~10-operator ceiling for the realization template language. `implemented: true` means kotlin/core-engine/src/commonMain/kotlin/polski/core/engine/ConstructionRealizer.kt actually applies that operator today (verified by reading the file, not inferred); `false` is reserved for a language that needs it — adding an 11th key here without an ADR is exactly the risk §10.3 flags.",
+  "ops": {
+    "order": { "implemented": true, "description": "A construction's slot sequence (ConstructionTemplate.slots, in list order)." },
+    "when": { "implemented": true, "description": "Single-condition `FeatureKey=value` guard used by `gov`/`agree`'s siblings (govWhen, requiredFeaturesWhen)." },
+    "agree": { "implemented": true, "description": "A slot borrows another slot's lexeme-inherent feature (SlotTemplate.agreementSource), e.g. adjective agreeing with noun Gender." },
+    "gov": { "implemented": true, "description": "Government: a fixed or conditional feature value applied to the whole construction (ConstructionTemplate.govFeature/govDefault/govWhen), e.g. pl negation governing object Case." },
+    "optional": { "implemented": true, "description": "A slot that may be absent from the realized sentence (SlotTemplate.optional)." },
+    "periphrasis": { "implemented": false, "description": "An analytic multi-word form (pl będę+infinitive, en do-support) — not yet a ConstructionRealizer operator; pl's future tense is handled by an authored exercise-recipes.json override instead." },
+    "prependAppend": { "implemented": false, "description": "Prepend/append a fixed particle to a slot's text (e.g. a negation 'nie') — not yet implemented; pl's negation instead governs Case via `gov`." },
+    "rewrite": { "implemented": false, "description": "A phonological rewrite rule (pl consonant softening, tr vowel harmony) — not yet implemented; pl's stem alternations are still authored per-lexeme, not as a rewrite rule." },
+    "alt": { "implemented": false, "description": "A closed set of alternative realizations to choose from — not yet implemented." },
+    "punct": { "implemented": false, "description": "Construction-level terminal punctuation (e.g. a question mark) — not yet implemented; pl's punctuation is still an authored copy-key." }
+  }
+}

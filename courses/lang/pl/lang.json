@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 1,
+  "$comment": "UniversalCorePlan.md §3.1/§12 UC-12: pl's language profile — which core/features.json keys pl's curriculum/realization actually use, and pl's own Case value vocabulary (courses/lang/pl/curriculum.json's literal focus/fixed strings, not kotlin/model/Grammar.kt's separate lowercase GramCase ids).",
+  "code": "pl",
+  "usesFeatures": ["Case", "Number", "Person", "Tense", "Polarity", "Mood"],
+  "case": ["Nom", "Gen", "Dat", "Acc", "Inst", "Loc", "Voc"],
+  "answerPolicy": "typed"
+}

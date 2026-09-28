@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "$comment": "UniversalCorePlan.md §2/§12 UC-12: the 6 CoreStructure ids pl-ru's 16 skills reduce to, verbatim from §2's table, plus core.composite. `axis` names the core/features.json key a construction's skills typically focus on; null when there is none (core.agreement.possessive changes the owner lexeme, not a feature value; core.composite has no single axis of its own). scripts/validate-pack-v2.mjs checks every curriculum skill's `construction` against this file's keys — a construction need not have a lang/pl/realization.json template (core.composite/core.sentence.mood are handled by exercise-recipes.json overrides instead, per §5.2's `overrides` escape hatch).",
+  "constructions": {
+    "core.argument.case-role": {
+      "axis": "Case",
+      "description": { "ru": "Падеж аргумента предложения (или семантическая роль в языках без падежей).", "en": "An argument's case (or semantic role in a caseless language)." }
+    },
+    "core.verb.tense": {
+      "axis": "Tense",
+      "description": { "ru": "Время глагола.", "en": "Verb tense." }
+    },
+    "core.sentence.polarity": {
+      "axis": "Polarity",
+      "description": { "ru": "Утверждение/отрицание предложения (в pl — родительный падеж дополнения при отрицании).", "en": "Sentence polarity (pl: negation flips the object's case to genitive)." }
+    },
+    "core.sentence.mood": {
+      "axis": "Mood",
+      "description": { "ru": "Тип предложения: утверждение или общий вопрос.", "en": "Sentence mood: declarative or yes/no question." }
+    },
+    "core.agreement.possessive": {
+      "axis": null,
+      "description": { "ru": "Владелец и согласование притяжательного/прилагательного с существительным.", "en": "The owner, and agreement of the possessive/adjective with the noun." }
+    },
+    "core.number": {
+      "axis": "Number",
+      "description": { "ru": "Число (единственное/множественное).", "en": "Grammatical number (singular/plural)." }
+    },
+    "core.composite": {
+      "axis": null,
+      "composesOf": [],
+      "description": { "ru": "Составной тип: ссылается на ≥2 структур (цепочка/`mixed`); pl-ru реализует состав через `chain`/лексический фокус в lang/pl/exercise-recipes.json, а не статический список здесь (UniversalCorePlan.md §10, риск 1, не решён).", "en": "Composite type referencing >=2 structures (a chain, or 'mixed'); pl-ru resolves the actual composition through lang/pl/exercise-recipes.json's `chain`, not a static list here (open risk, §10.1)." }
+    }
+  }
+}

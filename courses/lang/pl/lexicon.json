@@ -1,0 +1,1796 @@
+{
+  "schemaVersion": 1,
+  "nouns": [
+    {
+      "id": "wife",
+      "lemma": "żona",
+      "meaning": "жена",
+      "gender": "f",
+      "forms": {
+        "sg": {
+          "nom": "żona",
+          "gen": "żony",
+          "dat": "żonie",
+          "acc": "żonę",
+          "inst": "żoną",
+          "loc": "żonie",
+          "voc": "żono"
+        },
+        "pl": {
+          "nom": "żony",
+          "gen": "żon",
+          "dat": "żonom",
+          "acc": "żony",
+          "inst": "żonami",
+          "loc": "żonach",
+          "voc": "żony"
+        }
+      }
+    },
+    {
+      "id": "woman",
+      "lemma": "kobieta",
+      "meaning": "женщина",
+      "gender": "f",
+      "forms": {
+        "sg": {
+          "nom": "kobieta",
+          "gen": "kobiety",
+          "dat": "kobiecie",
+          "acc": "kobietę",
+          "inst": "kobietą",
+          "loc": "kobiecie",
+          "voc": "kobieto"
+        },
+        "pl": {
+          "nom": "kobiety",
+          "gen": "kobiet",
+          "dat": "kobietom",
+          "acc": "kobiety",
+          "inst": "kobietami",
+          "loc": "kobietach",
+          "voc": "kobiety"
+        }
+      }
+    },
+    {
+      "id": "book",
+      "lemma": "książka",
+      "meaning": "книга",
+      "gender": "f",
+      "forms": {
+        "sg": {
+          "nom": "książka",
+          "gen": "książki",
+          "dat": "książce",
+          "acc": "książkę",
+          "inst": "książką",
+          "loc": "książce",
+          "voc": "książko"
+        },
+        "pl": {
+          "nom": "książki",
+          "gen": "książek",
+          "dat": "książkom",
+          "acc": "książki",
+          "inst": "książkami",
+          "loc": "książkach",
+          "voc": "książki"
+        }
+      }
+    },
+    {
+      "id": "work",
+      "lemma": "praca",
+      "meaning": "работа",
+      "gender": "f",
+      "forms": {
+        "sg": {
+          "nom": "praca",
+          "gen": "pracy",
+          "dat": "pracy",
+          "acc": "pracę",
+          "inst": "pracą",
+          "loc": "pracy",
+          "voc": "praco"
+        },
+        "pl": {
+          "nom": "prace",
+          "gen": "prac",
+          "dat": "pracom",
+          "acc": "prace",
+          "inst": "pracami",
+          "loc": "pracach",
+          "voc": "prace"
+        }
+      }
+    },
+    {
+      "id": "husband",
+      "lemma": "mąż",
+      "meaning": "муж",
+      "gender": "m-personal",
+      "forms": {
+        "sg": {
+          "nom": "mąż",
+          "gen": "męża",
+          "dat": "mężowi",
+          "acc": "męża",
+          "inst": "mężem",
+          "loc": "mężu",
+          "voc": "mężu"
+        },
+        "pl": {
+          "nom": "mężowie",
+          "gen": "mężów",
+          "dat": "mężom",
+          "acc": "mężów",
+          "inst": "mężami",
+          "loc": "mężach",
+          "voc": "mężowie"
+        }
+      }
+    },
+    {
+      "id": "friendM",
+      "lemma": "kolega",
+      "meaning": "коллега",
+      "gender": "m-personal",
+      "forms": {
+        "sg": {
+          "nom": "kolega",
+          "gen": "kolegi",
+          "dat": "koledze",
+          "acc": "kolegę",
+          "inst": "kolegą",
+          "loc": "koledze",
+          "voc": "kolego"
+        },
+        "pl": {
+          "nom": "koledzy",
+          "gen": "kolegów",
+          "dat": "kolegom",
+          "acc": "kolegów",
+          "inst": "kolegami",
+          "loc": "kolegach",
+          "voc": "koledzy"
+        }
+      }
+    },
+    {
+      "id": "son",
+      "lemma": "syn",
+      "meaning": "сын",
+      "gender": "m-personal",
+      "forms": {
+        "sg": {
+          "nom": "syn",
+          "gen": "syna",
+          "dat": "synowi",
+          "acc": "syna",
+          "inst": "synem",
+          "loc": "synu",
+          "voc": "synu"
+        },
+        "pl": {
+          "nom": "synowie",
+          "gen": "synów",
+          "dat": "synom",
+          "acc": "synów",
+          "inst": "synami",
+          "loc": "synach",
+          "voc": "synowie"
+        }
+      }
+    },
+    {
+      "id": "dog",
+      "lemma": "pies",
+      "meaning": "собака",
+      "gender": "m-animate",
+      "forms": {
+        "sg": {
+          "nom": "pies",
+          "gen": "psa",
+          "dat": "psu",
+          "acc": "psa",
+          "inst": "psem",
+          "loc": "psie",
+          "voc": "psie"
+        },
+        "pl": {
+          "nom": "psy",
+          "gen": "psów",
+          "dat": "psom",
+          "acc": "psy",
+          "inst": "psami",
+          "loc": "psach",
+          "voc": "psy"
+        }
+      }
+    },
+    {
+      "id": "cat",
+      "lemma": "kot",
+      "meaning": "кот",
+      "gender": "m-animate",
+      "forms": {
+        "sg": {
+          "nom": "kot",
+          "gen": "kota",
+          "dat": "kotu",
+          "acc": "kota",
+          "inst": "kotem",
+          "loc": "kocie",
+          "voc": "kocie"
+        },
+        "pl": {
+          "nom": "koty",
+          "gen": "kotów",
+          "dat": "kotom",
+          "acc": "koty",
+          "inst": "kotami",
+          "loc": "kotach",
+          "voc": "koty"
+        }
+      }
+    },
+    {
+      "id": "car",
+      "lemma": "samochód",
+      "meaning": "машина",
+      "gender": "m-inanimate",
+      "forms": {
+        "sg": {
+          "nom": "samochód",
+          "gen": "samochodu",
+          "dat": "samochodowi",
+          "acc": "samochód",
+          "inst": "samochodem",
+          "loc": "samochodzie",
+          "voc": "samochodzie"
+        },
+        "pl": {
+          "nom": "samochody",
+          "gen": "samochodów",
+          "dat": "samochodom",
+          "acc": "samochody",
+          "inst": "samochodami",
+          "loc": "samochodach",
+          "voc": "samochody"
+        }
+      }
+    },
+    {
+      "id": "house",
+      "lemma": "dom",
+      "meaning": "дом",
+      "gender": "m-inanimate",
+      "forms": {
+        "sg": {
+          "nom": "dom",
+          "gen": "domu",
+          "dat": "domowi",
+          "acc": "dom",
+          "inst": "domem",
+          "loc": "domu",
+          "voc": "domu"
+        },
+        "pl": {
+          "nom": "domy",
+          "gen": "domów",
+          "dat": "domom",
+          "acc": "domy",
+          "inst": "domami",
+          "loc": "domach",
+          "voc": "domy"
+        }
+      }
+    },
+    {
+      "id": "phone",
+      "lemma": "telefon",
+      "meaning": "телефон",
+      "gender": "m-inanimate",
+      "forms": {
+        "sg": {
+          "nom": "telefon",
+          "gen": "telefonu",
+          "dat": "telefonowi",
+          "acc": "telefon",
+          "inst": "telefonem",
+          "loc": "telefonie",
+          "voc": "telefonie"
+        },
+        "pl": {
+          "nom": "telefony",
+          "gen": "telefonów",
+          "dat": "telefonom",
+          "acc": "telefony",
+          "inst": "telefonami",
+          "loc": "telefonach",
+          "voc": "telefony"
+        }
+      }
+    },
+    {
+      "id": "child",
+      "lemma": "dziecko",
+      "meaning": "ребёнок",
+      "gender": "n",
+      "forms": {
+        "sg": {
+          "nom": "dziecko",
+          "gen": "dziecka",
+          "dat": "dziecku",
+          "acc": "dziecko",
+          "inst": "dzieckiem",
+          "loc": "dziecku",
+          "voc": "dziecko"
+        },
+        "pl": {
+          "nom": "dzieci",
+          "gen": "dzieci",
+          "dat": "dzieciom",
+          "acc": "dzieci",
+          "inst": "dziećmi",
+          "loc": "dzieciach",
+          "voc": "dzieci"
+        }
+      }
+    },
+    {
+      "id": "window",
+      "lemma": "okno",
+      "meaning": "окно",
+      "gender": "n",
+      "forms": {
+        "sg": {
+          "nom": "okno",
+          "gen": "okna",
+          "dat": "oknu",
+          "acc": "okno",
+          "inst": "oknem",
+          "loc": "oknie",
+          "voc": "okno"
+        },
+        "pl": {
+          "nom": "okna",
+          "gen": "okien",
+          "dat": "oknom",
+          "acc": "okna",
+          "inst": "oknami",
+          "loc": "oknach",
+          "voc": "okna"
+        }
+      }
+    }
+  ],
+  "adjectives": [
+    {
+      "id": "beautiful",
+      "lemma": "piękny",
+      "meaning": "красивый",
+      "forms": {
+        "sg": {
+          "m-personal": {
+            "nom": "piękny",
+            "gen": "pięknego",
+            "dat": "pięknemu",
+            "acc": "pięknego",
+            "inst": "pięknym",
+            "loc": "pięknym",
+            "voc": "piękny"
+          },
+          "m-animate": {
+            "nom": "piękny",
+            "gen": "pięknego",
+            "dat": "pięknemu",
+            "acc": "pięknego",
+            "inst": "pięknym",
+            "loc": "pięknym",
+            "voc": "piękny"
+          },
+          "m-inanimate": {
+            "nom": "piękny",
+            "gen": "pięknego",
+            "dat": "pięknemu",
+            "acc": "piękny",
+            "inst": "pięknym",
+            "loc": "pięknym",
+            "voc": "piękny"
+          },
+          "f": {
+            "nom": "piękna",
+            "gen": "pięknej",
+            "dat": "pięknej",
+            "acc": "piękną",
+            "inst": "piękną",
+            "loc": "pięknej",
+            "voc": "piękna"
+          },
+          "n": {
+            "nom": "piękne",
+            "gen": "pięknego",
+            "dat": "pięknemu",
+            "acc": "piękne",
+            "inst": "pięknym",
+            "loc": "pięknym",
+            "voc": "piękne"
+          }
+        },
+        "pl": {
+          "m-personal": {
+            "nom": "piękni",
+            "gen": "pięknych",
+            "dat": "pięknym",
+            "acc": "pięknych",
+            "inst": "pięknymi",
+            "loc": "pięknych",
+            "voc": "piękni"
+          },
+          "m-animate": {
+            "nom": "piękne",
+            "gen": "pięknych",
+            "dat": "pięknym",
+            "acc": "piękne",
+            "inst": "pięknymi",
+            "loc": "pięknych",
+            "voc": "piękne"
+          },
+          "m-inanimate": {
+            "nom": "piękne",
+            "gen": "pięknych",
+            "dat": "pięknym",
+            "acc": "piękne",
+            "inst": "pięknymi",
+            "loc": "pięknych",
+            "voc": "piękne"
+          },
+          "f": {
+            "nom": "piękne",
+            "gen": "pięknych",
+            "dat": "pięknym",
+            "acc": "piękne",
+            "inst": "pięknymi",
+            "loc": "pięknych",
+            "voc": "piękne"
+          },
+          "n": {
+            "nom": "piękne",
+            "gen": "pięknych",
+            "dat": "pięknym",
+            "acc": "piękne",
+            "inst": "pięknymi",
+            "loc": "pięknych",
+            "voc": "piękne"
+          }
+        }
+      }
+    },
+    {
+      "id": "new",
+      "lemma": "nowy",
+      "meaning": "новый",
+      "forms": {
+        "sg": {
+          "m-personal": {
+            "nom": "nowy",
+            "gen": "nowego",
+            "dat": "nowemu",
+            "acc": "nowego",
+            "inst": "nowym",
+            "loc": "nowym",
+            "voc": "nowy"
+          },
+          "m-animate": {
+            "nom": "nowy",
+            "gen": "nowego",
+            "dat": "nowemu",
+            "acc": "nowego",
+            "inst": "nowym",
+            "loc": "nowym",
+            "voc": "nowy"
+          },
+          "m-inanimate": {
+            "nom": "nowy",
+            "gen": "nowego",
+            "dat": "nowemu",
+            "acc": "nowy",
+            "inst": "nowym",
+            "loc": "nowym",
+            "voc": "nowy"
+          },
+          "f": {
+            "nom": "nowa",
+            "gen": "nowej",
+            "dat": "nowej",
+            "acc": "nową",
+            "inst": "nową",
+            "loc": "nowej",
+            "voc": "nowa"
+          },
+          "n": {
+            "nom": "nowe",
+            "gen": "nowego",
+            "dat": "nowemu",
+            "acc": "nowe",
+            "inst": "nowym",
+            "loc": "nowym",
+            "voc": "nowe"
+          }
+        },
+        "pl": {
+          "m-personal": {
+            "nom": "nowi",
+            "gen": "nowych",
+            "dat": "nowym",
+            "acc": "nowych",
+            "inst": "nowymi",
+            "loc": "nowych",
+            "voc": "nowi"
+          },
+          "m-animate": {
+            "nom": "nowe",
+            "gen": "nowych",
+            "dat": "nowym",
+            "acc": "nowe",
+            "inst": "nowymi",
+            "loc": "nowych",
+            "voc": "nowe"
+          },
+          "m-inanimate": {
+            "nom": "nowe",
+            "gen": "nowych",
+            "dat": "nowym",
+            "acc": "nowe",
+            "inst": "nowymi",
+            "loc": "nowych",
+            "voc": "nowe"
+          },
+          "f": {
+            "nom": "nowe",
+            "gen": "nowych",
+            "dat": "nowym",
+            "acc": "nowe",
+            "inst": "nowymi",
+            "loc": "nowych",
+            "voc": "nowe"
+          },
+          "n": {
+            "nom": "nowe",
+            "gen": "nowych",
+            "dat": "nowym",
+            "acc": "nowe",
+            "inst": "nowymi",
+            "loc": "nowych",
+            "voc": "nowe"
+          }
+        }
+      }
+    },
+    {
+      "id": "small",
+      "lemma": "mały",
+      "meaning": "маленький",
+      "forms": {
+        "sg": {
+          "m-personal": {
+            "nom": "mały",
+            "gen": "małego",
+            "dat": "małemu",
+            "acc": "małego",
+            "inst": "małym",
+            "loc": "małym",
+            "voc": "mały"
+          },
+          "m-animate": {
+            "nom": "mały",
+            "gen": "małego",
+            "dat": "małemu",
+            "acc": "małego",
+            "inst": "małym",
+            "loc": "małym",
+            "voc": "mały"
+          },
+          "m-inanimate": {
+            "nom": "mały",
+            "gen": "małego",
+            "dat": "małemu",
+            "acc": "mały",
+            "inst": "małym",
+            "loc": "małym",
+            "voc": "mały"
+          },
+          "f": {
+            "nom": "mała",
+            "gen": "małej",
+            "dat": "małej",
+            "acc": "małą",
+            "inst": "małą",
+            "loc": "małej",
+            "voc": "mała"
+          },
+          "n": {
+            "nom": "małe",
+            "gen": "małego",
+            "dat": "małemu",
+            "acc": "małe",
+            "inst": "małym",
+            "loc": "małym",
+            "voc": "małe"
+          }
+        },
+        "pl": {
+          "m-personal": {
+            "nom": "mali",
+            "gen": "małych",
+            "dat": "małym",
+            "acc": "małych",
+            "inst": "małymi",
+            "loc": "małych",
+            "voc": "mali"
+          },
+          "m-animate": {
+            "nom": "małe",
+            "gen": "małych",
+            "dat": "małym",
+            "acc": "małe",
+            "inst": "małymi",
+            "loc": "małych",
+            "voc": "małe"
+          },
+          "m-inanimate": {
+            "nom": "małe",
+            "gen": "małych",
+            "dat": "małym",
+            "acc": "małe",
+            "inst": "małymi",
+            "loc": "małych",
+            "voc": "małe"
+          },
+          "f": {
+            "nom": "małe",
+            "gen": "małych",
+            "dat": "małym",
+            "acc": "małe",
+            "inst": "małymi",
+            "loc": "małych",
+            "voc": "małe"
+          },
+          "n": {
+            "nom": "małe",
+            "gen": "małych",
+            "dat": "małym",
+            "acc": "małe",
+            "inst": "małymi",
+            "loc": "małych",
+            "voc": "małe"
+          }
+        }
+      }
+    },
+    {
+      "id": "nice",
+      "lemma": "ładny",
+      "meaning": "красивый",
+      "forms": {
+        "sg": {
+          "m-personal": {
+            "nom": "ładny",
+            "gen": "ładnego",
+            "dat": "ładnemu",
+            "acc": "ładnego",
+            "inst": "ładnym",
+            "loc": "ładnym",
+            "voc": "ładny"
+          },
+          "m-animate": {
+            "nom": "ładny",
+            "gen": "ładnego",
+            "dat": "ładnemu",
+            "acc": "ładnego",
+            "inst": "ładnym",
+            "loc": "ładnym",
+            "voc": "ładny"
+          },
+          "m-inanimate": {
+            "nom": "ładny",
+            "gen": "ładnego",
+            "dat": "ładnemu",
+            "acc": "ładny",
+            "inst": "ładnym",
+            "loc": "ładnym",
+            "voc": "ładny"
+          },
+          "f": {
+            "nom": "ładna",
+            "gen": "ładnej",
+            "dat": "ładnej",
+            "acc": "ładną",
+            "inst": "ładną",
+            "loc": "ładnej",
+            "voc": "ładna"
+          },
+          "n": {
+            "nom": "ładne",
+            "gen": "ładnego",
+            "dat": "ładnemu",
+            "acc": "ładne",
+            "inst": "ładnym",
+            "loc": "ładnym",
+            "voc": "ładne"
+          }
+        },
+        "pl": {
+          "m-personal": {
+            "nom": "ładni",
+            "gen": "ładnych",
+            "dat": "ładnym",
+            "acc": "ładnych",
+            "inst": "ładnymi",
+            "loc": "ładnych",
+            "voc": "ładni"
+          },
+          "m-animate": {
+            "nom": "ładne",
+            "gen": "ładnych",
+            "dat": "ładnym",
+            "acc": "ładne",
+            "inst": "ładnymi",
+            "loc": "ładnych",
+            "voc": "ładne"
+          },
+          "m-inanimate": {
+            "nom": "ładne",
+            "gen": "ładnych",
+            "dat": "ładnym",
+            "acc": "ładne",
+            "inst": "ładnymi",
+            "loc": "ładnych",
+            "voc": "ładne"
+          },
+          "f": {
+            "nom": "ładne",
+            "gen": "ładnych",
+            "dat": "ładnym",
+            "acc": "ładne",
+            "inst": "ładnymi",
+            "loc": "ładnych",
+            "voc": "ładne"
+          },
+          "n": {
+            "nom": "ładne",
+            "gen": "ładnych",
+            "dat": "ładnym",
+            "acc": "ładne",
+            "inst": "ładnymi",
+            "loc": "ładnych",
+            "voc": "ładne"
+          }
+        }
+      }
+    },
+    {
+      "id": "good",
+      "lemma": "dobry",
+      "meaning": "хороший",
+      "forms": {
+        "sg": {
+          "m-personal": {
+            "nom": "dobry",
+            "gen": "dobrego",
+            "dat": "dobremu",
+            "acc": "dobrego",
+            "inst": "dobrym",
+            "loc": "dobrym",
+            "voc": "dobry"
+          },
+          "m-animate": {
+            "nom": "dobry",
+            "gen": "dobrego",
+            "dat": "dobremu",
+            "acc": "dobrego",
+            "inst": "dobrym",
+            "loc": "dobrym",
+            "voc": "dobry"
+          },
+          "m-inanimate": {
+            "nom": "dobry",
+            "gen": "dobrego",
+            "dat": "dobremu",
+            "acc": "dobry",
+            "inst": "dobrym",
+            "loc": "dobrym",
+            "voc": "dobry"
+          },
+          "f": {
+            "nom": "dobra",
+            "gen": "dobrej",
+            "dat": "dobrej",
+            "acc": "dobrą",
+            "inst": "dobrą",
+            "loc": "dobrej",
+            "voc": "dobra"
+          },
+          "n": {
+            "nom": "dobre",
+            "gen": "dobrego",
+            "dat": "dobremu",
+            "acc": "dobre",
+            "inst": "dobrym",
+            "loc": "dobrym",
+            "voc": "dobre"
+          }
+        },
+        "pl": {
+          "m-personal": {
+            "nom": "dobrzy",
+            "gen": "dobrych",
+            "dat": "dobrym",
+            "acc": "dobrych",
+            "inst": "dobrymi",
+            "loc": "dobrych",
+            "voc": "dobrzy"
+          },
+          "m-animate": {
+            "nom": "dobre",
+            "gen": "dobrych",
+            "dat": "dobrym",
+            "acc": "dobre",
+            "inst": "dobrymi",
+            "loc": "dobrych",
+            "voc": "dobre"
+          },
+          "m-inanimate": {
+            "nom": "dobre",
+            "gen": "dobrych",
+            "dat": "dobrym",
+            "acc": "dobre",
+            "inst": "dobrymi",
+            "loc": "dobrych",
+            "voc": "dobre"
+          },
+          "f": {
+            "nom": "dobre",
+            "gen": "dobrych",
+            "dat": "dobrym",
+            "acc": "dobre",
+            "inst": "dobrymi",
+            "loc": "dobrych",
+            "voc": "dobre"
+          },
+          "n": {
+            "nom": "dobre",
+            "gen": "dobrych",
+            "dat": "dobrym",
+            "acc": "dobre",
+            "inst": "dobrymi",
+            "loc": "dobrych",
+            "voc": "dobre"
+          }
+        }
+      }
+    },
+    {
+      "id": "old",
+      "lemma": "stary",
+      "meaning": "старый",
+      "forms": {
+        "sg": {
+          "m-personal": {
+            "nom": "stary",
+            "gen": "starego",
+            "dat": "staremu",
+            "acc": "starego",
+            "inst": "starym",
+            "loc": "starym",
+            "voc": "stary"
+          },
+          "m-animate": {
+            "nom": "stary",
+            "gen": "starego",
+            "dat": "staremu",
+            "acc": "starego",
+            "inst": "starym",
+            "loc": "starym",
+            "voc": "stary"
+          },
+          "m-inanimate": {
+            "nom": "stary",
+            "gen": "starego",
+            "dat": "staremu",
+            "acc": "stary",
+            "inst": "starym",
+            "loc": "starym",
+            "voc": "stary"
+          },
+          "f": {
+            "nom": "stara",
+            "gen": "starej",
+            "dat": "starej",
+            "acc": "starą",
+            "inst": "starą",
+            "loc": "starej",
+            "voc": "stara"
+          },
+          "n": {
+            "nom": "stare",
+            "gen": "starego",
+            "dat": "staremu",
+            "acc": "stare",
+            "inst": "starym",
+            "loc": "starym",
+            "voc": "stare"
+          }
+        },
+        "pl": {
+          "m-personal": {
+            "nom": "starzy",
+            "gen": "starych",
+            "dat": "starym",
+            "acc": "starych",
+            "inst": "starymi",
+            "loc": "starych",
+            "voc": "starzy"
+          },
+          "m-animate": {
+            "nom": "stare",
+            "gen": "starych",
+            "dat": "starym",
+            "acc": "stare",
+            "inst": "starymi",
+            "loc": "starych",
+            "voc": "stare"
+          },
+          "m-inanimate": {
+            "nom": "stare",
+            "gen": "starych",
+            "dat": "starym",
+            "acc": "stare",
+            "inst": "starymi",
+            "loc": "starych",
+            "voc": "stare"
+          },
+          "f": {
+            "nom": "stare",
+            "gen": "starych",
+            "dat": "starym",
+            "acc": "stare",
+            "inst": "starymi",
+            "loc": "starych",
+            "voc": "stare"
+          },
+          "n": {
+            "nom": "stare",
+            "gen": "starych",
+            "dat": "starym",
+            "acc": "stare",
+            "inst": "starymi",
+            "loc": "starych",
+            "voc": "stare"
+          }
+        }
+      }
+    },
+    {
+      "id": "expensive",
+      "lemma": "drogi",
+      "meaning": "дорогой",
+      "forms": {
+        "sg": {
+          "m-personal": {
+            "nom": "drogi",
+            "gen": "drogiego",
+            "dat": "drogiemu",
+            "acc": "drogiego",
+            "inst": "drogim",
+            "loc": "drogim",
+            "voc": "drogi"
+          },
+          "m-animate": {
+            "nom": "drogi",
+            "gen": "drogiego",
+            "dat": "drogiemu",
+            "acc": "drogiego",
+            "inst": "drogim",
+            "loc": "drogim",
+            "voc": "drogi"
+          },
+          "m-inanimate": {
+            "nom": "drogi",
+            "gen": "drogiego",
+            "dat": "drogiemu",
+            "acc": "drogi",
+            "inst": "drogim",
+            "loc": "drogim",
+            "voc": "drogi"
+          },
+          "f": {
+            "nom": "droga",
+            "gen": "drogiej",
+            "dat": "drogiej",
+            "acc": "drogą",
+            "inst": "drogą",
+            "loc": "drogiej",
+            "voc": "droga"
+          },
+          "n": {
+            "nom": "drogie",
+            "gen": "drogiego",
+            "dat": "drogiemu",
+            "acc": "drogie",
+            "inst": "drogim",
+            "loc": "drogim",
+            "voc": "drogie"
+          }
+        },
+        "pl": {
+          "m-personal": {
+            "nom": "drodzy",
+            "gen": "drogich",
+            "dat": "drogim",
+            "acc": "drogich",
+            "inst": "drogimi",
+            "loc": "drogich",
+            "voc": "drodzy"
+          },
+          "m-animate": {
+            "nom": "drogie",
+            "gen": "drogich",
+            "dat": "drogim",
+            "acc": "drogie",
+            "inst": "drogimi",
+            "loc": "drogich",
+            "voc": "drogie"
+          },
+          "m-inanimate": {
+            "nom": "drogie",
+            "gen": "drogich",
+            "dat": "drogim",
+            "acc": "drogie",
+            "inst": "drogimi",
+            "loc": "drogich",
+            "voc": "drogie"
+          },
+          "f": {
+            "nom": "drogie",
+            "gen": "drogich",
+            "dat": "drogim",
+            "acc": "drogie",
+            "inst": "drogimi",
+            "loc": "drogich",
+            "voc": "drogie"
+          },
+          "n": {
+            "nom": "drogie",
+            "gen": "drogich",
+            "dat": "drogim",
+            "acc": "drogie",
+            "inst": "drogimi",
+            "loc": "drogich",
+            "voc": "drogie"
+          }
+        }
+      }
+    }
+  ],
+  "verbs": [
+    {
+      "id": "have",
+      "lemma": "mieć",
+      "meaning": "иметь",
+      "aspect": "imperfective",
+      "futureType": "compound",
+      "present": {
+        "sg": {
+          "1": "mam",
+          "2": "masz",
+          "3": "ma"
+        },
+        "pl": {
+          "1": "mamy",
+          "2": "macie",
+          "3": "mają"
+        }
+      },
+      "pastStem": {
+        "m": "miał",
+        "f": "miała",
+        "n": "miało",
+        "mp": "mieli",
+        "np": "miały"
+      }
+    },
+    {
+      "id": "see",
+      "lemma": "widzieć",
+      "meaning": "видеть",
+      "aspect": "imperfective",
+      "futureType": "compound",
+      "present": {
+        "sg": {
+          "1": "widzę",
+          "2": "widzisz",
+          "3": "widzi"
+        },
+        "pl": {
+          "1": "widzimy",
+          "2": "widzicie",
+          "3": "widzą"
+        }
+      },
+      "pastStem": {
+        "m": "widział",
+        "f": "widziała",
+        "n": "widziało",
+        "mp": "widzieli",
+        "np": "widziały"
+      }
+    },
+    {
+      "id": "like",
+      "lemma": "lubić",
+      "meaning": "любить",
+      "aspect": "imperfective",
+      "futureType": "compound",
+      "present": {
+        "sg": {
+          "1": "lubię",
+          "2": "lubisz",
+          "3": "lubi"
+        },
+        "pl": {
+          "1": "lubimy",
+          "2": "lubicie",
+          "3": "lubią"
+        }
+      },
+      "pastStem": {
+        "m": "lubił",
+        "f": "lubiła",
+        "n": "lubiło",
+        "mp": "lubili",
+        "np": "lubiły"
+      }
+    },
+    {
+      "id": "buy",
+      "lemma": "kupować",
+      "meaning": "покупать",
+      "aspect": "imperfective",
+      "futureType": "compound",
+      "perfectivePair": "buyDone",
+      "present": {
+        "sg": {
+          "1": "kupuję",
+          "2": "kupujesz",
+          "3": "kupuje"
+        },
+        "pl": {
+          "1": "kupujemy",
+          "2": "kupujecie",
+          "3": "kupują"
+        }
+      },
+      "pastStem": {
+        "m": "kupował",
+        "f": "kupowała",
+        "n": "kupowało",
+        "mp": "kupowali",
+        "np": "kupowały"
+      }
+    },
+    {
+      "id": "read",
+      "lemma": "czytać",
+      "meaning": "читать",
+      "aspect": "imperfective",
+      "futureType": "compound",
+      "present": {
+        "sg": {
+          "1": "czytam",
+          "2": "czytasz",
+          "3": "czyta"
+        },
+        "pl": {
+          "1": "czytamy",
+          "2": "czytacie",
+          "3": "czytają"
+        }
+      },
+      "pastStem": {
+        "m": "czytał",
+        "f": "czytała",
+        "n": "czytało",
+        "mp": "czytali",
+        "np": "czytały"
+      }
+    },
+    {
+      "id": "talk",
+      "lemma": "mówić",
+      "meaning": "говорить",
+      "aspect": "imperfective",
+      "futureType": "compound",
+      "present": {
+        "sg": {
+          "1": "mówię",
+          "2": "mówisz",
+          "3": "mówi"
+        },
+        "pl": {
+          "1": "mówimy",
+          "2": "mówicie",
+          "3": "mówią"
+        }
+      },
+      "pastStem": {
+        "m": "mówił",
+        "f": "mówiła",
+        "n": "mówiło",
+        "mp": "mówili",
+        "np": "mówiły"
+      }
+    },
+    {
+      "id": "go",
+      "lemma": "iść",
+      "meaning": "идти",
+      "aspect": "imperfective",
+      "futureType": "compound",
+      "present": {
+        "sg": {
+          "1": "idę",
+          "2": "idziesz",
+          "3": "idzie"
+        },
+        "pl": {
+          "1": "idziemy",
+          "2": "idziecie",
+          "3": "idą"
+        }
+      },
+      "pastStem": {
+        "m": "szedł",
+        "f": "szła",
+        "n": "szło",
+        "mp": "szli",
+        "np": "szły"
+      }
+    },
+    {
+      "id": "be",
+      "lemma": "być",
+      "meaning": "быть",
+      "aspect": "imperfective",
+      "futureType": "compound",
+      "present": {
+        "sg": {
+          "1": "jestem",
+          "2": "jesteś",
+          "3": "jest"
+        },
+        "pl": {
+          "1": "jesteśmy",
+          "2": "jesteście",
+          "3": "są"
+        }
+      },
+      "pastStem": {
+        "m": "był",
+        "f": "była",
+        "n": "było",
+        "mp": "byli",
+        "np": "były"
+      }
+    },
+    {
+      "id": "buyDone",
+      "lemma": "kupić",
+      "meaning": "купить",
+      "aspect": "perfective",
+      "futureType": "present",
+      "present": {
+        "sg": {
+          "1": "kupię",
+          "2": "kupisz",
+          "3": "kupi"
+        },
+        "pl": {
+          "1": "kupimy",
+          "2": "kupicie",
+          "3": "kupią"
+        }
+      },
+      "pastStem": {
+        "m": "kupił",
+        "f": "kupiła",
+        "n": "kupiło",
+        "mp": "kupili",
+        "np": "kupiły"
+      }
+    },
+    {
+      "id": "do",
+      "lemma": "robić",
+      "meaning": "делать",
+      "aspect": "imperfective",
+      "futureType": "compound",
+      "perfectivePair": "doDone",
+      "present": {
+        "sg": {
+          "1": "robię",
+          "2": "robisz",
+          "3": "robi"
+        },
+        "pl": {
+          "1": "robimy",
+          "2": "robicie",
+          "3": "robią"
+        }
+      },
+      "pastStem": {
+        "m": "robił",
+        "f": "robiła",
+        "n": "robiło",
+        "mp": "robili",
+        "np": "robiły"
+      }
+    },
+    {
+      "id": "doDone",
+      "lemma": "zrobić",
+      "meaning": "сделать",
+      "aspect": "perfective",
+      "futureType": "present",
+      "present": {
+        "sg": {
+          "1": "zrobię",
+          "2": "zrobisz",
+          "3": "zrobi"
+        },
+        "pl": {
+          "1": "zrobimy",
+          "2": "zrobicie",
+          "3": "zrobią"
+        }
+      },
+      "pastStem": {
+        "m": "zrobił",
+        "f": "zrobiła",
+        "n": "zrobiło",
+        "mp": "zrobili",
+        "np": "zrobiły"
+      }
+    }
+  ],
+  "personalPronouns": {
+    "ja": {
+      "nom": "ja",
+      "gen": "mnie",
+      "dat": "mi",
+      "acc": "mnie",
+      "inst": "mną",
+      "loc": "mnie",
+      "voc": "ja"
+    },
+    "ty": {
+      "nom": "ty",
+      "gen": "ciebie",
+      "dat": "ci",
+      "acc": "ciebie",
+      "inst": "tobą",
+      "loc": "tobie",
+      "voc": "ty"
+    },
+    "on": {
+      "nom": "on",
+      "gen": "go",
+      "dat": "mu",
+      "acc": "go",
+      "inst": "nim",
+      "loc": "nim",
+      "voc": "on"
+    },
+    "ona": {
+      "nom": "ona",
+      "gen": "jej",
+      "dat": "jej",
+      "acc": "ją",
+      "inst": "nią",
+      "loc": "niej",
+      "voc": "ona"
+    },
+    "ono": {
+      "nom": "ono",
+      "gen": "go",
+      "dat": "mu",
+      "acc": "je",
+      "inst": "nim",
+      "loc": "nim",
+      "voc": "ono"
+    },
+    "my": {
+      "nom": "my",
+      "gen": "nas",
+      "dat": "nam",
+      "acc": "nas",
+      "inst": "nami",
+      "loc": "nas",
+      "voc": "my"
+    },
+    "wy": {
+      "nom": "wy",
+      "gen": "was",
+      "dat": "wam",
+      "acc": "was",
+      "inst": "wami",
+      "loc": "was",
+      "voc": "wy"
+    },
+    "oni": {
+      "nom": "oni",
+      "gen": "ich",
+      "dat": "im",
+      "acc": "ich",
+      "inst": "nimi",
+      "loc": "nich",
+      "voc": "oni"
+    },
+    "one": {
+      "nom": "one",
+      "gen": "ich",
+      "dat": "im",
+      "acc": "je",
+      "inst": "nimi",
+      "loc": "nich",
+      "voc": "one"
+    }
+  },
+  "possessives": [
+    {
+      "id": "my",
+      "label": "mój — мой",
+      "forms": {
+        "kind": "declined",
+        "sg": {
+          "m-personal": {
+            "nom": "mój",
+            "gen": "mojego",
+            "dat": "mojemu",
+            "acc": "mojego",
+            "inst": "moim",
+            "loc": "moim",
+            "voc": "mój"
+          },
+          "m-animate": {
+            "nom": "mój",
+            "gen": "mojego",
+            "dat": "mojemu",
+            "acc": "mojego",
+            "inst": "moim",
+            "loc": "moim",
+            "voc": "mój"
+          },
+          "m-inanimate": {
+            "nom": "mój",
+            "gen": "mojego",
+            "dat": "mojemu",
+            "acc": "mój",
+            "inst": "moim",
+            "loc": "moim",
+            "voc": "mój"
+          },
+          "f": {
+            "nom": "moja",
+            "gen": "mojej",
+            "dat": "mojej",
+            "acc": "moją",
+            "inst": "moją",
+            "loc": "mojej",
+            "voc": "moja"
+          },
+          "n": {
+            "nom": "moje",
+            "gen": "mojego",
+            "dat": "mojemu",
+            "acc": "moje",
+            "inst": "moim",
+            "loc": "moim",
+            "voc": "moje"
+          }
+        },
+        "pl": {
+          "m-personal": {
+            "nom": "moi",
+            "gen": "moich",
+            "dat": "moim",
+            "acc": "moich",
+            "inst": "moimi",
+            "loc": "moich",
+            "voc": "moi"
+          },
+          "other": {
+            "nom": "moje",
+            "gen": "moich",
+            "dat": "moim",
+            "acc": "moje",
+            "inst": "moimi",
+            "loc": "moich",
+            "voc": "moje"
+          }
+        }
+      }
+    },
+    {
+      "id": "your",
+      "label": "twój — твой",
+      "forms": {
+        "kind": "declined",
+        "sg": {
+          "m-personal": {
+            "nom": "twój",
+            "gen": "twojego",
+            "dat": "twojemu",
+            "acc": "twojego",
+            "inst": "twoim",
+            "loc": "twoim",
+            "voc": "twój"
+          },
+          "m-animate": {
+            "nom": "twój",
+            "gen": "twojego",
+            "dat": "twojemu",
+            "acc": "twojego",
+            "inst": "twoim",
+            "loc": "twoim",
+            "voc": "twój"
+          },
+          "m-inanimate": {
+            "nom": "twój",
+            "gen": "twojego",
+            "dat": "twojemu",
+            "acc": "twój",
+            "inst": "twoim",
+            "loc": "twoim",
+            "voc": "twój"
+          },
+          "f": {
+            "nom": "twoja",
+            "gen": "twojej",
+            "dat": "twojej",
+            "acc": "twoją",
+            "inst": "twoją",
+            "loc": "twojej",
+            "voc": "twoja"
+          },
+          "n": {
+            "nom": "twoje",
+            "gen": "twojego",
+            "dat": "twojemu",
+            "acc": "twoje",
+            "inst": "twoim",
+            "loc": "twoim",
+            "voc": "twoje"
+          }
+        },
+        "pl": {
+          "m-personal": {
+            "nom": "twoi",
+            "gen": "twoich",
+            "dat": "twoim",
+            "acc": "twoich",
+            "inst": "twoimi",
+            "loc": "twoich",
+            "voc": "twoi"
+          },
+          "other": {
+            "nom": "twoje",
+            "gen": "twoich",
+            "dat": "twoim",
+            "acc": "twoje",
+            "inst": "twoimi",
+            "loc": "twoich",
+            "voc": "twoje"
+          }
+        }
+      }
+    },
+    {
+      "id": "his",
+      "label": "jego — его",
+      "forms": {
+        "kind": "invariant",
+        "value": "jego"
+      }
+    },
+    {
+      "id": "her",
+      "label": "jej — её",
+      "forms": {
+        "kind": "invariant",
+        "value": "jej"
+      }
+    },
+    {
+      "id": "our",
+      "label": "nasz — наш",
+      "forms": {
+        "kind": "declined",
+        "sg": {
+          "m-personal": {
+            "nom": "nasz",
+            "gen": "naszego",
+            "dat": "naszemu",
+            "acc": "naszego",
+            "inst": "naszym",
+            "loc": "naszym",
+            "voc": "nasz"
+          },
+          "m-animate": {
+            "nom": "nasz",
+            "gen": "naszego",
+            "dat": "naszemu",
+            "acc": "naszego",
+            "inst": "naszym",
+            "loc": "naszym",
+            "voc": "nasz"
+          },
+          "m-inanimate": {
+            "nom": "nasz",
+            "gen": "naszego",
+            "dat": "naszemu",
+            "acc": "nasz",
+            "inst": "naszym",
+            "loc": "naszym",
+            "voc": "nasz"
+          },
+          "f": {
+            "nom": "nasza",
+            "gen": "naszej",
+            "dat": "naszej",
+            "acc": "naszą",
+            "inst": "naszą",
+            "loc": "naszej",
+            "voc": "nasza"
+          },
+          "n": {
+            "nom": "nasze",
+            "gen": "naszego",
+            "dat": "naszemu",
+            "acc": "nasze",
+            "inst": "naszym",
+            "loc": "naszym",
+            "voc": "nasze"
+          }
+        },
+        "pl": {
+          "m-personal": {
+            "nom": "nasi",
+            "gen": "naszych",
+            "dat": "naszym",
+            "acc": "naszych",
+            "inst": "naszymi",
+            "loc": "naszych",
+            "voc": "nasi"
+          },
+          "other": {
+            "nom": "nasze",
+            "gen": "naszych",
+            "dat": "naszym",
+            "acc": "nasze",
+            "inst": "naszymi",
+            "loc": "naszych",
+            "voc": "nasze"
+          }
+        }
+      }
+    },
+    {
+      "id": "yourPlural",
+      "label": "wasz — ваш",
+      "forms": {
+        "kind": "declined",
+        "sg": {
+          "m-personal": {
+            "nom": "wasz",
+            "gen": "waszego",
+            "dat": "waszemu",
+            "acc": "waszego",
+            "inst": "waszym",
+            "loc": "waszym",
+            "voc": "wasz"
+          },
+          "m-animate": {
+            "nom": "wasz",
+            "gen": "waszego",
+            "dat": "waszemu",
+            "acc": "waszego",
+            "inst": "waszym",
+            "loc": "waszym",
+            "voc": "wasz"
+          },
+          "m-inanimate": {
+            "nom": "wasz",
+            "gen": "waszego",
+            "dat": "waszemu",
+            "acc": "wasz",
+            "inst": "waszym",
+            "loc": "waszym",
+            "voc": "wasz"
+          },
+          "f": {
+            "nom": "wasza",
+            "gen": "waszej",
+            "dat": "waszej",
+            "acc": "waszą",
+            "inst": "waszą",
+            "loc": "waszej",
+            "voc": "wasza"
+          },
+          "n": {
+            "nom": "wasze",
+            "gen": "waszego",
+            "dat": "waszemu",
+            "acc": "wasze",
+            "inst": "waszym",
+            "loc": "waszym",
+            "voc": "wasze"
+          }
+        },
+        "pl": {
+          "m-personal": {
+            "nom": "wasi",
+            "gen": "waszych",
+            "dat": "waszym",
+            "acc": "waszych",
+            "inst": "waszymi",
+            "loc": "waszych",
+            "voc": "wasi"
+          },
+          "other": {
+            "nom": "wasze",
+            "gen": "waszych",
+            "dat": "waszym",
+            "acc": "wasze",
+            "inst": "waszymi",
+            "loc": "waszych",
+            "voc": "wasze"
+          }
+        }
+      }
+    },
+    {
+      "id": "their",
+      "label": "ich — их",
+      "forms": {
+        "kind": "invariant",
+        "value": "ich"
+      }
+    }
+  ],
+  "morphology": {
+    "futureAuxiliary": {
+      "verbId": "be",
+      "forms": {
+        "sg": {
+          "1": "będę",
+          "2": "będziesz",
+          "3": "będzie"
+        },
+        "pl": {
+          "1": "będziemy",
+          "2": "będziecie",
+          "3": "będą"
+        }
+      }
+    }
+  },
+  "stemAlternations": [
+    {
+      "a": "ó",
+      "b": "o"
+    }
+  ]
+}

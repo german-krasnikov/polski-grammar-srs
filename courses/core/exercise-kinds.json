@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "$comment": "UniversalCorePlan.md §3.1/§12 UC-12: the exercise-kind wiring kotlin/core-engine/src/commonMain/kotlin/polski/core/engine/Recipe.kt's own header comment names as this file. `implemented: true` means ExerciseGenerator (kotlin/core-engine) actually produces that kind today.",
+  "kinds": {
+    "transform": { "implemented": true, "description": "One skill's before→after change, produced by ExerciseGenerator.generateForSkill." },
+    "chain": { "implemented": true, "description": "A fixed sequence of transforms over one FeatureBundle, produced by ExerciseGenerator.generateChain." },
+    "fill-slot": { "implemented": false, "description": "Fill one blanked-out slot of a realized sentence — reserved, not yet implemented." },
+    "translate-L1->L2": { "implemented": false, "description": "Translate a native-language sentence into the target language — reserved, not yet implemented." },
+    "recognize": { "implemented": false, "description": "Multiple-choice recognition of the correct form — reserved, not yet implemented." }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Core constructions v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "constructions"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "$comment": { "type": "string" },
+    "constructions": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": { "$ref": "#/$defs/construction" },
+      "propertyNames": { "pattern": "^core\\.[a-z][a-zA-Z.-]*$" }
+    }
+  },
+  "$defs": {
+    "construction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["description"],
+      "properties": {
+        "axis": {
+          "description": "The core/features.json key this construction's skills typically focus on, or null when the construction has no single changing axis (e.g. core.agreement.possessive, core.composite).",
+          "type": ["string", "null"]
+        },
+        "composesOf": {
+          "description": "UniversalCorePlan.md §2/§10 risk #1: core.composite references >=2 other constructions, but pl's own chains (mixed/aspect) resolve their steps through lang/pl/exercise-recipes.json's `chain`, not a fixed list here — left empty on purpose, never inferred.",
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "description": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["ru"],
+          "properties": {
+            "ru": { "type": "string", "minLength": 1 },
+            "en": { "type": "string", "minLength": 1 }
+          }
+        }
+      }
+    }
+  }
+}

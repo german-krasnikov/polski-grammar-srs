@@ -1,0 +1,2170 @@
+{
+  "schemaVersion": 1,
+  "id": "pl-ru",
+  "targetLanguage": "pl",
+  "nativeLanguage": "ru",
+  "title": "Польский для русскоязычных",
+  "training": {
+    "chainPresentation": {
+      "steps": [
+        {
+          "id": "acc",
+          "label": "Вижу"
+        },
+        {
+          "id": "past",
+          "label": "Прошлое"
+        },
+        {
+          "id": "neg",
+          "label": "Отрицание"
+        },
+        {
+          "id": "owner",
+          "label": "Владелец"
+        },
+        {
+          "id": "loc",
+          "label": "Говорю о"
+        }
+      ],
+      "completion": {
+        "title": "Цепочка завершена",
+        "reactEyebrow": "5 преобразований",
+        "reactBody": "Ты изменил время, отрицание, владельца и падеж, сохранив одну мысль. Оценки сохранены в расписании повторений.",
+        "webBody": "Пять преобразований завершены. Оценки сохранены в расписании повторений."
+      }
+    }
+  },
+  "reference": {
+    "pronounTeaching": {
+      "personal": {
+        "title": "Личные местоимения в конструкциях",
+        "intro": {
+          "react": "Вместо отдельной формы запоминай её место в предложении. После предлогов у местоимений третьего лица появляется n-.",
+          "compact": "После предлогов у местоимений третьего лица появляется n-."
+        },
+        "footer": {
+          "react": "Здесь обычные безударные формы. Для ударения или противопоставления: mnie, tobie, jego, jemu. После предлога: do niego, do niej, do nich, dla mnie, dla ciebie.",
+          "web": "Здесь обычные безударные формы. После предлога: do niego, do niej, do nich, dla mnie, dla ciebie.",
+          "native": "После предлога: do niego, do niej, do nich, dla mnie, dla ciebie."
+        },
+        "pronounIds": [
+          "ja",
+          "ty",
+          "on",
+          "ona",
+          "ono",
+          "my",
+          "wy",
+          "oni",
+          "one"
+        ]
+      },
+      "contexts": [
+        {
+          "id": "gen",
+          "caseId": "gen",
+          "cue": {
+            "full": "Nie widzę…",
+            "compact": "Nie widzę…",
+            "ios": "Nie widzę"
+          },
+          "caseName": "Dopełniacz"
+        },
+        {
+          "id": "dat",
+          "caseId": "dat",
+          "cue": {
+            "full": "Daję prezent…",
+            "compact": "Daję prezent…",
+            "ios": "Daję prezent"
+          },
+          "caseName": "Celownik"
+        },
+        {
+          "id": "acc",
+          "caseId": "acc",
+          "cue": {
+            "full": "Widzę…",
+            "compact": "Widzę…",
+            "ios": "Widzę"
+          },
+          "caseName": "Biernik"
+        },
+        {
+          "id": "inst",
+          "caseId": "inst",
+          "cue": {
+            "full": "Idę z…",
+            "compact": "Idę z…",
+            "ios": "Idę"
+          },
+          "caseName": "Narzędnik",
+          "valuePrefix": "z ",
+          "specialValues": {
+            "ja": "ze mną"
+          }
+        },
+        {
+          "id": "loc",
+          "caseId": "loc",
+          "cue": {
+            "full": "Mówię o…",
+            "compact": "Mówię o…",
+            "ios": "Mówię o"
+          },
+          "caseName": "Miejscownik",
+          "valuePrefix": "o "
+        }
+      ],
+      "possessive": {
+        "title": "Владелец меняется независимо от падежа",
+        "demo": {
+          "nounId": "wife",
+          "adjectiveId": "beautiful",
+          "number": "sg",
+          "cases": [
+            {
+              "id": "nom",
+              "caption": {
+                "web": "Mianownik",
+                "desktop": "Mianownik",
+                "ios": "Mianownik"
+              }
+            },
+            {
+              "id": "acc",
+              "caption": {
+                "web": "Widzę… · Biernik",
+                "desktop": "Biernik",
+                "ios": "Biernik"
+              }
+            },
+            {
+              "id": "gen",
+              "caption": {
+                "web": "Nie widzę… · Dopełniacz",
+                "desktop": "Dopełniacz",
+                "ios": "Dopełniacz"
+              }
+            }
+          ],
+          "invariableOwnerIds": [
+            "his",
+            "her",
+            "their"
+          ],
+          "rule": {
+            "invariable": "Владелец не склоняется",
+            "variable": "Согласуется с żona"
+          }
+        }
+      }
+    },
+    "verbTeaching": {
+      "subjects": [
+        {
+          "id": "ja",
+          "person": 1,
+          "number": "sg",
+          "genderMode": "selected",
+          "label": {
+            "full": "ja — я",
+            "compact": "ja — я"
+          }
+        },
+        {
+          "id": "ty",
+          "person": 2,
+          "number": "sg",
+          "genderMode": "selected",
+          "label": {
+            "full": "ty — ты",
+            "compact": "ty — ты"
+          }
+        },
+        {
+          "id": "on",
+          "person": 3,
+          "number": "sg",
+          "genderMode": "fixed",
+          "fixedGender": "m-personal",
+          "label": {
+            "full": "on — он",
+            "compact": "on — он"
+          }
+        },
+        {
+          "id": "ona",
+          "person": 3,
+          "number": "sg",
+          "genderMode": "fixed",
+          "fixedGender": "f",
+          "label": {
+            "full": "ona — она",
+            "compact": "ona — она"
+          }
+        },
+        {
+          "id": "ono",
+          "person": 3,
+          "number": "sg",
+          "genderMode": "fixed",
+          "fixedGender": "n",
+          "label": {
+            "full": "ono — оно",
+            "compact": "ono — оно"
+          }
+        },
+        {
+          "id": "my",
+          "person": 1,
+          "number": "pl",
+          "genderMode": "selected",
+          "label": {
+            "full": "my — мы",
+            "compact": "my — мы"
+          }
+        },
+        {
+          "id": "wy",
+          "person": 2,
+          "number": "pl",
+          "genderMode": "selected",
+          "label": {
+            "full": "wy — вы",
+            "compact": "wy — вы"
+          }
+        },
+        {
+          "id": "oni",
+          "person": 3,
+          "number": "pl",
+          "genderMode": "fixed",
+          "fixedGender": "m-personal",
+          "label": {
+            "full": "oni — мужская личная группа",
+            "compact": "oni — мужская группа"
+          }
+        },
+        {
+          "id": "one",
+          "person": 3,
+          "number": "pl",
+          "genderMode": "fixed",
+          "fixedGender": "f",
+          "label": {
+            "full": "one — остальные",
+            "compact": "one — остальные"
+          }
+        }
+      ],
+      "genderControlLabel": {
+        "full": "Род для ja / ty / my / wy",
+        "compact": "Род"
+      },
+      "genderOptions": [
+        {
+          "id": "m",
+          "label": {
+            "full": "Мужской / мужская личная группа",
+            "compact": "Мужской"
+          }
+        },
+        {
+          "id": "f",
+          "label": {
+            "full": "Женский / женская группа",
+            "compact": "Женский"
+          }
+        }
+      ],
+      "tenseLabels": {
+        "present": {
+          "full": "Teraz · сейчас",
+          "compact": "Teraz"
+        },
+        "past": {
+          "full": "Przeszłość · прошлое",
+          "compact": "Przeszłość"
+        },
+        "future": {
+          "full": "Przyszłość · будущее",
+          "compact": "Przyszłość"
+        }
+      },
+      "futureExplanation": {
+        "react": "Составное будущее: będę + инфинитив (będę robić) или форма на -ł с родом и числом (będę robił / robiła). У być: będę, без второго глагола.",
+        "compact": "Составное будущее: będę + инфинитив или форма на -ł. У być: będę, без второго глагола."
+      }
+    },
+    "caseTeaching": {
+      "caseNote": {
+        "react": "Wołacz показан как форма обращения; с неодушевлёнными словами обычно используется только стилистически. «Zachwycam się…» = «Восхищаюсь…» (Narzędnik), «Przyglądam się…» — Celownik.",
+        "compact": "Wołacz — форма обращения. «Zachwycam się…» требует Narzędnik; «Przyglądam się…» — Celownik."
+      },
+      "comparisonReadingHint": "Читай по строке, чтобы сравнить типы. По столбцу — чтобы увидеть все формы одного слова."
+    },
+    "comparisonNounIds": [
+      "husband",
+      "friendM",
+      "dog",
+      "house",
+      "wife",
+      "book",
+      "child"
+    ],
+    "russianSupport": {
+      "title": {
+        "full": "Опора на русский: что переносится, а что проверить",
+        "compact": "Опора на русский"
+      },
+      "columns": [
+        "Русская опора",
+        "Польская конструкция",
+        "Проверка"
+      ],
+      "rows": [
+        {
+          "id": "accusative",
+          "cue": "вижу кого? что?",
+          "react": {
+            "construction": "Widzę moją żonę.",
+            "check": "Логика винительного знакома; польские окончания нужно менять во всей группе."
+          },
+          "web": {
+            "construction": "Widzę moją żonę.",
+            "check": "Польские окончания меняются во всей группе."
+          },
+          "desktop": {
+            "construction": "Widzę moją żonę.",
+            "check": "Окончания меняются во всей группе"
+          },
+          "mobileLine": "вижу кого? что? → Widzę moją żonę. Окончания меняются во всей группе.",
+          "comparisons": [
+            {
+              "from": "moja żona",
+              "to": "moją żonę",
+              "beforeParts": [
+                {
+                  "text": "moj",
+                  "isChanged": false,
+                  "isEnding": false
+                },
+                {
+                  "text": "a",
+                  "isChanged": true,
+                  "isEnding": true
+                },
+                {
+                  "text": " ",
+                  "isChanged": false,
+                  "isEnding": false
+                },
+                {
+                  "text": "żon",
+                  "isChanged": false,
+                  "isEnding": false
+                },
+                {
+                  "text": "a",
+                  "isChanged": true,
+                  "isEnding": true
+                }
+              ],
+              "afterParts": [
+                {
+                  "text": "moj",
+                  "isChanged": false,
+                  "isEnding": false
+                },
+                {
+                  "text": "ą",
+                  "isChanged": true,
+                  "isEnding": true
+                },
+                {
+                  "text": " ",
+                  "isChanged": false,
+                  "isEnding": false
+                },
+                {
+                  "text": "żon",
+                  "isChanged": false,
+                  "isEnding": false
+                },
+                {
+                  "text": "ę",
+                  "isChanged": true,
+                  "isEnding": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "instrumental",
+          "cue": "с моей женой",
+          "react": {
+            "construction": "z moją żoną",
+            "check": "Польское женское -ą соответствует здесь творительному; это же окончание есть у прилагательного в Bierniku."
+          },
+          "web": {
+            "construction": "z moją żoną",
+            "check": "Женское -ą здесь соответствует творительному."
+          },
+          "desktop": {
+            "construction": "z moją żoną",
+            "check": "Женское -ą — творительный"
+          },
+          "mobileLine": "с моей женой → z moją żoną. Женское -ą — творительный.",
+          "comparisons": [
+            {
+              "from": "moja żona",
+              "to": "moją żoną",
+              "beforeParts": [
+                {
+                  "text": "moj",
+                  "isChanged": false,
+                  "isEnding": false
+                },
+                {
+                  "text": "a",
+                  "isChanged": true,
+                  "isEnding": true
+                },
+                {
+                  "text": " ",
+                  "isChanged": false,
+                  "isEnding": false
+                },
+                {
+                  "text": "żon",
+                  "isChanged": false,
+                  "isEnding": false
+                },
+                {
+                  "text": "a",
+                  "isChanged": true,
+                  "isEnding": true
+                }
+              ],
+              "afterParts": [
+                {
+                  "text": "moj",
+                  "isChanged": false,
+                  "isEnding": false
+                },
+                {
+                  "text": "ą",
+                  "isChanged": true,
+                  "isEnding": true
+                },
+                {
+                  "text": " ",
+                  "isChanged": false,
+                  "isEnding": false
+                },
+                {
+                  "text": "żon",
+                  "isChanged": false,
+                  "isEnding": false
+                },
+                {
+                  "text": "ą",
+                  "isChanged": true,
+                  "isEnding": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "locative",
+          "cue": "говорю о жене",
+          "react": {
+            "construction": "mówię o żonie",
+            "check": "Местный падеж требует предлога; żona → żonie."
+          },
+          "web": {
+            "construction": "mówię o żonie",
+            "check": "Местный падеж требует предлога; żona → żonie."
+          },
+          "desktop": {
+            "construction": "mówię o żonie",
+            "check": "Местный требует предлога"
+          },
+          "mobileLine": "говорю о жене → mówię o żonie. Местный требует предлога.",
+          "comparisons": [
+            {
+              "from": "żona",
+              "to": "żonie",
+              "beforeParts": [
+                {
+                  "text": "żon",
+                  "isChanged": false,
+                  "isEnding": false
+                },
+                {
+                  "text": "a",
+                  "isChanged": true,
+                  "isEnding": true
+                }
+              ],
+              "afterParts": [
+                {
+                  "text": "żon",
+                  "isChanged": false,
+                  "isEnding": false
+                },
+                {
+                  "text": "ie",
+                  "isChanged": true,
+                  "isEnding": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "possessive",
+          "cue": "мой / его / их",
+          "react": {
+            "construction": "moją żonę / jego żonę / ich żonę",
+            "check": "jego, jej, ich не склоняются. Формы mojego и mojej зависят от предмета обладания."
+          },
+          "web": {
+            "construction": "moją żonę / jego żonę / ich żonę",
+            "check": "jego, jej, ich не склоняются."
+          },
+          "desktop": {
+            "construction": "moją / jego / ich żonę",
+            "check": "jego, jej, ich не склоняются"
+          },
+          "mobileLine": "мой / его / их → moją / jego / ich żonę. jego, jej, ich не склоняются.",
+          "comparisons": [
+            {
+              "from": "moją żonę",
+              "to": "jego żonę",
+              "beforeParts": [
+                {
+                  "text": "moją",
+                  "isChanged": true,
+                  "isEnding": false
+                },
+                {
+                  "text": " żonę",
+                  "isChanged": false,
+                  "isEnding": false
+                }
+              ],
+              "afterParts": [
+                {
+                  "text": "jego",
+                  "isChanged": true,
+                  "isEnding": false
+                },
+                {
+                  "text": " żonę",
+                  "isChanged": false,
+                  "isEnding": false
+                }
+              ]
+            },
+            {
+              "from": "moją żonę",
+              "to": "ich żonę",
+              "beforeParts": [
+                {
+                  "text": "moją",
+                  "isChanged": true,
+                  "isEnding": false
+                },
+                {
+                  "text": " żonę",
+                  "isChanged": false,
+                  "isEnding": false
+                }
+              ],
+              "afterParts": [
+                {
+                  "text": "ich",
+                  "isChanged": true,
+                  "isEnding": false
+                },
+                {
+                  "text": " żonę",
+                  "isChanged": false,
+                  "isEnding": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "pipeline": {
+      "title": "Сначала конструкция, затем формы",
+      "steps": [
+        {
+          "id": "intent",
+          "label": "01 · Смысл",
+          "question": "Что хочу сказать?",
+          "example": "Вижу / не вижу / говорю о…"
+        },
+        {
+          "id": "case",
+          "label": "02 · Операция",
+          "question": "Какой падеж нужен?",
+          "example": "widzę → Biernik"
+        },
+        {
+          "id": "agreement",
+          "label": "03 · Согласование",
+          "question": "Меняю всю группу",
+          "example": "moją + piękną + żonę"
+        }
+      ],
+      "compactExample": "widzę → Biernik → moją + piękną + żonę"
+    },
+    "systemCards": [
+      {
+        "id": "noun",
+        "title": "Существительное",
+        "explanation": "Род × число × падеж",
+        "example": "żona → żonę → żony",
+        "steps": [
+          "żona",
+          "żonę",
+          "żony"
+        ]
+      },
+      {
+        "id": "agreement",
+        "title": "Прилагательное и владелец",
+        "explanation": "Копируют род, число и падеж",
+        "example": "moja piękna → moją piękną",
+        "steps": [
+          "moja piękna",
+          "moją piękną"
+        ]
+      },
+      {
+        "id": "verb",
+        "title": "Глагол",
+        "explanation": "Лицо × число × время × вид",
+        "example": "widzę → widziałem → będę widzieć",
+        "steps": [
+          "widzę",
+          "widziałem",
+          "będę widzieć"
+        ]
+      },
+      {
+        "id": "modifiers",
+        "title": "Модификаторы",
+        "explanation": "Отрицание · вопрос · владелец",
+        "example": "Widzę… → Nie widzę… → Czy widzę…?",
+        "steps": [
+          "Widzę…",
+          "Nie widzę…",
+          "Czy widzę…?"
+        ]
+      }
+    ],
+    "maleAccRows": [
+      {
+        "id": "person",
+        "label": "Человек",
+        "title": "mąż / kolega",
+        "examples": [
+          {
+            "from": "mój dobry mąż",
+            "to": "mojego dobrego męża",
+            "sentence": "Widzę mojego dobrego męża."
+          },
+          {
+            "from": "mój dobry kolega",
+            "to": "mojego dobrego kolegę",
+            "sentence": "Widzę mojego dobrego kolegę."
+          }
+        ],
+        "rule": "На согласную: как Gen. На -a: -ę у существительного, но -ego у местоимения и прилагательного."
+      },
+      {
+        "id": "animal",
+        "label": "Животное",
+        "title": "pies / kot",
+        "examples": [
+          {
+            "from": "mój dobry pies",
+            "to": "mojego dobrego psa",
+            "sentence": "Widzę mojego dobrego psa."
+          }
+        ],
+        "rule": "Винительный как родительный: pies → psa."
+      },
+      {
+        "id": "object",
+        "label": "Предмет",
+        "title": "dom / samochód",
+        "examples": [
+          {
+            "from": "mój nowy samochód",
+            "to": "mój nowy samochód",
+            "sentence": "Widzę mój nowy samochód."
+          }
+        ],
+        "rule": "Винительный как именительный: группа сохраняет базовую форму."
+      }
+    ],
+    "aspectRows": [
+      {
+        "label": "robić · процесс",
+        "from": "robić",
+        "present": "robię",
+        "past": "robiłem / robiłam",
+        "future": "będę robić"
+      },
+      {
+        "label": "zrobić · результат",
+        "from": "zrobić",
+        "present": null,
+        "past": "zrobiłem / zrobiłam",
+        "future": "zrobię"
+      },
+      {
+        "label": "kupować · процесс",
+        "from": "kupować",
+        "present": "kupuję",
+        "past": "kupowałem / kupowałam",
+        "future": "będę kupować"
+      },
+      {
+        "label": "kupić · результат",
+        "from": "kupić",
+        "present": null,
+        "past": "kupiłem / kupiłam",
+        "future": "kupię"
+      }
+    ],
+    "tenseRows": [
+      {
+        "label": "Сейчас",
+        "from": "Moja piękna żona idzie do domu.",
+        "to": "Moja piękna żona idzie do domu."
+      },
+      {
+        "label": "Прошедшее",
+        "from": "Moja piękna żona idzie do domu.",
+        "to": "Moja piękna żona szła do domu."
+      },
+      {
+        "label": "Будущее · процесс",
+        "from": "Moja piękna żona szła do domu.",
+        "to": "Moja piękna żona będzie szła do domu."
+      },
+      {
+        "label": "Отрицание",
+        "from": "Moja piękna żona idzie do domu.",
+        "to": "Moja piękna żona nie idzie do domu."
+      },
+      {
+        "label": "Вопрос",
+        "from": "Moja piękna żona idzie do domu.",
+        "to": "Czy moja piękna żona idzie do domu?"
+      }
+    ],
+    "chainRows": [
+      {
+        "label": "База",
+        "from": "To jest moja piękna żona.",
+        "to": "Widzę moją piękną żonę.",
+        "change": "Biernik всей группы"
+      },
+      {
+        "label": "Прошедшее",
+        "from": "Widzę moją piękną żonę.",
+        "to": "Widziałem moją piękną żonę.",
+        "change": "widzę → widziałem"
+      },
+      {
+        "label": "Отрицание",
+        "from": "Widziałem moją piękną żonę.",
+        "to": "Nie widziałem mojej pięknej żony.",
+        "change": "вся группа: Biernik → Dopełniacz"
+      },
+      {
+        "label": "Их вместо моей",
+        "from": "Nie widziałem mojej pięknej żony.",
+        "to": "Nie widziałem ich pięknej żony.",
+        "change": "mojej → ich; ich не склоняется"
+      },
+      {
+        "label": "Говорю о…",
+        "from": "Nie widziałem ich pięknej żony.",
+        "to": "Mówię o ich pięknej żonie.",
+        "change": "o → Miejscownik"
+      }
+    ],
+    "caseRows": [
+      {
+        "id": "nom",
+        "pl": "Mianownik",
+        "ru": "Именительный",
+        "question": "kto? co?",
+        "trigger": "To jest…"
+      },
+      {
+        "id": "gen",
+        "pl": "Dopełniacz",
+        "ru": "Родительный",
+        "question": "kogo? czego?",
+        "trigger": "nie widzę / nie mam / bez / do",
+        "skill": "case.gen.neg"
+      },
+      {
+        "id": "dat",
+        "pl": "Celownik",
+        "ru": "Дательный",
+        "question": "komu? czemu?",
+        "trigger": "daję / pomagam",
+        "skill": "case.dat"
+      },
+      {
+        "id": "acc",
+        "pl": "Biernik",
+        "ru": "Винительный",
+        "question": "kogo? co?",
+        "trigger": "widzę / mam / lubię",
+        "skill": "case.acc.f"
+      },
+      {
+        "id": "inst",
+        "pl": "Narzędnik",
+        "ru": "Творительный",
+        "question": "kim? czym?",
+        "trigger": "z (с) / jestem",
+        "skill": "case.inst"
+      },
+      {
+        "id": "loc",
+        "pl": "Miejscownik",
+        "ru": "Предложный",
+        "question": "o kim? o czym?",
+        "trigger": "o / w / na (место)",
+        "skill": "case.loc"
+      },
+      {
+        "id": "voc",
+        "pl": "Wołacz",
+        "ru": "Обращение",
+        "question": "обращаемся к кому-то",
+        "trigger": "Żono! Kolego!"
+      }
+    ],
+    "genderNames": {
+      "m-personal": "мужской · человек",
+      "m-animate": "мужской · животное",
+      "m-inanimate": "мужской · предмет",
+      "f": "женский",
+      "n": "средний"
+    },
+    "matrixIntroduction": "Один небольшой словарь. Видно, что меняется при каждой операции.",
+    "contextHelp": {
+      "react": "Красным показана старая часть, золотым — новая. Местоимение и прилагательное согласуются с существительным.",
+      "compact": "Местоимение и прилагательное согласуются с существительным. jego, jej, ich не изменяются."
+    },
+    "maleAccIntro": "Для единственного числа сначала определи тип существительного.",
+    "aspectNoPresent": {
+      "compact": "Нет настоящего времени",
+      "ios": "Настоящее: нет настоящего времени"
+    },
+    "webCaseCompositionHeader": "Местоимение + прилагательное + существительное"
+  },
+  "skills": [
+    {
+      "id": "case.acc.n",
+      "title": "Biernik · средний род",
+      "group": "Przypadki",
+      "level": "A1",
+      "formula": "Средний род: Biernik = Mianownik",
+      "theory": "В единственном числе средний род сохраняет базовую форму в Bierniku: widzę moje małe dziecko.",
+      "hint": "moje nowe okno → widzę moje nowe okno",
+      "prerequisites": [],
+      "focus": {
+        "before": "moje duże morze",
+        "after": "moje duże morze"
+      },
+      "methods": {
+        "logic": {
+          "introduction": "В единственном числе средний род сохраняет базовую форму в Bierniku: widzę moje małe dziecko.",
+          "promptLead": "Сначала определи правило и форму.",
+          "introduce": "Проверь, совпадает ли базовая форма среднего рода с формой прямого дополнения.",
+          "retrieve": "Определи признаки и преобразуй исходное предложение самостоятельно.",
+          "feedback": "Сравни исходную и новую форму, затем проверь каждое изменение и правило.",
+          "review": "Выбери «Повторить» или «Вспомнил» по своей попытке; затем реши новое задание без подсказки."
+        },
+        "situations": {
+          "introduction": "Ты показываешь собеседнику то, о чём идёт речь. Назови это целой фразой: в этой группе форма остаётся прежней.",
+          "promptLead": "Представь ситуацию и скажи целое предложение.",
+          "introduce": "Ты сообщаешь собеседнику, что видишь названное. Как сказать об этом целой фразой?",
+          "retrieve": "Представь ситуацию и скажи целое предложение самостоятельно.",
+          "feedback": "Сравни, что хотел сказать, с эталоном и проследи изменения в предложении.",
+          "review": "Оцени, удалось ли вспомнить ответ самостоятельно; следующую ситуацию реши заново."
+        }
+      },
+      "styleContent": {
+        "nativeParallel": [
+          {
+            "native": "Вижу моё старое окно.",
+            "target": "Widzę moje stare okno.",
+            "note": "Средний род в винительном падеже не меняется ни в русском, ни в польском: «окно» и okno остаются в исходной форме.",
+            "matches": true
+          }
+        ],
+        "examples": [
+          "Mam nowe okno.",
+          "Widzę małe dziecko."
+        ],
+        "why": "Средний род — самый простой случай: винительный падеж внешне совпадает с именительным, потому что у среднего рода в обоих языках нет отдельного окончания для этой роли."
+      }
+    },
+    {
+      "id": "case.acc.f",
+      "title": "Biernik · żeński",
+      "group": "Przypadki",
+      "level": "A1",
+      "formula": "-a → -ę; прилагательное -a → -ą",
+      "theory": "Прямой объект после widzę, mam, lubię, kupuję обычно стоит в Bierniku.",
+      "hint": "Widzę kogo? co?",
+      "prerequisites": [],
+      "focus": {
+        "before": "moja młoda siostra",
+        "after": "moją młodą siostrę"
+      },
+      "methods": {
+        "logic": {
+          "introduction": "Прямой объект после widzę, mam, lubię, kupuję обычно стоит в Bierniku.",
+          "promptLead": "Сначала определи правило и форму.",
+          "introduce": "Определи род и падеж группы после действия, затем проверь согласование.",
+          "retrieve": "Определи признаки и преобразуй исходное предложение самостоятельно.",
+          "feedback": "Сравни исходную и новую форму, затем проверь каждое изменение и правило.",
+          "review": "Выбери «Повторить» или «Вспомнил» по своей попытке; затем реши новое задание без подсказки."
+        },
+        "situations": {
+          "introduction": "Ты говоришь собеседнику, кого или что видишь. Представь эту сцену, затем измени окончания всей группы.",
+          "promptLead": "Представь ситуацию и скажи целое предложение.",
+          "introduce": "Ты сообщаешь, кого или что видишь. Как назвать объект целой фразой?",
+          "retrieve": "Представь ситуацию и скажи целое предложение самостоятельно.",
+          "feedback": "Сравни, что хотел сказать, с эталоном и проследи изменения в предложении.",
+          "review": "Оцени, удалось ли вспомнить ответ самостоятельно; следующую ситуацию реши заново."
+        }
+      },
+      "styleContent": {
+        "nativeParallel": [
+          {
+            "native": "Вижу мою хорошую жену.",
+            "target": "Widzę moją dobrą żonę.",
+            "note": "В обоих языках женский род на -a/-а получает окончание -ę/-у в винительном: żona→żonę, жена→жену; прилагательное меняется вместе с существительным.",
+            "matches": true
+          }
+        ],
+        "examples": [
+          "Mam nową książkę.",
+          "Lubię moją siostrę."
+        ],
+        "why": "Прямой объект после глаголов действия (widzę, mam, lubię) обычно стоит в винительном; у женского рода на -a это всегда -ę, как и в русском -а→-у."
+      }
+    },
+    {
+      "id": "case.acc.m",
+      "title": "Biernik · męski",
+      "group": "Przypadki",
+      "level": "A2",
+      "formula": "на согласную: живое = Gen; неживое = Nom",
+      "theory": "Для мужских существительных на согласную: widzę męża/psa, но widzę dom/samochód. У существительных на -a: widzę kolegę, но nie widzę kolegi.",
+      "hint": "Сначала определи: żywotny или nieżywotny.",
+      "prerequisites": [
+        "case.acc.f"
+      ],
+      "focus": {
+        "before": "mój stary sąsiad",
+        "after": "mojego starego sąsiada"
+      },
+      "methods": {
+        "logic": {
+          "introduction": "Для мужских существительных на согласную: widzę męża/psa, но widzę dom/samochód. У существительных на -a: widzę kolegę, но nie widzę kolegi.",
+          "promptLead": "Сначала определи правило и форму.",
+          "introduce": "Определи, обозначает ли мужское слово лицо, живое существо или предмет.",
+          "retrieve": "Определи признаки и преобразуй исходное предложение самостоятельно.",
+          "feedback": "Сравни исходную и новую форму, затем проверь каждое изменение и правило.",
+          "review": "Выбери «Повторить» или «Вспомнил» по своей попытке; затем реши новое задание без подсказки."
+        },
+        "situations": {
+          "introduction": "Ты рассказываешь, кого или что видишь. Смысл «вижу кого/что?» помогает выбрать форму всей группы.",
+          "promptLead": "Представь ситуацию и скажи целое предложение.",
+          "introduce": "Ты рассказываешь, кого или что видишь. Что важно в значении названного?",
+          "retrieve": "Представь ситуацию и скажи целое предложение самостоятельно.",
+          "feedback": "Сравни, что хотел сказать, с эталоном и проследи изменения в предложении.",
+          "review": "Оцени, удалось ли вспомнить ответ самостоятельно; следующую ситуацию реши заново."
+        }
+      },
+      "styleContent": {
+        "nativeParallel": [
+          {
+            "native": "Вижу мужа.",
+            "target": "Widzę męża.",
+            "note": "Одушевлённые существительные мужского рода в винительном совпадают с родительным — это работает одинаково в русском и польском.",
+            "matches": true
+          },
+          {
+            "native": "Вижу дом.",
+            "target": "Widzę dom.",
+            "note": "Неодушевлённые существительные мужского рода в винительном совпадают с именительным — тоже как в русском.",
+            "matches": true
+          }
+        ],
+        "examples": [
+          "Widzę psa.",
+          "Widzę samochód."
+        ],
+        "why": "Мужской род различает живое и неживое в винительном падеже — это не польская особенность, а общее славянское правило, знакомое из русского."
+      }
+    },
+    {
+      "id": "case.gen.neg",
+      "title": "Dopełniacz · negacja",
+      "group": "Przypadki",
+      "level": "A2",
+      "formula": "Mam X → Nie mam + GEN",
+      "theory": "При отрицании прямого объекта Biernik очень часто превращается в Dopełniacz.",
+      "hint": "Не меняй только nie — поменяй весь noun phrase.",
+      "prerequisites": [
+        "case.acc.f"
+      ],
+      "focus": {
+        "before": "Widzę moją młodą siostrę.",
+        "after": "Nie widzę mojej młodej siostry."
+      },
+      "methods": {
+        "logic": {
+          "introduction": "При отрицании прямого объекта Biernik очень часто превращается в Dopełniacz.",
+          "promptLead": "Сначала определи правило и форму.",
+          "introduce": "Проверь, как отрицание влияет на падеж прямого дополнения.",
+          "retrieve": "Определи признаки и преобразуй исходное предложение самостоятельно.",
+          "feedback": "Сравни исходную и новую форму, затем проверь каждое изменение и правило.",
+          "review": "Выбери «Повторить» или «Вспомнил» по своей попытке; затем реши новое задание без подсказки."
+        },
+        "situations": {
+          "introduction": "Ты отрицаешь действие с прямым объектом. В польском при отрицании меняется форма всей группы после глагола.",
+          "promptLead": "Представь ситуацию и скажи целое предложение.",
+          "introduce": "Ты отрицаешь действие, сохраняя то, о чём идёт речь. Как сказать это целым предложением?",
+          "retrieve": "Представь ситуацию и скажи целое предложение самостоятельно.",
+          "feedback": "Сравни, что хотел сказать, с эталоном и проследи изменения в предложении.",
+          "review": "Оцени, удалось ли вспомнить ответ самостоятельно; следующую ситуацию реши заново."
+        }
+      },
+      "styleContent": {
+        "nativeParallel": [
+          {
+            "native": "Не вижу жену.",
+            "target": "Nie widzę żony.",
+            "note": "В русском при отрицании падеж не меняется (живы оба варианта — «жену»/«жены»); в польском после nie обязателен Dopełniacz.",
+            "matches": false
+          },
+          {
+            "native": "Не вижу книгу.",
+            "target": "Nie widzę książki.",
+            "note": "Тот же сдвиг у неодушевлённого объекта — родительный обязателен без вариантов.",
+            "matches": false
+          }
+        ],
+        "examples": [
+          "Nie mam czasu.",
+          "Nie widzę żadnego problemu."
+        ],
+        "why": "В польском отрицание всегда переводит прямое дополнение в родительный падеж; в русском это необязательно и звучит скорее книжно."
+      }
+    },
+    {
+      "id": "case.inst",
+      "title": "Narzędnik · z / być",
+      "group": "Przypadki",
+      "level": "A1",
+      "formula": "z + kim? czym? → INST",
+      "theory": "После z в значении «с кем/чем» используем Narzędnik. Также: Jestem programistą.",
+      "hint": "z moją żoną, z dobrym kolegą",
+      "prerequisites": [],
+      "focus": {
+        "before": "moja żona",
+        "after": "z moją żoną"
+      },
+      "methods": {
+        "logic": {
+          "introduction": "После z в значении «с кем/чем» используем Narzędnik. Также: Jestem programistą.",
+          "promptLead": "Сначала определи правило и форму.",
+          "introduce": "Определи падеж после предлога со значением совместного действия.",
+          "retrieve": "Определи признаки и преобразуй исходное предложение самостоятельно.",
+          "feedback": "Сравни исходную и новую форму, затем проверь каждое изменение и правило.",
+          "review": "Выбери «Повторить» или «Вспомнил» по своей попытке; затем реши новое задание без подсказки."
+        },
+        "situations": {
+          "introduction": "Ты рассказываешь, с кем идёшь. После z в значении «с кем?» меняется вся группа.",
+          "promptLead": "Представь ситуацию и скажи целое предложение.",
+          "introduce": "Ты говоришь, с кем идёшь. Как назвать спутника целой фразой?",
+          "retrieve": "Представь ситуацию и скажи целое предложение самостоятельно.",
+          "feedback": "Сравни, что хотел сказать, с эталоном и проследи изменения в предложении.",
+          "review": "Оцени, удалось ли вспомнить ответ самостоятельно; следующую ситуацию реши заново."
+        }
+      },
+      "styleContent": {
+        "nativeParallel": [
+          {
+            "native": "Иду с женой.",
+            "target": "Idę z żoną.",
+            "note": "После «с»/z в значении совместности оба языка требуют творительного падежа.",
+            "matches": true
+          },
+          {
+            "native": "Я программист.",
+            "target": "Jestem programistą.",
+            "note": "В польском профессия при być всегда в творительном; в разговорном русском связку «быть» обычно пропускают и говорят в именительном («Я программист»), творительный нужен только с «являюсь».",
+            "matches": false
+          }
+        ],
+        "examples": [
+          "Rozmawiam z kolegą.",
+          "Jestem nauczycielem."
+        ],
+        "why": "Творительный после z/с — обычное дело в обоих языках; а вот профессия при глаголе «быть» — разные привычки: поляки всегда используют творительный, русские обычно говорят в именительном без связки."
+      }
+    },
+    {
+      "id": "case.loc",
+      "title": "Miejscownik · o",
+      "group": "Przypadki",
+      "level": "A2",
+      "formula": "o + kim? czym? → LOC",
+      "theory": "После o (о ком/о чём) нужен Miejscownik.",
+      "hint": "mówię o żonie / domu",
+      "prerequisites": [
+        "case.inst"
+      ],
+      "focus": {
+        "before": "moja żona",
+        "after": "o mojej żonie"
+      },
+      "methods": {
+        "logic": {
+          "introduction": "После o (о ком/о чём) нужен Miejscownik.",
+          "promptLead": "Сначала определи правило и форму.",
+          "introduce": "Определи падеж после предлога, который вводит тему разговора.",
+          "retrieve": "Определи признаки и преобразуй исходное предложение самостоятельно.",
+          "feedback": "Сравни исходную и новую форму, затем проверь каждое изменение и правило.",
+          "review": "Выбери «Повторить» или «Вспомнил» по своей попытке; затем реши новое задание без подсказки."
+        },
+        "situations": {
+          "introduction": "Ты рассказываешь о человеке или предмете из предложения. После o в значении «о ком/о чём?» нужна другая форма.",
+          "promptLead": "Представь ситуацию и скажи целое предложение.",
+          "introduce": "Ты рассказываешь о том, кто или что уже названо. Как обозначить тему разговора?",
+          "retrieve": "Представь ситуацию и скажи целое предложение самостоятельно.",
+          "feedback": "Сравни, что хотел сказать, с эталоном и проследи изменения в предложении.",
+          "review": "Оцени, удалось ли вспомнить ответ самостоятельно; следующую ситуацию реши заново."
+        }
+      },
+      "styleContent": {
+        "nativeParallel": [
+          {
+            "native": "Говорю о жене.",
+            "target": "Mówię o żonie.",
+            "note": "После «о» оба языка используют падеж, обозначающий тему разговора (в русском предложный, в польском Miejscownik) — сама логика конструкции совпадает.",
+            "matches": true
+          }
+        ],
+        "examples": [
+          "Myślę o tobie.",
+          "Czytam o historii."
+        ],
+        "why": "Предлог о/o вводит тему и требует особого падежа — в русском предложный, в польском Miejscownik; окончания разные, но роль в предложении одна и та же."
+      }
+    },
+    {
+      "id": "case.dat",
+      "title": "Celownik · komu?",
+      "group": "Przypadki",
+      "level": "A2",
+      "formula": "daję/pomagam + DAT",
+      "theory": "Celownik отвечает «кому? чему?». Учим через короткие устойчивые конструкции.",
+      "hint": "Daję prezent komu?",
+      "prerequisites": [],
+      "focus": {
+        "before": "moja żona",
+        "after": "mojej żonie"
+      },
+      "methods": {
+        "logic": {
+          "introduction": "Celownik отвечает «кому? чему?». Учим через короткие устойчивые конструкции.",
+          "promptLead": "Сначала определи правило и форму.",
+          "introduce": "Определи падеж получателя действия.",
+          "retrieve": "Определи признаки и преобразуй исходное предложение самостоятельно.",
+          "feedback": "Сравни исходную и новую форму, затем проверь каждое изменение и правило.",
+          "review": "Выбери «Повторить» или «Вспомнил» по своей попытке; затем реши новое задание без подсказки."
+        },
+        "situations": {
+          "introduction": "Ты передаёшь подарок человеку из предложения. Получатель действия отвечает на вопрос «кому?».",
+          "promptLead": "Представь ситуацию и скажи целое предложение.",
+          "introduce": "Ты говоришь, кому передаёшь что-то. Как назвать получателя?",
+          "retrieve": "Представь ситуацию и скажи целое предложение самостоятельно.",
+          "feedback": "Сравни, что хотел сказать, с эталоном и проследи изменения в предложении.",
+          "review": "Оцени, удалось ли вспомнить ответ самостоятельно; следующую ситуацию реши заново."
+        }
+      },
+      "styleContent": {
+        "nativeParallel": [
+          {
+            "native": "Даю жене подарок.",
+            "target": "Daję żonie prezent.",
+            "note": "Дательный падеж получателя действия — совпадает в обоих языках.",
+            "matches": true
+          },
+          {
+            "native": "Помогаю жене.",
+            "target": "Pomagam żonie.",
+            "note": "Глагол «помогать»/pomagać управляет дательным падежом в обоих языках.",
+            "matches": true
+          }
+        ],
+        "examples": [
+          "Mówię ci prawdę.",
+          "Dziękuję nauczycielowi."
+        ],
+        "why": "Celownik/дательный отвечает на «кому?» и работает одинаково с глаголами давания и помощи в обоих языках."
+      }
+    },
+    {
+      "id": "agreement.my",
+      "title": "Мой, твой, его, наш, их",
+      "group": "Zgoda",
+      "level": "A2",
+      "formula": "Владелец + прилагательное + существительное",
+      "theory": "mój, twój, nasz, wasz согласуются с существительным. jego, jej, ich не склоняются.",
+      "hint": "moją piękną żonę → ich piękną żonę",
+      "prerequisites": [
+        "case.acc.f",
+        "case.gen.neg"
+      ],
+      "focus": {
+        "before": "mojej pięknej żony",
+        "after": "ich pięknej żony"
+      },
+      "methods": {
+        "logic": {
+          "introduction": "mój, twój, nasz, wasz согласуются с существительным. jego, jej, ich не склоняются.",
+          "promptLead": "Сначала определи правило и форму.",
+          "introduce": "Отдели владельца от падежа группы: какие слова должны согласоваться?",
+          "retrieve": "Определи признаки и преобразуй исходное предложение самостоятельно.",
+          "feedback": "Сравни исходную и новую форму, затем проверь каждое изменение и правило.",
+          "review": "Выбери «Повторить» или «Вспомнил» по своей попытке; затем реши новое задание без подсказки."
+        },
+        "situations": {
+          "introduction": "Теперь названное принадлежит другому владельцу. Как сохранить смысл фразы?",
+          "promptLead": "Представь ситуацию и скажи целое предложение.",
+          "introduce": "Теперь названное принадлежит другому владельцу. Как сохранить смысл фразы?",
+          "retrieve": "Представь ситуацию и скажи целое предложение самостоятельно.",
+          "feedback": "Сравни, что хотел сказать, с эталоном и проследи изменения в предложении.",
+          "review": "Оцени, удалось ли вспомнить ответ самостоятельно; следующую ситуацию реши заново."
+        }
+      },
+      "styleContent": {
+        "nativeParallel": [
+          {
+            "native": "Вижу его жену.",
+            "target": "Widzę jego żonę.",
+            "note": "«его» и jego не склоняются в обоих языках — это готовая форма для любого падежа и рода.",
+            "matches": true
+          },
+          {
+            "native": "Вижу мою жену.",
+            "target": "Widzę moją żonę.",
+            "note": "«моя»/moja склоняется по роду и падежу существительного одинаково в обоих языках.",
+            "matches": true
+          }
+        ],
+        "examples": [
+          "To jest jej dom.",
+          "Widzę ich dzieci."
+        ],
+        "why": "jego/jej/ich (его/её/их) не склоняются, потому что это застывшие формы местоимения — точно как в русском; а mój/twój/nasz/wasz согласуются с существительным, как «мой/твой/наш/ваш»."
+      }
+    },
+    {
+      "id": "verb.present",
+      "title": "Czas teraźniejszy",
+      "group": "Czasownik",
+      "level": "A1",
+      "formula": "лицо × число → окончание",
+      "theory": "Автоматизируем 6 лиц на высокочастотных глаголах.",
+      "hint": "ja/ty/on/my/wy/oni",
+      "prerequisites": [],
+      "focus": {
+        "before": "robić",
+        "after": "robię"
+      },
+      "methods": {
+        "logic": {
+          "introduction": "Автоматизируем 6 лиц на высокочастотных глаголах.",
+          "promptLead": "Сначала определи правило и форму.",
+          "introduce": "Определи лицо и число действующего лица для настоящего времени.",
+          "retrieve": "Определи признаки и преобразуй исходное предложение самостоятельно.",
+          "feedback": "Сравни исходную и новую форму, затем проверь каждое изменение и правило.",
+          "review": "Выбери «Повторить» или «Вспомнил» по своей попытке; затем реши новое задание без подсказки."
+        },
+        "situations": {
+          "introduction": "Ты описываешь действие прямо сейчас. Сначала назови, кто действует, затем выбери форму глагола.",
+          "promptLead": "Представь ситуацию и скажи целое предложение.",
+          "introduce": "Ты говоришь, что кто-то делает сейчас. Как назвать действие этого участника?",
+          "retrieve": "Представь ситуацию и скажи целое предложение самостоятельно.",
+          "feedback": "Сравни, что хотел сказать, с эталоном и проследи изменения в предложении.",
+          "review": "Оцени, удалось ли вспомнить ответ самостоятельно; следующую ситуацию реши заново."
+        }
+      },
+      "styleContent": {
+        "nativeParallel": [
+          {
+            "native": "Он идёт.",
+            "target": "On idzie.",
+            "note": "В настоящем времени оба языка спрягают глагол по лицу и числу: 3-е лицо единственного числа — идёт/idzie, окончание показывает лицо одинаково в обоих языках.",
+            "matches": true
+          }
+        ],
+        "examples": [
+          "Idzie do szkoły.",
+          "Idą do pracy."
+        ],
+        "why": "Формы настоящего времени различаются по лицу в обоих языках, но польский чаще опускает местоимение — окончание глагола само называет действующее лицо."
+      }
+    },
+    {
+      "id": "verb.past",
+      "title": "Czas przeszły",
+      "group": "Czasownik",
+      "level": "A2",
+      "formula": "основа прошедшего + род + лицо",
+      "theory": "В прошедшем времени форма отражает род говорящего/подлежащего и лицо.",
+      "hint": "robił-em, robiła-m, robili-śmy",
+      "prerequisites": [
+        "verb.present"
+      ],
+      "focus": {
+        "before": "robię",
+        "after": "robiłem"
+      },
+      "methods": {
+        "logic": {
+          "introduction": "В прошедшем времени форма отражает род говорящего/подлежащего и лицо.",
+          "promptLead": "Сначала определи правило и форму.",
+          "introduce": "Определи лицо, число и род для прошедшего времени.",
+          "retrieve": "Определи признаки и преобразуй исходное предложение самостоятельно.",
+          "feedback": "Сравни исходную и новую форму, затем проверь каждое изменение и правило.",
+          "review": "Выбери «Повторить» или «Вспомнил» по своей попытке; затем реши новое задание без подсказки."
+        },
+        "situations": {
+          "introduction": "Ты рассказываешь о действии, которое уже произошло. Как назвать его?",
+          "promptLead": "Представь ситуацию и скажи целое предложение.",
+          "introduce": "Ты рассказываешь о действии, которое уже произошло. Как назвать его?",
+          "retrieve": "Представь ситуацию и скажи целое предложение самостоятельно.",
+          "feedback": "Сравни, что хотел сказать, с эталоном и проследи изменения в предложении.",
+          "review": "Оцени, удалось ли вспомнить ответ самостоятельно; следующую ситуацию реши заново."
+        }
+      },
+      "styleContent": {
+        "nativeParallel": [
+          {
+            "native": "Она шла.",
+            "target": "Szła.",
+            "note": "Прошедшее время согласуется с родом подлежащего в обоих языках — «шла» и szła оба показывают женский род.",
+            "matches": true
+          },
+          {
+            "native": "Он шёл.",
+            "target": "Szedł.",
+            "note": "Мужской род прошедшего времени тоже совпадает — «шёл» и szedł; лицо (он) в обоих языках выражено отдельным словом, сам глагол лица не называет.",
+            "matches": true
+          }
+        ],
+        "examples": [
+          "Szedł do pracy.",
+          "Szła do szkoły."
+        ],
+        "why": "Прошедшее время в обоих языках зависит от рода — это общая славянская черта; а вот лицо (я/ты/он) в польском показывает сам глагол, а в русском — только отдельное местоимение."
+      }
+    },
+    {
+      "id": "verb.future",
+      "title": "Czas przyszły",
+      "group": "Czasownik",
+      "level": "A2",
+      "formula": "będę + инфинитив (несов.) / форма настоящего (сов.)",
+      "theory": "Для несовершенного вида: będę robić. Совершенный вид имеет простое будущее: zrobię.",
+      "hint": "będę czytać / kupię",
+      "prerequisites": [
+        "verb.present"
+      ],
+      "focus": {
+        "before": "robię",
+        "after": "będę robić"
+      },
+      "methods": {
+        "logic": {
+          "introduction": "Для несовершенного вида: będę robić. Совершенный вид имеет простое будущее: zrobię.",
+          "promptLead": "Сначала определи правило и форму.",
+          "introduce": "Определи лицо и число для будущего времени действия.",
+          "retrieve": "Определи признаки и преобразуй исходное предложение самостоятельно.",
+          "feedback": "Сравни исходную и новую форму, затем проверь каждое изменение и правило.",
+          "review": "Выбери «Повторить» или «Вспомнил» по своей попытке; затем реши новое задание без подсказки."
+        },
+        "situations": {
+          "introduction": "Ты говоришь о действии, которое ещё произойдёт. Как назвать его для этого участника?",
+          "promptLead": "Представь ситуацию и скажи целое предложение.",
+          "introduce": "Ты говоришь о действии, которое ещё произойдёт. Как назвать его для этого участника?",
+          "retrieve": "Представь ситуацию и скажи целое предложение самостоятельно.",
+          "feedback": "Сравни, что хотел сказать, с эталоном и проследи изменения в предложении.",
+          "review": "Оцени, удалось ли вспомнить ответ самостоятельно; следующую ситуацию реши заново."
+        }
+      },
+      "styleContent": {
+        "nativeParallel": [
+          {
+            "native": "Буду идти.",
+            "target": "Będę iść.",
+            "note": "Общая модель будущего несовершенного вида: буду/będę + инфинитив — сохраняется независимо от лица.",
+            "matches": true
+          },
+          {
+            "native": "Он будет идти.",
+            "target": "On będzie iść.",
+            "note": "Именно эту модель тренирует упражнение: 3-е лицо, будущее несовершенного вида — będzie + iść.",
+            "matches": true
+          }
+        ],
+        "examples": [
+          "Będziesz iść.",
+          "Będziemy iść."
+        ],
+        "why": "У будущего времени в обоих языках два способа: составное для незавершённого действия (буду/będę + инфинитив) и простая форма для завершённого результата (сделаю/zrobię) — структура полностью совпадает."
+      }
+    },
+    {
+      "id": "aspect",
+      "title": "Aspekt · robić/zrobić",
+      "group": "Czasownik",
+      "level": "B1",
+      "formula": "процесс/повторение ↔ завершённый результат",
+      "theory": "Недоконанный вид описывает процесс/повторяемость, dokonany — завершённый результат.",
+      "hint": "robiłem vs zrobiłem",
+      "prerequisites": [
+        "verb.past",
+        "verb.future"
+      ],
+      "focus": {
+        "before": "robiłem",
+        "after": "zrobiłem"
+      },
+      "methods": {
+        "logic": {
+          "introduction": "Недоконанный вид описывает процесс/повторяемость, dokonany — завершённый результат.",
+          "promptLead": "Сначала определи правило и форму.",
+          "introduce": "Сравни значение процесса и завершённого результата.",
+          "retrieve": "Определи признаки и преобразуй исходное предложение самостоятельно.",
+          "feedback": "Сравни исходную и новую форму, затем проверь каждое изменение и правило.",
+          "review": "Выбери «Повторить» или «Вспомнил» по своей попытке; затем реши новое задание без подсказки."
+        },
+        "situations": {
+          "introduction": "Ты описываешь не сам процесс покупки, а готовый результат. Выбери завершённое действие.",
+          "promptLead": "Представь ситуацию и скажи целое предложение.",
+          "introduce": "Ты хочешь подчеркнуть, что действие завершилось. Как это передать?",
+          "retrieve": "Представь ситуацию и скажи целое предложение самостоятельно.",
+          "feedback": "Сравни, что хотел сказать, с эталоном и проследи изменения в предложении.",
+          "review": "Оцени, удалось ли вспомнить ответ самостоятельно; следующую ситуацию реши заново."
+        }
+      },
+      "styleContent": {
+        "nativeParallel": [
+          {
+            "native": "Я делал (не закончил).",
+            "target": "Robiłem.",
+            "note": "Несовершенный вид описывает процесс без гарантии завершения — одинаково в обоих языках.",
+            "matches": true
+          },
+          {
+            "native": "Я сделал (готово).",
+            "target": "Zrobiłem.",
+            "note": "Совершенный вид подчёркивает завершённый результат — то же противопоставление, что в русской паре «сделал» против «делал».",
+            "matches": true
+          }
+        ],
+        "examples": [
+          "Czytałem książkę.",
+          "Przeczytałem książkę."
+        ],
+        "why": "Пара несовершенный/совершенный вид (robić/zrobić) — это то же противопоставление процесса и результата, что в русской паре делать/сделать; понятие переносится почти без изменений."
+      }
+    },
+    {
+      "id": "pronouns",
+      "title": "Zaimki osobowe",
+      "group": "Zaimki",
+      "level": "A2",
+      "formula": "ona → ją / jej / nią / niej",
+      "theory": "Тренируем местоимение сразу внутри конструкции, а не как отдельную таблицу.",
+      "hint": "widzę ją; mówię o niej; idę z nią",
+      "prerequisites": [
+        "case.inst",
+        "case.loc"
+      ],
+      "focus": {
+        "before": "moja żona",
+        "after": "ją"
+      },
+      "methods": {
+        "logic": {
+          "introduction": "Тренируем местоимение сразу внутри конструкции, а не как отдельную таблицу.",
+          "promptLead": "Сначала определи правило и форму.",
+          "introduce": "Определи падеж короткого слова, заменяющего названную группу.",
+          "retrieve": "Определи признаки и преобразуй исходное предложение самостоятельно.",
+          "feedback": "Сравни исходную и новую форму, затем проверь каждое изменение и правило.",
+          "review": "Выбери «Повторить» или «Вспомнил» по своей попытке; затем реши новое задание без подсказки."
+        },
+        "situations": {
+          "introduction": "Собеседник уже знает, о ком речь. Замени длинное название человека коротким местоимением.",
+          "promptLead": "Представь ситуацию и скажи целое предложение.",
+          "introduce": "Собеседник уже знает, о ком или о чём речь. Как избежать повторения длинной группы?",
+          "retrieve": "Представь ситуацию и скажи целое предложение самостоятельно.",
+          "feedback": "Сравни, что хотел сказать, с эталоном и проследи изменения в предложении.",
+          "review": "Оцени, удалось ли вспомнить ответ самостоятельно; следующую ситуацию реши заново."
+        }
+      },
+      "styleContent": {
+        "nativeParallel": [
+          {
+            "native": "Знаю её.",
+            "target": "Znam ją.",
+            "note": "Личное местоимение склоняется по падежу в обоих языках, хотя конкретные формы разные.",
+            "matches": true
+          },
+          {
+            "native": "Говорю о ней.",
+            "target": "Mówię o niej.",
+            "note": "После предлога оба языка добавляют дополнительный звук к местоимению: русское «н-» (о ней, с ней) и польское «ni-» (o niej, z nią) появляются в одной и той же позиции.",
+            "matches": true
+          }
+        ],
+        "examples": [
+          "Idę z nią.",
+          "Pomagam mu."
+        ],
+        "why": "Местоимения склоняются по падежу в обоих языках; в косвенных падежах после предлогов и русский, и польский вставляют один и тот же дополнительный звук (н-/ni-) — это не совпадение, а общее наследие."
+      }
+    },
+    {
+      "id": "mixed",
+      "title": "Смешанные трансформации",
+      "group": "B1 Core",
+      "level": "B1",
+      "formula": "Лицо + время + отрицание + падеж",
+      "theory": "Смешанные карточки проверяют, можешь ли ты объединить правила в живом предложении.",
+      "hint": "Сначала структура, затем окончания.",
+      "prerequisites": [
+        "agreement.my",
+        "verb.past"
+      ],
+      "focus": {
+        "before": "Widzę moją piękną żonę.",
+        "after": "Nie widziałem mojej pięknej żony."
+      },
+      "methods": {
+        "logic": {
+          "introduction": "Смешанные карточки проверяют, можешь ли ты объединить правила в живом предложении.",
+          "promptLead": "Сначала определи правило и форму.",
+          "introduce": "Проверь время, отрицание и падеж как три независимых условия.",
+          "retrieve": "Определи признаки и преобразуй исходное предложение самостоятельно.",
+          "feedback": "Сравни исходную и новую форму, затем проверь каждое изменение и правило.",
+          "review": "Выбери «Повторить» или «Вспомнил» по своей попытке; затем реши новое задание без подсказки."
+        },
+        "situations": {
+          "introduction": "Ты сообщаешь, что в прошлом не увидел названное. Как удержать все условия?",
+          "promptLead": "Представь ситуацию и скажи целое предложение.",
+          "introduce": "Ты сообщаешь, что в прошлом не увидел названное. Как удержать все условия?",
+          "retrieve": "Представь ситуацию и скажи целое предложение самостоятельно.",
+          "feedback": "Сравни, что хотел сказать, с эталоном и проследи изменения в предложении.",
+          "review": "Оцени, удалось ли вспомнить ответ самостоятельно; следующую ситуацию реши заново."
+        }
+      },
+      "styleContent": {
+        "nativeParallel": [
+          {
+            "native": "Ты не видел мою жену.",
+            "target": "Nie widziałeś mojej żony.",
+            "note": "В русском отрицание не всегда меняет падеж — винительный «жену» тоже допустим (родительный «жены» звучит книжнее); в польском после nie родительный обязателен всегда, без вариантов.",
+            "matches": false
+          }
+        ],
+        "examples": [
+          "Nie robiłem tego wczoraj.",
+          "Nie widziałem jej domu."
+        ],
+        "why": "Смешанное задание складывает несколько правил сразу: время, отрицание и падеж работают как отдельные, независимые условия — проверяй их по одному, а не все сразу."
+      }
+    },
+    {
+      "id": "sentence.question",
+      "title": "Вопрос с Czy",
+      "group": "Предложение",
+      "level": "A1",
+      "formula": "Czy + утверждение → вопрос",
+      "theory": "В общем вопросе czy ставится перед предложением. Падежи при этом не меняются.",
+      "hint": "Widzisz… → Czy widzisz…?",
+      "prerequisites": [],
+      "focus": {
+        "before": "Widzisz moją żonę.",
+        "after": "Czy widzisz moją żonę?"
+      },
+      "methods": {
+        "logic": {
+          "introduction": "В общем вопросе czy ставится перед предложением. Падежи при этом не меняются.",
+          "promptLead": "Сначала определи правило и форму.",
+          "introduce": "Определи, как превратить утверждение в общий вопрос без смены падежа.",
+          "retrieve": "Определи признаки и преобразуй исходное предложение самостоятельно.",
+          "feedback": "Сравни исходную и новую форму, затем проверь каждое изменение и правило.",
+          "review": "Выбери «Повторить» или «Вспомнил» по своей попытке; затем реши новое задание без подсказки."
+        },
+        "situations": {
+          "introduction": "Ты хочешь уточнить, видит ли собеседник названное. Как задать общий вопрос?",
+          "promptLead": "Представь ситуацию и скажи целое предложение.",
+          "introduce": "Ты хочешь уточнить, видит ли собеседник названное. Как задать общий вопрос?",
+          "retrieve": "Представь ситуацию и скажи целое предложение самостоятельно.",
+          "feedback": "Сравни, что хотел сказать, с эталоном и проследи изменения в предложении.",
+          "review": "Оцени, удалось ли вспомнить ответ самостоятельно; следующую ситуацию реши заново."
+        }
+      },
+      "styleContent": {
+        "nativeParallel": [
+          {
+            "native": "Ты видишь мою жену?",
+            "target": "Czy widzisz moją żonę?",
+            "note": "В русском общий вопрос обычно образуется только интонацией (падежи и порядок слов не меняются); в польском для этого есть отдельное слово czy в начале предложения.",
+            "matches": false
+          }
+        ],
+        "examples": [
+          "Czy masz czas?",
+          "Czy on tu jest?"
+        ],
+        "why": "В русском вопрос без вопросительного слова опирается на интонацию (изредка — книжную частицу «ли» после глагола); в польском для этого есть отдельное слово czy, которое всегда ставится в начале предложения."
+      }
+    },
+    {
+      "id": "sentence.plural",
+      "title": "Единственное → множественное",
+      "group": "Предложение",
+      "level": "A2",
+      "formula": "Местоимение + прилагательное + существительное → множественное число",
+      "theory": "Во множественном числе различай мужскую личную группу и все остальные.",
+      "hint": "mojego kolegę → moich kolegów; moją książkę → moje książki",
+      "prerequisites": [
+        "case.acc.m",
+        "agreement.my"
+      ],
+      "focus": {
+        "before": "mojego kolegę",
+        "after": "moich kolegów"
+      },
+      "methods": {
+        "logic": {
+          "introduction": "Во множественном числе различай мужскую личную группу и все остальные.",
+          "promptLead": "Сначала определи правило и форму.",
+          "introduce": "Определи число и тип группы перед изменением формы.",
+          "retrieve": "Определи признаки и преобразуй исходное предложение самостоятельно.",
+          "feedback": "Сравни исходную и новую форму, затем проверь каждое изменение и правило.",
+          "review": "Выбери «Повторить» или «Вспомнил» по своей попытке; затем реши новое задание без подсказки."
+        },
+        "situations": {
+          "introduction": "Теперь речь не об одном человеке или предмете, а о нескольких. Измени всю группу.",
+          "promptLead": "Представь ситуацию и скажи целое предложение.",
+          "introduce": "Теперь речь о нескольких таких участниках или предметах. Как назвать всю группу?",
+          "retrieve": "Представь ситуацию и скажи целое предложение самостоятельно.",
+          "feedback": "Сравни, что хотел сказать, с эталоном и проследи изменения в предложении.",
+          "review": "Оцени, удалось ли вспомнить ответ самостоятельно; следующую ситуацию реши заново."
+        }
+      },
+      "styleContent": {
+        "nativeParallel": [
+          {
+            "native": "Мои коллеги. Мои книги.",
+            "target": "Moi koledzy. Moje książki.",
+            "note": "В русском множественное число прилагательного/местоимения одно для всех родов и групп («мои» и там, и там); в польском мужская личная группа (koledzy) получает особую форму (moi), отличную от остальных существительных (moje książki).",
+            "matches": false
+          }
+        ],
+        "examples": [
+          "Moi bracia.",
+          "Moje siostry."
+        ],
+        "why": "Главная сложность множественного числа в польском — категория «мужская личная группа» (люди мужского пола), у которой особые формы прилагательных, местоимений и глаголов; в русском такого разделения во множественном числе нет."
+      }
+    }
+  ],
+  "sentenceSeeds": [
+    {
+      "nounId": "wife",
+      "adjectiveId": "beautiful"
+    },
+    {
+      "nounId": "husband",
+      "adjectiveId": "good"
+    },
+    {
+      "nounId": "friendM",
+      "adjectiveId": "good"
+    },
+    {
+      "nounId": "son",
+      "adjectiveId": "small"
+    },
+    {
+      "nounId": "dog",
+      "adjectiveId": "good"
+    },
+    {
+      "nounId": "cat",
+      "adjectiveId": "small"
+    },
+    {
+      "nounId": "book",
+      "adjectiveId": "new"
+    },
+    {
+      "nounId": "car",
+      "adjectiveId": "new"
+    },
+    {
+      "nounId": "house",
+      "adjectiveId": "new"
+    },
+    {
+      "nounId": "phone",
+      "adjectiveId": "new"
+    },
+    {
+      "nounId": "child",
+      "adjectiveId": "small"
+    },
+    {
+      "nounId": "window",
+      "adjectiveId": "new"
+    }
+  ],
+  "caseSentencePrefixes": {
+    "nomSg": "To jest",
+    "nomPl": "To są",
+    "gen": "Nie widzę",
+    "dat": "Przyglądam się",
+    "acc": "Widzę",
+    "inst": "Zachwycam się",
+    "loc": "Mówię o"
+  },
+  "exerciseCopy": {
+    "accPrompt": "Скажи, что ты видишь этого человека или этот предмет. Начни с «Widzę…».",
+    "accExplanation": "Widzę требует Biernik. Согласуй притяжательное местоимение, прилагательное и существительное.",
+    "accReasonPersonalA": "kolega → kolegę; местоимение и прилагательное — mojego dobrego.",
+    "accReasonUnchanged": "Biernik совпадает с Mianownikiem: группа сохраняет базовую форму.",
+    "accReasonChanged": "Изменяется вся группа слов.",
+    "genNegPrompt": "Сделай всё предложение отрицательным.",
+    "genNegExplanation": "Отрицание widzę переводит прямой объект из Biernika в Dopełniacz.",
+    "genNegReason": "Biernik → Dopełniacz",
+    "negationParticle": "Nie",
+    "negationInsertionReason": "Добавь отрицание nie.",
+    "instStart": "Idę z",
+    "instPrompt": "Скажи, что идёшь вместе с этим человеком. Начни с «Idę z…».",
+    "instReason": "z kim? czym? — Narzędnik",
+    "locStart": "Mówię o",
+    "locPrompt": "Теперь скажи, что говоришь об этом. Начни с «Mówię o…».",
+    "locReason": "o kim? czym? — Miejscownik",
+    "datStart": "Daję prezent",
+    "datPrompt": "Скажи, что даришь этому человеку подарок. Начни с «Daję prezent…».",
+    "datReason": "komu? czemu? — Celownik",
+    "caseDrillExplanation": "Новая конструкция задаёт падеж всей группы: местоимение + прилагательное + существительное.",
+    "ownerYour": "твой / твоя",
+    "ownerHis": "его",
+    "ownerHer": "её",
+    "ownerOur": "наш / наша",
+    "ownerYourPlural": "ваш / ваша",
+    "ownerTheir": "их",
+    "ownerPromptPrefix": "Замени «мой / моя» на «",
+    "ownerPromptSuffix": "». Сохрани время и смысл предложения.",
+    "ownerExplanation": "mój, twój, nasz, wasz согласуются с предметом обладания. jego, jej, ich не склоняются.",
+    "ownerReason": "Меняем владельца, сохраняем Biernik.",
+    "verbPastPrompt": "Перенеси всё предложение в прошедшее время.",
+    "verbFuturePrompt": "Перенеси всё предложение в будущее время. Сохрани несовершенный вид.",
+    "verbPresentPrompt": "Перенеси всё предложение в настоящее время.",
+    "verbExplanation": "Подлежащее остаётся в Mianowniku. В прошедшем времени глагол согласуется с ним по роду.",
+    "verbReason": "Меняется время глагола, остальные слова сохраняются.",
+    "aspectSource": "Dzisiaj kupuję nową książkę.",
+    "aspectPrompt": "Скажи, что вчера уже купил эту книгу: завершённый результат. Начни с «Wczoraj…».",
+    "aspectExpected": "Wczoraj kupiłem nową książkę.",
+    "aspectAccepted": "Wczoraj kupiłam nową książkę.",
+    "aspectExplanation": "Процесс kupować → завершённый результат kupić. Форма kupiłam также правильная.",
+    "aspectFrom": "kupuję",
+    "aspectTo": "kupiłem",
+    "aspectReason": "Совершенный вид + прошедшее время.",
+    "pronounPrompt": "Замени всю группу после «Widzę» одним личным местоимением.",
+    "pronounExplanation": "Местоимение заменяет всю группу слов и остаётся в Bierniku.",
+    "pronounReason": "кого? что?",
+    "questionPrompt": "Сделай вопрос, на который можно ответить «да» или «нет». Начни с «Czy…».",
+    "questionExplanation": "Czy превращает утверждение в общий вопрос. Падеж объекта сохраняется.",
+    "questionReason": "Добавь вопросительное czy.",
+    "questionParticle": "Czy",
+    "pluralPrompt": "Поставь всю группу после «Widzę» во множественное число.",
+    "pluralExplanation": "Во множественном числе мужские личные формы отличаются от остальных: moich dobrych kolegów, но moje nowe książki.",
+    "pluralReason": "Меняются число и согласование всей группы.",
+    "mixedPrompt": "Скажи «ты не видел…» в прошедшем времени. Сохрани «мой / моя».",
+    "mixedExplanation": "TY + прошедшее время + отрицание. Отрицание требует Dopełniacza всей группы слов.",
+    "mixedVerbReason": "Лицо + время + отрицание",
+    "mixedNounReason": "Biernik → Dopełniacz",
+    "chainAccPrompt": "Скажи, что видишь это. Начни с «Widzę…».",
+    "chainAccReason": "Widzę → Biernik.",
+    "chainPastPrompt": "Перенеси предложение в прошедшее время. Говори от мужского лица.",
+    "chainPastReason": "Меняется только время глагола.",
+    "chainNegPrompt": "Теперь сделай это предложение отрицательным.",
+    "chainNegReason": "Отрицание → Biernik меняется на Dopełniacz.",
+    "chainOwnerPrompt": "Замени «мой / моя» на «их».",
+    "chainOwnerReason": "ich не склоняется; прилагательное и существительное остаются в Dopełniaczu.",
+    "chainLocPrompt": "Теперь скажи, что говоришь об этом. Начни с «Mówię o…».",
+    "chainLocReason": "o → Miejscownik. Сохрани владельца «их».",
+    "questionChangeFrom": "Widzisz",
+    "questionChangeTo": "Czy widzisz",
+    "mixedChangeFrom": "Widzę",
+    "mixedChangeTo": "Nie widziałeś",
+    "chainPastChangeFrom": "Widzę",
+    "chainPastChangeTo": "Widziałem"
+  },
+  "exercisePatterns": {
+    "seenAcc": "Widzę {acc}.",
+    "seenGenNeg": "Nie widzę {gen}.",
+    "caseDrill": "{start} {target}.",
+    "verbSentence": "{nom} {verb} do domu.",
+    "verbFutureAccepted": "{nom} będzie {past} do domu.",
+    "questionSource": "Widzisz {acc}.",
+    "questionExpected": "Czy widzisz {acc}?",
+    "mixedMale": "Nie widziałeś {gen}.",
+    "mixedFemale": "Nie widziałaś {gen}.",
+    "chainPast": "Widziałem {acc}.",
+    "chainNeg": "Nie widziałem {gen}.",
+    "chainOwner": "Nie widziałem {theirGen}.",
+    "chainLoc": "Mówię o {theirLoc}."
+  },
+  "vocabulary": {
+    "source": "curated from existing Polish grammar lexemes; examples authored for this course",
+    "items": [
+      {
+        "id": "noun.wife",
+        "lemma": "żona",
+        "translation": "жена",
+        "form": "żona · род. żony",
+        "example": "Moja żona czyta książkę.",
+        "level": "A1",
+        "frequencyRank": 506
+      },
+      {
+        "id": "noun.woman",
+        "lemma": "kobieta",
+        "translation": "женщина",
+        "form": "kobieta · род. kobiety",
+        "example": "Ta kobieta mówi po polsku.",
+        "level": "A1",
+        "frequencyRank": 162
+      },
+      {
+        "id": "noun.book",
+        "lemma": "książka",
+        "translation": "книга",
+        "form": "książka · вин. książkę · род. książki",
+        "example": "Czytam nową książkę.",
+        "level": "A1",
+        "frequencyRank": 276
+      },
+      {
+        "id": "noun.work",
+        "lemma": "praca",
+        "translation": "работа",
+        "form": "praca · род. pracy",
+        "example": "Mam dziś dużo pracy.",
+        "level": "A2",
+        "frequencyRank": 62
+      },
+      {
+        "id": "noun.husband",
+        "lemma": "mąż",
+        "translation": "муж",
+        "form": "mąż · род. męża",
+        "example": "Jej mąż pracuje w domu.",
+        "level": "A2",
+        "frequencyRank": 658
+      },
+      {
+        "id": "noun.friendM",
+        "lemma": "kolega",
+        "translation": "коллега",
+        "form": "kolega · род. kolegi",
+        "example": "Mój kolega z pracy ma psa.",
+        "level": "A2",
+        "frequencyRank": 445
+      },
+      {
+        "id": "noun.son",
+        "lemma": "syn",
+        "translation": "сын",
+        "form": "syn · род. syna",
+        "example": "Mój syn lubi koty.",
+        "level": "A1",
+        "frequencyRank": 490
+      },
+      {
+        "id": "noun.dog",
+        "lemma": "pies",
+        "translation": "собака",
+        "form": "pies · род. psa",
+        "example": "Ten pies jest mały.",
+        "level": "A1",
+        "frequencyRank": 637
+      },
+      {
+        "id": "noun.cat",
+        "lemma": "kot",
+        "translation": "кот",
+        "form": "kot · род. kota",
+        "example": "Mój kot śpi na kanapie.",
+        "level": "A1",
+        "frequencyRank": 540
+      },
+      {
+        "id": "noun.car",
+        "lemma": "samochód",
+        "translation": "машина",
+        "form": "samochód · род. samochodu",
+        "example": "Ten samochód jest nowy.",
+        "level": "A1",
+        "frequencyRank": 225
+      },
+      {
+        "id": "noun.house",
+        "lemma": "dom",
+        "translation": "дом",
+        "form": "dom · род. domu",
+        "example": "Mój dom jest blisko.",
+        "level": "A1",
+        "frequencyRank": 104
+      },
+      {
+        "id": "noun.phone",
+        "lemma": "telefon",
+        "translation": "телефон",
+        "form": "telefon · род. telefonu",
+        "example": "Gdzie jest mój telefon?",
+        "level": "A1",
+        "frequencyRank": 596
+      },
+      {
+        "id": "noun.child",
+        "lemma": "dziecko",
+        "translation": "ребёнок",
+        "form": "dziecko · род. dziecka",
+        "example": "To dziecko lubi czytać.",
+        "level": "A1",
+        "frequencyRank": 86
+      },
+      {
+        "id": "noun.window",
+        "lemma": "okno",
+        "translation": "окно",
+        "form": "okno · род. okna",
+        "example": "Otwórz okno, proszę.",
+        "level": "A1",
+        "frequencyRank": 554
+      },
+      {
+        "id": "adjective.beautiful",
+        "lemma": "piękny",
+        "translation": "прекрасный, очень красивый",
+        "form": "piękny · ж. piękna",
+        "example": "To piękny dom.",
+        "level": "A2",
+        "frequencyRank": 488
+      },
+      {
+        "id": "adjective.new",
+        "lemma": "nowy",
+        "translation": "новый",
+        "form": "nowy · ж. nowa · ж. вин. nową",
+        "example": "Mam nową książkę.",
+        "level": "A1",
+        "frequencyRank": 68
+      },
+      {
+        "id": "adjective.small",
+        "lemma": "mały",
+        "translation": "маленький",
+        "form": "mały · ж. mała",
+        "example": "To mały pies.",
+        "level": "A1",
+        "frequencyRank": 155
+      },
+      {
+        "id": "adjective.nice",
+        "lemma": "ładny",
+        "translation": "симпатичный, приятный на вид",
+        "form": "ładny · ж. ładna",
+        "example": "To ładny dom.",
+        "level": "A1",
+        "frequencyRank": null
+      },
+      {
+        "id": "adjective.good",
+        "lemma": "dobry",
+        "translation": "хороший",
+        "form": "dobry · ж. dobra",
+        "example": "To dobry pomysł.",
+        "level": "A1",
+        "frequencyRank": 81
+      },
+      {
+        "id": "adjective.old",
+        "lemma": "stary",
+        "translation": "старый",
+        "form": "stary · ж. stara",
+        "example": "To stary samochód.",
+        "level": "A1",
+        "frequencyRank": 142
+      },
+      {
+        "id": "adjective.expensive",
+        "lemma": "drogi",
+        "translation": "дорогой",
+        "form": "drogi · ж. droga",
+        "example": "Ten telefon jest drogi.",
+        "level": "A2",
+        "frequencyRank": 921
+      },
+      {
+        "id": "verb.have",
+        "lemma": "mieć",
+        "translation": "иметь",
+        "form": "mieć · я mam",
+        "example": "Mam książkę.",
+        "level": "A1",
+        "frequencyRank": 14
+      },
+      {
+        "id": "verb.see",
+        "lemma": "widzieć",
+        "translation": "видеть",
+        "form": "widzieć · я widzę",
+        "example": "Widzę dom.",
+        "level": "A1",
+        "frequencyRank": 117
+      },
+      {
+        "id": "verb.like",
+        "lemma": "lubić",
+        "translation": "нравиться (о занятии); любить делать что-либо",
+        "form": "lubić · я lubię",
+        "example": "Lubię czytać.",
+        "level": "A1",
+        "frequencyRank": 370
+      },
+      {
+        "id": "verb.buy",
+        "lemma": "kupować",
+        "translation": "покупать",
+        "form": "kupować · я kupuję",
+        "example": "Kupuję książkę.",
+        "level": "A1",
+        "frequencyRank": null
+      },
+      {
+        "id": "verb.read",
+        "lemma": "czytać",
+        "translation": "читать",
+        "form": "czytać · я czytam",
+        "example": "Czytam książkę.",
+        "level": "A1",
+        "frequencyRank": 455
+      },
+      {
+        "id": "verb.talk",
+        "lemma": "mówić",
+        "translation": "говорить",
+        "form": "mówić · я mówię",
+        "example": "Mówię po polsku.",
+        "level": "A1",
+        "frequencyRank": 41
+      },
+      {
+        "id": "verb.go",
+        "lemma": "iść",
+        "translation": "идти",
+        "form": "iść · я idę",
+        "example": "Idę do domu.",
+        "level": "A1",
+        "frequencyRank": 176
+      },
+      {
+        "id": "verb.be",
+        "lemma": "być",
+        "translation": "быть",
+        "form": "być · я jestem",
+        "example": "Jestem w domu.",
+        "level": "A1",
+        "frequencyRank": 2
+      },
+      {
+        "id": "verb.buyDone",
+        "lemma": "kupić",
+        "translation": "купить",
+        "form": "kupić · буд. я kupię · прош. я (м.) kupiłem",
+        "example": "Kupiłem książkę.",
+        "level": "A2",
+        "frequencyRank": 449
+      },
+      {
+        "id": "verb.do",
+        "lemma": "robić",
+        "translation": "делать",
+        "form": "robić · я robię",
+        "example": "Robię obiad.",
+        "level": "A1",
+        "frequencyRank": 133
+      },
+      {
+        "id": "verb.doDone",
+        "lemma": "zrobić",
+        "translation": "сделать",
+        "form": "zrobić · буд. я zrobię · прош. я (м.) zrobiłem",
+        "example": "Zrobiłem obiad.",
+        "level": "A2",
+        "frequencyRank": 125
+      }
+    ],
+    "instructions": {
+      "react": "Частотный ранг не равен уровню CEFR. Слова без проверенного перевода и примера видны в списке, но пока не добавляются в тренировки. Исходные 32 карточки прошли языковую проверку; метки A1/A2 — локальные группы, не официальная сертификация CEFR.",
+      "web": "Частотный ранг не равен уровню CEFR. Слова без проверенного перевода и примера пока не добавляются в тренировки. Исходные 32 карточки прошли языковую проверку; метки A1/A2 — локальные группы, не официальная сертификация CEFR.",
+      "native": "Частотный ранг не равен уровню CEFR. Без проверенного перевода и примера слово пока недоступно. Исходные 32 карточки прошли языковую проверку; метки A1/A2 — локальные группы, не официальная сертификация CEFR.",
+      "ios": "Частотный ранг не равен уровню CEFR. Непроверенные слова пока недоступны. Исходные 32 карточки прошли языковую проверку; метки A1/A2 — локальные группы, не официальная сертификация CEFR."
+    },
+    "unavailableLabel": "Перевод и пример ещё не проверены"
+  },
+  "contentVersion": 1,
+  "attribution": "courses/pl-ru/ATTRIBUTION.md"
+}

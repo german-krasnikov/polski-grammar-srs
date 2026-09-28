@@ -19,7 +19,7 @@ function assertSchema(validate, data, prefix) {
   throw new Error(`${prefix}${first.instancePath}${suffix}: ${first.message}`);
 }
 
-function uniqueBy(rows, key, path) {
+export function uniqueBy(rows, key, path) {
   const seen = new Set();
   rows.forEach((row, index) => {
     if (seen.has(row[key])) throw new Error(`${path}/${index}/${key}: duplicate ${row[key]}`);
@@ -27,7 +27,7 @@ function uniqueBy(rows, key, path) {
   });
 }
 
-function noHtml(value, path = '') {
+export function noHtml(value, path = '') {
   if (typeof value === 'string' && /<\/?[A-Za-z][^>]*>/.test(value)) {
     throw new Error(`${path || '/'}: HTML markup is not course data`);
   }

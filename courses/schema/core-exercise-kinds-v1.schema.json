@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Core exercise kinds v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "kinds"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "$comment": { "type": "string" },
+    "kinds": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": { "$ref": "#/$defs/kind" }
+    }
+  },
+  "$defs": {
+    "kind": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["implemented", "description"],
+      "properties": {
+        "implemented": {
+          "description": "true only when kotlin/core-engine's ExerciseGenerator already produces this kind today (transform via generateForSkill, chain via generateChain); false = reserved by §3.1.",
+          "type": "boolean"
+        },
+        "description": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

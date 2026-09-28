@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Core template operators v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "ops"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "$comment": { "type": "string" },
+    "ops": {
+      "description": "UniversalCorePlan.md §5.2: a hard ceiling of ~10 operators. An 11th key here is the ADR-first stop signal from §10.3, never a silent addition.",
+      "type": "object",
+      "minProperties": 1,
+      "maxProperties": 10,
+      "additionalProperties": { "$ref": "#/$defs/op" }
+    }
+  },
+  "$defs": {
+    "op": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["implemented", "description"],
+      "properties": {
+        "implemented": {
+          "description": "true only when kotlin/core-engine's ConstructionRealizer actually applies this operator today; false = reserved by §5.2, not wired yet.",
+          "type": "boolean"
+        },
+        "description": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}
