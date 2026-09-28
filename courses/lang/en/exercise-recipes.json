@@ -87,8 +87,9 @@
       "explanationKey": "moodQuestionExplanation",
       "changes": [
         {
-          "from": { "type": "phrase", "spec": { "construction": "core.sentence.mood", "bundle": { "Tense": "Pres", "Person": "2", "Number": "sg", "Mood": "Decl" } } },
-          "to": { "type": "phrase", "spec": { "construction": "core.sentence.mood", "bundle": { "Tense": "Pres", "Person": "2", "Number": "sg", "Mood": "YesNoQ" } } },
+          "$comment": "EN-23: from/to are wrapped in the same `capitalized` the source/expected TextSpec.Concat above already applies to this exact phrase — core.sentence.mood's realized text IS the whole sentence here (unlike every other en-ru skill, where the changed phrase is a non-initial object/verb slot), so the change's own text must match the sentence's actual rendered case for ContrastHighlightPlan.md's word-boundary lookup (`sentenceHighlightParts`'s `wholePhraseStart` is intentionally case-sensitive) to find it at all.",
+          "from": { "type": "capitalized", "inner": { "type": "phrase", "spec": { "construction": "core.sentence.mood", "bundle": { "Tense": "Pres", "Person": "2", "Number": "sg", "Mood": "Decl" } } } },
+          "to": { "type": "capitalized", "inner": { "type": "phrase", "spec": { "construction": "core.sentence.mood", "bundle": { "Tense": "Pres", "Person": "2", "Number": "sg", "Mood": "YesNoQ" } } } },
           "reason": { "type": "fixed", "key": "moodQuestionReason" }
         }
       ],
@@ -145,6 +146,10 @@
           "to": { "type": "phrase", "spec": { "construction": "core.sentence.polarity", "bundle": { "Tense": "Pres", "Person": "1", "Number": "sg", "Polarity": "Neg" } } },
           "reason": { "type": "fixed", "key": "polarityReason" }
         }
+      ],
+      "$comment_accepted": "EnRuPackPlan.md §2.3: the do-support contraction is a typed-answer alternative only, never a FormChange — it must never be highlighted as a diff.",
+      "accepted": [
+        { "type": "pattern", "key": "subjectVerb", "values": { "verb": { "type": "literal", "value": "don't walk" } } }
       ],
       "tags": ["polarity", "neg"]
     },
@@ -219,6 +224,10 @@
           "to": { "type": "phrase", "spec": { "construction": "core.sentence.polarity", "bundle": { "Tense": "Past", "Person": "1", "Number": "sg", "Polarity": "Neg" } } },
           "reason": { "type": "fixed", "key": "polarityReason" }
         }
+      ],
+      "$comment_accepted": "EnRuPackPlan.md §2.3: the do-support contraction is a typed-answer alternative only, never a FormChange — it must never be highlighted as a diff.",
+      "accepted": [
+        { "type": "pattern", "key": "subjectVerb", "values": { "verb": { "type": "literal", "value": "didn't walk" } } }
       ],
       "tags": ["polarity", "neg", "past"]
     },
