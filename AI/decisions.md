@@ -2,6 +2,115 @@
 
 Новые сверху. Формат: решение → почему → где подробно.
 
+## ADR-30 · 2026-09-28 · EN-22 (iOS): target/native-пикеры, production `packRegistry` с реальным en-ru, безопасный порядок реселекта
+
+iOS-часть EN-22 (`Plans/Kotlin/EnRuPackPlan.md`§6): пикеры «Изучаемый язык»/«Родной язык» рядом с
+существующим пикером стиля, выбор которых **реально** переключает активный пакет — EN-06/EN-08
+уже дали `PackRegistry.select`/`CourseSelection(target, native, style)`, но ни один host их не
+вызывал (`PackRegistryTest`'s собственный комментарий: "production registry never calls select
+yet"). Эта задача — первый production-вызов, и она сразу упёрлась в 4 core-гэпа, которые чинятся
+здесь, а не обходятся в iOS-коде (по правилу плана: core-гэп чинится в core):
+
+1. **`packRegistry` физически не содержал второй пакет.** `embeddedCoursePackSources` — только v1
+   `course.json`-сканирование (`courses/en-ru/` не имеет `course.json`, только v2-слои
+   `lang/en/lexicon.json`+`pairs/en-ru/pair.json`). `CourseData.kt`'s `packRegistry` теперь
+   достраивает список: v1-пакеты как раньше (pl-ru — так же первый/дефолтный, поведение не
+   изменилось) + любой `pairs/<id>/pair.json` без своего v1-файла реконструируется через уже
+   готовый `CoursePackLoader.fromV2Layers` (EN-04) и добавляется следом. Новые
+   `PackRegistry.contains(pairId)`/`.options: List<Pair<target,native>>` — небросающая проверка и
+   реальный список опций для пикера (не хардкод).
+2. **`UserPreferencesCodec.encode`/`decode` требовали `target/native == packRegistry.active`**,
+   а не «зарегистрирован хоть где-то» (`packRegistry.contains`). Это — форменный тупик курицы-и-
+   яйца: сохранённый `target=en` не мог декодироваться в `Loaded` при холодном старте, потому что
+   активным всегда сначала становится pl-ru, а сам факт декодирования — единственный момент,
+   когда что-то узнаёт, что нужно выбрать другой пакет. Заменено на `packRegistry.contains(...)` в
+   обеих функциях (EN-08 сам оставил это как явный долг: "не пишется encode'ом — ни у одного хоста
+   нет второго реального пакета" — теперь есть). `UserPreferencesCodecTest`'s
+   `mismatchedCoursePairOrTargetNativeIsRecoveryRequired` обновлён — `en-ru` больше не «неизвестная
+   пара», это была её собственная устаревшая посылка, а не защищаемый golden-факт.
+3. **Реселект перенесён из конструктора в явный вызов, вне гонки с первым snapshot.**
+   `IosSession` форсирует все `packRegistry.active`-зависимые `by lazy` (pl-значениями) при своём
+   самом первом `snapshot()` — но это происходит в **теле** `AppModel.init()`, тогда как Swift-
+   свойства (`session`, `vocabulary`, `preferencesSession`) конструируются **до** тела. Реселект
+   внутри конструктора `IosPreferencesSession` (естественная первая попытка) успевал бы сработать
+   раньше первого snapshot этой же сессии. Исправлено переносом в явный публичный метод
+   `reapplySavedCoursePack()`, который Swift теперь вызывает из `AppModel.init()` **после**
+   `session.onState = {...}`.
+4. **Живой краш, найденный именно на симуляторе, не гипотеза — и он пережил исправление №3.**
+   Первый прогон нового XCUITest (`testCoursePickersListRealPacksAndSwitchingTargetPersistsAcrossRelaunch`)
+   всё равно уронил приложение на релонче с сохранённым `target=en`
+   (`dev.polski.grammarmatrix.ios crashed`, `PolskiGrammar-2026-09-28-105515.ips`,
+   `SIGABRT`/`kotlin::ProcessUnhandledException` в стеке `AppModel.init()` →
+   `IosSession#currentSnapshot()`). Причина — не гонка вокруг первого snapshot (та было исправлена),
+   а более фундаментальная асимметрия внутри `polski.data`: `skills`/`nouns`/`courseSentenceSeeds`/
+   `referenceChainRows`/… — top-level `by lazy { packRegistry.active.X }`, кэшируются один раз на
+   процесс; но соседние `presentationBySkillId`/`styleContentBySkillId` (`Skills.kt`) и
+   `caseSentencePrefix`/`exerciseCopy`/`renderCoursePattern` (`CourseData.kt`) читали
+   `packRegistry.active.X.getValue(key)` **заново на каждый вызов**, без кэша — та же
+   непоследовательность, что уже существовала в кодовой базе, просто никогда не проявлялась, пока
+   ни один host не звал `select`. `plExerciseGenerator` (жёстко pl, EN-07) генерирует карточки с
+   pl-ключами (`"case.acc.f"` и т.п.) при каждом новом упражнении/рендере **независимо** от
+   `packRegistry.active` — а эти 5 функций читают presentation/copy/pattern-таблицы уже **активного**
+   пакета вживую, так что после `select("en-ru")` первый же следующий `currentSnapshot()` бьётся о
+   `error("Unknown skill presentation case.acc.f")`, а не только при холодном старте — на **любом**
+   пересчёте snapshot после переключения. Воспроизведено за секунды не через `xcodebuild test`, а
+   прямым Kotlin-юнит-тестом (`IosSessionTest.currentSnapshotAfterSwitchingActivePackToEnRuDoesNotThrow`,
+   RED с точным стеком `polski.data#presentationBySkillId(Skills.kt:20)`), исправлено тем же
+   приёмом, что и №3 — оба места и ещё 3 в `CourseData.kt` переведены на тот же `by lazy`-кэш,
+   которым уже пользуется `skills` в этом же файле, а не на новую логику: последовательность внутри
+   одного файла, не изобретение. `GrammarReference.kt`'s `caseRows`/`genderNames` уже были кэшированы
+   правильно — не трогались. `TrainingStore.kt`'s `activePackSkillIds` **намеренно** остаётся живым
+   чтением (EN-10's собственный комментарий: "так более позднее select берёт эффект без нового
+   TrainingStore") — это не краш, а осознанно другое поведение, не трогалось.
+
+`IosPreferencesSession.currentSnapshot()` получил `target`/`native`/`coursePacks` (реальный список
+пар из `packRegistry.options`, не хардкод pl/en); `set()` — кейсы `"target"/"native"` с проверкой
+`packRegistry.contains` (иначе явная ошибка «Неизвестная пара языков: …», как у всех прочих полей)
+и `packRegistry.select(...)` при успехе; `importJson()` — тот же select для загруженного
+target/native. `IosSettingsView` — новая секция «Курс» с двумя `Picker`ами, опции которых читаются
+из `coursePacks` (не хардкод), подписи языков — Swift-side fallback-словарь (`courseLanguageLabel`),
+тот же паттерн, что уже `styleFallbackLabel` использует для стиля без recipe-текста.
+
+**Явный, задокументированный скоуп (не тихий пропуск, тот же паттерн, что ADR-28/EN-24 уже
+установил):** переключение `packRegistry.active` не меняет, что генерирует
+`plExerciseGenerator`/`plMorphology`/`plChainSteps` — EN-07 сам зафиксировал, что ни один host их
+не вызывает по-другому, все 5 хостов жёстко завязаны на `PackEngine("pl")`. Тренировочная карточка
+на iOS остаётся польской независимо от выбора в пикере; задача этого тикета — реальный,
+персистентный переключатель активного пакета и его пикер, не полное перевключение движка на всех
+хостах (та же явная задача-долг, что EN-24 уже назвала для матрицы).
+
+Проверено: `:shared:desktopTest`/`:core-engine:desktopTest`/`:pack-format:desktopTest`/
+`:shared:macosArm64Test`/`:shared:jsBrowserTest`/`:shared:wasmJsBrowserTest`/
+`:shared:iosSimulatorArm64Test` (новые `PackRegistryTest`/`UserPreferencesCodecTest`/
+`IosPreferencesSessionTest`/`IosSessionTest.currentSnapshotAfterSwitchingActivePackToEnRuDoesNotThrow`
+кейсы включены) — все `BUILD SUCCESSFUL`, повторный полный прогон после гэпа №4 — снова зелёный;
+`:composeApp:desktopTest`/`compileKotlinJs`/`compileKotlinWasmJs`,
+`:androidApp:testDebugUnitTest`/`assembleDebug` — зелёные (регрессия по всем 5 хостам, т.к. правки в
+`:shared`, общем для всех). `npm test` (268/268), `npm run course:validate` — зелёные, не тронуты
+(изменения не в pack-данных). `xcodebuild build` — success. `xcodebuild test
+-only-testing:PolskiGrammarUITests/PolskiGrammarUITests/testCoursePickersListRealPacksAndSwitchingTargetPersistsAcrossRelaunch`
+на iPhone 17 Pro Simulator (`4384946F-9E6B-43D0-ADA3-CA219A3456B8`, iOS 26): первый прогон (до
+исправления гэпа №4) — реальный крэш живьём, зафиксирован в `.ips`; после исправления — 2 прогона
+всё ещё падали, но **без нового `.ips`** и с `[Default] Automation Mode has been disabled` в логе
+симулятора сразу после `app.terminate()`/`app.launch()` (известная нестабильность XCTest-сессии
+автоматизации при релонче внутри одного теста, не крэш приложения — подтверждено чтением
+`xcrun simctl ... log show` вокруг точки отказа: процесс приложения жив и штатно завершает XPC-
+хендшейки, тишина только со стороны automation-моста). Прогон на заново созданном
+(`simctl erase`+`boot`) симуляторе — **`** TEST SUCCEEDED **`, `Executed 1 test, with 0 failures ...
+29.837 seconds`**, включая релонч, проверку персистентности выбора и восстановление pl-ru в конце.
+
+Почему: план явно требует ровно это (§6 EN-22 acceptance: «Выбор en+ru реально переключает
+активный пакет… существующий pl-ru выбор — поведение не изменилось»); 4 найденных гэпа чинятся в
+core/`:shared`, а не обходятся в pack-данных — по прямому правилу задачи.
+
+Подробно: `Plans/Kotlin/EnRuPackPlan.md`§6 EN-22; `kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt`;
+`kotlin/shared/src/commonMain/kotlin/polski/data/Skills.kt`;
+`kotlin/shared/src/commonMain/kotlin/polski/preferences/UserPreferencesCodec.kt`;
+`kotlin/shared/src/iosMain/kotlin/polski/ios/IosPreferencesSession.kt`;
+`kotlin/shared/src/iosTest/kotlin/polski/ios/IosSessionTest.kt`;
+`kotlin/iosApp/PolskiGrammar/PolskiGrammarApp.swift`;
+`kotlin/iosApp/PolskiGrammarUITests/PolskiGrammarUITests.swift`.
+
 ## ADR-29 · 2026-09-28 · EN-21 (iOS): «Лайфхак»-блок на `FlashCardView`, читает `LifehackProvider` через `styleBlocks.lifehacks`
 
 iOS-часть EN-21 (ADR-27 уже покрыла core+web; эта задача — тот же блок, но на SwiftUI-хосте, не

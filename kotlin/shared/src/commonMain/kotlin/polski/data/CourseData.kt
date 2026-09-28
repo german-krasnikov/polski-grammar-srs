@@ -543,8 +543,7 @@ internal class CoursePack(private val source: CoursePackSource) {
 /**
  * UC-03/EN-06: the single point where consumers reach a [CoursePack], keyed by [CoursePack.pairId].
  * [active] defaults to the first registered pack (pl-ru today, unchanged behavior) until
- * [select] switches it — no production caller does that yet; wiring a real picker to this is
- * EN-08/EN-10/EN-22, not this task.
+ * [select] switches it — EN-22 is the first production caller (host preferences sessions).
  */
 internal class PackRegistry(private val packs: List<CoursePack>) {
     init { require(packs.isNotEmpty() && packs.map { it.pairId }.distinct().size == packs.size) }
@@ -556,22 +555,54 @@ internal class PackRegistry(private val packs: List<CoursePack>) {
     fun select(pairId: String) {
         active = requireNotNull(packs.firstOrNull { it.pairId == pairId }) { "Unknown pack pairId: $pairId" }
     }
+
+    /** Whether [pairId] names a registered pack — a non-throwing check before [select] (EN-22). */
+    fun contains(pairId: String): Boolean = packs.any { it.pairId == pairId }
+
+    /** Every registered pack's own (targetLanguage, nativeLanguage), in registration order — the
+     *  real option list for a target/native picker (EN-22), never a hardcoded literal pair. */
+    val options: List<Pair<String, String>> by lazy { packs.map { it.targetLanguage to it.nativeLanguage } }
 }
 
-internal val packRegistry: PackRegistry by lazy { PackRegistry(embeddedCoursePackSources.map(::CoursePack)) }
+/**
+ * EN-22: pairs without their own v1 `course.json` (en-ru today) are reconstructed from their v2
+ * layers (EN-04's [CoursePackLoader], already proven byte-identical to v1 for pl-ru in
+ * [CoursePackLoaderTest]) and appended after the v1 packs — [embeddedCoursePackSources] itself
+ * (and so [coursePackManifest]) stays exactly the v1 scan it always was, so pl-ru keeps being
+ * [PackRegistry]'s first/default pack unchanged. A pairId's target language is the part of it
+ * before the first `-` (pairId is always `"${targetLanguage}-${nativeLanguage}"`, `pairId` above).
+ */
+internal val packRegistry: PackRegistry by lazy {
+    val v1 = embeddedCoursePackSources.map(::CoursePack)
+    val v1PairIds = v1.map { it.pairId }.toSet()
+    val v2 = generatedPairJsonByPairId.filterKeys { it !in v1PairIds }.map { (pairId, pairJson) ->
+        val targetLang = pairId.substringBefore("-")
+        CoursePack(CoursePackLoader.fromV2Layers(pairId, generatedLexiconJsonByLang.getValue(targetLang), pairJson))
+    }
+    PackRegistry(v1 + v2)
+}
 
 val courseSentenceSeeds: List<SentenceSeed> by lazy { packRegistry.active.sentenceSeeds }
 val courseStemAlternations: List<StemAlternation> by lazy { packRegistry.active.stemAlternations }
+
+// EN-22: cached once at first access (the same `by lazy`-on-`packRegistry.active` pattern every
+// other accessor below already uses), not re-read on every call — [polski.core.PackEngine]'s
+// `plExerciseGenerator` calls these continuously (every exercise), using pl's own key vocabulary
+// regardless of the *active* pack (it isn't pack-aware yet, EN-07's own scope note); a live
+// [PackRegistry.select] away from pl-ru must not turn the very next exercise render into a
+// `NoSuchElementException` on a key another pack's data simply doesn't have.
+private val caseSentencePrefixes: Map<String, String> by lazy { packRegistry.active.caseSentencePrefixes }
+private val courseExerciseCopy: Map<String, String> by lazy { packRegistry.active.exerciseCopy }
 
 fun caseSentencePrefix(gramCase: GramCase, number: NumberGram): String {
     require(gramCase != GramCase.VOC)
     val key = if (gramCase == GramCase.NOM) {
         if (number == NumberGram.SG) "nomSg" else "nomPl"
     } else gramCase.id
-    return packRegistry.active.caseSentencePrefixes.getValue(key)
+    return caseSentencePrefixes.getValue(key)
 }
 
-fun exerciseCopy(key: String): String = packRegistry.active.exerciseCopy.getValue(key)
+fun exerciseCopy(key: String): String = courseExerciseCopy.getValue(key)
 val referenceChainRows: List<ReferenceChainRow> by lazy { packRegistry.active.referenceChainRows }
 val courseChainPresentation: ChainPresentation by lazy { packRegistry.active.chainPresentation }
 val referenceSystemCards: List<ReferenceSystemCard> by lazy { packRegistry.active.referenceSystemCards }
@@ -593,9 +624,10 @@ val courseVocabularyInstructions: CourseVocabularyInstructions by lazy { packReg
 val courseVocabularyUnavailableLabel: String by lazy { packRegistry.active.vocabularyUnavailableLabel }
 
 private val coursePlaceholder = Regex("\\{([A-Za-z][A-Za-z0-9]*)\\}")
+private val courseExercisePatterns: Map<String, String> by lazy { packRegistry.active.exercisePatterns }
 
 fun renderCoursePattern(key: String, values: Map<String, String>): String =
-    coursePlaceholder.replace(packRegistry.active.exercisePatterns.getValue(key)) { match ->
+    coursePlaceholder.replace(courseExercisePatterns.getValue(key)) { match ->
         val name = match.groupValues[1]
         values[name]?.takeIf { it.isNotEmpty() } ?: error("Missing $name for $key")
     }

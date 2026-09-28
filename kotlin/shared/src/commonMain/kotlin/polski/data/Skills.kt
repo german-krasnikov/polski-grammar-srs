@@ -16,9 +16,16 @@ fun skillById(id: String): Skill = skills.firstOrNull { it.id == id } ?: error("
  */
 internal fun activePackSkillIds(registry: PackRegistry): Set<String> = registry.active.skills.map { it.id }.toSet()
 
+// EN-22: cached once at first access, the same `by lazy`-on-`packRegistry.active` pattern [skills]
+// just above already uses — not re-read on every call, so a live [PackRegistry.select] away from
+// pl-ru can't turn the very next card render into an "Unknown skill presentation" crash for a pl
+// skill id another pack's own data doesn't have (training content isn't pack-aware yet).
+private val presentations: Map<String, SkillPresentation> by lazy { packRegistry.active.presentations }
+private val styleContentMap: Map<String, SkillStyleContent> by lazy { packRegistry.active.styleContent }
+
 fun presentationBySkillId(id: String): SkillPresentation =
-    packRegistry.active.presentations[id] ?: error("Unknown skill presentation $id")
+    presentations[id] ?: error("Unknown skill presentation $id")
 
 /** Absent styleContent for [id] (true for every skill today) means [SkillStyleContent]'s all-derived defaults. */
 fun styleContentBySkillId(id: String): SkillStyleContent =
-    packRegistry.active.styleContent[id] ?: SkillStyleContent()
+    styleContentMap[id] ?: SkillStyleContent()

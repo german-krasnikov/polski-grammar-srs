@@ -116,16 +116,32 @@ class UserPreferencesCodecTest {
         val v4 = """{"schemaVersion":4,"target":"pl","native":"ru","styleId":"MinimalTheory"}"""
         val loaded = assertIs<PreferencesDecode.Loaded>(UserPreferencesCodec.decode(v4)).value
         assertEquals(CourseSelection("pl", "ru", PreferredStyle.MinimalTheory), loaded.course)
-        // encode() still only ever writes v3 (no host has a second pack to pick yet).
+        // encode() still only ever writes v3 (no host writes v4 yet).
         assertEquals(3, loaded.schemaVersion)
+    }
+
+    /** EN-22: en-ru is now a *registered* pack (`packRegistry.contains`, not only whichever one
+     *  happens to be `packRegistry.active` right now) — decode must accept a saved `target`/
+     *  `native` (or the legacy joined `coursePair`) naming it, exactly like pl-ru, without first
+     *  requiring the caller to have already switched the live active pack (a chicken-and-egg a
+     *  cold app launch could never resolve otherwise — selecting it live is the caller's job,
+     *  `IosPreferencesSession` et al., not decode's). */
+    @Test fun aRegisteredSecondPackDecodesEvenWhenNotCurrentlyActive() {
+        for (raw in listOf(
+            """{"schemaVersion":3,"coursePair":"en-ru"}""",
+            """{"schemaVersion":4,"target":"en","native":"ru"}""",
+        )) {
+            val loaded = assertIs<PreferencesDecode.Loaded>(UserPreferencesCodec.decode(raw)).value
+            assertEquals("en", loaded.target)
+            assertEquals("ru", loaded.native)
+        }
     }
 
     @Test fun mismatchedCoursePairOrTargetNativeIsRecoveryRequired() {
         for (raw in listOf(
-            """{"schemaVersion":3,"coursePair":"en-ru"}""",
             """{"schemaVersion":3,"coursePair":"pl-en"}""",
             """{"schemaVersion":3,"coursePair":"pl"}""",
-            """{"schemaVersion":4,"target":"en","native":"ru"}""",
+            """{"schemaVersion":4,"target":"de","native":"ru"}""",
         )) {
             assertIs<PreferencesDecode.RecoveryRequired>(UserPreferencesCodec.decode(raw))
         }

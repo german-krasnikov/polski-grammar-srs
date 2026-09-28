@@ -126,6 +126,24 @@ private func styleOptions(_ preferences: Record) -> [StyleOption] {
     }
 }
 
+// EN-22 (Plans/Kotlin/EnRuPackPlan.md §6): `coursePacks` (IosPreferencesSession.currentSnapshot)
+// is the real, currently-registered (target, native) pairs — pl-ru and en-ru today, never a
+// hardcoded literal pair here; only the *display* label for a known code is this file's own copy,
+// the same fallback pattern `styleFallbackLabel` above already uses for a style without recipe text.
+private let courseLanguageLabel: [String: String] = ["pl": "Польский", "en": "Английский", "ru": "Русский"]
+private func courseLanguageName(_ code: String) -> String { courseLanguageLabel[code] ?? code }
+
+/// The distinct values of [key] ("target"/"native") across every row of `preferences`'s
+/// `coursePacks`, in first-seen order — the real option list for one of the two EN-22 pickers.
+private func coursePackValues(_ preferences: Record, _ key: String) -> [String] {
+    var seen: [String] = []
+    for row in preferences.rows("coursePacks") {
+        let value = row.string(key)
+        if !seen.contains(value) { seen.append(value) }
+    }
+    return seen
+}
+
 struct ProgressFile: FileDocument {
     static var readableContentTypes: [UTType] { [.json] }
     var text: String
@@ -199,6 +217,9 @@ final class AppModel: ObservableObject {
         preferencesSession.onState = { [weak self] json in
             DispatchQueue.main.async { self?.receivePreferences(json) }
         }
+        // EN-22: must run after `session.onState` above (already forced) — see
+        // `reapplySavedCoursePack`'s own doc for why this exact ordering is load-bearing.
+        preferencesSession.reapplySavedCoursePack()
         receive(session.currentSnapshot())
         receiveVocabulary(vocabulary.currentSnapshot())
         receivePreferences(preferencesSession.currentSnapshot())
@@ -527,6 +548,30 @@ private struct IosSettingsView: View {
                     Text("Экспортируйте исходные настройки перед импортом проверенной копии.")
                 }
             } else {
+                Section("Курс") {
+                    // EN-22: options come from `coursePacks` (every really-registered pack), not a
+                    // hardcoded pl/en pair — picking a target keeps the current native unless that
+                    // exact combination doesn't exist, in which case `model.setPreference` surfaces
+                    // the real rejection as `notice` (see `set`'s "Неизвестная пара языков" error).
+                    Picker("Изучаемый язык", selection: Binding(
+                        get: { model.preferences.string("target") },
+                        set: { model.setPreference("target", $0) }
+                    )) {
+                        ForEach(coursePackValues(model.preferences, "target"), id: \.self) { code in
+                            Text(courseLanguageName(code)).tag(code)
+                        }
+                    }
+                    .accessibilityIdentifier("settingsTargetPicker")
+                    Picker("Родной язык", selection: Binding(
+                        get: { model.preferences.string("native") },
+                        set: { model.setPreference("native", $0) }
+                    )) {
+                        ForEach(coursePackValues(model.preferences, "native"), id: \.self) { code in
+                            Text(courseLanguageName(code)).tag(code)
+                        }
+                    }
+                    .accessibilityIdentifier("settingsNativePicker")
+                }
                 Section("Обучение") {
                     // UC-10/S1: 4 styles replace the old Logic/Situations selector — the picker's
                     // own selected-value row shows the label, the caption below shows its

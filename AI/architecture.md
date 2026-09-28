@@ -78,7 +78,7 @@ kotlin/macosApp             SwiftUI macOS
 :core-srs           FSRS
 :core-progress      прогресс по pack.id
 :core-presentation  сессии, StyleComposer (стили → блоки)
-:pack-format        схема v2, загрузчик, валидатор, PackRegistry
+:pack-format        схема v2, загрузчик, валидатор, PackRegistry — EN-22 (ADR-30): production `packRegistry` теперь реально несёт 2 пакета (pl-ru v1 `course.json` + en-ru реконструирован из v2-слоёв через уже готовый `CoursePackLoader`, EN-04), с `contains`/`options` для host-пикеров; `select` — первый production-вызов (host preferences-сессии), а не только тест
 :morph-api          интерфейс MorphologyPlugin (для языков, где таблиц мало)
 :shared :composeApp :androidApp   хосты — имена не меняются
 courses/core|lang|pairs/*          языки, L1 и пары как JSON/Markdown, подхватываются сканированием каталога

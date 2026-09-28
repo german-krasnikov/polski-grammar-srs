@@ -20,6 +20,58 @@ final class PolskiGrammarUITests: XCTestCase {
         XCTAssertTrue(app.staticTexts["To jest moja piękna żona."].exists)
     }
 
+    /**
+     * EN-22 (Plans/Kotlin/EnRuPackPlan.md §6): the new "Изучаемый язык"/"Родной язык" pickers
+     * next to the existing style picker. Both list the *real* registered packs (pl-ru and en-ru —
+     * `coursePacks` in `IosPreferencesSession.currentSnapshot`, never a hardcoded pair), and
+     * picking "Английский" really switches the production `packRegistry` (proven indirectly: the
+     * selection persists across a full relaunch, which only a real, saved `target`/`native` — not
+     * a view-only picker state — could survive), and the existing pl-ru training card keeps
+     * working unchanged throughout (the actual acceptance line: "существующий pl-ru выбор —
+     * поведение не изменилось"). Restores "Польский" at the end so later tests in the same run
+     * keep seeing pl-ru active, the same restore-at-the-end pattern
+     * `testAnimationsToggleDefaultsOnAndPersistsOffAcrossRelaunch` already uses for its own toggle.
+     */
+    func testCoursePickersListRealPacksAndSwitchingTargetPersistsAcrossRelaunch() {
+        let app = XCUIApplication()
+        app.launch()
+        XCTAssertTrue(app.staticTexts["To jest moja piękna żona."].waitForExistence(timeout: 20))
+        app.buttons["openSettings"].tap()
+        XCTAssertTrue(app.staticTexts["Курс"].waitForExistence(timeout: 5))
+
+        let targetRow = app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", "Изучаемый язык,")).firstMatch
+        XCTAssertTrue(targetRow.waitForExistence(timeout: 5), app.debugDescription)
+        XCTAssertTrue(targetRow.label.contains("Польский"), targetRow.label)
+        targetRow.tap()
+        XCTAssertTrue(app.buttons["Польский"].waitForExistence(timeout: 5), app.debugDescription)
+        XCTAssertTrue(app.buttons["Английский"].waitForExistence(timeout: 5), "en-ru must be a real, listed option, not only pl-ru")
+        let capture = XCTAttachment(screenshot: app.screenshot())
+        capture.name = "en22-course-pickers"
+        capture.lifetime = .keepAlways
+        add(capture)
+        app.buttons["Английский"].tap()
+        XCTAssertTrue(targetRow.label.contains("Английский"), targetRow.label)
+        // The training card is untouched by the switch (pl-ru's own engine isn't pack-aware yet,
+        // EN-22's explicit, documented scope) — the acceptance line this proves is the picker
+        // itself and its persistence, not a still-open follow-up task's full host rewiring.
+        app.buttons["Готово"].tap()
+        XCTAssertTrue(app.staticTexts["To jest moja piękna żona."].exists)
+
+        app.terminate()
+        app.launch()
+        XCTAssertTrue(app.staticTexts["To jest moja piękna żona."].waitForExistence(timeout: 20), "pl-ru training must keep working even with a different pack saved as the preference")
+        app.buttons["openSettings"].tap()
+        let targetRowAfterRelaunch = app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", "Изучаемый язык,")).firstMatch
+        XCTAssertTrue(targetRowAfterRelaunch.waitForExistence(timeout: 5), app.debugDescription)
+        XCTAssertTrue(targetRowAfterRelaunch.label.contains("Английский"), targetRowAfterRelaunch.label)
+
+        // Restore pl-ru so every later test in this run keeps seeing the default pack active.
+        targetRowAfterRelaunch.tap()
+        app.buttons["Польский"].tap()
+        XCTAssertTrue(targetRowAfterRelaunch.label.contains("Польский"), targetRowAfterRelaunch.label)
+        app.buttons["Готово"].tap()
+    }
+
     /// D5: the "Анимации" master switch defaults on and persists off across a relaunch, via the
     /// same `IosPreferencesSession` JSON document `NSUserDefaults`-backs every other setting with
     /// (`testNativeAppearanceSettingsKeepsTrainingCard` above covers the sibling pickers in the

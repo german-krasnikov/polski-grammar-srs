@@ -21,8 +21,9 @@ object UserPreferencesCodec {
     private val fieldsV1 = setOf("schemaVersion", "coursePair", "explanationMethod", "answerMode", "appearance", "motion", "swipeRatingEnabled", "reminder")
     private val fieldsV2 = fieldsV1 + "glassTintPercent" + "animationsEnabled"
     private val fieldsV3 = fieldsV2 - "explanationMethod" + "styleId"
-    /** EN-08: not yet written by [encode] (no host has two real packs to pick between yet), but
-     * decoded tolerantly so a future `target`/`native`-shaped export is never treated as garbage. */
+    /** EN-08/EN-22: not yet written by [encode] (every host still exports v3), but decoded
+     * tolerantly so a `target`/`native`-shaped export (a future v4 writer, or another KMP host
+     * that already writes v4) is never treated as garbage. */
     private val fieldsV4 = fieldsV3 - "coursePair" + "target" + "native"
     private val reminderFields = setOf("enabled", "localTime", "days", "quietStart", "quietEnd")
 
@@ -45,8 +46,11 @@ object UserPreferencesCodec {
             val n = root.optionalString("native", defaults.native) ?: return invalid(raw, "Invalid native")
             t to n
         }
-        if (target != packRegistry.active.targetLanguage || native != packRegistry.active.nativeLanguage)
-            return invalid(raw, "Unsupported course selection")
+        // EN-22: any *registered* pack decodes, not only whichever one happens to be
+        // `packRegistry.active` right now — selecting a decoded-but-not-yet-active pack live is
+        // the caller's job (`IosPreferencesSession` et al.), not decode's; a genuinely unknown
+        // pairId (typo, removed pack, another product's export) still recovers.
+        if (!packRegistry.contains("$target-$native")) return invalid(raw, "Unsupported course selection")
         // v1/v2 wrote `explanationMethod: "Logic"/"Situations"`; v3 writes `styleId` directly with all 4 names.
         val style = if (version <= 2) root.legacyStyleId(defaults.styleId) ?: return invalid(raw, "Invalid explanationMethod")
             else root.optionalEnum("styleId", defaults.styleId) ?: return invalid(raw, "Invalid styleId")
@@ -69,7 +73,7 @@ object UserPreferencesCodec {
     }
 
     fun encode(value: UserPreferencesV2): String {
-        require(value.schemaVersion == 3 && value.target == packRegistry.active.targetLanguage && value.native == packRegistry.active.nativeLanguage && validReminder(value.reminder) && value.glassTintPercent in 0..100)
+        require(value.schemaVersion == 3 && packRegistry.contains("${value.target}-${value.native}") && validReminder(value.reminder) && value.glassTintPercent in 0..100)
         val reminder = value.reminder
         val root = JsonObject(mapOf(
             "schemaVersion" to JsonPrimitive(3),
