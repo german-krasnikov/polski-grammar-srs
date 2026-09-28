@@ -36,6 +36,8 @@ import androidx.compose.ui.input.key.isMetaPressed
 import androidx.compose.ui.input.key.key
 import androidx.compose.ui.input.key.onKeyEvent
 import androidx.compose.ui.input.key.type
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -184,6 +186,19 @@ internal fun TrainingScreen(state: AppUiState, dispatch: (AppAction) -> Unit, fo
                                 }
                             }
                             Text("${skillById(exercise.primarySkill).level} · ${skillById(exercise.primarySkill).title}", color = MaterialTheme.colorScheme.primary)
+                            // EnRuPackPlan.md §4.2 (host-side follow-up): a cheap, non-spoiling
+                            // front badge — hasLifehacks(skillId) never exposes the lifehack's own
+                            // text/citation (that stays gated behind Revealed, see
+                            // DesktopLifehackBlock below), and this Text carries no click handler
+                            // so tapping it can never reveal the card.
+                            if (state.phase == CardPhase.Question && StaticPackLifehackProvider.hasLifehacks(exercise.primarySkill)) {
+                                Text(
+                                    "💡 Есть лайфхак",
+                                    style = MaterialTheme.typography.labelMedium,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                    modifier = Modifier.semantics { contentDescription = "Есть лайфхак" },
+                                )
+                            }
                             if (state.phase == CardPhase.Question && state.introPending) {
                                 Text("Знакомство с навыком", style = MaterialTheme.typography.titleMedium)
                                 Text("ИСХОДНОЕ ПРЕДЛОЖЕНИЕ", style = MaterialTheme.typography.labelMedium,
