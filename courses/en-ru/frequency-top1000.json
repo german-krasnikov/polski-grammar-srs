@@ -1,0 +1,5007 @@
+{
+  "source": "https://github.com/IlyaSemenov/wikipedia-word-frequency/blob/798ea9062d6e5aed1fa87deeeda1cd99d5b37903/results/enwiki-2023-04-13.txt",
+  "license": "MIT",
+  "corpus": "English Wikipedia dump enwiki-2023-04-13, word-frequency aggregation (words used in >=3 distinct articles)",
+  "items": [
+    {
+      "rank": 1,
+      "lemma": "the",
+      "count": 186631452
+    },
+    {
+      "rank": 2,
+      "lemma": "of",
+      "count": 88349543
+    },
+    {
+      "rank": 3,
+      "lemma": "in",
+      "count": 76718795
+    },
+    {
+      "rank": 4,
+      "lemma": "and",
+      "count": 76039670
+    },
+    {
+      "rank": 5,
+      "lemma": "a",
+      "count": 54631147
+    },
+    {
+      "rank": 6,
+      "lemma": "to",
+      "count": 53238808
+    },
+    {
+      "rank": 7,
+      "lemma": "was",
+      "count": 33191344
+    },
+    {
+      "rank": 8,
+      "lemma": "is",
+      "count": 24027878
+    },
+    {
+      "rank": 9,
+      "lemma": "on",
+      "count": 22155591
+    },
+    {
+      "rank": 10,
+      "lemma": "for",
+      "count": 22030466
+    },
+    {
+      "rank": 11,
+      "lemma": "as",
+      "count": 21545667
+    },
+    {
+      "rank": 12,
+      "lemma": "with",
+      "count": 18976732
+    },
+    {
+      "rank": 13,
+      "lemma": "by",
+      "count": 18479039
+    },
+    {
+      "rank": 14,
+      "lemma": "he",
+      "count": 16674038
+    },
+    {
+      "rank": 15,
+      "lemma": "that",
+      "count": 14891274
+    },
+    {
+      "rank": 16,
+      "lemma": "at",
+      "count": 14739901
+    },
+    {
+      "rank": 17,
+      "lemma": "from",
+      "count": 13977056
+    },
+    {
+      "rank": 18,
+      "lemma": "his",
+      "count": 12939649
+    },
+    {
+      "rank": 19,
+      "lemma": "it",
+      "count": 12063893
+    },
+    {
+      "rank": 20,
+      "lemma": "an",
+      "count": 10156986
+    },
+    {
+      "rank": 21,
+      "lemma": "were",
+      "count": 8684107
+    },
+    {
+      "rank": 22,
+      "lemma": "which",
+      "count": 7793753
+    },
+    {
+      "rank": 23,
+      "lemma": "are",
+      "count": 7404538
+    },
+    {
+      "rank": 24,
+      "lemma": "also",
+      "count": 6570012
+    },
+    {
+      "rank": 25,
+      "lemma": "this",
+      "count": 6518332
+    },
+    {
+      "rank": 26,
+      "lemma": "had",
+      "count": 6376035
+    },
+    {
+      "rank": 27,
+      "lemma": "be",
+      "count": 6239717
+    },
+    {
+      "rank": 28,
+      "lemma": "first",
+      "count": 6010339
+    },
+    {
+      "rank": 29,
+      "lemma": "or",
+      "count": 5834616
+    },
+    {
+      "rank": 30,
+      "lemma": "has",
+      "count": 5813977
+    },
+    {
+      "rank": 31,
+      "lemma": "their",
+      "count": 5309478
+    },
+    {
+      "rank": 32,
+      "lemma": "after",
+      "count": 5292313
+    },
+    {
+      "rank": 33,
+      "lemma": "its",
+      "count": 5124449
+    },
+    {
+      "rank": 34,
+      "lemma": "she",
+      "count": 5027176
+    },
+    {
+      "rank": 35,
+      "lemma": "new",
+      "count": 4975788
+    },
+    {
+      "rank": 36,
+      "lemma": "one",
+      "count": 4961684
+    },
+    {
+      "rank": 37,
+      "lemma": "her",
+      "count": 4953711
+    },
+    {
+      "rank": 38,
+      "lemma": "who",
+      "count": 4790236
+    },
+    {
+      "rank": 39,
+      "lemma": "but",
+      "count": 4746527
+    },
+    {
+      "rank": 40,
+      "lemma": "not",
+      "count": 4593029
+    },
+    {
+      "rank": 41,
+      "lemma": "they",
+      "count": 4504142
+    },
+    {
+      "rank": 42,
+      "lemma": "two",
+      "count": 4175124
+    },
+    {
+      "rank": 43,
+      "lemma": "have",
+      "count": 4173415
+    },
+    {
+      "rank": 44,
+      "lemma": "been",
+      "count": 3928465
+    },
+    {
+      "rank": 45,
+      "lemma": "other",
+      "count": 3580154
+    },
+    {
+      "rank": 46,
+      "lemma": "during",
+      "count": 3511037
+    },
+    {
+      "rank": 47,
+      "lemma": "when",
+      "count": 3391525
+    },
+    {
+      "rank": 48,
+      "lemma": "into",
+      "count": 3111707
+    },
+    {
+      "rank": 49,
+      "lemma": "all",
+      "count": 3078686
+    },
+    {
+      "rank": 50,
+      "lemma": "time",
+      "count": 3078207
+    },
+    {
+      "rank": 51,
+      "lemma": "there",
+      "count": 2995353
+    },
+    {
+      "rank": 52,
+      "lemma": "may",
+      "count": 2908953
+    },
+    {
+      "rank": 53,
+      "lemma": "more",
+      "count": 2737471
+    },
+    {
+      "rank": 54,
+      "lemma": "school",
+      "count": 2673315
+    },
+    {
+      "rank": 55,
+      "lemma": "would",
+      "count": 2668004
+    },
+    {
+      "rank": 56,
+      "lemma": "years",
+      "count": 2645324
+    },
+    {
+      "rank": 57,
+      "lemma": "over",
+      "count": 2631976
+    },
+    {
+      "rank": 58,
+      "lemma": "later",
+      "count": 2571348
+    },
+    {
+      "rank": 59,
+      "lemma": "between",
+      "count": 2523379
+    },
+    {
+      "rank": 60,
+      "lemma": "where",
+      "count": 2512795
+    },
+    {
+      "rank": 61,
+      "lemma": "only",
+      "count": 2492913
+    },
+    {
+      "rank": 62,
+      "lemma": "national",
+      "count": 2440635
+    },
+    {
+      "rank": 63,
+      "lemma": "season",
+      "count": 2412416
+    },
+    {
+      "rank": 64,
+      "lemma": "most",
+      "count": 2391219
+    },
+    {
+      "rank": 65,
+      "lemma": "world",
+      "count": 2385005
+    },
+    {
+      "rank": 66,
+      "lemma": "state",
+      "count": 2342495
+    },
+    {
+      "rank": 67,
+      "lemma": "up",
+      "count": 2324727
+    },
+    {
+      "rank": 68,
+      "lemma": "city",
+      "count": 2318336
+    },
+    {
+      "rank": 69,
+      "lemma": "some",
+      "count": 2288557
+    },
+    {
+      "rank": 70,
+      "lemma": "university",
+      "count": 2278773
+    },
+    {
+      "rank": 71,
+      "lemma": "while",
+      "count": 2270735
+    },
+    {
+      "rank": 72,
+      "lemma": "made",
+      "count": 2258068
+    },
+    {
+      "rank": 73,
+      "lemma": "three",
+      "count": 2246720
+    },
+    {
+      "rank": 74,
+      "lemma": "about",
+      "count": 2242953
+    },
+    {
+      "rank": 75,
+      "lemma": "then",
+      "count": 2239923
+    },
+    {
+      "rank": 76,
+      "lemma": "him",
+      "count": 2217619
+    },
+    {
+      "rank": 77,
+      "lemma": "united",
+      "count": 2216368
+    },
+    {
+      "rank": 78,
+      "lemma": "such",
+      "count": 2209894
+    },
+    {
+      "rank": 79,
+      "lemma": "out",
+      "count": 2181869
+    },
+    {
+      "rank": 80,
+      "lemma": "team",
+      "count": 2172258
+    },
+    {
+      "rank": 81,
+      "lemma": "film",
+      "count": 2149766
+    },
+    {
+      "rank": 82,
+      "lemma": "under",
+      "count": 2123590
+    },
+    {
+      "rank": 83,
+      "lemma": "used",
+      "count": 2121056
+    },
+    {
+      "rank": 84,
+      "lemma": "year",
+      "count": 2092863
+    },
+    {
+      "rank": 85,
+      "lemma": "became",
+      "count": 2088708
+    },
+    {
+      "rank": 86,
+      "lemma": "part",
+      "count": 2071615
+    },
+    {
+      "rank": 87,
+      "lemma": "known",
+      "count": 2068921
+    },
+    {
+      "rank": 88,
+      "lemma": "born",
+      "count": 2055255
+    },
+    {
+      "rank": 89,
+      "lemma": "can",
+      "count": 2048724
+    },
+    {
+      "rank": 90,
+      "lemma": "second",
+      "count": 2028121
+    },
+    {
+      "rank": 91,
+      "lemma": "no",
+      "count": 2001067
+    },
+    {
+      "rank": 92,
+      "lemma": "many",
+      "count": 1969582
+    },
+    {
+      "rank": 93,
+      "lemma": "states",
+      "count": 1959171
+    },
+    {
+      "rank": 94,
+      "lemma": "including",
+      "count": 1958696
+    },
+    {
+      "rank": 95,
+      "lemma": "than",
+      "count": 1952165
+    },
+    {
+      "rank": 96,
+      "lemma": "these",
+      "count": 1946629
+    },
+    {
+      "rank": 97,
+      "lemma": "being",
+      "count": 1944570
+    },
+    {
+      "rank": 98,
+      "lemma": "american",
+      "count": 1938920
+    },
+    {
+      "rank": 99,
+      "lemma": "before",
+      "count": 1915953
+    },
+    {
+      "rank": 100,
+      "lemma": "early",
+      "count": 1887987
+    },
+    {
+      "rank": 101,
+      "lemma": "both",
+      "count": 1882732
+    },
+    {
+      "rank": 102,
+      "lemma": "south",
+      "count": 1875890
+    },
+    {
+      "rank": 103,
+      "lemma": "through",
+      "count": 1870612
+    },
+    {
+      "rank": 104,
+      "lemma": "against",
+      "count": 1861600
+    },
+    {
+      "rank": 105,
+      "lemma": "i",
+      "count": 1861508
+    },
+    {
+      "rank": 106,
+      "lemma": "war",
+      "count": 1839700
+    },
+    {
+      "rank": 107,
+      "lemma": "history",
+      "count": 1833493
+    },
+    {
+      "rank": 108,
+      "lemma": "life",
+      "count": 1758054
+    },
+    {
+      "rank": 109,
+      "lemma": "until",
+      "count": 1754655
+    },
+    {
+      "rank": 110,
+      "lemma": "following",
+      "count": 1752983
+    },
+    {
+      "rank": 111,
+      "lemma": "family",
+      "count": 1747931
+    },
+    {
+      "rank": 112,
+      "lemma": "career",
+      "count": 1740432
+    },
+    {
+      "rank": 113,
+      "lemma": "since",
+      "count": 1719325
+    },
+    {
+      "rank": 114,
+      "lemma": "series",
+      "count": 1709575
+    },
+    {
+      "rank": 115,
+      "lemma": "people",
+      "count": 1704806
+    },
+    {
+      "rank": 116,
+      "lemma": "however",
+      "count": 1700124
+    },
+    {
+      "rank": 117,
+      "lemma": "work",
+      "count": 1682140
+    },
+    {
+      "rank": 118,
+      "lemma": "well",
+      "count": 1679695
+    },
+    {
+      "rank": 119,
+      "lemma": "them",
+      "count": 1648094
+    },
+    {
+      "rank": 120,
+      "lemma": "de",
+      "count": 1647954
+    },
+    {
+      "rank": 121,
+      "lemma": "north",
+      "count": 1628051
+    },
+    {
+      "rank": 122,
+      "lemma": "played",
+      "count": 1618316
+    },
+    {
+      "rank": 123,
+      "lemma": "group",
+      "count": 1600847
+    },
+    {
+      "rank": 124,
+      "lemma": "name",
+      "count": 1591792
+    },
+    {
+      "rank": 125,
+      "lemma": "area",
+      "count": 1589723
+    },
+    {
+      "rank": 126,
+      "lemma": "district",
+      "count": 1574039
+    },
+    {
+      "rank": 127,
+      "lemma": "league",
+      "count": 1572092
+    },
+    {
+      "rank": 128,
+      "lemma": "album",
+      "count": 1565466
+    },
+    {
+      "rank": 129,
+      "lemma": "music",
+      "count": 1560672
+    },
+    {
+      "rank": 130,
+      "lemma": "released",
+      "count": 1543177
+    },
+    {
+      "rank": 131,
+      "lemma": "number",
+      "count": 1520639
+    },
+    {
+      "rank": 132,
+      "lemma": "several",
+      "count": 1518664
+    },
+    {
+      "rank": 133,
+      "lemma": "county",
+      "count": 1499523
+    },
+    {
+      "rank": 134,
+      "lemma": "high",
+      "count": 1496712
+    },
+    {
+      "rank": 135,
+      "lemma": "won",
+      "count": 1489646
+    },
+    {
+      "rank": 136,
+      "lemma": "march",
+      "count": 1471150
+    },
+    {
+      "rank": 137,
+      "lemma": "s",
+      "count": 1470948
+    },
+    {
+      "rank": 138,
+      "lemma": "company",
+      "count": 1468605
+    },
+    {
+      "rank": 139,
+      "lemma": "government",
+      "count": 1441662
+    },
+    {
+      "rank": 140,
+      "lemma": "september",
+      "count": 1415449
+    },
+    {
+      "rank": 141,
+      "lemma": "january",
+      "count": 1413822
+    },
+    {
+      "rank": 142,
+      "lemma": "called",
+      "count": 1411276
+    },
+    {
+      "rank": 143,
+      "lemma": "four",
+      "count": 1409976
+    },
+    {
+      "rank": 144,
+      "lemma": "house",
+      "count": 1409956
+    },
+    {
+      "rank": 145,
+      "lemma": "club",
+      "count": 1389453
+    },
+    {
+      "rank": 146,
+      "lemma": "june",
+      "count": 1389432
+    },
+    {
+      "rank": 147,
+      "lemma": "october",
+      "count": 1383929
+    },
+    {
+      "rank": 148,
+      "lemma": "july",
+      "count": 1376851
+    },
+    {
+      "rank": 149,
+      "lemma": "game",
+      "count": 1366295
+    },
+    {
+      "rank": 150,
+      "lemma": "international",
+      "count": 1363833
+    },
+    {
+      "rank": 151,
+      "lemma": "august",
+      "count": 1352268
+    },
+    {
+      "rank": 152,
+      "lemma": "same",
+      "count": 1337396
+    },
+    {
+      "rank": 153,
+      "lemma": "will",
+      "count": 1316100
+    },
+    {
+      "rank": 154,
+      "lemma": "each",
+      "count": 1314806
+    },
+    {
+      "rank": 155,
+      "lemma": "april",
+      "count": 1314280
+    },
+    {
+      "rank": 156,
+      "lemma": "november",
+      "count": 1305890
+    },
+    {
+      "rank": 157,
+      "lemma": "began",
+      "count": 1305577
+    },
+    {
+      "rank": 158,
+      "lemma": "found",
+      "count": 1302709
+    },
+    {
+      "rank": 159,
+      "lemma": "station",
+      "count": 1298811
+    },
+    {
+      "rank": 160,
+      "lemma": "december",
+      "count": 1289394
+    },
+    {
+      "rank": 161,
+      "lemma": "john",
+      "count": 1270555
+    },
+    {
+      "rank": 162,
+      "lemma": "west",
+      "count": 1269790
+    },
+    {
+      "rank": 163,
+      "lemma": "member",
+      "count": 1251068
+    },
+    {
+      "rank": 164,
+      "lemma": "football",
+      "count": 1243519
+    },
+    {
+      "rank": 165,
+      "lemma": "college",
+      "count": 1240451
+    },
+    {
+      "rank": 166,
+      "lemma": "general",
+      "count": 1229985
+    },
+    {
+      "rank": 167,
+      "lemma": "end",
+      "count": 1229486
+    },
+    {
+      "rank": 168,
+      "lemma": "public",
+      "count": 1224838
+    },
+    {
+      "rank": 169,
+      "lemma": "home",
+      "count": 1224454
+    },
+    {
+      "rank": 170,
+      "lemma": "located",
+      "count": 1223107
+    },
+    {
+      "rank": 171,
+      "lemma": "held",
+      "count": 1218128
+    },
+    {
+      "rank": 172,
+      "lemma": "place",
+      "count": 1213817
+    },
+    {
+      "rank": 173,
+      "lemma": "use",
+      "count": 1212563
+    },
+    {
+      "rank": 174,
+      "lemma": "former",
+      "count": 1211329
+    },
+    {
+      "rank": 175,
+      "lemma": "so",
+      "count": 1206834
+    },
+    {
+      "rank": 176,
+      "lemma": "church",
+      "count": 1203910
+    },
+    {
+      "rank": 177,
+      "lemma": "due",
+      "count": 1188557
+    },
+    {
+      "rank": 178,
+      "lemma": "amp",
+      "count": 1188461
+    },
+    {
+      "rank": 179,
+      "lemma": "song",
+      "count": 1177181
+    },
+    {
+      "rank": 180,
+      "lemma": "population",
+      "count": 1176260
+    },
+    {
+      "rank": 181,
+      "lemma": "named",
+      "count": 1167956
+    },
+    {
+      "rank": 182,
+      "lemma": "now",
+      "count": 1166194
+    },
+    {
+      "rank": 183,
+      "lemma": "february",
+      "count": 1165950
+    },
+    {
+      "rank": 184,
+      "lemma": "took",
+      "count": 1156946
+    },
+    {
+      "rank": 185,
+      "lemma": "party",
+      "count": 1145987
+    },
+    {
+      "rank": 186,
+      "lemma": "york",
+      "count": 1143853
+    },
+    {
+      "rank": 187,
+      "lemma": "served",
+      "count": 1143230
+    },
+    {
+      "rank": 188,
+      "lemma": "town",
+      "count": 1140974
+    },
+    {
+      "rank": 189,
+      "lemma": "day",
+      "count": 1137318
+    },
+    {
+      "rank": 190,
+      "lemma": "around",
+      "count": 1128817
+    },
+    {
+      "rank": 191,
+      "lemma": "if",
+      "count": 1122660
+    },
+    {
+      "rank": 192,
+      "lemma": "system",
+      "count": 1119265
+    },
+    {
+      "rank": 193,
+      "lemma": "river",
+      "count": 1116799
+    },
+    {
+      "rank": 194,
+      "lemma": "british",
+      "count": 1110529
+    },
+    {
+      "rank": 195,
+      "lemma": "local",
+      "count": 1106221
+    },
+    {
+      "rank": 196,
+      "lemma": "line",
+      "count": 1104368
+    },
+    {
+      "rank": 197,
+      "lemma": "east",
+      "count": 1103295
+    },
+    {
+      "rank": 198,
+      "lemma": "age",
+      "count": 1100498
+    },
+    {
+      "rank": 199,
+      "lemma": "because",
+      "count": 1091539
+    },
+    {
+      "rank": 200,
+      "lemma": "received",
+      "count": 1086263
+    },
+    {
+      "rank": 201,
+      "lemma": "final",
+      "count": 1084492
+    },
+    {
+      "rank": 202,
+      "lemma": "did",
+      "count": 1079606
+    },
+    {
+      "rank": 203,
+      "lemma": "games",
+      "count": 1076919
+    },
+    {
+      "rank": 204,
+      "lemma": "service",
+      "count": 1064314
+    },
+    {
+      "rank": 205,
+      "lemma": "along",
+      "count": 1062706
+    },
+    {
+      "rank": 206,
+      "lemma": "could",
+      "count": 1056310
+    },
+    {
+      "rank": 207,
+      "lemma": "best",
+      "count": 1051532
+    },
+    {
+      "rank": 208,
+      "lemma": "any",
+      "count": 1049801
+    },
+    {
+      "rank": 209,
+      "lemma": "another",
+      "count": 1046282
+    },
+    {
+      "rank": 210,
+      "lemma": "based",
+      "count": 1046067
+    },
+    {
+      "rank": 211,
+      "lemma": "century",
+      "count": 1041004
+    },
+    {
+      "rank": 212,
+      "lemma": "within",
+      "count": 1040506
+    },
+    {
+      "rank": 213,
+      "lemma": "back",
+      "count": 1036738
+    },
+    {
+      "rank": 214,
+      "lemma": "members",
+      "count": 1036431
+    },
+    {
+      "rank": 215,
+      "lemma": "species",
+      "count": 1034073
+    },
+    {
+      "rank": 216,
+      "lemma": "building",
+      "count": 1029798
+    },
+    {
+      "rank": 217,
+      "lemma": "death",
+      "count": 1025269
+    },
+    {
+      "rank": 218,
+      "lemma": "built",
+      "count": 1018221
+    },
+    {
+      "rank": 219,
+      "lemma": "village",
+      "count": 1010743
+    },
+    {
+      "rank": 220,
+      "lemma": "president",
+      "count": 1005585
+    },
+    {
+      "rank": 221,
+      "lemma": "like",
+      "count": 998337
+    },
+    {
+      "rank": 222,
+      "lemma": "said",
+      "count": 997308
+    },
+    {
+      "rank": 223,
+      "lemma": "died",
+      "count": 993520
+    },
+    {
+      "rank": 224,
+      "lemma": "major",
+      "count": 985801
+    },
+    {
+      "rank": 225,
+      "lemma": "published",
+      "count": 976498
+    },
+    {
+      "rank": 226,
+      "lemma": "left",
+      "count": 973501
+    },
+    {
+      "rank": 227,
+      "lemma": "show",
+      "count": 965994
+    },
+    {
+      "rank": 228,
+      "lemma": "st",
+      "count": 961046
+    },
+    {
+      "rank": 229,
+      "lemma": "include",
+      "count": 959485
+    },
+    {
+      "rank": 230,
+      "lemma": "main",
+      "count": 948823
+    },
+    {
+      "rank": 231,
+      "lemma": "third",
+      "count": 948535
+    },
+    {
+      "rank": 232,
+      "lemma": "five",
+      "count": 946089
+    },
+    {
+      "rank": 233,
+      "lemma": "according",
+      "count": 942251
+    },
+    {
+      "rank": 234,
+      "lemma": "included",
+      "count": 937990
+    },
+    {
+      "rank": 235,
+      "lemma": "although",
+      "count": 936909
+    },
+    {
+      "rank": 236,
+      "lemma": "u",
+      "count": 928747
+    },
+    {
+      "rank": 237,
+      "lemma": "division",
+      "count": 927082
+    },
+    {
+      "rank": 238,
+      "lemma": "single",
+      "count": 926107
+    },
+    {
+      "rank": 239,
+      "lemma": "order",
+      "count": 925052
+    },
+    {
+      "rank": 240,
+      "lemma": "road",
+      "count": 923929
+    },
+    {
+      "rank": 241,
+      "lemma": "education",
+      "count": 923851
+    },
+    {
+      "rank": 242,
+      "lemma": "park",
+      "count": 916357
+    },
+    {
+      "rank": 243,
+      "lemma": "set",
+      "count": 915598
+    },
+    {
+      "rank": 244,
+      "lemma": "small",
+      "count": 915265
+    },
+    {
+      "rank": 245,
+      "lemma": "last",
+      "count": 914221
+    },
+    {
+      "rank": 246,
+      "lemma": "band",
+      "count": 911656
+    },
+    {
+      "rank": 247,
+      "lemma": "large",
+      "count": 904716
+    },
+    {
+      "rank": 248,
+      "lemma": "army",
+      "count": 902070
+    },
+    {
+      "rank": 249,
+      "lemma": "c",
+      "count": 900649
+    },
+    {
+      "rank": 250,
+      "lemma": "long",
+      "count": 899603
+    },
+    {
+      "rank": 251,
+      "lemma": "those",
+      "count": 897010
+    },
+    {
+      "rank": 252,
+      "lemma": "own",
+      "count": 891508
+    },
+    {
+      "rank": 253,
+      "lemma": "book",
+      "count": 889818
+    },
+    {
+      "rank": 254,
+      "lemma": "development",
+      "count": 878503
+    },
+    {
+      "rank": 255,
+      "lemma": "law",
+      "count": 872060
+    },
+    {
+      "rank": 256,
+      "lemma": "among",
+      "count": 869787
+    },
+    {
+      "rank": 257,
+      "lemma": "led",
+      "count": 863372
+    },
+    {
+      "rank": 258,
+      "lemma": "moved",
+      "count": 861882
+    },
+    {
+      "rank": 259,
+      "lemma": "still",
+      "count": 858073
+    },
+    {
+      "rank": 260,
+      "lemma": "list",
+      "count": 850324
+    },
+    {
+      "rank": 261,
+      "lemma": "french",
+      "count": 844934
+    },
+    {
+      "rank": 262,
+      "lemma": "times",
+      "count": 842333
+    },
+    {
+      "rank": 263,
+      "lemma": "research",
+      "count": 839003
+    },
+    {
+      "rank": 264,
+      "lemma": "council",
+      "count": 836747
+    },
+    {
+      "rank": 265,
+      "lemma": "million",
+      "count": 832953
+    },
+    {
+      "rank": 266,
+      "lemma": "us",
+      "count": 831866
+    },
+    {
+      "rank": 267,
+      "lemma": "central",
+      "count": 831678
+    },
+    {
+      "rank": 268,
+      "lemma": "election",
+      "count": 830207
+    },
+    {
+      "rank": 269,
+      "lemma": "court",
+      "count": 828376
+    },
+    {
+      "rank": 270,
+      "lemma": "art",
+      "count": 826220
+    },
+    {
+      "rank": 271,
+      "lemma": "very",
+      "count": 824335
+    },
+    {
+      "rank": 272,
+      "lemma": "cup",
+      "count": 823083
+    },
+    {
+      "rank": 273,
+      "lemma": "son",
+      "count": 812532
+    },
+    {
+      "rank": 274,
+      "lemma": "children",
+      "count": 810583
+    },
+    {
+      "rank": 275,
+      "lemma": "community",
+      "count": 807648
+    },
+    {
+      "rank": 276,
+      "lemma": "often",
+      "count": 807057
+    },
+    {
+      "rank": 277,
+      "lemma": "top",
+      "count": 806799
+    },
+    {
+      "rank": 278,
+      "lemma": "old",
+      "count": 806639
+    },
+    {
+      "rank": 279,
+      "lemma": "center",
+      "count": 805221
+    },
+    {
+      "rank": 280,
+      "lemma": "what",
+      "count": 802161
+    },
+    {
+      "rank": 281,
+      "lemma": "again",
+      "count": 800298
+    },
+    {
+      "rank": 282,
+      "lemma": "late",
+      "count": 800057
+    },
+    {
+      "rank": 283,
+      "lemma": "play",
+      "count": 799567
+    },
+    {
+      "rank": 284,
+      "lemma": "side",
+      "count": 797929
+    },
+    {
+      "rank": 285,
+      "lemma": "original",
+      "count": 796453
+    },
+    {
+      "rank": 286,
+      "lemma": "english",
+      "count": 794683
+    },
+    {
+      "rank": 287,
+      "lemma": "water",
+      "count": 793461
+    },
+    {
+      "rank": 288,
+      "lemma": "near",
+      "count": 792718
+    },
+    {
+      "rank": 289,
+      "lemma": "announced",
+      "count": 792649
+    },
+    {
+      "rank": 290,
+      "lemma": "championship",
+      "count": 788926
+    },
+    {
+      "rank": 291,
+      "lemma": "different",
+      "count": 786992
+    },
+    {
+      "rank": 292,
+      "lemma": "air",
+      "count": 786288
+    },
+    {
+      "rank": 293,
+      "lemma": "record",
+      "count": 785203
+    },
+    {
+      "rank": 294,
+      "lemma": "country",
+      "count": 783934
+    },
+    {
+      "rank": 295,
+      "lemma": "street",
+      "count": 780641
+    },
+    {
+      "rank": 296,
+      "lemma": "political",
+      "count": 776873
+    },
+    {
+      "rank": 297,
+      "lemma": "just",
+      "count": 776170
+    },
+    {
+      "rank": 298,
+      "lemma": "form",
+      "count": 774672
+    },
+    {
+      "rank": 299,
+      "lemma": "german",
+      "count": 772370
+    },
+    {
+      "rank": 300,
+      "lemma": "great",
+      "count": 772017
+    },
+    {
+      "rank": 301,
+      "lemma": "down",
+      "count": 771787
+    },
+    {
+      "rank": 302,
+      "lemma": "ii",
+      "count": 769099
+    },
+    {
+      "rank": 303,
+      "lemma": "established",
+      "count": 763183
+    },
+    {
+      "rank": 304,
+      "lemma": "military",
+      "count": 762013
+    },
+    {
+      "rank": 305,
+      "lemma": "title",
+      "count": 761185
+    },
+    {
+      "rank": 306,
+      "lemma": "award",
+      "count": 760248
+    },
+    {
+      "rank": 307,
+      "lemma": "production",
+      "count": 755725
+    },
+    {
+      "rank": 308,
+      "lemma": "off",
+      "count": 755009
+    },
+    {
+      "rank": 309,
+      "lemma": "having",
+      "count": 754985
+    },
+    {
+      "rank": 310,
+      "lemma": "started",
+      "count": 752746
+    },
+    {
+      "rank": 311,
+      "lemma": "much",
+      "count": 752329
+    },
+    {
+      "rank": 312,
+      "lemma": "power",
+      "count": 751846
+    },
+    {
+      "rank": 313,
+      "lemma": "support",
+      "count": 751343
+    },
+    {
+      "rank": 314,
+      "lemma": "white",
+      "count": 747112
+    },
+    {
+      "rank": 315,
+      "lemma": "period",
+      "count": 746712
+    },
+    {
+      "rank": 316,
+      "lemma": "london",
+      "count": 745054
+    },
+    {
+      "rank": 317,
+      "lemma": "role",
+      "count": 741630
+    },
+    {
+      "rank": 318,
+      "lemma": "land",
+      "count": 740703
+    },
+    {
+      "rank": 319,
+      "lemma": "head",
+      "count": 740445
+    },
+    {
+      "rank": 320,
+      "lemma": "went",
+      "count": 731097
+    },
+    {
+      "rank": 321,
+      "lemma": "even",
+      "count": 729076
+    },
+    {
+      "rank": 322,
+      "lemma": "region",
+      "count": 727409
+    },
+    {
+      "rank": 323,
+      "lemma": "next",
+      "count": 724815
+    },
+    {
+      "rank": 324,
+      "lemma": "six",
+      "count": 724686
+    },
+    {
+      "rank": 325,
+      "lemma": "island",
+      "count": 723895
+    },
+    {
+      "rank": 326,
+      "lemma": "king",
+      "count": 722054
+    },
+    {
+      "rank": 327,
+      "lemma": "office",
+      "count": 721072
+    },
+    {
+      "rank": 328,
+      "lemma": "came",
+      "count": 720401
+    },
+    {
+      "rank": 329,
+      "lemma": "total",
+      "count": 718371
+    },
+    {
+      "rank": 330,
+      "lemma": "joined",
+      "count": 717487
+    },
+    {
+      "rank": 331,
+      "lemma": "works",
+      "count": 717227
+    },
+    {
+      "rank": 332,
+      "lemma": "worked",
+      "count": 714730
+    },
+    {
+      "rank": 333,
+      "lemma": "m",
+      "count": 713550
+    },
+    {
+      "rank": 334,
+      "lemma": "player",
+      "count": 708693
+    },
+    {
+      "rank": 335,
+      "lemma": "television",
+      "count": 707287
+    },
+    {
+      "rank": 336,
+      "lemma": "director",
+      "count": 706607
+    },
+    {
+      "rank": 337,
+      "lemma": "western",
+      "count": 706484
+    },
+    {
+      "rank": 338,
+      "lemma": "father",
+      "count": 704365
+    },
+    {
+      "rank": 339,
+      "lemma": "various",
+      "count": 704267
+    },
+    {
+      "rank": 340,
+      "lemma": "given",
+      "count": 703981
+    },
+    {
+      "rank": 341,
+      "lemma": "black",
+      "count": 703710
+    },
+    {
+      "rank": 342,
+      "lemma": "association",
+      "count": 701477
+    },
+    {
+      "rank": 343,
+      "lemma": "make",
+      "count": 700392
+    },
+    {
+      "rank": 344,
+      "lemma": "union",
+      "count": 700170
+    },
+    {
+      "rank": 345,
+      "lemma": "using",
+      "count": 699724
+    },
+    {
+      "rank": 346,
+      "lemma": "way",
+      "count": 698690
+    },
+    {
+      "rank": 347,
+      "lemma": "described",
+      "count": 696956
+    },
+    {
+      "rank": 348,
+      "lemma": "professional",
+      "count": 694597
+    },
+    {
+      "rank": 349,
+      "lemma": "e",
+      "count": 687634
+    },
+    {
+      "rank": 350,
+      "lemma": "married",
+      "count": 687294
+    },
+    {
+      "rank": 351,
+      "lemma": "do",
+      "count": 682342
+    },
+    {
+      "rank": 352,
+      "lemma": "women",
+      "count": 681859
+    },
+    {
+      "rank": 353,
+      "lemma": "become",
+      "count": 681281
+    },
+    {
+      "rank": 354,
+      "lemma": "returned",
+      "count": 679122
+    },
+    {
+      "rank": 355,
+      "lemma": "field",
+      "count": 674380
+    },
+    {
+      "rank": 356,
+      "lemma": "wrote",
+      "count": 673218
+    },
+    {
+      "rank": 357,
+      "lemma": "produced",
+      "count": 668381
+    },
+    {
+      "rank": 358,
+      "lemma": "department",
+      "count": 667442
+    },
+    {
+      "rank": 359,
+      "lemma": "business",
+      "count": 663757
+    },
+    {
+      "rank": 360,
+      "lemma": "england",
+      "count": 662573
+    },
+    {
+      "rank": 361,
+      "lemma": "social",
+      "count": 662247
+    },
+    {
+      "rank": 362,
+      "lemma": "royal",
+      "count": 658459
+    },
+    {
+      "rank": 363,
+      "lemma": "created",
+      "count": 658403
+    },
+    {
+      "rank": 364,
+      "lemma": "european",
+      "count": 653475
+    },
+    {
+      "rank": 365,
+      "lemma": "students",
+      "count": 650053
+    },
+    {
+      "rank": 366,
+      "lemma": "point",
+      "count": 648507
+    },
+    {
+      "rank": 367,
+      "lemma": "program",
+      "count": 647425
+    },
+    {
+      "rank": 368,
+      "lemma": "william",
+      "count": 647331
+    },
+    {
+      "rank": 369,
+      "lemma": "b",
+      "count": 644261
+    },
+    {
+      "rank": 370,
+      "lemma": "young",
+      "count": 642715
+    },
+    {
+      "rank": 371,
+      "lemma": "without",
+      "count": 639913
+    },
+    {
+      "rank": 372,
+      "lemma": "society",
+      "count": 639550
+    },
+    {
+      "rank": 373,
+      "lemma": "open",
+      "count": 639002
+    },
+    {
+      "rank": 374,
+      "lemma": "written",
+      "count": 637967
+    },
+    {
+      "rank": 375,
+      "lemma": "site",
+      "count": 634534
+    },
+    {
+      "rank": 376,
+      "lemma": "further",
+      "count": 632660
+    },
+    {
+      "rank": 377,
+      "lemma": "act",
+      "count": 632321
+    },
+    {
+      "rank": 378,
+      "lemma": "round",
+      "count": 631394
+    },
+    {
+      "rank": 379,
+      "lemma": "you",
+      "count": 631371
+    },
+    {
+      "rank": 380,
+      "lemma": "lost",
+      "count": 631167
+    },
+    {
+      "rank": 381,
+      "lemma": "northern",
+      "count": 630973
+    },
+    {
+      "rank": 382,
+      "lemma": "continued",
+      "count": 630150
+    },
+    {
+      "rank": 383,
+      "lemma": "days",
+      "count": 630141
+    },
+    {
+      "rank": 384,
+      "lemma": "summer",
+      "count": 629512
+    },
+    {
+      "rank": 385,
+      "lemma": "take",
+      "count": 625816
+    },
+    {
+      "rank": 386,
+      "lemma": "railway",
+      "count": 622198
+    },
+    {
+      "rank": 387,
+      "lemma": "together",
+      "count": 621626
+    },
+    {
+      "rank": 388,
+      "lemma": "force",
+      "count": 620638
+    },
+    {
+      "rank": 389,
+      "lemma": "few",
+      "count": 620310
+    },
+    {
+      "rank": 390,
+      "lemma": "project",
+      "count": 617800
+    },
+    {
+      "rank": 391,
+      "lemma": "founded",
+      "count": 614312
+    },
+    {
+      "rank": 392,
+      "lemma": "services",
+      "count": 611328
+    },
+    {
+      "rank": 393,
+      "lemma": "event",
+      "count": 610269
+    },
+    {
+      "rank": 394,
+      "lemma": "design",
+      "count": 609812
+    },
+    {
+      "rank": 395,
+      "lemma": "position",
+      "count": 608909
+    },
+    {
+      "rank": 396,
+      "lemma": "radio",
+      "count": 605641
+    },
+    {
+      "rank": 397,
+      "lemma": "win",
+      "count": 604423
+    },
+    {
+      "rank": 398,
+      "lemma": "southern",
+      "count": 601281
+    },
+    {
+      "rank": 399,
+      "lemma": "match",
+      "count": 600821
+    },
+    {
+      "rank": 400,
+      "lemma": "men",
+      "count": 598294
+    },
+    {
+      "rank": 401,
+      "lemma": "though",
+      "count": 596692
+    },
+    {
+      "rank": 402,
+      "lemma": "india",
+      "count": 593032
+    },
+    {
+      "rank": 403,
+      "lemma": "board",
+      "count": 592866
+    },
+    {
+      "rank": 404,
+      "lemma": "considered",
+      "count": 590935
+    },
+    {
+      "rank": 405,
+      "lemma": "opened",
+      "count": 590636
+    },
+    {
+      "rank": 406,
+      "lemma": "france",
+      "count": 590355
+    },
+    {
+      "rank": 407,
+      "lemma": "man",
+      "count": 589185
+    },
+    {
+      "rank": 408,
+      "lemma": "elected",
+      "count": 588555
+    },
+    {
+      "rank": 409,
+      "lemma": "australia",
+      "count": 588308
+    },
+    {
+      "rank": 410,
+      "lemma": "we",
+      "count": 587232
+    },
+    {
+      "rank": 411,
+      "lemma": "live",
+      "count": 586352
+    },
+    {
+      "rank": 412,
+      "lemma": "san",
+      "count": 586337
+    },
+    {
+      "rank": 413,
+      "lemma": "route",
+      "count": 585951
+    },
+    {
+      "rank": 414,
+      "lemma": "version",
+      "count": 584432
+    },
+    {
+      "rank": 415,
+      "lemma": "appointed",
+      "count": 584340
+    },
+    {
+      "rank": 416,
+      "lemma": "video",
+      "count": 583738
+    },
+    {
+      "rank": 417,
+      "lemma": "signed",
+      "count": 582368
+    },
+    {
+      "rank": 418,
+      "lemma": "minister",
+      "count": 582021
+    },
+    {
+      "rank": 419,
+      "lemma": "debut",
+      "count": 581617
+    },
+    {
+      "rank": 420,
+      "lemma": "release",
+      "count": 581116
+    },
+    {
+      "rank": 421,
+      "lemma": "james",
+      "count": 579532
+    },
+    {
+      "rank": 422,
+      "lemma": "teams",
+      "count": 577295
+    },
+    {
+      "rank": 423,
+      "lemma": "per",
+      "count": 576573
+    },
+    {
+      "rank": 424,
+      "lemma": "d",
+      "count": 576020
+    },
+    {
+      "rank": 425,
+      "lemma": "awards",
+      "count": 575257
+    },
+    {
+      "rank": 426,
+      "lemma": "control",
+      "count": 573438
+    },
+    {
+      "rank": 427,
+      "lemma": "recorded",
+      "count": 572428
+    },
+    {
+      "rank": 428,
+      "lemma": "la",
+      "count": 572163
+    },
+    {
+      "rank": 429,
+      "lemma": "police",
+      "count": 571206
+    },
+    {
+      "rank": 430,
+      "lemma": "hall",
+      "count": 568258
+    },
+    {
+      "rank": 431,
+      "lemma": "run",
+      "count": 568154
+    },
+    {
+      "rank": 432,
+      "lemma": "women's",
+      "count": 567870
+    },
+    {
+      "rank": 433,
+      "lemma": "george",
+      "count": 566868
+    },
+    {
+      "rank": 434,
+      "lemma": "battle",
+      "count": 563768
+    },
+    {
+      "rank": 435,
+      "lemma": "every",
+      "count": 562752
+    },
+    {
+      "rank": 436,
+      "lemma": "health",
+      "count": 560685
+    },
+    {
+      "rank": 437,
+      "lemma": "california",
+      "count": 557421
+    },
+    {
+      "rank": 438,
+      "lemma": "construction",
+      "count": 557269
+    },
+    {
+      "rank": 439,
+      "lemma": "language",
+      "count": 556724
+    },
+    {
+      "rank": 440,
+      "lemma": "level",
+      "count": 554829
+    },
+    {
+      "rank": 441,
+      "lemma": "working",
+      "count": 554775
+    },
+    {
+      "rank": 442,
+      "lemma": "right",
+      "count": 551351
+    },
+    {
+      "rank": 443,
+      "lemma": "areas",
+      "count": 551004
+    },
+    {
+      "rank": 444,
+      "lemma": "red",
+      "count": 549844
+    },
+    {
+      "rank": 445,
+      "lemma": "playing",
+      "count": 549834
+    },
+    {
+      "rank": 446,
+      "lemma": "important",
+      "count": 549154
+    },
+    {
+      "rank": 447,
+      "lemma": "formed",
+      "count": 548959
+    },
+    {
+      "rank": 448,
+      "lemma": "appeared",
+      "count": 547795
+    },
+    {
+      "rank": 449,
+      "lemma": "special",
+      "count": 547587
+    },
+    {
+      "rank": 450,
+      "lemma": "once",
+      "count": 545736
+    },
+    {
+      "rank": 451,
+      "lemma": "short",
+      "count": 544770
+    },
+    {
+      "rank": 452,
+      "lemma": "making",
+      "count": 544197
+    },
+    {
+      "rank": 453,
+      "lemma": "points",
+      "count": 543986
+    },
+    {
+      "rank": 454,
+      "lemma": "records",
+      "count": 543433
+    },
+    {
+      "rank": 455,
+      "lemma": "common",
+      "count": 541756
+    },
+    {
+      "rank": 456,
+      "lemma": "race",
+      "count": 540926
+    },
+    {
+      "rank": 457,
+      "lemma": "forces",
+      "count": 540858
+    },
+    {
+      "rank": 458,
+      "lemma": "case",
+      "count": 539964
+    },
+    {
+      "rank": 459,
+      "lemma": "similar",
+      "count": 538292
+    },
+    {
+      "rank": 460,
+      "lemma": "result",
+      "count": 536088
+    },
+    {
+      "rank": 461,
+      "lemma": "personal",
+      "count": 536037
+    },
+    {
+      "rank": 462,
+      "lemma": "lead",
+      "count": 536032
+    },
+    {
+      "rank": 463,
+      "lemma": "others",
+      "count": 534487
+    },
+    {
+      "rank": 464,
+      "lemma": "story",
+      "count": 533060
+    },
+    {
+      "rank": 465,
+      "lemma": "events",
+      "count": 532572
+    },
+    {
+      "rank": 466,
+      "lemma": "wife",
+      "count": 532377
+    },
+    {
+      "rank": 467,
+      "lemma": "media",
+      "count": 530775
+    },
+    {
+      "rank": 468,
+      "lemma": "popular",
+      "count": 530390
+    },
+    {
+      "rank": 469,
+      "lemma": "museum",
+      "count": 530155
+    },
+    {
+      "rank": 470,
+      "lemma": "addition",
+      "count": 527635
+    },
+    {
+      "rank": 471,
+      "lemma": "originally",
+      "count": 526723
+    },
+    {
+      "rank": 472,
+      "lemma": "lake",
+      "count": 526287
+    },
+    {
+      "rank": 473,
+      "lemma": "style",
+      "count": 523182
+    },
+    {
+      "rank": 474,
+      "lemma": "how",
+      "count": 522806
+    },
+    {
+      "rank": 475,
+      "lemma": "canada",
+      "count": 521398
+    },
+    {
+      "rank": 476,
+      "lemma": "developed",
+      "count": 521169
+    },
+    {
+      "rank": 477,
+      "lemma": "modern",
+      "count": 520431
+    },
+    {
+      "rank": 478,
+      "lemma": "committee",
+      "count": 517231
+    },
+    {
+      "rank": 479,
+      "lemma": "living",
+      "count": 515978
+    },
+    {
+      "rank": 480,
+      "lemma": "indian",
+      "count": 515759
+    },
+    {
+      "rank": 481,
+      "lemma": "average",
+      "count": 515501
+    },
+    {
+      "rank": 482,
+      "lemma": "across",
+      "count": 514098
+    },
+    {
+      "rank": 483,
+      "lemma": "example",
+      "count": 513586
+    },
+    {
+      "rank": 484,
+      "lemma": "america",
+      "count": 512959
+    },
+    {
+      "rank": 485,
+      "lemma": "gt",
+      "count": 511855
+    },
+    {
+      "rank": 486,
+      "lemma": "australian",
+      "count": 511754
+    },
+    {
+      "rank": 487,
+      "lemma": "songs",
+      "count": 511418
+    },
+    {
+      "rank": 488,
+      "lemma": "coach",
+      "count": 509987
+    },
+    {
+      "rank": 489,
+      "lemma": "science",
+      "count": 507616
+    },
+    {
+      "rank": 490,
+      "lemma": "track",
+      "count": 506968
+    },
+    {
+      "rank": 491,
+      "lemma": "training",
+      "count": 506251
+    },
+    {
+      "rank": 492,
+      "lemma": "lt",
+      "count": 506116
+    },
+    {
+      "rank": 493,
+      "lemma": "little",
+      "count": 505282
+    },
+    {
+      "rank": 494,
+      "lemma": "free",
+      "count": 504005
+    },
+    {
+      "rank": 495,
+      "lemma": "upon",
+      "count": 503605
+    },
+    {
+      "rank": 496,
+      "lemma": "class",
+      "count": 500543
+    },
+    {
+      "rank": 497,
+      "lemma": "human",
+      "count": 500493
+    },
+    {
+      "rank": 498,
+      "lemma": "schools",
+      "count": 500362
+    },
+    {
+      "rank": 499,
+      "lemma": "despite",
+      "count": 500118
+    },
+    {
+      "rank": 500,
+      "lemma": "rock",
+      "count": 498621
+    },
+    {
+      "rank": 501,
+      "lemma": "tournament",
+      "count": 498310
+    },
+    {
+      "rank": 502,
+      "lemma": "throughout",
+      "count": 498230
+    },
+    {
+      "rank": 503,
+      "lemma": "players",
+      "count": 497260
+    },
+    {
+      "rank": 504,
+      "lemma": "himself",
+      "count": 496855
+    },
+    {
+      "rank": 505,
+      "lemma": "tour",
+      "count": 496490
+    },
+    {
+      "rank": 506,
+      "lemma": "eastern",
+      "count": 491392
+    },
+    {
+      "rank": 507,
+      "lemma": "never",
+      "count": 490917
+    },
+    {
+      "rank": 508,
+      "lemma": "love",
+      "count": 489629
+    },
+    {
+      "rank": 509,
+      "lemma": "good",
+      "count": 486943
+    },
+    {
+      "rank": 510,
+      "lemma": "information",
+      "count": 486938
+    },
+    {
+      "rank": 511,
+      "lemma": "centre",
+      "count": 486812
+    },
+    {
+      "rank": 512,
+      "lemma": "present",
+      "count": 485666
+    },
+    {
+      "rank": 513,
+      "lemma": "away",
+      "count": 483395
+    },
+    {
+      "rank": 514,
+      "lemma": "rights",
+      "count": 482097
+    },
+    {
+      "rank": 515,
+      "lemma": "current",
+      "count": 482001
+    },
+    {
+      "rank": 516,
+      "lemma": "seven",
+      "count": 481440
+    },
+    {
+      "rank": 517,
+      "lemma": "province",
+      "count": 480428
+    },
+    {
+      "rank": 518,
+      "lemma": "see",
+      "count": 480133
+    },
+    {
+      "rank": 519,
+      "lemma": "germany",
+      "count": 479259
+    },
+    {
+      "rank": 520,
+      "lemma": "performance",
+      "count": 479242
+    },
+    {
+      "rank": 521,
+      "lemma": "finished",
+      "count": 479226
+    },
+    {
+      "rank": 522,
+      "lemma": "institute",
+      "count": 478972
+    },
+    {
+      "rank": 523,
+      "lemma": "census",
+      "count": 478799
+    },
+    {
+      "rank": 524,
+      "lemma": "body",
+      "count": 478688
+    },
+    {
+      "rank": 525,
+      "lemma": "return",
+      "count": 477276
+    },
+    {
+      "rank": 526,
+      "lemma": "festival",
+      "count": 475832
+    },
+    {
+      "rank": 527,
+      "lemma": "sold",
+      "count": 474336
+    },
+    {
+      "rank": 528,
+      "lemma": "david",
+      "count": 474161
+    },
+    {
+      "rank": 529,
+      "lemma": "eventually",
+      "count": 473147
+    },
+    {
+      "rank": 530,
+      "lemma": "months",
+      "count": 471337
+    },
+    {
+      "rank": 531,
+      "lemma": "completed",
+      "count": 469934
+    },
+    {
+      "rank": 532,
+      "lemma": "gave",
+      "count": 469150
+    },
+    {
+      "rank": 533,
+      "lemma": "followed",
+      "count": 469046
+    },
+    {
+      "rank": 534,
+      "lemma": "study",
+      "count": 469019
+    },
+    {
+      "rank": 535,
+      "lemma": "daughter",
+      "count": 468142
+    },
+    {
+      "rank": 536,
+      "lemma": "chief",
+      "count": 467903
+    },
+    {
+      "rank": 537,
+      "lemma": "stage",
+      "count": 467409
+    },
+    {
+      "rank": 538,
+      "lemma": "sea",
+      "count": 465967
+    },
+    {
+      "rank": 539,
+      "lemma": "official",
+      "count": 465534
+    },
+    {
+      "rank": 540,
+      "lemma": "arts",
+      "count": 459101
+    },
+    {
+      "rank": 541,
+      "lemma": "performed",
+      "count": 459036
+    },
+    {
+      "rank": 542,
+      "lemma": "remained",
+      "count": 458917
+    },
+    {
+      "rank": 543,
+      "lemma": "mother",
+      "count": 458312
+    },
+    {
+      "rank": 544,
+      "lemma": "academy",
+      "count": 458263
+    },
+    {
+      "rank": 545,
+      "lemma": "reported",
+      "count": 457065
+    },
+    {
+      "rank": 546,
+      "lemma": "civil",
+      "count": 455612
+    },
+    {
+      "rank": 547,
+      "lemma": "currently",
+      "count": 455351
+    },
+    {
+      "rank": 548,
+      "lemma": "designed",
+      "count": 454956
+    },
+    {
+      "rank": 549,
+      "lemma": "should",
+      "count": 454458
+    },
+    {
+      "rank": 550,
+      "lemma": "taken",
+      "count": 454113
+    },
+    {
+      "rank": 551,
+      "lemma": "europe",
+      "count": 453786
+    },
+    {
+      "rank": 552,
+      "lemma": "studies",
+      "count": 453186
+    },
+    {
+      "rank": 553,
+      "lemma": "china",
+      "count": 452609
+    },
+    {
+      "rank": 554,
+      "lemma": "features",
+      "count": 452080
+    },
+    {
+      "rank": 555,
+      "lemma": "half",
+      "count": 451839
+    },
+    {
+      "rank": 556,
+      "lemma": "fire",
+      "count": 450793
+    },
+    {
+      "rank": 557,
+      "lemma": "available",
+      "count": 449936
+    },
+    {
+      "rank": 558,
+      "lemma": "process",
+      "count": 449331
+    },
+    {
+      "rank": 559,
+      "lemma": "j",
+      "count": 449328
+    },
+    {
+      "rank": 560,
+      "lemma": "less",
+      "count": 448329
+    },
+    {
+      "rank": 561,
+      "lemma": "robert",
+      "count": 448289
+    },
+    {
+      "rank": 562,
+      "lemma": "range",
+      "count": 447563
+    },
+    {
+      "rank": 563,
+      "lemma": "thomas",
+      "count": 447258
+    },
+    {
+      "rank": 564,
+      "lemma": "term",
+      "count": 447077
+    },
+    {
+      "rank": 565,
+      "lemma": "competition",
+      "count": 446100
+    },
+    {
+      "rank": 566,
+      "lemma": "leading",
+      "count": 445808
+    },
+    {
+      "rank": 567,
+      "lemma": "section",
+      "count": 445579
+    },
+    {
+      "rank": 568,
+      "lemma": "federal",
+      "count": 445236
+    },
+    {
+      "rank": 569,
+      "lemma": "space",
+      "count": 441153
+    },
+    {
+      "rank": 570,
+      "lemma": "championships",
+      "count": 439734
+    },
+    {
+      "rank": 571,
+      "lemma": "private",
+      "count": 439650
+    },
+    {
+      "rank": 572,
+      "lemma": "character",
+      "count": 439461
+    },
+    {
+      "rank": 573,
+      "lemma": "instead",
+      "count": 439342
+    },
+    {
+      "rank": 574,
+      "lemma": "light",
+      "count": 439106
+    },
+    {
+      "rank": 575,
+      "lemma": "groups",
+      "count": 437743
+    },
+    {
+      "rank": 576,
+      "lemma": "japanese",
+      "count": 437335
+    },
+    {
+      "rank": 577,
+      "lemma": "washington",
+      "count": 434554
+    },
+    {
+      "rank": 578,
+      "lemma": "charles",
+      "count": 433565
+    },
+    {
+      "rank": 579,
+      "lemma": "front",
+      "count": 433162
+    },
+    {
+      "rank": 580,
+      "lemma": "refer",
+      "count": 433126
+    },
+    {
+      "rank": 581,
+      "lemma": "campaign",
+      "count": 432721
+    },
+    {
+      "rank": 582,
+      "lemma": "largest",
+      "count": 432694
+    },
+    {
+      "rank": 583,
+      "lemma": "night",
+      "count": 432670
+    },
+    {
+      "rank": 584,
+      "lemma": "includes",
+      "count": 432291
+    },
+    {
+      "rank": 585,
+      "lemma": "conference",
+      "count": 432093
+    },
+    {
+      "rank": 586,
+      "lemma": "directed",
+      "count": 431506
+    },
+    {
+      "rank": 587,
+      "lemma": "help",
+      "count": 430004
+    },
+    {
+      "rank": 588,
+      "lemma": "russian",
+      "count": 429939
+    },
+    {
+      "rank": 589,
+      "lemma": "network",
+      "count": 429399
+    },
+    {
+      "rank": 590,
+      "lemma": "full",
+      "count": 429128
+    },
+    {
+      "rank": 591,
+      "lemma": "japan",
+      "count": 429015
+    },
+    {
+      "rank": 592,
+      "lemma": "my",
+      "count": 427829
+    },
+    {
+      "rank": 593,
+      "lemma": "awarded",
+      "count": 427497
+    },
+    {
+      "rank": 594,
+      "lemma": "featured",
+      "count": 426915
+    },
+    {
+      "rank": 595,
+      "lemma": "does",
+      "count": 426104
+    },
+    {
+      "rank": 596,
+      "lemma": "episode",
+      "count": 425958
+    },
+    {
+      "rank": 597,
+      "lemma": "g",
+      "count": 425231
+    },
+    {
+      "rank": 598,
+      "lemma": "uk",
+      "count": 423095
+    },
+    {
+      "rank": 599,
+      "lemma": "movement",
+      "count": 422629
+    },
+    {
+      "rank": 600,
+      "lemma": "kingdom",
+      "count": 422547
+    },
+    {
+      "rank": 601,
+      "lemma": "fourth",
+      "count": 422424
+    },
+    {
+      "rank": 602,
+      "lemma": "gold",
+      "count": 422018
+    },
+    {
+      "rank": 603,
+      "lemma": "stated",
+      "count": 420906
+    },
+    {
+      "rank": 604,
+      "lemma": "involved",
+      "count": 420889
+    },
+    {
+      "rank": 605,
+      "lemma": "medical",
+      "count": 420608
+    },
+    {
+      "rank": 606,
+      "lemma": "go",
+      "count": 420497
+    },
+    {
+      "rank": 607,
+      "lemma": "studio",
+      "count": 420119
+    },
+    {
+      "rank": 608,
+      "lemma": "eight",
+      "count": 419201
+    },
+    {
+      "rank": 609,
+      "lemma": "sports",
+      "count": 418627
+    },
+    {
+      "rank": 610,
+      "lemma": "senior",
+      "count": 417968
+    },
+    {
+      "rank": 611,
+      "lemma": "previous",
+      "count": 417475
+    },
+    {
+      "rank": 612,
+      "lemma": "independent",
+      "count": 417332
+    },
+    {
+      "rank": 613,
+      "lemma": "brother",
+      "count": 416839
+    },
+    {
+      "rank": 614,
+      "lemma": "professor",
+      "count": 416839
+    },
+    {
+      "rank": 615,
+      "lemma": "seen",
+      "count": 416696
+    },
+    {
+      "rank": 616,
+      "lemma": "grand",
+      "count": 416248
+    },
+    {
+      "rank": 617,
+      "lemma": "chinese",
+      "count": 415927
+    },
+    {
+      "rank": 618,
+      "lemma": "countries",
+      "count": 415509
+    },
+    {
+      "rank": 619,
+      "lemma": "news",
+      "count": 414505
+    },
+    {
+      "rank": 620,
+      "lemma": "sent",
+      "count": 413363
+    },
+    {
+      "rank": 621,
+      "lemma": "thus",
+      "count": 412689
+    },
+    {
+      "rank": 622,
+      "lemma": "films",
+      "count": 411629
+    },
+    {
+      "rank": 623,
+      "lemma": "change",
+      "count": 410586
+    },
+    {
+      "rank": 624,
+      "lemma": "canadian",
+      "count": 409780
+    },
+    {
+      "rank": 625,
+      "lemma": "model",
+      "count": 409372
+    },
+    {
+      "rank": 626,
+      "lemma": "books",
+      "count": 408845
+    },
+    {
+      "rank": 627,
+      "lemma": "able",
+      "count": 408332
+    },
+    {
+      "rank": 628,
+      "lemma": "degree",
+      "count": 407972
+    },
+    {
+      "rank": 629,
+      "lemma": "bank",
+      "count": 407916
+    },
+    {
+      "rank": 630,
+      "lemma": "get",
+      "count": 407621
+    },
+    {
+      "rank": 631,
+      "lemma": "added",
+      "count": 407591
+    },
+    {
+      "rank": 632,
+      "lemma": "hospital",
+      "count": 407109
+    },
+    {
+      "rank": 633,
+      "lemma": "r",
+      "count": 405948
+    },
+    {
+      "rank": 634,
+      "lemma": "replaced",
+      "count": 404889
+    },
+    {
+      "rank": 635,
+      "lemma": "usually",
+      "count": 403585
+    },
+    {
+      "rank": 636,
+      "lemma": "republic",
+      "count": 403010
+    },
+    {
+      "rank": 637,
+      "lemma": "middle",
+      "count": 402106
+    },
+    {
+      "rank": 638,
+      "lemma": "ten",
+      "count": 401725
+    },
+    {
+      "rank": 639,
+      "lemma": "close",
+      "count": 400338
+    },
+    {
+      "rank": 640,
+      "lemma": "either",
+      "count": 399602
+    },
+    {
+      "rank": 641,
+      "lemma": "previously",
+      "count": 398981
+    },
+    {
+      "rank": 642,
+      "lemma": "organization",
+      "count": 398228
+    },
+    {
+      "rank": 643,
+      "lemma": "men's",
+      "count": 397337
+    },
+    {
+      "rank": 644,
+      "lemma": "capital",
+      "count": 396424
+    },
+    {
+      "rank": 645,
+      "lemma": "coast",
+      "count": 396100
+    },
+    {
+      "rank": 646,
+      "lemma": "magazine",
+      "count": 395648
+    },
+    {
+      "rank": 647,
+      "lemma": "killed",
+      "count": 395158
+    },
+    {
+      "rank": 648,
+      "lemma": "writing",
+      "count": 394862
+    },
+    {
+      "rank": 649,
+      "lemma": "green",
+      "count": 394598
+    },
+    {
+      "rank": 650,
+      "lemma": "reached",
+      "count": 393924
+    },
+    {
+      "rank": 651,
+      "lemma": "provided",
+      "count": 393372
+    },
+    {
+      "rank": 652,
+      "lemma": "primary",
+      "count": 392784
+    },
+    {
+      "rank": 653,
+      "lemma": "week",
+      "count": 392452
+    },
+    {
+      "rank": 654,
+      "lemma": "culture",
+      "count": 391980
+    },
+    {
+      "rank": 655,
+      "lemma": "least",
+      "count": 390638
+    },
+    {
+      "rank": 656,
+      "lemma": "lower",
+      "count": 390302
+    },
+    {
+      "rank": 657,
+      "lemma": "action",
+      "count": 389644
+    },
+    {
+      "rank": 658,
+      "lemma": "above",
+      "count": 389198
+    },
+    {
+      "rank": 659,
+      "lemma": "bridge",
+      "count": 388210
+    },
+    {
+      "rank": 660,
+      "lemma": "tv",
+      "count": 387906
+    },
+    {
+      "rank": 661,
+      "lemma": "historic",
+      "count": 387344
+    },
+    {
+      "rank": 662,
+      "lemma": "must",
+      "count": 387020
+    },
+    {
+      "rank": 663,
+      "lemma": "car",
+      "count": 386768
+    },
+    {
+      "rank": 664,
+      "lemma": "industry",
+      "count": 386752
+    },
+    {
+      "rank": 665,
+      "lemma": "paul",
+      "count": 386250
+    },
+    {
+      "rank": 666,
+      "lemma": "female",
+      "count": 385977
+    },
+    {
+      "rank": 667,
+      "lemma": "management",
+      "count": 385683
+    },
+    {
+      "rank": 668,
+      "lemma": "scored",
+      "count": 385177
+    },
+    {
+      "rank": 669,
+      "lemma": "via",
+      "count": 384782
+    },
+    {
+      "rank": 670,
+      "lemma": "contract",
+      "count": 384393
+    },
+    {
+      "rank": 671,
+      "lemma": "data",
+      "count": 384049
+    },
+    {
+      "rank": 672,
+      "lemma": "type",
+      "count": 383801
+    },
+    {
+      "rank": 673,
+      "lemma": "placed",
+      "count": 382588
+    },
+    {
+      "rank": 674,
+      "lemma": "attack",
+      "count": 382422
+    },
+    {
+      "rank": 675,
+      "lemma": "attended",
+      "count": 381654
+    },
+    {
+      "rank": 676,
+      "lemma": "big",
+      "count": 381415
+    },
+    {
+      "rank": 677,
+      "lemma": "soon",
+      "count": 381194
+    },
+    {
+      "rank": 678,
+      "lemma": "post",
+      "count": 381047
+    },
+    {
+      "rank": 679,
+      "lemma": "rather",
+      "count": 381001
+    },
+    {
+      "rank": 680,
+      "lemma": "aircraft",
+      "count": 380197
+    },
+    {
+      "rank": 681,
+      "lemma": "beginning",
+      "count": 380182
+    },
+    {
+      "rank": 682,
+      "lemma": "africa",
+      "count": 380129
+    },
+    {
+      "rank": 683,
+      "lemma": "base",
+      "count": 380072
+    },
+    {
+      "rank": 684,
+      "lemma": "assembly",
+      "count": 379427
+    },
+    {
+      "rank": 685,
+      "lemma": "saw",
+      "count": 379141
+    },
+    {
+      "rank": 686,
+      "lemma": "valley",
+      "count": 377384
+    },
+    {
+      "rank": 687,
+      "lemma": "technology",
+      "count": 376457
+    },
+    {
+      "rank": 688,
+      "lemma": "ground",
+      "count": 376335
+    },
+    {
+      "rank": 689,
+      "lemma": "operations",
+      "count": 376305
+    },
+    {
+      "rank": 690,
+      "lemma": "decided",
+      "count": 374783
+    },
+    {
+      "rank": 691,
+      "lemma": "introduced",
+      "count": 374712
+    },
+    {
+      "rank": 692,
+      "lemma": "market",
+      "count": 374297
+    },
+    {
+      "rank": 693,
+      "lemma": "results",
+      "count": 374199
+    },
+    {
+      "rank": 694,
+      "lemma": "prior",
+      "count": 373973
+    },
+    {
+      "rank": 695,
+      "lemma": "systems",
+      "count": 373651
+    },
+    {
+      "rank": 696,
+      "lemma": "italian",
+      "count": 373315
+    },
+    {
+      "rank": 697,
+      "lemma": "almost",
+      "count": 373058
+    },
+    {
+      "rank": 698,
+      "lemma": "shows",
+      "count": 372255
+    },
+    {
+      "rank": 699,
+      "lemma": "hill",
+      "count": 372225
+    },
+    {
+      "rank": 700,
+      "lemma": "native",
+      "count": 372057
+    },
+    {
+      "rank": 701,
+      "lemma": "theatre",
+      "count": 371440
+    },
+    {
+      "rank": 702,
+      "lemma": "p",
+      "count": 370925
+    },
+    {
+      "rank": 703,
+      "lemma": "buildings",
+      "count": 370391
+    },
+    {
+      "rank": 704,
+      "lemma": "f",
+      "count": 369853
+    },
+    {
+      "rank": 705,
+      "lemma": "outside",
+      "count": 369131
+    },
+    {
+      "rank": 706,
+      "lemma": "los",
+      "count": 368968
+    },
+    {
+      "rank": 707,
+      "lemma": "success",
+      "count": 368785
+    },
+    {
+      "rank": 708,
+      "lemma": "medal",
+      "count": 367733
+    },
+    {
+      "rank": 709,
+      "lemma": "spanish",
+      "count": 367650
+    },
+    {
+      "rank": 710,
+      "lemma": "henry",
+      "count": 367624
+    },
+    {
+      "rank": 711,
+      "lemma": "today",
+      "count": 366875
+    },
+    {
+      "rank": 712,
+      "lemma": "regional",
+      "count": 366558
+    },
+    {
+      "rank": 713,
+      "lemma": "active",
+      "count": 366332
+    },
+    {
+      "rank": 714,
+      "lemma": "bay",
+      "count": 366273
+    },
+    {
+      "rank": 715,
+      "lemma": "parts",
+      "count": 366138
+    },
+    {
+      "rank": 716,
+      "lemma": "listed",
+      "count": 366002
+    },
+    {
+      "rank": 717,
+      "lemma": "initially",
+      "count": 364889
+    },
+    {
+      "rank": 718,
+      "lemma": "african",
+      "count": 364848
+    },
+    {
+      "rank": 719,
+      "lemma": "behind",
+      "count": 364672
+    },
+    {
+      "rank": 720,
+      "lemma": "collection",
+      "count": 363767
+    },
+    {
+      "rank": 721,
+      "lemma": "michael",
+      "count": 362868
+    },
+    {
+      "rank": 722,
+      "lemma": "v",
+      "count": 362346
+    },
+    {
+      "rank": 723,
+      "lemma": "goal",
+      "count": 361174
+    },
+    {
+      "rank": 724,
+      "lemma": "commission",
+      "count": 360128
+    },
+    {
+      "rank": 725,
+      "lemma": "parliament",
+      "count": 359828
+    },
+    {
+      "rank": 726,
+      "lemma": "future",
+      "count": 359762
+    },
+    {
+      "rank": 727,
+      "lemma": "start",
+      "count": 359694
+    },
+    {
+      "rank": 728,
+      "lemma": "economic",
+      "count": 359244
+    },
+    {
+      "rank": 729,
+      "lemma": "leader",
+      "count": 359160
+    },
+    {
+      "rank": 730,
+      "lemma": "represented",
+      "count": 358694
+    },
+    {
+      "rank": 731,
+      "lemma": "officer",
+      "count": 358313
+    },
+    {
+      "rank": 732,
+      "lemma": "star",
+      "count": 357815
+    },
+    {
+      "rank": 733,
+      "lemma": "regular",
+      "count": 357205
+    },
+    {
+      "rank": 734,
+      "lemma": "foreign",
+      "count": 356555
+    },
+    {
+      "rank": 735,
+      "lemma": "whose",
+      "count": 356550
+    },
+    {
+      "rank": 736,
+      "lemma": "winning",
+      "count": 356299
+    },
+    {
+      "rank": 737,
+      "lemma": "approximately",
+      "count": 355969
+    },
+    {
+      "rank": 738,
+      "lemma": "structure",
+      "count": 355693
+    },
+    {
+      "rank": 739,
+      "lemma": "basketball",
+      "count": 355608
+    },
+    {
+      "rank": 740,
+      "lemma": "trade",
+      "count": 355202
+    },
+    {
+      "rank": 741,
+      "lemma": "natural",
+      "count": 354509
+    },
+    {
+      "rank": 742,
+      "lemma": "put",
+      "count": 353644
+    },
+    {
+      "rank": 743,
+      "lemma": "texas",
+      "count": 352659
+    },
+    {
+      "rank": 744,
+      "lemma": "provide",
+      "count": 352307
+    },
+    {
+      "rank": 745,
+      "lemma": "families",
+      "count": 351896
+    },
+    {
+      "rank": 746,
+      "lemma": "novel",
+      "count": 351819
+    },
+    {
+      "rank": 747,
+      "lemma": "brought",
+      "count": 351299
+    },
+    {
+      "rank": 748,
+      "lemma": "successful",
+      "count": 351252
+    },
+    {
+      "rank": 749,
+      "lemma": "municipality",
+      "count": 350443
+    },
+    {
+      "rank": 750,
+      "lemma": "staff",
+      "count": 350316
+    },
+    {
+      "rank": 751,
+      "lemma": "higher",
+      "count": 350016
+    },
+    {
+      "rank": 752,
+      "lemma": "defeated",
+      "count": 348528
+    },
+    {
+      "rank": 753,
+      "lemma": "governor",
+      "count": 347989
+    },
+    {
+      "rank": 754,
+      "lemma": "significant",
+      "count": 346770
+    },
+    {
+      "rank": 755,
+      "lemma": "size",
+      "count": 346611
+    },
+    {
+      "rank": 756,
+      "lemma": "me",
+      "count": 346448
+    },
+    {
+      "rank": 757,
+      "lemma": "highway",
+      "count": 346227
+    },
+    {
+      "rank": 758,
+      "lemma": "possible",
+      "count": 344977
+    },
+    {
+      "rank": 759,
+      "lemma": "artist",
+      "count": 344881
+    },
+    {
+      "rank": 760,
+      "lemma": "operation",
+      "count": 344784
+    },
+    {
+      "rank": 761,
+      "lemma": "sometimes",
+      "count": 344783
+    },
+    {
+      "rank": 762,
+      "lemma": "christian",
+      "count": 344608
+    },
+    {
+      "rank": 763,
+      "lemma": "ended",
+      "count": 344395
+    },
+    {
+      "rank": 764,
+      "lemma": "taking",
+      "count": 343346
+    },
+    {
+      "rank": 765,
+      "lemma": "units",
+      "count": 343300
+    },
+    {
+      "rank": 766,
+      "lemma": "limited",
+      "count": 342409
+    },
+    {
+      "rank": 767,
+      "lemma": "interest",
+      "count": 341885
+    },
+    {
+      "rank": 768,
+      "lemma": "food",
+      "count": 341407
+    },
+    {
+      "rank": 769,
+      "lemma": "especially",
+      "count": 341015
+    },
+    {
+      "rank": 770,
+      "lemma": "notable",
+      "count": 340198
+    },
+    {
+      "rank": 771,
+      "lemma": "towards",
+      "count": 339441
+    },
+    {
+      "rank": 772,
+      "lemma": "runs",
+      "count": 338485
+    },
+    {
+      "rank": 773,
+      "lemma": "too",
+      "count": 338450
+    },
+    {
+      "rank": 774,
+      "lemma": "background",
+      "count": 337966
+    },
+    {
+      "rank": 775,
+      "lemma": "changed",
+      "count": 337767
+    },
+    {
+      "rank": 776,
+      "lemma": "allowed",
+      "count": 336196
+    },
+    {
+      "rank": 777,
+      "lemma": "catholic",
+      "count": 335812
+    },
+    {
+      "rank": 778,
+      "lemma": "location",
+      "count": 335257
+    },
+    {
+      "rank": 779,
+      "lemma": "traditional",
+      "count": 334807
+    },
+    {
+      "rank": 780,
+      "lemma": "ship",
+      "count": 334188
+    },
+    {
+      "rank": 781,
+      "lemma": "h",
+      "count": 333658
+    },
+    {
+      "rank": 782,
+      "lemma": "paris",
+      "count": 333070
+    },
+    {
+      "rank": 783,
+      "lemma": "foundation",
+      "count": 332993
+    },
+    {
+      "rank": 784,
+      "lemma": "plant",
+      "count": 332356
+    },
+    {
+      "rank": 785,
+      "lemma": "met",
+      "count": 332191
+    },
+    {
+      "rank": 786,
+      "lemma": "money",
+      "count": 331591
+    },
+    {
+      "rank": 787,
+      "lemma": "generally",
+      "count": 331179
+    },
+    {
+      "rank": 788,
+      "lemma": "disambiguation",
+      "count": 330571
+    },
+    {
+      "rank": 789,
+      "lemma": "below",
+      "count": 330310
+    },
+    {
+      "rank": 790,
+      "lemma": "child",
+      "count": 330069
+    },
+    {
+      "rank": 791,
+      "lemma": "woman",
+      "count": 329477
+    },
+    {
+      "rank": 792,
+      "lemma": "rural",
+      "count": 329440
+    },
+    {
+      "rank": 793,
+      "lemma": "energy",
+      "count": 328991
+    },
+    {
+      "rank": 794,
+      "lemma": "victory",
+      "count": 328981
+    },
+    {
+      "rank": 795,
+      "lemma": "library",
+      "count": 328527
+    },
+    {
+      "rank": 796,
+      "lemma": "low",
+      "count": 327871
+    },
+    {
+      "rank": 797,
+      "lemma": "roman",
+      "count": 327611
+    },
+    {
+      "rank": 798,
+      "lemma": "real",
+      "count": 327567
+    },
+    {
+      "rank": 799,
+      "lemma": "spent",
+      "count": 326941
+    },
+    {
+      "rank": 800,
+      "lemma": "standard",
+      "count": 326538
+    },
+    {
+      "rank": 801,
+      "lemma": "manager",
+      "count": 326183
+    },
+    {
+      "rank": 802,
+      "lemma": "commercial",
+      "count": 325672
+    },
+    {
+      "rank": 803,
+      "lemma": "owned",
+      "count": 325567
+    },
+    {
+      "rank": 804,
+      "lemma": "plays",
+      "count": 324998
+    },
+    {
+      "rank": 805,
+      "lemma": "command",
+      "count": 324955
+    },
+    {
+      "rank": 806,
+      "lemma": "youth",
+      "count": 324869
+    },
+    {
+      "rank": 807,
+      "lemma": "additional",
+      "count": 324455
+    },
+    {
+      "rank": 808,
+      "lemma": "unit",
+      "count": 324047
+    },
+    {
+      "rank": 809,
+      "lemma": "zealand",
+      "count": 323905
+    },
+    {
+      "rank": 810,
+      "lemma": "plan",
+      "count": 323802
+    },
+    {
+      "rank": 811,
+      "lemma": "strong",
+      "count": 323761
+    },
+    {
+      "rank": 812,
+      "lemma": "blue",
+      "count": 323750
+    },
+    {
+      "rank": 813,
+      "lemma": "whom",
+      "count": 323271
+    },
+    {
+      "rank": 814,
+      "lemma": "come",
+      "count": 323071
+    },
+    {
+      "rank": 815,
+      "lemma": "itself",
+      "count": 322716
+    },
+    {
+      "rank": 816,
+      "lemma": "bill",
+      "count": 322561
+    },
+    {
+      "rank": 817,
+      "lemma": "security",
+      "count": 322518
+    },
+    {
+      "rank": 818,
+      "lemma": "far",
+      "count": 322496
+    },
+    {
+      "rank": 819,
+      "lemma": "navy",
+      "count": 322450
+    },
+    {
+      "rank": 820,
+      "lemma": "channel",
+      "count": 322067
+    },
+    {
+      "rank": 821,
+      "lemma": "annual",
+      "count": 321621
+    },
+    {
+      "rank": 822,
+      "lemma": "peter",
+      "count": 321065
+    },
+    {
+      "rank": 823,
+      "lemma": "hit",
+      "count": 320989
+    },
+    {
+      "rank": 824,
+      "lemma": "course",
+      "count": 320943
+    },
+    {
+      "rank": 825,
+      "lemma": "soviet",
+      "count": 320157
+    },
+    {
+      "rank": 826,
+      "lemma": "airport",
+      "count": 320099
+    },
+    {
+      "rank": 827,
+      "lemma": "olympics",
+      "count": 320091
+    },
+    {
+      "rank": 828,
+      "lemma": "brown",
+      "count": 319404
+    },
+    {
+      "rank": 829,
+      "lemma": "noted",
+      "count": 319283
+    },
+    {
+      "rank": 830,
+      "lemma": "ireland",
+      "count": 318710
+    },
+    {
+      "rank": 831,
+      "lemma": "practice",
+      "count": 318446
+    },
+    {
+      "rank": 832,
+      "lemma": "opening",
+      "count": 318307
+    },
+    {
+      "rank": 833,
+      "lemma": "mountain",
+      "count": 318266
+    },
+    {
+      "rank": 834,
+      "lemma": "executive",
+      "count": 318073
+    },
+    {
+      "rank": 835,
+      "lemma": "richard",
+      "count": 317846
+    },
+    {
+      "rank": 836,
+      "lemma": "report",
+      "count": 317725
+    },
+    {
+      "rank": 837,
+      "lemma": "earlier",
+      "count": 317556
+    },
+    {
+      "rank": 838,
+      "lemma": "associated",
+      "count": 317176
+    },
+    {
+      "rank": 839,
+      "lemma": "km",
+      "count": 316652
+    },
+    {
+      "rank": 840,
+      "lemma": "companies",
+      "count": 316486
+    },
+    {
+      "rank": 841,
+      "lemma": "individual",
+      "count": 316468
+    },
+    {
+      "rank": 842,
+      "lemma": "property",
+      "count": 316352
+    },
+    {
+      "rank": 843,
+      "lemma": "places",
+      "count": 316334
+    },
+    {
+      "rank": 844,
+      "lemma": "selected",
+      "count": 316149
+    },
+    {
+      "rank": 845,
+      "lemma": "matches",
+      "count": 316081
+    },
+    {
+      "rank": 846,
+      "lemma": "closed",
+      "count": 315877
+    },
+    {
+      "rank": 847,
+      "lemma": "launched",
+      "count": 315341
+    },
+    {
+      "rank": 848,
+      "lemma": "issues",
+      "count": 315077
+    },
+    {
+      "rank": 849,
+      "lemma": "subsequently",
+      "count": 314995
+    },
+    {
+      "rank": 850,
+      "lemma": "artists",
+      "count": 314944
+    },
+    {
+      "rank": 851,
+      "lemma": "administration",
+      "count": 313415
+    },
+    {
+      "rank": 852,
+      "lemma": "studied",
+      "count": 313292
+    },
+    {
+      "rank": 853,
+      "lemma": "edition",
+      "count": 312839
+    },
+    {
+      "rank": 854,
+      "lemma": "numerous",
+      "count": 312817
+    },
+    {
+      "rank": 855,
+      "lemma": "review",
+      "count": 312422
+    },
+    {
+      "rank": 856,
+      "lemma": "virginia",
+      "count": 312414
+    },
+    {
+      "rank": 857,
+      "lemma": "secretary",
+      "count": 311840
+    },
+    {
+      "rank": 858,
+      "lemma": "press",
+      "count": 311545
+    },
+    {
+      "rank": 859,
+      "lemma": "related",
+      "count": 311395
+    },
+    {
+      "rank": 860,
+      "lemma": "historical",
+      "count": 311088
+    },
+    {
+      "rank": 861,
+      "lemma": "activities",
+      "count": 310987
+    },
+    {
+      "rank": 862,
+      "lemma": "student",
+      "count": 310726
+    },
+    {
+      "rank": 863,
+      "lemma": "legal",
+      "count": 310376
+    },
+    {
+      "rank": 864,
+      "lemma": "elections",
+      "count": 309570
+    },
+    {
+      "rank": 865,
+      "lemma": "singles",
+      "count": 309268
+    },
+    {
+      "rank": 866,
+      "lemma": "musical",
+      "count": 308772
+    },
+    {
+      "rank": 867,
+      "lemma": "square",
+      "count": 308615
+    },
+    {
+      "rank": 868,
+      "lemma": "cultural",
+      "count": 308366
+    },
+    {
+      "rank": 869,
+      "lemma": "policy",
+      "count": 308108
+    },
+    {
+      "rank": 870,
+      "lemma": "lived",
+      "count": 308097
+    },
+    {
+      "rank": 871,
+      "lemma": "ever",
+      "count": 308053
+    },
+    {
+      "rank": 872,
+      "lemma": "access",
+      "count": 307774
+    },
+    {
+      "rank": 873,
+      "lemma": "ran",
+      "count": 307379
+    },
+    {
+      "rank": 874,
+      "lemma": "entered",
+      "count": 306547
+    },
+    {
+      "rank": 875,
+      "lemma": "genus",
+      "count": 306140
+    },
+    {
+      "rank": 876,
+      "lemma": "required",
+      "count": 306073
+    },
+    {
+      "rank": 877,
+      "lemma": "loss",
+      "count": 305801
+    },
+    {
+      "rank": 878,
+      "lemma": "financial",
+      "count": 305566
+    },
+    {
+      "rank": 879,
+      "lemma": "means",
+      "count": 305531
+    },
+    {
+      "rank": 880,
+      "lemma": "captain",
+      "count": 305263
+    },
+    {
+      "rank": 881,
+      "lemma": "mark",
+      "count": 305015
+    },
+    {
+      "rank": 882,
+      "lemma": "running",
+      "count": 303883
+    },
+    {
+      "rank": 883,
+      "lemma": "starting",
+      "count": 302284
+    },
+    {
+      "rank": 884,
+      "lemma": "chicago",
+      "count": 302261
+    },
+    {
+      "rank": 885,
+      "lemma": "our",
+      "count": 302087
+    },
+    {
+      "rank": 886,
+      "lemma": "already",
+      "count": 301550
+    },
+    {
+      "rank": 887,
+      "lemma": "becoming",
+      "count": 301462
+    },
+    {
+      "rank": 888,
+      "lemma": "sound",
+      "count": 301341
+    },
+    {
+      "rank": 889,
+      "lemma": "increased",
+      "count": 300968
+    },
+    {
+      "rank": 890,
+      "lemma": "democratic",
+      "count": 300812
+    },
+    {
+      "rank": 891,
+      "lemma": "date",
+      "count": 300785
+    },
+    {
+      "rank": 892,
+      "lemma": "empire",
+      "count": 300436
+    },
+    {
+      "rank": 893,
+      "lemma": "religious",
+      "count": 298671
+    },
+    {
+      "rank": 894,
+      "lemma": "italy",
+      "count": 298171
+    },
+    {
+      "rank": 895,
+      "lemma": "majority",
+      "count": 298023
+    },
+    {
+      "rank": 896,
+      "lemma": "goals",
+      "count": 297060
+    },
+    {
+      "rank": 897,
+      "lemma": "stadium",
+      "count": 296295
+    },
+    {
+      "rank": 898,
+      "lemma": "move",
+      "count": 296195
+    },
+    {
+      "rank": 899,
+      "lemma": "smith",
+      "count": 295233
+    },
+    {
+      "rank": 900,
+      "lemma": "past",
+      "count": 294973
+    },
+    {
+      "rank": 901,
+      "lemma": "person",
+      "count": 294682
+    },
+    {
+      "rank": 902,
+      "lemma": "complex",
+      "count": 294600
+    },
+    {
+      "rank": 903,
+      "lemma": "appearance",
+      "count": 294364
+    },
+    {
+      "rank": 904,
+      "lemma": "angeles",
+      "count": 293204
+    },
+    {
+      "rank": 905,
+      "lemma": "rest",
+      "count": 292429
+    },
+    {
+      "rank": 906,
+      "lemma": "better",
+      "count": 292163
+    },
+    {
+      "rank": 907,
+      "lemma": "lines",
+      "count": 291817
+    },
+    {
+      "rank": 908,
+      "lemma": "congress",
+      "count": 291793
+    },
+    {
+      "rank": 909,
+      "lemma": "mexico",
+      "count": 291591
+    },
+    {
+      "rank": 910,
+      "lemma": "find",
+      "count": 291421
+    },
+    {
+      "rank": 911,
+      "lemma": "competed",
+      "count": 291148
+    },
+    {
+      "rank": 912,
+      "lemma": "nine",
+      "count": 290980
+    },
+    {
+      "rank": 913,
+      "lemma": "writer",
+      "count": 290603
+    },
+    {
+      "rank": 914,
+      "lemma": "test",
+      "count": 290528
+    },
+    {
+      "rank": 915,
+      "lemma": "here",
+      "count": 290356
+    },
+    {
+      "rank": 916,
+      "lemma": "chart",
+      "count": 290181
+    },
+    {
+      "rank": 917,
+      "lemma": "older",
+      "count": 289930
+    },
+    {
+      "rank": 918,
+      "lemma": "changes",
+      "count": 289806
+    },
+    {
+      "rank": 919,
+      "lemma": "finally",
+      "count": 289581
+    },
+    {
+      "rank": 920,
+      "lemma": "caused",
+      "count": 289503
+    },
+    {
+      "rank": 921,
+      "lemma": "w",
+      "count": 289352
+    },
+    {
+      "rank": 922,
+      "lemma": "islands",
+      "count": 289213
+    },
+    {
+      "rank": 923,
+      "lemma": "terms",
+      "count": 289203
+    },
+    {
+      "rank": 924,
+      "lemma": "mary",
+      "count": 288873
+    },
+    {
+      "rank": 925,
+      "lemma": "seat",
+      "count": 288761
+    },
+    {
+      "rank": 926,
+      "lemma": "cases",
+      "count": 288573
+    },
+    {
+      "rank": 927,
+      "lemma": "contains",
+      "count": 288445
+    },
+    {
+      "rank": 928,
+      "lemma": "overall",
+      "count": 288272
+    },
+    {
+      "rank": 929,
+      "lemma": "stone",
+      "count": 288171
+    },
+    {
+      "rank": 930,
+      "lemma": "decision",
+      "count": 287552
+    },
+    {
+      "rank": 931,
+      "lemma": "characters",
+      "count": 287012
+    },
+    {
+      "rank": 932,
+      "lemma": "dr",
+      "count": 285580
+    },
+    {
+      "rank": 933,
+      "lemma": "mostly",
+      "count": 285108
+    },
+    {
+      "rank": 934,
+      "lemma": "operated",
+      "count": 284926
+    },
+    {
+      "rank": 935,
+      "lemma": "forest",
+      "count": 284640
+    },
+    {
+      "rank": 936,
+      "lemma": "meeting",
+      "count": 284624
+    },
+    {
+      "rank": 937,
+      "lemma": "retired",
+      "count": 284591
+    },
+    {
+      "rank": 938,
+      "lemma": "serving",
+      "count": 284059
+    },
+    {
+      "rank": 939,
+      "lemma": "biography",
+      "count": 283639
+    },
+    {
+      "rank": 940,
+      "lemma": "mission",
+      "count": 283618
+    },
+    {
+      "rank": 941,
+      "lemma": "wide",
+      "count": 283550
+    },
+    {
+      "rank": 942,
+      "lemma": "room",
+      "count": 283144
+    },
+    {
+      "rank": 943,
+      "lemma": "evidence",
+      "count": 283006
+    },
+    {
+      "rank": 944,
+      "lemma": "complete",
+      "count": 282954
+    },
+    {
+      "rank": 945,
+      "lemma": "status",
+      "count": 282835
+    },
+    {
+      "rank": 946,
+      "lemma": "supported",
+      "count": 282761
+    },
+    {
+      "rank": 947,
+      "lemma": "particularly",
+      "count": 282629
+    },
+    {
+      "rank": 948,
+      "lemma": "thought",
+      "count": 282340
+    },
+    {
+      "rank": 949,
+      "lemma": "hours",
+      "count": 282269
+    },
+    {
+      "rank": 950,
+      "lemma": "highest",
+      "count": 282104
+    },
+    {
+      "rank": 951,
+      "lemma": "justice",
+      "count": 281889
+    },
+    {
+      "rank": 952,
+      "lemma": "van",
+      "count": 281523
+    },
+    {
+      "rank": 953,
+      "lemma": "going",
+      "count": 281509
+    },
+    {
+      "rank": 954,
+      "lemma": "cross",
+      "count": 281167
+    },
+    {
+      "rank": 955,
+      "lemma": "politician",
+      "count": 280662
+    },
+    {
+      "rank": 956,
+      "lemma": "programs",
+      "count": 280580
+    },
+    {
+      "rank": 957,
+      "lemma": "t",
+      "count": 280040
+    },
+    {
+      "rank": 958,
+      "lemma": "greek",
+      "count": 279962
+    },
+    {
+      "rank": 959,
+      "lemma": "forced",
+      "count": 279680
+    },
+    {
+      "rank": 960,
+      "lemma": "sir",
+      "count": 279566
+    },
+    {
+      "rank": 961,
+      "lemma": "l",
+      "count": 278700
+    },
+    {
+      "rank": 962,
+      "lemma": "feature",
+      "count": 278616
+    },
+    {
+      "rank": 963,
+      "lemma": "port",
+      "count": 278119
+    },
+    {
+      "rank": 964,
+      "lemma": "author",
+      "count": 278035
+    },
+    {
+      "rank": 965,
+      "lemma": "castle",
+      "count": 277736
+    },
+    {
+      "rank": 966,
+      "lemma": "junior",
+      "count": 277498
+    },
+    {
+      "rank": 967,
+      "lemma": "passed",
+      "count": 277397
+    },
+    {
+      "rank": 968,
+      "lemma": "earned",
+      "count": 277265
+    },
+    {
+      "rank": 969,
+      "lemma": "russia",
+      "count": 276404
+    },
+    {
+      "rank": 970,
+      "lemma": "wales",
+      "count": 276223
+    },
+    {
+      "rank": 971,
+      "lemma": "recording",
+      "count": 275917
+    },
+    {
+      "rank": 972,
+      "lemma": "theory",
+      "count": 275714
+    },
+    {
+      "rank": 973,
+      "lemma": "source",
+      "count": 275405
+    },
+    {
+      "rank": 974,
+      "lemma": "remains",
+      "count": 274979
+    },
+    {
+      "rank": 975,
+      "lemma": "relationship",
+      "count": 274728
+    },
+    {
+      "rank": 976,
+      "lemma": "claimed",
+      "count": 274673
+    },
+    {
+      "rank": 977,
+      "lemma": "score",
+      "count": 274652
+    },
+    {
+      "rank": 978,
+      "lemma": "issue",
+      "count": 273713
+    },
+    {
+      "rank": 979,
+      "lemma": "response",
+      "count": 273211
+    },
+    {
+      "rank": 980,
+      "lemma": "give",
+      "count": 273071
+    },
+    {
+      "rank": 981,
+      "lemma": "raised",
+      "count": 272040
+    },
+    {
+      "rank": 982,
+      "lemma": "entire",
+      "count": 271980
+    },
+    {
+      "rank": 983,
+      "lemma": "florida",
+      "count": 271786
+    },
+    {
+      "rank": 984,
+      "lemma": "create",
+      "count": 271697
+    },
+    {
+      "rank": 985,
+      "lemma": "era",
+      "count": 271603
+    },
+    {
+      "rank": 986,
+      "lemma": "singer",
+      "count": 271105
+    },
+    {
+      "rank": 987,
+      "lemma": "got",
+      "count": 270855
+    },
+    {
+      "rank": 988,
+      "lemma": "income",
+      "count": 270590
+    },
+    {
+      "rank": 989,
+      "lemma": "upper",
+      "count": 270205
+    },
+    {
+      "rank": 990,
+      "lemma": "multiple",
+      "count": 270109
+    },
+    {
+      "rank": 991,
+      "lemma": "fight",
+      "count": 269995
+    },
+    {
+      "rank": 992,
+      "lemma": "engine",
+      "count": 269904
+    },
+    {
+      "rank": 993,
+      "lemma": "parish",
+      "count": 269780
+    },
+    {
+      "rank": 994,
+      "lemma": "nature",
+      "count": 269348
+    },
+    {
+      "rank": 995,
+      "lemma": "marriage",
+      "count": 268950
+    },
+    {
+      "rank": 996,
+      "lemma": "weeks",
+      "count": 268679
+    },
+    {
+      "rank": 997,
+      "lemma": "fellow",
+      "count": 268590
+    },
+    {
+      "rank": 998,
+      "lemma": "saint",
+      "count": 268495
+    },
+    {
+      "rank": 999,
+      "lemma": "fort",
+      "count": 268291
+    },
+    {
+      "rank": 1000,
+      "lemma": "administrative",
+      "count": 268268
+    }
+  ]
+}
