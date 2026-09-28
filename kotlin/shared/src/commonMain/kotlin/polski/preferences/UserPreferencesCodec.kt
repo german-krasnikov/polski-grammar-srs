@@ -14,24 +14,39 @@ sealed interface PreferencesDecode {
     data class RecoveryRequired(val raw: String, val reason: String) : PreferencesDecode
 }
 
-/** Strict v1/v2/v3 wire codec. Unknown data is retained by the caller, never rewritten as defaults. */
+/** Strict v1-v4 wire codec ([encode] still writes v3; v4 is decode-only, EN-08). Unknown data is
+ * retained by the caller, never rewritten as defaults. */
 object UserPreferencesCodec {
     private val json = Json { isLenient = false }
     private val fieldsV1 = setOf("schemaVersion", "coursePair", "explanationMethod", "answerMode", "appearance", "motion", "swipeRatingEnabled", "reminder")
     private val fieldsV2 = fieldsV1 + "glassTintPercent" + "animationsEnabled"
     private val fieldsV3 = fieldsV2 - "explanationMethod" + "styleId"
+    /** EN-08: not yet written by [encode] (no host has two real packs to pick between yet), but
+     * decoded tolerantly so a future `target`/`native`-shaped export is never treated as garbage. */
+    private val fieldsV4 = fieldsV3 - "coursePair" + "target" + "native"
     private val reminderFields = setOf("enabled", "localTime", "days", "quietStart", "quietEnd")
 
     fun decode(raw: String): PreferencesDecode {
         val root = try { json.parseToJsonElement(raw) as? JsonObject }
         catch (_: Exception) { null } ?: return invalid(raw, "Expected preferences object")
         val version = root.number("schemaVersion") ?: return invalid(raw, "Invalid schemaVersion")
-        if (version !in 1..3) return invalid(raw, "Unsupported schemaVersion: $version")
-        val allowedFields = when (version) { 1 -> fieldsV1; 2 -> fieldsV2; else -> fieldsV3 }
+        if (version !in 1..4) return invalid(raw, "Unsupported schemaVersion: $version")
+        val allowedFields = when (version) { 1 -> fieldsV1; 2 -> fieldsV2; 3 -> fieldsV3; else -> fieldsV4 }
         if (root.keys.any { it !in allowedFields }) return invalid(raw, "Unknown preference field")
         val defaults = UserPreferencesV2()
-        val pair = root.optionalString("coursePair", defaults.coursePair) ?: return invalid(raw, "Invalid coursePair")
-        if (pair != packRegistry.active.pairId) return invalid(raw, "Unsupported coursePair")
+        // v1-v3 wrote the joined `coursePair` (e.g. `"pl-ru"`); v4 writes `target`/`native` directly.
+        val (target, native) = if (version <= 3) {
+            val joined = root.optionalString("coursePair", "${defaults.target}-${defaults.native}") ?: return invalid(raw, "Invalid coursePair")
+            val parts = joined.split("-", limit = 2)
+            if (parts.size != 2) return invalid(raw, "Invalid coursePair")
+            parts[0] to parts[1]
+        } else {
+            val t = root.optionalString("target", defaults.target) ?: return invalid(raw, "Invalid target")
+            val n = root.optionalString("native", defaults.native) ?: return invalid(raw, "Invalid native")
+            t to n
+        }
+        if (target != packRegistry.active.targetLanguage || native != packRegistry.active.nativeLanguage)
+            return invalid(raw, "Unsupported course selection")
         // v1/v2 wrote `explanationMethod: "Logic"/"Situations"`; v3 writes `styleId` directly with all 4 names.
         val style = if (version <= 2) root.legacyStyleId(defaults.styleId) ?: return invalid(raw, "Invalid explanationMethod")
             else root.optionalEnum("styleId", defaults.styleId) ?: return invalid(raw, "Invalid styleId")
@@ -50,15 +65,15 @@ object UserPreferencesCodec {
         // Missing on decode (v1, or a v2 document saved before this field existed) means enabled.
         val animations = if (version == 1) defaults.animationsEnabled
             else root.optionalBoolean("animationsEnabled", defaults.animationsEnabled) ?: return invalid(raw, "Invalid animationsEnabled")
-        return PreferencesDecode.Loaded(UserPreferencesV2(3, pair, style, answer, appearance, motion, swipe, reminder, tint, animations))
+        return PreferencesDecode.Loaded(UserPreferencesV2(3, target, native, style, answer, appearance, motion, swipe, reminder, tint, animations))
     }
 
     fun encode(value: UserPreferencesV2): String {
-        require(value.schemaVersion == 3 && value.coursePair == packRegistry.active.pairId && validReminder(value.reminder) && value.glassTintPercent in 0..100)
+        require(value.schemaVersion == 3 && value.target == packRegistry.active.targetLanguage && value.native == packRegistry.active.nativeLanguage && validReminder(value.reminder) && value.glassTintPercent in 0..100)
         val reminder = value.reminder
         val root = JsonObject(mapOf(
             "schemaVersion" to JsonPrimitive(3),
-            "coursePair" to JsonPrimitive(value.coursePair),
+            "coursePair" to JsonPrimitive("${value.target}-${value.native}"),
             "styleId" to JsonPrimitive(value.styleId.name),
             "answerMode" to JsonPrimitive(value.answerMode.name),
             "appearance" to JsonPrimitive(value.appearance.name),

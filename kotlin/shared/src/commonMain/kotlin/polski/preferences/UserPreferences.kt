@@ -17,14 +17,25 @@ data class ReminderPreferences(
 )
 
 /**
+ * EN-08 (gap G): what to study, as its own value — [target]/[native] language ids plus the
+ * presentation [style], for the three pickers (`Plans/Kotlin/EnRuPackPlan.md`§6) to grow into.
+ * A pure read view over [UserPreferencesV2]; [style] mirrors [UserPreferencesV2.styleId] rather
+ * than replacing it, since that field's name and shape are still read directly by every host.
+ */
+data class CourseSelection(val target: String, val native: String, val style: PreferredStyle)
+
+/**
  * Portable preferences only. Progress, FSRS cards, and host permission state live elsewhere.
  * The class name predates schema v3 (UC-10 renamed `explanationMethod` to [styleId]); it is kept
  * to avoid an unrelated rename across every host adapter — [schemaVersion] is the real version.
  */
 data class UserPreferencesV2(
     val schemaVersion: Int = 3,
-    /** UC-04: was the literal `"pl-ru"` — now the active pack's [polski.data.CoursePack.pairId]. */
-    val coursePair: String = packRegistry.active.pairId,
+    /** UC-04/EN-08: was the flat `"pl-ru"` [polski.data.CoursePack.pairId] string (`coursePair`);
+     * split into its two halves so a future second pack has real target/native pickers to bind
+     * to, not a delimiter-joined id. Defaults to the active pack's own languages. */
+    val target: String = packRegistry.active.targetLanguage,
+    val native: String = packRegistry.active.nativeLanguage,
     val styleId: PreferredStyle = PreferredStyle.RuleFirst,
     val answerMode: PreferredAnswerMode = PreferredAnswerMode.Oral,
     val appearance: Appearance = Appearance.System,
@@ -37,7 +48,10 @@ data class UserPreferencesV2(
      *  field on decode means enabled — see [UserPreferencesCodec]. Off keeps Rive entirely
      *  unloaded (no prewarm, no network requests) and all remaining CSS motion instant. */
     val animationsEnabled: Boolean = true,
-)
+) {
+    /** [target]/[native]/[styleId] as one [CourseSelection], for the picker code in EN-22. */
+    val course: CourseSelection get() = CourseSelection(target, native, styleId)
+}
 
 /** Source compatibility for native hosts while their preferences boundary migrates to v2. */
 typealias UserPreferencesV1 = UserPreferencesV2

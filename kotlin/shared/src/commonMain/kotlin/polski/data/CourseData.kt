@@ -193,6 +193,11 @@ internal class CoursePack(private val source: CoursePackSource) {
      * pack id could version content without changing the pair. */
     val pairId: String by lazy { "${root.string("targetLanguage")}-${root.string("nativeLanguage")}" }
 
+    /** EN-08 (gap G): the two halves of [pairId] as their own accessors, for preferences'
+     * `CourseSelection(target, native, style)` and future per-language pickers (EN-22). */
+    val targetLanguage: String by lazy { root.string("targetLanguage") }
+    val nativeLanguage: String by lazy { root.string("nativeLanguage") }
+
     val nouns: List<Noun> by lazy { root.rows("nouns").map { value ->
         Noun(value.string("id"), value.string("lemma"), value.string("meaning"), Gender.fromId(value.string("gender")),
             NumberGram.entries.associateWith { number -> value.obj("forms").obj(number.id).caseForms() })

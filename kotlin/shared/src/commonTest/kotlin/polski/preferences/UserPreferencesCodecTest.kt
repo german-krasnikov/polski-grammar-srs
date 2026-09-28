@@ -74,10 +74,60 @@ class UserPreferencesCodecTest {
     }
 
     @Test fun futureAndMalformedDocumentsRetainOriginalBytes() {
-        for (raw in listOf("{broken", "{\"schemaVersion\":4}", "{\"schemaVersion\":\"1\"}", "{\"schemaVersion\":1,\"future\":true}", "{\"schemaVersion\":1,\"glassTintPercent\":30}", "{\"schemaVersion\":2,\"future\":true}", "{\"schemaVersion\":3,\"future\":true}", "{\"schemaVersion\":1,\"appearance\":\"Blue\"}", "{\"schemaVersion\":1,\"swipeRatingEnabled\":\"true\"}", "{\"schemaVersion\":1,\"reminder\":{\"days\":[8]}}")) {
+        for (raw in listOf("{broken", "{\"schemaVersion\":5}", "{\"schemaVersion\":\"1\"}", "{\"schemaVersion\":1,\"future\":true}", "{\"schemaVersion\":1,\"glassTintPercent\":30}", "{\"schemaVersion\":2,\"future\":true}", "{\"schemaVersion\":3,\"future\":true}", "{\"schemaVersion\":4,\"future\":true}", "{\"schemaVersion\":1,\"appearance\":\"Blue\"}", "{\"schemaVersion\":1,\"swipeRatingEnabled\":\"true\"}", "{\"schemaVersion\":1,\"reminder\":{\"days\":[8]}}")) {
             val result = assertIs<PreferencesDecode.RecoveryRequired>(UserPreferencesCodec.decode(raw))
             assertEquals(raw, result.raw)
             assertTrue(result.reason.isNotBlank())
+        }
+    }
+
+    // EN-08 (Plans/Kotlin/EnRuPackPlan.md §6): `coursePair: String` -> `CourseSelection(target, native, style)`.
+    @Test fun courseSelectionGroupsTargetNativeAndStyle() {
+        val value = UserPreferencesV2(styleId = PreferredStyle.NativeContrast)
+        assertEquals(CourseSelection("pl", "ru", PreferredStyle.NativeContrast), value.course)
+    }
+
+    @Test fun legacyCoursePairSplitsIntoTargetAndNative() {
+        val loaded = assertIs<PreferencesDecode.Loaded>(
+            UserPreferencesCodec.decode("""{"schemaVersion":3,"coursePair":"pl-ru","styleId":"RuleFirst"}""")
+        ).value
+        assertEquals("pl", loaded.target)
+        assertEquals("ru", loaded.native)
+    }
+
+    // Golden: an existing default-shaped pl-ru v3 document (React export or KMP) round-trips
+    // byte-identically through the new codec — the wire format itself has not changed.
+    @Test fun defaultV3DocumentIsGoldenByteIdentical() {
+        val golden = "{\"schemaVersion\":3,\"coursePair\":\"pl-ru\",\"styleId\":\"RuleFirst\",\"answerMode\":\"Oral\"," +
+            "\"appearance\":\"System\",\"motion\":\"System\",\"swipeRatingEnabled\":true,\"glassTintPercent\":50," +
+            "\"animationsEnabled\":true,\"reminder\":{\"enabled\":false,\"localTime\":\"19:00\",\"days\":[1,2,3,4,5,6,7]," +
+            "\"quietStart\":\"22:00\",\"quietEnd\":\"08:00\"}}"
+        assertEquals(golden, UserPreferencesCodec.encode(UserPreferencesV2()))
+        assertEquals(UserPreferencesV2(), assertIs<PreferencesDecode.Loaded>(UserPreferencesCodec.decode(golden)).value)
+    }
+
+    @Test fun v1AndV2CoursePairDefaultingStillWorks() {
+        assertEquals("pl", assertIs<PreferencesDecode.Loaded>(UserPreferencesCodec.decode("""{"schemaVersion":1}""")).value.target)
+        val v2 = """{"schemaVersion":2,"coursePair":"pl-ru"}"""
+        assertEquals("ru", assertIs<PreferencesDecode.Loaded>(UserPreferencesCodec.decode(v2)).value.native)
+    }
+
+    @Test fun v4DecodesExplicitTargetAndNativeTolerantly() {
+        val v4 = """{"schemaVersion":4,"target":"pl","native":"ru","styleId":"MinimalTheory"}"""
+        val loaded = assertIs<PreferencesDecode.Loaded>(UserPreferencesCodec.decode(v4)).value
+        assertEquals(CourseSelection("pl", "ru", PreferredStyle.MinimalTheory), loaded.course)
+        // encode() still only ever writes v3 (no host has a second pack to pick yet).
+        assertEquals(3, loaded.schemaVersion)
+    }
+
+    @Test fun mismatchedCoursePairOrTargetNativeIsRecoveryRequired() {
+        for (raw in listOf(
+            """{"schemaVersion":3,"coursePair":"en-ru"}""",
+            """{"schemaVersion":3,"coursePair":"pl-en"}""",
+            """{"schemaVersion":3,"coursePair":"pl"}""",
+            """{"schemaVersion":4,"target":"en","native":"ru"}""",
+        )) {
+            assertIs<PreferencesDecode.RecoveryRequired>(UserPreferencesCodec.decode(raw))
         }
     }
 }
