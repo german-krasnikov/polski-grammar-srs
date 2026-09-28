@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "$comment": "Plans/Kotlin/EnRuPackPlan.md §1.3: en's lexicon. nouns/adjectives/possessives use the same `forms` wrapper as lang/pl/lexicon.json; verbs stay flat (present3sg/past/pastParticiple/ing as top-level fields) to mirror pl's own flat verb shape (present/pastStem directly on the object, no wrapper) — see morphology-notes.md for why en needs only these fields (no gender, no case declension) and for the deliberate exceptions (be's extra presentSg1/presentPl/pastPl fields; will's single invariant form).",
+  "nouns": [
+    { "id": "wife", "lemma": "wife", "meaning": "жена", "forms": { "sg": "wife", "pl": "wives" } },
+    { "id": "woman", "lemma": "woman", "meaning": "женщина", "forms": { "sg": "woman", "pl": "women" } },
+    { "id": "book", "lemma": "book", "meaning": "книга", "forms": { "sg": "book", "pl": "books" } },
+    { "id": "work", "lemma": "job", "meaning": "работа", "forms": { "sg": "job", "pl": "jobs" } },
+    { "id": "husband", "lemma": "husband", "meaning": "муж", "forms": { "sg": "husband", "pl": "husbands" } },
+    { "id": "friend", "lemma": "friend", "meaning": "друг", "forms": { "sg": "friend", "pl": "friends" } },
+    { "id": "son", "lemma": "son", "meaning": "сын", "forms": { "sg": "son", "pl": "sons" } },
+    { "id": "dog", "lemma": "dog", "meaning": "собака", "forms": { "sg": "dog", "pl": "dogs" } },
+    { "id": "cat", "lemma": "cat", "meaning": "кот", "forms": { "sg": "cat", "pl": "cats" } },
+    { "id": "car", "lemma": "car", "meaning": "машина", "forms": { "sg": "car", "pl": "cars" } },
+    { "id": "house", "lemma": "house", "meaning": "дом", "forms": { "sg": "house", "pl": "houses" } },
+    { "id": "phone", "lemma": "phone", "meaning": "телефон", "forms": { "sg": "phone", "pl": "phones" } },
+    { "id": "child", "lemma": "child", "meaning": "ребёнок", "forms": { "sg": "child", "pl": "children" } },
+    { "id": "window", "lemma": "window", "meaning": "окно", "forms": { "sg": "window", "pl": "windows" } }
+  ],
+  "adjectives": [
+    { "id": "beautiful", "lemma": "beautiful", "meaning": "красивый", "forms": { "invariant": "beautiful" } },
+    { "id": "new", "lemma": "new", "meaning": "новый", "forms": { "invariant": "new" } },
+    { "id": "small", "lemma": "small", "meaning": "маленький", "forms": { "invariant": "small" } },
+    { "id": "nice", "lemma": "nice", "meaning": "приятный", "forms": { "invariant": "nice" } },
+    { "id": "good", "lemma": "good", "meaning": "хороший", "forms": { "invariant": "good" } },
+    { "id": "old", "lemma": "old", "meaning": "старый", "forms": { "invariant": "old" } },
+    { "id": "expensive", "lemma": "expensive", "meaning": "дорогой", "forms": { "invariant": "expensive" } }
+  ],
+  "verbs": [
+    { "id": "walk", "lemma": "walk", "meaning": "ходить", "present3sg": "walks", "past": "walked", "pastParticiple": "walked", "ing": "walking" },
+    { "id": "see", "lemma": "see", "meaning": "видеть", "present3sg": "sees", "past": "saw", "pastParticiple": "seen", "ing": "seeing" },
+    { "id": "talk", "lemma": "talk", "meaning": "говорить", "present3sg": "talks", "past": "talked", "pastParticiple": "talked", "ing": "talking" },
+    { "id": "go", "lemma": "go", "meaning": "идти", "present3sg": "goes", "past": "went", "pastParticiple": "gone", "ing": "going" },
+    { "id": "like", "lemma": "like", "meaning": "любить", "present3sg": "likes", "past": "liked", "pastParticiple": "liked", "ing": "liking" },
+    { "id": "read", "lemma": "read", "meaning": "читать", "present3sg": "reads", "past": "read", "pastParticiple": "read", "ing": "reading" },
+    { "id": "have", "lemma": "have", "meaning": "иметь", "present3sg": "has", "past": "had", "pastParticiple": "had", "ing": "having" },
+    { "id": "do", "lemma": "do", "meaning": "делать", "present3sg": "does", "past": "did", "pastParticiple": "done", "ing": "doing" },
+    {
+      "id": "be", "lemma": "be", "meaning": "быть",
+      "present3sg": "is", "presentSg1": "am", "presentPl": "are",
+      "past": "was", "pastPl": "were",
+      "pastParticiple": "been", "ing": "being"
+    },
+    { "id": "will", "lemma": "will", "meaning": "вспомогательный глагол будущего времени", "present3sg": "will" }
+  ],
+  "personalPronouns": {
+    "I": { "subject": "I", "object": "me" },
+    "you": { "subject": "you", "object": "you" },
+    "he": { "subject": "he", "object": "him" },
+    "she": { "subject": "she", "object": "her" },
+    "it": { "subject": "it", "object": "it" },
+    "we": { "subject": "we", "object": "us" },
+    "they": { "subject": "they", "object": "them" }
+  },
+  "possessives": [
+    { "id": "my", "label": "my — мой", "forms": { "kind": "invariant", "value": "my" } },
+    { "id": "your", "label": "your — твой/ваш", "forms": { "kind": "invariant", "value": "your" } },
+    { "id": "his", "label": "his — его", "forms": { "kind": "invariant", "value": "his" } },
+    { "id": "her", "label": "her — её", "forms": { "kind": "invariant", "value": "her" } },
+    { "id": "its", "label": "its — его/её (о предмете)", "forms": { "kind": "invariant", "value": "its" } },
+    { "id": "our", "label": "our — наш", "forms": { "kind": "invariant", "value": "our" } },
+    { "id": "their", "label": "their — их", "forms": { "kind": "invariant", "value": "their" } }
+  ]
+}

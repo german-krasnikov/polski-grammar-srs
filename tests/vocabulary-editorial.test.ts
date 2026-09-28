@@ -27,6 +27,7 @@ describe('vocabulary editorial journal', () => {
     ['unlicensed source', (journal: typeof editorial) => { journal.cards[0].provenance.example = { kind: 'external', url: 'https://example.org/example', revision: '1', license: '', attribution: '' } as never; }, /provenance\/example/],
     ['unknown candidate', (journal: typeof editorial) => { journal.candidates[0].lemma = 'unknown'; }, /candidate.*lemma/],
     ['source revision drift', (journal: typeof editorial) => { journal.frequencySource.revision = 'f'.repeat(40); }, /frequencySource\/revision/],
+    ['source license drift', (journal: typeof editorial) => { journal.frequencySource.license = 'CC BY-SA 4.0'; }, /frequencySource\/license/],
     ['missing review evidence', (journal: typeof editorial) => { journal.cards[0].reviewSources = []; }, /reviewSources/],
     ['unconfirmed level decision', (journal: typeof editorial) => { journal.cards[0].levelDecision = 'CEFR review pending'; }, /reviewSources/],
     ['unknown external license', (journal: typeof editorial) => { journal.cards[0].provenance.example = { kind: 'external', url: 'https://example.org/example', revision: '1', license: 'unknown', attribution: 'A' } as never; }, /license/],

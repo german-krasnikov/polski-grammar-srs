@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "$comment": "Plans/Kotlin/EnRuPackPlan.md §1.1/§1.3/§5 gaps A+D: how en realizes each core construction into surface text — the same ConstructionRealizer/TableMorphology data as lang/pl/realization.json, a different vocabulary of feature values. Number stays lowercase (\"sg\"/\"pl\"), mirroring lang/en/lexicon.json's own forms keys; Case/Polarity/Mood/Aspect/Tense values are the capitalized core/features.json en vocabulary (Subj/Obj/In/With/To/About/Of, Pos/Neg, Decl/YesNoQ, Simple/Continuous/Perfect, Pres/Past/Fut), matching lang/en/lang.json and prepositions.json exactly. `verb`'s empty-bundle entry is always the bare/base form (walk/see/go) — the form English do-support and \"will\" need when the auxiliary, not the verb, carries tense/person; `Aspect=Continuous`/`Tense=Fut` bundles are the verb's other two invariant forms (the -ing form; the bare form again, distinguished from the do-support entry only by which condition selects it, both resolving to the same lemma string). Only 6 of the 7 core.* structures get a template here, the same omission lang/pl/realization.json documents for core.composite: it has no realization of its own (its skills — tense.contrast/mixed — compose other skills' constructions via exercise-recipes.json's chain, per core/constructions.json's own $comment on the escape hatch), so 7 CoreStructures (§1.1) yields 6 templates, not 7.",
+  "constructions": {
+    "core.argument.case-role": {
+      "$comment": "The role phrase only (owner+adjective+noun, optionally prefixed by the role's preposition) — subject/verb wording is a pattern-level concern (exercise-recipes.json), same split as pl. `prep` is EnRuPackPlan.md §5 gap A's conditional slot: absent for Subj/Obj (word order alone carries the role), present otherwise via a pack-level ConstantSlot keyed on Case (lang/en/exercise-recipes.json, EN-14) filling it with prepositions.json's \"role\" lexeme. `owner` defaults to ExerciseGenerator's defaultOwnerLexeme (\"my\") like pl, so a plain role sentence still reads \"my beautiful house\", not the bare noun.",
+      "slots": [
+        { "name": "prep", "category": "prep", "optional": true, "requiredFeatures": ["Case"] },
+        { "name": "owner", "category": "possessive", "optional": true, "requiredFeatures": [] },
+        { "name": "adjective", "category": "adjective", "requiredFeatures": [] },
+        { "name": "noun", "category": "noun", "requiredFeatures": ["Number"] }
+      ]
+    },
+    "core.agreement.possessive": {
+      "$comment": "Unlike core.argument.case-role, `owner` is the drilled focus here, so it is not optional. No `prep` slot: the one en skill using this construction (possessive.my) fixes Case=Obj, where the role is never prepositional.",
+      "slots": [
+        { "name": "owner", "category": "possessive", "requiredFeatures": [] },
+        { "name": "adjective", "category": "adjective", "requiredFeatures": [] },
+        { "name": "noun", "category": "noun", "requiredFeatures": ["Number"] }
+      ]
+    },
+    "core.number": {
+      "$comment": "Same shape as core.argument.case-role (a role phrase whose Number the skill drills) — `prep` kept for the same conditional reason even though number.plural's own fixed Case is Obj, so future reuse at a prepositional role needs no template edit.",
+      "slots": [
+        { "name": "prep", "category": "prep", "optional": true, "requiredFeatures": ["Case"] },
+        { "name": "owner", "category": "possessive", "optional": true, "requiredFeatures": [] },
+        { "name": "adjective", "category": "adjective", "requiredFeatures": [] },
+        { "name": "noun", "category": "noun", "requiredFeatures": ["Number"] }
+      ]
+    },
+    "core.verb.tense": {
+      "$comment": "EnRuPackPlan.md §1.1/§5 gap A: `aux` is a second lexical slot (absent for Aspect=Simple's Pres, present — as \"will\"/\"be\" via a Tense=Fut/Aspect=Continuous ConstantSlot, EN-14) alongside `verb`, replacing pl's single verb slot — English's composite tenses need two words, pl's simple conjugation needs one. `verb`'s default (Tense+Person+Number) is the finite present3sg-shaped form (only Pres/Simple actually varies by person in English); Tense=Past/Tense=Fut collapse to Tense alone (English past never conjugates by person; \"will\"+verb always takes the invariant bare form); Aspect=Continuous collapses to Aspect alone (the -ing form is equally invariant).",
+      "slots": [
+        { "name": "aux", "category": "aux", "optional": true, "requiredFeatures": ["Tense", "Person", "Number"] },
+        {
+          "name": "verb",
+          "category": "verb",
+          "requiredFeatures": ["Tense", "Person", "Number"],
+          "requiredFeaturesWhen": {
+            "Tense=Past": ["Tense"],
+            "Tense=Fut": ["Tense"],
+            "Aspect=Continuous": ["Aspect"]
+          }
+        }
+      ]
+    },
+    "core.sentence.polarity": {
+      "$comment": "EnRuPackPlan.md §5 gap A: the verb phrase's negation, not the noun phrase pl's core.sentence.polarity governs (English has no case to flip) — `aux` (\"do\", present only when Polarity=Neg via ConstantSlot, EN-14) and `neg` (\"not\", same condition) are the do-support insertion; `verb` reverts to its invariant bare form under negation (the aux carries tense/person) but stays fully finite when positive (Polarity=Pos, the construction's default) — the one skill contrast (polarity.present/polarity.past) this construction exists for.",
+      "slots": [
+        {
+          "name": "aux",
+          "category": "aux",
+          "optional": true,
+          "requiredFeatures": ["Tense", "Person", "Number"],
+          "requiredFeaturesWhen": { "Tense=Past": ["Tense"] }
+        },
+        { "name": "neg", "category": "neg", "optional": true, "requiredFeatures": [] },
+        {
+          "name": "verb",
+          "category": "verb",
+          "requiredFeatures": ["Tense", "Person", "Number"],
+          "requiredFeaturesWhen": { "Polarity=Neg": [], "Tense=Past": ["Tense"] }
+        }
+      ]
+    },
+    "core.sentence.mood": {
+      "$comment": "EnRuPackPlan.md §5 gap D, the literal motivating case: `orderWhen` because Mood=YesNoQ doesn't just add a word (gap A alone), it moves `aux` from after `subject` to before it (\"You see\" -> \"Do you see\") — the same do-support `aux`/`verb` shape as core.sentence.polarity (absent for Decl via the same Mood=YesNoQ ConstantSlot, EN-14), plus a `subject` slot (category \"pronoun\", invariant) this construction alone needs since word order, not just presence, depends on it. Default order is Decl's (subject, [aux], verb); orderWhen's Mood=YesNoQ list is the same three slots with aux moved first.",
+      "slots": [
+        { "name": "subject", "category": "pronoun", "requiredFeatures": [] },
+        {
+          "name": "aux",
+          "category": "aux",
+          "optional": true,
+          "requiredFeatures": ["Tense", "Person", "Number"],
+          "requiredFeaturesWhen": { "Tense=Past": ["Tense"] }
+        },
+        { "name": "verb", "category": "verb", "requiredFeatures": [] }
+      ],
+      "orderWhen": {
+        "Mood=YesNoQ": [
+          {
+            "name": "aux",
+            "category": "aux",
+            "optional": true,
+            "requiredFeatures": ["Tense", "Person", "Number"],
+            "requiredFeaturesWhen": { "Tense=Past": ["Tense"] }
+          },
+          { "name": "subject", "category": "pronoun", "requiredFeatures": [] },
+          { "name": "verb", "category": "verb", "requiredFeatures": [] }
+        ]
+      }
+    }
+  }
+}
