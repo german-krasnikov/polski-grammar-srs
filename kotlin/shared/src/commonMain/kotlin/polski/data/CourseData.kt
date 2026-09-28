@@ -198,22 +198,37 @@ internal class CoursePack(private val source: CoursePackSource) {
     val targetLanguage: String by lazy { root.string("targetLanguage") }
     val nativeLanguage: String by lazy { root.string("nativeLanguage") }
 
-    val nouns: List<Noun> by lazy { root.rows("nouns").map { value ->
-        Noun(value.string("id"), value.string("lemma"), value.string("meaning"), Gender.fromId(value.string("gender")),
+    /**
+     * EN-22 fix (EnRuAcceptance §7 item 1): a case-declining, gendered noun table — this is pl's
+     * own grammar shape, not a universal fact every pack has (English nouns have neither). A row
+     * without a "gender" field (en's `lexicon.json`) simply isn't this shape and is skipped rather
+     * than force-parsed into false gender/case data — [nouns] is honestly empty for such a pack,
+     * not fabricated. pl's rows all declare "gender", so pl's list is unchanged.
+     */
+    val nouns: List<Noun> by lazy { root.rows("nouns").mapNotNull { value ->
+        val gender = value.optionalString("gender")?.let(Gender::fromId) ?: return@mapNotNull null
+        Noun(value.string("id"), value.string("lemma"), value.string("meaning"), gender,
             NumberGram.entries.associateWith { number -> value.obj("forms").obj(number.id).caseForms() })
     }.requireUniqueIds(Noun::id) }
 
-    val adjectives: List<Adjective> by lazy { root.rows("adjectives").map { value ->
+    /** Same reasoning as [nouns]: a row whose "forms" isn't number×gender×case-shaped (en's flat
+     *  `{"invariant": "..."}`) is skipped, not force-parsed. */
+    val adjectives: List<Adjective> by lazy { root.rows("adjectives").mapNotNull { value ->
+        val forms = value.obj("forms")
+        if (!NumberGram.entries.all { forms.containsKey(it.id) }) return@mapNotNull null
         Adjective(value.string("id"), value.string("lemma"), value.string("meaning"),
             NumberGram.entries.associateWith { number ->
-                Gender.entries.associateWith { gender -> value.obj("forms").obj(number.id).obj(gender.id).caseForms() }
+                Gender.entries.associateWith { gender -> forms.obj(number.id).obj(gender.id).caseForms() }
             })
     }.requireUniqueIds(Adjective::id) }
 
-    val verbs: List<Verb> by lazy { root.rows("verbs").map { value ->
+    /** Same reasoning as [nouns]: a row without an "aspect" field (en's verbs have no pl-shaped
+     *  `pastStem`/`futureType`) is skipped, not force-parsed. */
+    val verbs: List<Verb> by lazy { root.rows("verbs").mapNotNull { value ->
+        val aspectId = value.optionalString("aspect") ?: return@mapNotNull null
         val past = value.obj("pastStem")
         Verb(value.string("id"), value.string("lemma"), value.string("meaning"),
-            Aspect.entries.first { it.id == value.string("aspect") },
+            Aspect.entries.first { it.id == aspectId },
             value["present"]?.jsonObject?.let { present ->
                 NumberGram.entries.associateWith { number ->
                     val forms = present.obj(number.id)
@@ -230,12 +245,18 @@ internal class CoursePack(private val source: CoursePackSource) {
             value.getValue("prerequisites").jsonArray.map { it.jsonPrimitive.content })
     }.requireUniqueIds(Skill::id) }
 
-    val sentenceSeeds: List<SentenceSeed> by lazy { root.rows("sentenceSeeds").map { value ->
-        SentenceSeed(value.string("nounId"), value.string("adjectiveId"))
-    }.also { seeds ->
-        require(seeds.isNotEmpty() && seeds.distinct().size == seeds.size)
-        require(seeds.all { seed -> nouns.any { it.id == seed.nounId } && adjectives.any { it.id == seed.adjectiveId } })
-    } }
+    /** Validated against the pack's own raw noun/adjective ids (every pack declares these,
+     *  whichever shape they end up in) rather than [nouns]/[adjectives] — those two are narrowed
+     *  to pl's gendered/case-declining shape and would wrongly reject a caseless pack's seeds. */
+    val sentenceSeeds: List<SentenceSeed> by lazy {
+        val nounIds = root.rows("nouns").map { it.string("id") }.toSet()
+        val adjectiveIds = root.rows("adjectives").map { it.string("id") }.toSet()
+        root.rows("sentenceSeeds").map { value -> SentenceSeed(value.string("nounId"), value.string("adjectiveId")) }
+            .also { seeds ->
+                require(seeds.isNotEmpty() && seeds.distinct().size == seeds.size)
+                require(seeds.all { seed -> seed.nounId in nounIds && seed.adjectiveId in adjectiveIds })
+            }
+    }
 
     /** UC S2: regular stem alternations this pack declares (e.g. Polish `ó~o`), consumed only by
      * `EndingHighlight.kt`'s reliability check — optional, defaults to none for a pack without any. */
@@ -265,27 +286,42 @@ internal class CoursePack(private val source: CoursePackSource) {
         )
     }
 
-    val caseReferenceRows: List<CaseReferenceRow> by lazy {
-        root.obj("reference").rows("caseRows").map { value ->
+    /**
+     * EN-22 fix (EnRuAcceptance §7 item 1): every property below through [aspectNoPresent] reads
+     * pl's own `reference` block — hand-authored teaching copy for pl's specific case/gender/verb
+     * system (Polish declension tables, gender-driven agreement rules…), not a structure every pack
+     * necessarily has. en-ru's own `reference` is genuinely empty (its lang has neither case nor
+     * gender to teach this way) — each property is therefore nullable, returning null when its own
+     * top-level key is absent instead of force-parsing nothing into it. pl's `reference` still has
+     * every one of these keys, so pl's parse is byte-identical to before.
+     */
+    private val reference: JsonObject by lazy { root.obj("reference") }
+
+    val caseReferenceRows: List<CaseReferenceRow>? by lazy {
+        val rows = reference.optRows("caseRows") ?: return@lazy null
+        rows.map { value ->
             CaseReferenceRow(GramCase.fromId(value.string("id")), value.string("pl"), value.string("ru"),
                 value.string("question"), value.string("trigger"), value.optionalString("skill"))
-        }.also { rows -> require(rows.map { it.id } == listOf(GramCase.NOM, GramCase.GEN, GramCase.DAT, GramCase.ACC, GramCase.INST, GramCase.LOC, GramCase.VOC)) }
+        }.also { parsed -> require(parsed.map { it.id } == listOf(GramCase.NOM, GramCase.GEN, GramCase.DAT, GramCase.ACC, GramCase.INST, GramCase.LOC, GramCase.VOC)) }
     }
 
-    val referenceGenderNames: Map<String, String> by lazy {
-        root.obj("reference").obj("genderNames").mapValues { (_, value) -> value.jsonPrimitive.content }
+    val referenceGenderNames: Map<String, String>? by lazy {
+        val names = reference.optObj("genderNames") ?: return@lazy null
+        names.mapValues { (_, value) -> value.jsonPrimitive.content }
     }
 
-    val referenceChainRows: List<ReferenceChainRow> by lazy {
-        root.obj("reference").rows("chainRows").map { value ->
+    val referenceChainRows: List<ReferenceChainRow>? by lazy {
+        val rows = reference.optRows("chainRows") ?: return@lazy null
+        rows.map { value ->
             ReferenceChainRow(value.string("label"), value.string("from"), value.string("to"), value.string("change"))
-        }.also { rows ->
-            require(rows.size == 5 && (1 until rows.size).all { rows[it].from == rows[it - 1].to })
+        }.also { parsed ->
+            require(parsed.size == 5 && (1 until parsed.size).all { parsed[it].from == parsed[it - 1].to })
         }
     }
 
-    val referenceSystemCards: List<ReferenceSystemCard> by lazy {
-        root.obj("reference").rows("systemCards").mapIndexed { index, value ->
+    val referenceSystemCards: List<ReferenceSystemCard>? by lazy {
+        val rows = reference.optRows("systemCards") ?: return@lazy null
+        rows.mapIndexed { index, value ->
             val steps = value.getValue("steps").jsonArray.map { it.jsonPrimitive.content }
             val example = value.string("example")
             require(steps.size >= 2 && steps.joinToString(" → ") == example) {
@@ -297,8 +333,8 @@ internal class CoursePack(private val source: CoursePackSource) {
         }
     }
 
-    val referencePipeline: ReferencePipeline by lazy {
-        val pipeline = root.obj("reference").obj("pipeline")
+    val referencePipeline: ReferencePipeline? by lazy {
+        val pipeline = reference.optObj("pipeline") ?: return@lazy null
         ReferencePipeline(
             pipeline.string("title"),
             pipeline.rows("steps").map { step ->
@@ -310,14 +346,14 @@ internal class CoursePack(private val source: CoursePackSource) {
         }
     }
 
-    val referenceCaseTeaching: CaseTeaching by lazy {
-        val teaching = root.obj("reference").obj("caseTeaching")
+    val referenceCaseTeaching: CaseTeaching? by lazy {
+        val teaching = reference.optObj("caseTeaching") ?: return@lazy null
         val note = teaching.obj("caseNote")
         CaseTeaching(note.string("react"), note.string("compact"), teaching.string("comparisonReadingHint"))
     }
 
-    val referencePronounTeaching: PronounTeaching by lazy {
-        val teaching = root.obj("reference").obj("pronounTeaching")
+    val referencePronounTeaching: PronounTeaching? by lazy {
+        val teaching = reference.optObj("pronounTeaching") ?: return@lazy null
         val personal = teaching.obj("personal")
         val intro = personal.obj("intro")
         val footer = personal.obj("footer")
@@ -353,8 +389,8 @@ internal class CoursePack(private val source: CoursePackSource) {
         }
     }
 
-    val referenceVerbTeaching: VerbTeaching by lazy {
-        val teaching = root.obj("reference").obj("verbTeaching")
+    val referenceVerbTeaching: VerbTeaching? by lazy {
+        val teaching = reference.optObj("verbTeaching") ?: return@lazy null
         VerbTeaching(
             teaching.rows("subjects").map { subject ->
                 VerbSubject(subject.string("id"), Person.fromId(subject.getValue("person").jsonPrimitive.int),
@@ -369,15 +405,16 @@ internal class CoursePack(private val source: CoursePackSource) {
         )
     }
 
-    val comparisonNounIds: List<String> by lazy {
-        root.obj("reference").getValue("comparisonNounIds").jsonArray.map { it.jsonPrimitive.content }.also { ids ->
-            require(ids.size == 7 && ids.distinct().size == ids.size)
-            require(ids.all { id -> nouns.any { it.id == id } })
+    val comparisonNounIds: List<String>? by lazy {
+        val ids = (reference["comparisonNounIds"] as? JsonArray)?.map { it.jsonPrimitive.content } ?: return@lazy null
+        ids.also {
+            require(it.size == 7 && it.distinct().size == it.size)
+            require(it.all { id -> nouns.any { noun -> noun.id == id } })
         }
     }
 
-    val referenceRussianSupport: RussianSupport by lazy {
-        val support = root.obj("reference").obj("russianSupport")
+    val referenceRussianSupport: RussianSupport? by lazy {
+        val support = reference.optObj("russianSupport") ?: return@lazy null
         val title = support.obj("title")
         RussianSupport(
             title.string("full"), title.string("compact"),
@@ -404,36 +441,39 @@ internal class CoursePack(private val source: CoursePackSource) {
         }
     }
 
-    val referenceTenseRows: List<ReferenceTenseRow> by lazy {
-        root.obj("reference").rows("tenseRows").map { value ->
+    val referenceTenseRows: List<ReferenceTenseRow>? by lazy {
+        val rows = reference.optRows("tenseRows") ?: return@lazy null
+        rows.map { value ->
             ReferenceTenseRow(value.string("label"), value.string("from"), value.string("to"))
-        }.also { rows ->
-            require(rows.size == 5 && rows.indices.all { index ->
-                rows[index].from == if (index == 2) rows[1].to else rows[0].to
+        }.also { parsed ->
+            require(parsed.size == 5 && parsed.indices.all { index ->
+                parsed[index].from == if (index == 2) parsed[1].to else parsed[0].to
             })
         }
     }
 
-    val referenceAspectRows: List<ReferenceAspectRow> by lazy {
-        root.obj("reference").rows("aspectRows").map { value ->
+    val referenceAspectRows: List<ReferenceAspectRow>? by lazy {
+        val rows = reference.optRows("aspectRows") ?: return@lazy null
+        rows.map { value ->
             ReferenceAspectRow(value.string("label"), value.string("from"),
                 value.optionalString("present")?.takeUnless { it == "null" }, value.string("past"), value.string("future"))
-        }.also { rows ->
-            require(rows.size == 4 && rows.all { row ->
+        }.also { parsed ->
+            require(parsed.size == 4 && parsed.all { row ->
                 verbs.any { verb -> verb.lemma == row.from && (row.present == null) == (verb.aspect == Aspect.PERFECTIVE) }
             })
         }
     }
 
-    val maleAccRows: List<MaleAccRow> by lazy {
-        root.obj("reference").rows("maleAccRows").map { value ->
+    val maleAccRows: List<MaleAccRow>? by lazy {
+        val rows = reference.optRows("maleAccRows") ?: return@lazy null
+        rows.map { value ->
             MaleAccRow(value.string("id"), value.string("label"), value.string("title"),
                 value.rows("examples").map { example ->
                     MaleAccExample(example.string("from"), example.string("to"), example.string("sentence"))
                 }, value.string("rule"))
-        }.also { rows ->
-            require(rows.map { it.id } == listOf("person", "animal", "object"))
-            require(rows.all { row -> row.examples.isNotEmpty() && row.examples.all { it.to in it.sentence } })
+        }.also { parsed ->
+            require(parsed.map { it.id } == listOf("person", "animal", "object"))
+            require(parsed.all { row -> row.examples.isNotEmpty() && row.examples.all { it.to in it.sentence } })
         }
     }
 
@@ -463,14 +503,14 @@ internal class CoursePack(private val source: CoursePackSource) {
         }.requireUniqueIds(VocabularyItem::id)
     }
 
-    val matrixIntroduction: String by lazy { root.obj("reference").string("matrixIntroduction") }
-    val webCaseCompositionHeader: String by lazy { root.obj("reference").string("webCaseCompositionHeader") }
-    val contextHelp: CourseContextHelp by lazy {
-        root.obj("reference").obj("contextHelp").let { CourseContextHelp(it.string("react"), it.string("compact")) }
+    val matrixIntroduction: String? by lazy { reference.optionalString("matrixIntroduction") }
+    val webCaseCompositionHeader: String? by lazy { reference.optionalString("webCaseCompositionHeader") }
+    val contextHelp: CourseContextHelp? by lazy {
+        reference.optObj("contextHelp")?.let { CourseContextHelp(it.string("react"), it.string("compact")) }
     }
-    val maleAccIntro: String by lazy { root.obj("reference").string("maleAccIntro") }
-    val aspectNoPresent: CourseAspectNoPresent by lazy {
-        root.obj("reference").obj("aspectNoPresent").let { CourseAspectNoPresent(it.string("compact"), it.string("ios")) }
+    val maleAccIntro: String? by lazy { reference.optionalString("maleAccIntro") }
+    val aspectNoPresent: CourseAspectNoPresent? by lazy {
+        reference.optObj("aspectNoPresent")?.let { CourseAspectNoPresent(it.string("compact"), it.string("ios")) }
     }
     val vocabularyInstructions: CourseVocabularyInstructions by lazy {
         root.obj("vocabulary").obj("instructions").let {
@@ -486,26 +526,38 @@ internal class CoursePack(private val source: CoursePackSource) {
         }.also { require(it.size == 1000) }
     }
 
+    /** A pronoun row without pl's full 7-case paradigm (en's `{subject, object}`) isn't this
+     *  case-declining shape and is skipped — same reasoning as [nouns]. */
     val personalPronouns: Map<String, Map<GramCase, String>> by lazy {
-        root.obj("personalPronouns").mapValues { (_, value) -> value.jsonObject.caseForms() }
+        root.obj("personalPronouns").mapNotNull { (id, value) ->
+            val forms = value.jsonObject
+            if (!GramCase.entries.all { forms.containsKey(it.id) }) return@mapNotNull null
+            id to forms.caseForms()
+        }.toMap()
     }
 
     val possessives: List<Possessive> by lazy {
         root.rows("possessives").map { Possessive(PossessiveId.fromId(it.string("id")), it.string("label")) }
     }
 
+    /**
+     * EN-22 fix (EnRuAcceptance §7 item 1): which possessive ids are invariant vs. declined by
+     * case/gender is a per-pack grammatical fact declared in the pack's own `forms.kind`, not the
+     * pl-specific "only his/her/their are invariant" rule this used to hardcode (English's whole
+     * paradigm is invariant) — dropped in favor of the structural shape check already below.
+     * Likewise, requiring every [PossessiveId] to be present is pl's own completeness rule, not a
+     * universal one; a pack simply declares whichever ids it has (en has no `yourPlural`).
+     */
     val possessiveForms: Map<PossessiveId, CoursePossessiveForms> by lazy {
         root.rows("possessives").associate { row ->
             val id = PossessiveId.fromId(row.string("id"))
             val forms = row.obj("forms")
             val value = when (forms.string("kind")) {
                 "invariant" -> {
-                    require(id in setOf(PossessiveId.HIS, PossessiveId.HER, PossessiveId.THEIR))
                     require(forms.keys == setOf("kind", "value"))
                     CoursePossessiveForms.Invariant(forms.formText("value"))
                 }
                 "declined" -> {
-                    require(id !in setOf(PossessiveId.HIS, PossessiveId.HER, PossessiveId.THEIR))
                     require(forms.keys == setOf("kind", "sg", "pl"))
                     val singular = forms.obj("sg")
                     val plural = forms.obj("pl")
@@ -519,11 +571,13 @@ internal class CoursePack(private val source: CoursePackSource) {
                 else -> error("Unknown possessive kind for ${id.id}")
             }
             id to value
-        }.also { forms -> require(forms.keys == PossessiveId.entries.toSet()) }
+        }
     }
 
-    val futureAuxiliary: FutureAuxiliary by lazy {
-        val morphology = root.obj("morphology")
+    /** Absent entirely for a pack with no compound future tense (en's `will` is a single
+     *  invariant particle, not a conjugated auxiliary verb) — null, not force-parsed. */
+    val futureAuxiliary: FutureAuxiliary? by lazy {
+        val morphology = root["morphology"]?.jsonObject ?: return@lazy null
         require(morphology.keys == setOf("futureAuxiliary"))
         val auxiliary = morphology.obj("futureAuxiliary")
         require(auxiliary.keys == setOf("verbId", "forms"))
@@ -589,19 +643,18 @@ internal val packRegistry: PackRegistry by lazy {
 val availableCourseSelections: List<Pair<String, String>> by lazy { packRegistry.options }
 
 /**
- * EN-22: the (possibly smaller) subset of [availableCourseSelections] whose full [CoursePack]
- * content actually parses today — a runtime probe of a throwaway instance (never touching
- * [packRegistry]'s own singleton, so a broken pack is never read through the real, process-wide
- * cached path [selectActiveCoursePack] warns about), covering every field a host's
+ * EN-22 (EnRuAcceptance §7 item 1): the (possibly smaller) subset of [availableCourseSelections]
+ * whose full [CoursePack] content actually parses today — a runtime probe of a throwaway instance
+ * (never touching [packRegistry]'s own singleton, so a broken pack is never read through the real,
+ * process-wide cached path [selectActiveCoursePack] warns about), covering every field a host's
  * Training/Vocabulary/Matrix/reference screens read.
  *
- * en-ru fails this probe: `lang/en/lexicon.json` correctly has no grammatical gender or case
- * (English has neither) — but [CoursePack]'s schema was written for pl-ru alone and requires both
- * throughout (`Noun.gender`, case-keyed `possessiveForms`/`futureAuxiliary`/reference rows,
- * [PossessiveId]'s closed set not even knowing `its`…). Content can't fix this without inventing
- * false grammar; only generalizing [CoursePack]'s schema can, a real gap this task didn't create
- * and isn't scoped to fix (`Plans/Kotlin/EnRuPackPlan.md`'s task table names no task for it) — a
- * build that lands that generalization needs no picker change, since this probe passes on its own.
+ * en-ru now passes this probe: [CoursePack]'s grammar-shaped properties (`Noun.gender`, case-keyed
+ * `possessiveForms`/`futureAuxiliary`/the `reference` block's pl-specific teaching rows) are each
+ * derived from what the pack's own JSON actually declares — a genuinely caseless/genderless
+ * language contributes an honest empty/null result there instead of a fabricated pl-shaped one, so
+ * it no longer throws. pl's own JSON declares every one of these fields exactly as before, so its
+ * parse (and every value it produces) is unchanged.
  */
 val usableCourseSelections: List<Pair<String, String>> by lazy {
     (embeddedCoursePackSources + v2OnlyCoursePackSources).mapNotNull { source ->
@@ -666,23 +719,56 @@ fun caseSentencePrefix(gramCase: GramCase, number: NumberGram): String {
 }
 
 fun exerciseCopy(key: String): String = packRegistry.active.exerciseCopy.getValue(key)
-val referenceChainRows: List<ReferenceChainRow> get() = packRegistry.active.referenceChainRows
+
+// EN-22 fix (EnRuAcceptance §7 item 1, corrected): each [CoursePack] property below is nullable (a
+// pack whose `reference` block doesn't cover this pl-specific teaching topic — en-ru today). This
+// same fix's [selectActiveCoursePack]/[selectCoursePack] now really flip the process-wide
+// [packRegistry.active] to en-ru (Settings/[PreferencesSession] included), so a host's existing
+// Matrix/reference screen can run with en-ru genuinely active — `!!` would crash there. Each
+// wrapper below falls back to an empty/blank instance of its own unchanged non-null return type:
+// "this pack has nothing to teach here", not a fabricated pl-shaped fact, and not a crash. Wiring a
+// *rich* en-ru-specific reference/matrix screen is report item 2's separate, unstarted work; this
+// only guarantees today's pl-shaped screens degrade to blank instead of throwing.
+private val emptyReferencePipeline = ReferencePipeline(title = "", steps = emptyList(), compactExample = "")
+private val emptyCaseTeaching = CaseTeaching(reactNote = "", compactNote = "", comparisonReadingHint = "")
+private val emptyVerbTeaching = VerbTeaching(
+    subjects = emptyList(),
+    genderControlLabel = VerbLabel("", ""),
+    genderOptions = emptyList(),
+    // every Tense key must resolve — hosts read `tenseLabels.getValue(tense)` unconditionally.
+    tenseLabels = Tense.entries.associateWith { VerbLabel("", "") },
+    reactFutureExplanation = "",
+    compactFutureExplanation = "",
+)
+private val emptyPossessiveDemo = PossessiveDemo(
+    nounId = "", adjectiveId = "", number = NumberGram.SG, cases = emptyList(),
+    invariableOwnerIds = emptySet(), invariableRule = "", variableRule = "",
+)
+private val emptyPronounTeaching = PronounTeaching(
+    personalTitle = "", reactIntro = "", compactIntro = "", reactFooter = "", webFooter = "", nativeFooter = "",
+    pronounIds = emptyList(), contexts = emptyList(), possessiveTitle = "", demo = emptyPossessiveDemo,
+)
+private val emptyRussianSupport = RussianSupport(fullTitle = "", compactTitle = "", columns = emptyList(), rows = emptyList())
+private val emptyContextHelp = CourseContextHelp(react = "", compact = "")
+private val emptyAspectNoPresent = CourseAspectNoPresent(compact = "", ios = "")
+
+val referenceChainRows: List<ReferenceChainRow> get() = packRegistry.active.referenceChainRows ?: emptyList()
 val courseChainPresentation: ChainPresentation get() = packRegistry.active.chainPresentation
-val referenceSystemCards: List<ReferenceSystemCard> get() = packRegistry.active.referenceSystemCards
-val referencePipeline: ReferencePipeline get() = packRegistry.active.referencePipeline
-val referenceCaseTeaching: CaseTeaching get() = packRegistry.active.referenceCaseTeaching
-val referenceVerbTeaching: VerbTeaching get() = packRegistry.active.referenceVerbTeaching
-val referencePronounTeaching: PronounTeaching get() = packRegistry.active.referencePronounTeaching
-val comparisonNounIds: List<String> get() = packRegistry.active.comparisonNounIds
-val referenceRussianSupport: RussianSupport get() = packRegistry.active.referenceRussianSupport
-val referenceTenseRows: List<ReferenceTenseRow> get() = packRegistry.active.referenceTenseRows
-val referenceAspectRows: List<ReferenceAspectRow> get() = packRegistry.active.referenceAspectRows
-val maleAccRows: List<MaleAccRow> get() = packRegistry.active.maleAccRows
-val courseMatrixIntroduction: String get() = packRegistry.active.matrixIntroduction
-val courseWebCaseCompositionHeader: String get() = packRegistry.active.webCaseCompositionHeader
-val courseContextHelp: CourseContextHelp get() = packRegistry.active.contextHelp
-val courseMaleAccIntro: String get() = packRegistry.active.maleAccIntro
-val courseAspectNoPresent: CourseAspectNoPresent get() = packRegistry.active.aspectNoPresent
+val referenceSystemCards: List<ReferenceSystemCard> get() = packRegistry.active.referenceSystemCards ?: emptyList()
+val referencePipeline: ReferencePipeline get() = packRegistry.active.referencePipeline ?: emptyReferencePipeline
+val referenceCaseTeaching: CaseTeaching get() = packRegistry.active.referenceCaseTeaching ?: emptyCaseTeaching
+val referenceVerbTeaching: VerbTeaching get() = packRegistry.active.referenceVerbTeaching ?: emptyVerbTeaching
+val referencePronounTeaching: PronounTeaching get() = packRegistry.active.referencePronounTeaching ?: emptyPronounTeaching
+val comparisonNounIds: List<String> get() = packRegistry.active.comparisonNounIds ?: emptyList()
+val referenceRussianSupport: RussianSupport get() = packRegistry.active.referenceRussianSupport ?: emptyRussianSupport
+val referenceTenseRows: List<ReferenceTenseRow> get() = packRegistry.active.referenceTenseRows ?: emptyList()
+val referenceAspectRows: List<ReferenceAspectRow> get() = packRegistry.active.referenceAspectRows ?: emptyList()
+val maleAccRows: List<MaleAccRow> get() = packRegistry.active.maleAccRows ?: emptyList()
+val courseMatrixIntroduction: String get() = packRegistry.active.matrixIntroduction ?: ""
+val courseWebCaseCompositionHeader: String get() = packRegistry.active.webCaseCompositionHeader ?: ""
+val courseContextHelp: CourseContextHelp get() = packRegistry.active.contextHelp ?: emptyContextHelp
+val courseMaleAccIntro: String get() = packRegistry.active.maleAccIntro ?: ""
+val courseAspectNoPresent: CourseAspectNoPresent get() = packRegistry.active.aspectNoPresent ?: emptyAspectNoPresent
 val courseVocabularyInstructions: CourseVocabularyInstructions get() = packRegistry.active.vocabularyInstructions
 val courseVocabularyUnavailableLabel: String get() = packRegistry.active.vocabularyUnavailableLabel
 
@@ -700,6 +786,11 @@ private fun JsonObject.string(key: String): String =
 private fun JsonObject.optionalString(key: String): String? = (get(key) as? JsonPrimitive)?.content
 private fun JsonObject.obj(key: String): JsonObject = getValue(key).jsonObject
 private fun JsonObject.rows(key: String): List<JsonObject> = getValue(key).jsonArray.map { it.jsonObject }
+
+/** [key] absent (a pack's `reference` block genuinely not covering this teaching topic, EN-22 fix)
+ *  is null, not a parse error — see [CoursePack.reference]'s own KDoc for why. */
+private fun JsonObject.optObj(key: String): JsonObject? = (get(key) as? JsonObject)
+private fun JsonObject.optRows(key: String): List<JsonObject>? = (get(key) as? JsonArray)?.map { it.jsonObject }
 private fun JsonObject.caseForms(): Map<GramCase, String> = GramCase.entries.associateWith { string(it.id) }
 private fun JsonObject.strictCaseForms(): Map<GramCase, String> {
     require(keys == GramCase.entries.map(GramCase::id).toSet())
@@ -801,6 +892,9 @@ private fun JsonObject.toNativeParallelPair(): NativeParallelPair =
 private fun JsonObject.endingParts(key: String): List<EndingPart> = rows(key).map { part ->
     EndingPart(part.string("text"), part.getValue("isEnding").jsonPrimitive.boolean, part.getValue("isChanged").jsonPrimitive.boolean)
 }
+/** Uniqueness only — emptiness is a legitimate result for a pl-shaped table a pack's own grammar
+ *  has nothing to contribute to (EnRuAcceptance §7 item 1: en's genderless [Noun]/[Adjective]/
+ *  [Verb] rows are filtered out upstream, not force-parsed), so it is never asserted here. */
 private fun <T> List<T>.requireUniqueIds(id: (T) -> String): List<T> = also { items ->
-    require(items.isNotEmpty() && items.map(id).distinct().size == items.size) { "Duplicate or missing course IDs" }
+    require(items.map(id).distinct().size == items.size) { "Duplicate course IDs" }
 }

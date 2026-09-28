@@ -23,7 +23,7 @@ import polski.data.caseSentencePrefix
 import polski.data.courseSentenceSeeds
 import polski.data.exerciseCopy
 import polski.data.generatedCurriculumJsonByLang
-import polski.data.nounById
+import polski.data.nounByIdOrNull
 import polski.data.packRegistry
 import polski.data.personalPronouns
 import polski.data.renderCoursePattern
@@ -76,8 +76,13 @@ internal class PackEngine(langId: String) {
      */
     val morphology by lazy { TableMorphology(parseForms(generatedFormsGeneratedJsonByLang[langId] ?: generatedFormsFixtureJson)) }
 
-    /** A noun's inherent `Gender` (§5.1's [LexemeFeatures]) — the only cross-slot agreement fact this pack needs. */
-    val lexemeFeatures = LexemeFeatures { nounId -> mapOf(FeatureKey("Gender") to FeatureValue(nounById(nounId).gender.id)) }
+    /** A noun's inherent `Gender` (§5.1's [LexemeFeatures]) — the only cross-slot agreement fact
+     *  this pack needs. Empty for a noun this pack has no gendered/case-declining entry for
+     *  (EnRuAcceptance §7 item 1: a genderless language's [nounByIdOrNull] lookup finds nothing) rather
+     *  than throwing — pl's own nouns are always found, so pl's result is unchanged. */
+    val lexemeFeatures = LexemeFeatures { nounId ->
+        nounByIdOrNull(nounId)?.let { noun -> mapOf(FeatureKey("Gender") to FeatureValue(noun.gender.id)) } ?: emptyMap()
+    }
     private val realizer by lazy { ConstructionRealizer(templates, morphology, lexemeFeatures) }
 
     /** Builds the live [ExerciseGenerator] for one session's [random]/[ids] ports. */
@@ -100,10 +105,13 @@ internal class PackEngine(langId: String) {
         constantSlots = recipeSet.constantSlots,
     )
 
-    /** The chain's 5 fixed steps with step 1's skill resolved for [nounId]'s own gender (UniversalCorePlan.md §5.3). */
+    /** The chain's 5 fixed steps with step 1's skill resolved for [nounId]'s own gender
+     *  (UniversalCorePlan.md §5.3) — falls back to `"default"` for a genderless language's noun,
+     *  same as an unrecognized gender id always has (EnRuAcceptance §7 item 1; en's own
+     *  `exercise-recipes.json` already declares only `"default"` for this exact reason). */
     fun chainSteps(nounId: String): List<ChainStepRecipe> {
-        val gender = nounById(nounId).gender.id
-        val firstSkill = recipeSet.firstSkillByGender[gender] ?: recipeSet.firstSkillByGender.getValue("default")
+        val gender = nounByIdOrNull(nounId)?.gender?.id
+        val firstSkill = gender?.let { recipeSet.firstSkillByGender[it] } ?: recipeSet.firstSkillByGender.getValue("default")
         val steps = recipeSet.chain
         return listOf(steps.first().copy(skillId = firstSkill)) + steps.drop(1)
     }

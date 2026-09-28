@@ -2,6 +2,73 @@
 
 Новые сверху. Формат: решение → почему → где подробно.
 
+## ADR-36 · 2026-09-28 · EnRuAcceptance §7 item 1: `CoursePack` больше не хардкодит pl-грамматику; активный-пакет-без-reference деградирует до пустого, а не падает
+
+`Plans/Kotlin/EnRuAcceptance-2026-09-28.md` §2/§7: `CoursePack`'s v1-схема писалась только под pl-ru
+и требовала pl-специфичную грамматику от любого пакета — `Noun.gender` (каждая noun-строка обязана
+иметь `"gender"`), case-keyed `possessiveForms`/`futureAuxiliary`, весь `reference`-блок (case/chain/
+system/pipeline/verb/pronoun/tense/aspect teaching, `comparisonNounIds`, matrix intro и т.д.), закрытый
+`PossessiveId` (не знал `its`). en-ru (`lang/en/lexicon.json` + `pairs/en-ru/pair.json`) честно не
+имеет ни рода, ни падежа, ни `reference`-блока — из-за чего `parsesCompletely()` падал на нём, и
+`usableCourseSelections`/`selectCoursePack`/`selectActiveCoursePack` его исключали: пикер мог
+*показать* «Английский», но выбор был no-op на всех 5 хостах (ADR-35's «iOS-пикер сейчас показывает
+только pl-ru» — тот самый симптом).
+
+Решение, часть 1 (генерализация схемы): `nouns`/`adjectives`/`verbs`/`personalPronouns` парсят
+`mapNotNull` — строка без pl-специфичной формы (нет `"gender"`, нет полного number×gender×case
+`forms`, нет `"aspect"`) просто не этой формы и пропускается, а не форсированно парсится в
+выдуманный род/падеж; `sentenceSeeds` валидируется против сырых id пакета, а не против уже
+отфильтрованных `nouns`/`adjectives`. Весь `reference`-блок (`caseReferenceRows` … `aspectNoPresent`)
+стал `nullable`: отсутствие своего top-level ключа — валидное «этот пакет не учит через эту тему»,
+не ошибка парсинга. `PossessiveId` получил `ITS` (en-only; pl просто никогда не декларирует его, так
+что pl-таблица полноты не задета). `PackEngine`/`PlEngine.kt`'s gender-driven lookups (`lexemeFeatures`,
+`chainSteps`) используют новый `nounByIdOrNull` и деградируют до `emptyMap()`/`"default"`-skill вместо
+падения на несуществующем noun-id — то же рассуждение, другая сторона.
+
+Решение, часть 2 (коррекция ревью — без неё пикер реально падает): генерализация part 1 сама по себе
+не требовалась переключать *настоящий*, host-facing `packRegistry.active` singleton — но
+`selectCoursePack`/`selectActiveCoursePack` (EN-22, тот же коммит) уже это делают, и Settings на
+android/iOS/macOS реально зовёт их. Публичные обёртки в `CourseData.kt`/`GrammarReference.kt`
+(`referenceChainRows`, `referenceSystemCards`, `referencePipeline`, `referenceCaseTeaching`,
+`referenceVerbTeaching`, `referencePronounTeaching`, `comparisonNounIds`, `referenceRussianSupport`,
+`referenceTenseRows`, `referenceAspectRows`, `maleAccRows`, `courseMatrixIntroduction`,
+`courseWebCaseCompositionHeader`, `courseContextHelp`, `courseMaleAccIntro`, `courseAspectNoPresent`,
+`polski.grammar.caseRows`/`genderNames`) держали новый nullable-тип за `!!`, рассчитывая, что только
+pl-ru когда-либо реально активен — а Matrix/Training reference и есть на каждом хосте, без пакет-id
+guard. Выбор target=English в Settings → открыть «Матрица» (или свернуть case-reference hint в
+Training) → `NullPointerException`, необнаруженный ни одним существующим тестом (все reference-тесты
+гоняли только против дефолтного pl-ru). Фикс: каждая обёртка вместо `!!` падает в пустой/blank
+инстанс своего *неизменного* non-null-типа (`emptyList()`, `""`, пустые `data class`-заглушки вроде
+`ReferencePipeline("", emptyList(), "")`) — «этому пакету нечего преподавать здесь», не выдуманный
+pl-факт (fabricated fact) и не крэш; `VerbTeaching.tenseLabels`-заглушка обязана нести все `Tense`,
+иначе `IosSnapshot.kt`/`MacSnapshot.kt`'s безусловный `tenseLabels.getValue(tense)` всё равно бы упал.
+Возврат к `!!` был бы честнее (сообщил бы о пробеле сразу), но сломал бы уже принятый контракт (нельзя
+делать эти проперти nullable — их читают `MatrixScreen.kt`/`AndroidMatrixScreen.kt`/`MatrixWeb.kt` в
+`:composeApp`, вне core-лейна этой задачи) и откатил бы уже добавленные Settings-тесты, которые
+проверяют, что выбор English реально переключает пакет.
+
+Не входит в этот ADR (явно отдельная, незакрытая работа — EnRuAcceptance §7 item 2): реальное,
+содержательное en-ru-содержимое для Matrix/reference-экранов и wiring Training-движка
+(`plExerciseGenerator`/`plMorphology`/`plChainSteps`) к активному, а не всегда-`"pl"`, пакету — без
+этого шага карточки Training остаются польскими даже при активном en-ru (известный, задокументированный
+разрыв, воспроизводится `IosSessionTest.currentSnapshotAfterSwitchingActivePackToEnRuDoesNotThrow`'s
+`Unknown skill case.acc.f`, не регрессия этого ADR).
+
+Проверено: `:shared:desktopTest` (358), `:shared:macosArm64Test` (379), `:shared:jsBrowserTest`/
+`:shared:wasmJsBrowserTest` (357/357), `:composeApp:desktopTest` (58), `:androidApp:testDebugUnitTest`
+(89) — все 0 failures; `:shared:iosSimulatorArm64Test` 395 tests/**1 known pre-existing failure**
+(выше, item 2, не эта работа); `npm test` 268/268; `npm run course:validate` — все 4 валидатора PASS;
+pl-ru golden/parity (`CoursePackLoaderTest`, `GrammarParityTest`, `TableMorphologyParityTest`,
+`TrainingParityTest`, `SchedulerParityTest`, `ProgressFixtureParityTest`) — byte-identical, не задеты.
+Новый `CoursePackSchemaTest.referenceAndMatrixWrappersDoNotCrashWithEnRuActive` — `selectCoursePack
+("en-ru")`, читает каждую из обёрток выше, восстанавливает pl-ru в `finally`.
+Где: `kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt`,
+`kotlin/shared/src/commonMain/kotlin/polski/grammar/GrammarReference.kt`,
+`kotlin/shared/src/commonMain/kotlin/polski/core/PlEngine.kt`,
+`kotlin/shared/src/commonMain/kotlin/polski/data/Nouns.kt`,
+`kotlin/shared/src/commonMain/kotlin/polski/model/Grammar.kt`,
+`kotlin/shared/src/commonTest/kotlin/polski/data/CoursePackSchemaTest.kt`.
+
 ## ADR-35 · 2026-09-28 · Интеграция lane-android/ios/macos (EN-22): один гейт `usableCourseSelections` для всех хостов, данные пакета читаются живьём
 
 Три лейна сделали EN-22 по-разному. Android (ADR-30/31): en-ru в `packRegistry`, но пикер и

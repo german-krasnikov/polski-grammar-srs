@@ -13,10 +13,9 @@ import kotlin.test.assertEquals
  * entrypoints every host (EN-22) calls; [packRegistry]/[PackRegistry]/[CoursePack] stay
  * `internal` to `:shared`.
  *
- * None of these tests mutate [packRegistry] (the one real process-wide singleton, unlike
- * [PackRegistryTest]'s isolated fixtures) — [selectActiveCoursePack] never actually switches to
- * en-ru today, since [usableCourseSelections] correctly refuses it (see that val's own KDoc for
- * why: [CoursePack]'s pl-shaped schema, not missing en-ru content).
+ * Every test that actually switches [packRegistry] (the one real process-wide singleton, unlike
+ * [PackRegistryTest]'s isolated fixtures) restores it to pl-ru afterwards, pass or fail, so it
+ * never leaks into another test sharing this binary.
  */
 class EnRuPackSwitchTest {
     @Test fun productionRegistryEmbedsBothPacksWithPlRuDefaultAndFirst() {
@@ -24,16 +23,23 @@ class EnRuPackSwitchTest {
         assertEquals(listOf("pl" to "ru", "en" to "ru"), availableCourseSelections)
     }
 
-    @Test fun enRuIsEmbeddedButNotYetSafeToMakeActive() {
-        // CoursePack's v1 schema requires grammatical gender/case English genuinely doesn't have
-        // (Noun.gender, case-keyed possessiveForms/futureAuxiliary/reference rows) — a real schema
-        // gap, not missing en-ru content; this stays red until that schema is generalized.
-        assertEquals(listOf("pl" to "ru"), usableCourseSelections)
+    /**
+     * EnRuAcceptance §7 item 1: [CoursePack]'s v1 schema no longer hardcodes pl's grammatical
+     * gender/case onto every pack (`Noun.gender`, case-keyed `possessiveForms`/`futureAuxiliary`/
+     * reference rows are each derived from what the pack's own JSON declares) — en-ru's genuinely
+     * caseless/genderless data now parses completely too.
+     */
+    @Test fun enRuIsNowSafeToMakeActive() {
+        assertEquals(listOf("pl" to "ru", "en" to "ru"), usableCourseSelections)
     }
 
-    @Test fun selectingEnRuIsANoOpUntilItPassesTheUsabilityProbe() {
-        selectActiveCoursePack("en-ru")
-        assertEquals("pl-ru", packRegistry.active.pairId)
+    @Test fun selectingEnRuActuallySwitchesTheActivePack() {
+        try {
+            selectActiveCoursePack("en-ru")
+            assertEquals("en-ru", packRegistry.active.pairId)
+        } finally {
+            selectActiveCoursePack("pl-ru")
+        }
     }
 
     @Test fun selectingAnUnknownPairIdIsANoOpNotACrash() {

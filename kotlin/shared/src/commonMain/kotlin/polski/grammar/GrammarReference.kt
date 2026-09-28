@@ -14,10 +14,15 @@ data class CaseRow(
     val skill: String? = null,
 )
 
-val caseRows: List<CaseRow> by lazy {
-    packRegistry.active.caseReferenceRows.map { CaseRow(it.id, it.pl, it.ru, it.question, it.trigger, it.skill) }
-}
+// EN-22 fix (EnRuAcceptance §7 item 1, corrected): read fresh (`get()`, not `by lazy` — the same
+// "actually changes after a later selectCoursePack" fix CourseData.kt already applies) and fall
+// back to empty/blank instead of `!!` — see CourseData.kt's reference-wrapper comment for why: a
+// pack whose `reference` block has no case rows/gender names (en-ru) degrades to nothing taught
+// here rather than crashing a host's reference screen once that pack is genuinely active.
+val caseRows: List<CaseRow> get() =
+    (packRegistry.active.caseReferenceRows ?: emptyList()).map { CaseRow(it.id, it.pl, it.ru, it.question, it.trigger, it.skill) }
 
-val genderNames: Map<Gender, String> by lazy {
-    Gender.entries.associateWith { packRegistry.active.referenceGenderNames.getValue(it.id) }
+val genderNames: Map<Gender, String> get() {
+    val names = packRegistry.active.referenceGenderNames ?: emptyMap()
+    return Gender.entries.associateWith { names[it.id] ?: "" }
 }

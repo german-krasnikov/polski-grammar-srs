@@ -11,7 +11,9 @@ class CourseMorphologyTest {
     @Test
     fun authoredTablesAreCompleteAndUsedByPublicGrammar() {
         val owners = packRegistry.active.possessiveForms
-        assertEquals(PossessiveId.entries.toSet(), owners.keys)
+        // PossessiveId.ITS is en-ru-only (EnRuAcceptance §7 item 1) — pl-ru's own table never
+        // declares it, so it is excluded from pl's completeness check here.
+        assertEquals(PossessiveId.entries.toSet() - PossessiveId.ITS, owners.keys)
         for ((id, forms) in owners) when (forms) {
             is CoursePossessiveForms.Invariant -> {
                 assertEquals(forms.value, possessiveForm(id, Gender.F, NumberGram.SG, GramCase.ACC))
@@ -29,9 +31,12 @@ class CourseMorphologyTest {
                 }
             }
         }
+        // pl-ru always declares a compound future auxiliary (EnRuAcceptance §7 item 1: it is
+        // absent, and null, only for a pack like en-ru with no such tense) — `!!` is safe here.
+        val futureAuxiliary = packRegistry.active.futureAuxiliary!!
         for (number in NumberGram.entries) for (person in Person.entries) {
-            assertEquals(packRegistry.active.futureAuxiliary.forms.getValue(number).getValue(person),
-                verbForm(packRegistry.active.futureAuxiliary.verbId, Tense.FUTURE, person, number))
+            assertEquals(futureAuxiliary.forms.getValue(number).getValue(person),
+                verbForm(futureAuxiliary.verbId, Tense.FUTURE, person, number))
         }
         assertFailsWith<IllegalStateException> { verbForm("missing", Tense.FUTURE, Person.FIRST, NumberGram.SG) }
         assertFailsWith<IllegalStateException> { verbForm("buyDone", Tense.PRESENT, Person.FIRST, NumberGram.SG) }

@@ -128,37 +128,39 @@ class IosPreferencesSessionTest {
     }
 
     /**
-     * EN-22 (Plans/Kotlin/EnRuPackPlan.md §6) + integration ADR-35: the pickers list only usable
-     * packs ([polski.data.availableCoursePacks]); en-ru is registered but its content does not
-     * parse through [polski.data.CoursePack] yet, so choosing it is rejected and never moves the
-     * production [packRegistry]. Restores pl-ru in `finally` regardless of outcome.
+     * EnRuAcceptance §7 item 1 generalized [polski.data.CoursePack] enough that en-ru now passes
+     * [polski.data.usableCourseSelections] too, so the pickers list both real packs and switching
+     * to en-ru succeeds instead of being rejected. Restores pl-ru in `finally` regardless of
+     * outcome, since [packRegistry] is a process-wide singleton shared with every other test.
      */
     @Test
-    fun targetAndNativeListOnlyUsablePacksAndRejectUnusableOnes() {
+    fun targetAndNativeListBothUsablePacksAndRejectTrulyUnknownOnes() {
         val suite = "polski-ios-preferences-course-${Random.nextLong()}"
         val defaults = assertNotNull(NSUserDefaults(suiteName = suite))
         defaults.removePersistentDomainForName(suite)
         try {
             val session = IosPreferencesSession(defaults)
             val options = Json.parseToJsonElement(session.currentSnapshot()).jsonObject.getValue("coursePacks").jsonArray
-            assertEquals(listOf("pl" to "ru"), options.map {
+            assertEquals(listOf("pl" to "ru", "en" to "ru"), options.map {
                 it.jsonObject.getValue("target").jsonPrimitive.content to it.jsonObject.getValue("native").jsonPrimitive.content
             })
             assertEquals("Неизвестная пара языков: de-ru", session.set(field = "target", value = "de"))
-            assertEquals("Неизвестная пара языков: en-ru", session.set(field = "target", value = "en"))
             assertEquals("pl", session.snapshotString("target"))
             assertEquals("pl-ru", packRegistry.active.pairId, "a rejected target must not move the active pack")
+            assertNull(session.set(field = "target", value = "en"))
+            assertEquals("en", session.snapshotString("target"))
+            assertEquals("en-ru", packRegistry.active.pairId)
             assertNull(session.set(field = "native", value = "ru"))
-            assertEquals("pl-ru", packRegistry.active.pairId)
+            assertEquals("en-ru", packRegistry.active.pairId)
         } finally {
             packRegistry.select("pl-ru")
             defaults.removePersistentDomainForName(suite)
         }
     }
 
-    /** A saved but unusable pair (en-ru) must not crash a cold start nor move the active pack. */
+    /** A saved, now-usable pair (en-ru) is applied on cold start, same as pl-ru always was. */
     @Test
-    fun reapplySavedCoursePackLeavesAnUnusableSavedPackAlone() {
+    fun reapplySavedCoursePackAppliesAUsableSavedPack() {
         val suite = "polski-ios-preferences-course-coldstart-${Random.nextLong()}"
         val defaults = assertNotNull(NSUserDefaults(suiteName = suite))
         defaults.removePersistentDomainForName(suite)
@@ -166,7 +168,7 @@ class IosPreferencesSessionTest {
             defaults.setObject(UserPreferencesCodec.encode(UserPreferencesV2(target = "en", native = "ru")), forKey = "polski-preferences-v2")
             val session = IosPreferencesSession(defaults)
             session.reapplySavedCoursePack()
-            assertEquals("pl-ru", packRegistry.active.pairId)
+            assertEquals("en-ru", packRegistry.active.pairId)
             session.currentSnapshot()
         } finally {
             packRegistry.select("pl-ru")

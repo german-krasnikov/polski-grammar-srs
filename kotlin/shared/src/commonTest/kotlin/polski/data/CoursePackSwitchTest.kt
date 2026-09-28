@@ -6,15 +6,19 @@ import kotlin.test.assertFails
 
 /**
  * EN-22 (Plans/Kotlin/EnRuPackPlan.md §6): [availableCoursePacks] is what a host's target/native
- * picker lists; [selectCoursePack] is what it calls on selection. Only pl-ru is safely registered
- * today — wiring en-ru in throws `IllegalStateException: Missing course field gender` from
- * [CoursePack.nouns] (see `packRegistry`'s own KDoc for the real, separate schema gap this
- * surfaced) — so this pins today's honest single-pack reality, not a second pack that would crash.
+ * picker lists; [selectCoursePack] is what it calls on selection. EnRuAcceptance §7 item 1
+ * generalized [CoursePack] enough that en-ru now passes [usableCourseSelections]'s probe too, so
+ * both registered packs are real, selectable options — restored to pl-ru at the end of every test
+ * that switches away, since [packRegistry] is a process-wide singleton shared with every other
+ * test in this binary.
  */
 class CoursePackSwitchTest {
     @Test
-    fun availablePacksListsPlRuWithItsRealLanguages() {
-        assertEquals(listOf(CoursePackOption("pl-ru", target = "pl", native = "ru")), availableCoursePacks)
+    fun availablePacksListPlRuFirstThenEnRu() {
+        assertEquals(
+            listOf(CoursePackOption("pl-ru", target = "pl", native = "ru"), CoursePackOption("en-ru", target = "en", native = "ru")),
+            availableCoursePacks,
+        )
     }
 
     @Test
@@ -24,7 +28,7 @@ class CoursePackSwitchTest {
 
     @Test
     fun selectingAnUnregisteredPairIdThrowsInsteadOfSilentlySwitching() {
-        assertFails { selectCoursePack("en-ru") }
+        assertFails { selectCoursePack("de-ru") }
         assertEquals("pl-ru", activeCoursePackId, "a failed select must not have changed the active pack")
     }
 
@@ -32,5 +36,15 @@ class CoursePackSwitchTest {
     fun selectingThePackAlreadyActiveIsANoOp() {
         selectCoursePack("pl-ru")
         assertEquals("pl-ru", activeCoursePackId)
+    }
+
+    @Test
+    fun selectingEnRuSwitchesTheActivePack() {
+        try {
+            selectCoursePack("en-ru")
+            assertEquals("en-ru", activeCoursePackId)
+        } finally {
+            selectCoursePack("pl-ru")
+        }
     }
 }

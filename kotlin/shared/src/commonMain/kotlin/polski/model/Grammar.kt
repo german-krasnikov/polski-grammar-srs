@@ -28,8 +28,10 @@ enum class Tense(val id: String) {
     companion object { fun fromId(id: String): Tense = entries.firstOrNull { it.id == id } ?: error("Unknown tense $id") }
 }
 
+/** [ITS] is an en-ru-only value (English's third-person-singular-neuter possessive, EnRuAcceptance
+ *  §7 item 1) — pl has no equivalent, so pl's own possessive rows never declare it. */
 enum class PossessiveId(val id: String) {
-    MY("my"), YOUR("your"), HIS("his"), HER("her"), OUR("our"), YOUR_PLURAL("yourPlural"), THEIR("their");
+    MY("my"), YOUR("your"), HIS("his"), HER("her"), OUR("our"), YOUR_PLURAL("yourPlural"), THEIR("their"), ITS("its");
     companion object { fun fromId(id: String): PossessiveId = entries.firstOrNull { it.id == id } ?: error("Unknown possessive $id") }
 }
 

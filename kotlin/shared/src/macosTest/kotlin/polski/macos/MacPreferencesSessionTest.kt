@@ -49,25 +49,28 @@ class MacPreferencesSessionTest {
     }
 
     /**
-     * EN-22: the target/native pickers next to the style picker. Only pl-ru is a real, registered
-     * pack today (see `polski.data.packRegistry`'s own KDoc for why en-ru isn't wired in yet), so
-     * this pins the honest current shape — one pack option, pl-ru selected and unrejectable — not a
-     * second pack this bridge can't safely offer.
+     * EnRuAcceptance §7 item 1 generalized [polski.data.CoursePack] enough that en-ru now passes
+     * [polski.data.usableCourseSelections] too, so this bridge's target/native pickers list both
+     * real, registered packs — not only pl-ru.
      */
-    @Test fun defaultSnapshotExposesPlRuAsTheOnlyPackOption() = withSession { session ->
+    @Test fun defaultSnapshotExposesBothRegisteredPackOptions() = withSession { session ->
         val snapshot = snapshotOf(session)
         assertEquals("pl", snapshot.getValue("target").jsonPrimitive.content)
         assertEquals("ru", snapshot.getValue("native").jsonPrimitive.content)
         val packs = snapshot.getValue("packs").let { it as kotlinx.serialization.json.JsonArray }
-        assertEquals(1, packs.size)
-        val onlyPack = packs.single() as JsonObject
-        assertEquals("pl-ru", onlyPack.getValue("pairId").jsonPrimitive.content)
-        assertEquals("Польский", onlyPack.getValue("targetLabel").jsonPrimitive.content)
-        assertEquals("Русский", onlyPack.getValue("nativeLabel").jsonPrimitive.content)
+        assertEquals(2, packs.size)
+        val plRu = packs[0] as JsonObject
+        assertEquals("pl-ru", plRu.getValue("pairId").jsonPrimitive.content)
+        assertEquals("Польский", plRu.getValue("targetLabel").jsonPrimitive.content)
+        assertEquals("Русский", plRu.getValue("nativeLabel").jsonPrimitive.content)
+        val enRu = packs[1] as JsonObject
+        assertEquals("en-ru", enRu.getValue("pairId").jsonPrimitive.content)
+        assertEquals("Английский", enRu.getValue("targetLabel").jsonPrimitive.content)
+        assertEquals("Русский", enRu.getValue("nativeLabel").jsonPrimitive.content)
     }
 
     @Test fun settingTargetToAnUnregisteredLanguageIsRejected() = withSession { session ->
-        val error = session.set("target", "en")
+        val error = session.set("target", "de")
         assertEquals(true, error != null)
         assertEquals("pl", snapshotOf(session).getValue("target").jsonPrimitive.content)
     }
@@ -76,5 +79,22 @@ class MacPreferencesSessionTest {
         val error = session.set("target", "pl")
         assertNull(error)
         assertEquals("pl", snapshotOf(session).getValue("target").jsonPrimitive.content)
+    }
+
+    /**
+     * EnRuAcceptance §7 item 1: picking English is now a real, accepted switch — this bridge's own
+     * [syncActivePack] then flips the process-wide [polski.data.packRegistry] to en-ru, so this
+     * test restores pl-ru afterwards (`finally`) the same way [polski.data.EnRuPackSwitchTest]'s
+     * own switching tests do, since that registry is shared with every other test in this binary.
+     */
+    @Test fun settingTargetToEnglishSwitchesToTheEnRuPack() = withSession { session ->
+        try {
+            val error = session.set("target", "en")
+            assertNull(error)
+            assertEquals("en", snapshotOf(session).getValue("target").jsonPrimitive.content)
+            assertEquals("en-ru", polski.data.activeCoursePackId)
+        } finally {
+            session.set("target", "pl")
+        }
     }
 }
