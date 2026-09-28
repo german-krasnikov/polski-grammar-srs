@@ -109,14 +109,14 @@ class MacSnapshotStyleBlocksTest {
     // EN-21 (`Plans/Kotlin/EnRuPackPlan.md` §4.2/§4.3/§6): `styleBlocks.lifehacks` is a separate
     // field from `frontBlocks`/`backBlocks` — a lifehack is not a `BlockKind`, it shows the same
     // way for every style (`MacFlashCardView`'s `backFace` renders it once, outside `MacStyleBlockView`'s
-    // switch). `case.inst` has exactly one authored pl-ru record (`courses/pairs/pl-ru/lifehacks.json`,
-    // EN-20) with no `source.url`, so this also locks the optional-url shape end to end.
+    // switch). `case.inst`'s original EN-20 record (still first — the §4.4/§7 follow-up only ever
+    // appends) has no `source.url`, so this also locks the optional-url shape end to end.
     @Test
     fun backBlocksLifehacksMatchTheActiveSkillsAuthoredPackLifehack() = withSession { session ->
         session.dispatch("skill", "case.inst")
 
         val lifehacks = state(session).getValue("styleBlocks").jsonObject.getValue("lifehacks").jsonArray
-        assertEquals(1, lifehacks.size)
+        assertEquals(2, lifehacks.size)
         val hack = lifehacks[0].jsonObject
         assertTrue(hack.getValue("text").jsonPrimitive.content.contains("być"))
         assertEquals("editorial", hack.getValue("status").jsonPrimitive.content)
@@ -124,13 +124,17 @@ class MacSnapshotStyleBlocksTest {
         assertEquals(JsonNull, hack.getValue("url"))
     }
 
-    // `case.acc.n` (curriculum's first A1 skill) has no entry in the 5-record pl-ru lifehacks.json.
+    // Full 16-skill pl-ru coverage (EnRuPackPlan.md §4.4/§7 follow-up) means no real skill is empty
+    // any more — `case.acc.n` now has 2 authored records instead. Genuinely empty-list snapshot
+    // behavior (the `?: emptyList()` branch) stays covered by
+    // `LifehackTest.staticProviderReturnsEmptyForASkillWithNoAuthoredLifehack`, a fixture-id test.
     @Test
-    fun backBlocksLifehacksEmptyForASkillWithNoAuthoredLifehack() = withSession { session ->
+    fun backBlocksLifehacksListEveryAuthoredRecordForASkillWithMoreThanOne() = withSession { session ->
         session.dispatch("skill", "case.acc.n")
 
         val lifehacks = state(session).getValue("styleBlocks").jsonObject.getValue("lifehacks").jsonArray
-        assertTrue(lifehacks.isEmpty())
+        assertEquals(2, lifehacks.size)
+        assertTrue(lifehacks.all { it.jsonObject.getValue("status").jsonPrimitive.content == "editorial" })
     }
 
     @Test

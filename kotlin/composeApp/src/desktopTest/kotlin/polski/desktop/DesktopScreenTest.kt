@@ -388,9 +388,10 @@ class DesktopScreenTest {
         assertEquals(AppAction.Rate(exercise.id, Rating.Again), actions.single())
     }
 
-    // EN-21 (`Plans/Kotlin/EnRuPackPlan.md` §4.2/§4.3): `case.inst` has exactly one authored pl-ru
-    // record (`courses/pairs/pl-ru/lifehacks.json`, EN-20) — collapsed by default, with the source
-    // attribution as the toggle's own always-visible label.
+    // EN-21 (`Plans/Kotlin/EnRuPackPlan.md` §4.2/§4.3): `case.inst`'s original EN-20 record (still
+    // first — the §4.4/§7 full-coverage follow-up only ever appends) is collapsed by default, with
+    // the source attribution as the toggle's own always-visible label. `case.inst` now has 2
+    // authored records, so the toggle/citation matchers below use `onAllNodesWithText(...)[0]`.
     @OptIn(ExperimentalTestApi::class)
     @Test
     fun revealedTrainingShowsACollapsedLifehackForASkillThatHasOne() = runComposeUiTest {
@@ -410,17 +411,20 @@ class DesktopScreenTest {
                 }
             }
         }
-        onNodeWithText("Лайфхак · источник: editorial").assertExists()
+        onAllNodesWithText("Лайфхак · источник: editorial").assertCountEquals(2)
         onNodeWithText("Bielec, D. (1998)", substring = true).assertDoesNotExist()
-        onNodeWithText("Лайфхак · источник: editorial").performScrollTo().performClick()
+        onAllNodesWithText("Лайфхак · источник: editorial")[0].performScrollTo().performClick()
         onNodeWithText("Bielec, D. (1998)", substring = true).assertExists()
     }
 
-    // `case.acc.n` (curriculum's first A1 skill) has no entry in the 5-record pl-ru lifehacks.json.
+    // Full 16-skill pl-ru coverage (EnRuPackPlan.md §4.4/§7 follow-up) means no real skill is empty
+    // any more — `case.acc.n` now has 2 authored records instead of 0. Genuinely empty rendering
+    // (`renderLifehackBlock`'s early return) stays covered at the provider layer by
+    // `LifehackTest.staticProviderReturnsEmptyForASkillWithNoAuthoredLifehack`, a fixture-id test.
     @OptIn(ExperimentalTestApi::class)
     @Test
-    fun revealedTrainingShowsNoLifehackBlockForASkillWithNoAuthoredOne() = runComposeUiTest {
-        val exercise = PlExerciseEngine(RandomSource { 0.1 }, ExerciseIdFactory { "desktop-lifehack-absent" })
+    fun revealedTrainingShowsBothLifehacksForASkillWithMoreThanOne() = runComposeUiTest {
+        val exercise = PlExerciseEngine(RandomSource { 0.1 }, ExerciseIdFactory { "desktop-lifehack-two" })
             .generateForSkill("case.acc.n")
         val actions = mutableListOf<AppAction>()
         setContent {
@@ -436,6 +440,6 @@ class DesktopScreenTest {
                 }
             }
         }
-        onNodeWithText("Лайфхак", substring = true).assertDoesNotExist()
+        onAllNodesWithText("Лайфхак · источник: editorial").assertCountEquals(2)
     }
 }

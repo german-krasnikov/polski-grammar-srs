@@ -295,5 +295,14 @@ ADR-15 фиксирует порядок «UC-09 (таблицы как данн
 - Полное покрытие UC-09 по всем 5 хостам (только EN-24 minimum slice).
 - Present Perfect / Present Perfect Continuous как отдельные skills (естественное B2-расширение, не часть 16).
 - Серверная часть `LifehackProvider` (голоса/community-статус) — порт зарезервирован, реализация — отдельная будущая задача (ADR-15 буквально).
-- Полное покрытие лайфхаками всех 16 pl-ru skills (только первые 5, §4.4).
+- ~~Полное покрытие лайфхаками всех 16 pl-ru skills (только первые 5, §4.4).~~ Закрыто отдельной
+  задачей после EN-20: `courses/pairs/pl-ru/lifehacks.json` теперь содержит по 2 записи на каждый
+  из 16 skills (32 записи), каждая с реальной проверяемой ссылкой (research-грамматики: Swan 2002,
+  Bielec 1998, Sadowska 2012, Rothstein 1993, Sussex & Cubberley 2006, Corbett 1991, Franks & King
+  2000, Dickey 2000; методические — Rohrer & Taylor 2007, Roediger & Karpicke 2006), status
+  `editorial` (ADR-15: без выдуманных `verified`-заявлений). Тесты обновлены на контракт «≥2 на
+  каждый skill» (`tests/lifehacks-pl-ru.test.ts`), затронутые host-тесты, зависевшие от старого
+  5-записного/пустого содержимого (`tests/browser/kotlin-lifehack-block.spec.ts`,
+  `MacSnapshotStyleBlocksTest.kt`, `DesktopScreenTest.kt`), обновлены на реальное новое содержимое,
+  не на моки.
 - Выбор конкретного revision/SHA частотного списка (EN-15 сама фиксирует, не предрешено здесь, чтобы не задокументировать непроверенный факт).
