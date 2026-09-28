@@ -45,25 +45,35 @@ struct TrainingSnapshot: Decodable {
             let beforeParts: [HighlightPart]
             let afterParts: [HighlightPart]
         }
-        struct CaseRow: Decodable {
-            let title: String
-            let question: String
-            let trigger: String
-            let phrasePair: ContrastPair
-            let sentencePair: ContrastPair
-        }
         /// [example] is the flat `"żona → żonę → żony"` label, kept only for accessibility/VoiceOver
         /// (`Text` cannot describe a `Text`-chain's own accessibility label from its parts); the
         /// visible chain renders from [steps] (`MacSnapshot.kt`'s `card.steps.zipWithNext`), one
         /// [ContrastPair] per arrow, each carrying its own morpheme-level `before`/`after` parts —
         /// C2, EmphasisUXAudit E6.
         struct SystemCard: Decodable { let id: String; let title: String; let explanation: String; let example: String; let steps: [ContrastPair] }
+        /// UC-09 part 2/2 (UniversalCorePlan.md §5.3.3, ADR-21): the generic wire shape for one
+        /// `MatrixTableViewModel` ([MatrixTableSnapshot.kt]'s `toJson()`) — a row-axis × column-list
+        /// table where each cell is either plain text or a "было → стало" [ContrastPair]. One struct
+        /// and one renderer (`matrixTableView` below) now covers every table this screen shows,
+        /// instead of a bespoke `Decodable`/view pair per section.
+        struct Cell: Decodable { let value: String; let contrast: ContrastPair? }
+        struct Row: Decodable { let header: String; let cells: [Cell] }
+        struct Table: Decodable { let rowHeaderLabel: String; let columnHeaders: [String]; let rows: [Row] }
         let section: String
         let matrixIntroduction: String
         let pipelineTitle: String
         let pipelineSummary: String
         let systemCards: [SystemCard]
-        let cases: [CaseRow]
+        let caseNote: String
+        let casesTable: Table
+        let comparisonTable: Table
+        let verbFutureExplanation: String
+        let verbsTable: Table
+        let pronounIntro: String
+        let pronounFooter: String
+        let possessiveTitle: String
+        let personalPronounsTable: Table
+        let possessivesTable: Table
     }
     struct Skill: Decodable { let id: String; let title: String; let group: String; let reviews: Int; let correct: Int; let due: Int64 }
     /// M12: mirrors `UiEffect` — a host must claim each id once and acknowledge it so it leaves
@@ -720,17 +730,26 @@ private struct MatrixView: View {
                     }.pickerStyle(.segmented)
                         .padding(3)
 
-                    if matrix.section == "Cases" {
-                        ForEach(matrix.cases, id: \.title) { row in
-                            GroupBox(row.title) {
-                                VStack(alignment: .leading, spacing: 9) {
-                                    Text("\(row.question) · \(row.trigger)").foregroundStyle(.secondary)
-                                    contrastPair(row.phrasePair).font(.headline)
-                                    contrastPair(row.sentencePair)
-                                }.frame(maxWidth: .infinity, alignment: .leading)
-                            }
+                    switch matrix.section {
+                    case "Cases":
+                        GroupBox("Все семь падежей на одной группе слов") {
+                            matrixTableView(matrix.casesTable)
+                            Text(matrix.caseNote).foregroundStyle(.secondary)
                         }
-                    } else {
+                        GroupBox("Сравнение типов склонения") { matrixTableView(matrix.comparisonTable) }
+                    case "Verbs":
+                        GroupBox("Лицо × число × время") {
+                            matrixTableView(matrix.verbsTable)
+                            Text(matrix.verbFutureExplanation).foregroundStyle(.secondary)
+                        }
+                    case "Pronouns":
+                        GroupBox("Местоимения") {
+                            Text(matrix.pronounIntro)
+                            matrixTableView(matrix.personalPronounsTable)
+                            Text(matrix.pronounFooter).foregroundStyle(.secondary)
+                        }
+                        GroupBox(matrix.possessiveTitle) { matrixTableView(matrix.possessivesTable) }
+                    default:
                         Text(matrix.pipelineTitle).font(.headline)
                         Text(matrix.pipelineSummary)
                         ForEach(matrix.systemCards, id: \.id) { card in
@@ -756,6 +775,35 @@ private struct MatrixView: View {
                 .accessibilityLabel("Было: \(pair.from)")
             (Text("→ ") + highlightedText(pair.afterParts, before: false))
                 .accessibilityLabel("Стало: \(pair.to)")
+        }
+        .textSelection(.enabled)
+    }
+
+    /// UC-09 part 2/2: the one renderer every "Матрица" table now shares — a header row plus data
+    /// rows, each cell either plain text or a [contrastPair]. Column width matches the existing
+    /// desktop/web tables' own convention (a narrower leading row-label column, wider data columns).
+    private func matrixTableView(_ table: TrainingSnapshot.Matrix.Table) -> some View {
+        ScrollView(.horizontal) {
+            VStack(alignment: .leading, spacing: 6) {
+                HStack(alignment: .top, spacing: 12) {
+                    Text(table.rowHeaderLabel).bold().frame(width: 170, alignment: .leading)
+                    ForEach(table.columnHeaders, id: \.self) { header in
+                        Text(header).bold().frame(width: 200, alignment: .leading)
+                    }
+                }
+                Divider()
+                ForEach(Array(table.rows.enumerated()), id: \.offset) { _, row in
+                    HStack(alignment: .top, spacing: 12) {
+                        Text(row.header).frame(width: 170, alignment: .leading)
+                        ForEach(Array(row.cells.enumerated()), id: \.offset) { _, cell in
+                            Group {
+                                if let contrast = cell.contrast { contrastPair(contrast) } else { Text(cell.value) }
+                            }.frame(width: 200, alignment: .leading)
+                        }
+                    }
+                    Divider()
+                }
+            }
         }
         .textSelection(.enabled)
     }

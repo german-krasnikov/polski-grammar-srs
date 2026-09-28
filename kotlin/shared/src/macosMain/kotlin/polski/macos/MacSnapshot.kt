@@ -30,7 +30,6 @@ import polski.data.maleAccRows
 import polski.data.courseMatrixIntroduction
 import polski.data.courseAspectNoPresent
 import polski.grammar.caseRows
-import polski.grammar.caseSentence
 import polski.grammar.nounPhrase
 import polski.grammar.possessiveForm
 import polski.grammar.verbForm
@@ -39,8 +38,6 @@ import polski.model.Gender
 import polski.model.GramCase
 import polski.model.NumberGram
 import polski.model.Person
-import polski.model.PossessiveId
-import polski.model.SentenceSeed
 import polski.model.Tense
 import polski.presentation.AppUiState
 import polski.presentation.CardPhase
@@ -51,6 +48,13 @@ import polski.presentation.changeHighlightParts
 import polski.presentation.sentenceHighlightParts
 import polski.presentation.ChangeSide
 import polski.presentation.ContrastPair
+import polski.presentation.casesFullTable
+import polski.presentation.comparisonTable
+import polski.presentation.contrastPairJson
+import polski.presentation.personalPronounsTable
+import polski.presentation.possessivesTable
+import polski.presentation.toJson
+import polski.presentation.verbsTable
 import polski.presentation.StyleComposer
 import polski.presentation.StyleId
 import polski.presentation.StylePhase
@@ -194,22 +198,11 @@ private fun styleBlocksSnapshot(state: AppUiState): JsonElement {
     }
 }
 
-private fun pairSnapshot(pair: ContrastPair): JsonObject = buildJsonObject {
-    put("from", pair.from)
-    put("to", pair.to)
-    put("beforeParts", JsonArray(pair.parts(ChangeSide.Before).map { part -> buildJsonObject {
-        put("text", part.text); put("changed", part.isChanged)
-    } }))
-    put("afterParts", JsonArray(pair.parts(ChangeSide.After).map { part -> buildJsonObject {
-        put("text", part.text); put("changed", part.isChanged)
-    } }))
-}
+private fun pairSnapshot(pair: ContrastPair): JsonObject = contrastPairJson(pair)
 
 private fun matrixSnapshot(state: AppUiState): JsonElement {
     val selection = state.matrixSelection
     val number = NumberGram.fromId(selection.numberId)
-    val owner = PossessiveId.fromId(selection.ownerId)
-    val seed = SentenceSeed(selection.nounId, selection.adjectiveId)
     return buildJsonObject {
         put("section", selection.section.name)
         put("matrixIntroduction", courseMatrixIntroduction)
@@ -235,6 +228,15 @@ private fun matrixSnapshot(state: AppUiState): JsonElement {
             put("comparisons", JsonArray(row.comparisons.map(::pairSnapshot)))
         } }))
         put("caseNote", referenceCaseTeaching.compactNote)
+        // UC-09 part 2/2 (UniversalCorePlan.md §5.3.3, ADR-21): these five tables replace what used
+        // to be hand-built per field below (`cases`/`comparison`/`verbsRows`/`pronouns`/`possessives`)
+        // with the shared engine's [MatrixTableViewModel], serialized once by [toJson]. The older
+        // per-field arrays stay below unchanged for now, so nothing already reading them breaks.
+        put("casesTable", casesFullTable(selection).toJson())
+        put("comparisonTable", comparisonTable(selection).toJson())
+        put("verbsTable", verbsTable(selection).toJson())
+        put("personalPronounsTable", personalPronounsTable().toJson())
+        put("possessivesTable", possessivesTable().toJson())
         put("systemCards", JsonArray(referenceSystemCards.map { card -> buildJsonObject {
             put("id", card.id); put("title", card.title)
             put("explanation", card.explanation); put("example", card.example)
@@ -287,16 +289,6 @@ private fun matrixSnapshot(state: AppUiState): JsonElement {
                     put("text", part.text); put("changed", part.isChanged)
                 } }))
             } }))
-        } }))
-        put("cases", JsonArray(caseRows.map { row -> buildJsonObject {
-            put("title", "${row.pl} · ${row.ru}")
-            put("question", row.question); put("trigger", row.trigger)
-            val phrase = nounPhrase(selection.nounId, row.id, number, selection.adjectiveId, owner)
-            val sentence = caseSentence(seed, row.id, owner, number)
-            put("phrase", phrase); put("sentence", sentence)
-            put("phrasePair", pairSnapshot(ContrastPair.generated(
-                nounPhrase(selection.nounId, GramCase.NOM, number, selection.adjectiveId, owner), phrase)))
-            put("sentencePair", pairSnapshot(ContrastPair.generated(caseSentence(seed, GramCase.NOM, owner, number), sentence)))
         } }))
         put("comparisonCases", JsonArray(caseRows.map { choice(it.id.name, it.pl) }))
         put("comparison", JsonArray(comparisonNounIds.map { id ->
