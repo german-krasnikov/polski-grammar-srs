@@ -2,6 +2,66 @@
 
 Новые сверху. Формат: решение → почему → где подробно.
 
+## ADR-28 · 2026-09-28 · EN-24 (web): UC-09 часть 2/2 минимум — English-таблица на `MatrixWeb.kt`, `forms.generated.json(en)`
+
+Plans/Kotlin/EnRuPackPlan.md §5 гэп H / §6 EN-24: минимальный слайс — хотя бы одна живая английская
+матрица через уже готовый `MatrixTableEngine`/`MatrixTableViewModel` (ADR-21/22), не новый ad hoc
+код. Новый `scripts/build-pack-en.mjs` материализует `courses/lang/en/forms.generated.json` из
+`lang/en/lexicon.json`'s флэт-полей verb (`present3sg`/`presentSg1`/`presentPl`/`past`/`pastPl`) —
+английская морфология не нуждается в декларациях (гэп B, не гэп): person/number почти всегда
+инвариантны, лексикон уже несёт весь нужный парадигматический материал; скрипт только раскладывает
+его в `Tense×Person×Number` `FeatureBundle`, byte-по-смыслу тот же приём, что `build-pack.mjs`
+делает для pl из другой формы источника. Модальный `will` не материализуется как отдельная лексема
+(нет собственной парадигмы — используется как инвариантный маркер будущего в `futureForm`).
+
+`kotlin/shared/build.gradle.kts`'s `generateFormsFixtureSource` сканирует `lang/*/forms.generated.json`
+(та же схема сканирования, что уже применена к realization.json/exercise-recipes.json, EN-05) в
+новый `generatedFormsGeneratedJsonByLang: Map<String,String>`; `polski.core.PackEngine.morphology`
+теперь читает `generatedFormsGeneratedJsonByLang[langId] ?: generatedFormsFixtureJson` — pl не имеет
+файла по этому пути (`lang/pl/forms.generated.json` не существует, легаси-файл остаётся на
+`courses/pl-ru/forms.generated.json`), поэтому pl продолжает читать старую константу нетронуто
+(byte-identical, `TrainingParityTest`/`GrammarParityTest` не менялись и остаются зелёными). Новый
+`val enMorphology: TableMorphology` (`PlEngine.kt`) — второй `PackEngine("en")`, независимый от
+`packRegistry.active` (переключение активного пакета — EN-22, не эта задача); новый
+`polski/data/EnLexicon.kt` — типизированные `enVerbs`/`enPersonalPronouns` из уже встроенного
+`generatedLexiconJsonByLang["en"]`, тоже не зависят от `active`.
+
+`MatrixWeb.kt`: `renderVerbs` добавляет два новых `MatrixTableEngine`-построения после
+существующих pl-таблиц — «English: лицо × время» (фиксированный пример-глагол «see», demonstрирует
+неправильный глагол через ту же табличную морфологию, никакого 11-го оператора) и отдельная
+«do-support: вопрос и отрицание» таблица (do/does present-раскол, invariant «did»; future-столбец —
+факт, не выдумка: у будущего своего do-support нет, вопрос/отрицание строятся через «will» само по
+себе). `HTMLElement.matrixTable`/`matrixContrast` получили опциональный `lang` параметр (default
+`"pl"`, все существующие вызовы без него — bute-identical); английские ячейки теперь помечаются
+`lang="en"`, а не хардкожным `"pl"` (реальный a11y-баг, если бы English-текст читался с польскими
+правилами произношения screen reader'ом — исправлен как часть этой задачи, не отдельным поводом).
+
+Новый Playwright `tests/browser/kotlin-en-matrix.spec.ts` (в `playwright.kotlin.config.ts`'s
+`testMatch`): проверяет реальные he/she/it→`sees`, неправильное `see→saw`, `will see`, do/does-раскол
+и отсутствие `lang="pl"` на английском тексте — против собранного `composeWebCompatibility`
+дистрибутива, на js и wasm веток одинаково.
+
+Проверено: `:shared:compileKotlinJs`/`compileKotlinDesktop`, `:composeApp:compileKotlinJs`/
+`compileKotlinWasmJs` — `BUILD SUCCESSFUL`; `:shared:desktopTest`/`:core-engine:desktopTest` —
+зелёные (`TrainingParityTest` 5/5, `GrammarParityTest` 20/20, `PackEngineTest` 2/2,
+`MatrixTableEngineTest`); `npm test` (268/268), `npm run course:validate`, `node
+scripts/build-pack-en.mjs --check`, `node scripts/build-pack.mjs --check` (pl golden, 1560 записей).
+`composeCompatibilityBrowserDistribution` собран; Playwright `kotlin-parity-matrix.spec.ts`+
+`kotlin-matrix-progress.spec.ts`+`kotlin-en-matrix.spec.ts` на js и wasm — по 14 passed / 2
+pre-existing failures (идентичные ADR-22's документированному разрыву, не регрессия, проверено
+живьём на этой же ветке). Не прогнано: Android/iOS/macOS/desktop — вне лейна этой задачи (web only,
+4 хоста — явный техдолг из плана §6).
+
+Почему: план явно ограничивает EN-24 web-минимумом («полное переключение всех 5 хостов —
+отдельная последующая задача»); гэп H требует именно «хотя бы одна живая английская матрица», не
+полный UI — реализовано буквально этим объёмом, без изобретения нового рендер-пути.
+
+Подробно: `Plans/Kotlin/EnRuPackPlan.md` §5 гэп H, §6 EN-24; `scripts/build-pack-en.mjs`;
+`kotlin/shared/src/commonMain/kotlin/polski/core/PlEngine.kt`;
+`kotlin/shared/src/commonMain/kotlin/polski/data/EnLexicon.kt`;
+`kotlin/composeApp/src/webMain/kotlin/polski/ui/MatrixWeb.kt`;
+`tests/browser/kotlin-en-matrix.spec.ts`.
+
 ## ADR-27 · 2026-09-28 · EN-21 (core+web): `LifehackProvider`-порт + `StaticPackLifehackProvider` + web-блок «Лайфхак»
 
 `Lifehack`/`LifehackSource`/`LifehackStatus` + `fun interface LifehackProvider { fun forSkill(skillId: String): List<Lifehack> }`

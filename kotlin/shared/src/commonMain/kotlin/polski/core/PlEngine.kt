@@ -65,8 +65,15 @@ internal class PackEngine(langId: String) {
     private val skills by lazy { parseCurriculum(generatedCurriculumJsonByLang.getValue(langId)).associateBy { it.id } }
     private val seeds by lazy { courseSentenceSeeds.map { mapOf("noun" to it.nounId, "adjective" to it.adjectiveId) } }
 
-    /** This pack's own [TableMorphology] — also the source of every matrix/reference form (UC-08). */
-    val morphology by lazy { TableMorphology(parseForms(generatedFormsFixtureJson)) }
+    /**
+     * This pack's own [TableMorphology] — also the source of every matrix/reference form (UC-08).
+     * EN-24: pl keeps reading the single legacy [generatedFormsFixtureJson] fixture byte-identical
+     * to before (no `lang/pl/forms.generated.json` file exists, so the per-lang map below never
+     * has a "pl" entry); a language with a real `lang/<code>/forms.generated.json` — en, EN-24 —
+     * reads it from there instead, the same scanning pattern EN-05 already uses for
+     * realization.json/exercise-recipes.json.
+     */
+    val morphology by lazy { TableMorphology(parseForms(generatedFormsGeneratedJsonByLang[langId] ?: generatedFormsFixtureJson)) }
 
     /** A noun's inherent `Gender` (§5.1's [LexemeFeatures]) — the only cross-slot agreement fact this pack needs. */
     val lexemeFeatures = LexemeFeatures { nounId -> mapOf(FeatureKey("Gender") to FeatureValue(nounById(nounId).gender.id)) }
@@ -114,3 +121,12 @@ fun plExerciseGenerator(random: RandomSource, ids: ExerciseIdFactory): ExerciseG
 
 /** The chain's 5 fixed steps with step 1's skill resolved for [nounId]'s own gender (UniversalCorePlan.md §5.3). */
 fun plChainSteps(nounId: String): List<ChainStepRecipe> = plEngine.chainSteps(nounId)
+
+/**
+ * EN-24 (UC-09 part 2/2 minimum): en's own [TableMorphology], sourced from
+ * `lang/en/forms.generated.json` — independent of [polski.data.packRegistry]'s active pack
+ * (pack-switching hosts to en-ru is EN-22, not this task), so the web matrix's English table
+ * always has real forms to show regardless of which pack is currently active.
+ */
+private val enEngine by lazy { PackEngine("en") }
+val enMorphology: TableMorphology get() = enEngine.morphology

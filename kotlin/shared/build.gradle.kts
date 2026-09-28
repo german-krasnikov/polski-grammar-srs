@@ -167,6 +167,16 @@ val generateFormsFixtureSource by tasks.registering {
                 val entryChunks = literalChunks(dir.resolve("exercise-recipes.json").readText())
                 "    \"${dir.name}\" to ${literalBuildString(entryChunks)}"
             }
+        // EN-24 (UC-09 part 2/2 minimum): a per-lang `lang/<code>/forms.generated.json`, additive
+        // to pl-ru's own [formsFixtureFile] above (still read directly by name for "pl", untouched)
+        // — a second target language's materialized forms need no Gradle/Kotlin edit beyond
+        // dropping the file in `lang/<code>/`, same scanning pattern as realization.json above.
+        val formsGeneratedEntryLiterals = langDirs
+            .filter { dir -> dir.resolve("forms.generated.json").isFile }
+            .joinToString(",\n") { dir ->
+                val entryChunks = literalChunks(dir.resolve("forms.generated.json").readText())
+                "    \"${dir.name}\" to ${literalBuildString(entryChunks)}"
+            }
         val recipesTarget = generatedFormsFixtureDirectory.get().file("polski/core/GeneratedRecipesFixtureJson.kt").asFile
         recipesTarget.parentFile.mkdirs()
         recipesTarget.writeText(
@@ -174,7 +184,9 @@ val generateFormsFixtureSource by tasks.registering {
                 "internal val generatedRealizationJsonByLang: Map<String, String> = mapOf(\n" +
                 realizationEntryLiterals + "\n)\n" +
                 "internal val generatedExerciseRecipesJsonByLang: Map<String, String> = mapOf(\n" +
-                recipesEntryLiterals + "\n)\n",
+                recipesEntryLiterals + "\n)\n" +
+                "internal val generatedFormsGeneratedJsonByLang: Map<String, String> = mapOf(\n" +
+                formsGeneratedEntryLiterals + "\n)\n",
         )
     }
 }

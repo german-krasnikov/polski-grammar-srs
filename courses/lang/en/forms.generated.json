@@ -1,0 +1,1320 @@
+{
+  "schemaVersion": 1,
+  "generatedFrom": "courses/lang/en/lexicon.json",
+  "forms": {
+    "verb:walk": [
+      {
+        "bundle": {
+          "Tense": "present",
+          "Person": "1",
+          "Number": "sg"
+        },
+        "form": "walk"
+      },
+      {
+        "bundle": {
+          "Tense": "past",
+          "Person": "1",
+          "Number": "sg"
+        },
+        "form": "walked"
+      },
+      {
+        "bundle": {
+          "Tense": "future",
+          "Person": "1",
+          "Number": "sg"
+        },
+        "form": "will walk"
+      },
+      {
+        "bundle": {
+          "Tense": "present",
+          "Person": "2",
+          "Number": "sg"
+        },
+        "form": "walk"
+      },
+      {
+        "bundle": {
+          "Tense": "past",
+          "Person": "2",
+          "Number": "sg"
+        },
+        "form": "walked"
+      },
+      {
+        "bundle": {
+          "Tense": "future",
+          "Person": "2",
+          "Number": "sg"
+        },
+        "form": "will walk"
+      },
+      {
+        "bundle": {
+          "Tense": "present",
+          "Person": "3",
+          "Number": "sg"
+        },
+        "form": "walks"
+      },
+      {
+        "bundle": {
+          "Tense": "past",
+          "Person": "3",
+          "Number": "sg"
+        },
+        "form": "walked"
+      },
+      {
+        "bundle": {
+          "Tense": "future",
+          "Person": "3",
+          "Number": "sg"
+        },
+        "form": "will walk"
+      },
+      {
+        "bundle": {
+          "Tense": "present",
+          "Person": "1",
+          "Number": "pl"
+        },
+        "form": "walk"
+      },
+      {
+        "bundle": {
+          "Tense": "past",
+          "Person": "1",
+          "Number": "pl"
+        },
+        "form": "walked"
+      },
+      {
+        "bundle": {
+          "Tense": "future",
+          "Person": "1",
+          "Number": "pl"
+        },
+        "form": "will walk"
+      },
+      {
+        "bundle": {
+          "Tense": "present",
+          "Person": "2",
+          "Number": "pl"
+        },
+        "form": "walk"
+      },
+      {
+        "bundle": {
+          "Tense": "past",
+          "Person": "2",
+          "Number": "pl"
+        },
+        "form": "walked"
+      },
+      {
+        "bundle": {
+          "Tense": "future",
+          "Person": "2",
+          "Number": "pl"
+        },
+        "form": "will walk"
+      },
+      {
+        "bundle": {
+          "Tense": "present",
+          "Person": "3",
+          "Number": "pl"
+        },
+        "form": "walk"
+      },
+      {
+        "bundle": {
+          "Tense": "past",
+          "Person": "3",
+          "Number": "pl"
+        },
+        "form": "walked"
+      },
+      {
+        "bundle": {
+          "Tense": "future",
+          "Person": "3",
+          "Number": "pl"
+        },
+        "form": "will walk"
+      }
+    ],
+    "verb:see": [
+      {
+        "bundle": {
+          "Tense": "present",
+          "Person": "1",
+          "Number": "sg"
+        },
+        "form": "see"
+      },
+      {
+        "bundle": {
+          "Tense": "past",
+          "Person": "1",
+          "Number": "sg"
+        },
+        "form": "saw"
+      },
+      {
+        "bundle": {
+          "Tense": "future",
+          "Person": "1",
+          "Number": "sg"
+        },
+        "form": "will see"
+      },
+      {
+        "bundle": {
+          "Tense": "present",
+          "Person": "2",
+          "Number": "sg"
+        },
+        "form": "see"
+      },
+      {
+        "bundle": {
+          "Tense": "past",
+          "Person": "2",
+          "Number": "sg"
+        },
+        "form": "saw"
+      },
+      {
+        "bundle": {
+          "Tense": "future",
+          "Person": "2",
+          "Number": "sg"
+        },
+        "form": "will see"
+      },
+      {
+        "bundle": {
+          "Tense": "present",
+          "Person": "3",
+          "Number": "sg"
+        },
+        "form": "sees"
+      },
+      {
+        "bundle": {
+          "Tense": "past",
+          "Person": "3",
+          "Number": "sg"
+        },
+        "form": "saw"
+      },
+      {
+        "bundle": {
+          "Tense": "future",
+          "Person": "3",
+          "Number": "sg"
+        },
+        "form": "will see"
+      },
+      {
+        "bundle": {
+          "Tense": "present",
+          "Person": "1",
+          "Number": "pl"
+        },
+        "form": "see"
+      },
+      {
+        "bundle": {
+          "Tense": "past",
+          "Person": "1",
+          "Number": "pl"
+        },
+        "form": "saw"
+      },
+      {
+        "bundle": {
+          "Tense": "future",
+          "Person": "1",
+          "Number": "pl"
+        },
+        "form": "will see"
+      },
+      {
+        "bundle": {
+          "Tense": "present",
+          "Person": "2",
+          "Number": "pl"
+        },
+        "form": "see"
+      },
+      {
+        "bundle": {
+          "Tense": "past",
+          "Person": "2",
+          "Number": "pl"
+        },
+        "form": "saw"
+      },
+      {
+        "bundle": {
+          "Tense": "future",
+          "Person": "2",
+          "Number": "pl"
+        },
+        "form": "will see"
+      },
+      {
+        "bundle": {
+          "Tense": "present",
+          "Person": "3",
+          "Number": "pl"
+        },
+        "form": "see"
+      },
+      {
+        "bundle": {
+          "Tense": "past",
+          "Person": "3",
+          "Number": "pl"
+        },
+        "form": "saw"
+      },
+      {
+        "bundle": {
+          "Tense": "future",
+          "Person": "3",
+          "Number": "pl"
+        },
+        "form": "will see"
+      }
+    ],
+    "verb:talk": [
+      {
+        "bundle": {
+          "Tense": "present",
+          "Person": "1",
+          "Number": "sg"
+        },
+        "form": "talk"
+      },
+      {
+        "bundle": {
+          "Tense": "past",
+          "Person": "1",
+          "Number": "sg"
+        },
+        "form": "talked"
+      },
+      {
+        "bundle": {
+          "Tense": "future",
+          "Person": "1",
+          "Number": "sg"
+        },
+        "form": "will talk"
+      },
+      {
+        "bundle": {
+          "Tense": "present",
+          "Person": "2",
+          "Number": "sg"
+        },
+        "form": "talk"
+      },
+      {
+        "bundle": {
+          "Tense": "past",
+          "Person": "2",
+          "Number": "sg"
+        },
+        "form": "talked"
+      },
+      {
+        "bundle": {
+          "Tense": "future",
+          "Person": "2",
+          "Number": "sg"
+        },
+        "form": "will talk"
+      },
+      {
+        "bundle": {
+          "Tense": "present",
+          "Person": "3",
+          "Number": "sg"
+        },
+        "form": "talks"
+      },
+      {
+        "bundle": {
+          "Tense": "past",
+          "Person": "3",
+          "Number": "sg"
+        },
+        "form": "talked"
+      },
+      {
+        "bundle": {
+          "Tense": "future",
+          "Person": "3",
+          "Number": "sg"
+        },
+        "form": "will talk"
+      },
+      {
+        "bundle": {
+          "Tense": "present",
+          "Person": "1",
+          "Number": "pl"
+        },
+        "form": "talk"
+      },
+      {
+        "bundle": {
+          "Tense": "past",
+          "Person": "1",
+          "Number": "pl"
+        },
+        "form": "talked"
+      },
+      {
+        "bundle": {
+          "Tense": "future",
+          "Person": "1",
+          "Number": "pl"
+        },
+        "form": "will talk"
+      },
+      {
+        "bundle": {
+          "Tense": "present",
+          "Person": "2",
+          "Number": "pl"
+        },
+        "form": "talk"
+      },
+      {
+        "bundle": {
+          "Tense": "past",
+          "Person": "2",
+          "Number": "pl"
+        },
+        "form": "talked"
+      },
+      {
+        "bundle": {
+          "Tense": "future",
+          "Person": "2",
+          "Number": "pl"
+        },
+        "form": "will talk"
+      },
+      {
+        "bundle": {
+          "Tense": "present",
+          "Person": "3",
+          "Number": "pl"
+        },
+        "form": "talk"
+      },
+      {
+        "bundle": {
+          "Tense": "past",
+          "Person": "3",
+          "Number": "pl"
+        },
+        "form": "talked"
+      },
+      {
+        "bundle": {
+          "Tense": "future",
+          "Person": "3",
+          "Number": "pl"
+        },
+        "form": "will talk"
+      }
+    ],
+    "verb:go": [
+      {
+        "bundle": {
+          "Tense": "present",
+          "Person": "1",
+          "Number": "sg"
+        },
+        "form": "go"
+      },
+      {
+        "bundle": {
+          "Tense": "past",
+          "Person": "1",
+          "Number": "sg"
+        },
+        "form": "went"
+      },
+      {
+        "bundle": {
+          "Tense": "future",
+          "Person": "1",
+          "Number": "sg"
+        },
+        "form": "will go"
+      },
+      {
+        "bundle": {
+          "Tense": "present",
+          "Person": "2",
+          "Number": "sg"
+        },
+        "form": "go"
+      },
+      {
+        "bundle": {
+          "Tense": "past",
+          "Person": "2",
+          "Number": "sg"
+        },
+        "form": "went"
+      },
+      {
+        "bundle": {
+          "Tense": "future",
+          "Person": "2",
+          "Number": "sg"
+        },
+        "form": "will go"
+      },
+      {
+        "bundle": {
+          "Tense": "present",
+          "Person": "3",
+          "Number": "sg"
+        },
+        "form": "goes"
+      },
+      {
+        "bundle": {
+          "Tense": "past",
+          "Person": "3",
+          "Number": "sg"
+        },
+        "form": "went"
+      },
+      {
+        "bundle": {
+          "Tense": "future",
+          "Person": "3",
+          "Number": "sg"
+        },
+        "form": "will go"
+      },
+      {
+        "bundle": {
+          "Tense": "present",
+          "Person": "1",
+          "Number": "pl"
+        },
+        "form": "go"
+      },
+      {
+        "bundle": {
+          "Tense": "past",
+          "Person": "1",
+          "Number": "pl"
+        },
+        "form": "went"
+      },
+      {
+        "bundle": {
+          "Tense": "future",
+          "Person": "1",
+          "Number": "pl"
+        },
+        "form": "will go"
+      },
+      {
+        "bundle": {
+          "Tense": "present",
+          "Person": "2",
+          "Number": "pl"
+        },
+        "form": "go"
+      },
+      {
+        "bundle": {
+          "Tense": "past",
+          "Person": "2",
+          "Number": "pl"
+        },
+        "form": "went"
+      },
+      {
+        "bundle": {
+          "Tense": "future",
+          "Person": "2",
+          "Number": "pl"
+        },
+        "form": "will go"
+      },
+      {
+        "bundle": {
+          "Tense": "present",
+          "Person": "3",
+          "Number": "pl"
+        },
+        "form": "go"
+      },
+      {
+        "bundle": {
+          "Tense": "past",
+          "Person": "3",
+          "Number": "pl"
+        },
+        "form": "went"
+      },
+      {
+        "bundle": {
+          "Tense": "future",
+          "Person": "3",
+          "Number": "pl"
+        },
+        "form": "will go"
+      }
+    ],
+    "verb:like": [
+      {
+        "bundle": {
+          "Tense": "present",
+          "Person": "1",
+          "Number": "sg"
+        },
+        "form": "like"
+      },
+      {
+        "bundle": {
+          "Tense": "past",
+          "Person": "1",
+          "Number": "sg"
+        },
+        "form": "liked"
+      },
+      {
+        "bundle": {
+          "Tense": "future",
+          "Person": "1",
+          "Number": "sg"
+        },
+        "form": "will like"
+      },
+      {
+        "bundle": {
+          "Tense": "present",
+          "Person": "2",
+          "Number": "sg"
+        },
+        "form": "like"
+      },
+      {
+        "bundle": {
+          "Tense": "past",
+          "Person": "2",
+          "Number": "sg"
+        },
+        "form": "liked"
+      },
+      {
+        "bundle": {
+          "Tense": "future",
+          "Person": "2",
+          "Number": "sg"
+        },
+        "form": "will like"
+      },
+      {
+        "bundle": {
+          "Tense": "present",
+          "Person": "3",
+          "Number": "sg"
+        },
+        "form": "likes"
+      },
+      {
+        "bundle": {
+          "Tense": "past",
+          "Person": "3",
+          "Number": "sg"
+        },
+        "form": "liked"
+      },
+      {
+        "bundle": {
+          "Tense": "future",
+          "Person": "3",
+          "Number": "sg"
+        },
+        "form": "will like"
+      },
+      {
+        "bundle": {
+          "Tense": "present",
+          "Person": "1",
+          "Number": "pl"
+        },
+        "form": "like"
+      },
+      {
+        "bundle": {
+          "Tense": "past",
+          "Person": "1",
+          "Number": "pl"
+        },
+        "form": "liked"
+      },
+      {
+        "bundle": {
+          "Tense": "future",
+          "Person": "1",
+          "Number": "pl"
+        },
+        "form": "will like"
+      },
+      {
+        "bundle": {
+          "Tense": "present",
+          "Person": "2",
+          "Number": "pl"
+        },
+        "form": "like"
+      },
+      {
+        "bundle": {
+          "Tense": "past",
+          "Person": "2",
+          "Number": "pl"
+        },
+        "form": "liked"
+      },
+      {
+        "bundle": {
+          "Tense": "future",
+          "Person": "2",
+          "Number": "pl"
+        },
+        "form": "will like"
+      },
+      {
+        "bundle": {
+          "Tense": "present",
+          "Person": "3",
+          "Number": "pl"
+        },
+        "form": "like"
+      },
+      {
+        "bundle": {
+          "Tense": "past",
+          "Person": "3",
+          "Number": "pl"
+        },
+        "form": "liked"
+      },
+      {
+        "bundle": {
+          "Tense": "future",
+          "Person": "3",
+          "Number": "pl"
+        },
+        "form": "will like"
+      }
+    ],
+    "verb:read": [
+      {
+        "bundle": {
+          "Tense": "present",
+          "Person": "1",
+          "Number": "sg"
+        },
+        "form": "read"
+      },
+      {
+        "bundle": {
+          "Tense": "past",
+          "Person": "1",
+          "Number": "sg"
+        },
+        "form": "read"
+      },
+      {
+        "bundle": {
+          "Tense": "future",
+          "Person": "1",
+          "Number": "sg"
+        },
+        "form": "will read"
+      },
+      {
+        "bundle": {
+          "Tense": "present",
+          "Person": "2",
+          "Number": "sg"
+        },
+        "form": "read"
+      },
+      {
+        "bundle": {
+          "Tense": "past",
+          "Person": "2",
+          "Number": "sg"
+        },
+        "form": "read"
+      },
+      {
+        "bundle": {
+          "Tense": "future",
+          "Person": "2",
+          "Number": "sg"
+        },
+        "form": "will read"
+      },
+      {
+        "bundle": {
+          "Tense": "present",
+          "Person": "3",
+          "Number": "sg"
+        },
+        "form": "reads"
+      },
+      {
+        "bundle": {
+          "Tense": "past",
+          "Person": "3",
+          "Number": "sg"
+        },
+        "form": "read"
+      },
+      {
+        "bundle": {
+          "Tense": "future",
+          "Person": "3",
+          "Number": "sg"
+        },
+        "form": "will read"
+      },
+      {
+        "bundle": {
+          "Tense": "present",
+          "Person": "1",
+          "Number": "pl"
+        },
+        "form": "read"
+      },
+      {
+        "bundle": {
+          "Tense": "past",
+          "Person": "1",
+          "Number": "pl"
+        },
+        "form": "read"
+      },
+      {
+        "bundle": {
+          "Tense": "future",
+          "Person": "1",
+          "Number": "pl"
+        },
+        "form": "will read"
+      },
+      {
+        "bundle": {
+          "Tense": "present",
+          "Person": "2",
+          "Number": "pl"
+        },
+        "form": "read"
+      },
+      {
+        "bundle": {
+          "Tense": "past",
+          "Person": "2",
+          "Number": "pl"
+        },
+        "form": "read"
+      },
+      {
+        "bundle": {
+          "Tense": "future",
+          "Person": "2",
+          "Number": "pl"
+        },
+        "form": "will read"
+      },
+      {
+        "bundle": {
+          "Tense": "present",
+          "Person": "3",
+          "Number": "pl"
+        },
+        "form": "read"
+      },
+      {
+        "bundle": {
+          "Tense": "past",
+          "Person": "3",
+          "Number": "pl"
+        },
+        "form": "read"
+      },
+      {
+        "bundle": {
+          "Tense": "future",
+          "Person": "3",
+          "Number": "pl"
+        },
+        "form": "will read"
+      }
+    ],
+    "verb:have": [
+      {
+        "bundle": {
+          "Tense": "present",
+          "Person": "1",
+          "Number": "sg"
+        },
+        "form": "have"
+      },
+      {
+        "bundle": {
+          "Tense": "past",
+          "Person": "1",
+          "Number": "sg"
+        },
+        "form": "had"
+      },
+      {
+        "bundle": {
+          "Tense": "future",
+          "Person": "1",
+          "Number": "sg"
+        },
+        "form": "will have"
+      },
+      {
+        "bundle": {
+          "Tense": "present",
+          "Person": "2",
+          "Number": "sg"
+        },
+        "form": "have"
+      },
+      {
+        "bundle": {
+          "Tense": "past",
+          "Person": "2",
+          "Number": "sg"
+        },
+        "form": "had"
+      },
+      {
+        "bundle": {
+          "Tense": "future",
+          "Person": "2",
+          "Number": "sg"
+        },
+        "form": "will have"
+      },
+      {
+        "bundle": {
+          "Tense": "present",
+          "Person": "3",
+          "Number": "sg"
+        },
+        "form": "has"
+      },
+      {
+        "bundle": {
+          "Tense": "past",
+          "Person": "3",
+          "Number": "sg"
+        },
+        "form": "had"
+      },
+      {
+        "bundle": {
+          "Tense": "future",
+          "Person": "3",
+          "Number": "sg"
+        },
+        "form": "will have"
+      },
+      {
+        "bundle": {
+          "Tense": "present",
+          "Person": "1",
+          "Number": "pl"
+        },
+        "form": "have"
+      },
+      {
+        "bundle": {
+          "Tense": "past",
+          "Person": "1",
+          "Number": "pl"
+        },
+        "form": "had"
+      },
+      {
+        "bundle": {
+          "Tense": "future",
+          "Person": "1",
+          "Number": "pl"
+        },
+        "form": "will have"
+      },
+      {
+        "bundle": {
+          "Tense": "present",
+          "Person": "2",
+          "Number": "pl"
+        },
+        "form": "have"
+      },
+      {
+        "bundle": {
+          "Tense": "past",
+          "Person": "2",
+          "Number": "pl"
+        },
+        "form": "had"
+      },
+      {
+        "bundle": {
+          "Tense": "future",
+          "Person": "2",
+          "Number": "pl"
+        },
+        "form": "will have"
+      },
+      {
+        "bundle": {
+          "Tense": "present",
+          "Person": "3",
+          "Number": "pl"
+        },
+        "form": "have"
+      },
+      {
+        "bundle": {
+          "Tense": "past",
+          "Person": "3",
+          "Number": "pl"
+        },
+        "form": "had"
+      },
+      {
+        "bundle": {
+          "Tense": "future",
+          "Person": "3",
+          "Number": "pl"
+        },
+        "form": "will have"
+      }
+    ],
+    "verb:do": [
+      {
+        "bundle": {
+          "Tense": "present",
+          "Person": "1",
+          "Number": "sg"
+        },
+        "form": "do"
+      },
+      {
+        "bundle": {
+          "Tense": "past",
+          "Person": "1",
+          "Number": "sg"
+        },
+        "form": "did"
+      },
+      {
+        "bundle": {
+          "Tense": "future",
+          "Person": "1",
+          "Number": "sg"
+        },
+        "form": "will do"
+      },
+      {
+        "bundle": {
+          "Tense": "present",
+          "Person": "2",
+          "Number": "sg"
+        },
+        "form": "do"
+      },
+      {
+        "bundle": {
+          "Tense": "past",
+          "Person": "2",
+          "Number": "sg"
+        },
+        "form": "did"
+      },
+      {
+        "bundle": {
+          "Tense": "future",
+          "Person": "2",
+          "Number": "sg"
+        },
+        "form": "will do"
+      },
+      {
+        "bundle": {
+          "Tense": "present",
+          "Person": "3",
+          "Number": "sg"
+        },
+        "form": "does"
+      },
+      {
+        "bundle": {
+          "Tense": "past",
+          "Person": "3",
+          "Number": "sg"
+        },
+        "form": "did"
+      },
+      {
+        "bundle": {
+          "Tense": "future",
+          "Person": "3",
+          "Number": "sg"
+        },
+        "form": "will do"
+      },
+      {
+        "bundle": {
+          "Tense": "present",
+          "Person": "1",
+          "Number": "pl"
+        },
+        "form": "do"
+      },
+      {
+        "bundle": {
+          "Tense": "past",
+          "Person": "1",
+          "Number": "pl"
+        },
+        "form": "did"
+      },
+      {
+        "bundle": {
+          "Tense": "future",
+          "Person": "1",
+          "Number": "pl"
+        },
+        "form": "will do"
+      },
+      {
+        "bundle": {
+          "Tense": "present",
+          "Person": "2",
+          "Number": "pl"
+        },
+        "form": "do"
+      },
+      {
+        "bundle": {
+          "Tense": "past",
+          "Person": "2",
+          "Number": "pl"
+        },
+        "form": "did"
+      },
+      {
+        "bundle": {
+          "Tense": "future",
+          "Person": "2",
+          "Number": "pl"
+        },
+        "form": "will do"
+      },
+      {
+        "bundle": {
+          "Tense": "present",
+          "Person": "3",
+          "Number": "pl"
+        },
+        "form": "do"
+      },
+      {
+        "bundle": {
+          "Tense": "past",
+          "Person": "3",
+          "Number": "pl"
+        },
+        "form": "did"
+      },
+      {
+        "bundle": {
+          "Tense": "future",
+          "Person": "3",
+          "Number": "pl"
+        },
+        "form": "will do"
+      }
+    ],
+    "verb:be": [
+      {
+        "bundle": {
+          "Tense": "present",
+          "Person": "1",
+          "Number": "sg"
+        },
+        "form": "am"
+      },
+      {
+        "bundle": {
+          "Tense": "past",
+          "Person": "1",
+          "Number": "sg"
+        },
+        "form": "was"
+      },
+      {
+        "bundle": {
+          "Tense": "future",
+          "Person": "1",
+          "Number": "sg"
+        },
+        "form": "will be"
+      },
+      {
+        "bundle": {
+          "Tense": "present",
+          "Person": "2",
+          "Number": "sg"
+        },
+        "form": "are"
+      },
+      {
+        "bundle": {
+          "Tense": "past",
+          "Person": "2",
+          "Number": "sg"
+        },
+        "form": "were"
+      },
+      {
+        "bundle": {
+          "Tense": "future",
+          "Person": "2",
+          "Number": "sg"
+        },
+        "form": "will be"
+      },
+      {
+        "bundle": {
+          "Tense": "present",
+          "Person": "3",
+          "Number": "sg"
+        },
+        "form": "is"
+      },
+      {
+        "bundle": {
+          "Tense": "past",
+          "Person": "3",
+          "Number": "sg"
+        },
+        "form": "was"
+      },
+      {
+        "bundle": {
+          "Tense": "future",
+          "Person": "3",
+          "Number": "sg"
+        },
+        "form": "will be"
+      },
+      {
+        "bundle": {
+          "Tense": "present",
+          "Person": "1",
+          "Number": "pl"
+        },
+        "form": "are"
+      },
+      {
+        "bundle": {
+          "Tense": "past",
+          "Person": "1",
+          "Number": "pl"
+        },
+        "form": "were"
+      },
+      {
+        "bundle": {
+          "Tense": "future",
+          "Person": "1",
+          "Number": "pl"
+        },
+        "form": "will be"
+      },
+      {
+        "bundle": {
+          "Tense": "present",
+          "Person": "2",
+          "Number": "pl"
+        },
+        "form": "are"
+      },
+      {
+        "bundle": {
+          "Tense": "past",
+          "Person": "2",
+          "Number": "pl"
+        },
+        "form": "were"
+      },
+      {
+        "bundle": {
+          "Tense": "future",
+          "Person": "2",
+          "Number": "pl"
+        },
+        "form": "will be"
+      },
+      {
+        "bundle": {
+          "Tense": "present",
+          "Person": "3",
+          "Number": "pl"
+        },
+        "form": "are"
+      },
+      {
+        "bundle": {
+          "Tense": "past",
+          "Person": "3",
+          "Number": "pl"
+        },
+        "form": "were"
+      },
+      {
+        "bundle": {
+          "Tense": "future",
+          "Person": "3",
+          "Number": "pl"
+        },
+        "form": "will be"
+      }
+    ]
+  }
+}

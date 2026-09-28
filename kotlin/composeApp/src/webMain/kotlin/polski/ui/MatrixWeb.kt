@@ -33,14 +33,21 @@ import polski.grammar.possessiveForm
 import polski.grammar.verbForm
 import polski.core.engine.MatrixColumn
 import polski.core.engine.MatrixTableEngine
+import polski.core.enMorphology
+import polski.data.enPersonalPronouns
+import polski.data.enVerbs
 import polski.model.Aspect
 import polski.model.Gender
 import polski.model.GramCase
+import polski.model.NumberFeature
 import polski.model.NumberGram
 import polski.model.Person
+import polski.model.PersonFeature
 import polski.model.PossessiveId
 import polski.model.SentenceSeed
 import polski.model.Tense
+import polski.model.TenseFeature
+import polski.model.toFeatureValue
 import polski.presentation.AppAction
 import polski.presentation.AppUiState
 import polski.presentation.CardPhase
@@ -314,6 +321,70 @@ private fun renderVerbs(root: HTMLElement, state: AppUiState, dispatch: (AppActi
             ),
         ).toViewModel(),
     )
+    renderEnglishVerbMatrix(root)
+}
+
+/**
+ * EN-24 (UC-09 part 2/2 minimum, Plans/Kotlin/EnRuPackPlan.md §5 gap H / §6): the one live English
+ * matrix table — Present/Past/Future × person, plus a do-support table for the same persons — read
+ * from `lang/en/forms.generated.json` through [enMorphology] and the exact same
+ * [MatrixTableEngine]/[MatrixTableViewModel] every pl table above already uses, not a new ad hoc
+ * rendering path. Fixed to one example verb (no selector): a minimum slice proving the engine is
+ * language-agnostic, not a full English matrix UI (that is the same follow-up as the other 4
+ * hosts, out of this task's scope).
+ */
+private fun renderEnglishVerbMatrix(root: HTMLElement) {
+    val exampleVerbId = "see"
+    val exampleLemma = enVerbs.first { it.id == exampleVerbId }.lemma
+    val tenseLabel = mapOf(Tense.PRESENT to "Настоящее", Tense.PAST to "Прошедшее", Tense.FUTURE to "Будущее")
+
+    val section = root.matrixSection("English: лицо × время (\"$exampleLemma\")")
+    section.matrixAdd("p", "Формы читаются из forms.generated.json(en) тем же MatrixTableViewModel, что и польские таблицы выше — движок не знает, что это английский.")
+    section.matrixTable(
+        MatrixTableEngine.build(
+            rowAxis = enPersonalPronouns,
+            rowHeaderLabel = "Кто",
+            rowHeader = { it.subject },
+            columns = Tense.entries.map { tense ->
+                MatrixColumn(tenseLabel.getValue(tense), { pronoun -> enVerbForm(exampleVerbId, tense, pronoun.id) }, contrastFrom = { exampleLemma })
+            },
+        ).toViewModel(),
+        lang = "en",
+    )
+
+    val doSupport = root.matrixSection("do-support: вопрос и отрицание")
+    doSupport.matrixAdd("p", "«do/does/did» встаёт перед подлежащим (Do you see…?) или перед «not» (I do not see…). У будущего своего do-support нет — вопрос и отрицание строятся через «will» само по себе.")
+    doSupport.matrixTable(
+        MatrixTableEngine.build(
+            rowAxis = enPersonalPronouns,
+            rowHeaderLabel = "Кто",
+            rowHeader = { it.subject },
+            columns = listOf(
+                MatrixColumn(tenseLabel.getValue(Tense.PRESENT), { pronoun -> enVerbForm("do", Tense.PRESENT, pronoun.id) }, contrastFrom = { "do" }),
+                MatrixColumn(tenseLabel.getValue(Tense.PAST), { pronoun -> enVerbForm("do", Tense.PAST, pronoun.id) }, contrastFrom = { "do" }),
+                MatrixColumn(tenseLabel.getValue(Tense.FUTURE), { "не нужен — только will" }),
+            ),
+        ).toViewModel(),
+        lang = "en",
+    )
+}
+
+private val enPersonNumberByPronounId = mapOf(
+    "I" to (Person.FIRST to NumberGram.SG),
+    "you" to (Person.SECOND to NumberGram.SG),
+    "he" to (Person.THIRD to NumberGram.SG),
+    "she" to (Person.THIRD to NumberGram.SG),
+    "it" to (Person.THIRD to NumberGram.SG),
+    "we" to (Person.FIRST to NumberGram.PL),
+    "they" to (Person.THIRD to NumberGram.PL),
+)
+
+private fun enVerbForm(verbId: String, tense: Tense, pronounId: String): String {
+    val (person, number) = enPersonNumberByPronounId.getValue(pronounId)
+    return enMorphology.form(
+        "verb:$verbId",
+        mapOf(TenseFeature to tense.toFeatureValue(), PersonFeature to person.toFeatureValue(), NumberFeature to number.toFeatureValue()),
+    )
 }
 
 private fun renderPronouns(root: HTMLElement, dispatch: (AppAction) -> Unit) {
@@ -398,7 +469,7 @@ private fun HTMLElement.matrixSelect(
  * [MatrixTableCell]s into DOM, the same as it always did for hand-built header/row lists.
  */
 private fun HTMLElement.matrixTable(
-    vm: MatrixTableViewModel, tableClass: String = "",
+    vm: MatrixTableViewModel, tableClass: String = "", lang: String = "pl",
     renderCell: ((row: Int, column: Int, cell: HTMLElement) -> Unit)? = null,
 ) {
     val scroll = matrixAdd("div", cls = "table-scroll")
@@ -413,8 +484,11 @@ private fun HTMLElement.matrixTable(
         row.cells.forEachIndexed { colIndex, cellVm ->
             val contrast = cellVm.contrast
             val cell = tr.matrixAdd("td", if (contrast == null) cellVm.value else null)
-            if (cellVm.value.any { it in "ąćęłńóśźżĄĆĘŁŃÓŚŹŻ" }) cell.setAttribute("lang", "pl")
-            if (contrast != null) matrixContrast(cell, contrast)
+            // en's cells are plain ASCII (no diacritic to detect by), so a non-pl table is tagged
+            // unconditionally; pl's own detection (only pl-diacritic cells get tagged, e.g. not a
+            // bare gloss/number cell) stays exactly as before.
+            if (lang != "pl" || cellVm.value.any { it in "ąćęłńóśźżĄĆĘŁŃÓŚŹŻ" }) cell.setAttribute("lang", lang)
+            if (contrast != null) matrixContrast(cell, contrast, lang)
             renderCell?.invoke(rowIndex, colIndex, cell)
         }
     }
@@ -461,7 +535,7 @@ private fun matrixContrastMasked(cell: HTMLElement, before: String) {
 
 private var contrastSemanticSerial = 0
 
-private fun matrixContrast(cell: HTMLElement, comparison: ContrastPair) {
+private fun matrixContrast(cell: HTMLElement, comparison: ContrastPair, lang: String = "pl") {
     val pair = cell.matrixAdd("span", cls = "form-contrast")
     val semanticId = "matrix-contrast-${contrastSemanticSerial++}"
     pair.setAttribute("role", "group")
@@ -471,12 +545,12 @@ private fun matrixContrast(cell: HTMLElement, comparison: ContrastPair) {
     semantic.id = semanticId
     semantic.setAttribute("aria-hidden", "true")
     semantic.appendChild(document.createTextNode("Было: "))
-    semantic.matrixAdd("span", comparison.from).setAttribute("lang", "pl")
+    semantic.matrixAdd("span", comparison.from).setAttribute("lang", lang)
     semantic.appendChild(document.createTextNode(". Стало: "))
-    semantic.matrixAdd("span", comparison.to).setAttribute("lang", "pl")
+    semantic.matrixAdd("span", comparison.to).setAttribute("lang", lang)
     pair.matrixAdd("span", "Было:", "form-contrast-label").setAttribute("aria-hidden", "true")
     val old = pair.matrixAdd("span", cls = "form-contrast-before")
-    old.setAttribute("lang", "pl")
+    old.setAttribute("lang", lang)
     old.setAttribute("aria-hidden", "true")
     comparison.parts(ChangeSide.Before).forEach { part ->
         old.matrixAdd("span", part.text, if (part.isChanged) "change-before" else null)
@@ -484,7 +558,7 @@ private fun matrixContrast(cell: HTMLElement, comparison: ContrastPair) {
     pair.matrixAdd("span", "→", "form-contrast-arrow").setAttribute("aria-hidden", "true")
     pair.matrixAdd("span", "Стало:", "form-contrast-label").setAttribute("aria-hidden", "true")
     val next = pair.matrixAdd("strong", cls = "form-contrast-after")
-    next.setAttribute("lang", "pl")
+    next.setAttribute("lang", lang)
     next.setAttribute("aria-hidden", "true")
     comparison.parts(ChangeSide.After).forEach { part ->
         next.matrixAdd("span", part.text, if (part.isChanged) "change-after" else null)
