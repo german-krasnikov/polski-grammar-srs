@@ -61,6 +61,14 @@ import polski.presentation.MatrixSection
 import polski.presentation.toViewModel
 import polski.core.engine.MatrixColumn
 import polski.core.engine.MatrixTableEngine
+import polski.core.enMorphology
+import polski.data.enPersonalPronouns
+import polski.data.enVerbs
+import polski.model.NumberFeature
+import polski.model.Person
+import polski.model.PersonFeature
+import polski.model.TenseFeature
+import polski.model.toFeatureValue
 
 @Composable
 internal fun AndroidMatrixScreen(state: AppUiState, dispatch: (AppAction) -> Unit) {
@@ -253,6 +261,82 @@ fun AndroidVerbsSection(state: AppUiState, dispatch: (AppAction) -> Unit) {
     AndroidInfoCard("Вид: процесс или результат") {
         referenceAspectRows.forEach { ReferenceAspectComparison(it) }
     }
+    AndroidEnglishVerbMatrix()
+}
+
+/**
+ * EN-24 android (UC-09 part 2/2 minimum, Plans/Kotlin/EnRuPackPlan.md §5 gap H / §6): the same live
+ * English matrix as the web slice (ADR-28) — Present/Past/Future × person for one example verb,
+ * plus a do-support table for the same persons — read from `lang/en/forms.generated.json` through
+ * [enMorphology] and the exact same [MatrixTableEngine]/`MatrixTableViewModel` every pl table above
+ * already uses, not a new ad hoc rendering path. Fixed to one example verb (no selector): a minimum
+ * slice proving the engine is language-agnostic on this host too, not a full English matrix UI.
+ */
+@Composable
+private fun AndroidEnglishVerbMatrix() {
+    val exampleVerbId = "see"
+    val exampleLemma = enVerbs.first { it.id == exampleVerbId }.lemma
+    val tenseLabel = mapOf(Tense.PRESENT to "Настоящее", Tense.PAST to "Прошедшее", Tense.FUTURE to "Будущее")
+    AndroidInfoCard("English: лицо × время (\"$exampleLemma\")") {
+        Text("Формы читаются из forms.generated.json(en) тем же MatrixTableViewModel, что и польские таблицы выше — движок не знает, что это английский.")
+    }
+    val verbsTable = MatrixTableEngine.build(
+        rowAxis = enPersonalPronouns,
+        rowHeaderLabel = "Кто",
+        rowHeader = { it.subject },
+        columns = Tense.entries.map { tense ->
+            MatrixColumn(tenseLabel.getValue(tense), { pronoun -> enVerbForm(exampleVerbId, tense, pronoun.id) }, contrastFrom = { exampleLemma })
+        },
+    ).toViewModel()
+    verbsTable.rows.forEach { row ->
+        AndroidInfoCard(row.header) {
+            row.cells.forEachIndexed { i, cell ->
+                Text(verbsTable.columnHeaders[i])
+                ContrastPairText(requireNotNull(cell.contrast))
+            }
+        }
+    }
+
+    AndroidInfoCard("do-support: вопрос и отрицание") {
+        Text("«do/does/did» встаёт перед подлежащим (Do you see…?) или перед «not» (I do not see…). У будущего своего do-support нет — вопрос и отрицание строятся через «will» само по себе.")
+    }
+    val doSupportTable = MatrixTableEngine.build(
+        rowAxis = enPersonalPronouns,
+        rowHeaderLabel = "Кто",
+        rowHeader = { it.subject },
+        columns = listOf(
+            MatrixColumn(tenseLabel.getValue(Tense.PRESENT), { pronoun -> enVerbForm("do", Tense.PRESENT, pronoun.id) }, contrastFrom = { "do" }),
+            MatrixColumn(tenseLabel.getValue(Tense.PAST), { pronoun -> enVerbForm("do", Tense.PAST, pronoun.id) }, contrastFrom = { "do" }),
+            MatrixColumn(tenseLabel.getValue(Tense.FUTURE), { "не нужен — только will" }),
+        ),
+    ).toViewModel()
+    doSupportTable.rows.forEach { row ->
+        AndroidInfoCard(row.header) {
+            row.cells.forEachIndexed { i, cell ->
+                Text(doSupportTable.columnHeaders[i])
+                val contrast = cell.contrast
+                if (contrast != null) ContrastPairText(contrast) else Text(cell.value)
+            }
+        }
+    }
+}
+
+private val enPersonNumberByPronounId = mapOf(
+    "I" to (Person.FIRST to NumberGram.SG),
+    "you" to (Person.SECOND to NumberGram.SG),
+    "he" to (Person.THIRD to NumberGram.SG),
+    "she" to (Person.THIRD to NumberGram.SG),
+    "it" to (Person.THIRD to NumberGram.SG),
+    "we" to (Person.FIRST to NumberGram.PL),
+    "they" to (Person.THIRD to NumberGram.PL),
+)
+
+private fun enVerbForm(verbId: String, tense: Tense, pronounId: String): String {
+    val (person, number) = enPersonNumberByPronounId.getValue(pronounId)
+    return enMorphology.form(
+        "verb:$verbId",
+        mapOf(TenseFeature to tense.toFeatureValue(), PersonFeature to person.toFeatureValue(), NumberFeature to number.toFeatureValue()),
+    )
 }
 
 /** Public — see [AndroidCasesSection]. */
