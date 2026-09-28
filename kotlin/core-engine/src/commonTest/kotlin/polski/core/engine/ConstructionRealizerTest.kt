@@ -78,6 +78,40 @@ class ConstructionRealizerTest {
         assertEquals("żonę", positive.text)
     }
 
+    @Test fun orderWhenSwapsSlotOrderByConditionOtherwiseKeepsTheDefaultOrder() {
+        val morph = TableMorphology(
+            mapOf(
+                "noun:wife" to mapOf(bundle("Number" to "sg", "Case" to "nom") to "żona"),
+                "aux:do" to mapOf(emptyMap<FeatureKey, FeatureValue>() to "czy"),
+            ),
+        )
+        val subject = SlotTemplate("subject", category = "noun", requiredFeatures = listOf("Number", "Case"))
+        val aux = SlotTemplate("aux", category = "aux")
+        val template = ConstructionTemplate(
+            slots = listOf(subject, aux),
+            orderWhen = mapOf("Mood=question" to listOf(aux, subject)),
+        )
+        val realizer = ConstructionRealizer(mapOf("core.sentence.mood" to template), morph, lexemeFeatures)
+
+        val declarative = realizer.realize(
+            "core.sentence.mood",
+            bundle("Number" to "sg", "Case" to "nom", "Mood" to "decl"),
+            mapOf("subject" to "wife", "aux" to "do"),
+        )
+        assertEquals("żona czy", declarative.text)
+        assertEquals(0 until 4, declarative.slotSpans.getValue("subject"))
+        assertEquals(5 until 8, declarative.slotSpans.getValue("aux"))
+
+        val question = realizer.realize(
+            "core.sentence.mood",
+            bundle("Number" to "sg", "Case" to "nom", "Mood" to "question"),
+            mapOf("subject" to "wife", "aux" to "do"),
+        )
+        assertEquals("czy żona", question.text)
+        assertEquals(0 until 3, question.slotSpans.getValue("aux"))
+        assertEquals(4 until 8, question.slotSpans.getValue("subject"))
+    }
+
     @Test fun missingRequiredSlotOrUnknownConstructionErrorsRatherThanGuessing() {
         val realizer = ConstructionRealizer(mapOf("core.argument.case-role" to nounPhraseTemplate), morphology, lexemeFeatures)
         assertFailsWith<IllegalStateException> {

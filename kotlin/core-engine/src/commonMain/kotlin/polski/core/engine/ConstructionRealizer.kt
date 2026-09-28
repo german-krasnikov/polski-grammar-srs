@@ -35,8 +35,9 @@ data class SlotTemplate(
 
 /**
  * UniversalCorePlan.md §3.2/§5.2: one construction's realization recipe — `order` ([slots], in
- * list order), `gov` ([govFeature]/[govDefault]/[govWhen], e.g. pl's negation flipping the
- * object's case from Acc to Gen), joined by [separator]. `when` is [govWhen]'s and
+ * list order, overridable per condition via [orderWhen], e.g. English `mood.question` moving `aux`
+ * before the subject), `gov` ([govFeature]/[govDefault]/[govWhen], e.g. pl's negation flipping the
+ * object's case from Acc to Gen), joined by [separator]. `when` is [govWhen]'s, [orderWhen]'s and
  * [SlotTemplate.requiredFeaturesWhen]'s single-condition syntax: `"FeatureKey=value"`.
  */
 data class ConstructionTemplate(
@@ -45,6 +46,7 @@ data class ConstructionTemplate(
     val govFeature: String? = null,
     val govDefault: String? = null,
     val govWhen: Map<String, String> = emptyMap(),
+    val orderWhen: Map<String, List<SlotTemplate>> = emptyMap(),
 )
 
 /**
@@ -61,10 +63,11 @@ class ConstructionRealizer(
     fun realize(construction: String, bundle: FeatureBundle, lexicalSlots: Map<String, String>): RealizedSentence {
         val template = templates[construction] ?: error("ConstructionRealizer: no template for construction=\"$construction\"")
         val resolved = applyGovernment(template, bundle)
+        val slots = template.orderWhen.entries.firstOrNull { (condition, _) -> matches(condition, resolved) }?.value ?: template.slots
         val parts = mutableListOf<String>()
         val spans = mutableMapOf<String, IntRange>()
         var offset = 0
-        for (slot in template.slots) {
+        for (slot in slots) {
             val lexeme = lexicalSlots[slot.name]
                 ?: if (slot.optional) continue else error("ConstructionRealizer: missing lexical slot \"${slot.name}\" for construction=\"$construction\"")
             val text = morphology.form("${slot.category}:$lexeme", slotBundle(slot, resolved, lexicalSlots))

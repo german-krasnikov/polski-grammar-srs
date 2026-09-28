@@ -49,8 +49,8 @@ private fun parseForms(json: String): Map<String, Map<FeatureBundle, String>> =
         }
     }
 
-private val plTemplates by lazy { parseConstructionTemplates(generatedRealizationJson) }
-private val plRecipeSet by lazy { parseRecipes(generatedExerciseRecipesJson) }
+private val plTemplates by lazy { parseConstructionTemplates(generatedRealizationJsonByLang.getValue("pl")) }
+private val plRecipeSet by lazy { parseRecipes(generatedExerciseRecipesJsonByLang.getValue("pl")) }
 
 /** The pack's own [TableMorphology] — also the source of every matrix/reference form (UC-08). */
 val plMorphology by lazy { TableMorphology(parseForms(generatedFormsFixtureJson)) }
