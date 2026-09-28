@@ -266,6 +266,27 @@ test('UX4-16: the nav indicator slides to the active destination', async ({ page
   }).toBe(true);
 });
 
+// W5: `WebNav.update()` used to measure `getBoundingClientRect()` synchronously right after mount,
+// before the stylesheet (and the web font it loads) was necessarily applied — a browser still on
+// fallback-font/UA-default metrics at that instant laid the buttons out narrower than their real
+// themed size, so the indicator snapped to a sliver ("tiny dot") on first load instead of the
+// active tab's width and was never corrected afterwards. Checked at a phone and a desktop width,
+// since the bug is about *when* the first measurement happens, not the viewport itself.
+for (const viewport of [{ width: 390, height: 844 }, { width: 1280, height: 900 }]) {
+  test(`W5: the nav indicator matches the active tab's width on first load at ${viewport.width}px, not a sliver`, async ({ page }) => {
+    await page.setViewportSize(viewport);
+    await page.goto('/#/training');
+    const indicator = page.locator('.nav-indicator');
+    const activeTab = page.locator('#nav-training');
+    await expect.poll(async () => {
+      const indicatorBox = await indicator.boundingBox();
+      const tabBox = await activeTab.boundingBox();
+      if (!indicatorBox || !tabBox) return null;
+      return Math.abs(indicatorBox.width - tabBox.width);
+    }).toBeLessThan(2);
+  });
+}
+
 test('UX4-17/19: tab navigation still works with RouteSlider wired in (UX5 replaced View Transitions — see kotlin-ux4.spec.ts §UX5 below), and is not triggered by the 30s timer', async ({ page }) => {
   await page.goto('/#/training');
   await continueIntroductionIfPresent(page);
