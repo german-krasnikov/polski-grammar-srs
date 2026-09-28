@@ -4,6 +4,7 @@ import polski.core.engine.MatrixColumn
 import polski.core.engine.MatrixTableEngine
 import polski.data.adjectives
 import polski.data.comparisonNounIds
+import polski.data.courseAspectNoPresent
 import polski.data.nounById
 import polski.data.nouns
 import polski.data.personalPronouns
@@ -37,6 +38,13 @@ import kotlin.test.assertEquals
  * way that file computes it today — same pack data, same grammar functions, same `contrastFrom`
  * base — so a change that breaks the generic engine's parity with those sections fails here first.
  * No host is touched; this only proves the engine can replace their per-section table-building.
+ *
+ * Out of scope, same as the system-map pipeline cards and the male-acc decision grid (ADR-21):
+ * `RussianSupportRow.comparisons` — the per-row embedded "было → стало" examples `MatrixWeb.kt`
+ * renders *inside* the support table's construction cell via its own `renderCell` hook. A
+ * [MatrixColumn] resolves at most one text value plus one optional `contrastFrom` base per cell,
+ * never a list of pre-authored [ContrastPair]s, so that feature cannot be represented here; see
+ * `russianSupportTableCoversOnlyThePlainConstructionAndCheckTextNotTheEmbeddedComparisons` below.
  */
 class MatrixTableViewModelTest {
     private val nounId = "wife"
@@ -162,7 +170,9 @@ class MatrixTableViewModelTest {
     // --- Verbs: "Вид: процесс или результат" (renderVerbs, aspect table) ---
 
     @Test fun aspectTableOmitsContrastOnlyForARowWithNoPresentTense() {
-        val courseAspectNoPresentCompact = "—"
+        // Real pack value (CourseInventoryContentTest pins it to "Нет настоящего времени"), the
+        // exact same reference MatrixWeb.kt's own aspect table reads — not a fabricated stand-in.
+        val courseAspectNoPresentCompact = courseAspectNoPresent.compact
         val table = MatrixTableEngine.build(
             rowAxis = referenceAspectRows,
             rowHeaderLabel = "Смысл",
@@ -267,10 +277,15 @@ class MatrixTableViewModelTest {
         }
     }
 
-    // --- Map: Russian-support table (renderMap, support matrixTable) — no contrast column ---
+    // --- Map: Russian-support table (renderMap, support matrixTable) — plain text columns only;
+    // the embedded per-row `comparisons` are out of MatrixTableEngine's scope, see class doc. ---
 
-    @Test fun russianSupportTableCarriesThePairsOwnConstructionAndCheckTextWithNoContrast() {
+    @Test fun russianSupportTableCoversOnlyThePlainConstructionAndCheckTextNotTheEmbeddedComparisons() {
         val support = referenceRussianSupport
+        // Sanity: comparisons are real, required-non-empty pack data (CourseData.kt requires it
+        // per row) that this table representation genuinely cannot express — not an unused field.
+        require(support.rows.all { it.comparisons.isNotEmpty() })
+
         val table = MatrixTableEngine.build(
             rowAxis = support.rows,
             rowHeaderLabel = support.columns[0],
