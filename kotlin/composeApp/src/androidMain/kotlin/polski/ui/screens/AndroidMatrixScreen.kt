@@ -148,10 +148,21 @@ fun AndroidSystemMapCard(card: ReferenceSystemCard) {
     }
 }
 
+// EnRuAcceptance-2026-09-28.md §7 (Android lane, live repro on emulator-5554): `nouns`
+// (packRegistry.active.nouns) is honestly empty for a caseless/genderless pack like en-ru — same
+// reasoning as [AndroidVerbsSection]'s `verbs.isEmpty()` guard and MatrixWeb.kt's `hasCaseSystem`
+// gate. This function used to build the whole pl declension grid unconditionally, so with en-ru
+// active it crashed with `IllegalStateException` ("Unknown noun wife") inside
+// `nounPhrase` -> `nounById` the moment the screen composed. Gate the pl-declension portion
+// behind `nouns.isNotEmpty()`, same pattern and same calm-notice text as the verbs fix.
 /** Public (not `private`), like [AndroidCaseReference]/[AndroidSystemMapCard], so UC-09's table
  *  parity can be exercised directly in Compose tests from `androidApp`. */
 @Composable
 fun AndroidCasesSection(state: AppUiState, dispatch: (AppAction) -> Unit) {
+    if (nouns.isEmpty()) {
+        AndroidNoCaseSystemNotice()
+        return
+    }
     val selected = state.matrixSelection
     AndroidInfoCard("Выбери группу слов") {
         AndroidChoiceMenu("Слово", selected.nounId, nouns.map { it.id to "${it.lemma} — ${it.meaning}" }) {
