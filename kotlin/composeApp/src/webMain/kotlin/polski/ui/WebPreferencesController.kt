@@ -3,6 +3,8 @@ package polski.ui
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import polski.data.availableCoursePacks
+import polski.data.selectCoursePack
 import polski.platform.WebPreferencesRepository
 import polski.preferences.Appearance
 import polski.preferences.Motion
@@ -48,6 +50,20 @@ internal class WebPreferencesController(private val repository: WebPreferencesRe
         if (store.state.value.phase != CardPhase.Question) return
         val mode = if (value.answerMode == PreferredAnswerMode.Typed) AnswerMode.Typed else AnswerMode.Oral
         if (store.state.value.answerMode != mode) store.dispatch(AppAction.SetAnswerMode(mode))
+    }
+
+    /**
+     * EnRuAcceptance-2026-09-28.md §7 item 3: the web target/native pickers — the only host that
+     * had none at all. Only a `(target, native)` combination [availableCoursePacks] actually lists
+     * (i.e. [polski.data.usableCourseSelections], never a merely-registered-but-unusable pack) is
+     * accepted; [store]'s own `remember(activeCoursePackId)` key (`TrainingWebApp.kt`) picks this
+     * up on the very next recomposition and rebuilds the training/exercise engine for the newly
+     * active pack — no host-side `PackEngine("pl")`/`"pl"` literal anywhere on this path.
+     */
+    fun setCourse(target: String, native: String) {
+        val pairId = "$target-$native"
+        if (availableCoursePacks.none { it.pairId == pairId }) { status = "Недоступное сочетание языков"; return }
+        if (save(value.copy(target = target, native = native))) selectCoursePack(pairId)
     }
 
     fun setAppearance(appearance: Appearance) = save(value.copy(appearance = appearance))

@@ -78,9 +78,17 @@ fun comparisonTable(selection: MatrixSelection): MatrixTableViewModel {
     ).toViewModel()
 }
 
+/**
+ * EnRuAcceptance-2026-09-28.md §7 item 1/3 (ADR-36's own scope note): [verbs] is honestly empty
+ * for a pack whose verbs aren't aspect-marked (en-ru) — every host's `matrixSnapshot`/matrix
+ * screen unconditionally builds this table regardless of route, so a caseless pack degrades to an
+ * empty table here (nothing to teach on this pl-only aspect/tense grid), not a crash. Wiring a
+ * real en-ru-specific verb-tense matrix is separate, unstarted work (same note).
+ */
 fun verbsTable(selection: MatrixSelection): MatrixTableViewModel {
     val teaching = referenceVerbTeaching
-    val lemma = verbs.first { it.id == selection.verbId }.lemma
+    val lemma = verbs.firstOrNull { it.id == selection.verbId }?.lemma
+        ?: return MatrixTableViewModel(rowHeaderLabel = "Кто", columnHeaders = emptyList(), rows = emptyList())
     return MatrixTableEngine.build(
         rowAxis = teaching.subjects,
         rowHeaderLabel = "Кто",

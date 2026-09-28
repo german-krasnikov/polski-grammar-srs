@@ -2,6 +2,126 @@
 
 Новые сверху. Формат: решение → почему → где подробно.
 
+## ADR-39 · 2026-09-28 · EnRuAcceptance §7 items 1/3/4 (ADR-37 blocker 1, закрыт): en-ru реально генерирует упражнения на всех хостах; web получил пикеры курса
+
+ADR-37 честно задокументировал, но не закрыл, blocker 1: `courses/lang/en/forms.generated.json`
+материализовал только формы глаголов (`scripts/build-pack-en.mjs` читал только `lexicon.verbs`),
+поэтому первое же построение упражнения/цепочки для en-ru падало на `TableMorphology: no form for
+lexeme="noun:..."`/`"possessive:..."` и т.п. — en-ru был выбираем в Settings, но физически не мог
+обучать ни одному навыку ни на одном хосте. Диагностика вскрыла ещё два независимых, тоже core-lane
+(не пакетных) пробела на пути к реальной генерации:
+
+1. `caseSentencePrefix(GramCase, NumberGram)` (`CourseData.kt`) форсировал ЛЮБОЙ пакет через
+   pl-only закрытый enum `GramCase` (`nom`/`gen`/.../`voc`) — en-ru использует свой собственный,
+   капитализированный словарь падежей-ролей (`Subj`/`Obj`/`In`/`With`/`To`/`About`/`Of`,
+   `courses/lang/en/realization.json`'s собственный `$comment`), так что `GramCase.fromId("Subj")`
+   бросал `Unknown case Subj` из `PackEngine`'s generic `casePrefix`-порта (`PlEngine.kt`).
+2. Аналогично, `PronounForms`-порт форсировал `personalPronouns` (`Map<String, Map<GramCase,
+   String>>`, ADR-36: honestly-empty для пакета без полной pl-парадигмы падежей) — en-ru's
+   `{Subj, Obj}`-строки в `personalPronouns` никогда не проходят этот фильтр, так что
+   `personalPronouns.getValue("it")` бросал на пустой карте.
+3. `lang/en/lexicon.json`'s `personalPronouns` использовал ключи `"subject"/"object"` — единственная
+   непоследовательность внутри самого en-ru пакета: `caseSentencePrefixes`/`prepositions.json`'s
+   `role`-запись уже используют капитализированный `Subj`/`Obj` тот же файл-соседей.
+
+Решение (все правки — core, language-agnostic, ни одного выдуманного факта — только derived data и
+переименование JSON-ключей под уже принятую в этом же пакете конвенцию):
+
+- **`scripts/build-pack-en.mjs`** переписан: материализует ВСЕ категории, которые
+  `ConstructionRealizer` может запросить для en (`noun`/`adjective`/`possessive`/`pronoun`/`prep`/
+  `neg`/`verb`/`aux`), с ровно теми FeatureBundle-формами, что объявляют `realization.json`'s
+  `requiredFeatures`/`requiredFeaturesWhen` — верифицировано напрямую через
+  `EnExerciseGeneratorTest`'s уже существующий (до этой задачи) hand-authored fixture, который
+  доказывал именно эту форму достаточной для всех 16 skills. Verb-таблица для
+  `MatrixTables.kt#enVerbForm`/EN-24 (старая, lowercase-Tense форма с "will "+lemma) сохранена
+  байт-в-байт под тем же `verb:<id>` ключом — `TableMorphology` это плоская `(lexeme, bundle) → form`
+  карта, обе формы сосуществуют без конфликта.
+- **`caseSentencePrefix`** получил перегрузку по сырому `String` case-id (генерическую); типизированный
+  `GramCase`-оверлоад теперь тонкая обёртка над ней — pl's `"nomSg"/"nomPl"` спецкейс не тронут,
+  байт-в-байт то же поведение. `PlEngine.kt`'s `casePrefix`-порт читает case-id напрямую, не через
+  `GramCase.fromId`.
+- **`personalPronounForm(pronounId, caseId)`** (новая функция, `Pronouns.kt`) читает новый
+  `CoursePack.personalPronounRawForms` — тот же raw JSON, без pl-парадигмы-фильтра — используется
+  только generic `pronouns`-портом; типизированный `personalPronouns` (pl-специфичные
+  Matrix/pronoun-teaching экраны) не тронут.
+- **`courses/lang/en/lexicon.json`**: `personalPronouns`' ключи `"subject"/"object"` → `"Subj"/"Obj"`
+  (реальные английские формы не изменены — только имена JSON-ключей, под уже принятую в этом же
+  каталоге конвенцию); `EnLexicon.kt#enPersonalPronouns` обновлён на новый ключ.
+- **Матрица деградирует, а не падает, для беспадежного пакета** (тот же контракт ADR-36: пустой
+  результат — не выдуманный pl-факт, не крэш) — обнаружено этой задачей, поскольку macOS/iOS строят
+  matrix-snapshot безусловно на каждом снимке, не по route, в отличие от web: `MatrixTables.kt#
+  verbsTable` (общий для всех хостов) и `IosSnapshot.kt`'s собственная непереиспользуемая копия
+  той же таблицы теперь используют `firstOrNull` вместо `first` для `verbs.first{it.id==...}`;
+  `MacSnapshot.kt`/`IosSnapshot.kt`/`AndroidTrainingScreen.kt`'s seed-пикеры (`nounById(seed.nounId)
+  .lemma`, безусловно на каждом снимке) заменены на новый generic `nounLabel`/`nounLemma`
+  (`Nouns.kt`, новый `CoursePack.nounLabels` — raw `(id) -> (lemma, meaning)`, без pl-фильтра).
+  Web's `MatrixWeb.kt` получил явный `hasCaseSystem`-гейт (Карта/Падежи/Местоимения → спокойное
+  сообщение вместо крэша для беспадежного пакета; «Времена и лица» не тронуты — EN-24 уже
+  language-independent) и такой же fallback для inline case-reference подсказки
+  (`renderCaseReferenceWeb`, «Таблица под рукой» на карточке Training).
+
+**Web (EnRuAcceptance §7 item 3, единственный хост без пикера вовсе):**
+`SettingsWeb.kt` получил секцию «Курс» — два `<select>` (`#settings-target`/`#settings-native`),
+построенных из `polski.data.availableCoursePacks` (то есть `usableCourseSelections` — не может
+предложить непригодный пакет), вызывающих новый `WebPreferencesController.setCourse(target,
+native)` → `selectCoursePack`. `TrainingWebApp.kt`'s `store` (не `renderer` — см. его же KDoc: этот
+класс держит ручной DOM-diff напрямую против живого `root`, перестройка сбросила бы diff-state, не
+DOM, оставляя вторую копию контента) теперь `remember(activeCoursePackId)`-keyed, так что переключение
+пакета в Settings пересобирает `PlExerciseEngine` на следующей рекомпозиции — идиоматичный Compose-
+способ того же «rebuild bridge on pack switch», что ADR-37 сделал для macOS/iOS императивно.
+`VocabularyWebController` (живёт внутри неперестраиваемого `renderer`) сам себя лечит: `render()`
+сверяет `activeCoursePackId` с тем, для какого пакета он загружен, и перезагружает документ/сбрасывает
+per-item UI-state при расхождении — тот же «detect the switch at the entry point» паттерн, что ADR-37
+применил к Mac/iOS-бриджам. Каждое место в `TrainingWebApp.kt`/`VocabularyWeb.kt`, хардкодившее
+`lang="pl"`/«по-польски»/«Русский → польский», теперь читает активный пакет живьём (pl-ru — байт-в-
+байт то же самое, так как `activeTargetLangCode()`/label-карты дают `"pl"`/«по-польски» по умолчанию).
+
+Не входит: полная генерализация Matrix (богатые en-ru-specific Карта/Падежи/Местоимения-экраны) —
+явный, задокументированный техдолг (тот же ADR-36's scope note), не в объёме этой задачи; словарь
+(EN-16) на других хостах (android/iOS/macOS) кроме web — их `StudyDirection`-хардкоды не тронуты
+здесь (web-only задача).
+
+Проверено: `:shared:desktopTest` 364/364, `:shared:jsBrowserTest`/`:shared:wasmJsBrowserTest`,
+`:composeApp:desktopTest`, `:composeApp:compileKotlinJs`/`compileKotlinWasmJs`,
+`:androidApp:testDebugUnitTest`/`assembleDebug` — все 0 failures; `:shared:macosArm64Test` 388/388
+(0 failures, было 387/1 до этой задачи); `:shared:iosSimulatorArm64Test` 400/400 (0 failures — **и
+ранее известный, задокументированный в ADR-36/37 red-тест
+`IosSessionTest.currentSnapshotAfterSwitchingActivePackToEnRuDoesNotThrow` теперь реально зелёный**).
+Новый `EnPackEngineRealFormsTest` (`:shared` commonTest) — реальный `PackEngine("en")`/
+`plExerciseGenerator`/`plChainSteps` (не hand-authored fixture) генерирует все 16 skills и 5-шаговую
+цепочку из реального, проверенного-в-checked-in `forms.generated.json`; RED подтверждён до фикса
+(падал на `TableMorphology: no form...`, затем `Unknown case Subj`, затем на отсутствующем
+pronoun-ряде), GREEN после. `MacSessionTest`'s ADR-37-red тест переписан в
+`switchingToEnRuNowSucceedsAndServesARealEnglishExercise` (положительный контракт вместо
+rollback-контракта, чья предпосылка закрылась). `npm test` 268/268; `npm run course:validate` все 4
+валидатора PASS. pl-ru golden/parity Kotlin-suites не тронуты содержательно.
+
+Playwright (`kotlin-en-course-switch.spec.ts`, новый, добавлен в `playwright.kotlin.config.ts`;
+wasm и js ветки chromium, оба PASS): реальный сценарий на web — Settings перечисляет оба usable
+пакета, выбор English рекомпозирует Training (`lang="en"`, реальный английский текст, ни одной
+кириллицы/польской диакритики), typed-режим получает «Ответ по-английски», навык «Object · без
+падежа» показывает свой реальный en-ru лайфхак (не мок), словарь показывает «Русский → английский»/
+«Английский → русский», переключение обратно на pl-ru восстанавливает байт-в-байт исходные подписи
+и `lang="pl"`. Полный региональный прогон `playwright.kotlin.config.ts` (все specs, обе ветки,
+chromium): 156 passed / 3 failed на КАЖДОЙ ветке — все 3 подтверждены pre-existing через чистый
+`git worktree` на родительском коммите (7d460a5, до этой задачи): 2 — уже задокументированный в
+ADR-22 `.change-before`/`.change-after`-разрыв на 2 pl-таблицах; 1 (`kotlin-parity-chain.spec.ts`'s
+P02, 5-й step «Отрицание» chain) — не задокументированный ранее, но идентично воспроизводится на
+чистом родительском коммите без единой правки этой задачи, то есть не регрессия этой работы;
+зафиксировано здесь как известный, не устранённый в этой задаче гэп для отдельного тикета.
+
+Где: `scripts/build-pack-en.mjs`, `courses/lang/en/forms.generated.json`, `courses/lang/en/
+lexicon.json`; `kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt` (`caseSentencePrefix`
+overload, `nounLabels`, `personalPronounRawForms`), `Nouns.kt`, `Pronouns.kt`, `EnLexicon.kt`;
+`kotlin/shared/src/commonMain/kotlin/polski/core/PlEngine.kt`; `kotlin/shared/src/commonMain/kotlin/
+polski/presentation/MatrixTables.kt`; `kotlin/shared/src/macosMain/kotlin/polski/macos/
+MacSnapshot.kt`; `kotlin/shared/src/iosMain/kotlin/polski/ios/IosSnapshot.kt`; `kotlin/composeApp/
+src/androidMain/kotlin/polski/ui/screens/AndroidTrainingScreen.kt`; `kotlin/composeApp/src/webMain/
+kotlin/polski/ui/{SettingsWeb,WebPreferencesController,TrainingWebApp,VocabularyWeb,MatrixWeb}.kt`;
+tests: `kotlin/shared/src/commonTest/kotlin/polski/core/EnPackEngineRealFormsTest.kt`,
+`kotlin/shared/src/macosTest/kotlin/polski/macos/MacSessionTest.kt`,
+`tests/browser/kotlin-en-course-switch.spec.ts`, `playwright.kotlin.config.ts`.
+
 ## ADR-38 · 2026-09-28 · EnRuAcceptance §7 item 2, коррекция ADR-37 (blocker 2): Settings-снимок сам исправляется после отката пакета тренировочным бриджем
 
 Ревью ADR-37's коммита (7bca546) вскрыло второй пробел вдобавок к уже честно задокументированному

@@ -9,6 +9,7 @@ import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
 import polski.data.adjectives
 import polski.data.nounById
+import polski.data.nounLemma
 import polski.data.nouns
 import polski.data.personalPronouns
 import polski.data.possessives
@@ -99,7 +100,7 @@ internal fun snapshot(state: AppUiState): String = buildJsonObject {
     put("error", state.error?.let(::JsonPrimitive) ?: JsonNull)
     put("nextDue", state.nextDue?.toEpochMilliseconds()?.let(::JsonPrimitive) ?: JsonNull)
     put("now", state.now?.toEpochMilliseconds()?.let(::JsonPrimitive) ?: JsonNull)
-    put("seeds", JsonArray(sentenceSeeds.mapIndexed { index, seed -> choice(index.toString(), nounById(seed.nounId).lemma) }))
+    put("seeds", JsonArray(sentenceSeeds.mapIndexed { index, seed -> choice(index.toString(), nounLemma(seed.nounId)) }))
     put("skills", JsonArray(skills.map { skill -> buildJsonObject {
         put("id", skill.id); put("title", skill.title); put("group", skill.group)
         put("level", skill.level); put("formula", skill.formula); put("theory", skill.theory)

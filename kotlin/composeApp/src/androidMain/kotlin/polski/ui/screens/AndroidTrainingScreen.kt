@@ -28,6 +28,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import polski.data.courseContextHelp
 import polski.data.nounById
+import polski.data.nounLemma
 import polski.data.courseChainPresentation
 import polski.presentation.chainDisplayCount
 import polski.data.skillById
@@ -115,7 +116,7 @@ internal fun AndroidTrainingScreen(
             AndroidChoiceMenu(
                 "Набор слов",
                 state.seedIndex.toString(),
-                sentenceSeeds.mapIndexed { index, seed -> index.toString() to nounById(seed.nounId).lemma },
+                sentenceSeeds.mapIndexed { index, seed -> index.toString() to nounLemma(seed.nounId) },
             ) { dispatch(AppAction.SelectChainSeed(it.toInt())) }
             val displayCount = state.chainDisplayCount
             Text("$displayCount / ${state.chain.size} · ${courseChainPresentation.summary}",

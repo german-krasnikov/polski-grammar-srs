@@ -25,10 +25,9 @@ import polski.data.exerciseCopy
 import polski.data.generatedCurriculumJsonByLang
 import polski.data.nounByIdOrNull
 import polski.data.packRegistry
-import polski.data.personalPronouns
+import polski.data.personalPronounForm
 import polski.data.renderCoursePattern
 import polski.grammar.generatedFormsFixtureJson
-import polski.model.GramCase
 import polski.model.NumberGram
 import polski.training.parseCurriculum
 
@@ -97,8 +96,8 @@ internal class PackEngine(langId: String) {
         ids = ids,
         copy = PackCopy { key -> exerciseCopy(key) },
         pattern = PackPattern { key, values -> renderCoursePattern(key, values) },
-        casePrefix = CasePrefix { caseId, numberId -> caseSentencePrefix(GramCase.fromId(caseId), NumberGram.fromId(numberId)) },
-        pronouns = PronounForms { key, caseId -> personalPronouns.getValue(key).getValue(GramCase.fromId(caseId)) },
+        casePrefix = CasePrefix { caseId, numberId -> caseSentencePrefix(caseId, NumberGram.fromId(numberId)) },
+        pronouns = PronounForms { key, caseId -> personalPronounForm(key, caseId) },
         textCase = TextCase { value -> polski.grammar.capitalize(value) },
         defaultOwnerLexeme = recipeSet.defaultOwnerLexeme,
         verbLexeme = recipeSet.verbLexeme,

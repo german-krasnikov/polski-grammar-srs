@@ -149,17 +149,18 @@ class MacSessionTest {
      * very next [MacSession.dispatch]/[MacSession.currentSnapshot] and rebuild for the newly
      * active pack, the same way [MacSession.importJson] already rebuilds after a progress import.
      *
-     * Today en-ru's own content can't actually build a working exercise engine yet — a *deeper*
-     * root cause this task uncovered but does not fix (`courses/lang/en/forms.generated.json`
-     * only has verb forms; every construction needing a noun/adjective/possessive form throws in
-     * `:core-engine`, still outside `usableCourseSelections`'s parse-only probe). That must not
-     * crash this bridge: this pins the fallback contract instead — no crash, the active pack
-     * rolls back to the one this session can actually run, and its progress stays exactly where
-     * it was. Once that content gap closes, the exact same rebuild path starts succeeding with no
-     * further change here.
+     * EnRuAcceptance-2026-09-28.md §7 item 1 (ADR-37 blocker 1, closed by this task): this test
+     * used to name its own premise — en-ru's engine "can't actually build yet" — because
+     * `lang/en/forms.generated.json` only had verb forms; any real generation threw and this
+     * bridge's `rebuildIfCourseSwitched` correctly rolled the switch back rather than crash.
+     * `scripts/build-pack-en.mjs` now materializes every category `ConstructionRealizer` can
+     * query (noun/adjective/possessive/pronoun/prep/neg/verb/aux), and `caseSentencePrefix`/
+     * `personalPronounForm` (`CourseData.kt`/`Pronouns.kt`) no longer force a pack's own case ids
+     * through pl's closed [polski.model.GramCase] — en-ru genuinely builds now, so the switch must
+     * succeed, not roll back.
      */
     @Test
-    fun switchingToAPackWhoseEngineCannotBuildYetDoesNotCrashAndRollsBackToTheWorkingPack() = withSession { session ->
+    fun switchingToEnRuNowSucceedsAndServesARealEnglishExercise() = withSession { session ->
         session.dispatch("continueIntroduction")
         val beforeId = exerciseId(session)
         try {
@@ -167,9 +168,8 @@ class MacSessionTest {
 
             session.dispatch("refresh")
 
-            assertEquals("pl-ru", polski.data.activeCoursePackId,
-                "a pack this session can't actually build must be rolled back, not left mismatched")
-            assertEquals(beforeId, exerciseId(session), "the working session's own progress/exercise must be untouched")
+            assertEquals("en-ru", polski.data.activeCoursePackId, "en-ru now builds a real session and must stay active")
+            assertTrue(exerciseId(session) != beforeId, "switching pack must serve a new (en-ru) exercise, not the stale pl-ru one")
             assertEquals("Question", phase(session))
         } finally {
             polski.data.selectCoursePack("pl-ru")

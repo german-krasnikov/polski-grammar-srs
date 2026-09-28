@@ -10,6 +10,7 @@ import polski.data.courseMaleAccIntro
 import polski.data.courseAspectNoPresent
 import polski.data.adjectives
 import polski.data.nounById
+import polski.data.nounByIdOrNull
 import polski.data.nouns
 import polski.data.personalPronouns
 import polski.data.referencePronounTeaching
@@ -73,12 +74,24 @@ internal fun renderMatrixWeb(root: HTMLElement, state: AppUiState, dispatch: (Ap
             if (state.matrixSelection.section == section) className = "active"
         }
     }
+    // EnRuAcceptance-2026-09-28.md §7 item 3/4: the Map/Cases/Pronouns sections are entirely
+    // pl-specific (case/gender declension) — genuinely absent for a caseless pack like en-ru
+    // (ADR-36: [nouns] is honestly empty, not fabricated, for such a pack). Wiring a rich
+    // en-ru-specific reference screen is separate, unstarted work (ADR-36's own scope note); this
+    // guard's only job is to make that absence a calm placeholder instead of a crash. [renderVerbs]
+    // is unaffected — EN-24's English verb/do-support tables already read en's own, pack-independent
+    // data and work regardless of which pack is active.
+    val hasCaseSystem = nouns.isNotEmpty()
     when (state.matrixSelection.section) {
-        MatrixSection.Map -> renderMap(root, dispatch)
-        MatrixSection.Cases -> renderCases(root, state, dispatch)
+        MatrixSection.Map -> if (hasCaseSystem) renderMap(root, dispatch) else renderNoCaseSystemNotice(root)
+        MatrixSection.Cases -> if (hasCaseSystem) renderCases(root, state, dispatch) else renderNoCaseSystemNotice(root)
         MatrixSection.Verbs -> renderVerbs(root, state, dispatch)
-        MatrixSection.Pronouns -> renderPronouns(root, dispatch)
+        MatrixSection.Pronouns -> if (hasCaseSystem) renderPronouns(root, dispatch) else renderNoCaseSystemNotice(root)
     }
+}
+
+private fun renderNoCaseSystemNotice(root: HTMLElement) {
+    root.matrixAdd("p", "muted", "Для текущего курса эта таблица недоступна: в этом языке нет падежей/рода. Открой «Времена и лица» — таблица глаголов и do-support работает для любого курса.")
 }
 
 /**
@@ -90,7 +103,13 @@ internal fun renderMatrixWeb(root: HTMLElement, state: AppUiState, dispatch: (Ap
 internal fun renderCaseReferenceWeb(root: HTMLElement, state: AppUiState, dispatch: (AppAction) -> Unit) {
     val exercise = state.exercise ?: return
     val revealed = state.phase == CardPhase.Revealed
-    val noun = nounById(exercise.nounId)
+    // EnRuAcceptance-2026-09-28.md §7 item 3/4: a caseless active pack's noun (e.g. en-ru's "wife")
+    // is honestly absent from [nouns] (ADR-36) — this "current sentence's case table" hint is
+    // pl-specific declension by definition, so it has nothing to show, not a crash.
+    val noun = nounByIdOrNull(exercise.nounId) ?: run {
+        root.matrixAdd("p", "muted", "Для этого курса падежная таблица недоступна.")
+        return
+    }
     root.matrixAdd("h3", "Таблица этого предложения")
     root.matrixAdd("p", "Можно подсматривать · ${noun.lemma} · ${genderNames.getValue(noun.gender)} · ${if (exercise.number == NumberGram.SG) "ед. ч." else "мн. ч."}")
     val scroll = root.matrixAdd("div", cls = "table-scroll")

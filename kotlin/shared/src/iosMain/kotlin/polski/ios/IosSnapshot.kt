@@ -12,6 +12,7 @@ import polski.data.enPersonalPronouns
 import polski.data.enVerbForm
 import polski.data.enVerbs
 import polski.data.nounById
+import polski.data.nounLemma
 import polski.data.nouns
 import polski.data.personalPronouns
 import polski.data.possessives
@@ -99,7 +100,7 @@ internal fun snapshot(state: AppUiState): String = buildJsonObject {
     put("error", state.error?.let(::JsonPrimitive) ?: JsonNull)
     put("nextDue", state.nextDue?.toEpochMilliseconds()?.let(::JsonPrimitive) ?: JsonNull)
     put("now", state.now?.toEpochMilliseconds()?.let(::JsonPrimitive) ?: JsonNull)
-    put("seeds", JsonArray(sentenceSeeds.mapIndexed { index, seed -> choice(index.toString(), nounById(seed.nounId).lemma) }))
+    put("seeds", JsonArray(sentenceSeeds.mapIndexed { index, seed -> choice(index.toString(), nounLemma(seed.nounId)) }))
     put("skills", JsonArray(skills.map { skill -> buildJsonObject {
         put("id", skill.id); put("title", skill.title); put("group", skill.group)
         put("level", skill.level); put("formula", skill.formula); put("theory", skill.theory)
@@ -410,7 +411,11 @@ private fun matrixSnapshot(state: AppUiState): JsonElement {
             Tense.entries.forEach { tense -> put(tense.id, referenceVerbTeaching.tenseLabels.getValue(tense).compact) }
         })
         val verbTenses = listOf(Tense.PRESENT, Tense.PAST, Tense.FUTURE)
-        val verbLemma = verbs.first { it.id == selection.verbId }.lemma
+        // EnRuAcceptance-2026-09-28.md §7 item 1/3: [verbs] is honestly empty for a pack whose
+        // verbs aren't aspect-marked (en-ru) — [referenceVerbTeaching.subjects] is empty too
+        // (ADR-36), so [verbsRows] below is empty regardless; this fallback just avoids crashing
+        // before reaching that, matching MatrixTables.kt#verbsTable's own fix for this same gap.
+        val verbLemma = verbs.firstOrNull { it.id == selection.verbId }?.lemma ?: ""
         val verbsTable = MatrixTableEngine.build(
             rowAxis = referenceVerbTeaching.subjects,
             rowHeaderLabel = "Кто",

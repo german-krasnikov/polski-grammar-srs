@@ -211,6 +211,16 @@ internal class CoursePack(private val source: CoursePackSource) {
             NumberGram.entries.associateWith { number -> value.obj("forms").obj(number.id).caseForms() })
     }.requireUniqueIds(Noun::id) }
 
+    /**
+     * EnRuAcceptance-2026-09-28.md §7 item 3/4: every noun row's own `(lemma, meaning)`, regardless
+     * of whether it has pl's case/gender shape — [nouns] above skips a genderless pack's rows
+     * entirely, but a host's chain-seed picker (`TrainingWebApp.kt`) only ever needs a label for
+     * whichever noun the active pack's own [sentenceSeeds] actually name, never pl's declension.
+     */
+    val nounLabels: Map<String, Pair<String, String>> by lazy {
+        root.rows("nouns").associate { value -> value.string("id") to (value.string("lemma") to value.string("meaning")) }
+    }
+
     /** Same reasoning as [nouns]: a row whose "forms" isn't number×gender×case-shaped (en's flat
      *  `{"invariant": "..."}`) is skipped, not force-parsed. */
     val adjectives: List<Adjective> by lazy { root.rows("adjectives").mapNotNull { value ->
@@ -536,6 +546,20 @@ internal class CoursePack(private val source: CoursePackSource) {
         }.toMap()
     }
 
+    /**
+     * EnRuAcceptance-2026-09-28.md §7 item 1 (ADR-37 blocker 1): [personalPronouns] above skips
+     * any pronoun row that isn't pl's full 7-case paradigm — en's own `{subject, object}` rows
+     * (`lang/en/lexicon.json`) never pass that filter, so [PackEngine]'s generic `pronouns` port
+     * (`PlEngine.kt`) needs every pack's raw, un-filtered case-id → form map instead, keyed by
+     * whatever case-id strings the pack's own JSON actually declares — never forced through
+     * [GramCase]'s pl-only closed set.
+     */
+    val personalPronounRawForms: Map<String, Map<String, String>> by lazy {
+        root.obj("personalPronouns").mapValues { (_, value) ->
+            value.jsonObject.mapValues { (_, form) -> form.jsonPrimitive.content }
+        }
+    }
+
     val possessives: List<Possessive> by lazy {
         root.rows("possessives").map { Possessive(PossessiveId.fromId(it.string("id")), it.string("label")) }
     }
@@ -712,9 +736,23 @@ val courseStemAlternations: List<StemAlternation> get() = packRegistry.active.st
 
 fun caseSentencePrefix(gramCase: GramCase, number: NumberGram): String {
     require(gramCase != GramCase.VOC)
-    val key = if (gramCase == GramCase.NOM) {
+    return caseSentencePrefix(gramCase.id, number)
+}
+
+/**
+ * EnRuAcceptance-2026-09-28.md §7 item 1 (ADR-37 blocker 1): the active pack's own case-id
+ * vocabulary is not necessarily [GramCase]'s pl-shaped closed set — en-ru's own
+ * `caseSentencePrefixes` (`courses/pairs/en-ru/pair.json`) is keyed by its own case ids ("Subj",
+ * not "nom"). [PackEngine]'s generic `casePrefix` port (`PlEngine.kt`) reads a pack's raw case id
+ * straight from its own [ConstructionRealizer] bundle instead of forcing it through
+ * [GramCase.fromId], which only recognizes pl's ids and throws `Unknown case` on any other pack's.
+ * pl's own [caseSentencePrefix] overload above still routes through here unchanged, so its
+ * `"nomSg"`/`"nomPl"` key split (pl's own convention, not a universal one) is preserved byte-for-byte.
+ */
+fun caseSentencePrefix(caseId: String, number: NumberGram): String {
+    val key = if (caseId == GramCase.NOM.id) {
         if (number == NumberGram.SG) "nomSg" else "nomPl"
-    } else gramCase.id
+    } else caseId
     return packRegistry.active.caseSentencePrefixes.getValue(key)
 }
 

@@ -1,8 +1,450 @@
 {
   "schemaVersion": 1,
-  "generatedFrom": "courses/lang/en/lexicon.json",
+  "generatedFrom": "courses/lang/en/lexicon.json + courses/lang/en/prepositions.json",
   "forms": {
+    "noun:wife": [
+      {
+        "bundle": {
+          "Number": "sg"
+        },
+        "form": "wife"
+      },
+      {
+        "bundle": {
+          "Number": "pl"
+        },
+        "form": "wives"
+      }
+    ],
+    "noun:woman": [
+      {
+        "bundle": {
+          "Number": "sg"
+        },
+        "form": "woman"
+      },
+      {
+        "bundle": {
+          "Number": "pl"
+        },
+        "form": "women"
+      }
+    ],
+    "noun:book": [
+      {
+        "bundle": {
+          "Number": "sg"
+        },
+        "form": "book"
+      },
+      {
+        "bundle": {
+          "Number": "pl"
+        },
+        "form": "books"
+      }
+    ],
+    "noun:work": [
+      {
+        "bundle": {
+          "Number": "sg"
+        },
+        "form": "job"
+      },
+      {
+        "bundle": {
+          "Number": "pl"
+        },
+        "form": "jobs"
+      }
+    ],
+    "noun:husband": [
+      {
+        "bundle": {
+          "Number": "sg"
+        },
+        "form": "husband"
+      },
+      {
+        "bundle": {
+          "Number": "pl"
+        },
+        "form": "husbands"
+      }
+    ],
+    "noun:friend": [
+      {
+        "bundle": {
+          "Number": "sg"
+        },
+        "form": "friend"
+      },
+      {
+        "bundle": {
+          "Number": "pl"
+        },
+        "form": "friends"
+      }
+    ],
+    "noun:son": [
+      {
+        "bundle": {
+          "Number": "sg"
+        },
+        "form": "son"
+      },
+      {
+        "bundle": {
+          "Number": "pl"
+        },
+        "form": "sons"
+      }
+    ],
+    "noun:dog": [
+      {
+        "bundle": {
+          "Number": "sg"
+        },
+        "form": "dog"
+      },
+      {
+        "bundle": {
+          "Number": "pl"
+        },
+        "form": "dogs"
+      }
+    ],
+    "noun:cat": [
+      {
+        "bundle": {
+          "Number": "sg"
+        },
+        "form": "cat"
+      },
+      {
+        "bundle": {
+          "Number": "pl"
+        },
+        "form": "cats"
+      }
+    ],
+    "noun:car": [
+      {
+        "bundle": {
+          "Number": "sg"
+        },
+        "form": "car"
+      },
+      {
+        "bundle": {
+          "Number": "pl"
+        },
+        "form": "cars"
+      }
+    ],
+    "noun:house": [
+      {
+        "bundle": {
+          "Number": "sg"
+        },
+        "form": "house"
+      },
+      {
+        "bundle": {
+          "Number": "pl"
+        },
+        "form": "houses"
+      }
+    ],
+    "noun:phone": [
+      {
+        "bundle": {
+          "Number": "sg"
+        },
+        "form": "phone"
+      },
+      {
+        "bundle": {
+          "Number": "pl"
+        },
+        "form": "phones"
+      }
+    ],
+    "noun:child": [
+      {
+        "bundle": {
+          "Number": "sg"
+        },
+        "form": "child"
+      },
+      {
+        "bundle": {
+          "Number": "pl"
+        },
+        "form": "children"
+      }
+    ],
+    "noun:window": [
+      {
+        "bundle": {
+          "Number": "sg"
+        },
+        "form": "window"
+      },
+      {
+        "bundle": {
+          "Number": "pl"
+        },
+        "form": "windows"
+      }
+    ],
+    "adjective:beautiful": [
+      {
+        "bundle": {},
+        "form": "beautiful"
+      }
+    ],
+    "adjective:new": [
+      {
+        "bundle": {},
+        "form": "new"
+      }
+    ],
+    "adjective:small": [
+      {
+        "bundle": {},
+        "form": "small"
+      }
+    ],
+    "adjective:nice": [
+      {
+        "bundle": {},
+        "form": "nice"
+      }
+    ],
+    "adjective:good": [
+      {
+        "bundle": {},
+        "form": "good"
+      }
+    ],
+    "adjective:old": [
+      {
+        "bundle": {},
+        "form": "old"
+      }
+    ],
+    "adjective:expensive": [
+      {
+        "bundle": {},
+        "form": "expensive"
+      }
+    ],
+    "possessive:my": [
+      {
+        "bundle": {},
+        "form": "my"
+      }
+    ],
+    "possessive:your": [
+      {
+        "bundle": {},
+        "form": "your"
+      }
+    ],
+    "possessive:his": [
+      {
+        "bundle": {},
+        "form": "his"
+      }
+    ],
+    "possessive:her": [
+      {
+        "bundle": {},
+        "form": "her"
+      }
+    ],
+    "possessive:its": [
+      {
+        "bundle": {},
+        "form": "its"
+      }
+    ],
+    "possessive:our": [
+      {
+        "bundle": {},
+        "form": "our"
+      }
+    ],
+    "possessive:their": [
+      {
+        "bundle": {},
+        "form": "their"
+      }
+    ],
+    "pronoun:I": [
+      {
+        "bundle": {},
+        "form": "I"
+      }
+    ],
+    "pronoun:you": [
+      {
+        "bundle": {},
+        "form": "you"
+      }
+    ],
+    "pronoun:he": [
+      {
+        "bundle": {},
+        "form": "he"
+      }
+    ],
+    "pronoun:she": [
+      {
+        "bundle": {},
+        "form": "she"
+      }
+    ],
+    "pronoun:it": [
+      {
+        "bundle": {},
+        "form": "it"
+      }
+    ],
+    "pronoun:we": [
+      {
+        "bundle": {},
+        "form": "we"
+      }
+    ],
+    "pronoun:they": [
+      {
+        "bundle": {},
+        "form": "they"
+      }
+    ],
+    "neg:not": [
+      {
+        "bundle": {},
+        "form": "not"
+      }
+    ],
+    "prep:role": [
+      {
+        "bundle": {
+          "Case": "Subj"
+        },
+        "form": ""
+      },
+      {
+        "bundle": {
+          "Case": "Obj"
+        },
+        "form": ""
+      },
+      {
+        "bundle": {
+          "Case": "In"
+        },
+        "form": "in"
+      },
+      {
+        "bundle": {
+          "Case": "With"
+        },
+        "form": "with"
+      },
+      {
+        "bundle": {
+          "Case": "To"
+        },
+        "form": "to"
+      },
+      {
+        "bundle": {
+          "Case": "About"
+        },
+        "form": "about"
+      },
+      {
+        "bundle": {
+          "Case": "Of"
+        },
+        "form": "of"
+      }
+    ],
     "verb:walk": [
+      {
+        "bundle": {
+          "Tense": "Pres",
+          "Person": "1",
+          "Number": "sg"
+        },
+        "form": "walk"
+      },
+      {
+        "bundle": {
+          "Tense": "Pres",
+          "Person": "2",
+          "Number": "sg"
+        },
+        "form": "walk"
+      },
+      {
+        "bundle": {
+          "Tense": "Pres",
+          "Person": "3",
+          "Number": "sg"
+        },
+        "form": "walks"
+      },
+      {
+        "bundle": {
+          "Tense": "Pres",
+          "Person": "1",
+          "Number": "pl"
+        },
+        "form": "walk"
+      },
+      {
+        "bundle": {
+          "Tense": "Pres",
+          "Person": "2",
+          "Number": "pl"
+        },
+        "form": "walk"
+      },
+      {
+        "bundle": {
+          "Tense": "Pres",
+          "Person": "3",
+          "Number": "pl"
+        },
+        "form": "walk"
+      },
+      {
+        "bundle": {
+          "Tense": "Past"
+        },
+        "form": "walked"
+      },
+      {
+        "bundle": {
+          "Tense": "Fut"
+        },
+        "form": "walk"
+      },
+      {
+        "bundle": {
+          "Aspect": "Continuous"
+        },
+        "form": "walking"
+      },
+      {
+        "bundle": {},
+        "form": "walk"
+      },
       {
         "bundle": {
           "Tense": "present",
@@ -151,6 +593,76 @@
     "verb:see": [
       {
         "bundle": {
+          "Tense": "Pres",
+          "Person": "1",
+          "Number": "sg"
+        },
+        "form": "see"
+      },
+      {
+        "bundle": {
+          "Tense": "Pres",
+          "Person": "2",
+          "Number": "sg"
+        },
+        "form": "see"
+      },
+      {
+        "bundle": {
+          "Tense": "Pres",
+          "Person": "3",
+          "Number": "sg"
+        },
+        "form": "sees"
+      },
+      {
+        "bundle": {
+          "Tense": "Pres",
+          "Person": "1",
+          "Number": "pl"
+        },
+        "form": "see"
+      },
+      {
+        "bundle": {
+          "Tense": "Pres",
+          "Person": "2",
+          "Number": "pl"
+        },
+        "form": "see"
+      },
+      {
+        "bundle": {
+          "Tense": "Pres",
+          "Person": "3",
+          "Number": "pl"
+        },
+        "form": "see"
+      },
+      {
+        "bundle": {
+          "Tense": "Past"
+        },
+        "form": "saw"
+      },
+      {
+        "bundle": {
+          "Tense": "Fut"
+        },
+        "form": "see"
+      },
+      {
+        "bundle": {
+          "Aspect": "Continuous"
+        },
+        "form": "seeing"
+      },
+      {
+        "bundle": {},
+        "form": "see"
+      },
+      {
+        "bundle": {
           "Tense": "present",
           "Person": "1",
           "Number": "sg"
@@ -295,6 +807,76 @@
       }
     ],
     "verb:talk": [
+      {
+        "bundle": {
+          "Tense": "Pres",
+          "Person": "1",
+          "Number": "sg"
+        },
+        "form": "talk"
+      },
+      {
+        "bundle": {
+          "Tense": "Pres",
+          "Person": "2",
+          "Number": "sg"
+        },
+        "form": "talk"
+      },
+      {
+        "bundle": {
+          "Tense": "Pres",
+          "Person": "3",
+          "Number": "sg"
+        },
+        "form": "talks"
+      },
+      {
+        "bundle": {
+          "Tense": "Pres",
+          "Person": "1",
+          "Number": "pl"
+        },
+        "form": "talk"
+      },
+      {
+        "bundle": {
+          "Tense": "Pres",
+          "Person": "2",
+          "Number": "pl"
+        },
+        "form": "talk"
+      },
+      {
+        "bundle": {
+          "Tense": "Pres",
+          "Person": "3",
+          "Number": "pl"
+        },
+        "form": "talk"
+      },
+      {
+        "bundle": {
+          "Tense": "Past"
+        },
+        "form": "talked"
+      },
+      {
+        "bundle": {
+          "Tense": "Fut"
+        },
+        "form": "talk"
+      },
+      {
+        "bundle": {
+          "Aspect": "Continuous"
+        },
+        "form": "talking"
+      },
+      {
+        "bundle": {},
+        "form": "talk"
+      },
       {
         "bundle": {
           "Tense": "present",
@@ -443,6 +1025,76 @@
     "verb:go": [
       {
         "bundle": {
+          "Tense": "Pres",
+          "Person": "1",
+          "Number": "sg"
+        },
+        "form": "go"
+      },
+      {
+        "bundle": {
+          "Tense": "Pres",
+          "Person": "2",
+          "Number": "sg"
+        },
+        "form": "go"
+      },
+      {
+        "bundle": {
+          "Tense": "Pres",
+          "Person": "3",
+          "Number": "sg"
+        },
+        "form": "goes"
+      },
+      {
+        "bundle": {
+          "Tense": "Pres",
+          "Person": "1",
+          "Number": "pl"
+        },
+        "form": "go"
+      },
+      {
+        "bundle": {
+          "Tense": "Pres",
+          "Person": "2",
+          "Number": "pl"
+        },
+        "form": "go"
+      },
+      {
+        "bundle": {
+          "Tense": "Pres",
+          "Person": "3",
+          "Number": "pl"
+        },
+        "form": "go"
+      },
+      {
+        "bundle": {
+          "Tense": "Past"
+        },
+        "form": "went"
+      },
+      {
+        "bundle": {
+          "Tense": "Fut"
+        },
+        "form": "go"
+      },
+      {
+        "bundle": {
+          "Aspect": "Continuous"
+        },
+        "form": "going"
+      },
+      {
+        "bundle": {},
+        "form": "go"
+      },
+      {
+        "bundle": {
           "Tense": "present",
           "Person": "1",
           "Number": "sg"
@@ -587,6 +1239,76 @@
       }
     ],
     "verb:like": [
+      {
+        "bundle": {
+          "Tense": "Pres",
+          "Person": "1",
+          "Number": "sg"
+        },
+        "form": "like"
+      },
+      {
+        "bundle": {
+          "Tense": "Pres",
+          "Person": "2",
+          "Number": "sg"
+        },
+        "form": "like"
+      },
+      {
+        "bundle": {
+          "Tense": "Pres",
+          "Person": "3",
+          "Number": "sg"
+        },
+        "form": "likes"
+      },
+      {
+        "bundle": {
+          "Tense": "Pres",
+          "Person": "1",
+          "Number": "pl"
+        },
+        "form": "like"
+      },
+      {
+        "bundle": {
+          "Tense": "Pres",
+          "Person": "2",
+          "Number": "pl"
+        },
+        "form": "like"
+      },
+      {
+        "bundle": {
+          "Tense": "Pres",
+          "Person": "3",
+          "Number": "pl"
+        },
+        "form": "like"
+      },
+      {
+        "bundle": {
+          "Tense": "Past"
+        },
+        "form": "liked"
+      },
+      {
+        "bundle": {
+          "Tense": "Fut"
+        },
+        "form": "like"
+      },
+      {
+        "bundle": {
+          "Aspect": "Continuous"
+        },
+        "form": "liking"
+      },
+      {
+        "bundle": {},
+        "form": "like"
+      },
       {
         "bundle": {
           "Tense": "present",
@@ -735,6 +1457,76 @@
     "verb:read": [
       {
         "bundle": {
+          "Tense": "Pres",
+          "Person": "1",
+          "Number": "sg"
+        },
+        "form": "read"
+      },
+      {
+        "bundle": {
+          "Tense": "Pres",
+          "Person": "2",
+          "Number": "sg"
+        },
+        "form": "read"
+      },
+      {
+        "bundle": {
+          "Tense": "Pres",
+          "Person": "3",
+          "Number": "sg"
+        },
+        "form": "reads"
+      },
+      {
+        "bundle": {
+          "Tense": "Pres",
+          "Person": "1",
+          "Number": "pl"
+        },
+        "form": "read"
+      },
+      {
+        "bundle": {
+          "Tense": "Pres",
+          "Person": "2",
+          "Number": "pl"
+        },
+        "form": "read"
+      },
+      {
+        "bundle": {
+          "Tense": "Pres",
+          "Person": "3",
+          "Number": "pl"
+        },
+        "form": "read"
+      },
+      {
+        "bundle": {
+          "Tense": "Past"
+        },
+        "form": "read"
+      },
+      {
+        "bundle": {
+          "Tense": "Fut"
+        },
+        "form": "read"
+      },
+      {
+        "bundle": {
+          "Aspect": "Continuous"
+        },
+        "form": "reading"
+      },
+      {
+        "bundle": {},
+        "form": "read"
+      },
+      {
+        "bundle": {
           "Tense": "present",
           "Person": "1",
           "Number": "sg"
@@ -879,6 +1671,76 @@
       }
     ],
     "verb:have": [
+      {
+        "bundle": {
+          "Tense": "Pres",
+          "Person": "1",
+          "Number": "sg"
+        },
+        "form": "have"
+      },
+      {
+        "bundle": {
+          "Tense": "Pres",
+          "Person": "2",
+          "Number": "sg"
+        },
+        "form": "have"
+      },
+      {
+        "bundle": {
+          "Tense": "Pres",
+          "Person": "3",
+          "Number": "sg"
+        },
+        "form": "has"
+      },
+      {
+        "bundle": {
+          "Tense": "Pres",
+          "Person": "1",
+          "Number": "pl"
+        },
+        "form": "have"
+      },
+      {
+        "bundle": {
+          "Tense": "Pres",
+          "Person": "2",
+          "Number": "pl"
+        },
+        "form": "have"
+      },
+      {
+        "bundle": {
+          "Tense": "Pres",
+          "Person": "3",
+          "Number": "pl"
+        },
+        "form": "have"
+      },
+      {
+        "bundle": {
+          "Tense": "Past"
+        },
+        "form": "had"
+      },
+      {
+        "bundle": {
+          "Tense": "Fut"
+        },
+        "form": "have"
+      },
+      {
+        "bundle": {
+          "Aspect": "Continuous"
+        },
+        "form": "having"
+      },
+      {
+        "bundle": {},
+        "form": "have"
+      },
       {
         "bundle": {
           "Tense": "present",
@@ -1027,6 +1889,76 @@
     "verb:do": [
       {
         "bundle": {
+          "Tense": "Pres",
+          "Person": "1",
+          "Number": "sg"
+        },
+        "form": "do"
+      },
+      {
+        "bundle": {
+          "Tense": "Pres",
+          "Person": "2",
+          "Number": "sg"
+        },
+        "form": "do"
+      },
+      {
+        "bundle": {
+          "Tense": "Pres",
+          "Person": "3",
+          "Number": "sg"
+        },
+        "form": "does"
+      },
+      {
+        "bundle": {
+          "Tense": "Pres",
+          "Person": "1",
+          "Number": "pl"
+        },
+        "form": "do"
+      },
+      {
+        "bundle": {
+          "Tense": "Pres",
+          "Person": "2",
+          "Number": "pl"
+        },
+        "form": "do"
+      },
+      {
+        "bundle": {
+          "Tense": "Pres",
+          "Person": "3",
+          "Number": "pl"
+        },
+        "form": "do"
+      },
+      {
+        "bundle": {
+          "Tense": "Past"
+        },
+        "form": "did"
+      },
+      {
+        "bundle": {
+          "Tense": "Fut"
+        },
+        "form": "do"
+      },
+      {
+        "bundle": {
+          "Aspect": "Continuous"
+        },
+        "form": "doing"
+      },
+      {
+        "bundle": {},
+        "form": "do"
+      },
+      {
+        "bundle": {
           "Tense": "present",
           "Person": "1",
           "Number": "sg"
@@ -1170,7 +2102,133 @@
         "form": "will do"
       }
     ],
+    "aux:do": [
+      {
+        "bundle": {
+          "Tense": "Pres",
+          "Person": "1",
+          "Number": "sg"
+        },
+        "form": "do"
+      },
+      {
+        "bundle": {
+          "Tense": "Pres",
+          "Person": "2",
+          "Number": "sg"
+        },
+        "form": "do"
+      },
+      {
+        "bundle": {
+          "Tense": "Pres",
+          "Person": "3",
+          "Number": "sg"
+        },
+        "form": "does"
+      },
+      {
+        "bundle": {
+          "Tense": "Pres",
+          "Person": "1",
+          "Number": "pl"
+        },
+        "form": "do"
+      },
+      {
+        "bundle": {
+          "Tense": "Pres",
+          "Person": "2",
+          "Number": "pl"
+        },
+        "form": "do"
+      },
+      {
+        "bundle": {
+          "Tense": "Pres",
+          "Person": "3",
+          "Number": "pl"
+        },
+        "form": "do"
+      },
+      {
+        "bundle": {
+          "Tense": "Past"
+        },
+        "form": "did"
+      }
+    ],
     "verb:be": [
+      {
+        "bundle": {
+          "Tense": "Pres",
+          "Person": "1",
+          "Number": "sg"
+        },
+        "form": "am"
+      },
+      {
+        "bundle": {
+          "Tense": "Pres",
+          "Person": "2",
+          "Number": "sg"
+        },
+        "form": "are"
+      },
+      {
+        "bundle": {
+          "Tense": "Pres",
+          "Person": "3",
+          "Number": "sg"
+        },
+        "form": "is"
+      },
+      {
+        "bundle": {
+          "Tense": "Pres",
+          "Person": "1",
+          "Number": "pl"
+        },
+        "form": "are"
+      },
+      {
+        "bundle": {
+          "Tense": "Pres",
+          "Person": "2",
+          "Number": "pl"
+        },
+        "form": "are"
+      },
+      {
+        "bundle": {
+          "Tense": "Pres",
+          "Person": "3",
+          "Number": "pl"
+        },
+        "form": "are"
+      },
+      {
+        "bundle": {
+          "Tense": "Past"
+        },
+        "form": "was"
+      },
+      {
+        "bundle": {
+          "Tense": "Fut"
+        },
+        "form": "be"
+      },
+      {
+        "bundle": {
+          "Aspect": "Continuous"
+        },
+        "form": "being"
+      },
+      {
+        "bundle": {},
+        "form": "be"
+      },
       {
         "bundle": {
           "Tense": "present",
@@ -1314,6 +2372,112 @@
           "Number": "pl"
         },
         "form": "will be"
+      }
+    ],
+    "aux:be": [
+      {
+        "bundle": {
+          "Tense": "Pres",
+          "Person": "1",
+          "Number": "sg"
+        },
+        "form": "am"
+      },
+      {
+        "bundle": {
+          "Tense": "Pres",
+          "Person": "2",
+          "Number": "sg"
+        },
+        "form": "are"
+      },
+      {
+        "bundle": {
+          "Tense": "Pres",
+          "Person": "3",
+          "Number": "sg"
+        },
+        "form": "is"
+      },
+      {
+        "bundle": {
+          "Tense": "Pres",
+          "Person": "1",
+          "Number": "pl"
+        },
+        "form": "are"
+      },
+      {
+        "bundle": {
+          "Tense": "Pres",
+          "Person": "2",
+          "Number": "pl"
+        },
+        "form": "are"
+      },
+      {
+        "bundle": {
+          "Tense": "Pres",
+          "Person": "3",
+          "Number": "pl"
+        },
+        "form": "are"
+      },
+      {
+        "bundle": {
+          "Tense": "Past"
+        },
+        "form": "was"
+      }
+    ],
+    "aux:will": [
+      {
+        "bundle": {
+          "Tense": "Fut",
+          "Person": "1",
+          "Number": "sg"
+        },
+        "form": "will"
+      },
+      {
+        "bundle": {
+          "Tense": "Fut",
+          "Person": "2",
+          "Number": "sg"
+        },
+        "form": "will"
+      },
+      {
+        "bundle": {
+          "Tense": "Fut",
+          "Person": "3",
+          "Number": "sg"
+        },
+        "form": "will"
+      },
+      {
+        "bundle": {
+          "Tense": "Fut",
+          "Person": "1",
+          "Number": "pl"
+        },
+        "form": "will"
+      },
+      {
+        "bundle": {
+          "Tense": "Fut",
+          "Person": "2",
+          "Number": "pl"
+        },
+        "form": "will"
+      },
+      {
+        "bundle": {
+          "Tense": "Fut",
+          "Person": "3",
+          "Number": "pl"
+        },
+        "form": "will"
       }
     ]
   }

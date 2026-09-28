@@ -26,6 +26,8 @@ import org.w3c.dom.events.Event
 import org.w3c.dom.events.KeyboardEvent
 import kotlin.random.Random
 import kotlin.time.Clock
+import polski.data.activeCoursePackId
+import polski.data.availableCoursePacks
 import polski.platform.BrowserLocalDayProvider
 import polski.platform.browserFormatDate
 import polski.platform.WebProgressRepository
@@ -48,7 +50,12 @@ fun TrainingWebApp() {
     val routes = remember { WebRouteController() }
     val appearance = remember { WebAppearance() }
     var route by remember { mutableStateOf(routes.current) }
-    val store = remember {
+    // EnRuAcceptance-2026-09-28.md §7 item 3: keyed on the active pack's pairId so a Settings pack
+    // switch (`WebPreferencesController.setCourse`) rebuilds a fresh `PlExerciseEngine`/store bound
+    // to the newly active pack on the very next recomposition — the same "rebuild the training
+    // bridge on pack switch" fix ADR-37 already applied to macOS/iOS, done here the idiomatic
+    // Compose way instead of a manual dirty-check on every dispatch.
+    val store = remember(activeCoursePackId) {
         val scheduler = FsrsScheduler()
         var nextId = 0L
         TrainingStore(
@@ -65,6 +72,12 @@ fun TrainingWebApp() {
     }
     val state by store.state.collectAsState()
     val attemptedEffects = remember { mutableSetOf<Long>() }
+    // Deliberately NOT keyed on activeCoursePackId (unlike [store]): this class owns a long-lived,
+    // hand-rolled DOM diff (`previous`/`previousRoute`/RouteSlider) directly against `root`'s real
+    // children — rebuilding it mid-session would reset that diff state while the actual DOM stayed
+    // exactly as the old instance left it, so the next render's "first paint" branch would populate
+    // a second copy into it instead of replacing the first. Its own [VocabularyWebController]
+    // instead self-heals on pack switch (see its own reload-on-mismatch check).
     val renderer = remember { TrainingDomRenderer() }
 
     DisposableEffect(renderer) { onDispose { renderer.close() } }
@@ -275,6 +288,13 @@ private fun percentEncode(value: String): String {
 }
 
 private const val ROUTE_FOOTER_TEXT = "Прогресс сохраняется в этом браузере. Интервальные повторения — FSRS."
+
+/** EnRuAcceptance-2026-09-28.md §7 item 3/4: the active pack's own target-language `lang` attribute
+ *  code and Russian adverb ("по-английски" for en, matching pl's already-shipped "по-польски") —
+ *  every place this file used to hardcode `"pl"`/"по-польски" regardless of the active pack. */
+private fun activeTargetLangCode(): String = availableCoursePacks.firstOrNull { it.pairId == activeCoursePackId }?.target ?: "pl"
+private val targetAdverbs: Map<String, String> = mapOf("pl" to "по-польски", "en" to "по-английски")
+private fun activeTargetAdverb(): String = targetAdverbs[activeTargetLangCode()] ?: activeTargetLangCode()
 
 /** UX5 perf: delay before the idle Matrix prewarm runs (see [TrainingDomRenderer.scheduleMatrixPrewarm]).
  *  There is no `requestIdleCallback` binding in either DOM binding this project has (kotlinx-browser/
@@ -664,7 +684,7 @@ private class TrainingDomRenderer {
         polski.training.sentenceSeeds.forEachIndexed { index, seed ->
             val option = document.createElement("option") as org.w3c.dom.HTMLOptionElement
             option.value = index.toString()
-            option.textContent = "${polski.data.nounById(seed.nounId).lemma} — ${polski.data.nounById(seed.nounId).meaning}"
+            option.textContent = polski.data.nounLabel(seed.nounId)
             select.appendChild(option)
         }
         select.value = state.seedIndex.toString()
@@ -695,7 +715,7 @@ private class TrainingDomRenderer {
         state.chain.forEachIndexed { index, exercise ->
             review.appendChild(node("div").apply {
                 appendChild(node("small", text = "${index + 1} · ${polski.data.skillById(exercise.primarySkill).title}"))
-                appendChild(node("p", text = exercise.expected).apply { setAttribute("lang", "pl") })
+                appendChild(node("p", text = exercise.expected).apply { setAttribute("lang", activeTargetLangCode()) })
             })
         }
         complete.appendChild(node("div", "actions").apply {
@@ -736,7 +756,7 @@ private class TrainingDomRenderer {
             card.appendChild(node("div", "card-front method-introduce").apply {
                 appendChild(node("span", "eyebrow", if (state.styleId == StyleId.SituationFirst) "Сцена и намерение" else "Признаки и операция"))
                 appendChild(node("p", "source-sentence").apply {
-                    setAttribute("lang", "pl")
+                    setAttribute("lang", activeTargetLangCode())
                     appendContrastParts(this, sentenceHighlightParts(exercise.source, exercise.changes, ChangeSide.Before), "change-before")
                 })
                 appendChild(node("p", text = method.introduce))
@@ -751,7 +771,7 @@ private class TrainingDomRenderer {
         val front = node("div", "card-front").apply {
             appendChild(node("span", "eyebrow", "Исходное предложение"))
             appendChild(node("p", "source-sentence").apply {
-                setAttribute("lang", "pl")
+                setAttribute("lang", activeTargetLangCode())
                 appendContrastParts(this, sentenceHighlightParts(exercise.source, exercise.changes, ChangeSide.Before), "change-before")
             })
             appendChild(node("div", "operation").apply {
@@ -829,7 +849,7 @@ private class TrainingDomRenderer {
         if (state.answerMode == AnswerMode.Typed) {
             val input = document.createElement("textarea") as HTMLTextAreaElement
             input.id = "training-answer"
-            input.setAttribute("aria-label", "Ответ по-польски")
+            input.setAttribute("aria-label", "Ответ ${activeTargetAdverb()}")
             input.placeholder = "Напиши целое предложение…"
             input.value = state.draft
             input.addEventListener("input", { dispatch(AppAction.EditAnswer(input.value)) })
@@ -851,11 +871,11 @@ private class TrainingDomRenderer {
         val exercise = state.exercise ?: return
         back.appendChild(node("span", "eyebrow", "Обратная сторона · эталон"))
         back.appendChild(node("p", "answer-sentence").apply {
-            setAttribute("lang", "pl")
+            setAttribute("lang", activeTargetLangCode())
             appendContrastParts(this, sentenceHighlightParts(exercise.expected, exercise.changes, ChangeSide.After), "change-after")
         })
         if (exercise.accepted.isNotEmpty()) {
-            back.appendChild(node("p", "accepted", "Также: ${exercise.accepted.joinToString(" / ")}").apply { setAttribute("lang", "pl") })
+            back.appendChild(node("p", "accepted", "Также: ${exercise.accepted.joinToString(" / ")}").apply { setAttribute("lang", activeTargetLangCode()) })
         }
         if (state.answerMode == AnswerMode.Typed) {
             val result = state.evaluation?.correct == true

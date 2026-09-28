@@ -11,6 +11,8 @@ import org.w3c.dom.StorageEvent
 import org.w3c.dom.events.Event
 import kotlin.random.Random
 import kotlin.time.Clock
+import polski.data.activeCoursePackId
+import polski.data.availableCoursePacks
 import polski.data.courseVocabularyInstructions
 import polski.data.courseVocabularyUnavailableLabel
 import polski.data.VocabularyItem
@@ -23,7 +25,32 @@ import polski.vocabulary.StudyDirection
 import polski.vocabulary.VocabularyCodec
 import polski.vocabulary.VocabularyDocument
 
-private const val VOCABULARY_BACKUP_KEY = "polski-vocabulary-pl-ru-v1-backup"
+/** EnRuAcceptance-2026-09-28.md §7 item 4: one backup slot per active pack — was a single literal
+ *  pl-ru key shared by every pack, so an en-ru import backup would silently overwrite pl-ru's (or
+ *  vice versa) instead of getting its own, same reasoning as [VocabularyCodec.key] itself. */
+private val VOCABULARY_BACKUP_KEY: String get() = "polski-vocabulary-$activeCoursePackId-v1-backup"
+
+/** EnRuAcceptance-2026-09-28.md §7 item 3/4: the active pack's own target/native language, for
+ *  every label below that used to hardcode "польский"/"русский". Lowercase nominative adjective
+ *  forms (matching "Эталон · польский"'s own agreement) coincide with the capitalized noun label
+ *  for every language this build embeds. */
+private val languageAdjective: Map<String, String> = mapOf("pl" to "польский", "en" to "английский", "ru" to "русский")
+private val languageAdverb: Map<String, String> = mapOf("pl" to "по-польски", "en" to "по-английски", "ru" to "по-русски")
+private val languageBcp47: Map<String, String> = mapOf("pl" to "pl", "en" to "en", "ru" to "ru")
+
+private data class ActivePackLanguages(val targetCode: String, val nativeCode: String) {
+    val targetAdjective get() = languageAdjective[targetCode] ?: targetCode
+    val nativeAdjective get() = languageAdjective[nativeCode] ?: nativeCode
+    val targetAdverb get() = languageAdverb[targetCode] ?: targetCode
+    val nativeAdverb get() = languageAdverb[nativeCode] ?: nativeCode
+    val targetLang get() = languageBcp47[targetCode] ?: targetCode
+    val nativeLang get() = languageBcp47[nativeCode] ?: nativeCode
+}
+
+private fun activePackLanguages(): ActivePackLanguages {
+    val pack = availableCoursePacks.firstOrNull { it.pairId == activeCoursePackId }
+    return ActivePackLanguages(pack?.target ?: "pl", pack?.native ?: "ru")
+}
 
 /** Browser adapter for the shared vocabulary document; it never writes legacy grammar progress. */
 internal class VocabularyWebController {
@@ -63,6 +90,12 @@ internal class VocabularyWebController {
     private var editor = EditorDraft()
     private var importText = ""
     private var pendingRefresh: (() -> Unit)? = null
+    // EnRuAcceptance-2026-09-28.md §7 item 3/4: which pack [document]/[direction] were last loaded
+    // for — this controller is a long-lived singleton (`TrainingDomRenderer`'s own field, never
+    // rebuilt on a Settings pack switch, see that class's own KDoc), so [render] below self-heals
+    // by reloading whenever the active pack no longer matches, the same "detect the switch at the
+    // entry point" pattern ADR-37 already applied to the macOS/iOS session bridges.
+    private var loadedForPackId: String = activeCoursePackId
     private val storageListener: (Event) -> Unit = { raw ->
         // Fires only in OTHER tabs of this origin; the writing tab never sees its own event.
         val event = raw as? StorageEvent
@@ -88,6 +121,15 @@ internal class VocabularyWebController {
         pendingRefresh = null
     }
 
+    /** See [loadedForPackId]'s own KDoc. Resets the per-pack UI state a routine cross-tab [reload]
+     *  must NOT touch (a plain storage-event reload keeps whichever card/direction is on screen). */
+    private fun reloadForActivePack() {
+        loadedForPackId = activeCoursePackId
+        direction = StudyDirection.RussianToPolish
+        revealed = false; flipped = false; flippedItemId = null; draft = ""
+        reload()
+    }
+
     private fun reload() {
         val raw = runCatching { window.localStorage.getItem(VocabularyCodec.key) }.getOrElse {
             error = "Не удалось открыть хранилище словаря: ${it.message}"
@@ -106,6 +148,7 @@ internal class VocabularyWebController {
 
     fun render(root: HTMLElement, outerRoot: HTMLElement, swipeRatingEnabled: Boolean, refresh: () -> Unit) {
         pendingRefresh = refresh
+        if (loadedForPackId != activeCoursePackId) reloadForActivePack()
         root.className = "vocabulary-page"
         val page = root.add("section", cls = "vocabulary-view")
         page.setAttribute("aria-label", "Тренировка слов")
@@ -114,10 +157,11 @@ internal class VocabularyWebController {
             add("h2", "Слова и выражения")
             add("p", "Отмечай слова в каталоге. Узнавание и воспроизведение повторяются по отдельным расписаниям.")
         }
+        val languages = activePackLanguages()
         val directionLabel = heading.add("label", "Направление")
         val directionSelect = directionLabel.select("Направление карточки", listOf(
-            StudyDirection.RussianToPolish.wire to "Русский → польский",
-            StudyDirection.PolishToRussian.wire to "Польский → русский",
+            StudyDirection.RussianToPolish.wire to "${languages.nativeAdjective.replaceFirstChar(Char::uppercase)} → ${languages.targetAdjective}",
+            StudyDirection.PolishToRussian.wire to "${languages.targetAdjective.replaceFirstChar(Char::uppercase)} → ${languages.nativeAdjective}",
         ), direction.wire)
         directionSelect.addEventListener("change", {
             direction = if (directionSelect.value == "pl-ru") StudyDirection.PolishToRussian else StudyDirection.RussianToPolish
@@ -128,7 +172,7 @@ internal class VocabularyWebController {
             page.button("Сохранить исходный JSON") { download("vocabulary-recovery.json", raw) }
         }
         val layout = page.add("div", cls = "vocabulary-layout")
-        renderCard(layout.add("section", cls = "card vocabulary-card"), outerRoot, swipeRatingEnabled, refresh)
+        renderCard(layout.add("section", cls = "card vocabulary-card"), outerRoot, swipeRatingEnabled, languages, refresh)
         renderCatalog(layout.add("section", cls = "card vocabulary-catalog"), refresh)
         page.add("p", cls = "muted small").apply {
             add("span", "Частотные ранги и counts: ")
@@ -141,7 +185,7 @@ internal class VocabularyWebController {
         }
     }
 
-    private fun renderCard(section: HTMLElement, outerRoot: HTMLElement, swipeRatingEnabled: Boolean, refresh: () -> Unit) {
+    private fun renderCard(section: HTMLElement, outerRoot: HTMLElement, swipeRatingEnabled: Boolean, languages: ActivePackLanguages, refresh: () -> Unit) {
         section.setAttribute("aria-label", "Карточка слова")
         val id = VocabularyCodec.dueIds(document, direction, scheduler, Clock.System.now()).firstOrNull()
         val item = id?.let { VocabularyCodec.item(document, it) }
@@ -172,9 +216,9 @@ internal class VocabularyWebController {
         // is not itself an accessibility affordance (it excludes editable/button descendants via
         // `installTapGesture`'s own `editableTarget` guard, same as training's question card).
         val promptBlock = front.add("div", cls = "vocabulary-prompt-block")
-        promptBlock.add("span", if (direction == StudyDirection.RussianToPolish) "Вспомни по-польски" else "Вспомни по-русски", "eyebrow")
+        promptBlock.add("span", "Вспомни ${if (direction == StudyDirection.RussianToPolish) languages.targetAdverb else languages.nativeAdverb}", "eyebrow")
         promptBlock.add("p", if (direction == StudyDirection.RussianToPolish) item.translation else item.lemma, "vocabulary-prompt")
-            .setAttribute("lang", if (direction == StudyDirection.RussianToPolish) "ru" else "pl")
+            .setAttribute("lang", if (direction == StudyDirection.RussianToPolish) languages.nativeLang else languages.targetLang)
         if (!revealed) {
             // UX5: no "Показать ответ" button in oral mode any more — the whole card reveals on a
             // click/tap (installTapGesture below) or Space (VocabularyWebController.spaceReveal);
@@ -223,7 +267,7 @@ internal class VocabularyWebController {
         // purely visually; swipe/keyboard on the revealed face rates (v4/UX4-08/09/14).
         val answer = detachedElement("div", "vocabulary-answer card-back card-face")
         answer.setAttribute("aria-live", "polite")
-        renderRevealedAnswer(flip, answer, outerRoot, item, swipeRatingEnabled, refresh)
+        renderRevealedAnswer(flip, answer, outerRoot, item, swipeRatingEnabled, languages, refresh)
         inner.appendChild(front)
         inner.appendChild(answer)
         section.appendChild(flip)
@@ -234,14 +278,14 @@ internal class VocabularyWebController {
         flipCard.installTap(flip) { toggleFlip() }
     }
 
-    private fun renderRevealedAnswer(flip: HTMLElement, answer: HTMLElement, outerRoot: HTMLElement, item: VocabularyItem, swipeRatingEnabled: Boolean, refresh: () -> Unit) {
-        answer.add("span", if (direction == StudyDirection.RussianToPolish) "Эталон · польский" else "Эталон · русский", "eyebrow")
+    private fun renderRevealedAnswer(flip: HTMLElement, answer: HTMLElement, outerRoot: HTMLElement, item: VocabularyItem, swipeRatingEnabled: Boolean, languages: ActivePackLanguages, refresh: () -> Unit) {
+        answer.add("span", "Эталон · ${if (direction == StudyDirection.RussianToPolish) languages.targetAdjective else languages.nativeAdjective}", "eyebrow")
         answer.add("p", if (direction == StudyDirection.RussianToPolish) item.lemma else item.translation)
-            .setAttribute("lang", if (direction == StudyDirection.RussianToPolish) "pl" else "ru")
+            .setAttribute("lang", if (direction == StudyDirection.RussianToPolish) languages.targetLang else languages.nativeLang)
         val description = answer.add("dl")
         description.detail("Перевод", item.translation)
-        description.detail("Форма", item.form, "pl")
-        description.detail("В предложении", item.example, "pl")
+        description.detail("Форма", item.form, languages.targetLang)
+        description.detail("В предложении", item.example, languages.targetLang)
         if (typed) answer.add("p", "Твой ответ: ${draft.ifBlank { "не введён" }}. Сравни сам и выбери оценку.")
         if (swipeRatingEnabled) {
             // v4/UX4-08/09: the whole revealed face is the element that tilts/translates with the
@@ -340,7 +384,7 @@ internal class VocabularyWebController {
         }
         renderEditor(inner, refresh)
         val actions = inner.add("div", cls = "actions")
-        actions.button("Экспорт словаря JSON") { download("polski-vocabulary-pl-ru.json", VocabularyCodec.encode(document)) }
+        actions.button("Экспорт словаря JSON") { download("polski-vocabulary-$activeCoursePackId.json", VocabularyCodec.encode(document)) }
         val importLabel = inner.add("label", "Импорт JSON")
         val input = importLabel.add("textarea") as HTMLTextAreaElement
         input.setAttribute("aria-label", "JSON словаря для импорта")

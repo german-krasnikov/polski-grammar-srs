@@ -44,13 +44,13 @@
     { "id": "will", "lemma": "will", "meaning": "вспомогательный глагол будущего времени", "present3sg": "will" }
   ],
   "personalPronouns": {
-    "I": { "subject": "I", "object": "me" },
-    "you": { "subject": "you", "object": "you" },
-    "he": { "subject": "he", "object": "him" },
-    "she": { "subject": "she", "object": "her" },
-    "it": { "subject": "it", "object": "it" },
-    "we": { "subject": "we", "object": "us" },
-    "they": { "subject": "they", "object": "them" }
+    "I": { "Subj": "I", "Obj": "me" },
+    "you": { "Subj": "you", "Obj": "you" },
+    "he": { "Subj": "he", "Obj": "him" },
+    "she": { "Subj": "she", "Obj": "her" },
+    "it": { "Subj": "it", "Obj": "it" },
+    "we": { "Subj": "we", "Obj": "us" },
+    "they": { "Subj": "they", "Obj": "them" }
   },
   "possessives": [
     { "id": "my", "label": "my — мой", "forms": { "kind": "invariant", "value": "my" } },

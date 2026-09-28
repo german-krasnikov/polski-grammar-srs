@@ -7,6 +7,7 @@ import org.w3c.dom.HTMLElement
 import org.w3c.dom.HTMLInputElement
 import org.w3c.dom.HTMLSelectElement
 import org.w3c.files.FileReader
+import polski.data.availableCoursePacks
 import polski.preferences.Appearance
 import polski.preferences.Motion
 import polski.preferences.PreferredAnswerMode
@@ -16,6 +17,12 @@ import polski.presentation.AppAction
 import polski.presentation.StyleId
 import polski.presentation.builtInStyleIds
 import polski.presentation.TrainingStore
+
+/** EnRuAcceptance-2026-09-28.md §7 item 3: a language code's Russian display name for the
+ *  target/native pickers — every code [availableCoursePacks] can report today or once a further
+ *  pack is registered (matching the macOS/iOS Settings bridges' own `languageDisplayNames`). */
+private val languageDisplayNames: Map<String, String> = mapOf("pl" to "Польский", "en" to "Английский", "ru" to "Русский")
+private fun languageLabel(code: String): String = languageDisplayNames[code] ?: code
 
 @OptIn(kotlin.js.ExperimentalWasmJsInterop::class)
 internal fun renderSettingsWeb(
@@ -31,6 +38,22 @@ internal fun renderSettingsWeb(
         setAttribute("role", "status")
         setAttribute("aria-live", "polite")
     })
+    val course = settingsNode("section", "card settings-panel")
+    course.appendChild(settingsNode("h3", text = "Курс"))
+    root.appendChild(course)
+    val packs = availableCoursePacks
+    val activePack = packs.firstOrNull { it.target == preferences.value.target && it.native == preferences.value.native } ?: packs.first()
+    val targetOptions = packs.map { it.target }.distinct()
+    val nativeOptionsForTarget = packs.filter { it.target == activePack.target }.map { it.native }.distinct()
+    course.appendChild(settingsSelect("Изучаемый язык", "settings-target", targetOptions.map { it to languageLabel(it) }, activePack.target) { selected ->
+        val native = packs.filter { it.target == selected }.map { it.native }.firstOrNull() ?: activePack.native
+        preferences.setCourse(selected, native)
+    })
+    course.appendChild(settingsSelect("Родной язык", "settings-native", nativeOptionsForTarget.map { it to languageLabel(it) }, activePack.native) { selected ->
+        preferences.setCourse(activePack.target, selected)
+    })
+    course.appendChild(settingsNode("p", "muted", "Доступны только сочетания языков, которые уже можно полностью пройти: тренировку, стили, лайфхаки, матрицу и словарь."))
+
     val learning = settingsNode("section", "card settings-panel")
     learning.appendChild(settingsNode("h3", text = "Обучение"))
     root.appendChild(learning)

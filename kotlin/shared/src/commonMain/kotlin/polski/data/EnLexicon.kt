@@ -37,7 +37,7 @@ val enVerbs: List<EnVerb> by lazy {
 /** In `lexicon.json`'s own declared pronoun order (I, you, he, she, it, we, they). */
 val enPersonalPronouns: List<EnPronoun> by lazy {
     enLexiconRoot.getValue("personalPronouns").jsonObject.map { (id, forms) ->
-        EnPronoun(id, forms.jsonObject.getValue("subject").jsonPrimitive.content)
+        EnPronoun(id, forms.jsonObject.getValue("Subj").jsonPrimitive.content)
     }
 }
 
