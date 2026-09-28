@@ -44,6 +44,22 @@ data class StudyDirection(val wire: String) {
  *  for hosts that need to iterate or look one up by [StudyDirection.wire]. */
 val builtInStudyDirections: List<StudyDirection> = listOf(StudyDirection.RussianToPolish, StudyDirection.PolishToRussian)
 
+/**
+ * EnRuAcceptance-2026-09-28.md §7 item 4: the *active* pack's own 2 directions — native→target
+ * (recall target from a native prompt) then target→native (recall native from a target prompt,
+ * the same order [wire] as [polski.data.activeCoursePackId] itself). Generalizes
+ * [builtInStudyDirections] to any registered pack instead of pl-ru alone: for pl-ru this is
+ * `[StudyDirection.RussianToPolish, StudyDirection.PolishToRussian]` byte-for-byte (same wires,
+ * same order); a second pack (`en-ru`: target `en`, native `ru`) gets its own `["ru-en", "en-ru"]`
+ * pair without any change here — see [VocabularyDocumentTest.opensToASecondPacksDirectionWithoutTouchingTheBuiltIns].
+ */
+val activeStudyDirections: List<StudyDirection> get() {
+    val pairId = polski.data.activeCoursePackId
+    val target = pairId.substringBefore('-')
+    val native = pairId.substringAfter('-')
+    return listOf(StudyDirection("$native-$target"), StudyDirection("$target-$native"))
+}
+
 data class VocabularyDocument(
     val selectedIds: List<String> = emptyList(),
     val custom: List<VocabularyItem> = emptyList(),
@@ -118,7 +134,12 @@ object VocabularyCodec {
         require(document.selectedIds.distinct().size == document.selectedIds.size)
         require(document.selectedIds.all { item(document, it) != null })
         val pairId = packRegistry.active.pairId
-        require(document.cards.keys.all { it.startsWith("$pairId:vocabulary:ru-pl:") || it.startsWith("$pairId:vocabulary:pl-ru:") })
+        // EnRuAcceptance-2026-09-28.md §7 item 4: was the literal `ru-pl`/`pl-ru` pair — a rated
+        // en-ru card (`cardKey` built from `activeStudyDirections`, e.g. `en-ru:vocabulary:ru-en:…`)
+        // failed this exact check and every future `encode()`/`commit()` with it. Same pattern as
+        // [key]/[cardKey] above: derive the allowed wires from the active pack instead of pl-ru's.
+        val wires = activeStudyDirections.map(StudyDirection::wire)
+        require(document.cards.keys.all { key -> wires.any { key.startsWith("$pairId:vocabulary:$it:") } })
         return document
     }
 

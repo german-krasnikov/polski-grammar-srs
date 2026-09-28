@@ -133,6 +133,17 @@ private func styleOptions(_ preferences: Record) -> [StyleOption] {
 private let courseLanguageLabel: [String: String] = ["pl": "Польский", "en": "Английский", "ru": "Русский"]
 private func courseLanguageName(_ code: String) -> String { courseLanguageLabel[code] ?? code }
 
+// EnRuAcceptance-2026-09-28.md §7 item 4: the vocabulary screen's own 2 small Russian phrasings
+// that need a language's name lowercase (mid-clause, e.g. "Русский → польский") or as the
+// instrumental adverb ("Вспомни по-польски") — [courseLanguageLabel] above is capitalized (a
+// Settings picker's own leading word), so neither reuses it. Same fallback-to-code pattern.
+private let courseLanguageLower: [String: String] = ["pl": "польский", "en": "английский", "ru": "русский"]
+// internal (not `private`): also read by `VocabularyCardView`'s own reveal hint, a separate file.
+let courseLanguageAdverb: [String: String] = ["pl": "польски", "en": "английски", "ru": "русски"]
+private func courseDirectionLabel(from: String, to: String) -> String {
+    "\((courseLanguageLower[from] ?? from).prefix(1).uppercased() + (courseLanguageLower[from] ?? from).dropFirst()) → \(courseLanguageLower[to] ?? to)"
+}
+
 /// The distinct values of [key] ("target"/"native") across every row of `preferences`'s
 /// `coursePacks`, in first-seen order — the real option list for one of the two EN-22 pickers.
 private func coursePackValues(_ preferences: Record, _ key: String) -> [String] {
@@ -1207,12 +1218,21 @@ private struct VocabularyView: View {
                 }
             } else {
                 Section("Направление") {
+                    // EnRuAcceptance-2026-09-28.md §7 item 4: was a hardcoded `"ru-pl"/"pl-ru"`
+                    // pair. Tags/labels read `state`'s own `target`/`native` (this bridge's own
+                    // snapshot, `IosVocabularySession`'s — see its own comment), never
+                    // `model.preferences`: that Settings-owned copy can briefly lag behind (or get
+                    // self-corrected after) a pack switch this screen's own `state` already
+                    // reflects, which would tag a segment with a pair `state.string("direction")`
+                    // never actually carries — reproduced live, both segments then show unselected.
+                    // pl-ru keeps the exact same 2 tags/labels it always had.
                     Picker("Учить", selection: Binding(
                         get: { state.string("direction") },
                         set: { model.sendVocabulary("direction", $0) }
                     )) {
-                        Text("Русский → польский").tag("ru-pl")
-                        Text("Польский → русский").tag("pl-ru")
+                        let target = state.string("target"), native = state.string("native")
+                        Text(courseDirectionLabel(from: native, to: target)).tag("\(native)-\(target)")
+                        Text(courseDirectionLabel(from: target, to: native)).tag("\(target)-\(native)")
                     }
                     .pickerStyle(.segmented)
                 }

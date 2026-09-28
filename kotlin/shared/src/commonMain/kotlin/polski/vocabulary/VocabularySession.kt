@@ -52,14 +52,19 @@ class VocabularySession(
         try {
             val raw = repository.loadRaw()
             savedRaw = raw
+            // EnRuAcceptance-2026-09-28.md §7 item 4: was the literal `StudyDirection.RussianToPolish`
+            // — wrong for a pack whose pair isn't pl-ru (its wire, "ru-pl", isn't even one of an
+            // en-ru session's own 2 directions). [activeStudyDirections] reads the active pack fresh,
+            // so pl-ru keeps starting on the exact same "ru-pl" direction as before.
+            val initialDirection = activeStudyDirections.first()
             if (raw == null) {
-                mutableState.value = VocabularyUiState(loadStatus = VocabularyLoadStatus.Ready)
+                mutableState.value = VocabularyUiState(loadStatus = VocabularyLoadStatus.Ready, direction = initialDirection)
             } else {
                 val decoded = runCatching { VocabularyCodec.decode(raw) }
                 mutableState.value = decoded.fold(
                     onSuccess = { document -> VocabularyUiState(
-                        loadStatus = VocabularyLoadStatus.Ready, document = document,
-                        currentId = nextId(document, StudyDirection.RussianToPolish),
+                        loadStatus = VocabularyLoadStatus.Ready, document = document, direction = initialDirection,
+                        currentId = nextId(document, initialDirection),
                     ) },
                     onFailure = { error -> VocabularyUiState(
                         loadStatus = VocabularyLoadStatus.RecoveryRequired, recoveryRaw = raw,
