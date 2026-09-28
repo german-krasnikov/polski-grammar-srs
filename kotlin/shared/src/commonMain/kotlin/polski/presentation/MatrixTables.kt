@@ -2,8 +2,11 @@ package polski.presentation
 
 import polski.core.engine.MatrixColumn
 import polski.core.engine.MatrixTableEngine
+import polski.core.enMorphology
 import polski.data.Possessive
 import polski.data.comparisonNounIds
+import polski.data.enPersonalPronouns
+import polski.data.enVerbs
 import polski.data.nounById
 import polski.data.personalPronouns
 import polski.data.possessives
@@ -15,10 +18,15 @@ import polski.grammar.caseSentence
 import polski.grammar.nounPhrase
 import polski.grammar.verbForm
 import polski.model.GramCase
+import polski.model.NumberFeature
 import polski.model.NumberGram
+import polski.model.Person
+import polski.model.PersonFeature
 import polski.model.PossessiveId
 import polski.model.SentenceSeed
 import polski.model.Tense
+import polski.model.TenseFeature
+import polski.model.toFeatureValue
 
 /**
  * UC-09 part 2/2 (UniversalCorePlan.md §5.3.3, ADR-21): one [MatrixTableViewModel] builder per
@@ -102,6 +110,58 @@ fun personalPronounsTable(): MatrixTableViewModel {
         },
     ).toViewModel()
 }
+
+private val enTenseLabel = mapOf(Tense.PRESENT to "Настоящее", Tense.PAST to "Прошедшее", Tense.FUTURE to "Будущее")
+
+private val enPersonNumberByPronounId = mapOf(
+    "I" to (Person.FIRST to NumberGram.SG),
+    "you" to (Person.SECOND to NumberGram.SG),
+    "he" to (Person.THIRD to NumberGram.SG),
+    "she" to (Person.THIRD to NumberGram.SG),
+    "it" to (Person.THIRD to NumberGram.SG),
+    "we" to (Person.FIRST to NumberGram.PL),
+    "they" to (Person.THIRD to NumberGram.PL),
+)
+
+private fun enVerbForm(verbId: String, tense: Tense, pronounId: String): String {
+    val (person, number) = enPersonNumberByPronounId.getValue(pronounId)
+    return enMorphology.form(
+        "verb:$verbId",
+        mapOf(TenseFeature to tense.toFeatureValue(), PersonFeature to person.toFeatureValue(), NumberFeature to number.toFeatureValue()),
+    )
+}
+
+/**
+ * EN-24 (UC-09 part 2/2 minimum, Plans/Kotlin/EnRuPackPlan.md §6): the one live English person ×
+ * tense table — real, irregular `forms.generated.json`(en) values read through [enMorphology] and
+ * the same [MatrixTableEngine]/[MatrixTableViewModel] every pl table above already uses. Shared so
+ * every host (web's `MatrixWeb.kt`, macOS's `matrixSnapshot`, desktop's `VerbsDesktop`) renders the
+ * exact same table instead of each hand-rolling its own copy of [enVerbForm].
+ */
+fun enVerbsTable(verbId: String = "see"): MatrixTableViewModel {
+    val lemma = enVerbs.first { it.id == verbId }.lemma
+    return MatrixTableEngine.build(
+        rowAxis = enPersonalPronouns,
+        rowHeaderLabel = "Кто",
+        rowHeader = { pronoun -> pronoun.subject },
+        columns = Tense.entries.map { tense ->
+            MatrixColumn(enTenseLabel.getValue(tense), { pronoun -> enVerbForm(verbId, tense, pronoun.id) }, contrastFrom = { lemma })
+        },
+    ).toViewModel()
+}
+
+/** The do-support table next to [enVerbsTable]: present splits by person (do/does), past is
+ *  invariant ("did"), and future has no do-support of its own (built on "will" alone). */
+fun enDoSupportTable(): MatrixTableViewModel = MatrixTableEngine.build(
+    rowAxis = enPersonalPronouns,
+    rowHeaderLabel = "Кто",
+    rowHeader = { pronoun -> pronoun.subject },
+    columns = listOf(
+        MatrixColumn(enTenseLabel.getValue(Tense.PRESENT), { pronoun -> enVerbForm("do", Tense.PRESENT, pronoun.id) }, contrastFrom = { "do" }),
+        MatrixColumn(enTenseLabel.getValue(Tense.PAST), { pronoun -> enVerbForm("do", Tense.PAST, pronoun.id) }, contrastFrom = { "do" }),
+        MatrixColumn(enTenseLabel.getValue(Tense.FUTURE), { "не нужен — только will" }),
+    ),
+).toViewModel()
 
 fun possessivesTable(): MatrixTableViewModel {
     val teaching = referencePronounTeaching

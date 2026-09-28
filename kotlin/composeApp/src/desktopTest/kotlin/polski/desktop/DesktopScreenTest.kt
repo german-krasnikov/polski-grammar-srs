@@ -16,9 +16,11 @@ import androidx.compose.ui.input.key.Key
 import androidx.compose.ui.test.ExperimentalTestApi
 import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsNotEnabled
 import androidx.compose.ui.test.onNodeWithContentDescription
+import androidx.compose.ui.test.onAllNodesWithContentDescription
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performKeyInput
 import androidx.compose.ui.test.pressKey
@@ -303,6 +305,37 @@ class DesktopScreenTest {
         onNodeWithText("Времена и лица").performScrollTo().performClick()
         waitForIdle()
         assertEquals(MatrixSection.Verbs, state.matrixSelection.section)
+    }
+
+    // EN-24 (UC-09 part 2/2 minimum, Plans/Kotlin/EnRuPackPlan.md §6, macOS slice — this compose
+    // desktop preview is the macOS host's JVM preview target): the one live English matrix table,
+    // real irregular `forms.generated.json`(en) values through `MatrixTableViewModel`, mirroring
+    // `tests/browser/kotlin-en-matrix.spec.ts`'s web assertions for the same table.
+    @OptIn(ExperimentalTestApi::class)
+    @Test
+    fun verbsMatrixShowsEnglishPersonTenseAndDoSupportTablesWithRealIrregularForms() = runComposeUiTest {
+        var state by mutableStateOf(AppUiState(loadStatus = LoadStatus.Ready, tab = AppTab.Matrix,
+            matrixSelection = MatrixSelection(section = MatrixSection.Verbs)))
+        setContent {
+            MaterialTheme {
+                Column(Modifier.verticalScroll(rememberScrollState())) {
+                    MatrixScreen(state) { action ->
+                        if (action is AppAction.SelectMatrixSection) {
+                            state = state.copy(matrixSelection = state.matrixSelection.copy(section = action.section))
+                        }
+                    }
+                }
+            }
+        }
+        onNodeWithText("English: лицо × время (\"see\")").performScrollTo().assertExists()
+        // Past/future are invariant across all 7 subjects; present splits "see"/"sees" 4-vs-3.
+        onAllNodesWithContentDescription("Было: see. Стало: saw").assertCountEquals(7)
+        onAllNodesWithContentDescription("Было: see. Стало: will see").assertCountEquals(7)
+        onAllNodesWithContentDescription("Было: see. Стало: sees").assertCountEquals(3)
+        onNodeWithText("do-support: вопрос и отрицание").performScrollTo().assertExists()
+        onAllNodesWithContentDescription("Было: do. Стало: does").assertCountEquals(3)
+        onAllNodesWithContentDescription("Было: do. Стало: did").assertCountEquals(7)
+        onAllNodesWithText("не нужен — только will").assertCountEquals(7)
     }
 
     @OptIn(ExperimentalTestApi::class)

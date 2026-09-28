@@ -69,6 +69,11 @@ struct TrainingSnapshot: Decodable {
         let comparisonTable: Table
         let verbFutureExplanation: String
         let verbsTable: Table
+        /// EN-24 (`EnRuPackPlan.md` §6, macOS slice): the one live English matrix on this host —
+        /// same `MatrixTableViewModel` wire shape as every pl table above, read from
+        /// `forms.generated.json`(en) through `enMorphology`, not a mock.
+        let enVerbsTable: Table
+        let enDoSupportTable: Table
         let pronounIntro: String
         let pronounFooter: String
         let possessiveTitle: String
@@ -765,6 +770,8 @@ private struct MatrixView: View {
                             matrixTableView(matrix.verbsTable)
                             Text(matrix.verbFutureExplanation).foregroundStyle(.secondary)
                         }
+                        GroupBox("English: лицо × время (\"see\")") { matrixTableView(matrix.enVerbsTable) }
+                        GroupBox("do-support: вопрос и отрицание") { matrixTableView(matrix.enDoSupportTable) }
                     case "Pronouns":
                         GroupBox("Местоимения") {
                             Text(matrix.pronounIntro)

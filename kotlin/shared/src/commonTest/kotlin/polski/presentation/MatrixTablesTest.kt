@@ -4,6 +4,8 @@ import kotlinx.serialization.json.jsonArray
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 import polski.data.comparisonNounIds
+import polski.data.enPersonalPronouns
+import polski.data.enVerbs
 import polski.data.nounById
 import polski.data.personalPronouns
 import polski.data.possessives
@@ -123,6 +125,36 @@ class MatrixTablesTest {
             assertEquals(demo.rule(possessive.id), ruleCell.value)
             assertNull(ruleCell.contrast)
         }
+    }
+
+    // EN-24 (UC-09 part 2/2 minimum, Plans/Kotlin/EnRuPackPlan.md §6, macOS slice): [enVerbsTable]/
+    // [enDoSupportTable] are the exact tables the web host already renders by hand in
+    // `MatrixWeb.kt`'s `renderEnglishVerbMatrix` — moved here so macOS's native `matrixSnapshot`
+    // and desktop's `VerbsDesktop` can show real, irregular `forms.generated.json`(en) values
+    // through this one shared builder instead of a third ad hoc copy.
+    @Test fun enVerbsTableUsesRealIrregularFormsPerPersonAndTense() {
+        val table = enVerbsTable("see")
+        val lemma = enVerbs.first { it.id == "see" }.lemma
+        assertEquals(listOf("Настоящее", "Прошедшее", "Будущее"), table.columnHeaders)
+        assertEquals(enPersonalPronouns.map { it.subject }, table.rows.map { it.header })
+        fun cell(subject: String, col: Int) = table.rows[enPersonalPronouns.indexOfFirst { it.subject == subject }].cells[col]
+        assertEquals("see", cell("I", 0).value)
+        assertEquals("saw", cell("I", 1).value)
+        assertEquals("will see", cell("I", 2).value)
+        assertEquals("sees", cell("he", 0).value)
+        assertEquals("saw", cell("he", 1).value)
+        assertEquals(ContrastPair.generated(lemma, "see"), cell("I", 0).contrast)
+    }
+
+    @Test fun enDoSupportTableSplitsPresentByPersonSharesInvariantPastAndHasNoFutureDoSupport() {
+        val table = enDoSupportTable()
+        assertEquals(listOf("Настоящее", "Прошедшее", "Будущее"), table.columnHeaders)
+        fun cell(subject: String, col: Int) = table.rows[enPersonalPronouns.indexOfFirst { it.subject == subject }].cells[col]
+        assertEquals("do", cell("I", 0).value)
+        assertEquals("does", cell("he", 0).value)
+        assertEquals("did", cell("I", 1).value)
+        assertEquals("did", cell("he", 1).value)
+        table.rows.forEach { row -> assertNull(Regex("\\bdid\\b|\\bdoes?\\b").find(row.cells[2].value)) }
     }
 
     @Test fun toJsonRoundTripsHeadersValuesAndContrastPairsLosslessly() {

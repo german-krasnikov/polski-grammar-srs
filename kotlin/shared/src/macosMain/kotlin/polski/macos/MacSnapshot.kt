@@ -51,6 +51,8 @@ import polski.presentation.ContrastPair
 import polski.presentation.casesFullTable
 import polski.presentation.comparisonTable
 import polski.presentation.contrastPairJson
+import polski.presentation.enDoSupportTable
+import polski.presentation.enVerbsTable
 import polski.presentation.personalPronounsTable
 import polski.presentation.possessivesTable
 import polski.presentation.toJson
@@ -246,6 +248,12 @@ private fun matrixSnapshot(state: AppUiState): JsonElement {
         put("casesTable", casesFullTable(selection).toJson())
         put("comparisonTable", comparisonTable(selection).toJson())
         put("verbsTable", verbsTable(selection).toJson())
+        // EN-24 (UC-09 part 2/2 minimum, Plans/Kotlin/EnRuPackPlan.md §6, macOS slice): the one
+        // live English matrix on this host, read from `forms.generated.json`(en) through the same
+        // `enMorphology`/`MatrixTableEngine`/`MatrixTableViewModel` path the web host already
+        // uses — not a mock and not a second ad hoc table-building path.
+        put("enVerbsTable", enVerbsTable().toJson())
+        put("enDoSupportTable", enDoSupportTable().toJson())
         put("personalPronounsTable", personalPronounsTable().toJson())
         put("possessivesTable", possessivesTable().toJson())
         put("systemCards", JsonArray(referenceSystemCards.map { card -> buildJsonObject {
