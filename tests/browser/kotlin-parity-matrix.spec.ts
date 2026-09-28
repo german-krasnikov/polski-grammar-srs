@@ -32,6 +32,27 @@ const course = JSON.parse(readFileSync(resolve('courses/pl-ru/course.json'), 'ut
 let reactServer: ViteDevServer;
 let reactBaseUrl: string;
 
+/**
+ * Mirrors EndingHighlight.kt's `singleWordInsertionOrDeletionParts` alignment check: true only
+ * when the two phrases differ by exactly one word AND removing that one word from the longer
+ * side lines up (letters only, case-insensitive) with the shorter side. Per the Emphasis
+ * contract (ContrastHighlightPlan.md "Контракт выделения" §1), only this specific shape is a
+ * pure insertion/deletion with nothing to mark on the shorter side; any other word-count
+ * mismatch (e.g. "robić" → "robiłem / robiłam") falls back to a whole-phrase change that marks
+ * both sides.
+ */
+function isSingleWordInsertionOrDeletion(from: string, to: string): boolean {
+  const a = from.split(' ');
+  const b = to.split(' ');
+  if (Math.abs(a.length - b.length) !== 1) return false;
+  const [longer, shorter] = a.length > b.length ? [a, b] : [b, a];
+  const letterCore = (word: string) => word.replace(/[^\p{L}]+$/u, '').toLowerCase();
+  return longer.some((_, i) => {
+    const remainder = longer.filter((_, j) => j !== i);
+    return remainder.length === shorter.length && remainder.every((word, k) => letterCore(word) === letterCore(shorter[k]));
+  });
+}
+
 test.beforeAll(async () => {
   reactServer = await createServer({ configFile: resolve('vite.config.ts'), server: { host: '127.0.0.1', port: 0 } });
   await reactServer.listen();
@@ -253,7 +274,17 @@ test('React and Kotlin render every authored tense comparison with labelled cont
         await expect(row.locator('th')).toHaveText(authored.label);
         await expect(row.locator('.form-contrast')).toHaveAttribute('aria-label', `Было: ${authored.from}. Стало: ${authored.to}`);
         if (index > 0) {
-          await expect(row.locator('.change-before').first()).toBeVisible();
+          // Emphasis contract (ContrastHighlightPlan.md "Контракт выделения" §1): a pure
+          // word insertion (e.g. "będzie"/"nie"/"Czy") has nothing to mark on the "before"
+          // side — only a same-word-count change (index 1: idzie→szła, a whole-word
+          // replacement) marks both sides. Kotlin's shared EndingHighlight.kt implements
+          // this (EndingHighlightTest.kt); React's src/ui/endingHighlight.ts mirror predates
+          // that refinement and still whole-phrase-highlights a word-count mismatch on both
+          // sides — a tracked, out-of-scope gap (AI/decisions.md ADR-44), not a contradiction
+          // this test should paper over by asserting it on React too.
+          const isInsertion = current === page && isSingleWordInsertionOrDeletion(authored.from, authored.to);
+          if (isInsertion) await expect(row.locator('.change-before')).toHaveCount(0);
+          else await expect(row.locator('.change-before').first()).toBeVisible();
           await expect(row.locator('.change-after').first()).toBeVisible();
         }
       }
@@ -282,7 +313,13 @@ test('React and Kotlin render every authored aspect form with its verb baseline'
           if (form === null) await expect(cell).toHaveText('Нет настоящего времени');
           else {
             await expect(cell.locator('.form-contrast')).toHaveAttribute('aria-label', `Было: ${authored.from}. Стало: ${form}`);
-            await expect(cell.locator('.change-before').first()).toBeVisible();
+            // Emphasis contract §1: a pure word insertion (e.g. "robić" → "będę robić")
+            // marks only the "after" side; a same-word-count change (aligned ending, or a
+            // multi-word literal fallback) marks both sides. See the tense-comparison test
+            // above for why this is checked on Kotlin (`page`) only, not React (ADR-44).
+            const isInsertion = current === page && isSingleWordInsertionOrDeletion(authored.from, form);
+            if (isInsertion) await expect(cell.locator('.change-before')).toHaveCount(0);
+            else await expect(cell.locator('.change-before').first()).toBeVisible();
             await expect(cell.locator('.change-after').first()).toBeVisible();
           }
         }

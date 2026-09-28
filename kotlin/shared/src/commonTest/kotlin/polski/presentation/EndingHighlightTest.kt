@@ -171,6 +171,32 @@ class EndingHighlightTest {
         assertEquals(listOf("Czy"), after.filter(EndingPart::isChanged).map(EndingPart::text))
     }
 
+    // Regression lock (ADR-44, kotlin-parity-matrix.spec.ts's "tense comparison"/"aspect form"
+    // tests): the "Времена и лица" matrix feeds two literal full sentences straight into
+    // ContrastPair.generated (no FormChange list), so the future-tense auxiliary "będzie"/
+    // "będę" must resolve through the very same single-word-insertion detection as the
+    // "Nie"/"Czy" particles above — before-side stable, after-side marks only the inserted
+    // word — even though it was never a dedicated FormChange.
+    @Test
+    fun theFutureAuxiliaryInATenseComparisonRowIsAPureInsertion() {
+        val before = changeHighlightParts("Moja piękna żona szła do domu.", "Moja piękna żona będzie szła do domu.", ChangeSide.Before)
+        val after = changeHighlightParts("Moja piękna żona szła do domu.", "Moja piękna żona będzie szła do domu.", ChangeSide.After)
+        assertEquals("Moja piękna żona szła do domu.", before.joinToString("") { it.text })
+        assertEquals("Moja piękna żona będzie szła do domu.", after.joinToString("") { it.text })
+        assertEquals(emptyList(), before.filter(EndingPart::isChanged))
+        assertEquals(listOf("będzie"), after.filter(EndingPart::isChanged).map(EndingPart::text))
+    }
+
+    @Test
+    fun theFutureAuxiliaryInAnAspectRowIsAPureInsertion() {
+        val before = changeHighlightParts("robić", "będę robić", ChangeSide.Before)
+        val after = changeHighlightParts("robić", "będę robić", ChangeSide.After)
+        assertEquals("robić", before.joinToString("") { it.text })
+        assertEquals("będę robić", after.joinToString("") { it.text })
+        assertEquals(emptyList(), before.filter(EndingPart::isChanged))
+        assertEquals(listOf("będę"), after.filter(EndingPart::isChanged).map(EndingPart::text))
+    }
+
     // S4 (EmphasisUXAudit E7): a style block's own prose (formula/rule/scene/examples/why) is
     // highlighted only from the skill's explicit `focus.before → focus.after` pair — never parsed
     // heuristically. A literal occurrence of either phrase gets the matching role; free prose that

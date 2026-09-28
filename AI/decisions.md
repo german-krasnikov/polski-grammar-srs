@@ -2,6 +2,61 @@
 
 Новые сверху. Формат: решение → почему → где подробно.
 
+## ADR-44 · 2026-09-28 · Закрытие ADR-22's `.change-before`/`.change-after`-разрыва: 2 из 3 были тестовым багом, 3-й уже исправлен
+
+ADR-22 задокументировал 2 падения (`kotlin-parity-matrix.spec.ts`'s "tense comparison"/"aspect
+form") и отдельная запись (строка ~343, EnRuAcceptance) — 3-е, `kotlin-parity-chain.spec.ts`'s
+P02 5-й step «Отрицание». Разобрано по каждому: **1/3 уже исправлен** — `ffab9b4` (та же дата,
+до этой задачи) убрал фиктивный `"" -> "Nie"/"Czy"` insertion `FormChange` из
+`case.gen.neg`/`sentence.question` и восстановил golden parity; живой прогон
+`kotlin-parity-chain.spec.ts` (wasm и js, chromium) сейчас 2/2 green без единой правки в этой
+задаче — не был воспроизведён заново, только подтверждён закрытым.
+
+**2/3 — тестовый баг, не продуктовый.** Обе таблицы («Время меняется» строка «Будущее · процесс»
+`szła do domu.`→`będzie szła do domu.`; «Вид» строка `robić`, столбец «Будущее» `robić`→
+`będę robić`) — чистая вставка одного слова (`będzie`/`będę`) в остальное неизменное предложение.
+Контракт выделения (`ContrastHighlightPlan.md` §«Контракт выделения», п.1, "Вставка и удаление")
+явно требует: вставка красится только на стороне «стало», сторона «было» остаётся без пометки.
+`EndingHighlight.kt`'s `singleWordInsertionOrDeletionParts` уже это делает правильно — тот же
+код, что уже покрыт `EndingHighlightTest.kt`'s `aSingleInsertedWordSurvivesAlongsideA
+TrailingPunctuationChangeElsewhere` (буквально тот же пример: `Czy moja piękna żona idzie do
+domu?`). Падал не продукт, а сам playwright-тест: он безусловно требовал видимый
+`.change-before` для *любой* строки с индексом >0, что верно для замены (`idzie`→`szła`, целое
+слово на обеих сторонах — уже проходило) и для многословных литеральных fallback-сравнений
+(`robić`→`robiłem / robiłam`, тоже проходило), но не для чистой вставки.
+
+**Побочная находка (не устранённая в этой задаче, вне разрешённого объёма — React-эталон
+сохраняется до прохождения его собственного gate, ADR-5 уже снял блокировку паритета).**
+React-зеркало `src/ui/endingHighlight.ts` не имеет аналога `singleWordInsertionOrDeletionParts`
+вовсе: при несовпадении числа слов оно красит *всю* фразу целиком на **обеих** сторонах
+(`isChanged: from !== to`), в отличие от контракта и от Kotlin. Проверено вживую: обновлённый
+тест, если временно требовать `.change-before`-count-0 и на React, красно падает именно на
+React (Kotlin — зелёный). Это значит контрактное уточнение (`087b926`) с самого начала обновило
+только Kotlin, не своё же React-зеркало, которое контракт называет обязательным местом
+(«и зеркале React `src/ui/endingHighlight.ts»`). Не исправлено здесь: задача ограничена shared
+Kotlin/тестами; React — сохраняемый эталон, а gate паритета (этап 11) уже снят решением ADR-5,
+так что расхождение не блокирует хосты. Зафиксировано как отдельный, не блокирующий тикет.
+
+Решение: `tests/browser/kotlin-parity-matrix.spec.ts`'s обе проверки переписаны на точную
+проверку контракта — helper `isSingleWordInsertionOrDeletion(from, to)` (то же выравнивание,
+что `singleWordInsertionOrDeletionParts`: разница ровно в одно слово И буквенное совпадение
+остатка без учёта регистра) решает, ждать ли `.change-before` (0 элементов для вставки, ≥1 иначе);
+проверка строго только на Kotlin-стороне (`current === page`) — на React она не навязывается
+(см. побочную находку). Добавлены 2 regression-теста в `EndingHighlightTest.kt` на именно эти
+пары (`będzie`/`będę`) — код уже был верным, RED не наблюдался, честно зафиксировано как lock,
+не TDD-history.
+
+Проверено: `:shared:desktopTest`/`:shared:jsBrowserTest`/`:shared:wasmJsBrowserTest`/
+`:shared:iosSimulatorArm64Test`/`:shared:macosArm64Test` все green; `npm test` 268/268;
+`npm run course:validate` 4/4 PASS; `kotlin-parity-matrix.spec.ts` (9/9) и
+`kotlin-parity-chain.spec.ts` (2/2) — обе ветки wasm и js, chromium, живая
+`composeCompatibilityBrowserDistribution`/`jsBrowserDistribution` — все green. Golden-фикстуры
+(`tests/fixtures/kotlin-parity/*`) не тронуты.
+
+Где: `tests/browser/kotlin-parity-matrix.spec.ts`; `kotlin/shared/src/commonTest/kotlin/polski/
+presentation/EndingHighlightTest.kt`. Не тронуто: `EndingHighlight.kt` (уже верен),
+`src/ui/endingHighlight.ts` (React-эталон, вне объёма).
+
 ## ADR-43 · 2026-09-28 · EnRuAcceptance §7 item 2 (lane-ios, false-green фикс): en-ru реально остаётся активным после релонча — баг был не в `rebuildIfCourseSwitched`, а в порядке `AppModel.init()`
 
 `EnRuAcceptance-2026-09-28.md` §7 item 2's исходная находка для этой лейны обвиняла
