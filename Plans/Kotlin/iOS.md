@@ -106,3 +106,36 @@ en-ru is accepted by every host's picker but never actually builds a working tra
 this is the still-open content gap ADR-37 documented. Until it closes, "select English and train
 all 16 skills" stays unreachable on every host, iOS included; what this change closes is only the
 picker's own honesty and the self-correction's visibility.
+
+**Superseded by the correction below**: ADR-39 (2026-09-28, core lane) closed the content gap this
+section calls "still-open" — `forms.generated.json` now materializes every category, and en-ru
+really trains. `testSelectingEnglishTargetIsOfferedAndSelfCorrectsWithAVisibleNoticeOnRelaunch`
+(GREEN above) was renamed/rewritten in the correction below because it turned out to still pass
+after ADR-39 for a wrong reason — see ADR-43.
+
+## EnRuAcceptance-2026-09-28 §7 item 2 (iOS lane, correction after ADR-39): false-green fix — en-ru now really stays active across a relaunch
+
+ADR-39 (core lane) closed the content gap the section above called out (`forms.generated.json` now
+has every category `ConstructionRealizer` needs), so `PlExerciseEngine` genuinely builds an en-ru
+session — the same class that already works live on Android. But
+`testSelectingEnglishTargetIsOfferedAndSelfCorrectsWithAVisibleNoticeOnRelaunch` kept passing
+unchanged after that fix landed, still asserting the *old* rollback contract (self-correction alert,
+reverted picker). Live diagnosis (temporary `NSLog` in `IosSession.rebuildIfCourseSwitched`,
+`xcrun simctl spawn … log stream` on `4384946F-9E6B-43D0-ADA3-CA219A3456B8`) found the true cause: it
+was never that rebuild — `activeCoursePackId` stayed `pl-ru` the entire relaunch, so no en-ru rebuild
+was ever attempted. The real bug was `PolskiGrammarApp.swift`'s `AppModel.init()` assigning
+`preferencesSession.onState` (whose setter eagerly reconciles the persisted target/native against
+the *still-default* active pack) before calling `preferencesSession.reapplySavedCoursePack()` — the
+only call that actually switches the pack. Every cold start with a persisted `target=en` therefore
+self-corrected it back to `pl-ru` before ever trying to apply it. Full root cause and fix: ADR-43.
+
+| Check | Result |
+| --- | --- |
+| RED (diagnostic): temporary `NSLog` in `rebuildIfCourseSwitched`, old init order | confirms `activeCoursePackId` logs `pl-ru`/`pl-ru` for every check across the relaunch — en-ru rebuild never attempted |
+| GREEN: `testSelectingEnglishTargetSticksAcrossRelaunchAndServesRealEnglishContent` (renamed/rewritten, positive contract) on iPhone 17 Pro Simulator | **PASS**: `** TEST SUCCEEDED **`, 35.5s — no `Сообщение` alert, old Polish sentence absent, real Latin-only card text found, `settingsTargetPicker` shows "Английский" after relaunch |
+| `:shared:iosSimulatorArm64Test` (full suite) | **PASS**: 400/400, unchanged (`:shared` production code not touched — see ADR-43) |
+| Regression (`xcodebuild test`, same simulator): `testAnimationsToggleDefaultsOnAndPersistsOffAcrossRelaunch`, `testAnswerModeChosenInSettingsSurvivesAppRestart`, `testNativeAppearanceSettingsKeepsTrainingCard`, `testSaveFailureShowsErrorBannerOnEveryTabWithExportReachable`, `testNativeChainCompletionShowsFiveAnswersAndKeepsFiveRatings`, `testNativeTrainingMatrixAndProgress` | see `Plans/Kotlin/Lane-ios.md` for the exact per-test result of this run |
+| `:shared` Kotlin sources | KDoc-only change (`IosPreferencesSession.reapplySavedCoursePack`) |
+| Android / web / desktop / macOS hosts | **NOT RUN** — iOS-only lane; `MacPreferencesSession` never had this hazard (applies the saved pack synchronously in its own `init`, not a separately-ordered host call) |
+
+See [decisions.md ADR-43](../../AI/decisions.md) for the full contract.

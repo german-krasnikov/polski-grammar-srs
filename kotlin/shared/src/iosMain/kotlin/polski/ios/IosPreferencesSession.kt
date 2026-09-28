@@ -39,9 +39,14 @@ class IosPreferencesSession(
     private var lastPackSwitchWarning: String? = null
 
     /**
-     * EN-22: re-applies whatever target/native was saved from a previous run — called once by the
-     * host after its training session's first snapshot. A saved pair that is not (or no longer)
-     * usable is left alone rather than crashing launch ([selectActiveCoursePack] is a no-op then).
+     * EN-22: re-applies whatever target/native was saved from a previous run — must be called by
+     * the host **before** this instance's [onState] is assigned (that setter eagerly calls
+     * [currentSnapshot], which runs [reconcileWithActivePack]; calling it first would see the
+     * still-default active pack, conclude the persisted choice failed, and silently revert it
+     * before this method ever ran — the exact false-green bug EnRuAcceptance-2026-09-28.md §7
+     * item 2's iOS fix traces to `PolskiGrammarApp.swift`'s init ordering). A saved pair that is
+     * not (or no longer) usable is left alone rather than crashing launch ([selectActiveCoursePack]
+     * is a no-op then).
      */
     fun reapplySavedCoursePack() {
         (loaded as? PreferencesDecode.Loaded)?.value?.let { prefs ->
