@@ -1705,7 +1705,7 @@ final class PolskiGrammarUITests: XCTestCase {
         // VoiceOver/screen-reader parity (plan §6 acceptance): the toggle's accessible name IS the
         // attribution caption — querying `app.buttons[...]` by this exact string is itself the
         // proof a screen reader announces it, not a separate assertion on some other property.
-        let toggle = app.buttons["Лайфхак · источник: editorial"]
+        let toggle = app.buttons["Лайфхак · источник: editorial"].firstMatch
         for _ in 0..<10 {
             if toggle.exists { break }
             app.swipeUp()
@@ -1752,7 +1752,7 @@ final class PolskiGrammarUITests: XCTestCase {
         }
         XCTAssertTrue(reveal.isHittable, app.debugDescription)
         reveal.tap()
-        let toggle = app.buttons["Лайфхак · источник: editorial"]
+        let toggle = app.buttons["Лайфхак · источник: editorial"].firstMatch
         for _ in 0..<10 {
             if toggle.exists { break }
             app.swipeUp()
@@ -1764,18 +1764,16 @@ final class PolskiGrammarUITests: XCTestCase {
         XCTAssertFalse(app.descendants(matching: .any)["источник"].firstMatch.exists)
     }
 
-    /// "Zaimki osobowe" (`pronouns`) has no entry in the 5-record pl-ru `lifehacks.json` — the
-    /// block must not render at all (no empty frame), matching the web spec's own "shows no
-    /// lifehack block at all" case — on both Front and Back.
-    func testSkillWithNoAuthoredLifehackShowsNoLifehackBlockAtAll() {
+    /// "Zaimki osobowe" (`pronouns`) now has 2 authored records (full pl-ru coverage) — mirrors the
+    /// web spec's "two independent collapsible entries": expanding the first leaves the second
+    /// collapsed. Empty-list rendering stays covered by `LifehackTest` with a fixture id.
+    func testSkillWithTwoAuthoredLifehacksShowsTwoIndependentEntries() {
         let app = XCUIApplication()
         app.launch()
         XCTAssertTrue(app.staticTexts["To jest moja piękna żona."].waitForExistence(timeout: 20))
         continueIntroductionIfPresent(app)
         selectSkill(app, title: "Zaimki osobowe")
         continueIntroductionIfPresent(app)
-        let anyLifehackToggle = app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", "Лайфхак ·")).firstMatch
-        XCTAssertFalse(anyLifehackToggle.exists, app.debugDescription)
         let reveal = app.buttons["revealAnswer"]
         for _ in 0..<7 {
             if reveal.exists && reveal.isHittable { break }
@@ -1783,7 +1781,16 @@ final class PolskiGrammarUITests: XCTestCase {
         }
         XCTAssertTrue(reveal.isHittable, app.debugDescription)
         reveal.tap()
-        for _ in 0..<10 { app.swipeUp() }
-        XCTAssertFalse(anyLifehackToggle.exists, app.debugDescription)
+        let toggles = app.buttons.matching(NSPredicate(format: "label == %@", "Лайфхак · источник: editorial"))
+        for _ in 0..<10 {
+            if toggles.count >= 2 { break }
+            app.swipeUp()
+        }
+        XCTAssertEqual(toggles.count, 2, app.debugDescription)
+        toggles.element(boundBy: 0).tap()
+        XCTAssertEqual(toggles.element(boundBy: 0).value as? String, "развёрнуто")
+        XCTAssertEqual(toggles.element(boundBy: 1).value as? String, "свёрнуто")
+        let expandedText = app.staticTexts.matching(NSPredicate(format: "label CONTAINS %@", "«je»")).firstMatch
+        XCTAssertTrue(expandedText.waitForExistence(timeout: 5), app.debugDescription)
     }
 }

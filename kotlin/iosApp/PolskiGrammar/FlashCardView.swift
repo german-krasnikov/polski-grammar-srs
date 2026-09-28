@@ -619,6 +619,9 @@ private struct LifehackEntryView: View {
                     Image(systemName: expanded ? "chevron.up" : "chevron.down")
                 }
             }
+            // Inside a List row, default-style buttons all fire on any tap in the row; borderless
+            // keeps each entry's toggle independent once a skill has 2+ lifehacks.
+            .buttonStyle(.borderless)
             .accessibilityIdentifier("lifehack-toggle-\(index)")
             .accessibilityValue(expanded ? "развёрнуто" : "свёрнуто")
             if expanded {

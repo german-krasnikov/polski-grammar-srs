@@ -2,6 +2,8 @@ package dev.polski.grammarmatrix
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onAllNodesWithText
+import androidx.compose.ui.test.onFirst
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import org.junit.Assert.assertEquals
@@ -38,7 +40,7 @@ class AndroidLifehackBlockComposeTest {
         composeRule.setContent {
             MaterialTheme { AndroidLifehackBlock(skillId = "case.gen.neg", reduceMotion = true) }
         }
-        composeRule.onNodeWithText(caption).assertExists()
+        composeRule.onAllNodesWithText(caption).onFirst().assertExists()
         composeRule.onNodeWithText(citationStart, substring = true).assertDoesNotExist()
     }
 
@@ -46,7 +48,7 @@ class AndroidLifehackBlockComposeTest {
         composeRule.setContent {
             MaterialTheme { AndroidLifehackBlock(skillId = "case.gen.neg", reduceMotion = true) }
         }
-        composeRule.onNodeWithText(caption).performClick()
+        composeRule.onAllNodesWithText(caption).onFirst().performClick()
         composeRule.onNodeWithText(citationStart, substring = true).assertExists()
     }
 }

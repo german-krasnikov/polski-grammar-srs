@@ -98,12 +98,12 @@ class LifehackTest {
         assertEquals(false, StaticPackLifehackProvider.hasLifehacks("no.such.skill.exists"))
     }
 
-    // §4.3's pack-wide "Лайфхаки" listing: pl-ru's 5 authored skills come back in curriculum
+    // §4.3's pack-wide "Лайфхаки" listing: pl-ru's groups come back in curriculum
     // order (Curriculum.kt/pair.json's own skills[] order), not lifehacks.json's authoring order —
     // and each group is titled by that skill's own real display title, never a made-up label.
     @Test fun listAllOrdersPlRuGroupsByCurriculumAndNamesEachByItsRealSkillTitle() {
         val groups = StaticPackLifehackProvider.listAll()
-        assertEquals(listOf("case.gen.neg", "case.inst", "agreement.my", "aspect", "mixed"), groups.map { it.skillId })
+        assertEquals(skills.map { it.id }, groups.map { it.skillId }, "pl-ru covers every skill, so order is exactly curriculum order")
         groups.forEach { group ->
             assertEquals(skills.first { it.id == group.skillId }.title, group.title)
             assertTrue(group.lifehacks.isNotEmpty())
@@ -128,6 +128,6 @@ class LifehackTest {
         }
         // Restored: pl-ru's own answers are unchanged after the round trip.
         assertTrue(StaticPackLifehackProvider.hasLifehacks("case.gen.neg"))
-        assertEquals(5, StaticPackLifehackProvider.listAll().size)
+        assertEquals(16, StaticPackLifehackProvider.listAll().size)
     }
 }
