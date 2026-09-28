@@ -21,3 +21,6 @@ Plans/Kotlin/artifacts/**/*.mp4
 Plans/Kotlin/artifacts/**/*.mov
 Plans/Kotlin/artifacts/**/*.webm
 Plans/Kotlin/artifacts/**/*.zip
+
+# Xcode per-user state
+xcuserdata/
