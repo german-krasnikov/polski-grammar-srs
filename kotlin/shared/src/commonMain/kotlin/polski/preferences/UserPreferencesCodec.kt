@@ -8,7 +8,6 @@ import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.booleanOrNull
 import kotlinx.serialization.json.intOrNull
 import polski.data.packRegistry
-import polski.data.usableCourseSelections
 
 sealed interface PreferencesDecode {
     data class Loaded(val value: UserPreferencesV2) : PreferencesDecode
@@ -22,17 +21,16 @@ object UserPreferencesCodec {
     private val fieldsV1 = setOf("schemaVersion", "coursePair", "explanationMethod", "answerMode", "appearance", "motion", "swipeRatingEnabled", "reminder")
     private val fieldsV2 = fieldsV1 + "glassTintPercent" + "animationsEnabled"
     private val fieldsV3 = fieldsV2 - "explanationMethod" + "styleId"
-    /** EN-08: not yet written by [encode] (no host has two real packs to pick between yet), but
-     * decoded tolerantly so a future `target`/`native`-shaped export is never treated as garbage. */
+    /** EN-08/EN-22: not yet written by [encode] (every host still exports v3), but decoded
+     * tolerantly so a `target`/`native`-shaped export (a future v4 writer, or another KMP host
+     * that already writes v4) is never treated as garbage. */
     private val fieldsV4 = fieldsV3 - "coursePair" + "target" + "native"
     private val reminderFields = setOf("enabled", "localTime", "days", "quietStart", "quietEnd")
 
     /**
-     * EN-22: the target/native half of a persisted document, read without checking it against
-     * [packRegistry.active] the way [decode] does — a host's cold start needs this *before*
-     * calling [polski.data.selectActiveCoursePack] with the result, so [decode]'s own check would
-     * otherwise always fail for a persisted pack switch (the active pack is still the old one at
-     * that point). Tolerant of both wire shapes (`coursePair` through v3, `target`/`native` from
+     * EN-22: the target/native half of a persisted document, read without [decode]'s full
+     * validation — a host's cold start needs this *before* calling
+     * [polski.data.selectActiveCoursePack] with the result, before touching any course data. Tolerant of both wire shapes (`coursePair` through v3, `target`/`native` from
      * v4); null for any missing/malformed document, same as "leave the default pack active".
      */
     fun peekTargetNative(raw: String): Pair<String, String>? {
@@ -68,8 +66,11 @@ object UserPreferencesCodec {
             val n = root.optionalString("native", defaults.native) ?: return invalid(raw, "Invalid native")
             t to n
         }
-        if (target != packRegistry.active.targetLanguage || native != packRegistry.active.nativeLanguage)
-            return invalid(raw, "Unsupported course selection")
+        // EN-22: any *registered* pack decodes, not only whichever one happens to be
+        // `packRegistry.active` right now — selecting a decoded-but-not-yet-active pack live is
+        // the caller's job (`IosPreferencesSession` et al.), not decode's; a genuinely unknown
+        // pairId (typo, removed pack, another product's export) still recovers.
+        if (!packRegistry.contains("$target-$native")) return invalid(raw, "Unsupported course selection")
         // v1/v2 wrote `explanationMethod: "Logic"/"Situations"`; v3 writes `styleId` directly with all 4 names.
         val style = if (version <= 2) root.legacyStyleId(defaults.styleId) ?: return invalid(raw, "Invalid explanationMethod")
             else root.optionalEnum("styleId", defaults.styleId) ?: return invalid(raw, "Invalid styleId")
@@ -92,15 +93,10 @@ object UserPreferencesCodec {
     }
 
     fun encode(value: UserPreferencesV2): String {
-        // EN-22 fix: a real course switch (AndroidSessionViewModel.persistCourseSelectionAndRestart)
-        // persists the target/native pair the user is switching *to* — packRegistry.active only
-        // catches up on the next cold start (see peekTargetNative's KDoc). Requiring value.target/
-        // native to already equal packRegistry.active here made every genuine switch throw and
-        // roll back; the invariant this require actually needs to protect is "never persist a pair
-        // this build can't safely load", which usableCourseSelections already states precisely.
-        // decode() separately checks the persisted pair against packRegistry.active — that's the
-        // right place for the "does this match what's active" question, not here.
-        require(value.schemaVersion == 3 && (value.target to value.native) in usableCourseSelections && validReminder(value.reminder) && value.glassTintPercent in 0..100)
+        // EN-22: a real course switch persists the pair the user is switching *to*, before
+        // packRegistry.active catches up (Android: next cold start; iOS: live select) — so encode
+        // only requires a registered pack, the same check decode uses, never the active one.
+        require(value.schemaVersion == 3 && packRegistry.contains("${value.target}-${value.native}") && validReminder(value.reminder) && value.glassTintPercent in 0..100)
         val reminder = value.reminder
         val root = JsonObject(mapOf(
             "schemaVersion" to JsonPrimitive(3),

@@ -126,6 +126,24 @@ private func styleOptions(_ preferences: Record) -> [StyleOption] {
     }
 }
 
+// EN-22 (Plans/Kotlin/EnRuPackPlan.md §6): `coursePacks` (IosPreferencesSession.currentSnapshot)
+// is the real, currently-registered (target, native) pairs — pl-ru and en-ru today, never a
+// hardcoded literal pair here; only the *display* label for a known code is this file's own copy,
+// the same fallback pattern `styleFallbackLabel` above already uses for a style without recipe text.
+private let courseLanguageLabel: [String: String] = ["pl": "Польский", "en": "Английский", "ru": "Русский"]
+private func courseLanguageName(_ code: String) -> String { courseLanguageLabel[code] ?? code }
+
+/// The distinct values of [key] ("target"/"native") across every row of `preferences`'s
+/// `coursePacks`, in first-seen order — the real option list for one of the two EN-22 pickers.
+private func coursePackValues(_ preferences: Record, _ key: String) -> [String] {
+    var seen: [String] = []
+    for row in preferences.rows("coursePacks") {
+        let value = row.string(key)
+        if !seen.contains(value) { seen.append(value) }
+    }
+    return seen
+}
+
 struct ProgressFile: FileDocument {
     static var readableContentTypes: [UTType] { [.json] }
     var text: String
@@ -199,6 +217,9 @@ final class AppModel: ObservableObject {
         preferencesSession.onState = { [weak self] json in
             DispatchQueue.main.async { self?.receivePreferences(json) }
         }
+        // EN-22: must run after `session.onState` above (already forced) — see
+        // `reapplySavedCoursePack`'s own doc for why this exact ordering is load-bearing.
+        preferencesSession.reapplySavedCoursePack()
         receive(session.currentSnapshot())
         receiveVocabulary(vocabulary.currentSnapshot())
         receivePreferences(preferencesSession.currentSnapshot())
@@ -527,6 +548,30 @@ private struct IosSettingsView: View {
                     Text("Экспортируйте исходные настройки перед импортом проверенной копии.")
                 }
             } else {
+                Section("Курс") {
+                    // EN-22: options come from `coursePacks` (every really-registered pack), not a
+                    // hardcoded pl/en pair — picking a target keeps the current native unless that
+                    // exact combination doesn't exist, in which case `model.setPreference` surfaces
+                    // the real rejection as `notice` (see `set`'s "Неизвестная пара языков" error).
+                    Picker("Изучаемый язык", selection: Binding(
+                        get: { model.preferences.string("target") },
+                        set: { model.setPreference("target", $0) }
+                    )) {
+                        ForEach(coursePackValues(model.preferences, "target"), id: \.self) { code in
+                            Text(courseLanguageName(code)).tag(code)
+                        }
+                    }
+                    .accessibilityIdentifier("settingsTargetPicker")
+                    Picker("Родной язык", selection: Binding(
+                        get: { model.preferences.string("native") },
+                        set: { model.setPreference("native", $0) }
+                    )) {
+                        ForEach(coursePackValues(model.preferences, "native"), id: \.self) { code in
+                            Text(courseLanguageName(code)).tag(code)
+                        }
+                    }
+                    .accessibilityIdentifier("settingsNativePicker")
+                }
                 Section("Обучение") {
                     // UC-10/S1: 4 styles replace the old Logic/Situations selector — the picker's
                     // own selected-value row shows the label, the caption below shows its
@@ -1009,6 +1054,43 @@ private struct MatrixView: View {
         Section("Время меняется, предложение остаётся целым") {
             ForEach(Array(matrix.rows("tenseRows").enumerated()), id: \.offset) { entry in
                 comparisonRow(entry.element)
+            }
+        }
+        english
+    }
+
+    // EN-24 (UC-09 part 2/2, ios lane, EnRuPackPlan.md §5 gap H / §6): mirrors the web host's
+    // `renderEnglishVerbMatrix` (ADR-28) — the one live English matrix table (fixed example verb
+    // "see", no selector — a minimum slice, not a full English matrix UI) plus a do-support table,
+    // both fed by `IosSnapshot.kt`'s `enVerbForm` (shared with the web host). Deliberately not
+    // `matrix.record("verbTenseLabels")` above — that map holds Polish glosses ("Teraz" etc.) for
+    // pl's own tense column headers, which would be a real a11y/correctness bug on an English
+    // table (the same class of bug ADR-28 fixed for `lang="pl"` on the web host).
+    private static let englishTenseLabel: [String: String] = ["present": "Настоящее", "past": "Прошедшее", "future": "Будущее"]
+
+    @ViewBuilder private var english: some View {
+        Section("English: лицо × время (\"\(matrix.string("englishExampleLemma"))\")") {
+            Text("Формы читаются из forms.generated.json(en) тем же MatrixTableViewModel, что и польские таблицы выше — движок не знает, что это английский.")
+        }
+        ForEach(Array(matrix.rows("englishVerbsRows").enumerated()), id: \.offset) { _, row in
+            Section(row.string("title")) {
+                ForEach(["present", "past", "future"], id: \.self) { tense in
+                    Text(Self.englishTenseLabel[tense] ?? tense).font(.subheadline)
+                    NativeContrastPairView(pair: row.record("\(tense)Pair"))
+                }
+            }
+        }
+        Section("do-support: вопрос и отрицание") {
+            Text("«do/does/did» встаёт перед подлежащим (Do you see…?) или перед «not» (I do not see…). У будущего своего do-support нет — вопрос и отрицание строятся через «will» само по себе.")
+        }
+        ForEach(Array(matrix.rows("englishDoSupportRows").enumerated()), id: \.offset) { _, row in
+            Section(row.string("title")) {
+                ForEach(["present", "past"], id: \.self) { tense in
+                    Text(Self.englishTenseLabel[tense] ?? tense).font(.subheadline)
+                    NativeContrastPairView(pair: row.record("\(tense)Pair"))
+                }
+                Text(Self.englishTenseLabel["future"] ?? "future").font(.subheadline)
+                Text("не нужен — только will").font(.footnote).foregroundStyle(.secondary)
             }
         }
     }

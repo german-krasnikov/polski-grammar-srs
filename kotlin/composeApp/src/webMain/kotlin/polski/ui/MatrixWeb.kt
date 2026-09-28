@@ -33,21 +33,16 @@ import polski.grammar.possessiveForm
 import polski.grammar.verbForm
 import polski.core.engine.MatrixColumn
 import polski.core.engine.MatrixTableEngine
-import polski.core.enMorphology
 import polski.data.enPersonalPronouns
+import polski.data.enVerbForm
 import polski.data.enVerbs
 import polski.model.Aspect
 import polski.model.Gender
 import polski.model.GramCase
-import polski.model.NumberFeature
 import polski.model.NumberGram
-import polski.model.Person
-import polski.model.PersonFeature
 import polski.model.PossessiveId
 import polski.model.SentenceSeed
 import polski.model.Tense
-import polski.model.TenseFeature
-import polski.model.toFeatureValue
 import polski.presentation.AppAction
 import polski.presentation.AppUiState
 import polski.presentation.CardPhase
@@ -327,10 +322,12 @@ private fun renderVerbs(root: HTMLElement, state: AppUiState, dispatch: (AppActi
 /**
  * EN-24 (UC-09 part 2/2 minimum, Plans/Kotlin/EnRuPackPlan.md §5 gap H / §6): the one live English
  * matrix table — Present/Past/Future × person, plus a do-support table for the same persons — read
- * from `lang/en/forms.generated.json` through [enMorphology] and the exact same
+ * from `lang/en/forms.generated.json` through [polski.data.enVerbForm] (a shared `:shared`
+ * commonMain lookup — EN-24 ios lane promoted it out of this file once the iOS matrix host needed
+ * the identical form, so both hosts read one implementation) and the exact same
  * [MatrixTableEngine]/[MatrixTableViewModel] every pl table above already uses, not a new ad hoc
  * rendering path. Fixed to one example verb (no selector): a minimum slice proving the engine is
- * language-agnostic, not a full English matrix UI (that is the same follow-up as the other 4
+ * language-agnostic, not a full English matrix UI (that is the same follow-up as the other 3
  * hosts, out of this task's scope).
  */
 private fun renderEnglishVerbMatrix(root: HTMLElement) {
@@ -366,24 +363,6 @@ private fun renderEnglishVerbMatrix(root: HTMLElement) {
             ),
         ).toViewModel(),
         lang = "en",
-    )
-}
-
-private val enPersonNumberByPronounId = mapOf(
-    "I" to (Person.FIRST to NumberGram.SG),
-    "you" to (Person.SECOND to NumberGram.SG),
-    "he" to (Person.THIRD to NumberGram.SG),
-    "she" to (Person.THIRD to NumberGram.SG),
-    "it" to (Person.THIRD to NumberGram.SG),
-    "we" to (Person.FIRST to NumberGram.PL),
-    "they" to (Person.THIRD to NumberGram.PL),
-)
-
-private fun enVerbForm(verbId: String, tense: Tense, pronounId: String): String {
-    val (person, number) = enPersonNumberByPronounId.getValue(pronounId)
-    return enMorphology.form(
-        "verb:$verbId",
-        mapOf(TenseFeature to tense.toFeatureValue(), PersonFeature to person.toFeatureValue(), NumberFeature to number.toFeatureValue()),
     )
 }
 

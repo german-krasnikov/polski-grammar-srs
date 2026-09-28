@@ -57,3 +57,19 @@ See [decisions.md ADR-22](../../AI/decisions.md) for the full contract.
 ## Native visual system and multilingual icon
 
 SwiftUI keeps the platform tab bar, Form controls, safe areas, Dynamic Type text styles and system grouped background. The training screen adds a compact study summary and a clearer sentence/action hierarchy; the iPad keeps its platform tab placement. The icon from [branding](../../assets/branding/README.md) has no language-specific letter or flag. After this visual change, both iPhone 17 Pro Simulator and physical iPad UI tests passed again, and the iOS asset catalog compiled with `AppIcon`; the iPhone and iPad simulator captures above show the compact layout. The native text field now owns a local draft during editing and sends each change to the shared session: the UI test observed a dropped Polish letter before this fix and passed afterward.
+
+## EN-24 (iOS): English matrix table on `MatrixView`, `enVerbForm` shared with web (2026-09-28)
+
+`IosSnapshot.kt`'s `matrixSnapshot` adds `englishExampleLemma`/`englishVerbsRows`/`englishDoSupportRows` next to the existing pl `verbsRows`/`tenseRows` — the one live English table (`EnRuPackPlan.md` §5 gap H / §6, the same minimum slice ADR-28 already shipped on web), built through the same `MatrixTableEngine`/`MatrixTableViewModel` every pl table above uses, fixed to one example verb ("see") and read from `lang/en/forms.generated.json`. `enVerbForm` (pronoun → person/number → `enMorphology.form`) moved from a webMain-only private helper into `:shared` commonMain (`EnLexicon.kt`) so both hosts call the one implementation instead of keeping a second hand-copied map. `MatrixView.swift` renders a new `english` section with its own Russian tense labels, deliberately not `matrix.record("verbTenseLabels")` (that map holds pl glosses like "Teraz", which would mislabel an English column — the same class of bug ADR-28 fixed for `lang="pl"` on web).
+
+| Check | Result |
+| --- | --- |
+| `:shared:iosSimulatorArm64Test` (incl. new `IosMatrixSnapshotTest` test, RED→GREEN confirmed live) | **PASS** |
+| `:shared:desktopTest` / `:shared:macosArm64Test` | **PASS** (pl regression check) |
+| `:composeApp:compileKotlinJs` / `compileKotlinWasmJs` / `:composeApp:desktopTest` (after moving `enVerbForm` out of `MatrixWeb.kt`) | **PASS** |
+| `xcodebuild test` on iPhone 17 Pro Simulator, `testEnglishMatrixTableShowsRealFormsAndDoSupportSplit` | **PASS**: `** TEST SUCCEEDED **`, real `he→sees/saw/will see`, `do/does` split, invariant `did`, no future do-support |
+| Same simulator, 3 adjacent existing Matrix UI tests (verb gender, cases, pronouns) | **PASS**: `** TEST SUCCEEDED **`, 0 failures — no regression on the pl tables sharing this screen |
+| Screenshots | [en24-matrix-english-verbs.png](artifacts/ios/en24-matrix-english-verbs.png), [en24-matrix-do-support.png](artifacts/ios/en24-matrix-do-support.png) |
+| Android / web / desktop / macOS hosts | **NOT RUN** — iOS-only lane per the plan's task table; still open per-host work, not silent |
+
+See [decisions.md ADR-34](../../AI/decisions.md) for the full contract.

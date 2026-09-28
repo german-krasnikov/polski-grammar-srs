@@ -20,6 +20,58 @@ final class PolskiGrammarUITests: XCTestCase {
         XCTAssertTrue(app.staticTexts["To jest moja piękna żona."].exists)
     }
 
+    /**
+     * EN-22 (Plans/Kotlin/EnRuPackPlan.md §6): the new "Изучаемый язык"/"Родной язык" pickers
+     * next to the existing style picker. Both list the *real* registered packs (pl-ru and en-ru —
+     * `coursePacks` in `IosPreferencesSession.currentSnapshot`, never a hardcoded pair), and
+     * picking "Английский" really switches the production `packRegistry` (proven indirectly: the
+     * selection persists across a full relaunch, which only a real, saved `target`/`native` — not
+     * a view-only picker state — could survive), and the existing pl-ru training card keeps
+     * working unchanged throughout (the actual acceptance line: "существующий pl-ru выбор —
+     * поведение не изменилось"). Restores "Польский" at the end so later tests in the same run
+     * keep seeing pl-ru active, the same restore-at-the-end pattern
+     * `testAnimationsToggleDefaultsOnAndPersistsOffAcrossRelaunch` already uses for its own toggle.
+     */
+    func testCoursePickersListRealPacksAndSwitchingTargetPersistsAcrossRelaunch() {
+        let app = XCUIApplication()
+        app.launch()
+        XCTAssertTrue(app.staticTexts["To jest moja piękna żona."].waitForExistence(timeout: 20))
+        app.buttons["openSettings"].tap()
+        XCTAssertTrue(app.staticTexts["Курс"].waitForExistence(timeout: 5))
+
+        let targetRow = app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", "Изучаемый язык,")).firstMatch
+        XCTAssertTrue(targetRow.waitForExistence(timeout: 5), app.debugDescription)
+        XCTAssertTrue(targetRow.label.contains("Польский"), targetRow.label)
+        targetRow.tap()
+        XCTAssertTrue(app.buttons["Польский"].waitForExistence(timeout: 5), app.debugDescription)
+        XCTAssertTrue(app.buttons["Английский"].waitForExistence(timeout: 5), "en-ru must be a real, listed option, not only pl-ru")
+        let capture = XCTAttachment(screenshot: app.screenshot())
+        capture.name = "en22-course-pickers"
+        capture.lifetime = .keepAlways
+        add(capture)
+        app.buttons["Английский"].tap()
+        XCTAssertTrue(targetRow.label.contains("Английский"), targetRow.label)
+        // The training card is untouched by the switch (pl-ru's own engine isn't pack-aware yet,
+        // EN-22's explicit, documented scope) — the acceptance line this proves is the picker
+        // itself and its persistence, not a still-open follow-up task's full host rewiring.
+        app.buttons["Готово"].tap()
+        XCTAssertTrue(app.staticTexts["To jest moja piękna żona."].exists)
+
+        app.terminate()
+        app.launch()
+        XCTAssertTrue(app.staticTexts["To jest moja piękna żona."].waitForExistence(timeout: 20), "pl-ru training must keep working even with a different pack saved as the preference")
+        app.buttons["openSettings"].tap()
+        let targetRowAfterRelaunch = app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", "Изучаемый язык,")).firstMatch
+        XCTAssertTrue(targetRowAfterRelaunch.waitForExistence(timeout: 5), app.debugDescription)
+        XCTAssertTrue(targetRowAfterRelaunch.label.contains("Английский"), targetRowAfterRelaunch.label)
+
+        // Restore pl-ru so every later test in this run keeps seeing the default pack active.
+        targetRowAfterRelaunch.tap()
+        app.buttons["Польский"].tap()
+        XCTAssertTrue(targetRowAfterRelaunch.label.contains("Польский"), targetRowAfterRelaunch.label)
+        app.buttons["Готово"].tap()
+    }
+
     /// D5: the "Анимации" master switch defaults on and persists off across a relaunch, via the
     /// same `IosPreferencesSession` JSON document `NSUserDefaults`-backs every other setting with
     /// (`testNativeAppearanceSettingsKeepsTrainingCard` above covers the sibling pickers in the
@@ -902,6 +954,46 @@ final class PolskiGrammarUITests: XCTestCase {
         XCTAssertTrue(robilChange.waitForExistence(timeout: 5))
     }
 
+    // EN-24 (UC-09 part 2/2, ios lane, EnRuPackPlan.md §5 gap H / §6): the iOS matrix host's own
+    // live English table + do-support split, mirroring web's `kotlin-en-matrix.spec.ts` — real,
+    // irregular `forms.generated.json(en)` values through `MatrixTableViewModel`, not a mock.
+    func testEnglishMatrixTableShowsRealFormsAndDoSupportSplit() {
+        let app = XCUIApplication()
+        app.launch()
+        app.buttons["Матрица"].firstMatch.tap()
+        let section = app.buttons.matching(NSPredicate(format: "label CONTAINS %@", "Раздел")).firstMatch
+        XCTAssertTrue(section.waitForExistence(timeout: 10))
+        section.tap()
+        app.buttons["Времена и лица"].tap()
+
+        let heSees = app.descendants(matching: .any)["Было: see; Стало: sees"].firstMatch
+        for _ in 0..<30 {
+            if heSees.exists { break }
+            app.swipeUp()
+        }
+        XCTAssertTrue(heSees.waitForExistence(timeout: 5))
+        XCTAssertTrue(app.descendants(matching: .any)["Было: see; Стало: saw"].firstMatch.exists)
+        // UC-09 (ios host, EN-24 minimum slice): visual evidence the English matrix table is real,
+        // MatrixTableViewModel-sourced content, not a mock.
+        let englishCapture = XCTAttachment(screenshot: app.screenshot())
+        englishCapture.name = "matrix-english-verbs-uc09"
+        englishCapture.lifetime = .keepAlways
+        add(englishCapture)
+
+        let doDoes = app.descendants(matching: .any)["Было: do; Стало: does"].firstMatch
+        for _ in 0..<30 {
+            if doDoes.exists { break }
+            app.swipeUp()
+        }
+        XCTAssertTrue(doDoes.waitForExistence(timeout: 5))
+        XCTAssertTrue(app.descendants(matching: .any)["Было: do; Стало: did"].firstMatch.exists)
+        XCTAssertTrue(app.staticTexts["не нужен — только will"].exists)
+        let doSupportCapture = XCTAttachment(screenshot: app.screenshot())
+        doSupportCapture.name = "matrix-do-support-uc09"
+        doSupportCapture.lifetime = .keepAlways
+        add(doSupportCapture)
+    }
+
     func testNativeCasesShowCompactNoteAndOrderedComparisonNouns() {
         let app = XCUIApplication()
         app.launch()
@@ -1512,5 +1604,154 @@ final class PolskiGrammarUITests: XCTestCase {
         whyToggle.tap()
         assertFullText("styleBlock-whyOnDemand-text", contains: "Прямой объект после глаголов действия")
         capture("style-blocks-whyOnDemand")
+    }
+
+    /// EN-21 iOS (`Plans/Kotlin/EnRuPackPlan.md` §4.2/§4.3/§6): navigates to a specific skill via
+    /// the "Отдельный навык" mode `Menu` then the "Навык" `Picker` — the same two-step navigation
+    /// `testNativeVerbGenderControlChangesSelectedSubjectOnly`'s gender `Picker` and
+    /// `testMethodSwitchKeepsTypedDraftThroughRevealAndOneReview`'s style `Picker` already prove
+    /// resolve their options as plain `app.buttons[...]` by label.
+    private func selectSkill(_ app: XCUIApplication, title: String) {
+        let mode = app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", "Режим:")).firstMatch
+        for _ in 0..<7 {
+            if mode.isHittable { break }
+            app.swipeUp()
+        }
+        XCTAssertTrue(mode.waitForExistence(timeout: 5), app.debugDescription)
+        // Idempotent: already in Focused/skill-picker mode on a later call in the same test
+        // (`Отдельный навык` only exists in the Menu the *first* time; switching skills after
+        // that goes straight through the now-visible "Навык" Picker below).
+        if mode.label.contains("Отдельный навык") {
+            let already = app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", "Навык")).firstMatch
+            for _ in 0..<7 {
+                if already.isHittable { break }
+                app.swipeUp()
+            }
+            XCTAssertTrue(already.waitForExistence(timeout: 5), app.debugDescription)
+            already.tap()
+            let option = app.buttons[title]
+            XCTAssertTrue(option.waitForExistence(timeout: 5), app.debugDescription)
+            option.tap()
+            return
+        }
+        mode.tap()
+        let focused = app.buttons["Отдельный навык"]
+        XCTAssertTrue(focused.waitForExistence(timeout: 5), app.debugDescription)
+        focused.tap()
+        let skillPicker = app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", "Навык")).firstMatch
+        for _ in 0..<7 {
+            if skillPicker.isHittable { break }
+            app.swipeUp()
+        }
+        XCTAssertTrue(skillPicker.waitForExistence(timeout: 5), app.debugDescription)
+        skillPicker.tap()
+        let option = app.buttons[title]
+        XCTAssertTrue(option.waitForExistence(timeout: 5), app.debugDescription)
+        option.tap()
+    }
+
+    /// EN-21 iOS (`Plans/Kotlin/EnRuPackPlan.md` §4.2/§4.3/§6, mirroring
+    /// `tests/browser/kotlin-lifehack-block.spec.ts`): the active pack on iOS is pl-ru (`packs.first()`
+    /// — EN-22 has not wired a real target/native picker yet), whose real `lifehacks.json` (EN-20)
+    /// authored exactly 5 records — `case.gen.neg` has a `source.url`, so this exercises both the
+    /// collapsed→expanded disclosure and the citation link.
+    func testLifehackBlockShowsCollapsedWithAttributionAndExpandsToShowCitationAndLink() {
+        let app = XCUIApplication()
+        app.launch()
+        XCTAssertTrue(app.staticTexts["To jest moja piękna żona."].waitForExistence(timeout: 20))
+        continueIntroductionIfPresent(app)
+        selectSkill(app, title: "Dopełniacz · negacja")
+        continueIntroductionIfPresent(app)
+        let reveal = app.buttons["revealAnswer"]
+        for _ in 0..<7 {
+            if reveal.exists && reveal.isHittable { break }
+            app.swipeUp()
+        }
+        XCTAssertTrue(reveal.isHittable, app.debugDescription)
+        reveal.tap()
+
+        // VoiceOver/screen-reader parity (plan §6 acceptance): the toggle's accessible name IS the
+        // attribution caption — querying `app.buttons[...]` by this exact string is itself the
+        // proof a screen reader announces it, not a separate assertion on some other property.
+        let toggle = app.buttons["Лайфхак · источник: editorial"]
+        for _ in 0..<10 {
+            if toggle.exists { break }
+            app.swipeUp()
+        }
+        XCTAssertTrue(toggle.waitForExistence(timeout: 5), app.debugDescription)
+        XCTAssertEqual(toggle.value as? String, "свёрнуто")
+        let text = app.staticTexts["падеж при отрицании"]
+        XCTAssertFalse(text.exists, "collapsed by default — the tip text must not be visible yet")
+        let capture = XCTAttachment(screenshot: app.screenshot())
+        capture.name = "en21-lifehack-collapsed"
+        capture.lifetime = .keepAlways
+        add(capture)
+
+        toggle.tap()
+        XCTAssertEqual(toggle.value as? String, "развёрнуто")
+        let expandedText = app.staticTexts.matching(NSPredicate(format: "label CONTAINS %@", "падеж при отрицании")).firstMatch
+        XCTAssertTrue(expandedText.waitForExistence(timeout: 5), app.debugDescription)
+        // A SwiftUI `Link` surfaces as a plain Button in this accessibility snapshot (confirmed
+        // live: `app.links[...]` never resolved it, `.descendants(matching: .any)` does) — not
+        // `app.links[...]`, the same reason `typedAnswer`/`totalReviews` elsewhere in this file
+        // use the broad query rather than guessing the concrete element type.
+        let link = app.descendants(matching: .any)["источник"].firstMatch
+        XCTAssertTrue(link.waitForExistence(timeout: 5), app.debugDescription)
+        let expandedCapture = XCTAttachment(screenshot: app.screenshot())
+        expandedCapture.name = "en21-lifehack-expanded"
+        expandedCapture.lifetime = .keepAlways
+        add(expandedCapture)
+    }
+
+    /// `case.inst`'s authored record (EN-20) has no `source.url` — the citation still renders,
+    /// just without a `Link`, proving the link is genuinely optional (mirrors the web spec's
+    /// "a lifehack with no source URL still shows its citation, without a link").
+    func testLifehackBlockWithNoSourceUrlStillShowsCitationWithoutLink() {
+        let app = XCUIApplication()
+        app.launch()
+        XCTAssertTrue(app.staticTexts["To jest moja piękna żona."].waitForExistence(timeout: 20))
+        continueIntroductionIfPresent(app)
+        selectSkill(app, title: "Narzędnik · z / być")
+        continueIntroductionIfPresent(app)
+        let reveal = app.buttons["revealAnswer"]
+        for _ in 0..<7 {
+            if reveal.exists && reveal.isHittable { break }
+            app.swipeUp()
+        }
+        XCTAssertTrue(reveal.isHittable, app.debugDescription)
+        reveal.tap()
+        let toggle = app.buttons["Лайфхак · источник: editorial"]
+        for _ in 0..<10 {
+            if toggle.exists { break }
+            app.swipeUp()
+        }
+        XCTAssertTrue(toggle.waitForExistence(timeout: 5), app.debugDescription)
+        toggle.tap()
+        let citation = app.staticTexts.matching(NSPredicate(format: "label CONTAINS %@", "Bielec, D. (1998)")).firstMatch
+        XCTAssertTrue(citation.waitForExistence(timeout: 5), app.debugDescription)
+        XCTAssertFalse(app.descendants(matching: .any)["источник"].firstMatch.exists)
+    }
+
+    /// "Zaimki osobowe" (`pronouns`) has no entry in the 5-record pl-ru `lifehacks.json` — the
+    /// block must not render at all (no empty frame), matching the web spec's own "shows no
+    /// lifehack block at all" case — on both Front and Back.
+    func testSkillWithNoAuthoredLifehackShowsNoLifehackBlockAtAll() {
+        let app = XCUIApplication()
+        app.launch()
+        XCTAssertTrue(app.staticTexts["To jest moja piękna żona."].waitForExistence(timeout: 20))
+        continueIntroductionIfPresent(app)
+        selectSkill(app, title: "Zaimki osobowe")
+        continueIntroductionIfPresent(app)
+        let anyLifehackToggle = app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", "Лайфхак ·")).firstMatch
+        XCTAssertFalse(anyLifehackToggle.exists, app.debugDescription)
+        let reveal = app.buttons["revealAnswer"]
+        for _ in 0..<7 {
+            if reveal.exists && reveal.isHittable { break }
+            app.swipeUp()
+        }
+        XCTAssertTrue(reveal.isHittable, app.debugDescription)
+        reveal.tap()
+        for _ in 0..<10 { app.swipeUp() }
+        XCTAssertFalse(anyLifehackToggle.exists, app.debugDescription)
     }
 }

@@ -11,6 +11,7 @@ import kotlinx.serialization.json.jsonPrimitive
 import platform.CoreFoundation.CFRunLoopRunInMode
 import platform.CoreFoundation.kCFRunLoopDefaultMode
 import platform.Foundation.NSUserDefaults
+import polski.data.packRegistry
 
 /**
  * M10: a store built for a fresh scene must start from the answerMode (and explanationMethod)
@@ -32,6 +33,29 @@ class IosSessionTest {
             assertEquals("Situations", snapshot.getValue("explanationMethod").jsonPrimitive.content)
             session.close()
         } finally {
+            defaults.removePersistentDomainForName(suite)
+        }
+    }
+
+    /**
+     * EN-22 diagnostic: reproduces the exact live crash found on iPhone 17 Pro Simulator — a
+     * [session]'s `currentSnapshot()` called *after* `packRegistry` is switched to en-ru (as
+     * `AppModel.init()` now does, `reapplySavedCoursePack()` before `session.currentSnapshot()`)
+     * must not throw, even though the first call already happened with pl-ru active.
+     */
+    @Test
+    fun currentSnapshotAfterSwitchingActivePackToEnRuDoesNotThrow() {
+        val suite = "polski-ios-session-enru-${Random.nextLong()}"
+        val defaults = assertNotNull(NSUserDefaults(suiteName = suite))
+        defaults.removePersistentDomainForName(suite)
+        try {
+            val session = IosSession(defaults)
+            session.currentSnapshot() // mirrors the first, pl-active call `onState`'s setter makes
+            packRegistry.select("en-ru")
+            session.currentSnapshot() // mirrors AppModel.init()'s explicit call after reapply
+            session.close()
+        } finally {
+            packRegistry.select("pl-ru")
             defaults.removePersistentDomainForName(suite)
         }
     }
