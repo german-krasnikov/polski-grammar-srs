@@ -273,6 +273,11 @@ internal fun AndroidTrainingScreen(
                                             Text(method.feedback)
                                             Text(exercise.explanation)
                                             AndroidBlockList(backBlocks, reduceMotion)
+                                            // EN-21 (`Plans/Kotlin/EnRuPackPlan.md` §4.3): after
+                                            // the style's own Back blocks, never inside them —
+                                            // mirrors `LifehackWeb.kt`'s placement after the web
+                                            // `renderCardBlocks` call.
+                                            AndroidLifehackBlock(skill.id, reduceMotion)
                                             Text(method.review)
                                         }
                                     }

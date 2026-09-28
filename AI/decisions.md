@@ -2,6 +2,54 @@
 
 Новые сверху. Формат: решение → почему → где подробно.
 
+## ADR-29 · 2026-09-28 · EN-21 (android): `AndroidLifehackBlock` — тот же сворачиваемый блок «Лайфхак», что web (ADR-27), теперь на Android-хосте
+
+`kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidLifehackBlock.kt`: android-часть
+EN-21 (`Plans/Kotlin/EnRuPackPlan.md` §4.3/§6) поверх уже готового `LifehackProvider`-порта и
+`StaticPackLifehackProvider` (ADR-27, `:shared`, без изменений) — здесь только UI-проводка, никакой
+новой архитектуры. Как и на web: лайфхак не 10-й `BlockKind` (ADR-15 прямо запрещает это), поэтому
+не идёт через `AndroidBlockList`/`StyleComposer` — `AndroidTrainingScreen.kt` вызывает
+`AndroidLifehackBlock(skill.id, reduceMotion)` один раз, сразу после `AndroidBlockList(backBlocks,
+reduceMotion)`, вне `if (state.phase == CardPhase.Revealed)`'s style-блоков, но внутри той же
+Revealed-ветки — тот же порядок «после back-блоков стиля», что `LifehackWeb.kt`'s
+`renderLifehackBlock`. Пусто (`StaticPackLifehackProvider.forSkill(skillId)` — пустой список) →
+composable не рисует вообще ничего (`if (lifehacks.isEmpty()) return`), не пустую рамку.
+
+Один `AndroidCollapsible` (уже существующий D4-компонент, `AndroidWidgets.kt`) на каждый
+[`Lifehack`], свёрнут по умолчанию; переключатель — обычный `clickable` `Row` с `caption`
+(`«Лайфхак · источник: editorial/community»`) как единственным видимым текстом строки и
+`Modifier.semantics { stateDescription = "развёрнуто"/"свёрнуто" }` — тот же паттерн, что
+`AndroidWhyOnDemandBlock` уже использует для своего toggle, так что TalkBack читает подпись
+источника независимо от состояния разворота, как и требует приёмка EN-21. Текст лайфхака и
+цитата/ссылка показываются только после разворота (`AndroidCollapsible`), ссылка — обычный
+`Text(..., Modifier.clickable { LocalUriHandler.current.openUri(url) })`, подчёркнутый, на **своей
+собственной строке** под цитатой: первая попытка (цитата и ссылка в одном `Row`) ломалась визуально
+— длинная цитата уже переносится на несколько строк внутри `Text`, забирая себе всю доступную
+ширину `Row`, и второму `Text` оставалось несколько `dp`, из-за чего «— источник» переносился по
+одной букве на строку (найдено и исправлено живьём на эмуляторе, не только в юнит-тесте — Compose
+UI-тест на JVM/Robolectric не ловит this конкретный wrap, т.к. использует ту же ширину, что и
+устройство, но скриншот-осмотр — единственный способ реально увидеть перенос).
+
+Почему не переиспользован web'овский `renderLifehackBlock` буквально: разные UI-тулкиты (DOM vs
+Compose), тот же паттерн («после back-блоков, коллапс по умолчанию, подпись видна всегда, пусто →
+ничего»), а не общий код — ровно то же соотношение, что уже у `AndroidBlockList`/`LifehackWeb.kt`'s
+`renderCardBlocks` для остальных 9 `BlockKind`.
+
+Проверено: `:androidApp:testDebugUnitTest` (новый `AndroidLifehackBlockComposeTest`, 3/3 — RED
+подтверждён отдельно временной no-op заглушкой перед реализацией, затем GREEN; остальные существующие
+android-тесты не регрессировали) зелёный; `:androidApp:assembleDebug` — `BUILD SUCCESSFUL`; живой
+смоук на `emulator-5554` (Single-skill режим → `case.gen.neg`, у которого есть pl-ru's EN-20
+авторский лайфхак) — блок появляется после «Что изменилось», свёрнут по умолчанию, разворачивается
+по тапу, ссылка «Источник» реально открывает `https://www.slavica.com/grammar-of-contemporary-polish.html`
+в системном WebView-тестере; скриншоты в `/private/tmp/claude-501/.../scratchpad/en21-android/`.
+Не менялись `:core-*`/`:shared`/`:pack-format` — pl-ru byte-identical инвариант не затронут по
+построению (ноль правок вне android-хоста). iOS/macOS/desktop — вне скоупа этого лейна (отдельные
+worktree-лейны), техдолг остаётся явным, как и было до этой задачи.
+
+Подробно: `Plans/Kotlin/EnRuPackPlan.md` §4.3/§6 (EN-21); ADR-27 (core+web часть той же задачи);
+`kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidLifehackBlock.kt`;
+`kotlin/androidApp/src/test/java/dev/polski/grammarmatrix/AndroidLifehackBlockComposeTest.kt`.
+
 ## ADR-28 · 2026-09-28 · EN-24 (web): UC-09 часть 2/2 минимум — English-таблица на `MatrixWeb.kt`, `forms.generated.json(en)`
 
 Plans/Kotlin/EnRuPackPlan.md §5 гэп H / §6 EN-24: минимальный слайс — хотя бы одна живая английская
