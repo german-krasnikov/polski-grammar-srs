@@ -64,7 +64,7 @@ kotlin/macosApp             SwiftUI macOS
 
 ```text
 :core-model         FeatureBundle (UD/UniMorph), Construction, SkillSpec (+ LexicalFilter, UC-06), порты будущего
-:core-engine        Morphology/TableMorphology (UC-05); ConstructionRealizer/TemplateInterpreter (≤10 операторов)/ExerciseGenerator (UC-07) — единственный движок с UC-08 (:shared зависит на :core-engine как api, хосты переключены, GrammarEngine/ExerciseFactory удалены); MatrixTableEngine (UC-09, рендер matrix-таблиц хостов) — впереди, сегодня matrix/reference экраны уже читают формы через TableMorphology (polski.grammar.PackMorphology)
+:core-engine        Morphology/TableMorphology (UC-05); ConstructionRealizer/TemplateInterpreter (≤10 операторов)/ExerciseGenerator (UC-07) — единственный движок с UC-08 (:shared зависит на :core-engine как api, хосты переключены, GrammarEngine/ExerciseFactory удалены); MatrixTableEngine (UC-09 часть 1/2, ADR-21) — generic row-axis×columns builder, обобщает приватный matrixTable-хелпер MatrixWeb.kt; polski.presentation.MatrixTableViewModel (:shared) навешивает ContrastPair-подсветку сверху. Хосты пока НЕ переключены (часть 2/2 — впереди); matrix/reference экраны сегодня читают формы через TableMorphology (polski.grammar.PackMorphology)
 :core-srs           FSRS
 :core-progress      прогресс по pack.id
 :core-presentation  сессии, StyleComposer (стили → блоки)
