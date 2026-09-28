@@ -178,7 +178,11 @@ internal class CoursePack(private val source: CoursePackSource) {
         Json.parseToJsonElement(source.load()).jsonObject.also { pack ->
             require(pack.getValue("schemaVersion").jsonPrimitive.int == 1)
             require(pack.string("id") == source.id)
-            require(pack.string("targetLanguage") == "pl" && pack.string("nativeLanguage") == "ru")
+            // EN-06 (gap G): no hardcoded target/native literal here — pl-ru is still the only
+            // real pack, so its pl/ru strings keep flowing through unchanged, but the check no
+            // longer refuses a second pack's own languages.
+            pack.string("targetLanguage")
+            pack.string("nativeLanguage")
         }
     }
 
@@ -532,11 +536,21 @@ internal class CoursePack(private val source: CoursePackSource) {
 }
 
 /**
- * UC-03: the single point where consumers reach a [CoursePack] — [active] is the only pack today
- * (pl-ru), so it stands in for the target/native selection later tasks (UC-04+) will add.
+ * UC-03/EN-06: the single point where consumers reach a [CoursePack], keyed by [CoursePack.pairId].
+ * [active] defaults to the first registered pack (pl-ru today, unchanged behavior) until
+ * [select] switches it — no production caller does that yet; wiring a real picker to this is
+ * EN-08/EN-10/EN-22, not this task.
  */
-internal class PackRegistry(packs: List<CoursePack>) {
-    val active: CoursePack = packs.first()
+internal class PackRegistry(private val packs: List<CoursePack>) {
+    init { require(packs.isNotEmpty() && packs.map { it.pairId }.distinct().size == packs.size) }
+
+    var active: CoursePack = packs.first()
+        private set
+
+    /** Switches [active] to the registered pack whose [CoursePack.pairId] is [pairId]. */
+    fun select(pairId: String) {
+        active = requireNotNull(packs.firstOrNull { it.pairId == pairId }) { "Unknown pack pairId: $pairId" }
+    }
 }
 
 internal val packRegistry: PackRegistry by lazy { PackRegistry(embeddedCoursePackSources.map(::CoursePack)) }
