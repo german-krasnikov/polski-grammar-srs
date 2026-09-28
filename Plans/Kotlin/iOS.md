@@ -39,6 +39,21 @@ The native SwiftUI host is `kotlin/iosApp/PolskiGrammar/PolskiGrammarApp.swift`,
 
 The two iPhone UI tests are focused smoke scenarios, not the full acceptance matrix. The web parity gate and Android Stage 13/14 acceptance remain open independently of this iOS implementation. See [kotlin/README.md](../../kotlin/README.md) for commands.
 
+## UC-09 (part 2/2): Matrix screens read `MatrixTableEngine`/`MatrixTableViewModel` (2026-09-28)
+
+`IosSnapshot.kt`'s `matrixSnapshot` now builds the cases, case-comparison, verb conjugation, tense, aspect, pronoun and possessive tables through `:core-engine`'s `MatrixTableEngine` and `:shared`'s `MatrixTableViewModel` (UniversalCorePlan.md §5.3.3/§12 UC-09, ADR-22) instead of re-deriving each cell by hand; the wire JSON `MatrixView` (SwiftUI) reads is unchanged, so no Swift file needed editing. `russianSupport`'s embedded comparisons, `systemCards` and `maleAccRows` stay outside `MatrixTableEngine`'s scope, per ADR-21.
+
+| Check | Result |
+| --- | --- |
+| `:shared:iosSimulatorArm64Test` (full suite, incl. `IosMatrixSnapshotTest` 12/12) | **PASS** |
+| `:shared:compileKotlinIosSimulatorArm64` / `compileKotlinIosArm64` | **PASS** |
+| RED→GREEN: breaking one column's `contrastFrom` (NOM→GEN) failed `IosMatrixSnapshotTest`; revert restored green | **PASS** (confirmed live) |
+| `xcodebuild test` on iPhone 17 Pro Simulator (iOS 26.0), 8 Matrix/system-map UI tests | **PASS**: `** TEST SUCCEEDED **`, 8/8, 0 failures |
+| Simulator screenshots (added `XCTAttachment` capture to 3 tests) | **PASS**, see [artifacts/ios/uc09-matrix-cases-comparison.png](artifacts/ios/uc09-matrix-cases-comparison.png), [uc09-matrix-verbs-tense-aspect.png](artifacts/ios/uc09-matrix-verbs-tense-aspect.png), [uc09-matrix-pronouns-possessives.png](artifacts/ios/uc09-matrix-pronouns-possessives.png) |
+| Android/Web/Desktop/macOS, physical device, VoiceOver/Dynamic Type on Matrix | **NOT RUN** — iOS-only host wiring, out of scope |
+
+See [decisions.md ADR-22](../../AI/decisions.md) for the full contract.
+
 ## Native visual system and multilingual icon
 
 SwiftUI keeps the platform tab bar, Form controls, safe areas, Dynamic Type text styles and system grouped background. The training screen adds a compact study summary and a clearer sentence/action hierarchy; the iPad keeps its platform tab placement. The icon from [branding](../../assets/branding/README.md) has no language-specific letter or flag. After this visual change, both iPhone 17 Pro Simulator and physical iPad UI tests passed again, and the iOS asset catalog compiled with `AppIcon`; the iPhone and iPad simulator captures above show the compact layout. The native text field now owns a local draft during editing and sends each change to the shared session: the UI test observed a dropped Polish letter before this fix and passed afterward.

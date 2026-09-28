@@ -813,6 +813,12 @@ final class PolskiGrammarUITests: XCTestCase {
             app.swipeUp()
         }
         XCTAssertTrue(ownerHeading.waitForExistence(timeout: 5))
+        // UC-09 (iOS host wiring, part 2/2): visual evidence that the pronoun/possessive tables —
+        // now sourced from MatrixTableEngine/MatrixTableViewModel — still render unchanged.
+        let pronounsCapture = XCTAttachment(screenshot: app.screenshot())
+        pronounsCapture.name = "matrix-pronouns-possessives-uc09"
+        pronounsCapture.lifetime = .keepAlways
+        add(pronounsCapture)
         let owner = app.descendants(matching: .any)["Было: moja piękna żona; Стало: moją piękną żonę"].firstMatch
         for _ in 0..<8 {
             if owner.exists { break }
@@ -856,6 +862,13 @@ final class PolskiGrammarUITests: XCTestCase {
         }
         XCTAssertTrue(masculinePast.waitForExistence(timeout: 5))
         XCTAssertTrue(future.waitForExistence(timeout: 5))
+        // UC-09 (iOS host wiring, part 2/2): visual evidence that the verb conjugation/tense/
+        // aspect tables — now sourced from MatrixTableEngine/MatrixTableViewModel — still render
+        // unchanged.
+        let verbsCapture = XCTAttachment(screenshot: app.screenshot())
+        verbsCapture.name = "matrix-verbs-tense-aspect-uc09"
+        verbsCapture.lifetime = .keepAlways
+        add(verbsCapture)
 
         for _ in 0..<6 {
             if gender.isHittable { break }
@@ -911,6 +924,12 @@ final class PolskiGrammarUITests: XCTestCase {
             app.swipeUp()
         }
         XCTAssertTrue(comparison.waitForExistence(timeout: 5))
+        // UC-09 (iOS host wiring, part 2/2): visual evidence that the Cases/comparison tables —
+        // now sourced from MatrixTableEngine/MatrixTableViewModel — still render unchanged.
+        let casesCapture = XCTAttachment(screenshot: app.screenshot())
+        casesCapture.name = "matrix-cases-comparison-uc09"
+        casesCapture.lifetime = .keepAlways
+        add(casesCapture)
         for lemma in ["mąż", "kolega", "pies", "dom", "żona", "książka", "dziecko"] {
             let noun = app.staticTexts[lemma]
             for _ in 0..<8 {
