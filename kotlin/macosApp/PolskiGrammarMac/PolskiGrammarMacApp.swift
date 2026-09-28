@@ -104,6 +104,10 @@ struct TrainingSnapshot: Decodable {
         let nativeContrastAvailable: Bool
         let frontBlocks: [BlockJSON]
         let backBlocks: [BlockJSON]
+        /// EN-21 (`EnRuPackPlan.md` §4.2/§4.3): pair-scoped L1-transfer tips for the active
+        /// exercise's skill — deliberately not part of `backBlocks`, since a lifehack shows the
+        /// same way for every style (see `MacLifehackView.swift`). Empty when the skill has none.
+        let lifehacks: [LifehackJSON]
     }
     let styleBlocks: StyleBlocks?
     let draft: String
@@ -185,6 +189,11 @@ struct BlockJSON: Decodable {
         }
     }
 }
+
+/// EN-21: one `MacSnapshot.kt` `styleBlocksSnapshot`'s `lifehacks[]` entry — `status` is always
+/// `"editorial"` today (`"community"` reserved, ADR-15); `url` is `nil` for a record with no
+/// `source.url` (`courses/pairs/pl-ru/lifehacks.json`'s `case.inst` record, for one real example).
+struct LifehackJSON: Decodable { let text: String; let citation: String; let url: String?; let status: String }
 
 struct VocabularySnapshot: Decodable {
     struct Item: Decodable { let id: String; let lemma: String; let translation: String; let form: String; let example: String; let level: String }

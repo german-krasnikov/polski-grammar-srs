@@ -354,4 +354,55 @@ class DesktopScreenTest {
         waitForIdle()
         assertEquals(AppAction.Rate(exercise.id, Rating.Again), actions.single())
     }
+
+    // EN-21 (`Plans/Kotlin/EnRuPackPlan.md` §4.2/§4.3): `case.inst` has exactly one authored pl-ru
+    // record (`courses/pairs/pl-ru/lifehacks.json`, EN-20) — collapsed by default, with the source
+    // attribution as the toggle's own always-visible label.
+    @OptIn(ExperimentalTestApi::class)
+    @Test
+    fun revealedTrainingShowsACollapsedLifehackForASkillThatHasOne() = runComposeUiTest {
+        val exercise = PlExerciseEngine(RandomSource { 0.1 }, ExerciseIdFactory { "desktop-lifehack-shown" })
+            .generateForSkill("case.inst")
+        val actions = mutableListOf<AppAction>()
+        setContent {
+            MaterialTheme {
+                Column(Modifier.verticalScroll(rememberScrollState())) {
+                    TrainingScreen(
+                        AppUiState(loadStatus = LoadStatus.Ready, phase = CardPhase.Revealed,
+                            exercise = exercise, chain = listOf(exercise)),
+                        actions::add,
+                        FocusRequester(),
+                        { "test-date" },
+                    )
+                }
+            }
+        }
+        onNodeWithText("Лайфхак · источник: editorial").assertExists()
+        onNodeWithText("Bielec, D. (1998)", substring = true).assertDoesNotExist()
+        onNodeWithText("Лайфхак · источник: editorial").performScrollTo().performClick()
+        onNodeWithText("Bielec, D. (1998)", substring = true).assertExists()
+    }
+
+    // `case.acc.n` (curriculum's first A1 skill) has no entry in the 5-record pl-ru lifehacks.json.
+    @OptIn(ExperimentalTestApi::class)
+    @Test
+    fun revealedTrainingShowsNoLifehackBlockForASkillWithNoAuthoredOne() = runComposeUiTest {
+        val exercise = PlExerciseEngine(RandomSource { 0.1 }, ExerciseIdFactory { "desktop-lifehack-absent" })
+            .generateForSkill("case.acc.n")
+        val actions = mutableListOf<AppAction>()
+        setContent {
+            MaterialTheme {
+                Column(Modifier.verticalScroll(rememberScrollState())) {
+                    TrainingScreen(
+                        AppUiState(loadStatus = LoadStatus.Ready, phase = CardPhase.Revealed,
+                            exercise = exercise, chain = listOf(exercise)),
+                        actions::add,
+                        FocusRequester(),
+                        { "test-date" },
+                    )
+                }
+            }
+        }
+        onNodeWithText("Лайфхак", substring = true).assertDoesNotExist()
+    }
 }

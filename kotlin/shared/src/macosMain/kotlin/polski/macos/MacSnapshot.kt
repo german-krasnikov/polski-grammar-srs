@@ -59,6 +59,8 @@ import polski.presentation.StyleComposer
 import polski.presentation.StyleId
 import polski.presentation.StylePhase
 import polski.presentation.StyleRegistry
+import polski.presentation.StaticPackLifehackProvider
+import polski.presentation.LifehackStatus
 import polski.presentation.blocksToJson
 import polski.presentation.toLegacyWireValue
 import polski.data.styleContentBySkillId
@@ -195,6 +197,15 @@ private fun styleBlocksSnapshot(state: AppUiState): JsonElement {
         put("nativeContrastAvailable", content.nativeParallel.isNotEmpty())
         put("frontBlocks", blocksToJson(StyleComposer.compose(effective, StylePhase.Front, exercise, skill, focus, content)))
         put("backBlocks", blocksToJson(StyleComposer.compose(effective, StylePhase.Back, exercise, skill, focus, content)))
+        // EN-21 (EnRuPackPlan.md §4.2/§4.3): deliberately its own field, not a block kind inside
+        // frontBlocks/backBlocks — a lifehack renders the same way for every style, so Swift shows
+        // it once, outside MacStyleBlockView's per-kind switch (see MacFlashCardView's backFace).
+        put("lifehacks", JsonArray(StaticPackLifehackProvider.forSkill(exercise.primarySkill).map { hack -> buildJsonObject {
+            put("text", hack.text)
+            put("citation", hack.source.citation)
+            put("url", hack.source.url?.let(::JsonPrimitive) ?: JsonNull)
+            put("status", when (hack.status) { LifehackStatus.Editorial -> "editorial"; LifehackStatus.Community -> "community" })
+        } }))
     }
 }
 

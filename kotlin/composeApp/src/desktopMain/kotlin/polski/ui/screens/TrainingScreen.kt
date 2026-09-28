@@ -56,6 +56,7 @@ import polski.presentation.CardPhase
 import polski.presentation.LoadStatus
 import polski.presentation.TrainingMode
 import polski.presentation.ChangeSide
+import polski.presentation.StaticPackLifehackProvider
 import polski.presentation.StyleId
 import polski.presentation.changeHighlightParts
 import polski.presentation.sentenceHighlightParts
@@ -264,6 +265,9 @@ internal fun TrainingScreen(state: AppUiState, dispatch: (AppAction) -> Unit, fo
                                         }
                                     }
                                 }
+                                // EN-21: same lifehack list every host now renders after the
+                                // style's own back content — absent entirely for a skill with none.
+                                DesktopLifehackBlock(StaticPackLifehackProvider.forSkill(exercise.primarySkill))
                                 Text("Когда повторить?", style = MaterialTheme.typography.titleMedium)
                                 Text(method.review)
                                 Row(Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {

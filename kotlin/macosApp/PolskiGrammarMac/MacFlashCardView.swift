@@ -201,6 +201,15 @@ struct MacFlashCardView: View {
             }
             .transition(reduceMotion ? .identity : .revealGroup(delay: 0.14))
 
+            // EN-21: the lifehack block is deliberately outside the styleBlocks group above — same
+            // for every style, so it always renders after the back blocks, never inside whichever
+            // ones the active style composed. Absent entirely (not an empty frame) when the skill
+            // has no authored lifehack.
+            if let lifehacks = state.styleBlocks?.lifehacks, !lifehacks.isEmpty {
+                MacLifehackListView(lifehacks: lifehacks, reduceMotion: reduceMotion)
+                    .transition(reduceMotion ? .identity : .revealGroup(delay: 0.18))
+            }
+
             VStack(alignment: .leading, spacing: 8) {
                 Text("Свайп влево — повторить · вправо — вспомнил")
                     .font(.footnote).foregroundStyle(.secondary)
