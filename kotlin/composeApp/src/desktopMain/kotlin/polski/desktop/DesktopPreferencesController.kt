@@ -3,6 +3,8 @@ package polski.desktop
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import polski.data.availableCoursePacks
+import polski.data.selectCoursePack
 import polski.preferences.Appearance
 import polski.preferences.Motion
 import polski.preferences.PreferencesDecode
@@ -36,8 +38,21 @@ internal class DesktopPreferencesController(private val repository: DesktopPrefe
     })
         private set
 
+    init { syncActivePack() }
+
     val recoveryRaw: String? get() = repository.recoveryRaw()
     fun exportRaw(): String = recoveryRaw ?: UserPreferencesCodec.encode(value)
+
+    /** EN-22: target/native pickers next to the style picker — a real, known [availableCoursePacks]
+     *  language switches `polski.data.packRegistry`'s active pack; an unknown one is a no-op, same
+     *  guard `MacPreferencesSession.set` uses for the native host's own version of this picker. */
+    fun setTarget(target: String) { if (availableCoursePacks.any { it.target == target }) { save(value.copy(target = target)); syncActivePack() } }
+    fun setNative(native: String) { if (availableCoursePacks.any { it.native == native }) { save(value.copy(native = native)); syncActivePack() } }
+
+    private fun syncActivePack() {
+        val pairId = "${value.target}-${value.native}"
+        if (availableCoursePacks.any { it.pairId == pairId }) selectCoursePack(pairId)
+    }
 
     fun setStyle(styleId: StyleId, dispatch: (AppAction) -> Unit) {
         if (save(value.copy(styleId = PreferredStyle.valueOf(styleId.value)))) {

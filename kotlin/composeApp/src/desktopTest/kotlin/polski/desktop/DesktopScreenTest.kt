@@ -16,9 +16,11 @@ import androidx.compose.ui.input.key.Key
 import androidx.compose.ui.test.ExperimentalTestApi
 import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsNotEnabled
 import androidx.compose.ui.test.onNodeWithContentDescription
+import androidx.compose.ui.test.onAllNodesWithContentDescription
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performKeyInput
 import androidx.compose.ui.test.pressKey
@@ -305,6 +307,37 @@ class DesktopScreenTest {
         assertEquals(MatrixSection.Verbs, state.matrixSelection.section)
     }
 
+    // EN-24 (UC-09 part 2/2 minimum, Plans/Kotlin/EnRuPackPlan.md §6, macOS slice — this compose
+    // desktop preview is the macOS host's JVM preview target): the one live English matrix table,
+    // real irregular `forms.generated.json`(en) values through `MatrixTableViewModel`, mirroring
+    // `tests/browser/kotlin-en-matrix.spec.ts`'s web assertions for the same table.
+    @OptIn(ExperimentalTestApi::class)
+    @Test
+    fun verbsMatrixShowsEnglishPersonTenseAndDoSupportTablesWithRealIrregularForms() = runComposeUiTest {
+        var state by mutableStateOf(AppUiState(loadStatus = LoadStatus.Ready, tab = AppTab.Matrix,
+            matrixSelection = MatrixSelection(section = MatrixSection.Verbs)))
+        setContent {
+            MaterialTheme {
+                Column(Modifier.verticalScroll(rememberScrollState())) {
+                    MatrixScreen(state) { action ->
+                        if (action is AppAction.SelectMatrixSection) {
+                            state = state.copy(matrixSelection = state.matrixSelection.copy(section = action.section))
+                        }
+                    }
+                }
+            }
+        }
+        onNodeWithText("English: лицо × время (\"see\")").performScrollTo().assertExists()
+        // Past/future are invariant across all 7 subjects; present splits "see"/"sees" 4-vs-3.
+        onAllNodesWithContentDescription("Было: see. Стало: saw").assertCountEquals(7)
+        onAllNodesWithContentDescription("Было: see. Стало: will see").assertCountEquals(7)
+        onAllNodesWithContentDescription("Было: see. Стало: sees").assertCountEquals(3)
+        onNodeWithText("do-support: вопрос и отрицание").performScrollTo().assertExists()
+        onAllNodesWithContentDescription("Было: do. Стало: does").assertCountEquals(3)
+        onAllNodesWithContentDescription("Было: do. Стало: did").assertCountEquals(7)
+        onAllNodesWithText("не нужен — только will").assertCountEquals(7)
+    }
+
     @OptIn(ExperimentalTestApi::class)
     @Test
     fun trainingFrontKeepsAnswerHiddenUntilRevealAction() = runComposeUiTest {
@@ -353,5 +386,56 @@ class DesktopScreenTest {
         onNodeWithText("1 Повторить").performScrollTo().performSemanticsAction(SemanticsActions.OnClick)
         waitForIdle()
         assertEquals(AppAction.Rate(exercise.id, Rating.Again), actions.single())
+    }
+
+    // EN-21 (`Plans/Kotlin/EnRuPackPlan.md` §4.2/§4.3): `case.inst` has exactly one authored pl-ru
+    // record (`courses/pairs/pl-ru/lifehacks.json`, EN-20) — collapsed by default, with the source
+    // attribution as the toggle's own always-visible label.
+    @OptIn(ExperimentalTestApi::class)
+    @Test
+    fun revealedTrainingShowsACollapsedLifehackForASkillThatHasOne() = runComposeUiTest {
+        val exercise = PlExerciseEngine(RandomSource { 0.1 }, ExerciseIdFactory { "desktop-lifehack-shown" })
+            .generateForSkill("case.inst")
+        val actions = mutableListOf<AppAction>()
+        setContent {
+            MaterialTheme {
+                Column(Modifier.verticalScroll(rememberScrollState())) {
+                    TrainingScreen(
+                        AppUiState(loadStatus = LoadStatus.Ready, phase = CardPhase.Revealed,
+                            exercise = exercise, chain = listOf(exercise)),
+                        actions::add,
+                        FocusRequester(),
+                        { "test-date" },
+                    )
+                }
+            }
+        }
+        onNodeWithText("Лайфхак · источник: editorial").assertExists()
+        onNodeWithText("Bielec, D. (1998)", substring = true).assertDoesNotExist()
+        onNodeWithText("Лайфхак · источник: editorial").performScrollTo().performClick()
+        onNodeWithText("Bielec, D. (1998)", substring = true).assertExists()
+    }
+
+    // `case.acc.n` (curriculum's first A1 skill) has no entry in the 5-record pl-ru lifehacks.json.
+    @OptIn(ExperimentalTestApi::class)
+    @Test
+    fun revealedTrainingShowsNoLifehackBlockForASkillWithNoAuthoredOne() = runComposeUiTest {
+        val exercise = PlExerciseEngine(RandomSource { 0.1 }, ExerciseIdFactory { "desktop-lifehack-absent" })
+            .generateForSkill("case.acc.n")
+        val actions = mutableListOf<AppAction>()
+        setContent {
+            MaterialTheme {
+                Column(Modifier.verticalScroll(rememberScrollState())) {
+                    TrainingScreen(
+                        AppUiState(loadStatus = LoadStatus.Ready, phase = CardPhase.Revealed,
+                            exercise = exercise, chain = listOf(exercise)),
+                        actions::add,
+                        FocusRequester(),
+                        { "test-date" },
+                    )
+                }
+            }
+        }
+        onNodeWithText("Лайфхак", substring = true).assertDoesNotExist()
     }
 }

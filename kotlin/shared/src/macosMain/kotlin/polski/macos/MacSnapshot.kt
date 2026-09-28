@@ -51,6 +51,8 @@ import polski.presentation.ContrastPair
 import polski.presentation.casesFullTable
 import polski.presentation.comparisonTable
 import polski.presentation.contrastPairJson
+import polski.presentation.enDoSupportTable
+import polski.presentation.enVerbsTable
 import polski.presentation.personalPronounsTable
 import polski.presentation.possessivesTable
 import polski.presentation.toJson
@@ -59,6 +61,8 @@ import polski.presentation.StyleComposer
 import polski.presentation.StyleId
 import polski.presentation.StylePhase
 import polski.presentation.StyleRegistry
+import polski.presentation.StaticPackLifehackProvider
+import polski.presentation.LifehackStatus
 import polski.presentation.blocksToJson
 import polski.presentation.toLegacyWireValue
 import polski.data.styleContentBySkillId
@@ -195,6 +199,15 @@ private fun styleBlocksSnapshot(state: AppUiState): JsonElement {
         put("nativeContrastAvailable", content.nativeParallel.isNotEmpty())
         put("frontBlocks", blocksToJson(StyleComposer.compose(effective, StylePhase.Front, exercise, skill, focus, content)))
         put("backBlocks", blocksToJson(StyleComposer.compose(effective, StylePhase.Back, exercise, skill, focus, content)))
+        // EN-21 (EnRuPackPlan.md §4.2/§4.3): deliberately its own field, not a block kind inside
+        // frontBlocks/backBlocks — a lifehack renders the same way for every style, so Swift shows
+        // it once, outside MacStyleBlockView's per-kind switch (see MacFlashCardView's backFace).
+        put("lifehacks", JsonArray(StaticPackLifehackProvider.forSkill(exercise.primarySkill).map { hack -> buildJsonObject {
+            put("text", hack.text)
+            put("citation", hack.source.citation)
+            put("url", hack.source.url?.let(::JsonPrimitive) ?: JsonNull)
+            put("status", when (hack.status) { LifehackStatus.Editorial -> "editorial"; LifehackStatus.Community -> "community" })
+        } }))
     }
 }
 
@@ -235,6 +248,12 @@ private fun matrixSnapshot(state: AppUiState): JsonElement {
         put("casesTable", casesFullTable(selection).toJson())
         put("comparisonTable", comparisonTable(selection).toJson())
         put("verbsTable", verbsTable(selection).toJson())
+        // EN-24 (UC-09 part 2/2 minimum, Plans/Kotlin/EnRuPackPlan.md §6, macOS slice): the one
+        // live English matrix on this host, read from `forms.generated.json`(en) through the same
+        // `enMorphology`/`MatrixTableEngine`/`MatrixTableViewModel` path the web host already
+        // uses — not a mock and not a second ad hoc table-building path.
+        put("enVerbsTable", enVerbsTable().toJson())
+        put("enDoSupportTable", enDoSupportTable().toJson())
         put("personalPronounsTable", personalPronounsTable().toJson())
         put("possessivesTable", possessivesTable().toJson())
         put("systemCards", JsonArray(referenceSystemCards.map { card -> buildJsonObject {

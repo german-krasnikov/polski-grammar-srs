@@ -2,7 +2,12 @@ package polski.data
 
 import polski.model.Skill
 
-val skills: List<Skill> by lazy { packRegistry.active.skills }
+/**
+ * EN-22: was `by lazy` (frozen at first access); now read fresh on every call so
+ * [PackRegistry.select] — wired to a real host picker as of this task — takes effect immediately,
+ * matching [activePackSkillIds] below which already reads fresh for the same reason.
+ */
+val skills: List<Skill> get() = packRegistry.active.skills
 
 fun skillById(id: String): Skill = skills.firstOrNull { it.id == id } ?: error("Unknown skill $id")
 
@@ -16,16 +21,9 @@ fun skillById(id: String): Skill = skills.firstOrNull { it.id == id } ?: error("
  */
 internal fun activePackSkillIds(registry: PackRegistry): Set<String> = registry.active.skills.map { it.id }.toSet()
 
-// EN-22: cached once at first access, the same `by lazy`-on-`packRegistry.active` pattern [skills]
-// just above already uses — not re-read on every call, so a live [PackRegistry.select] away from
-// pl-ru can't turn the very next card render into an "Unknown skill presentation" crash for a pl
-// skill id another pack's own data doesn't have (training content isn't pack-aware yet).
-private val presentations: Map<String, SkillPresentation> by lazy { packRegistry.active.presentations }
-private val styleContentMap: Map<String, SkillStyleContent> by lazy { packRegistry.active.styleContent }
-
 fun presentationBySkillId(id: String): SkillPresentation =
-    presentations[id] ?: error("Unknown skill presentation $id")
+    packRegistry.active.presentations[id] ?: error("Unknown skill presentation $id")
 
 /** Absent styleContent for [id] (true for every skill today) means [SkillStyleContent]'s all-derived defaults. */
 fun styleContentBySkillId(id: String): SkillStyleContent =
-    styleContentMap[id] ?: SkillStyleContent()
+    packRegistry.active.styleContent[id] ?: SkillStyleContent()

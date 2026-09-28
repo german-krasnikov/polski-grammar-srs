@@ -2,6 +2,29 @@
 
 Новые сверху. Формат: решение → почему → где подробно.
 
+## ADR-35 · 2026-09-28 · Интеграция lane-android/ios/macos (EN-22): один гейт `usableCourseSelections` для всех хостов, данные пакета читаются живьём
+
+Три лейна сделали EN-22 по-разному. Android (ADR-30/31): en-ru в `packRegistry`, но пикер и
+`selectActiveCoursePack` видят только `usableCourseSelections` (пакеты, чей `CoursePack` парсится
+целиком), переключение — холодным стартом. iOS (ADR-33): пикер из `packRegistry.options` вместе с
+en-ru и живой `select`, а падение обходилось заморозкой части глобалов (`by lazy`) на pl-ru — UI
+говорил «английский», а показывал польский. macOS (`Plans/Kotlin/Lane-macos.md`): все глобалы
+пакета стали живыми (`get()`), `PlEngine` берёт движок активного пакета, en-ru в реестр не входил.
+
+Решение: реестр несёт оба пакета (android/iOS); все глобалы читаются живьём (macOS), без
+iOS-кэшей; хост может сделать активным только пакет из `usableCourseSelections` — Android через
+`selectActiveCoursePack`, macOS/desktop через `availableCoursePacks`/`selectCoursePack` (теперь
+строится из `usableCourseSelections`, `selectCoursePack` бросает на непригодный), iOS через те же
+функции. `UserPreferencesCodec`: `decode` и `encode` требуют только зарегистрированный пакет.
+
+Почему: иначе живые геттеры + живой выбор en-ru на iOS/macOS падают (`Missing course field
+gender`) — схема `CoursePack` писалась под pl-ru; это пробел ядра, его закрывает обобщение схемы,
+а не данные пакета. После него en-ru появится во всех пикерах сам, без правок хостов.
+
+Последствие: iOS-пикер сейчас показывает только pl-ru; iOS-тесты EN-22 переписаны под гейт.
+Где: `kotlin/shared/src/commonMain/kotlin/polski/data/CourseData.kt`, `Skills.kt`,
+`kotlin/shared/src/iosMain/kotlin/polski/ios/IosPreferencesSession.kt`.
+
 ## ADR-34 · 2026-09-28 · EN-24 (iOS): English-таблица на `MatrixView` (SwiftUI), `enVerbForm` вынесен в `:shared` commonMain
 
 Plans/Kotlin/EnRuPackPlan.md §5 гэп H / §6 EN-24: план буквально ограничивает EN-24 web-минимумом

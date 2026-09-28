@@ -12,6 +12,7 @@ import platform.CoreFoundation.CFRunLoopRunInMode
 import platform.CoreFoundation.kCFRunLoopDefaultMode
 import platform.Foundation.NSUserDefaults
 import polski.data.packRegistry
+import polski.data.selectActiveCoursePack
 
 /**
  * M10: a store built for a fresh scene must start from the answerMode (and explanationMethod)
@@ -51,7 +52,7 @@ class IosSessionTest {
         try {
             val session = IosSession(defaults)
             session.currentSnapshot() // mirrors the first, pl-active call `onState`'s setter makes
-            packRegistry.select("en-ru")
+            selectActiveCoursePack("en-ru") // the host path; a no-op while en-ru is unusable (ADR-35)
             session.currentSnapshot() // mirrors AppModel.init()'s explicit call after reapply
             session.close()
         } finally {

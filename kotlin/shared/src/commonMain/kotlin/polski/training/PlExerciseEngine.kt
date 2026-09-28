@@ -12,7 +12,8 @@ import polski.model.NumberGram
 import polski.model.PossessiveId
 import polski.model.SentenceSeed
 
-val sentenceSeeds: List<SentenceSeed> by lazy { courseSentenceSeeds }
+/** EN-22: read fresh (was `by lazy`), same reason as [polski.data.courseSentenceSeeds] itself. */
+val sentenceSeeds: List<SentenceSeed> get() = courseSentenceSeeds
 
 /**
  * UniversalCorePlan.md §5.3/§12 UC-08: the live pl-ru exercise generator — `:core-engine`'s

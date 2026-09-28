@@ -69,6 +69,11 @@ struct TrainingSnapshot: Decodable {
         let comparisonTable: Table
         let verbFutureExplanation: String
         let verbsTable: Table
+        /// EN-24 (`EnRuPackPlan.md` §6, macOS slice): the one live English matrix on this host —
+        /// same `MatrixTableViewModel` wire shape as every pl table above, read from
+        /// `forms.generated.json`(en) through `enMorphology`, not a mock.
+        let enVerbsTable: Table
+        let enDoSupportTable: Table
         let pronounIntro: String
         let pronounFooter: String
         let possessiveTitle: String
@@ -104,6 +109,10 @@ struct TrainingSnapshot: Decodable {
         let nativeContrastAvailable: Bool
         let frontBlocks: [BlockJSON]
         let backBlocks: [BlockJSON]
+        /// EN-21 (`EnRuPackPlan.md` §4.2/§4.3): pair-scoped L1-transfer tips for the active
+        /// exercise's skill — deliberately not part of `backBlocks`, since a lifehack shows the
+        /// same way for every style (see `MacLifehackView.swift`). Empty when the skill has none.
+        let lifehacks: [LifehackJSON]
     }
     let styleBlocks: StyleBlocks?
     let draft: String
@@ -186,6 +195,11 @@ struct BlockJSON: Decodable {
     }
 }
 
+/// EN-21: one `MacSnapshot.kt` `styleBlocksSnapshot`'s `lifehacks[]` entry — `status` is always
+/// `"editorial"` today (`"community"` reserved, ADR-15); `url` is `nil` for a record with no
+/// `source.url` (`courses/pairs/pl-ru/lifehacks.json`'s `case.inst` record, for one real example).
+struct LifehackJSON: Decodable { let text: String; let citation: String; let url: String?; let status: String }
+
 struct VocabularySnapshot: Decodable {
     struct Item: Decodable { let id: String; let lemma: String; let translation: String; let form: String; let example: String; let level: String }
     struct Entry: Decodable { let id: String; let lemma: String; let translation: String; let level: String; let selected: Bool; let available: Bool }
@@ -216,9 +230,23 @@ struct PreferencesSnapshot: Decodable {
         let label: String
         let description: String
     }
+    /// EN-22: one pack `MacPreferencesSession.selectCoursePack` can actually switch to — pl-ru is
+    /// the only real one today (`polski.data.packRegistry`'s own KDoc has why en-ru isn't wired in
+    /// yet), so the target/native pickers below render exactly this list, never a hardcoded 2-case one.
+    struct PackOption: Decodable, Identifiable {
+        let pairId: String
+        let target: String
+        let native: String
+        let targetLabel: String
+        let nativeLabel: String
+        var id: String { pairId }
+    }
     let schemaVersion: Int
     let status: String
     let styles: [StyleOption]
+    let packs: [PackOption]
+    let target: String?
+    let native: String?
     let styleId: String?
     let answerMode: String?
     let appearance: String?
@@ -742,6 +770,8 @@ private struct MatrixView: View {
                             matrixTableView(matrix.verbsTable)
                             Text(matrix.verbFutureExplanation).foregroundStyle(.secondary)
                         }
+                        GroupBox("English: лицо × время (\"see\")") { matrixTableView(matrix.enVerbsTable) }
+                        GroupBox("do-support: вопрос и отрицание") { matrixTableView(matrix.enDoSupportTable) }
                     case "Pronouns":
                         GroupBox("Местоимения") {
                             Text(matrix.pronounIntro)
@@ -947,6 +977,40 @@ private struct ProgressViewNative: View {
     }
 }
 
+/// EN-22 (Plans/Kotlin/EnRuPackPlan.md §6): target/native pickers next to the style picker —
+/// `MacPreferencesSession.set("target"/"native", …)` really switches `polski.data.packRegistry`'s
+/// active pack (EN-06/EN-08), not just a saved preference. Built from `model.preferences?.packs`
+/// (never a hardcoded pl/en case list) so it grows on its own once a second pack is safely
+/// registered; today that list has exactly pl-ru, so both pickers render one disabled-looking but
+/// real option — the existing pl-ru choice is unaffected either way.
+private struct TargetNativePickers: View {
+    @ObservedObject var model: MacModel
+    private var targets: [PreferencesSnapshot.PackOption] {
+        var seen = Set<String>()
+        return (model.preferences?.packs ?? []).filter { seen.insert($0.target).inserted }
+    }
+    private var natives: [PreferencesSnapshot.PackOption] {
+        var seen = Set<String>()
+        return (model.preferences?.packs ?? []).filter { seen.insert($0.native).inserted }
+    }
+    var body: some View {
+        Picker("Изучаемый язык", selection: Binding(
+            get: { model.preferences?.target ?? "pl" },
+            set: { model.preference("target", $0) }
+        )) {
+            ForEach(targets) { pack in Text(pack.targetLabel).tag(pack.target) }
+        }
+        .accessibilityIdentifier("targetPicker")
+        Picker("Родной язык", selection: Binding(
+            get: { model.preferences?.native ?? "ru" },
+            set: { model.preference("native", $0) }
+        )) {
+            ForEach(natives) { pack in Text(pack.nativeLabel).tag(pack.native) }
+        }
+        .accessibilityIdentifier("nativePicker")
+    }
+}
+
 /// UC-10 S1: replaces the old 2-value "Объяснение" `Picker` (`Logic`/`Situations`) with the 4
 /// style recipes, each row's label/description coming from `model.preferences?.styles` (recipe
 /// data, host-side Russian fallback while CONTENT is unmerged — never hardcoded here). A
@@ -992,6 +1056,7 @@ private struct MacSettingsView: View {
                 Text(model.preferences?.error ?? "Настройки требуют восстановления")
                     .foregroundStyle(.red)
             } else {
+                Section("Язык") { TargetNativePickers(model: model) }
                 Section("Обучение") { StylePickerRows(model: model) }
                 Picker("Внешний вид", selection: Binding(
                     get: { model.preferences?.appearance ?? "System" },

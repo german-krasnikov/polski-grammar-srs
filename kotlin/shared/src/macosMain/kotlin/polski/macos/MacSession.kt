@@ -76,6 +76,11 @@ class MacSession(directory: String) {
             "chain" -> AppAction.StartChain()
             "schedule" -> AppAction.StartSchedule
             "matrixSection" -> MatrixSection.entries.firstOrNull { it.name == value }?.let(AppAction::SelectMatrixSection)
+            // Mirrors iOS's "skillPicker"/"skill" pair (IosSession.kt) — macOS has no skill-picker
+            // view yet, but the bridge itself should speak the same host vocabulary every other
+            // platform already does, not a macOS-only subset of AppAction.
+            "skillPicker" -> AppAction.OpenSkillPicker
+            "skill" -> AppAction.ChooseSkill(value)
             // macOS S1: native Settings/quick-switch pickers speak the full 4-value StyleId
             // vocabulary directly (Plans/Kotlin/StylesBlueprint.md §6) — no more legacy collapse.
             // UC-01: StyleId is open now — any id StyleRegistry actually loaded is dispatchable,

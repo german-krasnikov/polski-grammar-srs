@@ -558,3 +558,86 @@ Swift files added/removed).
   this as the same pre-existing, unresolved gap, not a new one; the decode/render path itself is
   exercised end-to-end by the launch above and is a direct, symmetric mirror of the already-tested
   `StyleSnapshotTest.kt` export and the already-shipped `CardBlocksWeb.kt` reference.
+
+## M7 — EN-21 macOS: the "Лайфхак" block on the native card and the desktop JVM preview
+
+**Task**: `Plans/Kotlin/EnRuPackPlan.md` §6 EN-21 ("`LifehackProvider`-порт + `StaticPackLifehackProvider`
++ UI-блок «Лайфхак» на всех 5 хостах... блок рендерится на каждом хосте при непустом списке,
+отсутствует при пустом; VoiceOver/screen-reader читает подпись источника") — the macOS/desktop
+slice of a task the shared port (`Lifehack.kt`) and the web host (`LifehackWeb.kt`) already closed
+on `main` (merged into this worktree first, `git merge --no-edit main`, fast-forward `cc83865..7e29abf`).
+
+**Change**: same architecture as the web reference (`EnRuPackPlan.md` §4.3) on both this lane's two
+hosts — a lifehack is deliberately not a `BlockKind`/`Block` (it shows the same way for every
+style), so it renders as its own element right after the resolved style's own back content, never
+inside it, and is entirely absent (no empty frame) when the active skill has none:
+
+- **`MacSnapshot.kt`**'s `styleBlocksSnapshot` gets a new `lifehacks` field, sibling to
+  `frontBlocks`/`backBlocks` — `StaticPackLifehackProvider.forSkill(exercise.primarySkill)` mapped
+  to `{text, citation, url, status}` (`url` explicit JSON `null` when the pack record has none,
+  e.g. `case.inst`'s). New Swift `LifehackJSON` (`PolskiGrammarMacApp.swift`) decodes it.
+- New **`MacLifehackView.swift`** (`MacLifehackListView` + private `MacLifehackView`): one
+  collapsed-by-default disclosure per lifehack, same mechanic as `MacStyleBlockView`'s
+  `WhyOnDemandBlockBody`. The toggle's own label is the always-visible source attribution
+  ("Лайфхак · источник: editorial/community") — exactly what VoiceOver announces as the control's
+  name whether collapsed or expanded (`accessibilityLabel`/`accessibilityValue`/
+  `accessibilityAddTraits(.isButton)`, same triad `WhyOnDemandBlockBody` already uses); citation
+  (as a real `Link` when `url` is present, plain `Text` otherwise) only shows once expanded.
+  `MacFlashCardView`'s `backFace` mounts it (own `.revealGroup(delay: 0.18)` stagger, between the
+  existing 0.14/0.22 groups) only `if let lifehacks = state.styleBlocks?.lifehacks, !lifehacks.isEmpty`.
+  Registered in `generate_project.rb`'s hardcoded source list; project regenerated.
+- **`MacSession.kt`** gained `"skillPicker"`/`"skill"` dispatch cases (`AppAction.OpenSkillPicker`/
+  `ChooseSkill`), mirroring `IosSession.kt`'s exact pair — macOS has no skill-picker view yet (out
+  of scope here), but the bridge needed a way to reach a specific skill deterministically for the
+  new K/N test below, and speaking the same host vocabulary every other platform already does is
+  the smaller change than a macOS-only subset of `AppAction`.
+- **`composeApp/src/desktopMain`** (the JVM Compose preview, predates UC-10's `StyleComposer`/
+  `BlockKind` — `TrainingScreen.kt` still hardcodes its own RuleFirst/SituationFirst answer layout):
+  new **`DesktopLifehackBlock.kt`**, same collapsed-by-default disclosure as Android's
+  `AndroidWhyOnDemandBlock` (`clickable` + `semantics { stateDescription }`), called from
+  `TrainingScreen.kt` right after the "ЗАПОМНИ" box and before "Когда повторить?" — the same
+  position the web/macOS place it, right after the answer's own back content.
+
+**Tests (RED→GREEN, real target runtimes)**:
+- `shared/src/macosTest/kotlin/polski/macos/MacSnapshotStyleBlocksTest.kt`: two new K/N tests
+  (`backBlocksLifehacksMatchTheActiveSkillsAuthoredPackLifehack` — dispatches `"skill"`/`"case.inst"`,
+  asserts the snapshot's `styleBlocks.lifehacks` has exactly `case.inst`'s one real pl-ru record,
+  its `Bielec, D. (1998)` citation and an explicit JSON `null` url;
+  `backBlocksLifehacksEmptyForASkillWithNoAuthoredLifehack` — `"case.acc.n"` has none). RED
+  (before `MacSnapshot.kt`'s change): both threw `NoSuchElementException` on the missing
+  `lifehacks` key. GREEN after.
+- `composeApp/src/desktopTest/kotlin/polski/desktop/DesktopScreenTest.kt`: two new
+  `runComposeUiTest` cases against `TrainingScreen` directly (real Compose UI test, not a fixture)
+  — `revealedTrainingShowsACollapsedLifehackForASkillThatHasOne` (`case.inst`: toggle visible,
+  citation text absent until clicked, present after) and
+  `revealedTrainingShowsNoLifehackBlockForASkillWithNoAuthoredOne` (`case.acc.n`: no "Лайфхак" node
+  at all). RED confirmed by temporarily removing the `DesktopLifehackBlock(...)` call from
+  `TrainingScreen.kt` and re-running — the "has one" test failed
+  (`assertDoesNotExist`/`assertExists` on "Лайфхак · источник: editorial"); restored → GREEN.
+
+**Verification**:
+- `:shared:macosArm64Test` (`JAVA_HOME=$(/usr/libexec/java_home -v 21 -a arm64)`) — **PASS**, full
+  suite (all `MacSnapshotStyleBlocksTest` + every other macosTest file), no regressions.
+- `:composeApp:desktopTest` — **PASS**, full suite (`DesktopScreenTest`'s 14 tests + all other
+  desktopTest files), no regressions.
+- `:composeApp:compileKotlinDesktop` — **PASS** (compiles cleanly against `shared`'s
+  `Lifehack`/`StaticPackLifehackProvider`/`LifehackStatus` commonMain types).
+- Build: `xcodebuild -project kotlin/macosApp/PolskiGrammarMac.xcodeproj -scheme PolskiGrammarMac
+  -destination "platform=macOS" -derivedDataPath /private/tmp/claude-501/en-dd
+  CODE_SIGNING_ALLOWED=NO build` — **BUILD SUCCEEDED** (arm64, JDK 21 arm64), run twice (once
+  right after `generate_project.rb`, once again after all edits settled).
+- Launched the built native `.app` (`open`, real windowed session) and the desktop JVM preview
+  (`./gradlew :composeApp:desktopRun`) and screenshotted both: both render their training card
+  correctly, no crash, no decode failure. Same pre-existing sandboxed-session Accessibility gap
+  already logged for M1-M6 (`osascript`: "is not allowed to send keystrokes"/"assistive access")
+  blocked driving either UI to actually reveal a `case.inst`/`agreement.my` card and see the
+  lifehack toggle rendered on screen — the real due card in both launches (`case.acc.f`/`żona`
+  in both) has no authored lifehack itself, so neither screenshot shows the block. Flagged as the
+  same unresolved, pre-existing gap, not a new one; the rendering path for a skill that *does* have
+  one is exercised end-to-end by the two real-target tests above (K/N `MacSnapshotStyleBlocksTest`,
+  JVM Compose `DesktopScreenTest`), which is stronger evidence for this specific behavior than an
+  interactive screenshot would be.
+- Out of scope for this task (left untouched): a macOS skill-picker UI (the new `"skill"` dispatch
+  case has no view calling it yet — see above), Android/iOS/web's own EN-21 slices (already landed
+  on `main` before this merge, or separate lanes), EN-22..EN-24 (settings pickers, emphasis-contract
+  verification, UC-09 part 2/2 — separate tasks in the plan's table).

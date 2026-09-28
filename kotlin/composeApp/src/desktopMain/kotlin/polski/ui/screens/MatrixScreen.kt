@@ -60,6 +60,8 @@ import polski.presentation.MatrixTableViewModel
 import polski.presentation.ContrastPair
 import polski.presentation.casesFullTable
 import polski.presentation.comparisonTable
+import polski.presentation.enDoSupportTable
+import polski.presentation.enVerbsTable
 import polski.presentation.personalPronounsTable
 import polski.presentation.possessivesTable
 import polski.presentation.verbsTable
@@ -181,6 +183,16 @@ private fun VerbsDesktop(state: AppUiState, dispatch: (AppAction) -> Unit) {
         }
         MatrixTableView(verbsTable(selected))
         Text(referenceVerbTeaching.compactFutureExplanation)
+    }
+    // EN-24 (UC-09 part 2/2 minimum, Plans/Kotlin/EnRuPackPlan.md §6, macOS slice — this compose
+    // desktop preview is the macOS host's JVM preview target): the one live English matrix table,
+    // read from `forms.generated.json`(en) through the same `MatrixTableViewModel` every pl table
+    // above already uses, mirroring the web host's `MatrixWeb.kt` (`renderEnglishVerbMatrix`).
+    MatrixCard("English: лицо × время (\"see\")") {
+        MatrixTableView(enVerbsTable())
+    }
+    MatrixCard("do-support: вопрос и отрицание") {
+        MatrixTableView(enDoSupportTable())
     }
     MatrixCard("Время меняется, предложение остаётся целым") {
         referenceTenseRows.forEach { ReferenceTenseComparison(it) }
