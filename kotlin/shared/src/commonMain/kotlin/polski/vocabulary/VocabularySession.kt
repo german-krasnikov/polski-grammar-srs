@@ -11,6 +11,7 @@ import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
 import polski.data.VocabularyItem
+import polski.grammar.trimJsWhitespace
 import polski.srs.Rating
 import polski.srs.Scheduler
 
@@ -126,7 +127,8 @@ class VocabularySession(
         val document = current.document
         val id = editingId ?: newId()
         require(editingId == null || document.custom.any { it.id == editingId }) { "Слово не найдено" }
-        val item = VocabularyItem(id, lemma.trim(), translation.trim(), form.trim(), example.trim(), level, null, true)
+        val item = VocabularyItem(id, trimJsWhitespace(lemma), trimJsWhitespace(translation),
+            trimJsWhitespace(form), trimJsWhitespace(example), level, null, true)
         require((polski.data.vocabularyItems + document.custom).none {
             it.id != id && it.lemma.lowercase() == item.lemma.lowercase()
         }) { "Это польское слово уже есть в словаре" }
@@ -197,7 +199,7 @@ class VocabularySession(
             var pendingDocument: VocabularyDocument? = null
             var pendingRaw: String? = null
             try {
-                val next = transform(current)
+                val next = VocabularyCodec.validate(transform(current))
                 val serialized = VocabularyCodec.encode(next)
                 pendingDocument = next
                 pendingRaw = serialized

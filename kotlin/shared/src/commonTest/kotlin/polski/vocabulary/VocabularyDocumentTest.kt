@@ -1,6 +1,7 @@
 package polski.vocabulary
 
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonPrimitive
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFails
@@ -14,6 +15,66 @@ import polski.data.VocabularyItem
 class VocabularyDocumentTest {
     private val at = Instant.parse("2026-09-23T12:00:00Z")
     private val scheduler = FsrsScheduler()
+
+    @Test
+    fun ownerImportTrimsFourFieldsBeforeLengthCheckAndStorage() {
+        data class Case(val id: String, val lemma: String, val translation: String, val form: String,
+                        val example: String, val expectedLemma: String = "szkoła")
+        val cases = listOf(
+            Case("VI-P01", "  szkoła ", "школа", "szkoła · род. szkoły", "To jest moja szkoła."),
+            Case("VI-P02", "\tszkoła", "школа\u00a0", " szkoła · род. szkoły ", "To jest moja szkoła. "),
+            Case("VI-P03", "\u00a0\ufeffszkoła", "школа", "szkoła · род. szkoły", "To jest moja szkoła."),
+            Case("VI-P04", "a".repeat(240) + " ", "школа", "szkoła · род. szkoły", "To jest moja szkoła.", "a".repeat(240)),
+            Case("VI-P05", " ".repeat(10) + "a".repeat(235) + " ".repeat(10), "школа",
+                "szkoła · род. szkoły", "To jest moja szkoła.", "a".repeat(235)),
+        )
+        val id = "user.00000000-0000-4000-8000-000000000001"
+        cases.forEach { case ->
+            val raw = """{"version":1,"pair":"pl-ru","selectedIds":[],"cards":{},"custom":[{"id":"$id","lemma":${JsonPrimitive(case.lemma)},"translation":${JsonPrimitive(case.translation)},"form":${JsonPrimitive(case.form)},"example":${JsonPrimitive(case.example)},"level":"A1","frequencyRank":null,"custom":true}]}"""
+            val decoded = VocabularyCodec.decode(raw)
+            val untrimmed = VocabularyDocument(custom = listOf(
+                VocabularyItem(id, case.lemma, case.translation, case.form, case.example, "A1", null, true),
+            ))
+            val validated = VocabularyCodec.validate(untrimmed)
+            val expected = VocabularyItem(id, case.expectedLemma, "школа", "szkoła · род. szkoły",
+                "To jest moja szkoła.", "A1", null, true)
+            assertEquals(listOf(expected), decoded.custom, case.id)
+            assertEquals(listOf(expected), validated.custom, case.id)
+            assertEquals(emptyList(), decoded.selectedIds, case.id)
+            assertEquals(emptySet(), decoded.cards.keys, case.id)
+            assertEquals(listOf(expected), VocabularyCodec.decode(VocabularyCodec.encode(validated)).custom, case.id)
+            assertEquals(listOf(expected), VocabularyCodec.decode(VocabularyCodec.encode(untrimmed)).custom, case.id)
+        }
+    }
+
+    @Test
+    fun ownerMergeRejectsCaseAndPaddingCollisionWithoutChangingLocalDocument() {
+        val local = VocabularyItem("user.00000000-0000-4000-8000-000000000001", "szkoła", "школа",
+            "szkoła · род. szkoły", "To jest moja szkoła.", "A1", null, true)
+        val current = VocabularyDocument(selectedIds = listOf(local.id), custom = listOf(local))
+        listOf("VM-P01" to "SZKOŁA", "VM-P02" to "  szkoła ").forEach { (id, lemma) ->
+            val imported = VocabularyDocument(custom = listOf(local.copy(
+                id = "user.00000000-0000-4000-8000-000000000002", lemma = lemma)))
+            assertFailsWith<IllegalArgumentException>(id) { VocabularyCodec.merge(current, imported) }
+            assertEquals(listOf(local), current.custom, id)
+            assertEquals(listOf(local.id), current.selectedIds, id)
+            assertEquals(emptyMap(), current.cards, id)
+        }
+    }
+
+    @Test
+    fun trimmedLimitUsesUtf16UnitsAndRejectsEmptyFields() {
+        val id = "user.00000000-0000-4000-8000-000000000001"
+        val base = VocabularyItem(id, "szkoła", "школа", "szkoła", "To jest moja szkoła.", "A1", null, true)
+        val accepted = base.copy(lemma = " " + "😀".repeat(120) + " ")
+        assertEquals("😀".repeat(120), VocabularyCodec.validate(VocabularyDocument(custom = listOf(accepted))).custom.single().lemma)
+        assertFailsWith<IllegalArgumentException> { VocabularyCodec.validate(VocabularyDocument(custom = listOf(
+            base.copy(lemma = "😀".repeat(120) + "a"),
+        ))) }
+        assertFailsWith<IllegalArgumentException> { VocabularyCodec.validate(VocabularyDocument(custom = listOf(
+            base.copy(example = "\u00a0\ufeff "),
+        ))) }
+    }
 
     /** UC-04: [VocabularyCodec.key]/[VocabularyCodec.cardKey]/[VocabularyCodec.encode] now read
      *  `packRegistry.active.pairId` instead of a `"pl-ru"` literal — pin the exact wire bytes so

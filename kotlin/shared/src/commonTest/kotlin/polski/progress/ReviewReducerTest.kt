@@ -49,6 +49,27 @@ class ReviewReducerTest {
         assertEquals(0, scheduler.reviewCalls)
     }
 
+    @Test
+    fun ownerRt05TypedCorrectWinsOverAgainWithoutChangingOtherHistory() {
+        val now = Instant.parse("2026-02-03T12:00:00Z")
+        val scheduler = CountingScheduler()
+        val original = ProgressDocument(Progress(
+            cards = listOf(StoredCard("a", SrsCard(now)), StoredCard("b", SrsCard(now).copy(reps = 3))),
+            stats = mapOf("a" to SkillStats(4, 3, 2, 1), "b" to SkillStats(1, 1, 1, 0)),
+            reviewsToday = 5, lastDay = "2026-02-03", totalReviews = 20,
+        ))
+        val result = assertIs<ReviewResult.Reviewed>(ReviewReducer(scheduler, setOf("a", "b"))
+            .recordReview(original, "a", Rating.Again, true, now, "2026-02-03")).document.progress
+        assertEquals(SkillStats(5, 4, 3, 1), result.stats.getValue("a"))
+        assertEquals(SkillStats(1, 1, 1, 0), result.stats.getValue("b"))
+        assertEquals(6, result.reviewsToday)
+        assertEquals("2026-02-03", result.lastDay)
+        assertEquals(21, result.totalReviews)
+        assertEquals(mapOf("a" to 1, "b" to 3), result.cards.associate { it.skillId to it.card.reps })
+        assertEquals(1, scheduler.reviewCalls)
+        assertEquals(original.progress.stats.getValue("a"), SkillStats(4, 3, 2, 1))
+    }
+
     private class CountingScheduler : Scheduler {
         var reviewCalls = 0
         override fun newCard(skillId: String, at: Instant) = StoredCard(skillId, SrsCard(at))
