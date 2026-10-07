@@ -36,6 +36,28 @@ class TrainingStoreTest {
     private val scheduler: Scheduler = FastScheduler()
 
     @Test
+    fun tabNavigationResetsMatrixSelectionOnlyOnEntry() = runTest {
+        val repo = FakeRepository(ProgressCodec.fresh(skills.map { it.id }, at, "2026-09-23", scheduler))
+        val store = newStore(repo, backgroundScope)
+        store.start()
+        assertEquals(AppTab.Training, store.state.value.tab)
+
+        for (tab in listOf(AppTab.Vocabulary, AppTab.Progress, AppTab.Training, AppTab.Matrix)) {
+            store.dispatch(AppAction.SelectTab(tab))
+            assertEquals(tab, store.state.value.tab)
+        }
+        val selected = MatrixSelection(section = MatrixSection.Cases)
+        store.dispatch(AppAction.SetMatrixSelection(selected))
+        assertEquals(selected, store.state.value.matrixSelection)
+        store.dispatch(AppAction.SelectTab(AppTab.Matrix))
+        assertEquals(selected, store.state.value.matrixSelection)
+        store.dispatch(AppAction.SelectTab(AppTab.Vocabulary))
+        store.dispatch(AppAction.SelectTab(AppTab.Matrix))
+        assertEquals(MatrixSelection(), store.state.value.matrixSelection)
+        store.close()
+    }
+
+    @Test
     fun introductionAndMethodSwitchPreserveDraftPhaseAndReviewCount() = runTest {
         val repo = FakeRepository(ProgressCodec.fresh(skills.map { it.id }, at, "2026-09-23", scheduler))
         val store = newStore(repo, backgroundScope)

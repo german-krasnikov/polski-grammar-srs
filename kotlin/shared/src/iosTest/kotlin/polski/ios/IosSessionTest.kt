@@ -20,6 +20,41 @@ import polski.data.selectActiveCoursePack
  */
 class IosSessionTest {
     @Test
+    fun tabCommandPreservesInvalidInputsAndResetsMatrixOnlyOnReentry() {
+        val suite = "polski-ios-tab-wire-${Random.nextLong()}"
+        val defaults = assertNotNull(NSUserDefaults(suiteName = suite))
+        defaults.removePersistentDomainForName(suite)
+        val session = IosSession(defaults)
+        try {
+            fun tab() = Json.parseToJsonElement(session.currentSnapshot()).jsonObject
+                .getValue("tab").jsonPrimitive.content
+            fun section() = Json.parseToJsonElement(session.currentSnapshot()).jsonObject
+                .getValue("matrix").jsonObject.getValue("section").jsonPrimitive.content
+
+            assertEquals("Training", tab())
+            for (value in listOf("Vocabulary", "Progress", "Training", "Matrix")) {
+                session.dispatch("tab", value)
+                assertEquals(value, tab())
+            }
+            session.dispatch("matrixSection", "Cases")
+            assertEquals("Cases", section())
+            session.dispatch("tab", "Matrix")
+            assertEquals("Cases", section())
+            for ((command, value) in listOf("unknown" to "Training", "tab" to "", "tab" to "Unknown", "tab" to "matrix")) {
+                session.dispatch(command, value)
+                assertEquals("Matrix", tab())
+                assertEquals("Cases", section())
+            }
+            session.dispatch("tab", "Vocabulary")
+            session.dispatch("tab", "Matrix")
+            assertEquals("Map", section())
+        } finally {
+            session.close()
+            defaults.removePersistentDomainForName(suite)
+        }
+    }
+
+    @Test
     fun newSessionRestoresPersistedAnswerModeAndExplanationMethod() {
         val suite = "polski-ios-session-test-${Random.nextLong()}"
         val defaults = assertNotNull(NSUserDefaults(suiteName = suite))
