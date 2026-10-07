@@ -2,6 +2,12 @@
 
 Новые сверху. Формат: решение → почему → где подробно.
 
+## ADR-50 · 2026-10-07 · COMMAND/WIRE stop-rule: сохранить native tab bridge
+
+Для одного контракта `tab`/snapshot между Kotlin и Swift новый `COMMAND`/`WIRE` DSL и Swift compiler target — **NO-GO**. Сравнение прямого native-кода с общим Kotlin `TrainingTabWire` через реальный KMP framework подтвердило Kotlin/macOS семантику и обнаружение одностороннего дрейфа command/key, но helper добавил семь production touchpoints и не устранил literal `tab` из macOS `TrainingSnapshot: Decodable`. Равных гарантий и измеренной экономии сопровождения нет: кандидат **STOP**, исходный shipping wire сохранён. [Результаты и ограничения](../Plans/Biome/CommandWireExperiment.md#actual-bounded-stop-rule-result-2026-10-07).
+
+Rapid sequential macOS tab probe одинаково не прошёл на прямом и helper-коде; изолированный tab-by-tab probe прошёл, поэтому rapid switching остаётся отдельным непроверенным поведением, не дефектом, приписанным helper. iOS Native runtime не исполнился из-за Xcode simulator-test setup; iOS Swift sender/UI/device также NOT RUN. Второй независимый продукт с тем же контрактом и равными guard-ами нужен до пересмотра грамматики. S1/S2 и их ожидания этим решением не меняются.
+
 ## ADR-49 · 2026-10-04 · Biome S0: нормализация ответов и словаря; пороги жеста по платформам
 
 Решение владельца для S1: Unicode-пробелы и BOM нормализуются как в JavaScript-эталоне.

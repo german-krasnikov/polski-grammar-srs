@@ -28,6 +28,30 @@ import platform.Foundation.NSUUID
  */
 @OptIn(ExperimentalForeignApi::class)
 class MacSessionTest {
+    @Test
+    fun tabCommandPreservesInvalidInputsAndResetsMatrixOnlyOnReentry() = withSession { session ->
+        fun tab() = state(session).getValue("tab").jsonPrimitive.content
+        fun section() = state(session).getValue("matrix").jsonObject.getValue("section").jsonPrimitive.content
+
+        assertEquals("Training", tab())
+        for (value in listOf("Vocabulary", "Progress", "Training", "Matrix")) {
+            session.dispatch("tab", value)
+            assertEquals(value, tab())
+        }
+        session.dispatch("matrixSection", "Cases")
+        assertEquals("Cases", section())
+        session.dispatch("tab", "Matrix")
+        assertEquals("Cases", section())
+        for ((command, value) in listOf("unknown" to "Training", "tab" to "", "tab" to "Unknown", "tab" to "matrix")) {
+            session.dispatch(command, value)
+            assertEquals("Matrix", tab())
+            assertEquals("Cases", section())
+        }
+        session.dispatch("tab", "Vocabulary")
+        session.dispatch("tab", "Matrix")
+        assertEquals("Map", section())
+    }
+
     private fun withSession(block: (MacSession) -> Unit) {
         val directory = NSTemporaryDirectory() + "polski-mac-session-${NSUUID().UUIDString}"
         val session = MacSession(directory)
