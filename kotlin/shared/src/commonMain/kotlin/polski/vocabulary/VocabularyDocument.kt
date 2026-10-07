@@ -16,6 +16,7 @@ import kotlinx.serialization.json.put
 import polski.data.VocabularyItem
 import polski.data.packRegistry
 import polski.data.vocabularyItems
+import polski.grammar.trimJsWhitespace
 import polski.srs.CardDecodeResult
 import polski.srs.Rating
 import polski.srs.Scheduler
@@ -178,32 +179,38 @@ object VocabularyCodec {
         vocabularyItems.firstOrNull { it.id == id } ?: document.custom.firstOrNull { it.id == id }
 
     fun merge(current: VocabularyDocument, other: VocabularyDocument): VocabularyDocument {
-        validate(other)
-        val incoming = other.custom.filter { imported -> current.custom.none { it.id == imported.id } }
-        val restoring = current.selectedIds.isEmpty() && current.custom.isEmpty() && current.cards.isEmpty()
-        val existingLemmas = (if (restoring) emptyList() else vocabularyItems + current.custom)
-            .map { it.lemma.trim().lowercase() }.toMutableSet()
+        val local = validate(current)
+        val imported = validate(other)
+        val incoming = imported.custom.filter { item -> local.custom.none { it.id == item.id } }
+        val restoring = local.selectedIds.isEmpty() && local.custom.isEmpty() && local.cards.isEmpty()
+        val existingLemmas = (if (restoring) emptyList() else vocabularyItems + local.custom)
+            .map { trimJsWhitespace(it.lemma).lowercase() }.toMutableSet()
         incoming.forEach { item ->
-            require(existingLemmas.add(item.lemma.trim().lowercase())) { "Это польское слово уже есть в словаре" }
+            require(existingLemmas.add(trimJsWhitespace(item.lemma).lowercase())) { "Это польское слово уже есть в словаре" }
         }
-        val custom = current.custom + incoming
-        return validate(current.copy(custom = custom, selectedIds = (current.selectedIds + other.selectedIds).distinct(),
-            cards = other.cards + current.cards))
+        val custom = local.custom + incoming
+        return validate(local.copy(custom = custom, selectedIds = (local.selectedIds + imported.selectedIds).distinct(),
+            cards = imported.cards + local.cards))
     }
 
     fun validate(document: VocabularyDocument): VocabularyDocument {
         require(document.custom.map(VocabularyItem::id).distinct().size == document.custom.size)
-        document.custom.forEach { value ->
+        val custom = document.custom.map { value ->
             require(Regex("^user\\.[a-f0-9-]{36}$").matches(value.id) && value.frequencyRank == null && value.custom)
-            require(listOf(value.lemma, value.translation, value.form, value.example).all { it.isNotBlank() && it.length <= 240 })
+            val normalized = value.copy(lemma = trimJsWhitespace(value.lemma),
+                translation = trimJsWhitespace(value.translation), form = trimJsWhitespace(value.form),
+                example = trimJsWhitespace(value.example))
+            require(listOf(normalized.lemma, normalized.translation, normalized.form, normalized.example)
+                .all { it.isNotEmpty() && it.length <= 240 })
             require(value.level in listOf("—", "A1", "A2", "B1", "B2", "C1", "C2"))
+            normalized
         }
         require(document.selectedIds.distinct().size == document.selectedIds.size)
         require(document.selectedIds.all { item(document, it) != null })
         // EnRuAcceptance-2026-09-28.md §7 item 4: allowed wires follow the active pack, not pl-ru's literal pair.
         val wires = activeStudyDirections.map(StudyDirection::wire)
         require(document.cards.keys.all { key -> wires.any { key.startsWith("${packRegistry.active.pairId}:vocabulary:$it:") } })
-        return document
+        return document.copy(custom = custom)
     }
 
     fun decode(raw: String): VocabularyDocument {
@@ -230,16 +237,16 @@ object VocabularyCodec {
     }
 
     fun encode(document: VocabularyDocument): String = buildJsonObject {
-        validate(document)
+        val normalized = validate(document)
         put("version", 1)
         put("pair", packRegistry.active.pairId)
-        put("selectedIds", buildJsonArray { document.selectedIds.forEach { add(JsonPrimitive(it)) } })
-        put("custom", buildJsonArray { document.custom.forEach { item -> add(buildJsonObject {
+        put("selectedIds", buildJsonArray { normalized.selectedIds.forEach { add(JsonPrimitive(it)) } })
+        put("custom", buildJsonArray { normalized.custom.forEach { item -> add(buildJsonObject {
             put("id", item.id); put("lemma", item.lemma); put("translation", item.translation)
             put("form", item.form); put("example", item.example); put("level", item.level)
             put("frequencyRank", JsonPrimitive(null as String?)); put("custom", true)
         }) } })
-        put("cards", buildJsonObject { document.cards.forEach { (key, card) ->
+        put("cards", buildJsonObject { normalized.cards.forEach { (key, card) ->
             val wire = SrsCardWire.encode(card)
             put(key, buildJsonObject {
                 put("due", wire.due); put("stability", wire.stability); put("difficulty", wire.difficulty)

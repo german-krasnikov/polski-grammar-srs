@@ -8,6 +8,7 @@ import kotlin.test.assertTrue
 import kotlin.time.Instant
 import polski.srs.FsrsScheduler
 import polski.srs.Rating
+import polski.data.VocabularyItem
 
 class VocabularySessionTest {
     private val at = Instant.parse("2026-09-23T12:00:00Z")
@@ -77,6 +78,24 @@ class VocabularySessionTest {
         assertTrue(session.state.value.document.custom.isEmpty())
         assertTrue(session.state.value.document.selectedIds.isEmpty())
         assertTrue(key in session.state.value.document.cards)
+    }
+
+    @Test
+    fun customSaveKeepsNormalizedMemoryAndBytesAndRejectsWithoutWrite() = runTest {
+        val repository = MemoryVocabularyRepository()
+        val session = VocabularySession(repository, FsrsScheduler(), { at },
+            { "user.00000000-0000-4000-8000-000000000001" })
+        session.start()
+        assertTrue(session.saveCustom("\u00a0\ufeffszkoła ", "школа\u00a0", " szkoła · род. szkoły ",
+            " To jest moja szkoła. ", "A1"))
+        val expected = VocabularyItem("user.00000000-0000-4000-8000-000000000001", "szkoła", "школа",
+            "szkoła · род. szkoły", "To jest moja szkoła.", "A1", null, true)
+        assertEquals(expected, session.state.value.document.custom.single())
+        assertEquals(expected, VocabularyCodec.decode(repository.raw!!).custom.single())
+        val before = repository.raw
+        assertFalse(session.saveCustom(" ".repeat(10) + "a".repeat(241) + " ", "школа", "form", "example", "A1", expected.id))
+        assertEquals(before, repository.raw)
+        assertEquals(listOf(expected), session.state.value.document.custom)
     }
 
     /** EnRuAcceptance-2026-09-28.md §7 item 4: a fresh session (no saved document yet, or one
