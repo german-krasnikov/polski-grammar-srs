@@ -47,6 +47,7 @@ import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
 import polski.presentation.CardEffect
 import polski.presentation.cardEffectFor
+import polski.interaction.SwipeDecision
 import polski.srs.Rating
 
 /**
@@ -62,11 +63,8 @@ import polski.srs.Rating
  */
 
 /** Which rating (if any) a completed horizontal drag of [dragX] px selects, given [thresholdPx]. */
-fun ratingForDrag(dragX: Float, thresholdPx: Float): Rating? = when {
-    dragX <= -thresholdPx -> Rating.Again
-    dragX >= thresholdPx -> Rating.Good
-    else -> null
-}
+fun ratingForDrag(dragX: Float, thresholdPx: Float): Rating? =
+    SwipeDecision.rating(dragX.toDouble(), 0.0, thresholdPx.toDouble(), 1.0, checkYOnRelease = false)
 
 /** How far towards a committed rating a live drag of [dx] px is, in `[-1, 1]` (D3: drives the tint/label growth). */
 fun dragProgress(dx: Float, thresholdPx: Float): Float =

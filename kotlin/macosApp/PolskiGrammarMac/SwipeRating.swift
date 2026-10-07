@@ -1,4 +1,5 @@
 import SwiftUI
+import PolskiShared
 
 /// D3 (`Plans/Kotlin/FlipCardRivePlan.md` §12-§18): the whole revealed card follows the finger
 /// (translate + slight tilt), a tint + direction label grows with drag distance, a short drag
@@ -39,8 +40,10 @@ private struct SwipeToRate: ViewModifier {
                 guard enabled, !flyingOut else { return }
                 let dx = value.translation.width
                 let dy = value.translation.height
-                guard abs(dx) > abs(dy) * 1.25, abs(dx) >= ratingSwipeThreshold else { snapBack(); return }
-                commit(remembered: dx > 0)
+                guard let rating = SwipeDecision.shared.rating(dx: Double(dx), dy: Double(dy),
+                    threshold: Double(ratingSwipeThreshold), axisRatio: 1.25, checkYOnRelease: true)
+                    else { snapBack(); return }
+                commit(remembered: rating === Rating.good)
             }
     }
 

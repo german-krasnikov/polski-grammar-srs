@@ -1,4 +1,5 @@
 import SwiftUI
+import PolskiShared
 
 /// D3's whole-card swipe-to-rate affordance (`Plans/Kotlin/FlipCardRivePlan.md`), shared by
 /// `FlashCardView`'s answer panel and `VocabularyCardView`'s answer face: the WHOLE card (whatever
@@ -82,8 +83,9 @@ struct SwipeToRate: ViewModifier {
                     .onEnded { value in
                         guard active, !flying else { return }
                         let x = value.translation.width, y = value.translation.height
-                        let horizontalDominant = abs(x) > abs(y) * 1.25
-                        settle(committed: horizontalDominant && abs(x) >= threshold, remembered: x > 0)
+                        let rating = SwipeDecision.shared.rating(dx: Double(x), dy: Double(y),
+                            threshold: Double(threshold), axisRatio: 1.25, checkYOnRelease: true)
+                        settle(committed: rating != nil, remembered: rating === Rating.good)
                     }
             )
     }
