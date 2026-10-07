@@ -5,6 +5,8 @@ import kotlinx.browser.window
 import org.w3c.dom.Element
 import org.w3c.dom.HTMLElement
 import org.w3c.dom.events.MouseEvent
+import polski.interaction.SwipeDecision
+import polski.srs.Rating
 
 private const val SWIPE_THRESHOLD_PX = 75.0
 private const val SWIPE_COMMIT_TRANSITION_MS = 220
@@ -57,9 +59,9 @@ internal fun installSwipeCard(zone: HTMLElement, faceForTransform: HTMLElement, 
         faceForTransform.style.removeProperty("--swipe-progress")
         zone.style.removeProperty("user-select")
     }
-    fun settle(committed: Boolean, dx: Int) {
+    fun settle(rating: Rating?) {
         val instant = motionInstantActive()
-        if (!committed) {
+        if (rating == null) {
             if (instant) { clearVisual(); return }
             faceForTransform.style.setProperty("transition", "transform ${SWIPE_COMMIT_TRANSITION_MS}ms $SWIPE_EASING")
             faceForTransform.style.setProperty("transform", withBase("translateX(0) rotate(0deg)"))
@@ -67,7 +69,7 @@ internal fun installSwipeCard(zone: HTMLElement, faceForTransform: HTMLElement, 
             window.setTimeout({ clearVisual(); null }, SWIPE_COMMIT_TRANSITION_MS)
             return
         }
-        val remembered = dx > 0
+        val remembered = rating == Rating.Good
         if (instant) { clearVisual(); onRating(remembered); return }
         val sign = if (remembered) 1 else -1
         faceForTransform.style.setProperty("transition", "transform ${SWIPE_COMMIT_TRANSITION_MS}ms $SWIPE_EASING, opacity ${SWIPE_COMMIT_TRANSITION_MS}ms $SWIPE_EASING")
@@ -128,10 +130,11 @@ internal fun installSwipeCard(zone: HTMLElement, faceForTransform: HTMLElement, 
         // move at all — a synthetic/scripted gesture, but also the only way a fast enough real
         // one could ever arrive. Neither means "never moved" (a tap) or "stayed vertical/diagonal".
         if (!wasHorizontal && !horizontalDominant) return@addEventListener
-        settle(kotlin.math.abs(dx) >= SWIPE_THRESHOLD_PX && horizontalDominant, dx)
+        settle(SwipeDecision.rating(dx.toDouble(), dy.toDouble(), SWIPE_THRESHOLD_PX, 1.25,
+            checkYOnRelease = true))
     })
-    zone.addEventListener("pointercancel", { start = null; if (horizontal) settle(false, 0); horizontal = false })
-    zone.addEventListener("lostpointercapture", { start = null; if (horizontal) settle(false, 0); horizontal = false })
+    zone.addEventListener("pointercancel", { start = null; if (horizontal) settle(null); horizontal = false })
+    zone.addEventListener("lostpointercapture", { start = null; if (horizontal) settle(null); horizontal = false })
 }
 
 /**
