@@ -18,6 +18,7 @@ import polski.data.courseVocabularyUnavailableLabel
 import polski.data.VocabularyItem
 import polski.data.frequencyItems
 import polski.data.vocabularyItems
+import polski.grammar.trimJsWhitespace
 import polski.presentation.cardEffectFor
 import polski.srs.FsrsScheduler
 import polski.srs.Rating
@@ -443,8 +444,8 @@ internal class VocabularyWebController {
 
     private fun saveOwn(refresh: () -> Unit) {
         val id = editing ?: "user.${randomUuid()}"
-        val item = VocabularyItem(id, editor.lemma.trim(), editor.translation.trim(), editor.form.trim(),
-            editor.example.trim(), editor.level, null, true)
+        val item = VocabularyItem(id, trimJsWhitespace(editor.lemma), trimJsWhitespace(editor.translation),
+            trimJsWhitespace(editor.form), trimJsWhitespace(editor.example), editor.level, null, true)
         if ((vocabularyItems + document.custom).any { it.id != id && it.lemma.lowercase() == item.lemma.lowercase() }) {
             error = "Это польское слово уже есть в словаре."; refresh(); return
         }
@@ -512,9 +513,10 @@ internal class VocabularyWebController {
      * only copy of the current document. Does not consult [recoveryRaw]; callers gate that.
      */
     private fun writeDocument(next: VocabularyDocument, backupCurrent: Boolean): Boolean {
-        val serialized = VocabularyCodec.encode(next)
         var previous: String? = null
         return runCatching {
+            // encode validates (S1 trim, non-empty, <= 240); a refusal is an error message, not an uncaught click
+            val serialized = VocabularyCodec.encode(next)
             previous = window.localStorage.getItem(VocabularyCodec.key)
             if (backupCurrent && previous != null) {
                 window.localStorage.setItem(VOCABULARY_BACKUP_KEY, previous)
