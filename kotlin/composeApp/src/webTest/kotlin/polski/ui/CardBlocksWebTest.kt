@@ -30,7 +30,7 @@ class CardBlocksWebTest {
             EndingPart(" here.", false),
         )
         val container = document.createElement("div") as HTMLElement
-        renderCardBlocks(container, listOf(Block.Formula("See mojej become ich here.", parts)), "card-front")
+        renderCardBlocks(container, listOf(Block.Formula("See mojej become ich here.", parts)), "card-front", "pl")
 
         val before = container.querySelectorAll(".change-before")
         assertEquals(1, before.length)
