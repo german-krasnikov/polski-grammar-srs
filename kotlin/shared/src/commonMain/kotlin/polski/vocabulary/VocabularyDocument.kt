@@ -201,7 +201,7 @@ object VocabularyCodec {
                 translation = trimJsWhitespace(value.translation), form = trimJsWhitespace(value.form),
                 example = trimJsWhitespace(value.example))
             require(listOf(normalized.lemma, normalized.translation, normalized.form, normalized.example)
-                .all { it.isNotEmpty() && it.length <= 240 })
+                .all { it.isNotEmpty() && it.length <= 240 }) { "Заполни слово, перевод, форму и пример (до 240 символов)." }
             require(value.level in listOf("—", "A1", "A2", "B1", "B2", "C1", "C2"))
             normalized
         }

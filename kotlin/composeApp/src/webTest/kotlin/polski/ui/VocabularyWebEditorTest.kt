@@ -55,6 +55,7 @@ class VocabularyWebEditorTest {
         }
     }
 
+    // Control: green on the old code too, because encode() already normalized the stored text.
     @Test
     fun allFourFieldsAreSavedTrimmedLikeJs() {
         val saved = saveThroughEditor("\uFEFF zzzunikat\u00A0", "\u3000перевод\uFEFF")
@@ -65,6 +66,8 @@ class VocabularyWebEditorTest {
 
     @Test
     fun aFieldThatTrimsToEmptyIsRefusedInsteadOfSaved() {
-        assertEquals(emptyList<VocabularyItem>(), saveThroughEditor("zzzunikat", "\uFEFF\u00A0").custom)
+        val saved = saveThroughEditor("zzzunikat", "\uFEFF\u00A0")
+        assertEquals(emptyList<VocabularyItem>(), saved.custom)
+        assertTrue("Заполни слово, перевод, форму и пример (до 240 символов)." in saved.text, saved.text)
     }
 }
