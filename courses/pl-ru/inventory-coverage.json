@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "candidateCount": 5366,
-  "tokenCount": 8257,
+  "candidateCount": 5371,
+  "tokenCount": 8270,
   "rows": [
     {
       "path": "src/training/generator.ts",
@@ -24061,7 +24061,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 29,
+      "line": 30,
       "symbol": "file-scope",
       "sourceFingerprint": "cb4f9f3681c184c036a45cb6156bcf00bb17d4451dbaccf41a26d840cb7631fe",
       "occurrence": 1,
@@ -24077,7 +24077,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 31,
+      "line": 32,
       "symbol": "VOCABULARY_BACKUP_KEY",
       "sourceFingerprint": "dc9a81c5ba01b5eb010599b7916ea4840fff2c1f5b0f670a037cd0d4f0f75b0b",
       "occurrence": 1,
@@ -24095,7 +24095,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 33,
+      "line": 34,
       "symbol": "file-scope",
       "sourceFingerprint": "800203eecbb833da92a8329ee2dbeb602c4147849cc552742d378aa51ec4c5f2",
       "occurrence": 1,
@@ -24111,7 +24111,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 34,
+      "line": 35,
       "symbol": "file-scope",
       "sourceFingerprint": "fabfb67ad254cbfbf9386e4a02e7f59036b0f8d73a621b8e65c8c993d32fdd9a",
       "occurrence": 1,
@@ -24127,7 +24127,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 35,
+      "line": 36,
       "symbol": "file-scope",
       "sourceFingerprint": "d5a05fd79a875b62d78d996ff3ea4f6cb918b7bc8ddd3cb3234c9e86c7a8fa1c",
       "occurrence": 1,
@@ -24143,7 +24143,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 37,
+      "line": 38,
       "symbol": "languageAdjective",
       "sourceFingerprint": "b2dc28ff888d1a8f3f5f1d43cb9aa33479b5c592e4bc7e9595ddf4c6fb779280",
       "occurrence": 1,
@@ -24191,7 +24191,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 38,
+      "line": 39,
       "symbol": "languageAdverb",
       "sourceFingerprint": "99151c399a36f7f638df0bf625ff34dd2364a3e104e4933a20d188fb60e0f1da",
       "occurrence": 1,
@@ -24239,7 +24239,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 39,
+      "line": 40,
       "symbol": "languageBcp47",
       "sourceFingerprint": "04d0e4560ab6fa4b5bb50c0baaad47965cb649756ac9d69f44b25d92af34d950",
       "occurrence": 1,
@@ -24287,7 +24287,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 52,
+      "line": 53,
       "symbol": "activePackLanguages",
       "sourceFingerprint": "93897a8a15a5089716dfdc3eb02cd8e030da7b9a6e0365459ef9d0e4b555927b",
       "occurrence": 1,
@@ -24311,7 +24311,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 55,
+      "line": 56,
       "symbol": "file-scope",
       "sourceFingerprint": "a6afc278f0e9659eaeac25593a224b9ca0862f0e9a42e0fc5275cb4cb6d01876",
       "occurrence": 1,
@@ -24327,7 +24327,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 57,
+      "line": 58,
       "symbol": "file-scope",
       "sourceFingerprint": "e93006b92c86ac171b253b721b5a42f1c9ddc4ab747b43b614d7b2b753d13599",
       "occurrence": 1,
@@ -24343,7 +24343,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 58,
+      "line": 59,
       "symbol": "file-scope",
       "sourceFingerprint": "6e3bda359164633c0b39c241c0e31772bee1c4de61ee28d5341f631ccc430bb1",
       "occurrence": 1,
@@ -24359,7 +24359,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 59,
+      "line": 60,
       "symbol": "file-scope",
       "sourceFingerprint": "3619ac0181f82494bfaad006f4b3ae6d33cc2672144360b021ca753456386928",
       "occurrence": 1,
@@ -24375,7 +24375,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 70,
+      "line": 71,
       "symbol": "VocabularyWebController.filter",
       "sourceFingerprint": "cd3535b4f9ecb4bac2103813c22103b6be1786dc08faf1d4b5f2ca652e498274",
       "occurrence": 1,
@@ -24393,7 +24393,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 75,
+      "line": 76,
       "symbol": "VocabularyWebController",
       "sourceFingerprint": "546896df3acb4fdb8468441fea246cbd6f354cee9d3064a6d8f5fb9d9f517140",
       "occurrence": 1,
@@ -24409,7 +24409,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 78,
+      "line": 79,
       "symbol": "VocabularyWebController",
       "sourceFingerprint": "c1806fd1bafbb7b69e727cf3dbfb1d8739e41fdabc4c746925b31647d37b28fb",
       "occurrence": 1,
@@ -24425,7 +24425,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 79,
+      "line": 80,
       "symbol": "VocabularyWebController",
       "sourceFingerprint": "8f779b7a3d1e335f0b8def83e8ea3b3b99df3db3477ce7e3e765fd7a89dbf643",
       "occurrence": 1,
@@ -24441,7 +24441,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 80,
+      "line": 81,
       "symbol": "VocabularyWebController",
       "sourceFingerprint": "7dbc9d3f9d50e95eda22d0aa5cb34d738ad34c2af3408863c1f6f1cf5ad22cdd",
       "occurrence": 1,
@@ -24457,7 +24457,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 85,
+      "line": 86,
       "symbol": "VocabularyWebController",
       "sourceFingerprint": "19e4171bea7836ec4f93b0f75c7884bfc6a177c59238e0392425fdd1f642067d",
       "occurrence": 1,
@@ -24473,7 +24473,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 86,
+      "line": 87,
       "symbol": "VocabularyWebController",
       "sourceFingerprint": "4f76ef222e3872e0f7a5d5e3871b867f7c264bd46adf80ef489453c9a50475cf",
       "occurrence": 1,
@@ -24489,7 +24489,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 87,
+      "line": 88,
       "symbol": "VocabularyWebController",
       "sourceFingerprint": "e9d10a42e4dc413b0a9a8aef1e949fdbe21fe1a3d5584e59048763ff58b342e0",
       "occurrence": 1,
@@ -24505,7 +24505,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 96,
+      "line": 97,
       "symbol": "VocabularyWebController.draft",
       "sourceFingerprint": "3e53362c13d92410e7fbd95d01e7b8f17105fd9745db7884f3e094aa0115ec33",
       "occurrence": 1,
@@ -24523,7 +24523,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 99,
+      "line": 100,
       "symbol": "VocabularyWebController.importText",
       "sourceFingerprint": "51446bb58e67bceb4579c4c37fbfc821e7f41e9050fb5ab0106c804fcaaec1cb",
       "occurrence": 1,
@@ -24541,7 +24541,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 102,
+      "line": 103,
       "symbol": "VocabularyWebController",
       "sourceFingerprint": "44d3541a7aa921fa59da28c89b44902c930f5abfc7c5095cc1cc83dcc6f2eadc",
       "occurrence": 1,
@@ -24557,7 +24557,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 103,
+      "line": 104,
       "symbol": "VocabularyWebController",
       "sourceFingerprint": "6cf9b0e32a0da1fcb4763aa229c2365a6f644168aea9a303b2d2f67bf8ee3acf",
       "occurrence": 1,
@@ -24573,7 +24573,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 104,
+      "line": 105,
       "symbol": "VocabularyWebController",
       "sourceFingerprint": "149c70fb773f7120998d4d49b38b08021c430365cf7544ff134e65f785f053a9",
       "occurrence": 1,
@@ -24589,7 +24589,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 105,
+      "line": 106,
       "symbol": "VocabularyWebController",
       "sourceFingerprint": "aa61f4de2977db00a366db316699d9f28f7db36778727c83ae9244ccfcce9916",
       "occurrence": 1,
@@ -24605,7 +24605,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 115,
+      "line": 116,
       "symbol": "VocabularyWebController",
       "sourceFingerprint": "aaa7528dfd3776060ea1b4d9bd6c742f4e71271c7f9b1637a1065b890941760a",
       "occurrence": 1,
@@ -24623,7 +24623,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 120,
+      "line": 121,
       "symbol": "VocabularyWebController.close",
       "sourceFingerprint": "2c162e549c06c114ad6355ff9a04140228f2abdfa86ad23b81552016c1a6d5d1",
       "occurrence": 1,
@@ -24641,7 +24641,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 132,
+      "line": 133,
       "symbol": "VocabularyWebController",
       "sourceFingerprint": "ec844495f3767e11556724ca6565488b4c9cd9501c6c38f4085979b4fbfeaeab",
       "occurrence": 1,
@@ -24657,7 +24657,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 137,
+      "line": 138,
       "symbol": "VocabularyWebController.reloadForActivePack",
       "sourceFingerprint": "52dd87e9b7c5d056be3f72a3815ccd6c511accd4f6ebb2dd2cf08ab0014695c8",
       "occurrence": 1,
@@ -24675,7 +24675,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 143,
+      "line": 144,
       "symbol": "VocabularyWebController.reload",
       "sourceFingerprint": "8135d557d038294a2fad9e19e163b81a09602d7bff241c76a5b2846967ba821d",
       "occurrence": 1,
@@ -24699,7 +24699,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 152,
+      "line": 153,
       "symbol": "VocabularyWebController.reload",
       "sourceFingerprint": "d071e5dd6707688e6281a6678acc017d6d3a2e8a5ce7530021d1688ee8f88a90",
       "occurrence": 1,
@@ -24723,7 +24723,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 160,
+      "line": 161,
       "symbol": "VocabularyWebController.render",
       "sourceFingerprint": "764c28020c389f961ad4518bc10361b1e88c6180098af6bd0a7a166711f14e11",
       "occurrence": 1,
@@ -24741,7 +24741,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 161,
+      "line": 162,
       "symbol": "VocabularyWebController.render.page",
       "sourceFingerprint": "252ffea31ceb1a703fb597f4306f9817a138053b64cd2abd20111ea9473c91b4",
       "occurrence": 1,
@@ -24765,7 +24765,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 162,
+      "line": 163,
       "symbol": "VocabularyWebController.render",
       "sourceFingerprint": "a68bf46ba7e78c0dacb608d36690702306ddbfaaebfa44366210a83b40eb9c82",
       "occurrence": 1,
@@ -24789,7 +24789,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 163,
+      "line": 164,
       "symbol": "VocabularyWebController.render.heading",
       "sourceFingerprint": "77baeb746278fd26e2d7fc93cc9171146dccf517ea67eda377787c75a01a3680",
       "occurrence": 1,
@@ -24813,7 +24813,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 164,
+      "line": 165,
       "symbol": "VocabularyWebController.render",
       "sourceFingerprint": "888776016ea4b9502bac0d91281c02715e4d126cc9706b8292c899eb5b68bdc1",
       "occurrence": 1,
@@ -24831,7 +24831,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 165,
+      "line": 166,
       "symbol": "VocabularyWebController.render",
       "sourceFingerprint": "09849da0934adff0af4f2d4e7969d832492d549ecdc43b276340f94821afd8cd",
       "occurrence": 1,
@@ -24855,7 +24855,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 166,
+      "line": 167,
       "symbol": "VocabularyWebController.render",
       "sourceFingerprint": "363ffb8e2f083610823ac414512240e3bded4ec0ca8a8f191d4044d07925fdb8",
       "occurrence": 1,
@@ -24879,7 +24879,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 171,
+      "line": 172,
       "symbol": "VocabularyWebController.render.directionLabel",
       "sourceFingerprint": "b11924828b292aff40e0850e1dacc571e0aee2a23d62c5f21cc645a0415a0cda",
       "occurrence": 1,
@@ -24903,7 +24903,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 172,
+      "line": 173,
       "symbol": "VocabularyWebController.render.directionSelect",
       "sourceFingerprint": "d8e42aa3a21dc362586efad8f283739b3b72cab33b62807200455e492c880771",
       "occurrence": 1,
@@ -24921,7 +24921,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 173,
+      "line": 174,
       "symbol": "VocabularyWebController.render",
       "sourceFingerprint": "944ed09be8e71ecdfedb39cbe5ccf1755dc94eb4529e453465229197c815ebbe",
       "occurrence": 1,
@@ -24951,7 +24951,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 174,
+      "line": 175,
       "symbol": "VocabularyWebController.render",
       "sourceFingerprint": "ad7aa6c8ddb1838fb1001a977bef5e1787c6d3b74a3fc31b7556914788bc01bb",
       "occurrence": 1,
@@ -24981,7 +24981,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 176,
+      "line": 177,
       "symbol": "VocabularyWebController.render",
       "sourceFingerprint": "664230bdda7e88f607262448b6a2810d2ba80e1187616c0549ac07890e7b4e4b",
       "occurrence": 1,
@@ -24999,7 +24999,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 178,
+      "line": 179,
       "symbol": "VocabularyWebController.render",
       "sourceFingerprint": "a9e427a4e7dab00bc3600ba66df9384c01eaf5951bc92323f8a63db734404fbe",
       "occurrence": 1,
@@ -25017,7 +25017,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 180,
+      "line": 181,
       "symbol": "VocabularyWebController.render",
       "sourceFingerprint": "177f46b4f5acfaeaa3caa9b129c3997f80e4702465af8ad0ee8007de803fcff6",
       "occurrence": 1,
@@ -25053,7 +25053,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 182,
+      "line": 183,
       "symbol": "VocabularyWebController.render",
       "sourceFingerprint": "11848aff895ac9860da7c3cb7a0bdb265c8902f2808108e1a44c5268359683e6",
       "occurrence": 1,
@@ -25077,7 +25077,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 184,
+      "line": 185,
       "symbol": "VocabularyWebController.render.layout",
       "sourceFingerprint": "eff1ccb5ce275a120a59cab72e87b27daa1a31339b4de2e36638654cb3a8e30d",
       "occurrence": 1,
@@ -25101,7 +25101,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 185,
+      "line": 186,
       "symbol": "VocabularyWebController.render",
       "sourceFingerprint": "e1c1a2fcb53e179d4fc3cf4d46c7391dd58b88531264c4a113e68f37994dee6c",
       "occurrence": 1,
@@ -25125,7 +25125,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 186,
+      "line": 187,
       "symbol": "VocabularyWebController.render",
       "sourceFingerprint": "29a2ec29acff3238ed7b37bc4259b4dde43dcc7238f7d22f940632b0fa77558c",
       "occurrence": 1,
@@ -25149,7 +25149,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 187,
+      "line": 188,
       "symbol": "VocabularyWebController.render",
       "sourceFingerprint": "ebd917af565a1e090a5899d582496729b674793897309629a91284a0efb62e8b",
       "occurrence": 1,
@@ -25173,7 +25173,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 188,
+      "line": 189,
       "symbol": "VocabularyWebController.render",
       "sourceFingerprint": "5cad058322901e6de77787b957921d77d3d2d55430b6b8455ec6f5811fbc4565",
       "occurrence": 1,
@@ -25197,7 +25197,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 189,
+      "line": 190,
       "symbol": "VocabularyWebController.render",
       "sourceFingerprint": "8eefe8548ade67bcae824ef4e3e725a90b4a03aa2fe0a690a86c795d09b7a325",
       "occurrence": 1,
@@ -25221,7 +25221,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 190,
+      "line": 191,
       "symbol": "VocabularyWebController.render",
       "sourceFingerprint": "35645bca640b22048d46d2b8463259504cbe2de8111b3931a9583e15e33405b5",
       "occurrence": 1,
@@ -25245,7 +25245,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 191,
+      "line": 192,
       "symbol": "VocabularyWebController.render",
       "sourceFingerprint": "d45b1deee8e66698697a69624291d203d75913efa6a67c4af047aee6d3ac6ff4",
       "occurrence": 1,
@@ -25269,7 +25269,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 192,
+      "line": 193,
       "symbol": "VocabularyWebController.render",
       "sourceFingerprint": "120113f19f3a9f69995f0bb9590c60c356d065e2b04454e1f19ed83ef3bb1ac5",
       "occurrence": 1,
@@ -25293,7 +25293,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 194,
+      "line": 195,
       "symbol": "VocabularyWebController.render",
       "sourceFingerprint": "41dd2586d92c597effce8681e73cdb7a60ffa96278d8899cee8d20879df40efe",
       "occurrence": 1,
@@ -25317,7 +25317,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 199,
+      "line": 200,
       "symbol": "VocabularyWebController.renderCard",
       "sourceFingerprint": "eb0f9f6fd062d31d678a427d8c879b26b088c1dae80487c30e99933336abaafb",
       "occurrence": 1,
@@ -25341,7 +25341,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 204,
+      "line": 205,
       "symbol": "VocabularyWebController.renderCard",
       "sourceFingerprint": "f4cfb9a20f14d2b7037289312fbc7410032cd6dcef03067984a89d3b4dde7b60",
       "occurrence": 1,
@@ -25357,7 +25357,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 205,
+      "line": 206,
       "symbol": "VocabularyWebController.renderCard.face",
       "sourceFingerprint": "3fa8de1838805761d22cdbe1861815323b51cc4140ba8f0b81b7f4a209e776fa",
       "occurrence": 1,
@@ -25381,7 +25381,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 206,
+      "line": 207,
       "symbol": "VocabularyWebController.renderCard",
       "sourceFingerprint": "cb57e42d87ce9da21b3259eb424444c4bc763b380291a6870931b88f31b12a4b",
       "occurrence": 1,
@@ -25411,7 +25411,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 207,
+      "line": 208,
       "symbol": "VocabularyWebController.renderCard",
       "sourceFingerprint": "17a516d521dd24e0771aea280be9480de6bf3774d816faf3d5b96cc09a6a6bd7",
       "occurrence": 1,
@@ -25435,7 +25435,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 210,
+      "line": 211,
       "symbol": "VocabularyWebController.renderCard",
       "sourceFingerprint": "ef6c45c4738c9b12d747c1b7d928d327358ef61773a6156fbe6d43fb17391771",
       "occurrence": 1,
@@ -25451,7 +25451,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 212,
+      "line": 213,
       "symbol": "VocabularyWebController.renderCard",
       "sourceFingerprint": "22598204671bc23eedf0cf5104eee348c54a203059de61545096fd43e4cd3b39",
       "occurrence": 1,
@@ -25467,7 +25467,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 214,
+      "line": 215,
       "symbol": "VocabularyWebController.renderCard",
       "sourceFingerprint": "7ff96c0e101a3666a1263e3672c456c3cb21e5e94f035a073247d3728f87cb59",
       "occurrence": 1,
@@ -25483,7 +25483,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 217,
+      "line": 218,
       "symbol": "VocabularyWebController.renderCard.flip",
       "sourceFingerprint": "827a9a8504d54e00644dc872235283f7eed2c9932b36dbbe36ecb141312e8a10",
       "occurrence": 1,
@@ -25507,7 +25507,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 218,
+      "line": 219,
       "symbol": "VocabularyWebController.renderCard.inner",
       "sourceFingerprint": "834bd6a967ae2aeea7f4c58c0a99a5cc13c81d41ef7f769b93c7cc292b3919b2",
       "occurrence": 1,
@@ -25531,7 +25531,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 220,
+      "line": 221,
       "symbol": "VocabularyWebController.renderCard.front",
       "sourceFingerprint": "acb8c688665f150113905919c41a8d3cd89927f2ffcba83c4c6d7accc2ff55af",
       "occurrence": 1,
@@ -25555,7 +25555,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 221,
+      "line": 222,
       "symbol": "VocabularyWebController.renderCard",
       "sourceFingerprint": "b9eb8fa837532229f15bf75a19c48b151a1dbb007234e1bbd81daf19810b6ea8",
       "occurrence": 1,
@@ -25571,7 +25571,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 223,
+      "line": 224,
       "symbol": "VocabularyWebController.renderCard",
       "sourceFingerprint": "9f85e41def0e9b970e00bebf83330b07a677925c6c58b34abef90879938798aa",
       "occurrence": 1,
@@ -25587,7 +25587,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 224,
+      "line": 225,
       "symbol": "VocabularyWebController.renderCard",
       "sourceFingerprint": "7962a81335f3104bdc1ff6047b231b0b48343d2af0621c5212e04a91a7775c2f",
       "occurrence": 1,
@@ -25603,7 +25603,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 227,
+      "line": 228,
       "symbol": "VocabularyWebController.renderCard",
       "sourceFingerprint": "1b35629bdb0becd6088de90da6492a29f7ce266eaba35d365c45ec6a6d6ae4a5",
       "occurrence": 1,
@@ -25619,7 +25619,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 229,
+      "line": 230,
       "symbol": "VocabularyWebController.renderCard.promptBlock",
       "sourceFingerprint": "9ca2631b763a96e2bcf6f055b03a1939f62d12e22d19ef505e17b89aaff533da",
       "occurrence": 1,
@@ -25643,7 +25643,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 230,
+      "line": 231,
       "symbol": "VocabularyWebController.renderCard",
       "sourceFingerprint": "97e6249f45536c217031dd78e0ab5536c562207d012eee85ccecf6ec1172c867",
       "occurrence": 1,
@@ -25679,7 +25679,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 231,
+      "line": 232,
       "symbol": "VocabularyWebController.renderCard",
       "sourceFingerprint": "e2a8830c037f2fb202859d54ced6f358ee49953abfd5de03fdf8946d73e57a78",
       "occurrence": 1,
@@ -25703,7 +25703,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 232,
+      "line": 233,
       "symbol": "VocabularyWebController.renderCard",
       "sourceFingerprint": "65a068cdb71a8ee6cd3a99b31f2b5729b738bdf0fd38bb7ba68af1e47f660455",
       "occurrence": 1,
@@ -25721,7 +25721,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 234,
+      "line": 235,
       "symbol": "VocabularyWebController.renderCard",
       "sourceFingerprint": "40c790149c60e07c896df7872c20c0bd28ee782795ffd3cb3cc0cbd402c00ead",
       "occurrence": 1,
@@ -25737,7 +25737,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 236,
+      "line": 237,
       "symbol": "VocabularyWebController.renderCard",
       "sourceFingerprint": "e5196a1347f3f40622c6e343c6066caf11a32fd3fa8810de04bc04a61ec5e6e0",
       "occurrence": 1,
@@ -25753,7 +25753,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 238,
+      "line": 239,
       "symbol": "VocabularyWebController.renderCard",
       "sourceFingerprint": "1419c30fcd4bf9e5d447498287f85441e5db2e4304ce655dd00b7a56cee9c2ac",
       "occurrence": 1,
@@ -25777,7 +25777,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 239,
+      "line": 240,
       "symbol": "VocabularyWebController.renderCard",
       "sourceFingerprint": "f6b203e16e3670b5c65d54512302878d11e7b02b7fc0709da68174ab2d50724d",
       "occurrence": 1,
@@ -25801,7 +25801,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 240,
+      "line": 241,
       "symbol": "VocabularyWebController.renderCard",
       "sourceFingerprint": "45ff4073831cbfdc0f756cea46c824c0311d205f68d23b4e13c812e9a1375e91",
       "occurrence": 1,
@@ -25825,7 +25825,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 241,
+      "line": 242,
       "symbol": "VocabularyWebController.renderCard.modes",
       "sourceFingerprint": "c752c03da27b4f1b79295fa575412829c2609568dcbc062c968f419c10e03cd9",
       "occurrence": 1,
@@ -25849,7 +25849,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 242,
+      "line": 243,
       "symbol": "VocabularyWebController.renderCard",
       "sourceFingerprint": "8b4273523f208e85cabb4176bf34efa15f4bfd938d1a363d3f25db74c8567362",
       "occurrence": 1,
@@ -25867,7 +25867,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 243,
+      "line": 244,
       "symbol": "VocabularyWebController.renderCard",
       "sourceFingerprint": "a17f9261e998cd527b50f8af444059f40ab944ad679df35bf76b9aa8d44fc193",
       "occurrence": 1,
@@ -25885,7 +25885,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 244,
+      "line": 245,
       "symbol": "VocabularyWebController.renderCard",
       "sourceFingerprint": "94cc081440fbc6e8b3c9268fd28a359bec128d989e08f60161849840283cba46",
       "occurrence": 1,
@@ -25903,7 +25903,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 246,
+      "line": 247,
       "symbol": "VocabularyWebController.renderCard",
       "sourceFingerprint": "65a5fb6131e3301cda272f5df6462fb222a66bbe6b5514f243240a176c639ad1",
       "occurrence": 1,
@@ -25921,7 +25921,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 247,
+      "line": 248,
       "symbol": "VocabularyWebController.renderCard",
       "sourceFingerprint": "02a60db271944b734fdbc8d2722afd8a607eb53f8ab59796e5304b9a40517107",
       "occurrence": 1,
@@ -25939,7 +25939,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 248,
+      "line": 249,
       "symbol": "VocabularyWebController.renderCard",
       "sourceFingerprint": "ea52043932292ad8a7ebbe4a4a71841056b9138b5c63d31fe670b0478a670621",
       "occurrence": 1,
@@ -25957,7 +25957,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 251,
+      "line": 252,
       "symbol": "VocabularyWebController.renderCard.input",
       "sourceFingerprint": "319b99112c0e66fa4559e2156de249f4227ca96971ec48cad3925ff91946cc24",
       "occurrence": 1,
@@ -25975,7 +25975,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 252,
+      "line": 253,
       "symbol": "VocabularyWebController.renderCard",
       "sourceFingerprint": "267022d5db4f66dd0c9c32aec914d1a590319cf30fa450ebf98697ddf23a7192",
       "occurrence": 1,
@@ -25993,7 +25993,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 253,
+      "line": 254,
       "symbol": "VocabularyWebController.renderCard",
       "sourceFingerprint": "2cbb57c69a0c9837d871de982c932df412a7a7e24cfe8a3b4ee77b89a654e3af",
       "occurrence": 1,
@@ -26017,7 +26017,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 255,
+      "line": 256,
       "symbol": "VocabularyWebController.renderCard",
       "sourceFingerprint": "f44e9289ad1f693e087e60d6f93ce937548aaae8c02bc9db365777e2cc364a9c",
       "occurrence": 1,
@@ -26035,7 +26035,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 256,
+      "line": 257,
       "symbol": "VocabularyWebController.renderCard",
       "sourceFingerprint": "21512b7e02e3598777be23403f62e6a0337dc7e79fe99037442ae8f020164c2f",
       "occurrence": 1,
@@ -26053,7 +26053,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 258,
+      "line": 259,
       "symbol": "VocabularyWebController.renderCard",
       "sourceFingerprint": "b0a8cee8a54b118a337f225b52910f558c146565cdfe7d877fff6d8047a304a4",
       "occurrence": 1,
@@ -26071,7 +26071,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 262,
+      "line": 263,
       "symbol": "VocabularyWebController.renderCard",
       "sourceFingerprint": "140b3c3eb8705d18be52e4447b8d5e2dac2ef4b2854ea407ff524bb94ed668ee",
       "occurrence": 1,
@@ -26087,7 +26087,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 266,
+      "line": 267,
       "symbol": "VocabularyWebController.renderCard",
       "sourceFingerprint": "ec655c67f7a4b758222112376352381d7701f356a9c32f09140bb504e4812679",
       "occurrence": 1,
@@ -26111,7 +26111,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 269,
+      "line": 270,
       "symbol": "VocabularyWebController.renderCard",
       "sourceFingerprint": "e4ce3b737992f8a4119888d9b932168a193eadf7bafb32578e9645105ad371e6",
       "occurrence": 1,
@@ -26127,7 +26127,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 277,
+      "line": 278,
       "symbol": "VocabularyWebController.renderCard",
       "sourceFingerprint": "74b67c8cb01e5172694c7e6bba0f1aadde750fe226ea22504d5a3bd8763d3092",
       "occurrence": 1,
@@ -26143,7 +26143,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 279,
+      "line": 280,
       "symbol": "VocabularyWebController.renderCard.answer",
       "sourceFingerprint": "9b58adec78c4e49bf5946469ca98468b72d3e25a5bbb39c987788040ccbd0162",
       "occurrence": 1,
@@ -26167,7 +26167,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 280,
+      "line": 281,
       "symbol": "VocabularyWebController.renderCard",
       "sourceFingerprint": "0ba0875fb942a87105d693ffca3c682cbf6bb22b0f517d76a07f44f95e1286bd",
       "occurrence": 1,
@@ -26191,7 +26191,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 294,
+      "line": 295,
       "symbol": "VocabularyWebController.renderRevealedAnswer",
       "sourceFingerprint": "adb2ecd13e5b4249b48e402fd8aa325ebb1d8ae6ad3ba052b3195e6759148aa9",
       "occurrence": 1,
@@ -26227,7 +26227,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 295,
+      "line": 296,
       "symbol": "VocabularyWebController.renderRevealedAnswer",
       "sourceFingerprint": "819b11b6fa94ba706ad29a07153271d920572342efa637459f25f3c193eafad0",
       "occurrence": 1,
@@ -26245,7 +26245,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 296,
+      "line": 297,
       "symbol": "VocabularyWebController.renderRevealedAnswer",
       "sourceFingerprint": "ccc85eb17411199915b3b08a03aae74662aebb4bf65b932d7001ca1e6e57384a",
       "occurrence": 1,
@@ -26263,7 +26263,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 297,
+      "line": 298,
       "symbol": "VocabularyWebController.renderRevealedAnswer.description",
       "sourceFingerprint": "314ef12edd7bac529ff5049da0da4b44323665ab3c873a71d5a6472ff29f87c6",
       "occurrence": 1,
@@ -26281,7 +26281,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 298,
+      "line": 299,
       "symbol": "VocabularyWebController.renderRevealedAnswer",
       "sourceFingerprint": "1b15c6ba7680e5bc207e478d8cded6785a353dbd2925b615d635c00b2d63a61b",
       "occurrence": 1,
@@ -26299,7 +26299,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 299,
+      "line": 300,
       "symbol": "VocabularyWebController.renderRevealedAnswer",
       "sourceFingerprint": "01f551b993c9a5ad2d0a68739a0082d2c7a0d4a171af07493064503401bdee74",
       "occurrence": 1,
@@ -26317,7 +26317,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 300,
+      "line": 301,
       "symbol": "VocabularyWebController.renderRevealedAnswer",
       "sourceFingerprint": "2a832cd18b4ffdd0f60cd71d7fc607fe0d18c567c3c941c986a95f1db22ce106",
       "occurrence": 1,
@@ -26335,7 +26335,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 301,
+      "line": 302,
       "symbol": "VocabularyWebController.renderRevealedAnswer",
       "sourceFingerprint": "d373fff4a51e702b9cdb50068f92666f3ac6380c3c8ce3451874948026b70eb6",
       "occurrence": 1,
@@ -26371,7 +26371,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 305,
+      "line": 306,
       "symbol": "VocabularyWebController.renderRevealedAnswer",
       "sourceFingerprint": "91f5457277fbc6f4bc2b97be1edba902326a46598d08291bff2b501bc592614d",
       "occurrence": 1,
@@ -26387,7 +26387,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 306,
+      "line": 307,
       "symbol": "VocabularyWebController.renderRevealedAnswer",
       "sourceFingerprint": "5822e5247af07fb1eb851cf0397290035535eeddf57dd82db19d65ab2ba11a5a",
       "occurrence": 1,
@@ -26403,7 +26403,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 307,
+      "line": 308,
       "symbol": "VocabularyWebController.renderRevealedAnswer",
       "sourceFingerprint": "402ca3ca8d111d549aad29b153397aea4fed8a777d8dc5f2b155049a06dc6aa8",
       "occurrence": 1,
@@ -26419,7 +26419,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 308,
+      "line": 309,
       "symbol": "VocabularyWebController.renderRevealedAnswer",
       "sourceFingerprint": "a41c1b278ef64c72b60b966bb544c4330f686a0e32265e456dce2a42e0fd2f96",
       "occurrence": 1,
@@ -26435,7 +26435,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 310,
+      "line": 311,
       "symbol": "VocabularyWebController.renderRevealedAnswer",
       "sourceFingerprint": "5237fd77881a9779178447bcd4aa90dbdfebd241199c03de3a2c38e5505cc1d6",
       "occurrence": 1,
@@ -26465,7 +26465,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 311,
+      "line": 312,
       "symbol": "VocabularyWebController.renderRevealedAnswer",
       "sourceFingerprint": "c31c186f4f4bb68543506d9b28c3bcab461d216ad0de5df0db1e65606f72a0eb",
       "occurrence": 1,
@@ -26489,7 +26489,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 314,
+      "line": 315,
       "symbol": "VocabularyWebController.renderRevealedAnswer",
       "sourceFingerprint": "32a74baab9c96f538b47f052478cabf360acb019d5d89ee384efc1250135bad0",
       "occurrence": 1,
@@ -26507,7 +26507,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 320,
+      "line": 321,
       "symbol": "VocabularyWebController.renderRevealedAnswer",
       "sourceFingerprint": "9b397750c6081c2081ea184754118be37ed2c429842c9707afe1d921f4beab6d",
       "occurrence": 1,
@@ -26523,7 +26523,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 321,
+      "line": 322,
       "symbol": "VocabularyWebController.renderRevealedAnswer",
       "sourceFingerprint": "980995d993580a525e39c2caeef0cf8294850d33d9f7dc4e7c91345314f84b02",
       "occurrence": 1,
@@ -26539,7 +26539,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 325,
+      "line": 326,
       "symbol": "VocabularyWebController.renderRevealedAnswer.ratings",
       "sourceFingerprint": "e4581dd6c558c33a6d06b42515bdf5a62bf4238a597242bd1d489ff60ba45651",
       "occurrence": 1,
@@ -26563,7 +26563,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 326,
+      "line": 327,
       "symbol": "VocabularyWebController.renderRevealedAnswer",
       "sourceFingerprint": "cb15b19ad87ef3bd514ebec028b40760af09f8195e25757cda84824820484af4",
       "occurrence": 1,
@@ -26593,7 +26593,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 329,
+      "line": 330,
       "symbol": "VocabularyWebController.renderRevealedAnswer",
       "sourceFingerprint": "af8f6b0bab301688bc28efc9a591fcf97f2068a309c86f53989844e6015fd35f",
       "occurrence": 1,
@@ -26623,7 +26623,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 335,
+      "line": 336,
       "symbol": "VocabularyWebController.renderCatalog.header",
       "sourceFingerprint": "508e3bdaf7e64eb21952c8474e31afb856415529dc15b7fff2fb229835ef2f6b",
       "occurrence": 1,
@@ -26647,7 +26647,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 336,
+      "line": 337,
       "symbol": "VocabularyWebController.renderCatalog",
       "sourceFingerprint": "dcd342601b1cb7cb80404a20548a9aebd79e343a8d2d9eed73beb89520d33b42",
       "occurrence": 1,
@@ -26677,7 +26677,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 337,
+      "line": 338,
       "symbol": "VocabularyWebController.renderCatalog.toggleId",
       "sourceFingerprint": "30db43c29cf851423c06dfaddc96f8a27a96e3a8433fc0f159d8de8a5b2d1525",
       "occurrence": 1,
@@ -26695,7 +26695,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 338,
+      "line": 339,
       "symbol": "VocabularyWebController.renderCatalog.collapsibleId",
       "sourceFingerprint": "f1eca6c39014db3279a6656f9a15ed31b083c082820dc2084a7753de469884b6",
       "occurrence": 1,
@@ -26713,7 +26713,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 339,
+      "line": 340,
       "symbol": "VocabularyWebController.renderCatalog",
       "sourceFingerprint": "c8762e574c17ae39c78524e12a303e373779220364747f52e698d2c339841c73",
       "occurrence": 1,
@@ -26737,7 +26737,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 344,
+      "line": 345,
       "symbol": "VocabularyWebController.renderCatalog",
       "sourceFingerprint": "2dda6a8f3562ecaa1f8567baef6427471d14727e777a9aefe834545368f25218",
       "occurrence": 1,
@@ -26753,7 +26753,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 349,
+      "line": 350,
       "symbol": "VocabularyWebController.renderCatalog",
       "sourceFingerprint": "f5db6d3fff189075df2836a44fab64cda95d500869e05e0dd63f6fa3a2d639a2",
       "occurrence": 1,
@@ -26771,7 +26771,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 350,
+      "line": 351,
       "symbol": "VocabularyWebController.renderCatalog.collapsible",
       "sourceFingerprint": "63d1977894d3e637e9a8e395de776ff54e077cf1fc1325f82cbd40b2cb98df01",
       "occurrence": 1,
@@ -26795,7 +26795,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 355,
+      "line": 356,
       "symbol": "VocabularyWebController.renderCatalog.inner",
       "sourceFingerprint": "de1d93e3343d5929f72604c7912f9b73c70286f857c9510a5781457783d8812b",
       "occurrence": 1,
@@ -26813,7 +26813,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 356,
+      "line": 357,
       "symbol": "VocabularyWebController.renderCatalog.filterLabel",
       "sourceFingerprint": "500b0aa4941f844cf9d7a8a93c809e96fd0c85ce82ff257b57fc369fe2ad0150",
       "occurrence": 1,
@@ -26837,7 +26837,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 357,
+      "line": 358,
       "symbol": "VocabularyWebController.renderCatalog.filters",
       "sourceFingerprint": "1912d4386f42b95d4380e5ebd3e01c2fa78d27e33ff5bdc1a8004901d3d0c3cb",
       "occurrence": 1,
@@ -26855,7 +26855,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 358,
+      "line": 359,
       "symbol": "VocabularyWebController.renderCatalog",
       "sourceFingerprint": "e4f598189ac9275b0076b7e7b1bad01cc4a0b6d8ce68bbb592fbb73c37010204",
       "occurrence": 1,
@@ -26903,7 +26903,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 359,
+      "line": 360,
       "symbol": "VocabularyWebController.renderCatalog",
       "sourceFingerprint": "1b347b0c70e6ec5722968aaf1c3d4f9d85c0b977f85e6063212f31bcb496c087",
       "occurrence": 1,
@@ -26951,7 +26951,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 360,
+      "line": 361,
       "symbol": "VocabularyWebController.renderCatalog",
       "sourceFingerprint": "a58ecc52473b7355a709ca861d254f7fff7475e612c9b0630bedf4a91a216e14",
       "occurrence": 1,
@@ -26975,7 +26975,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 362,
+      "line": 363,
       "symbol": "VocabularyWebController.renderCatalog",
       "sourceFingerprint": "6ff25184098d815f578e4ff46cf0189f767b133a335be0cbd418e655f73a3d6f",
       "occurrence": 1,
@@ -26993,7 +26993,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 363,
+      "line": 364,
       "symbol": "VocabularyWebController.renderCatalog",
       "sourceFingerprint": "2a3470f1a71494cc9ccc5656db1746e3ed44ac75ab4f0ad0f867f46504719d3e",
       "occurrence": 1,
@@ -27017,7 +27017,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 364,
+      "line": 365,
       "symbol": "VocabularyWebController.renderCatalog.list",
       "sourceFingerprint": "4e6ceb2b6db9444e76d32a2589d9b6ad2a64471b532b7e1091df039b01155766",
       "occurrence": 1,
@@ -27041,7 +27041,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 368,
+      "line": 369,
       "symbol": "VocabularyWebController.renderCatalog",
       "sourceFingerprint": "070059736c2ccb27456a213e56fa4d3204a5c076972ed614d2e352fcbab72d01",
       "occurrence": 1,
@@ -27071,7 +27071,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 369,
+      "line": 370,
       "symbol": "VocabularyWebController.renderCatalog",
       "sourceFingerprint": "550c70c0c35655aa6ac4ad1357d82bd7ef936c660adba61a210443c788057da5",
       "occurrence": 1,
@@ -27089,7 +27089,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 372,
+      "line": 373,
       "symbol": "VocabularyWebController.renderCatalog",
       "sourceFingerprint": "509063c3d6b73b76044c0507727b3966f81e0e39905c47b7840b8bbe9d002490",
       "occurrence": 1,
@@ -27119,7 +27119,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 374,
+      "line": 375,
       "symbol": "VocabularyWebController.renderCatalog",
       "sourceFingerprint": "be1f3697cf4cde94193a5782a1aac7bd7f543e655f93f84543767e6cce0518ad",
       "occurrence": 1,
@@ -27161,7 +27161,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 375,
+      "line": 376,
       "symbol": "VocabularyWebController.renderCatalog",
       "sourceFingerprint": "a04d08dd2fb60b439f25e48447cf95cf0109df02f24f6073d837f22f1336b0e9",
       "occurrence": 1,
@@ -27185,7 +27185,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 378,
+      "line": 379,
       "symbol": "VocabularyWebController.renderCatalog.row",
       "sourceFingerprint": "a41c1bd2f8f5d53660ea0066895cefe90ac1f8bcbe4c53d6a327dac998a292ea",
       "occurrence": 1,
@@ -27209,7 +27209,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 379,
+      "line": 380,
       "symbol": "VocabularyWebController.renderCatalog.checkbox",
       "sourceFingerprint": "77506843f4b6cdbf2834c517497fd1af292b6d86885d5f82f7c9148c86e8be10",
       "occurrence": 1,
@@ -27227,7 +27227,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 380,
+      "line": 381,
       "symbol": "VocabularyWebController.renderCatalog",
       "sourceFingerprint": "0adb66e9fc59348bfa0c20340761c0ea2062212ec488e905af1511fbb2e58694",
       "occurrence": 1,
@@ -27245,7 +27245,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 383,
+      "line": 384,
       "symbol": "VocabularyWebController.renderCatalog",
       "sourceFingerprint": "a001a92ac1ffeb2e37f59cbf8445106c9c749cf73b6a90a5dde78c40970b9c7f",
       "occurrence": 1,
@@ -27263,7 +27263,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 386,
+      "line": 387,
       "symbol": "VocabularyWebController.renderCatalog",
       "sourceFingerprint": "dd462774b94c64f2ab920998dc256e3d8c99ac8daa0e07428d752df3a94c8b11",
       "occurrence": 1,
@@ -27281,7 +27281,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 387,
+      "line": 388,
       "symbol": "VocabularyWebController.renderCatalog",
       "sourceFingerprint": "0f0146dc8771df82c80a1ea619c6be4d6f636b0cd634c4f281c1000417f8a8c2",
       "occurrence": 1,
@@ -27305,7 +27305,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 388,
+      "line": 389,
       "symbol": "VocabularyWebController.renderCatalog",
       "sourceFingerprint": "0badb094f8c1fae674d95db936d78f34b964563ac878df13c6ff194257ac872f",
       "occurrence": 1,
@@ -27323,7 +27323,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 390,
+      "line": 391,
       "symbol": "VocabularyWebController.renderCatalog",
       "sourceFingerprint": "48dd839e15a25d2de17911854f9be4b99c497c05a3514b7be819e354281ba8a1",
       "occurrence": 1,
@@ -27347,7 +27347,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 391,
+      "line": 392,
       "symbol": "VocabularyWebController.renderCatalog",
       "sourceFingerprint": "a95e9edaeb0716a610eb894e6f073a0d666ecb1406c8c4a9abd1fab3cf795ebd",
       "occurrence": 1,
@@ -27365,7 +27365,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 398,
+      "line": 399,
       "symbol": "VocabularyWebController.renderCatalog.actions",
       "sourceFingerprint": "44fcff8cc34c79e4cb9a7af2bc7237177aba70a875b7bb31701c06435133dc8c",
       "occurrence": 1,
@@ -27389,7 +27389,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 399,
+      "line": 400,
       "symbol": "VocabularyWebController.renderCatalog",
       "sourceFingerprint": "eaa46df2b74ca6bc5d256bf410ac6a4f669d21690cb42c989dabce0fcecb66f0",
       "occurrence": 1,
@@ -27413,7 +27413,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 400,
+      "line": 401,
       "symbol": "VocabularyWebController.renderCatalog.importLabel",
       "sourceFingerprint": "a5b0f9d528247c2c9d4943412e76032a1767c34a4b0451eafde94ca7c1b35824",
       "occurrence": 1,
@@ -27437,7 +27437,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 401,
+      "line": 402,
       "symbol": "VocabularyWebController.renderCatalog.input",
       "sourceFingerprint": "7c5ad6e4aa1afa7076de2f313e5725c0328eb8ac7470deb3c287a853b446d3aa",
       "occurrence": 1,
@@ -27455,7 +27455,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 402,
+      "line": 403,
       "symbol": "VocabularyWebController.renderCatalog",
       "sourceFingerprint": "526fbeb533ef2ba315fe9f3eb89250b9234a91c624ef96e19b9f31eef227623b",
       "occurrence": 1,
@@ -27479,7 +27479,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 403,
+      "line": 404,
       "symbol": "VocabularyWebController.renderCatalog",
       "sourceFingerprint": "c93bdf996ac0f3579f6844c95489c8c132ae135a60d30cef26b9acdc07d31ef5",
       "occurrence": 1,
@@ -27497,7 +27497,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 405,
+      "line": 406,
       "symbol": "VocabularyWebController.renderCatalog",
       "sourceFingerprint": "95a662c9172e56b158eeb2afa5a439acff04c8eca1b199cb90cd0ce3dfb7aec9",
       "occurrence": 1,
@@ -27515,7 +27515,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 406,
+      "line": 407,
       "symbol": "VocabularyWebController.renderCatalog",
       "sourceFingerprint": "5fbf6636cc5fe3925f6de5e2daf9f177627ccb132ab05f55bfb271a6576f30d6",
       "occurrence": 1,
@@ -27533,7 +27533,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 410,
+      "line": 411,
       "symbol": "VocabularyWebController.renderCatalog",
       "sourceFingerprint": "e6b4a447ea957bac42c13fb3a451e8ce5d640ab8238be48edea3e9985ddf4b67",
       "occurrence": 1,
@@ -27551,7 +27551,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 411,
+      "line": 412,
       "symbol": "VocabularyWebController.renderCatalog",
       "sourceFingerprint": "ac9f31194ee3cb1d770c3a69e456ebe4a8fd8ddb60217934f3249c69d4c715d4",
       "occurrence": 1,
@@ -27569,7 +27569,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 419,
+      "line": 420,
       "symbol": "VocabularyWebController.renderEditor.editorSection",
       "sourceFingerprint": "a6264b25da56c3424c24f0a34a61f01ef81b7786eac97381bb99fa044d64a4d0",
       "occurrence": 1,
@@ -27593,7 +27593,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 420,
+      "line": 421,
       "symbol": "VocabularyWebController.renderEditor",
       "sourceFingerprint": "ab28067b66d40613f03467083a897286acdf6df5fd1c34708369ed99fd909cfb",
       "occurrence": 1,
@@ -27623,7 +27623,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 421,
+      "line": 422,
       "symbol": "VocabularyWebController.renderEditor.fields",
       "sourceFingerprint": "fed68c475f37f0c80628a03bba13e174d8124269db6bebe7a0474c01217d1ab4",
       "occurrence": 1,
@@ -27647,7 +27647,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 422,
+      "line": 423,
       "symbol": "VocabularyWebController.renderEditor",
       "sourceFingerprint": "9c706d041403a0a498fa405682cbb566d9f79cb544355c948aff106e56c3be00",
       "occurrence": 1,
@@ -27665,7 +27665,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 423,
+      "line": 424,
       "symbol": "VocabularyWebController.renderEditor",
       "sourceFingerprint": "02802199acdc0f65b7e3eefb77d81bd48d1b734435f37a60fe290535d81fd9a6",
       "occurrence": 1,
@@ -27683,7 +27683,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 424,
+      "line": 425,
       "symbol": "VocabularyWebController.renderEditor",
       "sourceFingerprint": "df1f98dd054db39b476867bdec181ea9ad033b4e7f0badaf351351a4fafd4838",
       "occurrence": 1,
@@ -27701,7 +27701,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 425,
+      "line": 426,
       "symbol": "VocabularyWebController.renderEditor",
       "sourceFingerprint": "e8b319504a5a925052ed4584c3c959499ed2ab8d997919de635f6297c82bb658",
       "occurrence": 1,
@@ -27719,7 +27719,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 426,
+      "line": 427,
       "symbol": "VocabularyWebController.renderEditor.levelLabel",
       "sourceFingerprint": "10b79c34686d426c0477121032d6a9470bdc900536d1a184d3edc5ffa8c08955",
       "occurrence": 1,
@@ -27743,7 +27743,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 427,
+      "line": 428,
       "symbol": "VocabularyWebController.renderEditor.level",
       "sourceFingerprint": "c189a06070443a7c3dced0da64bb401957d8bf8e603bb32339adb975b5966230",
       "occurrence": 1,
@@ -27803,7 +27803,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 428,
+      "line": 429,
       "symbol": "VocabularyWebController.renderEditor",
       "sourceFingerprint": "0651f5960a937177d91a5c0780f85b1365d3609632c7a7a6625b83817d86c1ba",
       "occurrence": 1,
@@ -27821,7 +27821,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 429,
+      "line": 430,
       "symbol": "VocabularyWebController.renderEditor.actions",
       "sourceFingerprint": "ce56aa42f72620adc529f16d436796cbb093fedbab89b94aa79221760df35b72",
       "occurrence": 1,
@@ -27845,7 +27845,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 430,
+      "line": 431,
       "symbol": "VocabularyWebController.renderEditor",
       "sourceFingerprint": "c577dfc7d279ba682cdb9937a5819d8acee8a99d82d08fb85d55cbe879164b8a",
       "occurrence": 1,
@@ -27869,7 +27869,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 432,
+      "line": 433,
       "symbol": "VocabularyWebController.renderEditor",
       "sourceFingerprint": "0e9999bfff81575f39e5a45e26b633d37dd07d010d3f31134b04395a9b7b3608",
       "occurrence": 1,
@@ -27887,7 +27887,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 433,
+      "line": 434,
       "symbol": "VocabularyWebController.renderEditor",
       "sourceFingerprint": "fe3887196523a37ce4ade580c8f09d0246666a74e16fa1e80d348d098f8b3cdc",
       "occurrence": 1,
@@ -27905,7 +27905,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 434,
+      "line": 435,
       "symbol": "VocabularyWebController.renderEditor",
       "sourceFingerprint": "9b3eda6ada7ebae7613faf172eb5b246f06d4489c14fef8e348a0ed897d125b5",
       "occurrence": 1,
@@ -27923,7 +27923,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 445,
+      "line": 446,
       "symbol": "VocabularyWebController.saveOwn.id",
       "sourceFingerprint": "090dbbb7dceac2dd7ec776ae0623599c07946fc3f7d5488711ed043d46790c85",
       "occurrence": 1,
@@ -27947,7 +27947,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 449,
+      "line": 450,
       "symbol": "VocabularyWebController.saveOwn",
       "sourceFingerprint": "8ee820bf4096ae0bcdd14edf12853efe5155bfc0b95f61286ab73b0684485313",
       "occurrence": 1,
@@ -27965,7 +27965,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 457,
+      "line": 458,
       "symbol": "VocabularyWebController",
       "sourceFingerprint": "83eb554d201bb230fa4a5f0945f4201e93f8a0a02c966a758446fab9553b7aad",
       "occurrence": 1,
@@ -27981,7 +27981,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 469,
+      "line": 470,
       "symbol": "VocabularyWebController",
       "sourceFingerprint": "5484d5f17d30a0f3d9d0828fed502eda1e08c46f849f08e8887c6656e2adef99",
       "occurrence": 1,
@@ -27997,7 +27997,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 479,
+      "line": 480,
       "symbol": "VocabularyWebController",
       "sourceFingerprint": "3036b37741dae30c16b0e59a743d1c7d8e1cabc61c78c29da519927ade8c8267",
       "occurrence": 1,
@@ -28013,7 +28013,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 497,
+      "line": 498,
       "symbol": "VocabularyWebController.rate",
       "sourceFingerprint": "a9e427a4e7dab00bc3600ba66df9384c01eaf5951bc92323f8a63db734404fbe",
       "occurrence": 1,
@@ -28031,7 +28031,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 502,
+      "line": 503,
       "symbol": "VocabularyWebController.commit",
       "sourceFingerprint": "c44024f04d7dddcf39c970fc3acc8c4c53780798ef24a55d4fcc8024b60983ae",
       "occurrence": 1,
@@ -28049,7 +28049,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 521,
+      "line": 523,
       "symbol": "VocabularyWebController.writeDocument",
       "sourceFingerprint": "d00d3eda6ddcee07b55f6f97bed1694936fb7ea983be63d93bb8aadc9536722c",
       "occurrence": 1,
@@ -28067,7 +28067,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 524,
+      "line": 526,
       "symbol": "VocabularyWebController.writeDocument",
       "sourceFingerprint": "369786d8959dd97633a4638f286ea6310b1c95f11d30a37d75ad602661c5407d",
       "occurrence": 1,
@@ -28085,7 +28085,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 529,
+      "line": 531,
       "symbol": "VocabularyWebController.writeDocument",
       "sourceFingerprint": "cfe728ef2b63e965e434188775a433bbd2c0ac62d232c7224d58fc075a65b533",
       "occurrence": 1,
@@ -28103,7 +28103,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 534,
+      "line": 536,
       "symbol": "EditorDraft",
       "sourceFingerprint": "a78383c4ce975b789f02956d2ba99e42df15a5ba87e5c1a88a834fb5f9fb6b16",
       "occurrence": 1,
@@ -28133,7 +28133,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 535,
+      "line": 537,
       "symbol": "example",
       "sourceFingerprint": "ab5ca59d15c45103736e495498c13a6727337c893728abb04ab23ee671b34abb",
       "occurrence": 1,
@@ -28157,7 +28157,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 537,
+      "line": 539,
       "symbol": "member",
       "sourceFingerprint": "54d8dc8025da435bbd196f980e8e0f392f1c8ae42d5a63e0aacefb95719171eb",
       "occurrence": 1,
@@ -28173,7 +28173,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 538,
+      "line": 540,
       "symbol": "file-scope",
       "sourceFingerprint": "7f82c8799b458197f3125c4f9799f682c51a0ccbc07ea8907a19fafbf15ff53d",
       "occurrence": 1,
@@ -28189,7 +28189,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 539,
+      "line": 541,
       "symbol": "file-scope",
       "sourceFingerprint": "6d87eec9683bb1ad003fd978fa73ab653d377f8e246b9be5f41893a272aabcf8",
       "occurrence": 1,
@@ -28205,7 +28205,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 540,
+      "line": 542,
       "symbol": "file-scope",
       "sourceFingerprint": "be5a925c355507040c1e89b421f6aa6ec511704806a390ad2cd4ddc0ab72065a",
       "occurrence": 1,
@@ -28221,7 +28221,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 541,
+      "line": 543,
       "symbol": "file-scope",
       "sourceFingerprint": "3e04765b4f382078b35e14cece5c1ca527b2b43c8618eed2b29d4f1ee4318b2e",
       "occurrence": 1,
@@ -28237,7 +28237,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 552,
+      "line": 554,
       "symbol": "HTMLElement",
       "sourceFingerprint": "683df6741d4020bdd65b96b14e7355b778f15c9af22b4a6e644ad87a1f26ecd8",
       "occurrence": 1,
@@ -28255,7 +28255,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 553,
+      "line": 555,
       "symbol": "file-scope",
       "sourceFingerprint": "a9d343ea004a1b73227d19887c0916c2da1f8daad941fcf65fdc88f5fd18381d",
       "occurrence": 1,
@@ -28279,7 +28279,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 555,
+      "line": 557,
       "symbol": "file-scope",
       "sourceFingerprint": "96a5bb53291c1de1b608e37d68e397b9e7875f64752ab7ad24325d7aad44a489",
       "occurrence": 1,
@@ -28295,7 +28295,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 556,
+      "line": 558,
       "symbol": "file-scope",
       "sourceFingerprint": "2d7be3df444e057ed6a49db09f0e8914365df4b7df9f7891418a40b91f3bdb9c",
       "occurrence": 1,
@@ -28311,7 +28311,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 557,
+      "line": 559,
       "symbol": "file-scope",
       "sourceFingerprint": "3106c3f0df5f7a595a481c3dd994d876dbecf56b8d39b8a1f28c76b2991a57b0",
       "occurrence": 1,
@@ -28327,7 +28327,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 559,
+      "line": 561,
       "symbol": "HTMLElement",
       "sourceFingerprint": "cd79d4dc6357f261295f18678128f2896f65f7d6e2c3ccfadcc9bace186335e1",
       "occurrence": 1,
@@ -28345,7 +28345,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 560,
+      "line": 562,
       "symbol": "file-scope",
       "sourceFingerprint": "86a3c53ba1f7c9f447c673b5c246daa2ff983eba8a30859b07b6afc99f2ce855",
       "occurrence": 1,
@@ -28363,7 +28363,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 561,
+      "line": 563,
       "symbol": "file-scope",
       "sourceFingerprint": "4908747cad7571f21fd8d977589a6bd40256f80966d59a5996b984010402783b",
       "occurrence": 1,
@@ -28381,7 +28381,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 562,
+      "line": 564,
       "symbol": "file-scope",
       "sourceFingerprint": "99244a5ad72ef740ccad3dd7fa31fc7d8101bf78f67801a2b3ba9cd7fc69dc33",
       "occurrence": 1,
@@ -28399,7 +28399,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 563,
+      "line": 565,
       "symbol": "file-scope",
       "sourceFingerprint": "aa40bb42f7f747622acb33689010421f294437198eb3e6be17f0f254d52acc10",
       "occurrence": 1,
@@ -28417,7 +28417,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 567,
+      "line": 569,
       "symbol": "file-scope",
       "sourceFingerprint": "791c3781cb382440f19883c7d8f9f36936d98fc8ae6615c29d13e3c2369a37ad",
       "occurrence": 1,
@@ -28435,7 +28435,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 568,
+      "line": 570,
       "symbol": "file-scope",
       "sourceFingerprint": "81b89f9d0061bae740165338865c76e7442b1c61075d1584d1df60569a75243e",
       "occurrence": 1,
@@ -28453,7 +28453,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 569,
+      "line": 571,
       "symbol": "file-scope",
       "sourceFingerprint": "80db85c31edd7d9b6407b3df6047bc3bd2c317116b4e21261c04e18d3e374d61",
       "occurrence": 1,
@@ -28477,7 +28477,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 574,
+      "line": 576,
       "symbol": "HTMLElement.wrapper",
       "sourceFingerprint": "8a2c7fd2bec2b7e4e4bab0d982c86ec044e43e702c07b63beab206d9f77fca12",
       "occurrence": 1,
@@ -28495,7 +28495,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 575,
+      "line": 577,
       "symbol": "HTMLElement.input",
       "sourceFingerprint": "6e695217c9085020c3464a834ac5ea5bc28a8031193f5747372b3192bd9fd03a",
       "occurrence": 1,
@@ -28513,7 +28513,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 577,
+      "line": 579,
       "symbol": "HTMLElement",
       "sourceFingerprint": "97a8fc617b4ccb7e09730f8fcd6e20e6ff57af3bfa10e3bbea635a8a740c10f2",
       "occurrence": 1,
@@ -28531,7 +28531,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 581,
+      "line": 583,
       "symbol": "HTMLElement",
       "sourceFingerprint": "f5bd0de46554f2be2c259e8ef29bc587eb443731ace421ceecb020f17bcf4cce",
       "occurrence": 1,
@@ -28549,7 +28549,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 582,
+      "line": 584,
       "symbol": "HTMLElement",
       "sourceFingerprint": "cda744886e1c051ef48836cb69353d4e11f18d395471f0b445d7c43ccdcea6bd",
       "occurrence": 1,
@@ -28567,7 +28567,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 583,
+      "line": 585,
       "symbol": "HTMLElement",
       "sourceFingerprint": "024bea21c7b5ffdc1e5186df96c71eeca5c10ab5eae46ed18639c3a35d3bf24e",
       "occurrence": 1,
@@ -28591,7 +28591,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 591,
+      "line": 593,
       "symbol": "randomUuid.hex",
       "sourceFingerprint": "99550c61a85720b8336b68fbe8a184640d7614c4bd124dbfa0221fbd2b0814f7",
       "occurrence": 1,
@@ -28609,7 +28609,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 594,
+      "line": 596,
       "symbol": "randomUuid",
       "sourceFingerprint": "aef5620b6c7f278a4ba04e27a5596fefacef7eaa71b6ad93675360f167866b05",
       "occurrence": 1,
@@ -28627,7 +28627,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 603,
+      "line": 605,
       "symbol": "download.digits",
       "sourceFingerprint": "a455673bfd9cf37d8cf85c057bf634fb2ae09d650772162893a8299518f6b769",
       "occurrence": 1,
@@ -28645,7 +28645,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 607,
+      "line": 609,
       "symbol": "download",
       "sourceFingerprint": "ed867092dbd87b6e3e8b5058bd9c39a91a855f37d4b2d61bfd3953d1197f5506",
       "occurrence": 1,
@@ -28663,7 +28663,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 610,
+      "line": 612,
       "symbol": "download.link",
       "sourceFingerprint": "bf7419e2926bd8a729f50aefbaad05bf0833964cb30202e24585658b6b5f4d24",
       "occurrence": 1,
@@ -28681,7 +28681,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
-      "line": 611,
+      "line": 613,
       "symbol": "download",
       "sourceFingerprint": "bfb43375c3804a1368f0033b95f66f0809bf7894968ab90f3037087324ccba87",
       "occurrence": 1,
@@ -55584,25 +55584,145 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/grammar/AnswerNormalizer.kt",
-      "line": 13,
-      "symbol": "file-scope",
-      "sourceFingerprint": "5340adeed09fb85ed79bb8fb917161c825f875e5048a14924272c6c5ed4e3a27",
+      "line": 16,
+      "symbol": "Char",
+      "sourceFingerprint": "0126570195d6c034bb131d0c318caf4293d1bcb6f6ab9283c1912b70cf346c4d",
       "occurrence": 1,
-      "source": ".replace(Regex(\"\\\\s+\"), \" \")",
+      "source": "private fun Char.isJsWhitespace(): Boolean = this in '\\u0009'..'\\u000d' || this == ' ' ||",
       "tokens": [
-        "\"\\\\s+\"",
-        "\" \""
+        "'\\u0009'",
+        "'\\u000d'",
+        "' '"
       ],
       "parts": [
         {
           "ordinal": 0,
           "category": "runtime-morphology",
-          "reason": "Morphology branch, ending, agreement key or generated-form assembly; fixed examples/forms are supplied by the pack."
+          "reason": "ECMAScript whitespace character used by the shared answer normalizer to match web input behavior; no lesson text is authored here."
         },
         {
           "ordinal": 1,
           "category": "runtime-morphology",
-          "reason": "Morphology branch, ending, agreement key or generated-form assembly; fixed examples/forms are supplied by the pack."
+          "reason": "ECMAScript whitespace character used by the shared answer normalizer to match web input behavior; no lesson text is authored here."
+        },
+        {
+          "ordinal": 2,
+          "category": "runtime-morphology",
+          "reason": "ECMAScript whitespace character used by the shared answer normalizer to match web input behavior; no lesson text is authored here."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/grammar/AnswerNormalizer.kt",
+      "line": 17,
+      "symbol": "file-scope",
+      "sourceFingerprint": "14609d37d67ce67213dc81098a6b1d123a0fb6311a86a9cef040b40f80d4366f",
+      "occurrence": 1,
+      "source": "this == '\\u00a0' || this == '\\u1680' || this in '\\u2000'..'\\u200a' ||",
+      "tokens": [
+        "'\\u00a0'",
+        "'\\u1680'",
+        "'\\u2000'",
+        "'\\u200a'"
+      ],
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "runtime-morphology",
+          "reason": "ECMAScript whitespace character used by the shared answer normalizer to match web input behavior; no lesson text is authored here."
+        },
+        {
+          "ordinal": 1,
+          "category": "runtime-morphology",
+          "reason": "ECMAScript whitespace character used by the shared answer normalizer to match web input behavior; no lesson text is authored here."
+        },
+        {
+          "ordinal": 2,
+          "category": "runtime-morphology",
+          "reason": "ECMAScript whitespace character used by the shared answer normalizer to match web input behavior; no lesson text is authored here."
+        },
+        {
+          "ordinal": 3,
+          "category": "runtime-morphology",
+          "reason": "ECMAScript whitespace character used by the shared answer normalizer to match web input behavior; no lesson text is authored here."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/grammar/AnswerNormalizer.kt",
+      "line": 18,
+      "symbol": "file-scope",
+      "sourceFingerprint": "4b5452182512c380a1674b41793e20f4275be10470934dd3125742bcaf932a6e",
+      "occurrence": 1,
+      "source": "this == '\\u2028' || this == '\\u2029' || this == '\\u202f' ||",
+      "tokens": [
+        "'\\u2028'",
+        "'\\u2029'",
+        "'\\u202f'"
+      ],
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "runtime-morphology",
+          "reason": "ECMAScript whitespace character used by the shared answer normalizer to match web input behavior; no lesson text is authored here."
+        },
+        {
+          "ordinal": 1,
+          "category": "runtime-morphology",
+          "reason": "ECMAScript whitespace character used by the shared answer normalizer to match web input behavior; no lesson text is authored here."
+        },
+        {
+          "ordinal": 2,
+          "category": "runtime-morphology",
+          "reason": "ECMAScript whitespace character used by the shared answer normalizer to match web input behavior; no lesson text is authored here."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/grammar/AnswerNormalizer.kt",
+      "line": 19,
+      "symbol": "file-scope",
+      "sourceFingerprint": "362fed0c25a0e03b263e8b1e503e2ed41374baa3db0bf9471cc1280d34711c16",
+      "occurrence": 1,
+      "source": "this == '\\u205f' || this == '\\u3000' || this == '\\ufeff'",
+      "tokens": [
+        "'\\u205f'",
+        "'\\u3000'",
+        "'\\ufeff'"
+      ],
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "runtime-morphology",
+          "reason": "ECMAScript whitespace character used by the shared answer normalizer to match web input behavior; no lesson text is authored here."
+        },
+        {
+          "ordinal": 1,
+          "category": "runtime-morphology",
+          "reason": "ECMAScript whitespace character used by the shared answer normalizer to match web input behavior; no lesson text is authored here."
+        },
+        {
+          "ordinal": 2,
+          "category": "runtime-morphology",
+          "reason": "ECMAScript whitespace character used by the shared answer normalizer to match web input behavior; no lesson text is authored here."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/grammar/AnswerNormalizer.kt",
+      "line": 34,
+      "symbol": "collapseJsWhitespace",
+      "sourceFingerprint": "07be4eb7c10a31561ae48cf329871ef20ac164b6067a403490db3c6ec11185d3",
+      "occurrence": 1,
+      "source": "if (!previousWhitespace) append(' ')",
+      "tokens": [
+        "' '"
+      ],
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "runtime-morphology",
+          "reason": "ASCII space inserted when collapsing ECMAScript whitespace in an answer; this is normalization behavior, not course copy."
         }
       ]
     },
@@ -69790,7 +69910,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 29,
+      "line": 30,
       "symbol": "file-scope",
       "sourceFingerprint": "70439073162af2c40575b4192954bad89d96c7a08bf8e7118fcb5fdbec6061d8",
       "occurrence": 1,
@@ -69806,7 +69926,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 30,
+      "line": 31,
       "symbol": "file-scope",
       "sourceFingerprint": "13e8c83a3d657be184538316378856655c40b775ac8f772e65c4f2b7952758f3",
       "occurrence": 1,
@@ -69822,7 +69942,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 32,
+      "line": 33,
       "symbol": "file-scope",
       "sourceFingerprint": "67d5370694901fd7ccb140e9efe5231c0c8bd07a5fb5f71927c797c43261290f",
       "occurrence": 1,
@@ -69838,7 +69958,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 33,
+      "line": 34,
       "symbol": "file-scope",
       "sourceFingerprint": "e7ecd7e346a336b7925e061f2e6638f9a3a0dec4a7c10e642ce212122e534512",
       "occurrence": 1,
@@ -69854,7 +69974,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 38,
+      "line": 39,
       "symbol": "StudyDirection.RussianToPolish",
       "sourceFingerprint": "ef9385e221eb51439e92be28247605954cf4a15df5812270d03d649cb68e54ac",
       "occurrence": 1,
@@ -69872,7 +69992,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 39,
+      "line": 40,
       "symbol": "StudyDirection.PolishToRussian",
       "sourceFingerprint": "093dd923a1064a7e86263f5185e2b9507e669b145d87b762d44d7ad6cec6620a",
       "occurrence": 1,
@@ -69890,7 +70010,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 41,
+      "line": 42,
       "symbol": "StudyDirection",
       "sourceFingerprint": "da096ed21af04829a1a7aa6bbf40f246ffb9333215c511ea8566ce232caa25a0",
       "occurrence": 1,
@@ -69906,7 +70026,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 42,
+      "line": 43,
       "symbol": "StudyDirection",
       "sourceFingerprint": "87c82d1b508e090f603cbd2a7d8e3884145ea4df899b480db665b0452be90a3b",
       "occurrence": 1,
@@ -69922,7 +70042,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 43,
+      "line": 44,
       "symbol": "StudyDirection",
       "sourceFingerprint": "3201df109d99a40dd11635e8e8e39420e557939e5512f7360eb5d1785dfa1bf7",
       "occurrence": 1,
@@ -69938,7 +70058,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 46,
+      "line": 47,
       "symbol": "StudyDirection.nativeToTarget",
       "sourceFingerprint": "4b89d1a2c621adfd9bec88e3ed2ed0adca18cb81d55ca28c02044e70c13b2022",
       "occurrence": 1,
@@ -69956,7 +70076,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 47,
+      "line": 48,
       "symbol": "StudyDirection.targetToNative",
       "sourceFingerprint": "10c8807847ea8d67a228ce1ce6fd87930e7a328ca8d19fbe093893f6def4af67",
       "occurrence": 1,
@@ -69974,7 +70094,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 51,
+      "line": 52,
       "symbol": "file-scope",
       "sourceFingerprint": "efa01b0f773bc22b73fba213feaf362b960bdfed67fe96c5ff9f2cda4f27f4fa",
       "occurrence": 1,
@@ -69990,7 +70110,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 59,
+      "line": 60,
       "symbol": "file-scope",
       "sourceFingerprint": "1ba88a2bfc91bb97fa439943e58ca967f68f3a332d8826214fbdb4b01960640d",
       "occurrence": 1,
@@ -70006,7 +70126,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 70,
+      "line": 71,
       "symbol": "file-scope",
       "sourceFingerprint": "eaabe569000028d84588cc216a60ae519e79df52b03fec6c00e770a3f089e2bf",
       "occurrence": 1,
@@ -70022,7 +70142,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 71,
+      "line": 72,
       "symbol": "file-scope",
       "sourceFingerprint": "43c42810e9ddb1bf48b53df30930a6db962a2f8857301077108116b960c5d41d",
       "occurrence": 1,
@@ -70038,7 +70158,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 72,
+      "line": 73,
       "symbol": "file-scope",
       "sourceFingerprint": "7c8464daaeb075c362da46089d1af0ba6c82c744f93fb23062b09676df43a7a8",
       "occurrence": 1,
@@ -70054,7 +70174,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 73,
+      "line": 74,
       "symbol": "file-scope",
       "sourceFingerprint": "b6086c74e4958366442b94c4ca17c9fd6456ddb1518fc81cd85f3eb5859a61d8",
       "occurrence": 1,
@@ -70070,7 +70190,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 74,
+      "line": 75,
       "symbol": "languageDisplayNames",
       "sourceFingerprint": "bd88556cc250fb22fe6356d113f25a6012b258cdc0210ed4b621a92214382674",
       "occurrence": 1,
@@ -70118,7 +70238,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 77,
+      "line": 78,
       "symbol": "file-scope",
       "sourceFingerprint": "67400641005085de3fcb1d4078cbe6d5fdd48f6789cd117bfe7071c043bea31d",
       "occurrence": 1,
@@ -70134,7 +70254,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 79,
+      "line": 80,
       "symbol": "file-scope",
       "sourceFingerprint": "5eefb91230ac12c1ba61f1fe053c71e98bda41f033b5ed40065f33477ac221f6",
       "occurrence": 1,
@@ -70150,7 +70270,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 80,
+      "line": 81,
       "symbol": "file-scope",
       "sourceFingerprint": "754b440baa9c29e446929a3dda11055a32513028110fca63947df8c437137028",
       "occurrence": 1,
@@ -70166,7 +70286,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 85,
+      "line": 86,
       "symbol": "studyDirectionOptions.label",
       "sourceFingerprint": "935707e59d8a9185578c5acb44497cd528a2a90c7649aec3cf4437f96c5b2393",
       "occurrence": 1,
@@ -70196,7 +70316,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 92,
+      "line": 93,
       "symbol": "file-scope",
       "sourceFingerprint": "bf1adde54a5c658a7d28b313b9182faf9c71a2f11b3d38ce313ef1afb631e4cb",
       "occurrence": 1,
@@ -70212,7 +70332,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 94,
+      "line": 95,
       "symbol": "languageAdverbs",
       "sourceFingerprint": "a429a96fadc6cc8dd73cf53298fba4fc9c2c4ead9b03bd08ec2b5242dd9d8925",
       "occurrence": 1,
@@ -70260,7 +70380,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 99,
+      "line": 100,
       "symbol": "file-scope",
       "sourceFingerprint": "3cdae71ca4b17f96c1fab6656233ea51cf984d20d2fae55ccbb62a8b6ca70b7f",
       "occurrence": 1,
@@ -70276,7 +70396,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 100,
+      "line": 101,
       "symbol": "file-scope",
       "sourceFingerprint": "db7e9990c6fa26cf7438a2a43d1a3c0cc611a8342e5f3e1461a01b178c433452",
       "occurrence": 1,
@@ -70292,7 +70412,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 101,
+      "line": 102,
       "symbol": "file-scope",
       "sourceFingerprint": "7f65c1b082ded48cd366cf2639a5d4f6bdd60d26a3ced0b8a3f51c539962e6db",
       "occurrence": 1,
@@ -70308,7 +70428,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 102,
+      "line": 103,
       "symbol": "file-scope",
       "sourceFingerprint": "2d9045f877df8499ff790cca352e7c14d4f3e24feef75889199ca77f900eb090",
       "occurrence": 1,
@@ -70324,7 +70444,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 106,
+      "line": 107,
       "symbol": "file-scope",
       "sourceFingerprint": "5cc4d0e7066ed6af2b47ed8e9e48325f91833b8edbab864a6cdd01844b018bd0",
       "occurrence": 1,
@@ -70340,7 +70460,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 110,
+      "line": 111,
       "symbol": "StudyDirection",
       "sourceFingerprint": "0cfa1272b702d497a42bee2d9c69eede2002097111b3b4921215581c7011bb17",
       "occurrence": 1,
@@ -70364,7 +70484,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 114,
+      "line": 115,
       "symbol": "file-scope",
       "sourceFingerprint": "730fc74077f16dccb531f4ff94eb3ae2ee94ac901bdfd5140178dea4b9215385",
       "occurrence": 1,
@@ -70380,7 +70500,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 121,
+      "line": 122,
       "symbol": "file-scope",
       "sourceFingerprint": "6130ee399347d0c2e6d3d8fd166a2705f7f494cb8ca75b626e752b62c17530f8",
       "occurrence": 1,
@@ -70396,7 +70516,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 122,
+      "line": 123,
       "symbol": "file-scope",
       "sourceFingerprint": "8ac4573bcbc5958a3fdd3b8ecbe1bdfcd070e742025724f388127ec585a39936",
       "occurrence": 1,
@@ -70412,7 +70532,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 123,
+      "line": 124,
       "symbol": "file-scope",
       "sourceFingerprint": "ca921ae66ae36e5e72134b04db101b37be6fcfb85893b8cc21dab3beae4d39fc",
       "occurrence": 1,
@@ -70428,7 +70548,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 126,
+      "line": 127,
       "symbol": "file-scope",
       "sourceFingerprint": "00f5bbee248dc513984be9de81c6634c535020726d84c40aef71c6cd71765a4a",
       "occurrence": 1,
@@ -70444,7 +70564,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 137,
+      "line": 138,
       "symbol": "VocabularyCodec",
       "sourceFingerprint": "569a602f29bd28911419a70428e6e5a33d2cab65aa7ec710668687756fa1d5d4",
       "occurrence": 1,
@@ -70460,7 +70580,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 138,
+      "line": 139,
       "symbol": "VocabularyCodec",
       "sourceFingerprint": "de01f2aea8d57e9155e019b323fbe27a4ce3fd076d4c62eba8a9a3ae480841a3",
       "occurrence": 1,
@@ -70476,7 +70596,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 139,
+      "line": 140,
       "symbol": "VocabularyCodec",
       "sourceFingerprint": "c4ef10abaf9a2d3419f75a8901d5f761caf609a0455239419c0231d2711887e0",
       "occurrence": 1,
@@ -70492,7 +70612,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 140,
+      "line": 141,
       "symbol": "VocabularyCodec",
       "sourceFingerprint": "3c58373bcfe732becb168998c8660ef7c8f6cb9ab3c8e5872f27ab06376fc2de",
       "occurrence": 1,
@@ -70508,7 +70628,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 142,
+      "line": 143,
       "symbol": "VocabularyCodec",
       "sourceFingerprint": "817f2776f5a45da692eef63438e48b05e5ce8d1cc904715289a7d81d71e01cd1",
       "occurrence": 1,
@@ -70524,7 +70644,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 143,
+      "line": 144,
       "symbol": "VocabularyCodec.key",
       "sourceFingerprint": "3fc0cfe9715d241cf77cea7596a5657de8d13bbdaf00ac20f692cd3aae6c5c5d",
       "occurrence": 1,
@@ -70548,7 +70668,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 145,
+      "line": 146,
       "symbol": "VocabularyCodec.cardKey",
       "sourceFingerprint": "aae786619821bdc48caafeea17cdd9611f637191a3d115d80c716c833254c0b8",
       "occurrence": 1,
@@ -70578,7 +70698,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 154,
+      "line": 155,
       "symbol": "VocabularyCodec.select",
       "sourceFingerprint": "ae8d532e144b784c2916378354ba2b74f48d574978c3e8d0e64a82d4ef787653",
       "occurrence": 1,
@@ -70596,7 +70716,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 168,
+      "line": 169,
       "symbol": "VocabularyCodec",
       "sourceFingerprint": "3ce287c2986f8cf81b86480b2dd439ba9e8f19d903ef4980eab1b63fdd627acd",
       "occurrence": 1,
@@ -70612,11 +70732,11 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 187,
+      "line": 189,
       "symbol": "VocabularyCodec.merge",
-      "sourceFingerprint": "dd79722e4b7476a6d06f72e9cea46d6f6978a4dc744759b467f162cae289e332",
+      "sourceFingerprint": "dfcee48f9059ff4263415304067051e3bd38ecd3d88e6310300e7d5d1b7cfe7f",
       "occurrence": 1,
-      "source": "require(existingLemmas.add(item.lemma.trim().lowercase())) { \"Это польское слово уже есть в словаре\" }",
+      "source": "require(existingLemmas.add(trimJsWhitespace(item.lemma).lowercase())) { \"Это польское слово уже есть в словаре\" }",
       "tokens": [
         "\"Это польское слово уже есть в словаре\""
       ],
@@ -70624,13 +70744,13 @@
         {
           "ordinal": 0,
           "category": "diagnostic",
-          "reason": "Validation error for a duplicate user vocabulary lemma; no lesson content is authored here."
+          "reason": "Duplicate user vocabulary lemma validation message; no lesson content is authored here."
         }
       ]
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 197,
+      "line": 199,
       "symbol": "VocabularyCodec.validate",
       "sourceFingerprint": "f5c8eaa0f17df0e2283357f59933581dce93838fe2857e7b2e270bf958984fb3",
       "occurrence": 1,
@@ -70648,7 +70768,25 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 199,
+      "line": 204,
+      "symbol": "VocabularyCodec.validate",
+      "sourceFingerprint": "3913e944e593253ac12aa0bf7f1260682e630fc13d4062c4d6d6cf7e97021a83",
+      "occurrence": 1,
+      "source": ".all { it.isNotEmpty() && it.length <= 240 }) { \"Заполни слово, перевод, форму и пример (до 240 символов).\" }",
+      "tokens": [
+        "\"Заполни слово, перевод, форму и пример (до 240 символов).\""
+      ],
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "diagnostic",
+          "reason": "Required vocabulary field and length validation message shown for invalid user entries; no lesson content is authored here."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
+      "line": 205,
       "symbol": "VocabularyCodec.validate",
       "sourceFingerprint": "4bc744ecf6a7e5051d07be5a99f796d8eab82a0d8beb07e7e2a0a94d6f43f1dc",
       "occurrence": 1,
@@ -70702,7 +70840,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 203,
+      "line": 210,
       "symbol": "VocabularyCodec.validate",
       "sourceFingerprint": "4d7d64089f5ab86fc2d0a54d9e021124449395dcedd5395f5ab86ab8bf1b23c0",
       "occurrence": 1,
@@ -70718,7 +70856,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 205,
+      "line": 212,
       "symbol": "VocabularyCodec.validate",
       "sourceFingerprint": "789b196f046908b79e467c537d7ba691be5a0170a30461016edea6c6dc9d44d3",
       "occurrence": 1,
@@ -70742,7 +70880,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 211,
+      "line": 218,
       "symbol": "VocabularyCodec.decode",
       "sourceFingerprint": "9b5a61d8c7250acf000a0710b68df22091d951c2f637c6a730c36ec9ce48ab8c",
       "occurrence": 1,
@@ -70766,7 +70904,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 212,
+      "line": 219,
       "symbol": "VocabularyCodec.decode.selected",
       "sourceFingerprint": "8bf92340de295a4ed28d25317dad0ea38ab049bc37f0367ebe83b10b5f1f3bcd",
       "occurrence": 1,
@@ -70784,7 +70922,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 213,
+      "line": 220,
       "symbol": "VocabularyCodec.decode.custom",
       "sourceFingerprint": "a657f844d03ece8142ab7a581c53bf07c865d5c4301ddcb672596d67b2a5d068",
       "occurrence": 1,
@@ -70802,7 +70940,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 215,
+      "line": 222,
       "symbol": "VocabularyCodec.decode",
       "sourceFingerprint": "35922488605ecca64686ac5243943e48b9e78f8b9e76808ec501ebc0afc423e2",
       "occurrence": 1,
@@ -70838,7 +70976,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 216,
+      "line": 223,
       "symbol": "VocabularyCodec.decode",
       "sourceFingerprint": "fa61a93ddb3f83d45433946d50b86eabd16a2c544eca4a08ce07943c5acbc6a9",
       "occurrence": 1,
@@ -70862,7 +71000,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 218,
+      "line": 225,
       "symbol": "VocabularyCodec.decode.cards",
       "sourceFingerprint": "54891f59e78e4d7fdac13d3abe215d7d4613a7c215342d17f8828c41689d7b67",
       "occurrence": 1,
@@ -70880,7 +71018,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 220,
+      "line": 227,
       "symbol": "VocabularyCodec.decode.wire",
       "sourceFingerprint": "a41a9c456942703faccf79fdafa35267a3b042f209af40b503ae449a9846fda0",
       "occurrence": 1,
@@ -70910,7 +71048,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 221,
+      "line": 228,
       "symbol": "VocabularyCodec.decode",
       "sourceFingerprint": "f4141d5b03b72a05c1a7128d9a7d6bdaeb73b98467461e77a4e6969ae3b15b5b",
       "occurrence": 1,
@@ -70940,7 +71078,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 222,
+      "line": 229,
       "symbol": "VocabularyCodec.decode",
       "sourceFingerprint": "397c2d2350d8a19864c5ecab8334e47f9afa1ed9250ba479ed09e103a97504ed",
       "occurrence": 1,
@@ -70970,7 +71108,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 223,
+      "line": 230,
       "symbol": "VocabularyCodec.decode",
       "sourceFingerprint": "7b51ccfc4b0af119b7e47e66247fd16122ea32629456d91bef700a18a77fc0ae",
       "occurrence": 1,
@@ -70994,7 +71132,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 234,
+      "line": 241,
       "symbol": "VocabularyCodec.encode",
       "sourceFingerprint": "f857835095f614636ec68dab60252ca3e15af8be5a7106d8d0d51120dc9047af",
       "occurrence": 1,
@@ -71012,7 +71150,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 235,
+      "line": 242,
       "symbol": "VocabularyCodec.encode",
       "sourceFingerprint": "040709c53c28a639754f69f8d0fb62e8a0978b1c37c553e3e076fdea89b34f31",
       "occurrence": 1,
@@ -71030,11 +71168,11 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 236,
+      "line": 243,
       "symbol": "VocabularyCodec.encode",
-      "sourceFingerprint": "e007fa2fe649e7d35f76b17e4e6bb1cdd997d4a835d38a0f4fdfdaff3d374d51",
+      "sourceFingerprint": "be891a5fd19f80170bfd363f534d488bd0490d1fc28f0d7e50831f7f8ed2e8af",
       "occurrence": 1,
-      "source": "put(\"selectedIds\", buildJsonArray { document.selectedIds.forEach { add(JsonPrimitive(it)) } })",
+      "source": "put(\"selectedIds\", buildJsonArray { normalized.selectedIds.forEach { add(JsonPrimitive(it)) } })",
       "tokens": [
         "\"selectedIds\""
       ],
@@ -71042,17 +71180,17 @@
         {
           "ordinal": 0,
           "category": "serialization-plumbing",
-          "reason": "Persistence, scheduling, model, or platform identifier used for application behavior."
+          "reason": "Vocabulary progress document field name used for JSON persistence and restore."
         }
       ]
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 237,
+      "line": 244,
       "symbol": "VocabularyCodec.encode",
-      "sourceFingerprint": "3b4a339178a9f0916d1699be34b851b48a1df7e95dc4fea21cb4c2de405551bb",
+      "sourceFingerprint": "a1e3c992c4ac7194eb9e1023793cb2ded1e6e62e8174286685be97797ae823ff",
       "occurrence": 1,
-      "source": "put(\"custom\", buildJsonArray { document.custom.forEach { item -> add(buildJsonObject {",
+      "source": "put(\"custom\", buildJsonArray { normalized.custom.forEach { item -> add(buildJsonObject {",
       "tokens": [
         "\"custom\""
       ],
@@ -71060,13 +71198,13 @@
         {
           "ordinal": 0,
           "category": "serialization-plumbing",
-          "reason": "Persistence, scheduling, model, or platform identifier used for application behavior."
+          "reason": "Vocabulary progress document field name used for JSON persistence and restore."
         }
       ]
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 238,
+      "line": 245,
       "symbol": "VocabularyCodec.encode",
       "sourceFingerprint": "ae627e61dc058f83f06aca6a7316d721b21f111793c01d57008d680785333ad6",
       "occurrence": 1,
@@ -71096,7 +71234,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 239,
+      "line": 246,
       "symbol": "VocabularyCodec.encode",
       "sourceFingerprint": "17c8cccaf36ed3c564ce9964eabafa2da84f5babc210faf230721006083b4154",
       "occurrence": 1,
@@ -71126,7 +71264,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 240,
+      "line": 247,
       "symbol": "VocabularyCodec.encode",
       "sourceFingerprint": "eaf6e264705d83c55ca23522f32e66f0dc993768ebd638710dd9d366936538a2",
       "occurrence": 1,
@@ -71150,11 +71288,11 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 242,
+      "line": 249,
       "symbol": "VocabularyCodec.encode",
-      "sourceFingerprint": "bd832c59f83a00d9c49a4fc8766afb48f454d55a3b0cbb7b7594a1e512660832",
+      "sourceFingerprint": "6a44b71bb2bc7864b0d2f57a1d3f6dc7ba70c864ac5464c80f3dd5c43eb1df74",
       "occurrence": 1,
-      "source": "put(\"cards\", buildJsonObject { document.cards.forEach { (key, card) ->",
+      "source": "put(\"cards\", buildJsonObject { normalized.cards.forEach { (key, card) ->",
       "tokens": [
         "\"cards\""
       ],
@@ -71162,13 +71300,13 @@
         {
           "ordinal": 0,
           "category": "serialization-plumbing",
-          "reason": "Persistence, scheduling, model, or platform identifier used for application behavior."
+          "reason": "Vocabulary progress document field name used for JSON persistence and restore."
         }
       ]
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 245,
+      "line": 252,
       "symbol": "VocabularyCodec.encode",
       "sourceFingerprint": "55d075d843811dffffcf12ad97bc8fdcca7f1164d9eaa4181f01f9b2efab7cf2",
       "occurrence": 1,
@@ -71198,7 +71336,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 246,
+      "line": 253,
       "symbol": "VocabularyCodec.encode",
       "sourceFingerprint": "8061896cbdc209972c726783dff760f14b207ac8233bf8009bc48ba3bf936a05",
       "occurrence": 1,
@@ -71222,7 +71360,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 247,
+      "line": 254,
       "symbol": "VocabularyCodec.encode",
       "sourceFingerprint": "06df0f03d55dc063016d17881c687efeda46463e1a90a6768ba6cbb1af3b484b",
       "occurrence": 1,
@@ -71252,7 +71390,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
-      "line": 248,
+      "line": 255,
       "symbol": "VocabularyCodec.encode",
       "sourceFingerprint": "63f80783d030776c9a4d7012d05aef78fb491a3d77388f644d219f7759c892d1",
       "occurrence": 1,
@@ -71276,7 +71414,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularySession.kt",
-      "line": 29,
+      "line": 30,
       "symbol": "filter",
       "sourceFingerprint": "54af1e09940bdee34ec8348b786d6e3783cc0ac4147f63f7bbffabbdd2cdc1ff",
       "occurrence": 1,
@@ -71294,7 +71432,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularySession.kt",
-      "line": 33,
+      "line": 34,
       "symbol": "draft",
       "sourceFingerprint": "6e42ac6e0c3efcfd20a87542670276ae4b49b85d713249f86100c3de5d379ae6",
       "occurrence": 1,
@@ -71312,7 +71450,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularySession.kt",
-      "line": 55,
+      "line": 56,
       "symbol": "VocabularySession.start",
       "sourceFingerprint": "81ec202588a14e010d32bc9f3dc5ebd5d87d1762cf3796d82d31c3544da59ddf",
       "occurrence": 1,
@@ -71328,7 +71466,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularySession.kt",
-      "line": 56,
+      "line": 57,
       "symbol": "VocabularySession.start",
       "sourceFingerprint": "7a7e0097c2f7a0f5ea884dc85bea5962fcdfc4c25c4ec02bb6ec7986ee5dfac5",
       "occurrence": 1,
@@ -71344,7 +71482,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularySession.kt",
-      "line": 57,
+      "line": 58,
       "symbol": "VocabularySession.start",
       "sourceFingerprint": "7f7db9fe35fb6cd35161062e268e2294d84444823f3a55f2a4a8e66318945390",
       "occurrence": 1,
@@ -71360,7 +71498,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularySession.kt",
-      "line": 70,
+      "line": 71,
       "symbol": "VocabularySession.start",
       "sourceFingerprint": "6b32fe14c7013498284c5d3f50c6c3d140863d4344196c5ac44d0a5547b6cbae",
       "occurrence": 1,
@@ -71384,7 +71522,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularySession.kt",
-      "line": 77,
+      "line": 78,
       "symbol": "VocabularySession.start",
       "sourceFingerprint": "182becc341d3b90445847086a96c12a0a0243604543e54d80d0eb384f0da1866",
       "occurrence": 1,
@@ -71408,7 +71546,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularySession.kt",
-      "line": 84,
+      "line": 85,
       "symbol": "VocabularySession.setDirection",
       "sourceFingerprint": "6035738975965bd1d22c52ed36dec3775081463f8be63b4379016f094fea0441",
       "occurrence": 1,
@@ -71426,7 +71564,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularySession.kt",
-      "line": 90,
+      "line": 91,
       "symbol": "VocabularySession.setFilter",
       "sourceFingerprint": "7d7702b44717d5a692ab8b36a32421a5e0548c0a566cf6e8101c5797ee7e0925",
       "occurrence": 1,
@@ -71480,7 +71618,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularySession.kt",
-      "line": 128,
+      "line": 129,
       "symbol": "VocabularySession",
       "sourceFingerprint": "2bf447248c9713bf0b531dc669a79b48267ca6a5ef025e8419856b157b29c565",
       "occurrence": 1,
@@ -71498,7 +71636,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularySession.kt",
-      "line": 132,
+      "line": 134,
       "symbol": "VocabularySession",
       "sourceFingerprint": "14ace30731ce9d86f1ba71826026f3050f21a6a0a255ccd5385062bd8bba1ddc",
       "occurrence": 1,
@@ -71516,7 +71654,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularySession.kt",
-      "line": 141,
+      "line": 143,
       "symbol": "VocabularySession.deleteCustom",
       "sourceFingerprint": "fae9a65b928de1bfdf3436a6b4e2faf07dec80b53fe17738f31069940f030e6e",
       "occurrence": 1,
@@ -71534,7 +71672,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularySession.kt",
-      "line": 157,
+      "line": 159,
       "symbol": "VocabularySession.importJson",
       "sourceFingerprint": "2de9ffc116d2f428407ea71f423b1020429daf396a4a31068f9f969d3424faf2",
       "occurrence": 1,
@@ -71552,7 +71690,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularySession.kt",
-      "line": 158,
+      "line": 160,
       "symbol": "VocabularySession.importJson",
       "sourceFingerprint": "7b68ef76886a4ad5ec43d20e908c9abc31068cab51a6a20a421962adf4354e50",
       "occurrence": 1,
@@ -71570,7 +71708,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularySession.kt",
-      "line": 168,
+      "line": 170,
       "symbol": "VocabularySession.importJson",
       "sourceFingerprint": "57e78ef283dd46d2ccf83fd162f3b3ffa9381345677c0c4177695973b0563877",
       "occurrence": 1,
@@ -71588,7 +71726,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularySession.kt",
-      "line": 175,
+      "line": 177,
       "symbol": "VocabularySession.importJson",
       "sourceFingerprint": "1fdf2db249ac27e89f3b601c17a5d74670d7ed21eead80cf984b4c23a5db3305",
       "occurrence": 1,
@@ -71606,7 +71744,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularySession.kt",
-      "line": 182,
+      "line": 184,
       "symbol": "VocabularySession.importJson",
       "sourceFingerprint": "fbe882f030a35bc70ecb591901a4b6e302877d306c366bdbf9cb3e9c3803f3bd",
       "occurrence": 1,
@@ -71624,7 +71762,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularySession.kt",
-      "line": 206,
+      "line": 208,
       "symbol": "VocabularySession",
       "sourceFingerprint": "57e78ef283dd46d2ccf83fd162f3b3ffa9381345677c0c4177695973b0563877",
       "occurrence": 1,
@@ -71642,7 +71780,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularySession.kt",
-      "line": 213,
+      "line": 215,
       "symbol": "VocabularySession",
       "sourceFingerprint": "ea8002eb03bc30717f32c1b50a45d5be363674b11741d54780811a6fa8ede742",
       "occurrence": 1,
@@ -71660,7 +71798,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularySession.kt",
-      "line": 220,
+      "line": 222,
       "symbol": "VocabularySession",
       "sourceFingerprint": "fbe882f030a35bc70ecb591901a4b6e302877d306c366bdbf9cb3e9c3803f3bd",
       "occurrence": 1,
@@ -71678,7 +71816,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularySession.kt",
-      "line": 229,
+      "line": 231,
       "symbol": "VocabularySession.completeWrite",
       "sourceFingerprint": "c01f8f51e645ffd6b5bc3ea10d3d26b40a9fb7d8b21596b67a2011ce65fd1433",
       "occurrence": 1,
@@ -71696,7 +71834,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularySession.kt",
-      "line": 240,
+      "line": 242,
       "symbol": "VocabularySession.reconcile",
       "sourceFingerprint": "44e36f4427a94b99c1f92c041c42193a4918c2ff5655dd46f1ac6af4656fc982",
       "occurrence": 1,
@@ -71714,7 +71852,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularySession.kt",
-      "line": 247,
+      "line": 249,
       "symbol": "VocabularySession.reconcile",
       "sourceFingerprint": "1d8eac40f0737d84cc5eaaac5f1541d7c7794321c8ab1c64c66dd35216f2047e",
       "occurrence": 1,
@@ -71732,7 +71870,7 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularySession.kt",
-      "line": 254,
+      "line": 256,
       "symbol": "VocabularySession.reconcile",
       "sourceFingerprint": "b90f3a9d291b9494d093e79fb724da1814ccfeaa313d70445cc960f27c8fb771",
       "occurrence": 1,
@@ -83640,7 +83778,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidFlipCard.kt",
-      "line": 54,
+      "line": 55,
       "symbol": "file-scope",
       "sourceFingerprint": "5d89d24f60add2ecb2c5934fca1d8c83ae1f7dd63db0d140e09471083ea53b8c",
       "occurrence": 1,
@@ -83656,7 +83794,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidFlipCard.kt",
-      "line": 55,
+      "line": 56,
       "symbol": "file-scope",
       "sourceFingerprint": "9e871b63a1b64735b887104b804a0b0d279b177496d828e8ec16022a44f2dc3c",
       "occurrence": 1,
@@ -83672,7 +83810,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidFlipCard.kt",
-      "line": 61,
+      "line": 62,
       "symbol": "file-scope",
       "sourceFingerprint": "a245fc20b5946eca9c11620462a7ba94e9cad3b20a4d439ce50da2e04489ca6e",
       "occurrence": 1,
@@ -83688,7 +83826,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidFlipCard.kt",
-      "line": 71,
+      "line": 69,
       "symbol": "file-scope",
       "sourceFingerprint": "d8d854ffb5f41540da6933e300a351bd65e3c2efebed6678b98fd0462a62946f",
       "occurrence": 1,
@@ -83704,7 +83842,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidFlipCard.kt",
-      "line": 75,
+      "line": 73,
       "symbol": "file-scope",
       "sourceFingerprint": "ee112a2f48183c267eb448b21ab6db7427ad5021b8d73e6a526dd5514ceefdc0",
       "occurrence": 1,
@@ -83720,7 +83858,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidFlipCard.kt",
-      "line": 79,
+      "line": 77,
       "symbol": "file-scope",
       "sourceFingerprint": "63d99afbae051641a6e68be1b1bd90ec537b80bec4a61565025a794e358d150b",
       "occurrence": 1,
@@ -83736,7 +83874,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidFlipCard.kt",
-      "line": 87,
+      "line": 85,
       "symbol": "file-scope",
       "sourceFingerprint": "381fb9023068b8db9d4ee2c31f05fac5ea66523d17c6989dc230160d6a6079ef",
       "occurrence": 1,
@@ -83752,7 +83890,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidFlipCard.kt",
-      "line": 92,
+      "line": 90,
       "symbol": "SingleRatingGate",
       "sourceFingerprint": "c96fec1de39448c681b3e6820f2f3a63ec22694b7ecbc89ea518d8cae6aa1c7c",
       "occurrence": 1,
@@ -83768,7 +83906,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidFlipCard.kt",
-      "line": 104,
+      "line": 102,
       "symbol": "file-scope",
       "sourceFingerprint": "bcf3244a9e05a50726757a5d0a6a8ed3762c08ca1bf51be8c4bfad4c2c09e24c",
       "occurrence": 1,
@@ -83784,7 +83922,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidFlipCard.kt",
-      "line": 113,
+      "line": 111,
       "symbol": "file-scope",
       "sourceFingerprint": "32078cd6903b0a910a388ac2b075ad4ff276bbb729a2c2befcecf19060f8210b",
       "occurrence": 1,
@@ -83800,7 +83938,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidFlipCard.kt",
-      "line": 115,
+      "line": 113,
       "symbol": "file-scope",
       "sourceFingerprint": "37046df3908a3f554dc4ec70af0d6ab5696a7eeb42a63090e4ce299774e3cb9e",
       "occurrence": 1,
@@ -83816,7 +83954,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidFlipCard.kt",
-      "line": 118,
+      "line": 116,
       "symbol": "file-scope",
       "sourceFingerprint": "74c2b775ecea02f833cbc7098a1ed00b244410cacf2e78117fa1d5253db4a132",
       "occurrence": 1,
@@ -83832,7 +83970,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidFlipCard.kt",
-      "line": 119,
+      "line": 117,
       "symbol": "file-scope",
       "sourceFingerprint": "cf11411dbfe17eae24f813e6d45a0bc9b471b34a6eaaf161cbc490815b9c9df1",
       "occurrence": 1,
@@ -83848,7 +83986,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidFlipCard.kt",
-      "line": 140,
+      "line": 138,
       "symbol": "PointerInputScope",
       "sourceFingerprint": "3dde3be64ce2853e8be986588cf36fd195d1ab9d37585fe82c039f9c1b3e4ff5",
       "occurrence": 1,
@@ -83864,7 +84002,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidFlipCard.kt",
-      "line": 156,
+      "line": 154,
       "symbol": "file-scope",
       "sourceFingerprint": "f5853d4d0e3a5f5b17998399dc6446dc8f3407a883632460247ea637fa9684b9",
       "occurrence": 1,
@@ -83880,7 +84018,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidFlipCard.kt",
-      "line": 158,
+      "line": 156,
       "symbol": "file-scope",
       "sourceFingerprint": "1ac1f1adcf04ba3c3c8472875e04c5d4b88ead7426a4091a26732ad2847a1766",
       "occurrence": 1,
@@ -83896,7 +84034,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidFlipCard.kt",
-      "line": 160,
+      "line": 158,
       "symbol": "file-scope",
       "sourceFingerprint": "e5bb25900d7570a77070175881577e9a4a81689452ad16d26f9bc2e57370d07b",
       "occurrence": 1,
@@ -83912,7 +84050,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidFlipCard.kt",
-      "line": 161,
+      "line": 159,
       "symbol": "file-scope",
       "sourceFingerprint": "02244a507444e3edf9dc196a2d3335df42e0298d0d7d65004d339aa07b313ffa",
       "occurrence": 1,
@@ -83928,7 +84066,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidFlipCard.kt",
-      "line": 162,
+      "line": 160,
       "symbol": "file-scope",
       "sourceFingerprint": "b6f8a1bd000e2c8d6d25d72410c0075913584e149af6af3db30d4da7996fc300",
       "occurrence": 1,
@@ -83944,7 +84082,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidFlipCard.kt",
-      "line": 163,
+      "line": 161,
       "symbol": "file-scope",
       "sourceFingerprint": "838f91231e4b59ce9af3238b0b9045b18640391678cfee9c57b9d548d859c77b",
       "occurrence": 1,
@@ -83960,7 +84098,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidFlipCard.kt",
-      "line": 209,
+      "line": 207,
       "symbol": "file-scope",
       "sourceFingerprint": "4ee8f2b683dee9df9ce56b266b846b84f53eb3faaf426cb3e6ff9edcac6783b9",
       "occurrence": 1,
@@ -83978,7 +84116,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidFlipCard.kt",
-      "line": 211,
+      "line": 209,
       "symbol": "file-scope",
       "sourceFingerprint": "a2d5b37ee166e1481c1884c7e4ae41d49674bbd4b4a102003fa0536d0446d748",
       "occurrence": 1,
@@ -83996,7 +84134,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidFlipCard.kt",
-      "line": 212,
+      "line": 210,
       "symbol": "file-scope",
       "sourceFingerprint": "05ac37b7ad7669a10b0aeb9ea5f9b469ee4bbbe33e3074ac40b2b5527636d439",
       "occurrence": 1,
@@ -84014,7 +84152,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidFlipCard.kt",
-      "line": 229,
+      "line": 227,
       "symbol": "file-scope",
       "sourceFingerprint": "8f83c110314ea9d20845d426ad0902180adf42e402b9c8f61f0e133c48d7b252",
       "occurrence": 1,
@@ -84030,7 +84168,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidFlipCard.kt",
-      "line": 230,
+      "line": 228,
       "symbol": "file-scope",
       "sourceFingerprint": "d3309afbf04593603811b28c7210c13a0c6c9efd2fbc97e5721ae9689d095664",
       "occurrence": 1,
@@ -84046,7 +84184,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidFlipCard.kt",
-      "line": 231,
+      "line": 229,
       "symbol": "file-scope",
       "sourceFingerprint": "eb41086eb3b8880fae9bf487a907acfb4c69e9bd097aa639ad11c5ae8cb40c7a",
       "occurrence": 1,
@@ -84062,7 +84200,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidFlipCard.kt",
-      "line": 232,
+      "line": 230,
       "symbol": "file-scope",
       "sourceFingerprint": "6306c8e8aa6fdb5e6978aae46fa0e451b41384631b5c6297a76ce571bf620f33",
       "occurrence": 1,
@@ -84078,7 +84216,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidFlipCard.kt",
-      "line": 249,
+      "line": 247,
       "symbol": "BoxScope",
       "sourceFingerprint": "e523459daaf78ac5c947cf9e9fc0ac60feb1584e529ff8f072cdcafc24f767ed",
       "occurrence": 1,
@@ -84102,7 +84240,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidFlipCard.kt",
-      "line": 266,
+      "line": 264,
       "symbol": "file-scope",
       "sourceFingerprint": "4909e6ee0d758aeb3eefe5107cd93ee377cb40957cf7bf05ddf410dccf05e9ce",
       "occurrence": 1,
@@ -84118,7 +84256,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidFlipCard.kt",
-      "line": 268,
+      "line": 266,
       "symbol": "file-scope",
       "sourceFingerprint": "b9266988e86239f9eb4182b0ab93eca97f90f749ba25f04682155154e6c67bc3",
       "occurrence": 1,
@@ -84134,7 +84272,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidFlipCard.kt",
-      "line": 273,
+      "line": 271,
       "symbol": "SwipeNudgeGate",
       "sourceFingerprint": "24db7b6c9a0822e18ca7341337cd249e92f26137e27319e3ff95e59fd69d108c",
       "occurrence": 1,
@@ -84150,7 +84288,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidFlipCard.kt",
-      "line": 282,
+      "line": 280,
       "symbol": "file-scope",
       "sourceFingerprint": "6d05d1d09123353eb4e73a79d6dc553933e9abb184a9ee8de8df03dc99229596",
       "occurrence": 1,
@@ -84166,7 +84304,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidFlipCard.kt",
-      "line": 284,
+      "line": 282,
       "symbol": "file-scope",
       "sourceFingerprint": "7818a5b59711c3fb8435546dde686fb9c38bf2fc7daed3d356b6dd508af606df",
       "occurrence": 1,
@@ -84182,7 +84320,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidFlipCard.kt",
-      "line": 286,
+      "line": 284,
       "symbol": "file-scope",
       "sourceFingerprint": "c4f6431e13e1b00108808b57d4c44d83dc0b6bcb65157c6aaa5d9be88bf0d880",
       "occurrence": 1,
@@ -84198,7 +84336,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidFlipCard.kt",
-      "line": 303,
+      "line": 301,
       "symbol": "AndroidSwipeHint",
       "sourceFingerprint": "d7d9a5f7fa154a57bb6981a8453d6f14a574b91ca13b6cad2e0b70fcb1cd53aa",
       "occurrence": 1,
@@ -84216,7 +84354,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidFlipCard.kt",
-      "line": 304,
+      "line": 302,
       "symbol": "AndroidSwipeHint",
       "sourceFingerprint": "fe4b668062e00183a64c25d02dc63dd4f2a09a1af7b4c066ba8c3cdb67a80d90",
       "occurrence": 1,
@@ -84234,7 +84372,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidFlipCard.kt",
-      "line": 305,
+      "line": 303,
       "symbol": "AndroidSwipeHint",
       "sourceFingerprint": "57876cc0e1a2990d7ed1c0f1a23fcfffb4522c4cf0d602799bb00cf0253b5311",
       "occurrence": 1,
@@ -84252,7 +84390,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidFlipCard.kt",
-      "line": 310,
+      "line": 308,
       "symbol": "file-scope",
       "sourceFingerprint": "3d26fac9cb2d662f44fdc674dcd0896bad2123625b0aa5654546bd5744de757a",
       "occurrence": 1,
@@ -84268,7 +84406,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidFlipCard.kt",
-      "line": 312,
+      "line": 310,
       "symbol": "file-scope",
       "sourceFingerprint": "f96ec95a0f28825ddd636ad145516cb291f3ce912fe69f843402e383db90e364",
       "occurrence": 1,
@@ -84284,7 +84422,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidFlipCard.kt",
-      "line": 313,
+      "line": 311,
       "symbol": "file-scope",
       "sourceFingerprint": "1d661e109c60d52d97ab19bf08f2e70a1f3c81c347d576e9d88a5ba37e8c7d61",
       "occurrence": 1,
@@ -84300,7 +84438,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidFlipCard.kt",
-      "line": 314,
+      "line": 312,
       "symbol": "file-scope",
       "sourceFingerprint": "ea8ecf4b39045cfbfc7e6f473c422c9aa09d765fa899ae825b19ff95dfd5a9c1",
       "occurrence": 1,
@@ -84316,7 +84454,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidFlipCard.kt",
-      "line": 315,
+      "line": 313,
       "symbol": "file-scope",
       "sourceFingerprint": "d701e2bc3a371b84331ee50373cf4ebb9cbbc2676278157574fa2be9aa6bec75",
       "occurrence": 1,
@@ -84332,7 +84470,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidFlipCard.kt",
-      "line": 318,
+      "line": 316,
       "symbol": "file-scope",
       "sourceFingerprint": "efc397cb9028a103c2c65c5015f4073a0d02dd08f001000327c2db06078d4d73",
       "occurrence": 1,
@@ -84348,7 +84486,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidFlipCard.kt",
-      "line": 349,
+      "line": 347,
       "symbol": "file-scope",
       "sourceFingerprint": "80437a0a6124dc5fc278ee9bb4ecbe6c88d8c201dd63a37d8182f74f24431b04",
       "occurrence": 1,
@@ -84364,7 +84502,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidFlipCard.kt",
-      "line": 350,
+      "line": 348,
       "symbol": "file-scope",
       "sourceFingerprint": "d62bbfaf0b3abde84cdf64a10d1d3604e382c1146557d5e503ef1b7e512c3dbc",
       "occurrence": 1,
@@ -84380,7 +84518,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidFlipCard.kt",
-      "line": 351,
+      "line": 349,
       "symbol": "file-scope",
       "sourceFingerprint": "e8ac4f5177dcc3085f0d32cd82cafe8baae17a52bffaef47017b647ec1f460f7",
       "occurrence": 1,
@@ -84396,7 +84534,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidFlipCard.kt",
-      "line": 369,
+      "line": 367,
       "symbol": "file-scope",
       "sourceFingerprint": "b3b288a69e3ad01e8fb2f0b4b085b5b0e66e8f24f2e1f9544b92c828f49c9f1c",
       "occurrence": 1,
@@ -84412,7 +84550,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidFlipCard.kt",
-      "line": 372,
+      "line": 370,
       "symbol": "file-scope",
       "sourceFingerprint": "47df99224ac5df57ce59798709d71a7c59200938a506f25059529f26b7b4e822",
       "occurrence": 1,
@@ -84428,7 +84566,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidFlipCard.kt",
-      "line": 373,
+      "line": 371,
       "symbol": "file-scope",
       "sourceFingerprint": "7609ec1b5ea62dbee0c7d19229a9d89f807bba2c846bc5f3c18d39211876014d",
       "occurrence": 1,
@@ -84444,7 +84582,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidFlipCard.kt",
-      "line": 376,
+      "line": 374,
       "symbol": "file-scope",
       "sourceFingerprint": "cccf54c16ef5a850caf65008bacbaa6b198ba767a3548f2af764b00be43b4c7f",
       "occurrence": 1,
@@ -84460,7 +84598,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidFlipCard.kt",
-      "line": 380,
+      "line": 378,
       "symbol": "file-scope",
       "sourceFingerprint": "449dcd189acfcee1990faa88e53590bf4a2479a916b7ff732f25260dddd25259",
       "occurrence": 1,
@@ -84476,7 +84614,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidFlipCard.kt",
-      "line": 381,
+      "line": 379,
       "symbol": "file-scope",
       "sourceFingerprint": "6ac37bbd949664e33eaf5502ef144a787eb0405024719e43293fc4b6fdf73817",
       "occurrence": 1,
@@ -84492,7 +84630,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidFlipCard.kt",
-      "line": 383,
+      "line": 381,
       "symbol": "file-scope",
       "sourceFingerprint": "a6fe5944c85dba190213867b1e8b5f3133dcc331aa876c36b6297cb54d7c99e9",
       "occurrence": 1,
@@ -84508,7 +84646,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidFlipCard.kt",
-      "line": 385,
+      "line": 383,
       "symbol": "file-scope",
       "sourceFingerprint": "5521c49364fb458dba44f9d1733c045ad002b05a03346118129eb23905091713",
       "occurrence": 1,
@@ -84524,7 +84662,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidFlipCard.kt",
-      "line": 389,
+      "line": 387,
       "symbol": "file-scope",
       "sourceFingerprint": "7d7dd1769b8a17694476dd075eda72f8334dc977fcc40764468a9f9f78a70677",
       "occurrence": 1,
@@ -84540,7 +84678,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidFlipCard.kt",
-      "line": 390,
+      "line": 388,
       "symbol": "file-scope",
       "sourceFingerprint": "1cb0a931dbe7d1e8aceb342b253282be2b65f197b597f4ca050bd41fa86b0c96",
       "occurrence": 1,
@@ -84556,7 +84694,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidFlipCard.kt",
-      "line": 391,
+      "line": 389,
       "symbol": "file-scope",
       "sourceFingerprint": "39210a71581c370af15965777d359324ef89fa993c507c06c4b1f3e3781cbe8f",
       "occurrence": 1,
@@ -84572,7 +84710,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidFlipCard.kt",
-      "line": 392,
+      "line": 390,
       "symbol": "file-scope",
       "sourceFingerprint": "a098aae2a3bf65c424d97747a8e43009597932062d1e0d81fc0a1af9bcfc2209",
       "occurrence": 1,
@@ -84588,7 +84726,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidFlipCard.kt",
-      "line": 394,
+      "line": 392,
       "symbol": "file-scope",
       "sourceFingerprint": "79039474c57f610a196e48394abe35cf4b5f8abcca733ca6c10dea04b99b0973",
       "occurrence": 1,
@@ -84604,7 +84742,7 @@
     },
     {
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidFlipCard.kt",
-      "line": 395,
+      "line": 393,
       "symbol": "file-scope",
       "sourceFingerprint": "d550f73db629ac161491099fd3544678d7f00ee06d4561ebf73dd46b76b2dd94",
       "occurrence": 1,
@@ -100616,7 +100754,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/WebSwipeRating.kt",
-      "line": 11,
+      "line": 13,
       "symbol": "SWIPE_EASING",
       "sourceFingerprint": "feb7c89f1b17f3a23d6ecfd1233f291efa625332e549a3d475673630380198f1",
       "occurrence": 1,
@@ -100634,7 +100772,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/WebSwipeRating.kt",
-      "line": 17,
+      "line": 19,
       "symbol": "file-scope",
       "sourceFingerprint": "15454b67e1efdb640d84b4d4678cb6de1453bc45855cd33083596a10ed281493",
       "occurrence": 1,
@@ -100650,7 +100788,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/WebSwipeRating.kt",
-      "line": 18,
+      "line": 20,
       "symbol": "file-scope",
       "sourceFingerprint": "9a8e39e4793e2d9c722838139bcc13e38ff396c7029c886def962d105b85e460",
       "occurrence": 1,
@@ -100666,7 +100804,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/WebSwipeRating.kt",
-      "line": 24,
+      "line": 26,
       "symbol": "file-scope",
       "sourceFingerprint": "a64899ce9914d870352d68c03e1a206e081a21b947190471733f9a12f04e17b4",
       "occurrence": 1,
@@ -100682,7 +100820,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/WebSwipeRating.kt",
-      "line": 26,
+      "line": 28,
       "symbol": "file-scope",
       "sourceFingerprint": "f1b8f15c1067f18d06132c2a4202b6797771ff65657f84f5cfe09725d2379d21",
       "occurrence": 1,
@@ -100698,7 +100836,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/WebSwipeRating.kt",
-      "line": 29,
+      "line": 31,
       "symbol": "file-scope",
       "sourceFingerprint": "a3b04c2517df4e67cc314ffbf2902fc19cac5b09e38a58bf260136762e479aed",
       "occurrence": 1,
@@ -100714,7 +100852,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/WebSwipeRating.kt",
-      "line": 31,
+      "line": 33,
       "symbol": "file-scope",
       "sourceFingerprint": "caa4ee64a7ef842764816717506be11a1c7e5b789781b1ba2b67264ba28be530",
       "occurrence": 1,
@@ -100730,7 +100868,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/WebSwipeRating.kt",
-      "line": 36,
+      "line": 38,
       "symbol": "file-scope",
       "sourceFingerprint": "c4e5b6667b928172b91bf4748f62a8b658f10e0a3ece02fc7a2bcba55cacf154",
       "occurrence": 1,
@@ -100746,7 +100884,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/WebSwipeRating.kt",
-      "line": 37,
+      "line": 39,
       "symbol": "file-scope",
       "sourceFingerprint": "c16ec35663e36f3586aa4e8fba3177bcaa839c306f0be98920bd0f33e19b7501",
       "occurrence": 1,
@@ -100762,7 +100900,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/WebSwipeRating.kt",
-      "line": 39,
+      "line": 41,
       "symbol": "file-scope",
       "sourceFingerprint": "7ce230c745522172ba4e598c21f2901aa2178c6159c751f2b60024f34877703d",
       "occurrence": 1,
@@ -100778,7 +100916,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/WebSwipeRating.kt",
-      "line": 42,
+      "line": 44,
       "symbol": "installSwipeCard",
       "sourceFingerprint": "e9af3bdd08a1f3457ca339ad99534030b18e8ed890ee2c50286a1db3d89e984f",
       "occurrence": 1,
@@ -100796,7 +100934,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/WebSwipeRating.kt",
-      "line": 46,
+      "line": 48,
       "symbol": "installSwipeCard.withBase",
       "sourceFingerprint": "b33b7dc462d5fe95c5baa1ea2cfcd9144442bf82446953d722ceb4b546c82e58",
       "occurrence": 1,
@@ -100814,7 +100952,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/WebSwipeRating.kt",
-      "line": 48,
+      "line": 50,
       "symbol": "installSwipeCard.setProgress",
       "sourceFingerprint": "59ae21a975e82c14ec61bef071df1e4899f6475568b68e244c1d4745642507b6",
       "occurrence": 1,
@@ -100832,7 +100970,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/WebSwipeRating.kt",
-      "line": 49,
+      "line": 51,
       "symbol": "installSwipeCard",
       "sourceFingerprint": "5e8f17dc0ff29db7fd14bc024268c0b3a144399b8cf441bf7e61f74dd4895f48",
       "occurrence": 1,
@@ -100848,7 +100986,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/WebSwipeRating.kt",
-      "line": 50,
+      "line": 52,
       "symbol": "installSwipeCard",
       "sourceFingerprint": "f94eb17df813f19d84c7ea78a63d690620491e68e848d333024c2003393818a0",
       "occurrence": 1,
@@ -100864,7 +101002,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/WebSwipeRating.kt",
-      "line": 51,
+      "line": 53,
       "symbol": "installSwipeCard",
       "sourceFingerprint": "0b795e53e921ea0a055981af8b133f92ebedef4180628b4b54b41d8588eb9270",
       "occurrence": 1,
@@ -100880,7 +101018,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/WebSwipeRating.kt",
-      "line": 54,
+      "line": 56,
       "symbol": "installSwipeCard.clearVisual",
       "sourceFingerprint": "2f130e4306409fa8e52c2977526555a90729bc9568c2254f1a693901c51766de",
       "occurrence": 1,
@@ -100898,7 +101036,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/WebSwipeRating.kt",
-      "line": 55,
+      "line": 57,
       "symbol": "installSwipeCard.clearVisual",
       "sourceFingerprint": "88d2478768495612ec1057a6c2539c039005466e2dd1e40e5bcc91fafa4891c4",
       "occurrence": 1,
@@ -100916,7 +101054,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/WebSwipeRating.kt",
-      "line": 56,
+      "line": 58,
       "symbol": "installSwipeCard.clearVisual",
       "sourceFingerprint": "7d18222e4593f89e29f5813e161d8c9d761269604b20efeeeac8e06c5a8939ce",
       "occurrence": 1,
@@ -100934,7 +101072,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/WebSwipeRating.kt",
-      "line": 57,
+      "line": 59,
       "symbol": "installSwipeCard.clearVisual",
       "sourceFingerprint": "bc33eaa43133006113534bc25a5429bec8bb231c0bd03f745333df121bf8f91d",
       "occurrence": 1,
@@ -100952,7 +101090,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/WebSwipeRating.kt",
-      "line": 58,
+      "line": 60,
       "symbol": "installSwipeCard.clearVisual",
       "sourceFingerprint": "1d61b94cd223d039d68de6e22b91aff1aea49fa19902b8fc058eb9bfa198f442",
       "occurrence": 1,
@@ -100970,7 +101108,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/WebSwipeRating.kt",
-      "line": 64,
+      "line": 66,
       "symbol": "installSwipeCard.settle",
       "sourceFingerprint": "d346247a40c471da9c410d529acd23cb09875863f996778acd3b4dd4274431ec",
       "occurrence": 1,
@@ -101000,7 +101138,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/WebSwipeRating.kt",
-      "line": 65,
+      "line": 67,
       "symbol": "installSwipeCard.settle",
       "sourceFingerprint": "dbcd11e4138e63b3c1d8d8876d78795ccf6828470ee19b9a5e32abe0941f2af3",
       "occurrence": 1,
@@ -101024,7 +101162,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/WebSwipeRating.kt",
-      "line": 73,
+      "line": 75,
       "symbol": "installSwipeCard.settle",
       "sourceFingerprint": "c017417fd1445b5fba369f702a46a3082ec924766d33e29e48d685a02d75411e",
       "occurrence": 1,
@@ -101060,7 +101198,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/WebSwipeRating.kt",
-      "line": 74,
+      "line": 76,
       "symbol": "installSwipeCard.settle",
       "sourceFingerprint": "dd50890b1afec468666ef58d5b514c8c4289f1f9694f6a9f20091ad8d8d7216f",
       "occurrence": 1,
@@ -101096,7 +101234,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/WebSwipeRating.kt",
-      "line": 75,
+      "line": 77,
       "symbol": "installSwipeCard.settle",
       "sourceFingerprint": "3712a1429cd09cf39f903814136112ff1e4d0ec1f6c6d1f428058c0288a9e16d",
       "occurrence": 1,
@@ -101120,7 +101258,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/WebSwipeRating.kt",
-      "line": 79,
+      "line": 81,
       "symbol": "installSwipeCard",
       "sourceFingerprint": "6f185edba6a2e98dcb63b3740f9575062c147ed8994d08d70eb7977aed7635be",
       "occurrence": 1,
@@ -101138,7 +101276,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/WebSwipeRating.kt",
-      "line": 80,
+      "line": 82,
       "symbol": "installSwipeCard",
       "sourceFingerprint": "353e34ecf6d0676f48e8c8d602bcfb90ab8792de40a5186019f0c43332f8f01a",
       "occurrence": 1,
@@ -101154,7 +101292,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/WebSwipeRating.kt",
-      "line": 95,
+      "line": 97,
       "symbol": "installSwipeCard",
       "sourceFingerprint": "94b11c0344ff4e13d4fc1f372b0d1432d2ce0a1c1a30c9eb898755c0cd47a47d",
       "occurrence": 1,
@@ -101172,7 +101310,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/WebSwipeRating.kt",
-      "line": 102,
+      "line": 104,
       "symbol": "installSwipeCard",
       "sourceFingerprint": "644bad5d6c63eb1348cc007d458322b1419c92694755846c096b3671e130ea33",
       "occurrence": 1,
@@ -101188,7 +101326,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/WebSwipeRating.kt",
-      "line": 107,
+      "line": 109,
       "symbol": "installSwipeCard",
       "sourceFingerprint": "099340b202fcd458408ba30e55e689f993863d9bf2fe4444c025704a1fa52a5f",
       "occurrence": 1,
@@ -101212,7 +101350,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/WebSwipeRating.kt",
-      "line": 112,
+      "line": 114,
       "symbol": "installSwipeCard",
       "sourceFingerprint": "7783336318ddec0c3665db87a7049f205f82f7904aebae1352edca2b1c7836d5",
       "occurrence": 1,
@@ -101236,7 +101374,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/WebSwipeRating.kt",
-      "line": 113,
+      "line": 115,
       "symbol": "installSwipeCard",
       "sourceFingerprint": "74b8c429c737a40248b0b52ea44bdd63abd460970cd44cd6cc831216d2428ec7",
       "occurrence": 1,
@@ -101272,7 +101410,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/WebSwipeRating.kt",
-      "line": 116,
+      "line": 118,
       "symbol": "installSwipeCard",
       "sourceFingerprint": "92c001b99383e2fea880e06d495bb82fa9ae2d2064ae57e61a22551e6285aa27",
       "occurrence": 1,
@@ -101290,7 +101428,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/WebSwipeRating.kt",
-      "line": 126,
+      "line": 128,
       "symbol": "installSwipeCard",
       "sourceFingerprint": "a1d03905568e232aa5e5231d02d60fed7a87d478e0a5710590a6944f64bde286",
       "occurrence": 1,
@@ -101306,7 +101444,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/WebSwipeRating.kt",
-      "line": 127,
+      "line": 129,
       "symbol": "installSwipeCard",
       "sourceFingerprint": "caa005e58c4315fb2f119048e7d1cc4cc2596abb16627a8b29321d35483d5947",
       "occurrence": 1,
@@ -101322,7 +101460,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/WebSwipeRating.kt",
-      "line": 129,
+      "line": 131,
       "symbol": "installSwipeCard",
       "sourceFingerprint": "49e92faaa8277b178b4e42b1e085722e7bc5c53a3e04b833d13324e779075978",
       "occurrence": 1,
@@ -101338,11 +101476,11 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/WebSwipeRating.kt",
-      "line": 133,
+      "line": 136,
       "symbol": "installSwipeCard",
-      "sourceFingerprint": "3c7e195bfb48c085a3604b478d13713ae08f1fa80adb6d956b60ad7c4679b17d",
+      "sourceFingerprint": "9ae5257eb1f77bb30ad13c4f1767970967ae85744f5c639f29763320085a8570",
       "occurrence": 1,
-      "source": "zone.addEventListener(\"pointercancel\", { start = null; if (horizontal) settle(false, 0); horizontal = false })",
+      "source": "zone.addEventListener(\"pointercancel\", { start = null; if (horizontal) settle(null); horizontal = false })",
       "tokens": [
         "\"pointercancel\""
       ],
@@ -101350,17 +101488,17 @@
         {
           "ordinal": 0,
           "category": "serialization-plumbing",
-          "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+          "reason": "DOM pointer event name used to cancel an active web card swipe; this is host interaction wiring."
         }
       ]
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/WebSwipeRating.kt",
-      "line": 134,
+      "line": 137,
       "symbol": "installSwipeCard",
-      "sourceFingerprint": "a17de9d3761aae2542125422bf272941db1135463e2de3a13c7c5b7af2cf4e63",
+      "sourceFingerprint": "d47fe467a9e7e86905c67838232b84aab9aebb125c3c27f1ad5f682c65cce262",
       "occurrence": 1,
-      "source": "zone.addEventListener(\"lostpointercapture\", { start = null; if (horizontal) settle(false, 0); horizontal = false })",
+      "source": "zone.addEventListener(\"lostpointercapture\", { start = null; if (horizontal) settle(null); horizontal = false })",
       "tokens": [
         "\"lostpointercapture\""
       ],
@@ -101368,13 +101506,13 @@
         {
           "ordinal": 0,
           "category": "serialization-plumbing",
-          "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+          "reason": "DOM pointer event name used to cancel an active web card swipe; this is host interaction wiring."
         }
       ]
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/WebSwipeRating.kt",
-      "line": 138,
+      "line": 141,
       "symbol": "file-scope",
       "sourceFingerprint": "496b81c23ea616149ee6eff3bd60801bb4c77366e4d089c531f5192e32dbe444",
       "occurrence": 1,
@@ -101390,7 +101528,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/WebSwipeRating.kt",
-      "line": 139,
+      "line": 142,
       "symbol": "file-scope",
       "sourceFingerprint": "5b2c4dfad8c12ae0d3e2a5ccfc9afdef48e2f63b0a5c98d2bf972c7cb7853a2c",
       "occurrence": 1,
@@ -101406,7 +101544,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/WebSwipeRating.kt",
-      "line": 144,
+      "line": 147,
       "symbol": "appendSwipeLabels",
       "sourceFingerprint": "7e8913dd5dfd2da57a635ad3725182e544f33ddb6048d48423f87136db250c0d",
       "occurrence": 1,
@@ -101442,7 +101580,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/WebSwipeRating.kt",
-      "line": 145,
+      "line": 148,
       "symbol": "appendSwipeLabels.span",
       "sourceFingerprint": "5ac76e83036c0ee159581b6721caece03346a3acd21b77437f5480a0359e04da",
       "occurrence": 1,
@@ -101460,7 +101598,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/WebSwipeRating.kt",
-      "line": 146,
+      "line": 149,
       "symbol": "appendSwipeLabels",
       "sourceFingerprint": "48321234fdcff1ea73ec65219f209a25ba0f12c2f1691d196775dbafc8fb11b0",
       "occurrence": 1,
@@ -101478,7 +101616,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/WebSwipeRating.kt",
-      "line": 148,
+      "line": 151,
       "symbol": "appendSwipeLabels",
       "sourceFingerprint": "c78b63afb74c7a770f23db8c28539ced4cd258675d79a22f2da61dfcde9b449c",
       "occurrence": 1,
@@ -101502,7 +101640,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/WebSwipeRating.kt",
-      "line": 156,
+      "line": 159,
       "symbol": "file-scope",
       "sourceFingerprint": "8f12189717380f54711d289baced8cd1514a26fff956d83ae3e626c9bb02448a",
       "occurrence": 1,
@@ -101518,7 +101656,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/WebSwipeRating.kt",
-      "line": 162,
+      "line": 165,
       "symbol": "installTapGesture",
       "sourceFingerprint": "2a6fd816e2e48d4e705f17edc671f4cb66f9802f41cb82e43a388460c1ea7caf",
       "occurrence": 1,
@@ -101536,7 +101674,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/WebSwipeRating.kt",
-      "line": 170,
+      "line": 173,
       "symbol": "installTapGesture",
       "sourceFingerprint": "5b58e253f55c10f90cd6c1380b8ece77b50f5b0fc626a7afa781f134aefbad1f",
       "occurrence": 1,
@@ -101552,7 +101690,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/WebSwipeRating.kt",
-      "line": 171,
+      "line": 174,
       "symbol": "installTapGesture",
       "sourceFingerprint": "7387f06b756cbc210d9e2ecf86ceed835ff9db6b798c095b4489d723d20cb145",
       "occurrence": 1,
@@ -101570,7 +101708,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/WebSwipeRating.kt",
-      "line": 177,
+      "line": 180,
       "symbol": "installTapGesture",
       "sourceFingerprint": "6dbc77cc4ce3fc8b25db008b0dce66cefb929ce51d846bf525990da70a72437f",
       "occurrence": 1,
@@ -101588,7 +101726,7 @@
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/WebSwipeRating.kt",
-      "line": 186,
+      "line": 189,
       "symbol": "installTapGesture",
       "sourceFingerprint": "7edfa0b8f895ff1fd8e78e1ce7729d482fb8ffe5d6096ef9c41dabf528b0dfbc",
       "occurrence": 1,
@@ -109396,7 +109534,7 @@
     },
     {
       "path": "kotlin/iosApp/PolskiGrammar/SwipeToRate.swift",
-      "line": 3,
+      "line": 4,
       "symbol": "file-scope",
       "sourceFingerprint": "5b6eef1c316686e2905a98bfab4ccbef0cd4ab00f8b502cc8de04e951c9698e9",
       "occurrence": 1,
@@ -109412,7 +109550,7 @@
     },
     {
       "path": "kotlin/iosApp/PolskiGrammar/SwipeToRate.swift",
-      "line": 4,
+      "line": 5,
       "symbol": "file-scope",
       "sourceFingerprint": "52954b50ec99a5d41a19e0bf4814b4c2af72cf09d92fa32ec27842f0c6c8cc3d",
       "occurrence": 1,
@@ -109428,7 +109566,7 @@
     },
     {
       "path": "kotlin/iosApp/PolskiGrammar/SwipeToRate.swift",
-      "line": 5,
+      "line": 6,
       "symbol": "file-scope",
       "sourceFingerprint": "26e22214d1bf39fcd098206f11c448126a55da9ce6ba0215b01ad083b6fb5ee4",
       "occurrence": 1,
@@ -109444,7 +109582,7 @@
     },
     {
       "path": "kotlin/iosApp/PolskiGrammar/SwipeToRate.swift",
-      "line": 8,
+      "line": 9,
       "symbol": "file-scope",
       "sourceFingerprint": "2e950905616f35961e71cdad021a9d3f82f48919d2eb416129e4342a117cb201",
       "occurrence": 1,
@@ -109460,7 +109598,7 @@
     },
     {
       "path": "kotlin/iosApp/PolskiGrammar/SwipeToRate.swift",
-      "line": 9,
+      "line": 10,
       "symbol": "file-scope",
       "sourceFingerprint": "edfd8873539eb15967f09d05aba7fd3933a997f1918568af9bcca1b5fd901d8d",
       "occurrence": 1,
@@ -109476,7 +109614,7 @@
     },
     {
       "path": "kotlin/iosApp/PolskiGrammar/SwipeToRate.swift",
-      "line": 10,
+      "line": 11,
       "symbol": "file-scope",
       "sourceFingerprint": "61ec222fe3afba4fbe82f3d402eafffad9baafedc559bcadb68addb2faa7052e",
       "occurrence": 1,
@@ -109492,7 +109630,7 @@
     },
     {
       "path": "kotlin/iosApp/PolskiGrammar/SwipeToRate.swift",
-      "line": 11,
+      "line": 12,
       "symbol": "file-scope",
       "sourceFingerprint": "1e1e809a27c72aa35355ffd02b3290093e7b472efd3aac82ad20f4b6b28e4325",
       "occurrence": 1,
@@ -109508,7 +109646,7 @@
     },
     {
       "path": "kotlin/iosApp/PolskiGrammar/SwipeToRate.swift",
-      "line": 12,
+      "line": 13,
       "symbol": "file-scope",
       "sourceFingerprint": "d793030e1b6cb22097bc24f1ead535814f1646af4b7e6915a3247afcdd8441f5",
       "occurrence": 1,
@@ -109524,7 +109662,7 @@
     },
     {
       "path": "kotlin/iosApp/PolskiGrammar/SwipeToRate.swift",
-      "line": 14,
+      "line": 15,
       "symbol": "file-scope",
       "sourceFingerprint": "70ed0138f4d8d290dca5c5e2654b2855da3519f8e85d76cf1340afd119884f37",
       "occurrence": 1,
@@ -109540,7 +109678,7 @@
     },
     {
       "path": "kotlin/iosApp/PolskiGrammar/SwipeToRate.swift",
-      "line": 15,
+      "line": 16,
       "symbol": "file-scope",
       "sourceFingerprint": "9a5c5ed92ca3f7f684dd49590b6da26fa01bbe8756a1dc9c7e6c7eb1e9973c1d",
       "occurrence": 1,
@@ -109556,7 +109694,7 @@
     },
     {
       "path": "kotlin/iosApp/PolskiGrammar/SwipeToRate.swift",
-      "line": 16,
+      "line": 17,
       "symbol": "file-scope",
       "sourceFingerprint": "290174775bdd7f266f6e0b4e1ab242355f8920477ee39a4df6c522417c38b972",
       "occurrence": 1,
@@ -109572,7 +109710,7 @@
     },
     {
       "path": "kotlin/iosApp/PolskiGrammar/SwipeToRate.swift",
-      "line": 17,
+      "line": 18,
       "symbol": "file-scope",
       "sourceFingerprint": "adebe9f0c1103c46f3c9f4dcd89890967aaba6ec93c502477572852e3d80ae37",
       "occurrence": 1,
@@ -109588,7 +109726,7 @@
     },
     {
       "path": "kotlin/iosApp/PolskiGrammar/SwipeToRate.swift",
-      "line": 19,
+      "line": 20,
       "symbol": "file-scope",
       "sourceFingerprint": "9b3f2b9afed442a5281d06a1da42e9bb53cccca08896a99e2291b12670dbf161",
       "occurrence": 1,
@@ -109604,7 +109742,7 @@
     },
     {
       "path": "kotlin/iosApp/PolskiGrammar/SwipeToRate.swift",
-      "line": 21,
+      "line": 22,
       "symbol": "file-scope",
       "sourceFingerprint": "dd2eeb9e009a89ad4d3b3d103f068f6ba78f3dca638730f2ebb797085fd821a1",
       "occurrence": 1,
@@ -109620,7 +109758,7 @@
     },
     {
       "path": "kotlin/iosApp/PolskiGrammar/SwipeToRate.swift",
-      "line": 26,
+      "line": 27,
       "symbol": "file-scope",
       "sourceFingerprint": "6ad9781a9b10fdc8ca47fa4749c8588b7d8b2be9c40f381549aba9a6cd84dc3c",
       "occurrence": 1,
@@ -109636,7 +109774,7 @@
     },
     {
       "path": "kotlin/iosApp/PolskiGrammar/SwipeToRate.swift",
-      "line": 27,
+      "line": 28,
       "symbol": "file-scope",
       "sourceFingerprint": "c4dfae7a58f0c5455bb8c49d69b014a2fd462ad82d9e1fcc039e53b51a465ec6",
       "occurrence": 1,
@@ -109652,7 +109790,7 @@
     },
     {
       "path": "kotlin/iosApp/PolskiGrammar/SwipeToRate.swift",
-      "line": 28,
+      "line": 29,
       "symbol": "file-scope",
       "sourceFingerprint": "8645fd35d908323ce9788390dc407ffe5e541d4ab30a221ad035237753d21444",
       "occurrence": 1,
@@ -109668,7 +109806,7 @@
     },
     {
       "path": "kotlin/iosApp/PolskiGrammar/SwipeToRate.swift",
-      "line": 29,
+      "line": 30,
       "symbol": "file-scope",
       "sourceFingerprint": "e76f038c1d16c4370cb84b5e66b217180104e6f08e2a6a98f69acba65280fcff",
       "occurrence": 1,
@@ -109684,7 +109822,7 @@
     },
     {
       "path": "kotlin/iosApp/PolskiGrammar/SwipeToRate.swift",
-      "line": 30,
+      "line": 31,
       "symbol": "file-scope",
       "sourceFingerprint": "f1a8be2757f503b34b2e95c92f9a0416e88772c1b38d4f1234431d07ff5f9e51",
       "occurrence": 1,
@@ -109700,7 +109838,7 @@
     },
     {
       "path": "kotlin/iosApp/PolskiGrammar/SwipeToRate.swift",
-      "line": 32,
+      "line": 33,
       "symbol": "SwipeToRate",
       "sourceFingerprint": "cc917399cdbbf1fbeb61c01e0b2f1d9893ebbf45909c2fe2dbbafca128efe183",
       "occurrence": 1,
@@ -109716,7 +109854,7 @@
     },
     {
       "path": "kotlin/iosApp/PolskiGrammar/SwipeToRate.swift",
-      "line": 33,
+      "line": 34,
       "symbol": "SwipeToRate",
       "sourceFingerprint": "f762562380c4539d97c01261b390a8dda102eec6d7cc6591b40bb1c4d1509406",
       "occurrence": 1,
@@ -109732,7 +109870,7 @@
     },
     {
       "path": "kotlin/iosApp/PolskiGrammar/SwipeToRate.swift",
-      "line": 34,
+      "line": 35,
       "symbol": "SwipeToRate",
       "sourceFingerprint": "d68a2282ab5857ad7bfd1faaee3a7b16a4c52b0238cee45560a4e9f3bd39a95a",
       "occurrence": 1,
@@ -109748,7 +109886,7 @@
     },
     {
       "path": "kotlin/iosApp/PolskiGrammar/SwipeToRate.swift",
-      "line": 35,
+      "line": 36,
       "symbol": "SwipeToRate",
       "sourceFingerprint": "706a9c207f0f6ccf41854b3d63fb0af83d0b11630b39e571f60b183b98041e00",
       "occurrence": 1,
@@ -109764,7 +109902,7 @@
     },
     {
       "path": "kotlin/iosApp/PolskiGrammar/SwipeToRate.swift",
-      "line": 38,
+      "line": 39,
       "symbol": "SwipeToRate",
       "sourceFingerprint": "cd4afbbbf409732c096148b2f7283e30407e10a6ad5756680cbdd94483a96eb5",
       "occurrence": 1,
@@ -109780,7 +109918,7 @@
     },
     {
       "path": "kotlin/iosApp/PolskiGrammar/SwipeToRate.swift",
-      "line": 39,
+      "line": 40,
       "symbol": "SwipeToRate",
       "sourceFingerprint": "b4e0f380f18861ec569abfa3645989662dc468e3071e73ab192e3655500fa741",
       "occurrence": 1,
@@ -109796,7 +109934,7 @@
     },
     {
       "path": "kotlin/iosApp/PolskiGrammar/SwipeToRate.swift",
-      "line": 40,
+      "line": 41,
       "symbol": "SwipeToRate",
       "sourceFingerprint": "eac71c6feb4d0224601c84b43f040497cf105a1ea79522c167861be256f81d41",
       "occurrence": 1,
@@ -109812,7 +109950,7 @@
     },
     {
       "path": "kotlin/iosApp/PolskiGrammar/SwipeToRate.swift",
-      "line": 61,
+      "line": 62,
       "symbol": "SwipeToRate.body",
       "sourceFingerprint": "ef1e2491c27f92f1e05bf1e6f582ce15e1e56f96ee582797fa273e22e11a4ac1",
       "occurrence": 1,
@@ -109830,7 +109968,7 @@
     },
     {
       "path": "kotlin/iosApp/PolskiGrammar/SwipeToRate.swift",
-      "line": 62,
+      "line": 63,
       "symbol": "SwipeToRate.body",
       "sourceFingerprint": "f5818bde1198c1b9bbffb8e94722aea3d482087628098c0fa589c7f805382e0f",
       "occurrence": 1,
@@ -109848,7 +109986,7 @@
     },
     {
       "path": "kotlin/iosApp/PolskiGrammar/SwipeToRate.swift",
-      "line": 68,
+      "line": 69,
       "symbol": "SwipeToRate.body",
       "sourceFingerprint": "b1ae77e0526242681b8a2b52e1d66b73a75c93c4cb7166eef9d8cf2f92d5d613",
       "occurrence": 1,
@@ -109864,7 +110002,7 @@
     },
     {
       "path": "kotlin/iosApp/PolskiGrammar/SwipeToRate.swift",
-      "line": 69,
+      "line": 70,
       "symbol": "SwipeToRate.body",
       "sourceFingerprint": "cc0a79970f269cc2197af6651b269dbd0a9a562eb8b82a03180443caf921aa8f",
       "occurrence": 1,
@@ -109880,7 +110018,7 @@
     },
     {
       "path": "kotlin/iosApp/PolskiGrammar/SwipeToRate.swift",
-      "line": 71,
+      "line": 72,
       "symbol": "SwipeToRate.body",
       "sourceFingerprint": "7554ac925ec0f0c1c36c5a976dbc733abba6bb82cad78513a1eca35850d79db3",
       "occurrence": 1,
@@ -109896,7 +110034,7 @@
     },
     {
       "path": "kotlin/iosApp/PolskiGrammar/SwipeToRate.swift",
-      "line": 125,
+      "line": 127,
       "symbol": "View",
       "sourceFingerprint": "38ecb0ca30ce2a45dec229c0c0139f59a96eab64b308944d4a3f631840afc1d1",
       "occurrence": 1,
