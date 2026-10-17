@@ -2,6 +2,8 @@
 
 Status: **baseline in progress; no product DSL implementation or FP gate accepted**. This ledger implements [FullPortPlan.md](FullPortPlan.md) Stage 0. Product source baseline is `3ae9df8ae3b54a9411727329480cdb934d670573`; this isolated planning branch is `biome/full-port-2026` at `1774bafaf88b799658fdc58b12bca12cdcb70ed9` before this file. The compiler checkout inspected for planning is `/Users/german/Work/Python/biome-dsl` at `2ab6275d59496e113cd2a17caf0f75d1c63174d2`. These identifiers identify source, not a tested generated artifact. No personal progress, localStorage or app-private document was read or exported. Later stages need a synthetic, versioned fixture instead of user data.
 
+The first implementation candidate is recorded separately in [ReviewCreditExperiment.md](ReviewCreditExperiment.md): it passed several real consumer tests but was rejected for product integration under P8/P16/P17, then reverted. The working branch retains no review-credit DSL runtime dependency. Its results do not close any FP row or replace the baseline entries below.
+
 ## Current execution evidence
 
 The coordinator reported these runs on the unchanged product source. The ledger author inspected only the desktop XML; the other PASS entries are coordinator-reported and their raw logs, timestamps, runtime versions and artifact hashes have not yet been attached. Do not carry these statuses forward after a source change without a new run.
