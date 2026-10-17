@@ -1,5 +1,0 @@
-# A typed answer determines credit when present; oral review uses the rating.
-DECISION countsCorrect DEFAULT true
-  typedWrong AT 10 WHEN review.hasTypedResult AND NOT review.typedCorrect -> false
-  oralAgain AT 20 WHEN NOT review.hasTypedResult AND review.rating == again -> false
-END

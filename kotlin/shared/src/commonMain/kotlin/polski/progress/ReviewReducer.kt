@@ -1,7 +1,6 @@
 package polski.progress
 
 import kotlin.time.Instant
-import polski.biome.generated.Policy
 import polski.srs.Rating
 import polski.srs.Scheduler
 
@@ -25,16 +24,7 @@ class ReviewReducer(private val scheduler: Scheduler, private val knownSkillIds:
         }
         val oldStats = document.progress.stats[skillId] ?: return ReviewResult.UnknownSkill(skillId)
         val reviewed = scheduler.review(document.progress.cards.first { it.skillId == skillId }, rating, at)
-        val correct = Policy.countsCorrect(Policy.CountsCorrectInput(
-            reviewHasTypedResult = typedCorrect != null,
-            reviewRating = when (rating) {
-                Rating.Again -> "again"
-                Rating.Hard -> "hard"
-                Rating.Good -> "good"
-                Rating.Easy -> "easy"
-            },
-            reviewTypedCorrect = typedCorrect ?: false,
-        ))
+        val correct = typedCorrect ?: (rating != Rating.Again)
         val nextStats = oldStats.copy(
             reviews = oldStats.reviews + 1,
             correct = oldStats.correct + if (correct) 1 else 0,

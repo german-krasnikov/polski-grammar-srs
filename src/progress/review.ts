@@ -1,15 +1,9 @@
 import type {Progress,RatingName} from '../types';
 import {review} from '../srs/scheduler';
 import {localDay} from './storage';
-import {policy} from '../generated/biome/session.mjs';
-import {reviewHasTypedResult,reviewRating,reviewTypedCorrect} from './reviewFacts';
 
 export function recordReview(progress:Progress,skillId:string,rating:RatingName,typedCorrect?:boolean):Progress {
- const correct=policy.countsCorrect({
-  reviewRating:reviewRating(rating),
-  reviewHasTypedResult:reviewHasTypedResult(typedCorrect),
-  reviewTypedCorrect:reviewTypedCorrect(typedCorrect),
- });
+ const correct=typedCorrect??rating!=='again';
  const old=progress.stats[skillId];
  return {...progress,
   cards:progress.cards.map(c=>c.skillId===skillId?review(c,rating):c),

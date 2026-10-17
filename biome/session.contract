@@ -1,7 +1,0 @@
-CONTRACT polski.session
-COVERAGE declared-scope
-MODULE ../src/progress/reviewFacts.ts
-FACT review.rating enum=again,hard,good,easy
-FACT review.hasTypedResult bool
-FACT review.typedCorrect bool
-INPUT countsCorrect review.rating review.hasTypedResult review.typedCorrect
