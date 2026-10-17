@@ -4,6 +4,8 @@ Status: **baseline in progress; no product DSL implementation or FP gate accepte
 
 The first implementation candidate is recorded separately in [ReviewCreditExperiment.md](ReviewCreditExperiment.md): it passed several real consumer tests but was rejected for product integration under P8/P16/P17, then reverted. The working branch retains no review-credit DSL runtime dependency. Its results do not close any FP row or replace the baseline entries below.
 
+The pre-existing inventory failures below were repaired separately in commit `04d37ba` without changing production code or independent expectations. On that commit, `npm run course:inventory:check` passed for 165 source files and `npm run course:inventory:decisions:check` passed for 5,371 candidates / 8,270 tokens; the focused inventory suite passed 14 tests in 3 files. Independent read-only review approved the classification of whitespace normalization, validation messages, persistence keys and DOM events. The FAIL rows below remain the historical result on untouched `3ae9df8`; this repair does not close any full-port FP row.
+
 ## Current execution evidence
 
 The coordinator reported these runs on the unchanged product source. The ledger author inspected only the desktop XML; the other PASS entries are coordinator-reported and their raw logs, timestamps, runtime versions and artifact hashes have not yet been attached. Do not carry these statuses forward after a source change without a new run.
