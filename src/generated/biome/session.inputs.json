@@ -1,0 +1,7 @@
+{
+  "countsCorrect": [
+    "review.hasTypedResult",
+    "review.rating",
+    "review.typedCorrect"
+  ]
+}

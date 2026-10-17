@@ -19,6 +19,40 @@ val langDirectory = layout.projectDirectory.dir("../../courses/lang")
 val pairsDirectory = layout.projectDirectory.dir("../../courses/pairs")
 val generatedCourseDirectory = layout.buildDirectory.dir("generated/course/kotlin")
 val generatedFormsFixtureDirectory = layout.buildDirectory.dir("generated/formsFixture/kotlin")
+val generatedBiomeDirectory = layout.buildDirectory.dir("generated/biome/kotlin")
+val productDirectory = layout.projectDirectory.dir("../..")
+val biomeProjectFile = productDirectory.file("biome.project")
+val biomeCommit = providers.provider {
+    Regex("(?m)^TOOLCHAIN ([0-9a-f]{40})$").find(biomeProjectFile.asFile.readText())?.groupValues?.get(1)
+        ?: error("biome.project must pin one Biome compiler commit")
+}
+val verifyBiomeToolchain by tasks.registering(Exec::class) {
+    inputs.files(biomeProjectFile, productDirectory.file("scripts/generate-biome-policy.mjs"),
+        productDirectory.file("scripts/locate-biome.mjs"))
+    inputs.property("biomeCommit", biomeCommit)
+    // Verification is cheap and must also run when policy generation is up to date.
+    outputs.upToDateWhen { false }
+    workingDir = productDirectory.asFile
+    commandLine("node", productDirectory.file("scripts/generate-biome-policy.mjs").asFile.absolutePath, "--verify-only")
+}
+
+// The product project declares the authoritative Logic recipe. The common source set consumes
+// its generated Kotlin output; no authoring file or compiler package enters the app runtime.
+val generateBiomePolicy by tasks.registering(Exec::class) {
+    dependsOn(verifyBiomeToolchain)
+    inputs.files(
+        biomeProjectFile,
+        productDirectory.file("biome/session.contract"),
+        productDirectory.file("biome/session.logic"),
+        productDirectory.file("scripts/generate-biome-policy.mjs"),
+        productDirectory.file("scripts/locate-biome.mjs"),
+    )
+    inputs.property("biomeCommit", biomeCommit)
+    outputs.dir(generatedBiomeDirectory)
+    outputs.dir(productDirectory.dir("src/generated/biome"))
+    workingDir = productDirectory.asFile
+    commandLine("node", productDirectory.file("scripts/generate-biome-policy.mjs").asFile.absolutePath)
+}
 
 // Shared by generateCoursePackSource and generateFormsFixtureSource below: a JS/Wasm-safe way to
 // embed a JSON file's bytes as a Kotlin string constant, so commonTest/commonMain never do file
@@ -226,6 +260,7 @@ kotlin {
             // name happens to match a "compileKotlin*" prefix.
             kotlin.srcDir(generateCoursePackSource.map { it.outputs.files.singleFile })
             kotlin.srcDir(generateFormsFixtureSource.map { it.outputs.files.singleFile })
+            kotlin.srcDir(files(generatedBiomeDirectory).builtBy(generateBiomePolicy))
         }
         commonMain.dependencies {
             implementation(libs.kotlinx.serialization.json)

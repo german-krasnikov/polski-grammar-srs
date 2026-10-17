@@ -1,0 +1,4 @@
+TOOLCHAIN 2ab6275d59496e113cd2a17caf0f75d1c63174d2
+TOOLCHAIN LOCATOR scripts/locate-biome.mjs
+GENERATE session-policy logic generate --source {dir}/biome/session.logic --contract {dir}/biome/session.contract --out {dir}/src/generated/biome --standalone --target "kt {dir}/kotlin/shared/build/generated/biome/kotlin/polski/biome/generated/SessionLogic.kt AS polski.biome.generated"
+GENERATE session-examples logic examples --source {dir}/biome/session.examples --logic {dir}/biome/session.logic --contract {dir}/biome/session.contract --out {dir}/biome/generated/session.json
