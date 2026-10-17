@@ -52,7 +52,7 @@ At product source `3ae9df8`, count tracked files with `git ls-files` and physica
 | Authored root TypeScript tests | 74 | 7,563 | `tests/**/*.ts(x)` outside `tests/fixtures/`; this includes React, Kotlin browser Playwright and course tests. |
 | Generated Kotlin fixture tests | 5 | 2,957 | `TrainingParityTest.kt`, `ProgressFixtureParityTest.kt`, `SchedulerParityTest.kt`, `GrammarParityTest.kt`, `TableMorphologyParityTest.kt`. |
 | Generated course JSON | 4 | 149,030 | `courses/lang/en/forms.generated.json`, `courses/pl-ru/forms.generated.json`, `courses/pl-ru/source-inventory.json`, `courses/pl-ru/inventory-coverage.json`. |
-| Authored course JSON | 44 | 101,490 | Tracked `courses/**/*.json` excluding the four generated paths above. This includes substantial lexical/frequency content, so keep it separate from implementation code. |
+| Other tracked course JSON | 44 | 101,490 | `courses/**/*.json` excluding the four generated paths above. This is **not** a homogeneous authored gameplay denominator: it includes 15 schemas, two imported frequency lists, the 64,573-line human-classified `inventory-decisions.json`, derived v2 layers and curated content. Classify each source before claiming any DSL size saving. |
 | Checked-in Rive vendor JavaScript | 2 | 8,875 | `kotlin/composeApp/src/webMain/resources/rive/*.js`; excluded from authored KMP totals. |
 
 The three before-port change probes are **selected, not executed**. Scope counts below are whole files at this revision and may overlap; report actual touched authored/generated lines and independent edit sites only after performing the same change on reset native and DSL arms.
