@@ -163,7 +163,16 @@ val verifyNj05ReadOnlySelection by tasks.registering {
 }
 
 kotlin {
-    js { browser() }
+    js {
+        browser {
+            testTask {
+                useKarma {
+                    useChromeHeadless()
+                    useConfigDirectory(layout.projectDirectory.dir("karma.config.d").asFile)
+                }
+            }
+        }
+    }
     @OptIn(org.jetbrains.kotlin.gradle.ExperimentalWasmDsl::class)
     wasmJs { browser() }
     applyDefaultHierarchyTemplate()
