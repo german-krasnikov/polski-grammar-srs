@@ -54,6 +54,14 @@ internal class PlRuTypedPack(source: CoursePackSource) : CoursePack(source) {
     override val maleAccRows get() = generatedPlRuMaleAccRows
     override val comparisonNounIds get() = generatedPlRuComparisonNounIds
 
+    // Teaching / reference complex
+    override val referenceCaseTeaching get() = generatedPlRuCaseTeaching
+    override val referenceVerbTeaching get() = generatedPlRuVerbTeaching
+    override val referencePronounTeaching get() = generatedPlRuPronounTeaching
+    override val referenceRussianSupport get() = generatedPlRuRussianSupport
+    override val frequency get() = generatedPlRuFrequency
+    override val futureAuxiliary get() = generatedPlRuFutureAuxiliary
+
     // Simple strings
     override val matrixIntroduction get() = generatedPlRuMatrixIntroduction
     override val webCaseCompositionHeader get() = generatedPlRuWebCaseCompositionHeader

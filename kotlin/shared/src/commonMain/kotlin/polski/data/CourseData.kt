@@ -691,7 +691,10 @@ val usableCourseSelections: List<Pair<String, String>> by lazy {
     }
 }
 
-private fun CoursePack.parsesCompletely(): Boolean = runCatching {
+private fun CoursePack.parsesCompletely(): Boolean {
+    // NJ03: PlRuTypedPack has all fields typed — skip JSON parsing for pl-ru (P7).
+    if (this is PlRuTypedPack) return true
+    return runCatching {
     nouns; adjectives; verbs; skills; sentenceSeeds; stemAlternations; caseSentencePrefixes
     exerciseCopy; exercisePatterns; chainPresentation; caseReferenceRows; referenceGenderNames
     referenceChainRows; referenceSystemCards; referencePipeline; referenceCaseTeaching
@@ -701,6 +704,7 @@ private fun CoursePack.parsesCompletely(): Boolean = runCatching {
     vocabularyInstructions; vocabularyUnavailableLabel; frequency; personalPronouns; possessives
     possessiveForms; futureAuxiliary
 }.isSuccess
+}
 
 /**
  * EN-22 host entrypoint: switches the active pack to [pairId] (`"target-native"`) when this build
