@@ -152,12 +152,38 @@ expect Reject MapKey
 END
 
 CASE N16 named-list-item
-source TextWireDesign.md:36; TextWireExperimentBlueprint.md:27
+source TextWireDesign.md:36; TextWireExperimentBlueprint.md:27; TextWireFreezeAmendment.md:39
 arms A B C
-defect a list child carries a named key rather than sentinel
-input A NOT FROZEN
+defect P04 first list item carries named key "bad" rather than sentinel; parent/count and all other rows unchanged; digest recomputed
+input A utf8-lines
+POLSKI-TEXT	1	progress	2
+M	-	2
+L	K:z	2
+M	K:bad	2
+S	K:id	a
+B	K:x-unknown	1
+M	-	1
+S	K:id	b
+M	K:a	1
+L	K:inner	2
+N	-
+S	-	1
+H	sha256	14fc5751cc310d34d878ccddf1b5494db56cb8bff2a58bb9c38dafd06ffc1f23
 input B NOT FROZEN
-input C NOT FROZEN
+input C utf8-lines
+POLSKI-UNITS	1	progress	2
+M	-	2
+L	KU1:007A	2
+M	KU3:006200610064	2
+S	KU2:00690064	U1:0061
+B	KU9:0078002D0075006E006B006E006F0077006E	1
+M	-	1
+S	KU2:00690064	U1:0062
+M	KU1:0061	1
+L	KU5:0069006E006E00650072	2
+N	-
+S	-	U1:0031
+H	sha256	acb7fd20d79799d1548c110c95aee2a4307be57f9537435c9f81b8094443d5a3
 expect Reject ListItemKey
 END
 
