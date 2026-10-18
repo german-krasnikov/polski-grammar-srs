@@ -22,9 +22,9 @@ object PolskiTextCodec {
         sb.append(HEADER).append(TAB).append(FRAMING_VERSION).append(TAB)
             .append(kind).append(TAB).append(schemaVersion).append(LF)
         encodeNode(sb, "-", root)
-        val bodyBytes = sb.toString().toByteArray(Charsets.UTF_8)
+        val bodyBytes = sb.toString().encodeToByteArray()
         val digest = sha256Hex(bodyBytes)
-        val full = bodyBytes + "H\tsha256\t$digest\n".toByteArray(Charsets.UTF_8)
+        val full = bodyBytes + "H\tsha256\t$digest\n".encodeToByteArray()
         return EncodeResult(full)
     }
 
@@ -92,7 +92,7 @@ object PolskiTextCodec {
     fun decode(bytes: ByteArray): DecodeResult {
         // Validate UTF-8
         val text = try {
-            bytes.toString(Charsets.UTF_8)
+            bytes.decodeToString()
         } catch (e: Exception) {
             return DecodeResult.Err("invalid UTF-8")
         }
@@ -127,7 +127,7 @@ object PolskiTextCodec {
         val hLineStart = text.lastIndexOf("\nH\t")
         if (hLineStart < 0) return DecodeResult.Err("missing digest line")
         // Convert char index to byte index for multi-byte UTF-8 strings
-        val bodyByteLen = text.substring(0, hLineStart + 1).toByteArray(Charsets.UTF_8).size
+        val bodyByteLen = text.substring(0, hLineStart + 1).encodeToByteArray().size
         val bodyBytes = bytes.copyOf(bodyByteLen)
         val actualDigest = sha256Hex(bodyBytes)
         if (actualDigest != expectedDigest) return DecodeResult.Err("digest mismatch")

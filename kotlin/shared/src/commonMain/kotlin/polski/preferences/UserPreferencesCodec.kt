@@ -99,7 +99,7 @@ object UserPreferencesCodec {
 
     /** NJ03 C6: text wire encoder. */
     private fun decodeText(raw: String): PreferencesDecode {
-        val result = PolskiTextCodec.decode(raw.toByteArray(Charsets.UTF_8))
+        val result = PolskiTextCodec.decode(raw.encodeToByteArray())
         if (result !is polski.textwire.DecodeResult.Ok) return invalid(raw, "Invalid POLSKI-TEXT")
         if (result.kind != "preferences") return invalid(raw, "Wrong domain: ${result.kind}")
         val root = result.root
@@ -159,7 +159,7 @@ object UserPreferencesCodec {
     }
 
     /** NJ03 P11: encode delegates to text wire. All callers get POLSKI-TEXT format. */
-    fun encode(value: UserPreferencesV2): String = encodeText(value).toString(Charsets.UTF_8)
+    fun encode(value: UserPreferencesV2): String = encodeText(value).decodeToString()
 
     private fun decodeReminder(root: JsonObject): ReminderPreferences? {
         if (root.keys.any { it !in reminderFields }) return null

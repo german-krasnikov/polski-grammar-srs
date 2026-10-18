@@ -219,7 +219,7 @@ object VocabularyCodec {
 
     fun decode(raw: String): VocabularyDocument {
         // NJ03: try text wire first, fall back to legacy JSON.
-        if (raw.startsWith("POLSKI-TEXT")) return decodeText(raw.toByteArray(Charsets.UTF_8))
+        if (raw.startsWith("POLSKI-TEXT")) return decodeText(raw.encodeToByteArray())
         val root = Json.parseToJsonElement(raw).jsonObject
         require(root.getValue("version").jsonPrimitive.int == 1 && root.getValue("pair").jsonPrimitive.content == packRegistry.active.pairId)
         val selected = root.getValue("selectedIds").jsonArray.map { it.jsonPrimitive.content }

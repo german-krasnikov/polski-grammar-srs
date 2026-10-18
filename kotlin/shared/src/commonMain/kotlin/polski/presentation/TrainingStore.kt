@@ -408,7 +408,7 @@ class TrainingStore(
 
     private fun export() {
         // NJ03 C6: export as POLSKI-TEXT; DownloadJson retained for recovery path only.
-        val text = document?.let { ProgressCodec.encodeText(it).toString(Charsets.UTF_8) }
+        val text = document?.let { ProgressCodec.encodeText(it).decodeToString() }
             ?: recoveryRaw ?: return
         val isText = text.startsWith("POLSKI-TEXT")
         if (isText) addEffect { UiEffect.DownloadText(it, "polski-srs-progress.txt", text) }
