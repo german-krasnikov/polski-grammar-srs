@@ -76,7 +76,10 @@ class RawProgressRepository(
             }
             return if (legacy != null) LoadResult.LegacyAvailable(legacy) else LoadResult.Missing
         }
-        val decoded = ProgressCodec.decode(raw)
+        // NJ03 C6: try text wire first, fall back to JSON for legacy.
+        val decoded = if (raw.startsWith("POLSKI-TEXT"))
+            ProgressCodec.decodeText(raw.toByteArray(Charsets.UTF_8))
+            else ProgressCodec.decode(raw)
         if (marker != null || backup != null || legacy != null) {
             if (marker == null || backup == null || parseStamp(marker, backup) == null ||
                 (legacy != null && legacy != backup) || decoded !is DecodeResult.Valid || decoded.document.stamp() != marker) {
@@ -97,7 +100,11 @@ class RawProgressRepository(
                 is LoadResult.Unavailable -> return SaveResult.WriteFailed(current.cause)
                 else -> return SaveResult.WriteFailed(IllegalStateException("Progress requires migration or recovery before save"))
             }
-            val raw = ProgressCodec.encodeLegacyV1(document)
+            // NJ03 C6: use text wire when no migration state is present.
+            // When migration stamp is present, keep JSON for compatibility with migrateLegacy.
+            val hasMigrationState = storage.get(LEGACY_KEY) != null || storage.get(MARKER_KEY) != null
+            val raw = if (hasMigrationState) ProgressCodec.encodeLegacyV1(document)
+                      else ProgressCodec.encodeText(document).toString(Charsets.UTF_8)
             storage.put(PREVIEW_KEY, raw)
             check(storage.get(PREVIEW_KEY) == raw) { "Preview read-back mismatch" }
             SaveResult.Saved

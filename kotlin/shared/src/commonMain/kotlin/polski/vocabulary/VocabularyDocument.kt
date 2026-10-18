@@ -1,5 +1,8 @@
 package polski.vocabulary
 
+import polski.textwire.PolskiTextCodec
+import polski.textwire.WireNode
+
 import kotlin.time.Instant
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonArray
@@ -234,6 +237,47 @@ object VocabularyCodec {
             }
         }
         return validate(VocabularyDocument(selected, custom, cards))
+    }
+
+    /** NJ03 C6: text wire encoder replaces JSON encode for new saves. */
+    fun encodeText(document: VocabularyDocument): ByteArray {
+        val normalized = validate(document)
+        val pairId = packRegistry.active.pairId
+        val selectedList = WireNode.WireList(normalized.selectedIds.map { WireNode.WireString(it) })
+        val customList = WireNode.WireList(normalized.custom.map { item ->
+            WireNode.WireMap(listOf(
+                "id" to WireNode.WireString(item.id),
+                "lemma" to WireNode.WireString(item.lemma),
+                "translation" to WireNode.WireString(item.translation),
+                "form" to WireNode.WireString(item.form),
+                "example" to WireNode.WireString(item.example),
+                "level" to WireNode.WireString(item.level),
+            ))
+        })
+        val cardsList = WireNode.WireList(normalized.cards.entries.map { (key, card) ->
+            val wire = SrsCardWire.encode(card)
+            WireNode.WireMap(listOfNotNull(
+                "key" to WireNode.WireString(key),
+                "due" to WireNode.WireString(wire.due),
+                "stability" to WireNode.WireF64(wire.stability.toBits()),
+                "difficulty" to WireNode.WireF64(wire.difficulty.toBits()),
+                "elapsed_days" to WireNode.WireI64(wire.elapsedDays.toLong()),
+                "scheduled_days" to WireNode.WireI64(wire.scheduledDays.toLong()),
+                "reps" to WireNode.WireI64(wire.reps.toLong()),
+                "lapses" to WireNode.WireI64(wire.lapses.toLong()),
+                "learning_steps" to WireNode.WireI64(wire.learningSteps.toLong()),
+                "state" to WireNode.WireI64(wire.state.toLong()),
+                wire.lastReview?.let { "last_review" to WireNode.WireString(it) },
+            ))
+        })
+        val root = WireNode.WireMap(listOf(
+            "version" to WireNode.WireI64(1),
+            "pair" to WireNode.WireString(pairId),
+            "selectedIds" to selectedList,
+            "custom" to customList,
+            "cards" to cardsList,
+        ))
+        return PolskiTextCodec.encode(root, "vocabulary", 1).bytes
     }
 
     fun encode(document: VocabularyDocument): String = buildJsonObject {

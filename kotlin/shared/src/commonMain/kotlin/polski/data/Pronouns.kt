@@ -5,12 +5,19 @@ import polski.model.PossessiveId
 
 data class Possessive(val id: PossessiveId, val label: String)
 
-/** EN-22: read fresh on every call (not frozen at first access), same fix as [skills] — see its KDoc. */
-val personalPronouns: Map<String, Map<GramCase, String>> get() = packRegistry.active.personalPronouns
-val possessives: List<Possessive> get() = packRegistry.active.possessives
+// NJ03: pl-ru reads from typed Biome literal source.
+val personalPronouns: Map<String, Map<GramCase, String>> get() =
+    if (packRegistry.active.id == "pl-ru") generatedPlRuPersonalPronouns
+    else packRegistry.active.personalPronouns
 
-/** EnRuAcceptance-2026-09-28.md §7 item 1: the active pack's raw case-id → form map for one
- *  pronoun — see [polski.data.CoursePack.personalPronounRawForms]'s KDoc for why this exists
- *  alongside the pl-shaped, [GramCase]-keyed [personalPronouns]. */
+val possessives: List<Possessive> get() =
+    if (packRegistry.active.id == "pl-ru") generatedPlRuPossessives
+    else packRegistry.active.possessives
+
+internal val possessiveForms: Map<PossessiveId, CoursePossessiveForms> get() =
+    if (packRegistry.active.id == "pl-ru") generatedPlRuPossessiveForms
+    else packRegistry.active.possessiveForms
+
 fun personalPronounForm(pronounId: String, caseId: String): String =
-    packRegistry.active.personalPronounRawForms.getValue(pronounId).getValue(caseId)
+    if (packRegistry.active.id == "pl-ru") generatedPlRuPersonalPronounRawForms.getValue(pronounId).getValue(caseId)
+    else packRegistry.active.personalPronounRawForms.getValue(pronounId).getValue(caseId)

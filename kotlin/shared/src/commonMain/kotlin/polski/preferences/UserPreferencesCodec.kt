@@ -1,5 +1,8 @@
 package polski.preferences
 
+import polski.textwire.PolskiTextCodec
+import polski.textwire.WireNode
+
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonElement
@@ -90,6 +93,32 @@ object UserPreferencesCodec {
         val animations = if (version == 1) defaults.animationsEnabled
             else root.optionalBoolean("animationsEnabled", defaults.animationsEnabled) ?: return invalid(raw, "Invalid animationsEnabled")
         return PreferencesDecode.Loaded(UserPreferencesV2(3, target, native, style, answer, appearance, motion, swipe, reminder, tint, animations))
+    }
+
+    /** NJ03 C6: text wire encoder. */
+    fun encodeText(value: UserPreferencesV2): ByteArray {
+        require(value.schemaVersion == 3 && packRegistry.contains("${value.target}-${value.native}") && validReminder(value.reminder) && value.glassTintPercent in 0..100)
+        val reminder = value.reminder
+        val reminderNode = WireNode.WireMap(listOf(
+            "enabled" to WireNode.WireBool(reminder.enabled),
+            "localTime" to WireNode.WireString(reminder.localTime),
+            "days" to WireNode.WireList(reminder.days.map { WireNode.WireI64(it.toLong()) }),
+            "quietStart" to WireNode.WireString(reminder.quietStart),
+            "quietEnd" to WireNode.WireString(reminder.quietEnd),
+        ))
+        val root = WireNode.WireMap(listOf(
+            "schemaVersion" to WireNode.WireI64(3),
+            "coursePair" to WireNode.WireString("${value.target}-${value.native}"),
+            "styleId" to WireNode.WireString(value.styleId.name),
+            "answerMode" to WireNode.WireString(value.answerMode.name),
+            "appearance" to WireNode.WireString(value.appearance.name),
+            "motion" to WireNode.WireString(value.motion.name),
+            "swipeRatingEnabled" to WireNode.WireBool(value.swipeRatingEnabled),
+            "glassTintPercent" to WireNode.WireI64(value.glassTintPercent.toLong()),
+            "animationsEnabled" to WireNode.WireBool(value.animationsEnabled),
+            "reminder" to reminderNode,
+        ))
+        return PolskiTextCodec.encode(root, "preferences", 3).bytes
     }
 
     fun encode(value: UserPreferencesV2): String {

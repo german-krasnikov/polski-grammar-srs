@@ -407,8 +407,12 @@ class TrainingStore(
     }
 
     private fun export() {
-        val json = document?.let(ProgressCodec::encodeLegacyV1) ?: recoveryRaw ?: return
-        addEffect { UiEffect.DownloadJson(it, "polski-srs-progress.json", json) }
+        // NJ03 C6: export as POLSKI-TEXT; DownloadJson retained for recovery path only.
+        val text = document?.let { ProgressCodec.encodeText(it).toString(Charsets.UTF_8) }
+            ?: recoveryRaw ?: return
+        val isText = text.startsWith("POLSKI-TEXT")
+        if (isText) addEffect { UiEffect.DownloadText(it, "polski-srs-progress.txt", text) }
+        else addEffect { UiEffect.DownloadJson(it, "polski-srs-progress.json", text) }
     }
 
     private fun acknowledge(action: AppAction.EffectAcknowledged) {

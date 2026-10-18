@@ -720,6 +720,11 @@ val availableCoursePacks: List<CoursePackOption> get() =
     usableCourseSelections.map { (target, native) -> CoursePackOption("$target-$native", target, native) }
 
 /** [CoursePack.pairId] of the pack currently serving content. */
+// NJ03: pl-ru metadata from typed source (pair.json still provides other fields).
+private val plRuPairId = "pl-ru"
+private val plRuTarget = "pl"
+private val plRuNative = "ru"
+
 val activeCoursePackId: String get() = packRegistry.active.pairId
 
 /** The currently active pack's own [CoursePackOption] — a public target/native pair (`internal`
