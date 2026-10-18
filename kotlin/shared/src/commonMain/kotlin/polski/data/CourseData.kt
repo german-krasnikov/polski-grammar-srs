@@ -747,7 +747,9 @@ fun selectCoursePack(pairId: String) {
 val courseSentenceSeeds: List<SentenceSeed> get() =
     if (packRegistry.active.id == "pl-ru") generatedPlRuSentenceSeeds
     else packRegistry.active.sentenceSeeds
-val courseStemAlternations: List<StemAlternation> get() = packRegistry.active.stemAlternations
+val courseStemAlternations: List<StemAlternation> get() =
+    if (packRegistry.active.id == "pl-ru") generatedPlRuStemAlternations
+    else packRegistry.active.stemAlternations
 
 fun caseSentencePrefix(gramCase: GramCase, number: NumberGram): String {
     require(gramCase != GramCase.VOC)
@@ -768,10 +770,11 @@ fun caseSentencePrefix(caseId: String, number: NumberGram): String {
     val key = if (caseId == GramCase.NOM.id) {
         if (number == NumberGram.SG) "nomSg" else "nomPl"
     } else caseId
-    return packRegistry.active.caseSentencePrefixes.getValue(key)
+    return if (packRegistry.active.id == "pl-ru") generatedPlRuCaseSentencePrefixes.getValue(key)
+        else packRegistry.active.caseSentencePrefixes.getValue(key)
 }
 
-fun exerciseCopy(key: String): String = packRegistry.active.exerciseCopy.getValue(key)
+fun exerciseCopy(key: String): String = if (packRegistry.active.id == "pl-ru") generatedPlRuExerciseCopy.getValue(key) else packRegistry.active.exerciseCopy.getValue(key)
 
 // EN-22 fix (EnRuAcceptance §7 item 1, corrected): each [CoursePack] property below is nullable (a
 // pack whose `reference` block doesn't cover this pl-specific teaching topic — en-ru today). This
@@ -805,30 +808,34 @@ private val emptyRussianSupport = RussianSupport(fullTitle = "", compactTitle = 
 private val emptyContextHelp = CourseContextHelp(react = "", compact = "")
 private val emptyAspectNoPresent = CourseAspectNoPresent(compact = "", ios = "")
 
-val referenceChainRows: List<ReferenceChainRow> get() = packRegistry.active.referenceChainRows ?: emptyList()
-val courseChainPresentation: ChainPresentation get() = packRegistry.active.chainPresentation
-val referenceSystemCards: List<ReferenceSystemCard> get() = packRegistry.active.referenceSystemCards ?: emptyList()
-val referencePipeline: ReferencePipeline get() = packRegistry.active.referencePipeline ?: emptyReferencePipeline
+// NJ03: pl-ru reads from typed Biome literal source for all reference fields.
+private fun <T> plRu(typed: T, fallback: () -> T): T =
+    if (packRegistry.active.id == "pl-ru") typed else fallback()
+
+val referenceChainRows: List<ReferenceChainRow> get() = plRu(generatedPlRuReferenceChainRows) { packRegistry.active.referenceChainRows ?: emptyList() }
+val courseChainPresentation: ChainPresentation get() = plRu(generatedPlRuChainPresentation) { packRegistry.active.chainPresentation }
+val referenceSystemCards: List<ReferenceSystemCard> get() = plRu(generatedPlRuReferenceSystemCards) { packRegistry.active.referenceSystemCards ?: emptyList() }
+val referencePipeline: ReferencePipeline get() = plRu(generatedPlRuReferencePipeline) { packRegistry.active.referencePipeline ?: emptyReferencePipeline }
 val referenceCaseTeaching: CaseTeaching get() = packRegistry.active.referenceCaseTeaching ?: emptyCaseTeaching
 val referenceVerbTeaching: VerbTeaching get() = packRegistry.active.referenceVerbTeaching ?: emptyVerbTeaching
 val referencePronounTeaching: PronounTeaching get() = packRegistry.active.referencePronounTeaching ?: emptyPronounTeaching
-val comparisonNounIds: List<String> get() = packRegistry.active.comparisonNounIds ?: emptyList()
+val comparisonNounIds: List<String> get() = plRu(generatedPlRuComparisonNounIds) { packRegistry.active.comparisonNounIds ?: emptyList() }
 val referenceRussianSupport: RussianSupport get() = packRegistry.active.referenceRussianSupport ?: emptyRussianSupport
-val referenceTenseRows: List<ReferenceTenseRow> get() = packRegistry.active.referenceTenseRows ?: emptyList()
-val referenceAspectRows: List<ReferenceAspectRow> get() = packRegistry.active.referenceAspectRows ?: emptyList()
-val maleAccRows: List<MaleAccRow> get() = packRegistry.active.maleAccRows ?: emptyList()
-val courseMatrixIntroduction: String get() = packRegistry.active.matrixIntroduction ?: ""
-val courseWebCaseCompositionHeader: String get() = packRegistry.active.webCaseCompositionHeader ?: ""
-val courseContextHelp: CourseContextHelp get() = packRegistry.active.contextHelp ?: emptyContextHelp
-val courseMaleAccIntro: String get() = packRegistry.active.maleAccIntro ?: ""
-val courseAspectNoPresent: CourseAspectNoPresent get() = packRegistry.active.aspectNoPresent ?: emptyAspectNoPresent
-val courseVocabularyInstructions: CourseVocabularyInstructions get() = packRegistry.active.vocabularyInstructions
-val courseVocabularyUnavailableLabel: String get() = packRegistry.active.vocabularyUnavailableLabel
+val referenceTenseRows: List<ReferenceTenseRow> get() = plRu(generatedPlRuReferenceTenseRows) { packRegistry.active.referenceTenseRows ?: emptyList() }
+val referenceAspectRows: List<ReferenceAspectRow> get() = plRu(generatedPlRuReferenceAspectRows) { packRegistry.active.referenceAspectRows ?: emptyList() }
+val maleAccRows: List<MaleAccRow> get() = plRu(generatedPlRuMaleAccRows) { packRegistry.active.maleAccRows ?: emptyList() }
+val courseMatrixIntroduction: String get() = plRu(generatedPlRuMatrixIntroduction) { packRegistry.active.matrixIntroduction ?: "" }
+val courseWebCaseCompositionHeader: String get() = plRu(generatedPlRuWebCaseCompositionHeader) { packRegistry.active.webCaseCompositionHeader ?: "" }
+val courseContextHelp: CourseContextHelp get() = plRu(generatedPlRuContextHelp) { packRegistry.active.contextHelp ?: emptyContextHelp }
+val courseMaleAccIntro: String get() = plRu(generatedPlRuMaleAccIntro) { packRegistry.active.maleAccIntro ?: "" }
+val courseAspectNoPresent: CourseAspectNoPresent get() = plRu(generatedPlRuAspectNoPresent) { packRegistry.active.aspectNoPresent ?: emptyAspectNoPresent }
+val courseVocabularyInstructions: CourseVocabularyInstructions get() = plRu(generatedPlRuVocabularyInstructions) { packRegistry.active.vocabularyInstructions }
+val courseVocabularyUnavailableLabel: String get() = plRu(generatedPlRuVocabularyUnavailableLabel) { packRegistry.active.vocabularyUnavailableLabel }
 
 private val coursePlaceholder = Regex("\\{([A-Za-z][A-Za-z0-9]*)\\}")
 
 fun renderCoursePattern(key: String, values: Map<String, String>): String =
-    coursePlaceholder.replace(packRegistry.active.exercisePatterns.getValue(key)) { match ->
+    coursePlaceholder.replace(if (packRegistry.active.id == "pl-ru") generatedPlRuExercisePatterns.getValue(key) else packRegistry.active.exercisePatterns.getValue(key)) { match ->
         val name = match.groupValues[1]
         values[name]?.takeIf { it.isNotEmpty() } ?: error("Missing $name for $key")
     }

@@ -23,9 +23,11 @@ fun skillById(id: String): Skill = skills.firstOrNull { it.id == id } ?: error("
  */
 internal fun activePackSkillIds(registry: PackRegistry): Set<String> = registry.active.skills.map { it.id }.toSet()
 
+// NJ03: pl-ru reads from typed Biome literal source.
 fun presentationBySkillId(id: String): SkillPresentation =
-    packRegistry.active.presentations[id] ?: error("Unknown skill presentation $id")
+    if (packRegistry.active.id == "pl-ru") generatedPlRuPresentations[id] ?: error("Unknown skill presentation $id")
+    else packRegistry.active.presentations[id] ?: error("Unknown skill presentation $id")
 
-/** Absent styleContent for [id] (true for every skill today) means [SkillStyleContent]'s all-derived defaults. */
 fun styleContentBySkillId(id: String): SkillStyleContent =
-    packRegistry.active.styleContent[id] ?: SkillStyleContent()
+    if (packRegistry.active.id == "pl-ru") generatedPlRuStyleContent[id] ?: SkillStyleContent()
+    else packRegistry.active.styleContent[id] ?: SkillStyleContent()
