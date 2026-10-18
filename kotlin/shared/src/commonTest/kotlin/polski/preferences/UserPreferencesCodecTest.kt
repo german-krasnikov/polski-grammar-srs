@@ -37,7 +37,7 @@ class UserPreferencesCodecTest {
         assertIs<PreferencesDecode.RecoveryRequired>(UserPreferencesCodec.decode("""{"schemaVersion":3,"styleId":"Logic"}"""))
         assertIs<PreferencesDecode.RecoveryRequired>(UserPreferencesCodec.decode("""{"schemaVersion":3,"explanationMethod":"Logic"}"""))
         val encoded = UserPreferencesCodec.encode(UserPreferencesV2(styleId = PreferredStyle.MinimalTheory))
-        assertTrue(encoded.contains("\"styleId\":\"MinimalTheory\""))
+        assertTrue(encoded.contains("MinimalTheory"), "encoded should contain style name")
         assertTrue(!encoded.contains("explanationMethod"))
     }
 
@@ -98,12 +98,18 @@ class UserPreferencesCodecTest {
 
     // Golden: an existing default-shaped pl-ru v3 document (React export or KMP) round-trips
     // byte-identically through the new codec — the wire format itself has not changed.
-    @Test fun defaultV3DocumentIsGoldenByteIdentical() {
+    // NJ03: encode now outputs POLSKI-TEXT; round-trip + legacy JSON decode.
+    @Test fun defaultPreferencesRoundTrip() {
+        val encoded = UserPreferencesCodec.encode(UserPreferencesV2())
+        assertTrue(encoded.startsWith("POLSKI-TEXT"), "encode should produce POLSKI-TEXT")
+        assertEquals(UserPreferencesV2(), assertIs<PreferencesDecode.Loaded>(UserPreferencesCodec.decode(encoded)).value)
+    }
+
+    @Test fun legacyJsonV3StillDecodes() {
         val golden = "{\"schemaVersion\":3,\"coursePair\":\"pl-ru\",\"styleId\":\"RuleFirst\",\"answerMode\":\"Oral\"," +
             "\"appearance\":\"System\",\"motion\":\"System\",\"swipeRatingEnabled\":true,\"glassTintPercent\":50," +
             "\"animationsEnabled\":true,\"reminder\":{\"enabled\":false,\"localTime\":\"19:00\",\"days\":[1,2,3,4,5,6,7]," +
             "\"quietStart\":\"22:00\",\"quietEnd\":\"08:00\"}}"
-        assertEquals(golden, UserPreferencesCodec.encode(UserPreferencesV2()))
         assertEquals(UserPreferencesV2(), assertIs<PreferencesDecode.Loaded>(UserPreferencesCodec.decode(golden)).value)
     }
 
@@ -166,7 +172,7 @@ class UserPreferencesCodecTest {
         packRegistry.select("en-ru")
         try {
             val encoded = UserPreferencesCodec.encode(UserPreferencesV2(target = "pl", native = "ru"))
-            assertTrue(encoded.contains("\"coursePair\":\"pl-ru\""))
+            assertTrue(encoded.contains("pl-ru"), "encoded should contain pl-ru")
         } finally {
             packRegistry.select("pl-ru")
         }
