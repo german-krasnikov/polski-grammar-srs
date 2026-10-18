@@ -7,17 +7,85 @@ import platform.Foundation.NSTemporaryDirectory
 import platform.Foundation.NSUUID
 import polski.macos.MacPreferencesRepository
 import polski.macos.MacProgressRepository
+import polski.macos.MacVocabularyRepository
 import polski.srs.FsrsScheduler
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 import kotlin.test.assertFalse
+import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
-/** Rejected old input only: the host must not create a legacy JSON output file. */
+/** Historical host admission only; accepted old files live solely in isolated, deleted test storage. */
 @OptIn(ExperimentalForeignApi::class)
 class LegacyHostSizeAdmissionTest {
     private val progressPrefix = """{"version":1,"cards":[],"stats":{},"reviewsToday":0,"lastDay":"2026-03-29","totalReviews":0,"unknown":""""
+    private val vocabularyPrefix = """{"version":1,"pair":"pl-ru","selectedIds":[],"custom":[],"cards":{},"padding":""""
     private val preferencesPrefix = """{"schemaVersion":1"""
+
+    private fun filled(prefix: String, suffix: String, size: Int, value: Char): String =
+        prefix + value.toString().repeat(size - prefix.length - suffix.length) + suffix
+
+    @Test
+    fun macProgressImportsLedgerPinnedNearAndExactLimitInputs() = runBlocking {
+        for (size in listOf(9_999_999, 10_000_000)) {
+            val directory = NSTemporaryDirectory() + "polski-nj05-progress-$size-${NSUUID().UUIDString}"
+            try {
+                val raw = filled(progressPrefix, "\"}", size, 'x')
+                assertTrue(legacyAdmissionMatches("PG-$size", raw))
+                val repository = MacProgressRepository(directory, FsrsScheduler())
+                assertNull(repository.importJson(raw))
+                assertEquals(raw, repository.recoveryRaw())
+            } finally {
+                NSFileManager.defaultManager.removeItemAtPath(directory, null)
+            }
+        }
+    }
+
+    @Test
+    fun macVocabularyRepositorySavesLedgerPinnedNearAndExactLimitInputs() = runBlocking {
+        for (size in listOf(9_999_999, 10_000_000)) {
+            val directory = NSTemporaryDirectory() + "polski-nj05-vocabulary-$size-${NSUUID().UUIDString}"
+            try {
+                val raw = filled(vocabularyPrefix, "\"}", size, 'x')
+                assertTrue(legacyAdmissionMatches("VO-$size", raw))
+                val repository = MacVocabularyRepository(directory)
+                repository.saveRaw(raw, false)
+                assertEquals(raw, repository.loadRaw())
+            } finally {
+                NSFileManager.defaultManager.removeItemAtPath(directory, null)
+            }
+        }
+    }
+
+    @Test
+    fun macVocabularyRepositoryRejectsLedgerPinnedLimitPlusOneBeforeAnyWrite() = runBlocking {
+        val directory = NSTemporaryDirectory() + "polski-nj05-vocabulary-${NSUUID().UUIDString}"
+        try {
+            val raw = filled(vocabularyPrefix, "\"}", 10_000_001, 'x')
+            assertTrue(legacyAdmissionMatches("VO-10000001", raw))
+            assertFailsWith<IllegalArgumentException> { MacVocabularyRepository(directory).saveRaw(raw, false) }
+            assertFalse(NSFileManager.defaultManager.fileExistsAtPath(directory))
+        } finally {
+            NSFileManager.defaultManager.removeItemAtPath(directory, null)
+        }
+    }
+
+    @Test
+    fun macPreferencesImportsLedgerPinnedNearAndExactLimitInputs() {
+        for (size in listOf(999_999, 1_000_000)) {
+            val directory = NSTemporaryDirectory() + "polski-nj05-preferences-$size-${NSUUID().UUIDString}"
+            try {
+                val raw = filled(preferencesPrefix, "}", size, ' ')
+                assertTrue(legacyAdmissionMatches("PF-$size", raw))
+                val repository = MacPreferencesRepository(directory)
+                assertNull(repository.importJson(raw))
+                assertEquals(raw, repository.raw())
+            } finally {
+                NSFileManager.defaultManager.removeItemAtPath(directory, null)
+            }
+        }
+    }
 
     @Test
     fun macProgressRejectsLimitPlusOneBeforeAnyWrite() = runBlocking {
