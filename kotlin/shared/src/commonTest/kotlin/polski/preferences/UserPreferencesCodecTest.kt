@@ -99,10 +99,18 @@ class UserPreferencesCodecTest {
     // Golden: an existing default-shaped pl-ru v3 document (React export or KMP) round-trips
     // byte-identically through the new codec — the wire format itself has not changed.
     // NJ03: encode now outputs POLSKI-TEXT; round-trip + legacy JSON decode.
+    // P15: encode is deterministic and round-trips; golden is the encode output itself.
     @Test fun defaultPreferencesRoundTrip() {
         val encoded = UserPreferencesCodec.encode(UserPreferencesV2())
         assertTrue(encoded.startsWith("POLSKI-TEXT"), "encode should produce POLSKI-TEXT")
         assertEquals(UserPreferencesV2(), assertIs<PreferencesDecode.Loaded>(UserPreferencesCodec.decode(encoded)).value)
+        // Determinism: encoding the same value twice yields identical bytes.
+        assertEquals(encoded, UserPreferencesCodec.encode(UserPreferencesV2()))
+        // Structure: key fields present in wire output.
+        assertTrue("K:coursePair" in encoded, "coursePair key")
+        assertTrue("K:styleId" in encoded, "styleId key")
+        assertTrue("K:reminder" in encoded, "reminder key")
+        assertTrue("sha256" in encoded, "SHA-256 hash line")
     }
 
     @Test fun legacyJsonV3StillDecodes() {

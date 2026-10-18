@@ -78,8 +78,9 @@ class ProgressRepositoryTest {
         assertNull(store.values[RawProgressRepository.PREVIEW_KEY])
         assertIs<MigrationResult.Migrated>(immediate { repository.migrateLegacy(at, "2026-03-29", listOf("known")) })
         assertEquals(SaveResult.Saved, immediate { repository.resetConfirmed(at, "2026-03-29", listOf("known")) })
-        assertEquals(legacyRaw(), store.values[RawProgressRepository.LEGACY_KEY])
-        assertEquals(legacyRaw(), store.values[RawProgressRepository.BACKUP_KEY])
+        // NJ03 §Данные: after successful POLSKI-TEXT save, migration keys cleaned up.
+        assertTrue(store.values[RawProgressRepository.LEGACY_KEY].isNullOrEmpty())
+        assertTrue(store.values[RawProgressRepository.BACKUP_KEY].isNullOrEmpty())
         assertIs<LoadResult.Loaded>(immediate { repository.load() })
     }
 
