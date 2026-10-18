@@ -5,51 +5,14 @@ Reads requirements.core-data → prints Kotlin assertion blocks to stdout.
 The surrounding test class, evaluation/queue/ports tests stay hand-authored.
 """
 from __future__ import annotations
-import hashlib, re, sys
+import hashlib, sys
 from pathlib import Path
+import sys as _sys
+_sys.path.insert(0, str(Path(__file__).parent))
+from biome_value import parse  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[2]
 ORACLE = ROOT / "tests/fixtures/nj03-exercise-oracle/requirements.core-data"
-
-# --- minimal Biome value parser ---
-
-def _ws(s, i):
-    while i < len(s) and s[i] in ' \t\r\n': i += 1
-    return i
-
-def _str(s, i):
-    i += 1; parts = []
-    while s[i] != '"':
-        if s[i] == '\\':
-            i += 1; c = s[i]
-            parts.append({'n':'\n','t':'\t','r':'\r'}.get(c, c))
-        else:
-            parts.append(s[i])
-        i += 1
-    return ''.join(parts), i+1
-
-def _val(s, i):
-    i = _ws(s, i)
-    if s[i] == '"': return _str(s, i)
-    if s[i] == '{':
-        i = _ws(s, i+1); rec = {}
-        while s[i] != '}':
-            m = re.match(r'[a-zA-Z_]\w*', s[i:]); k = m.group(); i = _ws(s, i+len(k))
-            assert s[i] == ':'; i = _ws(s, i+1)
-            v, i = _val(s, i); rec[k] = v; i = _ws(s, i)
-        return rec, i+1
-    if s[i] == '[':
-        i = _ws(s, i+1); lst = []
-        while s[i] != ']': v, i = _val(s, i); lst.append(v); i = _ws(s, i)
-        return lst, i+1
-    if s[i:i+4] == 'null': return None, i+4
-    m = re.match(r'-?\d+(?:\.\d+)?', s[i:])
-    if m: t = m.group(); return (float(t) if '.' in t else int(t)), i+len(t)
-    m = re.match(r'[a-zA-Z_][\w.:-]*', s[i:])
-    if m: return m.group(), i+len(m.group())
-    raise ValueError(f"at {i}: {s[i:i+20]}")
-
-def parse(text): return _val(text, 0)[0]
 
 # --- Kotlin printer ---
 
