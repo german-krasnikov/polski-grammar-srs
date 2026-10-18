@@ -1,0 +1,40 @@
+# NJ03 old-source facts. Frozen before any candidate DSL transcription.
+# SOURCE | language | exact relative source path | full-file SHA-256
+# ROW | language | 1-based position | id | construction | focus | fixed | lexicalFilter | level | prerequisites
+# NULL means an explicitly present null; {} means a present empty record; [] means a present empty list.
+# Focus: feature:from>to. Fixed: ordered key=value pairs. Lexical: slot/whereKey=ordered values.
+# Every ROW has seven top-level fields in the source order documented by the ledger.
+SOURCE | en | courses/lang/en/curriculum.json | 4c8f1c21595479a1b49ebb38a6fa4df9fff15f02bbe6d6cdd2b8ed4ecaf0afe6
+SOURCE | pl | courses/lang/pl/curriculum.json | 4f98cb4e0a5bc5b5f21890120fe25e077cedc2ba5e65852bff4b1e252b4234b7
+ROW | en | 01 | en:role.object | core.argument.case-role | Case:Subj>Obj | Tense=Pres,Person=1,Number=Sing | NULL | A1 | []
+ROW | en | 02 | en:verb.presentSimple | core.verb.tense | Tense:Past>Pres | Person=3,Number=Sing,Aspect=Simple | NULL | A1 | []
+ROW | en | 03 | en:possessive.my | core.agreement.possessive | NULL | Case=Obj,Tense=Pres,Person=1,Number=Sing | NULL | A1 | en:role.object
+ROW | en | 04 | en:mood.question | core.sentence.mood | Mood:Decl>YesNoQ | Tense=Pres,Person=2,Number=Sing,Aspect=Simple | NULL | A1 | en:verb.presentSimple
+ROW | en | 05 | en:role.location | core.argument.case-role | Case:Obj>In | Tense=Pres,Person=1,Number=Sing | NULL | A1 | en:role.object
+ROW | en | 06 | en:role.instrument | core.argument.case-role | Case:Obj>With | Tense=Pres,Person=1,Number=Sing | NULL | A2 | en:role.object
+ROW | en | 07 | en:polarity.present | core.sentence.polarity | Polarity:Pos>Neg | Tense=Pres,Person=1,Number=Sing,Aspect=Simple | NULL | A2 | en:role.object
+ROW | en | 08 | en:verb.pastSimple | core.verb.tense | Tense:Pres>Past | Person=3,Number=Sing,Aspect=Simple | NULL | A2 | en:verb.presentSimple
+ROW | en | 09 | en:role.recipient | core.argument.case-role | Case:Obj>To | Tense=Pres,Person=1,Number=Sing | noun/nounId=wife,husband,friend,son,dog,cat,child | A2 | en:role.instrument
+ROW | en | 10 | en:number.plural | core.number | Number:Sing>Plur | Case=Obj,Tense=Pres,Person=1 | NULL | A2 | en:role.object,en:possessive.my
+ROW | en | 11 | en:polarity.past | core.sentence.polarity | Polarity:Pos>Neg | Tense=Past,Person=1,Number=Sing,Aspect=Simple | NULL | A2 | en:polarity.present,en:verb.pastSimple
+ROW | en | 12 | en:verb.futureSimple | core.verb.tense | Tense:Pres>Fut | Person=3,Number=Sing,Aspect=Simple | NULL | A2 | en:verb.pastSimple
+ROW | en | 13 | en:pronouns | core.argument.case-role | NULL | Case=Obj,Tense=Pres,Person=1,Number=Sing | noun/nounId=book,work,dog,cat,car,house,phone,window | A2 | en:role.instrument,en:role.location
+ROW | en | 14 | en:verb.presentContinuous | core.verb.tense | Aspect:Simple>Continuous | Tense=Pres,Person=3,Number=Sing | NULL | B1 | en:verb.presentSimple
+ROW | en | 15 | en:tense.contrast | core.composite | NULL | Person=1,Number=Sing | NULL | B1 | en:verb.futureSimple,en:verb.presentContinuous
+ROW | en | 16 | en:mixed | core.composite | NULL | {} | NULL | B1 | en:possessive.my,en:verb.pastSimple
+ROW | pl | 01 | case.acc.n | core.argument.case-role | Case:Nom>Acc | Tense=Pres,Person=1,Number=Sing | noun/gender=n | A1 | []
+ROW | pl | 02 | case.acc.f | core.argument.case-role | Case:Nom>Acc | Tense=Pres,Person=1,Number=Sing | noun/gender=f | A1 | []
+ROW | pl | 03 | case.acc.m | core.argument.case-role | Case:Nom>Acc | Tense=Pres,Person=1,Number=Sing | noun/gender=m-personal,m-animate,m-inanimate | A2 | case.acc.f
+ROW | pl | 04 | case.gen.neg | core.sentence.polarity | Polarity:Pos>Neg | Tense=Pres,Person=1,Number=Sing | NULL | A2 | case.acc.f
+ROW | pl | 05 | case.inst | core.argument.case-role | Case:Acc>Inst | Tense=Pres,Person=1,Number=Sing | noun/nounId=wife,husband,friendM,son,child | A1 | []
+ROW | pl | 06 | case.loc | core.argument.case-role | Case:Acc>Loc | Tense=Pres,Person=1,Number=Sing | NULL | A2 | case.inst
+ROW | pl | 07 | case.dat | core.argument.case-role | Case:Acc>Dat | Tense=Pres,Person=1,Number=Sing | noun/nounId=wife,husband,friendM,son,child | A2 | []
+ROW | pl | 08 | agreement.my | core.agreement.possessive | NULL | Case=Acc,Tense=Pres,Person=1,Number=Sing | NULL | A2 | case.acc.f,case.gen.neg
+ROW | pl | 09 | verb.present | core.verb.tense | Tense:Past>Pres | Person=3,Number=Sing | noun/nounId=wife,husband,friendM,son,child | A1 | []
+ROW | pl | 10 | verb.past | core.verb.tense | Tense:Pres>Past | Person=3,Number=Sing | noun/nounId=wife,husband,friendM,son,child | A2 | verb.present
+ROW | pl | 11 | verb.future | core.verb.tense | Tense:Pres>Fut | Person=3,Number=Sing | noun/nounId=wife,husband,friendM,son,child | A2 | verb.present
+ROW | pl | 12 | aspect | core.composite | NULL | Person=1,Number=Sing | NULL | B1 | verb.past,verb.future
+ROW | pl | 13 | pronouns | core.argument.case-role | NULL | Case=Acc,Tense=Pres,Person=1,Number=Sing | noun/nounId=wife,husband,friendM,son,child | A2 | case.inst,case.loc
+ROW | pl | 14 | mixed | core.composite | NULL | {} | NULL | B1 | agreement.my,verb.past
+ROW | pl | 15 | sentence.question | core.sentence.mood | Mood:Decl>YesNoQ | Tense=Pres,Person=2,Number=Sing | NULL | A1 | []
+ROW | pl | 16 | sentence.plural | core.number | Number:Sing>Plur | Case=Acc,Tense=Pres,Person=1 | NULL | A2 | case.acc.m,agreement.my
