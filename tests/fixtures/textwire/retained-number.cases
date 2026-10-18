@@ -1,0 +1,102 @@
+# NJ05 E3 independent test-only freeze, before an A/C prototype or production codec.
+# This extends the existing .cases tree notation with retained-number; it does not
+# assert that a Biome DSL parser accepts this notation or select a product wire.
+# Tabs in the input blocks are literal HT bytes. Each block ends with one LF.
+# H hashes the literal prefix from the header through the LF before H.
+# Old input path and hash are sealed separately and must never be written.
+
+CASE R01 small-ordered-retained-number-tree
+source NJ05E3LexicalNumberHandoff.md; TextWireDesign.md; TextWireFreezeAmendment.md
+arms A C
+tree
+  map
+    key "wide" => retained-number "9223372036854775808"
+    key "huge" => retained-number "1e10000"
+    key "decimal" => retained-number "1.0"
+    key "exponentOne" => retained-number "1e0"
+    key "negativeZero" => retained-number "-0"
+    key "zero" => i64 0
+    key "negativeZeroBits" => f64bits 8000000000000000
+    key "numericText" => string "-0"
+    key "nullValue" => null
+    key "listExample" => list
+      item => retained-number "1e0"
+order root: "wide", "huge", "decimal", "exponentOne", "negativeZero", "zero", "negativeZeroBits", "numericText", "nullValue", "listExample"
+expect R is disjoint from I 0, D negative zero, S "-0" and N; retain five spellings and child order on decode/re-encode
+input A utf8-lines
+POLSKI-TEXT	1	progress	2
+M	-	10
+R	K:wide	9223372036854775808
+R	K:huge	1e10000
+R	K:decimal	1.0
+R	K:exponentOne	1e0
+R	K:negativeZero	-0
+I	K:zero	0
+D	K:negativeZeroBits	8000000000000000
+S	K:numericText	-0
+N	K:nullValue
+L	K:listExample	1
+R	-	1e0
+H	sha256	a0fe2b8ee5dc422e73e2f9ee3e92d781cd7370541a00b2aa94909a0124f098ee
+input C utf8-lines
+POLSKI-UNITS	1	progress	2
+M	-	10
+R	KU4:0077006900640065	9223372036854775808
+R	KU4:0068007500670065	1e10000
+R	KU7:0064006500630069006D0061006C	1.0
+R	KU11:006500780070006F006E0065006E0074004F006E0065	1e0
+R	KU12:006E0065006700610074006900760065005A00650072006F	-0
+I	KU4:007A00650072006F	0
+D	KU16:006E0065006700610074006900760065005A00650072006F0042006900740073	8000000000000000
+S	KU11:006E0075006D00650072006900630054006500780074	U2:002D0030
+N	KU9:006E0075006C006C00560061006C00750065
+L	KU11:006C006900730074004500780061006D0070006C0065	1
+R	-	1e0
+H	sha256	ed734896b6450a4b18744d9b066ca7d3157bb432e9338c1a512ef65f03d75569
+expect A 316 bytes SHA-256 430e231aa713e9b2f156b177996a2914e265490ec7632bd2ac7ceb75e57fad94
+expect C 618 bytes SHA-256 c410aa1ec0354fa08722d22b4876e63279693bb0a3ba20e63abf8f5cc21c7658
+expect final LF and exact SHA-256 of A/C prefix (242/544 bytes)
+END
+
+CASE R02 sealed-E2-ordered-projection-tree-only
+source legacy-representability.cases; exact-path old input in retained-number.sha256
+arms A C
+input old-user read-only tests/fixtures/textwire/inputs/legacy-representability-progress.input
+order source.unknown: wide, huge, decimal, exponentOne, negativeZero, nullValue, emptyString, emptyList, emptyRecord, nested, literal, escaped, loneHigh, longKey
+retained source.unknown.wide 9223372036854775808
+retained source.unknown.huge 1e10000
+retained source.unknown.decimal 1.0
+retained source.unknown.exponentOne 1e0
+retained source.unknown.negativeZero -0
+expect each old node is numeric, not string; exact token/code units/order; no old writer; old bytes unchanged
+expect full E2 A/C bytes NOT FROZEN; R01 is the only E3 exact-byte oracle
+END
+
+# N01-N15 start from the R01 literal prefix for each arm. Replace the named
+# row/payload bytes, hash the changed prefix, append H with that new digest and LF.
+# The checker proves each mutation has a valid recomputed digest, except N15.
+# A structural rejection is not allowed to masquerade as DigestMismatch. N14's
+# R01 mutation tests generic tag identity; the Domain outcome requires inserting
+# this R node into an otherwise accepted progress document, whose full wire
+# bytes/schema remain unfrozen. It cannot be claimed as an executed document test.
+# Earliest boundary: Generic = A/C row parser, Domain = progress schema admission,
+# N26 = unresolved physical bound, Legacy = read-only old-parser preflight.
+# All outcomes require the old E2 input's exact path and bytes to remain unchanged.
+# Columns: id | mutation of R01 | expected outcome | earliest boundary
+NEGATIVE N01 | R wide payload +1 | Reject RetainedNumberSyntax | Generic
+NEGATIVE N02 | R wide payload 01 | Reject RetainedNumberSyntax | Generic
+NEGATIVE N03 | R wide payload .5 | Reject RetainedNumberSyntax | Generic
+NEGATIVE N04 | R wide payload 1. | Reject RetainedNumberSyntax | Generic
+NEGATIVE N05 | R wide payload 1e | Reject RetainedNumberSyntax | Generic
+NEGATIVE N06 | R wide payload --1 | Reject RetainedNumberSyntax | Generic
+NEGATIVE N07 | R wide payload NaN | Reject RetainedNumberSyntax | Generic
+NEGATIVE N08 | R wide payload Infinity | Reject RetainedNumberSyntax | Generic
+NEGATIVE N09 | R wide payload U+0661 | Reject RetainedNumberSyntax | Generic
+NEGATIVE N10 | R wide payload one-byte HT | Reject RowArity | Generic
+NEGATIVE N11 | R wide payload 1 then one-byte LF then 0 | Reject RowArityOrTrailingRow | Generic
+NEGATIVE N12 | R wide key sentinel - | Reject MapKey | Generic
+NEGATIVE N13 | R list item key named wide | Reject ListItemKey | Generic
+NEGATIVE N14 | R wide key reviewsToday, payload 1 | Reject KnownTypedFieldR | Domain
+NEGATIVE N15 | flip one covered R wide payload byte; retain original H | Reject DigestMismatch | Generic
+NEGATIVE N16 | R wide token longer than selected N26 scalar limit | PENDING N26 numeric bound | N26
+NEGATIVE N17 | old input duplicate unknown key with indistinguishable parser result | RecoveryRequired; sealed input-only control, Kotlin preflight NOT RUN | Legacy
