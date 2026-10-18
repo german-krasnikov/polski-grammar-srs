@@ -7,4 +7,11 @@ GENERATE exercise-oracle derive {dir}/derive-oracle.mjs generate OUT
 GENERATE course-value-skills derive {dir}/derive-skills.mjs generate OUT
 GENERATE course-value-sections derive {dir}/derive-sections.mjs generate OUT
 GENERATE course-lexicon derive {dir}/derive-lexicon.mjs generate OUT
+GENERATE course-full derive {dir}/derive-full.mjs generate OUT
+GENERATE course-presentations derive {dir}/derive-presentations.mjs generate OUT
+GENERATE course-pronouns derive {dir}/derive-pronouns.mjs generate OUT
+GENERATE course-reference derive {dir}/derive-reference.mjs generate OUT
+GENERATE course-vocabulary derive {dir}/derive-vocabulary.mjs generate OUT
+GENERATE course-teaching derive {dir}/derive-teaching.mjs generate OUT
+GENERATE course-frequency derive {dir}/derive-frequency.mjs generate OUT
 GENERATE textwire-tests derive {dir}/../nj03-textwire/derive-textwire-tests.mjs generate OUT
