@@ -7,7 +7,9 @@ import polski.model.Skill
  * [PackRegistry.select] — wired to a real host picker as of this task — takes effect immediately,
  * matching [activePackSkillIds] below which already reads fresh for the same reason.
  */
-val skills: List<Skill> get() = packRegistry.active.skills
+// NJ03 B5: pl-ru reads from typed Biome literal source; other packs use JSON path.
+val skills: List<Skill> get() = if (packRegistry.active.id == "pl-ru") generatedPlRuSkills
+    else packRegistry.active.skills
 
 fun skillById(id: String): Skill = skills.firstOrNull { it.id == id } ?: error("Unknown skill $id")
 
