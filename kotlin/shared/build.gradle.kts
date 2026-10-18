@@ -1,3 +1,5 @@
+import java.security.MessageDigest
+
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.android.kmp.library)
@@ -23,14 +25,32 @@ val legacyAdmissionLedgers = listOf(
     layout.projectDirectory.file("../../tests/fixtures/textwire/legacy-boundary.cases"),
     layout.projectDirectory.file("../../tests/fixtures/textwire/numeric-admission.cases"),
 )
+val legacyAdmissionSeal = layout.projectDirectory.file("../../tests/fixtures/textwire/legacy-admission.sha256")
 val generatedLegacyAdmissionDirectory = layout.buildDirectory.dir("generated/legacyAdmissionTest/kotlin")
 
 // Test-only values come from the independently reviewed text ledgers. No old input or hash
 // is maintained a second time in Kotlin, and this source is never attached to commonMain.
 val generateLegacyAdmissionTestSource by tasks.registering {
     legacyAdmissionLedgers.forEach { inputs.file(it) }
+    inputs.file(legacyAdmissionSeal)
     outputs.dir(generatedLegacyAdmissionDirectory)
     doLast {
+        val sealLine = Regex("([0-9a-f]{64})  (tests/fixtures/textwire/[a-z-]+\\.cases)")
+        val sealRows = legacyAdmissionSeal.asFile.readLines()
+        val sealed = sealRows.associate { line ->
+            val match = sealLine.matchEntire(line) ?: error("Invalid legacy admission seal line")
+            match.groupValues[2] to match.groupValues[1]
+        }
+        val paths = legacyAdmissionLedgers.map { "tests/fixtures/textwire/${it.asFile.name}" }
+        require(sealRows.size == 2 && sealed.size == 2 && sealed.keys == paths.toSet()) {
+            "Legacy admission seal path set changed or duplicated"
+        }
+        legacyAdmissionLedgers.zip(paths).forEach { (ledger, path) ->
+            val actual = MessageDigest.getInstance("SHA-256")
+                .digest(ledger.asFile.readBytes())
+                .joinToString("") { (it.toInt() and 0xff).toString(16).padStart(2, '0') }
+            require(actual == sealed.getValue(path)) { "Legacy admission ledger changed without reviewed seal: $path" }
+        }
         val entry = Regex("(?i)\\bsize ([0-9,]+); SHA-256 ([0-9a-f]{64})(?:;|\\.)")
         val rows = legacyAdmissionLedgers.flatMap { ledger ->
             ledger.asFile.readLines().mapNotNull { line ->

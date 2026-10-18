@@ -25,19 +25,20 @@ internal fun legacyAdmissionSha256(bytes: ByteArray): String {
         0x510e527f, 0x9b05688c.toInt(), 0x1f83d9ab, 0x5be0cd19,
     )
     val bitLength = bytes.size.toLong() * 8
-    val paddedLength = ((bytes.size.toLong() + 9 + 63) / 64) * 64
-    fun byteAt(index: Long): Int = when {
-        index < bytes.size -> bytes[index.toInt()].toInt() and 0xff
-        index == bytes.size.toLong() -> 0x80
-        index >= paddedLength - 8 -> (bitLength ushr ((paddedLength - 1 - index) * 8).toInt()).toInt() and 0xff
+    require(bytes.size <= Int.MAX_VALUE - 72)
+    val paddedLength = ((bytes.size + 72) / 64) * 64
+    fun byteAt(index: Int): Int = when {
+        index < bytes.size -> bytes[index].toInt() and 0xff
+        index == bytes.size -> 0x80
+        index >= paddedLength - 8 -> (bitLength ushr ((paddedLength - 1 - index) * 8)).toInt() and 0xff
         else -> 0
     }
     fun rotate(value: Int, bits: Int): Int = (value ushr bits) or (value shl (32 - bits))
     val words = IntArray(64)
-    var offset = 0L
+    var offset = 0
     while (offset < paddedLength) {
         for (index in 0 until 16) {
-            val base = offset + index * 4L
+            val base = offset + index * 4
             words[index] = (byteAt(base) shl 24) or (byteAt(base + 1) shl 16) or
                 (byteAt(base + 2) shl 8) or byteAt(base + 3)
         }

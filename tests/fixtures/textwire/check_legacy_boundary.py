@@ -2,11 +2,12 @@
 """Rebuild the input-only NJ05 recipes and verify every ledger byte hash."""
 
 import hashlib
+import os
 import re
 from pathlib import Path
 
 
-LEDGER = Path(__file__).with_name("legacy-boundary.cases")
+LEDGER = Path(os.environ.get("TEXTWIRE_FIXTURES_DIR", Path(__file__).parent)) / "legacy-boundary.cases"
 text = LEDGER.read_text(encoding="utf-8")
 
 
@@ -69,12 +70,22 @@ for label, prefix, suffix, fill in (
         checked += 1
 
 size, digest = inline_case("Progress nested recipe = ")
-check("progress-depth-128", progress[:-1] + "[" * 128 + "0" + "]" * 128 + "}", size, digest)
+nested_line = line_starting("Progress nested recipe = ")
+depth_match = re.search(r"`\[` \* (\d+)", nested_line)
+if depth_match is None:
+    raise SystemExit("missing progress nested depth recipe")
+depth = int(depth_match.group(1))
+check(f"progress-depth-{depth}", progress[:-1] + "[" * depth + "0" + "]" * depth + "}", size, digest)
 checked += 1
 
 size, digest = inline_case("Progress rows recipe = ")
-rows = ",".join('{"i":' + str(i) + "}" for i in range(2048))
-check("progress-rows-2048", progress[:-1] + "[" + rows + "]}", size, digest)
+rows_line = line_starting("Progress rows recipe = ")
+upper_match = re.search(r"from 0 through (\d+)", rows_line)
+if upper_match is None:
+    raise SystemExit("missing progress row count recipe")
+row_count = int(upper_match.group(1)) + 1
+rows = ",".join('{"i":' + str(i) + "}" for i in range(row_count))
+check(f"progress-rows-{row_count}", progress[:-1] + "[" + rows + "]}", size, digest)
 checked += 1
 
 size, digest = inline_case("Progress Unicode literal = ")
@@ -85,7 +96,12 @@ size, digest = inline_case("Vocabulary domain text recipe: ")
 parts = fragments("Vocabulary domain text recipe: ")
 if len(parts) != 9 or parts[1::2] != ["ż"] * 4:
     raise SystemExit("vocabulary domain recipe fragments drifted")
-domain_recipe = "".join(part + ("ż" * 240 if i < 4 else "") for i, part in enumerate(parts[::2]))
+domain_line = line_starting("Vocabulary domain text recipe: ")
+length_match = re.search(r"`ż` \* (\d+)", domain_line)
+if length_match is None:
+    raise SystemExit("missing vocabulary domain text length")
+domain_length = int(length_match.group(1))
+domain_recipe = "".join(part + ("ż" * domain_length if i < 4 else "") for i, part in enumerate(parts[::2]))
 check("vocabulary-240", domain_recipe, size, digest)
 checked += 1
 

@@ -2,11 +2,12 @@
 """Verify input-only numeric legacy recipes without invoking a candidate wire codec."""
 
 import hashlib
+import os
 import re
 from pathlib import Path
 
 
-HERE = Path(__file__).parent
+HERE = Path(os.environ.get("TEXTWIRE_FIXTURES_DIR", Path(__file__).parent))
 base = (HERE / "legacy-boundary.cases").read_text(encoding="utf-8")
 ledger = (HERE / "numeric-admission.cases").read_text(encoding="utf-8")
 
@@ -14,6 +15,20 @@ ledger = (HERE / "numeric-admission.cases").read_text(encoding="utf-8")
 def between(source: str, label: str) -> str:
     line = next(line for line in source.splitlines() if line.startswith(label))
     return re.findall(r"`([^`]*)`", line)[0]
+
+
+def line_starting(source: str, label: str) -> str:
+    matches = [line for line in source.splitlines() if line.startswith(label)]
+    if len(matches) != 1:
+        raise SystemExit(f"expected one recipe line {label!r}; got {len(matches)}")
+    return matches[0]
+
+
+def recipe_int(label: str, pattern: str) -> int:
+    match = re.search(pattern, line_starting(ledger, label))
+    if match is None:
+        raise SystemExit(f"missing numeric recipe dimension: {label}")
+    return int(match.group(1).replace(",", ""))
 
 
 def verify(label: str, raw: str) -> None:
@@ -41,10 +56,13 @@ for label, prefix, suffix, limit, fill in (
     raw = prefix + fill * (limit - len(prefix.encode()) - len(suffix.encode())) + suffix
     verify(label, raw)
 
-verify("Progress depth-256 recipe:", progress[:-1] + "[" * 256 + "0" + "]" * 256 + "}")
-rows = ",".join('{"i":' + str(i) + "}" for i in range(32_768))
+depth = recipe_int("Progress depth-256 recipe:", r"`\[` \* (\d+)")
+verify("Progress depth-256 recipe:", progress[:-1] + "[" * depth + "0" + "]" * depth + "}")
+upper = recipe_int("Progress rows-32768-at-limit recipe:", r"i = 0\.\.(\d+)")
+rows = ",".join('{"i":' + str(i) + "}" for i in range(upper + 1))
 prefix = progress[:-1] + "[" + rows + '],"padding":"'
-raw = prefix + "x" * (10_000_000 - len(prefix.encode()) - 2) + '"}'
+padding = recipe_int("Progress rows-32768-at-limit recipe:", r"`x` \* ([\d,]+)")
+raw = prefix + "x" * padding + '"}'
 verify("Progress rows-32768-at-limit recipe:", raw)
 verify("Progress UTF-16 recipe:", between(ledger, "Progress UTF-16 recipe:"))
 print("PASS 6 selected / 6 checked / 0 skipped; legacy inputs only")
