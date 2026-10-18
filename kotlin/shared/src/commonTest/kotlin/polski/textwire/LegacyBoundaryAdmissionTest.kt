@@ -31,18 +31,21 @@ class LegacyBoundaryAdmissionTest {
         return prefix + value.toString().repeat(count) + suffix
     }
 
-    @Test
-    fun progressRetainsSingleLargeUnknownValueAtLegacyByteCeiling() {
-        for (size in listOf(9_999_999, 10_000_000)) {
-            val raw = filled(progressPrefix, "\"}", size, 'x')
-            assertEquals(size, raw.encodeToByteArray().size)
-            assertTrue(legacyAdmissionMatches("PG-$size", raw))
-            val source = assertIs<DecodeResult.Valid>(ProgressCodec.decode(raw)).document.source
-            val value = source["unknown"]!!.jsonPrimitive.content
-            assertEquals(size - progressPrefix.length - 2, value.length)
-            assertEquals(true, value.all { it == 'x' })
-        }
+    private fun assertLargeUnknownValue(size: Int) {
+        val raw = filled(progressPrefix, "\"}", size, 'x')
+        assertEquals(size, raw.encodeToByteArray().size)
+        assertTrue(legacyAdmissionMatches("PG-$size", raw))
+        val source = assertIs<DecodeResult.Valid>(ProgressCodec.decode(raw)).document.source
+        val value = source["unknown"]!!.jsonPrimitive.content
+        assertEquals(size - progressPrefix.length - 2, value.length)
+        assertEquals(true, value.all { it == 'x' })
     }
+
+    @Test
+    fun progressRetainsLargeUnknownValueBelowLegacyByteCeiling() = assertLargeUnknownValue(9_999_999)
+
+    @Test
+    fun progressRetainsLargeUnknownValueAtLegacyByteCeiling() = assertLargeUnknownValue(10_000_000)
 
     @Test
     fun progressRetainsNestedUnknownTreeAndOrderedRows() {
