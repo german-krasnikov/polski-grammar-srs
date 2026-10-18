@@ -70,7 +70,7 @@ independent `.cases`/`.examples`, not in this helper. Shared Logic/Test
 `LET` variables do not add value for this static feature catalog; use them
 when a real repeated executable test input appears. Emit the derived line
 as **NEW generated, ignored**
-`kotlin/shared/build/generated/biome/curriculum-fixed.program` for inspection.
+`kotlin/shared/build/generated/biome-curricula/curriculum-fixed.program` for inspection.
 The existing `--check` must compare its exact bytes as well as the Kotlin
 output and manifest, without writing. Add its digest and the fully resolved
 `Skill` read-plan digest to `curricula.manifest`, with the registry, authored
@@ -84,6 +84,49 @@ reproduced from authored DSL and checked; none is edited by hand.
 Update `kotlin/shared/build.gradle.kts` inputs for the new helper and include
 `scripts/nj03/curriculum/examples.mjs`, which the current manifest hashes but
 the current task input list omits.
+
+### Gradle output ownership and dependencies
+
+The current `kotlin/shared/build.gradle.kts::generateBiomeCoreRegistry`
+declares the **entire** `kotlin/shared/build/generated/biome` directory as its
+output; both candidate NJ03 files currently sit inside it. Preserve NJ02's
+accepted paths and directory ownership. Move **all** NJ03 outputs to the
+disjoint sibling directory `kotlin/shared/build/generated/biome-curricula`:
+
+| Producer | Exclusive Gradle output directory | Files owned by that producer |
+| --- | --- | --- |
+| `generateBiomeCoreRegistry` | `generated/biome` (unchanged) | `kotlin/polski/data/GeneratedCoreRegistry.kt`, `registry.manifest` |
+| `generateBiomeCurricula` | `generated/biome-curricula` (new) | `kotlin/polski/data/GeneratedCurricula.kt`, `curricula.manifest`, `curriculum-fixed.program` |
+| `generateBiomeCurriculaTestOracle` | `generated/biomeTest/kotlin` (unchanged) | test-only `polski/data/BiomeCurriculumCandidateTest.kt` |
+
+Update `scripts/nj03/curriculum/build.mjs`'s output and manifest constants,
+`scripts/nj03/curriculum/freshness.mjs`'s manifest path, and Gradle's NJ03
+providers together. In Gradle declare exactly one
+`outputs.dir(generatedBiomeCurriculaDirectory)` for the NJ03 producer, as NJ02
+already does for its own root. In `commonMain`, use
+`kotlin.srcDir(generateBiomeCurricula.map { it.outputs.files.singleFile.resolve("kotlin") })`
+and retain the existing equivalent provider mapping for
+`generateBiomeCoreRegistry`. Gradle then wires every compilation task that
+consumes either generated source directory to **both** producers through the
+task providers. The generators themselves have no output-to-input dependency:
+NJ03 reads the authored registry source through `validateRegistrySource`,
+not NJ02's generated Kotlin or manifest. Do not add a false producer edge
+between them. The independent `checkBiomeCurricula` and
+`checkBiomeCoreRegistry` tasks must **not** depend on generation: a check
+must expose stale or missing artifacts rather than repair them first. Keep
+the oracle in `commonTest` behind its existing task provider.
+
+Freeze a disposable ownership regression before implementation: corrupt the
+NJ03 derived `.program`, run only `generateBiomeCoreRegistry`, then require
+`checkBiomeCurricula` to remain red with `STALE` for that exact file. Reverse
+the direction: corrupt `registry.manifest`, run only
+`generateBiomeCurricula`, then require `checkBiomeCoreRegistry` to remain red
+for the registry manifest. In both directions snapshot the untouched
+producer's three/two owned bytes before and after, require equality, and
+verify the Gradle declared output directories are disjoint by path segment.
+After restoring the disposable artifacts, compile the consumer with both
+task providers and record both producer executions. No independent expected
+skill/registry value changes are authorized by this path repair.
 
 The generated `.program` is a build artifact, never an application format.
 No JSON application output is introduced. For the *final cutover*, replace
