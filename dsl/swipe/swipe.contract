@@ -1,0 +1,13 @@
+# SwipeDecision: pure release classification for swipe-to-rate gesture.
+# Host measures dx/dy distance and threshold; this contract decides the rating.
+CONTRACT swipe.decision
+COVERAGE declared-scope
+MODULE ./swipe-native.js
+FACT swipe.absDx number min=0 max=10000
+FACT swipe.absDy number min=0 max=10000
+FACT swipe.threshold number min=0.01 max=10000
+FACT swipe.axisProduct number min=0 max=100000000
+FACT swipe.dxPositive bool
+FACT swipe.belowThreshold bool
+FACT swipe.yDominates bool
+INPUT rating swipe.belowThreshold swipe.yDominates swipe.dxPositive

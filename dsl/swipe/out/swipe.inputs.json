@@ -1,0 +1,7 @@
+{
+  "rating": [
+    "swipe.belowThreshold",
+    "swipe.dxPositive",
+    "swipe.yDominates"
+  ]
+}

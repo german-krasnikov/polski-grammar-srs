@@ -1,0 +1,8 @@
+# SwipeDecision: swipe gesture → rating classification.
+# First match wins. null (no rating) when below threshold or vertical dominates.
+DECISION rating DEFAULT none
+  belowThreshold AT 10 WHEN swipe.belowThreshold -> none
+  verticalDominates AT 20 WHEN swipe.yDominates -> none
+  swipeRight AT 30 WHEN swipe.dxPositive -> good
+  swipeLeft AT 40 WHEN NOT swipe.dxPositive -> again
+END

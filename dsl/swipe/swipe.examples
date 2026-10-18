@@ -1,0 +1,10 @@
+PROVENANCE "Hand-written from SwipeDecisionTest.kt expectations. Not generated."
+
+EXAMPLES rating
+  id                      | swipeBelowThreshold | swipeYDominates | swipeDxPositive -> expected
+  right-above-threshold   | false               | false           | true            -> good
+  left-above-threshold    | false               | false           | false           -> again
+  below-threshold-returns | true                | false           | true            -> none
+  vertical-dominates      | false               | true            | true            -> none
+  both-below-and-vertical | true                | true            | false           -> none
+END

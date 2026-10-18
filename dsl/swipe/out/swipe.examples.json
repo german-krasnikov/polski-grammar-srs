@@ -1,0 +1,11 @@
+{
+  "generated": "from swipe.examples by npm run logic -- examples; do not edit",
+  "provenance": "Hand-written from SwipeDecisionTest.kt expectations. Not generated.",
+  "rating": [
+    { "id": "right-above-threshold", "facts": { "swipeBelowThreshold": false, "swipeYDominates": false, "swipeDxPositive": true }, "expected": "good" },
+    { "id": "left-above-threshold", "facts": { "swipeBelowThreshold": false, "swipeYDominates": false, "swipeDxPositive": false }, "expected": "again" },
+    { "id": "below-threshold-returns", "facts": { "swipeBelowThreshold": true, "swipeYDominates": false, "swipeDxPositive": true }, "expected": "none" },
+    { "id": "vertical-dominates", "facts": { "swipeBelowThreshold": false, "swipeYDominates": true, "swipeDxPositive": true }, "expected": "none" },
+    { "id": "both-below-and-vertical", "facts": { "swipeBelowThreshold": true, "swipeYDominates": true, "swipeDxPositive": false }, "expected": "none" }
+  ]
+}
