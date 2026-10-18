@@ -215,23 +215,9 @@ val generateCoursePackSource by tasks.registering {
             "    \"${dir.name}\" to ${literalBuildString(chunks)}"
         }
 
-        // EN-04/ADR-20 UC-12: `lang/<code>/lexicon.json` + `pairs/<pairId>/pair.json` — the two v2
-        // layer files `CoursePackLoader` reconstructs a v1-shaped pack from; scanned the same way
-        // as curriculum.json above, so a second pack's files need no Gradle/Kotlin edit.
-        val lexiconDirs = (langDirectory.asFile.listFiles { file -> file.isDirectory } ?: emptyArray())
-            .filter { dir -> dir.resolve("lexicon.json").isFile }
-            .sortedBy { it.name }
-        val lexiconEntryLiterals = lexiconDirs.joinToString(",\n") { dir ->
-            val chunks = literalChunks(dir.resolve("lexicon.json").readText())
-            "    \"${dir.name}\" to ${literalBuildString(chunks)}"
-        }
-        val pairDirs = (pairsDirectory.asFile.listFiles { file -> file.isDirectory } ?: emptyArray())
-            .filter { dir -> dir.resolve("pair.json").isFile }
-            .sortedBy { it.name }
-        val pairEntryLiterals = pairDirs.joinToString(",\n") { dir ->
-            val chunks = literalChunks(dir.resolve("pair.json").readText())
-            "    \"${dir.name}\" to ${literalBuildString(chunks)}"
-        }
+        // NJ03: lexicon.json and pair.json no longer embedded — all packs use typed objects.
+        val lexiconEntryLiterals = ""
+        val pairEntryLiterals = ""
 
         // EN-21/ADR-15: `pairs/<pairId>/lifehacks.json` — pair-scoped, outside core, scanned the
         // same way as pair.json above so a pack without lifehacks (or a future 3rd pack) needs no

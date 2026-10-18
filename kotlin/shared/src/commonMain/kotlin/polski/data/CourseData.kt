@@ -649,24 +649,15 @@ internal class PackRegistry(private val packs: List<CoursePackFields>) {
  * byte-identical to a hand-written v1 pack. pl-ru ships as v1 today, so it is never duplicated
  * here; en-ru (EN-11..EN-20) has no `courses/en-ru/course.json` and so is only ever reached this
  * way — without this, [packRegistry] would embed pl-ru alone and en-ru could never be selected. */
-private val v2OnlyCoursePackSources: List<CoursePackSource> by lazy {
-    // NJ03 B8: pl-ru is now v2-only too; pl-ru sorts before en-ru to preserve first-default order.
-    generatedPairJsonByPairId.keys.filter { pairId -> embeddedCoursePackSources.none { it.id == pairId } }
-        .sortedWith(compareBy { if (it == "pl-ru") 0 else 1 })
-        .map { pairId ->
-            CoursePackLoader.fromV2Layers(pairId, generatedLexiconJsonByLang.getValue(pairId.substringBefore("-")),
-                generatedPairJsonByPairId.getValue(pairId))
-        }
-}
+// NJ03: v2OnlyCoursePackSources removed — all packs are typed objects.
 
 internal val packRegistry: PackRegistry by lazy {
     PackRegistry(buildList<CoursePackFields> {
         // NJ03 P7: pl-ru uses typed Biome literal source (PlRuTypedPack object).
         // Other packs read from JSON via CoursePack.
-        val jsonPacks = (embeddedCoursePackSources + v2OnlyCoursePackSources)
-            .filter { it.id != "pl-ru" }.map(::CoursePack)
+        // NJ03 P7: all packs are typed objects — zero JSON at runtime.
         add(PlRuTypedPack)
-        addAll(jsonPacks)
+        add(EnRuTypedPack)
     })
 }
 
@@ -690,15 +681,9 @@ val availableCourseSelections: List<Pair<String, String>> by lazy { packRegistry
  */
 val usableCourseSelections: List<Pair<String, String>> by lazy {
     buildList {
-        // NJ03: pl-ru is always usable via PlRuTypedPack (no JSON probe needed).
+        // NJ03 P7: all packs are typed — always usable.
         add(PlRuTypedPack.targetLanguage to PlRuTypedPack.nativeLanguage)
-        // Other packs probe via JSON.
-        (embeddedCoursePackSources + v2OnlyCoursePackSources)
-            .filter { it.id != "pl-ru" }
-            .mapNotNullTo(this) { source ->
-                val pack = CoursePack(source)
-                pack.takeIf { it.parsesCompletely() }?.let { it.targetLanguage to it.nativeLanguage }
-            }
+        add(EnRuTypedPack.targetLanguage to EnRuTypedPack.nativeLanguage)
     }
 }
 
