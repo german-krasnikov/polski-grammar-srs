@@ -30,7 +30,9 @@ class LegacyBoundaryAdmissionTest {
             val raw = filled(progressPrefix, "\"}", size, 'x')
             assertEquals(size, raw.encodeToByteArray().size)
             val source = assertIs<DecodeResult.Valid>(ProgressCodec.decode(raw)).document.source
-            assertEquals(size - progressPrefix.length - 2, source["unknown"]!!.jsonPrimitive.content.length)
+            val value = source["unknown"]!!.jsonPrimitive.content
+            assertEquals(size - progressPrefix.length - 2, value.length)
+            assertEquals(true, value.all { it == 'x' })
         }
     }
 
@@ -45,8 +47,9 @@ class LegacyBoundaryAdmissionTest {
         val rowTree = assertIs<DecodeResult.Valid>(ProgressCodec.decode(rows)).document.source
         val values = assertIs<JsonArray>(rowTree["unknown"])
         assertEquals(2048, values.size)
-        assertEquals("0", assertIs<JsonObject>(values.first())["i"]!!.jsonPrimitive.content)
-        assertEquals("2047", assertIs<JsonObject>(values.last())["i"]!!.jsonPrimitive.content)
+        values.forEachIndexed { ordinal, value ->
+            assertEquals(ordinal.toString(), assertIs<JsonObject>(value)["i"]!!.jsonPrimitive.content)
+        }
     }
 
     @Test
