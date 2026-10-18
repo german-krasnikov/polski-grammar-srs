@@ -24,13 +24,13 @@ END
 
 CASE T04 valid-new-and-old-mismatched-receipt
 source TextWireDesign.md:61-63; TextWireExperimentBlueprint.md:29
-given old=A new=B(valid,sha(B)) receipt=(kind=progress,oldHash=sha(A),newHash=sha(C),schemaVersion=2,transactionId="tx-1")
+given host=iOS legacyPath="polski-progress-v1" old=A new=B(valid,sha(B)) receipt=(kind=progress,legacyPath="polski-progress-v1",oldHash=sha(A),newHash=sha(C),schemaVersion=2,transactionId="tx-1")
 expect RecoveryRequired before any write/delete/ordinary save; preserve A and B
 END
 
 CASE T05 matching-receipt-after-crash
 source TextWireDesign.md:61-64; TextWireExperimentBlueprint.md:29
-given old=A new=B(valid,sha(B)) receipt=(kind=progress,oldHash=sha(A),newHash=sha(B),schemaVersion=2,transactionId="tx-1",durable=true)
+given host=iOS legacyPath="polski-progress-v1" old=A new=B(valid,sha(B)) receipt=(kind=progress,legacyPath="polski-progress-v1",oldHash=sha(A),newHash=sha(B),schemaVersion=2,transactionId="tx-1",durable=true)
 expect verify old/new hashes and receipt readback; delete only matching old primary/backups; verify absence; then Loaded B; do not re-import A or replay a review
 END
 
@@ -84,8 +84,14 @@ END
 
 CASE T14 legacy-missing-or-invalid
 source NoJsonAcceptance.md:NJ06; TextWireDesign.md:57,63
-given three isolated old inputs: absent; unsupported version A; corrupt/truncated A
-expect absent with no new is Fresh (T01); unsupported/corrupt/truncated enter RecoveryRequired and preserve exact A, with no empty replacement save
+variant 1 given old=absent oldBackups=absent new=absent receipt=absent
+variant 1 expect Fresh as T01; no legacy bytes to preserve
+variant 2 given old=A(unsupported-version) oldBackups=absent new=absent receipt=absent
+variant 2 expect RecoveryRequired; preserve exact A; no empty replacement save
+variant 3 given old=A(corrupt-content) oldBackups=absent new=absent receipt=absent
+variant 3 expect RecoveryRequired; preserve exact A; no empty replacement save
+variant 4 given old=A(truncated-bytes) oldBackups=absent new=absent receipt=absent
+variant 4 expect RecoveryRequired; preserve exact A; no empty replacement save
 END
 
 CASE T15 old-tab-rewrite-after-cleanup
@@ -110,4 +116,10 @@ CASE T18 unknown-legacy-unconvertible
 source TextWireDesign.md:57,63; TextWireExperimentBlueprint.md:29
 given old=A with duplicate object keys, non-finite/unsafe number, invalid Unicode or unknown value lacking lossless typed mapping; each isolated
 expect RecoveryRequired; preserve A and backups; no new text, receipt or JSON export
+END
+
+CASE T19 receipt-legacy-path-mismatch
+source TextWireDesign.md:61-63; TextWireExperimentBlueprint.md:29
+given host=iOS legacyPath="polski-progress-v1" old=A new=B(valid,sha(B)) receipt=(kind=progress,legacyPath="different-progress-v1",oldHash=sha(A),newHash=sha(B),schemaVersion=2,transactionId="tx-1",durable=true)
+expect RecoveryRequired before any write/delete/ordinary save despite matching byte hashes; preserve A, B and receipt bytes; never clean a different legacy path
 END

@@ -65,16 +65,16 @@ expect exactly 32 selected IDs and 32 cards in source order; IDs copied as seman
 wire A/B/C NOT FROZEN
 END
 
-CASE D07 vocabulary-custom-homonyms-both-directions
-source TextWireExperimentBlueprint.md:25; TextWireDesign.md:55; VocabularyDocument.kt
+CASE D07 vocabulary-shipped-custom-homonym-both-directions
+source TextWireExperimentBlueprint.md:25; TextWireDesign.md:55; VocabularyDocument.kt; VocabularyDocumentTest.kt:mergeRejectsNewCustomLemmaCollisionAndKeepsLegacyShippedHomonym
 kind vocabulary
-given pair="pl-ru" selectedIds=["user.00000000-0000-0000-0000-000000000001", "user.00000000-0000-0000-0000-000000000002"]
+given pair="pl-ru" selectedIds=["noun.wife", "user.00000000-0000-0000-0000-000000000001", "user.00000000-0000-0000-0000-000000000002"]
 given custom ordered:
-  id="user.00000000-0000-0000-0000-000000000001" lemma="zamek" translation="замок (строение)" form="zamku" example="Idę do zamku. 😀" level="A2" frequencyRank=null custom=true
-  id="user.00000000-0000-0000-0000-000000000002" lemma="zamek" translation="замок (ключ)" form="zamka" example="Klucz do zamka.\\\t\n" level="A2" frequencyRank=null custom=true
-given card keys for first item: "pl-ru:vocabulary:ru-pl:user.00000000-0000-0000-0000-000000000001", "pl-ru:vocabulary:pl-ru:user.00000000-0000-0000-0000-000000000001"
-given first directional card uses D01 "legacy.review" FSRS fields; second uses the same fields except lastReview="2026-10-18T12:34:57.789Z"
-expect custom order, exact text/code units, two directional cards and distinct lastReview instants preserved; loaded homonyms remain distinct by ID
+  id="user.00000000-0000-0000-0000-000000000001" lemma="żona" translation="жена (своё пояснение)" form="żony" example="Moja żona czyta. 😀" level="A1" frequencyRank=null custom=true
+  id="user.00000000-0000-0000-0000-000000000002" lemma="żubr" translation="зубр" form="żubra" example="Widzę żubra.\\\t\n" level="A2" frequencyRank=null custom=true
+given card keys ordered: "pl-ru:vocabulary:ru-pl:noun.wife", "pl-ru:vocabulary:pl-ru:noun.wife", "pl-ru:vocabulary:ru-pl:user.00000000-0000-0000-0000-000000000001", "pl-ru:vocabulary:pl-ru:user.00000000-0000-0000-0000-000000000001"
+given each card uses D01 "legacy.review" FSRS fields; lastReview of four cards respectively "2026-10-18T12:34:56.789Z", "2026-10-18T12:34:57.789Z", "2026-10-18T12:34:58.789Z", "2026-10-18T12:34:59.789Z"
+expect shipped noun.wife and legacy custom żona remain distinct by ID despite shared lemma; two distinct custom lemmas retain source order and exact text/code units; four directional histories remain distinct
 wire A/B/C NOT FROZEN
 END
 
@@ -174,5 +174,16 @@ source TextWireDesign.md:36; TextWireExperimentBlueprint.md:25
 kind progress
 given generic tree map { key "unrelated" => string "valid tree" }
 expect generic codec accepts typed tree; progress document validator rejects missing required fields
+wire A/B/C NOT FROZEN
+END
+
+CASE D20 duplicate-custom-lemma-in-import
+source TextWireExperimentBlueprint.md:27; VocabularyDocument.kt:merge; VocabularyDocumentTest.kt:importedBackupCannotContainTwoCustomIdsWithOneLemma
+kind vocabulary
+given imported pair="pl-ru" custom ordered:
+  id="user.00000000-0000-0000-0000-000000000001" lemma="szkoła" translation="школа" form="szkoły" example="To jest szkoła." level="A1" frequencyRank=null custom=true
+  id="user.00000000-0000-0000-0000-000000000002" lemma=" SZKOŁA " translation="школа" form="szkoły" example="To jest szkoła." level="A1" frequencyRank=null custom=true
+given local vocabulary empty
+expect import/merge rejects duplicate post-trim, case-insensitive custom lemma; preserve local document and imported bytes; no cards or selected IDs merged
 wire A/B/C NOT FROZEN
 END
