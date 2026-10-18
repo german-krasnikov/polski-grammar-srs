@@ -1,0 +1,83 @@
+# NJ01 glass-rollout future-measurement independent semantic cases
+# Baseline: biome/full-port-2026@fbc6548bbcf7e6163b39dbd3e870f26ff1c4b68f.
+# This is a requirement ledger, not a .measure grammar or generated output.
+# Decimal tokens below identify mathematical binary64 test values. Their future
+# textual encoding and complete .measure bytes are NOT FROZEN.
+# In STRING examples, <LF>, <TAB>, and <U+0085> denote individual Unicode
+# scalar values, not literal angle-bracket text or a chosen wire escape.
+
+OLD-SOURCE old-default | 729bfb4 | Plans/Kotlin/artifacts/glass-rollout/web-matrix-scroll.json | blob 7452182ec08f40e6252baf1676f60bb56fdca96a | 9290 bytes | sha256 3f51ad5a237fa540fdd2f2a335eb49cd407d9a9c207f106bc94c2735a6c66604
+OLD-SOURCE old-final | 729bfb4 | Plans/Kotlin/artifacts/glass-rollout/web-matrix-scroll-final.json | blob 1ffe93dd3e31a61aef006eec04e16d8e03510c1f | 9128 bytes | sha256 dead0a133541a27dfb56acc9b63564446f61b1225de542ab6bc8a1772ad526a3
+
+POSITIVE P01 ordered-two-engine-measurement
+  version: future first supported version, exact token pending grammar
+  date: 2026-10-18T12:34:56.789Z
+  baseline URL: https://example.test/baseline/
+  candidate URL: https://example.test/candidate/
+  rounds: 2; duration: 500 ms
+  profile: 390 x 844 CSS px; device pixel ratio 3; dark; reduced motion
+  engine[0]: chromium; browserVersion: 155.0.0-żółć-😀
+    run[0]: round 1, baseline; intervalsMs [16, 17, 20, 26]; frames 4; p50Ms 17; p95Ms 26; p99Ms 26; over25Ms 1; navFilter null; cardFilter ""
+    run[1]: round 1, candidate; intervalsMs [17, 18, 21, 27]; frames 4; p50Ms 18; p95Ms 27; p99Ms 27; over25Ms 1; navFilter "blur(8px)"; cardFilter "none"
+    run[2]: round 2, candidate; intervalsMs [19, 20, 23, 28]; frames 4; p50Ms 20; p95Ms 28; p99Ms 28; over25Ms 1; navFilter "none"; cardFilter null
+    run[3]: round 2, baseline; intervalsMs [15, 16, 19, 25]; frames 4; p50Ms 16; p95Ms 25; p99Ms 25; over25Ms 0; navFilter "none"; cardFilter "none"
+    summary: baselineMedianP95Ms 25; candidateMedianP95Ms 27; pairedP95DeltasMs [1, 3]; pairedMedianDeltaP95Ms 1; pairedRangeDeltaP95Ms [1, 3]
+  engine[1]: firefox; browserVersion: 155.0.0
+    run[0]: round 1, baseline; intervalsMs [10, 20, 30, 40]; frames 4; p50Ms 20; p95Ms 40; p99Ms 40; over25Ms 2; navFilter "none"; cardFilter "none"
+    run[1]: round 1, candidate; intervalsMs [11, 21, 31, 41]; frames 4; p50Ms 21; p95Ms 41; p99Ms 41; over25Ms 2; navFilter "none"; cardFilter "none"
+    run[2]: round 2, candidate; intervalsMs [12, 22, 32, 42]; frames 4; p50Ms 22; p95Ms 42; p99Ms 42; over25Ms 2; navFilter "none"; cardFilter "none"
+    run[3]: round 2, baseline; intervalsMs [13, 23, 33, 43]; frames 4; p50Ms 23; p95Ms 43; p99Ms 43; over25Ms 2; navFilter "none"; cardFilter "none"
+    summary: baselineMedianP95Ms 40; candidateMedianP95Ms 41; pairedP95DeltasMs [1, -1]; pairedMedianDeltaP95Ms -1; pairedRangeDeltaP95Ms [-1, 1]
+  expected: preserve engine order, run order, interval order, all typed fields, and units exactly; every round has one baseline and one candidate. Percentiles use nearest rank ceil(n*fraction)-1 on sorted positive intervals, with p99 added to the future report. The over25 counter uses strict > 25, so an interval of exactly 25 does not count. A round's paired delta is candidate p95 minus baseline p95; the median of two values is the lower ranked one under the same percentile rule. The future reader must return the same semantic values, including explicit null and empty string.
+
+POSITIVE P02 finite-binary64-fidelity
+  Each numeric probe is a separate generic measurement-value codec test, not a
+  physically plausible browser frame or permission to bypass field-domain checks.
+  values: +0, -0, 0.30000000000000004, 16.666666666666668,
+          1.0000000000000002, 5e-324, 1.7976931348623157e308
+  expected: read(write(value)) is Object.is-equal to value in JavaScript;
+            -0 remains distinct from +0 and no decimal is rounded for display.
+
+POSITIVE P03 unicode-and-control-text
+  browserVersion: "żółć 😀<U+0085>"
+  navFilter: "line1<LF>line2<TAB>Ω"
+  cardFilter: null
+  expected: exact Unicode scalar sequence and typed null survive read/write;
+            control characters use one canonical safe encoding, with no raw
+            record delimiter or line break embedded in the output structure.
+  note: the final letter in navFilter is capital omega U+03A9; this ledger
+        does not select an escape syntax for the future wire.
+
+POSITIVE P04 indexed-long-sequence
+  one engine, 500 complete rounds, two runs per round, 30 intervals per run;
+  run order alternates baseline/candidate then candidate/baseline by round;
+  each interval is 16 ms; each run has frames 30, p50/p95/p99 16,
+  over25Ms 0; each paired delta and each summary delta is 0.
+  expected: 1000 runs and 30000 ordered interval values are accepted without
+            quadratic expansion or a spurious size-limit failure. This is a
+            semantic load floor, not a full writer throughput PASS.
+
+NEGATIVE N01 zero-engines | selected engine list [] | reject before launch/write; never produce a success-looking empty report.
+NEGATIVE N02 zero-rounds | rounds 0 | reject settings before launch/write.
+NEGATIVE N03 zero-runs | engine chromium with runs [] and rounds 1 | reject before final write/read acceptance.
+NEGATIVE N04 empty-intervals | run frames 0, intervalsMs [] | reject as no measured frame; no undefined percentile or null substitution.
+NEGATIVE N05 missing-run | rounds 2, one engine has only three of the four P01 runs | reject incomplete round; do not calculate summary from one-sided data.
+NEGATIVE N06 duplicate-run | repeat (engine chromium, round 1, baseline) | reject even if values are equal.
+NEGATIVE N07 wrong-order | swap P01 chromium run[1] and run[2] | reject noncanonical alternating round/variant order; no silent reorder.
+NEGATIVE N08 duplicate-engine | two engine records named chromium | reject even if browser versions differ.
+NEGATIVE N09 bad-index | first run index 1 or a gap after index 0 | reject; never infer missing position.
+NEGATIVE N10 missing-field | omit P01 run[0].navFilter while keeping cardFilter null or empty | reject missing required measurement; absent, null, and empty text are distinct.
+NEGATIVE N11 wrong-units | declare frame intervals in seconds but use P01 millisecond values | reject mismatched unit/dimension, not silently rescale.
+NEGATIVE N12 wrong-derived-value | P01 chromium run[3].over25Ms = 1 or p99Ms = 26 | reject inconsistent derived fields.
+NEGATIVE N13 nonfinite | NaN, +Infinity, or -Infinity in any number cell | reject before write; never coerce to null or a string.
+NEGATIVE N14 lone-surrogate | browserVersion contains unpaired UTF-16 high surrogate U+D800 | reject before write; never replace with U+FFFD.
+NEGATIVE N15 unsupported-version | any version other than the explicitly accepted future version | reject; no silent fallback.
+NEGATIVE N16 truncated-document | remove the final complete run or the final structural terminator from an otherwise valid encoded P01 document | reject, never accept partial success. Exact mutated bytes are pending the grammar.
+NEGATIVE N17 resource-ceiling | one run/interval/text item exceeds a declared bound or total bytes/rows exceed its declared bound by one | reject before unbounded allocation. Numeric ceilings and exact byte examples are NOT FROZEN until P23 sizing/format choice; P04 is the admission floor.
+NEGATIVE N18 incomplete-write | process stops after a temporary file is partly written | no final .measure path is published and no old .json path is overwritten.
+NEGATIVE N19 nonpositive-interval | a captured frame delta is +0, -0, or negative | reject the measurement with a clear error before publication; do not silently filter the observation and report a plausible but incomplete count.
+
+BYTE-STATUS all positive complete .measure bytes: NOT FROZEN; no syntax, newline,
+            decimal spelling, escape spelling, key order, or terminal newline is
+            authorized by these semantic cases. Freeze those independent expected
+            bytes after P8 choice and before implementing the selected printer.
