@@ -1,2 +1,2 @@
 SURFACE preposition
-PREPOSITION {id: role formz: {Subj: "" Obj: "" In: in With: with To: to About: about Of: of}}
+PREPOSITION {id: role forms: {Subj: "" Obj: "" In: in With: with To: to About: about Of: of} formz: ignored}

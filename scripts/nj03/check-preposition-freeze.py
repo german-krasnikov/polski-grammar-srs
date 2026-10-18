@@ -14,7 +14,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 CORPUS = ROOT / "Plans/Biome/NJ03PrepositionIndependent.cases"
-CORPUS_SHA256 = "2b92fb71049470048eb8f9387ee05a51c59e252dca4682c370b6eb4b2a4277ec"
+CORPUS_SHA256 = "c7888ad050df4f1c96e74c06fd8fe4122cbd0568b118c8adea5deb8d176b1eb1"
 EXPECTED_FORMS = (
     ("Subj", ""),
     ("Obj", ""),
@@ -78,11 +78,11 @@ def negative_expectations(positive: str) -> dict[str, tuple[str, str, str, str, 
         "missing-subj": (replace('Subj: "" ', ""), "E_CASE_MISSING", "$/forms/Subj", "{", "record"),
         "missing-obj": (replace('Obj: "" ', ""), "E_CASE_MISSING", "$/forms/Obj", "{", "record"),
         "duplicate-in": (replace("In: in With:", "In: in In: inside With:"), "E_DUP_KEY", "$/forms/In", "In", "second"),
-        "unknown-case": (replace("Of: of", "Onto: of"), "E_CASE_UNKNOWN", "$/forms/Onto", "Onto", "first"),
-        "lowercase-case": (replace("In: in", "in: in"), "E_CASE_UNKNOWN", "$/forms/in", "in", "first"),
+        "unknown-case": (replace("Of: of", "Of: of Onto: onto"), "E_CASE_UNKNOWN", "$/forms/Onto", "Onto", "first"),
+        "lowercase-case": (replace("In: in With:", "In: in in: inside With:"), "E_CASE_UNKNOWN", "$/forms/in", "in", "second"),
         "wrong-type": (replace("In: in", "In: 7"), "E_TYPE", "$/forms/In", "7", "first"),
         "null-value": (replace('Subj: ""', "Subj: null"), "E_TYPE", "$/forms/Subj", "null", "first"),
-        "wrong-key": (replace("forms:", "formz:"), "E_FIELD_UNKNOWN", "$/formz", "formz", "first"),
+        "wrong-key": (replace("Of: of}}", "Of: of} formz: ignored}"), "E_FIELD_UNKNOWN", "$/formz", "formz", "first"),
         "utf16-wrong-type": (
             replace('Subj: ""', 'Subj: "😀"').replace("In: in", "In: 7"),
             "E_TYPE", "$/forms/In", "7", "first",
