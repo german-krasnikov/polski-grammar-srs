@@ -64,7 +64,7 @@ jobs:
       - name: Test shared web targets
         run: ./gradlew :shared:jsBrowserTest :shared:wasmJsBrowserTest
       - name: Build JS and Wasm compatibility distribution
-        run: ./gradlew :composeApp:composeCompatibilityBrowserDistribution
+        run: ./gradlew :composeApp:verifyNoWebSourceMaps
       - uses: actions/upload-artifact@v7
         with:
           name: kotlin-web-preview
