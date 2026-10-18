@@ -25,6 +25,20 @@ data class SelectedSource(
 fun sha256(bytes: ByteArray): String = MessageDigest.getInstance("SHA-256").digest(bytes)
     .joinToString("") { "%02x".format(it.toInt() and 0xff) }
 
+fun generatedHashes(seal: File): Map<String, String> {
+    val rows = seal.readLines()
+    require(rows.size == 2) { "NJ05 generated-source seal row count changed" }
+    val hashes = rows.map { line ->
+        val match = Regex("([0-9a-f]{64})  (LegacyAdmissionLedger|LegacyRepresentabilityFixture)\\.kt")
+            .matchEntire(line) ?: error("Invalid NJ05 generated-source seal row")
+        "${match.groupValues[2]}.kt" to match.groupValues[1]
+    }.toMap()
+    require(hashes.size == 2 && hashes.keys == setOf(
+        "LegacyAdmissionLedger.kt", "LegacyRepresentabilityFixture.kt",
+    )) { "NJ05 generated-source seal path set changed" }
+    return hashes
+}
+
 fun selectedSources(
     manifest: File,
     allowedPrefix: String,
@@ -68,21 +82,34 @@ val forbiddenCalls = Regex(
 )
 val testAnnotation = Regex("(?m)^\\s*@Test\\s*$")
 val topLevelClass = Regex("(?m)^class\\s+([A-Za-z][A-Za-z0-9]*)\\b")
+val generatedFixtureFiles = mapOf(
+    "LegacyAdmissionLedger.kt" to project(":shared").layout.buildDirectory.file(
+        "generated/legacyAdmissionTest/kotlin/polski/textwire/LegacyAdmissionLedger.kt",
+    ),
+    "LegacyRepresentabilityFixture.kt" to project(":shared").layout.buildDirectory.file(
+        "generated/representabilityTest/kotlin/polski/textwire/LegacyRepresentabilityFixture.kt",
+    ),
+)
 
 val prepareNj05ReadOnlyTestSources by tasks.registering(Sync::class) {
     inputs.file(sourceManifest)
+    inputs.file(generatedSourceSeal)
     inputs.files(sourceFiles)
     dependsOn(":shared:generateLegacyAdmissionTestSource")
     dependsOn(":shared:generateRepresentabilityTestSource")
     from(sourceFiles) { into("polski/textwire") }
-    from(project(":shared").layout.buildDirectory.file(
-        "generated/legacyAdmissionTest/kotlin/polski/textwire/LegacyAdmissionLedger.kt",
-    )) { into("polski/textwire") }
-    from(project(":shared").layout.buildDirectory.file(
-        "generated/representabilityTest/kotlin/polski/textwire/LegacyRepresentabilityFixture.kt",
-    )) { into("polski/textwire") }
+    generatedFixtureFiles.values.forEach { provider ->
+        from(provider) { into("polski/textwire") }
+    }
     into(layout.buildDirectory.dir("generated/nj05ReadOnlyProbeTest/kotlin"))
     doFirst {
+        val expectedGenerated = generatedHashes(generatedSourceSeal.asFile)
+        generatedFixtureFiles.forEach { (name, provider) ->
+            val file = provider.get().asFile
+            require(file.isFile && sha256(file.readBytes()) == expectedGenerated.getValue(name)) {
+                "Reviewed NJ05 generated test source changed before copy: $name"
+            }
+        }
         sources.zip(sourceFiles).forEach { (source, file) ->
             require(file.isFile && file.canonicalFile.parentFile == allowedDirectory) {
                 "Missing or redirected NJ05 source: ${source.path}"
@@ -127,17 +154,7 @@ val verifyNj05ReadOnlySelection by tasks.registering {
                 "Copied NJ05 test source changed: ${source.path}"
             }
         }
-        val generatedRows = generatedSourceSeal.asFile.readLines()
-        require(generatedRows.size == 2) { "NJ05 generated-source seal row count changed" }
-        val generatedHashes = generatedRows.map { line ->
-            val match = Regex("([0-9a-f]{64})  (LegacyAdmissionLedger|LegacyRepresentabilityFixture)\\.kt")
-                .matchEntire(line) ?: error("Invalid NJ05 generated-source seal row")
-            "${match.groupValues[2]}.kt" to match.groupValues[1]
-        }.toMap()
-        require(generatedHashes.size == 2 && generatedHashes.keys == setOf(
-            "LegacyAdmissionLedger.kt", "LegacyRepresentabilityFixture.kt",
-        )) { "NJ05 generated-source seal path set changed" }
-        generatedHashes.forEach { (name, expectedHash) ->
+        generatedHashes(generatedSourceSeal.asFile).forEach { (name, expectedHash) ->
             val bytes = output.resolve("polski/textwire/$name").readBytes()
             require(sha256(bytes) == expectedHash) { "Reviewed NJ05 generated test source changed: $name" }
         }

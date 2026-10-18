@@ -2,6 +2,7 @@
 """Static, independent selection audit; it never launches Gradle or application code."""
 
 from pathlib import Path
+import argparse
 import hashlib
 import re
 
@@ -78,10 +79,27 @@ for fragment in (
     "generatedSourceSeal",
     "sha256(copied) == source.sha256",
     "sha256(bytes) == expectedHash",
+    "Reviewed NJ05 generated test source changed before copy",
 ):
     if fragment not in build:
         raise AssertionError(f"Missing isolated Gradle edge: {fragment}")
 print("PASS exact selected scope: 3 read-only classes, 6 tests, 2 helpers, 2 pinned generated fixtures")
+
+parser = argparse.ArgumentParser()
+parser.add_argument("--generated-root", type=Path, help="existing shared/build/generated tree to audit read-only")
+options = parser.parse_args()
+if options.generated_root is not None:
+    locations = {
+        "LegacyAdmissionLedger.kt": "legacyAdmissionTest/kotlin/polski/textwire/LegacyAdmissionLedger.kt",
+        "LegacyRepresentabilityFixture.kt": "representabilityTest/kotlin/polski/textwire/LegacyRepresentabilityFixture.kt",
+    }
+    for digest, name in generated_rows:
+        data = (options.generated_root / locations[name]).read_bytes()
+        if hashlib.sha256(data).hexdigest() != digest:
+            raise AssertionError(f"Generated source differs before copy: {name}")
+        if hashlib.sha256(data + b"X").hexdigest() == digest:
+            raise AssertionError(f"Mutated generated source admitted before copy: {name}")
+    print("PASS pre-copy generated fixture hashes 2/2; byte mutations rejected 2/2")
 
 bad_class = rows + [[
     "test",
