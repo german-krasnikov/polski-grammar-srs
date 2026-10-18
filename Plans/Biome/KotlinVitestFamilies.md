@@ -5,7 +5,7 @@ All 41 files / 268 collected cases are expanded per case in [ledgers 1](KotlinVi
 | Old test file | Cases | Related Kotlin class | Planned lane |
 | --- | ---: | --- | --- |
 | `tests/app.test.tsx` | 6 | `NONE` | B |
-| `tests/course-chain-presentation-acceptance.test.ts` | 2 | `data/CourseChainPresentationTest.kt` | C |
+| `tests/course-chain-presentation-acceptance.test.ts` | 2 | `data/CourseChainPresentationTest.kt` | G |
 | `tests/course-chain-presentation.test.ts` | 3 | `data/CourseChainPresentationTest.kt` | C |
 | `tests/course-inventory-acceptance.test.ts` | 5 | `data/CourseInventoryContentTest.kt` | G |
 | `tests/course-inventory-checker.test.ts` | 4 | `NONE` | G |
@@ -18,7 +18,7 @@ All 41 files / 268 collected cases are expanded per case in [ledgers 1](KotlinVi
 | `tests/course-reference-chain.test.ts` | 1 | `data/CourseReferenceChainTest.kt` | C |
 | `tests/course-reference-male-acc.test.ts` | 1 | `data/CourseReferenceMaleAccTest.kt` | C |
 | `tests/course-reference-pipeline.test.ts` | 1 | `data/CourseReferencePipelineTest.kt` | C |
-| `tests/course-reference-pronouns.test.ts` | 16 | `data/CoursePronounTeachingTest.kt` | C |
+| `tests/course-reference-pronouns.test.ts` | 16 | `data/CoursePronounTeachingTest.kt` | 2 C / 14 G |
 | `tests/course-reference-russian-support.test.ts` | 1 | `data/CourseRussianSupportTest.kt` | C |
 | `tests/course-reference-system-cards.test.ts` | 1 | `data/CourseReferenceSystemCardsTest.kt` | C |
 | `tests/course-reference-verbs.test.ts` | 1 | `data/CourseVerbTeachingTest.kt` | C |
