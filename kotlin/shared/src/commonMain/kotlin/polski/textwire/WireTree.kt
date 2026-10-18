@@ -2,7 +2,9 @@ package polski.textwire
 
 /** Ordered typed tree node — the language-neutral data model for POLSKI-TEXT wire format. */
 sealed class WireNode {
-    data class WireMap(val children: List<Pair<String, WireNode>>) : WireNode()
+    data class WireMap(val children: List<Pair<String, WireNode>>) : WireNode() {
+        fun get(key: String): WireNode? = children.firstOrNull { it.first == key }?.second
+    }
     data class WireList(val items: List<WireNode>) : WireNode()
     data class WireString(val value: String) : WireNode()
     data class WireI64(val value: Long) : WireNode()
