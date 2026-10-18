@@ -1,6 +1,6 @@
 # NJ05 E4 A/C frozen-corpus prototype handoff
 
-Status: **test-only candidate; previously executed Desktop PASS and isolated JS FAIL reproducibly; latest case-split source `357308d82da4cbab912ee3251ae27094cecdeba9` is NOT RUN**. The exact previously executed source is `a1234cfce4f803c8cdc4668b20ccdb080d029ce0`, with A/C test implementation from `8858685caf6194b6f54c049c5787f975105f3a36`. Based on accepted JS/Wasm isolation source `7d6370bb6b05364e80b8387dac3cca2229830b30` and its documentation descendant `229e713f0edb242ac9e0c41fcc3da185c8c7f8b5`. This worktree does not authorize a production codec, app writer, migration transaction, N26 limit or NJ05 completion.
+Status: **test-only candidate; latest case-split source `357308d82da4cbab912ee3251ae27094cecdeba9` passed focused Desktop 8/8 and isolated JS 14/14**. The earlier source `a1234cfce4f803c8cdc4668b20ccdb080d029ce0` had a reproducible isolated JS 8/9 FAIL, with A/C test implementation from `8858685caf6194b6f54c049c5787f975105f3a36`. Based on accepted JS/Wasm isolation source `7d6370bb6b05364e80b8387dac3cca2229830b30` and its documentation descendant `229e713f0edb242ac9e0c41fcc3da185c8c7f8b5`. This worktree does not authorize a production codec, app writer, migration transaction, N26 limit or NJ05 completion.
 
 The independent `positive.cases` and `negative.cases` remain the only expected A/C byte source. A new `:shared` **commonTest-only** generator checks their pinned whole-file SHA-256 values against `corpus.sha256`, then embeds the unchanged text as a generated Kotlin test fixture. `FrozenAcCorpusProbeTest` states twelve ordered trees separately from that fixture; it compares the existing test-only A/C printer's complete bytes with each P01–P12 literal, decodes the literal back to the independently stated tree, and verifies exact re-encoding. P12 uses a test-only snapshot framing parameter. N16 reads its literal A/C bytes with the independently recomputed digest and expects `ListItemKey`. No expectation comes from candidate output. No corpus, old input, `commonMain`, app source set or application JSON path was edited.
 
@@ -19,7 +19,7 @@ Evidence is copied outside the repository to `/Users/german/Work/JS/polski-gramm
 
 `wasmJsBrowserTest`, focused macOS/iOS Simulator, Android and E4 timing, allocation, quotas and P23 headroom are **NOT RUN**. The reproducible JS runner timeout remains an open defect; the XML's short method time is insufficient to classify it as startup or probe computation. A mismatch remains FAIL; never change frozen bytes or trees to fit the prototype.
 
-## Pending isolated case-split rerun
+## Case-split source and static controls
 
 Source `357308d82da4cbab912ee3251ae27094cecdeba9` replaces the one P01–P06 group with six individually named `@Test` methods, each selecting exactly one case through `single { it.id == id }` and the unchanged A/C byte, ordered-tree, decode and re-encode comparison. P07–P12 and N16 are unchanged. The sealed isolated JS/Wasm selection is now four classes/fourteen methods/two helpers/three generated fixtures; the A/C test-source hash is `9de036a837c5dea5c2fd2115e39327f14f4a102a12544034b7321eff577bf455`. Mocha remains at 10 seconds. No corpus, expected tree, generated fixture, production code or runner timeout changed. The original `a1234cf` JS failure evidence above remains preserved.
 
