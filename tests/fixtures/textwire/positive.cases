@@ -1,0 +1,207 @@
+# NJ05 generic codec positives. Syntax and NOT FROZEN meaning: Plans/Biome/TextWireCorpusNotes.md.
+# All cases assert decode(encode(tree)) = tree. Byte oracles additionally assert decode(input)
+# = tree and encode(decode(input)) = input. B/C byte oracles remain NOT FROZEN.
+
+CASE P01 empty-root
+source TextWireDesign.md:22-36; TextWireExperimentBlueprint.md:17,25
+arms A B C
+tree
+  map
+input A utf8-lines
+POLSKI-TEXT	1	progress	2
+M	-	0
+H	sha256	dadd8287604ee6368645c92d3e1b58ce1b236f8df959a3d3aee5ceda76c2439b
+input B NOT FROZEN
+input C NOT FROZEN
+expect ordered empty map; final LF; verified digest; exact re-encode
+END
+
+CASE P02 distinct-empty-null-zero-and-absence
+source TextWireDesign.md:34-36; TextWireExperimentBlueprint.md:17,25
+arms A B C
+tree
+  map
+    key "emptyText" => string ""
+    key "nothing" => null
+    key "emptyList" => list
+    key "emptyMap" => map
+    key "zero" => i64 0
+absent root.missing
+input A utf8-lines-terminal-ht
+POLSKI-TEXT	1	progress	2
+M	-	5
+S	K:emptyText<HT>
+N	K:nothing
+L	K:emptyList	0
+M	K:emptyMap	0
+I	K:zero	0
+H	sha256	ed7ff5bc2f6df5f210d37e254b9bbac31f4cf3844a883ba3eab800aca72010c9
+input B NOT FROZEN
+input C NOT FROZEN
+expect five ordered children and missing absent; no coercion
+END
+
+CASE P03 escaped-and-literal-keys
+source TextWireDesign.md:34; TextWireExperimentBlueprint.md:25
+arms A B C
+tree
+  map
+    key "-" => string "dash"
+    key "" => string "empty"
+    key "K:-" => string "prefixed"
+input A utf8-lines
+POLSKI-TEXT	1	progress	2
+M	-	3
+S	K:-	dash
+S	K:	empty
+S	K:K:-	prefixed
+H	sha256	02845d71a5d0b19390e065554efca8c2bc7334e64cefb89fb48fbc85330e53fe
+input B NOT FROZEN
+input C NOT FROZEN
+expect decoded keys exactly "-", "", "K:-" in that order
+END
+
+CASE P04 nested-order-and-unknown-extension
+source TextWireExperimentBlueprint.md:17,25; TextWireDesign.md:49,55
+arms A B C
+tree
+  map
+    key "z" => list
+      item => map
+        key "id" => string "a"
+        key "x-unknown" => bool true
+      item => map
+        key "id" => string "b"
+    key "a" => map
+      key "inner" => list
+        item => null
+        item => string "1"
+order root: "z", "a"
+order root.z[0]: "id", "x-unknown"
+input A NOT FROZEN
+input B NOT FROZEN
+input C NOT FROZEN
+expect nested order and unknown node preserved on round-trip
+END
+
+CASE P05 signed-i64-edges-and-numeric-text
+source TextWireDesign.md:29; TextWireExperimentBlueprint.md:25
+arms A B C
+tree
+  map
+    key "min" => i64 -9223372036854775808
+    key "max" => i64 9223372036854775807
+    key "numericText" => string "001e+3"
+    key "negativeZeroText" => string "-0"
+input A NOT FROZEN
+input B NOT FROZEN
+input C NOT FROZEN
+expect exact integer edges and strings, with no JS Number coercion
+END
+
+CASE P06 finite-binary64-bits
+source TextWireDesign.md:30; TextWireExperimentBlueprint.md:25
+arms A B C
+tree
+  map
+    key "positiveZero" => f64bits 0000000000000000
+    key "negativeZero" => f64bits 8000000000000000
+    key "one" => f64bits 3ff0000000000000
+    key "smallestSubnormal" => f64bits 0000000000000001
+    key "largestFinite" => f64bits 7fefffffffffffff
+input A NOT FROZEN
+input B NOT FROZEN
+input C NOT FROZEN
+expect all five exact bit patterns, including the sign of zero
+END
+
+CASE P07 multilingual-controls-and-line-separators
+source TextWireDesign.md:34; TextWireExperimentBlueprint.md:25
+arms A B C
+tree
+  map
+    key "text" => string "Zażółć gęślą jaźń / Привет / 漢字 / 😀\tline\nnext\\end\u0000\u001F\u007F\u0085\u2028\u2029"
+input A NOT FROZEN
+input B NOT FROZEN
+input C NOT FROZEN
+expect unchanged UTF-16 code units; canonical control escaping; no normalization
+END
+
+CASE P08 literal-utf16-code-unit-order
+source TextWireDesign.md:49; TextWireExperimentBlueprint.md:17,25; ProjectMigratioPrincipals.md:P24
+arms A B C
+tree
+  map
+    key "A" => string "ASCII"
+    key "\uD800" => string "lone high"
+    key "\uD800\uDC00" => string "U+10000"
+    key "\uDC00" => string "lone low"
+    key "\uE000" => string "BMP"
+order newly-created extension keys: "A", "\uD800", "\uD800\uDC00", "\uDC00", "\uE000"
+input A NOT FROZEN
+input B NOT FROZEN
+input C NOT FROZEN
+expect unsigned UTF-16 order; decoded existing order retained
+END
+
+CASE P09 decoded-non-sorted-extension-order
+source TextWireDesign.md:49; TextWireExperimentBlueprint.md:17
+arms A B C
+tree
+  map
+    key "\uE000" => string "first"
+    key "A" => string "second"
+    key "\uD800\uDC00" => string "third"
+order root: "\uE000", "A", "\uD800\uDC00"
+input A NOT FROZEN
+input B NOT FROZEN
+input C NOT FROZEN
+expect decoded order retained; re-encode does not sort migrated records
+END
+
+CASE P10 UTF16-lone-value-and-paired-value
+source TextWireDesign.md:34; TextWireExperimentBlueprint.md:17
+arms A B C
+tree
+  map
+    key "value" => string "\uD800|\uDC00|\uD83D\uDE00"
+input A NOT FROZEN
+input B NOT FROZEN
+input C NOT FROZEN
+expect lone units preserved; valid pair encoded as visible emoji in A
+END
+
+CASE P11 boolean-and-false
+source TextWireDesign.md:31; TextWireExperimentBlueprint.md:17
+arms A B C
+tree
+  map
+    key "yes" => bool true
+    key "no" => bool false
+input A NOT FROZEN
+input B NOT FROZEN
+input C NOT FROZEN
+expect distinct boolean values
+END
+
+CASE P12 snapshot-framing-kind
+source TextWireDesign.md:22; TextWireExperimentBlueprint.md:17
+arms A B C
+tree
+  map
+    key "revision" => i64 1
+    key "effectId" => string "download-1"
+input A NOT FROZEN
+input B NOT FROZEN
+input C NOT FROZEN
+expect recognized snapshot framing kind; snapshot schema and Swift bridge NOT FROZEN
+END
+
+CASE P13 sha256-standard-vectors
+source TextWireExperimentBlueprint.md:46; TextWireDesign.md:51
+arms A B C
+input bytes hex empty
+expect sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+input bytes utf8-literal "abc" without LF
+expect sha256 ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad
+END

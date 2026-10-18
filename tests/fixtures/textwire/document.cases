@@ -1,0 +1,178 @@
+# NJ05 later domain-document expectations. All cases are NOT RUN by the generic codec.
+# `given` is a typed semantic input, `expect` is the required domain outcome.
+# New document schema version, field order and A/B/C bytes are NOT FROZEN.
+# No legacy application JSON is embedded here. See TextWireCorpusNotes.md.
+
+CASE D01 progress-all-fsrs-states
+source TextWireDesign.md:49,55; TextWireExperimentBlueprint.md:25; SrsCard.kt; SrsCardWire.kt
+kind progress
+given Progress version=1 reviewsToday=2 lastDay="2026-10-18" totalReviews=17
+given cards ordered skillIds: "known.new", "known.learning", "legacy.review", "known.relearning"
+given card "known.new": due="2026-10-18T00:00:00.000Z" stability=f64bits:0000000000000000 difficulty=f64bits:0000000000000000 elapsedDays=0 scheduledDays=0 reps=0 lapses=0 learningSteps=0 state=0 lastReview=null
+given card "known.learning": due="2026-10-18T00:01:00.000Z" stability=f64bits:3ff0000000000000 difficulty=f64bits:4014000000000000 elapsedDays=0 scheduledDays=1 reps=1 lapses=0 learningSteps=1 state=1 lastReview="2026-10-18T00:00:00.000Z"
+given card "legacy.review": due="2026-10-20T12:34:56.789Z" stability=f64bits:4012000000000000 difficulty=f64bits:4008000000000000 elapsedDays=2 scheduledDays=2 reps=3 lapses=0 learningSteps=0 state=2 lastReview="2026-10-18T12:34:56.789Z"
+given card "known.relearning": due="2026-10-18T12:36:00.000Z" stability=f64bits:3ff8000000000000 difficulty=f64bits:4010000000000000 elapsedDays=0 scheduledDays=1 reps=4 lapses=1 learningSteps=2 state=3 lastReview="2026-10-18T12:35:00.000Z"
+given stats ordered "known.new"=(reviews=0,correct=0,streak=0,mistakes=0), "legacy.review"=(reviews=3,correct=2,streak=1,mistakes=1)
+expect all four state integers, counters, binary64 bits, millisecond instants, order and unknown skill preserved; lastReview null distinct from absent
+wire A/B/C NOT FROZEN
+END
+
+CASE D02 progress-ratings-are-not-wire-state
+source TextWireExperimentBlueprint.md:25; Scheduler.kt; TextWireDesign.md:55
+kind progress
+given valid D01 card "legacy.review"; review input ratings 1=Again, 2=Hard, 3=Good, 4=Easy at "2026-10-18T12:40:00.000Z" in four isolated copies
+expect rating is an input to domain scheduling, not a persisted card field; each resulting card must round-trip all resulting FSRS fields without coercion; exact scheduler outputs NOT FROZEN for this wire corpus
+wire A/B/C NOT FROZEN
+END
+
+CASE D03 progress-midnight-and-dst
+source NoJsonFullPortPlan.md:NJ06; TextWireDesign.md:55
+kind progress
+given lastDay="2026-03-29" reviewsToday=3; due="2026-03-29T00:30:00.000Z"; zone="Europe/Warsaw"
+expect lastDay string and absolute due instant unchanged by decode/encode; no implicit local-day normalization before migration readback
+wire A/B/C NOT FROZEN
+END
+
+CASE D04 progress-typed-unknown-extensions
+source TextWireDesign.md:49,55-57; TextWireExperimentBlueprint.md:25
+kind progress
+given D01 plus root extension key "-" => string "1", key "" => list [null, empty map], key "K:-" => i64 9223372036854775807
+given card "legacy.review" extension key "memo" => string "zażółć\nПривет"
+given stats "legacy.review" extension key "confidence" => f64bits 8000000000000000
+expect all extension nodes and inherited order preserved exactly; no projection to known fields
+wire A/B/C NOT FROZEN
+END
+
+CASE D05 progress-empty-is-valid-structure
+source TextWireDesign.md:38-49; TextWireExperimentBlueprint.md:17,25
+kind progress
+given version=1 cards=[] stats=[] reviewsToday=0 lastDay="2026-10-18" totalReviews=0
+expect decoded empty lists differ from absent required fields; domain validates the whole record
+wire A/B/C NOT FROZEN
+END
+
+CASE D06 vocabulary-32-prepared-items
+source TextWireExperimentBlueprint.md:25; TextWireDesign.md:55; VocabularyDocument.kt
+kind vocabulary
+given pair="pl-ru" selectedIds ordered:
+  "noun.wife", "noun.woman", "noun.book", "noun.work", "noun.husband", "noun.friendM", "noun.son", "noun.dog"
+  "noun.cat", "noun.car", "noun.house", "noun.phone", "noun.child", "noun.window", "adjective.beautiful", "adjective.new"
+  "adjective.small", "adjective.nice", "adjective.good", "adjective.old", "adjective.expensive", "verb.have", "verb.see", "verb.like"
+  "verb.buy", "verb.read", "verb.talk", "verb.go", "verb.be", "verb.buyDone", "verb.do", "verb.doDone"
+given custom=[]
+given cards ordered one per selected ID above: key="pl-ru:vocabulary:ru-pl:<selectedId>" with <selectedId> replaced literally in list order; each card has due="2026-10-18T00:00:00.000Z" stability=f64bits:0000000000000000 difficulty=f64bits:0000000000000000 elapsedDays=0 scheduledDays=0 reps=0 lapses=0 learningSteps=0 state=0 lastReview=null
+expect exactly 32 selected IDs and 32 cards in source order; IDs copied as semantic controls from tests/fixtures/vocabulary-baseline-32.json at pinned SHA; no missing/duplicate card
+wire A/B/C NOT FROZEN
+END
+
+CASE D07 vocabulary-custom-homonyms-both-directions
+source TextWireExperimentBlueprint.md:25; TextWireDesign.md:55; VocabularyDocument.kt
+kind vocabulary
+given pair="pl-ru" selectedIds=["user.00000000-0000-0000-0000-000000000001", "user.00000000-0000-0000-0000-000000000002"]
+given custom ordered:
+  id="user.00000000-0000-0000-0000-000000000001" lemma="zamek" translation="замок (строение)" form="zamku" example="Idę do zamku. 😀" level="A2" frequencyRank=null custom=true
+  id="user.00000000-0000-0000-0000-000000000002" lemma="zamek" translation="замок (ключ)" form="zamka" example="Klucz do zamka.\\\t\n" level="A2" frequencyRank=null custom=true
+given card keys for first item: "pl-ru:vocabulary:ru-pl:user.00000000-0000-0000-0000-000000000001", "pl-ru:vocabulary:pl-ru:user.00000000-0000-0000-0000-000000000001"
+given first directional card uses D01 "legacy.review" FSRS fields; second uses the same fields except lastReview="2026-10-18T12:34:57.789Z"
+expect custom order, exact text/code units, two directional cards and distinct lastReview instants preserved; loaded homonyms remain distinct by ID
+wire A/B/C NOT FROZEN
+END
+
+CASE D08 vocabulary-import-local-wins
+source TextWireDesign.md:61; VocabularyDocument.kt:merge
+kind vocabulary
+given local selectedIds=["noun.wife"] cards key="pl-ru:vocabulary:ru-pl:noun.wife" due="2026-10-20T00:00:00.000Z"
+given imported selectedIds=["noun.wife", "noun.woman"] same card key due="2026-10-21T00:00:00.000Z"
+expect selectedIds=["noun.wife", "noun.woman"]; common card due remains "2026-10-20T00:00:00.000Z"; import does not replay reviews
+wire A/B/C NOT FROZEN
+END
+
+CASE D09 preferences-v1-defaults
+source TextWireDesign.md:55; TextWireExperimentBlueprint.md:25; UserPreferences.kt; UserPreferencesCodec.kt
+kind preferences
+given legacy semantic version=1 coursePair="pl-ru" explanationMethod="Logic" with other optional fields absent
+expect target="pl" native="ru" styleId=RuleFirst answerMode=Oral appearance=System motion=System swipeRatingEnabled=true reminder=(enabled=false,localTime="19:00",days=[1,2,3,4,5,6,7],quietStart="22:00",quietEnd="08:00") glassTintPercent=50 animationsEnabled=true
+wire A/B/C NOT FROZEN
+END
+
+CASE D10 preferences-v2-and-v3
+source TextWireDesign.md:55; TextWireExperimentBlueprint.md:25; UserPreferencesCodec.kt
+kind preferences
+given v2 coursePair="pl-ru" explanationMethod="Situations" glassTintPercent=0 animationsEnabled=false
+expect v2 interpreted styleId=SituationFirst tint=0 animationsEnabled=false
+given v3 coursePair="pl-ru" styleId=NativeContrast answerMode=Typed appearance=Dark motion=Reduced swipeRatingEnabled=false glassTintPercent=100 animationsEnabled=true
+expect v3 each supplied enum/bool/tint retained, without legacy style renaming
+wire A/B/C NOT FROZEN
+END
+
+CASE D11 preferences-v4-early-peek
+source TextWireDesign.md:11,55; TextWireExperimentBlueprint.md:25; UserPreferencesCodec.kt
+kind preferences
+given semantic version=4 target="en" native="ru" styleId=MinimalTheory reminder=(enabled=true,localTime="07:45",days=[1,3,5],quietStart="22:30",quietEnd="06:30")
+expect early peek returns target="en", native="ru" before active-pack reads; full load preserves reminder order and all defaults for absent optional fields; unsupported pack recovers
+wire A/B/C NOT FROZEN
+END
+
+CASE D12 wrong-document-schema
+source TextWireDesign.md:49; TextWireExperimentBlueprint.md:27
+kind progress
+given valid generic typed tree with schemaVersion=999 and otherwise D05 values
+expect Unsupported DocumentSchema, not a defaulted progress save
+wire A/B/C NOT FROZEN
+END
+
+CASE D13 duplicate-progress-skill-id
+source TextWireExperimentBlueprint.md:27; ProgressCodec.kt
+kind progress
+given D01 plus second card wrapper skillId="known.learning"
+expect RecoveryRequired InvalidDuplicateSkillId before write
+wire A/B/C NOT FROZEN
+END
+
+CASE D14 invalid-fsrs-state-memory-date
+source TextWireExperimentBlueprint.md:27; SrsCardWire.kt; ProgressCodec.kt
+kind progress
+given three isolated mutations of D01: state=4; state=0 with stability=f64bits:3ff0000000000000; due="2026-02-30T00:00:00.000Z"
+expect RecoveryRequired InvalidFSRS on each; original bytes preserved
+wire A/B/C NOT FROZEN
+END
+
+CASE D15 invalid-day-and-counters
+source TextWireExperimentBlueprint.md:27; ProgressCodec.kt
+kind progress
+given three isolated mutations of D01: lastDay="2026-02-30"; reviewsToday=-1; card reps=-1
+expect RecoveryRequired InvalidDomainValue on each
+wire A/B/C NOT FROZEN
+END
+
+CASE D16 invalid-vocabulary-pair-card-id
+source TextWireExperimentBlueprint.md:27; VocabularyDocument.kt
+kind vocabulary
+given three isolated mutations of D07: pair="xx-yy"; card key prefix "en-ru:vocabulary:ru-en:" in pl-ru document; duplicate selected ID
+expect RecoveryRequired InvalidVocabulary on each, no silent card removal
+wire A/B/C NOT FROZEN
+END
+
+CASE D17 unsupported-preferences-pack-and-field
+source TextWireExperimentBlueprint.md:27; UserPreferencesCodec.kt
+kind preferences
+given two isolated mutations of D11: target="xx" native="yy"; unknown field with unconvertible value
+expect RecoveryRequired on each, no fallback to active pack/defaults
+wire A/B/C NOT FROZEN
+END
+
+CASE D18 unknown-legacy-value-cannot-be-losslessly-typed
+source TextWireDesign.md:57; TextWireExperimentBlueprint.md:27
+kind progress
+given unknown legacy value that cannot map losslessly to ordered typed tree, e.g. duplicate source object keys already collapsed by legacy parser
+expect RecoveryRequired; preserve original legacy bytes; do not emit new text or discard the value
+wire A/B/C NOT FROZEN
+END
+
+CASE D19 mechanically-valid-tree-not-a-save
+source TextWireDesign.md:36; TextWireExperimentBlueprint.md:25
+kind progress
+given generic tree map { key "unrelated" => string "valid tree" }
+expect generic codec accepts typed tree; progress document validator rejects missing required fields
+wire A/B/C NOT FROZEN
+END

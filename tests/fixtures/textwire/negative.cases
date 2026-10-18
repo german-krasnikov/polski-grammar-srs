@@ -1,0 +1,290 @@
+# NJ05 generic codec rejections. Mutations marked recompute-digest retain a valid digest;
+# failure must arise from the named structural or canonical defect. See TextWireCorpusNotes.md.
+
+CASE N01 missing-header
+source TextWireDesign.md:22; TextWireExperimentBlueprint.md:27
+arms A B C
+defect remove entire framing header from P01; recompute-digest
+input A derive P01 remove line 1, recompute-digest
+input B NOT FROZEN
+input C NOT FROZEN
+expect Reject Framing
+END
+
+CASE N02 unsupported-framing-version
+source TextWireDesign.md:22; TextWireExperimentBlueprint.md:17,27
+arms A B C
+defect change framing version from 1 to 9; recompute-digest
+input A derive P01 replace header field 2 with 9, recompute-digest
+input B NOT FROZEN
+input C NOT FROZEN
+expect Unsupported FramingVersion; no coercion
+END
+
+CASE N03 unknown-kind
+source TextWireDesign.md:22; TextWireExperimentBlueprint.md:17,27
+arms A B C
+defect change kind to alien; recompute-digest
+input A derive P01 replace header field 3 with alien, recompute-digest
+input B NOT FROZEN
+input C NOT FROZEN
+expect Unsupported Kind
+END
+
+CASE N04 digest-corruption
+source TextWireDesign.md:51; TextWireExperimentBlueprint.md:17,27
+arms A B C
+defect change one covered byte without changing digest
+input A derive P02 replace zero integer payload 0 with 1; leave digest unchanged
+input B NOT FROZEN
+input C NOT FROZEN
+expect Reject DigestMismatch
+END
+
+CASE N05 digest-malformed
+source TextWireDesign.md:51; TextWireExperimentBlueprint.md:27
+arms A B C
+defect replace first digest hex digit with uppercase G
+input A derive P01 replace digest field character 1 with G
+input B NOT FROZEN
+input C NOT FROZEN
+expect Reject DigestSyntax
+END
+
+CASE N06 bom
+source TextWireDesign.md:22; TextWireExperimentBlueprint.md:27
+arms A B C
+defect prepend UTF-8 BOM
+input A derive P01 prepend hex EF BB BF; leave digest unchanged
+input B NOT FROZEN
+input C NOT FROZEN
+expect Reject BOM before header
+END
+
+CASE N07 crlf
+source TextWireDesign.md:22; TextWireExperimentBlueprint.md:27
+arms A B C
+defect replace every LF with CR LF
+input A derive P01 replace each byte 0A with 0D 0A
+input B NOT FROZEN
+input C NOT FROZEN
+expect Reject CRLF
+END
+
+CASE N08 invalid-utf8
+source TextWireDesign.md:22,34; TextWireExperimentBlueprint.md:17,27
+arms A B C
+defect one isolated continuation byte in string payload
+input A hex 50 4f 4c 53 4b 49 2d 54 45 58 54 09 31 09 70 72 6f 67 72 65 73 73 09 32 0a 4d 09 2d 09 31 0a 53 09 4b 3a 78 09 80 0a
+input B NOT FROZEN
+input C NOT FROZEN
+expect Reject InvalidUtf8 before allocating decoded string
+END
+
+CASE N09 invalid-utf8-overlong
+source TextWireDesign.md:22,34; TextWireExperimentBlueprint.md:27
+arms A B C
+defect overlong UTF-8 spelling of slash, C0 AF, in string payload
+input A derive P02 replace emptyText payload with hex C0 AF; recompute-digest
+input B NOT FROZEN
+input C NOT FROZEN
+expect Reject InvalidUtf8
+END
+
+CASE N10 noncanonical-tab-escape
+source TextWireDesign.md:34; TextWireExperimentBlueprint.md:27
+arms A B C
+defect encode TAB as backslash-u-0009 instead of short escape; recompute-digest
+input A derive P03 replace first string payload with literal characters backslash u 0 0 0 9; recompute-digest
+input B NOT FROZEN
+input C NOT FROZEN
+expect Reject NoncanonicalEscape
+END
+
+CASE N11 noncanonical-printable-escape
+source TextWireDesign.md:34; TextWireExperimentBlueprint.md:27
+arms A B C
+defect encode letter A as backslash-u-0041; recompute-digest
+input A derive P03 replace first string payload with literal characters backslash u 0 0 4 1; recompute-digest
+input B NOT FROZEN
+input C NOT FROZEN
+expect Reject NoncanonicalEscape
+END
+
+CASE N12 lowercase-hex-escape
+source TextWireDesign.md:34; TextWireExperimentBlueprint.md:27
+arms A B C
+defect encode excluded U+007F with lowercase hex letter in an escape
+input A derive P03 replace first string payload with literal characters backslash u 0 0 7 f; recompute-digest
+input B NOT FROZEN
+input C NOT FROZEN
+expect Reject EscapeSyntax
+END
+
+CASE N13 incomplete-escape
+source TextWireDesign.md:34; TextWireExperimentBlueprint.md:27
+arms A B C
+defect string payload ends with one backslash before LF
+input A derive P03 replace first string payload with one byte 5c; recompute-digest
+input B NOT FROZEN
+input C NOT FROZEN
+expect Reject EscapeSyntax
+END
+
+CASE N14 named-child-missing-prefix
+source TextWireDesign.md:34-36; TextWireExperimentBlueprint.md:27
+arms A B C
+defect map child key text has no K: prefix
+input A derive P03 replace key token K:- with bare x; recompute-digest
+input B NOT FROZEN
+input C NOT FROZEN
+expect Reject MapKey
+END
+
+CASE N15 sentinel-in-map-child
+source TextWireDesign.md:36; TextWireExperimentBlueprint.md:27
+arms A B C
+defect map child uses structural sentinel
+input A derive P03 replace first key token K:- with -; recompute-digest
+input B NOT FROZEN
+input C NOT FROZEN
+expect Reject MapKey
+END
+
+CASE N16 named-list-item
+source TextWireDesign.md:36; TextWireExperimentBlueprint.md:27
+arms A B C
+defect a list child carries a named key rather than sentinel
+input A NOT FROZEN
+input B NOT FROZEN
+input C NOT FROZEN
+expect Reject ListItemKey
+END
+
+CASE N17 named-root
+source TextWireDesign.md:36; TextWireExperimentBlueprint.md:27
+arms A B C
+defect root key is named, not sentinel
+input A derive P01 replace root key - with K:root; recompute-digest
+input B NOT FROZEN
+input C NOT FROZEN
+expect Reject RootKey
+END
+
+CASE N18 duplicate-decoded-key
+source TextWireDesign.md:34,36; TextWireExperimentBlueprint.md:27
+arms A B C
+defect two map children decode to same key
+input A derive P03 replace second key token K: with K:-; recompute-digest
+input B NOT FROZEN
+input C NOT FROZEN
+expect Reject DuplicateDecodedMapKey
+END
+
+CASE N19 wrong-child-count
+source TextWireDesign.md:26,36; TextWireExperimentBlueprint.md:27
+arms A B C
+defect root claims one more child than present
+input A derive P03 replace root count 3 with 4; recompute-digest
+input B NOT FROZEN
+input C NOT FROZEN
+expect Reject TruncatedTree
+END
+
+CASE N20 trailing-row
+source TextWireDesign.md:36,51; TextWireExperimentBlueprint.md:27
+arms A B C
+defect extra value row follows complete root before digest
+input A derive P01 insert line S TAB K:x TAB y before H; recompute-digest
+input B NOT FROZEN
+input C NOT FROZEN
+expect Reject TrailingRow
+END
+
+CASE N21 missing-row
+source TextWireDesign.md:36; TextWireExperimentBlueprint.md:27
+arms A B C
+defect remove one child row while root still claims it
+input A derive P03 remove first S row; recompute-digest
+input B NOT FROZEN
+input C NOT FROZEN
+expect Reject TruncatedTree
+END
+
+CASE N22 i64-overflow
+source TextWireDesign.md:29; TextWireExperimentBlueprint.md:27
+arms A B C
+defect integer is 9223372036854775808, one above signed i64 maximum
+input A derive P02 replace zero integer payload with 9223372036854775808; recompute-digest
+input B NOT FROZEN
+input C NOT FROZEN
+expect Reject IntegerRange
+END
+
+CASE N23 i64-noncanonical
+source TextWireDesign.md:29; TextWireExperimentBlueprint.md:17
+arms A B C
+defect integer spelled +0, -0 or 00; three variants
+input A derive P02 replace zero integer payload with each of +0, -0, 00; recompute-digest per variant
+input B NOT FROZEN
+input C NOT FROZEN
+expect Reject IntegerSpelling on each variant
+END
+
+CASE N24 nan-and-infinity-bits
+source TextWireDesign.md:30; TextWireExperimentBlueprint.md:27
+arms A B C
+defect D payloads 7ff8000000000000, 7ff0000000000000, fff0000000000000; three variants
+input A derive P02 replace zero I row by D with each payload; recompute-digest per variant
+input B NOT FROZEN
+input C NOT FROZEN
+expect Reject NonfiniteBinary64 on each variant
+END
+
+CASE N25 binary64-noncanonical-spelling
+source TextWireDesign.md:30; TextWireExperimentBlueprint.md:17
+arms A B C
+defect D payload uppercase hex or fewer than 16 digits
+input A derive P02 replace zero I row by D with each of 3FF0000000000000, 3ff000000000000; recompute-digest per variant
+input B NOT FROZEN
+input C NOT FROZEN
+expect Reject Binary64Spelling on each variant
+END
+
+CASE N26 bounds
+source TextWireDesign.md:34,36; TextWireExperimentBlueprint.md:15,27
+arms A B C
+defect four variants: total bytes > configured maximum; tree depth > configured maximum;
+       rows > configured maximum; one string bytes > configured maximum
+input A NOT FROZEN: exact numeric ceilings await protocol decision
+input B NOT FROZEN: exact numeric ceilings await protocol decision
+input C NOT FROZEN: exact numeric ceilings await protocol decision
+expect Reject Bound before unbounded allocation on each variant
+END
+
+CASE N27 toml-bare-null
+source TextWireExperimentBlueprint.md:15,27
+arms B
+defect TOML value uses bare null instead of tagged N row
+input B utf8-lines
+value = null
+expect Reject TOML10Profile, even if library permissive-null mode accepts it
+END
+
+CASE N28 toml-permissive-null-mode
+source TextWireExperimentBlueprint.md:15,27
+arms B
+defect TOML parser configured to accept bare null and output a null tree
+input B utf8-lines
+value = null
+expect Reject TOML10Profile; permissive parser mode cannot turn N27 positive
+END
+
+CASE N29 toml-11-only-syntax
+source TextWireExperimentBlueprint.md:15,27
+arms B
+defect Unicode bare key permitted only by TOML 1.1, outside TOML 1.0
+input B utf8-lines
+clé = "x"
+expect Reject TOML10Profile
+END
