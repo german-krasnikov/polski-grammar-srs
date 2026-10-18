@@ -19,6 +19,43 @@ val langDirectory = layout.projectDirectory.dir("../../courses/lang")
 val pairsDirectory = layout.projectDirectory.dir("../../courses/pairs")
 val generatedCourseDirectory = layout.buildDirectory.dir("generated/course/kotlin")
 val generatedFormsFixtureDirectory = layout.buildDirectory.dir("generated/formsFixture/kotlin")
+val legacyAdmissionLedgers = listOf(
+    layout.projectDirectory.file("../../tests/fixtures/textwire/legacy-boundary.cases"),
+    layout.projectDirectory.file("../../tests/fixtures/textwire/numeric-admission.cases"),
+)
+val generatedLegacyAdmissionDirectory = layout.buildDirectory.dir("generated/legacyAdmissionTest/kotlin")
+
+// Test-only values come from the independently reviewed text ledgers. No old input or hash
+// is maintained a second time in Kotlin, and this source is never attached to commonMain.
+val generateLegacyAdmissionTestSource by tasks.registering {
+    legacyAdmissionLedgers.forEach { inputs.file(it) }
+    outputs.dir(generatedLegacyAdmissionDirectory)
+    doLast {
+        val entry = Regex("(?i)\\bsize ([0-9,]+); SHA-256 ([0-9a-f]{64})(?:;|\\.)")
+        val rows = legacyAdmissionLedgers.flatMap { ledger ->
+            ledger.asFile.readLines().mapNotNull { line ->
+                val match = entry.find(line) ?: return@mapNotNull null
+                val label = line.substringBefore(':').substringBefore(" = ").trim()
+                require(label.isNotBlank() && label.all { it.code in 32..126 }) { "Invalid legacy admission label: $label" }
+                val size = match.groupValues[1].replace(",", "").toInt()
+                val digest = match.groupValues[2].lowercase()
+                Triple(label, size, digest)
+            }
+        }
+        require(rows.size == 16 && rows.map { it.first }.toSet().size == rows.size) {
+            "Expected 16 distinct legacy admission hash recipes, got ${rows.size}"
+        }
+        val target = generatedLegacyAdmissionDirectory.get().file("polski/textwire/LegacyAdmissionLedger.kt").asFile
+        target.parentFile.mkdirs()
+        target.writeText(
+            "package polski.textwire\n\n" +
+                "internal val legacyAdmissionLedger: Map<String, Pair<Int, String>> = mapOf(\n" +
+                rows.joinToString(",\n") { (label, size, digest) ->
+                    "    \"$label\" to ($size to \"$digest\")"
+                } + "\n)\n",
+        )
+    }
+}
 
 // Shared by generateCoursePackSource and generateFormsFixtureSource below: a JS/Wasm-safe way to
 // embed a JSON file's bytes as a Kotlin string constant, so commonTest/commonMain never do file
@@ -244,6 +281,9 @@ kotlin {
         commonTest.dependencies {
             implementation(kotlin("test"))
             implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.10.2")
+        }
+        commonTest {
+            kotlin.srcDir(generateLegacyAdmissionTestSource.map { it.outputs.files.singleFile })
         }
     }
 }

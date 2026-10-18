@@ -36,6 +36,7 @@ class LegacyBoundaryAdmissionTest {
         for (size in listOf(9_999_999, 10_000_000)) {
             val raw = filled(progressPrefix, "\"}", size, 'x')
             assertEquals(size, raw.encodeToByteArray().size)
+            assertTrue(legacyAdmissionMatches("PG-$size", raw))
             val source = assertIs<DecodeResult.Valid>(ProgressCodec.decode(raw)).document.source
             val value = source["unknown"]!!.jsonPrimitive.content
             assertEquals(size - progressPrefix.length - 2, value.length)
@@ -46,11 +47,13 @@ class LegacyBoundaryAdmissionTest {
     @Test
     fun progressRetainsNestedUnknownTreeAndOrderedRows() {
         val nested = progressPrefix.dropLast(1) + "[".repeat(128) + "0" + "]".repeat(128) + "}"
+        assertTrue(legacyAdmissionMatches("Progress nested recipe", nested))
         val root = assertIs<DecodeResult.Valid>(ProgressCodec.decode(nested)).document.source
         var item = root["unknown"]!!
         repeat(128) { item = assertIs<JsonArray>(item).single() }
         assertEquals("0", item.jsonPrimitive.content)
         val rows = progressPrefix.dropLast(1) + "[" + (0 until 2048).joinToString(",") { "{\"i\":$it}" } + "]}"
+        assertTrue(legacyAdmissionMatches("Progress rows recipe", rows))
         val rowTree = assertIs<DecodeResult.Valid>(ProgressCodec.decode(rows)).document.source
         val values = assertIs<JsonArray>(rowTree["unknown"])
         assertEquals(2048, values.size)
@@ -64,11 +67,13 @@ class LegacyBoundaryAdmissionTest {
         for (size in listOf(9_999_999, 10_000_000)) {
             val raw = filled(vocabularyPrefix, "\"}", size, 'x')
             assertEquals(size, raw.encodeToByteArray().size)
+            assertTrue(legacyAdmissionMatches("VO-$size", raw))
             assertEquals(emptyList(), VocabularyCodec.decode(raw).custom)
         }
         for (size in listOf(999_999, 1_000_000)) {
             val raw = filled(preferencesPrefix, "}", size, ' ')
             assertEquals(size, raw.encodeToByteArray().size)
+            assertTrue(legacyAdmissionMatches("PF-$size", raw))
             assertIs<PreferencesDecode.Loaded>(UserPreferencesCodec.decode(raw))
         }
     }
@@ -76,12 +81,14 @@ class LegacyBoundaryAdmissionTest {
     @Test
     fun multilingualUnknownProgressAndMaximumCustomVocabularyTextDecode() {
         val progress = """{"version":1,"cards":[],"stats":{},"reviewsToday":0,"lastDay":"2026-03-29","totalReviews":0,"unknown":{"żółć":"😀\t\n"}}"""
+        assertTrue(legacyAdmissionMatches("Progress Unicode literal", progress))
         val source = assertIs<DecodeResult.Valid>(ProgressCodec.decode(progress)).document.source
         val unknown = assertIs<JsonObject>(source["unknown"])
         assertEquals("😀\t\n", unknown["żółć"]!!.jsonPrimitive.content)
 
         val text = "ż".repeat(240)
         val vocabulary = """{"version":1,"pair":"pl-ru","selectedIds":[],"custom":[{"id":"user.00000000-0000-0000-0000-000000000000","lemma":"$text","translation":"$text","form":"$text","example":"$text","level":"A1"}],"cards":{}}"""
+        assertTrue(legacyAdmissionMatches("Vocabulary domain text recipe", vocabulary))
         val custom = VocabularyCodec.decode(vocabulary).custom.single()
         assertEquals(240, custom.lemma.length)
         assertEquals(text, custom.example)
@@ -90,10 +97,12 @@ class LegacyBoundaryAdmissionTest {
     @Test
     fun legacyDecodersAcceptLimitPlusOneButVocabularyImportRejectsBeforeWriting() = runTest {
         val progress = filled(progressPrefix, "\"}", 10_000_001, 'x')
+        assertTrue(legacyAdmissionMatches("PG-10000001", progress))
         val source = assertIs<DecodeResult.Valid>(ProgressCodec.decode(progress)).document.source
         assertEquals(9_999_896, source["unknown"]!!.jsonPrimitive.content.length)
 
         val vocabulary = filled(vocabularyPrefix, "\"}", 10_000_001, 'x')
+        assertTrue(legacyAdmissionMatches("VO-10000001", vocabulary))
         assertEquals(emptyList(), VocabularyCodec.decode(vocabulary).custom)
         val repository = object : VocabularyRepository {
             var writes = 0
@@ -108,6 +117,7 @@ class LegacyBoundaryAdmissionTest {
         assertTrue(session.state.value.error.orEmpty().contains("слишком большой"))
 
         val preferences = filled(preferencesPrefix, "}", 1_000_001, ' ')
+        assertTrue(legacyAdmissionMatches("PF-1000001", preferences))
         assertIs<PreferencesDecode.Loaded>(UserPreferencesCodec.decode(preferences))
     }
 
@@ -116,6 +126,7 @@ class LegacyBoundaryAdmissionTest {
         val rows = (0 until 32_768).joinToString(",") { "{\"i\":$it}" }
         val prefix = progressPrefix.dropLast(1) + "[" + rows + "],\"padding\":\""
         val raw = filled(prefix, "\"}", 10_000_000, 'x')
+        assertTrue(legacyAdmissionMatches("Progress rows-32768-at-limit recipe", raw))
         assertEquals(10_000_000, raw.encodeToByteArray().size)
         val source = assertIs<DecodeResult.Valid>(ProgressCodec.decode(raw)).document.source
         assertEquals(listOf("version", "cards", "stats", "reviewsToday", "lastDay", "totalReviews", "unknown", "padding"), source.keys.toList())
@@ -130,12 +141,14 @@ class LegacyBoundaryAdmissionTest {
     @Test
     fun progressRetainsDeeperAndUtf16SpecificUnknownValues() {
         val nested = progressPrefix.dropLast(1) + "[".repeat(256) + "0" + "]".repeat(256) + "}"
+        assertTrue(legacyAdmissionMatches("Progress depth-256 recipe", nested))
         val source = assertIs<DecodeResult.Valid>(ProgressCodec.decode(nested)).document.source
         var item = source["unknown"]!!
         repeat(256) { item = assertIs<JsonArray>(item).single() }
         assertEquals("0", item.jsonPrimitive.content)
 
         val unicode = """{"version":1,"cards":[],"stats":{},"reviewsToday":0,"lastDay":"2026-03-29","totalReviews":0,"unknown":{"żółć":"😀\t\n","escaped":"\ud83d\ude00","lone":"\ud800"}}"""
+        assertTrue(legacyAdmissionMatches("Progress UTF-16 recipe", unicode))
         val unknown = assertIs<JsonObject>(assertIs<DecodeResult.Valid>(ProgressCodec.decode(unicode)).document.source["unknown"])
         assertEquals("😀\t\n", unknown["żółć"]!!.jsonPrimitive.content)
         assertEquals("😀", unknown["escaped"]!!.jsonPrimitive.content)

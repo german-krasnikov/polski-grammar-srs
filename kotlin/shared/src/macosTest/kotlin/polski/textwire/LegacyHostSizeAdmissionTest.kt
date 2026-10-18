@@ -11,6 +11,7 @@ import polski.srs.FsrsScheduler
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
+import kotlin.test.assertTrue
 
 /** Rejected old input only: the host must not create a legacy JSON output file. */
 @OptIn(ExperimentalForeignApi::class)
@@ -24,6 +25,7 @@ class LegacyHostSizeAdmissionTest {
         try {
             val raw = progressPrefix + "x".repeat(10_000_001 - progressPrefix.length - 2) + "\"}"
             assertEquals(10_000_001, raw.encodeToByteArray().size)
+            assertTrue(legacyAdmissionMatches("PG-10000001", raw))
             assertEquals("Файл прогресса слишком большой", MacProgressRepository(directory, FsrsScheduler()).importJson(raw))
             assertFalse(NSFileManager.defaultManager.fileExistsAtPath("$directory/progress-v1.json"))
             assertFalse(NSFileManager.defaultManager.fileExistsAtPath(directory))
@@ -38,6 +40,7 @@ class LegacyHostSizeAdmissionTest {
         try {
             val raw = preferencesPrefix + " ".repeat(1_000_001 - preferencesPrefix.length - 1) + "}"
             assertEquals(1_000_001, raw.encodeToByteArray().size)
+            assertTrue(legacyAdmissionMatches("PF-1000001", raw))
             assertEquals("Файл настроек слишком большой", MacPreferencesRepository(directory).importJson(raw))
             assertFalse(NSFileManager.defaultManager.fileExistsAtPath("$directory/preferences-v1.json"))
             assertFalse(NSFileManager.defaultManager.fileExistsAtPath(directory))
