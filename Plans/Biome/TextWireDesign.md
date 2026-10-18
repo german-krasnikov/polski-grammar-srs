@@ -1,6 +1,6 @@
 # Text wire and one-time legacy migration: architecture design
 
-Status: **design only; no codec, migration, host run or clean-CI result is claimed**. This is the wire-level companion to [NoJsonFullPortPlan.md](NoJsonFullPortPlan.md) and the owner's [ADR-51](../../AI/decisions.md). It covers durable progress, vocabulary and preferences plus cross-host import/export. Apple UI snapshots are a distinct transient consumer of the same framing only if a typed Kotlin/Swift bridge cannot meet the actual host contract. All examples and paths below are proposals to test, not implemented interfaces.
+Status: **design only; no codec, migration, host run or clean-CI result is claimed**. This is the wire-level companion to [NoJsonFullPortPlan.md](NoJsonFullPortPlan.md) and the owner's [ADR-51/ADR-52](../../AI/decisions.md). It covers durable progress, vocabulary and preferences plus cross-host import/export. `POLSKI-TEXT` below is **candidate A**, not an adopted header or file extension: compare it with the established-format and smaller-helper arms in [TextWireExperimentBlueprint.md](TextWireExperimentBlueprint.md), freeze each arm's canonical bytes independently, then choose one protocol before document or repository integration. Apple UI snapshots are a separate transient decision: first prove a typed Kotlin/Swift bridge on live hosts; only a failed bridge gate admits a separately tested text snapshot schema. All examples and paths below are proposals to test, not implemented interfaces.
 
 ## Existing contracts that the wire must carry
 
