@@ -650,8 +650,9 @@ internal class PackRegistry(private val packs: List<CoursePack>) {
  * here; en-ru (EN-11..EN-20) has no `courses/en-ru/course.json` and so is only ever reached this
  * way — without this, [packRegistry] would embed pl-ru alone and en-ru could never be selected. */
 private val v2OnlyCoursePackSources: List<CoursePackSource> by lazy {
+    // NJ03 B8: pl-ru is now v2-only too; pl-ru sorts before en-ru to preserve first-default order.
     generatedPairJsonByPairId.keys.filter { pairId -> embeddedCoursePackSources.none { it.id == pairId } }
-        .sorted()
+        .sortedWith(compareBy { if (it == "pl-ru") 0 else 1 })
         .map { pairId ->
             CoursePackLoader.fromV2Layers(pairId, generatedLexiconJsonByLang.getValue(pairId.substringBefore("-")),
                 generatedPairJsonByPairId.getValue(pairId))

@@ -3,7 +3,9 @@ package polski.data
 import polski.model.Noun
 
 /** EN-22: read fresh on every call (not frozen at first access), same fix as [skills] — see its KDoc. */
-val nouns: List<Noun> get() = packRegistry.active.nouns
+// NJ03 B7: pl-ru reads from typed Biome literal source.
+val nouns: List<Noun> get() = if (packRegistry.active.id == "pl-ru") generatedPlRuNouns
+    else packRegistry.active.nouns
 
 fun nounById(id: String): Noun = nouns.firstOrNull { it.id == id } ?: error("Unknown noun $id")
 
@@ -14,8 +16,12 @@ fun nounByIdOrNull(id: String): Noun? = nouns.firstOrNull { it.id == id }
 
 /** "lemma — meaning" for any noun the active pack actually declares, independent of whether it
  *  has pl's case/gender shape (EnRuAcceptance §7 item 3/4) — see [polski.data.CoursePack.nounLabels]. */
-fun nounLabel(id: String): String = packRegistry.active.nounLabels.getValue(id).let { (lemma, meaning) -> "$lemma — $meaning" }
+private val plRuNounLabels: Map<String, Pair<String, String>> by lazy {
+    generatedPlRuNouns.associate { it.id to (it.lemma to it.meaning) }
+}
+private val nounLabels: Map<String, Pair<String, String>>
+    get() = if (packRegistry.active.id == "pl-ru") plRuNounLabels else packRegistry.active.nounLabels
 
-/** Just the lemma half of [nounLabel] — every host's chain-seed picker only ever needs this one
- *  field, never [nounById]'s full case/gender-declining [polski.model.Noun]. */
-fun nounLemma(id: String): String = packRegistry.active.nounLabels.getValue(id).first
+fun nounLabel(id: String): String = nounLabels.getValue(id).let { (lemma, meaning) -> "$lemma — $meaning" }
+
+fun nounLemma(id: String): String = nounLabels.getValue(id).first

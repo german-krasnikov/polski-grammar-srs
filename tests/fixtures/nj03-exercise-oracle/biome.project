@@ -6,3 +6,4 @@ TOOLCHAIN 6a5d88afd47716a8a34663b4cec89ac269c2e02e
 GENERATE exercise-oracle derive {dir}/derive-oracle.mjs generate OUT
 GENERATE course-value-skills derive {dir}/derive-skills.mjs generate OUT
 GENERATE course-value-sections derive {dir}/derive-sections.mjs generate OUT
+GENERATE course-lexicon derive {dir}/derive-lexicon.mjs generate OUT

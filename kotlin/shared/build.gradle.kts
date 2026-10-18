@@ -195,16 +195,9 @@ val generateCoursePackSource by tasks.registering {
     inputs.dir(pairsDirectory)
     outputs.dir(generatedCourseDirectory)
     doLast {
-        // UC-02: a pack directory is any immediate child of `courses/` (other than the shared
-        // `schema`/`styles` directories) that has its own `course.json` — pl-ru is the only one
-        // today, read as schema v1 like before; a second pack directory needs no edit here.
-        val packDirs = (coursesDirectory.asFile.listFiles { file -> file.isDirectory } ?: emptyArray())
-            .filter { dir -> dir.name != "schema" && dir.name != "styles" && dir.resolve("course.json").isFile }
-            .sortedBy { it.name }
-        val packSourceLiterals = packDirs.joinToString(",\n") { dir ->
-            val chunks = literalChunks(dir.resolve("course.json").readText())
-            "    EmbeddedCoursePackSource(\"${dir.name}\", ${literalBuildString(chunks)})"
-        }
+        // NJ03 B8: course.json removed as authored source; pl-ru now loads via v2 layers
+        // (pair.json + lexicon.json) exactly like en-ru. embeddedCoursePackSources is empty.
+        val packSourceLiterals = ""
 
         val frequencyChunks = literalChunks(frequencyFile.asFile.readText())
         val styleFiles = (stylesDirectory.asFile.listFiles { file -> file.extension == "json" } ?: emptyArray())
