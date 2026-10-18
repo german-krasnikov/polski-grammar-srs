@@ -1,0 +1,38 @@
+NJ05 independent legacy admission ledger — input-only controls
+Base product revision: 1a19d92. These are legacy UTF-8 JSON inputs, not A/B/C wire bytes or new-document acceptance rules. SHA-256 values below were calculated from the recipes with Python hashlib, independently of the Kotlin decoders. No emitted app JSON is an oracle.
+
+Recipe notation: concatenate the quoted literal fragments as UTF-8 without their surrounding notation quotes. `X * n` repeats the one ASCII byte X exactly n times. No BOM or final LF is added. `size` counts all bytes. The focused Kotlin test constructs the same inputs and checks exact byte length before decoding. The hashes identify the complete input, including all padding.
+
+Progress prefix P = `{"version":1,"cards":[],"stats":{},"reviewsToday":0,"lastDay":"2026-03-29","totalReviews":0,"unknown":"`
+Progress large-string recipe = P + (`x` * (size - 105)) + `"}`. P has 103 bytes; suffix has 2. The old `ProgressCodec.decode` returns Valid and its `document.source["unknown"]` has precisely size - 105 UTF-16 units. The source retains the unknown value; the progress projection has no cards.
+  PG-9999999: size 9,999,999; SHA-256 8928db86f11ba0e581771dccfd3cd4a7ab79da23a0a642be8907a68027633963; desktop decoder PASS.
+  PG-10000000: size 10,000,000; SHA-256 ea352d11ee1ee98811162f97bc90e2631aae6c58f5adc046f56f4007aea565e5; desktop decoder PASS.
+
+Vocabulary prefix V = `{"version":1,"pair":"pl-ru","selectedIds":[],"custom":[],"cards":{},"padding":"`
+Vocabulary padding recipe = V + (`x` * (size - byteLength(V) - 2)) + `"}`. `padding` is an unknown field ignored by `VocabularyCodec.decode`; it demonstrates decoder admission at the input cap, not preservation of that field. The decoded document has zero custom items.
+  VO-9999999: size 9,999,999; SHA-256 08062c3103790e1e731af4f27c46d4ca6ba9fa73422ba3dee701c86c64e3e6df; desktop decoder PASS.
+  VO-10000000: size 10,000,000; SHA-256 8c878bc31488b783c037fc588e3db595d8b9f06fd5e8a1f6fe37bee6dddc4617; desktop decoder PASS.
+
+Preferences prefix F = `{"schemaVersion":1`
+Preferences whitespace recipe = F + (SPACE * (size - byteLength(F) - 1)) + `}`. Whitespace changes input length without changing the valid schema-1 tree. Unknown preferences fields are rejected by the old decoder; this control makes no unknown-field preservation claim.
+  PF-999999: size 999,999; SHA-256 bb2d7bc486b7e2ab44e3aba0da3b65ee47a7b64f9a151f5b1d126b7b12cb49c6; desktop decoder PASS.
+  PF-1000000: size 1,000,000; SHA-256 f5390fcef6b5966c71bf43e8275d8cad28b5cf3f9b68f6aac82b87d6584a892d; desktop decoder PASS.
+
+Progress nested recipe = P without its final `"` + (`[` * 128) + `0` + (`]` * 128) + `}`. This is a 128-list-deep unknown value, and the decoder retains all 128 list levels and the integer zero. Size 360; SHA-256 cf4aeb430608de116414b3047ceeba5bca8cb237a349b517c7b9b8a3f5ca535d; desktop decoder PASS. This establishes 128, not an upper depth limit.
+
+Progress rows recipe = P without its final `"` + `[` + comma-join, for integer i from 0 through 2047 in ascending order, of `{"i":` + shortest decimal i + `}` + `]}`. The decoded unknown array has 2048 ordered map values and the first/last integers are 0/2047. Size 21,522; SHA-256 bab875ba5b61c59bd2cbaa81057265e5e5874851de96ec0dd6927c91163cd3d4; desktop decoder PASS. This does not establish a maximum row count.
+
+Progress Unicode literal = `{"version":1,"cards":[],"stats":{},"reviewsToday":0,"lastDay":"2026-03-29","totalReviews":0,"unknown":{"żółć":"😀\t\n"}}`; `\t` and `\n` are two-byte JSON escape spellings, while the Polish key and emoji are literal UTF-8. Size 126; SHA-256 430f93b1cd1b20faf8d35787d0b4a3c6fa600cf1e11ff88c2dc913e61c219323; decoded key and value checked on desktop PASS.
+
+Vocabulary domain text recipe: literal prefix `{"version":1,"pair":"pl-ru","selectedIds":[],"custom":[{"id":"user.00000000-0000-0000-0000-000000000000","lemma":"` + (`ż` * 240) + `","translation":"` + (`ż` * 240) + `","form":"` + (`ż` * 240) + `","example":"` + (`ż` * 240) + `","level":"A1"}],"cards":{}}`. Each of four custom text fields reaches the existing 240 UTF-16-unit validation limit; decode retains the example text. Size 2,102; SHA-256 5a6b05cc43f3f59bfefab5680e95929c162ad1dec18b4b2bb022e2eb24d101a0; desktop decoder PASS. This is not a near-10-MB meaningful vocabulary control.
+
+Execution: `./gradlew :shared:desktopTest --tests 'polski.textwire.LegacyBoundaryAdmissionTest' --console=plain`, cwd `kotlin`, on this branch from 1a19d92. Gradle XML reports 4 selected, 4 executed, 0 skipped, 0 failed, target desktop JVM; PASS. The test asserts decoded content as described above. Python hashlib recipe calculation selected 10 controls and produced the listed lengths and hashes; it did not run the Kotlin decoder.
+
+Host-policy inventory from source at the base revision:
+  Android progress `readUtf8Limited` accepts at most 10,000,000 bytes from InputStream; the file reader itself was NOT RUN here. It decodes bytes with the JVM UTF-8 constructor, whose replacement behavior is distinct from strict new-wire UTF-8. Android vocabulary source and import path were inspected only; host execution NOT RUN.
+  iOS and macOS progress import gate uses `encodeToByteArray().size > 10_000_000`; iOS uses NSUserDefaults and macOS a file with readback. Host import, storage and device execution NOT RUN.
+  Common vocabulary session uses both `raw.length > 10_000_000` and UTF-8 bytes `> 10_000_000`; iOS/macOS raw-save gate uses byte count at 10,000,000 and runs `VocabularyCodec.decode`. The session merge, rewritten serialized size, backup, write and readback were NOT RUN for these controls.
+  iOS/macOS preferences import gate uses UTF-8 bytes `> 1_000_000`; native host write/readback NOT RUN. The preferences decoder accepts the two whitespace controls on desktop.
+  Web progress/preferences persistence calls browser localStorage without a fixed import-byte ceiling in the inspected adapters. Browser quota and browser import were NOT RUN. A desktop decoder PASS does not imply localStorage admission.
+
+These controls are a partial lower bound on legacy semantic admission. They do not set numeric new-wire depth/row/string ceilings or A/B/C physical byte ceilings. Exact-at-limit and plus-one host rejection, larger/deeper accepted semantic trees, many-row near-limit documents, browser quota, device memory, and independent A/B/C output sizes remain NOT RUN / NOT FROZEN. Do not reject any arm using 10,000,000 as its output-byte cap: PG-10000000 alone carries 9,999,895 unknown string units that C expands to about 40 MB before framing.
