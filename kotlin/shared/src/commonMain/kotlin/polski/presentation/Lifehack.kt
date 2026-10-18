@@ -73,9 +73,8 @@ interface LifehackProvider {
  * EN-22 wires a real target/native picker, switching packs needs no re-wiring here.
  */
 object StaticPackLifehackProvider : LifehackProvider {
-    private val byPairId: Map<String, List<Lifehack>> by lazy {
-        generatedLifehacksJsonByPairId.mapValues { (_, json) -> parseLifehacksJson(json) }
-    }
+    // NJ03: typed lifehacks from GeneratedLifehacks.kt (no JSON parsing).
+    private val byPairId: Map<String, List<Lifehack>> get() = polski.data.generatedLifehacksByPairId
 
     private val activeHacks: List<Lifehack> get() = byPairId[packRegistry.active.pairId] ?: emptyList()
 

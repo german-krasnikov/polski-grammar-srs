@@ -221,14 +221,8 @@ val generateCoursePackSource by tasks.registering {
 
         // EN-21/ADR-15: `pairs/<pairId>/lifehacks.json` — pair-scoped, outside core, scanned the
         // same way as pair.json above so a pack without lifehacks (or a future 3rd pack) needs no
-        // Gradle/Kotlin edit; [polski.presentation.StaticPackLifehackProvider] reads this map.
-        val lifehackDirs = (pairsDirectory.asFile.listFiles { file -> file.isDirectory } ?: emptyArray())
-            .filter { dir -> dir.resolve("lifehacks.json").isFile }
-            .sortedBy { it.name }
-        val lifehackEntryLiterals = lifehackDirs.joinToString(",\n") { dir ->
-            val chunks = literalChunks(dir.resolve("lifehacks.json").readText())
-            "    \"${dir.name}\" to ${literalBuildString(chunks)}"
-        }
+        // NJ03: lifehacks.json no longer embedded — typed in GeneratedLifehacks.kt.
+        val lifehackEntryLiterals = ""
 
         val target = generatedCourseDirectory.get().file("polski/data/GeneratedCourseJson.kt").asFile
         target.parentFile.mkdirs()

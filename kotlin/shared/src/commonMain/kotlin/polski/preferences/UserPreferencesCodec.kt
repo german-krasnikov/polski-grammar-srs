@@ -37,6 +37,14 @@ object UserPreferencesCodec {
      * v4); null for any missing/malformed document, same as "leave the default pack active".
      */
     fun peekTargetNative(raw: String): Pair<String, String>? {
+        // NJ03: POLSKI-TEXT peek via WireNode, legacy JSON fallback.
+        if (raw.startsWith("POLSKI-TEXT")) {
+            val result = PolskiTextCodec.decode(raw.encodeToByteArray())
+            if (result !is polski.textwire.DecodeResult.Ok || result.kind != "preferences") return null
+            val pair = (result.root.get("coursePair") as? WireNode.WireString)?.value ?: return null
+            val parts = pair.split("-", limit = 2)
+            return if (parts.size == 2) parts[0] to parts[1] else null
+        }
         val root = try { json.parseToJsonElement(raw) as? JsonObject } catch (_: Exception) { null } ?: return null
         val version = root.number("schemaVersion") ?: return null
         return if (version <= 3) {
