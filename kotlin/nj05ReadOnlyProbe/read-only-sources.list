@@ -1,7 +1,8 @@
 # Exact commonTest sources compiled into the isolated NJ05 JS/Wasm probe.
-# Format: support path | test path class method-count. No wildcard source roots.
-support kotlin/shared/src/commonTest/kotlin/polski/textwire/LegacyAdmissionDigest.kt
-test kotlin/shared/src/commonTest/kotlin/polski/textwire/LegacyRepresentabilityProbeTest.kt LegacyRepresentabilityProbeTest 1
-support kotlin/shared/src/commonTest/kotlin/polski/textwire/RetainedNumberProbe.kt
-test kotlin/shared/src/commonTest/kotlin/polski/textwire/RetainedNumberPrototypeTest.kt RetainedNumberPrototypeTest 4
-test kotlin/shared/src/commonTest/kotlin/polski/textwire/RetainedNumberIndependentMutationTest.kt RetainedNumberIndependentMutationTest 1
+# Format: support path SHA-256 | test path class method-count SHA-256.
+# A source edit requires a new reviewed hash before this isolated runner can execute.
+support kotlin/shared/src/commonTest/kotlin/polski/textwire/LegacyAdmissionDigest.kt 039f6cfeec195441117dfbd44999da6efb125a5c52b884450db8e8ec94ad3d30
+test kotlin/shared/src/commonTest/kotlin/polski/textwire/LegacyRepresentabilityProbeTest.kt LegacyRepresentabilityProbeTest 1 ad9619739e85d7d7f9c35f636e8c832b40c046086405a1b6a798e2ed7dee780d
+support kotlin/shared/src/commonTest/kotlin/polski/textwire/RetainedNumberProbe.kt d6713d4a6aa15686a8141fe3f36d8a71d29fe558060f49ebbe023c4a88959893
+test kotlin/shared/src/commonTest/kotlin/polski/textwire/RetainedNumberPrototypeTest.kt RetainedNumberPrototypeTest 4 cc44ba4f49ca36f2c94409f24329c765c5b650fc55543ac623dc5c30f78721a9
+test kotlin/shared/src/commonTest/kotlin/polski/textwire/RetainedNumberIndependentMutationTest.kt RetainedNumberIndependentMutationTest 1 fd06d7b452d4ad517b6b57de40dc4b5296220bf2897748e850c065157a3da33b
