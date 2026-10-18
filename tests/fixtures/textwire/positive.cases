@@ -1,6 +1,6 @@
 # NJ05 generic codec positives. Syntax and NOT FROZEN meaning: Plans/Biome/TextWireCorpusNotes.md.
 # All cases assert decode(encode(tree)) = tree. Byte oracles additionally assert decode(input)
-# = tree and encode(decode(input)) = input. B/C byte oracles remain NOT FROZEN.
+# = tree and encode(decode(input)) = input. B byte oracles remain NOT FROZEN.
 
 CASE P01 empty-root
 source TextWireDesign.md:22-36; TextWireExperimentBlueprint.md:17,25
@@ -12,7 +12,10 @@ POLSKI-TEXT	1	progress	2
 M	-	0
 H	sha256	dadd8287604ee6368645c92d3e1b58ce1b236f8df959a3d3aee5ceda76c2439b
 input B NOT FROZEN
-input C NOT FROZEN
+input C utf8-lines
+POLSKI-UNITS	1	progress	2
+M	-	0
+H	sha256	982db5ba74bd2fa99fa4a05f83eddc1cbc0bff40583a29f1366a15c51ce0687d
 expect ordered empty map; final LF; verified digest; exact re-encode
 END
 
@@ -37,7 +40,15 @@ M	K:emptyMap	0
 I	K:zero	0
 H	sha256	ed7ff5bc2f6df5f210d37e254b9bbac31f4cf3844a883ba3eab800aca72010c9
 input B NOT FROZEN
-input C NOT FROZEN
+input C utf8-lines
+POLSKI-UNITS	1	progress	2
+M	-	5
+S	KU9:0065006D0070007400790054006500780074	U0:
+N	KU7:006E006F007400680069006E0067
+L	KU9:0065006D007000740079004C006900730074	0
+M	KU8:0065006D007000740079004D00610070	0
+I	KU4:007A00650072006F	0
+H	sha256	b769803f1d014d2bede046b6febdd9d1bc6c1ad8f976d9454c3825961f4f6610
 expect five ordered children and missing absent; no coercion
 END
 
@@ -57,7 +68,13 @@ S	K:	empty
 S	K:K:-	prefixed
 H	sha256	02845d71a5d0b19390e065554efca8c2bc7334e64cefb89fb48fbc85330e53fe
 input B NOT FROZEN
-input C NOT FROZEN
+input C utf8-lines
+POLSKI-UNITS	1	progress	2
+M	-	3
+S	KU1:002D	U4:0064006100730068
+S	KU0:	U5:0065006D007000740079
+S	KU3:004B003A002D	U8:00700072006500660069007800650064
+H	sha256	69ed884e39b59daa1f2936bb3e89495fbbda67bbf5b895bae3fe3f25825bee4e
 expect decoded keys exactly "-", "", "K:-" in that order
 END
 
@@ -78,9 +95,35 @@ tree
         item => string "1"
 order root: "z", "a"
 order root.z[0]: "id", "x-unknown"
-input A NOT FROZEN
+input A utf8-lines
+POLSKI-TEXT	1	progress	2
+M	-	2
+L	K:z	2
+M	-	2
+S	K:id	a
+B	K:x-unknown	1
+M	-	1
+S	K:id	b
+M	K:a	1
+L	K:inner	2
+N	-
+S	-	1
+H	sha256	183e041866a8bdab16ad478247c56732be59425ed07cda9998361384f6088d70
 input B NOT FROZEN
-input C NOT FROZEN
+input C utf8-lines
+POLSKI-UNITS	1	progress	2
+M	-	2
+L	KU1:007A	2
+M	-	2
+S	KU2:00690064	U1:0061
+B	KU9:0078002D0075006E006B006E006F0077006E	1
+M	-	1
+S	KU2:00690064	U1:0062
+M	KU1:0061	1
+L	KU5:0069006E006E00650072	2
+N	-
+S	-	U1:0031
+H	sha256	0edf1f6235dc4aedad64097c599934f037b461cb1d27cdd69da0490ab529c0d7
 expect nested order and unknown node preserved on round-trip
 END
 
@@ -93,9 +136,23 @@ tree
     key "max" => i64 9223372036854775807
     key "numericText" => string "001e+3"
     key "negativeZeroText" => string "-0"
-input A NOT FROZEN
+input A utf8-lines
+POLSKI-TEXT	1	progress	2
+M	-	4
+I	K:min	-9223372036854775808
+I	K:max	9223372036854775807
+S	K:numericText	001e+3
+S	K:negativeZeroText	-0
+H	sha256	313f5076209a4fd8b41818288f1d9441768f705f87b9e16fb4f79e535f6d108d
 input B NOT FROZEN
-input C NOT FROZEN
+input C utf8-lines
+POLSKI-UNITS	1	progress	2
+M	-	4
+I	KU3:006D0069006E	-9223372036854775808
+I	KU3:006D00610078	9223372036854775807
+S	KU11:006E0075006D00650072006900630054006500780074	U6:0030003000310065002B0033
+S	KU16:006E0065006700610074006900760065005A00650072006F0054006500780074	U2:002D0030
+H	sha256	fe13a93db11e37fe783642f31265d90e4d1144b81628724c216a3265a854f227
 expect exact integer edges and strings, with no JS Number coercion
 END
 
@@ -109,9 +166,25 @@ tree
     key "one" => f64bits 3ff0000000000000
     key "smallestSubnormal" => f64bits 0000000000000001
     key "largestFinite" => f64bits 7fefffffffffffff
-input A NOT FROZEN
+input A utf8-lines
+POLSKI-TEXT	1	progress	2
+M	-	5
+D	K:positiveZero	0000000000000000
+D	K:negativeZero	8000000000000000
+D	K:one	3ff0000000000000
+D	K:smallestSubnormal	0000000000000001
+D	K:largestFinite	7fefffffffffffff
+H	sha256	880d81757150572df11b831aebc45ca63bba5f9fea28db94af8a4d4ae7dec96a
 input B NOT FROZEN
-input C NOT FROZEN
+input C utf8-lines
+POLSKI-UNITS	1	progress	2
+M	-	5
+D	KU12:0070006F007300690074006900760065005A00650072006F	0000000000000000
+D	KU12:006E0065006700610074006900760065005A00650072006F	8000000000000000
+D	KU3:006F006E0065	3ff0000000000000
+D	KU17:0073006D0061006C006C006500730074005300750062006E006F0072006D0061006C	0000000000000001
+D	KU13:006C00610072006700650073007400460069006E006900740065	7fefffffffffffff
+H	sha256	002f1e4e1b8460d606d21c2ac9e5e8d35df132f2a5be61bae49f07bec46a3e83
 expect all five exact bit patterns, including the sign of zero
 END
 
@@ -121,9 +194,17 @@ arms A B C
 tree
   map
     key "text" => string "Zażółć gęślą jaźń / Привет / 漢字 / 😀\tline\nnext\\end\u0000\u001F\u007F\u0085\u2028\u2029"
-input A NOT FROZEN
+input A utf8-lines
+POLSKI-TEXT	1	progress	2
+M	-	1
+S	K:text	Zażółć gęślą jaźń / Привет / 漢字 / 😀\tline\nnext\\end\u0000\u001F\u007F\u0085  
+H	sha256	427468f432f05189c6c58756c4d12f7c7a88de128baed011a107f0038b857cb1
 input B NOT FROZEN
-input C NOT FROZEN
+input C utf8-lines
+POLSKI-UNITS	1	progress	2
+M	-	1
+S	KU4:0074006500780074	U56:005A0061017C00F301420107002000670119015B006C01050020006A0061017A01440020002F0020041F044004380432043504420020002F00206F225B570020002F0020D83DDE000009006C0069006E0065000A006E006500780074005C0065006E00640000001F007F008520282029
+H	sha256	c144e2a9398c8ca59bfe83f0c011de2fa1d080505caa6fa7c28fbb62213ad823
 expect unchanged UTF-16 code units; canonical control escaping; no normalization
 END
 
@@ -138,9 +219,25 @@ tree
     key "\uDC00" => string "lone low"
     key "\uE000" => string "BMP"
 order newly-created extension keys: "A", "\uD800", "\uD800\uDC00", "\uDC00", "\uE000"
-input A NOT FROZEN
+input A utf8-lines
+POLSKI-TEXT	1	progress	2
+M	-	5
+S	K:A	ASCII
+S	K:\uD800	lone high
+S	K:𐀀	U+10000
+S	K:\uDC00	lone low
+S	K:	BMP
+H	sha256	d510fb17dfbd4afbafd4094dda0e9c5beebfa93ac66c8b60bd7767877e65bcb2
 input B NOT FROZEN
-input C NOT FROZEN
+input C utf8-lines
+POLSKI-UNITS	1	progress	2
+M	-	5
+S	KU1:0041	U5:00410053004300490049
+S	KU1:D800	U9:006C006F006E006500200068006900670068
+S	KU2:D800DC00	U7:0055002B00310030003000300030
+S	KU1:DC00	U8:006C006F006E00650020006C006F0077
+S	KU1:E000	U3:0042004D0050
+H	sha256	1ebcfb1d4723bff4746f8352624f240391aa609dad2dfc7bb7880dc66aff1793
 expect unsigned UTF-16 order; decoded existing order retained
 END
 
@@ -153,9 +250,21 @@ tree
     key "A" => string "second"
     key "\uD800\uDC00" => string "third"
 order root: "\uE000", "A", "\uD800\uDC00"
-input A NOT FROZEN
+input A utf8-lines
+POLSKI-TEXT	1	progress	2
+M	-	3
+S	K:	first
+S	K:A	second
+S	K:𐀀	third
+H	sha256	c50bfed4289dd79f6dfdc9cdfc5dd3e128ae7e3a08dcc290b2a9276daef06ab7
 input B NOT FROZEN
-input C NOT FROZEN
+input C utf8-lines
+POLSKI-UNITS	1	progress	2
+M	-	3
+S	KU1:E000	U5:00660069007200730074
+S	KU1:0041	U6:007300650063006F006E0064
+S	KU2:D800DC00	U5:00740068006900720064
+H	sha256	b3421f018aa96955c073450ab85b7bfd220bb0b03fdd090d6c11c17a96315569
 expect decoded order retained; re-encode does not sort migrated records
 END
 
@@ -165,9 +274,17 @@ arms A B C
 tree
   map
     key "value" => string "\uD800|\uDC00|\uD83D\uDE00"
-input A NOT FROZEN
+input A utf8-lines
+POLSKI-TEXT	1	progress	2
+M	-	1
+S	K:value	\uD800|\uDC00|😀
+H	sha256	56d3e2b0c7079b9af99fb3e5a172069ad1b8e51e27bd55e3039ee330d77f2289
 input B NOT FROZEN
-input C NOT FROZEN
+input C utf8-lines
+POLSKI-UNITS	1	progress	2
+M	-	1
+S	KU5:00760061006C00750065	U6:D800007CDC00007CD83DDE00
+H	sha256	d16d3ee09d9bdfad39d889eed268c7939fe36a94c98dd53168d045e666bdb237
 expect lone units preserved; valid pair encoded as visible emoji in A
 END
 
@@ -178,9 +295,19 @@ tree
   map
     key "yes" => bool true
     key "no" => bool false
-input A NOT FROZEN
+input A utf8-lines
+POLSKI-TEXT	1	progress	2
+M	-	2
+B	K:yes	1
+B	K:no	0
+H	sha256	5272de24055d495d3d1ffcf7020c25e752d907c3e640e7a8481adb6cf5100206
 input B NOT FROZEN
-input C NOT FROZEN
+input C utf8-lines
+POLSKI-UNITS	1	progress	2
+M	-	2
+B	KU3:007900650073	1
+B	KU2:006E006F	0
+H	sha256	b0ff602600039539cdea3472a0cb4e0fd7a853c8b5b3db92d97453059c4a6137
 expect distinct boolean values
 END
 
@@ -191,9 +318,19 @@ tree
   map
     key "revision" => i64 1
     key "effectId" => string "download-1"
-input A NOT FROZEN
+input A utf8-lines
+POLSKI-TEXT	1	snapshot	1
+M	-	2
+I	K:revision	1
+S	K:effectId	download-1
+H	sha256	8270d001f6d4041279becf1a8e4852643be7501b990c351bada49e8975e80ba0
 input B NOT FROZEN
-input C NOT FROZEN
+input C utf8-lines
+POLSKI-UNITS	1	snapshot	1
+M	-	2
+I	KU8:007200650076006900730069006F006E	1
+S	KU8:00650066006600650063007400490064	U10:0064006F0077006E006C006F00610064002D0031
+H	sha256	68ba37a2dd13dc925435020c542105b42535a2a9f32814af0c64983adb61793d
 expect recognized snapshot framing kind; snapshot schema and Swift bridge NOT FROZEN
 END
 
