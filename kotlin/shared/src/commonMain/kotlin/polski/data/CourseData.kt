@@ -649,8 +649,6 @@ internal class PackRegistry(private val packs: List<CoursePackFields>) {
  * byte-identical to a hand-written v1 pack. pl-ru ships as v1 today, so it is never duplicated
  * here; en-ru (EN-11..EN-20) has no `courses/en-ru/course.json` and so is only ever reached this
  * way — without this, [packRegistry] would embed pl-ru alone and en-ru could never be selected. */
-// NJ03: v2OnlyCoursePackSources removed — all packs are typed objects.
-
 internal val packRegistry: PackRegistry by lazy {
     PackRegistry(buildList<CoursePackFields> {
         // NJ03 P7: pl-ru uses typed Biome literal source (PlRuTypedPack object).
@@ -665,42 +663,12 @@ internal val packRegistry: PackRegistry by lazy {
  * that exists, not necessarily one a picker may safely offer yet (see [usableCourseSelections]). */
 val availableCourseSelections: List<Pair<String, String>> by lazy { packRegistry.options }
 
-/**
- * EN-22 (EnRuAcceptance §7 item 1): the (possibly smaller) subset of [availableCourseSelections]
- * whose full [CoursePack] content actually parses today — a runtime probe of a throwaway instance
- * (never touching [packRegistry]'s own singleton, so a broken pack is never read through the real,
- * process-wide cached path [selectActiveCoursePack] warns about), covering every field a host's
- * Training/Vocabulary/Matrix/reference screens read.
- *
- * en-ru now passes this probe: [CoursePack]'s grammar-shaped properties (`Noun.gender`, case-keyed
- * `possessiveForms`/`futureAuxiliary`/the `reference` block's pl-specific teaching rows) are each
- * derived from what the pack's own JSON actually declares — a genuinely caseless/genderless
- * language contributes an honest empty/null result there instead of a fabricated pl-shaped one, so
- * it no longer throws. pl's own JSON declares every one of these fields exactly as before, so its
- * parse (and every value it produces) is unchanged.
- */
 val usableCourseSelections: List<Pair<String, String>> by lazy {
     buildList {
         // NJ03 P7: all packs are typed — always usable.
         add(PlRuTypedPack.targetLanguage to PlRuTypedPack.nativeLanguage)
         add(EnRuTypedPack.targetLanguage to EnRuTypedPack.nativeLanguage)
     }
-}
-
-private fun CoursePackFields.parsesCompletely(): Boolean {
-    // NJ03: PlRuTypedPack has all fields typed — skip JSON parsing for pl-ru (P7).
-    if (this === PlRuTypedPack) return true
-    if (this !is CoursePack) return false
-    return runCatching {
-    nouns; adjectives; verbs; skills; sentenceSeeds; stemAlternations; caseSentencePrefixes
-    exerciseCopy; exercisePatterns; chainPresentation; caseReferenceRows; referenceGenderNames
-    referenceChainRows; referenceSystemCards; referencePipeline; referenceCaseTeaching
-    referencePronounTeaching; referenceVerbTeaching; comparisonNounIds; referenceRussianSupport
-    referenceTenseRows; referenceAspectRows; maleAccRows; presentations; styleContent; vocabulary
-    matrixIntroduction; webCaseCompositionHeader; contextHelp; maleAccIntro; aspectNoPresent
-    vocabularyInstructions; vocabularyUnavailableLabel; frequency; personalPronouns; possessives
-    possessiveForms; futureAuxiliary
-}.isSuccess
 }
 
 /**
