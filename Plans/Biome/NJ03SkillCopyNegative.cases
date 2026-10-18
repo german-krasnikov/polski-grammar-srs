@@ -1,0 +1,9 @@
+# Independent mutations against NJ03SkillCopyIndependent.cases. Every one must fail.
+# NEGATIVE | case | action | pair | position | argument | expected diagnostic
+NEGATIVE | unknown skill reference | replace-reference | en-ru | 01 | en:missing.skill | E_REF
+NEGATIVE | skill order | swap-order | pl-ru | 01 | 02 | E_ORDER
+NEGATIVE | duplicate skill | duplicate | en-ru | 03 | - | E_DUP_ID
+NEGATIVE | invalid text escaping | bad-escape | pl-ru | 02 | $/theory | E_ESCAPE
+NEGATIVE | absent style field | drop-node | en-ru | 01 | $/styleContent/why | E_COVERAGE
+NEGATIVE | null differs from text | null-node | pl-ru | 01 | $/styleContent/why | E_COVERAGE
+NEGATIVE | empty differs from text | empty-text | en-ru | 02 | $/formula | E_COVERAGE
