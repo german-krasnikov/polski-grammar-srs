@@ -1,6 +1,6 @@
 # NJ03 project decisions for lexical slots and focused axes
 
-Status: requirement decision, **not an implemented or executed check**. This fixes the meanings of N02 and N03 in [NJ03KotlinCurriculumPlan.md](NJ03KotlinCurriculumPlan.md) before candidate source mutations or compiler diagnostics are observed. The 32 old skill rows in [NJ03CurriculumIndependent.cases](NJ03CurriculumIndependent.cases) remain unchanged. These are new project rules, not claims of old-validator parity.
+Status: independently reviewed requirement decision at `8c82b7a`; **not an implemented or executed check**. This fixes the meanings of N02 and N03 in [NJ03KotlinCurriculumPlan.md](NJ03KotlinCurriculumPlan.md) before candidate source mutations or compiler diagnostics are observed. The 32 old skill rows in [NJ03CurriculumIndependent.cases](NJ03CurriculumIndependent.cases) remain unchanged. These are new project rules, not claims of old-validator parity.
 
 ## N02: the filterable lexical slot is declared by the project
 
