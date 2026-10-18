@@ -14,6 +14,7 @@ val expectedTests = mapOf(
     "LegacyRepresentabilityProbeTest" to 1,
     "RetainedNumberPrototypeTest" to 4,
     "RetainedNumberIndependentMutationTest" to 1,
+    "FrozenAcCorpusProbeTest" to 3,
 )
 data class SelectedSource(
     val path: String,
@@ -27,14 +28,14 @@ fun sha256(bytes: ByteArray): String = MessageDigest.getInstance("SHA-256").dige
 
 fun generatedHashes(seal: File): Map<String, String> {
     val rows = seal.readLines()
-    require(rows.size == 2) { "NJ05 generated-source seal row count changed" }
+    require(rows.size == 3) { "NJ05 generated-source seal row count changed" }
     val hashes = rows.map { line ->
-        val match = Regex("([0-9a-f]{64})  (LegacyAdmissionLedger|LegacyRepresentabilityFixture)\\.kt")
+        val match = Regex("([0-9a-f]{64})  (LegacyAdmissionLedger|LegacyRepresentabilityFixture|FrozenAcCorpusSource)\\.kt")
             .matchEntire(line) ?: error("Invalid NJ05 generated-source seal row")
         "${match.groupValues[2]}.kt" to match.groupValues[1]
     }.toMap()
-    require(hashes.size == 2 && hashes.keys == setOf(
-        "LegacyAdmissionLedger.kt", "LegacyRepresentabilityFixture.kt",
+    require(hashes.size == 3 && hashes.keys == setOf(
+        "LegacyAdmissionLedger.kt", "LegacyRepresentabilityFixture.kt", "FrozenAcCorpusSource.kt",
     )) { "NJ05 generated-source seal path set changed" }
     return hashes
 }
@@ -56,7 +57,7 @@ fun selectedSources(
                 else -> error("Invalid NJ05 selection row: $line")
             }
         }
-    require(rows.size == 5 && rows.map { it.path }.toSet().size == rows.size)
+    require(rows.size == 6 && rows.map { it.path }.toSet().size == rows.size)
     require(rows.filter { it.testClass != null }
         .associate { it.testClass!! to it.methodCount } == requiredTests) {
         "NJ05 read-only test class/method selection changed"
@@ -89,6 +90,9 @@ val generatedFixtureFiles = mapOf(
     "LegacyRepresentabilityFixture.kt" to project(":shared").layout.buildDirectory.file(
         "generated/representabilityTest/kotlin/polski/textwire/LegacyRepresentabilityFixture.kt",
     ),
+    "FrozenAcCorpusSource.kt" to project(":shared").layout.buildDirectory.file(
+        "generated/acCorpusTest/kotlin/polski/textwire/FrozenAcCorpusSource.kt",
+    ),
 )
 
 val prepareNj05ReadOnlyTestSources by tasks.registering(Sync::class) {
@@ -97,6 +101,7 @@ val prepareNj05ReadOnlyTestSources by tasks.registering(Sync::class) {
     inputs.files(sourceFiles)
     dependsOn(":shared:generateLegacyAdmissionTestSource")
     dependsOn(":shared:generateRepresentabilityTestSource")
+    dependsOn(":shared:generateAcCorpusTestSource")
     from(sourceFiles) { into("polski/textwire") }
     generatedFixtureFiles.values.forEach { provider ->
         from(provider) { into("polski/textwire") }
@@ -143,9 +148,9 @@ val verifyNj05ReadOnlySelection by tasks.registering {
         val selected = output.walkTopDown().filter { it.isFile }
             .map { it.relativeTo(output).path.replace(File.separatorChar, '/') }.toSet()
         val expected = (sourceFiles.map { it.name } + listOf(
-            "LegacyAdmissionLedger.kt", "LegacyRepresentabilityFixture.kt",
+            "LegacyAdmissionLedger.kt", "LegacyRepresentabilityFixture.kt", "FrozenAcCorpusSource.kt",
         )).map { "polski/textwire/$it" }.toSet()
-        require(selected == expected && selected.size == 7) {
+        require(selected == expected && selected.size == 9) {
             "NJ05 runner source selection drift: $selected"
         }
         sources.zip(sourceFiles).forEach { (source, file) ->
@@ -158,7 +163,7 @@ val verifyNj05ReadOnlySelection by tasks.registering {
             val bytes = output.resolve("polski/textwire/$name").readBytes()
             require(sha256(bytes) == expectedHash) { "Reviewed NJ05 generated test source changed: $name" }
         }
-        println("NJ05 source selection: 3 read-only classes / 6 tests / 2 helpers / 2 sealed fixtures")
+        println("NJ05 source selection: 4 read-only classes / 9 tests / 2 helpers / 3 sealed fixtures")
     }
 }
 

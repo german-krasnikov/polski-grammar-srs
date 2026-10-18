@@ -14,6 +14,7 @@ EXPECTED_CLASSES = {
     "LegacyRepresentabilityProbeTest": 1,
     "RetainedNumberPrototypeTest": 4,
     "RetainedNumberIndependentMutationTest": 1,
+    "FrozenAcCorpusProbeTest": 3,
 }
 FORBIDDEN_CALL = re.compile(
     r"\b(?:encodeLegacyV1|importJson|exportJson|saveRaw|migrateLegacy|backupJson)\s*\("
@@ -24,8 +25,8 @@ TOP_LEVEL_CLASS = re.compile(r"^class\s+([A-Za-z][A-Za-z0-9]*)\b", re.M)
 
 
 def validate(rows: list[list[str]], read_source) -> None:
-    if len(rows) != 5 or len({row[1] for row in rows}) != 5:
-        raise AssertionError("Selection must contain five distinct source paths")
+    if len(rows) != 6 or len({row[1] for row in rows}) != 6:
+        raise AssertionError("Selection must contain six distinct source paths")
     classes = {}
     supports = 0
     for row in rows:
@@ -63,8 +64,8 @@ rows = [
 ]
 validate(rows, Path.read_bytes)
 generated_rows = [line.split("  ") for line in (MODULE / "generated-sources.sha256").read_text().splitlines()]
-if len(generated_rows) != 2 or {row[1] for row in generated_rows} != {
-    "LegacyAdmissionLedger.kt", "LegacyRepresentabilityFixture.kt",
+if len(generated_rows) != 3 or {row[1] for row in generated_rows} != {
+    "LegacyAdmissionLedger.kt", "LegacyRepresentabilityFixture.kt", "FrozenAcCorpusSource.kt",
 } or any(len(row) != 2 or not re.fullmatch(r"[0-9a-f]{64}", row[0]) for row in generated_rows):
     raise AssertionError("Generated fixture source seal path/hash set changed")
 assert 'include(":nj05ReadOnlyProbe")' in (ROOT / "kotlin/settings.gradle.kts").read_text()
@@ -83,7 +84,7 @@ for fragment in (
 ):
     if fragment not in build:
         raise AssertionError(f"Missing isolated Gradle edge: {fragment}")
-print("PASS exact selected scope: 3 read-only classes, 6 tests, 2 helpers, 2 pinned generated fixtures")
+print("PASS exact selected scope: 4 read-only classes, 9 tests, 2 helpers, 3 pinned generated fixtures")
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--generated-root", type=Path, help="existing shared/build/generated tree to audit read-only")
@@ -92,6 +93,7 @@ if options.generated_root is not None:
     locations = {
         "LegacyAdmissionLedger.kt": "legacyAdmissionTest/kotlin/polski/textwire/LegacyAdmissionLedger.kt",
         "LegacyRepresentabilityFixture.kt": "representabilityTest/kotlin/polski/textwire/LegacyRepresentabilityFixture.kt",
+        "FrozenAcCorpusSource.kt": "acCorpusTest/kotlin/polski/textwire/FrozenAcCorpusSource.kt",
     }
     for digest, name in generated_rows:
         data = (options.generated_root / locations[name]).read_bytes()
@@ -99,7 +101,7 @@ if options.generated_root is not None:
             raise AssertionError(f"Generated source differs before copy: {name}")
         if hashlib.sha256(data + b"X").hexdigest() == digest:
             raise AssertionError(f"Mutated generated source admitted before copy: {name}")
-    print("PASS pre-copy generated fixture hashes 2/2; byte mutations rejected 2/2")
+    print("PASS pre-copy generated fixture hashes 3/3; byte mutations rejected 3/3")
 
 bad_class = rows + [[
     "test",
@@ -109,7 +111,7 @@ bad_class = rows + [[
     "0" * 64,
 ]]
 for label, candidate, reader, expected_error in (
-    ("extra class", bad_class, Path.read_bytes, "Selection must contain five"),
+    ("extra class", bad_class, Path.read_bytes, "Selection must contain six"),
     ("fully qualified extra @Test", rows,
      lambda path: Path.read_bytes(path) + b"\n@kotlin.test.Test fun addedUnreviewedTest() {}\n",
      "Reviewed NJ05 source identity drift"),
