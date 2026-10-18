@@ -4,7 +4,7 @@ This ledger extends legacy-boundary.cases; the six old JSON inputs below are gen
 
 Use P, V and F from legacy-boundary.cases. Repeat one ASCII byte to reach the stated complete input length; the prefix and suffix are included in that length.
 
-  PG-10000001: P + (`x` * 9,999,896) + `"}`; size 10,000,001; SHA-256 b435649e0b0473b7b84c770fddd9b126ae065af3d8a7bbf3c8553efc763d59c9. Old common ProgressCodec.decode accepts and retains every unknown string unit. The 10,000,000-byte iOS/macOS/Android progress host caps reject this input before decoding or writing; host rejection must be executed separately.
+  PG-10000001: P + (`x` * 9,999,896) + `"}`; size 10,000,001; SHA-256 b435649e0b0473b7b84c770fddd9b126ae065af3d8a7bbf3c8553efc763d59c9. Old common ProgressCodec.decode accepts and retains every unknown string unit. iOS/macOS repository import and the Android UI picker have 10,000,000-byte pre-write gates; direct AndroidProgressRepository.importJson does not and can write before its size-limited readback. These host paths require separate execution; see NJ05AndroidImportCorrection.md.
   VO-10000001: V + (`x` * 9,999,920) + `"}`; size 10,000,001; SHA-256 70cbd2abdefcfe97c38e1d8bfd263526cbcc53e227308aa103c02fe76bcbebde. Old common VocabularyCodec.decode accepts but discards the unknown `padding`; the common VocabularySession.importJson byte/length gate rejects before a repository write. This is decoder admission only, not a lossless migration control.
   PF-1000001: F + (SPACE * 999,982) + `}`; size 1,000,001; SHA-256 91f9fd8b5b774d22db0013807113421d8f31a36c0d899e5227a5f5502961ead9. Old common UserPreferencesCodec.decode accepts; iOS/macOS host import byte gates reject separately.
 
