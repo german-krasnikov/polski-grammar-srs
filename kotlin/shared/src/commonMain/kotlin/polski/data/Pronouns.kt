@@ -5,19 +5,12 @@ import polski.model.PossessiveId
 
 data class Possessive(val id: PossessiveId, val label: String)
 
-// NJ03: pl-ru reads from typed Biome literal source.
-val personalPronouns: Map<String, Map<GramCase, String>> get() =
-    if (packRegistry.active.id == "pl-ru") generatedPlRuPersonalPronouns
-    else packRegistry.active.personalPronouns
-
-val possessives: List<Possessive> get() =
-    if (packRegistry.active.id == "pl-ru") generatedPlRuPossessives
-    else packRegistry.active.possessives
+/** EN-22: read fresh. pl-ru returns PlRuTypedPack fields (NJ03 P7). */
+val personalPronouns: Map<String, Map<GramCase, String>> get() = packRegistry.active.personalPronouns
+val possessives: List<Possessive> get() = packRegistry.active.possessives
 
 internal val possessiveForms: Map<PossessiveId, CoursePossessiveForms> get() =
-    if (packRegistry.active.id == "pl-ru") generatedPlRuPossessiveForms
-    else packRegistry.active.possessiveForms
+    packRegistry.active.possessiveForms
 
 fun personalPronounForm(pronounId: String, caseId: String): String =
-    if (packRegistry.active.id == "pl-ru") generatedPlRuPersonalPronounRawForms.getValue(pronounId).getValue(caseId)
-    else packRegistry.active.personalPronounRawForms.getValue(pronounId).getValue(caseId)
+    packRegistry.active.personalPronounRawForms.getValue(pronounId).getValue(caseId)
