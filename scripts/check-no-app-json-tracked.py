@@ -115,7 +115,7 @@ def main() -> int:
             for raw in result.stdout.split(b"\0")
             if raw
             for path in [raw.decode("utf-8", "surrogateescape")]
-            if Path(path).suffix.casefold() == ".json"
+            if Path(path).name.casefold().endswith(".json")
         }
     )
     legacy_ok = {path for path in paths if matches_legacy_input(path)}

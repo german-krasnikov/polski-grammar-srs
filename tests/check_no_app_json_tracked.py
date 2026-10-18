@@ -46,13 +46,17 @@ class PathGateTest(unittest.TestCase):
     def test_case_variants_are_rejected(self) -> None:
         (self.root / "extra.JSON").write_bytes(b"{}")
         (self.root / "other.Json").write_bytes(b"{}")
+        (self.root / ".json").write_bytes(b"{}")
+        hidden_directory = self.root / "hidden"
+        hidden_directory.mkdir()
+        (hidden_directory / ".JSON").write_bytes(b"{}")
         result, output = self.run_gate()
         self.assertEqual(result, 1)
-        self.assertIn("violations=2", output)
-        self.git("add", "extra.JSON")
+        self.assertIn("violations=4", output)
+        self.git("add", "extra.JSON", ".json", "hidden/.JSON")
         result, output = self.run_gate()
         self.assertEqual(result, 1)
-        self.assertIn("violations=2", output)
+        self.assertIn("violations=4", output)
 
     def test_only_exact_tool_path_is_allowed(self) -> None:
         (self.root / "package.json").write_bytes(b"{}")
