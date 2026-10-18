@@ -1,0 +1,3 @@
+FIXTURE codec preset:string kind:string schema:number
+ACTION roundtrip MODE both
+QUERY ok bool

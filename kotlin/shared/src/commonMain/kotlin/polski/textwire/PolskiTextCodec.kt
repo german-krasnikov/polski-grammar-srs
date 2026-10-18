@@ -74,7 +74,8 @@ object PolskiTextCodec {
                 c == '\t' -> sb.append("\\t")
                 c == '\n' -> sb.append("\\n")
                 c == '\r' -> sb.append("\\r")
-                c.code in 0x00..0x1F || c.code in 0x7F..0x9F -> {
+                c.code in 0x00..0x1F || c.code in 0x7F..0x9F
+                    || c.code == 0x2028 || c.code == 0x2029 -> {
                     sb.append("\\u").append(c.code.toString(16).uppercase().padStart(4, '0'))
                 }
                 else -> sb.append(c)
@@ -125,7 +126,9 @@ object PolskiTextCodec {
         // Compute digest over body (everything before the H line including its preceding LF)
         val hLineStart = text.lastIndexOf("\nH\t")
         if (hLineStart < 0) return DecodeResult.Err("missing digest line")
-        val bodyBytes = bytes.copyOf(hLineStart + 1) // include the LF before H
+        // Convert char index to byte index for multi-byte UTF-8 strings
+        val bodyByteLen = text.substring(0, hLineStart + 1).toByteArray(Charsets.UTF_8).size
+        val bodyBytes = bytes.copyOf(bodyByteLen)
         val actualDigest = sha256Hex(bodyBytes)
         if (actualDigest != expectedDigest) return DecodeResult.Err("digest mismatch")
 

@@ -1,0 +1,22 @@
+# Independent escape/unescape cases for PolskiTextCodec.
+# Format: description | input | expected output
+# These run via biome verify against a JS subjects file (P15: independent of codec output).
+# NOT RUN on Kotlin until a subjects file for Kotlin is wired.
+
+SOURCES 1
+SUBJECTS ./escape-subjects.mjs
+SUBJECT escapeText
+plain text unchanged | hello | hello
+tab escaped | a	b | a\tb
+newline escaped | a
+b | a\nb
+backslash doubled | a\b | a\\b
+dollar escaped | a$b | a\$b
+control char escaped | a b | a\u0001b
+SUBJECT unescapeText
+plain unchanged | hello | hello
+tab unescaped | a\tb | a	b
+newline unescaped | a\nb | a
+b
+backslash unescaped | a\\b | a\b
+control unescaped | a\u0001b | a b
