@@ -1,0 +1,10 @@
+TEST "PolskiTextCodec" PROFILE editmode
+  TESTCASE emptyMap    preset=empty      kind=progress schema=2 expectOk=true
+  TESTCASE stringValue preset=hello      kind=progress schema=2 expectOk=true
+  TESTCASE nullNode    preset=withNull   kind=progress schema=2 expectOk=true
+  TESTCASE wrongHeader preset=badHeader  kind=progress schema=2 expectOk=false
+  TESTCASE badDigest   preset=badDigest  kind=progress schema=2 expectOk=false
+  FIXTURE codec preset=case.preset kind=case.kind schema=case.schema
+  roundtrip
+  ASSERT ok == case.expectOk
+END

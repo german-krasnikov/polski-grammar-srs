@@ -1,0 +1,26 @@
+# Review-credit DSL experiment: NO-GO for product integration
+
+The full-port branch first tested one shared review-credit rule on the current Biome compiler, then removed it from production because the equal-behavior native helper is cheaper and the integration was not ready for clean CI. The experiment is preserved at `biome/review-credit-experiment` commit `d68d4f3`; `biome/full-port-2026` reverted it in `0f9f05e`. The full-port branch tree after the revert equals `acda1c8` byte-for-byte (`8b0b90635ad22ebb0efcb15462afc9239782cf80`). This is a slice decision, not a verdict on the whole DSL migration.
+
+The initial native decision was `typedCorrect ?: rating != Again` in Kotlin `ReviewReducer` and `typedCorrect ?? rating !== 'again'` in React `recordReview`. The experiment authored `countsCorrect` in a line `.logic`, with a `.contract`, eight independent `.examples` rows and a pinned `biome.project`. Generated TypeScript and Kotlin policies were consumed by the real reducers; the reducers still owned stats/card mutation, while `TrainingStore` still owned session ordering and persistence. A deliberately wrong `DEFAULT false` policy compiled but failed the authored `oral-hard` expectation, then the accepted rule passed. A stale getter and a stale generated input plan were detected. The React boundary retained `null` and `undefined` as absent typed results.
+
+## Evidence at the experiment commit
+
+| Surface | Observed result | Limit |
+| --- | --- | --- |
+| Product root `npm test`, `npm run typecheck`, `npm run build` | PASS: 42 files / 271 tests, typecheck and production React build | Root tests do not run Kotlin or host UI. |
+| `kotlin/` `:shared:desktopTest :shared:jsBrowserTest :shared:wasmJsBrowserTest` | PASS: Desktop 384, JS 383, Wasm 383 tests; zero failures/errors/skips | Shared consumers executed; no Android/iOS UI or browser app traversal. |
+| Tester `:shared:macosArm64Test` | PASS: 411 tests, zero failures/errors/skips | macOS Native shared logic, not SwiftUI app behavior. |
+| Product project `generate --check` and direct Logic examples `--check` | PASS: generated JS, declarations, read plan, Kotlin and examples match their sources | `biome check changed` still returned `session.examples` as **NOT CHECKED** because there was no complete executable examples binding; its own examples check and eight-row React execution passed. |
+| Independent real-consumer checks | Tester ran all eight authored rows through React `recordReview` and checked one review plus correct/mistake counters; focused 4/4 and selected 23/23 PASS | All eight rows through Kotlin `ReviewReducer` were **NOT RUN**; existing Kotlin tests cover only selected conflicts. |
+| Clean CI checkout | **FAIL**: locator cannot find compiler without a sibling checkout or `BIOME_TS`; reviewer marked reproducibility and artifact freshness Major | Current Kotlin/deploy workflows checkout only Polski, omit `biome/**`/`biome.project` triggers and do not run full generated-artifact freshness checks. The pinned compiler `2ab6275` is local and ahead of its remote. |
+
+The separately recorded course-inventory and inventory-decisions failures existed on product `main` before this experiment; they do not support or refute the policy result. After reverting, focused product parity/sentence tests passed 20/20 and typecheck passed on the identical pre-experiment tree.
+
+## Maintenance and cost result
+
+The single semantic decision moved from two one-line expressions to one DSL rule, but the experiment added 29 authored DSL/project lines, six TypeScript fact-adapter lines, 64 locator/generation-script lines, 35 Gradle integration lines, about 16 net consumer lines and 60 test lines. Generated interchange/runtime output added 102 lines (JS 43, Kotlin 31, declaration 7, read plan 7, examples 14), counted separately. The Kotlin fact mapping remained handwritten, so the contract/read plan did **not** establish one authoritative binding across both languages (P7). The generated policy improved stale-binding detection in TypeScript, but the same eight independent cases can guard a small typed native helper without a compiler dependency. The product integration introduced an external pinned toolchain requirement into every Kotlin build.
+
+Observed project generation took about 0.7–0.9 s and an incremental Gradle verification/skip about 1.6 s; the three-target experiment run took 2m 43s. The pre-port three-target run was 3m 49s with a different cache state, so these numbers are **not** a speed comparison. Startup, steady runtime, allocations, reviewer time and LLM usage were **NOT MEASURED**. No percentage reduction in application maintenance is claimed from this slice. Under P8/P5 and the read-only reviewer rejection, this particular rule stays native while the full-port investigation moves to a larger, genuinely shared authoring case.
+
+The next candidate is a bounded `.tables` course-source pilot with unchanged JSON loader and independent exercise/form expectations, as specified in [FullPortPlan.md](FullPortPlan.md). Bulk JSON transcription is excluded by the source-of-truth and native-helper comparison. If that pilot also loses equal-guarantee upkeep, record a second NO-GO instead of claiming a full DSL translation.

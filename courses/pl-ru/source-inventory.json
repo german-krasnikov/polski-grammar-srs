@@ -4078,882 +4078,882 @@
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/VocabularyWeb.kt",
       "owner": "production source audit",
       "migrationStatus": "classified in inventory-decisions.json; review Evidence.md for acceptance",
-      "sha256": "e432e0a1dcb46e6720da91d2a9531f86945226be365a65dfa03de3953bf0239e",
+      "sha256": "c3a3c2da16f6b58d821b8f3be4ff321a79fb2910f5522dcbc3fac32c2c3b6aff",
       "literalLines": [
         {
-          "line": 29,
+          "line": 30,
           "source": "*  pl-ru key shared by every pack, so an en-ru import backup would silently overwrite pl-ru's (or"
         },
         {
-          "line": 31,
+          "line": 32,
           "source": "private val VOCABULARY_BACKUP_KEY: String get() = \"polski-vocabulary-$activeCoursePackId-v1-backup\""
         },
         {
-          "line": 33,
+          "line": 34,
           "source": "/** EnRuAcceptance-2026-09-28.md §7 item 3/4: the active pack's own target/native language, for"
         },
         {
-          "line": 34,
+          "line": 35,
           "source": "*  every label below that used to hardcode \"польский\"/\"русский\". Lowercase nominative adjective"
         },
         {
-          "line": 35,
+          "line": 36,
           "source": "*  forms (matching \"Эталон · польский\"'s own agreement) coincide with the capitalized noun label"
         },
         {
-          "line": 37,
+          "line": 38,
           "source": "private val languageAdjective: Map<String, String> = mapOf(\"pl\" to \"польский\", \"en\" to \"английский\", \"ru\" to \"русский\")"
         },
         {
-          "line": 38,
+          "line": 39,
           "source": "private val languageAdverb: Map<String, String> = mapOf(\"pl\" to \"по-польски\", \"en\" to \"по-английски\", \"ru\" to \"по-русски\")"
         },
         {
-          "line": 39,
+          "line": 40,
           "source": "private val languageBcp47: Map<String, String> = mapOf(\"pl\" to \"pl\", \"en\" to \"en\", \"ru\" to \"ru\")"
         },
         {
-          "line": 52,
+          "line": 53,
           "source": "return ActivePackLanguages(pack?.target ?: \"pl\", pack?.native ?: \"ru\")"
         },
         {
-          "line": 55,
+          "line": 56,
           "source": "/** EnRuAcceptance-2026-09-28.md §7 item 4: the active pack's own two [StudyDirection]s — was a"
         },
         {
-          "line": 57,
+          "line": 58,
           "source": "*  Settings to en-ru still saved/rated cards under pl-ru's own direction wires. Generalizes via"
         },
         {
-          "line": 58,
+          "line": 59,
           "source": "*  [StudyDirection.nativeToTarget]/[targetToNative] (pl-ru's own pair, byte-identical, is exactly"
         },
         {
-          "line": 59,
+          "line": 60,
           "source": "*  what those two produce for target=\"pl\"/native=\"ru\"). */"
         },
         {
-          "line": 70,
+          "line": 71,
           "source": "private var filter = \"A1\""
         },
         {
-          "line": 75,
+          "line": 76,
           "source": "// (reset to false) by the very next renderCatalog() call, same pattern as `justRevealedFlip`."
         },
         {
-          "line": 78,
+          "line": 79,
           "source": "// v3/B: real 3D flip, reusing the exact same tested behaviour as the vocabulary flip's own"
         },
         {
-          "line": 79,
+          "line": 80,
           "source": "// extracted [FlipCard] (originally the training card's, see CardFlip.kt) — purely visual,"
         },
         {
-          "line": 80,
+          "line": 81,
           "source": "// never touches `revealed`/FSRS review state (same contract the training card's flip had)."
         },
         {
-          "line": 85,
+          "line": 86,
           "source": "// end of every revealed `renderCard` — lets keyboard (Space) toggle the same already-mounted"
         },
         {
-          "line": 86,
+          "line": 87,
           "source": "// flip a click already can, without a full page rebuild (matching the click handler's own"
         },
         {
-          "line": 87,
+          "line": 88,
           "source": "// direct-DOM-mutation, no-refresh design; see `toggleFlip`)."
         },
         {
-          "line": 96,
+          "line": 97,
           "source": "private var draft = \"\""
         },
         {
-          "line": 99,
+          "line": 100,
           "source": "private var importText = \"\""
         },
         {
-          "line": 102,
+          "line": 103,
           "source": "// for — this controller is a long-lived singleton (`TrainingDomRenderer`'s own field, never"
         },
         {
-          "line": 103,
+          "line": 104,
           "source": "// rebuilt on a Settings pack switch, see that class's own KDoc), so [render] below self-heals"
         },
         {
-          "line": 104,
+          "line": 105,
           "source": "// by reloading whenever the active pack no longer matches, the same \"detect the switch at the"
         },
         {
-          "line": 105,
+          "line": 106,
           "source": "// entry point\" pattern ADR-37 already applied to the macOS/iOS session bridges."
         },
         {
-          "line": 115,
+          "line": 116,
           "source": "window.addEventListener(\"storage\", storageListener)"
         },
         {
-          "line": 120,
+          "line": 121,
           "source": "window.removeEventListener(\"storage\", storageListener)"
         },
         {
-          "line": 132,
+          "line": 133,
           "source": "/** See [loadedForPackId]'s own KDoc. Resets the per-pack UI state a routine cross-tab [reload]"
         },
         {
-          "line": 137,
+          "line": 138,
           "source": "revealed = false; flipped = false; flippedItemId = null; draft = \"\""
         },
         {
-          "line": 143,
+          "line": 144,
           "source": "error = \"Не удалось открыть хранилище словаря: ${it.message}\""
         },
         {
-          "line": 152,
+          "line": 153,
           "source": "error = \"Словарь нужно восстановить: ${it.message}\""
         },
         {
-          "line": 160,
+          "line": 161,
           "source": "root.className = \"vocabulary-page\""
         },
         {
-          "line": 161,
+          "line": 162,
           "source": "val page = root.add(\"section\", cls = \"vocabulary-view\")"
         },
         {
-          "line": 162,
+          "line": 163,
           "source": "page.setAttribute(\"aria-label\", \"Тренировка слов\")"
         },
         {
-          "line": 163,
+          "line": 164,
           "source": "val heading = page.add(\"div\", cls = \"vocabulary-heading\")"
         },
         {
-          "line": 164,
+          "line": 165,
           "source": "heading.add(\"div\").apply {"
         },
         {
-          "line": 165,
+          "line": 166,
           "source": "add(\"h2\", \"Слова и выражения\")"
         },
         {
-          "line": 166,
+          "line": 167,
           "source": "add(\"p\", \"Отмечай слова в каталоге. Узнавание и воспроизведение повторяются по отдельным расписаниям.\")"
         },
         {
-          "line": 171,
+          "line": 172,
           "source": "val directionLabel = heading.add(\"label\", \"Направление\")"
         },
         {
-          "line": 172,
+          "line": 173,
           "source": "val directionSelect = directionLabel.select(\"Направление карточки\", listOf("
         },
         {
-          "line": 173,
+          "line": 174,
           "source": "forward.wire to \"${languages.nativeAdjective.replaceFirstChar(Char::uppercase)} → ${languages.targetAdjective}\","
         },
         {
-          "line": 174,
+          "line": 175,
           "source": "backward.wire to \"${languages.targetAdjective.replaceFirstChar(Char::uppercase)} → ${languages.nativeAdjective}\","
         },
         {
-          "line": 176,
+          "line": 177,
           "source": "directionSelect.addEventListener(\"change\", {"
         },
         {
-          "line": 178,
+          "line": 179,
           "source": "revealed = false; draft = \"\"; refresh()"
         },
         {
-          "line": 180,
+          "line": 181,
           "source": "error?.let { page.add(\"p\", it, \"notice\").setAttribute(\"role\", \"alert\") }"
         },
         {
-          "line": 182,
+          "line": 183,
           "source": "page.button(\"Сохранить исходный JSON\") { download(\"vocabulary-recovery.json\", raw) }"
         },
         {
-          "line": 184,
+          "line": 185,
           "source": "val layout = page.add(\"div\", cls = \"vocabulary-layout\")"
         },
         {
-          "line": 185,
+          "line": 186,
           "source": "renderCard(layout.add(\"section\", cls = \"card vocabulary-card\"), outerRoot, swipeRatingEnabled, languages, refresh)"
         },
         {
-          "line": 186,
+          "line": 187,
           "source": "renderCatalog(layout.add(\"section\", cls = \"card vocabulary-catalog\"), languages, refresh)"
         },
         {
-          "line": 187,
+          "line": 188,
           "source": "page.add(\"p\", cls = \"muted small\").apply {"
         },
         {
-          "line": 188,
+          "line": 189,
           "source": "add(\"span\", \"Частотные ранги и counts: \")"
         },
         {
-          "line": 189,
+          "line": 190,
           "source": "add(\"a\", \"Leksjo / NKJP, CC BY 4.0\").apply {"
         },
         {
-          "line": 190,
+          "line": 191,
           "source": "setAttribute(\"href\", \"https://github.com/KubaCiolo/leksjo-dane/blob/01782aa92cc842d0d3199079eba47ecbf05879e1/dane/nkjp-frekwencja.csv\")"
         },
         {
-          "line": 191,
+          "line": 192,
           "source": "setAttribute(\"target\", \"_blank\")"
         },
         {
-          "line": 192,
+          "line": 193,
           "source": "setAttribute(\"rel\", \"noreferrer\")"
         },
         {
-          "line": 194,
+          "line": 195,
           "source": "add(\"span\", \". Изменения: взяты первые 1000 лемм, рангов и counts.\")"
         },
         {
-          "line": 199,
+          "line": 200,
           "source": "section.setAttribute(\"aria-label\", \"Карточка слова\")"
         },
         {
-          "line": 204,
+          "line": 205,
           "source": "// page background is the same \"no panel\" bug as the unrevealed front used to have."
         },
         {
-          "line": 205,
+          "line": 206,
           "source": "val face = section.add(\"div\", cls = \"card-front card-face\")"
         },
         {
-          "line": 206,
+          "line": 207,
           "source": "face.add(\"h3\", if (document.selectedIds.isEmpty()) \"Выбери слова для тренировки\" else \"На сейчас всё повторено\")"
         },
         {
-          "line": 207,
+          "line": 208,
           "source": "face.add(\"p\", \"Отметь готовые карточки в каталоге. История каждого направления сохраняется отдельно.\")"
         },
         {
-          "line": 210,
+          "line": 211,
           "source": "// The `flipped` visual state is host-local and keyed to the item on screen — a brand-new"
         },
         {
-          "line": 212,
+          "line": 213,
           "source": "// question-side-up, never inheriting the previous item's face."
         },
         {
-          "line": 214,
+          "line": 215,
           "source": "// P0-2: the flip wrapper (and the front face's own panel chrome) exists from the very"
         },
         {
-          "line": 217,
+          "line": 218,
           "source": "val flip = detachedElement(\"div\", \"card-flip\")"
         },
         {
-          "line": 218,
+          "line": 219,
           "source": "val inner = detachedElement(\"div\", \"card-flip-inner\")"
         },
         {
-          "line": 220,
+          "line": 221,
           "source": "val front = detachedElement(\"div\", \"card-front card-face\")"
         },
         {
-          "line": 221,
+          "line": 222,
           "source": "// UX5: the reveal target is only the prompt block, never `front` as a whole — `front`"
         },
         {
-          "line": 223,
+          "line": 224,
           "source": "// so giving IT `role=\"button\"` too would nest a custom button role around other real"
         },
         {
-          "line": 224,
+          "line": 225,
           "source": "// interactive controls. `front` itself stays a plain container; ITS tap gesture (below)"
         },
         {
-          "line": 227,
+          "line": 228,
           "source": "// `installTapGesture`'s own `editableTarget` guard, same as training's question card)."
         },
         {
-          "line": 229,
+          "line": 230,
           "source": "val promptBlock = front.add(\"div\", cls = \"vocabulary-prompt-block\")"
         },
         {
-          "line": 230,
+          "line": 231,
           "source": "promptBlock.add(\"span\", \"Вспомни ${if (isNativeToTarget) languages.targetAdverb else languages.nativeAdverb}\", \"eyebrow\")"
         },
         {
-          "line": 231,
+          "line": 232,
           "source": "promptBlock.add(\"p\", if (isNativeToTarget) item.translation else item.lemma, \"vocabulary-prompt\")"
         },
         {
-          "line": 232,
+          "line": 233,
           "source": ".setAttribute(\"lang\", if (isNativeToTarget) languages.nativeLang else languages.targetLang)"
         },
         {
-          "line": 234,
+          "line": 235,
           "source": "// UX5: no \"Показать ответ\" button in oral mode any more — the whole card reveals on a"
         },
         {
-          "line": 236,
+          "line": 237,
           "source": "// `promptBlock` carries the keyboard-focusable/screen-reader affordance that used to"
         },
         {
-          "line": 238,
+          "line": 239,
           "source": "promptBlock.setAttribute(\"role\", \"button\")"
         },
         {
-          "line": 239,
+          "line": 240,
           "source": "promptBlock.setAttribute(\"tabindex\", \"0\")"
         },
         {
-          "line": 240,
+          "line": 241,
           "source": "promptBlock.setAttribute(\"aria-label\", \"Показать ответ\")"
         },
         {
-          "line": 241,
+          "line": 242,
           "source": "val modes = front.add(\"div\", cls = \"answer-mode\")"
         },
         {
-          "line": 242,
+          "line": 243,
           "source": "modes.button(\"Ответ вслух / про себя\") { typed = false; refresh() }.apply {"
         },
         {
-          "line": 243,
+          "line": 244,
           "source": "setAttribute(\"aria-pressed\", (!typed).toString())"
         },
         {
-          "line": 244,
+          "line": 245,
           "source": "classList.toggle(\"active\", !typed) // UX4/P2-12: same selected-state look as training's mode buttons"
         },
         {
-          "line": 246,
+          "line": 247,
           "source": "modes.button(\"Напечатать ответ\") { typed = true; refresh() }.apply {"
         },
         {
-          "line": 247,
+          "line": 248,
           "source": "setAttribute(\"aria-pressed\", typed.toString())"
         },
         {
-          "line": 248,
+          "line": 249,
           "source": "classList.toggle(\"active\", typed)"
         },
         {
-          "line": 251,
+          "line": 252,
           "source": "val input = front.add(\"textarea\") as HTMLTextAreaElement"
         },
         {
-          "line": 252,
+          "line": 253,
           "source": "input.id = \"vocabulary-answer\""
         },
         {
-          "line": 253,
+          "line": 254,
           "source": "input.setAttribute(\"aria-label\", \"Ответ на карточку слова\")"
         },
         {
-          "line": 255,
+          "line": 256,
           "source": "input.addEventListener(\"input\", { draft = input.value })"
         },
         {
-          "line": 256,
+          "line": 257,
           "source": "input.addEventListener(\"keydown\", { event ->"
         },
         {
-          "line": 258,
+          "line": 259,
           "source": "if (key.key == \"Enter\" && !key.shiftKey && !key.isComposing) {"
         },
         {
-          "line": 262,
+          "line": 263,
           "source": "// UX5: typed mode keeps an explicit submit action (\"Проверить\") — a click/tap"
         },
         {
-          "line": 266,
+          "line": 267,
           "source": "front.button(\"Проверить\", \"primary reveal-button\") { revealAndFlip(refresh) }"
         },
         {
-          "line": 269,
+          "line": 270,
           "source": "// tap-vs-drag gesture training's question card and this card's own flip-back use, so a"
         },
         {
-          "line": 277,
+          "line": 278,
           "source": "// `FlipCard` helper the training card's flip used. Click toggles which face is forward,"
         },
         {
-          "line": 279,
+          "line": 280,
           "source": "val answer = detachedElement(\"div\", \"vocabulary-answer card-back card-face\")"
         },
         {
-          "line": 280,
+          "line": 281,
           "source": "answer.setAttribute(\"aria-live\", \"polite\")"
         },
         {
-          "line": 294,
+          "line": 295,
           "source": "answer.add(\"span\", \"Эталон · ${if (isNativeToTarget) languages.targetAdjective else languages.nativeAdjective}\", \"eyebrow\")"
         },
         {
-          "line": 295,
+          "line": 296,
           "source": "answer.add(\"p\", if (isNativeToTarget) item.lemma else item.translation)"
         },
         {
-          "line": 296,
+          "line": 297,
           "source": ".setAttribute(\"lang\", if (isNativeToTarget) languages.targetLang else languages.nativeLang)"
         },
         {
-          "line": 297,
+          "line": 298,
           "source": "val description = answer.add(\"dl\")"
         },
         {
-          "line": 298,
+          "line": 299,
           "source": "description.detail(\"Перевод\", item.translation)"
         },
         {
-          "line": 299,
+          "line": 300,
           "source": "description.detail(\"Форма\", item.form, languages.targetLang)"
         },
         {
-          "line": 300,
+          "line": 301,
           "source": "description.detail(\"В предложении\", item.example, languages.targetLang)"
         },
         {
-          "line": 301,
+          "line": 302,
           "source": "if (typed) answer.add(\"p\", \"Твой ответ: ${draft.ifBlank { \"не введён\" }}. Сравни сам и выбери оценку.\")"
         },
         {
-          "line": 305,
+          "line": 306,
           "source": "// itself. The gesture LISTENERS live on the stable `.card-flip` (never itself"
         },
         {
-          "line": 306,
+          "line": 307,
           "source": "// transformed — only `.card-flip-inner`'s rotateY drives the flip), not on `answer` —"
         },
         {
-          "line": 307,
+          "line": 308,
           "source": "// see `installSwipeCard`'s own doc comment for why, and `baseTransform` for how this"
         },
         {
-          "line": 308,
+          "line": 309,
           "source": "// face's own resting `rotateY(180deg)` (undoing the flip's mirroring) survives every"
         },
         {
-          "line": 310,
+          "line": 311,
           "source": "answer.add(\"p\", \"← Повторить · Вспомнил →\", \"vocabulary-swipe-zone muted small\").apply {"
         },
         {
-          "line": 311,
+          "line": 312,
           "source": "setAttribute(\"aria-hidden\", \"true\")"
         },
         {
-          "line": 314,
+          "line": 315,
           "source": "installSwipeCard(flip, answer, baseTransform = \"rotateY(180deg)\") { remembered ->"
         },
         {
-          "line": 320,
+          "line": 321,
           "source": "// UX4-13: the same hint+interval structure the training card's rating buttons already"
         },
         {
-          "line": 321,
+          "line": 322,
           "source": "// show — `VocabularyCodec.preview` routes through the real scheduler without writing"
         },
         {
-          "line": 325,
+          "line": 326,
           "source": "val ratings = answer.add(\"div\", cls = \"ratings\")"
         },
         {
-          "line": 326,
+          "line": 327,
           "source": "ratings.button(\"Повторить\", hint = \"Ошибка или не уверен\", interval = intervalLabel(preview[Rating.Again].toEpochMilliseconds(), at.toEpochMilliseconds()), cls = \"rating-again\") {"
         },
         {
-          "line": 329,
+          "line": 330,
           "source": "ratings.button(\"Вспомнил\", hint = \"Воспроизвёл сам\", interval = intervalLabel(preview[Rating.Good].toEpochMilliseconds(), at.toEpochMilliseconds()), cls = \"rating-good\") {"
         },
         {
-          "line": 335,
+          "line": 336,
           "source": "val header = section.add(\"div\", cls = \"catalog-toolbar\")"
         },
         {
-          "line": 336,
+          "line": 337,
           "source": "header.add(\"h3\", \"Мой словарь · ${document.selectedIds.size}\")"
         },
         {
-          "line": 337,
+          "line": 338,
           "source": "val toggleId = \"vocabulary-catalog-toggle\""
         },
         {
-          "line": 338,
+          "line": 339,
           "source": "val collapsibleId = \"vocabulary-catalog-collapsible\""
         },
         {
-          "line": 339,
+          "line": 340,
           "source": "header.button(if (catalogVisible) \"Скрыть каталог\" else \"Открыть каталог\") {"
         },
         {
-          "line": 344,
+          "line": 345,
           "source": "// `body`. Relying on the default leaves nothing to reclaim once the whole subtree"
         },
         {
-          "line": 349,
+          "line": 350,
           "source": "}.apply { id = toggleId; setAttribute(\"aria-expanded\", catalogVisible.toString()) }"
         },
         {
-          "line": 350,
+          "line": 351,
           "source": "val collapsible = section.add(\"div\", cls = \"collapsible catalog-collapsible\")"
         },
         {
-          "line": 355,
+          "line": 356,
           "source": "val inner = collapsible.add(\"div\")"
         },
         {
-          "line": 356,
+          "line": 357,
           "source": "val filterLabel = inner.add(\"label\", \"Подборка\")"
         },
         {
-          "line": 357,
+          "line": 358,
           "source": "val filters = filterLabel.select(\"Подборка слов\", listOf("
         },
         {
-          "line": 358,
+          "line": 359,
           "source": "\"A1\" to \"A1 · готовые карточки\", \"A2\" to \"A2 · готовые карточки\", \"B1\" to \"B1 · готовые карточки\","
         },
         {
-          "line": 359,
+          "line": 360,
           "source": "\"100\" to \"Топ-100 по частоте\", \"500\" to \"Топ-500 по частоте\", \"1000\" to \"Топ-1000 по частоте\","
         },
         {
-          "line": 360,
+          "line": 361,
           "source": "\"mine\" to \"Мои слова\","
         },
         {
-          "line": 362,
+          "line": 363,
           "source": "filters.addEventListener(\"change\", { filter = filters.value; refresh() })"
         },
         {
-          "line": 363,
+          "line": 364,
           "source": "inner.add(\"p\", courseVocabularyInstructions.web, \"muted small\")"
         },
         {
-          "line": 364,
+          "line": 365,
           "source": "val list = inner.add(\"div\", cls = \"catalog-list\")"
         },
         {
-          "line": 368,
+          "line": 369,
           "source": "\"100\", \"500\", \"1000\" -> frequencyItems.take(filter.toInt()).map { Triple(it.rank, it.lemma, byLemma[it.lemma]) }"
         },
         {
-          "line": 369,
+          "line": 370,
           "source": "\"mine\" -> document.custom.map { Triple(it.frequencyRank, it.lemma, it) }"
         },
         {
-          "line": 372,
+          "line": 373,
           "source": "if (filter in listOf(\"100\", \"500\", \"1000\")) {"
         },
         {
-          "line": 374,
+          "line": 375,
           "source": "inner.add(\"p\", \"Готово $ready/${rows.size} · недоступно ${rows.size - ready}\", \"muted small\")"
         },
         {
-          "line": 375,
+          "line": 376,
           "source": ".setAttribute(\"role\", \"status\")"
         },
         {
-          "line": 378,
+          "line": 379,
           "source": "val row = list.add(\"label\", cls = \"catalog-row\")"
         },
         {
-          "line": 379,
+          "line": 380,
           "source": "val checkbox = row.add(\"input\") as HTMLInputElement"
         },
         {
-          "line": 380,
+          "line": 381,
           "source": "checkbox.type = \"checkbox\""
         },
         {
-          "line": 383,
+          "line": 384,
           "source": "checkbox.addEventListener(\"change\", {"
         },
         {
-          "line": 386,
+          "line": 387,
           "source": "row.add(\"span\").apply {"
         },
         {
-          "line": 387,
+          "line": 388,
           "source": "add(\"b\", lemma).setAttribute(\"lang\", languages.targetLang)"
         },
         {
-          "line": 388,
+          "line": 389,
           "source": "add(\"small\", item?.translation ?: courseVocabularyUnavailableLabel)"
         },
         {
-          "line": 390,
+          "line": 391,
           "source": "if (rank != null) row.add(\"small\", \"№ $rank\")"
         },
         {
-          "line": 391,
+          "line": 392,
           "source": "if (item?.custom == true) row.button(\"Изменить\") {"
         },
         {
-          "line": 398,
+          "line": 399,
           "source": "val actions = inner.add(\"div\", cls = \"actions\")"
         },
         {
-          "line": 399,
+          "line": 400,
           "source": "actions.button(\"Экспорт словаря JSON\") { download(\"polski-vocabulary-$activeCoursePackId.json\", VocabularyCodec.encode(document)) }"
         },
         {
-          "line": 400,
+          "line": 401,
           "source": "val importLabel = inner.add(\"label\", \"Импорт JSON\")"
         },
         {
-          "line": 401,
+          "line": 402,
           "source": "val input = importLabel.add(\"textarea\") as HTMLTextAreaElement"
         },
         {
-          "line": 402,
+          "line": 403,
           "source": "input.setAttribute(\"aria-label\", \"JSON словаря для импорта\")"
         },
         {
-          "line": 403,
+          "line": 404,
           "source": "input.placeholder = \"Вставь содержимое экспортированного JSON\""
         },
         {
-          "line": 405,
+          "line": 406,
           "source": "input.addEventListener(\"input\", { importText = input.value })"
         },
         {
-          "line": 406,
+          "line": 407,
           "source": "actions.button(\"Добавить данные из JSON\") {"
         },
         {
-          "line": 410,
+          "line": 411,
           "source": "if (writeDocument(merged, backupCurrent = true)) { recoveryRaw = null; importText = \"\" }"
         },
         {
-          "line": 411,
+          "line": 412,
           "source": "}.onFailure { error = it.message ?: \"Не удалось импортировать словарь\" }"
         },
         {
-          "line": 419,
+          "line": 420,
           "source": "val editorSection = section.add(\"div\", cls = \"vocabulary-editor\")"
         },
         {
-          "line": 420,
+          "line": 421,
           "source": "editorSection.add(\"h4\", if (editing == null) \"Добавить своё слово\" else \"Изменить своё слово\")"
         },
         {
-          "line": 421,
+          "line": 422,
           "source": "val fields = editorSection.add(\"div\", cls = \"editor-fields\")"
         },
         {
-          "line": 422,
+          "line": 423,
           "source": "fields.field(\"Польское слово\", editor.lemma) { editor.lemma = it }"
         },
         {
-          "line": 423,
+          "line": 424,
           "source": "fields.field(\"Перевод\", editor.translation) { editor.translation = it }"
         },
         {
-          "line": 424,
+          "line": 425,
           "source": "fields.field(\"Форма\", editor.form) { editor.form = it }"
         },
         {
-          "line": 425,
+          "line": 426,
           "source": "fields.field(\"Пример в предложении\", editor.example) { editor.example = it }"
         },
         {
-          "line": 426,
+          "line": 427,
           "source": "val levelLabel = fields.add(\"label\", \"Уровень\")"
         },
         {
-          "line": 427,
+          "line": 428,
           "source": "val level = levelLabel.select(\"Уровень\", listOf(\"—\", \"A1\", \"A2\", \"B1\", \"B2\", \"C1\", \"C2\").map { it to it }, editor.level)"
         },
         {
-          "line": 428,
+          "line": 429,
           "source": "level.addEventListener(\"change\", { editor.level = level.value })"
         },
         {
-          "line": 429,
+          "line": 430,
           "source": "val actions = editorSection.add(\"div\", cls = \"actions\")"
         },
         {
-          "line": 430,
+          "line": 431,
           "source": "actions.button(if (editing == null) \"Добавить слово\" else \"Сохранить изменения\") { saveOwn(refresh) }"
         },
         {
-          "line": 432,
+          "line": 433,
           "source": "actions.button(\"Отмена\") { editing = null; editor = EditorDraft(); refresh() }"
         },
         {
-          "line": 433,
+          "line": 434,
           "source": "actions.button(\"Удалить слово\") {"
         },
         {
-          "line": 434,
+          "line": 435,
           "source": "if (window.confirm(\"Удалить своё слово из каталога? История повторений останется в экспортируемых данных.\")) {"
         },
         {
-          "line": 445,
+          "line": 446,
           "source": "val id = editing ?: \"user.${randomUuid()}\""
         },
         {
-          "line": 449,
+          "line": 450,
           "source": "error = \"Это польское слово уже есть в словаре.\"; refresh(); return"
         },
         {
-          "line": 457,
+          "line": 458,
           "source": "* (`TrainingWebApp.kt`, `ArrowLeft`/`ArrowRight`/`1`/`2` on the Vocabulary route) — reads the"
         },
         {
-          "line": 469,
+          "line": 470,
           "source": "* the card already does: reveals (and flips to face the answer) when the card isn't revealed yet,"
         },
         {
-          "line": 479,
+          "line": 480,
           "source": "*  Enter/\"Проверить\" in typed mode, and [spaceReveal]. A no-op once already revealed, so a"
         },
         {
-          "line": 497,
+          "line": 498,
           "source": "revealed = false; draft = \"\"; refresh()"
         },
         {
-          "line": 502,
+          "line": 503,
           "source": "if (recoveryRaw != null) { error = \"Сначала сохрани исходный JSON и восстанови словарь.\"; refresh(); return false }"
         },
         {
-          "line": 521,
+          "line": 523,
           "source": "check(window.localStorage.getItem(VOCABULARY_BACKUP_KEY) == previous) { \"Резервная копия словаря не подтверждена\" }"
         },
         {
-          "line": 524,
+          "line": 526,
           "source": "check(window.localStorage.getItem(VocabularyCodec.key) == serialized) { \"Словарь не прошёл проверку записи\" }"
         },
         {
-          "line": 529,
+          "line": 531,
           "source": "error = it.message ?: \"Не удалось сохранить словарь\""
         },
         {
-          "line": 534,
+          "line": 536,
           "source": "private data class EditorDraft(var lemma: String = \"\", var translation: String = \"\", var form: String = \"\","
         },
         {
-          "line": 535,
+          "line": 537,
           "source": "var example: String = \"\", var level: String = \"—\")"
         },
         {
-          "line": 537,
+          "line": 539,
           "source": "// Top-level (not a class member) so `document` here always resolves to kotlinx.browser.document —"
         },
         {
-          "line": 538,
+          "line": 540,
           "source": "// inside VocabularyWebController itself the simple name `document` resolves to its own"
         },
         {
-          "line": 539,
+          "line": 541,
           "source": "// `VocabularyDocument` field instead, shadowing the browser global (pre-existing naming; the"
         },
         {
-          "line": 540,
+          "line": 542,
           "source": "// class's own methods below always create elements through this or the `add`/`button`/`select`"
         },
         {
-          "line": 541,
+          "line": 543,
           "source": "// extensions rather than calling `document.createElement` directly)."
         },
         {
-          "line": 552,
+          "line": 554,
           "source": "private fun HTMLElement.button(label: String, cls: String = \"\", action: () -> Unit): HTMLElement ="
         },
         {
-          "line": 553,
+          "line": 555,
           "source": "add(\"button\", label, cls).apply { addEventListener(\"click\", { action() }) }"
         },
         {
-          "line": 555,
+          "line": 557,
           "source": "/** UX4-13: same `<small>hint</small><span>interval</span>` structure the training card's rating"
         },
         {
-          "line": 556,
+          "line": 558,
           "source": "*  buttons already use — \"не пустые высокие кнопки\" is a direct consequence of having this."
         },
         {
-          "line": 557,
+          "line": 559,
           "source": "*  [cls] (P2-13) carries the same `rating-again`/`rating-good` colour accent training's own"
         },
         {
-          "line": 559,
+          "line": 561,
           "source": "private fun HTMLElement.button(label: String, hint: String, interval: String, cls: String = \"\", action: () -> Unit): HTMLElement ="
         },
         {
-          "line": 560,
+          "line": 562,
           "source": "add(\"button\", label, cls).apply {"
         },
         {
-          "line": 561,
+          "line": 563,
           "source": "add(\"small\", hint)"
         },
         {
-          "line": 562,
+          "line": 564,
           "source": "add(\"span\", interval)"
         },
         {
-          "line": 563,
+          "line": 565,
           "source": "addEventListener(\"click\", { action() })"
         },
         {
-          "line": 567,
+          "line": 569,
           "source": "(add(\"select\") as HTMLSelectElement).also { select ->"
         },
         {
-          "line": 568,
+          "line": 570,
           "source": "select.setAttribute(\"aria-label\", label)"
         },
         {
-          "line": 569,
+          "line": 571,
           "source": "options.forEach { (value, title) -> select.add(\"option\", title).setAttribute(\"value\", value) }"
         },
         {
-          "line": 574,
+          "line": 576,
           "source": "val wrapper = add(\"label\", label)"
         },
         {
-          "line": 575,
+          "line": 577,
           "source": "val input = wrapper.add(\"input\") as HTMLInputElement"
         },
         {
-          "line": 577,
+          "line": 579,
           "source": "input.addEventListener(\"input\", { onInput(input.value) })"
         },
         {
-          "line": 581,
+          "line": 583,
           "source": "add(\"div\").apply {"
         },
         {
-          "line": 582,
+          "line": 584,
           "source": "add(\"dt\", title)"
         },
         {
-          "line": 583,
+          "line": 585,
           "source": "add(\"dd\", value).apply { if (language != null) setAttribute(\"lang\", language) }"
         },
         {
-          "line": 591,
+          "line": 593,
           "source": "val hex = \"0123456789abcdef\""
         },
         {
-          "line": 594,
+          "line": 596,
           "source": "if (index in listOf(4, 6, 8, 10)) append('-')"
         },
         {
-          "line": 603,
+          "line": 605,
           "source": "val digits = \"0123456789ABCDEF\""
         },
         {
-          "line": 607,
+          "line": 609,
           "source": "append('%'); append(digits[value shr 4]); append(digits[value and 15])"
         },
         {
-          "line": 610,
+          "line": 612,
           "source": "val link = document.createElement(\"a\") as HTMLAnchorElement"
         },
         {
-          "line": 611,
+          "line": 613,
           "source": "link.href = \"data:application/json;charset=utf-8,$encoded\""
         }
       ]
@@ -10333,15 +10333,31 @@
       "path": "kotlin/shared/src/commonMain/kotlin/polski/grammar/AnswerNormalizer.kt",
       "owner": "production source audit",
       "migrationStatus": "classified in inventory-decisions.json; review Evidence.md for acceptance",
-      "sha256": "0d0f6ba4fb254ca5c54ff0acc45c911e8afcce7f2f4d3035936db1273f3d22fa",
+      "sha256": "d45fe15363aea0fd491fb0dea1594236b0b3bba63173a61bdcf67397e8fa02e8",
       "literalLines": [
         {
           "line": 12,
           "source": ".replace(Regex(\"[.!?]+$\"), \"\")"
         },
         {
-          "line": 13,
-          "source": ".replace(Regex(\"\\\\s+\"), \" \")"
+          "line": 16,
+          "source": "private fun Char.isJsWhitespace(): Boolean = this in '\\u0009'..'\\u000d' || this == ' ' ||"
+        },
+        {
+          "line": 17,
+          "source": "this == '\\u00a0' || this == '\\u1680' || this in '\\u2000'..'\\u200a' ||"
+        },
+        {
+          "line": 18,
+          "source": "this == '\\u2028' || this == '\\u2029' || this == '\\u202f' ||"
+        },
+        {
+          "line": 19,
+          "source": "this == '\\u205f' || this == '\\u3000' || this == '\\ufeff'"
+        },
+        {
+          "line": 34,
+          "source": "if (!previousWhitespace) append(' ')"
         }
       ]
     },
@@ -11480,6 +11496,13 @@
           "source": "ownerLexeme = this[\"ownerLexeme\"]?.jsonPrimitive?.contentOrNull,"
         }
       ]
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/interaction/SwipeDecision.kt",
+      "owner": "production source audit",
+      "migrationStatus": "classified in inventory-decisions.json; review Evidence.md for acceptance",
+      "sha256": "1be79b38a72ab8e41340df4a6d0e3871da94fa572f635a81ce0990c93fb51ee0",
+      "literalLines": []
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/model/Exercise.kt",
@@ -13647,290 +13670,294 @@
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
       "owner": "production source audit",
       "migrationStatus": "classified in inventory-decisions.json; review Evidence.md for acceptance",
-      "sha256": "b4000107a73b19ff228fb9d31fb8a1dd7b289a3782fecebb3fca959666677f00",
+      "sha256": "cb451f91bfb2df516014f6142429e7c750a5fbdb4669127af0e8448ee89feae5",
       "literalLines": [
         {
-          "line": 29,
+          "line": 30,
           "source": "* Which side of a pack's pair the learner recalls (native → target, or target → native)."
         },
         {
-          "line": 30,
+          "line": 31,
           "source": "* EN-09 (gap F, `Plans/Kotlin/EnRuPackPlan.md` §5) opened this from a closed 2-value enum to a"
         },
         {
-          "line": 32,
+          "line": 33,
           "source": "* pack's pair (`\"en-ru\"/\"ru-en\"`) is just a new [StudyDirection], not a Kotlin change here. [wire]"
         },
         {
-          "line": 33,
+          "line": 34,
           "source": "* keeps the exact `\"ru-pl\"/\"pl-ru\"` bytes the old enum's [wire] produced, so every persisted card"
         },
         {
-          "line": 38,
+          "line": 39,
           "source": "val RussianToPolish = StudyDirection(\"ru-pl\")"
         },
         {
-          "line": 39,
+          "line": 40,
           "source": "val PolishToRussian = StudyDirection(\"pl-ru\")"
         },
         {
-          "line": 41,
+          "line": 42,
           "source": "/** Generalizes [RussianToPolish]/[PolishToRussian] (themselves this exact pair for pl-ru's"
         },
         {
-          "line": 42,
+          "line": 43,
           "source": "*  own native=\"ru\"/target=\"pl\") to any pack's own (target, native) codes —"
         },
         {
-          "line": 43,
+          "line": 44,
           "source": "*  EnRuAcceptance-2026-09-28.md §7 item 4: a second pack's UI needs no new named"
         },
         {
-          "line": 46,
+          "line": 47,
           "source": "fun nativeToTarget(target: String, native: String) = StudyDirection(\"$native-$target\")"
         },
         {
-          "line": 47,
+          "line": 48,
           "source": "fun targetToNative(target: String, native: String) = StudyDirection(\"$target-$native\")"
         },
         {
-          "line": 51,
+          "line": 52,
           "source": "/** The 2 built-in directions in the old enum's declaration order — replaces `StudyDirection.entries`"
         },
         {
-          "line": 59,
+          "line": 60,
           "source": "* (EnRuAcceptance-2026-09-28.md §7 item 4; en-ru gets `[\"ru-en\", \"en-ru\"]`, see"
         },
         {
-          "line": 70,
+          "line": 71,
           "source": "/** Human name for a target/native language code — the same small display-name map every host's"
         },
         {
-          "line": 71,
+          "line": 72,
           "source": "*  own target/native course picker already keeps (e.g. `MacPreferencesSession`'s own"
         },
         {
-          "line": 72,
+          "line": 73,
           "source": "*  `languageDisplayNames`); [studyDirectionOptions] needs the same names to label a direction for"
         },
         {
-          "line": 73,
+          "line": 74,
           "source": "*  any pack, not just pl-ru's hardcoded two. */"
         },
         {
-          "line": 74,
+          "line": 75,
           "source": "private val languageDisplayNames = mapOf(\"pl\" to \"Польский\", \"en\" to \"Английский\", \"ru\" to \"Русский\")"
         },
         {
-          "line": 77,
+          "line": 78,
           "source": "* EnRuAcceptance-2026-09-28.md §7 item 4: the 2 study directions of a pack's own [target]/[native]"
         },
         {
-          "line": 79,
+          "line": 80,
           "source": "* pl-ru — `studyDirectionOptions(\"pl\", \"ru\")` returns pl-ru's own byte-identical wires and labels"
         },
         {
-          "line": 80,
+          "line": 81,
           "source": "* (\"ru-pl\" \"Русский → польский\", \"pl-ru\" \"Польский → русский\"); any other pack (e.g. `\"en\"`/`\"ru\"`)"
         },
         {
-          "line": 85,
+          "line": 86,
           "source": "fun label(from: String, to: String) = \"${languageDisplayNames[from] ?: from} → ${(languageDisplayNames[to] ?: to).lowercase()}\""
         },
         {
-          "line": 92,
+          "line": 93,
           "source": "/** \"по-{language}\" adverb form (\"по-польски\", \"по-русски\", \"по-английски\") for [recallCaption] —"
         },
         {
-          "line": 94,
+          "line": 95,
           "source": "private val languageAdverbs = mapOf(\"pl\" to \"польски\", \"ru\" to \"русски\", \"en\" to \"английски\")"
         },
         {
-          "line": 99,
+          "line": 100,
           "source": "* word and [VocabularyItem.translation] always the native one (every pack's own `course.json`/"
         },
         {
-          "line": 100,
+          "line": 101,
           "source": "* `pair.json` `vocabulary.items` is authored that way), so this single boolean is everything a"
         },
         {
-          "line": 101,
+          "line": 102,
           "source": "* card needs to pick which field is the prompt and which is the revealed answer, for any pack's"
         },
         {
-          "line": 102,
+          "line": 103,
           "source": "* [target]/[native] — not the `wire == \"ru-pl\"` compare a pl-ru-only card would hardcode."
         },
         {
-          "line": 106,
+          "line": 107,
           "source": "/** \"Вспомни по-…\" prompt caption for whichever language [this] direction asks the learner to"
         },
         {
-          "line": 110,
+          "line": 111,
           "source": "return \"Вспомни по-${languageAdverbs[code] ?: code}\""
         },
         {
-          "line": 114,
+          "line": 115,
           "source": "*  e.g. \"польский\" recalling target pl, \"русский\" recalling native ru. */"
         },
         {
-          "line": 121,
+          "line": 122,
           "source": "* EnRuAcceptance-2026-09-28.md §7 item 4: the active pack's own native→target direction — pl-ru's"
         },
         {
-          "line": 122,
+          "line": 123,
           "source": "* own byte-identical [StudyDirection.RussianToPolish] (\"ru-pl\") while pl-ru is active, e.g. en-ru's"
         },
         {
-          "line": 123,
+          "line": 124,
           "source": "* own \"ru-en\" once en-ru is. The sensible default for a fresh [VocabularyUiState] or a just-loaded"
         },
         {
-          "line": 126,
+          "line": 127,
           "source": "* starts after a pack switch never opens on the *previous* pack's own hardcoded direction."
         },
         {
-          "line": 137,
+          "line": 138,
           "source": "/** UC-04: was the literal `\"pl-ru\"` — now the active pack's [polski.data.CoursePack.pairId]."
         },
         {
-          "line": 138,
+          "line": 139,
           "source": "* EnRuAcceptance-2026-09-28.md §7 item 2: read fresh (was `by lazy`, which froze this to"
         },
         {
-          "line": 139,
+          "line": 140,
           "source": "* whichever pack was active on first read for the rest of the process) so a host's vocabulary"
         },
         {
-          "line": 140,
+          "line": 141,
           "source": "* repository keeps loading/saving the right pack's own document after"
         },
         {
-          "line": 142,
+          "line": 143,
           "source": "* the rest of `CourseData.kt`'s per-pack `val`s already applied. */"
         },
         {
-          "line": 143,
+          "line": 144,
           "source": "val key: String get() = \"polski-vocabulary-${packRegistry.active.pairId}-v1\""
         },
         {
-          "line": 145,
+          "line": 146,
           "source": "fun cardKey(id: String, direction: StudyDirection): String = \"${packRegistry.active.pairId}:vocabulary:${direction.wire}:$id\""
         },
         {
-          "line": 154,
+          "line": 155,
           "source": "require(item(document, id) != null) { \"Unknown vocabulary item\" }"
         },
         {
-          "line": 168,
+          "line": 169,
           "source": "*  anything — mirrors [dueIds]'s way of reading the stored (or not-yet-created) card, but"
         },
         {
-          "line": 187,
-          "source": "require(existingLemmas.add(item.lemma.trim().lowercase())) { \"Это польское слово уже есть в словаре\" }"
-        },
-        {
-          "line": 197,
-          "source": "require(Regex(\"^user\\\\.[a-f0-9-]{36}$\").matches(value.id) && value.frequencyRank == null && value.custom)"
+          "line": 189,
+          "source": "require(existingLemmas.add(trimJsWhitespace(item.lemma).lowercase())) { \"Это польское слово уже есть в словаре\" }"
         },
         {
           "line": 199,
-          "source": "require(value.level in listOf(\"—\", \"A1\", \"A2\", \"B1\", \"B2\", \"C1\", \"C2\"))"
+          "source": "require(Regex(\"^user\\\\.[a-f0-9-]{36}$\").matches(value.id) && value.frequencyRank == null && value.custom)"
         },
         {
-          "line": 203,
-          "source": "// EnRuAcceptance-2026-09-28.md §7 item 4: allowed wires follow the active pack, not pl-ru's literal pair."
+          "line": 204,
+          "source": ".all { it.isNotEmpty() && it.length <= 240 }) { \"Заполни слово, перевод, форму и пример (до 240 символов).\" }"
         },
         {
           "line": 205,
-          "source": "require(document.cards.keys.all { key -> wires.any { key.startsWith(\"${packRegistry.active.pairId}:vocabulary:$it:\") } })"
+          "source": "require(value.level in listOf(\"—\", \"A1\", \"A2\", \"B1\", \"B2\", \"C1\", \"C2\"))"
         },
         {
-          "line": 211,
-          "source": "require(root.getValue(\"version\").jsonPrimitive.int == 1 && root.getValue(\"pair\").jsonPrimitive.content == packRegistry.active.pairId)"
+          "line": 210,
+          "source": "// EnRuAcceptance-2026-09-28.md §7 item 4: allowed wires follow the active pack, not pl-ru's literal pair."
         },
         {
           "line": 212,
-          "source": "val selected = root.getValue(\"selectedIds\").jsonArray.map { it.jsonPrimitive.content }"
-        },
-        {
-          "line": 213,
-          "source": "val custom = root.getValue(\"custom\").jsonArray.map { element ->"
-        },
-        {
-          "line": 215,
-          "source": "VocabularyItem(value.text(\"id\"), value.text(\"lemma\"), value.text(\"translation\"), value.text(\"form\"),"
-        },
-        {
-          "line": 216,
-          "source": "value.text(\"example\"), value.text(\"level\"), null, true)"
+          "source": "require(document.cards.keys.all { key -> wires.any { key.startsWith(\"${packRegistry.active.pairId}:vocabulary:$it:\") } })"
         },
         {
           "line": 218,
-          "source": "val cards = root.getValue(\"cards\").jsonObject.mapValues { (_, element) ->"
+          "source": "require(root.getValue(\"version\").jsonPrimitive.int == 1 && root.getValue(\"pair\").jsonPrimitive.content == packRegistry.active.pairId)"
+        },
+        {
+          "line": 219,
+          "source": "val selected = root.getValue(\"selectedIds\").jsonArray.map { it.jsonPrimitive.content }"
         },
         {
           "line": 220,
-          "source": "val wire = SerializedCard(value.text(\"due\"), value.number(\"stability\"), value.number(\"difficulty\"),"
-        },
-        {
-          "line": 221,
-          "source": "value.integer(\"elapsed_days\"), value.integer(\"scheduled_days\"), value.integer(\"reps\"),"
+          "source": "val custom = root.getValue(\"custom\").jsonArray.map { element ->"
         },
         {
           "line": 222,
-          "source": "value.integer(\"lapses\"), value.integer(\"learning_steps\"), value.integer(\"state\"),"
+          "source": "VocabularyItem(value.text(\"id\"), value.text(\"lemma\"), value.text(\"translation\"), value.text(\"form\"),"
         },
         {
           "line": 223,
+          "source": "value.text(\"example\"), value.text(\"level\"), null, true)"
+        },
+        {
+          "line": 225,
+          "source": "val cards = root.getValue(\"cards\").jsonObject.mapValues { (_, element) ->"
+        },
+        {
+          "line": 227,
+          "source": "val wire = SerializedCard(value.text(\"due\"), value.number(\"stability\"), value.number(\"difficulty\"),"
+        },
+        {
+          "line": 228,
+          "source": "value.integer(\"elapsed_days\"), value.integer(\"scheduled_days\"), value.integer(\"reps\"),"
+        },
+        {
+          "line": 229,
+          "source": "value.integer(\"lapses\"), value.integer(\"learning_steps\"), value.integer(\"state\"),"
+        },
+        {
+          "line": 230,
           "source": "value[\"last_review\"]?.jsonPrimitive?.content?.takeUnless { it == \"null\" })"
         },
         {
-          "line": 234,
+          "line": 241,
           "source": "put(\"version\", 1)"
         },
         {
-          "line": 235,
+          "line": 242,
           "source": "put(\"pair\", packRegistry.active.pairId)"
         },
         {
-          "line": 236,
-          "source": "put(\"selectedIds\", buildJsonArray { document.selectedIds.forEach { add(JsonPrimitive(it)) } })"
+          "line": 243,
+          "source": "put(\"selectedIds\", buildJsonArray { normalized.selectedIds.forEach { add(JsonPrimitive(it)) } })"
         },
         {
-          "line": 237,
-          "source": "put(\"custom\", buildJsonArray { document.custom.forEach { item -> add(buildJsonObject {"
-        },
-        {
-          "line": 238,
-          "source": "put(\"id\", item.id); put(\"lemma\", item.lemma); put(\"translation\", item.translation)"
-        },
-        {
-          "line": 239,
-          "source": "put(\"form\", item.form); put(\"example\", item.example); put(\"level\", item.level)"
-        },
-        {
-          "line": 240,
-          "source": "put(\"frequencyRank\", JsonPrimitive(null as String?)); put(\"custom\", true)"
-        },
-        {
-          "line": 242,
-          "source": "put(\"cards\", buildJsonObject { document.cards.forEach { (key, card) ->"
+          "line": 244,
+          "source": "put(\"custom\", buildJsonArray { normalized.custom.forEach { item -> add(buildJsonObject {"
         },
         {
           "line": 245,
-          "source": "put(\"due\", wire.due); put(\"stability\", wire.stability); put(\"difficulty\", wire.difficulty)"
+          "source": "put(\"id\", item.id); put(\"lemma\", item.lemma); put(\"translation\", item.translation)"
         },
         {
           "line": 246,
-          "source": "put(\"elapsed_days\", wire.elapsedDays); put(\"scheduled_days\", wire.scheduledDays)"
+          "source": "put(\"form\", item.form); put(\"example\", item.example); put(\"level\", item.level)"
         },
         {
           "line": 247,
+          "source": "put(\"frequencyRank\", JsonPrimitive(null as String?)); put(\"custom\", true)"
+        },
+        {
+          "line": 249,
+          "source": "put(\"cards\", buildJsonObject { normalized.cards.forEach { (key, card) ->"
+        },
+        {
+          "line": 252,
+          "source": "put(\"due\", wire.due); put(\"stability\", wire.stability); put(\"difficulty\", wire.difficulty)"
+        },
+        {
+          "line": 253,
+          "source": "put(\"elapsed_days\", wire.elapsedDays); put(\"scheduled_days\", wire.scheduledDays)"
+        },
+        {
+          "line": 254,
           "source": "put(\"reps\", wire.reps); put(\"lapses\", wire.lapses); put(\"learning_steps\", wire.learningSteps)"
         },
         {
-          "line": 248,
+          "line": 255,
           "source": "put(\"state\", wire.state); wire.lastReview?.let { put(\"last_review\", it) }"
         }
       ]
@@ -13939,102 +13966,102 @@
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularySession.kt",
       "owner": "production source audit",
       "migrationStatus": "classified in inventory-decisions.json; review Evidence.md for acceptance",
-      "sha256": "a9f6762c7f3a32f2ec44f16809df3a348307705e817e498187209f68b896ab62",
+      "sha256": "844a32888c5d6f40219739b62595273d57235483c7cfed03705223758ff37f81",
       "literalLines": [
         {
-          "line": 29,
+          "line": 30,
           "source": "val filter: String = \"A1\","
         },
         {
-          "line": 33,
+          "line": 34,
           "source": "val draft: String = \"\","
         },
         {
-          "line": 55,
+          "line": 56,
           "source": "// EnRuAcceptance-2026-09-28.md §7 item 4: read once per start() so a fresh session's"
         },
         {
-          "line": 56,
+          "line": 57,
           "source": "// default (and the `currentId` picked for it) both name the pack really active right"
         },
         {
-          "line": 57,
+          "line": 58,
           "source": "// now, not pl-ru's `RussianToPolish` regardless of which pack that is."
         },
         {
-          "line": 70,
+          "line": 71,
           "source": "error = \"Словарь нужно восстановить: ${error.message}\","
         },
         {
-          "line": 77,
+          "line": 78,
           "source": "error = \"Не удалось открыть словарь: ${error.message}\")"
         },
         {
-          "line": 84,
+          "line": 85,
           "source": "direction = direction, currentId = nextId(current.document, direction), revealed = false, draft = \"\","
         },
         {
-          "line": 90,
+          "line": 91,
           "source": "require(filter in listOf(\"A1\", \"A2\", \"B1\", \"100\", \"500\", \"1000\", \"mine\"))"
         },
         {
-          "line": 128,
+          "line": 129,
           "source": "require(editingId == null || document.custom.any { it.id == editingId }) { \"Слово не найдено\" }"
         },
         {
-          "line": 132,
+          "line": 134,
           "source": "}) { \"Это польское слово уже есть в словаре\" }"
         },
         {
-          "line": 141,
+          "line": 143,
           "source": "require(document.custom.any { it.id == id }) { \"Слово не найдено\" }"
         },
         {
-          "line": 157,
+          "line": 159,
           "source": "require(raw.length <= 10_000_000) { \"Файл словаря слишком большой\" }"
         },
         {
-          "line": 158,
+          "line": 160,
           "source": "require(raw.encodeToByteArray().size <= 10_000_000) { \"Файл словаря слишком большой\" }"
         },
         {
-          "line": 168,
+          "line": 170,
           "source": "check(repository.loadRaw() == serialized) { \"Словарь не прошёл проверку записи\" }"
         },
         {
-          "line": 175,
+          "line": 177,
           "source": "mutableState.update { it.copy(error = error.message ?: \"Импорт не удался\") }"
         },
         {
-          "line": 182,
+          "line": 184,
           "source": "loadStatus = VocabularyLoadStatus.Unavailable, error = \"Не удалось проверить запись словаря\") }"
         },
         {
-          "line": 206,
+          "line": 208,
           "source": "check(repository.loadRaw() == serialized) { \"Словарь не прошёл проверку записи\" }"
         },
         {
-          "line": 213,
+          "line": 215,
           "source": "mutableState.update { it.copy(error = error.message ?: \"Не удалось сохранить словарь\") }"
         },
         {
-          "line": 220,
+          "line": 222,
           "source": "loadStatus = VocabularyLoadStatus.Unavailable, error = \"Не удалось проверить запись словаря\") }"
         },
         {
-          "line": 229,
+          "line": 231,
           "source": "draft = if (resetCard) \"\" else latest.draft, busy = false, error = null, recoveryRaw = null)"
         },
         {
-          "line": 240,
+          "line": 242,
           "source": "error = cause.message ?: \"Запись словаря не завершилась\") }"
         },
         {
-          "line": 247,
+          "line": 249,
           "source": "error = \"Состояние словаря изменилось во время записи. Экспортируйте JSON перед восстановлением.\") }"
         },
         {
-          "line": 254,
+          "line": 256,
           "source": "error = \"Не удалось проверить словарь после записи: ${readFailure.message}\") }"
         }
       ]
@@ -16599,246 +16626,246 @@
       "path": "kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidFlipCard.kt",
       "owner": "production source audit",
       "migrationStatus": "classified in inventory-decisions.json; review Evidence.md for acceptance",
-      "sha256": "03f45fe418a721a64a06709dffb9c2dc8d6730a33cafc90d8f0e8e25cbfc3f9a",
+      "sha256": "fe1e3d7df1f65196e6c59836c89a1a5dcee3ca99f60ad209f5643aa65ab7aed5",
       "literalLines": [
         {
-          "line": 54,
+          "line": 55,
           "source": "* [isFlipTap]/[AndroidFlipCard]) the vocabulary card's D2 whole-panel flip"
         },
         {
-          "line": 55,
+          "line": 56,
           "source": "* (`Plans/Kotlin/FlipCardRivePlan.md` §0/FC-07/FC-20/§16.0-B). D1 replaced the training card's 3D"
         },
         {
-          "line": 61,
+          "line": 62,
           "source": "* `androidApp/src/test` without a Compose test rule; see `AndroidFlipCardTest.kt`."
         },
         {
-          "line": 71,
+          "line": 69,
           "source": "/** How far towards a committed rating a live drag of [dx] px is, in `[-1, 1]` (D3: drives the tint/label growth). */"
         },
         {
-          "line": 75,
+          "line": 73,
           "source": "/** The card's slight tilt while dragged [dx] px, capped at [maxDegrees] (D3: \"translate + slight tilt\"). */"
         },
         {
-          "line": 79,
+          "line": 77,
           "source": "/** The Rive effect to play for [rating], or `null` when reduced motion or a measurement variant disables it (FC-16/20). */"
         },
         {
-          "line": 87,
+          "line": 85,
           "source": "* state, so `remember { SingleRatingGate() }` keeps one per card without pulling in a test rule."
         },
         {
-          "line": 92,
+          "line": 90,
           "source": "/** Rates once; returns the [CardEffect] to play, or `null` when already rated (or motion/measurement suppress it). */"
         },
         {
-          "line": 104,
+          "line": 102,
           "source": "* same \"short and mostly-still\" contract the pre-D1 training flip used for its own tap-vs-swipe"
         },
         {
-          "line": 113,
+          "line": 111,
           "source": "* lets the caller decide whether the final `(dx, dy)` commits a rating, flips a tap, or snaps back"
         },
         {
-          "line": 115,
+          "line": 113,
           "source": "* [androidx.compose.foundation.gestures.detectHorizontalDragGestures]'s own touch-slop"
         },
         {
-          "line": 118,
+          "line": 116,
           "source": "* vertical scroll still reaches the ancestor `verticalScroll` untouched (superseded the old,"
         },
         {
-          "line": 119,
+          "line": 117,
           "source": "* separate `detectSwipeRating`/`detectFlipOrSwipe`, which only reported the final release)."
         },
         {
-          "line": 140,
+          "line": 138,
           "source": "if (absDx < tapSlopPx && absDy < tapSlopPx) continue // still undecided; don't consume"
         },
         {
-          "line": 156,
+          "line": 154,
           "source": "* fires — mirroring the web host's own drag language (`FlipCardRivePlan.md` §17.3/UX4-08..10)."
         },
         {
-          "line": 158,
+          "line": 156,
           "source": "* No visible rating buttons on Android (D3: \"phones/tablets: no rating buttons\") — the two ratings"
         },
         {
-          "line": 160,
+          "line": 158,
           "source": "* users keep an always-available, equivalent way to rate without a drag (`compose-multiplatform-ui`"
         },
         {
-          "line": 161,
+          "line": 159,
           "source": "* skill: \"one accessible action per rating\"). [onTap] (vocabulary only) fires for a short,"
         },
         {
-          "line": 162,
+          "line": 160,
           "source": "* mostly-still release that isn't a rating commit; training has no tap action ([onTap] stays"
         },
         {
-          "line": 163,
+          "line": 161,
           "source": "* `null`, a swipe short of the threshold there just snaps back)."
         },
         {
-          "line": 209,
+          "line": 207,
           "source": "contentDescription = \"Оценка карточки\""
         },
         {
-          "line": 211,
+          "line": 209,
           "source": "CustomAccessibilityAction(\"Повторить\") { onRate(Rating.Again); true },"
         },
         {
-          "line": 212,
+          "line": 210,
           "source": "CustomAccessibilityAction(\"Вспомнил\") { onRate(Rating.Good); true },"
         },
         {
-          "line": 229,
+          "line": 227,
           "source": "* `Box`, no gesture of its own) and is hidden from TalkBack ([hideFromAccessibility]), since the"
         },
         {
-          "line": 230,
+          "line": 228,
           "source": "* surface's own [CustomAccessibilityAction]s already cover the same two ratings. Reuses the"
         },
         {
-          "line": 231,
+          "line": 229,
           "source": "* existing error/primary tokens the rest of the app already uses for \"before\"/\"after\" contrast,"
         },
         {
-          "line": 232,
+          "line": 230,
           "source": "* not a new palette (`compose-multiplatform-ui` skill: \"a restrained semantic palette\")."
         },
         {
-          "line": 249,
+          "line": 247,
           "source": "val (label, weight) = if (again >= good) \"Повторить\" to again else \"Вспомнил\" to good"
         },
         {
-          "line": 266,
+          "line": 264,
           "source": "* Lets [AndroidSwipeHint] play its wiggle at most once per instance — one gate `remember`ed at the"
         },
         {
-          "line": 268,
+          "line": 266,
           "source": "* later card that screen shows does not (A4, `EmphasisUXAudit-2026-09-27.md` U2)."
         },
         {
-          "line": 273,
+          "line": 271,
           "source": "/** `true` the first time this is called; `false` on every call after. */"
         },
         {
-          "line": 282,
+          "line": 280,
           "source": "* Persistent, arrow-marked swipe-rating hint for the revealed card (A4, `EmphasisUXAudit-2026-09-27.md`"
         },
         {
-          "line": 284,
+          "line": 282,
           "source": "* for sighted users without adding any — [AndroidRatingDragSurface]'s TalkBack"
         },
         {
-          "line": 286,
+          "line": 284,
           "source": "* first instance of a fresh [nudgeGate] (and only while [reduceMotion] is `false` — the \"Анимации\""
         },
         {
-          "line": 303,
+          "line": 301,
           "source": "Text(\"←\", style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.error)"
         },
         {
-          "line": 304,
+          "line": 302,
           "source": "Text(\"Повторить · Вспомнил\", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)"
         },
         {
-          "line": 305,
+          "line": 303,
           "source": "Text(\"→\", style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.primary)"
         },
         {
-          "line": 310,
+          "line": 308,
           "source": "* D1: the training card's answer panel — expands downward below the always-visible question the"
         },
         {
-          "line": 312,
+          "line": 310,
           "source": "* becomes `Revealed`, so its first composition IS the reveal moment). [MutableTransitionState]"
         },
         {
-          "line": 313,
+          "line": 311,
           "source": "* starts at `false` while immediately targeting `true`: the standard idiom for playing an enter"
         },
         {
-          "line": 314,
+          "line": 312,
           "source": "* transition on a composable's very first appearance — passing a plain `visible = true` from frame"
         },
         {
-          "line": 315,
+          "line": 313,
           "source": "* one would have nothing to transition from and would just snap. `reduceMotion` skips the"
         },
         {
-          "line": 318,
+          "line": 316,
           "source": "* caller's [SingleRatingGate] with [AndroidRatingDragSurface] (FC-07/20)."
         },
         {
-          "line": 349,
+          "line": 347,
           "source": "* \"answer, explanation, rating panel unfold... with short stagger\", so [index] 0/1/2 space those"
         },
         {
-          "line": 350,
+          "line": 348,
           "source": "* three groups ~70ms apart. `reduceMotion` renders [content] directly, matching"
         },
         {
-          "line": 351,
+          "line": 349,
           "source": "* [AndroidAnswerReveal]'s own snap."
         },
         {
-          "line": 369,
+          "line": 367,
           "source": "* D2 whole-panel flip for the vocabulary card (`FlipCardRivePlan.md` §16.0-B): [front]/[back] are"
         },
         {
-          "line": 372,
+          "line": 370,
           "source": "* the web host's v4 pass already applied, §17.1). Reuses the exact `rotationY`/`cameraDistance`/"
         },
         {
-          "line": 373,
+          "line": 371,
           "source": "* [Animatable] pattern the training card's own pre-D1 flip used (git `af126a6`/`b22e758`), keyed by"
         },
         {
-          "line": 376,
+          "line": 374,
           "source": "* re-reveals, never re-rates — [onRate] is still gated by the caller's own [SingleRatingGate])."
         },
         {
-          "line": 380,
+          "line": 378,
           "source": "* [front] receives this card's own local flip toggle as its lambda parameter, for a tap that lands"
         },
         {
-          "line": 381,
+          "line": 379,
           "source": "* while [revealed] is already `true`: the caller's reveal control still calls its own \"reveal\""
         },
         {
-          "line": 383,
+          "line": 381,
           "source": "* true), but session-style state that is already `true` re-writes the same value, a `StateFlow`"
         },
         {
-          "line": 385,
+          "line": 383,
           "source": "* (`main @ 25c378c` regression 2, `PostMergeTest-2026-09-27.md`). The caller invokes the parameter"
         },
         {
-          "line": 389,
+          "line": 387,
           "source": "* Gesture/drag ([AndroidRatingDragSurface]) attaches only once `showingBack` (angle past 90°), not"
         },
         {
-          "line": 390,
+          "line": 388,
           "source": "* the instant [revealed] turns true: `revealed` flips true the moment the flip *starts*, but"
         },
         {
-          "line": 391,
+          "line": 389,
           "source": "* `front()` (with its own always-on tap-to-reveal control) keeps rendering and receiving touch for"
         },
         {
-          "line": 392,
+          "line": 390,
           "source": "* the ~250ms `tween(500)` takes to cross 90°. Attaching the drag surface any earlier let a swipe"
         },
         {
-          "line": 394,
+          "line": 392,
           "source": "* a double-tap in that window race `front`'s reveal against this gesture's `toggleFlip`, reversing"
         },
         {
-          "line": 395,
+          "line": 393,
           "source": "* the in-flight animation (`Plans/Kotlin/Lane-android.md`'s \"gate on `showingBack`\" correction)."
         }
       ]
@@ -20387,210 +20414,210 @@
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/WebSwipeRating.kt",
       "owner": "production source audit",
       "migrationStatus": "classified in inventory-decisions.json; review Evidence.md for acceptance",
-      "sha256": "239a114aaadcd9c6cb31781d379ee52ca70e4a572fef0ea6d75240cd695f83ee",
+      "sha256": "042aa247fd094330860b1afc869660338232229c39aa93a3538e87b4f0a25f2a",
       "literalLines": [
         {
-          "line": 11,
+          "line": 13,
           "source": "private const val SWIPE_EASING = \"cubic-bezier(.16,1,.3,1)\""
         },
         {
-          "line": 17,
+          "line": 19,
           "source": "* the finger and receives the live `--swipe-progress` custom property (`-1`..`1`, read by"
         },
         {
-          "line": 18,
+          "line": 20,
           "source": "* `training.css`'s tint/label rules, and inherited down to it from [zone] if they differ)."
         },
         {
-          "line": 24,
+          "line": 26,
           "source": "* unaffected, but a CSS `transform` moves what's actually under the pointer for hit-testing too)."
         },
         {
-          "line": 26,
+          "line": 28,
           "source": "* resting footprint as the face (training's `.card-answer-wrap`, vocabulary's `.card-flip`) as"
         },
         {
-          "line": 29,
+          "line": 31,
           "source": "* [baseTransform] (e.g. `\"rotateY(180deg)\"` for the vocabulary card's back face) is preserved"
         },
         {
-          "line": 31,
+          "line": 33,
           "source": "* own static `transform` for an unrelated reason (there, undoing the flip's mirroring) never has"
         },
         {
-          "line": 36,
+          "line": 38,
           "source": "* button's click (see `editableTarget`, and the `closest()`-based fix recorded in"
         },
         {
-          "line": 37,
+          "line": 39,
           "source": "* FlipCardRivePlan.md §8's deviations for why `event.target`, not just `activeElement`, must be"
         },
         {
-          "line": 39,
+          "line": 41,
           "source": "* transition as a committed swipe's fly-out, never rating."
         },
         {
-          "line": 42,
+          "line": 44,
           "source": "internal fun installSwipeCard(zone: HTMLElement, faceForTransform: HTMLElement, baseTransform: String = \"\", onRating: (remembered: Boolean) -> Unit) {"
         },
         {
-          "line": 46,
+          "line": 48,
           "source": "fun withBase(transform: String) = if (baseTransform.isEmpty()) transform else \"$baseTransform $transform\""
         },
         {
-          "line": 48,
+          "line": 50,
           "source": "fun setProgress(value: Double) { faceForTransform.style.setProperty(\"--swipe-progress\", value.toString()) }"
         },
         {
-          "line": 49,
+          "line": 51,
           "source": "// P1-6: a horizontal drag otherwise selects the card's own text like any other mouse drag —"
         },
         {
-          "line": 50,
+          "line": 52,
           "source": "// suppressed on `zone` (not `faceForTransform`; the selection a fast drag already started can"
         },
         {
-          "line": 51,
+          "line": 53,
           "source": "// span outside the moving face) for exactly the gesture's duration, and any range already"
         },
         {
-          "line": 54,
+          "line": 56,
           "source": "faceForTransform.style.removeProperty(\"transition\")"
         },
         {
-          "line": 55,
+          "line": 57,
           "source": "faceForTransform.style.removeProperty(\"transform\")"
         },
         {
-          "line": 56,
+          "line": 58,
           "source": "faceForTransform.style.removeProperty(\"opacity\")"
         },
         {
-          "line": 57,
+          "line": 59,
           "source": "faceForTransform.style.removeProperty(\"--swipe-progress\")"
         },
         {
-          "line": 58,
+          "line": 60,
           "source": "zone.style.removeProperty(\"user-select\")"
         },
         {
-          "line": 64,
+          "line": 66,
           "source": "faceForTransform.style.setProperty(\"transition\", \"transform ${SWIPE_COMMIT_TRANSITION_MS}ms $SWIPE_EASING\")"
         },
         {
-          "line": 65,
+          "line": 67,
           "source": "faceForTransform.style.setProperty(\"transform\", withBase(\"translateX(0) rotate(0deg)\"))"
         },
         {
-          "line": 73,
+          "line": 75,
           "source": "faceForTransform.style.setProperty(\"transition\", \"transform ${SWIPE_COMMIT_TRANSITION_MS}ms $SWIPE_EASING, opacity ${SWIPE_COMMIT_TRANSITION_MS}ms $SWIPE_EASING\")"
         },
         {
-          "line": 74,
+          "line": 76,
           "source": "faceForTransform.style.setProperty(\"transform\", withBase(\"translateX(${sign * 140}%) rotate(${sign * 14}deg)\"))"
         },
         {
-          "line": 75,
+          "line": 77,
           "source": "faceForTransform.style.setProperty(\"opacity\", \"0\")"
         },
         {
-          "line": 79,
+          "line": 81,
           "source": "zone.addEventListener(\"pointerdown\", { raw ->"
         },
         {
-          "line": 80,
+          "line": 82,
           "source": "// Capturing the pointer here would redirect its later click/pointerup to `zone` too, which"
         },
         {
-          "line": 95,
+          "line": 97,
           "source": "zone.addEventListener(\"pointermove\", { raw ->"
         },
         {
-          "line": 102,
+          "line": 104,
           "source": "// dominant drag \"sticks\" to this gesture (tinting/translating the face) even if it briefly"
         },
         {
-          "line": 107,
+          "line": 109,
           "source": "zone.style.setProperty(\"user-select\", \"none\")"
         },
         {
-          "line": 112,
+          "line": 114,
           "source": "faceForTransform.style.setProperty(\"transition\", \"none\")"
         },
         {
-          "line": 113,
+          "line": 115,
           "source": "faceForTransform.style.setProperty(\"transform\", withBase(\"translateX(${dx}px) rotate(${rotate}deg)\"))"
         },
         {
-          "line": 116,
+          "line": 118,
           "source": "zone.addEventListener(\"pointerup\", { raw ->"
         },
         {
-          "line": 126,
+          "line": 128,
           "source": "// `wasHorizontal` covers a real drag (locked in by a pointermove partway through, see"
         },
         {
-          "line": 127,
+          "line": 129,
           "source": "// above); `horizontalDominant` alone covers a same-tick down→up pair with no intermediate"
         },
         {
-          "line": 129,
+          "line": 131,
           "source": "// one could ever arrive. Neither means \"never moved\" (a tap) or \"stayed vertical/diagonal\"."
         },
         {
-          "line": 133,
-          "source": "zone.addEventListener(\"pointercancel\", { start = null; if (horizontal) settle(false, 0); horizontal = false })"
+          "line": 136,
+          "source": "zone.addEventListener(\"pointercancel\", { start = null; if (horizontal) settle(null); horizontal = false })"
         },
         {
-          "line": 134,
-          "source": "zone.addEventListener(\"lostpointercapture\", { start = null; if (horizontal) settle(false, 0); horizontal = false })"
+          "line": 137,
+          "source": "zone.addEventListener(\"lostpointercapture\", { start = null; if (horizontal) settle(null); horizontal = false })"
         },
         {
-          "line": 138,
+          "line": 141,
           "source": "* UX4-10: the two direction labels (\"Повторить\"/\"Вспомнил\") that grow with drag distance,"
         },
         {
-          "line": 139,
+          "line": 142,
           "source": "* decorative and driven purely by CSS reading the `--swipe-progress` custom property"
         },
         {
-          "line": 144,
+          "line": 147,
           "source": "listOf(\"again\" to \"Повторить\", \"good\" to \"Вспомнил\").forEach { (kind, label) ->"
         },
         {
-          "line": 145,
+          "line": 148,
           "source": "val span = document.createElement(\"span\") as HTMLElement"
         },
         {
-          "line": 146,
+          "line": 149,
           "source": "span.className = \"swipe-label swipe-label-$kind\""
         },
         {
-          "line": 148,
+          "line": 151,
           "source": "span.setAttribute(\"aria-hidden\", \"true\")"
         },
         {
-          "line": 156,
+          "line": 159,
           "source": "* training card's click-to-reveal question and the vocabulary card's click-to-flip (`FlipCard`)"
         },
         {
-          "line": 162,
+          "line": 165,
           "source": "target.addEventListener(\"pointerdown\", { raw ->"
         },
         {
-          "line": 170,
+          "line": 173,
           "source": "// gesture is unambiguously a drag, using the same 10px threshold `pointerup` checks below."
         },
         {
-          "line": 171,
+          "line": 174,
           "source": "target.addEventListener(\"pointermove\", { raw ->"
         },
         {
-          "line": 177,
+          "line": 180,
           "source": "target.addEventListener(\"pointerup\", { raw ->"
         },
         {
-          "line": 186,
+          "line": 189,
           "source": "target.addEventListener(\"pointercancel\", { start = null })"
         }
       ]
@@ -22359,134 +22386,134 @@
       "path": "kotlin/iosApp/PolskiGrammar/SwipeToRate.swift",
       "owner": "production source audit",
       "migrationStatus": "classified in inventory-decisions.json; review Evidence.md for acceptance",
-      "sha256": "4de357daa922c67437f666c8dfa926a4c78f5a94c0eecfdd2a15922eca588260",
+      "sha256": "695a740ce112be1148b90d22f05b36c0118032b00ecab7d8e1ff51d4f64125dc",
       "literalLines": [
         {
-          "line": 3,
+          "line": 4,
           "source": "/// D3's whole-card swipe-to-rate affordance (`Plans/Kotlin/FlipCardRivePlan.md`), shared by"
         },
         {
-          "line": 4,
+          "line": 5,
           "source": "/// `FlashCardView`'s answer panel and `VocabularyCardView`'s answer face: the WHOLE card (whatever"
         },
         {
-          "line": 5,
+          "line": 6,
           "source": "/// [Content] is — training's answer panel has no background of its own; vocabulary's is the"
         },
         {
-          "line": 8,
+          "line": 9,
           "source": "/// screen on commit, mirroring the web host's own `installSwipeCard`/`appendSwipeLabels`"
         },
         {
-          "line": 9,
+          "line": 10,
           "source": "/// (`WebSwipeRating.kt`, read, not edited): same ~80pt threshold, same \"horizontal-dominant sticks,"
         },
         {
-          "line": 10,
+          "line": 11,
           "source": "/// vertical/diagonal never moves the card\" gesture split (so it never fights the enclosing Form's"
         },
         {
-          "line": 11,
+          "line": 12,
           "source": "/// scroll — `.simultaneousGesture`, not `.gesture`), and the fly-out finishes **before** [onRate]"
         },
         {
-          "line": 12,
+          "line": 13,
           "source": "/// actually dispatches the rating, exactly like the web host's own commit-then-settle order."
         },
         {
-          "line": 14,
+          "line": 15,
           "source": "/// Touch has no rating buttons any more (D3: \"Phones/tablets (touch): no rating buttons\") — this"
         },
         {
-          "line": 15,
+          "line": 16,
           "source": "/// gesture is the only way to rate on iPhone/iPad. Each call site puts the `ratingSwipeArea`"
         },
         {
-          "line": 16,
+          "line": 17,
           "source": "/// accessibility identifier explicitly on its own long hint text (`FlashCardView`'s \"Свайп влево…\""
         },
         {
-          "line": 17,
+          "line": 18,
           "source": "/// footnote, `VocabularyCardView`'s own copy), never here on the shared, multi-child [content]:"
         },
         {
-          "line": 19,
+          "line": 20,
           "source": "/// one of them a plain, unidentified `Text`), and an XCUITest query's `firstMatch` could then"
         },
         {
-          "line": 21,
+          "line": 22,
           "source": "/// frame, not the whole card's, is what a synthesized `swipeLeft()`/`swipeRight()` would then swipe"
         },
         {
-          "line": 26,
+          "line": 27,
           "source": "/// once, from `DragGesture`'s own `onEnded`, guarded by `flying` against a second gesture"
         },
         {
-          "line": 27,
+          "line": 28,
           "source": "/// overlapping the fly-out's brief window; the real reset happens for free because both call sites"
         },
         {
-          "line": 28,
+          "line": 29,
           "source": "/// only ever mount this face while its card is actually up (`FlashCardView`'s `if revealed`,"
         },
         {
-          "line": 29,
+          "line": 30,
           "source": "/// `VocabularyCardView`'s `if showBack`), so a stale in-flight drag can never survive onto the next"
         },
         {
-          "line": 30,
+          "line": 31,
           "source": "/// card — a fresh `SwipeToRate` instance, with fresh `@State`, mounts for it."
         },
         {
-          "line": 32,
+          "line": 33,
           "source": "/// False makes every gesture on this face snap back, never commit — `VocabularyCardView` passes"
         },
         {
-          "line": 33,
+          "line": 34,
           "source": "/// `showBack` here (this modifier sits on the shared container both faces render through, so a"
         },
         {
-          "line": 34,
+          "line": 35,
           "source": "/// drag started on the still-showing question face must never rate); `FlashCardView` always"
         },
         {
-          "line": 35,
+          "line": 36,
           "source": "/// passes `true` since its own call site only exists while the card is already revealed."
         },
         {
-          "line": 38,
+          "line": 39,
           "source": "/// The tint/label's corner radius — vocabulary's whole rounded panel (`cornerRadius: 20`,"
         },
         {
-          "line": 39,
+          "line": 40,
           "source": "/// matching its own background shape) vs. training's plain, background-less answer panel"
         },
         {
-          "line": 40,
+          "line": 41,
           "source": "/// (`cornerRadius: 16`, matching its own \"ЗАПОМНИ\" callout's radius for visual consistency)."
         },
         {
-          "line": 61,
+          "line": 62,
           "source": ".overlay(swipeLabel(\"Повторить\", active: translation < 0))"
         },
         {
-          "line": 62,
+          "line": 63,
           "source": ".overlay(swipeLabel(\"Вспомнил\", active: translation > 0))"
         },
         {
-          "line": 68,
+          "line": 69,
           "source": "// 18, matching the pre-D3 rating drag this replaces: `.simultaneousGesture`"
         },
         {
-          "line": 69,
+          "line": 70,
           "source": "// already keeps this from blocking the enclosing Form's own scroll gesture, but a"
         },
         {
-          "line": 71,
+          "line": 72,
           "source": "// measurably ate into that same scroll's effective distance per swipe in a"
         },
         {
-          "line": 125,
+          "line": 127,
           "source": "/// See [SwipeToRate]'s own doc comment for the full contract."
         }
       ]

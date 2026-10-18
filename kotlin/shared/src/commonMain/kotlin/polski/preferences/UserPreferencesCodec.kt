@@ -1,5 +1,8 @@
 package polski.preferences
 
+import polski.textwire.PolskiTextCodec
+import polski.textwire.WireNode
+
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonElement
@@ -34,6 +37,14 @@ object UserPreferencesCodec {
      * v4); null for any missing/malformed document, same as "leave the default pack active".
      */
     fun peekTargetNative(raw: String): Pair<String, String>? {
+        // NJ03: POLSKI-TEXT peek via WireNode, legacy JSON fallback.
+        if (raw.startsWith("POLSKI-TEXT")) {
+            val result = PolskiTextCodec.decode(raw.encodeToByteArray())
+            if (result !is polski.textwire.DecodeResult.Ok || result.kind != "preferences") return null
+            val pair = (result.root.get("coursePair") as? WireNode.WireString)?.value ?: return null
+            val parts = pair.split("-", limit = 2)
+            return if (parts.size == 2) parts[0] to parts[1] else null
+        }
         val root = try { json.parseToJsonElement(raw) as? JsonObject } catch (_: Exception) { null } ?: return null
         val version = root.number("schemaVersion") ?: return null
         return if (version <= 3) {
@@ -48,6 +59,8 @@ object UserPreferencesCodec {
     }
 
     fun decode(raw: String): PreferencesDecode {
+        // NJ03: try text wire first, fall back to legacy JSON (v1-v4).
+        if (raw.startsWith("POLSKI-TEXT")) return decodeText(raw)
         val root = try { json.parseToJsonElement(raw) as? JsonObject }
         catch (_: Exception) { null } ?: return invalid(raw, "Expected preferences object")
         val version = root.number("schemaVersion") ?: return invalid(raw, "Invalid schemaVersion")
@@ -92,32 +105,69 @@ object UserPreferencesCodec {
         return PreferencesDecode.Loaded(UserPreferencesV2(3, target, native, style, answer, appearance, motion, swipe, reminder, tint, animations))
     }
 
-    fun encode(value: UserPreferencesV2): String {
-        // EN-22: a real course switch persists the pair the user is switching *to*, before
-        // packRegistry.active catches up (Android: next cold start; iOS: live select) — so encode
-        // only requires a registered pack, the same check decode uses, never the active one.
+    /** NJ03 C6: text wire encoder. */
+    private fun decodeText(raw: String): PreferencesDecode {
+        val result = PolskiTextCodec.decode(raw.encodeToByteArray())
+        if (result !is polski.textwire.DecodeResult.Ok) return invalid(raw, "Invalid POLSKI-TEXT")
+        if (result.kind != "preferences") return invalid(raw, "Wrong domain: ${result.kind}")
+        val root = result.root
+        val defaults = UserPreferencesV2()
+        val coursePair = (root.get("coursePair") as? WireNode.WireString)?.value ?: return invalid(raw, "Missing coursePair")
+        val parts = coursePair.split("-", limit = 2)
+        if (parts.size != 2) return invalid(raw, "Invalid coursePair")
+        val (target, native) = parts
+        if (!packRegistry.contains(coursePair)) return invalid(raw, "Unsupported course")
+        fun str(key: String): String? = (root.get(key) as? WireNode.WireString)?.value
+        fun bool(key: String, default: Boolean): Boolean = (root.get(key) as? WireNode.WireBool)?.value ?: default
+        fun long(key: String, default: Long): Long = (root.get(key) as? WireNode.WireI64)?.value ?: default
+        val style = str("styleId")?.let { runCatching { PreferredStyle.valueOf(it) }.getOrNull() } ?: return invalid(raw, "Invalid styleId")
+        val answer = str("answerMode")?.let { runCatching { PreferredAnswerMode.valueOf(it) }.getOrNull() } ?: return invalid(raw, "Invalid answerMode")
+        val appearance = str("appearance")?.let { runCatching { Appearance.valueOf(it) }.getOrNull() } ?: return invalid(raw, "Invalid appearance")
+        val motion = str("motion")?.let { runCatching { Motion.valueOf(it) }.getOrNull() } ?: return invalid(raw, "Invalid motion")
+        val swipe = bool("swipeRatingEnabled", defaults.swipeRatingEnabled)
+        val tint = long("glassTintPercent", defaults.glassTintPercent.toLong()).toInt()
+        if (tint !in 0..100) return invalid(raw, "Invalid glassTintPercent")
+        val animations = bool("animationsEnabled", defaults.animationsEnabled)
+        val reminderNode = root.get("reminder") as? WireNode.WireMap
+        val reminder = if (reminderNode != null) {
+            val enabled = (reminderNode.get("enabled") as? WireNode.WireBool)?.value ?: defaults.reminder.enabled
+            val localTime = (reminderNode.get("localTime") as? WireNode.WireString)?.value ?: defaults.reminder.localTime
+            val days = (reminderNode.get("days") as? WireNode.WireList)?.items?.mapNotNull { (it as? WireNode.WireI64)?.value?.toInt() } ?: defaults.reminder.days
+            val qStart = (reminderNode.get("quietStart") as? WireNode.WireString)?.value ?: defaults.reminder.quietStart
+            val qEnd = (reminderNode.get("quietEnd") as? WireNode.WireString)?.value ?: defaults.reminder.quietEnd
+            ReminderPreferences(enabled, localTime, days, qStart, qEnd)
+        } else defaults.reminder
+        if (!validReminder(reminder)) return invalid(raw, "Invalid reminder")
+        return PreferencesDecode.Loaded(UserPreferencesV2(3, target, native, style, answer, appearance, motion, swipe, reminder, tint, animations))
+    }
+
+    fun encodeText(value: UserPreferencesV2): ByteArray {
         require(value.schemaVersion == 3 && packRegistry.contains("${value.target}-${value.native}") && validReminder(value.reminder) && value.glassTintPercent in 0..100)
         val reminder = value.reminder
-        val root = JsonObject(mapOf(
-            "schemaVersion" to JsonPrimitive(3),
-            "coursePair" to JsonPrimitive("${value.target}-${value.native}"),
-            "styleId" to JsonPrimitive(value.styleId.name),
-            "answerMode" to JsonPrimitive(value.answerMode.name),
-            "appearance" to JsonPrimitive(value.appearance.name),
-            "motion" to JsonPrimitive(value.motion.name),
-            "swipeRatingEnabled" to JsonPrimitive(value.swipeRatingEnabled),
-            "glassTintPercent" to JsonPrimitive(value.glassTintPercent),
-            "animationsEnabled" to JsonPrimitive(value.animationsEnabled),
-            "reminder" to JsonObject(mapOf(
-                "enabled" to JsonPrimitive(reminder.enabled),
-                "localTime" to JsonPrimitive(reminder.localTime),
-                "days" to JsonArray(reminder.days.map(::JsonPrimitive)),
-                "quietStart" to JsonPrimitive(reminder.quietStart),
-                "quietEnd" to JsonPrimitive(reminder.quietEnd),
-            )),
+        val reminderNode = WireNode.WireMap(listOf(
+            "enabled" to WireNode.WireBool(reminder.enabled),
+            "localTime" to WireNode.WireString(reminder.localTime),
+            "days" to WireNode.WireList(reminder.days.map { WireNode.WireI64(it.toLong()) }),
+            "quietStart" to WireNode.WireString(reminder.quietStart),
+            "quietEnd" to WireNode.WireString(reminder.quietEnd),
         ))
-        return json.encodeToString(JsonElement.serializer(), root)
+        val root = WireNode.WireMap(listOf(
+            "schemaVersion" to WireNode.WireI64(3),
+            "coursePair" to WireNode.WireString("${value.target}-${value.native}"),
+            "styleId" to WireNode.WireString(value.styleId.name),
+            "answerMode" to WireNode.WireString(value.answerMode.name),
+            "appearance" to WireNode.WireString(value.appearance.name),
+            "motion" to WireNode.WireString(value.motion.name),
+            "swipeRatingEnabled" to WireNode.WireBool(value.swipeRatingEnabled),
+            "glassTintPercent" to WireNode.WireI64(value.glassTintPercent.toLong()),
+            "animationsEnabled" to WireNode.WireBool(value.animationsEnabled),
+            "reminder" to reminderNode,
+        ))
+        return PolskiTextCodec.encode(root, "preferences", 3).bytes
     }
+
+    /** NJ03 P11: encode delegates to text wire. All callers get POLSKI-TEXT format. */
+    fun encode(value: UserPreferencesV2): String = encodeText(value).decodeToString()
 
     private fun decodeReminder(root: JsonObject): ReminderPreferences? {
         if (root.keys.any { it !in reminderFields }) return null

@@ -1,0 +1,122 @@
+# NJ02 registry acceptance cases — independent semantic expectations
+# Authority: NJ02RegistryIndependentCases.md, product 16060a72554d82849128a56c0960f847476f6b79
+# Status: OLD facts frozen. New text surface/coordinates NOT FROZEN. New-arm cases NOT RUN.
+# These are test requirements, not candidate DSL syntax or generated-output fixtures.
+
+GROUP POSITIVE OLD FACTS
+
+CASE R0a ordered constructions
+  INPUT checked-in core constructions at pinned SHA
+  EXPECT exactly seven IDs in ledger order, with exactly the listed axis and bilingual description values
+  EXPECT core.agreement.possessive.axis and core.composite.axis are explicit Null
+  EXPECT core.composite.composesOf is a present empty List
+  EXPECT composesOf is Absent for each of the other six constructions
+  STATUS old fact observed; candidate execution NOT RUN
+
+CASE R0b ordered features
+  INPUT checked-in core features at pinned SHA
+  EXPECT exactly seven keys in ledger order and every values list in ledger order
+  EXPECT each gloss retains its exact ru/en text, including Cyrillic punctuation
+  EXPECT Person values are Text "1", "2", "3"
+  STATUS old fact observed; candidate execution NOT RUN
+
+CASE R0c accepted schema distinctions
+  INPUT one independent registry variant per allowed state
+  EXPECT axis: Absent, Text, and explicit Null are distinct accepted states
+  EXPECT composesOf: Absent and present List([]) are distinct accepted states
+  EXPECT description.en: Absent is accepted; description.ru: Absent is rejected
+  EXPECT gloss: Absent, empty Record({}), and one-language Record are accepted
+  EXPECT feature values: nonempty List<Text> with unique nonempty entries
+  STATUS schema-derived expectations; candidate execution NOT RUN
+
+GROUP EXISTING VALIDATOR PARITY
+# OLD means supported by pinned schema/validator. It does not mean every mutation was run.
+# No old token coordinate is claimed: the JSON validator reports schema/curriculum paths.
+
+CASE R2b duplicate value within one feature values list
+  MUTATE Case.values by adding a second "Nom" while retaining the first
+  EXPECT reject via core-features schema uniqueItems; never silently deduplicate
+  EXPECT new authoring diagnostic locates duplicate value and, where available, first occurrence
+  OLD basis core-features schema uniqueItems; new-arm execution NOT RUN
+
+CASE R5 unresolved curriculum construction
+  MUTATE one curriculum construction from core.argument.case-role to core.does-not-exist
+  EXPECT reject unknown construction against the seven-ID registry
+  OLD basis checkConstructionsResolve; existing pack test mutates pl first skill
+  EXPECT new source diagnostic locates the offending curriculum reference when that source is ported
+  STATUS candidate execution NOT RUN
+
+CASE R6a unresolved curriculum feature key
+  MUTATE one focus.feature from Case to AbsentFeature; separately mutate a fixed key likewise
+  EXPECT each rejected as a feature absent from the core registry
+  OLD basis checkFeaturesResolve; candidate execution NOT RUN
+
+CASE R6b unresolved curriculum feature value
+  MUTATE one focus.from, one focus.to, and one fixed value to Impossible in separate inputs
+  EXPECT each rejected as undeclared for its existing feature
+  OLD basis checkFeaturesResolve; candidate execution NOT RUN
+
+CASE R7 feature not enabled by language
+  MUTATE a language usesFeatures to omit a feature used by its curriculum while retaining that core feature
+  EXPECT reject used feature absent from lang/<code>/lang.json usesFeatures
+  OLD basis checkFeaturesResolve; candidate execution NOT RUN
+
+CASE R8a malformed nested description
+  MUTATE one construction description to omit ru; separately set ru to empty text, a number, or a list
+  EXPECT each rejected by core-constructions schema at the nested description
+  EXPECT omitted en accepted; present empty en rejected
+  OLD basis required/type/minLength; candidate execution NOT RUN
+
+CASE R8b malformed nested gloss and feature values
+  MUTATE one gloss.ru or gloss.en to empty text or a number in separate inputs
+  MUTATE one values item to empty text or a number; separately make values empty
+  EXPECT each rejected by core-features schema at the nested gloss/value or list
+  EXPECT omitted gloss, empty gloss record, and omitted one language member accepted
+  OLD basis type/minLength/minItems; candidate execution NOT RUN
+
+CASE R8c construction optional types
+  MUTATE one axis to a number; separately mutate one composesOf item to a number
+  EXPECT each rejected by core-constructions schema
+  EXPECT axis Null and composesOf List([]) remain accepted
+  OLD basis type constraints; candidate execution NOT RUN
+
+GROUP NEW AUTHORING PROFILE AND PIPELINE
+# NEW cases apply equally to A/B/C. They are not old JSON validator parity.
+
+CASE R1 duplicate construction source key
+  MUTATE new authored source to declare core.number twice
+  EXPECT reject duplicate ID; diagnostic identifies second declaration and both origins
+  REASON JSON.parse collapses duplicate object keys before old schema/checks
+  STATUS proposed independently; source coordinates NOT FROZEN; NOT RUN
+
+CASE R2a duplicate feature source key
+  MUTATE new authored source to declare Case twice
+  EXPECT reject duplicate key; diagnostic identifies second declaration and both origins
+  REASON JSON.parse collapses duplicate object keys before old schema/checks
+  STATUS proposed independently; source coordinates NOT FROZEN; NOT RUN
+
+CASE R9a stale source
+  AFTER clean candidate generation mutate one authored registry fact only
+  EXPECT candidate freshness check fails for dependent outputs before accepted build
+  STATUS proposed independently; artifact identity/command NOT FROZEN; NOT RUN
+
+CASE R9b stale binding
+  AFTER clean candidate generation mutate a fact binding/read plan only
+  EXPECT candidate contract/freshness check fails, with no stale accepted output
+  STATUS proposed independently; artifact identity/command NOT FROZEN; NOT RUN
+
+CASE R9c stale output
+  AFTER clean candidate generation mutate generated typed output only
+  EXPECT that output's own freshness check fails
+  STATUS proposed independently; artifact identity/command NOT FROZEN; NOT RUN
+
+EXCLUDED FROM ACCEPTED OLD PARITY
+  R3 unknown axis: schema permits arbitrary Text; validator does not resolve axis.
+  R4 absent/wrong-kind composesOf target or cycle: schema permits Text items; validator does not resolve or traverse them.
+  These need a separately accepted owner requirement and independent oracle before becoming comparison cases.
+
+SOURCE COORDINATE FREEZE RULE
+  For each arm, first pin the concrete new source file and hash. Then author each mutation above,
+  record exact file/line/column of the offending token and both origins for duplicate keys,
+  and commit that expectation before running the new implementation. Until then: NOT FROZEN.
+  Never read the compiler's observed location to fill an expected coordinate.

@@ -1,0 +1,190 @@
+# N17 independent old-user INPUT recipes. This is test notation, not Biome syntax.
+# Build each source from the immutable 674-byte input; never emit it from the app.
+# A replacement is applied exactly once to the UTF-8 decoded source. ${U+0001}
+# denotes one raw code unit; it is not the six visible characters of a JSON escape.
+# Spans are zero-based half-open Kotlin String UTF-16 intervals, including quotes.
+# SHA values cover the complete recipe input; M03 intentionally truncates the LF.
+
+BASE sealed tests/fixtures/textwire/inputs/legacy-duplicate-key-progress.input
+BASE clean sealed replace "wide":1,"wide":2 => "wide":1
+
+CASE D00 sealed-original
+from sealed
+container "unknown":{
+keys "wide" | "wide"
+expect Duplicate path unknown/wide first 103:109 second 112:118
+expect bytes 674 sha256 8cc8e3335dce5e58c242b8dc9fbcd30fac2d156f03f534aa4ef79e207515be12
+expect RecoveryRequired before-write raw-unchanged zero-put zero-new-key
+END
+
+CASE D01 escaped-key-after-literal
+from clean
+replace "nested":{"z":1,"a":2,"m":3} => "nested":{"żółć":0,"a":1,"\u0061":2}
+container "nested":{
+keys "a" | "\u0061"
+expect Duplicate path unknown/nested/a first 262:265 second 268:276
+expect bytes 677 sha256 731b61ddd444ec016251eb841c0adeed1fbf1719998037a20612d2c9ec03c90a
+expect RecoveryRequired before-write raw-unchanged zero-put zero-new-key
+END
+
+CASE D02 literal-key-after-escape
+from clean
+replace "nested":{"z":1,"a":2,"m":3} => "nested":{"żółć":0,"\u0061":1,"a":2}
+container "nested":{
+keys "\u0061" | "a"
+expect Duplicate path unknown/nested/a first 262:270 second 273:276
+expect bytes 677 sha256 62a40355ee8e2e5e84dc452056cc444d7f9615ee504e01ad253463cdef4d32d5
+END
+
+CASE D03 astral-literal-and-escape
+from clean
+replace "nested":{"z":1,"a":2,"m":3} => "nested":{"żółć":0,"😀":1,"\uD83D\uDE00":2}
+container "nested":{
+keys "😀" | "\uD83D\uDE00"
+expect Duplicate path unknown/nested/😀 first 262:266 second 269:283
+expect bytes 686 sha256 2d589a250444e5c2a86608922d5868eb29e61b3c2c86230155db8793a1721b63
+END
+
+CASE D04 array-object-path
+from clean
+replace "nested":{"z":1,"a":2,"m":3} => "nested":[{"a":1,"a":2}]
+container "nested":[
+keys "a" | "a"
+expect Duplicate path unknown/nested/0/a first 254:257 second 260:263
+expect bytes 661 sha256 bd0302f66265f903111e51c7f2dd697642b430add4bd3a394f5b0dd0429552dd
+END
+
+CASE D05 stats-object-path
+from clean
+replace "stats":{} => "stats":{"a":1,"a":2}
+container "stats":{
+keys "a" | "a"
+expect Duplicate path stats/a first 33:36 second 39:42
+expect bytes 676 sha256 419d1f9b32990b88c68961911e3d4e027b346f64674075336421783c1e2988bc
+END
+
+CASE U01 sibling-objects-own-keys
+from clean
+replace "nested":{"z":1,"a":2,"m":3} => "nested":[{"a":1},{"a":2}]
+expect Unique
+expect bytes 663 sha256 03798cdc4898d58d98d43b0d76b3e9154385daf7f9e5ae5cb6fe4ac02f8575b7
+END
+
+CASE U02 key-looking-value-is-not-key
+from clean
+replace "nested":{"z":1,"a":2,"m":3} => "nested":{"text":"\"wide\":","a":1}
+expect Unique
+expect bytes 672 sha256 05c9bc7af4553556045872e2a926c58c8ffe6d5f6c0ad57da0b20c24703a6ef6
+END
+
+CASE U03 quoted-and-backslash-keys
+from clean
+replace "nested":{"z":1,"a":2,"m":3} => "nested":{"a\"b":1,"a\\b":2,"negativeZero":-0,"huge":1e10000}
+expect Unique
+expect bytes 698 sha256 b4659f8c60fc5d9ef42e245c9f65f5480ddbc267e93c973c07882c57cd67b510
+END
+
+CASE U04 empties-whitespace-and-nesting
+from clean
+replace "nested":{"z":1,"a":2,"m":3} => "nested": { "empty": {}, "list": [], "child": {"a":1} }
+expect Unique
+expect bytes 692 sha256 db38774c369c7dd794b3f8a89bf4a0dc59e813875d4ffa4c746c6f8f277523be
+END
+
+CASE U05 escaped-lone-key-versus-backslash-text
+from clean
+replace "nested":{"z":1,"a":2,"m":3} => "nested":{"\ud800":1,"\\ud800":2}
+expect Unique
+expect bytes 670 sha256 a0e6bedfe23120bc7b5d7bd1d1d8a80d64c254ed0d7e28bc42c78c433b86e142
+END
+
+CASE M01 malformed-unicode-escape
+from clean
+replace "nested":{"z":1,"a":2,"m":3} => "nested":{"\u00X0":1}
+trigger-fragment X
+expect UnsafeInput trigger-at 258
+expect bytes 658 sha256 29b695ab0609372bd2983ffef079b515fa3981baa8674975fe617372e0b69eda
+END
+
+CASE M02 raw-control-in-value
+from clean
+replace "nested":{"z":1,"a":2,"m":3} => "nested":{"a":"x${U+0001}y"}
+trigger-fragment ${U+0001}
+expect UnsafeInput trigger-at 259
+expect bytes 657 sha256 97e155e1b8e45020bd2718331afac6df1862589dd97b6d89019e28e345a95d8e
+END
+
+CASE M03 unterminated-string
+from clean
+replace-tail "nested":{"z":1,"a":2,"m":3} => "nested":{"a":"oops
+trigger-fragment "oops
+expect UnsafeInput trigger-at 257
+expect bytes 262 sha256 9dc103a6393b13907581d4082024fdc696ac710fa56f179051de9f7c88b7263f
+END
+
+CASE M04 unclosed-array
+from clean
+replace "nested":{"z":1,"a":2,"m":3} => "nested":[1,2}
+trigger-fragment }
+expect UnsafeInput trigger-at 256
+expect bytes 651 sha256 a6be8eee44c6ec3713f47850873b0d88decc81b378e7f0ca9ce2d303a8ad5147
+END
+
+CASE M05 missing-colon
+from clean
+replace "nested":{"z":1,"a":2,"m":3} => "nested":{"a",1}
+trigger-fragment ,
+expect UnsafeInput trigger-at 256
+expect bytes 653 sha256 d1dc1d8d9bb1bf5ff5b6b7dd7d1224626bc365cec14e3d6a24bebde7e36e3970
+END
+
+CASE M06 missing-comma
+from clean
+replace "nested":{"z":1,"a":2,"m":3} => "nested":{"a":1 "b":2}
+trigger-fragment  "b"
+expect UnsafeInput trigger-at 258
+expect bytes 659 sha256 f2925a41522c8af25ecd43b953fad9bad6b2103ac623b3b8047159a1081835cb
+END
+
+CASE M07 incomplete-number
+from clean
+replace "nested":{"z":1,"a":2,"m":3} => "nested":{"a":1e}
+trigger-fragment e}
+expect UnsafeInput trigger-at 258
+expect bytes 654 sha256 c4e5aa0aafc1ac071079469394eab600edb52112bf6d08e218176940065d38a9
+END
+
+CASE B01 invalid-utf8-file-byte
+from clean
+replace-first-utf8 😀 => hex ff
+expect HostDecodeReject before-string before-write raw-bytes-unchanged
+expect bytes 662 sha256 29595382e0aad352a670714a550c70482c3461357e4f07396c8c66dc02052636
+END
+
+CASE S01 raw-unpaired-surrogate-host-string
+from clean
+replace "nested":{"z":1,"a":2,"m":3} => "nested":{"${U+D800}":1}
+expect UniqueIfLegacyAcceptsOrUnsafeInputIfLegacyRejects; probe Kotlin old-reader admission before changing it
+expect no-utf8-file-recipe
+END
+
+CASE S02 raw-and-escaped-lone-surrogate-host-string
+from clean
+replace "nested":{"z":1,"a":2,"m":3} => "nested":{"${U+D800}":1,"\ud800":2}
+container "nested":{
+keys "${U+D800}" | "\ud800"
+expect DuplicateIfLegacyAccepts path unknown/nested/U+D800 first 253:256 second 259:267
+expect RecoveryRequiredIfLegacyAccepts before-write raw-unchanged zero-put zero-new-key
+expect no-utf8-file-recipe
+END
+
+CONTROL E2 unknown-order wide,huge,decimal,exponentOne,negativeZero,nullValue,emptyString,emptyList,emptyRecord,nested,literal,escaped,loneHigh,longKey
+CONTROL E2 numeric-spelling wide=9223372036854775808 huge=1e10000 decimal=1.0 exponentOne=1e0 negativeZero=-0
+CONTROL admitted-progress PG-10000000 and 128-list-depth from legacy-boundary.cases; scanner must not add a smaller cap
+COST scanner and old-parser separately on sealed E2 and admitted large progress; count steps, peak-memory-proxy, elapsed-time
+HOST web localStorage UTF-16 raw and zero additional keys; browser/origin NOT RUN
+HOST Android strict UTF-8 file read before String and existing 10000000-byte file limit; device NOT RUN
+HOST macOS strict UTF-8 file read before String and existing 10000000-byte load limit; app/FS NOT RUN
+HOST iOS NSUserDefaults UTF-16 raw and full key-set unchanged; device NOT RUN
+HOST Desktop file strict UTF-8 before String and file list/bytes unchanged; app/FS NOT RUN
+HOST shared Desktop/macOS/iOS commonTest selected nonempty; Kotlin NOT RUN

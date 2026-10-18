@@ -33,7 +33,7 @@ class VocabularySessionAcceptanceTest {
         assertTrue(session.state.value.document.cards.isNotEmpty())
         assertFalse(session.rate(Rating.Good))
         assertFalse(session.state.value.busy)
-        assertEquals(repository.raw, VocabularyCodec.encode(session.state.value.document))
+        assertEquals(repository.raw, VocabularyCodec.encodeText(session.state.value.document).toString(Charsets.UTF_8))
     }
 
     @Test

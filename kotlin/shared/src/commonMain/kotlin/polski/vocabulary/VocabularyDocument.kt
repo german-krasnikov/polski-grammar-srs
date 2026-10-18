@@ -1,5 +1,9 @@
 package polski.vocabulary
 
+import polski.textwire.PolskiTextCodec
+import polski.textwire.WireNode
+import polski.textwire.DecodeResult as WireDecodeResult
+
 import kotlin.time.Instant
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonArray
@@ -214,6 +218,8 @@ object VocabularyCodec {
     }
 
     fun decode(raw: String): VocabularyDocument {
+        // NJ03: try text wire first, fall back to legacy JSON.
+        if (raw.startsWith("POLSKI-TEXT")) return decodeText(raw.encodeToByteArray())
         val root = Json.parseToJsonElement(raw).jsonObject
         require(root.getValue("version").jsonPrimitive.int == 1 && root.getValue("pair").jsonPrimitive.content == packRegistry.active.pairId)
         val selected = root.getValue("selectedIds").jsonArray.map { it.jsonPrimitive.content }
@@ -234,6 +240,91 @@ object VocabularyCodec {
             }
         }
         return validate(VocabularyDocument(selected, custom, cards))
+    }
+
+    /** NJ03 C6: text wire encoder replaces JSON encode for new saves. */
+    fun decodeText(bytes: ByteArray): VocabularyDocument {
+        val result = PolskiTextCodec.decode(bytes)
+        require(result is WireDecodeResult.Ok) { "Invalid POLSKI-TEXT: ${(result as? WireDecodeResult.Err)?.message}" }
+        require(result.kind == "vocabulary" && result.schemaVersion == 1)
+        val root = result.root
+        val pairId = (root.get("pair") as WireNode.WireString).value
+        require(pairId == packRegistry.active.pairId)
+        val selected = (root.get("selectedIds") as WireNode.WireList).items.map { (it as WireNode.WireString).value }
+        val custom = (root.get("custom") as WireNode.WireList).items.map { node ->
+            val m = node as WireNode.WireMap
+            VocabularyItem(
+                (m.get("id") as WireNode.WireString).value,
+                (m.get("lemma") as WireNode.WireString).value,
+                (m.get("translation") as WireNode.WireString).value,
+                (m.get("form") as WireNode.WireString).value,
+                (m.get("example") as WireNode.WireString).value,
+                (m.get("level") as WireNode.WireString).value,
+                null, true,
+            )
+        }
+        val cards = (root.get("cards") as WireNode.WireList).items.associate { node ->
+            val m = node as WireNode.WireMap
+            val key = (m.get("key") as WireNode.WireString).value
+            val wire = SerializedCard(
+                (m.get("due") as WireNode.WireString).value,
+                Double.fromBits((m.get("stability") as WireNode.WireF64).bits),
+                Double.fromBits((m.get("difficulty") as WireNode.WireF64).bits),
+                (m.get("elapsed_days") as WireNode.WireI64).value.toInt(),
+                (m.get("scheduled_days") as WireNode.WireI64).value.toInt(),
+                (m.get("reps") as WireNode.WireI64).value.toInt(),
+                (m.get("lapses") as WireNode.WireI64).value.toInt(),
+                (m.get("learning_steps") as WireNode.WireI64).value.toInt(),
+                (m.get("state") as WireNode.WireI64).value.toInt(),
+                (m.get("last_review") as? WireNode.WireString)?.value,
+            )
+            val card = when (val result = SrsCardWire.decode(wire)) {
+                is CardDecodeResult.Valid -> result.card
+                is CardDecodeResult.Invalid -> error(result.reason)
+            }
+            key to card
+        }
+        return validate(VocabularyDocument(selected, custom, cards))
+    }
+
+    fun encodeText(document: VocabularyDocument): ByteArray {
+        val normalized = validate(document)
+        val pairId = packRegistry.active.pairId
+        val selectedList = WireNode.WireList(normalized.selectedIds.map { WireNode.WireString(it) })
+        val customList = WireNode.WireList(normalized.custom.map { item ->
+            WireNode.WireMap(listOf(
+                "id" to WireNode.WireString(item.id),
+                "lemma" to WireNode.WireString(item.lemma),
+                "translation" to WireNode.WireString(item.translation),
+                "form" to WireNode.WireString(item.form),
+                "example" to WireNode.WireString(item.example),
+                "level" to WireNode.WireString(item.level),
+            ))
+        })
+        val cardsList = WireNode.WireList(normalized.cards.entries.map { (key, card) ->
+            val wire = SrsCardWire.encode(card)
+            WireNode.WireMap(listOfNotNull(
+                "key" to WireNode.WireString(key),
+                "due" to WireNode.WireString(wire.due),
+                "stability" to WireNode.WireF64(wire.stability.toBits()),
+                "difficulty" to WireNode.WireF64(wire.difficulty.toBits()),
+                "elapsed_days" to WireNode.WireI64(wire.elapsedDays.toLong()),
+                "scheduled_days" to WireNode.WireI64(wire.scheduledDays.toLong()),
+                "reps" to WireNode.WireI64(wire.reps.toLong()),
+                "lapses" to WireNode.WireI64(wire.lapses.toLong()),
+                "learning_steps" to WireNode.WireI64(wire.learningSteps.toLong()),
+                "state" to WireNode.WireI64(wire.state.toLong()),
+                wire.lastReview?.let { "last_review" to WireNode.WireString(it) },
+            ))
+        })
+        val root = WireNode.WireMap(listOf(
+            "version" to WireNode.WireI64(1),
+            "pair" to WireNode.WireString(pairId),
+            "selectedIds" to selectedList,
+            "custom" to customList,
+            "cards" to cardsList,
+        ))
+        return PolskiTextCodec.encode(root, "vocabulary", 1).bytes
     }
 
     fun encode(document: VocabularyDocument): String = buildJsonObject {

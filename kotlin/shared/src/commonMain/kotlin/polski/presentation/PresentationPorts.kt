@@ -25,5 +25,7 @@ sealed interface UiEffect {
 
     data class FocusReveal(override val id: Long, val exerciseId: String) : UiEffect
     data class DownloadJson(override val id: Long, val filename: String, val json: String) : UiEffect
+    /** NJ03 C6: text wire export replaces DownloadJson for progress. */
+    data class DownloadText(override val id: Long, val filename: String, val text: String) : UiEffect
     data class ConfirmReset(override val id: Long, val prompt: String) : UiEffect
 }

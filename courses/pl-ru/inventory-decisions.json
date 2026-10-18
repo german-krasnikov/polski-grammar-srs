@@ -27571,21 +27571,108 @@
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/grammar/AnswerNormalizer.kt",
-      "symbol": "file-scope",
-      "sourceFingerprint": "5340adeed09fb85ed79bb8fb917161c825f875e5048a14924272c6c5ed4e3a27",
+      "symbol": "Char",
+      "sourceFingerprint": "0126570195d6c034bb131d0c318caf4293d1bcb6f6ab9283c1912b70cf346c4d",
       "occurrence": 1,
       "parts": [
         {
           "ordinal": 0,
           "category": "runtime-morphology",
-          "reason": "Morphology branch, ending, agreement key or generated-form assembly; fixed examples/forms are supplied by the pack."
+          "reason": "ECMAScript whitespace character used by the shared answer normalizer to match web input behavior; no lesson text is authored here."
         },
         {
           "ordinal": 1,
           "category": "runtime-morphology",
-          "reason": "Morphology branch, ending, agreement key or generated-form assembly; fixed examples/forms are supplied by the pack."
+          "reason": "ECMAScript whitespace character used by the shared answer normalizer to match web input behavior; no lesson text is authored here."
+        },
+        {
+          "ordinal": 2,
+          "category": "runtime-morphology",
+          "reason": "ECMAScript whitespace character used by the shared answer normalizer to match web input behavior; no lesson text is authored here."
         }
       ]
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/grammar/AnswerNormalizer.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "14609d37d67ce67213dc81098a6b1d123a0fb6311a86a9cef040b40f80d4366f",
+      "occurrence": 1,
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "runtime-morphology",
+          "reason": "ECMAScript whitespace character used by the shared answer normalizer to match web input behavior; no lesson text is authored here."
+        },
+        {
+          "ordinal": 1,
+          "category": "runtime-morphology",
+          "reason": "ECMAScript whitespace character used by the shared answer normalizer to match web input behavior; no lesson text is authored here."
+        },
+        {
+          "ordinal": 2,
+          "category": "runtime-morphology",
+          "reason": "ECMAScript whitespace character used by the shared answer normalizer to match web input behavior; no lesson text is authored here."
+        },
+        {
+          "ordinal": 3,
+          "category": "runtime-morphology",
+          "reason": "ECMAScript whitespace character used by the shared answer normalizer to match web input behavior; no lesson text is authored here."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/grammar/AnswerNormalizer.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "4b5452182512c380a1674b41793e20f4275be10470934dd3125742bcaf932a6e",
+      "occurrence": 1,
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "runtime-morphology",
+          "reason": "ECMAScript whitespace character used by the shared answer normalizer to match web input behavior; no lesson text is authored here."
+        },
+        {
+          "ordinal": 1,
+          "category": "runtime-morphology",
+          "reason": "ECMAScript whitespace character used by the shared answer normalizer to match web input behavior; no lesson text is authored here."
+        },
+        {
+          "ordinal": 2,
+          "category": "runtime-morphology",
+          "reason": "ECMAScript whitespace character used by the shared answer normalizer to match web input behavior; no lesson text is authored here."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/grammar/AnswerNormalizer.kt",
+      "symbol": "file-scope",
+      "sourceFingerprint": "362fed0c25a0e03b263e8b1e503e2ed41374baa3db0bf9471cc1280d34711c16",
+      "occurrence": 1,
+      "parts": [
+        {
+          "ordinal": 0,
+          "category": "runtime-morphology",
+          "reason": "ECMAScript whitespace character used by the shared answer normalizer to match web input behavior; no lesson text is authored here."
+        },
+        {
+          "ordinal": 1,
+          "category": "runtime-morphology",
+          "reason": "ECMAScript whitespace character used by the shared answer normalizer to match web input behavior; no lesson text is authored here."
+        },
+        {
+          "ordinal": 2,
+          "category": "runtime-morphology",
+          "reason": "ECMAScript whitespace character used by the shared answer normalizer to match web input behavior; no lesson text is authored here."
+        }
+      ]
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/grammar/AnswerNormalizer.kt",
+      "symbol": "collapseJsWhitespace",
+      "sourceFingerprint": "07be4eb7c10a31561ae48cf329871ef20ac164b6067a403490db3c6ec11185d3",
+      "occurrence": 1,
+      "category": "runtime-morphology",
+      "reason": "ASCII space inserted when collapsing ECMAScript whitespace in an answer; this is normalization behavior, not course copy."
     },
     {
       "path": "kotlin/composeApp/src/commonMain/kotlin/polski/ui/ContrastText.kt",
@@ -32790,10 +32877,10 @@
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
       "symbol": "VocabularyCodec.merge",
-      "sourceFingerprint": "dd79722e4b7476a6d06f72e9cea46d6f6978a4dc744759b467f162cae289e332",
+      "sourceFingerprint": "dfcee48f9059ff4263415304067051e3bd38ecd3d88e6310300e7d5d1b7cfe7f",
       "occurrence": 1,
       "category": "diagnostic",
-      "reason": "Validation error for a duplicate user vocabulary lemma; no lesson content is authored here."
+      "reason": "Duplicate user vocabulary lemma validation message; no lesson content is authored here."
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
@@ -32802,6 +32889,14 @@
       "occurrence": 1,
       "category": "serialization-plumbing",
       "reason": "Persistence, scheduling, model, or platform identifier used for application behavior."
+    },
+    {
+      "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
+      "symbol": "VocabularyCodec.validate",
+      "sourceFingerprint": "3913e944e593253ac12aa0bf7f1260682e630fc13d4062c4d6d6cf7e97021a83",
+      "occurrence": 1,
+      "category": "diagnostic",
+      "reason": "Required vocabulary field and length validation message shown for invalid user entries; no lesson content is authored here."
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
@@ -33040,18 +33135,18 @@
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
       "symbol": "VocabularyCodec.encode",
-      "sourceFingerprint": "e007fa2fe649e7d35f76b17e4e6bb1cdd997d4a835d38a0f4fdfdaff3d374d51",
+      "sourceFingerprint": "be891a5fd19f80170bfd363f534d488bd0490d1fc28f0d7e50831f7f8ed2e8af",
       "occurrence": 1,
       "category": "serialization-plumbing",
-      "reason": "Persistence, scheduling, model, or platform identifier used for application behavior."
+      "reason": "Vocabulary progress document field name used for JSON persistence and restore."
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
       "symbol": "VocabularyCodec.encode",
-      "sourceFingerprint": "3b4a339178a9f0916d1699be34b851b48a1df7e95dc4fea21cb4c2de405551bb",
+      "sourceFingerprint": "a1e3c992c4ac7194eb9e1023793cb2ded1e6e62e8174286685be97797ae823ff",
       "occurrence": 1,
       "category": "serialization-plumbing",
-      "reason": "Persistence, scheduling, model, or platform identifier used for application behavior."
+      "reason": "Vocabulary progress document field name used for JSON persistence and restore."
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
@@ -33120,10 +33215,10 @@
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
       "symbol": "VocabularyCodec.encode",
-      "sourceFingerprint": "bd832c59f83a00d9c49a4fc8766afb48f454d55a3b0cbb7b7594a1e512660832",
+      "sourceFingerprint": "6a44b71bb2bc7864b0d2f57a1d3f6dc7ba70c864ac5464c80f3dd5c43eb1df74",
       "occurrence": 1,
       "category": "serialization-plumbing",
-      "reason": "Persistence, scheduling, model, or platform identifier used for application behavior."
+      "reason": "Vocabulary progress document field name used for JSON persistence and restore."
     },
     {
       "path": "kotlin/shared/src/commonMain/kotlin/polski/vocabulary/VocabularyDocument.kt",
@@ -46773,18 +46868,18 @@
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/WebSwipeRating.kt",
       "symbol": "installSwipeCard",
-      "sourceFingerprint": "3c7e195bfb48c085a3604b478d13713ae08f1fa80adb6d956b60ad7c4679b17d",
+      "sourceFingerprint": "9ae5257eb1f77bb30ad13c4f1767970967ae85744f5c639f29763320085a8570",
       "occurrence": 1,
       "category": "serialization-plumbing",
-      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+      "reason": "DOM pointer event name used to cancel an active web card swipe; this is host interaction wiring."
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/WebSwipeRating.kt",
       "symbol": "installSwipeCard",
-      "sourceFingerprint": "a17de9d3761aae2542125422bf272941db1135463e2de3a13c7c5b7af2cf4e63",
+      "sourceFingerprint": "d47fe467a9e7e86905c67838232b84aab9aebb125c3c27f1ad5f682c65cce262",
       "occurrence": 1,
       "category": "serialization-plumbing",
-      "reason": "Host component wiring, CSS/DOM key, accessibility attribute, enum/skill identifier or course-pack field lookup."
+      "reason": "DOM pointer event name used to cancel an active web card swipe; this is host interaction wiring."
     },
     {
       "path": "kotlin/composeApp/src/webMain/kotlin/polski/ui/WebSwipeRating.kt",

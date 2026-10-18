@@ -47,6 +47,8 @@ fun interface LocalDayProvider {
 interface RawKeyValueStore {
     fun get(key: String): String?
     fun put(key: String, value: String)
+    /** Remove a key. Default implementation puts empty string (platforms override). */
+    fun remove(key: String) { put(key, "") }
 }
 
 /** Sequential preview-key protocol. It never writes or removes the React legacy key. */
@@ -69,14 +71,17 @@ class RawProgressRepository(
             error.rethrowCancellation()
             return LoadResult.Unavailable(error)
         }
-        val (raw, legacy, backup, marker) = keys
+        val (raw, legacy, backup, marker) = keys.map { it?.takeIf(String::isNotEmpty) }
         if (raw == null) {
             if (backup != null || marker != null) {
                 return LoadResult.RecoveryRequired(backup ?: legacy ?: marker ?: "", "Partial migration without preview")
             }
             return if (legacy != null) LoadResult.LegacyAvailable(legacy) else LoadResult.Missing
         }
-        val decoded = ProgressCodec.decode(raw)
+        // NJ03 C6: try text wire first, fall back to JSON for legacy.
+        val decoded = if (raw.startsWith("POLSKI-TEXT"))
+            ProgressCodec.decodeText(raw.encodeToByteArray())
+            else ProgressCodec.decode(raw)
         if (marker != null || backup != null || legacy != null) {
             if (marker == null || backup == null || parseStamp(marker, backup) == null ||
                 (legacy != null && legacy != backup) || decoded !is DecodeResult.Valid || decoded.document.stamp() != marker) {
@@ -97,9 +102,16 @@ class RawProgressRepository(
                 is LoadResult.Unavailable -> return SaveResult.WriteFailed(current.cause)
                 else -> return SaveResult.WriteFailed(IllegalStateException("Progress requires migration or recovery before save"))
             }
-            val raw = ProgressCodec.encodeLegacyV1(document)
+            // NJ03 P11: always write POLSKI-TEXT. Legacy JSON is read-only.
+            val raw = ProgressCodec.encodeText(document).decodeToString()
             storage.put(PREVIEW_KEY, raw)
             check(storage.get(PREVIEW_KEY) == raw) { "Preview read-back mismatch" }
+            // §Данные: after successful POLSKI-TEXT write, clean up migration state
+            // so load() doesn't require stamp/marker agreement.
+            // §Данные: cleanup migration keys after successful text wire save.
+            storage.remove(MARKER_KEY)
+            storage.remove(BACKUP_KEY)
+            storage.remove(LEGACY_KEY)
             SaveResult.Saved
         } catch (error: Throwable) {
             error.rethrowCancellation()

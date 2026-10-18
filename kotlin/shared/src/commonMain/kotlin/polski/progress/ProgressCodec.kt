@@ -10,6 +10,9 @@ import kotlinx.serialization.json.doubleOrNull
 import kotlinx.serialization.json.intOrNull
 import kotlinx.serialization.json.jsonPrimitive
 import kotlin.time.Instant
+import polski.textwire.DecodeResult as WireDecodeResult
+import polski.textwire.PolskiTextCodec
+import polski.textwire.WireNode
 import polski.srs.CardDecodeResult
 import polski.srs.Scheduler
 import polski.srs.SerializedCard
@@ -109,6 +112,105 @@ object ProgressCodec {
         ))
         return json.encodeToString(JsonElement.serializer(), root)
     }
+
+    // ---------------------------------------------------------------------------
+    // Text wire encode/decode (POLSKI-TEXT arm A, NJ03 C2)
+    // ---------------------------------------------------------------------------
+
+    fun encodeText(document: ProgressDocument): ByteArray {
+        val p = document.progress
+        val cards = WireNode.WireList(p.cards.map { stored ->
+            val enc = SrsCardWire.encode(stored.card)
+            WireNode.WireMap(listOfNotNull(
+                "skillId" to WireNode.WireString(stored.skillId),
+                "due"            to WireNode.WireString(enc.due),
+                "stability"      to WireNode.WireF64(enc.stability.toBits()),
+                "difficulty"     to WireNode.WireF64(enc.difficulty.toBits()),
+                "elapsed_days"   to WireNode.WireI64(enc.elapsedDays.toLong()),
+                "scheduled_days" to WireNode.WireI64(enc.scheduledDays.toLong()),
+                "reps"           to WireNode.WireI64(enc.reps.toLong()),
+                "lapses"         to WireNode.WireI64(enc.lapses.toLong()),
+                "learning_steps" to WireNode.WireI64(enc.learningSteps.toLong()),
+                "state"          to WireNode.WireI64(enc.state.toLong()),
+                enc.lastReview?.let { "last_review" to WireNode.WireString(it) },
+            ))
+        })
+        val stats = WireNode.WireList(p.stats.entries.map { (skillId, s) ->
+            WireNode.WireMap(listOf(
+                "skillId"  to WireNode.WireString(skillId),
+                "reviews"  to WireNode.WireI64(s.reviews.toLong()),
+                "correct"  to WireNode.WireI64(s.correct.toLong()),
+                "streak"   to WireNode.WireI64(s.streak.toLong()),
+                "mistakes" to WireNode.WireI64(s.mistakes.toLong()),
+            ))
+        })
+        val root = WireNode.WireMap(listOf(
+            "version"      to WireNode.WireI64(p.version.toLong()),
+            "cards"        to cards,
+            "stats"        to stats,
+            "reviewsToday" to WireNode.WireI64(p.reviewsToday.toLong()),
+            "lastDay"      to WireNode.WireString(p.lastDay),
+            "totalReviews" to WireNode.WireI64(p.totalReviews.toLong()),
+        ))
+        return PolskiTextCodec.encode(root, "progress", 2).bytes
+    }
+
+    fun decodeText(bytes: ByteArray): DecodeResult {
+        val wire = PolskiTextCodec.decode(bytes)
+        if (wire is WireDecodeResult.Err) return DecodeResult.Invalid(wire.message)
+        val ok = wire as WireDecodeResult.Ok
+        if (ok.kind != "progress") return DecodeResult.Invalid("wrong kind: ${ok.kind}")
+        if (ok.schemaVersion != 2) return DecodeResult.Unsupported(ok.schemaVersion)
+        val m = ok.root.children.toMap()
+        val version = (m["version"] as? WireNode.WireI64)?.value?.toInt() ?: return DecodeResult.Invalid("missing version")
+        val cardsNode = m["cards"] as? WireNode.WireList ?: return DecodeResult.Invalid("missing cards")
+        val statsNode = m["stats"] as? WireNode.WireList ?: return DecodeResult.Invalid("missing stats")
+        val reviewsToday = (m["reviewsToday"] as? WireNode.WireI64)?.value?.toInt() ?: return DecodeResult.Invalid("missing reviewsToday")
+        val lastDay = (m["lastDay"] as? WireNode.WireString)?.value?.takeIf(::validDay) ?: return DecodeResult.Invalid("invalid lastDay")
+        val totalReviews = (m["totalReviews"] as? WireNode.WireI64)?.value?.toInt() ?: return DecodeResult.Invalid("missing totalReviews")
+        val cards = ArrayList<StoredCard>(cardsNode.items.size)
+        val seen = HashSet<String>()
+        for ((index, item) in cardsNode.items.withIndex()) {
+            val cm = (item as? WireNode.WireMap)?.children?.toMap() ?: return DecodeResult.Invalid("invalid card at $index")
+            val skillId = (cm["skillId"] as? WireNode.WireString)?.value?.takeIf { it.isNotBlank() } ?: return DecodeResult.Invalid("missing skillId at $index")
+            if (!seen.add(skillId)) return DecodeResult.Invalid("duplicate skillId: $skillId")
+            val serialized = SerializedCard(
+                due            = (cm["due"] as? WireNode.WireString)?.value ?: return DecodeResult.Invalid("missing due for $skillId"),
+                stability      = Double.fromBits((cm["stability"] as? WireNode.WireF64)?.bits ?: return DecodeResult.Invalid("missing stability")),
+                difficulty     = Double.fromBits((cm["difficulty"] as? WireNode.WireF64)?.bits ?: return DecodeResult.Invalid("missing difficulty")),
+                elapsedDays    = (cm["elapsed_days"] as? WireNode.WireI64)?.value?.toInt() ?: return DecodeResult.Invalid("missing elapsed_days"),
+                scheduledDays  = (cm["scheduled_days"] as? WireNode.WireI64)?.value?.toInt() ?: return DecodeResult.Invalid("missing scheduled_days"),
+                reps           = (cm["reps"] as? WireNode.WireI64)?.value?.toInt() ?: return DecodeResult.Invalid("missing reps"),
+                lapses         = (cm["lapses"] as? WireNode.WireI64)?.value?.toInt() ?: return DecodeResult.Invalid("missing lapses"),
+                learningSteps  = (cm["learning_steps"] as? WireNode.WireI64)?.value?.toInt() ?: return DecodeResult.Invalid("missing learning_steps"),
+                state          = (cm["state"] as? WireNode.WireI64)?.value?.toInt() ?: return DecodeResult.Invalid("missing state"),
+                lastReview     = (cm["last_review"] as? WireNode.WireString)?.value,
+            )
+            when (val decoded = SrsCardWire.decode(serialized)) {
+                is CardDecodeResult.Valid -> cards += StoredCard(skillId, decoded.card)
+                is CardDecodeResult.Invalid -> return DecodeResult.Invalid("$skillId: ${decoded.reason}")
+            }
+        }
+        val stats = linkedMapOf<String, SkillStats>()
+        for ((idx, item) in statsNode.items.withIndex()) {
+            val sm = (item as? WireNode.WireMap)?.children?.toMap() ?: return DecodeResult.Invalid("invalid stats at $idx")
+            val skillId = (sm["skillId"] as? WireNode.WireString)?.value?.takeIf { it.isNotBlank() } ?: return DecodeResult.Invalid("missing stats skillId at $idx")
+            stats[skillId] = SkillStats(
+                reviews  = (sm["reviews"] as? WireNode.WireI64)?.value?.toInt() ?: return DecodeResult.Invalid("missing reviews for $skillId"),
+                correct  = (sm["correct"] as? WireNode.WireI64)?.value?.toInt() ?: return DecodeResult.Invalid("missing correct for $skillId"),
+                streak   = (sm["streak"] as? WireNode.WireI64)?.value?.toInt() ?: return DecodeResult.Invalid("missing streak for $skillId"),
+                mistakes = (sm["mistakes"] as? WireNode.WireI64)?.value?.toInt() ?: return DecodeResult.Invalid("missing mistakes for $skillId"),
+            )
+        }
+        return DecodeResult.Valid(
+            ProgressDocument(Progress(version, cards.toList(), stats.toMap(), reviewsToday, lastDay, totalReviews))
+        )
+    }
+
+    private fun SerializedCard(due: String, stability: Double, difficulty: Double,
+        elapsedDays: Int, scheduledDays: Int, reps: Int, lapses: Int, learningSteps: Int,
+        state: Int, lastReview: String?): SerializedCard =
+        polski.srs.SerializedCard(due, stability, difficulty, elapsedDays, scheduledDays, reps, lapses, learningSteps, state, lastReview)
 
     fun fresh(skillIds: List<String>, at: Instant, localDay: String, scheduler: Scheduler): ProgressDocument {
         require(validDay(localDay)) { "Invalid local day" }

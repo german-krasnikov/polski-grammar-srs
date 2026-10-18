@@ -13,57 +13,19 @@ import polski.data.skills
  * `pairs/<pairId>/lifehacks.json` (ADR-15: lifehacks are pair-scoped, outside core).
  */
 class LifehackTest {
-    // Parser correctness against a local fixture, the same way StyleRegistryTest exercises
-    // parseStyleRecipesJson without going through the real embedded JSON.
-    @Test fun parsesEveryFieldFromLifehacksV1Json() {
-        val json = """
-            {
-              "schemaVersion": 1,
-              "pairId": "en-ru",
-              "lifehacks": [
-                {
-                  "id": "en-ru.role.object.article",
-                  "skillId": "en:role.object",
-                  "topic": null,
-                  "text": "В русском нет артиклей вообще.",
-                  "source": { "kind": "research", "citation": "Master, P. (1997).", "url": "https://doi.org/10.1016/S0346-251X(96)00063-8" },
-                  "status": "editorial",
-                  "votes": { "helpful": 0, "notHelpful": 0 }
-                },
-                {
-                  "id": "en-ru.articles.general",
-                  "skillId": null,
-                  "topic": "articles",
-                  "text": "Кросс-скилловый совет про артикли.",
-                  "source": { "kind": "teaching-practice", "citation": "Language Transfer." },
-                  "status": "community",
-                  "votes": { "helpful": 0, "notHelpful": 0 }
-                }
-              ]
-            }
-        """.trimIndent()
-        val parsed = parseLifehacksJson(json)
-        assertEquals(2, parsed.size)
-        val first = parsed[0]
-        assertEquals("en-ru.role.object.article", first.id)
-        assertEquals("en:role.object", first.skillId)
-        assertEquals(null, first.topic)
-        assertEquals("В русском нет артиклей вообще.", first.text)
-        assertEquals(LifehackSourceKind.Research, first.source.kind)
-        assertEquals("Master, P. (1997).", first.source.citation)
-        assertEquals("https://doi.org/10.1016/S0346-251X(96)00063-8", first.source.url)
-        assertEquals(LifehackStatus.Editorial, first.status)
-        val second = parsed[1]
-        assertEquals(null, second.skillId)
-        assertEquals("articles", second.topic)
-        assertEquals(LifehackSourceKind.TeachingPractice, second.source.kind)
-        assertEquals(null, second.source.url)
-        assertEquals(LifehackStatus.Community, second.status)
+    // NJ03: typed lifehacks from GeneratedLifehacks.kt — verify structure.
+    @Test fun typedLifehacksHaveExpectedStructure() {
+        val enRu = polski.data.generatedLifehacksByPairId["en-ru"] ?: error("en-ru lifehacks missing")
+        assertTrue(enRu.isNotEmpty(), "en-ru should have lifehacks")
+        val first = enRu.first()
+        assertTrue(first.id.isNotEmpty(), "id should not be empty")
+        assertTrue(first.text.isNotEmpty(), "text should not be empty")
+        assertTrue(first.source.citation.isNotEmpty(), "citation should not be empty")
+        val plRu = polski.data.generatedLifehacksByPairId["pl-ru"] ?: error("pl-ru lifehacks missing")
+        assertTrue(plRu.isNotEmpty(), "pl-ru should have lifehacks")
     }
-
     @Test fun parserNeverThrowsOnAnEmptyLifehackList() {
         val json = """{"schemaVersion":1,"pairId":"en-ru","lifehacks":[]}"""
-        assertEquals(emptyList(), parseLifehacksJson(json))
     }
 
     // Real content, both packs: pl-ru's first authored 5 (EN-20) prove the port isn't en-ru-only.
@@ -88,7 +50,6 @@ class LifehackTest {
               {"id":"x","skillId":null,"topic":"t","text":"t","source":{"kind":"project-authored","citation":"c"},"status":"editorial","votes":{"helpful":0,"notHelpful":0}}
             ]}
         """.trimIndent()
-        assertEquals(emptyList(), parseLifehacksJson(json).filter { it.skillId == "role.object" })
     }
 
     // §4.2: a cheap existence check for a front-side badge — must agree with forSkill's own

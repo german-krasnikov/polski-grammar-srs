@@ -1,0 +1,62 @@
+NJ05 E3 independent retained-number size arithmetic, test-only
+Source: exact-path seals in retained-number-sizes.sha256. R01 is the authored
+ordered tree in retained-number.cases. E2-unknown is only the 14-key unknown
+subtree of the sealed 683-byte old progress input, modeled as a generic root
+map with kind progress and schema 2. It is not a full migrated progress
+document; full E2 A/C literal bytes and adapter are NOT FROZEN.
+
+Accounting order per line: total A/C bytes, header bytes, preorder-row bytes,
+retained-number ASCII payload bytes. The final H row is always 74 bytes and
+includes the digest and final LF. R payload is its token's ASCII byte count,
+not the mathematical expansion of its value. Every row also counts tag, HT,
+key, optional HT/payload and LF. A key/string counts canonical escaping;
+C key/string counts U count plus four ASCII hex bytes per UTF-16 code unit.
+
+R01 A = 316, 25, 217, 37
+R01 C = 618, 26, 518, 37
+E2-unknown A = 693, 25, 594, 37
+E2-unknown C = 2051, 26, 1951, 37
+R01 has 12 preorder rows, including an R list item. E2-unknown has 18 rows:
+14 direct children and three nested R children. Its five direct numeric tokens
+consume 34 bytes; nested z/a/m each contributes one, for 37 R payload bytes.
+
+Previously frozen decoder-accepted old progress controls, inherited from
+numeric-admission.cases/check_numeric_sizes.py, are physical output floors,
+assuming the stated full progress projection; no E3 R value occurs in them:
+PG-10000000 A = 10000112
+PG-10000000 C = 40000022
+PG-rows-32768 A = 10196726
+PG-rows-32768 C = 39214145
+PG-single durable-floor A = 20000112
+PG-single durable-floor C = 50000022
+PG-many durable-floor A = 20196726
+PG-many durable-floor C = 49214145
+The Desktop decoder accepted these 10,000,000-byte old inputs; required-host
+persistence remains unproved. That input cap is not an output-byte cap. These
+are lower floors only, not a chosen N26 ceiling or proof of host persistence.
+
+Arithmetic negative controls: appending one ASCII digit to R01's wide numeric
+token adds one byte to either arm's R row; replacing key wide by wïde adds one
+UTF-8 byte to A, zero UTF-16 units to C; replacing E2's literal emoji by A
+subtracts three A payload bytes and four C payload bytes. None changes a
+frozen source or supplies a codec-derived expectation.
+
+Resource accounting variables (bytes unless marked otherwise): L = sealed
+old input; T = retained in-memory typed tree (host allocation, unmeasured);
+O = canonical new text; Q = readback copy or stream buffer; B = any prior text
+backup, if present; W = temporary staging copy; R = durable text receipt and
+its staging, if present. Keep each term distinct. For R01 L is absent because
+R01 is a synthetic tree; O is the calculated R01 arm total. For E2-unknown,
+L = 683, O is only its generic subtree estimate, not a complete new document.
+For PG-10000000, L = 10,000,000 and O is at least the arm's floor above.
+Before verified cleanup, durable old plus complete new text alone requires
+L + O bytes; E2-unknown's O is only a component of that complete new text;
+other live B/W/R terms can increase disk peak according to the actual host
+transaction. Materializing both old bytes and a full readback copy together
+requires at least L + Q bytes of buffers. If full encoded output O and full
+readback Q = O coexist with the old input and retained tree, the live terms
+are L + T + 2O, before other host overhead. Streaming may avoid those copies,
+so byte lengths do not establish an exact peak heap number. The transaction's
+storage ordering, backup size, receipt syntax and host quota are unproved.
+N14 domain, N16/N26 limit, N17 Kotlin duplicate-key preflight, P23 time and
+logical steps, physical quota/peak memory on each host: NOT RUN.

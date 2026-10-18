@@ -1,0 +1,133 @@
+# Frozen source bytes for NJ03 mutation cases. LF, UTF-8, exactly one trailing LF per materialized source.
+# Materialize BASE language by concatenating `SURFACE curriculum\n` and its 16 ROW lines with LF.
+# Materialize CASE by replacing exactly one numbered ROW with the following LINE, except ARTIFACT cases.
+# SHA-256 and UTF-16 coordinates below were computed from this independent text, before candidate diagnostics.
+# These are test-only source fixtures; the current product curriculum remains independent and unchanged.
+BASE | en | rows=16 | source=Plans/Biome/NJ03CurriculumIndependent.cases
+ROW | 01 | SKILL {id: "en:role.object" construction: "core.argument.case-role" focus: {feature: Case from: Subj to: Obj} fixed: {Tense: Pres Person: "1" Number: Sing} lexicalFilter: null level: A1 prerequisites: []}
+ROW | 02 | SKILL {id: "en:verb.presentSimple" construction: "core.verb.tense" focus: {feature: Tense from: Past to: Pres} fixed: {Person: "3" Number: Sing Aspect: Simple} lexicalFilter: null level: A1 prerequisites: []}
+ROW | 03 | SKILL {id: "en:possessive.my" construction: "core.agreement.possessive" focus: null fixed: {Case: Obj Tense: Pres Person: "1" Number: Sing} lexicalFilter: null level: A1 prerequisites: ["en:role.object"]}
+ROW | 04 | SKILL {id: "en:mood.question" construction: "core.sentence.mood" focus: {feature: Mood from: Decl to: YesNoQ} fixed: {Tense: Pres Person: "2" Number: Sing Aspect: Simple} lexicalFilter: null level: A1 prerequisites: ["en:verb.presentSimple"]}
+ROW | 05 | SKILL {id: "en:role.location" construction: "core.argument.case-role" focus: {feature: Case from: Obj to: In} fixed: {Tense: Pres Person: "1" Number: Sing} lexicalFilter: null level: A1 prerequisites: ["en:role.object"]}
+ROW | 06 | SKILL {id: "en:role.instrument" construction: "core.argument.case-role" focus: {feature: Case from: Obj to: With} fixed: {Tense: Pres Person: "1" Number: Sing} lexicalFilter: null level: A2 prerequisites: ["en:role.object"]}
+ROW | 07 | SKILL {id: "en:polarity.present" construction: "core.sentence.polarity" focus: {feature: Polarity from: Pos to: Neg} fixed: {Tense: Pres Person: "1" Number: Sing Aspect: Simple} lexicalFilter: null level: A2 prerequisites: ["en:role.object"]}
+ROW | 08 | SKILL {id: "en:verb.pastSimple" construction: "core.verb.tense" focus: {feature: Tense from: Pres to: Past} fixed: {Person: "3" Number: Sing Aspect: Simple} lexicalFilter: null level: A2 prerequisites: ["en:verb.presentSimple"]}
+ROW | 09 | SKILL {id: "en:role.recipient" construction: "core.argument.case-role" focus: {feature: Case from: Obj to: To} fixed: {Tense: Pres Person: "1" Number: Sing} lexicalFilter: {slot: noun where: {nounId: [wife husband friend son dog cat child]}} level: A2 prerequisites: ["en:role.instrument"]}
+ROW | 10 | SKILL {id: "en:number.plural" construction: "core.number" focus: {feature: Number from: Sing to: Plur} fixed: {Case: Obj Tense: Pres Person: "1"} lexicalFilter: null level: A2 prerequisites: ["en:role.object" "en:possessive.my"]}
+ROW | 11 | SKILL {id: "en:polarity.past" construction: "core.sentence.polarity" focus: {feature: Polarity from: Pos to: Neg} fixed: {Tense: Past Person: "1" Number: Sing Aspect: Simple} lexicalFilter: null level: A2 prerequisites: ["en:polarity.present" "en:verb.pastSimple"]}
+ROW | 12 | SKILL {id: "en:verb.futureSimple" construction: "core.verb.tense" focus: {feature: Tense from: Pres to: Fut} fixed: {Person: "3" Number: Sing Aspect: Simple} lexicalFilter: null level: A2 prerequisites: ["en:verb.pastSimple"]}
+ROW | 13 | SKILL {id: "en:pronouns" construction: "core.argument.case-role" focus: null fixed: {Case: Obj Tense: Pres Person: "1" Number: Sing} lexicalFilter: {slot: noun where: {nounId: [book work dog cat car house phone window]}} level: A2 prerequisites: ["en:role.instrument" "en:role.location"]}
+ROW | 14 | SKILL {id: "en:verb.presentContinuous" construction: "core.verb.tense" focus: {feature: Aspect from: Simple to: Continuous} fixed: {Tense: Pres Person: "3" Number: Sing} lexicalFilter: null level: B1 prerequisites: ["en:verb.presentSimple"]}
+ROW | 15 | SKILL {id: "en:tense.contrast" construction: "core.composite" focus: null fixed: {Person: "1" Number: Sing} lexicalFilter: null level: B1 prerequisites: ["en:verb.futureSimple" "en:verb.presentContinuous"]}
+ROW | 16 | SKILL {id: "en:mixed" construction: "core.composite" focus: null fixed: {} lexicalFilter: null level: B1 prerequisites: ["en:possessive.my" "en:verb.pastSimple"]}
+BASE_SHA256 | en | ca342be7e87cf8dd65654e0561dd0f3bb0a0d6a07ae8ca6849f682a685740562
+BASE | pl | rows=16 | source=Plans/Biome/NJ03CurriculumIndependent.cases
+ROW | 01 | SKILL {id: "case.acc.n" construction: "core.argument.case-role" focus: {feature: Case from: Nom to: Acc} fixed: {Tense: Pres Person: "1" Number: Sing} lexicalFilter: {slot: noun where: {gender: [n]}} level: A1 prerequisites: []}
+ROW | 02 | SKILL {id: "case.acc.f" construction: "core.argument.case-role" focus: {feature: Case from: Nom to: Acc} fixed: {Tense: Pres Person: "1" Number: Sing} lexicalFilter: {slot: noun where: {gender: [f]}} level: A1 prerequisites: []}
+ROW | 03 | SKILL {id: "case.acc.m" construction: "core.argument.case-role" focus: {feature: Case from: Nom to: Acc} fixed: {Tense: Pres Person: "1" Number: Sing} lexicalFilter: {slot: noun where: {gender: ["m-personal" "m-animate" "m-inanimate"]}} level: A2 prerequisites: ["case.acc.f"]}
+ROW | 04 | SKILL {id: "case.gen.neg" construction: "core.sentence.polarity" focus: {feature: Polarity from: Pos to: Neg} fixed: {Tense: Pres Person: "1" Number: Sing} lexicalFilter: null level: A2 prerequisites: ["case.acc.f"]}
+ROW | 05 | SKILL {id: "case.inst" construction: "core.argument.case-role" focus: {feature: Case from: Acc to: Inst} fixed: {Tense: Pres Person: "1" Number: Sing} lexicalFilter: {slot: noun where: {nounId: [wife husband friendM son child]}} level: A1 prerequisites: []}
+ROW | 06 | SKILL {id: "case.loc" construction: "core.argument.case-role" focus: {feature: Case from: Acc to: Loc} fixed: {Tense: Pres Person: "1" Number: Sing} lexicalFilter: null level: A2 prerequisites: ["case.inst"]}
+ROW | 07 | SKILL {id: "case.dat" construction: "core.argument.case-role" focus: {feature: Case from: Acc to: Dat} fixed: {Tense: Pres Person: "1" Number: Sing} lexicalFilter: {slot: noun where: {nounId: [wife husband friendM son child]}} level: A2 prerequisites: []}
+ROW | 08 | SKILL {id: "agreement.my" construction: "core.agreement.possessive" focus: null fixed: {Case: Acc Tense: Pres Person: "1" Number: Sing} lexicalFilter: null level: A2 prerequisites: ["case.acc.f" "case.gen.neg"]}
+ROW | 09 | SKILL {id: "verb.present" construction: "core.verb.tense" focus: {feature: Tense from: Past to: Pres} fixed: {Person: "3" Number: Sing} lexicalFilter: {slot: noun where: {nounId: [wife husband friendM son child]}} level: A1 prerequisites: []}
+ROW | 10 | SKILL {id: "verb.past" construction: "core.verb.tense" focus: {feature: Tense from: Pres to: Past} fixed: {Person: "3" Number: Sing} lexicalFilter: {slot: noun where: {nounId: [wife husband friendM son child]}} level: A2 prerequisites: ["verb.present"]}
+ROW | 11 | SKILL {id: "verb.future" construction: "core.verb.tense" focus: {feature: Tense from: Pres to: Fut} fixed: {Person: "3" Number: Sing} lexicalFilter: {slot: noun where: {nounId: [wife husband friendM son child]}} level: A2 prerequisites: ["verb.present"]}
+ROW | 12 | SKILL {id: "aspect" construction: "core.composite" focus: null fixed: {Person: "1" Number: Sing} lexicalFilter: null level: B1 prerequisites: ["verb.past" "verb.future"]}
+ROW | 13 | SKILL {id: "pronouns" construction: "core.argument.case-role" focus: null fixed: {Case: Acc Tense: Pres Person: "1" Number: Sing} lexicalFilter: {slot: noun where: {nounId: [wife husband friendM son child]}} level: A2 prerequisites: ["case.inst" "case.loc"]}
+ROW | 14 | SKILL {id: "mixed" construction: "core.composite" focus: null fixed: {} lexicalFilter: null level: B1 prerequisites: ["agreement.my" "verb.past"]}
+ROW | 15 | SKILL {id: "sentence.question" construction: "core.sentence.mood" focus: {feature: Mood from: Decl to: YesNoQ} fixed: {Tense: Pres Person: "2" Number: Sing} lexicalFilter: null level: A1 prerequisites: []}
+ROW | 16 | SKILL {id: "sentence.plural" construction: "core.number" focus: {feature: Number from: Sing to: Plur} fixed: {Case: Acc Tense: Pres Person: "1"} lexicalFilter: null level: A2 prerequisites: ["case.acc.m" "agreement.my"]}
+BASE_SHA256 | pl | befc84739fc38ea2e303619b0c981d9f67bfe3bf4c32badfe64f76d6bf6bb44d
+# `at` is 1-based line:UTF-16 column; `length_utf16` spans the named leaf/key. Absence has neither.
+# `path` is the semantic path. Exact diagnostic wording/code remains unfrozen until the project diagnostic contract is set.
+CASE | C01a | en | 01 | REJECT missing required focus | path=focus | at=none (absent field) | length_utf16=none | token=absence | source_sha256=7f289a71930ff99fe5cf612769c56a06a7486459dc41d093e9867e3ec7d6af3c
+LINE | SKILL {id: "en:role.object" construction: "core.argument.case-role" fixed: {Tense: Pres Person: "1" Number: Sing} lexicalFilter: null level: A1 prerequisites: []}
+RATIONALE | Omission is not null; there is no leaf token to locate.
+CASE | C01b | en | 01 | REJECT fixed null | path=fixed | at=2:118 | length_utf16=4 | token=leaf | source_sha256=b3da3d0cf915235a6d7064ea1d810f91d5f33112a00c54f2a61c521ffe993fbe
+LINE | SKILL {id: "en:role.object" construction: "core.argument.case-role" focus: {feature: Case from: Subj to: Obj} fixed: null lexicalFilter: null level: A1 prerequisites: []}
+RATIONALE | A present empty record is valid; null is not.
+CASE | C01c | en | 01 | REJECT missing required prerequisites | path=prerequisites | at=none (absent field) | length_utf16=none | token=absence | source_sha256=6691bdbf7229c2207765e5277b722e19bef87ff5c0fa664a3b6ad289d10fbf2b
+LINE | SKILL {id: "en:role.object" construction: "core.argument.case-role" focus: {feature: Case from: Subj to: Obj} fixed: {Tense: Pres Person: "1" Number: Sing} lexicalFilter: null level: A1}
+RATIONALE | Omission is not an empty list.
+CASE | C02 | en | 01 | REJECT no-op focus | path=focus.to | at=2:106 | length_utf16=4 | token=leaf | source_sha256=7ff164bba2c40e30e3902117807dcf18acd5a94da1db96d4de950bae2fe96e28
+LINE | SKILL {id: "en:role.object" construction: "core.argument.case-role" focus: {feature: Case from: Subj to: Subj} fixed: {Tense: Pres Person: "1" Number: Sing} lexicalFilter: null level: A1 prerequisites: []}
+RATIONALE | Existing local validator parity.
+CASE | C03 | en | 02 | REJECT duplicate skill id | path=id | at=3:12 | length_utf16=16 | token=leaf | source_sha256=e7da8629abfccef4efceb3c200e9eb420e8285733d3c9ed52d229a3b51677aeb
+LINE | SKILL {id: "en:role.object" construction: "core.verb.tense" focus: {feature: Tense from: Past to: Pres} fixed: {Person: "3" Number: Sing Aspect: Simple} lexicalFilter: null level: A1 prerequisites: []}
+RATIONALE | Existing local validator parity.
+CASE | C04 | en | 03 | REJECT dangling prerequisite | path=prerequisites[0] | at=4:187 | length_utf16=12 | token=leaf | source_sha256=1d6d225bbc65409532e029fbd6f819989d6f3e5082ae5e06c26a6caea93c16e8
+LINE | SKILL {id: "en:possessive.my" construction: "core.agreement.possessive" focus: null fixed: {Case: Obj Tense: Pres Person: "1" Number: Sing} lexicalFilter: null level: A1 prerequisites: ["en:missing"]}
+RATIONALE | Existing local validator parity.
+CASE | C05 | en | 01 | REJECT prerequisite cycle | path=prerequisites[0] | at=2:203 | length_utf16=18 | token=leaf | source_sha256=5b29f3dd1712f23e272d978e3d229aeacb76545344d1d2d04eef1c40a188781b
+LINE | SKILL {id: "en:role.object" construction: "core.argument.case-role" focus: {feature: Case from: Subj to: Obj} fixed: {Tense: Pres Person: "1" Number: Sing} lexicalFilter: null level: A1 prerequisites: ["en:possessive.my"]}
+RATIONALE | Existing local validator parity.
+CASE | C06 | en | 01 | REJECT unknown construction | path=construction | at=2:43 | length_utf16=14 | token=leaf | source_sha256=f5c06565ad4d9f3f33ec7a9146d39fc35da099003fd7b4ff8f0319466f33637f
+LINE | SKILL {id: "en:role.object" construction: "core.unknown" focus: {feature: Case from: Subj to: Obj} fixed: {Tense: Pres Person: "1" Number: Sing} lexicalFilter: null level: A1 prerequisites: []}
+RATIONALE | Existing pack validator parity.
+CASE | C07a | en | 01 | REJECT unknown feature key | path=fixed.Bogus | at=2:119 | length_utf16=5 | token=key | source_sha256=289e651eb4f43d7ff599139c04a430723261f34b27d67ce427be127cd7e95e36
+LINE | SKILL {id: "en:role.object" construction: "core.argument.case-role" focus: {feature: Case from: Subj to: Obj} fixed: {Bogus: Value Tense: Pres Person: "1" Number: Sing} lexicalFilter: null level: A1 prerequisites: []}
+RATIONALE | Existing pack validator parity.
+CASE | C07b | en | 01 | REJECT unsupported feature value | path=fixed.Tense | at=2:126 | length_utf16=10 | token=leaf | source_sha256=27cd95a5c0c7e47f3b285a427baebdf7c9e0be3741656c3ffa084982850b8706
+LINE | SKILL {id: "en:role.object" construction: "core.argument.case-role" focus: {feature: Case from: Subj to: Obj} fixed: {Tense: Impossible Person: "1" Number: Sing} lexicalFilter: null level: A1 prerequisites: []}
+RATIONALE | Existing pack validator parity.
+CASE | C08a | en | 09 | REJECT unknown noun | path=lexicalFilter.where.nounId[0] | at=10:202 | length_utf16=11 | token=leaf | source_sha256=9daaa7a2c83155cf63b5333b38fd2f4510c0860acdfc2e8d1f4e2956279f725b
+LINE | SKILL {id: "en:role.recipient" construction: "core.argument.case-role" focus: {feature: Case from: Obj to: To} fixed: {Tense: Pres Person: "1" Number: Sing} lexicalFilter: {slot: noun where: {nounId: [missingNoun husband friend son dog cat child]}} level: A2 prerequisites: ["en:role.instrument"]}
+RATIONALE | Existing pack validator parity.
+CASE | C08b | en | 09 | REJECT unknown lexical where key | path=lexicalFilter.where.colour | at=10:193 | length_utf16=6 | token=key | source_sha256=6e95c483f29d4fd94a3baaba350898b4868b52093f18be8c68e6fde2ecf2fe15
+LINE | SKILL {id: "en:role.recipient" construction: "core.argument.case-role" focus: {feature: Case from: Obj to: To} fixed: {Tense: Pres Person: "1" Number: Sing} lexicalFilter: {slot: noun where: {colour: [wife husband friend son dog cat child]}} level: A2 prerequisites: ["en:role.instrument"]}
+RATIONALE | Existing pack validator parity.
+CASE | C09a | en | 10 | REJECT duplicate prerequisite | path=prerequisites[2] | at=11:229 | length_utf16=18 | token=leaf | source_sha256=19d4f9e214f8726e22764a2cdaa56acabe77e158dc512883cb5ebcde69c2b431
+LINE | SKILL {id: "en:number.plural" construction: "core.number" focus: {feature: Number from: Sing to: Plur} fixed: {Case: Obj Tense: Pres Person: "1"} lexicalFilter: null level: A2 prerequisites: ["en:role.object" "en:possessive.my" "en:possessive.my"]}
+RATIONALE | Existing schema parity.
+CASE | C09b | en | 09 | REJECT duplicate lexical value | path=lexicalFilter.where.nounId[1] | at=10:207 | length_utf16=4 | token=leaf | source_sha256=28071d77860dd21af1d3e00dff40c84c3d4c042cffffed9c22cede3c2e5bab43
+LINE | SKILL {id: "en:role.recipient" construction: "core.argument.case-role" focus: {feature: Case from: Obj to: To} fixed: {Tense: Pres Person: "1" Number: Sing} lexicalFilter: {slot: noun where: {nounId: [wife wife husband friend son dog cat child]}} level: A2 prerequisites: ["en:role.instrument"]}
+RATIONALE | Existing schema parity.
+CASE | C09c | en | 09 | REJECT empty lexical value | path=lexicalFilter.where.nounId[0] | at=10:202 | length_utf16=2 | token=leaf | source_sha256=05cbe5f4d0935544abd9990e49dcdee78e0a4a4e902e03f4473949bfd92c2d2c
+LINE | SKILL {id: "en:role.recipient" construction: "core.argument.case-role" focus: {feature: Case from: Obj to: To} fixed: {Tense: Pres Person: "1" Number: Sing} lexicalFilter: {slot: noun where: {nounId: ["" husband friend son dog cat child]}} level: A2 prerequisites: ["en:role.instrument"]}
+RATIONALE | Existing schema parity.
+CASE | N01 | en | 01 | REJECT duplicate source key | path=fixed.Tense | at=2:131 | length_utf16=5 | token=key | first_at=2:119 | first_length_utf16=5 | source_sha256=20a0f626fab7372fceee77b294546b1a8942d87d62a0abe6bcfa4c0352767db0
+LINE | SKILL {id: "en:role.object" construction: "core.argument.case-role" focus: {feature: Case from: Subj to: Obj} fixed: {Tense: Pres Tense: Past Person: "1" Number: Sing} lexicalFilter: null level: A1 prerequisites: []}
+RATIONALE | New Kit/source integrity; report first and repeated key.
+CASE | N02owner | en | 09 | REJECT undeclared filterable slot | path=lexicalFilter.slot | at=10:180 | length_utf16=5 | token=leaf | source_sha256=862414bb89d4e7a9316536e17ba65aca5ad7546cc7d3e1236bbdbc0dae1bc598
+LINE | SKILL {id: "en:role.recipient" construction: "core.argument.case-role" focus: {feature: Case from: Obj to: To} fixed: {Tense: Pres Person: "1" Number: Sing} lexicalFilter: {slot: owner where: {nounId: [wife husband friend son dog cat child]}} level: A2 prerequisites: ["en:role.instrument"]}
+RATIONALE | New project rule; valid nounIds remain unchanged.
+CASE | N02adjective | en | 09 | REJECT undeclared filterable slot | path=lexicalFilter.slot | at=10:180 | length_utf16=9 | token=leaf | source_sha256=99921f2179e57c733146ff0bf849d4aebcf51a9ca89cbc50ff44c1ad0844a0e0
+LINE | SKILL {id: "en:role.recipient" construction: "core.argument.case-role" focus: {feature: Case from: Obj to: To} fixed: {Tense: Pres Person: "1" Number: Sing} lexicalFilter: {slot: adjective where: {nounId: [wife husband friend son dog cat child]}} level: A2 prerequisites: ["en:role.instrument"]}
+RATIONALE | New project rule; not enabled by a runtime owner value.
+CASE | N03from | en | 01 | REJECT focus/fixed axis conflict | path=fixed.Case | at=2:119 | length_utf16=4 | token=key | source_sha256=5cf82e75323b386ca0c5e47aa89f69c37a40b55a9b2734604a3af387ecd22ef9
+LINE | SKILL {id: "en:role.object" construction: "core.argument.case-role" focus: {feature: Case from: Subj to: Obj} fixed: {Case: Subj Tense: Pres Person: "1" Number: Sing} lexicalFilter: null level: A1 prerequisites: []}
+RATIONALE | New project rule, catalogued from value.
+CASE | N03to | en | 01 | REJECT focus/fixed axis conflict | path=fixed.Case | at=2:119 | length_utf16=4 | token=key | source_sha256=d8881de64f0767bfd092794044991b01440da4e164d103d6406802cc3306be71
+LINE | SKILL {id: "en:role.object" construction: "core.argument.case-role" focus: {feature: Case from: Subj to: Obj} fixed: {Case: Obj Tense: Pres Person: "1" Number: Sing} lexicalFilter: null level: A1 prerequisites: []}
+RATIONALE | New project rule, catalogued to value.
+CASE | N04syntax | en | 01 | REJECT malformed nested scalar | path=focus.to | at=2:106 | length_utf16=1 | token=leaf | source_sha256=e247be5251fabfa852cb87959881a29fb30a689f280ebffda1cb2c4122fb2fad
+LINE | SKILL {id: "en:role.object" construction: "core.argument.case-role" focus: {feature: Case from: Subj to: @} fixed: {Tense: Pres Person: "1" Number: Sing} lexicalFilter: null level: A1 prerequisites: []}
+RATIONALE | New syntax diagnostic; not an old validator parity claim.
+CASE | N04binding | en | 01 | REJECT unresolved catalogue value | path=focus.to | at=2:106 | length_utf16=11 | token=leaf | source_sha256=37d59af9b8320ded109f4f00c9be2de5270af2c7e5b968ff558eee090fd90e79
+LINE | SKILL {id: "en:role.object" construction: "core.argument.case-role" focus: {feature: Case from: Subj to: MissingCase} fixed: {Tense: Pres Person: "1" Number: Sing} lexicalFilter: null level: A1 prerequisites: []}
+RATIONALE | New located binding diagnostic; same independent feature registry.
+# N04 artifact freshness: take a previously accepted, hashed source/declaration/binding/printer/output set.
+ARTIFACT | N04-source-stale | change one authored skill byte but keep old generated Kotlin and manifest | REJECT at checkBiomeCurricula before consumer; no token coordinate
+ARTIFACT | N04-binding-stale | change one typed declaration or binding/read-plan byte but keep old generated Kotlin and manifest | REJECT at checkBiomeCurricula before consumer; no token coordinate
+ARTIFACT | N04-output-stale | change one generated Kotlin byte in disposable copy while sources and manifest remain old | REJECT at checkBiomeCurricula before consumer; no token coordinate
+ARTIFACT | N04-output-missing | remove generated Kotlin in disposable copy while sources and manifest remain old | REJECT at checkBiomeCurricula before consumer; no token coordinate
+# N05 accepted portability probes and malformed UTF-16 probe are frozen separately in the receipt; full typed registry+lexicon fixture is NOT FROZEN.
+# N05 is a separate new portability requirement, not old curriculum parity.
+# Accepted probes use the existing catalogued construction and no refs/filter; each is a complete one-row curriculum.
+# `value_u16` is the decoded `id` value, not the source spelling or Kotlin/TS literal.
+PORTABLE | N05-unicode | ACCEPT | id at=2:12 | id_length_utf16=13 | source_sha256=4508d128c2ca60c59b4f1fef2b09a734ee4fa4ef42bb4e4cb502bc7b9e1da14b
+SOURCE | SURFACE curriculum
+SOURCE | SKILL {id: "en:zażółć😀" construction: "core.argument.case-role" focus: null fixed: {} lexicalFilter: null level: A1 prerequisites: []}
+EXPECT | id=en:zażółć😀 | value_u16=101 110 58 122 97 380 243 322 263 55357 56832 | Kotlin and isolated TS compiled/executed values must match these units
+PORTABLE | N05-escaping | ACCEPT | id at=2:12 | id_length_utf16=23 | source_sha256=d93d1670c8010c52b00b1b309e3eba0ff6ce0a618926924cc44cbe64aa19f141
+SOURCE | SURFACE curriculum
+SOURCE | SKILL {id: "en:cytat \"A\" \\ B😀" construction: "core.argument.case-role" focus: null fixed: {} lexicalFilter: null level: A1 prerequisites: []}
+EXPECT | id decoded text `en:cytat "A" \ B😀` | value_u16=101 110 58 99 121 116 97 116 32 34 65 34 32 92 32 66 55357 56832 | Kotlin and isolated TS compiled/executed values must match these units
+PORTABLE | N05-surrogate | REJECT invalid Unicode scalar | path=id | at=2:16 | length_utf16=1 | source_utf16le_sha256=e9863614fe83a72aa332bee93bcf7cc67cbac1f43fef308c3b5a4929dc73c5de
+MATERIALIZE_U16 | prefix `SURFACE curriculum\nSKILL {id: "en:` | 55296 | suffix `" construction: "core.argument.case-role" focus: null fixed: {} lexicalFilter: null level: A1 prerequisites: []}\n`
+EXPECT | reject before Kotlin/TS printer or product consumer; source byte SHA not applicable because unpaired surrogate is not valid UTF-8
+PORTABLE | N05-malformed-quote | REJECT syntax | quote at=2:12 | length_utf16=1 | source_sha256=00845e36c629682f7a3f9a1a43f2939aad7b8c236aea6ecd13ae7df3fc282159
+SOURCE | SURFACE curriculum
+SOURCE | SKILL {id: "en:unfinished
+# N05 full catalogued non-ASCII lexical value and a source-level malformed-surrogate proof remain NOT FROZEN until the typed lexicon fixture exists.

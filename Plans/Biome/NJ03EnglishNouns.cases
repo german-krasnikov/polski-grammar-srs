@@ -1,0 +1,18 @@
+# Independent old-authored English noun expectation freeze, before any candidate Biome transcription.
+# SOURCE | exact path | complete SHA-256. NOUN | position | id | lemma | Russian meaning | sg | pl.
+# Exact Unicode text and source order matter; this is not output from a candidate generator.
+SOURCE | courses/lang/en/lexicon.json | f96da7fc14e569d2e061a9f0b39a6d97ead26eb7f21d6521d9ed457a8d0abd80
+NOUN | 01 | wife | wife | жена | wife | wives
+NOUN | 02 | woman | woman | женщина | woman | women
+NOUN | 03 | book | book | книга | book | books
+NOUN | 04 | work | job | работа | job | jobs
+NOUN | 05 | husband | husband | муж | husband | husbands
+NOUN | 06 | friend | friend | друг | friend | friends
+NOUN | 07 | son | son | сын | son | sons
+NOUN | 08 | dog | dog | собака | dog | dogs
+NOUN | 09 | cat | cat | кот | cat | cats
+NOUN | 10 | car | car | машина | car | cars
+NOUN | 11 | house | house | дом | house | houses
+NOUN | 12 | phone | phone | телефон | phone | phones
+NOUN | 13 | child | child | ребёнок | child | children
+NOUN | 14 | window | window | окно | window | windows

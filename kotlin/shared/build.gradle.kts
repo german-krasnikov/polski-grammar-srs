@@ -1,3 +1,5 @@
+import java.security.MessageDigest
+
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.android.kmp.library)
@@ -19,6 +21,61 @@ val langDirectory = layout.projectDirectory.dir("../../courses/lang")
 val pairsDirectory = layout.projectDirectory.dir("../../courses/pairs")
 val generatedCourseDirectory = layout.buildDirectory.dir("generated/course/kotlin")
 val generatedFormsFixtureDirectory = layout.buildDirectory.dir("generated/formsFixture/kotlin")
+val legacyAdmissionLedgers = listOf(
+    layout.projectDirectory.file("../../tests/fixtures/textwire/legacy-boundary.cases"),
+    layout.projectDirectory.file("../../tests/fixtures/textwire/numeric-admission.cases"),
+)
+val legacyAdmissionSeal = layout.projectDirectory.file("../../tests/fixtures/textwire/legacy-admission.sha256")
+val generatedLegacyAdmissionDirectory = layout.buildDirectory.dir("generated/legacyAdmissionTest/kotlin")
+
+// Test-only values come from the independently reviewed text ledgers. No old input or hash
+// is maintained a second time in Kotlin, and this source is never attached to commonMain.
+val generateLegacyAdmissionTestSource by tasks.registering {
+    legacyAdmissionLedgers.forEach { inputs.file(it) }
+    inputs.file(legacyAdmissionSeal)
+    outputs.dir(generatedLegacyAdmissionDirectory)
+    doLast {
+        val sealLine = Regex("([0-9a-f]{64})  (tests/fixtures/textwire/[a-z-]+\\.cases)")
+        val sealRows = legacyAdmissionSeal.asFile.readLines()
+        val sealed = sealRows.associate { line ->
+            val match = sealLine.matchEntire(line) ?: error("Invalid legacy admission seal line")
+            match.groupValues[2] to match.groupValues[1]
+        }
+        val paths = legacyAdmissionLedgers.map { "tests/fixtures/textwire/${it.asFile.name}" }
+        require(sealRows.size == 2 && sealed.size == 2 && sealed.keys == paths.toSet()) {
+            "Legacy admission seal path set changed or duplicated"
+        }
+        legacyAdmissionLedgers.zip(paths).forEach { (ledger, path) ->
+            val actual = MessageDigest.getInstance("SHA-256")
+                .digest(ledger.asFile.readBytes())
+                .joinToString("") { (it.toInt() and 0xff).toString(16).padStart(2, '0') }
+            require(actual == sealed.getValue(path)) { "Legacy admission ledger changed without reviewed seal: $path" }
+        }
+        val entry = Regex("(?i)\\bsize ([0-9,]+); SHA-256 ([0-9a-f]{64})(?:;|\\.)")
+        val rows = legacyAdmissionLedgers.flatMap { ledger ->
+            ledger.asFile.readLines().mapNotNull { line ->
+                val match = entry.find(line) ?: return@mapNotNull null
+                val label = line.substringBefore(':').substringBefore(" = ").trim()
+                require(label.isNotBlank() && label.all { it.code in 32..126 }) { "Invalid legacy admission label: $label" }
+                val size = match.groupValues[1].replace(",", "").toInt()
+                val digest = match.groupValues[2].lowercase()
+                Triple(label, size, digest)
+            }
+        }
+        require(rows.size == 16 && rows.map { it.first }.toSet().size == rows.size) {
+            "Expected 16 distinct legacy admission hash recipes, got ${rows.size}"
+        }
+        val target = generatedLegacyAdmissionDirectory.get().file("polski/textwire/LegacyAdmissionLedger.kt").asFile
+        target.parentFile.mkdirs()
+        target.writeText(
+            "package polski.textwire\n\n" +
+                "internal val legacyAdmissionLedger: Map<String, Pair<Int, String>> = mapOf(\n" +
+                rows.joinToString(",\n") { (label, size, digest) ->
+                    "    \"$label\" to ($size to \"$digest\")"
+                } + "\n)\n",
+        )
+    }
+}
 
 // Shared by generateCoursePackSource and generateFormsFixtureSource below: a JS/Wasm-safe way to
 // embed a JSON file's bytes as a Kotlin string constant, so commonTest/commonMain never do file
@@ -45,6 +102,88 @@ fun literalChunks(source: String): List<String> {
 fun literalBuildString(chunks: List<String>): String =
     "buildString {\n" + chunks.joinToString("\n") { "    append(\"$it\")" } + "\n}"
 
+val representabilityInput = layout.projectDirectory.file("../../tests/fixtures/textwire/inputs/legacy-representability-progress.input")
+val representabilityCases = layout.projectDirectory.file("../../tests/fixtures/textwire/legacy-representability.cases")
+val representabilitySeal = layout.projectDirectory.file("../../tests/fixtures/textwire/legacy-representability.sha256")
+val generatedRepresentabilityTestDirectory = layout.buildDirectory.dir("generated/representabilityTest/kotlin")
+
+// Embed only frozen, input-only old-user bytes and independent expectations in commonTest.
+val generateRepresentabilityTestSource by tasks.registering {
+    inputs.files(representabilityInput, representabilityCases, representabilitySeal)
+    outputs.dir(generatedRepresentabilityTestDirectory)
+    doLast {
+        val expectedPaths = listOf(
+            "tests/fixtures/textwire/inputs/legacy-representability-progress.input",
+            "tests/fixtures/textwire/legacy-representability.cases",
+        )
+        val actualFiles = listOf(representabilityInput.asFile, representabilityCases.asFile)
+        val rows = representabilitySeal.asFile.readLines()
+        require(rows.size == expectedPaths.size) { "Representability seal must list exactly two files" }
+        rows.zip(expectedPaths.zip(actualFiles)).forEach { (line, pair) ->
+            val (path, file) = pair
+            val match = Regex("([0-9a-f]{64})  (tests/fixtures/textwire/[a-z/-]+\\.(?:input|cases))")
+                .matchEntire(line) ?: error("Invalid representability seal line")
+            require(match.groupValues[2] == path) { "Representability seal path/order changed" }
+            val actual = MessageDigest.getInstance("SHA-256").digest(file.readBytes())
+                .joinToString("") { (it.toInt() and 0xff).toString(16).padStart(2, '0') }
+            require(actual == match.groupValues[1]) { "Representability fixture changed without reviewed seal: $path" }
+        }
+        val output = generatedRepresentabilityTestDirectory.get()
+            .file("polski/textwire/LegacyRepresentabilityFixture.kt").asFile
+        output.parentFile.mkdirs()
+        output.writeText(
+            "package polski.textwire\n\n" +
+                "internal val legacyRepresentabilityInput = " +
+                literalBuildString(literalChunks(representabilityInput.asFile.readText())) + "\n" +
+                "internal val legacyRepresentabilityCases = " +
+                literalBuildString(literalChunks(representabilityCases.asFile.readText())) + "\n" +
+                "internal const val legacyRepresentabilityInputSha256 = \"${rows[0].substringBefore("  ")}\"\n",
+        )
+    }
+}
+
+val acPositiveCorpus = layout.projectDirectory.file("../../tests/fixtures/textwire/positive.cases")
+val acNegativeCorpus = layout.projectDirectory.file("../../tests/fixtures/textwire/negative.cases")
+val acCorpusSeal = layout.projectDirectory.file("../../tests/fixtures/textwire/corpus.sha256")
+val generatedAcCorpusTestDirectory = layout.buildDirectory.dir("generated/acCorpusTest/kotlin")
+
+// Test-only literal bytes are copied from the independent, sealed A/C corpus. No candidate
+// encoder supplies an expectation, and the generated source never enters an app source set.
+val generateAcCorpusTestSource by tasks.registering {
+    inputs.files(acPositiveCorpus, acNegativeCorpus, acCorpusSeal)
+    outputs.dir(generatedAcCorpusTestDirectory)
+    doLast {
+        val pinned = mapOf(
+            "tests/fixtures/textwire/positive.cases" to
+                "3efd4826a17727b98c81cf31563ece48f9fdf9db33312291b669e4a9e3144075",
+            "tests/fixtures/textwire/negative.cases" to
+                "4beaf078c24a55a1ff3c2dfcbad0e0e419367f4ed8ddcdd13d3dc4031c8ef646",
+        )
+        val sealRows = acCorpusSeal.asFile.readLines()
+        require(sealRows.size == 4 && sealRows.take(2) == pinned.map { (path, hash) -> "$hash  $path" }) {
+            "Frozen A/C corpus seal changed"
+        }
+        for ((path, file) in listOf(
+            "tests/fixtures/textwire/positive.cases" to acPositiveCorpus.asFile,
+            "tests/fixtures/textwire/negative.cases" to acNegativeCorpus.asFile,
+        )) {
+            val actual = MessageDigest.getInstance("SHA-256").digest(file.readBytes())
+                .joinToString("") { (it.toInt() and 0xff).toString(16).padStart(2, '0') }
+            require(actual == pinned.getValue(path)) { "Frozen A/C corpus bytes changed: $path" }
+        }
+        val target = generatedAcCorpusTestDirectory.get()
+            .file("polski/textwire/FrozenAcCorpusSource.kt").asFile
+        target.parentFile.mkdirs()
+        target.writeText(
+            "package polski.textwire\n\n" +
+                "internal val frozenAcPositiveCorpus = " +
+                literalBuildString(literalChunks(acPositiveCorpus.asFile.readText())) + "\n" +
+                "internal val frozenAcNegativeCorpus = " +
+                literalBuildString(literalChunks(acNegativeCorpus.asFile.readText())) + "\n",
+        )
+    }
+}
+
 val generateCoursePackSource by tasks.registering {
     // UniversalCorePlan.md §4.2/§12 UC-02: pack ids are discovered by scanning `courses/*` for a
     // `course.json`, not read from one hardcoded path — adding `courses/<id>/course.json` needs no
@@ -56,16 +195,9 @@ val generateCoursePackSource by tasks.registering {
     inputs.dir(pairsDirectory)
     outputs.dir(generatedCourseDirectory)
     doLast {
-        // UC-02: a pack directory is any immediate child of `courses/` (other than the shared
-        // `schema`/`styles` directories) that has its own `course.json` — pl-ru is the only one
-        // today, read as schema v1 like before; a second pack directory needs no edit here.
-        val packDirs = (coursesDirectory.asFile.listFiles { file -> file.isDirectory } ?: emptyArray())
-            .filter { dir -> dir.name != "schema" && dir.name != "styles" && dir.resolve("course.json").isFile }
-            .sortedBy { it.name }
-        val packSourceLiterals = packDirs.joinToString(",\n") { dir ->
-            val chunks = literalChunks(dir.resolve("course.json").readText())
-            "    EmbeddedCoursePackSource(\"${dir.name}\", ${literalBuildString(chunks)})"
-        }
+        // NJ03 B8: course.json removed as authored source; pl-ru now loads via v2 layers
+        // (pair.json + lexicon.json) exactly like en-ru. embeddedCoursePackSources is empty.
+        val packSourceLiterals = ""
 
         val frequencyChunks = literalChunks(frequencyFile.asFile.readText())
         val styleFiles = (stylesDirectory.asFile.listFiles { file -> file.extension == "json" } ?: emptyArray())
@@ -83,34 +215,14 @@ val generateCoursePackSource by tasks.registering {
             "    \"${dir.name}\" to ${literalBuildString(chunks)}"
         }
 
-        // EN-04/ADR-20 UC-12: `lang/<code>/lexicon.json` + `pairs/<pairId>/pair.json` — the two v2
-        // layer files `CoursePackLoader` reconstructs a v1-shaped pack from; scanned the same way
-        // as curriculum.json above, so a second pack's files need no Gradle/Kotlin edit.
-        val lexiconDirs = (langDirectory.asFile.listFiles { file -> file.isDirectory } ?: emptyArray())
-            .filter { dir -> dir.resolve("lexicon.json").isFile }
-            .sortedBy { it.name }
-        val lexiconEntryLiterals = lexiconDirs.joinToString(",\n") { dir ->
-            val chunks = literalChunks(dir.resolve("lexicon.json").readText())
-            "    \"${dir.name}\" to ${literalBuildString(chunks)}"
-        }
-        val pairDirs = (pairsDirectory.asFile.listFiles { file -> file.isDirectory } ?: emptyArray())
-            .filter { dir -> dir.resolve("pair.json").isFile }
-            .sortedBy { it.name }
-        val pairEntryLiterals = pairDirs.joinToString(",\n") { dir ->
-            val chunks = literalChunks(dir.resolve("pair.json").readText())
-            "    \"${dir.name}\" to ${literalBuildString(chunks)}"
-        }
+        // NJ03: lexicon.json and pair.json no longer embedded — all packs use typed objects.
+        val lexiconEntryLiterals = ""
+        val pairEntryLiterals = ""
 
         // EN-21/ADR-15: `pairs/<pairId>/lifehacks.json` — pair-scoped, outside core, scanned the
         // same way as pair.json above so a pack without lifehacks (or a future 3rd pack) needs no
-        // Gradle/Kotlin edit; [polski.presentation.StaticPackLifehackProvider] reads this map.
-        val lifehackDirs = (pairsDirectory.asFile.listFiles { file -> file.isDirectory } ?: emptyArray())
-            .filter { dir -> dir.resolve("lifehacks.json").isFile }
-            .sortedBy { it.name }
-        val lifehackEntryLiterals = lifehackDirs.joinToString(",\n") { dir ->
-            val chunks = literalChunks(dir.resolve("lifehacks.json").readText())
-            "    \"${dir.name}\" to ${literalBuildString(chunks)}"
-        }
+        // NJ03: lifehacks.json no longer embedded — typed in GeneratedLifehacks.kt.
+        val lifehackEntryLiterals = ""
 
         val target = generatedCourseDirectory.get().file("polski/data/GeneratedCourseJson.kt").asFile
         target.parentFile.mkdirs()
@@ -244,6 +356,11 @@ kotlin {
         commonTest.dependencies {
             implementation(kotlin("test"))
             implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.10.2")
+        }
+        commonTest {
+            kotlin.srcDir(generateLegacyAdmissionTestSource.map { it.outputs.files.singleFile })
+            kotlin.srcDir(generateRepresentabilityTestSource.map { it.outputs.files.singleFile })
+            kotlin.srcDir(generateAcCorpusTestSource.map { it.outputs.files.singleFile })
         }
     }
 }

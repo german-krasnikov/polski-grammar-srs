@@ -1,0 +1,26 @@
+NJ05 E2 independent read-only representability expectations, frozen before a new codec.
+Input-only old-user bytes: tests/fixtures/textwire/inputs/legacy-representability-progress.input
+The input ends in one LF. It is never an application output, export, or new authoring format.
+The separate legacy-representability.sha256 seals this file and the exact input path.
+Columns below are requirement kind | source path | expected value. longKey means the unique unknown key with prefix longKey-.
+
+INPUT_BYTES | progress | 683
+ROOT_KEYS | source | version,cards,stats,reviewsToday,lastDay,totalReviews,unknown
+UNKNOWN_KEYS | source.unknown | wide,huge,decimal,exponentOne,negativeZero,nullValue,emptyString,emptyList,emptyRecord,nested,literal,escaped,loneHigh,longKey
+NESTED_KEYS | source.unknown.nested | z,a,m
+NUMBER_TOKEN | source.unknown.wide | 9223372036854775808
+NUMBER_TOKEN | source.unknown.huge | 1e10000
+NUMBER_TOKEN | source.unknown.decimal | 1.0
+NUMBER_TOKEN | source.unknown.exponentOne | 1e0
+NUMBER_TOKEN | source.unknown.negativeZero | -0
+NULL | source.unknown.nullValue | present
+EMPTY_STRING | source.unknown.emptyString | present
+EMPTY_LIST | source.unknown.emptyList | present
+EMPTY_RECORD | source.unknown.emptyRecord | present
+ABSENT | source.unknown.missing | true
+UTF16_HEX | source.unknown.literal | d83d,de00
+UTF16_HEX | source.unknown.escaped | d83d,de00
+UTF16_HEX | source.unknown.loneHigh | d800
+LONG_KEY | source.unknown.longKey | 320,end
+
+The numeric tokens are ordered unknown progress values accepted by the old reader; preserving only a rounded binary64 value or a signed i64 is insufficient. NUMBER_TOKEN asserts the original lexeme and non-string type. The future adapter must retain it losslessly or return RecoveryRequired while leaving the old input unchanged. Vocabulary unknown padding is discarded by its old typed schema and has no implied lossless extension contract here. Preferences rejects unknown fields. No A/C/B output bytes or N26 limits are asserted.

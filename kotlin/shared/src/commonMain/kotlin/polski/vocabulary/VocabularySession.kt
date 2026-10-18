@@ -162,7 +162,7 @@ class VocabularySession(
             val current = state.value
             val merged = if (current.loadStatus == VocabularyLoadStatus.Ready)
                 VocabularyCodec.merge(current.document, imported) else imported
-            val serialized = VocabularyCodec.encode(merged)
+            val serialized = VocabularyCodec.encodeText(merged).decodeToString()
             pendingDocument = merged
             pendingRaw = serialized
             mutableState.update { it.copy(busy = true) }
@@ -188,7 +188,7 @@ class VocabularySession(
     fun exportJson(): String? {
         val current = state.value
         return current.recoveryRaw ?: if (current.loadStatus == VocabularyLoadStatus.Ready)
-            VocabularyCodec.encode(current.document) else null
+            VocabularyCodec.encodeText(current.document).decodeToString() else null
     }
 
     private suspend fun commit(transform: (VocabularyUiState) -> VocabularyDocument, resetCard: Boolean = false,
@@ -200,7 +200,7 @@ class VocabularySession(
             var pendingRaw: String? = null
             try {
                 val next = VocabularyCodec.validate(transform(current))
-                val serialized = VocabularyCodec.encode(next)
+                val serialized = VocabularyCodec.encodeText(next).decodeToString()
                 pendingDocument = next
                 pendingRaw = serialized
                 mutableState.update { it.copy(busy = true) }

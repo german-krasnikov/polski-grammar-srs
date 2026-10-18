@@ -1,0 +1,56 @@
+# NJ03 test-only preposition freeze at biome/full-port-2026@f404d79c31c8d25fe0ce284175e043beeb262ff4.
+# UTF-8 LF. Column/length count UTF-16 code units from one. No line below is generated from a candidate printer.
+# Read-only historical input: courses/lang/en/prepositions.json. Requirement: Plans/Kotlin/EnRuPackPlan.md section 5 gap A and Plans/Biome/NJ03FormsDependencyMatrix.md section Smallest useful fixture experiment.
+# A future project PREPOSITION construct may bind this Core record; these are independent acceptance expectations, not proof of execution.
+HISTORICAL | courses/lang/en/prepositions.json | 140e900f2b98b6233d00b0bb83df360f93875f75bf83a66f83b85ea1d0a6fcc2
+PROFILE | courses/lang/en/lang.json | 4e97a8fe6e4b0d7cb7ce900d60791019d9384bdbffb5edaacf2cd1ba9bc50a31
+SOURCE | tests/fixtures/nj03-preposition/role.core-data | 399eefc883e793b88e75a6858f245dd50767b1e85ab58731a9a9270af5a3662e
+TREE | $ | record | id,forms
+TREE | $/id | text | role
+TREE | $/forms | record | Subj,Obj,In,With,To,About,Of
+TREE | $/forms/Subj | text | <empty>
+TREE | $/forms/Obj | text | <empty>
+TREE | $/forms/In | text | in
+TREE | $/forms/With | text | with
+TREE | $/forms/To | text | to
+TREE | $/forms/About | text | about
+TREE | $/forms/Of | text | of
+# Each LOOKUP calls real TableMorphology.form("prep:role", {FeatureKey("Case"): FeatureValue(case)}), preserving source order.
+LOOKUP | 01 | prep:role | Case=Subj | <empty>
+LOOKUP | 02 | prep:role | Case=Obj | <empty>
+LOOKUP | 03 | prep:role | Case=In | in
+LOOKUP | 04 | prep:role | Case=With | with
+LOOKUP | 05 | prep:role | Case=To | to
+LOOKUP | 06 | prep:role | Case=About | about
+LOOKUP | 07 | prep:role | Case=Of | of
+# Missing form, missing lexeme, wrong-case lexeme and wrong-case feature value must throw, not return empty text.
+LOOKUP_ERROR | prep:role | Case=MissingCase | no form
+LOOKUP_ERROR | prep:missing | Case=In | no form
+LOOKUP_ERROR | prep:Role | Case=In | no form
+LOOKUP_ERROR | prep:role | Case=in | no form
+LOOKUP_ERROR | prep:role | <empty-bundle> | no form
+# Tiny test-owned ConstructionTemplate: one SlotTemplate(name="prep", category="prep", requiredFeatures=["Case"]), separator=" "; LexemeFeatures returns emptyMap(); lexicalSlots={"prep":"role"}.
+# RealizedSentence uses Kotlin IntRange semantics: `0 until 2` = 0..1; `0 until 0` is an empty range, yet the slot key is present.
+REALIZER | fixture.preposition | Case=In | text=in | slot=prep | span=0 until 2
+REALIZER | fixture.preposition | Case=Obj | text=<empty> | slot=prep | span=0 until 0
+REALIZER_ERROR | fixture.preposition | Case=In | missing lexical slot prep | throws
+# Obj's empty lookup is not the production recipe's optional-slot omission; the latter needs a separate full-course parity check.
+# Negative authored sources are complete UTF-8 LF files. Each has one fault: unknown keys are additions to all seven valid Case keys, never replacements. Coordinates identify the first required diagnostic token; omitted keys point to the containing forms record's opening brace.
+NEGATIVE | missing-subj | tests/fixtures/nj03-preposition/missing-subj.core-data | 80f9f3dcb4c3c5a78564c38f8ecbd88e981761d64c199afbed471861eb2a935c | E_CASE_MISSING | $/forms/Subj | 2:30 | 1 | {
+NEGATIVE | missing-obj | tests/fixtures/nj03-preposition/missing-obj.core-data | 01dc5b3880448acf6a4be7dcdae5e2e380715d3c30fd0f7a846f4f9650011f12 | E_CASE_MISSING | $/forms/Obj | 2:30 | 1 | {
+NEGATIVE | duplicate-in | tests/fixtures/nj03-preposition/duplicate-in.core-data | 1532e94987961837dafadf9e9467a66015861ff77cfae8498185f67251500772 | E_DUP_KEY | $/forms/In | 2:55 | 2 | In
+NEGATIVE | unknown-case | tests/fixtures/nj03-preposition/unknown-case.core-data | 7784682dc37a2eb65315a6290f8ae980c02d47cab15d4700215db310cedf73ee | E_CASE_UNKNOWN | $/forms/Onto | 2:93 | 4 | Onto
+NEGATIVE | lowercase-case | tests/fixtures/nj03-preposition/lowercase-case.core-data | 76169dbd656377df976f7d8c99227820721c1fb3e28102f493026ff80c7aa38d | E_CASE_UNKNOWN | $/forms/in | 2:55 | 2 | in
+NEGATIVE | wrong-type | tests/fixtures/nj03-preposition/wrong-type.core-data | 4227a614fd7eba75e9639e88799fbdf8aebf84e9fdad2fca825f63435e14f39e | E_TYPE | $/forms/In | 2:52 | 1 | 7
+NEGATIVE | null-value | tests/fixtures/nj03-preposition/null-value.core-data | ec6718a3d0c5b7617355429f665f2a1bb798fac0d78d7515ef218adb590bd298 | E_TYPE | $/forms/Subj | 2:37 | 4 | null
+NEGATIVE | wrong-key | tests/fixtures/nj03-preposition/wrong-key.core-data | 67638d15f2a5c7f012e9072d9dc88b320ef250a387fbeb135bfc554691241a96 | E_FIELD_UNKNOWN | $/formz | 2:94 | 5 | formz
+NEGATIVE | utf16-wrong-type | tests/fixtures/nj03-preposition/utf16-wrong-type.core-data | b2071d1698c302e919eb3763fc2a23c44183b1108558ad407704a7577b1deb14 | E_TYPE | $/forms/In | 2:54 | 1 | 7
+# Artifact checks are frozen obligations. No producer/manifest exists yet, so these are NOT RUN rather than pretend failures.
+ARTIFACT | source-only | alter role.core-data, retain output and manifest | REJECT stale source before consumer
+ARTIFACT | type-only | alter PREPOSITION type/construct, retain output and manifest | REJECT stale type before consumer
+ARTIFACT | profile-only | alter accepted Case profile, retain output and manifest | REJECT stale reference binding before consumer
+ARTIFACT | compiler-only | alter compiler pin/artifact, retain output and manifest | REJECT stale compiler before consumer
+ARTIFACT | printer-only | alter Kotlin printer, retain output and manifest | REJECT stale printer before consumer
+ARTIFACT | output-only | alter generated Kotlin, retain source and manifest | REJECT stale output before consumer
+ARTIFACT | output-missing | remove generated Kotlin, retain source and manifest | REJECT missing output before consumer
+ARTIFACT | manifest-only | alter text manifest, retain source and output | REJECT stale manifest before consumer

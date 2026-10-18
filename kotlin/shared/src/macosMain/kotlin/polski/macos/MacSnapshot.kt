@@ -188,6 +188,7 @@ internal fun snapshot(state: AppUiState): String = buildJsonObject {
         when (effect) {
             is UiEffect.FocusReveal -> { put("kind", "focus"); put("exerciseId", effect.exerciseId) }
             is UiEffect.DownloadJson -> { put("kind", "export"); put("filename", effect.filename); put("json", effect.json) }
+            is UiEffect.DownloadText -> { put("kind", "exportText"); put("filename", effect.filename); put("text", effect.text) }
             is UiEffect.ConfirmReset -> { put("kind", "reset"); put("prompt", effect.prompt) }
         }
     } }))

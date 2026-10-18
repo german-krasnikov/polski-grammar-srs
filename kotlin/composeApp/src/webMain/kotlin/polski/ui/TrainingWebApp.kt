@@ -271,6 +271,19 @@ private fun executeEffect(root: HTMLElement, state: AppUiState, effect: UiEffect
                 store.dispatch(AppAction.EffectAcknowledged(effect.id, EffectOutcome.Failed(error.message ?: "Экспорт не удался")))
             }
         }
+        is UiEffect.DownloadText -> {
+            try {
+                val anchor = document.createElement("a") as HTMLAnchorElement
+                anchor.href = "data:text/plain;charset=utf-8,${percentEncode(effect.text)}"
+                anchor.download = effect.filename
+                document.body?.appendChild(anchor)
+                anchor.click()
+                anchor.remove()
+                store.dispatch(AppAction.EffectAcknowledged(effect.id, EffectOutcome.Completed))
+            } catch (error: Throwable) {
+                store.dispatch(AppAction.EffectAcknowledged(effect.id, EffectOutcome.Failed(error.message ?: "Экспорт не удался")))
+            }
+        }
     }
     return true
 }

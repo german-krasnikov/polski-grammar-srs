@@ -71,12 +71,13 @@ kotlin {
         androidResources { enable = true }
     }
     js {
-        browser()
+        compilerOptions { sourceMap.set(false) }
+        browser { commonWebpackConfig { sourceMaps = false } }
         binaries.executable()
     }
     @OptIn(org.jetbrains.kotlin.gradle.ExperimentalWasmDsl::class)
     wasmJs {
-        browser()
+        browser { commonWebpackConfig { sourceMaps = false } }
         binaries.executable()
     }
     applyDefaultHierarchyTemplate()
@@ -108,6 +109,8 @@ kotlin {
             }
         }
         val desktopTest by getting {
+            // Test-only, exact-path sealed legacy input; never included in application resources.
+            resources.srcDir(layout.projectDirectory.dir("../../tests/fixtures/textwire"))
             dependencies {
                 implementation(kotlin("test"))
                 implementation("org.jetbrains.compose.ui:ui-test:1.12.1")
@@ -118,6 +121,24 @@ kotlin {
             // FC-16: legacy RiveAnimationView/state-machine-input API — see AndroidRiveOverlay.kt.
             implementation("app.rive:rive-android:11.12.1")
         }
+    }
+}
+
+// Source maps are JSON-format application artifacts. Check all three web distributions
+// before the compatibility bundle is uploaded or copied into the published site.
+tasks.register("verifyNoWebSourceMaps") {
+    group = "verification"
+    description = "Rejects source-map files from Kotlin JS, Wasm and compatibility web distributions."
+    dependsOn("composeCompatibilityBrowserDistribution")
+    doLast {
+        val distributionNames = listOf("js", "wasmJs", "composeWebCompatibility")
+        val maps = distributionNames.flatMap { name ->
+            val root = layout.buildDirectory.dir("dist/$name/productionExecutable").get().asFile
+            check(root.isDirectory) { "Missing $name web distribution: $root" }
+            root.walkTopDown().filter { it.isFile && it.extension.equals("map", ignoreCase = true) }
+                .map { it.relativeTo(root).invariantSeparatorsPath.let { path -> "$name/$path" } }.toList()
+        }
+        check(maps.isEmpty()) { "JSON-format source maps in web distributions: ${maps.sorted().joinToString()}" }
     }
 }
 

@@ -1,0 +1,1339 @@
+# NJ03 independent old-source skill copy/presentation/style expectation, frozen before SKILL_COPY transcription.
+# UTF-8 LF. Order, object keys, field presence, list length, booleans and every text byte are significant.
+# SOURCE = historical input SHA-256; SKILL = ordered pair key; NODE = preorder path/kind/value.
+# TEXT payload = UTF-8 byte length : SHA-256 of decoded UTF-8 bytes : readable Unicode with \, \n, \r, \t escapes.
+# OBJECT payload lists keys in source order; EMPTY means present empty record. LIST 0 means present empty list. NULL means present null.
+# Full old skill object is frozen so copy fields cannot silently diverge from id/level/prerequisites; copy authority is only the non-SkillSpec fields.
+SOURCE | pl-v1 | courses/pl-ru/course.json | 7255e8c686ceee17a72d280e5876b0cf6776dd9a1743884cd75c724fb8180dcc
+SOURCE | pl-ru | courses/pairs/pl-ru/pair.json | dadb5eabaa02fa7dcf300f01bc3aa079cec43567247c249b3476d5c8a32215b7
+SOURCE | en-ru | courses/pairs/en-ru/pair.json | 55f79438cf1511b1061d389f4d74117112c910092e7515c73c57aa0d3af61862
+SOURCE | en-curriculum | courses/lang/en/curriculum.json | 4c8f1c21595479a1b49ebb38a6fa4df9fff15f02bbe6d6cdd2b8ed4ecaf0afe6
+SOURCE | pl-curriculum | courses/lang/pl/curriculum.json | 4f98cb4e0a5bc5b5f21890120fe25e077cedc2ba5e65852bff4b1e252b4234b7
+SKILL | en-ru | 01 | en:role.object
+NODE | en-ru | 01 | $ | OBJECT | id,title,group,level,formula,theory,hint,prerequisites,focus,methods,styleContent
+NODE | en-ru | 01 | $/id | TEXT | 14:737aa862df4c201888d798163b667edf9f158e24842393bde1908f7799512c39:en:role.object
+NODE | en-ru | 01 | $/title | TEXT | 29:151c673a9cfdfe535df6f69c4f55bb79fa19f77997b4c0bedb6aeeae2d7eb7e8:Object · без падежа
+NODE | en-ru | 01 | $/group | TEXT | 5:c25337055464f8d31fb1498bc94025cba5eae3b0e1cf07741f09f8b873d00103:Roles
+NODE | en-ru | 01 | $/level | TEXT | 2:16a36e86f6fed5d465ff332511a0ce1a863b55d364b25a7cdaa25db19abf9648:A1
+NODE | en-ru | 01 | $/formula | TEXT | 144:2da1ab48bda9cba35bd1117967201fc4c232e06efd747fad23aa6c6645253ae3:Подлежащее → дополнение: падежа нет, меняется только порядок слов (Subject-Verb-Object).
+NODE | en-ru | 01 | $/theory | TEXT | 390:ef6b52a2cc9fc15ef40b649c9cd9daf5a5bfb01616f01951e38ed7617bf7e4e8:В английском у существительных нет падежных окончаний: форма слова одна и та же и для подлежащего, и для дополнения. Роль слова показывает порядок: I see my house — «house» дополнение просто потому, что стоит после глагола.
+NODE | en-ru | 01 | $/hint | TEXT | 48:0bce5600ce6cfaf5fa325e59ba742351f46065dacef98e92c83c986c1fc30e9a:my beautiful house → I see my beautiful house.
+NODE | en-ru | 01 | $/prerequisites | LIST | 0
+NODE | en-ru | 01 | $/focus | OBJECT | before,after
+NODE | en-ru | 01 | $/focus/before | TEXT | 18:950a373c80885afc065274210f51e1f7ee834cd6635472a04914a436779f4f5b:my beautiful house
+NODE | en-ru | 01 | $/focus/after | TEXT | 18:950a373c80885afc065274210f51e1f7ee834cd6635472a04914a436779f4f5b:my beautiful house
+NODE | en-ru | 01 | $/methods | OBJECT | logic,situations
+NODE | en-ru | 01 | $/methods/logic | OBJECT | introduction,promptLead,introduce,retrieve,feedback,review
+NODE | en-ru | 01 | $/methods/logic/introduction | TEXT | 390:ef6b52a2cc9fc15ef40b649c9cd9daf5a5bfb01616f01951e38ed7617bf7e4e8:В английском у существительных нет падежных окончаний: форма слова одна и та же и для подлежащего, и для дополнения. Роль слова показывает порядок: I see my house — «house» дополнение просто потому, что стоит после глагола.
+NODE | en-ru | 01 | $/methods/logic/promptLead | TEXT | 61:442b5151eb2924d3f075686bdec5fa7eeae0dc62862e26b181a17252f8d37c5d:Сначала определи правило и форму.
+NODE | en-ru | 01 | $/methods/logic/introduce | TEXT | 158:766c3e6208d4db5e957bea6d1a4ea7ceb33e32b5e096365fdb9c7c30af439e08:Проверь: меняется ли форма существительного при переходе из подлежащего в дополнение?
+NODE | en-ru | 01 | $/methods/logic/retrieve | TEXT | 127:53c24754ca08d3326d45d97a3c0de5c9ad68793b22058d098f97efa89e0c9461:Определи признаки и преобразуй исходное предложение самостоятельно.
+NODE | en-ru | 01 | $/methods/logic/feedback | TEXT | 132:44b559e170de20f9416b72ce2ea9ab8fbde7bcdd04ac9f553da88cafa57df38a:Сравни исходную и новую форму, затем проверь каждое изменение и правило.
+NODE | en-ru | 01 | $/methods/logic/review | TEXT | 168:9d390f23626d63465f7ee59e6fbb33a9c7a37ca33aea92755c7b879f7ee45f8a:Выбери «Повторить» или «Вспомнил» по своей попытке; затем реши новое задание без подсказки.
+NODE | en-ru | 01 | $/methods/situations | OBJECT | introduction,promptLead,introduce,retrieve,feedback,review
+NODE | en-ru | 01 | $/methods/situations/introduction | TEXT | 236:08b7f592638f0d37902c6bcc406b6bcff06ec5fb1592c639614a3a3a85d06926:Ты показываешь собеседнику предмет, о котором говоришь. В английском не нужно менять форму слова — только сказать её после «I see».
+NODE | en-ru | 01 | $/methods/situations/promptLead | TEXT | 84:6e5b09c01f4379252336b49ccd4208bfedaaa85b9b0857cc848f009ba8c7cee4:Представь ситуацию и скажи целое предложение.
+NODE | en-ru | 01 | $/methods/situations/introduce | TEXT | 148:697d15b436b97fd8b1ddc41073bc94b5f34544153b5651ad3aa697bea52bb2ed:Ты сообщаешь собеседнику, что видишь названное. Как сказать об этом целой фразой?
+NODE | en-ru | 01 | $/methods/situations/retrieve | TEXT | 113:de639badf123d9e75205e26852d3062620c5878f8cbc8a63a4551d4438495462:Представь ситуацию и скажи целое предложение самостоятельно.
+NODE | en-ru | 01 | $/methods/situations/feedback | TEXT | 188:28a9d10f8ea05d0d0dfa186fe328d984901550311f4abbc542bedb6d3bc2421e:Сравни, что хотел сказать, с эталоном: форма слова не меняется, меняется только его место в предложении.
+NODE | en-ru | 01 | $/methods/situations/review | TEXT | 150:294b6fbeab70d415b69854c22c77d5cf12e91d39234c44e5c9eb436a2db33ef7:Оцени, удалось ли вспомнить ответ самостоятельно; следующую ситуацию реши заново.
+NODE | en-ru | 01 | $/styleContent | OBJECT | nativeParallel,examples,why
+NODE | en-ru | 01 | $/styleContent/nativeParallel | LIST | 1
+NODE | en-ru | 01 | $/styleContent/nativeParallel/0 | OBJECT | native,target,matches,note
+NODE | en-ru | 01 | $/styleContent/nativeParallel/0/native | TEXT | 16:5e49aec9d4dd4aebae654cd9828b03afcf7b7a6ef8e655e682e3e26a8a66260c:Вижу дом.
+NODE | en-ru | 01 | $/styleContent/nativeParallel/0/target | TEXT | 14:b4823445446972bd3ff9dbe48840f89a4a75d7a1ceb9c748699a5df7e9416172:I see a house.
+NODE | en-ru | 01 | $/styleContent/nativeParallel/0/matches | BOOL | false
+NODE | en-ru | 01 | $/styleContent/nativeParallel/0/note | TEXT | 368:da100476465a995d089195606f61bf091b5ea306f288e2b29a6d4524632d03c3:В русском нет артикля вообще — «дом» без «a»/«the» звучит нормально; в английском голое существительное почти всегда требует артикль. Это первое расхождение, которое собьёт русскоговорящего чаще всего.
+NODE | en-ru | 01 | $/styleContent/examples | LIST | 2
+NODE | en-ru | 01 | $/styleContent/examples/0 | TEXT | 13:7618153da78db3e65974785606942fe694a48bb97185e5838c86b6944ded7861:I see a book.
+NODE | en-ru | 01 | $/styleContent/examples/1 | TEXT | 12:273a8ff142ac420623a280c01ad1f36f43ad09a7c8bc018076db2ffe9a42da6f:I see a dog.
+NODE | en-ru | 01 | $/styleContent/why | TEXT | 291:9f915327be31c208426eb8c2a6b4803029ec6376101fbf61d5158419551eed0b:Английский обозначает роль слова местом в предложении, а не окончанием — поэтому дополнение выглядит точно так же, как подлежащее, просто стоит после глагола.
+SKILL | en-ru | 02 | en:verb.presentSimple
+NODE | en-ru | 02 | $ | OBJECT | id,title,group,level,formula,theory,hint,prerequisites,focus,methods,styleContent
+NODE | en-ru | 02 | $/id | TEXT | 21:a5bbe2d6ad540c0fef03a6cf913f069da0a10804437111ee3033be79d0b1a7b3:en:verb.presentSimple
+NODE | en-ru | 02 | $/title | TEXT | 14:d4edefb763b4e161e1b2ef0a1eddb72386b891fc9b03b8027fd451b01b291037:Present Simple
+NODE | en-ru | 02 | $/group | TEXT | 4:4405911001ce921421527486758e45e9213792d21f84ec1cbf075f2327eca2de:Verb
+NODE | en-ru | 02 | $/level | TEXT | 2:16a36e86f6fed5d465ff332511a0ce1a863b55d364b25a7cdaa25db19abf9648:A1
+NODE | en-ru | 02 | $/formula | TEXT | 110:f770c09230728ede880600a78dce877e6c935fb12a719814dc0ae5389ed549a0:3-е лицо ед.ч.: добавляем -s/-es к базовой форме глагола (Past → Pres).
+NODE | en-ru | 02 | $/theory | TEXT | 255:d022b087e736595312058abaf03a8f7ae5c84c46c8657ec5a586a70cfa4b68dc:В настоящем простом времени для he/she/it к глаголу добавляется -s (walk → walks). Это единственное изменение формы глагола по лицу для этого времени.
+NODE | en-ru | 02 | $/hint | TEXT | 16:9fed21f2260987dfc6d0cf4e2443af93b15511757fc7c1647fbada998d1aac99:walked → walks
+NODE | en-ru | 02 | $/prerequisites | LIST | 0
+NODE | en-ru | 02 | $/focus | OBJECT | before,after
+NODE | en-ru | 02 | $/focus/before | TEXT | 6:2c158582949f34c9ef03daee0949fda374fcaa77dff2af611c96a027fbd30832:walked
+NODE | en-ru | 02 | $/focus/after | TEXT | 5:e3c024aa6059557ea0287bf08cbe9ebc8e27a26a226398c99e9d001e35ace381:walks
+NODE | en-ru | 02 | $/methods | OBJECT | logic,situations
+NODE | en-ru | 02 | $/methods/logic | OBJECT | introduction,promptLead,introduce,retrieve,feedback,review
+NODE | en-ru | 02 | $/methods/logic/introduction | TEXT | 255:d022b087e736595312058abaf03a8f7ae5c84c46c8657ec5a586a70cfa4b68dc:В настоящем простом времени для he/she/it к глаголу добавляется -s (walk → walks). Это единственное изменение формы глагола по лицу для этого времени.
+NODE | en-ru | 02 | $/methods/logic/promptLead | TEXT | 61:442b5151eb2924d3f075686bdec5fa7eeae0dc62862e26b181a17252f8d37c5d:Сначала определи правило и форму.
+NODE | en-ru | 02 | $/methods/logic/introduce | TEXT | 132:6e8bb976433145a4a99c97385462e641ec65d00b6ab84061462c8622dfdefb4f:Проверь: это 3-е лицо единственного числа? Тогда добавь -s к базовой форме.
+NODE | en-ru | 02 | $/methods/logic/retrieve | TEXT | 127:53c24754ca08d3326d45d97a3c0de5c9ad68793b22058d098f97efa89e0c9461:Определи признаки и преобразуй исходное предложение самостоятельно.
+NODE | en-ru | 02 | $/methods/logic/feedback | TEXT | 132:44b559e170de20f9416b72ce2ea9ab8fbde7bcdd04ac9f553da88cafa57df38a:Сравни исходную и новую форму, затем проверь каждое изменение и правило.
+NODE | en-ru | 02 | $/methods/logic/review | TEXT | 168:9d390f23626d63465f7ee59e6fbb33a9c7a37ca33aea92755c7b879f7ee45f8a:Выбери «Повторить» или «Вспомнил» по своей попытке; затем реши новое задание без подсказки.
+NODE | en-ru | 02 | $/methods/situations | OBJECT | introduction,promptLead,introduce,retrieve,feedback,review
+NODE | en-ru | 02 | $/methods/situations/introduction | TEXT | 162:4869956cffd3b685b44e7a6d08bdc8bd75693cfd72b41b9725bbd50834252d9d:Ты рассказываешь о привычном действии — том, что происходит регулярно, не именно сейчас.
+NODE | en-ru | 02 | $/methods/situations/promptLead | TEXT | 84:6e5b09c01f4379252336b49ccd4208bfedaaa85b9b0857cc848f009ba8c7cee4:Представь ситуацию и скажи целое предложение.
+NODE | en-ru | 02 | $/methods/situations/introduce | TEXT | 93:5b66a59627db7956f6cfc0368fbee462cc7ed831a0119ce2de633bb75e5462f4:Как сказать, что это происходит обычно, а не сейчас?
+NODE | en-ru | 02 | $/methods/situations/retrieve | TEXT | 113:de639badf123d9e75205e26852d3062620c5878f8cbc8a63a4551d4438495462:Представь ситуацию и скажи целое предложение самостоятельно.
+NODE | en-ru | 02 | $/methods/situations/feedback | TEXT | 111:e489a11cded8039f523414ac6f6ec44d159b2f08027c5d383f5bd83e7481dce0:Сравни свой ответ с эталоном: обрати внимание на окончание -s.
+NODE | en-ru | 02 | $/methods/situations/review | TEXT | 150:294b6fbeab70d415b69854c22c77d5cf12e91d39234c44e5c9eb436a2db33ef7:Оцени, удалось ли вспомнить ответ самостоятельно; следующую ситуацию реши заново.
+NODE | en-ru | 02 | $/styleContent | OBJECT | nativeParallel,examples,why
+NODE | en-ru | 02 | $/styleContent/nativeParallel | LIST | 1
+NODE | en-ru | 02 | $/styleContent/nativeParallel/0 | OBJECT | native,target,matches,note
+NODE | en-ru | 02 | $/styleContent/nativeParallel/0/native | TEXT | 51:7e0b1c319195285760b55af2dc0b70da958d465ed292d702e9d010452b700b84:Он читает книгу каждый день.
+NODE | en-ru | 02 | $/styleContent/nativeParallel/0/target | TEXT | 26:f1379bdc34471326aca0064e908929332dd2d71200bb6999af208268ae67a290:He reads a book every day.
+NODE | en-ru | 02 | $/styleContent/nativeParallel/0/matches | BOOL | false
+NODE | en-ru | 02 | $/styleContent/nativeParallel/0/note | TEXT | 683:b086bffcaacee181cdee7f78f69893ac7ec9787c07781440750548e645dbc26b:В русском лицо глагола различается на каждой форме (читаю/читаешь/читает/читаем/читаете/читают) — окончание меняется всегда. В английском наоборот: единственный маркер лица во всём наборе — окончание -s, и только для he/she/it; I/you/we/they вообще без окончания. Из-за этого русскоговорящие либо забывают -s там, где оно обязательно, либо по инерции добавляют его туда, где оно не нужно.
+NODE | en-ru | 02 | $/styleContent/examples | LIST | 2
+NODE | en-ru | 02 | $/styleContent/examples/0 | TEXT | 14:3e4000ffef68fe1ca4ac7de69429f1ac517d2c4d3387d9ce00be67b218f18c13:The dog walks.
+NODE | en-ru | 02 | $/styleContent/examples/1 | TEXT | 17:0151e555f9696cfe7c8b0fb7f9276e0e7d7e0c77ad603f36404144d66c4e8121:She reads a book.
+NODE | en-ru | 02 | $/styleContent/why | TEXT | 207:eec6d10b0a33a027bff1031639ec3046680b28c37640da97c025d858516333f2:Present Simple обозначает привычные, регулярные действия и факты; -s в 3-м лице — единственный маркер лица в этом времени.
+SKILL | en-ru | 03 | en:possessive.my
+NODE | en-ru | 03 | $ | OBJECT | id,title,group,level,formula,theory,hint,prerequisites,focus,methods,styleContent
+NODE | en-ru | 03 | $/id | TEXT | 16:f073c4b7943383333f634f531fdf3d43f1134d2d181413ac4aee493fddf282dd:en:possessive.my
+NODE | en-ru | 03 | $/title | TEXT | 20:413886ceca04305e361e2cf4726b142f227ba3c43d31ba3a435b2f7d633e8ecf:My, his, her, our...
+NODE | en-ru | 03 | $/group | TEXT | 9:2dff10f6a8b7e6985b6ad779a205a3cf95f95d5966402e50d288696519bbe2ac:Agreement
+NODE | en-ru | 03 | $/level | TEXT | 2:16a36e86f6fed5d465ff332511a0ce1a863b55d364b25a7cdaa25db19abf9648:A1
+NODE | en-ru | 03 | $/formula | TEXT | 206:9aaa0c14baf5a84bd3e5c3454d38d99caf3eb8720449c76c8826ab1b07546b4f:Притяжательное местоимение не согласуется ни с родом, ни с числом предмета: my/your/his/her/its/our/their — всегда одна форма.
+NODE | en-ru | 03 | $/theory | TEXT | 297:db845aa709c0a4fda7a634f82298fa2d96afcaa72004037c1e3e03578b7e9a6d:В отличие от русского («мой/моя/моё»), английское притяжательное местоимение не изменяется по роду или числу владения: my dog, my house, my houses — форма my одна на все случаи.
+NODE | en-ru | 03 | $/hint | TEXT | 42:2f761252d40b7d5026c775af81a4e5173e492b840f7f8acf96bc6e84f89659a0:my beautiful house → her beautiful house
+NODE | en-ru | 03 | $/prerequisites | LIST | 1
+NODE | en-ru | 03 | $/prerequisites/0 | TEXT | 14:737aa862df4c201888d798163b667edf9f158e24842393bde1908f7799512c39:en:role.object
+NODE | en-ru | 03 | $/focus | OBJECT | before,after
+NODE | en-ru | 03 | $/focus/before | TEXT | 18:950a373c80885afc065274210f51e1f7ee834cd6635472a04914a436779f4f5b:my beautiful house
+NODE | en-ru | 03 | $/focus/after | TEXT | 19:2398c20a8ff079e1af3c33f48fbc50abd6be0eb77f1bd974c8f612a3bbd9bf66:her beautiful house
+NODE | en-ru | 03 | $/methods | OBJECT | logic,situations
+NODE | en-ru | 03 | $/methods/logic | OBJECT | introduction,promptLead,introduce,retrieve,feedback,review
+NODE | en-ru | 03 | $/methods/logic/introduction | TEXT | 297:db845aa709c0a4fda7a634f82298fa2d96afcaa72004037c1e3e03578b7e9a6d:В отличие от русского («мой/моя/моё»), английское притяжательное местоимение не изменяется по роду или числу владения: my dog, my house, my houses — форма my одна на все случаи.
+NODE | en-ru | 03 | $/methods/logic/promptLead | TEXT | 61:442b5151eb2924d3f075686bdec5fa7eeae0dc62862e26b181a17252f8d37c5d:Сначала определи правило и форму.
+NODE | en-ru | 03 | $/methods/logic/introduce | TEXT | 233:be0f87263200361af331693161f91adf606a044802a5436c0079b821e3f1f78d:Проверь: меняется ли форма прилагательного или существительного при замене владельца? Нет — меняется только само местоимение.
+NODE | en-ru | 03 | $/methods/logic/retrieve | TEXT | 127:53c24754ca08d3326d45d97a3c0de5c9ad68793b22058d098f97efa89e0c9461:Определи признаки и преобразуй исходное предложение самостоятельно.
+NODE | en-ru | 03 | $/methods/logic/feedback | TEXT | 132:44b559e170de20f9416b72ce2ea9ab8fbde7bcdd04ac9f553da88cafa57df38a:Сравни исходную и новую форму, затем проверь каждое изменение и правило.
+NODE | en-ru | 03 | $/methods/logic/review | TEXT | 168:9d390f23626d63465f7ee59e6fbb33a9c7a37ca33aea92755c7b879f7ee45f8a:Выбери «Повторить» или «Вспомнил» по своей попытке; затем реши новое задание без подсказки.
+NODE | en-ru | 03 | $/methods/situations | OBJECT | introduction,promptLead,introduce,retrieve,feedback,review
+NODE | en-ru | 03 | $/methods/situations/introduction | TEXT | 128:a7fc5d8d4cae39e845447502caf9cc7cfee8020fddeb6e41b2beaa582fd863e4:Ты говоришь о предмете, который принадлежит кому-то другому — не тебе.
+NODE | en-ru | 03 | $/methods/situations/promptLead | TEXT | 84:6e5b09c01f4379252336b49ccd4208bfedaaa85b9b0857cc848f009ba8c7cee4:Представь ситуацию и скажи целое предложение.
+NODE | en-ru | 03 | $/methods/situations/introduce | TEXT | 109:2ae2749a0d21e5a3801050eb68cf0883719f4ff931f8cb639cde771f3fd66c29:Как сказать, что этот предмет принадлежит другому человеку?
+NODE | en-ru | 03 | $/methods/situations/retrieve | TEXT | 113:de639badf123d9e75205e26852d3062620c5878f8cbc8a63a4551d4438495462:Представь ситуацию и скажи целое предложение самостоятельно.
+NODE | en-ru | 03 | $/methods/situations/feedback | TEXT | 145:8bc5459ee7e8edbbd1456e79e096ac3a62d879e3574725091d9bffc8198abfeb:Сравни ответ с эталоном: остальная фраза не меняется, меняется только владелец.
+NODE | en-ru | 03 | $/methods/situations/review | TEXT | 150:294b6fbeab70d415b69854c22c77d5cf12e91d39234c44e5c9eb436a2db33ef7:Оцени, удалось ли вспомнить ответ самостоятельно; следующую ситуацию реши заново.
+NODE | en-ru | 03 | $/styleContent | OBJECT | nativeParallel,examples,why
+NODE | en-ru | 03 | $/styleContent/nativeParallel | LIST | 1
+NODE | en-ru | 03 | $/styleContent/nativeParallel/0 | OBJECT | native,target,matches,note
+NODE | en-ru | 03 | $/styleContent/nativeParallel/0/native | TEXT | 18:76b37d6504b46cecce113b14f9a4894e2591716c8946bd23b19ddfd659314262:Моя книга.
+NODE | en-ru | 03 | $/styleContent/nativeParallel/0/target | TEXT | 8:1ddf793191afaf65e988b8160799a21e9a45574adfb62890b42bf24dbd707c8c:My book.
+NODE | en-ru | 03 | $/styleContent/nativeParallel/0/matches | BOOL | true
+NODE | en-ru | 03 | $/styleContent/nativeParallel/0/note | TEXT | 413:434139799b45cb7716b97108f066048db1be4acca57e623b8a02ef1a13d468b9:Порядок владелец-перед-существительным совпадает в обоих языках, притяжательное не согласуется по числу/роду ни там, ни там на уровне «мой/my» — единственный skill из 16, где английское явление проще русского, не только польского.
+NODE | en-ru | 03 | $/styleContent/examples | LIST | 2
+NODE | en-ru | 03 | $/styleContent/examples/0 | TEXT | 17:f721d9bddf91bc6b611a1d507fe899cedab6a063bfd02a10c031578a4575b5ce:This is her book.
+NODE | en-ru | 03 | $/styleContent/examples/1 | TEXT | 18:1bf32a72d7c316d5633deab8a637472ca2f435b74a3722ab01e1120e14be0c92:This is their car.
+NODE | en-ru | 03 | $/styleContent/why | TEXT | 297:1d7834e4a2b915b257e7ed1c54fdf1aefb79634b5dd08d4fc213baa393a974e7:Английское притяжательное — закрытый список неизменяемых слов; в отличие от польского и русского, ему не нужно согласование с родом или числом существительного.
+SKILL | en-ru | 04 | en:mood.question
+NODE | en-ru | 04 | $ | OBJECT | id,title,group,level,formula,theory,hint,prerequisites,focus,methods,styleContent
+NODE | en-ru | 04 | $/id | TEXT | 16:50d63e0d57644f0ac86375b4289cc14ec656364d69fdb99b2c6abc22637b069c:en:mood.question
+NODE | en-ru | 04 | $/title | TEXT | 29:d232658362ff33d427e8646712d30840ce0fcee8feb95a7e351edf4955aaff51:Yes/No Question · do-support
+NODE | en-ru | 04 | $/group | TEXT | 8:e006e2f17808669e07e178fca62d24707a4a564b99f15023c8b8cfcb45a463b6:Sentence
+NODE | en-ru | 04 | $/level | TEXT | 2:16a36e86f6fed5d465ff332511a0ce1a863b55d364b25a7cdaa25db19abf9648:A1
+NODE | en-ru | 04 | $/formula | TEXT | 153:b901f1d1affd8805f190873a57b144fc57627486f5d5baeb1c13b97333e28997:Вопрос образуется через вынесенный вперёд вспомогательный do/does, а не порядком слов.
+NODE | en-ru | 04 | $/theory | TEXT | 291:e726514f7712256a4204df2c13c95e325173de864b7a1f5db489d1231e8da51f:В отличие от русского, где вопрос — это только интонация, английский вопрос требует вспомогательный глагол do/does, поставленный перед подлежащим: You walk. → Do you walk?
+NODE | en-ru | 04 | $/hint | TEXT | 26:ddea10bc69f544b64020b55ed1d79426e7d20a857e06533d5f361ad1637c47a3:You walk. → Do you walk?
+NODE | en-ru | 04 | $/prerequisites | LIST | 1
+NODE | en-ru | 04 | $/prerequisites/0 | TEXT | 21:a5bbe2d6ad540c0fef03a6cf913f069da0a10804437111ee3033be79d0b1a7b3:en:verb.presentSimple
+NODE | en-ru | 04 | $/focus | OBJECT | before,after
+NODE | en-ru | 04 | $/focus/before | TEXT | 9:54e2c476495c322300e01fa2106f1c459535ed5c6f88d2a5f8f0f599d6e2a34a:You walk.
+NODE | en-ru | 04 | $/focus/after | TEXT | 12:3d9d3136d7dd35e41eb4bba8f4158e45ae5ba61a9ae880dd4ab8a9903323d0c3:Do you walk?
+NODE | en-ru | 04 | $/methods | OBJECT | logic,situations
+NODE | en-ru | 04 | $/methods/logic | OBJECT | introduction,promptLead,introduce,retrieve,feedback,review
+NODE | en-ru | 04 | $/methods/logic/introduction | TEXT | 291:e726514f7712256a4204df2c13c95e325173de864b7a1f5db489d1231e8da51f:В отличие от русского, где вопрос — это только интонация, английский вопрос требует вспомогательный глагол do/does, поставленный перед подлежащим: You walk. → Do you walk?
+NODE | en-ru | 04 | $/methods/logic/promptLead | TEXT | 61:442b5151eb2924d3f075686bdec5fa7eeae0dc62862e26b181a17252f8d37c5d:Сначала определи правило и форму.
+NODE | en-ru | 04 | $/methods/logic/introduce | TEXT | 197:512ad29f5f88047dbd1ac125cbbf2af916f44f5e93366ec695d6fd1ff592960b:Проверь: есть ли в предложении вспомогательный глагол do? Если нет — его нужно добавить и поставить в начало.
+NODE | en-ru | 04 | $/methods/logic/retrieve | TEXT | 127:53c24754ca08d3326d45d97a3c0de5c9ad68793b22058d098f97efa89e0c9461:Определи признаки и преобразуй исходное предложение самостоятельно.
+NODE | en-ru | 04 | $/methods/logic/feedback | TEXT | 132:44b559e170de20f9416b72ce2ea9ab8fbde7bcdd04ac9f553da88cafa57df38a:Сравни исходную и новую форму, затем проверь каждое изменение и правило.
+NODE | en-ru | 04 | $/methods/logic/review | TEXT | 168:9d390f23626d63465f7ee59e6fbb33a9c7a37ca33aea92755c7b879f7ee45f8a:Выбери «Повторить» или «Вспомнил» по своей попытке; затем реши новое задание без подсказки.
+NODE | en-ru | 04 | $/methods/situations | OBJECT | introduction,promptLead,introduce,retrieve,feedback,review
+NODE | en-ru | 04 | $/methods/situations/introduction | TEXT | 132:aabd345086e8e716bb0d692f4d34471d89db1ffd2a66d3e0af07df2186aaf856:Ты хочешь спросить собеседника о чём-то — получить ответ «да» или «нет».
+NODE | en-ru | 04 | $/methods/situations/promptLead | TEXT | 84:6e5b09c01f4379252336b49ccd4208bfedaaa85b9b0857cc848f009ba8c7cee4:Представь ситуацию и скажи целое предложение.
+NODE | en-ru | 04 | $/methods/situations/introduce | TEXT | 94:4175512c92ab4121cc78d2910095083d734da6569987d55ad5572518627f2cd3:Как задать вопрос, на который можно ответить да/нет?
+NODE | en-ru | 04 | $/methods/situations/retrieve | TEXT | 113:de639badf123d9e75205e26852d3062620c5878f8cbc8a63a4551d4438495462:Представь ситуацию и скажи целое предложение самостоятельно.
+NODE | en-ru | 04 | $/methods/situations/feedback | TEXT | 108:bc99562fbb68fa1f6a091d6e18f62baf1f1addd3038828d54d68e0a673af6a4a:Сравни свой вопрос с эталоном: do вынесено перед подлежащим.
+NODE | en-ru | 04 | $/methods/situations/review | TEXT | 150:294b6fbeab70d415b69854c22c77d5cf12e91d39234c44e5c9eb436a2db33ef7:Оцени, удалось ли вспомнить ответ самостоятельно; следующую ситуацию реши заново.
+NODE | en-ru | 04 | $/styleContent | OBJECT | nativeParallel,examples,why
+NODE | en-ru | 04 | $/styleContent/nativeParallel | LIST | 1
+NODE | en-ru | 04 | $/styleContent/nativeParallel/0 | OBJECT | native,target,matches,note
+NODE | en-ru | 04 | $/styleContent/nativeParallel/0/native | TEXT | 25:126f7a1631a96e3952aa2ffd2c28fcf1b7172eda648f2f2374380127071a583b:Ты видишь дом?
+NODE | en-ru | 04 | $/styleContent/nativeParallel/0/target | TEXT | 19:c88b0f32f901d19ad27efaed9266a2be7ce269717044b4cf05a6291eff6d31b1:Do you see a house?
+NODE | en-ru | 04 | $/styleContent/nativeParallel/0/matches | BOOL | false
+NODE | en-ru | 04 | $/styleContent/nativeParallel/0/note | TEXT | 396:7fc04a3c55ce8b87a8650b689eed2e805afa9525ccc9f53b04cd51a4c103089e:В русском вопрос — только интонация/порядок, без изменений в глаголе. В английском обязательна инверсия (аналог pl, но там это do-support, не порядок подлежащее-глагол): нужен вспомогательный do, вынесенный перед подлежащим.
+NODE | en-ru | 04 | $/styleContent/examples | LIST | 2
+NODE | en-ru | 04 | $/styleContent/examples/0 | TEXT | 19:c88b0f32f901d19ad27efaed9266a2be7ce269717044b4cf05a6291eff6d31b1:Do you see a house?
+NODE | en-ru | 04 | $/styleContent/examples/1 | TEXT | 14:3936d39afb06a2126b9e72548278f6a9009342a6df9c6a039f46fdf7e7fcc0d2:Does she read?
+NODE | en-ru | 04 | $/styleContent/why | TEXT | 269:18bc4b7d1faf8bcf0c3da169a365f2a3c686a41110cc424229a3533759f50a8e:У английского нет свободной интонационной инверсии, как в русском — вопрос всегда маркируется грамматически, через вынесенный вперёд do/does (do-support).
+SKILL | en-ru | 05 | en:role.location
+NODE | en-ru | 05 | $ | OBJECT | id,title,group,level,formula,theory,hint,prerequisites,focus,methods,styleContent
+NODE | en-ru | 05 | $/id | TEXT | 16:f76c949a34a935d652b8c0a6a00598260cb14fceed2bb60b7ca6b0f614e618c5:en:role.location
+NODE | en-ru | 05 | $/title | TEXT | 16:769475fe269c84fbd4c28f84a772a69f4a5d9647a41ccbc37772653f1c66652e:In · место
+NODE | en-ru | 05 | $/group | TEXT | 5:c25337055464f8d31fb1498bc94025cba5eae3b0e1cf07741f09f8b873d00103:Roles
+NODE | en-ru | 05 | $/level | TEXT | 2:16a36e86f6fed5d465ff332511a0ce1a863b55d364b25a7cdaa25db19abf9648:A1
+NODE | en-ru | 05 | $/formula | TEXT | 132:ead3b524dd5c8a2e4f475a40b2436bf2cd94daffb9b0c1e57844b8bed571b0d9:Роль места вводится предлогом in: Case Obj → In добавляет in перед дополнением.
+NODE | en-ru | 05 | $/theory | TEXT | 209:8f001e70e5404413e227ef93801daff4627d6b722804ab87a26e3e74bba72505:Место действия в английском выражается предлогом in, а не изменением формы существительного: I see my house. → I live in my house.
+NODE | en-ru | 05 | $/hint | TEXT | 44:0e30864e286856c9bdd47ff08345abec783e568dc6b5ffa76068e6da815d93f0:my beautiful house → in my beautiful house
+NODE | en-ru | 05 | $/prerequisites | LIST | 1
+NODE | en-ru | 05 | $/prerequisites/0 | TEXT | 14:737aa862df4c201888d798163b667edf9f158e24842393bde1908f7799512c39:en:role.object
+NODE | en-ru | 05 | $/focus | OBJECT | before,after
+NODE | en-ru | 05 | $/focus/before | TEXT | 18:950a373c80885afc065274210f51e1f7ee834cd6635472a04914a436779f4f5b:my beautiful house
+NODE | en-ru | 05 | $/focus/after | TEXT | 21:d4b8429dcecccf4bc20b8c4e3e95697306ecfc9960bc80a1bfbdb8a8f602356a:in my beautiful house
+NODE | en-ru | 05 | $/methods | OBJECT | logic,situations
+NODE | en-ru | 05 | $/methods/logic | OBJECT | introduction,promptLead,introduce,retrieve,feedback,review
+NODE | en-ru | 05 | $/methods/logic/introduction | TEXT | 209:8f001e70e5404413e227ef93801daff4627d6b722804ab87a26e3e74bba72505:Место действия в английском выражается предлогом in, а не изменением формы существительного: I see my house. → I live in my house.
+NODE | en-ru | 05 | $/methods/logic/promptLead | TEXT | 61:442b5151eb2924d3f075686bdec5fa7eeae0dc62862e26b181a17252f8d37c5d:Сначала определи правило и форму.
+NODE | en-ru | 05 | $/methods/logic/introduce | TEXT | 101:715e2b5e536dd9a30f5c49d09f663486873e8b375b76d41ea51f3463a679ed2a:Проверь: нужно ли добавить предлог in перед дополнением?
+NODE | en-ru | 05 | $/methods/logic/retrieve | TEXT | 127:53c24754ca08d3326d45d97a3c0de5c9ad68793b22058d098f97efa89e0c9461:Определи признаки и преобразуй исходное предложение самостоятельно.
+NODE | en-ru | 05 | $/methods/logic/feedback | TEXT | 132:44b559e170de20f9416b72ce2ea9ab8fbde7bcdd04ac9f553da88cafa57df38a:Сравни исходную и новую форму, затем проверь каждое изменение и правило.
+NODE | en-ru | 05 | $/methods/logic/review | TEXT | 168:9d390f23626d63465f7ee59e6fbb33a9c7a37ca33aea92755c7b879f7ee45f8a:Выбери «Повторить» или «Вспомнил» по своей попытке; затем реши новое задание без подсказки.
+NODE | en-ru | 05 | $/methods/situations | OBJECT | introduction,promptLead,introduce,retrieve,feedback,review
+NODE | en-ru | 05 | $/methods/situations/introduction | TEXT | 94:8a6d538ad9aa5bd1ab99869328093be9011f762978bf404a9f6f968c183d8d66:Ты говоришь, где что-то происходит — внутри чего-то.
+NODE | en-ru | 05 | $/methods/situations/promptLead | TEXT | 84:6e5b09c01f4379252336b49ccd4208bfedaaa85b9b0857cc848f009ba8c7cee4:Представь ситуацию и скажи целое предложение.
+NODE | en-ru | 05 | $/methods/situations/introduce | TEXT | 86:d8cc5a6d6f9b48a026177733edc87d73404a4deb1a144cc4666bfa0b83b1f849:Как сказать, что находишься внутри этого места?
+NODE | en-ru | 05 | $/methods/situations/retrieve | TEXT | 113:de639badf123d9e75205e26852d3062620c5878f8cbc8a63a4551d4438495462:Представь ситуацию и скажи целое предложение самостоятельно.
+NODE | en-ru | 05 | $/methods/situations/feedback | TEXT | 127:f30d8d6e0003f6d9f0e7a6e15d56510b1e5b466ce989db321335bdde7dc9c071:Сравни ответ с эталоном: сама фраза не меняется, добавляется только in.
+NODE | en-ru | 05 | $/methods/situations/review | TEXT | 150:294b6fbeab70d415b69854c22c77d5cf12e91d39234c44e5c9eb436a2db33ef7:Оцени, удалось ли вспомнить ответ самостоятельно; следующую ситуацию реши заново.
+NODE | en-ru | 05 | $/styleContent | OBJECT | nativeParallel,examples,why
+NODE | en-ru | 05 | $/styleContent/nativeParallel | LIST | 1
+NODE | en-ru | 05 | $/styleContent/nativeParallel/0 | OBJECT | native,target,matches,note
+NODE | en-ru | 05 | $/styleContent/nativeParallel/0/native | TEXT | 24:b79d89f5076b59205f193528f489dca373d9df231ebf199115ce710a051168d0:Я живу в доме.
+NODE | en-ru | 05 | $/styleContent/nativeParallel/0/target | TEXT | 18:fbc1ad20ccf28b2d721950c1603f966a6e53a70951ff58a2cc6cfa61314376de:I live in a house.
+NODE | en-ru | 05 | $/styleContent/nativeParallel/0/matches | BOOL | true
+NODE | en-ru | 05 | $/styleContent/nativeParallel/0/note | TEXT | 501:033463957ca0ad13f7f9f6d758165d04cdaa875ac1121993d09a317444e6d1d1:Здесь предлоги почти буквально совпадают: русское «в» и английское in оба обозначают нахождение внутри — редкий случай, когда предложная логика почти не расходится. Это исключение: другие роли (with/to/about) выбирают предлог лексически, без опоры на русский падеж (см. другие skills).
+NODE | en-ru | 05 | $/styleContent/examples | LIST | 2
+NODE | en-ru | 05 | $/styleContent/examples/0 | TEXT | 18:fbc1ad20ccf28b2d721950c1603f966a6e53a70951ff58a2cc6cfa61314376de:I live in a house.
+NODE | en-ru | 05 | $/styleContent/examples/1 | TEXT | 16:4e23c1a0beaf7f96d9f83e4d746ccaf46976b55286634305014563a59bb8f204:I read in a car.
+NODE | en-ru | 05 | $/styleContent/why | TEXT | 285:69d902a20d4e4f76c28316d2cef8c3ed2305caac2a5247ae8879b28c85175b0f:Английские предлоги роли — отдельные, лексически закреплённые слова, а не падежные окончания; in выбирается по роли «место», а не по форме существительного.
+SKILL | en-ru | 06 | en:role.instrument
+NODE | en-ru | 06 | $ | OBJECT | id,title,group,level,formula,theory,hint,prerequisites,focus,methods,styleContent
+NODE | en-ru | 06 | $/id | TEXT | 18:0f5b2bbd0fc1d978370667ab896edf243e8b5c0a5cb7a4a5f94b1d0a3f33a859:en:role.instrument
+NODE | en-ru | 06 | $/title | TEXT | 43:1245f16a2bbd1e8a10e21777e59c18b8ad75c8c61921a975f4df55c810e73c86:With · инструмент/спутник
+NODE | en-ru | 06 | $/group | TEXT | 5:c25337055464f8d31fb1498bc94025cba5eae3b0e1cf07741f09f8b873d00103:Roles
+NODE | en-ru | 06 | $/level | TEXT | 2:c8361f9b468e68c86da024270e0949ce139cb704b8d7cce586681b99f3a7ea56:A2
+NODE | en-ru | 06 | $/formula | TEXT | 92:088bb6fbe518e8ad483f905a602729e1aea5a5394599e1af215f86e7bf1b9b7e:Роль инструмента/спутника — предлог with: Case Obj → With.
+NODE | en-ru | 06 | $/theory | TEXT | 294:86101d9541ca6ded50b51913dbd8e0c60283529069b8b016749197430a982c6e:Совместность или инструмент выражается предлогом with, который не связан с падежом русского творительного — это отдельное лексическое слово: I see my dog. → I go with my dog.
+NODE | en-ru | 06 | $/hint | TEXT | 32:d75b1f8d4440344fb5ede2ebe296f2936ae082ea4a6a7a39041a12d02ccf1a1e:my good dog → with my good dog
+NODE | en-ru | 06 | $/prerequisites | LIST | 1
+NODE | en-ru | 06 | $/prerequisites/0 | TEXT | 14:737aa862df4c201888d798163b667edf9f158e24842393bde1908f7799512c39:en:role.object
+NODE | en-ru | 06 | $/focus | OBJECT | before,after
+NODE | en-ru | 06 | $/focus/before | TEXT | 11:6c1e35d0dbfe5b5ed0f99aee9f89ef70a77d94ac5451fa45523b1539aaad4963:my good dog
+NODE | en-ru | 06 | $/focus/after | TEXT | 16:f7529c5a0c2ea536dd71ccbc75750568587778122093433583e87cb88e3c5dba:with my good dog
+NODE | en-ru | 06 | $/methods | OBJECT | logic,situations
+NODE | en-ru | 06 | $/methods/logic | OBJECT | introduction,promptLead,introduce,retrieve,feedback,review
+NODE | en-ru | 06 | $/methods/logic/introduction | TEXT | 294:86101d9541ca6ded50b51913dbd8e0c60283529069b8b016749197430a982c6e:Совместность или инструмент выражается предлогом with, который не связан с падежом русского творительного — это отдельное лексическое слово: I see my dog. → I go with my dog.
+NODE | en-ru | 06 | $/methods/logic/promptLead | TEXT | 61:442b5151eb2924d3f075686bdec5fa7eeae0dc62862e26b181a17252f8d37c5d:Сначала определи правило и форму.
+NODE | en-ru | 06 | $/methods/logic/introduce | TEXT | 157:24d7cbf06bece194704e5f8ebf5bef601101bd95245e1ff741b99bc1e0d91f98:Проверь: нужно ли добавить with перед дополнением для смысла «вместе с» или «с помощью»?
+NODE | en-ru | 06 | $/methods/logic/retrieve | TEXT | 127:53c24754ca08d3326d45d97a3c0de5c9ad68793b22058d098f97efa89e0c9461:Определи признаки и преобразуй исходное предложение самостоятельно.
+NODE | en-ru | 06 | $/methods/logic/feedback | TEXT | 132:44b559e170de20f9416b72ce2ea9ab8fbde7bcdd04ac9f553da88cafa57df38a:Сравни исходную и новую форму, затем проверь каждое изменение и правило.
+NODE | en-ru | 06 | $/methods/logic/review | TEXT | 168:9d390f23626d63465f7ee59e6fbb33a9c7a37ca33aea92755c7b879f7ee45f8a:Выбери «Повторить» или «Вспомнил» по своей попытке; затем реши новое задание без подсказки.
+NODE | en-ru | 06 | $/methods/situations | OBJECT | introduction,promptLead,introduce,retrieve,feedback,review
+NODE | en-ru | 06 | $/methods/situations/introduction | TEXT | 94:9ee1f1cc875253ab12a54487b532380f60be09ce7bd63ed250fc4af4c494e2c8:Ты говоришь, с кем или с помощью чего что-то делаешь.
+NODE | en-ru | 06 | $/methods/situations/promptLead | TEXT | 84:6e5b09c01f4379252336b49ccd4208bfedaaa85b9b0857cc848f009ba8c7cee4:Представь ситуацию и скажи целое предложение.
+NODE | en-ru | 06 | $/methods/situations/introduce | TEXT | 82:a58a62dd5bb68a3a2f211937b6678f55462734c7b14c5e2631969fccb49b52dc:Как сказать, что делаешь что-то вместе с этим?
+NODE | en-ru | 06 | $/methods/situations/retrieve | TEXT | 113:de639badf123d9e75205e26852d3062620c5878f8cbc8a63a4551d4438495462:Представь ситуацию и скажи целое предложение самостоятельно.
+NODE | en-ru | 06 | $/methods/situations/feedback | TEXT | 86:3b59e2c924766c3f22bad79cee3f4dbb19207d98dd85ac4aa3b7d5f80e5749a3:Сравни ответ с эталоном: добавляется только with.
+NODE | en-ru | 06 | $/methods/situations/review | TEXT | 150:294b6fbeab70d415b69854c22c77d5cf12e91d39234c44e5c9eb436a2db33ef7:Оцени, удалось ли вспомнить ответ самостоятельно; следующую ситуацию реши заново.
+NODE | en-ru | 06 | $/styleContent | OBJECT | nativeParallel,examples,why
+NODE | en-ru | 06 | $/styleContent/nativeParallel | LIST | 1
+NODE | en-ru | 06 | $/styleContent/nativeParallel/0 | OBJECT | native,target,matches,note
+NODE | en-ru | 06 | $/styleContent/nativeParallel/0/native | TEXT | 25:b54efffbf933c58f5dbfd02a97f55ac1f5a7f1503398c4ed9a4f5209b89fbd05:Я пишу ручкой.
+NODE | en-ru | 06 | $/styleContent/nativeParallel/0/target | TEXT | 19:89938b60fb95a5a9f3be7179348a247570835b121909740de434bd6c00347fc6:I write with a pen.
+NODE | en-ru | 06 | $/styleContent/nativeParallel/0/matches | BOOL | false
+NODE | en-ru | 06 | $/styleContent/nativeParallel/0/note | TEXT | 553:d3875b928f8cec126d1c5703ed9fa32685a59fc30056e1dbc3b5b92783b4020c:Русский творительный падеж выражает роль «инструмент» одним окончанием, без предлога вообще — «ручкой» уже значит «с помощью ручки». В английском падежа нет, поэтому эта роль не может обойтись без отдельного слова with — предлог здесь не необязательное дополнение, а единственный способ показать роль.
+NODE | en-ru | 06 | $/styleContent/examples | LIST | 2
+NODE | en-ru | 06 | $/styleContent/examples/0 | TEXT | 20:215583dcb10830a022da03e7fe3f6ffb53286838dca57c593826deefd8ea68ee:I go with my friend.
+NODE | en-ru | 06 | $/styleContent/examples/1 | TEXT | 21:73fe89a88d92f2025ed21796a3c2d10d7082c91224cc6570b427967c16d0d9a2:I write with a phone.
+NODE | en-ru | 06 | $/styleContent/why | TEXT | 212:4ea323ba5a9dfb8a9425778c08669f457044ef7c3b92515635d8f2d6c3c97356:With не связан с формой существительного — как и in/to/about, это чисто лексический выбор предлога по роли, а не морфология.
+SKILL | en-ru | 07 | en:polarity.present
+NODE | en-ru | 07 | $ | OBJECT | id,title,group,level,formula,theory,hint,prerequisites,focus,methods,styleContent
+NODE | en-ru | 07 | $/id | TEXT | 19:a5ccb8b7e783a41e619506ab68c52435b49196ec9ebdf046cbd9a65362114fc1:en:polarity.present
+NODE | en-ru | 07 | $/title | TEXT | 28:66f260c4e8cc41e4831986639a8d294be44e129fd36215a9dca0c89157a9906a:Do not · отрицание
+NODE | en-ru | 07 | $/group | TEXT | 8:e006e2f17808669e07e178fca62d24707a4a564b99f15023c8b8cfcb45a463b6:Sentence
+NODE | en-ru | 07 | $/level | TEXT | 2:c8361f9b468e68c86da024270e0949ce139cb704b8d7cce586681b99f3a7ea56:A2
+NODE | en-ru | 07 | $/formula | TEXT | 150:5bd330d23306c914f69ce6128988b0f516140aad140348e7d900a50a16ea7d57:Отрицание несёт вспомогательный do: I do not walk. — сам глагол остаётся в базовой форме.
+NODE | en-ru | 07 | $/theory | TEXT | 300:fcb8c1b37ed78765835bee78b98e7195c936da791a74443ac5590446946c9dea:В отличие от русского «не» перед глаголом, английское отрицание требует вспомогательный глагол do/does/did + not; смысловой глагол сохраняет базовую форму: I walk. → I do not walk.
+NODE | en-ru | 07 | $/hint | TEXT | 26:eb9fc1cd16b39c47f132665fc8e51f504c9da0ca9e9d0e2a00855a3645adebb4:I walk. → I do not walk.
+NODE | en-ru | 07 | $/prerequisites | LIST | 1
+NODE | en-ru | 07 | $/prerequisites/0 | TEXT | 14:737aa862df4c201888d798163b667edf9f158e24842393bde1908f7799512c39:en:role.object
+NODE | en-ru | 07 | $/focus | OBJECT | before,after
+NODE | en-ru | 07 | $/focus/before | TEXT | 7:4f3f21fe3dea64f048c2c6c029c432305e01e57eb2786c3c799fa7cd7af9298c:I walk.
+NODE | en-ru | 07 | $/focus/after | TEXT | 14:fd50a0770623d8b4fd5fe1c4e827d17e22e692aed206e33aa72b5254781626cd:I do not walk.
+NODE | en-ru | 07 | $/methods | OBJECT | logic,situations
+NODE | en-ru | 07 | $/methods/logic | OBJECT | introduction,promptLead,introduce,retrieve,feedback,review
+NODE | en-ru | 07 | $/methods/logic/introduction | TEXT | 300:fcb8c1b37ed78765835bee78b98e7195c936da791a74443ac5590446946c9dea:В отличие от русского «не» перед глаголом, английское отрицание требует вспомогательный глагол do/does/did + not; смысловой глагол сохраняет базовую форму: I walk. → I do not walk.
+NODE | en-ru | 07 | $/methods/logic/promptLead | TEXT | 61:442b5151eb2924d3f075686bdec5fa7eeae0dc62862e26b181a17252f8d37c5d:Сначала определи правило и форму.
+NODE | en-ru | 07 | $/methods/logic/introduce | TEXT | 135:2c7dd0691ead91c2914d7faab2d1abf551b5ae20c20007dcb3a78b73f8698e96:Проверь: смысловой глагол остаётся в базовой форме — время и лицо несёт do.
+NODE | en-ru | 07 | $/methods/logic/retrieve | TEXT | 127:53c24754ca08d3326d45d97a3c0de5c9ad68793b22058d098f97efa89e0c9461:Определи признаки и преобразуй исходное предложение самостоятельно.
+NODE | en-ru | 07 | $/methods/logic/feedback | TEXT | 132:44b559e170de20f9416b72ce2ea9ab8fbde7bcdd04ac9f553da88cafa57df38a:Сравни исходную и новую форму, затем проверь каждое изменение и правило.
+NODE | en-ru | 07 | $/methods/logic/review | TEXT | 168:9d390f23626d63465f7ee59e6fbb33a9c7a37ca33aea92755c7b879f7ee45f8a:Выбери «Повторить» или «Вспомнил» по своей попытке; затем реши новое задание без подсказки.
+NODE | en-ru | 07 | $/methods/situations | OBJECT | introduction,promptLead,introduce,retrieve,feedback,review
+NODE | en-ru | 07 | $/methods/situations/introduction | TEXT | 62:458e1f9b7833f7fda506f80f2496648ab6a56cbc0f04e248f022e81e20aaf9fe:Ты говоришь, что что-то НЕ делаешь.
+NODE | en-ru | 07 | $/methods/situations/promptLead | TEXT | 84:6e5b09c01f4379252336b49ccd4208bfedaaa85b9b0857cc848f009ba8c7cee4:Представь ситуацию и скажи целое предложение.
+NODE | en-ru | 07 | $/methods/situations/introduce | TEXT | 66:89ad781bc0655be9b3faf92e743693ed18833466e47cabbca48c0ba79a8eb7e8:Как сказать, что ты этого не делаешь?
+NODE | en-ru | 07 | $/methods/situations/retrieve | TEXT | 113:de639badf123d9e75205e26852d3062620c5878f8cbc8a63a4551d4438495462:Представь ситуацию и скажи целое предложение самостоятельно.
+NODE | en-ru | 07 | $/methods/situations/feedback | TEXT | 114:9b4f15d802b456605cc49ffe7e5b624fda290a75e39df80eb47076b30d464997:Сравни ответ с эталоном: добавлено do not, глагол в базовой форме.
+NODE | en-ru | 07 | $/methods/situations/review | TEXT | 150:294b6fbeab70d415b69854c22c77d5cf12e91d39234c44e5c9eb436a2db33ef7:Оцени, удалось ли вспомнить ответ самостоятельно; следующую ситуацию реши заново.
+NODE | en-ru | 07 | $/styleContent | OBJECT | nativeParallel,examples,why
+NODE | en-ru | 07 | $/styleContent/nativeParallel | LIST | 1
+NODE | en-ru | 07 | $/styleContent/nativeParallel/0 | OBJECT | native,target,matches,note
+NODE | en-ru | 07 | $/styleContent/nativeParallel/0/native | TEXT | 24:c75971fa14c7bacf21494f26f13f202254ff806054a6adeeee02dd81c803e59c:Я не вижу дом.
+NODE | en-ru | 07 | $/styleContent/nativeParallel/0/target | TEXT | 20:eab5e42235ae57b9e84bbb40142953ac94bde2f69ea8d36e3db4b84aa3505e8e:I don't see a house.
+NODE | en-ru | 07 | $/styleContent/nativeParallel/0/matches | BOOL | false
+NODE | en-ru | 07 | $/styleContent/nativeParallel/0/note | TEXT | 386:54a7f63ff35c763b1978d45d17b971a8c73a2590ee03b4e8f464fa03976044f8:В русском отрицание — одна частица «не» перед глаголом, без вспомогательного слова. В английском нужен do/does + not, и именно do, а не глагол, несёт отрицание — русский не подсказывает, что нужно вставить лишнее слово.
+NODE | en-ru | 07 | $/styleContent/examples | LIST | 2
+NODE | en-ru | 07 | $/styleContent/examples/0 | TEXT | 19:af2d237ead9fdde393a2d1c323cb2e2a40b8bde1e853e362fd029508b3c0b4aa:I do not see a car.
+NODE | en-ru | 07 | $/styleContent/examples/1 | TEXT | 14:c0742ab9eaa71f7bc69efef7db37b0d3938514e2bbbdd4bbb84b2df3f2e80b4a:I do not read.
+NODE | en-ru | 07 | $/styleContent/why | TEXT | 311:3e8ea92cb2320e4866eded0208d09984a43eab2c50e27930215d441ede1015f8:Do-support — обязательный механизм английского отрицания и вопроса: смысловой глагол сам никогда не меняется для этого, всю грамматическую нагрузку берёт вспомогательный do.
+SKILL | en-ru | 08 | en:verb.pastSimple
+NODE | en-ru | 08 | $ | OBJECT | id,title,group,level,formula,theory,hint,prerequisites,focus,methods,styleContent
+NODE | en-ru | 08 | $/id | TEXT | 18:1c0a8fdb94ccbe2701906ed6bd2fa23ea852c9c2f90cb75c04521b94eb5e0524:en:verb.pastSimple
+NODE | en-ru | 08 | $/title | TEXT | 11:d5d2ea5572821da66b7bf4704c343ae5b0b1770bf68465537ab6de4fe40258af:Past Simple
+NODE | en-ru | 08 | $/group | TEXT | 4:4405911001ce921421527486758e45e9213792d21f84ec1cbf075f2327eca2de:Verb
+NODE | en-ru | 08 | $/level | TEXT | 2:c8361f9b468e68c86da024270e0949ce139cb704b8d7cce586681b99f3a7ea56:A2
+NODE | en-ru | 08 | $/formula | TEXT | 160:ce58a37b265d9c286c12fda76c85a09f244b5faf3259f84ef66cf05c203ff017:Правильные глаголы: -ed к базовой форме (Pres → Past); неправильные — отдельная форма (go → went).
+NODE | en-ru | 08 | $/theory | TEXT | 346:40d4f36da0e8a265ed2c9814d97bccce84de8ade590eee0634d00621148defd8:Большинство глаголов образуют прошедшее время добавлением -ed (walk → walked); часть глаголов — неправильные, их форма прошедшего времени не выводится по правилу и запоминается отдельно (go → went).
+NODE | en-ru | 08 | $/hint | TEXT | 16:a7afeb2e740bd10a3204ee8fe8c59befc9528cf56aaf3d668ab1862c8adb4cbd:walks → walked
+NODE | en-ru | 08 | $/prerequisites | LIST | 1
+NODE | en-ru | 08 | $/prerequisites/0 | TEXT | 21:a5bbe2d6ad540c0fef03a6cf913f069da0a10804437111ee3033be79d0b1a7b3:en:verb.presentSimple
+NODE | en-ru | 08 | $/focus | OBJECT | before,after
+NODE | en-ru | 08 | $/focus/before | TEXT | 5:e3c024aa6059557ea0287bf08cbe9ebc8e27a26a226398c99e9d001e35ace381:walks
+NODE | en-ru | 08 | $/focus/after | TEXT | 6:2c158582949f34c9ef03daee0949fda374fcaa77dff2af611c96a027fbd30832:walked
+NODE | en-ru | 08 | $/methods | OBJECT | logic,situations
+NODE | en-ru | 08 | $/methods/logic | OBJECT | introduction,promptLead,introduce,retrieve,feedback,review
+NODE | en-ru | 08 | $/methods/logic/introduction | TEXT | 346:40d4f36da0e8a265ed2c9814d97bccce84de8ade590eee0634d00621148defd8:Большинство глаголов образуют прошедшее время добавлением -ed (walk → walked); часть глаголов — неправильные, их форма прошедшего времени не выводится по правилу и запоминается отдельно (go → went).
+NODE | en-ru | 08 | $/methods/logic/promptLead | TEXT | 61:442b5151eb2924d3f075686bdec5fa7eeae0dc62862e26b181a17252f8d37c5d:Сначала определи правило и форму.
+NODE | en-ru | 08 | $/methods/logic/introduce | TEXT | 146:6fc111ae38f190b90e4654f5e4f9e37824172d5f1485fe90688db2b087917415:Проверь: -ed добавляется к базовой форме, или нужна отдельная неправильная форма?
+NODE | en-ru | 08 | $/methods/logic/retrieve | TEXT | 127:53c24754ca08d3326d45d97a3c0de5c9ad68793b22058d098f97efa89e0c9461:Определи признаки и преобразуй исходное предложение самостоятельно.
+NODE | en-ru | 08 | $/methods/logic/feedback | TEXT | 132:44b559e170de20f9416b72ce2ea9ab8fbde7bcdd04ac9f553da88cafa57df38a:Сравни исходную и новую форму, затем проверь каждое изменение и правило.
+NODE | en-ru | 08 | $/methods/logic/review | TEXT | 168:9d390f23626d63465f7ee59e6fbb33a9c7a37ca33aea92755c7b879f7ee45f8a:Выбери «Повторить» или «Вспомнил» по своей попытке; затем реши новое задание без подсказки.
+NODE | en-ru | 08 | $/methods/situations | OBJECT | introduction,promptLead,introduce,retrieve,feedback,review
+NODE | en-ru | 08 | $/methods/situations/introduction | TEXT | 76:5f062e60ecba2a57b4a75ed7a095bc009f2db698fbfdbf11e309f0fc32ffe219:Ты рассказываешь о том, что уже произошло.
+NODE | en-ru | 08 | $/methods/situations/promptLead | TEXT | 84:6e5b09c01f4379252336b49ccd4208bfedaaa85b9b0857cc848f009ba8c7cee4:Представь ситуацию и скажи целое предложение.
+NODE | en-ru | 08 | $/methods/situations/introduce | TEXT | 63:8f7b429bff9a68f9d19f62e4cac3322d225a9036b713e10c5862bec165058a83:Как сказать, что это уже произошло?
+NODE | en-ru | 08 | $/methods/situations/retrieve | TEXT | 113:de639badf123d9e75205e26852d3062620c5878f8cbc8a63a4551d4438495462:Представь ситуацию и скажи целое предложение самостоятельно.
+NODE | en-ru | 08 | $/methods/situations/feedback | TEXT | 127:382b4afd4306de992cd19f9807f47a78e0d94749e3dccb01ab926d57d6e7d056:Сравни ответ с эталоном: обрати внимание на форму прошедшего времени.
+NODE | en-ru | 08 | $/methods/situations/review | TEXT | 150:294b6fbeab70d415b69854c22c77d5cf12e91d39234c44e5c9eb436a2db33ef7:Оцени, удалось ли вспомнить ответ самостоятельно; следующую ситуацию реши заново.
+NODE | en-ru | 08 | $/styleContent | OBJECT | nativeParallel,examples,why
+NODE | en-ru | 08 | $/styleContent/nativeParallel | LIST | 1
+NODE | en-ru | 08 | $/styleContent/nativeParallel/0 | OBJECT | native,target,matches,note
+NODE | en-ru | 08 | $/styleContent/nativeParallel/0/native | TEXT | 31:3883a6ee3bdd038fb97745503a895bccccfa6aad08c3f835fdc177642a92c187:Она гуляла вчера.
+NODE | en-ru | 08 | $/styleContent/nativeParallel/0/target | TEXT | 21:eaef41d585cc23341a2603a01adde8b9c294684be6caa0ea0ed1734346419d9d:She walked yesterday.
+NODE | en-ru | 08 | $/styleContent/nativeParallel/0/matches | BOOL | false
+NODE | en-ru | 08 | $/styleContent/nativeParallel/0/note | TEXT | 674:586962ccdf09683b9e03448f845d06291182392a5363f0f4296e8a4da23cf539:Русское прошедшее время согласуется с подлежащим по роду: гулял (он) / гуляла (она) / гуляли (они) — форма глагола меняется в зависимости от того, кто действует. Английское прошедшее время (walked) не различает ни род, ни число, ни лицо вообще — одна форма на всех. Здесь английская грамматика проще, но именно поэтому русскоговорящий по привычке ищет несуществующее различие.
+NODE | en-ru | 08 | $/styleContent/examples | LIST | 2
+NODE | en-ru | 08 | $/styleContent/examples/0 | TEXT | 21:c914cab44d63bede97d1de4eebf446c403a295bb3f74d416642dc6c37028ebc4:She walked to school.
+NODE | en-ru | 08 | $/styleContent/examples/1 | TEXT | 13:62ec62d6606ba2f63399861e37a345a9a4576f94f169f58cacbd7b76089060af:He went home.
+NODE | en-ru | 08 | $/styleContent/why | TEXT | 294:8dc4baa6d82777513741443da88434ce03dc397149454516c951cf77b3ba82e2:Прошедшее время в английском не зависит от лица и числа (в отличие от русского рода): walked одинаково для I/you/he/she/we/they — меняется только между настоящим и прошедшим.
+SKILL | en-ru | 09 | en:role.recipient
+NODE | en-ru | 09 | $ | OBJECT | id,title,group,level,formula,theory,hint,prerequisites,focus,methods,styleContent
+NODE | en-ru | 09 | $/id | TEXT | 17:d5aa64e8afcb85520439f5fc9509ed9e7784e8f054cf76000e2195969684d242:en:role.recipient
+NODE | en-ru | 09 | $/title | TEXT | 26:0b34477a8b507da60944ea83ca17e502e4992c41774c580905d0d40f8f299b74:To · получатель
+NODE | en-ru | 09 | $/group | TEXT | 5:c25337055464f8d31fb1498bc94025cba5eae3b0e1cf07741f09f8b873d00103:Roles
+NODE | en-ru | 09 | $/level | TEXT | 2:c8361f9b468e68c86da024270e0949ce139cb704b8d7cce586681b99f3a7ea56:A2
+NODE | en-ru | 09 | $/formula | TEXT | 69:5811a096ba4e68641b5765351b4371556a814fb090c9301dd203cbcf0ef7bcc0:Роль получателя — предлог to: Case Obj → To.
+NODE | en-ru | 09 | $/theory | TEXT | 219:bfe432d633ac7dc8b0fa169ab34deae0a9ce707c6e40be5deaad89589a557abd:Получатель действия вводится предлогом to: I give a present to my friend. — форма существительного не меняется, добавляется только to.
+NODE | en-ru | 09 | $/hint | TEXT | 36:2f195bfd6964ef5ee20d625fa1571a78ef097c5664b410e94e12438fa70d0023:my good friend → to my good friend
+NODE | en-ru | 09 | $/prerequisites | LIST | 1
+NODE | en-ru | 09 | $/prerequisites/0 | TEXT | 18:0f5b2bbd0fc1d978370667ab896edf243e8b5c0a5cb7a4a5f94b1d0a3f33a859:en:role.instrument
+NODE | en-ru | 09 | $/focus | OBJECT | before,after
+NODE | en-ru | 09 | $/focus/before | TEXT | 14:808630bfb0cbfd86971190fe749e013884def231549553e0e9f2c2eef2cfdae7:my good friend
+NODE | en-ru | 09 | $/focus/after | TEXT | 17:2bdb209e7415494f3df859e89499a82bd4677acfbe68160a9c5eeddee7f4a022:to my good friend
+NODE | en-ru | 09 | $/methods | OBJECT | logic,situations
+NODE | en-ru | 09 | $/methods/logic | OBJECT | introduction,promptLead,introduce,retrieve,feedback,review
+NODE | en-ru | 09 | $/methods/logic/introduction | TEXT | 219:bfe432d633ac7dc8b0fa169ab34deae0a9ce707c6e40be5deaad89589a557abd:Получатель действия вводится предлогом to: I give a present to my friend. — форма существительного не меняется, добавляется только to.
+NODE | en-ru | 09 | $/methods/logic/promptLead | TEXT | 61:442b5151eb2924d3f075686bdec5fa7eeae0dc62862e26b181a17252f8d37c5d:Сначала определи правило и форму.
+NODE | en-ru | 09 | $/methods/logic/introduce | TEXT | 109:33982c75fd8476f74986abd41f256993813e79f949512d13430aa4ca60925a0a:Проверь: нужно ли добавить to перед дополнением-получателем?
+NODE | en-ru | 09 | $/methods/logic/retrieve | TEXT | 127:53c24754ca08d3326d45d97a3c0de5c9ad68793b22058d098f97efa89e0c9461:Определи признаки и преобразуй исходное предложение самостоятельно.
+NODE | en-ru | 09 | $/methods/logic/feedback | TEXT | 132:44b559e170de20f9416b72ce2ea9ab8fbde7bcdd04ac9f553da88cafa57df38a:Сравни исходную и новую форму, затем проверь каждое изменение и правило.
+NODE | en-ru | 09 | $/methods/logic/review | TEXT | 168:9d390f23626d63465f7ee59e6fbb33a9c7a37ca33aea92755c7b879f7ee45f8a:Выбери «Повторить» или «Вспомнил» по своей попытке; затем реши новое задание без подсказки.
+NODE | en-ru | 09 | $/methods/situations | OBJECT | introduction,promptLead,introduce,retrieve,feedback,review
+NODE | en-ru | 09 | $/methods/situations/introduction | TEXT | 81:77bad65720b228c6d6b26d4a3feb2fa3db1afab453f76bce0bc2cf242e93d940:Ты говоришь, кому что-то даёшь или посылаешь.
+NODE | en-ru | 09 | $/methods/situations/promptLead | TEXT | 84:6e5b09c01f4379252336b49ccd4208bfedaaa85b9b0857cc848f009ba8c7cee4:Представь ситуацию и скажи целое предложение.
+NODE | en-ru | 09 | $/methods/situations/introduce | TEXT | 60:d68ef3672631c88b90153c12482eec8e0ad19948274ff8fdd2b9c4385db8c8f3:Как сказать, кому это адресовано?
+NODE | en-ru | 09 | $/methods/situations/retrieve | TEXT | 113:de639badf123d9e75205e26852d3062620c5878f8cbc8a63a4551d4438495462:Представь ситуацию и скажи целое предложение самостоятельно.
+NODE | en-ru | 09 | $/methods/situations/feedback | TEXT | 84:4763643e6d7f715c069367e1ba9624a1b741e4e53087f811bf26b8488bf347af:Сравни ответ с эталоном: добавляется только to.
+NODE | en-ru | 09 | $/methods/situations/review | TEXT | 150:294b6fbeab70d415b69854c22c77d5cf12e91d39234c44e5c9eb436a2db33ef7:Оцени, удалось ли вспомнить ответ самостоятельно; следующую ситуацию реши заново.
+NODE | en-ru | 09 | $/styleContent | OBJECT | nativeParallel,examples,why
+NODE | en-ru | 09 | $/styleContent/nativeParallel | LIST | 1
+NODE | en-ru | 09 | $/styleContent/nativeParallel/0 | OBJECT | native,target,matches,note
+NODE | en-ru | 09 | $/styleContent/nativeParallel/0/native | TEXT | 45:937deb3ae80ed5b88f7dc46225dbae0b56fe2cabf1b6d4e502f874d93a179c93:Я дал книгу своему другу.
+NODE | en-ru | 09 | $/styleContent/nativeParallel/0/target | TEXT | 29:8793226bcd733ee58b964b5fb0007da4b83aa3c9555a38648ef89e160e9c30e0:I gave the book to my friend.
+NODE | en-ru | 09 | $/styleContent/nativeParallel/0/matches | BOOL | false
+NODE | en-ru | 09 | $/styleContent/nativeParallel/0/note | TEXT | 461:dfc18f0924e7ae407dcc3d9617de0e9109027514d489b23100ce831d53007a41:Русский дательный падеж («другу») сам маркирует получателя окончанием — отдельного слова не нужно. В английском нет падежных окончаний, поэтому роль «получатель» держится только на предлоге to; убрать to — потерять саму роль, а не просто изменить стиль.
+NODE | en-ru | 09 | $/styleContent/examples | LIST | 2
+NODE | en-ru | 09 | $/styleContent/examples/0 | TEXT | 27:965e4db954f716581ab1f789e8a8a279befc64b016ad7241b257b89062c85005:I give a present to my son.
+NODE | en-ru | 09 | $/styleContent/examples/1 | TEXT | 20:d844faf37cd0bce313965c2b165b19153976d3cd04f2e8a70308bea33eae164b:I talk to my friend.
+NODE | en-ru | 09 | $/styleContent/why | TEXT | 313:45dc7f911b949d508fbc7a9cb2cc48efddb2cd26ec62576387d50f223aeee8cc:To выбирается по роли «получатель», а не по падежу; в русском дательный падеж меняет форму существительного, в английском форма не меняется вообще, меняется только предлог.
+SKILL | en-ru | 10 | en:number.plural
+NODE | en-ru | 10 | $ | OBJECT | id,title,group,level,formula,theory,hint,prerequisites,focus,methods,styleContent
+NODE | en-ru | 10 | $/id | TEXT | 16:146a4d919717bf3b4464c74e5a4d8c94d891f7db7863210e8dad0cd99640a98f:en:number.plural
+NODE | en-ru | 10 | $/title | TEXT | 43:1059606eecdb31cc6cdab821a2ace980286eaea6bb947791521357cbd9645ff5:Plural · -s/-es + неправильные
+NODE | en-ru | 10 | $/group | TEXT | 6:bd82cf16699be29ec05cbb763199c12f0dced428dde8381dbdd31c1d5dd0e8d4:Number
+NODE | en-ru | 10 | $/level | TEXT | 2:c8361f9b468e68c86da024270e0949ce139cb704b8d7cce586681b99f3a7ea56:A2
+NODE | en-ru | 10 | $/formula | TEXT | 168:204c9a379b4c34613d9fd997ac0a414353582ef5fb357293e75adc130128412f:Множественное число: -s/-es к базовой форме; часть существительных — неправильные (child → children).
+NODE | en-ru | 10 | $/theory | TEXT | 309:600ac3825c268b42d4a1ad15886ac5a2c5e574d0874f0fb471e6c487a1db1b12:Регулярное множественное число добавляет -s (house → houses) или -es после шипящих; неправильные существительные (child → children) меняют форму не по правилу и запоминаются отдельно.
+NODE | en-ru | 10 | $/hint | TEXT | 42:26252db420b817bc838d523eeb4d23d7ac0c0d449cb1070ae84dabb47c50cd0b:my beautiful house → my beautiful houses
+NODE | en-ru | 10 | $/prerequisites | LIST | 2
+NODE | en-ru | 10 | $/prerequisites/0 | TEXT | 14:737aa862df4c201888d798163b667edf9f158e24842393bde1908f7799512c39:en:role.object
+NODE | en-ru | 10 | $/prerequisites/1 | TEXT | 16:f073c4b7943383333f634f531fdf3d43f1134d2d181413ac4aee493fddf282dd:en:possessive.my
+NODE | en-ru | 10 | $/focus | OBJECT | before,after
+NODE | en-ru | 10 | $/focus/before | TEXT | 18:950a373c80885afc065274210f51e1f7ee834cd6635472a04914a436779f4f5b:my beautiful house
+NODE | en-ru | 10 | $/focus/after | TEXT | 19:cda57cc1af9afc6fca6ca55d2f3cef4e24939318bb09f5dcf29452e54bda46e2:my beautiful houses
+NODE | en-ru | 10 | $/methods | OBJECT | logic,situations
+NODE | en-ru | 10 | $/methods/logic | OBJECT | introduction,promptLead,introduce,retrieve,feedback,review
+NODE | en-ru | 10 | $/methods/logic/introduction | TEXT | 309:600ac3825c268b42d4a1ad15886ac5a2c5e574d0874f0fb471e6c487a1db1b12:Регулярное множественное число добавляет -s (house → houses) или -es после шипящих; неправильные существительные (child → children) меняют форму не по правилу и запоминаются отдельно.
+NODE | en-ru | 10 | $/methods/logic/promptLead | TEXT | 61:442b5151eb2924d3f075686bdec5fa7eeae0dc62862e26b181a17252f8d37c5d:Сначала определи правило и форму.
+NODE | en-ru | 10 | $/methods/logic/introduce | TEXT | 120:873da069477de3ceac9ae51d2fd066112d00f15448f2f4b6f2aa00185b63669c:Проверь: добавляется -s/-es, или нужна отдельная неправильная форма?
+NODE | en-ru | 10 | $/methods/logic/retrieve | TEXT | 127:53c24754ca08d3326d45d97a3c0de5c9ad68793b22058d098f97efa89e0c9461:Определи признаки и преобразуй исходное предложение самостоятельно.
+NODE | en-ru | 10 | $/methods/logic/feedback | TEXT | 132:44b559e170de20f9416b72ce2ea9ab8fbde7bcdd04ac9f553da88cafa57df38a:Сравни исходную и новую форму, затем проверь каждое изменение и правило.
+NODE | en-ru | 10 | $/methods/logic/review | TEXT | 168:9d390f23626d63465f7ee59e6fbb33a9c7a37ca33aea92755c7b879f7ee45f8a:Выбери «Повторить» или «Вспомнил» по своей попытке; затем реши новое задание без подсказки.
+NODE | en-ru | 10 | $/methods/situations | OBJECT | introduction,promptLead,introduce,retrieve,feedback,review
+NODE | en-ru | 10 | $/methods/situations/introduction | TEXT | 88:925b6cacf2183cff97e87792098c735310d03a3993adc612f0843312f7f4c9fd:Ты говоришь не об одном предмете, а о нескольких.
+NODE | en-ru | 10 | $/methods/situations/promptLead | TEXT | 84:6e5b09c01f4379252336b49ccd4208bfedaaa85b9b0857cc848f009ba8c7cee4:Представь ситуацию и скажи целое предложение.
+NODE | en-ru | 10 | $/methods/situations/introduce | TEXT | 54:26c5b4b9b32c67af642af226b7b05437ae795cb1d5ddd9c594e070efb5a85285:Как сказать, что их несколько?
+NODE | en-ru | 10 | $/methods/situations/retrieve | TEXT | 113:de639badf123d9e75205e26852d3062620c5878f8cbc8a63a4551d4438495462:Представь ситуацию и скажи целое предложение самостоятельно.
+NODE | en-ru | 10 | $/methods/situations/feedback | TEXT | 131:3896768c892e09bc20ce64c71dadc28cee2e28c08ca1382881e059ed0088de08:Сравни ответ с эталоном: обрати внимание на форму множественного числа.
+NODE | en-ru | 10 | $/methods/situations/review | TEXT | 150:294b6fbeab70d415b69854c22c77d5cf12e91d39234c44e5c9eb436a2db33ef7:Оцени, удалось ли вспомнить ответ самостоятельно; следующую ситуацию реши заново.
+NODE | en-ru | 10 | $/styleContent | OBJECT | nativeParallel,examples,why
+NODE | en-ru | 10 | $/styleContent/nativeParallel | LIST | 1
+NODE | en-ru | 10 | $/styleContent/nativeParallel/0 | OBJECT | native,target,matches,note
+NODE | en-ru | 10 | $/styleContent/nativeParallel/0/native | TEXT | 52:c8d2d90136d1dd2ed4cee0184d00cd1e37e85d0be102eb86643fdd4f51c9c6c6:Один ребёнок, но много детей.
+NODE | en-ru | 10 | $/styleContent/nativeParallel/0/target | TEXT | 29:ba67858d02fca1dda809c3250989ccb54648d2a509eb71808052b2eb4cc606f6:One child, but many children.
+NODE | en-ru | 10 | $/styleContent/nativeParallel/0/matches | BOOL | true
+NODE | en-ru | 10 | $/styleContent/nativeParallel/0/note | TEXT | 470:19d06c510da983c57f165333669874aceceac70b4803e8d7531ce2aa17f5c589:Редкое настоящее совпадение: оба языка образуют множественное число именно этого слова не регулярным окончанием, а отдельной (супплетивной) формой — ребёнок→дети, child→children, а не «childs». Здесь само исключение переносится напрямую, а не только общее правило.
+NODE | en-ru | 10 | $/styleContent/examples | LIST | 2
+NODE | en-ru | 10 | $/styleContent/examples/0 | TEXT | 17:937bbd096d8e675d6ec932640b14f8b4c7662f52e84cf1c95f88c850302e38e4:I see two houses.
+NODE | en-ru | 10 | $/styleContent/examples/1 | TEXT | 21:26597c9df84da682b48743c0691e297c2b076957c510cd936a00c676502fa7bc:I see three children.
+NODE | en-ru | 10 | $/styleContent/why | TEXT | 314:aad8354e95aeafbfa7a4da19cddb66c7e526ffc881151c37e06c2db823bb2bcb:Притяжательное my и прилагательное не меняются по числу — согласование с числом происходит только у самого существительного, в отличие от русского, где меняются оба слова.
+SKILL | en-ru | 11 | en:polarity.past
+NODE | en-ru | 11 | $ | OBJECT | id,title,group,level,formula,theory,hint,prerequisites,focus,methods,styleContent
+NODE | en-ru | 11 | $/id | TEXT | 16:e606616b160bb0b552ee6428159890ae2b03f233b2a3381e5902c16a06d03e61:en:polarity.past
+NODE | en-ru | 11 | $/title | TEXT | 51:3a083e28243131cdb4431697ae165c7654ffbdfc3f264f9b93348eae2c740522:Did not · отрицание в прошедшем
+NODE | en-ru | 11 | $/group | TEXT | 8:e006e2f17808669e07e178fca62d24707a4a564b99f15023c8b8cfcb45a463b6:Sentence
+NODE | en-ru | 11 | $/level | TEXT | 2:c8361f9b468e68c86da024270e0949ce139cb704b8d7cce586681b99f3a7ea56:A2
+NODE | en-ru | 11 | $/formula | TEXT | 162:26fd5ca43b67080abe3776e25c483726d686a8099b079e2a8586d7c56106dc79:Отрицание в прошедшем времени: did not + базовая форма глагола (время несёт did, не сам глагол).
+NODE | en-ru | 11 | $/theory | TEXT | 256:9fb9366d80cc3c4a3a4ebbb4ad3d57bb6dc753e2d0673f83cfc2ddaee0c1d133:В прошедшем времени отрицание строится так же, как в настоящем, но с did: I walked. → I did not walk. Смысловой глагол снова возвращается в базовую форму.
+NODE | en-ru | 11 | $/hint | TEXT | 29:4f612885e4414945acfc6ca9ec2c6429e1e86fe3fe12222192546dee6313a708:I walked. → I did not walk.
+NODE | en-ru | 11 | $/prerequisites | LIST | 2
+NODE | en-ru | 11 | $/prerequisites/0 | TEXT | 19:a5ccb8b7e783a41e619506ab68c52435b49196ec9ebdf046cbd9a65362114fc1:en:polarity.present
+NODE | en-ru | 11 | $/prerequisites/1 | TEXT | 18:1c0a8fdb94ccbe2701906ed6bd2fa23ea852c9c2f90cb75c04521b94eb5e0524:en:verb.pastSimple
+NODE | en-ru | 11 | $/focus | OBJECT | before,after
+NODE | en-ru | 11 | $/focus/before | TEXT | 9:acd6d6efa8e32aba4bf1b157d45eec34f4adcffe4d4c37d9e0c052f7a00a2f4d:I walked.
+NODE | en-ru | 11 | $/focus/after | TEXT | 15:ec435f7d906544aa796b41ee610b214c0a6680785086e14f142b6e71f62f6102:I did not walk.
+NODE | en-ru | 11 | $/methods | OBJECT | logic,situations
+NODE | en-ru | 11 | $/methods/logic | OBJECT | introduction,promptLead,introduce,retrieve,feedback,review
+NODE | en-ru | 11 | $/methods/logic/introduction | TEXT | 256:9fb9366d80cc3c4a3a4ebbb4ad3d57bb6dc753e2d0673f83cfc2ddaee0c1d133:В прошедшем времени отрицание строится так же, как в настоящем, но с did: I walked. → I did not walk. Смысловой глагол снова возвращается в базовую форму.
+NODE | en-ru | 11 | $/methods/logic/promptLead | TEXT | 61:442b5151eb2924d3f075686bdec5fa7eeae0dc62862e26b181a17252f8d37c5d:Сначала определи правило и форму.
+NODE | en-ru | 11 | $/methods/logic/introduce | TEXT | 167:35607c45fa5c2d20afacb776e88243559a26a02bc3d436301d68e71b70f62cb8:Проверь: -ed или неправильная форма прошедшего времени убирается, а время «переезжает» на did.
+NODE | en-ru | 11 | $/methods/logic/retrieve | TEXT | 127:53c24754ca08d3326d45d97a3c0de5c9ad68793b22058d098f97efa89e0c9461:Определи признаки и преобразуй исходное предложение самостоятельно.
+NODE | en-ru | 11 | $/methods/logic/feedback | TEXT | 132:44b559e170de20f9416b72ce2ea9ab8fbde7bcdd04ac9f553da88cafa57df38a:Сравни исходную и новую форму, затем проверь каждое изменение и правило.
+NODE | en-ru | 11 | $/methods/logic/review | TEXT | 168:9d390f23626d63465f7ee59e6fbb33a9c7a37ca33aea92755c7b879f7ee45f8a:Выбери «Повторить» или «Вспомнил» по своей попытке; затем реши новое задание без подсказки.
+NODE | en-ru | 11 | $/methods/situations | OBJECT | introduction,promptLead,introduce,retrieve,feedback,review
+NODE | en-ru | 11 | $/methods/situations/introduction | TEXT | 78:1ceb9b74b4f53f3274ad16546724e7ad00af41cd66cab1a2041ea8c200d84df3:Ты говоришь, что чего-то не делал в прошлом.
+NODE | en-ru | 11 | $/methods/situations/promptLead | TEXT | 84:6e5b09c01f4379252336b49ccd4208bfedaaa85b9b0857cc848f009ba8c7cee4:Представь ситуацию и скажи целое предложение.
+NODE | en-ru | 11 | $/methods/situations/introduce | TEXT | 65:29e0c91db403cd5a25197206f58040ed6a03e0a038fa8d279a9740f441151ef0:Как сказать, что этого не произошло?
+NODE | en-ru | 11 | $/methods/situations/retrieve | TEXT | 113:de639badf123d9e75205e26852d3062620c5878f8cbc8a63a4551d4438495462:Представь ситуацию и скажи целое предложение самостоятельно.
+NODE | en-ru | 11 | $/methods/situations/feedback | TEXT | 81:6d8b863e111e6c47d679e12fb04f48bc255ceeadfbde432f0f5e14a6c0f80b74:Сравни ответ с эталоном: did not + базовая форма.
+NODE | en-ru | 11 | $/methods/situations/review | TEXT | 150:294b6fbeab70d415b69854c22c77d5cf12e91d39234c44e5c9eb436a2db33ef7:Оцени, удалось ли вспомнить ответ самостоятельно; следующую ситуацию реши заново.
+NODE | en-ru | 11 | $/styleContent | OBJECT | nativeParallel,examples,why
+NODE | en-ru | 11 | $/styleContent/nativeParallel | LIST | 1
+NODE | en-ru | 11 | $/styleContent/nativeParallel/0 | OBJECT | native,target,matches,note
+NODE | en-ru | 11 | $/styleContent/nativeParallel/0/native | TEXT | 37:7ad0fff5224e1cdb073a85e4bbed5e2892acb3add674280aff09b043c2928f03:Я не видел ту машину.
+NODE | en-ru | 11 | $/styleContent/nativeParallel/0/target | TEXT | 23:b032591e545e3e8aee7e6e95f42084951d66c97e3ccb83799667fa6881a786fa:I did not see that car.
+NODE | en-ru | 11 | $/styleContent/nativeParallel/0/matches | BOOL | false
+NODE | en-ru | 11 | $/styleContent/nativeParallel/0/note | TEXT | 703:2597ec41804931a3924aac9ee3ab6f3d4f2ab35300fc3b00a3091750c71be7f8:Русское «не» — одна и та же частица в любом времени; само время несёт на себе глагол (видел — уже прошедшее). В английском отрицание в прошедшем времени, наоборот, целиком перекладывает время на вспомогательный did, а смысловой глагол (see) возвращается в базовую форму — время «переезжает» на служебное слово, а не остаётся на смысловом глаголе, как интуитивно ожидал бы русскоговорящий.
+NODE | en-ru | 11 | $/styleContent/examples | LIST | 2
+NODE | en-ru | 11 | $/styleContent/examples/0 | TEXT | 18:c7af3dafa394eeb656f0acc9d12983bf96532bbe00d73e69f47fdaead7506399:I did not see him.
+NODE | en-ru | 11 | $/styleContent/examples/1 | TEXT | 26:ffa06d381bc08624b04eb1421213340127a9292791ed934f15fc15f58ca822d1:She did not read the book.
+NODE | en-ru | 11 | $/styleContent/why | TEXT | 223:8f8278beffce73e282ac8560e3469514b442d22a3626d580859dd64aa95e0b2a:Did — та же механика do-support, но в прошедшем времени; смысловой глагол в отрицании прошедшего времени никогда не сохраняет -ed.
+SKILL | en-ru | 12 | en:verb.futureSimple
+NODE | en-ru | 12 | $ | OBJECT | id,title,group,level,formula,theory,hint,prerequisites,focus,methods,styleContent
+NODE | en-ru | 12 | $/id | TEXT | 20:a3fbd8f442dced688f9b07c284b729a41a39e25d3da51da75cf71740077c45f4:en:verb.futureSimple
+NODE | en-ru | 12 | $/title | TEXT | 13:3cdeaf5e27bc80b0fdb6538f4cb3fd0f2f650582c514dbef8f3baca80a701244:Future Simple
+NODE | en-ru | 12 | $/group | TEXT | 4:4405911001ce921421527486758e45e9213792d21f84ec1cbf075f2327eca2de:Verb
+NODE | en-ru | 12 | $/level | TEXT | 2:c8361f9b468e68c86da024270e0949ce139cb704b8d7cce586681b99f3a7ea56:A2
+NODE | en-ru | 12 | $/formula | TEXT | 124:521e420a82ea758f8c11477b79c3152953d799c7ee7b4f688c7135480dbd4eea:Будущее простое: will + базовая форма глагола, неизменная для всех лиц.
+NODE | en-ru | 12 | $/theory | TEXT | 282:814cc7c58b7cff9fc79ddfd73bf2638acf19aa1652f48b2082599c9c37ddd3da:Future Simple строится одинаково для всех лиц: will + базовая форма (walk → will walk). В отличие от настоящего и прошедшего, здесь нет изменения окончания самого глагола.
+NODE | en-ru | 12 | $/hint | TEXT | 19:14485ef246204b44bb5a928cdb601851b3e8cf6e954f0d6911d749e242743352:walks → will walk
+NODE | en-ru | 12 | $/prerequisites | LIST | 1
+NODE | en-ru | 12 | $/prerequisites/0 | TEXT | 18:1c0a8fdb94ccbe2701906ed6bd2fa23ea852c9c2f90cb75c04521b94eb5e0524:en:verb.pastSimple
+NODE | en-ru | 12 | $/focus | OBJECT | before,after
+NODE | en-ru | 12 | $/focus/before | TEXT | 5:e3c024aa6059557ea0287bf08cbe9ebc8e27a26a226398c99e9d001e35ace381:walks
+NODE | en-ru | 12 | $/focus/after | TEXT | 9:ea031cbef3221e4d73abb19191e8c9188920020653a0417dd8adea2a845d1aa8:will walk
+NODE | en-ru | 12 | $/methods | OBJECT | logic,situations
+NODE | en-ru | 12 | $/methods/logic | OBJECT | introduction,promptLead,introduce,retrieve,feedback,review
+NODE | en-ru | 12 | $/methods/logic/introduction | TEXT | 282:814cc7c58b7cff9fc79ddfd73bf2638acf19aa1652f48b2082599c9c37ddd3da:Future Simple строится одинаково для всех лиц: will + базовая форма (walk → will walk). В отличие от настоящего и прошедшего, здесь нет изменения окончания самого глагола.
+NODE | en-ru | 12 | $/methods/logic/promptLead | TEXT | 61:442b5151eb2924d3f075686bdec5fa7eeae0dc62862e26b181a17252f8d37c5d:Сначала определи правило и форму.
+NODE | en-ru | 12 | $/methods/logic/introduce | TEXT | 136:677cd80d481f9ca193fe43e656fd58601ce3054d6a52613f8f445a76979d2199:Проверь: will не меняется по лицу, и глагол после него всегда в базовой форме.
+NODE | en-ru | 12 | $/methods/logic/retrieve | TEXT | 127:53c24754ca08d3326d45d97a3c0de5c9ad68793b22058d098f97efa89e0c9461:Определи признаки и преобразуй исходное предложение самостоятельно.
+NODE | en-ru | 12 | $/methods/logic/feedback | TEXT | 132:44b559e170de20f9416b72ce2ea9ab8fbde7bcdd04ac9f553da88cafa57df38a:Сравни исходную и новую форму, затем проверь каждое изменение и правило.
+NODE | en-ru | 12 | $/methods/logic/review | TEXT | 168:9d390f23626d63465f7ee59e6fbb33a9c7a37ca33aea92755c7b879f7ee45f8a:Выбери «Повторить» или «Вспомнил» по своей попытке; затем реши новое задание без подсказки.
+NODE | en-ru | 12 | $/methods/situations | OBJECT | introduction,promptLead,introduce,retrieve,feedback,review
+NODE | en-ru | 12 | $/methods/situations/introduction | TEXT | 72:8ec38f9a90a11f860f20f974ac939d9dedc560198e0c90bf79b71ce475dca544:Ты говоришь о том, что произойдёт позже.
+NODE | en-ru | 12 | $/methods/situations/promptLead | TEXT | 84:6e5b09c01f4379252336b49ccd4208bfedaaa85b9b0857cc848f009ba8c7cee4:Представь ситуацию и скажи целое предложение.
+NODE | en-ru | 12 | $/methods/situations/introduce | TEXT | 69:d84f48bda9978239c4f2c8e2c865988970af77b248efb8cfa1489df48dab5529:Как сказать, что это произойдёт позже?
+NODE | en-ru | 12 | $/methods/situations/retrieve | TEXT | 113:de639badf123d9e75205e26852d3062620c5878f8cbc8a63a4551d4438495462:Представь ситуацию и скажи целое предложение самостоятельно.
+NODE | en-ru | 12 | $/methods/situations/feedback | TEXT | 93:73bce9429ca2240f3a9d0eb58ae002be0dae298901119c0cad1d0751798b1285:Сравни ответ с эталоном: will + базовая форма глагола.
+NODE | en-ru | 12 | $/methods/situations/review | TEXT | 150:294b6fbeab70d415b69854c22c77d5cf12e91d39234c44e5c9eb436a2db33ef7:Оцени, удалось ли вспомнить ответ самостоятельно; следующую ситуацию реши заново.
+NODE | en-ru | 12 | $/styleContent | OBJECT | nativeParallel,examples,why
+NODE | en-ru | 12 | $/styleContent/nativeParallel | LIST | 1
+NODE | en-ru | 12 | $/styleContent/nativeParallel/0 | OBJECT | native,target,matches,note
+NODE | en-ru | 12 | $/styleContent/nativeParallel/0/native | TEXT | 25:acd693543523d07e1b9b19294809ba05b1fcab90c69a102de1605914219880e9:Я буду читать.
+NODE | en-ru | 12 | $/styleContent/nativeParallel/0/target | TEXT | 12:e0e60c856353c1ca5dbb483017e9f99510b584e4690f7f575626f88b07b884ff:I will read.
+NODE | en-ru | 12 | $/styleContent/nativeParallel/0/matches | BOOL | true
+NODE | en-ru | 12 | $/styleContent/nativeParallel/0/note | TEXT | 715:1a26e77f13956df64e51ca31e008a9b82694ca5eb2f3b332b32b7dbdaae0eb0a:Настоящее совпадение структуры: для несовершенного вида русский тоже строит будущее время аналитически — буду + инфинитив, почти как will + базовая форма в английском. Разница — в русском эта модель работает только для несовершенного вида (у совершенного будущее однословное: прочитаю), а в английском will + базовая форма — единственный способ говорить о будущем вообще, без такого разделения.
+NODE | en-ru | 12 | $/styleContent/examples | LIST | 2
+NODE | en-ru | 12 | $/styleContent/examples/0 | TEXT | 17:82a58fe0e26709c6ca26dae206248682cf88ede5bb3a3327cb956f23e0f6b374:I will walk home.
+NODE | en-ru | 12 | $/styleContent/examples/1 | TEXT | 21:74c28b96d0b496bd87f5f200101bb1849fe631ff377375016cf1612f75de42d9:She will read a book.
+NODE | en-ru | 12 | $/styleContent/why | TEXT | 264:309ea75af1855ab82468a5aa12240254fcaf0a667f57c0d48c5e9aef2ceec923:Will — неизменяемый вспомогательный элемент будущего времени; в отличие от настоящего/прошедшего, лицо и число вообще не влияют на форму глагола.
+SKILL | en-ru | 13 | en:pronouns
+NODE | en-ru | 13 | $ | OBJECT | id,title,group,level,formula,theory,hint,prerequisites,focus,methods,styleContent
+NODE | en-ru | 13 | $/id | TEXT | 11:72c93b6726e6ca5dfed6122bc56cee2cf8c6222dbfdd80e380fbbfb0494c8d2a:en:pronouns
+NODE | en-ru | 13 | $/title | TEXT | 41:45b768dda7871443157b68f69966856fcb8578991dec1d81a7519727140778b6:It · личное местоимение
+NODE | en-ru | 13 | $/group | TEXT | 8:28104b8f1375cd4031b0eed156edd626c89f1b84aefbc1e6cab9191666c3a886:Pronouns
+NODE | en-ru | 13 | $/level | TEXT | 2:c8361f9b468e68c86da024270e0949ce139cb704b8d7cce586681b99f3a7ea56:A2
+NODE | en-ru | 13 | $/formula | TEXT | 166:e331e6b94b665222b92424b803631a5bca0548774eddedb7d6778d5fb9e12fd2:Личное местоимение заменяет всю группу слов дополнения: it — для неодушевлённых предметов.
+NODE | en-ru | 13 | $/theory | TEXT | 270:bd3d643122ff50ed5861c7510e26a2068454c027b9332bc000811aba35c20e4d:Местоимение it заменяет целую группу «притяжательное + прилагательное + существительное», когда речь идёт о предмете, а не о человеке: my beautiful house → it.
+NODE | en-ru | 13 | $/hint | TEXT | 25:bd3bfdaadc5521ae53f4ba207d28ad6b878f6f93950327910bbeced4e0b5f883:my beautiful house → it
+NODE | en-ru | 13 | $/prerequisites | LIST | 2
+NODE | en-ru | 13 | $/prerequisites/0 | TEXT | 18:0f5b2bbd0fc1d978370667ab896edf243e8b5c0a5cb7a4a5f94b1d0a3f33a859:en:role.instrument
+NODE | en-ru | 13 | $/prerequisites/1 | TEXT | 16:f76c949a34a935d652b8c0a6a00598260cb14fceed2bb60b7ca6b0f614e618c5:en:role.location
+NODE | en-ru | 13 | $/focus | OBJECT | before,after
+NODE | en-ru | 13 | $/focus/before | TEXT | 18:950a373c80885afc065274210f51e1f7ee834cd6635472a04914a436779f4f5b:my beautiful house
+NODE | en-ru | 13 | $/focus/after | TEXT | 2:2ad8a7049d7c5511ac254f5f51fe70a046ebd884729056f0fe57f5160d467153:it
+NODE | en-ru | 13 | $/methods | OBJECT | logic,situations
+NODE | en-ru | 13 | $/methods/logic | OBJECT | introduction,promptLead,introduce,retrieve,feedback,review
+NODE | en-ru | 13 | $/methods/logic/introduction | TEXT | 270:bd3d643122ff50ed5861c7510e26a2068454c027b9332bc000811aba35c20e4d:Местоимение it заменяет целую группу «притяжательное + прилагательное + существительное», когда речь идёт о предмете, а не о человеке: my beautiful house → it.
+NODE | en-ru | 13 | $/methods/logic/promptLead | TEXT | 61:442b5151eb2924d3f075686bdec5fa7eeae0dc62862e26b181a17252f8d37c5d:Сначала определи правило и форму.
+NODE | en-ru | 13 | $/methods/logic/introduce | TEXT | 93:c4537b3b45e35c1c0eacc2fb4a884cee8efcbee22997b7f6998587a8f19ca8de:Проверь: вся группа слов заменяется одним словом it.
+NODE | en-ru | 13 | $/methods/logic/retrieve | TEXT | 127:53c24754ca08d3326d45d97a3c0de5c9ad68793b22058d098f97efa89e0c9461:Определи признаки и преобразуй исходное предложение самостоятельно.
+NODE | en-ru | 13 | $/methods/logic/feedback | TEXT | 132:44b559e170de20f9416b72ce2ea9ab8fbde7bcdd04ac9f553da88cafa57df38a:Сравни исходную и новую форму, затем проверь каждое изменение и правило.
+NODE | en-ru | 13 | $/methods/logic/review | TEXT | 168:9d390f23626d63465f7ee59e6fbb33a9c7a37ca33aea92755c7b879f7ee45f8a:Выбери «Повторить» или «Вспомнил» по своей попытке; затем реши новое задание без подсказки.
+NODE | en-ru | 13 | $/methods/situations | OBJECT | introduction,promptLead,introduce,retrieve,feedback,review
+NODE | en-ru | 13 | $/methods/situations/introduction | TEXT | 117:1be9298b5994fa5d940cbe55c368940d477c75bba990d1c06443545073e8edba:Ты уже назвал предмет и не хочешь повторять его полное название.
+NODE | en-ru | 13 | $/methods/situations/promptLead | TEXT | 84:6e5b09c01f4379252336b49ccd4208bfedaaa85b9b0857cc848f009ba8c7cee4:Представь ситуацию и скажи целое предложение.
+NODE | en-ru | 13 | $/methods/situations/introduce | TEXT | 88:d89c3f4ce36f593436bf0542fd02555b41ea1b260090dcd22acde864f3340da3:Как сказать это одним словом вместо целой фразы?
+NODE | en-ru | 13 | $/methods/situations/retrieve | TEXT | 113:de639badf123d9e75205e26852d3062620c5878f8cbc8a63a4551d4438495462:Представь ситуацию и скажи целое предложение самостоятельно.
+NODE | en-ru | 13 | $/methods/situations/feedback | TEXT | 107:ef07cd1224dae722fe7a675e962253e71134592d64efbb64f907f3bf1465e444:Сравни ответ с эталоном: вместо целой фразы — одно слово it.
+NODE | en-ru | 13 | $/methods/situations/review | TEXT | 150:294b6fbeab70d415b69854c22c77d5cf12e91d39234c44e5c9eb436a2db33ef7:Оцени, удалось ли вспомнить ответ самостоятельно; следующую ситуацию реши заново.
+NODE | en-ru | 13 | $/styleContent | OBJECT | nativeParallel,examples,why
+NODE | en-ru | 13 | $/styleContent/nativeParallel | LIST | 1
+NODE | en-ru | 13 | $/styleContent/nativeParallel/0 | OBJECT | native,target,matches,note
+NODE | en-ru | 13 | $/styleContent/nativeParallel/0/native | TEXT | 44:dc819195845303381405605485e73efa095c22f1318b45027aa230abe1ea6e7c:Где моя книга? — Вот она.
+NODE | en-ru | 13 | $/styleContent/nativeParallel/0/target | TEXT | 33:8e9f6289c98235dbcdd842301a5de70d4124c9cdba5ac57cccf047b9f31421d9:Where is my book? — Here it is.
+NODE | en-ru | 13 | $/styleContent/nativeParallel/0/matches | BOOL | false
+NODE | en-ru | 13 | $/styleContent/nativeParallel/0/note | TEXT | 645:300c2f4194a62e893c9300216f7bdc4c480ffd70834cfd4b037ee9f5ab5f3b57:Выбор русского местоимения (он/она/оно) зависит от грамматического рода существительного — «книга» женского рода, поэтому «она», хотя книга явно неодушевлённый предмет. Это условность, которую нужно помнить отдельно для каждого слова. В английском для всех неодушевлённых предметов — всегда it, независимо от рода существительного в русском переводе.
+NODE | en-ru | 13 | $/styleContent/examples | LIST | 2
+NODE | en-ru | 13 | $/styleContent/examples/0 | TEXT | 9:d377a13342d29564b150e891b0faf08e249c02f7845ba83d2b1f028edef8c82c:I see it.
+NODE | en-ru | 13 | $/styleContent/examples/1 | TEXT | 10:769a065a2d1b04e0a37d15fb4e36632b6c9e06e9aaba19f64207a131504cdaf8:I read it.
+NODE | en-ru | 13 | $/styleContent/why | TEXT | 402:37d3bc9c43d843ffb670364fe79578dcc36e095e1b2e5f8add083f7390875f1e:It — единственная форма для неодушевлённых предметов независимо от рода в русском переводе слова; у английских личных местоимений нет такого явного падежного различия subject/object, как у he/him, she/her — it неизменно в обеих ролях.
+SKILL | en-ru | 14 | en:verb.presentContinuous
+NODE | en-ru | 14 | $ | OBJECT | id,title,group,level,formula,theory,hint,prerequisites,focus,methods,styleContent
+NODE | en-ru | 14 | $/id | TEXT | 25:4fc9339bc459327038792578a4447f17251796f0bb64928a660938ba104034b8:en:verb.presentContinuous
+NODE | en-ru | 14 | $/title | TEXT | 18:71225ec04f0cee29577ce96b3992ff498e47c454eac522155a7012056ec58350:Present Continuous
+NODE | en-ru | 14 | $/group | TEXT | 4:4405911001ce921421527486758e45e9213792d21f84ec1cbf075f2327eca2de:Verb
+NODE | en-ru | 14 | $/level | TEXT | 2:5b950e77941d01cdf246d00b1ece546bc95234b77d98b44c9187e2733afa696a:B1
+NODE | en-ru | 14 | $/formula | TEXT | 59:ec4d412c70a6e1899acf10ba099d4735e0e61c6e94be50be4ef9c5dcafbd2ff5:Aspect Simple → Continuous: am/is/are + глагол-ing.
+NODE | en-ru | 14 | $/theory | TEXT | 307:71f492f79f3875d4d9b1e4e79d1760cde21df5a8fb25dd2d5144fe6f0e417e98:Present Continuous описывает процесс, происходящий сейчас: be (am/is/are) + глагол с -ing. В отличие от Present Simple (привычка/факт), Continuous всегда подчёркивает, что действие идёт в момент речи.
+NODE | en-ru | 14 | $/hint | TEXT | 20:67b46c8569633a9ecaa84c2a170a202d3ec59821beaf915ebdf486be2f7ec224:walks → is walking
+NODE | en-ru | 14 | $/prerequisites | LIST | 1
+NODE | en-ru | 14 | $/prerequisites/0 | TEXT | 21:a5bbe2d6ad540c0fef03a6cf913f069da0a10804437111ee3033be79d0b1a7b3:en:verb.presentSimple
+NODE | en-ru | 14 | $/focus | OBJECT | before,after
+NODE | en-ru | 14 | $/focus/before | TEXT | 5:e3c024aa6059557ea0287bf08cbe9ebc8e27a26a226398c99e9d001e35ace381:walks
+NODE | en-ru | 14 | $/focus/after | TEXT | 10:bc46c1a20f687ad8f838fda76b0ccc67a1821ec71fdc2ad3b881d15ccef34667:is walking
+NODE | en-ru | 14 | $/methods | OBJECT | logic,situations
+NODE | en-ru | 14 | $/methods/logic | OBJECT | introduction,promptLead,introduce,retrieve,feedback,review
+NODE | en-ru | 14 | $/methods/logic/introduction | TEXT | 307:71f492f79f3875d4d9b1e4e79d1760cde21df5a8fb25dd2d5144fe6f0e417e98:Present Continuous описывает процесс, происходящий сейчас: be (am/is/are) + глагол с -ing. В отличие от Present Simple (привычка/факт), Continuous всегда подчёркивает, что действие идёт в момент речи.
+NODE | en-ru | 14 | $/methods/logic/promptLead | TEXT | 61:442b5151eb2924d3f075686bdec5fa7eeae0dc62862e26b181a17252f8d37c5d:Сначала определи правило и форму.
+NODE | en-ru | 14 | $/methods/logic/introduce | TEXT | 102:350b77d6d84adb3c9873faaf0242f52a006faa53a942b869ac2c020ce5c0fcea:Проверь: be согласуется с подлежащим, глагол получает -ing.
+NODE | en-ru | 14 | $/methods/logic/retrieve | TEXT | 127:53c24754ca08d3326d45d97a3c0de5c9ad68793b22058d098f97efa89e0c9461:Определи признаки и преобразуй исходное предложение самостоятельно.
+NODE | en-ru | 14 | $/methods/logic/feedback | TEXT | 132:44b559e170de20f9416b72ce2ea9ab8fbde7bcdd04ac9f553da88cafa57df38a:Сравни исходную и новую форму, затем проверь каждое изменение и правило.
+NODE | en-ru | 14 | $/methods/logic/review | TEXT | 168:9d390f23626d63465f7ee59e6fbb33a9c7a37ca33aea92755c7b879f7ee45f8a:Выбери «Повторить» или «Вспомнил» по своей попытке; затем реши новое задание без подсказки.
+NODE | en-ru | 14 | $/methods/situations | OBJECT | introduction,promptLead,introduce,retrieve,feedback,review
+NODE | en-ru | 14 | $/methods/situations/introduction | TEXT | 109:19722bf809f2c17286a97e5d28bb8db728db2b7de43989c70e053aa4c2e99a64:Ты говоришь о том, что происходит прямо сейчас, в эту минуту.
+NODE | en-ru | 14 | $/methods/situations/promptLead | TEXT | 84:6e5b09c01f4379252336b49ccd4208bfedaaa85b9b0857cc848f009ba8c7cee4:Представь ситуацию и скажи целое предложение.
+NODE | en-ru | 14 | $/methods/situations/introduce | TEXT | 106:2c0047fee58457079adb7360681296b8c164de846dce0b9dae18fefc1e17ec0d:Как сказать, что это происходит именно сейчас, а не всегда?
+NODE | en-ru | 14 | $/methods/situations/retrieve | TEXT | 113:de639badf123d9e75205e26852d3062620c5878f8cbc8a63a4551d4438495462:Представь ситуацию и скажи целое предложение самостоятельно.
+NODE | en-ru | 14 | $/methods/situations/feedback | TEXT | 67:20194554f7487667076becf88f8fa44dcdf1f1eb7130469f50ad897cfd7cce57:Сравни ответ с эталоном: be + глагол-ing.
+NODE | en-ru | 14 | $/methods/situations/review | TEXT | 150:294b6fbeab70d415b69854c22c77d5cf12e91d39234c44e5c9eb436a2db33ef7:Оцени, удалось ли вспомнить ответ самостоятельно; следующую ситуацию реши заново.
+NODE | en-ru | 14 | $/styleContent | OBJECT | nativeParallel,examples,why
+NODE | en-ru | 14 | $/styleContent/nativeParallel | LIST | 1
+NODE | en-ru | 14 | $/styleContent/nativeParallel/0 | OBJECT | native,target,matches,note
+NODE | en-ru | 14 | $/styleContent/nativeParallel/0/native | TEXT | 36:2c255a18e659657bffb98cae603d25f4c2919318056b685d7bf893373a5341eb:Я иду домой (сейчас).
+NODE | en-ru | 14 | $/styleContent/nativeParallel/0/target | TEXT | 16:ef8df4e55b1968d43057a059d3d93cf487e76f61c32a54ab0385e19bc584bf4b:I am going home.
+NODE | en-ru | 14 | $/styleContent/nativeParallel/0/matches | BOOL | false
+NODE | en-ru | 14 | $/styleContent/nativeParallel/0/note | TEXT | 524:693e40c31aac644ef2c255221ca5cac59793cf816dcd2d4e2a513d9807486da6:Русский вид (иду — процесс vs пойду — начало) не совпадает по границам с английским Simple/Continuous: один и тот же русский несовершенный «иду» может быть и Present Simple («I go» — привычка), и Present Continuous («I am going» — сейчас) в зависимости от контекста, который в русском не маркирован грамматически вообще.
+NODE | en-ru | 14 | $/styleContent/examples | LIST | 2
+NODE | en-ru | 14 | $/styleContent/examples/0 | TEXT | 22:c91b8cd6e157ed7a1bca37202ac6637223446d239babdf7dd514bf76a66b3b6a:She is reading a book.
+NODE | en-ru | 14 | $/styleContent/examples/1 | TEXT | 19:8e41124dc91c9040117bd324d7a223f3db165c8f4877cfaf2057605df4e2543a:The dog is walking.
+NODE | en-ru | 14 | $/styleContent/why | TEXT | 303:83ccf9a781e9e144de7ab3c5d244d3211ef9d41b1aed6f032995b81d958807fb:Continuous — грамматический аспект (форма be+ing), не лексический выбор глагола, как русский совершенный/несовершенный вид; один и тот же глагол walk работает и в Simple, и в Continuous.
+SKILL | en-ru | 15 | en:tense.contrast
+NODE | en-ru | 15 | $ | OBJECT | id,title,group,level,formula,theory,hint,prerequisites,focus,methods,styleContent
+NODE | en-ru | 15 | $/id | TEXT | 17:e69516c9dd4d5e19c8e16cf40d558d41b404cd8baeb4988dd2dd4b7493346c63:en:tense.contrast
+NODE | en-ru | 15 | $/title | TEXT | 58:dec7618180ab1f10fa67ae308cbec86ff196fc0473d3dee137bc9f91bdb78acf:Simple vs Continuous vs Perfect · одно событие
+NODE | en-ru | 15 | $/group | TEXT | 7:ace019e68559fa1c8443f381cfd29cad5d376f83fe089544cf155af0d9ed7ddd:B1 Core
+NODE | en-ru | 15 | $/level | TEXT | 2:5b950e77941d01cdf246d00b1ece546bc95234b77d98b44c9187e2733afa696a:B1
+NODE | en-ru | 15 | $/formula | TEXT | 162:90694c3c5baf853265c7b820b85d0888e80f83e5e39387dc5e3300c2b72f6aee:Одно и то же событие: I read (привычка) — I am reading (процесс) — I have read (результат, значим сейчас).
+NODE | en-ru | 15 | $/theory | TEXT | 334:df09c3ba54c295404d0826f86f9578a20e55ea0a2dd23a672b335dfd6bbe0e40:Simple, Continuous и Perfect не про «когда», а про то, что говорящий подчёркивает: привычку/факт, процесс в моменте или готовый результат. I have read a new book сообщает о результате, а не о моменте времени.
+NODE | en-ru | 15 | $/hint | TEXT | 24:d38988d466e66c6b27348612d305b7cc93bd3c8d4bea7c1a3123bd9fc0d7a937:am reading → have read
+NODE | en-ru | 15 | $/prerequisites | LIST | 2
+NODE | en-ru | 15 | $/prerequisites/0 | TEXT | 20:a3fbd8f442dced688f9b07c284b729a41a39e25d3da51da75cf71740077c45f4:en:verb.futureSimple
+NODE | en-ru | 15 | $/prerequisites/1 | TEXT | 25:4fc9339bc459327038792578a4447f17251796f0bb64928a660938ba104034b8:en:verb.presentContinuous
+NODE | en-ru | 15 | $/focus | OBJECT | before,after
+NODE | en-ru | 15 | $/focus/before | TEXT | 10:f5d5326f3b12bb666c3917f1a6f566ae0fbcbdb3172aec050d307a5d4fff7799:am reading
+NODE | en-ru | 15 | $/focus/after | TEXT | 9:a420430c1a6723538b2372222b595481efed1994e20f44079c387d6c41892832:have read
+NODE | en-ru | 15 | $/methods | OBJECT | logic,situations
+NODE | en-ru | 15 | $/methods/logic | OBJECT | introduction,promptLead,introduce,retrieve,feedback,review
+NODE | en-ru | 15 | $/methods/logic/introduction | TEXT | 334:df09c3ba54c295404d0826f86f9578a20e55ea0a2dd23a672b335dfd6bbe0e40:Simple, Continuous и Perfect не про «когда», а про то, что говорящий подчёркивает: привычку/факт, процесс в моменте или готовый результат. I have read a new book сообщает о результате, а не о моменте времени.
+NODE | en-ru | 15 | $/methods/logic/promptLead | TEXT | 61:442b5151eb2924d3f075686bdec5fa7eeae0dc62862e26b181a17252f8d37c5d:Сначала определи правило и форму.
+NODE | en-ru | 15 | $/methods/logic/introduce | TEXT | 178:d567d7e1d55e0ae09ed036ba38e78683c808af5b89e3d982c2c5a1c073a88210:Проверь: have + причастие показывает завершённость и её значимость сейчас, а не сам момент действия.
+NODE | en-ru | 15 | $/methods/logic/retrieve | TEXT | 127:53c24754ca08d3326d45d97a3c0de5c9ad68793b22058d098f97efa89e0c9461:Определи признаки и преобразуй исходное предложение самостоятельно.
+NODE | en-ru | 15 | $/methods/logic/feedback | TEXT | 132:44b559e170de20f9416b72ce2ea9ab8fbde7bcdd04ac9f553da88cafa57df38a:Сравни исходную и новую форму, затем проверь каждое изменение и правило.
+NODE | en-ru | 15 | $/methods/logic/review | TEXT | 168:9d390f23626d63465f7ee59e6fbb33a9c7a37ca33aea92755c7b879f7ee45f8a:Выбери «Повторить» или «Вспомнил» по своей попытке; затем реши новое задание без подсказки.
+NODE | en-ru | 15 | $/methods/situations | OBJECT | introduction,promptLead,introduce,retrieve,feedback,review
+NODE | en-ru | 15 | $/methods/situations/introduction | TEXT | 209:4f56e693b79a867a37bd2502465c9562307c146236df06bfe01a0464368fde52:Ты хочешь показать, что действие уже завершилось и результат важен сейчас, а не что оно происходит в данный момент.
+NODE | en-ru | 15 | $/methods/situations/promptLead | TEXT | 84:6e5b09c01f4379252336b49ccd4208bfedaaa85b9b0857cc848f009ba8c7cee4:Представь ситуацию и скажи целое предложение.
+NODE | en-ru | 15 | $/methods/situations/introduce | TEXT | 110:11c0055a795b2640a676440de7b0750476f299ce73c4d5164828753225e18171:Как сказать, что ты уже закончил, а не что делаешь это сейчас?
+NODE | en-ru | 15 | $/methods/situations/retrieve | TEXT | 113:de639badf123d9e75205e26852d3062620c5878f8cbc8a63a4551d4438495462:Представь ситуацию и скажи целое предложение самостоятельно.
+NODE | en-ru | 15 | $/methods/situations/feedback | TEXT | 94:eaa4c40769566296d6e1655c2e32462e503e6d4edac7210e7ce18643145dba7a:Сравни ответ с эталоном: have + причастие вместо be + -ing.
+NODE | en-ru | 15 | $/methods/situations/review | TEXT | 150:294b6fbeab70d415b69854c22c77d5cf12e91d39234c44e5c9eb436a2db33ef7:Оцени, удалось ли вспомнить ответ самостоятельно; следующую ситуацию реши заново.
+NODE | en-ru | 15 | $/styleContent | OBJECT | nativeParallel,examples,why
+NODE | en-ru | 15 | $/styleContent/nativeParallel | LIST | 1
+NODE | en-ru | 15 | $/styleContent/nativeParallel/0 | OBJECT | native,target,matches,note
+NODE | en-ru | 15 | $/styleContent/nativeParallel/0/native | TEXT | 31:016cc1f8bd7d647e3bba6d0f4e9a51cfe249e0dbd840837f199e04ad21b14233:Я прочитал книгу.
+NODE | en-ru | 15 | $/styleContent/nativeParallel/0/target | TEXT | 21:66c14e420873c641014a2a249b246056114cf0c62bd9d774a23457f6cfe116e2:I have read the book.
+NODE | en-ru | 15 | $/styleContent/nativeParallel/0/matches | BOOL | false
+NODE | en-ru | 15 | $/styleContent/nativeParallel/0/note | TEXT | 710:54fc0a70ee4b6c37b4c19290bb1de708d98090d71074a3f2339e0721aa02f146:Русский вид маркирует завершённость одним глаголом — «прочитал» (от читать→прочитать) сразу говорит «уже сделано, результат есть». Английский для той же идеи «результат сейчас значим» не меняет сам глагол на другой, а добавляет вспомогательный have к тому же самому read, которым только что была выражена и привычка (I read), и процесс (I am reading) — одна лексема, три разных грамматических костюма.
+NODE | en-ru | 15 | $/styleContent/examples | LIST | 3
+NODE | en-ru | 15 | $/styleContent/examples/0 | TEXT | 18:0f6f3c60a156be66f5ab3730fcb43a0f37721ce597b09f4ed2a9ef603684a0cd:I read a new book.
+NODE | en-ru | 15 | $/styleContent/examples/1 | TEXT | 24:04a9cd7390ce2bc0b528f6ce3d5dd0c695ab05c04fd46034843928692032e3b1:I am reading a new book.
+NODE | en-ru | 15 | $/styleContent/examples/2 | TEXT | 23:54b8994d5f991c9a1c6130f18bb22c21d9eeaae2e7b114f8feb31432b88dc30c:I have read a new book.
+NODE | en-ru | 15 | $/styleContent/why | TEXT | 359:2ea07bc47fd59a69c15944f241feebad3fb0835b561f66b7eb4f71a40be48ab0:Три формы одного глагола показывают три разных взгляда на событие — привычку, процесс, результат — а не три разных момента времени; различие грамматическое (aspect), а не лексическое, как русский вид.
+SKILL | en-ru | 16 | en:mixed
+NODE | en-ru | 16 | $ | OBJECT | id,title,group,level,formula,theory,hint,prerequisites,focus,methods,styleContent
+NODE | en-ru | 16 | $/id | TEXT | 8:3e926616e5e184e09e92be614fd0bf4448f7d3083c57c92fc4389db155aa3e29:en:mixed
+NODE | en-ru | 16 | $/title | TEXT | 45:ef1be93fc00a50d5e46ab0232ff26bc8c0de66f55c14fdc9d4704290f5cb5a90:Смешанные трансформации
+NODE | en-ru | 16 | $/group | TEXT | 7:ace019e68559fa1c8443f381cfd29cad5d376f83fe089544cf155af0d9ed7ddd:B1 Core
+NODE | en-ru | 16 | $/level | TEXT | 2:5b950e77941d01cdf246d00b1ece546bc95234b77d98b44c9187e2733afa696a:B1
+NODE | en-ru | 16 | $/formula | TEXT | 159:98b62d436316d4069c798c9d97d0ec2b58724286b18206cf235f655033e57e8e:Комбинация: время (Present → Past) + владелец (my → другое притяжательное) в одном предложении.
+NODE | en-ru | 16 | $/theory | TEXT | 251:762c58fc86dc42dd84ce6f547557ec5ea9516583cb4500ee187c1c6668658726:На уровне B1 нужно менять несколько вещей одновременно: и время глагола, и притяжательное местоимение, без пошаговых подсказок, как на A1-A2.
+NODE | en-ru | 16 | $/hint | TEXT | 56:611a991348c5e9d45ab2f7d50a95aef9a72e9f7d6fde9411efb096180d47d40b:I see my beautiful house. → I saw his beautiful house.
+NODE | en-ru | 16 | $/prerequisites | LIST | 2
+NODE | en-ru | 16 | $/prerequisites/0 | TEXT | 16:f073c4b7943383333f634f531fdf3d43f1134d2d181413ac4aee493fddf282dd:en:possessive.my
+NODE | en-ru | 16 | $/prerequisites/1 | TEXT | 18:1c0a8fdb94ccbe2701906ed6bd2fa23ea852c9c2f90cb75c04521b94eb5e0524:en:verb.pastSimple
+NODE | en-ru | 16 | $/focus | OBJECT | before,after
+NODE | en-ru | 16 | $/focus/before | TEXT | 25:28c65eee11acb47f20a8e2ac98a29b7a0ff836344d9733dbc2e228c3b3b4ab35:I see my beautiful house.
+NODE | en-ru | 16 | $/focus/after | TEXT | 26:612a185063141a06f91725397ef61a09d6178f8aa73e8846431f74b6964127f2:I saw his beautiful house.
+NODE | en-ru | 16 | $/methods | OBJECT | logic,situations
+NODE | en-ru | 16 | $/methods/logic | OBJECT | introduction,promptLead,introduce,retrieve,feedback,review
+NODE | en-ru | 16 | $/methods/logic/introduction | TEXT | 251:762c58fc86dc42dd84ce6f547557ec5ea9516583cb4500ee187c1c6668658726:На уровне B1 нужно менять несколько вещей одновременно: и время глагола, и притяжательное местоимение, без пошаговых подсказок, как на A1-A2.
+NODE | en-ru | 16 | $/methods/logic/promptLead | TEXT | 105:4d68c05f62461a3e6841fe808a4349e4f15c43e51c6c2b5672589ad92a1686af:Сначала определи, что меняется: время, владелец — или оба.
+NODE | en-ru | 16 | $/methods/logic/introduce | TEXT | 113:1acd245b472073b8e8b072b621cb346d8c15926ea9750638653231c8d45520d7:Проверь оба изменения по отдельности, затем собери результат.
+NODE | en-ru | 16 | $/methods/logic/retrieve | TEXT | 130:9ec26fc6e059331364ce67005cd4149a20b259936f8c7f7344ca54e6040b91ae:Построй итоговое предложение самостоятельно, без пошаговых подсказок.
+NODE | en-ru | 16 | $/methods/logic/feedback | TEXT | 100:63c90cfce063f369afbb8e3e0754bb85acca54e21c5f6f810e4abfa6647e31b1:Сравни ответ с эталоном по каждому изменению отдельно.
+NODE | en-ru | 16 | $/methods/logic/review | TEXT | 168:9d390f23626d63465f7ee59e6fbb33a9c7a37ca33aea92755c7b879f7ee45f8a:Выбери «Повторить» или «Вспомнил» по своей попытке; затем реши новое задание без подсказки.
+NODE | en-ru | 16 | $/methods/situations | OBJECT | introduction,promptLead,introduce,retrieve,feedback,review
+NODE | en-ru | 16 | $/methods/situations/introduction | TEXT | 138:df201bf896cd99577904bd11453dd0ac87b1c54d9efc3e4789ae1df54e09037b:Ты пересказываешь историю с новыми деталями: другое время, другой владелец.
+NODE | en-ru | 16 | $/methods/situations/promptLead | TEXT | 84:6e5b09c01f4379252336b49ccd4208bfedaaa85b9b0857cc848f009ba8c7cee4:Представь ситуацию и скажи целое предложение.
+NODE | en-ru | 16 | $/methods/situations/introduce | TEXT | 82:c5974211a4e398723f201ea5623c6cf8904c5750c00aa0b47694f242b1121f2e:Как сказать это с учётом обеих деталей сразу?
+NODE | en-ru | 16 | $/methods/situations/retrieve | TEXT | 113:de639badf123d9e75205e26852d3062620c5878f8cbc8a63a4551d4438495462:Представь ситуацию и скажи целое предложение самостоятельно.
+NODE | en-ru | 16 | $/methods/situations/feedback | TEXT | 75:244dbd0abd1b364fa83835edd3752d18f4f5af08a8ad022d3711364bae8f34b4:Сравни ответ с эталоном по каждой детали.
+NODE | en-ru | 16 | $/methods/situations/review | TEXT | 150:294b6fbeab70d415b69854c22c77d5cf12e91d39234c44e5c9eb436a2db33ef7:Оцени, удалось ли вспомнить ответ самостоятельно; следующую ситуацию реши заново.
+NODE | en-ru | 16 | $/styleContent | OBJECT | nativeParallel,examples,why
+NODE | en-ru | 16 | $/styleContent/nativeParallel | LIST | 1
+NODE | en-ru | 16 | $/styleContent/nativeParallel/0 | OBJECT | native,target,matches,note
+NODE | en-ru | 16 | $/styleContent/nativeParallel/0/native | TEXT | 38:a5d3a2088e5fb1869d81741bc083bf828c185a1b42bcdde460a1829688d3fe18:Она увидела твой дом.
+NODE | en-ru | 16 | $/styleContent/nativeParallel/0/target | TEXT | 19:6d9e85b68e59b732b944b5fbf6563e63d8f42561edcaf78e644a1ece4b45fd57:She saw your house.
+NODE | en-ru | 16 | $/styleContent/nativeParallel/0/matches | BOOL | false
+NODE | en-ru | 16 | $/styleContent/nativeParallel/0/note | TEXT | 757:5df0d4ac1e1551f2317f731c4847cd7ecf980866797a1144b6357cd13ef6d797:В русском прошедшем времени глагол согласуется по роду с подлежащим («увидела», не «увидел» — потому что говорит она), а не с владельцем предмета («твой дом» остаётся «твой» независимо от рода того, кто увидел). В английском saw вообще не согласуется ни с кем — одна форма для всех; типичная ошибка — решить, что раз меняется владелец, должен «согласоваться» и глагол, хотя в обоих языках эти два изменения независимы.
+NODE | en-ru | 16 | $/styleContent/examples | LIST | 2
+NODE | en-ru | 16 | $/styleContent/examples/0 | TEXT | 19:296a4d8c4855c8f109edf2cc59895fadb34027bef65e778736a1ce7e1daf8606:She walked her dog.
+NODE | en-ru | 16 | $/styleContent/examples/1 | TEXT | 19:4afab3ac63f64aa0e14af0282d9797da14fb311083797458512ab6013752be66:He read their book.
+NODE | en-ru | 16 | $/styleContent/why | TEXT | 305:cc949bc78a1c3c69f1929eb7e2e04ed2deb5fc9388a0abdf2476f2a0e061c569:B1 объединяет уже отдельно выученные навыки (время, притяжательные) в одном предложении без пошаговых подсказок — тренирует именно комбинирование, а не новое правило.
+SKILL | pl-ru | 01 | case.acc.n
+NODE | pl-ru | 01 | $ | OBJECT | id,title,group,level,formula,theory,hint,prerequisites,focus,methods,styleContent
+NODE | pl-ru | 01 | $/id | TEXT | 10:7b63869f947ccde5248c1cfb42d735f6e8ce4ecba065694fbe69ba1b5367341f:case.acc.n
+NODE | pl-ru | 01 | $/title | TEXT | 32:7094fdc2f0668cf020541c83710320a5afa11408f0db98fd70378d91d77e9bea:Biernik · средний род
+NODE | pl-ru | 01 | $/group | TEXT | 9:23443958b952af7e3cc8394084c6157ea4e3af3e4233964fc204c33303e6f14c:Przypadki
+NODE | pl-ru | 01 | $/level | TEXT | 2:16a36e86f6fed5d465ff332511a0ce1a863b55d364b25a7cdaa25db19abf9648:A1
+NODE | pl-ru | 01 | $/formula | TEXT | 42:0f3477913a79d3dc71e6d900feb5b5fe4fbd61a68097ae8e82476cceeb521281:Средний род: Biernik = Mianownik
+NODE | pl-ru | 01 | $/theory | TEXT | 145:003394cc2b9c298fbbb329849aea2fc8651ea76fdcdd3d9cca53ae0199a1a974:В единственном числе средний род сохраняет базовую форму в Bierniku: widzę moje małe dziecko.
+NODE | pl-ru | 01 | $/hint | TEXT | 40:229ba423ee85a5a0b4272ef9c3c14fd07e941f4cc8ef324029fce259f7f0aad8:moje nowe okno → widzę moje nowe okno
+NODE | pl-ru | 01 | $/prerequisites | LIST | 0
+NODE | pl-ru | 01 | $/focus | OBJECT | before,after
+NODE | pl-ru | 01 | $/focus/before | TEXT | 16:e2e0a8c5c290f92bc16ce51a44a885d95ed4c4615975febe014549fc263c71d4:moje duże morze
+NODE | pl-ru | 01 | $/focus/after | TEXT | 16:e2e0a8c5c290f92bc16ce51a44a885d95ed4c4615975febe014549fc263c71d4:moje duże morze
+NODE | pl-ru | 01 | $/methods | OBJECT | logic,situations
+NODE | pl-ru | 01 | $/methods/logic | OBJECT | introduction,promptLead,introduce,retrieve,feedback,review
+NODE | pl-ru | 01 | $/methods/logic/introduction | TEXT | 145:003394cc2b9c298fbbb329849aea2fc8651ea76fdcdd3d9cca53ae0199a1a974:В единственном числе средний род сохраняет базовую форму в Bierniku: widzę moje małe dziecko.
+NODE | pl-ru | 01 | $/methods/logic/promptLead | TEXT | 61:442b5151eb2924d3f075686bdec5fa7eeae0dc62862e26b181a17252f8d37c5d:Сначала определи правило и форму.
+NODE | pl-ru | 01 | $/methods/logic/introduce | TEXT | 144:0b436a1f6741af5f803e59ca692d2f93986bfa4e389cf001bb4746307802d076:Проверь, совпадает ли базовая форма среднего рода с формой прямого дополнения.
+NODE | pl-ru | 01 | $/methods/logic/retrieve | TEXT | 127:53c24754ca08d3326d45d97a3c0de5c9ad68793b22058d098f97efa89e0c9461:Определи признаки и преобразуй исходное предложение самостоятельно.
+NODE | pl-ru | 01 | $/methods/logic/feedback | TEXT | 132:44b559e170de20f9416b72ce2ea9ab8fbde7bcdd04ac9f553da88cafa57df38a:Сравни исходную и новую форму, затем проверь каждое изменение и правило.
+NODE | pl-ru | 01 | $/methods/logic/review | TEXT | 168:9d390f23626d63465f7ee59e6fbb33a9c7a37ca33aea92755c7b879f7ee45f8a:Выбери «Повторить» или «Вспомнил» по своей попытке; затем реши новое задание без подсказки.
+NODE | pl-ru | 01 | $/methods/situations | OBJECT | introduction,promptLead,introduce,retrieve,feedback,review
+NODE | pl-ru | 01 | $/methods/situations/introduction | TEXT | 199:2642b8be503b3867004676db183a88b648ae9de2f3578ab519561fa1a0f1593d:Ты показываешь собеседнику то, о чём идёт речь. Назови это целой фразой: в этой группе форма остаётся прежней.
+NODE | pl-ru | 01 | $/methods/situations/promptLead | TEXT | 84:6e5b09c01f4379252336b49ccd4208bfedaaa85b9b0857cc848f009ba8c7cee4:Представь ситуацию и скажи целое предложение.
+NODE | pl-ru | 01 | $/methods/situations/introduce | TEXT | 148:697d15b436b97fd8b1ddc41073bc94b5f34544153b5651ad3aa697bea52bb2ed:Ты сообщаешь собеседнику, что видишь названное. Как сказать об этом целой фразой?
+NODE | pl-ru | 01 | $/methods/situations/retrieve | TEXT | 113:de639badf123d9e75205e26852d3062620c5878f8cbc8a63a4551d4438495462:Представь ситуацию и скажи целое предложение самостоятельно.
+NODE | pl-ru | 01 | $/methods/situations/feedback | TEXT | 133:6ba12d584584a8febf3a1858cf67219a88466e594df76ada7d411ac1845ed0e1:Сравни, что хотел сказать, с эталоном и проследи изменения в предложении.
+NODE | pl-ru | 01 | $/methods/situations/review | TEXT | 150:294b6fbeab70d415b69854c22c77d5cf12e91d39234c44e5c9eb436a2db33ef7:Оцени, удалось ли вспомнить ответ самостоятельно; следующую ситуацию реши заново.
+NODE | pl-ru | 01 | $/styleContent | OBJECT | nativeParallel,examples,why
+NODE | pl-ru | 01 | $/styleContent/nativeParallel | LIST | 1
+NODE | pl-ru | 01 | $/styleContent/nativeParallel/0 | OBJECT | native,target,note,matches
+NODE | pl-ru | 01 | $/styleContent/nativeParallel/0/native | TEXT | 38:e49b0943fc5c275538a1eb901caa5b6aefdd55d09efb9a40c2cce28f4e437642:Вижу моё старое окно.
+NODE | pl-ru | 01 | $/styleContent/nativeParallel/0/target | TEXT | 23:07e1b1e76b9fb8d0cba4305d286337106e1f7b2b9ce5e43068e0da00b1d9a4b7:Widzę moje stare okno.
+NODE | pl-ru | 01 | $/styleContent/nativeParallel/0/note | TEXT | 202:7228e33f87e2110e11f257f04fbb705b804e68b4640db628ed7985c030f45c38:Средний род в винительном падеже не меняется ни в русском, ни в польском: «окно» и okno остаются в исходной форме.
+NODE | pl-ru | 01 | $/styleContent/nativeParallel/0/matches | BOOL | true
+NODE | pl-ru | 01 | $/styleContent/examples | LIST | 2
+NODE | pl-ru | 01 | $/styleContent/examples/0 | TEXT | 14:29fee51be74f083c459e0d7e3272236d7af65ce279e12b6220a1611c6764d4ea:Mam nowe okno.
+NODE | pl-ru | 01 | $/styleContent/examples/1 | TEXT | 21:e8f7315e0b785889df299438bfa256c92b785ab7c131ffd44b5f5186793ff404:Widzę małe dziecko.
+NODE | pl-ru | 01 | $/styleContent/why | TEXT | 309:46e159bbb6e0bdc6d5edfafdf06200e2453fa9951c844edb1f561e600b72a993:Средний род — самый простой случай: винительный падеж внешне совпадает с именительным, потому что у среднего рода в обоих языках нет отдельного окончания для этой роли.
+SKILL | pl-ru | 02 | case.acc.f
+NODE | pl-ru | 02 | $ | OBJECT | id,title,group,level,formula,theory,hint,prerequisites,focus,methods,styleContent
+NODE | pl-ru | 02 | $/id | TEXT | 10:2c36ea844352256540e6ea3f32b9b104f176161e0b747174c03810754c3c3507:case.acc.f
+NODE | pl-ru | 02 | $/title | TEXT | 19:46e3ce6242202e6d9aaf96166eeebebaf19d4d0a8a10d2510647ae9bf3889bb4:Biernik · żeński
+NODE | pl-ru | 02 | $/group | TEXT | 9:23443958b952af7e3cc8394084c6157ea4e3af3e4233964fc204c33303e6f14c:Przypadki
+NODE | pl-ru | 02 | $/level | TEXT | 2:16a36e86f6fed5d465ff332511a0ce1a863b55d364b25a7cdaa25db19abf9648:A1
+NODE | pl-ru | 02 | $/formula | TEXT | 51:92abddb20cef9e97bcb3e854687590954ba9c6a4649201b22adbc93e16740590:-a → -ę; прилагательное -a → -ą
+NODE | pl-ru | 02 | $/theory | TEXT | 102:4d228d7516ed8403ec9750b7212cee4a1406365ab1cdc80d2736e53bde01d231:Прямой объект после widzę, mam, lubię, kupuję обычно стоит в Bierniku.
+NODE | pl-ru | 02 | $/hint | TEXT | 16:a13229e82e4c42309286ccfae763f9cc1ee61d533ecd34a0dfc10eb098e72728:Widzę kogo? co?
+NODE | pl-ru | 02 | $/prerequisites | LIST | 0
+NODE | pl-ru | 02 | $/focus | OBJECT | before,after
+NODE | pl-ru | 02 | $/focus/before | TEXT | 19:dc798870fa3acf5c63b5dff622fd4b1a6ccf9c8863bd18eb4dc0303ddc12b3ab:moja młoda siostra
+NODE | pl-ru | 02 | $/focus/after | TEXT | 22:c543db42a9dc1eb924b142bfbef9f56112292e021341a8f729ec9f9f3914a52c:moją młodą siostrę
+NODE | pl-ru | 02 | $/methods | OBJECT | logic,situations
+NODE | pl-ru | 02 | $/methods/logic | OBJECT | introduction,promptLead,introduce,retrieve,feedback,review
+NODE | pl-ru | 02 | $/methods/logic/introduction | TEXT | 102:4d228d7516ed8403ec9750b7212cee4a1406365ab1cdc80d2736e53bde01d231:Прямой объект после widzę, mam, lubię, kupuję обычно стоит в Bierniku.
+NODE | pl-ru | 02 | $/methods/logic/promptLead | TEXT | 61:442b5151eb2924d3f075686bdec5fa7eeae0dc62862e26b181a17252f8d37c5d:Сначала определи правило и форму.
+NODE | pl-ru | 02 | $/methods/logic/introduce | TEXT | 131:68cf6dddea4d464da47eecef3f4fff621ba56711c27ae65affc329b5790c817a:Определи род и падеж группы после действия, затем проверь согласование.
+NODE | pl-ru | 02 | $/methods/logic/retrieve | TEXT | 127:53c24754ca08d3326d45d97a3c0de5c9ad68793b22058d098f97efa89e0c9461:Определи признаки и преобразуй исходное предложение самостоятельно.
+NODE | pl-ru | 02 | $/methods/logic/feedback | TEXT | 132:44b559e170de20f9416b72ce2ea9ab8fbde7bcdd04ac9f553da88cafa57df38a:Сравни исходную и новую форму, затем проверь каждое изменение и правило.
+NODE | pl-ru | 02 | $/methods/logic/review | TEXT | 168:9d390f23626d63465f7ee59e6fbb33a9c7a37ca33aea92755c7b879f7ee45f8a:Выбери «Повторить» или «Вспомнил» по своей попытке; затем реши новое задание без подсказки.
+NODE | pl-ru | 02 | $/methods/situations | OBJECT | introduction,promptLead,introduce,retrieve,feedback,review
+NODE | pl-ru | 02 | $/methods/situations/introduction | TEXT | 186:d106c78a25d88cb7a42bc5e46af7ca15b5e1848a2e593af52f0d7b16ba6ac233:Ты говоришь собеседнику, кого или что видишь. Представь эту сцену, затем измени окончания всей группы.
+NODE | pl-ru | 02 | $/methods/situations/promptLead | TEXT | 84:6e5b09c01f4379252336b49ccd4208bfedaaa85b9b0857cc848f009ba8c7cee4:Представь ситуацию и скажи целое предложение.
+NODE | pl-ru | 02 | $/methods/situations/introduce | TEXT | 121:d658981493a16739ee924e175fc6a921badcfb89fc5e0195a1196d373fdce939:Ты сообщаешь, кого или что видишь. Как назвать объект целой фразой?
+NODE | pl-ru | 02 | $/methods/situations/retrieve | TEXT | 113:de639badf123d9e75205e26852d3062620c5878f8cbc8a63a4551d4438495462:Представь ситуацию и скажи целое предложение самостоятельно.
+NODE | pl-ru | 02 | $/methods/situations/feedback | TEXT | 133:6ba12d584584a8febf3a1858cf67219a88466e594df76ada7d411ac1845ed0e1:Сравни, что хотел сказать, с эталоном и проследи изменения в предложении.
+NODE | pl-ru | 02 | $/methods/situations/review | TEXT | 150:294b6fbeab70d415b69854c22c77d5cf12e91d39234c44e5c9eb436a2db33ef7:Оцени, удалось ли вспомнить ответ самостоятельно; следующую ситуацию реши заново.
+NODE | pl-ru | 02 | $/styleContent | OBJECT | nativeParallel,examples,why
+NODE | pl-ru | 02 | $/styleContent/nativeParallel | LIST | 1
+NODE | pl-ru | 02 | $/styleContent/nativeParallel/0 | OBJECT | native,target,note,matches
+NODE | pl-ru | 02 | $/styleContent/nativeParallel/0/native | TEXT | 40:c8be4a90a25eadc7c3c943d015c7f291edca61c9924e968192f8c553fde27334:Вижу мою хорошую жену.
+NODE | pl-ru | 02 | $/styleContent/nativeParallel/0/target | TEXT | 27:cf38f7907dbfd6689a53a8b1c828184ecd2fc335ca620b9577959c5603540cf1:Widzę moją dobrą żonę.
+NODE | pl-ru | 02 | $/styleContent/nativeParallel/0/note | TEXT | 262:4379acbd10aecdd49eea8e6c6cc1f10a5b3cd354e932816a364de8510ecd26bb:В обоих языках женский род на -a/-а получает окончание -ę/-у в винительном: żona→żonę, жена→жену; прилагательное меняется вместе с существительным.
+NODE | pl-ru | 02 | $/styleContent/nativeParallel/0/matches | BOOL | true
+NODE | pl-ru | 02 | $/styleContent/examples | LIST | 2
+NODE | pl-ru | 02 | $/styleContent/examples/0 | TEXT | 21:3e8b06bbb8b02936463f37272f194e3064edc2156ca0ea271c23dc8fe1a66d7d:Mam nową książkę.
+NODE | pl-ru | 02 | $/styleContent/examples/1 | TEXT | 22:fe5802ec542a45edb1799d716c1a9791d81cd259f214c9533c365a78018e198b:Lubię moją siostrę.
+NODE | pl-ru | 02 | $/styleContent/why | TEXT | 244:6447ca1f9b74bb9316d055faeef2cef4d81a274dc8e238d166597a3a9f62ea07:Прямой объект после глаголов действия (widzę, mam, lubię) обычно стоит в винительном; у женского рода на -a это всегда -ę, как и в русском -а→-у.
+SKILL | pl-ru | 03 | case.acc.m
+NODE | pl-ru | 03 | $ | OBJECT | id,title,group,level,formula,theory,hint,prerequisites,focus,methods,styleContent
+NODE | pl-ru | 03 | $/id | TEXT | 10:301fd01e37be55f7f52c3eeb2332c3501b5e31bc4ae4595a19ef36012d447892:case.acc.m
+NODE | pl-ru | 03 | $/title | TEXT | 17:435ab1f1e1a886e1c89c2a6cbf7ebff97c39d1adf889d8f9ff4be560f027a2df:Biernik · męski
+NODE | pl-ru | 03 | $/group | TEXT | 9:23443958b952af7e3cc8394084c6157ea4e3af3e4233964fc204c33303e6f14c:Przypadki
+NODE | pl-ru | 03 | $/level | TEXT | 2:c8361f9b468e68c86da024270e0949ce139cb704b8d7cce586681b99f3a7ea56:A2
+NODE | pl-ru | 03 | $/formula | TEXT | 63:c58452ed3b6c8a5b49e3136702af12c40d9d1f3d2e4b8245175a8e9cb5e38e8e:на согласную: живое = Gen; неживое = Nom
+NODE | pl-ru | 03 | $/theory | TEXT | 206:3e0bc5ec2601714a1450cccdbe76bf5ac4af0132242fb0543da31b00e66850c1:Для мужских существительных на согласную: widzę męża/psa, но widzę dom/samochód. У существительных на -a: widzę kolegę, но nie widzę kolegi.
+NODE | pl-ru | 03 | $/hint | TEXT | 61:8706aed51921fae6fd54622779de5812814e134f80911da7eb06a7d558287c68:Сначала определи: żywotny или nieżywotny.
+NODE | pl-ru | 03 | $/prerequisites | LIST | 1
+NODE | pl-ru | 03 | $/prerequisites/0 | TEXT | 10:2c36ea844352256540e6ea3f32b9b104f176161e0b747174c03810754c3c3507:case.acc.f
+NODE | pl-ru | 03 | $/focus | OBJECT | before,after
+NODE | pl-ru | 03 | $/focus/before | TEXT | 18:2a975ac1024e7f74d4ae94a4517a624433bd4809f8b4d124165da485b008962b:mój stary sąsiad
+NODE | pl-ru | 03 | $/focus/after | TEXT | 23:9e5f0f4b653537b930c4932ce4e2402c24440d3038f15f521cd81596233169f9:mojego starego sąsiada
+NODE | pl-ru | 03 | $/methods | OBJECT | logic,situations
+NODE | pl-ru | 03 | $/methods/logic | OBJECT | introduction,promptLead,introduce,retrieve,feedback,review
+NODE | pl-ru | 03 | $/methods/logic/introduction | TEXT | 206:3e0bc5ec2601714a1450cccdbe76bf5ac4af0132242fb0543da31b00e66850c1:Для мужских существительных на согласную: widzę męża/psa, но widzę dom/samochód. У существительных на -a: widzę kolegę, но nie widzę kolegi.
+NODE | pl-ru | 03 | $/methods/logic/promptLead | TEXT | 61:442b5151eb2924d3f075686bdec5fa7eeae0dc62862e26b181a17252f8d37c5d:Сначала определи правило и форму.
+NODE | pl-ru | 03 | $/methods/logic/introduce | TEXT | 130:27d037a0b19ffe2359db07e8548818c57129bf9a6905625820b0e5eb366e7dd6:Определи, обозначает ли мужское слово лицо, живое существо или предмет.
+NODE | pl-ru | 03 | $/methods/logic/retrieve | TEXT | 127:53c24754ca08d3326d45d97a3c0de5c9ad68793b22058d098f97efa89e0c9461:Определи признаки и преобразуй исходное предложение самостоятельно.
+NODE | pl-ru | 03 | $/methods/logic/feedback | TEXT | 132:44b559e170de20f9416b72ce2ea9ab8fbde7bcdd04ac9f553da88cafa57df38a:Сравни исходную и новую форму, затем проверь каждое изменение и правило.
+NODE | pl-ru | 03 | $/methods/logic/review | TEXT | 168:9d390f23626d63465f7ee59e6fbb33a9c7a37ca33aea92755c7b879f7ee45f8a:Выбери «Повторить» или «Вспомнил» по своей попытке; затем реши новое задание без подсказки.
+NODE | pl-ru | 03 | $/methods/situations | OBJECT | introduction,promptLead,introduce,retrieve,feedback,review
+NODE | pl-ru | 03 | $/methods/situations/introduction | TEXT | 176:a7029260fdcc4b1822044c32df984ea51b09d1e239baa14509c1ecf05baa8c64:Ты рассказываешь, кого или что видишь. Смысл «вижу кого/что?» помогает выбрать форму всей группы.
+NODE | pl-ru | 03 | $/methods/situations/promptLead | TEXT | 84:6e5b09c01f4379252336b49ccd4208bfedaaa85b9b0857cc848f009ba8c7cee4:Представь ситуацию и скажи целое предложение.
+NODE | pl-ru | 03 | $/methods/situations/introduce | TEXT | 129:a06aa21703d562044900795f599ea955cf872a3888cd2073f85fe34c3e8f5bec:Ты рассказываешь, кого или что видишь. Что важно в значении названного?
+NODE | pl-ru | 03 | $/methods/situations/retrieve | TEXT | 113:de639badf123d9e75205e26852d3062620c5878f8cbc8a63a4551d4438495462:Представь ситуацию и скажи целое предложение самостоятельно.
+NODE | pl-ru | 03 | $/methods/situations/feedback | TEXT | 133:6ba12d584584a8febf3a1858cf67219a88466e594df76ada7d411ac1845ed0e1:Сравни, что хотел сказать, с эталоном и проследи изменения в предложении.
+NODE | pl-ru | 03 | $/methods/situations/review | TEXT | 150:294b6fbeab70d415b69854c22c77d5cf12e91d39234c44e5c9eb436a2db33ef7:Оцени, удалось ли вспомнить ответ самостоятельно; следующую ситуацию реши заново.
+NODE | pl-ru | 03 | $/styleContent | OBJECT | nativeParallel,examples,why
+NODE | pl-ru | 03 | $/styleContent/nativeParallel | LIST | 2
+NODE | pl-ru | 03 | $/styleContent/nativeParallel/0 | OBJECT | native,target,note,matches
+NODE | pl-ru | 03 | $/styleContent/nativeParallel/0/native | TEXT | 18:6ce97ea7285a5556abb1b243de30362b5dfdf89ff39a28671f279f020fb3b84f:Вижу мужа.
+NODE | pl-ru | 03 | $/styleContent/nativeParallel/0/target | TEXT | 14:4761641fec2f80d4f28ac89f4a5f55401c419af57711de7255b3fa766fcd0a57:Widzę męża.
+NODE | pl-ru | 03 | $/styleContent/nativeParallel/0/note | TEXT | 238:c1f7d9bd8e1d62d34779f3717daea4691b8cbf18577c218bfe9e2fe4d7703496:Одушевлённые существительные мужского рода в винительном совпадают с родительным — это работает одинаково в русском и польском.
+NODE | pl-ru | 03 | $/styleContent/nativeParallel/0/matches | BOOL | true
+NODE | pl-ru | 03 | $/styleContent/nativeParallel/1 | OBJECT | native,target,note,matches
+NODE | pl-ru | 03 | $/styleContent/nativeParallel/1/native | TEXT | 16:5e49aec9d4dd4aebae654cd9828b03afcf7b7a6ef8e655e682e3e26a8a66260c:Вижу дом.
+NODE | pl-ru | 03 | $/styleContent/nativeParallel/1/target | TEXT | 11:7fa9ac408ee9158ff9b406bfd1bf03268a6d032821e5b253bb3a09e804895538:Widzę dom.
+NODE | pl-ru | 03 | $/styleContent/nativeParallel/1/note | TEXT | 197:7956d74b20554d99a9fa8c09e15594c7a5b33e483aa74bdb2af956d3eca3b364:Неодушевлённые существительные мужского рода в винительном совпадают с именительным — тоже как в русском.
+NODE | pl-ru | 03 | $/styleContent/nativeParallel/1/matches | BOOL | true
+NODE | pl-ru | 03 | $/styleContent/examples | LIST | 2
+NODE | pl-ru | 03 | $/styleContent/examples/0 | TEXT | 11:873ba6c79903842f577d0ad05dabbe4eb51225c5fc7d3881b67a92b8da68b450:Widzę psa.
+NODE | pl-ru | 03 | $/styleContent/examples/1 | TEXT | 17:64e1c8f445e7160ad3326f4533cddfba015e153ec53959787b75acd41cf064b1:Widzę samochód.
+NODE | pl-ru | 03 | $/styleContent/why | TEXT | 256:0d2949952e3c1f5a1be3e19f19b8a7ba770e97123c59d9349be46c87b047cd6f:Мужской род различает живое и неживое в винительном падеже — это не польская особенность, а общее славянское правило, знакомое из русского.
+SKILL | pl-ru | 04 | case.gen.neg
+NODE | pl-ru | 04 | $ | OBJECT | id,title,group,level,formula,theory,hint,prerequisites,focus,methods,styleContent
+NODE | pl-ru | 04 | $/id | TEXT | 12:c5a94bde8b8cd7c9d0b50ce297df1ce929b78a6f01e18342f7da38c4ef017c32:case.gen.neg
+NODE | pl-ru | 04 | $/title | TEXT | 22:b31d119dffd3c246344fb68625736402d5a150e24523030fb05e521527a5a8cd:Dopełniacz · negacja
+NODE | pl-ru | 04 | $/group | TEXT | 9:23443958b952af7e3cc8394084c6157ea4e3af3e4233964fc204c33303e6f14c:Przypadki
+NODE | pl-ru | 04 | $/level | TEXT | 2:c8361f9b468e68c86da024270e0949ce139cb704b8d7cce586681b99f3a7ea56:A2
+NODE | pl-ru | 04 | $/formula | TEXT | 23:9fd1903ff98f42c7cc8618b676fcf7bec7b6043de46916baf9692da93df01e02:Mam X → Nie mam + GEN
+NODE | pl-ru | 04 | $/theory | TEXT | 126:3509098a3d21eb6c73a8902258c07095c05dfa88fb4e73c57c459de9196ee799:При отрицании прямого объекта Biernik очень часто превращается в Dopełniacz.
+NODE | pl-ru | 04 | $/hint | TEXT | 73:c0ddd7c3e35b8945059b7afc488f87a595292c079b1904f2cc6374413f75524b:Не меняй только nie — поменяй весь noun phrase.
+NODE | pl-ru | 04 | $/prerequisites | LIST | 1
+NODE | pl-ru | 04 | $/prerequisites/0 | TEXT | 10:2c36ea844352256540e6ea3f32b9b104f176161e0b747174c03810754c3c3507:case.acc.f
+NODE | pl-ru | 04 | $/focus | OBJECT | before,after
+NODE | pl-ru | 04 | $/focus/before | TEXT | 30:d969b8d092db2b9f35fee671fdd28c9c69d7b38a91a5b5e491f52ff59a035189:Widzę moją młodą siostrę.
+NODE | pl-ru | 04 | $/focus/after | TEXT | 33:c32887d246cac0b48882e40b4acf601646e8600a788f82483df104156d68d679:Nie widzę mojej młodej siostry.
+NODE | pl-ru | 04 | $/methods | OBJECT | logic,situations
+NODE | pl-ru | 04 | $/methods/logic | OBJECT | introduction,promptLead,introduce,retrieve,feedback,review
+NODE | pl-ru | 04 | $/methods/logic/introduction | TEXT | 126:3509098a3d21eb6c73a8902258c07095c05dfa88fb4e73c57c459de9196ee799:При отрицании прямого объекта Biernik очень часто превращается в Dopełniacz.
+NODE | pl-ru | 04 | $/methods/logic/promptLead | TEXT | 61:442b5151eb2924d3f075686bdec5fa7eeae0dc62862e26b181a17252f8d37c5d:Сначала определи правило и форму.
+NODE | pl-ru | 04 | $/methods/logic/introduce | TEXT | 107:bd8162a1f6d195cee86a411d855f67c32f1fe6aa5fd7f227a933b9c27b34f696:Проверь, как отрицание влияет на падеж прямого дополнения.
+NODE | pl-ru | 04 | $/methods/logic/retrieve | TEXT | 127:53c24754ca08d3326d45d97a3c0de5c9ad68793b22058d098f97efa89e0c9461:Определи признаки и преобразуй исходное предложение самостоятельно.
+NODE | pl-ru | 04 | $/methods/logic/feedback | TEXT | 132:44b559e170de20f9416b72ce2ea9ab8fbde7bcdd04ac9f553da88cafa57df38a:Сравни исходную и новую форму, затем проверь каждое изменение и правило.
+NODE | pl-ru | 04 | $/methods/logic/review | TEXT | 168:9d390f23626d63465f7ee59e6fbb33a9c7a37ca33aea92755c7b879f7ee45f8a:Выбери «Повторить» или «Вспомнил» по своей попытке; затем реши новое задание без подсказки.
+NODE | pl-ru | 04 | $/methods/situations | OBJECT | introduction,promptLead,introduce,retrieve,feedback,review
+NODE | pl-ru | 04 | $/methods/situations/introduction | TEXT | 197:41cf36611d5c1a51a31f9be380bcc377add171395de53e10849c0fb142e9aa8d:Ты отрицаешь действие с прямым объектом. В польском при отрицании меняется форма всей группы после глагола.
+NODE | pl-ru | 04 | $/methods/situations/promptLead | TEXT | 84:6e5b09c01f4379252336b49ccd4208bfedaaa85b9b0857cc848f009ba8c7cee4:Представь ситуацию и скажи целое предложение.
+NODE | pl-ru | 04 | $/methods/situations/introduce | TEXT | 159:d0f2ac6fcaa35daa3d88fbe0eb86c8edb69b941de5ddd5821bd9b191e28bb649:Ты отрицаешь действие, сохраняя то, о чём идёт речь. Как сказать это целым предложением?
+NODE | pl-ru | 04 | $/methods/situations/retrieve | TEXT | 113:de639badf123d9e75205e26852d3062620c5878f8cbc8a63a4551d4438495462:Представь ситуацию и скажи целое предложение самостоятельно.
+NODE | pl-ru | 04 | $/methods/situations/feedback | TEXT | 133:6ba12d584584a8febf3a1858cf67219a88466e594df76ada7d411ac1845ed0e1:Сравни, что хотел сказать, с эталоном и проследи изменения в предложении.
+NODE | pl-ru | 04 | $/methods/situations/review | TEXT | 150:294b6fbeab70d415b69854c22c77d5cf12e91d39234c44e5c9eb436a2db33ef7:Оцени, удалось ли вспомнить ответ самостоятельно; следующую ситуацию реши заново.
+NODE | pl-ru | 04 | $/styleContent | OBJECT | nativeParallel,examples,why
+NODE | pl-ru | 04 | $/styleContent/nativeParallel | LIST | 2
+NODE | pl-ru | 04 | $/styleContent/nativeParallel/0 | OBJECT | native,target,note,matches
+NODE | pl-ru | 04 | $/styleContent/nativeParallel/0/native | TEXT | 23:09bc9cfdea6396cbb74ccef1ede13c18922ede9ce952c527c4c88c686ef2c924:Не вижу жену.
+NODE | pl-ru | 04 | $/styleContent/nativeParallel/0/target | TEXT | 17:f7d4446f1a0587836ca1442a0a893aa0a78100247b97b1858210ec54ff023b85:Nie widzę żony.
+NODE | pl-ru | 04 | $/styleContent/nativeParallel/0/note | TEXT | 211:a145a93a6b98c770c33c90e3e7d09da0adf720d176a0c2134be4154586abcd8a:В русском при отрицании падеж не меняется (живы оба варианта — «жену»/«жены»); в польском после nie обязателен Dopełniacz.
+NODE | pl-ru | 04 | $/styleContent/nativeParallel/0/matches | BOOL | false
+NODE | pl-ru | 04 | $/styleContent/nativeParallel/1 | OBJECT | native,target,note,matches
+NODE | pl-ru | 04 | $/styleContent/nativeParallel/1/native | TEXT | 25:ee0a11752a4d3819463c162355909b605ac8b4194b7dc3d41f09892538bded6a:Не вижу книгу.
+NODE | pl-ru | 04 | $/styleContent/nativeParallel/1/target | TEXT | 21:42c649c081fbfbbe97d8172715ba29c525438fec8a291ef085812aaf33c9774d:Nie widzę książki.
+NODE | pl-ru | 04 | $/styleContent/nativeParallel/1/note | TEXT | 146:e7f6d49427eaf7337858095c6a939f3537175cfa82bb96cab1d6bf0af3c4467a:Тот же сдвиг у неодушевлённого объекта — родительный обязателен без вариантов.
+NODE | pl-ru | 04 | $/styleContent/nativeParallel/1/matches | BOOL | false
+NODE | pl-ru | 04 | $/styleContent/examples | LIST | 2
+NODE | pl-ru | 04 | $/styleContent/examples/0 | TEXT | 14:a5b2b31f8c3d8bf566e7eeee7ab3ba2ec6a18d1a589f327436e25531a4cd8963:Nie mam czasu.
+NODE | pl-ru | 04 | $/styleContent/examples/1 | TEXT | 29:353212a26c2654271dc16830377478bc045ffdc759275b6a46eed0829d623c17:Nie widzę żadnego problemu.
+NODE | pl-ru | 04 | $/styleContent/why | TEXT | 237:f200423c2f07e86029e31dacc87d7b692f2af6574e4c451f454a3b8d226aa323:В польском отрицание всегда переводит прямое дополнение в родительный падеж; в русском это необязательно и звучит скорее книжно.
+SKILL | pl-ru | 05 | case.inst
+NODE | pl-ru | 05 | $ | OBJECT | id,title,group,level,formula,theory,hint,prerequisites,focus,methods,styleContent
+NODE | pl-ru | 05 | $/id | TEXT | 9:a27a77f4fc86a2a2b5c7c4b85e89fa53bd44bc1fc2195ec49272b9d4bac975d4:case.inst
+NODE | pl-ru | 05 | $/title | TEXT | 22:b0a224fcb54ac3703cbe5a7b520a329b38f1dc78559065a99071b9f62dc5702a:Narzędnik · z / być
+NODE | pl-ru | 05 | $/group | TEXT | 9:23443958b952af7e3cc8394084c6157ea4e3af3e4233964fc204c33303e6f14c:Przypadki
+NODE | pl-ru | 05 | $/level | TEXT | 2:16a36e86f6fed5d465ff332511a0ce1a863b55d364b25a7cdaa25db19abf9648:A1
+NODE | pl-ru | 05 | $/formula | TEXT | 23:3db81b932c57fd3d09d73ae045ed19d40acc7cc2f06f92cd21b04628206b1f92:z + kim? czym? → INST
+NODE | pl-ru | 05 | $/theory | TEXT | 119:1ef84ee8b069a41606b301eb6d11abf4bd7ef1c19d6a73944cbf13433d6c336a:После z в значении «с кем/чем» используем Narzędnik. Также: Jestem programistą.
+NODE | pl-ru | 05 | $/hint | TEXT | 32:67fb2c32d98978d39b53452bf21660b5ea359086166e92f0a3e127b5468ca490:z moją żoną, z dobrym kolegą
+NODE | pl-ru | 05 | $/prerequisites | LIST | 0
+NODE | pl-ru | 05 | $/focus | OBJECT | before,after
+NODE | pl-ru | 05 | $/focus/before | TEXT | 10:267ea628e68ef89d8c49c16e3d5bb3f71477639fc0bdb57144311fdeb81743a0:moja żona
+NODE | pl-ru | 05 | $/focus/after | TEXT | 14:c8d1f74bc45a2ccb1dc60d305e08ee352adccdad712bb53edc361570dc6efa2d:z moją żoną
+NODE | pl-ru | 05 | $/methods | OBJECT | logic,situations
+NODE | pl-ru | 05 | $/methods/logic | OBJECT | introduction,promptLead,introduce,retrieve,feedback,review
+NODE | pl-ru | 05 | $/methods/logic/introduction | TEXT | 119:1ef84ee8b069a41606b301eb6d11abf4bd7ef1c19d6a73944cbf13433d6c336a:После z в значении «с кем/чем» используем Narzędnik. Также: Jestem programistą.
+NODE | pl-ru | 05 | $/methods/logic/promptLead | TEXT | 61:442b5151eb2924d3f075686bdec5fa7eeae0dc62862e26b181a17252f8d37c5d:Сначала определи правило и форму.
+NODE | pl-ru | 05 | $/methods/logic/introduce | TEXT | 120:a4e727b752144252fe02df0c1609713ae819333e9628fb5250b5193c6f66e01a:Определи падеж после предлога со значением совместного действия.
+NODE | pl-ru | 05 | $/methods/logic/retrieve | TEXT | 127:53c24754ca08d3326d45d97a3c0de5c9ad68793b22058d098f97efa89e0c9461:Определи признаки и преобразуй исходное предложение самостоятельно.
+NODE | pl-ru | 05 | $/methods/logic/feedback | TEXT | 132:44b559e170de20f9416b72ce2ea9ab8fbde7bcdd04ac9f553da88cafa57df38a:Сравни исходную и новую форму, затем проверь каждое изменение и правило.
+NODE | pl-ru | 05 | $/methods/logic/review | TEXT | 168:9d390f23626d63465f7ee59e6fbb33a9c7a37ca33aea92755c7b879f7ee45f8a:Выбери «Повторить» или «Вспомнил» по своей попытке; затем реши новое задание без подсказки.
+NODE | pl-ru | 05 | $/methods/situations | OBJECT | introduction,promptLead,introduce,retrieve,feedback,review
+NODE | pl-ru | 05 | $/methods/situations/introduction | TEXT | 140:eb87e779997b042ac3b466f33b3d385df9ece791dc8b5e06f3936819946f4ae9:Ты рассказываешь, с кем идёшь. После z в значении «с кем?» меняется вся группа.
+NODE | pl-ru | 05 | $/methods/situations/promptLead | TEXT | 84:6e5b09c01f4379252336b49ccd4208bfedaaa85b9b0857cc848f009ba8c7cee4:Представь ситуацию и скажи целое предложение.
+NODE | pl-ru | 05 | $/methods/situations/introduce | TEXT | 108:55183b855735c8ac13c8ad80b79cc9ae438cd30a2bfb55b285c96fdabcf10502:Ты говоришь, с кем идёшь. Как назвать спутника целой фразой?
+NODE | pl-ru | 05 | $/methods/situations/retrieve | TEXT | 113:de639badf123d9e75205e26852d3062620c5878f8cbc8a63a4551d4438495462:Представь ситуацию и скажи целое предложение самостоятельно.
+NODE | pl-ru | 05 | $/methods/situations/feedback | TEXT | 133:6ba12d584584a8febf3a1858cf67219a88466e594df76ada7d411ac1845ed0e1:Сравни, что хотел сказать, с эталоном и проследи изменения в предложении.
+NODE | pl-ru | 05 | $/methods/situations/review | TEXT | 150:294b6fbeab70d415b69854c22c77d5cf12e91d39234c44e5c9eb436a2db33ef7:Оцени, удалось ли вспомнить ответ самостоятельно; следующую ситуацию реши заново.
+NODE | pl-ru | 05 | $/styleContent | OBJECT | nativeParallel,examples,why
+NODE | pl-ru | 05 | $/styleContent/nativeParallel | LIST | 2
+NODE | pl-ru | 05 | $/styleContent/nativeParallel/0 | OBJECT | native,target,note,matches
+NODE | pl-ru | 05 | $/styleContent/nativeParallel/0/native | TEXT | 21:3863a42c10bce76e5a785290baac65a7af488778c602359950add16b2368fd74:Иду с женой.
+NODE | pl-ru | 05 | $/styleContent/nativeParallel/0/target | TEXT | 14:5ab2f86d28f3370af0479e42e03cb86f94432cfe6d8a111886b0c537cb5ef49e:Idę z żoną.
+NODE | pl-ru | 05 | $/styleContent/nativeParallel/0/note | TEXT | 138:5e06fbd10733e8c33689f0aa702da207954549ddc6dfe3142279993434cd179b:После «с»/z в значении совместности оба языка требуют творительного падежа.
+NODE | pl-ru | 05 | $/styleContent/nativeParallel/0/matches | BOOL | true
+NODE | pl-ru | 05 | $/styleContent/nativeParallel/1 | OBJECT | native,target,note,matches
+NODE | pl-ru | 05 | $/styleContent/nativeParallel/1/native | TEXT | 26:1b8426f4a1d0557328a4a5220ecc5c19cbe514275c660b7373bfdd26f83038d3:Я программист.
+NODE | pl-ru | 05 | $/styleContent/nativeParallel/1/target | TEXT | 20:e010718bac66e29bda53bb8e7e324b097f833121aec40202ad3b957bac8ea21f:Jestem programistą.
+NODE | pl-ru | 05 | $/styleContent/nativeParallel/1/note | TEXT | 344:72f797030d9f5819bb3da75105bd6cf881aa1bcd07c068787a831f71f2137851:В польском профессия при być всегда в творительном; в разговорном русском связку «быть» обычно пропускают и говорят в именительном («Я программист»), творительный нужен только с «являюсь».
+NODE | pl-ru | 05 | $/styleContent/nativeParallel/1/matches | BOOL | false
+NODE | pl-ru | 05 | $/styleContent/examples | LIST | 2
+NODE | pl-ru | 05 | $/styleContent/examples/0 | TEXT | 20:d7b0eb351c57abb20202e0823178d04ede469801d9b42c3ab2ceece628924e05:Rozmawiam z kolegą.
+NODE | pl-ru | 05 | $/styleContent/examples/1 | TEXT | 20:b8a9067e52635a74e0db19a0367878c0009a9499fd472a87e062dab8ece10457:Jestem nauczycielem.
+NODE | pl-ru | 05 | $/styleContent/why | TEXT | 360:49d43c8d1662a3d46e5e607be9fbe6b4583bd757bd3bd8c320c39a04e3fd12bf:Творительный после z/с — обычное дело в обоих языках; а вот профессия при глаголе «быть» — разные привычки: поляки всегда используют творительный, русские обычно говорят в именительном без связки.
+SKILL | pl-ru | 06 | case.loc
+NODE | pl-ru | 06 | $ | OBJECT | id,title,group,level,formula,theory,hint,prerequisites,focus,methods,styleContent
+NODE | pl-ru | 06 | $/id | TEXT | 8:b38d69be6e77df2f38b75918a1d1152915ab938e41501ab35bd8174c03760037:case.loc
+NODE | pl-ru | 06 | $/title | TEXT | 16:4c9e3c8b0623f6c5a3b354f3af0cd249f6f2f44ab8a1d957b78f2f8788d34e46:Miejscownik · o
+NODE | pl-ru | 06 | $/group | TEXT | 9:23443958b952af7e3cc8394084c6157ea4e3af3e4233964fc204c33303e6f14c:Przypadki
+NODE | pl-ru | 06 | $/level | TEXT | 2:c8361f9b468e68c86da024270e0949ce139cb704b8d7cce586681b99f3a7ea56:A2
+NODE | pl-ru | 06 | $/formula | TEXT | 22:6bbcb5ad83c6bd49c2bc43b9847c832ee0234518b161b8fd84e65a3cb201dd0f:o + kim? czym? → LOC
+NODE | pl-ru | 06 | $/theory | TEXT | 58:d05d073640da46bf57ffcdfee74251a49417c1844019d118a503927307ca03e3:После o (о ком/о чём) нужен Miejscownik.
+NODE | pl-ru | 06 | $/hint | TEXT | 23:fd005f8e4c6d101115c67042a5364471a571dbdb640fe72abe298b90fc706a0a:mówię o żonie / domu
+NODE | pl-ru | 06 | $/prerequisites | LIST | 1
+NODE | pl-ru | 06 | $/prerequisites/0 | TEXT | 9:a27a77f4fc86a2a2b5c7c4b85e89fa53bd44bc1fc2195ec49272b9d4bac975d4:case.inst
+NODE | pl-ru | 06 | $/focus | OBJECT | before,after
+NODE | pl-ru | 06 | $/focus/before | TEXT | 10:267ea628e68ef89d8c49c16e3d5bb3f71477639fc0bdb57144311fdeb81743a0:moja żona
+NODE | pl-ru | 06 | $/focus/after | TEXT | 14:727f598794040fca4ff772fff1fc80b528b99f73e228d1965f2e5e55f3e17b7c:o mojej żonie
+NODE | pl-ru | 06 | $/methods | OBJECT | logic,situations
+NODE | pl-ru | 06 | $/methods/logic | OBJECT | introduction,promptLead,introduce,retrieve,feedback,review
+NODE | pl-ru | 06 | $/methods/logic/introduction | TEXT | 58:d05d073640da46bf57ffcdfee74251a49417c1844019d118a503927307ca03e3:После o (о ком/о чём) нужен Miejscownik.
+NODE | pl-ru | 06 | $/methods/logic/promptLead | TEXT | 61:442b5151eb2924d3f075686bdec5fa7eeae0dc62862e26b181a17252f8d37c5d:Сначала определи правило и форму.
+NODE | pl-ru | 06 | $/methods/logic/introduce | TEXT | 113:4aecbb38530ac860c9ea92b6708e90836f2886c13b380a69751dc82919e07e62:Определи падеж после предлога, который вводит тему разговора.
+NODE | pl-ru | 06 | $/methods/logic/retrieve | TEXT | 127:53c24754ca08d3326d45d97a3c0de5c9ad68793b22058d098f97efa89e0c9461:Определи признаки и преобразуй исходное предложение самостоятельно.
+NODE | pl-ru | 06 | $/methods/logic/feedback | TEXT | 132:44b559e170de20f9416b72ce2ea9ab8fbde7bcdd04ac9f553da88cafa57df38a:Сравни исходную и новую форму, затем проверь каждое изменение и правило.
+NODE | pl-ru | 06 | $/methods/logic/review | TEXT | 168:9d390f23626d63465f7ee59e6fbb33a9c7a37ca33aea92755c7b879f7ee45f8a:Выбери «Повторить» или «Вспомнил» по своей попытке; затем реши новое задание без подсказки.
+NODE | pl-ru | 06 | $/methods/situations | OBJECT | introduction,promptLead,introduce,retrieve,feedback,review
+NODE | pl-ru | 06 | $/methods/situations/introduction | TEXT | 198:3bfc8cb6eea9bce5c500e8755e3a6edc154dc5b6f5938e133b68a13e9c80719c:Ты рассказываешь о человеке или предмете из предложения. После o в значении «о ком/о чём?» нужна другая форма.
+NODE | pl-ru | 06 | $/methods/situations/promptLead | TEXT | 84:6e5b09c01f4379252336b49ccd4208bfedaaa85b9b0857cc848f009ba8c7cee4:Представь ситуацию и скажи целое предложение.
+NODE | pl-ru | 06 | $/methods/situations/introduce | TEXT | 143:941c519393d9bcb82599d06ee5a1d584db8554344ddd49bb409878b65dab1494:Ты рассказываешь о том, кто или что уже названо. Как обозначить тему разговора?
+NODE | pl-ru | 06 | $/methods/situations/retrieve | TEXT | 113:de639badf123d9e75205e26852d3062620c5878f8cbc8a63a4551d4438495462:Представь ситуацию и скажи целое предложение самостоятельно.
+NODE | pl-ru | 06 | $/methods/situations/feedback | TEXT | 133:6ba12d584584a8febf3a1858cf67219a88466e594df76ada7d411ac1845ed0e1:Сравни, что хотел сказать, с эталоном и проследи изменения в предложении.
+NODE | pl-ru | 06 | $/methods/situations/review | TEXT | 150:294b6fbeab70d415b69854c22c77d5cf12e91d39234c44e5c9eb436a2db33ef7:Оцени, удалось ли вспомнить ответ самостоятельно; следующую ситуацию реши заново.
+NODE | pl-ru | 06 | $/styleContent | OBJECT | nativeParallel,examples,why
+NODE | pl-ru | 06 | $/styleContent/nativeParallel | LIST | 1
+NODE | pl-ru | 06 | $/styleContent/nativeParallel/0 | OBJECT | native,target,note,matches
+NODE | pl-ru | 06 | $/styleContent/nativeParallel/0/native | TEXT | 25:99133a74e9eaa59326ff24685aa0313bbe3cccf885af9da16814d5fda08803fd:Говорю о жене.
+NODE | pl-ru | 06 | $/styleContent/nativeParallel/0/target | TEXT | 17:c93ddc168ec06f3248a40737c9bc8dab246da5fd8296f86641c897031da1fa0c:Mówię o żonie.
+NODE | pl-ru | 06 | $/styleContent/nativeParallel/0/note | TEXT | 264:6aae83f016b719dc5ffa302feaa377be2d30aaa4e32ba58bbc28b77e835a425a:После «о» оба языка используют падеж, обозначающий тему разговора (в русском предложный, в польском Miejscownik) — сама логика конструкции совпадает.
+NODE | pl-ru | 06 | $/styleContent/nativeParallel/0/matches | BOOL | true
+NODE | pl-ru | 06 | $/styleContent/examples | LIST | 2
+NODE | pl-ru | 06 | $/styleContent/examples/0 | TEXT | 16:9b576e0d797810b866215ab2e97fe2de6659a064d417ecab6e414e5897337c03:Myślę o tobie.
+NODE | pl-ru | 06 | $/styleContent/examples/1 | TEXT | 18:a732026ddb2e39a1df7d25832ce24644d32b37d5145544dcb0089b301f03240d:Czytam o historii.
+NODE | pl-ru | 06 | $/styleContent/why | TEXT | 260:9bff496cd67cfd2577772faebebac5cf5538d2c82ec411bb0847c3152c893b27:Предлог о/o вводит тему и требует особого падежа — в русском предложный, в польском Miejscownik; окончания разные, но роль в предложении одна и та же.
+SKILL | pl-ru | 07 | case.dat
+NODE | pl-ru | 07 | $ | OBJECT | id,title,group,level,formula,theory,hint,prerequisites,focus,methods,styleContent
+NODE | pl-ru | 07 | $/id | TEXT | 8:479ed770aed90b62903dd5021ed7425ff08b294c1a23c1506b817120ba06a9c8:case.dat
+NODE | pl-ru | 07 | $/title | TEXT | 17:cf2eb0f02d123c6d909d5c395fa861724d1afcf6f98cebd9086b48bfc67ad4ef:Celownik · komu?
+NODE | pl-ru | 07 | $/group | TEXT | 9:23443958b952af7e3cc8394084c6157ea4e3af3e4233964fc204c33303e6f14c:Przypadki
+NODE | pl-ru | 07 | $/level | TEXT | 2:c8361f9b468e68c86da024270e0949ce139cb704b8d7cce586681b99f3a7ea56:A2
+NODE | pl-ru | 07 | $/formula | TEXT | 19:982a8d3c34489e24ac0faaf17d04842fb5c13fd9c1a6cab6abcb25bc47fcf64e:daję/pomagam + DAT
+NODE | pl-ru | 07 | $/theory | TEXT | 132:4e57298b55e65d8cd4b8e1c767b2fbe4d67a3742a0911e8ae0c8735f574f8401:Celownik отвечает «кому? чему?». Учим через короткие устойчивые конструкции.
+NODE | pl-ru | 07 | $/hint | TEXT | 19:539cc2290724e270ab34d752e88f548ab8e1edb5ddebc692cfc5d947d704787c:Daję prezent komu?
+NODE | pl-ru | 07 | $/prerequisites | LIST | 0
+NODE | pl-ru | 07 | $/focus | OBJECT | before,after
+NODE | pl-ru | 07 | $/focus/before | TEXT | 10:267ea628e68ef89d8c49c16e3d5bb3f71477639fc0bdb57144311fdeb81743a0:moja żona
+NODE | pl-ru | 07 | $/focus/after | TEXT | 12:b76e72dc1d07698dd2e9122c10a0fc10f9ef76fd7a8ab45d35176d802c93a812:mojej żonie
+NODE | pl-ru | 07 | $/methods | OBJECT | logic,situations
+NODE | pl-ru | 07 | $/methods/logic | OBJECT | introduction,promptLead,introduce,retrieve,feedback,review
+NODE | pl-ru | 07 | $/methods/logic/introduction | TEXT | 132:4e57298b55e65d8cd4b8e1c767b2fbe4d67a3742a0911e8ae0c8735f574f8401:Celownik отвечает «кому? чему?». Учим через короткие устойчивые конструкции.
+NODE | pl-ru | 07 | $/methods/logic/promptLead | TEXT | 61:442b5151eb2924d3f075686bdec5fa7eeae0dc62862e26b181a17252f8d37c5d:Сначала определи правило и форму.
+NODE | pl-ru | 07 | $/methods/logic/introduce | TEXT | 66:d0ff1d5dc87cd5620484d80cd47ecb81814d6cc973bfcf7b79d743407af90b14:Определи падеж получателя действия.
+NODE | pl-ru | 07 | $/methods/logic/retrieve | TEXT | 127:53c24754ca08d3326d45d97a3c0de5c9ad68793b22058d098f97efa89e0c9461:Определи признаки и преобразуй исходное предложение самостоятельно.
+NODE | pl-ru | 07 | $/methods/logic/feedback | TEXT | 132:44b559e170de20f9416b72ce2ea9ab8fbde7bcdd04ac9f553da88cafa57df38a:Сравни исходную и новую форму, затем проверь каждое изменение и правило.
+NODE | pl-ru | 07 | $/methods/logic/review | TEXT | 168:9d390f23626d63465f7ee59e6fbb33a9c7a37ca33aea92755c7b879f7ee45f8a:Выбери «Повторить» или «Вспомнил» по своей попытке; затем реши новое задание без подсказки.
+NODE | pl-ru | 07 | $/methods/situations | OBJECT | introduction,promptLead,introduce,retrieve,feedback,review
+NODE | pl-ru | 07 | $/methods/situations/introduction | TEXT | 172:3f3c556e3d77908bd14039e4d0368f8a1bb314368124205deacc50b52149393c:Ты передаёшь подарок человеку из предложения. Получатель действия отвечает на вопрос «кому?».
+NODE | pl-ru | 07 | $/methods/situations/promptLead | TEXT | 84:6e5b09c01f4379252336b49ccd4208bfedaaa85b9b0857cc848f009ba8c7cee4:Представь ситуацию и скажи целое предложение.
+NODE | pl-ru | 07 | $/methods/situations/introduce | TEXT | 107:6fb0266501f3a73dc05bd29b5a010eeda78f73b431f3a560abe990051249d03c:Ты говоришь, кому передаёшь что-то. Как назвать получателя?
+NODE | pl-ru | 07 | $/methods/situations/retrieve | TEXT | 113:de639badf123d9e75205e26852d3062620c5878f8cbc8a63a4551d4438495462:Представь ситуацию и скажи целое предложение самостоятельно.
+NODE | pl-ru | 07 | $/methods/situations/feedback | TEXT | 133:6ba12d584584a8febf3a1858cf67219a88466e594df76ada7d411ac1845ed0e1:Сравни, что хотел сказать, с эталоном и проследи изменения в предложении.
+NODE | pl-ru | 07 | $/methods/situations/review | TEXT | 150:294b6fbeab70d415b69854c22c77d5cf12e91d39234c44e5c9eb436a2db33ef7:Оцени, удалось ли вспомнить ответ самостоятельно; следующую ситуацию реши заново.
+NODE | pl-ru | 07 | $/styleContent | OBJECT | nativeParallel,examples,why
+NODE | pl-ru | 07 | $/styleContent/nativeParallel | LIST | 2
+NODE | pl-ru | 07 | $/styleContent/nativeParallel/0 | OBJECT | native,target,note,matches
+NODE | pl-ru | 07 | $/styleContent/nativeParallel/0/native | TEXT | 31:0774c6b748670c38d3fe40f5d7fefe4845ca31fb9af86b0ae9bc82e5ade4dc57:Даю жене подарок.
+NODE | pl-ru | 07 | $/styleContent/nativeParallel/0/target | TEXT | 21:4777379c4624e6b67db8652c9f96000080928629100a54e73ee8e9b588cde9bd:Daję żonie prezent.
+NODE | pl-ru | 07 | $/styleContent/nativeParallel/0/note | TEXT | 118:d75628b81a49c83a29c0343c810db62bd7a78844fb0a97484efef1aa45857661:Дательный падеж получателя действия — совпадает в обоих языках.
+NODE | pl-ru | 07 | $/styleContent/nativeParallel/0/matches | BOOL | true
+NODE | pl-ru | 07 | $/styleContent/nativeParallel/1 | OBJECT | native,target,note,matches
+NODE | pl-ru | 07 | $/styleContent/nativeParallel/1/native | TEXT | 24:306e4862e9540374b050e231d7c65d5dfedf3e34f2bef1b7a5190429ef1cad83:Помогаю жене.
+NODE | pl-ru | 07 | $/styleContent/nativeParallel/1/target | TEXT | 15:80921b3676ef766b02163fe343aecf9ebc4eb539b5da734bd586e85f7000328a:Pomagam żonie.
+NODE | pl-ru | 07 | $/styleContent/nativeParallel/1/note | TEXT | 123:1504e04262b61c3383d76e2221c8ba5695063331dbbf813b1167a38ffcd7deb5:Глагол «помогать»/pomagać управляет дательным падежом в обоих языках.
+NODE | pl-ru | 07 | $/styleContent/nativeParallel/1/matches | BOOL | true
+NODE | pl-ru | 07 | $/styleContent/examples | LIST | 2
+NODE | pl-ru | 07 | $/styleContent/examples/0 | TEXT | 19:69b8d2b9bc4395398354f7a96837d95d6dfb5bcbe2a88fb7a84fe9c82c87fb51:Mówię ci prawdę.
+NODE | pl-ru | 07 | $/styleContent/examples/1 | TEXT | 25:efcec78b6e353e9786f2c89825f6a9308beca93e12cfb8958629af801e4f1aae:Dziękuję nauczycielowi.
+NODE | pl-ru | 07 | $/styleContent/why | TEXT | 183:6b0a287837887a701a831a2f44dc887925036a85d95a65e9dbc85426f9862ded:Celownik/дательный отвечает на «кому?» и работает одинаково с глаголами давания и помощи в обоих языках.
+SKILL | pl-ru | 08 | agreement.my
+NODE | pl-ru | 08 | $ | OBJECT | id,title,group,level,formula,theory,hint,prerequisites,focus,methods,styleContent
+NODE | pl-ru | 08 | $/id | TEXT | 12:ca893758693f3f8313cc2390a4f925b26b074a8325d77fd1804f0c7e12d11a0d:agreement.my
+NODE | pl-ru | 08 | $/title | TEXT | 38:ee3600529e275a2dc904629cb6a8f699a799ec5dd7ca16041a7a5addb16558d8:Мой, твой, его, наш, их
+NODE | pl-ru | 08 | $/group | TEXT | 5:41fbaf689a2e7b4595afdecac40d5a5f2f6ee9405b57f3c74fe9775b660768ed:Zgoda
+NODE | pl-ru | 08 | $/level | TEXT | 2:c8361f9b468e68c86da024270e0949ce139cb704b8d7cce586681b99f3a7ea56:A2
+NODE | pl-ru | 08 | $/formula | TEXT | 80:9fa22d4c18126c78e4220d894ba53e874a41ec65e7708cbb9b34be37715bfcf6:Владелец + прилагательное + существительное
+NODE | pl-ru | 08 | $/theory | TEXT | 123:97b7680dcd621da00c0c7148e5e7336e0b62886e0db9c3e4ddc56053f66c30d6:mój, twój, nasz, wasz согласуются с существительным. jego, jej, ich не склоняются.
+NODE | pl-ru | 08 | $/hint | TEXT | 45:40706a3463fdfd346a924f9090c4a477e59db1db1710f08caac124e49c08f013:moją piękną żonę → ich piękną żonę
+NODE | pl-ru | 08 | $/prerequisites | LIST | 2
+NODE | pl-ru | 08 | $/prerequisites/0 | TEXT | 10:2c36ea844352256540e6ea3f32b9b104f176161e0b747174c03810754c3c3507:case.acc.f
+NODE | pl-ru | 08 | $/prerequisites/1 | TEXT | 12:c5a94bde8b8cd7c9d0b50ce297df1ce929b78a6f01e18342f7da38c4ef017c32:case.gen.neg
+NODE | pl-ru | 08 | $/focus | OBJECT | before,after
+NODE | pl-ru | 08 | $/focus/before | TEXT | 20:70e93a05f1f0a79c82be6d3092b0fe5f48308f86e8712930ef32c805d4e142d7:mojej pięknej żony
+NODE | pl-ru | 08 | $/focus/after | TEXT | 18:9ae65016550250b8c73ecb7ce3c293b29b58fc31ab09576ffe30bbf3e8a1d426:ich pięknej żony
+NODE | pl-ru | 08 | $/methods | OBJECT | logic,situations
+NODE | pl-ru | 08 | $/methods/logic | OBJECT | introduction,promptLead,introduce,retrieve,feedback,review
+NODE | pl-ru | 08 | $/methods/logic/introduction | TEXT | 123:97b7680dcd621da00c0c7148e5e7336e0b62886e0db9c3e4ddc56053f66c30d6:mój, twój, nasz, wasz согласуются с существительным. jego, jej, ich не склоняются.
+NODE | pl-ru | 08 | $/methods/logic/promptLead | TEXT | 61:442b5151eb2924d3f075686bdec5fa7eeae0dc62862e26b181a17252f8d37c5d:Сначала определи правило и форму.
+NODE | pl-ru | 08 | $/methods/logic/introduce | TEXT | 126:0134a372356573721bc86de3bff6a631a936ba707f6998524c9c8b8d2e650207:Отдели владельца от падежа группы: какие слова должны согласоваться?
+NODE | pl-ru | 08 | $/methods/logic/retrieve | TEXT | 127:53c24754ca08d3326d45d97a3c0de5c9ad68793b22058d098f97efa89e0c9461:Определи признаки и преобразуй исходное предложение самостоятельно.
+NODE | pl-ru | 08 | $/methods/logic/feedback | TEXT | 132:44b559e170de20f9416b72ce2ea9ab8fbde7bcdd04ac9f553da88cafa57df38a:Сравни исходную и новую форму, затем проверь каждое изменение и правило.
+NODE | pl-ru | 08 | $/methods/logic/review | TEXT | 168:9d390f23626d63465f7ee59e6fbb33a9c7a37ca33aea92755c7b879f7ee45f8a:Выбери «Повторить» или «Вспомнил» по своей попытке; затем реши новое задание без подсказки.
+NODE | pl-ru | 08 | $/methods/situations | OBJECT | introduction,promptLead,introduce,retrieve,feedback,review
+NODE | pl-ru | 08 | $/methods/situations/introduction | TEXT | 138:65578edeea65c900e8338ba218787bdd5ff028224b08b3e8b78c2940e1843466:Теперь названное принадлежит другому владельцу. Как сохранить смысл фразы?
+NODE | pl-ru | 08 | $/methods/situations/promptLead | TEXT | 84:6e5b09c01f4379252336b49ccd4208bfedaaa85b9b0857cc848f009ba8c7cee4:Представь ситуацию и скажи целое предложение.
+NODE | pl-ru | 08 | $/methods/situations/introduce | TEXT | 138:65578edeea65c900e8338ba218787bdd5ff028224b08b3e8b78c2940e1843466:Теперь названное принадлежит другому владельцу. Как сохранить смысл фразы?
+NODE | pl-ru | 08 | $/methods/situations/retrieve | TEXT | 113:de639badf123d9e75205e26852d3062620c5878f8cbc8a63a4551d4438495462:Представь ситуацию и скажи целое предложение самостоятельно.
+NODE | pl-ru | 08 | $/methods/situations/feedback | TEXT | 133:6ba12d584584a8febf3a1858cf67219a88466e594df76ada7d411ac1845ed0e1:Сравни, что хотел сказать, с эталоном и проследи изменения в предложении.
+NODE | pl-ru | 08 | $/methods/situations/review | TEXT | 150:294b6fbeab70d415b69854c22c77d5cf12e91d39234c44e5c9eb436a2db33ef7:Оцени, удалось ли вспомнить ответ самостоятельно; следующую ситуацию реши заново.
+NODE | pl-ru | 08 | $/styleContent | OBJECT | nativeParallel,examples,why
+NODE | pl-ru | 08 | $/styleContent/nativeParallel | LIST | 2
+NODE | pl-ru | 08 | $/styleContent/nativeParallel/0 | OBJECT | native,target,note,matches
+NODE | pl-ru | 08 | $/styleContent/nativeParallel/0/native | TEXT | 25:befc2b1c01975a8f948349933496758496f949dc9a67375382ec44a15c0caf08:Вижу его жену.
+NODE | pl-ru | 08 | $/styleContent/nativeParallel/0/target | TEXT | 19:f121965ee2dba5fb974a5bbdd9c208b531290531537ee7e9388cb9f991473653:Widzę jego żonę.
+NODE | pl-ru | 08 | $/styleContent/nativeParallel/0/note | TEXT | 154:66137856c9fc594a24e312841160a0e6df4389037bc5ce75484724f6c946805d:«его» и jego не склоняются в обоих языках — это готовая форма для любого падежа и рода.
+NODE | pl-ru | 08 | $/styleContent/nativeParallel/0/matches | BOOL | true
+NODE | pl-ru | 08 | $/styleContent/nativeParallel/1 | OBJECT | native,target,note,matches
+NODE | pl-ru | 08 | $/styleContent/nativeParallel/1/native | TEXT | 25:cf202f91b230d70a04d456c6286b86613665294b3d9cd7b2dd6ed9fd1eb32a52:Вижу мою жену.
+NODE | pl-ru | 08 | $/styleContent/nativeParallel/1/target | TEXT | 20:c23e5f5fac5a0fc3db951604755df8a819a97171b43740a4c9a533b8e0f7b6b8:Widzę moją żonę.
+NODE | pl-ru | 08 | $/styleContent/nativeParallel/1/note | TEXT | 146:d67eba8bce2c986b9d3aba96598f4674fcfe22ee78a9c618e3a48738c5ca076c:«моя»/moja склоняется по роду и падежу существительного одинаково в обоих языках.
+NODE | pl-ru | 08 | $/styleContent/nativeParallel/1/matches | BOOL | true
+NODE | pl-ru | 08 | $/styleContent/examples | LIST | 2
+NODE | pl-ru | 08 | $/styleContent/examples/0 | TEXT | 16:452dbb3fc386b8fb9afce92b185e557aa48a689744230743bcfb0cefb76e8528:To jest jej dom.
+NODE | pl-ru | 08 | $/styleContent/examples/1 | TEXT | 18:c869f0c9760a49f231fe307fe5a6306c767e9dfa6956384569a1e7319494ce53:Widzę ich dzieci.
+NODE | pl-ru | 08 | $/styleContent/why | TEXT | 303:463bd14231473bd35ce611cbdb5f6139e2fd939abee308d19d4b8b207ba973fa:jego/jej/ich (его/её/их) не склоняются, потому что это застывшие формы местоимения — точно как в русском; а mój/twój/nasz/wasz согласуются с существительным, как «мой/твой/наш/ваш».
+SKILL | pl-ru | 09 | verb.present
+NODE | pl-ru | 09 | $ | OBJECT | id,title,group,level,formula,theory,hint,prerequisites,focus,methods,styleContent
+NODE | pl-ru | 09 | $/id | TEXT | 12:448a8d4b92a743108a005a935d7c51e9d345e48a45552728e6d5145eb734f1f3:verb.present
+NODE | pl-ru | 09 | $/title | TEXT | 18:f8e61083919bd060ff2ca23e8ebc51ba05dc378cc9d5f351632144b76b032d2d:Czas teraźniejszy
+NODE | pl-ru | 09 | $/group | TEXT | 9:6fb030ca19c3d44bd3ddebca8058ebf25e0865171fec431efd1f7624c3c3aada:Czasownik
+NODE | pl-ru | 09 | $/level | TEXT | 2:16a36e86f6fed5d465ff332511a0ce1a863b55d364b25a7cdaa25db19abf9648:A1
+NODE | pl-ru | 09 | $/formula | TEXT | 45:32b37d8f1f991c05b0307e0666fbff53c7cc8a436ed0b49fa9e25a41b156ba91:лицо × число → окончание
+NODE | pl-ru | 09 | $/theory | TEXT | 91:0ee85065688445e3c2cdbd3410ef7713309427eda82207f3611b1225eb27cc0c:Автоматизируем 6 лиц на высокочастотных глаголах.
+NODE | pl-ru | 09 | $/hint | TEXT | 18:0d6cc4b529a36f9847bd64d538dbff426a59760d006dd79452d6f4073b27aee4:ja/ty/on/my/wy/oni
+NODE | pl-ru | 09 | $/prerequisites | LIST | 0
+NODE | pl-ru | 09 | $/focus | OBJECT | before,after
+NODE | pl-ru | 09 | $/focus/before | TEXT | 6:5324127156ca0bc1baca05629778ef9e74c28dfa917442c769e6685a78b714d0:robić
+NODE | pl-ru | 09 | $/focus/after | TEXT | 6:96bb8ecfaf0c772a11e5de4743c4def8aa0bf613bf99a74a067eaa81894c42a4:robię
+NODE | pl-ru | 09 | $/methods | OBJECT | logic,situations
+NODE | pl-ru | 09 | $/methods/logic | OBJECT | introduction,promptLead,introduce,retrieve,feedback,review
+NODE | pl-ru | 09 | $/methods/logic/introduction | TEXT | 91:0ee85065688445e3c2cdbd3410ef7713309427eda82207f3611b1225eb27cc0c:Автоматизируем 6 лиц на высокочастотных глаголах.
+NODE | pl-ru | 09 | $/methods/logic/promptLead | TEXT | 61:442b5151eb2924d3f075686bdec5fa7eeae0dc62862e26b181a17252f8d37c5d:Сначала определи правило и форму.
+NODE | pl-ru | 09 | $/methods/logic/introduce | TEXT | 117:f6e2a7d34e7d3acec53a19bdcde269abbdfcc6ec0eef0b525a0833c047e7e38f:Определи лицо и число действующего лица для настоящего времени.
+NODE | pl-ru | 09 | $/methods/logic/retrieve | TEXT | 127:53c24754ca08d3326d45d97a3c0de5c9ad68793b22058d098f97efa89e0c9461:Определи признаки и преобразуй исходное предложение самостоятельно.
+NODE | pl-ru | 09 | $/methods/logic/feedback | TEXT | 132:44b559e170de20f9416b72ce2ea9ab8fbde7bcdd04ac9f553da88cafa57df38a:Сравни исходную и новую форму, затем проверь каждое изменение и правило.
+NODE | pl-ru | 09 | $/methods/logic/review | TEXT | 168:9d390f23626d63465f7ee59e6fbb33a9c7a37ca33aea92755c7b879f7ee45f8a:Выбери «Повторить» или «Вспомнил» по своей попытке; затем реши новое задание без подсказки.
+NODE | pl-ru | 09 | $/methods/situations | OBJECT | introduction,promptLead,introduce,retrieve,feedback,review
+NODE | pl-ru | 09 | $/methods/situations/introduction | TEXT | 174:e76fbf2e72b7b39f8b3c06a0290e451836f19e247c2132ced4ecb35e5437b937:Ты описываешь действие прямо сейчас. Сначала назови, кто действует, затем выбери форму глагола.
+NODE | pl-ru | 09 | $/methods/situations/promptLead | TEXT | 84:6e5b09c01f4379252336b49ccd4208bfedaaa85b9b0857cc848f009ba8c7cee4:Представь ситуацию и скажи целое предложение.
+NODE | pl-ru | 09 | $/methods/situations/introduce | TEXT | 138:6e56c681cfc96ef9feb450a160abc541b41e43b4fd0708fcf9f35dc6d64cbb91:Ты говоришь, что кто-то делает сейчас. Как назвать действие этого участника?
+NODE | pl-ru | 09 | $/methods/situations/retrieve | TEXT | 113:de639badf123d9e75205e26852d3062620c5878f8cbc8a63a4551d4438495462:Представь ситуацию и скажи целое предложение самостоятельно.
+NODE | pl-ru | 09 | $/methods/situations/feedback | TEXT | 133:6ba12d584584a8febf3a1858cf67219a88466e594df76ada7d411ac1845ed0e1:Сравни, что хотел сказать, с эталоном и проследи изменения в предложении.
+NODE | pl-ru | 09 | $/methods/situations/review | TEXT | 150:294b6fbeab70d415b69854c22c77d5cf12e91d39234c44e5c9eb436a2db33ef7:Оцени, удалось ли вспомнить ответ самостоятельно; следующую ситуацию реши заново.
+NODE | pl-ru | 09 | $/styleContent | OBJECT | nativeParallel,examples,why
+NODE | pl-ru | 09 | $/styleContent/nativeParallel | LIST | 1
+NODE | pl-ru | 09 | $/styleContent/nativeParallel/0 | OBJECT | native,target,note,matches
+NODE | pl-ru | 09 | $/styleContent/nativeParallel/0/native | TEXT | 14:271a2def95cf118e6d37760d235701c31429697b13b199b4e9521c4d3f90854c:Он идёт.
+NODE | pl-ru | 09 | $/styleContent/nativeParallel/0/target | TEXT | 9:2b0b6ec42e599a62368b30bf54929cf265e7d2dd85299845dd4654c875aee779:On idzie.
+NODE | pl-ru | 09 | $/styleContent/nativeParallel/0/note | TEXT | 281:49199413afa579c9cf5bf47173eaf5f0d91bcdfb38afefcf9f59fcbfd8494be4:В настоящем времени оба языка спрягают глагол по лицу и числу: 3-е лицо единственного числа — идёт/idzie, окончание показывает лицо одинаково в обоих языках.
+NODE | pl-ru | 09 | $/styleContent/nativeParallel/0/matches | BOOL | true
+NODE | pl-ru | 09 | $/styleContent/examples | LIST | 2
+NODE | pl-ru | 09 | $/styleContent/examples/0 | TEXT | 17:e5f062665c5212ec1a39fa304e64a526ca73d56b9cc9e0c8cb3c9b1d44bc410a:Idzie do szkoły.
+NODE | pl-ru | 09 | $/styleContent/examples/1 | TEXT | 14:5a15d92b2e89520beddc5b97a864882964c153ca64d893fc4b3571127e17f417:Idą do pracy.
+NODE | pl-ru | 09 | $/styleContent/why | TEXT | 279:1307436d8a023fcb918fff6bc52be4e9fef9908c5a25c7824cd6a0f8e8a3bb17:Формы настоящего времени различаются по лицу в обоих языках, но польский чаще опускает местоимение — окончание глагола само называет действующее лицо.
+SKILL | pl-ru | 10 | verb.past
+NODE | pl-ru | 10 | $ | OBJECT | id,title,group,level,formula,theory,hint,prerequisites,focus,methods,styleContent
+NODE | pl-ru | 10 | $/id | TEXT | 9:75e03622d8ea0ef4f6fdd144ca1ccbeaf80cd0be02afdd62b4fd95e1b0582ef0:verb.past
+NODE | pl-ru | 10 | $/title | TEXT | 14:2fceb513b76fe6c0c352cea4d2829b9969e2083bb3711e5b0ca515f2c7e6c2d0:Czas przeszły
+NODE | pl-ru | 10 | $/group | TEXT | 9:6fb030ca19c3d44bd3ddebca8058ebf25e0865171fec431efd1f7624c3c3aada:Czasownik
+NODE | pl-ru | 10 | $/level | TEXT | 2:c8361f9b468e68c86da024270e0949ce139cb704b8d7cce586681b99f3a7ea56:A2
+NODE | pl-ru | 10 | $/formula | TEXT | 53:50b7bc16266bed344f24a078c9f43cd9033c3d23180c0662bc59b5abd642f018:основа прошедшего + род + лицо
+NODE | pl-ru | 10 | $/theory | TEXT | 128:4627d69a410ca556bfff6d029b8526891ed738fdf1191c9f076ba5ea5cb04d9b:В прошедшем времени форма отражает род говорящего/подлежащего и лицо.
+NODE | pl-ru | 10 | $/hint | TEXT | 33:7d23680454bfc622c765b10b9ef65369d230a5065b2276d3132d795c9350d6d4:robił-em, robiła-m, robili-śmy
+NODE | pl-ru | 10 | $/prerequisites | LIST | 1
+NODE | pl-ru | 10 | $/prerequisites/0 | TEXT | 12:448a8d4b92a743108a005a935d7c51e9d345e48a45552728e6d5145eb734f1f3:verb.present
+NODE | pl-ru | 10 | $/focus | OBJECT | before,after
+NODE | pl-ru | 10 | $/focus/before | TEXT | 6:96bb8ecfaf0c772a11e5de4743c4def8aa0bf613bf99a74a067eaa81894c42a4:robię
+NODE | pl-ru | 10 | $/focus/after | TEXT | 8:75f18d92a298c45c8513153c8549ace85e04d760c18fd0ce5656d5221a014945:robiłem
+NODE | pl-ru | 10 | $/methods | OBJECT | logic,situations
+NODE | pl-ru | 10 | $/methods/logic | OBJECT | introduction,promptLead,introduce,retrieve,feedback,review
+NODE | pl-ru | 10 | $/methods/logic/introduction | TEXT | 128:4627d69a410ca556bfff6d029b8526891ed738fdf1191c9f076ba5ea5cb04d9b:В прошедшем времени форма отражает род говорящего/подлежащего и лицо.
+NODE | pl-ru | 10 | $/methods/logic/promptLead | TEXT | 61:442b5151eb2924d3f075686bdec5fa7eeae0dc62862e26b181a17252f8d37c5d:Сначала определи правило и форму.
+NODE | pl-ru | 10 | $/methods/logic/introduce | TEXT | 91:6db2cd32e789b8dd20701e03ff42e9bff9f541872ecc5348387b6e99409da748:Определи лицо, число и род для прошедшего времени.
+NODE | pl-ru | 10 | $/methods/logic/retrieve | TEXT | 127:53c24754ca08d3326d45d97a3c0de5c9ad68793b22058d098f97efa89e0c9461:Определи признаки и преобразуй исходное предложение самостоятельно.
+NODE | pl-ru | 10 | $/methods/logic/feedback | TEXT | 132:44b559e170de20f9416b72ce2ea9ab8fbde7bcdd04ac9f553da88cafa57df38a:Сравни исходную и новую форму, затем проверь каждое изменение и правило.
+NODE | pl-ru | 10 | $/methods/logic/review | TEXT | 168:9d390f23626d63465f7ee59e6fbb33a9c7a37ca33aea92755c7b879f7ee45f8a:Выбери «Повторить» или «Вспомнил» по своей попытке; затем реши новое задание без подсказки.
+NODE | pl-ru | 10 | $/methods/situations | OBJECT | introduction,promptLead,introduce,retrieve,feedback,review
+NODE | pl-ru | 10 | $/methods/situations/introduction | TEXT | 124:ee5b2a254f49341de4ae352a71115fbdec517b83488f1d981096ddb27dbae325:Ты рассказываешь о действии, которое уже произошло. Как назвать его?
+NODE | pl-ru | 10 | $/methods/situations/promptLead | TEXT | 84:6e5b09c01f4379252336b49ccd4208bfedaaa85b9b0857cc848f009ba8c7cee4:Представь ситуацию и скажи целое предложение.
+NODE | pl-ru | 10 | $/methods/situations/introduce | TEXT | 124:ee5b2a254f49341de4ae352a71115fbdec517b83488f1d981096ddb27dbae325:Ты рассказываешь о действии, которое уже произошло. Как назвать его?
+NODE | pl-ru | 10 | $/methods/situations/retrieve | TEXT | 113:de639badf123d9e75205e26852d3062620c5878f8cbc8a63a4551d4438495462:Представь ситуацию и скажи целое предложение самостоятельно.
+NODE | pl-ru | 10 | $/methods/situations/feedback | TEXT | 133:6ba12d584584a8febf3a1858cf67219a88466e594df76ada7d411ac1845ed0e1:Сравни, что хотел сказать, с эталоном и проследи изменения в предложении.
+NODE | pl-ru | 10 | $/methods/situations/review | TEXT | 150:294b6fbeab70d415b69854c22c77d5cf12e91d39234c44e5c9eb436a2db33ef7:Оцени, удалось ли вспомнить ответ самостоятельно; следующую ситуацию реши заново.
+NODE | pl-ru | 10 | $/styleContent | OBJECT | nativeParallel,examples,why
+NODE | pl-ru | 10 | $/styleContent/nativeParallel | LIST | 2
+NODE | pl-ru | 10 | $/styleContent/nativeParallel/0 | OBJECT | native,target,note,matches
+NODE | pl-ru | 10 | $/styleContent/nativeParallel/0/native | TEXT | 14:4fa24e593923a3e52abe343786f376a47a8de83802e8002bb0d81077b0044531:Она шла.
+NODE | pl-ru | 10 | $/styleContent/nativeParallel/0/target | TEXT | 6:6ff0044fb90428807e15a1a8077ac880698f9360ef08baa09b6df7ff1ab9becc:Szła.
+NODE | pl-ru | 10 | $/styleContent/nativeParallel/0/note | TEXT | 191:c59fb959fed6843b967c42775430f63536cd4cf1b943f087a603d64d15693394:Прошедшее время согласуется с родом подлежащего в обоих языках — «шла» и szła оба показывают женский род.
+NODE | pl-ru | 10 | $/styleContent/nativeParallel/0/matches | BOOL | true
+NODE | pl-ru | 10 | $/styleContent/nativeParallel/1 | OBJECT | native,target,note,matches
+NODE | pl-ru | 10 | $/styleContent/nativeParallel/1/native | TEXT | 12:faa655348bd0ede34df9534efcb17745eb72732f666843b2813c29446fc6d6bd:Он шёл.
+NODE | pl-ru | 10 | $/styleContent/nativeParallel/1/target | TEXT | 7:85dff8921d652627e375e3c6f23e14bf6a4a47b581cb4583b453c18c027fe14f:Szedł.
+NODE | pl-ru | 10 | $/styleContent/nativeParallel/1/note | TEXT | 256:91ebd595ac2c1baed60f1a2f3eb1abcad3957fd7aa6ef16989624df505d127ed:Мужской род прошедшего времени тоже совпадает — «шёл» и szedł; лицо (он) в обоих языках выражено отдельным словом, сам глагол лица не называет.
+NODE | pl-ru | 10 | $/styleContent/nativeParallel/1/matches | BOOL | true
+NODE | pl-ru | 10 | $/styleContent/examples | LIST | 2
+NODE | pl-ru | 10 | $/styleContent/examples/0 | TEXT | 16:370f35571a04c31358132322638c96f31d17ec01e997c8a84f1b309cc7ac5b76:Szedł do pracy.
+NODE | pl-ru | 10 | $/styleContent/examples/1 | TEXT | 17:a2b7849d4ac8e11fdf759b0fffe0c2ce2f752dac6fb2d2c0640a42a0bb8e3040:Szła do szkoły.
+NODE | pl-ru | 10 | $/styleContent/why | TEXT | 317:7aeb785a996c30b894bff96c50b9f1ccb2e32bdc415d6b8386b009cedf4cf671:Прошедшее время в обоих языках зависит от рода — это общая славянская черта; а вот лицо (я/ты/он) в польском показывает сам глагол, а в русском — только отдельное местоимение.
+SKILL | pl-ru | 11 | verb.future
+NODE | pl-ru | 11 | $ | OBJECT | id,title,group,level,formula,theory,hint,prerequisites,focus,methods,styleContent
+NODE | pl-ru | 11 | $/id | TEXT | 11:d8dc041db33bf778057e86678eaa22ed528c0dfe55b2bcf5869869f2667a7854:verb.future
+NODE | pl-ru | 11 | $/title | TEXT | 14:3e52894058bf413511be9b51251fbdd6ea8bc1604c316414b6d4429f9c4cae78:Czas przyszły
+NODE | pl-ru | 11 | $/group | TEXT | 9:6fb030ca19c3d44bd3ddebca8058ebf25e0865171fec431efd1f7624c3c3aada:Czasownik
+NODE | pl-ru | 11 | $/level | TEXT | 2:c8361f9b468e68c86da024270e0949ce139cb704b8d7cce586681b99f3a7ea56:A2
+NODE | pl-ru | 11 | $/formula | TEXT | 85:37cf80675fb468ff2b267fc5582b3180f0a1dd7a0331be9dde233d0f2e63d9c0:będę + инфинитив (несов.) / форма настоящего (сов.)
+NODE | pl-ru | 11 | $/theory | TEXT | 141:1d7ee9992eaa0213899a3e796fc8a012b958b97d866dc0e45c892181178f6e1d:Для несовершенного вида: będę robić. Совершенный вид имеет простое будущее: zrobię.
+NODE | pl-ru | 11 | $/hint | TEXT | 23:b119c8ededfe85d46ce56b46078933c46d72ba82d2b65c451ae2502c0a367a5b:będę czytać / kupię
+NODE | pl-ru | 11 | $/prerequisites | LIST | 1
+NODE | pl-ru | 11 | $/prerequisites/0 | TEXT | 12:448a8d4b92a743108a005a935d7c51e9d345e48a45552728e6d5145eb734f1f3:verb.present
+NODE | pl-ru | 11 | $/focus | OBJECT | before,after
+NODE | pl-ru | 11 | $/focus/before | TEXT | 6:96bb8ecfaf0c772a11e5de4743c4def8aa0bf613bf99a74a067eaa81894c42a4:robię
+NODE | pl-ru | 11 | $/focus/after | TEXT | 13:ae942d039a954e7e7d9a94f89dee4022564b137f02af000c565ac56cf181336a:będę robić
+NODE | pl-ru | 11 | $/methods | OBJECT | logic,situations
+NODE | pl-ru | 11 | $/methods/logic | OBJECT | introduction,promptLead,introduce,retrieve,feedback,review
+NODE | pl-ru | 11 | $/methods/logic/introduction | TEXT | 141:1d7ee9992eaa0213899a3e796fc8a012b958b97d866dc0e45c892181178f6e1d:Для несовершенного вида: będę robić. Совершенный вид имеет простое будущее: zrobię.
+NODE | pl-ru | 11 | $/methods/logic/promptLead | TEXT | 61:442b5151eb2924d3f075686bdec5fa7eeae0dc62862e26b181a17252f8d37c5d:Сначала определи правило и форму.
+NODE | pl-ru | 11 | $/methods/logic/introduce | TEXT | 96:d0d0199b4d951aa971a71d3211330b74146383e1b9de0a14ae39284663293256:Определи лицо и число для будущего времени действия.
+NODE | pl-ru | 11 | $/methods/logic/retrieve | TEXT | 127:53c24754ca08d3326d45d97a3c0de5c9ad68793b22058d098f97efa89e0c9461:Определи признаки и преобразуй исходное предложение самостоятельно.
+NODE | pl-ru | 11 | $/methods/logic/feedback | TEXT | 132:44b559e170de20f9416b72ce2ea9ab8fbde7bcdd04ac9f553da88cafa57df38a:Сравни исходную и новую форму, затем проверь каждое изменение и правило.
+NODE | pl-ru | 11 | $/methods/logic/review | TEXT | 168:9d390f23626d63465f7ee59e6fbb33a9c7a37ca33aea92755c7b879f7ee45f8a:Выбери «Повторить» или «Вспомнил» по своей попытке; затем реши новое задание без подсказки.
+NODE | pl-ru | 11 | $/methods/situations | OBJECT | introduction,promptLead,introduce,retrieve,feedback,review
+NODE | pl-ru | 11 | $/methods/situations/introduction | TEXT | 153:005173893073e61c597a9447c86fa52b217e71d880a1994bb107aab4c7e46a42:Ты говоришь о действии, которое ещё произойдёт. Как назвать его для этого участника?
+NODE | pl-ru | 11 | $/methods/situations/promptLead | TEXT | 84:6e5b09c01f4379252336b49ccd4208bfedaaa85b9b0857cc848f009ba8c7cee4:Представь ситуацию и скажи целое предложение.
+NODE | pl-ru | 11 | $/methods/situations/introduce | TEXT | 153:005173893073e61c597a9447c86fa52b217e71d880a1994bb107aab4c7e46a42:Ты говоришь о действии, которое ещё произойдёт. Как назвать его для этого участника?
+NODE | pl-ru | 11 | $/methods/situations/retrieve | TEXT | 113:de639badf123d9e75205e26852d3062620c5878f8cbc8a63a4551d4438495462:Представь ситуацию и скажи целое предложение самостоятельно.
+NODE | pl-ru | 11 | $/methods/situations/feedback | TEXT | 133:6ba12d584584a8febf3a1858cf67219a88466e594df76ada7d411ac1845ed0e1:Сравни, что хотел сказать, с эталоном и проследи изменения в предложении.
+NODE | pl-ru | 11 | $/methods/situations/review | TEXT | 150:294b6fbeab70d415b69854c22c77d5cf12e91d39234c44e5c9eb436a2db33ef7:Оцени, удалось ли вспомнить ответ самостоятельно; следующую ситуацию реши заново.
+NODE | pl-ru | 11 | $/styleContent | OBJECT | nativeParallel,examples,why
+NODE | pl-ru | 11 | $/styleContent/nativeParallel | LIST | 2
+NODE | pl-ru | 11 | $/styleContent/nativeParallel/0 | OBJECT | native,target,note,matches
+NODE | pl-ru | 11 | $/styleContent/nativeParallel/0/native | TEXT | 18:a9d037a2300cef3d5ea66c95eaac74d131d622b7b4e60dc0d3c54a929ed463e9:Буду идти.
+NODE | pl-ru | 11 | $/styleContent/nativeParallel/0/target | TEXT | 13:36d2082f33c257e50d62bb544f9e88478332fbf9dfec488478e749a9c330827d:Będę iść.
+NODE | pl-ru | 11 | $/styleContent/nativeParallel/0/note | TEXT | 179:9810083be62f3bb21aed1f876bcb29500792f216201ac4ce035480c5713b5dc5:Общая модель будущего несовершенного вида: буду/będę + инфинитив — сохраняется независимо от лица.
+NODE | pl-ru | 11 | $/styleContent/nativeParallel/0/matches | BOOL | true
+NODE | pl-ru | 11 | $/styleContent/nativeParallel/1 | OBJECT | native,target,note,matches
+NODE | pl-ru | 11 | $/styleContent/nativeParallel/1/native | TEXT | 25:d93ae73b494e4f04e3c302c741bef24b11a2e14278f922af1a430bec4221eed0:Он будет идти.
+NODE | pl-ru | 11 | $/styleContent/nativeParallel/1/target | TEXT | 17:f43d5c5bfe1857f6344a78c3aab0534058399a14e2fb0faffd27cc14e51ddd29:On będzie iść.
+NODE | pl-ru | 11 | $/styleContent/nativeParallel/1/note | TEXT | 162:2623c675be2049b04b1085e615bb26ba2b19d0ddc15a026d703b4c436bb57400:Именно эту модель тренирует упражнение: 3-е лицо, будущее несовершенного вида — będzie + iść.
+NODE | pl-ru | 11 | $/styleContent/nativeParallel/1/matches | BOOL | true
+NODE | pl-ru | 11 | $/styleContent/examples | LIST | 2
+NODE | pl-ru | 11 | $/styleContent/examples/0 | TEXT | 16:c6651357d1cecfecd9d428af6ffc7e63d3b9da8260f6b81e8b0cc776edd119d9:Będziesz iść.
+NODE | pl-ru | 11 | $/styleContent/examples/1 | TEXT | 16:0fb8622e6322294ab053eaccd00e1efd2efa30a8c300ea84f2a545de632f4b2b:Będziemy iść.
+NODE | pl-ru | 11 | $/styleContent/why | TEXT | 362:cde8d0ad59834cfebd22373900cb925960d33007f5dad81b57b4761d36c4346b:У будущего времени в обоих языках два способа: составное для незавершённого действия (буду/będę + инфинитив) и простая форма для завершённого результата (сделаю/zrobię) — структура полностью совпадает.
+SKILL | pl-ru | 12 | aspect
+NODE | pl-ru | 12 | $ | OBJECT | id,title,group,level,formula,theory,hint,prerequisites,focus,methods,styleContent
+NODE | pl-ru | 12 | $/id | TEXT | 6:bd8bf4f1e8c62eb16adf31eff78f2456fd159c62ea8b8fe2e9b37ab6d18a8743:aspect
+NODE | pl-ru | 12 | $/title | TEXT | 24:8f72ed0782619c56af1a9bcbdb078d7e42fafde92407a642e7a4a39ce6a286f3:Aspekt · robić/zrobić
+NODE | pl-ru | 12 | $/group | TEXT | 9:6fb030ca19c3d44bd3ddebca8058ebf25e0865171fec431efd1f7624c3c3aada:Czasownik
+NODE | pl-ru | 12 | $/level | TEXT | 2:5b950e77941d01cdf246d00b1ece546bc95234b77d98b44c9187e2733afa696a:B1
+NODE | pl-ru | 12 | $/formula | TEXT | 81:90caf3b425b0410e886dd4c52610b531c67939528b22c721455566f1eb999291:процесс/повторение ↔ завершённый результат
+NODE | pl-ru | 12 | $/theory | TEXT | 149:7caee0c39fca9a3dc88442ee1955f64fb8e492cd14b278464febffc5d123ed29:Недоконанный вид описывает процесс/повторяемость, dokonany — завершённый результат.
+NODE | pl-ru | 12 | $/hint | TEXT | 21:3afddcac3019d5b28022f4312a0f7763d9f96408e53aab1e1a5ed8bbe3396f10:robiłem vs zrobiłem
+NODE | pl-ru | 12 | $/prerequisites | LIST | 2
+NODE | pl-ru | 12 | $/prerequisites/0 | TEXT | 9:75e03622d8ea0ef4f6fdd144ca1ccbeaf80cd0be02afdd62b4fd95e1b0582ef0:verb.past
+NODE | pl-ru | 12 | $/prerequisites/1 | TEXT | 11:d8dc041db33bf778057e86678eaa22ed528c0dfe55b2bcf5869869f2667a7854:verb.future
+NODE | pl-ru | 12 | $/focus | OBJECT | before,after
+NODE | pl-ru | 12 | $/focus/before | TEXT | 8:75f18d92a298c45c8513153c8549ace85e04d760c18fd0ce5656d5221a014945:robiłem
+NODE | pl-ru | 12 | $/focus/after | TEXT | 9:33c81095f972cf8c9db90dd9e7d2ff9eaeb0270102f8aef433d6dbccabcfe42e:zrobiłem
+NODE | pl-ru | 12 | $/methods | OBJECT | logic,situations
+NODE | pl-ru | 12 | $/methods/logic | OBJECT | introduction,promptLead,introduce,retrieve,feedback,review
+NODE | pl-ru | 12 | $/methods/logic/introduction | TEXT | 149:7caee0c39fca9a3dc88442ee1955f64fb8e492cd14b278464febffc5d123ed29:Недоконанный вид описывает процесс/повторяемость, dokonany — завершённый результат.
+NODE | pl-ru | 12 | $/methods/logic/promptLead | TEXT | 61:442b5151eb2924d3f075686bdec5fa7eeae0dc62862e26b181a17252f8d37c5d:Сначала определи правило и форму.
+NODE | pl-ru | 12 | $/methods/logic/introduce | TEXT | 96:d83449b7b02d9c269bed2c7357a38a38b532705f528e368c3d938e142fb36e07:Сравни значение процесса и завершённого результата.
+NODE | pl-ru | 12 | $/methods/logic/retrieve | TEXT | 127:53c24754ca08d3326d45d97a3c0de5c9ad68793b22058d098f97efa89e0c9461:Определи признаки и преобразуй исходное предложение самостоятельно.
+NODE | pl-ru | 12 | $/methods/logic/feedback | TEXT | 132:44b559e170de20f9416b72ce2ea9ab8fbde7bcdd04ac9f553da88cafa57df38a:Сравни исходную и новую форму, затем проверь каждое изменение и правило.
+NODE | pl-ru | 12 | $/methods/logic/review | TEXT | 168:9d390f23626d63465f7ee59e6fbb33a9c7a37ca33aea92755c7b879f7ee45f8a:Выбери «Повторить» или «Вспомнил» по своей попытке; затем реши новое задание без подсказки.
+NODE | pl-ru | 12 | $/methods/situations | OBJECT | introduction,promptLead,introduce,retrieve,feedback,review
+NODE | pl-ru | 12 | $/methods/situations/introduction | TEXT | 160:e9e719177cf67194029793ff39e756b690810365fe93a90164b8b8a84d23250b:Ты описываешь не сам процесс покупки, а готовый результат. Выбери завершённое действие.
+NODE | pl-ru | 12 | $/methods/situations/promptLead | TEXT | 84:6e5b09c01f4379252336b49ccd4208bfedaaa85b9b0857cc848f009ba8c7cee4:Представь ситуацию и скажи целое предложение.
+NODE | pl-ru | 12 | $/methods/situations/introduce | TEXT | 121:8d205fe65a62db73e99dde8e4476157737da82463e359b370ccef4000dcb8189:Ты хочешь подчеркнуть, что действие завершилось. Как это передать?
+NODE | pl-ru | 12 | $/methods/situations/retrieve | TEXT | 113:de639badf123d9e75205e26852d3062620c5878f8cbc8a63a4551d4438495462:Представь ситуацию и скажи целое предложение самостоятельно.
+NODE | pl-ru | 12 | $/methods/situations/feedback | TEXT | 133:6ba12d584584a8febf3a1858cf67219a88466e594df76ada7d411ac1845ed0e1:Сравни, что хотел сказать, с эталоном и проследи изменения в предложении.
+NODE | pl-ru | 12 | $/methods/situations/review | TEXT | 150:294b6fbeab70d415b69854c22c77d5cf12e91d39234c44e5c9eb436a2db33ef7:Оцени, удалось ли вспомнить ответ самостоятельно; следующую ситуацию реши заново.
+NODE | pl-ru | 12 | $/styleContent | OBJECT | nativeParallel,examples,why
+NODE | pl-ru | 12 | $/styleContent/nativeParallel | LIST | 2
+NODE | pl-ru | 12 | $/styleContent/nativeParallel/0 | OBJECT | native,target,note,matches
+NODE | pl-ru | 12 | $/styleContent/nativeParallel/0/native | TEXT | 38:b097dea98e70beb4a094fc51d27ccf23f544c58ef6a7c7ffdc2deb12602cc4a9:Я делал (не закончил).
+NODE | pl-ru | 12 | $/styleContent/nativeParallel/0/target | TEXT | 9:31285808435f45f876d103c52a360c717cf58beec2d103bba94df056dfbf8dc1:Robiłem.
+NODE | pl-ru | 12 | $/styleContent/nativeParallel/0/note | TEXT | 163:74cffe0c5896ba9cb1ac90fdfd02aa1ca8fb2150c2c64d9921df2060fe17d495:Несовершенный вид описывает процесс без гарантии завершения — одинаково в обоих языках.
+NODE | pl-ru | 12 | $/styleContent/nativeParallel/0/matches | BOOL | true
+NODE | pl-ru | 12 | $/styleContent/nativeParallel/1 | OBJECT | native,target,note,matches
+NODE | pl-ru | 12 | $/styleContent/nativeParallel/1/native | TEXT | 31:be742f6409e09065007e170d21b32b2551dff50fa7aad72b5c675ac7565141ed:Я сделал (готово).
+NODE | pl-ru | 12 | $/styleContent/nativeParallel/1/target | TEXT | 10:a827de8e51ea7e7a48d86a616b149637f85c95ce3c01f8580688da09b364fdc4:Zrobiłem.
+NODE | pl-ru | 12 | $/styleContent/nativeParallel/1/note | TEXT | 228:65ba05485af558d8ba4d12be2f5e7dc0d239fc9225bad0ebecb4d04dfbd2ba8d:Совершенный вид подчёркивает завершённый результат — то же противопоставление, что в русской паре «сделал» против «делал».
+NODE | pl-ru | 12 | $/styleContent/nativeParallel/1/matches | BOOL | true
+NODE | pl-ru | 12 | $/styleContent/examples | LIST | 2
+NODE | pl-ru | 12 | $/styleContent/examples/0 | TEXT | 21:35ee50511b878015f8876e5509ac39d5f9a02748d9b888df1d8666cebf830957:Czytałem książkę.
+NODE | pl-ru | 12 | $/styleContent/examples/1 | TEXT | 25:a30c14381a16f7d400358953b05f1d1d4814673170c0e2c4b6477debbd29be78:Przeczytałem książkę.
+NODE | pl-ru | 12 | $/styleContent/why | TEXT | 321:656aa9ec21c49156c049454804939972cf4f2fef124ed53a0197842d8191d66a:Пара несовершенный/совершенный вид (robić/zrobić) — это то же противопоставление процесса и результата, что в русской паре делать/сделать; понятие переносится почти без изменений.
+SKILL | pl-ru | 13 | pronouns
+NODE | pl-ru | 13 | $ | OBJECT | id,title,group,level,formula,theory,hint,prerequisites,focus,methods,styleContent
+NODE | pl-ru | 13 | $/id | TEXT | 8:973d21033137896dbf29e04c7dd65bd9b537f03b86feb0ec621573a89af097a8:pronouns
+NODE | pl-ru | 13 | $/title | TEXT | 14:dfe864d9b76501fa39e015341b487670f4374c1add5d53d7d4bb3c991d0c6567:Zaimki osobowe
+NODE | pl-ru | 13 | $/group | TEXT | 6:56bb17135fcd7309e44ad3c6a98354c0e148d3e269c0c3562cb20c167d629077:Zaimki
+NODE | pl-ru | 13 | $/level | TEXT | 2:c8361f9b468e68c86da024270e0949ce139cb704b8d7cce586681b99f3a7ea56:A2
+NODE | pl-ru | 13 | $/formula | TEXT | 31:66b479cb032bcb608bdfb071bf550f40d06c8e762d4dcec61014489ebe4b0aaf:ona → ją / jej / nią / niej
+NODE | pl-ru | 13 | $/theory | TEXT | 139:5cf62a6cb717afe9614d776dd9e0bfb4927d3bdc979f71ff0454385eaac453a1:Тренируем местоимение сразу внутри конструкции, а не как отдельную таблицу.
+NODE | pl-ru | 13 | $/hint | TEXT | 39:5d198ceb0e80782474799b2b7d664341a18b74adefc43f48690d8d62fe11dc93:widzę ją; mówię o niej; idę z nią
+NODE | pl-ru | 13 | $/prerequisites | LIST | 2
+NODE | pl-ru | 13 | $/prerequisites/0 | TEXT | 9:a27a77f4fc86a2a2b5c7c4b85e89fa53bd44bc1fc2195ec49272b9d4bac975d4:case.inst
+NODE | pl-ru | 13 | $/prerequisites/1 | TEXT | 8:b38d69be6e77df2f38b75918a1d1152915ab938e41501ab35bd8174c03760037:case.loc
+NODE | pl-ru | 13 | $/focus | OBJECT | before,after
+NODE | pl-ru | 13 | $/focus/before | TEXT | 10:267ea628e68ef89d8c49c16e3d5bb3f71477639fc0bdb57144311fdeb81743a0:moja żona
+NODE | pl-ru | 13 | $/focus/after | TEXT | 3:5aaf529b20c74875ac4304f8a9d90ee51e72aecfa8dfcdab7e827720d5e0cf17:ją
+NODE | pl-ru | 13 | $/methods | OBJECT | logic,situations
+NODE | pl-ru | 13 | $/methods/logic | OBJECT | introduction,promptLead,introduce,retrieve,feedback,review
+NODE | pl-ru | 13 | $/methods/logic/introduction | TEXT | 139:5cf62a6cb717afe9614d776dd9e0bfb4927d3bdc979f71ff0454385eaac453a1:Тренируем местоимение сразу внутри конструкции, а не как отдельную таблицу.
+NODE | pl-ru | 13 | $/methods/logic/promptLead | TEXT | 61:442b5151eb2924d3f075686bdec5fa7eeae0dc62862e26b181a17252f8d37c5d:Сначала определи правило и форму.
+NODE | pl-ru | 13 | $/methods/logic/introduce | TEXT | 114:809516e5504aa6e7b6e0b4fc16e84bb7a86f461690c4a88fc98d76fdf7b60d7e:Определи падеж короткого слова, заменяющего названную группу.
+NODE | pl-ru | 13 | $/methods/logic/retrieve | TEXT | 127:53c24754ca08d3326d45d97a3c0de5c9ad68793b22058d098f97efa89e0c9461:Определи признаки и преобразуй исходное предложение самостоятельно.
+NODE | pl-ru | 13 | $/methods/logic/feedback | TEXT | 132:44b559e170de20f9416b72ce2ea9ab8fbde7bcdd04ac9f553da88cafa57df38a:Сравни исходную и новую форму, затем проверь каждое изменение и правило.
+NODE | pl-ru | 13 | $/methods/logic/review | TEXT | 168:9d390f23626d63465f7ee59e6fbb33a9c7a37ca33aea92755c7b879f7ee45f8a:Выбери «Повторить» или «Вспомнил» по своей попытке; затем реши новое задание без подсказки.
+NODE | pl-ru | 13 | $/methods/situations | OBJECT | introduction,promptLead,introduce,retrieve,feedback,review
+NODE | pl-ru | 13 | $/methods/situations/introduction | TEXT | 164:d0e99bee38cfa47332436df2a766152301683ef49c5f194c93477cfe96057902:Собеседник уже знает, о ком речь. Замени длинное название человека коротким местоимением.
+NODE | pl-ru | 13 | $/methods/situations/promptLead | TEXT | 84:6e5b09c01f4379252336b49ccd4208bfedaaa85b9b0857cc848f009ba8c7cee4:Представь ситуацию и скажи целое предложение.
+NODE | pl-ru | 13 | $/methods/situations/introduce | TEXT | 150:fe429d363978a40adf19266f7a2efaec53487fb99ca1a9f0159afae11447f81d:Собеседник уже знает, о ком или о чём речь. Как избежать повторения длинной группы?
+NODE | pl-ru | 13 | $/methods/situations/retrieve | TEXT | 113:de639badf123d9e75205e26852d3062620c5878f8cbc8a63a4551d4438495462:Представь ситуацию и скажи целое предложение самостоятельно.
+NODE | pl-ru | 13 | $/methods/situations/feedback | TEXT | 133:6ba12d584584a8febf3a1858cf67219a88466e594df76ada7d411ac1845ed0e1:Сравни, что хотел сказать, с эталоном и проследи изменения в предложении.
+NODE | pl-ru | 13 | $/methods/situations/review | TEXT | 150:294b6fbeab70d415b69854c22c77d5cf12e91d39234c44e5c9eb436a2db33ef7:Оцени, удалось ли вспомнить ответ самостоятельно; следующую ситуацию реши заново.
+NODE | pl-ru | 13 | $/styleContent | OBJECT | nativeParallel,examples,why
+NODE | pl-ru | 13 | $/styleContent/nativeParallel | LIST | 2
+NODE | pl-ru | 13 | $/styleContent/nativeParallel/0 | OBJECT | native,target,note,matches
+NODE | pl-ru | 13 | $/styleContent/nativeParallel/0/native | TEXT | 14:954f20645d97b8ead97b37434501c3272a8c93df9d7687fd6952f0dd1e039bbe:Знаю её.
+NODE | pl-ru | 13 | $/styleContent/nativeParallel/0/target | TEXT | 9:0e00ec5f1f74647063e4d89a83036ee745a589c8e36fae1b0b07a062d90381cb:Znam ją.
+NODE | pl-ru | 13 | $/styleContent/nativeParallel/0/note | TEXT | 157:aa6833a30225957404cc28c931b338b5ed0cdd53f3a8569d7a74eb28b7add58b:Личное местоимение склоняется по падежу в обоих языках, хотя конкретные формы разные.
+NODE | pl-ru | 13 | $/styleContent/nativeParallel/0/matches | BOOL | true
+NODE | pl-ru | 13 | $/styleContent/nativeParallel/1 | OBJECT | native,target,note,matches
+NODE | pl-ru | 13 | $/styleContent/nativeParallel/1/native | TEXT | 23:e5196db2b6224abf92fac956ce4452bfaf7cc494ef73987e9600e65cac6a8017:Говорю о ней.
+NODE | pl-ru | 13 | $/styleContent/nativeParallel/1/target | TEXT | 15:757a3980077a35ed4096589a78d9442baf799f4ffc955e54cb3cf4d1e872386a:Mówię o niej.
+NODE | pl-ru | 13 | $/styleContent/nativeParallel/1/note | TEXT | 286:be64e95953c122c277d871e8a065a404a7c7234b6620224b9146cf4155cf19a7:После предлога оба языка добавляют дополнительный звук к местоимению: русское «н-» (о ней, с ней) и польское «ni-» (o niej, z nią) появляются в одной и той же позиции.
+NODE | pl-ru | 13 | $/styleContent/nativeParallel/1/matches | BOOL | true
+NODE | pl-ru | 13 | $/styleContent/examples | LIST | 2
+NODE | pl-ru | 13 | $/styleContent/examples/0 | TEXT | 12:9324984942c087c0a18ad441eb2b39fa4451571274e1becd7c8d45d6ebf4ebb5:Idę z nią.
+NODE | pl-ru | 13 | $/styleContent/examples/1 | TEXT | 11:6fde79c559949b6bfa8125ba171a74ba02c8f99fff527c8767f6220e2fa7405f:Pomagam mu.
+NODE | pl-ru | 13 | $/styleContent/why | TEXT | 356:e192e5ad22fcbfefb8a8a03a119ca1ee3b09cdfb412870a7e678ff1c0c4dfdde:Местоимения склоняются по падежу в обоих языках; в косвенных падежах после предлогов и русский, и польский вставляют один и тот же дополнительный звук (н-/ni-) — это не совпадение, а общее наследие.
+SKILL | pl-ru | 14 | mixed
+NODE | pl-ru | 14 | $ | OBJECT | id,title,group,level,formula,theory,hint,prerequisites,focus,methods,styleContent
+NODE | pl-ru | 14 | $/id | TEXT | 5:3f8fee624f43b2a9d685353269a0ab3eac785863ab6227636db1060fba1855e0:mixed
+NODE | pl-ru | 14 | $/title | TEXT | 45:ef1be93fc00a50d5e46ab0232ff26bc8c0de66f55c14fdc9d4704290f5cb5a90:Смешанные трансформации
+NODE | pl-ru | 14 | $/group | TEXT | 7:ace019e68559fa1c8443f381cfd29cad5d376f83fe089544cf155af0d9ed7ddd:B1 Core
+NODE | pl-ru | 14 | $/level | TEXT | 2:5b950e77941d01cdf246d00b1ece546bc95234b77d98b44c9187e2733afa696a:B1
+NODE | pl-ru | 14 | $/formula | TEXT | 55:b741c43fe22fa2fc27d448acf58bfa411cfae92b383242e636df918ee2bf8f90:Лицо + время + отрицание + падеж
+NODE | pl-ru | 14 | $/theory | TEXT | 152:9c0226b8532c3b3f6ddf8b56b8aa50d12a1723833e24f5ef3e9710de8b8918f7:Смешанные карточки проверяют, можешь ли ты объединить правила в живом предложении.
+NODE | pl-ru | 14 | $/hint | TEXT | 65:6c1e144a38774f178724b748555fd9601cf574ab524558faa5241b956f3dd3fa:Сначала структура, затем окончания.
+NODE | pl-ru | 14 | $/prerequisites | LIST | 2
+NODE | pl-ru | 14 | $/prerequisites/0 | TEXT | 12:ca893758693f3f8313cc2390a4f925b26b074a8325d77fd1804f0c7e12d11a0d:agreement.my
+NODE | pl-ru | 14 | $/prerequisites/1 | TEXT | 9:75e03622d8ea0ef4f6fdd144ca1ccbeaf80cd0be02afdd62b4fd95e1b0582ef0:verb.past
+NODE | pl-ru | 14 | $/focus | OBJECT | before,after
+NODE | pl-ru | 14 | $/focus/before | TEXT | 29:504c64c8484cae78737d6d73bf3e1a933e18500a12bcbe89fbb25dc4dbc7a3ce:Widzę moją piękną żonę.
+NODE | pl-ru | 14 | $/focus/after | TEXT | 36:5b41b714d1f180cf061a0a16aa917d2535642169e630d0ad4588381ab68b0167:Nie widziałem mojej pięknej żony.
+NODE | pl-ru | 14 | $/methods | OBJECT | logic,situations
+NODE | pl-ru | 14 | $/methods/logic | OBJECT | introduction,promptLead,introduce,retrieve,feedback,review
+NODE | pl-ru | 14 | $/methods/logic/introduction | TEXT | 152:9c0226b8532c3b3f6ddf8b56b8aa50d12a1723833e24f5ef3e9710de8b8918f7:Смешанные карточки проверяют, можешь ли ты объединить правила в живом предложении.
+NODE | pl-ru | 14 | $/methods/logic/promptLead | TEXT | 61:442b5151eb2924d3f075686bdec5fa7eeae0dc62862e26b181a17252f8d37c5d:Сначала определи правило и форму.
+NODE | pl-ru | 14 | $/methods/logic/introduce | TEXT | 112:c75161985b95bc43ca315ac2020b3f3aa1a97918633f0fbcd40af5c68db7f98f:Проверь время, отрицание и падеж как три независимых условия.
+NODE | pl-ru | 14 | $/methods/logic/retrieve | TEXT | 127:53c24754ca08d3326d45d97a3c0de5c9ad68793b22058d098f97efa89e0c9461:Определи признаки и преобразуй исходное предложение самостоятельно.
+NODE | pl-ru | 14 | $/methods/logic/feedback | TEXT | 132:44b559e170de20f9416b72ce2ea9ab8fbde7bcdd04ac9f553da88cafa57df38a:Сравни исходную и новую форму, затем проверь каждое изменение и правило.
+NODE | pl-ru | 14 | $/methods/logic/review | TEXT | 168:9d390f23626d63465f7ee59e6fbb33a9c7a37ca33aea92755c7b879f7ee45f8a:Выбери «Повторить» или «Вспомнил» по своей попытке; затем реши новое задание без подсказки.
+NODE | pl-ru | 14 | $/methods/situations | OBJECT | introduction,promptLead,introduce,retrieve,feedback,review
+NODE | pl-ru | 14 | $/methods/situations/introduction | TEXT | 134:dca2e9ee5368f8771b9c3670c203d66bbdfe8b7136c8752f6b315aa7fefe1f39:Ты сообщаешь, что в прошлом не увидел названное. Как удержать все условия?
+NODE | pl-ru | 14 | $/methods/situations/promptLead | TEXT | 84:6e5b09c01f4379252336b49ccd4208bfedaaa85b9b0857cc848f009ba8c7cee4:Представь ситуацию и скажи целое предложение.
+NODE | pl-ru | 14 | $/methods/situations/introduce | TEXT | 134:dca2e9ee5368f8771b9c3670c203d66bbdfe8b7136c8752f6b315aa7fefe1f39:Ты сообщаешь, что в прошлом не увидел названное. Как удержать все условия?
+NODE | pl-ru | 14 | $/methods/situations/retrieve | TEXT | 113:de639badf123d9e75205e26852d3062620c5878f8cbc8a63a4551d4438495462:Представь ситуацию и скажи целое предложение самостоятельно.
+NODE | pl-ru | 14 | $/methods/situations/feedback | TEXT | 133:6ba12d584584a8febf3a1858cf67219a88466e594df76ada7d411ac1845ed0e1:Сравни, что хотел сказать, с эталоном и проследи изменения в предложении.
+NODE | pl-ru | 14 | $/methods/situations/review | TEXT | 150:294b6fbeab70d415b69854c22c77d5cf12e91d39234c44e5c9eb436a2db33ef7:Оцени, удалось ли вспомнить ответ самостоятельно; следующую ситуацию реши заново.
+NODE | pl-ru | 14 | $/styleContent | OBJECT | nativeParallel,examples,why
+NODE | pl-ru | 14 | $/styleContent/nativeParallel | LIST | 1
+NODE | pl-ru | 14 | $/styleContent/nativeParallel/0 | OBJECT | native,target,note,matches
+NODE | pl-ru | 14 | $/styleContent/nativeParallel/0/native | TEXT | 37:bad2afb47d973afdeb1e0ac9efb9bbd0fd62f27d7ecf685496e395cc72e839fe:Ты не видел мою жену.
+NODE | pl-ru | 14 | $/styleContent/nativeParallel/0/target | TEXT | 28:841beb0f9847d03486b35dfe388e65b8dcbb2f22d8ce4ef0f99fe029e0913204:Nie widziałeś mojej żony.
+NODE | pl-ru | 14 | $/styleContent/nativeParallel/0/note | TEXT | 331:7f0182492c22f2aecb1072154061ac274701a7cd09619f07f853c4fde1c7c469:В русском отрицание не всегда меняет падеж — винительный «жену» тоже допустим (родительный «жены» звучит книжнее); в польском после nie родительный обязателен всегда, без вариантов.
+NODE | pl-ru | 14 | $/styleContent/nativeParallel/0/matches | BOOL | false
+NODE | pl-ru | 14 | $/styleContent/examples | LIST | 2
+NODE | pl-ru | 14 | $/styleContent/examples/0 | TEXT | 26:10912868741eabb965ae97a0f491163758571c148b6541bbee69bcf2af66bc3f:Nie robiłem tego wczoraj.
+NODE | pl-ru | 14 | $/styleContent/examples/1 | TEXT | 24:048622735309ca51d9c52d2feb593addee5cbf4deac9d0cbeeb2600258a5ae08:Nie widziałem jej domu.
+NODE | pl-ru | 14 | $/styleContent/why | TEXT | 297:7e1df0da81f69c6973703173fd9e6d78b2f41551de0e13f709b5bb23cf2e5129:Смешанное задание складывает несколько правил сразу: время, отрицание и падеж работают как отдельные, независимые условия — проверяй их по одному, а не все сразу.
+SKILL | pl-ru | 15 | sentence.question
+NODE | pl-ru | 15 | $ | OBJECT | id,title,group,level,formula,theory,hint,prerequisites,focus,methods,styleContent
+NODE | pl-ru | 15 | $/id | TEXT | 17:e77f993991c9f7e1b4b56dd36dcd1670200469d3d61de9759adb6fe9e14b6085:sentence.question
+NODE | pl-ru | 15 | $/title | TEXT | 19:8c7cc9fdbd859e208957dba96c3f46e8a133816c038bdefbeb34c9d057d50b82:Вопрос с Czy
+NODE | pl-ru | 15 | $/group | TEXT | 22:c89eba90f1d8c201e401498d2f64202792190c32ad8a26c56d0974c6b12181bc:Предложение
+NODE | pl-ru | 15 | $/level | TEXT | 2:16a36e86f6fed5d465ff332511a0ce1a863b55d364b25a7cdaa25db19abf9648:A1
+NODE | pl-ru | 15 | $/formula | TEXT | 45:090e156004eb1a20383645549479195012afc4653e6b2c999a34afbe01e7be61:Czy + утверждение → вопрос
+NODE | pl-ru | 15 | $/theory | TEXT | 138:eef3272025dd4498a4628c4f3ed3db3489f79f3ee9641f31b4e814e5db47fc9d:В общем вопросе czy ставится перед предложением. Падежи при этом не меняются.
+NODE | pl-ru | 15 | $/hint | TEXT | 30:350983112700c5c51b44946545b0f42a3bbdfc4b4710cf9fbc5662f9d7c7e8a2:Widzisz… → Czy widzisz…?
+NODE | pl-ru | 15 | $/prerequisites | LIST | 0
+NODE | pl-ru | 15 | $/focus | OBJECT | before,after
+NODE | pl-ru | 15 | $/focus/before | TEXT | 21:0f7fe73a2d2a4a94e38bda82ada8b930140f75a7d0e0124e5a760a3908a72d68:Widzisz moją żonę.
+NODE | pl-ru | 15 | $/focus/after | TEXT | 25:9158aeb2f35887f3d7678281eb538c543fb284b60c89fe1f3043277b2ceb3711:Czy widzisz moją żonę?
+NODE | pl-ru | 15 | $/methods | OBJECT | logic,situations
+NODE | pl-ru | 15 | $/methods/logic | OBJECT | introduction,promptLead,introduce,retrieve,feedback,review
+NODE | pl-ru | 15 | $/methods/logic/introduction | TEXT | 138:eef3272025dd4498a4628c4f3ed3db3489f79f3ee9641f31b4e814e5db47fc9d:В общем вопросе czy ставится перед предложением. Падежи при этом не меняются.
+NODE | pl-ru | 15 | $/methods/logic/promptLead | TEXT | 61:442b5151eb2924d3f075686bdec5fa7eeae0dc62862e26b181a17252f8d37c5d:Сначала определи правило и форму.
+NODE | pl-ru | 15 | $/methods/logic/introduce | TEXT | 127:beb46b652945554dc37af37ad83631b298f55c644f26dc5735bb5c7b3b6e5a8c:Определи, как превратить утверждение в общий вопрос без смены падежа.
+NODE | pl-ru | 15 | $/methods/logic/retrieve | TEXT | 127:53c24754ca08d3326d45d97a3c0de5c9ad68793b22058d098f97efa89e0c9461:Определи признаки и преобразуй исходное предложение самостоятельно.
+NODE | pl-ru | 15 | $/methods/logic/feedback | TEXT | 132:44b559e170de20f9416b72ce2ea9ab8fbde7bcdd04ac9f553da88cafa57df38a:Сравни исходную и новую форму, затем проверь каждое изменение и правило.
+NODE | pl-ru | 15 | $/methods/logic/review | TEXT | 168:9d390f23626d63465f7ee59e6fbb33a9c7a37ca33aea92755c7b879f7ee45f8a:Выбери «Повторить» или «Вспомнил» по своей попытке; затем реши новое задание без подсказки.
+NODE | pl-ru | 15 | $/methods/situations | OBJECT | introduction,promptLead,introduce,retrieve,feedback,review
+NODE | pl-ru | 15 | $/methods/situations/introduction | TEXT | 137:2c0becb5592ee20cf4ca4d481bc44c59857364e61c6c8c4d7a0162067c9eddf7:Ты хочешь уточнить, видит ли собеседник названное. Как задать общий вопрос?
+NODE | pl-ru | 15 | $/methods/situations/promptLead | TEXT | 84:6e5b09c01f4379252336b49ccd4208bfedaaa85b9b0857cc848f009ba8c7cee4:Представь ситуацию и скажи целое предложение.
+NODE | pl-ru | 15 | $/methods/situations/introduce | TEXT | 137:2c0becb5592ee20cf4ca4d481bc44c59857364e61c6c8c4d7a0162067c9eddf7:Ты хочешь уточнить, видит ли собеседник названное. Как задать общий вопрос?
+NODE | pl-ru | 15 | $/methods/situations/retrieve | TEXT | 113:de639badf123d9e75205e26852d3062620c5878f8cbc8a63a4551d4438495462:Представь ситуацию и скажи целое предложение самостоятельно.
+NODE | pl-ru | 15 | $/methods/situations/feedback | TEXT | 133:6ba12d584584a8febf3a1858cf67219a88466e594df76ada7d411ac1845ed0e1:Сравни, что хотел сказать, с эталоном и проследи изменения в предложении.
+NODE | pl-ru | 15 | $/methods/situations/review | TEXT | 150:294b6fbeab70d415b69854c22c77d5cf12e91d39234c44e5c9eb436a2db33ef7:Оцени, удалось ли вспомнить ответ самостоятельно; следующую ситуацию реши заново.
+NODE | pl-ru | 15 | $/styleContent | OBJECT | nativeParallel,examples,why
+NODE | pl-ru | 15 | $/styleContent/nativeParallel | LIST | 1
+NODE | pl-ru | 15 | $/styleContent/nativeParallel/0 | OBJECT | native,target,note,matches
+NODE | pl-ru | 15 | $/styleContent/nativeParallel/0/native | TEXT | 34:c02c1f4995c1047bb5935e519399e052d19ef4a82a1e4b9ae4073fb603c57f2d:Ты видишь мою жену?
+NODE | pl-ru | 15 | $/styleContent/nativeParallel/0/target | TEXT | 25:9158aeb2f35887f3d7678281eb538c543fb284b60c89fe1f3043277b2ceb3711:Czy widzisz moją żonę?
+NODE | pl-ru | 15 | $/styleContent/nativeParallel/0/note | TEXT | 295:9f0ae84d326306e24eddaf4d56241cf2e2d0adb1242ba95675d834574d4a9302:В русском общий вопрос обычно образуется только интонацией (падежи и порядок слов не меняются); в польском для этого есть отдельное слово czy в начале предложения.
+NODE | pl-ru | 15 | $/styleContent/nativeParallel/0/matches | BOOL | false
+NODE | pl-ru | 15 | $/styleContent/examples | LIST | 2
+NODE | pl-ru | 15 | $/styleContent/examples/0 | TEXT | 14:5bafcd1dd1d7d6f9f87da4268d0842b63e18f58e9ae9bdc39773564c74455e4e:Czy masz czas?
+NODE | pl-ru | 15 | $/styleContent/examples/1 | TEXT | 15:ccdf9b64c15039ebd6c6114cdb117d8f5a162874ca7006d5abbf26dba571d5fe:Czy on tu jest?
+NODE | pl-ru | 15 | $/styleContent/why | TEXT | 376:a3805848a0e42b9d86c52770637f4bf948948b298b0460d17d5300ea73e4a286:В русском вопрос без вопросительного слова опирается на интонацию (изредка — книжную частицу «ли» после глагола); в польском для этого есть отдельное слово czy, которое всегда ставится в начале предложения.
+SKILL | pl-ru | 16 | sentence.plural
+NODE | pl-ru | 16 | $ | OBJECT | id,title,group,level,formula,theory,hint,prerequisites,focus,methods,styleContent
+NODE | pl-ru | 16 | $/id | TEXT | 15:3943799f94992dda48788da68cdc905b00cfac6c57f23f27391e2b8c6d07eff0:sentence.plural
+NODE | pl-ru | 16 | $/title | TEXT | 55:c85799638bfc7522213c84f9e6239792d943203ec7f12cc7e4f316d810f8f5a5:Единственное → множественное
+NODE | pl-ru | 16 | $/group | TEXT | 22:c89eba90f1d8c201e401498d2f64202792190c32ad8a26c56d0974c6b12181bc:Предложение
+NODE | pl-ru | 16 | $/level | TEXT | 2:c8361f9b468e68c86da024270e0949ce139cb704b8d7cce586681b99f3a7ea56:A2
+NODE | pl-ru | 16 | $/formula | TEXT | 128:943b7a3c5691341a08e1e234e6532797af8dcdc04eb539e1df23b9eb4a1bb566:Местоимение + прилагательное + существительное → множественное число
+NODE | pl-ru | 16 | $/theory | TEXT | 130:df413387bc863b7d0629726571b0034ad7dc1dd50ce7234e46c9e834ea81d7f2:Во множественном числе различай мужскую личную группу и все остальные.
+NODE | pl-ru | 16 | $/hint | TEXT | 70:398dd5d8acef196c150c81183b356129452366958c962a973d4b3de1639c12b2:mojego kolegę → moich kolegów; moją książkę → moje książki
+NODE | pl-ru | 16 | $/prerequisites | LIST | 2
+NODE | pl-ru | 16 | $/prerequisites/0 | TEXT | 10:301fd01e37be55f7f52c3eeb2332c3501b5e31bc4ae4595a19ef36012d447892:case.acc.m
+NODE | pl-ru | 16 | $/prerequisites/1 | TEXT | 12:ca893758693f3f8313cc2390a4f925b26b074a8325d77fd1804f0c7e12d11a0d:agreement.my
+NODE | pl-ru | 16 | $/focus | OBJECT | before,after
+NODE | pl-ru | 16 | $/focus/before | TEXT | 14:489ce1d7e9b0dfc0d27f801fdd5617e8d30c317cb65b8bc7473a66496b7ff7b6:mojego kolegę
+NODE | pl-ru | 16 | $/focus/after | TEXT | 14:e9af6bc9fc6ec51c8dddea8fd61549f202329f76f8e72967750713837545a568:moich kolegów
+NODE | pl-ru | 16 | $/methods | OBJECT | logic,situations
+NODE | pl-ru | 16 | $/methods/logic | OBJECT | introduction,promptLead,introduce,retrieve,feedback,review
+NODE | pl-ru | 16 | $/methods/logic/introduction | TEXT | 130:df413387bc863b7d0629726571b0034ad7dc1dd50ce7234e46c9e834ea81d7f2:Во множественном числе различай мужскую личную группу и все остальные.
+NODE | pl-ru | 16 | $/methods/logic/promptLead | TEXT | 61:442b5151eb2924d3f075686bdec5fa7eeae0dc62862e26b181a17252f8d37c5d:Сначала определи правило и форму.
+NODE | pl-ru | 16 | $/methods/logic/introduce | TEXT | 94:d92bda9d6c0a003fd844a7f7aea4428ebfad8ed19f6ec79fe361a31657623aeb:Определи число и тип группы перед изменением формы.
+NODE | pl-ru | 16 | $/methods/logic/retrieve | TEXT | 127:53c24754ca08d3326d45d97a3c0de5c9ad68793b22058d098f97efa89e0c9461:Определи признаки и преобразуй исходное предложение самостоятельно.
+NODE | pl-ru | 16 | $/methods/logic/feedback | TEXT | 132:44b559e170de20f9416b72ce2ea9ab8fbde7bcdd04ac9f553da88cafa57df38a:Сравни исходную и новую форму, затем проверь каждое изменение и правило.
+NODE | pl-ru | 16 | $/methods/logic/review | TEXT | 168:9d390f23626d63465f7ee59e6fbb33a9c7a37ca33aea92755c7b879f7ee45f8a:Выбери «Повторить» или «Вспомнил» по своей попытке; затем реши новое задание без подсказки.
+NODE | pl-ru | 16 | $/methods/situations | OBJECT | introduction,promptLead,introduce,retrieve,feedback,review
+NODE | pl-ru | 16 | $/methods/situations/introduction | TEXT | 146:7d1a53188a2d0d5f7454fc68a3ef0a928997338b5ab0e6687baffe31641a6374:Теперь речь не об одном человеке или предмете, а о нескольких. Измени всю группу.
+NODE | pl-ru | 16 | $/methods/situations/promptLead | TEXT | 84:6e5b09c01f4379252336b49ccd4208bfedaaa85b9b0857cc848f009ba8c7cee4:Представь ситуацию и скажи целое предложение.
+NODE | pl-ru | 16 | $/methods/situations/introduce | TEXT | 147:bc4e66023022c76f9ef3a0ef7d1e9cf96d964db9d17062fd4a7fc4fe45b615fe:Теперь речь о нескольких таких участниках или предметах. Как назвать всю группу?
+NODE | pl-ru | 16 | $/methods/situations/retrieve | TEXT | 113:de639badf123d9e75205e26852d3062620c5878f8cbc8a63a4551d4438495462:Представь ситуацию и скажи целое предложение самостоятельно.
+NODE | pl-ru | 16 | $/methods/situations/feedback | TEXT | 133:6ba12d584584a8febf3a1858cf67219a88466e594df76ada7d411ac1845ed0e1:Сравни, что хотел сказать, с эталоном и проследи изменения в предложении.
+NODE | pl-ru | 16 | $/methods/situations/review | TEXT | 150:294b6fbeab70d415b69854c22c77d5cf12e91d39234c44e5c9eb436a2db33ef7:Оцени, удалось ли вспомнить ответ самостоятельно; следующую ситуацию реши заново.
+NODE | pl-ru | 16 | $/styleContent | OBJECT | nativeParallel,examples,why
+NODE | pl-ru | 16 | $/styleContent/nativeParallel | LIST | 1
+NODE | pl-ru | 16 | $/styleContent/nativeParallel/0 | OBJECT | native,target,note,matches
+NODE | pl-ru | 16 | $/styleContent/nativeParallel/0/native | TEXT | 41:a5958ac499d40cb5fa5676e61898494df0e0e70c3c203b749821b60f2d528173:Мои коллеги. Мои книги.
+NODE | pl-ru | 16 | $/styleContent/nativeParallel/0/target | TEXT | 28:f6015bf14a87ad7fddca0ebfb88cc961479ac28a40f14615757ee794f1397bfc:Moi koledzy. Moje książki.
+NODE | pl-ru | 16 | $/styleContent/nativeParallel/0/note | TEXT | 403:72bbfaf2fb53b5dd1415e9764cd8fffe93454de79a3621880aa40ddf52ff4fe1:В русском множественное число прилагательного/местоимения одно для всех родов и групп («мои» и там, и там); в польском мужская личная группа (koledzy) получает особую форму (moi), отличную от остальных существительных (moje książki).
+NODE | pl-ru | 16 | $/styleContent/nativeParallel/0/matches | BOOL | false
+NODE | pl-ru | 16 | $/styleContent/examples | LIST | 2
+NODE | pl-ru | 16 | $/styleContent/examples/0 | TEXT | 11:18a61de3db33d3fea8317d6ed7ce26e8fe78e16d6ec01a42f940c9c367db6612:Moi bracia.
+NODE | pl-ru | 16 | $/styleContent/examples/1 | TEXT | 13:cb8ce46d98a456cc1dd511ca70e762f174cbc8955d7a73df96eba80713aa3ad6:Moje siostry.
+NODE | pl-ru | 16 | $/styleContent/why | TEXT | 418:9e8ee971e8445cc1e5a416ae4cd0a7622854870b2b2e0e22aec4fe1a571d2cff:Главная сложность множественного числа в польском — категория «мужская личная группа» (люди мужского пола), у которой особые формы прилагательных, местоимений и глаголов; в русском такого разделения во множественном числе нет.

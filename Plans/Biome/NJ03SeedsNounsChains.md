@@ -1,0 +1,41 @@
+# NJ03 independent Polish seeds, nouns and chain corpus
+
+Status: **bounded old-source requirement freeze, before any candidate DSL transcription; NJ03 remains open**. The independent text expectations are [NJ03SeedsNounsChains.cases](NJ03SeedsNounsChains.cases). They record all 14 Polish nouns with 196 singular/plural case forms, all 12 ordered seed pairs, the five authored chain steps, and the 60 exact `source → expected` sentence pairs with skill IDs. The old product baseline is `biome/full-port-2026@bf7fac2a810181f90530900aedcd95495c4144bc`. No candidate DSL/generator output was used as an oracle. Existing application JSON was **read only**; no JSON file or JSON output was created.
+
+## Provenance and authority
+
+Every SHA-256 below covers complete file bytes, including whitespace and newline. Paths and hashes are also locked in the `.cases` `SOURCE` rows.
+
+| Role | Exact path | SHA-256 |
+| --- | --- | --- |
+| **Old v1 authoring authority**: noun and adjective/possessive forms, seeds, copy, patterns, reference wife chain and presentation | `courses/pl-ru/course.json` | `7255e8c686ceee17a72d280e5876b0cf6776dd9a1743884cd75c724fb8180dcc` |
+| **Old authored v2 recipe**: first skill by gender, five step specifications, tags, owner and copy/pattern keys | `courses/lang/pl/exercise-recipes.json` | `8ef622c556d34e4cdf29cc99fe33c5f3ad848df373c437a845874e4e8d34b5a4` |
+| Old **derived projection** of noun data, consistency check only | `courses/lang/pl/lexicon.json` | `f7e7e83a4c95f7113b8d495451b4c6ad2809d70afa73bbebba745a3b441f5838` |
+| Old **derived projection** of seed/copy/pattern/presentation data, consistency check only | `courses/pairs/pl-ru/pair.json` | `dadb5eabaa02fa7dcf300f01bc3aa079cec43567247c249b3476d5c8a32215b7` |
+
+`courses/pl-ru/forms.generated.json` is **generated output**, not a source or expectation; it was never read by the corpus checker. Its observed old file hash is `97864959a9d00be33f8cab0de4250f1cfa8cde64d1bf995c5e8182333fb656c7`, recorded solely to identify that distinction. The old v2 lexicon and pair are migration products, not second human-maintained authorities. The static checker verifies their relevant slices against v1 and `node scripts/migrate-v1-to-v2.mjs --check` confirmed the complete old split. The final no-JSON product must replace these application files and remove or retire the two development-only old-source readers in this slice; this freeze does not authorize retaining an active JSON dependency.
+
+The `.cases` notation preserves exact Unicode strings. `NOUN` is ordered ID, Polish lemma, Russian meaning, five-way gender, then all seven cases in the fixed order `nom, gen, dat, acc, inst, loc, voc` for singular and plural separately. It includes the two nouns **not** chosen as chain seeds (`woman`, `work`), and the irregular/edge forms `kolega → kolegę/koledze`, `mąż → męża`, `dziecko → dzieci/dziećmi`, and `samochód` accusative unchanged. `SEED` preserves all 12 list positions and exact noun/adjective IDs; no inferred Cartesian product is substituted. `FIRST` preserves the authoring recipe's `f`, `n`, and `default` first-skill mapping. `STEP` freezes five presentation IDs/labels, skill IDs, source/expected template keys, tag order, `ownerOut`, prompt and explanation keys. `PREFIX`/`PATTERN` freeze the exact text that determines these 60 sentence shapes. `CHAIN` freezes each of 60 exact source/expected strings plus the gender-selected skill ID. Every step after the first has `source == previous.expected`; the 48 within-seed links are explicit expected behavior. In step 4, `their` means the invariant authored form **`ich`**, which remains `ich` in step 5. For the 12 seeds, masculine inanimate and neuter accusatives can equal nominatives; the sentence still changes from `To jest…` to `Widzę…`.
+
+The old source makes the Polish `12 × 5` count and exact source/expected sequences derivable: 12 authored seed pairs resolve to existing noun/adjective form tables, the recipe declares five ordered steps, and v1 copy/pattern text supplies each sentence. The first seed's five pairs also appear independently in the authored `reference.chainRows` and match this corpus. The text table was extracted from those **old authored facts**, then checked against the old React generator; it was not copied from a candidate generated file, the v2 derived products, or a parity snapshot. Any change to the requirements or one of these expectations needs separate explanation and review (P15), not an edit to match a future implementation.
+
+## Evidence boundary and remaining facts
+
+The [static checker](../../scripts/check-nj03-old-seeds-chains.mjs) verifies exact locked paths and byte hashes, all 14 noun identities and 196 ordered forms, 12 ordered seed references, five authored step keys/tags/owners, 60 sentence/skill expectations computed by direct lookup and substitution of **old authored** forms/templates, the independent wife reference row, and relevant v1→v2 projection equality. It has no candidate import and writes no JSON. The [old React baseline checker](../../scripts/check-nj03-old-chain-react.mts) compares the previously frozen text expectations against the actual old `generateChain`; the runtime result confirms old behavior and does not define the expected values. Both scripts are temporary development evidence and must leave the active product path when old application JSON is removed.
+
+This corpus proves the Polish authored/reference/React branch only. It does **not** establish the same 12 seeds or five-step sequence for English, nor that Kotlin/Android/iOS/browser hosts execute all 60 cases, nor the random exercise IDs, accepted variants, prompts/explanations text rendering, change descriptors, final summary, seed cycling, or every skill's eligibility. Those FP01/FP02 cases need their own independent corpus and execution. The generated Kotlin form table and `PlEngine` path were inspected but **not run** here. The current old `course.json`/recipe source being well formed does not prove a new Biome parser, source-location diagnostics, typed output, per-output freshness, or no-JSON acceptance.
+
+Future negative cases for this slice should mutate an authored seed to a missing noun/adjective, duplicate a seed, remove or permute a chain step, break a source/expected link, replace a required case form, change gender-first-skill routing, alter `ich`, and introduce an escaping-sensitive Unicode string. Freeze the candidate source bytes and UTF-16 error positions **after syntax is pinned and before implementation results are used**; do not infer locations from compiler output. Existing v1 `validateCoursePack` rejects unknown/duplicate seeds and wrong presentation step order; the new source-integrity/freshness diagnostics are not old-validator parity.
+
+## Execution receipt
+
+Working directory `/Users/german/Work/JS/polski-grammar-srs-nj03-seeds-nouns-chains`; old product source SHA `bf7fac2a810181f90530900aedcd95495c4144bc`; Node `v24.1.0`; 2026-10-18. The local ignored `node_modules` symlink points to the canonical checkout's installed dependencies. Results:
+
+| Command | Observed scope/result |
+| --- | --- |
+| `node scripts/check-nj03-old-seeds-chains.mjs` | PASS: 4 exact-path/full-byte hash locks; 14/14 nouns, 12/12 seeds, 5/5 steps, 60/60 static sentence rows. |
+| `npx tsx scripts/check-nj03-old-chain-react.mts` | PASS: old React `generateChain` matched 60/60 source/expected/skill/tag/owner cases and 48/48 links, zero skipped. |
+| `node scripts/migrate-v1-to-v2.mjs --check` | PASS: old split files match v1 and round trip. |
+| `node scripts/validate-course.mjs` | PASS: old v1 course accepted. |
+
+Three temporary **text** `.cases` mutations were rejected by the static checker (3 selected/executed, 0 skipped): `friendM` lemma `kolega → kolegi`, one `Mówię o ich pięknej żonie.` sentence altered, and v1 source SHA replaced by zeroes. Those probes did not touch old JSON files. Candidate source/generator/typed consumers selected/executed: **0/0; NOT RUN**. Kotlin, browser, Desktop, Android, iOS, clean CI and `gate:all`: **NOT RUN**. The old-source fact freeze received bounded independent read-only approval before integration; no candidate execution was reviewed.

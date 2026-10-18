@@ -1,0 +1,3 @@
+# pl-course/morphology — source SHA-256: 7255e8c686ceee17...
+SURFACE course_morphology
+MORPHOLOGY {futureAuxiliary: {verbId: "be" forms: {sg: {1: "będę" 2: "będziesz" 3: "będzie"} pl: {1: "będziemy" 2: "będziecie" 3: "będą"}}}}

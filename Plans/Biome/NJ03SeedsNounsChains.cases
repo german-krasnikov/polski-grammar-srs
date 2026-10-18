@@ -1,0 +1,110 @@
+# NJ03 old-authored input facts and independently frozen 12 × 5 chain sentences.
+# SOURCE | role | exact path | complete SHA-256. DERIVED is checked for consistency only, never an oracle.
+# NOUN | position | id | lemma | meaning | gender | sg forms | pl forms; form order nom,gen,dat,acc,inst,loc,voc.
+# SEED | position | nounId | adjectiveId. FIRST | gender/default | first skillId.
+# STEP | position | presentation id | label | skillId/gender | sourceKey | expectedKey | tags | ownerOut | promptKey | explanationKey.
+# PREFIX/PATTERN | authored key | exact text. CHAIN | seed position | step | skillId | exact source | exact expected.
+SOURCE | AUTHORED | courses/pl-ru/course.json | 7255e8c686ceee17a72d280e5876b0cf6776dd9a1743884cd75c724fb8180dcc
+SOURCE | AUTHORED | courses/lang/pl/exercise-recipes.json | 8ef622c556d34e4cdf29cc99fe33c5f3ad848df373c437a845874e4e8d34b5a4
+SOURCE | DERIVED | courses/lang/pl/lexicon.json | f7e7e83a4c95f7113b8d495451b4c6ad2809d70afa73bbebba745a3b441f5838
+SOURCE | DERIVED | courses/pairs/pl-ru/pair.json | dadb5eabaa02fa7dcf300f01bc3aa079cec43567247c249b3476d5c8a32215b7
+NOUN | 01 | wife | żona | жена | f | żona,żony,żonie,żonę,żoną,żonie,żono | żony,żon,żonom,żony,żonami,żonach,żony
+NOUN | 02 | woman | kobieta | женщина | f | kobieta,kobiety,kobiecie,kobietę,kobietą,kobiecie,kobieto | kobiety,kobiet,kobietom,kobiety,kobietami,kobietach,kobiety
+NOUN | 03 | book | książka | книга | f | książka,książki,książce,książkę,książką,książce,książko | książki,książek,książkom,książki,książkami,książkach,książki
+NOUN | 04 | work | praca | работа | f | praca,pracy,pracy,pracę,pracą,pracy,praco | prace,prac,pracom,prace,pracami,pracach,prace
+NOUN | 05 | husband | mąż | муж | m-personal | mąż,męża,mężowi,męża,mężem,mężu,mężu | mężowie,mężów,mężom,mężów,mężami,mężach,mężowie
+NOUN | 06 | friendM | kolega | коллега | m-personal | kolega,kolegi,koledze,kolegę,kolegą,koledze,kolego | koledzy,kolegów,kolegom,kolegów,kolegami,kolegach,koledzy
+NOUN | 07 | son | syn | сын | m-personal | syn,syna,synowi,syna,synem,synu,synu | synowie,synów,synom,synów,synami,synach,synowie
+NOUN | 08 | dog | pies | собака | m-animate | pies,psa,psu,psa,psem,psie,psie | psy,psów,psom,psy,psami,psach,psy
+NOUN | 09 | cat | kot | кот | m-animate | kot,kota,kotu,kota,kotem,kocie,kocie | koty,kotów,kotom,koty,kotami,kotach,koty
+NOUN | 10 | car | samochód | машина | m-inanimate | samochód,samochodu,samochodowi,samochód,samochodem,samochodzie,samochodzie | samochody,samochodów,samochodom,samochody,samochodami,samochodach,samochody
+NOUN | 11 | house | dom | дом | m-inanimate | dom,domu,domowi,dom,domem,domu,domu | domy,domów,domom,domy,domami,domach,domy
+NOUN | 12 | phone | telefon | телефон | m-inanimate | telefon,telefonu,telefonowi,telefon,telefonem,telefonie,telefonie | telefony,telefonów,telefonom,telefony,telefonami,telefonach,telefony
+NOUN | 13 | child | dziecko | ребёнок | n | dziecko,dziecka,dziecku,dziecko,dzieckiem,dziecku,dziecko | dzieci,dzieci,dzieciom,dzieci,dziećmi,dzieciach,dzieci
+NOUN | 14 | window | okno | окно | n | okno,okna,oknu,okno,oknem,oknie,okno | okna,okien,oknom,okna,oknami,oknach,okna
+SEED | 01 | wife | beautiful
+SEED | 02 | husband | good
+SEED | 03 | friendM | good
+SEED | 04 | son | small
+SEED | 05 | dog | good
+SEED | 06 | cat | small
+SEED | 07 | book | new
+SEED | 08 | car | new
+SEED | 09 | house | new
+SEED | 10 | phone | new
+SEED | 11 | child | small
+SEED | 12 | window | new
+FIRST | f | case.acc.f
+FIRST | n | case.acc.n
+FIRST | default | case.acc.m
+STEP | 01 | acc | Вижу | gender | nomSg | seenAcc | acc | my | chainAccPrompt | chainAccReason
+STEP | 02 | past | Прошлое | verb.past | seenAcc | chainPast | past,acc | my | chainPastPrompt | chainPastReason
+STEP | 03 | neg | Отрицание | case.gen.neg | chainPast | chainNeg | gen,negation | my | chainNegPrompt | chainNegReason
+STEP | 04 | owner | Владелец | agreement.my | chainNeg | chainOwner | gen,agreement | their | chainOwnerPrompt | chainOwnerReason
+STEP | 05 | loc | Говорю о | case.loc | chainOwner | chainLoc | loc | their | chainLocPrompt | chainLocReason
+PREFIX | nomSg | To jest
+PATTERN | seenAcc | Widzę {acc}.
+PATTERN | chainPast | Widziałem {acc}.
+PATTERN | chainNeg | Nie widziałem {gen}.
+PATTERN | chainOwner | Nie widziałem {theirGen}.
+PATTERN | chainLoc | Mówię o {theirLoc}.
+CHAIN | 01 | 01 | case.acc.f | To jest moja piękna żona. | Widzę moją piękną żonę.
+CHAIN | 01 | 02 | verb.past | Widzę moją piękną żonę. | Widziałem moją piękną żonę.
+CHAIN | 01 | 03 | case.gen.neg | Widziałem moją piękną żonę. | Nie widziałem mojej pięknej żony.
+CHAIN | 01 | 04 | agreement.my | Nie widziałem mojej pięknej żony. | Nie widziałem ich pięknej żony.
+CHAIN | 01 | 05 | case.loc | Nie widziałem ich pięknej żony. | Mówię o ich pięknej żonie.
+CHAIN | 02 | 01 | case.acc.m | To jest mój dobry mąż. | Widzę mojego dobrego męża.
+CHAIN | 02 | 02 | verb.past | Widzę mojego dobrego męża. | Widziałem mojego dobrego męża.
+CHAIN | 02 | 03 | case.gen.neg | Widziałem mojego dobrego męża. | Nie widziałem mojego dobrego męża.
+CHAIN | 02 | 04 | agreement.my | Nie widziałem mojego dobrego męża. | Nie widziałem ich dobrego męża.
+CHAIN | 02 | 05 | case.loc | Nie widziałem ich dobrego męża. | Mówię o ich dobrym mężu.
+CHAIN | 03 | 01 | case.acc.m | To jest mój dobry kolega. | Widzę mojego dobrego kolegę.
+CHAIN | 03 | 02 | verb.past | Widzę mojego dobrego kolegę. | Widziałem mojego dobrego kolegę.
+CHAIN | 03 | 03 | case.gen.neg | Widziałem mojego dobrego kolegę. | Nie widziałem mojego dobrego kolegi.
+CHAIN | 03 | 04 | agreement.my | Nie widziałem mojego dobrego kolegi. | Nie widziałem ich dobrego kolegi.
+CHAIN | 03 | 05 | case.loc | Nie widziałem ich dobrego kolegi. | Mówię o ich dobrym koledze.
+CHAIN | 04 | 01 | case.acc.m | To jest mój mały syn. | Widzę mojego małego syna.
+CHAIN | 04 | 02 | verb.past | Widzę mojego małego syna. | Widziałem mojego małego syna.
+CHAIN | 04 | 03 | case.gen.neg | Widziałem mojego małego syna. | Nie widziałem mojego małego syna.
+CHAIN | 04 | 04 | agreement.my | Nie widziałem mojego małego syna. | Nie widziałem ich małego syna.
+CHAIN | 04 | 05 | case.loc | Nie widziałem ich małego syna. | Mówię o ich małym synu.
+CHAIN | 05 | 01 | case.acc.m | To jest mój dobry pies. | Widzę mojego dobrego psa.
+CHAIN | 05 | 02 | verb.past | Widzę mojego dobrego psa. | Widziałem mojego dobrego psa.
+CHAIN | 05 | 03 | case.gen.neg | Widziałem mojego dobrego psa. | Nie widziałem mojego dobrego psa.
+CHAIN | 05 | 04 | agreement.my | Nie widziałem mojego dobrego psa. | Nie widziałem ich dobrego psa.
+CHAIN | 05 | 05 | case.loc | Nie widziałem ich dobrego psa. | Mówię o ich dobrym psie.
+CHAIN | 06 | 01 | case.acc.m | To jest mój mały kot. | Widzę mojego małego kota.
+CHAIN | 06 | 02 | verb.past | Widzę mojego małego kota. | Widziałem mojego małego kota.
+CHAIN | 06 | 03 | case.gen.neg | Widziałem mojego małego kota. | Nie widziałem mojego małego kota.
+CHAIN | 06 | 04 | agreement.my | Nie widziałem mojego małego kota. | Nie widziałem ich małego kota.
+CHAIN | 06 | 05 | case.loc | Nie widziałem ich małego kota. | Mówię o ich małym kocie.
+CHAIN | 07 | 01 | case.acc.f | To jest moja nowa książka. | Widzę moją nową książkę.
+CHAIN | 07 | 02 | verb.past | Widzę moją nową książkę. | Widziałem moją nową książkę.
+CHAIN | 07 | 03 | case.gen.neg | Widziałem moją nową książkę. | Nie widziałem mojej nowej książki.
+CHAIN | 07 | 04 | agreement.my | Nie widziałem mojej nowej książki. | Nie widziałem ich nowej książki.
+CHAIN | 07 | 05 | case.loc | Nie widziałem ich nowej książki. | Mówię o ich nowej książce.
+CHAIN | 08 | 01 | case.acc.m | To jest mój nowy samochód. | Widzę mój nowy samochód.
+CHAIN | 08 | 02 | verb.past | Widzę mój nowy samochód. | Widziałem mój nowy samochód.
+CHAIN | 08 | 03 | case.gen.neg | Widziałem mój nowy samochód. | Nie widziałem mojego nowego samochodu.
+CHAIN | 08 | 04 | agreement.my | Nie widziałem mojego nowego samochodu. | Nie widziałem ich nowego samochodu.
+CHAIN | 08 | 05 | case.loc | Nie widziałem ich nowego samochodu. | Mówię o ich nowym samochodzie.
+CHAIN | 09 | 01 | case.acc.m | To jest mój nowy dom. | Widzę mój nowy dom.
+CHAIN | 09 | 02 | verb.past | Widzę mój nowy dom. | Widziałem mój nowy dom.
+CHAIN | 09 | 03 | case.gen.neg | Widziałem mój nowy dom. | Nie widziałem mojego nowego domu.
+CHAIN | 09 | 04 | agreement.my | Nie widziałem mojego nowego domu. | Nie widziałem ich nowego domu.
+CHAIN | 09 | 05 | case.loc | Nie widziałem ich nowego domu. | Mówię o ich nowym domu.
+CHAIN | 10 | 01 | case.acc.m | To jest mój nowy telefon. | Widzę mój nowy telefon.
+CHAIN | 10 | 02 | verb.past | Widzę mój nowy telefon. | Widziałem mój nowy telefon.
+CHAIN | 10 | 03 | case.gen.neg | Widziałem mój nowy telefon. | Nie widziałem mojego nowego telefonu.
+CHAIN | 10 | 04 | agreement.my | Nie widziałem mojego nowego telefonu. | Nie widziałem ich nowego telefonu.
+CHAIN | 10 | 05 | case.loc | Nie widziałem ich nowego telefonu. | Mówię o ich nowym telefonie.
+CHAIN | 11 | 01 | case.acc.n | To jest moje małe dziecko. | Widzę moje małe dziecko.
+CHAIN | 11 | 02 | verb.past | Widzę moje małe dziecko. | Widziałem moje małe dziecko.
+CHAIN | 11 | 03 | case.gen.neg | Widziałem moje małe dziecko. | Nie widziałem mojego małego dziecka.
+CHAIN | 11 | 04 | agreement.my | Nie widziałem mojego małego dziecka. | Nie widziałem ich małego dziecka.
+CHAIN | 11 | 05 | case.loc | Nie widziałem ich małego dziecka. | Mówię o ich małym dziecku.
+CHAIN | 12 | 01 | case.acc.n | To jest moje nowe okno. | Widzę moje nowe okno.
+CHAIN | 12 | 02 | verb.past | Widzę moje nowe okno. | Widziałem moje nowe okno.
+CHAIN | 12 | 03 | case.gen.neg | Widziałem moje nowe okno. | Nie widziałem mojego nowego okna.
+CHAIN | 12 | 04 | agreement.my | Nie widziałem mojego nowego okna. | Nie widziałem ich nowego okna.
+CHAIN | 12 | 05 | case.loc | Nie widziałem ich nowego okna. | Mówię o ich nowym oknie.

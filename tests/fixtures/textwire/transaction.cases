@@ -1,0 +1,125 @@
+# NJ06 pure repository state decisions. NOT RUN in the NJ05 generic codec experiment.
+# `old=A`/`new=B` stand for immutable, exact, nonempty byte sequences with SHA-256
+# `sha(A)`/`sha(B)`; they are symbolic here, not legacy JSON fixtures or save-wire bytes.
+# Each `expect` covers state plus allowed effects, in order. All unspecified writes/deletes
+# are forbidden. Real old-user exact-path byte fixtures and host execution remain open.
+
+CASE T01 fresh-no-legacy
+source TextWireDesign.md:63; TextWireExperimentBlueprint.md:29
+given old=absent oldBackups=absent new=absent receipt=absent
+expect Fresh allowed; a new text document may be created; no migration receipt required
+END
+
+CASE T02 valid-new-and-old-without-receipt
+source TextWireDesign.md:63; NoJsonAcceptance.md:NJ06; TextWireExperimentBlueprint.md:29
+given old=A new=B(valid,sha(B)) receipt=absent
+expect RecoveryRequired before any write/delete/ordinary save; old remains exactly A; new remains exactly B
+END
+
+CASE T03 valid-new-and-old-malformed-receipt
+source TextWireDesign.md:63; TextWireExperimentBlueprint.md:29
+given old=A new=B(valid,sha(B)) receipt=malformed-text
+expect RecoveryRequired before any write/delete/ordinary save; preserve A, B and receipt bytes
+END
+
+CASE T04 valid-new-and-old-mismatched-receipt
+source TextWireDesign.md:61-63; TextWireExperimentBlueprint.md:29
+given host=iOS legacyPath="polski-progress-v1" old=A new=B(valid,sha(B)) receipt=(kind=progress,legacyPath="polski-progress-v1",oldHash=sha(A),newHash=sha(C),schemaVersion=2,transactionId="tx-1")
+expect RecoveryRequired before any write/delete/ordinary save; preserve A and B
+END
+
+CASE T05 matching-receipt-after-crash
+source TextWireDesign.md:61-64; TextWireExperimentBlueprint.md:29
+given host=iOS legacyPath="polski-progress-v1" old=A new=B(valid,sha(B)) receipt=(kind=progress,legacyPath="polski-progress-v1",oldHash=sha(A),newHash=sha(B),schemaVersion=2,transactionId="tx-1",durable=true)
+expect verify old/new hashes and receipt readback; delete only matching old primary/backups; verify absence; then Loaded B; do not re-import A or replay a review
+END
+
+CASE T06 receipt-after-cleanup-repeat-load
+source TextWireDesign.md:63-64; TextWireExperimentBlueprint.md:29
+given old=absent oldBackups=absent new=B(valid,sha(B)) receipt=(matching T05)
+expect Loaded B on first and repeated load; zero duplicate reviews/custom words; zero new writes
+END
+
+CASE T07 old-backup-conflict
+source TextWireDesign.md:57,63; TextWireExperimentBlueprint.md:29
+given old=A oldBackup=C with sha(C)!=sha(A) new=absent receipt=absent
+expect RecoveryRequired; preserve exact A and C; no silent winner; no new document or receipt
+END
+
+CASE T08 new-readback-mismatch
+source TextWireDesign.md:63; TextWireExperimentBlueprint.md:29
+given old=A new=absent receipt=absent; migration computes B but stored readback=C with sha(C)!=sha(B)
+expect RecoveryRequired; old remains A; no receipt, delete or ordinary save; new destination not claimed committed
+END
+
+CASE T09 new-digest-failure
+source TextWireDesign.md:51,63; TextWireExperimentBlueprint.md:29
+given old=A new=absent receipt=absent; stored readback B has wrong trailing digest
+expect RecoveryRequired; old remains A; no receipt or delete
+END
+
+CASE T10 receipt-write-failure
+source TextWireDesign.md:63; TextWireExperimentBlueprint.md:29
+given old=A new=B(valid/readback-equal) receipt write throws before durable completion
+expect RecoveryRequired; old remains A; B remains recoverable; no delete or ordinary save
+END
+
+CASE T11 receipt-readback-failure
+source TextWireDesign.md:63; TextWireExperimentBlueprint.md:29
+given old=A new=B(valid/readback-equal) receipt write returns but readback is absent or mismatched
+expect RecoveryRequired; old remains A; B remains recoverable; no delete or ordinary save
+END
+
+CASE T12 delete-failure
+source TextWireDesign.md:63-64; TextWireExperimentBlueprint.md:29
+given old=A oldBackup=A new=B(valid) receipt=(matching T05); deletion of old backup fails
+expect RecoveryRequired/incomplete; preserve B and receipt; verify remaining old bytes; never claim zero-JSON complete
+END
+
+CASE T13 crash-before-receipt
+source TextWireDesign.md:63-64; TextWireExperimentBlueprint.md:29
+given old=A new=B(valid) receipt=absent after interrupted write/readback
+expect same RecoveryRequired as T02, not automatic overwrite/re-import; preserve A and B
+END
+
+CASE T14 legacy-missing-or-invalid
+source NoJsonAcceptance.md:NJ06; TextWireDesign.md:57,63
+variant 1 given old=absent oldBackups=absent new=absent receipt=absent
+variant 1 expect Fresh as T01; no legacy bytes to preserve
+variant 2 given old=A(unsupported-version) oldBackups=absent new=absent receipt=absent
+variant 2 expect RecoveryRequired; preserve exact A; no empty replacement save
+variant 3 given old=A(corrupt-content) oldBackups=absent new=absent receipt=absent
+variant 3 expect RecoveryRequired; preserve exact A; no empty replacement save
+variant 4 given old=A(truncated-bytes) oldBackups=absent new=absent receipt=absent
+variant 4 expect RecoveryRequired; preserve exact A; no empty replacement save
+END
+
+CASE T15 old-tab-rewrite-after-cleanup
+source TextWireDesign.md:65; TextWireExperimentBlueprint.md:29
+given T06 clean state; an already-open old-version browser tab writes legacy bytes C after cleanup
+expect next read/commit detects reappeared old C and returns RecoveryRequired; preserve B and C; zero-JSON release claim blocked until writer quiescence proved
+END
+
+CASE T16 two-new-tabs-interleaved
+source TextWireDesign.md:65; TextWireExperimentBlueprint.md:29
+given two new-version tabs both read old=A and new=absent; one writes B and receipt; other has stale snapshot and attempts write/delete
+expect cross-tab exclusion plus hash recheck prevents stale commit, lost review or custom word; losing tab reloads or recovers; no duplicate migration
+END
+
+CASE T17 cancel-or-write-failure
+source NoJsonAcceptance.md:NJ06; TextWireDesign.md:63-65
+given old=A new=absent receipt=absent; cancellation or new-write failure at each pre-receipt boundary
+expect old remains exactly A; previous in-memory state retained; no receipt/delete/JSON output; subsequent retry follows fresh verification
+END
+
+CASE T18 unknown-legacy-unconvertible
+source TextWireDesign.md:57,63; TextWireExperimentBlueprint.md:29
+given old=A with duplicate object keys, non-finite/unsafe number, invalid Unicode or unknown value lacking lossless typed mapping; each isolated
+expect RecoveryRequired; preserve A and backups; no new text, receipt or JSON export
+END
+
+CASE T19 receipt-legacy-path-mismatch
+source TextWireDesign.md:61-63; TextWireExperimentBlueprint.md:29
+given host=iOS legacyPath="polski-progress-v1" old=A new=B(valid,sha(B)) receipt=(kind=progress,legacyPath="different-progress-v1",oldHash=sha(A),newHash=sha(B),schemaVersion=2,transactionId="tx-1",durable=true)
+expect RecoveryRequired before any write/delete/ordinary save despite matching byte hashes; preserve A, B and receipt bytes; never clean a different legacy path
+END
