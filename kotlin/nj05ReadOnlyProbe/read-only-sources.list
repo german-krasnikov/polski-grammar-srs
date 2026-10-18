@@ -1,0 +1,7 @@
+# Exact commonTest sources compiled into the isolated NJ05 JS/Wasm probe.
+# Format: support path | test path class method-count. No wildcard source roots.
+support kotlin/shared/src/commonTest/kotlin/polski/textwire/LegacyAdmissionDigest.kt
+test kotlin/shared/src/commonTest/kotlin/polski/textwire/LegacyRepresentabilityProbeTest.kt LegacyRepresentabilityProbeTest 1
+support kotlin/shared/src/commonTest/kotlin/polski/textwire/RetainedNumberProbe.kt
+test kotlin/shared/src/commonTest/kotlin/polski/textwire/RetainedNumberPrototypeTest.kt RetainedNumberPrototypeTest 4
+test kotlin/shared/src/commonTest/kotlin/polski/textwire/RetainedNumberIndependentMutationTest.kt RetainedNumberIndependentMutationTest 1
