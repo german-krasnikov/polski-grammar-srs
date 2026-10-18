@@ -173,7 +173,7 @@ internal data class FutureAuxiliary(val verbId: String, val forms: Map<NumberGra
  * still pl-ru-shaped; a second pack would need its own schema before this class stops being
  * pl-ru-specific.
  */
-internal open class CoursePack(private val source: CoursePackSource) {
+internal class CoursePack(private val source: CoursePackSource) : CoursePackFields {
     private val root: JsonObject by lazy {
         Json.parseToJsonElement(source.load()).jsonObject.also { pack ->
             require(pack.getValue("schemaVersion").jsonPrimitive.int == 1)
@@ -186,17 +186,17 @@ internal open class CoursePack(private val source: CoursePackSource) {
         }
     }
 
-    open val id: String by lazy { root.string("id") }
+    override val id: String by lazy { root.string("id") }
 
     /** UC-04: vocabulary's pair scope (`${target}-${native}`) — v1 packs have `id == pairId`
      * (one pack per pair), but the two stay conceptually distinct for a future schema where a
      * pack id could version content without changing the pair. */
-    open val pairId: String by lazy { "${root.string("targetLanguage")}-${root.string("nativeLanguage")}" }
+    override val pairId: String by lazy { "${root.string("targetLanguage")}-${root.string("nativeLanguage")}" }
 
     /** EN-08 (gap G): the two halves of [pairId] as their own accessors, for preferences'
      * `CourseSelection(target, native, style)` and future per-language pickers (EN-22). */
-    open val targetLanguage: String by lazy { root.string("targetLanguage") }
-    open val nativeLanguage: String by lazy { root.string("nativeLanguage") }
+    override val targetLanguage: String by lazy { root.string("targetLanguage") }
+    override val nativeLanguage: String by lazy { root.string("nativeLanguage") }
 
     /**
      * EN-22 fix (EnRuAcceptance §7 item 1): a case-declining, gendered noun table — this is pl's
@@ -205,7 +205,7 @@ internal open class CoursePack(private val source: CoursePackSource) {
      * than force-parsed into false gender/case data — [nouns] is honestly empty for such a pack,
      * not fabricated. pl's rows all declare "gender", so pl's list is unchanged.
      */
-    open val nouns: List<Noun> by lazy { root.rows("nouns").mapNotNull { value ->
+    override val nouns: List<Noun> by lazy { root.rows("nouns").mapNotNull { value ->
         val gender = value.optionalString("gender")?.let(Gender::fromId) ?: return@mapNotNull null
         Noun(value.string("id"), value.string("lemma"), value.string("meaning"), gender,
             NumberGram.entries.associateWith { number -> value.obj("forms").obj(number.id).caseForms() })
@@ -217,13 +217,13 @@ internal open class CoursePack(private val source: CoursePackSource) {
      * entirely, but a host's chain-seed picker (`TrainingWebApp.kt`) only ever needs a label for
      * whichever noun the active pack's own [sentenceSeeds] actually name, never pl's declension.
      */
-    open val nounLabels: Map<String, Pair<String, String>> by lazy {
+    override val nounLabels: Map<String, Pair<String, String>> by lazy {
         root.rows("nouns").associate { value -> value.string("id") to (value.string("lemma") to value.string("meaning")) }
     }
 
     /** Same reasoning as [nouns]: a row whose "forms" isn't number×gender×case-shaped (en's flat
      *  `{"invariant": "..."}`) is skipped, not force-parsed. */
-    open val adjectives: List<Adjective> by lazy { root.rows("adjectives").mapNotNull { value ->
+    override val adjectives: List<Adjective> by lazy { root.rows("adjectives").mapNotNull { value ->
         val forms = value.obj("forms")
         if (!NumberGram.entries.all { forms.containsKey(it.id) }) return@mapNotNull null
         Adjective(value.string("id"), value.string("lemma"), value.string("meaning"),
@@ -234,7 +234,7 @@ internal open class CoursePack(private val source: CoursePackSource) {
 
     /** Same reasoning as [nouns]: a row without an "aspect" field (en's verbs have no pl-shaped
      *  `pastStem`/`futureType`) is skipped, not force-parsed. */
-    open val verbs: List<Verb> by lazy { root.rows("verbs").mapNotNull { value ->
+    override val verbs: List<Verb> by lazy { root.rows("verbs").mapNotNull { value ->
         val aspectId = value.optionalString("aspect") ?: return@mapNotNull null
         val past = value.obj("pastStem")
         Verb(value.string("id"), value.string("lemma"), value.string("meaning"),
@@ -249,7 +249,7 @@ internal open class CoursePack(private val source: CoursePackSource) {
             FutureType.entries.first { it.id == value.string("futureType") }, value.optionalString("perfectivePair"))
     }.requireUniqueIds(Verb::id) }
 
-    open val skills: List<Skill> by lazy { root.rows("skills").map { value ->
+    override val skills: List<Skill> by lazy { root.rows("skills").map { value ->
         Skill(value.string("id"), value.string("title"), value.string("group"), value.string("level"),
             value.string("formula"), value.string("theory"), value.string("hint"),
             value.getValue("prerequisites").jsonArray.map { it.jsonPrimitive.content })
@@ -258,7 +258,7 @@ internal open class CoursePack(private val source: CoursePackSource) {
     /** Validated against the pack's own raw noun/adjective ids (every pack declares these,
      *  whichever shape they end up in) rather than [nouns]/[adjectives] — those two are narrowed
      *  to pl's gendered/case-declining shape and would wrongly reject a caseless pack's seeds. */
-    open val sentenceSeeds: List<SentenceSeed> by lazy {
+    override val sentenceSeeds: List<SentenceSeed> by lazy {
         val nounIds = root.rows("nouns").map { it.string("id") }.toSet()
         val adjectiveIds = root.rows("adjectives").map { it.string("id") }.toSet()
         root.rows("sentenceSeeds").map { value -> SentenceSeed(value.string("nounId"), value.string("adjectiveId")) }
@@ -270,21 +270,21 @@ internal open class CoursePack(private val source: CoursePackSource) {
 
     /** UC S2: regular stem alternations this pack declares (e.g. Polish `ó~o`), consumed only by
      * `EndingHighlight.kt`'s reliability check — optional, defaults to none for a pack without any. */
-    open val stemAlternations: List<StemAlternation> by lazy { parseStemAlternations(root["stemAlternations"]) }
+    override val stemAlternations: List<StemAlternation> by lazy { parseStemAlternations(root["stemAlternations"]) }
 
-    open val caseSentencePrefixes: Map<String, String> by lazy {
+    override val caseSentencePrefixes: Map<String, String> by lazy {
         root.obj("caseSentencePrefixes").mapValues { (_, value) -> value.jsonPrimitive.content }
     }
 
-    open val exerciseCopy: Map<String, String> by lazy {
+    override val exerciseCopy: Map<String, String> by lazy {
         root.obj("exerciseCopy").mapValues { (_, value) -> value.jsonPrimitive.content }
     }
 
-    open val exercisePatterns: Map<String, String> by lazy {
+    override val exercisePatterns: Map<String, String> by lazy {
         root.obj("exercisePatterns").mapValues { (_, value) -> value.jsonPrimitive.content }
     }
 
-    open val chainPresentation: ChainPresentation by lazy {
+    override val chainPresentation: ChainPresentation by lazy {
         val value = root.obj("training").obj("chainPresentation")
         val completion = value.obj("completion")
         ChainPresentation(
@@ -307,7 +307,7 @@ internal open class CoursePack(private val source: CoursePackSource) {
      */
     private val reference: JsonObject by lazy { root.obj("reference") }
 
-    open val caseReferenceRows: List<CaseReferenceRow>? by lazy {
+    override val caseReferenceRows: List<CaseReferenceRow>? by lazy {
         val rows = reference.optRows("caseRows") ?: return@lazy null
         rows.map { value ->
             CaseReferenceRow(GramCase.fromId(value.string("id")), value.string("pl"), value.string("ru"),
@@ -315,12 +315,12 @@ internal open class CoursePack(private val source: CoursePackSource) {
         }.also { parsed -> require(parsed.map { it.id } == listOf(GramCase.NOM, GramCase.GEN, GramCase.DAT, GramCase.ACC, GramCase.INST, GramCase.LOC, GramCase.VOC)) }
     }
 
-    open val referenceGenderNames: Map<String, String>? by lazy {
+    override val referenceGenderNames: Map<String, String>? by lazy {
         val names = reference.optObj("genderNames") ?: return@lazy null
         names.mapValues { (_, value) -> value.jsonPrimitive.content }
     }
 
-    open val referenceChainRows: List<ReferenceChainRow>? by lazy {
+    override val referenceChainRows: List<ReferenceChainRow>? by lazy {
         val rows = reference.optRows("chainRows") ?: return@lazy null
         rows.map { value ->
             ReferenceChainRow(value.string("label"), value.string("from"), value.string("to"), value.string("change"))
@@ -329,7 +329,7 @@ internal open class CoursePack(private val source: CoursePackSource) {
         }
     }
 
-    open val referenceSystemCards: List<ReferenceSystemCard>? by lazy {
+    override val referenceSystemCards: List<ReferenceSystemCard>? by lazy {
         val rows = reference.optRows("systemCards") ?: return@lazy null
         rows.mapIndexed { index, value ->
             val steps = value.getValue("steps").jsonArray.map { it.jsonPrimitive.content }
@@ -343,7 +343,7 @@ internal open class CoursePack(private val source: CoursePackSource) {
         }
     }
 
-    open val referencePipeline: ReferencePipeline? by lazy {
+    override val referencePipeline: ReferencePipeline? by lazy {
         val pipeline = reference.optObj("pipeline") ?: return@lazy null
         ReferencePipeline(
             pipeline.string("title"),
@@ -356,13 +356,13 @@ internal open class CoursePack(private val source: CoursePackSource) {
         }
     }
 
-    open val referenceCaseTeaching: CaseTeaching? by lazy {
+    override val referenceCaseTeaching: CaseTeaching? by lazy {
         val teaching = reference.optObj("caseTeaching") ?: return@lazy null
         val note = teaching.obj("caseNote")
         CaseTeaching(note.string("react"), note.string("compact"), teaching.string("comparisonReadingHint"))
     }
 
-    open val referencePronounTeaching: PronounTeaching? by lazy {
+    override val referencePronounTeaching: PronounTeaching? by lazy {
         val teaching = reference.optObj("pronounTeaching") ?: return@lazy null
         val personal = teaching.obj("personal")
         val intro = personal.obj("intro")
@@ -399,7 +399,7 @@ internal open class CoursePack(private val source: CoursePackSource) {
         }
     }
 
-    open val referenceVerbTeaching: VerbTeaching? by lazy {
+    override val referenceVerbTeaching: VerbTeaching? by lazy {
         val teaching = reference.optObj("verbTeaching") ?: return@lazy null
         VerbTeaching(
             teaching.rows("subjects").map { subject ->
@@ -415,7 +415,7 @@ internal open class CoursePack(private val source: CoursePackSource) {
         )
     }
 
-    open val comparisonNounIds: List<String>? by lazy {
+    override val comparisonNounIds: List<String>? by lazy {
         val ids = (reference["comparisonNounIds"] as? JsonArray)?.map { it.jsonPrimitive.content } ?: return@lazy null
         ids.also {
             require(it.size == 7 && it.distinct().size == it.size)
@@ -423,7 +423,7 @@ internal open class CoursePack(private val source: CoursePackSource) {
         }
     }
 
-    open val referenceRussianSupport: RussianSupport? by lazy {
+    override val referenceRussianSupport: RussianSupport? by lazy {
         val support = reference.optObj("russianSupport") ?: return@lazy null
         val title = support.obj("title")
         RussianSupport(
@@ -451,7 +451,7 @@ internal open class CoursePack(private val source: CoursePackSource) {
         }
     }
 
-    open val referenceTenseRows: List<ReferenceTenseRow>? by lazy {
+    override val referenceTenseRows: List<ReferenceTenseRow>? by lazy {
         val rows = reference.optRows("tenseRows") ?: return@lazy null
         rows.map { value ->
             ReferenceTenseRow(value.string("label"), value.string("from"), value.string("to"))
@@ -462,7 +462,7 @@ internal open class CoursePack(private val source: CoursePackSource) {
         }
     }
 
-    open val referenceAspectRows: List<ReferenceAspectRow>? by lazy {
+    override val referenceAspectRows: List<ReferenceAspectRow>? by lazy {
         val rows = reference.optRows("aspectRows") ?: return@lazy null
         rows.map { value ->
             ReferenceAspectRow(value.string("label"), value.string("from"),
@@ -474,7 +474,7 @@ internal open class CoursePack(private val source: CoursePackSource) {
         }
     }
 
-    open val maleAccRows: List<MaleAccRow>? by lazy {
+    override val maleAccRows: List<MaleAccRow>? by lazy {
         val rows = reference.optRows("maleAccRows") ?: return@lazy null
         rows.map { value ->
             MaleAccRow(value.string("id"), value.string("label"), value.string("title"),
@@ -487,7 +487,7 @@ internal open class CoursePack(private val source: CoursePackSource) {
         }
     }
 
-    open val presentations: Map<String, SkillPresentation> by lazy {
+    override val presentations: Map<String, SkillPresentation> by lazy {
         root.rows("skills").associate { value ->
             val focus = value.obj("focus")
             val methods = value.obj("methods")
@@ -499,11 +499,11 @@ internal open class CoursePack(private val source: CoursePackSource) {
     }
 
     /** Absent on a skill (true for every skill today) means [SkillStyleContent]'s all-derived defaults. */
-    open val styleContent: Map<String, SkillStyleContent> by lazy {
+    override val styleContent: Map<String, SkillStyleContent> by lazy {
         root.rows("skills").associate { value -> value.string("id") to parseSkillStyleContent(value["styleContent"]) }
     }
 
-    open val vocabulary: List<VocabularyItem> by lazy {
+    override val vocabulary: List<VocabularyItem> by lazy {
         root.obj("vocabulary").rows("items").map { value ->
             VocabularyItem(value.string("id"), value.string("lemma"), value.string("translation"),
                 value.string("form"), value.string("example"), value.string("level"),
@@ -513,23 +513,23 @@ internal open class CoursePack(private val source: CoursePackSource) {
         }.requireUniqueIds(VocabularyItem::id)
     }
 
-    open val matrixIntroduction: String? by lazy { reference.optionalString("matrixIntroduction") }
-    open val webCaseCompositionHeader: String? by lazy { reference.optionalString("webCaseCompositionHeader") }
-    open val contextHelp: CourseContextHelp? by lazy {
+    override val matrixIntroduction: String? by lazy { reference.optionalString("matrixIntroduction") }
+    override val webCaseCompositionHeader: String? by lazy { reference.optionalString("webCaseCompositionHeader") }
+    override val contextHelp: CourseContextHelp? by lazy {
         reference.optObj("contextHelp")?.let { CourseContextHelp(it.string("react"), it.string("compact")) }
     }
-    open val maleAccIntro: String? by lazy { reference.optionalString("maleAccIntro") }
-    open val aspectNoPresent: CourseAspectNoPresent? by lazy {
+    override val maleAccIntro: String? by lazy { reference.optionalString("maleAccIntro") }
+    override val aspectNoPresent: CourseAspectNoPresent? by lazy {
         reference.optObj("aspectNoPresent")?.let { CourseAspectNoPresent(it.string("compact"), it.string("ios")) }
     }
-    open val vocabularyInstructions: CourseVocabularyInstructions by lazy {
+    override val vocabularyInstructions: CourseVocabularyInstructions by lazy {
         root.obj("vocabulary").obj("instructions").let {
             CourseVocabularyInstructions(it.string("react"), it.string("web"), it.string("native"), it.string("ios"))
         }
     }
-    open val vocabularyUnavailableLabel: String by lazy { root.obj("vocabulary").string("unavailableLabel") }
+    override val vocabularyUnavailableLabel: String by lazy { root.obj("vocabulary").string("unavailableLabel") }
 
-    open val frequency: List<FrequencyItem> by lazy {
+    override val frequency: List<FrequencyItem> by lazy {
         Json.parseToJsonElement(generatedFrequencyJson).jsonObject.rows("items").mapIndexed { index, value ->
             FrequencyItem(value.getValue("rank").jsonPrimitive.int, value.string("lemma"),
                 value.getValue("count").jsonPrimitive.int).also { require(it.rank == index + 1) }
@@ -538,7 +538,7 @@ internal open class CoursePack(private val source: CoursePackSource) {
 
     /** A pronoun row without pl's full 7-case paradigm (en's `{subject, object}`) isn't this
      *  case-declining shape and is skipped — same reasoning as [nouns]. */
-    open val personalPronouns: Map<String, Map<GramCase, String>> by lazy {
+    override val personalPronouns: Map<String, Map<GramCase, String>> by lazy {
         root.obj("personalPronouns").mapNotNull { (id, value) ->
             val forms = value.jsonObject
             if (!GramCase.entries.all { forms.containsKey(it.id) }) return@mapNotNull null
@@ -554,13 +554,13 @@ internal open class CoursePack(private val source: CoursePackSource) {
      * whatever case-id strings the pack's own JSON actually declares — never forced through
      * [GramCase]'s pl-only closed set.
      */
-    open val personalPronounRawForms: Map<String, Map<String, String>> by lazy {
+    override val personalPronounRawForms: Map<String, Map<String, String>> by lazy {
         root.obj("personalPronouns").mapValues { (_, value) ->
             value.jsonObject.mapValues { (_, form) -> form.jsonPrimitive.content }
         }
     }
 
-    open val possessives: List<Possessive> by lazy {
+    override val possessives: List<Possessive> by lazy {
         root.rows("possessives").map { Possessive(PossessiveId.fromId(it.string("id")), it.string("label")) }
     }
 
@@ -572,7 +572,7 @@ internal open class CoursePack(private val source: CoursePackSource) {
      * Likewise, requiring every [PossessiveId] to be present is pl's own completeness rule, not a
      * universal one; a pack simply declares whichever ids it has (en has no `yourPlural`).
      */
-    open val possessiveForms: Map<PossessiveId, CoursePossessiveForms> by lazy {
+    override val possessiveForms: Map<PossessiveId, CoursePossessiveForms> by lazy {
         root.rows("possessives").associate { row ->
             val id = PossessiveId.fromId(row.string("id"))
             val forms = row.obj("forms")
@@ -600,7 +600,7 @@ internal open class CoursePack(private val source: CoursePackSource) {
 
     /** Absent entirely for a pack with no compound future tense (en's `will` is a single
      *  invariant particle, not a conjugated auxiliary verb) — null, not force-parsed. */
-    open val futureAuxiliary: FutureAuxiliary? by lazy {
+    override val futureAuxiliary: FutureAuxiliary? by lazy {
         val morphology = root["morphology"]?.jsonObject ?: return@lazy null
         require(morphology.keys == setOf("futureAuxiliary"))
         val auxiliary = morphology.obj("futureAuxiliary")
@@ -624,10 +624,10 @@ internal open class CoursePack(private val source: CoursePackSource) {
  * [select] switches it — EN-22 is the first production caller (host preferences sessions), driven
  * by `UserPreferencesV2.target`/`native` and gated by [usableCourseSelections].
  */
-internal class PackRegistry(private val packs: List<CoursePack>) {
+internal class PackRegistry(private val packs: List<CoursePackFields>) {
     init { require(packs.isNotEmpty() && packs.map { it.pairId }.distinct().size == packs.size) }
 
-    var active: CoursePack = packs.first()
+    var active: CoursePackFields = packs.first()
         private set
 
     /** Switches [active] to the registered pack whose [CoursePack.pairId] is [pairId]. */
@@ -640,7 +640,7 @@ internal class PackRegistry(private val packs: List<CoursePack>) {
 
     /** Every registered pack's own (targetLanguage, nativeLanguage), in registration order (pl-ru
      *  first) — the real option list for a target/native picker (EN-22), never a hardcoded pair. */
-    open val options: List<Pair<String, String>> by lazy { packs.map { it.targetLanguage to it.nativeLanguage } }
+    val options: List<Pair<String, String>> by lazy { packs.map { it.targetLanguage to it.nativeLanguage } }
 }
 
 /** EN-04/EN-22: v1 packs (a real `courses/<id>/course.json`) first, then any pair this build has
@@ -660,9 +660,13 @@ private val v2OnlyCoursePackSources: List<CoursePackSource> by lazy {
 }
 
 internal val packRegistry: PackRegistry by lazy {
-    PackRegistry((embeddedCoursePackSources + v2OnlyCoursePackSources).map { source ->
-        // NJ03: pl-ru uses typed Biome literal source for all fields (P7: one override point).
-        if (source.id == "pl-ru") PlRuTypedPack(source) else CoursePack(source)
+    PackRegistry(buildList<CoursePackFields> {
+        // NJ03 P7: pl-ru uses typed Biome literal source (PlRuTypedPack object).
+        // Other packs read from JSON via CoursePack.
+        val jsonPacks = (embeddedCoursePackSources + v2OnlyCoursePackSources)
+            .filter { it.id != "pl-ru" }.map(::CoursePack)
+        add(PlRuTypedPack)
+        addAll(jsonPacks)
     })
 }
 
@@ -686,14 +690,15 @@ val availableCourseSelections: List<Pair<String, String>> by lazy { packRegistry
  */
 val usableCourseSelections: List<Pair<String, String>> by lazy {
     (embeddedCoursePackSources + v2OnlyCoursePackSources).mapNotNull { source ->
-        val pack = CoursePack(source)
+        val pack: CoursePackFields = if (source.id == "pl-ru") PlRuTypedPack else CoursePack(source)
         pack.takeIf { it.parsesCompletely() }?.let { it.targetLanguage to it.nativeLanguage }
     }
 }
 
-private fun CoursePack.parsesCompletely(): Boolean {
+private fun CoursePackFields.parsesCompletely(): Boolean {
     // NJ03: PlRuTypedPack has all fields typed — skip JSON parsing for pl-ru (P7).
-    if (this is PlRuTypedPack) return true
+    if (this === PlRuTypedPack) return true
+    if (this !is CoursePack) return false
     return runCatching {
     nouns; adjectives; verbs; skills; sentenceSeeds; stemAlternations; caseSentencePrefixes
     exerciseCopy; exercisePatterns; chainPresentation; caseReferenceRows; referenceGenderNames
