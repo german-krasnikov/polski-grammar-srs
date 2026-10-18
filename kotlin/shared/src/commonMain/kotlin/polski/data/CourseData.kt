@@ -689,9 +689,16 @@ val availableCourseSelections: List<Pair<String, String>> by lazy { packRegistry
  * parse (and every value it produces) is unchanged.
  */
 val usableCourseSelections: List<Pair<String, String>> by lazy {
-    (embeddedCoursePackSources + v2OnlyCoursePackSources).mapNotNull { source ->
-        val pack: CoursePackFields = if (source.id == "pl-ru") PlRuTypedPack else CoursePack(source)
-        pack.takeIf { it.parsesCompletely() }?.let { it.targetLanguage to it.nativeLanguage }
+    buildList {
+        // NJ03: pl-ru is always usable via PlRuTypedPack (no JSON probe needed).
+        add(PlRuTypedPack.targetLanguage to PlRuTypedPack.nativeLanguage)
+        // Other packs probe via JSON.
+        (embeddedCoursePackSources + v2OnlyCoursePackSources)
+            .filter { it.id != "pl-ru" }
+            .mapNotNullTo(this) { source ->
+                val pack = CoursePack(source)
+                pack.takeIf { it.parsesCompletely() }?.let { it.targetLanguage to it.nativeLanguage }
+            }
     }
 }
 
