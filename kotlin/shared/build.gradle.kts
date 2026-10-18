@@ -142,6 +142,48 @@ val generateRepresentabilityTestSource by tasks.registering {
     }
 }
 
+val acPositiveCorpus = layout.projectDirectory.file("../../tests/fixtures/textwire/positive.cases")
+val acNegativeCorpus = layout.projectDirectory.file("../../tests/fixtures/textwire/negative.cases")
+val acCorpusSeal = layout.projectDirectory.file("../../tests/fixtures/textwire/corpus.sha256")
+val generatedAcCorpusTestDirectory = layout.buildDirectory.dir("generated/acCorpusTest/kotlin")
+
+// Test-only literal bytes are copied from the independent, sealed A/C corpus. No candidate
+// encoder supplies an expectation, and the generated source never enters an app source set.
+val generateAcCorpusTestSource by tasks.registering {
+    inputs.files(acPositiveCorpus, acNegativeCorpus, acCorpusSeal)
+    outputs.dir(generatedAcCorpusTestDirectory)
+    doLast {
+        val pinned = mapOf(
+            "tests/fixtures/textwire/positive.cases" to
+                "3efd4826a17727b98c81cf31563ece48f9fdf9db33312291b669e4a9e3144075",
+            "tests/fixtures/textwire/negative.cases" to
+                "4beaf078c24a55a1ff3c2dfcbad0e0e419367f4ed8ddcdd13d3dc4031c8ef646",
+        )
+        val sealRows = acCorpusSeal.asFile.readLines()
+        require(sealRows.size == 4 && sealRows.take(2) == pinned.map { (path, hash) -> "$hash  $path" }) {
+            "Frozen A/C corpus seal changed"
+        }
+        for ((path, file) in listOf(
+            "tests/fixtures/textwire/positive.cases" to acPositiveCorpus.asFile,
+            "tests/fixtures/textwire/negative.cases" to acNegativeCorpus.asFile,
+        )) {
+            val actual = MessageDigest.getInstance("SHA-256").digest(file.readBytes())
+                .joinToString("") { (it.toInt() and 0xff).toString(16).padStart(2, '0') }
+            require(actual == pinned.getValue(path)) { "Frozen A/C corpus bytes changed: $path" }
+        }
+        val target = generatedAcCorpusTestDirectory.get()
+            .file("polski/textwire/FrozenAcCorpusSource.kt").asFile
+        target.parentFile.mkdirs()
+        target.writeText(
+            "package polski.textwire\n\n" +
+                "internal val frozenAcPositiveCorpus = " +
+                literalBuildString(literalChunks(acPositiveCorpus.asFile.readText())) + "\n" +
+                "internal val frozenAcNegativeCorpus = " +
+                literalBuildString(literalChunks(acNegativeCorpus.asFile.readText())) + "\n",
+        )
+    }
+}
+
 val generateCoursePackSource by tasks.registering {
     // UniversalCorePlan.md §4.2/§12 UC-02: pack ids are discovered by scanning `courses/*` for a
     // `course.json`, not read from one hardcoded path — adding `courses/<id>/course.json` needs no
@@ -345,6 +387,7 @@ kotlin {
         commonTest {
             kotlin.srcDir(generateLegacyAdmissionTestSource.map { it.outputs.files.singleFile })
             kotlin.srcDir(generateRepresentabilityTestSource.map { it.outputs.files.singleFile })
+            kotlin.srcDir(generateAcCorpusTestSource.map { it.outputs.files.singleFile })
         }
     }
 }

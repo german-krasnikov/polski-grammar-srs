@@ -53,26 +53,33 @@ internal data class RetainedNumber(val token: String) : ProbeValue {
     }
 }
 
-internal enum class ProbeArm(val header: String) {
-    A("POLSKI-TEXT\t1\tprogress\t2"),
-    C("POLSKI-UNITS\t1\tprogress\t2"),
+internal enum class ProbeArm(val magic: String) {
+    A("POLSKI-TEXT"),
+    C("POLSKI-UNITS"),
+}
+internal enum class ProbeFrame(val kind: String, val schema: Int) {
+    Progress("progress", 2),
+    Snapshot("snapshot", 1),
 }
 internal class ProbeWireFault(val code: String) : IllegalArgumentException(code)
 
 /** Mechanical A/C feasibility printer/parser; schema admission and storage are absent. */
 internal object RetainedNumberProbeWire {
-    fun encode(root: ProbeMap, arm: ProbeArm): String {
+    private fun header(arm: ProbeArm, frame: ProbeFrame): String =
+        "${arm.magic}\t1\t${frame.kind}\t${frame.schema}"
+
+    fun encode(root: ProbeMap, arm: ProbeArm, frame: ProbeFrame = ProbeFrame.Progress): String {
         val prefix = buildString {
-            append(arm.header).append('\n')
+            append(header(arm, frame)).append('\n')
             write(root, "-", arm)
         }
         return prefix + "H\tsha256\t" + legacyAdmissionSha256(prefix.encodeToByteArray()) + "\n"
     }
 
-    fun decode(wire: String, arm: ProbeArm): ProbeMap {
+    fun decode(wire: String, arm: ProbeArm, frame: ProbeFrame = ProbeFrame.Progress): ProbeMap {
         if (!wire.endsWith('\n') || '\r' in wire || wire.startsWith('\uFEFF')) fail("Framing")
         val lines = wire.split('\n').dropLast(1)
-        if (lines.size < 3 || lines.first() != arm.header) fail("Header")
+        if (lines.size < 3 || lines.first() != header(arm, frame)) fail("Header")
         val digest = lines.last().split('\t')
         if (digest.size != 3 || digest[0] != "H" || digest[1] != "sha256" ||
             digest[2].length != 64 || digest[2].any { it !in '0'..'9' && it !in 'a'..'f' }
@@ -83,7 +90,7 @@ internal object RetainedNumberProbeWire {
         val root = parser.read(Position.ROOT)
         if (parser.hasMore()) fail("TrailingRow")
         if (root !is ProbeMap) fail("RootMap")
-        if (encode(root, arm) != wire) fail("NonCanonical")
+        if (encode(root, arm, frame) != wire) fail("NonCanonical")
         return root
     }
 
