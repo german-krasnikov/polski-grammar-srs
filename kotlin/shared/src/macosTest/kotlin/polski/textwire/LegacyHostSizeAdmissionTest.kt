@@ -26,6 +26,7 @@ class LegacyHostSizeAdmissionTest {
             assertEquals(10_000_001, raw.encodeToByteArray().size)
             assertEquals("Файл прогресса слишком большой", MacProgressRepository(directory, FsrsScheduler()).importJson(raw))
             assertFalse(NSFileManager.defaultManager.fileExistsAtPath("$directory/progress-v1.json"))
+            assertFalse(NSFileManager.defaultManager.fileExistsAtPath(directory))
         } finally {
             NSFileManager.defaultManager.removeItemAtPath(directory, null)
         }
@@ -39,6 +40,7 @@ class LegacyHostSizeAdmissionTest {
             assertEquals(1_000_001, raw.encodeToByteArray().size)
             assertEquals("Файл настроек слишком большой", MacPreferencesRepository(directory).importJson(raw))
             assertFalse(NSFileManager.defaultManager.fileExistsAtPath("$directory/preferences-v1.json"))
+            assertFalse(NSFileManager.defaultManager.fileExistsAtPath(directory))
         } finally {
             NSFileManager.defaultManager.removeItemAtPath(directory, null)
         }
