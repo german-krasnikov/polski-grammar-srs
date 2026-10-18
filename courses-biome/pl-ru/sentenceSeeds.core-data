@@ -1,0 +1,14 @@
+# pl-course/sentenceSeeds — source SHA-256: 7255e8c686ceee17...
+SURFACE course_sentenceSeeds
+SEED {nounId: "wife" adjectiveId: "beautiful"}
+SEED {nounId: "husband" adjectiveId: "good"}
+SEED {nounId: "friendM" adjectiveId: "good"}
+SEED {nounId: "son" adjectiveId: "small"}
+SEED {nounId: "dog" adjectiveId: "good"}
+SEED {nounId: "cat" adjectiveId: "small"}
+SEED {nounId: "book" adjectiveId: "new"}
+SEED {nounId: "car" adjectiveId: "new"}
+SEED {nounId: "house" adjectiveId: "new"}
+SEED {nounId: "phone" adjectiveId: "new"}
+SEED {nounId: "child" adjectiveId: "small"}
+SEED {nounId: "window" adjectiveId: "new"}

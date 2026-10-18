@@ -2,27 +2,27 @@
 """One-time converter: course JSON → Biome value syntax (.core-data files).
 
 Read-only historical input. Never writes JSON. Produces Biome record/list
-literals under courses-biome/. Run once, then delete this script from
-the recurring build.
+literals under courses-biome/. Run once; result is the new authority.
 
-Usage: python3 convert-course-json.py [--all | --skills-only]
+Usage: python3 convert-course-json.py
 """
 from __future__ import annotations
 import hashlib, json, sys
 from pathlib import Path
+
 sys.path.insert(0, str(Path(__file__).parent))
 from biome_value import parse, emit as bv  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[2]
 
 SOURCES = {
-    "pl-course":    ROOT / "courses/pl-ru/course.json",
-    "pl-pair":      ROOT / "courses/pairs/pl-ru/pair.json",
-    "en-pair":      ROOT / "courses/pairs/en-ru/pair.json",
-    "pl-lexicon":   ROOT / "courses/lang/pl/lexicon.json",
-    "en-lexicon":   ROOT / "courses/lang/en/lexicon.json",
-    "pl-curriculum":ROOT / "courses/lang/pl/curriculum.json",
-    "en-curriculum":ROOT / "courses/lang/en/curriculum.json",
+    "pl-course":     ROOT / "courses/pl-ru/course.json",
+    "pl-pair":       ROOT / "courses/pairs/pl-ru/pair.json",
+    "en-pair":       ROOT / "courses/pairs/en-ru/pair.json",
+    "pl-lexicon":    ROOT / "courses/lang/pl/lexicon.json",
+    "en-lexicon":    ROOT / "courses/lang/en/lexicon.json",
+    "pl-curriculum": ROOT / "courses/lang/pl/curriculum.json",
+    "en-curriculum": ROOT / "courses/lang/en/curriculum.json",
 }
 
 FROZEN_SHA = {
@@ -37,110 +37,92 @@ FROZEN_SHA = {
 
 OUT = ROOT / "courses-biome"
 
-# ---------------------------------------------------------------------------
-# Biome value emitter
-# ---------------------------------------------------------------------------
-
-# ---------------------------------------------------------------------------
-# Verify source hashes before reading
-# ---------------------------------------------------------------------------
 
 def load_verified(key: str) -> dict | list:
     path = SOURCES[key]
     raw = path.read_bytes()
     actual = hashlib.sha256(raw).hexdigest()
-    expected = FROZEN_SHA[key]
-    if actual != expected:
-        print(f"STOP: {key} SHA changed: {actual[:16]}... != {expected[:16]}...", file=sys.stderr)
+    if actual != FROZEN_SHA[key]:
+        print(f"STOP: {key} SHA changed: {actual[:16]}...", file=sys.stderr)
         sys.exit(1)
     return json.loads(raw.decode("utf-8"))
 
-# ---------------------------------------------------------------------------
-# Skills pilot (B2 first slice)
-# ---------------------------------------------------------------------------
 
-def convert_skills(pack_key: str, data: dict, out_dir: Path) -> Path:
-    skills = data["skills"]
+def write_section(pack_key: str, section: str, value: object, tag: str, out_dir: Path) -> Path:
+    """Write one section as one TAG per item (line-oriented for the parser)."""
     out_dir.mkdir(parents=True, exist_ok=True)
+    items = value if isinstance(value, list) else [value]
     lines = [
-        f"# {pack_key} skills — converted from {SOURCES[pack_key].name}",
-        f"# Source SHA-256: {FROZEN_SHA[pack_key]}",
-        f"# {len(skills)} skills. Read-only historical input; this file is the new authority.",
-        "SURFACE courseSkills",
+        f"# {pack_key}/{section} — source SHA-256: {FROZEN_SHA[pack_key][:16]}...",
+        f"SURFACE course_{section}",
+        *[f"{tag} {bv(item, inline=True)}" for item in items],
     ]
-    for skill in skills:
-        # One SKILL per line (parser is line-oriented)
-        lines.append(f"SKILL {bv(skill, inline=True)}")
-    content = "\n".join(lines) + "\n"
-    out_path = out_dir / "skills.core-data"
-    out_path.write_text(content, encoding="utf-8")
+    out_path = out_dir / f"{section}.core-data"
+    out_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
     return out_path
 
-# ---------------------------------------------------------------------------
-# Round-trip verification: parse emitted Biome and compare to original JSON
-# ---------------------------------------------------------------------------
 
-def verify_roundtrip(original: list, core_data_path: Path) -> bool:
-    """Parse SKILL lines back and compare parsed values to original."""
-    # Use existing oracle parser from generate-exercise-oracle-test.py logic
-    sys.path.insert(0, str(ROOT / "scripts/nj03"))
-    from generate_exercise_oracle_test import parse  # noqa: PLC0415
-
-    lines = core_data_path.read_text("utf-8").splitlines()
-    parsed = []
-    for line in lines:
-        if line.startswith("SKILL "):
-            parsed.append(parse(line[6:]))
-
-    if len(parsed) != len(original):
-        print(f"FAIL: count mismatch {len(parsed)} != {len(original)}")
-        return False
-
-    mismatches = 0
-    for i, (p, o) in enumerate(zip(parsed, original)):
-        if p != o:
-            print(f"FAIL: skill[{i}] mismatch")
-            print(f"  original:  {json.dumps(o, ensure_ascii=False)[:120]}")
-            print(f"  roundtrip: {json.dumps(p, ensure_ascii=False)[:120]}")
-            mismatches += 1
-    if mismatches:
+def verify_roundtrip(original: list | dict, out_path: Path, tag: str) -> bool:
+    lines = out_path.read_text("utf-8").splitlines()
+    parsed = [parse(line[len(tag) + 1:]) for line in lines if line.startswith(tag + " ")]
+    original_list = original if isinstance(original, list) else [original]
+    if parsed != original_list:
+        for i, (p, o) in enumerate(zip(parsed, original_list)):
+            if p != o:
+                print(f"  FAIL item[{i}]", file=sys.stderr)
         return False
     return True
 
-# ---------------------------------------------------------------------------
-# main
-# ---------------------------------------------------------------------------
 
-def main() -> None:
-    skills_only = "--all" not in sys.argv
-
-    print("=== B1: verifying frozen source hashes ===")
-    for key in SOURCES:
-        data = load_verified(key)
-        print(f"  OK {key}: SHA {FROZEN_SHA[key][:16]}...")
-
-    print("\n=== B2 pilot: converting skills ===")
-    pl_data = load_verified("pl-course")
-    out_path = convert_skills("pl-course", pl_data, OUT / "pl-ru")
-    print(f"  Written: {out_path.relative_to(ROOT)} ({out_path.stat().st_size} bytes)")
-
-    print("\n=== Round-trip verification ===")
-    lines = out_path.read_text("utf-8").splitlines()
-    parsed = [parse(line[6:]) for line in lines if line.startswith("SKILL ")]
-    original = pl_data["skills"]
-
-    ok = len(parsed) == len(original) and all(p == o for p, o in zip(parsed, original))
-    if ok:
-        print(f"  PASS: {len(parsed)} skills round-trip identical")
-    else:
-        for i, (p, o) in enumerate(zip(parsed, original)):
-            if p != o:
-                print(f"  FAIL skill[{i}] {o['id']}")
-                print(f"    original:  {json.dumps(o, ensure_ascii=False)[:200]}")
-                print(f"    roundtrip: {json.dumps(p, ensure_ascii=False)[:200]}")
+def convert_all(data: dict, pack_key: str, out_dir: Path) -> None:
+    # Sections: (json_key, tag_name)
+    sections = [
+        ("skills",               "SKILL"),
+        ("nouns",                "NOUN"),
+        ("adjectives",           "ADJ"),
+        ("verbs",                "VERB"),
+        ("possessives",          "POSSESSIVE"),
+        ("sentenceSeeds",        "SEED"),
+        ("exerciseCopy",         "COPY"),
+        ("exercisePatterns",     "PATTERN"),
+        ("caseSentencePrefixes", "PREFIX"),
+        ("personalPronouns",     "PRONOUNS"),
+        ("training",             "TRAINING"),
+        ("reference",            "REFERENCE"),
+        ("vocabulary",           "VOCABULARY"),
+        ("morphology",           "MORPHOLOGY"),
+        ("stemAlternations",     "STEM_ALT"),
+    ]
+    failures = 0
+    for section, tag in sections:
+        if section not in data:
+            print(f"  SKIP {section} (not in {pack_key})")
+            continue
+        value = data[section]
+        out_path = write_section(pack_key, section, value, tag, out_dir)
+        if verify_roundtrip(value, out_path, tag):
+            count = len(value) if isinstance(value, list) else 1
+            print(f"  PASS {section}: {count} item(s), {out_path.stat().st_size} bytes")
+        else:
+            print(f"  FAIL {section}")
+            failures += 1
+    if failures:
+        print(f"\nFAIL: {failures} sections failed round-trip", file=sys.stderr)
         sys.exit(1)
 
-    print("\nB2 pilot complete. NOT RUN: full catalog, forms, recipes, en skills.")
+
+def main() -> None:
+    print("=== B1: verifying source hashes ===")
+    data = {}
+    for key in SOURCES:
+        data[key] = load_verified(key)
+        print(f"  OK {key}: {FROZEN_SHA[key][:16]}...")
+
+    print("\n=== B2 full: converting pl-ru/course.json ===")
+    convert_all(data["pl-course"], "pl-course", OUT / "pl-ru")
+
+    print("\nB2 full complete.")
+    print("NOT RUN: pair, lexicon, curriculum, forms, en-pack, Kotlin consumption.")
 
 
 if __name__ == "__main__":

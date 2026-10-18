@@ -33,7 +33,7 @@ def _val(s, i):
         i = _ws(s, i + 1)
         rec = {}
         while s[i] != '}':
-            m = re.match(r'[a-zA-Z_]\w*', s[i:])
+            m = re.match(r'[a-zA-Z_0-9][\w.-]*', s[i:])
             k = m.group()
             i = _ws(s, i + len(k))
             assert s[i] == ':'
