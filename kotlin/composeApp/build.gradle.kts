@@ -108,6 +108,8 @@ kotlin {
             }
         }
         val desktopTest by getting {
+            // Test-only, exact-path sealed legacy input; never included in application resources.
+            resources.srcDir(layout.projectDirectory.dir("../../tests/fixtures/textwire"))
             dependencies {
                 implementation(kotlin("test"))
                 implementation("org.jetbrains.compose.ui:ui-test:1.12.1")
