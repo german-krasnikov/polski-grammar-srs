@@ -1004,5 +1004,4 @@ internal val generatedPlRuFrequency: List<FrequencyItem> = listOf(
     FrequencyItem(998, "stawiać", 128),
     FrequencyItem(999, "walczyć", 128),
     FrequencyItem(1000, "wymienić", 128),
-
 )
