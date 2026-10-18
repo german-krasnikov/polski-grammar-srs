@@ -23,6 +23,7 @@ class TrainingParityTest {
         }
     }
     @Test fun allExerciseCases() {
+        // --- GENERATED START: do not edit, run scripts/nj03/generate-exercise-oracle-test.py ---
         run { // C-01-01
             val factory = factory(listOf(0.11))
             val actual = factory.generateChain(SentenceSeed("wife", "beautiful"))[0]
@@ -583,6 +584,7 @@ class TrainingParityTest {
             val actual = factory.generateForSkill("mixed", SentenceSeed("wife", "beautiful"))
             assertEquals(Exercise("generated", "mixed", "Widzę moją piękną żonę.", "Скажи «ты не видел…» в прошедшем времени. Сохрани «мой / моя».", "Nie widziałeś mojej pięknej żony.", listOf("Nie widziałaś mojej pięknej żony."), "TY + прошедшее время + отрицание. Отрицание требует Dopełniacza всей группы слов.", listOf("mixed", "gen", "past"), "wife", "beautiful", PossessiveId.fromId("my"), NumberGram.fromId("sg"), listOf(FormChange("Widzę", "Nie widziałeś", "Лицо + время + отрицание"), FormChange("moją piękną żonę", "mojej pięknej żony", "Biernik → Dopełniacz"))), actual, "E-mixed-accepted")
         }
+        // --- GENERATED END ---
     }
     @Test fun allEvaluationCases() {
         run { // A-exact
