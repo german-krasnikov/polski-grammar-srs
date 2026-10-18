@@ -102,6 +102,46 @@ fun literalChunks(source: String): List<String> {
 fun literalBuildString(chunks: List<String>): String =
     "buildString {\n" + chunks.joinToString("\n") { "    append(\"$it\")" } + "\n}"
 
+val representabilityInput = layout.projectDirectory.file("../../tests/fixtures/textwire/inputs/legacy-representability-progress.input")
+val representabilityCases = layout.projectDirectory.file("../../tests/fixtures/textwire/legacy-representability.cases")
+val representabilitySeal = layout.projectDirectory.file("../../tests/fixtures/textwire/legacy-representability.sha256")
+val generatedRepresentabilityTestDirectory = layout.buildDirectory.dir("generated/representabilityTest/kotlin")
+
+// Embed only frozen, input-only old-user bytes and independent expectations in commonTest.
+val generateRepresentabilityTestSource by tasks.registering {
+    inputs.files(representabilityInput, representabilityCases, representabilitySeal)
+    outputs.dir(generatedRepresentabilityTestDirectory)
+    doLast {
+        val expectedPaths = listOf(
+            "tests/fixtures/textwire/inputs/legacy-representability-progress.input",
+            "tests/fixtures/textwire/legacy-representability.cases",
+        )
+        val actualFiles = listOf(representabilityInput.asFile, representabilityCases.asFile)
+        val rows = representabilitySeal.asFile.readLines()
+        require(rows.size == expectedPaths.size) { "Representability seal must list exactly two files" }
+        rows.zip(expectedPaths.zip(actualFiles)).forEach { (line, pair) ->
+            val (path, file) = pair
+            val match = Regex("([0-9a-f]{64})  (tests/fixtures/textwire/[a-z/-]+\\.(?:input|cases))")
+                .matchEntire(line) ?: error("Invalid representability seal line")
+            require(match.groupValues[2] == path) { "Representability seal path/order changed" }
+            val actual = MessageDigest.getInstance("SHA-256").digest(file.readBytes())
+                .joinToString("") { (it.toInt() and 0xff).toString(16).padStart(2, '0') }
+            require(actual == match.groupValues[1]) { "Representability fixture changed without reviewed seal: $path" }
+        }
+        val output = generatedRepresentabilityTestDirectory.get()
+            .file("polski/textwire/LegacyRepresentabilityFixture.kt").asFile
+        output.parentFile.mkdirs()
+        output.writeText(
+            "package polski.textwire\n\n" +
+                "internal val legacyRepresentabilityInput = " +
+                literalBuildString(literalChunks(representabilityInput.asFile.readText())) + "\n" +
+                "internal val legacyRepresentabilityCases = " +
+                literalBuildString(literalChunks(representabilityCases.asFile.readText())) + "\n" +
+                "internal const val legacyRepresentabilityInputSha256 = \"${rows[0].substringBefore("  ")}\"\n",
+        )
+    }
+}
+
 val generateCoursePackSource by tasks.registering {
     // UniversalCorePlan.md §4.2/§12 UC-02: pack ids are discovered by scanning `courses/*` for a
     // `course.json`, not read from one hardcoded path — adding `courses/<id>/course.json` needs no
@@ -304,6 +344,7 @@ kotlin {
         }
         commonTest {
             kotlin.srcDir(generateLegacyAdmissionTestSource.map { it.outputs.files.singleFile })
+            kotlin.srcDir(generateRepresentabilityTestSource.map { it.outputs.files.singleFile })
         }
     }
 }
