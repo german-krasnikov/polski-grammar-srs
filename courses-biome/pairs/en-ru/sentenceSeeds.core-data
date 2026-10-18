@@ -1,0 +1,14 @@
+# en-pair/sentenceSeeds — SHA: 55f79438cf1511b1...
+SURFACE en_pair_sentenceSeeds
+SENTENCE {nounId: "wife" adjectiveId: "beautiful"}
+SENTENCE {nounId: "husband" adjectiveId: "good"}
+SENTENCE {nounId: "friend" adjectiveId: "good"}
+SENTENCE {nounId: "son" adjectiveId: "small"}
+SENTENCE {nounId: "dog" adjectiveId: "good"}
+SENTENCE {nounId: "cat" adjectiveId: "small"}
+SENTENCE {nounId: "book" adjectiveId: "new"}
+SENTENCE {nounId: "car" adjectiveId: "new"}
+SENTENCE {nounId: "house" adjectiveId: "new"}
+SENTENCE {nounId: "phone" adjectiveId: "new"}
+SENTENCE {nounId: "child" adjectiveId: "small"}
+SENTENCE {nounId: "window" adjectiveId: "new"}

@@ -1,0 +1,3 @@
+# en-pair/training — SHA: 55f79438cf1511b1...
+SURFACE en_pair_training
+TRAINING {chainPresentation: {steps: [{id: "obj" label: "Вижу"} {id: "past" label: "Прошлое"} {id: "neg" label: "Отрицание"} {id: "owner" label: "Владелец"} {id: "loc" label: "Место"}] completion: {title: "Цепочка завершена" reactEyebrow: "5 преобразований" reactBody: "Ты изменил время, отрицание, владельца и роль дополнения, сохранив одну мысль. Оценки сохранены в расписании повторений." webBody: "Пять преобразований завершены. Оценки сохранены в расписании повторений."}}}

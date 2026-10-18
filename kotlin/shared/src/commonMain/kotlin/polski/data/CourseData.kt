@@ -737,7 +737,10 @@ fun selectCoursePack(pairId: String) {
 // selectCoursePack (host picker, this task) actually changes what these return; see Skills.kt's
 // `skills` KDoc for the same fix's original writeup. `caseSentencePrefix`/`exerciseCopy` above were
 // already plain `fun`s reading `packRegistry.active` fresh, so they needed no change.
-val courseSentenceSeeds: List<SentenceSeed> get() = packRegistry.active.sentenceSeeds
+// NJ03 B9: pl-ru reads from typed Biome literal source; other packs use JSON path.
+val courseSentenceSeeds: List<SentenceSeed> get() =
+    if (packRegistry.active.id == "pl-ru") generatedPlRuSentenceSeeds
+    else packRegistry.active.sentenceSeeds
 val courseStemAlternations: List<StemAlternation> get() = packRegistry.active.stemAlternations
 
 fun caseSentencePrefix(gramCase: GramCase, number: NumberGram): String {
