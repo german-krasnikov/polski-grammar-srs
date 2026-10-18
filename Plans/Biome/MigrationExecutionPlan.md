@@ -1,109 +1,98 @@
 # Polski → Biome DSL: план исполнения миграции
 
-Статус: **план, NOT RUN**. Основание: `AI/ProjectMigratioPrincipals.md`, `NJ03PragmaticCourseCutoverDecision.md`, `KotlinOnlyCutoverAmendment.md`, `NoJsonFullPortPlan.md`. Ветка: `experiment/nj03-exercise-oracle` @ `d96bf34`.
+Статус: **A завершён; B1–B2 пилот завершён; B продолжается**. Основание: `AI/ProjectMigratioPrincipals.md`, `NJ03PragmaticCourseCutoverDecision.md`, `KotlinOnlyCutoverAmendment.md`, `NoJsonFullPortPlan.md`. Ветка: `experiment/nj03-exercise-oracle`.
 
 ## Текущий статус
 
-| Срез | Статус | SHA |
-|---|---|---|
-| S1 whitespace/BOM, vocabulary trim | **DONE** main | `3ae9df8` |
-| S2 shared swipe decision | **DONE** main | `db0728e` |
-| COMMAND/WIRE | **STOP** main | `ae614a0` |
-| Exercise oracle: 112 cases `.core-data` | Транскрибировано, генератор 65 строк, diff=0 | `d96bf34` |
-| CourseValue pilot: RED→GREEN `case.acc.f` | Pilot passed | `9bc0356` |
-| biome-dsl gate:all на `7ba4a05a` | Запущен, сборка/typecheck прошли | open |
+| Срез | Статус | SHA | Доказательство |
+|---|---|---|---|
+| S1 whitespace/BOM, vocabulary trim | **DONE** main | `3ae9df8` | desktopTest 29/29 |
+| S2 shared swipe decision | **DONE** main | `db0728e` | desktopTest + framework build |
+| COMMAND/WIRE | **STOP** main | `ae614a0` | measured NO-GO |
+| A1–A6: exercise oracle 112 cases | **DONE** | `6e3c6ab` | desktopTest 5/5, RED/GREEN |
+| B1: freeze 7 JSON SHA-256 | **DONE** | `f80c5cc` | hashes verified |
+| B2 пилот: 16 pl skills round-trip | **DONE** | `f80c5cc` | 16/16 identical |
+| biome.project + derive --check (P16) | **DONE** | uncommitted | `biome generate --check` PASS |
+| biome-dsl gate:all `7ba4a05a` | open | — | build/typecheck PASS; full open |
 
-## Три блока миграции
+## Слой каждого правила (ARCHITECTURE §3)
 
-### Блок A: Exercise oracle (текущий)
+| Намерение | Слой | Инструмент | Статус |
+|---|---|---|---|
+| Exercise ожидания (112 cases) | `.sources` / oracle | `biome.project` derive → Python → Kotlin `@Test` | **DONE** |
+| SwipeDecision (порог, ratio, направление) | Logic DECISION | `.logic` → `biome logic generate --target kt` | NOT RUN; сейчас нативный Kotlin (STOP P8) |
+| Course skills/curriculum (16+16) | Данные, Core reader | Biome record/list literals + typed reader | B2 пилот: pl-ru 16 DONE |
+| Course forms, recipes, pairs | Данные | Одноразовый конвертер → Biome literals | NOT RUN |
+| User data codec | Нативный | Kotlin text codec за контрактом | NOT RUN (Блок C) |
+| Freshness check генератов | `biome.project` derive | `GENERATE derive --check` | **DONE** |
 
-**Цель**: 112 exercise-ожиданий управляются из `.core-data`, генерируются в Kotlin, проходят `desktopTest`.
+## Блок A: Exercise oracle ✅
 
-| Шаг | Действие | Вход | Выход | Проверка |
+Все шаги A1–A6 завершены. Коммит `6e3c6ab`.
+
+```
+requirements.core-data (112 CASE, 116 строк)
+    ↓  biome.project → derive-oracle.mjs → generate-exercise-oracle-test.py (65 строк)
+TrainingParityTest.kt::allExerciseCases() (560 строк, между маркерами)
+    ↓  ./gradlew :shared:desktopTest
+    5/5 PASS
+```
+
+**NOT RUN**: JS/Wasm, iOS, macOS, Android, English exercises oracle.
+
+## Блок B: Course catalog
+
+**Принципы (из аудита Biome capabilities):**
+- Данные курса → Biome record/list literals, читает Core typed reader — не кастомный парсер
+- Каждый генерат → `biome.project` с `GENERATE derive --check` (P16)
+- Классификационные правила → `.logic` DECISION (будущие навыки)
+- `.tables` — hard NO-GO (всегда эмитирует JSON)
+
+| Шаг | Действие | Инструмент | Проверка | Статус |
 |---|---|---|---|---|
-| A1 | Подключить генератор к файлу | `requirements.core-data` (112 CASE) | Тело `allExerciseCases()` в stdout | `diff` с существующим = 0 ✅ |
-| A2 | Скрипт сборки: `python3 generate-exercise-oracle-test.py > body`, вставка в `TrainingParityTest.kt` между маркерами | Маркеры `// --- GENERATED START ---` / `// --- GENERATED END ---` в `.kt` | Полный `.kt` с ручными тестами + сгенерированным телом | `diff` полного файла |
-| A3 | Gradle `desktopTest --tests "*.TrainingParityTest"` | Сгенерированный `.kt` | 5 @Test, 0 failures | PASS/FAIL |
-| A4 | Мутация: изменить одно ожидание в `.core-data`, регенерировать, запустить | Мутированный oracle | RED: один assertion fail | Видимый RED |
-| A5 | Восстановить oracle, регенерировать, запустить | Оригинал | GREEN | PASS |
-| A6 | Коммит + SHA oracle hash в `.kt` header | — | Один коммит | — |
+| B1 | Freeze SHA-256 для 7 JSON | Python script | SHA verified | **DONE** |
+| B2 пилот | pl-ru 16 skills → Biome literals | `convert-course-json.py` | 16/16 round-trip | **DONE** |
+| B2 full | Все секции course.json → Biome literals | Расширить конвертер | Round-trip каждой секции | TODO |
+| B3 | `CourseValue` Kotlin IR | NEW `CourseValue.kt` | Компиляция | TODO |
+| B4 | Kotlin printer: Biome IR → `CourseValue` конструкторы | `biome.project` derive → JS/Python printer | `biome generate --check` | TODO |
+| B5 | Заменить `CourseData.kt` JsonObject → `CourseValue` | Kotlin edit | `desktopTest` GREEN | TODO |
+| B6 | Заменить `CoursePackLoader.fromV2Layers` | Kotlin edit | `desktopTest` GREEN | TODO |
+| B7 | Один Gradle task вместо двух JSON embedders | `build.gradle.kts` | `desktopTest` GREEN | TODO |
+| B8 | Удалить 11 JSON, старые Node скрипты | Удаление | no-JSON scan clean | TODO |
+| B9 | RecipeLoader, EnLexicon, Curriculum, Lifehack, StyleRecipe | Kotlin edit | `desktopTest` GREEN | TODO |
+| B10 | English exercise oracle: 16 skills + chain | NEW `.core-data` | `desktopTest` GREEN | TODO |
+| B11 | Pair-lifetime scenario | NEW test | Frozen outputs match | TODO |
 
-**NOT RUN после A**: JS/Wasm, iOS, macOS, Android, browser, English exercises.
+**Следующий: B2 full** — конвертация оставшихся секций `course.json`.
 
-### Блок B: Course catalog (один bundle)
+## Блок C: User data
 
-**Цель**: курсовые JSON (course.json 145K + pairs + lexicon + curriculum + forms + recipes + styles + lifehacks) → один типизированный Biome source → один Kotlin printer → один Gradle task. По `NJ03PragmaticCourseCutoverDecision.md`.
+**Зависимость**: Блок B завершён, wire protocol выбран.
 
-**Зависимость**: biome-dsl gate:all PASS на `7ba4a05a`.
+| Шаг | Действие | Статус |
+|---|---|---|
+| C1 | Wire protocol selection (TextWireDesign.md A/B/C) | NOT RUN |
+| C2 | Text codec: Progress, Vocabulary, Preferences | NOT RUN |
+| C3 | Legacy JSON reader (read-only) | NOT RUN |
+| C4 | Migration path + receipt + cleanup | NOT RUN |
+| C5 | Host tests: browser, Android, Desktop, iOS, macOS | NOT RUN |
+| C6 | Delete old JSON writers | NOT RUN |
 
-| Шаг | Действие | Файлы | Проверка |
-|---|---|---|---|
-| B1 | Заморозить хеши всех 11 курсовых JSON | `courses/**/*.json` | SHA-256 записаны |
-| B2 | Одноразовый конвертер: JSON → Biome record/list syntax по файлам/пакам | 11 JSON → `.core-data` файлы | Побайтовое сравнение parsed values |
-| B3 | `CourseValue` Kotlin IR: `Record/List/Text/Number/Boolean/Null` | NEW `CourseValue.kt` ~50 строк | Компиляция |
-| B4 | Kotlin printer: Biome IR → `CourseValue` конструкторы | NEW `CourseValuePrinter.py` в biome-dsl или проектный скрипт | Генерирует `.kt`, `diff` parsed values = 0 |
-| B5 | Заменить `CourseData.kt` JsonObject helpers → `CourseValue` access | 944 строк → ~same с `CourseValue` | `desktopTest` GREEN |
-| B6 | Заменить `CoursePackLoader.fromV2Layers` → generated bundle read | 28 строк loader | `desktopTest` GREEN |
-| B7 | Заменить `generateCoursePackSource` + `generateFormsFixtureSource` в Gradle → один typed task | `build.gradle.kts` lines 48–228 | `./gradlew :shared:desktopTest` GREEN |
-| B8 | Удалить 11 активных JSON, старые `build-pack*.mjs`, `migrate-v1-to-v2.mjs` | Удаление | no-JSON scan clean |
-| B9 | RecipeLoader (166), EnLexicon (65), Curriculum (54), Lifehack (130), StyleRecipe (123) → generated bundle | 538 строк суммарно | `desktopTest` GREEN, consumers compile |
-| B10 | English exercise oracle: 16 skills + 5-step chain с полными ожиданиями | NEW `.core-data` | `desktopTest` GREEN |
-| B11 | Pair-lifetime: старый generator после `pl-ru→en-ru` + свежий en generator | NEW test | Frozen outputs match |
+## Использование Biome DSL (аудит по ARCHITECTURE §3)
 
-**Порядок**: B1→B2→B3→B4→B5–B6 (вместе)→B7→B8→B9. B10–B11 параллельно с B5+.
+| Возможность | Используем | Почему не иначе |
+|---|---|---|
+| `biome logic generate --target kt` | НЕТ (SwipeDecision нативный) | STOP по P8; при следующем похожем правиле — `.logic` |
+| `biome test generate --lang kt` | НЕТ | Нет шва `Host.open()` к `PlExerciseEngine` — честный NOT RUN |
+| `biome.project` + `GENERATE derive --check` | **ДА** (exercise oracle) | P16 freshness — единственный правильный путь |
+| Core record/list literals + typed reader | **ДА** (course data) | Biome native syntax, не кастомный парсер |
+| `.contract` с FACT | НЕТ | Нет DECISION/FEATURE consumer для exercise типов |
+| `.examples` / `.sources` формат | NOT RUN | Следующий срез при English oracle |
 
-**STOP**: второй активный authority, JSON в строке/ячейке, ручная правка генерата, P23 нелинейность.
+## Правила исполнения
 
-### Блок C: User data (progress, vocabulary, preferences)
-
-**Цель**: ProgressCodec (185), VocabularyDocument (263), UserPreferencesCodec (162) — переход с JSON wire на текстовый формат. Legacy JSON → read-only migration path.
-
-**Зависимость**: Блок B завершён (course path чист от JSON), wire protocol выбран (`TextWireDesign.md`).
-
-| Шаг | Действие | Файлы | Проверка |
-|---|---|---|---|
-| C1 | Wire protocol selection: POLSKI-TEXT vs alternatives | `TextWireDesign.md` corpus | Measured A/B/C |
-| C2 | Text codec: encode/decode для Progress, Vocabulary, Preferences | 3 Kotlin codecs | Round-trip + edge cases |
-| C3 | Legacy JSON reader (read-only) | Existing codecs, restricted | Never writes JSON |
-| C4 | Migration path: old JSON → text + receipt + cleanup | Transaction test | Power-fail, retry, old-tab safe |
-| C5 | Host tests: browser, Android, Desktop, iOS, macOS | Per-host | Storage + recovery per host |
-| C6 | Delete old JSON writers, backup paths | — | no-JSON scan final |
-
-## Чего нет в плане (NOT IN SCOPE)
-
-- UI/UX перенос (уже Kotlin Compose + SwiftUI)
-- FSRS алгоритм (нативный, P4 — механический)
-- EndingHighlight (display-only, ADR осознанное расхождение)
-- Unity/CosMiner (OWNER-DEFERRED)
-- Публикация, push, CI (отдельное полномочие владельца)
-
-## Инвентарь затронутых файлов
-
-| Группа | Файлы | Строк | Блок |
-|---|---|---|---|
-| Course JSON (авторские) | 11 файлов | ~1.1M bytes | B |
-| Course Kotlin consumers | CourseData, CoursePackLoader, RecipeLoader, EnLexicon, Curriculum, Lifehack, StyleRecipe | 1510 | B |
-| Course Gradle embedders | build.gradle.kts lines 23–228 | ~200 | B |
-| Course Node scripts | 11 `.mjs` файлов | ~2500 | B (retire) |
-| Exercise oracle | TrainingParityTest.kt | 634 | A |
-| User data codecs | ProgressCodec, VocabularyDocument, UserPreferencesCodec | 610 | C |
-| TS tests (historical) | 20 files | — | Retire after Kotlin proof |
-
-## Правила исполнения (из ProjectMigratioPrincipals.md)
-
-1. **Обнаружение прогресса** — первый шаг, не перечитывать всё
-2. **Генератор = команда** — вызывать, не копировать вывод
-3. **diff, не перечитывать** — сравнение через `diff`/hash
-4. **Отчёт = таблица** — что сделано, что NOT RUN, числа
-5. **P7** — один факт = один источник, не дублировать hardcoded
-6. **P11** — никакого JSON в авторских/генерированных/runtime форматах
-7. **P15** — ожидания независимы от backend
-8. **P16** — генерат не правится руками
-9. **P17** — PASS = фактическое исполнение, не компиляция
-10. **RED→GREEN** — сначала поведенческий RED, затем GREEN
-
-## Ближайшие действия
-
-1. Завершить **A2–A6** (exercise oracle подключен к Gradle)
-2. Дождаться **biome-dsl gate:all** PASS на `7ba4a05a`
-3. Начать **B1–B2** (freeze + transcribe course JSON)
+1. Намерение → таблица слоёв (ARCHITECTURE §3) → ближайший corpus пример
+2. Любой генерат → `biome.project` с `GENERATE derive --check` (P16)
+3. Генератор печатает только переменную часть (P1/P6)
+4. diff, не перечитывать (экономия контекста)
+5. Отчёт = таблица с числами и NOT RUN
