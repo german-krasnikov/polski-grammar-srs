@@ -1,11 +1,5 @@
 package polski.presentation
 
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.JsonNull
-import kotlinx.serialization.json.JsonObject
-import kotlinx.serialization.json.jsonArray
-import kotlinx.serialization.json.jsonObject
-import kotlinx.serialization.json.jsonPrimitive
 import polski.data.generatedLifehacksJsonByPairId
 import polski.data.packRegistry
 import polski.data.skills
@@ -95,35 +89,3 @@ object StaticPackLifehackProvider : LifehackProvider {
     }
 }
 
-private val sourceKindByWireName: Map<String, LifehackSourceKind> =
-    mapOf("research" to LifehackSourceKind.Research, "teaching-practice" to LifehackSourceKind.TeachingPractice,
-        "project-authored" to LifehackSourceKind.ProjectAuthored)
-
-private val statusByWireName: Map<String, LifehackStatus> =
-    mapOf("editorial" to LifehackStatus.Editorial, "community" to LifehackStatus.Community)
-
-/** Parses one `lifehacks-v1.schema.json` document. Never throws on an empty `lifehacks` array;
- *  a malformed entry (unknown `source.kind`/`status`) throws via [Map.getValue] rather than
- *  silently dropping it — unlike [BlockKind]'s open-catalog tolerance, this schema's enums are
- *  closed and validated at authoring time by `scripts/validate-pack-v2.mjs`. */
-internal fun parseLifehacksJson(json: String): List<Lifehack> =
-    Json.parseToJsonElement(json).jsonObject.getValue("lifehacks").jsonArray.map { element ->
-        val value = element.jsonObject
-        val source = value.getValue("source").jsonObject
-        Lifehack(
-            id = value.getValue("id").jsonPrimitive.content,
-            skillId = value.optionalString("skillId"),
-            topic = value.optionalString("topic"),
-            text = value.getValue("text").jsonPrimitive.content,
-            source = LifehackSource(
-                kind = sourceKindByWireName.getValue(source.getValue("kind").jsonPrimitive.content),
-                citation = source.getValue("citation").jsonPrimitive.content,
-                url = source["url"]?.jsonPrimitive?.content,
-            ),
-            status = statusByWireName.getValue(value.getValue("status").jsonPrimitive.content),
-        )
-    }
-
-/** `null` for a JSON `null` or a missing key — [JsonObject.get] already gives `null` for missing;
- *  a schema-valid `"skillId": null` is [JsonNull], not absent, and needs the same result. */
-private fun JsonObject.optionalString(key: String): String? = this[key]?.takeUnless { it is JsonNull }?.jsonPrimitive?.content
