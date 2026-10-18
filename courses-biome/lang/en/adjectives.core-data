@@ -1,9 +1,0 @@
-# en-lexicon/adjectives — SHA: f96da7fc14e569d2...
-SURFACE en_lexicon_adjectives
-ADJECTIV {id: "beautiful" lemma: "beautiful" meaning: "красивый" forms: {invariant: "beautiful"}}
-ADJECTIV {id: "new" lemma: "new" meaning: "новый" forms: {invariant: "new"}}
-ADJECTIV {id: "small" lemma: "small" meaning: "маленький" forms: {invariant: "small"}}
-ADJECTIV {id: "nice" lemma: "nice" meaning: "приятный" forms: {invariant: "nice"}}
-ADJECTIV {id: "good" lemma: "good" meaning: "хороший" forms: {invariant: "good"}}
-ADJECTIV {id: "old" lemma: "old" meaning: "старый" forms: {invariant: "old"}}
-ADJECTIV {id: "expensive" lemma: "expensive" meaning: "дорогой" forms: {invariant: "expensive"}}

@@ -1,3 +1,0 @@
-# pl-pair/training — SHA: dadb5eabaa02fa7d...
-SURFACE pl_pair_training
-TRAINING {chainPresentation: {steps: [{id: "acc" label: "Вижу"} {id: "past" label: "Прошлое"} {id: "neg" label: "Отрицание"} {id: "owner" label: "Владелец"} {id: "loc" label: "Говорю о"}] completion: {title: "Цепочка завершена" reactEyebrow: "5 преобразований" reactBody: "Ты изменил время, отрицание, владельца и падеж, сохранив одну мысль. Оценки сохранены в расписании повторений." webBody: "Пять преобразований завершены. Оценки сохранены в расписании повторений."}}}

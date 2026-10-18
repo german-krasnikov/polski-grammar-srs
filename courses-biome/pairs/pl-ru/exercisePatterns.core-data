@@ -1,3 +1,0 @@
-# pl-pair/exercisePatterns — SHA: dadb5eabaa02fa7d...
-SURFACE pl_pair_exercisePatterns
-EXERCISE {seenAcc: "Widzę {acc}." seenGenNeg: "Nie widzę {gen}." caseDrill: "{start} {target}." verbSentence: "{nom} {verb} do domu." verbFutureAccepted: "{nom} będzie {past} do domu." questionSource: "Widzisz {acc}." questionExpected: "Czy widzisz {acc}?" mixedMale: "Nie widziałeś {gen}." mixedFemale: "Nie widziałaś {gen}." chainPast: "Widziałem {acc}." chainNeg: "Nie widziałem {gen}." chainOwner: "Nie widziałem {theirGen}." chainLoc: "Mówię o {theirLoc}."}

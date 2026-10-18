@@ -1,3 +1,0 @@
-# pl-lexicon/morphology — SHA: f7e7e83a4c95f711...
-SURFACE pl_lexicon_morphology
-MORPHOLO {futureAuxiliary: {verbId: "be" forms: {sg: {1: "będę" 2: "będziesz" 3: "będzie"} pl: {1: "będziemy" 2: "będziecie" 3: "będą"}}}}

@@ -1,3 +1,0 @@
-# en-pair/exercisePatterns — SHA: 55f79438cf1511b1...
-SURFACE en_pair_exercisePatterns
-EXERCISE {seenObj: "I see {obj}." verbSentence: "{subj} {verb}." subjectVerb: "I {verb}." roleDrill: "{start} {target}." chainPast: "I saw {obj}." chainNeg: "I did not see {obj}."}

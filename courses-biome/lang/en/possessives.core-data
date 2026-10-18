@@ -1,9 +1,0 @@
-# en-lexicon/possessives — SHA: f96da7fc14e569d2...
-SURFACE en_lexicon_possessives
-POSSESSI {id: "my" label: "my — мой" forms: {kind: "invariant" value: "my"}}
-POSSESSI {id: "your" label: "your — твой/ваш" forms: {kind: "invariant" value: "your"}}
-POSSESSI {id: "his" label: "his — его" forms: {kind: "invariant" value: "his"}}
-POSSESSI {id: "her" label: "her — её" forms: {kind: "invariant" value: "her"}}
-POSSESSI {id: "its" label: "its — его/её (о предмете)" forms: {kind: "invariant" value: "its"}}
-POSSESSI {id: "our" label: "our — наш" forms: {kind: "invariant" value: "our"}}
-POSSESSI {id: "their" label: "their — их" forms: {kind: "invariant" value: "their"}}

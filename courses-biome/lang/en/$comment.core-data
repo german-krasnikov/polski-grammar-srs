@@ -1,3 +1,0 @@
-# en-lexicon/$comment — SHA: f96da7fc14e569d2...
-SURFACE en_lexicon_$comment
-$COMMENT "Plans/Kotlin/EnRuPackPlan.md §1.3: en's lexicon. nouns/adjectives/possessives use the same `forms` wrapper as lang/pl/lexicon.json; verbs stay flat (present3sg/past/pastParticiple/ing as top-level fields) to mirror pl's own flat verb shape (present/pastStem directly on the object, no wrapper) — see morphology-notes.md for why en needs only these fields (no gender, no case declension) and for the deliberate exceptions (be's extra presentSg1/presentPl/pastPl fields; will's single invariant form)."
