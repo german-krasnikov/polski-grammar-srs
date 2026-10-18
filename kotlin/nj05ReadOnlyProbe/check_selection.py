@@ -14,7 +14,7 @@ EXPECTED_CLASSES = {
     "LegacyRepresentabilityProbeTest": 1,
     "RetainedNumberPrototypeTest": 4,
     "RetainedNumberIndependentMutationTest": 1,
-    "FrozenAcCorpusProbeTest": 3,
+    "FrozenAcCorpusProbeTest": 8,
 }
 FORBIDDEN_CALL = re.compile(
     r"\b(?:encodeLegacyV1|importJson|exportJson|saveRaw|migrateLegacy|backupJson)\s*\("
@@ -84,7 +84,7 @@ for fragment in (
 ):
     if fragment not in build:
         raise AssertionError(f"Missing isolated Gradle edge: {fragment}")
-print("PASS exact selected scope: 4 read-only classes, 9 tests, 2 helpers, 3 pinned generated fixtures")
+print("PASS exact selected scope: 4 read-only classes, 14 tests, 2 helpers, 3 pinned generated fixtures")
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--generated-root", type=Path, help="existing shared/build/generated tree to audit read-only")
@@ -110,13 +110,30 @@ bad_class = rows + [[
     "4",
     "0" * 64,
 ]]
+frozen_source = SOURCE_DIR / "FrozenAcCorpusProbeTest.kt"
+
+
+def mutate_frozen(path: Path, before: bytes, after: bytes) -> bytes:
+    data = Path.read_bytes(path)
+    if path != frozen_source:
+        return data
+    if before not in data:
+        raise AssertionError(f"Expected mutation anchor missing: {before!r}")
+    return data.replace(before, after, 1)
+
+
 for label, candidate, reader, expected_error in (
     ("extra class", bad_class, Path.read_bytes, "Selection must contain six"),
     ("fully qualified extra @Test", rows,
-     lambda path: Path.read_bytes(path) + b"\n@kotlin.test.Test fun addedUnreviewedTest() {}\n",
+     lambda path: mutate_frozen(path, b"class FrozenAcCorpusProbeTest {",
+                                b"class FrozenAcCorpusProbeTest {\n    @kotlin.test.Test fun addedUnreviewedTest() {}"),
      "Reviewed NJ05 source identity drift"),
     ("callable old-writer reference", rows,
-     lambda path: Path.read_bytes(path) + b"\nval writer = ProgressCodec::encodeLegacyV1; writer(document)\n",
+     lambda path: mutate_frozen(path, b"class FrozenAcCorpusProbeTest {",
+                                b"class FrozenAcCorpusProbeTest {\n    val writer = ProgressCodec::encodeLegacyV1; writer(document)"),
+     "Reviewed NJ05 source identity drift"),
+    ("swapped P06 case identity", rows,
+     lambda path: mutate_frozen(path, b'compareCase("P06")', b'compareCase("P05")'),
      "Reviewed NJ05 source identity drift"),
 ):
     try:

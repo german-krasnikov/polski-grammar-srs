@@ -14,7 +14,7 @@ val expectedTests = mapOf(
     "LegacyRepresentabilityProbeTest" to 1,
     "RetainedNumberPrototypeTest" to 4,
     "RetainedNumberIndependentMutationTest" to 1,
-    "FrozenAcCorpusProbeTest" to 3,
+    "FrozenAcCorpusProbeTest" to 8,
 )
 data class SelectedSource(
     val path: String,
@@ -163,7 +163,7 @@ val verifyNj05ReadOnlySelection by tasks.registering {
             val bytes = output.resolve("polski/textwire/$name").readBytes()
             require(sha256(bytes) == expectedHash) { "Reviewed NJ05 generated test source changed: $name" }
         }
-        println("NJ05 source selection: 4 read-only classes / 9 tests / 2 helpers / 3 sealed fixtures")
+        println("NJ05 source selection: 4 read-only classes / 14 tests / 2 helpers / 3 sealed fixtures")
     }
 }
 

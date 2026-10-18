@@ -63,7 +63,22 @@ class FrozenAcCorpusProbeTest {
     )
 
     @Test
-    fun p01ToP06MatchFrozenAAndCBytesAndOrderedTrees() = compare(examples.take(6))
+    fun p01MatchesFrozenAAndCBytesAndOrderedTree() = compareCase("P01")
+
+    @Test
+    fun p02MatchesFrozenAAndCBytesAndOrderedTree() = compareCase("P02")
+
+    @Test
+    fun p03MatchesFrozenAAndCBytesAndOrderedTree() = compareCase("P03")
+
+    @Test
+    fun p04MatchesFrozenAAndCBytesAndOrderedTree() = compareCase("P04")
+
+    @Test
+    fun p05MatchesFrozenAAndCBytesAndOrderedTree() = compareCase("P05")
+
+    @Test
+    fun p06MatchesFrozenAAndCBytesAndOrderedTree() = compareCase("P06")
 
     @Test
     fun p07ToP12MatchFrozenAAndCBytesAndOrderedTrees() = compare(examples.drop(6))
@@ -77,6 +92,8 @@ class FrozenAcCorpusProbeTest {
             }.code, "N16 $arm")
         }
     }
+
+    private fun compareCase(id: String) = compare(listOf(examples.single { it.id == id }))
 
     private fun compare(selected: List<Example>) {
         assertEquals(12, examples.map { it.id }.toSet().size)
