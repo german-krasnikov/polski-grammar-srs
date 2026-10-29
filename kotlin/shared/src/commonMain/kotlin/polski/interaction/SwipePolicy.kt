@@ -1,6 +1,7 @@
-// Generated from swipe.logic; source-sha256=4944f9411f45dd1f2c6bbc49b7009b06d7fef2bfd292268e5cfe1aa9479a845f
-// contract-sha256=11fb3b7da4d623e677053e38e260d0c1847f6b5679ec9c10edc03e362ba251e8
-// Generated: source=4944f9411f45dd1f2c6bbc49b7009b06d7fef2bfd292268e5cfe1aa9479a845f; contract=11fb3b7da4d623e677053e38e260d0c1847f6b5679ec9c10edc03e362ba251e8
+// Generated from swipe.logic
+// source-sha256=4944f9411f45dd1f2c6bbc49b7009b06d7fef2bfd292268e5cfe1aa9479a845f
+// Edit the source, then run biome generate.
+
 package polski.interaction
 
 object Policy {
