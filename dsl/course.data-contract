@@ -580,6 +580,84 @@ RECORD ReasonRuleRow
   key: ref CopyEntryRow
 END
 
+# The recipes of a pack (R1.11b): for each skill how its exercise is built (a constructed one, or a static one that is fully authored), the five steps of the
+# chain, and the pack's defaults. A constructed recipe writes source, expected, explanationKey, changes and tags, and a prompt (a key, or an owner draw);
+# a static one writes only staticOverride: the contract has no union, so PlRuRecipeRows.kt refuses any other combination. A recipe is one row of the skill
+# it names (the mapper refuses a second one for the same skill). The owners are possessive ids; the ids of the noun and the adjective of a static exercise are
+# texts, because the other pack has its own noun and adjective records. The chain's first step has no skill: it is the first skill of the noun's gender.
+RECORD SkillRecipeRow COUNT 1..
+  skill: ref SkillRow
+  source: TextSpecRow OPTIONAL
+  expected: TextSpecRow OPTIONAL
+  promptKey: ref CopyEntryRow OPTIONAL
+  explanationKey: ref CopyEntryRow OPTIONAL
+  changes: [ChangeSpecRow] OPTIONAL
+  accepted: [TextSpecRow] OPTIONAL
+  tags: [string] OPTIONAL
+  includeNounGenderTag: bool OPTIONAL
+  ownerDraw: OwnerDrawRow OPTIONAL
+  numberOverride: string OPTIONAL
+  staticOverride: StaticExerciseRow OPTIONAL
+END
+
+# The second draw of a skill: one owner out of these, with the copy entry that names it in the prompt (the prompt is prefix, name, suffix).
+RECORD OwnerDrawRow
+  owners: [OwnerChoiceRow]
+  promptPrefixKey: ref CopyEntryRow
+  promptSuffixKey: ref CopyEntryRow
+END
+
+RECORD OwnerChoiceRow
+  lexeme: ref PossessiveRow
+  labelKey: ref CopyEntryRow
+END
+
+RECORD StaticExerciseRow
+  sourceKey: ref CopyEntryRow
+  promptKey: ref CopyEntryRow
+  expectedKey: ref CopyEntryRow
+  explanationKey: ref CopyEntryRow
+  acceptedKeys: [ref CopyEntryRow]
+  changeFromKey: ref CopyEntryRow
+  changeToKey: ref CopyEntryRow
+  changeReasonKey: ref CopyEntryRow
+  nounId: string
+  adjectiveId: string
+  tags: [string]
+END
+
+RECORD ChainStepRecipeRow COUNT 1..
+  skill: ref SkillRow OPTIONAL
+  source: TextSpecRow
+  expected: TextSpecRow
+  promptKey: ref CopyEntryRow
+  explanationKey: ref CopyEntryRow
+  changes: [ChangeSpecRow]
+  tags: [string]
+  ownerOut: ref PossessiveRow
+END
+
+# The defaults of a pack: the unmarked owner, the verb the tense skills drill, the first skill of the chain for each gender of the noun ("default" for the
+# others), and the lexical slots that are the same in every exercise, each always or only when a feature of the phrase has one of the values.
+RECORD RecipeDefaultsRow COUNT 1
+  defaultOwnerLexeme: ref PossessiveRow
+  verbLexeme: string
+  firstSkillByGender: [GenderSkillRow]
+  constantSlots: [ConstantSlotRow] OPTIONAL
+END
+
+RECORD GenderSkillRow
+  gender: string
+  skill: ref SkillRow
+END
+
+RECORD ConstantSlotRow
+  slot: string
+  lexeme: string
+  whenFeature: string OPTIONAL
+  whenValues: [string] OPTIONAL
+END
+
 # The realization of the constructions (R1.11b): the slots of a construction in order, which lexeme category and features each needs, and when the order or the
 # case governed by the construction changes. A condition is a feature and a value, written `Feature=value` by the engine. The first condition that holds wins,
 # so the lists keep their order.

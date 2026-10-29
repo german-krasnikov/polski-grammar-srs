@@ -1,17 +1,23 @@
 package polski.data
 
+import polski.core.RecipeSet
+import polski.core.engine.ChainStepRecipe
 import polski.core.engine.ChangeSpec
+import polski.core.engine.ConstantSlot
 import polski.core.engine.ConstructionTemplate
+import polski.core.engine.OwnerDraw
 import polski.core.engine.PhraseSpec
 import polski.core.engine.ReasonRule
 import polski.core.engine.ReasonSpec
+import polski.core.engine.SkillRecipe
 import polski.core.engine.SlotTemplate
+import polski.core.engine.StaticExercise
 import polski.core.engine.TextSpec
 import polski.core.engine.TextValue
 import polski.data.rows.plru.*
 
 /**
- * R1.11: the recipe expressions and the constructions of the pl-ru rows as the types of :core-engine (R1Design.md D5). A variant is one record with a kind and
+ * R1.11: the recipes and the constructions of the pl-ru rows as the types of :core-engine (R1Design.md D5). A variant is one record with a kind and
  * OPTIONAL fields, so each mapper first checks that the fields written are exactly the ones its kind uses: the engine would meet a missing one at
  * the first exercise of the skill, and would never see one of another kind. Nothing here fills in what the data does not say, except what the
  * engine types default (an absent `accepted` is none, an absent `optional` is false).
@@ -93,4 +99,48 @@ internal fun ConstructionRow.toTemplate(): ConstructionTemplate {
     )
 }
 
+internal fun OwnerDrawRow.toOwnerDraw(): OwnerDraw {
+    require(owners.isNotEmpty()) { "an owner draw has no owner" }
+    return OwnerDraw(owners.map { it.lexeme }, owners.map { it.lexeme to it.labelKey }.toDistinctMap("owner draw"), promptPrefixKey, promptSuffixKey)
+}
+
+internal fun StaticExerciseRow.toStaticExercise() =
+    StaticExercise(sourceKey, promptKey, expectedKey, explanationKey, acceptedKeys, changeFromKey, changeToKey, changeReasonKey, nounId, adjectiveId, tags)
+
+/** A static recipe writes nothing but its exercise; a constructed one writes its texts, its changes and its tags, and a prompt (a key, or an owner draw). */
+internal fun SkillRecipeRow.toSkillRecipe(): SkillRecipe {
+    val others = mapOf(
+        "source" to source, "expected" to expected, "promptKey" to promptKey, "explanationKey" to explanationKey, "changes" to changes, "accepted" to accepted,
+        "tags" to tags, "includeNounGenderTag" to includeNounGenderTag, "ownerDraw" to ownerDraw, "numberOverride" to numberOverride,
+    )
+    if (staticOverride != null) {
+        require(others.values.all { it == null }) { "$skill: a static recipe writes staticOverride only, not ${others.filterValues { it != null }.keys}" }
+        return SkillRecipe(skill, staticOverride = staticOverride.toStaticExercise())
+    }
+    val lacking = listOf("source", "expected", "explanationKey", "changes", "tags").filter { others.getValue(it) == null }
+    require(lacking.isEmpty()) { "$skill: a constructed recipe lacks $lacking" }
+    require(promptKey != null || ownerDraw != null) { "$skill: a recipe has a promptKey or an ownerDraw" }
+    return SkillRecipe(
+        skillId = skill, source = source!!.toTextSpec(), expected = expected!!.toTextSpec(), promptKey = promptKey.orEmpty(), explanationKey = explanationKey!!,
+        changes = changes!!.map { it.toChangeSpec() }, accepted = accepted.orEmpty().map { it.toTextSpec() }, tags = tags!!,
+        includeNounGenderTag = includeNounGenderTag == true, ownerDraw = ownerDraw?.toOwnerDraw(), numberOverride = numberOverride,
+    )
+}
+
+/** Only the first step has no skill: it is the first skill of the noun's gender, resolved by the engine. */
+internal fun ChainStepRecipeRow.toChainStep() =
+    ChainStepRecipe(skill.orEmpty(), source.toTextSpec(), expected.toTextSpec(), promptKey, explanationKey, changes.map { it.toChangeSpec() }, tags, ownerOut)
+
+internal fun recipeSetOf(recipes: List<SkillRecipeRow>, chain: List<ChainStepRecipeRow>, defaults: RecipeDefaultsRow): RecipeSet {
+    val firstSkills = defaults.firstSkillByGender.map { it.gender to it.skill }.toDistinctMap("firstSkillByGender")
+    require("default" in firstSkills) { "firstSkillByGender has no \"default\" gender" }
+    require(chain.drop(1).all { it.skill != null }) { "a chain step after the first has no skill" }
+    return RecipeSet(
+        skills = recipes.map { it.skill to it.toSkillRecipe() }.toDistinctMap("recipes"), chain = chain.map { it.toChainStep() },
+        firstSkillByGender = firstSkills, defaultOwnerLexeme = defaults.defaultOwnerLexeme, verbLexeme = defaults.verbLexeme,
+        constantSlots = defaults.constantSlots.orEmpty().map { ConstantSlot(it.slot, it.lexeme, it.whenFeature, it.whenValues.orEmpty()) },
+    )
+}
+
 internal val generatedPlRuConstructionTemplates: Map<String, ConstructionTemplate> = CONSTRUCTION_ROW_ROWS.associate { it.id to it.toTemplate() }
+internal val generatedPlRuRecipes: RecipeSet = recipeSetOf(SKILL_RECIPE_ROW_ROWS, CHAIN_STEP_RECIPE_ROW_ROWS, RECIPE_DEFAULTS_ROW_ROWS.single())

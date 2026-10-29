@@ -1,0 +1,11 @@
+# courses/lang/pl/exercise-recipes.json — source SHA-256: 8ef622c556d34e4c...
+# $comment_defaults: Pack-level defaults ExerciseGenerator threads through instead of a Kotlin literal (UniversalCorePlan.md §1.3 principle #3): defaultOwnerLexeme is pl-ru's unmarked possessive owner (used whenever a recipe doesn't draw or override one); verbLexeme is the single verb verb.present/past/future drill.
+DEFAULTS {
+  defaultOwnerLexeme: my
+  verbLexeme: go
+  firstSkillByGender: [
+    {gender: f skill: case.acc.f}
+    {gender: n skill: case.acc.n}
+    {gender: default skill: case.acc.m}
+  ]
+}

@@ -1,5 +1,5 @@
 // Generated from dsl/course.data-contract
-// source-sha256=bf277e143ccbd8e96bfbcd40bdf15c64f842d0b6b5932bd4f6e864e5f142a569
+// source-sha256=f80d056f5d818641c09ea3d4d575e242575a33fcaeb4399fcabfe44edfb48134
 // Edit the source, then run biome generate.
 
 package polski.data.rows.plru
@@ -594,6 +594,76 @@ data class ChangeSpecRow(
     val from: TextValueRow,
     val to: TextValueRow,
     val reason: ReasonSpecRow,
+)
+
+data class OwnerChoiceRow(
+    val lexeme: String,
+    val labelKey: String,
+)
+
+data class OwnerDrawRow(
+    val owners: List<OwnerChoiceRow>,
+    val promptPrefixKey: String,
+    val promptSuffixKey: String,
+)
+
+data class StaticExerciseRow(
+    val sourceKey: String,
+    val promptKey: String,
+    val expectedKey: String,
+    val explanationKey: String,
+    val acceptedKeys: List<String>,
+    val changeFromKey: String,
+    val changeToKey: String,
+    val changeReasonKey: String,
+    val nounId: String,
+    val adjectiveId: String,
+    val tags: List<String>,
+)
+
+data class SkillRecipeRow(
+    val skill: String,
+    val source: TextSpecRow? = null,
+    val expected: TextSpecRow? = null,
+    val promptKey: String? = null,
+    val explanationKey: String? = null,
+    val changes: List<ChangeSpecRow>? = null,
+    val accepted: List<TextSpecRow>? = null,
+    val tags: List<String>? = null,
+    val includeNounGenderTag: Boolean? = null,
+    val ownerDraw: OwnerDrawRow? = null,
+    val numberOverride: String? = null,
+    val staticOverride: StaticExerciseRow? = null,
+)
+
+data class ChainStepRecipeRow(
+    val skill: String? = null,
+    val source: TextSpecRow,
+    val expected: TextSpecRow,
+    val promptKey: String,
+    val explanationKey: String,
+    val changes: List<ChangeSpecRow>,
+    val tags: List<String>,
+    val ownerOut: String,
+)
+
+data class GenderSkillRow(
+    val gender: String,
+    val skill: String,
+)
+
+data class ConstantSlotRow(
+    val slot: String,
+    val lexeme: String,
+    val whenFeature: String? = null,
+    val whenValues: List<String>? = null,
+)
+
+data class RecipeDefaultsRow(
+    val defaultOwnerLexeme: String,
+    val verbLexeme: String,
+    val firstSkillByGender: List<GenderSkillRow>,
+    val constantSlots: List<ConstantSlotRow>? = null,
 )
 
 data class ConditionRow(
@@ -4315,3 +4385,1568 @@ private fun constructionRowRowsPart0(): List<ConstructionRow> = listOf(
 )
 
 val CONSTRUCTION_ROW_ROWS: List<ConstructionRow> = constructionRowRowsPart0()
+
+private fun skillRecipeRowRowsPart0(): List<SkillRecipeRow> = listOf(
+    SkillRecipeRow(
+        skill = "case.acc.n",
+        source = TextSpecRow(
+            kind = TextSpecRowKind.PREFIXED,
+            spec = PhraseSpecRow(
+                construction = "core.argument.case-role",
+                bundle = listOf(
+                    FeatureValueRow(feature = "Number", value = "sg"),
+                    FeatureValueRow(feature = "Case", value = "nom"),
+                ),
+            ),
+            prefixCase = "nom",
+            punct = ".",
+        ),
+        expected = TextSpecRow(
+            kind = TextSpecRowKind.PATTERN,
+            key = "seenAcc",
+            values = listOf(
+                PatternValueRow(
+                    name = "acc",
+                    value = TextValueRow(
+                        kind = TextValueRowKind.PHRASE,
+                        spec = PhraseSpecRow(
+                            construction = "core.argument.case-role",
+                            bundle = listOf(
+                                FeatureValueRow(feature = "Number", value = "sg"),
+                                FeatureValueRow(feature = "Case", value = "acc"),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        promptKey = "accPrompt",
+        explanationKey = "accExplanation",
+        changes = listOf(
+            ChangeSpecRow(
+                from = TextValueRow(
+                    kind = TextValueRowKind.PHRASE,
+                    spec = PhraseSpecRow(
+                        construction = "core.argument.case-role",
+                        bundle = listOf(
+                            FeatureValueRow(feature = "Number", value = "sg"),
+                            FeatureValueRow(feature = "Case", value = "nom"),
+                        ),
+                    ),
+                ),
+                to = TextValueRow(
+                    kind = TextValueRowKind.PHRASE,
+                    spec = PhraseSpecRow(
+                        construction = "core.argument.case-role",
+                        bundle = listOf(
+                            FeatureValueRow(feature = "Number", value = "sg"),
+                            FeatureValueRow(feature = "Case", value = "acc"),
+                        ),
+                    ),
+                ),
+                reason = ReasonSpecRow(
+                    kind = ReasonSpecRowKind.CLASSIFIED,
+                    rules = listOf(
+                        ReasonRuleRow(whenClass = "unchanged", key = "accReasonUnchanged"),
+                        ReasonRuleRow(whenClass = "personalA", key = "accReasonPersonalA"),
+                        ReasonRuleRow(whenClass = "default", key = "accReasonChanged"),
+                    ),
+                ),
+            ),
+        ),
+        tags = listOf("acc"),
+        includeNounGenderTag = true,
+    ),
+    SkillRecipeRow(
+        skill = "case.acc.f",
+        source = TextSpecRow(
+            kind = TextSpecRowKind.PREFIXED,
+            spec = PhraseSpecRow(
+                construction = "core.argument.case-role",
+                bundle = listOf(
+                    FeatureValueRow(feature = "Number", value = "sg"),
+                    FeatureValueRow(feature = "Case", value = "nom"),
+                ),
+            ),
+            prefixCase = "nom",
+            punct = ".",
+        ),
+        expected = TextSpecRow(
+            kind = TextSpecRowKind.PATTERN,
+            key = "seenAcc",
+            values = listOf(
+                PatternValueRow(
+                    name = "acc",
+                    value = TextValueRow(
+                        kind = TextValueRowKind.PHRASE,
+                        spec = PhraseSpecRow(
+                            construction = "core.argument.case-role",
+                            bundle = listOf(
+                                FeatureValueRow(feature = "Number", value = "sg"),
+                                FeatureValueRow(feature = "Case", value = "acc"),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        promptKey = "accPrompt",
+        explanationKey = "accExplanation",
+        changes = listOf(
+            ChangeSpecRow(
+                from = TextValueRow(
+                    kind = TextValueRowKind.PHRASE,
+                    spec = PhraseSpecRow(
+                        construction = "core.argument.case-role",
+                        bundle = listOf(
+                            FeatureValueRow(feature = "Number", value = "sg"),
+                            FeatureValueRow(feature = "Case", value = "nom"),
+                        ),
+                    ),
+                ),
+                to = TextValueRow(
+                    kind = TextValueRowKind.PHRASE,
+                    spec = PhraseSpecRow(
+                        construction = "core.argument.case-role",
+                        bundle = listOf(
+                            FeatureValueRow(feature = "Number", value = "sg"),
+                            FeatureValueRow(feature = "Case", value = "acc"),
+                        ),
+                    ),
+                ),
+                reason = ReasonSpecRow(
+                    kind = ReasonSpecRowKind.CLASSIFIED,
+                    rules = listOf(
+                        ReasonRuleRow(whenClass = "unchanged", key = "accReasonUnchanged"),
+                        ReasonRuleRow(whenClass = "personalA", key = "accReasonPersonalA"),
+                        ReasonRuleRow(whenClass = "default", key = "accReasonChanged"),
+                    ),
+                ),
+            ),
+        ),
+        tags = listOf("acc"),
+        includeNounGenderTag = true,
+    ),
+    SkillRecipeRow(
+        skill = "case.acc.m",
+        source = TextSpecRow(
+            kind = TextSpecRowKind.PREFIXED,
+            spec = PhraseSpecRow(
+                construction = "core.argument.case-role",
+                bundle = listOf(
+                    FeatureValueRow(feature = "Number", value = "sg"),
+                    FeatureValueRow(feature = "Case", value = "nom"),
+                ),
+            ),
+            prefixCase = "nom",
+            punct = ".",
+        ),
+        expected = TextSpecRow(
+            kind = TextSpecRowKind.PATTERN,
+            key = "seenAcc",
+            values = listOf(
+                PatternValueRow(
+                    name = "acc",
+                    value = TextValueRow(
+                        kind = TextValueRowKind.PHRASE,
+                        spec = PhraseSpecRow(
+                            construction = "core.argument.case-role",
+                            bundle = listOf(
+                                FeatureValueRow(feature = "Number", value = "sg"),
+                                FeatureValueRow(feature = "Case", value = "acc"),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        promptKey = "accPrompt",
+        explanationKey = "accExplanation",
+        changes = listOf(
+            ChangeSpecRow(
+                from = TextValueRow(
+                    kind = TextValueRowKind.PHRASE,
+                    spec = PhraseSpecRow(
+                        construction = "core.argument.case-role",
+                        bundle = listOf(
+                            FeatureValueRow(feature = "Number", value = "sg"),
+                            FeatureValueRow(feature = "Case", value = "nom"),
+                        ),
+                    ),
+                ),
+                to = TextValueRow(
+                    kind = TextValueRowKind.PHRASE,
+                    spec = PhraseSpecRow(
+                        construction = "core.argument.case-role",
+                        bundle = listOf(
+                            FeatureValueRow(feature = "Number", value = "sg"),
+                            FeatureValueRow(feature = "Case", value = "acc"),
+                        ),
+                    ),
+                ),
+                reason = ReasonSpecRow(
+                    kind = ReasonSpecRowKind.CLASSIFIED,
+                    rules = listOf(
+                        ReasonRuleRow(whenClass = "unchanged", key = "accReasonUnchanged"),
+                        ReasonRuleRow(whenClass = "personalA", key = "accReasonPersonalA"),
+                        ReasonRuleRow(whenClass = "default", key = "accReasonChanged"),
+                    ),
+                ),
+            ),
+        ),
+        tags = listOf("acc"),
+        includeNounGenderTag = true,
+    ),
+    SkillRecipeRow(
+        skill = "case.gen.neg",
+        source = TextSpecRow(
+            kind = TextSpecRowKind.PATTERN,
+            key = "seenAcc",
+            values = listOf(
+                PatternValueRow(
+                    name = "acc",
+                    value = TextValueRow(
+                        kind = TextValueRowKind.PHRASE,
+                        spec = PhraseSpecRow(
+                            construction = "core.argument.case-role",
+                            bundle = listOf(
+                                FeatureValueRow(feature = "Number", value = "sg"),
+                                FeatureValueRow(feature = "Case", value = "acc"),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        expected = TextSpecRow(
+            kind = TextSpecRowKind.PATTERN,
+            key = "seenGenNeg",
+            values = listOf(
+                PatternValueRow(
+                    name = "gen",
+                    value = TextValueRow(
+                        kind = TextValueRowKind.PHRASE,
+                        spec = PhraseSpecRow(
+                            construction = "core.sentence.polarity",
+                            bundle = listOf(
+                                FeatureValueRow(feature = "Number", value = "sg"),
+                                FeatureValueRow(feature = "Polarity", value = "neg"),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        promptKey = "genNegPrompt",
+        explanationKey = "genNegExplanation",
+        changes = listOf(
+            ChangeSpecRow(
+                from = TextValueRow(
+                    kind = TextValueRowKind.PHRASE,
+                    spec = PhraseSpecRow(
+                        construction = "core.argument.case-role",
+                        bundle = listOf(
+                            FeatureValueRow(feature = "Number", value = "sg"),
+                            FeatureValueRow(feature = "Case", value = "acc"),
+                        ),
+                    ),
+                ),
+                to = TextValueRow(
+                    kind = TextValueRowKind.PHRASE,
+                    spec = PhraseSpecRow(
+                        construction = "core.sentence.polarity",
+                        bundle = listOf(
+                            FeatureValueRow(feature = "Number", value = "sg"),
+                            FeatureValueRow(feature = "Polarity", value = "neg"),
+                        ),
+                    ),
+                ),
+                reason = ReasonSpecRow(kind = ReasonSpecRowKind.FIXED, key = "genNegReason"),
+            ),
+        ),
+        tags = listOf("gen", "negation"),
+    ),
+    SkillRecipeRow(
+        skill = "case.inst",
+        source = TextSpecRow(
+            kind = TextSpecRowKind.PATTERN,
+            key = "seenAcc",
+            values = listOf(
+                PatternValueRow(
+                    name = "acc",
+                    value = TextValueRow(
+                        kind = TextValueRowKind.PHRASE,
+                        spec = PhraseSpecRow(
+                            construction = "core.argument.case-role",
+                            bundle = listOf(
+                                FeatureValueRow(feature = "Number", value = "sg"),
+                                FeatureValueRow(feature = "Case", value = "acc"),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        expected = TextSpecRow(
+            kind = TextSpecRowKind.PATTERN,
+            key = "caseDrill",
+            values = listOf(
+                PatternValueRow(name = "start", value = TextValueRow(kind = TextValueRowKind.COPY, key = "instStart")),
+                PatternValueRow(
+                    name = "target",
+                    value = TextValueRow(
+                        kind = TextValueRowKind.PHRASE,
+                        spec = PhraseSpecRow(
+                            construction = "core.argument.case-role",
+                            bundle = listOf(
+                                FeatureValueRow(feature = "Number", value = "sg"),
+                                FeatureValueRow(feature = "Case", value = "inst"),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        promptKey = "instPrompt",
+        explanationKey = "caseDrillExplanation",
+        changes = listOf(
+            ChangeSpecRow(
+                from = TextValueRow(
+                    kind = TextValueRowKind.PHRASE,
+                    spec = PhraseSpecRow(
+                        construction = "core.argument.case-role",
+                        bundle = listOf(
+                            FeatureValueRow(feature = "Number", value = "sg"),
+                            FeatureValueRow(feature = "Case", value = "acc"),
+                        ),
+                    ),
+                ),
+                to = TextValueRow(
+                    kind = TextValueRowKind.PHRASE,
+                    spec = PhraseSpecRow(
+                        construction = "core.argument.case-role",
+                        bundle = listOf(
+                            FeatureValueRow(feature = "Number", value = "sg"),
+                            FeatureValueRow(feature = "Case", value = "inst"),
+                        ),
+                    ),
+                ),
+                reason = ReasonSpecRow(kind = ReasonSpecRowKind.FIXED, key = "instReason"),
+            ),
+        ),
+        tags = listOf("inst"),
+    ),
+    SkillRecipeRow(
+        skill = "case.loc",
+        source = TextSpecRow(
+            kind = TextSpecRowKind.PATTERN,
+            key = "seenAcc",
+            values = listOf(
+                PatternValueRow(
+                    name = "acc",
+                    value = TextValueRow(
+                        kind = TextValueRowKind.PHRASE,
+                        spec = PhraseSpecRow(
+                            construction = "core.argument.case-role",
+                            bundle = listOf(
+                                FeatureValueRow(feature = "Number", value = "sg"),
+                                FeatureValueRow(feature = "Case", value = "acc"),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        expected = TextSpecRow(
+            kind = TextSpecRowKind.PATTERN,
+            key = "caseDrill",
+            values = listOf(
+                PatternValueRow(name = "start", value = TextValueRow(kind = TextValueRowKind.COPY, key = "locStart")),
+                PatternValueRow(
+                    name = "target",
+                    value = TextValueRow(
+                        kind = TextValueRowKind.PHRASE,
+                        spec = PhraseSpecRow(
+                            construction = "core.argument.case-role",
+                            bundle = listOf(
+                                FeatureValueRow(feature = "Number", value = "sg"),
+                                FeatureValueRow(feature = "Case", value = "loc"),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        promptKey = "locPrompt",
+        explanationKey = "caseDrillExplanation",
+        changes = listOf(
+            ChangeSpecRow(
+                from = TextValueRow(
+                    kind = TextValueRowKind.PHRASE,
+                    spec = PhraseSpecRow(
+                        construction = "core.argument.case-role",
+                        bundle = listOf(
+                            FeatureValueRow(feature = "Number", value = "sg"),
+                            FeatureValueRow(feature = "Case", value = "acc"),
+                        ),
+                    ),
+                ),
+                to = TextValueRow(
+                    kind = TextValueRowKind.PHRASE,
+                    spec = PhraseSpecRow(
+                        construction = "core.argument.case-role",
+                        bundle = listOf(
+                            FeatureValueRow(feature = "Number", value = "sg"),
+                            FeatureValueRow(feature = "Case", value = "loc"),
+                        ),
+                    ),
+                ),
+                reason = ReasonSpecRow(kind = ReasonSpecRowKind.FIXED, key = "locReason"),
+            ),
+        ),
+        tags = listOf("loc"),
+    ),
+    SkillRecipeRow(
+        skill = "case.dat",
+        source = TextSpecRow(
+            kind = TextSpecRowKind.PATTERN,
+            key = "seenAcc",
+            values = listOf(
+                PatternValueRow(
+                    name = "acc",
+                    value = TextValueRow(
+                        kind = TextValueRowKind.PHRASE,
+                        spec = PhraseSpecRow(
+                            construction = "core.argument.case-role",
+                            bundle = listOf(
+                                FeatureValueRow(feature = "Number", value = "sg"),
+                                FeatureValueRow(feature = "Case", value = "acc"),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        expected = TextSpecRow(
+            kind = TextSpecRowKind.PATTERN,
+            key = "caseDrill",
+            values = listOf(
+                PatternValueRow(name = "start", value = TextValueRow(kind = TextValueRowKind.COPY, key = "datStart")),
+                PatternValueRow(
+                    name = "target",
+                    value = TextValueRow(
+                        kind = TextValueRowKind.PHRASE,
+                        spec = PhraseSpecRow(
+                            construction = "core.argument.case-role",
+                            bundle = listOf(
+                                FeatureValueRow(feature = "Number", value = "sg"),
+                                FeatureValueRow(feature = "Case", value = "dat"),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        promptKey = "datPrompt",
+        explanationKey = "caseDrillExplanation",
+        changes = listOf(
+            ChangeSpecRow(
+                from = TextValueRow(
+                    kind = TextValueRowKind.PHRASE,
+                    spec = PhraseSpecRow(
+                        construction = "core.argument.case-role",
+                        bundle = listOf(
+                            FeatureValueRow(feature = "Number", value = "sg"),
+                            FeatureValueRow(feature = "Case", value = "acc"),
+                        ),
+                    ),
+                ),
+                to = TextValueRow(
+                    kind = TextValueRowKind.PHRASE,
+                    spec = PhraseSpecRow(
+                        construction = "core.argument.case-role",
+                        bundle = listOf(
+                            FeatureValueRow(feature = "Number", value = "sg"),
+                            FeatureValueRow(feature = "Case", value = "dat"),
+                        ),
+                    ),
+                ),
+                reason = ReasonSpecRow(kind = ReasonSpecRowKind.FIXED, key = "datReason"),
+            ),
+        ),
+        tags = listOf("dat"),
+    ),
+    SkillRecipeRow(
+        skill = "agreement.my",
+        source = TextSpecRow(
+            kind = TextSpecRowKind.PATTERN,
+            key = "seenAcc",
+            values = listOf(
+                PatternValueRow(
+                    name = "acc",
+                    value = TextValueRow(
+                        kind = TextValueRowKind.PHRASE,
+                        spec = PhraseSpecRow(
+                            construction = "core.argument.case-role",
+                            bundle = listOf(
+                                FeatureValueRow(feature = "Number", value = "sg"),
+                                FeatureValueRow(feature = "Case", value = "acc"),
+                            ),
+                            ownerLexeme = "my",
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        expected = TextSpecRow(
+            kind = TextSpecRowKind.PATTERN,
+            key = "seenAcc",
+            values = listOf(
+                PatternValueRow(
+                    name = "acc",
+                    value = TextValueRow(
+                        kind = TextValueRowKind.PHRASE,
+                        spec = PhraseSpecRow(
+                            construction = "core.agreement.possessive",
+                            bundle = listOf(
+                                FeatureValueRow(feature = "Number", value = "sg"),
+                                FeatureValueRow(feature = "Case", value = "acc"),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        explanationKey = "ownerExplanation",
+        changes = listOf(
+            ChangeSpecRow(
+                from = TextValueRow(
+                    kind = TextValueRowKind.PHRASE,
+                    spec = PhraseSpecRow(
+                        construction = "core.argument.case-role",
+                        bundle = listOf(
+                            FeatureValueRow(feature = "Number", value = "sg"),
+                            FeatureValueRow(feature = "Case", value = "acc"),
+                        ),
+                        ownerLexeme = "my",
+                    ),
+                ),
+                to = TextValueRow(
+                    kind = TextValueRowKind.PHRASE,
+                    spec = PhraseSpecRow(
+                        construction = "core.agreement.possessive",
+                        bundle = listOf(
+                            FeatureValueRow(feature = "Number", value = "sg"),
+                            FeatureValueRow(feature = "Case", value = "acc"),
+                        ),
+                    ),
+                ),
+                reason = ReasonSpecRow(kind = ReasonSpecRowKind.FIXED, key = "ownerReason"),
+            ),
+        ),
+        tags = listOf("agreement", "acc"),
+        ownerDraw = OwnerDrawRow(
+            owners = listOf(
+                OwnerChoiceRow(lexeme = "your", labelKey = "ownerYour"),
+                OwnerChoiceRow(lexeme = "his", labelKey = "ownerHis"),
+                OwnerChoiceRow(lexeme = "her", labelKey = "ownerHer"),
+                OwnerChoiceRow(lexeme = "our", labelKey = "ownerOur"),
+                OwnerChoiceRow(lexeme = "yourPlural", labelKey = "ownerYourPlural"),
+                OwnerChoiceRow(lexeme = "their", labelKey = "ownerTheir"),
+            ),
+            promptPrefixKey = "ownerPromptPrefix",
+            promptSuffixKey = "ownerPromptSuffix",
+        ),
+    ),
+    SkillRecipeRow(
+        skill = "verb.present",
+        source = TextSpecRow(
+            kind = TextSpecRowKind.PATTERN,
+            key = "verbSentence",
+            values = listOf(
+                PatternValueRow(
+                    name = "nom",
+                    value = TextValueRow(
+                        kind = TextValueRowKind.PHRASE,
+                        capitalized = true,
+                        spec = PhraseSpecRow(
+                            construction = "core.argument.case-role",
+                            bundle = listOf(
+                                FeatureValueRow(feature = "Number", value = "sg"),
+                                FeatureValueRow(feature = "Case", value = "nom"),
+                            ),
+                        ),
+                    ),
+                ),
+                PatternValueRow(
+                    name = "verb",
+                    value = TextValueRow(
+                        kind = TextValueRowKind.PHRASE,
+                        spec = PhraseSpecRow(
+                            construction = "core.verb.tense",
+                            bundle = listOf(
+                                FeatureValueRow(feature = "Tense", value = "past"),
+                                FeatureValueRow(feature = "Person", value = "3"),
+                                FeatureValueRow(feature = "Number", value = "sg"),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        expected = TextSpecRow(
+            kind = TextSpecRowKind.PATTERN,
+            key = "verbSentence",
+            values = listOf(
+                PatternValueRow(
+                    name = "nom",
+                    value = TextValueRow(
+                        kind = TextValueRowKind.PHRASE,
+                        capitalized = true,
+                        spec = PhraseSpecRow(
+                            construction = "core.argument.case-role",
+                            bundle = listOf(
+                                FeatureValueRow(feature = "Number", value = "sg"),
+                                FeatureValueRow(feature = "Case", value = "nom"),
+                            ),
+                        ),
+                    ),
+                ),
+                PatternValueRow(
+                    name = "verb",
+                    value = TextValueRow(
+                        kind = TextValueRowKind.PHRASE,
+                        spec = PhraseSpecRow(
+                            construction = "core.verb.tense",
+                            bundle = listOf(
+                                FeatureValueRow(feature = "Tense", value = "present"),
+                                FeatureValueRow(feature = "Person", value = "3"),
+                                FeatureValueRow(feature = "Number", value = "sg"),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        promptKey = "verbPresentPrompt",
+        explanationKey = "verbExplanation",
+        changes = listOf(
+            ChangeSpecRow(
+                from = TextValueRow(
+                    kind = TextValueRowKind.PHRASE,
+                    spec = PhraseSpecRow(
+                        construction = "core.verb.tense",
+                        bundle = listOf(
+                            FeatureValueRow(feature = "Tense", value = "past"),
+                            FeatureValueRow(feature = "Person", value = "3"),
+                            FeatureValueRow(feature = "Number", value = "sg"),
+                        ),
+                    ),
+                ),
+                to = TextValueRow(
+                    kind = TextValueRowKind.PHRASE,
+                    spec = PhraseSpecRow(
+                        construction = "core.verb.tense",
+                        bundle = listOf(
+                            FeatureValueRow(feature = "Tense", value = "present"),
+                            FeatureValueRow(feature = "Person", value = "3"),
+                            FeatureValueRow(feature = "Number", value = "sg"),
+                        ),
+                    ),
+                ),
+                reason = ReasonSpecRow(kind = ReasonSpecRowKind.FIXED, key = "verbReason"),
+            ),
+        ),
+        tags = listOf("verb", "present", "nom"),
+    ),
+    SkillRecipeRow(
+        skill = "verb.past",
+        source = TextSpecRow(
+            kind = TextSpecRowKind.PATTERN,
+            key = "verbSentence",
+            values = listOf(
+                PatternValueRow(
+                    name = "nom",
+                    value = TextValueRow(
+                        kind = TextValueRowKind.PHRASE,
+                        capitalized = true,
+                        spec = PhraseSpecRow(
+                            construction = "core.argument.case-role",
+                            bundle = listOf(
+                                FeatureValueRow(feature = "Number", value = "sg"),
+                                FeatureValueRow(feature = "Case", value = "nom"),
+                            ),
+                        ),
+                    ),
+                ),
+                PatternValueRow(
+                    name = "verb",
+                    value = TextValueRow(
+                        kind = TextValueRowKind.PHRASE,
+                        spec = PhraseSpecRow(
+                            construction = "core.verb.tense",
+                            bundle = listOf(
+                                FeatureValueRow(feature = "Tense", value = "present"),
+                                FeatureValueRow(feature = "Person", value = "3"),
+                                FeatureValueRow(feature = "Number", value = "sg"),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        expected = TextSpecRow(
+            kind = TextSpecRowKind.PATTERN,
+            key = "verbSentence",
+            values = listOf(
+                PatternValueRow(
+                    name = "nom",
+                    value = TextValueRow(
+                        kind = TextValueRowKind.PHRASE,
+                        capitalized = true,
+                        spec = PhraseSpecRow(
+                            construction = "core.argument.case-role",
+                            bundle = listOf(
+                                FeatureValueRow(feature = "Number", value = "sg"),
+                                FeatureValueRow(feature = "Case", value = "nom"),
+                            ),
+                        ),
+                    ),
+                ),
+                PatternValueRow(
+                    name = "verb",
+                    value = TextValueRow(
+                        kind = TextValueRowKind.PHRASE,
+                        spec = PhraseSpecRow(
+                            construction = "core.verb.tense",
+                            bundle = listOf(
+                                FeatureValueRow(feature = "Tense", value = "past"),
+                                FeatureValueRow(feature = "Person", value = "3"),
+                                FeatureValueRow(feature = "Number", value = "sg"),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        promptKey = "verbPastPrompt",
+        explanationKey = "verbExplanation",
+        changes = listOf(
+            ChangeSpecRow(
+                from = TextValueRow(
+                    kind = TextValueRowKind.PHRASE,
+                    spec = PhraseSpecRow(
+                        construction = "core.verb.tense",
+                        bundle = listOf(
+                            FeatureValueRow(feature = "Tense", value = "present"),
+                            FeatureValueRow(feature = "Person", value = "3"),
+                            FeatureValueRow(feature = "Number", value = "sg"),
+                        ),
+                    ),
+                ),
+                to = TextValueRow(
+                    kind = TextValueRowKind.PHRASE,
+                    spec = PhraseSpecRow(
+                        construction = "core.verb.tense",
+                        bundle = listOf(
+                            FeatureValueRow(feature = "Tense", value = "past"),
+                            FeatureValueRow(feature = "Person", value = "3"),
+                            FeatureValueRow(feature = "Number", value = "sg"),
+                        ),
+                    ),
+                ),
+                reason = ReasonSpecRow(kind = ReasonSpecRowKind.FIXED, key = "verbReason"),
+            ),
+        ),
+        tags = listOf("verb", "past", "nom"),
+    ),
+    SkillRecipeRow(
+        skill = "verb.future",
+        source = TextSpecRow(
+            kind = TextSpecRowKind.PATTERN,
+            key = "verbSentence",
+            values = listOf(
+                PatternValueRow(
+                    name = "nom",
+                    value = TextValueRow(
+                        kind = TextValueRowKind.PHRASE,
+                        capitalized = true,
+                        spec = PhraseSpecRow(
+                            construction = "core.argument.case-role",
+                            bundle = listOf(
+                                FeatureValueRow(feature = "Number", value = "sg"),
+                                FeatureValueRow(feature = "Case", value = "nom"),
+                            ),
+                        ),
+                    ),
+                ),
+                PatternValueRow(
+                    name = "verb",
+                    value = TextValueRow(
+                        kind = TextValueRowKind.PHRASE,
+                        spec = PhraseSpecRow(
+                            construction = "core.verb.tense",
+                            bundle = listOf(
+                                FeatureValueRow(feature = "Tense", value = "present"),
+                                FeatureValueRow(feature = "Person", value = "3"),
+                                FeatureValueRow(feature = "Number", value = "sg"),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        expected = TextSpecRow(
+            kind = TextSpecRowKind.PATTERN,
+            key = "verbSentence",
+            values = listOf(
+                PatternValueRow(
+                    name = "nom",
+                    value = TextValueRow(
+                        kind = TextValueRowKind.PHRASE,
+                        capitalized = true,
+                        spec = PhraseSpecRow(
+                            construction = "core.argument.case-role",
+                            bundle = listOf(
+                                FeatureValueRow(feature = "Number", value = "sg"),
+                                FeatureValueRow(feature = "Case", value = "nom"),
+                            ),
+                        ),
+                    ),
+                ),
+                PatternValueRow(
+                    name = "verb",
+                    value = TextValueRow(
+                        kind = TextValueRowKind.PHRASE,
+                        spec = PhraseSpecRow(
+                            construction = "core.verb.tense",
+                            bundle = listOf(
+                                FeatureValueRow(feature = "Tense", value = "future"),
+                                FeatureValueRow(feature = "Person", value = "3"),
+                                FeatureValueRow(feature = "Number", value = "sg"),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        promptKey = "verbFuturePrompt",
+        explanationKey = "verbExplanation",
+        changes = listOf(
+            ChangeSpecRow(
+                from = TextValueRow(
+                    kind = TextValueRowKind.PHRASE,
+                    spec = PhraseSpecRow(
+                        construction = "core.verb.tense",
+                        bundle = listOf(
+                            FeatureValueRow(feature = "Tense", value = "present"),
+                            FeatureValueRow(feature = "Person", value = "3"),
+                            FeatureValueRow(feature = "Number", value = "sg"),
+                        ),
+                    ),
+                ),
+                to = TextValueRow(
+                    kind = TextValueRowKind.PHRASE,
+                    spec = PhraseSpecRow(
+                        construction = "core.verb.tense",
+                        bundle = listOf(
+                            FeatureValueRow(feature = "Tense", value = "future"),
+                            FeatureValueRow(feature = "Person", value = "3"),
+                            FeatureValueRow(feature = "Number", value = "sg"),
+                        ),
+                    ),
+                ),
+                reason = ReasonSpecRow(kind = ReasonSpecRowKind.FIXED, key = "verbReason"),
+            ),
+        ),
+        accepted = listOf(
+            TextSpecRow(
+                kind = TextSpecRowKind.PATTERN,
+                key = "verbFutureAccepted",
+                values = listOf(
+                    PatternValueRow(
+                        name = "nom",
+                        value = TextValueRow(
+                            kind = TextValueRowKind.PHRASE,
+                            capitalized = true,
+                            spec = PhraseSpecRow(
+                                construction = "core.argument.case-role",
+                                bundle = listOf(
+                                    FeatureValueRow(feature = "Number", value = "sg"),
+                                    FeatureValueRow(feature = "Case", value = "nom"),
+                                ),
+                            ),
+                        ),
+                    ),
+                    PatternValueRow(
+                        name = "past",
+                        value = TextValueRow(
+                            kind = TextValueRowKind.PHRASE,
+                            spec = PhraseSpecRow(
+                                construction = "core.verb.tense",
+                                bundle = listOf(
+                                    FeatureValueRow(feature = "Tense", value = "past"),
+                                    FeatureValueRow(feature = "Person", value = "3"),
+                                    FeatureValueRow(feature = "Number", value = "sg"),
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        tags = listOf("verb", "future", "nom"),
+    ),
+    SkillRecipeRow(
+        skill = "aspect",
+        staticOverride = StaticExerciseRow(
+            sourceKey = "aspectSource",
+            promptKey = "aspectPrompt",
+            expectedKey = "aspectExpected",
+            explanationKey = "aspectExplanation",
+            acceptedKeys = listOf("aspectAccepted"),
+            changeFromKey = "aspectFrom",
+            changeToKey = "aspectTo",
+            changeReasonKey = "aspectReason",
+            nounId = "book",
+            adjectiveId = "new",
+            tags = listOf("aspect", "past"),
+        ),
+    ),
+    SkillRecipeRow(
+        skill = "pronouns",
+        source = TextSpecRow(
+            kind = TextSpecRowKind.PATTERN,
+            key = "seenAcc",
+            values = listOf(
+                PatternValueRow(
+                    name = "acc",
+                    value = TextValueRow(
+                        kind = TextValueRowKind.PHRASE,
+                        spec = PhraseSpecRow(
+                            construction = "core.argument.case-role",
+                            bundle = listOf(
+                                FeatureValueRow(feature = "Number", value = "sg"),
+                                FeatureValueRow(feature = "Case", value = "acc"),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        expected = TextSpecRow(
+            kind = TextSpecRowKind.PATTERN,
+            key = "seenAcc",
+            values = listOf(
+                PatternValueRow(
+                    name = "acc",
+                    value = TextValueRow(
+                        kind = TextValueRowKind.PRONOUN,
+                        genderToKey = listOf(
+                            GenderPronounRow(gender = "f", pronounId = "ona"),
+                            GenderPronounRow(gender = "n", pronounId = "ono"),
+                            GenderPronounRow(gender = "default", pronounId = "on"),
+                        ),
+                        caseId = "acc",
+                    ),
+                ),
+            ),
+        ),
+        promptKey = "pronounPrompt",
+        explanationKey = "pronounExplanation",
+        changes = listOf(
+            ChangeSpecRow(
+                from = TextValueRow(
+                    kind = TextValueRowKind.PHRASE,
+                    spec = PhraseSpecRow(
+                        construction = "core.argument.case-role",
+                        bundle = listOf(
+                            FeatureValueRow(feature = "Number", value = "sg"),
+                            FeatureValueRow(feature = "Case", value = "acc"),
+                        ),
+                    ),
+                ),
+                to = TextValueRow(
+                    kind = TextValueRowKind.PRONOUN,
+                    genderToKey = listOf(
+                        GenderPronounRow(gender = "f", pronounId = "ona"),
+                        GenderPronounRow(gender = "n", pronounId = "ono"),
+                        GenderPronounRow(gender = "default", pronounId = "on"),
+                    ),
+                    caseId = "acc",
+                ),
+                reason = ReasonSpecRow(kind = ReasonSpecRowKind.FIXED, key = "pronounReason"),
+            ),
+        ),
+        tags = listOf("pronoun", "acc"),
+    ),
+    SkillRecipeRow(
+        skill = "sentence.question",
+        source = TextSpecRow(
+            kind = TextSpecRowKind.PATTERN,
+            key = "questionSource",
+            values = listOf(
+                PatternValueRow(
+                    name = "acc",
+                    value = TextValueRow(
+                        kind = TextValueRowKind.PHRASE,
+                        spec = PhraseSpecRow(
+                            construction = "core.argument.case-role",
+                            bundle = listOf(
+                                FeatureValueRow(feature = "Number", value = "sg"),
+                                FeatureValueRow(feature = "Case", value = "acc"),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        expected = TextSpecRow(
+            kind = TextSpecRowKind.PATTERN,
+            key = "questionExpected",
+            values = listOf(
+                PatternValueRow(
+                    name = "acc",
+                    value = TextValueRow(
+                        kind = TextValueRowKind.PHRASE,
+                        spec = PhraseSpecRow(
+                            construction = "core.argument.case-role",
+                            bundle = listOf(
+                                FeatureValueRow(feature = "Number", value = "sg"),
+                                FeatureValueRow(feature = "Case", value = "acc"),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        promptKey = "questionPrompt",
+        explanationKey = "questionExplanation",
+        changes = listOf(
+            ChangeSpecRow(
+                from = TextValueRow(kind = TextValueRowKind.COPY, key = "questionChangeFrom"),
+                to = TextValueRow(kind = TextValueRowKind.COPY, key = "questionChangeTo"),
+                reason = ReasonSpecRow(kind = ReasonSpecRowKind.FIXED, key = "questionReason"),
+            ),
+        ),
+        tags = listOf("question", "acc"),
+    ),
+    SkillRecipeRow(
+        skill = "sentence.plural",
+        source = TextSpecRow(
+            kind = TextSpecRowKind.PATTERN,
+            key = "seenAcc",
+            values = listOf(
+                PatternValueRow(
+                    name = "acc",
+                    value = TextValueRow(
+                        kind = TextValueRowKind.PHRASE,
+                        spec = PhraseSpecRow(
+                            construction = "core.argument.case-role",
+                            bundle = listOf(
+                                FeatureValueRow(feature = "Number", value = "sg"),
+                                FeatureValueRow(feature = "Case", value = "acc"),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        expected = TextSpecRow(
+            kind = TextSpecRowKind.PATTERN,
+            key = "seenAcc",
+            values = listOf(
+                PatternValueRow(
+                    name = "acc",
+                    value = TextValueRow(
+                        kind = TextValueRowKind.PHRASE,
+                        spec = PhraseSpecRow(
+                            construction = "core.number",
+                            bundle = listOf(
+                                FeatureValueRow(feature = "Number", value = "pl"),
+                                FeatureValueRow(feature = "Case", value = "acc"),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        promptKey = "pluralPrompt",
+        explanationKey = "pluralExplanation",
+        changes = listOf(
+            ChangeSpecRow(
+                from = TextValueRow(
+                    kind = TextValueRowKind.PHRASE,
+                    spec = PhraseSpecRow(
+                        construction = "core.argument.case-role",
+                        bundle = listOf(
+                            FeatureValueRow(feature = "Number", value = "sg"),
+                            FeatureValueRow(feature = "Case", value = "acc"),
+                        ),
+                    ),
+                ),
+                to = TextValueRow(
+                    kind = TextValueRowKind.PHRASE,
+                    spec = PhraseSpecRow(
+                        construction = "core.number",
+                        bundle = listOf(
+                            FeatureValueRow(feature = "Number", value = "pl"),
+                            FeatureValueRow(feature = "Case", value = "acc"),
+                        ),
+                    ),
+                ),
+                reason = ReasonSpecRow(kind = ReasonSpecRowKind.FIXED, key = "pluralReason"),
+            ),
+        ),
+        tags = listOf("plural", "acc"),
+        numberOverride = "pl",
+    ),
+    SkillRecipeRow(
+        skill = "mixed",
+        source = TextSpecRow(
+            kind = TextSpecRowKind.PATTERN,
+            key = "seenAcc",
+            values = listOf(
+                PatternValueRow(
+                    name = "acc",
+                    value = TextValueRow(
+                        kind = TextValueRowKind.PHRASE,
+                        spec = PhraseSpecRow(
+                            construction = "core.argument.case-role",
+                            bundle = listOf(
+                                FeatureValueRow(feature = "Number", value = "sg"),
+                                FeatureValueRow(feature = "Case", value = "acc"),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        expected = TextSpecRow(
+            kind = TextSpecRowKind.PATTERN,
+            key = "mixedMale",
+            values = listOf(
+                PatternValueRow(
+                    name = "gen",
+                    value = TextValueRow(
+                        kind = TextValueRowKind.PHRASE,
+                        spec = PhraseSpecRow(
+                            construction = "core.sentence.polarity",
+                            bundle = listOf(
+                                FeatureValueRow(feature = "Number", value = "sg"),
+                                FeatureValueRow(feature = "Polarity", value = "neg"),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        promptKey = "mixedPrompt",
+        explanationKey = "mixedExplanation",
+        changes = listOf(
+            ChangeSpecRow(
+                from = TextValueRow(kind = TextValueRowKind.COPY, key = "mixedChangeFrom"),
+                to = TextValueRow(kind = TextValueRowKind.COPY, key = "mixedChangeTo"),
+                reason = ReasonSpecRow(kind = ReasonSpecRowKind.FIXED, key = "mixedVerbReason"),
+            ),
+            ChangeSpecRow(
+                from = TextValueRow(
+                    kind = TextValueRowKind.PHRASE,
+                    spec = PhraseSpecRow(
+                        construction = "core.argument.case-role",
+                        bundle = listOf(
+                            FeatureValueRow(feature = "Number", value = "sg"),
+                            FeatureValueRow(feature = "Case", value = "acc"),
+                        ),
+                    ),
+                ),
+                to = TextValueRow(
+                    kind = TextValueRowKind.PHRASE,
+                    spec = PhraseSpecRow(
+                        construction = "core.sentence.polarity",
+                        bundle = listOf(
+                            FeatureValueRow(feature = "Number", value = "sg"),
+                            FeatureValueRow(feature = "Polarity", value = "neg"),
+                        ),
+                    ),
+                ),
+                reason = ReasonSpecRow(kind = ReasonSpecRowKind.FIXED, key = "mixedNounReason"),
+            ),
+        ),
+        accepted = listOf(
+            TextSpecRow(
+                kind = TextSpecRowKind.PATTERN,
+                key = "mixedFemale",
+                values = listOf(
+                    PatternValueRow(
+                        name = "gen",
+                        value = TextValueRow(
+                            kind = TextValueRowKind.PHRASE,
+                            spec = PhraseSpecRow(
+                                construction = "core.sentence.polarity",
+                                bundle = listOf(
+                                    FeatureValueRow(feature = "Number", value = "sg"),
+                                    FeatureValueRow(feature = "Polarity", value = "neg"),
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        tags = listOf("mixed", "gen", "past"),
+    ),
+)
+
+val SKILL_RECIPE_ROW_ROWS: List<SkillRecipeRow> = skillRecipeRowRowsPart0()
+
+private fun chainStepRecipeRowRowsPart0(): List<ChainStepRecipeRow> = listOf(
+    ChainStepRecipeRow(
+        source = TextSpecRow(
+            kind = TextSpecRowKind.PREFIXED,
+            spec = PhraseSpecRow(
+                construction = "core.argument.case-role",
+                bundle = listOf(
+                    FeatureValueRow(feature = "Number", value = "sg"),
+                    FeatureValueRow(feature = "Case", value = "nom"),
+                ),
+            ),
+            prefixCase = "nom",
+            punct = ".",
+        ),
+        expected = TextSpecRow(
+            kind = TextSpecRowKind.PATTERN,
+            key = "seenAcc",
+            values = listOf(
+                PatternValueRow(
+                    name = "acc",
+                    value = TextValueRow(
+                        kind = TextValueRowKind.PHRASE,
+                        spec = PhraseSpecRow(
+                            construction = "core.argument.case-role",
+                            bundle = listOf(
+                                FeatureValueRow(feature = "Number", value = "sg"),
+                                FeatureValueRow(feature = "Case", value = "acc"),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        promptKey = "chainAccPrompt",
+        explanationKey = "chainAccReason",
+        changes = listOf(
+            ChangeSpecRow(
+                from = TextValueRow(
+                    kind = TextValueRowKind.PHRASE,
+                    spec = PhraseSpecRow(
+                        construction = "core.argument.case-role",
+                        bundle = listOf(
+                            FeatureValueRow(feature = "Number", value = "sg"),
+                            FeatureValueRow(feature = "Case", value = "nom"),
+                        ),
+                    ),
+                ),
+                to = TextValueRow(
+                    kind = TextValueRowKind.PHRASE,
+                    spec = PhraseSpecRow(
+                        construction = "core.argument.case-role",
+                        bundle = listOf(
+                            FeatureValueRow(feature = "Number", value = "sg"),
+                            FeatureValueRow(feature = "Case", value = "acc"),
+                        ),
+                    ),
+                ),
+                reason = ReasonSpecRow(kind = ReasonSpecRowKind.FIXED, key = "chainAccReason"),
+            ),
+        ),
+        tags = listOf("acc"),
+        ownerOut = "my",
+    ),
+    ChainStepRecipeRow(
+        skill = "verb.past",
+        source = TextSpecRow(
+            kind = TextSpecRowKind.PATTERN,
+            key = "seenAcc",
+            values = listOf(
+                PatternValueRow(
+                    name = "acc",
+                    value = TextValueRow(
+                        kind = TextValueRowKind.PHRASE,
+                        spec = PhraseSpecRow(
+                            construction = "core.argument.case-role",
+                            bundle = listOf(
+                                FeatureValueRow(feature = "Number", value = "sg"),
+                                FeatureValueRow(feature = "Case", value = "acc"),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        expected = TextSpecRow(
+            kind = TextSpecRowKind.PATTERN,
+            key = "chainPast",
+            values = listOf(
+                PatternValueRow(
+                    name = "acc",
+                    value = TextValueRow(
+                        kind = TextValueRowKind.PHRASE,
+                        spec = PhraseSpecRow(
+                            construction = "core.argument.case-role",
+                            bundle = listOf(
+                                FeatureValueRow(feature = "Number", value = "sg"),
+                                FeatureValueRow(feature = "Case", value = "acc"),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        promptKey = "chainPastPrompt",
+        explanationKey = "chainPastReason",
+        changes = listOf(
+            ChangeSpecRow(
+                from = TextValueRow(kind = TextValueRowKind.COPY, key = "chainPastChangeFrom"),
+                to = TextValueRow(kind = TextValueRowKind.COPY, key = "chainPastChangeTo"),
+                reason = ReasonSpecRow(kind = ReasonSpecRowKind.FIXED, key = "chainPastReason"),
+            ),
+        ),
+        tags = listOf("past", "acc"),
+        ownerOut = "my",
+    ),
+    ChainStepRecipeRow(
+        skill = "case.gen.neg",
+        source = TextSpecRow(
+            kind = TextSpecRowKind.PATTERN,
+            key = "chainPast",
+            values = listOf(
+                PatternValueRow(
+                    name = "acc",
+                    value = TextValueRow(
+                        kind = TextValueRowKind.PHRASE,
+                        spec = PhraseSpecRow(
+                            construction = "core.argument.case-role",
+                            bundle = listOf(
+                                FeatureValueRow(feature = "Number", value = "sg"),
+                                FeatureValueRow(feature = "Case", value = "acc"),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        expected = TextSpecRow(
+            kind = TextSpecRowKind.PATTERN,
+            key = "chainNeg",
+            values = listOf(
+                PatternValueRow(
+                    name = "gen",
+                    value = TextValueRow(
+                        kind = TextValueRowKind.PHRASE,
+                        spec = PhraseSpecRow(
+                            construction = "core.sentence.polarity",
+                            bundle = listOf(
+                                FeatureValueRow(feature = "Number", value = "sg"),
+                                FeatureValueRow(feature = "Polarity", value = "neg"),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        promptKey = "chainNegPrompt",
+        explanationKey = "chainNegReason",
+        changes = listOf(
+            ChangeSpecRow(
+                from = TextValueRow(
+                    kind = TextValueRowKind.PHRASE,
+                    spec = PhraseSpecRow(
+                        construction = "core.argument.case-role",
+                        bundle = listOf(
+                            FeatureValueRow(feature = "Number", value = "sg"),
+                            FeatureValueRow(feature = "Case", value = "acc"),
+                        ),
+                    ),
+                ),
+                to = TextValueRow(
+                    kind = TextValueRowKind.PHRASE,
+                    spec = PhraseSpecRow(
+                        construction = "core.sentence.polarity",
+                        bundle = listOf(
+                            FeatureValueRow(feature = "Number", value = "sg"),
+                            FeatureValueRow(feature = "Polarity", value = "neg"),
+                        ),
+                    ),
+                ),
+                reason = ReasonSpecRow(kind = ReasonSpecRowKind.FIXED, key = "chainNegReason"),
+            ),
+        ),
+        tags = listOf("gen", "negation"),
+        ownerOut = "my",
+    ),
+    ChainStepRecipeRow(
+        skill = "agreement.my",
+        source = TextSpecRow(
+            kind = TextSpecRowKind.PATTERN,
+            key = "chainNeg",
+            values = listOf(
+                PatternValueRow(
+                    name = "gen",
+                    value = TextValueRow(
+                        kind = TextValueRowKind.PHRASE,
+                        spec = PhraseSpecRow(
+                            construction = "core.sentence.polarity",
+                            bundle = listOf(
+                                FeatureValueRow(feature = "Number", value = "sg"),
+                                FeatureValueRow(feature = "Polarity", value = "neg"),
+                            ),
+                            ownerLexeme = "my",
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        expected = TextSpecRow(
+            kind = TextSpecRowKind.PATTERN,
+            key = "chainOwner",
+            values = listOf(
+                PatternValueRow(
+                    name = "theirGen",
+                    value = TextValueRow(
+                        kind = TextValueRowKind.PHRASE,
+                        spec = PhraseSpecRow(
+                            construction = "core.agreement.possessive",
+                            bundle = listOf(
+                                FeatureValueRow(feature = "Number", value = "sg"),
+                                FeatureValueRow(feature = "Case", value = "gen"),
+                            ),
+                            ownerLexeme = "their",
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        promptKey = "chainOwnerPrompt",
+        explanationKey = "chainOwnerReason",
+        changes = listOf(
+            ChangeSpecRow(
+                from = TextValueRow(
+                    kind = TextValueRowKind.PHRASE,
+                    spec = PhraseSpecRow(
+                        construction = "core.sentence.polarity",
+                        bundle = listOf(
+                            FeatureValueRow(feature = "Number", value = "sg"),
+                            FeatureValueRow(feature = "Polarity", value = "neg"),
+                        ),
+                        ownerLexeme = "my",
+                    ),
+                ),
+                to = TextValueRow(
+                    kind = TextValueRowKind.PHRASE,
+                    spec = PhraseSpecRow(
+                        construction = "core.agreement.possessive",
+                        bundle = listOf(
+                            FeatureValueRow(feature = "Number", value = "sg"),
+                            FeatureValueRow(feature = "Case", value = "gen"),
+                        ),
+                        ownerLexeme = "their",
+                    ),
+                ),
+                reason = ReasonSpecRow(kind = ReasonSpecRowKind.FIXED, key = "chainOwnerReason"),
+            ),
+        ),
+        tags = listOf("gen", "agreement"),
+        ownerOut = "their",
+    ),
+    ChainStepRecipeRow(
+        skill = "case.loc",
+        source = TextSpecRow(
+            kind = TextSpecRowKind.PATTERN,
+            key = "chainOwner",
+            values = listOf(
+                PatternValueRow(
+                    name = "theirGen",
+                    value = TextValueRow(
+                        kind = TextValueRowKind.PHRASE,
+                        spec = PhraseSpecRow(
+                            construction = "core.agreement.possessive",
+                            bundle = listOf(
+                                FeatureValueRow(feature = "Number", value = "sg"),
+                                FeatureValueRow(feature = "Case", value = "gen"),
+                            ),
+                            ownerLexeme = "their",
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        expected = TextSpecRow(
+            kind = TextSpecRowKind.PATTERN,
+            key = "chainLoc",
+            values = listOf(
+                PatternValueRow(
+                    name = "theirLoc",
+                    value = TextValueRow(
+                        kind = TextValueRowKind.PHRASE,
+                        spec = PhraseSpecRow(
+                            construction = "core.argument.case-role",
+                            bundle = listOf(
+                                FeatureValueRow(feature = "Number", value = "sg"),
+                                FeatureValueRow(feature = "Case", value = "loc"),
+                            ),
+                            ownerLexeme = "their",
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        promptKey = "chainLocPrompt",
+        explanationKey = "chainLocReason",
+        changes = listOf(
+            ChangeSpecRow(
+                from = TextValueRow(
+                    kind = TextValueRowKind.PHRASE,
+                    spec = PhraseSpecRow(
+                        construction = "core.agreement.possessive",
+                        bundle = listOf(
+                            FeatureValueRow(feature = "Number", value = "sg"),
+                            FeatureValueRow(feature = "Case", value = "gen"),
+                        ),
+                        ownerLexeme = "their",
+                    ),
+                ),
+                to = TextValueRow(
+                    kind = TextValueRowKind.PHRASE,
+                    spec = PhraseSpecRow(
+                        construction = "core.argument.case-role",
+                        bundle = listOf(
+                            FeatureValueRow(feature = "Number", value = "sg"),
+                            FeatureValueRow(feature = "Case", value = "loc"),
+                        ),
+                        ownerLexeme = "their",
+                    ),
+                ),
+                reason = ReasonSpecRow(kind = ReasonSpecRowKind.FIXED, key = "chainLocReason"),
+            ),
+        ),
+        tags = listOf("loc"),
+        ownerOut = "their",
+    ),
+)
+
+val CHAIN_STEP_RECIPE_ROW_ROWS: List<ChainStepRecipeRow> = chainStepRecipeRowRowsPart0()
+
+private fun recipeDefaultsRowRowsPart0(): List<RecipeDefaultsRow> = listOf(
+    RecipeDefaultsRow(
+        defaultOwnerLexeme = "my",
+        verbLexeme = "go",
+        firstSkillByGender = listOf(
+            GenderSkillRow(gender = "f", skill = "case.acc.f"),
+            GenderSkillRow(gender = "n", skill = "case.acc.n"),
+            GenderSkillRow(gender = "default", skill = "case.acc.m"),
+        ),
+    ),
+)
+
+val RECIPE_DEFAULTS_ROW_ROWS: List<RecipeDefaultsRow> = recipeDefaultsRowRowsPart0()

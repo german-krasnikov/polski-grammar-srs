@@ -1,0 +1,280 @@
+# courses/lang/pl/exercise-recipes.json — source SHA-256: 8ef622c556d34e4c...
+# $comment_chain: generateChain's 5 fixed steps (UniversalCorePlan.md §5.1/§5.3): step 1's skillId varies by the drawn noun's gender (firstSkillByGender) — every other field is gender-independent. Owner is always the default "my" except where a phrase explicitly names "their" (after step 4's agreement.my swaps it) — see Recipe.kt's ChainStepRecipe doc.
+CHAIN {
+  source: {
+    kind: prefixed
+    spec: {
+      construction: core.argument.case-role
+      bundle: [{feature: Number value: sg} {feature: Case value: nom}]
+    }
+    prefixCase: nom
+    punct: "."
+  }
+  expected: {
+    kind: pattern
+    key: seenAcc
+    values: [
+      {
+        name: acc
+        value: {
+          kind: phrase
+          spec: {
+            construction: core.argument.case-role
+            bundle: [{feature: Number value: sg} {feature: Case value: acc}]
+          }
+        }
+      }
+    ]
+  }
+  promptKey: chainAccPrompt
+  explanationKey: chainAccReason
+  changes: [
+    {
+      from: {
+        kind: phrase
+        spec: {
+          construction: core.argument.case-role
+          bundle: [{feature: Number value: sg} {feature: Case value: nom}]
+        }
+      }
+      to: {
+        kind: phrase
+        spec: {
+          construction: core.argument.case-role
+          bundle: [{feature: Number value: sg} {feature: Case value: acc}]
+        }
+      }
+      reason: {kind: fixed key: chainAccReason}
+    }
+  ]
+  tags: [acc]
+  ownerOut: my
+}
+CHAIN {
+  skill: verb.past
+  source: {
+    kind: pattern
+    key: seenAcc
+    values: [
+      {
+        name: acc
+        value: {
+          kind: phrase
+          spec: {
+            construction: core.argument.case-role
+            bundle: [{feature: Number value: sg} {feature: Case value: acc}]
+          }
+        }
+      }
+    ]
+  }
+  expected: {
+    kind: pattern
+    key: chainPast
+    values: [
+      {
+        name: acc
+        value: {
+          kind: phrase
+          spec: {
+            construction: core.argument.case-role
+            bundle: [{feature: Number value: sg} {feature: Case value: acc}]
+          }
+        }
+      }
+    ]
+  }
+  promptKey: chainPastPrompt
+  explanationKey: chainPastReason
+  changes: [
+    {
+      from: {kind: copy key: chainPastChangeFrom}
+      to: {kind: copy key: chainPastChangeTo}
+      reason: {kind: fixed key: chainPastReason}
+    }
+  ]
+  tags: [past acc]
+  ownerOut: my
+}
+CHAIN {
+  skill: case.gen.neg
+  source: {
+    kind: pattern
+    key: chainPast
+    values: [
+      {
+        name: acc
+        value: {
+          kind: phrase
+          spec: {
+            construction: core.argument.case-role
+            bundle: [{feature: Number value: sg} {feature: Case value: acc}]
+          }
+        }
+      }
+    ]
+  }
+  expected: {
+    kind: pattern
+    key: chainNeg
+    values: [
+      {
+        name: gen
+        value: {
+          kind: phrase
+          spec: {
+            construction: core.sentence.polarity
+            bundle: [{feature: Number value: sg} {feature: Polarity value: neg}]
+          }
+        }
+      }
+    ]
+  }
+  promptKey: chainNegPrompt
+  explanationKey: chainNegReason
+  changes: [
+    {
+      from: {
+        kind: phrase
+        spec: {
+          construction: core.argument.case-role
+          bundle: [{feature: Number value: sg} {feature: Case value: acc}]
+        }
+      }
+      to: {
+        kind: phrase
+        spec: {
+          construction: core.sentence.polarity
+          bundle: [{feature: Number value: sg} {feature: Polarity value: neg}]
+        }
+      }
+      reason: {kind: fixed key: chainNegReason}
+    }
+  ]
+  tags: [gen negation]
+  ownerOut: my
+}
+CHAIN {
+  skill: agreement.my
+  source: {
+    kind: pattern
+    key: chainNeg
+    values: [
+      {
+        name: gen
+        value: {
+          kind: phrase
+          spec: {
+            construction: core.sentence.polarity
+            bundle: [{feature: Number value: sg} {feature: Polarity value: neg}]
+            ownerLexeme: my
+          }
+        }
+      }
+    ]
+  }
+  expected: {
+    kind: pattern
+    key: chainOwner
+    values: [
+      {
+        name: theirGen
+        value: {
+          kind: phrase
+          spec: {
+            construction: core.agreement.possessive
+            bundle: [{feature: Number value: sg} {feature: Case value: gen}]
+            ownerLexeme: their
+          }
+        }
+      }
+    ]
+  }
+  promptKey: chainOwnerPrompt
+  explanationKey: chainOwnerReason
+  changes: [
+    {
+      from: {
+        kind: phrase
+        spec: {
+          construction: core.sentence.polarity
+          bundle: [{feature: Number value: sg} {feature: Polarity value: neg}]
+          ownerLexeme: my
+        }
+      }
+      to: {
+        kind: phrase
+        spec: {
+          construction: core.agreement.possessive
+          bundle: [{feature: Number value: sg} {feature: Case value: gen}]
+          ownerLexeme: their
+        }
+      }
+      reason: {kind: fixed key: chainOwnerReason}
+    }
+  ]
+  tags: [gen agreement]
+  ownerOut: their
+}
+CHAIN {
+  skill: case.loc
+  source: {
+    kind: pattern
+    key: chainOwner
+    values: [
+      {
+        name: theirGen
+        value: {
+          kind: phrase
+          spec: {
+            construction: core.agreement.possessive
+            bundle: [{feature: Number value: sg} {feature: Case value: gen}]
+            ownerLexeme: their
+          }
+        }
+      }
+    ]
+  }
+  expected: {
+    kind: pattern
+    key: chainLoc
+    values: [
+      {
+        name: theirLoc
+        value: {
+          kind: phrase
+          spec: {
+            construction: core.argument.case-role
+            bundle: [{feature: Number value: sg} {feature: Case value: loc}]
+            ownerLexeme: their
+          }
+        }
+      }
+    ]
+  }
+  promptKey: chainLocPrompt
+  explanationKey: chainLocReason
+  changes: [
+    {
+      from: {
+        kind: phrase
+        spec: {
+          construction: core.agreement.possessive
+          bundle: [{feature: Number value: sg} {feature: Case value: gen}]
+          ownerLexeme: their
+        }
+      }
+      to: {
+        kind: phrase
+        spec: {
+          construction: core.argument.case-role
+          bundle: [{feature: Number value: sg} {feature: Case value: loc}]
+          ownerLexeme: their
+        }
+      }
+      reason: {kind: fixed key: chainLocReason}
+    }
+  ]
+  tags: [loc]
+  ownerOut: their
+}
