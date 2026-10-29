@@ -1,10 +1,16 @@
 // Development-only read of locked old course inputs and their v2 projections.
 // This is a static source/fixture consistency check, not candidate or host execution.
+// The old inputs are read from git at the commit that still has them in the tree (they left it; course.json before R1, the pl pack JSON in R1);
+// the SHA-256 of each is locked by the cases file.
 import { strict as assert } from 'node:assert';
 import { createHash } from 'node:crypto';
+import { execFileSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
 
 const root = new URL('../', import.meta.url);
+const OLD_SOURCES_REV = '7358aeb72ab79dce80fca1faadba6be64892fa18';
+const oldSource = (path) => execFileSync('git', ['show', `${OLD_SOURCES_REV}:${path}`], { cwd: fileURLToPath(root), maxBuffer: 1 << 26 });
 const defaultCases = new URL('../Plans/Biome/NJ03SeedsNounsChains.cases', import.meta.url);
 const casesPath = process.argv.length === 2 ? defaultCases : process.argv.length === 4 && process.argv[2] === '--cases' ? process.argv[3] : null;
 if (!casesPath) throw new Error('usage: node scripts/check-nj03-old-seeds-chains.mjs [--cases path]');
@@ -37,7 +43,7 @@ for (const [index, raw] of readFileSync(casesPath, 'utf8').split('\n').entries()
 assert.equal(sources.size, allowedSources.size, 'all four old-source/projection identities required');
 
 function readLocked(path) {
-  const bytes = readFileSync(new URL(path, root));
+  const bytes = oldSource(path);
   assert.equal(createHash('sha256').update(bytes).digest('hex'), sources.get(path), `${path}: complete old bytes changed`);
   return JSON.parse(bytes.toString('utf8'));
 }

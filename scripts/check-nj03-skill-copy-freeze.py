@@ -12,6 +12,7 @@ import argparse
 import hashlib
 import json
 from pathlib import Path
+import subprocess
 import sys
 
 
@@ -20,6 +21,8 @@ DEFAULT_CASES = ROOT / "Plans/Biome/NJ03SkillCopyIndependent.cases"
 NEGATIVE_CASES = ROOT / "Plans/Biome/NJ03SkillCopyNegative.cases"
 SEALED_CASES_SHA256 = "1e7933b61b666397fa23d40b80a9e197674bfd7148465cc92b2219c6589dea82"
 SEALED_NEGATIVES_SHA256 = "aa9d4d72ddab9f46fd5002d0e31832bd40362edb402e366133e1250efa3afbc9"
+# The old sources are read from git at the commit that still has them in the tree (they left it; course.json before R1, the pack JSON in R1); each is locked by SHA-256 below.
+OLD_SOURCES_REV = "7358aeb72ab79dce80fca1faadba6be64892fa18"
 SOURCES = (
     ("pl-v1", "courses/pl-ru/course.json", "7255e8c686ceee17a72d280e5876b0cf6776dd9a1743884cd75c724fb8180dcc"),
     ("pl-ru", "courses/pairs/pl-ru/pair.json", "dadb5eabaa02fa7dcf300f01bc3aa079cec43567247c249b3476d5c8a32215b7"),
@@ -120,8 +123,7 @@ def walk(value: object, path: str = "$") -> list[tuple[str, str, object]]:
 def read_old_sources() -> dict[str, object]:
     old: dict[str, object] = {}
     for key, relpath, expected_hash in SOURCES:
-        path = ROOT / relpath
-        raw = path.read_bytes()
+        raw = subprocess.run(["git", "show", f"{OLD_SOURCES_REV}:{relpath}"], cwd=ROOT, capture_output=True, check=True).stdout
         require(digest(raw) == expected_hash, "E_SOURCE_HASH", relpath)
         old[key] = json.loads(raw.decode("utf-8"))
     require(walk(old["pl-v1"]["skills"]) == walk(old["pl-ru"]["skills"]), "E_PROJECTION", "pl v1 → pair skill projection differs")

@@ -1,10 +1,15 @@
 // Test-only static oracle check. JSON.parse reads only the two locked historical source files.
 // It neither emits JSON nor executes a candidate Biome surface or product consumer.
+// The two files are read from git at the commit that still has them in the tree (R1 removes the pack JSON from the tree); the SHA-256 of each is locked by the cases file.
 import { strict as assert } from 'node:assert';
 import { createHash } from 'node:crypto';
+import { execFileSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
 
 const root = new URL('../', import.meta.url);
+const OLD_SOURCES_REV = '7358aeb72ab79dce80fca1faadba6be64892fa18';
+const oldSource = (path) => execFileSync('git', ['show', `${OLD_SOURCES_REV}:${path}`], { cwd: fileURLToPath(root), maxBuffer: 1 << 26 });
 const defaultCases = new URL('../Plans/Biome/NJ03CurriculumIndependent.cases', import.meta.url);
 const casesPath = process.argv.length === 2 ? defaultCases : process.argv.length === 4 && process.argv[2] === '--cases' ? process.argv[3] : null;
 if (casesPath === null) throw new Error('usage: node scripts/check-nj03-old-curriculum-facts.mjs [--cases path]');
@@ -80,7 +85,7 @@ for (const [lineIndex, raw] of readFileSync(casesPath, 'utf8').split('\n').entri
 assert.equal(sources.size, 2, 'both old source identities must be frozen');
 for (const language of ['en', 'pl']) {
   const { path, sha256 } = sources.get(language);
-  const bytes = readFileSync(new URL(path, root));
+  const bytes = oldSource(path);
   assert.equal(createHash('sha256').update(bytes).digest('hex'), sha256, `${path}: old source bytes changed`);
   const actual = JSON.parse(bytes.toString('utf8'));
   const expected = rows.get(language);

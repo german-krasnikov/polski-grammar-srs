@@ -1,16 +1,20 @@
 import { describe, expect, test } from 'vitest';
 import { validateLifehacks } from '../scripts/validate-lifehacks.mjs';
 import lifehacks from '../courses/pairs/pl-ru/lifehacks.json';
-import curriculum from '../courses/lang/pl/curriculum.json';
 
-const curriculumIds = (curriculum as unknown as Array<{ id: string }>).map((skill) => skill.id);
+// The 16 skill ids of the pl curriculum, in the order of the file lang/pl/curriculum.json (sha256 4f98cb4e...) that left the tree in R1.13. The same fact is
+// courses-biome/pl-ru/skills.core-data, which the Kotlin tests and `biome data check` read; this old TS test keeps its own copy until R1.18 maps it to a Kotlin test.
+const curriculumIds = [
+  'case.acc.n', 'case.acc.f', 'case.acc.m', 'case.gen.neg', 'case.inst', 'case.loc', 'case.dat', 'agreement.my',
+  'verb.present', 'verb.past', 'verb.future', 'aspect', 'pronouns', 'mixed', 'sentence.question', 'sentence.plural',
+];
 const copy = () => structuredClone(lifehacks);
 
 // EnRuPackPlan.md §4.4/§6 EN-20 authored a deliberately incomplete first set (5 records on the 5
 // most typologically unexpected skills). This later task closes the rest of §7's open item ("full
-// coverage of all 16 pl-ru skills") — every lang/pl/curriculum.json skill now has at least 2.
+// coverage of all 16 pl-ru skills") — every one of the 16 pl skills now has at least 2.
 describe('pl-ru lifehacks.json (full 16-skill coverage, EnRuPackPlan.md §4.4/§7 follow-up)', () => {
-  test('validates schema and resolves every skillId against lang/pl/curriculum.json', () => {
+  test('validates schema and resolves every skillId against the 16 pl skill ids', () => {
     expect(() => validateLifehacks('pl-ru', copy(), curriculumIds)).not.toThrow();
   });
 
