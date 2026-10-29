@@ -1,0 +1,50 @@
+DSL 1
+# The skills of a course pack (courses-biome/<pair>/skills.core-data), one SKILL row each: the Skill, its presentation and its style content.
+# Every Row record has the suffix so its Kotlin class cannot meet polski.model.Skill in the iOS/macOS export. R1.4b adds the SkillSpec fields.
+RECORD SkillRow KEY id COUNT 1..
+  id: string
+  title: string
+  group: string
+  level: enum A1|A2|B1|B2
+  formula: string
+  theory: string
+  hint: string
+  prerequisites: [ref SkillRow]
+  focus: FocusRow
+  methods: MethodsRow
+  styleContent: StyleContentRow OPTIONAL
+END
+
+RECORD FocusRow
+  before: string
+  after: string
+END
+
+RECORD MethodsRow
+  logic: MethodRow
+  situations: MethodRow
+END
+
+RECORD MethodRow
+  introduction: string
+  promptLead: string
+  introduce: string
+  retrieve: string
+  feedback: string
+  review: string
+END
+
+# rule, examples and nativeParallel may be left out: the style composer then derives the block from the skill itself (SkillStyleContent).
+RECORD StyleContentRow
+  rule: string OPTIONAL
+  nativeParallel: [NativeParallelRow] OPTIONAL
+  examples: [string] OPTIONAL
+  why: string OPTIONAL
+END
+
+RECORD NativeParallelRow
+  native: string
+  target: string
+  note: string
+  matches: bool
+END

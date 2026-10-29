@@ -303,6 +303,8 @@ kotlin {
             // name happens to match a "compileKotlin*" prefix.
             kotlin.srcDir(generateCoursePackSource.map { it.outputs.files.singleFile })
             kotlin.srcDir(generateFormsFixtureSource.map { it.outputs.files.singleFile })
+            // Rows printed by `biome generate --project dsl/biome.project` from courses-biome/<pair>/*.core-data (standard layout, committed).
+            kotlin.srcDir("src/commonMain/generated/kotlin")
         }
         commonMain.dependencies {
             implementation(libs.kotlinx.serialization.json)

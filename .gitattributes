@@ -1,0 +1,4 @@
+# Generated code (P16): folded in review tools, never edited by hand. tests/generated-registry.test.ts checks that this list and the GENERATE steps agree.
+kotlin/shared/src/commonMain/generated/** linguist-generated=true gitlab-generated
+kotlin/shared/src/commonMain/kotlin/polski/data/Generated*.kt linguist-generated=true gitlab-generated
+kotlin/shared/src/commonMain/kotlin/polski/interaction/SwipePolicy.kt linguist-generated=true gitlab-generated
