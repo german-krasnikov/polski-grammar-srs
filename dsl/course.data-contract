@@ -202,8 +202,8 @@ RECORD PrefixEntryRow KEY key COUNT 1..
 END
 
 # The vocabulary cards (one row: the cards and the texts around them), the chain of the training and the stem alternations.
-# A card with no frequency rank writes null: absence is stated, not left out (NULLABLE). The ids of the cards are unique, which the contract
-# cannot see inside a list, so PlRuVocabularyRows.kt checks them.
+# A card with no frequency rank writes null: absence is stated, not left out (NULLABLE). The ids of the cards and of the chain steps are unique,
+# which the contract cannot see inside a list, so PlRuVocabularyRows.kt checks them.
 RECORD VocabularyRow COUNT 1
   source: string
   items: [VocabularyItemRow]

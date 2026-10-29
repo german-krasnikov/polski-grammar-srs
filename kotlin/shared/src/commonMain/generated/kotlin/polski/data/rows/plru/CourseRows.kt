@@ -1,5 +1,5 @@
 // Generated from dsl/course.data-contract
-// source-sha256=5c776261a3c96ae91a7f20c78cdfe17a7a1a3af0d419ed399a953f21e3d023e2
+// source-sha256=8d177f9bb4865d3fc7369ca236cefea9f7520711e60dab029ccddd67c64addc4
 // Edit the source, then run biome generate.
 
 package polski.data.rows.plru
