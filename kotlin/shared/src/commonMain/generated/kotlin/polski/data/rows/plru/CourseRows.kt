@@ -1,5 +1,5 @@
 // Generated from dsl/course.data-contract
-// source-sha256=8d177f9bb4865d3fc7369ca236cefea9f7520711e60dab029ccddd67c64addc4
+// source-sha256=4953b2a3a851a6ff19ad3abaf568017fc11d7e786c43263efec38e6403a31a37
 // Edit the source, then run biome generate.
 
 package polski.data.rows.plru
@@ -31,6 +31,25 @@ enum class VerbSubjectRowGenderMode(val tag: String) {
     FIXED("fixed"),
 }
 
+enum class TextValueRowKind(val tag: String) {
+    COPY("copy"),
+    LITERAL("literal"),
+    PHRASE("phrase"),
+    PRONOUN("pronoun"),
+}
+
+enum class TextSpecRowKind(val tag: String) {
+    DIRECT("direct"),
+    PATTERN("pattern"),
+    CONCAT("concat"),
+    PREFIXED("prefixed"),
+}
+
+enum class ReasonSpecRowKind(val tag: String) {
+    FIXED("fixed"),
+    CLASSIFIED("classified"),
+}
+
 data class FocusRow(
     val before: String,
     val after: String,
@@ -56,7 +75,7 @@ data class FeatureFocusRow(
     val to: String,
 )
 
-data class FixedRow(
+data class FeatureValueRow(
     val feature: String,
     val value: String,
 )
@@ -98,7 +117,7 @@ data class SkillRow(
     val methods: MethodsRow,
     val construction: String,
     val featureFocus: FeatureFocusRow?,
-    val fixed: List<FixedRow>,
+    val fixed: List<FeatureValueRow>,
     val lexicalFilter: LexicalFilterRow?,
     val styleContent: StyleContentRow? = null,
 )
@@ -523,6 +542,60 @@ data class MorphologyRow(
     val futureAuxiliary: FutureAuxiliaryRow,
 )
 
+data class PhraseSpecRow(
+    val construction: String,
+    val bundle: List<FeatureValueRow>,
+    val ownerLexeme: String? = null,
+)
+
+data class GenderPronounRow(
+    val gender: String,
+    val pronounId: String,
+)
+
+data class TextValueRow(
+    val kind: TextValueRowKind,
+    val capitalized: Boolean? = null,
+    val key: String? = null,
+    val value: String? = null,
+    val spec: PhraseSpecRow? = null,
+    val genderToKey: List<GenderPronounRow>? = null,
+    val caseId: String? = null,
+)
+
+data class PatternValueRow(
+    val name: String,
+    val value: TextValueRow,
+)
+
+data class TextSpecRow(
+    val kind: TextSpecRowKind,
+    val value: TextValueRow? = null,
+    val key: String? = null,
+    val values: List<PatternValueRow>? = null,
+    val parts: List<TextValueRow>? = null,
+    val spec: PhraseSpecRow? = null,
+    val prefixCase: String? = null,
+    val punct: String? = null,
+)
+
+data class ReasonRuleRow(
+    val whenClass: String,
+    val key: String,
+)
+
+data class ReasonSpecRow(
+    val kind: ReasonSpecRowKind,
+    val key: String? = null,
+    val rules: List<ReasonRuleRow>? = null,
+)
+
+data class ChangeSpecRow(
+    val from: TextValueRow,
+    val to: TextValueRow,
+    val reason: ReasonSpecRow,
+)
+
 private fun skillRowRowsPart0(): List<SkillRow> = listOf(
     SkillRow(
         id = "case.acc.n",
@@ -555,9 +628,9 @@ private fun skillRowRowsPart0(): List<SkillRow> = listOf(
         construction = "core.argument.case-role",
         featureFocus = FeatureFocusRow(feature = "Case", from = "Nom", to = "Acc"),
         fixed = listOf(
-            FixedRow(feature = "Tense", value = "Pres"),
-            FixedRow(feature = "Person", value = "1"),
-            FixedRow(feature = "Number", value = "Sing"),
+            FeatureValueRow(feature = "Tense", value = "Pres"),
+            FeatureValueRow(feature = "Person", value = "1"),
+            FeatureValueRow(feature = "Number", value = "Sing"),
         ),
         lexicalFilter = LexicalFilterRow(slot = "noun", where = WhereRow(gender = listOf("n"))),
         styleContent = StyleContentRow(
@@ -604,9 +677,9 @@ private fun skillRowRowsPart0(): List<SkillRow> = listOf(
         construction = "core.argument.case-role",
         featureFocus = FeatureFocusRow(feature = "Case", from = "Nom", to = "Acc"),
         fixed = listOf(
-            FixedRow(feature = "Tense", value = "Pres"),
-            FixedRow(feature = "Person", value = "1"),
-            FixedRow(feature = "Number", value = "Sing"),
+            FeatureValueRow(feature = "Tense", value = "Pres"),
+            FeatureValueRow(feature = "Person", value = "1"),
+            FeatureValueRow(feature = "Number", value = "Sing"),
         ),
         lexicalFilter = LexicalFilterRow(slot = "noun", where = WhereRow(gender = listOf("f"))),
         styleContent = StyleContentRow(
@@ -653,9 +726,9 @@ private fun skillRowRowsPart0(): List<SkillRow> = listOf(
         construction = "core.argument.case-role",
         featureFocus = FeatureFocusRow(feature = "Case", from = "Nom", to = "Acc"),
         fixed = listOf(
-            FixedRow(feature = "Tense", value = "Pres"),
-            FixedRow(feature = "Person", value = "1"),
-            FixedRow(feature = "Number", value = "Sing"),
+            FeatureValueRow(feature = "Tense", value = "Pres"),
+            FeatureValueRow(feature = "Person", value = "1"),
+            FeatureValueRow(feature = "Number", value = "Sing"),
         ),
         lexicalFilter = LexicalFilterRow(
             slot = "noun",
@@ -711,9 +784,9 @@ private fun skillRowRowsPart0(): List<SkillRow> = listOf(
         construction = "core.sentence.polarity",
         featureFocus = FeatureFocusRow(feature = "Polarity", from = "Pos", to = "Neg"),
         fixed = listOf(
-            FixedRow(feature = "Tense", value = "Pres"),
-            FixedRow(feature = "Person", value = "1"),
-            FixedRow(feature = "Number", value = "Sing"),
+            FeatureValueRow(feature = "Tense", value = "Pres"),
+            FeatureValueRow(feature = "Person", value = "1"),
+            FeatureValueRow(feature = "Number", value = "Sing"),
         ),
         lexicalFilter = null,
         styleContent = StyleContentRow(
@@ -766,9 +839,9 @@ private fun skillRowRowsPart0(): List<SkillRow> = listOf(
         construction = "core.argument.case-role",
         featureFocus = FeatureFocusRow(feature = "Case", from = "Acc", to = "Inst"),
         fixed = listOf(
-            FixedRow(feature = "Tense", value = "Pres"),
-            FixedRow(feature = "Person", value = "1"),
-            FixedRow(feature = "Number", value = "Sing"),
+            FeatureValueRow(feature = "Tense", value = "Pres"),
+            FeatureValueRow(feature = "Person", value = "1"),
+            FeatureValueRow(feature = "Number", value = "Sing"),
         ),
         lexicalFilter = LexicalFilterRow(
             slot = "noun",
@@ -824,9 +897,9 @@ private fun skillRowRowsPart0(): List<SkillRow> = listOf(
         construction = "core.argument.case-role",
         featureFocus = FeatureFocusRow(feature = "Case", from = "Acc", to = "Loc"),
         fixed = listOf(
-            FixedRow(feature = "Tense", value = "Pres"),
-            FixedRow(feature = "Person", value = "1"),
-            FixedRow(feature = "Number", value = "Sing"),
+            FeatureValueRow(feature = "Tense", value = "Pres"),
+            FeatureValueRow(feature = "Person", value = "1"),
+            FeatureValueRow(feature = "Number", value = "Sing"),
         ),
         lexicalFilter = null,
         styleContent = StyleContentRow(
@@ -873,9 +946,9 @@ private fun skillRowRowsPart0(): List<SkillRow> = listOf(
         construction = "core.argument.case-role",
         featureFocus = FeatureFocusRow(feature = "Case", from = "Acc", to = "Dat"),
         fixed = listOf(
-            FixedRow(feature = "Tense", value = "Pres"),
-            FixedRow(feature = "Person", value = "1"),
-            FixedRow(feature = "Number", value = "Sing"),
+            FeatureValueRow(feature = "Tense", value = "Pres"),
+            FeatureValueRow(feature = "Person", value = "1"),
+            FeatureValueRow(feature = "Number", value = "Sing"),
         ),
         lexicalFilter = LexicalFilterRow(
             slot = "noun",
@@ -931,10 +1004,10 @@ private fun skillRowRowsPart0(): List<SkillRow> = listOf(
         construction = "core.agreement.possessive",
         featureFocus = null,
         fixed = listOf(
-            FixedRow(feature = "Case", value = "Acc"),
-            FixedRow(feature = "Tense", value = "Pres"),
-            FixedRow(feature = "Person", value = "1"),
-            FixedRow(feature = "Number", value = "Sing"),
+            FeatureValueRow(feature = "Case", value = "Acc"),
+            FeatureValueRow(feature = "Tense", value = "Pres"),
+            FeatureValueRow(feature = "Person", value = "1"),
+            FeatureValueRow(feature = "Number", value = "Sing"),
         ),
         lexicalFilter = null,
         styleContent = StyleContentRow(
@@ -986,7 +1059,10 @@ private fun skillRowRowsPart0(): List<SkillRow> = listOf(
         ),
         construction = "core.verb.tense",
         featureFocus = FeatureFocusRow(feature = "Tense", from = "Past", to = "Pres"),
-        fixed = listOf(FixedRow(feature = "Person", value = "3"), FixedRow(feature = "Number", value = "Sing")),
+        fixed = listOf(
+            FeatureValueRow(feature = "Person", value = "3"),
+            FeatureValueRow(feature = "Number", value = "Sing"),
+        ),
         lexicalFilter = LexicalFilterRow(
             slot = "noun",
             where = WhereRow(nounId = listOf("wife", "husband", "friendM", "son", "child")),
@@ -1034,7 +1110,10 @@ private fun skillRowRowsPart0(): List<SkillRow> = listOf(
         ),
         construction = "core.verb.tense",
         featureFocus = FeatureFocusRow(feature = "Tense", from = "Pres", to = "Past"),
-        fixed = listOf(FixedRow(feature = "Person", value = "3"), FixedRow(feature = "Number", value = "Sing")),
+        fixed = listOf(
+            FeatureValueRow(feature = "Person", value = "3"),
+            FeatureValueRow(feature = "Number", value = "Sing"),
+        ),
         lexicalFilter = LexicalFilterRow(
             slot = "noun",
             where = WhereRow(nounId = listOf("wife", "husband", "friendM", "son", "child")),
@@ -1088,7 +1167,10 @@ private fun skillRowRowsPart0(): List<SkillRow> = listOf(
         ),
         construction = "core.verb.tense",
         featureFocus = FeatureFocusRow(feature = "Tense", from = "Pres", to = "Fut"),
-        fixed = listOf(FixedRow(feature = "Person", value = "3"), FixedRow(feature = "Number", value = "Sing")),
+        fixed = listOf(
+            FeatureValueRow(feature = "Person", value = "3"),
+            FeatureValueRow(feature = "Number", value = "Sing"),
+        ),
         lexicalFilter = LexicalFilterRow(
             slot = "noun",
             where = WhereRow(nounId = listOf("wife", "husband", "friendM", "son", "child")),
@@ -1142,7 +1224,10 @@ private fun skillRowRowsPart0(): List<SkillRow> = listOf(
         ),
         construction = "core.composite",
         featureFocus = null,
-        fixed = listOf(FixedRow(feature = "Person", value = "1"), FixedRow(feature = "Number", value = "Sing")),
+        fixed = listOf(
+            FeatureValueRow(feature = "Person", value = "1"),
+            FeatureValueRow(feature = "Number", value = "Sing"),
+        ),
         lexicalFilter = null,
         styleContent = StyleContentRow(
             nativeParallel = listOf(
@@ -1194,10 +1279,10 @@ private fun skillRowRowsPart0(): List<SkillRow> = listOf(
         construction = "core.argument.case-role",
         featureFocus = null,
         fixed = listOf(
-            FixedRow(feature = "Case", value = "Acc"),
-            FixedRow(feature = "Tense", value = "Pres"),
-            FixedRow(feature = "Person", value = "1"),
-            FixedRow(feature = "Number", value = "Sing"),
+            FeatureValueRow(feature = "Case", value = "Acc"),
+            FeatureValueRow(feature = "Tense", value = "Pres"),
+            FeatureValueRow(feature = "Person", value = "1"),
+            FeatureValueRow(feature = "Number", value = "Sing"),
         ),
         lexicalFilter = LexicalFilterRow(
             slot = "noun",
@@ -1298,9 +1383,9 @@ private fun skillRowRowsPart0(): List<SkillRow> = listOf(
         construction = "core.sentence.mood",
         featureFocus = FeatureFocusRow(feature = "Mood", from = "Decl", to = "YesNoQ"),
         fixed = listOf(
-            FixedRow(feature = "Tense", value = "Pres"),
-            FixedRow(feature = "Person", value = "2"),
-            FixedRow(feature = "Number", value = "Sing"),
+            FeatureValueRow(feature = "Tense", value = "Pres"),
+            FeatureValueRow(feature = "Person", value = "2"),
+            FeatureValueRow(feature = "Number", value = "Sing"),
         ),
         lexicalFilter = null,
         styleContent = StyleContentRow(
@@ -1347,9 +1432,9 @@ private fun skillRowRowsPart0(): List<SkillRow> = listOf(
         construction = "core.number",
         featureFocus = FeatureFocusRow(feature = "Number", from = "Sing", to = "Plur"),
         fixed = listOf(
-            FixedRow(feature = "Case", value = "Acc"),
-            FixedRow(feature = "Tense", value = "Pres"),
-            FixedRow(feature = "Person", value = "1"),
+            FeatureValueRow(feature = "Case", value = "Acc"),
+            FeatureValueRow(feature = "Tense", value = "Pres"),
+            FeatureValueRow(feature = "Person", value = "1"),
         ),
         lexicalFilter = null,
         styleContent = StyleContentRow(

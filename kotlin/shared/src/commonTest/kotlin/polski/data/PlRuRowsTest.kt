@@ -9,7 +9,7 @@ import polski.core.model.FeatureValue
 import polski.core.model.LexicalFilter
 import polski.core.model.SkillSpec
 import polski.data.rows.plru.FeatureFocusRow
-import polski.data.rows.plru.FixedRow
+import polski.data.rows.plru.FeatureValueRow
 import polski.data.rows.plru.FocusRow
 import polski.data.rows.plru.LexicalFilterRow
 import polski.data.rows.plru.MethodRow
@@ -31,7 +31,7 @@ class PlRuRowsTest {
     private fun row(
         style: StyleContentRow? = null,
         featureFocus: FeatureFocusRow? = null,
-        fixed: List<FixedRow> = emptyList(),
+        fixed: List<FeatureValueRow> = emptyList(),
         filter: LexicalFilterRow? = null,
     ) = SkillRow(
         "s", edge, "G", SkillRowLevel.B1, "f", "t", "h", listOf("p"), FocusRow("b", "a"), MethodsRow(method("l"), method("s")),
@@ -74,7 +74,7 @@ class PlRuRowsTest {
     @Test fun focusFixedAndFilterBecomeTheCoreTypesInTheOrderWritten() {
         val spec = row(
             featureFocus = FeatureFocusRow("Case", "Nom", "Acc"),
-            fixed = listOf(FixedRow("Tense", "Pres"), FixedRow("Person", "1")),
+            fixed = listOf(FeatureValueRow("Tense", "Pres"), FeatureValueRow("Person", "1")),
             filter = LexicalFilterRow("noun", WhereRow(nounId = listOf("wife"), gender = listOf("m-personal", "f"))),
         ).toSkillSpec()
         assertEquals(FeatureFocus(FeatureKey("Case"), FeatureValue("Nom"), FeatureValue("Acc")), spec.focus)
@@ -88,7 +88,7 @@ class PlRuRowsTest {
     }
 
     @Test fun aFixedFeatureWrittenTwiceIsRefusedNotOverwritten() {
-        val twice = listOf(FixedRow("Tense", "Pres"), FixedRow("Tense", "Past"))
+        val twice = listOf(FeatureValueRow("Tense", "Pres"), FeatureValueRow("Tense", "Past"))
         assertFailsWith<IllegalArgumentException> { row(fixed = twice).toSkillSpec() }
     }
 }

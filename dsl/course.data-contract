@@ -15,7 +15,7 @@ RECORD SkillRow KEY id COUNT 1..
   methods: MethodsRow
   construction: string
   featureFocus: FeatureFocusRow NULLABLE
-  fixed: [FixedRow]
+  fixed: [FeatureValueRow]
   lexicalFilter: LexicalFilterRow NULLABLE
   styleContent: StyleContentRow OPTIONAL
 END
@@ -39,15 +39,15 @@ RECORD MethodRow
   review: string
 END
 
-# The axis a skill drills (null: no single feature flip), the axes it holds fixed (the features are an open catalog, so pairs, not fields),
-# and the candidates it draws from: each property of `where` names the values a candidate must have; a nounId is the id of a noun.
+# The axis a skill drills (null: no single feature flip), the axes it holds fixed, and the candidates it draws from: each property of `where` names
+# the values a candidate must have; a nounId is the id of a noun. The features are an open catalog, so a set of them is a list of pairs, not a record.
 RECORD FeatureFocusRow
   feature: string
   from: string
   to: string
 END
 
-RECORD FixedRow
+RECORD FeatureValueRow
   feature: string
   value: string
 END
@@ -516,4 +516,65 @@ RECORD EndingPartRow
   text: string
   isChanged: bool
   isEnding: bool
+END
+
+# Recipe expressions (R1.11): how the text of an exercise is built from the pack. The contract has no union, so each variant is one record with a kind and
+# OPTIONAL fields; PlRuRecipeRows.kt refuses a kind that lacks a field of its own or carries one of another kind. A text is a copy entry, a literal (it may be
+# empty), a phrase of a construction, or a personal pronoun chosen by the gender of the noun ("default" is the pair for every other gender); `capitalized`
+# puts the first letter in capitals. The names of a bundle's features are an open catalog, as in SkillRow.fixed.
+RECORD TextValueRow
+  kind: enum copy|literal|phrase|pronoun
+  capitalized: bool OPTIONAL
+  key: ref CopyEntryRow OPTIONAL
+  value: string OPTIONAL
+  spec: PhraseSpecRow OPTIONAL
+  genderToKey: [GenderPronounRow] OPTIONAL
+  caseId: string OPTIONAL
+END
+
+RECORD PhraseSpecRow
+  construction: string
+  bundle: [FeatureValueRow]
+  ownerLexeme: string OPTIONAL
+END
+
+RECORD GenderPronounRow
+  gender: string
+  pronounId: string
+END
+
+# A text made of values: one of them, a pattern with a value for each placeholder, the values joined without a separator, or the case sentence of a phrase
+# (the lead-in of prefixCase, the phrase, then punct).
+RECORD TextSpecRow
+  kind: enum direct|pattern|concat|prefixed
+  value: TextValueRow OPTIONAL
+  key: ref PatternEntryRow OPTIONAL
+  values: [PatternValueRow] OPTIONAL
+  parts: [TextValueRow] OPTIONAL
+  spec: PhraseSpecRow OPTIONAL
+  prefixCase: string OPTIONAL
+  punct: string OPTIONAL
+END
+
+RECORD PatternValueRow
+  name: string
+  value: TextValueRow
+END
+
+# What changed between two texts and why: the reason is one copy entry, or one for each class of change (the class "default" is the one left over).
+RECORD ChangeSpecRow
+  from: TextValueRow
+  to: TextValueRow
+  reason: ReasonSpecRow
+END
+
+RECORD ReasonSpecRow
+  kind: enum fixed|classified
+  key: ref CopyEntryRow OPTIONAL
+  rules: [ReasonRuleRow] OPTIONAL
+END
+
+RECORD ReasonRuleRow
+  whenClass: string
+  key: ref CopyEntryRow
 END
