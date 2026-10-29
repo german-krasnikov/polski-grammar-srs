@@ -1,0 +1,19 @@
+DSL 1
+# The form table of a pack (R1.12): for each lexeme, written category:id, every form the engine can ask for and the bundle of features that asks for it.
+# It is not authored. dsl/derive-forms.mjs lays the forms of the lexicon out under their bundles (the rules of the past tense and of the future are there),
+# `biome generate` prints the rows, and TableMorphology only looks a form up: the rules are run at build time (UniversalCorePlan.md section 1.5).
+# A bundle is a list of pairs, not a record: the features are an open catalog and the bundles of one table do not share their features.
+RECORD FormLexemeRow KEY lexeme COUNT 1..
+  lexeme: string
+  forms: [FormRow]
+END
+
+RECORD FormRow
+  bundle: [BundleFeatureRow]
+  form: string
+END
+
+RECORD BundleFeatureRow
+  feature: string
+  value: string
+END

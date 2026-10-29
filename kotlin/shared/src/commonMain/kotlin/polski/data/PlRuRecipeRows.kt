@@ -27,11 +27,6 @@ private fun requireFields(what: String, kind: String, written: Map<String, Any?>
     require(present == needed.toSet()) { "$what of kind $kind writes $present, the kind needs ${needed.toSet()}" }
 }
 
-/** A map from pairs; a name written twice is refused, not overwritten. */
-private fun <V> List<Pair<String, V>>.toDistinctMap(what: String): Map<String, V> = toMap().also {
-    require(it.size == size) { "$what: ${groupingBy { pair -> pair.first }.eachCount().filterValues { n -> n > 1 }.keys} written twice" }
-}
-
 internal fun PhraseSpecRow.toPhraseSpec() = PhraseSpec(construction, bundle.map { it.feature to it.value }.toDistinctMap("bundle of $construction"), ownerLexeme)
 
 internal fun TextValueRow.toTextValue(): TextValue {
