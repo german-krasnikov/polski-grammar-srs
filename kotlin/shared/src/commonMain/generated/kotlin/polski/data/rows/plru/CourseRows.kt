@@ -1,5 +1,5 @@
 // Generated from dsl/course.data-contract
-// source-sha256=5d6c9f8692aff6787af8eb09bbcbd9fdc2305782a9b9ad05138ddf2407a8953a
+// source-sha256=b51f04df7413cf819608d7d3e1540d25e98970557018f48ef7b04e85948b40b1
 // Edit the source, then run biome generate.
 
 package polski.data.rows.plru
@@ -192,6 +192,26 @@ data class PossessiveRow(
     val id: String,
     val label: String,
     val forms: PossessiveFormsRow,
+)
+
+data class SeedRow(
+    val nounId: String,
+    val adjectiveId: String,
+)
+
+data class CopyEntryRow(
+    val key: String,
+    val value: String,
+)
+
+data class PatternEntryRow(
+    val key: String,
+    val value: String,
+)
+
+data class PrefixEntryRow(
+    val key: String,
+    val value: String,
 )
 
 private fun skillRowRowsPart0(): List<SkillRow> = listOf(
@@ -2656,3 +2676,170 @@ private fun possessiveRowRowsPart0(): List<PossessiveRow> = listOf(
 )
 
 val POSSESSIVE_ROW_ROWS: List<PossessiveRow> = possessiveRowRowsPart0()
+
+private fun seedRowRowsPart0(): List<SeedRow> = listOf(
+    SeedRow(nounId = "wife", adjectiveId = "beautiful"),
+    SeedRow(nounId = "husband", adjectiveId = "good"),
+    SeedRow(nounId = "friendM", adjectiveId = "good"),
+    SeedRow(nounId = "son", adjectiveId = "small"),
+    SeedRow(nounId = "dog", adjectiveId = "good"),
+    SeedRow(nounId = "cat", adjectiveId = "small"),
+    SeedRow(nounId = "book", adjectiveId = "new"),
+    SeedRow(nounId = "car", adjectiveId = "new"),
+    SeedRow(nounId = "house", adjectiveId = "new"),
+    SeedRow(nounId = "phone", adjectiveId = "new"),
+    SeedRow(nounId = "child", adjectiveId = "small"),
+    SeedRow(nounId = "window", adjectiveId = "new"),
+)
+
+val SEED_ROW_ROWS: List<SeedRow> = seedRowRowsPart0()
+
+private fun copyEntryRowRowsPart0(): List<CopyEntryRow> = listOf(
+    CopyEntryRow(key = "accPrompt", value = "Скажи, что ты видишь этого человека или этот предмет. Начни с «Widzę…»."),
+    CopyEntryRow(
+        key = "accExplanation",
+        value = "Widzę требует Biernik. Согласуй притяжательное местоимение, прилагательное и существительное.",
+    ),
+    CopyEntryRow(key = "accReasonPersonalA", value = "kolega → kolegę; местоимение и прилагательное — mojego dobrego."),
+    CopyEntryRow(
+        key = "accReasonUnchanged",
+        value = "Biernik совпадает с Mianownikiem: группа сохраняет базовую форму.",
+    ),
+    CopyEntryRow(key = "accReasonChanged", value = "Изменяется вся группа слов."),
+    CopyEntryRow(key = "genNegPrompt", value = "Сделай всё предложение отрицательным."),
+    CopyEntryRow(
+        key = "genNegExplanation",
+        value = "Отрицание widzę переводит прямой объект из Biernika в Dopełniacz.",
+    ),
+    CopyEntryRow(key = "genNegReason", value = "Biernik → Dopełniacz"),
+    CopyEntryRow(key = "negationParticle", value = "Nie"),
+    CopyEntryRow(key = "negationInsertionReason", value = "Добавь отрицание nie."),
+    CopyEntryRow(key = "instStart", value = "Idę z"),
+    CopyEntryRow(key = "instPrompt", value = "Скажи, что идёшь вместе с этим человеком. Начни с «Idę z…»."),
+    CopyEntryRow(key = "instReason", value = "z kim? czym? — Narzędnik"),
+    CopyEntryRow(key = "locStart", value = "Mówię o"),
+    CopyEntryRow(key = "locPrompt", value = "Теперь скажи, что говоришь об этом. Начни с «Mówię o…»."),
+    CopyEntryRow(key = "locReason", value = "o kim? czym? — Miejscownik"),
+    CopyEntryRow(key = "datStart", value = "Daję prezent"),
+    CopyEntryRow(key = "datPrompt", value = "Скажи, что даришь этому человеку подарок. Начни с «Daję prezent…»."),
+    CopyEntryRow(key = "datReason", value = "komu? czemu? — Celownik"),
+    CopyEntryRow(
+        key = "caseDrillExplanation",
+        value = "Новая конструкция задаёт падеж всей группы: местоимение + прилагательное + существительное.",
+    ),
+    CopyEntryRow(key = "ownerYour", value = "твой / твоя"),
+    CopyEntryRow(key = "ownerHis", value = "его"),
+    CopyEntryRow(key = "ownerHer", value = "её"),
+    CopyEntryRow(key = "ownerOur", value = "наш / наша"),
+    CopyEntryRow(key = "ownerYourPlural", value = "ваш / ваша"),
+    CopyEntryRow(key = "ownerTheir", value = "их"),
+    CopyEntryRow(key = "ownerPromptPrefix", value = "Замени «мой / моя» на «"),
+    CopyEntryRow(key = "ownerPromptSuffix", value = "». Сохрани время и смысл предложения."),
+    CopyEntryRow(
+        key = "ownerExplanation",
+        value = "mój, twój, nasz, wasz согласуются с предметом обладания. jego, jej, ich не склоняются.",
+    ),
+    CopyEntryRow(key = "ownerReason", value = "Меняем владельца, сохраняем Biernik."),
+    CopyEntryRow(key = "verbPastPrompt", value = "Перенеси всё предложение в прошедшее время."),
+    CopyEntryRow(
+        key = "verbFuturePrompt",
+        value = "Перенеси всё предложение в будущее время. Сохрани несовершенный вид.",
+    ),
+    CopyEntryRow(key = "verbPresentPrompt", value = "Перенеси всё предложение в настоящее время."),
+    CopyEntryRow(
+        key = "verbExplanation",
+        value = "Подлежащее остаётся в Mianowniku. В прошедшем времени глагол согласуется с ним по роду.",
+    ),
+    CopyEntryRow(key = "verbReason", value = "Меняется время глагола, остальные слова сохраняются."),
+    CopyEntryRow(key = "aspectSource", value = "Dzisiaj kupuję nową książkę."),
+    CopyEntryRow(
+        key = "aspectPrompt",
+        value = "Скажи, что вчера уже купил эту книгу: завершённый результат. Начни с «Wczoraj…».",
+    ),
+    CopyEntryRow(key = "aspectExpected", value = "Wczoraj kupiłem nową książkę."),
+    CopyEntryRow(key = "aspectAccepted", value = "Wczoraj kupiłam nową książkę."),
+    CopyEntryRow(
+        key = "aspectExplanation",
+        value = "Процесс kupować → завершённый результат kupić. Форма kupiłam также правильная.",
+    ),
+    CopyEntryRow(key = "aspectFrom", value = "kupuję"),
+    CopyEntryRow(key = "aspectTo", value = "kupiłem"),
+    CopyEntryRow(key = "aspectReason", value = "Совершенный вид + прошедшее время."),
+    CopyEntryRow(key = "pronounPrompt", value = "Замени всю группу после «Widzę» одним личным местоимением."),
+    CopyEntryRow(key = "pronounExplanation", value = "Местоимение заменяет всю группу слов и остаётся в Bierniku."),
+    CopyEntryRow(key = "pronounReason", value = "кого? что?"),
+    CopyEntryRow(
+        key = "questionPrompt",
+        value = "Сделай вопрос, на который можно ответить «да» или «нет». Начни с «Czy…».",
+    ),
+    CopyEntryRow(
+        key = "questionExplanation",
+        value = "Czy превращает утверждение в общий вопрос. Падеж объекта сохраняется.",
+    ),
+    CopyEntryRow(key = "questionReason", value = "Добавь вопросительное czy."),
+    CopyEntryRow(key = "questionParticle", value = "Czy"),
+    CopyEntryRow(key = "pluralPrompt", value = "Поставь всю группу после «Widzę» во множественное число."),
+    CopyEntryRow(
+        key = "pluralExplanation",
+        value = "Во множественном числе мужские личные формы отличаются от остальных: moich dobrych kolegów, но moje nowe książki.",
+    ),
+    CopyEntryRow(key = "pluralReason", value = "Меняются число и согласование всей группы."),
+    CopyEntryRow(key = "mixedPrompt", value = "Скажи «ты не видел…» в прошедшем времени. Сохрани «мой / моя»."),
+    CopyEntryRow(
+        key = "mixedExplanation",
+        value = "TY + прошедшее время + отрицание. Отрицание требует Dopełniacza всей группы слов.",
+    ),
+    CopyEntryRow(key = "mixedVerbReason", value = "Лицо + время + отрицание"),
+    CopyEntryRow(key = "mixedNounReason", value = "Biernik → Dopełniacz"),
+    CopyEntryRow(key = "chainAccPrompt", value = "Скажи, что видишь это. Начни с «Widzę…»."),
+    CopyEntryRow(key = "chainAccReason", value = "Widzę → Biernik."),
+    CopyEntryRow(key = "chainPastPrompt", value = "Перенеси предложение в прошедшее время. Говори от мужского лица."),
+    CopyEntryRow(key = "chainPastReason", value = "Меняется только время глагола."),
+    CopyEntryRow(key = "chainNegPrompt", value = "Теперь сделай это предложение отрицательным."),
+    CopyEntryRow(key = "chainNegReason", value = "Отрицание → Biernik меняется на Dopełniacz."),
+    CopyEntryRow(key = "chainOwnerPrompt", value = "Замени «мой / моя» на «их»."),
+    CopyEntryRow(
+        key = "chainOwnerReason",
+        value = "ich не склоняется; прилагательное и существительное остаются в Dopełniaczu.",
+    ),
+    CopyEntryRow(key = "chainLocPrompt", value = "Теперь скажи, что говоришь об этом. Начни с «Mówię o…»."),
+    CopyEntryRow(key = "chainLocReason", value = "o → Miejscownik. Сохрани владельца «их»."),
+    CopyEntryRow(key = "questionChangeFrom", value = "Widzisz"),
+    CopyEntryRow(key = "questionChangeTo", value = "Czy widzisz"),
+    CopyEntryRow(key = "mixedChangeFrom", value = "Widzę"),
+    CopyEntryRow(key = "mixedChangeTo", value = "Nie widziałeś"),
+    CopyEntryRow(key = "chainPastChangeFrom", value = "Widzę"),
+    CopyEntryRow(key = "chainPastChangeTo", value = "Widziałem"),
+)
+
+val COPY_ENTRY_ROW_ROWS: List<CopyEntryRow> = copyEntryRowRowsPart0()
+
+private fun patternEntryRowRowsPart0(): List<PatternEntryRow> = listOf(
+    PatternEntryRow(key = "seenAcc", value = "Widzę {acc}."),
+    PatternEntryRow(key = "seenGenNeg", value = "Nie widzę {gen}."),
+    PatternEntryRow(key = "caseDrill", value = "{start} {target}."),
+    PatternEntryRow(key = "verbSentence", value = "{nom} {verb} do domu."),
+    PatternEntryRow(key = "verbFutureAccepted", value = "{nom} będzie {past} do domu."),
+    PatternEntryRow(key = "questionSource", value = "Widzisz {acc}."),
+    PatternEntryRow(key = "questionExpected", value = "Czy widzisz {acc}?"),
+    PatternEntryRow(key = "mixedMale", value = "Nie widziałeś {gen}."),
+    PatternEntryRow(key = "mixedFemale", value = "Nie widziałaś {gen}."),
+    PatternEntryRow(key = "chainPast", value = "Widziałem {acc}."),
+    PatternEntryRow(key = "chainNeg", value = "Nie widziałem {gen}."),
+    PatternEntryRow(key = "chainOwner", value = "Nie widziałem {theirGen}."),
+    PatternEntryRow(key = "chainLoc", value = "Mówię o {theirLoc}."),
+)
+
+val PATTERN_ENTRY_ROW_ROWS: List<PatternEntryRow> = patternEntryRowRowsPart0()
+
+private fun prefixEntryRowRowsPart0(): List<PrefixEntryRow> = listOf(
+    PrefixEntryRow(key = "nomSg", value = "To jest"),
+    PrefixEntryRow(key = "nomPl", value = "To są"),
+    PrefixEntryRow(key = "gen", value = "Nie widzę"),
+    PrefixEntryRow(key = "dat", value = "Przyglądam się"),
+    PrefixEntryRow(key = "acc", value = "Widzę"),
+    PrefixEntryRow(key = "inst", value = "Zachwycam się"),
+    PrefixEntryRow(key = "loc", value = "Mówię o"),
+)
+
+val PREFIX_ENTRY_ROW_ROWS: List<PrefixEntryRow> = prefixEntryRowRowsPart0()

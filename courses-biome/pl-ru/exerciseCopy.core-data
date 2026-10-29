@@ -1,2 +1,74 @@
 # pl-course/exerciseCopy — source SHA-256: 7255e8c686ceee17...
-COPY {accPrompt: "Скажи, что ты видишь этого человека или этот предмет. Начни с «Widzę…»." accExplanation: "Widzę требует Biernik. Согласуй притяжательное местоимение, прилагательное и существительное." accReasonPersonalA: "kolega → kolegę; местоимение и прилагательное — mojego dobrego." accReasonUnchanged: "Biernik совпадает с Mianownikiem: группа сохраняет базовую форму." accReasonChanged: "Изменяется вся группа слов." genNegPrompt: "Сделай всё предложение отрицательным." genNegExplanation: "Отрицание widzę переводит прямой объект из Biernika в Dopełniacz." genNegReason: "Biernik → Dopełniacz" negationParticle: "Nie" negationInsertionReason: "Добавь отрицание nie." instStart: "Idę z" instPrompt: "Скажи, что идёшь вместе с этим человеком. Начни с «Idę z…»." instReason: "z kim? czym? — Narzędnik" locStart: "Mówię o" locPrompt: "Теперь скажи, что говоришь об этом. Начни с «Mówię o…»." locReason: "o kim? czym? — Miejscownik" datStart: "Daję prezent" datPrompt: "Скажи, что даришь этому человеку подарок. Начни с «Daję prezent…»." datReason: "komu? czemu? — Celownik" caseDrillExplanation: "Новая конструкция задаёт падеж всей группы: местоимение + прилагательное + существительное." ownerYour: "твой / твоя" ownerHis: "его" ownerHer: "её" ownerOur: "наш / наша" ownerYourPlural: "ваш / ваша" ownerTheir: "их" ownerPromptPrefix: "Замени «мой / моя» на «" ownerPromptSuffix: "». Сохрани время и смысл предложения." ownerExplanation: "mój, twój, nasz, wasz согласуются с предметом обладания. jego, jej, ich не склоняются." ownerReason: "Меняем владельца, сохраняем Biernik." verbPastPrompt: "Перенеси всё предложение в прошедшее время." verbFuturePrompt: "Перенеси всё предложение в будущее время. Сохрани несовершенный вид." verbPresentPrompt: "Перенеси всё предложение в настоящее время." verbExplanation: "Подлежащее остаётся в Mianowniku. В прошедшем времени глагол согласуется с ним по роду." verbReason: "Меняется время глагола, остальные слова сохраняются." aspectSource: "Dzisiaj kupuję nową książkę." aspectPrompt: "Скажи, что вчера уже купил эту книгу: завершённый результат. Начни с «Wczoraj…»." aspectExpected: "Wczoraj kupiłem nową książkę." aspectAccepted: "Wczoraj kupiłam nową książkę." aspectExplanation: "Процесс kupować → завершённый результат kupić. Форма kupiłam также правильная." aspectFrom: "kupuję" aspectTo: "kupiłem" aspectReason: "Совершенный вид + прошедшее время." pronounPrompt: "Замени всю группу после «Widzę» одним личным местоимением." pronounExplanation: "Местоимение заменяет всю группу слов и остаётся в Bierniku." pronounReason: "кого? что?" questionPrompt: "Сделай вопрос, на который можно ответить «да» или «нет». Начни с «Czy…»." questionExplanation: "Czy превращает утверждение в общий вопрос. Падеж объекта сохраняется." questionReason: "Добавь вопросительное czy." questionParticle: "Czy" pluralPrompt: "Поставь всю группу после «Widzę» во множественное число." pluralExplanation: "Во множественном числе мужские личные формы отличаются от остальных: moich dobrych kolegów, но moje nowe książki." pluralReason: "Меняются число и согласование всей группы." mixedPrompt: "Скажи «ты не видел…» в прошедшем времени. Сохрани «мой / моя»." mixedExplanation: "TY + прошедшее время + отрицание. Отрицание требует Dopełniacza всей группы слов." mixedVerbReason: "Лицо + время + отрицание" mixedNounReason: "Biernik → Dopełniacz" chainAccPrompt: "Скажи, что видишь это. Начни с «Widzę…»." chainAccReason: "Widzę → Biernik." chainPastPrompt: "Перенеси предложение в прошедшее время. Говори от мужского лица." chainPastReason: "Меняется только время глагола." chainNegPrompt: "Теперь сделай это предложение отрицательным." chainNegReason: "Отрицание → Biernik меняется на Dopełniacz." chainOwnerPrompt: "Замени «мой / моя» на «их»." chainOwnerReason: "ich не склоняется; прилагательное и существительное остаются в Dopełniaczu." chainLocPrompt: "Теперь скажи, что говоришь об этом. Начни с «Mówię o…»." chainLocReason: "o → Miejscownik. Сохрани владельца «их»." questionChangeFrom: "Widzisz" questionChangeTo: "Czy widzisz" mixedChangeFrom: "Widzę" mixedChangeTo: "Nie widziałeś" chainPastChangeFrom: "Widzę" chainPastChangeTo: "Widziałem"}
+COPY {key: "accPrompt" value: "Скажи, что ты видишь этого человека или этот предмет. Начни с «Widzę…»."}
+COPY {key: "accExplanation" value: "Widzę требует Biernik. Согласуй притяжательное местоимение, прилагательное и существительное."}
+COPY {key: "accReasonPersonalA" value: "kolega → kolegę; местоимение и прилагательное — mojego dobrego."}
+COPY {key: "accReasonUnchanged" value: "Biernik совпадает с Mianownikiem: группа сохраняет базовую форму."}
+COPY {key: "accReasonChanged" value: "Изменяется вся группа слов."}
+COPY {key: "genNegPrompt" value: "Сделай всё предложение отрицательным."}
+COPY {key: "genNegExplanation" value: "Отрицание widzę переводит прямой объект из Biernika в Dopełniacz."}
+COPY {key: "genNegReason" value: "Biernik → Dopełniacz"}
+COPY {key: "negationParticle" value: "Nie"}
+COPY {key: "negationInsertionReason" value: "Добавь отрицание nie."}
+COPY {key: "instStart" value: "Idę z"}
+COPY {key: "instPrompt" value: "Скажи, что идёшь вместе с этим человеком. Начни с «Idę z…»."}
+COPY {key: "instReason" value: "z kim? czym? — Narzędnik"}
+COPY {key: "locStart" value: "Mówię o"}
+COPY {key: "locPrompt" value: "Теперь скажи, что говоришь об этом. Начни с «Mówię o…»."}
+COPY {key: "locReason" value: "o kim? czym? — Miejscownik"}
+COPY {key: "datStart" value: "Daję prezent"}
+COPY {key: "datPrompt" value: "Скажи, что даришь этому человеку подарок. Начни с «Daję prezent…»."}
+COPY {key: "datReason" value: "komu? czemu? — Celownik"}
+COPY {key: "caseDrillExplanation" value: "Новая конструкция задаёт падеж всей группы: местоимение + прилагательное + существительное."}
+COPY {key: "ownerYour" value: "твой / твоя"}
+COPY {key: "ownerHis" value: "его"}
+COPY {key: "ownerHer" value: "её"}
+COPY {key: "ownerOur" value: "наш / наша"}
+COPY {key: "ownerYourPlural" value: "ваш / ваша"}
+COPY {key: "ownerTheir" value: "их"}
+COPY {key: "ownerPromptPrefix" value: "Замени «мой / моя» на «"}
+COPY {key: "ownerPromptSuffix" value: "». Сохрани время и смысл предложения."}
+COPY {key: "ownerExplanation" value: "mój, twój, nasz, wasz согласуются с предметом обладания. jego, jej, ich не склоняются."}
+COPY {key: "ownerReason" value: "Меняем владельца, сохраняем Biernik."}
+COPY {key: "verbPastPrompt" value: "Перенеси всё предложение в прошедшее время."}
+COPY {key: "verbFuturePrompt" value: "Перенеси всё предложение в будущее время. Сохрани несовершенный вид."}
+COPY {key: "verbPresentPrompt" value: "Перенеси всё предложение в настоящее время."}
+COPY {key: "verbExplanation" value: "Подлежащее остаётся в Mianowniku. В прошедшем времени глагол согласуется с ним по роду."}
+COPY {key: "verbReason" value: "Меняется время глагола, остальные слова сохраняются."}
+COPY {key: "aspectSource" value: "Dzisiaj kupuję nową książkę."}
+COPY {key: "aspectPrompt" value: "Скажи, что вчера уже купил эту книгу: завершённый результат. Начни с «Wczoraj…»."}
+COPY {key: "aspectExpected" value: "Wczoraj kupiłem nową książkę."}
+COPY {key: "aspectAccepted" value: "Wczoraj kupiłam nową książkę."}
+COPY {key: "aspectExplanation" value: "Процесс kupować → завершённый результат kupić. Форма kupiłam также правильная."}
+COPY {key: "aspectFrom" value: "kupuję"}
+COPY {key: "aspectTo" value: "kupiłem"}
+COPY {key: "aspectReason" value: "Совершенный вид + прошедшее время."}
+COPY {key: "pronounPrompt" value: "Замени всю группу после «Widzę» одним личным местоимением."}
+COPY {key: "pronounExplanation" value: "Местоимение заменяет всю группу слов и остаётся в Bierniku."}
+COPY {key: "pronounReason" value: "кого? что?"}
+COPY {key: "questionPrompt" value: "Сделай вопрос, на который можно ответить «да» или «нет». Начни с «Czy…»."}
+COPY {key: "questionExplanation" value: "Czy превращает утверждение в общий вопрос. Падеж объекта сохраняется."}
+COPY {key: "questionReason" value: "Добавь вопросительное czy."}
+COPY {key: "questionParticle" value: "Czy"}
+COPY {key: "pluralPrompt" value: "Поставь всю группу после «Widzę» во множественное число."}
+COPY {key: "pluralExplanation" value: "Во множественном числе мужские личные формы отличаются от остальных: moich dobrych kolegów, но moje nowe książki."}
+COPY {key: "pluralReason" value: "Меняются число и согласование всей группы."}
+COPY {key: "mixedPrompt" value: "Скажи «ты не видел…» в прошедшем времени. Сохрани «мой / моя»."}
+COPY {key: "mixedExplanation" value: "TY + прошедшее время + отрицание. Отрицание требует Dopełniacza всей группы слов."}
+COPY {key: "mixedVerbReason" value: "Лицо + время + отрицание"}
+COPY {key: "mixedNounReason" value: "Biernik → Dopełniacz"}
+COPY {key: "chainAccPrompt" value: "Скажи, что видишь это. Начни с «Widzę…»."}
+COPY {key: "chainAccReason" value: "Widzę → Biernik."}
+COPY {key: "chainPastPrompt" value: "Перенеси предложение в прошедшее время. Говори от мужского лица."}
+COPY {key: "chainPastReason" value: "Меняется только время глагола."}
+COPY {key: "chainNegPrompt" value: "Теперь сделай это предложение отрицательным."}
+COPY {key: "chainNegReason" value: "Отрицание → Biernik меняется на Dopełniacz."}
+COPY {key: "chainOwnerPrompt" value: "Замени «мой / моя» на «их»."}
+COPY {key: "chainOwnerReason" value: "ich не склоняется; прилагательное и существительное остаются в Dopełniaczu."}
+COPY {key: "chainLocPrompt" value: "Теперь скажи, что говоришь об этом. Начни с «Mówię o…»."}
+COPY {key: "chainLocReason" value: "o → Miejscownik. Сохрани владельца «их»."}
+COPY {key: "questionChangeFrom" value: "Widzisz"}
+COPY {key: "questionChangeTo" value: "Czy widzisz"}
+COPY {key: "mixedChangeFrom" value: "Widzę"}
+COPY {key: "mixedChangeTo" value: "Nie widziałeś"}
+COPY {key: "chainPastChangeFrom" value: "Widzę"}
+COPY {key: "chainPastChangeTo" value: "Widziałem"}

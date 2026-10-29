@@ -177,3 +177,26 @@ RECORD PossessivePluralRow
   m_personal: CaseFormsRow
   other: CaseFormsRow
 END
+
+# The text of the exercises. A seed says which adjective goes with which noun. The copy (prompts, explanations), the sentence patterns and the
+# prefixes of the case sentences are dictionaries of a pack: one row per key, so a repeated key is DATA_DUPLICATE and a later slice can name a
+# copy key by reference. The set of keys is the pack's own (the engine asks for them by name), so a misspelt key is the engine's to refuse.
+RECORD SeedRow COUNT 1..
+  nounId: ref NounRow
+  adjectiveId: ref AdjectiveRow
+END
+
+RECORD CopyEntryRow KEY key COUNT 1..
+  key: string
+  value: string
+END
+
+RECORD PatternEntryRow KEY key COUNT 1..
+  key: string
+  value: string
+END
+
+RECORD PrefixEntryRow KEY key COUNT 1..
+  key: string
+  value: string
+END

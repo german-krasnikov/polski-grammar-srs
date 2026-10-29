@@ -1,2 +1,8 @@
 # pl-course/caseSentencePrefixes — source SHA-256: 7255e8c686ceee17...
-PREFIX {nomSg: "To jest" nomPl: "To są" gen: "Nie widzę" dat: "Przyglądam się" acc: "Widzę" inst: "Zachwycam się" loc: "Mówię o"}
+PREFIX {key: "nomSg" value: "To jest"}
+PREFIX {key: "nomPl" value: "To są"}
+PREFIX {key: "gen" value: "Nie widzę"}
+PREFIX {key: "dat" value: "Przyglądam się"}
+PREFIX {key: "acc" value: "Widzę"}
+PREFIX {key: "inst" value: "Zachwycam się"}
+PREFIX {key: "loc" value: "Mówię o"}
