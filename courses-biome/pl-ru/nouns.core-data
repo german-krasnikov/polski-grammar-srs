@@ -1,5 +1,4 @@
 # pl-course/nouns — source SHA-256: 7255e8c686ceee17...
-SURFACE course_nouns
 NOUN {id: "wife" lemma: "żona" meaning: "жена" gender: "f" forms: {sg: {nom: "żona" gen: "żony" dat: "żonie" acc: "żonę" inst: "żoną" loc: "żonie" voc: "żono"} pl: {nom: "żony" gen: "żon" dat: "żonom" acc: "żony" inst: "żonami" loc: "żonach" voc: "żony"}}}
 NOUN {id: "woman" lemma: "kobieta" meaning: "женщина" gender: "f" forms: {sg: {nom: "kobieta" gen: "kobiety" dat: "kobiecie" acc: "kobietę" inst: "kobietą" loc: "kobiecie" voc: "kobieto"} pl: {nom: "kobiety" gen: "kobiet" dat: "kobietom" acc: "kobiety" inst: "kobietami" loc: "kobietach" voc: "kobiety"}}}
 NOUN {id: "book" lemma: "książka" meaning: "книга" gender: "f" forms: {sg: {nom: "książka" gen: "książki" dat: "książce" acc: "książkę" inst: "książką" loc: "książce" voc: "książko"} pl: {nom: "książki" gen: "książek" dat: "książkom" acc: "książki" inst: "książkami" loc: "książkach" voc: "książki"}}}

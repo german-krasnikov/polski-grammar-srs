@@ -33,9 +33,12 @@ def _val(s, i):
         i = _ws(s, i + 1)
         rec = {}
         while s[i] != '}':
-            m = re.match(r'[a-zA-Z_0-9][\w.-]*', s[i:])
-            k = m.group()
-            i = _ws(s, i + len(k))
+            if s[i] == '"':  # a quoted key: how Core data writes a key that is no word ("1")
+                k, i = _str(s, i)
+            else:
+                k = re.match(r'[a-zA-Z_0-9][\w.-]*', s[i:]).group()
+                i += len(k)
+            i = _ws(s, i)
             assert s[i] == ':'
             i = _ws(s, i + 1)
             v, i = _val(s, i)

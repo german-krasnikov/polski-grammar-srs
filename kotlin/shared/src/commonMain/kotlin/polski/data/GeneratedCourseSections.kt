@@ -1,5 +1,5 @@
 // Generated from courses-biome/pl-ru/; do not edit.
-// sentenceSeeds SHA-256: 9d00e7bb7aaaece751eaa2a5e72b253e3283bd5798fc762c755a40811ea4d08e
+// sentenceSeeds SHA-256: ab2970c2987edb961d010a81c2b7d4e15ba8a343e2e9b9bbce465a8b9c005e5c
 package polski.data
 
 import polski.model.SentenceSeed

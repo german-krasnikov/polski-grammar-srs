@@ -1,5 +1,5 @@
 // Generated from courses-biome/pl-ru/reference.core-data; do not edit.
-// SHA-256: 3306d03cefeff36a9fc193c675be3624f5305ac741e6315067b395b217433dff
+// SHA-256: 78a41f5d202e9f4f038e65e933928ad23431f98fb4d8d5651fa11c8528183fbe
 package polski.data
 
 import polski.model.GramCase

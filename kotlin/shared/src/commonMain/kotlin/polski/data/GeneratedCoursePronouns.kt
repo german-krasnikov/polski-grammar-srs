@@ -1,5 +1,5 @@
 // Generated from courses-biome/pl-ru/; do not edit.
-// personalPronouns SHA-256: e39d3b632d4a71bfb9e89230b9c257a5bfd0665073825a5979702214b35afd2f
+// personalPronouns SHA-256: 7bf3ded71a52fa7f00c489b8f4be6c15ef3ebb758f70cb961477ddfd4bcf2e89
 package polski.data
 
 import polski.model.GramCase

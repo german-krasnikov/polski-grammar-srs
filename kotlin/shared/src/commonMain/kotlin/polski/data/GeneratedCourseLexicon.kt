@@ -1,5 +1,5 @@
 // Generated from courses-biome/pl-ru/; do not edit.
-// nouns SHA-256: db662af417e3b6e7769d3c295f8a7771bff37e697bfb6810ff1f5258c7240f34
+// nouns SHA-256: aa981982127ec9c3c907a4604ef8a33edad051db144f63bbdee3df80df9f37c1
 package polski.data
 
 import polski.model.*

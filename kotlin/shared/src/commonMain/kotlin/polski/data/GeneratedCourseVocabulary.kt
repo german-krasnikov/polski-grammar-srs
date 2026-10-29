@@ -1,5 +1,5 @@
 // Generated from courses-biome/pl-ru/vocabulary.core-data; do not edit.
-// SHA-256: 78a8d1ab4b1bceb12910e11d904a075a8b7ec9ce034d10f629babc2b1099efe8
+// SHA-256: 19b579580ab1c1ced4c9a4b136ad9180db7a8cfe5d0a85001ac3d671d57fa6d3
 package polski.data
 
 /** Typed pl-ru vocabulary items from Biome literal source. */

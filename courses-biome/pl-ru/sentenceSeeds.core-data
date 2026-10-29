@@ -1,5 +1,4 @@
 # pl-course/sentenceSeeds — source SHA-256: 7255e8c686ceee17...
-SURFACE course_sentenceSeeds
 SEED {nounId: "wife" adjectiveId: "beautiful"}
 SEED {nounId: "husband" adjectiveId: "good"}
 SEED {nounId: "friendM" adjectiveId: "good"}

@@ -1,5 +1,5 @@
 // Generated from courses-biome/pl-ru/skills.core-data; do not edit.
-// Oracle SHA-256: 87c142d054b803c5982f1022c5de479086a431f88f24cfe977ade435ea8eafd4
+// Oracle SHA-256: 724479b07f04ef398e41abb4c4e6ae8f469aa05c00a91b11a09fac1f359f2e27
 // Source JSON SHA-256: 7255e8c686ceee17a72d280e5876b0cf6776dd9a1743884cd75c724fb8180dcc
 package polski.data
 

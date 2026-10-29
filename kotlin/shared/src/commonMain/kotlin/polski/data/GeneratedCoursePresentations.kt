@@ -1,5 +1,5 @@
 // Generated from courses-biome/pl-ru/skills.core-data; do not edit.
-// SHA-256: 87c142d054b803c5982f1022c5de479086a431f88f24cfe977ade435ea8eafd4
+// SHA-256: 724479b07f04ef398e41abb4c4e6ae8f469aa05c00a91b11a09fac1f359f2e27
 package polski.data
 
 import polski.presentation.NativeParallelPair
