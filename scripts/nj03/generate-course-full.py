@@ -1,11 +1,8 @@
 #!/usr/bin/env python3
-"""Generate GeneratedCourseFull.kt: all remaining course fields for pl-ru.
+"""Generate GeneratedCourseFull.kt: the reference fields of pl-ru that are not typed rows yet (R1.9 takes the rest).
 
-Covers: chainPresentation, stemAlternations, comparisonNounIds, matrixIntroduction,
-webCaseCompositionHeader, maleAccIntro, contextHelp, aspectNoPresent,
-vocabularyInstructions, vocabularyUnavailableLabel, referenceChainRows,
-maleAccRows, tenseRows, aspectRows, systemCards, pipeline,
-caseTeaching, verbTeaching, pronounTeaching, russianSupport.
+Covers: comparisonNounIds, matrixIntroduction, webCaseCompositionHeader, maleAccIntro, contextHelp, aspectNoPresent,
+referenceChainRows, maleAccRows, tenseRows, aspectRows, systemCards, pipeline.
 """
 from __future__ import annotations
 import hashlib, sys
@@ -36,18 +33,6 @@ def read(fname: str, tag: str) -> list:
 
 def main() -> None:
     ref = read("reference.core-data", "REFERENCE")[0]
-    training = read("training.core-data", "TRAINING")[0]
-    vocab = read("vocabulary.core-data", "VOCABULARY")[0]
-    stem_alts = read("stemAlternations.core-data", "STEM_ALT")
-
-    cp = training["chainPresentation"]
-    steps_kt = ", ".join(f'ChainStep("{ks(s["id"])}", "{ks(s["label"])}")' for s in cp["steps"])
-    compl = cp["completion"]
-    compl_kt = (f'ChainCompletion("{ks(compl["title"])}", "{ks(compl["reactEyebrow"])}", '
-                f'"{ks(compl["reactBody"])}", "{ks(compl["webBody"])}")')
-
-    # stemAlternations
-    stem_kt = ", ".join(f"StemAlternation('{a['a'][0]}', '{a['b'][0]}')" for a in stem_alts)
 
     # Simple reference strings
     matrix_intro = ks(ref["matrixIntroduction"])
@@ -59,9 +44,6 @@ def main() -> None:
     anp = ref["aspectNoPresent"]
     anp_kt = f'CourseAspectNoPresent("{ks(anp["compact"])}", "{ks(anp["ios"])}")'
 
-    vi = vocab["instructions"]
-    vi_kt = f'CourseVocabularyInstructions("{ks(vi["react"])}", "{ks(vi["web"])}", "{ks(vi["native"])}", "{ks(vi["ios"])}")'
-    vunavail = ks(vocab["unavailableLabel"])
 
     # referenceChainRows
     chain_rows = ", ".join(f'ReferenceChainRow("{ks(r["label"])}", "{ks(r["from"])}", "{ks(r["to"])}", "{ks(r["change"])}")'
@@ -112,15 +94,6 @@ import polski.model.Gender
 import polski.model.NumberGram
 import polski.model.Person
 import polski.model.Tense
-import polski.presentation.StemAlternation
-
-// --- chainPresentation ---
-internal val generatedPlRuChainPresentation = ChainPresentation(
-    listOf({steps_kt}), {compl_kt})
-
-// --- stemAlternations ---
-internal val generatedPlRuStemAlternations: List<StemAlternation> =
-    listOf({stem_kt})
 
 // --- reference simple strings ---
 internal val generatedPlRuMatrixIntroduction = "{matrix_intro}"
@@ -129,8 +102,6 @@ internal val generatedPlRuMaleAccIntro = "{male_acc_intro}"
 internal val generatedPlRuComparisonNounIds: List<String> = {comparison_ids}
 internal val generatedPlRuContextHelp = {ctx_kt}
 internal val generatedPlRuAspectNoPresent = {anp_kt}
-internal val generatedPlRuVocabularyInstructions = {vi_kt}
-internal val generatedPlRuVocabularyUnavailableLabel = "{vunavail}"
 
 // --- reference rows ---
 internal val generatedPlRuReferenceChainRows: List<ReferenceChainRow> = listOf({chain_rows})

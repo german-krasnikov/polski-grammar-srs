@@ -1,5 +1,5 @@
 // Generated from dsl/course.data-contract
-// source-sha256=b51f04df7413cf819608d7d3e1540d25e98970557018f48ef7b04e85948b40b1
+// source-sha256=c8d02120cdfbd29cf3b36e21f00704479561e3bfd6c23c28ed30b5d93bb06719
 // Edit the source, then run biome generate.
 
 package polski.data.rows.plru
@@ -212,6 +212,56 @@ data class PatternEntryRow(
 data class PrefixEntryRow(
     val key: String,
     val value: String,
+)
+
+data class VocabularyItemRow(
+    val id: String,
+    val lemma: String,
+    val translation: String,
+    val form: String,
+    val example: String,
+    val level: String,
+    val frequencyRank: Int?,
+)
+
+data class VocabularyInstructionsRow(
+    val react: String,
+    val web: String,
+    val native: String,
+    val ios: String,
+)
+
+data class VocabularyRow(
+    val source: String,
+    val items: List<VocabularyItemRow>,
+    val instructions: VocabularyInstructionsRow,
+    val unavailableLabel: String,
+)
+
+data class ChainStepRow(
+    val id: String,
+    val label: String,
+)
+
+data class ChainCompletionRow(
+    val title: String,
+    val reactEyebrow: String,
+    val reactBody: String,
+    val webBody: String,
+)
+
+data class ChainPresentationRow(
+    val steps: List<ChainStepRow>,
+    val completion: ChainCompletionRow,
+)
+
+data class TrainingRow(
+    val chainPresentation: ChainPresentationRow,
+)
+
+data class StemAlternationRow(
+    val a: String,
+    val b: String,
 )
 
 private fun skillRowRowsPart0(): List<SkillRow> = listOf(
@@ -2843,3 +2893,336 @@ private fun prefixEntryRowRowsPart0(): List<PrefixEntryRow> = listOf(
 )
 
 val PREFIX_ENTRY_ROW_ROWS: List<PrefixEntryRow> = prefixEntryRowRowsPart0()
+
+private fun vocabularyRowRowsPart0(): List<VocabularyRow> = listOf(
+    VocabularyRow(
+        source = "curated from existing Polish grammar lexemes; examples authored for this course",
+        items = listOf(
+            VocabularyItemRow(
+                id = "noun.wife",
+                lemma = "żona",
+                translation = "жена",
+                form = "żona · род. żony",
+                example = "Moja żona czyta książkę.",
+                level = "A1",
+                frequencyRank = 506,
+            ),
+            VocabularyItemRow(
+                id = "noun.woman",
+                lemma = "kobieta",
+                translation = "женщина",
+                form = "kobieta · род. kobiety",
+                example = "Ta kobieta mówi po polsku.",
+                level = "A1",
+                frequencyRank = 162,
+            ),
+            VocabularyItemRow(
+                id = "noun.book",
+                lemma = "książka",
+                translation = "книга",
+                form = "książka · вин. książkę · род. książki",
+                example = "Czytam nową książkę.",
+                level = "A1",
+                frequencyRank = 276,
+            ),
+            VocabularyItemRow(
+                id = "noun.work",
+                lemma = "praca",
+                translation = "работа",
+                form = "praca · род. pracy",
+                example = "Mam dziś dużo pracy.",
+                level = "A2",
+                frequencyRank = 62,
+            ),
+            VocabularyItemRow(
+                id = "noun.husband",
+                lemma = "mąż",
+                translation = "муж",
+                form = "mąż · род. męża",
+                example = "Jej mąż pracuje w domu.",
+                level = "A2",
+                frequencyRank = 658,
+            ),
+            VocabularyItemRow(
+                id = "noun.friendM",
+                lemma = "kolega",
+                translation = "коллега",
+                form = "kolega · род. kolegi",
+                example = "Mój kolega z pracy ma psa.",
+                level = "A2",
+                frequencyRank = 445,
+            ),
+            VocabularyItemRow(
+                id = "noun.son",
+                lemma = "syn",
+                translation = "сын",
+                form = "syn · род. syna",
+                example = "Mój syn lubi koty.",
+                level = "A1",
+                frequencyRank = 490,
+            ),
+            VocabularyItemRow(
+                id = "noun.dog",
+                lemma = "pies",
+                translation = "собака",
+                form = "pies · род. psa",
+                example = "Ten pies jest mały.",
+                level = "A1",
+                frequencyRank = 637,
+            ),
+            VocabularyItemRow(
+                id = "noun.cat",
+                lemma = "kot",
+                translation = "кот",
+                form = "kot · род. kota",
+                example = "Mój kot śpi na kanapie.",
+                level = "A1",
+                frequencyRank = 540,
+            ),
+            VocabularyItemRow(
+                id = "noun.car",
+                lemma = "samochód",
+                translation = "машина",
+                form = "samochód · род. samochodu",
+                example = "Ten samochód jest nowy.",
+                level = "A1",
+                frequencyRank = 225,
+            ),
+            VocabularyItemRow(
+                id = "noun.house",
+                lemma = "dom",
+                translation = "дом",
+                form = "dom · род. domu",
+                example = "Mój dom jest blisko.",
+                level = "A1",
+                frequencyRank = 104,
+            ),
+            VocabularyItemRow(
+                id = "noun.phone",
+                lemma = "telefon",
+                translation = "телефон",
+                form = "telefon · род. telefonu",
+                example = "Gdzie jest mój telefon?",
+                level = "A1",
+                frequencyRank = 596,
+            ),
+            VocabularyItemRow(
+                id = "noun.child",
+                lemma = "dziecko",
+                translation = "ребёнок",
+                form = "dziecko · род. dziecka",
+                example = "To dziecko lubi czytać.",
+                level = "A1",
+                frequencyRank = 86,
+            ),
+            VocabularyItemRow(
+                id = "noun.window",
+                lemma = "okno",
+                translation = "окно",
+                form = "okno · род. okna",
+                example = "Otwórz okno, proszę.",
+                level = "A1",
+                frequencyRank = 554,
+            ),
+            VocabularyItemRow(
+                id = "adjective.beautiful",
+                lemma = "piękny",
+                translation = "прекрасный, очень красивый",
+                form = "piękny · ж. piękna",
+                example = "To piękny dom.",
+                level = "A2",
+                frequencyRank = 488,
+            ),
+            VocabularyItemRow(
+                id = "adjective.new",
+                lemma = "nowy",
+                translation = "новый",
+                form = "nowy · ж. nowa · ж. вин. nową",
+                example = "Mam nową książkę.",
+                level = "A1",
+                frequencyRank = 68,
+            ),
+            VocabularyItemRow(
+                id = "adjective.small",
+                lemma = "mały",
+                translation = "маленький",
+                form = "mały · ж. mała",
+                example = "To mały pies.",
+                level = "A1",
+                frequencyRank = 155,
+            ),
+            VocabularyItemRow(
+                id = "adjective.nice",
+                lemma = "ładny",
+                translation = "симпатичный, приятный на вид",
+                form = "ładny · ж. ładna",
+                example = "To ładny dom.",
+                level = "A1",
+                frequencyRank = null,
+            ),
+            VocabularyItemRow(
+                id = "adjective.good",
+                lemma = "dobry",
+                translation = "хороший",
+                form = "dobry · ж. dobra",
+                example = "To dobry pomysł.",
+                level = "A1",
+                frequencyRank = 81,
+            ),
+            VocabularyItemRow(
+                id = "adjective.old",
+                lemma = "stary",
+                translation = "старый",
+                form = "stary · ж. stara",
+                example = "To stary samochód.",
+                level = "A1",
+                frequencyRank = 142,
+            ),
+            VocabularyItemRow(
+                id = "adjective.expensive",
+                lemma = "drogi",
+                translation = "дорогой",
+                form = "drogi · ж. droga",
+                example = "Ten telefon jest drogi.",
+                level = "A2",
+                frequencyRank = 921,
+            ),
+            VocabularyItemRow(
+                id = "verb.have",
+                lemma = "mieć",
+                translation = "иметь",
+                form = "mieć · я mam",
+                example = "Mam książkę.",
+                level = "A1",
+                frequencyRank = 14,
+            ),
+            VocabularyItemRow(
+                id = "verb.see",
+                lemma = "widzieć",
+                translation = "видеть",
+                form = "widzieć · я widzę",
+                example = "Widzę dom.",
+                level = "A1",
+                frequencyRank = 117,
+            ),
+            VocabularyItemRow(
+                id = "verb.like",
+                lemma = "lubić",
+                translation = "нравиться (о занятии); любить делать что-либо",
+                form = "lubić · я lubię",
+                example = "Lubię czytać.",
+                level = "A1",
+                frequencyRank = 370,
+            ),
+            VocabularyItemRow(
+                id = "verb.buy",
+                lemma = "kupować",
+                translation = "покупать",
+                form = "kupować · я kupuję",
+                example = "Kupuję książkę.",
+                level = "A1",
+                frequencyRank = null,
+            ),
+            VocabularyItemRow(
+                id = "verb.read",
+                lemma = "czytać",
+                translation = "читать",
+                form = "czytać · я czytam",
+                example = "Czytam książkę.",
+                level = "A1",
+                frequencyRank = 455,
+            ),
+            VocabularyItemRow(
+                id = "verb.talk",
+                lemma = "mówić",
+                translation = "говорить",
+                form = "mówić · я mówię",
+                example = "Mówię po polsku.",
+                level = "A1",
+                frequencyRank = 41,
+            ),
+            VocabularyItemRow(
+                id = "verb.go",
+                lemma = "iść",
+                translation = "идти",
+                form = "iść · я idę",
+                example = "Idę do domu.",
+                level = "A1",
+                frequencyRank = 176,
+            ),
+            VocabularyItemRow(
+                id = "verb.be",
+                lemma = "być",
+                translation = "быть",
+                form = "być · я jestem",
+                example = "Jestem w domu.",
+                level = "A1",
+                frequencyRank = 2,
+            ),
+            VocabularyItemRow(
+                id = "verb.buyDone",
+                lemma = "kupić",
+                translation = "купить",
+                form = "kupić · буд. я kupię · прош. я (м.) kupiłem",
+                example = "Kupiłem książkę.",
+                level = "A2",
+                frequencyRank = 449,
+            ),
+            VocabularyItemRow(
+                id = "verb.do",
+                lemma = "robić",
+                translation = "делать",
+                form = "robić · я robię",
+                example = "Robię obiad.",
+                level = "A1",
+                frequencyRank = 133,
+            ),
+            VocabularyItemRow(
+                id = "verb.doDone",
+                lemma = "zrobić",
+                translation = "сделать",
+                form = "zrobić · буд. я zrobię · прош. я (м.) zrobiłem",
+                example = "Zrobiłem obiad.",
+                level = "A2",
+                frequencyRank = 125,
+            ),
+        ),
+        instructions = VocabularyInstructionsRow(
+            react = "Частотный ранг не равен уровню CEFR. Слова без проверенного перевода и примера видны в списке, но пока не добавляются в тренировки. Исходные 32 карточки прошли языковую проверку; метки A1/A2 — локальные группы, не официальная сертификация CEFR.",
+            web = "Частотный ранг не равен уровню CEFR. Слова без проверенного перевода и примера пока не добавляются в тренировки. Исходные 32 карточки прошли языковую проверку; метки A1/A2 — локальные группы, не официальная сертификация CEFR.",
+            native = "Частотный ранг не равен уровню CEFR. Без проверенного перевода и примера слово пока недоступно. Исходные 32 карточки прошли языковую проверку; метки A1/A2 — локальные группы, не официальная сертификация CEFR.",
+            ios = "Частотный ранг не равен уровню CEFR. Непроверенные слова пока недоступны. Исходные 32 карточки прошли языковую проверку; метки A1/A2 — локальные группы, не официальная сертификация CEFR.",
+        ),
+        unavailableLabel = "Перевод и пример ещё не проверены",
+    ),
+)
+
+val VOCABULARY_ROW_ROWS: List<VocabularyRow> = vocabularyRowRowsPart0()
+
+private fun trainingRowRowsPart0(): List<TrainingRow> = listOf(
+    TrainingRow(
+        chainPresentation = ChainPresentationRow(
+            steps = listOf(
+                ChainStepRow(id = "acc", label = "Вижу"),
+                ChainStepRow(id = "past", label = "Прошлое"),
+                ChainStepRow(id = "neg", label = "Отрицание"),
+                ChainStepRow(id = "owner", label = "Владелец"),
+                ChainStepRow(id = "loc", label = "Говорю о"),
+            ),
+            completion = ChainCompletionRow(
+                title = "Цепочка завершена",
+                reactEyebrow = "5 преобразований",
+                reactBody = "Ты изменил время, отрицание, владельца и падеж, сохранив одну мысль. Оценки сохранены в расписании повторений.",
+                webBody = "Пять преобразований завершены. Оценки сохранены в расписании повторений.",
+            ),
+        ),
+    ),
+)
+
+val TRAINING_ROW_ROWS: List<TrainingRow> = trainingRowRowsPart0()
+
+private fun stemAlternationRowRowsPart0(): List<StemAlternationRow> = listOf(
+    StemAlternationRow(a = "ó", b = "o"),
+)
+
+val STEM_ALTERNATION_ROW_ROWS: List<StemAlternationRow> = stemAlternationRowRowsPart0()

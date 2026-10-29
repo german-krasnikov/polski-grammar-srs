@@ -7,15 +7,6 @@ import polski.model.Gender
 import polski.model.NumberGram
 import polski.model.Person
 import polski.model.Tense
-import polski.presentation.StemAlternation
-
-// --- chainPresentation ---
-internal val generatedPlRuChainPresentation = ChainPresentation(
-    listOf(ChainStep("acc", "Вижу"), ChainStep("past", "Прошлое"), ChainStep("neg", "Отрицание"), ChainStep("owner", "Владелец"), ChainStep("loc", "Говорю о")), ChainCompletion("Цепочка завершена", "5 преобразований", "Ты изменил время, отрицание, владельца и падеж, сохранив одну мысль. Оценки сохранены в расписании повторений.", "Пять преобразований завершены. Оценки сохранены в расписании повторений."))
-
-// --- stemAlternations ---
-internal val generatedPlRuStemAlternations: List<StemAlternation> =
-    listOf(StemAlternation('ó', 'o'))
 
 // --- reference simple strings ---
 internal val generatedPlRuMatrixIntroduction = "Один небольшой словарь. Видно, что меняется при каждой операции."
@@ -24,8 +15,6 @@ internal val generatedPlRuMaleAccIntro = "Для единственного чи
 internal val generatedPlRuComparisonNounIds: List<String> = listOf("husband", "friendM", "dog", "house", "wife", "book", "child")
 internal val generatedPlRuContextHelp = CourseContextHelp("Красным показана старая часть, золотым — новая. Местоимение и прилагательное согласуются с существительным.", "Местоимение и прилагательное согласуются с существительным. jego, jej, ich не изменяются.")
 internal val generatedPlRuAspectNoPresent = CourseAspectNoPresent("Нет настоящего времени", "Настоящее: нет настоящего времени")
-internal val generatedPlRuVocabularyInstructions = CourseVocabularyInstructions("Частотный ранг не равен уровню CEFR. Слова без проверенного перевода и примера видны в списке, но пока не добавляются в тренировки. Исходные 32 карточки прошли языковую проверку; метки A1/A2 — локальные группы, не официальная сертификация CEFR.", "Частотный ранг не равен уровню CEFR. Слова без проверенного перевода и примера пока не добавляются в тренировки. Исходные 32 карточки прошли языковую проверку; метки A1/A2 — локальные группы, не официальная сертификация CEFR.", "Частотный ранг не равен уровню CEFR. Без проверенного перевода и примера слово пока недоступно. Исходные 32 карточки прошли языковую проверку; метки A1/A2 — локальные группы, не официальная сертификация CEFR.", "Частотный ранг не равен уровню CEFR. Непроверенные слова пока недоступны. Исходные 32 карточки прошли языковую проверку; метки A1/A2 — локальные группы, не официальная сертификация CEFR.")
-internal val generatedPlRuVocabularyUnavailableLabel = "Перевод и пример ещё не проверены"
 
 // --- reference rows ---
 internal val generatedPlRuReferenceChainRows: List<ReferenceChainRow> = listOf(ReferenceChainRow("База", "To jest moja piękna żona.", "Widzę moją piękną żonę.", "Biernik всей группы"), ReferenceChainRow("Прошедшее", "Widzę moją piękną żonę.", "Widziałem moją piękną żonę.", "widzę → widziałem"), ReferenceChainRow("Отрицание", "Widziałem moją piękną żonę.", "Nie widziałem mojej pięknej żony.", "вся группа: Biernik → Dopełniacz"), ReferenceChainRow("Их вместо моей", "Nie widziałem mojej pięknej żony.", "Nie widziałem ich pięknej żony.", "mojej → ich; ich не склоняется"), ReferenceChainRow("Говорю о…", "Nie widziałem ich pięknej żony.", "Mówię o ich pięknej żonie.", "o → Miejscownik"))

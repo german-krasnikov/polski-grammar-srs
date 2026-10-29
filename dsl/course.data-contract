@@ -200,3 +200,57 @@ RECORD PrefixEntryRow KEY key COUNT 1..
   key: string
   value: string
 END
+
+# The vocabulary cards (one row: the cards and the texts around them), the chain of the training and the stem alternations.
+# A card with no frequency rank writes null: absence is stated, not left out (NULLABLE). The ids of the cards are unique, which the contract
+# cannot see inside a list, so PlRuVocabularyRows.kt checks them.
+RECORD VocabularyRow COUNT 1
+  source: string
+  items: [VocabularyItemRow]
+  instructions: VocabularyInstructionsRow
+  unavailableLabel: string
+END
+
+RECORD VocabularyItemRow
+  id: string
+  lemma: string
+  translation: string
+  form: string
+  example: string
+  level: string
+  frequencyRank: int NULLABLE
+END
+
+RECORD VocabularyInstructionsRow
+  react: string
+  web: string
+  native: string
+  ios: string
+END
+
+RECORD TrainingRow COUNT 1
+  chainPresentation: ChainPresentationRow
+END
+
+RECORD ChainPresentationRow
+  steps: [ChainStepRow]
+  completion: ChainCompletionRow
+END
+
+RECORD ChainStepRow
+  id: string
+  label: string
+END
+
+RECORD ChainCompletionRow
+  title: string
+  reactEyebrow: string
+  reactBody: string
+  webBody: string
+END
+
+# A stem alternation is two letters: one UTF-16 unit each.
+RECORD StemAlternationRow COUNT 1..
+  a: string
+  b: string
+END
