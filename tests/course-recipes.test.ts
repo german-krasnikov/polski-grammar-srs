@@ -1,4 +1,4 @@
-// R1.11 (Plans/Biome/R1Design.md): the recipe expressions (R1.11a) and the constructions (R1.11b) against dsl/course.data-contract: what `biome data` rejects,
+// R1.11 (Plans/Biome/R1Design.md): the recipe expressions (R1.11a), the recipes and the constructions (R1.11b) against dsl/course.data-contract: what `biome data` rejects,
 // with the exact position of each problem.
 // A kind that carries a field of another kind, or lacks its own, is beyond the contract (no union): PlRuRecipeRows.kt refuses it, and the last case of each group says so.
 // They need a biome-dsl checkout (see course-data.test.ts); without one they are skipped, which is NOT RUN, not a pass.
@@ -103,4 +103,81 @@ describe.skipIf(!hasCli)('constructions against the contract', () => {
   it('no row at all is DATA_COUNT at 1:1', () => expect(check('').problems).toEqual(['constructions.core-data:1:1: DATA_COUNT']));
   it('a government without its feature is beyond the contract: it passes here and the mapper refuses it', () =>
     expect(check(construction('c', { govDefault: '"acc"' }) + '\n')).toEqual({ status: 0, problems: [] }));
+});
+
+describe.skipIf(!hasCli)('recipes against the contract', () => {
+  const needs = ['SkillRow', 'NounRow', 'CopyEntryRow', 'PatternEntryRow', 'ConstructionRow', 'PossessiveRow'];
+  const { check, problem } = rowsOf('SkillRecipeRow', ...needs);
+  const direct = '{kind: direct value: {kind: copy key: "accPrompt"}}';
+  const fixed = '{kind: fixed key: "accExplanation"}';
+  const fields = (skill: string): Record<string, string> => ({
+    skill: `"${skill}"`, source: direct, expected: direct, promptKey: '"accPrompt"', explanationKey: '"accExplanation"',
+    changes: `[{from: {kind: copy key: "accPrompt"} to: {kind: copy key: "accPrompt"} reason: ${fixed}}]`, tags: '["acc"]',
+  });
+  const recipe = (skill: string, change: Record<string, string | undefined> = {}) => row('RECIPE', fields(skill), change);
+  const staticFields = '{sourceKey: "accPrompt" promptKey: "accPrompt" expectedKey: "accPrompt" explanationKey: "accPrompt" acceptedKeys: ["accPrompt"] changeFromKey: "accPrompt" changeToKey: "accPrompt" changeReasonKey: "accPrompt" nounId: "book" adjectiveId: "new" tags: ["t"]}';
+
+  it('a constructed recipe, one with an owner draw and a static one are accepted', () => {
+    const draw = '{owners: [{lexeme: "your" labelKey: "accPrompt"} {lexeme: "his" labelKey: "accExplanation"}] promptPrefixKey: "accPrompt" promptSuffixKey: "accPrompt"}';
+    const rows = [recipe('case.acc.n'), recipe('case.acc.f', { promptKey: undefined, ownerDraw: draw, includeNounGenderTag: 'true', numberOverride: '"pl"' }), row('RECIPE', { skill: '"case.acc.m"', staticOverride: staticFields })];
+    expect(check(rows.join('\n') + '\n')).toEqual({ status: 0, problems: [] });
+  });
+  it('a skill that is no skill is DATA_REF at the value', () => problem([recipe('nope')], 0, '"nope"', 'DATA_REF'));
+  it('a prompt key and an explanation key that are no copy entries are DATA_REF at the value', () => {
+    problem([recipe('case.acc.n', { promptKey: '"nope"' })], 0, '"nope"', 'DATA_REF');
+    problem([recipe('case.acc.n', { explanationKey: '"nope"' })], 0, '"nope"', 'DATA_REF');
+  });
+  it('an owner that is no possessive and a label that is no copy entry are DATA_REF at the value', () => {
+    const draw = (owner: string, label: string) => `{owners: [{lexeme: "${owner}" labelKey: "${label}"}] promptPrefixKey: "accPrompt" promptSuffixKey: "accPrompt"}`;
+    problem([recipe('case.acc.n', { ownerDraw: draw('nobody', 'accPrompt') })], 0, '"nobody"', 'DATA_REF');
+    problem([recipe('case.acc.n', { ownerDraw: draw('your', 'nope') })], 0, '"nope"', 'DATA_REF');
+  });
+  it('a key of a static exercise that is no copy entry is DATA_REF at the value', () =>
+    problem([row('RECIPE', { skill: '"case.acc.m"', staticOverride: staticFields.replace('expectedKey: "accPrompt"', 'expectedKey: "nope"') })], 0, '"nope"', 'DATA_REF'));
+  it('an accepted key of a static exercise that is no copy entry is DATA_REF at the value', () =>
+    problem([row('RECIPE', { skill: '"case.acc.m"', staticOverride: staticFields.replace('acceptedKeys: ["accPrompt"]', 'acceptedKeys: ["accPrompt" "nope"]') })], 0, '"nope"', 'DATA_REF'));
+  it('a static exercise without its noun is DATA_REQUIRED at the { of the exercise', () =>
+    problem([row('RECIPE', { skill: '"case.acc.m"', staticOverride: staticFields.replace('nounId: "book" ', '') })], 0, '{sourceKey:', 'DATA_REQUIRED'));
+  it('a change that is a record where a list belongs is DATA_TYPE at the value', () =>
+    problem([recipe('case.acc.n', { changes: `{from: {kind: copy key: "accPrompt"}}` })], 0, '{from: {kind: copy key: "accPrompt"}}', 'DATA_TYPE'));
+  it('a field the contract does not know is DATA_UNKNOWN_FIELD at its key', () => problem([recipe('case.acc.n', { skillId: '"x"' })], 0, 'skillId', 'DATA_UNKNOWN_FIELD'));
+  it('a recipe that lacks its source and one that is static and constructed at once are beyond the contract: they pass here and the mapper refuses them', () => {
+    expect(check(recipe('case.acc.n', { source: undefined }) + '\n')).toEqual({ status: 0, problems: [] });
+    expect(check(recipe('case.acc.n', { staticOverride: staticFields }) + '\n')).toEqual({ status: 0, problems: [] });
+  });
+});
+
+describe.skipIf(!hasCli)('the chain and the defaults against the contract', () => {
+  const needs = ['SkillRow', 'NounRow', 'CopyEntryRow', 'PatternEntryRow', 'ConstructionRow', 'PossessiveRow'];
+  const chain = rowsOf('ChainStepRecipeRow', ...needs);
+  const defaults = rowsOf('RecipeDefaultsRow', ...needs);
+  const direct = '{kind: direct value: {kind: copy key: "accPrompt"}}';
+  const step = (change: Record<string, string | undefined> = {}) => row('CHAIN', {
+    skill: '"verb.past"', source: direct, expected: direct, promptKey: '"accPrompt"', explanationKey: '"accExplanation"', changes: '[]', tags: '["past"]', ownerOut: '"my"',
+  }, change);
+
+  it('a step with a skill and the first step without one are accepted', () =>
+    expect(chain.check([step(), step({ skill: undefined })].join('\n') + '\n')).toEqual({ status: 0, problems: [] }));
+  it('a skill that is no skill and an owner that is no possessive are DATA_REF at the value', () => {
+    chain.problem([step({ skill: '"nope"' })], 0, '"nope"', 'DATA_REF');
+    chain.problem([step({ ownerOut: '"nobody"' })], 0, '"nobody"', 'DATA_REF');
+  });
+  it('a step without its owner is DATA_REQUIRED at the { of the row', () => chain.problem([step({ ownerOut: undefined })], 0, '{', 'DATA_REQUIRED'));
+  it('no step at all is DATA_COUNT at 1:1', () => expect(chain.check('').problems).toEqual(['chainSteps.core-data:1:1: DATA_COUNT']));
+
+  const one = (change: Record<string, string | undefined> = {}) => row('DEFAULTS', {
+    defaultOwnerLexeme: '"my"', verbLexeme: '"go"', firstSkillByGender: '[{gender: "f" skill: "case.acc.f"} {gender: "default" skill: "case.acc.m"}]',
+  }, change);
+  it('defaults with and without constant slots are accepted', () => {
+    const slots = '[{slot: "aux" lexeme: "do" whenFeature: "Polarity" whenValues: ["Neg"]} {slot: "subject" lexeme: "you"}]';
+    expect(defaults.check(one({ constantSlots: slots }) + '\n')).toEqual({ status: 0, problems: [] });
+    expect(defaults.check(one() + '\n')).toEqual({ status: 0, problems: [] });
+  });
+  it('a first skill that is no skill and a default owner that is no possessive are DATA_REF at the value', () => {
+    defaults.problem([one({ firstSkillByGender: '[{gender: "f" skill: "nope"}]' })], 0, '"nope"', 'DATA_REF');
+    defaults.problem([one({ defaultOwnerLexeme: '"nobody"' })], 0, '"nobody"', 'DATA_REF');
+  });
+  it('a constant slot without its lexeme is DATA_REQUIRED at the { of the slot', () =>
+    defaults.problem([one({ constantSlots: '[{slot: "aux"}]' })], 0, '{slot: "aux"}', 'DATA_REQUIRED'));
+  it('a second defaults row is DATA_COUNT at 1:1', () => expect(defaults.check([one(), one()].join('\n') + '\n').problems).toEqual(['recipeDefaults.core-data:1:1: DATA_COUNT']));
 });
