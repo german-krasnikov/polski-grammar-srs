@@ -1,5 +1,5 @@
 // Generated from dsl/course.data-contract
-// source-sha256=c8d02120cdfbd29cf3b36e21f00704479561e3bfd6c23c28ed30b5d93bb06719
+// source-sha256=a5e64708fa49fd0038acae11dc56795af42632b5d16acfcbdc392a4746a9fd40
 // Edit the source, then run biome generate.
 
 package polski.data.rows.plru
@@ -262,6 +262,110 @@ data class TrainingRow(
 data class StemAlternationRow(
     val a: String,
     val b: String,
+)
+
+data class ReactCompactRow(
+    val react: String,
+    val compact: String,
+)
+
+data class AspectNoPresentRow(
+    val compact: String,
+    val ios: String,
+)
+
+data class GenderNamesRow(
+    val m_personal: String,
+    val m_animate: String,
+    val m_inanimate: String,
+    val f: String,
+    val n: String,
+)
+
+data class RefCaseRow(
+    val id: String,
+    val pl: String,
+    val ru: String,
+    val question: String,
+    val trigger: String,
+    val skill: String? = null,
+)
+
+data class RefChainRow(
+    val label: String,
+    val from: String,
+    val to: String,
+    val change: String,
+)
+
+data class RefTenseRow(
+    val label: String,
+    val from: String,
+    val to: String,
+)
+
+data class RefAspectRow(
+    val label: String,
+    val from: String,
+    val present: String?,
+    val past: String,
+    val future: String,
+)
+
+data class RefMaleAccExampleRow(
+    val from: String,
+    val to: String,
+    val sentence: String,
+)
+
+data class RefMaleAccRow(
+    val id: String,
+    val label: String,
+    val title: String,
+    val examples: List<RefMaleAccExampleRow>,
+    val rule: String,
+)
+
+data class RefSystemCardRow(
+    val id: String,
+    val title: String,
+    val explanation: String,
+    val example: String,
+    val steps: List<String>,
+)
+
+data class RefPipelineStepRow(
+    val id: String,
+    val label: String,
+    val question: String,
+    val example: String,
+)
+
+data class RefPipelineRow(
+    val title: String,
+    val steps: List<RefPipelineStepRow>,
+    val compactExample: String,
+)
+
+data class ReferenceRow(
+    val matrixIntroduction: String,
+    val webCaseCompositionHeader: String,
+    val maleAccIntro: String,
+    val comparisonNounIds: List<String>,
+    val contextHelp: ReactCompactRow,
+    val aspectNoPresent: AspectNoPresentRow,
+    val genderNames: GenderNamesRow,
+    val caseRows: List<RefCaseRow>,
+    val chainRows: List<RefChainRow>,
+    val tenseRows: List<RefTenseRow>,
+    val aspectRows: List<RefAspectRow>,
+    val maleAccRows: List<RefMaleAccRow>,
+    val systemCards: List<RefSystemCardRow>,
+    val pipeline: RefPipelineRow,
+    val caseTeaching: Any?,
+    val verbTeaching: Any?,
+    val pronounTeaching: Any?,
+    val russianSupport: Any?,
 )
 
 private fun skillRowRowsPart0(): List<SkillRow> = listOf(
@@ -3226,3 +3330,593 @@ private fun stemAlternationRowRowsPart0(): List<StemAlternationRow> = listOf(
 )
 
 val STEM_ALTERNATION_ROW_ROWS: List<StemAlternationRow> = stemAlternationRowRowsPart0()
+
+private fun referenceRowRowsPart0(): List<ReferenceRow> = listOf(
+    ReferenceRow(
+        matrixIntroduction = "Один небольшой словарь. Видно, что меняется при каждой операции.",
+        webCaseCompositionHeader = "Местоимение + прилагательное + существительное",
+        maleAccIntro = "Для единственного числа сначала определи тип существительного.",
+        comparisonNounIds = listOf("husband", "friendM", "dog", "house", "wife", "book", "child"),
+        contextHelp = ReactCompactRow(
+            react = "Красным показана старая часть, золотым — новая. Местоимение и прилагательное согласуются с существительным.",
+            compact = "Местоимение и прилагательное согласуются с существительным. jego, jej, ich не изменяются.",
+        ),
+        aspectNoPresent = AspectNoPresentRow(
+            compact = "Нет настоящего времени",
+            ios = "Настоящее: нет настоящего времени",
+        ),
+        genderNames = GenderNamesRow(
+            m_personal = "мужской · человек",
+            m_animate = "мужской · животное",
+            m_inanimate = "мужской · предмет",
+            f = "женский",
+            n = "средний",
+        ),
+        caseRows = listOf(
+            RefCaseRow(id = "nom", pl = "Mianownik", ru = "Именительный", question = "kto? co?", trigger = "To jest…"),
+            RefCaseRow(
+                id = "gen",
+                pl = "Dopełniacz",
+                ru = "Родительный",
+                question = "kogo? czego?",
+                trigger = "nie widzę / nie mam / bez / do",
+                skill = "case.gen.neg",
+            ),
+            RefCaseRow(
+                id = "dat",
+                pl = "Celownik",
+                ru = "Дательный",
+                question = "komu? czemu?",
+                trigger = "daję / pomagam",
+                skill = "case.dat",
+            ),
+            RefCaseRow(
+                id = "acc",
+                pl = "Biernik",
+                ru = "Винительный",
+                question = "kogo? co?",
+                trigger = "widzę / mam / lubię",
+                skill = "case.acc.f",
+            ),
+            RefCaseRow(
+                id = "inst",
+                pl = "Narzędnik",
+                ru = "Творительный",
+                question = "kim? czym?",
+                trigger = "z (с) / jestem",
+                skill = "case.inst",
+            ),
+            RefCaseRow(
+                id = "loc",
+                pl = "Miejscownik",
+                ru = "Предложный",
+                question = "o kim? o czym?",
+                trigger = "o / w / na (место)",
+                skill = "case.loc",
+            ),
+            RefCaseRow(
+                id = "voc",
+                pl = "Wołacz",
+                ru = "Обращение",
+                question = "обращаемся к кому-то",
+                trigger = "Żono! Kolego!",
+            ),
+        ),
+        chainRows = listOf(
+            RefChainRow(
+                label = "База",
+                from = "To jest moja piękna żona.",
+                to = "Widzę moją piękną żonę.",
+                change = "Biernik всей группы",
+            ),
+            RefChainRow(
+                label = "Прошедшее",
+                from = "Widzę moją piękną żonę.",
+                to = "Widziałem moją piękną żonę.",
+                change = "widzę → widziałem",
+            ),
+            RefChainRow(
+                label = "Отрицание",
+                from = "Widziałem moją piękną żonę.",
+                to = "Nie widziałem mojej pięknej żony.",
+                change = "вся группа: Biernik → Dopełniacz",
+            ),
+            RefChainRow(
+                label = "Их вместо моей",
+                from = "Nie widziałem mojej pięknej żony.",
+                to = "Nie widziałem ich pięknej żony.",
+                change = "mojej → ich; ich не склоняется",
+            ),
+            RefChainRow(
+                label = "Говорю о…",
+                from = "Nie widziałem ich pięknej żony.",
+                to = "Mówię o ich pięknej żonie.",
+                change = "o → Miejscownik",
+            ),
+        ),
+        tenseRows = listOf(
+            RefTenseRow(
+                label = "Сейчас",
+                from = "Moja piękna żona idzie do domu.",
+                to = "Moja piękna żona idzie do domu.",
+            ),
+            RefTenseRow(
+                label = "Прошедшее",
+                from = "Moja piękna żona idzie do domu.",
+                to = "Moja piękna żona szła do domu.",
+            ),
+            RefTenseRow(
+                label = "Будущее · процесс",
+                from = "Moja piękna żona szła do domu.",
+                to = "Moja piękna żona będzie szła do domu.",
+            ),
+            RefTenseRow(
+                label = "Отрицание",
+                from = "Moja piękna żona idzie do domu.",
+                to = "Moja piękna żona nie idzie do domu.",
+            ),
+            RefTenseRow(
+                label = "Вопрос",
+                from = "Moja piękna żona idzie do domu.",
+                to = "Czy moja piękna żona idzie do domu?",
+            ),
+        ),
+        aspectRows = listOf(
+            RefAspectRow(
+                label = "robić · процесс",
+                from = "robić",
+                present = "robię",
+                past = "robiłem / robiłam",
+                future = "będę robić",
+            ),
+            RefAspectRow(
+                label = "zrobić · результат",
+                from = "zrobić",
+                present = null,
+                past = "zrobiłem / zrobiłam",
+                future = "zrobię",
+            ),
+            RefAspectRow(
+                label = "kupować · процесс",
+                from = "kupować",
+                present = "kupuję",
+                past = "kupowałem / kupowałam",
+                future = "będę kupować",
+            ),
+            RefAspectRow(
+                label = "kupić · результат",
+                from = "kupić",
+                present = null,
+                past = "kupiłem / kupiłam",
+                future = "kupię",
+            ),
+        ),
+        maleAccRows = listOf(
+            RefMaleAccRow(
+                id = "person",
+                label = "Человек",
+                title = "mąż / kolega",
+                examples = listOf(
+                    RefMaleAccExampleRow(
+                        from = "mój dobry mąż",
+                        to = "mojego dobrego męża",
+                        sentence = "Widzę mojego dobrego męża.",
+                    ),
+                    RefMaleAccExampleRow(
+                        from = "mój dobry kolega",
+                        to = "mojego dobrego kolegę",
+                        sentence = "Widzę mojego dobrego kolegę.",
+                    ),
+                ),
+                rule = "На согласную: как Gen. На -a: -ę у существительного, но -ego у местоимения и прилагательного.",
+            ),
+            RefMaleAccRow(
+                id = "animal",
+                label = "Животное",
+                title = "pies / kot",
+                examples = listOf(
+                    RefMaleAccExampleRow(
+                        from = "mój dobry pies",
+                        to = "mojego dobrego psa",
+                        sentence = "Widzę mojego dobrego psa.",
+                    ),
+                ),
+                rule = "Винительный как родительный: pies → psa.",
+            ),
+            RefMaleAccRow(
+                id = "object",
+                label = "Предмет",
+                title = "dom / samochód",
+                examples = listOf(
+                    RefMaleAccExampleRow(
+                        from = "mój nowy samochód",
+                        to = "mój nowy samochód",
+                        sentence = "Widzę mój nowy samochód.",
+                    ),
+                ),
+                rule = "Винительный как именительный: группа сохраняет базовую форму.",
+            ),
+        ),
+        systemCards = listOf(
+            RefSystemCardRow(
+                id = "noun",
+                title = "Существительное",
+                explanation = "Род × число × падеж",
+                example = "żona → żonę → żony",
+                steps = listOf("żona", "żonę", "żony"),
+            ),
+            RefSystemCardRow(
+                id = "agreement",
+                title = "Прилагательное и владелец",
+                explanation = "Копируют род, число и падеж",
+                example = "moja piękna → moją piękną",
+                steps = listOf("moja piękna", "moją piękną"),
+            ),
+            RefSystemCardRow(
+                id = "verb",
+                title = "Глагол",
+                explanation = "Лицо × число × время × вид",
+                example = "widzę → widziałem → będę widzieć",
+                steps = listOf("widzę", "widziałem", "będę widzieć"),
+            ),
+            RefSystemCardRow(
+                id = "modifiers",
+                title = "Модификаторы",
+                explanation = "Отрицание · вопрос · владелец",
+                example = "Widzę… → Nie widzę… → Czy widzę…?",
+                steps = listOf("Widzę…", "Nie widzę…", "Czy widzę…?"),
+            ),
+        ),
+        pipeline = RefPipelineRow(
+            title = "Сначала конструкция, затем формы",
+            steps = listOf(
+                RefPipelineStepRow(
+                    id = "intent",
+                    label = "01 · Смысл",
+                    question = "Что хочу сказать?",
+                    example = "Вижу / не вижу / говорю о…",
+                ),
+                RefPipelineStepRow(
+                    id = "case",
+                    label = "02 · Операция",
+                    question = "Какой падеж нужен?",
+                    example = "widzę → Biernik",
+                ),
+                RefPipelineStepRow(
+                    id = "agreement",
+                    label = "03 · Согласование",
+                    question = "Меняю всю группу",
+                    example = "moją + piękną + żonę",
+                ),
+            ),
+            compactExample = "widzę → Biernik → moją + piękną + żonę",
+        ),
+        caseTeaching = mapOf(
+            "caseNote" to mapOf(
+                "react" to "Wołacz показан как форма обращения; с неодушевлёнными словами обычно используется только стилистически. «Zachwycam się…» = «Восхищаюсь…» (Narzędnik), «Przyglądam się…» — Celownik.",
+                "compact" to "Wołacz — форма обращения. «Zachwycam się…» требует Narzędnik; «Przyglądam się…» — Celownik.",
+            ),
+            "comparisonReadingHint" to "Читай по строке, чтобы сравнить типы. По столбцу — чтобы увидеть все формы одного слова.",
+        ),
+        verbTeaching = mapOf(
+            "subjects" to listOf(
+                mapOf(
+                    "id" to "ja",
+                    "person" to 1,
+                    "number" to "sg",
+                    "genderMode" to "selected",
+                    "label" to mapOf("full" to "ja — я", "compact" to "ja — я"),
+                ),
+                mapOf(
+                    "id" to "ty",
+                    "person" to 2,
+                    "number" to "sg",
+                    "genderMode" to "selected",
+                    "label" to mapOf("full" to "ty — ты", "compact" to "ty — ты"),
+                ),
+                mapOf(
+                    "id" to "on",
+                    "person" to 3,
+                    "number" to "sg",
+                    "genderMode" to "fixed",
+                    "fixedGender" to "m-personal",
+                    "label" to mapOf("full" to "on — он", "compact" to "on — он"),
+                ),
+                mapOf(
+                    "id" to "ona",
+                    "person" to 3,
+                    "number" to "sg",
+                    "genderMode" to "fixed",
+                    "fixedGender" to "f",
+                    "label" to mapOf("full" to "ona — она", "compact" to "ona — она"),
+                ),
+                mapOf(
+                    "id" to "ono",
+                    "person" to 3,
+                    "number" to "sg",
+                    "genderMode" to "fixed",
+                    "fixedGender" to "n",
+                    "label" to mapOf("full" to "ono — оно", "compact" to "ono — оно"),
+                ),
+                mapOf(
+                    "id" to "my",
+                    "person" to 1,
+                    "number" to "pl",
+                    "genderMode" to "selected",
+                    "label" to mapOf("full" to "my — мы", "compact" to "my — мы"),
+                ),
+                mapOf(
+                    "id" to "wy",
+                    "person" to 2,
+                    "number" to "pl",
+                    "genderMode" to "selected",
+                    "label" to mapOf("full" to "wy — вы", "compact" to "wy — вы"),
+                ),
+                mapOf(
+                    "id" to "oni",
+                    "person" to 3,
+                    "number" to "pl",
+                    "genderMode" to "fixed",
+                    "fixedGender" to "m-personal",
+                    "label" to mapOf("full" to "oni — мужская личная группа", "compact" to "oni — мужская группа"),
+                ),
+                mapOf(
+                    "id" to "one",
+                    "person" to 3,
+                    "number" to "pl",
+                    "genderMode" to "fixed",
+                    "fixedGender" to "f",
+                    "label" to mapOf("full" to "one — остальные", "compact" to "one — остальные"),
+                ),
+            ),
+            "genderControlLabel" to mapOf("full" to "Род для ja / ty / my / wy", "compact" to "Род"),
+            "genderOptions" to listOf(
+                mapOf(
+                    "id" to "m",
+                    "label" to mapOf("full" to "Мужской / мужская личная группа", "compact" to "Мужской"),
+                ),
+                mapOf("id" to "f", "label" to mapOf("full" to "Женский / женская группа", "compact" to "Женский")),
+            ),
+            "tenseLabels" to mapOf(
+                "present" to mapOf("full" to "Teraz · сейчас", "compact" to "Teraz"),
+                "past" to mapOf("full" to "Przeszłość · прошлое", "compact" to "Przeszłość"),
+                "future" to mapOf("full" to "Przyszłość · будущее", "compact" to "Przyszłość"),
+            ),
+            "futureExplanation" to mapOf(
+                "react" to "Составное будущее: będę + инфинитив (będę robić) или форма на -ł с родом и числом (będę robił / robiła). У być: będę, без второго глагола.",
+                "compact" to "Составное будущее: będę + инфинитив или форма на -ł. У być: będę, без второго глагола.",
+            ),
+        ),
+        pronounTeaching = mapOf(
+            "personal" to mapOf(
+                "title" to "Личные местоимения в конструкциях",
+                "intro" to mapOf(
+                    "react" to "Вместо отдельной формы запоминай её место в предложении. После предлогов у местоимений третьего лица появляется n-.",
+                    "compact" to "После предлогов у местоимений третьего лица появляется n-.",
+                ),
+                "footer" to mapOf(
+                    "react" to "Здесь обычные безударные формы. Для ударения или противопоставления: mnie, tobie, jego, jemu. После предлога: do niego, do niej, do nich, dla mnie, dla ciebie.",
+                    "web" to "Здесь обычные безударные формы. После предлога: do niego, do niej, do nich, dla mnie, dla ciebie.",
+                    "native" to "После предлога: do niego, do niej, do nich, dla mnie, dla ciebie.",
+                ),
+                "pronounIds" to listOf("ja", "ty", "on", "ona", "ono", "my", "wy", "oni", "one"),
+            ),
+            "contexts" to listOf(
+                mapOf(
+                    "id" to "gen",
+                    "caseId" to "gen",
+                    "cue" to mapOf("full" to "Nie widzę…", "compact" to "Nie widzę…", "ios" to "Nie widzę"),
+                    "caseName" to "Dopełniacz",
+                ),
+                mapOf(
+                    "id" to "dat",
+                    "caseId" to "dat",
+                    "cue" to mapOf("full" to "Daję prezent…", "compact" to "Daję prezent…", "ios" to "Daję prezent"),
+                    "caseName" to "Celownik",
+                ),
+                mapOf(
+                    "id" to "acc",
+                    "caseId" to "acc",
+                    "cue" to mapOf("full" to "Widzę…", "compact" to "Widzę…", "ios" to "Widzę"),
+                    "caseName" to "Biernik",
+                ),
+                mapOf(
+                    "id" to "inst",
+                    "caseId" to "inst",
+                    "cue" to mapOf("full" to "Idę z…", "compact" to "Idę z…", "ios" to "Idę"),
+                    "caseName" to "Narzędnik",
+                    "valuePrefix" to "z ",
+                    "specialValues" to mapOf("ja" to "ze mną"),
+                ),
+                mapOf(
+                    "id" to "loc",
+                    "caseId" to "loc",
+                    "cue" to mapOf("full" to "Mówię o…", "compact" to "Mówię o…", "ios" to "Mówię o"),
+                    "caseName" to "Miejscownik",
+                    "valuePrefix" to "o ",
+                ),
+            ),
+            "possessive" to mapOf(
+                "title" to "Владелец меняется независимо от падежа",
+                "demo" to mapOf(
+                    "nounId" to "wife",
+                    "adjectiveId" to "beautiful",
+                    "number" to "sg",
+                    "cases" to listOf(
+                        mapOf(
+                            "id" to "nom",
+                            "caption" to mapOf("web" to "Mianownik", "desktop" to "Mianownik", "ios" to "Mianownik"),
+                        ),
+                        mapOf(
+                            "id" to "acc",
+                            "caption" to mapOf("web" to "Widzę… · Biernik", "desktop" to "Biernik", "ios" to "Biernik"),
+                        ),
+                        mapOf(
+                            "id" to "gen",
+                            "caption" to mapOf(
+                                "web" to "Nie widzę… · Dopełniacz",
+                                "desktop" to "Dopełniacz",
+                                "ios" to "Dopełniacz",
+                            ),
+                        ),
+                    ),
+                    "invariableOwnerIds" to listOf("his", "her", "their"),
+                    "rule" to mapOf("invariable" to "Владелец не склоняется", "variable" to "Согласуется с żona"),
+                ),
+            ),
+        ),
+        russianSupport = mapOf(
+            "title" to mapOf(
+                "full" to "Опора на русский: что переносится, а что проверить",
+                "compact" to "Опора на русский",
+            ),
+            "columns" to listOf("Русская опора", "Польская конструкция", "Проверка"),
+            "rows" to listOf(
+                mapOf(
+                    "id" to "accusative",
+                    "cue" to "вижу кого? что?",
+                    "react" to mapOf(
+                        "construction" to "Widzę moją żonę.",
+                        "check" to "Логика винительного знакома; польские окончания нужно менять во всей группе.",
+                    ),
+                    "web" to mapOf(
+                        "construction" to "Widzę moją żonę.",
+                        "check" to "Польские окончания меняются во всей группе.",
+                    ),
+                    "desktop" to mapOf(
+                        "construction" to "Widzę moją żonę.",
+                        "check" to "Окончания меняются во всей группе",
+                    ),
+                    "mobileLine" to "вижу кого? что? → Widzę moją żonę. Окончания меняются во всей группе.",
+                    "comparisons" to listOf(
+                        mapOf(
+                            "from" to "moja żona",
+                            "to" to "moją żonę",
+                            "beforeParts" to listOf(
+                                mapOf("text" to "moj", "isChanged" to false, "isEnding" to false),
+                                mapOf("text" to "a", "isChanged" to true, "isEnding" to true),
+                                mapOf("text" to " ", "isChanged" to false, "isEnding" to false),
+                                mapOf("text" to "żon", "isChanged" to false, "isEnding" to false),
+                                mapOf("text" to "a", "isChanged" to true, "isEnding" to true),
+                            ),
+                            "afterParts" to listOf(
+                                mapOf("text" to "moj", "isChanged" to false, "isEnding" to false),
+                                mapOf("text" to "ą", "isChanged" to true, "isEnding" to true),
+                                mapOf("text" to " ", "isChanged" to false, "isEnding" to false),
+                                mapOf("text" to "żon", "isChanged" to false, "isEnding" to false),
+                                mapOf("text" to "ę", "isChanged" to true, "isEnding" to true),
+                            ),
+                        ),
+                    ),
+                ),
+                mapOf(
+                    "id" to "instrumental",
+                    "cue" to "с моей женой",
+                    "react" to mapOf(
+                        "construction" to "z moją żoną",
+                        "check" to "Польское женское -ą соответствует здесь творительному; это же окончание есть у прилагательного в Bierniku.",
+                    ),
+                    "web" to mapOf(
+                        "construction" to "z moją żoną",
+                        "check" to "Женское -ą здесь соответствует творительному.",
+                    ),
+                    "desktop" to mapOf("construction" to "z moją żoną", "check" to "Женское -ą — творительный"),
+                    "mobileLine" to "с моей женой → z moją żoną. Женское -ą — творительный.",
+                    "comparisons" to listOf(
+                        mapOf(
+                            "from" to "moja żona",
+                            "to" to "moją żoną",
+                            "beforeParts" to listOf(
+                                mapOf("text" to "moj", "isChanged" to false, "isEnding" to false),
+                                mapOf("text" to "a", "isChanged" to true, "isEnding" to true),
+                                mapOf("text" to " ", "isChanged" to false, "isEnding" to false),
+                                mapOf("text" to "żon", "isChanged" to false, "isEnding" to false),
+                                mapOf("text" to "a", "isChanged" to true, "isEnding" to true),
+                            ),
+                            "afterParts" to listOf(
+                                mapOf("text" to "moj", "isChanged" to false, "isEnding" to false),
+                                mapOf("text" to "ą", "isChanged" to true, "isEnding" to true),
+                                mapOf("text" to " ", "isChanged" to false, "isEnding" to false),
+                                mapOf("text" to "żon", "isChanged" to false, "isEnding" to false),
+                                mapOf("text" to "ą", "isChanged" to true, "isEnding" to true),
+                            ),
+                        ),
+                    ),
+                ),
+                mapOf(
+                    "id" to "locative",
+                    "cue" to "говорю о жене",
+                    "react" to mapOf(
+                        "construction" to "mówię o żonie",
+                        "check" to "Местный падеж требует предлога; żona → żonie.",
+                    ),
+                    "web" to mapOf(
+                        "construction" to "mówię o żonie",
+                        "check" to "Местный падеж требует предлога; żona → żonie.",
+                    ),
+                    "desktop" to mapOf("construction" to "mówię o żonie", "check" to "Местный требует предлога"),
+                    "mobileLine" to "говорю о жене → mówię o żonie. Местный требует предлога.",
+                    "comparisons" to listOf(
+                        mapOf(
+                            "from" to "żona",
+                            "to" to "żonie",
+                            "beforeParts" to listOf(
+                                mapOf("text" to "żon", "isChanged" to false, "isEnding" to false),
+                                mapOf("text" to "a", "isChanged" to true, "isEnding" to true),
+                            ),
+                            "afterParts" to listOf(
+                                mapOf("text" to "żon", "isChanged" to false, "isEnding" to false),
+                                mapOf("text" to "ie", "isChanged" to true, "isEnding" to true),
+                            ),
+                        ),
+                    ),
+                ),
+                mapOf(
+                    "id" to "possessive",
+                    "cue" to "мой / его / их",
+                    "react" to mapOf(
+                        "construction" to "moją żonę / jego żonę / ich żonę",
+                        "check" to "jego, jej, ich не склоняются. Формы mojego и mojej зависят от предмета обладания.",
+                    ),
+                    "web" to mapOf(
+                        "construction" to "moją żonę / jego żonę / ich żonę",
+                        "check" to "jego, jej, ich не склоняются.",
+                    ),
+                    "desktop" to mapOf(
+                        "construction" to "moją / jego / ich żonę",
+                        "check" to "jego, jej, ich не склоняются",
+                    ),
+                    "mobileLine" to "мой / его / их → moją / jego / ich żonę. jego, jej, ich не склоняются.",
+                    "comparisons" to listOf(
+                        mapOf(
+                            "from" to "moją żonę",
+                            "to" to "jego żonę",
+                            "beforeParts" to listOf(
+                                mapOf("text" to "moją", "isChanged" to true, "isEnding" to false),
+                                mapOf("text" to " żonę", "isChanged" to false, "isEnding" to false),
+                            ),
+                            "afterParts" to listOf(
+                                mapOf("text" to "jego", "isChanged" to true, "isEnding" to false),
+                                mapOf("text" to " żonę", "isChanged" to false, "isEnding" to false),
+                            ),
+                        ),
+                        mapOf(
+                            "from" to "moją żonę",
+                            "to" to "ich żonę",
+                            "beforeParts" to listOf(
+                                mapOf("text" to "moją", "isChanged" to true, "isEnding" to false),
+                                mapOf("text" to " żonę", "isChanged" to false, "isEnding" to false),
+                            ),
+                            "afterParts" to listOf(
+                                mapOf("text" to "ich", "isChanged" to true, "isEnding" to false),
+                                mapOf("text" to " żonę", "isChanged" to false, "isEnding" to false),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        ),
+    ),
+)
+
+val REFERENCE_ROW_ROWS: List<ReferenceRow> = referenceRowRowsPart0()

@@ -254,3 +254,111 @@ RECORD StemAlternationRow COUNT 1..
   a: string
   b: string
 END
+
+# The reference content of the matrix screens, one row: the texts, the case table, the tables of the chain, the tenses, the aspects and the
+# accusative of the masculine, the system cards and the pipeline. The four teaching texts (caseTeaching, verbTeaching, pronounTeaching,
+# russianSupport) are `any` until R1.10 types them. Records are named Ref... so no class meets a domain class of the same name in the export.
+RECORD ReferenceRow COUNT 1
+  matrixIntroduction: string
+  webCaseCompositionHeader: string
+  maleAccIntro: string
+  comparisonNounIds: [ref NounRow]
+  contextHelp: ReactCompactRow
+  aspectNoPresent: AspectNoPresentRow
+  genderNames: GenderNamesRow
+  caseRows: [RefCaseRow]
+  chainRows: [RefChainRow]
+  tenseRows: [RefTenseRow]
+  aspectRows: [RefAspectRow]
+  maleAccRows: [RefMaleAccRow]
+  systemCards: [RefSystemCardRow]
+  pipeline: RefPipelineRow
+  caseTeaching: any
+  verbTeaching: any
+  pronounTeaching: any
+  russianSupport: any
+END
+
+# Two wordings of one text: the full React screen and the compact hosts (also the teaching texts of R1.10).
+RECORD ReactCompactRow
+  react: string
+  compact: string
+END
+
+RECORD AspectNoPresentRow
+  compact: string
+  ios: string
+END
+
+RECORD GenderNamesRow
+  m_personal: string
+  m_animate: string
+  m_inanimate: string
+  f: string
+  n: string
+END
+
+RECORD RefCaseRow
+  id: string
+  pl: string
+  ru: string
+  question: string
+  trigger: string
+  skill: ref SkillRow OPTIONAL
+END
+
+RECORD RefChainRow
+  label: string
+  from: string
+  to: string
+  change: string
+END
+
+RECORD RefTenseRow
+  label: string
+  from: string
+  to: string
+END
+
+RECORD RefAspectRow
+  label: string
+  from: string
+  present: string NULLABLE
+  past: string
+  future: string
+END
+
+RECORD RefMaleAccRow
+  id: string
+  label: string
+  title: string
+  examples: [RefMaleAccExampleRow]
+  rule: string
+END
+
+RECORD RefMaleAccExampleRow
+  from: string
+  to: string
+  sentence: string
+END
+
+RECORD RefSystemCardRow
+  id: string
+  title: string
+  explanation: string
+  example: string
+  steps: [string]
+END
+
+RECORD RefPipelineRow
+  title: string
+  steps: [RefPipelineStepRow]
+  compactExample: string
+END
+
+RECORD RefPipelineStepRow
+  id: string
+  label: string
+  question: string
+  example: string
+END
