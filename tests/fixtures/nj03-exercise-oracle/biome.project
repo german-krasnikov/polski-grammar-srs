@@ -9,7 +9,6 @@ GENERATE course-full derive {dir}/derive-full.mjs generate OUT
 GENERATE course-reference derive {dir}/derive-reference.mjs generate OUT
 GENERATE course-vocabulary derive {dir}/derive-vocabulary.mjs generate OUT
 GENERATE course-teaching derive {dir}/derive-teaching.mjs generate OUT
-GENERATE course-frequency derive {dir}/derive-frequency.mjs generate OUT
 GENERATE enru-pack derive {dir}/derive-enru-pack.mjs generate OUT
 GENERATE lifehacks derive {dir}/derive-lifehacks.mjs generate OUT
 GENERATE swipe-policy derive {dir}/derive-swipe-policy.mjs generate OUT

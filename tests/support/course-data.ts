@@ -1,5 +1,5 @@
 // Shared by the tests of the course data (R1.4+): the biome CLI, the contract, and which real file holds which record.
-// The record-to-file pairs are read from the course-plru step of dsl/biome.project, so no test keeps a second list of them.
+// The record-to-file pairs and their contracts are read from the data steps of dsl/biome.project, so no test keeps a second list of them.
 import { spawnSync } from 'node:child_process';
 import { existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
@@ -13,14 +13,19 @@ export const hasCli = existsSync(cli);
 export const PACK = join(repo, 'courses-biome/pl-ru');
 export const CONTRACT = join(repo, 'dsl/course.data-contract');
 
-const step = readFileSync(join(repo, 'dsl/biome.project'), 'utf8').split('\n').find(line => line.startsWith('GENERATE course-plru '))!;
-/** `--rows <Record> <file>` of the step: the real file of each record. */
-const REAL = new Map([...step.matchAll(/--rows (\w+) \{dir\}\/\.\.\/(\S+)/g)].map(match => [match[1], join(repo, match[2])]));
+const project = readFileSync(join(repo, 'dsl/biome.project'), 'utf8');
+const CONTRACTS = new Map([...project.matchAll(/^CONTRACT (\S+) FROM (\S+)/gm)].map(match => [match[1], join(repo, 'dsl', match[2])]));
+/** For each record: its real file and the contract of the data step that binds it (`--rows <Record> <file>` and `--contract <name>`). */
+const REAL = new Map<string, { file: string; contract: string }>();
+for (const step of project.split('\n').filter(line => /^GENERATE \S+ data /.test(line))) {
+  const contract = CONTRACTS.get(step.match(/--contract (\S+)/)![1])!;
+  for (const match of step.matchAll(/--rows (\w+) \{dir\}\/\.\.\/(\S+)/g)) REAL.set(match[1], { file: join(repo, match[2]), contract });
+}
 
 export const biome = (...args: string[]) => spawnSync(process.execPath, [cli, ...args], { encoding: 'utf8' });
 
-/** The real file of a record, as the step of dsl/biome.project binds it. */
-export const realFile = (record: string) => REAL.get(record)!;
+/** The real file of a record, as the data step of dsl/biome.project binds it. */
+export const realFile = (record: string) => REAL.get(record)!.file;
 
 /**
  * `biome data check` of rows the test writes for one record, with the real files of the records it needs bound as the step binds them
@@ -30,12 +35,12 @@ export const realFile = (record: string) => REAL.get(record)!;
 export function rowsOf(record: string, ...needs: string[]) {
   const dir = mkdtempSync(join(tmpdir(), 'course-data-'));
   afterAll(() => rmSync(dir, { recursive: true, force: true }));
-  const real = REAL.get(record)!, file = join(dir, basename(real)), name = basename(real);
-  const bound = [record, ...needs].flatMap(each => ['--rows', each, each === record ? file : REAL.get(each)!]);
+  const { file: real, contract } = REAL.get(record)!, file = join(dir, basename(real)), name = basename(real);
+  const bound = [record, ...needs].flatMap(each => ['--rows', each, each === record ? file : REAL.get(each)!.file]);
 
   function check(text: string) {
     writeFileSync(file, text);
-    const run = biome('data', 'check', '--contract', CONTRACT, ...bound);
+    const run = biome('data', 'check', '--contract', contract, ...bound);
     const problems = run.stderr.split('\n').flatMap(line => {
       const match = line.match(/^(\S+):(\d+):(\d+): (DATA_\w+)/);
       return match ? [`${basename(match[1])}:${match[2]}:${match[3]}: ${match[4]}`] : [];

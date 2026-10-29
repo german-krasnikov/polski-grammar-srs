@@ -1,0 +1,8 @@
+DSL 1
+# The word frequencies of a course pack (courses-biome/<pair>/frequency.core-data), one FREQ row per lemma in rank order. A contract and a step of
+# their own: nothing refers to them and the 1000 printed rows should not sit in the file of the course rows (R1Design.md D1).
+RECORD FrequencyRow COUNT 1..
+  rank: int
+  lemma: string
+  count: int
+END
