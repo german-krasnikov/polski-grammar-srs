@@ -1,5 +1,5 @@
 // Generated from dsl/course.data-contract
-// source-sha256=4953b2a3a851a6ff19ad3abaf568017fc11d7e786c43263efec38e6403a31a37
+// source-sha256=bf277e143ccbd8e96bfbcd40bdf15c64f842d0b6b5932bd4f6e864e5f142a569
 // Edit the source, then run biome generate.
 
 package polski.data.rows.plru
@@ -594,6 +594,44 @@ data class ChangeSpecRow(
     val from: TextValueRow,
     val to: TextValueRow,
     val reason: ReasonSpecRow,
+)
+
+data class ConditionRow(
+    val feature: String,
+    val value: String,
+)
+
+data class RequiredWhenRow(
+    val condition: ConditionRow,
+    val features: List<String>,
+)
+
+data class SlotRow(
+    val name: String,
+    val category: String,
+    val optional: Boolean? = null,
+    val requiredFeatures: List<String>,
+    val requiredFeaturesWhen: List<RequiredWhenRow>? = null,
+    val agreementSource: String? = null,
+)
+
+data class GovWhenRow(
+    val condition: ConditionRow,
+    val result: String,
+)
+
+data class OrderWhenRow(
+    val condition: ConditionRow,
+    val slots: List<SlotRow>,
+)
+
+data class ConstructionRow(
+    val id: String,
+    val slots: List<SlotRow>,
+    val govFeature: String? = null,
+    val govDefault: String? = null,
+    val govWhen: List<GovWhenRow>? = null,
+    val orderWhen: List<OrderWhenRow>? = null,
 )
 
 private fun skillRowRowsPart0(): List<SkillRow> = listOf(
@@ -4177,3 +4215,103 @@ private fun morphologyRowRowsPart0(): List<MorphologyRow> = listOf(
 )
 
 val MORPHOLOGY_ROW_ROWS: List<MorphologyRow> = morphologyRowRowsPart0()
+
+private fun constructionRowRowsPart0(): List<ConstructionRow> = listOf(
+    ConstructionRow(
+        id = "core.argument.case-role",
+        slots = listOf(
+            SlotRow(
+                name = "owner",
+                category = "possessive",
+                optional = true,
+                requiredFeatures = listOf("Number", "Gender", "Case"),
+                agreementSource = "noun",
+            ),
+            SlotRow(
+                name = "adjective",
+                category = "adjective",
+                requiredFeatures = listOf("Number", "Gender", "Case"),
+                agreementSource = "noun",
+            ),
+            SlotRow(name = "noun", category = "noun", requiredFeatures = listOf("Number", "Case")),
+        ),
+    ),
+    ConstructionRow(
+        id = "core.agreement.possessive",
+        slots = listOf(
+            SlotRow(
+                name = "owner",
+                category = "possessive",
+                requiredFeatures = listOf("Number", "Gender", "Case"),
+                agreementSource = "noun",
+            ),
+            SlotRow(
+                name = "adjective",
+                category = "adjective",
+                requiredFeatures = listOf("Number", "Gender", "Case"),
+                agreementSource = "noun",
+            ),
+            SlotRow(name = "noun", category = "noun", requiredFeatures = listOf("Number", "Case")),
+        ),
+    ),
+    ConstructionRow(
+        id = "core.number",
+        slots = listOf(
+            SlotRow(
+                name = "owner",
+                category = "possessive",
+                optional = true,
+                requiredFeatures = listOf("Number", "Gender", "Case"),
+                agreementSource = "noun",
+            ),
+            SlotRow(
+                name = "adjective",
+                category = "adjective",
+                requiredFeatures = listOf("Number", "Gender", "Case"),
+                agreementSource = "noun",
+            ),
+            SlotRow(name = "noun", category = "noun", requiredFeatures = listOf("Number", "Case")),
+        ),
+    ),
+    ConstructionRow(
+        id = "core.sentence.polarity",
+        slots = listOf(
+            SlotRow(
+                name = "owner",
+                category = "possessive",
+                optional = true,
+                requiredFeatures = listOf("Number", "Gender", "Case"),
+                agreementSource = "noun",
+            ),
+            SlotRow(
+                name = "adjective",
+                category = "adjective",
+                requiredFeatures = listOf("Number", "Gender", "Case"),
+                agreementSource = "noun",
+            ),
+            SlotRow(name = "noun", category = "noun", requiredFeatures = listOf("Number", "Case")),
+        ),
+        govFeature = "Case",
+        govDefault = "acc",
+        govWhen = listOf(GovWhenRow(condition = ConditionRow(feature = "Polarity", value = "neg"), result = "gen")),
+    ),
+    ConstructionRow(
+        id = "core.verb.tense",
+        slots = listOf(
+            SlotRow(
+                name = "verb",
+                category = "verb",
+                requiredFeatures = listOf("Tense", "Person", "Number"),
+                requiredFeaturesWhen = listOf(
+                    RequiredWhenRow(
+                        condition = ConditionRow(feature = "Tense", value = "past"),
+                        features = listOf("Tense", "Person", "Number", "Gender"),
+                    ),
+                ),
+                agreementSource = "noun",
+            ),
+        ),
+    ),
+)
+
+val CONSTRUCTION_ROW_ROWS: List<ConstructionRow> = constructionRowRowsPart0()

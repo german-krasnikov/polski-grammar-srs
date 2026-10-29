@@ -1,17 +1,20 @@
 package polski.data
 
 import polski.core.engine.ChangeSpec
+import polski.core.engine.ConstructionTemplate
 import polski.core.engine.PhraseSpec
 import polski.core.engine.ReasonRule
 import polski.core.engine.ReasonSpec
+import polski.core.engine.SlotTemplate
 import polski.core.engine.TextSpec
 import polski.core.engine.TextValue
 import polski.data.rows.plru.*
 
 /**
- * R1.11a: the recipe expressions of the rows as the types of :core-engine (R1Design.md D5). A variant is one record with a kind and OPTIONAL fields,
- * so each mapper first checks that the fields written are exactly the ones its kind uses: the engine would meet a missing one at the first
- * exercise of the skill, and would never see one of another kind. Nothing here fills in what the data does not say.
+ * R1.11: the recipe expressions and the constructions of the pl-ru rows as the types of :core-engine (R1Design.md D5). A variant is one record with a kind and
+ * OPTIONAL fields, so each mapper first checks that the fields written are exactly the ones its kind uses: the engine would meet a missing one at
+ * the first exercise of the skill, and would never see one of another kind. Nothing here fills in what the data does not say, except what the
+ * engine types default (an absent `accepted` is none, an absent `optional` is false).
  */
 private fun requireFields(what: String, kind: String, written: Map<String, Any?>, vararg needed: String) {
     val present = written.filterValues { it != null }.keys
@@ -19,8 +22,9 @@ private fun requireFields(what: String, kind: String, written: Map<String, Any?>
 }
 
 /** A map from pairs; a name written twice is refused, not overwritten. */
-private fun <V> List<Pair<String, V>>.toDistinctMap(what: String): Map<String, V> =
-    toMap().also { require(it.size == size) { "$what: a name is written twice" } }
+private fun <V> List<Pair<String, V>>.toDistinctMap(what: String): Map<String, V> = toMap().also {
+    require(it.size == size) { "$what: ${groupingBy { pair -> pair.first }.eachCount().filterValues { n -> n > 1 }.keys} written twice" }
+}
 
 internal fun PhraseSpecRow.toPhraseSpec() = PhraseSpec(construction, bundle.map { it.feature to it.value }.toDistinctMap("bundle of $construction"), ownerLexeme)
 
@@ -69,3 +73,24 @@ internal fun ReasonSpecRow.toReasonSpec(): ReasonSpec {
 }
 
 internal fun ChangeSpecRow.toChangeSpec() = ChangeSpec(from.toTextValue(), to.toTextValue(), reason.toReasonSpec())
+
+internal fun ConditionRow.toCondition(): String {
+    require("=" !in feature) { "a condition's feature has no \"=\": $feature" }
+    return "$feature=$value"
+}
+
+internal fun SlotRow.toSlot() = SlotTemplate(
+    name, category, optional == true, requiredFeatures,
+    requiredFeaturesWhen.orEmpty().map { it.condition.toCondition() to it.features }.toDistinctMap("slot $name"), agreementSource,
+)
+
+internal fun ConstructionRow.toTemplate(): ConstructionTemplate {
+    require(govFeature != null || (govDefault == null && govWhen.isNullOrEmpty())) { "$id: govDefault and govWhen need a govFeature" }
+    return ConstructionTemplate(
+        slots = slots.map { it.toSlot() }, govFeature = govFeature, govDefault = govDefault,
+        govWhen = govWhen.orEmpty().map { it.condition.toCondition() to it.result }.toDistinctMap("$id govWhen"),
+        orderWhen = orderWhen.orEmpty().map { it.condition.toCondition() to it.slots.map(SlotRow::toSlot) }.toDistinctMap("$id orderWhen"),
+    )
+}
+
+internal val generatedPlRuConstructionTemplates: Map<String, ConstructionTemplate> = CONSTRUCTION_ROW_ROWS.associate { it.id to it.toTemplate() }

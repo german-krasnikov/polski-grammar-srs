@@ -1,7 +1,8 @@
 DSL 1
 # The skills of a course pack (courses-biome/<pair>/skills.core-data), one SKILL row each: the Skill, its presentation, its style content and its SkillSpec.
 # Every Row record has the suffix so its Kotlin class cannot meet polski.model.Skill in the iOS/macOS export.
-# level and prerequisites are written once and are both the Skill's and the SkillSpec's.
+# level and prerequisites are written once and are both the Skill's and the SkillSpec's. The construction is a core structure (core.composite, core.sentence.mood),
+# not always one the pack has a realization for, so it is a text and not a reference to ConstructionRow.
 RECORD SkillRow KEY id COUNT 1..
   id: string
   title: string
@@ -533,9 +534,9 @@ RECORD TextValueRow
 END
 
 RECORD PhraseSpecRow
-  construction: string
+  construction: ref ConstructionRow
   bundle: [FeatureValueRow]
-  ownerLexeme: string OPTIONAL
+  ownerLexeme: ref PossessiveRow OPTIONAL
 END
 
 RECORD GenderPronounRow
@@ -577,4 +578,45 @@ END
 RECORD ReasonRuleRow
   whenClass: string
   key: ref CopyEntryRow
+END
+
+# The realization of the constructions (R1.11b): the slots of a construction in order, which lexeme category and features each needs, and when the order or the
+# case governed by the construction changes. A condition is a feature and a value, written `Feature=value` by the engine. The first condition that holds wins,
+# so the lists keep their order.
+RECORD ConstructionRow KEY id COUNT 1..
+  id: string
+  slots: [SlotRow]
+  govFeature: string OPTIONAL
+  govDefault: string OPTIONAL
+  govWhen: [GovWhenRow] OPTIONAL
+  orderWhen: [OrderWhenRow] OPTIONAL
+END
+
+RECORD SlotRow
+  name: string
+  category: string
+  optional: bool OPTIONAL
+  requiredFeatures: [string]
+  requiredFeaturesWhen: [RequiredWhenRow] OPTIONAL
+  agreementSource: string OPTIONAL
+END
+
+RECORD ConditionRow
+  feature: string
+  value: string
+END
+
+RECORD GovWhenRow
+  condition: ConditionRow
+  result: string
+END
+
+RECORD OrderWhenRow
+  condition: ConditionRow
+  slots: [SlotRow]
+END
+
+RECORD RequiredWhenRow
+  condition: ConditionRow
+  features: [string]
 END
