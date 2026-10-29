@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Generate allExerciseCases() body from the independent exercise oracle.
 
-Reads requirements.core-data → prints Kotlin assertion blocks to stdout.
-The surrounding test class, evaluation/queue/ports tests stay hand-authored.
+Reads an oracle → rewrites the GENERATED region of the target test. The surrounding test class stays hand-authored.
+Usage: generate-exercise-oracle-test.py ORACLE TARGET EXPECTED_CASES (paths from the repo root; the derive wrappers pass them).
 """
 from __future__ import annotations
 import hashlib, sys
@@ -12,7 +12,9 @@ _sys.path.insert(0, str(Path(__file__).parent))
 from biome_value import parse  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[2]
-ORACLE = ROOT / "tests/fixtures/nj03-exercise-oracle/requirements.core-data"
+if len(sys.argv) != 4:
+    sys.exit(__doc__)
+ORACLE, TARGET, EXPECTED = ROOT / sys.argv[1], ROOT / sys.argv[2], int(sys.argv[3])
 
 # --- Kotlin printer ---
 
@@ -50,7 +52,6 @@ def emit(case):
 
 START = '        // --- GENERATED START: do not edit, run scripts/nj03/generate-exercise-oracle-test.py ---'
 END   = '        // --- GENERATED END ---'
-TARGET = ROOT / 'kotlin/shared/src/commonTest/kotlin/polski/training/TrainingParityTest.kt'
 
 # --- main ---
 
@@ -58,7 +59,7 @@ cases = []
 for line in ORACLE.read_text('utf-8').splitlines():
     if line.startswith('CASE '): cases.append(parse(line[5:]))
 
-assert len(cases) == 112, f"expected 112, got {len(cases)}"
+assert len(cases) == EXPECTED, f"expected {EXPECTED}, got {len(cases)}"
 
 body = '\n'.join(emit(c) for c in cases)
 
