@@ -15,6 +15,8 @@ export const CONTRACT = join(repo, 'dsl/course.data-contract');
 
 const project = readFileSync(join(repo, 'dsl/biome.project'), 'utf8');
 const CONTRACTS = new Map([...project.matchAll(/^CONTRACT (\S+) FROM (\S+)/gm)].map(match => [match[1], join(repo, 'dsl', match[2])]));
+/** The contract (of the CONTRACT lines of the project) that declares a record no data step binds: the part of a row, or the rows a derive step makes. */
+const contractOf = (record: string) => [...CONTRACTS.values()].find(file => new RegExp(`^RECORD ${record}\\b`, 'm').test(readFileSync(file, 'utf8')))!;
 /** For each record: its real file and the contract of the data step that binds it (`--rows <Record> <file>` and `--contract <name>`). */
 const REAL = new Map<string, { file: string; contract: string }>();
 for (const step of project.split('\n').filter(line => /^GENERATE \S+ data /.test(line))) {
@@ -35,8 +37,8 @@ export const realFile = (record: string) => REAL.get(record)!.file;
 export function rowsOf(record: string, ...needs: string[]) {
   const dir = mkdtempSync(join(tmpdir(), 'course-data-'));
   afterAll(() => rmSync(dir, { recursive: true, force: true }));
-  /** A record no step binds to a file of its own (a part of a row, bound here only to be checked alone) is written as `<Record>.core-data` and checked against the course contract. */
-  const { file: real, contract } = REAL.get(record) ?? { file: join(PACK, `${record}.core-data`), contract: CONTRACT }, file = join(dir, basename(real)), name = basename(real);
+  /** A record no step binds to a file of its own (a part of a row, bound here only to be checked alone) is written as `<Record>.core-data` and checked against the contract that declares it. */
+  const { file: real, contract } = REAL.get(record) ?? { file: join(PACK, `${record}.core-data`), contract: contractOf(record) }, file = join(dir, basename(real)), name = basename(real);
   const bound = [record, ...needs].flatMap(each => ['--rows', each, each === record ? file : REAL.get(each)!.file]);
 
   function check(text: string) {

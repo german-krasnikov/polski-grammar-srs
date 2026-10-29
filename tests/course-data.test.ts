@@ -27,7 +27,7 @@ describe.skipIf(!hasCli)('courses-biome/pl-ru is Core data', () => {
     });
   }
 
-  it('the course-plru step of dsl/biome.project passes: every row against the contract, and the printed Kotlin is current', () => {
+  it('every step of dsl/biome.project passes: every row against its contract, the form table derived from the lexicon, and the printed Kotlin is current', () => {
     const run = biome('generate', '--check', '--project', join(PACK, '../../dsl/biome.project'));
     expect(run.stderr.replace(/^warning TOOLCHAIN_PIN_STALE.*\n/m, '')).toBe('');
     expect(run.status).toBe(0);
