@@ -5,7 +5,6 @@ TOOLCHAIN 61cc0c34fc4ed872a24ca87d320d6b369b0eb1e1
 # Check: node <biome> generate --check --project tests/fixtures/nj03-exercise-oracle/biome.project
 GENERATE exercise-oracle derive {dir}/derive-oracle.mjs generate OUT
 GENERATE exercise-oracle-en derive {dir}/derive-oracle-en.mjs generate OUT
-GENERATE course-teaching derive {dir}/derive-teaching.mjs generate OUT
 GENERATE enru-pack derive {dir}/derive-enru-pack.mjs generate OUT
 GENERATE lifehacks derive {dir}/derive-lifehacks.mjs generate OUT
 GENERATE swipe-policy derive {dir}/derive-swipe-policy.mjs generate OUT

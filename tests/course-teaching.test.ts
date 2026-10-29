@@ -13,7 +13,7 @@ const changed = (from: string, to: string) => {
 };
 
 describe.skipIf(!hasCli)('verb and case teaching in the reference row', () => {
-  const { problem, check } = rowsOf('ReferenceRow', 'SkillRow', 'NounRow');
+  const { problem, check } = rowsOf('ReferenceRow', 'SkillRow', 'NounRow', 'AdjectiveRow', 'PronounRow', 'PossessiveRow');
   it('a gender mode outside the enum is DATA_ENUM at the value', () => problem(changed('genderMode: "selected"', 'genderMode: "chosen"'), ROW, '"chosen"', 'DATA_ENUM'));
   it('a subject without its label is DATA_REQUIRED at the { of the subject', () =>
     problem(changed(' label: {full: "ja — я" compact: "ja — я"}', ''), ROW, '{id: "ja" person: 1', 'DATA_REQUIRED'));

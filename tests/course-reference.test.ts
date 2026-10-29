@@ -13,7 +13,7 @@ const changed = (from: string, to: string) => {
 };
 
 describe.skipIf(!hasCli)('reference row', () => {
-  const { check, problem } = rowsOf('ReferenceRow', 'SkillRow', 'NounRow');
+  const { check, problem } = rowsOf('ReferenceRow', 'SkillRow', 'NounRow', 'AdjectiveRow', 'PronounRow', 'PossessiveRow');
   it('the real row passes', () => expect(check(real.join('\n') + '\n')).toEqual({ status: 0, problems: [] }));
   it('a case row that names a skill that does not exist is DATA_REF at the value', () =>
     problem(changed('skill: "case.gen.neg"', 'skill: "case.gen.ng"'), ROW, '"case.gen.ng"', 'DATA_REF'));

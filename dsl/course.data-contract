@@ -256,9 +256,8 @@ RECORD StemAlternationRow COUNT 1..
 END
 
 # The reference content of the matrix screens, one row: the texts, the case table, the tables of the chain, the tenses, the aspects and the
-# accusative of the masculine, the system cards and the pipeline, and the teaching texts. The teaching of the pronouns and the Russian support
-# (pronounTeaching, russianSupport) are `any` until R1.10b types them. The reference records are named Ref... so no class meets a domain class
-# of the same name in the export.
+# accusative of the masculine, the system cards and the pipeline, and the teaching texts. The reference records are named Ref... so no class meets
+# a domain class of the same name in the export.
 RECORD ReferenceRow COUNT 1
   matrixIntroduction: string
   webCaseCompositionHeader: string
@@ -276,8 +275,8 @@ RECORD ReferenceRow COUNT 1
   pipeline: RefPipelineRow
   caseTeaching: CaseTeachingRow
   verbTeaching: VerbTeachingRow
-  pronounTeaching: any
-  russianSupport: any
+  pronounTeaching: PronounTeachingRow
+  russianSupport: RussianSupportSectionRow
 END
 
 # Two wordings of one text: the full React screen and the compact hosts (also the teaching texts of R1.10).
@@ -411,4 +410,110 @@ END
 RECORD FutureAuxiliaryRow
   verbId: ref VerbRow
   forms: PresentRow
+END
+
+# The teaching of the personal pronouns and the possessives, and the Russian support table. The pronoun ids are the ids of the pronoun rows and
+# the possessive ids those of the possessive rows: they are references, so an id that is no row is DATA_REF. The special values of a context
+# are pairs (the open dictionary of R1Design.md D4, here keyed by pronoun id).
+RECORD PronounTeachingRow
+  personal: PersonalTeachingRow
+  contexts: [PronounContextRow]
+  possessive: PossessiveTeachingRow
+END
+
+RECORD PersonalTeachingRow
+  title: string
+  intro: ReactCompactRow
+  footer: FooterRow
+  pronounIds: [ref PronounRow]
+END
+
+RECORD FooterRow
+  react: string
+  web: string
+  native: string
+END
+
+RECORD PronounContextRow
+  id: string
+  caseId: string
+  cue: CueRow
+  caseName: string
+  valuePrefix: string OPTIONAL
+  specialValues: [SpecialValueRow] OPTIONAL
+END
+
+RECORD CueRow
+  full: string
+  compact: string
+  ios: string
+END
+
+RECORD SpecialValueRow
+  pronounId: ref PronounRow
+  value: string
+END
+
+RECORD PossessiveTeachingRow
+  title: string
+  demo: PossessiveDemoRow
+END
+
+RECORD PossessiveDemoRow
+  nounId: ref NounRow
+  adjectiveId: ref AdjectiveRow
+  number: string
+  cases: [DemoCaseRow]
+  invariableOwnerIds: [ref PossessiveRow]
+  rule: DemoRuleRow
+END
+
+RECORD DemoCaseRow
+  id: string
+  caption: CaptionRow
+END
+
+RECORD CaptionRow
+  web: string
+  desktop: string
+  ios: string
+END
+
+RECORD DemoRuleRow
+  invariable: string
+  variable: string
+END
+
+RECORD RussianSupportSectionRow
+  title: FullCompactRow
+  columns: [string]
+  rows: [SupportRow]
+END
+
+RECORD SupportRow
+  id: string
+  cue: string
+  react: ConstructionCheckRow
+  web: ConstructionCheckRow
+  desktop: ConstructionCheckRow
+  mobileLine: string
+  comparisons: [ContrastRow]
+END
+
+RECORD ConstructionCheckRow
+  construction: string
+  check: string
+END
+
+RECORD ContrastRow
+  from: string
+  to: string
+  beforeParts: [EndingPartRow]
+  afterParts: [EndingPartRow]
+END
+
+RECORD EndingPartRow
+  text: string
+  isChanged: bool
+  isEnding: bool
 END

@@ -1,4 +1,4 @@
-"""Minimal Biome value syntax parser and emitter. Shared by nj03 scripts."""
+"""Minimal Biome value syntax parser. Read by generate-exercise-oracle-test.py for the sealed requirements.core-data."""
 from __future__ import annotations
 import re
 
@@ -71,38 +71,3 @@ def _val(s, i):
 
 def parse(text: str) -> object:
     return _val(text, 0)[0]
-
-
-# --- emitter ---
-
-def emit(v, indent: int = 0, inline: bool = False) -> str:
-    """Emit a Python value as Biome value syntax.
-    inline=True forces single-line output (for line-oriented .core-data files).
-    """
-    pad = "  " * indent
-    if v is None:
-        return "null"
-    if isinstance(v, bool):
-        return "true" if v else "false"
-    if isinstance(v, int):
-        return str(v)
-    if isinstance(v, float):
-        return str(int(v)) if v == int(v) else str(v)
-    if isinstance(v, str):
-        esc = (v.replace('\\', '\\\\').replace('"', '\\"')
-                .replace('\n', '\\n').replace('\r', '\\r').replace('\t', '\\t'))
-        return f'"{esc}"'
-    if isinstance(v, list):
-        if not v:
-            return "[]"
-        items = [emit(x, indent + 1, inline=True) for x in v]
-        return f'[{" ".join(items)}]'
-    if isinstance(v, dict):
-        if not v:
-            return "{}"
-        pairs = [f'{k}: {emit(val, indent + 1, inline=True)}' for k, val in v.items()]
-        if inline or len(pairs) <= 3 and all(not isinstance(val, (dict, list)) for val in v.values()):
-            return "{" + " ".join(pairs) + "}"
-        inner = ("\n" + pad + "  ").join(pairs)
-        return f'{{\n{pad}  {inner}\n{pad}}}'
-    raise ValueError(f"unsupported type: {type(v)}")

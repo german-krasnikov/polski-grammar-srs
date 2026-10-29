@@ -1,5 +1,5 @@
 // Generated from dsl/course.data-contract
-// source-sha256=82d9960427c8207a199c4b5c8b50522638f9dc7295d6d2a194f404c9cb591bb4
+// source-sha256=5c776261a3c96ae91a7f20c78cdfe17a7a1a3af0d419ed399a953f21e3d023e2
 // Edit the source, then run biome generate.
 
 package polski.data.rows.plru
@@ -390,6 +390,109 @@ data class VerbTeachingRow(
     val futureExplanation: ReactCompactRow,
 )
 
+data class FooterRow(
+    val react: String,
+    val web: String,
+    val native: String,
+)
+
+data class PersonalTeachingRow(
+    val title: String,
+    val intro: ReactCompactRow,
+    val footer: FooterRow,
+    val pronounIds: List<String>,
+)
+
+data class CueRow(
+    val full: String,
+    val compact: String,
+    val ios: String,
+)
+
+data class SpecialValueRow(
+    val pronounId: String,
+    val value: String,
+)
+
+data class PronounContextRow(
+    val id: String,
+    val caseId: String,
+    val cue: CueRow,
+    val caseName: String,
+    val valuePrefix: String? = null,
+    val specialValues: List<SpecialValueRow>? = null,
+)
+
+data class CaptionRow(
+    val web: String,
+    val desktop: String,
+    val ios: String,
+)
+
+data class DemoCaseRow(
+    val id: String,
+    val caption: CaptionRow,
+)
+
+data class DemoRuleRow(
+    val invariable: String,
+    val variable: String,
+)
+
+data class PossessiveDemoRow(
+    val nounId: String,
+    val adjectiveId: String,
+    val number: String,
+    val cases: List<DemoCaseRow>,
+    val invariableOwnerIds: List<String>,
+    val rule: DemoRuleRow,
+)
+
+data class PossessiveTeachingRow(
+    val title: String,
+    val demo: PossessiveDemoRow,
+)
+
+data class PronounTeachingRow(
+    val personal: PersonalTeachingRow,
+    val contexts: List<PronounContextRow>,
+    val possessive: PossessiveTeachingRow,
+)
+
+data class ConstructionCheckRow(
+    val construction: String,
+    val check: String,
+)
+
+data class EndingPartRow(
+    val text: String,
+    val isChanged: Boolean,
+    val isEnding: Boolean,
+)
+
+data class ContrastRow(
+    val from: String,
+    val to: String,
+    val beforeParts: List<EndingPartRow>,
+    val afterParts: List<EndingPartRow>,
+)
+
+data class SupportRow(
+    val id: String,
+    val cue: String,
+    val react: ConstructionCheckRow,
+    val web: ConstructionCheckRow,
+    val desktop: ConstructionCheckRow,
+    val mobileLine: String,
+    val comparisons: List<ContrastRow>,
+)
+
+data class RussianSupportSectionRow(
+    val title: FullCompactRow,
+    val columns: List<String>,
+    val rows: List<SupportRow>,
+)
+
 data class ReferenceRow(
     val matrixIntroduction: String,
     val webCaseCompositionHeader: String,
@@ -407,8 +510,8 @@ data class ReferenceRow(
     val pipeline: RefPipelineRow,
     val caseTeaching: CaseTeachingRow,
     val verbTeaching: VerbTeachingRow,
-    val pronounTeaching: Any?,
-    val russianSupport: Any?,
+    val pronounTeaching: PronounTeachingRow,
+    val russianSupport: RussianSupportSectionRow,
 )
 
 data class FutureAuxiliaryRow(
@@ -3742,229 +3845,229 @@ private fun referenceRowRowsPart0(): List<ReferenceRow> = listOf(
                 compact = "Составное будущее: będę + инфинитив или форма на -ł. У być: będę, без второго глагола.",
             ),
         ),
-        pronounTeaching = mapOf(
-            "personal" to mapOf(
-                "title" to "Личные местоимения в конструкциях",
-                "intro" to mapOf(
-                    "react" to "Вместо отдельной формы запоминай её место в предложении. После предлогов у местоимений третьего лица появляется n-.",
-                    "compact" to "После предлогов у местоимений третьего лица появляется n-.",
+        pronounTeaching = PronounTeachingRow(
+            personal = PersonalTeachingRow(
+                title = "Личные местоимения в конструкциях",
+                intro = ReactCompactRow(
+                    react = "Вместо отдельной формы запоминай её место в предложении. После предлогов у местоимений третьего лица появляется n-.",
+                    compact = "После предлогов у местоимений третьего лица появляется n-.",
                 ),
-                "footer" to mapOf(
-                    "react" to "Здесь обычные безударные формы. Для ударения или противопоставления: mnie, tobie, jego, jemu. После предлога: do niego, do niej, do nich, dla mnie, dla ciebie.",
-                    "web" to "Здесь обычные безударные формы. После предлога: do niego, do niej, do nich, dla mnie, dla ciebie.",
-                    "native" to "После предлога: do niego, do niej, do nich, dla mnie, dla ciebie.",
+                footer = FooterRow(
+                    react = "Здесь обычные безударные формы. Для ударения или противопоставления: mnie, tobie, jego, jemu. После предлога: do niego, do niej, do nich, dla mnie, dla ciebie.",
+                    web = "Здесь обычные безударные формы. После предлога: do niego, do niej, do nich, dla mnie, dla ciebie.",
+                    native = "После предлога: do niego, do niej, do nich, dla mnie, dla ciebie.",
                 ),
-                "pronounIds" to listOf("ja", "ty", "on", "ona", "ono", "my", "wy", "oni", "one"),
+                pronounIds = listOf("ja", "ty", "on", "ona", "ono", "my", "wy", "oni", "one"),
             ),
-            "contexts" to listOf(
-                mapOf(
-                    "id" to "gen",
-                    "caseId" to "gen",
-                    "cue" to mapOf("full" to "Nie widzę…", "compact" to "Nie widzę…", "ios" to "Nie widzę"),
-                    "caseName" to "Dopełniacz",
+            contexts = listOf(
+                PronounContextRow(
+                    id = "gen",
+                    caseId = "gen",
+                    cue = CueRow(full = "Nie widzę…", compact = "Nie widzę…", ios = "Nie widzę"),
+                    caseName = "Dopełniacz",
                 ),
-                mapOf(
-                    "id" to "dat",
-                    "caseId" to "dat",
-                    "cue" to mapOf("full" to "Daję prezent…", "compact" to "Daję prezent…", "ios" to "Daję prezent"),
-                    "caseName" to "Celownik",
+                PronounContextRow(
+                    id = "dat",
+                    caseId = "dat",
+                    cue = CueRow(full = "Daję prezent…", compact = "Daję prezent…", ios = "Daję prezent"),
+                    caseName = "Celownik",
                 ),
-                mapOf(
-                    "id" to "acc",
-                    "caseId" to "acc",
-                    "cue" to mapOf("full" to "Widzę…", "compact" to "Widzę…", "ios" to "Widzę"),
-                    "caseName" to "Biernik",
+                PronounContextRow(
+                    id = "acc",
+                    caseId = "acc",
+                    cue = CueRow(full = "Widzę…", compact = "Widzę…", ios = "Widzę"),
+                    caseName = "Biernik",
                 ),
-                mapOf(
-                    "id" to "inst",
-                    "caseId" to "inst",
-                    "cue" to mapOf("full" to "Idę z…", "compact" to "Idę z…", "ios" to "Idę"),
-                    "caseName" to "Narzędnik",
-                    "valuePrefix" to "z ",
-                    "specialValues" to mapOf("ja" to "ze mną"),
+                PronounContextRow(
+                    id = "inst",
+                    caseId = "inst",
+                    cue = CueRow(full = "Idę z…", compact = "Idę z…", ios = "Idę"),
+                    caseName = "Narzędnik",
+                    valuePrefix = "z ",
+                    specialValues = listOf(SpecialValueRow(pronounId = "ja", value = "ze mną")),
                 ),
-                mapOf(
-                    "id" to "loc",
-                    "caseId" to "loc",
-                    "cue" to mapOf("full" to "Mówię o…", "compact" to "Mówię o…", "ios" to "Mówię o"),
-                    "caseName" to "Miejscownik",
-                    "valuePrefix" to "o ",
+                PronounContextRow(
+                    id = "loc",
+                    caseId = "loc",
+                    cue = CueRow(full = "Mówię o…", compact = "Mówię o…", ios = "Mówię o"),
+                    caseName = "Miejscownik",
+                    valuePrefix = "o ",
                 ),
             ),
-            "possessive" to mapOf(
-                "title" to "Владелец меняется независимо от падежа",
-                "demo" to mapOf(
-                    "nounId" to "wife",
-                    "adjectiveId" to "beautiful",
-                    "number" to "sg",
-                    "cases" to listOf(
-                        mapOf(
-                            "id" to "nom",
-                            "caption" to mapOf("web" to "Mianownik", "desktop" to "Mianownik", "ios" to "Mianownik"),
+            possessive = PossessiveTeachingRow(
+                title = "Владелец меняется независимо от падежа",
+                demo = PossessiveDemoRow(
+                    nounId = "wife",
+                    adjectiveId = "beautiful",
+                    number = "sg",
+                    cases = listOf(
+                        DemoCaseRow(
+                            id = "nom",
+                            caption = CaptionRow(web = "Mianownik", desktop = "Mianownik", ios = "Mianownik"),
                         ),
-                        mapOf(
-                            "id" to "acc",
-                            "caption" to mapOf("web" to "Widzę… · Biernik", "desktop" to "Biernik", "ios" to "Biernik"),
+                        DemoCaseRow(
+                            id = "acc",
+                            caption = CaptionRow(web = "Widzę… · Biernik", desktop = "Biernik", ios = "Biernik"),
                         ),
-                        mapOf(
-                            "id" to "gen",
-                            "caption" to mapOf(
-                                "web" to "Nie widzę… · Dopełniacz",
-                                "desktop" to "Dopełniacz",
-                                "ios" to "Dopełniacz",
+                        DemoCaseRow(
+                            id = "gen",
+                            caption = CaptionRow(
+                                web = "Nie widzę… · Dopełniacz",
+                                desktop = "Dopełniacz",
+                                ios = "Dopełniacz",
                             ),
                         ),
                     ),
-                    "invariableOwnerIds" to listOf("his", "her", "their"),
-                    "rule" to mapOf("invariable" to "Владелец не склоняется", "variable" to "Согласуется с żona"),
+                    invariableOwnerIds = listOf("his", "her", "their"),
+                    rule = DemoRuleRow(invariable = "Владелец не склоняется", variable = "Согласуется с żona"),
                 ),
             ),
         ),
-        russianSupport = mapOf(
-            "title" to mapOf(
-                "full" to "Опора на русский: что переносится, а что проверить",
-                "compact" to "Опора на русский",
+        russianSupport = RussianSupportSectionRow(
+            title = FullCompactRow(
+                full = "Опора на русский: что переносится, а что проверить",
+                compact = "Опора на русский",
             ),
-            "columns" to listOf("Русская опора", "Польская конструкция", "Проверка"),
-            "rows" to listOf(
-                mapOf(
-                    "id" to "accusative",
-                    "cue" to "вижу кого? что?",
-                    "react" to mapOf(
-                        "construction" to "Widzę moją żonę.",
-                        "check" to "Логика винительного знакома; польские окончания нужно менять во всей группе.",
+            columns = listOf("Русская опора", "Польская конструкция", "Проверка"),
+            rows = listOf(
+                SupportRow(
+                    id = "accusative",
+                    cue = "вижу кого? что?",
+                    react = ConstructionCheckRow(
+                        construction = "Widzę moją żonę.",
+                        check = "Логика винительного знакома; польские окончания нужно менять во всей группе.",
                     ),
-                    "web" to mapOf(
-                        "construction" to "Widzę moją żonę.",
-                        "check" to "Польские окончания меняются во всей группе.",
+                    web = ConstructionCheckRow(
+                        construction = "Widzę moją żonę.",
+                        check = "Польские окончания меняются во всей группе.",
                     ),
-                    "desktop" to mapOf(
-                        "construction" to "Widzę moją żonę.",
-                        "check" to "Окончания меняются во всей группе",
+                    desktop = ConstructionCheckRow(
+                        construction = "Widzę moją żonę.",
+                        check = "Окончания меняются во всей группе",
                     ),
-                    "mobileLine" to "вижу кого? что? → Widzę moją żonę. Окончания меняются во всей группе.",
-                    "comparisons" to listOf(
-                        mapOf(
-                            "from" to "moja żona",
-                            "to" to "moją żonę",
-                            "beforeParts" to listOf(
-                                mapOf("text" to "moj", "isChanged" to false, "isEnding" to false),
-                                mapOf("text" to "a", "isChanged" to true, "isEnding" to true),
-                                mapOf("text" to " ", "isChanged" to false, "isEnding" to false),
-                                mapOf("text" to "żon", "isChanged" to false, "isEnding" to false),
-                                mapOf("text" to "a", "isChanged" to true, "isEnding" to true),
+                    mobileLine = "вижу кого? что? → Widzę moją żonę. Окончания меняются во всей группе.",
+                    comparisons = listOf(
+                        ContrastRow(
+                            from = "moja żona",
+                            to = "moją żonę",
+                            beforeParts = listOf(
+                                EndingPartRow(text = "moj", isChanged = false, isEnding = false),
+                                EndingPartRow(text = "a", isChanged = true, isEnding = true),
+                                EndingPartRow(text = " ", isChanged = false, isEnding = false),
+                                EndingPartRow(text = "żon", isChanged = false, isEnding = false),
+                                EndingPartRow(text = "a", isChanged = true, isEnding = true),
                             ),
-                            "afterParts" to listOf(
-                                mapOf("text" to "moj", "isChanged" to false, "isEnding" to false),
-                                mapOf("text" to "ą", "isChanged" to true, "isEnding" to true),
-                                mapOf("text" to " ", "isChanged" to false, "isEnding" to false),
-                                mapOf("text" to "żon", "isChanged" to false, "isEnding" to false),
-                                mapOf("text" to "ę", "isChanged" to true, "isEnding" to true),
-                            ),
-                        ),
-                    ),
-                ),
-                mapOf(
-                    "id" to "instrumental",
-                    "cue" to "с моей женой",
-                    "react" to mapOf(
-                        "construction" to "z moją żoną",
-                        "check" to "Польское женское -ą соответствует здесь творительному; это же окончание есть у прилагательного в Bierniku.",
-                    ),
-                    "web" to mapOf(
-                        "construction" to "z moją żoną",
-                        "check" to "Женское -ą здесь соответствует творительному.",
-                    ),
-                    "desktop" to mapOf("construction" to "z moją żoną", "check" to "Женское -ą — творительный"),
-                    "mobileLine" to "с моей женой → z moją żoną. Женское -ą — творительный.",
-                    "comparisons" to listOf(
-                        mapOf(
-                            "from" to "moja żona",
-                            "to" to "moją żoną",
-                            "beforeParts" to listOf(
-                                mapOf("text" to "moj", "isChanged" to false, "isEnding" to false),
-                                mapOf("text" to "a", "isChanged" to true, "isEnding" to true),
-                                mapOf("text" to " ", "isChanged" to false, "isEnding" to false),
-                                mapOf("text" to "żon", "isChanged" to false, "isEnding" to false),
-                                mapOf("text" to "a", "isChanged" to true, "isEnding" to true),
-                            ),
-                            "afterParts" to listOf(
-                                mapOf("text" to "moj", "isChanged" to false, "isEnding" to false),
-                                mapOf("text" to "ą", "isChanged" to true, "isEnding" to true),
-                                mapOf("text" to " ", "isChanged" to false, "isEnding" to false),
-                                mapOf("text" to "żon", "isChanged" to false, "isEnding" to false),
-                                mapOf("text" to "ą", "isChanged" to true, "isEnding" to true),
+                            afterParts = listOf(
+                                EndingPartRow(text = "moj", isChanged = false, isEnding = false),
+                                EndingPartRow(text = "ą", isChanged = true, isEnding = true),
+                                EndingPartRow(text = " ", isChanged = false, isEnding = false),
+                                EndingPartRow(text = "żon", isChanged = false, isEnding = false),
+                                EndingPartRow(text = "ę", isChanged = true, isEnding = true),
                             ),
                         ),
                     ),
                 ),
-                mapOf(
-                    "id" to "locative",
-                    "cue" to "говорю о жене",
-                    "react" to mapOf(
-                        "construction" to "mówię o żonie",
-                        "check" to "Местный падеж требует предлога; żona → żonie.",
+                SupportRow(
+                    id = "instrumental",
+                    cue = "с моей женой",
+                    react = ConstructionCheckRow(
+                        construction = "z moją żoną",
+                        check = "Польское женское -ą соответствует здесь творительному; это же окончание есть у прилагательного в Bierniku.",
                     ),
-                    "web" to mapOf(
-                        "construction" to "mówię o żonie",
-                        "check" to "Местный падеж требует предлога; żona → żonie.",
+                    web = ConstructionCheckRow(
+                        construction = "z moją żoną",
+                        check = "Женское -ą здесь соответствует творительному.",
                     ),
-                    "desktop" to mapOf("construction" to "mówię o żonie", "check" to "Местный требует предлога"),
-                    "mobileLine" to "говорю о жене → mówię o żonie. Местный требует предлога.",
-                    "comparisons" to listOf(
-                        mapOf(
-                            "from" to "żona",
-                            "to" to "żonie",
-                            "beforeParts" to listOf(
-                                mapOf("text" to "żon", "isChanged" to false, "isEnding" to false),
-                                mapOf("text" to "a", "isChanged" to true, "isEnding" to true),
+                    desktop = ConstructionCheckRow(construction = "z moją żoną", check = "Женское -ą — творительный"),
+                    mobileLine = "с моей женой → z moją żoną. Женское -ą — творительный.",
+                    comparisons = listOf(
+                        ContrastRow(
+                            from = "moja żona",
+                            to = "moją żoną",
+                            beforeParts = listOf(
+                                EndingPartRow(text = "moj", isChanged = false, isEnding = false),
+                                EndingPartRow(text = "a", isChanged = true, isEnding = true),
+                                EndingPartRow(text = " ", isChanged = false, isEnding = false),
+                                EndingPartRow(text = "żon", isChanged = false, isEnding = false),
+                                EndingPartRow(text = "a", isChanged = true, isEnding = true),
                             ),
-                            "afterParts" to listOf(
-                                mapOf("text" to "żon", "isChanged" to false, "isEnding" to false),
-                                mapOf("text" to "ie", "isChanged" to true, "isEnding" to true),
+                            afterParts = listOf(
+                                EndingPartRow(text = "moj", isChanged = false, isEnding = false),
+                                EndingPartRow(text = "ą", isChanged = true, isEnding = true),
+                                EndingPartRow(text = " ", isChanged = false, isEnding = false),
+                                EndingPartRow(text = "żon", isChanged = false, isEnding = false),
+                                EndingPartRow(text = "ą", isChanged = true, isEnding = true),
                             ),
                         ),
                     ),
                 ),
-                mapOf(
-                    "id" to "possessive",
-                    "cue" to "мой / его / их",
-                    "react" to mapOf(
-                        "construction" to "moją żonę / jego żonę / ich żonę",
-                        "check" to "jego, jej, ich не склоняются. Формы mojego и mojej зависят от предмета обладания.",
+                SupportRow(
+                    id = "locative",
+                    cue = "говорю о жене",
+                    react = ConstructionCheckRow(
+                        construction = "mówię o żonie",
+                        check = "Местный падеж требует предлога; żona → żonie.",
                     ),
-                    "web" to mapOf(
-                        "construction" to "moją żonę / jego żonę / ich żonę",
-                        "check" to "jego, jej, ich не склоняются.",
+                    web = ConstructionCheckRow(
+                        construction = "mówię o żonie",
+                        check = "Местный падеж требует предлога; żona → żonie.",
                     ),
-                    "desktop" to mapOf(
-                        "construction" to "moją / jego / ich żonę",
-                        "check" to "jego, jej, ich не склоняются",
-                    ),
-                    "mobileLine" to "мой / его / их → moją / jego / ich żonę. jego, jej, ich не склоняются.",
-                    "comparisons" to listOf(
-                        mapOf(
-                            "from" to "moją żonę",
-                            "to" to "jego żonę",
-                            "beforeParts" to listOf(
-                                mapOf("text" to "moją", "isChanged" to true, "isEnding" to false),
-                                mapOf("text" to " żonę", "isChanged" to false, "isEnding" to false),
+                    desktop = ConstructionCheckRow(construction = "mówię o żonie", check = "Местный требует предлога"),
+                    mobileLine = "говорю о жене → mówię o żonie. Местный требует предлога.",
+                    comparisons = listOf(
+                        ContrastRow(
+                            from = "żona",
+                            to = "żonie",
+                            beforeParts = listOf(
+                                EndingPartRow(text = "żon", isChanged = false, isEnding = false),
+                                EndingPartRow(text = "a", isChanged = true, isEnding = true),
                             ),
-                            "afterParts" to listOf(
-                                mapOf("text" to "jego", "isChanged" to true, "isEnding" to false),
-                                mapOf("text" to " żonę", "isChanged" to false, "isEnding" to false),
+                            afterParts = listOf(
+                                EndingPartRow(text = "żon", isChanged = false, isEnding = false),
+                                EndingPartRow(text = "ie", isChanged = true, isEnding = true),
                             ),
                         ),
-                        mapOf(
-                            "from" to "moją żonę",
-                            "to" to "ich żonę",
-                            "beforeParts" to listOf(
-                                mapOf("text" to "moją", "isChanged" to true, "isEnding" to false),
-                                mapOf("text" to " żonę", "isChanged" to false, "isEnding" to false),
+                    ),
+                ),
+                SupportRow(
+                    id = "possessive",
+                    cue = "мой / его / их",
+                    react = ConstructionCheckRow(
+                        construction = "moją żonę / jego żonę / ich żonę",
+                        check = "jego, jej, ich не склоняются. Формы mojego и mojej зависят от предмета обладания.",
+                    ),
+                    web = ConstructionCheckRow(
+                        construction = "moją żonę / jego żonę / ich żonę",
+                        check = "jego, jej, ich не склоняются.",
+                    ),
+                    desktop = ConstructionCheckRow(
+                        construction = "moją / jego / ich żonę",
+                        check = "jego, jej, ich не склоняются",
+                    ),
+                    mobileLine = "мой / его / их → moją / jego / ich żonę. jego, jej, ich не склоняются.",
+                    comparisons = listOf(
+                        ContrastRow(
+                            from = "moją żonę",
+                            to = "jego żonę",
+                            beforeParts = listOf(
+                                EndingPartRow(text = "moją", isChanged = true, isEnding = false),
+                                EndingPartRow(text = " żonę", isChanged = false, isEnding = false),
                             ),
-                            "afterParts" to listOf(
-                                mapOf("text" to "ich", "isChanged" to true, "isEnding" to false),
-                                mapOf("text" to " żonę", "isChanged" to false, "isEnding" to false),
+                            afterParts = listOf(
+                                EndingPartRow(text = "jego", isChanged = true, isEnding = false),
+                                EndingPartRow(text = " żonę", isChanged = false, isEnding = false),
+                            ),
+                        ),
+                        ContrastRow(
+                            from = "moją żonę",
+                            to = "ich żonę",
+                            beforeParts = listOf(
+                                EndingPartRow(text = "moją", isChanged = true, isEnding = false),
+                                EndingPartRow(text = " żonę", isChanged = false, isEnding = false),
+                            ),
+                            afterParts = listOf(
+                                EndingPartRow(text = "ich", isChanged = true, isEnding = false),
+                                EndingPartRow(text = " żonę", isChanged = false, isEnding = false),
                             ),
                         ),
                     ),
