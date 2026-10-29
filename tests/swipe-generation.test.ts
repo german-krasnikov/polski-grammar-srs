@@ -27,6 +27,12 @@ describe('swipe Policy generation', () => {
     expect(relative(repo, (await load(join(repo, DERIVE))).OUT)).toBe(CONSUMER);
   });
 
+  it('the derive takes its biome from the generate context and rejects when that biome fails', async () => {
+    const { generate } = await load(join(repo, DERIVE));
+    await expect(generate({} as never)).rejects.toThrow('no context.cli');
+    await expect(generate({ cli: join(repo, 'no-such-biome.mjs'), node: process.execPath, env: process.env })).rejects.toThrow('biome logic generate failed');
+  });
+
   describe.skipIf(!existsSync(cli))('with the biome CLI', () => {
     let dir: string;
 
@@ -56,6 +62,8 @@ describe('swipe Policy generation', () => {
       return files;
     }
     const added = (before: Record<string, string>) => Object.keys(snapshot()).filter(file => !(file in before));
+    /** Temp directories the derive made in the private TMPDIR and did not remove. */
+    const leftovers = () => readdirSync(join(dir, 'tmp')).filter(name => name.startsWith('swipe-policy-'));
 
     /** A fresh consumer written by `biome generate`: the precondition of every stale and rejected case. */
     function fresh(): string {
@@ -95,6 +103,7 @@ describe('swipe Policy generation', () => {
       expect(added(before)).toEqual([CONSUMER]);
       expect(readFileSync(join(dir, CONSUMER), 'utf8')).toBe(text);
       expect(generate('--check').status).toBe(0);
+      expect(leftovers(), 'temp directories left behind').toEqual([]);
     });
 
     it('a hand-edited consumer fails --check and is not healed', SLOW, () => {
@@ -135,7 +144,7 @@ describe('swipe Policy generation', () => {
           expect(run.stderr).toContain(code);
           expect(snapshot(), `biome generate ${flags.join(' ')} changed the tree`).toEqual(before);
         }
-        expect(readdirSync(join(dir, 'tmp')).filter(name => name.startsWith('swipe-policy-')), 'temp directories left behind').toEqual([]);
+        expect(leftovers(), 'temp directories left behind').toEqual([]);
       });
     }
   });
