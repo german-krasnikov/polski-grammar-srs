@@ -1,6 +1,7 @@
 DSL 1
-# The skills of a course pack (courses-biome/<pair>/skills.core-data), one SKILL row each: the Skill, its presentation and its style content.
-# Every Row record has the suffix so its Kotlin class cannot meet polski.model.Skill in the iOS/macOS export. R1.4b adds the SkillSpec fields.
+# The skills of a course pack (courses-biome/<pair>/skills.core-data), one SKILL row each: the Skill, its presentation, its style content and its SkillSpec.
+# Every Row record has the suffix so its Kotlin class cannot meet polski.model.Skill in the iOS/macOS export.
+# level and prerequisites are written once and are both the Skill's and the SkillSpec's.
 RECORD SkillRow KEY id COUNT 1..
   id: string
   title: string
@@ -12,6 +13,10 @@ RECORD SkillRow KEY id COUNT 1..
   prerequisites: [ref SkillRow]
   focus: FocusRow
   methods: MethodsRow
+  construction: string
+  featureFocus: FeatureFocusRow NULLABLE
+  fixed: [FixedRow]
+  lexicalFilter: LexicalFilterRow NULLABLE
   styleContent: StyleContentRow OPTIONAL
 END
 
@@ -32,6 +37,29 @@ RECORD MethodRow
   retrieve: string
   feedback: string
   review: string
+END
+
+# The axis a skill drills (null: no single feature flip), the axes it holds fixed (the features are an open catalog, so pairs, not fields),
+# and the candidates it draws from: each property of `where` names the values a candidate must have. nounId is [string] until R1.5 has the nouns.
+RECORD FeatureFocusRow
+  feature: string
+  from: string
+  to: string
+END
+
+RECORD FixedRow
+  feature: string
+  value: string
+END
+
+RECORD LexicalFilterRow
+  slot: string
+  where: WhereRow
+END
+
+RECORD WhereRow
+  nounId: [string] OPTIONAL
+  gender: [string] OPTIONAL
 END
 
 # rule, examples and nativeParallel may be left out: the style composer then derives the block from the skill itself (SkillStyleContent).

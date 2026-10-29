@@ -1,5 +1,5 @@
 // Generated from dsl/course.data-contract, courses-biome/pl-ru/skills.core-data
-// source-sha256=fc074365478708a3c10061bedb810b5677406416afe2e6b7971cb219ecfba251
+// source-sha256=a0f4c6af51e2dfec77deb0ffac6e9a9feb85415ef7b622490bf662b6803464f1
 // Edit the source, then run biome generate.
 
 package polski.data.rows.plru
@@ -30,6 +30,27 @@ data class MethodsRow(
     val situations: MethodRow,
 )
 
+data class FeatureFocusRow(
+    val feature: String,
+    val from: String,
+    val to: String,
+)
+
+data class FixedRow(
+    val feature: String,
+    val value: String,
+)
+
+data class WhereRow(
+    val nounId: List<String>? = null,
+    val gender: List<String>? = null,
+)
+
+data class LexicalFilterRow(
+    val slot: String,
+    val where: WhereRow,
+)
+
 data class NativeParallelRow(
     val native: String,
     val target: String,
@@ -55,6 +76,10 @@ data class SkillRow(
     val prerequisites: List<String>,
     val focus: FocusRow,
     val methods: MethodsRow,
+    val construction: String,
+    val featureFocus: FeatureFocusRow?,
+    val fixed: List<FixedRow>,
+    val lexicalFilter: LexicalFilterRow?,
     val styleContent: StyleContentRow? = null,
 )
 
@@ -87,6 +112,14 @@ val SKILL_ROW_ROWS: List<SkillRow> = listOf(
                 review = "Оцени, удалось ли вспомнить ответ самостоятельно; следующую ситуацию реши заново.",
             ),
         ),
+        construction = "core.argument.case-role",
+        featureFocus = FeatureFocusRow(feature = "Case", from = "Nom", to = "Acc"),
+        fixed = listOf(
+            FixedRow(feature = "Tense", value = "Pres"),
+            FixedRow(feature = "Person", value = "1"),
+            FixedRow(feature = "Number", value = "Sing"),
+        ),
+        lexicalFilter = LexicalFilterRow(slot = "noun", where = WhereRow(gender = listOf("n"))),
         styleContent = StyleContentRow(
             nativeParallel = listOf(
                 NativeParallelRow(
@@ -128,6 +161,14 @@ val SKILL_ROW_ROWS: List<SkillRow> = listOf(
                 review = "Оцени, удалось ли вспомнить ответ самостоятельно; следующую ситуацию реши заново.",
             ),
         ),
+        construction = "core.argument.case-role",
+        featureFocus = FeatureFocusRow(feature = "Case", from = "Nom", to = "Acc"),
+        fixed = listOf(
+            FixedRow(feature = "Tense", value = "Pres"),
+            FixedRow(feature = "Person", value = "1"),
+            FixedRow(feature = "Number", value = "Sing"),
+        ),
+        lexicalFilter = LexicalFilterRow(slot = "noun", where = WhereRow(gender = listOf("f"))),
         styleContent = StyleContentRow(
             nativeParallel = listOf(
                 NativeParallelRow(
@@ -168,6 +209,17 @@ val SKILL_ROW_ROWS: List<SkillRow> = listOf(
                 feedback = "Сравни, что хотел сказать, с эталоном и проследи изменения в предложении.",
                 review = "Оцени, удалось ли вспомнить ответ самостоятельно; следующую ситуацию реши заново.",
             ),
+        ),
+        construction = "core.argument.case-role",
+        featureFocus = FeatureFocusRow(feature = "Case", from = "Nom", to = "Acc"),
+        fixed = listOf(
+            FixedRow(feature = "Tense", value = "Pres"),
+            FixedRow(feature = "Person", value = "1"),
+            FixedRow(feature = "Number", value = "Sing"),
+        ),
+        lexicalFilter = LexicalFilterRow(
+            slot = "noun",
+            where = WhereRow(gender = listOf("m-personal", "m-animate", "m-inanimate")),
         ),
         styleContent = StyleContentRow(
             nativeParallel = listOf(
@@ -216,6 +268,14 @@ val SKILL_ROW_ROWS: List<SkillRow> = listOf(
                 review = "Оцени, удалось ли вспомнить ответ самостоятельно; следующую ситуацию реши заново.",
             ),
         ),
+        construction = "core.sentence.polarity",
+        featureFocus = FeatureFocusRow(feature = "Polarity", from = "Pos", to = "Neg"),
+        fixed = listOf(
+            FixedRow(feature = "Tense", value = "Pres"),
+            FixedRow(feature = "Person", value = "1"),
+            FixedRow(feature = "Number", value = "Sing"),
+        ),
+        lexicalFilter = null,
         styleContent = StyleContentRow(
             nativeParallel = listOf(
                 NativeParallelRow(
@@ -262,6 +322,17 @@ val SKILL_ROW_ROWS: List<SkillRow> = listOf(
                 feedback = "Сравни, что хотел сказать, с эталоном и проследи изменения в предложении.",
                 review = "Оцени, удалось ли вспомнить ответ самостоятельно; следующую ситуацию реши заново.",
             ),
+        ),
+        construction = "core.argument.case-role",
+        featureFocus = FeatureFocusRow(feature = "Case", from = "Acc", to = "Inst"),
+        fixed = listOf(
+            FixedRow(feature = "Tense", value = "Pres"),
+            FixedRow(feature = "Person", value = "1"),
+            FixedRow(feature = "Number", value = "Sing"),
+        ),
+        lexicalFilter = LexicalFilterRow(
+            slot = "noun",
+            where = WhereRow(nounId = listOf("wife", "husband", "friendM", "son", "child")),
         ),
         styleContent = StyleContentRow(
             nativeParallel = listOf(
@@ -310,6 +381,14 @@ val SKILL_ROW_ROWS: List<SkillRow> = listOf(
                 review = "Оцени, удалось ли вспомнить ответ самостоятельно; следующую ситуацию реши заново.",
             ),
         ),
+        construction = "core.argument.case-role",
+        featureFocus = FeatureFocusRow(feature = "Case", from = "Acc", to = "Loc"),
+        fixed = listOf(
+            FixedRow(feature = "Tense", value = "Pres"),
+            FixedRow(feature = "Person", value = "1"),
+            FixedRow(feature = "Number", value = "Sing"),
+        ),
+        lexicalFilter = null,
         styleContent = StyleContentRow(
             nativeParallel = listOf(
                 NativeParallelRow(
@@ -350,6 +429,17 @@ val SKILL_ROW_ROWS: List<SkillRow> = listOf(
                 feedback = "Сравни, что хотел сказать, с эталоном и проследи изменения в предложении.",
                 review = "Оцени, удалось ли вспомнить ответ самостоятельно; следующую ситуацию реши заново.",
             ),
+        ),
+        construction = "core.argument.case-role",
+        featureFocus = FeatureFocusRow(feature = "Case", from = "Acc", to = "Dat"),
+        fixed = listOf(
+            FixedRow(feature = "Tense", value = "Pres"),
+            FixedRow(feature = "Person", value = "1"),
+            FixedRow(feature = "Number", value = "Sing"),
+        ),
+        lexicalFilter = LexicalFilterRow(
+            slot = "noun",
+            where = WhereRow(nounId = listOf("wife", "husband", "friendM", "son", "child")),
         ),
         styleContent = StyleContentRow(
             nativeParallel = listOf(
@@ -398,6 +488,15 @@ val SKILL_ROW_ROWS: List<SkillRow> = listOf(
                 review = "Оцени, удалось ли вспомнить ответ самостоятельно; следующую ситуацию реши заново.",
             ),
         ),
+        construction = "core.agreement.possessive",
+        featureFocus = null,
+        fixed = listOf(
+            FixedRow(feature = "Case", value = "Acc"),
+            FixedRow(feature = "Tense", value = "Pres"),
+            FixedRow(feature = "Person", value = "1"),
+            FixedRow(feature = "Number", value = "Sing"),
+        ),
+        lexicalFilter = null,
         styleContent = StyleContentRow(
             nativeParallel = listOf(
                 NativeParallelRow(
@@ -445,6 +544,13 @@ val SKILL_ROW_ROWS: List<SkillRow> = listOf(
                 review = "Оцени, удалось ли вспомнить ответ самостоятельно; следующую ситуацию реши заново.",
             ),
         ),
+        construction = "core.verb.tense",
+        featureFocus = FeatureFocusRow(feature = "Tense", from = "Past", to = "Pres"),
+        fixed = listOf(FixedRow(feature = "Person", value = "3"), FixedRow(feature = "Number", value = "Sing")),
+        lexicalFilter = LexicalFilterRow(
+            slot = "noun",
+            where = WhereRow(nounId = listOf("wife", "husband", "friendM", "son", "child")),
+        ),
         styleContent = StyleContentRow(
             nativeParallel = listOf(
                 NativeParallelRow(
@@ -485,6 +591,13 @@ val SKILL_ROW_ROWS: List<SkillRow> = listOf(
                 feedback = "Сравни, что хотел сказать, с эталоном и проследи изменения в предложении.",
                 review = "Оцени, удалось ли вспомнить ответ самостоятельно; следующую ситуацию реши заново.",
             ),
+        ),
+        construction = "core.verb.tense",
+        featureFocus = FeatureFocusRow(feature = "Tense", from = "Pres", to = "Past"),
+        fixed = listOf(FixedRow(feature = "Person", value = "3"), FixedRow(feature = "Number", value = "Sing")),
+        lexicalFilter = LexicalFilterRow(
+            slot = "noun",
+            where = WhereRow(nounId = listOf("wife", "husband", "friendM", "son", "child")),
         ),
         styleContent = StyleContentRow(
             nativeParallel = listOf(
@@ -533,6 +646,13 @@ val SKILL_ROW_ROWS: List<SkillRow> = listOf(
                 review = "Оцени, удалось ли вспомнить ответ самостоятельно; следующую ситуацию реши заново.",
             ),
         ),
+        construction = "core.verb.tense",
+        featureFocus = FeatureFocusRow(feature = "Tense", from = "Pres", to = "Fut"),
+        fixed = listOf(FixedRow(feature = "Person", value = "3"), FixedRow(feature = "Number", value = "Sing")),
+        lexicalFilter = LexicalFilterRow(
+            slot = "noun",
+            where = WhereRow(nounId = listOf("wife", "husband", "friendM", "son", "child")),
+        ),
         styleContent = StyleContentRow(
             nativeParallel = listOf(
                 NativeParallelRow(
@@ -580,6 +700,10 @@ val SKILL_ROW_ROWS: List<SkillRow> = listOf(
                 review = "Оцени, удалось ли вспомнить ответ самостоятельно; следующую ситуацию реши заново.",
             ),
         ),
+        construction = "core.composite",
+        featureFocus = null,
+        fixed = listOf(FixedRow(feature = "Person", value = "1"), FixedRow(feature = "Number", value = "Sing")),
+        lexicalFilter = null,
         styleContent = StyleContentRow(
             nativeParallel = listOf(
                 NativeParallelRow(
@@ -626,6 +750,18 @@ val SKILL_ROW_ROWS: List<SkillRow> = listOf(
                 feedback = "Сравни, что хотел сказать, с эталоном и проследи изменения в предложении.",
                 review = "Оцени, удалось ли вспомнить ответ самостоятельно; следующую ситуацию реши заново.",
             ),
+        ),
+        construction = "core.argument.case-role",
+        featureFocus = null,
+        fixed = listOf(
+            FixedRow(feature = "Case", value = "Acc"),
+            FixedRow(feature = "Tense", value = "Pres"),
+            FixedRow(feature = "Person", value = "1"),
+            FixedRow(feature = "Number", value = "Sing"),
+        ),
+        lexicalFilter = LexicalFilterRow(
+            slot = "noun",
+            where = WhereRow(nounId = listOf("wife", "husband", "friendM", "son", "child")),
         ),
         styleContent = StyleContentRow(
             nativeParallel = listOf(
@@ -674,6 +810,10 @@ val SKILL_ROW_ROWS: List<SkillRow> = listOf(
                 review = "Оцени, удалось ли вспомнить ответ самостоятельно; следующую ситуацию реши заново.",
             ),
         ),
+        construction = "core.composite",
+        featureFocus = null,
+        fixed = emptyList(),
+        lexicalFilter = null,
         styleContent = StyleContentRow(
             nativeParallel = listOf(
                 NativeParallelRow(
@@ -715,6 +855,14 @@ val SKILL_ROW_ROWS: List<SkillRow> = listOf(
                 review = "Оцени, удалось ли вспомнить ответ самостоятельно; следующую ситуацию реши заново.",
             ),
         ),
+        construction = "core.sentence.mood",
+        featureFocus = FeatureFocusRow(feature = "Mood", from = "Decl", to = "YesNoQ"),
+        fixed = listOf(
+            FixedRow(feature = "Tense", value = "Pres"),
+            FixedRow(feature = "Person", value = "2"),
+            FixedRow(feature = "Number", value = "Sing"),
+        ),
+        lexicalFilter = null,
         styleContent = StyleContentRow(
             nativeParallel = listOf(
                 NativeParallelRow(
@@ -756,6 +904,14 @@ val SKILL_ROW_ROWS: List<SkillRow> = listOf(
                 review = "Оцени, удалось ли вспомнить ответ самостоятельно; следующую ситуацию реши заново.",
             ),
         ),
+        construction = "core.number",
+        featureFocus = FeatureFocusRow(feature = "Number", from = "Sing", to = "Plur"),
+        fixed = listOf(
+            FixedRow(feature = "Case", value = "Acc"),
+            FixedRow(feature = "Tense", value = "Pres"),
+            FixedRow(feature = "Person", value = "1"),
+        ),
+        lexicalFilter = null,
         styleContent = StyleContentRow(
             nativeParallel = listOf(
                 NativeParallelRow(

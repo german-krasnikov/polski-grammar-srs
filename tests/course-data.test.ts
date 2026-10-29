@@ -39,7 +39,8 @@ const method = (text: string) => `{introduction: "${text}" promptLead: "${text}"
 /** The fields of one valid SKILL row, as .core-data text; a test replaces one, or drops it with `undefined`. */
 const fields = (id: string): Record<string, string> => ({
   id: `"${id}"`, title: '"T"', group: '"G"', level: 'A1', formula: '"f"', theory: '"t"', hint: '"h"', prerequisites: '[]',
-  focus: '{before: "b" after: "a"}', methods: `{logic: ${method('l')} situations: ${method('s')}}`, styleContent: '{why: "w"}',
+  focus: '{before: "b" after: "a"}', methods: `{logic: ${method('l')} situations: ${method('s')}}`,
+  construction: '"core.c"', featureFocus: 'null', fixed: '[]', lexicalFilter: 'null', styleContent: '{why: "w"}',
 });
 const skill = (id: string, change: Record<string, string | undefined> = {}) =>
   `SKILL {${Object.entries({ ...fields(id), ...change }).filter(([, value]) => value !== undefined).map(([key, value]) => `${key}: ${value}`).join(' ')}}`;
@@ -73,6 +74,19 @@ describe.skipIf(!existsSync(cli))('skill rows against dsl/course.data-contract',
   it('an unterminated record is DATA_SYNTAX at its {', () => problem([skill('a').slice(0, -1)], 0, '{', 'DATA_SYNTAX'));
   it('no row at all is DATA_COUNT at 1:1', () => expect(check('')).toEqual({ status: 1, problems: ['skills.core-data:1:1: DATA_COUNT'] }));
   it('columns count UTF-16 units: each emoji before the fault is two', () => problem([skill('a', { title: '"😀😀"', level: 'C9' })], 0, 'C9', 'DATA_ENUM'));
+
+  it('a NULLABLE field that was not written is DATA_REQUIRED at the { of the row', () =>
+    problem([skill('a', { featureFocus: undefined })], 0, '{', 'DATA_REQUIRED'));
+  it('a fixed feature without its value is DATA_REQUIRED at the { of the pair', () =>
+    problem([skill('a', { fixed: '[{feature: "Tense"}]' })], 0, '{feature: "Tense"}', 'DATA_REQUIRED'));
+  it('a filter property the contract does not know is DATA_UNKNOWN_FIELD at its key', () =>
+    problem([skill('a', { lexicalFilter: '{slot: "noun" where: {genre: ["f"]}}' })], 0, 'genre', 'DATA_UNKNOWN_FIELD'));
+  it('a written focus, fixed pairs and a filter with either or both properties are accepted', () => {
+    const spec = { featureFocus: '{feature: "Case" from: "Nom" to: "Acc"}', fixed: '[{feature: "Tense" value: "Pres"} {feature: "Person" value: "1"}]' };
+    const rows = ['{nounId: ["wife"]}', '{gender: ["n"]}', '{nounId: ["wife"] gender: ["f"]}'].map((where, i) =>
+      skill(`s${i}`, { ...spec, lexicalFilter: `{slot: "noun" where: ${where}}` }));
+    expect(check(rows.join('\n') + '\n')).toEqual({ status: 0, problems: [] });
+  });
 
   it('the optional style fields may be left out and an empty text is data', () =>
     expect(check([skill('a', { styleContent: undefined }), skill('b', { styleContent: '{why: ""}' })].join('\n') + '\n')).toEqual({ status: 0, problems: [] }));
