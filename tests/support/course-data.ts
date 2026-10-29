@@ -54,3 +54,10 @@ export function rowsOf(record: string, ...needs: string[]) {
 /** `TAG {key: value ...}` from the fields of a valid row; `change` replaces a field, or drops it with `undefined`. */
 export const row = (tag: string, fields: Record<string, string>, change: Record<string, string | undefined> = {}) =>
   `${tag} {${Object.entries({ ...fields, ...change }).filter(([, value]) => value !== undefined).map(([key, value]) => `${key}: ${value}`).join(' ')}}`;
+
+const CASES = ['nom', 'gen', 'dat', 'acc', 'inst', 'loc', 'voc'];
+const GENDERS = ['m_personal', 'm_animate', 'm_inanimate', 'f', 'n'];
+/** The seven cases of one form record, each text tagged with where it sits; `drop` leaves one case out. */
+export const cases = (tag: string, drop?: string) => `{${CASES.filter(c => c !== drop).map(c => `${c}: "${tag}-${c}"`).join(' ')}}`;
+/** The five genders of a form record, each holding its seven cases; `drop` leaves one gender out. */
+export const genders = (drop?: string) => `{${GENDERS.filter(g => g !== drop).map(g => `${g}: ${cases(g)}`).join(' ')}}`;

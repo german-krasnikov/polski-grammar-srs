@@ -2,13 +2,8 @@
 // The keys of the data that are no identifiers are written m_personal.. and p1..p3 (owner decision 2026-10-29); the ids as values stay verbatim.
 import { describe, expect, it } from 'vitest';
 import { readFileSync } from 'node:fs';
-import { hasCli, realFile, row, rowsOf } from './support/course-data';
+import { cases, genders, hasCli, realFile, row, rowsOf } from './support/course-data';
 
-const CASES = ['nom', 'gen', 'dat', 'acc', 'inst', 'loc', 'voc'];
-const GENDERS = ['m_personal', 'm_animate', 'm_inanimate', 'f', 'n'];
-/** The seven cases of one form record, each text tagged with where it sits; `drop` leaves one case out. */
-const cases = (tag: string, drop?: string) => `{${CASES.filter(c => c !== drop).map(c => `${c}: "${tag}-${c}"`).join(' ')}}`;
-const genders = (drop?: string) => `{${GENDERS.filter(g => g !== drop).map(g => `${g}: ${cases(g)}`).join(' ')}}`;
 const persons = (tag: string) => `{p1: "${tag}1" p2: "${tag}2" p3: "${tag}3"}`;
 
 const noun = (id: string, change: Record<string, string | undefined> = {}) =>
