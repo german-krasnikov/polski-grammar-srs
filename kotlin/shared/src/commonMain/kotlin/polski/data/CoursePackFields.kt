@@ -11,7 +11,7 @@ import polski.presentation.StemAlternation
 
 /**
  * NJ03 P7: one typed contract for course pack fields.
- * CoursePack (JSON reader) and PlRuTypedPack (generated typed vals) both implement this.
+ * PlRuTypedPack and EnRuTypedPack (generated typed vals) implement this.
  * PackRegistry and all consumers reference this interface — no second authority.
  */
 internal interface CoursePackFields {

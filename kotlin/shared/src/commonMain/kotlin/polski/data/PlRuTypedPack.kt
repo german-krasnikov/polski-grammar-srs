@@ -5,7 +5,7 @@ import polski.model.PossessiveId
 
 /**
  * NJ03 P7: typed pl-ru course pack — implements CoursePackFields directly from
- * generated Biome literal sources. No JSON parsing, no CoursePack inheritance.
+ * generated Biome literal sources. No JSON parsing.
  * One source → one typed contract → one implementation.
  */
 internal object PlRuTypedPack : CoursePackFields {

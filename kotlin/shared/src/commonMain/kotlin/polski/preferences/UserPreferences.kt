@@ -31,7 +31,7 @@ data class CourseSelection(val target: String, val native: String, val style: Pr
  */
 data class UserPreferencesV2(
     val schemaVersion: Int = 3,
-    /** UC-04/EN-08: was the flat `"pl-ru"` [polski.data.CoursePack.pairId] string (`coursePair`);
+    /** UC-04/EN-08: was the flat `"pl-ru"` [polski.data.CoursePackFields.pairId] string (`coursePair`);
      * split into its two halves so a future second pack has real target/native pickers to bind
      * to, not a delimiter-joined id. Defaults to the active pack's own languages. */
     val target: String = packRegistry.active.targetLanguage,

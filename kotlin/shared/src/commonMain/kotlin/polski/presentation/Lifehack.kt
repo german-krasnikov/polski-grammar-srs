@@ -1,6 +1,5 @@
 package polski.presentation
 
-import polski.data.generatedLifehacksJsonByPairId
 import polski.data.packRegistry
 import polski.data.skills
 
@@ -60,9 +59,8 @@ interface LifehackProvider {
 }
 
 /**
- * The only [LifehackProvider] today: reads the active pack's own `pairs/<pairId>/lifehacks.json`
- * (embedded at build time into [generatedLifehacksJsonByPairId], `kotlin/shared/build.gradle.kts`,
- * the same mechanism `pair.json`/`course.json` use). An `object`, not a class holding a captured
+ * The only [LifehackProvider] today: reads the active pack's own typed lifehacks
+ * ([polski.data.generatedLifehacksByPairId], GeneratedLifehacks.kt). An `object`, not a class holding a captured
  * pairId, so it always reflects whichever pack is [polski.data.PackRegistry.active] *now* — once
  * EN-22 wires a real target/native picker, switching packs needs no re-wiring here.
  */

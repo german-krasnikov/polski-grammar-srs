@@ -46,8 +46,8 @@ data class StudyDirection(val wire: String) {
         /** Generalizes [RussianToPolish]/[PolishToRussian] (themselves this exact pair for pl-ru's
          *  own native="ru"/target="pl") to any pack's own (target, native) codes —
          *  EnRuAcceptance-2026-09-28.md §7 item 4: a second pack's UI needs no new named
-         *  [StudyDirection] constants of its own, just its [polski.data.CoursePack.targetLanguage]/
-         *  [polski.data.CoursePack.nativeLanguage]. */
+         *  [StudyDirection] constants of its own, just its [polski.data.CoursePackFields.targetLanguage]/
+         *  [polski.data.CoursePackFields.nativeLanguage]. */
         fun nativeToTarget(target: String, native: String) = StudyDirection("$native-$target")
         fun targetToNative(target: String, native: String) = StudyDirection("$target-$native")
     }
@@ -139,7 +139,7 @@ data class VocabularyDocument(
 )
 
 object VocabularyCodec {
-    /** UC-04: was the literal `"pl-ru"` — now the active pack's [polski.data.CoursePack.pairId].
+    /** UC-04: was the literal `"pl-ru"` — now the active pack's [polski.data.CoursePackFields.pairId].
      * EnRuAcceptance-2026-09-28.md §7 item 2: read fresh (was `by lazy`, which froze this to
      * whichever pack was active on first read for the rest of the process) so a host's vocabulary
      * repository keeps loading/saving the right pack's own document after

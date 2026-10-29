@@ -1,30 +1,11 @@
 package polski.data
 
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.JsonArray
-import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.JsonObject
-import kotlinx.serialization.json.JsonPrimitive
-import kotlinx.serialization.json.boolean
-import kotlinx.serialization.json.int
-import kotlinx.serialization.json.jsonArray
-import kotlinx.serialization.json.jsonObject
-import kotlinx.serialization.json.jsonPrimitive
 import polski.model.*
-import polski.pack.CoursePackSource
-import polski.presentation.ContrastPair
-import polski.presentation.EndingPart
-import polski.presentation.NativeParallelPair
 import polski.presentation.StemAlternation
-import polski.presentation.TableRow
-
-
-
-
 
 
 /**
- * UC-03/EN-06: the single point where consumers reach a [CoursePack], keyed by [CoursePack.pairId].
+ * UC-03/EN-06: the single point where consumers reach a [CoursePackFields], keyed by [CoursePackFields.pairId].
  * [active] defaults to the first registered pack (pl-ru today, unchanged behavior) until
  * [select] switches it — EN-22 is the first production caller (host preferences sessions), driven
  * by `UserPreferencesV2.target`/`native` and gated by [usableCourseSelections].
@@ -35,7 +16,7 @@ internal class PackRegistry(private val packs: List<CoursePackFields>) {
     var active: CoursePackFields = packs.first()
         private set
 
-    /** Switches [active] to the registered pack whose [CoursePack.pairId] is [pairId]. */
+    /** Switches [active] to the registered pack whose [CoursePackFields.pairId] is [pairId]. */
     fun select(pairId: String) {
         active = requireNotNull(packs.firstOrNull { it.pairId == pairId }) { "Unknown pack pairId: $pairId" }
     }
@@ -48,17 +29,10 @@ internal class PackRegistry(private val packs: List<CoursePackFields>) {
     val options: List<Pair<String, String>> by lazy { packs.map { it.targetLanguage to it.nativeLanguage } }
 }
 
-/** EN-04/EN-22: v1 packs (a real `courses/<id>/course.json`) first, then any pair this build has
- * v2 layers for (`lang/<target>/lexicon.json` + `pairs/<pairId>/pair.json`) but no v1 file of its
- * own — reconstructed by [CoursePackLoader], the same content [CoursePackLoaderTest] proves is
- * byte-identical to a hand-written v1 pack. pl-ru ships as v1 today, so it is never duplicated
- * here; en-ru (EN-11..EN-20) has no `courses/en-ru/course.json` and so is only ever reached this
- * way — without this, [packRegistry] would embed pl-ru alone and en-ru could never be selected. */
+/** The packs this build embeds: pl-ru first (the default active pack), then en-ru. Both are typed objects
+ *  generated from the DSL data (R1: no JSON pack reader remains), so EN-22's picker can select either. */
 internal val packRegistry: PackRegistry by lazy {
     PackRegistry(buildList<CoursePackFields> {
-        // NJ03 P7: pl-ru uses typed Biome literal source (PlRuTypedPack object).
-        // Other packs read from JSON via CoursePack.
-        // NJ03 P7: all packs are typed objects — zero JSON at runtime.
         add(PlRuTypedPack)
         add(EnRuTypedPack)
     })
@@ -96,7 +70,7 @@ data class CoursePackOption(val pairId: String, val target: String, val native: 
 val availableCoursePacks: List<CoursePackOption> get() =
     usableCourseSelections.map { (target, native) -> CoursePackOption("$target-$native", target, native) }
 
-/** [CoursePack.pairId] of the pack currently serving content. */
+/** [CoursePackFields.pairId] of the pack currently serving content. */
 // NJ03: pl-ru metadata from typed source (pair.json still provides other fields).
 private val plRuPairId = "pl-ru"
 private val plRuTarget = "pl"
@@ -150,7 +124,7 @@ fun caseSentencePrefix(caseId: String, number: NumberGram): String {
 
 fun exerciseCopy(key: String): String = packRegistry.active.exerciseCopy.getValue(key)
 
-// EN-22 fix (EnRuAcceptance §7 item 1, corrected): each [CoursePack] property below is nullable (a
+// EN-22 fix (EnRuAcceptance §7 item 1, corrected): each [CoursePackFields] property below is nullable (a
 // pack whose `reference` block doesn't cover this pl-specific teaching topic — en-ru today). This
 // same fix's [selectActiveCoursePack]/[selectCoursePack] now really flip the process-wide
 // [packRegistry.active] to en-ru (Settings/[PreferencesSession] included), so a host's existing
@@ -210,122 +184,3 @@ fun renderCoursePattern(key: String, values: Map<String, String>): String =
         val name = match.groupValues[1]
         values[name]?.takeIf { it.isNotEmpty() } ?: error("Missing $name for $key")
     }
-
-internal fun JsonObject.string(key: String): String =
-    (get(key) as? JsonPrimitive)?.content?.takeIf(String::isNotEmpty) ?: error("Missing course field $key")
-
-internal fun JsonObject.optionalString(key: String): String? = (get(key) as? JsonPrimitive)?.content
-internal fun JsonObject.obj(key: String): JsonObject = getValue(key).jsonObject
-internal fun JsonObject.rows(key: String): List<JsonObject> = getValue(key).jsonArray.map { it.jsonObject }
-
-/** [key] absent (a pack's `reference` block genuinely not covering this teaching topic, EN-22 fix)
- *  is null, not a parse error — see [CoursePack.reference]'s own KDoc for why. */
-internal fun JsonObject.optObj(key: String): JsonObject? = (get(key) as? JsonObject)
-internal fun JsonObject.optRows(key: String): List<JsonObject>? = (get(key) as? JsonArray)?.map { it.jsonObject }
-internal fun JsonObject.caseForms(): Map<GramCase, String> = GramCase.entries.associateWith { string(it.id) }
-internal fun JsonObject.strictCaseForms(): Map<GramCase, String> {
-    require(keys == GramCase.entries.map(GramCase::id).toSet())
-    return GramCase.entries.associateWith { formText(it.id) }
-}
-internal fun JsonObject.formText(key: String): String = string(key).also { require(it.isNotBlank()) }
-internal fun JsonObject.methodPresentation(): MethodPresentation {
-    fun required(field: String): String = string(field).also { value ->
-        require(value.isNotBlank()) { "Invalid method stage: $field" }
-    }
-    return MethodPresentation(
-        required("introduction"), required("promptLead"), required("introduce"),
-        required("retrieve"), required("feedback"), required("review"),
-    )
-}
-internal fun JsonObject.russianSupportTable(): RussianSupportTable =
-    RussianSupportTable(string("construction"), string("check"))
-
-internal fun JsonObject.russianSupportComparison(path: String): ContrastPair {
-    val from = string("from")
-    val to = string("to")
-    fun parts(key: String, form: String): List<EndingPart> {
-        val pieces = rows(key).mapIndexed { index, part ->
-            EndingPart(
-                part.string("text"),
-                part.getValue("isEnding").jsonPrimitive.boolean,
-                part.getValue("isChanged").jsonPrimitive.boolean,
-            ).also { piece ->
-                require(piece.text.isNotEmpty()) { "$path/$key/$index/text: empty segment" }
-            }
-        }
-        require(pieces.isNotEmpty() && pieces.joinToString("") { it.text } == form) {
-            "$path/$key: segments must reassemble exactly"
-        }
-        var cursor = 0
-        pieces.forEachIndexed { index, piece ->
-            val next = cursor + piece.text.length
-            val before = form.getOrNull(cursor - 1)
-            val after = form.getOrNull(next)
-            if (piece.isEnding) {
-                require(piece.isChanged && piece.text.length <= 3 && piece.text.all(Char::isLetter) &&
-                    before?.isLetterOrDigit() == true && after?.isLetterOrDigit() != true) {
-                    "$path/$key/$index/isEnding: invalid ending span"
-                }
-            } else if (piece.isChanged) {
-                require(before?.isLetterOrDigit() != true && after?.isLetterOrDigit() != true) {
-                    "$path/$key/$index/isChanged: replacement must mark a whole word"
-                }
-            }
-            cursor = next
-        }
-        return pieces
-    }
-    val before = parts("beforeParts", from)
-    val after = parts("afterParts", to)
-    require(from == to || (before.any { it.isChanged } && after.any { it.isChanged })) {
-        "$path: both changed forms need marked spans"
-    }
-    require(before.filterNot { it.isChanged }.joinToString("") { it.text } ==
-        after.filterNot { it.isChanged }.joinToString("") { it.text } &&
-        (from != to || (before.none { it.isChanged } && after.none { it.isChanged }))) {
-        "$path: unchanged fragments must agree on both sides"
-    }
-    return ContrastPair(from, to, before, after)
-}
-internal fun JsonObject.verbLabel(): VerbLabel = VerbLabel(string("full"), string("compact"))
-
-/** [json] is the optional `skill.styleContent` value as it comes out of `root["styleContent"]` — absent/non-object means the all-derived default. */
-internal fun parseSkillStyleContent(json: JsonElement?): SkillStyleContent =
-    (json as? JsonObject)?.toSkillStyleContent() ?: SkillStyleContent()
-
-/** [json] is the optional `stemAlternations` value as it comes out of `root["stemAlternations"]` — absent/non-array means no pack-declared alternation (UC S2). */
-internal fun parseStemAlternations(json: JsonElement?): List<StemAlternation> =
-    (json as? JsonArray)?.map { it.jsonObject.toStemAlternation() } ?: emptyList()
-
-internal fun JsonObject.toStemAlternation(): StemAlternation {
-    val a = string("a")
-    val b = string("b")
-    require(a.length == 1 && b.length == 1) { "stemAlternations: a/b must be single characters" }
-    return StemAlternation(a[0], b[0])
-}
-
-internal fun JsonObject.toSkillStyleContent(): SkillStyleContent = SkillStyleContent(
-    rule = optionalString("rule"),
-    table = (get("table") as? JsonObject)?.rows("rows")?.map { it.toTableRow() },
-    scene = optionalString("scene"),
-    nativeParallel = (get("nativeParallel") as? JsonArray)?.map { it.jsonObject.toNativeParallelPair() } ?: emptyList(),
-    examples = (get("examples") as? JsonArray)?.map { it.jsonPrimitive.content } ?: emptyList(),
-    why = optionalString("why"),
-)
-
-internal fun JsonObject.toTableRow(): TableRow = TableRow(string("label"), endingParts("before"), endingParts("after"))
-
-/** [NativeParallelPair.targetParts] is filled in later, at compose time, from the skill's own
- *  explicit `focus` pair (EmphasisUXAudit E7/S4) — this raw course-data parse knows no exercise. */
-internal fun JsonObject.toNativeParallelPair(): NativeParallelPair =
-    NativeParallelPair(string("native"), string("target"), string("note"), getValue("matches").jsonPrimitive.boolean, targetParts = emptyList())
-
-internal fun JsonObject.endingParts(key: String): List<EndingPart> = rows(key).map { part ->
-    EndingPart(part.string("text"), part.getValue("isEnding").jsonPrimitive.boolean, part.getValue("isChanged").jsonPrimitive.boolean)
-}
-/** Uniqueness only — emptiness is a legitimate result for a pl-shaped table a pack's own grammar
- *  has nothing to contribute to (EnRuAcceptance §7 item 1: en's genderless [Noun]/[Adjective]/
- *  [Verb] rows are filtered out upstream, not force-parsed), so it is never asserted here. */
-internal fun <T> List<T>.requireUniqueIds(id: (T) -> String): List<T> = also { items ->
-    require(items.map(id).distinct().size == items.size) { "Duplicate course IDs" }
-}

@@ -5,8 +5,6 @@ plugins {
     alias(libs.plugins.android.kmp.library)
 }
 
-val coursesDirectory = layout.projectDirectory.dir("../../courses")
-val frequencyFile = layout.projectDirectory.file("../../courses/pl-ru/frequency-top1000.json")
 // UC-10/StylesBlueprint.md §2/§4: every JSON file under here is a presentation-style recipe,
 // inlined below the same way course.json is. Listing files by directory scan (not a fixed
 // filename list) means a new recipe file needs no Gradle/Kotlin edit to reach StyleRegistry —
@@ -16,9 +14,6 @@ val formsFixtureFile = layout.projectDirectory.file("../../courses/pl-ru/forms.g
 // UniversalCorePlan.md §3.1/§12 UC-06: `lang/<code>/curriculum.json` — scanned the same way as
 // `packDirs` below, so a second target language's curriculum needs no Gradle/Kotlin edit.
 val langDirectory = layout.projectDirectory.dir("../../courses/lang")
-// EN-04/ADR-20 UC-12: the v2 layer files `CoursePackLoader` reconstructs a v1 `CoursePack` from —
-// `lang/<code>/lexicon.json` (scanned below alongside curriculum.json) and `pairs/<pairId>/pair.json`.
-val pairsDirectory = layout.projectDirectory.dir("../../courses/pairs")
 val generatedCourseDirectory = layout.buildDirectory.dir("generated/course/kotlin")
 val generatedFormsFixtureDirectory = layout.buildDirectory.dir("generated/formsFixture/kotlin")
 val legacyAdmissionLedgers = listOf(
@@ -184,22 +179,13 @@ val generateAcCorpusTestSource by tasks.registering {
     }
 }
 
+// Embeds the two JSON inputs the live readers still parse: `lang/<code>/curriculum.json` (PackEngine) and `styles/*.json`
+// (StyleRegistry). R1.13 and R1.18 replace them; the JSON pack reader and its module are gone (R1.3).
 val generateCoursePackSource by tasks.registering {
-    // UniversalCorePlan.md §4.2/§12 UC-02: pack ids are discovered by scanning `courses/*` for a
-    // `course.json`, not read from one hardcoded path — adding `courses/<id>/course.json` needs no
-    // Gradle/Kotlin edit to become an embedded CoursePackSource. `schema`/`styles` aren't packs.
-    inputs.dir(coursesDirectory)
-    inputs.file(frequencyFile)
     inputs.dir(stylesDirectory)
     inputs.dir(langDirectory)
-    inputs.dir(pairsDirectory)
     outputs.dir(generatedCourseDirectory)
     doLast {
-        // NJ03 B8: course.json removed as authored source; pl-ru now loads via v2 layers
-        // (pair.json + lexicon.json) exactly like en-ru. embeddedCoursePackSources is empty.
-        val packSourceLiterals = ""
-
-        val frequencyChunks = literalChunks(frequencyFile.asFile.readText())
         val styleFiles = (stylesDirectory.asFile.listFiles { file -> file.extension == "json" } ?: emptyArray())
             .sortedBy { it.name }
         val stylesJson = "[" + styleFiles.joinToString(",") { it.readText() } + "]"
@@ -215,34 +201,13 @@ val generateCoursePackSource by tasks.registering {
             "    \"${dir.name}\" to ${literalBuildString(chunks)}"
         }
 
-        // NJ03: lexicon.json and pair.json no longer embedded — all packs use typed objects.
-        val lexiconEntryLiterals = ""
-        val pairEntryLiterals = ""
-
-        // EN-21/ADR-15: `pairs/<pairId>/lifehacks.json` — pair-scoped, outside core, scanned the
-        // same way as pair.json above so a pack without lifehacks (or a future 3rd pack) needs no
-        // NJ03: lifehacks.json no longer embedded — typed in GeneratedLifehacks.kt.
-        val lifehackEntryLiterals = ""
-
         val target = generatedCourseDirectory.get().file("polski/data/GeneratedCourseJson.kt").asFile
         target.parentFile.mkdirs()
         target.writeText(
             "package polski.data\n\n" +
-                "import polski.pack.EmbeddedCoursePackSource\n" +
-                "import polski.pack.PackManifest\n\n" +
-                "internal val embeddedCoursePackSources: List<EmbeddedCoursePackSource> = listOf(\n" +
-                packSourceLiterals + "\n)\n" +
-                "internal val coursePackManifest: PackManifest = PackManifest(embeddedCoursePackSources.map { it.id })\n" +
-                "internal val generatedFrequencyJson = " + literalBuildString(frequencyChunks) + "\n" +
                 "internal val generatedStylesJson = " + literalBuildString(styleChunks) + "\n" +
                 "internal val generatedCurriculumJsonByLang: Map<String, String> = mapOf(\n" +
-                curriculumEntryLiterals + "\n)\n" +
-                "internal val generatedLexiconJsonByLang: Map<String, String> = mapOf(\n" +
-                lexiconEntryLiterals + "\n)\n" +
-                "internal val generatedPairJsonByPairId: Map<String, String> = mapOf(\n" +
-                pairEntryLiterals + "\n)\n" +
-                "internal val generatedLifehacksJsonByPairId: Map<String, String> = mapOf(\n" +
-                lifehackEntryLiterals + "\n)\n",
+                curriculumEntryLiterals + "\n)\n",
         )
     }
 }
@@ -345,9 +310,6 @@ kotlin {
             // UniversalCorePlan.md §4.1 UC-01: model/Grammar.kt's Polish enums are a thin adapter
             // over the universal core's open FeatureKey/FeatureValue catalog.
             api(project(":core-model"))
-            // UniversalCorePlan.md §4.1 UC-02: CoursePackSource is the seam generateCoursePackSource
-            // (above) generates against — pl-ru is read as v1 through it, same as before.
-            api(project(":pack-format"))
             // UniversalCorePlan.md §12 UC-08: ExerciseGenerator/TableMorphology are the live pl-ru
             // engine now (polski.core.PlEngine.kt) — api so hosts (:composeApp/:androidApp) can
             // build ports (RandomSource/ExerciseIdFactory) against :core-engine's own types.

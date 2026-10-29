@@ -1,21 +1,8 @@
 package polski.data
 
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.JsonArray
-import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.JsonObject
-import kotlinx.serialization.json.JsonPrimitive
-import kotlinx.serialization.json.boolean
-import kotlinx.serialization.json.int
-import kotlinx.serialization.json.jsonArray
-import kotlinx.serialization.json.jsonObject
-import kotlinx.serialization.json.jsonPrimitive
 import polski.model.*
-import polski.pack.CoursePackSource
 import polski.presentation.ContrastPair
-import polski.presentation.EndingPart
 import polski.presentation.NativeParallelPair
-import polski.presentation.StemAlternation
 import polski.presentation.TableRow
 
 
@@ -167,10 +154,3 @@ internal sealed interface CoursePossessiveForms {
 }
 
 internal data class FutureAuxiliary(val verbId: String, val forms: Map<NumberGram, Map<Person, String>>)
-
-/**
- * One course pack's parsed content, read from [source] as schema v1 (a `course.json` under
- * `courses`, UC-02's [CoursePackSource]). Polish/Russian is the only pack today, so every field below is
- * still pl-ru-shaped; a second pack would need its own schema before this class stops being
- * pl-ru-specific.
- */

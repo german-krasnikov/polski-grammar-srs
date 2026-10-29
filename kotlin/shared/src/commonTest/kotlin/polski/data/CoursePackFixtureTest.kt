@@ -1,34 +1,68 @@
 package polski.data
 
-import kotlinx.serialization.json.JsonArray
-import kotlinx.serialization.json.JsonPrimitive
-import kotlinx.serialization.json.buildJsonObject
-import kotlinx.serialization.json.put
 import polski.model.Skill
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
 /**
- * UniversalCorePlan.md §12 UC-02 acceptance: generalizing `generateCoursePackSource`
- * (`kotlin/shared/build.gradle.kts`) into a pack-directory scan plus `:pack-format`'s
- * `CoursePackSource` must not change what pl-ru's `course.json` produces at runtime.
- * [expectedSkillsJson] is a golden fixture of `PolishCourseData.skills` (now [packRegistry]
- * `.active.skills` — UC-03) pinned *before* that refactor — a mismatch here means the
- * scan/`CoursePackSource` change altered the loaded pack, not just how it is plumbed from disk
- * into Kotlin.
+ * UniversalCorePlan.md §12 UC-02 acceptance: what pl-ru's skills are at runtime must not change when the way they
+ * reach Kotlin changes. [expectedSkills] is the golden fixture of `PolishCourseData.skills` (now [packRegistry]
+ * `.active.skills`) pinned 2026-09-27 at commit fa9526a, before that refactor. R1.3 only changed its form: the
+ * pinned JSON text became these typed values, field for field (16 skills, same order).
  */
 class CoursePackFixtureTest {
-    @Test fun skillsSerializeToThePinnedPreRefactorFixture() {
-        assertEquals(expectedSkillsJson, JsonArray(packRegistry.active.skills.map { it.toFixtureJson() }).toString())
+    @Test fun skillsEqualThePinnedPreRefactorFixture() {
+        assertEquals(expectedSkills, packRegistry.active.skills)
     }
 }
 
-private fun Skill.toFixtureJson() = buildJsonObject {
-    put("id", id); put("title", title); put("group", group); put("level", level)
-    put("formula", formula); put("theory", theory); put("hint", hint)
-    put("prerequisites", JsonArray(prerequisites.map(::JsonPrimitive)))
-}
-
-// Captured 2026-09-27 from PolishCourseData.skills at commit fa9526a (pre-UC-02), by running this
-// test with an empty expected value and pinning its actual output — see UC-02 handoff.
-private const val expectedSkillsJson = "[{\"id\":\"case.acc.n\",\"title\":\"Biernik · средний род\",\"group\":\"Przypadki\",\"level\":\"A1\",\"formula\":\"Средний род: Biernik = Mianownik\",\"theory\":\"В единственном числе средний род сохраняет базовую форму в Bierniku: widzę moje małe dziecko.\",\"hint\":\"moje nowe okno → widzę moje nowe okno\",\"prerequisites\":[]},{\"id\":\"case.acc.f\",\"title\":\"Biernik · żeński\",\"group\":\"Przypadki\",\"level\":\"A1\",\"formula\":\"-a → -ę; прилагательное -a → -ą\",\"theory\":\"Прямой объект после widzę, mam, lubię, kupuję обычно стоит в Bierniku.\",\"hint\":\"Widzę kogo? co?\",\"prerequisites\":[]},{\"id\":\"case.acc.m\",\"title\":\"Biernik · męski\",\"group\":\"Przypadki\",\"level\":\"A2\",\"formula\":\"на согласную: живое = Gen; неживое = Nom\",\"theory\":\"Для мужских существительных на согласную: widzę męża/psa, но widzę dom/samochód. У существительных на -a: widzę kolegę, но nie widzę kolegi.\",\"hint\":\"Сначала определи: żywotny или nieżywotny.\",\"prerequisites\":[\"case.acc.f\"]},{\"id\":\"case.gen.neg\",\"title\":\"Dopełniacz · negacja\",\"group\":\"Przypadki\",\"level\":\"A2\",\"formula\":\"Mam X → Nie mam + GEN\",\"theory\":\"При отрицании прямого объекта Biernik очень часто превращается в Dopełniacz.\",\"hint\":\"Не меняй только nie — поменяй весь noun phrase.\",\"prerequisites\":[\"case.acc.f\"]},{\"id\":\"case.inst\",\"title\":\"Narzędnik · z / być\",\"group\":\"Przypadki\",\"level\":\"A1\",\"formula\":\"z + kim? czym? → INST\",\"theory\":\"После z в значении «с кем/чем» используем Narzędnik. Также: Jestem programistą.\",\"hint\":\"z moją żoną, z dobrym kolegą\",\"prerequisites\":[]},{\"id\":\"case.loc\",\"title\":\"Miejscownik · o\",\"group\":\"Przypadki\",\"level\":\"A2\",\"formula\":\"o + kim? czym? → LOC\",\"theory\":\"После o (о ком/о чём) нужен Miejscownik.\",\"hint\":\"mówię o żonie / domu\",\"prerequisites\":[\"case.inst\"]},{\"id\":\"case.dat\",\"title\":\"Celownik · komu?\",\"group\":\"Przypadki\",\"level\":\"A2\",\"formula\":\"daję/pomagam + DAT\",\"theory\":\"Celownik отвечает «кому? чему?». Учим через короткие устойчивые конструкции.\",\"hint\":\"Daję prezent komu?\",\"prerequisites\":[]},{\"id\":\"agreement.my\",\"title\":\"Мой, твой, его, наш, их\",\"group\":\"Zgoda\",\"level\":\"A2\",\"formula\":\"Владелец + прилагательное + существительное\",\"theory\":\"mój, twój, nasz, wasz согласуются с существительным. jego, jej, ich не склоняются.\",\"hint\":\"moją piękną żonę → ich piękną żonę\",\"prerequisites\":[\"case.acc.f\",\"case.gen.neg\"]},{\"id\":\"verb.present\",\"title\":\"Czas teraźniejszy\",\"group\":\"Czasownik\",\"level\":\"A1\",\"formula\":\"лицо × число → окончание\",\"theory\":\"Автоматизируем 6 лиц на высокочастотных глаголах.\",\"hint\":\"ja/ty/on/my/wy/oni\",\"prerequisites\":[]},{\"id\":\"verb.past\",\"title\":\"Czas przeszły\",\"group\":\"Czasownik\",\"level\":\"A2\",\"formula\":\"основа прошедшего + род + лицо\",\"theory\":\"В прошедшем времени форма отражает род говорящего/подлежащего и лицо.\",\"hint\":\"robił-em, robiła-m, robili-śmy\",\"prerequisites\":[\"verb.present\"]},{\"id\":\"verb.future\",\"title\":\"Czas przyszły\",\"group\":\"Czasownik\",\"level\":\"A2\",\"formula\":\"będę + инфинитив (несов.) / форма настоящего (сов.)\",\"theory\":\"Для несовершенного вида: będę robić. Совершенный вид имеет простое будущее: zrobię.\",\"hint\":\"będę czytać / kupię\",\"prerequisites\":[\"verb.present\"]},{\"id\":\"aspect\",\"title\":\"Aspekt · robić/zrobić\",\"group\":\"Czasownik\",\"level\":\"B1\",\"formula\":\"процесс/повторение ↔ завершённый результат\",\"theory\":\"Недоконанный вид описывает процесс/повторяемость, dokonany — завершённый результат.\",\"hint\":\"robiłem vs zrobiłem\",\"prerequisites\":[\"verb.past\",\"verb.future\"]},{\"id\":\"pronouns\",\"title\":\"Zaimki osobowe\",\"group\":\"Zaimki\",\"level\":\"A2\",\"formula\":\"ona → ją / jej / nią / niej\",\"theory\":\"Тренируем местоимение сразу внутри конструкции, а не как отдельную таблицу.\",\"hint\":\"widzę ją; mówię o niej; idę z nią\",\"prerequisites\":[\"case.inst\",\"case.loc\"]},{\"id\":\"mixed\",\"title\":\"Смешанные трансформации\",\"group\":\"B1 Core\",\"level\":\"B1\",\"formula\":\"Лицо + время + отрицание + падеж\",\"theory\":\"Смешанные карточки проверяют, можешь ли ты объединить правила в живом предложении.\",\"hint\":\"Сначала структура, затем окончания.\",\"prerequisites\":[\"agreement.my\",\"verb.past\"]},{\"id\":\"sentence.question\",\"title\":\"Вопрос с Czy\",\"group\":\"Предложение\",\"level\":\"A1\",\"formula\":\"Czy + утверждение → вопрос\",\"theory\":\"В общем вопросе czy ставится перед предложением. Падежи при этом не меняются.\",\"hint\":\"Widzisz… → Czy widzisz…?\",\"prerequisites\":[]},{\"id\":\"sentence.plural\",\"title\":\"Единственное → множественное\",\"group\":\"Предложение\",\"level\":\"A2\",\"formula\":\"Местоимение + прилагательное + существительное → множественное число\",\"theory\":\"Во множественном числе различай мужскую личную группу и все остальные.\",\"hint\":\"mojego kolegę → moich kolegów; moją książkę → moje książki\",\"prerequisites\":[\"case.acc.m\",\"agreement.my\"]}]"
+private val expectedSkills = listOf(
+    Skill("case.acc.n", "Biernik · средний род", "Przypadki", "A1",
+        "Средний род: Biernik = Mianownik", "В единственном числе средний род сохраняет базовую форму в Bierniku: widzę moje małe dziecko.", "moje nowe okno → widzę moje nowe okno",
+        emptyList()),
+    Skill("case.acc.f", "Biernik · żeński", "Przypadki", "A1",
+        "-a → -ę; прилагательное -a → -ą", "Прямой объект после widzę, mam, lubię, kupuję обычно стоит в Bierniku.", "Widzę kogo? co?",
+        emptyList()),
+    Skill("case.acc.m", "Biernik · męski", "Przypadki", "A2",
+        "на согласную: живое = Gen; неживое = Nom", "Для мужских существительных на согласную: widzę męża/psa, но widzę dom/samochód. У существительных на -a: widzę kolegę, но nie widzę kolegi.", "Сначала определи: żywotny или nieżywotny.",
+        listOf("case.acc.f")),
+    Skill("case.gen.neg", "Dopełniacz · negacja", "Przypadki", "A2",
+        "Mam X → Nie mam + GEN", "При отрицании прямого объекта Biernik очень часто превращается в Dopełniacz.", "Не меняй только nie — поменяй весь noun phrase.",
+        listOf("case.acc.f")),
+    Skill("case.inst", "Narzędnik · z / być", "Przypadki", "A1",
+        "z + kim? czym? → INST", "После z в значении «с кем/чем» используем Narzędnik. Также: Jestem programistą.", "z moją żoną, z dobrym kolegą",
+        emptyList()),
+    Skill("case.loc", "Miejscownik · o", "Przypadki", "A2",
+        "o + kim? czym? → LOC", "После o (о ком/о чём) нужен Miejscownik.", "mówię o żonie / domu",
+        listOf("case.inst")),
+    Skill("case.dat", "Celownik · komu?", "Przypadki", "A2",
+        "daję/pomagam + DAT", "Celownik отвечает «кому? чему?». Учим через короткие устойчивые конструкции.", "Daję prezent komu?",
+        emptyList()),
+    Skill("agreement.my", "Мой, твой, его, наш, их", "Zgoda", "A2",
+        "Владелец + прилагательное + существительное", "mój, twój, nasz, wasz согласуются с существительным. jego, jej, ich не склоняются.", "moją piękną żonę → ich piękną żonę",
+        listOf("case.acc.f", "case.gen.neg")),
+    Skill("verb.present", "Czas teraźniejszy", "Czasownik", "A1",
+        "лицо × число → окончание", "Автоматизируем 6 лиц на высокочастотных глаголах.", "ja/ty/on/my/wy/oni",
+        emptyList()),
+    Skill("verb.past", "Czas przeszły", "Czasownik", "A2",
+        "основа прошедшего + род + лицо", "В прошедшем времени форма отражает род говорящего/подлежащего и лицо.", "robił-em, robiła-m, robili-śmy",
+        listOf("verb.present")),
+    Skill("verb.future", "Czas przyszły", "Czasownik", "A2",
+        "będę + инфинитив (несов.) / форма настоящего (сов.)", "Для несовершенного вида: będę robić. Совершенный вид имеет простое будущее: zrobię.", "będę czytać / kupię",
+        listOf("verb.present")),
+    Skill("aspect", "Aspekt · robić/zrobić", "Czasownik", "B1",
+        "процесс/повторение ↔ завершённый результат", "Недоконанный вид описывает процесс/повторяемость, dokonany — завершённый результат.", "robiłem vs zrobiłem",
+        listOf("verb.past", "verb.future")),
+    Skill("pronouns", "Zaimki osobowe", "Zaimki", "A2",
+        "ona → ją / jej / nią / niej", "Тренируем местоимение сразу внутри конструкции, а не как отдельную таблицу.", "widzę ją; mówię o niej; idę z nią",
+        listOf("case.inst", "case.loc")),
+    Skill("mixed", "Смешанные трансформации", "B1 Core", "B1",
+        "Лицо + время + отрицание + падеж", "Смешанные карточки проверяют, можешь ли ты объединить правила в живом предложении.", "Сначала структура, затем окончания.",
+        listOf("agreement.my", "verb.past")),
+    Skill("sentence.question", "Вопрос с Czy", "Предложение", "A1",
+        "Czy + утверждение → вопрос", "В общем вопросе czy ставится перед предложением. Падежи при этом не меняются.", "Widzisz… → Czy widzisz…?",
+        emptyList()),
+    Skill("sentence.plural", "Единственное → множественное", "Предложение", "A2",
+        "Местоимение + прилагательное + существительное → множественное число", "Во множественном числе различай мужскую личную группу и все остальные.", "mojego kolegę → moich kolegów; moją książkę → moje książki",
+        listOf("case.acc.m", "agreement.my")),
+)
