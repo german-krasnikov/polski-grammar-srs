@@ -35,7 +35,8 @@ export const realFile = (record: string) => REAL.get(record)!.file;
 export function rowsOf(record: string, ...needs: string[]) {
   const dir = mkdtempSync(join(tmpdir(), 'course-data-'));
   afterAll(() => rmSync(dir, { recursive: true, force: true }));
-  const { file: real, contract } = REAL.get(record)!, file = join(dir, basename(real)), name = basename(real);
+  /** A record no step binds to a file of its own (a part of a row, bound here only to be checked alone) is written as `<Record>.core-data` and checked against the course contract. */
+  const { file: real, contract } = REAL.get(record) ?? { file: join(PACK, `${record}.core-data`), contract: CONTRACT }, file = join(dir, basename(real)), name = basename(real);
   const bound = [record, ...needs].flatMap(each => ['--rows', each, each === record ? file : REAL.get(each)!.file]);
 
   function check(text: string) {
