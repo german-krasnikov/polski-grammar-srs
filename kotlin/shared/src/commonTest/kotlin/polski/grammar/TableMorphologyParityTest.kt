@@ -9,6 +9,7 @@ import polski.core.model.FeatureBundle
 import polski.core.model.FeatureKey
 import polski.core.model.FeatureValue
 import polski.data.adjectives
+import polski.data.generatedPlRuFormTable
 import polski.data.nouns
 import polski.data.possessives
 import polski.data.verbs
@@ -26,7 +27,6 @@ import polski.model.TenseFeature
 import polski.model.toFeatureValue
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertTrue
 
 // Manual JsonElement navigation, not @Serializable/decodeFromString — matches
 // `polski.data.CourseData`'s convention (no kotlinx-serialization compiler plugin is applied).
@@ -47,22 +47,25 @@ private fun entryCount(json: String): Int =
  * UniversalCorePlan.md §12 UC-05 acceptance: "verb/noun/adjective/possessive forms from
  * TableMorphology equal [polski.grammar]'s public morphology functions for every lexeme × feature
  * bundle (exhaustive test) and match tests/fixtures/core-golden". [TableMorphology] here is built
- * from `forms.generated.json` itself (embedded at build time by `generateFormsFixtureSource`,
- * `shared/build.gradle.kts` — scripts/build-pack.mjs's actual output, not a re-derivation), so
- * this proves both that the converter's data loads correctly through the real :core-engine
- * contract, and that every materialized form agrees with `nounForm`/`adjectiveForm`/
- * `possessiveForm`/`verbForm` (`PackMorphology.kt`, UC-08: also `TableMorphology`-backed, but a
- * separately-parsed instance — this still guards against the two ever silently diverging).
- * `scripts/build-pack.mjs --check` separately proves forms.generated.json agrees with
- * tests/fixtures/core-golden/grammar.json byte-for-byte, so this test doesn't re-load that
- * fixture — that fixture's own agreement with the live functions is `GrammarParityTest`'s job.
+ * from the form table that dsl/derive-forms.mjs derives from the typed lexicon (R1.12), and the
+ * public functions still read the engine built from `forms.generated.json` (embedded by
+ * `generateFormsFixtureSource`): the two are separate parses of separate sources, so this is the
+ * differential of the move. R1.13 makes the engine read the derived table and removes the JSON,
+ * the bridge test below and `parseForms` with it.
  */
 class TableMorphologyParityTest {
-    private val morphology: TableMorphology = TableMorphology(parseForms(generatedFormsFixtureJson))
+    private val morphology: TableMorphology = TableMorphology(generatedPlRuFormTable)
 
-    @Test fun tableMorphologyLoadsEveryEntryFromTheGeneratedFixture() {
-        val count = entryCount(generatedFormsFixtureJson)
-        assertTrue(count > 1500, "expected the full pl-ru forms table, got $count entries")
+    @Test fun tableMorphologyLoadsEveryEntryOfTheDerivedTable() {
+        val count = generatedPlRuFormTable.values.sumOf { it.size }
+        assertEquals(1560, count, "expected the full pl-ru forms table")
+    }
+
+    @Test fun theDerivedTableEqualsTheFrozenFixtureLexemeForLexemeAndFormForForm() {
+        val frozen = parseForms(generatedFormsFixtureJson)
+        assertEquals(entryCount(generatedFormsFixtureJson), generatedPlRuFormTable.values.sumOf { it.size })
+        assertEquals(frozen, generatedPlRuFormTable)
+        assertEquals(frozen.keys.toList(), generatedPlRuFormTable.keys.toList())
     }
 
     @Test fun nounFormsMatchForEveryNounNumberAndCase() {
