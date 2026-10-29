@@ -186,3 +186,18 @@ d5b187c68b5b3fc46cdc967d38197a9a8fa1fd8ee0b52841c4dadbd93de58361    13289  kotli
 90024794948af8261cc2f4f6bcd530da450dd8e5db3c372214fe84acb45193d0     8106  kotlin/shared/src/commonTest/kotlin/polski/data/CoursePackFixtureTest.kt
 ```
 
+
+## 6. W после правки commonTest (добавлено вторым коммитом, вне плана R1)
+
+Единственная причина красного JS/Wasm/K/N на базе — `VocabularySessionAcceptanceTest.kt:36`. Правка в одну строку (`toString(Charsets.UTF_8)` → `decodeToString()`, те же байты UTF-8 → тот же текст) отдельным коммитом, не частью срезов R1; без неё W не исполняется вовсе.
+Прогон на дереве `75e2324` + эта правка, каждая задача отдельным `./gradlew <задача> --rerun --console=plain` из `kotlin/` (XML свежие):
+
+| Задача | Хост | files / selected = executed | fail / error / skipped | exit |
+|---|---|---|---|---|
+| `:shared:desktopTest` | JVM desktop (Temurin 21) | 72 / 420 | 0 / 0 / 0 | 0 |
+| `:shared:jsBrowserTest` | браузер (JS, Chrome/Karma) | 68 / 410 | 0 / 0 / 0 | 0 |
+| `:shared:wasmJsBrowserTest` | браузер (Wasm, Chrome/Karma) | 68 / 410 | 0 / 0 / 0 | 0 |
+| `:shared:macosArm64Test` | Kotlin/Native macOS arm64 | 76 / 447 | 0 / 0 / 0 | 0 |
+
+Расхождение 420 (desktop) / 410 (JS, Wasm) / 447 (macOS) проверено по именам: наборы JS и Wasm совпадают; 10 тестов только desktop — классы `NJ03CourseValuePilotTest`, `NJ03PairLifetimeTest`, `StyleSourceGenericityTest`, `PolskiTextCodecTest` (source set `desktopTest`); macOS — те же 410 плюс 37 из `macosTest`.
+По-прежнему NOT RUN: `:composeApp:desktopTest` (`Main.kt:216`), `:androidApp:testDebugUnitTest` (`MainActivity.kt:209`) — нужна ветка `UiEffect.DownloadText` в обоих `when` (поведение хоста, решение вне R1); iOS simulator; Playwright; приложения iOS/macOS.
