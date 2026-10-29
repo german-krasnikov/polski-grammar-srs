@@ -1,5 +1,5 @@
 // Generated from dsl/course.data-contract
-// source-sha256=a49c1417fea1007b5851ca9b06d4e6b9468dc57422573d0a72c7696f7b45ad32
+// source-sha256=5d6c9f8692aff6787af8eb09bbcbd9fdc2305782a9b9ad05138ddf2407a8953a
 // Edit the source, then run biome generate.
 
 package polski.data.rows.plru
@@ -19,6 +19,11 @@ enum class VerbRowAspect(val tag: String) {
 enum class VerbRowFutureType(val tag: String) {
     COMPOUND("compound"),
     PRESENT("present"),
+}
+
+enum class PossessiveFormsRowKind(val tag: String) {
+    DECLINED("declined"),
+    INVARIANT("invariant"),
 }
 
 data class FocusRow(
@@ -164,6 +169,29 @@ data class VerbRow(
     val perfectivePair: String? = null,
     val present: PresentRow,
     val pastStem: PastStemRow,
+)
+
+data class PronounRow(
+    val id: String,
+    val forms: CaseFormsRow,
+)
+
+data class PossessivePluralRow(
+    val m_personal: CaseFormsRow,
+    val other: CaseFormsRow,
+)
+
+data class PossessiveFormsRow(
+    val kind: PossessiveFormsRowKind,
+    val value: String? = null,
+    val sg: GenderFormsRow? = null,
+    val pl: PossessivePluralRow? = null,
+)
+
+data class PossessiveRow(
+    val id: String,
+    val label: String,
+    val forms: PossessiveFormsRow,
 )
 
 private fun skillRowRowsPart0(): List<SkillRow> = listOf(
@@ -2231,3 +2259,400 @@ private fun verbRowRowsPart0(): List<VerbRow> = listOf(
 )
 
 val VERB_ROW_ROWS: List<VerbRow> = verbRowRowsPart0()
+
+private fun pronounRowRowsPart0(): List<PronounRow> = listOf(
+    PronounRow(
+        id = "ja",
+        forms = CaseFormsRow(
+            nom = "ja",
+            gen = "mnie",
+            dat = "mi",
+            acc = "mnie",
+            inst = "mną",
+            loc = "mnie",
+            voc = "ja",
+        ),
+    ),
+    PronounRow(
+        id = "ty",
+        forms = CaseFormsRow(
+            nom = "ty",
+            gen = "ciebie",
+            dat = "ci",
+            acc = "ciebie",
+            inst = "tobą",
+            loc = "tobie",
+            voc = "ty",
+        ),
+    ),
+    PronounRow(
+        id = "on",
+        forms = CaseFormsRow(nom = "on", gen = "go", dat = "mu", acc = "go", inst = "nim", loc = "nim", voc = "on"),
+    ),
+    PronounRow(
+        id = "ona",
+        forms = CaseFormsRow(
+            nom = "ona",
+            gen = "jej",
+            dat = "jej",
+            acc = "ją",
+            inst = "nią",
+            loc = "niej",
+            voc = "ona",
+        ),
+    ),
+    PronounRow(
+        id = "ono",
+        forms = CaseFormsRow(nom = "ono", gen = "go", dat = "mu", acc = "je", inst = "nim", loc = "nim", voc = "ono"),
+    ),
+    PronounRow(
+        id = "my",
+        forms = CaseFormsRow(nom = "my", gen = "nas", dat = "nam", acc = "nas", inst = "nami", loc = "nas", voc = "my"),
+    ),
+    PronounRow(
+        id = "wy",
+        forms = CaseFormsRow(nom = "wy", gen = "was", dat = "wam", acc = "was", inst = "wami", loc = "was", voc = "wy"),
+    ),
+    PronounRow(
+        id = "oni",
+        forms = CaseFormsRow(
+            nom = "oni",
+            gen = "ich",
+            dat = "im",
+            acc = "ich",
+            inst = "nimi",
+            loc = "nich",
+            voc = "oni",
+        ),
+    ),
+    PronounRow(
+        id = "one",
+        forms = CaseFormsRow(
+            nom = "one",
+            gen = "ich",
+            dat = "im",
+            acc = "je",
+            inst = "nimi",
+            loc = "nich",
+            voc = "one",
+        ),
+    ),
+)
+
+val PRONOUN_ROW_ROWS: List<PronounRow> = pronounRowRowsPart0()
+
+private fun possessiveRowRowsPart0(): List<PossessiveRow> = listOf(
+    PossessiveRow(
+        id = "my",
+        label = "mój — мой",
+        forms = PossessiveFormsRow(
+            kind = PossessiveFormsRowKind.DECLINED,
+            sg = GenderFormsRow(
+                m_personal = CaseFormsRow(
+                    nom = "mój",
+                    gen = "mojego",
+                    dat = "mojemu",
+                    acc = "mojego",
+                    inst = "moim",
+                    loc = "moim",
+                    voc = "mój",
+                ),
+                m_animate = CaseFormsRow(
+                    nom = "mój",
+                    gen = "mojego",
+                    dat = "mojemu",
+                    acc = "mojego",
+                    inst = "moim",
+                    loc = "moim",
+                    voc = "mój",
+                ),
+                m_inanimate = CaseFormsRow(
+                    nom = "mój",
+                    gen = "mojego",
+                    dat = "mojemu",
+                    acc = "mój",
+                    inst = "moim",
+                    loc = "moim",
+                    voc = "mój",
+                ),
+                f = CaseFormsRow(
+                    nom = "moja",
+                    gen = "mojej",
+                    dat = "mojej",
+                    acc = "moją",
+                    inst = "moją",
+                    loc = "mojej",
+                    voc = "moja",
+                ),
+                n = CaseFormsRow(
+                    nom = "moje",
+                    gen = "mojego",
+                    dat = "mojemu",
+                    acc = "moje",
+                    inst = "moim",
+                    loc = "moim",
+                    voc = "moje",
+                ),
+            ),
+            pl = PossessivePluralRow(
+                m_personal = CaseFormsRow(
+                    nom = "moi",
+                    gen = "moich",
+                    dat = "moim",
+                    acc = "moich",
+                    inst = "moimi",
+                    loc = "moich",
+                    voc = "moi",
+                ),
+                other = CaseFormsRow(
+                    nom = "moje",
+                    gen = "moich",
+                    dat = "moim",
+                    acc = "moje",
+                    inst = "moimi",
+                    loc = "moich",
+                    voc = "moje",
+                ),
+            ),
+        ),
+    ),
+    PossessiveRow(
+        id = "your",
+        label = "twój — твой",
+        forms = PossessiveFormsRow(
+            kind = PossessiveFormsRowKind.DECLINED,
+            sg = GenderFormsRow(
+                m_personal = CaseFormsRow(
+                    nom = "twój",
+                    gen = "twojego",
+                    dat = "twojemu",
+                    acc = "twojego",
+                    inst = "twoim",
+                    loc = "twoim",
+                    voc = "twój",
+                ),
+                m_animate = CaseFormsRow(
+                    nom = "twój",
+                    gen = "twojego",
+                    dat = "twojemu",
+                    acc = "twojego",
+                    inst = "twoim",
+                    loc = "twoim",
+                    voc = "twój",
+                ),
+                m_inanimate = CaseFormsRow(
+                    nom = "twój",
+                    gen = "twojego",
+                    dat = "twojemu",
+                    acc = "twój",
+                    inst = "twoim",
+                    loc = "twoim",
+                    voc = "twój",
+                ),
+                f = CaseFormsRow(
+                    nom = "twoja",
+                    gen = "twojej",
+                    dat = "twojej",
+                    acc = "twoją",
+                    inst = "twoją",
+                    loc = "twojej",
+                    voc = "twoja",
+                ),
+                n = CaseFormsRow(
+                    nom = "twoje",
+                    gen = "twojego",
+                    dat = "twojemu",
+                    acc = "twoje",
+                    inst = "twoim",
+                    loc = "twoim",
+                    voc = "twoje",
+                ),
+            ),
+            pl = PossessivePluralRow(
+                m_personal = CaseFormsRow(
+                    nom = "twoi",
+                    gen = "twoich",
+                    dat = "twoim",
+                    acc = "twoich",
+                    inst = "twoimi",
+                    loc = "twoich",
+                    voc = "twoi",
+                ),
+                other = CaseFormsRow(
+                    nom = "twoje",
+                    gen = "twoich",
+                    dat = "twoim",
+                    acc = "twoje",
+                    inst = "twoimi",
+                    loc = "twoich",
+                    voc = "twoje",
+                ),
+            ),
+        ),
+    ),
+    PossessiveRow(
+        id = "his",
+        label = "jego — его",
+        forms = PossessiveFormsRow(kind = PossessiveFormsRowKind.INVARIANT, value = "jego"),
+    ),
+    PossessiveRow(
+        id = "her",
+        label = "jej — её",
+        forms = PossessiveFormsRow(kind = PossessiveFormsRowKind.INVARIANT, value = "jej"),
+    ),
+    PossessiveRow(
+        id = "our",
+        label = "nasz — наш",
+        forms = PossessiveFormsRow(
+            kind = PossessiveFormsRowKind.DECLINED,
+            sg = GenderFormsRow(
+                m_personal = CaseFormsRow(
+                    nom = "nasz",
+                    gen = "naszego",
+                    dat = "naszemu",
+                    acc = "naszego",
+                    inst = "naszym",
+                    loc = "naszym",
+                    voc = "nasz",
+                ),
+                m_animate = CaseFormsRow(
+                    nom = "nasz",
+                    gen = "naszego",
+                    dat = "naszemu",
+                    acc = "naszego",
+                    inst = "naszym",
+                    loc = "naszym",
+                    voc = "nasz",
+                ),
+                m_inanimate = CaseFormsRow(
+                    nom = "nasz",
+                    gen = "naszego",
+                    dat = "naszemu",
+                    acc = "nasz",
+                    inst = "naszym",
+                    loc = "naszym",
+                    voc = "nasz",
+                ),
+                f = CaseFormsRow(
+                    nom = "nasza",
+                    gen = "naszej",
+                    dat = "naszej",
+                    acc = "naszą",
+                    inst = "naszą",
+                    loc = "naszej",
+                    voc = "nasza",
+                ),
+                n = CaseFormsRow(
+                    nom = "nasze",
+                    gen = "naszego",
+                    dat = "naszemu",
+                    acc = "nasze",
+                    inst = "naszym",
+                    loc = "naszym",
+                    voc = "nasze",
+                ),
+            ),
+            pl = PossessivePluralRow(
+                m_personal = CaseFormsRow(
+                    nom = "nasi",
+                    gen = "naszych",
+                    dat = "naszym",
+                    acc = "naszych",
+                    inst = "naszymi",
+                    loc = "naszych",
+                    voc = "nasi",
+                ),
+                other = CaseFormsRow(
+                    nom = "nasze",
+                    gen = "naszych",
+                    dat = "naszym",
+                    acc = "nasze",
+                    inst = "naszymi",
+                    loc = "naszych",
+                    voc = "nasze",
+                ),
+            ),
+        ),
+    ),
+    PossessiveRow(
+        id = "yourPlural",
+        label = "wasz — ваш",
+        forms = PossessiveFormsRow(
+            kind = PossessiveFormsRowKind.DECLINED,
+            sg = GenderFormsRow(
+                m_personal = CaseFormsRow(
+                    nom = "wasz",
+                    gen = "waszego",
+                    dat = "waszemu",
+                    acc = "waszego",
+                    inst = "waszym",
+                    loc = "waszym",
+                    voc = "wasz",
+                ),
+                m_animate = CaseFormsRow(
+                    nom = "wasz",
+                    gen = "waszego",
+                    dat = "waszemu",
+                    acc = "waszego",
+                    inst = "waszym",
+                    loc = "waszym",
+                    voc = "wasz",
+                ),
+                m_inanimate = CaseFormsRow(
+                    nom = "wasz",
+                    gen = "waszego",
+                    dat = "waszemu",
+                    acc = "wasz",
+                    inst = "waszym",
+                    loc = "waszym",
+                    voc = "wasz",
+                ),
+                f = CaseFormsRow(
+                    nom = "wasza",
+                    gen = "waszej",
+                    dat = "waszej",
+                    acc = "waszą",
+                    inst = "waszą",
+                    loc = "waszej",
+                    voc = "wasza",
+                ),
+                n = CaseFormsRow(
+                    nom = "wasze",
+                    gen = "waszego",
+                    dat = "waszemu",
+                    acc = "wasze",
+                    inst = "waszym",
+                    loc = "waszym",
+                    voc = "wasze",
+                ),
+            ),
+            pl = PossessivePluralRow(
+                m_personal = CaseFormsRow(
+                    nom = "wasi",
+                    gen = "waszych",
+                    dat = "waszym",
+                    acc = "waszych",
+                    inst = "waszymi",
+                    loc = "waszych",
+                    voc = "wasi",
+                ),
+                other = CaseFormsRow(
+                    nom = "wasze",
+                    gen = "waszych",
+                    dat = "waszym",
+                    acc = "wasze",
+                    inst = "waszymi",
+                    loc = "waszych",
+                    voc = "wasze",
+                ),
+            ),
+        ),
+    ),
+    PossessiveRow(
+        id = "their",
+        label = "ich — их",
+        forms = PossessiveFormsRow(kind = PossessiveFormsRowKind.INVARIANT, value = "ich"),
+    ),
+)
+
+val POSSESSIVE_ROW_ROWS: List<PossessiveRow> = possessiveRowRowsPart0()

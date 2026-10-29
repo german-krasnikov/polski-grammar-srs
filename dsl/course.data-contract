@@ -151,3 +151,29 @@ RECORD PastStemRow
   mp: string
   np: string
 END
+
+# The personal pronouns (one row each, the seven cases) and the possessives. A possessive is declined (singular by gender, plural for the
+# masculine personal group and for all the rest) or invariable (one text): the contract cannot say "one or the other", so kind says which
+# of value and sg+pl is written, and PlRuPronounRows.kt refuses any other combination.
+RECORD PronounRow KEY id COUNT 1..
+  id: string
+  forms: CaseFormsRow
+END
+
+RECORD PossessiveRow KEY id COUNT 1..
+  id: string
+  label: string
+  forms: PossessiveFormsRow
+END
+
+RECORD PossessiveFormsRow
+  kind: enum declined|invariant
+  value: string OPTIONAL
+  sg: GenderFormsRow OPTIONAL
+  pl: PossessivePluralRow OPTIONAL
+END
+
+RECORD PossessivePluralRow
+  m_personal: CaseFormsRow
+  other: CaseFormsRow
+END

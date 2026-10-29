@@ -7,9 +7,9 @@ import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { CONTRACT, PACK, biome, hasCli, realFile, row, rowsOf } from './support/course-data';
 
-/** Rows per file, from the inventory of R1Design.md section 1 (nouns 14, adjectives 7, verbs 11, skills 16, possessives 7, seeds 12; the other sections are one row). */
+/** Rows per file, from the inventory of R1Design.md section 1 (nouns 14, adjectives 7, verbs 11, skills 16, possessives 7, personalPronouns 9, seeds 12; the other sections are one row). */
 const ROWS: Record<string, number> = {
-  adjectives: 7, caseSentencePrefixes: 1, exerciseCopy: 1, exercisePatterns: 1, morphology: 1, nouns: 14, personalPronouns: 1, possessives: 7,
+  adjectives: 7, caseSentencePrefixes: 1, exerciseCopy: 1, exercisePatterns: 1, morphology: 1, nouns: 14, personalPronouns: 9, possessives: 7,
   reference: 1, sentenceSeeds: 12, skills: 16, stemAlternations: 1, training: 1, verbs: 11, vocabulary: 1,
 };
 

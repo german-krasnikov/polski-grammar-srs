@@ -1,2 +1,10 @@
 # pl-course/personalPronouns — source SHA-256: 7255e8c686ceee17...
-PRONOUNS {ja: {nom: "ja" gen: "mnie" dat: "mi" acc: "mnie" inst: "mną" loc: "mnie" voc: "ja"} ty: {nom: "ty" gen: "ciebie" dat: "ci" acc: "ciebie" inst: "tobą" loc: "tobie" voc: "ty"} on: {nom: "on" gen: "go" dat: "mu" acc: "go" inst: "nim" loc: "nim" voc: "on"} ona: {nom: "ona" gen: "jej" dat: "jej" acc: "ją" inst: "nią" loc: "niej" voc: "ona"} ono: {nom: "ono" gen: "go" dat: "mu" acc: "je" inst: "nim" loc: "nim" voc: "ono"} my: {nom: "my" gen: "nas" dat: "nam" acc: "nas" inst: "nami" loc: "nas" voc: "my"} wy: {nom: "wy" gen: "was" dat: "wam" acc: "was" inst: "wami" loc: "was" voc: "wy"} oni: {nom: "oni" gen: "ich" dat: "im" acc: "ich" inst: "nimi" loc: "nich" voc: "oni"} one: {nom: "one" gen: "ich" dat: "im" acc: "je" inst: "nimi" loc: "nich" voc: "one"}}
+PRONOUN {id: "ja" forms: {nom: "ja" gen: "mnie" dat: "mi" acc: "mnie" inst: "mną" loc: "mnie" voc: "ja"}}
+PRONOUN {id: "ty" forms: {nom: "ty" gen: "ciebie" dat: "ci" acc: "ciebie" inst: "tobą" loc: "tobie" voc: "ty"}}
+PRONOUN {id: "on" forms: {nom: "on" gen: "go" dat: "mu" acc: "go" inst: "nim" loc: "nim" voc: "on"}}
+PRONOUN {id: "ona" forms: {nom: "ona" gen: "jej" dat: "jej" acc: "ją" inst: "nią" loc: "niej" voc: "ona"}}
+PRONOUN {id: "ono" forms: {nom: "ono" gen: "go" dat: "mu" acc: "je" inst: "nim" loc: "nim" voc: "ono"}}
+PRONOUN {id: "my" forms: {nom: "my" gen: "nas" dat: "nam" acc: "nas" inst: "nami" loc: "nas" voc: "my"}}
+PRONOUN {id: "wy" forms: {nom: "wy" gen: "was" dat: "wam" acc: "was" inst: "wami" loc: "was" voc: "wy"}}
+PRONOUN {id: "oni" forms: {nom: "oni" gen: "ich" dat: "im" acc: "ich" inst: "nimi" loc: "nich" voc: "oni"}}
+PRONOUN {id: "one" forms: {nom: "one" gen: "ich" dat: "im" acc: "je" inst: "nimi" loc: "nich" voc: "one"}}

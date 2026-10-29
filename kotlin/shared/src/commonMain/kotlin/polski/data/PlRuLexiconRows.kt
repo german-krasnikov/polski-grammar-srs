@@ -23,11 +23,11 @@ internal fun VerbRow.toVerb() = Verb(
     futureType.toModel(), perfectivePair,
 )
 
-private fun CaseFormsRow.toCases() = mapOf(
+internal fun CaseFormsRow.toCases() = mapOf(
     GramCase.NOM to nom, GramCase.GEN to gen, GramCase.DAT to dat, GramCase.ACC to acc, GramCase.INST to inst, GramCase.LOC to loc, GramCase.VOC to voc,
 )
 
-private fun GenderFormsRow.toGenders() = mapOf(
+internal fun GenderFormsRow.toGenders() = mapOf(
     Gender.M_PERSONAL to m_personal.toCases(), Gender.M_ANIMATE to m_animate.toCases(), Gender.M_INANIMATE to m_inanimate.toCases(),
     Gender.F to f.toCases(), Gender.N to n.toCases(),
 )
