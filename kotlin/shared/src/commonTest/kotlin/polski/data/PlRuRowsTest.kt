@@ -2,6 +2,12 @@ package polski.data
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
+import polski.core.model.FeatureFocus
+import polski.core.model.FeatureKey
+import polski.core.model.FeatureValue
+import polski.core.model.LexicalFilter
+import polski.core.model.SkillSpec
 import polski.data.rows.plru.FeatureFocusRow
 import polski.data.rows.plru.FixedRow
 import polski.data.rows.plru.FocusRow
@@ -12,6 +18,7 @@ import polski.data.rows.plru.NativeParallelRow
 import polski.data.rows.plru.SkillRow
 import polski.data.rows.plru.SkillRowLevel
 import polski.data.rows.plru.StyleContentRow
+import polski.data.rows.plru.WhereRow
 import polski.model.Skill
 import polski.presentation.NativeParallelPair
 
@@ -58,5 +65,30 @@ class PlRuRowsTest {
     @Test fun anEmptyTextIsDataNotAbsence() {
         val content = row(StyleContentRow(rule = "", why = "")).toStyleContent()
         assertEquals("" to "", content.rule to content.why)
+    }
+
+    @Test fun aSpecTakesConstructionLevelAndPrerequisitesFromTheRow() {
+        assertEquals(SkillSpec("s", "core.c", level = "B1", prerequisites = listOf("p")), row().toSkillSpec())
+    }
+
+    @Test fun focusFixedAndFilterBecomeTheCoreTypesInTheOrderWritten() {
+        val spec = row(
+            featureFocus = FeatureFocusRow("Case", "Nom", "Acc"),
+            fixed = listOf(FixedRow("Tense", "Pres"), FixedRow("Person", "1")),
+            filter = LexicalFilterRow("noun", WhereRow(nounId = listOf("wife"), gender = listOf("m-personal", "f"))),
+        ).toSkillSpec()
+        assertEquals(FeatureFocus(FeatureKey("Case"), FeatureValue("Nom"), FeatureValue("Acc")), spec.focus)
+        assertEquals(listOf("Tense" to "Pres", "Person" to "1"), spec.fixed.map { (key, value) -> key.name to value.name })
+        assertEquals(LexicalFilter("noun", mapOf("nounId" to listOf("wife"), "gender" to listOf("m-personal", "f"))), spec.lexicalFilter)
+    }
+
+    @Test fun aFilterPropertyThatIsNotWrittenIsNotInTheFilter() {
+        val where = row(filter = LexicalFilterRow("noun", WhereRow(gender = listOf("n")))).toSkillSpec().lexicalFilter?.where
+        assertEquals(mapOf("gender" to listOf("n")), where)
+    }
+
+    @Test fun aFixedFeatureWrittenTwiceIsRefusedNotOverwritten() {
+        val twice = listOf(FixedRow("Tense", "Pres"), FixedRow("Tense", "Past"))
+        assertFailsWith<IllegalArgumentException> { row(fixed = twice).toSkillSpec() }
     }
 }
