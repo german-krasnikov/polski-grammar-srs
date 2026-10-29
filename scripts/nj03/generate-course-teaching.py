@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-"""Generate GeneratedCourseTeaching.kt: caseTeaching, verbTeaching, pronounTeaching,
-russianSupport, futureAuxiliary."""
+"""Generate GeneratedCourseTeaching.kt: pronounTeaching and russianSupport (R1.10b takes them over)."""
 from __future__ import annotations
 import sys
 from pathlib import Path
@@ -25,49 +24,8 @@ def read_tag(fname: str, tag: str) -> object:
     raise ValueError(f"{tag} not found in {fname}")
 
 
-def verb_label(vl: dict) -> str:
-    return f'VerbLabel("{ks(vl["full"])}", "{ks(vl["compact"])}")'
-
-
 def main() -> None:
     ref = read_tag("reference.core-data", "REFERENCE")
-    morph = read_tag("morphology.core-data", "MORPHOLOGY")
-
-    ct = ref["caseTeaching"]
-    cn = ct["caseNote"]
-    case_teaching_kt = (f'CaseTeaching("{ks(cn["react"])}", "{ks(cn["compact"])}", '
-                        f'"{ks(ct["comparisonReadingHint"])}")')
-
-    # VerbTeaching
-    vt = ref["verbTeaching"]
-    subj_list = []
-    for s in vt["subjects"]:
-        gm = s.get("genderMode", "fixed")
-        selected = "true" if gm == "selected" else "false"
-        person_map = {"1": "FIRST", "2": "SECOND", "3": "THIRD"}
-        person_kt = f'Person.{person_map[str(s["person"])]}'
-        number_kt = f'NumberGram.fromId("{ks(s["number"])}")'
-        gender_raw = s.get("fixedGender")
-        gender_kt = f'Gender.fromId("{ks(gender_raw)}")' if gender_raw else "null"
-        subj_list.append(
-            f'VerbSubject("{ks(s["id"])}", {person_kt}, {number_kt}, '
-            f'{selected}, {gender_kt}, {verb_label(s["label"])})'
-        )
-    go_list = [f'VerbGenderOption("{ks(g["id"])}", {verb_label(g["label"])})' for g in vt["genderOptions"]]
-    tense_map_entries = []
-    tense_kotlin = {"present": "Tense.PRESENT", "past": "Tense.PAST", "future": "Tense.FUTURE"}
-    for t_id, t_label in vt["tenseLabels"].items():
-        tense_map_entries.append(f'{tense_kotlin[t_id]} to {verb_label(t_label)}')
-    fu_exp = vt.get("futureExplanation", {})
-    fu_react = ks(fu_exp.get("react", "")) if isinstance(fu_exp, dict) else ""
-    fu_compact = ks(fu_exp.get("compact", "")) if isinstance(fu_exp, dict) else ""
-    verb_teaching_kt = (
-        f'VerbTeaching(listOf({", ".join(subj_list)}), '
-        f'{verb_label(vt["genderControlLabel"])}, '
-        f'listOf({", ".join(go_list)}), '
-        f'mapOf({", ".join(tense_map_entries)}), '
-        f'"{fu_react}", "{fu_compact}")'
-    )
 
     # PronounTeaching
     pt = ref["pronounTeaching"]
@@ -146,34 +104,18 @@ def main() -> None:
         full_title = compact_title = ks(rs_title)
     russian_support_kt = (f'RussianSupport("{full_title}", "{compact_title}", listOf({cols}), listOf({", ".join(rs_rows)}))')
 
-        # FutureAuxiliary
-    fa = morph.get("futureAuxiliary", {})
-    fa_verb = fa.get("verbId", "be")
-    fa_forms = fa.get("forms", {})
-    num_entries = []
-    for num_id, persons in fa_forms.items():
-        p_entries = ", ".join(f'Person.fromId({int(p)}) to "{ks(form)}"' for p, form in persons.items())
-        num_entries.append(f'NumberGram.fromId("{ks(num_id)}") to mapOf({p_entries})')
-    future_aux_kt = f'FutureAuxiliary("{ks(fa_verb)}", mapOf({", ".join(num_entries)}))'
-
     content = f"""\
 // Generated from courses-biome/pl-ru/; do not edit.
 package polski.data
 
-import polski.model.Gender
 import polski.model.GramCase
 import polski.model.NumberGram
-import polski.model.Person
 import polski.model.PossessiveId
-import polski.model.Tense
 import polski.presentation.ContrastPair
 import polski.presentation.EndingPart
 
-internal val generatedPlRuCaseTeaching: CaseTeaching = {case_teaching_kt}
-internal val generatedPlRuVerbTeaching: VerbTeaching = {verb_teaching_kt}
 internal val generatedPlRuPronounTeaching: PronounTeaching = {pron_teaching_kt}
 internal val generatedPlRuRussianSupport: RussianSupport = {russian_support_kt}
-internal val generatedPlRuFutureAuxiliary: FutureAuxiliary = {future_aux_kt}
 """
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(content, encoding="utf-8")

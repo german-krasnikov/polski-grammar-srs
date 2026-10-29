@@ -32,7 +32,7 @@ internal fun GenderFormsRow.toGenders() = mapOf(
     Gender.F to f.toCases(), Gender.N to n.toCases(),
 )
 
-private fun PresentRow.toPersons() = mapOf(NumberGram.SG to sg.toPersons(), NumberGram.PL to pl.toPersons())
+internal fun PresentRow.toPersons() = mapOf(NumberGram.SG to sg.toPersons(), NumberGram.PL to pl.toPersons())
 
 private fun PersonFormsRow.toPersons() = mapOf(Person.FIRST to p1, Person.SECOND to p2, Person.THIRD to p3)
 

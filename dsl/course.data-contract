@@ -256,8 +256,9 @@ RECORD StemAlternationRow COUNT 1..
 END
 
 # The reference content of the matrix screens, one row: the texts, the case table, the tables of the chain, the tenses, the aspects and the
-# accusative of the masculine, the system cards and the pipeline. The four teaching texts (caseTeaching, verbTeaching, pronounTeaching,
-# russianSupport) are `any` until R1.10 types them. Records are named Ref... so no class meets a domain class of the same name in the export.
+# accusative of the masculine, the system cards and the pipeline, and the teaching texts. The teaching of the pronouns and the Russian support
+# (pronounTeaching, russianSupport) are `any` until R1.10b types them. The reference records are named Ref... so no class meets a domain class
+# of the same name in the export.
 RECORD ReferenceRow COUNT 1
   matrixIntroduction: string
   webCaseCompositionHeader: string
@@ -273,8 +274,8 @@ RECORD ReferenceRow COUNT 1
   maleAccRows: [RefMaleAccRow]
   systemCards: [RefSystemCardRow]
   pipeline: RefPipelineRow
-  caseTeaching: any
-  verbTeaching: any
+  caseTeaching: CaseTeachingRow
+  verbTeaching: VerbTeachingRow
   pronounTeaching: any
   russianSupport: any
 END
@@ -361,4 +362,53 @@ RECORD RefPipelineStepRow
   label: string
   question: string
   example: string
+END
+
+# The teaching texts of the case table and of the verb table, and the auxiliary of the future. A verb subject is selected (the learner picks the
+# gender) or fixed (it has one): the contract cannot say "fixedGender exactly when fixed", so PlRuTeachingRows.kt does.
+RECORD FullCompactRow
+  full: string
+  compact: string
+END
+
+RECORD CaseTeachingRow
+  caseNote: ReactCompactRow
+  comparisonReadingHint: string
+END
+
+RECORD VerbTeachingRow
+  subjects: [VerbSubjectRow]
+  genderControlLabel: FullCompactRow
+  genderOptions: [VerbGenderOptionRow]
+  tenseLabels: TenseLabelsRow
+  futureExplanation: ReactCompactRow
+END
+
+RECORD VerbSubjectRow
+  id: string
+  person: int
+  number: string
+  genderMode: enum selected|fixed
+  fixedGender: string OPTIONAL
+  label: FullCompactRow
+END
+
+RECORD VerbGenderOptionRow
+  id: string
+  label: FullCompactRow
+END
+
+RECORD TenseLabelsRow
+  present: FullCompactRow
+  past: FullCompactRow
+  future: FullCompactRow
+END
+
+RECORD MorphologyRow COUNT 1
+  futureAuxiliary: FutureAuxiliaryRow
+END
+
+RECORD FutureAuxiliaryRow
+  verbId: ref VerbRow
+  forms: PresentRow
 END

@@ -1,5 +1,5 @@
 // Generated from dsl/course.data-contract
-// source-sha256=a5e64708fa49fd0038acae11dc56795af42632b5d16acfcbdc392a4746a9fd40
+// source-sha256=82d9960427c8207a199c4b5c8b50522638f9dc7295d6d2a194f404c9cb591bb4
 // Edit the source, then run biome generate.
 
 package polski.data.rows.plru
@@ -24,6 +24,11 @@ enum class VerbRowFutureType(val tag: String) {
 enum class PossessiveFormsRowKind(val tag: String) {
     DECLINED("declined"),
     INVARIANT("invariant"),
+}
+
+enum class VerbSubjectRowGenderMode(val tag: String) {
+    SELECTED("selected"),
+    FIXED("fixed"),
 }
 
 data class FocusRow(
@@ -347,6 +352,44 @@ data class RefPipelineRow(
     val compactExample: String,
 )
 
+data class CaseTeachingRow(
+    val caseNote: ReactCompactRow,
+    val comparisonReadingHint: String,
+)
+
+data class FullCompactRow(
+    val full: String,
+    val compact: String,
+)
+
+data class VerbSubjectRow(
+    val id: String,
+    val person: Int,
+    val number: String,
+    val genderMode: VerbSubjectRowGenderMode,
+    val fixedGender: String? = null,
+    val label: FullCompactRow,
+)
+
+data class VerbGenderOptionRow(
+    val id: String,
+    val label: FullCompactRow,
+)
+
+data class TenseLabelsRow(
+    val present: FullCompactRow,
+    val past: FullCompactRow,
+    val future: FullCompactRow,
+)
+
+data class VerbTeachingRow(
+    val subjects: List<VerbSubjectRow>,
+    val genderControlLabel: FullCompactRow,
+    val genderOptions: List<VerbGenderOptionRow>,
+    val tenseLabels: TenseLabelsRow,
+    val futureExplanation: ReactCompactRow,
+)
+
 data class ReferenceRow(
     val matrixIntroduction: String,
     val webCaseCompositionHeader: String,
@@ -362,10 +405,19 @@ data class ReferenceRow(
     val maleAccRows: List<RefMaleAccRow>,
     val systemCards: List<RefSystemCardRow>,
     val pipeline: RefPipelineRow,
-    val caseTeaching: Any?,
-    val verbTeaching: Any?,
+    val caseTeaching: CaseTeachingRow,
+    val verbTeaching: VerbTeachingRow,
     val pronounTeaching: Any?,
     val russianSupport: Any?,
+)
+
+data class FutureAuxiliaryRow(
+    val verbId: String,
+    val forms: PresentRow,
+)
+
+data class MorphologyRow(
+    val futureAuxiliary: FutureAuxiliaryRow,
 )
 
 private fun skillRowRowsPart0(): List<SkillRow> = listOf(
@@ -3591,100 +3643,103 @@ private fun referenceRowRowsPart0(): List<ReferenceRow> = listOf(
             ),
             compactExample = "widzę → Biernik → moją + piękną + żonę",
         ),
-        caseTeaching = mapOf(
-            "caseNote" to mapOf(
-                "react" to "Wołacz показан как форма обращения; с неодушевлёнными словами обычно используется только стилистически. «Zachwycam się…» = «Восхищаюсь…» (Narzędnik), «Przyglądam się…» — Celownik.",
-                "compact" to "Wołacz — форма обращения. «Zachwycam się…» требует Narzędnik; «Przyglądam się…» — Celownik.",
+        caseTeaching = CaseTeachingRow(
+            caseNote = ReactCompactRow(
+                react = "Wołacz показан как форма обращения; с неодушевлёнными словами обычно используется только стилистически. «Zachwycam się…» = «Восхищаюсь…» (Narzędnik), «Przyglądam się…» — Celownik.",
+                compact = "Wołacz — форма обращения. «Zachwycam się…» требует Narzędnik; «Przyglądam się…» — Celownik.",
             ),
-            "comparisonReadingHint" to "Читай по строке, чтобы сравнить типы. По столбцу — чтобы увидеть все формы одного слова.",
+            comparisonReadingHint = "Читай по строке, чтобы сравнить типы. По столбцу — чтобы увидеть все формы одного слова.",
         ),
-        verbTeaching = mapOf(
-            "subjects" to listOf(
-                mapOf(
-                    "id" to "ja",
-                    "person" to 1,
-                    "number" to "sg",
-                    "genderMode" to "selected",
-                    "label" to mapOf("full" to "ja — я", "compact" to "ja — я"),
+        verbTeaching = VerbTeachingRow(
+            subjects = listOf(
+                VerbSubjectRow(
+                    id = "ja",
+                    person = 1,
+                    number = "sg",
+                    genderMode = VerbSubjectRowGenderMode.SELECTED,
+                    label = FullCompactRow(full = "ja — я", compact = "ja — я"),
                 ),
-                mapOf(
-                    "id" to "ty",
-                    "person" to 2,
-                    "number" to "sg",
-                    "genderMode" to "selected",
-                    "label" to mapOf("full" to "ty — ты", "compact" to "ty — ты"),
+                VerbSubjectRow(
+                    id = "ty",
+                    person = 2,
+                    number = "sg",
+                    genderMode = VerbSubjectRowGenderMode.SELECTED,
+                    label = FullCompactRow(full = "ty — ты", compact = "ty — ты"),
                 ),
-                mapOf(
-                    "id" to "on",
-                    "person" to 3,
-                    "number" to "sg",
-                    "genderMode" to "fixed",
-                    "fixedGender" to "m-personal",
-                    "label" to mapOf("full" to "on — он", "compact" to "on — он"),
+                VerbSubjectRow(
+                    id = "on",
+                    person = 3,
+                    number = "sg",
+                    genderMode = VerbSubjectRowGenderMode.FIXED,
+                    fixedGender = "m-personal",
+                    label = FullCompactRow(full = "on — он", compact = "on — он"),
                 ),
-                mapOf(
-                    "id" to "ona",
-                    "person" to 3,
-                    "number" to "sg",
-                    "genderMode" to "fixed",
-                    "fixedGender" to "f",
-                    "label" to mapOf("full" to "ona — она", "compact" to "ona — она"),
+                VerbSubjectRow(
+                    id = "ona",
+                    person = 3,
+                    number = "sg",
+                    genderMode = VerbSubjectRowGenderMode.FIXED,
+                    fixedGender = "f",
+                    label = FullCompactRow(full = "ona — она", compact = "ona — она"),
                 ),
-                mapOf(
-                    "id" to "ono",
-                    "person" to 3,
-                    "number" to "sg",
-                    "genderMode" to "fixed",
-                    "fixedGender" to "n",
-                    "label" to mapOf("full" to "ono — оно", "compact" to "ono — оно"),
+                VerbSubjectRow(
+                    id = "ono",
+                    person = 3,
+                    number = "sg",
+                    genderMode = VerbSubjectRowGenderMode.FIXED,
+                    fixedGender = "n",
+                    label = FullCompactRow(full = "ono — оно", compact = "ono — оно"),
                 ),
-                mapOf(
-                    "id" to "my",
-                    "person" to 1,
-                    "number" to "pl",
-                    "genderMode" to "selected",
-                    "label" to mapOf("full" to "my — мы", "compact" to "my — мы"),
+                VerbSubjectRow(
+                    id = "my",
+                    person = 1,
+                    number = "pl",
+                    genderMode = VerbSubjectRowGenderMode.SELECTED,
+                    label = FullCompactRow(full = "my — мы", compact = "my — мы"),
                 ),
-                mapOf(
-                    "id" to "wy",
-                    "person" to 2,
-                    "number" to "pl",
-                    "genderMode" to "selected",
-                    "label" to mapOf("full" to "wy — вы", "compact" to "wy — вы"),
+                VerbSubjectRow(
+                    id = "wy",
+                    person = 2,
+                    number = "pl",
+                    genderMode = VerbSubjectRowGenderMode.SELECTED,
+                    label = FullCompactRow(full = "wy — вы", compact = "wy — вы"),
                 ),
-                mapOf(
-                    "id" to "oni",
-                    "person" to 3,
-                    "number" to "pl",
-                    "genderMode" to "fixed",
-                    "fixedGender" to "m-personal",
-                    "label" to mapOf("full" to "oni — мужская личная группа", "compact" to "oni — мужская группа"),
+                VerbSubjectRow(
+                    id = "oni",
+                    person = 3,
+                    number = "pl",
+                    genderMode = VerbSubjectRowGenderMode.FIXED,
+                    fixedGender = "m-personal",
+                    label = FullCompactRow(full = "oni — мужская личная группа", compact = "oni — мужская группа"),
                 ),
-                mapOf(
-                    "id" to "one",
-                    "person" to 3,
-                    "number" to "pl",
-                    "genderMode" to "fixed",
-                    "fixedGender" to "f",
-                    "label" to mapOf("full" to "one — остальные", "compact" to "one — остальные"),
+                VerbSubjectRow(
+                    id = "one",
+                    person = 3,
+                    number = "pl",
+                    genderMode = VerbSubjectRowGenderMode.FIXED,
+                    fixedGender = "f",
+                    label = FullCompactRow(full = "one — остальные", compact = "one — остальные"),
                 ),
             ),
-            "genderControlLabel" to mapOf("full" to "Род для ja / ty / my / wy", "compact" to "Род"),
-            "genderOptions" to listOf(
-                mapOf(
-                    "id" to "m",
-                    "label" to mapOf("full" to "Мужской / мужская личная группа", "compact" to "Мужской"),
+            genderControlLabel = FullCompactRow(full = "Род для ja / ty / my / wy", compact = "Род"),
+            genderOptions = listOf(
+                VerbGenderOptionRow(
+                    id = "m",
+                    label = FullCompactRow(full = "Мужской / мужская личная группа", compact = "Мужской"),
                 ),
-                mapOf("id" to "f", "label" to mapOf("full" to "Женский / женская группа", "compact" to "Женский")),
+                VerbGenderOptionRow(
+                    id = "f",
+                    label = FullCompactRow(full = "Женский / женская группа", compact = "Женский"),
+                ),
             ),
-            "tenseLabels" to mapOf(
-                "present" to mapOf("full" to "Teraz · сейчас", "compact" to "Teraz"),
-                "past" to mapOf("full" to "Przeszłość · прошлое", "compact" to "Przeszłość"),
-                "future" to mapOf("full" to "Przyszłość · будущее", "compact" to "Przyszłość"),
+            tenseLabels = TenseLabelsRow(
+                present = FullCompactRow(full = "Teraz · сейчас", compact = "Teraz"),
+                past = FullCompactRow(full = "Przeszłość · прошлое", compact = "Przeszłość"),
+                future = FullCompactRow(full = "Przyszłość · будущее", compact = "Przyszłość"),
             ),
-            "futureExplanation" to mapOf(
-                "react" to "Составное будущее: będę + инфинитив (będę robić) или форма на -ł с родом и числом (będę robił / robiła). У być: będę, без второго глагола.",
-                "compact" to "Составное будущее: będę + инфинитив или форма на -ł. У być: będę, без второго глагола.",
+            futureExplanation = ReactCompactRow(
+                react = "Составное будущее: będę + инфинитив (będę robić) или форма на -ł с родом и числом (będę robił / robiła). У być: będę, без второго глагола.",
+                compact = "Составное будущее: będę + инфинитив или форма на -ł. У być: będę, без второго глагола.",
             ),
         ),
         pronounTeaching = mapOf(
@@ -3920,3 +3975,17 @@ private fun referenceRowRowsPart0(): List<ReferenceRow> = listOf(
 )
 
 val REFERENCE_ROW_ROWS: List<ReferenceRow> = referenceRowRowsPart0()
+
+private fun morphologyRowRowsPart0(): List<MorphologyRow> = listOf(
+    MorphologyRow(
+        futureAuxiliary = FutureAuxiliaryRow(
+            verbId = "be",
+            forms = PresentRow(
+                sg = PersonFormsRow(p1 = "będę", p2 = "będziesz", p3 = "będzie"),
+                pl = PersonFormsRow(p1 = "będziemy", p2 = "będziecie", p3 = "będą"),
+            ),
+        ),
+    ),
+)
+
+val MORPHOLOGY_ROW_ROWS: List<MorphologyRow> = morphologyRowRowsPart0()
