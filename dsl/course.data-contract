@@ -40,7 +40,7 @@ RECORD MethodRow
 END
 
 # The axis a skill drills (null: no single feature flip), the axes it holds fixed (the features are an open catalog, so pairs, not fields),
-# and the candidates it draws from: each property of `where` names the values a candidate must have. nounId is [string] until R1.5 has the nouns.
+# and the candidates it draws from: each property of `where` names the values a candidate must have; a nounId is the id of a noun.
 RECORD FeatureFocusRow
   feature: string
   from: string
@@ -58,7 +58,7 @@ RECORD LexicalFilterRow
 END
 
 RECORD WhereRow
-  nounId: [string] OPTIONAL
+  nounId: [ref NounRow] OPTIONAL
   gender: [string] OPTIONAL
 END
 
@@ -75,4 +75,79 @@ RECORD NativeParallelRow
   target: string
   note: string
   matches: bool
+END
+
+# The lexicon: nouns (the seven cases in both numbers), adjectives (all five genders in both numbers) and verbs (present in both numbers, the past stem).
+# The ids of the model stay as they are (gender "m-personal"). A key of a record is an identifier, so the genders are written m_personal.. and the persons p1..p3 (R1Design.md D4).
+RECORD NounRow KEY id COUNT 1..
+  id: string
+  lemma: string
+  meaning: string
+  gender: string
+  forms: NounFormsRow
+END
+
+RECORD NounFormsRow
+  sg: CaseFormsRow
+  pl: CaseFormsRow
+END
+
+RECORD CaseFormsRow
+  nom: string
+  gen: string
+  dat: string
+  acc: string
+  inst: string
+  loc: string
+  voc: string
+END
+
+RECORD AdjectiveRow KEY id COUNT 1..
+  id: string
+  lemma: string
+  meaning: string
+  forms: AdjectiveFormsRow
+END
+
+RECORD AdjectiveFormsRow
+  sg: GenderFormsRow
+  pl: GenderFormsRow
+END
+
+RECORD GenderFormsRow
+  m_personal: CaseFormsRow
+  m_animate: CaseFormsRow
+  m_inanimate: CaseFormsRow
+  f: CaseFormsRow
+  n: CaseFormsRow
+END
+
+RECORD VerbRow KEY id COUNT 1..
+  id: string
+  lemma: string
+  meaning: string
+  aspect: enum imperfective|perfective
+  futureType: enum compound|present
+  perfectivePair: ref VerbRow OPTIONAL
+  present: PresentRow
+  pastStem: PastStemRow
+END
+
+RECORD PresentRow
+  sg: PersonFormsRow
+  pl: PersonFormsRow
+END
+
+RECORD PersonFormsRow
+  p1: string
+  p2: string
+  p3: string
+END
+
+RECORD PastStemRow
+  m: string
+  f: string
+  n: string
+  mp: string
+  np: string
 END

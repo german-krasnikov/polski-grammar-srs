@@ -2,4 +2,4 @@ TOOLCHAIN 61cc0c34fc4ed872a24ca87d320d6b369b0eb1e1
 # The course data of the packs (R1): .core-data rows checked against course.data-contract and printed as Kotlin rows (kotlin/shared/src/commonMain/generated).
 # Run: node <biome> generate --project dsl/biome.project     Check: node <biome> generate --check --project dsl/biome.project
 CONTRACT course FROM course.data-contract
-GENERATE course-plru data --contract course --rows SkillRow {dir}/../courses-biome/pl-ru/skills.core-data --target kt --kt-package polski.data.rows.plru --out {dir}/../kotlin/shared/src/commonMain/generated/kotlin/polski/data/rows/plru/CourseRows.kt
+GENERATE course-plru data --contract course --rows SkillRow {dir}/../courses-biome/pl-ru/skills.core-data --rows NounRow {dir}/../courses-biome/pl-ru/nouns.core-data --rows AdjectiveRow {dir}/../courses-biome/pl-ru/adjectives.core-data --rows VerbRow {dir}/../courses-biome/pl-ru/verbs.core-data --target kt --kt-package polski.data.rows.plru --out {dir}/../kotlin/shared/src/commonMain/generated/kotlin/polski/data/rows/plru/CourseRows.kt

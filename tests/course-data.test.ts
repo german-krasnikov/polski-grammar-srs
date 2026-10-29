@@ -53,7 +53,7 @@ describe.skipIf(!existsSync(cli))('skill rows against dsl/course.data-contract',
   /** `biome data check` over the rows: its exit status and each problem as `file:line:col: CODE`. */
   function check(text: string) {
     writeFileSync(FILE, text);
-    const run = biome('check', '--contract', CONTRACT, '--rows', 'SkillRow', FILE);
+    const run = biome('check', '--contract', CONTRACT, '--rows', 'SkillRow', FILE, '--rows', 'NounRow', join(PACK, 'nouns.core-data'));
     return { status: run.status, problems: run.stderr.split('\n').flatMap(line => line.replace(FILE, 'skills.core-data').match(/^skills\.core-data:\d+:\d+: DATA_\w+/) ?? []) };
   }
   /** One problem expected: `needle` is found by JS in row `row`, so the column is counted in UTF-16 units without asking the tool. */
@@ -95,9 +95,9 @@ describe.skipIf(!existsSync(cli))('skill rows against dsl/course.data-contract',
     expect(check(`SKILL {\n${lines.join('\n')}\n}\n`)).toEqual({ status: 0, problems: [] });
   });
   it('the real pl-ru skills pass: 16 rows, no problem', () => {
-    const run = biome('check', '--contract', CONTRACT, '--rows', 'SkillRow', join(PACK, 'skills.core-data'));
+    const run = biome('check', '--contract', CONTRACT, '--rows', 'SkillRow', join(PACK, 'skills.core-data'), '--rows', 'NounRow', join(PACK, 'nouns.core-data'));
     expect(run.status).toBe(0);
-    expect(run.stdout).toContain('16 row(s) of 1 record(s), 0 problem(s)');
+    expect(run.stdout).toContain('SkillRow 16 row(s)');
   });
 
   /** The text of a Kotlin string literal body (\t \b \n \r \' \" \\ \$ \uXXXX); an unescaped `$name` or `${` would be a template, so it throws. */
@@ -125,7 +125,7 @@ describe.skipIf(!existsSync(cli))('skill rows against dsl/course.data-contract',
     const quoted = '"' + title.replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\t/g, '\\t') + '"';
     writeFileSync(FILE, skill('a', { title: quoted }) + '\n');
     const out = join(dir, 'CourseRows.kt');
-    const run = biome('generate', '--contract', CONTRACT, '--rows', 'SkillRow', FILE, '--target', 'kt', '--kt-package', 'edge.rows', '--out', out);
+    const run = biome('generate', '--contract', CONTRACT, '--rows', 'SkillRow', FILE, '--rows', 'NounRow', join(PACK, 'nouns.core-data'), '--target', 'kt', '--kt-package', 'edge.rows', '--out', out);
     expect(run.status, run.stderr).toBe(0);
     const printed = readFileSync(out, 'utf8').match(/^\s+title = "(.*)",$/m);
     expect(printed, 'a title line').not.toBeNull();
