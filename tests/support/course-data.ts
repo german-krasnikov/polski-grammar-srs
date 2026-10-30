@@ -17,29 +17,34 @@ const project = readFileSync(join(repo, 'dsl/biome.project'), 'utf8');
 const CONTRACTS = new Map([...project.matchAll(/^CONTRACT (\S+) FROM (\S+)/gm)].map(match => [match[1], join(repo, 'dsl', match[2])]));
 /** The contract (of the CONTRACT lines of the project) that declares a record no data step binds: the part of a row, or the rows a derive step makes. */
 const contractOf = (record: string) => [...CONTRACTS.values()].find(file => new RegExp(`^RECORD ${record}\\b`, 'm').test(readFileSync(file, 'utf8')))!;
-/** For each record: its real file and the contract of the data step that binds it (`--rows <Record> <file>` and `--contract <name>`). */
-const REAL = new Map<string, { file: string; contract: string }>();
+/** For each data step, the records it binds: their real files and the contract of the step (`--rows <Record> <file>` and `--contract <name>`). Two packs bind the same record to files of their own. */
+const STEPS = new Map<string, Map<string, { file: string; contract: string }>>();
 for (const step of project.split('\n').filter(line => /^GENERATE \S+ data /.test(line))) {
-  const contract = CONTRACTS.get(step.match(/--contract (\S+)/)![1])!;
-  for (const match of step.matchAll(/--rows (\w+) \{dir\}\/\.\.\/(\S+)/g)) REAL.set(match[1], { file: join(repo, match[2]), contract });
+  const contract = CONTRACTS.get(step.match(/--contract (\S+)/)![1])!, records = new Map<string, { file: string; contract: string }>();
+  for (const match of step.matchAll(/--rows (\w+) \{dir\}\/\.\.\/(\S+)/g)) records.set(match[1], { file: join(repo, match[2]), contract });
+  STEPS.set(step.split(' ')[1], records);
 }
+/** The binding of a record in a step, or in the first step that binds it (a record only one step knows, like FrequencyRow). */
+const binding = (step: string, record: string) => STEPS.get(step)?.get(record) ?? [...STEPS.values()].map(records => records.get(record)).find(Boolean);
 
 export const biome = (...args: string[]) => spawnSync(process.execPath, [cli, ...args], { encoding: 'utf8' });
 
 /** The real file of a record, as the data step of dsl/biome.project binds it. */
-export const realFile = (record: string) => REAL.get(record)!.file;
+export const realFile = (record: string) => binding('course-plru', record)!.file;
 
 /**
  * `biome data check` of rows the test writes for one record, with the real files of the records it needs bound as the step binds them
  * (a `ref` needs its target). The written file keeps the real file's name, so a problem reads `nouns.core-data:2:5: DATA_REQUIRED`;
  * a problem in a real file shows too, under its own name.
  */
-export function rowsOf(record: string, ...needs: string[]) {
+export const rowsOf = (record: string, ...needs: string[]) => rowsIn('course-plru', record, ...needs);
+/** The same for the files that the data step `step` binds (`course-plru` or `course-enru`): a record of both packs has a file in each. */
+export function rowsIn(step: string, record: string, ...needs: string[]) {
   const dir = mkdtempSync(join(tmpdir(), 'course-data-'));
   afterAll(() => rmSync(dir, { recursive: true, force: true }));
   /** A record no step binds to a file of its own (a part of a row, bound here only to be checked alone) is written as `<Record>.core-data` and checked against the contract that declares it. */
-  const { file: real, contract } = REAL.get(record) ?? { file: join(PACK, `${record}.core-data`), contract: contractOf(record) }, file = join(dir, basename(real)), name = basename(real);
-  const bound = [record, ...needs].flatMap(each => ['--rows', each, each === record ? file : REAL.get(each)!.file]);
+  const { file: real, contract } = binding(step, record) ?? { file: join(PACK, `${record}.core-data`), contract: contractOf(record) }, file = join(dir, basename(real)), name = basename(real);
+  const bound = [record, ...needs].flatMap(each => ['--rows', each, each === record ? file : binding(step, each)!.file]);
 
   function check(text: string) {
     writeFileSync(file, text);
