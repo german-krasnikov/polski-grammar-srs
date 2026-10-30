@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import subprocess
 from pathlib import Path
 
 
@@ -25,6 +26,8 @@ EXPECTED_FORMS = (
     ("Of", "of"),
 )
 FIXTURE = "tests/fixtures/nj03-preposition/"
+# courses/lang/en/prepositions.json left the tree in R1.17; its bytes are read from the commit that still has it, and the SHA-256 in the corpus is checked on them.
+OLD_SOURCES_REV = "7358aeb72ab79dce80fca1faadba6be64892fa18"
 
 
 def require(condition: bool, message: str) -> None:
@@ -40,9 +43,12 @@ def verify_seal(data: bytes, expected: str, label: str) -> None:
     require(digest(data) == expected, f"stale/tampered {label}: SHA-256 differs")
 
 
-def sealed(relative: str, expected: str) -> bytes:
-    path = ROOT / relative
-    data = path.read_bytes()
+def old_source(relative: str) -> bytes:
+    return subprocess.run(["git", "show", f"{OLD_SOURCES_REV}:{relative}"], cwd=ROOT, check=True, capture_output=True).stdout
+
+
+def sealed(relative: str, expected: str, *, old: bool = False) -> bytes:
+    data = old_source(relative) if old else (ROOT / relative).read_bytes()
     verify_seal(data, expected, relative)
     require(b"\r" not in data and data.endswith(b"\n"), f"{relative}: expected UTF-8 LF")
     data.decode("utf-8", errors="strict")
@@ -101,7 +107,7 @@ def check() -> None:
     require(historical_path == "courses/lang/en/prepositions.json", "wrong historical input")
     require(profile_path == "courses/lang/en/lang.json", "wrong historical profile")
     require(source_path == FIXTURE + "role.core-data", "wrong typed fixture")
-    historical = json.loads(sealed(historical_path, historical_sha))  # old authored input, read only
+    historical = json.loads(sealed(historical_path, historical_sha, old=True))  # old authored input, read from git
     profile = json.loads(sealed(profile_path, profile_sha))  # old authored input, read only
     require(len(historical["prepositions"]) == 1, "old preposition row count changed")
     old = historical["prepositions"][0]
@@ -157,7 +163,7 @@ def check() -> None:
     # In-memory tamper controls: no temporary application format or generated output is written.
     for label, data, sha in (
         ("corpus", corpus_bytes, CORPUS_SHA256),
-        ("historical", (ROOT / historical_path).read_bytes(), historical_sha),
+        ("historical", old_source(historical_path), historical_sha),
         ("profile", (ROOT / profile_path).read_bytes(), profile_sha),
         ("positive", positive_bytes, source_sha),
         ("negative", (ROOT / (FIXTURE + "wrong-type.core-data")).read_bytes(), next(row[2] for row in table["NEGATIVE"] if row[0] == "wrong-type")),

@@ -21,7 +21,7 @@ Frequency rank and language-learning level answer different questions, same as f
 
 ## Skill and exercise content (EnRuPackPlan.md §6 EN-17)
 
-The English/Russian skill texts in `courses/pairs/en-ru/pair.json` — `formula`/`theory`/`hint`, the `logic`/`situations` method prose, `styleContent` (`examples`/`why`, and the `nativeParallel` pairs the plan itself specifies for `role.object`/`polarity.present`/`verb.presentContinuous`/`mood.question`/`possessive.my`/`role.location`) and every `exerciseCopy`/`exercisePatterns` string — were authored for this course, the same "project-authored" status `pl-ru/ATTRIBUTION.md` records for its own skill texts. `vocabulary-editorial.json`'s 30 approved cards record their own per-field provenance and `reviewSources` individually; this file does not restate them.
+The English/Russian skill texts in `courses-biome/en-ru/skills.core-data` (until R1.17 `courses/pairs/en-ru/pair.json`) — `formula`/`theory`/`hint`, the `logic`/`situations` method prose, `styleContent` (`examples`/`why`, and the `nativeParallel` pairs the plan itself specifies for `role.object`/`polarity.present`/`verb.presentContinuous`/`mood.question`/`possessive.my`/`role.location`) and every `exerciseCopy`/`exercisePatterns` string (`exerciseCopy.core-data`, `exercisePatterns.core-data`) — were authored for this course, the same "project-authored" status `pl-ru/ATTRIBUTION.md` records for its own skill texts. `vocabulary-editorial.json`'s 30 approved cards record their own per-field provenance and `reviewSources` individually; this file does not restate them.
 
 ## Known extraction artifacts (linguist self-check, 2026-09-28)
 

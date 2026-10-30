@@ -1,8 +1,8 @@
 // EnRuPackPlan.md §4/§6 EN-19: validates a pair's lifehacks.json (pair-scoped L1-transfer tips,
 // outside core per ADR-15) against lifehacks-v1.schema.json, plus the cross-checks that schema
 // alone cannot express: `pairId` matches the file's own directory, every `id` is globally unique
-// and prefixed with that pairId, a non-null `skillId` resolves against the target language's own
-// curriculum.json (so a lifehack can never point at a skill that doesn't exist), a null `skillId`
+// and prefixed with that pairId, a non-null `skillId` resolves against the pair's own skill rows
+// (courses-biome/<pairId>/skills.core-data, so a lifehack can never point at a skill that doesn't exist), a null `skillId`
 // carries a non-empty `topic` (the schema's own required-but-nullable pairing), and every
 // `source.citation` is non-empty prose, not an obvious placeholder (ADR-15's "no invented
 // citations" is a linguist-review call, not fully automatable — this only catches the
@@ -21,8 +21,8 @@ const validateSchema = new Ajv2020({ allErrors: true, strict: true }).compile(sc
 const PLACEHOLDER = /^(tbd|todo|n\/a|unknown|placeholder|tba|\?+)$/i;
 
 /**
- * `curriculumIds` is the target language's `lang/<code>/curriculum.json` ids (nullable — pass
- * null/undefined to skip the skillId cross-check, e.g. before that curriculum exists yet).
+ * `curriculumIds` is the ids of the pair's skill rows (nullable — pass
+ * null/undefined to skip the skillId cross-check, e.g. before those rows exist yet).
  */
 export function validateLifehacks(pairId, lifehacks, curriculumIds) {
   if (!validateSchema(lifehacks)) {
@@ -58,8 +58,9 @@ export function validateLifehacks(pairId, lifehacks, curriculumIds) {
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   const pairId = process.argv[2] ?? 'en-ru';
   try {
-    const curriculum = readJson(`courses/lang/${pairId.split('-')[0]}/curriculum.json`);
-    validateLifehacks(pairId, readJson(`courses/pairs/${pairId}/lifehacks.json`), curriculum.map((skill) => skill.id));
+    // The first field of each SKILL row is its id (the curriculum JSON files left the tree in R1.13 and R1.17).
+    const skills = readFileSync(new URL(`courses-biome/${pairId}/skills.core-data`, root), 'utf8');
+    validateLifehacks(pairId, readJson(`courses/pairs/${pairId}/lifehacks.json`), [...skills.matchAll(/^SKILL \{\s*id: "([^"]+)"/gm)].map((match) => match[1]));
     process.stdout.write(`PASS lifehacks ${pairId}\n`);
   } catch (error) {
     process.stderr.write(`FAIL lifehacks ${pairId}: ${error.message}\n`);

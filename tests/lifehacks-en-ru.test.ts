@@ -1,13 +1,19 @@
 import { describe, expect, test } from 'vitest';
 import { validateLifehacks } from '../scripts/validate-lifehacks.mjs';
 import lifehacks from '../courses/pairs/en-ru/lifehacks.json';
-import curriculum from '../courses/lang/en/curriculum.json';
 
-const curriculumIds = (curriculum as unknown as Array<{ id: string }>).map((skill) => skill.id);
+// The 16 skill ids of the en curriculum, in the order of the file lang/en/curriculum.json (sha256 4c8f1c21...) that left the tree in R1.17. The same fact is
+// courses-biome/en-ru/skills.core-data, which the Kotlin tests and `biome data check` read; this old TS test keeps its own copy until R1.18 maps it to a Kotlin test.
+const curriculumIds = [
+  'en:role.object', 'en:verb.presentSimple', 'en:possessive.my', 'en:mood.question',
+  'en:role.location', 'en:role.instrument', 'en:polarity.present', 'en:verb.pastSimple',
+  'en:role.recipient', 'en:number.plural', 'en:polarity.past', 'en:verb.futureSimple',
+  'en:pronouns', 'en:verb.presentContinuous', 'en:tense.contrast', 'en:mixed',
+];
 const copy = () => structuredClone(lifehacks);
 
 describe('en-ru lifehacks.json (EnRuPackPlan.md §4/§6 EN-19)', () => {
-  test('validates schema and resolves every skillId against lang/en/curriculum.json', () => {
+  test('validates schema and resolves every skillId against the 16 en skill ids', () => {
     expect(() => validateLifehacks('en-ru', copy(), curriculumIds)).not.toThrow();
   });
 
