@@ -1,0 +1,91 @@
+# courses/lang/en/lexicon.json — source SHA-256: f96da7fc14e569d2...
+VERB {
+  id: walk
+  lemma: walk
+  meaning: "ходить"
+  present3sg: walks
+  past: walked
+  pastParticiple: walked
+  ing: walking
+}
+VERB {
+  id: see
+  lemma: see
+  meaning: "видеть"
+  present3sg: sees
+  past: saw
+  pastParticiple: seen
+  ing: seeing
+}
+VERB {
+  id: talk
+  lemma: talk
+  meaning: "говорить"
+  present3sg: talks
+  past: talked
+  pastParticiple: talked
+  ing: talking
+}
+VERB {
+  id: go
+  lemma: go
+  meaning: "идти"
+  present3sg: goes
+  past: went
+  pastParticiple: gone
+  ing: going
+}
+VERB {
+  id: like
+  lemma: like
+  meaning: "любить"
+  present3sg: likes
+  past: liked
+  pastParticiple: liked
+  ing: liking
+}
+VERB {
+  id: read
+  lemma: read
+  meaning: "читать"
+  present3sg: reads
+  past: read
+  pastParticiple: read
+  ing: reading
+}
+VERB {
+  id: have
+  lemma: have
+  meaning: "иметь"
+  present3sg: has
+  past: had
+  pastParticiple: had
+  ing: having
+}
+VERB {
+  id: do
+  lemma: do
+  meaning: "делать"
+  present3sg: does
+  past: did
+  pastParticiple: done
+  ing: doing
+}
+VERB {
+  id: be
+  lemma: be
+  meaning: "быть"
+  present3sg: is
+  presentSg1: am
+  presentPl: are
+  past: was
+  pastPl: were
+  pastParticiple: been
+  ing: being
+}
+VERB {
+  id: will
+  lemma: will
+  meaning: "вспомогательный глагол будущего времени"
+  present3sg: will
+}

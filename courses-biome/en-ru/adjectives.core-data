@@ -1,0 +1,23 @@
+# courses/lang/en/lexicon.json — source SHA-256: f96da7fc14e569d2...
+ADJECTIVE {
+  id: beautiful
+  lemma: beautiful
+  meaning: "красивый"
+  forms: {invariant: beautiful}
+}
+ADJECTIVE {id: new lemma: new meaning: "новый" forms: {invariant: new}}
+ADJECTIVE {
+  id: small
+  lemma: small
+  meaning: "маленький"
+  forms: {invariant: small}
+}
+ADJECTIVE {id: nice lemma: nice meaning: "приятный" forms: {invariant: nice}}
+ADJECTIVE {id: good lemma: good meaning: "хороший" forms: {invariant: good}}
+ADJECTIVE {id: old lemma: old meaning: "старый" forms: {invariant: old}}
+ADJECTIVE {
+  id: expensive
+  lemma: expensive
+  meaning: "дорогой"
+  forms: {invariant: expensive}
+}

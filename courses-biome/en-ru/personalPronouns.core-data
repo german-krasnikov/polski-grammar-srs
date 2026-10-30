@@ -1,0 +1,8 @@
+# courses/lang/en/lexicon.json — source SHA-256: f96da7fc14e569d2...
+PRONOUN {id: I forms: {Subj: I Obj: me}}
+PRONOUN {id: you forms: {Subj: you Obj: you}}
+PRONOUN {id: he forms: {Subj: he Obj: him}}
+PRONOUN {id: she forms: {Subj: she Obj: her}}
+PRONOUN {id: it forms: {Subj: it Obj: it}}
+PRONOUN {id: we forms: {Subj: we Obj: us}}
+PRONOUN {id: they forms: {Subj: they Obj: them}}

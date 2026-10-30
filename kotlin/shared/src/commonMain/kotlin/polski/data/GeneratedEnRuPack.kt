@@ -1,10 +1,9 @@
-// Generated from courses/pairs/en-ru/pair.json + courses/lang/en/lexicon.json; do not edit.
+// Generated from courses/pairs/en-ru/pair.json; do not edit. The lexicon is generated from courses-biome/en-ru (EnRuRows.kt).
 package polski.data
 
 import polski.model.Adjective
 import polski.model.GramCase
 import polski.model.Noun
-import polski.model.PossessiveId
 import polski.model.SentenceSeed
 import polski.model.Skill
 import polski.model.Verb
@@ -14,22 +13,6 @@ import polski.presentation.NativeParallelPair
 internal val generatedEnRuNouns: List<Noun> = emptyList()
 internal val generatedEnRuAdjectives: List<Adjective> = emptyList()
 internal val generatedEnRuVerbs: List<Verb> = emptyList()
-internal val generatedEnRuNounLabels: Map<String, Pair<String, String>> = mapOf(
-    "wife" to ("wife" to "жена"),
-    "woman" to ("woman" to "женщина"),
-    "book" to ("book" to "книга"),
-    "work" to ("job" to "работа"),
-    "husband" to ("husband" to "муж"),
-    "friend" to ("friend" to "друг"),
-    "son" to ("son" to "сын"),
-    "dog" to ("dog" to "собака"),
-    "cat" to ("cat" to "кот"),
-    "car" to ("car" to "машина"),
-    "house" to ("house" to "дом"),
-    "phone" to ("phone" to "телефон"),
-    "child" to ("child" to "ребёнок"),
-    "window" to ("window" to "окно")
-)
 internal val generatedEnRuSkills: List<Skill> = listOf(
     Skill("en:role.object", "Object · без падежа", "Roles", "A1", "Подлежащее → дополнение: падежа нет, меняется только порядок слов (Subject-Verb-Object).", "В английском у существительных нет падежных окончаний: форма слова одна и та же и для подлежащего, и для дополнения. Роль слова показывает порядок: I see my house — «house» дополнение просто потому, что стоит после глагола.", "my beautiful house → I see my beautiful house.", listOf()),
     Skill("en:verb.presentSimple", "Present Simple", "Verb", "A1", "3-е лицо ед.ч.: добавляем -s/-es к базовой форме глагола (Past → Pres).", "В настоящем простом времени для he/she/it к глаголу добавляется -s (walk → walks). Это единственное изменение формы глагола по лицу для этого времени.", "walked → walks", listOf()),
@@ -138,45 +121,4 @@ internal val generatedEnRuStyleContent: Map<String, SkillStyleContent> = mapOf(
 )
 // en pronouns use Subj/Obj, not GramCase -> typed map is empty.
 internal val generatedEnRuPersonalPronouns: Map<String, Map<GramCase, String>> = emptyMap()
-internal val generatedEnRuPersonalPronounRawForms: Map<String, Map<String, String>> = mapOf(
-    "I" to mapOf("Subj" to "I", "Obj" to "me"),
-    "you" to mapOf("Subj" to "you", "Obj" to "you"),
-    "he" to mapOf("Subj" to "he", "Obj" to "him"),
-    "she" to mapOf("Subj" to "she", "Obj" to "her"),
-    "it" to mapOf("Subj" to "it", "Obj" to "it"),
-    "we" to mapOf("Subj" to "we", "Obj" to "us"),
-    "they" to mapOf("Subj" to "they", "Obj" to "them")
-)
-internal val generatedEnRuPossessives: List<Possessive> = listOf(
-    Possessive(PossessiveId.fromId("my"), "my — мой"),
-    Possessive(PossessiveId.fromId("your"), "your — твой/ваш"),
-    Possessive(PossessiveId.fromId("his"), "his — его"),
-    Possessive(PossessiveId.fromId("her"), "her — её"),
-    Possessive(PossessiveId.fromId("its"), "its — его/её (о предмете)"),
-    Possessive(PossessiveId.fromId("our"), "our — наш"),
-    Possessive(PossessiveId.fromId("their"), "their — их")
-)
 internal val generatedEnRuFrequency: List<FrequencyItem> = emptyList()
-
-// En-specific data for EnLexicon.kt (matrix tables)
-internal val generatedEnVerbs: List<EnVerb> = listOf(
-    EnVerb("walk", "walk", "ходить"),
-    EnVerb("see", "see", "видеть"),
-    EnVerb("talk", "talk", "говорить"),
-    EnVerb("go", "go", "идти"),
-    EnVerb("like", "like", "любить"),
-    EnVerb("read", "read", "читать"),
-    EnVerb("have", "have", "иметь"),
-    EnVerb("do", "do", "делать"),
-    EnVerb("be", "be", "быть"),
-    EnVerb("will", "will", "вспомогательный глагол будущего времени")
-)
-internal val generatedEnPronouns: List<EnPronoun> = listOf(
-    EnPronoun("I", "I"),
-    EnPronoun("you", "you"),
-    EnPronoun("he", "he"),
-    EnPronoun("she", "she"),
-    EnPronoun("it", "it"),
-    EnPronoun("we", "we"),
-    EnPronoun("they", "they")
-)

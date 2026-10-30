@@ -698,3 +698,62 @@ RECORD RequiredWhenRow
   condition: ConditionRow
   features: [string]
 END
+
+# The English lexicon (R1.14a). English has no case and no gender, so it has records of its own: a noun has two forms, an adjective one, a verb the few forms
+# of its paradigm (present3sg and past are all most verbs write; `be` has more, and `will` only its one form), a personal pronoun a subject and an object form.
+# The prepositions of a role are pairs: the roles are the language's own open list. The possessives are PossessiveRow, shaped alike in both packs.
+RECORD EnNounRow KEY id COUNT 1..
+  id: string
+  lemma: string
+  meaning: string
+  forms: EnNounFormsRow
+END
+
+RECORD EnNounFormsRow
+  sg: string
+  pl: string
+END
+
+RECORD EnAdjectiveRow KEY id COUNT 1..
+  id: string
+  lemma: string
+  meaning: string
+  forms: EnAdjectiveFormsRow
+END
+
+RECORD EnAdjectiveFormsRow
+  invariant: string
+END
+
+RECORD EnVerbRow KEY id COUNT 1..
+  id: string
+  lemma: string
+  meaning: string
+  present3sg: string
+  presentSg1: string OPTIONAL
+  presentPl: string OPTIONAL
+  past: string OPTIONAL
+  pastPl: string OPTIONAL
+  pastParticiple: string OPTIONAL
+  ing: string OPTIONAL
+END
+
+RECORD EnPronounRow KEY id COUNT 1..
+  id: string
+  forms: EnPronounFormsRow
+END
+
+RECORD EnPronounFormsRow
+  Subj: string
+  Obj: string
+END
+
+RECORD EnPrepositionRow KEY id COUNT 1..
+  id: string
+  forms: [RoleFormRow]
+END
+
+RECORD RoleFormRow
+  role: string
+  form: string
+END

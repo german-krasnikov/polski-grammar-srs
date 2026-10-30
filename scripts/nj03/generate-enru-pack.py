@@ -6,7 +6,6 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 PAIR = json.load(open(ROOT / "courses/pairs/en-ru/pair.json"))
-LEXICON = json.load(open(ROOT / "courses/lang/en/lexicon.json"))
 OUT = ROOT / "kotlin/shared/src/commonMain/kotlin/polski/data/GeneratedEnRuPack.kt"
 
 
@@ -94,28 +93,14 @@ def main():
     instr = voc.get("instructions", {})
     unavail = ks(voc.get("unavailableLabel", ""))
 
-    noun_labels = [f'"{ks(n["id"])}" to ("{ks(n["lemma"])}" to "{ks(n["meaning"])}")' for n in LEXICON["nouns"]]
-
-    # en pronouns use Subj/Obj, not GramCase — personalPronouns is empty, raw forms only
-    pp = LEXICON.get("personalPronouns", {})
-    pp_raw = []
-    for pid, forms in pp.items():
-        if isinstance(forms, dict):
-            raw_inner = ", ".join(f'"{ks(c)}" to "{ks(f)}"' for c, f in forms.items())
-            pp_raw.append(f'"{ks(pid)}" to mapOf({raw_inner})')
-
-    poss = LEXICON.get("possessives", [])
-    poss_items = [f'Possessive(PossessiveId.fromId("{ks(p["id"])}"), "{ks(p.get("label",""))}")' for p in poss]
-
     NL = chr(10)
     content = f"""\
-// Generated from courses/pairs/en-ru/pair.json + courses/lang/en/lexicon.json; do not edit.
+// Generated from courses/pairs/en-ru/pair.json; do not edit. The lexicon is generated from courses-biome/en-ru (EnRuRows.kt).
 package polski.data
 
 import polski.model.Adjective
 import polski.model.GramCase
 import polski.model.Noun
-import polski.model.PossessiveId
 import polski.model.SentenceSeed
 import polski.model.Skill
 import polski.model.Verb
@@ -125,9 +110,6 @@ import polski.presentation.NativeParallelPair
 internal val generatedEnRuNouns: List<Noun> = emptyList()
 internal val generatedEnRuAdjectives: List<Adjective> = emptyList()
 internal val generatedEnRuVerbs: List<Verb> = emptyList()
-internal val generatedEnRuNounLabels: Map<String, Pair<String, String>> = mapOf(
-    {("," + NL + "    ").join(noun_labels)}
-)
 internal val generatedEnRuSkills: List<Skill> = listOf(
     {("," + NL + "    ").join(skills)}
 )
@@ -151,21 +133,7 @@ internal val generatedEnRuStyleContent: Map<String, SkillStyleContent> = mapOf(
 )
 // en pronouns use Subj/Obj, not GramCase -> typed map is empty.
 internal val generatedEnRuPersonalPronouns: Map<String, Map<GramCase, String>> = emptyMap()
-internal val generatedEnRuPersonalPronounRawForms: Map<String, Map<String, String>> = mapOf(
-    {("," + NL + "    ").join(pp_raw)}
-)
-internal val generatedEnRuPossessives: List<Possessive> = listOf(
-    {("," + NL + "    ").join(poss_items)}
-)
 internal val generatedEnRuFrequency: List<FrequencyItem> = emptyList()
-
-// En-specific data for EnLexicon.kt (matrix tables)
-internal val generatedEnVerbs: List<EnVerb> = listOf(
-    {("," + NL + "    ").join(f'EnVerb("{ks(v["id"])}", "{ks(v["lemma"])}", "{ks(v["meaning"])}")' for v in LEXICON["verbs"])}
-)
-internal val generatedEnPronouns: List<EnPronoun> = listOf(
-    {("," + NL + "    ").join(f'EnPronoun("{ks(pid)}", "{ks(forms.get("Subj", pid))}")' for pid, forms in LEXICON["personalPronouns"].items() if isinstance(forms, dict))}
-)
 """
     OUT.write_text(content, encoding="utf-8")
     print(f"Generated {OUT.relative_to(ROOT)}")

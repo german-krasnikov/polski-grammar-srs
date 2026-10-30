@@ -1,0 +1,14 @@
+# courses/lang/en/prepositions.json — source SHA-256: 140e900f2b98b623...
+# $comment: Plans/Kotlin/EnRuPackPlan.md §1.1/§1.3/§5 gap A: the `role` entry maps every lang.json `case` (role) value to the preposition that realizes it — empty string for Subj/Obj (word order alone, no preposition). scripts/validate-pack-v2.mjs checks this entry's forms keys equal lang/en/lang.json's `case` array exactly.
+PREPOSITION {
+  id: role
+  forms: [
+    {role: Subj form: ""}
+    {role: Obj form: ""}
+    {role: In form: in}
+    {role: With form: with}
+    {role: To form: to}
+    {role: About form: about}
+    {role: Of form: of}
+  ]
+}

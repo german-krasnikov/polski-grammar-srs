@@ -1,0 +1,21 @@
+# courses/lang/en/lexicon.json — source SHA-256: f96da7fc14e569d2...
+# $comment: Plans/Kotlin/EnRuPackPlan.md §1.3: en's lexicon. nouns/adjectives/possessives use the same `forms` wrapper as lang/pl/lexicon.json; verbs stay flat (present3sg/past/pastParticiple/ing as top-level fields) to mirror pl's own flat verb shape (present/pastStem directly on the object, no wrapper) — see morphology-notes.md for why en needs only these fields (no gender, no case declension) and for the deliberate exceptions (be's extra presentSg1/presentPl/pastPl fields; will's single invariant form).
+NOUN {id: wife lemma: wife meaning: "жена" forms: {sg: wife pl: wives}}
+NOUN {id: woman lemma: woman meaning: "женщина" forms: {sg: woman pl: women}}
+NOUN {id: book lemma: book meaning: "книга" forms: {sg: book pl: books}}
+NOUN {id: work lemma: job meaning: "работа" forms: {sg: job pl: jobs}}
+NOUN {
+  id: husband
+  lemma: husband
+  meaning: "муж"
+  forms: {sg: husband pl: husbands}
+}
+NOUN {id: friend lemma: friend meaning: "друг" forms: {sg: friend pl: friends}}
+NOUN {id: son lemma: son meaning: "сын" forms: {sg: son pl: sons}}
+NOUN {id: dog lemma: dog meaning: "собака" forms: {sg: dog pl: dogs}}
+NOUN {id: cat lemma: cat meaning: "кот" forms: {sg: cat pl: cats}}
+NOUN {id: car lemma: car meaning: "машина" forms: {sg: car pl: cars}}
+NOUN {id: house lemma: house meaning: "дом" forms: {sg: house pl: houses}}
+NOUN {id: phone lemma: phone meaning: "телефон" forms: {sg: phone pl: phones}}
+NOUN {id: child lemma: child meaning: "ребёнок" forms: {sg: child pl: children}}
+NOUN {id: window lemma: window meaning: "окно" forms: {sg: window pl: windows}}

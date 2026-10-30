@@ -1,0 +1,16 @@
+# courses/lang/en/lexicon.json — source SHA-256: f96da7fc14e569d2...
+POSSESSIVE {id: my label: "my — мой" forms: {kind: invariant value: my}}
+POSSESSIVE {
+  id: your
+  label: "your — твой/ваш"
+  forms: {kind: invariant value: your}
+}
+POSSESSIVE {id: his label: "his — его" forms: {kind: invariant value: his}}
+POSSESSIVE {id: her label: "her — её" forms: {kind: invariant value: her}}
+POSSESSIVE {
+  id: its
+  label: "its — его/её (о предмете)"
+  forms: {kind: invariant value: its}
+}
+POSSESSIVE {id: our label: "our — наш" forms: {kind: invariant value: our}}
+POSSESSIVE {id: their label: "their — их" forms: {kind: invariant value: their}}

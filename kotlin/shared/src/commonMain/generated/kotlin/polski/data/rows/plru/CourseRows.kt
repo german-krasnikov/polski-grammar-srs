@@ -1,5 +1,5 @@
 // Generated from dsl/course.data-contract
-// source-sha256=f80d056f5d818641c09ea3d4d575e242575a33fcaeb4399fcabfe44edfb48134
+// source-sha256=ad63a057e2973d0916a2de0ff23081414305075a27a2cc08f74c9721a9bd26f3
 // Edit the source, then run biome generate.
 
 package polski.data.rows.plru
@@ -702,6 +702,62 @@ data class ConstructionRow(
     val govDefault: String? = null,
     val govWhen: List<GovWhenRow>? = null,
     val orderWhen: List<OrderWhenRow>? = null,
+)
+
+data class EnNounFormsRow(
+    val sg: String,
+    val pl: String,
+)
+
+data class EnNounRow(
+    val id: String,
+    val lemma: String,
+    val meaning: String,
+    val forms: EnNounFormsRow,
+)
+
+data class EnAdjectiveFormsRow(
+    val invariant: String,
+)
+
+data class EnAdjectiveRow(
+    val id: String,
+    val lemma: String,
+    val meaning: String,
+    val forms: EnAdjectiveFormsRow,
+)
+
+data class EnVerbRow(
+    val id: String,
+    val lemma: String,
+    val meaning: String,
+    val present3sg: String,
+    val presentSg1: String? = null,
+    val presentPl: String? = null,
+    val past: String? = null,
+    val pastPl: String? = null,
+    val pastParticiple: String? = null,
+    val ing: String? = null,
+)
+
+data class EnPronounFormsRow(
+    val Subj: String,
+    val Obj: String,
+)
+
+data class EnPronounRow(
+    val id: String,
+    val forms: EnPronounFormsRow,
+)
+
+data class RoleFormRow(
+    val role: String,
+    val form: String,
+)
+
+data class EnPrepositionRow(
+    val id: String,
+    val forms: List<RoleFormRow>,
 )
 
 private fun skillRowRowsPart0(): List<SkillRow> = listOf(
