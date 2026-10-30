@@ -1,5 +1,7 @@
 # R1.0 — база и печати (R1Receipt)
 
+> Разделы 1–6 — факты чистой базы R1.0. Разделы 7–15 (после черты) добавлены итоговым прогоном R1.20 на дереве `65b8890`.
+
 Только факты на **чистой** базе: код и данные продукта этим срезом не менялись (`git status` перед коммитом — один этот файл и неотслеживаемые `R1Design.md`, `ResumePlan.md`).
 Каждая проверка названа с хостом. «Исполнено» = запущено на этом хосте и дало результат; всё остальное — NOT RUN. Один зелёный хост не доказывает другой: `desktopTest` — только JVM desktop.
 
@@ -201,3 +203,150 @@ d5b187c68b5b3fc46cdc967d38197a9a8fa1fd8ee0b52841c4dadbd93de58361    13289  kotli
 
 Расхождение 420 (desktop) / 410 (JS, Wasm) / 447 (macOS) проверено по именам: наборы JS и Wasm совпадают; 10 тестов только desktop — классы `NJ03CourseValuePilotTest`, `NJ03PairLifetimeTest`, `StyleSourceGenericityTest`, `PolskiTextCodecTest` (source set `desktopTest`); macOS — те же 410 плюс 37 из `macosTest`.
 По-прежнему NOT RUN: `:composeApp:desktopTest` (`Main.kt:216`), `:androidApp:testDebugUnitTest` (`MainActivity.kt:209`) — нужна ветка `UiEffect.DownloadText` в обоих `when` (поведение хоста, решение вне R1); iOS simulator; Playwright; приложения iOS/macOS.
+
+---
+
+# R1.20 — итоговый прогон (§5 дизайна), дерево `65b8890`
+
+Дата 2026-10-30. Ветка `biome-resume`, база R1.0 — `9d867a6` (§1–6 выше), начало R1.11–R1.19 — `1962c38`. Дерево чистое, кроме неотслеживаемых `R1Design.md` и `ResumePlan.md`. Компилятор — соседний checkout (HEAD `1a062dfb`); пин `61cc0c34` даёт предупреждение `TOOLCHAIN_PIN_STALE` (файлы всё равно сравниваются побайтно), как на базе. Каждая проверка названа с хостом; «исполнено» = запущено на этом хосте и дало результат. Решение GO/NO-GO принимает владелец; ниже — доказательства и открытые пункты.
+
+## 7. Что сделано: 36 коммитов R1.11–R1.19
+
+| Срез | Коммиты (feat / test…) | Итог |
+|---|---|---|
+| R1.11a, R1.11b-1, R1.11b-2 | `78d4a09` `efe0aee` `0884312` `d02e058` `228ead7` `1b66dbf` | pl: выражения рецептов, шаблоны конструкций, рецепты, цепочка, значения по умолчанию — типизированные строки |
+| R1.12 | `760eb0f` `d673d3a` `f7d38e6` | pl: таблица форм строится при сборке (`dsl/derive-forms.mjs`), 39 лексем / 1560 форм |
+| R1.13-0, R1.13 | `6b085f8` `6c022f5` `23a85fd` | чекеры читают историю `git show` + SHA; `PackEngine` строится из пака, pl-JSON и две задачи Gradle ушли |
+| R1.14a, R1.14b | `7c9911d` `527cf02` `134ca47` `66631a2` | en: лексикон, пара (навыки, тексты, словарь, цепочка), копии мапперов делает `dsl/derive-enru-mappers.mjs` |
+| R1.15, R1.16 | `cee8989` `a52d50c` `f4a2424` `d517768` `e6b8393` | en: SkillSpec, рецепты, конструкции, таблица форм (49 лексем / 329 форм) |
+| R1.17 | `ec2c588` `c39d2cc` | en-флип: пак берёт вход движка из строк; мост, парсеры и 7 en-JSON удалены |
+| R1.18a, R1.18b | `cb4a9b6` `211e3eb` `a905cbd` · `10076ee` `c8d09fd` `306e723` `505cb41` | стили (4 строки, `StyleRegistry`) и лайфхаки (64 строки, `CoursePackFields.lifehacks`); последняя задача встраивания удалена |
+| R1.19a, b, c | `d485a75` `bcb69ae` · `1bf704d` `a9ccde8` · `0e24de3` `65b8890` | частоты en-ru как данные без потребителя; канонический вид `biome fmt` и шаги `fmt`; guard «нет читателя JSON курса»; ADR-54 |
+
+С базы удалено: 19 файлов `courses/**.json` (694 934 байта; ещё три — `course.json`, `pairs/pl-ru/pair.json`, `lang/pl/lexicon.json` — убрал NJ03 раньше), 12 `Generated*.kt` (323 645 байт), 13 Python-генераторов, 3 `build-pack*.mjs`/`extract-course-morphology.mjs`, 12 обёрток `derive-*.mjs`, обе Gradle-задачи встраивания, `EnRuJsonBridge.kt`, `parseCurriculum`, `parseRecipes`, `parseConstructionTemplates`, `parseStyleRecipesJson`, `validate-lifehacks.mjs`.
+
+## 8. Исполнено на итоговом дереве
+
+Каждая задача — `./gradlew <задача> --rerun --console=plain` из `kotlin/` (XML свежие). selected = executed: число `@Test` в исходниках равно числу выполненных (commonTest 517, desktopTest +7, macosTest +37; `@Ignore` нет).
+
+| Задача | Хост | files / tests | fail / error / skipped | База (§6) |
+|---|---|---|---|---|
+| `:shared:desktopTest` | JVM desktop (Temurin 21) | 92 / 524 | 0 / 0 / 0 | 72 / 420 |
+| `:shared:jsBrowserTest` (`-Pkotlin.incremental.js=false -Pkotlin.incremental.js.ir=false`) | Chrome headless (JS) | 89 / 517 | 0 / 0 / 0 | 68 / 410 |
+| `:shared:wasmJsBrowserTest` | Chrome headless (Wasm) | 89 / 517 | 0 / 0 / 0 | 68 / 410 |
+| `:shared:macosArm64Test` | Kotlin/Native macOS arm64 | 97 / 554 | 0 / 0 / 0 | 76 / 447 |
+
+Только компиляция (без запуска тестов): `:shared:compileKotlinIosArm64`, `:shared:compileKotlinIosSimulatorArm64`, `:shared:compileTestKotlinIosSimulatorArm64`, `:composeApp:compileKotlinJs`, `:composeApp:compileKotlinWasmJs`, `:composeApp:compileTestDevelopmentExecutableKotlinJs` — BUILD SUCCESSFUL: ни один хост не ссылается на удалённый API.
+
+**NOT RUN:** `:composeApp:desktopTest` и `:androidApp:testDebugUnitTest` — те же две ошибки компиляции, что на базе, в тех же строках и единственные: `Main.kt:216` и `MainActivity.kt:209`, `'when' expression must be exhaustive … 'is DownloadText'`. Ветка для `UiEffect.DownloadText` — продуктовое решение (что делать с эффектом), не правка в одну строку, поэтому её нет. Также NOT RUN: iOS simulator (тесты и приложение), приложения Swift (iOS, macOS), Playwright (`tests/browser/*`), `gate:all` компилятора, устройства.
+
+Vitest, весь набор (`BIOME_BIN` задан): **339 тестов PASS, 0 FAIL; 32 набора не запускаются — ровно те 32 файла по именам, что заморожены в §3** (падают на импорте удалённого JSON; R1 их не менял). Из 10 зелёных файлов базы три удалены вместе со своим JSON после карты на Kotlin/vitest (`lifehacks-en-ru`, `lifehacks-pl-ru`, `style-recipe-validation`: карта в сообщениях `306e723`, `211e3eb`), `vocabulary-editorial-en-ru` (8) переподключён к `git show` и зелёный, остальные шесть не менялись. `npx tsc -b`: 97 ошибок (88 после R1.13; +9 — импорты удалённых файлов в `tests/pack-v2.test.ts`, красном до R1).
+
+## 9. Оракулы и печати (§5.2)
+
+| Оракул | Что | Результат (tests / fail / skipped) на desktop, JS, Wasm, K/N |
+|---|---|---|
+| EX112 | `TrainingParityTest` | 5 / 0 / 0 на каждом из четырёх хостов |
+| EN-OR | `TrainingParityEnTest` (92 случая, R1.1) | 2 / 0 / 0 на каждом |
+| GP | `GrammarParityTest` | 20 / 0 / 0 на каждом |
+| CUR | `CurriculumReaderTest` + vitest `course-curriculum` (16 строк pl и 16 en против `NJ03CurriculumIndependent.cases`) | 11 / 0 / 0 на каждом; vitest 4 / 0 |
+| SC | `python3 scripts/check-nj03-skill-copy-freeze.py` | PASS: 5 печатей, 32 навыка, 1296 узлов, 7 отрицательных мутаций |
+| PREP | `python3 scripts/nj03/check-preposition-freeze.py` | PASS (читает JSON из `git show 7358aeb…` + SHA) |
+| — | `check-nj03-old-curriculum-facts.mjs`, `check-nj03-old-seeds-chains.mjs` | PASS, PASS (были FAIL на базе: ENOENT) |
+
+Независимые опоры не менялись: `requirements.core-data` (ef4d5949…), `TrainingParityTest.kt` (f704738d…), `GrammarParityTest.kt` (85c64ba7…), `NJ03CurriculumIndependent.cases`, `NJ03SkillCopyIndependent.cases`, `NJ03PrepositionIndependent.cases`, `NJ03SeedsNounsChains.cases` — sha256 равны базе (§5). Изменены только `CurriculumReaderTest.kt` (вход — строки; удалён один тест, ставший тождеством: `level`/`prerequisites` теперь одна строка) и `CoursePackFixtureTest.kt` (замороженный JSON-текст стал типизированными значениями поле в поле, R1.3). Новая опора: `requirements-en.core-data` (46975490…, R1.1). Ожидания не подгонялись под вывод.
+
+Проба флипа en (R1.17), одни и те же четыре правки строк en-ru до и после: до флипа **0** тестов видят правку (движок читал JSON), после — `TrainingParityEnTest.allExerciseCases` видит все четыре; правка конструкции валит ещё 4 теста движка (`EnExerciseGeneratorTest` ×2, `EnRealizationTest` ×2), правка владельца — ещё 3 (`TrainingParityEnTest.metadataAndChainLinks`, `EnExerciseGeneratorTest` ×2).
+
+## 10. Один авторитет (§5.1)
+
+- JSON-сканер `check-no-app-json-tracked.py --summary`: **violations 98 → 79** (цель дизайна 80; лишний — частоты en-ru по решению владельца 3).
+- Guard `tests/retired-json-path.test.ts` (8 тестов): 22 файла `courses/**.json` отсутствуют; в 20 файлах Gradle/`.properties`/`.toml` нет `courses/`; в 356 `.kt` нет `val generated…Json…`; в 113 `.kt` пакетов `polski.{data,core,training}` нет `kotlinx.serialization`; Python- и NJ03-скрипты, называющие JSON курса, читают его через `git show` на 40-hex ревизии. Пять пробы-нарушений убиты 5 из 5 (каждое — одним тестом).
+- Реестр сгенерированного (`tests/generated-registry.test.ts`): каждый `.kt` с баннером — выход ровно одного шага; git помечает его generated.
+- Проба подмены для **каждого** выхода реестра (дописать строку в выход, `generate --check`, вернуть): **17 выходов** — 14 целых файлов: exit 1 с именем файла; 3 гибрида (`TrainingParityTest.kt`, `TrainingParityEnTest.kt`, `PolskiTextCodecTest.kt`): правка **внутри** области `GENERATED START/END` — exit 1, вне неё — exit 0 (рукописная обвязка, как на базе §2). Байты после проб на месте, `git status` чист.
+- Каждый факт — в одном `.core-data`: `KEY`/`ref` проверяет `data check` (`generate --check` исполняет 5 `data`-шагов, 9 `derive`-шагов, 3 `fmt`-шага); дубли записей двух паков (`rows.plru` / `rows.enru`) собираются из одного рукописного маппера pl-ru (копию делает `dsl/derive-enru-mappers.mjs`, `generate --check` ловит расхождение).
+
+## 11. D-набор (§5.2) — какой тест что исполняет
+
+| Случай | Тесты |
+|---|---|
+| пропавший id | vitest: 44 теста `DATA_REF` в 10 файлах (`course-recipes` 18, `course-enru-pair` 9, `course-pronoun-teaching` 5, `course-lexicon` 3, `course-data` «a prerequisite that is no skill»…) — каждый проверяет позицию `file:line:col` |
+| чужой тип | `course-enru-pair`: навык/ключ copy/конструкция/владелец паков друг друга — `DATA_REF` в шаге другого пака; `course-lifehacks`: skillId не из SkillRow |
+| цикл | Kotlin `PlRuSkillSpecsTest.aSelfLoopATwoCycleAndACycleBehindAnAcyclicTailAreRefused` + `aSharedPrerequisiteIsNotACycle` на всех четырёх хостах; **остаточный риск**: цикл ловится при первом доступе, позиции в файле нет (`data check` чист) |
+| optional / null / empty / порядок | `PlRuRowsTest` (`anAbsentStyleContentIsTheDomainDefault`, `anEmptyTextIsDataNotAbsence`, `focusFixedAndFilterBecomeTheCoreTypesInTheOrderWritten`, `aFilterPropertyThatIsNotWrittenIsNotInTheFilter`), vitest `DATA_REQUIRED` («null is written»), `toString`-паритеты порядка в Δ |
+| Unicode | `PlRuRowsTest.textsPassThroughUnchanged` (астральный символ, `$`, `${y}`, `\`, `"`, перенос, табуляция, пробелы по краям) на всех четырёх хостах; vitest `course-data`: печатный Kotlin несёт такой текст точно |
+| позиция в UTF-16 | vitest `course-data` «columns count UTF-16 units» (ожидаемая колонка считается `indexOf` в JS, не берётся из вывода инструмента) |
+
+## 12. Равные данные и API (§5.3)
+
+Δ=0 по каждому семейству отдельно для pl и en (одноразовые сравнения со старым значением — в сообщениях коммитов; постоянные — тесты, читающие закрытый источник из истории):
+
+| Семейство | Сравнение | Постоянный тест |
+|---|---|---|
+| pl рецепты, конструкции | `==` с `parseRecipes`/`parseConstructionTemplates` (R1.11b), затем EX112/GP зелёные | `PlRuRecipeSetRowsTest`, EX112 |
+| pl формы | 39 лексем / 1560 форм == `forms.generated.json` и 1560 golden-случаев | vitest `course-forms` (golden), `FormTablesTest` |
+| pl навыки (SkillSpec) | 16 строк == замороженные случаи | vitest `course-curriculum`, `CurriculumReaderTest` |
+| en лексикон, пара | `==` старому сгенерированному значению (16 навыков, 12 затравок, 73 copy, 6 шаблонов, 1 префикс, цепочка, 30 карточек…) и `toString` | `EnRu*RowsTest`, vitest `course-enru-pair` |
+| en SkillSpec, рецепты, конструкции | паритет с JSON-парсерами на всех четырёх хостах (R1.15–R1.16), `toString` | vitest `course-curriculum` (en), `EnRuEngineInputsTest`, EN-OR |
+| en формы | 49 лексем / 329 форм == замороженный JSON **побайтно** и в том же порядке | vitest `course-forms-enru` (`git show` + SHA), `EnRuFormTablesTest` |
+| стили | 4 рецепта `==` `parseStyleRecipesJson` (toString 1272 знака) | vitest `course-styles` (`git show` + SHA) |
+| лайфхаки | 32 + 32 `==` сгенерированному Kotlin (29 526 + 22 107 знаков) | vitest `course-lifehacks` (`git show` + SHA) |
+| частоты en | 1000 строк == `items` закрытого файла | vitest `course-frequency` |
+
+Снимок публичных деклараций верхнего уровня `polski.{data,core,training,presentation}` (commonMain; одноразовый скрипт вне репозитория, разбирает исходники двух ревизий, члены классов не отслеживаются): **164 на базе → 446 сейчас; удалены 4** — `parseConstructionTemplates`, `parseRecipes` (`polski.core`), `parseCurriculum`, `plCurriculum` (`polski.training`), то есть ровно JSON-входы белого списка; **добавлены 286** — все в новых пакетах `polski.data.rows.{plru,enru,plru.forms,enru.forms,plru.frequency,styles}` (типы и константы строк). Остальные 160 деклараций не менялись.
+
+## 13. P8 / P23 (§1 и §5.4)
+
+Холодный kotlinc целого пака, база `9d867a6` против `65b8890`, 3 чередующихся раунда, `--offline --no-daemon --profile`, медианы (wall команды / время задачи Gradle):
+
+| Цель | база, с | кандидат, с | отношение | лимит |
+|---|---|---|---|---|
+| Desktop wall / задача | 11.70 / 2.52 | 11.94 / 3.22 | ×1.02 / ×1.28 | wall ≤ ×1.6 ✓ (задача печатается, строже) |
+| Js | 10.02 / 1.58 | 10.46 / 1.94 | ×1.04 / ×1.22 | ✓ |
+| WasmJs | 10.10 / 1.57 | 10.23 / 1.88 | ×1.01 / ×1.20 | ✓ |
+
+Серия N = 10 / 100 / 1000 синтетических `SkillRow` (полная строка первого навыка pl-ru, 2.3 КБ данных, `prerequisites: []`; Kotlin 57 756 / 427 616 / 4 126 064 байт), 3 раунда:
+
+| Что | N = 10 | N = 100 | N = 1000 | Лимит / проход |
+|---|---|---|---|---|
+| `biome data generate`, wall, с (медиана) | 0.50 | 0.66 | **1.495** (6 прогонов: 1.46–1.58; первые три — 1.51) | ≤ 3.0 / проход ≤ 1.5: лимит ✓ с запасом ×2.0, **проход на грани**; t(1000) − t(10) = 0.99 ≤ 12 · (t(100) − t(10)) = 1.86 ✓ |
+| kotlinc Desktop, wall / задача | 12.50 / 3.43 | 12.25 / 3.49 | **13.40 / 4.54** | wall ≤ 30 ✓ (проход ≤ 15 ✓), задача ≤ 10 ✓ (проход ≤ 5 ✓) |
+| kotlinc Js, wall / задача | 10.14 / 2.01 | — | **10.96 / 2.83** | wall ≤ 25 ✓ (проход ≤ 12.5 ✓) |
+| kotlinc WasmJs, wall / задача | 10.05 / 1.96 | — | **10.89 / 2.79** | wall ≤ 25 ✓ (проход ≤ 12.5 ✓) |
+| первый доступ `generatedScaleSkills`, N = 1000 (3 свежих запуска) | — | — | JVM 21.1 / 24.1 / 21.3 мс; Chrome JS 26.4 / 26.1 / 25.6 мс; Chrome Wasm 26.0 / 26.3 / 26.1 мс; K/N macOS 13.6 / 4.5 / 4.4 мс | JVM ≤ 200 ✓ (проход ≤ 100 ✓), браузер ≤ 1000 ✓ (проход ≤ 500 ✓) |
+| логические шаги `requireAcyclic` | 6.30 | 6.93 | 6.99 на навык | ≤ 20 · N ✓ (проход ≤ 10 · N ✓), тест `PlRuSkillSpecsTest.workGrowsLinearlyWithTheNumberOfSkills` на четырёх хостах |
+
+Метод серии: рабочая копия итогового дерева, синтетические строки делает одноразовый скрипт (не в репозитории), копия маппера `PlRuSkillRows.kt` с заменой имён в пакет `polski.data.rows.scale`; первый доступ — одноразовый тест в копии (не в репозитории). Холодный старт K/N, нагрузка нескольких паков и реальные устройства не измерялись.
+
+ObjC-заголовок статического framework macOS (`linkDebugFrameworkMacosArm64`): **535 272 → 834 525 байт (+55.9%), 7 786 → 11 088 строк, 327 → 565 интерфейсов** (база R1.0 → R1.19; каждый срез в своём коммите). Решение владельца — «отметить, мер не принимать» было принято при +16.4%; сейчас рост больше. Источники роста: контракт печатается целиком в пакет каждого шага (`rows.plru`, `rows.enru`, `rows.*.forms`, `rows.styles`), записи дублируются. Время линковки, размер самого framework и холодная линковка базы против кандидата в итоговом прогоне **не измерялись**.
+
+P8, три правки на DSL-руке, выполнены на итоговом дереве (правка → `biome fmt` → `biome generate` → полный `desktopTest` и vitest-тесты курса → откат); на базе — те же правки там, где конвейер на базе работает:
+
+| Правка | DSL-рука (итог) | Нативная рука (база `9d867a6`) |
+|---|---|---|
+| поле текста навыка (`hint` у `case.acc.n`) | 1 авторский файл / 1 строка; сгенерирован 1 файл (`rows/plru/CourseRows.kt`, 1 строка); падают 2 закреплённых ожидания: `CoursePackFixtureTest`, `GrammarParityTest.corpusPart20` (нужны только при смене требования) | выполнено: 1 авторский файл (`skills.core-data`); сгенерированы 2 файла (`GeneratedCoursePresentations.kt`, `GeneratedCourseValueSource.kt`) |
+| новое существительное (14 форм: `sister`) | **1 авторский файл** (`nouns.core-data`, 26 строк, формы пишутся один раз); сгенерированы 2 файла (`CourseRows.kt` +26, `forms/FormRows.kt` +103: выведены 14 форм); падают 3 закреплённых счётчика (`FormTablesTest` 39 лексем; vitest `course-data`, `course-forms`) | `nouns.core-data` (1 строка) + `GeneratedCourseLexicon.kt` (+5 строк) + **ещё одно место авторства**: `forms.generated.json` (100 строк на существительное, пишутся руками: `scripts/build-pack.mjs` читает `course.json`, которого нет, и не запускается); база дизайна: 4 файла / 2 места авторства. Цель дизайна 2 файла / 1 место: **1 место достигнуто**, файлов 3 (1 авторский + 2 сгенерированных), на один больше цели — `FormRows.kt` дизайн не считал |
+| новый навык с рецептом и ключами copy (`case.dat2`: строка навыка, рецепт, 3 ключа) | **3 авторских файла**: `skills.core-data` +55, `recipes.core-data` +58, `exerciseCopy.core-data` +6 (119 строк); сгенерирован 1 файл (+131); `data check` сразу показывает пропавший ключ copy (до дописывания ключей: 3 × `DATA_REF` с `file:line:col`); падают 16 закреплённых «16 навыков»: 11 Kotlin (счётчики, порядок, независимые `TrainingParityTest.metadataAndChainLinks`, `CoursePackFixtureTest`, и **покрытие лайфхаками: у каждого навыка ≥ 2 совета** — для нового навыка нужны ещё 2 строки лайфхаков) и 5 vitest | перечислено, не выполнено: строка в `skills.core-data` (+ `level`/`prerequisites`) **и** запись в `lang/pl/curriculum.json` (те же `level`/`prerequisites` второй раз), запись в `exercise-recipes.json`, ключи в `exerciseCopy.core-data` — **4 авторских файла** |
+| поле модели (4-я) | перечислено, не выполнено: 4 места (данные, контракт, маппер, модель) | 4 места, как в R1.4b |
+
+Пойманные ошибки (единая методика «тот же дефект на обеих руках», подробные таблицы в сообщениях коммитов): навыки pl 9 из 11 статически против 6 из 11 (R1.4b); пара en-ru 6 из 6 против 2 из 6; таблица форм en 6 из 6 против 1 из 6; стили 5 из 5 против 0 из 5; лайфхаки 7 из 7 (старый валидатор ловил те же 7, но отдельной командой вне сборки; генератор не отказал ни разу); рецепты en 6 из 7 статически (7-й — лексема константного слота, вне контракта; его ловит первое использование) против 0 из 7 статически на старом пути: 2 при разборе JSON, 5 при первом использовании движка.
+
+## 14. Отклонения, остаток и открытые пункты
+
+- **Не исполнено (NOT RUN)**: см. §8. Ничто из этого не затронуто изменениями R1, кроме ссылок, которые проверены компиляцией.
+- **Новых красных тестов нет** (339 тестов vitest PASS, 0 FAIL, те же 32 набора; 4 хоста 0 fail; `tsc -b` +9 ошибок в красном `pack-v2.test.ts`). **Сломано командами вне R1-области (требует решения владельца)**: шаги CI `npm run course:validate`, `course:inventory:check`, `course:inventory:decisions:check` (`.github/workflows/kotlin-check.yml`) на этой ветке не проходят — они читают файлы, которые R1 удалил (инвентарные падали и на базе); `validate-pack-v2.mjs` импортирует удалённый `validate-lifehacks.mjs`. §6 дизайна оставляет TS-инструменты pack v2 за R2–R6. Не меняю CI-гейт без владельца.
+- **Видимая пользователю фраза** «Формы читаются из forms.generated.json(en)…» на экранах матрицы iOS, web и Android называет удалённый файл; она закреплена `courses/pl-ru/source-inventory.json`, правка требует хостов, которых нет.
+- **Рост ObjC-заголовка** +55.9% против +16.4% при решении владельца (§13).
+- `courses/schema/lifehacks-v1.schema.json` осталась (15 схем — за R5/R6); читать её больше некому.
+- Цикл в навыках ловится при первом доступе, без позиции в файле (остаточный риск D-набора).
+- Реализация формы: таблица форм en-ru строится в `derive-forms.mjs` портом правил `build-pack-en.mjs`; `neg:not` — литерал, как в старом построителе.
+- Нумерация срезов: в дизайне R1.18 — стили и лайфхаки, R1.19 — Retire; частоты en-ru (решение владельца 3) — отдельный срез R1.19a.
+
+## 15. Вердикт по §5 (чтение доказательств, не решение владельца)
+
+1. **Один авторитет — выполнено**: guard (8 тестов, 5 из 5 нарушений ловятся), 17 из 17 выходов реестра отвергают подмену, JSON-сканер 98 → 79.
+2. **Исполнено — выполнено для `:shared` на четырёх хостах** (selected = executed, skipped = 0) и всех оракулов; **не выполнено** `:composeApp` и Android unit-тесты (две ошибки компиляции базы, не R1). D-набор исполняется, цикл — с остаточным риском без позиции.
+3. **Равные данные и API — выполнено**: Δ=0 по каждому семейству, публичные декларации отличаются только удалёнными JSON-входами и новыми пакетами строк.
+4. **P8/P23 — в пределах объявленных лимитов**: целый пак ×1.01–×1.04 по wall (лимит ×1.6), серия N = 1000 укладывается в проходные отметки (запас ≥ 2× до лимитов), `data generate` — на грани проходной отметки 1.5 с (медиана шести прогонов 1.495 с, трёх прогонов серии Desktop 1.51 с; лимит 3.0 с с запасом ×2.0); нативное сравнение P8 выполнено полностью для правки текста, для нового существительного и навыка — частично (DSL-рука выполнена, нативная — по структуре базы).
+
+Если открытые пункты §14 (CI-гейты, composeApp/Android, ObjC) принимаются владельцем, оснований для NO-GO по §5 в собранных доказательствах нет; пока они не решены, слияние — решение владельца (единица слияния — вся R1.3–R1.19).
