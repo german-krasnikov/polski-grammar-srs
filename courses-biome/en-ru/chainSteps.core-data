@@ -1,0 +1,269 @@
+# courses/lang/en/exercise-recipes.json — source SHA-256: 05757efb0e6966df...
+# $comment_chain: generateChain's 5 fixed steps (UniversalCorePlan.md §5.1/§5.3), recast in en's own grammar rather than pl's case walk: role (Subj->Obj) -> tense (Pres->Past) -> negation (do-support) -> possessive owner swap (my->her) -> role again (Obj->In). Each step's own verb/negation form is baked directly into its own pattern key's copy text ("seenObj"/"chainPast"/"chainNeg"), exactly like pl's "seenAcc"/"chainPast" — only the noun phrase is realized live through ConstructionRealizer, matching pl's chain design precisely (pl's own chain never realizes its verb through core.verb.tense either). en has no grammatical gender, so firstSkillByGender carries only "default".
+CHAIN {
+  source: {
+    kind: prefixed
+    spec: {
+      construction: core.argument.case-role
+      bundle: [{feature: Number value: sg} {feature: Case value: Subj}]
+    }
+    prefixCase: Subj
+    punct: "."
+  }
+  expected: {
+    kind: pattern
+    key: seenObj
+    values: [
+      {
+        name: obj
+        value: {
+          kind: phrase
+          spec: {
+            construction: core.argument.case-role
+            bundle: [{feature: Number value: sg} {feature: Case value: Obj}]
+          }
+        }
+      }
+    ]
+  }
+  promptKey: chainObjPrompt
+  explanationKey: chainObjReason
+  changes: [
+    {
+      from: {
+        kind: phrase
+        spec: {
+          construction: core.argument.case-role
+          bundle: [{feature: Number value: sg} {feature: Case value: Subj}]
+        }
+      }
+      to: {
+        kind: phrase
+        spec: {
+          construction: core.argument.case-role
+          bundle: [{feature: Number value: sg} {feature: Case value: Obj}]
+        }
+      }
+      reason: {kind: fixed key: chainObjReason}
+    }
+  ]
+  tags: [obj]
+  ownerOut: my
+}
+CHAIN {
+  skill: "en:verb.pastSimple"
+  source: {
+    kind: pattern
+    key: seenObj
+    values: [
+      {
+        name: obj
+        value: {
+          kind: phrase
+          spec: {
+            construction: core.argument.case-role
+            bundle: [{feature: Number value: sg} {feature: Case value: Obj}]
+          }
+        }
+      }
+    ]
+  }
+  expected: {
+    kind: pattern
+    key: chainPast
+    values: [
+      {
+        name: obj
+        value: {
+          kind: phrase
+          spec: {
+            construction: core.argument.case-role
+            bundle: [{feature: Number value: sg} {feature: Case value: Obj}]
+          }
+        }
+      }
+    ]
+  }
+  promptKey: chainPastPrompt
+  explanationKey: chainPastReason
+  changes: [
+    {
+      from: {kind: copy key: chainPastChangeFrom}
+      to: {kind: copy key: chainPastChangeTo}
+      reason: {kind: fixed key: chainPastReason}
+    }
+  ]
+  tags: [past]
+  ownerOut: my
+}
+CHAIN {
+  skill: "en:polarity.past"
+  source: {
+    kind: pattern
+    key: chainPast
+    values: [
+      {
+        name: obj
+        value: {
+          kind: phrase
+          spec: {
+            construction: core.argument.case-role
+            bundle: [{feature: Number value: sg} {feature: Case value: Obj}]
+          }
+        }
+      }
+    ]
+  }
+  expected: {
+    kind: pattern
+    key: chainNeg
+    values: [
+      {
+        name: obj
+        value: {
+          kind: phrase
+          spec: {
+            construction: core.argument.case-role
+            bundle: [{feature: Number value: sg} {feature: Case value: Obj}]
+          }
+        }
+      }
+    ]
+  }
+  promptKey: chainNegPrompt
+  explanationKey: chainNegReason
+  changes: [
+    {
+      from: {kind: copy key: chainNegChangeFrom}
+      to: {kind: copy key: chainNegChangeTo}
+      reason: {kind: fixed key: chainNegReason}
+    }
+  ]
+  tags: [neg past]
+  ownerOut: my
+}
+CHAIN {
+  skill: "en:possessive.my"
+  source: {
+    kind: pattern
+    key: chainNeg
+    values: [
+      {
+        name: obj
+        value: {
+          kind: phrase
+          spec: {
+            construction: core.argument.case-role
+            bundle: [{feature: Number value: sg} {feature: Case value: Obj}]
+            ownerLexeme: my
+          }
+        }
+      }
+    ]
+  }
+  expected: {
+    kind: pattern
+    key: chainNeg
+    values: [
+      {
+        name: obj
+        value: {
+          kind: phrase
+          spec: {
+            construction: core.agreement.possessive
+            bundle: [{feature: Number value: sg}]
+            ownerLexeme: her
+          }
+        }
+      }
+    ]
+  }
+  promptKey: chainOwnerPrompt
+  explanationKey: chainOwnerReason
+  changes: [
+    {
+      from: {
+        kind: phrase
+        spec: {
+          construction: core.argument.case-role
+          bundle: [{feature: Number value: sg} {feature: Case value: Obj}]
+          ownerLexeme: my
+        }
+      }
+      to: {
+        kind: phrase
+        spec: {
+          construction: core.agreement.possessive
+          bundle: [{feature: Number value: sg}]
+          ownerLexeme: her
+        }
+      }
+      reason: {kind: fixed key: chainOwnerReason}
+    }
+  ]
+  tags: [agreement]
+  ownerOut: her
+}
+CHAIN {
+  skill: "en:role.location"
+  source: {
+    kind: pattern
+    key: chainNeg
+    values: [
+      {
+        name: obj
+        value: {
+          kind: phrase
+          spec: {
+            construction: core.agreement.possessive
+            bundle: [{feature: Number value: sg}]
+            ownerLexeme: her
+          }
+        }
+      }
+    ]
+  }
+  expected: {
+    kind: pattern
+    key: roleDrill
+    values: [
+      {name: start value: {kind: copy key: chainLocStart}}
+      {
+        name: target
+        value: {
+          kind: phrase
+          spec: {
+            construction: core.argument.case-role
+            bundle: [{feature: Number value: sg} {feature: Case value: In}]
+            ownerLexeme: her
+          }
+        }
+      }
+    ]
+  }
+  promptKey: chainLocPrompt
+  explanationKey: chainLocReason
+  changes: [
+    {
+      from: {
+        kind: phrase
+        spec: {
+          construction: core.agreement.possessive
+          bundle: [{feature: Number value: sg}]
+          ownerLexeme: her
+        }
+      }
+      to: {
+        kind: phrase
+        spec: {
+          construction: core.argument.case-role
+          bundle: [{feature: Number value: sg} {feature: Case value: In}]
+          ownerLexeme: her
+        }
+      }
+      reason: {kind: fixed key: chainLocReason}
+    }
+  ]
+  tags: [role in]
+  ownerOut: her
+}

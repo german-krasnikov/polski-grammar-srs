@@ -1,0 +1,21 @@
+# courses/lang/en/exercise-recipes.json — source SHA-256: 05757efb0e6966df...
+# $comment_verbLexeme: "walk" (EnRuPackPlan.md §1.3: a neutral, fully regular verb, deliberately not "go") is the lexicalSlots["verb"] value core.verb.tense/core.sentence.polarity/core.sentence.mood realize through ConstructionRealizer — the only 7 skills (verb.presentSimple/pastSimple/futureSimple/presentContinuous, polarity.present/past, mood.question) whose own construction actually needs a realized verb form. Every other skill's copy pattern bakes its own fixed verb ("see"/"saw"/"did not see") directly as pack-authored text, exactly like pl's "seenAcc"/"chainPast" patterns — those skills drill a noun-phrase transformation, not verb conjugation, so the verb they show is presentation, not `:core-engine` realization.
+DEFAULTS {
+  defaultOwnerLexeme: my
+  verbLexeme: walk
+  firstSkillByGender: [{gender: default skill: "en:role.object"}]
+  constantSlots: [
+    {
+      slot: prep
+      lexeme: role
+      whenFeature: Case
+      whenValues: [In With To About Of]
+    }
+    {slot: aux lexeme: do whenFeature: Polarity whenValues: [Neg]}
+    {slot: neg lexeme: not whenFeature: Polarity whenValues: [Neg]}
+    {slot: aux lexeme: will whenFeature: Tense whenValues: [Fut]}
+    {slot: aux lexeme: be whenFeature: Aspect whenValues: [Continuous]}
+    {slot: aux lexeme: do whenFeature: Mood whenValues: [YesNoQ]}
+    {slot: subject lexeme: you}
+  ]
+}

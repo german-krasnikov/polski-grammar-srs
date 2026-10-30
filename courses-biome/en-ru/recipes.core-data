@@ -1,0 +1,1141 @@
+# courses/lang/en/exercise-recipes.json — source SHA-256: 05757efb0e6966df...
+# $comment: EnRuPackPlan.md §1.3/§6 EN-14: the wiring ExerciseGenerator reads for every one of lang/en/curriculum.json's 16 skills, mirroring lang/pl/exercise-recipes.json's own convention exactly — every string outside a construction/feature/case identifier is an opaque exerciseCopy/exercisePattern KEY (resolved through pairs/en-ru/pair.json, EN-17), never English or Russian text written here. `defaultOwnerLexeme`/`verbLexeme` are pl's own convention, reused unchanged. `constantSlots` is new (EnRuPackPlan.md §5 gap A): pack-constant lexical slots beyond `owner`/`verb` that ExerciseGenerator now fills conditionally on a phrase's own resolved Case/Polarity/Tense/Aspect/Mood — `prep` (the role preposition, absent for Subj/Obj), `aux`/`neg` (do-support, present only for Polarity=Neg or Mood=YesNoQ; `will`/`be` for the periphrastic Tense=Fut/Aspect=Continuous), and `subject` (mood.question's fixed "you", unconditional — every other construction here simply has no `subject` slot to fill). Skill ids are `en:`-namespaced (curriculum.json, EN-12) unlike pl's bare ids, so both packs' recipes never collide even though the underlying construction ids are shared.
+# /skills/en:mood.question/changes[0]/$comment: EN-23: from/to are wrapped in the same `capitalized` the source/expected TextSpec.Concat above already applies to this exact phrase — core.sentence.mood's realized text IS the whole sentence here (unlike every other en-ru skill, where the changed phrase is a non-initial object/verb slot), so the change's own text must match the sentence's actual rendered case for ContrastHighlightPlan.md's word-boundary lookup (`sentenceHighlightParts`'s `wholePhraseStart` is intentionally case-sensitive) to find it at all.
+# /skills/en:polarity.present/$comment_accepted: EnRuPackPlan.md §2.3: the do-support contraction is a typed-answer alternative only, never a FormChange — it must never be highlighted as a diff.
+# /skills/en:polarity.past/$comment_accepted: EnRuPackPlan.md §2.3: the do-support contraction is a typed-answer alternative only, never a FormChange — it must never be highlighted as a diff.
+RECIPE {
+  skill: "en:role.object"
+  source: {
+    kind: prefixed
+    spec: {
+      construction: core.argument.case-role
+      bundle: [{feature: Number value: sg} {feature: Case value: Subj}]
+    }
+    prefixCase: Subj
+    punct: "."
+  }
+  expected: {
+    kind: pattern
+    key: seenObj
+    values: [
+      {
+        name: obj
+        value: {
+          kind: phrase
+          spec: {
+            construction: core.argument.case-role
+            bundle: [{feature: Number value: sg} {feature: Case value: Obj}]
+          }
+        }
+      }
+    ]
+  }
+  promptKey: roleObjPrompt
+  explanationKey: roleObjExplanation
+  changes: [
+    {
+      from: {
+        kind: phrase
+        spec: {
+          construction: core.argument.case-role
+          bundle: [{feature: Number value: sg} {feature: Case value: Subj}]
+        }
+      }
+      to: {
+        kind: phrase
+        spec: {
+          construction: core.argument.case-role
+          bundle: [{feature: Number value: sg} {feature: Case value: Obj}]
+        }
+      }
+      reason: {kind: fixed key: roleObjReason}
+    }
+  ]
+  tags: [obj]
+}
+RECIPE {
+  skill: "en:verb.presentSimple"
+  source: {
+    kind: pattern
+    key: verbSentence
+    values: [
+      {
+        name: subj
+        value: {
+          kind: phrase
+          capitalized: true
+          spec: {
+            construction: core.argument.case-role
+            bundle: [{feature: Number value: sg} {feature: Case value: Subj}]
+          }
+        }
+      }
+      {
+        name: verb
+        value: {
+          kind: phrase
+          spec: {
+            construction: core.verb.tense
+            bundle: [
+              {feature: Tense value: Past}
+              {feature: Person value: "3"}
+              {feature: Number value: sg}
+              {feature: Aspect value: Simple}
+            ]
+          }
+        }
+      }
+    ]
+  }
+  expected: {
+    kind: pattern
+    key: verbSentence
+    values: [
+      {
+        name: subj
+        value: {
+          kind: phrase
+          capitalized: true
+          spec: {
+            construction: core.argument.case-role
+            bundle: [{feature: Number value: sg} {feature: Case value: Subj}]
+          }
+        }
+      }
+      {
+        name: verb
+        value: {
+          kind: phrase
+          spec: {
+            construction: core.verb.tense
+            bundle: [
+              {feature: Tense value: Pres}
+              {feature: Person value: "3"}
+              {feature: Number value: sg}
+              {feature: Aspect value: Simple}
+            ]
+          }
+        }
+      }
+    ]
+  }
+  promptKey: verbPresentPrompt
+  explanationKey: verbTenseExplanation
+  changes: [
+    {
+      from: {
+        kind: phrase
+        spec: {
+          construction: core.verb.tense
+          bundle: [
+            {feature: Tense value: Past}
+            {feature: Person value: "3"}
+            {feature: Number value: sg}
+            {feature: Aspect value: Simple}
+          ]
+        }
+      }
+      to: {
+        kind: phrase
+        spec: {
+          construction: core.verb.tense
+          bundle: [
+            {feature: Tense value: Pres}
+            {feature: Person value: "3"}
+            {feature: Number value: sg}
+            {feature: Aspect value: Simple}
+          ]
+        }
+      }
+      reason: {kind: fixed key: verbTenseReason}
+    }
+  ]
+  tags: [verb present subj]
+}
+RECIPE {
+  skill: "en:possessive.my"
+  source: {
+    kind: pattern
+    key: seenObj
+    values: [
+      {
+        name: obj
+        value: {
+          kind: phrase
+          spec: {
+            construction: core.argument.case-role
+            bundle: [{feature: Number value: sg} {feature: Case value: Obj}]
+            ownerLexeme: my
+          }
+        }
+      }
+    ]
+  }
+  expected: {
+    kind: pattern
+    key: seenObj
+    values: [
+      {
+        name: obj
+        value: {
+          kind: phrase
+          spec: {
+            construction: core.agreement.possessive
+            bundle: [{feature: Number value: sg}]
+          }
+        }
+      }
+    ]
+  }
+  explanationKey: ownerExplanation
+  changes: [
+    {
+      from: {
+        kind: phrase
+        spec: {
+          construction: core.argument.case-role
+          bundle: [{feature: Number value: sg} {feature: Case value: Obj}]
+          ownerLexeme: my
+        }
+      }
+      to: {
+        kind: phrase
+        spec: {
+          construction: core.agreement.possessive
+          bundle: [{feature: Number value: sg}]
+        }
+      }
+      reason: {kind: fixed key: ownerReason}
+    }
+  ]
+  tags: [agreement obj]
+  ownerDraw: {
+    owners: [
+      {lexeme: your labelKey: ownerYour}
+      {lexeme: his labelKey: ownerHis}
+      {lexeme: her labelKey: ownerHer}
+      {lexeme: its labelKey: ownerIts}
+      {lexeme: our labelKey: ownerOur}
+      {lexeme: their labelKey: ownerTheir}
+    ]
+    promptPrefixKey: ownerPromptPrefix
+    promptSuffixKey: ownerPromptSuffix
+  }
+}
+RECIPE {
+  skill: "en:mood.question"
+  source: {
+    kind: concat
+    parts: [
+      {
+        kind: phrase
+        capitalized: true
+        spec: {
+          construction: core.sentence.mood
+          bundle: [
+            {feature: Tense value: Pres}
+            {feature: Person value: "2"}
+            {feature: Number value: sg}
+            {feature: Mood value: Decl}
+          ]
+        }
+      }
+      {kind: literal value: "."}
+    ]
+  }
+  expected: {
+    kind: concat
+    parts: [
+      {
+        kind: phrase
+        capitalized: true
+        spec: {
+          construction: core.sentence.mood
+          bundle: [
+            {feature: Tense value: Pres}
+            {feature: Person value: "2"}
+            {feature: Number value: sg}
+            {feature: Mood value: YesNoQ}
+          ]
+        }
+      }
+      {kind: literal value: "?"}
+    ]
+  }
+  promptKey: moodQuestionPrompt
+  explanationKey: moodQuestionExplanation
+  changes: [
+    {
+      from: {
+        kind: phrase
+        capitalized: true
+        spec: {
+          construction: core.sentence.mood
+          bundle: [
+            {feature: Tense value: Pres}
+            {feature: Person value: "2"}
+            {feature: Number value: sg}
+            {feature: Mood value: Decl}
+          ]
+        }
+      }
+      to: {
+        kind: phrase
+        capitalized: true
+        spec: {
+          construction: core.sentence.mood
+          bundle: [
+            {feature: Tense value: Pres}
+            {feature: Person value: "2"}
+            {feature: Number value: sg}
+            {feature: Mood value: YesNoQ}
+          ]
+        }
+      }
+      reason: {kind: fixed key: moodQuestionReason}
+    }
+  ]
+  tags: [mood question]
+}
+RECIPE {
+  skill: "en:role.location"
+  source: {
+    kind: pattern
+    key: seenObj
+    values: [
+      {
+        name: obj
+        value: {
+          kind: phrase
+          spec: {
+            construction: core.argument.case-role
+            bundle: [{feature: Number value: sg} {feature: Case value: Obj}]
+          }
+        }
+      }
+    ]
+  }
+  expected: {
+    kind: pattern
+    key: roleDrill
+    values: [
+      {name: start value: {kind: copy key: roleLocationStart}}
+      {
+        name: target
+        value: {
+          kind: phrase
+          spec: {
+            construction: core.argument.case-role
+            bundle: [{feature: Number value: sg} {feature: Case value: In}]
+          }
+        }
+      }
+    ]
+  }
+  promptKey: roleLocationPrompt
+  explanationKey: roleDrillExplanation
+  changes: [
+    {
+      from: {
+        kind: phrase
+        spec: {
+          construction: core.argument.case-role
+          bundle: [{feature: Number value: sg} {feature: Case value: Obj}]
+        }
+      }
+      to: {
+        kind: phrase
+        spec: {
+          construction: core.argument.case-role
+          bundle: [{feature: Number value: sg} {feature: Case value: In}]
+        }
+      }
+      reason: {kind: fixed key: roleLocationReason}
+    }
+  ]
+  tags: [role in]
+}
+RECIPE {
+  skill: "en:role.instrument"
+  source: {
+    kind: pattern
+    key: seenObj
+    values: [
+      {
+        name: obj
+        value: {
+          kind: phrase
+          spec: {
+            construction: core.argument.case-role
+            bundle: [{feature: Number value: sg} {feature: Case value: Obj}]
+          }
+        }
+      }
+    ]
+  }
+  expected: {
+    kind: pattern
+    key: roleDrill
+    values: [
+      {name: start value: {kind: copy key: roleInstrumentStart}}
+      {
+        name: target
+        value: {
+          kind: phrase
+          spec: {
+            construction: core.argument.case-role
+            bundle: [{feature: Number value: sg} {feature: Case value: With}]
+          }
+        }
+      }
+    ]
+  }
+  promptKey: roleInstrumentPrompt
+  explanationKey: roleDrillExplanation
+  changes: [
+    {
+      from: {
+        kind: phrase
+        spec: {
+          construction: core.argument.case-role
+          bundle: [{feature: Number value: sg} {feature: Case value: Obj}]
+        }
+      }
+      to: {
+        kind: phrase
+        spec: {
+          construction: core.argument.case-role
+          bundle: [{feature: Number value: sg} {feature: Case value: With}]
+        }
+      }
+      reason: {kind: fixed key: roleInstrumentReason}
+    }
+  ]
+  tags: [role with]
+}
+RECIPE {
+  skill: "en:polarity.present"
+  source: {
+    kind: pattern
+    key: subjectVerb
+    values: [
+      {
+        name: verb
+        value: {
+          kind: phrase
+          spec: {
+            construction: core.sentence.polarity
+            bundle: [
+              {feature: Tense value: Pres}
+              {feature: Person value: "1"}
+              {feature: Number value: sg}
+              {feature: Polarity value: Pos}
+            ]
+          }
+        }
+      }
+    ]
+  }
+  expected: {
+    kind: pattern
+    key: subjectVerb
+    values: [
+      {
+        name: verb
+        value: {
+          kind: phrase
+          spec: {
+            construction: core.sentence.polarity
+            bundle: [
+              {feature: Tense value: Pres}
+              {feature: Person value: "1"}
+              {feature: Number value: sg}
+              {feature: Polarity value: Neg}
+            ]
+          }
+        }
+      }
+    ]
+  }
+  promptKey: polarityPresentPrompt
+  explanationKey: polarityExplanation
+  changes: [
+    {
+      from: {
+        kind: phrase
+        spec: {
+          construction: core.sentence.polarity
+          bundle: [
+            {feature: Tense value: Pres}
+            {feature: Person value: "1"}
+            {feature: Number value: sg}
+            {feature: Polarity value: Pos}
+          ]
+        }
+      }
+      to: {
+        kind: phrase
+        spec: {
+          construction: core.sentence.polarity
+          bundle: [
+            {feature: Tense value: Pres}
+            {feature: Person value: "1"}
+            {feature: Number value: sg}
+            {feature: Polarity value: Neg}
+          ]
+        }
+      }
+      reason: {kind: fixed key: polarityReason}
+    }
+  ]
+  accepted: [
+    {
+      kind: pattern
+      key: subjectVerb
+      values: [{name: verb value: {kind: literal value: "don't walk"}}]
+    }
+  ]
+  tags: [polarity neg]
+}
+RECIPE {
+  skill: "en:verb.pastSimple"
+  source: {
+    kind: pattern
+    key: verbSentence
+    values: [
+      {
+        name: subj
+        value: {
+          kind: phrase
+          capitalized: true
+          spec: {
+            construction: core.argument.case-role
+            bundle: [{feature: Number value: sg} {feature: Case value: Subj}]
+          }
+        }
+      }
+      {
+        name: verb
+        value: {
+          kind: phrase
+          spec: {
+            construction: core.verb.tense
+            bundle: [
+              {feature: Tense value: Pres}
+              {feature: Person value: "3"}
+              {feature: Number value: sg}
+              {feature: Aspect value: Simple}
+            ]
+          }
+        }
+      }
+    ]
+  }
+  expected: {
+    kind: pattern
+    key: verbSentence
+    values: [
+      {
+        name: subj
+        value: {
+          kind: phrase
+          capitalized: true
+          spec: {
+            construction: core.argument.case-role
+            bundle: [{feature: Number value: sg} {feature: Case value: Subj}]
+          }
+        }
+      }
+      {
+        name: verb
+        value: {
+          kind: phrase
+          spec: {
+            construction: core.verb.tense
+            bundle: [
+              {feature: Tense value: Past}
+              {feature: Person value: "3"}
+              {feature: Number value: sg}
+              {feature: Aspect value: Simple}
+            ]
+          }
+        }
+      }
+    ]
+  }
+  promptKey: verbPastPrompt
+  explanationKey: verbTenseExplanation
+  changes: [
+    {
+      from: {
+        kind: phrase
+        spec: {
+          construction: core.verb.tense
+          bundle: [
+            {feature: Tense value: Pres}
+            {feature: Person value: "3"}
+            {feature: Number value: sg}
+            {feature: Aspect value: Simple}
+          ]
+        }
+      }
+      to: {
+        kind: phrase
+        spec: {
+          construction: core.verb.tense
+          bundle: [
+            {feature: Tense value: Past}
+            {feature: Person value: "3"}
+            {feature: Number value: sg}
+            {feature: Aspect value: Simple}
+          ]
+        }
+      }
+      reason: {kind: fixed key: verbTenseReason}
+    }
+  ]
+  tags: [verb past subj]
+}
+RECIPE {
+  skill: "en:role.recipient"
+  source: {
+    kind: pattern
+    key: seenObj
+    values: [
+      {
+        name: obj
+        value: {
+          kind: phrase
+          spec: {
+            construction: core.argument.case-role
+            bundle: [{feature: Number value: sg} {feature: Case value: Obj}]
+          }
+        }
+      }
+    ]
+  }
+  expected: {
+    kind: pattern
+    key: roleDrill
+    values: [
+      {name: start value: {kind: copy key: roleRecipientStart}}
+      {
+        name: target
+        value: {
+          kind: phrase
+          spec: {
+            construction: core.argument.case-role
+            bundle: [{feature: Number value: sg} {feature: Case value: To}]
+          }
+        }
+      }
+    ]
+  }
+  promptKey: roleRecipientPrompt
+  explanationKey: roleDrillExplanation
+  changes: [
+    {
+      from: {
+        kind: phrase
+        spec: {
+          construction: core.argument.case-role
+          bundle: [{feature: Number value: sg} {feature: Case value: Obj}]
+        }
+      }
+      to: {
+        kind: phrase
+        spec: {
+          construction: core.argument.case-role
+          bundle: [{feature: Number value: sg} {feature: Case value: To}]
+        }
+      }
+      reason: {kind: fixed key: roleRecipientReason}
+    }
+  ]
+  tags: [role to]
+}
+RECIPE {
+  skill: "en:number.plural"
+  source: {
+    kind: pattern
+    key: seenObj
+    values: [
+      {
+        name: obj
+        value: {
+          kind: phrase
+          spec: {
+            construction: core.argument.case-role
+            bundle: [{feature: Number value: sg} {feature: Case value: Obj}]
+          }
+        }
+      }
+    ]
+  }
+  expected: {
+    kind: pattern
+    key: seenObj
+    values: [
+      {
+        name: obj
+        value: {
+          kind: phrase
+          spec: {
+            construction: core.number
+            bundle: [{feature: Number value: pl} {feature: Case value: Obj}]
+          }
+        }
+      }
+    ]
+  }
+  promptKey: pluralPrompt
+  explanationKey: pluralExplanation
+  changes: [
+    {
+      from: {
+        kind: phrase
+        spec: {
+          construction: core.argument.case-role
+          bundle: [{feature: Number value: sg} {feature: Case value: Obj}]
+        }
+      }
+      to: {
+        kind: phrase
+        spec: {
+          construction: core.number
+          bundle: [{feature: Number value: pl} {feature: Case value: Obj}]
+        }
+      }
+      reason: {kind: fixed key: pluralReason}
+    }
+  ]
+  tags: [plural obj]
+  numberOverride: pl
+}
+RECIPE {
+  skill: "en:polarity.past"
+  source: {
+    kind: pattern
+    key: subjectVerb
+    values: [
+      {
+        name: verb
+        value: {
+          kind: phrase
+          spec: {
+            construction: core.sentence.polarity
+            bundle: [
+              {feature: Tense value: Past}
+              {feature: Person value: "1"}
+              {feature: Number value: sg}
+              {feature: Polarity value: Pos}
+            ]
+          }
+        }
+      }
+    ]
+  }
+  expected: {
+    kind: pattern
+    key: subjectVerb
+    values: [
+      {
+        name: verb
+        value: {
+          kind: phrase
+          spec: {
+            construction: core.sentence.polarity
+            bundle: [
+              {feature: Tense value: Past}
+              {feature: Person value: "1"}
+              {feature: Number value: sg}
+              {feature: Polarity value: Neg}
+            ]
+          }
+        }
+      }
+    ]
+  }
+  promptKey: polarityPastPrompt
+  explanationKey: polarityExplanation
+  changes: [
+    {
+      from: {
+        kind: phrase
+        spec: {
+          construction: core.sentence.polarity
+          bundle: [
+            {feature: Tense value: Past}
+            {feature: Person value: "1"}
+            {feature: Number value: sg}
+            {feature: Polarity value: Pos}
+          ]
+        }
+      }
+      to: {
+        kind: phrase
+        spec: {
+          construction: core.sentence.polarity
+          bundle: [
+            {feature: Tense value: Past}
+            {feature: Person value: "1"}
+            {feature: Number value: sg}
+            {feature: Polarity value: Neg}
+          ]
+        }
+      }
+      reason: {kind: fixed key: polarityReason}
+    }
+  ]
+  accepted: [
+    {
+      kind: pattern
+      key: subjectVerb
+      values: [{name: verb value: {kind: literal value: "didn't walk"}}]
+    }
+  ]
+  tags: [polarity neg past]
+}
+RECIPE {
+  skill: "en:verb.futureSimple"
+  source: {
+    kind: pattern
+    key: verbSentence
+    values: [
+      {
+        name: subj
+        value: {
+          kind: phrase
+          capitalized: true
+          spec: {
+            construction: core.argument.case-role
+            bundle: [{feature: Number value: sg} {feature: Case value: Subj}]
+          }
+        }
+      }
+      {
+        name: verb
+        value: {
+          kind: phrase
+          spec: {
+            construction: core.verb.tense
+            bundle: [
+              {feature: Tense value: Pres}
+              {feature: Person value: "3"}
+              {feature: Number value: sg}
+              {feature: Aspect value: Simple}
+            ]
+          }
+        }
+      }
+    ]
+  }
+  expected: {
+    kind: pattern
+    key: verbSentence
+    values: [
+      {
+        name: subj
+        value: {
+          kind: phrase
+          capitalized: true
+          spec: {
+            construction: core.argument.case-role
+            bundle: [{feature: Number value: sg} {feature: Case value: Subj}]
+          }
+        }
+      }
+      {
+        name: verb
+        value: {
+          kind: phrase
+          spec: {
+            construction: core.verb.tense
+            bundle: [
+              {feature: Tense value: Fut}
+              {feature: Person value: "3"}
+              {feature: Number value: sg}
+              {feature: Aspect value: Simple}
+            ]
+          }
+        }
+      }
+    ]
+  }
+  promptKey: verbFuturePrompt
+  explanationKey: verbTenseExplanation
+  changes: [
+    {
+      from: {
+        kind: phrase
+        spec: {
+          construction: core.verb.tense
+          bundle: [
+            {feature: Tense value: Pres}
+            {feature: Person value: "3"}
+            {feature: Number value: sg}
+            {feature: Aspect value: Simple}
+          ]
+        }
+      }
+      to: {
+        kind: phrase
+        spec: {
+          construction: core.verb.tense
+          bundle: [
+            {feature: Tense value: Fut}
+            {feature: Person value: "3"}
+            {feature: Number value: sg}
+            {feature: Aspect value: Simple}
+          ]
+        }
+      }
+      reason: {kind: fixed key: verbTenseReason}
+    }
+  ]
+  tags: [verb future subj]
+}
+RECIPE {
+  skill: "en:pronouns"
+  source: {
+    kind: pattern
+    key: seenObj
+    values: [
+      {
+        name: obj
+        value: {
+          kind: phrase
+          spec: {
+            construction: core.argument.case-role
+            bundle: [{feature: Number value: sg} {feature: Case value: Obj}]
+          }
+        }
+      }
+    ]
+  }
+  expected: {
+    kind: pattern
+    key: seenObj
+    values: [
+      {
+        name: obj
+        value: {
+          kind: pronoun
+          genderToKey: [{gender: default pronounId: it}]
+          caseId: Obj
+        }
+      }
+    ]
+  }
+  promptKey: pronounPrompt
+  explanationKey: pronounExplanation
+  changes: [
+    {
+      from: {
+        kind: phrase
+        spec: {
+          construction: core.argument.case-role
+          bundle: [{feature: Number value: sg} {feature: Case value: Obj}]
+        }
+      }
+      to: {
+        kind: pronoun
+        genderToKey: [{gender: default pronounId: it}]
+        caseId: Obj
+      }
+      reason: {kind: fixed key: pronounReason}
+    }
+  ]
+  tags: [pronoun obj]
+}
+RECIPE {
+  skill: "en:verb.presentContinuous"
+  source: {
+    kind: pattern
+    key: verbSentence
+    values: [
+      {
+        name: subj
+        value: {
+          kind: phrase
+          capitalized: true
+          spec: {
+            construction: core.argument.case-role
+            bundle: [{feature: Number value: sg} {feature: Case value: Subj}]
+          }
+        }
+      }
+      {
+        name: verb
+        value: {
+          kind: phrase
+          spec: {
+            construction: core.verb.tense
+            bundle: [
+              {feature: Tense value: Pres}
+              {feature: Person value: "3"}
+              {feature: Number value: sg}
+              {feature: Aspect value: Simple}
+            ]
+          }
+        }
+      }
+    ]
+  }
+  expected: {
+    kind: pattern
+    key: verbSentence
+    values: [
+      {
+        name: subj
+        value: {
+          kind: phrase
+          capitalized: true
+          spec: {
+            construction: core.argument.case-role
+            bundle: [{feature: Number value: sg} {feature: Case value: Subj}]
+          }
+        }
+      }
+      {
+        name: verb
+        value: {
+          kind: phrase
+          spec: {
+            construction: core.verb.tense
+            bundle: [
+              {feature: Tense value: Pres}
+              {feature: Person value: "3"}
+              {feature: Number value: sg}
+              {feature: Aspect value: Continuous}
+            ]
+          }
+        }
+      }
+    ]
+  }
+  promptKey: verbContinuousPrompt
+  explanationKey: verbTenseExplanation
+  changes: [
+    {
+      from: {
+        kind: phrase
+        spec: {
+          construction: core.verb.tense
+          bundle: [
+            {feature: Tense value: Pres}
+            {feature: Person value: "3"}
+            {feature: Number value: sg}
+            {feature: Aspect value: Simple}
+          ]
+        }
+      }
+      to: {
+        kind: phrase
+        spec: {
+          construction: core.verb.tense
+          bundle: [
+            {feature: Tense value: Pres}
+            {feature: Person value: "3"}
+            {feature: Number value: sg}
+            {feature: Aspect value: Continuous}
+          ]
+        }
+      }
+      reason: {kind: fixed key: verbTenseReason}
+    }
+  ]
+  tags: [verb continuous subj]
+}
+RECIPE {
+  skill: "en:tense.contrast"
+  staticOverride: {
+    sourceKey: tenseContrastSource
+    promptKey: tenseContrastPrompt
+    expectedKey: tenseContrastExpected
+    explanationKey: tenseContrastExplanation
+    acceptedKeys: [tenseContrastAccepted]
+    changeFromKey: tenseContrastFrom
+    changeToKey: tenseContrastTo
+    changeReasonKey: tenseContrastReason
+    nounId: house
+    adjectiveId: new
+    tags: [tense contrast]
+  }
+}
+RECIPE {
+  skill: "en:mixed"
+  source: {
+    kind: pattern
+    key: seenObj
+    values: [
+      {
+        name: obj
+        value: {
+          kind: phrase
+          spec: {
+            construction: core.argument.case-role
+            bundle: [{feature: Number value: sg} {feature: Case value: Obj}]
+            ownerLexeme: my
+          }
+        }
+      }
+    ]
+  }
+  expected: {
+    kind: pattern
+    key: chainPast
+    values: [
+      {
+        name: obj
+        value: {
+          kind: phrase
+          spec: {
+            construction: core.agreement.possessive
+            bundle: [{feature: Number value: sg}]
+          }
+        }
+      }
+    ]
+  }
+  promptKey: mixedPrompt
+  explanationKey: mixedExplanation
+  changes: [
+    {
+      from: {kind: copy key: mixedVerbFrom}
+      to: {kind: copy key: mixedVerbTo}
+      reason: {kind: fixed key: mixedVerbReason}
+    }
+    {
+      from: {
+        kind: phrase
+        spec: {
+          construction: core.argument.case-role
+          bundle: [{feature: Number value: sg} {feature: Case value: Obj}]
+          ownerLexeme: my
+        }
+      }
+      to: {
+        kind: phrase
+        spec: {
+          construction: core.agreement.possessive
+          bundle: [{feature: Number value: sg}]
+        }
+      }
+      reason: {kind: fixed key: mixedOwnerReason}
+    }
+  ]
+  tags: [mixed past agreement]
+  ownerDraw: {
+    owners: [
+      {lexeme: your labelKey: ownerYour}
+      {lexeme: his labelKey: ownerHis}
+      {lexeme: her labelKey: ownerHer}
+      {lexeme: its labelKey: ownerIts}
+      {lexeme: our labelKey: ownerOur}
+      {lexeme: their labelKey: ownerTheir}
+    ]
+    promptPrefixKey: mixedOwnerPromptPrefix
+    promptSuffixKey: mixedOwnerPromptSuffix
+  }
+}

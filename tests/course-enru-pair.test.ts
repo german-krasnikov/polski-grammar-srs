@@ -1,4 +1,4 @@
-// R1.14b (Plans/Biome/R1Design.md): the files of courses-biome/en-ru and the pair rows of English against dsl/course.data-contract: what `biome data` rejects, with the exact position of each problem.
+// R1.14b and R1.15 (Plans/Biome/R1Design.md): the files of courses-biome/en-ru, the pair rows and the recipes of English against dsl/course.data-contract: what `biome data` rejects, with the exact position of each problem.
 // The lexicon cases are course-enru-lexicon.test.ts. They need a biome-dsl checkout (see course-data.test.ts); without one they are skipped, which is NOT RUN, not a pass.
 import { describe, expect, it } from 'vitest';
 import { readdirSync } from 'node:fs';
@@ -6,13 +6,14 @@ import { join } from 'node:path';
 import { biome, hasCli, repo, row, rowsIn, skill } from './support/course-data';
 
 const EN = join(repo, 'courses-biome/en-ru');
-/** Rows per file, from the sealed sources (lang/en/lexicon.json, lang/en/prepositions.json, pairs/en-ru/pair.json: the 16 skills, 12 seeds, 73 copy entries, 6 patterns, 1 prefix, 1 vocabulary of 30 cards, 1 chain). */
+/** Rows per file, from the sealed sources (lang/en/lexicon.json, lang/en/prepositions.json, pairs/en-ru/pair.json: the 16 skills, 12 seeds, 73 copy entries, 6 patterns, 1 prefix, 1 vocabulary of 30 cards, 1 chain; R1.15, lang/en/realization.json and exercise-recipes.json: 6 constructions, 16 recipes, 5 chain steps, 1 defaults row). */
 const ROWS: Record<string, number> = {
-  adjectives: 7, caseSentencePrefixes: 1, exerciseCopy: 73, exercisePatterns: 6, nouns: 14, personalPronouns: 7, possessives: 7, prepositions: 1, sentenceSeeds: 12, skills: 16, training: 1, verbs: 10, vocabulary: 1,
+  adjectives: 7, caseSentencePrefixes: 1, chainSteps: 5, constructions: 6, exerciseCopy: 73, exercisePatterns: 6, nouns: 14, personalPronouns: 7, possessives: 7, prepositions: 1,
+  recipeDefaults: 1, recipes: 16, sentenceSeeds: 12, skills: 16, training: 1, verbs: 10, vocabulary: 1,
 };
 
 describe.skipIf(!hasCli)('courses-biome/en-ru is Core data', () => {
-  it('holds exactly the 13 known files', () => {
+  it('holds exactly the 17 known files', () => {
     expect(readdirSync(EN).filter(name => name.endsWith('.core-data')).map(name => name.replace('.core-data', '')).sort()).toEqual(Object.keys(ROWS).sort());
   });
   for (const [file, rows] of Object.entries(ROWS)) {
@@ -44,4 +45,27 @@ describe.skipIf(!hasCli)('en skill rows against the contract', () => {
   it('an enNounId that is no noun of the lexicon is DATA_REF at the value', () => skills.problem([filtered('{enNounId: ["nobody"]}')], 0, '"nobody"', 'DATA_REF'));
   it('a nounId, the reference of pl-ru, has no noun to refer to in the English step: DATA_REF', () => skills.problem([filtered('{nounId: ["wife"]}')], 0, '"wife"', 'DATA_REF'));
   it('a prerequisite that is no skill of the pack is DATA_REF at the value', () => skills.problem([skill('en:a', { prerequisites: '["en:nope"]' })], 0, '"en:nope"', 'DATA_REF'));
+});
+
+describe.skipIf(!hasCli)('en recipes and constructions against the contract', () => {
+  const needs = ['SkillRow', 'EnNounRow', 'CopyEntryRow', 'PatternEntryRow', 'ConstructionRow', 'PossessiveRow'];
+  const recipes = rowsIn('course-enru', 'SkillRecipeRow', ...needs);
+  const chain = rowsIn('course-enru', 'ChainStepRecipeRow', ...needs);
+  const defaults = rowsIn('course-enru', 'RecipeDefaultsRow', ...needs);
+  const direct = '{kind: direct value: {kind: copy key: "roleObjPrompt"}}';
+  const recipe = (skill: string, change: Record<string, string | undefined> = {}) => row('RECIPE', {
+    skill: `"${skill}"`, source: direct, expected: direct, promptKey: '"roleObjPrompt"', explanationKey: '"roleObjExplanation"', changes: '[]', tags: '["obj"]',
+  }, change);
+  it('a recipe for an English skill, with an English copy key, is accepted', () => expect(recipes.check(recipe('en:role.object') + '\n')).toEqual({ status: 0, problems: [] }));
+  it('a recipe for a skill of pl-ru is DATA_REF at the value: the step binds the skills of English', () => recipes.problem([recipe('case.acc.n')], 0, '"case.acc.n"', 'DATA_REF'));
+  it('a copy key of pl-ru is DATA_REF at the value', () => recipes.problem([recipe('en:role.object', { promptKey: '"accPrompt"' })], 0, '"accPrompt"', 'DATA_REF'));
+  it('a phrase of a construction that English has no template for is DATA_REF at the value', () =>
+    recipes.problem([recipe('en:role.object', { source: '{kind: prefixed spec: {construction: "core.composite" bundle: []} prefixCase: "Subj" punct: "."}' })], 0, '"core.composite"', 'DATA_REF'));
+  it('an owner of pl-ru that English has not (yourPlural) is DATA_REF at the value', () =>
+    chain.problem([row('CHAIN', { source: direct, expected: direct, promptKey: '"roleObjPrompt"', explanationKey: '"roleObjExplanation"', changes: '[]', tags: '[]', ownerOut: '"yourPlural"' })], 0, '"yourPlural"', 'DATA_REF'));
+  it('constant slots that are always there, and ones that wait for a feature of the phrase, are accepted', () =>
+    expect(defaults.check(row('DEFAULTS', {
+      defaultOwnerLexeme: '"my"', verbLexeme: '"walk"', firstSkillByGender: '[{gender: "default" skill: "en:role.object"}]',
+      constantSlots: '[{slot: "prep" lexeme: "role" whenFeature: "Case" whenValues: ["In" "With"]} {slot: "subject" lexeme: "you"}]',
+    }) + '\n')).toEqual({ status: 0, problems: [] }));
 });
