@@ -5,7 +5,7 @@
 import { describe, expect, it } from 'vitest';
 import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { CONTRACT, PACK, biome, hasCli, realFile, row, rowsOf } from './support/course-data';
+import { CONTRACT, PACK, biome, hasCli, realFile, row, rowsOf, skill, skillFields } from './support/course-data';
 
 /** Rows per file, from the inventory of R1Design.md section 1 (nouns 14, adjectives 7, verbs 11, skills 16, possessives 7, personalPronouns 9, seeds 12, exerciseCopy 73, exercisePatterns 13, caseSentencePrefixes 7, frequency 1000; recipes 16, constructions 5, chainSteps 5 (R1.11b); the other sections are one row). */
 const ROWS: Record<string, number> = {
@@ -33,15 +33,6 @@ describe.skipIf(!hasCli)('courses-biome/pl-ru is Core data', () => {
     expect(run.status).toBe(0);
   });
 });
-
-const method = (text: string) => `{introduction: "${text}" promptLead: "${text}" introduce: "${text}" retrieve: "${text}" feedback: "${text}" review: "${text}"}`;
-/** The fields of one valid SKILL row, as .core-data text; a test replaces one, or drops it with `undefined`. */
-const fields = (id: string): Record<string, string> => ({
-  id: `"${id}"`, title: '"T"', group: '"G"', level: 'A1', formula: '"f"', theory: '"t"', hint: '"h"', prerequisites: '[]',
-  focus: '{before: "b" after: "a"}', methods: `{logic: ${method('l')} situations: ${method('s')}}`,
-  construction: '"core.c"', featureFocus: 'null', fixed: '[]', lexicalFilter: 'null', styleContent: '{why: "w"}',
-});
-const skill = (id: string, change: Record<string, string | undefined> = {}) => row('SKILL', fields(id), change);
 
 describe.skipIf(!hasCli)('skill rows against dsl/course.data-contract', () => {
   const { check, problem, file, name } = rowsOf('SkillRow', 'NounRow');
@@ -76,7 +67,7 @@ describe.skipIf(!hasCli)('skill rows against dsl/course.data-contract', () => {
   it('the optional style fields may be left out and an empty text is data', () =>
     expect(check([skill('a', { styleContent: undefined }), skill('b', { styleContent: '{why: ""}' })].join('\n') + '\n')).toEqual({ status: 0, problems: [] }));
   it('a row may be written over several lines, as `biome fmt` lays it out', () => {
-    const lines = Object.entries(fields('a')).map(([key, value]) => `  ${key}: ${value}`);
+    const lines = Object.entries(skillFields('a')).map(([key, value]) => `  ${key}: ${value}`);
     expect(check(`SKILL {\n${lines.join('\n')}\n}\n`)).toEqual({ status: 0, problems: [] });
   });
   /** The text of a Kotlin string literal body (\t \b \n \r \' \" \\ \$ \uXXXX); an unescaped `$name` or `${` would be a template, so it throws. */

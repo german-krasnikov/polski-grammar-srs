@@ -87,6 +87,18 @@ class PlRuRowsTest {
         assertEquals(mapOf("gender" to listOf("n")), where)
     }
 
+    @Test fun theNounsOfAFilterAreTheSamePropertyWhetherThePackWritesThemAsNounIdOrAsEnNounId() {
+        val pl = row(filter = LexicalFilterRow("noun", WhereRow(nounId = listOf("wife")))).toSkillSpec().lexicalFilter
+        val en = row(filter = LexicalFilterRow("noun", WhereRow(enNounId = listOf("wife")))).toSkillSpec().lexicalFilter
+        assertEquals(LexicalFilter("noun", mapOf("nounId" to listOf("wife"))), pl)
+        assertEquals(pl, en)
+    }
+
+    @Test fun aFilterThatNamesItsNounsTwiceIsRefused() {
+        val twice = LexicalFilterRow("noun", WhereRow(nounId = listOf("wife"), enNounId = listOf("dog")))
+        assertFailsWith<IllegalArgumentException> { row(filter = twice).toSkillSpec() }
+    }
+
     @Test fun aFixedFeatureWrittenTwiceIsRefusedNotOverwritten() {
         val twice = listOf(FeatureValueRow("Tense", "Pres"), FeatureValueRow("Tense", "Past"))
         assertFailsWith<IllegalArgumentException> { row(fixed = twice).toSkillSpec() }

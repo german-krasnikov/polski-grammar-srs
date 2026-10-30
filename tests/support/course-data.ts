@@ -74,3 +74,12 @@ const GENDERS = ['m_personal', 'm_animate', 'm_inanimate', 'f', 'n'];
 export const cases = (tag: string, drop?: string) => `{${CASES.filter(c => c !== drop).map(c => `${c}: "${tag}-${c}"`).join(' ')}}`;
 /** The five genders of a form record, each holding its seven cases; `drop` leaves one gender out. */
 export const genders = (drop?: string) => `{${GENDERS.filter(g => g !== drop).map(g => `${g}: ${cases(g)}`).join(' ')}}`;
+
+const method = (text: string) => `{introduction: "${text}" promptLead: "${text}" introduce: "${text}" retrieve: "${text}" feedback: "${text}" review: "${text}"}`;
+/** The fields of one valid SKILL row, as .core-data text; a test replaces one, or drops it with `undefined`. */
+export const skillFields = (id: string): Record<string, string> => ({
+  id: `"${id}"`, title: '"T"', group: '"G"', level: 'A1', formula: '"f"', theory: '"t"', hint: '"h"', prerequisites: '[]',
+  focus: '{before: "b" after: "a"}', methods: `{logic: ${method('l')} situations: ${method('s')}}`,
+  construction: '"core.c"', featureFocus: 'null', fixed: '[]', lexicalFilter: 'null', styleContent: '{why: "w"}',
+});
+export const skill = (id: string, change: Record<string, string | undefined> = {}) => row('SKILL', skillFields(id), change);
