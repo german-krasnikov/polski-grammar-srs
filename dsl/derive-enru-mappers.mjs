@@ -15,6 +15,7 @@ export const OUT_VOCABULARY_ROWS = target('PlRuVocabularyRows.kt');
 export const OUT_SKILL_SPECS = target('PlRuSkillSpecs.kt');
 export const OUT_RECIPE_ROWS = target('PlRuRecipeRows.kt');
 export const OUT_FORM_TABLES = target('PlRuFormTables.kt');
+export const OUT_LIFEHACK_ROWS = target('PlRuLifehackRows.kt');
 
 /** `generateArgs[0]` is the pl-ru file of the step. */
 export async function copy({ generateArgs: [source] = [] } = {}) {

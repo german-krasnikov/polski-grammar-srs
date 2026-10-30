@@ -10,24 +10,9 @@ import polski.data.skills
  * EN-21 (`Plans/Kotlin/EnRuPackPlan.md` §4.2/§6): [LifehackProvider] is the reserved port
  * (`Plans/Kotlin/UniversalCorePlan.md` §5.4's `ExplanationProvider`/`AudioProvider` pattern),
  * [StaticPackLifehackProvider] its only implementation today — reads the active pack's
- * `pairs/<pairId>/lifehacks.json` (ADR-15: lifehacks are pair-scoped, outside core).
+ * `courses-biome/<pairId>/lifehacks.core-data` (ADR-15: lifehacks are pair-scoped, outside core). The rows and the mapper are LifehackDataTest's and LifehackRowsTest's.
  */
 class LifehackTest {
-    // NJ03: typed lifehacks from GeneratedLifehacks.kt — verify structure.
-    @Test fun typedLifehacksHaveExpectedStructure() {
-        val enRu = polski.data.generatedLifehacksByPairId["en-ru"] ?: error("en-ru lifehacks missing")
-        assertTrue(enRu.isNotEmpty(), "en-ru should have lifehacks")
-        val first = enRu.first()
-        assertTrue(first.id.isNotEmpty(), "id should not be empty")
-        assertTrue(first.text.isNotEmpty(), "text should not be empty")
-        assertTrue(first.source.citation.isNotEmpty(), "citation should not be empty")
-        val plRu = polski.data.generatedLifehacksByPairId["pl-ru"] ?: error("pl-ru lifehacks missing")
-        assertTrue(plRu.isNotEmpty(), "pl-ru should have lifehacks")
-    }
-    @Test fun parserNeverThrowsOnAnEmptyLifehackList() {
-        val json = """{"schemaVersion":1,"pairId":"en-ru","lifehacks":[]}"""
-    }
-
     // Real content, both packs: pl-ru's first authored 5 (EN-20) prove the port isn't en-ru-only.
     @Test fun staticProviderReturnsPlRusRealAuthoredLifehackForCaseGenNeg() {
         val hacks = StaticPackLifehackProvider.forSkill("case.gen.neg")
@@ -41,17 +26,6 @@ class LifehackTest {
         assertEquals(emptyList(), StaticPackLifehackProvider.forSkill("no.such.skill.exists"))
     }
 
-    // A cross-skill lifehack (skillId == null) must never surface through forSkill(realId) —
-    // §4.1 reserves null+topic for cross-skill advice the per-skill card doesn't render (EN-21 web
-    // scope is the per-skill collapsible block only).
-    @Test fun aCrossSkillLifehackNeverMatchesAnyRealSkillId() {
-        val json = """
-            {"schemaVersion":1,"pairId":"en-ru","lifehacks":[
-              {"id":"x","skillId":null,"topic":"t","text":"t","source":{"kind":"project-authored","citation":"c"},"status":"editorial","votes":{"helpful":0,"notHelpful":0}}
-            ]}
-        """.trimIndent()
-    }
-
     // §4.2: a cheap existence check for a front-side badge — must agree with forSkill's own
     // emptiness, on both a covered and an uncovered skill, without pretending it's a mock.
     @Test fun hasLifehacksAgreesWithForSkillsEmptiness() {
@@ -60,7 +34,7 @@ class LifehackTest {
     }
 
     // §4.3's pack-wide "Лайфхаки" listing: pl-ru's groups come back in curriculum
-    // order (Curriculum.kt/pair.json's own skills[] order), not lifehacks.json's authoring order —
+    // order (the order of the skill rows), not the order of the lifehack rows —
     // and each group is titled by that skill's own real display title, never a made-up label.
     @Test fun listAllOrdersPlRuGroupsByCurriculumAndNamesEachByItsRealSkillTitle() {
         val groups = StaticPackLifehackProvider.listAll()

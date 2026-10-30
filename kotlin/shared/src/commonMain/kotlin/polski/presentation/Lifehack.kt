@@ -12,7 +12,7 @@ enum class LifehackStatus { Editorial, Community }
 
 data class LifehackSource(val kind: LifehackSourceKind, val citation: String, val url: String? = null)
 
-/** One pair-scoped L1-transfer tip (`courses/pairs/<pairId>/lifehacks.json`). [skillId] is `null`
+/** One pair-scoped L1-transfer tip (a row of `courses-biome/<pairId>/lifehacks.core-data`). [skillId] is `null`
  *  for a cross-skill tip ([topic] names it instead) — [LifehackProvider.forSkill] never returns
  *  one of those, since no real skill id equals `null`. */
 data class Lifehack(
@@ -60,15 +60,12 @@ interface LifehackProvider {
 
 /**
  * The only [LifehackProvider] today: reads the active pack's own typed lifehacks
- * ([polski.data.generatedLifehacksByPairId], GeneratedLifehacks.kt). An `object`, not a class holding a captured
+ * ([polski.data.CoursePackFields.lifehacks], the rows of courses-biome/<pairId>/lifehacks.core-data). An `object`, not a class holding a captured
  * pairId, so it always reflects whichever pack is [polski.data.PackRegistry.active] *now* — once
  * EN-22 wires a real target/native picker, switching packs needs no re-wiring here.
  */
 object StaticPackLifehackProvider : LifehackProvider {
-    // NJ03: typed lifehacks from GeneratedLifehacks.kt (no JSON parsing).
-    private val byPairId: Map<String, List<Lifehack>> get() = polski.data.generatedLifehacksByPairId
-
-    private val activeHacks: List<Lifehack> get() = byPairId[packRegistry.active.pairId] ?: emptyList()
+    private val activeHacks: List<Lifehack> get() = packRegistry.active.lifehacks
 
     override fun forSkill(skillId: String): List<Lifehack> = activeHacks.filter { it.skillId == skillId }
 

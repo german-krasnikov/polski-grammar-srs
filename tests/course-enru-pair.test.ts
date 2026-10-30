@@ -6,14 +6,14 @@ import { join } from 'node:path';
 import { biome, hasCli, repo, row, rowsIn, skill } from './support/course-data';
 
 const EN = join(repo, 'courses-biome/en-ru');
-/** Rows per file, from the sealed sources (lang/en/lexicon.json, lang/en/prepositions.json, pairs/en-ru/pair.json: the 16 skills, 12 seeds, 73 copy entries, 6 patterns, 1 prefix, 1 vocabulary of 30 cards, 1 chain; R1.15, lang/en/realization.json and exercise-recipes.json: 6 constructions, 16 recipes, 5 chain steps, 1 defaults row). */
+/** Rows per file, from the sealed sources (lang/en/lexicon.json, lang/en/prepositions.json, pairs/en-ru/pair.json: the 16 skills, 12 seeds, 73 copy entries, 6 patterns, 1 prefix, 1 vocabulary of 30 cards, 1 chain; R1.15, lang/en/realization.json and exercise-recipes.json: 6 constructions, 16 recipes, 5 chain steps, 1 defaults row; R1.18, pairs/en-ru/lifehacks.json: 32 lifehacks). */
 const ROWS: Record<string, number> = {
-  adjectives: 7, caseSentencePrefixes: 1, chainSteps: 5, constructions: 6, exerciseCopy: 73, exercisePatterns: 6, nouns: 14, personalPronouns: 7, possessives: 7, prepositions: 1,
+  adjectives: 7, caseSentencePrefixes: 1, chainSteps: 5, constructions: 6, exerciseCopy: 73, exercisePatterns: 6, lifehacks: 32, nouns: 14, personalPronouns: 7, possessives: 7, prepositions: 1,
   recipeDefaults: 1, recipes: 16, sentenceSeeds: 12, skills: 16, training: 1, verbs: 10, vocabulary: 1,
 };
 
 describe.skipIf(!hasCli)('courses-biome/en-ru is Core data', () => {
-  it('holds exactly the 17 known files', () => {
+  it('holds exactly the 18 known files', () => {
     expect(readdirSync(EN).filter(name => name.endsWith('.core-data')).map(name => name.replace('.core-data', '')).sort()).toEqual(Object.keys(ROWS).sort());
   });
   for (const [file, rows] of Object.entries(ROWS)) {

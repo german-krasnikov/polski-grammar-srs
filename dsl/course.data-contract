@@ -765,3 +765,21 @@ RECORD EnSeedRow COUNT 1..
   nounId: ref EnNounRow
   adjectiveId: ref EnAdjectiveRow
 END
+
+# A lifehack (R1.18): a pair-scoped tip about a trap the learner's own language sets (ADR-15), one row for each tip, in the file of its pair (courses-biome/<pair>/lifehacks.core-data).
+# `skillId` is the skill the tip is shown on; a tip for no single skill leaves it out and names a `topic` instead (the mapper refuses a row with neither, and one with both). `source` says why the
+# tip is trusted, never invented (ADR-15). The old JSON carried vote counts, always 0 and read by nothing: a `votes` field is DATA_UNKNOWN_FIELD now.
+RECORD LifehackRow KEY id COUNT 1..
+  id: string
+  skillId: ref SkillRow OPTIONAL
+  topic: string OPTIONAL
+  text: string
+  source: LifehackSourceRow
+  status: enum editorial|community
+END
+
+RECORD LifehackSourceRow
+  kind: enum research|teaching_practice|project_authored
+  citation: string
+  url: string OPTIONAL
+END

@@ -7,14 +7,14 @@ import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { CONTRACT, PACK, biome, hasCli, realFile, row, rowsOf, skill, skillFields } from './support/course-data';
 
-/** Rows per file, from the inventory of R1Design.md section 1 (nouns 14, adjectives 7, verbs 11, skills 16, possessives 7, personalPronouns 9, seeds 12, exerciseCopy 73, exercisePatterns 13, caseSentencePrefixes 7, frequency 1000; recipes 16, constructions 5, chainSteps 5 (R1.11b); the other sections are one row). */
+/** Rows per file, from the inventory of R1Design.md section 1 (nouns 14, adjectives 7, verbs 11, skills 16, possessives 7, personalPronouns 9, seeds 12, exerciseCopy 73, exercisePatterns 13, caseSentencePrefixes 7, frequency 1000; recipes 16, constructions 5, chainSteps 5 (R1.11b), lifehacks 32 (R1.18); the other sections are one row). */
 const ROWS: Record<string, number> = {
-  adjectives: 7, caseSentencePrefixes: 7, chainSteps: 5, constructions: 5, exerciseCopy: 73, exercisePatterns: 13, frequency: 1000, morphology: 1, nouns: 14, personalPronouns: 9,
+  adjectives: 7, caseSentencePrefixes: 7, chainSteps: 5, constructions: 5, exerciseCopy: 73, exercisePatterns: 13, frequency: 1000, lifehacks: 32, morphology: 1, nouns: 14, personalPronouns: 9,
   possessives: 7, recipeDefaults: 1, recipes: 16, reference: 1, sentenceSeeds: 12, skills: 16, stemAlternations: 1, training: 1, verbs: 11, vocabulary: 1,
 };
 
 describe.skipIf(!hasCli)('courses-biome/pl-ru is Core data', () => {
-  it('holds exactly the 20 known sections', () => {
+  it('holds exactly the 21 known sections', () => {
     expect(readdirSync(PACK).filter(name => name.endsWith('.core-data')).map(name => name.replace('.core-data', '')).sort()).toEqual(Object.keys(ROWS).sort());
   });
 

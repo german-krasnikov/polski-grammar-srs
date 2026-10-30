@@ -11,6 +11,7 @@ import polski.model.PossessiveId
 import polski.model.Skill
 import polski.model.SentenceSeed
 import polski.model.Verb
+import polski.presentation.Lifehack
 import polski.presentation.StemAlternation
 
 /**
@@ -47,6 +48,7 @@ internal interface CoursePackFields {
     val styleContent: Map<String, SkillStyleContent>
     val vocabulary: List<VocabularyItem>
     val frequency: List<FrequencyItem>
+    val lifehacks: List<Lifehack>
 
     // Reference (nullable — en-ru doesn't have them yet)
     val chainPresentation: ChainPresentation

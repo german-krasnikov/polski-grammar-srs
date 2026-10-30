@@ -68,4 +68,5 @@ internal object EnRuTypedPack : CoursePackFields {
     override val aspectNoPresent: CourseAspectNoPresent? get() = null
     override val vocabularyInstructions get() = generatedEnRuVocabularyInstructions
     override val vocabularyUnavailableLabel get() = generatedEnRuVocabularyUnavailableLabel
+    override val lifehacks get() = generatedEnRuLifehacks
 }

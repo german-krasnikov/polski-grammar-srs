@@ -67,4 +67,5 @@ internal object PlRuTypedPack : CoursePackFields {
     override val aspectNoPresent get() = generatedPlRuAspectNoPresent
     override val vocabularyInstructions get() = generatedPlRuVocabularyInstructions
     override val vocabularyUnavailableLabel get() = generatedPlRuVocabularyUnavailableLabel
+    override val lifehacks get() = generatedPlRuLifehacks
 }

@@ -1,5 +1,5 @@
 // Generated from dsl/course.data-contract
-// source-sha256=9ed4fd3d8ebc4fcb93bf8dabc39062e968cff0b5142939ceb584ef4b46f7535b
+// source-sha256=1c990107b99132709babf88837c6c708ca52eeaa1d020e201b2433dc94d38fe6
 // Edit the source, then run biome generate.
 
 package polski.data.rows.plru
@@ -48,6 +48,17 @@ enum class TextSpecRowKind(val tag: String) {
 enum class ReasonSpecRowKind(val tag: String) {
     FIXED("fixed"),
     CLASSIFIED("classified"),
+}
+
+enum class LifehackRowStatus(val tag: String) {
+    EDITORIAL("editorial"),
+    COMMUNITY("community"),
+}
+
+enum class LifehackSourceRowKind(val tag: String) {
+    RESEARCH("research"),
+    TEACHING_PRACTICE("teaching_practice"),
+    PROJECT_AUTHORED("project_authored"),
 }
 
 data class FocusRow(
@@ -764,6 +775,21 @@ data class EnPrepositionRow(
 data class EnSeedRow(
     val nounId: String,
     val adjectiveId: String,
+)
+
+data class LifehackSourceRow(
+    val kind: LifehackSourceRowKind,
+    val citation: String,
+    val url: String? = null,
+)
+
+data class LifehackRow(
+    val id: String,
+    val skillId: String? = null,
+    val topic: String? = null,
+    val text: String,
+    val source: LifehackSourceRow,
+    val status: LifehackRowStatus,
 )
 
 private fun skillRowRowsPart0(): List<SkillRow> = listOf(
@@ -6012,3 +6038,343 @@ private fun recipeDefaultsRowRowsPart0(): List<RecipeDefaultsRow> = listOf(
 )
 
 val RECIPE_DEFAULTS_ROW_ROWS: List<RecipeDefaultsRow> = recipeDefaultsRowRowsPart0()
+
+private fun lifehackRowRowsPart0(): List<LifehackRow> = listOf(
+    LifehackRow(
+        id = "pl-ru.case.gen.neg.obligatory",
+        skillId = "case.gen.neg",
+        text = "В русском родительный падеж при отрицании — это опциональный, стилистически окрашенный выбор: «Я не вижу дом» и «Я не вижу дома» оба грамматичны, второй вариант более книжный. В польском при отрицании прямого дополнения родительный падеж ОБЯЗАТЕЛЕН, а не факультативен: «Nie widzę domu» — единственный правильный вариант, «Nie widzę dom» (винительный, как в утверждении «Widzę dom») грамматически неверно. Русская интуиция «можно и так, и так» здесь не работает.",
+        source = LifehackSourceRow(
+            kind = LifehackSourceRowKind.RESEARCH,
+            citation = "Swan, O. A. (2002). A Grammar of Contemporary Polish. Slavica Publishers — обязательность родительного падежа прямого дополнения при отрицании в польском, в контрасте с факультативностью того же явления в русском.",
+            url = "https://www.slavica.com/grammar-of-contemporary-polish.html",
+        ),
+        status = LifehackRowStatus.EDITORIAL,
+    ),
+    LifehackRow(
+        id = "pl-ru.case.inst.no-copula-present",
+        skillId = "case.inst",
+        text = "В польском связка «być» в настоящем времени не пропускается, и предикативное имя после неё стоит в творительном падеже: «Jestem lekarzem» (буквально «есть врачом»). В русском настоящем времени связка «быть» вообще не произносится, а именная часть сказуемого стоит в именительном: «Я врач», не «Я врачом». Отсюда системная ошибка переноса — пропуск «jestem» и/или замена творительного на именительный: *«Ja lekarz» вместо «Jestem lekarzem».",
+        source = LifehackSourceRow(
+            kind = LifehackSourceRowKind.RESEARCH,
+            citation = "Bielec, D. (1998). Polish: An Essential Grammar. Routledge — обязательность связки «być» и творительного падежа предикативного имени в настоящем времени, в контрасте с нулевой связкой русского настоящего времени.",
+        ),
+        status = LifehackRowStatus.EDITORIAL,
+    ),
+    LifehackRow(
+        id = "pl-ru.agreement.my.masculine-personal-plural",
+        skillId = "agreement.my",
+        text = "«Mój/moja/moje» согласуются с обладаемым по роду и числу — на первый взгляд как русские «мой/моя/моё». Но во множественном числе польский дополнительно различает «мужской личный» род (обладаемое — люди мужского пола) и все прочие: «moi bracia» (мои братья, мужской личный), но «moje psy» (мои собаки, не личный, хотя «пёс» — тоже мужской род в единственном числе). В русском такого расщепления по одушевлённости-«личности» во множественном числе нет — «мои» одно на всё. Опора на русскую форму даёт неверный выбор именно в множественном числе.",
+        source = LifehackSourceRow(
+            kind = LifehackSourceRowKind.RESEARCH,
+            citation = "Swan, O. A. (2002). A Grammar of Contemporary Polish. Slavica Publishers — категория rodzaj męskoosobowy (мужской личный род) во множественном числе и её отсутствие как отдельной согласовательной категории в русском.",
+            url = "https://www.slavica.com/grammar-of-contemporary-polish.html",
+        ),
+        status = LifehackRowStatus.EDITORIAL,
+    ),
+    LifehackRow(
+        id = "pl-ru.aspect.boundary-mismatch",
+        skillId = "aspect",
+        text = "И в русском, и в польском есть совершенный/несовершенный вид, и большинство глаголов интуитивно совпадают по видовой паре («написать»/«napisać», «писать»/«pisać»). Но границы вида — не всегда те же самые: есть глаголы, где польский выбирает несовершенный вид там, где русский естественно ждёт совершенный, и наоборот (типологически ожидаемое несовпадение видовых границ между близкородственными славянскими языками, а не исключение из правила). Совпадение видовых пар «в большинстве случаев» — это не гарантия совпадения «всегда»: конкретный глагол в конкретном контексте нужно проверять, не выводить автоматически по русской модели.",
+        source = LifehackSourceRow(
+            kind = LifehackSourceRowKind.RESEARCH,
+            citation = "Dickey, S. M. (2000). Parameters of Slavic Aspect: A Cognitive Approach. CSLI Publications — межславянское сопоставление аспектуальных систем, включая несовпадение границ вида между близкородственными языками (в частности, польским и русским).",
+        ),
+        status = LifehackRowStatus.EDITORIAL,
+    ),
+    LifehackRow(
+        id = "pl-ru.mixed.interleaving",
+        skillId = "mixed",
+        text = "Упражнения, где вперемешку встречаются разные конструкции (mixed), сложнее блочной тренировки «одно и то же по одной теме подряд» — но именно эта сложность и даёт более прочное запоминание на дистанции, потому что каждый раз заново заставляет распознать, какое из уже выученных правил (падеж, вид, согласование) применить, а не действовать по инерции предыдущего задания.",
+        source = LifehackSourceRow(
+            kind = LifehackSourceRowKind.RESEARCH,
+            citation = "Rohrer, D., & Taylor, K. (2007). The shuffling of mathematics problems improves learning. Instructional Science, 35(6), 481–498 — эффект интерливинга (чередование задач разных типов) для долговременного запоминания, методически применимый к чередованию грамматических категорий независимо от конкретной языковой пары.",
+        ),
+        status = LifehackRowStatus.EDITORIAL,
+    ),
+    LifehackRow(
+        id = "pl-ru.case.acc.n.nom-acc-syncretism",
+        skillId = "case.acc.n",
+        text = "В обоих языках у существительных среднего рода в единственном числе именительный и винительный падеж совпадают буквально: русское «окно» → «вижу окно» (форма не меняется), польское «okno» → «widzę okno» — та же неизменная форма. Это один из немногих случаев винительного падежа, где русская интуиция срабатывает без всяких поправок: если существительное среднего рода, окончание винительного падежа менять не нужно вовсе.",
+        source = LifehackSourceRow(
+            kind = LifehackSourceRowKind.RESEARCH,
+            citation = "Swan, O. A. (2002). A Grammar of Contemporary Polish. Slavica Publishers — таблицы склонения существительных среднего рода: совпадение именительного и винительного падежа в единственном числе, параллельно русскому.",
+            url = "https://www.slavica.com/grammar-of-contemporary-polish.html",
+        ),
+        status = LifehackRowStatus.EDITORIAL,
+    ),
+    LifehackRow(
+        id = "pl-ru.case.acc.n.um-indeclinable",
+        skillId = "case.acc.n",
+        text = "Существительные среднего рода на -um (muzeum, liceum, gimnazjum, akwarium) в единственном числе не изменяются вообще ни по одному падежу, включая винительный: «widzę to muzeum» и «idę do tego muzeum» — форма «muzeum» одна и та же везде. Механизм иной, чем у русских несклоняемых заимствований («кино», «такси»), но результат для винительного падежа тот же самый — форма не меняется, значит и здесь ничего специально подстраивать не нужно.",
+        source = LifehackSourceRow(
+            kind = LifehackSourceRowKind.RESEARCH,
+            citation = "Bielec, D. (1998). Polish: An Essential Grammar. Routledge — неизменяемость существительных среднего рода на -um во всех падежах единственного числа.",
+        ),
+        status = LifehackRowStatus.EDITORIAL,
+    ),
+    LifehackRow(
+        id = "pl-ru.case.acc.f.nasal-ending",
+        skillId = "case.acc.f",
+        text = "Основная модель винительного падежа женского рода — окончание -a меняется на носовое -ę: «książka» → «widzę książkę». Русское соответствие -a → -у/-ю («книга» → «книгу») учит менять окончание, но не готовит к тому, что польское -ę — это отдельный носовой звук (пишется с «хвостиком», ogonek), который часто произносят как обычное «е» или как «эн», теряя носовое качество. Ошибка не в выборе падежной модели (она угадана верно по аналогии с русским), а в произношении и написании самого нового звука.",
+        source = LifehackSourceRow(
+            kind = LifehackSourceRowKind.RESEARCH,
+            citation = "Sadowska, I. (2012). Polish: A Comprehensive Grammar. Routledge — раздел о носовых гласных ą/ę, их произношении и типичных ошибках произношения у изучающих.",
+        ),
+        status = LifehackRowStatus.EDITORIAL,
+    ),
+    LifehackRow(
+        id = "pl-ru.case.acc.f.consonant-stem-unchanged",
+        skillId = "case.acc.f",
+        text = "Не все существительные женского рода заканчиваются на -a: те, что заканчиваются на мягкий согласный (noc — ночь, rzecz — вещь, postać — персонаж, pomoc — помощь), в винительном падеже вообще не меняются — «widzę tę rzecz» так же, как «to jest ta rzecz». Это прямая параллель с русским третьим склонением: «вижу эту вещь» — форма «вещь» тоже не меняется. Правило «женский род → окончание -ę» действует только для типа на -a, а не для этого второго, более редкого подтипа на согласный.",
+        source = LifehackSourceRow(
+            kind = LifehackSourceRowKind.RESEARCH,
+            citation = "Swan, O. A. (2002). A Grammar of Contemporary Polish. Slavica Publishers — два типа склонения женского рода (на -a и на мягкий согласный) и их падежное поведение.",
+            url = "https://www.slavica.com/grammar-of-contemporary-polish.html",
+        ),
+        status = LifehackRowStatus.EDITORIAL,
+    ),
+    LifehackRow(
+        id = "pl-ru.case.acc.m.animacy-split-matches-russian",
+        skillId = "case.acc.m",
+        text = "Винительный падеж мужского рода в единственном числе расходится по одушевлённости так же, как в русском: у неодушевлённых существительных винительный совпадает с именительным («widzę dom» — вижу дом, форма не меняется), а у одушевлённых (люди и животные) винительный совпадает с родительным («widzę psa» — вижу собаку, «psa» — та же форма, что и в родительном). Это не новая логика, которую нужно выучивать заново — это тот же самый принцип, что и в русском («вижу дом» / «вижу кота»), перенос безопасен, нужно только выучить сами окончания.",
+        source = LifehackSourceRow(
+            kind = LifehackSourceRowKind.RESEARCH,
+            citation = "Swan, O. A. (2002). A Grammar of Contemporary Polish. Slavica Publishers — одушевлённость как фактор совпадения винительного падежа с именительным либо родительным в мужском роде единственного числа.",
+            url = "https://www.slavica.com/grammar-of-contemporary-polish.html",
+        ),
+        status = LifehackRowStatus.EDITORIAL,
+    ),
+    LifehackRow(
+        id = "pl-ru.case.acc.m.a-ending-masculine",
+        skillId = "case.acc.m",
+        text = "Некоторые существительные мужского рода оканчиваются на -a (mężczyzna — мужчина, kolega — коллега, artysta — артист) и в винительном падеже склоняются по образцу женского склонения: «widzę tego mężczyznę», а не «mężczyznego». Это не специфически польское исключение — то же самое происходит и в русском: «мужчина», «коллега» тоже склоняются по форме как существительные женского рода («вижу мужчину», «вижу коллегу»), сохраняя при этом мужское согласование прилагательных и местоимений («этот мужчина», не «эта мужчина»). Логика одна и та же в обоих языках, различается только конкретный материал (окончание).",
+        source = LifehackSourceRow(
+            kind = LifehackSourceRowKind.RESEARCH,
+            citation = "Swan, O. A. (2002). A Grammar of Contemporary Polish. Slavica Publishers — класс существительных мужского рода на -a и их склонение по женской модели.",
+            url = "https://www.slavica.com/grammar-of-contemporary-polish.html",
+        ),
+        status = LifehackRowStatus.EDITORIAL,
+    ),
+    LifehackRow(
+        id = "pl-ru.case.gen.neg.pronoun-go-jej",
+        skillId = "case.gen.neg",
+        text = "Родительный падеж при отрицании касается не только существительных, но и местоимений, заменяющих прямое дополнение — и здесь ловушка незаметнее, потому что для мужского и среднего рода винительный и родительный падеж местоимения 3-го лица совпадают по форме («go»): «Widzę go» (вижу его) и «Nie widzę go» (не вижу его) выглядят одинаково, будто падеж вообще не меняется. Для женского рода формы разные: «Widzę ją» (винительный), но «Nie widzę jej» (родительный) — забыть переключиться легко именно потому, что мужской род никакого сигнала об изменении не подаёт.",
+        source = LifehackSourceRow(
+            kind = LifehackSourceRowKind.RESEARCH,
+            citation = "Swan, O. A. (2002). A Grammar of Contemporary Polish. Slavica Publishers — склонение личных местоимений 3-го лица, совпадение винительного и родительного падежа «go» для мужского/среднего рода в отличие от женского «ją»/«jej».",
+            url = "https://www.slavica.com/grammar-of-contemporary-polish.html",
+        ),
+        status = LifehackRowStatus.EDITORIAL,
+    ),
+    LifehackRow(
+        id = "pl-ru.case.inst.transport-no-preposition",
+        skillId = "case.inst",
+        text = "Творительный падеж без предлога для орудия действия работает одинаково в обоих языках: «pisać ołówkiem» = «писать карандашом» — перенос безопасен. Но для транспортных средств русский обычно добавляет предлог «на» + предложный падеж («ехать на поезде», «на автобусе»), а польский использует чистый творительный без предлога: «jechać pociągiem», «autobusem» — не «na pociągu». Механический перенос русской модели «на + место» на транспорт даёт лишний, неправильный предлог там, где польский требует голого творительного падежа.",
+        source = LifehackSourceRow(
+            kind = LifehackSourceRowKind.RESEARCH,
+            citation = "Bielec, D. (1998). Polish: An Essential Grammar. Routledge — беспредложный творительный падеж для орудия и средства передвижения.",
+        ),
+        status = LifehackRowStatus.EDITORIAL,
+    ),
+    LifehackRow(
+        id = "pl-ru.case.loc.dative-locative-syncretism",
+        skillId = "case.loc",
+        text = "У существительных женского рода дательный и местный (предложный) падеж в единственном числе совпадают по форме буквально: «matka» → «matce» и в дательном («daję matce» — даю матери), и в местном («o matce» — о матери) — одна и та же форма. В русском происходит ровно то же самое: «мама» → «маме» и в дательном («даю маме»), и в предложном («о маме»). Если форма дательного падежа для существительного женского рода уже выучена, местный падеж для того же слова достаётся бесплатно — учить отдельно не нужно.",
+        source = LifehackSourceRow(
+            kind = LifehackSourceRowKind.RESEARCH,
+            citation = "Sadowska, I. (2012). Polish: A Comprehensive Grammar. Routledge — таблица склонения женского рода: совпадение дательного и местного падежа в единственном числе.",
+        ),
+        status = LifehackRowStatus.EDITORIAL,
+    ),
+    LifehackRow(
+        id = "pl-ru.case.loc.consonant-alternation",
+        skillId = "case.loc",
+        text = "Местный падеж почти всегда сопровождается чередованием согласного перед окончанием -e, которого русский предложный падеж не знает: «Polska» → «w Polsce» (k→c), «miasto» → «w mieście» (st→ście), «matka» → «o matce» (k→c), «Warszawa» → «w Warszawie» (w→wi). Русское «в Польше», «о городе», «о матери» меняет только окончание, сам корень остаётся тем же. Выучить окончание -e недостаточно — нужно отдельно запоминать (или проверять), какое чередование происходит с последним согласным основы: это отдельный список правил, не автоматика.",
+        source = LifehackSourceRow(
+            kind = LifehackSourceRowKind.RESEARCH,
+            citation = "Rothstein, R. A. (1993). Polish. In B. Comrie & G. Corbett (Eds.), The Slavonic Languages. Routledge — чередования согласных (палатализация) перед падежными окончаниями на передний гласный в польском склонении, в контрасте с ограниченностью таких чередований в русском.",
+        ),
+        status = LifehackRowStatus.EDITORIAL,
+    ),
+    LifehackRow(
+        id = "pl-ru.case.dat.dative-locative-syncretism",
+        skillId = "case.dat",
+        text = "Та же параллель работает и в обратную сторону: для существительных женского рода дательный падеж совпадает с местным — если уже выучена форма местного падежа («o żonie» — о жене), дательный («daję żonie» — даю жене) окажется той же самой формой. Русский язык устроен точно так же («о жене» / «даю жене» — одна форма «жене»), так что это не польская странность, которую нужно выучивать отдельно, а структурное сходство, которое можно использовать как готовую подсказку.",
+        source = LifehackSourceRow(
+            kind = LifehackSourceRowKind.RESEARCH,
+            citation = "Sadowska, I. (2012). Polish: A Comprehensive Grammar. Routledge — таблица склонения женского рода: совпадение дательного и местного падежа в единственном числе.",
+        ),
+        status = LifehackRowStatus.EDITORIAL,
+    ),
+    LifehackRow(
+        id = "pl-ru.case.dat.owi-u-split",
+        skillId = "case.dat",
+        text = "В отличие от русского, где дательный падеж мужского рода единственного числа всегда получает одно и то же окончание -у/-ю («брату», «отцу», «сыну», «мальчику»), в польском действуют два конкурирующих окончания: продуктивное -owi (большинство существительных: «chłopcowi», «Adamowi») и более старое -u для ограниченного, но частого списка слов («ojcu» — отцу, «bratu» — брату, «panu» — господину, «Bogu» — богу, «światu» — миру). Русская модель «всегда -у» не подсказывает, какое слово из закрытого списка исключений нужно проверять по памяти, а не выводить по общему правилу.",
+        source = LifehackSourceRow(
+            kind = LifehackSourceRowKind.RESEARCH,
+            citation = "Swan, O. A. (2002). A Grammar of Contemporary Polish. Slavica Publishers — конкуренция окончаний -owi/-u в дательном падеже мужского рода единственного числа и лексический список исключений на -u.",
+            url = "https://www.slavica.com/grammar-of-contemporary-polish.html",
+        ),
+        status = LifehackRowStatus.EDITORIAL,
+    ),
+    LifehackRow(
+        id = "pl-ru.agreement.my.swoj-obligatory",
+        skillId = "agreement.my",
+        text = "Возвратное притяжательное «swój» обязательно, когда обладатель — само подлежащее того же предложения: «On kocha swoją żonę» (он любит свою [собственную] жену). Если вместо этого сказать «On kocha jego żonę», получится не тот же смысл с более разговорным оттенком, а буквально другой смысл — «жену другого мужчины», не его собственную. В русском разграничение «свою»/«его» в этой позиции тоже существует, но на практике часто нейтрализуется в разговорной речи без потери смысла — в польском такой нейтрализации нет, замена «swój» на «jego/jej» всегда меняет референцию.",
+        source = LifehackSourceRow(
+            kind = LifehackSourceRowKind.RESEARCH,
+            citation = "Swan, O. A. (2002). A Grammar of Contemporary Polish. Slavica Publishers — обязательное употребление возвратного притяжательного «swój» при кореференции с подлежащим.",
+            url = "https://www.slavica.com/grammar-of-contemporary-polish.html",
+        ),
+        status = LifehackRowStatus.EDITORIAL,
+    ),
+    LifehackRow(
+        id = "pl-ru.verb.present.iotation-parallel",
+        skillId = "verb.present",
+        text = "Настоящее время многих польских глаголов образуется с тем же историческим чередованием согласных перед личным окончанием, что и в русском (общеславянская йотация): «pisać» → «pisze» (s→sz) — как русское «писать» → «пишет» (с→ш); «móc» → «może» (g→ż) — как русское «могу» → «может» (г→ж). Если чередование знакомо по русскому глаголу-родственнику, есть хороший шанс, что польский когнат мутирует тем же способом — не гарантия, но рабочая подсказка, а не случайность.",
+        source = LifehackSourceRow(
+            kind = LifehackSourceRowKind.RESEARCH,
+            citation = "Sussex, R., & Cubberley, P. (2006). The Slavic Languages. Cambridge University Press — общеславянская йотация согласных перед личными окончаниями настоящего времени, общая для польского и русского спряжения.",
+        ),
+        status = LifehackRowStatus.EDITORIAL,
+    ),
+    LifehackRow(
+        id = "pl-ru.verb.present.conjugation-class-unpredictable",
+        skillId = "verb.present",
+        text = "В русском практически все глаголы на -ать спрягаются одинаково в 3-м лице (читает, играет, работает — окончание -ает почти без исключений), поэтому по инфинитиву легко предсказать личную форму. В польском инфинитив на -ać такой гарантии не даёт: «czytać» → «czyta» (окончание -a), но «pisać» → «pisze» (окончание -e, с чередованием s→sz) — два разных типа спряжения при внешне одинаковом инфинитиве. Окончание инфинитива в польском подсказывает спряжение значительно слабее, чем в русском — форму 3-го лица нужно запоминать по каждому глаголу отдельно, а не выводить по шаблону.",
+        source = LifehackSourceRow(
+            kind = LifehackSourceRowKind.RESEARCH,
+            citation = "Swan, O. A. (2002). A Grammar of Contemporary Polish. Slavica Publishers — глава о классах спряжения: несколько разных моделей настоящего времени для глаголов на -ać.",
+            url = "https://www.slavica.com/grammar-of-contemporary-polish.html",
+        ),
+        status = LifehackRowStatus.EDITORIAL,
+    ),
+    LifehackRow(
+        id = "pl-ru.verb.past.gender-agreement-matches",
+        skillId = "verb.past",
+        text = "Прошедшее время в 3-м лице согласуется с подлежащим по роду одинаково в обоих языках, по той же трёхчленной модели: «żona robiła» (она делала, женский род), «mąż robił» (он делал, мужской род), «dziecko robiło» (оно делало, средний род) — та же логика, что в русском «делала/делал/делало», просто с другими окончаниями (-ła/-ł/-ło вместо -ла/-л/-ло). Выбор формы по роду подлежащего переносится из русского напрямую и работает без исключений для этой модели.",
+        source = LifehackSourceRow(
+            kind = LifehackSourceRowKind.RESEARCH,
+            citation = "Sussex, R., & Cubberley, P. (2006). The Slavic Languages. Cambridge University Press — общеславянское происхождение прошедшего времени на основе l-причастия с согласованием по роду, общее для польского и русского.",
+        ),
+        status = LifehackRowStatus.EDITORIAL,
+    ),
+    LifehackRow(
+        id = "pl-ru.verb.past.nasal-vowel-alternation",
+        skillId = "verb.past",
+        text = "У глаголов на -nąć (zacząć — начать, zamknąć — закрыть, wyciągnąć — вытянуть) корневой гласный меняется в зависимости от рода прошедшего времени: перед нулевым окончанием мужского рода — «ą» (zaczął), перед -a/-o женского/среднего рода — «ę» (zaczęła, zaczęło). Русские соответствия («начал/начала/начало», «закрыл/закрыла/закрыло») никакого чередования корневого гласного не показывают — легко забыть переключить «ą» на «ę» при переходе от мужского рода к женскому или среднему, механически перенося русскую неизменность корня.",
+        source = LifehackSourceRow(
+            kind = LifehackSourceRowKind.RESEARCH,
+            citation = "Swan, O. A. (2002). A Grammar of Contemporary Polish. Slavica Publishers — чередование ą/ę в корне глаголов на -nąć в прошедшем времени, обусловленное родовым окончанием.",
+            url = "https://www.slavica.com/grammar-of-contemporary-polish.html",
+        ),
+        status = LifehackRowStatus.EDITORIAL,
+    ),
+    LifehackRow(
+        id = "pl-ru.verb.future.perfective-present-form",
+        skillId = "verb.future",
+        text = "Совершенные глаголы образуют будущее время, просто спрягаясь по образцу настоящего времени, без вспомогательного глагола — точно тот же механизм, что и в русском: польское «napisać» → «napisze» (напишет) устроено ровно так же, как русское «написать» → «напишет». Раз перенос уже знаком по родному языку, для совершенных глаголов польское будущее время учить отдельно как новую конструкцию не нужно.",
+        source = LifehackSourceRow(
+            kind = LifehackSourceRowKind.RESEARCH,
+            citation = "Dickey, S. M. (2000). Parameters of Slavic Aspect: A Cognitive Approach. CSLI Publications — «настоящая» форма совершенного глагола как регулярный способ выражения будущего времени в славянских языках, включая польский и русский.",
+        ),
+        status = LifehackRowStatus.EDITORIAL,
+    ),
+    LifehackRow(
+        id = "pl-ru.verb.future.periphrastic-two-forms",
+        skillId = "verb.future",
+        text = "Для несовершенных глаголов польский допускает два равнозначных варианта будущего времени: «będzie» + инфинитив («będzie pisać») или «będzie» + причастие на -ł с согласованием по роду («będzie pisał/pisała/pisało»). В русском способ только один — «будет» + инфинитив («будет писать»), без какого-либо согласования по роду. Наличие второго, родового варианта в польском может сбивать, будто в будущем времени тоже нужно менять форму по роду, как в прошедшем — на самом деле оба варианта равноправны, и вариант с инфинитивом (без родовой формы) — самый безопасный и точный перенос русской модели.",
+        source = LifehackSourceRow(
+            kind = LifehackSourceRowKind.RESEARCH,
+            citation = "Swan, O. A. (2002). A Grammar of Contemporary Polish. Slavica Publishers — два равнозначных перифрастических способа образования будущего времени несовершенных глаголов.",
+            url = "https://www.slavica.com/grammar-of-contemporary-polish.html",
+        ),
+        status = LifehackRowStatus.EDITORIAL,
+    ),
+    LifehackRow(
+        id = "pl-ru.aspect.suppletive-pairs",
+        skillId = "aspect",
+        text = "Оба языка допускают, что видовая пара образуется не приставкой или суффиксом, а вообще другим корнем (супплетивно): русское «говорить/сказать» и польское «mówić/powiedzieć» — тот же самый тип нерегулярности, только на разном материале. Если для какого-то польского глагола видовая пара образована неожиданно, другим корнем, а не приставкой, — это не польская особенность, которую нужно осваивать с нуля, а общеславянская черта, с которой русский носитель уже интуитивно знаком на примере своего собственного языка.",
+        source = LifehackSourceRow(
+            kind = LifehackSourceRowKind.RESEARCH,
+            citation = "Dickey, S. M. (2000). Parameters of Slavic Aspect: A Cognitive Approach. CSLI Publications — супплетивные видовые пары как общеславянское, а не изолированное польское явление.",
+        ),
+        status = LifehackRowStatus.EDITORIAL,
+    ),
+    LifehackRow(
+        id = "pl-ru.mixed.testing-effect",
+        skillId = "mixed",
+        text = "Смешанные упражнения (mixed) заставляют не просто применить правило, а сначала определить, какое из нескольких выученных правил применимо в данном случае — это дополнительный шаг «поиска в памяти», которого нет в блочной тренировке одного правила подряд. Именно эта необходимость активно вспоминать и выбирать нужное правило, а не просто повторно его применять, сама по себе улучшает долговременное запоминание.",
+        source = LifehackSourceRow(
+            kind = LifehackSourceRowKind.RESEARCH,
+            citation = "Roediger, H. L., & Karpicke, J. D. (2006). Test-enhanced learning: Taking memory tests improves long-term retention. Psychological Science, 17(3), 249–255 — эффект тестирования: активное извлечение из памяти при решении задачи улучшает долговременное запоминание сильнее, чем повторное узнавание уже известного правила.",
+        ),
+        status = LifehackRowStatus.EDITORIAL,
+    ),
+    LifehackRow(
+        id = "pl-ru.pronouns.neuter-je-vs-go",
+        skillId = "pronouns",
+        text = "В русском местоимение 3-го лица в винительном падеже для мужского и среднего рода совпадает: «его» — и «вижу его» (про мужчину), и «вижу его» (про предмет среднего рода, вроде «окно»). В польском средний род получает отдельную форму «je», отличную от мужской «go»: «widzę go» (про мужчину или предмет мужского рода) против «widzę je» (про «dziecko» — ребёнка, среднего рода, или «okno» — окно). Русская привычка «одна форма на оба рода» подсказывает неверно выбрать «go» там, где нужно «je».",
+        source = LifehackSourceRow(
+            kind = LifehackSourceRowKind.RESEARCH,
+            citation = "Swan, O. A. (2002). A Grammar of Contemporary Polish. Slavica Publishers — склонение личных местоимений 3-го лица: отдельная форма «je» для среднего рода в винительном падеже, в отличие от совпадающей русской формы «его» для мужского и среднего рода.",
+            url = "https://www.slavica.com/grammar-of-contemporary-polish.html",
+        ),
+        status = LifehackRowStatus.EDITORIAL,
+    ),
+    LifehackRow(
+        id = "pl-ru.pronouns.clitic-position",
+        skillId = "pronouns",
+        text = "Безударные местоимения-клитики (go, ją, je, mu, jej) не могут стоять в самом начале предложения — это жёсткое синтаксическое правило, а не стилистическая рекомендация: «Widzę go» (вижу его) — нормально, но начать предложение с «Go widzę» невозможно вообще. В русском такого позиционного запрета для «его/её» нет — «Его я вижу» вполне грамматично при особом порядке слов для акцента. Строя польское предложение с местоимением-объектом, нельзя механически переносить свободный русский порядок слов — местоимение должно уйти внутрь предложения.",
+        source = LifehackSourceRow(
+            kind = LifehackSourceRowKind.RESEARCH,
+            citation = "Franks, S., & King, T. H. (2000). A Handbook of Slavic Clitics. Oxford University Press — позиционные ограничения безударных местоименных клитик в польском синтаксисе.",
+        ),
+        status = LifehackRowStatus.EDITORIAL,
+    ),
+    LifehackRow(
+        id = "pl-ru.sentence.question.czy-particle",
+        skillId = "sentence.question",
+        text = "В русском вопрос без вопросительного слова оформляется практически только интонацией: «Ты работаешь?» и «Ты работаешь.» отличаются на письме только знаком, порядок слов не меняется, специальная частица не обязательна. В польском нейтральный, наиболее естественный способ задать общий вопрос — поставить частицу «czy» в самое начало предложения: «Czy pracujesz?», а не голое «Pracujesz?» (последнее тоже встречается, но воспринимается как более разговорный вариант, не нейтральный по умолчанию). Русская привычка обходиться совсем без маркера регулярно даёт грамматически возможное, но более разговорное польское предложение там, где нейтральный вариант ожидает «czy».",
+        source = LifehackSourceRow(
+            kind = LifehackSourceRowKind.RESEARCH,
+            citation = "Swan, O. A. (2002). A Grammar of Contemporary Polish. Slavica Publishers — частица «czy» как нейтральный маркер общего вопроса в начале предложения.",
+            url = "https://www.slavica.com/grammar-of-contemporary-polish.html",
+        ),
+        status = LifehackRowStatus.EDITORIAL,
+    ),
+    LifehackRow(
+        id = "pl-ru.sentence.question.embedded-czy-vs-li",
+        skillId = "sentence.question",
+        text = "Та же частица «czy» используется и в косвенных вопросах («не знаю, работает ли он» → «Nie wiem, czy on pracuje»), но стоит в начале придаточного, а не после сказуемого. Русская частица «ли» ведёт себя противоположно — она клитика второй позиции, обязательно стоящая после того слова (обычно глагола), которое находится под вопросом: «работает ли он», а не «ли он работает». Механический перенос позиции русской «ли» на польское «czy» даёт неверный порядок слов.",
+        source = LifehackSourceRow(
+            kind = LifehackSourceRowKind.RESEARCH,
+            citation = "Franks, S., & King, T. H. (2000). A Handbook of Slavic Clitics. Oxford University Press — контраст между клитикой второй позиции (русское «ли») и частицей в начале клаузы (польское «czy») в вопросительных конструкциях славянских языков.",
+        ),
+        status = LifehackRowStatus.EDITORIAL,
+    ),
+    LifehackRow(
+        id = "pl-ru.sentence.plural.masculine-personal-category",
+        skillId = "sentence.plural",
+        text = "В русском множественном числе никакой отдельной категории «мужской личный род» не существует: прилагательные и глаголы согласуются одинаково независимо от того, о людях или не-людях речь («красивые дома» и «красивые мужчины» — одно и то же окончание). В польском множественное число обязательно расщепляется на два согласовательных класса: «mężczyźni byli» (мужчины были — męskoosobowy, «мужской личный») против «kobiety/dzieci/psy były» (женщины/дети/собаки были — niemęskoosobowy, всё остальное, включая женщин, детей и животных). Разные формы получают и прилагательное, и глагол в прошедшем времени, и местоимение «они» (oni/one). Русская интуиция «множественное число одно на всех» здесь не работает вообще — это отдельная грамматическая категория, которую нужно выучить как факт языка, а не выводить логически.",
+        source = LifehackSourceRow(
+            kind = LifehackSourceRowKind.RESEARCH,
+            citation = "Corbett, G. G. (1991). Gender. Cambridge University Press — противопоставление męskoosobowy/niemęskoosobowy в польском множественном числе как классический пример уникального согласовательного класса.",
+        ),
+        status = LifehackRowStatus.EDITORIAL,
+    ),
+    LifehackRow(
+        id = "pl-ru.sentence.plural.accusative-split-mismatch",
+        skillId = "sentence.plural",
+        text = "В русском множественном числе винительный падеж повторяет родительный для любого одушевлённого существительного независимо от рода: «вижу этих мужчин», «вижу этих женщин», «вижу этих собак» — везде родительный. В польском родительную модель винительного падежа во множественном числе получают только существительные класса mężczyźni (mężczyzn, chłopców, lekarzy) — а «kobiety» (женщины), «dzieci» (дети) и животные (psy, koty) в винительном падеже множественного числа выглядят как именительный, без всякого сходства с родительным: «widzę te kobiety», «widzę te dzieci», «widzę te psy». Русская логика «одушевлённое значит родительный» здесь систематически подводит для женщин, детей и животных — в польском винительном падеже множественного числа они ведут себя как неличные, что противоречит и русской, и бытовой интуиции.",
+        source = LifehackSourceRow(
+            kind = LifehackSourceRowKind.RESEARCH,
+            citation = "Swan, O. A. (2002). A Grammar of Contemporary Polish. Slavica Publishers — морфология винительного падежа множественного числа: родительная модель только для mężczyźni-класса, именительная для всех прочих, включая одушевлённых нелично.",
+            url = "https://www.slavica.com/grammar-of-contemporary-polish.html",
+        ),
+        status = LifehackRowStatus.EDITORIAL,
+    ),
+)
+
+val LIFEHACK_ROW_ROWS: List<LifehackRow> = lifehackRowRowsPart0()
