@@ -1,7 +1,9 @@
 import { describe, expect, test } from 'vitest';
+import { execFileSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
 import { validateVocabularyEditorial } from '../scripts/validate-vocabulary-editorial.mjs';
-import frequency from '../courses/en-ru/frequency-top1000.json';
 import editorial from '../courses/pairs/en-ru/vocabulary-editorial.json';
+import { repo } from './support/course-data';
 
 // Independent pin of the recorded source (courses/en-ru/ATTRIBUTION.md), not derived from
 // the journal under test — catches accidental edits to frequencySource the same way pl-ru's
@@ -14,6 +16,12 @@ const enSource = {
   csvSha256: 'e2071140a49a6c40c732bd68c36836ef13c0978233fb3d5e1b2a3c2d34faef59',
   jsonSha256: 'f64d9dcebdff358135aec3b6031763c553f3cbc8f2603e525ea40c82c5050253',
 };
+
+// The frequency list is courses-biome/en-ru/frequency.core-data since R1.19 (courses/en-ru/frequency-top1000.json left the tree, nothing reads the list yet). The journal is validated against the list
+// as the file had it: read from the commit that still has it (git show <rev>:path), with the sha256 that the pin above records; tests/course-frequency.test.ts holds the rows equal to it.
+const frequencyBytes = execFileSync('git', ['show', '7358aeb72ab79dce80fca1faadba6be64892fa18:courses/en-ru/frequency-top1000.json'], { cwd: repo });
+expect(createHash('sha256').update(frequencyBytes).digest('hex')).toBe(enSource.jsonSha256);
+const frequency = JSON.parse(frequencyBytes.toString('utf8'));
 
 const copy = () => [structuredClone(frequency), structuredClone(editorial)] as const;
 

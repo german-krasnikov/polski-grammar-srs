@@ -23,3 +23,5 @@ GENERATE enru-form-tables derive {dir}/derive-enru-mappers.mjs copy OUT_FORM_TAB
 # The built-in presentation styles (R1.18): not a pair's data, so a contract and a package of their own.
 GENERATE styles data --contract style --rows StyleRecipeRow {dir}/../courses-biome/styles/styles.core-data --target kt --kt-package polski.data.rows.styles --out {dir}/../kotlin/shared/src/commonMain/generated/kotlin/polski/data/rows/styles/StyleRows.kt
 GENERATE enru-lifehack-rows derive {dir}/derive-enru-mappers.mjs copy OUT_LIFEHACK_ROWS {dir}/../kotlin/shared/src/commonMain/kotlin/polski/data/PlRuLifehackRows.kt
+# The word frequencies of en-ru (R1.19): converted from courses/en-ru/frequency-top1000.json and checked, with no consumer and so no printed Kotlin (a step without --target writes nothing); the list is kept, not connected.
+GENERATE course-enru-frequency data --contract frequency --rows FrequencyRow {dir}/../courses-biome/en-ru/frequency.core-data

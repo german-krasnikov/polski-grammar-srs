@@ -24,7 +24,8 @@ async function stepOutputs(): Promise<string[]> {
     const dir = dirname(join(repo, manifest));
     for (const line of readFileSync(join(repo, manifest), 'utf8').split('\n').filter(l => l.startsWith('GENERATE '))) {
       const tokens = line.trim().split(/\s+/).map(token => token.replace('{dir}', dir));
-      const file = tokens[2] === 'derive' ? (await import(pathToFileURL(resolve(tokens[3])).href))[tokens[5]] : tokens[tokens.indexOf('--out') + 1];
+      const out = tokens.indexOf('--out'); // a data step without --out only checks (R1.19: the frequency list of en-ru) and prints nothing
+      const file = tokens[2] === 'derive' ? (await import(pathToFileURL(resolve(tokens[3])).href))[tokens[5]] : out >= 0 ? tokens[out + 1] : undefined;
       if (file) outputs.push(resolve(dir, file).slice(repo.length + 1));
     }
   }
