@@ -12,9 +12,8 @@ import polski.data.rows.enru.forms.FormLexemeRow
 import polski.data.rows.enru.forms.FormRow
 
 /**
- * R1.16: the en-ru form table, derived from the lexicon rows by dsl/derive-forms.mjs (the rules and the table against the sealed lang/en/forms.generated.json, sha256 a0796ddf..., are the vitest tests
- * of the derive), here as the maps `TableMorphology` takes: equal to the table the engine still parses from that JSON, in the same order, and the paradigms written out from the lexicon sources.
- * The parity test is a bridge: R1.17 points the pack at this table and deletes the JSON and the test.
+ * R1.16, R1.17: the en-ru form table, derived from the lexicon rows by dsl/derive-forms.mjs (the rules and the table against the sealed lang/en/forms.generated.json, sha256 a0796ddf..., are the vitest tests
+ * of the derive), here as the maps `TableMorphology` takes: its size and order, each form against its lexicon row, and the paradigms written out. The pack takes this table since R1.17.
  */
 class EnRuFormTablesTest {
     private val table = generatedEnRuFormTable
@@ -23,11 +22,6 @@ class EnRuFormTablesTest {
     private fun forms(prefix: String) = table.filterKeys { it.startsWith("$prefix:") }
     /** The forms of a tense in the order 1sg, 1pl, 2sg, 2pl, 3sg, 3pl, under the tense id `tense` of the shape that asks for it. */
     private fun cells(lexeme: String, tense: String) = listOf("1", "2", "3").flatMap { person -> listOf("sg", "pl").map { number -> form(lexeme, "Tense" to tense, "Person" to person, "Number" to number) } }
-
-    @Test fun theTableOfTheRowsEqualsTheTableTheEngineStillParsesFromJsonInTheSameOrder() {
-        assertEquals(bridgedEnRuFormTable, table)
-        assertEquals(bridgedEnRuFormTable.toString(), table.toString())
-    }
 
     @Test fun theTableHasTheFortyNineLexemesAndThreeHundredTwentyNineFormsOfTheEnglishLexiconInTheOrderOfTheRows() {
         val prefixes = listOf("noun", "adjective", "possessive", "pronoun", "neg", "prep", "verb", "aux")

@@ -15,7 +15,9 @@ import polski.core.model.CoreExercise
 import polski.core.model.FeatureBundle
 import polski.core.model.FeatureKey
 import polski.core.model.FeatureValue
-import polski.data.generatedCurriculumJsonByLang
+import polski.data.generatedEnRuConstructionTemplates
+import polski.data.generatedEnRuRecipes
+import polski.data.generatedEnRuSkillSpecs
 import polski.model.Exercise
 import polski.model.NumberGram
 import polski.model.PossessiveId
@@ -24,7 +26,6 @@ import polski.presentation.EndingPart
 import polski.presentation.changeHighlightParts
 import polski.presentation.sentenceHighlightParts
 import polski.training.evaluate
-import polski.training.parseCurriculum
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
@@ -32,9 +33,9 @@ import kotlin.test.assertTrue
 
 /**
  * EnRuPackPlan.md task EN-23: the emphasis contract (ContrastHighlightPlan.md §1/§7,
- * `EndingHighlightTest`'s own convention) manually verified against the *real*, embedded
- * `lang/en/exercise-recipes.json` (EN-14) run through the real [ExerciseGenerator] — not a
- * synthetic fixture. Three gap-A/D-specific cases the plan names explicitly (§2.3): do-support
+ * `EndingHighlightTest`'s own convention) manually verified against the *real* English recipes
+ * (EN-14; the rows of courses-biome/en-ru, until R1.17 lang/en/exercise-recipes.json) run through
+ * the real [ExerciseGenerator] — not a synthetic fixture. Three gap-A/D-specific cases the plan names explicitly (§2.3): do-support
  * insertion (`do`/`does`/`did`/`not`) must highlight only the inserted word(s), never render as an
  * `ending`; an irregular verb (`see`→`saw`, EN-17's own deliberate choice over the regular
  * `walk`→`walked`) must highlight as a `whole` change, never an `ending`; a contraction
@@ -95,9 +96,9 @@ class EnEmphasisContractTest {
     )
 
     private val lexemeFeatures = LexemeFeatures { emptyMap() }
-    private val templates = parseConstructionTemplates(generatedRealizationJsonByLang.getValue("en"))
-    private val recipeSet = parseRecipes(generatedExerciseRecipesJsonByLang.getValue("en"))
-    private val skills = parseCurriculum(generatedCurriculumJsonByLang.getValue("en")).associateBy { it.id }
+    private val templates = generatedEnRuConstructionTemplates
+    private val recipeSet = generatedEnRuRecipes
+    private val skills = generatedEnRuSkillSpecs.associateBy { it.id }
     private val realizer = ConstructionRealizer(templates, morphology, lexemeFeatures)
 
     // Real pairs/en-ru/pair.json `exercisePatterns` (EN-17), transcribed verbatim — the actual

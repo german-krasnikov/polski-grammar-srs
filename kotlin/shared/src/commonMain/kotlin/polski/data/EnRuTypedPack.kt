@@ -28,11 +28,11 @@ internal object EnRuTypedPack : CoursePackFields {
     override val personalPronouns get() = generatedEnRuPersonalPronouns
     override val personalPronounRawForms get() = generatedEnRuPersonalPronounRawForms
 
-    // The inputs of the exercise engine: still the JSON files of lang/en, through one file that R1.17 deletes
-    override val skillSpecs get() = bridgedEnRuSkillSpecs
-    override val recipes get() = bridgedEnRuRecipes
-    override val constructionTemplates get() = bridgedEnRuConstructionTemplates
-    override val formTable get() = bridgedEnRuFormTable
+    // The inputs of the exercise engine (R1.15, R1.16)
+    override val skillSpecs get() = generatedEnRuSkillSpecs
+    override val recipes get() = generatedEnRuRecipes
+    override val constructionTemplates get() = generatedEnRuConstructionTemplates
+    override val formTable get() = generatedEnRuFormTable
 
     // Exercise
     override val caseSentencePrefixes get() = generatedEnRuCaseSentencePrefixes

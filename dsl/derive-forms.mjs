@@ -1,6 +1,6 @@
 // Derive: the form tables of pl-ru and en-ru as typed Kotlin rows (R1.12, R1.16). A table is the forms of the lexicon (courses-biome/<pair>/*.core-data) laid out under the feature
 // bundle that asks for each, so a fact is authored once: a noun's seven cases are in nouns.core-data and nowhere else. The rules of pl-ru are those of scripts/build-pack.mjs, which read
-// a course.json that no longer exists (the past tense: stem and ending by person, number and gender; the future: the auxiliary and the lemma); those of en-ru are scripts/build-pack-en.mjs's.
+// a course.json that no longer exists (the past tense: stem and ending by person, number and gender; the future: the auxiliary and the lemma); those of en-ru are scripts/build-pack-en.mjs's, which read lang/en/lexicon.json (the scripts left the tree in R1.13 and R1.17; `git show 7358aeb72ab79dce80fca1faadba6be64892fa18:scripts/build-pack-en.mjs`).
 // It returns the text and writes nothing: `biome generate` writes OUT (generate) or compares it with the file (--check). The rows are printed by `biome data generate`, not by a printer of this file.
 import { spawnSync } from 'node:child_process';
 import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';

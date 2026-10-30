@@ -16,20 +16,20 @@ import polski.core.model.CoreExercise
 import polski.core.model.FeatureBundle
 import polski.core.model.FeatureKey
 import polski.core.model.FeatureValue
-import polski.data.generatedCurriculumJsonByLang
-import polski.training.parseCurriculum
+import polski.data.generatedEnRuConstructionTemplates
+import polski.data.generatedEnRuRecipes
+import polski.data.generatedEnRuSkillSpecs
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 /**
  * EnRuPackPlan.md task EN-14: the live run its own acceptance names — `ExerciseGenerator
- * .generateForSkill` over every one of `lang/en/curriculum.json`'s 16 real skill ids, reading the
- * real, embedded `lang/en/exercise-recipes.json` (this task) through the same [parseRecipes]
- * `PlEngine.kt` uses for pl. No `forms.generated.json` exists for en yet (EnRealizationTest's own
- * documented gap, still open) so — exactly like that test — a hand-authored [TableMorphology]
- * fixture stands in for en's lexicon/prepositions.json values; every entry is transcribed from the
- * real `lang/en/lexicon.json`/`prepositions.json` content, not invented. [seeds] is a small,
+ * .generateForSkill` over every one of the 16 real English skill ids, reading the real recipes,
+ * constructions and skills (the rows of courses-biome/en-ru, R1.15; until R1.17 the files
+ * lang/en/curriculum.json, exercise-recipes.json and realization.json). Like EnRealizationTest, it
+ * stands a hand-authored [TableMorphology] fixture in for en's form table (the table itself is
+ * EnPackEngineRealFormsTest's); every entry is transcribed from the lexicon, not invented. [seeds] is a small,
  * controlled pool (not the full 14-noun lexicon) so this fixture stays finite while still covering
  * every construction/slot combination the 16 recipes actually exercise — `pick()` is only ever
  * reached by `en:possessive.my`/`en:mixed`'s owner draw (every other call passes `preferredSeed`).
@@ -100,9 +100,9 @@ class EnExerciseGeneratorTest {
     // `lexicalFilter` restricts the draw to inanimate nouns, so this absence is never a crash.
     private val lexemeFeatures = LexemeFeatures { emptyMap() }
 
-    private val templates = parseConstructionTemplates(generatedRealizationJsonByLang.getValue("en"))
-    private val recipeSet = parseRecipes(generatedExerciseRecipesJsonByLang.getValue("en"))
-    private val skills = parseCurriculum(generatedCurriculumJsonByLang.getValue("en")).associateBy { it.id }
+    private val templates = generatedEnRuConstructionTemplates
+    private val recipeSet = generatedEnRuRecipes
+    private val skills = generatedEnRuSkillSpecs.associateBy { it.id }
     private val realizer = ConstructionRealizer(templates, morphology, lexemeFeatures)
 
     private fun generator(draws: List<Double> = listOf(0.4)): ExerciseGenerator = ExerciseGenerator(

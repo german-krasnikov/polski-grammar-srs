@@ -10,11 +10,7 @@ plugins {
 // filename list) means a new recipe file needs no Gradle/Kotlin edit to reach StyleRegistry —
 // only the JSON file.
 val stylesDirectory = layout.projectDirectory.dir("../../courses/styles")
-// UniversalCorePlan.md §3.1/§12 UC-06: `lang/<code>/curriculum.json` — scanned the same way as
-// `packDirs` below, so a second target language's curriculum needs no Gradle/Kotlin edit.
-val langDirectory = layout.projectDirectory.dir("../../courses/lang")
 val generatedCourseDirectory = layout.buildDirectory.dir("generated/course/kotlin")
-val generatedFormsFixtureDirectory = layout.buildDirectory.dir("generated/formsFixture/kotlin")
 val legacyAdmissionLedgers = listOf(
     layout.projectDirectory.file("../../tests/fixtures/textwire/legacy-boundary.cases"),
     layout.projectDirectory.file("../../tests/fixtures/textwire/numeric-admission.cases"),
@@ -71,9 +67,8 @@ val generateLegacyAdmissionTestSource by tasks.registering {
     }
 }
 
-// Shared by generateCoursePackSource and generateFormsFixtureSource below: a JS/Wasm-safe way to
-// embed a JSON file's bytes as a Kotlin string constant, so commonTest/commonMain never do file
-// I/O at runtime (browser targets have none) — the same technique for both, just different inputs.
+// Shared by the embedding tasks below: a JS/Wasm-safe way to embed a file's bytes as a Kotlin string constant,
+// so commonTest/commonMain never do file I/O at runtime (browser targets have none).
 fun literalChunks(source: String): List<String> {
     val rawChunks = mutableListOf<String>()
     var start = 0
@@ -178,11 +173,9 @@ val generateAcCorpusTestSource by tasks.registering {
     }
 }
 
-// Embeds the two JSON inputs the live readers still parse: `lang/<code>/curriculum.json` (PackEngine) and `styles/*.json`
-// (StyleRegistry). R1.13 and R1.18 replace them; the JSON pack reader and its module are gone (R1.3).
+// Embeds the one JSON input a live reader still parses: `styles/*.json` (StyleRegistry). R1.18 replaces it with rows (R1.13 and R1.17 did the engine inputs of both packs).
 val generateCoursePackSource by tasks.registering {
     inputs.dir(stylesDirectory)
-    inputs.dir(langDirectory)
     outputs.dir(generatedCourseDirectory)
     doLast {
         val styleFiles = (stylesDirectory.asFile.listFiles { file -> file.extension == "json" } ?: emptyArray())
@@ -190,66 +183,11 @@ val generateCoursePackSource by tasks.registering {
         val stylesJson = "[" + styleFiles.joinToString(",") { it.readText() } + "]"
         val styleChunks = literalChunks(stylesJson)
 
-        // UC-06: any `lang/<code>/curriculum.json` becomes an entry keyed by <code> — pl is the
-        // only one today, but a new target language's curriculum needs no edit here.
-        val langDirs = (langDirectory.asFile.listFiles { file -> file.isDirectory } ?: emptyArray())
-            .filter { dir -> dir.resolve("curriculum.json").isFile }
-            .sortedBy { it.name }
-        val curriculumEntryLiterals = langDirs.joinToString(",\n") { dir ->
-            val chunks = literalChunks(dir.resolve("curriculum.json").readText())
-            "    \"${dir.name}\" to ${literalBuildString(chunks)}"
-        }
-
         val target = generatedCourseDirectory.get().file("polski/data/GeneratedCourseJson.kt").asFile
         target.parentFile.mkdirs()
         target.writeText(
             "package polski.data\n\n" +
-                "internal val generatedStylesJson = " + literalBuildString(styleChunks) + "\n" +
-                "internal val generatedCurriculumJsonByLang: Map<String, String> = mapOf(\n" +
-                curriculumEntryLiterals + "\n)\n",
-        )
-    }
-}
-
-// UniversalCorePlan.md §5.3/§12 UC-08: realization.json/exercise-recipes.json/forms.generated.json are scanned per `lang/<code>/` the same way
-// generateCoursePackSource scans curriculum.json (EN-05). Only en has them since R1.13 (pl-ru's engine inputs are rows, R1.11 and R1.12); R1.17 removes
-// this task with the en files.
-val generateFormsFixtureSource by tasks.registering {
-    inputs.dir(langDirectory)
-    outputs.dir(generatedFormsFixtureDirectory)
-    doLast {
-        val langDirs = (langDirectory.asFile.listFiles { file -> file.isDirectory } ?: emptyArray())
-            .sortedBy { it.name }
-        val realizationEntryLiterals = langDirs
-            .filter { dir -> dir.resolve("realization.json").isFile }
-            .joinToString(",\n") { dir ->
-                val entryChunks = literalChunks(dir.resolve("realization.json").readText())
-                "    \"${dir.name}\" to ${literalBuildString(entryChunks)}"
-            }
-        val recipesEntryLiterals = langDirs
-            .filter { dir -> dir.resolve("exercise-recipes.json").isFile }
-            .joinToString(",\n") { dir ->
-                val entryChunks = literalChunks(dir.resolve("exercise-recipes.json").readText())
-                "    \"${dir.name}\" to ${literalBuildString(entryChunks)}"
-            }
-        // EN-24 (UC-09 part 2/2 minimum): a per-lang `lang/<code>/forms.generated.json` — a target language's materialized forms need no Gradle/Kotlin edit
-        // beyond dropping the file in `lang/<code>/`, same scanning pattern as realization.json above.
-        val formsGeneratedEntryLiterals = langDirs
-            .filter { dir -> dir.resolve("forms.generated.json").isFile }
-            .joinToString(",\n") { dir ->
-                val entryChunks = literalChunks(dir.resolve("forms.generated.json").readText())
-                "    \"${dir.name}\" to ${literalBuildString(entryChunks)}"
-            }
-        val recipesTarget = generatedFormsFixtureDirectory.get().file("polski/core/GeneratedRecipesFixtureJson.kt").asFile
-        recipesTarget.parentFile.mkdirs()
-        recipesTarget.writeText(
-            "package polski.core\n\n" +
-                "internal val generatedRealizationJsonByLang: Map<String, String> = mapOf(\n" +
-                realizationEntryLiterals + "\n)\n" +
-                "internal val generatedExerciseRecipesJsonByLang: Map<String, String> = mapOf(\n" +
-                recipesEntryLiterals + "\n)\n" +
-                "internal val generatedFormsGeneratedJsonByLang: Map<String, String> = mapOf(\n" +
-                formsGeneratedEntryLiterals + "\n)\n",
+                "internal val generatedStylesJson = " + literalBuildString(styleChunks) + "\n",
         )
     }
 }
@@ -288,7 +226,6 @@ kotlin {
             // compile*MainKotlinMetadata — as a task dependency, not just tasks whose
             // name happens to match a "compileKotlin*" prefix.
             kotlin.srcDir(generateCoursePackSource.map { it.outputs.files.singleFile })
-            kotlin.srcDir(generateFormsFixtureSource.map { it.outputs.files.singleFile })
             // Rows printed by `biome generate --project dsl/biome.project` from courses-biome/<pair>/*.core-data (standard layout, committed).
             kotlin.srcDir("src/commonMain/generated/kotlin")
         }

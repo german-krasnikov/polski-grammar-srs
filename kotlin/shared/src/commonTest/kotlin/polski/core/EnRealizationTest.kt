@@ -6,17 +6,17 @@ import polski.core.engine.TableMorphology
 import polski.core.model.FeatureBundle
 import polski.core.model.FeatureKey
 import polski.core.model.FeatureValue
+import polski.data.generatedEnRuConstructionTemplates
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
 /**
- * EnRuPackPlan.md task EN-13: manually runs `lang/en/realization.json`'s real, embedded content
- * (parsed by the same [parseConstructionTemplates] `PlEngine.kt` uses for pl, EnRuPackPlan.md §5
- * gaps A/D) through the real [ConstructionRealizer], with a hand-authored [TableMorphology]
- * fixture standing in for en's own lexicon/prepositions.json values (no generated
- * `forms.generated.json` exists for en yet — gap G/EN-04..EN-10, out of this task's scope) —
- * covering every one of the 16 `lang/en/curriculum.json` skills' construction+feature-bundle
- * combinations and asserting grammatically correct English output.
+ * EnRuPackPlan.md task EN-13: manually runs the real English construction templates (the rows of
+ * courses-biome/en-ru, R1.15; until R1.17 `lang/en/realization.json`, EnRuPackPlan.md §5 gaps A/D)
+ * through the real [ConstructionRealizer], with a hand-authored [TableMorphology] fixture standing
+ * in for en's form table (the real one is EnPackEngineRealFormsTest's) — covering the
+ * construction+feature-bundle combinations of the 16 English skills and asserting grammatically
+ * correct English output.
  */
 class EnRealizationTest {
     private fun bundle(vararg pairs: Pair<String, String>): FeatureBundle = pairs.associate { (k, v) -> FeatureKey(k) to FeatureValue(v) }
@@ -54,7 +54,7 @@ class EnRealizationTest {
         ),
     )
 
-    private val templates = parseConstructionTemplates(generatedRealizationJsonByLang.getValue("en"))
+    private val templates = generatedEnRuConstructionTemplates
     private val realizer = ConstructionRealizer(templates, morphology, LexemeFeatures { emptyMap() })
 
     // en:role.object / role.location / role.instrument / role.recipient (core.argument.case-role):

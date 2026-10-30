@@ -1,5 +1,5 @@
 // R1.16 (Plans/Biome/R1Design.md): the form table of en-ru is derived from the English lexicon rows by dsl/derive-forms.mjs. The rules on hand-built rows (expectations written out) and the real table against
-// the table that scripts/build-pack-en.mjs built from the JSON lexicon, which is read from the commit that sealed it (git show <rev>:path, sha256 pinned) because R1.17 deletes the file.
+// the table that scripts/build-pack-en.mjs built from the JSON lexicon; the file left the tree in R1.17, so it is read from the commit that still has it (git show <rev>:path, sha256 pinned).
 // The data cases need a biome-dsl checkout (see course-data.test.ts); without one they are skipped, which is NOT RUN, not a pass.
 import { describe, expect, it } from 'vitest';
 import { execFileSync } from 'node:child_process';

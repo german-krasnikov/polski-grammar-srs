@@ -3,27 +3,42 @@ package polski.data
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import polski.core.engine.ConstantSlot
+import polski.core.model.FeatureFocus
+import polski.core.model.FeatureKey
+import polski.core.model.FeatureValue
+import polski.core.model.LexicalFilter
 
 /**
- * R1.15: the English engine inputs from the rows, against the JSON that the engine still reads through EnRuJsonBridge.kt (R1.17 points the pack at the rows, deletes the
- * bridge and the three parity tests here), and against values read off the sealed sources (lang/en/exercise-recipes.json sha256 05757efb..., lang/en/realization.json sha256
- * 50f846ca..., lang/en/curriculum.json sha256 4c8f1c21...) before they were transcribed. The mappers are the generated EnRu... copies of the pl-ru ones.
+ * R1.15, R1.17: the English engine inputs from the rows, against values read off the sealed sources (lang/en/curriculum.json sha256 4c8f1c21..., lang/en/exercise-recipes.json sha256 05757efb...,
+ * lang/en/realization.json sha256 50f846ca...) before they were transcribed; they left the tree in R1.17. All 16 specs against the sealed cases are the vitest test course-curriculum; the engine tests
+ * (EnPackEngineRealFormsTest, EnExerciseGeneratorTest, EnEmphasisContractTest, EnRealizationTest) run every recipe and construction. The mappers are the generated EnRu... copies of the pl-ru ones.
  */
 class EnRuEngineInputsTest {
-    @Test fun theSpecsOfTheRowsEqualTheParsedCurriculumInOrder() {
+    private fun bundle(vararg pairs: Pair<String, String>) = pairs.associate { FeatureKey(it.first) to FeatureValue(it.second) }
+    private fun spec(id: String) = generatedEnRuSkillSpecs.single { it.id == id }
+
+    @Test fun theSpecsAreThe16SkillsInTheOrderOfTheCurriculumAndAFewAreWrittenOut() {
         assertEquals(16, generatedEnRuSkillSpecs.size)
-        assertEquals(bridgedEnRuSkillSpecs, generatedEnRuSkillSpecs)
+        assertEquals("en:role.object", generatedEnRuSkillSpecs.first().id)
+        assertEquals("en:mixed", generatedEnRuSkillSpecs.last().id)
+        assertEquals(
+            SkillSpecAnchor("core.argument.case-role", FeatureFocus(FeatureKey("Case"), FeatureValue("Subj"), FeatureValue("Obj")), bundle("Tense" to "Pres", "Person" to "1", "Number" to "Sing"), null, "A1", emptyList()),
+            spec("en:role.object").anchor(),
+        )
+        assertEquals(
+            SkillSpecAnchor("core.verb.tense", FeatureFocus(FeatureKey("Aspect"), FeatureValue("Simple"), FeatureValue("Continuous")), bundle("Tense" to "Pres", "Person" to "3", "Number" to "Sing"), null, "B1", listOf("en:verb.presentSimple")),
+            spec("en:verb.presentContinuous").anchor(),
+        )
+        assertEquals(
+            SkillSpecAnchor("core.argument.case-role", FeatureFocus(FeatureKey("Case"), FeatureValue("Obj"), FeatureValue("To")), bundle("Tense" to "Pres", "Person" to "1", "Number" to "Sing"),
+                LexicalFilter("noun", mapOf("nounId" to listOf("wife", "husband", "friend", "son", "dog", "cat", "child"))), "A2", listOf("en:role.instrument")),
+            spec("en:role.recipient").anchor(),
+        )
+        assertEquals(SkillSpecAnchor("core.composite", null, emptyMap(), null, "B1", listOf("en:possessive.my", "en:verb.pastSimple")), spec("en:mixed").anchor())
     }
 
-    @Test fun theRecipesOfTheRowsEqualTheParsedRecipesInOrder() {
-        assertEquals(bridgedEnRuRecipes, generatedEnRuRecipes)
-        assertEquals(bridgedEnRuRecipes.toString(), generatedEnRuRecipes.toString())
-    }
-
-    @Test fun theConstructionsOfTheRowsEqualTheParsedRealizationInOrder() {
-        assertEquals(bridgedEnRuConstructionTemplates, generatedEnRuConstructionTemplates)
-        assertEquals(bridgedEnRuConstructionTemplates.toString(), generatedEnRuConstructionTemplates.toString())
-    }
+    private data class SkillSpecAnchor(val construction: String, val focus: FeatureFocus?, val fixed: Map<FeatureKey, FeatureValue>, val filter: LexicalFilter?, val level: String?, val prerequisites: List<String>)
+    private fun polski.core.model.SkillSpec.anchor() = SkillSpecAnchor(construction, focus, fixed, lexicalFilter, level, prerequisites)
 
     @Test fun theSixteenRecipesAreThoseOfTheSkillsAndTheChainHasItsFiveSteps() {
         val set = generatedEnRuRecipes

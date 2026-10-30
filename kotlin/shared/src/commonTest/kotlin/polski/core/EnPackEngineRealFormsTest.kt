@@ -6,24 +6,24 @@ import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 import polski.core.engine.ExerciseIdFactory
 import polski.core.engine.RandomSource
-import polski.data.generatedCurriculumJsonByLang
+import polski.data.generatedEnRuSkillSpecs
 import polski.data.selectActiveCoursePack
-import polski.training.parseCurriculum
 
 /**
  * EnRuAcceptance-2026-09-28.md §7 item 1 (ADR-37 blocker 1): unlike [EnExerciseGeneratorTest],
- * which proves the real `lang/en/realization.json`/`exercise-recipes.json` templates generate all
- * 16 skills against a HAND-AUTHORED morphology/pronoun/case-prefix fixture, this test selects
+ * which proves the real English templates and recipes generate all 16 skills against a
+ * HAND-AUTHORED morphology/pronoun/case-prefix fixture, this test selects
  * en-ru as the real, process-wide active pack (exactly what a host's Settings picker does) and
  * calls the exact production entrypoints ([plExerciseGenerator]/[plChainSteps]) every host's
- * `PlExerciseEngine` calls — so it exercises the real, checked-in `lang/en/forms.generated.json`,
- * the real `caseSentencePrefix`/`personalPronounForm` wiring, end to end, with nothing faked.
+ * `PlExerciseEngine` calls — so it exercises the real form table (derived from the rows of
+ * courses-biome/en-ru, R1.16; until R1.17 the file lang/en/forms.generated.json), the real
+ * `caseSentencePrefix`/`personalPronounForm` wiring, end to end, with nothing faked.
  * Before this task's fixes this crashed on the very first skill/chain step with `TableMorphology:
  * no form for lexeme="..."`, then `Unknown case Subj`, then a missing pronoun row — none of which
  * EnExerciseGeneratorTest's own hand-authored fixtures could ever catch.
  */
 class EnPackEngineRealFormsTest {
-    private val skillIds = parseCurriculum(generatedCurriculumJsonByLang.getValue("en")).map { it.id }
+    private val skillIds = generatedEnRuSkillSpecs.map { it.id }
 
     @AfterTest
     fun restorePlRu() {
