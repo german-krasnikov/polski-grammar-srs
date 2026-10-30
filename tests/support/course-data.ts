@@ -29,6 +29,16 @@ const binding = (step: string, record: string) => STEPS.get(step)?.get(record) ?
 
 export const biome = (...args: string[]) => spawnSync(process.execPath, [cli, ...args], { encoding: 'utf8' });
 
+/**
+ * The rows of the real file of a record, one canonical `TAG value` line each (`biome read --format raw`): the same whatever layout the file is written in, so a test may cut a row or replace one text in it.
+ * A word is written without quotes in it (`skill: case.gen.neg`), as `biome fmt` writes it.
+ */
+export function realRows(record: string) {
+  const run = biome('read', binding('course-plru', record)!.file, '--format', 'raw');
+  expect(run.status, run.stderr).toBe(0);
+  return run.stdout.split('\n').filter(Boolean);
+}
+
 /** The real file of a record, as the data step of dsl/biome.project binds it. */
 export const realFile = (record: string) => binding('course-plru', record)!.file;
 

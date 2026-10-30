@@ -1,12 +1,144 @@
 # pl-course/verbs — source SHA-256: 7255e8c686ceee17...
-VERB {id: "have" lemma: "mieć" meaning: "иметь" aspect: "imperfective" futureType: "compound" present: {sg: {p1: "mam" p2: "masz" p3: "ma"} pl: {p1: "mamy" p2: "macie" p3: "mają"}} pastStem: {m: "miał" f: "miała" n: "miało" mp: "mieli" np: "miały"}}
-VERB {id: "see" lemma: "widzieć" meaning: "видеть" aspect: "imperfective" futureType: "compound" present: {sg: {p1: "widzę" p2: "widzisz" p3: "widzi"} pl: {p1: "widzimy" p2: "widzicie" p3: "widzą"}} pastStem: {m: "widział" f: "widziała" n: "widziało" mp: "widzieli" np: "widziały"}}
-VERB {id: "like" lemma: "lubić" meaning: "любить" aspect: "imperfective" futureType: "compound" present: {sg: {p1: "lubię" p2: "lubisz" p3: "lubi"} pl: {p1: "lubimy" p2: "lubicie" p3: "lubią"}} pastStem: {m: "lubił" f: "lubiła" n: "lubiło" mp: "lubili" np: "lubiły"}}
-VERB {id: "buy" lemma: "kupować" meaning: "покупать" aspect: "imperfective" futureType: "compound" perfectivePair: "buyDone" present: {sg: {p1: "kupuję" p2: "kupujesz" p3: "kupuje"} pl: {p1: "kupujemy" p2: "kupujecie" p3: "kupują"}} pastStem: {m: "kupował" f: "kupowała" n: "kupowało" mp: "kupowali" np: "kupowały"}}
-VERB {id: "read" lemma: "czytać" meaning: "читать" aspect: "imperfective" futureType: "compound" present: {sg: {p1: "czytam" p2: "czytasz" p3: "czyta"} pl: {p1: "czytamy" p2: "czytacie" p3: "czytają"}} pastStem: {m: "czytał" f: "czytała" n: "czytało" mp: "czytali" np: "czytały"}}
-VERB {id: "talk" lemma: "mówić" meaning: "говорить" aspect: "imperfective" futureType: "compound" present: {sg: {p1: "mówię" p2: "mówisz" p3: "mówi"} pl: {p1: "mówimy" p2: "mówicie" p3: "mówią"}} pastStem: {m: "mówił" f: "mówiła" n: "mówiło" mp: "mówili" np: "mówiły"}}
-VERB {id: "go" lemma: "iść" meaning: "идти" aspect: "imperfective" futureType: "compound" present: {sg: {p1: "idę" p2: "idziesz" p3: "idzie"} pl: {p1: "idziemy" p2: "idziecie" p3: "idą"}} pastStem: {m: "szedł" f: "szła" n: "szło" mp: "szli" np: "szły"}}
-VERB {id: "be" lemma: "być" meaning: "быть" aspect: "imperfective" futureType: "compound" present: {sg: {p1: "jestem" p2: "jesteś" p3: "jest"} pl: {p1: "jesteśmy" p2: "jesteście" p3: "są"}} pastStem: {m: "był" f: "była" n: "było" mp: "byli" np: "były"}}
-VERB {id: "buyDone" lemma: "kupić" meaning: "купить" aspect: "perfective" futureType: "present" present: {sg: {p1: "kupię" p2: "kupisz" p3: "kupi"} pl: {p1: "kupimy" p2: "kupicie" p3: "kupią"}} pastStem: {m: "kupił" f: "kupiła" n: "kupiło" mp: "kupili" np: "kupiły"}}
-VERB {id: "do" lemma: "robić" meaning: "делать" aspect: "imperfective" futureType: "compound" perfectivePair: "doDone" present: {sg: {p1: "robię" p2: "robisz" p3: "robi"} pl: {p1: "robimy" p2: "robicie" p3: "robią"}} pastStem: {m: "robił" f: "robiła" n: "robiło" mp: "robili" np: "robiły"}}
-VERB {id: "doDone" lemma: "zrobić" meaning: "сделать" aspect: "perfective" futureType: "present" present: {sg: {p1: "zrobię" p2: "zrobisz" p3: "zrobi"} pl: {p1: "zrobimy" p2: "zrobicie" p3: "zrobią"}} pastStem: {m: "zrobił" f: "zrobiła" n: "zrobiło" mp: "zrobili" np: "zrobiły"}}
+VERB {
+  id: have
+  lemma: "mieć"
+  meaning: "иметь"
+  aspect: imperfective
+  futureType: compound
+  present: {sg: {p1: mam p2: masz p3: ma} pl: {p1: mamy p2: macie p3: "mają"}}
+  pastStem: {m: "miał" f: "miała" n: "miało" mp: mieli np: "miały"}
+}
+VERB {
+  id: see
+  lemma: "widzieć"
+  meaning: "видеть"
+  aspect: imperfective
+  futureType: compound
+  present: {
+    sg: {p1: "widzę" p2: widzisz p3: widzi}
+    pl: {p1: widzimy p2: widzicie p3: "widzą"}
+  }
+  pastStem: {
+    m: "widział"
+    f: "widziała"
+    n: "widziało"
+    mp: widzieli
+    np: "widziały"
+  }
+}
+VERB {
+  id: like
+  lemma: "lubić"
+  meaning: "любить"
+  aspect: imperfective
+  futureType: compound
+  present: {
+    sg: {p1: "lubię" p2: lubisz p3: lubi}
+    pl: {p1: lubimy p2: lubicie p3: "lubią"}
+  }
+  pastStem: {m: "lubił" f: "lubiła" n: "lubiło" mp: lubili np: "lubiły"}
+}
+VERB {
+  id: buy
+  lemma: "kupować"
+  meaning: "покупать"
+  aspect: imperfective
+  futureType: compound
+  perfectivePair: buyDone
+  present: {
+    sg: {p1: "kupuję" p2: kupujesz p3: kupuje}
+    pl: {p1: kupujemy p2: kupujecie p3: "kupują"}
+  }
+  pastStem: {
+    m: "kupował"
+    f: "kupowała"
+    n: "kupowało"
+    mp: kupowali
+    np: "kupowały"
+  }
+}
+VERB {
+  id: read
+  lemma: "czytać"
+  meaning: "читать"
+  aspect: imperfective
+  futureType: compound
+  present: {
+    sg: {p1: czytam p2: czytasz p3: czyta}
+    pl: {p1: czytamy p2: czytacie p3: "czytają"}
+  }
+  pastStem: {m: "czytał" f: "czytała" n: "czytało" mp: czytali np: "czytały"}
+}
+VERB {
+  id: talk
+  lemma: "mówić"
+  meaning: "говорить"
+  aspect: imperfective
+  futureType: compound
+  present: {
+    sg: {p1: "mówię" p2: "mówisz" p3: "mówi"}
+    pl: {p1: "mówimy" p2: "mówicie" p3: "mówią"}
+  }
+  pastStem: {m: "mówił" f: "mówiła" n: "mówiło" mp: "mówili" np: "mówiły"}
+}
+VERB {
+  id: go
+  lemma: "iść"
+  meaning: "идти"
+  aspect: imperfective
+  futureType: compound
+  present: {
+    sg: {p1: "idę" p2: idziesz p3: idzie}
+    pl: {p1: idziemy p2: idziecie p3: "idą"}
+  }
+  pastStem: {m: "szedł" f: "szła" n: "szło" mp: szli np: "szły"}
+}
+VERB {
+  id: be
+  lemma: "być"
+  meaning: "быть"
+  aspect: imperfective
+  futureType: compound
+  present: {
+    sg: {p1: jestem p2: "jesteś" p3: jest}
+    pl: {p1: "jesteśmy" p2: "jesteście" p3: "są"}
+  }
+  pastStem: {m: "był" f: "była" n: "było" mp: byli np: "były"}
+}
+VERB {
+  id: buyDone
+  lemma: "kupić"
+  meaning: "купить"
+  aspect: perfective
+  futureType: present
+  present: {
+    sg: {p1: "kupię" p2: kupisz p3: kupi}
+    pl: {p1: kupimy p2: kupicie p3: "kupią"}
+  }
+  pastStem: {m: "kupił" f: "kupiła" n: "kupiło" mp: kupili np: "kupiły"}
+}
+VERB {
+  id: do
+  lemma: "robić"
+  meaning: "делать"
+  aspect: imperfective
+  futureType: compound
+  perfectivePair: doDone
+  present: {
+    sg: {p1: "robię" p2: robisz p3: robi}
+    pl: {p1: robimy p2: robicie p3: "robią"}
+  }
+  pastStem: {m: "robił" f: "robiła" n: "robiło" mp: robili np: "robiły"}
+}
+VERB {
+  id: doDone
+  lemma: "zrobić"
+  meaning: "сделать"
+  aspect: perfective
+  futureType: present
+  present: {
+    sg: {p1: "zrobię" p2: zrobisz p3: zrobi}
+    pl: {p1: zrobimy p2: zrobicie p3: "zrobią"}
+  }
+  pastStem: {m: "zrobił" f: "zrobiła" n: "zrobiło" mp: zrobili np: "zrobiły"}
+}

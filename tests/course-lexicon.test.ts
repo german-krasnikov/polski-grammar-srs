@@ -1,8 +1,7 @@
 // R1.5 (Plans/Biome/R1Design.md): the lexicon rows against dsl/course.data-contract: what `biome data` rejects, with the exact position of each problem.
 // The keys of the data that are no identifiers are written m_personal.. and p1..p3 (owner decision 2026-10-29); the ids as values stay verbatim.
 import { describe, expect, it } from 'vitest';
-import { readFileSync } from 'node:fs';
-import { cases, genders, hasCli, realFile, row, rowsOf } from './support/course-data';
+import { cases, genders, hasCli, realRows, row, rowsOf } from './support/course-data';
 
 const persons = (tag: string) => `{p1: "${tag}1" p2: "${tag}2" p3: "${tag}3"}`;
 
@@ -25,7 +24,7 @@ describe.skipIf(!hasCli)('noun rows', () => {
   it('a second noun with the same id is DATA_DUPLICATE at its id', () => problem([noun('a'), noun('a')], 1, '"a"', 'DATA_DUPLICATE'));
   it('a number for a text is DATA_TYPE at the value', () => problem([noun('a', { lemma: '5' })], 0, '5', 'DATA_TYPE'));
   it('a noun that a skill draws from cannot be removed: every skill that names it is DATA_REF', () => {
-    const without = readFileSync(realFile('NounRow'), 'utf8').split('\n').filter(line => !line.startsWith('NOUN {id: "wife"')).join('\n');
+    const without = realRows('NounRow').filter(line => !line.startsWith('NOUN {id: wife ')).join('\n');
     const { status, problems } = withSkills.check(without);
     expect(status).toBe(1);
     expect(problems.length).toBeGreaterThan(0);
