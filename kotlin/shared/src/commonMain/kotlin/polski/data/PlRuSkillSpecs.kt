@@ -24,8 +24,9 @@ internal fun SkillRow.toSkillSpec(): SkillSpec {
         focus = featureFocus?.let { FeatureFocus(FeatureKey(it.feature), FeatureValue(it.from), FeatureValue(it.to)) },
         fixed = fixedFeatures,
         lexicalFilter = lexicalFilter?.let { filter ->
+            require(filter.where.nounId == null || filter.where.enNounId == null) { "$id: a filter names its nouns twice, as nounId and as enNounId" }
             LexicalFilter(filter.slot, buildMap {
-                filter.where.nounId?.let { put("nounId", it) }
+                (filter.where.nounId ?: filter.where.enNounId)?.let { put("nounId", it) }
                 filter.where.gender?.let { put("gender", it) }
             })
         },

@@ -1,0 +1,7 @@
+# courses/pairs/en-ru/pair.json — source SHA-256: 55f79438cf1511b1...
+PATTERN {key: seenObj value: "I see {obj}."}
+PATTERN {key: verbSentence value: "{subj} {verb}."}
+PATTERN {key: subjectVerb value: "I {verb}."}
+PATTERN {key: roleDrill value: "{start} {target}."}
+PATTERN {key: chainPast value: "I saw {obj}."}
+PATTERN {key: chainNeg value: "I did not see {obj}."}

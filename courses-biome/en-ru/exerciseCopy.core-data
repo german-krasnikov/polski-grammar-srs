@@ -1,0 +1,203 @@
+# courses/pairs/en-ru/pair.json — source SHA-256: 55f79438cf1511b1...
+COPY {
+  key: roleObjPrompt
+  value: "Скажи, что видишь названное. Начни с «I see…»."
+}
+COPY {
+  key: roleObjExplanation
+  value: "I see требует дополнения после глагола; падежа нет — форма слова не меняется, меняется только его место в предложении."
+}
+COPY {
+  key: roleObjReason
+  value: "Роль меняется (подлежащее → дополнение), форма слова остаётся прежней."
+}
+COPY {
+  key: verbPresentPrompt
+  value: "Перенеси предложение в настоящее простое время."
+}
+COPY {
+  key: verbTenseExplanation
+  value: "Подлежащее не меняется; меняется только форма глагола по времени и (для he/she/it) по -s."
+}
+COPY {
+  key: verbTenseReason
+  value: "Меняется форма глагола, остальные слова сохраняются."
+}
+COPY {
+  key: ownerExplanation
+  value: "my/your/his/her/its/our/their не согласуются ни с родом, ни с числом предмета — это закрытый список неизменяемых слов."
+}
+COPY {key: ownerReason value: "Меняем владельца, остальная фраза не меняется."}
+COPY {
+  key: moodQuestionPrompt
+  value: "Сделай вопрос, на который можно ответить «да» или «нет». Начни с «Do…»."
+}
+COPY {
+  key: moodQuestionExplanation
+  value: "Do выносится перед подлежащим; смысловой глагол остаётся в базовой форме."
+}
+COPY {
+  key: moodQuestionReason
+  value: "Do-support: вспомогательный глагол выносится вперёд, смысловой глагол теряет -s."
+}
+COPY {
+  key: roleLocationPrompt
+  value: "Скажи, что находишься внутри этого. Начни с «I live in…»."
+}
+COPY {
+  key: roleDrillExplanation
+  value: "Роль вводится отдельным предлогом; форма существительного не меняется — меняется только предлог перед ним."
+}
+COPY {key: roleLocationReason value: "Добавлен предлог in по роли «место»."}
+COPY {key: roleLocationStart value: "I live"}
+COPY {
+  key: roleInstrumentPrompt
+  value: "Скажи, что делаешь это вместе с этим/с помощью этого. Начни с «I go with…»."
+}
+COPY {
+  key: roleInstrumentReason
+  value: "Добавлен предлог with по роли «инструмент/спутник»."
+}
+COPY {key: roleInstrumentStart value: "I go"}
+COPY {key: polarityPresentPrompt value: "Сделай предложение отрицательным."}
+COPY {
+  key: polarityExplanation
+  value: "Do/does/did несёт отрицание; смысловой глагол остаётся в базовой форме."
+}
+COPY {
+  key: polarityReason
+  value: "Добавлен do/does/did + not, смысловой глагол — в базовой форме."
+}
+COPY {
+  key: verbPastPrompt
+  value: "Перенеси предложение в прошедшее простое время."
+}
+COPY {
+  key: roleRecipientPrompt
+  value: "Скажи, кому это адресовано. Начни с «I give a present to…»."
+}
+COPY {
+  key: roleRecipientReason
+  value: "Добавлен предлог to по роли «получатель»."
+}
+COPY {key: roleRecipientStart value: "I give a present"}
+COPY {key: pluralPrompt value: "Скажи, что таких предметов несколько."}
+COPY {
+  key: pluralExplanation
+  value: "Существительное получает -s/-es или неправильную форму множественного числа; притяжательное и прилагательное не меняются."
+}
+COPY {
+  key: pluralReason
+  value: "Существительное — во множественном числе, остальные слова — без изменений."
+}
+COPY {
+  key: polarityPastPrompt
+  value: "Сделай предложение в прошедшем времени отрицательным."
+}
+COPY {
+  key: verbFuturePrompt
+  value: "Перенеси предложение в будущее простое время."
+}
+COPY {
+  key: pronounPrompt
+  value: "Замени группу дополнения одним личным местоимением."
+}
+COPY {
+  key: pronounExplanation
+  value: "It заменяет целую группу слов, обозначающую предмет."
+}
+COPY {key: pronounReason value: "Вся группа слов заменена местоимением it."}
+COPY {
+  key: verbContinuousPrompt
+  value: "Скажи, что это происходит именно сейчас."
+}
+COPY {key: tenseContrastSource value: "I am reading a new book."}
+COPY {
+  key: tenseContrastPrompt
+  value: "Скажи, что ты уже прочитал эту книгу — результат сейчас есть, а не процесс. Начни с «I have…»."
+}
+COPY {key: tenseContrastExpected value: "I have read a new book."}
+COPY {key: tenseContrastAccepted value: "I've read a new book."}
+COPY {
+  key: tenseContrastExplanation
+  value: "I read a new book (Simple — привычка/факт вообще) → I am reading a new book (Continuous — процесс, идёт сейчас) → I have read a new book (Perfect — результат уже есть, важен для настоящего момента). Одно и то же событие можно описать тремя разными «временами»: разница не в моменте времени, а в том, что говорящий хочет подчеркнуть."
+}
+COPY {key: tenseContrastFrom value: "am reading"}
+COPY {key: tenseContrastTo value: "have read"}
+COPY {
+  key: tenseContrastReason
+  value: "Continuous (процесс) → Perfect (результат, значимый сейчас): подчёркиваем не «что происходит», а «что уже сделано»."
+}
+COPY {
+  key: mixedPrompt
+  value: "Перенеси предложение в прошедшее время и замени владельца."
+}
+COPY {
+  key: mixedExplanation
+  value: "Здесь два изменения сразу: время глагола и притяжательное местоимение; каждое меняется по своему собственному правилу, независимо от другого."
+}
+COPY {key: mixedVerbFrom value: see}
+COPY {key: mixedVerbTo value: saw}
+COPY {
+  key: mixedVerbReason
+  value: "Меняется время глагола: настоящее → прошедшее."
+}
+COPY {
+  key: mixedOwnerReason
+  value: "Меняется владелец; остальная форма существительного и прилагательного не меняется."
+}
+COPY {key: mixedOwnerPromptPrefix value: "Замени «мой» на «"}
+COPY {
+  key: mixedOwnerPromptSuffix
+  value: "». Сохрани прошедшее время предложения."
+}
+COPY {key: ownerYour value: "твой / твоя"}
+COPY {key: ownerHis value: "его"}
+COPY {key: ownerHer value: "её"}
+COPY {key: ownerIts value: "его / её (у предмета)"}
+COPY {key: ownerOur value: "наш / наша"}
+COPY {key: ownerTheir value: "их"}
+COPY {key: ownerPromptPrefix value: "Замени «мой» на «"}
+COPY {key: ownerPromptSuffix value: "». Сохрани время и смысл предложения."}
+COPY {
+  key: chainObjPrompt
+  value: "Скажи, что видишь этот предмет. Начни с «I see…»."
+}
+COPY {
+  key: chainObjReason
+  value: "Роль меняется (подлежащее → дополнение), форма слова остаётся прежней."
+}
+COPY {key: chainPastPrompt value: "Перенеси предложение в прошедшее время."}
+COPY {
+  key: chainPastReason
+  value: "Меняется время глагола: настоящее → прошедшее, дополнение не меняется."
+}
+COPY {key: chainPastChangeFrom value: see}
+COPY {key: chainPastChangeTo value: saw}
+COPY {
+  key: chainNegPrompt
+  value: "Сделай предложение отрицательным, сохранив прошедшее время."
+}
+COPY {
+  key: chainNegReason
+  value: "Добавлен did not перед базовой формой глагола."
+}
+COPY {key: chainNegChangeFrom value: saw}
+COPY {key: chainNegChangeTo value: "did not see"}
+COPY {
+  key: chainOwnerPrompt
+  value: "Замени владельца на «her». Сохрани отрицание и прошедшее время."
+}
+COPY {
+  key: chainOwnerReason
+  value: "Меняется владелец; остальная фраза, включая отрицание, не меняется."
+}
+COPY {
+  key: chainLocPrompt
+  value: "Скажи, что находишься внутри этого. Начни с «I stayed in…»."
+}
+COPY {
+  key: chainLocReason
+  value: "Добавлен предлог in по роли «место»; владелец из предыдущего шага сохраняется."
+}
+COPY {key: chainLocStart value: "I stayed"}

@@ -2,6 +2,7 @@ package polski.data
 
 import polski.data.rows.plru.*
 import polski.model.*
+import polski.presentation.StemAlternation
 
 /**
  * R1.5: the pl-ru nouns, adjectives and verbs from the generated rows. The fields of a form record are the keys of the data
@@ -11,6 +12,12 @@ import polski.model.*
 internal val generatedPlRuNouns: List<Noun> = NOUN_ROW_ROWS.map { it.toNoun() }
 internal val generatedPlRuAdjectives: List<Adjective> = ADJECTIVE_ROW_ROWS.map { it.toAdjective() }
 internal val generatedPlRuVerbs: List<Verb> = VERB_ROW_ROWS.map { it.toVerb() }
+
+/** R1.7: which adjective goes with which noun, and R1.8b: the stem alternations, each two single letters (UTF-16 units, as the model has them). */
+internal val generatedPlRuSentenceSeeds: List<SentenceSeed> = SEED_ROW_ROWS.map { SentenceSeed(it.nounId, it.adjectiveId) }
+internal val generatedPlRuStemAlternations: List<StemAlternation> = STEM_ALTERNATION_ROW_ROWS.map { it.toStemAlternation() }
+
+internal fun StemAlternationRow.toStemAlternation() = StemAlternation(a.single(), b.single())
 
 internal fun NounRow.toNoun() =
     Noun(id, lemma, meaning, Gender.fromId(gender), mapOf(NumberGram.SG to forms.sg.toCases(), NumberGram.PL to forms.pl.toCases()))

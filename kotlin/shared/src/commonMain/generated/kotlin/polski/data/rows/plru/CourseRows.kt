@@ -1,5 +1,5 @@
 // Generated from dsl/course.data-contract
-// source-sha256=ad63a057e2973d0916a2de0ff23081414305075a27a2cc08f74c9721a9bd26f3
+// source-sha256=9ed4fd3d8ebc4fcb93bf8dabc39062e968cff0b5142939ceb584ef4b46f7535b
 // Edit the source, then run biome generate.
 
 package polski.data.rows.plru
@@ -82,6 +82,7 @@ data class FeatureValueRow(
 
 data class WhereRow(
     val nounId: List<String>? = null,
+    val enNounId: List<String>? = null,
     val gender: List<String>? = null,
 )
 
@@ -758,6 +759,11 @@ data class RoleFormRow(
 data class EnPrepositionRow(
     val id: String,
     val forms: List<RoleFormRow>,
+)
+
+data class EnSeedRow(
+    val nounId: String,
+    val adjectiveId: String,
 )
 
 private fun skillRowRowsPart0(): List<SkillRow> = listOf(

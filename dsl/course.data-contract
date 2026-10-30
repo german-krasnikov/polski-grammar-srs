@@ -41,7 +41,8 @@ RECORD MethodRow
 END
 
 # The axis a skill drills (null: no single feature flip), the axes it holds fixed, and the candidates it draws from: each property of `where` names
-# the values a candidate must have; a nounId is the id of a noun. The features are an open catalog, so a set of them is a list of pairs, not a record.
+# the values a candidate must have; a nounId is the id of a noun of pl-ru, an enNounId of en-ru (a reference has one target record, and the two packs' nouns are different records).
+# The features are an open catalog, so a set of them is a list of pairs, not a record.
 RECORD FeatureFocusRow
   feature: string
   from: string
@@ -60,6 +61,7 @@ END
 
 RECORD WhereRow
   nounId: [ref NounRow] OPTIONAL
+  enNounId: [ref EnNounRow] OPTIONAL
   gender: [string] OPTIONAL
 END
 
@@ -756,4 +758,10 @@ END
 RECORD RoleFormRow
   role: string
   form: string
+END
+
+# A sentence seed of en-ru: which adjective goes with which noun (the nouns and adjectives of English are records of their own).
+RECORD EnSeedRow COUNT 1..
+  nounId: ref EnNounRow
+  adjectiveId: ref EnAdjectiveRow
 END

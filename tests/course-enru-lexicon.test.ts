@@ -1,27 +1,7 @@
 // R1.14a (Plans/Biome/R1Design.md): the en-ru lexicon rows against dsl/course.data-contract: what `biome data` rejects, with the exact position of each problem.
-// The rows are read from the files the step course-enru of dsl/biome.project binds. They need a biome-dsl checkout (see course-data.test.ts); without one they are skipped, which is NOT RUN, not a pass.
+// The inventory of the files of en-ru is tests/course-enru-pair.test.ts. They need a biome-dsl checkout (see course-data.test.ts); without one they are skipped, which is NOT RUN, not a pass.
 import { describe, expect, it } from 'vitest';
-import { readdirSync } from 'node:fs';
-import { join } from 'node:path';
-import { biome, hasCli, repo, row, rowsIn } from './support/course-data';
-
-const EN = join(repo, 'courses-biome/en-ru');
-/** Rows per file, from the sealed lexicon (lang/en/lexicon.json sha256 f96da7fc..., lang/en/prepositions.json sha256 140e900f...) read before the transcription. */
-const ROWS: Record<string, number> = { adjectives: 7, nouns: 14, personalPronouns: 7, possessives: 7, prepositions: 1, verbs: 10 };
-
-describe.skipIf(!hasCli)('courses-biome/en-ru lexicon is Core data', () => {
-  it('holds exactly the six lexicon files so far', () => {
-    expect(readdirSync(EN).filter(name => name.endsWith('.core-data')).map(name => name.replace('.core-data', '')).sort()).toEqual(Object.keys(ROWS).sort());
-  });
-  for (const [file, rows] of Object.entries(ROWS)) {
-    it(`biome read ${file}.core-data reads ${rows} row(s)`, () => {
-      const run = biome('read', join(EN, `${file}.core-data`), '--format', 'raw');
-      expect(run.stderr, 'biome read diagnostics').toBe('');
-      expect(run.status).toBe(0);
-      expect(run.stdout.trimEnd().split('\n')).toHaveLength(rows);
-    });
-  }
-});
+import { hasCli, row, rowsIn } from './support/course-data';
 
 describe.skipIf(!hasCli)('en nouns and adjectives', () => {
   const nouns = rowsIn('course-enru', 'EnNounRow');
