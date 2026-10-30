@@ -1,0 +1,20 @@
+DSL 1
+# The built-in presentation styles (R1.18): one row for each recipe of the old courses/styles/*.json, in the order of their file names. A style is a presentation preference, not a
+# diagnosis (StyleRecipe.kt): it says which kinds of block the card shows before and after the answer. Not a pair's data, so a contract and a step of their own; the Kotlin side
+# turns the kebab-case id (native-contrast) into the wire value the hosts speak (NativeContrast) and refuses a kind shown twice.
+ENUM BlockKindRow formula|table|rule|scene|nativeParallel|examples|whyOnDemand|changes|contrast
+
+RECORD StyleRecipeRow KEY id COUNT 1..
+  id: string
+  label: LocalizedTextRow
+  description: LocalizedTextRow
+  front: [BlockKindRow]
+  back: [BlockKindRow]
+  requires: [BlockKindRow] OPTIONAL
+  fallback: ref StyleRecipeRow OPTIONAL
+END
+
+RECORD LocalizedTextRow
+  ru: string
+  en: string
+END

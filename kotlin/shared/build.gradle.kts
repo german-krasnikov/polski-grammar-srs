@@ -5,12 +5,6 @@ plugins {
     alias(libs.plugins.android.kmp.library)
 }
 
-// UC-10/StylesBlueprint.md §2/§4: every JSON file under here is a presentation-style recipe,
-// inlined below the same way course.json is. Listing files by directory scan (not a fixed
-// filename list) means a new recipe file needs no Gradle/Kotlin edit to reach StyleRegistry —
-// only the JSON file.
-val stylesDirectory = layout.projectDirectory.dir("../../courses/styles")
-val generatedCourseDirectory = layout.buildDirectory.dir("generated/course/kotlin")
 val legacyAdmissionLedgers = listOf(
     layout.projectDirectory.file("../../tests/fixtures/textwire/legacy-boundary.cases"),
     layout.projectDirectory.file("../../tests/fixtures/textwire/numeric-admission.cases"),
@@ -67,8 +61,8 @@ val generateLegacyAdmissionTestSource by tasks.registering {
     }
 }
 
-// Shared by the embedding tasks below: a JS/Wasm-safe way to embed a file's bytes as a Kotlin string constant,
-// so commonTest/commonMain never do file I/O at runtime (browser targets have none).
+// Shared by the test-source tasks below: a JS/Wasm-safe way to embed a file's bytes as a Kotlin string constant,
+// so commonTest never does file I/O at runtime (browser targets have none).
 fun literalChunks(source: String): List<String> {
     val rawChunks = mutableListOf<String>()
     var start = 0
@@ -173,25 +167,6 @@ val generateAcCorpusTestSource by tasks.registering {
     }
 }
 
-// Embeds the one JSON input a live reader still parses: `styles/*.json` (StyleRegistry). R1.18 replaces it with rows (R1.13 and R1.17 did the engine inputs of both packs).
-val generateCoursePackSource by tasks.registering {
-    inputs.dir(stylesDirectory)
-    outputs.dir(generatedCourseDirectory)
-    doLast {
-        val styleFiles = (stylesDirectory.asFile.listFiles { file -> file.extension == "json" } ?: emptyArray())
-            .sortedBy { it.name }
-        val stylesJson = "[" + styleFiles.joinToString(",") { it.readText() } + "]"
-        val styleChunks = literalChunks(stylesJson)
-
-        val target = generatedCourseDirectory.get().file("polski/data/GeneratedCourseJson.kt").asFile
-        target.parentFile.mkdirs()
-        target.writeText(
-            "package polski.data\n\n" +
-                "internal val generatedStylesJson = " + literalBuildString(styleChunks) + "\n",
-        )
-    }
-}
-
 kotlin {
     jvmToolchain(21)
     jvm("desktop")
@@ -221,11 +196,6 @@ kotlin {
 
     sourceSets {
         commonMain {
-            // Deriving the srcDir from the task's own outputs (rather than the raw
-            // directory provider) lets Gradle auto-wire every consumer — including
-            // compile*MainKotlinMetadata — as a task dependency, not just tasks whose
-            // name happens to match a "compileKotlin*" prefix.
-            kotlin.srcDir(generateCoursePackSource.map { it.outputs.files.singleFile })
             // Rows printed by `biome generate --project dsl/biome.project` from courses-biome/<pair>/*.core-data (standard layout, committed).
             kotlin.srcDir("src/commonMain/generated/kotlin")
         }
