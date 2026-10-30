@@ -31,7 +31,7 @@ describe.skipIf(!hasCli)('courses-biome/pl-ru is Core data', () => {
     const run = biome('generate', '--check', '--project', join(PACK, '../../dsl/biome.project'));
     expect(run.stderr.replace(/^warning TOOLCHAIN_PIN_STALE.*\n/m, '')).toBe('');
     expect(run.status).toBe(0);
-  });
+  }, 60_000); // the whole project, a nested biome process for each derive step: 4 s alone and 5.5 s among the parallel test files at R1.16, over the default 5 s
 });
 
 describe.skipIf(!hasCli)('skill rows against dsl/course.data-contract', () => {

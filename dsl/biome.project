@@ -16,3 +16,6 @@ GENERATE enru-exercise-text-rows derive {dir}/derive-enru-mappers.mjs copy OUT_E
 GENERATE enru-vocabulary-rows derive {dir}/derive-enru-mappers.mjs copy OUT_VOCABULARY_ROWS {dir}/../kotlin/shared/src/commonMain/kotlin/polski/data/PlRuVocabularyRows.kt
 GENERATE enru-skill-specs derive {dir}/derive-enru-mappers.mjs copy OUT_SKILL_SPECS {dir}/../kotlin/shared/src/commonMain/kotlin/polski/data/PlRuSkillSpecs.kt
 GENERATE enru-recipe-rows derive {dir}/derive-enru-mappers.mjs copy OUT_RECIPE_ROWS {dir}/../kotlin/shared/src/commonMain/kotlin/polski/data/PlRuRecipeRows.kt
+# The form table of en-ru, derived the same way (R1.16); its mapper is the copy of the pl-ru one.
+GENERATE forms-enru derive {dir}/derive-forms.mjs enru OUT_ENRU {dir}/../courses-biome/en-ru/nouns.core-data {dir}/../courses-biome/en-ru/adjectives.core-data {dir}/../courses-biome/en-ru/verbs.core-data {dir}/../courses-biome/en-ru/possessives.core-data {dir}/../courses-biome/en-ru/personalPronouns.core-data {dir}/../courses-biome/en-ru/prepositions.core-data
+GENERATE enru-form-tables derive {dir}/derive-enru-mappers.mjs copy OUT_FORM_TABLES {dir}/../kotlin/shared/src/commonMain/kotlin/polski/data/PlRuFormTables.kt
