@@ -10,7 +10,6 @@ plugins {
 // filename list) means a new recipe file needs no Gradle/Kotlin edit to reach StyleRegistry —
 // only the JSON file.
 val stylesDirectory = layout.projectDirectory.dir("../../courses/styles")
-val formsFixtureFile = layout.projectDirectory.file("../../courses/pl-ru/forms.generated.json")
 // UniversalCorePlan.md §3.1/§12 UC-06: `lang/<code>/curriculum.json` — scanned the same way as
 // `packDirs` below, so a second target language's curriculum needs no Gradle/Kotlin edit.
 val langDirectory = layout.projectDirectory.dir("../../courses/lang")
@@ -212,24 +211,13 @@ val generateCoursePackSource by tasks.registering {
     }
 }
 
-// UniversalCorePlan.md §5.3/§12 UC-08: forms.generated.json backs the live pl-ru engine
-// (polski.core.PlEngine.kt), embedded into commonMain the same way generateCoursePackSource
-// embeds course.json. realization.json/exercise-recipes.json are scanned per `lang/<code>/`
-// the same way generateCoursePackSource scans curriculum.json (EN-05) — a second target
-// language's files need no Gradle/Kotlin edit to reach polski.core.
+// UniversalCorePlan.md §5.3/§12 UC-08: realization.json/exercise-recipes.json/forms.generated.json are scanned per `lang/<code>/` the same way
+// generateCoursePackSource scans curriculum.json (EN-05). Only en has them since R1.13 (pl-ru's engine inputs are rows, R1.11 and R1.12); R1.17 removes
+// this task with the en files.
 val generateFormsFixtureSource by tasks.registering {
-    inputs.file(formsFixtureFile)
     inputs.dir(langDirectory)
     outputs.dir(generatedFormsFixtureDirectory)
     doLast {
-        val chunks = literalChunks(formsFixtureFile.asFile.readText())
-        val target = generatedFormsFixtureDirectory.get().file("polski/grammar/GeneratedFormsFixtureJson.kt").asFile
-        target.parentFile.mkdirs()
-        target.writeText(
-            "package polski.grammar\n\n" +
-                "internal val generatedFormsFixtureJson = " + literalBuildString(chunks) + "\n",
-        )
-
         val langDirs = (langDirectory.asFile.listFiles { file -> file.isDirectory } ?: emptyArray())
             .sortedBy { it.name }
         val realizationEntryLiterals = langDirs
@@ -244,10 +232,8 @@ val generateFormsFixtureSource by tasks.registering {
                 val entryChunks = literalChunks(dir.resolve("exercise-recipes.json").readText())
                 "    \"${dir.name}\" to ${literalBuildString(entryChunks)}"
             }
-        // EN-24 (UC-09 part 2/2 minimum): a per-lang `lang/<code>/forms.generated.json`, additive
-        // to pl-ru's own [formsFixtureFile] above (still read directly by name for "pl", untouched)
-        // — a second target language's materialized forms need no Gradle/Kotlin edit beyond
-        // dropping the file in `lang/<code>/`, same scanning pattern as realization.json above.
+        // EN-24 (UC-09 part 2/2 minimum): a per-lang `lang/<code>/forms.generated.json` — a target language's materialized forms need no Gradle/Kotlin edit
+        // beyond dropping the file in `lang/<code>/`, same scanning pattern as realization.json above.
         val formsGeneratedEntryLiterals = langDirs
             .filter { dir -> dir.resolve("forms.generated.json").isFile }
             .joinToString(",\n") { dir ->

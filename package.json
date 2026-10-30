@@ -24,8 +24,6 @@
     "lifehacks:check": "node scripts/validate-lifehacks.mjs en-ru",
     "course:inventory:check": "node scripts/inventory-course.mjs --check",
     "course:inventory:decisions:check": "node scripts/check-course-inventory.mjs --check",
-    "pack:build": "node scripts/build-pack.mjs",
-    "pack:build:check": "node scripts/build-pack.mjs --check",
     "pack:build:en": "node scripts/build-pack-en.mjs",
     "pack:build:en:check": "node scripts/build-pack-en.mjs --check"
   },

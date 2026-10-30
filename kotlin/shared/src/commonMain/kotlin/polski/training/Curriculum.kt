@@ -13,17 +13,14 @@ import polski.core.model.FeatureKey
 import polski.core.model.FeatureValue
 import polski.core.model.LexicalFilter
 import polski.core.model.SkillSpec
-import polski.data.generatedCurriculumJsonByLang
 
 /**
  * Parses one `lang/<code>/curriculum.json` document (UniversalCorePlan.md §3.1/§3.2, §12 UC-06)
  * into its [SkillSpec]s. Pure parsing — no defaults beyond the JSON's own optionality; the
- * shipped file always writes `focus`/`lexicalFilter` explicitly, `null` included.
+ * shipped file always writes `focus`/`lexicalFilter` explicitly, `null` included. Since R1.13 only
+ * the en bridge (polski.data.EnRuJsonBridge.kt, until R1.17) calls it: pl-ru's specs are rows.
  */
 fun parseCurriculum(json: String): List<SkillSpec> = Json.parseToJsonElement(json).jsonArray.map { it.jsonObject.toSkillSpec() }
-
-/** pl's curriculum (UC-06) — the data ExerciseFactory.kt's `when(skillId)` branches are checked against. */
-val plCurriculum: List<SkillSpec> by lazy { parseCurriculum(generatedCurriculumJsonByLang.getValue("pl")) }
 
 private fun JsonElement?.orNullObject(): JsonObject? = this?.takeIf { it !is JsonNull }?.jsonObject
 

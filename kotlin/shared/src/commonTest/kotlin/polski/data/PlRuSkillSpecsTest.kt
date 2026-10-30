@@ -4,16 +4,22 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 import kotlin.test.assertTrue
-import polski.training.plCurriculum
 
 /**
- * R1.4b: the SkillSpecs of the rows against the `lang/pl/curriculum.json` the engine still parses, and the prerequisite cycle check.
- * R1.13 makes the engine read the rows and removes the JSON path; the parity test goes with it.
+ * R1.4b: the SkillSpecs of the rows and the prerequisite cycle check. Until R1.13 a test here compared the specs with the `lang/pl/curriculum.json` the engine
+ * then parsed (16 of 16 equal, in order); the engine reads the rows now and the JSON is gone, so that parity test went with it. The specs are checked against
+ * independent expectations by CurriculumReaderTest (focus, fixed, filter of each skill) and by `tests/course-curriculum.test.ts` (the whole rows against the
+ * frozen NJ03CurriculumIndependent.cases).
  */
 class PlRuSkillSpecsTest {
-    @Test fun theSpecsOfTheRowsEqualTheShippedCurriculumInOrder() {
-        assertEquals(16, generatedPlRuSkillSpecs.size)
-        assertEquals(plCurriculum, generatedPlRuSkillSpecs)
+    @Test fun theSixteenSpecsComeInTheOrderOfTheCurriculum() {
+        assertEquals(
+            listOf(
+                "case.acc.n", "case.acc.f", "case.acc.m", "case.gen.neg", "case.inst", "case.loc", "case.dat", "agreement.my",
+                "verb.present", "verb.past", "verb.future", "aspect", "pronouns", "mixed", "sentence.question", "sentence.plural",
+            ),
+            generatedPlRuSkillSpecs.map { it.id },
+        )
     }
 
     @Test fun aSkillAndItsSpecAreOneRowSoTheyAgreeOnLevelAndPrerequisites() {

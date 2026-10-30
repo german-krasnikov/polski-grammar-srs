@@ -4,7 +4,7 @@ import polski.core.model.FeatureFocus
 import polski.core.model.FeatureKey
 import polski.core.model.FeatureValue
 import polski.core.model.LexicalFilter
-import polski.data.skillById
+import polski.data.generatedPlRuSkillSpecs
 import polski.model.Gender
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -12,8 +12,8 @@ import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
 /**
- * UniversalCorePlan.md §12 UC-06: `lang/pl/curriculum.json`'s 16 [polski.core.model.SkillSpec]
- * entries must carry the same `focus`/`fixed`/`lexicalFilter` as `ExerciseFactory.kt`'s
+ * UniversalCorePlan.md §12 UC-06: the 16 [polski.core.model.SkillSpec]s of pl-ru (R1.13: the rows of
+ * courses-biome/pl-ru/skills.core-data, formerly `lang/pl/curriculum.json`) must carry the same `focus`/`fixed`/`lexicalFilter` as `ExerciseFactory.kt`'s
  * `when(skillId)` branches (:49-136) they are derived from — historical: `ExerciseFactory.kt`
  * itself is deleted (UC-08), replaced by `polski.training.PlExerciseEngine`; this only proves
  * the data is a faithful, checkable copy of what those branches did, which is what the generic
@@ -38,27 +38,19 @@ import kotlin.test.assertTrue
  * against the literal patterns instead of leaving it unverified; it is not a code-branch-parameter
  * check, and is not claimed to be one.
  *
- * `level`/`prerequisites` are cross-checked against the shipped pack ([skillById]) rather than a
- * second hardcoded copy, so a `course.json` edit cannot silently drift from this file unnoticed.
+ * `level`/`prerequisites` are one row's own since R1.4b (the Skill and its SkillSpec are one row), so
+ * they cannot differ and there is nothing left to cross-check; PlRuSkillSpecsTest pins that.
  * The gender/nounId filter sets are cross-checked against real enum ids ([Gender]) or pinned
  * against the literal `setOf(...)` in `ExerciseFactory.kt:54` where no such enum exists.
  */
 class CurriculumReaderTest {
-    private val curriculum = plCurriculum
+    private val curriculum = generatedPlRuSkillSpecs
     private val byId = curriculum.associateBy { it.id }
     private val filteredNounIds = listOf("wife", "husband", "friendM", "son", "child") // ExerciseFactory.kt:54
 
     @Test fun coversAllSixteenPolishSkillIdsExactlyOnce() {
         assertEquals(polishSkillIds, curriculum.map { it.id }.toSet())
         assertEquals(polishSkillIds.size, curriculum.size)
-    }
-
-    @Test fun levelAndPrerequisitesMatchTheShippedPack() {
-        for (spec in curriculum) {
-            val skill = skillById(spec.id)
-            assertEquals(skill.level, spec.level, "level for ${spec.id}")
-            assertEquals(skill.prerequisites, spec.prerequisites, "prerequisites for ${spec.id}")
-        }
     }
 
     // ExerciseFactory.kt:50-52,63-69 — Case Nom→Acc, candidates filtered by the noun's gender.

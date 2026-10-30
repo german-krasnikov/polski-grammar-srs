@@ -27,6 +27,12 @@ internal object PlRuTypedPack : CoursePackFields {
     override val personalPronouns get() = generatedPlRuPersonalPronouns
     override val personalPronounRawForms get() = generatedPlRuPersonalPronounRawForms
 
+    // The inputs of the exercise engine
+    override val skillSpecs get() = generatedPlRuSkillSpecs
+    override val recipes get() = generatedPlRuRecipes
+    override val constructionTemplates get() = generatedPlRuConstructionTemplates
+    override val formTable get() = generatedPlRuFormTable
+
     // Exercise
     override val caseSentencePrefixes get() = generatedPlRuCaseSentencePrefixes
     override val exerciseCopy get() = generatedPlRuExerciseCopy

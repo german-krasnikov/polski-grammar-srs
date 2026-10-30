@@ -22,10 +22,10 @@ import polski.model.toFeatureValue
 /**
  * UniversalCorePlan.md §5.1/§5.3/§12 UC-08: pl's morphology (noun/adjective/possessive/verb forms
  * — used by matrix/reference screens as well as [nounPhrase]/[caseSentence] below) now reads
- * [plMorphology] (`:core-engine`'s `TableMorphology`, built from `forms.generated.json`) instead
- * of the deleted `GrammarEngine`'s hand-written declension/suffix rules. Exhaustively proven
- * byte-identical to the old rules for every lexeme × feature combination by
- * `TableMorphologyParityTest`/`GrammarParityTest` before this switch.
+ * [plMorphology] (`:core-engine`'s `TableMorphology`, built from the pack's form table, derived from the
+ * lexicon rows at build time, R1.12) instead of the deleted `GrammarEngine`'s hand-written declension/suffix
+ * rules. Exhaustively proven byte-identical to the old rules for every lexeme × feature combination by
+ * `GrammarParityTest` (and, until R1.13, by `TableMorphologyParityTest`) before this switch.
  */
 fun nounForm(id: String, gramCase: GramCase, number: NumberGram = NumberGram.SG): String =
     plMorphology.form("noun:$id", mapOf(NumberFeature to number.toFeatureValue(), CaseFeature to gramCase.toFeatureValue()))

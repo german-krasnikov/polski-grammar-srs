@@ -6,13 +6,15 @@ import polski.core.engine.ExerciseIdFactory
 import polski.core.engine.RandomSource
 import polski.core.model.FeatureKey
 import polski.core.model.FeatureValue
+import polski.data.PlRuTypedPack
 
 /**
  * EN-07 (gap G): [PackEngine] is the `pack -> engine` factory `PlEngine.kt` used to be a flat
- * pl-only set of top-level `val`s. It takes a target-language id in its constructor rather than
- * reading a hardcoded `"pl"` literal, and `plMorphology`/`plExerciseGenerator`/`plChainSteps`
- * (this file's public, host-facing names) must stay byte-identical wrappers over `PackEngine("pl")`
- * -- proven here by comparing a fresh instance's output to those top-level functions directly.
+ * pl-only set of top-level `val`s. It takes the pack in its constructor (R1.13: it took a target-language id
+ * and the JSON embedded for it) rather than reading a hardcoded `"pl"` literal, and `plMorphology`/
+ * `plExerciseGenerator`/`plChainSteps` (this file's public, host-facing names) must stay byte-identical
+ * wrappers over the engine of the pack -- proven here by comparing a fresh instance's output to those
+ * top-level functions directly.
  */
 class PackEngineTest {
     private class Draws(private val values: List<Double>) : RandomSource {
@@ -21,10 +23,10 @@ class PackEngineTest {
     }
 
     @Test
-    fun constructedByLanguageIdNotHardcodedLiteral() {
-        // langId is a real constructor argument, not a compiled-in "pl" literal: a fresh
-        // PackEngine("pl") reproduces the exact same wiring plMorphology/plLexemeFeatures expose.
-        val engine = PackEngine("pl")
+    fun constructedByThePackNotHardcodedLiteral() {
+        // the pack is a real constructor argument, not a compiled-in "pl" literal: a fresh
+        // PackEngine(PlRuTypedPack) reproduces the exact same wiring plMorphology/plLexemeFeatures expose.
+        val engine = PackEngine(PlRuTypedPack)
         assertEquals(plMorphology.form("noun:wife", mapOf(FeatureKey("Number") to FeatureValue("sg"), FeatureKey("Case") to FeatureValue("nom"))), engine.morphology.form("noun:wife", mapOf(FeatureKey("Number") to FeatureValue("sg"), FeatureKey("Case") to FeatureValue("nom"))))
         assertEquals(plLexemeFeatures.of("wife"), engine.lexemeFeatures.of("wife"))
     }
@@ -34,8 +36,8 @@ class PackEngineTest {
         val seed = mapOf("noun" to "wife", "adjective" to "beautiful")
         val fromWrapper = plExerciseGenerator(Draws(listOf(0.11)), ExerciseIdFactory { "generated" })
             .generateChain(plChainSteps("wife"), seed)
-        val fromEngine = PackEngine("pl").exerciseGenerator(Draws(listOf(0.11)), ExerciseIdFactory { "generated" })
-            .generateChain(PackEngine("pl").chainSteps("wife"), seed)
+        val fromEngine = PackEngine(PlRuTypedPack).exerciseGenerator(Draws(listOf(0.11)), ExerciseIdFactory { "generated" })
+            .generateChain(PackEngine(PlRuTypedPack).chainSteps("wife"), seed)
         assertEquals(fromWrapper, fromEngine)
     }
 }

@@ -1,5 +1,9 @@
 package polski.data
 
+import polski.core.RecipeSet
+import polski.core.engine.ConstructionTemplate
+import polski.core.model.FeatureBundle
+import polski.core.model.SkillSpec
 import polski.model.Adjective
 import polski.model.GramCase
 import polski.model.Noun
@@ -26,6 +30,12 @@ internal interface CoursePackFields {
     val adjectives: List<Adjective>
     val verbs: List<Verb>
     val skills: List<Skill>
+
+    // The four inputs the exercise engine is built from (R1.13): PackEngine takes them from the pack, no file or JSON text
+    val skillSpecs: List<SkillSpec>
+    val recipes: RecipeSet
+    val constructionTemplates: Map<String, ConstructionTemplate>
+    val formTable: Map<String, Map<FeatureBundle, String>>
 
     // Sentence / exercise
     val sentenceSeeds: List<SentenceSeed>
