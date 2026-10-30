@@ -4,6 +4,14 @@
 
 Цель продукта (универсальное ядро для любых языков), журнал решений и архитектура — в [AI/](AI/README.md). Новые решения записывай в `AI/decisions.md`.
 
+## Данные курса
+
+Данные курса — строки `courses-biome/<пара>/*.core-data` (построчный DSL, не JSON) и контракты `dsl/*.data-contract`. Kotlin-строки в `kotlin/shared/src/commonMain/generated/` печатает `biome generate --project dsl/biome.project` и коммитит; руками их не правь. Рукописные мапперы строк — `polski/data/PlRu*Rows.kt` (источник) и их копии `EnRu*` (их делает `dsl/derive-enru-mappers.mjs`: правь файл pl-ru и запускай generate). Таблицы форм выводит `dsl/derive-forms.mjs` при генерации; `TableMorphology` только ищет форму.
+
+- Правка данных: измени `.core-data` → `biome fmt <файл>` → `biome generate`. Проверка: `biome generate --check --project dsl/biome.project` (шаги `data`, `derive`, `fmt`). Команду `biome` берёт из соседнего checkout (`BIOME_BIN=<checkout>/implementations/typescript/packages/biome/src/bin.mjs` для vitest).
+- JSON-файлы курса больше не читает ни Gradle, ни Kotlin, ни Python; это закреплено `tests/retired-json-path.test.ts`. Старые источники нужны только проверяющим скриптам (`scripts/check-nj03-*`, `scripts/nj03/check-preposition-freeze.py`): они читают их через `git show 7358aeb72ab79dce80fca1faadba6be64892fa18:<путь>` и сверяют SHA-256.
+- Фиксированные ожидания (`Plans/Biome/*.cases`, `tests/fixtures/*`) не правь под сгенерированный вывод; меняй их только вместе с требованием.
+
 ## Текущая задача и границы
 
 Проект пока работает на React/TypeScript/Vite. Целевое направление — Kotlin Multiplatform с общей логикой и интерфейсом каждой платформы: браузерная версия уже имеет локальное превью, macOS Desktop собран локально, Android использует отдельные Jetpack Compose экраны; iPhone/iPad имеют нативное SwiftUI-превью поверх общего Kotlin-сеанса. Последовательность и критерии сохранения функциональности находятся в [Plans/Kotlin/Plan.md](Plans/Kotlin/Plan.md); desktop lane — в [Plans/Kotlin/MacDesktop.md](Plans/Kotlin/MacDesktop.md), Android lane — в [Plans/Kotlin/Android.md](Plans/Kotlin/Android.md), iOS lane — в [Plans/Kotlin/iOS.md](Plans/Kotlin/iOS.md). Наличие кода и локального превью не означает закрытия device и независимых review gates. Решением от 2026-09-25 этап 11 (React↔Kotlin parity gate) снят: каждый хост получает свой нативный UI (DOM/CSS web, Compose M3 Android, SwiftUI iOS/macOS), а web parity больше не блокирует нативную работу.

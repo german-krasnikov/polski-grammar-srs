@@ -4,6 +4,9 @@
 
 Kotlin Multiplatform: общее ядро + нативный UI на каждой платформе. React-версия (`src/`) — исторический эталон, переход на Kotlin завершён.
 
+Данные курса (R1, ADR-54): `courses-biome/<пара>/*.core-data` + `dsl/*.data-contract` ──(`biome generate --project dsl/biome.project`)──► `kotlin/shared/src/commonMain/generated/…/rows/<plru|enru|styles>/` (типизированные строки, коммитятся) ──► рукописные мапперы `polski/data/PlRu*Rows.kt`
+(копии `EnRu*` делает `dsl/derive-enru-mappers.mjs`) ──► `PlRuTypedPack`/`EnRuTypedPack` (`CoursePackFields`) ──► `PackEngine`. Таблицы форм выводит `dsl/derive-forms.mjs`. Ниже — исторический слой JSON v2: его читают только `courses/core`, `lang.json`, `schema` и TS-проверки R2–R6.
+
 ```text
 courses/core/*.json, courses/lang/pl/{lang,lexicon}.json, courses/pairs/pl-ru/pair.json   schema v2 (UC-12) — механическое
   разбиение courses/pl-ru/course.json (scripts/migrate-v1-to-v2.mjs) + формализация уже существующих Construction/
@@ -18,13 +21,12 @@ courses/lang/en/{lang,lexicon,prepositions}.json (ADR-26, EnRuPackPlan.md §1.3/
   (пока только pl — EN-12 добавит его для en). reconstructCoursePack→course-pack-v1.schema.json→validateCoursePack
   остаётся ЖЁСТКО pl-ru-специфичным (v1-схема буквально кодирует pl'ские падежные метки как ключи объекта) — не
   генерализован, en идёт мимо него до EN-04/EN-05 (:core-engine v2-загрузчик, гэп G).
-courses/*/course.json ──(build: generateCoursePackSource scans courses/*, UC-02)──► kotlin/shared (через :pack-format CoursePackSource)
-courses/lang/<code>/curriculum.json ──(тот же generateCoursePackSource, сканирует courses/lang/*, UC-06)──► polski.training.plCurriculum ──► polski.core.plExerciseGenerator (UC-08, живой путь)
+(удалено в R1: courses/*/course.json и generateCoursePackSource, courses/lang/<code>/curriculum.json → plCurriculum, :pack-format — путь данных см. выше)
 kotlin/build-logic         convention-плагин polski.kmp-common — 7 KMP-таргетов для новых :core-* модулей
 kotlin/core-model          FeatureKey/FeatureValue/FeatureBundle, Construction, SkillSpec (UC-01, первый :core-* модуль)
 kotlin/pack-format         CoursePackSource/EmbeddedCoursePackSource/PackManifest (UC-02) — раздача сырого JSON пакета по id
 kotlin/core-engine         Morphology/TableMorphology (UC-05) — табличный lookup формы по (lexeme, FeatureBundle);
-                           forms.generated.json (scripts/build-pack.mjs, из courses/pl-ru/course.json) — единственный
+                           таблица форм — строки `FormLexemeRow` (dsl/derive-forms.mjs, R1.12/R1.16) — единственный
                            источник форм; ConstructionRealizer/TemplateInterpreter (order/gov/agree, ≤10 операторов)/
                            ExerciseGenerator (UC-07) читают realization.json/exercise-recipes.json. UC-08: :shared
                            (commonMain) зависит на :core-engine (api); GrammarEngine.kt/ExerciseFactory.kt удалены —
@@ -41,7 +43,7 @@ kotlin/shared (commonMain)
   preferences               UserPreferences (тема, движение, animationsEnabled, методика…)
   presentation              TrainingStore (единственный владелец сессии), AppAction/AppUiState, CardEffect;
                            Lifehack/LifehackProvider/StaticPackLifehackProvider (ADR-27, EN-21) — читает
-                           `pairs/<pairId>/lifehacks.json` через generatedLifehacksJsonByPairId
+                           `CoursePackFields.lifehacks` активного пакета (строки courses-biome/<пара>/lifehacks.core-data)
   iosMain / macosMain       Swift-мосты (IosSession, MacSession, snapshots)
 kotlin/composeApp
   webMain                   Kotlin/JS + Wasm, семантический DOM/CSS (не Compose UI)
@@ -82,7 +84,7 @@ kotlin/macosApp             SwiftUI macOS
 :morph-api          интерфейс MorphologyPlugin (для языков, где таблиц мало)
 :shared :composeApp :androidApp   хосты — имена не меняются
 courses/core|lang|pairs/*          языки, L1 и пары как JSON/Markdown, подхватываются сканированием каталога
-styles/*.json                      стили подачи как данные
+courses-biome/styles/styles.core-data  стили подачи как данные (StyleRegistry, R1.18)
 ```
 
 Зависимости: ядро не знает ни одного языка; хосты зависят от ядра и выбранных пакетов. Новый язык — ноль правок в `:core-*`, `:pack-format`, `:morph-api`.

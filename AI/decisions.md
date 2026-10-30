@@ -2,6 +2,25 @@
 
 Новые сверху. Формат: решение → почему → где подробно.
 
+## ADR-54 · 2026-10-30 · R1: данные курса — типизированные строки, JSON ушёл из сборки
+
+Данные курса pl-ru и en-ru — строки `courses-biome/<пара>/*.core-data`, проверенные контрактами `dsl/*.data-contract`; Kotlin-строки печатает `biome generate` и коммитит. Gradle, Kotlin и Python больше не читают JSON курса
+(guard: `tests/retired-json-path.test.ts`); в дереве нет 22 файлов `courses/**.json` из его списка (19 удалены в R1, три — раньше, NJ03), нет обеих задач встраивания, JSON-парсеров (`parseCurriculum`, `parseRecipes`, `parseConstructionTemplates`, `parseStyleRecipesJson`),
+`GeneratedLifehacks.kt` и генераторов на Python. Решения владельца при этом:
+
+- **Формы — таблица на этапе сборки.** `dsl/derive-forms.mjs` раскладывает лексикон по пучкам признаков (правила прежних `build-pack*.mjs`), `TableMorphology` только ищет форму (UniversalCorePlan §1.5: правила на сборке, таблицы в рантайме).
+  Таблица pl-ru — 39 лексем/1560 форм, en-ru — 49/329, обе равны замороженным эталонам.
+- **Ключи, не являющиеся идентификаторами, — алиасы:** `m_personal`, `p1..p3`, теги enum `teaching_practice`; значения-идентификаторы остаются дословными.
+- **Частоты en-ru** (`frequency.core-data`, 1000 строк) конвертированы без подключения потребителя: шаг только проверяет, Kotlin не печатается; данные сохранены, поведение то же.
+- **Python-проверяющие** читают закрытые JSON через `git show 7358aeb72ab79dce80fca1faadba6be64892fa18:<путь>` и сверяют SHA-256; `course.json` input-only не возвращается.
+- **Общие по форме записи двух пакетов** (навыки, тексты упражнений, рецепты, таблицы форм, лайфхаки) печатаются в пакете каждого шага (`polski.data.rows.plru` / `.enru`); рукописные мапперы живут в одном экземпляре (pl-ru),
+  копию для en-ru делает `dsl/derive-enru-mappers.mjs`, `generate --check` ловит расхождение.
+- **Рост ObjC-заголовка** статического framework macOS: 535 272 → 834 525 байт (+55,9%), 7 786 → 11 088 строк, 327 → 565 интерфейсов от базы R1.0 до R1.19 (контракт печатается целиком в пакет каждого шага; записи дублируются в `rows.plru` и `rows.enru`). Отмечено, мер не принято.
+- Данные в каноническом виде `biome fmt` (шаги `fmt` в `dsl/biome.project`, тест `tests/course-data-layout.test.ts` называет каждый файл).
+
+Остаётся за R2–R6: `courses/core`, `courses/lang/*/lang.json`, `courses/schema`, редакторские словари, три инвентаря и TS-проверки pack v2 (`validate-*.mjs`, `migrate-v1-to-v2.mjs`), чьи входы R1 удалил; шаги CI `course:validate` и
+`course:inventory:*` на них не проходят. Подробно: [R1Design.md](../Plans/Biome/R1Design.md), [R1Receipt.md](../Plans/Biome/R1Receipt.md).
+
 ## ADR-53 · 2026-10-18 · Итоговый продукт только на Kotlin
 
 Владелец уточнил целевое состояние миграции: остаётся один продукт Kotlin Multiplatform.
