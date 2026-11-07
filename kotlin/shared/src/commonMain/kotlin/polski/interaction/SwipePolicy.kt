@@ -23,9 +23,13 @@ object Policy {
     interface IInputs : IRatingInputs
     private object Decision_rating {
         fun evaluate(value1: Boolean, value0: Boolean, value2: Boolean): String {
+            // rule: belowThreshold (priority 10)
             if (value1 == true) return "none"
+            // rule: verticalDominates (priority 20)
             if (value2 == true) return "none"
+            // rule: swipeRight (priority 30)
             if (value0 == true) return "good"
+            // rule: swipeLeft (priority 40)
             if (!(value0 == true)) return "again"
             return "none"
         }
