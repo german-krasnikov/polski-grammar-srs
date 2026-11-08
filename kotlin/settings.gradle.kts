@@ -16,5 +16,5 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "polski-grammar-kotlin"
-include(":shared", ":composeApp", ":androidApp", ":core-model", ":core-engine", ":browserAcceptance")
+include(":shared", ":apple-bridge", ":composeApp", ":androidApp", ":core-model", ":core-engine", ":browserAcceptance")
 include(":nj05ReadOnlyProbe")

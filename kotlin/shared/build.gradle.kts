@@ -187,12 +187,8 @@ kotlin {
     }
     applyDefaultHierarchyTemplate()
 
-    listOf(iosDevice, iosSimulator, macDevice).forEach { target ->
-        target.binaries.framework {
-            baseName = "PolskiShared"
-            isStatic = true
-        }
-    }
+    // Framework binary moved to :apple-bridge (W4.1). shared still declares Apple targets
+    // so that apple-bridge can depend on shared's klibs for iOS/macOS compilation.
 
     sourceSets {
         commonMain {

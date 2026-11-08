@@ -33,7 +33,7 @@ private struct SwipeToRate: ViewModifier {
     private var drag: some Gesture {
         DragGesture(minimumDistance: 8)
             .onChanged { value in
-                guard enabled, !flyingOut, abs(value.translation.width) > abs(value.translation.height) * 1.25 else { return }
+                guard enabled, !flyingOut, abs(value.translation.width) > abs(value.translation.height) * SharedConstants.axisRatio else { return }
                 offset = value.translation.width
             }
             .onEnded { value in
@@ -41,7 +41,7 @@ private struct SwipeToRate: ViewModifier {
                 let dx = value.translation.width
                 let dy = value.translation.height
                 guard let rating = SwipeDecision.shared.rating(dx: Double(dx), dy: Double(dy),
-                    threshold: Double(ratingSwipeThreshold), axisRatio: 1.25, checkYOnRelease: true)
+                    threshold: Double(ratingSwipeThreshold), axisRatio: SharedConstants.axisRatio, checkYOnRelease: true)
                     else { snapBack(); return }
                 commit(remembered: rating === Rating.good)
             }

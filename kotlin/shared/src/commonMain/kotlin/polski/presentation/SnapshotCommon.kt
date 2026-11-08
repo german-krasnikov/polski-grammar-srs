@@ -82,6 +82,13 @@ internal fun JsonObjectBuilder.putSharedSnapshotHeader(
         put("lifehacks", JsonArray(group.lifehacks.map(hackToJson)))
     } }))
     put("chainAnswers", JsonArray(if (state.phase == CardPhase.ChainComplete) state.chain.map { JsonPrimitive(it.expected) } else emptyList()))
+    put("uiResetProgress", UiCopy.ResetProgress)
+    put("uiProgressTab", UiCopy.ProgressTab)
+    put("uiSettingsTab", UiCopy.SettingsTab)
+    put("uiLifehacks", UiCopy.Lifehacks)
+    put("uiAgain", UiCopy.Again)
+    put("uiGood", UiCopy.Good)
+    put("uiShowAnswer", UiCopy.ShowAnswer)
 }
 
 /** UC-10/exercise wire shape: identical on every host because the question/reveal fields a

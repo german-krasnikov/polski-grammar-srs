@@ -52,9 +52,9 @@ script.shell_script = <<~SH
     echo "Only macosArm64 is verified; Intel requires a separate Kotlin target" >&2
     exit 1
   fi
-  ./gradlew :shared:linkDebugFrameworkMacosArm64 --console=plain
+  ./gradlew :apple-bridge:linkDebugFrameworkMacosArm64 --console=plain
   rm -rf "${BUILT_PRODUCTS_DIR}/PolskiShared.framework"
-  cp -R "shared/build/bin/macosArm64/debugFramework/PolskiShared.framework" "${BUILT_PRODUCTS_DIR}/PolskiShared.framework"
+  cp -R "apple-bridge/build/bin/macosArm64/debugFramework/PolskiShared.framework" "${BUILT_PRODUCTS_DIR}/PolskiShared.framework"
 SH
 script.always_out_of_date = '1'
 target.build_phases.move(script, 0)

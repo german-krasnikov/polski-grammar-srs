@@ -138,6 +138,13 @@ struct TrainingSnapshot: Decodable {
     /// not `styleBlocks.lifehacks` (that stays the per-card back-face block for the active skill
     /// only). Follows whichever pack is active (pl-ru/en-ru), same as every other snapshot field.
     let lifehackGroups: [LifehackGroupJSON]
+    let uiResetProgress: String?
+    let uiProgressTab: String?
+    let uiSettingsTab: String?
+    let uiLifehacks: String?
+    let uiAgain: String?
+    let uiGood: String?
+    let uiShowAnswer: String?
 }
 
 /// One `MacSnapshot.kt` `lifehackGroups[]` entry — `skillId`/`topic` are mutually exclusive
@@ -590,7 +597,7 @@ private struct MacRootView: View {
                         .transition(tabTransition)
                 }
                 .frame(minWidth: 320, minHeight: 420)
-                .toolbar { SettingsLink { Label("Настройки", systemImage: "gearshape") } }
+                .toolbar { SettingsLink { Label(model.training?.uiSettingsTab ?? "Настройки", systemImage: "gearshape") } }
                 .animation(tabMotionReduced ? nil : .timingCurve(0.2, 0, 0, 1, duration: 0.3), value: model.selectedTab)
             }
         }
@@ -800,7 +807,7 @@ private struct MatrixView: View {
                         Text("Падежи").tag("Cases")
                         Text("Глаголы").tag("Verbs")
                         Text("Местоимения").tag("Pronouns")
-                        Text("Лайфхаки").tag("Lifehacks")
+                        Text(model.training?.uiLifehacks ?? "Лайфхаки").tag("Lifehacks")
                     }.pickerStyle(.segmented)
                         .padding(3)
 
@@ -1030,9 +1037,9 @@ private struct ProgressViewNative: View {
                 Divider()
                 DataControls(model: model)
                 // M12: RequestReset produces a ConfirmReset effect the root alert now handles.
-                Button("Сбросить прогресс", role: .destructive) { model.send("reset") }
+                Button(model.training?.uiResetProgress ?? "Сбросить прогресс", role: .destructive) { model.send("reset") }
             }.frame(maxWidth: 760, alignment: .leading).padding(28)
-        }.navigationTitle("Прогресс")
+        }.navigationTitle(model.training?.uiProgressTab ?? "Прогресс")
     }
 }
 

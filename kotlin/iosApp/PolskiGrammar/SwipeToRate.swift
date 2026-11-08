@@ -77,14 +77,14 @@ struct SwipeToRate: ViewModifier {
                     .onChanged { value in
                         guard active, !flying else { return }
                         let x = value.translation.width, y = value.translation.height
-                        guard abs(x) > abs(y) * 1.25 else { return }
+                        guard abs(x) > abs(y) * SharedConstants.axisRatio else { return }
                         translation = x
                     }
                     .onEnded { value in
                         guard active, !flying else { return }
                         let x = value.translation.width, y = value.translation.height
                         let rating = SwipeDecision.shared.rating(dx: Double(x), dy: Double(y),
-                            threshold: Double(threshold), axisRatio: 1.25, checkYOnRelease: true)
+                            threshold: Double(threshold), axisRatio: SharedConstants.axisRatio, checkYOnRelease: true)
                         settle(committed: rating != nil, remembered: rating === Rating.good)
                     }
             )

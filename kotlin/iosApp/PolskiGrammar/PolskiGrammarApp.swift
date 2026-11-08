@@ -4,6 +4,11 @@ import PolskiShared
 
 typealias Record = [String: Any]
 
+/// Pack-aware UI string from the snapshot bridge (SnapshotCommon.kt puts them as "ui*" keys).
+private func uiText(_ state: Record, _ key: String, fallback: String) -> String {
+    state[key] as? String ?? fallback
+}
+
 private enum StudyStyle {
     static let ink = Color(red: 0.08, green: 0.19, blue: 0.22)
     static let amber = Color(red: 0.98, green: 0.72, blue: 0.38)
@@ -436,7 +441,7 @@ struct PolskiGrammarApp: App {
     private let tabBarItems = [
         TabBarItem(tag: "Training", title: "Тренировка", icon: "square.stack"),
         TabBarItem(tag: "Matrix", title: "Матрица", icon: "tablecells"),
-        TabBarItem(tag: "Progress", title: "Прогресс", icon: "chart.bar"),
+        TabBarItem(tag: "Progress", title: uiText(model.state, "uiProgressTab", fallback: "Прогресс"), icon: "chart.bar"),
         TabBarItem(tag: "Vocabulary", title: "Слова", icon: "character.book.closed"),
     ]
 
@@ -535,7 +540,7 @@ struct PolskiGrammarApp: App {
 
     private var settingsToolbar: some ToolbarContent {
         ToolbarItem(placement: .topBarTrailing) {
-            Button { showingSettings = true } label: { Label("Настройки", systemImage: "gearshape") }
+            Button { showingSettings = true } label: { Label(uiText(model.state, "uiSettingsTab", fallback: "Настройки"), systemImage: "gearshape") }
                 .accessibilityIdentifier("openSettings")
         }
     }
@@ -684,7 +689,7 @@ private struct IosSettingsView: View {
             }
             #endif
         }
-        .navigationTitle("Настройки")
+        .navigationTitle(uiText(model.state, "uiSettingsTab", fallback: "Настройки"))
         .navigationBarTitleDisplayMode(.inline)
         .toolbar { ToolbarItem(placement: .confirmationAction) { Button("Готово") { dismiss() } } }
     }
@@ -730,7 +735,7 @@ private struct TrainingView: View {
                     .listRowBackground(Color.clear)
             }
             if state.string("loadStatus") != "Ready" {
-                Section("Прогресс") {
+                Section(uiText(state, "uiProgressTab", fallback: "Прогресс")) {
                     Text(state.string("loadStatus") == "Loading" ? "Загружаем…" : "Нужна копия прогресса")
                     // state.error is shown by the global ErrorBanner above every tab (C1).
                     Text("Откройте «Прогресс» для импорта или экспорта JSON.")
@@ -960,7 +965,7 @@ private struct MatrixView: View {
                     Text("Падежи и окончания").tag("Cases")
                     Text("Времена и лица").tag("Verbs")
                     Text("Местоимения").tag("Pronouns")
-                    Text("Лайфхаки").tag("Lifehacks")
+                    Text(uiText(model.state, "uiLifehacks", fallback: "Лайфхаки")).tag("Lifehacks")
                 }
             }
             switch section {
@@ -1172,7 +1177,7 @@ private struct MatrixView: View {
     @ViewBuilder private var lifehacks: some View {
         let groups = model.state.rows("lifehackGroups")
         if groups.isEmpty {
-            Section("Лайфхаки") {
+            Section(uiText(model.state, "uiLifehacks", fallback: "Лайфхаки")) {
                 Text("Для этого набора лайфхаков пока нет.").foregroundStyle(.secondary)
             }
         } else {
@@ -1223,10 +1228,10 @@ private struct ProgressView: View {
             Section("Данные") {
                 Button("Экспортировать JSON") { model.send("export") }
                 Button("Импортировать JSON") { importing = true }
-                Button("Сбросить прогресс", role: .destructive) { model.send("reset") }
+                Button(uiText(model.state, "uiResetProgress", fallback: "Сбросить прогресс"), role: .destructive) { model.send("reset") }
             }
         }
-        .navigationTitle("Прогресс")
+        .navigationTitle(uiText(model.state, "uiProgressTab", fallback: "Прогресс"))
         .navigationBarTitleDisplayMode(.inline)
         .frame(maxWidth: 850).frame(maxWidth: .infinity)
     }

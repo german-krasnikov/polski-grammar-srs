@@ -61,9 +61,9 @@ script.shell_script = <<~SH
     KOTLIN_TARGET="IosArm64"
     KOTLIN_FOLDER="iosArm64"
   fi
-  ./gradlew ":shared:linkDebugFramework${KOTLIN_TARGET}" --console=plain
+  ./gradlew ":apple-bridge:linkDebugFramework${KOTLIN_TARGET}" --console=plain
   rm -rf "${BUILT_PRODUCTS_DIR}/PolskiShared.framework"
-  cp -R "shared/build/bin/${KOTLIN_FOLDER}/debugFramework/PolskiShared.framework" "${BUILT_PRODUCTS_DIR}/PolskiShared.framework"
+  cp -R "apple-bridge/build/bin/${KOTLIN_FOLDER}/debugFramework/PolskiShared.framework" "${BUILT_PRODUCTS_DIR}/PolskiShared.framework"
 SH
 script.always_out_of_date = '1'
 target.build_phases.move(script, 0)
