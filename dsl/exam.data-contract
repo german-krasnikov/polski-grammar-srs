@@ -86,3 +86,12 @@ RECORD WritingTaskRow KEY taskId COUNT 1..
   wordLimit: int OPTIONAL
   genre: enum letter|description|argument|essay
 END
+
+# Scoring oracle: input/output pairs for the answer-matching rule (P4: test expectations in DSL).
+# Adding a case = one .core-data line; the Kotlin test loops over generated rows.
+RECORD ScoringCaseRow KEY id COUNT 1..
+  id: string
+  answer: string
+  expected: string
+  correct: bool
+END

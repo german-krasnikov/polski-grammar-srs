@@ -2,25 +2,33 @@ package polski.exam.grammar
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertFalse
-import kotlin.test.assertTrue
 import polski.exam.QuestionType
+import polski.exam.data.oracle.SCORING_CASE_ROW_ROWS
 
+/**
+ * Loops [SCORING_CASE_ROW_ROWS] (generated from dsl/exam-scoring/scoring.core-data by biome generate).
+ * Adding a scoring test case = one line in the .core-data file (P4: test expectations in DSL).
+ */
 class GrammarExamScorerTest {
-    private val item = GrammarItem(
+    private val template = GrammarItem(
         itemId = "q1", questionType = QuestionType.ChooseForm,
         context = "test ___", gap = "___", options = listOf("a", "b", "c"),
-        correctAnswer = "nas", points = 1,
+        correctAnswer = "", points = 1,
     )
 
-    @Test fun exactMatch() = assertTrue(GrammarExamScorer.score(item, "nas"))
-    @Test fun caseInsensitive() = assertTrue(GrammarExamScorer.score(item, "Nas"))
-    @Test fun trimmed() = assertTrue(GrammarExamScorer.score(item, "  nas  "))
-    @Test fun wrong() = assertFalse(GrammarExamScorer.score(item, "nami"))
-    @Test fun empty() = assertFalse(GrammarExamScorer.score(item, ""))
+    @Test fun scoringOracle() {
+        for (row in SCORING_CASE_ROW_ROWS) {
+            val item = template.copy(correctAnswer = row.expected)
+            assertEquals(row.correct, GrammarExamScorer.score(item, row.answer), row.id)
+        }
+    }
 
     @Test fun fullAttempt() {
-        val test = GrammarTest("t1", "instruction", listOf(item, item.copy(itemId = "q2", correctAnswer = "do", points = 2)))
+        val items = listOf(
+            template.copy(itemId = "q1", correctAnswer = "nas", points = 1),
+            template.copy(itemId = "q2", correctAnswer = "do", points = 2),
+        )
+        val test = GrammarTest("t1", "instruction", items)
         val result = GrammarExamScorer.scoreAttempt(test, mapOf("q1" to "nas", "q2" to "wrong"))
         assertEquals(1, result.correct)
         assertEquals(3, result.total)
@@ -28,7 +36,7 @@ class GrammarExamScorerTest {
     }
 
     @Test fun unansweredItemScoresZero() {
-        val test = GrammarTest("t1", "instr", listOf(item))
+        val test = GrammarTest("t1", "instr", listOf(template.copy(correctAnswer = "nas")))
         val result = GrammarExamScorer.scoreAttempt(test, emptyMap())
         assertEquals(0, result.correct)
     }

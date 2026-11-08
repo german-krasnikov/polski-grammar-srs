@@ -1,0 +1,10 @@
+DSL 1
+# Scoring oracle (P4): each row is one input/output case for the normalize-and-match rule.
+# Adding a test = one line here; biome generate prints typed rows the Kotlin test loops over.
+SCORING_CASE {id: "exact-match" answer: "nas" expected: "nas" correct: true}
+SCORING_CASE {id: "case-insensitive" answer: "Nas" expected: "nas" correct: true}
+SCORING_CASE {id: "trimmed" answer: "  nas  " expected: "nas" correct: true}
+SCORING_CASE {id: "wrong-answer" answer: "nami" expected: "nas" correct: false}
+SCORING_CASE {id: "empty-answer" answer: "" expected: "nas" correct: false}
+SCORING_CASE {id: "diacritics-match" answer: "więc" expected: "więc" correct: true}
+SCORING_CASE {id: "diacritics-case" answer: "Więc" expected: "więc" correct: true}
