@@ -77,9 +77,16 @@ internal object EnRuTypedPack : CoursePackFields {
         "exportJson" to "Экспорт JSON", "resetProgress" to "Сбросить прогресс",
         "hideTable" to "Скрыть таблицу", "tableAtHand" to "Таблица под рукой",
         "allTablesAndSchema" to "Все таблицы и схема", "whenToReview" to "Когда повторить?",
-        "noDueTitle" to "Новых повторений пока нет.", "compareAnswer" to "Сравни свой ответ с эталоном",
+        "noDueTitle" to "No reviews due.", "compareAnswer" to "Compare your answer with the model",
+        "backSideReference" to "Back side · model answer", "noAnswerEntered" to "No answer entered",
+        "matches" to "Matches", "differs" to "Differs",
+        "selectExam" to "Select exam", "start" to "Start", "next" to "Next →",
+        "finish" to "Finish", "tryAgain" to "Try again", "task" to "Task",
+        "grammar" to "Grammar", "listening" to "Listening", "reading" to "Reading",
+        "writing" to "Writing", "results" to "Results", "comingSoon" to "Coming soon", "exam" to "Exam",
+        "cardsTab" to "Cards", "vocabularyTab" to "Vocabulary", "matrixTab" to "Tables & scheme",
         "lang.pl" to "Польский", "lang.en" to "Английский", "lang.ru" to "Русский",
         "adverb.pl" to "по-польски", "adverb.en" to "по-английски", "adverb.ru" to "по-русски",
-        "tense.present" to "Настоящее", "tense.past" to "Прошедшее", "tense.future" to "Будущее",
+        "tense.present" to "Present", "tense.past" to "Past", "tense.future" to "Future",
     )
 }

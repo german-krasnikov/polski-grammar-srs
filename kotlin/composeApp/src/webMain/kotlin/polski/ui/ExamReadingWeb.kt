@@ -3,6 +3,7 @@ package polski.ui
 import kotlinx.browser.document
 import org.w3c.dom.HTMLButtonElement
 import org.w3c.dom.HTMLElement
+import polski.presentation.UiCopy
 import org.w3c.dom.HTMLInputElement
 import polski.exam.QuestionType
 
@@ -105,8 +106,8 @@ internal class ExamReadingController(examId: String, private val onBack: () -> U
         c.appendChild(node("div", "exam-nav").apply {
             if (currentPassageIdx > 0) appendChild(navBtn("← Назад") { currentPassageIdx--; redraw() })
             appendChild(node("span", "exam-nav-spacer"))
-            if (currentPassageIdx < exam.passages.lastIndex) appendChild(navBtn("Далее →") { currentPassageIdx++; redraw() })
-            if (currentPassageIdx == exam.passages.lastIndex) appendChild(navBtn("Завершить", true) { submitted = true; redraw() })
+            if (currentPassageIdx < exam.passages.lastIndex) appendChild(navBtn(UiCopy.Next) { currentPassageIdx++; redraw() })
+            if (currentPassageIdx == exam.passages.lastIndex) appendChild(navBtn(UiCopy.Finish, true) { submitted = true; redraw() })
         })
     }
 
@@ -117,7 +118,7 @@ internal class ExamReadingController(examId: String, private val onBack: () -> U
             if (answers[q.id]?.trim()?.lowercase() == q.correctAnswer.trim().lowercase()) correct++
         }
         val pct = if (total > 0) (correct.toDouble() / total * 100).toInt() else 0
-        c.appendChild(node("h2", "exam-title", "Результаты — Чтение"))
+        c.appendChild(node("h2", "exam-title", "${UiCopy.Results} — ${UiCopy.Reading}"))
         c.appendChild(node("div", "exam-score").apply {
             appendChild(node("div", "exam-score-big", "$pct%"))
             appendChild(node("div", "exam-score-detail", "$correct / $total"))
@@ -136,7 +137,7 @@ internal class ExamReadingController(examId: String, private val onBack: () -> U
         c.appendChild(node("div", "exam-nav").apply {
             appendChild(navBtn("← К модулям") { onBack() })
             appendChild(node("span", "exam-nav-spacer"))
-            appendChild(navBtn("Пройти ещё раз", true) { answers.clear(); currentPassageIdx = 0; submitted = false; redraw() })
+            appendChild(navBtn(UiCopy.TryAgain, true) { answers.clear(); currentPassageIdx = 0; submitted = false; redraw() })
         })
     }
 

@@ -3,6 +3,7 @@ package polski.ui
 import org.w3c.dom.HTMLButtonElement
 import org.w3c.dom.HTMLElement
 import polski.presentation.Block
+import polski.presentation.UiCopy
 
 /**
  * UC-10 web S2: renders whatever [Block]s [polski.presentation.StyleComposer.compose] returns for
@@ -126,7 +127,7 @@ private fun renderNativeParallelBlock(container: HTMLElement, block: Block.Nativ
         row.appendChild(node(
             "span",
             if (pair.matches) "native-parallel-badge match" else "native-parallel-badge differs",
-            if (pair.matches) "Совпадает" else "Отличается",
+            if (pair.matches) UiCopy.Matches else UiCopy.Differs,
         ))
         if (pair.note.isNotBlank()) row.appendChild(node("p", "native-parallel-note", pair.note))
     }

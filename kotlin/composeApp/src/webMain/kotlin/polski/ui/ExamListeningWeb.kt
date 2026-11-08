@@ -6,6 +6,7 @@ import org.w3c.dom.HTMLButtonElement
 import org.w3c.dom.HTMLElement
 import org.w3c.dom.HTMLInputElement
 import polski.exam.QuestionType
+import polski.presentation.UiCopy
 
 internal data class ListeningTask(val id: String, val instruction: String, val questions: List<ListeningQ>, val startMs: Long = 0, val endMs: Long = 0)
 internal data class ListeningQ(val id: String, val type: QuestionType, val questionText: String, val options: List<String>, val correctAnswer: String)
@@ -100,7 +101,7 @@ internal class ExamListeningController(examId: String, private val onBack: () ->
     private fun renderTask(c: HTMLElement) {
         val task = exam.tasks[currentTaskIdx]
         c.appendChild(node("div", "exam-progress").apply {
-            appendChild(node("span", "exam-progress-text", "Задание ${currentTaskIdx + 1} / ${exam.tasks.size}"))
+            appendChild(node("span", "exam-progress-text", "${UiCopy.Task} ${currentTaskIdx + 1} / ${exam.tasks.size}"))
             appendChild(node("div", "exam-progress-bar").apply {
                 appendChild(node("div", "exam-progress-fill").apply {
                     style.setProperty("width", "${((currentTaskIdx + 1).toDouble() / exam.tasks.size * 100).toInt()}%")
@@ -130,8 +131,8 @@ internal class ExamListeningController(examId: String, private val onBack: () ->
         c.appendChild(node("div", "exam-nav").apply {
             if (currentTaskIdx > 0) appendChild(navBtn("← Назад") { currentTaskIdx--; redraw() })
             appendChild(node("span", "exam-nav-spacer"))
-            if (currentTaskIdx < exam.tasks.lastIndex) appendChild(navBtn("Далее →") { currentTaskIdx++; redraw() })
-            if (currentTaskIdx == exam.tasks.lastIndex) appendChild(navBtn("Завершить", true) { submitted = true; redraw() })
+            if (currentTaskIdx < exam.tasks.lastIndex) appendChild(navBtn(UiCopy.Next) { currentTaskIdx++; redraw() })
+            if (currentTaskIdx == exam.tasks.lastIndex) appendChild(navBtn(UiCopy.Finish, true) { submitted = true; redraw() })
         })
     }
 
@@ -174,7 +175,7 @@ internal class ExamListeningController(examId: String, private val onBack: () ->
             if (ans == exp || (q.type == QuestionType.TrueFalse && matchTrueFalse(ans, exp))) correct++
         }
         val pct = if (total > 0) (correct.toDouble() / total * 100).toInt() else 0
-        c.appendChild(node("h2", "exam-title", "Результаты — Аудирование"))
+        c.appendChild(node("h2", "exam-title", "${UiCopy.Results} — ${UiCopy.Listening}"))
         c.appendChild(node("div", "exam-score").apply {
             appendChild(node("div", "exam-score-big", "$pct%"))
             appendChild(node("div", "exam-score-detail", "$correct / $total"))
@@ -194,7 +195,7 @@ internal class ExamListeningController(examId: String, private val onBack: () ->
         c.appendChild(node("div", "exam-nav").apply {
             appendChild(navBtn("← К модулям") { onBack() })
             appendChild(node("span", "exam-nav-spacer"))
-            appendChild(navBtn("Пройти ещё раз", true) {
+            appendChild(navBtn(UiCopy.TryAgain, true) {
                 answers.clear(); currentTaskIdx = 0; submitted = false; audioElement = null; redraw()
             })
         })

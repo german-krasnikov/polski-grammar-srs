@@ -3,6 +3,7 @@ package polski.ui
 import kotlinx.browser.document
 import org.w3c.dom.HTMLButtonElement
 import org.w3c.dom.HTMLElement
+import polski.presentation.UiCopy
 import org.w3c.dom.HTMLInputElement
 import polski.exam.QuestionType
 import polski.exam.grammar.*
@@ -95,14 +96,14 @@ internal class ExamGrammarController(examId: String, private val onBack: () -> U
         c.appendChild(node("div", "exam-nav").apply {
             if (!card.isFirst) appendChild(navBtn("← Назад") { dispatch(GrammarExamAction.Previous) })
             appendChild(node("span", "exam-nav-spacer"))
-            if (!card.isLast) appendChild(navBtn("Далее →") { dispatch(GrammarExamAction.Next) })
-            if (card.isLast) appendChild(navBtn("Завершить", primary = true) { dispatch(GrammarExamAction.Submit) })
+            if (!card.isLast) appendChild(navBtn(UiCopy.Next) { dispatch(GrammarExamAction.Next) })
+            if (card.isLast) appendChild(navBtn(UiCopy.Finish, primary = true) { dispatch(GrammarExamAction.Submit) })
         })
     }
 
     private fun renderResult(c: HTMLElement) {
         val result = state.result ?: return
-        c.appendChild(node("h2", "exam-title", "Результаты — Грамматика"))
+        c.appendChild(node("h2", "exam-title", "${UiCopy.Results} — ${UiCopy.Grammar}"))
         c.appendChild(node("div", "exam-score").apply {
             appendChild(node("div", "exam-score-big", "${result.percentage.toInt()}%"))
             appendChild(node("div", "exam-score-detail", "${result.correct} / ${result.total} баллов"))
@@ -121,7 +122,7 @@ internal class ExamGrammarController(examId: String, private val onBack: () -> U
         c.appendChild(node("div", "exam-nav").apply {
             appendChild(navBtn("← К модулям") { onBack() })
             appendChild(node("span", "exam-nav-spacer"))
-            appendChild(navBtn("Пройти ещё раз", primary = true) {
+            appendChild(navBtn(UiCopy.TryAgain, primary = true) {
                 state = GrammarExamState(test = state.test); inputRef = null; redraw()
             })
         })

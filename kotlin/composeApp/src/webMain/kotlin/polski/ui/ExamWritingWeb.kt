@@ -3,6 +3,7 @@ package polski.ui
 import kotlinx.browser.document
 import org.w3c.dom.HTMLButtonElement
 import org.w3c.dom.HTMLElement
+import polski.presentation.UiCopy
 import org.w3c.dom.HTMLTextAreaElement
 
 internal data class WritingTask(val id: String, val instruction: String, val promptText: String, val wordLimit: Int?)
@@ -27,7 +28,7 @@ internal class ExamWritingController(examId: String, private val onBack: () -> U
     private fun renderTask(c: HTMLElement) {
         val task = exam.tasks[currentTaskIdx]
         c.appendChild(node("div", "exam-progress").apply {
-            appendChild(node("span", "exam-progress-text", "Задание ${currentTaskIdx + 1} / ${exam.tasks.size}"))
+            appendChild(node("span", "exam-progress-text", "${UiCopy.Task} ${currentTaskIdx + 1} / ${exam.tasks.size}"))
         })
         c.appendChild(node("h3", "exam-title", task.instruction))
         c.appendChild(node("div", "exam-writing-prompt").apply {
@@ -73,7 +74,7 @@ internal class ExamWritingController(examId: String, private val onBack: () -> U
         })
         exam.tasks.forEachIndexed { i, task ->
             c.appendChild(node("div", "exam-writing-review").apply {
-                appendChild(node("h4", text = "Задание ${i + 1}: ${task.instruction}"))
+                appendChild(node("h4", text = "${UiCopy.Task} ${i + 1}: ${task.instruction}"))
                 appendChild(node("pre", "exam-writing-draft", drafts[task.id].orEmpty().ifEmpty { "[пусто]" }))
             })
         }

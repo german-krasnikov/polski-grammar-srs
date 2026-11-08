@@ -889,7 +889,7 @@ private class TrainingDomRenderer {
     private fun renderAnswerBack(root: HTMLElement, card: HTMLElement, wrap: HTMLElement, back: HTMLElement, state: AppUiState, swipeRatingEnabled: Boolean, dispatch: (AppAction) -> Unit) {
         val exercise = state.exercise ?: return
         val model = trainingCardModel(state)
-        back.appendChild(node("span", "eyebrow", "Обратная сторона · эталон"))
+        back.appendChild(node("span", "eyebrow", UiCopy.BackSideReference))
         back.appendChild(node("p", "answer-sentence").apply {
             setAttribute("lang", activeTargetLangCode())
             appendContrastParts(this, sentenceHighlightParts(exercise.expected, exercise.changes, ChangeSide.After), "change-after")
@@ -900,8 +900,8 @@ private class TrainingDomRenderer {
         if (state.answerMode == AnswerMode.Typed) {
             val result = state.evaluation?.correct == true
             back.appendChild(node("div", if (result) "typed-result correct" else "typed-result incorrect").apply {
-                appendChild(node("strong", text = if (result) "Совпадает с правильным вариантом" else UiCopy.CompareAnswer))
-                appendChild(node("p", text = state.frozenAnswer?.takeIf(String::isNotEmpty) ?: "Ответ не введён"))
+                appendChild(node("strong", text = if (result) UiCopy.Matches else UiCopy.CompareAnswer))
+                appendChild(node("p", text = state.frozenAnswer?.takeIf(String::isNotEmpty) ?: UiCopy.NoAnswerEntered))
             })
         }
         val mf = model.back.filterIsInstance<CardSection.MethodFeedback>().firstOrNull()

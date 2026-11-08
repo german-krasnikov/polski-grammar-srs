@@ -4,6 +4,7 @@ import kotlinx.browser.document
 import org.w3c.dom.HTMLButtonElement
 import org.w3c.dom.HTMLElement
 import polski.exam.ExamModule
+import polski.presentation.UiCopy
 
 internal data class ExamEntry(
     val id: String, val label: String, val level: String, val year: String,
@@ -42,7 +43,7 @@ internal class ExamWebController {
     }
 
     private fun renderExamList(c: HTMLElement) {
-        c.appendChild(node("h2", "exam-title", "Выберите экзамен"))
+        c.appendChild(node("h2", "exam-title", UiCopy.SelectExam))
         c.appendChild(node("div", "exam-list").apply {
             exams.forEach { exam ->
                 appendChild(node("div", "exam-card").apply {
@@ -52,14 +53,14 @@ internal class ExamWebController {
                     })
                     appendChild(node("div", "exam-card-title", exam.label))
                     val counts = buildList {
-                        if (exam.grammarCount > 0) add("Грамматика: ${exam.grammarCount}")
-                        if (exam.readingCount > 0) add("Чтение: ${exam.readingCount}")
-                        if (exam.listeningCount > 0) add("Аудирование: ${exam.listeningCount}")
-                        if (exam.writingCount > 0) add("Письмо: ${exam.writingCount}")
+                        if (exam.grammarCount > 0) add("${UiCopy.Grammar}: ${exam.grammarCount}")
+                        if (exam.readingCount > 0) add("${UiCopy.Reading}: ${exam.readingCount}")
+                        if (exam.listeningCount > 0) add("${UiCopy.Listening}: ${exam.listeningCount}")
+                        if (exam.writingCount > 0) add("${UiCopy.Writing}: ${exam.writingCount}")
                     }
                     appendChild(node("div", "exam-card-counts", counts.joinToString(" · ")))
                     appendChild((document.createElement("button") as HTMLButtonElement).apply {
-                        type = "button"; className = "exam-nav-btn primary"; textContent = "Начать"
+                        type = "button"; className = "exam-nav-btn primary"; textContent = UiCopy.Start
                         addEventListener("click", { selectExam(exam) })
                     })
                 })
@@ -92,7 +93,7 @@ internal class ExamWebController {
         })
         c.appendChild(node("div", "exam-nav").apply {
             appendChild((document.createElement("button") as HTMLButtonElement).apply {
-                type = "button"; className = "exam-nav-btn"; textContent = "← Назад к списку"
+                type = "button"; className = "exam-nav-btn"; textContent = "← ${UiCopy.SelectExam}"
                 addEventListener("click", { screen = ExamScreen.List; redraw() })
             })
         })
@@ -101,11 +102,11 @@ internal class ExamWebController {
     private fun moduleRow(parent: HTMLElement, label: String, count: Int, available: Boolean, onClick: () -> Unit) {
         parent.appendChild(node("div", "exam-module-card").apply {
             appendChild(node("div", "exam-module-name", label))
-            if (count > 0) appendChild(node("div", "exam-module-count", "$count вопросов/заданий"))
+            if (count > 0) appendChild(node("div", "exam-module-count", "$count"))
             appendChild((document.createElement("button") as HTMLButtonElement).apply {
                 type = "button"
                 className = if (available) "exam-nav-btn primary" else "exam-nav-btn"
-                textContent = if (available) "Начать" else "Скоро"
+                textContent = if (available) UiCopy.Start else UiCopy.ComingSoon
                 disabled = !available
                 addEventListener("click", { if (available) onClick() })
             })

@@ -17,11 +17,11 @@ internal class WebNav(app: HTMLElement, navigate: (WebRoute) -> Unit) {
         setAttribute("aria-hidden", "true")
     }
     private val destinations = listOf(
-        WebRoute.Training to "Карточки",
-        WebRoute.Vocabulary to "Слова",
-        WebRoute.Matrix to "Таблицы и схема",
+        WebRoute.Training to UiCopy.CardsTab,
+        WebRoute.Vocabulary to UiCopy.VocabularyTab,
+        WebRoute.Matrix to UiCopy.MatrixTab,
         WebRoute.Progress to UiCopy.ProgressTab,
-        WebRoute.Exam to "Экзамен",
+        WebRoute.Exam to UiCopy.Exam,
         WebRoute.Settings to UiCopy.SettingsTab,
     )
     // P2-10: "Таблицы и схема" wraps onto two lines inside the mobile nav's fixed-height buttons;
