@@ -19,10 +19,12 @@ Date: 2026-11-08. Scope: [NEXT-SESSION-EXECUTION.md](NEXT-SESSION-EXECUTION.md),
 | Negative control | Temporarily changed `on-new-1` DSL `expDue` from `12:01` to `12:02`, generated only the scheduler typed row with `biome data generate`, then ran the same focused Gradle test | RED observed: `on-new-1 due expected:<2026-02-03T12:02:00Z> but was:<2026-02-03T12:01:00Z>`. Restored source and regenerated; focused test PASS. |
 | Diff whitespace | `git diff --check` (repo root) | PASS |
 
-JS/Wasm tests, browser scenarios, devices, and full shared test suite: NOT RUN for this P2 slice. The desktop target proves the commonTest consumer on JVM only. Independent tester and reviewer gates remain open.
+JS/Wasm tests, browser scenarios, devices, and full shared test suite: NOT RUN for this P2 slice. The desktop target proves the commonTest consumer on JVM only. Independent tester and reviewer results follow below.
 
-## Independent verification, 2026-11-08
+## Independent tester verification, 2026-11-08
 
-The GPT-6 Sol tester compared the 70 authored DSL records independently against the frozen `expanded_oracle.json`: all 27 mapped fields per case match, all case IDs occur in the old HEAD test, zero mismatches. The tester reran `./gradlew :shared:desktopTest --tests 'polski.srs.SchedulerExpandedTest' --console=plain` from `kotlin/`: PASS. The XML reports one nonempty `allCases[desktop]` test iterating the 70 generated rows, zero failures. JS/Wasm scheduler tests remain NOT RUN. The preceding developer evidence is preserved as a separate run.
+For S1–S2, a separate read-only audit compared all 70 authored `SCHEDULER_EXPANDED_CASE` records with the pinned `expanded_oracle.json`: IDs/order, all 27 mapped input/preview/review fields per case, and the presence of each ID as a method in the pre-migration HEAD test. Result: **PASS, zero mismatches**. This independently checks expected values against the frozen fixture, not the current scheduler output. Developer's negative-control RED above was reviewed as developer evidence; the tester did not repeat the mutation.
+
+For S3, `cd kotlin && ./gradlew :shared:desktopTest --tests 'polski.srs.SchedulerExpandedTest' --console=plain` passed independently. `shared/build/test-results/desktopTest/TEST-polski.srs.SchedulerExpandedTest.xml` reports one nonempty `allCases[desktop]` test, zero skipped/failures/errors; that case loops over the 70 typed rows and checks four previews, reviewed fields, immutable source and selected due. The developer's `biome generate --check` pass above is reused because these source rows and project wiring did not change between it and the tester run. JS/Wasm scheduler tests and devices remain **NOT RUN** for the new DSL-backed test; older XML files from September concern the previous test and are not current evidence.
 
 Independent GPT-6 Sol read-only review: **APPROVED**, no blockers in P2 and the browser storage helper slice. Review confirmed fixed oracle provenance, retained comparisons and enum guards; no tests were executed by the reviewer. Exam changes and the pending reference-table correction were outside this verdict.
