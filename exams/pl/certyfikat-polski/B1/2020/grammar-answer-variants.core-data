@@ -1,0 +1,44 @@
+DSL 1
+# Additional full-credit alternatives printed in B1/2020 klucz.pdf pp. 5–6.
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B1-2020-grammar-4-4-alt-1
+  itemRef: certyfikat-polski-B1-2020-grammar-4-4
+  answer: "będziemy pracować"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B1-2020-grammar-4-8-alt-1
+  itemRef: certyfikat-polski-B1-2020-grammar-4-8
+  answer: "będziemy mieć"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B1-2020-grammar-4-10-alt-1
+  itemRef: certyfikat-polski-B1-2020-grammar-4-10
+  answer: "będziemy mogli"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B1-2020-grammar-5-1-alt-1
+  itemRef: certyfikat-polski-B1-2020-grammar-5-1
+  answer: "W jaki sposób"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B1-2020-grammar-5-2-alt-1
+  itemRef: certyfikat-polski-B1-2020-grammar-5-2
+  answer: "Ile tygodni"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B1-2020-grammar-5-2-alt-2
+  itemRef: certyfikat-polski-B1-2020-grammar-5-2
+  answer: "Ile czasu"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B1-2020-grammar-6-5-alt-1
+  itemRef: certyfikat-polski-B1-2020-grammar-6-5
+  answer: "Czy wiesz, jaki adres ma ten sklep?"
+  earnedQuarter: 4
+}

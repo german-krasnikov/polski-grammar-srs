@@ -1,285 +1,316 @@
 DSL 1
 READING_QUESTION {
-  questionId: "B1-2019-rq1-1"
-  passageRef: "B1-2019-read-1"
+  questionId: B1-2019-rq1-1
+  passageRef: B1-2019-read-1
   questionType: multiple_choice
-  questionText: "Pytanie 1"
-  options: "a|b|c"
-  correctAnswer: "b"
-  points: 1
+  questionText: "Z tego tekstu wynika, że z projektu może skorzystać"
+  options: "każdy, kto chce otworzyć własną firmę|bezrobotny powyżej 30. roku życia|każda osoba bez wykształcenia"
+  correctAnswer: "bezrobotny powyżej 30. roku życia"
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "B1-2019-rq1-2"
-  passageRef: "B1-2019-read-1"
+  questionId: B1-2019-rq1-2
+  passageRef: B1-2019-read-1
   questionType: multiple_choice
-  questionText: "Pytanie 2"
-  options: "a|b|c"
-  correctAnswer: "a"
-  points: 1
+  questionText: "Z tego tekstu wynika, że w klubie fitness"
+  options: "po zajęciach można się wykąpać|przez cały rok zajęcia są za darmo|popularni instruktorzy prowadzą bufet"
+  correctAnswer: "po zajęciach można się wykąpać"
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "B1-2019-rq1-3"
-  passageRef: "B1-2019-read-1"
+  questionId: B1-2019-rq1-3
+  passageRef: B1-2019-read-1
   questionType: multiple_choice
-  questionText: "Pytanie 3"
-  options: "a|b|c"
-  correctAnswer: "b"
-  points: 1
+  questionText: "Z tego tekstu wynika, że"
+  options: "„La Musicienne” to najdroższy obraz na świecie|cena obrazu była dla wszystkich zaskoczeniem|obraz kupił amerykański biznesmen"
+  correctAnswer: "cena obrazu była dla wszystkich zaskoczeniem"
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "B1-2019-rq1-4"
-  passageRef: "B1-2019-read-1"
+  questionId: B1-2019-rq1-4
+  passageRef: B1-2019-read-1
   questionType: multiple_choice
-  questionText: "Pytanie 4"
-  options: "a|b|c"
-  correctAnswer: "c"
-  points: 1
+  questionText: "Z tego tekstu wynika, że"
+  options: "w rankingu znalazło się 28 uczelni z całej Polski|konkurs zorganizowały szkoły wyższe i media|Szkoła Główna Handlowa niejednokrotnie wygrała ten konkurs"
+  correctAnswer: "Szkoła Główna Handlowa niejednokrotnie wygrała ten konkurs"
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "B1-2019-rq2-1"
-  passageRef: "B1-2019-read-2"
+  questionId: B1-2019-rq2-1
+  passageRef: B1-2019-read-2
   questionType: true_false_not_given
-  questionText: "Pytanie 1"
-  correctAnswer: "TAK"
-  points: 1
+  questionText: "W ciągu pół roku 256 lotów jednej z linii lotniczych było opóźnionych o ponad 3 godziny."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "B1-2019-rq2-2"
-  passageRef: "B1-2019-read-2"
+  questionId: B1-2019-rq2-2
+  passageRef: B1-2019-read-2
   questionType: true_false_not_given
-  questionText: "Pytanie 2"
-  correctAnswer: "NIE"
-  points: 1
+  questionText: "Według przepisów pasażerowie mogą otrzymać pieniądze za opóźniony lub odwołany lot."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "B1-2019-rq2-3"
-  passageRef: "B1-2019-read-2"
+  questionId: B1-2019-rq2-3
+  passageRef: B1-2019-read-2
   questionType: true_false_not_given
-  questionText: "Pytanie 3"
-  correctAnswer: "TAK"
-  points: 1
+  questionText: "Linie lotnicze regularnie publikują dane dotyczące faktycznych godzin lądowania ich samolotów."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "B1-2019-rq2-4"
-  passageRef: "B1-2019-read-2"
+  questionId: B1-2019-rq2-4
+  passageRef: B1-2019-read-2
   questionType: true_false_not_given
-  questionText: "Pytanie 4"
-  correctAnswer: "NIE"
-  points: 1
+  questionText: "Pieniądze za bilet mogą być zwrócone, jeśli lot odwołano na przykład tydzień przed wylotem."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "B1-2019-rq2-5"
-  passageRef: "B1-2019-read-2"
+  questionId: B1-2019-rq2-5
+  passageRef: B1-2019-read-2
   questionType: true_false_not_given
-  questionText: "Pytanie 5"
-  correctAnswer: "TAK"
-  points: 1
+  questionText: "Za anulowanie każdego biletu z winy linii lotniczych pasażerowie dostają 600 euro."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "B1-2019-rq2-6"
-  passageRef: "B1-2019-read-2"
+  questionId: B1-2019-rq2-6
+  passageRef: B1-2019-read-2
   questionType: true_false_not_given
-  questionText: "Pytanie 6"
-  correctAnswer: "TAK"
-  points: 1
+  questionText: "Formularze o zwrot kosztów pasażerowie wypełniają zazwyczaj starannie i szybko."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "B1-2019-rq2-7"
-  passageRef: "B1-2019-read-2"
+  questionId: B1-2019-rq2-7
+  passageRef: B1-2019-read-2
   questionType: true_false_not_given
-  questionText: "Pytanie 7"
-  correctAnswer: "NIE"
-  points: 1
+  questionText: "Pasażerowie mogą liczyć na pomoc specjalnych firm, jeśli chcą dostać pieniądze od linii lotniczych."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "B1-2019-rq3-1"
-  passageRef: "B1-2019-read-3"
+  questionId: B1-2019-rq3-1
+  passageRef: B1-2019-read-3
   questionType: match_heading
-  questionText: "Fragment 1"
-  correctAnswer: "H"
-  points: 1
+  questionText: "Fragment do luki 1"
+  options: "A|C|D|E|F|G|H|I"
+  correctAnswer: H
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "B1-2019-rq3-2"
-  passageRef: "B1-2019-read-3"
+  questionId: B1-2019-rq3-2
+  passageRef: B1-2019-read-3
   questionType: match_heading
-  questionText: "Fragment 2"
-  correctAnswer: "A"
-  points: 1
+  questionText: "Fragment do luki 2"
+  options: "A|C|D|E|F|G|H|I"
+  correctAnswer: A
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "B1-2019-rq3-3"
-  passageRef: "B1-2019-read-3"
+  questionId: B1-2019-rq3-3
+  passageRef: B1-2019-read-3
   questionType: match_heading
-  questionText: "Fragment 3"
-  correctAnswer: "E"
-  points: 1
+  questionText: "Fragment do luki 3"
+  options: "A|C|D|E|F|G|H|I"
+  correctAnswer: E
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "B1-2019-rq3-4"
-  passageRef: "B1-2019-read-3"
+  questionId: B1-2019-rq3-4
+  passageRef: B1-2019-read-3
   questionType: match_heading
-  questionText: "Fragment 4"
-  correctAnswer: "F"
-  points: 1
+  questionText: "Fragment do luki 4"
+  options: "A|C|D|E|F|G|H|I"
+  correctAnswer: F
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "B1-2019-rq3-5"
-  passageRef: "B1-2019-read-3"
+  questionId: B1-2019-rq3-5
+  passageRef: B1-2019-read-3
   questionType: match_heading
-  questionText: "Fragment 5"
-  correctAnswer: "C"
-  points: 1
+  questionText: "Fragment do luki 5"
+  options: "A|C|D|E|F|G|H|I"
+  correctAnswer: C
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "B1-2019-rq3-6"
-  passageRef: "B1-2019-read-3"
+  questionId: B1-2019-rq3-6
+  passageRef: B1-2019-read-3
   questionType: match_heading
-  questionText: "Fragment 6"
-  correctAnswer: "D"
-  points: 1
+  questionText: "Fragment do luki 6"
+  options: "A|C|D|E|F|G|H|I"
+  correctAnswer: D
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "B1-2019-rq3-7"
-  passageRef: "B1-2019-read-3"
+  questionId: B1-2019-rq3-7
+  passageRef: B1-2019-read-3
   questionType: match_heading
-  questionText: "Fragment 7"
-  correctAnswer: "I"
-  points: 1
+  questionText: "Fragment do luki 7"
+  options: "A|C|D|E|F|G|H|I"
+  correctAnswer: I
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "B1-2019-rq3-8"
-  passageRef: "B1-2019-read-3"
+  questionId: B1-2019-rq3-8
+  passageRef: B1-2019-read-3
   questionType: match_heading
-  questionText: "Fragment 8"
-  correctAnswer: "G"
-  points: 1
+  questionText: "Fragment do luki 8"
+  options: "A|C|D|E|F|G|H|I"
+  correctAnswer: G
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "B1-2019-rq4-1"
-  passageRef: "B1-2019-read-4"
+  questionId: B1-2019-rq4-1
+  passageRef: B1-2019-read-4
   questionType: match_heading
-  questionText: "Tytul 1"
-  correctAnswer: "G"
-  points: 1
+  questionText: "Ważny jest cel"
+  options: "A|B|C|D|E|F|G"
+  correctAnswer: G
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "B1-2019-rq4-2"
-  passageRef: "B1-2019-read-4"
+  questionId: B1-2019-rq4-2
+  passageRef: B1-2019-read-4
   questionType: match_heading
-  questionText: "Tytul 2"
-  correctAnswer: "A"
-  points: 1
+  questionText: "Odpowiedni czas"
+  options: "A|B|C|D|E|F|G"
+  correctAnswer: A
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "B1-2019-rq4-3"
-  passageRef: "B1-2019-read-4"
+  questionId: B1-2019-rq4-3
+  passageRef: B1-2019-read-4
   questionType: match_heading
-  questionText: "Tytul 3"
-  correctAnswer: "F"
-  points: 1
+  questionText: "Najpierw to, co dla ciebie ważne"
+  options: "A|B|C|D|E|F|G"
+  correctAnswer: F
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "B1-2019-rq4-4"
-  passageRef: "B1-2019-read-4"
+  questionId: B1-2019-rq4-4
+  passageRef: B1-2019-read-4
   questionType: match_heading
-  questionText: "Tytul 4"
-  correctAnswer: "D"
-  points: 1
+  questionText: "Małe kroki"
+  options: "A|B|C|D|E|F|G"
+  correctAnswer: D
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "B1-2019-rq4-5"
-  passageRef: "B1-2019-read-4"
+  questionId: B1-2019-rq4-5
+  passageRef: B1-2019-read-4
   questionType: match_heading
-  questionText: "Tytul 5"
-  correctAnswer: "C"
-  points: 1
+  questionText: "Dobry sprzęt i środki czystości"
+  options: "A|B|C|D|E|F|G"
+  correctAnswer: C
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "B1-2019-rq4-6"
-  passageRef: "B1-2019-read-4"
+  questionId: B1-2019-rq4-6
+  passageRef: B1-2019-read-4
   questionType: match_heading
-  questionText: "Tytul 6"
-  correctAnswer: "E"
-  points: 1
+  questionText: "Wykorzystaj czas"
+  options: "A|B|C|D|E|F|G"
+  correctAnswer: E
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "B1-2019-rq5-1"
-  passageRef: "B1-2019-read-5"
+  questionId: B1-2019-rq5-1
+  passageRef: B1-2019-read-5
   questionType: fill_gap
-  questionText: "Luka 1"
-  correctAnswer: "nowych"
-  points: 1
+  questionText: "W polskich więzieniach nie ma ___ książek"
+  options: "pojawiło się|wysokie|nowych|zorganizować|mieszkańców|książkę|młodzieży|wolność|przyłączyło się|popularne"
+  correctAnswer: nowych
+  pointsQuarter: 2
 }
 READING_QUESTION {
-  questionId: "B1-2019-rq5-2"
-  passageRef: "B1-2019-read-5"
+  questionId: B1-2019-rq5-2
+  passageRef: B1-2019-read-5
   questionType: fill_gap
-  questionText: "Luka 2"
-  correctAnswer: "wysokie"
-  points: 1
+  questionText: "ich ceny są za ___"
+  options: "pojawiło się|wysokie|nowych|zorganizować|mieszkańców|książkę|młodzieży|wolność|przyłączyło się|popularne"
+  correctAnswer: wysokie
+  pointsQuarter: 2
 }
 READING_QUESTION {
-  questionId: "B1-2019-rq5-3"
-  passageRef: "B1-2019-read-5"
+  questionId: B1-2019-rq5-3
+  passageRef: B1-2019-read-5
   questionType: fill_gap
-  questionText: "Luka 3"
-  correctAnswer: "zorganizowac"
-  points: 1
+  questionText: "postanowiła ___ zbiórkę"
+  options: "pojawiło się|wysokie|nowych|zorganizować|mieszkańców|książkę|młodzieży|wolność|przyłączyło się|popularne"
+  correctAnswer: "zorganizować"
+  pointsQuarter: 2
 }
 READING_QUESTION {
-  questionId: "B1-2019-rq5-4"
-  passageRef: "B1-2019-read-5"
+  questionId: B1-2019-rq5-4
+  passageRef: B1-2019-read-5
   questionType: fill_gap
-  questionText: "Luka 4"
-  correctAnswer: "mieszkancow"
-  points: 1
+  questionText: "zachęcenie wszystkich ___ Warszawy"
+  options: "pojawiło się|wysokie|nowych|zorganizować|mieszkańców|książkę|młodzieży|wolność|przyłączyło się|popularne"
+  correctAnswer: "mieszkańców"
+  pointsQuarter: 2
 }
 READING_QUESTION {
-  questionId: "B1-2019-rq5-5"
-  passageRef: "B1-2019-read-5"
+  questionId: B1-2019-rq5-5
+  passageRef: B1-2019-read-5
   questionType: fill_gap
-  questionText: "Luka 5"
-  correctAnswer: "popularne"
-  points: 1
+  questionText: "Majewski to ___ nazwisko"
+  options: "pojawiło się|wysokie|nowych|zorganizować|mieszkańców|książkę|młodzieży|wolność|przyłączyło się|popularne"
+  correctAnswer: popularne
+  pointsQuarter: 2
 }
 READING_QUESTION {
-  questionId: "B1-2019-rq5-6"
-  passageRef: "B1-2019-read-5"
+  questionId: B1-2019-rq5-6
+  passageRef: B1-2019-read-5
   questionType: fill_gap
-  questionText: "Luka 6"
-  correctAnswer: "wolnosc"
-  points: 1
+  questionText: "po wyjściu na ___"
+  options: "pojawiło się|wysokie|nowych|zorganizować|mieszkańców|książkę|młodzieży|wolność|przyłączyło się|popularne"
+  correctAnswer: "wolność"
+  pointsQuarter: 2
 }
 READING_QUESTION {
-  questionId: "B1-2019-rq5-7"
-  passageRef: "B1-2019-read-5"
+  questionId: B1-2019-rq5-7
+  passageRef: B1-2019-read-5
   questionType: fill_gap
-  questionText: "Luka 7"
-  correctAnswer: "mlodziezy"
-  points: 1
+  questionText: "dajemy szansę nie tylko ___"
+  options: "pojawiło się|wysokie|nowych|zorganizować|mieszkańców|książkę|młodzieży|wolność|przyłączyło się|popularne"
+  correctAnswer: "młodzieży"
+  pointsQuarter: 2
 }
 READING_QUESTION {
-  questionId: "B1-2019-rq5-8"
-  passageRef: "B1-2019-read-5"
+  questionId: B1-2019-rq5-8
+  passageRef: B1-2019-read-5
   questionType: fill_gap
-  questionText: "Luka 8"
-  correctAnswer: "ksiazke"
-  points: 1
+  questionText: "Mogą oni zwrócić ___"
+  options: "pojawiło się|wysokie|nowych|zorganizować|mieszkańców|książkę|młodzieży|wolność|przyłączyło się|popularne"
+  correctAnswer: "książkę"
+  pointsQuarter: 2
 }
 READING_QUESTION {
-  questionId: "B1-2019-rq5-9"
-  passageRef: "B1-2019-read-5"
+  questionId: B1-2019-rq5-9
+  passageRef: B1-2019-read-5
   questionType: fill_gap
-  questionText: "Luka 9"
-  correctAnswer: "przylaczulo sie"
-  points: 1
+  questionText: "Do akcji ___ kilka znanych osób"
+  options: "pojawiło się|wysokie|nowych|zorganizować|mieszkańców|książkę|młodzieży|wolność|przyłączyło się|popularne"
+  correctAnswer: "przyłączyło się"
+  pointsQuarter: 2
 }
 READING_QUESTION {
-  questionId: "B1-2019-rq5-10"
-  passageRef: "B1-2019-read-5"
+  questionId: B1-2019-rq5-10
+  passageRef: B1-2019-read-5
   questionType: fill_gap
-  questionText: "Luka 10"
-  correctAnswer: "pojawilo sie"
-  points: 1
+  questionText: "nazwisko, które ___ w kampanii"
+  options: "pojawiło się|wysokie|nowych|zorganizować|mieszkańców|książkę|młodzieży|wolność|przyłączyło się|popularne"
+  correctAnswer: "pojawiło się"
+  pointsQuarter: 2
 }

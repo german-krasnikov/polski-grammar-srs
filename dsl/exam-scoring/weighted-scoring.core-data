@@ -1,0 +1,23 @@
+DSL 1
+# Reading weighted full/zero cases independent of the Kotlin scorer.
+WEIGHTED_SCORING_CASE {
+  id: reading-half-full
+  answer: zna
+  expected: zna
+  maximumQuarter: 2
+  earnedQuarter: 2
+}
+WEIGHTED_SCORING_CASE {
+  id: reading-half-zero
+  answer: ""
+  expected: zna
+  maximumQuarter: 2
+  earnedQuarter: 0
+}
+WEIGHTED_SCORING_CASE {
+  id: reading-whole-full
+  answer: "kościołów"
+  expected: "kościołów"
+  maximumQuarter: 4
+  earnedQuarter: 4
+}

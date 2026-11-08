@@ -346,7 +346,7 @@ private class TrainingDomRenderer {
     // path every other route always has.
     private var matrixPrewarmScheduled = false
 
-    fun close() { navigation?.close(); navigation = null; vocabulary.close() }
+    fun close() { navigation?.close(); navigation = null; vocabulary.close(); exam.close() }
 
     /** UX4-14: delegates to the Vocabulary controller for the shared keydown handler. */
     fun rateVocabularyIfRevealed(rating: Rating, refresh: () -> Unit) = vocabulary.rateCurrentIfRevealed(rating, refresh)
@@ -442,6 +442,7 @@ private class TrainingDomRenderer {
             // A cross-tab storage write must not replay a Vocabulary render callback captured for a
             // route this host has since navigated away from.
             if (route != WebRoute.Vocabulary) vocabulary.deactivate()
+            if (route != WebRoute.Exam) exam.close()
             when (route) {
                 WebRoute.Training -> renderTraining(root, content, state, preferences.value.swipeRatingEnabled, enteringChainComplete, justRevealed, justShowedReference, dispatch)
                 WebRoute.Vocabulary -> vocabulary.render(node("main", "vocabulary-page").also(content::appendChild), root, preferences.value.swipeRatingEnabled) {

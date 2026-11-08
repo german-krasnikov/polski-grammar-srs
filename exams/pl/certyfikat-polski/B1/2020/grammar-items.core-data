@@ -1,89 +1,478 @@
 DSL 1
+# Arkusz B1/2020, pp. 16–20; answers from klucz.pdf pp. 5–6.
+# Every ordinary item earns 2 quarter-points; task VI earns 4.
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2020-g1"
-  testRef: "certyfikat-polski-B1-2020-grammar-2"
-  questionType: fill_gap
-  context: "Zadanie II, pytanie 1"
-  correctAnswer: "Wyraz zbędny"
-  points: 1
+  itemId: certyfikat-polski-B1-2020-grammar-1-1
+  testRef: certyfikat-polski-B1-2020-grammar-1
+  questionType: choose_form
+  context: "W szkole czytamy wiele […]."
+  options: "książki|książek|książkach"
+  correctAnswer: "książek"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2020-g2"
-  testRef: "certyfikat-polski-B1-2020-grammar-2"
-  questionType: fill_gap
-  context: "Zadanie II, pytanie 2"
-  correctAnswer: "ani"
-  points: 1
+  itemId: certyfikat-polski-B1-2020-grammar-1-2
+  testRef: certyfikat-polski-B1-2020-grammar-1
+  questionType: choose_form
+  context: "Czy wszystkie podobają się […] tak samo?"
+  options: "nam|nas|nami"
+  correctAnswer: nam
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2020-g3"
-  testRef: "certyfikat-polski-B1-2020-grammar-4"
-  questionType: fill_gap
-  context: "Zadanie IV, pytanie 3"
-  correctAnswer: "TEST PRZYKŁADOWY"
-  points: 1
+  itemId: certyfikat-polski-B1-2020-grammar-1-3
+  testRef: certyfikat-polski-B1-2020-grammar-1
+  questionType: choose_form
+  context: "Poprosiliśmy […] ludzi, żeby opisali lektury."
+  options: "młodzi|młodymi|młodych"
+  correctAnswer: "młodych"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2020-g4"
-  testRef: "certyfikat-polski-B1-2020-grammar-4"
-  questionType: fill_gap
-  context: "Zadanie IV, pytanie 4"
-  correctAnswer: "POZIOM B"
-  points: 1
+  itemId: certyfikat-polski-B1-2020-grammar-1-4
+  testRef: certyfikat-polski-B1-2020-grammar-1
+  questionType: choose_form
+  context: "Mateusz zna opinie […] o różnych lekturach."
+  options: "koledzy|kolegom|kolegów"
+  correctAnswer: "kolegów"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2020-g5"
-  testRef: "certyfikat-polski-B1-2020-grammar-4"
-  questionType: fill_gap
-  context: "Zadanie IV, pytanie 5"
-  correctAnswer: "TRANSKRYPCJE I KLUCZ DO ZADAŃ"
-  points: 1
+  itemId: certyfikat-polski-B1-2020-grammar-1-5
+  testRef: certyfikat-polski-B1-2020-grammar-1
+  questionType: choose_form
+  context: "Przeczytał już […] najtrudniejszą."
+  options: "tej|te|tę"
+  correctAnswer: "tę"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2020-g6"
-  testRef: "certyfikat-polski-B1-2020-grammar-6"
-  questionType: fill_gap
-  context: "Zadanie VI, pytanie 6"
-  correctAnswer: "Należy uznać wszystkie inne poprawne rozwiązania zgodne z poleceniem"
-  points: 1
+  itemId: certyfikat-polski-B1-2020-grammar-1-6
+  testRef: certyfikat-polski-B1-2020-grammar-1
+  questionType: choose_form
+  context: "Historia w Krzyżakach jest dosyć […]."
+  options: "ciekawą|ciekawa|ciekawej"
+  correctAnswer: ciekawa
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2020-g7"
-  testRef: "certyfikat-polski-B1-2020-grammar-8"
-  questionType: fill_gap
-  context: "Zadanie VIII, pytanie 7"
-  correctAnswer: "Wyraz zbędny"
-  points: 1
+  itemId: certyfikat-polski-B1-2020-grammar-1-7
+  testRef: certyfikat-polski-B1-2020-grammar-1
+  questionType: choose_form
+  context: "Ale napisana trudnym […]."
+  options: "językiem|języka|języku"
+  correctAnswer: "językiem"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2020-g8"
-  testRef: "certyfikat-polski-B1-2020-grammar-8"
-  questionType: fill_gap
-  context: "Zadanie VIII, pytanie 8"
-  correctAnswer: "z"
-  points: 1
+  itemId: certyfikat-polski-B1-2020-grammar-1-8
+  testRef: certyfikat-polski-B1-2020-grammar-1
+  questionType: choose_form
+  context: "Krzyżaków czytałem razem z […]."
+  options: "rodzicach|rodzicami|rodziców"
+  correctAnswer: rodzicami
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2020-g9"
-  testRef: "certyfikat-polski-B1-2020-grammar-8"
-  questionType: fill_gap
-  context: "Zadanie VIII, pytanie 9"
-  correctAnswer: "TEST PRZYKŁADOWY"
-  points: 1
+  itemId: certyfikat-polski-B1-2020-grammar-1-9
+  testRef: certyfikat-polski-B1-2020-grammar-1
+  questionType: choose_form
+  context: "Pytałem, co znaczą […] słowa."
+  options: "dawni|dawne|dawnymi"
+  correctAnswer: dawne
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2020-g10"
-  testRef: "certyfikat-polski-B1-2020-grammar-8"
-  questionType: fill_gap
-  context: "Zadanie VIII, pytanie 10"
-  correctAnswer: "POZIOM B"
-  points: 1
+  itemId: certyfikat-polski-B1-2020-grammar-1-10
+  testRef: certyfikat-polski-B1-2020-grammar-1
+  questionType: choose_form
+  context: "Po kilku […] wiedziałem, że to książka dla mnie."
+  options: "stron|stronach|strony"
+  correctAnswer: stronach
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2020-g11"
-  testRef: "certyfikat-polski-B1-2020-grammar-8"
+  itemId: certyfikat-polski-B1-2020-grammar-2-1
+  testRef: certyfikat-polski-B1-2020-grammar-2
   questionType: fill_gap
-  context: "Zadanie VIII, pytanie 11"
-  correctAnswer: "TRANSKRYPCJE I KLUCZ DO ZADAŃ"
-  points: 1
+  context: "Podczas koncertów studenci używają języka migowego, […] języka osób niesłyszących."
+  options: "że|oraz|ale|chociaż|czyli|ani|więc"
+  correctAnswer: czyli
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B1-2020-grammar-2-2
+  testRef: certyfikat-polski-B1-2020-grammar-2
+  questionType: fill_gap
+  context: "W chórze występują osoby po kursach tego języka […] tacy, którzy go nie znają."
+  options: "że|oraz|ale|chociaż|czyli|ani|więc"
+  correctAnswer: oraz
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B1-2020-grammar-2-3
+  testRef: certyfikat-polski-B1-2020-grammar-2
+  questionType: fill_gap
+  context: "Nie znają języka migowego, […] bardzo chcą się go nauczyć."
+  options: "że|oraz|ale|chociaż|czyli|ani|więc"
+  correctAnswer: ale
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B1-2020-grammar-2-4
+  testRef: certyfikat-polski-B1-2020-grammar-2
+  questionType: fill_gap
+  context: "Utwory są tak ciekawe, […] wszyscy mogą się czegoś dowiedzieć."
+  options: "że|oraz|ale|chociaż|czyli|ani|więc"
+  correctAnswer: "że"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B1-2020-grammar-2-5
+  testRef: certyfikat-polski-B1-2020-grammar-2
+  questionType: fill_gap
+  context: "Zainteresowanie chórem rośnie, […] spotkania odbywają się coraz częściej."
+  options: "że|oraz|ale|chociaż|czyli|ani|więc"
+  correctAnswer: "więc"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B1-2020-grammar-3-1
+  testRef: certyfikat-polski-B1-2020-grammar-3
+  questionType: choose_form
+  context: "Starzy nie chcą być […]."
+  options: "gorszymi|gorsi|najgorsze"
+  correctAnswer: gorsi
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B1-2020-grammar-3-2
+  testRef: certyfikat-polski-B1-2020-grammar-3
+  questionType: choose_form
+  context: "Emeryci mają […] obowiązków."
+  options: "mniej|mniejszych|najmniejsze"
+  correctAnswer: mniej
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B1-2020-grammar-3-3
+  testRef: certyfikat-polski-B1-2020-grammar-3
+  questionType: choose_form
+  context: "[…] wybierane przez seniorów formy aktywności to treningi pamięci, podróżowanie i sport."
+  options: "Częste|Najczęstsze|Najczęściej"
+  correctAnswer: "Najczęściej"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B1-2020-grammar-3-4
+  testRef: certyfikat-polski-B1-2020-grammar-3
+  questionType: choose_form
+  context: "Dzisiaj jest […] niż kiedyś rozwijać zainteresowania."
+  options: "łatwo|łatwiej|łatwiejszy"
+  correctAnswer: "łatwiej"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B1-2020-grammar-3-5
+  testRef: certyfikat-polski-B1-2020-grammar-3
+  questionType: choose_form
+  context: "Pan Jurek jest w tym […] od swojego wnuka."
+  options: "lepiej|najlepszy|lepszy"
+  correctAnswer: lepszy
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B1-2020-grammar-4-1
+  testRef: certyfikat-polski-B1-2020-grammar-4
+  questionType: fill_gap
+  context: "Festiwal był okazją do rozmowy o tym, co […] (dawać) nam poczucie komfortu."
+  correctAnswer: daje
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B1-2020-grammar-4-2
+  testRef: certyfikat-polski-B1-2020-grammar-4
+  questionType: fill_gap
+  context: "W jaki sposób na potrzeby człowieka […] (odpowiadać) artyści?"
+  correctAnswer: "odpowiadają"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B1-2020-grammar-4-3
+  testRef: certyfikat-polski-B1-2020-grammar-4
+  questionType: fill_gap
+  context: "[…] (mówić) Michał Piernikowski, dyrektor."
+  correctAnswer: "mówi"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B1-2020-grammar-4-4
+  testRef: certyfikat-polski-B1-2020-grammar-4
+  questionType: fill_gap
+  context: "Jak […] (my – pracować) za kilkanaście lat?"
+  correctAnswer: "będziemy pracowali"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B1-2020-grammar-4-5
+  testRef: certyfikat-polski-B1-2020-grammar-4
+  questionType: fill_gap
+  context: "Jak nasze miejsca pracy się […] (zmienić) za jakiś czas?"
+  correctAnswer: "zmienią"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B1-2020-grammar-4-6
+  testRef: certyfikat-polski-B1-2020-grammar-4
+  questionType: fill_gap
+  context: "Katarzyna Dubik z biura organizacyjnego […] (informować)."
+  correctAnswer: informuje
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B1-2020-grammar-4-7
+  testRef: certyfikat-polski-B1-2020-grammar-4
+  questionType: fill_gap
+  context: "Do Łodzi […] (przyjechać) najważniejsi projektanci."
+  correctAnswer: "przyjadą"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B1-2020-grammar-4-8
+  testRef: certyfikat-polski-B1-2020-grammar-4
+  questionType: fill_gap
+  context: "Jutro […] (my – mieć) ogromną przyjemność gościć artystów."
+  correctAnswer: "będziemy mieli"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B1-2020-grammar-4-9
+  testRef: certyfikat-polski-B1-2020-grammar-4
+  questionType: fill_gap
+  context: "Artyści, którzy […] (poprowadzić) warsztaty dla dzieci."
+  correctAnswer: "poprowadzą"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B1-2020-grammar-4-10
+  testRef: certyfikat-polski-B1-2020-grammar-4
+  questionType: fill_gap
+  context: "Już wkrótce wszyscy […] (móc) oglądać wystawy."
+  correctAnswer: "będą mogli"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B1-2020-grammar-5-1
+  testRef: certyfikat-polski-B1-2020-grammar-5
+  questionType: transform
+  context: "Michał próbował podzielić jabłko widelcem. – […] Michał próbował podzielić jabłko? – Widelcem."
+  correctAnswer: Czym
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B1-2020-grammar-5-2
+  testRef: certyfikat-polski-B1-2020-grammar-5
+  questionType: transform
+  context: "Nasi koledzy czekali dwa tygodnie na wyniki egzaminu. – […] wasi koledzy czekali na wyniki egzaminu? – Dwa tygodnie."
+  correctAnswer: "Jak długo"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B1-2020-grammar-5-3
+  testRef: certyfikat-polski-B1-2020-grammar-5
+  questionType: transform
+  context: "Znalazłem to ogłoszenie w sklepie. – […] znalazłeś to ogłoszenie? – W sklepie."
+  correctAnswer: Gdzie
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B1-2020-grammar-5-4
+  testRef: certyfikat-polski-B1-2020-grammar-5
+  questionType: transform
+  context: "Matka pomogła Piotrowi znaleźć pracę. – […] matka pomogła znaleźć pracę? – Piotrowi."
+  correctAnswer: Komu
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B1-2020-grammar-5-5
+  testRef: certyfikat-polski-B1-2020-grammar-5
+  questionType: transform
+  context: "Anna czekała na schodach na koleżankę. – […] Anna czekała na schodach? – Na koleżankę."
+  correctAnswer: "Na kogo"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B1-2020-grammar-6-1
+  testRef: certyfikat-polski-B1-2020-grammar-6
+  questionType: transform
+  context: "Joanna przyglądała się małemu kotu. Użyj: obserwowała."
+  correctAnswer: "Joanna obserwowała małego kota."
+  pointsQuarter: 4
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B1-2020-grammar-6-2
+  testRef: certyfikat-polski-B1-2020-grammar-6
+  questionType: transform
+  context: "W twoim pokoju zawsze jest bałagan. Użyj: porządku."
+  correctAnswer: "W twoim pokoju nigdy nie ma porządku."
+  pointsQuarter: 4
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B1-2020-grammar-6-3
+  testRef: certyfikat-polski-B1-2020-grammar-6
+  questionType: transform
+  context: "Marta bez przerwy wspomina ten koncert. Użyj: opowiada."
+  correctAnswer: "Marta bez przerwy opowiada o tym koncercie."
+  pointsQuarter: 4
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B1-2020-grammar-6-4
+  testRef: certyfikat-polski-B1-2020-grammar-6
+  questionType: transform
+  context: "Wczoraj Michał był w teatrze pierwszy raz w życiu. Użyj: poszedł."
+  correctAnswer: "Wczoraj Michał poszedł do teatru pierwszy raz w życiu."
+  pointsQuarter: 4
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B1-2020-grammar-6-5
+  testRef: certyfikat-polski-B1-2020-grammar-6
+  questionType: transform
+  context: "Czy znasz adres tego sklepu? Użyj: wiesz."
+  correctAnswer: "Czy wiesz, jaki jest adres tego sklepu?"
+  pointsQuarter: 4
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B1-2020-grammar-7-1
+  testRef: certyfikat-polski-B1-2020-grammar-7
+  questionType: choose_form
+  context: "[…] czy wtedy ty i twoja żona od razu kupilibyście wszystko?"
+  options: "Powiedziałbyś|Mówcie|Powiedz"
+  correctAnswer: Powiedz
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B1-2020-grammar-7-2
+  testRef: certyfikat-polski-B1-2020-grammar-7
+  questionType: choose_form
+  context: "Czy wtedy ty i twoja żona od razu […] wszystko, o czym marzycie?"
+  options: "kupujcie|kupilibyście|kupiliby"
+  correctAnswer: "kupilibyście"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B1-2020-grammar-7-3
+  testRef: certyfikat-polski-B1-2020-grammar-7
+  questionType: choose_form
+  context: "Nie wiem, […] się dłużej nad tym zastanowić."
+  options: "musiałem|musiałbym|musiałybyśmy"
+  correctAnswer: "musiałbym"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B1-2020-grammar-7-4
+  testRef: certyfikat-polski-B1-2020-grammar-7
+  questionType: choose_form
+  context: "Często byśmy […] innym."
+  options: "pomogli|pomagaliśmy|pomagali"
+  correctAnswer: pomagali
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B1-2020-grammar-7-5
+  testRef: certyfikat-polski-B1-2020-grammar-7
+  questionType: choose_form
+  context: "Moja córka pewnie […] kupić jedzenie dla zwierząt."
+  options: "proponowałabym|proponuje|zaproponowałaby"
+  correctAnswer: "zaproponowałaby"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B1-2020-grammar-7-6
+  testRef: certyfikat-polski-B1-2020-grammar-7
+  questionType: choose_form
+  context: "Syn by […] dać pieniądze na nowe ubrania."
+  options: "wolałby|wolał|woli"
+  correctAnswer: "wolał"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B1-2020-grammar-7-7
+  testRef: certyfikat-polski-B1-2020-grammar-7
+  questionType: choose_form
+  context: "Proszę was, […] o naszym dziadku."
+  options: "pamiętajcie|pamiętalibyśmy|zapamiętajcie"
+  correctAnswer: "pamiętajcie"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B1-2020-grammar-7-8
+  testRef: certyfikat-polski-B1-2020-grammar-7
+  questionType: choose_form
+  context: "[…] w nim wygodnie resztę życia."
+  options: "Niech spędzi|Spędzałby|Spędziłaby"
+  correctAnswer: "Niech spędzi"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B1-2020-grammar-7-9
+  testRef: certyfikat-polski-B1-2020-grammar-7
+  questionType: choose_form
+  context: "Właśnie tam […] w pierwszej kolejności."
+  options: "pojechalibyśmy|jedźmy|pojechaliby"
+  correctAnswer: "pojechalibyśmy"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B1-2020-grammar-7-10
+  testRef: certyfikat-polski-B1-2020-grammar-7
+  questionType: choose_form
+  context: "Niech każdy z was […] swój pomysł na kartce."
+  options: "piszcie|napiszcie|napisze"
+  correctAnswer: napisze
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B1-2020-grammar-8-1
+  testRef: certyfikat-polski-B1-2020-grammar-8
+  questionType: fill_gap
+  context: "Kilka miesięcy […] wakacjami szukali domku."
+  options: "do|w|nad|przed|z|na"
+  correctAnswer: przed
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B1-2020-grammar-8-2
+  testRef: certyfikat-polski-B1-2020-grammar-8
+  questionType: fill_gap
+  context: "Szukali […] internecie domku."
+  options: "do|w|nad|przed|z|na"
+  correctAnswer: w
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B1-2020-grammar-8-3
+  testRef: certyfikat-polski-B1-2020-grammar-8
+  questionType: fill_gap
+  context: "Domek […] polskim morzem."
+  options: "do|w|nad|przed|z|na"
+  correctAnswer: nad
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B1-2020-grammar-8-4
+  testRef: certyfikat-polski-B1-2020-grammar-8
+  questionType: fill_gap
+  context: "Chcieli wynająć go […] trzy tygodnie."
+  options: "do|w|nad|przed|z|na"
+  correctAnswer: na
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B1-2020-grammar-8-5
+  testRef: certyfikat-polski-B1-2020-grammar-8
+  questionType: fill_gap
+  context: "Zdecydowali się na wyjazd […] Grecji."
+  options: "do|w|nad|przed|z|na"
+  correctAnswer: do
+  pointsQuarter: 2
 }

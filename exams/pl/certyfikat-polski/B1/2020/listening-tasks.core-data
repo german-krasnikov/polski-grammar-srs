@@ -1,46 +1,48 @@
 DSL 1
+# Arkusz B1/2020 pp. 3–7 and klucz.pdf pp. 1–3.
+# segmentStartMs=segmentEndMs=0 means unmarked; not ready for playback.
 LISTENING_TASK {
-  taskId: "certyfikat-polski-B1-2020-listen-1"
-  examRef: "certyfikat-polski-B1-2020"
+  taskId: certyfikat-polski-B1-2020-listen-1
+  examRef: certyfikat-polski-B1-2020
   taskNumber: 1
-  audioUrl: "exam-audio/B1-2020.mp3"
+  audioUrl: exam-audio/B1-2020.mp3
   segmentStartMs: 0
   segmentEndMs: 0
-  instruction: "Zadanie 1"
+  instruction: "Proszę uważnie słuchać nagrania i zaznaczyć właściwe odpowiedzi. Nagranie zostanie odtworzone tylko jeden raz."
 }
 LISTENING_TASK {
-  taskId: "certyfikat-polski-B1-2020-listen-2"
-  examRef: "certyfikat-polski-B1-2020"
+  taskId: certyfikat-polski-B1-2020-listen-2
+  examRef: certyfikat-polski-B1-2020
   taskNumber: 2
-  audioUrl: "exam-audio/B1-2020.mp3"
+  audioUrl: exam-audio/B1-2020.mp3
   segmentStartMs: 0
   segmentEndMs: 0
-  instruction: "Zadanie 2"
+  instruction: "Proszę wysłuchać dialogów i zaznaczyć właściwe odpowiedzi. Nagranie zostanie odtworzone dwa razy."
 }
 LISTENING_TASK {
-  taskId: "certyfikat-polski-B1-2020-listen-3"
-  examRef: "certyfikat-polski-B1-2020"
+  taskId: certyfikat-polski-B1-2020-listen-3
+  examRef: certyfikat-polski-B1-2020
   taskNumber: 3
-  audioUrl: "exam-audio/B1-2020.mp3"
+  audioUrl: exam-audio/B1-2020.mp3
   segmentStartMs: 0
   segmentEndMs: 0
-  instruction: "Zadanie 3"
+  instruction: "Dziennikarz rozmawia z Joanną Kamińską, współwłaścicielką międzynarodowej firmy. Zaznaczyć TAK, gdy zdanie jest zgodne z tekstem, lub NIE. Nagranie zostanie odtworzone dwa razy."
 }
 LISTENING_TASK {
-  taskId: "certyfikat-polski-B1-2020-listen-4"
-  examRef: "certyfikat-polski-B1-2020"
+  taskId: certyfikat-polski-B1-2020-listen-4
+  examRef: certyfikat-polski-B1-2020
   taskNumber: 4
-  audioUrl: "exam-audio/B1-2020.mp3"
+  audioUrl: exam-audio/B1-2020.mp3
   segmentStartMs: 0
   segmentEndMs: 0
-  instruction: "Zadanie 4"
+  instruction: "Wypowiedzi osób (1–4) o życiu w dużych miastach: dopasować do opinii A–E. Jedna osoba może wypowiadać więcej niż jedną opinię. Nagranie zostanie odtworzone dwa razy."
 }
 LISTENING_TASK {
-  taskId: "certyfikat-polski-B1-2020-listen-5"
-  examRef: "certyfikat-polski-B1-2020"
+  taskId: certyfikat-polski-B1-2020-listen-5
+  examRef: certyfikat-polski-B1-2020
   taskNumber: 5
-  audioUrl: "exam-audio/B1-2020.mp3"
+  audioUrl: exam-audio/B1-2020.mp3
   segmentStartMs: 0
   segmentEndMs: 0
-  instruction: "Zadanie 5"
+  instruction: "Popularne wśród Polaków 100 lat temu dyscypliny sportowe: połączyć informacje z kolumn I i II. A: bez specjalnego stroju; B: polskie sukcesy; C: równie popularny co narty; D: sport i turystyka; E: stosunkowo niedrogi; F: moda sportowa. Nagranie zostanie odtworzone dwa razy."
 }

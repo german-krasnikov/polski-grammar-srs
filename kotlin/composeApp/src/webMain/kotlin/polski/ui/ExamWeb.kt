@@ -8,13 +8,18 @@ import polski.presentation.UiCopy
 
 internal data class ExamEntry(
     val id: String, val label: String, val level: String, val year: String,
-    val grammarCount: Int, val readingCount: Int, val listeningCount: Int, val writingCount: Int,
-)
+) {
+    val grammarCount: Int get() = examGrammarData[id]?.sumOf { it.items.size } ?: 0
+    val readingCount: Int get() = examReadingData[id]?.questions?.size ?: 0
+    val listeningCount: Int get() = examListeningData[id]?.tasks?.sumOf { it.questions.size } ?: 0
+    val writingCount: Int get() = examWritingData[id]?.tasks?.size ?: 0
+}
 
 private val exams = listOf(
-    ExamEntry("b1-sample", "B1 Przykładowy", "B1", "sample", 20, 0, 0, 1),
-    ExamEntry("b1-2019", "B1 Certyfikat 2019", "B1", "2019", 45, 13, 15, 2),
-    ExamEntry("b2-2019", "B2 Certyfikat 2019", "B2", "2019", 75, 15, 12, 1),
+    ExamEntry("b1-sample", "B1 Przykładowy", "B1", "sample"),
+    ExamEntry("b1-2017", "B1 Certyfikat 2017", "B1", "2017"),
+    ExamEntry("b1-2019", "B1 Certyfikat 2019", "B1", "2019"),
+    ExamEntry("b2-2019", "B2 Certyfikat 2019", "B2", "2019"),
 )
 
 internal enum class ExamScreen { List, Modules, Grammar, Reading, Listening, Writing }
@@ -27,6 +32,12 @@ internal class ExamWebController {
     private var listeningCtrl: ExamListeningController? = null
     private var writingCtrl: ExamWritingController? = null
     private var root: HTMLElement? = null
+
+    fun close() {
+        listeningCtrl?.close()
+        listeningCtrl = null
+        screen = ExamScreen.List
+    }
 
     fun render(container: HTMLElement) { root = container; redraw() }
 
@@ -75,7 +86,8 @@ internal class ExamWebController {
         c.appendChild(node("h2", "exam-title", exam.label))
         c.appendChild(node("div", "exam-module-list").apply {
             moduleRow(this, "I. Rozumienie ze słuchu", exam.listeningCount, exam.listeningCount > 0) {
-                listeningCtrl = ExamListeningController(exam.id) { screen = ExamScreen.Modules; redraw() }
+                close()
+                listeningCtrl = ExamListeningController(exam.id) { close(); screen = ExamScreen.Modules; redraw() }
                 screen = ExamScreen.Listening; redraw()
             }
             moduleRow(this, "II. Rozumienie tekstów pisanych", exam.readingCount, exam.readingCount > 0) {

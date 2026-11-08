@@ -1,0 +1,5 @@
+TEST "missing exam recording is reported" PROFILE playmode
+  open exam="B1 Certyfikat 2019" module="listening"
+  waitMediaError
+  ASSERT media.unavailable == true
+END

@@ -1,0 +1,38 @@
+DSL 1
+# Independent full / partial / wrong / empty expectations for official quarter-point scoring.
+QUARTER_SCORING_CASE {
+  id: full
+  fullAnswer: "z którym"
+  partialAnswer: "z kim"
+  partialQuarter: 1
+  maximumQuarter: 2
+  answer: "z którym"
+  expectedQuarter: 2
+}
+QUARTER_SCORING_CASE {
+  id: partial
+  fullAnswer: "z którym"
+  partialAnswer: "z kim"
+  partialQuarter: 1
+  maximumQuarter: 2
+  answer: "z kim"
+  expectedQuarter: 1
+}
+QUARTER_SCORING_CASE {
+  id: wrong
+  fullAnswer: "z którym"
+  partialAnswer: "z kim"
+  partialQuarter: 1
+  maximumQuarter: 2
+  answer: "z czego"
+  expectedQuarter: 0
+}
+QUARTER_SCORING_CASE {
+  id: empty
+  fullAnswer: "z którym"
+  partialAnswer: "z kim"
+  partialQuarter: 1
+  maximumQuarter: 2
+  answer: ""
+  expectedQuarter: 0
+}

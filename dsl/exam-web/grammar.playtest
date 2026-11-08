@@ -1,0 +1,18 @@
+TEST "B1 exam typed answer and review" PROFILE playmode
+  open exam="B1 Certyfikat 2019" module="grammar"
+  advance count=10
+  enter text="żółć"
+  ASSERT exam.input == "żółć"
+  ASSERT exam.focused == true
+  press key="ArrowLeft"
+  enter text="ą"
+  ASSERT exam.input == "żółąć"
+  ASSERT exam.caret == 4
+  next
+  back
+  ASSERT exam.input == "żółąć"
+  advance count=34
+  submit
+  ASSERT exam.score == "0%"
+  ASSERT exam.reviewAnswer == "żółąć"
+END

@@ -1,0 +1,8 @@
+TEST "B1 2017 half point stays exact" PROFILE playmode
+  open exam="B1 Certyfikat 2017" module="grammar"
+  chooseGrammar answer="dobrego teatru"
+  ASSERT exam.firstSelected == "B. dobrego teatru"
+  advance count=49
+  submit
+  ASSERT exam.scoreDetail == "0,5 / 30 баллов"
+END

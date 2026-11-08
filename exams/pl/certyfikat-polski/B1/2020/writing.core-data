@@ -1,10 +1,62 @@
 DSL 1
+# Arkusz B1/2020, p. 22: choose exactly one set and complete both tasks.
 WRITING_TASK {
-  taskId: "certyfikat-polski-B1-2020-writing-1"
-  examRef: "certyfikat-polski-B1-2020"
+  taskId: certyfikat-polski-B1-2020-writing-I-a
+  examRef: certyfikat-polski-B1-2020
   taskNumber: 1
-  instruction: "Zestaw I"
-  promptText: "Prosze wykonac zadanie pisemne zgodnie z poleceniem."
-  wordLimit: 200
-  genre: letter
+  setId: I
+  instruction: "Zestaw I, zadanie a. 25 słów. Ogłoszenie: Drodzy Sąsiedzi! Zamienię mieszkanie dwupokojowe na większe w tym samym bloku. Tel. 506 34 34 51. Anna."
+  promptText: "Jest Pani zainteresowana / Pan zainteresowany tym ogłoszeniem. Proszę napisać SMS do pani Anny, zapytać o szczegóły (cena, piętro) i umówić się na spotkanie."
+  wordLimit: 25
+  genre: sms
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B1-2020-writing-I-b
+  examRef: certyfikat-polski-B1-2020
+  taskNumber: 2
+  setId: I
+  instruction: "Zestaw I, zadanie b. 175 słów."
+  promptText: "Proszę napisać sprawozdanie z uroczystości rodzinnej (np. z wesela siostry lub brata, z urodzin babci), w której ostatnio Pani uczestniczyła / Pan uczestniczył."
+  wordLimit: 175
+  genre: report
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B1-2020-writing-II-a
+  examRef: certyfikat-polski-B1-2020
+  taskNumber: 1
+  setId: II
+  instruction: "Zestaw II, zadanie a. 40 słów."
+  promptText: "Spędziła Pani / Spędził Pan wakacje w małym hotelu nad morzem. Proszę napisać opinię o tym miejscu, którą zamieści Pani / Pan na polskim portalu turystycznym „(Nie)Polecamy”."
+  wordLimit: 40
+  genre: opinion
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B1-2020-writing-II-b
+  examRef: certyfikat-polski-B1-2020
+  taskNumber: 2
+  setId: II
+  instruction: "Zestaw II, zadanie b. 160 słów."
+  promptText: "Proszę napisać esej (wypracowanie szkolne) na temat: „To jest praca moich marzeń”."
+  wordLimit: 160
+  genre: essay
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B1-2020-writing-III-a
+  examRef: certyfikat-polski-B1-2020
+  taskNumber: 1
+  setId: III
+  instruction: "Zestaw III, zadanie a. 25 słów."
+  promptText: "Proszę napisać życzenia z okazji świąt Bożego Narodzenia dla swojej dawnej nauczycielki / swojego dawnego nauczyciela języka polskiego."
+  wordLimit: 25
+  genre: wishes
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B1-2020-writing-III-b
+  examRef: certyfikat-polski-B1-2020
+  taskNumber: 2
+  setId: III
+  instruction: "Zestaw III, zadanie b. 175 słów."
+  promptText: "Proszę napisać opowiadanie pod tytułem „Przygoda na lotnisku”."
+  wordLimit: 175
+  genre: story
 }

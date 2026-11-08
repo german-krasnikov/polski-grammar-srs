@@ -1,0 +1,13 @@
+TEST "B1 2017 passport recording stays live beyond 40 seconds" PROFILE playmode
+  open exam="B1 Certyfikat 2017" module="listening"
+  advanceTask count=4
+  waitTaskSeek start=1116
+  ASSERT media.taskLabel == "Задание 5 / 5"
+  ASSERT media.durationLabel == "4:39"
+  play
+  ASSERT media.position > 1115
+  watchProgress seconds=42 TIMEOUT 60s
+  ASSERT media.playing == true
+  ASSERT media.position > 1156
+  ASSERT media.elapsed > 40
+END

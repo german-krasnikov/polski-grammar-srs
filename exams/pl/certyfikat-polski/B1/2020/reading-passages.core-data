@@ -1,31 +1,42 @@
 DSL 1
+# Arkusz B1/2020, pp. 9–14; question keys from klucz.pdf p. 4.
 READING_PASSAGE {
-  passageId: "certyfikat-polski-B1-2020-read-1"
-  examRef: "certyfikat-polski-B1-2020"
+  passageId: certyfikat-polski-B1-2020-read-1
+  examRef: certyfikat-polski-B1-2020
   taskNumber: 1
-  instruction: "Zadanie 1"
+  title: "Fragmenty tekstów informacyjnych"
+  instruction: "Proszę przeczytać fragmenty tekstów i – zgodnie z przykładem – zaznaczyć właściwą odpowiedź."
+  text: "1. Pomysł wprowadzenia opłat za wjazd do Wenecji pojawił się już dawno. Od tego roku turyści – w zależności od terminu będą musieli zapłacić od 3 do 10 euro. Władze Wenecji planują zniżki dla osób, które przyjadą na imprezy organizowane przez miasto.\n\n2. Konkurs teatralny „Więcej niż teatr!” jest zmienioną wersją zeszłorocznego przeglądu teatrów amatorskich. W spektaklach występują aktorzy z całej Polski, zarówno amatorzy, jak i profesjonaliści. W tym roku obejrzymy 10 przedstawień na podstawie znanych tekstów literackich.\n\n3. Znany dom mody zaprezentował swoje nowe logo, przygotowane na potrzeby kampanii reklamującej modę męską na sezon jesień/zima 2020. Nowy znak wygląda, jakby był pisany przez dziecko, co – według niektórych – ma się łączyć z pozytywnymi emocjami.\n\n4. 6 na 10 rodziców w Europie mówi, że ma problemy ze skoncentrowaniem się na drodze w czasie, gdy ich dzieci źle zachowują się w samochodzie. Jeszcze bardziej może martwić sytuacja, że prawie co trzeci dorosły zauważa, że niegrzeczne dzieci w aucie mają negatywny wpływ na bezpieczeństwo jazdy.\n\n5. W tym roku bardzo dużo osób chciało wziąć udział w maratonie organizowanym w Łodzi 6 stycznia. Lista startowa Biegu Trzech Króli była zamknięta już 2 stycznia. Kilku zapisanych zawodników się nie pojawiło, więc nieliczne osoby mogły dołączyć do wyścigu w ostatniej chwili."
 }
 READING_PASSAGE {
-  passageId: "certyfikat-polski-B1-2020-read-2"
-  examRef: "certyfikat-polski-B1-2020"
+  passageId: certyfikat-polski-B1-2020-read-2
+  examRef: certyfikat-polski-B1-2020
   taskNumber: 2
-  instruction: "Zadanie 2"
+  title: "Świat według Kiepskich"
+  instruction: "Proszę przeczytać tekst, a następnie – jak w przykładzie – zaznaczyć TAK, gdy zdanie jest zgodne z tekstem, albo NIE, gdy nie jest zgodne."
+  text: "„Świat według Kiepskich” to serial komediowy, który od ponad 20 lat jest pokazywany w polskiej telewizji. Pierwszy odcinek miał premierę w 1999 roku i obejrzało go 6,5 mln widzów. Był to duży sukces, dlatego powstały kolejne odcinki „Kiepskich”, bo tak serial nazywany jest przez wielu Polaków. Do dzisiaj można zobaczyć ponad 560 odcinków – jest to jeden z najdłużej emitowanych seriali komediowych w Polsce.\n\nSerial pokazuje codzienne życie zwykłych ludzi, wykorzystuje prosty humor i zabawny język – prawdopodobnie dlatego cieszy się tak dużą popularnością wśród Polaków. Głównym bohaterem jest Ferdynand Kiepski, który nie może znaleźć pracy, bo nie ma wykształcenia. Halina, czyli żona Ferdynanda, jest pielęgniarką w szpitalu, natomiast sąsiad sprzedaje bieliznę na pobliskim targu.\n\nPoczątkowo „Świat według Kiepskich” był nagrywany w jednej z kamienic, jednak ciągłe chodzenie aktorów, reżyserów i operatorów po schodach przeszkadzało mieszkańcom i postanowiono przenieść nagrania do studia. Miejsce jest nowe, ale pewne rekwizyty są obecne w serialu od początku, na przykład różowy szlafrok Haliny można zobaczyć zarówno w pierwszych odcinkach, jak i w ostatnich.\n\nSerial ciągle się zmienia. Niektórzy bohaterowie odchodzą, a w ich miejsce pojawiają się inne postacie. Najnowsze odcinki można oglądać już nie tylko w telewizji, ale także w internecie."
 }
 READING_PASSAGE {
-  passageId: "certyfikat-polski-B1-2020-read-3"
-  examRef: "certyfikat-polski-B1-2020"
+  passageId: certyfikat-polski-B1-2020-read-3
+  examRef: certyfikat-polski-B1-2020
   taskNumber: 3
-  instruction: "Zadanie 3"
+  title: E-sport
+  instruction: "Proszę przeczytać tekst i – zgodnie z przykładem – dopasować usunięte z niego fragmenty (A–H)."
+  text: "Jeszcze kilkanaście lat temu, [C], trzeba było spotkać się z kolegami, pójść na pobliskie boisko, podzielić się na dwie drużyny i można było zaczynać. Dzisiaj coraz częściej zamiast biegania po boisku dzieci wybierają zabawę na komputerze. Grają z rodziną, kolegami, przyjaciółmi, ze znajomymi z całej Polski, [1]. Gry nie są już tylko rozrywką, [2]. Zawody w różnego rodzaju grach komputerowych, czyli turnieje e-sportowe, odbywają się już w wielu krajach, [3].\n\nPodczas ostatniej edycji mistrzostw e-sportowych w Katowicach można było wygrać nagrody warte milion dolarów. Widowiska te są tak bardzo popularne, [4]. Ponadto kiedyś można je było oglądać tylko w internecie, [5].\n\nZainteresowanie sportem elektronicznym (e-sportem) jest coraz większe. W jednej z polskich szkół powstała nawet klasa, [6]. Granie w gry jest bardzo częstym sposobem spędzania wolnego czasu, a w przyszłości prawdopodobnie będzie najpopularniejszą formą rozrywki.\n\nNajlepsi gracze poza nagrodami pieniężnymi zyskują także ogromną sławę. Ich zdjęcia umieszczane są na okładkach czasopism, a nawet w reklamach telewizyjnych. Stają się oni idolami nastolatków, [7].\n\nFragmenty do wyboru: A. natomiast teraz także w telewizji; B. ale powoli stają się pracą i źródłem dochodów; C. aby zagrać w piłkę nożną (przykład); D. a nawet z mieszkańcami innych kontynentów; E. w tym także w Polsce; F. którzy interesują się e-sportem; G. że oglądają je ludzie z całego świata; H. w której uczą się przyszli zawodnicy."
 }
 READING_PASSAGE {
-  passageId: "certyfikat-polski-B1-2020-read-4"
-  examRef: "certyfikat-polski-B1-2020"
+  passageId: certyfikat-polski-B1-2020-read-4
+  examRef: certyfikat-polski-B1-2020
   taskNumber: 4
-  instruction: "Zadanie 4"
+  title: "W Polsce ciągle coś się dzieje!"
+  instruction: "Proszę – zgodnie z przykładem – połączyć tytuły z kolumny I z fragmentami tekstów z kolumny II."
+  text: "A. Trzeba mieć ukończone 21 lat i średnie wykształcenie. Zarobki powinny być wysokie, szczególnie dla tych, którzy zdadzą dobrze egzaminy.\n\nB. Artysta jeszcze nigdy nie koncertował w naszym kraju. Inspiracją dla niego są rockowe i popowe przeboje.\n\nC. Restauracja „Nowa” ogłosiła zimową promocję. W niedziele (od grudnia do końca lutego) będzie można kupić niektóre dania o 50% taniej.\n\nD. Od 1 kwietnia będziemy musieli dzielić śmieci na więcej grup niż do tej pory. W niektórych miastach nowością będą obowiązkowe brązowe kosze na odpady BIO.\n\nE. Palenie w domowych piecach to jedna z przyczyn powstawania smogu, dlatego zimą częściej pojawiają się infekcje gardła, kaszel, astma.\n\nF. W ostatnich latach więcej płacimy za mięso, masło, jajka i czekoladę. Wzrost cen z roku na rok staje się bardziej odczuwalny.\n\nG. Od nowego roku ceny za wywiezienie śmieci będą wyższe, a w centrach nie będzie już koszy tylko jednego rodzaju. Tych, którzy nie będą segregować, czekają kary.\n\nH. Straż miejska wypisuje mandaty wszystkim zmotoryzowanym, którzy nie przestrzegają nowych zasad organizacji ruchu drogowego."
 }
 READING_PASSAGE {
-  passageId: "certyfikat-polski-B1-2020-read-5"
-  examRef: "certyfikat-polski-B1-2020"
+  passageId: certyfikat-polski-B1-2020-read-5
+  examRef: certyfikat-polski-B1-2020
   taskNumber: 5
-  instruction: "Zadanie 5"
+  title: "Festiwal Kolorów"
+  instruction: "Proszę – zgodnie z przykładem – podkreślić najlepszą spośród możliwości podanych w nawiasach."
+  text: "Kolorowe święto holi (pochodzi, wychodzi, przyjechało) z Indii. To pierwszy dzień wiosny, na ulicach można [1] radość. Ludzie są dla siebie bardziej serdeczni niż [2], śpiewają i tańczą. Wszyscy oblewają się wodą i obsypują różnobarwnymi proszkami zrobionymi z kwiatów. [3] dnia rano odbywa się karnawał kolorów. Uczestnicy [4] przyjaciół i rodzinę, żeby podzielić się radością.\n\nW Polsce także [5] to święto – nazywa się Festiwal Kolorów. Jednak nie ma wiele [6] z kulturą Indii. Z oryginalnego święta został tylko różnobarwny proszek. To ma być przede wszystkim dobra [7] i okazja do „kolorowania miasta”. Organizatorzy informują, że proszek nie jest szkodliwy dla zdrowia i łatwo go zmyć ze skóry. W tym roku dla uczestników przygotowano wiele dodatkowych [8]: koncerty zespołów muzycznych, taniec zumba, karaoke i kolorowe tatuaże."
 }

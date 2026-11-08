@@ -1,5 +1,5 @@
 // Generated from dsl/exam.data-contract
-// source-sha256=7aec6bd7560fd85cd8ef0b8895762479ce55502bfb2b04de354c154692c8e478
+// source-sha256=38312e40b51866266241f0d457f0b1f2091a4dc0f9c70d53551cb502cdd032fe
 // Edit the source, then run biome generate.
 
 package polski.exam.data.b2y2019
@@ -31,6 +31,18 @@ enum class WritingTaskRowGenre(val tag: String) {
     DESCRIPTION("description"),
     ARGUMENT("argument"),
     ESSAY("essay"),
+    INVITATION("invitation"),
+    WISHES("wishes"),
+    STORY("story"),
+    REPORT("report"),
+    SMS("sms"),
+    OPINION("opinion"),
+}
+
+enum class ExamInventoryCaseRowSection(val tag: String) {
+    LISTENING("listening"),
+    READING("reading"),
+    GRAMMAR("grammar"),
 }
 
 data class ExamRow(
@@ -52,6 +64,8 @@ data class ListeningTaskRow(
     val segmentEndMs: Int,
     val instruction: String,
     val transcript: String? = null,
+    val promptImageUrl: String? = null,
+    val promptImageAlt: String? = null,
 )
 
 data class ListeningQuestionRow(
@@ -61,7 +75,8 @@ data class ListeningQuestionRow(
     val questionText: String,
     val options: String? = null,
     val correctAnswer: String,
-    val points: Int,
+    val points: Int? = null,
+    val pointsQuarter: Int? = null,
 )
 
 data class ReadingPassageRow(
@@ -81,7 +96,8 @@ data class ReadingQuestionRow(
     val questionText: String,
     val options: String? = null,
     val correctAnswer: String,
-    val points: Int,
+    val points: Int? = null,
+    val pointsQuarter: Int? = null,
     val relevantParagraph: Int? = null,
 )
 
@@ -100,17 +116,78 @@ data class GrammarItemRow(
     val gap: String? = null,
     val options: String? = null,
     val correctAnswer: String,
-    val points: Int,
+    val points: Int? = null,
+    val pointsQuarter: Int? = null,
+)
+
+data class GrammarAnswerVariantRow(
+    val variantId: String,
+    val itemRef: String,
+    val answer: String,
+    val earnedQuarter: Int,
 )
 
 data class WritingTaskRow(
     val taskId: String,
     val examRef: String,
     val taskNumber: Int,
+    val setId: String? = null,
     val instruction: String,
     val promptText: String,
+    val promptImageUrl: String? = null,
+    val promptImageAlt: String? = null,
     val wordLimit: Int? = null,
     val genre: WritingTaskRowGenre,
+)
+
+data class ScoringCaseRow(
+    val id: String,
+    val answer: String,
+    val expected: String,
+    val correct: Boolean,
+)
+
+data class QuarterScoringCaseRow(
+    val id: String,
+    val fullAnswer: String,
+    val partialAnswer: String,
+    val partialQuarter: Int,
+    val maximumQuarter: Int,
+    val answer: String,
+    val expectedQuarter: Int,
+)
+
+data class WeightedScoringCaseRow(
+    val id: String,
+    val answer: String,
+    val expected: String,
+    val maximumQuarter: Int,
+    val earnedQuarter: Int,
+)
+
+data class ExamInventoryCaseRow(
+    val id: String,
+    val section: ExamInventoryCaseRowSection,
+    val taskRef: String,
+    val itemCount: Int,
+    val pointsQuarter: Int,
+    val variantCount: Int? = null,
+    val segmentStartMs: Int? = null,
+    val segmentEndMs: Int? = null,
+)
+
+data class WritingPromptCaseRow(
+    val id: String,
+    val setId: String,
+    val taskNumber: Int,
+    val wordLimit: Int,
+    val promptImageUrl: String? = null,
+)
+
+data class QuarterFormatCaseRow(
+    val id: String,
+    val pointsQuarter: Int,
+    val expectedText: String,
 )
 
 val EXAM_ROW_ROWS: List<ExamRow> = listOf(

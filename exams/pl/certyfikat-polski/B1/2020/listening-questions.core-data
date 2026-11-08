@@ -1,57 +1,304 @@
 DSL 1
+# Arkusz B1/2020 pp. 3–7; klucz.pdf p. 3. Counts 12+7+5+5+5 rows; task IV has 7 answer slots; 30 points.
+# Task IV B/C are unordered sets, encoded as 1|4 and 2|4. Current single-select UI cannot score them: keep exam hidden.
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2020-lq1"
-  taskRef: "certyfikat-polski-B1-2020-listen-1"
+  questionId: certyfikat-polski-B1-2020-listening-1-1
+  taskRef: certyfikat-polski-B1-2020-listen-1
   questionType: multiple_choice
-  questionText: "Pytanie 1"
-  correctAnswer: "b c c a b b c b a a c a"
-  points: 1
+  questionText: "Ta wypowiedź jest typowa"
+  options: "a) na stacji benzynowej.|b) w sklepie z meblami.|c) w kinie przy kasie."
+  correctAnswer: "b) w sklepie z meblami."
+  pointsQuarter: 2
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2020-lq2"
-  taskRef: "certyfikat-polski-B1-2020-listen-2"
+  questionId: certyfikat-polski-B1-2020-listening-1-2
+  taskRef: certyfikat-polski-B1-2020-listen-1
   questionType: multiple_choice
-  questionText: "Pytanie 2"
-  correctAnswer: "c a c b c b a"
-  points: 1
+  questionText: "Ta wypowiedź jest typowa w"
+  options: "a) siłowni.|b) restauracji.|c) hotelu."
+  correctAnswer: "c) hotelu."
+  pointsQuarter: 2
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2020-lq3"
-  taskRef: "certyfikat-polski-B1-2020-listen-3"
+  questionId: certyfikat-polski-B1-2020-listening-1-3
+  taskRef: certyfikat-polski-B1-2020-listen-1
   questionType: multiple_choice
-  questionText: "Pytanie 3"
-  correctAnswer: "TAK NIE"
-  points: 1
+  questionText: "Ta wypowiedź jest typowa w"
+  options: "a) samolocie.|b) taksówce.|c) autobusie."
+  correctAnswer: "c) autobusie."
+  pointsQuarter: 2
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2020-lq4"
-  taskRef: "certyfikat-polski-B1-2020-listen-5"
+  questionId: certyfikat-polski-B1-2020-listening-1-4
+  taskRef: certyfikat-polski-B1-2020-listen-1
   questionType: multiple_choice
-  questionText: "Pytanie 4"
-  correctAnswer: "E D B F A"
-  points: 1
+  questionText: "Ta wypowiedź jest typowa"
+  options: "a) w aptece.|b) u dentysty.|c) w sekretariacie."
+  correctAnswer: "a) w aptece."
+  pointsQuarter: 2
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2020-lq5"
-  taskRef: "certyfikat-polski-B1-2020-listen-5"
+  questionId: certyfikat-polski-B1-2020-listening-1-5
+  taskRef: certyfikat-polski-B1-2020-listen-1
   questionType: multiple_choice
-  questionText: "Pytanie 5"
-  correctAnswer: "TEST PRZYKŁADOWY"
-  points: 1
+  questionText: "Ta wypowiedź to fragment"
+  options: "a) komunikatu na dworcu.|b) reklamy radiowej.|c) instrukcji obsługi."
+  correctAnswer: "b) reklamy radiowej."
+  pointsQuarter: 2
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2020-lq6"
-  taskRef: "certyfikat-polski-B1-2020-listen-5"
+  questionId: certyfikat-polski-B1-2020-listening-1-6
+  taskRef: certyfikat-polski-B1-2020-listen-1
   questionType: multiple_choice
-  questionText: "Pytanie 6"
-  correctAnswer: "POZIOM B"
-  points: 1
+  questionText: "Ta wypowiedź to fragment rozmowy"
+  options: "a) w dziekanacie.|b) przez telefon.|c) dwóch koleżanek."
+  correctAnswer: "b) przez telefon."
+  pointsQuarter: 2
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2020-lq7"
-  taskRef: "certyfikat-polski-B1-2020-listen-5"
+  questionId: certyfikat-polski-B1-2020-listening-1-7
+  taskRef: certyfikat-polski-B1-2020-listen-1
   questionType: multiple_choice
-  questionText: "Pytanie 7"
-  correctAnswer: "TRANSKRYPCJE I KLUCZ DO ZADAŃ"
-  points: 1
+  questionText: "Ta wypowiedź to pytanie o"
+  options: "a) czas.|b) miejsce.|c) środek transportu."
+  correctAnswer: "c) środek transportu."
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-listening-1-8
+  taskRef: certyfikat-polski-B1-2020-listen-1
+  questionType: multiple_choice
+  questionText: "Ta wypowiedź oznacza, że ta osoba"
+  options: "a) planuje wizytę u lekarza.|b) dawno nie leczyła zębów.|c) często odwiedza dentystę."
+  correctAnswer: "b) dawno nie leczyła zębów."
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-listening-1-9
+  taskRef: certyfikat-polski-B1-2020-listen-1
+  questionType: multiple_choice
+  questionText: "Ta wypowiedź oznacza"
+  options: "a) krytykę.|b) życzenie.|c) akceptację."
+  correctAnswer: "a) krytykę."
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-listening-1-10
+  taskRef: certyfikat-polski-B1-2020-listen-1
+  questionType: multiple_choice
+  questionText: "Ta wypowiedź oznacza"
+  options: "a) niepokój.|b) radość.|c) satysfakcję."
+  correctAnswer: "a) niepokój."
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-listening-1-11
+  taskRef: certyfikat-polski-B1-2020-listen-1
+  questionType: multiple_choice
+  questionText: "Ta wypowiedź oznacza, że"
+  options: "a) mamy dużo czasu.|b) będziemy punktualnie.|c) spóźnimy się."
+  correctAnswer: "c) spóźnimy się."
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-listening-1-12
+  taskRef: certyfikat-polski-B1-2020-listen-1
+  questionType: multiple_choice
+  questionText: "Ta wypowiedź oznacza, że trzeba"
+  options: "a) włączyć światło.|b) zamknąć okno.|c) zgasić światło."
+  correctAnswer: "a) włączyć światło."
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-listening-2-1
+  taskRef: certyfikat-polski-B1-2020-listen-2
+  questionType: multiple_choice
+  questionText: "Z tego dialogu dowiadujemy się, że mężczyzna"
+  options: "a) idzie do hotelu.|b) zatrzymuje taksówkę.|c) jedzie w złym kierunku."
+  correctAnswer: "c) jedzie w złym kierunku."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-listening-2-2
+  taskRef: certyfikat-polski-B1-2020-listen-2
+  questionType: multiple_choice
+  questionText: "Z tego dialogu dowiadujemy się, że"
+  options: "a) kobieta studiuje i zajmuje się domem.|b) mąż robi wszystko w domu.|c) kobiecie nikt nie pomaga."
+  correctAnswer: "a) kobieta studiuje i zajmuje się domem."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-listening-2-3
+  taskRef: certyfikat-polski-B1-2020-listen-2
+  questionType: multiple_choice
+  questionText: "Z tego dialogu dowiadujemy się, że mężczyzna"
+  options: "a) jest autorem projektu.|b) krytykuje projekt.|c) nie mówi, co myśli."
+  correctAnswer: "c) nie mówi, co myśli."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-listening-2-4
+  taskRef: certyfikat-polski-B1-2020-listen-2
+  questionType: multiple_choice
+  questionText: "Z tego dialogu dowiadujemy się, że mężczyzna"
+  options: "a) chce wydać nową płytę.|b) jest za stary na kolejną płytę.|c) komponuje muzykę do nowej płyty."
+  correctAnswer: "b) jest za stary na kolejną płytę."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-listening-2-5
+  taskRef: certyfikat-polski-B1-2020-listen-2
+  questionType: multiple_choice
+  questionText: "Z tego dialogu dowiadujemy się, że mężczyzna"
+  options: "a) jeździ na rowerze z dzieckiem.|b) dostał rower od dziecka.|c) jeździł na rowerze już w dzieciństwie."
+  correctAnswer: "c) jeździł na rowerze już w dzieciństwie."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-listening-2-6
+  taskRef: certyfikat-polski-B1-2020-listen-2
+  questionType: multiple_choice
+  questionText: "Z tego dialogu dowiadujemy się, że uczestnicy kursu"
+  options: "a) są pracownikami urzędu miasta.|b) biorą w nim udział bezpłatnie.|c) muszą zapłacić za zajęcia."
+  correctAnswer: "b) biorą w nim udział bezpłatnie."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-listening-2-7
+  taskRef: certyfikat-polski-B1-2020-listen-2
+  questionType: multiple_choice
+  questionText: "Z tego dialogu dowiadujemy się, że w sobotę kobieta i mężczyzna"
+  options: "a) mają inne plany na wieczór.|b) spędzą razem wieczór.|c) idą wieczorem na mecz."
+  correctAnswer: "a) mają inne plany na wieczór."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-listening-3-1
+  taskRef: certyfikat-polski-B1-2020-listen-3
+  questionType: true_false
+  questionText: "Bohaterka wywiadu w dzieciństwie podróżowała po Europie."
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-listening-3-2
+  taskRef: certyfikat-polski-B1-2020-listen-3
+  questionType: true_false
+  questionText: "Bohaterka wywiadu w szkole średniej wyjeżdżała z rodzicami do Anglii."
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-listening-3-3
+  taskRef: certyfikat-polski-B1-2020-listen-3
+  questionType: true_false
+  questionText: "Bohaterka wywiadu obecnie podróżuje z grupą przyjaciół."
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-listening-3-4
+  taskRef: certyfikat-polski-B1-2020-listen-3
+  questionType: true_false
+  questionText: "Bohaterka wywiadu wybiera środek transportu w zależności od miejsca, w którym jest."
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-listening-3-5
+  taskRef: certyfikat-polski-B1-2020-listen-3
+  questionType: true_false
+  questionText: "Bohaterka wywiadu boi się kłopotów z powodu braku znajomości języków obcych."
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-listening-4-1
+  taskRef: certyfikat-polski-B1-2020-listen-4
+  questionType: match
+  questionText: "A: narzeka na hałaśliwych sąsiadów."
+  options: "1|2|3|4"
+  correctAnswer: "3"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-listening-4-2
+  taskRef: certyfikat-polski-B1-2020-listen-4
+  questionType: match
+  questionText: "B: wymienia miejsca, gdzie można spędzić wolny czas."
+  options: "1|2|3|4"
+  correctAnswer: "1|4"
+  pointsQuarter: 8
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-listening-4-3
+  taskRef: certyfikat-polski-B1-2020-listen-4
+  questionType: match
+  questionText: "C: mówi, że życie w mieście jest drogie."
+  options: "1|2|3|4"
+  correctAnswer: "2|4"
+  pointsQuarter: 8
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-listening-4-4
+  taskRef: certyfikat-polski-B1-2020-listen-4
+  questionType: match
+  questionText: "D: zwraca uwagę na zanieczyszczenie."
+  options: "1|2|3|4"
+  correctAnswer: "4"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-listening-4-5
+  taskRef: certyfikat-polski-B1-2020-listen-4
+  questionType: match
+  questionText: "E: nie lubi osób za bardzo ciekawych tego, jak żyją inni."
+  options: "1|2|3|4"
+  correctAnswer: "2"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-listening-5-1
+  taskRef: certyfikat-polski-B1-2020-listen-5
+  questionType: match
+  questionText: "Łyżwy"
+  options: "A|B|C|D|E|F"
+  correctAnswer: E
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-listening-5-2
+  taskRef: certyfikat-polski-B1-2020-listen-5
+  questionType: match
+  questionText: "Sporty wodne"
+  options: "A|B|C|D|E|F"
+  correctAnswer: D
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-listening-5-3
+  taskRef: certyfikat-polski-B1-2020-listen-5
+  questionType: match
+  questionText: "Jazda konna"
+  options: "A|B|C|D|E|F"
+  correctAnswer: B
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-listening-5-4
+  taskRef: certyfikat-polski-B1-2020-listen-5
+  questionType: match
+  questionText: Tenis
+  options: "A|B|C|D|E|F"
+  correctAnswer: F
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-listening-5-5
+  taskRef: certyfikat-polski-B1-2020-listen-5
+  questionType: match
+  questionText: "Gra w siatkówkę"
+  options: "A|B|C|D|E|F"
+  correctAnswer: A
+  pointsQuarter: 4
 }

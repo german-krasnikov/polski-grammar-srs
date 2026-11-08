@@ -2,22 +2,37 @@ package polski.exam.grammar
 
 import polski.grammar.normalize
 
-data class GrammarExamResult(val correct: Int, val total: Int, val percentage: Double)
+data class GrammarExamResult(
+    /** Legacy whole-point view. Use quarter fields for exams with fractional scores. */
+    val correct: Int,
+    val total: Int,
+    val percentage: Double,
+    val earnedQuarterPoints: Int = correct * 4,
+    val possibleQuarterPoints: Int = total * 4,
+)
 
 object GrammarExamScorer {
     fun score(item: GrammarItem, answer: String): Boolean =
         normalize(answer) == normalize(item.correctAnswer)
 
+    /** Earned score in exact quarter-point units. Full answer takes precedence over variants. */
+    fun earnedQuarter(item: GrammarItem, answer: String): Int {
+        if (score(item, answer)) return item.maximumQuarter
+        val normalized = normalize(answer)
+        return item.scoredVariants.firstOrNull { normalize(it.answer) == normalized }?.earnedQuarter ?: 0
+    }
+
     fun scoreAttempt(test: GrammarTest, answers: Map<String, String>): GrammarExamResult {
-        val correct = test.items.count { item ->
-            val answer = answers[item.itemId]
-            answer != null && score(item, answer)
+        val possibleQuarter = test.items.sumOf { it.maximumQuarter }
+        val earnedQuarter = test.items.sumOf { item ->
+            answers[item.itemId]?.let { earnedQuarter(item, it) } ?: 0
         }
-        val total = test.items.sumOf { it.points }
-        val earned = test.items.sumOf { item ->
-            val answer = answers[item.itemId]
-            if (answer != null && score(item, answer)) item.points else 0
-        }
-        return GrammarExamResult(correct = earned, total = total, percentage = if (total > 0) earned.toDouble() / total * 100.0 else 0.0)
+        return GrammarExamResult(
+            correct = earnedQuarter / 4,
+            total = possibleQuarter / 4,
+            percentage = if (possibleQuarter > 0) earnedQuarter.toDouble() / possibleQuarter * 100.0 else 0.0,
+            earnedQuarterPoints = earnedQuarter,
+            possibleQuarterPoints = possibleQuarter,
+        )
     }
 }

@@ -1,0 +1,10 @@
+TEST "B1 2017 final reading task awards half a point" PROFILE playmode
+  open exam="B1 Certyfikat 2017" module="reading"
+  advance count=4
+  ASSERT reading.questionCount == 8
+  ASSERT reading.firstOptions == "wie|umie|zna"
+  chooseReading index=1 answer="zna"
+  ASSERT reading.selectedFirst == "zna"
+  submit
+  ASSERT exam.scoreDetail == "0,5 / 30"
+END

@@ -1,0 +1,19 @@
+TEST "B1 exam listening keeps media and answer" PROFILE playmode
+  open exam="B1 Certyfikat 2019" module="listening"
+  play
+  ASSERT media.playing == true
+  rememberPosition
+  choose answer="a) w kinie."
+  ASSERT media.selected == "a) w kinie."
+  ASSERT media.playing == true
+  ASSERT media.notRewound == true
+  seekEnd
+  ASSERT media.playing == false
+  ASSERT media.selected == "a) w kinie."
+  play
+  ASSERT media.playing == true
+  leave
+  ASSERT media.closed == true
+  reenter
+  ASSERT exam.listVisible == true
+END

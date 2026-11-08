@@ -1,36 +1,36 @@
 DSL 1
 READING_PASSAGE {
-  passageId: "B1-2019-read-1"
-  examRef: "certyfikat-polski-B1-2019"
+  passageId: B1-2019-read-1
+  examRef: certyfikat-polski-B1-2019
   taskNumber: 1
-  instruction: "Prosze przeczytac fragmenty tekstow i zaznaczyc wlasciwa odpowiedz."
-  text: "Krotkie fragmenty tekstow z pytaniami wielokrotnego wyboru."
+  instruction: "Proszę przeczytać fragmenty tekstów i zaznaczyć właściwą odpowiedź."
+  text: "1. Jeśli masz ponad 30 lat i zarejestrowałeś się jako bezrobotny, możesz otrzymać pomoc finansową na otwarcie firmy. Projekt adresowany jest też do osób, które na rynku pracy znajdują się w trudnej sytuacji – są po 50. roku życia i mają niskie kwalifikacje.\n\n2. Od października działa nowy klub fitness. Przez pierwsze dwa tygodnie zajęcia grupowe prowadzone przez profesjonalnych instruktorów są bezpłatne. Do dyspozycji klientów jest też siłownia, szatnie z prysznicami i bufet.\n\n3. Obraz Tamary Łempickiej „La Musicienne” został sprzedany w Nowym Jorku za blisko 9,1 mln dolarów (ponad 34 mln zł). Nikt nie myślał, że kwota będzie tak wysoka. Praca jest najdroższym w historii obrazem polskiego artysty.\n\n4. Już trzeci raz w rankingu gazety „Rzeczpospolita” najlepszą polską uczelnią ekonomiczną została Szkoła Główna Handlowa w Warszawie. W tegorocznym konkursie brało udział sześć uniwersytetów i 28 wydziałów."
 }
 READING_PASSAGE {
-  passageId: "B1-2019-read-2"
-  examRef: "certyfikat-polski-B1-2019"
+  passageId: B1-2019-read-2
+  examRef: certyfikat-polski-B1-2019
   taskNumber: 2
-  instruction: "Prosze przeczytac tekst i zaznaczyc: TAK lub NIE."
-  text: "Wedlug przepisow pasazer ma prawo do zwrotu pieniedzy, jezeli rejs zostal odwolany na krocej niz 14 dni przed wylotem lub jest opozniony o ponad 3 godziny..."
+  instruction: "Proszę przeczytać tekst, a następnie zaznaczyć TAK, gdy zdanie jest zgodne z tekstem, lub NIE, gdy nie jest zgodne."
+  text: "Spóźniony samolot\n\nW jaki sposób starać się o zwrot pieniędzy za bilet, kiedy nasz samolot się spóźnił lub w ogóle nie poleciał? Jedna z linii lotniczych podała informację, że w pierwszej połowie 2016 roku aż 256 jej lotów było opóźnionych o więcej niż 3 godziny. W takiej sytuacji, zgodnie z prawem Unii Europejskiej, pasażerowie mogą dostać zwrot pieniędzy za lot.\n\n– Trudno znaleźć dokładne statystyki spóźnionych samolotów, bo takich informacji nie podają linie lotnicze. To nie jest dla nich wygodne, aby pasażerowie mogli korzystać ze swoich praw – mówi adwokat Marcin Maciejewski.\n\nWedług przepisów pasażer ma prawo do zwrotu pieniędzy, jeżeli rejs został odwołany na krócej niż 14 dni przed wylotem lub jest opóźniony o ponad 3 godziny. To, ile linie lotnicze nam zwrócą, zależy od długości lotu i może to być nawet 600 euro.\n\n– Pasażerowie często rezygnują i nie starają się o zwrot pieniędzy w przypadku spóźnionego lub anulowanego samolotu. Mówią, że to skomplikowane, nie znają prawa i muszą wypełnić dużo dokumentów – zauważa Maciejewski.\n\nDlatego też szybko rozwijają się firmy, które pomagają pasażerom w otrzymaniu zwrotu pieniędzy. – Klient przekazuje nam skany dokumentów, podpisuje umowę i czeka na przelew, a sprawą zajmuje się wyspecjalizowana firma – mówi jeden z pracowników.\n\nNa podstawie: National Geographic Traveler, „Opóźniony samolot”."
 }
 READING_PASSAGE {
-  passageId: "B1-2019-read-3"
-  examRef: "certyfikat-polski-B1-2019"
+  passageId: B1-2019-read-3
+  examRef: certyfikat-polski-B1-2019
   taskNumber: 3
-  instruction: "Prosze przeczytac tekst i dopasowac usuniete fragmenty (A-I)."
-  text: "Slynny na caly swiat Jarmark Dominikanski w Gdansku ma bardzo dluga tradycje..."
+  instruction: "Proszę przeczytać tekst i dopasować usunięte fragmenty A–I."
+  text: "Słynny na cały świat Jarmark Dominikański w Gdańsku ma bardzo długą tradycję, bo pierwszy raz odbył się w 1260 roku. Z historii możemy się dowiedzieć, że w XVI wieku jarmark odbywał się w sierpniu [1]. Z tej okazji na cały ten czas do Gdańska przyjeżdżali sprzedawcy z całej Europy, a razem z nimi grupy artystów ulicznych, [2]. Do miasta przypływały również wielkie statki z winem francuskim i hiszpańskim, jedwabiem, oliwą, cytrynami, konfiturami i egzotycznymi przyprawami. Przez wiele wieków było to każdego roku wielkie święto miasta [3]. Powrócono do niej w 1972 roku, ale wówczas jarmark stał się imprezą wyłącznie handlową, umożliwiającą kupowanie produktów, [4].\n\nDzisiaj jarmark jest główną atrakcją turystyczną Gdańska. Jest to największa impreza handlowo-kulturalna w Polsce, [5], kolorowa i pełna życia. Turyści z całego świata przyjeżdżają chętnie w sezonie letnim, [6]. Jedni – pyszne regionalne jedzenie: sery, wędliny, ciasta oraz kawę i różne rodzaje herbaty. Inni – spektakle i koncerty. Ludzie kupują, [7], a dla dzieci organizowane są atrakcyjne warsztaty, gry i zabawy. W czasie jarmarku nigdy nie jest nudno, [8]. Dookoła słychać radosny śmiech najmłodszych, rozmowy w wielu językach, muzykę dobiegającą ze scen. Obecnie Jarmark Dominikański rozpoczyna się zawsze w ostatnią sobotę lipca i trwa 23 dni.\n\nA. którzy bawili gości\nB. bo pierwszy raz odbył się w 1260 roku (przykład)\nC. a jednocześnie jedna z największych w Europie\nD. bo tutaj każdy znajduje coś dla siebie\nE. i dopiero druga wojna światowa przerwała tę tradycję\nF. których brakowało w tamtym czasie w sklepach\nG. bo wszędzie coś się dzieje\nH. i trwał czternaście dni\nI. słuchają muzyki, robią pamiątkowe fotografie"
 }
 READING_PASSAGE {
-  passageId: "B1-2019-read-4"
-  examRef: "certyfikat-polski-B1-2019"
+  passageId: B1-2019-read-4
+  examRef: certyfikat-polski-B1-2019
   taskNumber: 4
-  instruction: "Prosze polaczyc tytuly z kolumny I z fragmentami tekstow z kolumny II."
-  text: "Jak polubic sprzatanie? Fragmenty tekstow z radami na temat sprzatania."
+  instruction: "Proszę połączyć tytuły z fragmentami tekstów."
+  text: "Jak polubić sprzątanie?\n\nA. Sprzątaj wtedy, kiedy masz na to ochotę. Warto wykorzystać dobry moment i po prostu zacząć sprzątać. Czy to będzie poniedziałek, czy środa, wieczór czy środek dnia, to nie ma znaczenia.\nB. To klucz do tego, by polubić porządki. Możemy powtarzać, że znów trzeba sprzątać albo chcieć to zrobić i z przyjemnością myśleć o końcowym efekcie.\nC. Jedną z najsmutniejszych rzeczy przy sprzątaniu jest brak szybkich efektów. Dlatego ogromne znaczenie ma to, czym sprzątamy. Jest w czym wybierać, wiele produktów działa rewelacyjnie w krótkim czasie.\nD. Uporządkowanie jednej półki czy szuflady brzmi mniej strasznie niż posprzątanie całego mieszkania. To idealne rozwiązanie, gdy trudno nam się zmobilizować do sprzątania.\nE. Szkoda ci czasu na porządki? Podczas sprzątania możesz słuchać muzyki, audycji radiowych, a prasowanie można połączyć z oglądaniem ulubionego programu.\nF. Lubisz książki – wyczyść je i poukładaj np. kolorami, lubisz modę i ubrania, zrób porządek w szafie, kolekcjonujesz płyty – zrób ich listę, kochasz gotować – zacznij od sprzątania w kuchni czy posegregowania przepisów.\nG. To, dlaczego sprzątamy, jest najważniejsze. Czasami, bo przychodzą goście. Przede wszystkim jednak dlatego, że lubimy żyć w porządku, wtedy czujemy się lepiej i jesteśmy szczęśliwsi."
 }
 READING_PASSAGE {
-  passageId: "B1-2019-read-5"
-  examRef: "certyfikat-polski-B1-2019"
+  passageId: B1-2019-read-5
+  examRef: certyfikat-polski-B1-2019
   taskNumber: 5
-  instruction: "Prosze uzupelnic tekst wyrazami z ramki."
-  text: "Akcja 'Majewskich posadzili' jest czescia kampanii, ktora prowadzi fundacja 'Zmiana'..."
+  instruction: "Proszę uzupełnić tekst wyrazami z ramki."
+  text: "Akcja „Majewskich posadzili” jest częścią kampanii, którą prowadzi fundacja „Zmiana”. W polskich więzieniach nie ma [1], wydanych w ostatnim czasie książek. Powód jest prosty – ich ceny są za [2]. Dlatego grupa fanów literatury postanowiła [3] zbiórkę. Celem akcji było zachęcenie wszystkich [4] Warszawy do oddawania swoich książek do zakładów karnych. Organizatorzy tak tłumaczyli nazwę kampanii: Majewski to [5] nazwisko, każdy z nas zna jakiegoś Majewskiego. Każdy z nas słyszał też o kimś, kto znalazł się w więzieniu. Chcemy zwrócić uwagę na fakt, że w tego typu miejscach są osoby, które po wyjściu na [6] mają możliwość rozpoczęcia nowego życia. Dzięki mądrym książkom dajemy szansę nie tylko [7], ale też starszym, którzy chcą się zmienić. Mogą oni zwrócić [8] lub zatrzymać ją na zawsze. Do akcji [9] kilka znanych osób, między innymi piosenkarka Alicja Majewska i showman Szymon Majewski – noszą oni nazwisko, które [10] w kampanii.\n\nWyrazy z ramki: pojawiło się; częścią (przykład); wysokie; nowych; zorganizować; mieszkańców; książkę; młodzieży; wolność; przyłączyło się; popularne."
 }

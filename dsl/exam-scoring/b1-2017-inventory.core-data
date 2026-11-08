@@ -1,0 +1,133 @@
+DSL 1
+# Official B1/2017 paper task counts and weights: listening p3, reading p9, grammar p16.
+# Audio boundaries were checked against the local official recording.
+EXAM_INVENTORY_CASE {
+  id: b1-2017-listen-1
+  section: listening
+  taskRef: certyfikat-polski-B1-2017-listen-1
+  itemCount: 14
+  pointsQuarter: 28
+  segmentStartMs: 115000
+  segmentEndMs: 369000
+}
+EXAM_INVENTORY_CASE {
+  id: b1-2017-listen-2
+  section: listening
+  taskRef: certyfikat-polski-B1-2017-listen-2
+  itemCount: 7
+  pointsQuarter: 28
+  segmentStartMs: 369000
+  segmentEndMs: 599000
+}
+EXAM_INVENTORY_CASE {
+  id: b1-2017-listen-3
+  section: listening
+  taskRef: certyfikat-polski-B1-2017-listen-3
+  itemCount: 5
+  pointsQuarter: 20
+  segmentStartMs: 599000
+  segmentEndMs: 877000
+}
+EXAM_INVENTORY_CASE {
+  id: b1-2017-listen-4
+  section: listening
+  taskRef: certyfikat-polski-B1-2017-listen-4
+  itemCount: 6
+  pointsQuarter: 24
+  segmentStartMs: 877000
+  segmentEndMs: 1116000
+}
+EXAM_INVENTORY_CASE {
+  id: b1-2017-listen-5
+  section: listening
+  taskRef: certyfikat-polski-B1-2017-listen-5
+  itemCount: 5
+  pointsQuarter: 20
+  segmentStartMs: 1116000
+  segmentEndMs: 1395000
+}
+EXAM_INVENTORY_CASE {
+  id: b1-2017-read-1
+  section: reading
+  taskRef: certyfikat-polski-B1-2017-read-1
+  itemCount: 5
+  pointsQuarter: 20
+}
+EXAM_INVENTORY_CASE {
+  id: b1-2017-read-2
+  section: reading
+  taskRef: certyfikat-polski-B1-2017-read-2
+  itemCount: 7
+  pointsQuarter: 28
+}
+EXAM_INVENTORY_CASE {
+  id: b1-2017-read-3
+  section: reading
+  taskRef: certyfikat-polski-B1-2017-read-3
+  itemCount: 7
+  pointsQuarter: 28
+}
+EXAM_INVENTORY_CASE {
+  id: b1-2017-read-4
+  section: reading
+  taskRef: certyfikat-polski-B1-2017-read-4
+  itemCount: 7
+  pointsQuarter: 28
+}
+EXAM_INVENTORY_CASE {
+  id: b1-2017-read-5
+  section: reading
+  taskRef: certyfikat-polski-B1-2017-read-5
+  itemCount: 8
+  pointsQuarter: 16
+}
+EXAM_INVENTORY_CASE {
+  id: b1-2017-grammar-1
+  section: grammar
+  taskRef: certyfikat-polski-B1-2017-grammar-1
+  itemCount: 10
+  pointsQuarter: 20
+}
+EXAM_INVENTORY_CASE {
+  id: b1-2017-grammar-2
+  section: grammar
+  taskRef: certyfikat-polski-B1-2017-grammar-2
+  itemCount: 5
+  pointsQuarter: 10
+}
+EXAM_INVENTORY_CASE {
+  id: b1-2017-grammar-3
+  section: grammar
+  taskRef: certyfikat-polski-B1-2017-grammar-3
+  itemCount: 10
+  pointsQuarter: 20
+}
+EXAM_INVENTORY_CASE {
+  id: b1-2017-grammar-4
+  section: grammar
+  taskRef: certyfikat-polski-B1-2017-grammar-4
+  itemCount: 5
+  pointsQuarter: 10
+  variantCount: 2
+}
+EXAM_INVENTORY_CASE {
+  id: b1-2017-grammar-5
+  section: grammar
+  taskRef: certyfikat-polski-B1-2017-grammar-5
+  itemCount: 10
+  pointsQuarter: 30
+}
+EXAM_INVENTORY_CASE {
+  id: b1-2017-grammar-6
+  section: grammar
+  taskRef: certyfikat-polski-B1-2017-grammar-6
+  itemCount: 5
+  pointsQuarter: 10
+}
+EXAM_INVENTORY_CASE {
+  id: b1-2017-grammar-7
+  section: grammar
+  taskRef: certyfikat-polski-B1-2017-grammar-7
+  itemCount: 5
+  pointsQuarter: 20
+}

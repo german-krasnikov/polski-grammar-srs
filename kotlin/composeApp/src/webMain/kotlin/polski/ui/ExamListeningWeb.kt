@@ -5,11 +5,20 @@ import org.w3c.dom.HTMLAudioElement
 import org.w3c.dom.HTMLButtonElement
 import org.w3c.dom.HTMLElement
 import org.w3c.dom.HTMLInputElement
+import polski.exam.formatQuarterPoints
 import polski.exam.QuestionType
 import polski.presentation.UiCopy
 
-internal data class ListeningTask(val id: String, val instruction: String, val questions: List<ListeningQ>, val startMs: Long = 0, val endMs: Long = 0)
-internal data class ListeningQ(val id: String, val type: QuestionType, val questionText: String, val options: List<String>, val correctAnswer: String)
+internal data class ListeningTask(
+    val id: String,
+    val instruction: String,
+    val questions: List<ListeningQ>,
+    val startMs: Long = 0,
+    val endMs: Long = 0,
+    val promptImageUrl: String? = null,
+    val promptImageAlt: String? = null,
+)
+internal data class ListeningQ(val id: String, val type: QuestionType, val questionText: String, val options: List<String>, val correctAnswer: String, val pointsQuarter: Int = 4)
 internal data class ListeningExam(val tasks: List<ListeningTask>, val audioUrl: String)
 
 internal class ExamListeningController(examId: String, private val onBack: () -> Unit) {
@@ -19,9 +28,34 @@ internal class ExamListeningController(examId: String, private val onBack: () ->
     private var submitted = false
     private var root: HTMLElement? = null
     private var audioElement: HTMLAudioElement? = null
-    private var questionsContainer: HTMLElement? = null
+    private var playButton: HTMLButtonElement? = null
+    private var timeLabel: HTMLElement? = null
+    private var progressFill: HTMLElement? = null
+    private var mediaError: HTMLElement? = null
+    private var renderedTaskIdx = -1
 
     fun render(container: HTMLElement) { root = container; setupAudio(); redraw() }
+
+    /** Releases the single media element when the exam route or module is left. */
+    fun close() {
+        disposeAudio()
+        root = null
+    }
+
+    private fun disposeAudio() {
+        audioElement?.let { audio ->
+            audio.pause()
+            audio.removeAttribute("src")
+            audio.load()
+            audio.remove()
+        }
+        audioElement = null
+        playButton = null
+        timeLabel = null
+        progressFill = null
+        mediaError = null
+        renderedTaskIdx = -1
+    }
 
     private var currentSegmentStart = 0.0
     private var currentSegmentEnd = 0.0
@@ -31,6 +65,16 @@ internal class ExamListeningController(examId: String, private val onBack: () ->
         audioElement = (document.createElement("audio") as HTMLAudioElement).apply {
             src = exam.audioUrl; className = "exam-audio-hidden"
             setAttribute("preload", "auto")
+            hidden = true
+            addEventListener("loadedmetadata", { currentTime = currentSegmentStart; pause() })
+            addEventListener("timeupdate", {
+                if (currentSegmentEnd > 0 && currentTime >= currentSegmentEnd) {
+                    pause(); currentTime = currentSegmentEnd
+                }
+                updatePlayer()
+            })
+            addEventListener("ended", { updatePlayer() })
+            addEventListener("error", { updatePlayer() })
         }
     }
 
@@ -38,14 +82,19 @@ internal class ExamListeningController(examId: String, private val onBack: () ->
         val audio = audioElement ?: return
         currentSegmentStart = task.startMs / 1000.0
         currentSegmentEnd = if (task.endMs > 0) task.endMs / 1000.0 else audio.duration
-        fun doSeek() { audio.currentTime = currentSegmentStart; audio.pause() }
-        if (audio.readyState >= 1) doSeek()
-        else audio.addEventListener("loadedmetadata", { doSeek() })
-        audio.ontimeupdate = {
-            if (currentSegmentEnd > 0 && audio.currentTime >= currentSegmentEnd) {
-                audio.pause(); audio.currentTime = currentSegmentEnd
-            }
-        }
+        if (audio.readyState >= 1) { audio.currentTime = currentSegmentStart; audio.pause() }
+    }
+
+    private fun updatePlayer() {
+        val audio = audioElement ?: return
+        val duration = (currentSegmentEnd - currentSegmentStart).coerceAtLeast(0.0)
+        val elapsed = (audio.currentTime - currentSegmentStart).coerceIn(0.0, duration)
+        progressFill?.style?.setProperty("width", "${if (duration > 0) (elapsed / duration * 100).toInt() else 0}%")
+        timeLabel?.textContent = "${formatTime(elapsed)} / ${formatTime(duration)}"
+        playButton?.textContent = if (audio.paused) "▶" else "⏸"
+        val unavailable = audio.error != null
+        playButton?.disabled = unavailable
+        mediaError?.textContent = if (unavailable) "Аудиозапись недоступна" else ""
     }
 
     private fun buildCustomPlayer(task: ListeningTask): HTMLElement {
@@ -53,36 +102,37 @@ internal class ExamListeningController(examId: String, private val onBack: () ->
         val segDuration = currentSegmentEnd - currentSegmentStart
         val container = node("div", "exam-custom-player")
         val playBtn = (document.createElement("button") as HTMLButtonElement).apply {
-            type = "button"; className = "player-play-btn"; textContent = "▶"
+            type = "button"; className = "player-play-btn"; textContent = if (audio.paused) "▶" else "⏸"
         }
-        val timeLabel = node("span", "player-time", "0:00 / ${formatTime(segDuration)}")
+        val playerTime = node("span", "player-time", "0:00 / ${formatTime(segDuration)}")
+        val error = node("span", "player-error").apply { setAttribute("role", "status") }
         val progressWrap = node("div", "player-progress-wrap")
         val progressBar = node("div", "player-progress-bar")
-        val progressFill = node("div", "player-progress-fill")
-        progressBar.appendChild(progressFill)
+        val fill = node("div", "player-progress-fill")
+        progressBar.appendChild(fill)
         progressWrap.appendChild(progressBar)
 
         playBtn.addEventListener("click", {
-            if (audio.paused) { audio.play(); playBtn.textContent = "⏸" }
-            else { audio.pause(); playBtn.textContent = "▶" }
+            if (audio.paused) {
+                if (currentSegmentEnd > 0 && audio.currentTime >= currentSegmentEnd) audio.currentTime = currentSegmentStart
+                audio.play()
+            } else audio.pause()
+            updatePlayer()
         })
         progressWrap.addEventListener("click", { e ->
             val rect = progressBar.getBoundingClientRect()
             val pct = ((e as org.w3c.dom.events.MouseEvent).clientX - rect.left) / rect.width
             audio.currentTime = currentSegmentStart + pct * segDuration
         })
-        audio.addEventListener("timeupdate", {
-            val elapsed = (audio.currentTime - currentSegmentStart).coerceIn(0.0, segDuration)
-            val pct = if (segDuration > 0) (elapsed / segDuration * 100) else 0.0
-            progressFill.style.setProperty("width", "${pct.toInt()}%")
-            timeLabel.textContent = "${formatTime(elapsed)} / ${formatTime(segDuration)}"
-            if (audio.paused) playBtn.textContent = "▶"
-        })
-        audio.addEventListener("ended", { playBtn.textContent = "▶" })
-
         container.appendChild(playBtn)
         container.appendChild(progressWrap)
-        container.appendChild(timeLabel)
+        container.appendChild(playerTime)
+        container.appendChild(error)
+        playButton = playBtn
+        timeLabel = playerTime
+        progressFill = fill
+        mediaError = error
+        updatePlayer()
         return container
     }
 
@@ -93,6 +143,7 @@ internal class ExamListeningController(examId: String, private val onBack: () ->
 
     private fun redraw() {
         val c = root ?: return; c.innerHTML = ""
+        audioElement?.let { c.appendChild(it) }
         if (submitted) { audioElement?.pause(); renderResult(c) }
         else if (exam.tasks.isEmpty()) renderEmpty(c)
         else renderTask(c)
@@ -109,9 +160,18 @@ internal class ExamListeningController(examId: String, private val onBack: () ->
             })
         })
         c.appendChild(node("h3", "exam-title", task.instruction))
+        task.promptImageUrl?.let { imageUrl ->
+            c.appendChild(node("img", "exam-writing-image").apply {
+                setAttribute("src", imageUrl)
+                setAttribute("alt", requireNotNull(task.promptImageAlt) { "Missing image description for ${task.id}" })
+            })
+        }
         // Custom audio player — shows only the segment, not full track
         if (audioElement != null) {
-            seekToTask(task)
+            if (renderedTaskIdx != currentTaskIdx) {
+                seekToTask(task)
+                renderedTaskIdx = currentTaskIdx
+            }
             c.appendChild(buildCustomPlayer(task))
         }
         // Questions
@@ -137,13 +197,30 @@ internal class ExamListeningController(examId: String, private val onBack: () ->
     }
 
     private fun trueFalseOptions(q: ListeningQ) = node("div", "exam-options").apply {
-        listOf("PRAWDA", "FAŁSZ").forEach { opt ->
+        q.options.ifEmpty { listOf("PRAWDA", "FAŁSZ") }.forEach { opt ->
             appendChild((document.createElement("button") as HTMLButtonElement).apply {
                 type = "button"
                 className = if (answers[q.id] == opt) "exam-option selected" else "exam-option"
                 textContent = opt
-                addEventListener("click", { answers[q.id] = opt; redraw() })
+                addEventListener("click", { selectAnswer(q.id, opt) })
             })
+        }
+    }
+
+    private fun selectAnswer(questionId: String, answer: String) {
+        answers[questionId] = answer
+        val question = root?.querySelectorAll(".exam-reading-q") ?: return
+        for (i in 0 until question.length) {
+            val row = question.item(i) as? HTMLElement ?: continue
+            val buttons = row.querySelectorAll(".exam-option")
+            if (buttons.length == 0) continue
+            val matches = exam.tasks[currentTaskIdx].questions.getOrNull(i)?.id == questionId
+            if (!matches) continue
+            for (j in 0 until buttons.length) {
+                val button = buttons.item(j) as? HTMLButtonElement ?: continue
+                button.className = if (button.textContent == answer) "exam-option selected" else "exam-option"
+            }
+            return
         }
     }
 
@@ -153,7 +230,7 @@ internal class ExamListeningController(examId: String, private val onBack: () ->
                 type = "button"
                 className = if (answers[q.id] == opt) "exam-option selected" else "exam-option"
                 textContent = opt
-                addEventListener("click", { answers[q.id] = opt; redraw() })
+                addEventListener("click", { selectAnswer(q.id, opt) })
             })
         }
     }
@@ -167,18 +244,18 @@ internal class ExamListeningController(examId: String, private val onBack: () ->
     }
 
     private fun renderResult(c: HTMLElement) {
-        var correct = 0; var total = 0
+        var earnedQuarter = 0; var totalQuarter = 0
         exam.tasks.flatMap { it.questions }.forEach { q ->
-            total++
+            totalQuarter += q.pointsQuarter
             val ans = answers[q.id]?.trim()?.lowercase().orEmpty()
             val exp = q.correctAnswer.trim().lowercase()
-            if (ans == exp || (q.type == QuestionType.TrueFalse && matchTrueFalse(ans, exp))) correct++
+            if (ans == exp || (q.type == QuestionType.TrueFalse && matchTrueFalse(ans, exp))) earnedQuarter += q.pointsQuarter
         }
-        val pct = if (total > 0) (correct.toDouble() / total * 100).toInt() else 0
+        val pct = if (totalQuarter > 0) (earnedQuarter.toDouble() / totalQuarter * 100).toInt() else 0
         c.appendChild(node("h2", "exam-title", "${UiCopy.Results} — ${UiCopy.Listening}"))
         c.appendChild(node("div", "exam-score").apply {
             appendChild(node("div", "exam-score-big", "$pct%"))
-            appendChild(node("div", "exam-score-detail", "$correct / $total"))
+            appendChild(node("div", "exam-score-detail", "${formatQuarterPoints(earnedQuarter)} / ${formatQuarterPoints(totalQuarter)} баллов"))
         })
         c.appendChild(node("div", "exam-review").apply {
             exam.tasks.flatMap { it.questions }.forEachIndexed { i, q ->
@@ -196,7 +273,7 @@ internal class ExamListeningController(examId: String, private val onBack: () ->
             appendChild(navBtn("← К модулям") { onBack() })
             appendChild(node("span", "exam-nav-spacer"))
             appendChild(navBtn(UiCopy.TryAgain, true) {
-                answers.clear(); currentTaskIdx = 0; submitted = false; audioElement = null; redraw()
+                disposeAudio(); answers.clear(); currentTaskIdx = 0; submitted = false; setupAudio(); redraw()
             })
         })
     }

@@ -1,31 +1,36 @@
 DSL 1
 READING_PASSAGE {
-  passageId: "certyfikat-polski-B1-2017-read-1"
-  examRef: "certyfikat-polski-B1-2017"
+  passageId: certyfikat-polski-B1-2017-read-1
+  examRef: certyfikat-polski-B1-2017
   taskNumber: 1
-  instruction: "Zadanie 1"
+  instruction: "Proszę przeczytać akapity i zaznaczyć właściwe odpowiedzi."
+  text: "1. Każdy, kto będzie chciał skorzystać z Internetu, będzie mógł to zrobić w kiosku internetowym. Na razie jest ich kilka, ale wkrótce mają się znajdować w wielu miejscach w kraju.\n\n2. Kluby aktywnego poszukiwania pracy są jedną z form pomocy dla bezrobotnych. Mają one za zadanie pobudzić ich i zmotywować do bardziej aktywnego poszukiwania pracy oraz wzbogacić o potrzebne wiadomości i umiejętności.\n\n3. W Polsce na początku lat 90. na chipsy przerabiano kilka tysięcy ton ziemniaków rocznie. Teraz – 270 tys. ton. Statystyczny Polak zjada w ciągu roku kilogram chipsów, Brytyjczyk aż pięć kilo.\n\n4. Doskonale pamiętam, jak ciężko mi było z dala od Polski. Pierwsze kilka lat w USA to była ciągła tęsknota i brak przyjaciół. Wtedy, w ciężkich chwilach ciocia powtarzała mi stale, że jak mi się tu nie podoba, to mogę wracać.\n\n5. Jeśli chcesz wziąć kredyt studencki, musisz mieć konto w banku. Stypendia i pieniądze od rodziców lepiej trzymać na koncie niż w skarpecie schowanej w akademiku."
 }
 READING_PASSAGE {
-  passageId: "certyfikat-polski-B1-2017-read-2"
-  examRef: "certyfikat-polski-B1-2017"
+  passageId: certyfikat-polski-B1-2017-read-2
+  examRef: certyfikat-polski-B1-2017
   taskNumber: 2
-  instruction: "Zadanie 2"
+  instruction: "Proszę przeczytać tekst, a następnie zaznaczyć: P – gdy zdanie jest prawdziwe, F – gdy jest fałszywe."
+  text: "Mentor dla cudzoziemca\n\nOla Różycka, studentka psychologii, przez cały ubiegły rok opiekowała się Martiną, Włoszką z Bolonii, która przyjechała na Uniwersytet Warszawski studiować ekonomię.\n\n– Pomagałam jej załatwiać sprawy w dziekanacie, zapisać się do biblioteki, trafić na zajęcia, znaleźć mieszkanie. Samej byłoby jej trudno, bo nie znała polskiego – wspomina Ola. Była mentorką – osobą, która pomaga zagranicznym stypendystom odnaleźć się na uczelni i w mieście. Takiego opiekuna dostaje każdy cudzoziemiec na Uniwersytecie Warszawskim. Podobnie też jest w Szkole Głównej Handlowej.\n\nTen zwyczaj przyszedł z zachodnich uczelni, na które co roku przyjeżdża wielu studentów z całego świata. Coraz więcej przybywa ich też do Polski. Polscy studenci zgłaszają się, żeby polepszyć swój angielski albo inny język. W ankiecie zgłoszeniowej podają, jaki język znają i jaka ma być płeć ich podopiecznego. Bo mentorowanie szybko zmienia się we wspólne spotkania, imprezy, przyjaźń, a czasem nawet w coś więcej…\n\nKiedy zdarza się, że opiekun nie może zająć się studentem, do akcji wkracza Grupa Szybkiego Reagowania. Zastępuje mentora, by student obcokrajowiec nie czuł się zagubiony w mieście.\n\n– Zaprzyjaźniłyśmy się z Martiną. Spędziła w moim domu Wielkanoc. Chociaż moja mama nie zna włoskiego ani angielskiego, świetnie się porozumiewała z Martiną i bardzo się polubiły – wspomina Ola. Mentorska znajomość przetrwała wakacje: piszą do siebie maile, a za pół roku będą się spotykały we Włoszech. Ola wyjeżdża na stypendium do Rzymu. I tam, jako zagraniczna stypendystka, będzie miała okazję zobaczyć, jak wygląda praca mentora od drugiej strony."
 }
 READING_PASSAGE {
-  passageId: "certyfikat-polski-B1-2017-read-3"
-  examRef: "certyfikat-polski-B1-2017"
+  passageId: certyfikat-polski-B1-2017-read-3
+  examRef: certyfikat-polski-B1-2017
   taskNumber: 3
-  instruction: "Zadanie 3"
+  instruction: "Proszę przeczytać tekst i dopasować usunięte z niego fragmenty."
+  text: "Spacery\n\nObecnie większość czasu spędzamy w pomieszczeniach: mieszkaniach, biurach, fabrykach. Unikamy wysiłku, nie chodzimy na piechotę, a w wolnym czasie zamiast na przykład pójść [1] oglądać telewizję. Tak jest nam wygodniej.\n\nJeśli chcesz poprawić kondycję fizyczną bez [2], wybierz łatwy i tani sposób, czyli spacer. Ruch potrzebny jest wszystkim – [3]. Największym plusem spacerów jest to, że nie musimy kupować żadnego specjalistycznego sprzętu. Trzeba mieć tylko wygodne buty. Co więcej, [4] i przy każdej pogodzie. Najlepiej spacerować w [5] i miejskiego ruchu – człowiek najlepiej wypoczywa na łonie przyrody.\n\nJuż jedna godzina spaceru dziennie [6]. Powinien to być jednak wtedy intensywny marsz, w tempie 5 – 6 kilometrów na godzinę.\n\nOdmianą spaceru jest popularny także w Polsce nordic walking, czyli dynamiczny marsz z kijkami. Ogromną zaletą tej formy ruchu jest to, że można go polecić wszystkim, a zwłaszcza [7]. Jest on bowiem bezpieczną formą aktywności, połączonej ze spędzaniem czasu na świeżym powietrzu.\n\nB. dzieciom, ludziom młodym oraz osobom starszym\nC. wydawania pieniędzy na siłownię czy aerobik\nD. miejscach zielonych i spokojnych, z daleka od dróg\nE. na spacer można się wybrać o każdej porze dnia\nF. na spacer, wolimy siedzieć w domu i\nG. osobom starszym, z różnymi problemami zdrowotnymi\nH. zwiększa naszą kondycję fizyczną"
 }
 READING_PASSAGE {
-  passageId: "certyfikat-polski-B1-2017-read-4"
-  examRef: "certyfikat-polski-B1-2017"
+  passageId: certyfikat-polski-B1-2017-read-4
+  examRef: certyfikat-polski-B1-2017
   taskNumber: 4
-  instruction: "Zadanie 4"
+  instruction: "Proszę połączyć wypowiedzi z kolumny I z wypowiedziami z kolumny II."
+  text: "Jak zachęcić dziecko do czytania? Oto kilka wskazówek dla rodziców.\n\nA. Umówcie się z dzieckiem, że będzie mogło posiedzieć 15 minut przed telewizorem, jeśli spędzi 30 minut z książką.\nB. Dziecko, które widzi rodziców z książką, chętniej będzie szukać czegoś do czytania.\nC. Zachęcajcie dzieci, aby czytały na głos. Możecie zaplanować raz w miesiącu kolację z historią czytaną przez dziecko.\nD. Starsze dzieci zachęćcie do napisania listu lub e-maila do pisarza, którego książka je zaciekawiła.\nE. Pamiętajcie, że słuchania należy się uczyć. Nie denerwujcie się, gdy na początku dziecko nie potrafi się skoncentrować.\nF. Miejsce, gdzie stoją ulubione książki, powinno być na odpowiedniej wysokości dla dziecka.\nG. Na czytanie wykorzystujcie różne okoliczności. Może to być czas posiłków lub nawet kąpiel.\nH. Nie pytajcie, czy dziecko woli czytanie, czy oglądanie telewizji. Po prostu siadajcie obok siebie i czytajcie."
 }
 READING_PASSAGE {
-  passageId: "certyfikat-polski-B1-2017-read-5"
-  examRef: "certyfikat-polski-B1-2017"
+  passageId: certyfikat-polski-B1-2017-read-5
+  examRef: certyfikat-polski-B1-2017
   taskNumber: 5
-  instruction: "Zadanie 5"
+  instruction: "Proszę wybrać najlepszą z trzech możliwości podanych w nawiasach."
+  text: "W drugą rocznicę śmierci Marka Grechuty odbędzie się w Krakowie pierwsza edycja festiwalu jego twórczości pt.: „Korowód”.\n\nAnna Treter – krakowska piosenkarka i szefowa Fundacji „Piosenkarnia” opowiada:\nŻona Marka dobrze [1] koncerty piosenki literackiej przygotowywane przez Fundację i poprosiła mnie, żebym [2] koncert w drugą rocznicę śmierci jej męża. Propozycja ta zgadzała się z celami Fundacji, [3] postanowiłam zrealizować ten pomysł. Najpierw odbył się konkurs na interpretację piosenek Marka Grechuty, a [4] zdecydowaliśmy się dołączyć nowe elementy do przygotowywanego koncertu. [5] festiwalu będzie można nie tylko słuchać muzyki. Przygotowujemy również [6] obrazów Marka Grechuty. Natomiast fotograf – Adam Bujak pokaże publicznie po raz pierwszy swoje archiwalne [7], które robił Markowi Grechucie. Festiwal zakończy modlitwa w jednym z krakowskich [8], a potem wszyscy przejdą na cmentarz Rakowiecki, aby tam przy pomniku Marka Grechuty złożyć kwiaty."
 }

@@ -1,0 +1,13 @@
+TEST "B1 2017 reading true and false each earn one point" PROFILE playmode
+  open exam="B1 Certyfikat 2017" module="reading"
+  next
+  ASSERT reading.questionCount == 7
+  ASSERT reading.firstOptions == "PRAWDA|FAŁSZ"
+  chooseReading index=1 answer="PRAWDA"
+  ASSERT reading.selectedFirst == "PRAWDA"
+  chooseReading index=2 answer="FAŁSZ"
+  ASSERT reading.selectedSecond == "FAŁSZ"
+  advance count=3
+  submit
+  ASSERT exam.scoreDetail == "2 / 30"
+END

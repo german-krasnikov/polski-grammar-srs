@@ -1,137 +1,431 @@
 DSL 1
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2017-g1"
-  testRef: "certyfikat-polski-B1-2017-grammar-4"
-  questionType: fill_gap
-  context: "Zadanie IV, pytanie 1"
-  correctAnswer: "z kim"
-  points: 1
+  itemId: B1-2017-g1-1
+  testRef: certyfikat-polski-B1-2017-grammar-1
+  questionType: choose_form
+  context: "dumni są z ___"
+  options: "dobry teatr|dobrego teatru|dobrym teatrem"
+  correctAnswer: "dobrego teatru"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2017-g2"
-  testRef: "certyfikat-polski-B1-2017-grammar-4"
-  questionType: fill_gap
-  context: "Zadanie IV, pytanie 2"
-  correctAnswer: "p"
-  points: 1
+  itemId: B1-2017-g1-2
+  testRef: certyfikat-polski-B1-2017-grammar-1
+  questionType: choose_form
+  context: "w którym ___ odbywa się festiwal"
+  options: "późnego lata|późnym latem|późnym lecie"
+  correctAnswer: "późnym latem"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2017-g3"
-  testRef: "certyfikat-polski-B1-2017-grammar-4"
-  questionType: fill_gap
-  context: "Zadanie IV, pytanie 3"
-  correctAnswer: "dlaczego"
-  points: 1
+  itemId: B1-2017-g1-3
+  testRef: certyfikat-polski-B1-2017-grammar-1
+  questionType: choose_form
+  context: "wypić z ___ filiżankę kawy"
+  options: "ich|nich|nimi"
+  correctAnswer: nimi
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2017-g4"
-  testRef: "certyfikat-polski-B1-2017-grammar-4"
-  questionType: fill_gap
-  context: "Zadanie IV, pytanie 4"
-  correctAnswer: "p"
-  points: 1
+  itemId: B1-2017-g1-4
+  testRef: certyfikat-polski-B1-2017-grammar-1
+  questionType: choose_form
+  context: "Na turystów czekają tu ___"
+  options: "wygodnych hoteli|wygodne hotele|wygodnymi hotelami"
+  correctAnswer: "wygodne hotele"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2017-g5"
-  testRef: "certyfikat-polski-B1-2017-grammar-4"
-  questionType: fill_gap
-  context: "Zadanie IV, pytanie 5"
-  correctAnswer: "a"
-  points: 1
+  itemId: B1-2017-g1-5
+  testRef: certyfikat-polski-B1-2017-grammar-1
+  questionType: choose_form
+  context: "W ___ jest jeden z najnowocześniejszych ogrodów zoologicznych"
+  options: "nasze miasto|naszym miastem|naszym mieście"
+  correctAnswer: "naszym mieście"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2017-g6"
-  testRef: "certyfikat-polski-B1-2017-grammar-4"
-  questionType: fill_gap
-  context: "Zadanie IV, pytanie 6"
-  correctAnswer: "n"
-  points: 1
+  itemId: B1-2017-g1-6
+  testRef: certyfikat-polski-B1-2017-grammar-1
+  questionType: choose_form
+  context: "Można tu zobaczyć dużo ___"
+  options: "zwierzęta|zwierząt|zwierzęciu"
+  correctAnswer: "zwierząt"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2017-g7"
-  testRef: "certyfikat-polski-B1-2017-grammar-4"
-  questionType: fill_gap
-  context: "Zadanie IV, pytanie 7"
-  correctAnswer: "o"
-  points: 1
+  itemId: B1-2017-g1-7
+  testRef: certyfikat-polski-B1-2017-grammar-1
+  questionType: choose_form
+  context: "i długo ___ obserwować"
+  options: "one|je|ich"
+  correctAnswer: je
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2017-g8"
-  testRef: "certyfikat-polski-B1-2017-grammar-4"
-  questionType: fill_gap
-  context: "Zadanie IV, pytanie 8"
-  correctAnswer: "r"
-  points: 1
+  itemId: B1-2017-g1-8
+  testRef: certyfikat-polski-B1-2017-grammar-1
+  questionType: choose_form
+  context: "ZOO leży w centrum ___"
+  options: "dużym parkiem|dużego parku|dużym parku"
+  correctAnswer: "dużego parku"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2017-g9"
-  testRef: "certyfikat-polski-B1-2017-grammar-4"
-  questionType: fill_gap
-  context: "Zadanie IV, pytanie 9"
-  correctAnswer: "t"
-  points: 1
+  itemId: B1-2017-g1-9
+  testRef: certyfikat-polski-B1-2017-grammar-1
+  questionType: choose_form
+  context: "jeśli ktoś pójdzie ___ rzekę"
+  options: "do|nad|na"
+  correctAnswer: nad
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2017-g10"
-  testRef: "certyfikat-polski-B1-2017-grammar-4"
-  questionType: fill_gap
-  context: "Zadanie IV, pytanie 10"
-  correctAnswer: "S"
-  points: 1
+  itemId: B1-2017-g1-10
+  testRef: certyfikat-polski-B1-2017-grammar-1
+  questionType: choose_form
+  context: "mogą grać ___ piłkę"
+  options: "na|z|w"
+  correctAnswer: w
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2017-g11"
-  testRef: "certyfikat-polski-B1-2017-grammar-4"
-  questionType: fill_gap
-  context: "Zadanie IV, pytanie 11"
-  correctAnswer: "TEST PRZYKŁADOWY"
-  points: 1
+  itemId: B1-2017-g2-1
+  testRef: certyfikat-polski-B1-2017-grammar-2
+  questionType: choose_form
+  context: "latem dzień jest ___"
+  options: "dłuższy|dłużej|dłuższym"
+  correctAnswer: "dłuższy"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2017-g12"
-  testRef: "certyfikat-polski-B1-2017-grammar-4"
-  questionType: fill_gap
-  context: "Zadanie IV, pytanie 12"
-  correctAnswer: "B"
-  points: 1
+  itemId: B1-2017-g2-2
+  testRef: certyfikat-polski-B1-2017-grammar-2
+  questionType: choose_form
+  context: "mamy wtedy zdecydowanie ___ kontaktu ze słońcem"
+  options: "większego|większych|więcej"
+  correctAnswer: "więcej"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2017-g13"
-  testRef: "certyfikat-polski-B1-2017-grammar-4"
-  questionType: fill_gap
-  context: "Zadanie IV, pytanie 13"
-  correctAnswer: "TRANSKRYPCJE I KLUCZ DO ZADAŃ"
-  points: 1
+  itemId: B1-2017-g2-3
+  testRef: certyfikat-polski-B1-2017-grammar-2
+  questionType: choose_form
+  context: "Zimą także ___ jest kupić świeże warzywa"
+  options: "trudniej|trudniejsze|trudne"
+  correctAnswer: trudniej
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2017-g14"
-  testRef: "certyfikat-polski-B1-2017-grammar-6"
-  questionType: fill_gap
-  context: "Zadanie VI, pytanie 14"
-  correctAnswer: "Zbędny spójnik"
-  points: 1
+  itemId: B1-2017-g2-4
+  testRef: certyfikat-polski-B1-2017-grammar-2
+  questionType: choose_form
+  context: "owoce stanowią ___ źródło witamin"
+  options: "najlepiej|najlepsze|lepszą"
+  correctAnswer: najlepsze
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2017-g15"
-  testRef: "certyfikat-polski-B1-2017-grammar-6"
-  questionType: fill_gap
-  context: "Zadanie VI, pytanie 15"
-  correctAnswer: "ale"
-  points: 1
+  itemId: B1-2017-g2-5
+  testRef: certyfikat-polski-B1-2017-grammar-2
+  questionType: choose_form
+  context: "święta, które lubią ___ w całym roku"
+  options: "bardzo|bardziej|najbardziej"
+  correctAnswer: najbardziej
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2017-g16"
-  testRef: "certyfikat-polski-B1-2017-grammar-7"
-  questionType: fill_gap
-  context: "Zadanie VII, pytanie 16"
-  correctAnswer: "Oraz inne poprawne zdania o tej treści"
-  points: 1
+  itemId: B1-2017-g3-1
+  testRef: certyfikat-polski-B1-2017-grammar-3
+  questionType: choose_form
+  context: "Gdybyśmy mogły znaleźć pokój, ___ z ochotą"
+  options: "przyjeżdżałybyśmy|przyjechałybyśmy|przyjedźmy"
+  correctAnswer: "przyjechałybyśmy"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2017-g17"
-  testRef: "certyfikat-polski-B1-2017-grammar-7"
+  itemId: B1-2017-g3-2
+  testRef: certyfikat-polski-B1-2017-grammar-3
+  questionType: choose_form
+  context: "___ nam proszę coś niedaleko od centrum"
+  options: "wynajmiesz|wynajmij|wynajmuj"
+  correctAnswer: wynajmij
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: B1-2017-g3-3
+  testRef: certyfikat-polski-B1-2017-grammar-3
+  questionType: choose_form
+  context: "zaraz razem z Piotrem ___ do hotelu"
+  options: "zadzwonimy|zadzwonilibyśmy|dzwonilibyśmy"
+  correctAnswer: zadzwonimy
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: B1-2017-g3-4
+  testRef: certyfikat-polski-B1-2017-grammar-3
+  questionType: choose_form
+  context: "Jeśli ___ wolny pokój"
+  options: "znajdźmy|znajdziemy|będziemy znajdować"
+  correctAnswer: znajdziemy
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: B1-2017-g3-5
+  testRef: certyfikat-polski-B1-2017-grammar-3
+  questionType: choose_form
+  context: "to go ___"
+  options: "zarezerwowalibyśmy|rezerwujemy|zarezerwujemy"
+  correctAnswer: zarezerwujemy
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: B1-2017-g3-6
+  testRef: certyfikat-polski-B1-2017-grammar-3
+  questionType: choose_form
+  context: "___ z Magdą na informację od Ciebie"
+  options: "czekamy|czekałybyśmy|poczekajmy"
+  correctAnswer: czekamy
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: B1-2017-g3-7
+  testRef: certyfikat-polski-B1-2017-grammar-3
+  questionType: choose_form
+  context: "___ się ze mną koniecznie jutro rano"
+  options: "Skontaktujesz|Skontaktuj|Kontaktowałabyś"
+  correctAnswer: Skontaktuj
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: B1-2017-g3-8
+  testRef: certyfikat-polski-B1-2017-grammar-3
+  questionType: choose_form
+  context: "to Ci ___"
+  options: "będę odpowiadał|odpowiedziałbym|odpowiem"
+  correctAnswer: odpowiem
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: B1-2017-g3-9
+  testRef: certyfikat-polski-B1-2017-grammar-3
+  questionType: choose_form
+  context: "A gdybyśmy nie ___ pokoju?"
+  options: "dostawały|dostały|dostałyby"
+  correctAnswer: "dostały"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: B1-2017-g3-10
+  testRef: certyfikat-polski-B1-2017-grammar-3
+  questionType: choose_form
+  context: "nie ___ na wszystko tak pesymistycznie"
+  options: "patrz|popatrz|patrzysz"
+  correctAnswer: patrz
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: B1-2017-g4-1
+  testRef: certyfikat-polski-B1-2017-grammar-4
   questionType: fill_gap
-  context: "Zadanie VII, pytanie 17"
-  correctAnswer: "ZADANIA DODATKOWE"
-  points: 1
+  context: "Łukasz dowiedział się o tym z gazety. — ___ Łukasz się o tym dowiedział?"
+  correctAnswer: "skąd"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: B1-2017-g4-2
+  testRef: certyfikat-polski-B1-2017-grammar-4
+  questionType: fill_gap
+  context: "Agata chce porozmawiać tylko z tym nowym studentem. — ___ studentem Agata chce porozmawiać?"
+  correctAnswer: "z którym"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: B1-2017-g4-3
+  testRef: certyfikat-polski-B1-2017-grammar-4
+  questionType: fill_gap
+  context: "Anka poszła do swojego pokoju po książkę telefoniczną. — ___ Anka poszła do swojego pokoju?"
+  correctAnswer: "po co"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: B1-2017-g4-4
+  testRef: certyfikat-polski-B1-2017-grammar-4
+  questionType: fill_gap
+  context: "Oni nie lubią filmów historycznych. — ___ filmów oni nie lubią?"
+  correctAnswer: jakich
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: B1-2017-g4-5
+  testRef: certyfikat-polski-B1-2017-grammar-4
+  questionType: fill_gap
+  context: "Marcin potrzebuje nowego roweru. — ___ potrzebuje Marcin?"
+  correctAnswer: czego
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: B1-2017-g5-1
+  testRef: certyfikat-polski-B1-2017-grammar-5
+  questionType: fill_gap
+  context: "Kiedy ja i moi koledzy ___ (być) małymi chłopcami"
+  correctAnswer: "byliśmy"
+  pointsQuarter: 3
+}
+GRAMMAR_ITEM {
+  itemId: B1-2017-g5-2
+  testRef: certyfikat-polski-B1-2017-grammar-5
+  questionType: fill_gap
+  context: "___ (chcieć) zostać policjantami"
+  correctAnswer: "chcieliśmy"
+  pointsQuarter: 3
+}
+GRAMMAR_ITEM {
+  itemId: B1-2017-g5-3
+  testRef: certyfikat-polski-B1-2017-grammar-5
+  questionType: fill_gap
+  context: "Ja nie ___ (zmienić) swoich planów do dzisiaj"
+  correctAnswer: "zmieniłem"
+  pointsQuarter: 3
+}
+GRAMMAR_ITEM {
+  itemId: B1-2017-g5-4
+  testRef: certyfikat-polski-B1-2017-grammar-5
+  questionType: fill_gap
+  context: "nadal ___ (zamierzać) studiować"
+  correctAnswer: zamierzam
+  pointsQuarter: 3
+}
+GRAMMAR_ITEM {
+  itemId: B1-2017-g5-5
+  testRef: certyfikat-polski-B1-2017-grammar-5
+  questionType: fill_gap
+  context: "Teraz jednak ___ (planować) przerwę w nauce"
+  correctAnswer: "planuję"
+  pointsQuarter: 3
+}
+GRAMMAR_ITEM {
+  itemId: B1-2017-g5-6
+  testRef: certyfikat-polski-B1-2017-grammar-5
+  questionType: fill_gap
+  context: "najbliższy rok ___ (mieć) zamiar poświęcić na pracę"
+  correctAnswer: mam
+  pointsQuarter: 3
+}
+GRAMMAR_ITEM {
+  itemId: B1-2017-g5-7
+  testRef: certyfikat-polski-B1-2017-grammar-5
+  questionType: fill_gap
+  context: "Siostra i jeden z moich braci jeszcze się ___ (uczyć)"
+  correctAnswer: "uczą"
+  pointsQuarter: 3
+}
+GRAMMAR_ITEM {
+  itemId: B1-2017-g5-8
+  testRef: certyfikat-polski-B1-2017-grammar-5
+  questionType: fill_gap
+  context: "najmłodszy Maciek ___ (chodzić) do przedszkola"
+  correctAnswer: chodzi
+  pointsQuarter: 3
+}
+GRAMMAR_ITEM {
+  itemId: B1-2017-g5-9
+  testRef: certyfikat-polski-B1-2017-grammar-5
+  questionType: fill_gap
+  context: "rodzice nie ___ (móc) dłużej pomagać mi finansowo"
+  correctAnswer: "mogą"
+  pointsQuarter: 3
+}
+GRAMMAR_ITEM {
+  itemId: B1-2017-g5-10
+  testRef: certyfikat-polski-B1-2017-grammar-5
+  questionType: fill_gap
+  context: "___ (ja – widzieć) wczoraj ogłoszenie"
+  correctAnswer: "widziałem"
+  pointsQuarter: 3
+}
+GRAMMAR_ITEM {
+  itemId: B1-2017-g6-1
+  testRef: certyfikat-polski-B1-2017-grammar-6
+  questionType: fill_gap
+  context: "___ w dzieciństwie marzył o karierze aktora, wybrał studia"
+  options: "a|ale|chociaż|czy|gdyby|że"
+  correctAnswer: "Chociaż"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: B1-2017-g6-2
+  testRef: certyfikat-polski-B1-2017-grammar-6
+  questionType: fill_gap
+  context: "Na początku nie był pewien, ___ to dobry wybór"
+  options: "a|ale|chociaż|czy|gdyby|że"
+  correctAnswer: czy
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: B1-2017-g6-3
+  testRef: certyfikat-polski-B1-2017-grammar-6
+  questionType: fill_gap
+  context: "zrozumiał jednak, ___ właśnie tym chce się zajmować"
+  options: "a|ale|chociaż|czy|gdyby|że"
+  correctAnswer: "że"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: B1-2017-g6-4
+  testRef: certyfikat-polski-B1-2017-grammar-6
+  questionType: fill_gap
+  context: "Ma codziennie kontakt z ludźmi, ___ to jego zdaniem najważniejsze"
+  options: "a|ale|chociaż|czy|gdyby|że"
+  correctAnswer: a
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: B1-2017-g6-5
+  testRef: certyfikat-polski-B1-2017-grammar-6
+  questionType: fill_gap
+  context: "___ miał wybierać jeszcze raz, na pewno zrobiłby to samo"
+  options: "a|ale|chociaż|czy|gdyby|że"
+  correctAnswer: Gdyby
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: B1-2017-g7-1
+  testRef: certyfikat-polski-B1-2017-grammar-7
+  questionType: transform
+  context: "Ewelina nie wie, kim jest ta pani. (zna) → ___"
+  correctAnswer: "Ewelina nie zna tej pani."
+  pointsQuarter: 4
+}
+GRAMMAR_ITEM {
+  itemId: B1-2017-g7-2
+  testRef: certyfikat-polski-B1-2017-grammar-7
+  questionType: transform
+  context: "Jestem starszy niż ty. (od) → ___"
+  correctAnswer: "Jestem starszy od ciebie."
+  pointsQuarter: 4
+}
+GRAMMAR_ITEM {
+  itemId: B1-2017-g7-3
+  testRef: certyfikat-polski-B1-2017-grammar-7
+  questionType: transform
+  context: "Magdę interesują stare fotografie. (interesuje się) → ___"
+  correctAnswer: "Magda interesuje się starymi fotografiami."
+  pointsQuarter: 4
+}
+GRAMMAR_ITEM {
+  itemId: B1-2017-g7-4
+  testRef: certyfikat-polski-B1-2017-grammar-7
+  questionType: transform
+  context: "Michel jest francuskim studentem. (to) → ___"
+  correctAnswer: "Michel to francuski student."
+  pointsQuarter: 4
+}
+GRAMMAR_ITEM {
+  itemId: B1-2017-g7-5
+  testRef: certyfikat-polski-B1-2017-grammar-7
+  questionType: transform
+  context: "Jak nazywa się autor tej powieści? (napisał) → ___"
+  correctAnswer: "Kto napisał tę powieść."
+  pointsQuarter: 4
 }

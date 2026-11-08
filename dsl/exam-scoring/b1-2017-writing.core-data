@@ -1,0 +1,39 @@
+DSL 1
+# Official B1/2017 writing sets and word limits from paper p22.
+WRITING_PROMPT_CASE {
+  id: b1-2017-writing-I-1
+  setId: I
+  taskNumber: 1
+  wordLimit: 20
+}
+WRITING_PROMPT_CASE {
+  id: b1-2017-writing-I-2
+  setId: I
+  taskNumber: 2
+  wordLimit: 180
+}
+WRITING_PROMPT_CASE {
+  id: b1-2017-writing-II-1
+  setId: II
+  taskNumber: 1
+  wordLimit: 25
+}
+WRITING_PROMPT_CASE {
+  id: b1-2017-writing-II-2
+  setId: II
+  taskNumber: 2
+  wordLimit: 175
+  promptImageUrl: exam-images/B1-2017-writing-II-2.jpeg
+}
+WRITING_PROMPT_CASE {
+  id: b1-2017-writing-III-1
+  setId: III
+  taskNumber: 1
+  wordLimit: 60
+}
+WRITING_PROMPT_CASE {
+  id: b1-2017-writing-III-2
+  setId: III
+  taskNumber: 2
+  wordLimit: 140
+}

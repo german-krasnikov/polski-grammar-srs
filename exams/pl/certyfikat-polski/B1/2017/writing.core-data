@@ -1,10 +1,63 @@
 DSL 1
 WRITING_TASK {
-  taskId: "certyfikat-polski-B1-2017-writing-1"
-  examRef: "certyfikat-polski-B1-2017"
+  taskId: B1-2017-writing-I-1
+  examRef: certyfikat-polski-B1-2017
   taskNumber: 1
-  instruction: "Zestaw I"
-  promptText: "Prosze wykonac zadanie pisemne zgodnie z poleceniem."
-  wordLimit: 200
-  genre: letter
+  setId: I
+  instruction: "Zestaw I, zadanie a"
+  promptText: "Proszę napisać zaproszenie dla nauczyciela lub szefa na swoje urodziny / imieniny, które organizuje Pani / Pan w restauracji."
+  wordLimit: 20
+  genre: invitation
+}
+WRITING_TASK {
+  taskId: B1-2017-writing-I-2
+  examRef: certyfikat-polski-B1-2017
+  taskNumber: 2
+  setId: I
+  instruction: "Zestaw I, zadanie b"
+  promptText: "„Wakacje w domu…”. Proszę napisać wypracowanie (esej szkolny)."
+  wordLimit: 180
+  genre: essay
+}
+WRITING_TASK {
+  taskId: B1-2017-writing-II-1
+  examRef: certyfikat-polski-B1-2017
+  taskNumber: 1
+  setId: II
+  instruction: "Zestaw II, zadanie a"
+  promptText: "Proszę napisać życzenia dla przyjaciół z okazji ich ślubu."
+  wordLimit: 25
+  genre: wishes
+}
+WRITING_TASK {
+  taskId: B1-2017-writing-II-2
+  examRef: certyfikat-polski-B1-2017
+  taskNumber: 2
+  setId: II
+  instruction: "Zestaw II, zadanie b"
+  promptText: "Proszę napisać opowiadanie pt. „Jesteśmy razem już trzy lata…”. Proszę wykorzystać zdjęcie."
+  promptImageUrl: exam-images/B1-2017-writing-II-2.jpeg
+  promptImageAlt: "Mężczyzna siedzi nad wodą i głaszcze psa."
+  wordLimit: 175
+  genre: story
+}
+WRITING_TASK {
+  taskId: B1-2017-writing-III-1
+  examRef: certyfikat-polski-B1-2017
+  taskNumber: 1
+  setId: III
+  instruction: "Zestaw III, zadanie a"
+  promptText: "Proszę opisać najpiękniejszy prezent, który dostała Pani / dostał Pan na urodziny lub imieniny."
+  wordLimit: 60
+  genre: description
+}
+WRITING_TASK {
+  taskId: B1-2017-writing-III-2
+  examRef: certyfikat-polski-B1-2017
+  taskNumber: 2
+  setId: III
+  instruction: "Zestaw III, zadanie b"
+  promptText: "Proszę napisać sprawozdanie (relację) z wycieczki lub podróży."
+  wordLimit: 140
+  genre: report
 }

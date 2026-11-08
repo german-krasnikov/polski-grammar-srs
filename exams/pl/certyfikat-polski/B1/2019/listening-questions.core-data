@@ -1,356 +1,379 @@
 DSL 1
 LISTENING_QUESTION {
-  questionId: "B1-2019-lq1-1"
-  taskRef: "B1-2019-listen-1"
+  questionId: B1-2019-lq1-1
+  taskRef: B1-2019-listen-1
   questionType: multiple_choice
-  questionText: "Pytanie 1"
-  options: "a|b|c"
-  correctAnswer: "b"
-  points: 1
+  questionText: "Ta wypowiedź jest typowa"
+  options: "a) w kinie.|b) w bibliotece.|c) w księgarni."
+  correctAnswer: "b) w bibliotece."
+  pointsQuarter: 2
 }
 LISTENING_QUESTION {
-  questionId: "B1-2019-lq1-2"
-  taskRef: "B1-2019-listen-1"
+  questionId: B1-2019-lq1-2
+  taskRef: B1-2019-listen-1
   questionType: multiple_choice
-  questionText: "Pytanie 2"
-  options: "a|b|c"
-  correctAnswer: "c"
-  points: 1
+  questionText: "Ta wypowiedź to fragment"
+  options: "a) wizyty u lekarza.|b) egzaminu na prawo jazdy.|c) rozmowy o pracę."
+  correctAnswer: "c) rozmowy o pracę."
+  pointsQuarter: 2
 }
 LISTENING_QUESTION {
-  questionId: "B1-2019-lq1-3"
-  taskRef: "B1-2019-listen-1"
+  questionId: B1-2019-lq1-3
+  taskRef: B1-2019-listen-1
   questionType: multiple_choice
-  questionText: "Pytanie 3"
-  options: "a|b|c"
-  correctAnswer: "b"
-  points: 1
+  questionText: "Ta wypowiedź oznacza"
+  options: "a) odmowę.|b) niepewność.|c) komplement."
+  correctAnswer: "b) niepewność."
+  pointsQuarter: 2
 }
 LISTENING_QUESTION {
-  questionId: "B1-2019-lq1-4"
-  taskRef: "B1-2019-listen-1"
+  questionId: B1-2019-lq1-4
+  taskRef: B1-2019-listen-1
   questionType: multiple_choice
-  questionText: "Pytanie 4"
-  options: "a|b|c"
-  correctAnswer: "a"
-  points: 1
+  questionText: "Ta wypowiedź jest typowa"
+  options: "a) u fryzjera.|b) w drogerii.|c) u lekarza."
+  correctAnswer: "a) u fryzjera."
+  pointsQuarter: 2
 }
 LISTENING_QUESTION {
-  questionId: "B1-2019-lq1-5"
-  taskRef: "B1-2019-listen-1"
+  questionId: B1-2019-lq1-5
+  taskRef: B1-2019-listen-1
   questionType: multiple_choice
-  questionText: "Pytanie 5"
-  options: "a|b|c"
-  correctAnswer: "a"
-  points: 1
+  questionText: "Ta wypowiedź oznacza"
+  options: "a) radę.|b) prośbę.|c) ofertę."
+  correctAnswer: "a) radę."
+  pointsQuarter: 2
 }
 LISTENING_QUESTION {
-  questionId: "B1-2019-lq1-6"
-  taskRef: "B1-2019-listen-1"
+  questionId: B1-2019-lq1-6
+  taskRef: B1-2019-listen-1
   questionType: multiple_choice
-  questionText: "Pytanie 6"
-  options: "a|b|c"
-  correctAnswer: "c"
-  points: 1
+  questionText: "Ta wypowiedź jest typowa"
+  options: "a) w księgarni.|b) u optyka.|c) w kwiaciarni."
+  correctAnswer: "c) w kwiaciarni."
+  pointsQuarter: 2
 }
 LISTENING_QUESTION {
-  questionId: "B1-2019-lq1-7"
-  taskRef: "B1-2019-listen-1"
+  questionId: B1-2019-lq1-7
+  taskRef: B1-2019-listen-1
   questionType: multiple_choice
-  questionText: "Pytanie 7"
-  options: "a|b|c"
-  correctAnswer: "a"
-  points: 1
+  questionText: "Ta wypowiedź jest typowa"
+  options: "a) w banku.|b) w kinie.|c) w kantorze."
+  correctAnswer: "a) w banku."
+  pointsQuarter: 2
 }
 LISTENING_QUESTION {
-  questionId: "B1-2019-lq1-8"
-  taskRef: "B1-2019-listen-1"
+  questionId: B1-2019-lq1-8
+  taskRef: B1-2019-listen-1
   questionType: multiple_choice
-  questionText: "Pytanie 8"
-  options: "a|b|c"
-  correctAnswer: "b"
-  points: 1
+  questionText: "Ta wypowiedź to fragment"
+  options: "a) diagnozy lekarza.|b) prognozy pogody.|c) rozmowy o pracę."
+  correctAnswer: "b) prognozy pogody."
+  pointsQuarter: 2
 }
 LISTENING_QUESTION {
-  questionId: "B1-2019-lq1-9"
-  taskRef: "B1-2019-listen-1"
+  questionId: B1-2019-lq1-9
+  taskRef: B1-2019-listen-1
   questionType: multiple_choice
-  questionText: "Pytanie 9"
-  options: "a|b|c"
-  correctAnswer: "a"
-  points: 1
+  questionText: "Ta wypowiedź to"
+  options: "a) życzenia ślubne.|b) kondolencje.|c) życzenia urodzinowe."
+  correctAnswer: "a) życzenia ślubne."
+  pointsQuarter: 2
 }
 LISTENING_QUESTION {
-  questionId: "B1-2019-lq1-10"
-  taskRef: "B1-2019-listen-1"
+  questionId: B1-2019-lq1-10
+  taskRef: B1-2019-listen-1
   questionType: multiple_choice
-  questionText: "Pytanie 10"
-  options: "a|b|c"
-  correctAnswer: "b"
-  points: 1
+  questionText: "Ta wypowiedź to fragment audycji"
+  options: "a) o podróżach.|b) o sporcie.|c) o religii."
+  correctAnswer: "b) o sporcie."
+  pointsQuarter: 2
 }
 LISTENING_QUESTION {
-  questionId: "B1-2019-lq1-11"
-  taskRef: "B1-2019-listen-1"
+  questionId: B1-2019-lq1-11
+  taskRef: B1-2019-listen-1
   questionType: multiple_choice
-  questionText: "Pytanie 11"
-  options: "a|b|c"
-  correctAnswer: "c"
-  points: 1
+  questionText: "Ta wypowiedź oznacza"
+  options: "a) prośbę.|b) propozycję.|c) zakaz."
+  correctAnswer: "c) zakaz."
+  pointsQuarter: 2
 }
 LISTENING_QUESTION {
-  questionId: "B1-2019-lq1-12"
-  taskRef: "B1-2019-listen-1"
+  questionId: B1-2019-lq1-12
+  taskRef: B1-2019-listen-1
   questionType: multiple_choice
-  questionText: "Pytanie 12"
-  options: "a|b|c"
-  correctAnswer: "c"
-  points: 1
+  questionText: "Ta wypowiedź jest typowa"
+  options: "a) w tramwaju.|b) w kasie biletowej.|c) w taksówce."
+  correctAnswer: "c) w taksówce."
+  pointsQuarter: 2
 }
 LISTENING_QUESTION {
-  questionId: "B1-2019-lq1-13"
-  taskRef: "B1-2019-listen-1"
+  questionId: B1-2019-lq1-13
+  taskRef: B1-2019-listen-1
   questionType: multiple_choice
-  questionText: "Pytanie 13"
-  options: "a|b|c"
-  correctAnswer: "a"
-  points: 1
+  questionText: "Ta wypowiedź dotyczy"
+  options: "a) ubioru.|b) fryzury.|c) makijażu."
+  correctAnswer: "a) ubioru."
+  pointsQuarter: 2
 }
 LISTENING_QUESTION {
-  questionId: "B1-2019-lq1-14"
-  taskRef: "B1-2019-listen-1"
+  questionId: B1-2019-lq1-14
+  taskRef: B1-2019-listen-1
   questionType: multiple_choice
-  questionText: "Pytanie 14"
-  options: "a|b|c"
-  correctAnswer: "c"
-  points: 1
+  questionText: "Ta wypowiedź to fragment"
+  options: "a) relacji sportowej.|b) charakterystyki.|c) komunikatu policji."
+  correctAnswer: "c) komunikatu policji."
+  pointsQuarter: 2
 }
 LISTENING_QUESTION {
-  questionId: "B1-2019-lq2-1"
-  taskRef: "B1-2019-listen-2"
+  questionId: B1-2019-lq2-1
+  taskRef: B1-2019-listen-2
   questionType: true_false
-  questionText: "Pytanie 1"
-  correctAnswer: "NIE"
-  points: 1
+  questionText: "Do tej pory niezbyt dużo sklepów bierze udział w akcji."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "B1-2019-lq2-2"
-  taskRef: "B1-2019-listen-2"
+  questionId: B1-2019-lq2-2
+  taskRef: B1-2019-listen-2
   questionType: true_false
-  questionText: "Pytanie 2"
-  correctAnswer: "TAK"
-  points: 1
+  questionText: "Akcja „Torby bumerangi” ma pomóc dbać o środowisko."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "B1-2019-lq2-3"
-  taskRef: "B1-2019-listen-2"
+  questionId: B1-2019-lq2-3
+  taskRef: B1-2019-listen-2
   questionType: true_false
-  questionText: "Pytanie 3"
-  correctAnswer: "TAK"
-  points: 1
+  questionText: "Włączenie się do projektu jest dosyć skomplikowane."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "B1-2019-lq2-4"
-  taskRef: "B1-2019-listen-2"
+  questionId: B1-2019-lq2-4
+  taskRef: B1-2019-listen-2
   questionType: true_false
-  questionText: "Pytanie 4"
-  correctAnswer: "NIE"
-  points: 1
+  questionText: "W projekcie wykorzystywane są tylko nowe torby."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "B1-2019-lq2-5"
-  taskRef: "B1-2019-listen-2"
+  questionId: B1-2019-lq2-5
+  taskRef: B1-2019-listen-2
   questionType: true_false
-  questionText: "Pytanie 5"
-  correctAnswer: "TAK"
-  points: 1
+  questionText: "Pomysł na zorganizowanie takiej akcji powstał poza Polską."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "B1-2019-lq2-6"
-  taskRef: "B1-2019-listen-2"
+  questionId: B1-2019-lq2-6
+  taskRef: B1-2019-listen-2
   questionType: true_false
-  questionText: "Pytanie 6"
-  correctAnswer: "NIE"
-  points: 1
+  questionText: "Czasami właściciele sklepów sami kontaktują się z organizatorami."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "B1-2019-lq2-7"
-  taskRef: "B1-2019-listen-2"
+  questionId: B1-2019-lq2-7
+  taskRef: B1-2019-listen-2
   questionType: true_false
-  questionText: "Pytanie 7"
-  correctAnswer: "TAK"
-  points: 1
+  questionText: "Przede wszystkim sklepy spożywcze zainteresowały się tą akcją."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "B1-2019-lq2-8"
-  taskRef: "B1-2019-listen-2"
+  questionId: B1-2019-lq2-8
+  taskRef: B1-2019-listen-2
   questionType: true_false
-  questionText: "Pytanie 8"
-  correctAnswer: "NIE"
-  points: 1
+  questionText: "Organizatorzy bali się, że torby nie będą wracały do koszy."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "B1-2019-lq3-1"
-  taskRef: "B1-2019-listen-3"
+  questionId: B1-2019-lq3-1
+  taskRef: B1-2019-listen-3
   questionType: multiple_choice
-  questionText: "Pytanie 1"
-  options: "a|b|c"
-  correctAnswer: "b"
-  points: 1
+  questionText: "Wiadomości alarmowe"
+  options: "a) przesyła policja i straż pożarna.|b) powstają w Centrum Bezpieczeństwa.|c) przygotowują operatorzy komórkowi."
+  correctAnswer: "b) powstają w Centrum Bezpieczeństwa."
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "B1-2019-lq3-2"
-  taskRef: "B1-2019-listen-3"
+  questionId: B1-2019-lq3-2
+  taskRef: B1-2019-listen-3
   questionType: multiple_choice
-  questionText: "Pytanie 2"
-  options: "a|b|c"
-  correctAnswer: "c"
-  points: 1
+  questionText: "Aby otrzymać wiadomość,"
+  options: "a) należy wpisać się na specjalną listę.|b) trzeba zarejestrować się na stronie internetowej.|c) nie trzeba robić niczego szczególnego."
+  correctAnswer: "c) nie trzeba robić niczego szczególnego."
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "B1-2019-lq3-3"
-  taskRef: "B1-2019-listen-3"
+  questionId: B1-2019-lq3-3
+  taskRef: B1-2019-listen-3
   questionType: multiple_choice
-  questionText: "Pytanie 3"
-  options: "a|b|c"
-  correctAnswer: "c"
-  points: 1
+  questionText: "System nie ostrzega przed"
+  options: "a) silnymi wiatrami.|b) zmianami temperatury.|c) niebezpiecznymi drogami."
+  correctAnswer: "c) niebezpiecznymi drogami."
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "B1-2019-lq3-4"
-  taskRef: "B1-2019-listen-3"
+  questionId: B1-2019-lq3-4
+  taskRef: B1-2019-listen-3
   questionType: multiple_choice
-  questionText: "Pytanie 4"
-  options: "a|b|c"
-  correctAnswer: "a"
-  points: 1
+  questionText: "Po przeczytaniu wiadomości należy"
+  options: "a) zrobić to, co jest w niej napisane.|b) zadzwonić na numer nadawcy.|c) uciekać tak szybko, jak to tylko możliwe."
+  correctAnswer: "a) zrobić to, co jest w niej napisane."
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "B1-2019-lq3-5"
-  taskRef: "B1-2019-listen-3"
+  questionId: B1-2019-lq3-5
+  taskRef: B1-2019-listen-3
   questionType: multiple_choice
-  questionText: "Pytanie 5"
-  options: "a|b|c"
-  correctAnswer: "c"
-  points: 1
+  questionText: "System alarmowy"
+  options: "a) działa w Polsce od wielu lat.|b) od niedawna źle funkcjonuje.|c) może być oceniany przez Polaków."
+  correctAnswer: "c) może być oceniany przez Polaków."
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "B1-2019-lq4-1"
-  taskRef: "B1-2019-listen-4"
+  questionId: B1-2019-lq4-1
+  taskRef: B1-2019-listen-4
   questionType: match
-  questionText: "A"
+  questionText: "A. Mówi, że bardzo ważne jest słuchanie partnera."
+  options: "1|2|3|4"
   correctAnswer: "4"
-  points: 1
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "B1-2019-lq4-2"
-  taskRef: "B1-2019-listen-4"
+  questionId: B1-2019-lq4-2
+  taskRef: B1-2019-listen-4
   questionType: match
-  questionText: "B"
+  questionText: "B. Uważa, że do sukcesu potrzebne jest poznanie rozmówcy."
+  options: "1|2|3|4"
   correctAnswer: "2"
-  points: 1
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "B1-2019-lq4-3"
-  taskRef: "B1-2019-listen-4"
+  questionId: B1-2019-lq4-3
+  taskRef: B1-2019-listen-4
   questionType: match
-  questionText: "C"
+  questionText: "C. Zwraca uwagę na grzeczność i kulturę osobistą."
+  options: "1|2|3|4"
   correctAnswer: "3"
-  points: 1
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "B1-2019-lq4-4"
-  taskRef: "B1-2019-listen-4"
+  questionId: B1-2019-lq4-4
+  taskRef: B1-2019-listen-4
   questionType: match
-  questionText: "D"
+  questionText: "D. Twierdzi, że czasem warto zmienić zdanie."
+  options: "1|2|3|4"
   correctAnswer: "1"
-  points: 1
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "B1-2019-lq4-5"
-  taskRef: "B1-2019-listen-4"
+  questionId: B1-2019-lq4-5
+  taskRef: B1-2019-listen-4
   questionType: match
-  questionText: "E"
+  questionText: "E. Podkreśla, że nie należy bać się ciszy."
+  options: "1|2|3|4"
   correctAnswer: "4"
-  points: 1
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "B1-2019-lq5-1"
-  taskRef: "B1-2019-listen-5"
+  questionId: B1-2019-lq5-1
+  taskRef: B1-2019-listen-5
   questionType: match
-  questionText: "B"
+  questionText: "Ilustracja B"
+  options: "1|2|3|4|5|6|7|8|9|10"
   correctAnswer: "6"
-  points: 1
+  pointsQuarter: 2
 }
 LISTENING_QUESTION {
-  questionId: "B1-2019-lq5-2"
-  taskRef: "B1-2019-listen-5"
+  questionId: B1-2019-lq5-2
+  taskRef: B1-2019-listen-5
   questionType: match
-  questionText: "C"
+  questionText: "Ilustracja C"
+  options: "1|2|3|4|5|6|7|8|9|10"
   correctAnswer: "7"
-  points: 1
+  pointsQuarter: 2
 }
 LISTENING_QUESTION {
-  questionId: "B1-2019-lq5-3"
-  taskRef: "B1-2019-listen-5"
+  questionId: B1-2019-lq5-3
+  taskRef: B1-2019-listen-5
   questionType: match
-  questionText: "D"
+  questionText: "Ilustracja D"
+  options: "1|2|3|4|5|6|7|8|9|10"
   correctAnswer: "5"
-  points: 1
+  pointsQuarter: 2
 }
 LISTENING_QUESTION {
-  questionId: "B1-2019-lq5-4"
-  taskRef: "B1-2019-listen-5"
+  questionId: B1-2019-lq5-4
+  taskRef: B1-2019-listen-5
   questionType: match
-  questionText: "E"
+  questionText: "Ilustracja E"
+  options: "1|2|3|4|5|6|7|8|9|10"
   correctAnswer: "1"
-  points: 1
+  pointsQuarter: 2
 }
 LISTENING_QUESTION {
-  questionId: "B1-2019-lq5-5"
-  taskRef: "B1-2019-listen-5"
+  questionId: B1-2019-lq5-5
+  taskRef: B1-2019-listen-5
   questionType: match
-  questionText: "F"
+  questionText: "Ilustracja F"
+  options: "1|2|3|4|5|6|7|8|9|10"
   correctAnswer: "9"
-  points: 1
+  pointsQuarter: 2
 }
 LISTENING_QUESTION {
-  questionId: "B1-2019-lq5-6"
-  taskRef: "B1-2019-listen-5"
+  questionId: B1-2019-lq5-6
+  taskRef: B1-2019-listen-5
   questionType: match
-  questionText: "G"
+  questionText: "Ilustracja G"
+  options: "1|2|3|4|5|6|7|8|9|10"
   correctAnswer: "10"
-  points: 1
+  pointsQuarter: 2
 }
 LISTENING_QUESTION {
-  questionId: "B1-2019-lq5-7"
-  taskRef: "B1-2019-listen-5"
+  questionId: B1-2019-lq5-7
+  taskRef: B1-2019-listen-5
   questionType: match
-  questionText: "H"
+  questionText: "Ilustracja H"
+  options: "1|2|3|4|5|6|7|8|9|10"
   correctAnswer: "3"
-  points: 1
+  pointsQuarter: 2
 }
 LISTENING_QUESTION {
-  questionId: "B1-2019-lq5-8"
-  taskRef: "B1-2019-listen-5"
+  questionId: B1-2019-lq5-8
+  taskRef: B1-2019-listen-5
   questionType: match
-  questionText: "I"
+  questionText: "Ilustracja I"
+  options: "1|2|3|4|5|6|7|8|9|10"
   correctAnswer: "4"
-  points: 1
+  pointsQuarter: 2
 }
 LISTENING_QUESTION {
-  questionId: "B1-2019-lq5-9"
-  taskRef: "B1-2019-listen-5"
+  questionId: B1-2019-lq5-9
+  taskRef: B1-2019-listen-5
   questionType: match
-  questionText: "J"
+  questionText: "Ilustracja J"
+  options: "1|2|3|4|5|6|7|8|9|10"
   correctAnswer: "8"
-  points: 1
+  pointsQuarter: 2
 }
 LISTENING_QUESTION {
-  questionId: "B1-2019-lq5-10"
-  taskRef: "B1-2019-listen-5"
+  questionId: B1-2019-lq5-10
+  taskRef: B1-2019-listen-5
   questionType: match
-  questionText: "K"
+  questionText: "Ilustracja K"
+  options: "1|2|3|4|5|6|7|8|9|10"
   correctAnswer: "2"
-  points: 1
+  pointsQuarter: 2
 }

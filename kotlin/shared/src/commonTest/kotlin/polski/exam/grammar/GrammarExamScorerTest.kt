@@ -2,8 +2,10 @@ package polski.exam.grammar
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 import polski.exam.QuestionType
 import polski.exam.data.oracle.SCORING_CASE_ROW_ROWS
+import polski.exam.data.oracle.QUARTER_SCORING_CASE_ROW_ROWS
 
 /**
  * Loops [SCORING_CASE_ROW_ROWS] (generated from dsl/exam-scoring/scoring.core-data by biome generate).
@@ -13,7 +15,7 @@ class GrammarExamScorerTest {
     private val template = GrammarItem(
         itemId = "q1", questionType = QuestionType.ChooseForm,
         context = "test ___", gap = "___", options = listOf("a", "b", "c"),
-        correctAnswer = "", points = 1,
+        correctAnswer = "placeholder", points = 1,
     )
 
     @Test fun scoringOracle() {
@@ -39,5 +41,34 @@ class GrammarExamScorerTest {
         val test = GrammarTest("t1", "instr", listOf(template.copy(correctAnswer = "nas")))
         val result = GrammarExamScorer.scoreAttempt(test, emptyMap())
         assertEquals(0, result.correct)
+    }
+
+    @Test fun officialQuarterPointAnswers() {
+        for (row in QUARTER_SCORING_CASE_ROW_ROWS) {
+            val item = template.copy(
+                correctAnswer = row.fullAnswer,
+                points = 0,
+                pointsQuarter = row.maximumQuarter,
+                scoredVariants = listOf(GrammarScoredVariant(row.partialAnswer, row.partialQuarter)),
+            )
+            val result = GrammarExamScorer.scoreAttempt(
+                GrammarTest("official", "", listOf(item)),
+                mapOf(item.itemId to row.answer),
+            )
+            assertEquals(row.expectedQuarter.toDouble() / row.maximumQuarter * 100.0, result.percentage, 0.001, row.id)
+        }
+    }
+
+    @Test fun invalidScoredVariantsAreRejected() {
+        for (variant in listOf(
+            GrammarScoredVariant("", 1),
+            GrammarScoredVariant("z kim", 0),
+            GrammarScoredVariant("z kim", 3),
+            GrammarScoredVariant("z którym", 1),
+        )) {
+            assertFailsWith<IllegalArgumentException> {
+                template.copy(correctAnswer = "z którym", pointsQuarter = 2, scoredVariants = listOf(variant))
+            }
+        }
     }
 }

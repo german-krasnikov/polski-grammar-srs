@@ -4,7 +4,7 @@ import polski.exam.QuestionType
 
 /** Listening exams from generated biome rows — single source of truth. */
 internal val examListeningData: Map<String, ListeningExam> by lazy {
-    mapOf("b1-2019" to mapB1Listening(), "b2-2019" to mapB2Listening())
+    mapOf("b1-2019" to mapB1Listening(), "b2-2019" to mapB2Listening(), "b1-2017" to mapB1y2017Listening())
 }
 
 private fun mapB1Listening(): ListeningExam {
@@ -14,8 +14,8 @@ private fun mapB1Listening(): ListeningExam {
         tasks.map { t ->
             ListeningTask(t.taskId, t.instruction,
                 qs.filter { it.taskRef == t.taskId }.map { q ->
-                    ListeningQ(q.questionId, QuestionType.fromTag(q.questionType.tag), q.questionText, q.options?.split("|") ?: emptyList(), q.correctAnswer)
-                }, t.segmentStartMs.toLong(), t.segmentEndMs.toLong())
+                    ListeningQ(q.questionId, QuestionType.fromTag(q.questionType.tag), q.questionText, q.options?.split("|") ?: emptyList(), q.correctAnswer, q.pointsQuarter ?: requireNotNull(q.points) { "Missing score for ${q.questionId}" } * 4)
+                }, t.segmentStartMs.toLong(), t.segmentEndMs.toLong(), t.promptImageUrl, t.promptImageAlt)
         }, tasks.firstOrNull()?.audioUrl ?: "")
 }
 
@@ -26,7 +26,35 @@ private fun mapB2Listening(): ListeningExam {
         tasks.map { t ->
             ListeningTask(t.taskId, t.instruction,
                 qs.filter { it.taskRef == t.taskId }.map { q ->
-                    ListeningQ(q.questionId, QuestionType.fromTag(q.questionType.tag), q.questionText, q.options?.split("|") ?: emptyList(), q.correctAnswer)
-                }, t.segmentStartMs.toLong(), t.segmentEndMs.toLong())
+                    ListeningQ(q.questionId, QuestionType.fromTag(q.questionType.tag), q.questionText, q.options?.split("|") ?: emptyList(), q.correctAnswer, q.pointsQuarter ?: requireNotNull(q.points) { "Missing score for ${q.questionId}" } * 4)
+                }, t.segmentStartMs.toLong(), t.segmentEndMs.toLong(), t.promptImageUrl, t.promptImageAlt)
         }, tasks.firstOrNull()?.audioUrl ?: "")
+}
+
+private fun mapB1y2017Listening(): ListeningExam {
+    val tasks = polski.exam.data.b1y2017.LISTENING_TASK_ROW_ROWS
+    val questions = polski.exam.data.b1y2017.LISTENING_QUESTION_ROW_ROWS
+    return ListeningExam(
+        tasks.map { task ->
+            ListeningTask(
+                task.taskId,
+                task.instruction,
+                questions.filter { it.taskRef == task.taskId }.map { question ->
+                    ListeningQ(
+                        question.questionId,
+                        QuestionType.fromTag(question.questionType.tag),
+                        question.questionText,
+                        question.options?.split("|") ?: emptyList(),
+                        question.correctAnswer,
+                        question.pointsQuarter ?: requireNotNull(question.points) { "Missing score for ${question.questionId}" } * 4,
+                    )
+                },
+                task.segmentStartMs.toLong(),
+                task.segmentEndMs.toLong(),
+                task.promptImageUrl,
+                task.promptImageAlt,
+            )
+        },
+        tasks.firstOrNull()?.audioUrl ?: "",
+    )
 }

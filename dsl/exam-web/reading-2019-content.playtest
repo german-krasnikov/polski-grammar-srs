@@ -1,0 +1,30 @@
+TEST "B1 2019 reading uses complete paper questions and passages" PROFILE playmode
+  open exam="B1 Certyfikat 2019" module="reading"
+  ASSERT reading.questionCount == 4
+  ASSERT reading.passageOpening == "Jeśli masz ponad 30 lat i zarejestrowałeś się jako bezrobotny, możesz otrzymać pomoc finansową na otwarcie firmy"
+  ASSERT reading.firstQuestion == "1. Z tego tekstu wynika, że z projektu może skorzystać"
+  ASSERT reading.firstOptions == "każdy, kto chce otworzyć własną firmę|bezrobotny powyżej 30. roku życia|każda osoba bez wykształcenia"
+  ASSERT reading.genericQuestionCount == 0
+  ASSERT reading.genericOptionCount == 0
+  ASSERT reading.passageChars > 100
+  next
+  ASSERT reading.questionCount == 7
+  ASSERT reading.genericQuestionCount == 0
+  ASSERT reading.genericOptionCount == 0
+  ASSERT reading.passageChars > 100
+  next
+  ASSERT reading.questionCount == 8
+  ASSERT reading.genericQuestionCount == 0
+  ASSERT reading.genericOptionCount == 0
+  ASSERT reading.passageChars > 100
+  next
+  ASSERT reading.questionCount == 6
+  ASSERT reading.genericQuestionCount == 0
+  ASSERT reading.genericOptionCount == 0
+  ASSERT reading.passageChars > 100
+  next
+  ASSERT reading.questionCount == 10
+  ASSERT reading.genericQuestionCount == 0
+  ASSERT reading.genericOptionCount == 0
+  ASSERT reading.passageChars > 100
+END

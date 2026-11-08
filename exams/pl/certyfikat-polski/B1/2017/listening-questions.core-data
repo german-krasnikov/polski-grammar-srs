@@ -1,105 +1,321 @@
 DSL 1
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2017-lq1"
-  taskRef: "certyfikat-polski-B1-2017-listen-1"
+  questionId: B1-2017-l1-1
+  taskRef: certyfikat-polski-B1-2017-listen-1
   questionType: multiple_choice
-  questionText: "Pytanie 1"
-  correctAnswer: "a c c b b A c b b b a a b a"
-  points: 1
+  questionText: "Ta wypowiedź jest typowa"
+  options: "w tramwaju|w kinie|w muzeum"
+  correctAnswer: "w tramwaju"
+  pointsQuarter: 2
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2017-lq2"
-  taskRef: "certyfikat-polski-B1-2017-listen-3"
+  questionId: B1-2017-l1-2
+  taskRef: certyfikat-polski-B1-2017-listen-1
   questionType: multiple_choice
-  questionText: "Pytanie 2"
-  correctAnswer: "b c b a b"
-  points: 1
+  questionText: "Ta wypowiedź jest typowa"
+  options: "w sklepie|u dentysty|w aptece"
+  correctAnswer: "w aptece"
+  pointsQuarter: 2
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2017-lq3"
-  taskRef: "certyfikat-polski-B1-2017-listen-4"
+  questionId: B1-2017-l1-3
+  taskRef: certyfikat-polski-B1-2017-listen-1
   questionType: multiple_choice
-  questionText: "Pytanie 3"
-  correctAnswer: "F F P F P P"
-  points: 1
+  questionText: "Ta wypowiedź jest typowa"
+  options: "w salonie Bingo|w punkcie LOTTO|w szatni"
+  correctAnswer: "w szatni"
+  pointsQuarter: 2
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2017-lq4"
-  taskRef: "certyfikat-polski-B1-2017-listen-5"
+  questionId: B1-2017-l1-4
+  taskRef: certyfikat-polski-B1-2017-listen-1
   questionType: multiple_choice
-  questionText: "Pytanie 4"
-  correctAnswer: "D F B C A"
-  points: 1
+  questionText: "Ta wypowiedź jest typowa"
+  options: "w autobusie|w taksówce|w pociągu"
+  correctAnswer: "w taksówce"
+  pointsQuarter: 2
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2017-lq5"
-  taskRef: "certyfikat-polski-B1-2017-listen-5"
+  questionId: B1-2017-l1-5
+  taskRef: certyfikat-polski-B1-2017-listen-1
   questionType: multiple_choice
-  questionText: "Pytanie 5"
-  correctAnswer: "a"
-  points: 1
+  questionText: "Ta wypowiedź jest typowa podczas"
+  options: "zakupów|posiłku|zebrania"
+  correctAnswer: "posiłku"
+  pointsQuarter: 2
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2017-lq6"
-  taskRef: "certyfikat-polski-B1-2017-listen-5"
+  questionId: B1-2017-l1-6
+  taskRef: certyfikat-polski-B1-2017-listen-1
   questionType: multiple_choice
-  questionText: "Pytanie 6"
-  correctAnswer: "n"
-  points: 1
+  questionText: "Ta wypowiedź oznacza"
+  options: "Tak!|Nie!|Nigdy!"
+  correctAnswer: "Tak!"
+  pointsQuarter: 2
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2017-lq7"
-  taskRef: "certyfikat-polski-B1-2017-listen-5"
+  questionId: B1-2017-l1-7
+  taskRef: certyfikat-polski-B1-2017-listen-1
   questionType: multiple_choice
-  questionText: "Pytanie 7"
-  correctAnswer: "o"
-  points: 1
+  questionText: "Ta wypowiedź oznacza, że"
+  options: "mam jutro czas|spotkamy się jutro|muszę to zrobić do jutra"
+  correctAnswer: "muszę to zrobić do jutra"
+  pointsQuarter: 2
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2017-lq8"
-  taskRef: "certyfikat-polski-B1-2017-listen-5"
+  questionId: B1-2017-l1-8
+  taskRef: certyfikat-polski-B1-2017-listen-1
   questionType: multiple_choice
-  questionText: "Pytanie 8"
-  correctAnswer: "r"
-  points: 1
+  questionText: "Ta wypowiedź oznacza"
+  options: "Nie wiem, dokąd idziesz|Nie rozumiem|Chodź ze mną"
+  correctAnswer: "Nie rozumiem"
+  pointsQuarter: 2
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2017-lq9"
-  taskRef: "certyfikat-polski-B1-2017-listen-5"
+  questionId: B1-2017-l1-9
+  taskRef: certyfikat-polski-B1-2017-listen-1
   questionType: multiple_choice
-  questionText: "Pytanie 9"
-  correctAnswer: "t"
-  points: 1
+  questionText: "Ta wypowiedź oznacza, że"
+  options: "nic nie wiem na ten temat|nie chcę o tym mówić|nie rozumiem tego tematu"
+  correctAnswer: "nie chcę o tym mówić"
+  pointsQuarter: 2
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2017-lq10"
-  taskRef: "certyfikat-polski-B1-2017-listen-5"
+  questionId: B1-2017-l1-10
+  taskRef: certyfikat-polski-B1-2017-listen-1
   questionType: multiple_choice
-  questionText: "Pytanie 10"
-  correctAnswer: "S"
-  points: 1
+  questionText: "Ta wypowiedź oznacza, że"
+  options: "rozmawiam z dyrektorem|proszę o rozmowę z dyrektorem|wołam dyrektora"
+  correctAnswer: "proszę o rozmowę z dyrektorem"
+  pointsQuarter: 2
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2017-lq11"
-  taskRef: "certyfikat-polski-B1-2017-listen-5"
+  questionId: B1-2017-l1-11
+  taskRef: certyfikat-polski-B1-2017-listen-1
   questionType: multiple_choice
-  questionText: "Pytanie 11"
-  correctAnswer: "TEST PRZYKŁADOWY"
-  points: 1
+  questionText: "Ta wypowiedź oznacza, że kupuję bilet"
+  options: "w obie strony|tylko powrotny|w jedną stronę"
+  correctAnswer: "w obie strony"
+  pointsQuarter: 2
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2017-lq12"
-  taskRef: "certyfikat-polski-B1-2017-listen-5"
+  questionId: B1-2017-l1-12
+  taskRef: certyfikat-polski-B1-2017-listen-1
   questionType: multiple_choice
-  questionText: "Pytanie 12"
-  correctAnswer: "B"
-  points: 1
+  questionText: "Ta wypowiedź oznacza"
+  options: "Dokąd idziesz?|Co wybrałeś?|Jakie są wyniki wyborów?"
+  correctAnswer: "Dokąd idziesz?"
+  pointsQuarter: 2
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2017-lq13"
-  taskRef: "certyfikat-polski-B1-2017-listen-5"
+  questionId: B1-2017-l1-13
+  taskRef: certyfikat-polski-B1-2017-listen-1
   questionType: multiple_choice
-  questionText: "Pytanie 13"
-  correctAnswer: "TRANSKRYPCJE I KLUCZ DO ZADAŃ"
-  points: 1
+  questionText: "Ta wypowiedź to"
+  options: "odmowa|zaproszenie|zawiadomienie"
+  correctAnswer: zaproszenie
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: B1-2017-l1-14
+  taskRef: certyfikat-polski-B1-2017-listen-1
+  questionType: multiple_choice
+  questionText: "Tę wypowiedź można najczęściej usłyszeć"
+  options: "w sklepie|przy stole|nad morzem"
+  correctAnswer: "w sklepie"
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: B1-2017-l2-1
+  taskRef: certyfikat-polski-B1-2017-listen-2
+  questionType: fill_gap
+  questionText: "od dzieciństwa ___ wiek dojrzały po starość"
+  correctAnswer: przez
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: B1-2017-l2-2
+  taskRef: certyfikat-polski-B1-2017-listen-2
+  questionType: fill_gap
+  questionText: "są ___ rzesze tych"
+  correctAnswer: "całe"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: B1-2017-l2-3
+  taskRef: certyfikat-polski-B1-2017-listen-2
+  questionType: fill_gap
+  questionText: "uczą się, ___, później zawierają związek"
+  correctAnswer: "studiują"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: B1-2017-l2-4
+  taskRef: certyfikat-polski-B1-2017-listen-2
+  questionType: fill_gap
+  questionText: "o tym ___ pierwszym mieszkaniu"
+  correctAnswer: swoim
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: B1-2017-l2-5
+  taskRef: certyfikat-polski-B1-2017-listen-2
+  questionType: fill_gap
+  questionText: "to, co się ___ na ścianach"
+  correctAnswer: powiesi
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: B1-2017-l2-6
+  taskRef: certyfikat-polski-B1-2017-listen-2
+  questionType: fill_gap
+  questionText: "ale zawsze był ten ___"
+  correctAnswer: moment
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: B1-2017-l2-7
+  taskRef: certyfikat-polski-B1-2017-listen-2
+  questionType: fill_gap
+  questionText: "widok z okna, który nam ___ przez tyle lat"
+  correctAnswer: towarzyszy
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: B1-2017-l3-1
+  taskRef: certyfikat-polski-B1-2017-listen-3
+  questionType: multiple_choice
+  questionText: "W podróży uczestniczyły"
+  options: "dwie studentki|starsze panie|chińskie uczennice"
+  correctAnswer: "starsze panie"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: B1-2017-l3-2
+  taskRef: certyfikat-polski-B1-2017-listen-3
+  questionType: multiple_choice
+  questionText: "Podróż została zorganizowana przez"
+  options: "firmę transportową|jedną ze stacji telewizyjnych|producenta herbaty"
+  correctAnswer: "producenta herbaty"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: B1-2017-l3-3
+  taskRef: certyfikat-polski-B1-2017-listen-3
+  questionType: multiple_choice
+  questionText: "Kobiety są w dobrej kondycji fizycznej, bo"
+  options: "uprawiają sport|piją herbatę|jedzą zdrowo"
+  correctAnswer: "piją herbatę"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: B1-2017-l3-4
+  taskRef: certyfikat-polski-B1-2017-listen-3
+  questionType: multiple_choice
+  questionText: "Lot trwał"
+  options: "30 minut|50 minut|godzinę"
+  correctAnswer: "30 minut"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: B1-2017-l3-5
+  taskRef: certyfikat-polski-B1-2017-listen-3
+  questionType: multiple_choice
+  questionText: "Kobiety całe życie"
+  options: "wiele podróżowały|ciężko pracowały|latały samolotem"
+  correctAnswer: "ciężko pracowały"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: B1-2017-l4-1
+  taskRef: certyfikat-polski-B1-2017-listen-4
+  questionType: true_false
+  questionText: "Konkurs mogą wygrać dwie osoby."
+  correctAnswer: "FAŁSZ"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: B1-2017-l4-2
+  taskRef: certyfikat-polski-B1-2017-listen-4
+  questionType: true_false
+  questionText: "Nagrodą w konkursie jest wyjazd do Sosnowca."
+  correctAnswer: "FAŁSZ"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: B1-2017-l4-3
+  taskRef: certyfikat-polski-B1-2017-listen-4
+  questionType: true_false
+  questionText: "Wycieczka będzie trwać kilka dni."
+  correctAnswer: PRAWDA
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: B1-2017-l4-4
+  taskRef: certyfikat-polski-B1-2017-listen-4
+  questionType: true_false
+  questionText: "Współorganizatorem konkursu jest Telewizja Polska."
+  correctAnswer: "FAŁSZ"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: B1-2017-l4-5
+  taskRef: certyfikat-polski-B1-2017-listen-4
+  questionType: true_false
+  questionText: "Pytania dotyczą Unii Europejskiej."
+  correctAnswer: PRAWDA
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: B1-2017-l4-6
+  taskRef: certyfikat-polski-B1-2017-listen-4
+  questionType: true_false
+  questionText: "Według redaktora pytania konkursowe są dość trudne."
+  correctAnswer: PRAWDA
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: B1-2017-l5-1
+  taskRef: certyfikat-polski-B1-2017-listen-5
+  questionType: match
+  questionText: "opłata paszportowa w wysokości 30 zł"
+  options: "A. paszport dla emerytów i rencistów|B. paszport tymczasowy dla dorosłych|C. paszport dla osób powyżej 70 lat|D. paszport dla dzieci do 7 lat|E. paszport dla dorosłych na 10 lat|F. paszport dla dzieci poniżej 13 lat"
+  correctAnswer: "D. paszport dla dzieci do 7 lat"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: B1-2017-l5-2
+  taskRef: certyfikat-polski-B1-2017-listen-5
+  questionType: match
+  questionText: "opłata paszportowa w wysokości 60 zł"
+  options: "A. paszport dla emerytów i rencistów|B. paszport tymczasowy dla dorosłych|C. paszport dla osób powyżej 70 lat|D. paszport dla dzieci do 7 lat|E. paszport dla dorosłych na 10 lat|F. paszport dla dzieci poniżej 13 lat"
+  correctAnswer: "F. paszport dla dzieci poniżej 13 lat"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: B1-2017-l5-3
+  taskRef: certyfikat-polski-B1-2017-listen-5
+  questionType: match
+  questionText: "opłata paszportowa w wysokości 45 zł"
+  options: "A. paszport dla emerytów i rencistów|B. paszport tymczasowy dla dorosłych|C. paszport dla osób powyżej 70 lat|D. paszport dla dzieci do 7 lat|E. paszport dla dorosłych na 10 lat|F. paszport dla dzieci poniżej 13 lat"
+  correctAnswer: "B. paszport tymczasowy dla dorosłych"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: B1-2017-l5-4
+  taskRef: certyfikat-polski-B1-2017-listen-5
+  questionType: match
+  questionText: "paszport bez opłaty"
+  options: "A. paszport dla emerytów i rencistów|B. paszport tymczasowy dla dorosłych|C. paszport dla osób powyżej 70 lat|D. paszport dla dzieci do 7 lat|E. paszport dla dorosłych na 10 lat|F. paszport dla dzieci poniżej 13 lat"
+  correctAnswer: "C. paszport dla osób powyżej 70 lat"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: B1-2017-l5-5
+  taskRef: certyfikat-polski-B1-2017-listen-5
+  questionType: match
+  questionText: "50% ulgi w opłacie paszportowej"
+  options: "A. paszport dla emerytów i rencistów|B. paszport tymczasowy dla dorosłych|C. paszport dla osób powyżej 70 lat|D. paszport dla dzieci do 7 lat|E. paszport dla dorosłych na 10 lat|F. paszport dla dzieci poniżej 13 lat"
+  correctAnswer: "A. paszport dla emerytów i rencistów"
+  pointsQuarter: 4
 }

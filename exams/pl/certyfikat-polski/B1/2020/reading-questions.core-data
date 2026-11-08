@@ -1,57 +1,302 @@
 DSL 1
+# Arkusz B1/2020, pp. 9–14; keys from klucz.pdf p. 4.
+# Counts 5+7+7+7+8; points 5+7+7+7+4 = 30.
 READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2020-rq1"
-  passageRef: "certyfikat-polski-B1-2020-read-1"
-  questionType: fill_gap
-  questionText: "Pytanie 1"
-  correctAnswer: "a b c a c"
-  points: 1
+  questionId: certyfikat-polski-B1-2020-reading-1-1
+  passageRef: certyfikat-polski-B1-2020-read-1
+  questionType: multiple_choice
+  questionText: "Z tego tekstu wynika, że opłata za wjazd do Wenecji"
+  options: "nie będzie taka sama przez cały rok.|obowiązuje już od dawna.|będzie wyższa dla uczestników imprez miejskich."
+  correctAnswer: "nie będzie taka sama przez cały rok."
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2020-rq2"
-  passageRef: "certyfikat-polski-B1-2020-read-2"
-  questionType: fill_gap
-  questionText: "Pytanie 2"
-  correctAnswer: "Tak Nie"
-  points: 1
+  questionId: certyfikat-polski-B1-2020-reading-1-2
+  passageRef: certyfikat-polski-B1-2020-read-1
+  questionType: multiple_choice
+  questionText: "Z tego tekstu wynika, że"
+  options: "konkurs teatralny od lat istnieje w takiej samej formie.|w spektaklach mogą wziąć udział zawodowi aktorzy.|aktorzy będą prezentować znane wiersze."
+  correctAnswer: "w spektaklach mogą wziąć udział zawodowi aktorzy."
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2020-rq3"
-  passageRef: "certyfikat-polski-B1-2020-read-3"
-  questionType: fill_gap
-  questionText: "Pytanie 3"
-  correctAnswer: "D B E G A H F"
-  points: 1
+  questionId: certyfikat-polski-B1-2020-reading-1-3
+  passageRef: certyfikat-polski-B1-2020-read-1
+  questionType: multiple_choice
+  questionText: "Z tego tekstu wynika, że nowy znak reklamowy"
+  options: "był inspirowany jesienną modą.|stworzyły dzieci.|ma przywoływać dobry nastrój."
+  correctAnswer: "ma przywoływać dobry nastrój."
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2020-rq4"
-  passageRef: "certyfikat-polski-B1-2020-read-4"
-  questionType: fill_gap
-  questionText: "Pytanie 4"
-  correctAnswer: "H E C G A F D"
-  points: 1
+  questionId: certyfikat-polski-B1-2020-reading-1-4
+  passageRef: certyfikat-polski-B1-2020-read-1
+  questionType: multiple_choice
+  questionText: "Ten tekst informuje, że"
+  options: "złe zachowanie dzieci w samochodzie powoduje brak uwagi u kierowcy.|co trzeci kierowca ma problem z koncentracją na drodze.|kierowcy, którzy są rodzicami, nie potrafią ostrożnie jeździć."
+  correctAnswer: "złe zachowanie dzieci w samochodzie powoduje brak uwagi u kierowcy."
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2020-rq5"
-  passageRef: "certyfikat-polski-B1-2020-read-5"
-  questionType: fill_gap
-  questionText: "Pytanie 5"
-  correctAnswer: "TEST PRZYKŁADOWY"
-  points: 1
+  questionId: certyfikat-polski-B1-2020-reading-1-5
+  passageRef: certyfikat-polski-B1-2020-read-1
+  questionType: multiple_choice
+  questionText: "Z tego tekstu wynika, że"
+  options: "w maratonie biegło mało zawodników.|lista zapisów była otwarta do 6 stycznia.|były osoby, które zrezygnowały z biegu."
+  correctAnswer: "były osoby, które zrezygnowały z biegu."
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2020-rq6"
-  passageRef: "certyfikat-polski-B1-2020-read-5"
-  questionType: fill_gap
-  questionText: "Pytanie 6"
-  correctAnswer: "POZIOM B"
-  points: 1
+  questionId: certyfikat-polski-B1-2020-reading-2-1
+  passageRef: certyfikat-polski-B1-2020-read-2
+  questionType: true_false_not_given
+  questionText: "Pierwszy odcinek serialu był nieudany."
+  correctAnswer: NIE
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2020-rq7"
-  passageRef: "certyfikat-polski-B1-2020-read-5"
+  questionId: certyfikat-polski-B1-2020-reading-2-2
+  passageRef: certyfikat-polski-B1-2020-read-2
+  questionType: true_false_not_given
+  questionText: "Nagrywanie kolejnych odcinków zależało od zainteresowania widzów."
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-reading-2-3
+  passageRef: certyfikat-polski-B1-2020-read-2
+  questionType: true_false_not_given
+  questionText: "Bohaterowie serialu należą do najbogatszych ludzi w Polsce."
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-reading-2-4
+  passageRef: certyfikat-polski-B1-2020-read-2
+  questionType: true_false_not_given
+  questionText: "Sąsiad Ferdynanda zajmuje się handlem."
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-reading-2-5
+  passageRef: certyfikat-polski-B1-2020-read-2
+  questionType: true_false_not_given
+  questionText: "Serial od początku jest nagrywany w studiu filmowym."
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-reading-2-6
+  passageRef: certyfikat-polski-B1-2020-read-2
+  questionType: true_false_not_given
+  questionText: "Niektóre przedmioty można zobaczyć w serialu od pierwszych odcinków aż do dziś."
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-reading-2-7
+  passageRef: certyfikat-polski-B1-2020-read-2
+  questionType: true_false_not_given
+  questionText: "Cały serial jest dostępny w telewizji i w internecie."
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-reading-3-1
+  passageRef: certyfikat-polski-B1-2020-read-3
+  questionType: match_heading
+  questionText: "Fragment [ 1 ]"
+  options: "A|B|C|D|E|F|G|H"
+  correctAnswer: D
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-reading-3-2
+  passageRef: certyfikat-polski-B1-2020-read-3
+  questionType: match_heading
+  questionText: "Fragment [ 2 ]"
+  options: "A|B|C|D|E|F|G|H"
+  correctAnswer: B
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-reading-3-3
+  passageRef: certyfikat-polski-B1-2020-read-3
+  questionType: match_heading
+  questionText: "Fragment [ 3 ]"
+  options: "A|B|C|D|E|F|G|H"
+  correctAnswer: E
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-reading-3-4
+  passageRef: certyfikat-polski-B1-2020-read-3
+  questionType: match_heading
+  questionText: "Fragment [ 4 ]"
+  options: "A|B|C|D|E|F|G|H"
+  correctAnswer: G
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-reading-3-5
+  passageRef: certyfikat-polski-B1-2020-read-3
+  questionType: match_heading
+  questionText: "Fragment [ 5 ]"
+  options: "A|B|C|D|E|F|G|H"
+  correctAnswer: A
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-reading-3-6
+  passageRef: certyfikat-polski-B1-2020-read-3
+  questionType: match_heading
+  questionText: "Fragment [ 6 ]"
+  options: "A|B|C|D|E|F|G|H"
+  correctAnswer: H
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-reading-3-7
+  passageRef: certyfikat-polski-B1-2020-read-3
+  questionType: match_heading
+  questionText: "Fragment [ 7 ]"
+  options: "A|B|C|D|E|F|G|H"
+  correctAnswer: F
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-reading-4-1
+  passageRef: certyfikat-polski-B1-2020-read-4
+  questionType: match_heading
+  questionText: "Kary dla kierowców"
+  options: "A|B|C|D|E|F|G|H"
+  correctAnswer: H
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-reading-4-2
+  passageRef: certyfikat-polski-B1-2020-read-4
+  questionType: match_heading
+  questionText: "Choroby w okresie zimowym"
+  options: "A|B|C|D|E|F|G|H"
+  correctAnswer: E
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-reading-4-3
+  passageRef: certyfikat-polski-B1-2020-read-4
+  questionType: match_heading
+  questionText: "Za pół ceny"
+  options: "A|B|C|D|E|F|G|H"
+  correctAnswer: C
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-reading-4-4
+  passageRef: certyfikat-polski-B1-2020-read-4
+  questionType: match_heading
+  questionText: "Opłaty w górę"
+  options: "A|B|C|D|E|F|G|H"
+  correctAnswer: G
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-reading-4-5
+  passageRef: certyfikat-polski-B1-2020-read-4
+  questionType: match_heading
+  questionText: "Praca w straży miejskiej"
+  options: "A|B|C|D|E|F|G|H"
+  correctAnswer: A
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-reading-4-6
+  passageRef: certyfikat-polski-B1-2020-read-4
+  questionType: match_heading
+  questionText: "Zakupy coraz droższe"
+  options: "A|B|C|D|E|F|G|H"
+  correctAnswer: F
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-reading-4-7
+  passageRef: certyfikat-polski-B1-2020-read-4
+  questionType: match_heading
+  questionText: "Nowe zasady segregacji"
+  options: "A|B|C|D|E|F|G|H"
+  correctAnswer: D
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-reading-5-1
+  passageRef: certyfikat-polski-B1-2020-read-5
   questionType: fill_gap
-  questionText: "Pytanie 7"
-  correctAnswer: "TRANSKRYPCJE I KLUCZ DO ZADAŃ"
-  points: 1
+  questionText: "Na ulicach można […] radość."
+  options: "widać|zobaczyć|przeglądać"
+  correctAnswer: "zobaczyć"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-reading-5-2
+  passageRef: certyfikat-polski-B1-2020-read-5
+  questionType: fill_gap
+  questionText: "Ludzie są serdeczni bardziej niż […]."
+  options: "zwykle|często|rzadko"
+  correctAnswer: zwykle
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-reading-5-3
+  passageRef: certyfikat-polski-B1-2020-read-5
+  questionType: fill_gap
+  questionText: "[…] dnia rano odbywa się karnawał kolorów."
+  options: "Następnego|dalszego|przyszłego"
+  correctAnswer: "Następnego"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-reading-5-4
+  passageRef: certyfikat-polski-B1-2020-read-5
+  questionType: fill_gap
+  questionText: "Uczestnicy […] przyjaciół i rodzinę."
+  options: "zwiedzają|odwiedzają|widzą"
+  correctAnswer: "odwiedzają"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-reading-5-5
+  passageRef: certyfikat-polski-B1-2020-read-5
+  questionType: fill_gap
+  questionText: "W Polsce także […] to święto."
+  options: "odbywamy|obchodzimy|bierzemy"
+  correctAnswer: obchodzimy
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-reading-5-6
+  passageRef: certyfikat-polski-B1-2020-read-5
+  questionType: fill_gap
+  questionText: "Nie ma wiele […] z kulturą Indii."
+  options: "takiego samego|identycznego|wspólnego"
+  correctAnswer: "wspólnego"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-reading-5-7
+  passageRef: certyfikat-polski-B1-2020-read-5
+  questionType: fill_gap
+  questionText: "To ma być przede wszystkim dobra […]."
+  options: "gra|zabawa|nauka"
+  correctAnswer: zabawa
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-reading-5-8
+  passageRef: certyfikat-polski-B1-2020-read-5
+  questionType: fill_gap
+  questionText: "Przygotowano wiele dodatkowych […]."
+  options: "spektakli|pomysłów|atrakcji"
+  correctAnswer: atrakcji
+  pointsQuarter: 2
 }

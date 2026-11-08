@@ -23,7 +23,7 @@ fun grammarExamCardModel(state: GrammarExamState): GrammarExamCard {
         isFirst = state.currentIndex == 0,
         isLast = state.currentIndex == state.test.items.lastIndex,
         submitted = state.submitted,
-        isCorrect = if (state.submitted) GrammarExamScorer.score(item, answer) else null,
+        isCorrect = if (state.submitted) GrammarExamScorer.earnedQuarter(item, answer) == item.maximumQuarter else null,
         result = state.result,
     )
 }

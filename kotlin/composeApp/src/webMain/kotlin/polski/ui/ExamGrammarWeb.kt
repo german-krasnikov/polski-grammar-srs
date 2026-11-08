@@ -6,6 +6,7 @@ import org.w3c.dom.HTMLElement
 import polski.presentation.UiCopy
 import org.w3c.dom.HTMLInputElement
 import polski.exam.QuestionType
+import polski.exam.formatQuarterPoints
 import polski.exam.grammar.*
 
 internal class ExamGrammarController(examId: String, private val onBack: () -> Unit) {
@@ -106,16 +107,22 @@ internal class ExamGrammarController(examId: String, private val onBack: () -> U
         c.appendChild(node("h2", "exam-title", "${UiCopy.Results} — ${UiCopy.Grammar}"))
         c.appendChild(node("div", "exam-score").apply {
             appendChild(node("div", "exam-score-big", "${result.percentage.toInt()}%"))
-            appendChild(node("div", "exam-score-detail", "${result.correct} / ${result.total} баллов"))
+            appendChild(node("div", "exam-score-detail", "${formatQuarterPoints(result.earnedQuarterPoints)} / ${formatQuarterPoints(result.possibleQuarterPoints)} баллов"))
         })
         c.appendChild(node("div", "exam-review").apply {
             state.test.items.forEachIndexed { i, item ->
                 val answer = state.answers[item.itemId].orEmpty()
-                val ok = GrammarExamScorer.score(item, answer)
-                appendChild(node("div", if (ok) "exam-review-item correct" else "exam-review-item wrong").apply {
+                val earned = GrammarExamScorer.earnedQuarter(item, answer)
+                val status = when {
+                    earned == item.maximumQuarter -> "correct"
+                    earned > 0 -> "partial"
+                    else -> "wrong"
+                }
+                appendChild(node("div", "exam-review-item $status").apply {
                     appendChild(node("span", "exam-review-num", "${i + 1}."))
                     appendChild(node("span", "exam-review-context", item.context.replace("___", if (answer.isNotEmpty()) "[$answer]" else "[—]")))
-                    if (!ok) appendChild(node("span", "exam-review-correct", "→ ${item.correctAnswer}"))
+                    if (earned > 0 && earned < item.maximumQuarter) appendChild(node("span", "exam-review-correct", "+${formatQuarterPoints(earned)} / ${formatQuarterPoints(item.maximumQuarter)}"))
+                    if (earned < item.maximumQuarter) appendChild(node("span", "exam-review-correct", "→ ${item.correctAnswer}"))
                 })
             }
         })

@@ -1,49 +1,50 @@
 DSL 1
+# Arkusz B1/2020, pp. 16–20; tasks I–VIII.
 GRAMMAR_TEST {
-  testId: "certyfikat-polski-B1-2020-grammar-1"
-  examRef: "certyfikat-polski-B1-2020"
+  testId: certyfikat-polski-B1-2020-grammar-1
+  examRef: certyfikat-polski-B1-2020
   taskNumber: 1
-  instruction: "Zadanie 1"
+  instruction: "Proszę – zgodnie z przykładami – podkreślić poprawne formy wyrazów podanych w nawiasach (odmiana rzeczowników, przymiotników i zaimków)."
 }
 GRAMMAR_TEST {
-  testId: "certyfikat-polski-B1-2020-grammar-2"
-  examRef: "certyfikat-polski-B1-2020"
+  testId: certyfikat-polski-B1-2020-grammar-2
+  examRef: certyfikat-polski-B1-2020
   taskNumber: 2
-  instruction: "Zadanie 2"
+  instruction: "Proszę – zgodnie z przykładem – uzupełnić zdania wyrazami z ramki (spójniki). Uwaga! Jeden wyraz w ramce jest niepotrzebny."
 }
 GRAMMAR_TEST {
-  testId: "certyfikat-polski-B1-2020-grammar-3"
-  examRef: "certyfikat-polski-B1-2020"
+  testId: certyfikat-polski-B1-2020-grammar-3
+  examRef: certyfikat-polski-B1-2020
   taskNumber: 3
-  instruction: "Zadanie 3"
+  instruction: "Proszę – zgodnie z przykładami – podkreślić poprawne formy wyrazów podanych w nawiasach (stopniowanie przymiotników i przysłówków)."
 }
 GRAMMAR_TEST {
-  testId: "certyfikat-polski-B1-2020-grammar-4"
-  examRef: "certyfikat-polski-B1-2020"
+  testId: certyfikat-polski-B1-2020-grammar-4
+  examRef: certyfikat-polski-B1-2020
   taskNumber: 4
-  instruction: "Zadanie 4"
+  instruction: "Proszę – zgodnie z przykładami – uzupełnić tekst poprawnymi formami wyrazów podanych w nawiasach (czas teraźniejszy i przyszły)."
 }
 GRAMMAR_TEST {
-  testId: "certyfikat-polski-B1-2020-grammar-5"
-  examRef: "certyfikat-polski-B1-2020"
+  testId: certyfikat-polski-B1-2020-grammar-5
+  examRef: certyfikat-polski-B1-2020
   taskNumber: 5
-  instruction: "Zadanie 5"
+  instruction: "Proszę – zgodnie z przykładem – zapytać o podkreśloną część zdania."
 }
 GRAMMAR_TEST {
-  testId: "certyfikat-polski-B1-2020-grammar-6"
-  examRef: "certyfikat-polski-B1-2020"
+  testId: certyfikat-polski-B1-2020-grammar-6
+  examRef: certyfikat-polski-B1-2020
   taskNumber: 6
-  instruction: "Zadanie 6"
+  instruction: "Proszę – zgodnie z przykładem – użyć wyrazu w nawiasie i przekształcić zdanie tak, by miało ten sam sens."
 }
 GRAMMAR_TEST {
-  testId: "certyfikat-polski-B1-2020-grammar-7"
-  examRef: "certyfikat-polski-B1-2020"
+  testId: certyfikat-polski-B1-2020-grammar-7
+  examRef: certyfikat-polski-B1-2020
   taskNumber: 7
-  instruction: "Zadanie 7"
+  instruction: "Proszę – zgodnie z przykładami – podkreślić poprawną formę wyrazów podanych w nawiasach (aspekt i tryby)."
 }
 GRAMMAR_TEST {
-  testId: "certyfikat-polski-B1-2020-grammar-8"
-  examRef: "certyfikat-polski-B1-2020"
+  testId: certyfikat-polski-B1-2020-grammar-8
+  examRef: certyfikat-polski-B1-2020
   taskNumber: 8
-  instruction: "Zadanie 8"
+  instruction: "Proszę – zgodnie z przykładem – uzupełnić zdania wyrazami z ramki (przyimki). Uwaga! Jeden wyraz w ramce jest niepotrzebny."
 }

@@ -1,0 +1,13 @@
+DSL 1
+GRAMMAR_ANSWER_VARIANT {
+  variantId: B1-2017-g4-2-partial
+  itemRef: B1-2017-g4-2
+  answer: "z kim"
+  earnedQuarter: 1
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: B1-2017-g4-3-partial
+  itemRef: B1-2017-g4-3
+  answer: dlaczego
+  earnedQuarter: 1
+}

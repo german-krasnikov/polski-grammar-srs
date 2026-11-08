@@ -1,46 +1,48 @@
 DSL 1
 LISTENING_TASK {
-  taskId: "B1-2019-listen-1"
-  examRef: "certyfikat-polski-B1-2019"
+  taskId: B1-2019-listen-1
+  examRef: certyfikat-polski-B1-2019
   taskNumber: 1
-  audioUrl: "exam-audio/B1-2019.mp3"
+  audioUrl: exam-audio/B1-2019.mp3
   segmentStartMs: 85000
   segmentEndMs: 305000
-  instruction: "Zadanie 1. Prosze uwazznie sluchac nagrania. Uwaga! Nagranie zostanie odtworzone tylko jeden raz. To zdanie moze wypowiedziec kto / gdzie?"
+  instruction: "Proszę uważnie słuchać nagrania i zaznaczyć właściwe odpowiedzi. Nagranie zostanie odtworzone tylko jeden raz. (14 × 0,5 p.)"
 }
 LISTENING_TASK {
-  taskId: "B1-2019-listen-2"
-  examRef: "certyfikat-polski-B1-2019"
+  taskId: B1-2019-listen-2
+  examRef: certyfikat-polski-B1-2019
   taskNumber: 2
-  audioUrl: "exam-audio/B1-2019.mp3"
+  audioUrl: exam-audio/B1-2019.mp3
   segmentStartMs: 310000
   segmentEndMs: 544000
-  instruction: "Zadanie 2. Dziennikarz rozmawia na temat akcji 'Torby bumerangi'. Prosze zaznaczyc: TAK lub NIE. Uwaga! Nagranie zostanie odtworzone dwa razy."
+  instruction: "Dziennikarz rozmawia o akcji „Torby bumerangi”. Zaznacz TAK, jeśli zdanie jest zgodne z tekstem, lub NIE, jeśli nie jest. Nagranie zostanie odtworzone dwa razy. (8 × 1 p.)"
 }
 LISTENING_TASK {
-  taskId: "B1-2019-listen-3"
-  examRef: "certyfikat-polski-B1-2019"
+  taskId: B1-2019-listen-3
+  examRef: certyfikat-polski-B1-2019
   taskNumber: 3
-  audioUrl: "exam-audio/B1-2019.mp3"
+  audioUrl: exam-audio/B1-2019.mp3
   segmentStartMs: 547000
   segmentEndMs: 787000
-  instruction: "Zadanie 3. Prosze wysluchac informacji na temat nowego systemu informowania o zagrozeniach i zaznaczyc wlasciwe odpowiedzi. Uwaga! Nagranie zostanie odtworzone dwa razy."
+  instruction: "Posłuchaj informacji o systemie ostrzegania SMS i zaznacz właściwe odpowiedzi. Nagranie zostanie odtworzone dwa razy. (5 × 1 p.)"
 }
 LISTENING_TASK {
-  taskId: "B1-2019-listen-4"
-  examRef: "certyfikat-polski-B1-2019"
+  taskId: B1-2019-listen-4
+  examRef: certyfikat-polski-B1-2019
   taskNumber: 4
-  audioUrl: "exam-audio/B1-2019.mp3"
+  audioUrl: exam-audio/B1-2019.mp3
   segmentStartMs: 790000
   segmentEndMs: 1061000
-  instruction: "Zadanie 4. Co jest wazne w rozmowach biznesowych? Prosze dopasowac osoby (1-4) do ich rad (A-E). Uwaga! Nagranie zostanie odtworzone dwa razy."
+  instruction: "Posłuchaj rad o rozmowach biznesowych. Dopasuj osobę 1–4 do opinii A–E; jedna osoba może wypowiadać więcej niż jedną opinię. Nagranie zostanie odtworzone dwa razy. (5 × 1 p.)"
 }
 LISTENING_TASK {
-  taskId: "B1-2019-listen-5"
-  examRef: "certyfikat-polski-B1-2019"
+  taskId: B1-2019-listen-5
+  examRef: certyfikat-polski-B1-2019
   taskNumber: 5
-  audioUrl: "exam-audio/B1-2019.mp3"
+  audioUrl: exam-audio/B1-2019.mp3
   segmentStartMs: 1066000
   segmentEndMs: 1472000
-  instruction: "Zadanie 5. Sposoby organizacji przeprowadzki. Prosze dopasowac numer tekstu do ilustracji. Uwaga! Nagranie zostanie odtworzone dwa razy."
+  instruction: "Posłuchaj tekstów o organizacji przeprowadzki i dopasuj numer tekstu 1–10 do ilustracji B–K. Ilustracja A jest przykładem. Nagranie zostanie odtworzone dwa razy. (10 × 0,5 p.)"
+  promptImageUrl: exam-images/B1-2019-listening-V.jpeg
+  promptImageAlt: "Ilustracje A–K do zadania V: A narzędzia jako przykład; B marker, C kosmetyczka, D ciężarówka, E pudła, F ubrania na wieszakach, G wspólny posiłek, H koce, I środki czystości, J osoba niosąca pudła, K pomoc przyjaciół."
 }

@@ -23,6 +23,8 @@ RECORD ListeningTaskRow KEY taskId COUNT 1..
   segmentEndMs: int
   instruction: string
   transcript: string OPTIONAL
+  promptImageUrl: string OPTIONAL
+  promptImageAlt: string OPTIONAL
 END
 
 RECORD ListeningQuestionRow KEY questionId COUNT 1..
@@ -32,7 +34,8 @@ RECORD ListeningQuestionRow KEY questionId COUNT 1..
   questionText: string
   options: string OPTIONAL
   correctAnswer: string
-  points: int
+  points: int OPTIONAL
+  pointsQuarter: int OPTIONAL
 END
 
 # Reading: passages with questions; paragraphs derived from text by blank-line split.
@@ -53,7 +56,8 @@ RECORD ReadingQuestionRow KEY questionId COUNT 1..
   questionText: string
   options: string OPTIONAL
   correctAnswer: string
-  points: int
+  points: int OPTIONAL
+  pointsQuarter: int OPTIONAL
   relevantParagraph: int OPTIONAL
 END
 
@@ -73,7 +77,16 @@ RECORD GrammarItemRow KEY itemId COUNT 1..
   gap: string OPTIONAL
   options: string OPTIONAL
   correctAnswer: string
-  points: int
+  points: int OPTIONAL
+  pointsQuarter: int OPTIONAL
+END
+
+# Additional accepted answers may earn part of the item's maximum, in quarter-point units.
+RECORD GrammarAnswerVariantRow KEY variantId COUNT 1..
+  variantId: string
+  itemRef: ref GrammarItemRow
+  answer: string
+  earnedQuarter: int
 END
 
 # Writing: prompts with genre and optional word limit.
@@ -81,10 +94,13 @@ RECORD WritingTaskRow KEY taskId COUNT 1..
   taskId: string
   examRef: ref ExamRow
   taskNumber: int
+  setId: string OPTIONAL
   instruction: string
   promptText: string
+  promptImageUrl: string OPTIONAL
+  promptImageAlt: string OPTIONAL
   wordLimit: int OPTIONAL
-  genre: enum letter|description|argument|essay
+  genre: enum letter|description|argument|essay|invitation|wishes|story|report|sms|opinion
 END
 
 # Scoring oracle: input/output pairs for the answer-matching rule (P4: test expectations in DSL).
@@ -94,4 +110,48 @@ RECORD ScoringCaseRow KEY id COUNT 1..
   answer: string
   expected: string
   correct: bool
+END
+
+RECORD QuarterScoringCaseRow KEY id COUNT 1..
+  id: string
+  fullAnswer: string
+  partialAnswer: string
+  partialQuarter: int
+  maximumQuarter: int
+  answer: string
+  expectedQuarter: int
+END
+
+RECORD WeightedScoringCaseRow KEY id COUNT 1..
+  id: string
+  answer: string
+  expected: string
+  maximumQuarter: int
+  earnedQuarter: int
+END
+
+# Published paper inventory and formatting expectations, consumed by generic Kotlin tests.
+RECORD ExamInventoryCaseRow KEY id COUNT 1..
+  id: string
+  section: enum listening|reading|grammar
+  taskRef: string
+  itemCount: int
+  pointsQuarter: int
+  variantCount: int OPTIONAL
+  segmentStartMs: int OPTIONAL
+  segmentEndMs: int OPTIONAL
+END
+
+RECORD WritingPromptCaseRow KEY id COUNT 1..
+  id: string
+  setId: string
+  taskNumber: int
+  wordLimit: int
+  promptImageUrl: string OPTIONAL
+END
+
+RECORD QuarterFormatCaseRow KEY id COUNT 1..
+  id: string
+  pointsQuarter: int
+  expectedText: string
 END

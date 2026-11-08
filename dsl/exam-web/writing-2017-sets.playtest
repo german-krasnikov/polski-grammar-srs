@@ -1,0 +1,27 @@
+TEST "B1 2017 writing keeps two drafts in one set and shows its photo" PROFILE playmode
+  open exam="B1 Certyfikat 2017" module="writing"
+  ASSERT writing.setChoiceCount == 3
+  selectWritingSet set="II"
+  ASSERT writing.taskLabel == "Задание 1 / 2"
+  writeDraft text="Życzymy wam szczęścia."
+  ASSERT writing.draft == "Życzymy wam szczęścia."
+  nextWriting
+  ASSERT writing.taskLabel == "Задание 2 / 2"
+  waitImage
+  ASSERT exam.promptImageLoaded == true
+  ASSERT exam.promptImageAlt == "Mężczyzna siedzi nad wodą i głaszcze psa."
+  writeDraft text="Jesteśmy razem trzy lata."
+  changeWritingSet
+  ASSERT writing.setChoiceCount == 3
+  selectWritingSet set="I"
+  ASSERT writing.draft == ""
+  changeWritingSet
+  selectWritingSet set="II"
+  ASSERT writing.draft == "Życzymy wam szczęścia."
+  nextWriting
+  ASSERT writing.draft == "Jesteśmy razem trzy lata."
+  submitWriting
+  ASSERT writing.reviewCount == 2
+  ASSERT writing.reviewDrafts == "Życzymy wam szczęścia.|Jesteśmy razem trzy lata."
+  ASSERT writing.autoScoreVisible == false
+END

@@ -1,0 +1,5 @@
+DSL 1
+QUARTER_FORMAT_CASE {id: quarter-one pointsQuarter: 1 expectedText: "0,25"}
+QUARTER_FORMAT_CASE {id: quarter-two pointsQuarter: 2 expectedText: "0,5"}
+QUARTER_FORMAT_CASE {id: quarter-three pointsQuarter: 3 expectedText: "0,75"}
+QUARTER_FORMAT_CASE {id: quarter-120 pointsQuarter: 120 expectedText: "30"}

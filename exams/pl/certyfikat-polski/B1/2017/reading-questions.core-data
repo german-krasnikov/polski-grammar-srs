@@ -1,105 +1,307 @@
 DSL 1
 READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2017-rq1"
-  passageRef: "certyfikat-polski-B1-2017-read-1"
-  questionType: fill_gap
-  questionText: "Pytanie 1"
-  correctAnswer: "c b b a c"
-  points: 1
-}
-READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2017-rq2"
-  passageRef: "certyfikat-polski-B1-2017-read-2"
+  questionId: B1-2017-r1-1
+  passageRef: certyfikat-polski-B1-2017-read-1
   questionType: multiple_choice
-  questionText: "Pytanie 2"
-  correctAnswer: "P F"
-  points: 1
+  questionText: "Ten tekst informuje, że"
+  options: "kioski internetowe są popularne w całym kraju|w kiosku z gazetami można skorzystać z Internetu|kioski internetowe oferują dostęp do Internetu"
+  correctAnswer: "kioski internetowe oferują dostęp do Internetu"
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2017-rq3"
-  passageRef: "certyfikat-polski-B1-2017-read-3"
-  questionType: fill_gap
-  questionText: "Pytanie 3"
-  correctAnswer: "F C B E D H G"
-  points: 1
-}
-READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2017-rq4"
-  passageRef: "certyfikat-polski-B1-2017-read-4"
-  questionType: fill_gap
-  questionText: "Pytanie 4"
-  correctAnswer: "G F H C B E A"
-  points: 1
-}
-READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2017-rq5"
-  passageRef: "certyfikat-polski-B1-2017-read-5"
+  questionId: B1-2017-r1-2
+  passageRef: certyfikat-polski-B1-2017-read-1
   questionType: multiple_choice
-  questionText: "Pytanie 5"
-  correctAnswer: "a"
-  points: 1
+  questionText: "Z tego tekstu wynika, że kluby"
+  options: "dają bezrobotnym pracę|uczą, jak efektywniej poszukiwać pracy|oferują bezrobotnym pomoc materialną"
+  correctAnswer: "uczą, jak efektywniej poszukiwać pracy"
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2017-rq6"
-  passageRef: "certyfikat-polski-B1-2017-read-5"
+  questionId: B1-2017-r1-3
+  passageRef: certyfikat-polski-B1-2017-read-1
   questionType: multiple_choice
-  questionText: "Pytanie 6"
-  correctAnswer: "n"
-  points: 1
+  questionText: "Z tego tekstu wynika, że"
+  options: "Polacy i Brytyjczycy jedzą najwięcej chipsów|w Polsce je się coraz więcej chipsów|Polacy jedzą chipsy od lat 90"
+  correctAnswer: "w Polsce je się coraz więcej chipsów"
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2017-rq7"
-  passageRef: "certyfikat-polski-B1-2017-read-5"
+  questionId: B1-2017-r1-4
+  passageRef: certyfikat-polski-B1-2017-read-1
   questionType: multiple_choice
-  questionText: "Pytanie 7"
-  correctAnswer: "o"
-  points: 1
+  questionText: "Z tego tekstu wynika, że narrator"
+  options: "miał ciotkę w USA|tęsknił za USA|wyemigrował z USA"
+  correctAnswer: "miał ciotkę w USA"
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2017-rq8"
-  passageRef: "certyfikat-polski-B1-2017-read-5"
+  questionId: B1-2017-r1-5
+  passageRef: certyfikat-polski-B1-2017-read-1
   questionType: multiple_choice
-  questionText: "Pytanie 8"
-  correctAnswer: "r"
-  points: 1
+  questionText: "Ten tekst informuje, że"
+  options: "każdy student musi mieć konto|należy przechowywać pieniądze w domu akademickim|banki dadzą kredyt tylko właścicielowi konta"
+  correctAnswer: "banki dadzą kredyt tylko właścicielowi konta"
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2017-rq9"
-  passageRef: "certyfikat-polski-B1-2017-read-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 9"
-  correctAnswer: "t"
-  points: 1
+  questionId: B1-2017-r2-1
+  passageRef: certyfikat-polski-B1-2017-read-2
+  questionType: true_false_not_given
+  questionText: "Martina mogła sobie nie poradzić sama ze znalezieniem mieszkania."
+  options: "PRAWDA|FAŁSZ"
+  correctAnswer: PRAWDA
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2017-rq10"
-  passageRef: "certyfikat-polski-B1-2017-read-5"
+  questionId: B1-2017-r2-2
+  passageRef: certyfikat-polski-B1-2017-read-2
+  questionType: true_false_not_given
+  questionText: "Aby być mentorem, należy bardzo dobrze znać angielski."
+  options: "PRAWDA|FAŁSZ"
+  correctAnswer: "FAŁSZ"
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2017-r2-3
+  passageRef: certyfikat-polski-B1-2017-read-2
+  questionType: true_false_not_given
+  questionText: "Mentorowanie to nie tylko obowiązki."
+  options: "PRAWDA|FAŁSZ"
+  correctAnswer: PRAWDA
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2017-r2-4
+  passageRef: certyfikat-polski-B1-2017-read-2
+  questionType: true_false_not_given
+  questionText: "Grupa Szybkiego Reagowania organizuje zajęcia na uczelni."
+  options: "PRAWDA|FAŁSZ"
+  correctAnswer: "FAŁSZ"
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2017-r2-5
+  passageRef: certyfikat-polski-B1-2017-read-2
+  questionType: true_false_not_given
+  questionText: "Włoszka spędziła święta w polskiej rodzinie."
+  options: "PRAWDA|FAŁSZ"
+  correctAnswer: PRAWDA
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2017-r2-6
+  passageRef: certyfikat-polski-B1-2017-read-2
+  questionType: true_false_not_given
+  questionText: "Mama Oli nie rozumiała przyjaciółki córki."
+  options: "PRAWDA|FAŁSZ"
+  correctAnswer: "FAŁSZ"
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2017-r2-7
+  passageRef: certyfikat-polski-B1-2017-read-2
+  questionType: true_false_not_given
+  questionText: "Ola będzie mentorką we Włoszech."
+  options: "PRAWDA|FAŁSZ"
+  correctAnswer: "FAŁSZ"
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2017-r3-1
+  passageRef: certyfikat-polski-B1-2017-read-3
   questionType: match_heading
-  questionText: "Pytanie 10"
-  correctAnswer: "S"
-  points: 1
+  questionText: "Fragment do luki 1"
+  options: "B|C|D|E|F|G|H"
+  correctAnswer: F
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2017-rq11"
-  passageRef: "certyfikat-polski-B1-2017-read-5"
-  questionType: fill_gap
-  questionText: "Pytanie 11"
-  correctAnswer: "TEST PRZYKŁADOWY"
-  points: 1
-}
-READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2017-rq12"
-  passageRef: "certyfikat-polski-B1-2017-read-5"
+  questionId: B1-2017-r3-2
+  passageRef: certyfikat-polski-B1-2017-read-3
   questionType: match_heading
-  questionText: "Pytanie 12"
-  correctAnswer: "B"
-  points: 1
+  questionText: "Fragment do luki 2"
+  options: "B|C|D|E|F|G|H"
+  correctAnswer: C
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2017-rq13"
-  passageRef: "certyfikat-polski-B1-2017-read-5"
-  questionType: fill_gap
-  questionText: "Pytanie 13"
-  correctAnswer: "TRANSKRYPCJE I KLUCZ DO ZADAŃ"
-  points: 1
+  questionId: B1-2017-r3-3
+  passageRef: certyfikat-polski-B1-2017-read-3
+  questionType: match_heading
+  questionText: "Fragment do luki 3"
+  options: "B|C|D|E|F|G|H"
+  correctAnswer: B
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2017-r3-4
+  passageRef: certyfikat-polski-B1-2017-read-3
+  questionType: match_heading
+  questionText: "Fragment do luki 4"
+  options: "B|C|D|E|F|G|H"
+  correctAnswer: E
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2017-r3-5
+  passageRef: certyfikat-polski-B1-2017-read-3
+  questionType: match_heading
+  questionText: "Fragment do luki 5"
+  options: "B|C|D|E|F|G|H"
+  correctAnswer: D
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2017-r3-6
+  passageRef: certyfikat-polski-B1-2017-read-3
+  questionType: match_heading
+  questionText: "Fragment do luki 6"
+  options: "B|C|D|E|F|G|H"
+  correctAnswer: H
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2017-r3-7
+  passageRef: certyfikat-polski-B1-2017-read-3
+  questionType: match_heading
+  questionText: "Fragment do luki 7"
+  options: "B|C|D|E|F|G|H"
+  correctAnswer: G
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2017-r4-1
+  passageRef: certyfikat-polski-B1-2017-read-4
+  questionType: match_heading
+  questionText: "Lektura w wannie"
+  options: "A|B|C|D|E|F|G|H"
+  correctAnswer: G
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2017-r4-2
+  passageRef: certyfikat-polski-B1-2017-read-4
+  questionType: match_heading
+  questionText: "Własna półka na książki"
+  options: "A|B|C|D|E|F|G|H"
+  correctAnswer: F
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2017-r4-3
+  passageRef: certyfikat-polski-B1-2017-read-4
+  questionType: match_heading
+  questionText: "Propozycja nie wybór"
+  options: "A|B|C|D|E|F|G|H"
+  correctAnswer: H
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2017-r4-4
+  passageRef: certyfikat-polski-B1-2017-read-4
+  questionType: match_heading
+  questionText: "Wieczór z bajką"
+  options: "A|B|C|D|E|F|G|H"
+  correctAnswer: C
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2017-r4-5
+  passageRef: certyfikat-polski-B1-2017-read-4
+  questionType: match_heading
+  questionText: "Dobry przykład"
+  options: "A|B|C|D|E|F|G|H"
+  correctAnswer: B
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2017-r4-6
+  passageRef: certyfikat-polski-B1-2017-read-4
+  questionType: match_heading
+  questionText: "Cierpliwość"
+  options: "A|B|C|D|E|F|G|H"
+  correctAnswer: E
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2017-r4-7
+  passageRef: certyfikat-polski-B1-2017-read-4
+  questionType: match_heading
+  questionText: "Nie ma oglądania bez czytania"
+  options: "A|B|C|D|E|F|G|H"
+  correctAnswer: A
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2017-r5-1
+  passageRef: certyfikat-polski-B1-2017-read-5
+  questionType: multiple_choice
+  questionText: "Żona Marka dobrze ___ koncerty"
+  options: "wie|umie|zna"
+  correctAnswer: zna
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: B1-2017-r5-2
+  passageRef: certyfikat-polski-B1-2017-read-5
+  questionType: multiple_choice
+  questionText: "żebym ___ koncert"
+  options: "zorganizowała|zbudowała|zagrała"
+  correctAnswer: "zorganizowała"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: B1-2017-r5-3
+  passageRef: certyfikat-polski-B1-2017-read-5
+  questionType: multiple_choice
+  questionText: "___ postanowiłam zrealizować ten pomysł"
+  options: "dlatego|ponieważ|dlaczego"
+  correctAnswer: dlatego
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: B1-2017-r5-4
+  passageRef: certyfikat-polski-B1-2017-read-5
+  questionType: multiple_choice
+  questionText: "a ___ zdecydowaliśmy się dołączyć nowe elementy"
+  options: "późno|dalej|potem"
+  correctAnswer: potem
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: B1-2017-r5-5
+  passageRef: certyfikat-polski-B1-2017-read-5
+  questionType: multiple_choice
+  questionText: "___ festiwalu będzie można nie tylko słuchać muzyki"
+  options: "Dla|Po|Na"
+  correctAnswer: Na
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: B1-2017-r5-6
+  passageRef: certyfikat-polski-B1-2017-read-5
+  questionType: multiple_choice
+  questionText: "Przygotowujemy również ___ obrazów"
+  options: "wystawę|przedstawienie|spektakl"
+  correctAnswer: "wystawę"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: B1-2017-r5-7
+  passageRef: certyfikat-polski-B1-2017-read-5
+  questionType: multiple_choice
+  questionText: "swoje archiwalne ___"
+  options: "zdjęcia|płyty|rysunki"
+  correctAnswer: "zdjęcia"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: B1-2017-r5-8
+  passageRef: certyfikat-polski-B1-2017-read-5
+  questionType: multiple_choice
+  questionText: "w jednym z krakowskich ___"
+  options: "teatrów|kościołów|parków"
+  correctAnswer: "kościołów"
+  pointsQuarter: 2
 }

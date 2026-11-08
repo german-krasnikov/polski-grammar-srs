@@ -1,0 +1,8 @@
+TEST "B1 2019 listening task V shows its paper image grid" PROFILE playmode
+  open exam="B1 Certyfikat 2019" module="listening"
+  advanceTask count=4
+  ASSERT media.taskLabel == "Задание 5 / 5"
+  waitImage
+  ASSERT exam.promptImageLoaded == true
+  ASSERT exam.promptImageAlt == "Ilustracje A–K do zadania V: A narzędzia jako przykład; B marker, C kosmetyczka, D ciężarówka, E pudła, F ubrania na wieszakach, G wspólny posiłek, H koce, I środki czystości, J osoba niosąca pudła, K pomoc przyjaciół."
+END
