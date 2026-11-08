@@ -1,136 +1,407 @@
 DSL 1
+# B2/2019 arkusz pp. 10–16; key p. 6. Counts 5+10+10+10+10; 40 points.
 READING_QUESTION {
-  questionId: "B2-2019-r1-q1"
-  passageRef: "B2-2019-r1-p1"
+  questionId: certyfikat-polski-B2-2019-reading-1-1
+  passageRef: certyfikat-polski-B2-2019-read-1
   questionType: multiple_choice
-  questionText: "Z tego tekstu dowiadujemy sie, ze"
-  options: "a) w stresie spozycie posikow i przekasek jest wieksze.|b) w okresie pobudzenia organizmu do dziaania czesciej tyjemy.|c) zajadanie stresu pojawia sie u wszystkich zestresowanych."
-  correctAnswer: "b"
-  points: 1
+  questionText: "Z tego tekstu dowiadujemy się, że"
+  options: "a) w stresie spożycie posiłków i przekąsek jest większe.|b) w okresie pobudzenia organizmu do działania częściej tyjemy.|c) zajadanie stresu pojawia się u wszystkich zestresowanych."
+  correctAnswer: "b) w okresie pobudzenia organizmu do działania częściej tyjemy."
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "B2-2019-r1-q2"
-  passageRef: "B2-2019-r1-p2"
+  questionId: certyfikat-polski-B2-2019-reading-1-2
+  passageRef: certyfikat-polski-B2-2019-read-1
   questionType: multiple_choice
-  questionText: "Z tego tekstu dowiadujemy sie, ze"
-  options: "a) pociag nie moze jechac szybciej niz 60 km na godzine.|b) mijane krajobrazy nie sa atrakcyjne.|c) podroz Koleja Transsyberyjska moze byc komfortowa za wysoka cene."
-  correctAnswer: "c"
-  points: 1
+  questionText: "Z tego tekstu dowiadujemy się, że"
+  options: "a) pociąg nie może jechać szybciej niż 60 km na godzinę.|b) mijane krajobrazy nie są atrakcyjne.|c) podróż Koleją Transsyberyjską może być komfortowa za wysoką cenę."
+  correctAnswer: "c) podróż Koleją Transsyberyjską może być komfortowa za wysoką cenę."
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "B2-2019-r1-q3"
-  passageRef: "B2-2019-r1-p3"
+  questionId: certyfikat-polski-B2-2019-reading-1-3
+  passageRef: certyfikat-polski-B2-2019-read-1
   questionType: multiple_choice
-  questionText: "Z tego tekstu dowiadujemy sie, ze"
-  options: "a) nagy i silny bol moze okazac sie pozyteczny.|b) istnieje sprawdzona skuteczna metoda walki z bolem.|c) bezsennosc i brak apetytu moga byc przyczyna bolu."
-  correctAnswer: "a"
-  points: 1
+  questionText: "Z tego tekstu dowiadujemy się, że"
+  options: "a) nagły i silny ból może okazać się pożyteczny.|b) istnieje sprawdzona skuteczna metoda walki z bólem.|c) bezsenność i brak apetytu mogą być przyczyną bólu."
+  correctAnswer: "a) nagły i silny ból może okazać się pożyteczny."
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "B2-2019-r1-q4"
-  passageRef: "B2-2019-r1-p4"
+  questionId: certyfikat-polski-B2-2019-reading-1-4
+  passageRef: certyfikat-polski-B2-2019-read-1
   questionType: multiple_choice
-  questionText: "Z tego tekstu dowiadujemy sie, ze"
-  options: "a) kobiecy spacer kosmiczny jest corocznym obyczajem.|b) McClain i Koch beda pierwszymi kobietami odbywajacymi spacer kosmiczny.|c) kobiety-astronautki sa obecne w NASA juz od ponad czterdziestu lat."
-  correctAnswer: "c"
-  points: 1
+  questionText: "Z tego tekstu dowiadujemy się, że"
+  options: "a) kobiecy spacer kosmiczny jest corocznym obyczajem.|b) McClain i Koch będą pierwszymi kobietami odbywającymi spacer kosmiczny.|c) kobiety-astronautki są obecne w NASA już od ponad czterdziestu lat."
+  correctAnswer: "c) kobiety-astronautki są obecne w NASA już od ponad czterdziestu lat."
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "B2-2019-r1-q5"
-  passageRef: "B2-2019-r1-p5"
+  questionId: certyfikat-polski-B2-2019-reading-1-5
+  passageRef: certyfikat-polski-B2-2019-read-1
   questionType: multiple_choice
-  questionText: "Z tego tekstu dowiadujemy sie, ze"
-  options: "a) juz poowa ludzi na swiecie sucha podcastow.|b) przez ostatnie lata liczba suchowisk znacznie wzrosa.|c) 42 miliony wielbicieli sucha podcastow tylko raz w tygodniu."
-  correctAnswer: "b"
-  points: 1
+  questionText: "Z tego tekstu dowiadujemy się, że"
+  options: "a) już połowa ludzi na świecie słucha podcastów.|b) przez ostatnie lata liczba słuchowisk znacznie wzrosła.|c) 42 miliony wielbicieli słucha podcastów tylko raz w tygodniu."
+  correctAnswer: "b) przez ostatnie lata liczba słuchowisk znacznie wzrosła."
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "B2-2019-r4-q1"
-  passageRef: "B2-2019-r4-p1"
-  questionType: true_false_not_given
-  questionText: "W Arktyce skutki globalnego ocieplenia widac goym okiem."
-  options: "TAK|NIE|BI"
-  correctAnswer: "BI"
-  points: 1
+  questionId: certyfikat-polski-B2-2019-reading-2-1
+  passageRef: certyfikat-polski-B2-2019-read-2
+  questionType: fill_gap
+  questionText: "Fragment do luki [1]"
+  options: "A|B|D|E|F|G|H|I|J|K"
+  correctAnswer: H
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "B2-2019-r4-q2"
-  passageRef: "B2-2019-r4-p1"
-  questionType: true_false_not_given
-  questionText: "Zmiany klimatyczne sa przyczyna migracji ryb w kierunku polnocnym."
-  options: "TAK|NIE|BI"
-  correctAnswer: "TAK"
-  points: 1
+  questionId: certyfikat-polski-B2-2019-reading-2-2
+  passageRef: certyfikat-polski-B2-2019-read-2
+  questionType: fill_gap
+  questionText: "Fragment do luki [2]"
+  options: "A|B|D|E|F|G|H|I|J|K"
+  correctAnswer: A
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "B2-2019-r4-q3"
-  passageRef: "B2-2019-r4-p1"
-  questionType: true_false_not_given
-  questionText: "W Arktyce liczba ryb sodkowodnych zmniejsza sie szybciej niz liczba ryb morskich."
-  options: "TAK|NIE|BI"
-  correctAnswer: "BI"
-  points: 1
+  questionId: certyfikat-polski-B2-2019-reading-2-3
+  passageRef: certyfikat-polski-B2-2019-read-2
+  questionType: fill_gap
+  questionText: "Fragment do luki [3]"
+  options: "A|B|D|E|F|G|H|I|J|K"
+  correctAnswer: I
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "B2-2019-r4-q4"
-  passageRef: "B2-2019-r4-p1"
-  questionType: true_false_not_given
-  questionText: "Rozmarzanie ziemi w Arktyce ma zwiazek z licznie wystepujacymi tam lasami."
-  options: "TAK|NIE|BI"
-  correctAnswer: "NIE"
-  points: 1
+  questionId: certyfikat-polski-B2-2019-reading-2-4
+  passageRef: certyfikat-polski-B2-2019-read-2
+  questionType: fill_gap
+  questionText: "Fragment do luki [4]"
+  options: "A|B|D|E|F|G|H|I|J|K"
+  correctAnswer: D
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "B2-2019-r4-q5"
-  passageRef: "B2-2019-r4-p1"
-  questionType: true_false_not_given
-  questionText: "Owady na polnocy potrzebuja drzew, zeby sie rozmnazac."
-  options: "TAK|NIE|BI"
-  correctAnswer: "BI"
-  points: 1
+  questionId: certyfikat-polski-B2-2019-reading-2-5
+  passageRef: certyfikat-polski-B2-2019-read-2
+  questionType: fill_gap
+  questionText: "Fragment do luki [5]"
+  options: "A|B|D|E|F|G|H|I|J|K"
+  correctAnswer: E
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "B2-2019-r4-q6"
-  passageRef: "B2-2019-r4-p1"
-  questionType: true_false_not_given
-  questionText: "Przodkowie dzisiejszych ludow Arktyki nazywali siebie Eskimosami."
-  options: "TAK|NIE|BI"
-  correctAnswer: "BI"
-  points: 1
+  questionId: certyfikat-polski-B2-2019-reading-2-6
+  passageRef: certyfikat-polski-B2-2019-read-2
+  questionType: fill_gap
+  questionText: "Fragment do luki [6]"
+  options: "A|B|D|E|F|G|H|I|J|K"
+  correctAnswer: B
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "B2-2019-r4-q7"
-  passageRef: "B2-2019-r4-p1"
-  questionType: true_false_not_given
-  questionText: "W dzisiejszych czasach ludnosc Arktyki czesto zmienia miejsce zamieszkania."
-  options: "TAK|NIE|BI"
-  correctAnswer: "NIE"
-  points: 1
+  questionId: certyfikat-polski-B2-2019-reading-2-7
+  passageRef: certyfikat-polski-B2-2019-read-2
+  questionType: fill_gap
+  questionText: "Fragment do luki [7]"
+  options: "A|B|D|E|F|G|H|I|J|K"
+  correctAnswer: G
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "B2-2019-r4-q8"
-  passageRef: "B2-2019-r4-p1"
-  questionType: true_false_not_given
-  questionText: "Ludzie na dalekiej polnocy kultywuja odwieczne tradycje myliwskie."
-  options: "TAK|NIE|BI"
-  correctAnswer: "TAK"
-  points: 1
+  questionId: certyfikat-polski-B2-2019-reading-2-8
+  passageRef: certyfikat-polski-B2-2019-read-2
+  questionType: fill_gap
+  questionText: "Fragment do luki [8]"
+  options: "A|B|D|E|F|G|H|I|J|K"
+  correctAnswer: K
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "B2-2019-r4-q9"
-  passageRef: "B2-2019-r4-p1"
-  questionType: true_false_not_given
-  questionText: "Liczenie arktycznych zwierzat przez naukowcow potwierdzio opinie ekologow."
-  options: "TAK|NIE|BI"
-  correctAnswer: "NIE"
-  points: 1
+  questionId: certyfikat-polski-B2-2019-reading-2-9
+  passageRef: certyfikat-polski-B2-2019-read-2
+  questionType: fill_gap
+  questionText: "Fragment do luki [9]"
+  options: "A|B|D|E|F|G|H|I|J|K"
+  correctAnswer: F
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "B2-2019-r4-q10"
-  passageRef: "B2-2019-r4-p1"
+  questionId: certyfikat-polski-B2-2019-reading-2-10
+  passageRef: certyfikat-polski-B2-2019-read-2
+  questionType: fill_gap
+  questionText: "Fragment do luki [10]"
+  options: "A|B|D|E|F|G|H|I|J|K"
+  correctAnswer: J
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-3-1
+  passageRef: certyfikat-polski-B2-2019-read-3
+  questionType: match_heading
+  questionText: "Co wpłynęło na Twoją decyzję o udziale w tym projekcie?"
+  options: "A|B|C|D|E|G|H|I|J|K"
+  correctAnswer: D
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-3-2
+  passageRef: certyfikat-polski-B2-2019-read-3
+  questionType: match_heading
+  questionText: "Jak wyglądała praca nad piosenką do „Kuriera”?"
+  options: "A|B|C|D|E|G|H|I|J|K"
+  correctAnswer: A
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-3-3
+  passageRef: certyfikat-polski-B2-2019-read-3
+  questionType: match_heading
+  questionText: "Czy łatwo było napisać tekst?"
+  options: "A|B|C|D|E|G|H|I|J|K"
+  correctAnswer: E
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-3-4
+  passageRef: certyfikat-polski-B2-2019-read-3
+  questionType: match_heading
+  questionText: "Co Cię najbardziej zafascynowało w historii Nowaka-Jeziorańskiego?"
+  options: "A|B|C|D|E|G|H|I|J|K"
+  correctAnswer: K
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-3-5
+  passageRef: certyfikat-polski-B2-2019-read-3
+  questionType: match_heading
+  questionText: "Nie jest to Twoja pierwsza przygoda z kinem historycznym. To przypadek?"
+  options: "A|B|C|D|E|G|H|I|J|K"
+  correctAnswer: I
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-3-6
+  passageRef: certyfikat-polski-B2-2019-read-3
+  questionType: match_heading
+  questionText: "Jak Twoim zdaniem powinien wyglądać współczesny patriotyzm?"
+  options: "A|B|C|D|E|G|H|I|J|K"
+  correctAnswer: B
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-3-7
+  passageRef: certyfikat-polski-B2-2019-read-3
+  questionType: match_heading
+  questionText: "Niektórzy mówią, że artyści są od grania, a nie manifestowania poglądów politycznych. Jakie jest Twoje zdanie?"
+  options: "A|B|C|D|E|G|H|I|J|K"
+  correctAnswer: C
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-3-8
+  passageRef: certyfikat-polski-B2-2019-read-3
+  questionType: match_heading
+  questionText: "Karierę zaczynałeś od ciężkich brzmień, teraz zmieniłeś styl. Nie brakuje Ci metalu?"
+  options: "A|B|C|D|E|G|H|I|J|K"
+  correctAnswer: G
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-3-9
+  passageRef: certyfikat-polski-B2-2019-read-3
+  questionType: match_heading
+  questionText: "Sięgnąłeś też po twórczość Czesława Niemena, nie obawiałeś się reakcji publiczności?"
+  options: "A|B|C|D|E|G|H|I|J|K"
+  correctAnswer: H
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-3-10
+  passageRef: certyfikat-polski-B2-2019-read-3
+  questionType: match_heading
+  questionText: "Jakie są Twoje muzyczne plany?"
+  options: "A|B|C|D|E|G|H|I|J|K"
+  correctAnswer: J
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-4-1
+  passageRef: certyfikat-polski-B2-2019-read-4
   questionType: true_false_not_given
-  questionText: "Migracje ryb pociagaja za soba wedrowki innych gatunkow zwierzat."
+  questionText: "W Arktyce skutki globalnego ocieplenia widać gołym okiem."
   options: "TAK|NIE|BI"
-  correctAnswer: "TAK"
-  points: 1
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-4-2
+  passageRef: certyfikat-polski-B2-2019-read-4
+  questionType: true_false_not_given
+  questionText: "Zmiany klimatyczne są przyczyną migracji ryb w kierunku północnym."
+  options: "TAK|NIE|BI"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-4-3
+  passageRef: certyfikat-polski-B2-2019-read-4
+  questionType: true_false_not_given
+  questionText: "W Arktyce liczba ryb słodkowodnych zmniejsza się szybciej niż liczba ryb morskich."
+  options: "TAK|NIE|BI"
+  correctAnswer: BI
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-4-4
+  passageRef: certyfikat-polski-B2-2019-read-4
+  questionType: true_false_not_given
+  questionText: "Rozmarzanie ziemi w Arktyce ma związek z licznie występującymi tam lasami."
+  options: "TAK|NIE|BI"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-4-5
+  passageRef: certyfikat-polski-B2-2019-read-4
+  questionType: true_false_not_given
+  questionText: "Owady na północy potrzebują drzew, żeby się rozmnażać."
+  options: "TAK|NIE|BI"
+  correctAnswer: BI
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-4-6
+  passageRef: certyfikat-polski-B2-2019-read-4
+  questionType: true_false_not_given
+  questionText: "Przodkowie dzisiejszych ludów Arktyki nazywali siebie Eskimosami."
+  options: "TAK|NIE|BI"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-4-7
+  passageRef: certyfikat-polski-B2-2019-read-4
+  questionType: true_false_not_given
+  questionText: "W dzisiejszych czasach ludność Arktyki często zmienia miejsce zamieszkania."
+  options: "TAK|NIE|BI"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-4-8
+  passageRef: certyfikat-polski-B2-2019-read-4
+  questionType: true_false_not_given
+  questionText: "Ludzie na dalekiej północy kultywują odwieczne tradycje myśliwskie."
+  options: "TAK|NIE|BI"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-4-9
+  passageRef: certyfikat-polski-B2-2019-read-4
+  questionType: true_false_not_given
+  questionText: "Liczenie arktycznych zwierząt przez naukowców potwierdziło opinie ekologów."
+  options: "TAK|NIE|BI"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-4-10
+  passageRef: certyfikat-polski-B2-2019-read-4
+  questionType: true_false_not_given
+  questionText: "Migracje ryb pociągają za sobą wędrówki innych gatunków zwierząt."
+  options: "TAK|NIE|BI"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-5-1
+  passageRef: certyfikat-polski-B2-2019-read-5
+  questionType: fill_gap
+  questionText: "zbyt częste picie groziło [1]"
+  options: "chronią|postanawiają|zależnością|nadają|niepożądanych|oczyszczają|cennych|warunki|smaku|pomieszczenie|uzależnieniem|zapach|zastanawiają się"
+  correctAnswer: "uzależnieniem"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-5-2
+  passageRef: certyfikat-polski-B2-2019-read-5
+  questionType: fill_gap
+  questionText: "składniki, które [2] organizm"
+  options: "chronią|postanawiają|zależnością|nadają|niepożądanych|oczyszczają|cennych|warunki|smaku|pomieszczenie|uzależnieniem|zapach|zastanawiają się"
+  correctAnswer: "chronią"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-5-3
+  passageRef: certyfikat-polski-B2-2019-read-5
+  questionType: fill_gap
+  questionText: "Nad tym [3] ostatnio fizycy i chemicy"
+  options: "chronią|postanawiają|zależnością|nadają|niepożądanych|oczyszczają|cennych|warunki|smaku|pomieszczenie|uzależnieniem|zapach|zastanawiają się"
+  correctAnswer: "zastanawiają się"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-5-4
+  passageRef: certyfikat-polski-B2-2019-read-5
+  questionType: fill_gap
+  questionText: "zarówno [4] palenia ziaren"
+  options: "chronią|postanawiają|zależnością|nadają|niepożądanych|oczyszczają|cennych|warunki|smaku|pomieszczenie|uzależnieniem|zapach|zastanawiają się"
+  correctAnswer: warunki
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-5-5
+  passageRef: certyfikat-polski-B2-2019-read-5
+  questionType: fill_gap
+  questionText: "napój jest nijaki w [5]"
+  options: "chronią|postanawiają|zależnością|nadają|niepożądanych|oczyszczają|cennych|warunki|smaku|pomieszczenie|uzależnieniem|zapach|zastanawiają się"
+  correctAnswer: smaku
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-5-6
+  passageRef: certyfikat-polski-B2-2019-read-5
+  questionType: fill_gap
+  questionText: "reakcje, które [6] kawie smak"
+  options: "chronią|postanawiają|zależnością|nadają|niepożądanych|oczyszczają|cennych|warunki|smaku|pomieszczenie|uzależnieniem|zapach|zastanawiają się"
+  correctAnswer: "nadają"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-5-7
+  passageRef: certyfikat-polski-B2-2019-read-5
+  questionType: fill_gap
+  questionText: "owocowy, kwaskowy [7]"
+  options: "chronią|postanawiają|zależnością|nadają|niepożądanych|oczyszczają|cennych|warunki|smaku|pomieszczenie|uzależnieniem|zapach|zastanawiają się"
+  correctAnswer: zapach
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-5-8
+  passageRef: certyfikat-polski-B2-2019-read-5
+  questionType: fill_gap
+  questionText: "zbyt mało [8] składników"
+  options: "chronią|postanawiają|zależnością|nadają|niepożądanych|oczyszczają|cennych|warunki|smaku|pomieszczenie|uzależnieniem|zapach|zastanawiają się"
+  correctAnswer: cennych
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-5-9
+  passageRef: certyfikat-polski-B2-2019-read-5
+  questionType: fill_gap
+  questionText: "pojawi się wiele [9]"
+  options: "chronią|postanawiają|zależnością|nadają|niepożądanych|oczyszczają|cennych|warunki|smaku|pomieszczenie|uzależnieniem|zapach|zastanawiają się"
+  correctAnswer: "niepożądanych"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-5-10
+  passageRef: certyfikat-polski-B2-2019-read-5
+  questionType: fill_gap
+  questionText: "gdy [10], w którym się ją podaje"
+  options: "chronią|postanawiają|zależnością|nadają|niepożądanych|oczyszczają|cennych|warunki|smaku|pomieszczenie|uzależnieniem|zapach|zastanawiają się"
+  correctAnswer: pomieszczenie
+  pointsQuarter: 2
 }

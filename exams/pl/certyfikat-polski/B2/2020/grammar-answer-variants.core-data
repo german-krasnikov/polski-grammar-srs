@@ -1,5 +1,12 @@
 DSL 1
-# B2/2020 klucz pp. 7–8: official full-credit alternatives. II/8=w is conditional on II/6 not using w; omitted until grouped usage grading exists.
+# B2/2020 klucz pp. 7–8: official full-credit alternatives. II/8=w is conditional on II/6 not using w.
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2020-grammar-2-8-alt-w
+  itemRef: certyfikat-polski-B2-2020-grammar-2-8
+  answer: w
+  earnedQuarter: 2
+  onlyIfNotUsedBy: certyfikat-polski-B2-2020-grammar-2-6
+}
 GRAMMAR_ANSWER_VARIANT {
   variantId: certyfikat-polski-B2-2020-grammar-4-2-alt-1
   itemRef: certyfikat-polski-B2-2020-grammar-4-2

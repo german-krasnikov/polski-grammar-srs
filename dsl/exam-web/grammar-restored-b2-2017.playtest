@@ -1,0 +1,9 @@
+TEST "B2 2017 grammar credits the printed Mieszkając form" PROFILE playmode
+  open exam="B2 Certyfikat 2017" module="grammar"
+  ASSERT grammar.context == " […] w światowych stolicach mody, wchodzą do elitarnego grona projektantów."
+  chooseGrammar answer="Mieszkając"
+  advance count=64
+  submit
+  inspectReview index=1
+  ASSERT grammar.reviewStatus == "correct"
+END

@@ -1,0 +1,17 @@
+TEST "B1 2020 all five source-audited recording windows" PROFILE playmode
+  open exam="B1 Certyfikat 2020" module="listening"
+  ASSERT media.taskLabel == "Задание 1 / 5"
+  auditSegment start=102 end=271
+  advanceTask count=1
+  ASSERT media.taskLabel == "Задание 2 / 5"
+  auditSegment start=272 end=553
+  advanceTask count=1
+  ASSERT media.taskLabel == "Задание 3 / 5"
+  auditSegment start=554 end=798
+  advanceTask count=1
+  ASSERT media.taskLabel == "Задание 4 / 5"
+  auditSegment start=799 end=1154
+  advanceTask count=1
+  ASSERT media.taskLabel == "Задание 5 / 5"
+  auditSegment start=1155 end=1418
+END

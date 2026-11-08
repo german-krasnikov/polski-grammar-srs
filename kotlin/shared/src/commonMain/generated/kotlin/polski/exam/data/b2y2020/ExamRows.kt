@@ -1,5 +1,5 @@
 // Generated from dsl/exam.data-contract
-// source-sha256=992a404f2b4446e2e0e639f8406138254b00bba16e0cbbd01dd5b91240805608
+// source-sha256=a57e78c0c7e995774d3b275d965c3ed5eaf230d29d01cb66a06330174c9e816d
 // Edit the source, then run biome generate.
 
 package polski.exam.data.b2y2020
@@ -56,6 +56,7 @@ enum class WritingTaskRowGenre(val tag: String) {
     EMAIL("email"),
     REVIEW("review"),
     ADVERTISEMENT("advertisement"),
+    APPLICATION("application"),
 }
 
 enum class ExamInventoryCaseRowSection(val tag: String) {
@@ -197,6 +198,7 @@ data class GrammarAnswerVariantRow(
     val itemRef: String,
     val answer: String,
     val earnedQuarter: Int,
+    val onlyIfNotUsedBy: String? = null,
 )
 
 data class WritingTaskRow(
@@ -313,6 +315,14 @@ data class OpenItemGroupCaseRow(
     val expectedBlankStatus: OpenItemGroupCaseRowExpectedBlankStatus,
 )
 
+data class GrammarConstraintCaseRow(
+    val id: String,
+    val answer6: String,
+    val answer8: String,
+    val expected6Quarter: Int,
+    val expected8Quarter: Int,
+)
+
 val EXAM_ROW_ROWS: List<ExamRow> = listOf(
     ExamRow(
         examId = "certyfikat-polski-B2-2020",
@@ -330,8 +340,8 @@ val LISTENING_TASK_ROW_ROWS: List<ListeningTaskRow> = listOf(
         examRef = "certyfikat-polski-B2-2020",
         taskNumber = 1,
         audioUrl = "exam-audio/B2-2020.mp3",
-        segmentStartMs = 0,
-        segmentEndMs = 0,
+        segmentStartMs = 97000,
+        segmentEndMs = 417000,
         instruction = "Proszę wysłuchać kolejnych tekstów i zaznaczyć właściwe odpowiedzi. Nagranie zostanie odtworzone dwukrotnie.",
     ),
     ListeningTaskRow(
@@ -339,8 +349,8 @@ val LISTENING_TASK_ROW_ROWS: List<ListeningTaskRow> = listOf(
         examRef = "certyfikat-polski-B2-2020",
         taskNumber = 2,
         audioUrl = "exam-audio/B2-2020.mp3",
-        segmentStartMs = 0,
-        segmentEndMs = 0,
+        segmentStartMs = 418000,
+        segmentEndMs = 702000,
         instruction = "Proszę wysłuchać wypowiedzi ekonomisty o gospodarce współpracy i zaznaczyć TAK albo NIE. Nagranie zostanie odtworzone dwukrotnie.",
     ),
     ListeningTaskRow(
@@ -348,8 +358,8 @@ val LISTENING_TASK_ROW_ROWS: List<ListeningTaskRow> = listOf(
         examRef = "certyfikat-polski-B2-2020",
         taskNumber = 3,
         audioUrl = "exam-audio/B2-2020.mp3",
-        segmentStartMs = 0,
-        segmentEndMs = 0,
+        segmentStartMs = 703000,
+        segmentEndMs = 1082000,
         instruction = "Proszę wysłuchać tekstu i przyporządkować opisy miejscom: A. Piramida w Rapie; B. Piramida w Krynicy; C. Kratery Morasko; D. Zamek Krzyżtopór. Jeden opis może dotyczyć więcej niż jednego miejsca; kolejność dwóch odpowiedzi jest dowolna. Nagranie zostanie odtworzone dwukrotnie.",
     ),
     ListeningTaskRow(
@@ -357,8 +367,8 @@ val LISTENING_TASK_ROW_ROWS: List<ListeningTaskRow> = listOf(
         examRef = "certyfikat-polski-B2-2020",
         taskNumber = 4,
         audioUrl = "exam-audio/B2-2020.mp3",
-        segmentStartMs = 0,
-        segmentEndMs = 0,
+        segmentStartMs = 1083000,
+        segmentEndMs = 1357000,
         instruction = "Proszę wysłuchać tekstu o święcie hodowców gołębi pocztowych i zaznaczyć właściwe odpowiedzi. Nagranie zostanie odtworzone dwukrotnie.",
     ),
     ListeningTaskRow(
@@ -366,8 +376,8 @@ val LISTENING_TASK_ROW_ROWS: List<ListeningTaskRow> = listOf(
         examRef = "certyfikat-polski-B2-2020",
         taskNumber = 5,
         audioUrl = "exam-audio/B2-2020.mp3",
-        segmentStartMs = 0,
-        segmentEndMs = 0,
+        segmentStartMs = 1357000,
+        segmentEndMs = 1672000,
         instruction = "Proszę wysłuchać tekstu o historii kawy i odpowiedzieć na pytania. Nagranie zostanie odtworzone dwukrotnie.",
     ),
 )
@@ -1897,6 +1907,13 @@ val GRAMMAR_ITEM_ROW_ROWS: List<GrammarItemRow> = listOf(
 )
 
 val GRAMMAR_ANSWER_VARIANT_ROW_ROWS: List<GrammarAnswerVariantRow> = listOf(
+    GrammarAnswerVariantRow(
+        variantId = "certyfikat-polski-B2-2020-grammar-2-8-alt-w",
+        itemRef = "certyfikat-polski-B2-2020-grammar-2-8",
+        answer = "w",
+        earnedQuarter = 2,
+        onlyIfNotUsedBy = "certyfikat-polski-B2-2020-grammar-2-6",
+    ),
     GrammarAnswerVariantRow(
         variantId = "certyfikat-polski-B2-2020-grammar-4-2-alt-1",
         itemRef = "certyfikat-polski-B2-2020-grammar-4-2",

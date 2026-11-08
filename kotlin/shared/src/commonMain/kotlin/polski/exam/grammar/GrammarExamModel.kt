@@ -8,7 +8,21 @@ data class GrammarTest(
     val testId: String,
     val instruction: String,
     val items: List<GrammarItem>,
-)
+) {
+    init {
+        val itemIds = items.map { it.itemId }.toSet()
+        require(itemIds.size == items.size) { "Duplicate item in $testId" }
+        items.forEach { item ->
+            item.scoredVariants.forEach { variant ->
+                variant.onlyIfNotUsedByItemId?.let { otherId ->
+                    require(otherId != item.itemId && otherId in itemIds) {
+                        "Conditional answer for ${item.itemId} must reference another item in $testId"
+                    }
+                }
+            }
+        }
+    }
+}
 
 data class GrammarItem(
     val itemId: String,
@@ -35,6 +49,11 @@ data class GrammarItem(
     }
 }
 
-data class GrammarScoredVariant(val answer: String, val earnedQuarter: Int)
+data class GrammarScoredVariant(
+    val answer: String,
+    val earnedQuarter: Int,
+    /** Item in this test whose same normalized answer blocks this variant. */
+    val onlyIfNotUsedByItemId: String? = null,
+)
 
 data class GrammarAttempt(val itemId: String, val answer: String)

@@ -1,0 +1,10 @@
+TEST "B2 2020 listening V confirms one printed half-point word" PROFILE playmode
+  open exam="B2 Certyfikat 2020" module="listening"
+  advanceTask count=4
+  ASSERT media.taskLabel == "Задание 5 / 5"
+  enterListening index=6 slot=1 text="czajnik"
+  submit
+  inspectReview index=38
+  ASSERT grammar.reviewStatus == "partial"
+  ASSERT exam.scoreDetail == "0,5 / 40 баллов"
+END

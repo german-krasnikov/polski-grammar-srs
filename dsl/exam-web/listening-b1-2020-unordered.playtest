@@ -1,0 +1,12 @@
+TEST "B1 2020 listening IV scores two choices regardless of entry order" PROFILE playmode
+  open exam="B1 Certyfikat 2020" module="listening"
+  advanceTask count=3
+  ASSERT media.taskLabel == "Задание 4 / 5"
+  chooseReading index=2 answer="4"
+  chooseReading index=2 answer="1"
+  ASSERT listening.selectedSecond == "1|4"
+  advanceTask count=1
+  submit
+  inspectReview index=26
+  ASSERT grammar.reviewStatus == "correct"
+END

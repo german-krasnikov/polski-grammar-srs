@@ -1,11 +1,12 @@
-TEST "Official B1 browser catalog shows mapped modules and hides unfinished papers" PROFILE playmode
+TEST "Official browser catalog shows all six mapped papers" PROFILE playmode
   openCatalog
   ASSERT exam.listVisible == true
   ASSERT catalog.b12019Counts == "55|35|42|6"
   ASSERT catalog.b12017Counts == "50|34|37|6"
-  ASSERT catalog.b12020Visible == false
-  ASSERT catalog.b22017Visible == false
-  ASSERT catalog.b22020Visible == false
+  ASSERT catalog.b12020Counts == "55|34|36|6"
+  ASSERT catalog.b22017Counts == "65|45|47|6"
+  ASSERT catalog.b22019Counts == "75|45|41|6"
+  ASSERT catalog.b22020Counts == "75|45|41|6"
   open exam="B1 Certyfikat 2019" module="writing"
   ASSERT writing.setChoiceCount == 3
 END

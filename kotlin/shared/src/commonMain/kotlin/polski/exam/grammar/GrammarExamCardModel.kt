@@ -18,6 +18,7 @@ data class GrammarExamCard(
 fun grammarExamCardModel(state: GrammarExamState): GrammarExamCard {
     val item = state.test.items[state.currentIndex]
     val answer = state.answers[item.itemId].orEmpty()
+    val evaluation = if (state.submitted) GrammarExamScorer.gradeInAttempt(state.test, item, state.answers) else null
     return GrammarExamCard(
         instruction = state.test.instruction,
         progress = "${state.currentIndex + 1} / ${state.test.items.size}",
@@ -26,8 +27,8 @@ fun grammarExamCardModel(state: GrammarExamState): GrammarExamCard {
         isFirst = state.currentIndex == 0,
         isLast = state.currentIndex == state.test.items.lastIndex,
         submitted = state.submitted,
-        isCorrect = if (state.submitted) GrammarExamScorer.grade(item, answer).status == ExamAnswerStatus.ConfirmedFull else null,
-        gradeStatus = if (state.submitted) GrammarExamScorer.grade(item, answer).status else null,
+        isCorrect = evaluation?.let { it.status == ExamAnswerStatus.ConfirmedFull },
+        gradeStatus = evaluation?.status,
         result = state.result,
     )
 }

@@ -1,0 +1,16 @@
+TEST "B2 2020 writing keeps the printed promotion prompt and drafts" PROFILE playmode
+  open exam="B2 Certyfikat 2020" module="writing"
+  ASSERT writing.setChoiceCount == 3
+  selectWritingSet set="I"
+  ASSERT writing.taskLabel == "Задание 1 / 2"
+  ASSERT writing.promptOpening == "Liczyła Pani / Liczył Pan na awans w pracy. Niestety, dyrektor przyznał go Pani/Pana współpracownikowi. Proszę napisać do swojej przyjaciółki / swojego przyjaciela z Polski e-mail, w którym wyrazi Pani/Pan rozgoryczenie związane z tą sytuacją."
+  writeDraft text="Przykro mi, że nie dostałam awansu."
+  nextWriting
+  ASSERT writing.taskLabel == "Задание 2 / 2"
+  ASSERT writing.draft == ""
+  writeDraft text="To było niesprawiedliwe."
+  submitWriting
+  ASSERT writing.reviewCount == 2
+  ASSERT writing.reviewDrafts == "Przykro mi, że nie dostałam awansu.|To było niesprawiedliwe."
+  ASSERT writing.autoScoreVisible == false
+END

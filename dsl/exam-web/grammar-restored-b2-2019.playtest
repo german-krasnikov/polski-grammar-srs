@@ -1,0 +1,9 @@
+TEST "B2 2019 grammar credits the printed zobowiązującą form" PROFILE playmode
+  open exam="B2 Certyfikat 2019" module="grammar"
+  ASSERT grammar.context == "Gwarancję […] Cię do przestrzegania instrukcji."
+  chooseGrammar answer="zobowiązującą"
+  advance count=74
+  submit
+  inspectReview index=1
+  ASSERT grammar.reviewStatus == "correct"
+END

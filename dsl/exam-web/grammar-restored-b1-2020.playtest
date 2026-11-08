@@ -1,0 +1,9 @@
+TEST "B1 2020 grammar credits the printed książek form" PROFILE playmode
+  open exam="B1 Certyfikat 2020" module="grammar"
+  ASSERT grammar.context == "W szkole czytamy wiele […]."
+  chooseGrammar answer="książek"
+  advance count=54
+  submit
+  inspectReview index=1
+  ASSERT grammar.reviewStatus == "correct"
+END

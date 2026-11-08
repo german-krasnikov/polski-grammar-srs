@@ -121,7 +121,7 @@ internal class ExamGrammarController(examId: String, private val onBack: () -> U
         c.appendChild(node("div", "exam-review").apply {
             state.test.items.forEachIndexed { i, item ->
                 val answer = state.answers[item.itemId].orEmpty()
-                val evaluation = GrammarExamScorer.grade(item, answer)
+                val evaluation = GrammarExamScorer.gradeInAttempt(state.test, item, state.answers)
                 val status = when (evaluation.status) {
                     ExamAnswerStatus.ConfirmedFull -> "correct"
                     ExamAnswerStatus.ConfirmedPartial -> "partial"

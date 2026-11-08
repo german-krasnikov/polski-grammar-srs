@@ -1,631 +1,638 @@
 DSL 1
+# B2/2019 arkusz pp. 18–24; key pp. 7–8. I–VII half point, VIII full point.
+# VIII permits other correct transformations, so the official examples are not exhaustive.
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g1-q1"
-  testRef: "certyfikat-polski-B2-2019-grammar-1"
+  itemId: certyfikat-polski-B2-2019-grammar-1-1
+  testRef: certyfikat-polski-B2-2019-grammar-1
   questionType: choose_form
-  context: "Drogi Uzytkowniku! Przy zakupie naszego sprzetu otrzymasz gwarancje ___ Cie do przestrzegania ponizszej instrukcji."
-  options: "obowiazujac|zobowiazujaca|zobowiazana"
-  correctAnswer: "zobowiazujaca"
-  points: 1
+  context: "Gwarancję […] Cię do przestrzegania instrukcji."
+  options: "obowiązując|zobowiązującą|zobowiązaną"
+  correctAnswer: "zobowiązującą"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g1-q2"
-  testRef: "certyfikat-polski-B2-2019-grammar-1"
+  itemId: certyfikat-polski-B2-2019-grammar-1-2
+  testRef: certyfikat-polski-B2-2019-grammar-1
   questionType: choose_form
-  context: "Przed podaczeniem drukarki do pradu upewnij sie, ze kabel nie jest ___"
-  options: "uszkadzajacy|uszkodzony|uszkadzajac"
-  correctAnswer: "uszkodzony"
-  points: 1
+  context: "Kabel nie jest […]."
+  options: "uszkadzający|uszkodzony|uszkadzając"
+  correctAnswer: uszkodzony
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g1-q3"
-  testRef: "certyfikat-polski-B2-2019-grammar-1"
+  itemId: certyfikat-polski-B2-2019-grammar-1-3
+  testRef: certyfikat-polski-B2-2019-grammar-1
   questionType: choose_form
-  context: "a w gniazdku jest napiecie ___ w instrukcji."
-  options: "wskazujac|wskazujace|wskazane"
-  correctAnswer: "wskazane"
-  points: 1
+  context: "Napięcie […] w instrukcji."
+  options: "wskazując|wskazujące|wskazane"
+  correctAnswer: wskazane
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g1-q4"
-  testRef: "certyfikat-polski-B2-2019-grammar-1"
+  itemId: certyfikat-polski-B2-2019-grammar-1-4
+  testRef: certyfikat-polski-B2-2019-grammar-1
   questionType: choose_form
-  context: "Pamietaj, ze ___ wiele urzadzen do jednego zroda pradu, mozesz spowodowac jego przeciazenie."
-  options: "podaczajac|podaczajace|podaczane"
-  correctAnswer: "podaczajac"
-  points: 1
+  context: "[…] wiele urządzeń do jednego źródła prądu."
+  options: "podłączając|podłączające|podłączane"
+  correctAnswer: "podłączając"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g1-q5"
-  testRef: "certyfikat-polski-B2-2019-grammar-1"
+  itemId: certyfikat-polski-B2-2019-grammar-1-5
+  testRef: certyfikat-polski-B2-2019-grammar-1
   questionType: choose_form
-  context: "Chron urzadzenie przed czynnikami ___ jej przegrzanie, a nawet pozar."
-  options: "spowodowanymi|powodujacymi|powodujac"
-  correctAnswer: "powodujacymi"
-  points: 1
+  context: "Przed czynnikami […] jej przegrzanie."
+  options: "spowodowanymi|powodującymi|powodując"
+  correctAnswer: "powodującymi"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g1-q6"
-  testRef: "certyfikat-polski-B2-2019-grammar-1"
+  itemId: certyfikat-polski-B2-2019-grammar-1-6
+  testRef: certyfikat-polski-B2-2019-grammar-1
   questionType: choose_form
-  context: "a takze nie obsuguj ___ sprzetu mokrymi rekami."
-  options: "waczajacego|waczonego|waczajac"
-  correctAnswer: "waczonego"
-  points: 1
+  context: "Nie obsługuj […] sprzętu mokrymi rękami."
+  options: "włączającego|włączonego|włączając"
+  correctAnswer: "włączonego"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g1-q7"
-  testRef: "certyfikat-polski-B2-2019-grammar-1"
+  itemId: certyfikat-polski-B2-2019-grammar-1-7
+  testRef: certyfikat-polski-B2-2019-grammar-1
   questionType: choose_form
-  context: "Pamietaj, ___ za kabel, mozesz go urwac, a takze uszkodzic cae urzadzenie."
-  options: "pociagniety|pociagajacy|pociagajac"
-  correctAnswer: "pociagajac"
-  points: 1
+  context: "[…] za kabel, możesz go urwać."
+  options: "pociągnięty|pociągający|pociągając"
+  correctAnswer: "pociągając"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g1-q8"
-  testRef: "certyfikat-polski-B2-2019-grammar-1"
+  itemId: certyfikat-polski-B2-2019-grammar-1-8
+  testRef: certyfikat-polski-B2-2019-grammar-1
   questionType: choose_form
-  context: "___ w mieszkaniu odpowiednia poke"
-  options: "Wybierajac|Wybierajace|Wybrane"
-  correctAnswer: "Wybierajac"
-  points: 1
+  context: "[…] w mieszkaniu odpowiednią półkę."
+  options: "Wybierając|Wybierające|Wybrane"
+  correctAnswer: "Wybierając"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g1-q9"
-  testRef: "certyfikat-polski-B2-2019-grammar-1"
+  itemId: certyfikat-polski-B2-2019-grammar-1-9
+  testRef: certyfikat-polski-B2-2019-grammar-1
   questionType: choose_form
-  context: "___ na miejsce dla Twojej drukarki, upewnij sie, ze jest ona stabilna."
-  options: "przeznaczajaca|przeznaczajac|przeznaczona"
-  correctAnswer: "przeznaczona"
-  points: 1
+  context: "Półkę […] na miejsce dla drukarki."
+  options: "przeznaczającą|przeznaczając|przeznaczoną"
+  correctAnswer: "przeznaczoną"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g1-q10"
-  testRef: "certyfikat-polski-B2-2019-grammar-1"
+  itemId: certyfikat-polski-B2-2019-grammar-1-10
+  testRef: certyfikat-polski-B2-2019-grammar-1
   questionType: choose_form
-  context: "skontaktuj sie ze sprzedawca lub punktem ___ serwis urzadzen tego typu."
-  options: "oferowanym|oferujac|oferujacym"
-  correctAnswer: "oferujacym"
-  points: 1
+  context: "Punktem […] serwis urządzeń tego typu."
+  options: "oferowanym|oferując|oferującym"
+  correctAnswer: "oferującym"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g2-q1"
-  testRef: "certyfikat-polski-B2-2019-grammar-2"
+  itemId: certyfikat-polski-B2-2019-grammar-2-1
+  testRef: certyfikat-polski-B2-2019-grammar-2
   questionType: fill_gap
-  context: "Caa inwestycja juz rok temu zostaa podzielona ___ dwa etapy."
-  correctAnswer: "na"
-  points: 1
+  context: "Inwestycja została podzielona […] dwa etapy."
+  correctAnswer: na
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g2-q2"
-  testRef: "certyfikat-polski-B2-2019-grammar-2"
+  itemId: certyfikat-polski-B2-2019-grammar-2-2
+  testRef: certyfikat-polski-B2-2019-grammar-2
   questionType: fill_gap
-  context: "Stao sie tak dlatego, ze najtansza oferta dotyczaca caosci przewyzszaa kwote planowana przez miasto ___ 123 mln z."
-  correctAnswer: "o"
-  points: 1
+  context: "Oferta przewyższała kwotę planowaną […] 123 mln zł."
+  correctAnswer: o
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g2-q3"
-  testRef: "certyfikat-polski-B2-2019-grammar-2"
+  itemId: certyfikat-polski-B2-2019-grammar-2-3
+  testRef: certyfikat-polski-B2-2019-grammar-2
   questionType: fill_gap
-  context: "Dzis realizacja pierwszego etapu powinna kosztowac nieco ___ 122 mln z,"
-  correctAnswer: "ponad"
-  points: 1
+  context: "Powinna kosztować nieco […] 122 mln zł."
+  correctAnswer: ponad
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g2-q4"
-  testRef: "certyfikat-polski-B2-2019-grammar-2"
+  itemId: certyfikat-polski-B2-2019-grammar-2-4
+  testRef: certyfikat-polski-B2-2019-grammar-2
   questionType: fill_gap
-  context: "a roboty powinny zostac zakonczone ___ 2023 roku."
-  correctAnswer: "do"
-  points: 1
+  context: "Zostaną zakończone […] 2023 roku."
+  correctAnswer: do
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g2-q5"
-  testRef: "certyfikat-polski-B2-2019-grammar-2"
+  itemId: certyfikat-polski-B2-2019-grammar-2-5
+  testRef: certyfikat-polski-B2-2019-grammar-2
   questionType: fill_gap
-  context: "Pierwsze prace - ___ nowego planu -"
-  correctAnswer: "wedug"
-  points: 1
+  context: "Pierwsze prace – […] nowego planu – rozpoczną się."
+  correctAnswer: "według"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g2-q6"
-  testRef: "certyfikat-polski-B2-2019-grammar-2"
+  itemId: certyfikat-polski-B2-2019-grammar-2-6
+  testRef: certyfikat-polski-B2-2019-grammar-2
   questionType: fill_gap
-  context: "rozpoczna sie tuz ___ dugim majowym weekendzie."
-  correctAnswer: "po"
-  points: 1
+  context: "Rozpoczną się tuż […] długim majowym weekendzie."
+  correctAnswer: po
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g2-q7"
-  testRef: "certyfikat-polski-B2-2019-grammar-2"
+  itemId: certyfikat-polski-B2-2019-grammar-2-7
+  testRef: certyfikat-polski-B2-2019-grammar-2
   questionType: fill_gap
-  context: "nowe tory tramwajowe powstana ___ ulica Duga a przystankiem autobusowym"
-  correctAnswer: "miedzy"
-  points: 1
+  context: "Tory powstaną […] ulicą Długą a przystankiem."
+  correctAnswer: "między"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g2-q8"
-  testRef: "certyfikat-polski-B2-2019-grammar-2"
+  itemId: certyfikat-polski-B2-2019-grammar-2-8
+  testRef: certyfikat-polski-B2-2019-grammar-2
   questionType: fill_gap
-  context: "___ Politechnice."
-  correctAnswer: "przy"
-  points: 1
+  context: "Przystankiem autobusowym […] Politechnice."
+  correctAnswer: przy
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g2-q9"
-  testRef: "certyfikat-polski-B2-2019-grammar-2"
+  itemId: certyfikat-polski-B2-2019-grammar-2-9
+  testRef: certyfikat-polski-B2-2019-grammar-2
   questionType: fill_gap
-  context: "Najwazniejsza i najtrudniejsza bedzie jednak przebudowa wiaduktu ___ ulica Duga."
-  correctAnswer: "nad"
-  points: 1
+  context: "Przebudowa wiaduktu […] ulicą Długą."
+  correctAnswer: nad
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g2-q10"
-  testRef: "certyfikat-polski-B2-2019-grammar-2"
+  itemId: certyfikat-polski-B2-2019-grammar-2-10
+  testRef: certyfikat-polski-B2-2019-grammar-2
   questionType: fill_gap
-  context: "___ planowanym pracom zachodnia czesc miasta zyska nowe, wazne poaczenie."
-  correctAnswer: "Dzieki"
-  points: 1
+  context: "[…] planowanym pracom miasto zyska połączenie."
+  correctAnswer: "Dzięki"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g3-q1"
-  testRef: "certyfikat-polski-B2-2019-grammar-3"
+  itemId: certyfikat-polski-B2-2019-grammar-3-1
+  testRef: certyfikat-polski-B2-2019-grammar-3
   questionType: choose_form
-  context: "nieczystosci wciaz ___ na ulice lub do rzek."
-  options: ""
-  correctAnswer: "wylewao sie"
-  points: 1
+  context: "Nieczystości wciąż […] na ulice lub do rzek."
+  options: "wylano|wylewało się|zostały wylane"
+  correctAnswer: "wylewało się"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g3-q2"
-  testRef: "certyfikat-polski-B2-2019-grammar-3"
+  itemId: certyfikat-polski-B2-2019-grammar-3-2
+  testRef: certyfikat-polski-B2-2019-grammar-3
   questionType: choose_form
-  context: "co roku w miescie ___ wiele tysiecy zachorowan na cholere czy czerwonke."
-  options: ""
-  correctAnswer: "odnotowywano"
-  points: 1
+  context: "Co roku w mieście […] wiele tysięcy zachorowań."
+  options: "były odnotowywane|odnotowywano|odnotowano"
+  correctAnswer: odnotowywano
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g3-q3"
-  testRef: "certyfikat-polski-B2-2019-grammar-3"
+  itemId: certyfikat-polski-B2-2019-grammar-3-3
+  testRef: certyfikat-polski-B2-2019-grammar-3
   questionType: choose_form
-  context: "scieki z fabryk wokienniczych, ktore nieprzerwanie ___ do odzkich rzek i rzeczek."
-  options: ""
-  correctAnswer: "odprowadzano"
-  points: 1
+  context: "Ścieki z fabryk […] do łódzkich rzek."
+  options: "odprowadzano|zostały odprowadzone|odprowadziło się"
+  correctAnswer: odprowadzano
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g3-q4"
-  testRef: "certyfikat-polski-B2-2019-grammar-3"
+  itemId: certyfikat-polski-B2-2019-grammar-3-4
+  testRef: certyfikat-polski-B2-2019-grammar-3
   questionType: choose_form
-  context: "w 1924 roku do Warszawy ___ analize stanu sanitarnego miasta"
-  options: ""
-  correctAnswer: "wysano"
-  points: 1
+  context: "W 1924 roku do Warszawy […] analizę."
+  options: "wysłano|została wysłana|wysyłało się"
+  correctAnswer: "wysłano"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g3-q5"
-  testRef: "certyfikat-polski-B2-2019-grammar-3"
+  itemId: certyfikat-polski-B2-2019-grammar-3-5
+  testRef: certyfikat-polski-B2-2019-grammar-3
   questionType: choose_form
-  context: "Decyzja o jej rozpoczeciu ___ natychmiast po lekturze raportu."
-  options: ""
-  correctAnswer: "zostaa podjeta"
-  points: 1
+  context: "Decyzja […] natychmiast po lekturze raportu."
+  options: "została podjęta|podjęto|podjęło się"
+  correctAnswer: "została podjęta"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g3-q6"
-  testRef: "certyfikat-polski-B2-2019-grammar-3"
+  itemId: certyfikat-polski-B2-2019-grammar-3-6
+  testRef: certyfikat-polski-B2-2019-grammar-3
   questionType: choose_form
-  context: "Prace przy budowie ___ ostatecznie Stefanowi Skrzywanie."
-  options: ""
-  correctAnswer: "powierzono"
-  points: 1
+  context: "Prace przy budowie […] Stefanowi Skrzywanie."
+  options: "powierzało się|były powierzane|powierzono"
+  correctAnswer: powierzono
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g3-q7"
-  testRef: "certyfikat-polski-B2-2019-grammar-3"
+  itemId: certyfikat-polski-B2-2019-grammar-3-7
+  testRef: certyfikat-polski-B2-2019-grammar-3
   questionType: choose_form
-  context: "wode ___ juz ze studni gebinowych,"
-  options: ""
-  correctAnswer: "pobierao sie"
-  points: 1
+  context: "Wodę […] już ze studni głębinowych."
+  options: "pobierało się|była pobierana|pobrano"
+  correctAnswer: "pobierało się"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g3-q8"
-  testRef: "certyfikat-polski-B2-2019-grammar-3"
+  itemId: certyfikat-polski-B2-2019-grammar-3-8
+  testRef: certyfikat-polski-B2-2019-grammar-3
   questionType: choose_form
-  context: "a odzianie ___ przez stukilometrowa siec wodociagowa."
-  options: ""
-  correctAnswer: "byli obsugiwani"
-  points: 1
+  context: "Łodzianie […] przez stukilometrową sieć."
+  options: "obsługiwano|obsługiwało się|byli obsługiwani"
+  correctAnswer: "byli obsługiwani"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g3-q9"
-  testRef: "certyfikat-polski-B2-2019-grammar-3"
+  itemId: certyfikat-polski-B2-2019-grammar-3-9
+  testRef: certyfikat-polski-B2-2019-grammar-3
   questionType: choose_form
-  context: "juz niebawem ___ specjalny komiks poswiecony dramatycznym warunkom sanitarnym"
-  options: ""
+  context: "Niebawem […] specjalny komiks."
+  options: "zaprezentuje się|zostanie zaprezentowany|zaprezentowano"
   correctAnswer: "zostanie zaprezentowany"
-  points: 1
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g3-q10"
-  testRef: "certyfikat-polski-B2-2019-grammar-3"
+  itemId: certyfikat-polski-B2-2019-grammar-3-10
+  testRef: certyfikat-polski-B2-2019-grammar-3
   questionType: choose_form
-  context: "Komiks ten ___ na ekranach miejskich autobusow przez najblizszych kilka miesiecy."
-  options: ""
-  correctAnswer: "bedzie wyswietlany"
-  points: 1
+  context: "Komiks ten […] na ekranach autobusów."
+  options: "wyświetlano|będzie wyświetlany|wyświetli się"
+  correctAnswer: "będzie wyświetlany"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g4-q1"
-  testRef: "certyfikat-polski-B2-2019-grammar-4"
+  itemId: certyfikat-polski-B2-2019-grammar-4-1
+  testRef: certyfikat-polski-B2-2019-grammar-4
   questionType: fill_gap
-  context: "Konferencja bedzie miaa miejsce w ___ (centrum)"
-  correctAnswer: "centrum"
-  points: 1
+  context: "W […] (centrum) kongresowym."
+  correctAnswer: centrum
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g4-q2"
-  testRef: "certyfikat-polski-B2-2019-grammar-4"
+  itemId: certyfikat-polski-B2-2019-grammar-4-2
+  testRef: certyfikat-polski-B2-2019-grammar-4
   questionType: fill_gap
-  context: "___ (kongresowe)"
-  correctAnswer: "kongresowym"
-  points: 1
+  context: "W centrum […] (kongresowe)."
+  correctAnswer: kongresowym
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g4-q3"
-  testRef: "certyfikat-polski-B2-2019-grammar-4"
+  itemId: certyfikat-polski-B2-2019-grammar-4-3
+  testRef: certyfikat-polski-B2-2019-grammar-4
   questionType: fill_gap
-  context: "a wykady otwarte dla szerokiej publicznosci wygosza ___ (znany)"
-  correctAnswer: "znani"
-  points: 1
+  context: "Wykłady wygłoszą […] (znany) dietetycy."
+  correctAnswer: znani
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g4-q4"
-  testRef: "certyfikat-polski-B2-2019-grammar-4"
+  itemId: certyfikat-polski-B2-2019-grammar-4-4
+  testRef: certyfikat-polski-B2-2019-grammar-4
   questionType: fill_gap
-  context: "___ (dietetyk)"
-  correctAnswer: "dietetycy"
-  points: 1
+  context: "Wykłady wygłoszą znani […] (dietetyk)."
+  correctAnswer: dietetycy
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g4-q5"
-  testRef: "certyfikat-polski-B2-2019-grammar-4"
+  itemId: certyfikat-polski-B2-2019-grammar-4-5
+  testRef: certyfikat-polski-B2-2019-grammar-4
   questionType: fill_gap
-  context: "Nie zabraknie tez ___ (doswiadczony)"
-  correctAnswer: "doswiadczonych"
-  points: 1
+  context: "Nie zabraknie też […] (doświadczony) pediatrów."
+  correctAnswer: "doświadczonych"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g4-q6"
-  testRef: "certyfikat-polski-B2-2019-grammar-4"
+  itemId: certyfikat-polski-B2-2019-grammar-4-6
+  testRef: certyfikat-polski-B2-2019-grammar-4
   questionType: fill_gap
-  context: "___ (pediatra) z wielu osrodkow krajowych i zagranicznych."
-  correctAnswer: "pediatrow"
-  points: 1
+  context: "Nie zabraknie doświadczonych […] (pediatra)."
+  correctAnswer: "pediatrów"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g4-q7"
-  testRef: "certyfikat-polski-B2-2019-grammar-4"
+  itemId: certyfikat-polski-B2-2019-grammar-4-7
+  testRef: certyfikat-polski-B2-2019-grammar-4
   questionType: fill_gap
-  context: "Chyba ___ (nikt) nie trzeba tumaczyc, jak wazna dla zdrowego rozwoju dziecka jest zbilansowana dieta."
-  correctAnswer: "nikomu"
-  points: 1
+  context: "Chyba […] (nikt) nie trzeba tłumaczyć."
+  correctAnswer: nikomu
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g4-q8"
-  testRef: "certyfikat-polski-B2-2019-grammar-4"
+  itemId: certyfikat-polski-B2-2019-grammar-4-8
+  testRef: certyfikat-polski-B2-2019-grammar-4
   questionType: fill_gap
-  context: "to nas, ___ (dorosy), trzeba przekonywac,"
-  correctAnswer: "dorosych"
-  points: 1
+  context: "To nas, […] (dorosły), trzeba przekonywać."
+  correctAnswer: "dorosłych"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g4-q9"
-  testRef: "certyfikat-polski-B2-2019-grammar-4"
+  itemId: certyfikat-polski-B2-2019-grammar-4-9
+  testRef: certyfikat-polski-B2-2019-grammar-4
   questionType: fill_gap
-  context: "zebysmy uczyli ___ (ono) prawidowego odzywiania sie"
-  correctAnswer: "je"
-  points: 1
+  context: "Żebyśmy uczyli […] (ono) prawidłowego odżywiania."
+  correctAnswer: je
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g4-q10"
-  testRef: "certyfikat-polski-B2-2019-grammar-4"
+  itemId: certyfikat-polski-B2-2019-grammar-4-10
+  testRef: certyfikat-polski-B2-2019-grammar-4
   questionType: fill_gap
-  context: "jak ___ (one) przygotowywac, zeby szybko i bez problemu znikay z talerza"
-  correctAnswer: "je"
-  points: 1
+  context: "Pokażemy, jak […] (one) przygotowywać."
+  correctAnswer: je
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g5-q1"
-  testRef: "certyfikat-polski-B2-2019-grammar-5"
+  itemId: certyfikat-polski-B2-2019-grammar-5-1
+  testRef: certyfikat-polski-B2-2019-grammar-5
   questionType: choose_form
-  context: "jego ___ (trzech/trzy/trzej)"
-  options: ""
-  correctAnswer: "trzej"
-  points: 1
+  context: "Jego […] (trzech / trzy / trzej) bracia musieli opuścić dwór."
+  options: "trzech|trzy|trzej"
+  correctAnswer: trzej
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g5-q2"
-  testRef: "certyfikat-polski-B2-2019-grammar-5"
+  itemId: certyfikat-polski-B2-2019-grammar-5-2
+  testRef: certyfikat-polski-B2-2019-grammar-5
   questionType: choose_form
-  context: "___ (braci/bracia/braciom) musieli opuscic dwor"
-  options: ""
-  correctAnswer: "bracia"
-  points: 1
+  context: "Jego trzej […] (braci / bracia / braciom)."
+  options: "braci|bracia|braciom"
+  correctAnswer: bracia
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g5-q3"
-  testRef: "certyfikat-polski-B2-2019-grammar-5"
+  itemId: certyfikat-polski-B2-2019-grammar-5-3
+  testRef: certyfikat-polski-B2-2019-grammar-5
   questionType: choose_form
-  context: "dzieki ___ (trzem/trzema/trzej)"
-  options: ""
-  correctAnswer: "trzem"
-  points: 1
+  context: "Dzięki […] (trzem / trzema / trzej) biskupstwom."
+  options: "trzem|trzema|trzej"
+  correctAnswer: trzem
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g5-q4"
-  testRef: "certyfikat-polski-B2-2019-grammar-5"
+  itemId: certyfikat-polski-B2-2019-grammar-5-4
+  testRef: certyfikat-polski-B2-2019-grammar-5
   questionType: choose_form
-  context: "___ (biskupstwami/biskupstw/biskupstwom) utworzonym za jego rzadow"
-  options: ""
-  correctAnswer: "biskupstwom"
-  points: 1
+  context: "Dzięki trzem […] (biskupstwami / biskupstw / biskupstwom)."
+  options: "biskupstwami|biskupstw|biskupstwom"
+  correctAnswer: biskupstwom
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g5-q5"
-  testRef: "certyfikat-polski-B2-2019-grammar-5"
+  itemId: certyfikat-polski-B2-2019-grammar-5-5
+  testRef: certyfikat-polski-B2-2019-grammar-5
   questionType: choose_form
-  context: "po ___ (szesnastu/szesnascie/szesnastoma)"
-  options: ""
-  correctAnswer: "szesnastu"
-  points: 1
+  context: "Konflikt skończył się dopiero po […] latach."
+  options: "szesnastu|szesnaście|szesnastoma"
+  correctAnswer: szesnastu
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g5-q6"
-  testRef: "certyfikat-polski-B2-2019-grammar-5"
+  itemId: certyfikat-polski-B2-2019-grammar-5-6
+  testRef: certyfikat-polski-B2-2019-grammar-5
   questionType: choose_form
-  context: "___ (lata/latach/latom)"
-  options: ""
-  correctAnswer: "latach"
-  points: 1
+  context: "Po szesnastu […] (lata / latach / latom)."
+  options: "lata|latach|latom"
+  correctAnswer: latach
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g5-q7"
-  testRef: "certyfikat-polski-B2-2019-grammar-5"
+  itemId: certyfikat-polski-B2-2019-grammar-5-7
+  testRef: certyfikat-polski-B2-2019-grammar-5
   questionType: choose_form
-  context: "na ___ (kilka/kilku/kilkoma)"
-  options: ""
-  correctAnswer: "kilka"
-  points: 1
+  context: "Królem Polski na […] miesięcy przed śmiercią."
+  options: "kilka|kilku|kilkoma"
+  correctAnswer: kilka
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g5-q8"
-  testRef: "certyfikat-polski-B2-2019-grammar-5"
+  itemId: certyfikat-polski-B2-2019-grammar-5-8
+  testRef: certyfikat-polski-B2-2019-grammar-5
   questionType: choose_form
-  context: "___ (miesiecy/miesiącach/miesiącami) przed swoja smiercia."
-  options: ""
-  correctAnswer: "miesiecy"
-  points: 1
+  context: "Na kilka […] (miesięcy / miesiącach / miesiącami)."
+  options: "miesięcy|miesiącach|miesiącami"
+  correctAnswer: "miesięcy"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g5-q9"
-  testRef: "certyfikat-polski-B2-2019-grammar-5"
+  itemId: certyfikat-polski-B2-2019-grammar-5-9
+  testRef: certyfikat-polski-B2-2019-grammar-5
   questionType: choose_form
-  context: "w wieku ___ (trzydziesci trzy/trzydziestoma trzema/trzydziestu trzech)"
-  options: ""
+  context: "Już w wieku […] lat."
+  options: "trzydzieści trzy|trzydziestoma trzema|trzydziestu trzech"
   correctAnswer: "trzydziestu trzech"
-  points: 1
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g5-q10"
-  testRef: "certyfikat-polski-B2-2019-grammar-5"
+  itemId: certyfikat-polski-B2-2019-grammar-5-10
+  testRef: certyfikat-polski-B2-2019-grammar-5
   questionType: choose_form
-  context: "___ (lata/lat/latom)"
-  options: ""
-  correctAnswer: "lat"
-  points: 1
+  context: "W wieku trzydziestu trzech […] (lata / lat / latom)."
+  options: "lata|lat|latom"
+  correctAnswer: lat
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g6-q1"
-  testRef: "certyfikat-polski-B2-2019-grammar-6"
+  itemId: certyfikat-polski-B2-2019-grammar-6-1
+  testRef: certyfikat-polski-B2-2019-grammar-6
   questionType: fill_gap
-  context: "W ubiegych latach niektore czesci parkow ___ przez duzszy czas dzikie."
-  correctAnswer: "pozostaway"
-  points: 1
+  context: "Niektóre części parków […] (pozostawać / pozostać) dzikie."
+  correctAnswer: "pozostawały"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g6-q2"
-  testRef: "certyfikat-polski-B2-2019-grammar-6"
+  itemId: certyfikat-polski-B2-2019-grammar-6-2
+  testRef: certyfikat-polski-B2-2019-grammar-6
   questionType: fill_gap
-  context: "Nasi pracownicy bowiem w minimalnym tylko stopniu ___ tu w zycie przyrody."
-  correctAnswer: "ingerowali"
-  points: 1
+  context: "Nasi pracownicy […] (ingerować / zaingerować) w życie przyrody."
+  correctAnswer: ingerowali
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g6-q3"
-  testRef: "certyfikat-polski-B2-2019-grammar-6"
+  itemId: certyfikat-polski-B2-2019-grammar-6-3
+  testRef: certyfikat-polski-B2-2019-grammar-6
   questionType: fill_gap
-  context: "Chcielismy, zeby w koncu ___ sie w nich rozwijac bujna zielen"
-  correctAnswer: "zaczea"
-  points: 1
+  context: "Żeby […] (zaczynać / zacząć) się rozwijać zieleń."
+  correctAnswer: "zaczęła"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g6-q4"
-  testRef: "certyfikat-polski-B2-2019-grammar-6"
+  itemId: certyfikat-polski-B2-2019-grammar-6-4
+  testRef: certyfikat-polski-B2-2019-grammar-6
   questionType: fill_gap
-  context: "___ przedstawiciel ZZM."
-  correctAnswer: "stwierdzil"
-  points: 1
+  context: "[…] (stwierdzać / stwierdzić) przedstawiciel ZZM."
+  correctAnswer: "stwierdził"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g6-q5"
-  testRef: "certyfikat-polski-B2-2019-grammar-6"
+  itemId: certyfikat-polski-B2-2019-grammar-6-5
+  testRef: certyfikat-polski-B2-2019-grammar-6
   questionType: fill_gap
-  context: "wadze miejskie zapowiadaja, ze w pierwszej kolejnosci ___ na parku Grabiszynskim."
-  correctAnswer: "skupia sie"
-  points: 1
+  context: "W pierwszej kolejności […] (skupiać się / skupić się) na parku."
+  correctAnswer: "skupią się"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g6-q6"
-  testRef: "certyfikat-polski-B2-2019-grammar-6"
+  itemId: certyfikat-polski-B2-2019-grammar-6-6
+  testRef: certyfikat-polski-B2-2019-grammar-6
   questionType: fill_gap
-  context: "firma ogrodnicza kompletnie ___ duzy fragment parku,"
-  correctAnswer: "zniszczya"
-  points: 1
+  context: "Firma ogrodnicza […] (niszczyć / zniszczyć) fragment parku."
+  correctAnswer: "zniszczyła"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g6-q7"
-  testRef: "certyfikat-polski-B2-2019-grammar-6"
+  itemId: certyfikat-polski-B2-2019-grammar-6-7
+  testRef: certyfikat-polski-B2-2019-grammar-6
   questionType: fill_gap
-  context: "mimo ze mieszkancy niejednokrotnie ___ uwage na niefrasobliwosc jej robotnikow."
-  correctAnswer: "zwracali"
-  points: 1
+  context: "Mieszkańcy […] (zwracać / zwrócić) uwagę."
+  correctAnswer: zwracali
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g6-q8"
-  testRef: "certyfikat-polski-B2-2019-grammar-6"
+  itemId: certyfikat-polski-B2-2019-grammar-6-8
+  testRef: certyfikat-polski-B2-2019-grammar-6
   questionType: fill_gap
-  context: "Z tego powodu prezydent miasta ___ poprzedniego dyrektora ZZM."
-  correctAnswer: "odwoal"
-  points: 1
+  context: "Prezydent miasta […] (odwoływać / odwołać) dyrektora."
+  correctAnswer: "odwołał"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g6-q9"
-  testRef: "certyfikat-polski-B2-2019-grammar-6"
+  itemId: certyfikat-polski-B2-2019-grammar-6-9
+  testRef: certyfikat-polski-B2-2019-grammar-6
   questionType: fill_gap
-  context: "pracownicy ___ konsekwentnie nowe techniki pielegnacji drzew,"
-  correctAnswer: "beda stosowali"
-  points: 1
+  context: "Pracownicy […] (stosować / zastosować) techniki."
+  correctAnswer: "będą stosowali"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g6-q10"
-  testRef: "certyfikat-polski-B2-2019-grammar-6"
+  itemId: certyfikat-polski-B2-2019-grammar-6-10
+  testRef: certyfikat-polski-B2-2019-grammar-6
   questionType: fill_gap
-  context: "co ___ ostatecznie do lepszej ochrony tego terenu."
-  correctAnswer: "przyczyni sie"
-  points: 1
+  context: "Co […] (przyczyniać się / przyczynić się) do ochrony."
+  correctAnswer: "przyczyni się"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g7-q1"
-  testRef: "certyfikat-polski-B2-2019-grammar-7"
+  itemId: certyfikat-polski-B2-2019-grammar-7-1
+  testRef: certyfikat-polski-B2-2019-grammar-7
   questionType: fill_gap
-  context: "odwiedzio je ponad 300 tysiecy ___ (duzo) turystow niz Zamek Krolewski na Wawelu."
-  correctAnswer: "wiecej"
-  points: 1
+  context: "Ponad 300 tysięcy […] (dużo) turystów."
+  correctAnswer: "więcej"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g7-q2"
-  testRef: "certyfikat-polski-B2-2019-grammar-7"
+  itemId: certyfikat-polski-B2-2019-grammar-7-2
+  testRef: certyfikat-polski-B2-2019-grammar-7
   questionType: fill_gap
-  context: "Dzis bilety do zoo sa 5 razy ___ (drogi) od tych sprzed kilku lat,"
-  correctAnswer: "drozsze"
-  points: 1
+  context: "Bilety są pięć razy […] (drogi)."
+  correctAnswer: "droższe"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g7-q3"
-  testRef: "certyfikat-polski-B2-2019-grammar-7"
+  itemId: certyfikat-polski-B2-2019-grammar-7-3
+  testRef: certyfikat-polski-B2-2019-grammar-7
   questionType: fill_gap
-  context: "zwiedzajacy przychodza tu piec razy ___ (czesto) niz przed dekada."
-  correctAnswer: "czesciej"
-  points: 1
+  context: "Przychodzą pięć razy […] (często)."
+  correctAnswer: "częściej"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g7-q4"
-  testRef: "certyfikat-polski-B2-2019-grammar-7"
+  itemId: certyfikat-polski-B2-2019-grammar-7-4
+  testRef: certyfikat-polski-B2-2019-grammar-7
   questionType: fill_gap
-  context: "Dzieki coraz ___ (wysokie) dochodom"
-  correctAnswer: "wyzszym"
-  points: 1
+  context: "Dzięki coraz […] (wysokie) dochodom."
+  correctAnswer: "wyższym"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g7-q5"
-  testRef: "certyfikat-polski-B2-2019-grammar-7"
+  itemId: certyfikat-polski-B2-2019-grammar-7-5
+  testRef: certyfikat-polski-B2-2019-grammar-7
   questionType: fill_gap
-  context: "___ (wazne) ze wszystkich sa prace przy starym Akwarium."
-  correctAnswer: "najwazniejsze"
-  points: 1
+  context: "[…] (ważne) ze wszystkich są prace przy Akwarium."
+  correctAnswer: "najważniejsze"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g7-q6"
-  testRef: "certyfikat-polski-B2-2019-grammar-7"
+  itemId: certyfikat-polski-B2-2019-grammar-7-6
+  testRef: certyfikat-polski-B2-2019-grammar-7
   questionType: fill_gap
-  context: "przeniesienie wilkow na wybieg ___ (obszerny) niz ich dotychczasowy."
-  correctAnswer: "obszerniejszy"
-  points: 1
+  context: "Na wybieg […] (obszerny) niż dotychczasowy."
+  correctAnswer: obszerniejszy
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g7-q7"
-  testRef: "certyfikat-polski-B2-2019-grammar-7"
+  itemId: certyfikat-polski-B2-2019-grammar-7-7
+  testRef: certyfikat-polski-B2-2019-grammar-7
   questionType: fill_gap
-  context: "ktore sa ___ (rzadko) wystepujacymi przedstawicielami rodziny kotowatych"
-  correctAnswer: "najrzadziej"
-  points: 1
+  context: "Pantery śnieżne są […] (rzadko) występującymi przedstawicielami."
+  correctAnswer: najrzadziej
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g7-q8"
-  testRef: "certyfikat-polski-B2-2019-grammar-7"
+  itemId: certyfikat-polski-B2-2019-grammar-7-8
+  testRef: certyfikat-polski-B2-2019-grammar-7
   questionType: fill_gap
-  context: "Kiedy ___ (dobrze) zaplanowac wizyte w zoo?"
-  correctAnswer: "najlepiej"
-  points: 1
+  context: "Kiedy […] (dobrze) zaplanować wizytę?"
+  correctAnswer: najlepiej
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g7-q9"
-  testRef: "certyfikat-polski-B2-2019-grammar-7"
+  itemId: certyfikat-polski-B2-2019-grammar-7-9
+  testRef: certyfikat-polski-B2-2019-grammar-7
   questionType: fill_gap
-  context: "po bilet do Afrykarium trzeba czekac nie ___ (krotko) niz dwie godziny."
-  correctAnswer: "krocej"
-  points: 1
+  context: "Czekać nie […] (krótko) niż dwie godziny."
+  correctAnswer: "krócej"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g7-q10"
-  testRef: "certyfikat-polski-B2-2019-grammar-7"
+  itemId: certyfikat-polski-B2-2019-grammar-7-10
+  testRef: certyfikat-polski-B2-2019-grammar-7
   questionType: fill_gap
-  context: "wroawskie zoo staje sie coraz ___ (atrakcyjne) miejscem turystycznym w regionie."
-  correctAnswer: "atrakcyjniejszym"
-  points: 1
+  context: "Staje się coraz […] (atrakcyjne) miejscem."
+  correctAnswer: atrakcyjniejszym
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g8-q1"
-  testRef: "certyfikat-polski-B2-2019-grammar-8"
+  itemId: certyfikat-polski-B2-2019-grammar-8-1
+  testRef: certyfikat-polski-B2-2019-grammar-8
   questionType: transform
-  context: "Chociaz rodzice protestowali, szkolny sklepik zosta zamkniety. -> ___ szkolny sklepik zosta zamkniety."
-  correctAnswer: "Wbrew protestom rodzicow"
-  points: 1
+  context: "Chociaż rodzice protestowali, szkolny sklepik został zamknięty. Użyj: wbrew."
+  correctAnswer: "Wbrew protestom rodziców szkolny sklepik został zamknięty."
+  gradingMode: open_manual
+  pointsQuarter: 4
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g8-q2"
-  testRef: "certyfikat-polski-B2-2019-grammar-8"
+  itemId: certyfikat-polski-B2-2019-grammar-8-2
+  testRef: certyfikat-polski-B2-2019-grammar-8
   questionType: transform
-  context: "Robertowi nie udao sie zdac testu, poniewaz by ciagle nieobecny na lekcjach. -> Robertowi nie udao sie zdac testu ___."
-  correctAnswer: "przez ciaga nieobecnosc na lekcjach"
-  points: 1
+  context: "Robertowi nie udało się zdać testu, ponieważ był ciągle nieobecny na lekcjach. Użyj: przez."
+  correctAnswer: "Robertowi nie udało się zdać testu przez ciągłą nieobecność na lekcjach."
+  gradingMode: open_manual
+  pointsQuarter: 4
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g8-q3"
-  testRef: "certyfikat-polski-B2-2019-grammar-8"
+  itemId: certyfikat-polski-B2-2019-grammar-8-3
+  testRef: certyfikat-polski-B2-2019-grammar-8
   questionType: transform
-  context: "Beata jest gotowa poswiecic wiele, zeby zachowac smugla sylwetke. -> Beata jest gotowa poswiecic wiele ___."
-  correctAnswer: "dla zachowania smugej sylwetki"
-  points: 1
+  context: "Beata jest gotowa poświęcić wiele, żeby zachować smukłą sylwetkę. Użyj: dla."
+  correctAnswer: "Beata jest gotowa poświęcić wiele dla zachowania smukłej sylwetki."
+  gradingMode: open_manual
+  pointsQuarter: 4
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g8-q4"
-  testRef: "certyfikat-polski-B2-2019-grammar-8"
+  itemId: certyfikat-polski-B2-2019-grammar-8-4
+  testRef: certyfikat-polski-B2-2019-grammar-8
   questionType: transform
-  context: "Kiedy wrocimy z urlopu, musimy sie wziac do remontu mieszkania. -> ___ musimy sie wziac do remontu mieszkania."
-  correctAnswer: "Po powrocie z urlopu"
-  points: 1
+  context: "Kiedy wrócimy z urlopu, musimy się wziąć do remontu mieszkania. Użyj: po."
+  correctAnswer: "Po powrocie z urlopu musimy wziąć się do remontu mieszkania."
+  gradingMode: open_manual
+  pointsQuarter: 4
 }
 GRAMMAR_ITEM {
-  itemId: "B2-2019-g8-q5"
-  testRef: "certyfikat-polski-B2-2019-grammar-8"
+  itemId: certyfikat-polski-B2-2019-grammar-8-5
+  testRef: certyfikat-polski-B2-2019-grammar-8
   questionType: transform
-  context: "Jesli bedziesz mia silne zawroty gowy, zadzwon po pogotowie. -> ___ zadzwon po pogotowie."
-  correctAnswer: "W razie silnych zawrotow gowy"
-  points: 1
+  context: "Jeśli będziesz miał silne zawroty głowy, zadzwoń po pogotowie. Użyj: w razie."
+  correctAnswer: "W razie silnych zawrotów głowy zadzwoń po pogotowie."
+  gradingMode: open_manual
+  pointsQuarter: 4
 }

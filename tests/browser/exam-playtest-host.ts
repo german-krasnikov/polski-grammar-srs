@@ -19,6 +19,7 @@ export async function runExamPlaytest(page: Page, sourceFile: string) {
   page.on('pageerror', error => pageErrors.push(error.message));
   page.on('console', message => { if (message.type() === 'error') consoleErrors.push(message.text()); });
   let rememberedPosition = 0;
+  let reviewIndex = 1;
   let audioHandle: Awaited<ReturnType<ReturnType<Page['locator']>['elementHandle']>> = null;
   let editorHandle: Awaited<ReturnType<ReturnType<Page['locator']>['elementHandle']>> = null;
 
@@ -32,11 +33,14 @@ export async function runExamPlaytest(page: Page, sourceFile: string) {
       const time = document.querySelector('.player-time')?.textContent ?? '';
       const readingRows = [...document.querySelectorAll<HTMLElement>('.exam-reading-q')];
       const firstReading = readingRows[0];
+      const selectedAt = (index: number) => [...(readingRows[index]?.querySelectorAll<HTMLButtonElement>('.exam-option.selected') ?? [])]
+        .map(button => button.textContent).join('|');
       const image = document.querySelector<HTMLImageElement>('.exam-writing-image');
       const catalogCounts = (title: string) => {
         const card = [...document.querySelectorAll<HTMLElement>('.exam-card')].find(node => node.querySelector('.exam-card-title')?.textContent === title);
         return (card?.querySelector('.exam-card-counts')?.textContent?.match(/\d+/g) ?? []).join('|');
       };
+      const inspectedReview = review.item((window as Window & { __examReviewIndex?: number }).__examReviewIndex ?? 0);
       return {
         'exam.input': input?.value ?? '',
         'exam.focused': !!input && document.activeElement === input,
@@ -48,6 +52,10 @@ export async function runExamPlaytest(page: Page, sourceFile: string) {
         'exam.listVisible': !!document.querySelector('.exam-list'),
         'catalog.b12019Counts': catalogCounts('B1 Certyfikat 2019'),
         'catalog.b12017Counts': catalogCounts('B1 Certyfikat 2017'),
+        'catalog.b12020Counts': catalogCounts('B1 Certyfikat 2020'),
+        'catalog.b22017Counts': catalogCounts('B2 Certyfikat 2017'),
+        'catalog.b22019Counts': catalogCounts('B2 Certyfikat 2019'),
+        'catalog.b22020Counts': catalogCounts('B2 Certyfikat 2020'),
         'catalog.b12020Visible': !![...document.querySelectorAll('.exam-card-title')].find(node => node.textContent === 'B1 Certyfikat 2020'),
         'catalog.b22017Visible': !![...document.querySelectorAll('.exam-card-title')].find(node => node.textContent === 'B2 Certyfikat 2017'),
         'catalog.b22020Visible': !![...document.querySelectorAll('.exam-card-title')].find(node => node.textContent === 'B2 Certyfikat 2020'),
@@ -55,11 +63,15 @@ export async function runExamPlaytest(page: Page, sourceFile: string) {
         'exam.promptImageAlt': image?.alt ?? '',
         'grammar.context': document.querySelector('.exam-context')?.textContent ?? '',
         'grammar.manualReviewCount': document.querySelectorAll('.exam-review-manual').length,
+        'grammar.reviewStatus': inspectedReview?.classList.contains('correct') ? 'correct' : inspectedReview?.classList.contains('partial') ? 'partial' : inspectedReview?.classList.contains('pending') ? 'pending' : inspectedReview?.classList.contains('wrong') ? 'wrong' : '',
         'reading.passageOpening': document.querySelector('.exam-reading-text p')?.textContent?.replace(/^\d+\.\s*/, '').split('.')[0] ?? '',
         'reading.passageChars': document.querySelector('.exam-reading-text')?.textContent?.length ?? 0,
         'reading.questionCount': readingRows.length,
         'reading.firstQuestion': firstReading?.querySelector('.exam-reading-q-text')?.textContent ?? '',
         'reading.firstOptions': [...(firstReading?.querySelectorAll<HTMLButtonElement>('.exam-option') ?? [])].map(button => button.textContent).join('|'),
+        'listening.firstOptions': [...(firstReading?.querySelectorAll<HTMLButtonElement>('.exam-option') ?? [])].map(button => button.textContent).join('|'),
+        'listening.selectedSecond': selectedAt(1),
+        'listening.selectedFourth': selectedAt(3),
         'reading.genericQuestionCount': readingRows.filter(row => /^\d+\. Pytanie \d+/i.test(row.querySelector('.exam-reading-q-text')?.textContent ?? '')).length,
         'reading.genericOptionCount': readingRows.filter(row => [...row.querySelectorAll<HTMLButtonElement>('.exam-option')].map(button => button.textContent?.trim()).join('|') === 'a|b|c').length,
         'reading.selectedFirst': firstReading?.querySelector('.exam-option.selected')?.textContent ?? '',
@@ -67,6 +79,7 @@ export async function runExamPlaytest(page: Page, sourceFile: string) {
         'writing.setChoiceCount': [...document.querySelectorAll<HTMLButtonElement>('.exam-nav-btn')].filter(button => button.textContent?.startsWith('Набор ')).length,
         'writing.taskLabel': document.querySelector('.exam-progress-text')?.textContent ?? '',
         'writing.prompt': document.querySelector('.exam-writing-prompt')?.textContent ?? '',
+        'writing.promptOpening': document.querySelector('.exam-writing-prompt p')?.textContent ?? '',
         'writing.draft': document.querySelector<HTMLTextAreaElement>('.exam-textarea')?.value ?? '',
         'writing.reviewCount': document.querySelectorAll('.exam-writing-review').length,
         'writing.reviewDrafts': [...document.querySelectorAll('.exam-writing-draft')].map(node => node.textContent).join('|'),
@@ -137,6 +150,11 @@ export async function runExamPlaytest(page: Page, sourceFile: string) {
   action('next', [], async () => { await button('Далее →'); });
   action('back', [], async () => { await button('← Назад'); });
   action('submit', [], async () => { await button('Завершить'); });
+  action('retry', [], async () => { await button('Пройти ещё раз'); });
+  action('inspectReview', [{ name: 'index', type: 'number' }], async args => {
+    reviewIndex = Number(args.index);
+    await page.evaluate(index => { (window as Window & { __examReviewIndex?: number }).__examReviewIndex = index - 1; }, reviewIndex);
+  });
   action('enter', string('text'), async args => {
     const input = page.locator('.exam-input');
     if (!(await input.evaluate(element => element === document.activeElement))) await input.click();
@@ -194,10 +212,24 @@ export async function runExamPlaytest(page: Page, sourceFile: string) {
     const start = Number(args.start);
     const end = Number(args.end);
     const audio = page.locator('audio');
-    await expect.poll(() => audio.evaluate(element => {
-      const media = element as HTMLAudioElement;
-      return media.seekable.length ? media.seekable.end(0) : 0;
-    })).toBeGreaterThan(end - 1);
+    try {
+      await expect.poll(() => audio.evaluate(element => {
+        const media = element as HTMLAudioElement;
+        return media.seekable.length ? media.seekable.end(0) : 0;
+      })).toBeGreaterThan(end - 1);
+    } catch (error) {
+      const state = await audio.evaluate(element => {
+        const media = element as HTMLAudioElement;
+        return {
+          currentTime: media.currentTime, duration: media.duration, paused: media.paused,
+          seeking: media.seeking, readyState: media.readyState, networkState: media.networkState,
+          errorCode: media.error?.code, currentSrc: media.currentSrc,
+          seekable: [...Array(media.seekable.length)].map((_, i) => [media.seekable.start(i), media.seekable.end(i)]),
+          buffered: [...Array(media.buffered.length)].map((_, i) => [media.buffered.start(i), media.buffered.end(i)]),
+        };
+      }).catch(e => ({ evaluationError: String(e) }));
+      throw new Error(`Recording window ${start}–${end} not seekable: ${JSON.stringify({ state, pageErrors, consoleErrors })}`, { cause: error });
+    }
     await expect.poll(() => audio.evaluate(element => (element as HTMLAudioElement).currentTime)).toBeGreaterThanOrEqual(start - 0.25);
     expect(await audio.evaluate(element => (element as HTMLAudioElement).currentTime)).toBeLessThan(start + 1);
     await page.locator('.player-play-btn').click();
@@ -222,10 +254,20 @@ export async function runExamPlaytest(page: Page, sourceFile: string) {
     })).toBe(true);
   });
   action('chooseGrammar', string('answer'), async args => {
-    await page.locator('.exam-option').filter({ hasText: String(args.answer) }).click();
+    const answer = String(args.answer);
+    const options = page.locator('.exam-option');
+    const labels = await options.allTextContents();
+    const matches = labels.flatMap((label, index) =>
+      label.trim().replace(/^[A-Z]\.\s*/, '') === answer ? [index] : []);
+    if (matches.length !== 1) throw new Error(`Grammar option ${answer} has ${matches.length} exact matches: ${labels.join('|')}`);
+    await options.nth(matches[0]).click();
   });
   action('chooseReading', [{ name: 'index', type: 'number' }, ...string('answer')], async args => {
     await page.locator('.exam-reading-q').nth(Number(args.index) - 1).getByRole('button', { name: String(args.answer), exact: true }).click();
+  });
+  action('enterListening', [{ name: 'index', type: 'number' }, { name: 'slot', type: 'number' }, ...string('text')], async args => {
+    await page.locator('.exam-reading-q').nth(Number(args.index) - 1).locator('.exam-input')
+      .nth(Number(args.slot) - 1).fill(String(args.text));
   });
   action('selectWritingSet', string('set'), async args => {
     await page.getByRole('button', { name: `Набор ${String(args.set)}`, exact: true }).click();
@@ -267,15 +309,19 @@ export async function runExamPlaytest(page: Page, sourceFile: string) {
     'exam.score': 'string', 'exam.scoreDetail': 'string', 'exam.reviewAnswer': 'string',
     'exam.firstSelected': 'string', 'exam.listVisible': 'bool',
     'catalog.b12019Counts': 'string', 'catalog.b12017Counts': 'string',
+    'catalog.b12020Counts': 'string', 'catalog.b22017Counts': 'string', 'catalog.b22019Counts': 'string', 'catalog.b22020Counts': 'string',
     'catalog.b12020Visible': 'bool', 'catalog.b22017Visible': 'bool', 'catalog.b22020Visible': 'bool',
     'exam.promptImageLoaded': 'bool', 'exam.promptImageAlt': 'string',
-    'grammar.context': 'string', 'grammar.manualReviewCount': 'number',
+    'grammar.context': 'string', 'grammar.manualReviewCount': 'number', 'grammar.reviewStatus': 'string',
     'reading.passageOpening': 'string', 'reading.passageChars': 'number',
     'reading.questionCount': 'number', 'reading.firstQuestion': 'string',
     'reading.firstOptions': 'string', 'reading.genericQuestionCount': 'number',
+    'listening.firstOptions': 'string',
+    'listening.selectedSecond': 'string', 'listening.selectedFourth': 'string',
     'reading.genericOptionCount': 'number', 'reading.selectedFirst': 'string', 'reading.selectedSecond': 'string',
     'writing.setChoiceCount': 'number', 'writing.taskLabel': 'string',
     'writing.prompt': 'string', 'writing.draft': 'string', 'writing.reviewCount': 'number',
+    'writing.promptOpening': 'string',
     'writing.reviewDrafts': 'string', 'writing.manualAssessment': 'string', 'writing.autoScoreVisible': 'bool',
     'media.playing': 'bool', 'media.position': 'number', 'media.elapsed': 'number',
     'media.durationLabel': 'string', 'media.taskLabel': 'string', 'media.selected': 'string',

@@ -177,6 +177,7 @@ LISTENING_QUESTION {
   taskRef: certyfikat-polski-B1-2020-listen-3
   questionType: true_false
   questionText: "Bohaterka wywiadu w dzieciństwie podróżowała po Europie."
+  options: "TAK|NIE"
   correctAnswer: TAK
   pointsQuarter: 4
 }
@@ -185,6 +186,7 @@ LISTENING_QUESTION {
   taskRef: certyfikat-polski-B1-2020-listen-3
   questionType: true_false
   questionText: "Bohaterka wywiadu w szkole średniej wyjeżdżała z rodzicami do Anglii."
+  options: "TAK|NIE"
   correctAnswer: NIE
   pointsQuarter: 4
 }
@@ -193,6 +195,7 @@ LISTENING_QUESTION {
   taskRef: certyfikat-polski-B1-2020-listen-3
   questionType: true_false
   questionText: "Bohaterka wywiadu obecnie podróżuje z grupą przyjaciół."
+  options: "TAK|NIE"
   correctAnswer: NIE
   pointsQuarter: 4
 }
@@ -201,6 +204,7 @@ LISTENING_QUESTION {
   taskRef: certyfikat-polski-B1-2020-listen-3
   questionType: true_false
   questionText: "Bohaterka wywiadu wybiera środek transportu w zależności od miejsca, w którym jest."
+  options: "TAK|NIE"
   correctAnswer: TAK
   pointsQuarter: 4
 }
@@ -209,6 +213,7 @@ LISTENING_QUESTION {
   taskRef: certyfikat-polski-B1-2020-listen-3
   questionType: true_false
   questionText: "Bohaterka wywiadu boi się kłopotów z powodu braku znajomości języków obcych."
+  options: "TAK|NIE"
   correctAnswer: NIE
   pointsQuarter: 4
 }

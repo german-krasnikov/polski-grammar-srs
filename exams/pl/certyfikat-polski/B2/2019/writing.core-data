@@ -1,55 +1,62 @@
 DSL 1
+# B2/2019 arkusz p. 26: choose one set and write both a and b; paper job-ad card is fully transcribed.
 WRITING_TASK {
-  taskId: "B2-2019-writing-1a"
-  examRef: "certyfikat-polski-B2-2019"
+  taskId: B2-2019-writing-1a
+  examRef: certyfikat-polski-B2-2019
   taskNumber: 1
-  instruction: "Zestaw I, zadanie a: Jest Pani zainteresowana / Pan zainteresowany ponisza oferta pracy. Prosze napisac list motywacyjny."
-  promptText: "Fundacja Zwierzeta Niczyje poszukuje opiekuna do pomocy w schronisku. Masz minimum 18 lat i kochasz zwierzeta? Chcesz pospacerować, ale nie masz z kim? Nie chcesz siedziec w biurze od 8.00 do 16.00? Oferujemy minimalne stawki, ale w ramach premii mozesz liczyc na mnostwo miosci i wdzecznosci."
+  setId: I
+  instruction: "Zestaw I, zadanie a. 100 słów."
+  promptText: "Jest Pani zainteresowana / Pan zainteresowany poniższą ofertą pracy. Proszę napisać list motywacyjny.\n\nFundacja Zwierzęta Niczyje poszukuje opiekuna do pomocy w schronisku.\n* Masz minimum 18 lat i kochasz zwierzęta?\n* Chcesz pospacerować, ale nie masz z kim?\n* Nie chcesz siedzieć w biurze od 8.00 do 16.00?\n* A może robisz świetne zdjęcia i w ten sposób będziesz promować adopcje?\nJeśli na któreś z tych pytań odpowiedziałeś „tak”, to mamy dla Ciebie propozycję – dołącz do nas!\nCo prawda oferujemy minimalne stawki, ale w ramach premii możesz liczyć na mnóstwo miłości i wdzięczności.\nListy motywacyjne proszę kierować na adres: zwierzeta.niczyje@org.pl"
   wordLimit: 100
   genre: letter
 }
 WRITING_TASK {
-  taskId: "B2-2019-writing-1b"
-  examRef: "certyfikat-polski-B2-2019"
+  taskId: B2-2019-writing-1b
+  examRef: certyfikat-polski-B2-2019
   taskNumber: 2
-  instruction: "Zestaw I, zadanie b: 'Caa widownia pakaa ze smiechu'. Prosze napisac recenzje filmu lub przedstawienia teatralnego."
-  promptText: "Caa widownia pakaa ze smiechu. Prosze napisac recenzje filmu lub przedstawienia teatralnego, ktora zamiesci Pani / Pan na polskim portalu 'Propozycje na Weekend'."
+  setId: I
+  instruction: "Zestaw I, zadanie b. 200 słów."
+  promptText: "„Cała widownia płakała ze śmiechu”. Proszę napisać recenzję filmu lub przedstawienia teatralnego, którą zamieści Pani / Pan na polskim portalu „Propozycje na Weekend”."
   wordLimit: 200
-  genre: description
+  genre: review
 }
 WRITING_TASK {
-  taskId: "B2-2019-writing-2a"
-  examRef: "certyfikat-polski-B2-2019"
-  taskNumber: 3
-  instruction: "Zestaw II, zadanie a: Organizuje Pani / Pan uroczyste otwarcie wasnej cukierni. Prosze napisac zaproszenie."
-  promptText: "Organizuje Pani / Pan w jednym z polskich miast uroczyste otwarcie wasnej cukierni. Prosze napisac zaproszenie dla swojego nauczyciela z kursu kulinarnego."
+  taskId: B2-2019-writing-2a
+  examRef: certyfikat-polski-B2-2019
+  taskNumber: 1
+  setId: II
+  instruction: "Zestaw II, zadanie a. 30 słów."
+  promptText: "Organizuje Pani / Pan w jednym z polskich miast uroczyste otwarcie własnej cukierni. Proszę napisać zaproszenie dla swojego nauczyciela z kursu kulinarnego."
   wordLimit: 30
-  genre: letter
+  genre: invitation
 }
 WRITING_TASK {
-  taskId: "B2-2019-writing-2b"
-  examRef: "certyfikat-polski-B2-2019"
-  taskNumber: 4
-  instruction: "Zestaw II, zadanie b: 'Zosc jest choroba duszy' (Eliza Orzeszkowa). Prosze napisac tekst argumentacyjny."
-  promptText: "'Zosc jest choroba duszy' (Eliza Orzeszkowa). Czy zgadza sie Pani / Pan z tym stwierdzeniem? Prosze napisac tekst argumentacyjny (rozprawke)."
+  taskId: B2-2019-writing-2b
+  examRef: certyfikat-polski-B2-2019
+  taskNumber: 2
+  setId: II
+  instruction: "Zestaw II, zadanie b. 270 słów."
+  promptText: "„Złość jest chorobą duszy” (Eliza Orzeszkowa). Czy zgadza się Pani / Pan z tym stwierdzeniem? Proszę napisać tekst argumentacyjny (rozprawkę)."
   wordLimit: 270
   genre: argument
 }
 WRITING_TASK {
-  taskId: "B2-2019-writing-3a"
-  examRef: "certyfikat-polski-B2-2019"
-  taskNumber: 5
-  instruction: "Zestaw III, zadanie a: Prosze napisac podanie do zarzadcy osiedla, proszac o budowe placu zabaw dla dzieci."
-  promptText: "Niedawno kupia Pani / kupi Pan w Polsce mieszkanie. W imieniu lokatorow domu prosze napisac podanie do zarzadcy osiedla, proszac o budowe placu zabaw dla dzieci."
+  taskId: B2-2019-writing-3a
+  examRef: certyfikat-polski-B2-2019
+  taskNumber: 1
+  setId: III
+  instruction: "Zestaw III, zadanie a. 100 słów."
+  promptText: "Niedawno kupiła Pani / kupił Pan w Polsce mieszkanie. W imieniu lokatorów domu proszę napisać podanie do zarządcy osiedla, prosząc o budowę placu zabaw dla dzieci."
   wordLimit: 100
-  genre: letter
+  genre: application
 }
 WRITING_TASK {
-  taskId: "B2-2019-writing-3b"
-  examRef: "certyfikat-polski-B2-2019"
-  taskNumber: 6
-  instruction: "Zestaw III, zadanie b: 'Gdybym moga / Gdybym mogl cofnac czas, to wszystko bym zmienia / bym zmieni.' Prosze napisac opowiadanie."
-  promptText: "'Gdybym moga / Gdybym mogl cofnac czas, to wszystko bym zmienia / bym zmieni.' Prosze napisac opowiadanie zainspirowane powyzszym zdaniem."
+  taskId: B2-2019-writing-3b
+  examRef: certyfikat-polski-B2-2019
+  taskNumber: 2
+  setId: III
+  instruction: "Zestaw III, zadanie b. 200 słów."
+  promptText: "„Gdybym mogła / Gdybym mógł cofnąć czas, to wszystko bym zmieniła / bym zmienił”. Proszę napisać opowiadanie zainspirowane powyższym zdaniem."
   wordLimit: 200
-  genre: essay
+  genre: story
 }

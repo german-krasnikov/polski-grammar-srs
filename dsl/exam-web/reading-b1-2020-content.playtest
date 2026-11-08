@@ -1,0 +1,23 @@
+TEST "B1 2020 reading keeps the printed Venice item and all five passages" PROFILE playmode
+  open exam="B1 Certyfikat 2020" module="reading"
+  ASSERT reading.questionCount == 5
+  ASSERT reading.firstQuestion == "1. Z tego tekstu wynika, że opłata za wjazd do Wenecji"
+  ASSERT reading.firstOptions == "nie będzie taka sama przez cały rok.|obowiązuje już od dawna.|będzie wyższa dla uczestników imprez miejskich."
+  ASSERT reading.passageChars > 100
+  ASSERT reading.genericQuestionCount == 0
+  ASSERT reading.genericOptionCount == 0
+  next
+  ASSERT reading.questionCount == 7
+  ASSERT reading.firstQuestion == "1. Pierwszy odcinek serialu był nieudany."
+  ASSERT reading.firstOptions == "TAK|NIE"
+  ASSERT reading.passageChars > 100
+  next
+  ASSERT reading.questionCount == 7
+  ASSERT reading.passageChars > 100
+  next
+  ASSERT reading.questionCount == 7
+  ASSERT reading.passageChars > 100
+  next
+  ASSERT reading.questionCount == 8
+  ASSERT reading.passageChars > 100
+END

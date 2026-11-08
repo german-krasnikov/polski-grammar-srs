@@ -1,0 +1,26 @@
+TEST "B2 2020 conditional word bank uses current answer snapshot" PROFILE playmode
+  open exam="B2 Certyfikat 2020" module="grammar"
+  advance count=15
+  enter text="w"
+  advance count=2
+  enter text="w"
+  advance count=57
+  submit
+  inspectReview index=18
+  ASSERT grammar.reviewStatus == "wrong"
+  retry
+  advance count=15
+  enter text="w"
+  advance count=2
+  enter text="w"
+  back
+  back
+  enter text="inne"
+  next
+  next
+  ASSERT exam.input == "w"
+  advance count=57
+  submit
+  inspectReview index=18
+  ASSERT grammar.reviewStatus == "correct"
+END

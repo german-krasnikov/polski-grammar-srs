@@ -1,0 +1,13 @@
+TEST "B2 2017 listening IV scores all three keyed choices in any order" PROFILE playmode
+  open exam="B2 Certyfikat 2017" module="listening"
+  advanceTask count=3
+  ASSERT media.taskLabel == "Задание 4 / 5"
+  chooseReading index=4 answer="4"
+  chooseReading index=4 answer="2"
+  chooseReading index=4 answer="1"
+  ASSERT listening.selectedFourth == "1|2|4"
+  advanceTask count=1
+  submit
+  inspectReview index=32
+  ASSERT grammar.reviewStatus == "correct"
+END

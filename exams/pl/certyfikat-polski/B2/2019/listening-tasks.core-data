@@ -1,5 +1,5 @@
 DSL 1
-# Windows independently refined against original MP3 waveform, base transition clips, and task announcements.
+# B2/2019 arkusz pp. 3–8; key p. 5. Windows independently refined against MP3 waveform/base clips; recorded repeats included.
 LISTENING_TASK {
   taskId: certyfikat-polski-B2-2019-listen-1
   examRef: certyfikat-polski-B2-2019
@@ -7,7 +7,7 @@ LISTENING_TASK {
   audioUrl: exam-audio/B2-2019.mp3
   segmentStartMs: 68000
   segmentEndMs: 427000
-  instruction: "Zadanie 1. Prosze uwazznie sluchac nagrania i wykonywac zadanie. Uwaga! Nagranie zostanie odtworzone tylko jeden raz."
+  instruction: "Proszę wysłuchać kolejnych tekstów i zaznaczyć właściwe odpowiedzi. Nagranie zostanie odtworzone dwukrotnie."
 }
 LISTENING_TASK {
   taskId: certyfikat-polski-B2-2019-listen-2
@@ -16,7 +16,7 @@ LISTENING_TASK {
   audioUrl: exam-audio/B2-2019.mp3
   segmentStartMs: 428000
   segmentEndMs: 792000
-  instruction: "Zadanie 2. Prosze uwazznie sluchac nagrania. Uwaga! Nagranie zostanie odtworzone dwa razy."
+  instruction: "Proszę słuchać nagrania na temat programu Kawka II i zaznaczyć właściwe odpowiedzi. Nagranie zostanie odtworzone dwukrotnie."
 }
 LISTENING_TASK {
   taskId: certyfikat-polski-B2-2019-listen-3
@@ -25,7 +25,7 @@ LISTENING_TASK {
   audioUrl: exam-audio/B2-2019.mp3
   segmentStartMs: 793000
   segmentEndMs: 1163000
-  instruction: "Zadanie 3. Prosze uwazznie sluchac nagrania. Uwaga! Nagranie zostanie odtworzone dwa razy."
+  instruction: "Proszę słuchać wypowiedzi na temat rodzin zastępczych i zaznaczyć TAK albo NIE. Nagranie zostanie odtworzone dwukrotnie."
 }
 LISTENING_TASK {
   taskId: certyfikat-polski-B2-2019-listen-4
@@ -34,7 +34,9 @@ LISTENING_TASK {
   audioUrl: exam-audio/B2-2019.mp3
   segmentStartMs: 1164000
   segmentEndMs: 1580000
-  instruction: "Zadanie 4. Prosze uwazznie sluchac nagrania. Uwaga! Nagranie zostanie odtworzone dwa razy."
+  instruction: "Proszę przyporządkować opisy roślinom: A. rącznik pospolity; B. pokrzyk wilcza jagoda; C. oleander; D. tojad sudecki; E. szczwół plamisty. Dwa opisy wymagają dwóch roślin; kolejność jest dowolna. Nagranie zostanie odtworzone dwukrotnie."
+  promptImageUrl: exam-images/B2-2019-listening-IV.png
+  promptImageAlt: "Pięć zdjęć roślin A–E: A rącznik pospolity, B pokrzyk wilcza jagoda, C oleander, D tojad sudecki, E szczwół plamisty."
 }
 LISTENING_TASK {
   taskId: certyfikat-polski-B2-2019-listen-5
@@ -43,5 +45,5 @@ LISTENING_TASK {
   audioUrl: exam-audio/B2-2019.mp3
   segmentStartMs: 1580000
   segmentEndMs: 2006000
-  instruction: "Zadanie 5. Prosze uwazznie sluchac nagrania. Uwaga! Nagranie zostanie odtworzone dwa razy."
+  instruction: "Proszę wysłuchać tekstu na temat soli w fast foodach i odpowiedzieć na pytania. Nagranie zostanie odtworzone dwukrotnie."
 }

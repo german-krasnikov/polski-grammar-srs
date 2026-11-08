@@ -1,5 +1,6 @@
 # B2/2020 source-data checkpoint
 
+Current integration update, 2026-11-08: the source checkpoint and pending/hidden statements below are historical. The schema, six-exam catalog, delivered media and browser behavior have since passed the bounded [six-exam acceptance](SIX-EXAM-BROWSER-ACCEPTANCE.md). That receipt records exact artifact hashes, the earlier intermittent seekability failure and remaining limits; it does not mark P10/P11 or the entire exam plan complete.
 Date: 2026-11-08. Source is the locally supplied official sample paper
 `ExamBin/pl/B2/2020/arkusz.pdf` (SHA-256 `ff786439979e4bb935b3b228c27788e0ca43537f1bf12a5d3eec7715493d409c`)
 and key `ExamBin/pl/B2/2020/klucz.pdf` (SHA-256 `1d794631516c9a7d71a4a3dc66d697e648e6282e4b78ca8c56e82e3606e4e19f`).
@@ -54,9 +55,35 @@ the conditional row remains to be added after the schema field exists.
   with all ten B2/2020 row bindings: 196 rows, 0 problems after grouping V/6
   and adding the explicit unconditional alternatives. Rerun after the
   conditional variant is added.
-- **NOT RUN** — full project generation, Gradle, browser, or audio-boundary
-  verification in this source-data checkpoint. The catalog should remain
-  hidden until audio, scoring, and independent acceptance finish.
+- **NOT RUN** — browser playback of the updated audio windows or independent
+  acceptance in this source-data checkpoint. The catalog should remain hidden
+  until audio, scoring, and independent acceptance finish.
 
 The authored data are in `exams/pl/certyfikat-polski/B2/2020/`. No generated
 Kotlin rows were edited by hand.
+
+## Audio boundary update, 2026-11-08
+
+The local MP3 SHA-256 is stated above; `ffprobe` duration is 1744.718350 s.
+The full-file Polish Whisper **tiny** pass produced 473 segments in
+`/tmp/polski-audio-audit/B2-2020/audio.json`. Independent Whisper **base**
+clips around six transitions are in
+`/tmp/polski-audio-audit/B2-2020/base-boundaries.json`. `ffmpeg
+silencedetect=n=-35dB:d=0.25` checked signal at the joins. The first base/tiny
+clips placed words into the long initial silence; the actual first speech
+begins after 97.34 s, so that waveform governs the first start.
+
+| Task | Source window (s) | Boundary evidence |
+| --- | ---: | --- |
+| I | 97–417 | closure 415.31–416.54; next speech 418.63 |
+| II | 418–702 | closure 699.59–700.71; next speech 702.97 |
+| III | 703–1082 | closure 1079.99–1081.18; next speech 1083.21 |
+| IV | 1083–1357 | closure 1354.00–1355.14; next speech 1357.56 |
+| V | 1357–1672 | closure 1669.98–1671.38; post-test instruction starts 1673.48 |
+
+The waveform shows roughly 45-second pauses between repeated content in
+each task; one playback of the full source window includes the recorded
+repetition. A 60-second silent tail and later section-ending phrase are
+excluded from Task V. These are ASR plus waveform checks, **not human acoustic
+listening** or verbatim transcription certification. Generated-row and
+browser artifact playback checks are pending after the next generation.

@@ -1,0 +1,16 @@
+TEST "B2 2019 writing shows the shelter job advert and two drafts" PROFILE playmode
+  open exam="B2 Certyfikat 2019" module="writing"
+  ASSERT writing.setChoiceCount == 3
+  selectWritingSet set="I"
+  ASSERT writing.taskLabel == "Задание 1 / 2"
+  ASSERT writing.promptOpening == "Jest Pani zainteresowana / Pan zainteresowany poniższą ofertą pracy. Proszę napisać list motywacyjny."
+  writeDraft text="Chciałabym pracować w schronisku."
+  nextWriting
+  ASSERT writing.taskLabel == "Задание 2 / 2"
+  ASSERT writing.draft == ""
+  writeDraft text="Zwierzęta potrzebują pomocy."
+  submitWriting
+  ASSERT writing.reviewCount == 2
+  ASSERT writing.reviewDrafts == "Chciałabym pracować w schronisku.|Zwierzęta potrzebują pomocy."
+  ASSERT writing.autoScoreVisible == false
+END

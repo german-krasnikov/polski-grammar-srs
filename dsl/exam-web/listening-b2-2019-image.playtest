@@ -1,0 +1,8 @@
+TEST "B2 2019 listening IV displays the five source photographs" PROFILE playmode
+  open exam="B2 Certyfikat 2019" module="listening"
+  advanceTask count=3
+  ASSERT media.taskLabel == "Задание 4 / 5"
+  waitImage
+  ASSERT exam.promptImageLoaded == true
+  ASSERT exam.promptImageAlt == "Pięć zdjęć roślin A–E: A rącznik pospolity, B pokrzyk wilcza jagoda, C oleander, D tojad sudecki, E szczwół plamisty."
+END

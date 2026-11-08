@@ -1,5 +1,5 @@
 // Generated from dsl/exam.data-contract
-// source-sha256=992a404f2b4446e2e0e639f8406138254b00bba16e0cbbd01dd5b91240805608
+// source-sha256=a57e78c0c7e995774d3b275d965c3ed5eaf230d29d01cb66a06330174c9e816d
 // Edit the source, then run biome generate.
 
 package polski.exam.data.b1y2017
@@ -56,6 +56,7 @@ enum class WritingTaskRowGenre(val tag: String) {
     EMAIL("email"),
     REVIEW("review"),
     ADVERTISEMENT("advertisement"),
+    APPLICATION("application"),
 }
 
 enum class ExamInventoryCaseRowSection(val tag: String) {
@@ -197,6 +198,7 @@ data class GrammarAnswerVariantRow(
     val itemRef: String,
     val answer: String,
     val earnedQuarter: Int,
+    val onlyIfNotUsedBy: String? = null,
 )
 
 data class WritingTaskRow(
@@ -311,6 +313,14 @@ data class OpenItemGroupCaseRow(
     val unknownAnswer: String,
     val expectedUnknownStatus: OpenItemGroupCaseRowExpectedUnknownStatus,
     val expectedBlankStatus: OpenItemGroupCaseRowExpectedBlankStatus,
+)
+
+data class GrammarConstraintCaseRow(
+    val id: String,
+    val answer6: String,
+    val answer8: String,
+    val expected6Quarter: Int,
+    val expected8Quarter: Int,
 )
 
 val EXAM_ROW_ROWS: List<ExamRow> = listOf(

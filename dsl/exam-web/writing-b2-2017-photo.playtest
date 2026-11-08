@@ -1,0 +1,19 @@
+TEST "B2 2017 writing set III loads its official photograph" PROFILE playmode
+  open exam="B2 Certyfikat 2017" module="writing"
+  ASSERT writing.setChoiceCount == 3
+  selectWritingSet set="III"
+  ASSERT writing.taskLabel == "Задание 1 / 2"
+  ASSERT writing.promptOpening == "Proszę napisać tekst reklamujący kurs tańca dla dorosłych."
+  writeDraft text="Zapisz się na kurs tańca."
+  nextWriting
+  ASSERT writing.taskLabel == "Задание 2 / 2"
+  ASSERT writing.promptOpening == "„Język polski nas połączył”. Proszę napisać opowiadanie zainspirowane poniższym zdjęciem."
+  waitImage
+  ASSERT exam.promptImageLoaded == true
+  ASSERT exam.promptImageAlt == "Grupa uśmiechniętych ludzi różnych narodowości wspólnie świętuje."
+  writeDraft text="Poznaliśmy się w Warszawie."
+  submitWriting
+  ASSERT writing.reviewCount == 2
+  ASSERT writing.reviewDrafts == "Zapisz się na kurs tańca.|Poznaliśmy się w Warszawie."
+  ASSERT writing.autoScoreVisible == false
+END

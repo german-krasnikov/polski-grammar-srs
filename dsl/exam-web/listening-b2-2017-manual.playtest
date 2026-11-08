@@ -1,0 +1,11 @@
+TEST "B2 2017 listening V unknown plausible word awaits human review" PROFILE playmode
+  open exam="B2 Certyfikat 2017" module="listening"
+  advanceTask count=4
+  ASSERT media.taskLabel == "Задание 5 / 5"
+  enterListening index=1 slot=1 text="uprzejmą"
+  submit
+  inspectReview index=35
+  ASSERT grammar.reviewStatus == "pending"
+  ASSERT exam.score == "Подтверждено: 0 / 40"
+  ASSERT exam.scoreDetail == "Ожидает проверки: 0,5"
+END

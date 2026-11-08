@@ -1,0 +1,44 @@
+DSL 1
+# B2/2019 klucz p. 8: explicit full-credit alternatives; VIII still accepts other correct manual answers.
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2019-grammar-6-9-alt-1
+  itemRef: certyfikat-polski-B2-2019-grammar-6-9
+  answer: "będą stosować"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2019-grammar-7-6-alt-1
+  itemRef: certyfikat-polski-B2-2019-grammar-7-6
+  answer: "bardziej obszerny"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2019-grammar-7-10-alt-1
+  itemRef: certyfikat-polski-B2-2019-grammar-7-10
+  answer: "bardziej atrakcyjnym"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2019-grammar-8-1-alt-1
+  itemRef: certyfikat-polski-B2-2019-grammar-8-1
+  answer: "Wbrew protestującym rodzicom szkolny sklepik został zamknięty."
+  earnedQuarter: 4
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2019-grammar-8-2-alt-1
+  itemRef: certyfikat-polski-B2-2019-grammar-8-2
+  answer: "Robertowi nie udało się zdać testu przez ciągłe nieobecności na lekcjach."
+  earnedQuarter: 4
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2019-grammar-8-2-alt-2
+  itemRef: certyfikat-polski-B2-2019-grammar-8-2
+  answer: "Robertowi nie udało się zdać testu przez to, że był ciągle nieobecny na lekcjach."
+  earnedQuarter: 4
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2019-grammar-8-4-alt-1
+  itemRef: certyfikat-polski-B2-2019-grammar-8-4
+  answer: "Po urlopie musimy wziąć się do remontu mieszkania."
+  earnedQuarter: 4
+}

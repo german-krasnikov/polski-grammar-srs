@@ -1,9 +1,9 @@
 DSL 1
 EXAM {
-  examId: "certyfikat-polski-B2-2019"
-  provider: "certyfikat-polski"
-  targetLanguage: "pl"
-  level: "B2"
+  examId: certyfikat-polski-B2-2019
+  provider: certyfikat-polski
+  targetLanguage: pl
+  level: B2
   year: 2019
   sourceUrl: "https://certyfikatpolski.pl/o-egzaminie/przykladowe-testy-zbiory-zadan/"
 }

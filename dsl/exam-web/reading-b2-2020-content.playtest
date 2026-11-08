@@ -1,0 +1,21 @@
+TEST "B2 2020 reading keeps the printed allergy item and all five passages" PROFILE playmode
+  open exam="B2 Certyfikat 2020" module="reading"
+  ASSERT reading.questionCount == 5
+  ASSERT reading.firstQuestion == "1. Z tekstu dowiadujemy się, że uczulenie na kota"
+  ASSERT reading.firstOptions == "a) jest najpopularniejszym rodzajem alergii na zwierzęta.|b) można leczyć w sposób podobny do leczenia astmy.|c) daje objawy nie tylko przy bezpośrednim kontakcie ze zwierzęciem."
+  ASSERT reading.passageChars > 100
+  ASSERT reading.genericQuestionCount == 0
+  ASSERT reading.genericOptionCount == 0
+  next
+  ASSERT reading.questionCount == 10
+  ASSERT reading.passageChars > 100
+  next
+  ASSERT reading.questionCount == 10
+  ASSERT reading.passageChars > 100
+  next
+  ASSERT reading.questionCount == 10
+  ASSERT reading.passageChars > 100
+  next
+  ASSERT reading.questionCount == 10
+  ASSERT reading.passageChars > 100
+END

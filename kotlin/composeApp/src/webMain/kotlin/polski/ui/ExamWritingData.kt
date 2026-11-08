@@ -2,7 +2,11 @@ package polski.ui
 
 /** Writing exams from generated biome rows — single source of truth. */
 internal val examWritingData: Map<String, WritingExam> by lazy {
-    mapOf("b1-2019" to mapB1Writing(), "b2-2019" to mapB2Writing(), "b1-2017" to mapB1y2017Writing())
+    mapOf(
+        "b1-2019" to mapB1Writing(), "b1-2017" to mapB1y2017Writing(),
+        "b1-2020" to mapB1y2020Writing(), "b2-2017" to mapB2y2017Writing(),
+        "b2-2019" to mapB2Writing(), "b2-2020" to mapB2y2020Writing(),
+    )
 }
 
 private fun mapB1Writing(): WritingExam {
@@ -19,6 +23,24 @@ private fun mapB2Writing(): WritingExam {
 
 private fun mapB1y2017Writing(): WritingExam = WritingExam(
     polski.exam.data.b1y2017.WRITING_TASK_ROW_ROWS.map {
+        WritingTask(it.taskId, it.instruction, it.promptText, it.wordLimit, it.setId, it.genre.tag, it.promptImageUrl, it.promptImageAlt)
+    },
+)
+
+private fun mapB1y2020Writing(): WritingExam = WritingExam(
+    polski.exam.data.b1y2020.WRITING_TASK_ROW_ROWS.map {
+        WritingTask(it.taskId, it.instruction, it.promptText, it.wordLimit, it.setId, it.genre.tag, it.promptImageUrl, it.promptImageAlt)
+    },
+)
+
+private fun mapB2y2017Writing(): WritingExam = WritingExam(
+    polski.exam.data.b2y2017.WRITING_TASK_ROW_ROWS.map {
+        WritingTask(it.taskId, it.instruction, it.promptText, it.wordLimit, it.setId, it.genre.tag, it.promptImageUrl, it.promptImageAlt)
+    },
+)
+
+private fun mapB2y2020Writing(): WritingExam = WritingExam(
+    polski.exam.data.b2y2020.WRITING_TASK_ROW_ROWS.map {
         WritingTask(it.taskId, it.instruction, it.promptText, it.wordLimit, it.setId, it.genre.tag, it.promptImageUrl, it.promptImageAlt)
     },
 )

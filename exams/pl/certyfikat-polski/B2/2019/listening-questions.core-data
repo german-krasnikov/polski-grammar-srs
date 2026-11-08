@@ -1,327 +1,337 @@
 DSL 1
+# B2/2019 arkusz pp. 3–8; key p. 5. I 8, II 6, III 8, IV 10, V 8 points.
+# IV/4 and IV/7 are two-letter unordered sets; V/1,V/3,V/4 have two open answer slots. V key permits other transcript-consistent answers.
 LISTENING_QUESTION {
-  questionId: "B2-2019-l1-q1a"
-  taskRef: "certyfikat-polski-B2-2019-listen-1"
+  questionId: certyfikat-polski-B2-2019-listening-1-1
+  taskRef: certyfikat-polski-B2-2019-listen-1
   questionType: multiple_choice
-  questionText: "Kobieta zali sie, ze jej partner"
-  options: "a) ukrywa przed nia wazne informacje.|b) nie zajmowa sie nia naleycie.|c) zaprzeczy, ze jest ojcem Julii."
-  correctAnswer: "a"
-  points: 1
+  questionText: "Kobieta żali się, że jej partner"
+  options: "a) ukrywał przed nią ważne informacje.|b) nie zajmował się nią należycie.|c) zaprzeczył, że jest ojcem Julii."
+  correctAnswer: "a) ukrywał przed nią ważne informacje."
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "B2-2019-l1-q1b"
-  taskRef: "certyfikat-polski-B2-2019-listen-1"
+  questionId: certyfikat-polski-B2-2019-listening-1-2
+  taskRef: certyfikat-polski-B2-2019-listen-1
   questionType: multiple_choice
-  questionText: "Ojciec Julii trafi do wiezienia"
-  options: "a) kiedy dziewczynka miaa trzy lata.|b) na osiem lat.|c) trzy miesiace po narodzinach corki."
-  correctAnswer: "c"
-  points: 1
+  questionText: "Ojciec Julii trafił do więzienia"
+  options: "a) kiedy dziewczynka miała trzy lata.|b) na osiem lat.|c) trzy miesiące po narodzinach córki."
+  correctAnswer: "c) trzy miesiące po narodzinach córki."
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "B2-2019-l1-q2a"
-  taskRef: "certyfikat-polski-B2-2019-listen-1"
+  questionId: certyfikat-polski-B2-2019-listening-1-3
+  taskRef: certyfikat-polski-B2-2019-listen-1
   questionType: multiple_choice
   questionText: "Rozmowa dotyczy"
-  options: "a) problemow dotykajacych osoby leworeczne.|b) skutkow zmuszania osob leworecznych do korzystania z prawej reki.|c) zwiazkow miedzy leworecznoscia a problemami w nauce."
-  correctAnswer: "b"
-  points: 1
+  options: "a) problemów dotykających osoby leworęczne.|b) skutków zmuszania osób leworęcznych do korzystania z prawej ręki.|c) związków między leworęcznością a problemami w nauce."
+  correctAnswer: "b) skutków zmuszania osób leworęcznych do korzystania z prawej ręki."
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "B2-2019-l1-q2b"
-  taskRef: "certyfikat-polski-B2-2019-listen-1"
+  questionId: certyfikat-polski-B2-2019-listening-1-4
+  taskRef: certyfikat-polski-B2-2019-listen-1
   questionType: multiple_choice
-  questionText: "Komplikacje, o ktorych mowa w audycji, powstaja, poniewaz mozg"
-  options: "a) nie odczytuje informacji zwiazanych z orientacja w przestrzeni.|b) otrzymuje informacje, z ktorymi sobie nie radzi.|c) gubi czesc informacji."
-  correctAnswer: "b"
-  points: 1
+  questionText: "Komplikacje, o których mowa w audycji, powstają, ponieważ mózg"
+  options: "a) nie odczytuje informacji związanych z orientacją w przestrzeni.|b) otrzymuje informacje, z którymi sobie nie radzi.|c) gubi część informacji."
+  correctAnswer: "b) otrzymuje informacje, z którymi sobie nie radzi."
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "B2-2019-l1-q3a"
-  taskRef: "certyfikat-polski-B2-2019-listen-1"
+  questionId: certyfikat-polski-B2-2019-listening-1-5
+  taskRef: certyfikat-polski-B2-2019-listen-1
   questionType: multiple_choice
   questionText: "Rozmowa dotyczy"
   options: "a) uprawiania sportu.|b) prowadzenia samochodu.|c) cen mebli."
-  correctAnswer: "b"
-  points: 1
+  correctAnswer: "b) prowadzenia samochodu."
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "B2-2019-l1-q3b"
-  taskRef: "certyfikat-polski-B2-2019-listen-1"
+  questionId: certyfikat-polski-B2-2019-listening-1-6
+  taskRef: certyfikat-polski-B2-2019-listen-1
   questionType: multiple_choice
-  questionText: "Wujek nie zgadza sie na propozycje chopca, poniewaz ten"
-  options: "a) nie jest w odpowiednim wieku.|b) nie jest jego kolega.|c) od 9 miesiecy bierze udzia w kursie."
-  correctAnswer: "a"
-  points: 1
+  questionText: "Wujek nie zgadza się na propozycję chłopca, ponieważ ten"
+  options: "a) nie jest w odpowiednim wieku.|b) nie jest jego kolegą.|c) od 9 miesięcy bierze udział w kursie."
+  correctAnswer: "a) nie jest w odpowiednim wieku."
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "B2-2019-l1-q4a"
-  taskRef: "certyfikat-polski-B2-2019-listen-1"
+  questionId: certyfikat-polski-B2-2019-listening-1-7
+  taskRef: certyfikat-polski-B2-2019-listen-1
   questionType: multiple_choice
-  questionText: "Corka rozmowcow ma kopoty"
-  options: "a) zwiazane ze szkoa.|b) z wyprowadzka z domu.|c) z wyrazaniem emocji."
-  correctAnswer: "a"
-  points: 1
+  questionText: "Córka rozmówców ma kłopoty"
+  options: "a) związane ze szkołą.|b) z wyprowadzką z domu.|c) z wyrażaniem emocji."
+  correctAnswer: "a) związane ze szkołą."
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "B2-2019-l1-q4b"
-  taskRef: "certyfikat-polski-B2-2019-listen-1"
+  questionId: certyfikat-polski-B2-2019-listening-1-8
+  taskRef: certyfikat-polski-B2-2019-listen-1
   questionType: multiple_choice
-  questionText: "Wedug mezczyzny corka"
-  options: "a) bardzo przezywa rozwod rodzicow.|b) obwinia sie o kopoty rodzicow.|c) wykorzystuje rozstanie rodzicow, by usprawiedliwic swoje zachowanie."
-  correctAnswer: "c"
-  points: 1
+  questionText: "Według mężczyzny córka"
+  options: "a) bardzo przeżywa rozwód rodziców.|b) obwinia się o kłopoty rodziców.|c) wykorzystuje rozstanie rodziców, by usprawiedliwić swoje zachowanie."
+  correctAnswer: "c) wykorzystuje rozstanie rodziców, by usprawiedliwić swoje zachowanie."
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "B2-2019-l2-q1"
-  taskRef: "certyfikat-polski-B2-2019-listen-2"
+  questionId: certyfikat-polski-B2-2019-listening-2-1
+  taskRef: certyfikat-polski-B2-2019-listen-2
   questionType: multiple_choice
-  questionText: "915 to liczba piecow"
-  options: "a) ktore zostay zlikwidowane podczas czterech lat trwania projektu.|b) ktorych nie udao sie usunac.|c) ktore znikna z Grudziadza w ciagu najblizszych czterech lat."
-  correctAnswer: "a"
-  points: 1
+  questionText: "915 to liczba pieców"
+  options: "a) które zostały zlikwidowane podczas czterech lat trwania projektu.|b) których nie udało się usunąć.|c) które znikną z Grudziądza w ciągu najbliższych czterech lat."
+  correctAnswer: "a) które zostały zlikwidowane podczas czterech lat trwania projektu."
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "B2-2019-l2-q2"
-  taskRef: "certyfikat-polski-B2-2019-listen-2"
+  questionId: certyfikat-polski-B2-2019-listening-2-2
+  taskRef: certyfikat-polski-B2-2019-listen-2
   questionType: multiple_choice
-  questionText: "Wojewodzki i Narodowy Fundusz Ochrony Srodowiska i Gospodarki Wodnej"
-  options: "a) czesciowo dofinansowa prowadzone dziaania.|b) pokry cakowity koszt programu.|c) odpowiada za kampanie informacyjna."
-  correctAnswer: "a"
-  points: 1
+  questionText: "Wojewódzki i Narodowy Fundusz Ochrony Środowiska i Gospodarki Wodnej"
+  options: "a) częściowo dofinansował prowadzone działania.|b) pokrył całkowity koszt programu.|c) odpowiadał za kampanię informacyjną."
+  correctAnswer: "a) częściowo dofinansował prowadzone działania."
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "B2-2019-l2-q3"
-  taskRef: "certyfikat-polski-B2-2019-listen-2"
+  questionId: certyfikat-polski-B2-2019-listening-2-3
+  taskRef: certyfikat-polski-B2-2019-listen-2
   questionType: multiple_choice
-  questionText: "Pomorska Grupa Konsultingowa zajmowaa sie"
+  questionText: "Pomorska Grupa Konsultingowa zajmowała się"
   options: "a) przygotowaniem projektu.|b) finansowaniem projektu.|c) projektem przez 4 lata."
-  correctAnswer: "c"
-  points: 1
+  correctAnswer: "c) projektem przez 4 lata."
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "B2-2019-l2-q4"
-  taskRef: "certyfikat-polski-B2-2019-listen-2"
+  questionId: certyfikat-polski-B2-2019-listening-2-4
+  taskRef: certyfikat-polski-B2-2019-listen-2
   questionType: multiple_choice
-  questionText: "Kampania informacyjna skupiaa sie na"
-  options: "a) szczegolowym instruktazu wymiany pieca.|b) promocji zachowan ekologicznych i informacjach praktycznych.|c) sposobach dziaania roznego rodzaju piecow."
-  correctAnswer: "b"
-  points: 1
+  questionText: "Kampania informacyjna skupiała się na"
+  options: "a) szczegółowym instruktażu wymiany pieca.|b) promocji zachowań ekologicznych i informacjach praktycznych.|c) sposobach działania różnego rodzaju pieców."
+  correctAnswer: "b) promocji zachowań ekologicznych i informacjach praktycznych."
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "B2-2019-l2-q5"
-  taskRef: "certyfikat-polski-B2-2019-listen-2"
+  questionId: certyfikat-polski-B2-2019-listening-2-5
+  taskRef: certyfikat-polski-B2-2019-listen-2
   questionType: multiple_choice
   questionText: "Podczas kampanii edukacyjnej co roku"
-  options: "a) szkolono cztery grupy odbiorcow.|b) zmieniano jej program.|c) zmienia sie jej odbiorca."
-  correctAnswer: "c"
-  points: 1
+  options: "a) szkolono cztery grupy odbiorców.|b) zmieniano jej program.|c) zmieniał się jej odbiorca."
+  correctAnswer: "c) zmieniał się jej odbiorca."
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "B2-2019-l2-q6"
-  taskRef: "certyfikat-polski-B2-2019-listen-2"
+  questionId: certyfikat-polski-B2-2019-listening-2-6
+  taskRef: certyfikat-polski-B2-2019-listen-2
   questionType: multiple_choice
   questionText: "Program Kawka III"
-  options: "a) nigdy nie by planowany.|b) nie doszed ostatecznie do skutku.|c) zakonczy sie wymiana 780 piecow."
-  correctAnswer: "b"
-  points: 1
+  options: "a) nigdy nie był planowany.|b) nie doszedł ostatecznie do skutku.|c) zakończył się wymianą 780 pieców."
+  correctAnswer: "b) nie doszedł ostatecznie do skutku."
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "B2-2019-l3-q1"
-  taskRef: "certyfikat-polski-B2-2019-listen-3"
+  questionId: certyfikat-polski-B2-2019-listening-3-1
+  taskRef: certyfikat-polski-B2-2019-listen-3
   questionType: true_false
-  questionText: "W suwalskich rodzinach zastepczych wychowuje sie okoo 100 dzieci."
+  questionText: "W suwalskich rodzinach zastępczych wychowuje się około 100 dzieci."
   options: "TAK|NIE"
-  correctAnswer: "TAK"
-  points: 1
+  correctAnswer: NIE
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "B2-2019-l3-q2"
-  taskRef: "certyfikat-polski-B2-2019-listen-3"
+  questionId: certyfikat-polski-B2-2019-listening-3-2
+  taskRef: certyfikat-polski-B2-2019-listen-3
   questionType: true_false
-  questionText: "MOPS planuje kolejne szkolenie jesienia."
+  questionText: "MOPS planuje kolejne szkolenie jesienią."
   options: "TAK|NIE"
-  correctAnswer: "NIE"
-  points: 1
+  correctAnswer: TAK
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "B2-2019-l3-q3"
-  taskRef: "certyfikat-polski-B2-2019-listen-3"
+  questionId: certyfikat-polski-B2-2019-listening-3-3
+  taskRef: certyfikat-polski-B2-2019-listen-3
   questionType: true_false
-  questionText: "Wskazaniem do umieszczenia dziecka w rodzinie zastepczej jest m.in. wiek dziecka."
+  questionText: "Wskazaniem do umieszczenia dziecka w rodzinie zastępczej jest m.in. wiek dziecka."
   options: "TAK|NIE"
-  correctAnswer: "NIE"
-  points: 1
+  correctAnswer: TAK
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "B2-2019-l3-q4"
-  taskRef: "certyfikat-polski-B2-2019-listen-3"
+  questionId: certyfikat-polski-B2-2019-listening-3-4
+  taskRef: certyfikat-polski-B2-2019-listen-3
   questionType: true_false
-  questionText: "W tej chwili w Suwakach jest 10 kandydatow czekajacych na przyjecie dziecka."
+  questionText: "W tej chwili w Suwałkach jest 10 kandydatów czekających na przyjęcie dziecka."
   options: "TAK|NIE"
-  correctAnswer: "NIE"
-  points: 1
+  correctAnswer: NIE
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "B2-2019-l3-q5"
-  taskRef: "certyfikat-polski-B2-2019-listen-3"
+  questionId: certyfikat-polski-B2-2019-listening-3-5
+  taskRef: certyfikat-polski-B2-2019-listen-3
   questionType: true_false
-  questionText: "MOPS zwraca sie z apelem do mieszkancow, ktorzy maja mozliwosci i sa dyspozycyjni."
+  questionText: "MOPS zwraca się z apelem do mieszkańców, którzy mają możliwości i są dyspozycyjni."
   options: "TAK|NIE"
-  correctAnswer: "TAK"
-  points: 1
+  correctAnswer: TAK
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "B2-2019-l3-q6"
-  taskRef: "certyfikat-polski-B2-2019-listen-3"
+  questionId: certyfikat-polski-B2-2019-listening-3-6
+  taskRef: certyfikat-polski-B2-2019-listen-3
   questionType: true_false
   questionText: "Sztuka pomaga w wychowaniu dzieci."
   options: "TAK|NIE"
-  correctAnswer: "TAK"
-  points: 1
+  correctAnswer: NIE
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "B2-2019-l3-q7"
-  taskRef: "certyfikat-polski-B2-2019-listen-3"
+  questionId: certyfikat-polski-B2-2019-listening-3-7
+  taskRef: certyfikat-polski-B2-2019-listen-3
   questionType: true_false
-  questionText: "Zdaniem Leszka Lewoca rodziny zastepcze w Suwakach przyjmuja dzieci z checi zysku."
+  questionText: "Zdaniem Leszka Lewoca rodziny zastępcze w Suwałkach przyjmują dzieci z chęci zysku."
   options: "TAK|NIE"
-  correctAnswer: "NIE"
-  points: 1
+  correctAnswer: NIE
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "B2-2019-l3-q8"
-  taskRef: "certyfikat-polski-B2-2019-listen-3"
+  questionId: certyfikat-polski-B2-2019-listening-3-8
+  taskRef: certyfikat-polski-B2-2019-listen-3
   questionType: true_false
-  questionText: "Pieniadze na utrzymanie dziecka w rodzinie zastepczej pochodza z dwoch zrode."
+  questionText: "Pieniądze na utrzymanie dziecka w rodzinie zastępczej pochodzą z dwóch źródeł."
   options: "TAK|NIE"
-  correctAnswer: "TAK"
-  points: 1
+  correctAnswer: TAK
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "B2-2019-l4-q1"
-  taskRef: "certyfikat-polski-B2-2019-listen-4"
+  questionId: certyfikat-polski-B2-2019-listening-4-1
+  taskRef: certyfikat-polski-B2-2019-listen-4
   questionType: match
-  questionText: "Zatrucie sie nia nie musi oznaczac smierci."
-  correctAnswer: "B"
-  points: 1
+  questionText: "Zatrucie się nią nie musi oznaczać śmierci."
+  options: "A|B|C|D|E"
+  correctAnswer: B
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "B2-2019-l4-q2"
-  taskRef: "certyfikat-polski-B2-2019-listen-4"
+  questionId: certyfikat-polski-B2-2019-listening-4-2
+  taskRef: certyfikat-polski-B2-2019-listen-4
   questionType: match
-  questionText: "Moze zabic nawet jej zapach."
-  correctAnswer: "E"
-  points: 1
+  questionText: "Może zabić nawet jej zapach."
+  options: "A|B|C|D|E"
+  correctAnswer: E
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "B2-2019-l4-q3"
-  taskRef: "certyfikat-polski-B2-2019-listen-4"
+  questionId: certyfikat-polski-B2-2019-listening-4-3
+  taskRef: certyfikat-polski-B2-2019-listen-4
   questionType: match
-  questionText: "Pomagaa kobietom stac sie bardziej atrakcyjnymi."
-  correctAnswer: "B"
-  points: 1
+  questionText: "Pomagała kobietom stać się bardziej atrakcyjnymi."
+  options: "A|B|C|D|E"
+  correctAnswer: B
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "B2-2019-l4-q4"
-  taskRef: "certyfikat-polski-B2-2019-listen-4"
+  questionId: certyfikat-polski-B2-2019-listening-4-4
+  taskRef: certyfikat-polski-B2-2019-listen-4
   questionType: match
-  questionText: "Zostaa wykorzystana w rozgrywkach na szczytach wadzy."
+  questionText: "Została wykorzystana w rozgrywkach na szczytach władzy."
+  options: "A|B|C|D|E"
   correctAnswer: "B|D"
-  points: 1
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
+  pointsQuarter: 8
 }
 LISTENING_QUESTION {
-  questionId: "B2-2019-l4-q5"
-  taskRef: "certyfikat-polski-B2-2019-listen-4"
+  questionId: certyfikat-polski-B2-2019-listening-4-5
+  taskRef: certyfikat-polski-B2-2019-listen-4
   questionType: match
-  questionText: "Bya uzywana podczas zdobywania pozywienia."
-  correctAnswer: "D"
-  points: 1
+  questionText: "Była używana podczas zdobywania pożywienia."
+  options: "A|B|C|D|E"
+  correctAnswer: D
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "B2-2019-l4-q6"
-  taskRef: "certyfikat-polski-B2-2019-listen-4"
+  questionId: certyfikat-polski-B2-2019-listening-4-6
+  taskRef: certyfikat-polski-B2-2019-listen-4
   questionType: match
-  questionText: "Jest lubiana w Europie roslina ozdobna."
-  correctAnswer: "C"
-  points: 1
+  questionText: "Jest lubianą w Europie rośliną ozdobną."
+  options: "A|B|C|D|E"
+  correctAnswer: C
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "B2-2019-l4-q7"
-  taskRef: "certyfikat-polski-B2-2019-listen-4"
+  questionId: certyfikat-polski-B2-2019-listening-4-7
+  taskRef: certyfikat-polski-B2-2019-listen-4
   questionType: match
-  questionText: "Wystepuje powszechnie w roznych czesciach swiata."
+  questionText: "Występuje powszechnie w różnych częściach świata."
+  options: "A|B|C|D|E"
   correctAnswer: "A|E"
-  points: 1
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
+  pointsQuarter: 8
 }
 LISTENING_QUESTION {
-  questionId: "B2-2019-l4-q8"
-  taskRef: "certyfikat-polski-B2-2019-listen-4"
+  questionId: certyfikat-polski-B2-2019-listening-4-8
+  taskRef: certyfikat-polski-B2-2019-listen-4
   questionType: match
-  questionText: "Odpowiednie procesy pozwalaja pozbyc sie z niej trujacej substancji."
-  correctAnswer: "A"
-  points: 1
+  questionText: "Odpowiednie procesy pozwalają pozbyć się z niej trującej substancji."
+  options: "A|B|C|D|E"
+  correctAnswer: A
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "B2-2019-l5-q1a"
-  taskRef: "certyfikat-polski-B2-2019-listen-5"
+  questionId: certyfikat-polski-B2-2019-listening-5-1
+  taskRef: certyfikat-polski-B2-2019-listen-5
   questionType: fill_gap
-  questionText: "Jakie skutki ma dla naszego organizmu nadmierne spozycie soli? (a)"
-  correctAnswer: "opuchlizna / puchnie nam ciao / zatrzymanie wody w organizmie"
-  points: 1
+  questionText: "Jakie skutki ma dla naszego organizmu nadmierne spożycie soli? a) …; b) …"
+  correctAnswer: "opuchlizna|utrudnienie i spowolnienie pracy nerek"
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
+  gradingMode: open_manual
+  pointsQuarter: 8
 }
 LISTENING_QUESTION {
-  questionId: "B2-2019-l5-q1b"
-  taskRef: "certyfikat-polski-B2-2019-listen-5"
+  questionId: certyfikat-polski-B2-2019-listening-5-2
+  taskRef: certyfikat-polski-B2-2019-listen-5
   questionType: fill_gap
-  questionText: "Jakie skutki ma dla naszego organizmu nadmierne spozycie soli? (b)"
-  correctAnswer: "utrudnienie i spowolnienie pracy nerek"
-  points: 1
+  questionText: "Czemu odpowiada zawartość soli w hamburgerze i frytkach?"
+  correctAnswer: "łyżeczce soli"
+  gradingMode: open_manual
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "B2-2019-l5-q2"
-  taskRef: "certyfikat-polski-B2-2019-listen-5"
+  questionId: certyfikat-polski-B2-2019-listening-5-3
+  taskRef: certyfikat-polski-B2-2019-listen-5
   questionType: fill_gap
-  questionText: "Czemu odpowiada zawartosc soli w hamburgerze i frytkach?"
-  correctAnswer: "yzeczce soli / caodziennemu zapotrzebowaniu na sol"
-  points: 1
+  questionText: "Jakie składniki powodują, że w kebabie zawartość soli jest aż tak wysoka? a) …; b) …"
+  correctAnswer: "posolone, przetworzone mięso|sosy"
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
+  gradingMode: open_manual
+  pointsQuarter: 8
 }
 LISTENING_QUESTION {
-  questionId: "B2-2019-l5-q3a"
-  taskRef: "certyfikat-polski-B2-2019-listen-5"
+  questionId: certyfikat-polski-B2-2019-listening-5-4
+  taskRef: certyfikat-polski-B2-2019-listen-5
   questionType: fill_gap
-  questionText: "Jakie skadniki powoduja, ze w kebabie zawartosc soli jest az tak wysoka? (a)"
-  correctAnswer: "posolone, przetworzone mieso"
-  points: 1
+  questionText: "Co jeszcze przyswaja osoba spożywająca co dzień fast foody? Dwie odpowiedzi po 0,5 p."
+  correctAnswer: "tłuszcz|węglowodany"
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 2
+  gradingMode: open_manual
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "B2-2019-l5-q3b"
-  taskRef: "certyfikat-polski-B2-2019-listen-5"
+  questionId: certyfikat-polski-B2-2019-listening-5-5
+  taskRef: certyfikat-polski-B2-2019-listen-5
   questionType: fill_gap
-  questionText: "Jakie skadniki powoduja, ze w kebabie zawartosc soli jest az tak wysoka? (b)"
-  correctAnswer: "sosy / sosy czosnkowe / sosy na bazie majonezu"
-  points: 1
+  questionText: "Dlaczego nadmierne spożycie soli może prowadzić do osteoporozy?"
+  correctAnswer: "zwiększa wydalanie magnezu i wapnia z organizmu"
+  gradingMode: open_manual
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "B2-2019-l5-q4"
-  taskRef: "certyfikat-polski-B2-2019-listen-5"
+  questionId: certyfikat-polski-B2-2019-listening-5-6
+  taskRef: certyfikat-polski-B2-2019-listen-5
   questionType: fill_gap
-  questionText: "Co jeszcze przyswaja osoba spozywajaca co dzien fast foody?"
-  correctAnswer: "tuszcz i weglowodany"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "B2-2019-l5-q5"
-  taskRef: "certyfikat-polski-B2-2019-listen-5"
-  questionType: fill_gap
-  questionText: "Dlaczego nadmierne spozycie soli moze prowadzic do osteoporozy?"
-  correctAnswer: "zwieksza wydalanie magnezu i wapnia z organizmu"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "B2-2019-l5-q6"
-  taskRef: "certyfikat-polski-B2-2019-listen-5"
-  questionType: fill_gap
-  questionText: "Do jakich zmian w naszym organizmie moze dojsc bezposrednio po spozyciu fast foodow?"
-  correctAnswer: "podwyzszenie cisnienia tetniczego"
-  points: 1
+  questionText: "Do jakich zmian w naszym organizmie może dojść bezpośrednio po spożyciu fast foodów?"
+  correctAnswer: "do podwyższenia ciśnienia tętniczego"
+  gradingMode: open_manual
+  pointsQuarter: 4
 }

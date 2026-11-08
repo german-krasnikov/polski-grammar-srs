@@ -19,7 +19,10 @@ private val exams = listOf(
     ExamEntry("b1-sample", "B1 Przykładowy", "B1", "sample"),
     ExamEntry("b1-2017", "B1 Certyfikat 2017", "B1", "2017"),
     ExamEntry("b1-2019", "B1 Certyfikat 2019", "B1", "2019"),
+    ExamEntry("b1-2020", "B1 Certyfikat 2020", "B1", "2020"),
+    ExamEntry("b2-2017", "B2 Certyfikat 2017", "B2", "2017"),
     ExamEntry("b2-2019", "B2 Certyfikat 2019", "B2", "2019"),
+    ExamEntry("b2-2020", "B2 Certyfikat 2020", "B2", "2020"),
 )
 
 internal enum class ExamScreen { List, Modules, Grammar, Reading, Listening, Writing }

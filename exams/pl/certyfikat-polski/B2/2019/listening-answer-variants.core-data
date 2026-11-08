@@ -1,0 +1,20 @@
+DSL 1
+# B2/2019 klucz p. 5: explicit alternate full-credit forms for single open responses; all other transcript-consistent answers remain manual.
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2019-listening-5-2-alt-1
+  questionRef: certyfikat-polski-B2-2019-listening-5-2
+  answer: "całodziennemu zapotrzebowaniu na sól"
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2019-listening-5-5-alt-1
+  questionRef: certyfikat-polski-B2-2019-listening-5-5
+  answer: "organizm wydala więcej magnezu i wapnia"
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2019-listening-5-6-alt-1
+  questionRef: certyfikat-polski-B2-2019-listening-5-6
+  answer: "ciśnienie tętnicze rośnie"
+  earnedQuarter: 4
+}

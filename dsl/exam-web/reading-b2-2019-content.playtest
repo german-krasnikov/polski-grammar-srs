@@ -1,0 +1,20 @@
+TEST "B2 2019 reading keeps the printed stress item and all five passages" PROFILE playmode
+  open exam="B2 Certyfikat 2019" module="reading"
+  ASSERT reading.questionCount == 5
+  ASSERT reading.firstOptions == "a) w stresie spożycie posiłków i przekąsek jest większe.|b) w okresie pobudzenia organizmu do działania częściej tyjemy.|c) zajadanie stresu pojawia się u wszystkich zestresowanych."
+  ASSERT reading.passageChars > 100
+  ASSERT reading.genericQuestionCount == 0
+  ASSERT reading.genericOptionCount == 0
+  next
+  ASSERT reading.questionCount == 10
+  ASSERT reading.passageChars > 100
+  next
+  ASSERT reading.questionCount == 10
+  ASSERT reading.passageChars > 100
+  next
+  ASSERT reading.questionCount == 10
+  ASSERT reading.passageChars > 100
+  next
+  ASSERT reading.questionCount == 10
+  ASSERT reading.passageChars > 100
+END

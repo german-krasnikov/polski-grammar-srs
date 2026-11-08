@@ -1,5 +1,5 @@
 // Generated from dsl/exam.data-contract
-// source-sha256=992a404f2b4446e2e0e639f8406138254b00bba16e0cbbd01dd5b91240805608
+// source-sha256=a57e78c0c7e995774d3b275d965c3ed5eaf230d29d01cb66a06330174c9e816d
 // Edit the source, then run biome generate.
 
 package polski.exam.data.b1y2020
@@ -56,6 +56,7 @@ enum class WritingTaskRowGenre(val tag: String) {
     EMAIL("email"),
     REVIEW("review"),
     ADVERTISEMENT("advertisement"),
+    APPLICATION("application"),
 }
 
 enum class ExamInventoryCaseRowSection(val tag: String) {
@@ -197,6 +198,7 @@ data class GrammarAnswerVariantRow(
     val itemRef: String,
     val answer: String,
     val earnedQuarter: Int,
+    val onlyIfNotUsedBy: String? = null,
 )
 
 data class WritingTaskRow(
@@ -311,6 +313,14 @@ data class OpenItemGroupCaseRow(
     val unknownAnswer: String,
     val expectedUnknownStatus: OpenItemGroupCaseRowExpectedUnknownStatus,
     val expectedBlankStatus: OpenItemGroupCaseRowExpectedBlankStatus,
+)
+
+data class GrammarConstraintCaseRow(
+    val id: String,
+    val answer6: String,
+    val answer8: String,
+    val expected6Quarter: Int,
+    val expected8Quarter: Int,
 )
 
 val EXAM_ROW_ROWS: List<ExamRow> = listOf(
@@ -549,6 +559,7 @@ val LISTENING_QUESTION_ROW_ROWS: List<ListeningQuestionRow> = listOf(
         taskRef = "certyfikat-polski-B1-2020-listen-3",
         questionType = ListeningQuestionRowQuestionType.TRUE_FALSE,
         questionText = "Bohaterka wywiadu w dzieciństwie podróżowała po Europie.",
+        options = "TAK|NIE",
         correctAnswer = "TAK",
         pointsQuarter = 4,
     ),
@@ -557,6 +568,7 @@ val LISTENING_QUESTION_ROW_ROWS: List<ListeningQuestionRow> = listOf(
         taskRef = "certyfikat-polski-B1-2020-listen-3",
         questionType = ListeningQuestionRowQuestionType.TRUE_FALSE,
         questionText = "Bohaterka wywiadu w szkole średniej wyjeżdżała z rodzicami do Anglii.",
+        options = "TAK|NIE",
         correctAnswer = "NIE",
         pointsQuarter = 4,
     ),
@@ -565,6 +577,7 @@ val LISTENING_QUESTION_ROW_ROWS: List<ListeningQuestionRow> = listOf(
         taskRef = "certyfikat-polski-B1-2020-listen-3",
         questionType = ListeningQuestionRowQuestionType.TRUE_FALSE,
         questionText = "Bohaterka wywiadu obecnie podróżuje z grupą przyjaciół.",
+        options = "TAK|NIE",
         correctAnswer = "NIE",
         pointsQuarter = 4,
     ),
@@ -573,6 +586,7 @@ val LISTENING_QUESTION_ROW_ROWS: List<ListeningQuestionRow> = listOf(
         taskRef = "certyfikat-polski-B1-2020-listen-3",
         questionType = ListeningQuestionRowQuestionType.TRUE_FALSE,
         questionText = "Bohaterka wywiadu wybiera środek transportu w zależności od miejsca, w którym jest.",
+        options = "TAK|NIE",
         correctAnswer = "TAK",
         pointsQuarter = 4,
     ),
@@ -581,6 +595,7 @@ val LISTENING_QUESTION_ROW_ROWS: List<ListeningQuestionRow> = listOf(
         taskRef = "certyfikat-polski-B1-2020-listen-3",
         questionType = ListeningQuestionRowQuestionType.TRUE_FALSE,
         questionText = "Bohaterka wywiadu boi się kłopotów z powodu braku znajomości języków obcych.",
+        options = "TAK|NIE",
         correctAnswer = "NIE",
         pointsQuarter = 4,
     ),
@@ -774,6 +789,7 @@ val READING_QUESTION_ROW_ROWS: List<ReadingQuestionRow> = listOf(
         passageRef = "certyfikat-polski-B1-2020-read-2",
         questionType = ReadingQuestionRowQuestionType.TRUE_FALSE_NOT_GIVEN,
         questionText = "Pierwszy odcinek serialu był nieudany.",
+        options = "TAK|NIE",
         correctAnswer = "NIE",
         pointsQuarter = 4,
     ),
@@ -782,6 +798,7 @@ val READING_QUESTION_ROW_ROWS: List<ReadingQuestionRow> = listOf(
         passageRef = "certyfikat-polski-B1-2020-read-2",
         questionType = ReadingQuestionRowQuestionType.TRUE_FALSE_NOT_GIVEN,
         questionText = "Nagrywanie kolejnych odcinków zależało od zainteresowania widzów.",
+        options = "TAK|NIE",
         correctAnswer = "TAK",
         pointsQuarter = 4,
     ),
@@ -790,6 +807,7 @@ val READING_QUESTION_ROW_ROWS: List<ReadingQuestionRow> = listOf(
         passageRef = "certyfikat-polski-B1-2020-read-2",
         questionType = ReadingQuestionRowQuestionType.TRUE_FALSE_NOT_GIVEN,
         questionText = "Bohaterowie serialu należą do najbogatszych ludzi w Polsce.",
+        options = "TAK|NIE",
         correctAnswer = "NIE",
         pointsQuarter = 4,
     ),
@@ -798,6 +816,7 @@ val READING_QUESTION_ROW_ROWS: List<ReadingQuestionRow> = listOf(
         passageRef = "certyfikat-polski-B1-2020-read-2",
         questionType = ReadingQuestionRowQuestionType.TRUE_FALSE_NOT_GIVEN,
         questionText = "Sąsiad Ferdynanda zajmuje się handlem.",
+        options = "TAK|NIE",
         correctAnswer = "TAK",
         pointsQuarter = 4,
     ),
@@ -806,6 +825,7 @@ val READING_QUESTION_ROW_ROWS: List<ReadingQuestionRow> = listOf(
         passageRef = "certyfikat-polski-B1-2020-read-2",
         questionType = ReadingQuestionRowQuestionType.TRUE_FALSE_NOT_GIVEN,
         questionText = "Serial od początku jest nagrywany w studiu filmowym.",
+        options = "TAK|NIE",
         correctAnswer = "NIE",
         pointsQuarter = 4,
     ),
@@ -814,6 +834,7 @@ val READING_QUESTION_ROW_ROWS: List<ReadingQuestionRow> = listOf(
         passageRef = "certyfikat-polski-B1-2020-read-2",
         questionType = ReadingQuestionRowQuestionType.TRUE_FALSE_NOT_GIVEN,
         questionText = "Niektóre przedmioty można zobaczyć w serialu od pierwszych odcinków aż do dziś.",
+        options = "TAK|NIE",
         correctAnswer = "TAK",
         pointsQuarter = 4,
     ),
@@ -822,6 +843,7 @@ val READING_QUESTION_ROW_ROWS: List<ReadingQuestionRow> = listOf(
         passageRef = "certyfikat-polski-B1-2020-read-2",
         questionType = ReadingQuestionRowQuestionType.TRUE_FALSE_NOT_GIVEN,
         questionText = "Cały serial jest dostępny w telewizji i w internecie.",
+        options = "TAK|NIE",
         correctAnswer = "NIE",
         pointsQuarter = 4,
     ),

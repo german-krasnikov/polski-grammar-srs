@@ -22,10 +22,27 @@ object GrammarExamScorer {
     fun score(item: GrammarItem, answer: String): Boolean =
         normalize(answer) == normalize(item.correctAnswer)
 
-    fun grade(item: GrammarItem, answer: String): ExamAnswerEvaluation = evaluateExamAnswer(
+    fun grade(item: GrammarItem, answer: String): ExamAnswerEvaluation = evaluateWithVariants(
+        item, answer, item.scoredVariants.filter { it.onlyIfNotUsedByItemId == null },
+    )
+
+    /** Grades conditional key variants against the complete, current answer snapshot. */
+    fun gradeInAttempt(test: GrammarTest, item: GrammarItem, answers: Map<String, String>): ExamAnswerEvaluation {
+        require(item in test.items) { "Item ${item.itemId} is not in ${test.testId}" }
+        val eligible = item.scoredVariants.filter { variant ->
+            variant.onlyIfNotUsedByItemId?.let { otherId ->
+                normalize(answers[otherId].orEmpty()) != normalize(variant.answer)
+            } ?: true
+        }
+        return evaluateWithVariants(item, answers[item.itemId].orEmpty(), eligible)
+    }
+
+    private fun evaluateWithVariants(
+        item: GrammarItem, answer: String, variants: List<GrammarScoredVariant>,
+    ): ExamAnswerEvaluation = evaluateExamAnswer(
         mode = item.gradingMode,
         fullAnswer = item.correctAnswer,
-        variants = item.scoredVariants.map { ExamAnswerVariant(it.answer, it.earnedQuarter) },
+        variants = variants.map { ExamAnswerVariant(it.answer, it.earnedQuarter) },
         answer = answer,
         maximumQuarter = item.maximumQuarter,
     )
@@ -35,7 +52,7 @@ object GrammarExamScorer {
 
     fun scoreAttempt(test: GrammarTest, answers: Map<String, String>): GrammarExamResult {
         val possibleQuarter = test.items.sumOf { it.maximumQuarter }
-        val evaluations = test.items.map { item -> grade(item, answers[item.itemId].orEmpty()) }
+        val evaluations = test.items.map { item -> gradeInAttempt(test, item, answers) }
         val earnedQuarter = evaluations.sumOf { it.confirmedQuarter }
         val pendingQuarter = evaluations.sumOf { it.pendingQuarter }
         return GrammarExamResult(

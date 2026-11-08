@@ -51,6 +51,7 @@ READING_QUESTION {
   passageRef: certyfikat-polski-B1-2020-read-2
   questionType: true_false_not_given
   questionText: "Pierwszy odcinek serialu był nieudany."
+  options: "TAK|NIE"
   correctAnswer: NIE
   pointsQuarter: 4
 }
@@ -59,6 +60,7 @@ READING_QUESTION {
   passageRef: certyfikat-polski-B1-2020-read-2
   questionType: true_false_not_given
   questionText: "Nagrywanie kolejnych odcinków zależało od zainteresowania widzów."
+  options: "TAK|NIE"
   correctAnswer: TAK
   pointsQuarter: 4
 }
@@ -67,6 +69,7 @@ READING_QUESTION {
   passageRef: certyfikat-polski-B1-2020-read-2
   questionType: true_false_not_given
   questionText: "Bohaterowie serialu należą do najbogatszych ludzi w Polsce."
+  options: "TAK|NIE"
   correctAnswer: NIE
   pointsQuarter: 4
 }
@@ -75,6 +78,7 @@ READING_QUESTION {
   passageRef: certyfikat-polski-B1-2020-read-2
   questionType: true_false_not_given
   questionText: "Sąsiad Ferdynanda zajmuje się handlem."
+  options: "TAK|NIE"
   correctAnswer: TAK
   pointsQuarter: 4
 }
@@ -83,6 +87,7 @@ READING_QUESTION {
   passageRef: certyfikat-polski-B1-2020-read-2
   questionType: true_false_not_given
   questionText: "Serial od początku jest nagrywany w studiu filmowym."
+  options: "TAK|NIE"
   correctAnswer: NIE
   pointsQuarter: 4
 }
@@ -91,6 +96,7 @@ READING_QUESTION {
   passageRef: certyfikat-polski-B1-2020-read-2
   questionType: true_false_not_given
   questionText: "Niektóre przedmioty można zobaczyć w serialu od pierwszych odcinków aż do dziś."
+  options: "TAK|NIE"
   correctAnswer: TAK
   pointsQuarter: 4
 }
@@ -99,6 +105,7 @@ READING_QUESTION {
   passageRef: certyfikat-polski-B1-2020-read-2
   questionType: true_false_not_given
   questionText: "Cały serial jest dostępny w telewizji i w internecie."
+  options: "TAK|NIE"
   correctAnswer: NIE
   pointsQuarter: 4
 }

@@ -1,0 +1,20 @@
+TEST "B2 2017 reading keeps the printed yacht item and all five passages" PROFILE playmode
+  open exam="B2 Certyfikat 2017" module="reading"
+  ASSERT reading.questionCount == 5
+  ASSERT reading.firstOptions == "a) podczas wiatrów krótkie rejsy należy odbywać na małych jachtach.|b) człowieka poznaje się w trudnych warunkach.|c) relacje między ludźmi najlepiej badają testy i treningi psychologiczne."
+  ASSERT reading.passageChars > 100
+  ASSERT reading.genericQuestionCount == 0
+  ASSERT reading.genericOptionCount == 0
+  next
+  ASSERT reading.questionCount == 10
+  ASSERT reading.passageChars > 100
+  next
+  ASSERT reading.questionCount == 10
+  ASSERT reading.passageChars > 100
+  next
+  ASSERT reading.questionCount == 10
+  ASSERT reading.passageChars > 100
+  next
+  ASSERT reading.questionCount == 10
+  ASSERT reading.passageChars > 100
+END

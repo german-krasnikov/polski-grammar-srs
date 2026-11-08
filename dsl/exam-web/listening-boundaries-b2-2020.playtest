@@ -1,0 +1,12 @@
+TEST "B2 2020 all five source-audited recording windows" PROFILE playmode
+  open exam="B2 Certyfikat 2020" module="listening"
+  auditSegment start=97 end=417
+  advanceTask count=1
+  auditSegment start=418 end=702
+  advanceTask count=1
+  auditSegment start=703 end=1082
+  advanceTask count=1
+  auditSegment start=1083 end=1357
+  advanceTask count=1
+  auditSegment start=1357 end=1672
+END

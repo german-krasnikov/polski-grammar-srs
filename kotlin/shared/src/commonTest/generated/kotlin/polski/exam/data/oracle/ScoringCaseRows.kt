@@ -1,5 +1,5 @@
 // Generated from dsl/exam.data-contract
-// source-sha256=992a404f2b4446e2e0e639f8406138254b00bba16e0cbbd01dd5b91240805608
+// source-sha256=a57e78c0c7e995774d3b275d965c3ed5eaf230d29d01cb66a06330174c9e816d
 // Edit the source, then run biome generate.
 
 package polski.exam.data.oracle
@@ -56,6 +56,7 @@ enum class WritingTaskRowGenre(val tag: String) {
     EMAIL("email"),
     REVIEW("review"),
     ADVERTISEMENT("advertisement"),
+    APPLICATION("application"),
 }
 
 enum class ExamInventoryCaseRowSection(val tag: String) {
@@ -197,6 +198,7 @@ data class GrammarAnswerVariantRow(
     val itemRef: String,
     val answer: String,
     val earnedQuarter: Int,
+    val onlyIfNotUsedBy: String? = null,
 )
 
 data class WritingTaskRow(
@@ -311,6 +313,14 @@ data class OpenItemGroupCaseRow(
     val unknownAnswer: String,
     val expectedUnknownStatus: OpenItemGroupCaseRowExpectedUnknownStatus,
     val expectedBlankStatus: OpenItemGroupCaseRowExpectedBlankStatus,
+)
+
+data class GrammarConstraintCaseRow(
+    val id: String,
+    val answer6: String,
+    val answer8: String,
+    val expected6Quarter: Int,
+    val expected8Quarter: Int,
 )
 
 val SCORING_CASE_ROW_ROWS: List<ScoringCaseRow> = listOf(
@@ -857,5 +867,44 @@ val OPEN_ITEM_GROUP_CASE_ROW_ROWS: List<OpenItemGroupCaseRow> = listOf(
         unknownAnswer = "inna odpowiedź spoza drukowanego klucza",
         expectedUnknownStatus = OpenItemGroupCaseRowExpectedUnknownStatus.PENDING_MANUAL,
         expectedBlankStatus = OpenItemGroupCaseRowExpectedBlankStatus.WRONG,
+    ),
+)
+
+val GRAMMAR_CONSTRAINT_CASE_ROW_ROWS: List<GrammarConstraintCaseRow> = listOf(
+    GrammarConstraintCaseRow(
+        id = "canonical-pair",
+        answer6 = "w",
+        answer8 = "przy",
+        expected6Quarter = 2,
+        expected8Quarter = 2,
+    ),
+    GrammarConstraintCaseRow(
+        id = "repeated-w",
+        answer6 = "w",
+        answer8 = "w",
+        expected6Quarter = 2,
+        expected8Quarter = 0,
+    ),
+    GrammarConstraintCaseRow(id = "blank-six", answer6 = "", answer8 = "w", expected6Quarter = 0, expected8Quarter = 2),
+    GrammarConstraintCaseRow(
+        id = "wrong-six",
+        answer6 = "inne",
+        answer8 = "w",
+        expected6Quarter = 0,
+        expected8Quarter = 2,
+    ),
+    GrammarConstraintCaseRow(
+        id = "normalized-repeat",
+        answer6 = "W",
+        answer8 = "W",
+        expected6Quarter = 2,
+        expected8Quarter = 0,
+    ),
+    GrammarConstraintCaseRow(
+        id = "blank-eight",
+        answer6 = "w",
+        answer8 = "",
+        expected6Quarter = 2,
+        expected8Quarter = 0,
     ),
 )

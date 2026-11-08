@@ -98,6 +98,7 @@ RECORD GrammarAnswerVariantRow KEY variantId COUNT 1..
   itemRef: ref GrammarItemRow
   answer: string
   earnedQuarter: int
+  onlyIfNotUsedBy: ref GrammarItemRow OPTIONAL
 END
 
 # Writing: prompts with genre and optional word limit.
@@ -111,7 +112,7 @@ RECORD WritingTaskRow KEY taskId COUNT 1..
   promptImageUrl: string OPTIONAL
   promptImageAlt: string OPTIONAL
   wordLimit: int OPTIONAL
-  genre: enum letter|description|argument|essay|invitation|wishes|story|report|sms|opinion|announcement|email|review|advertisement
+  genre: enum letter|description|argument|essay|invitation|wishes|story|report|sms|opinion|announcement|email|review|advertisement|application
 END
 
 # Scoring oracle: input/output pairs for the answer-matching rule (P4: test expectations in DSL).
@@ -217,4 +218,13 @@ RECORD OpenItemGroupCaseRow KEY id COUNT 1..
   unknownAnswer: string
   expectedUnknownStatus: enum pending_manual
   expectedBlankStatus: enum wrong
+END
+
+# Official B2/2020 Grammar II key: II/8=w only when II/6 did not use w.
+RECORD GrammarConstraintCaseRow KEY id COUNT 1..
+  id: string
+  answer6: string
+  answer8: string
+  expected6Quarter: int
+  expected8Quarter: int
 END

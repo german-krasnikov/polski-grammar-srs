@@ -1,0 +1,11 @@
+TEST "B1 2020 listening III uses printed TAK NIE and credits TAK" PROFILE playmode
+  open exam="B1 Certyfikat 2020" module="listening"
+  advanceTask count=2
+  ASSERT media.taskLabel == "Задание 3 / 5"
+  ASSERT listening.firstOptions == "TAK|NIE"
+  chooseReading index=1 answer="TAK"
+  advanceTask count=2
+  submit
+  inspectReview index=20
+  ASSERT grammar.reviewStatus == "correct"
+END
