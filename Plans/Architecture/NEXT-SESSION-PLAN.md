@@ -73,7 +73,7 @@
 8. **TrainingWebApp.kt split** — 1040 строк, >200 line rule
 
 ### Низкий приоритет
-9. **Exam B2/C1 данные** из certyfikatpolski.pl (сессии 2022-2024)
+9. **Exam B2/C1 данные** из certyfikatpolski.pl (сессии 2022-2024) — [инвентарь официальных источников](EXAM-2022-2024-SOURCE-INVENTORY.md): 11 взрослых вариантов; нужны ID с датой сессии и дополнительные правила зависимых ответов C1
 10. **Grammar exam: все типы** (transform, word_bank, question_formation)
 11. **Reading/Listening/Writing session** в shared (сейчас только в webMain)
 12. **Swift UiCopy** — дочитать на Swift стороне оставшиеся labels
