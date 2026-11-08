@@ -1,6 +1,6 @@
 # Six-exam browser acceptance, 2026-11-08
 
-Independent tester receipt for the restored B1/2020, B2/2017, B2/2019 and B2/2020 papers, alongside retained B1/2017 and B1/2019 behavior. Accepted scope: [EXAM-WORD-BANK-CONSTRAINT-ADDENDUM.md](EXAM-WORD-BANK-CONSTRAINT-ADDENDUM.md), the six paper data evidence files and [EXAM-AUDIO-BOUNDARY-AUDIT.md](EXAM-AUDIO-BOUNDARY-AUDIT.md). This is browser acceptance of immutable Kotlin/Wasm production distributions, not a native-device result or an independent certification of every PDF answer. Authored PlayTest expectations are based on source paper/key evidence and explicit source rows, not current Kotlin output.
+Independent tester receipt for the restored B1/2020, B2/2017, B2/2019 and B2/2020 papers, alongside retained B1/2017 and B1/2019 behavior. Accepted scope: [EXAM-WORD-BANK-CONSTRAINT-ADDENDUM.md](EXAM-WORD-BANK-CONSTRAINT-ADDENDUM.md), the paper data evidence files and [EXAM-AUDIO-BOUNDARY-AUDIT.md](EXAM-AUDIO-BOUNDARY-AUDIT.md). This is browser acceptance of immutable Kotlin/Wasm production distributions, not a native-device result or an independent certification of every PDF answer. Authored PlayTest expectations are based on source paper/key evidence and explicit source rows, not current Kotlin output.
 
 ## Artifacts and checks
 

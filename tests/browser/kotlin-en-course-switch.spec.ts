@@ -45,6 +45,8 @@ test('Settings lists every usable pack; selecting target English/native Russian 
 
   const source = page.locator('.source-sentence');
   await expect(source).toBeVisible();
+  await expect(page.locator('.route-viewport > .route-content')).toHaveCount(1);
+  await expect(source).toHaveCount(1);
   await expect(source).toHaveAttribute('lang', 'en');
   const sourceText = (await source.textContent())!;
   expect(sourceText).not.toMatch(CYRILLIC_OR_POLISH);
@@ -103,6 +105,8 @@ test('Vocabulary direction picker follows the active pack, and switching back to
   await page.getByRole('button', { name: 'Карточки' }).click();
   await expect(page).toHaveURL(/#\/training$/);
   await continueIntroductionIfPresent(page);
+  await expect(page.locator('.route-viewport > .route-content')).toHaveCount(1);
+  await expect(page.locator('.source-sentence')).toHaveCount(1);
   await expect(page.locator('.source-sentence')).toHaveAttribute('lang', 'pl');
 });
 
