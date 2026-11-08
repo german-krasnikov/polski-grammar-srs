@@ -18,12 +18,34 @@ internal class ExamListeningController(examId: String, private val onBack: () ->
     private var submitted = false
     private var root: HTMLElement? = null
     private var audioElement: HTMLAudioElement? = null
+    private var questionsContainer: HTMLElement? = null
 
-    fun render(container: HTMLElement) { root = container; redraw() }
+    fun render(container: HTMLElement) { root = container; setupAudio(); redraw() }
+
+    private fun setupAudio() {
+        if (audioElement != null || exam.audioUrl.isBlank()) return
+        audioElement = (document.createElement("audio") as HTMLAudioElement).apply {
+            src = exam.audioUrl; controls = true; className = "exam-audio-player"
+            setAttribute("preload", "auto")
+        }
+    }
+
+    private fun seekToTask(task: ListeningTask) {
+        val audio = audioElement ?: return
+        val startSec = task.startMs / 1000.0
+        val endSec = task.endMs / 1000.0
+        fun doSeek() { audio.currentTime = startSec; audio.pause() }
+        if (audio.readyState >= 1) doSeek()
+        else audio.addEventListener("loadedmetadata", { doSeek() })
+        // auto-stop at segment end
+        if (endSec > 0) {
+            audio.ontimeupdate = { if (audio.currentTime >= endSec) { audio.pause(); audio.currentTime = endSec } }
+        }
+    }
 
     private fun redraw() {
         val c = root ?: return; c.innerHTML = ""
-        if (submitted) renderResult(c)
+        if (submitted) { audioElement?.pause(); renderResult(c) }
         else if (exam.tasks.isEmpty()) renderEmpty(c)
         else renderTask(c)
     }
@@ -39,17 +61,10 @@ internal class ExamListeningController(examId: String, private val onBack: () ->
             })
         })
         c.appendChild(node("h3", "exam-title", task.instruction))
-        // Audio player — seek to task segment
-        if (exam.audioUrl.isNotBlank()) {
-            val audio = (document.createElement("audio") as HTMLAudioElement).apply {
-                src = exam.audioUrl; controls = true; className = "exam-audio-player"
-                setAttribute("preload", "metadata")
-                if (task.startMs > 0) currentTime = task.startMs / 1000.0
-                if (task.endMs > 0) addEventListener("timeupdate", {
-                    if (currentTime >= task.endMs / 1000.0) { pause(); currentTime = task.endMs / 1000.0 }
-                })
-            }
-            audioElement = audio
+        // Audio player — persistent element, seek to segment
+        val audio = audioElement
+        if (audio != null) {
+            seekToTask(task)
             c.appendChild(node("div", "exam-audio-wrap").apply {
                 appendChild(audio)
                 val hint = if (task.startMs > 0) {
