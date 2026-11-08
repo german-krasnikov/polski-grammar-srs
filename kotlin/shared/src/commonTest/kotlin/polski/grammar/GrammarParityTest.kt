@@ -22,7 +22,7 @@ import polski.model.*
 class GrammarParityTest {
     @Test
     fun allCases() {
-        for (row in grammarCaseRows) {
+        for (row in GRAMMAR_CASE_ROW_ROWS) {
             val actual: String? = when (row.kind) {
                 GrammarCaseRowKind.NOUN -> nounById(row.nounId!!).let { n ->
                     listOf(n.lemma, n.meaning, n.gender.id, nounForm(n.id, GramCase.fromId(row.gramCase!!), NumberGram.fromId(row.number!!))).joinToString("|")

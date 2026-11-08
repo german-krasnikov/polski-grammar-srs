@@ -92,9 +92,10 @@ class PlRuRecipeRowsTest {
 
     @Test fun aReasonIsOneKeyOrRulesInOrderWithTheDefaultOneAmongThem() {
         assertEquals(ReasonSpec.Fixed("why"), ReasonSpecRow(ReasonSpecRowKind.FIXED, key = "why").toReasonSpec())
-        val rules = listOf(ReasonRuleRow("unchanged", "a"), ReasonRuleRow("default", "b"))
-        assertEquals(ReasonSpec.Classified(listOf(ReasonRule("unchanged", "a"), ReasonRule("default", "b"))), ReasonSpecRow(ReasonSpecRowKind.CLASSIFIED, rules = rules).toReasonSpec())
-        for (bad in listOf(ReasonSpecRow(ReasonSpecRowKind.CLASSIFIED, rules = rules.take(1)), ReasonSpecRow(ReasonSpecRowKind.FIXED), ReasonSpecRow(ReasonSpecRowKind.FIXED, key = "k", rules = rules))) {
+        val rules = listOf(ReasonRuleRow(whenUnchanged = true, key = "a"), ReasonRuleRow(key = "b"))
+        assertEquals(ReasonSpec.Classified(listOf(ReasonRule(whenUnchanged = true, key = "a"), ReasonRule(key = "b"))), ReasonSpecRow(ReasonSpecRowKind.CLASSIFIED, rules = rules).toReasonSpec())
+        val noFallback = listOf(ReasonRuleRow(whenUnchanged = true, key = "a"))
+        for (bad in listOf(ReasonSpecRow(ReasonSpecRowKind.CLASSIFIED, rules = noFallback), ReasonSpecRow(ReasonSpecRowKind.FIXED), ReasonSpecRow(ReasonSpecRowKind.FIXED, key = "k", rules = rules))) {
             assertFailsWith<IllegalArgumentException>("$bad") { bad.toReasonSpec() }
         }
     }
