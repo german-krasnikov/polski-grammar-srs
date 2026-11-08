@@ -591,11 +591,13 @@ private class TrainingDomRenderer {
         val modes = node("div", "subnav")
         modes.setAttribute("aria-label", "Режим тренировки")
         toolbar.appendChild(modes)
-        modes.appendChild(button("Цепочка предложений", active = state.mode == TrainingMode.Chain, pressed = state.mode == TrainingMode.Chain) { dispatch(AppAction.StartChain()) })
-        modes.appendChild(button("По расписанию · ${state.dueCount}", active = state.mode == TrainingMode.Schedule, pressed = state.mode == TrainingMode.Schedule) { dispatch(AppAction.StartSchedule) })
-        modes.appendChild(button("Отдельный навык", active = state.mode == TrainingMode.Focused, pressed = state.mode == TrainingMode.Focused) { dispatch(AppAction.OpenSkillPicker) }.apply {
-            setAttribute("aria-expanded", state.showSkillPicker.toString())
-        })
+        val studyModel = trainingCardModel(state)
+        studyModel.header.modes.forEach { option ->
+            val label = if (option.mode == TrainingMode.Schedule) "${option.label} · ${studyModel.header.dueCount}" else option.label
+            val btn = button(label, active = studyModel.header.selected == option.mode, pressed = studyModel.header.selected == option.mode) { dispatch(option.action) }
+            if (option.mode == TrainingMode.Focused) btn.setAttribute("aria-expanded", state.showSkillPicker.toString())
+            modes.appendChild(btn)
+        }
         val options = node("div", "study-options")
         toolbar.appendChild(options)
         val methodLabel = node("label", text = "Подача")
@@ -614,7 +616,8 @@ private class TrainingDomRenderer {
             dispatch(AppAction.SetStyle(StyleId(methodSelect.value)))
         })
         methodLabel.appendChild(methodSelect)
-        options.appendChild(button(if (state.showReference && !state.introPending) "Скрыть таблицу" else "Таблица под рукой") {
+        val model = trainingCardModel(state)
+        options.appendChild(button(model.referenceToggle.label) {
             dispatch(AppAction.ToggleReference)
         }.apply {
             disabled = state.introPending
@@ -877,7 +880,7 @@ private class TrainingDomRenderer {
             })
             area.appendChild(input)
         } else area.appendChild(node("p", "muted", "Произнеси целое предложение, затем переверни карточку."))
-        area.appendChild(button(if (state.answerMode == AnswerMode.Typed) "Проверить и показать ответ" else "Показать ответ", primary = true) {
+        area.appendChild(button(if (state.answerMode == AnswerMode.Typed) UiCopy.CheckAndShowAnswer else UiCopy.ShowAnswer, primary = true) {
             state.exerciseId?.let { dispatch(AppAction.Reveal(it)) }
         }.apply { id = "training-reveal"; className += " reveal-button" })
     }
@@ -918,22 +921,19 @@ private class TrainingDomRenderer {
         // output — same for every style, so it always renders after the back blocks, never inside
         // whichever ones the active style composed.
         renderLifehackBlock(back, skill.id)
-        back.appendChild(node("div", "rating-label", "Когда повторить?"))
+        back.appendChild(node("div", "rating-label", UiCopy.WhenToReview))
         back.appendChild(node("p", "method-review", method.review))
         val ratings = node("div", "ratings")
         back.appendChild(ratings)
-        listOf(
-            Triple(Rating.Again, "Повторить", "Ошибка или не уверен"),
-            Triple(Rating.Good, "Вспомнил", "Воспроизвёл сам"),
-        ).forEachIndexed { index, (rating, label, hint) ->
-            ratings.appendChild(button("${index + 1} $label", extraClass = "rating-${rating.name.lowercase()}") {
-                riveOverlay.trigger(root, back, cardEffectFor(rating))
-                dispatch(AppAction.Rate(exercise.id, rating))
+        val model = trainingCardModel(state)
+        val ratingHints = mapOf(Rating.Again to "Ошибка или не уверен", Rating.Good to "Воспроизвёл сам")
+        model.ratingButtons.forEachIndexed { index, rb ->
+            ratings.appendChild(button("${index + 1} ${rb.label}", extraClass = "rating-${rb.rating.name.lowercase()}") {
+                riveOverlay.trigger(root, back, cardEffectFor(rb.rating))
+                dispatch(AppAction.Rate(exercise.id, rb.rating))
             }.apply {
-                appendChild(node("small", text = hint))
-                appendChild(node("span", text = state.intervals?.get(rating)?.let { due ->
-                    intervalLabel(due.toEpochMilliseconds(), state.now?.toEpochMilliseconds() ?: due.toEpochMilliseconds())
-                }.orEmpty()))
+                appendChild(node("small", text = ratingHints[rb.rating].orEmpty()))
+                appendChild(node("span", text = rb.intervalLabel))
             })
         }
         back.appendChild(node("p", "muted small", "Оценка планирует следующее повторение навыка."))
@@ -1001,15 +1001,8 @@ private fun resolveEffectiveStyleAndContent(state: AppUiState, skillId: String):
     return StyleRegistry.recipes.getValue(effectiveId) to content
 }
 
-// UX4-13: shared with the vocabulary card's rating buttons, not private to this file any more.
-internal fun intervalLabel(dueMillis: Long, nowMillis: Long): String {
-    val minutes = maxOf(1L, (dueMillis - nowMillis + 30_000L) / 60_000L)
-    return when {
-        minutes < 60 -> "$minutes мин"
-        minutes < 2_880 -> "${(minutes + 30) / 60} ч"
-        else -> "${(minutes + 720) / 1_440} дн"
-    }
-}
+// UX4-13: intervalLabel now shared as polski.presentation.intervalLabel (IntervalLabel.kt).
+// The wildcard import `polski.presentation.*` at the top of this file brings it in.
 
 // UC-10 web S2: shared with CardBlocksWeb.kt's block renderers (Table/Contrast/Changes reuse the
 // exact same ending-highlight markup this file has always used), so file-private isn't enough.
