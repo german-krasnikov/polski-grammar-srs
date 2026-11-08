@@ -34,3 +34,11 @@ Stable artifact for independent browser tests: `kotlin/composeApp/build/dist/was
 The tester independently ran `npx vitest run tests/exam-audio-assets.test.ts`: PASS 5/5; `npm run exam:audio:check-paths`: PASS six paths; `npm run exam:audio:check-dist -- <distribution>` on both Wasm and compatibility artifacts: PASS six hashes each. The reviewer read the bounded manifest/preparation/Gradle/path/docs slice and found no blockers. Copying is atomic per file, not a six-file filesystem transaction. No remote availability or publication approval is implied.
 
 Preview transport correction: use Vite preview for media playback, not the earlier Python server. A real range request on the user's port 4190 returned `206 Partial Content`, `Accept-Ranges: bytes`, and exactly 100 requested MP3 bytes. Full byte/hash delivery checks above and seek/progress PlayTests are separate checks; see [EXAM-PLAYTEST-EVIDENCE.md](EXAM-PLAYTEST-EVIDENCE.md).
+
+## CI delivery repair — 2026-11-08
+
+Pages run `42519126770` failed at `prepareExamAudio`: official B1/2017 URL returned HTTP 403. After the owner explicitly approved publishing the six original MP3 copies, prepared release `exam-audio-v1` with `polski-exam-audio-v1.tar`. Archive SHA-256: `1ef043108d29dd238e92edc8aa61736f1c343f170f352674324a8d34f0c5e829`; only six canonical `ExamBin` audio paths are included. This supersedes the earlier absence of publication authorization for these six assets.
+
+The shared local GitHub action `.github/actions/exam-audio` restores this pinned archive in both Pages and Kotlin web CI. Archive verification precedes extraction; existing `prepare --offline` then validates every MP3 against the DSL SHA-256 manifest. There is no successful fake audio fallback or skipped media gate. Local source preparation PASS (six hashes); clean archive restoration, remote release and final Pages results are recorded below after execution.
+
+Delivery repair checks: focused Vitest audio + registry **9/9 PASS**; extraction into a fresh temporary directory followed by the existing offline preparer **PASS**, all six source and staged hashes verified. Independent read-only CI review **APPROVED**. Workflow filters now include the shared action path. Remote upload/deployment remains pending at this checkpoint.

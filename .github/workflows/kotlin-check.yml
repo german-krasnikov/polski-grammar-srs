@@ -13,6 +13,7 @@ on:
       - 'package.json'
       - 'package-lock.json'
       - '.github/workflows/kotlin-check.yml'
+      - '.github/actions/exam-audio/**'
   pull_request:
     paths:
       - 'kotlin/**'
@@ -25,6 +26,7 @@ on:
       - 'package.json'
       - 'package-lock.json'
       - '.github/workflows/kotlin-check.yml'
+      - '.github/actions/exam-audio/**'
   workflow_dispatch:
 
 permissions:
@@ -54,6 +56,8 @@ jobs:
       - name: Run vitest
         run: npm test
         working-directory: .
+      - name: Restore verified exam audio
+        uses: ./.github/actions/exam-audio
       - name: Verify Gradle wrapper JAR
         run: echo '7d3a4ac4de1c32b59bc6a4eb8ecb8e612ccd0cf1ae1e99f66902da64df296172  gradle/wrapper/gradle-wrapper.jar' | sha256sum --check
       - name: List Gradle tasks

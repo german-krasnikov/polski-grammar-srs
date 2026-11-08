@@ -27,6 +27,7 @@ jobs:
           java-version: '21'
       - run: npm ci --no-audit --no-fund
       - run: npm test
+      - uses: ./.github/actions/exam-audio
       - name: Verify Gradle wrapper JAR
         working-directory: kotlin
         run: echo '7d3a4ac4de1c32b59bc6a4eb8ecb8e612ccd0cf1ae1e99f66902da64df296172  gradle/wrapper/gradle-wrapper.jar' | sha256sum --check
