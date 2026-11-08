@@ -347,12 +347,12 @@ private fun renderVerbs(root: HTMLElement, state: AppUiState, dispatch: (AppActi
                 rowHeader = { it.label },
                 columns = listOf(
                     MatrixColumn(
-                        "Настоящее",
+                        polski.presentation.UiCopy.tenseLabel("present"),
                         { it.present ?: courseAspectNoPresent.compact },
                         contrastFrom = { row -> if (row.present == null) null else row.from },
                     ),
-                    MatrixColumn("Прошедшее", { it.past }, contrastFrom = { it.from }),
-                    MatrixColumn("Будущее", { it.future }, contrastFrom = { it.from }),
+                    MatrixColumn(polski.presentation.UiCopy.tenseLabel("past"), { it.past }, contrastFrom = { it.from }),
+                    MatrixColumn(polski.presentation.UiCopy.tenseLabel("future"), { it.future }, contrastFrom = { it.from }),
                 ),
             ).toViewModel(),
         )
@@ -374,7 +374,7 @@ private fun renderVerbs(root: HTMLElement, state: AppUiState, dispatch: (AppActi
 private fun renderEnglishVerbMatrix(root: HTMLElement) {
     val exampleVerbId = "see"
     val exampleLemma = enVerbs.first { it.id == exampleVerbId }.lemma
-    val tenseLabel = mapOf(Tense.PRESENT to "Настоящее", Tense.PAST to "Прошедшее", Tense.FUTURE to "Будущее")
+    fun tenseLabel(t: Tense) = polski.presentation.UiCopy.tenseLabel(t.id)
 
     val section = root.matrixSection("English: лицо × время (\"$exampleLemma\")")
     section.matrixAdd("p", "Формы читаются из forms.generated.json(en) тем же MatrixTableViewModel, что и польские таблицы выше — движок не знает, что это английский.")
@@ -384,7 +384,7 @@ private fun renderEnglishVerbMatrix(root: HTMLElement) {
             rowHeaderLabel = "Кто",
             rowHeader = { it.subject },
             columns = Tense.entries.map { tense ->
-                MatrixColumn(tenseLabel.getValue(tense), { pronoun -> enVerbForm(exampleVerbId, tense, pronoun.id) }, contrastFrom = { exampleLemma })
+                MatrixColumn(tenseLabel(tense), { pronoun -> enVerbForm(exampleVerbId, tense, pronoun.id) }, contrastFrom = { exampleLemma })
             },
         ).toViewModel(),
         lang = "en",
@@ -398,9 +398,9 @@ private fun renderEnglishVerbMatrix(root: HTMLElement) {
             rowHeaderLabel = "Кто",
             rowHeader = { it.subject },
             columns = listOf(
-                MatrixColumn(tenseLabel.getValue(Tense.PRESENT), { pronoun -> enVerbForm("do", Tense.PRESENT, pronoun.id) }, contrastFrom = { "do" }),
-                MatrixColumn(tenseLabel.getValue(Tense.PAST), { pronoun -> enVerbForm("do", Tense.PAST, pronoun.id) }, contrastFrom = { "do" }),
-                MatrixColumn(tenseLabel.getValue(Tense.FUTURE), { "не нужен — только will" }),
+                MatrixColumn(tenseLabel(Tense.PRESENT), { pronoun -> enVerbForm("do", Tense.PRESENT, pronoun.id) }, contrastFrom = { "do" }),
+                MatrixColumn(tenseLabel(Tense.PAST), { pronoun -> enVerbForm("do", Tense.PAST, pronoun.id) }, contrastFrom = { "do" }),
+                MatrixColumn(tenseLabel(Tense.FUTURE), { "не нужен — только will" }),
             ),
         ).toViewModel(),
         lang = "en",

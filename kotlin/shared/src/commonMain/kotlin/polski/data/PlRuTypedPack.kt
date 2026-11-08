@@ -77,5 +77,8 @@ internal object PlRuTypedPack : CoursePackFields {
         "hideTable" to "Скрыть таблицу", "tableAtHand" to "Таблица под рукой",
         "allTablesAndSchema" to "Все таблицы и схема", "whenToReview" to "Когда повторить?",
         "noDueTitle" to "Новых повторений пока нет.", "compareAnswer" to "Сравни свой ответ с эталоном",
+        "lang.pl" to "Польский", "lang.en" to "Английский", "lang.ru" to "Русский",
+        "adverb.pl" to "по-польски", "adverb.en" to "по-английски", "adverb.ru" to "по-русски",
+        "tense.present" to "Настоящее", "tense.past" to "Прошедшее", "tense.future" to "Будущее",
     )
 }

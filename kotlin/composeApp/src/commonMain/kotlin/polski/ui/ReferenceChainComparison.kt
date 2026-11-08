@@ -31,9 +31,9 @@ fun ReferenceAspectComparison(row: ReferenceAspectRow, modifier: Modifier = Modi
     Column(modifier, verticalArrangement = Arrangement.spacedBy(8.dp)) {
         Text(row.label, style = MaterialTheme.typography.titleMedium)
         if (present == null) Text(courseAspectNoPresent.compact)
-        else ReferenceTransitionComparison("Настоящее", row.from, present, null, Modifier)
-        ReferenceTransitionComparison("Прошедшее", row.from, row.past, null, Modifier)
-        ReferenceTransitionComparison("Будущее", row.from, row.future, null, Modifier)
+        else ReferenceTransitionComparison(polski.presentation.UiCopy.tenseLabel("present"), row.from, present, null, Modifier)
+        ReferenceTransitionComparison(polski.presentation.UiCopy.tenseLabel("past"), row.from, row.past, null, Modifier)
+        ReferenceTransitionComparison(polski.presentation.UiCopy.tenseLabel("future"), row.from, row.future, null, Modifier)
     }
 }
 

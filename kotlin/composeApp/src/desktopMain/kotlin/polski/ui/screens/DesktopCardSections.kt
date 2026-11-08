@@ -53,7 +53,10 @@ internal fun CardSectionView(section: CardSection, state: AppUiState, dispatch: 
         is CardSection.AnswerInput -> if (section.mode == AnswerMode.Typed) OutlinedTextField(
             value = section.draft,
             onValueChange = { dispatch(AppAction.EditAnswer(it)) },
-            label = { Text("Ответ по-польски") },
+            label = {
+                val target = polski.data.availableCoursePacks.firstOrNull { it.pairId == polski.data.activeCoursePackId }?.target ?: "pl"
+                Text("Ответ ${polski.presentation.UiCopy.languageAdverb(target)}")
+            },
             modifier = Modifier.fillMaxWidth(),
             minLines = 2,
         )

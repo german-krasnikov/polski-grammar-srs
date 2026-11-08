@@ -207,8 +207,8 @@ fun AndroidRatingDragSurface(
             .semantics {
                 contentDescription = "Оценка карточки"
                 customActions = listOf(
-                    CustomAccessibilityAction("Повторить") { onRate(Rating.Again); true },
-                    CustomAccessibilityAction("Вспомнил") { onRate(Rating.Good); true },
+                    CustomAccessibilityAction(polski.presentation.UiCopy.Again) { onRate(Rating.Again); true },
+                    CustomAccessibilityAction(polski.presentation.UiCopy.Good) { onRate(Rating.Good); true },
                 )
             },
     ) {
@@ -245,7 +245,7 @@ private fun BoxScope.AndroidDragRatingOverlay(progress: Float) {
             shape = RoundedCornerShape(24.dp),
             modifier = Modifier.matchParentSize(),
         ) {}
-        val (label, weight) = if (again >= good) "Повторить" to again else "Вспомнил" to good
+        val (label, weight) = if (again >= good) polski.presentation.UiCopy.Again to again else polski.presentation.UiCopy.Good to good
         if (weight > 0.05f) Text(
             label,
             style = MaterialTheme.typography.headlineSmall,

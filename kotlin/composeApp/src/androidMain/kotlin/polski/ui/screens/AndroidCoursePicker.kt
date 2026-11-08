@@ -15,8 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import polski.data.usableCourseSelections
 
-private val languageLabels = mapOf("pl" to "Польский", "en" to "Английский", "ru" to "Русский")
-private fun languageLabel(code: String): String = languageLabels[code] ?: code
+private fun languageLabel(code: String): String = polski.presentation.UiCopy.languageName(code)
 
 /**
  * EN-22: target/native pickers next to the existing style picker (AndroidStylePicker.kt) — driven

@@ -22,6 +22,10 @@ object UiCopy {
     val WhenToReview: String get() = text("whenToReview")
     val NoDueTitle: String get() = text("noDueTitle")
     val CompareAnswer: String get() = text("compareAnswer")
+
+    fun languageName(code: String): String = text("lang.$code")
+    fun languageAdverb(code: String): String = text("adverb.$code")
+    fun tenseLabel(tense: String): String = text("tense.$tense")
 }
 
 private fun text(key: String): String = packRegistry.active.uiCopy[key] ?: key

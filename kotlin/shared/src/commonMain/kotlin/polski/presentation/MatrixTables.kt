@@ -158,7 +158,7 @@ fun personalPronounsTable(): MatrixTableViewModel {
     ).toViewModel()
 }
 
-private val enTenseLabel = mapOf(Tense.PRESENT to "Настоящее", Tense.PAST to "Прошедшее", Tense.FUTURE to "Будущее")
+private fun enTenseLabel(tense: Tense) = UiCopy.tenseLabel(tense.id)
 
 private fun enVerbForm(verbId: String, tense: Tense, pronounId: String): String =
     polski.data.enVerbForm(verbId, tense, pronounId)
@@ -177,7 +177,7 @@ fun enVerbsTable(verbId: String = "see"): MatrixTableViewModel {
         rowHeaderLabel = "Кто",
         rowHeader = { pronoun -> pronoun.subject },
         columns = Tense.entries.map { tense ->
-            MatrixColumn(enTenseLabel.getValue(tense), { pronoun -> enVerbForm(verbId, tense, pronoun.id) }, contrastFrom = { lemma })
+            MatrixColumn(enTenseLabel(tense), { pronoun -> enVerbForm(verbId, tense, pronoun.id) }, contrastFrom = { lemma })
         },
     ).toViewModel()
 }
@@ -189,9 +189,9 @@ fun enDoSupportTable(): MatrixTableViewModel = MatrixTableEngine.build(
     rowHeaderLabel = "Кто",
     rowHeader = { pronoun -> pronoun.subject },
     columns = listOf(
-        MatrixColumn(enTenseLabel.getValue(Tense.PRESENT), { pronoun -> enVerbForm("do", Tense.PRESENT, pronoun.id) }, contrastFrom = { "do" }),
-        MatrixColumn(enTenseLabel.getValue(Tense.PAST), { pronoun -> enVerbForm("do", Tense.PAST, pronoun.id) }, contrastFrom = { "do" }),
-        MatrixColumn(enTenseLabel.getValue(Tense.FUTURE), { "не нужен — только will" }),
+        MatrixColumn(enTenseLabel(Tense.PRESENT), { pronoun -> enVerbForm("do", Tense.PRESENT, pronoun.id) }, contrastFrom = { "do" }),
+        MatrixColumn(enTenseLabel(Tense.PAST), { pronoun -> enVerbForm("do", Tense.PAST, pronoun.id) }, contrastFrom = { "do" }),
+        MatrixColumn(enTenseLabel(Tense.FUTURE), { "не нужен — только will" }),
     ),
 ).toViewModel()
 

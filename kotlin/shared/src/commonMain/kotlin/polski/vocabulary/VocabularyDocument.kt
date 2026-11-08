@@ -76,7 +76,7 @@ data class StudyDirectionOption(val direction: StudyDirection, val label: String
  *  own target/native course picker already keeps (e.g. `MacPreferencesSession`'s own
  *  `languageDisplayNames`); [studyDirectionOptions] needs the same names to label a direction for
  *  any pack, not just pl-ru's hardcoded two. */
-private val languageDisplayNames = mapOf("pl" to "Польский", "en" to "Английский", "ru" to "Русский")
+private fun languageDisplayName(code: String) = polski.presentation.UiCopy.languageName(code)
 
 /**
  * EnRuAcceptance-2026-09-28.md §7 item 4: the 2 study directions of a pack's own [target]/[native]
@@ -87,7 +87,7 @@ private val languageDisplayNames = mapOf("pl" to "Польский", "en" to "А
  * 2-case list again.
  */
 fun studyDirectionOptions(target: String, native: String): List<StudyDirectionOption> {
-    fun label(from: String, to: String) = "${languageDisplayNames[from] ?: from} → ${(languageDisplayNames[to] ?: to).lowercase()}"
+    fun label(from: String, to: String) = "${languageDisplayName(from)} → ${languageDisplayName(to).lowercase()}"
     return listOf(
         StudyDirectionOption(StudyDirection.nativeToTarget(target, native), label(native, target)),
         StudyDirectionOption(StudyDirection.targetToNative(target, native), label(target, native)),
@@ -96,7 +96,7 @@ fun studyDirectionOptions(target: String, native: String): List<StudyDirectionOp
 
 /** "по-{language}" adverb form ("по-польски", "по-русски", "по-английски") for [recallCaption] —
  *  grounded only in the 3 language codes any pack in this build actually uses. */
-private val languageAdverbs = mapOf("pl" to "польски", "ru" to "русски", "en" to "английски")
+private fun languageAdverb(code: String) = polski.presentation.UiCopy.languageAdverb(code)
 
 /**
  * EnRuAcceptance-2026-09-28.md §7 item 4: whether [this] direction asks the learner to see the
@@ -112,14 +112,14 @@ fun StudyDirection.recallsTarget(target: String, native: String): Boolean = this
  *  produce. */
 fun StudyDirection.recallCaption(target: String, native: String): String {
     val code = if (recallsTarget(target, native)) target else native
-    return "Вспомни по-${languageAdverbs[code] ?: code}"
+    return "Вспомни ${languageAdverb(code)}"
 }
 
 /** Nominative, lowercase name of whichever language [this] direction reveals as the answer —
  *  e.g. "польский" recalling target pl, "русский" recalling native ru. */
 fun StudyDirection.answerLanguageLabel(target: String, native: String): String {
     val code = if (recallsTarget(target, native)) target else native
-    return (languageDisplayNames[code] ?: code).lowercase()
+    return languageDisplayName(code).lowercase()
 }
 
 /**

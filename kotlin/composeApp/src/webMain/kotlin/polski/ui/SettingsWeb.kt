@@ -21,8 +21,7 @@ import polski.presentation.TrainingStore
 /** EnRuAcceptance-2026-09-28.md §7 item 3: a language code's Russian display name for the
  *  target/native pickers — every code [availableCoursePacks] can report today or once a further
  *  pack is registered (matching the macOS/iOS Settings bridges' own `languageDisplayNames`). */
-private val languageDisplayNames: Map<String, String> = mapOf("pl" to "Польский", "en" to "Английский", "ru" to "Русский")
-private fun languageLabel(code: String): String = languageDisplayNames[code] ?: code
+private fun languageLabel(code: String): String = polski.presentation.UiCopy.languageName(code)
 
 @OptIn(kotlin.js.ExperimentalWasmJsInterop::class)
 internal fun renderSettingsWeb(

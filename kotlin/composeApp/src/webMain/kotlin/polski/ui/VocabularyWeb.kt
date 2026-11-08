@@ -37,17 +37,13 @@ private val VOCABULARY_BACKUP_KEY: String get() = "polski-vocabulary-$activeCour
  *  every label below that used to hardcode "польский"/"русский". Lowercase nominative adjective
  *  forms (matching "Эталон · польский"'s own agreement) coincide with the capitalized noun label
  *  for every language this build embeds. */
-private val languageAdjective: Map<String, String> = mapOf("pl" to "польский", "en" to "английский", "ru" to "русский")
-private val languageAdverb: Map<String, String> = mapOf("pl" to "по-польски", "en" to "по-английски", "ru" to "по-русски")
-private val languageBcp47: Map<String, String> = mapOf("pl" to "pl", "en" to "en", "ru" to "ru")
-
 private data class ActivePackLanguages(val targetCode: String, val nativeCode: String) {
-    val targetAdjective get() = languageAdjective[targetCode] ?: targetCode
-    val nativeAdjective get() = languageAdjective[nativeCode] ?: nativeCode
-    val targetAdverb get() = languageAdverb[targetCode] ?: targetCode
-    val nativeAdverb get() = languageAdverb[nativeCode] ?: nativeCode
-    val targetLang get() = languageBcp47[targetCode] ?: targetCode
-    val nativeLang get() = languageBcp47[nativeCode] ?: nativeCode
+    val targetAdjective get() = polski.presentation.UiCopy.languageName(targetCode).lowercase()
+    val nativeAdjective get() = polski.presentation.UiCopy.languageName(nativeCode).lowercase()
+    val targetAdverb get() = polski.presentation.UiCopy.languageAdverb(targetCode)
+    val nativeAdverb get() = polski.presentation.UiCopy.languageAdverb(nativeCode)
+    val targetLang get() = targetCode
+    val nativeLang get() = nativeCode
 }
 
 private fun activePackLanguages(): ActivePackLanguages {

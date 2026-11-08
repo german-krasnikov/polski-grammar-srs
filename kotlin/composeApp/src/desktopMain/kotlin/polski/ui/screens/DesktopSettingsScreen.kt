@@ -151,8 +151,7 @@ private fun styleLabel(id: StyleId): String =
     StyleRegistry.recipes[id]?.label?.get("ru")?.takeIf { it.isNotBlank() } ?: fallbackStyleLabel.getValue(id)
 
 /** EN-22: a language code's Russian display name for the target/native pickers. */
-private val languageDisplayNames: Map<String, String> = mapOf("pl" to "Польский", "en" to "Английский", "ru" to "Русский")
-private fun languageLabel(code: String): String = languageDisplayNames[code] ?: code
+private fun languageLabel(code: String): String = polski.presentation.UiCopy.languageName(code)
 
 @Composable
 private fun SettingsCard(title: String, content: @Composable () -> Unit) {

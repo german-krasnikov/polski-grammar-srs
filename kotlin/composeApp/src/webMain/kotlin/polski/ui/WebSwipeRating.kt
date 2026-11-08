@@ -144,7 +144,7 @@ internal fun installSwipeCard(zone: HTMLElement, faceForTransform: HTMLElement, 
  * copy of this markup.
  */
 internal fun appendSwipeLabels(face: HTMLElement) {
-    listOf("again" to "Повторить", "good" to "Вспомнил").forEach { (kind, label) ->
+    listOf("again" to polski.presentation.UiCopy.Again, "good" to polski.presentation.UiCopy.Good).forEach { (kind, label) ->
         val span = document.createElement("span") as HTMLElement
         span.className = "swipe-label swipe-label-$kind"
         span.textContent = label
