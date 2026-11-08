@@ -148,9 +148,10 @@ class MacVocabularySession(private val directory: String) {
         // (`MacSnapshot.kt`) and the web reference's `VocabularyCodec.preview` usage
         // (`webMain/kotlin/polski/ui/VocabularyWeb.kt`) — only computed once actually revealed,
         // the only phase these buttons are shown in.
-        if (state.revealed && state.currentId != null) {
+        val currentId = state.currentId
+        if (state.revealed && currentId != null) {
             val at = Clock.System.now()
-            val preview = VocabularyCodec.preview(state.document, state.currentId, state.direction, scheduler, at)
+            val preview = VocabularyCodec.preview(state.document, currentId, state.direction, scheduler, at)
             put("now", at.toEpochMilliseconds())
             put("intervals", intervalsJson(preview))
         } else {

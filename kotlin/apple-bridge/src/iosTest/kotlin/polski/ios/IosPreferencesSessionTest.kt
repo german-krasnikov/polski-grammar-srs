@@ -12,7 +12,8 @@ import kotlinx.serialization.json.boolean
 import kotlinx.serialization.json.jsonArray
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
-import polski.data.packRegistry
+import polski.data.activeCoursePackId
+import polski.data.selectActiveCoursePack
 import polski.preferences.PreferencesDecode
 import polski.preferences.UserPreferencesCodec
 import polski.preferences.UserPreferencesV2
@@ -74,7 +75,10 @@ class IosPreferencesSessionTest {
             val session = IosPreferencesSession(defaults)
             val imported = UserPreferencesCodec.encode(UserPreferencesV2(glassTintPercent = 87))
             assertNull(session.importJson(imported))
-            assertEquals("Invalid glassTintPercent", session.importJson(imported.replace("87", "101")))
+            // A byte edit invalidates POLSKI-TEXT's digest before field validation. A valid
+            // legacy v2 document separately checks the range while preserving the import.
+            assertEquals("Invalid POLSKI-TEXT", session.importJson(imported.replace("87", "101")))
+            assertEquals("Invalid glassTintPercent", session.importJson("""{"schemaVersion":2,"glassTintPercent":101}"""))
             assertNull(session.set(field = "appearance", value = "Dark"))
             val saved = assertIs<PreferencesDecode.Loaded>(UserPreferencesCodec.decode(assertNotNull(session.exportJson()))).value
             assertEquals(87, saved.glassTintPercent)
@@ -146,14 +150,14 @@ class IosPreferencesSessionTest {
             })
             assertEquals("Неизвестная пара языков: de-ru", session.set(field = "target", value = "de"))
             assertEquals("pl", session.snapshotString("target"))
-            assertEquals("pl-ru", packRegistry.active.pairId, "a rejected target must not move the active pack")
+            assertEquals("pl-ru", activeCoursePackId, "a rejected target must not move the active pack")
             assertNull(session.set(field = "target", value = "en"))
             assertEquals("en", session.snapshotString("target"))
-            assertEquals("en-ru", packRegistry.active.pairId)
+            assertEquals("en-ru", activeCoursePackId)
             assertNull(session.set(field = "native", value = "ru"))
-            assertEquals("en-ru", packRegistry.active.pairId)
+            assertEquals("en-ru", activeCoursePackId)
         } finally {
-            packRegistry.select("pl-ru")
+            selectActiveCoursePack("pl-ru")
             defaults.removePersistentDomainForName(suite)
         }
     }
@@ -176,9 +180,9 @@ class IosPreferencesSessionTest {
         try {
             val session = IosPreferencesSession(defaults)
             assertNull(session.set(field = "target", value = "en"))
-            assertEquals("en-ru", packRegistry.active.pairId)
+            assertEquals("en-ru", activeCoursePackId)
 
-            packRegistry.select("pl-ru")
+            selectActiveCoursePack("pl-ru")
 
             val snapshot = Json.parseToJsonElement(session.currentSnapshot()).jsonObject
             assertEquals("pl", snapshot.getValue("target").jsonPrimitive.content)
@@ -193,7 +197,7 @@ class IosPreferencesSessionTest {
             assertEquals("pl", restartedSnapshot.getValue("target").jsonPrimitive.content)
             assertEquals("ru", restartedSnapshot.getValue("native").jsonPrimitive.content)
         } finally {
-            packRegistry.select("pl-ru")
+            selectActiveCoursePack("pl-ru")
             defaults.removePersistentDomainForName(suite)
         }
     }
@@ -208,10 +212,10 @@ class IosPreferencesSessionTest {
             defaults.setObject(UserPreferencesCodec.encode(UserPreferencesV2(target = "en", native = "ru")), forKey = "polski-preferences-v2")
             val session = IosPreferencesSession(defaults)
             session.reapplySavedCoursePack()
-            assertEquals("en-ru", packRegistry.active.pairId)
+            assertEquals("en-ru", activeCoursePackId)
             session.currentSnapshot()
         } finally {
-            packRegistry.select("pl-ru")
+            selectActiveCoursePack("pl-ru")
             defaults.removePersistentDomainForName(suite)
         }
     }

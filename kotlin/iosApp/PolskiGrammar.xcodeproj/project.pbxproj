@@ -280,7 +280,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "set -euo pipefail\ncd \"${SRCROOT}/..\"\nif [[ \"${PLATFORM_NAME}\" == \"iphonesimulator\" ]]; then\n  KOTLIN_TARGET=\"IosSimulatorArm64\"\n  KOTLIN_FOLDER=\"iosSimulatorArm64\"\nelse\n  KOTLIN_TARGET=\"IosArm64\"\n  KOTLIN_FOLDER=\"iosArm64\"\nfi\n./gradlew \":shared:linkDebugFramework${KOTLIN_TARGET}\" --console=plain\nrm -rf \"${BUILT_PRODUCTS_DIR}/PolskiShared.framework\"\ncp -R \"shared/build/bin/${KOTLIN_FOLDER}/debugFramework/PolskiShared.framework\" \"${BUILT_PRODUCTS_DIR}/PolskiShared.framework\"\n";
+			shellScript = "set -euo pipefail\ncd \"${SRCROOT}/..\"\nif [[ \"${PLATFORM_NAME}\" == \"iphonesimulator\" ]]; then\n  KOTLIN_TARGET=\"IosSimulatorArm64\"\n  KOTLIN_FOLDER=\"iosSimulatorArm64\"\nelse\n  KOTLIN_TARGET=\"IosArm64\"\n  KOTLIN_FOLDER=\"iosArm64\"\nfi\n./gradlew \":apple-bridge:linkDebugFramework${KOTLIN_TARGET}\" --console=plain\nrm -rf \"${BUILT_PRODUCTS_DIR}/PolskiShared.framework\"\ncp -R \"apple-bridge/build/bin/${KOTLIN_FOLDER}/debugFramework/PolskiShared.framework\" \"${BUILT_PRODUCTS_DIR}/PolskiShared.framework\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

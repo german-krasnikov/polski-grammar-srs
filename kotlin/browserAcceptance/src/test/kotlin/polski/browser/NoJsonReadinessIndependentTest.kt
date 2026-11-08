@@ -27,7 +27,7 @@ internal class NoJsonReadinessIndependentTest {
     @Test
     fun legacyFreshStartWriterFailsBeforeAnyBrowserLaunch() {
         val distribution = fakeDistribution()
-        val repository = worktree.resolve("kotlin/shared/src/commonMain/kotlin/polski/progress/ProgressRepository.kt")
+        val repository = worktree.resolve("kotlin/srs-progress/src/commonMain/kotlin/polski/progress/ProgressRepository.kt")
         Files.createDirectories(repository.parent)
         Files.writeString(repository, "ProgressCodec.encodeLegacyV1(document)")
         val failure = assertThrows(IllegalStateException::class.java) {
@@ -39,7 +39,7 @@ internal class NoJsonReadinessIndependentTest {
     @Test
     fun generatedJsonSourceMapFailsBeforeAnyBrowserLaunch() {
         val distribution = fakeDistribution()
-        val repository = worktree.resolve("kotlin/shared/src/commonMain/kotlin/polski/progress/ProgressRepository.kt")
+        val repository = worktree.resolve("kotlin/srs-progress/src/commonMain/kotlin/polski/progress/ProgressRepository.kt")
         Files.createDirectories(repository.parent)
         Files.writeString(repository, "text-wire save")
         Files.writeString(distribution.root.resolve("composeApp.js.map"), "synthetic map placeholder")
@@ -52,7 +52,7 @@ internal class NoJsonReadinessIndependentTest {
     @Test
     fun applicationJsonMediaTypeInBundleFailsBeforeAnyBrowserLaunch() {
         val distribution = fakeDistribution("application/json")
-        val repository = worktree.resolve("kotlin/shared/src/commonMain/kotlin/polski/progress/ProgressRepository.kt")
+        val repository = worktree.resolve("kotlin/srs-progress/src/commonMain/kotlin/polski/progress/ProgressRepository.kt")
         Files.createDirectories(repository.parent)
         Files.writeString(repository, "text-wire save")
         val failure = assertThrows(IllegalStateException::class.java) {

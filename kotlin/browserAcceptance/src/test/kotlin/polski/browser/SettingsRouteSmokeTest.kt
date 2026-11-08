@@ -134,7 +134,7 @@ internal class SettingsRouteSmokeTest {
 /** Fail closed until the product-wide text-wire transition has removed application JSON. */
 internal object NoJsonReadiness {
     fun require(worktree: Path, distribution: BrowserDistribution) {
-        val repository = worktree.resolve("kotlin/shared/src/commonMain/kotlin/polski/progress/ProgressRepository.kt")
+        val repository = worktree.resolve("kotlin/srs-progress/src/commonMain/kotlin/polski/progress/ProgressRepository.kt")
         check(!Files.readString(repository).contains("ProgressCodec.encodeLegacyV1(document)")) {
             "Old progress writer still emits JSON on fresh browser startup"
         }

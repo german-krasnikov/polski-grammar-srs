@@ -1,0 +1,54 @@
+# P5 `:srs-progress` implementation handoff
+
+Base: detached `c31b8ee` in `/tmp/polski-srs-module-worktree`. Scope and acceptance: [NEXT-SESSION-P5-P8-PLAN.md](NEXT-SESSION-P5-P8-PLAN.md) §P5. This receipt describes the uncommitted isolated worktree; it does not claim integration into the main checkout.
+
+## Source and compatibility
+
+- Added `kotlin/srs-progress/build.gradle.kts` with the existing `polski.kmp-common` target convention, `kotlinx.serialization.json` API dependency, and generated `commonTest` root. Added the module to `kotlin/settings.gradle.kts`.
+- Moved 14 common production files under `polski.{srs,progress,textwire}` and five platform SHA-256 actual files byte for byte from `:shared` into `:srs-progress`. Public packages/signatures and persistence logic were not edited. `:shared` now has `api(project(":srs-progress"))`; Apple bridge has a direct API dependency and framework export for the new module. Host repositories remain in their original source sets.
+- Moved the pure SRS/progress common tests and generated scheduler rows to the module. Moved the Desktop codec test because it checks an `internal` codec helper. Kept the cross-document textwire common tests and generated sealed-fixture tasks in `:shared` to test the compatibility bridge and avoid a dependency on course data from the new module. The NJ05 read-only probe still selects those unchanged shared test sources and their original sealed bytes.
+- Updated `dsl/biome.project`, both derive wrappers, two parity Python commands, the textwire derive wrapper/script, browser acceptance source-path probes, and `kotlin/README.md`. `scripts/inventory-course.mjs` and `scripts/check-course-inventory.mjs` were not altered: their inventory contract covers `:shared` and host paths, not the moved SRS module.
+- Compared 36 moved source/test files with their `HEAD` counterparts: only three generator script comments changed to document the new path. Both pinned Kotlin parity JSON files and the legacy textwire seal have identical bytes to `HEAD`.
+
+## Checks observed in this worktree
+
+All Gradle commands below ran from `/tmp/polski-srs-module-worktree/kotlin`; the Biome command ran from the worktree root. No RED behavior run is claimed for this module extraction: existing semantic oracles supplied the regression baseline; a missing-module compiler error would not be behavioral RED.
+
+| Gate | Command/result |
+|---|---|
+| Module Desktop | `./gradlew :srs-progress:desktopTest` **PASS**; 56 tests, 0 failures in 12 XML suites. |
+| Shared compatibility and web compilation | `./gradlew :shared:desktopTest :srs-progress:compileKotlinJs :srs-progress:compileKotlinWasmJs :composeApp:compileKotlinJs :composeApp:compileKotlinWasmJs` **PASS**; shared Desktop 417 tests, 0 failures. |
+| Real browser test runners | `./gradlew :srs-progress:jsBrowserTest :srs-progress:wasmJsBrowserTest :shared:jsBrowserTest :shared:wasmJsBrowserTest` **PASS**; module 54 JS and 54 Wasm tests, shared 412 JS and 412 Wasm tests, all 0 failures in XML. |
+| Native module | `./gradlew :srs-progress:compileKotlinIosSimulatorArm64` and `./gradlew :srs-progress:macosArm64Test` **PASS**; Mac Native 54 tests, 0 failures. |
+| Android consumer | `ANDROID_HOME=/Users/german/Library/Android/sdk ./gradlew :androidApp:compileDebugKotlin` **PASS**. An earlier attempt using the nonexistent task `compileDebugKotlinAndroid` and an attempt without `ANDROID_HOME` failed at task discovery/SDK setup; neither was a source failure. |
+| Generator | `node /Users/german/Work/Python/biome-dsl/implementations/typescript/packages/biome/src/bin.mjs generate --check --project dsl/biome.project` **PASS**. It warned that the pinned Biome toolchain commit is stale, but compared generated output byte for byte. |
+| Sealed boundary and source probes | `./gradlew :nj05ReadOnlyProbe:verifyNj05ReadOnlySelection :browserAcceptance:test --tests polski.browser.NoJsonReadinessIndependentTest` **PASS**; NJ05 reports four selected read-only classes, 14 tests, two helpers, three sealed fixtures. |
+| Static | `git diff --check` **PASS**; fixture byte comparison **PASS**. |
+
+## Apple baseline blocker and approved repair (M4)
+
+`ANDROID_HOME=/Users/german/Library/Android/sdk ./gradlew :apple-bridge:linkDebugFrameworkMacosArm64 :apple-bridge:linkDebugFrameworkIosSimulatorArm64 :androidApp:compileDebugKotlin` stopped at `:apple-bridge:compileKotlinMacosArm64`. It reported 20 errors: nine `choice` internal-visibility errors in `MacMatrixSnapshot.kt` (lines 38, 68, 69, 70, 71 twice, 72, 151, 165); ten internal shared-helper errors in `MacSnapshot.kt` (lines 24–28, 32, 33, 42, 43, 76); and one cross-module smart-cast error for `state.currentId` in `MacVocabularySession.kt:153`.
+
+To isolate causation, a clean `git archive HEAD` of `c31b8ee` was extracted into `/tmp/polski-p5-baseline-c31b8ee` without modifying the main checkout. From its `kotlin/` directory, `ANDROID_HOME=/Users/german/Library/Android/sdk ./gradlew :apple-bridge:compileKotlinMacosArm64 --console=plain --max-workers=2` **FAIL** with the same 20 diagnostics and paths. The P5 module therefore has no observed Apple compile regression. This was the initial blocker; the approved [Apple bridge repair plan](APPLE-BRIDGE-COMPILE-FIX-PLAN.md) and its observed result follow.
+
+The repair moved the entire Apple-only `SnapshotCommon.kt` from `:shared` to `:apple-bridge` commonMain, retaining package, six `internal` functions and JSON keys. The only logic changes capture `state.progress` and `state.currentId` in local vals to satisfy cross-module smart casts. The bridge declares direct serialization and explicit direct `:shared` and `:srs-progress` framework exports, with no `transitiveExport`. `:shared` export was required by the actual Swift `SwipeDecision` call sites in both hosts. The two checked-in Xcode project build phases now link/copy `:apple-bridge`, matching their canonical Ruby generators.
+
+The Native test source had two old compile gaps exposed after production compilation: Apple host admission tests referenced sealed test helpers generated only for `:shared`, and iOS tests reached `internal` `packRegistry` across the module boundary. A test-only `Sync` task reuses the unchanged `LegacyAdmissionDigest.kt` and the two generated sealed fixture files; iOS tests now call the existing public `activeCoursePackId`/`selectActiveCoursePack` facade with equivalent registered pairs. One iOS preferences test expected a field error after editing a POLSKI-TEXT byte without updating its digest. It now asserts the digest error and separately tests the field-range error with valid legacy JSON. Frozen fixture bytes and hashes were not altered.
+
+Native results from `/tmp/polski-srs-module-worktree/kotlin`:
+
+| Gate | Observed result |
+|---|---|
+| Kotlin Apple compile | `ANDROID_HOME=/Users/german/Library/Android/sdk ./gradlew :apple-bridge:compileKotlinMacosArm64 :apple-bridge:compileKotlinIosSimulatorArm64 --console=plain --max-workers=2` **PASS**. The first post-move attempt had one further `state.progress` smart-cast error; the local val resolved it. |
+| Apple Native tests | `:apple-bridge:macosArm64Test` **PASS 38/38** and `:apple-bridge:iosSimulatorArm64Test` **PASS 43/43**. The initial test compile exposed the two test-boundary gaps above; the first completed iOS run found the stale POLSKI-TEXT expectation, which was corrected before the passing run. |
+| Frameworks | `:apple-bridge:linkDebugFrameworkMacosArm64 :apple-bridge:linkDebugFrameworkIosSimulatorArm64` **PASS**. Both headers contain host session entries, `PolskiSharedSwipeDecision`, `PolskiSharedFsrsScheduler`, `PolskiSharedProgressCodec`, and SRS card types. None exposes the six `SnapshotCommon` helper declarations. |
+| Swift consumers | `xcodebuild -quiet -project kotlin/macosApp/PolskiGrammarMac.xcodeproj -scheme PolskiGrammarMac -configuration Debug -destination 'platform=macOS' -derivedDataPath /tmp/polski-p5-macos-derived CODE_SIGNING_ALLOWED=NO build` **PASS**. Initial Swift compile found missing `SwipeDecision`; direct `:shared` export fixed it. A subsequent compile found `RiveChainCompleteOverlay` already called by the Mac view but absent in its source; the existing iOS implementation was copied into the Mac overlay file. This is a compile bugfix, not new Desktop behavior. |
+| Swift iOS consumer | `xcodebuild -quiet -project kotlin/iosApp/PolskiGrammar.xcodeproj -scheme PolskiGrammar -configuration Debug -destination 'platform=iOS Simulator,id=DCBFB4BA-9CC0-444E-88BA-9217EFE4DA8B' -derivedDataPath /tmp/polski-p5-ios-derived CODE_SIGNING_ALLOWED=NO build` **PASS**. The README's named `iPhone 17 Pro` destination was unavailable locally; the installed simulator ID was used. First Swift compile found a stored `tabBarItems` initializer referring to `model` before `self`; it is now a computed property. |
+| Xcode artifact routing | The framework header copied to each DerivedData product has the same SHA-256 as its respective `apple-bridge/build/bin/.../PolskiShared.h`. No `:shared:linkDebugFramework` or `shared/build/bin` remains in either checked-in `.pbxproj`. |
+| Regeneration and other consumers | Biome `generate --check` **PASS** after repair (same stale toolchain pin warning); `:shared:desktopTest :composeApp:compileKotlinJs :composeApp:compileKotlinWasmJs` **PASS** after the adapter move. A repeat of the shared JS/Wasm browser tests was interrupted after Karma stayed active without output for several minutes; the earlier pre-repair 412/412 per target PASS remains recorded above, and the post-repair web compile passed. Independent tester should rerun the affected browser tests if that distinction matters to its gate. |
+
+Swift simulator/device execution and physical device runs: **NOT RUN**. Both Swift app builds and Kotlin Native tests did run. Desktop received only source/build repairs for already-referenced UI and no new feature.
+
+## Main checkout integration — 2026-11-08
+
+After independent tester acceptance and reviewer APPROVED, the coordinator applied the P5 source moves and Apple fixes to the main checkout, preserving the simultaneous six-exam work. Only the scheduler output path was merged into the current `dsl/biome.project`; exam generation rows were retained. Root `biome generate --check --project dsl/biome.project` **PASS** (`/tmp/polski-p5-main-generate-check.log`). From main `kotlin/`, `./gradlew :srs-progress:desktopTest :shared:desktopTest :composeApp:compileKotlinJs :composeApp:compileKotlinWasmJs --console=plain --max-workers=2` **PASS**: module 56/56, shared 423/423 (includes current exam tests), both web targets compile; 24 tasks executed, 17 up-to-date (`/tmp/polski-p5-main-integration.log`). `git diff --check` **PASS**. Native build evidence above remains tied to the reviewed isolated P5 source; no main native UI execution is claimed. Independent browser acceptance of the new six-exam artifact is a separate ongoing task.

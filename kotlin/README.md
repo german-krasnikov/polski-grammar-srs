@@ -13,7 +13,7 @@ This directory contains the Kotlin Multiplatform implementation for browser, Mac
 ```sh
 cd kotlin
 ./gradlew tasks --all
-./gradlew :shared:jsBrowserTest :shared:wasmJsBrowserTest
+./gradlew :srs-progress:jsBrowserTest :srs-progress:wasmJsBrowserTest :shared:jsBrowserTest :shared:wasmJsBrowserTest
 ./gradlew :composeApp:compileKotlinJs :composeApp:compileKotlinWasmJs
 ./gradlew :composeApp:composeCompatibilityBrowserDistribution
 node ../node_modules/vite/bin/vite.js preview --host 127.0.0.1 --port 8765 --strictPort --outDir composeApp/build/dist/composeWebCompatibility/productionExecutable
@@ -31,11 +31,13 @@ From the repository root, `npm run exam:audio:check-paths` checks that the six e
 
 ## Progress migration contract (work in progress)
 
+Pure scheduling, progress documents, repository ports, and the POLSKI-TEXT codec live in `:srs-progress` (`srs-progress/src/commonMain/kotlin/polski/{srs,progress,textwire}`). `:shared` exports that module with an `api` dependency so existing host imports and storage adapters retain their package names. Platform repositories and lifecycle ownership remain in their host modules. The pinned progress and scheduler parity tests and generated scheduler rows live in `srs-progress/src/commonTest/`; the cross-document textwire admission tests remain in `:shared` and continue to exercise its compatibility bridge.
+
 The browser adapter is `WebProgressRepository(scheduler)` and `BrowserLocalDayProvider` in `composeApp/src/webMain/kotlin/polski/platform/`. It keeps the React key `polski-grammar-srs-v1` read-only and writes only the separate `polski-grammar-srs-kmp-preview-v1` key. The raw legacy backup is `polski-grammar-srs-kmp-legacy-backup-v1`; successful migration is recorded in `polski-grammar-srs-kmp-migrated-v1`.
 
 Call `load()` before creating or writing progress. `Missing` permits a fresh preview; `LegacyAvailable(raw)` requires an explicit user migration action. `RecoveryRequired`, `Invalid`, `Unsupported`, and `Unavailable` require recovery instead of a fresh write. `migrateLegacy(at, localDay, skillIds)` saves and verifies the exact raw backup, validates the v1 document, completes missing known skills, writes and reads back the preview, then writes the marker. An interrupted migration can resume without changing the React key. A failed `save` leaves the current in-memory document available for `ProgressCodec.encodeLegacyV1(document)` export. The browser UI offers an explicit retry after a partial migration and keeps raw JSON export available during recovery. A current Kotlin export has been loaded in the React baseline in desktop browser tests; device and independent parity gates remain open, so this preview is not a production cutover.
 
-The [20-case progress ledger](../Plans/Kotlin/ProgressParity.md) lists fixture replay evidence and intentional safety differences from React. After changing `tests/fixtures/kotlin-parity/progress.json`, regenerate its Kotlin midnight/import assertions from the repository root with `python3 kotlin/shared/src/commonTest/kotlin/polski/progress/generate_parity.py`, then run the shared JS/Wasm browser tests. The generated source is `shared/src/commonTest/kotlin/polski/progress/ProgressFixtureParityTest.kt`.
+The [20-case progress ledger](../Plans/Kotlin/ProgressParity.md) lists fixture replay evidence and intentional safety differences from React. After changing `tests/fixtures/kotlin-parity/progress.json`, regenerate its Kotlin midnight/import assertions from the repository root with `python3 kotlin/srs-progress/src/commonTest/kotlin/polski/progress/generate_parity.py`, then run the shared JS/Wasm browser tests. The generated source is `srs-progress/src/commonTest/kotlin/polski/progress/ProgressFixtureParityTest.kt`.
 
 The vocabulary mode uses a separate browser key, `polski-vocabulary-pl-ru-v1`. It keeps selected words, custom entries and FSRS cards for `ru-pl` and `pl-ru` independently, without altering the grammar-progress migration keys. The React and Kotlin web previews can read the same vocabulary JSON layout; localStorage still belongs to each browser origin. The first course includes 32 prepared cards and a 1,000-lemma discovery list, so most frequency entries are not yet selectable. Local Mac, Android and iOS hosts now expose the same vocabulary document, two review directions, editor and JSON import/export; mobile simulator and assistive-technology gates are tracked in [CoursePacksPlan.md](../Plans/Kotlin/CoursePacksPlan.md).
 
@@ -55,7 +57,7 @@ The native Mac application is `macosApp/PolskiGrammarMac.xcodeproj`: a standard 
 
 ```sh
 ./gradlew :composeApp:run
-./gradlew :shared:desktopTest :composeApp:desktopTest
+./gradlew :srs-progress:desktopTest :shared:desktopTest :composeApp:desktopTest
 ./gradlew :composeApp:packageDmg
 ```
 
@@ -89,17 +91,19 @@ The **Слова** tab keeps `vocabulary-v1.json` in app-private storage, separa
 
 ## iPhone and iPad development preview
 
-`iosApp/PolskiGrammar.xcodeproj` is a native SwiftUI application. It links the `PolskiShared` Kotlin framework directly; its Xcode build phase runs the matching iOS device or Apple Silicon simulator Gradle target. The shared session supplies immutable screen snapshots and semantic actions. iOS keeps its own app-private v1 progress; use **Экспортировать JSON** and **Импортировать JSON** to transfer a browser or Android save. Import validates before replacement and keeps a backup of the previous native document.
+`iosApp/PolskiGrammar.xcodeproj` is a native SwiftUI application. It links `PolskiShared` from `:apple-bridge`; its Xcode build phase runs the matching iOS device or Apple Silicon simulator Gradle framework task. The shared session supplies immutable screen snapshots and semantic actions. iOS keeps its own app-private v1 progress; use **Экспортировать JSON** and **Импортировать JSON** to transfer a browser or Android save. Import validates before replacement and keeps a backup of the previous native document.
 
 The SwiftUI **Слова** tab keeps an independent vocabulary document with two directions and editable personal words. It uses its own JSON file importer/exporter; after reveal, swipe left/right or use the two rating buttons. The Kotlin session alone calculates the two FSRS schedules.
 
-With Xcode 27 and its license accepted, build and test on an Apple Silicon Mac from the repository root:
+With Xcode 27 and its license accepted, run the Kotlin Native tests and build the Swift app on an Apple Silicon Mac from the repository root:
 
 ```sh
 cd kotlin
-./gradlew :shared:iosSimulatorArm64Test
+./gradlew :srs-progress:compileKotlinIosSimulatorArm64 :apple-bridge:iosSimulatorArm64Test
 cd ..
-xcodebuild -project kotlin/iosApp/PolskiGrammar.xcodeproj -scheme PolskiGrammar -configuration Debug -destination 'platform=iOS Simulator,name=iPhone 17 Pro' -derivedDataPath kotlin/iosApp/build CODE_SIGNING_ALLOWED=NO test
+xcodebuild -project kotlin/iosApp/PolskiGrammar.xcodeproj -scheme PolskiGrammar -configuration Debug -destination 'generic/platform=iOS Simulator' -derivedDataPath kotlin/iosApp/build CODE_SIGNING_ALLOWED=NO build
 ```
+
+To run Swift UI tests, select an installed simulator from `xcodebuild -showdestinations -project kotlin/iosApp/PolskiGrammar.xcodeproj -scheme PolskiGrammar` and use its destination with `xcodebuild test`; a generic build destination cannot run tests.
 
 Open `kotlin/iosApp/PolskiGrammar.xcodeproj` in Xcode to run on a simulator or a signed physical device. For a connected device, select the active Apple Development team in Xcode, or build from the repository root with `xcodebuild -project kotlin/iosApp/PolskiGrammar.xcodeproj -scheme PolskiGrammar -configuration Debug -destination 'platform=iOS,id=<device-udid>' -derivedDataPath kotlin/iosApp/build -allowProvisioningUpdates DEVELOPMENT_TEAM=<team-id> build`. Install the resulting `kotlin/iosApp/build/Build/Products/Debug-iphoneos/PolskiGrammar.app` with `xcrun devicectl device install app --device <device-udid> <app-path>`, then launch `dev.polski.grammarmatrix.ios` with `xcrun devicectl device process launch --device <device-udid> dev.polski.grammarmatrix.ios`. The source project can be regenerated with `arch -arm64 ruby kotlin/iosApp/generate_project.rb` if the local `xcodeproj` Ruby gem is installed. Current simulator, device and parity evidence is tracked in [iOS.md](../Plans/Kotlin/iOS.md).

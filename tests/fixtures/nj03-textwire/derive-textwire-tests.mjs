@@ -7,7 +7,7 @@ const root = resolve(import.meta.dirname, '..', '..', '..');
 
 export const OUT = join(
   root,
-  'kotlin/shared/src/desktopTest/kotlin/polski/textwire/PolskiTextCodecTest.kt',
+  'kotlin/srs-progress/src/desktopTest/kotlin/polski/textwire/PolskiTextCodecTest.kt',
 );
 
 export async function generate() {

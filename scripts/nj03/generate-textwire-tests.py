@@ -11,7 +11,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 POS  = ROOT / "tests/fixtures/textwire/positive.cases"
 NEG  = ROOT / "tests/fixtures/textwire/negative.cases"
-KT   = ROOT / "kotlin/shared/src/desktopTest/kotlin/polski/textwire/PolskiTextCodecTest.kt"
+KT   = ROOT / "kotlin/srs-progress/src/desktopTest/kotlin/polski/textwire/PolskiTextCodecTest.kt"
 
 START = "        // --- GENERATED START: do not edit, run scripts/nj03/generate-textwire-tests.py ---"
 END   = "        // --- GENERATED END ---"

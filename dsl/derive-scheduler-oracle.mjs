@@ -1,4 +1,4 @@
-// Derive: the Kotlin scheduler-oracle test, printed by kotlin/shared/src/commonTest/kotlin/polski/srs/generate_parity.py --print from the pinned ts-fsrs 5.4.2 fixture
+// Derive: the Kotlin scheduler-oracle test, printed by kotlin/srs-progress/src/commonTest/kotlin/polski/srs/generate_parity.py --print from the pinned ts-fsrs 5.4.2 fixture
 // (tests/fixtures/kotlin-parity/scheduler.json). The Python script is the one source of the rule: run without --print it writes the same text to the checked-in Kotlin test, so this wrapper lets
 // `biome generate --check` catch a drift between the fixture and that file instead of relying on someone to rerun the script by hand.
 // It returns the text and writes nothing: `biome generate` writes OUT (generate) or compares it with the file (--check).
@@ -6,7 +6,7 @@ import { spawnSync } from 'node:child_process';
 import { resolve } from 'node:path';
 
 const root = resolve(import.meta.dirname, '..');
-const dir = resolve(root, 'kotlin/shared/src/commonTest/kotlin/polski/srs');
+const dir = resolve(root, 'kotlin/srs-progress/src/commonTest/kotlin/polski/srs');
 export const OUT = resolve(dir, 'SchedulerOracleTest.kt');
 const SCRIPT = resolve(dir, 'generate_parity.py');
 

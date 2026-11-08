@@ -46,3 +46,17 @@ struct RiveEffectOverlay: View {
         }
     }
 }
+
+/// The completion screen already mounts this view. Keep its animation source in the generated
+/// Rive table, matching the iOS host's existing one-shot presentation.
+struct RiveChainCompleteOverlay: View {
+    private let viewModel = RiveViewModel(
+        fileName: RiveEffects.chainComplete.asset,
+        animationName: RiveEffects.chainComplete.animation,
+        artboardName: RiveEffects.chainComplete.artboard
+    )
+
+    var body: some View {
+        viewModel.view().allowsHitTesting(false).accessibilityHidden(true)
+    }
+}

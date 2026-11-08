@@ -1,7 +1,7 @@
 """Generate direct Kotlin progress transitions from the pinned React parity fixture.
 
 Run from the repository root:
-    python3 kotlin/shared/src/commonTest/kotlin/polski/progress/generate_parity.py
+    python3 kotlin/srs-progress/src/commonTest/kotlin/polski/progress/generate_parity.py
 """
 
 import json

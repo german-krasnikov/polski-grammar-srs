@@ -19,8 +19,8 @@ import polski.training.sentenceSeeds
 /**
  * W3.2 (architect finding #5): [AppUiState]-to-JSON glue that iOS's `snapshot()` (`IosSnapshot.kt`)
  * and macOS's `snapshot()` (`MacSnapshot.kt`) used to each re-type byte for byte. None of this is
- * platform-specific — the wire shape here is identical on both hosts — so it lives once, in
- * commonMain, and each host's own `snapshot()` just calls into it. Platform-specific pieces
+ * platform-specific — the wire shape here is identical on both hosts — so it lives once in
+ * apple-bridge commonMain, and each host's own `snapshot()` just calls into it. Platform-specific pieces
  * (`styleBlocksSnapshot`'s field names, `matrixSnapshot`, the per-hack status key) stay in each
  * host file, because those really do differ by host.
  */
@@ -145,9 +145,10 @@ internal fun exerciseJson(state: AppUiState): JsonElement = state.exercise?.let 
 
 /** "progress"/"totalReviews": identical on every host, read straight off [AppUiState.progress]. */
 internal fun JsonObjectBuilder.putProgressFields(state: AppUiState) {
-    put("progress", JsonArray(state.progress?.cards?.mapNotNull { card ->
+    val progress = state.progress
+    put("progress", JsonArray(progress?.cards?.mapNotNull { card ->
         val skill = skills.firstOrNull { it.id == card.skillId } ?: return@mapNotNull null
-        val stats = state.progress.stats[card.skillId]
+        val stats = progress.stats[card.skillId]
         buildJsonObject {
             put("id", skill.id); put("title", skill.title); put("group", skill.group)
             put("reviews", stats?.reviews ?: 0); put("correct", stats?.correct ?: 0)

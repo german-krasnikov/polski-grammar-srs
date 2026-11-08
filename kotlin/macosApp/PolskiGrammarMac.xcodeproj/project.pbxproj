@@ -207,7 +207,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "set -euo pipefail\ncd \"${SRCROOT}/..\"\nif [[ \"${ARCHS}\" != *arm64* ]]; then\n  echo \"Only macosArm64 is verified; Intel requires a separate Kotlin target\" >&2\n  exit 1\nfi\n./gradlew :shared:linkDebugFrameworkMacosArm64 --console=plain\nrm -rf \"${BUILT_PRODUCTS_DIR}/PolskiShared.framework\"\ncp -R \"shared/build/bin/macosArm64/debugFramework/PolskiShared.framework\" \"${BUILT_PRODUCTS_DIR}/PolskiShared.framework\"\n";
+			shellScript = "set -euo pipefail\ncd \"${SRCROOT}/..\"\nif [[ \"${ARCHS}\" != *arm64* ]]; then\n  echo \"Only macosArm64 is verified; Intel requires a separate Kotlin target\" >&2\n  exit 1\nfi\n./gradlew :apple-bridge:linkDebugFrameworkMacosArm64 --console=plain\nrm -rf \"${BUILT_PRODUCTS_DIR}/PolskiShared.framework\"\ncp -R \"apple-bridge/build/bin/macosArm64/debugFramework/PolskiShared.framework\" \"${BUILT_PRODUCTS_DIR}/PolskiShared.framework\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

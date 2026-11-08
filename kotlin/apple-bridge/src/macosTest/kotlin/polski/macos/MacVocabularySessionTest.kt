@@ -2,6 +2,7 @@ package polski.macos
 
 import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonNull
 import kotlinx.serialization.json.jsonArray
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
@@ -67,6 +68,24 @@ class MacVocabularySessionTest {
             CFRunLoopRunInMode(kCFRunLoopDefaultMode, 0.02, true)
         }
         error("select never landed a due currentId")
+    }
+
+    @Test
+    fun intervalPreviewRequiresRevealedCurrentCard() = withSession { session ->
+        val empty = state(session)
+        assertEquals(JsonNull, empty.getValue("currentId"))
+        assertEquals(JsonNull, empty.getValue("now"))
+        assertEquals(JsonNull, empty.getValue("intervals"))
+
+        session.dispatch("reveal")
+        assertEquals(JsonNull, state(session).getValue("intervals"))
+
+        selectWord(session)
+        assertEquals(JsonNull, state(session).getValue("intervals"))
+        session.dispatch("reveal")
+        val revealed = state(session)
+        assertTrue(revealed.getValue("now") != JsonNull)
+        assertTrue(revealed.getValue("intervals") != JsonNull)
     }
 
     @Test

@@ -205,6 +205,7 @@ kotlin {
             // engine now (polski.core.PlEngine.kt) — api so hosts (:composeApp/:androidApp) can
             // build ports (RandomSource/ExerciseIdFactory) against :core-engine's own types.
             api(project(":core-engine"))
+            api(project(":srs-progress"))
         }
         commonTest.dependencies {
             implementation(kotlin("test"))

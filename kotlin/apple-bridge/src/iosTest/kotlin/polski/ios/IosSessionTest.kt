@@ -6,12 +6,12 @@ import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.jsonArray
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 import platform.CoreFoundation.CFRunLoopRunInMode
 import platform.CoreFoundation.kCFRunLoopDefaultMode
 import platform.Foundation.NSUserDefaults
-import polski.data.packRegistry
 import polski.data.selectActiveCoursePack
 
 /**
@@ -19,6 +19,24 @@ import polski.data.selectActiveCoursePack
  * already persisted in defaults, the same way both preferences are re-applied after import.
  */
 class IosSessionTest {
+    @Test
+    fun lifehackSnapshotKeepsIosStatusLabel() {
+        val suite = "polski-ios-lifehack-wire-${Random.nextLong()}"
+        val defaults = assertNotNull(NSUserDefaults(suiteName = suite))
+        defaults.removePersistentDomainForName(suite)
+        val session = IosSession(defaults)
+        try {
+            val groups = Json.parseToJsonElement(session.currentSnapshot()).jsonObject
+                .getValue("lifehackGroups").jsonArray
+            val hack = groups.flatMap { it.jsonObject.getValue("lifehacks").jsonArray }.first().jsonObject
+            assertTrue("statusLabel" in hack)
+            assertTrue("status" !in hack)
+        } finally {
+            session.close()
+            defaults.removePersistentDomainForName(suite)
+        }
+    }
+
     @Test
     fun tabCommandPreservesInvalidInputsAndResetsMatrixOnlyOnReentry() {
         val suite = "polski-ios-tab-wire-${Random.nextLong()}"
@@ -96,7 +114,7 @@ class IosSessionTest {
             session.currentSnapshot() // mirrors AppModel.init()'s explicit call after reapply
             session.close()
         } finally {
-            packRegistry.select("pl-ru")
+            selectActiveCoursePack("pl-ru")
             defaults.removePersistentDomainForName(suite)
         }
     }

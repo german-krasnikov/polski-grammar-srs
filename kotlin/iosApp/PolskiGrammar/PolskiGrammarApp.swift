@@ -438,12 +438,12 @@ struct PolskiGrammarApp: App {
     // transition this drives is always keyed by the switch that is actually happening.
     @State private var pagingEdge: Edge = .trailing
     private let tabOrder = ["Training", "Matrix", "Progress", "Vocabulary"]
-    private let tabBarItems = [
+    private var tabBarItems: [TabBarItem] { [
         TabBarItem(tag: "Training", title: "Тренировка", icon: "square.stack"),
         TabBarItem(tag: "Matrix", title: "Матрица", icon: "tablecells"),
         TabBarItem(tag: "Progress", title: uiText(model.state, "uiProgressTab", fallback: "Прогресс"), icon: "chart.bar"),
         TabBarItem(tag: "Vocabulary", title: "Слова", icon: "character.book.closed"),
-    ]
+    ] }
 
     var body: some Scene {
         WindowGroup {

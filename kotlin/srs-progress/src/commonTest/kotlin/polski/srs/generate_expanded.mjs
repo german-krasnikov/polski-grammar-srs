@@ -1,4 +1,4 @@
-// Pin: installed ts-fsrs 5.4.2. Run from repository root with node kotlin/shared/src/commonTest/kotlin/polski/srs/generate_expanded.mjs
+// Pin: installed ts-fsrs 5.4.2. Run from repository root with node kotlin/srs-progress/src/commonTest/kotlin/polski/srs/generate_expanded.mjs
 import { createEmptyCard, fsrs, Rating } from 'ts-fsrs';
 import { readFileSync, writeFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';

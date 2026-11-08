@@ -1,7 +1,7 @@
 """Regenerate Kotlin oracle assertions from pinned React scheduler fixture.
 
 Source: tests/fixtures/kotlin-parity/scheduler.json, generated against ts-fsrs 5.4.2.
-Run from repository root: python3 kotlin/shared/src/commonTest/kotlin/polski/srs/generate_parity.py
+Run from repository root: python3 kotlin/srs-progress/src/commonTest/kotlin/polski/srs/generate_parity.py
 """
 import json
 import sys
