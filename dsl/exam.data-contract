@@ -1,0 +1,87 @@
+DSL 1
+# Exam preparation modules: listening, reading, grammar and writing tasks for any language exam
+# (Certyfikat Polski, IELTS, DELF, TestDaF, etc.). Provider and targetLanguage are open strings
+# so a new exam board is added as data, not a contract edit. See Plans/Architecture/EXAM-MODULES-PLAN.md.
+
+RECORD ExamRow KEY examId COUNT 1..
+  examId: string
+  provider: string
+  targetLanguage: string
+  level: string
+  year: int OPTIONAL
+  sourceUrl: string OPTIONAL
+  license: string OPTIONAL
+END
+
+# Listening: one audio file per exam, each task plays a segment (startMs..endMs).
+RECORD ListeningTaskRow KEY taskId COUNT 1..
+  taskId: string
+  examRef: ref ExamRow
+  taskNumber: int
+  audioUrl: string
+  segmentStartMs: int
+  segmentEndMs: int
+  instruction: string
+END
+
+RECORD ListeningQuestionRow KEY questionId COUNT 1..
+  questionId: string
+  taskRef: ref ListeningTaskRow
+  questionType: enum multiple_choice|true_false|fill_gap|match
+  questionText: string
+  options: string OPTIONAL
+  correctAnswer: string
+  points: int
+END
+
+# Reading: passages with questions; paragraphs derived from text by blank-line split.
+RECORD ReadingPassageRow KEY passageId COUNT 1..
+  passageId: string
+  examRef: ref ExamRow
+  taskNumber: int
+  title: string OPTIONAL
+  source: string OPTIONAL
+  instruction: string
+  text: string
+END
+
+RECORD ReadingQuestionRow KEY questionId COUNT 1..
+  questionId: string
+  passageRef: ref ReadingPassageRow
+  questionType: enum multiple_choice|true_false_not_given|match_heading|fill_gap|short_answer
+  questionText: string
+  options: string OPTIONAL
+  correctAnswer: string
+  points: int
+  relevantParagraph: int OPTIONAL
+END
+
+# Grammar: structured tests with items of various types.
+RECORD GrammarTestRow KEY testId COUNT 1..
+  testId: string
+  examRef: ref ExamRow
+  taskNumber: int
+  instruction: string
+END
+
+RECORD GrammarItemRow KEY itemId COUNT 1..
+  itemId: string
+  testRef: ref GrammarTestRow
+  questionType: enum choose_form|fill_gap|transform|word_formation
+  context: string
+  gap: string OPTIONAL
+  options: string OPTIONAL
+  correctAnswer: string
+  points: int
+END
+
+# Writing: prompts with genre and optional word limit.
+RECORD WritingTaskRow KEY taskId COUNT 1..
+  taskId: string
+  examRef: ref ExamRow
+  taskNumber: int
+  instruction: string
+  promptText: string
+  wordLimit: int OPTIONAL
+  genre: enum letter|description|argument|essay
+END
