@@ -2,7 +2,6 @@ package polski.ui.screens
 
 import androidx.compose.foundation.focusable
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.background
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
@@ -18,8 +17,6 @@ import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -27,7 +24,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.key.Key
 import androidx.compose.ui.input.key.KeyEventType
 import androidx.compose.ui.input.key.isAltPressed
@@ -38,35 +34,21 @@ import androidx.compose.ui.input.key.onKeyEvent
 import androidx.compose.ui.input.key.type
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.style.TextDecoration
-import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import polski.data.nounById
 import polski.data.courseChainPresentation
-import polski.presentation.chainDisplayCount
 import polski.data.skillById
-import polski.data.presentationBySkillId
 import polski.data.skills
-import polski.presentation.AnswerMode
 import polski.presentation.AppAction
 import polski.presentation.AppUiState
 import polski.presentation.CardPhase
+import polski.presentation.HotKey
 import polski.presentation.LoadStatus
 import polski.presentation.TrainingMode
-import polski.presentation.ChangeSide
-import polski.presentation.StaticPackLifehackProvider
 import polski.presentation.StyleId
-import polski.presentation.UiCopy
-import polski.presentation.changeHighlightParts
-import polski.presentation.sentenceHighlightParts
-import polski.srs.Rating
+import polski.presentation.trainingCardModel
 import polski.training.sentenceSeeds
-import polski.ui.contrastAnnotatedText
-
 
 @Composable
 internal fun TabButton(label: String, selected: Boolean, onClick: () -> Unit) {
@@ -91,20 +73,24 @@ internal fun RecoveryScreen(state: AppUiState, export: () -> Unit) {
     }
 }
 
+/** W2.2: renders `TrainingCardModel.trainingCardModel(state)` — see `CardSectionView` for the
+ *  front/back section renderer and `DesktopBlockView` (`DesktopStyleBlocks.kt`) for the
+ *  per-[polski.presentation.Block] visuals a [CardSection.Styled] entry carries. */
 @Composable
 internal fun TrainingScreen(state: AppUiState, dispatch: (AppAction) -> Unit, focusReveal: FocusRequester, formatDate: (Long) -> String) {
     val cardFocus = remember { FocusRequester() }
-    val introducing = state.phase == CardPhase.Question && state.introPending
+    val model = trainingCardModel(state)
     LaunchedEffect(state.phase, state.exerciseId) {
         if (state.phase == CardPhase.Revealed) runCatching { cardFocus.requestFocus() }
     }
     Column(verticalArrangement = Arrangement.spacedBy(14.dp)) {
         Row(Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            TabButton("Цепочка предложений", state.mode == TrainingMode.Chain) { dispatch(AppAction.StartChain()) }
-            TabButton("По расписанию · ${state.dueCount}", state.mode == TrainingMode.Schedule) { dispatch(AppAction.StartSchedule) }
-            TabButton("Отдельный навык", state.mode == TrainingMode.Focused) { dispatch(AppAction.OpenSkillPicker) }
-            OutlinedButton(onClick = { dispatch(AppAction.ToggleReference) }, enabled = !introducing) {
-                Text(if (!introducing && state.showReference) "Скрыть таблицу" else "Таблица под рукой")
+            model.header.modes.forEach { option ->
+                val label = if (option.mode == TrainingMode.Schedule) "${option.label} · ${model.header.dueCount}" else option.label
+                TabButton(label, model.header.selected == option.mode) { dispatch(option.action) }
+            }
+            OutlinedButton(onClick = { dispatch(AppAction.ToggleReference) }, enabled = model.referenceToggle.enabled) {
+                Text(model.referenceToggle.label)
             }
         }
         if (state.showSkillPicker) {
@@ -128,35 +114,29 @@ internal fun TrainingScreen(state: AppUiState, dispatch: (AppAction) -> Unit, fo
                     }
                 }
             }
-            val displayCount = state.chainDisplayCount
-            Text("$displayCount / ${state.chain.size} · ${courseChainPresentation.summary}", color = MaterialTheme.colorScheme.onSurfaceVariant)
-            LinearProgressIndicator(
-                progress = { displayCount.toFloat() / state.chain.size.coerceAtLeast(1) },
-                modifier = Modifier.fillMaxWidth(),
-            )
+            model.chainProgress?.let { progress ->
+                Text("${progress.displayCount} / ${progress.total} · ${progress.summary}", color = MaterialTheme.colorScheme.onSurfaceVariant)
+                LinearProgressIndicator(
+                    progress = { progress.displayCount.toFloat() / progress.total.coerceAtLeast(1) },
+                    modifier = Modifier.fillMaxWidth(),
+                )
+            }
         }
         Card(Modifier.fillMaxWidth().focusRequester(cardFocus).focusable().onKeyEvent { event ->
             if (event.type != KeyEventType.KeyDown || event.isAltPressed || event.isCtrlPressed || event.isMetaPressed) {
                 return@onKeyEvent false
             }
-            val exerciseId = state.exerciseId ?: return@onKeyEvent false
-            if (state.phase == CardPhase.Question && state.introPending && event.key == Key.Spacebar) {
-                dispatch(AppAction.ContinueIntroduction)
-                true
-            } else if (state.phase == CardPhase.Question && !state.introPending && state.answerMode == AnswerMode.Oral && event.key == Key.Spacebar) {
-                dispatch(AppAction.Reveal(exerciseId))
-                true
-            } else if (state.phase == CardPhase.Revealed) {
-                val rating = when (event.key) {
-                    Key.One -> Rating.Again
-                    Key.Two -> Rating.Good
-                    else -> null
-                }
-                if (rating == null) false else {
-                    dispatch(AppAction.Rate(exerciseId, rating))
-                    true
-                }
-            } else false
+            val hotKey = when (event.key) {
+                Key.Spacebar -> HotKey.Space
+                Key.One -> HotKey.Digit1
+                Key.Two -> HotKey.Digit2
+                Key.DirectionLeft -> HotKey.ArrowLeft
+                Key.DirectionRight -> HotKey.ArrowRight
+                else -> null
+            }
+            val action = hotKey?.let(model.hotkeys::get) ?: return@onKeyEvent false
+            dispatch(action)
+            true
         }, shape = RoundedCornerShape(24.dp),
             colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainer),
             border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline)) {
@@ -170,14 +150,12 @@ internal fun TrainingScreen(state: AppUiState, dispatch: (AppAction) -> Unit, fo
                     }
                     CardPhase.NoDue -> {
                         Text("Повторения на сейчас завершены", style = MaterialTheme.typography.headlineSmall)
-                        Text(state.nextDue?.let { "Следующее: ${formatDate(it.toEpochMilliseconds())}" } ?: UiCopy.NoDueTitle)
+                        Text(state.nextDue?.let { "Следующее: ${formatDate(it.toEpochMilliseconds())}" } ?: "Новых повторений пока нет.")
                         Button(onClick = { dispatch(AppAction.StartChain()) }) { Text("Потренировать цепочку") }
                     }
                     CardPhase.Question, CardPhase.Revealed -> {
                         val exercise = state.exercise
                         if (exercise != null) {
-                            val presentation = presentationBySkillId(exercise.primarySkill)
-                            val method = if (state.styleId == StyleId.SituationFirst) presentation.situations else presentation.logic
                             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                                 TabButton("Схемы и логика", state.styleId != StyleId.SituationFirst) {
                                     dispatch(AppAction.SetStyle(StyleId.RuleFirst))
@@ -187,132 +165,35 @@ internal fun TrainingScreen(state: AppUiState, dispatch: (AppAction) -> Unit, fo
                                 }
                             }
                             Text("${skillById(exercise.primarySkill).level} · ${skillById(exercise.primarySkill).title}", color = MaterialTheme.colorScheme.primary)
-                            // EnRuPackPlan.md §4.2 (host-side follow-up): a cheap, non-spoiling
-                            // front badge — hasLifehacks(skillId) never exposes the lifehack's own
-                            // text/citation (that stays gated behind Revealed, see
-                            // DesktopLifehackBlock below), and this Text carries no click handler
-                            // so tapping it can never reveal the card.
-                            if (state.phase == CardPhase.Question && StaticPackLifehackProvider.hasLifehacks(exercise.primarySkill)) {
+                            // EnRuPackPlan.md §4.2: a cheap, non-spoiling teaser — the lifehack's own text/citation
+                            // stays gated behind reveal, on CardSection.LifehackSection.
+                            model.lifehackBadge?.let { badge ->
                                 Text(
-                                    "💡 Есть лайфхак",
-                                    style = MaterialTheme.typography.labelMedium,
+                                    badge.text, style = MaterialTheme.typography.labelMedium,
                                     color = MaterialTheme.colorScheme.onSurfaceVariant,
-                                    modifier = Modifier.semantics { contentDescription = "Есть лайфхак" },
+                                    modifier = Modifier.semantics { contentDescription = badge.contentDescription },
                                 )
                             }
-                            if (state.phase == CardPhase.Question && state.introPending) {
-                                Text("Знакомство с навыком", style = MaterialTheme.typography.titleMedium)
-                                Text("ИСХОДНОЕ ПРЕДЛОЖЕНИЕ", style = MaterialTheme.typography.labelMedium,
-                                    color = MaterialTheme.colorScheme.onSurfaceVariant)
-                                Text(contrastAnnotatedText(sentenceHighlightParts(exercise.source, exercise.changes, ChangeSide.Before),
-                                    MaterialTheme.colorScheme.error), style = MaterialTheme.typography.headlineMedium)
-                                Text(method.introduce)
-                                Button(onClick = { dispatch(AppAction.ContinueIntroduction) }) { Text("Перейти к заданию") }
-                            } else {
-                            Text("ИСХОДНОЕ ПРЕДЛОЖЕНИЕ", style = MaterialTheme.typography.labelMedium,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant)
-                            Text(contrastAnnotatedText(sentenceHighlightParts(exercise.source, exercise.changes, ChangeSide.Before),
-                                MaterialTheme.colorScheme.error), style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.SemiBold)
-                            Text("${exercise.prompt}\n${method.promptLead}",
-                                modifier = Modifier.fillMaxWidth().background(MaterialTheme.colorScheme.surfaceContainerHigh, RoundedCornerShape(16.dp)).padding(18.dp),
-                                style = MaterialTheme.typography.titleLarge)
-                            if (state.phase == CardPhase.Question) Text(method.retrieve)
-                            if (state.phase == CardPhase.Question) {
+                            if (model.introducing) Text("Знакомство с навыком", style = MaterialTheme.typography.titleMedium)
+                            model.front.forEach { section -> CardSectionView(section, state, dispatch, focusReveal) }
+                            if (state.phase == CardPhase.Revealed) {
+                                model.back.forEach { section -> CardSectionView(section, state, dispatch, focusReveal) }
                                 Row(Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                                    TabButton("Ответ вслух / про себя", state.answerMode == AnswerMode.Oral) { dispatch(AppAction.SetAnswerMode(AnswerMode.Oral)) }
-                                    TabButton("Напечатать ответ", state.answerMode == AnswerMode.Typed) { dispatch(AppAction.SetAnswerMode(AnswerMode.Typed)) }
-                                }
-                                if (state.answerMode == AnswerMode.Typed) {
-                                    OutlinedTextField(
-                                        value = state.draft,
-                                        onValueChange = { dispatch(AppAction.EditAnswer(it)) },
-                                        label = { Text("Ответ по-польски") },
-                                        modifier = Modifier.fillMaxWidth(),
-                                        minLines = 2,
-                                    )
-                                } else Text("Произнеси целое предложение, затем покажи ответ.")
-                                Button(
-                                    onClick = { dispatch(AppAction.Reveal(exercise.id)) },
-                                    modifier = Modifier.focusRequester(focusReveal),
-                                ) { Text(if (state.answerMode == AnswerMode.Typed) "Проверить и показать ответ" else "Показать ответ") }
-                            } else {
-                                Text("Эталон", color = MaterialTheme.colorScheme.onSurfaceVariant)
-                                Text(contrastAnnotatedText(sentenceHighlightParts(exercise.expected, exercise.changes, ChangeSide.After), MaterialTheme.colorScheme.primary),
-                                    style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.SemiBold)
-                                if (exercise.accepted.isNotEmpty()) Text("Также: ${exercise.accepted.joinToString(" / ")}")
-                                if (state.answerMode == AnswerMode.Typed) {
-                                    Text(if (state.evaluation?.correct == true) "Совпадает с правильным вариантом" else UiCopy.CompareAnswer)
-                                    Text(state.frozenAnswer?.takeIf(String::isNotEmpty) ?: "Ответ не введён")
-                                }
-                                if (state.styleId == StyleId.SituationFirst) {
-                                    Text(method.feedback)
-                                    Text(exercise.explanation)
-                                }
-                                Text("Что изменилось", style = MaterialTheme.typography.titleMedium)
-                                exercise.changes.forEach { change ->
-                                    Column {
-                                        Row(horizontalArrangement = Arrangement.spacedBy(5.dp)) {
-                                            Text(contrastAnnotatedText(changeHighlightParts(change.from, change.to, ChangeSide.Before),
-                                                MaterialTheme.colorScheme.error))
-                                            Text("→")
-                                            Text(contrastAnnotatedText(changeHighlightParts(change.from, change.to, ChangeSide.After), MaterialTheme.colorScheme.primary),
-                                                fontWeight = FontWeight.Bold)
-                                        }
-                                        Text(change.reason, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                                    }
-                                }
-                                Surface(shape = RoundedCornerShape(16.dp), color = MaterialTheme.colorScheme.tertiaryContainer,
-                                    modifier = Modifier.fillMaxWidth()) {
-                                    Column(Modifier.padding(18.dp), verticalArrangement = Arrangement.spacedBy(7.dp)) {
-                                        Text("ЗАПОМНИ", style = MaterialTheme.typography.labelMedium,
-                                            color = MaterialTheme.colorScheme.onTertiaryContainer)
-                                        Text(skillById(exercise.primarySkill).formula, fontWeight = FontWeight.Bold,
-                                            style = MaterialTheme.typography.titleMedium,
-                                            color = MaterialTheme.colorScheme.onTertiaryContainer)
-                                        if (state.styleId != StyleId.SituationFirst) {
-                                            Text(method.feedback, color = MaterialTheme.colorScheme.onTertiaryContainer)
-                                            Text(exercise.explanation, color = MaterialTheme.colorScheme.onTertiaryContainer)
-                                        }
-                                        Row(horizontalArrangement = Arrangement.spacedBy(5.dp)) {
-                                            Text(contrastAnnotatedText(changeHighlightParts(presentation.focusBefore, presentation.focusAfter, ChangeSide.Before),
-                                                MaterialTheme.colorScheme.error))
-                                            Text("→")
-                                            Text(contrastAnnotatedText(changeHighlightParts(presentation.focusBefore, presentation.focusAfter, ChangeSide.After), MaterialTheme.colorScheme.primary))
-                                        }
-                                    }
-                                }
-                                // EN-21: same lifehack list every host now renders after the
-                                // style's own back content — absent entirely for a skill with none.
-                                DesktopLifehackBlock(StaticPackLifehackProvider.forSkill(exercise.primarySkill))
-                                Text("Когда повторить?", style = MaterialTheme.typography.titleMedium)
-                                Text(method.review)
-                                Row(Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                                    listOf(Rating.Again to "1 Повторить", Rating.Good to "2 Вспомнил")
-                                        .forEach { (rating, label) ->
-                                            OutlinedButton(onClick = { dispatch(AppAction.Rate(exercise.id, rating)) }) {
-                                                Column {
-                                                    Text(label)
-                                                    Text(state.intervals?.get(rating)?.let { intervalLabel(it.toEpochMilliseconds(), state.now?.toEpochMilliseconds() ?: it.toEpochMilliseconds()) }.orEmpty(), fontSize = 11.sp)
-                                                }
+                                    model.ratingButtons.forEachIndexed { index, rb ->
+                                        OutlinedButton(onClick = { dispatch(AppAction.Rate(exercise.id, rb.rating)) }) {
+                                            Column {
+                                                Text("${index + 1} ${rb.label}")
+                                                Text(rb.intervalLabel, fontSize = 11.sp)
                                             }
                                         }
+                                    }
                                 }
-                            }
                             }
                         }
                     }
                 }
             }
         }
-        if (state.showReference && !introducing) CaseReferenceScreen(state, dispatch)
-    }
-}
-
-private fun intervalLabel(dueMillis: Long, nowMillis: Long): String {
-    val minutes = maxOf(1L, (dueMillis - nowMillis + 30_000L) / 60_000L)
-    return when {
-        minutes < 60 -> "$minutes мин"
-        minutes < 2_880 -> "${(minutes + 30) / 60} ч"
-        else -> "${(minutes + 720) / 1_440} дн"
+        if (model.referenceToggle.expanded) CaseReferenceScreen(state, dispatch)
     }
 }

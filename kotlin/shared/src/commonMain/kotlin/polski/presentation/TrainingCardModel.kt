@@ -12,7 +12,7 @@ enum class HotKey { Space, Digit1, Digit2, ArrowLeft, ArrowRight }
 
 /** The front-side "has a lifehack" teaser; never carries the lifehack's own text (that stays on
  *  [CardSection.LifehackSection], gated behind reveal). */
-data class LifehackBadge(val text: String = "💡 ${UiCopy.Lifehacks}", val contentDescription: String = UiCopy.Lifehacks)
+data class LifehackBadge(val text: String = "💡 Есть лайфхак", val contentDescription: String = "Есть лайфхак")
 
 data class ModeOption(val mode: TrainingMode, val label: String, val action: AppAction)
 

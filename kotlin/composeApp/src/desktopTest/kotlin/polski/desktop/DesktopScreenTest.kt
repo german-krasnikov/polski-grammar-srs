@@ -348,16 +348,18 @@ class DesktopScreenTest {
         val actions = mutableListOf<AppAction>()
         setContent {
             MaterialTheme {
-                TrainingScreen(
-                    AppUiState(loadStatus = LoadStatus.Ready, exercise = exercise, chain = listOf(exercise)),
-                    actions::add,
-                    FocusRequester(),
-                    { "test-date" },
-                )
+                Column(Modifier.verticalScroll(rememberScrollState())) {
+                    TrainingScreen(
+                        AppUiState(loadStatus = LoadStatus.Ready, exercise = exercise, chain = listOf(exercise)),
+                        actions::add,
+                        FocusRequester(),
+                        { "test-date" },
+                    )
+                }
             }
         }
         onNodeWithText(exercise.expected).assertDoesNotExist()
-        onNodeWithText("Показать ответ").performClick()
+        onNodeWithText("Показать ответ").performScrollTo().performClick()
         assertEquals(AppAction.Reveal(exercise.id), actions.single())
     }
 
