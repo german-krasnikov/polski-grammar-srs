@@ -15,3 +15,7 @@ The partial run observed four failures in `kotlin-binary-rating.spec.ts` and `ko
 The method-cycle failure reproduces at a 320 px viewport: choose SituationFirst, enter the training card, and open “Таблица под рукой” before reveal. The target Biernik row shows `Было: moją piękną żonę` while its `Стало` answer is masked. The accepted pre-reveal contract withholds the exercise's own answer from visible and accessible reference text. Actual snapshot: `test-results/kotlin-wasm/kotlin-method-cycle-first--da14e-d-stores-exactly-one-rating-chromium/error-context.md`; trace beside it. `MatrixWeb.kt` passed the target phrase to `matrixContrastMasked`. Developer correction is pending a fresh artifact and independent retest; this document does not mark it closed.
 
 No exam UI browser case was included in the baseline config at that revision. Exam UI, JS branch, Firefox, WebKit and devices: **NOT RUN** in this baseline. No tracked UX4 PNG was edited by the tester.
+
+## Reference correction verified
+
+The developer added `CaseReferenceModel.sourcePhrase` and used it in the masked web row. On the rebuilt Wasm artifact (`composeApp.js` SHA-256 `3a7850c57b371acbbb98e484cce14095a52841f9ea837712fe300aa1d9118e4f`), the independent tester ran `kotlin-method-cycle.spec.ts` and `kotlin-reference-panel-leak.spec.ts`: **PASS 2/2** in Chromium. Log: `/tmp/polski-kotlin-reference-retest-20261108.log`. Read-only review approved this isolated fix; it was committed as `5f031ad`. The pending wording above describes the earlier baseline, not the current fix status.
