@@ -7,6 +7,7 @@ import polski.data.Possessive
 import polski.data.comparisonNounIds
 import polski.data.enPersonalPronouns
 import polski.data.enVerbs
+import polski.data.courseContextHelp
 import polski.data.nounById
 import polski.data.personalPronouns
 import polski.data.possessives
@@ -15,8 +16,10 @@ import polski.data.referenceVerbTeaching
 import polski.data.verbs
 import polski.grammar.caseRows
 import polski.grammar.caseSentence
+import polski.grammar.genderNames
 import polski.grammar.nounPhrase
 import polski.grammar.verbForm
+import polski.model.Exercise
 import polski.model.GramCase
 import polski.model.NumberFeature
 import polski.model.NumberGram
@@ -36,6 +39,42 @@ import polski.model.toFeatureValue
  * axis, same columns, same "было → стало" base per column — so hosts stop duplicating this glue and
  * instead render whatever `MatrixTableEngine` + this layer's contrast attachment produced.
  */
+
+/** One row of the in-card case reference: the noun phrase for a given case, with masking/highlight. */
+data class CaseReferenceRow(
+    val caseLabel: String,
+    val phrase: String,
+    val isTarget: Boolean,
+    val contrast: ContrastPair?,
+)
+
+/** In-card "Таблица этого предложения": one row per case, target masked until revealed. */
+data class CaseReferenceModel(
+    val title: String,
+    val nounInfo: String,
+    val rows: List<CaseReferenceRow>,
+    val contextHelp: String,
+)
+
+fun caseReferenceModel(exercise: Exercise, revealed: Boolean): CaseReferenceModel {
+    val noun = nounById(exercise.nounId)
+    val nomPhrase = nounPhrase(exercise.nounId, GramCase.NOM, exercise.number, exercise.adjectiveId, exercise.possessive)
+    return CaseReferenceModel(
+        title = "Таблица этого предложения",
+        nounInfo = "${noun.lemma} · ${genderNames.getValue(noun.gender)} · ${if (exercise.number == NumberGram.SG) "ед. ч." else "мн. ч."}",
+        rows = caseRows.map { row ->
+            val isTarget = row.id.id in exercise.tags
+            val phrase = nounPhrase(exercise.nounId, row.id, exercise.number, exercise.adjectiveId, exercise.possessive)
+            CaseReferenceRow(
+                caseLabel = "${row.pl} · ${row.ru}",
+                phrase = phrase,
+                isTarget = isTarget,
+                contrast = if (isTarget && !revealed) null else ContrastPair.generated(nomPhrase, phrase),
+            )
+        },
+        contextHelp = courseContextHelp.compact,
+    )
+}
 
 fun casesFullTable(selection: MatrixSelection): MatrixTableViewModel {
     val number = NumberGram.fromId(selection.numberId)
@@ -121,23 +160,8 @@ fun personalPronounsTable(): MatrixTableViewModel {
 
 private val enTenseLabel = mapOf(Tense.PRESENT to "Настоящее", Tense.PAST to "Прошедшее", Tense.FUTURE to "Будущее")
 
-private val enPersonNumberByPronounId = mapOf(
-    "I" to (Person.FIRST to NumberGram.SG),
-    "you" to (Person.SECOND to NumberGram.SG),
-    "he" to (Person.THIRD to NumberGram.SG),
-    "she" to (Person.THIRD to NumberGram.SG),
-    "it" to (Person.THIRD to NumberGram.SG),
-    "we" to (Person.FIRST to NumberGram.PL),
-    "they" to (Person.THIRD to NumberGram.PL),
-)
-
-private fun enVerbForm(verbId: String, tense: Tense, pronounId: String): String {
-    val (person, number) = enPersonNumberByPronounId.getValue(pronounId)
-    return enMorphology.form(
-        "verb:$verbId",
-        mapOf(TenseFeature to tense.toFeatureValue(), PersonFeature to person.toFeatureValue(), NumberFeature to number.toFeatureValue()),
-    )
-}
+private fun enVerbForm(verbId: String, tense: Tense, pronounId: String): String =
+    polski.data.enVerbForm(verbId, tense, pronounId)
 
 /**
  * EN-24 (UC-09 part 2/2 minimum, Plans/Kotlin/EnRuPackPlan.md §6): the one live English person ×

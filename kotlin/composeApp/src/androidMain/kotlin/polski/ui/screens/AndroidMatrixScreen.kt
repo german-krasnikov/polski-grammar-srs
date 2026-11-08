@@ -185,23 +185,8 @@ fun AndroidCasesSection(state: AppUiState, dispatch: (AppAction) -> Unit) {
         }
     }
     val number = NumberGram.fromId(selected.numberId)
-    val owner = PossessiveId.fromId(selected.ownerId)
     val seed = SentenceSeed(selected.nounId, selected.adjectiveId)
-    val basePhrase = nounPhrase(selected.nounId, GramCase.NOM, number, selected.adjectiveId, owner)
-    val baseSentence = caseSentence(seed, GramCase.NOM, owner, number)
-    // UC-09 part 2/2: this table's cells now come from MatrixTableEngine (rowAxis = caseRows)
-    // instead of calling nounPhrase/caseSentence inline per card — same values, one engine.
-    val casesTable = MatrixTableEngine.build(
-        rowAxis = caseRows,
-        rowHeaderLabel = "Падеж · русская опора",
-        rowHeader = { row -> "${row.pl} · ${row.ru}" },
-        columns = listOf(
-            MatrixColumn("Вопрос / конструкция", { row -> "${row.question} · ${row.trigger}" }),
-            MatrixColumn("Фраза", { row -> nounPhrase(selected.nounId, row.id, number, selected.adjectiveId, owner) },
-                contrastFrom = { basePhrase }),
-            MatrixColumn("Предложение", { row -> caseSentence(seed, row.id, owner, number) }, contrastFrom = { baseSentence }),
-        ),
-    ).toViewModel()
+    val casesTable = polski.presentation.casesFullTable(selected)
     casesTable.rows.forEach { row ->
         AndroidInfoCard(row.header) {
             Text(row.cells[0].value, style = MaterialTheme.typography.labelLarge)
@@ -367,23 +352,8 @@ private fun AndroidEnglishVerbMatrix() {
     }
 }
 
-private val enPersonNumberByPronounId = mapOf(
-    "I" to (Person.FIRST to NumberGram.SG),
-    "you" to (Person.SECOND to NumberGram.SG),
-    "he" to (Person.THIRD to NumberGram.SG),
-    "she" to (Person.THIRD to NumberGram.SG),
-    "it" to (Person.THIRD to NumberGram.SG),
-    "we" to (Person.FIRST to NumberGram.PL),
-    "they" to (Person.THIRD to NumberGram.PL),
-)
-
-private fun enVerbForm(verbId: String, tense: Tense, pronounId: String): String {
-    val (person, number) = enPersonNumberByPronounId.getValue(pronounId)
-    return enMorphology.form(
-        "verb:$verbId",
-        mapOf(TenseFeature to tense.toFeatureValue(), PersonFeature to person.toFeatureValue(), NumberFeature to number.toFeatureValue()),
-    )
-}
+private fun enVerbForm(verbId: String, tense: Tense, pronounId: String): String =
+    polski.data.enVerbForm(verbId, tense, pronounId)
 
 /** Public — see [AndroidCasesSection]. */
 @Composable
