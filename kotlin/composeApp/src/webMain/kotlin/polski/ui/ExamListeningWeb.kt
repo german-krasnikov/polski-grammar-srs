@@ -22,25 +22,72 @@ internal class ExamListeningController(examId: String, private val onBack: () ->
 
     fun render(container: HTMLElement) { root = container; setupAudio(); redraw() }
 
+    private var currentSegmentStart = 0.0
+    private var currentSegmentEnd = 0.0
+
     private fun setupAudio() {
         if (audioElement != null || exam.audioUrl.isBlank()) return
         audioElement = (document.createElement("audio") as HTMLAudioElement).apply {
-            src = exam.audioUrl; controls = true; className = "exam-audio-player"
+            src = exam.audioUrl; className = "exam-audio-hidden"
             setAttribute("preload", "auto")
         }
     }
 
     private fun seekToTask(task: ListeningTask) {
         val audio = audioElement ?: return
-        val startSec = task.startMs / 1000.0
-        val endSec = task.endMs / 1000.0
-        fun doSeek() { audio.currentTime = startSec; audio.pause() }
+        currentSegmentStart = task.startMs / 1000.0
+        currentSegmentEnd = if (task.endMs > 0) task.endMs / 1000.0 else audio.duration
+        fun doSeek() { audio.currentTime = currentSegmentStart; audio.pause() }
         if (audio.readyState >= 1) doSeek()
         else audio.addEventListener("loadedmetadata", { doSeek() })
-        // auto-stop at segment end
-        if (endSec > 0) {
-            audio.ontimeupdate = { if (audio.currentTime >= endSec) { audio.pause(); audio.currentTime = endSec } }
+        audio.ontimeupdate = {
+            if (currentSegmentEnd > 0 && audio.currentTime >= currentSegmentEnd) {
+                audio.pause(); audio.currentTime = currentSegmentEnd
+            }
         }
+    }
+
+    private fun buildCustomPlayer(task: ListeningTask): HTMLElement {
+        val audio = audioElement ?: return node("div")
+        val segDuration = currentSegmentEnd - currentSegmentStart
+        val container = node("div", "exam-custom-player")
+        val playBtn = (document.createElement("button") as HTMLButtonElement).apply {
+            type = "button"; className = "player-play-btn"; textContent = "▶"
+        }
+        val timeLabel = node("span", "player-time", "0:00 / ${formatTime(segDuration)}")
+        val progressWrap = node("div", "player-progress-wrap")
+        val progressBar = node("div", "player-progress-bar")
+        val progressFill = node("div", "player-progress-fill")
+        progressBar.appendChild(progressFill)
+        progressWrap.appendChild(progressBar)
+
+        playBtn.addEventListener("click", {
+            if (audio.paused) { audio.play(); playBtn.textContent = "⏸" }
+            else { audio.pause(); playBtn.textContent = "▶" }
+        })
+        progressWrap.addEventListener("click", { e ->
+            val rect = progressBar.getBoundingClientRect()
+            val pct = ((e as org.w3c.dom.events.MouseEvent).clientX - rect.left) / rect.width
+            audio.currentTime = currentSegmentStart + pct * segDuration
+        })
+        audio.addEventListener("timeupdate", {
+            val elapsed = (audio.currentTime - currentSegmentStart).coerceIn(0.0, segDuration)
+            val pct = if (segDuration > 0) (elapsed / segDuration * 100) else 0.0
+            progressFill.style.setProperty("width", "${pct.toInt()}%")
+            timeLabel.textContent = "${formatTime(elapsed)} / ${formatTime(segDuration)}"
+            if (audio.paused) playBtn.textContent = "▶"
+        })
+        audio.addEventListener("ended", { playBtn.textContent = "▶" })
+
+        container.appendChild(playBtn)
+        container.appendChild(progressWrap)
+        container.appendChild(timeLabel)
+        return container
+    }
+
+    private fun formatTime(sec: Double): String {
+        val m = (sec / 60).toInt(); val s = (sec % 60).toInt()
+        return "$m:${s.toString().padStart(2, '0')}"
     }
 
     private fun redraw() {
@@ -61,21 +108,10 @@ internal class ExamListeningController(examId: String, private val onBack: () ->
             })
         })
         c.appendChild(node("h3", "exam-title", task.instruction))
-        // Audio player — persistent element, seek to segment
-        val audio = audioElement
-        if (audio != null) {
+        // Custom audio player — shows only the segment, not full track
+        if (audioElement != null) {
             seekToTask(task)
-            c.appendChild(node("div", "exam-audio-wrap").apply {
-                appendChild(audio)
-                val hint = if (task.startMs > 0) {
-                    val startMin = (task.startMs / 60000).toInt()
-                    val startSec = ((task.startMs % 60000) / 1000).toInt()
-                    val endMin = (task.endMs / 60000).toInt()
-                    val endSec = ((task.endMs % 60000) / 1000).toInt()
-                    "Odtwórz fragment ${startMin}:${startSec.toString().padStart(2, '0')} — ${endMin}:${endSec.toString().padStart(2, '0')}"
-                } else "Odtwórz nagranie i odpowiedz na pytania"
-                appendChild(node("p", "exam-audio-hint", hint))
-            })
+            c.appendChild(buildCustomPlayer(task))
         }
         // Questions
         c.appendChild(node("div", "exam-listening-questions").apply {
