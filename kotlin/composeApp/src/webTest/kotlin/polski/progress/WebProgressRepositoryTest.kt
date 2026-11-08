@@ -53,10 +53,12 @@ class WebProgressRepositoryTest {
             val revised = migrated.document.copy(progress = migrated.document.progress.copy(totalReviews = 8))
             assertEquals(SaveResult.Saved, immediate { repository.save(revised) })
             assertEquals(8, assertIs<LoadResult.Loaded>(immediate { repository.load() }).document.progress.totalReviews)
+            // NJ03 C6: successful POLSKI-TEXT save cleans up migration keys (legacy, backup, marker).
+            assertEquals("", window.localStorage.getItem(RawProgressRepository.LEGACY_KEY))
+            assertEquals("", window.localStorage.getItem(RawProgressRepository.BACKUP_KEY))
+            assertEquals("", window.localStorage.getItem(RawProgressRepository.MARKER_KEY))
             assertEquals(SaveResult.Saved, immediate { repository.resetConfirmed(at, "2026-03-29", listOf("known")) })
             assertEquals(0, assertIs<LoadResult.Loaded>(immediate { repository.load() }).document.progress.totalReviews)
-            assertEquals(legacy, window.localStorage.getItem(RawProgressRepository.LEGACY_KEY))
-            assertEquals(legacy, window.localStorage.getItem(RawProgressRepository.BACKUP_KEY))
         } finally {
             for ((key, value) in original) {
                 if (value == null) window.localStorage.removeItem(key) else window.localStorage.setItem(key, value)

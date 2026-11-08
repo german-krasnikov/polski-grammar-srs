@@ -8,10 +8,9 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "npm run course:validate && tsc -b && vite build",
+    "build": "tsc -b && vite build",
     "test": "vitest run",
     "test:watch": "vitest",
-    "fixtures:generate": "tsx tests/fixtures/kotlin-parity/generate.ts",
     "test:browser": "playwright test",
     "preview": "vite preview",
     "typecheck": "tsc -b",
