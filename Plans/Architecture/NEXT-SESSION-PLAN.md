@@ -62,9 +62,9 @@
 3. **Exam UI баги**:
    - Focus loss при вводе текста (fix сделан но проверить)
    - Все типы вопросов (word_bank, matching, transform, gap_fill_fragment)
-   - Аудио: "nagranie zostanie odtworzone dwa razy" — авто-повтор
+   - Аудио: проверить записанные повторы и границы; B1/2017 II–V уже содержат два проигрывания, дополнительный программный повтор не нужен
    
-4. **Playwright тесты** — 53 passed, ~9 нужно обновить для model changes
+4. **Playwright тесты** — исторические 53 passed/~9 требуют актуализации. Полный Chromium-прогон 2026-11-08: 148 случаев, 118 PASS / 28 FAIL / 2 SKIP, без retries, без screenshot-writing `kotlin-ux4`. Все 10 exam PlayTests PASS; остальные failures классифицируются, общий gate открыт.
 
 ### Средний приоритет
 5. **:srs-progress модуль** — граница подтверждена, но cross-refs в derive/Python мешают
@@ -96,3 +96,9 @@ ExamBin:       /Users/german/Work/JS/polski-grammar-srs/ExamBin/pl/<level>/<year
 Exam .core-data: exams/pl/certyfikat-polski/<level>/<year>/
 Plans:         Plans/Architecture/
 ```
+
+## Проверенный checkpoint — 2026-11-08
+
+Коммит `4a07fb1`: восстановлены все четыре раздела B1/2017, чтение и аудирование B1/2019, source-only B1/2020; добавлены точные дробные веса, письменные комплекты/иллюстрации и 10 DSL PlayTests. Независимый reviewer одобрил этот ограниченный срез. Новые счётчики каталога прошли Wasm compilation, их отдельная браузерная проверка после пересборки ещё NOT RUN. Подробности — [exam acceptance](EXAM-ACCEPTANCE-EVIDENCE.md) и [audio delivery](EXAM-AUDIO-ASSET-EVIDENCE.md).
+
+B1/2019 грамматика/письмо и B2/2017–2020 остаются в работе. Открытые ответы реализуются по [контракту provisional grading](EXAM-OPEN-ANSWER-ADDENDUM.md), чтобы неизвестный допустимый вариант не считался автоматически ошибкой. Проверка оставшихся аудиограниц, все остальные разделы 2019 и задачи 5–12 не закрыты этим checkpoint.
