@@ -67,6 +67,8 @@
 4. **Playwright тесты** — исторические 53 passed/~9 требуют актуализации. Полный Chromium-прогон 2026-11-08: 148 случаев, 118 PASS / 28 FAIL / 2 SKIP, без retries, без screenshot-writing `kotlin-ux4`. Все 10 exam PlayTests PASS; остальные failures классифицируются, общий gate открыт.
 
 ### Средний приоритет
+
+Границы и критерии пунктов 5–8: [план исполнения](NEXT-SESSION-P5-P8-PLAN.md).
 5. **:srs-progress модуль** — граница подтверждена, но cross-refs в derive/Python мешают
 6. **EndingHighlightTest → DSL oracle** — 65 assertions → .core-data
 7. **MatrixTablesTest → DSL oracle** — 43 assertions → .core-data
