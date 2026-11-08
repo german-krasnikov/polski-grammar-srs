@@ -12,8 +12,9 @@ class FrozenAcCorpusProbeTest {
         val frame: ProbeFrame = ProbeFrame.Progress,
     )
 
-    private val high = 0xd800.toChar().toString()
-    private val low = 0xdc00.toChar().toString()
+    // Build UTF-16 units at runtime: JS constant folding of Char.toString replaces lone surrogates.
+    private val high = charArrayOf(0xd800.toChar()).concatToString()
+    private val low = charArrayOf(0xdc00.toChar()).concatToString()
     private val pair = high + low
     private val privateUse = 0xe000.toChar().toString()
 
