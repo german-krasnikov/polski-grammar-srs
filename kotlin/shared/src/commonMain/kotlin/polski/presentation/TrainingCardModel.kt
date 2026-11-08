@@ -121,7 +121,8 @@ fun trainingCardModel(state: AppUiState, now: Instant? = state.now): TrainingCar
             if (state.answerMode == AnswerMode.Typed) {
                 back += CardSection.EvaluationFeedback(state.evaluation?.correct == true, state.frozenAnswer.orEmpty())
             }
-            back += CardSection.MethodFeedback(method.feedback, exercise.explanation)
+            val methodHeading = if (state.styleId == StyleId.SituationFirst) "Сравни смысл и форму" else "Разбор изменений"
+            back += CardSection.MethodFeedback(methodHeading, method.feedback, exercise.explanation)
             val lifehacks = StaticPackLifehackProvider.forSkill(exercise.primarySkill)
             if (lifehacks.isNotEmpty()) back += CardSection.LifehackSection(lifehacks)
             back += CardSection.ReviewHint(method.review)

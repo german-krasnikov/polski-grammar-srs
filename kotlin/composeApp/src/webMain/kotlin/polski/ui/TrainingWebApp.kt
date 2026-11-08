@@ -306,8 +306,7 @@ private const val ROUTE_FOOTER_TEXT = "Прогресс сохраняется �
  *  code and Russian adverb ("по-английски" for en, matching pl's already-shipped "по-польски") —
  *  every place this file used to hardcode `"pl"`/"по-польски" regardless of the active pack. */
 private fun activeTargetLangCode(): String = availableCoursePacks.firstOrNull { it.pairId == activeCoursePackId }?.target ?: "pl"
-private val targetAdverbs: Map<String, String> = mapOf("pl" to "по-польски", "en" to "по-английски")
-private fun activeTargetAdverb(): String = targetAdverbs[activeTargetLangCode()] ?: activeTargetLangCode()
+private fun activeTargetAdverb(): String = polski.presentation.UiCopy.languageAdverb(activeTargetLangCode())
 
 /** UX5 perf: delay before the idle Matrix prewarm runs (see [TrainingDomRenderer.scheduleMatrixPrewarm]).
  *  There is no `requestIdleCallback` binding in either DOM binding this project has (kotlinx-browser/
@@ -887,6 +886,7 @@ private class TrainingDomRenderer {
 
     private fun renderAnswerBack(root: HTMLElement, card: HTMLElement, wrap: HTMLElement, back: HTMLElement, state: AppUiState, swipeRatingEnabled: Boolean, dispatch: (AppAction) -> Unit) {
         val exercise = state.exercise ?: return
+        val model = trainingCardModel(state)
         back.appendChild(node("span", "eyebrow", "Обратная сторона · эталон"))
         back.appendChild(node("p", "answer-sentence").apply {
             setAttribute("lang", activeTargetLangCode())
@@ -902,13 +902,11 @@ private class TrainingDomRenderer {
                 appendChild(node("p", text = state.frozenAnswer?.takeIf(String::isNotEmpty) ?: "Ответ не введён"))
             })
         }
-        val skill = polski.data.skillById(exercise.primarySkill)
-        val presentation = polski.data.presentationBySkillId(exercise.primarySkill)
-        val method = if (state.styleId == StyleId.SituationFirst) presentation.situations else presentation.logic
-        back.appendChild(node("div", "method-feedback").apply {
-            appendChild(node("h3", text = if (state.styleId == StyleId.SituationFirst) "Сравни смысл и форму" else "Разбор изменений"))
-            appendChild(node("p", text = method.feedback))
-            if (state.styleId == StyleId.SituationFirst) appendChild(node("p", text = exercise.explanation))
+        val mf = model.back.filterIsInstance<CardSection.MethodFeedback>().firstOrNull()
+        if (mf != null) back.appendChild(node("div", "method-feedback").apply {
+            appendChild(node("h3", text = mf.heading))
+            appendChild(node("p", text = mf.feedback))
+            if (mf.explanation.isNotEmpty()) appendChild(node("p", text = mf.explanation))
         })
         // UC-10 web S2: Changes/Formula/Rule/Contrast used to be hardcoded here per 2-way style
         // check — now they (and Table/NativeParallel/Scene/Examples/WhyOnDemand) come entirely

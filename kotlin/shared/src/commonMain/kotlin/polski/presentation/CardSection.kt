@@ -37,8 +37,9 @@ sealed interface CardSection {
      *  [answerText] is the raw frozen draft (possibly empty) — never a fallback phrase. */
     data class EvaluationFeedback(val matched: Boolean, val answerText: String) : CardSection
 
-    /** Unconditional on back regardless of [StyleId]. */
-    data class MethodFeedback(val feedback: String, val explanation: String) : CardSection
+    /** Unconditional on back regardless of [StyleId]. [heading] is style-resolved
+     *  ("Сравни смысл и форму" for SituationFirst, "Разбор изменений" otherwise). */
+    data class MethodFeedback(val heading: String, val feedback: String, val explanation: String) : CardSection
 
     /** Present only when the skill has at least one [Lifehack] — never an empty-list placeholder. */
     data class LifehackSection(val lifehacks: List<Lifehack>) : CardSection
