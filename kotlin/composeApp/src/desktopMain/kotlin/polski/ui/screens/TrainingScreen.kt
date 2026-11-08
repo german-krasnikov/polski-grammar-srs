@@ -62,7 +62,6 @@ import polski.presentation.StaticPackLifehackProvider
 import polski.presentation.StyleId
 import polski.presentation.UiCopy
 import polski.presentation.changeHighlightParts
-import polski.presentation.intervalLabel
 import polski.presentation.sentenceHighlightParts
 import polski.srs.Rating
 import polski.training.sentenceSeeds
@@ -105,7 +104,7 @@ internal fun TrainingScreen(state: AppUiState, dispatch: (AppAction) -> Unit, fo
             TabButton("По расписанию · ${state.dueCount}", state.mode == TrainingMode.Schedule) { dispatch(AppAction.StartSchedule) }
             TabButton("Отдельный навык", state.mode == TrainingMode.Focused) { dispatch(AppAction.OpenSkillPicker) }
             OutlinedButton(onClick = { dispatch(AppAction.ToggleReference) }, enabled = !introducing) {
-                Text(if (!introducing && state.showReference) UiCopy.HideTable else UiCopy.TableAtHand)
+                Text(if (!introducing && state.showReference) "Скрыть таблицу" else "Таблица под рукой")
             }
         }
         if (state.showSkillPicker) {
@@ -171,7 +170,7 @@ internal fun TrainingScreen(state: AppUiState, dispatch: (AppAction) -> Unit, fo
                     }
                     CardPhase.NoDue -> {
                         Text("Повторения на сейчас завершены", style = MaterialTheme.typography.headlineSmall)
-                        Text(state.nextDue?.let { "Следующее: ${formatDate(it.toEpochMilliseconds())}" } ?: "Новых повторений пока нет.")
+                        Text(state.nextDue?.let { "Следующее: ${formatDate(it.toEpochMilliseconds())}" } ?: UiCopy.NoDueTitle)
                         Button(onClick = { dispatch(AppAction.StartChain()) }) { Text("Потренировать цепочку") }
                     }
                     CardPhase.Question, CardPhase.Revealed -> {
@@ -235,14 +234,14 @@ internal fun TrainingScreen(state: AppUiState, dispatch: (AppAction) -> Unit, fo
                                 Button(
                                     onClick = { dispatch(AppAction.Reveal(exercise.id)) },
                                     modifier = Modifier.focusRequester(focusReveal),
-                                ) { Text(if (state.answerMode == AnswerMode.Typed) "Проверить и показать ответ" else UiCopy.ShowAnswer) }
+                                ) { Text(if (state.answerMode == AnswerMode.Typed) "Проверить и показать ответ" else "Показать ответ") }
                             } else {
                                 Text("Эталон", color = MaterialTheme.colorScheme.onSurfaceVariant)
                                 Text(contrastAnnotatedText(sentenceHighlightParts(exercise.expected, exercise.changes, ChangeSide.After), MaterialTheme.colorScheme.primary),
                                     style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.SemiBold)
                                 if (exercise.accepted.isNotEmpty()) Text("Также: ${exercise.accepted.joinToString(" / ")}")
                                 if (state.answerMode == AnswerMode.Typed) {
-                                    Text(if (state.evaluation?.correct == true) "Совпадает с правильным вариантом" else "Сравни свой ответ с эталоном")
+                                    Text(if (state.evaluation?.correct == true) "Совпадает с правильным вариантом" else UiCopy.CompareAnswer)
                                     Text(state.frozenAnswer?.takeIf(String::isNotEmpty) ?: "Ответ не введён")
                                 }
                                 if (state.styleId == StyleId.SituationFirst) {
@@ -285,10 +284,10 @@ internal fun TrainingScreen(state: AppUiState, dispatch: (AppAction) -> Unit, fo
                                 // EN-21: same lifehack list every host now renders after the
                                 // style's own back content — absent entirely for a skill with none.
                                 DesktopLifehackBlock(StaticPackLifehackProvider.forSkill(exercise.primarySkill))
-                                Text(UiCopy.WhenToReview, style = MaterialTheme.typography.titleMedium)
+                                Text("Когда повторить?", style = MaterialTheme.typography.titleMedium)
                                 Text(method.review)
                                 Row(Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                                    listOf(Rating.Again to "1 ${UiCopy.Again}", Rating.Good to "2 ${UiCopy.Good}")
+                                    listOf(Rating.Again to "1 Повторить", Rating.Good to "2 Вспомнил")
                                         .forEach { (rating, label) ->
                                             OutlinedButton(onClick = { dispatch(AppAction.Rate(exercise.id, rating)) }) {
                                                 Column {
@@ -306,5 +305,14 @@ internal fun TrainingScreen(state: AppUiState, dispatch: (AppAction) -> Unit, fo
             }
         }
         if (state.showReference && !introducing) CaseReferenceScreen(state, dispatch)
+    }
+}
+
+private fun intervalLabel(dueMillis: Long, nowMillis: Long): String {
+    val minutes = maxOf(1L, (dueMillis - nowMillis + 30_000L) / 60_000L)
+    return when {
+        minutes < 60 -> "$minutes мин"
+        minutes < 2_880 -> "${(minutes + 30) / 60} ч"
+        else -> "${(minutes + 720) / 1_440} дн"
     }
 }

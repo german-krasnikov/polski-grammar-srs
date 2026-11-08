@@ -614,7 +614,7 @@ private class TrainingDomRenderer {
             dispatch(AppAction.SetStyle(StyleId(methodSelect.value)))
         })
         methodLabel.appendChild(methodSelect)
-        options.appendChild(button(if (state.showReference && !state.introPending) UiCopy.HideTable else UiCopy.TableAtHand) {
+        options.appendChild(button(if (state.showReference && !state.introPending) "Скрыть таблицу" else "Таблица под рукой") {
             dispatch(AppAction.ToggleReference)
         }.apply {
             disabled = state.introPending
@@ -671,7 +671,7 @@ private class TrainingDomRenderer {
             section.appendChild(button("Повторить перенос") { dispatch(AppAction.RequestMigration) })
         }
         if (state.loadStatus == LoadStatus.MigrationAvailable || state.loadStatus == LoadStatus.RecoveryRequired) {
-            section.appendChild(button(UiCopy.ExportJson) { dispatch(AppAction.RequestExport) })
+            section.appendChild(button("Экспорт JSON") { dispatch(AppAction.RequestExport) })
         }
     }
 
@@ -747,7 +747,7 @@ private class TrainingDomRenderer {
             appendChild(node("h2", text = "Повторения на сейчас завершены"))
             appendChild(node("p", text = state.nextDue?.let {
                 "Следующее: ${browserFormatDate(it.toEpochMilliseconds().toDouble())}"
-            } ?: "Новых повторений пока нет."))
+            } ?: UiCopy.NoDueTitle))
             appendChild(button("Потренировать цепочку") { dispatch(AppAction.StartChain()) })
         })
     }
@@ -877,7 +877,7 @@ private class TrainingDomRenderer {
             })
             area.appendChild(input)
         } else area.appendChild(node("p", "muted", "Произнеси целое предложение, затем переверни карточку."))
-        area.appendChild(button(if (state.answerMode == AnswerMode.Typed) "Проверить и показать ответ" else UiCopy.ShowAnswer, primary = true) {
+        area.appendChild(button(if (state.answerMode == AnswerMode.Typed) "Проверить и показать ответ" else "Показать ответ", primary = true) {
             state.exerciseId?.let { dispatch(AppAction.Reveal(it)) }
         }.apply { id = "training-reveal"; className += " reveal-button" })
     }
@@ -895,7 +895,7 @@ private class TrainingDomRenderer {
         if (state.answerMode == AnswerMode.Typed) {
             val result = state.evaluation?.correct == true
             back.appendChild(node("div", if (result) "typed-result correct" else "typed-result incorrect").apply {
-                appendChild(node("strong", text = if (result) "Совпадает с правильным вариантом" else "Сравни свой ответ с эталоном"))
+                appendChild(node("strong", text = if (result) "Совпадает с правильным вариантом" else UiCopy.CompareAnswer))
                 appendChild(node("p", text = state.frozenAnswer?.takeIf(String::isNotEmpty) ?: "Ответ не введён"))
             })
         }
@@ -918,13 +918,13 @@ private class TrainingDomRenderer {
         // output — same for every style, so it always renders after the back blocks, never inside
         // whichever ones the active style composed.
         renderLifehackBlock(back, skill.id)
-        back.appendChild(node("div", "rating-label", UiCopy.WhenToReview))
+        back.appendChild(node("div", "rating-label", "Когда повторить?"))
         back.appendChild(node("p", "method-review", method.review))
         val ratings = node("div", "ratings")
         back.appendChild(ratings)
         listOf(
-            Triple(Rating.Again, UiCopy.Again, "Ошибка или не уверен"),
-            Triple(Rating.Good, UiCopy.Good, "Воспроизвёл сам"),
+            Triple(Rating.Again, "Повторить", "Ошибка или не уверен"),
+            Triple(Rating.Good, "Вспомнил", "Воспроизвёл сам"),
         ).forEachIndexed { index, (rating, label, hint) ->
             ratings.appendChild(button("${index + 1} $label", extraClass = "rating-${rating.name.lowercase()}") {
                 riveOverlay.trigger(root, back, cardEffectFor(rating))
@@ -945,7 +945,7 @@ private class TrainingDomRenderer {
             // `installSwipeCard`'s own doc comment for why: `back` briefly leaves its own resting
             // hitbox while snapping back/flying out, which could otherwise make a second gesture
             // started right at its edge within that ~220ms window miss it entirely.
-            back.appendChild(node("p", "vocabulary-swipe-zone muted small", "← ${UiCopy.Again} · ${UiCopy.Good} →").apply {
+            back.appendChild(node("p", "vocabulary-swipe-zone muted small", "← Повторить · Вспомнил →").apply {
                 setAttribute("aria-hidden", "true")
             })
             appendSwipeLabels(back)
@@ -999,6 +999,16 @@ private fun resolveEffectiveStyleAndContent(state: AppUiState, skillId: String):
     val recipe = StyleRegistry.recipes.getValue(state.styleId)
     val effectiveId = StyleComposer.resolveEffectiveStyle(recipe, content, StyleRegistry.recipes)
     return StyleRegistry.recipes.getValue(effectiveId) to content
+}
+
+// UX4-13: shared with the vocabulary card's rating buttons, not private to this file any more.
+internal fun intervalLabel(dueMillis: Long, nowMillis: Long): String {
+    val minutes = maxOf(1L, (dueMillis - nowMillis + 30_000L) / 60_000L)
+    return when {
+        minutes < 60 -> "$minutes мин"
+        minutes < 2_880 -> "${(minutes + 30) / 60} ч"
+        else -> "${(minutes + 720) / 1_440} дн"
+    }
 }
 
 // UC-10 web S2: shared with CardBlocksWeb.kt's block renderers (Table/Contrast/Changes reuse the

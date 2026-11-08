@@ -6,7 +6,6 @@ import org.w3c.dom.Element
 import org.w3c.dom.HTMLElement
 import org.w3c.dom.events.MouseEvent
 import polski.interaction.SwipeDecision
-import polski.presentation.UiCopy
 import polski.srs.Rating
 
 private const val SWIPE_THRESHOLD_PX = 75.0
@@ -105,7 +104,7 @@ internal fun installSwipeCard(zone: HTMLElement, faceForTransform: HTMLElement, 
         // dominant drag "sticks" to this gesture (tinting/translating the face) even if it briefly
         // wobbles vertically afterwards; a vertical/diagonal one is left alone entirely (no visual
         // follow at all), so it never fights page scroll.
-        if (!horizontal && kotlin.math.abs(dx) <= kotlin.math.abs(dy) * 1.25) return@addEventListener
+        if (!horizontal && !SwipeDecision.locksHorizontal(dx.toDouble(), dy.toDouble())) return@addEventListener
         if (!horizontal) {
             zone.style.setProperty("user-select", "none")
             clearTextSelection()
@@ -125,13 +124,13 @@ internal fun installSwipeCard(zone: HTMLElement, faceForTransform: HTMLElement, 
         val dy = event.clientY - origin.y
         val wasHorizontal = horizontal
         horizontal = false
-        val horizontalDominant = kotlin.math.abs(dx) > kotlin.math.abs(dy) * 1.25
+        val horizontalDominant = SwipeDecision.locksHorizontal(dx.toDouble(), dy.toDouble())
         // `wasHorizontal` covers a real drag (locked in by a pointermove partway through, see
         // above); `horizontalDominant` alone covers a same-tick down→up pair with no intermediate
         // move at all — a synthetic/scripted gesture, but also the only way a fast enough real
         // one could ever arrive. Neither means "never moved" (a tap) or "stayed vertical/diagonal".
         if (!wasHorizontal && !horizontalDominant) return@addEventListener
-        settle(SwipeDecision.rating(dx.toDouble(), dy.toDouble(), SWIPE_THRESHOLD_PX, 1.25,
+        settle(SwipeDecision.rating(dx.toDouble(), dy.toDouble(), SWIPE_THRESHOLD_PX, SwipeDecision.AXIS_RATIO,
             checkYOnRelease = true))
     })
     zone.addEventListener("pointercancel", { start = null; if (horizontal) settle(null); horizontal = false })
@@ -145,7 +144,7 @@ internal fun installSwipeCard(zone: HTMLElement, faceForTransform: HTMLElement, 
  * copy of this markup.
  */
 internal fun appendSwipeLabels(face: HTMLElement) {
-    listOf("again" to UiCopy.Again, "good" to UiCopy.Good).forEach { (kind, label) ->
+    listOf("again" to "Повторить", "good" to "Вспомнил").forEach { (kind, label) ->
         val span = document.createElement("span") as HTMLElement
         span.className = "swipe-label swipe-label-$kind"
         span.textContent = label

@@ -54,8 +54,8 @@ import polski.presentation.builtInStyleIds
 import polski.presentation.StylePhase
 import polski.presentation.StyleRegistry
 import polski.presentation.ContrastPair
-import polski.presentation.sentenceHighlightParts
 import polski.presentation.UiCopy
+import polski.presentation.sentenceHighlightParts
 import polski.srs.Rating
 import polski.training.sentenceSeeds
 import polski.ui.ContrastPairText
@@ -144,7 +144,7 @@ internal fun AndroidTrainingScreen(
                 if (!reduceMotion && !RiveMeasurementVariant.riveDisabled) AndroidChainCompleteOverlay()
             }
             CardPhase.NoDue -> AndroidInfoCard("Повторения на сейчас завершены") {
-                Text(state.nextDue?.let { "Следующее: ${formatDate(it.toEpochMilliseconds())}" } ?: "Новых повторений пока нет.")
+                Text(state.nextDue?.let { "Следующее: ${formatDate(it.toEpochMilliseconds())}" } ?: UiCopy.NoDueTitle)
                 Button(onClick = { dispatch(AppAction.StartChain()) }, modifier = Modifier.fillMaxWidth()) {
                     Text("Потренировать цепочку")
                 }
@@ -250,7 +250,7 @@ internal fun AndroidTrainingScreen(
                                         onClick = { dispatch(AppAction.Reveal(exercise.id)) },
                                         modifier = Modifier.fillMaxWidth().focusRequester(focusReveal),
                                         shape = RoundedCornerShape(16.dp),
-                                    ) { Text(if (state.answerMode == AnswerMode.Typed) "Проверить ответ" else UiCopy.ShowAnswer,
+                                    ) { Text(if (state.answerMode == AnswerMode.Typed) "Проверить ответ" else "Показать ответ",
                                         modifier = Modifier.padding(vertical = 7.dp)) }
                                 }
                             }
@@ -263,7 +263,7 @@ internal fun AndroidTrainingScreen(
                                                 before = false, style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.SemiBold)
                                             if (exercise.accepted.isNotEmpty()) Text("Также: ${exercise.accepted.joinToString(" / ")}")
                                             if (state.answerMode == AnswerMode.Typed) {
-                                                Text(if (state.evaluation?.correct == true) "Совпадает с правильным вариантом" else "Сравни свой ответ с эталоном")
+                                                Text(if (state.evaluation?.correct == true) "Совпадает с правильным вариантом" else UiCopy.CompareAnswer)
                                                 Text(state.frozenAnswer?.takeIf(String::isNotEmpty) ?: "Ответ не введён")
                                             }
                                         }
@@ -306,7 +306,7 @@ internal fun AndroidTrainingScreen(
 
         OutlinedButton(onClick = { dispatch(AppAction.ToggleReference) }, enabled = !introducing,
             modifier = Modifier.fillMaxWidth()) {
-            Text(if (!introducing && state.showReference) UiCopy.HideTable else UiCopy.TableAtHand)
+            Text(if (!introducing && state.showReference) "Скрыть таблицу" else "Таблица под рукой")
         }
         AndroidCollapsible(visible = state.showReference && !introducing, reduceMotion = reduceMotion) {
             AndroidCaseReference(state, dispatch)
@@ -343,7 +343,7 @@ fun AndroidCaseReference(state: AppUiState, dispatch: (AppAction) -> Unit) {
         }
         Text(courseContextHelp.compact)
         OutlinedButton(onClick = { dispatch(AppAction.SelectTab(AppTab.Matrix)) }, modifier = Modifier.fillMaxWidth()) {
-            Text(UiCopy.AllTablesAndSchema)
+            Text("Все таблицы и схема")
         }
     }
 }

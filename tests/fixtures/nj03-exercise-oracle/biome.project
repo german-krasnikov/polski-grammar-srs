@@ -1,9 +1,4 @@
 TOOLCHAIN b3fc1ec9c8b94c422e51b8cbfa5edbdf340488d4
-# Exercise oracle: generates allExerciseCases() body into TrainingParityTest.kt
-# from requirements.core-data (112 CASE lines in Biome value syntax).
-# Run: node <biome> generate --project tests/fixtures/nj03-exercise-oracle/biome.project
-# Check: node <biome> generate --check --project tests/fixtures/nj03-exercise-oracle/biome.project
-GENERATE exercise-oracle derive {dir}/derive-oracle.mjs generate OUT
-GENERATE exercise-oracle-en derive {dir}/derive-oracle-en.mjs generate OUT
-GENERATE swipe-policy derive {dir}/derive-swipe-policy.mjs generate OUT
-GENERATE textwire-tests derive {dir}/../nj03-textwire/derive-textwire-tests.mjs generate OUT
+# The four GENERATE steps that used to run from this project (exercise oracle, swipe-policy, textwire-tests) moved to
+# dsl/biome.project (W1.5), so the main project's `biome generate --check` also catches drift in their outputs.
+# The derive scripts stayed in this directory; only the GENERATE lines moved. See dsl/biome.project.

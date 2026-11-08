@@ -46,7 +46,7 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
 import polski.presentation.CardEffect
-import polski.presentation.UiCopy
+import polski.presentation.CardFlipTiming
 import polski.presentation.cardEffectFor
 import polski.interaction.SwipeDecision
 import polski.srs.Rating
@@ -207,8 +207,8 @@ fun AndroidRatingDragSurface(
             .semantics {
                 contentDescription = "Оценка карточки"
                 customActions = listOf(
-                    CustomAccessibilityAction(UiCopy.Again) { onRate(Rating.Again); true },
-                    CustomAccessibilityAction(UiCopy.Good) { onRate(Rating.Good); true },
+                    CustomAccessibilityAction("Повторить") { onRate(Rating.Again); true },
+                    CustomAccessibilityAction("Вспомнил") { onRate(Rating.Good); true },
                 )
             },
     ) {
@@ -245,7 +245,7 @@ private fun BoxScope.AndroidDragRatingOverlay(progress: Float) {
             shape = RoundedCornerShape(24.dp),
             modifier = Modifier.matchParentSize(),
         ) {}
-        val (label, weight) = if (again >= good) UiCopy.Again to again else UiCopy.Good to good
+        val (label, weight) = if (again >= good) "Повторить" to again else "Вспомнил" to good
         if (weight > 0.05f) Text(
             label,
             style = MaterialTheme.typography.headlineSmall,
@@ -300,7 +300,7 @@ fun AndroidSwipeHint(nudgeGate: SwipeNudgeGate, reduceMotion: Boolean) {
         horizontalArrangement = Arrangement.spacedBy(6.dp),
     ) {
         Text("←", style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.error)
-        Text("${UiCopy.Again} · ${UiCopy.Good}", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        Text("Повторить · Вспомнил", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
         Text("→", style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.primary)
     }
 }
@@ -388,7 +388,7 @@ fun AndroidStaggeredReveal(index: Int, reduceMotion: Boolean, content: @Composab
  * Gesture/drag ([AndroidRatingDragSurface]) attaches only once `showingBack` (angle past 90°), not
  * the instant [revealed] turns true: `revealed` flips true the moment the flip *starts*, but
  * `front()` (with its own always-on tap-to-reveal control) keeps rendering and receiving touch for
- * the ~250ms `tween(500)` takes to cross 90°. Attaching the drag surface any earlier let a swipe
+ * the ~[CardFlipTiming.HALF_MS]ms `tween([CardFlipTiming.FULL_MS])` takes to cross 90°. Attaching the drag surface any earlier let a swipe
  * fired right after the reveal tap dispatch a rating before the answer face was ever shown, and let
  * a double-tap in that window race `front`'s reveal against this gesture's `toggleFlip`, reversing
  * the in-flight animation (`Plans/Kotlin/Lane-android.md`'s "gate on `showingBack`" correction).
@@ -409,7 +409,7 @@ fun AndroidFlipCard(
         if (flipped == target) return
         flipped = target
         val to = if (target) 180f else 0f
-        if (reduceMotion) angleAnim.snapTo(to) else angleAnim.animateTo(to, tween(500))
+        if (reduceMotion) angleAnim.snapTo(to) else angleAnim.animateTo(to, tween(CardFlipTiming.FULL_MS))
     }
     LaunchedEffect(revealed, itemId) { if (revealed) setFlipped(true) }
     val angle = angleAnim.value

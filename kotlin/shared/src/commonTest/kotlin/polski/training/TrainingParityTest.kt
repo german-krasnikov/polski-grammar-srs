@@ -615,13 +615,6 @@ class TrainingParityTest {
             assertEquals(Evaluation(false, "widzę mojego dobrego kolegę", "Nie widziałeś mojej pięknej żony.", 23), evaluate("Widzę mojego dobrego kolegę.", Exercise("generated", "mixed", "Widzę moją piękną żonę.", "Скажи «ты не видел…» в прошедшем времени. Сохрани «мой / моя».", "Nie widziałeś mojej pięknej żony.", listOf("Nie widziałaś mojej pięknej żony."), "TY + прошедшее время + отрицание. Отрицание требует Dopełniacza всей группы слов.", listOf("mixed", "gen", "past"), "wife", "beautiful", PossessiveId.fromId("my"), NumberGram.fromId("sg"), listOf(FormChange("Widzę", "Nie widziałeś", "Лицо + время + отрицание"), FormChange("moją piękną żonę", "mojej pięknej żony", "Biernik → Dopełniacz")))), "A-wrong")
         }
     }
-    @Test fun queueSelection() {
-        val cards = listOf(DueSkillCard("first", 20), DueSkillCard("second", 10), DueSkillCard("third", 10))
-        assertEquals("first", nextSkillId(cards, "first"))
-        assertEquals("second", nextSkillId(cards))
-        assertEquals("second", nextSkillId(cards, "unknown"))
-        assertFailsWith<IllegalStateException> { nextSkillId(emptyList()) }
-    }
     @Test fun portsAndUtf16Distance() {
         assertFailsWith<IllegalArgumentException> { PlExerciseEngine(RandomSource { 1.0 }, ExerciseIdFactory { "id" }).generateForSkill("mixed") }
         assertFailsWith<IllegalArgumentException> { PlExerciseEngine(RandomSource { 0.0 }, ExerciseIdFactory { "" }).generateChain() }

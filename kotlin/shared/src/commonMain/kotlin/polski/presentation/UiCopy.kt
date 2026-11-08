@@ -28,4 +28,6 @@ object UiCopy {
     const val TableAtHand = "Таблица под рукой"
     const val AllTablesAndSchema = "Все таблицы и схема"
     const val WhenToReview = "Когда повторить?"
+    const val NoDueTitle = "Новых повторений пока нет."
+    const val CompareAnswer = "Сравни свой ответ с эталоном"
 }

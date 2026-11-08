@@ -2,7 +2,9 @@ package polski.interaction
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFalse
 import kotlin.test.assertNull
+import kotlin.test.assertTrue
 import polski.srs.Rating
 
 class SwipeDecisionTest {
@@ -24,5 +26,14 @@ class SwipeDecisionTest {
         assertEquals(Rating.Again, SwipeDecision.rating(-75.0, -59.0, 75.0, 1.25, true))
         assertEquals(Rating.Good, SwipeDecision.rating(72.0, 200.0, 72.0, 1.0, false))
         assertEquals(Rating.Again, SwipeDecision.rating(-72.0, -200.0, 72.0, 1.0, false))
+    }
+
+    @Test
+    fun locksHorizontalUsesSharedAxisRatio() {
+        assertEquals(1.25, SwipeDecision.AXIS_RATIO)
+        assertTrue(SwipeDecision.locksHorizontal(100.0, 79.0))
+        assertFalse(SwipeDecision.locksHorizontal(100.0, 80.0))
+        assertFalse(SwipeDecision.locksHorizontal(-50.0, 100.0))
+        assertTrue(SwipeDecision.locksHorizontal(-100.0, -79.0))
     }
 }

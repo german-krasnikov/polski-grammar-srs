@@ -48,6 +48,7 @@ import polski.model.SentenceSeed
 import polski.model.Tense
 import polski.presentation.AppUiState
 import polski.presentation.CardPhase
+import polski.presentation.UiCopy
 import polski.presentation.chainDisplayCount
 import polski.presentation.UiEffect
 import polski.presentation.endingHighlightParts
@@ -97,6 +98,10 @@ internal fun snapshot(state: AppUiState): String = buildJsonObject {
     put("showSkillPicker", state.showSkillPicker)
     put("revision", state.revision)
     put("savedRevision", state.savedRevision)
+    put("resetProgress", UiCopy.ResetProgress)
+    put("progressTab", UiCopy.ProgressTab)
+    put("settingsTab", UiCopy.SettingsTab)
+    put("lifehacks", UiCopy.Lifehacks)
     put("error", state.error?.let(::JsonPrimitive) ?: JsonNull)
     put("nextDue", state.nextDue?.toEpochMilliseconds()?.let(::JsonPrimitive) ?: JsonNull)
     put("now", state.now?.toEpochMilliseconds()?.let(::JsonPrimitive) ?: JsonNull)

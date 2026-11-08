@@ -6,7 +6,7 @@ import org.w3c.dom.HTMLCanvasElement
 import org.w3c.dom.HTMLElement
 import org.w3c.dom.HTMLScriptElement
 import polski.presentation.CardEffect
-import polski.presentation.RiveGate
+import polski.presentation.CardFlipTiming
 
 /** True when the app's Motion setting (or the OS reduce-motion signal) disables animation. */
 internal fun reducedMotionActive(): Boolean =
@@ -25,14 +25,12 @@ internal fun motionInstantActive(): Boolean = reducedMotionActive() || animation
 /** Debug-only escape hatch for the A/B/C measurement variants (§5): `?riveDisabled=1`. */
 private fun disabledForMeasurement(): Boolean = window.location.search.contains("riveDisabled=1")
 
-/** Whether ANY Rive call (bridge load, trigger, prewarm) is allowed right now, via the shared
- *  [RiveGate.skip] (`DSL-MIGRATION-PLAN.md` block B). */
-internal fun riveGated(): Boolean =
-    RiveGate.skip(motionInstantActive(), animationsEnabled = !animationsDisabledActive(), measurementDisabled = disabledForMeasurement())
+/** Whether ANY Rive call (bridge load, trigger, prewarm) is allowed right now. */
+internal fun riveGated(): Boolean = motionInstantActive() || disabledForMeasurement()
 
 /**
  * Each half of the card flip's duration in ms (R1's two-half swap-at-90°, [FlipCard.apply]).
- * Normally a fixed 250ms; `?flipDebugScale=<n>` multiplies it for tests that need a slowed-down,
+ * Normally a fixed [CardFlipTiming.HALF_MS]ms; `?flipDebugScale=<n>` multiplies it for tests that need a slowed-down,
  * non-flaky window to assert mid-flip DOM/aria state in — the same test-only-timing idea as the
  * iOS/macOS `POLSKI_FLIP_DEBUG_SCALE` env var (FlipCardRivePlan.md §12.1/FC2-05), ported to a URL
  * flag since that is this host's existing debug-flag convention (`?riveDisabled=1`).
@@ -41,11 +39,11 @@ internal fun flipHalfDurationMs(): Int {
     val search = window.location.search
     val marker = "flipDebugScale="
     val start = search.indexOf(marker)
-    if (start < 0) return 250
+    if (start < 0) return CardFlipTiming.HALF_MS
     val rest = search.substring(start + marker.length)
     val end = rest.indexOf('&').let { if (it < 0) rest.length else it }
-    val scale = rest.substring(0, end).toDoubleOrNull() ?: return 250
-    return (250 * scale).toInt().coerceIn(1, 20_000)
+    val scale = rest.substring(0, end).toDoubleOrNull() ?: return CardFlipTiming.HALF_MS
+    return (CardFlipTiming.HALF_MS * scale).toInt().coerceIn(1, 20_000)
 }
 
 private var riveBridgeRequested = false

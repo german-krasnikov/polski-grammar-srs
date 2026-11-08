@@ -30,10 +30,8 @@ import polski.progress.ReviewResult
 import polski.progress.SaveResult
 import polski.progress.SkillQueue
 import polski.srs.Scheduler
-import polski.training.DueSkillCard
 import polski.training.PlExerciseEngine
 import polski.training.evaluate
-import polski.training.nextSkillId
 import polski.training.sentenceSeeds
 
 /**
@@ -320,13 +318,8 @@ class TrainingStore(
         val nextExercise = when (current.mode) {
             TrainingMode.Chain -> current.chain.getOrNull(current.chainIndex + 1)
             TrainingMode.Focused -> exerciseEngine.generateForSkill(current.focusedSkillId ?: exercise.primarySkill)
-            TrainingMode.Schedule -> {
-                val due = skillQueue.due(result.document.progress.cards, scheduler, captured.at)
-                val nextId = due.takeIf { it.isNotEmpty() }?.let { cards ->
-                    nextSkillId(cards.map { DueSkillCard(it.skillId, it.card.due.toEpochMilliseconds()) })
-                }
-                nextId?.let(exerciseEngine::generateForSkill)
-            }
+            TrainingMode.Schedule ->
+                skillQueue.next(result.document.progress.cards, scheduler, captured.at)?.let { exerciseEngine.generateForSkill(it.skillId) }
         }
         val phase = when {
             current.mode == TrainingMode.Chain && nextExercise == null -> CardPhase.ChainComplete

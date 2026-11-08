@@ -86,8 +86,8 @@ describe('swipe Policy generation', () => {
         mkdirSync(dirname(join(dir, file)), { recursive: true });
         copyFileSync(join(repo, file), join(dir, file));
       }
-      const steps = readFileSync(join(repo, PROJECT, 'biome.project'), 'utf8').split('\n').filter(line => line.startsWith('GENERATE swipe-policy '));
-      expect(steps, 'the swipe-policy step is registered once in biome.project').toHaveLength(1);
+      const steps = readFileSync(join(repo, 'dsl/biome.project'), 'utf8').split('\n').filter(line => line.startsWith('GENERATE swipe-policy '));
+      expect(steps, 'the swipe-policy step is registered once in dsl/biome.project').toHaveLength(1);
       writeFileSync(join(dir, PROJECT, 'biome.project'), `${steps[0]}\n`);
       mkdirSync(join(dir, 'tmp'));
     });
