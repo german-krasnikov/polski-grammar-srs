@@ -133,22 +133,19 @@ class TrainingStore(
 
     fun dispatch(action: AppAction) {
         if (closed) return
+        val s = state.value
+        if (!accepts(action, s)) return
         when (action) {
             is AppAction.EffectAcknowledged -> acknowledge(action)
             is AppAction.ResetDecision -> resetDecision(action)
             AppAction.RequestExport -> export()
             AppAction.RequestMigration -> requestMigration()
-            AppAction.RequestReset -> if (state.value.loadStatus == LoadStatus.Ready &&
-                state.value.pendingEffects.none { it is UiEffect.ConfirmReset }
-            ) {
-                addEffect { UiEffect.ConfirmReset(it, "Сбросить весь прогресс?") }
-            }
+            AppAction.RequestReset -> addEffect { UiEffect.ConfirmReset(it, "Сбросить весь прогресс?") }
             AppAction.RefreshTime -> refreshTime()
             is AppAction.SelectTab -> {
-                val old = state.value
-                mutableState.value = old.copy(
+                mutableState.value = s.copy(
                     tab = action.tab,
-                    matrixSelection = if (action.tab == AppTab.Matrix && old.tab != AppTab.Matrix) MatrixSelection() else old.matrixSelection,
+                    matrixSelection = if (action.tab == AppTab.Matrix && s.tab != AppTab.Matrix) MatrixSelection() else s.matrixSelection,
                 )
             }
             is AppAction.SelectMatrixSection -> mutate { it.copy(matrixSelection = it.matrixSelection.copy(section = action.section)) }
@@ -164,20 +161,33 @@ class TrainingStore(
             }
             AppAction.ToggleReference -> mutate { it.copy(showReference = !it.showReference) }
             AppAction.OpenSkillPicker -> mutate { it.copy(showSkillPicker = !it.showSkillPicker) }
-            is AppAction.StartChain -> ifReady { startChain(action.seedIndex ?: state.value.seedIndex) }
-            is AppAction.SelectChainSeed -> ifReady { startChain(action.index) }
-            AppAction.StartSchedule -> ifReady { startSchedule() }
-            is AppAction.ChooseSkill -> ifReady { chooseSkill(action) }
-            is AppAction.SetAnswerMode -> if (state.value.phase == CardPhase.Question) mutate { it.copy(answerMode = action.mode) }
+            is AppAction.StartChain -> startChain(action.seedIndex ?: s.seedIndex)
+            is AppAction.SelectChainSeed -> startChain(action.index)
+            AppAction.StartSchedule -> startSchedule()
+            is AppAction.ChooseSkill -> chooseSkill(action)
+            is AppAction.SetAnswerMode -> mutate { it.copy(answerMode = action.mode) }
             is AppAction.SetStyle -> mutate { it.copy(styleId = action.styleId) }
-            AppAction.ContinueIntroduction -> if (state.value.phase == CardPhase.Question && state.value.introPending) {
+            AppAction.ContinueIntroduction -> {
                 mutate { it.copy(introPending = false) }
-                state.value.exercise?.let(::addFocus)
+                s.exercise?.let(::addFocus)
             }
-            is AppAction.EditAnswer -> if (state.value.phase == CardPhase.Question) mutate { it.copy(draft = action.text) }
+            is AppAction.EditAnswer -> mutate { it.copy(draft = action.text) }
             is AppAction.Reveal -> reveal(action.exerciseId)
             is AppAction.Rate -> rate(action)
         }
+    }
+
+    private fun accepts(action: AppAction, s: AppUiState): Boolean = when (action) {
+        is AppAction.StartChain, is AppAction.SelectChainSeed,
+        AppAction.StartSchedule, is AppAction.ChooseSkill -> s.loadStatus == LoadStatus.Ready
+        AppAction.RequestReset -> s.loadStatus == LoadStatus.Ready && s.pendingEffects.none { it is UiEffect.ConfirmReset }
+        is AppAction.SetAnswerMode, is AppAction.EditAnswer -> s.phase == CardPhase.Question
+        AppAction.ContinueIntroduction -> s.phase == CardPhase.Question && s.introPending
+        is AppAction.Reveal -> s.loadStatus == LoadStatus.Ready && s.phase == CardPhase.Question &&
+            !s.introPending && s.exercise?.id == action.exerciseId
+        is AppAction.Rate -> s.loadStatus == LoadStatus.Ready && s.phase == CardPhase.Revealed &&
+            s.exercise?.id == action.exerciseId && document != null
+        else -> true
     }
 
     private fun install(source: ProgressDocument, captured: TimeCapture) {
@@ -222,10 +232,6 @@ class TrainingStore(
                 is MigrationResult.Unavailable -> recovery(recoveryRaw.orEmpty(), result.cause.message ?: "Не удалось перенести прогресс")
             }
         }
-    }
-
-    private fun ifReady(block: () -> Unit) {
-        if (state.value.loadStatus == LoadStatus.Ready) block()
     }
 
     private fun needsIntroduction(exercise: Exercise?, source: ProgressDocument?): Boolean =
@@ -292,8 +298,6 @@ class TrainingStore(
     private fun reveal(exerciseId: String) {
         val current = state.value
         val exercise = current.exercise ?: return
-        if (current.loadStatus != LoadStatus.Ready || current.phase != CardPhase.Question ||
-            current.introPending || exercise.id != exerciseId) return
         val evaluation = if (current.answerMode == AnswerMode.Typed) evaluate(current.draft, exercise) else null
         mutate { it.copy(phase = CardPhase.Revealed, frozenAnswer = current.draft, evaluation = evaluation) }
     }
@@ -302,7 +306,6 @@ class TrainingStore(
         val current = state.value
         val exercise = current.exercise ?: return
         val before = document ?: return
-        if (current.loadStatus != LoadStatus.Ready || current.phase != CardPhase.Revealed || exercise.id != action.exerciseId) return
         val captured = time.capture()
         val result = reviewReducer.recordReview(
             before, exercise.primarySkill, action.rating,
