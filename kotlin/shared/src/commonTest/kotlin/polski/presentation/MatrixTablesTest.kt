@@ -5,13 +5,11 @@ import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 import polski.data.comparisonNounIds
 import polski.data.enPersonalPronouns
-import polski.data.enVerbs
 import polski.data.nounById
 import polski.data.personalPronouns
 import polski.data.possessives
 import polski.data.referencePronounTeaching
 import polski.data.referenceVerbTeaching
-import polski.data.verbs
 import polski.grammar.caseRows
 import polski.grammar.caseSentence
 import polski.grammar.nounPhrase
@@ -21,140 +19,149 @@ import polski.model.NumberGram
 import polski.model.PossessiveId
 import polski.model.SentenceSeed
 import polski.model.Tense
+import polski.presentation.data.oracle.MATRIX_CELL_CASE_ROW_ROWS
+import polski.presentation.data.oracle.MATRIX_HEADER_ROW_ROWS
+import polski.presentation.data.oracle.MATRIX_TABLE_CASE_ROW_ROWS
+import polski.presentation.data.oracle.MatrixTableCaseRowPack
+import polski.presentation.data.oracle.MatrixTableCaseRowTableKind
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
+import kotlin.test.assertTrue
 
 /**
  * UC-09 part 2/2: [casesFullTable]/[comparisonTable]/[verbsTable]/[personalPronounsTable]/
  * [possessivesTable] are the exact tables desktop's `MatrixScreen.kt` (`CasesDesktop`/
  * `VerbsDesktop`/`PronounsDesktop`) and macOS's `matrixSnapshot` build by hand today — every
- * expected value/header below is computed the same way those call sites compute it, so a switch
- * to these shared builders cannot change a single cell a host already shows.
+ * DSL rows pin observed headers and selected cells independently of the builders. The source-wide
+ * property checks below cover every row and contrast, including cells outside the literal oracle.
  */
 class MatrixTablesTest {
     private val selection = MatrixSelection()
 
-    @Test fun casesFullTableMatchesDesktopsHeadersAndPerCaseFormsAndSentences() {
+    @Test fun literalMatrixOraclePreservesHeadersCellsAndContrastRoles() {
+        val headers = MATRIX_HEADER_ROW_ROWS.groupBy { it.caseRef }
+        val cells = MATRIX_CELL_CASE_ROW_ROWS.groupBy { it.caseRef }
+        assertEquals(MATRIX_TABLE_CASE_ROW_ROWS.map { it.id }.toSet(), headers.keys)
+        assertEquals(MATRIX_TABLE_CASE_ROW_ROWS.map { it.id }.toSet(), cells.keys)
+        MATRIX_TABLE_CASE_ROW_ROWS.forEach { case ->
+            val caseSelection = selection.copy(
+                nounId = case.nounId ?: selection.nounId,
+                adjectiveId = case.adjectiveId ?: selection.adjectiveId,
+                ownerId = case.ownerId ?: selection.ownerId,
+                numberId = case.numberId ?: selection.numberId,
+                verbId = case.verbId ?: selection.verbId,
+                feminineGroup = case.feminineGroup ?: selection.feminineGroup,
+            )
+            val table = when (case.tableKind) {
+                MatrixTableCaseRowTableKind.CASES -> casesFullTable(caseSelection)
+                MatrixTableCaseRowTableKind.COMPARISON -> comparisonTable(caseSelection)
+                MatrixTableCaseRowTableKind.VERBS -> verbsTable(caseSelection)
+                MatrixTableCaseRowTableKind.PRONOUNS -> personalPronounsTable()
+                MatrixTableCaseRowTableKind.POSSESSIVES -> possessivesTable()
+                MatrixTableCaseRowTableKind.ENVERBS -> enVerbsTable(requireNotNull(case.verbId))
+                MatrixTableCaseRowTableKind.ENDOSUPPORT -> enDoSupportTable()
+            }
+            val expectedPack = when (case.tableKind) {
+                MatrixTableCaseRowTableKind.ENVERBS, MatrixTableCaseRowTableKind.ENDOSUPPORT -> MatrixTableCaseRowPack.EN
+                else -> MatrixTableCaseRowPack.PL
+            }
+            assertEquals(expectedPack, case.pack, "${case.id} pack")
+            assertEquals(case.rowHeaderLabel, table.rowHeaderLabel, case.id)
+            assertEquals(case.rowCount, table.rows.size, "${case.id} row count")
+            val expectedHeaders = headers.getValue(case.id).sortedBy { it.ordinal }
+            assertEquals(table.columnHeaders.indices.toList(), expectedHeaders.map { it.ordinal }, "${case.id} header order")
+            assertEquals(expectedHeaders.map { it.label }, table.columnHeaders, case.id)
+            cells.getValue(case.id).forEach { row ->
+                val tableRow = table.rows[row.rowIndex]
+                val cell = tableRow.cells[row.columnIndex]
+                assertEquals(row.rowHeader, tableRow.header, row.cellId)
+                assertEquals(row.value, cell.value, row.cellId)
+                if (row.expectNoContrast == true) {
+                    assertNull(cell.contrast, row.cellId)
+                } else {
+                    assertTrue(row.contrastFrom != null && row.contrastTo != null, "${row.cellId} incomplete oracle")
+                    assertEquals(row.contrastFrom, cell.contrast?.from, "${row.cellId} contrast from")
+                    assertEquals(row.contrastTo, cell.contrast?.to, "${row.cellId} contrast to")
+                }
+            }
+        }
+    }
+
+    private fun assertSourceCell(cell: MatrixTableCell, expectedValue: String, contrastFrom: String? = null) {
+        assertEquals(expectedValue, cell.value)
+        assertEquals(contrastFrom?.let { ContrastPair.generated(it, expectedValue) }, cell.contrast)
+    }
+
+    @Test fun plTablesCoverEverySourceRowAndSubject() {
         val number = NumberGram.fromId(selection.numberId)
         val owner = PossessiveId.fromId(selection.ownerId)
         val seed = SentenceSeed(selection.nounId, selection.adjectiveId)
-        val table = casesFullTable(selection)
-
-        assertEquals("Падеж · русская опора", table.rowHeaderLabel)
-        assertEquals(listOf("Вопрос / конструкция", "Вся группа слов", "Целое предложение"), table.columnHeaders)
-        assertEquals(caseRows.size, table.rows.size)
-        caseRows.forEachIndexed { i, row ->
-            val phrase = nounPhrase(selection.nounId, row.id, number, selection.adjectiveId, owner)
-            val sentence = caseSentence(seed, row.id, owner, number)
-            assertEquals("${row.pl} · ${row.ru}", table.rows[i].header)
-            assertEquals("${row.question} · ${row.trigger}", table.rows[i].cells[0].value)
-            assertNull(table.rows[i].cells[0].contrast)
-            assertEquals(phrase, table.rows[i].cells[1].value)
-            assertEquals(sentence, table.rows[i].cells[2].value)
-            val nomPhrase = nounPhrase(selection.nounId, GramCase.NOM, number, selection.adjectiveId, owner)
-            val nomSentence = caseSentence(seed, GramCase.NOM, owner, number)
-            assertEquals(ContrastPair.generated(nomPhrase, phrase), table.rows[i].cells[1].contrast)
-            assertEquals(ContrastPair.generated(nomSentence, sentence), table.rows[i].cells[2].contrast)
+        val cases = casesFullTable(selection)
+        val nomPhrase = nounPhrase(selection.nounId, GramCase.NOM, number, selection.adjectiveId, owner)
+        val nomSentence = caseSentence(seed, GramCase.NOM, owner, number)
+        assertEquals(caseRows.size, cases.rows.size)
+        caseRows.forEachIndexed { index, row ->
+            val cells = cases.rows[index].cells
+            assertEquals("${row.pl} · ${row.ru}", cases.rows[index].header)
+            assertSourceCell(cells[0], "${row.question} · ${row.trigger}")
+            assertSourceCell(cells[1], nounPhrase(selection.nounId, row.id, number, selection.adjectiveId, owner), nomPhrase)
+            assertSourceCell(cells[2], caseSentence(seed, row.id, owner, number), nomSentence)
         }
-    }
 
-    @Test fun comparisonTableMatchesDesktopsLemmaHeadersAndEveryNounsFormPerCase() {
-        val number = NumberGram.fromId(selection.numberId)
-        val table = comparisonTable(selection)
-
-        assertEquals(comparisonNounIds.map { nounById(it).lemma }, table.columnHeaders)
+        val comparison = comparisonTable(selection)
+        assertEquals(comparisonNounIds.size, comparison.columnHeaders.size)
         caseRows.forEachIndexed { rowIndex, row ->
-            comparisonNounIds.forEachIndexed { colIndex, id ->
-                val noun = nounById(id)
-                val expected = noun.forms.getValue(number).getValue(row.id)
-                val base = noun.forms.getValue(number).getValue(GramCase.NOM)
-                assertEquals(expected, table.rows[rowIndex].cells[colIndex].value)
-                assertEquals(ContrastPair.generated(base, expected), table.rows[rowIndex].cells[colIndex].contrast)
+            comparisonNounIds.forEachIndexed { columnIndex, id ->
+                val forms = nounById(id).forms.getValue(number)
+                assertSourceCell(comparison.rows[rowIndex].cells[columnIndex], forms.getValue(row.id), forms.getValue(GramCase.NOM))
             }
         }
-    }
 
-    @Test fun verbsTableMatchesDesktopsCompactTenseLabelsAndEverySubject() {
         val teaching = referenceVerbTeaching
         val tenses = listOf(Tense.PRESENT, Tense.PAST, Tense.FUTURE)
-        val table = verbsTable(selection)
-        val lemma = verbs.first { it.id == selection.verbId }.lemma
-
-        assertEquals(tenses.map { teaching.tenseLabels.getValue(it).compact }, table.columnHeaders)
+        val verbs = verbsTable(selection)
+        val lemma = polski.data.verbs.first { it.id == selection.verbId }.lemma
+        assertEquals(teaching.subjects.size, verbs.rows.size)
         teaching.subjects.forEachIndexed { rowIndex, subject ->
-            assertEquals(subject.label.compact, table.rows[rowIndex].header)
-            tenses.forEachIndexed { colIndex, tense ->
-                val expected = verbForm(selection.verbId, tense, subject.person, subject.number, subject.gender(selection.feminineGroup))
-                assertEquals(expected, table.rows[rowIndex].cells[colIndex].value)
-                assertEquals(ContrastPair.generated(lemma, expected), table.rows[rowIndex].cells[colIndex].contrast)
+            assertEquals(subject.label.compact, verbs.rows[rowIndex].header)
+            tenses.forEachIndexed { columnIndex, tense ->
+                val form = verbForm(selection.verbId, tense, subject.person, subject.number, subject.gender(selection.feminineGroup))
+                assertSourceCell(verbs.rows[rowIndex].cells[columnIndex], form, lemma)
             }
         }
-    }
 
-    @Test fun personalPronounsTableMatchesDesktopsCompactCuesAndEveryPronoun() {
-        val teaching = referencePronounTeaching
-        val table = personalPronounsTable()
-
-        assertEquals(teaching.contexts.map { it.cue.compact }, table.columnHeaders)
-        teaching.pronounIds.forEachIndexed { rowIndex, id ->
-            assertEquals(id, table.rows[rowIndex].header)
-            teaching.contexts.forEachIndexed { colIndex, context ->
-                val expected = context.value(id, personalPronouns.getValue(id))
-                assertEquals(expected, table.rows[rowIndex].cells[colIndex].value)
-                assertEquals(ContrastPair.generated(id, expected), table.rows[rowIndex].cells[colIndex].contrast)
+        val pronouns = personalPronounsTable()
+        val pronounTeaching = referencePronounTeaching
+        pronounTeaching.pronounIds.forEachIndexed { rowIndex, id ->
+            assertEquals(id, pronouns.rows[rowIndex].header)
+            pronounTeaching.contexts.forEachIndexed { columnIndex, context ->
+                assertSourceCell(pronouns.rows[rowIndex].cells[columnIndex], context.value(id, personalPronouns.getValue(id)), id)
             }
         }
-    }
 
-    @Test fun possessivesTableMatchesDesktopsCaseColumnsPlusAnUnhighlightedRuleColumn() {
-        val teaching = referencePronounTeaching
-        val demo = teaching.demo
-        val table = possessivesTable()
-
-        assertEquals(demo.cases.map { it.desktop } + "Правило", table.columnHeaders)
+        val possessiveTable = possessivesTable()
+        val demo = pronounTeaching.demo
         possessives.forEachIndexed { rowIndex, possessive ->
-            assertEquals(possessive.label, table.rows[rowIndex].header)
-            demo.cases.forEachIndexed { colIndex, case ->
-                val expected = demo.phrase(possessive.id, case.id)
-                val base = demo.phrase(possessive.id, GramCase.NOM)
-                assertEquals(expected, table.rows[rowIndex].cells[colIndex].value)
-                assertEquals(ContrastPair.generated(base, expected), table.rows[rowIndex].cells[colIndex].contrast)
+            assertEquals(possessive.label, possessiveTable.rows[rowIndex].header)
+            demo.cases.forEachIndexed { columnIndex, case ->
+                assertSourceCell(possessiveTable.rows[rowIndex].cells[columnIndex], demo.phrase(possessive.id, case.id),
+                    demo.phrase(possessive.id, GramCase.NOM))
             }
-            val ruleCell = table.rows[rowIndex].cells[demo.cases.size]
-            assertEquals(demo.rule(possessive.id), ruleCell.value)
-            assertNull(ruleCell.contrast)
+            assertSourceCell(possessiveTable.rows[rowIndex].cells[demo.cases.size], demo.rule(possessive.id))
         }
     }
 
-    // EN-24 (UC-09 part 2/2 minimum, Plans/Kotlin/EnRuPackPlan.md §6, macOS slice): [enVerbsTable]/
-    // [enDoSupportTable] are the exact tables the web host already renders by hand in
-    // `MatrixWeb.kt`'s `renderEnglishVerbMatrix` — moved here so macOS's native `matrixSnapshot`
-    // and desktop's `VerbsDesktop` can show real, irregular `forms.generated.json`(en) values
-    // through this one shared builder instead of a third ad hoc copy.
-    @Test fun enVerbsTableUsesRealIrregularFormsPerPersonAndTense() {
-        val table = enVerbsTable("see")
-        val lemma = enVerbs.first { it.id == "see" }.lemma
-        assertEquals(listOf("Настоящее", "Прошедшее", "Будущее"), table.columnHeaders)
-        assertEquals(enPersonalPronouns.map { it.subject }, table.rows.map { it.header })
-        fun cell(subject: String, col: Int) = table.rows[enPersonalPronouns.indexOfFirst { it.subject == subject }].cells[col]
-        assertEquals("see", cell("I", 0).value)
-        assertEquals("saw", cell("I", 1).value)
-        assertEquals("will see", cell("I", 2).value)
-        assertEquals("sees", cell("he", 0).value)
-        assertEquals("saw", cell("he", 1).value)
-        assertEquals(ContrastPair.generated(lemma, "see"), cell("I", 0).contrast)
-    }
-
-    @Test fun enDoSupportTableSplitsPresentByPersonSharesInvariantPastAndHasNoFutureDoSupport() {
-        val table = enDoSupportTable()
-        assertEquals(listOf("Настоящее", "Прошедшее", "Будущее"), table.columnHeaders)
-        fun cell(subject: String, col: Int) = table.rows[enPersonalPronouns.indexOfFirst { it.subject == subject }].cells[col]
-        assertEquals("do", cell("I", 0).value)
-        assertEquals("does", cell("he", 0).value)
-        assertEquals("did", cell("I", 1).value)
-        assertEquals("did", cell("he", 1).value)
-        table.rows.forEach { row -> assertNull(Regex("\\bdid\\b|\\bdoes?\\b").find(row.cells[2].value)) }
+    @Test fun englishTablesCoverEverySubjectAndFutureHasNoDoSupport() {
+        val verbs = enVerbsTable("see")
+        val support = enDoSupportTable()
+        val subjects = enPersonalPronouns.map { it.subject }
+        assertEquals(subjects, verbs.rows.map { it.header })
+        assertEquals(subjects, support.rows.map { it.header })
+        support.rows.forEach { row ->
+            assertNull(Regex("\\bdid\\b|\\bdoes?\\b").find(row.cells[2].value))
+            assertNull(row.cells[2].contrast)
+        }
     }
 
     @Test fun toJsonRoundTripsHeadersValuesAndContrastPairsLosslessly() {

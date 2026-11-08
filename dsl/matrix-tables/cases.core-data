@@ -1,0 +1,61 @@
+# Inputs are explicit for the selection-driven tables; English verb is see.
+MATRIX_TABLE_CASE {
+  id: cases
+  tableKind: cases
+  pack: pl
+  rowHeaderLabel: "Падеж · русская опора"
+  rowCount: 7
+  nounId: wife
+  adjectiveId: beautiful
+  ownerId: my
+  numberId: sg
+}
+MATRIX_TABLE_CASE {
+  id: comparison
+  tableKind: comparison
+  pack: pl
+  rowHeaderLabel: "Падеж"
+  rowCount: 7
+  nounId: wife
+  adjectiveId: beautiful
+  ownerId: my
+  numberId: sg
+}
+MATRIX_TABLE_CASE {
+  id: verbs
+  tableKind: verbs
+  pack: pl
+  rowHeaderLabel: "Кто"
+  rowCount: 9
+  verbId: do
+  feminineGroup: false
+}
+MATRIX_TABLE_CASE {
+  id: pronouns
+  tableKind: pronouns
+  pack: pl
+  rowHeaderLabel: "Кто"
+  rowCount: 9
+}
+MATRIX_TABLE_CASE {
+  id: possessives
+  tableKind: possessives
+  pack: pl
+  rowHeaderLabel: "Кому принадлежит"
+  rowCount: 7
+}
+MATRIX_TABLE_CASE {
+  id: en-verbs
+  tableKind: enVerbs
+  pack: en
+  rowHeaderLabel: "Кто"
+  rowCount: 7
+  verbId: see
+}
+MATRIX_TABLE_CASE {
+  id: en-do-support
+  tableKind: enDoSupport
+  pack: en
+  rowHeaderLabel: "Кто"
+  rowCount: 7
+}

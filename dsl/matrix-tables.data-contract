@@ -1,0 +1,34 @@
+DSL 1
+# Fixed Matrix table metadata and independently reviewed literal cells.
+RECORD MatrixTableCaseRow KEY id COUNT 7
+  id: string
+  tableKind: enum cases|comparison|verbs|pronouns|possessives|enVerbs|enDoSupport
+  pack: enum pl|en
+  rowHeaderLabel: string
+  rowCount: int
+  nounId: string OPTIONAL
+  adjectiveId: string OPTIONAL
+  ownerId: string OPTIONAL
+  numberId: string OPTIONAL
+  verbId: string OPTIONAL
+  feminineGroup: bool OPTIONAL
+END
+
+RECORD MatrixHeaderRow KEY headerId COUNT 1..
+  headerId: string
+  caseRef: ref MatrixTableCaseRow
+  ordinal: int
+  label: string
+END
+
+RECORD MatrixCellCaseRow KEY cellId COUNT 1..
+  cellId: string
+  caseRef: ref MatrixTableCaseRow
+  rowIndex: int
+  rowHeader: string
+  columnIndex: int
+  value: string
+  contrastFrom: string OPTIONAL
+  contrastTo: string OPTIONAL
+  expectNoContrast: bool OPTIONAL
+END

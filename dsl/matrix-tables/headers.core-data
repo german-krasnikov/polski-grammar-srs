@@ -1,0 +1,149 @@
+# Explicit order from the current matrix labels and the course's reference rows.
+MATRIX_HEADER {
+  headerId: cases-0
+  caseRef: cases
+  ordinal: 0
+  label: "Вопрос / конструкция"
+}
+MATRIX_HEADER {
+  headerId: cases-1
+  caseRef: cases
+  ordinal: 1
+  label: "Вся группа слов"
+}
+MATRIX_HEADER {
+  headerId: cases-2
+  caseRef: cases
+  ordinal: 2
+  label: "Целое предложение"
+}
+MATRIX_HEADER {
+  headerId: comparison-0
+  caseRef: comparison
+  ordinal: 0
+  label: "mąż"
+}
+MATRIX_HEADER {
+  headerId: comparison-1
+  caseRef: comparison
+  ordinal: 1
+  label: kolega
+}
+MATRIX_HEADER {
+  headerId: comparison-2
+  caseRef: comparison
+  ordinal: 2
+  label: pies
+}
+MATRIX_HEADER {headerId: comparison-3 caseRef: comparison ordinal: 3 label: dom}
+MATRIX_HEADER {
+  headerId: comparison-4
+  caseRef: comparison
+  ordinal: 4
+  label: "żona"
+}
+MATRIX_HEADER {
+  headerId: comparison-5
+  caseRef: comparison
+  ordinal: 5
+  label: "książka"
+}
+MATRIX_HEADER {
+  headerId: comparison-6
+  caseRef: comparison
+  ordinal: 6
+  label: dziecko
+}
+MATRIX_HEADER {headerId: verbs-0 caseRef: verbs ordinal: 0 label: Teraz}
+MATRIX_HEADER {headerId: verbs-1 caseRef: verbs ordinal: 1 label: "Przeszłość"}
+MATRIX_HEADER {headerId: verbs-2 caseRef: verbs ordinal: 2 label: "Przyszłość"}
+MATRIX_HEADER {
+  headerId: pronouns-0
+  caseRef: pronouns
+  ordinal: 0
+  label: "Nie widzę…"
+}
+MATRIX_HEADER {
+  headerId: pronouns-1
+  caseRef: pronouns
+  ordinal: 1
+  label: "Daję prezent…"
+}
+MATRIX_HEADER {
+  headerId: pronouns-2
+  caseRef: pronouns
+  ordinal: 2
+  label: "Widzę…"
+}
+MATRIX_HEADER {
+  headerId: pronouns-3
+  caseRef: pronouns
+  ordinal: 3
+  label: "Idę z…"
+}
+MATRIX_HEADER {
+  headerId: pronouns-4
+  caseRef: pronouns
+  ordinal: 4
+  label: "Mówię o…"
+}
+MATRIX_HEADER {
+  headerId: possessives-0
+  caseRef: possessives
+  ordinal: 0
+  label: Mianownik
+}
+MATRIX_HEADER {
+  headerId: possessives-1
+  caseRef: possessives
+  ordinal: 1
+  label: Biernik
+}
+MATRIX_HEADER {
+  headerId: possessives-2
+  caseRef: possessives
+  ordinal: 2
+  label: "Dopełniacz"
+}
+MATRIX_HEADER {
+  headerId: possessives-3
+  caseRef: possessives
+  ordinal: 3
+  label: "Правило"
+}
+MATRIX_HEADER {
+  headerId: en-verbs-0
+  caseRef: en-verbs
+  ordinal: 0
+  label: "Настоящее"
+}
+MATRIX_HEADER {
+  headerId: en-verbs-1
+  caseRef: en-verbs
+  ordinal: 1
+  label: "Прошедшее"
+}
+MATRIX_HEADER {
+  headerId: en-verbs-2
+  caseRef: en-verbs
+  ordinal: 2
+  label: "Будущее"
+}
+MATRIX_HEADER {
+  headerId: en-do-support-0
+  caseRef: en-do-support
+  ordinal: 0
+  label: "Настоящее"
+}
+MATRIX_HEADER {
+  headerId: en-do-support-1
+  caseRef: en-do-support
+  ordinal: 1
+  label: "Прошедшее"
+}
+MATRIX_HEADER {
+  headerId: en-do-support-2
+  caseRef: en-do-support
+  ordinal: 2
+  label: "Будущее"
+}

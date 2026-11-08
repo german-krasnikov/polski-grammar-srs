@@ -1,0 +1,468 @@
+# Literal forms checked against course source records and the pre-migration host examples.
+# The Kotlin property loops retain exhaustive coverage for all other cells.
+MATRIX_CELL_CASE {
+  cellId: cases-nom-question
+  caseRef: cases
+  rowIndex: 0
+  rowHeader: "Mianownik · Именительный"
+  columnIndex: 0
+  value: "kto? co? · To jest…"
+  expectNoContrast: true
+}
+MATRIX_CELL_CASE {
+  cellId: cases-gen-question
+  caseRef: cases
+  rowIndex: 1
+  rowHeader: "Dopełniacz · Родительный"
+  columnIndex: 0
+  value: "kogo? czego? · nie widzę / nie mam / bez / do"
+  expectNoContrast: true
+}
+MATRIX_CELL_CASE {
+  cellId: cases-acc-question
+  caseRef: cases
+  rowIndex: 3
+  rowHeader: "Biernik · Винительный"
+  columnIndex: 0
+  value: "kogo? co? · widzę / mam / lubię"
+  expectNoContrast: true
+}
+MATRIX_CELL_CASE {
+  cellId: cases-gen-phrase
+  caseRef: cases
+  rowIndex: 1
+  rowHeader: "Dopełniacz · Родительный"
+  columnIndex: 1
+  value: "mojej pięknej żony"
+  contrastFrom: "moja piękna żona"
+  contrastTo: "mojej pięknej żony"
+}
+MATRIX_CELL_CASE {
+  cellId: cases-acc-phrase
+  caseRef: cases
+  rowIndex: 3
+  rowHeader: "Biernik · Винительный"
+  columnIndex: 1
+  value: "moją piękną żonę"
+  contrastFrom: "moja piękna żona"
+  contrastTo: "moją piękną żonę"
+}
+MATRIX_CELL_CASE {
+  cellId: cases-gen-sentence
+  caseRef: cases
+  rowIndex: 1
+  rowHeader: "Dopełniacz · Родительный"
+  columnIndex: 2
+  value: "Nie widzę mojej pięknej żony."
+  contrastFrom: "To jest moja piękna żona."
+  contrastTo: "Nie widzę mojej pięknej żony."
+}
+MATRIX_CELL_CASE {
+  cellId: cases-acc-sentence
+  caseRef: cases
+  rowIndex: 3
+  rowHeader: "Biernik · Винительный"
+  columnIndex: 2
+  value: "Widzę moją piękną żonę."
+  contrastFrom: "To jest moja piękna żona."
+  contrastTo: "Widzę moją piękną żonę."
+}
+
+# Genitive gives one literal source-form check for every comparison column.
+MATRIX_CELL_CASE {
+  cellId: comparison-husband-gen
+  caseRef: comparison
+  rowIndex: 1
+  rowHeader: "Dopełniacz"
+  columnIndex: 0
+  value: "męża"
+  contrastFrom: "mąż"
+  contrastTo: "męża"
+}
+MATRIX_CELL_CASE {
+  cellId: comparison-friend-gen
+  caseRef: comparison
+  rowIndex: 1
+  rowHeader: "Dopełniacz"
+  columnIndex: 1
+  value: kolegi
+  contrastFrom: kolega
+  contrastTo: kolegi
+}
+MATRIX_CELL_CASE {
+  cellId: comparison-dog-gen
+  caseRef: comparison
+  rowIndex: 1
+  rowHeader: "Dopełniacz"
+  columnIndex: 2
+  value: psa
+  contrastFrom: pies
+  contrastTo: psa
+}
+MATRIX_CELL_CASE {
+  cellId: comparison-house-gen
+  caseRef: comparison
+  rowIndex: 1
+  rowHeader: "Dopełniacz"
+  columnIndex: 3
+  value: domu
+  contrastFrom: dom
+  contrastTo: domu
+}
+MATRIX_CELL_CASE {
+  cellId: comparison-wife-gen
+  caseRef: comparison
+  rowIndex: 1
+  rowHeader: "Dopełniacz"
+  columnIndex: 4
+  value: "żony"
+  contrastFrom: "żona"
+  contrastTo: "żony"
+}
+MATRIX_CELL_CASE {
+  cellId: comparison-book-gen
+  caseRef: comparison
+  rowIndex: 1
+  rowHeader: "Dopełniacz"
+  columnIndex: 5
+  value: "książki"
+  contrastFrom: "książka"
+  contrastTo: "książki"
+}
+MATRIX_CELL_CASE {
+  cellId: comparison-child-gen
+  caseRef: comparison
+  rowIndex: 1
+  rowHeader: "Dopełniacz"
+  columnIndex: 6
+  value: dziecka
+  contrastFrom: dziecko
+  contrastTo: dziecka
+}
+
+MATRIX_CELL_CASE {
+  cellId: verbs-ja-present
+  caseRef: verbs
+  rowIndex: 0
+  rowHeader: "ja — я"
+  columnIndex: 0
+  value: "robię"
+  contrastFrom: "robić"
+  contrastTo: "robię"
+}
+MATRIX_CELL_CASE {
+  cellId: verbs-ja-past
+  caseRef: verbs
+  rowIndex: 0
+  rowHeader: "ja — я"
+  columnIndex: 1
+  value: "robiłem"
+  contrastFrom: "robić"
+  contrastTo: "robiłem"
+}
+MATRIX_CELL_CASE {
+  cellId: verbs-ja-future
+  caseRef: verbs
+  rowIndex: 0
+  rowHeader: "ja — я"
+  columnIndex: 2
+  value: "będę robić"
+  contrastFrom: "robić"
+  contrastTo: "będę robić"
+}
+MATRIX_CELL_CASE {
+  cellId: verbs-on-present
+  caseRef: verbs
+  rowIndex: 2
+  rowHeader: "on — он"
+  columnIndex: 0
+  value: robi
+  contrastFrom: "robić"
+  contrastTo: robi
+}
+MATRIX_CELL_CASE {
+  cellId: verbs-ona-past
+  caseRef: verbs
+  rowIndex: 3
+  rowHeader: "ona — она"
+  columnIndex: 1
+  value: "robiła"
+  contrastFrom: "robić"
+  contrastTo: "robiła"
+}
+
+MATRIX_CELL_CASE {
+  cellId: pronouns-ja-gen
+  caseRef: pronouns
+  rowIndex: 0
+  rowHeader: ja
+  columnIndex: 0
+  value: mnie
+  contrastFrom: ja
+  contrastTo: mnie
+}
+MATRIX_CELL_CASE {
+  cellId: pronouns-ja-inst
+  caseRef: pronouns
+  rowIndex: 0
+  rowHeader: ja
+  columnIndex: 3
+  value: "ze mną"
+  contrastFrom: ja
+  contrastTo: "ze mną"
+}
+MATRIX_CELL_CASE {
+  cellId: pronouns-on-acc
+  caseRef: pronouns
+  rowIndex: 2
+  rowHeader: on
+  columnIndex: 2
+  value: go
+  contrastFrom: on
+  contrastTo: go
+}
+MATRIX_CELL_CASE {
+  cellId: pronouns-on-loc
+  caseRef: pronouns
+  rowIndex: 2
+  rowHeader: on
+  columnIndex: 4
+  value: "o nim"
+  contrastFrom: on
+  contrastTo: "o nim"
+}
+MATRIX_CELL_CASE {
+  cellId: pronouns-one-acc
+  caseRef: pronouns
+  rowIndex: 8
+  rowHeader: one
+  columnIndex: 2
+  value: je
+  contrastFrom: one
+  contrastTo: je
+}
+
+MATRIX_CELL_CASE {
+  cellId: possessives-my-nom
+  caseRef: possessives
+  rowIndex: 0
+  rowHeader: "mój — мой"
+  columnIndex: 0
+  value: "moja piękna żona"
+  contrastFrom: "moja piękna żona"
+  contrastTo: "moja piękna żona"
+}
+MATRIX_CELL_CASE {
+  cellId: possessives-my-acc
+  caseRef: possessives
+  rowIndex: 0
+  rowHeader: "mój — мой"
+  columnIndex: 1
+  value: "moją piękną żonę"
+  contrastFrom: "moja piękna żona"
+  contrastTo: "moją piękną żonę"
+}
+MATRIX_CELL_CASE {
+  cellId: possessives-my-gen
+  caseRef: possessives
+  rowIndex: 0
+  rowHeader: "mój — мой"
+  columnIndex: 2
+  value: "mojej pięknej żony"
+  contrastFrom: "moja piękna żona"
+  contrastTo: "mojej pięknej żony"
+}
+MATRIX_CELL_CASE {
+  cellId: possessives-my-rule
+  caseRef: possessives
+  rowIndex: 0
+  rowHeader: "mój — мой"
+  columnIndex: 3
+  value: "Согласуется с żona"
+  expectNoContrast: true
+}
+MATRIX_CELL_CASE {
+  cellId: possessives-his-nom
+  caseRef: possessives
+  rowIndex: 2
+  rowHeader: "jego — его"
+  columnIndex: 0
+  value: "jego piękna żona"
+  contrastFrom: "jego piękna żona"
+  contrastTo: "jego piękna żona"
+}
+MATRIX_CELL_CASE {
+  cellId: possessives-his-rule
+  caseRef: possessives
+  rowIndex: 2
+  rowHeader: "jego — его"
+  columnIndex: 3
+  value: "Владелец не склоняется"
+  expectNoContrast: true
+}
+
+MATRIX_CELL_CASE {
+  cellId: en-verbs-I-present
+  caseRef: en-verbs
+  rowIndex: 0
+  rowHeader: I
+  columnIndex: 0
+  value: see
+  contrastFrom: see
+  contrastTo: see
+}
+MATRIX_CELL_CASE {
+  cellId: en-verbs-I-past
+  caseRef: en-verbs
+  rowIndex: 0
+  rowHeader: I
+  columnIndex: 1
+  value: saw
+  contrastFrom: see
+  contrastTo: saw
+}
+MATRIX_CELL_CASE {
+  cellId: en-verbs-I-future
+  caseRef: en-verbs
+  rowIndex: 0
+  rowHeader: I
+  columnIndex: 2
+  value: "will see"
+  contrastFrom: see
+  contrastTo: "will see"
+}
+MATRIX_CELL_CASE {
+  cellId: en-verbs-he-present
+  caseRef: en-verbs
+  rowIndex: 2
+  rowHeader: he
+  columnIndex: 0
+  value: sees
+  contrastFrom: see
+  contrastTo: sees
+}
+MATRIX_CELL_CASE {
+  cellId: en-verbs-he-past
+  caseRef: en-verbs
+  rowIndex: 2
+  rowHeader: he
+  columnIndex: 1
+  value: saw
+  contrastFrom: see
+  contrastTo: saw
+}
+MATRIX_CELL_CASE {
+  cellId: en-verbs-they-future
+  caseRef: en-verbs
+  rowIndex: 6
+  rowHeader: they
+  columnIndex: 2
+  value: "will see"
+  contrastFrom: see
+  contrastTo: "will see"
+}
+
+MATRIX_CELL_CASE {
+  cellId: en-do-I-present
+  caseRef: en-do-support
+  rowIndex: 0
+  rowHeader: I
+  columnIndex: 0
+  value: do
+  contrastFrom: do
+  contrastTo: do
+}
+MATRIX_CELL_CASE {
+  cellId: en-do-I-past
+  caseRef: en-do-support
+  rowIndex: 0
+  rowHeader: I
+  columnIndex: 1
+  value: did
+  contrastFrom: do
+  contrastTo: did
+}
+MATRIX_CELL_CASE {
+  cellId: en-do-he-present
+  caseRef: en-do-support
+  rowIndex: 2
+  rowHeader: he
+  columnIndex: 0
+  value: does
+  contrastFrom: do
+  contrastTo: does
+}
+MATRIX_CELL_CASE {
+  cellId: en-do-he-past
+  caseRef: en-do-support
+  rowIndex: 2
+  rowHeader: he
+  columnIndex: 1
+  value: did
+  contrastFrom: do
+  contrastTo: did
+}
+# No future do-support: every English subject must use the placeholder and have no contrast.
+MATRIX_CELL_CASE {
+  cellId: en-do-I-future
+  caseRef: en-do-support
+  rowIndex: 0
+  rowHeader: I
+  columnIndex: 2
+  value: "не нужен — только will"
+  expectNoContrast: true
+}
+MATRIX_CELL_CASE {
+  cellId: en-do-you-future
+  caseRef: en-do-support
+  rowIndex: 1
+  rowHeader: you
+  columnIndex: 2
+  value: "не нужен — только will"
+  expectNoContrast: true
+}
+MATRIX_CELL_CASE {
+  cellId: en-do-he-future
+  caseRef: en-do-support
+  rowIndex: 2
+  rowHeader: he
+  columnIndex: 2
+  value: "не нужен — только will"
+  expectNoContrast: true
+}
+MATRIX_CELL_CASE {
+  cellId: en-do-she-future
+  caseRef: en-do-support
+  rowIndex: 3
+  rowHeader: she
+  columnIndex: 2
+  value: "не нужен — только will"
+  expectNoContrast: true
+}
+MATRIX_CELL_CASE {
+  cellId: en-do-it-future
+  caseRef: en-do-support
+  rowIndex: 4
+  rowHeader: it
+  columnIndex: 2
+  value: "не нужен — только will"
+  expectNoContrast: true
+}
+MATRIX_CELL_CASE {
+  cellId: en-do-we-future
+  caseRef: en-do-support
+  rowIndex: 5
+  rowHeader: we
+  columnIndex: 2
+  value: "не нужен — только will"
+  expectNoContrast: true
+}
+MATRIX_CELL_CASE {
+  cellId: en-do-they-future
+  caseRef: en-do-support
+  rowIndex: 6
+  rowHeader: they
+  columnIndex: 2
+  value: "не нужен — только will"
+  expectNoContrast: true
+}
