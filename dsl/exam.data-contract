@@ -22,6 +22,7 @@ RECORD ListeningTaskRow KEY taskId COUNT 1..
   segmentStartMs: int
   segmentEndMs: int
   instruction: string
+  transcript: string OPTIONAL
 END
 
 RECORD ListeningQuestionRow KEY questionId COUNT 1..
