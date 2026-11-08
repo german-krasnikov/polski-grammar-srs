@@ -1,0 +1,158 @@
+DSL 1
+# Rozumienie tekstów pisanych — B1 test przykładowy (źródło: UW JPO B1)
+
+READING_PASSAGE {
+  passageId: "B1-sample-reading-1"
+  examRef: "certyfikat-polski-B1-sample"
+  taskNumber: 1
+  instruction: "Proszę uważnie przeczytać fragmenty tekstów i dopasować do nich tytuły oznaczone literami A-G. Jeden tytuł jest zbędny."
+  text: "0. Świąteczne zakupy to najbardziej stresujący moment przygotowań. Możesz uniknąć stania w kilometrowych kolejkach, jeśli wybierzesz usługę e-zakupów.\n\n11. Już 25% gospodarstw domowych w Stanach Zjednoczonych to ludzie żyjący samotnie. Liczba rezerwacji na stolik dla jednej osoby w nowojorskich restauracjach wzrosła o 80%.\n\n12. Chcesz szybko schudnąć, a przy tym nie zaszkodzić zdrowiu? Wystarczy, że zaczniesz regularnie jeść orzechy, warzywa i owoce.\n\n13. W poniedziałek zakończyło się referendum wśród pracowników szkół. Większość popiera strajk: chce walczyć o wyższe wynagrodzenie.\n\n14. Marzymy o tym, żeby rozumieć swoją żonę/męża. Osiągnięcie porozumienia wydaje się coraz trudniejsze, bo za mało ze sobą rozmawiamy.\n\n15. Podczas rozpoczęcia konkursu warunki pogodowe sprzyjały zawodnikom. Dopiero kiedy ostatni zawodnik oddał skok, zachmurzyło się."
+}
+READING_QUESTION {
+  questionId: "B1-sample-r1-q11"
+  passageRef: "B1-sample-reading-1"
+  questionType: match_heading
+  questionText: "Fragment 11"
+  options: "A. Jak nauczyć się słuchać partnera?|B. Zakupy bez wychodzenia z domu|C. Sam nad talerzem|D. Oczekiwania nauczycieli|E. Piękne zakończenie sezonu w skokach narciarskich|F. Kto wygrał mecz o wszystko?|G. Dieta na wiosnę"
+  correctAnswer: "C"
+  points: 2
+}
+READING_QUESTION {
+  questionId: "B1-sample-r1-q12"
+  passageRef: "B1-sample-reading-1"
+  questionType: match_heading
+  questionText: "Fragment 12"
+  options: "A|B|C|D|E|F|G"
+  correctAnswer: "G"
+  points: 2
+}
+READING_QUESTION {
+  questionId: "B1-sample-r1-q13"
+  passageRef: "B1-sample-reading-1"
+  questionType: match_heading
+  questionText: "Fragment 13"
+  options: "A|B|C|D|E|F|G"
+  correctAnswer: "D"
+  points: 2
+}
+READING_QUESTION {
+  questionId: "B1-sample-r1-q14"
+  passageRef: "B1-sample-reading-1"
+  questionType: match_heading
+  questionText: "Fragment 14"
+  options: "A|B|C|D|E|F|G"
+  correctAnswer: "A"
+  points: 2
+}
+READING_QUESTION {
+  questionId: "B1-sample-r1-q15"
+  passageRef: "B1-sample-reading-1"
+  questionType: match_heading
+  questionText: "Fragment 15"
+  options: "A|B|C|D|E|F|G"
+  correctAnswer: "E"
+  points: 2
+}
+
+READING_PASSAGE {
+  passageId: "B1-sample-reading-2"
+  examRef: "certyfikat-polski-B1-sample"
+  taskNumber: 2
+  title: "List do lekarza"
+  instruction: "Proszę uważnie przeczytać list, a następnie odpowiedzieć na pytania, wybierając właściwą odpowiedź."
+  text: "Szanowny Panie Doktorze! Moja małżonka od kilku dni jest już w domu. Chciałbym wraz z moją córką i synem podziękować Panu z całego serca za udzieloną pomoc! Jestem również wdzięczny pielęgniarkom, które były profesjonalne. Po wypadku samochodowym, który Maria miała trzy miesiące temu, baliśmy się, że już nigdy nie będzie normalnie chodzić. Na szczęście spotkaliśmy Pana i od tego momentu codziennie odnotowywaliśmy poprawę! Dzięki ćwiczeniom z poleconym rehabilitantem Maria mogła przestać brać silne środki przeciwbólowe. W przyszłym tygodniu będziemy na wizycie kontrolnej. Z wyrazami szacunku, Tomasz Jackowski"
+}
+READING_QUESTION {
+  questionId: "B1-sample-r2-q16"
+  passageRef: "B1-sample-reading-2"
+  questionType: multiple_choice
+  questionText: "Pacjentką kliniki"
+  options: "była żona Tomasza Jackowskiego|była córka Tomasza Jackowskiego|był syn Tomasza Jackowskiego"
+  correctAnswer: "a"
+  points: 2
+}
+READING_QUESTION {
+  questionId: "B1-sample-r2-q17"
+  passageRef: "B1-sample-reading-2"
+  questionType: multiple_choice
+  questionText: "Tomasz jest"
+  options: "rozczarowany pracą personelu kliniki|zadowolony z pracy personelu kliniki|zdenerwowany pracą personelu kliniki"
+  correctAnswer: "b"
+  points: 2
+}
+READING_QUESTION {
+  questionId: "B1-sample-r2-q18"
+  passageRef: "B1-sample-reading-2"
+  questionType: multiple_choice
+  questionText: "Maria miała problem z"
+  options: "sercem|nogą|ręką"
+  correctAnswer: "b"
+  points: 2
+}
+READING_QUESTION {
+  questionId: "B1-sample-r2-q19"
+  passageRef: "B1-sample-reading-2"
+  questionType: multiple_choice
+  questionText: "Marii najbardziej pomogły"
+  options: "lekarstwa|spotkania z fizjoterapeutą|operacje"
+  correctAnswer: "b"
+  points: 2
+}
+READING_QUESTION {
+  questionId: "B1-sample-r2-q20"
+  passageRef: "B1-sample-reading-2"
+  questionType: multiple_choice
+  questionText: "Córka Marii i Tomasza"
+  options: "mieszka poza Polską|jest rehabilitantką|pije dużo kawy"
+  correctAnswer: "a"
+  points: 2
+}
+
+READING_PASSAGE {
+  passageId: "B1-sample-reading-3"
+  examRef: "certyfikat-polski-B1-sample"
+  taskNumber: 3
+  title: "Osobowość człowieka"
+  instruction: "Proszę przeczytać tekst i zdecydować, czy stwierdzenia są prawdziwe (A), fałszywe (B) czy brakuje informacji (C)."
+  text: "Charakter człowieka jest jego przeznaczeniem – uważał Heraklit z Efezu. Obecnie psychologowie zamiast o charakterze mówią częściej o osobowości. Jedna z najbardziej popularnych teorii proponuje pięć elementów: ekstrawersja, neurotyczność, ugodowość, sumienność i otwartość na doświadczenie. Typowy ekstrawertyk jest przyjazny, aktywny, towarzyski. Neurotyczność to skłonność do przeżywania negatywnych emocji. Osoby o dużej sumienności wykazują silną wolę, przy skrajnym nasileniu popadają w perfekcjonizm."
+}
+READING_QUESTION {
+  questionId: "B1-sample-r3-q21"
+  passageRef: "B1-sample-reading-3"
+  questionType: true_false_not_given
+  questionText: "We współczesnej psychologii termin 'charakter' jest używany rzadziej niż 'osobowość'."
+  correctAnswer: "A"
+  points: 2
+}
+READING_QUESTION {
+  questionId: "B1-sample-r3-q22"
+  passageRef: "B1-sample-reading-3"
+  questionType: true_false_not_given
+  questionText: "Ludzie różnią się od siebie dzięki osobowości."
+  correctAnswer: "A"
+  points: 2
+}
+READING_QUESTION {
+  questionId: "B1-sample-r3-q23"
+  passageRef: "B1-sample-reading-3"
+  questionType: true_false_not_given
+  questionText: "Osoby neurotyczne stresują się rzadziej niż osoby ugodowe."
+  correctAnswer: "B"
+  points: 2
+}
+READING_QUESTION {
+  questionId: "B1-sample-r3-q24"
+  passageRef: "B1-sample-reading-3"
+  questionType: true_false_not_given
+  questionText: "Ekstrawertycy nie lubią spędzać czasu z introwertykami."
+  correctAnswer: "C"
+  points: 2
+}
+READING_QUESTION {
+  questionId: "B1-sample-r3-q25"
+  passageRef: "B1-sample-reading-3"
+  questionType: true_false_not_given
+  questionText: "Wszyscy sumienni ludzie są perfekcjonistami i pracoholikami."
+  correctAnswer: "B"
+  points: 2
+}

@@ -1,0 +1,187 @@
+DSL 1
+# Poprawność gramatyczna (Użycie języka) — B1 test przykładowy (źródło: UW JPO B1)
+# Klucz: 26-A 27-C 28-C 29-B 30-B 31-A 32-C 33-C 34-A 35-B
+
+GRAMMAR_TEST {
+  testId: "B1-sample-grammar-1"
+  examRef: "certyfikat-polski-B1-sample"
+  taskNumber: 1
+  instruction: "Proszę przeczytać tekst i uzupełnić luki, wybierając jedną z trzech możliwości (A, B, C)."
+}
+GRAMMAR_ITEM {
+  itemId: "B1-sample-g1-q26"
+  testRef: "B1-sample-grammar-1"
+  questionType: choose_form
+  context: "„Nasza planeta" to najnowsza produkcja Netfliksa, która zabierze ___ w wyjątkową podróż"
+  options: "nas|nami|ich"
+  correctAnswer: "nas"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B1-sample-g1-q27"
+  testRef: "B1-sample-grammar-1"
+  questionType: choose_form
+  context: "w wyjątkową podróż ___ najdalszych i zapierających dech w piersiach miejsc na Ziemi"
+  options: "w|po|do"
+  correctAnswer: "do"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B1-sample-g1-q28"
+  testRef: "B1-sample-grammar-1"
+  questionType: choose_form
+  context: "Ten serial to nie tylko przyjemna podróż dookoła świata, ___ także ostrzeżenie"
+  options: "i|lub|ale"
+  correctAnswer: "ale"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B1-sample-g1-q29"
+  testRef: "B1-sample-grammar-1"
+  questionType: choose_form
+  context: "jak zmiany klimatyczne wpływają na ___ na naszej planecie"
+  options: "życiu|życie|życiem"
+  correctAnswer: "życie"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B1-sample-g1-q30"
+  testRef: "B1-sample-grammar-1"
+  questionType: choose_form
+  context: "W produkcji „Nasza planeta" ___, dzięki najnowszej technice, po raz pierwszy podziwiać wspaniałe zdjęcia"
+  options: "mogą|możecie|może"
+  correctAnswer: "możecie"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B1-sample-g1-q31"
+  testRef: "B1-sample-grammar-1"
+  questionType: choose_form
+  context: "dzięki ___ technice, po raz pierwszy podziwiać wspaniałe zdjęcia"
+  options: "najnowszej|nowej|nowszej"
+  correctAnswer: "najnowszej"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B1-sample-g1-q32"
+  testRef: "B1-sample-grammar-1"
+  questionType: choose_form
+  context: "podziwiać wspaniałe zdjęcia nieznanych do tej pory ___ Ziemi"
+  options: "zakątki|zakątkami|zakątków"
+  correctAnswer: "zakątków"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B1-sample-g1-q33"
+  testRef: "B1-sample-grammar-1"
+  questionType: choose_form
+  context: "ponad 600 członków ekipy wspólnie ___ materiał"
+  options: "nagrali|nagrany|nagrało"
+  correctAnswer: "nagrało"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B1-sample-g1-q34"
+  testRef: "B1-sample-grammar-1"
+  questionType: choose_form
+  context: "Serial będzie poświęcony ___ różnorodności ekosystemów"
+  options: "niezwykłej|niezwykłemu|niezwykłą"
+  correctAnswer: "niezwykłej"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B1-sample-g1-q35"
+  testRef: "B1-sample-grammar-1"
+  questionType: choose_form
+  context: "aż po rozległe ___ Afryki"
+  options: "krajobrazów|krajobrazy|krajobrazami"
+  correctAnswer: "krajobrazy"
+  points: 1
+}
+
+GRAMMAR_TEST {
+  testId: "B1-sample-grammar-2"
+  examRef: "certyfikat-polski-B1-sample"
+  taskNumber: 2
+  instruction: "Proszę przeczytać tekst i uzupełnić każdą lukę jednym słowem."
+}
+GRAMMAR_ITEM {
+  itemId: "B1-sample-g2-q36"
+  testRef: "B1-sample-grammar-2"
+  questionType: fill_gap
+  context: "tablety zastępują spacer, a smartfony są pomocne rodzicom w układaniu ___ do snu"
+  correctAnswer: "dzieci"
+  points: 2
+}
+GRAMMAR_ITEM {
+  itemId: "B1-sample-g2-q37"
+  testRef: "B1-sample-grammar-2"
+  questionType: fill_gap
+  context: "skutki tych popularnych 'metod wychowawczych' ___ być fatalne"
+  correctAnswer: "mogą"
+  points: 2
+}
+GRAMMAR_ITEM {
+  itemId: "B1-sample-g2-q38"
+  testRef: "B1-sample-grammar-2"
+  questionType: fill_gap
+  context: "nowa piramida żywieniowa, która ___ pierwszym miejscu stawia ruch i sen"
+  correctAnswer: "na"
+  points: 2
+}
+GRAMMAR_ITEM {
+  itemId: "B1-sample-g2-q39"
+  testRef: "B1-sample-grammar-2"
+  questionType: fill_gap
+  context: "liczba otyłych dzieci zwiększyła się na ___ aż jedenastokrotnie"
+  correctAnswer: "świecie"
+  points: 2
+}
+GRAMMAR_ITEM {
+  itemId: "B1-sample-g2-q40"
+  testRef: "B1-sample-grammar-2"
+  questionType: fill_gap
+  context: "eksperci z Instytutu Żywności i Żywienia ___ nową piramidę żywieniową"
+  correctAnswer: "opracowali"
+  points: 2
+}
+GRAMMAR_ITEM {
+  itemId: "B1-sample-g2-q41"
+  testRef: "B1-sample-grammar-2"
+  questionType: fill_gap
+  context: "Zgodnie z ___ zaleceniami dzieci powinny ćwiczyć przynajmniej godzinę dziennie"
+  correctAnswer: "najnowszymi"
+  points: 2
+}
+GRAMMAR_ITEM {
+  itemId: "B1-sample-g2-q42"
+  testRef: "B1-sample-grammar-2"
+  questionType: fill_gap
+  context: "zarówno w szkole, ___ i poza nią"
+  correctAnswer: "jak"
+  points: 2
+}
+GRAMMAR_ITEM {
+  itemId: "B1-sample-g2-q43"
+  testRef: "B1-sample-grammar-2"
+  questionType: fill_gap
+  context: "Jednocześnie ___ telewizji, korzystanie z komputera należy ograniczyć"
+  correctAnswer: "oglądanie"
+  points: 2
+}
+GRAMMAR_ITEM {
+  itemId: "B1-sample-g2-q44"
+  testRef: "B1-sample-grammar-2"
+  questionType: fill_gap
+  context: "___ nowych wytycznych podstawą zdrowego odżywiania są warzywa i owoce"
+  correctAnswer: "Według"
+  points: 2
+}
+GRAMMAR_ITEM {
+  itemId: "B1-sample-g2-q45"
+  testRef: "B1-sample-grammar-2"
+  questionType: fill_gap
+  context: "warzywa i owoce, które warto spożywać jak ___"
+  correctAnswer: "najczęściej"
+  points: 2
+}

@@ -1,0 +1,108 @@
+DSL 1
+# Rozumienie ze słuchu — B1 test przykładowy (źródło: UW JPO B1)
+# Audio: single file per exam; segments marked by startMs/endMs.
+# Audio URL is the exam materials page — direct MP3 link behind access control.
+LISTENING_TASK {
+  taskId: "B1-sample-listening-1"
+  examRef: "certyfikat-polski-B1-sample"
+  taskNumber: 1
+  audioUrl: "https://certyfikatpolski.pl/o-egzaminie/przykladowe-testy-zbiory-zadan/#B1-audio"
+  segmentStartMs: 0
+  segmentEndMs: 180000
+  instruction: "Proszę uważnie słuchać fragmentu wywiadu i zaznaczać właściwe odpowiedzi. Tylko jedna odpowiedź jest poprawna. Nagranie zostanie odtworzone dwa razy."
+}
+LISTENING_QUESTION {
+  questionId: "B1-sample-l1-q1"
+  taskRef: "B1-sample-listening-1"
+  questionType: multiple_choice
+  questionText: "Nela odwiedziła program, który ma swoją premierę w telewizji:"
+  options: "rano|w południe|wieczorem"
+  correctAnswer: "a"
+  points: 2
+}
+LISTENING_QUESTION {
+  questionId: "B1-sample-l1-q2"
+  taskRef: "B1-sample-listening-1"
+  questionType: multiple_choice
+  questionText: "Nela zwiedziła:"
+  options: "więcej niż 3 kontynenty|mniej niż 4 kontynenty|nie pamięta, ile kontynentów"
+  correctAnswer: "a"
+  points: 2
+}
+LISTENING_QUESTION {
+  questionId: "B1-sample-l1-q3"
+  taskRef: "B1-sample-listening-1"
+  questionType: multiple_choice
+  questionText: "Nela ostatnio pojechała:"
+  options: "do Tajlandii|do Birmy|do Birmy, a potem do Tajlandii"
+  correctAnswer: "b"
+  points: 2
+}
+LISTENING_QUESTION {
+  questionId: "B1-sample-l1-q4"
+  taskRef: "B1-sample-listening-1"
+  questionType: multiple_choice
+  questionText: "Przed podróżą:"
+  options: "ogląda filmy o niebezpiecznych zwierzętach w tym kraju|dziewczynka robi mapę najciekawszych miejsc|o wszystkim decydują mama i tata Neli"
+  correctAnswer: "c"
+  points: 2
+}
+LISTENING_QUESTION {
+  questionId: "B1-sample-l1-q5"
+  taskRef: "B1-sample-listening-1"
+  questionType: multiple_choice
+  questionText: "Nela chciałaby pojechać jeszcze raz:"
+  options: "Do Berna|Do rezerwatu lwów|Na Zanzibar"
+  correctAnswer: "b"
+  points: 2
+}
+
+LISTENING_TASK {
+  taskId: "B1-sample-listening-2"
+  examRef: "certyfikat-polski-B1-sample"
+  taskNumber: 2
+  audioUrl: "https://certyfikatpolski.pl/o-egzaminie/przykladowe-testy-zbiory-zadan/#B1-audio"
+  segmentStartMs: 180000
+  segmentEndMs: 360000
+  instruction: "Proszę uważnie słuchać nagrania i zdecydować, czy zdania są prawdziwe (A) czy fałszywe (B). Nagranie zostanie odtworzone dwa razy."
+}
+LISTENING_QUESTION {
+  questionId: "B1-sample-l2-q6"
+  taskRef: "B1-sample-listening-2"
+  questionType: true_false
+  questionText: "Kędzierska studiowała prawo."
+  correctAnswer: "A"
+  points: 2
+}
+LISTENING_QUESTION {
+  questionId: "B1-sample-l2-q7"
+  taskRef: "B1-sample-listening-2"
+  questionType: true_false
+  questionText: "Kobieta teraz pracuje w korporacji."
+  correctAnswer: "B"
+  points: 2
+}
+LISTENING_QUESTION {
+  questionId: "B1-sample-l2-q8"
+  taskRef: "B1-sample-listening-2"
+  questionType: true_false
+  questionText: "Ona zawsze miała dużo kredytów."
+  correctAnswer: "B"
+  points: 2
+}
+LISTENING_QUESTION {
+  questionId: "B1-sample-l2-q9"
+  taskRef: "B1-sample-listening-2"
+  questionType: true_false
+  questionText: "Kędzierska pochodzi z rodziny, w której szanuje się książki."
+  correctAnswer: "A"
+  points: 2
+}
+LISTENING_QUESTION {
+  questionId: "B1-sample-l2-q10"
+  taskRef: "B1-sample-listening-2"
+  questionType: true_false
+  questionText: "Według prelegentki najtrudniejsze w minimalizmie jest wyrzucanie rzeczy."
+  correctAnswer: "B"
+  points: 2
+}

@@ -1,0 +1,9 @@
+DSL 1
+EXAM {
+  examId: "certyfikat-polski-B1-sample"
+  provider: "certyfikat-polski"
+  targetLanguage: "pl"
+  level: "B1"
+  sourceUrl: "https://certyfikatpolski.pl/o-egzaminie/przykladowe-testy-zbiory-zadan/"
+  license: "Państwowa Komisja ds. Poświadczania Znajomości Języka Polskiego jako Obcego"
+}

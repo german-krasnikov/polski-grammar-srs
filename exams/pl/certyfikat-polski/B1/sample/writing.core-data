@@ -1,0 +1,21 @@
+DSL 1
+# Pisanie — B1 test przykładowy (źródło: UW JPO B1)
+
+WRITING_TASK {
+  taskId: "B1-sample-writing-1"
+  examRef: "certyfikat-polski-B1-sample"
+  taskNumber: 1
+  instruction: "Pani/Pana koleżanka nie przyszła / kolega nie przyszedł na ważne zajęcia. Proszę napisać e-mail, w którym przekaże Pani/Pan informacje na temat projektu, który musicie razem zrobić."
+  promptText: "Napisz e-mail do koleżanki/kolegi z informacjami o wspólnym projekcie (70-80 wyrazów)."
+  wordLimit: 80
+  genre: letter
+}
+WRITING_TASK {
+  taskId: "B1-sample-writing-2"
+  examRef: "certyfikat-polski-B1-sample"
+  taskNumber: 2
+  instruction: "Proszę krótko zrecenzować film, który ostatnio Pani oglądała / Pan oglądał."
+  promptText: "Napisz krótką recenzję ostatnio obejrzanego filmu (70-80 wyrazów)."
+  wordLimit: 80
+  genre: description
+}
