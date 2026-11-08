@@ -1,4 +1,2 @@
 TOOLCHAIN b3fc1ec9c8b94c422e51b8cbfa5edbdf340488d4
-# The four GENERATE steps that used to run from this project (exercise oracle, swipe-policy, textwire-tests) moved to
-# dsl/biome.project (W1.5), so the main project's `biome generate --check` also catches drift in their outputs.
-# The derive scripts stayed in this directory; only the GENERATE lines moved. See dsl/biome.project.
+# Steps moved to dsl/biome.project (W1.5). This file is kept only for the TOOLCHAIN pin; swipe-generation.test.ts reads the step line from dsl/biome.project and writes its own sandbox project.

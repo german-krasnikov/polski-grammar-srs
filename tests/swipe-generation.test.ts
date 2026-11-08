@@ -88,7 +88,8 @@ describe('swipe Policy generation', () => {
       }
       const steps = readFileSync(join(repo, 'dsl/biome.project'), 'utf8').split('\n').filter(line => line.startsWith('GENERATE swipe-policy '));
       expect(steps, 'the swipe-policy step is registered once in dsl/biome.project').toHaveLength(1);
-      writeFileSync(join(dir, PROJECT, 'biome.project'), `${steps[0]}\n`);
+      const localStep = steps[0].replace('{dir}/../tests/fixtures/nj03-exercise-oracle/', '{dir}/');
+      writeFileSync(join(dir, PROJECT, 'biome.project'), `${localStep}\n`);
       mkdirSync(join(dir, 'tmp'));
     });
     afterEach(() => rmSync(dir, { recursive: true, force: true }));

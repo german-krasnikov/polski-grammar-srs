@@ -42,7 +42,7 @@ GENERATE effects-web derive {dir}/derive-rive-effects.mjs js OUT_JS {dir}/effect
 # Block F: grammar oracle — 1979 pinned cases from grammar.json.
 CONTRACT grammar-oracle FROM grammar-oracle.data-contract
 GENERATE grammar-oracle data --contract grammar-oracle --rows GrammarCaseRow {dir}/grammar-oracle/grammar.core-data --target kt --kt-package polski.data.rows.oracle --out {dir}/../kotlin/shared/src/commonTest/generated/kotlin/polski/data/rows/oracle/GrammarCaseRows.kt
-# W1.5: nj03 steps merged from tests/fixtures/nj03-exercise-oracle/biome.project.
+# W1.5: nj03 derive steps (exercise oracle, swipe-policy, textwire). The swipe-generation.test.ts reads the swipe-policy line from here to build its sandbox.
 GENERATE exercise-oracle derive {dir}/../tests/fixtures/nj03-exercise-oracle/derive-oracle.mjs generate OUT
 GENERATE exercise-oracle-en derive {dir}/../tests/fixtures/nj03-exercise-oracle/derive-oracle-en.mjs generate OUT
 GENERATE swipe-policy derive {dir}/../tests/fixtures/nj03-exercise-oracle/derive-swipe-policy.mjs generate OUT
