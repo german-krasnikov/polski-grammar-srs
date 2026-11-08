@@ -908,22 +908,15 @@ private class TrainingDomRenderer {
             appendChild(node("p", text = mf.feedback))
             if (mf.explanation.isNotEmpty()) appendChild(node("p", text = mf.explanation))
         })
-        // UC-10 web S2: Changes/Formula/Rule/Contrast used to be hardcoded here per 2-way style
-        // check — now they (and Table/NativeParallel/Scene/Examples/WhyOnDemand) come entirely
-        // from the resolved style's composed Back blocks; a style switch changes which of these
-        // sections show, never a branch in this function.
-        val (effective, content) = resolveEffectiveStyleAndContent(state, skill.id)
-        val backBlocks = StyleComposer.compose(effective, StylePhase.Back, exercise, skill, presentation, content)
-        renderCardBlocks(back, backBlocks, "card-blocks-back", activeTargetLangCode())
-        // EN-21 (EnRuPackPlan.md §4.3): the lifehack block is deliberately outside StyleComposer's
-        // output — same for every style, so it always renders after the back blocks, never inside
-        // whichever ones the active style composed.
-        renderLifehackBlock(back, skill.id)
+        val styledBlocks = model.back.filterIsInstance<CardSection.Styled>().map { it.block }
+        renderCardBlocks(back, styledBlocks, "card-blocks-back", activeTargetLangCode())
+        val lifehacks = model.back.filterIsInstance<CardSection.LifehackSection>().firstOrNull()
+        if (lifehacks != null) renderLifehackBlock(back, exercise.primarySkill)
         back.appendChild(node("div", "rating-label", UiCopy.WhenToReview))
-        back.appendChild(node("p", "method-review", method.review))
+        val reviewHint = model.back.filterIsInstance<CardSection.ReviewHint>().firstOrNull()
+        if (reviewHint != null) back.appendChild(node("p", "method-review", reviewHint.text))
         val ratings = node("div", "ratings")
         back.appendChild(ratings)
-        val model = trainingCardModel(state)
         val ratingHints = mapOf(Rating.Again to "Ошибка или не уверен", Rating.Good to "Воспроизвёл сам")
         model.ratingButtons.forEachIndexed { index, rb ->
             ratings.appendChild(button("${index + 1} ${rb.label}", extraClass = "rating-${rb.rating.name.lowercase()}") {
