@@ -1,16 +1,4 @@
 DSL 1
-# Rozumienie ze słuchu — B1 test przykładowy (źródło: UW JPO B1)
-# Audio: single file per exam; segments marked by startMs/endMs.
-# Audio URL is the exam materials page — direct MP3 link behind access control.
-LISTENING_TASK {
-  taskId: "B1-sample-listening-1"
-  examRef: "certyfikat-polski-B1-sample"
-  taskNumber: 1
-  audioUrl: "https://certyfikatpolski.pl/o-egzaminie/przykladowe-testy-zbiory-zadan/#B1-audio"
-  segmentStartMs: 0
-  segmentEndMs: 180000
-  instruction: "Proszę uważnie słuchać fragmentu wywiadu i zaznaczać właściwe odpowiedzi. Tylko jedna odpowiedź jest poprawna. Nagranie zostanie odtworzone dwa razy."
-}
 LISTENING_QUESTION {
   questionId: "B1-sample-l1-q1"
   taskRef: "B1-sample-listening-1"
@@ -55,16 +43,6 @@ LISTENING_QUESTION {
   options: "Do Berna|Do rezerwatu lwów|Na Zanzibar"
   correctAnswer: "b"
   points: 2
-}
-
-LISTENING_TASK {
-  taskId: "B1-sample-listening-2"
-  examRef: "certyfikat-polski-B1-sample"
-  taskNumber: 2
-  audioUrl: "https://certyfikatpolski.pl/o-egzaminie/przykladowe-testy-zbiory-zadan/#B1-audio"
-  segmentStartMs: 180000
-  segmentEndMs: 360000
-  instruction: "Proszę uważnie słuchać nagrania i zdecydować, czy zdania są prawdziwe (A) czy fałszywe (B). Nagranie zostanie odtworzone dwa razy."
 }
 LISTENING_QUESTION {
   questionId: "B1-sample-l2-q6"

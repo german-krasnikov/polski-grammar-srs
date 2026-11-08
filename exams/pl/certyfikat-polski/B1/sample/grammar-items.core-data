@@ -2,17 +2,11 @@ DSL 1
 # Poprawność gramatyczna (Użycie języka) — B1 test przykładowy (źródło: UW JPO B1)
 # Klucz: 26-A 27-C 28-C 29-B 30-B 31-A 32-C 33-C 34-A 35-B
 
-GRAMMAR_TEST {
-  testId: "B1-sample-grammar-1"
-  examRef: "certyfikat-polski-B1-sample"
-  taskNumber: 1
-  instruction: "Proszę przeczytać tekst i uzupełnić luki, wybierając jedną z trzech możliwości (A, B, C)."
-}
 GRAMMAR_ITEM {
   itemId: "B1-sample-g1-q26"
   testRef: "B1-sample-grammar-1"
   questionType: choose_form
-  context: "„Nasza planeta" to najnowsza produkcja Netfliksa, która zabierze ___ w wyjątkową podróż"
+  context: "'Nasza planeta" to najnowsza produkcja Netfliksa, która zabierze ___ w wyjątkową podróż"
   options: "nas|nami|ich"
   correctAnswer: "nas"
   points: 1
@@ -48,7 +42,7 @@ GRAMMAR_ITEM {
   itemId: "B1-sample-g1-q30"
   testRef: "B1-sample-grammar-1"
   questionType: choose_form
-  context: "W produkcji „Nasza planeta" ___, dzięki najnowszej technice, po raz pierwszy podziwiać wspaniałe zdjęcia"
+  context: "W produkcji 'Nasza planeta" ___, dzięki najnowszej technice, po raz pierwszy podziwiać wspaniałe zdjęcia"
   options: "mogą|możecie|może"
   correctAnswer: "możecie"
   points: 1
@@ -99,12 +93,6 @@ GRAMMAR_ITEM {
   points: 1
 }
 
-GRAMMAR_TEST {
-  testId: "B1-sample-grammar-2"
-  examRef: "certyfikat-polski-B1-sample"
-  taskNumber: 2
-  instruction: "Proszę przeczytać tekst i uzupełnić każdą lukę jednym słowem."
-}
 GRAMMAR_ITEM {
   itemId: "B1-sample-g2-q36"
   testRef: "B1-sample-grammar-2"

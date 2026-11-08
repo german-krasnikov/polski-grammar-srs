@@ -1,0 +1,19 @@
+DSL 1
+LISTENING_TASK {
+  taskId: "B1-sample-listening-1"
+  examRef: "certyfikat-polski-B1-sample"
+  taskNumber: 1
+  audioUrl: "https://certyfikatpolski.pl/o-egzaminie/przykladowe-testy-zbiory-zadan/#B1-audio"
+  segmentStartMs: 0
+  segmentEndMs: 180000
+  instruction: "Proszę uważnie słuchać fragmentu wywiadu i zaznaczać właściwe odpowiedzi. Tylko jedna odpowiedź jest poprawna. Nagranie zostanie odtworzone dwa razy."
+}
+LISTENING_TASK {
+  taskId: "B1-sample-listening-2"
+  examRef: "certyfikat-polski-B1-sample"
+  taskNumber: 2
+  audioUrl: "https://certyfikatpolski.pl/o-egzaminie/przykladowe-testy-zbiory-zadan/#B1-audio"
+  segmentStartMs: 180000
+  segmentEndMs: 360000
+  instruction: "Proszę uważnie słuchać nagrania i zdecydować, czy zdania są prawdziwe (A) czy fałszywe (B). Nagranie zostanie odtworzone dwa razy."
+}
