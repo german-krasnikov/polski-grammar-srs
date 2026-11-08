@@ -68,8 +68,10 @@ internal fun ReasonSpecRow.toReasonSpec(): ReasonSpec {
         ReasonSpecRowKind.FIXED -> { requireFields("reason", kind.tag, written, "key"); ReasonSpec.Fixed(key!!) }
         ReasonSpecRowKind.CLASSIFIED -> {
             requireFields("reason", kind.tag, written, "rules")
-            require(rules!!.any { it.whenClass == "default" }) { "a classified reason has no \"default\" rule" }
-            ReasonSpec.Classified(rules.map { ReasonRule(it.whenClass, it.key) })
+            require(rules!!.any { it.whenUnchanged != true && it.whenGender == null && it.whenNomSingularSuffix == null }) {
+                "a classified reason has no unconditional fallback rule"
+            }
+            ReasonSpec.Classified(rules.map { ReasonRule(it.whenUnchanged, it.whenGender, it.whenNomSingularSuffix, it.key) })
         }
     }
 }

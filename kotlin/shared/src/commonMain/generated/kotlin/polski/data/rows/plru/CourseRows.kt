@@ -1,5 +1,5 @@
 // Generated from dsl/course.data-contract
-// source-sha256=1c990107b99132709babf88837c6c708ca52eeaa1d020e201b2433dc94d38fe6
+// source-sha256=9b3a70bd0bf50cb735e315a4160f877aae25cba46d73a0976f6ed2fb65d4295e
 // Edit the source, then run biome generate.
 
 package polski.data.rows.plru
@@ -592,7 +592,9 @@ data class TextSpecRow(
 )
 
 data class ReasonRuleRow(
-    val whenClass: String,
+    val whenUnchanged: Boolean? = null,
+    val whenGender: String? = null,
+    val whenNomSingularSuffix: String? = null,
     val key: String,
 )
 
@@ -4535,9 +4537,13 @@ private fun skillRecipeRowRowsPart0(): List<SkillRecipeRow> = listOf(
                 reason = ReasonSpecRow(
                     kind = ReasonSpecRowKind.CLASSIFIED,
                     rules = listOf(
-                        ReasonRuleRow(whenClass = "unchanged", key = "accReasonUnchanged"),
-                        ReasonRuleRow(whenClass = "personalA", key = "accReasonPersonalA"),
-                        ReasonRuleRow(whenClass = "default", key = "accReasonChanged"),
+                        ReasonRuleRow(whenUnchanged = true, key = "accReasonUnchanged"),
+                        ReasonRuleRow(
+                            whenGender = "m-personal",
+                            whenNomSingularSuffix = "a",
+                            key = "accReasonPersonalA",
+                        ),
+                        ReasonRuleRow(key = "accReasonChanged"),
                     ),
                 ),
             ),
@@ -4605,9 +4611,13 @@ private fun skillRecipeRowRowsPart0(): List<SkillRecipeRow> = listOf(
                 reason = ReasonSpecRow(
                     kind = ReasonSpecRowKind.CLASSIFIED,
                     rules = listOf(
-                        ReasonRuleRow(whenClass = "unchanged", key = "accReasonUnchanged"),
-                        ReasonRuleRow(whenClass = "personalA", key = "accReasonPersonalA"),
-                        ReasonRuleRow(whenClass = "default", key = "accReasonChanged"),
+                        ReasonRuleRow(whenUnchanged = true, key = "accReasonUnchanged"),
+                        ReasonRuleRow(
+                            whenGender = "m-personal",
+                            whenNomSingularSuffix = "a",
+                            key = "accReasonPersonalA",
+                        ),
+                        ReasonRuleRow(key = "accReasonChanged"),
                     ),
                 ),
             ),
@@ -4675,9 +4685,13 @@ private fun skillRecipeRowRowsPart0(): List<SkillRecipeRow> = listOf(
                 reason = ReasonSpecRow(
                     kind = ReasonSpecRowKind.CLASSIFIED,
                     rules = listOf(
-                        ReasonRuleRow(whenClass = "unchanged", key = "accReasonUnchanged"),
-                        ReasonRuleRow(whenClass = "personalA", key = "accReasonPersonalA"),
-                        ReasonRuleRow(whenClass = "default", key = "accReasonChanged"),
+                        ReasonRuleRow(whenUnchanged = true, key = "accReasonUnchanged"),
+                        ReasonRuleRow(
+                            whenGender = "m-personal",
+                            whenNomSingularSuffix = "a",
+                            key = "accReasonPersonalA",
+                        ),
+                        ReasonRuleRow(key = "accReasonChanged"),
                     ),
                 ),
             ),
