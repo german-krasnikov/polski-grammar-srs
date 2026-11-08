@@ -246,6 +246,7 @@ private fun DesktopSession(
                         }
                     } else store.dispatch(AppAction.EffectAcknowledged(effect.id, EffectOutcome.Skipped))
                 }
+                is UiEffect.DownloadText -> store.dispatch(AppAction.EffectAcknowledged(effect.id, EffectOutcome.Skipped))
             }
         }
     }
