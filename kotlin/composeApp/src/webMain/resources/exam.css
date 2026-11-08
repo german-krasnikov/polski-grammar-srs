@@ -29,3 +29,25 @@
 .exam-review-num { font-weight: 600; min-width: 24px; }
 .exam-review-context { flex: 1; }
 .exam-review-correct { color: var(--primary, #7eb6ff); font-weight: 600; white-space: nowrap; }
+
+/* Exam list */
+.exam-list { display: flex; flex-direction: column; gap: 12px; }
+.exam-card { padding: 16px; border: 1.5px solid var(--outline, #444); border-radius: 12px; display: flex; flex-direction: column; gap: 8px; }
+.exam-card-header { display: flex; align-items: center; gap: 8px; }
+.exam-level-badge { padding: 2px 10px; border-radius: 6px; font-weight: 700; font-size: 0.85rem; background: var(--primary, #7eb6ff); color: var(--on-primary, #003059); }
+.exam-card-year { font-size: 0.9rem; color: var(--on-surface-variant, #888); }
+.exam-card-title { font-size: 1.1rem; font-weight: 600; }
+.exam-card-counts { font-size: 0.85rem; color: var(--on-surface-variant, #888); }
+
+/* Module list */
+.exam-module-list { display: flex; flex-direction: column; gap: 10px; margin: 12px 0; }
+.exam-module-card { padding: 14px 16px; border: 1.5px solid var(--outline, #444); border-radius: 10px; display: flex; align-items: center; gap: 12px; }
+.exam-module-name { flex: 1; font-size: 1rem; font-weight: 500; }
+.exam-module-count { font-size: 0.85rem; color: var(--on-surface-variant, #888); white-space: nowrap; }
+
+/* Reading */
+.exam-reading-text { padding: 16px; background: var(--surface-container, #1a1f2a); border-radius: 12px; margin-bottom: 16px; line-height: 1.7; font-size: 1rem; }
+.exam-reading-text p { margin: 0 0 8px; }
+.exam-reading-questions { display: flex; flex-direction: column; gap: 16px; margin-bottom: 16px; }
+.exam-reading-q { display: flex; flex-direction: column; gap: 6px; }
+.exam-reading-q-text { font-weight: 500; font-size: 0.95rem; }

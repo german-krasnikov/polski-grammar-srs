@@ -1,0 +1,103 @@
+package polski.ui
+
+import kotlinx.browser.document
+import org.w3c.dom.HTMLButtonElement
+import org.w3c.dom.HTMLElement
+import org.w3c.dom.HTMLInputElement
+import polski.exam.QuestionType
+import polski.exam.grammar.*
+
+internal class ExamGrammarController(examId: String, private val onBack: () -> Unit) {
+    private var state = GrammarExamState(test = examGrammarTests.getValue(examId))
+    private var root: HTMLElement? = null
+
+    fun render(container: HTMLElement) { root = container; redraw() }
+
+    private fun dispatch(action: GrammarExamAction) { state = reduceGrammarExam(state, action); redraw() }
+
+    private fun redraw() {
+        val c = root ?: return; c.innerHTML = ""
+        if (state.submitted && state.result != null) renderResult(c) else renderQuestion(c)
+    }
+
+    private fun renderQuestion(c: HTMLElement) {
+        val card = grammarExamCardModel(state)
+        c.appendChild(node("h2", "exam-title", card.instruction))
+        c.appendChild(node("div", "exam-progress").apply {
+            appendChild(node("span", "exam-progress-text", card.progress))
+            appendChild(node("div", "exam-progress-bar").apply {
+                appendChild(node("div", "exam-progress-fill").apply {
+                    style.setProperty("width", "${((state.currentIndex + 1).toDouble() / state.test.items.size * 100).toInt()}%")
+                })
+            })
+        })
+        c.appendChild(node("div", "exam-context").apply {
+            setAttribute("lang", "pl")
+            val parts = card.item.context.split("___")
+            if (parts.size == 2) {
+                appendChild(node("span", text = parts[0]))
+                appendChild(node("span", "exam-gap", "___"))
+                appendChild(node("span", text = parts[1]))
+            } else textContent = card.item.context
+        })
+        if (card.item.options.isNotEmpty()) {
+            c.appendChild(node("div", "exam-options").apply {
+                card.item.options.forEachIndexed { i, opt ->
+                    appendChild((document.createElement("button") as HTMLButtonElement).apply {
+                        type = "button"
+                        className = if (card.currentAnswer == opt) "exam-option selected" else "exam-option"
+                        textContent = "${'A' + i}. $opt"
+                        addEventListener("click", { dispatch(GrammarExamAction.Answer(card.item.itemId, opt)) })
+                    })
+                }
+            })
+        } else {
+            c.appendChild(node("div", "exam-input-wrap").apply {
+                appendChild((document.createElement("input") as HTMLInputElement).apply {
+                    type = "text"; className = "exam-input"; placeholder = "Wpisz odpowiedź..."
+                    value = card.currentAnswer
+                    addEventListener("input", { dispatch(GrammarExamAction.Answer(card.item.itemId, this.value)) })
+                })
+            })
+        }
+        c.appendChild(node("div", "exam-nav").apply {
+            if (!card.isFirst) appendChild(navBtn("← Назад") { dispatch(GrammarExamAction.Previous) })
+            appendChild(node("span", "exam-nav-spacer"))
+            if (!card.isLast) appendChild(navBtn("Далее →") { dispatch(GrammarExamAction.Next) })
+            if (card.isLast) appendChild(navBtn("Завершить", primary = true) { dispatch(GrammarExamAction.Submit) })
+        })
+    }
+
+    private fun renderResult(c: HTMLElement) {
+        val result = state.result ?: return
+        c.appendChild(node("h2", "exam-title", "Результаты — Грамматика"))
+        c.appendChild(node("div", "exam-score").apply {
+            appendChild(node("div", "exam-score-big", "${result.percentage.toInt()}%"))
+            appendChild(node("div", "exam-score-detail", "${result.correct} / ${result.total} баллов"))
+        })
+        c.appendChild(node("div", "exam-review").apply {
+            state.test.items.forEachIndexed { i, item ->
+                val answer = state.answers[item.itemId].orEmpty()
+                val ok = GrammarExamScorer.score(item, answer)
+                appendChild(node("div", if (ok) "exam-review-item correct" else "exam-review-item wrong").apply {
+                    appendChild(node("span", "exam-review-num", "${i + 1}."))
+                    appendChild(node("span", "exam-review-context", item.context.replace("___", if (answer.isNotEmpty()) "[$answer]" else "[—]")))
+                    if (!ok) appendChild(node("span", "exam-review-correct", "→ ${item.correctAnswer}"))
+                })
+            }
+        })
+        c.appendChild(node("div", "exam-nav").apply {
+            appendChild(navBtn("← К модулям") { onBack() })
+            appendChild(node("span", "exam-nav-spacer"))
+            appendChild(navBtn("Пройти ещё раз", primary = true) {
+                state = GrammarExamState(test = state.test); redraw()
+            })
+        })
+    }
+}
+
+private fun navBtn(label: String, primary: Boolean = false, onClick: () -> Unit) =
+    (document.createElement("button") as HTMLButtonElement).apply {
+        type = "button"; className = if (primary) "exam-nav-btn primary" else "exam-nav-btn"
+        textContent = label; addEventListener("click", { onClick() })
+    }
