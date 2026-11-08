@@ -9,7 +9,7 @@ RECORD EffectPlayRow
 END
 
 RECORD CardEffectRow KEY effect COUNT 1..
-  effect: enum remembered|again
+  effect: string
   plays: [EffectPlayRow]
 END
 
