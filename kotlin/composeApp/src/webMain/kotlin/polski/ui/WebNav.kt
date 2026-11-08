@@ -45,6 +45,9 @@ internal class WebNav(app: HTMLElement, navigate: (WebRoute) -> Unit) {
     }
     private var positioned = false
     private var currentRoute: WebRoute? = null
+    private var initialRaf1: Int? = null
+    private var initialRaf2: Int? = null
+    private var closed = false
     // W5: the first `update()` used to measure `getBoundingClientRect()` synchronously right after
     // mount, before the stylesheet (and the web font it loads) was necessarily ready — a browser
     // still on fallback-font/UA-default metrics at that instant lays the buttons out narrower than
@@ -58,18 +61,25 @@ internal class WebNav(app: HTMLElement, navigate: (WebRoute) -> Unit) {
     // `ResizeObserver` nor `document.fonts` are bound in this project's `org.w3c.dom` for both the
     // js and wasmJs targets this source set compiles for, so plain `requestAnimationFrame`/`resize`
     // are the portable choice here.
-    private val onResize: (Event) -> Unit = { reposition(animate = false) }
+    private val onResize: (Event) -> Unit = { if (!closed) reposition(animate = false) }
 
     init {
         shell.className = "primary-nav"
         shell.setAttribute("aria-label", "Основные разделы")
         shell.insertBefore(indicator, shell.firstChild)
         app.appendChild(shell)
-        window.requestAnimationFrame { window.requestAnimationFrame { reposition(animate = false) } }
+        initialRaf1 = window.requestAnimationFrame {
+            initialRaf1 = null
+            if (!closed) initialRaf2 = window.requestAnimationFrame {
+                initialRaf2 = null
+                if (!closed) reposition(animate = false)
+            }
+        }
         window.addEventListener("resize", onResize)
     }
 
     fun update(route: WebRoute) {
+        if (closed) return
         currentRoute = route
         buttons.forEach { (destination, button) ->
             val selected = destination == route
@@ -96,5 +106,14 @@ internal class WebNav(app: HTMLElement, navigate: (WebRoute) -> Unit) {
         indicator.style.setProperty("width", "${activeRect.width}px")
     }
 
-    fun close() { window.removeEventListener("resize", onResize); shell.remove() }
+    fun close() {
+        if (closed) return
+        closed = true
+        initialRaf1?.let(window::cancelAnimationFrame)
+        initialRaf2?.let(window::cancelAnimationFrame)
+        initialRaf1 = null
+        initialRaf2 = null
+        window.removeEventListener("resize", onResize)
+        shell.remove()
+    }
 }

@@ -41,6 +41,9 @@ internal class RouteSlider {
     private var finishNow: (() -> Unit)? = null
     private var pendingBuild: (() -> HTMLElement)? = null
     private var liveIncoming: HTMLElement? = null
+    private var liveOutgoing: HTMLElement? = null
+    private var liveViewport: HTMLElement? = null
+    private var closed = false
 
     /**
      * True from the moment [start] commits to a real slide until it settles — including the
@@ -64,6 +67,7 @@ internal class RouteSlider {
      * glitches the slide already under way.
      */
     fun refresh(buildIncoming: () -> HTMLElement) {
+        if (closed) return
         val incoming = liveIncoming
         if (incoming != null) {
             val fresh = buildIncoming()
@@ -76,6 +80,7 @@ internal class RouteSlider {
 
     /** Finishes any in-flight transition immediately; a no-op when nothing is running. */
     fun settle() {
+        if (closed) return
         buildTimer?.let { window.clearTimeout(it) }
         buildTimer = null
         pendingBuild = null
@@ -89,6 +94,32 @@ internal class RouteSlider {
         val finish = finishNow
         finishNow = null
         finish?.invoke()
+    }
+
+    /** Releases pending browser work without running the slide's completion callbacks. */
+    fun close() {
+        if (closed) return
+        closed = true
+        buildTimer?.let(window::clearTimeout)
+        finishTimer?.let(window::clearTimeout)
+        raf1?.let(window::cancelAnimationFrame)
+        raf2?.let(window::cancelAnimationFrame)
+        buildTimer = null
+        finishTimer = null
+        raf1 = null
+        raf2 = null
+        pendingBuild = null
+        finishNow = null
+        liveIncoming?.remove()
+        liveOutgoing?.apply {
+            removeAttribute("inert")
+            removeAttribute("aria-hidden")
+            listOf("will-change", "transform", "transition").forEach(style::removeProperty)
+        }
+        liveViewport?.style?.removeProperty("overflow")
+        liveIncoming = null
+        liveOutgoing = null
+        liveViewport = null
     }
 
     /**
@@ -106,6 +137,7 @@ internal class RouteSlider {
         onMounted: (HTMLElement) -> Unit,
         onSettled: (HTMLElement) -> Unit,
     ) {
+        if (closed) return
         settle() // never let a second transition of the same viewport overlap the first
         val outgoing = viewport.querySelector(":scope > .route-content") as? HTMLElement
         if (outgoing == null || instant) {
@@ -125,12 +157,15 @@ internal class RouteSlider {
         // gesture that must react within the SAME task, so this costs nothing perceptible.
         buildTimer = window.setTimeout({
             buildTimer = null
+            if (closed) return@setTimeout null
             // `pendingBuild` (see `refresh`) wins if a same-route change arrived before this ever
             // ran — it reflects strictly newer state than the closure `start` was originally
             // called with.
             val incoming = (pendingBuild ?: buildIncoming)()
             pendingBuild = null
             liveIncoming = incoming
+            liveOutgoing = outgoing
+            liveViewport = viewport
             // Correction round: `incoming` no longer needs `position:absolute`/`top`/`left`/
             // `width` — `.route-viewport>.route-content{grid-area:1/1}` (training.css) already
             // stacks it exactly on top of `outgoing` and auto-sizes the shared row to whichever
@@ -160,13 +195,17 @@ internal class RouteSlider {
             // frame of the slide has painted, simply snaps `incoming` straight to rest — a
             // reasonable outcome for an interrupt this early, and always safe.
             val finish = {
-                outgoing.remove()
-                viewport.style.removeProperty("overflow")
-                listOf("will-change", "transform", "transition").forEach {
-                    incoming.style.removeProperty(it)
+                if (!closed) {
+                    outgoing.remove()
+                    viewport.style.removeProperty("overflow")
+                    listOf("will-change", "transform", "transition").forEach {
+                        incoming.style.removeProperty(it)
+                    }
+                    liveIncoming = null
+                    liveOutgoing = null
+                    liveViewport = null
+                    onSettled(incoming)
                 }
-                liveIncoming = null
-                onSettled(incoming)
             }
             finishNow = finish
             // Two `requestAnimationFrame`s, not a forced `offsetWidth`/`getBoundingClientRect`
@@ -180,15 +219,21 @@ internal class RouteSlider {
             // work rather than a synchronous script-side flush.
             raf1 = window.requestAnimationFrame {
                 raf1 = null
-                raf2 = window.requestAnimationFrame {
+                if (!closed) raf2 = window.requestAnimationFrame {
                     raf2 = null
+                    if (closed) return@requestAnimationFrame
                     val transition = "transform ${SLIDE_DURATION_MS}ms $SLIDE_EASING"
                     outgoing.style.setProperty("transition", transition)
                     incoming.style.setProperty("transition", transition)
                     outgoing.style.setProperty("transform", "translateX(${-direction * 100}%)")
                     incoming.style.setProperty("transform", "translateX(0)")
                     onMounted(incoming)
-                    finishTimer = window.setTimeout({ finishTimer = null; finishNow = null; finish(); null }, SLIDE_DURATION_MS)
+                    finishTimer = window.setTimeout({
+                        finishTimer = null
+                        finishNow = null
+                        if (!closed) finish()
+                        null
+                    }, SLIDE_DURATION_MS)
                 }
             }
             null
