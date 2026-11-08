@@ -120,8 +120,9 @@ internal fun renderCaseReferenceWeb(root: HTMLElement, state: AppUiState, dispat
         root.matrixAdd("p", "muted", "Для этого курса падежная таблица недоступна.")
         return
     }
-    root.matrixAdd("h3", "Таблица этого предложения")
-    root.matrixAdd("p", "Можно подсматривать · ${noun.lemma} · ${genderNames.getValue(noun.gender)} · ${if (exercise.number == NumberGram.SG) "ед. ч." else "мн. ч."}")
+    val ref = polski.presentation.caseReferenceModel(exercise, revealed)
+    root.matrixAdd("h3", ref.title)
+    root.matrixAdd("p", "Можно подсматривать · ${ref.nounInfo}")
     val scroll = root.matrixAdd("div", cls = "table-scroll")
     scroll.setAttribute("data-scroll-key", "card-reference")
     val table = scroll.matrixAdd("table", cls = "compact-table")
@@ -129,22 +130,21 @@ internal fun renderCaseReferenceWeb(root: HTMLElement, state: AppUiState, dispat
     header.matrixAdd("th", "Падеж").setAttribute("scope", "col")
     header.matrixAdd("th", "Вся группа слов").setAttribute("scope", "col")
     val body = table.matrixAdd("tbody")
-    caseRows.forEach { row ->
+    ref.rows.forEach { row ->
         val tr = body.matrixAdd("tr")
-        val isTarget = row.id.id in exercise.tags
-        if (isTarget && revealed) tr.className = "highlight-row"
-        tr.matrixAdd("th", "${row.pl} · ${row.ru}").setAttribute("scope", "row")
+        if (row.isTarget && revealed) tr.className = "highlight-row"
+        tr.matrixAdd("th", row.caseLabel).setAttribute("scope", "row")
         tr.matrixAdd("td").apply {
             setAttribute("lang", "pl")
-            val from = nounPhrase(exercise.nounId, GramCase.NOM, exercise.number, exercise.adjectiveId, exercise.possessive)
-            if (isTarget && !revealed) {
-                matrixContrastMasked(this, from)
+            if (row.isTarget && row.contrast == null) {
+                matrixContrastMasked(this, row.phrase)
             } else {
-                matrixContrast(this, from, nounPhrase(exercise.nounId, row.id, exercise.number, exercise.adjectiveId, exercise.possessive))
+                val pair = row.contrast ?: polski.presentation.ContrastPair.generated(row.phrase, row.phrase)
+                matrixContrast(this, pair.from, row.phrase)
             }
         }
     }
-    root.matrixAdd("p", courseContextHelp.compact, "muted small")
+    root.matrixAdd("p", ref.contextHelp, "muted small")
     root.matrixButton(UiCopy.AllTablesAndSchema) { dispatch(AppAction.SelectTab(polski.presentation.AppTab.Matrix)) }
 }
 

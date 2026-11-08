@@ -79,24 +79,18 @@ internal fun AndroidCardSection(section: CardSection, state: AppUiState, dispatc
 @Composable
 fun AndroidCaseReference(state: AppUiState, dispatch: (AppAction) -> Unit) {
     val exercise = state.exercise ?: return
-    val noun = polski.data.nounById(exercise.nounId)
-    val revealed = state.phase == CardPhase.Revealed
-    AndroidInfoCard("Таблица этого предложения") {
-        Text("${noun.lemma} · ${polski.grammar.genderNames.getValue(noun.gender)} · ${if (exercise.number == polski.model.NumberGram.SG) "ед. ч." else "мн. ч."}")
-        polski.grammar.caseRows.forEach { row ->
-            val isTarget = row.id.id in exercise.tags
-            Text("${row.pl} · ${row.ru}", style = MaterialTheme.typography.labelLarge)
-            val from = polski.grammar.nounPhrase(exercise.nounId, polski.model.GramCase.NOM, exercise.number, exercise.adjectiveId, exercise.possessive)
-            if (isTarget && !revealed) {
-                ContrastPairTextMasked(from)
+    val ref = polski.presentation.caseReferenceModel(exercise, state.phase == CardPhase.Revealed)
+    AndroidInfoCard(ref.title) {
+        Text(ref.nounInfo)
+        ref.rows.forEach { row ->
+            Text(row.caseLabel, style = MaterialTheme.typography.labelLarge)
+            if (row.isTarget && row.contrast == null) {
+                ContrastPairTextMasked(row.phrase)
             } else {
-                ContrastPairText(ContrastPair.generated(
-                    from,
-                    polski.grammar.nounPhrase(exercise.nounId, row.id, exercise.number, exercise.adjectiveId, exercise.possessive),
-                ))
+                ContrastPairText(row.contrast ?: ContrastPair.generated(row.phrase, row.phrase))
             }
         }
-        Text(polski.data.courseContextHelp.compact)
+        Text(ref.contextHelp)
         OutlinedButton(onClick = { dispatch(AppAction.SelectTab(AppTab.Matrix)) }, modifier = Modifier.fillMaxWidth()) {
             Text(UiCopy.AllTablesAndSchema)
         }

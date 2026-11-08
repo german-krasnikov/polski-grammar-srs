@@ -50,8 +50,8 @@ import polski.ui.ReferenceAspectComparison
 import polski.ui.MaleAccComparison
 import polski.ui.ContrastPairText
 import polski.grammar.caseRows
-import polski.grammar.genderNames
-import polski.grammar.nounPhrase
+import polski.presentation.CardPhase
+import polski.presentation.caseReferenceModel
 import polski.model.Aspect
 import polski.model.GramCase
 import polski.model.NumberGram
@@ -141,19 +141,15 @@ private fun LifehackGroupCard(group: LifehackGroup) {
 @Composable
 internal fun CaseReferenceScreen(state: AppUiState, dispatch: (AppAction) -> Unit) {
     val exercise = state.exercise ?: return
-    val noun = nounById(exercise.nounId)
-    MatrixCard("Таблица этого предложения") {
-        Text("${noun.lemma} · ${genderNames.getValue(noun.gender)} · ${if (exercise.number == NumberGram.SG) "ед. ч." else "мн. ч."}")
+    val ref = caseReferenceModel(exercise, state.phase == CardPhase.Revealed)
+    MatrixCard(ref.title) {
+        Text(ref.nounInfo)
         MatrixTable(
             listOf("Падеж", "Вся группа слов"),
-            caseRows.map { row -> listOf(
-                "${row.pl} · ${row.ru}",
-                nounPhrase(exercise.nounId, row.id, exercise.number, exercise.adjectiveId, exercise.possessive),
-            ) },
-            contrastFrom = { _, column -> if (column == 1) nounPhrase(exercise.nounId, GramCase.NOM,
-                exercise.number, exercise.adjectiveId, exercise.possessive) else null },
+            ref.rows.map { row -> listOf(row.caseLabel, if (row.isTarget && row.contrast == null) "···" else row.phrase) },
+            contrastFrom = { rowIndex, column -> if (column == 1) ref.rows[rowIndex].contrast?.from else null },
         )
-        Text(courseContextHelp.compact)
+        Text(ref.contextHelp)
         OutlinedButton(onClick = { dispatch(AppAction.SelectTab(AppTab.Matrix)) }) { Text(UiCopy.AllTablesAndSchema) }
     }
 }
