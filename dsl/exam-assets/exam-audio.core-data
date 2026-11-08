@@ -1,0 +1,44 @@
+DSL 1
+# Local hashes measured 2026-11-08. Official endpoints returned HTTP 403 in this environment; URL equality is not a verified download claim.
+EXAM_AUDIO_ASSET {
+  examId: certyfikat-polski-B1-2017
+  officialDownloadUrl: "https://certyfikatpolski.pl/wp-content/uploads/2017/03/Egzamin-Przyk%C5%82adowy-B1-gru2016.mp3"
+  sha256: e7d78c0f1bf64ef6ebf83e7d8b9d38f30539a2d33f205d40d230d56d03fb2747
+  webPath: exam-audio/B1-2017.mp3
+  localSourcePath: ExamBin/pl/B1/2017/audio.mp3
+}
+EXAM_AUDIO_ASSET {
+  examId: certyfikat-polski-B1-2019
+  officialDownloadUrl: "https://certyfikatpolski.pl/wp-content/uploads/2019/09/B1_audio.mp3"
+  sha256: "55a563e5a53cb6f576e565fd4656fd705074cf25073a75804afeb19e3159ede1"
+  webPath: exam-audio/B1-2019.mp3
+  localSourcePath: ExamBin/pl/B1/2019/audio.mp3
+}
+EXAM_AUDIO_ASSET {
+  examId: certyfikat-polski-B1-2020
+  officialDownloadUrl: "https://certyfikatpolski.pl/wp-content/uploads/2020/12/B1_2020_03.mp3"
+  sha256: b88f61dea88036425bfd6990c07f308264a42b06d0aa9ce75a64a82bf3e840c8
+  webPath: exam-audio/B1-2020.mp3
+  localSourcePath: ExamBin/pl/B1/2020/audio.mp3
+}
+EXAM_AUDIO_ASSET {
+  examId: certyfikat-polski-B2-2017
+  officialDownloadUrl: "https://certyfikatpolski.pl/wp-content/uploads/2017/03/Egzamin-przyk%C5%82adowy-B2-listopad-2016-poprawiony.mp3"
+  sha256: d1d865a43dd4a6e91ef2508e1476cdffca2413e0abcd25a9371b568b702cf84e
+  webPath: exam-audio/B2-2017.mp3
+  localSourcePath: ExamBin/pl/B2/2017/audio.mp3
+}
+EXAM_AUDIO_ASSET {
+  examId: certyfikat-polski-B2-2019
+  officialDownloadUrl: "https://certyfikatpolski.pl/wp-content/uploads/2019/09/B2_audio.mp3"
+  sha256: "4aa580740d38b5f5a3cbcd10c0b6b4e9ed700d6c1407dce60c2733445d9b9650"
+  webPath: exam-audio/B2-2019.mp3
+  localSourcePath: ExamBin/pl/B2/2019/audio.mp3
+}
+EXAM_AUDIO_ASSET {
+  examId: certyfikat-polski-B2-2020
+  officialDownloadUrl: "https://certyfikatpolski.pl/wp-content/uploads/2020/12/B2_03_2020.mp3"
+  sha256: e931d9c4466ee5186a6b47fb3a01201a93882791c8bbc74a2ea8275ba9f3d72e
+  webPath: exam-audio/B2-2020.mp3
+  localSourcePath: ExamBin/pl/B2/2020/audio.mp3
+}

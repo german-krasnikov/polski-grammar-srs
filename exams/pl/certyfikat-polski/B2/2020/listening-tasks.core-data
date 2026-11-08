@@ -3,7 +3,7 @@ LISTENING_TASK {
   taskId: "certyfikat-polski-B2-2020-listen-1"
   examRef: "certyfikat-polski-B2-2020"
   taskNumber: 1
-  audioUrl: "ExamBin/pl/B2/2020/audio.mp3"
+  audioUrl: "exam-audio/B2-2020.mp3"
   segmentStartMs: 0
   segmentEndMs: 0
   instruction: "Zadanie 1"
@@ -12,7 +12,7 @@ LISTENING_TASK {
   taskId: "certyfikat-polski-B2-2020-listen-2"
   examRef: "certyfikat-polski-B2-2020"
   taskNumber: 2
-  audioUrl: "ExamBin/pl/B2/2020/audio.mp3"
+  audioUrl: "exam-audio/B2-2020.mp3"
   segmentStartMs: 0
   segmentEndMs: 0
   instruction: "Zadanie 2"
@@ -21,7 +21,7 @@ LISTENING_TASK {
   taskId: "certyfikat-polski-B2-2020-listen-3"
   examRef: "certyfikat-polski-B2-2020"
   taskNumber: 3
-  audioUrl: "ExamBin/pl/B2/2020/audio.mp3"
+  audioUrl: "exam-audio/B2-2020.mp3"
   segmentStartMs: 0
   segmentEndMs: 0
   instruction: "Zadanie 3"
@@ -30,7 +30,7 @@ LISTENING_TASK {
   taskId: "certyfikat-polski-B2-2020-listen-4"
   examRef: "certyfikat-polski-B2-2020"
   taskNumber: 4
-  audioUrl: "ExamBin/pl/B2/2020/audio.mp3"
+  audioUrl: "exam-audio/B2-2020.mp3"
   segmentStartMs: 0
   segmentEndMs: 0
   instruction: "Zadanie 4"
@@ -39,7 +39,7 @@ LISTENING_TASK {
   taskId: "certyfikat-polski-B2-2020-listen-5"
   examRef: "certyfikat-polski-B2-2020"
   taskNumber: 5
-  audioUrl: "ExamBin/pl/B2/2020/audio.mp3"
+  audioUrl: "exam-audio/B2-2020.mp3"
   segmentStartMs: 0
   segmentEndMs: 0
   instruction: "Zadanie 5"

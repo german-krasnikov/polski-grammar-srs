@@ -16,12 +16,18 @@ cd kotlin
 ./gradlew :shared:jsBrowserTest :shared:wasmJsBrowserTest
 ./gradlew :composeApp:compileKotlinJs :composeApp:compileKotlinWasmJs
 ./gradlew :composeApp:composeCompatibilityBrowserDistribution
-python3 -m http.server 8765 --bind 127.0.0.1 --directory composeApp/build/dist/composeWebCompatibility/productionExecutable
+node ../node_modules/vite/bin/vite.js preview --host 127.0.0.1 --port 8765 --strictPort --outDir composeApp/build/dist/composeWebCompatibility/productionExecutable
 ```
 
 Open `http://127.0.0.1:8765/`. The distribution contains a Wasm branch and a JS fallback. The browser tests use headless Chrome through Karma; Chrome must be installed and discoverable. The production distribution is the artifact uploaded by the separate Kotlin CI check. CI does not publish it to Pages or alter the React deploy.
 
-For a clean checkout, install JDK 21, clone the repository, and run the commands above. The Gradle and Yarn caches may be empty; the first run downloads dependencies. Use `JAVA_HOME` pointing to JDK 21 if another JDK is selected by default.
+Use a server supporting HTTP byte ranges for exam audio. Vite preview serves MP3 range requests as `206 Partial Content`; the plain Python server used earlier did not provide seekable media ranges and caused incorrect segment playback.
+
+For a clean checkout, install JDK 21 and root Node dependencies (`npm ci`) before the Gradle web build. Use `JAVA_HOME` pointing to JDK 21 if another JDK is selected by default. The Gradle and Yarn caches may be empty; the first run downloads dependencies.
+
+The exam audio manifest is `../dsl/exam-assets/exam-audio.core-data`. Browser resource tasks verify the SHA-256 of six local `../ExamBin/pl/{B1,B2}/{2017,2019,2020}/audio.mp3` files before copying them into ignored web resources; if a source is absent, the preparer tries its official URL and fails if download or hash verification fails. The official endpoints returned HTTP 403 in the 2026-11-08 local check, so a clean checkout without the local audio vault cannot currently pass a web distribution build. Direct JS, Wasm and compatibility distribution tasks verify their output MP3s as a final gate. These local assets are not tracked or licensed for automatic publication by this build step.
+
+From the repository root, `npm run exam:audio:check-paths` checks that the six exams' DSL task URLs match the manifest. After a production distribution, run `npm run exam:audio:check-dist -- kotlin/composeApp/build/dist/composeWebCompatibility/productionExecutable`; with a local server running, `npm run exam:audio:check-url -- http://127.0.0.1:8765/` checks the served response bytes. Both checks compare all six assets to the manifest SHA-256.
 
 ## Progress migration contract (work in progress)
 

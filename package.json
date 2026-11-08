@@ -23,7 +23,11 @@
     "course:inventory:check": "node scripts/inventory-course.mjs --check",
     "course:inventory:decisions:check": "node scripts/check-course-inventory.mjs --check",
     "rive:sync": "node scripts/sync-rive-assets.mjs",
-    "rive:sync:check": "node scripts/sync-rive-assets.mjs --check"
+    "rive:sync:check": "node scripts/sync-rive-assets.mjs --check",
+    "exam:audio:prepare": "tsx scripts/prepare-exam-audio.ts prepare",
+    "exam:audio:check-paths": "tsx scripts/prepare-exam-audio.ts check-paths",
+    "exam:audio:check-dist": "tsx scripts/prepare-exam-audio.ts check-dist",
+    "exam:audio:check-url": "tsx scripts/prepare-exam-audio.ts check-url"
   },
   "dependencies": {
     "react": "^19.1.1",

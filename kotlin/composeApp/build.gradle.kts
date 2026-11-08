@@ -124,6 +124,31 @@ kotlin {
     }
 }
 
+// Web exam audio is a local, pinned input. A direct Gradle distribution must fail when
+// the vault is absent or its bytes differ from the DSL manifest.
+val examAudioRepository = rootProject.projectDir.parentFile
+val examAudioCli = examAudioRepository.resolve("node_modules/tsx/dist/cli.mjs")
+val examAudioScript = examAudioRepository.resolve("scripts/prepare-exam-audio.ts")
+val prepareExamAudio = tasks.register<Exec>("prepareExamAudio") {
+    group = "build"
+    workingDir(examAudioRepository)
+    commandLine("node", examAudioCli.absolutePath, examAudioScript.absolutePath, "prepare")
+}
+tasks.matching { it.name == "jsProcessResources" || it.name == "wasmJsProcessResources" }
+    .configureEach { dependsOn(prepareExamAudio) }
+
+for (target in listOf("js", "wasmJs", "composeWebCompatibility")) {
+    val verify = tasks.register<Exec>("verify${target.replaceFirstChar { it.uppercase() }}ExamAudio") {
+        group = "verification"
+        workingDir(examAudioRepository)
+        commandLine("node", examAudioCli.absolutePath, examAudioScript.absolutePath,
+            "check-dist", layout.buildDirectory.dir("dist/$target/productionExecutable").get().asFile.absolutePath)
+    }
+    val distribution = if (target == "composeWebCompatibility")
+        "composeCompatibilityBrowserDistribution" else "${target}BrowserDistribution"
+    tasks.matching { it.name == distribution }.configureEach { finalizedBy(verify) }
+}
+
 // Source maps are JSON-format application artifacts. Check all three web distributions
 // before the compatibility bundle is uploaded or copied into the published site.
 tasks.register("verifyNoWebSourceMaps") {
