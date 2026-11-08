@@ -1,0 +1,47 @@
+DSL 1
+# Audio timestamps need manual verification
+LISTENING_TASK {
+  taskId: "certyfikat-polski-C1-2019-listen-1"
+  examRef: "certyfikat-polski-C1-2019"
+  taskNumber: 1
+  audioUrl: "https://certyfikatpolski.pl/wp-content/uploads/2019/09/C1_test.mp3"
+  segmentStartMs: 0
+  segmentEndMs: 0
+  instruction: "TODO: fill from PDF"
+}
+LISTENING_TASK {
+  taskId: "certyfikat-polski-C1-2019-listen-2"
+  examRef: "certyfikat-polski-C1-2019"
+  taskNumber: 2
+  audioUrl: "https://certyfikatpolski.pl/wp-content/uploads/2019/09/C1_test.mp3"
+  segmentStartMs: 0
+  segmentEndMs: 0
+  instruction: "TODO: fill from PDF"
+}
+LISTENING_TASK {
+  taskId: "certyfikat-polski-C1-2019-listen-3"
+  examRef: "certyfikat-polski-C1-2019"
+  taskNumber: 3
+  audioUrl: "https://certyfikatpolski.pl/wp-content/uploads/2019/09/C1_test.mp3"
+  segmentStartMs: 0
+  segmentEndMs: 0
+  instruction: "TODO: fill from PDF"
+}
+LISTENING_TASK {
+  taskId: "certyfikat-polski-C1-2019-listen-4"
+  examRef: "certyfikat-polski-C1-2019"
+  taskNumber: 4
+  audioUrl: "https://certyfikatpolski.pl/wp-content/uploads/2019/09/C1_test.mp3"
+  segmentStartMs: 0
+  segmentEndMs: 0
+  instruction: "TODO: fill from PDF"
+}
+LISTENING_TASK {
+  taskId: "certyfikat-polski-C1-2019-listen-5"
+  examRef: "certyfikat-polski-C1-2019"
+  taskNumber: 5
+  audioUrl: "https://certyfikatpolski.pl/wp-content/uploads/2019/09/C1_test.mp3"
+  segmentStartMs: 0
+  segmentEndMs: 0
+  instruction: "TODO: fill from PDF"
+}

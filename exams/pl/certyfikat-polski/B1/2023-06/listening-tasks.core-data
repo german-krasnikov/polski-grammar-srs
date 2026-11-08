@@ -1,0 +1,47 @@
+DSL 1
+# Audio timestamps need manual verification
+LISTENING_TASK {
+  taskId: "certyfikat-polski-B1-2023-06-listen-1"
+  examRef: "certyfikat-polski-B1-2023-06"
+  taskNumber: 1
+  audioUrl: "https://certyfikatpolski.pl/wp-content/uploads/2025/07/2023_06_24_25_B1_arkusz_egzaminacyjny.mp3"
+  segmentStartMs: 0
+  segmentEndMs: 0
+  instruction: "TODO: fill from PDF"
+}
+LISTENING_TASK {
+  taskId: "certyfikat-polski-B1-2023-06-listen-2"
+  examRef: "certyfikat-polski-B1-2023-06"
+  taskNumber: 2
+  audioUrl: "https://certyfikatpolski.pl/wp-content/uploads/2025/07/2023_06_24_25_B1_arkusz_egzaminacyjny.mp3"
+  segmentStartMs: 0
+  segmentEndMs: 0
+  instruction: "TODO: fill from PDF"
+}
+LISTENING_TASK {
+  taskId: "certyfikat-polski-B1-2023-06-listen-3"
+  examRef: "certyfikat-polski-B1-2023-06"
+  taskNumber: 3
+  audioUrl: "https://certyfikatpolski.pl/wp-content/uploads/2025/07/2023_06_24_25_B1_arkusz_egzaminacyjny.mp3"
+  segmentStartMs: 0
+  segmentEndMs: 0
+  instruction: "TODO: fill from PDF"
+}
+LISTENING_TASK {
+  taskId: "certyfikat-polski-B1-2023-06-listen-4"
+  examRef: "certyfikat-polski-B1-2023-06"
+  taskNumber: 4
+  audioUrl: "https://certyfikatpolski.pl/wp-content/uploads/2025/07/2023_06_24_25_B1_arkusz_egzaminacyjny.mp3"
+  segmentStartMs: 0
+  segmentEndMs: 0
+  instruction: "TODO: fill from PDF"
+}
+LISTENING_TASK {
+  taskId: "certyfikat-polski-B1-2023-06-listen-5"
+  examRef: "certyfikat-polski-B1-2023-06"
+  taskNumber: 5
+  audioUrl: "https://certyfikatpolski.pl/wp-content/uploads/2025/07/2023_06_24_25_B1_arkusz_egzaminacyjny.mp3"
+  segmentStartMs: 0
+  segmentEndMs: 0
+  instruction: "TODO: fill from PDF"
+}

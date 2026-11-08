@@ -1,0 +1,162 @@
+DSL 1
+# Answers need manual fill from PDF (Cloudflare blocks automated download)
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B2-2023-06-g10-q1"
+  testRef: "certyfikat-polski-B2-2023-06-grammar-10"
+  questionType: choose_form
+  context: "TODO: fill from PDF"
+  correctAnswer: "?"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B2-2023-06-g10-q2"
+  testRef: "certyfikat-polski-B2-2023-06-grammar-10"
+  questionType: choose_form
+  context: "TODO: fill from PDF"
+  correctAnswer: "?"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B2-2023-06-g10-q3"
+  testRef: "certyfikat-polski-B2-2023-06-grammar-10"
+  questionType: choose_form
+  context: "TODO: fill from PDF"
+  correctAnswer: "?"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B2-2023-06-g10-q4"
+  testRef: "certyfikat-polski-B2-2023-06-grammar-10"
+  questionType: choose_form
+  context: "TODO: fill from PDF"
+  correctAnswer: "?"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B2-2023-06-g10-q5"
+  testRef: "certyfikat-polski-B2-2023-06-grammar-10"
+  questionType: choose_form
+  context: "TODO: fill from PDF"
+  correctAnswer: "?"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B2-2023-06-g10-q6"
+  testRef: "certyfikat-polski-B2-2023-06-grammar-10"
+  questionType: choose_form
+  context: "TODO: fill from PDF"
+  correctAnswer: "?"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B2-2023-06-g10-q7"
+  testRef: "certyfikat-polski-B2-2023-06-grammar-10"
+  questionType: choose_form
+  context: "TODO: fill from PDF"
+  correctAnswer: "?"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B2-2023-06-g10-q8"
+  testRef: "certyfikat-polski-B2-2023-06-grammar-10"
+  questionType: choose_form
+  context: "TODO: fill from PDF"
+  correctAnswer: "?"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B2-2023-06-g10-q9"
+  testRef: "certyfikat-polski-B2-2023-06-grammar-10"
+  questionType: choose_form
+  context: "TODO: fill from PDF"
+  correctAnswer: "?"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B2-2023-06-g10-q10"
+  testRef: "certyfikat-polski-B2-2023-06-grammar-10"
+  questionType: choose_form
+  context: "TODO: fill from PDF"
+  correctAnswer: "?"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B2-2023-06-g11-q11"
+  testRef: "certyfikat-polski-B2-2023-06-grammar-11"
+  questionType: transform
+  context: "TODO: fill from PDF"
+  correctAnswer: "?"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B2-2023-06-g11-q12"
+  testRef: "certyfikat-polski-B2-2023-06-grammar-11"
+  questionType: transform
+  context: "TODO: fill from PDF"
+  correctAnswer: "?"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B2-2023-06-g11-q13"
+  testRef: "certyfikat-polski-B2-2023-06-grammar-11"
+  questionType: transform
+  context: "TODO: fill from PDF"
+  correctAnswer: "?"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B2-2023-06-g11-q14"
+  testRef: "certyfikat-polski-B2-2023-06-grammar-11"
+  questionType: transform
+  context: "TODO: fill from PDF"
+  correctAnswer: "?"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B2-2023-06-g11-q15"
+  testRef: "certyfikat-polski-B2-2023-06-grammar-11"
+  questionType: transform
+  context: "TODO: fill from PDF"
+  correctAnswer: "?"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B2-2023-06-g12-q16"
+  testRef: "certyfikat-polski-B2-2023-06-grammar-12"
+  questionType: fill_gap
+  context: "TODO: fill from PDF"
+  correctAnswer: "?"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B2-2023-06-g12-q17"
+  testRef: "certyfikat-polski-B2-2023-06-grammar-12"
+  questionType: fill_gap
+  context: "TODO: fill from PDF"
+  correctAnswer: "?"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B2-2023-06-g12-q18"
+  testRef: "certyfikat-polski-B2-2023-06-grammar-12"
+  questionType: fill_gap
+  context: "TODO: fill from PDF"
+  correctAnswer: "?"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B2-2023-06-g12-q19"
+  testRef: "certyfikat-polski-B2-2023-06-grammar-12"
+  questionType: fill_gap
+  context: "TODO: fill from PDF"
+  correctAnswer: "?"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B2-2023-06-g12-q20"
+  testRef: "certyfikat-polski-B2-2023-06-grammar-12"
+  questionType: fill_gap
+  context: "TODO: fill from PDF"
+  correctAnswer: "?"
+  points: 1
+}

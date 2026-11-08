@@ -1,0 +1,19 @@
+DSL 1
+GRAMMAR_TEST {
+  testId: "certyfikat-polski-B2-2024-06-grammar-10"
+  examRef: "certyfikat-polski-B2-2024-06"
+  taskNumber: 10
+  instruction: "Prosze przeczytac tekst i uzupelnic luki, wybierajac jedna z czterech mozliwosci (A, B, C, D)."
+}
+GRAMMAR_TEST {
+  testId: "certyfikat-polski-B2-2024-06-grammar-11"
+  examRef: "certyfikat-polski-B2-2024-06"
+  taskNumber: 11
+  instruction: "Prosze przeksztalcic zdanie uzywajac podanego slowa."
+}
+GRAMMAR_TEST {
+  testId: "certyfikat-polski-B2-2024-06-grammar-12"
+  examRef: "certyfikat-polski-B2-2024-06"
+  taskNumber: 12
+  instruction: "Prosze uzupelnic luki odpowiednia forma podanego slowa."
+}

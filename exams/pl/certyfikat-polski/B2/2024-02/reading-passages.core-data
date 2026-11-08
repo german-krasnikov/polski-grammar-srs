@@ -1,0 +1,29 @@
+DSL 1
+READING_PASSAGE {
+  passageId: "certyfikat-polski-B2-2024-02-read-6"
+  examRef: "certyfikat-polski-B2-2024-02"
+  taskNumber: 6
+  instruction: "TODO: fill from PDF"
+  text: "TODO: fill from PDF"
+}
+READING_PASSAGE {
+  passageId: "certyfikat-polski-B2-2024-02-read-7"
+  examRef: "certyfikat-polski-B2-2024-02"
+  taskNumber: 7
+  instruction: "TODO: fill from PDF"
+  text: "TODO: fill from PDF"
+}
+READING_PASSAGE {
+  passageId: "certyfikat-polski-B2-2024-02-read-8"
+  examRef: "certyfikat-polski-B2-2024-02"
+  taskNumber: 8
+  instruction: "TODO: fill from PDF"
+  text: "TODO: fill from PDF"
+}
+READING_PASSAGE {
+  passageId: "certyfikat-polski-B2-2024-02-read-9"
+  examRef: "certyfikat-polski-B2-2024-02"
+  taskNumber: 9
+  instruction: "TODO: fill from PDF"
+  text: "TODO: fill from PDF"
+}

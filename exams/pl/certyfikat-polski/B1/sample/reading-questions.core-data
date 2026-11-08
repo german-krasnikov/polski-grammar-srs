@@ -1,7 +1,7 @@
 DSL 1
 READING_QUESTION {
   questionId: "B1-sample-r1-q11"
-  passageRef: "B1-sample-reading-1"
+  passageRef: "certyfikat-polski-B1-sample-read-6"
   questionType: match_heading
   questionText: "Fragment 11"
   options: "A. Jak nauczyć się słuchać partnera?|B. Zakupy bez wychodzenia z domu|C. Sam nad talerzem|D. Oczekiwania nauczycieli|E. Piękne zakończenie sezonu w skokach narciarskich|F. Kto wygrał mecz o wszystko?|G. Dieta na wiosnę"
@@ -10,7 +10,7 @@ READING_QUESTION {
 }
 READING_QUESTION {
   questionId: "B1-sample-r1-q12"
-  passageRef: "B1-sample-reading-1"
+  passageRef: "certyfikat-polski-B1-sample-read-6"
   questionType: match_heading
   questionText: "Fragment 12"
   options: "A|B|C|D|E|F|G"
@@ -19,7 +19,7 @@ READING_QUESTION {
 }
 READING_QUESTION {
   questionId: "B1-sample-r1-q13"
-  passageRef: "B1-sample-reading-1"
+  passageRef: "certyfikat-polski-B1-sample-read-6"
   questionType: match_heading
   questionText: "Fragment 13"
   options: "A|B|C|D|E|F|G"
@@ -28,7 +28,7 @@ READING_QUESTION {
 }
 READING_QUESTION {
   questionId: "B1-sample-r1-q14"
-  passageRef: "B1-sample-reading-1"
+  passageRef: "certyfikat-polski-B1-sample-read-6"
   questionType: match_heading
   questionText: "Fragment 14"
   options: "A|B|C|D|E|F|G"
@@ -37,7 +37,7 @@ READING_QUESTION {
 }
 READING_QUESTION {
   questionId: "B1-sample-r1-q15"
-  passageRef: "B1-sample-reading-1"
+  passageRef: "certyfikat-polski-B1-sample-read-6"
   questionType: match_heading
   questionText: "Fragment 15"
   options: "A|B|C|D|E|F|G"
@@ -46,7 +46,7 @@ READING_QUESTION {
 }
 READING_QUESTION {
   questionId: "B1-sample-r2-q16"
-  passageRef: "B1-sample-reading-2"
+  passageRef: "certyfikat-polski-B1-sample-read-7"
   questionType: multiple_choice
   questionText: "Pacjentką kliniki"
   options: "była żona Tomasza Jackowskiego|była córka Tomasza Jackowskiego|był syn Tomasza Jackowskiego"
@@ -55,7 +55,7 @@ READING_QUESTION {
 }
 READING_QUESTION {
   questionId: "B1-sample-r2-q17"
-  passageRef: "B1-sample-reading-2"
+  passageRef: "certyfikat-polski-B1-sample-read-7"
   questionType: multiple_choice
   questionText: "Tomasz jest"
   options: "rozczarowany pracą personelu kliniki|zadowolony z pracy personelu kliniki|zdenerwowany pracą personelu kliniki"
@@ -64,7 +64,7 @@ READING_QUESTION {
 }
 READING_QUESTION {
   questionId: "B1-sample-r2-q18"
-  passageRef: "B1-sample-reading-2"
+  passageRef: "certyfikat-polski-B1-sample-read-7"
   questionType: multiple_choice
   questionText: "Maria miała problem z"
   options: "sercem|nogą|ręką"
@@ -73,7 +73,7 @@ READING_QUESTION {
 }
 READING_QUESTION {
   questionId: "B1-sample-r2-q19"
-  passageRef: "B1-sample-reading-2"
+  passageRef: "certyfikat-polski-B1-sample-read-7"
   questionType: multiple_choice
   questionText: "Marii najbardziej pomogły"
   options: "lekarstwa|spotkania z fizjoterapeutą|operacje"
@@ -82,7 +82,7 @@ READING_QUESTION {
 }
 READING_QUESTION {
   questionId: "B1-sample-r2-q20"
-  passageRef: "B1-sample-reading-2"
+  passageRef: "certyfikat-polski-B1-sample-read-7"
   questionType: multiple_choice
   questionText: "Córka Marii i Tomasza"
   options: "mieszka poza Polską|jest rehabilitantką|pije dużo kawy"
@@ -91,7 +91,7 @@ READING_QUESTION {
 }
 READING_QUESTION {
   questionId: "B1-sample-r3-q21"
-  passageRef: "B1-sample-reading-3"
+  passageRef: "certyfikat-polski-B1-sample-read-8"
   questionType: true_false_not_given
   questionText: "We współczesnej psychologii termin 'charakter' jest używany rzadziej niż 'osobowość'."
   correctAnswer: "A"
@@ -99,7 +99,7 @@ READING_QUESTION {
 }
 READING_QUESTION {
   questionId: "B1-sample-r3-q22"
-  passageRef: "B1-sample-reading-3"
+  passageRef: "certyfikat-polski-B1-sample-read-8"
   questionType: true_false_not_given
   questionText: "Ludzie różnią się od siebie dzięki osobowości."
   correctAnswer: "A"
@@ -107,7 +107,7 @@ READING_QUESTION {
 }
 READING_QUESTION {
   questionId: "B1-sample-r3-q23"
-  passageRef: "B1-sample-reading-3"
+  passageRef: "certyfikat-polski-B1-sample-read-8"
   questionType: true_false_not_given
   questionText: "Osoby neurotyczne stresują się rzadziej niż osoby ugodowe."
   correctAnswer: "B"
@@ -115,7 +115,7 @@ READING_QUESTION {
 }
 READING_QUESTION {
   questionId: "B1-sample-r3-q24"
-  passageRef: "B1-sample-reading-3"
+  passageRef: "certyfikat-polski-B1-sample-read-8"
   questionType: true_false_not_given
   questionText: "Ekstrawertycy nie lubią spędzać czasu z introwertykami."
   correctAnswer: "C"
@@ -123,7 +123,7 @@ READING_QUESTION {
 }
 READING_QUESTION {
   questionId: "B1-sample-r3-q25"
-  passageRef: "B1-sample-reading-3"
+  passageRef: "certyfikat-polski-B1-sample-read-8"
   questionType: true_false_not_given
   questionText: "Wszyscy sumienni ludzie są perfekcjonistami i pracoholikami."
   correctAnswer: "B"

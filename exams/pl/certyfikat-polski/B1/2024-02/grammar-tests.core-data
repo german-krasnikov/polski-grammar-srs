@@ -1,0 +1,13 @@
+DSL 1
+GRAMMAR_TEST {
+  testId: "certyfikat-polski-B1-2024-02-grammar-10"
+  examRef: "certyfikat-polski-B1-2024-02"
+  taskNumber: 10
+  instruction: "Prosze przeczytac tekst i uzupelnic luki, wybierajac jedna z trzech mozliwosci (A, B, C)."
+}
+GRAMMAR_TEST {
+  testId: "certyfikat-polski-B1-2024-02-grammar-11"
+  examRef: "certyfikat-polski-B1-2024-02"
+  taskNumber: 11
+  instruction: "Prosze przeczytac tekst i uzupelnic kazda luke jednym slowem."
+}

@@ -1,0 +1,19 @@
+DSL 1
+WRITING_TASK {
+  taskId: "certyfikat-polski-B1-2023-02-write-12"
+  examRef: "certyfikat-polski-B1-2023-02"
+  taskNumber: 12
+  instruction: "TODO: fill from PDF"
+  promptText: "TODO: fill from PDF"
+  wordLimit: 200
+  genre: letter
+}
+WRITING_TASK {
+  taskId: "certyfikat-polski-B1-2023-02-write-13"
+  examRef: "certyfikat-polski-B1-2023-02"
+  taskNumber: 13
+  instruction: "TODO: fill from PDF"
+  promptText: "TODO: fill from PDF"
+  wordLimit: 200
+  genre: description
+}

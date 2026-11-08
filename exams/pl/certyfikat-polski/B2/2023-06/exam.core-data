@@ -1,0 +1,10 @@
+DSL 1
+EXAM {
+  examId: "certyfikat-polski-B2-2023-06"
+  provider: "certyfikat-polski"
+  targetLanguage: "pl"
+  level: "B2"
+  year: 2023
+  sourceUrl: "https://certyfikatpolski.pl/wp-content/uploads/2025/07/2023_06_24_25_B2_arkusz_egzaminacyjny.pdf"
+  license: "Panstwowa Komisja ds. Poswiadczania Znajomosci Jezyka Polskiego jako Obcego"
+}

@@ -1,0 +1,47 @@
+DSL 1
+# Audio timestamps need manual verification
+LISTENING_TASK {
+  taskId: "certyfikat-polski-B2-2024-02-listen-1"
+  examRef: "certyfikat-polski-B2-2024-02"
+  taskNumber: 1
+  audioUrl: "https://certyfikatpolski.pl/wp-content/uploads/2025/02/4-5.02.2024-B2_arkusz_egzaminacyjny.mp3"
+  segmentStartMs: 0
+  segmentEndMs: 0
+  instruction: "TODO: fill from PDF"
+}
+LISTENING_TASK {
+  taskId: "certyfikat-polski-B2-2024-02-listen-2"
+  examRef: "certyfikat-polski-B2-2024-02"
+  taskNumber: 2
+  audioUrl: "https://certyfikatpolski.pl/wp-content/uploads/2025/02/4-5.02.2024-B2_arkusz_egzaminacyjny.mp3"
+  segmentStartMs: 0
+  segmentEndMs: 0
+  instruction: "TODO: fill from PDF"
+}
+LISTENING_TASK {
+  taskId: "certyfikat-polski-B2-2024-02-listen-3"
+  examRef: "certyfikat-polski-B2-2024-02"
+  taskNumber: 3
+  audioUrl: "https://certyfikatpolski.pl/wp-content/uploads/2025/02/4-5.02.2024-B2_arkusz_egzaminacyjny.mp3"
+  segmentStartMs: 0
+  segmentEndMs: 0
+  instruction: "TODO: fill from PDF"
+}
+LISTENING_TASK {
+  taskId: "certyfikat-polski-B2-2024-02-listen-4"
+  examRef: "certyfikat-polski-B2-2024-02"
+  taskNumber: 4
+  audioUrl: "https://certyfikatpolski.pl/wp-content/uploads/2025/02/4-5.02.2024-B2_arkusz_egzaminacyjny.mp3"
+  segmentStartMs: 0
+  segmentEndMs: 0
+  instruction: "TODO: fill from PDF"
+}
+LISTENING_TASK {
+  taskId: "certyfikat-polski-B2-2024-02-listen-5"
+  examRef: "certyfikat-polski-B2-2024-02"
+  taskNumber: 5
+  audioUrl: "https://certyfikatpolski.pl/wp-content/uploads/2025/02/4-5.02.2024-B2_arkusz_egzaminacyjny.mp3"
+  segmentStartMs: 0
+  segmentEndMs: 0
+  instruction: "TODO: fill from PDF"
+}

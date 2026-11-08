@@ -1,0 +1,181 @@
+DSL 1
+READING_QUESTION {
+  questionId: "certyfikat-polski-B1-2023-06-rq-1"
+  passageRef: "certyfikat-polski-B1-2023-06-read-6"
+  questionType: multiple_choice
+  questionText: "TODO: fill from PDF"
+  options: "A|B|C"
+  correctAnswer: "?"
+  points: 1
+}
+READING_QUESTION {
+  questionId: "certyfikat-polski-B1-2023-06-rq-2"
+  passageRef: "certyfikat-polski-B1-2023-06-read-6"
+  questionType: multiple_choice
+  questionText: "TODO: fill from PDF"
+  options: "A|B|C"
+  correctAnswer: "?"
+  points: 1
+}
+READING_QUESTION {
+  questionId: "certyfikat-polski-B1-2023-06-rq-3"
+  passageRef: "certyfikat-polski-B1-2023-06-read-6"
+  questionType: multiple_choice
+  questionText: "TODO: fill from PDF"
+  options: "A|B|C"
+  correctAnswer: "?"
+  points: 1
+}
+READING_QUESTION {
+  questionId: "certyfikat-polski-B1-2023-06-rq-4"
+  passageRef: "certyfikat-polski-B1-2023-06-read-6"
+  questionType: multiple_choice
+  questionText: "TODO: fill from PDF"
+  options: "A|B|C"
+  correctAnswer: "?"
+  points: 1
+}
+READING_QUESTION {
+  questionId: "certyfikat-polski-B1-2023-06-rq-5"
+  passageRef: "certyfikat-polski-B1-2023-06-read-6"
+  questionType: multiple_choice
+  questionText: "TODO: fill from PDF"
+  options: "A|B|C"
+  correctAnswer: "?"
+  points: 1
+}
+READING_QUESTION {
+  questionId: "certyfikat-polski-B1-2023-06-rq-6"
+  passageRef: "certyfikat-polski-B1-2023-06-read-7"
+  questionType: multiple_choice
+  questionText: "TODO: fill from PDF"
+  options: "A|B|C"
+  correctAnswer: "?"
+  points: 1
+}
+READING_QUESTION {
+  questionId: "certyfikat-polski-B1-2023-06-rq-7"
+  passageRef: "certyfikat-polski-B1-2023-06-read-7"
+  questionType: multiple_choice
+  questionText: "TODO: fill from PDF"
+  options: "A|B|C"
+  correctAnswer: "?"
+  points: 1
+}
+READING_QUESTION {
+  questionId: "certyfikat-polski-B1-2023-06-rq-8"
+  passageRef: "certyfikat-polski-B1-2023-06-read-7"
+  questionType: multiple_choice
+  questionText: "TODO: fill from PDF"
+  options: "A|B|C"
+  correctAnswer: "?"
+  points: 1
+}
+READING_QUESTION {
+  questionId: "certyfikat-polski-B1-2023-06-rq-9"
+  passageRef: "certyfikat-polski-B1-2023-06-read-7"
+  questionType: multiple_choice
+  questionText: "TODO: fill from PDF"
+  options: "A|B|C"
+  correctAnswer: "?"
+  points: 1
+}
+READING_QUESTION {
+  questionId: "certyfikat-polski-B1-2023-06-rq-10"
+  passageRef: "certyfikat-polski-B1-2023-06-read-7"
+  questionType: multiple_choice
+  questionText: "TODO: fill from PDF"
+  options: "A|B|C"
+  correctAnswer: "?"
+  points: 1
+}
+READING_QUESTION {
+  questionId: "certyfikat-polski-B1-2023-06-rq-11"
+  passageRef: "certyfikat-polski-B1-2023-06-read-8"
+  questionType: multiple_choice
+  questionText: "TODO: fill from PDF"
+  options: "A|B|C"
+  correctAnswer: "?"
+  points: 1
+}
+READING_QUESTION {
+  questionId: "certyfikat-polski-B1-2023-06-rq-12"
+  passageRef: "certyfikat-polski-B1-2023-06-read-8"
+  questionType: multiple_choice
+  questionText: "TODO: fill from PDF"
+  options: "A|B|C"
+  correctAnswer: "?"
+  points: 1
+}
+READING_QUESTION {
+  questionId: "certyfikat-polski-B1-2023-06-rq-13"
+  passageRef: "certyfikat-polski-B1-2023-06-read-8"
+  questionType: multiple_choice
+  questionText: "TODO: fill from PDF"
+  options: "A|B|C"
+  correctAnswer: "?"
+  points: 1
+}
+READING_QUESTION {
+  questionId: "certyfikat-polski-B1-2023-06-rq-14"
+  passageRef: "certyfikat-polski-B1-2023-06-read-8"
+  questionType: multiple_choice
+  questionText: "TODO: fill from PDF"
+  options: "A|B|C"
+  correctAnswer: "?"
+  points: 1
+}
+READING_QUESTION {
+  questionId: "certyfikat-polski-B1-2023-06-rq-15"
+  passageRef: "certyfikat-polski-B1-2023-06-read-8"
+  questionType: multiple_choice
+  questionText: "TODO: fill from PDF"
+  options: "A|B|C"
+  correctAnswer: "?"
+  points: 1
+}
+READING_QUESTION {
+  questionId: "certyfikat-polski-B1-2023-06-rq-16"
+  passageRef: "certyfikat-polski-B1-2023-06-read-9"
+  questionType: multiple_choice
+  questionText: "TODO: fill from PDF"
+  options: "A|B|C"
+  correctAnswer: "?"
+  points: 1
+}
+READING_QUESTION {
+  questionId: "certyfikat-polski-B1-2023-06-rq-17"
+  passageRef: "certyfikat-polski-B1-2023-06-read-9"
+  questionType: multiple_choice
+  questionText: "TODO: fill from PDF"
+  options: "A|B|C"
+  correctAnswer: "?"
+  points: 1
+}
+READING_QUESTION {
+  questionId: "certyfikat-polski-B1-2023-06-rq-18"
+  passageRef: "certyfikat-polski-B1-2023-06-read-9"
+  questionType: multiple_choice
+  questionText: "TODO: fill from PDF"
+  options: "A|B|C"
+  correctAnswer: "?"
+  points: 1
+}
+READING_QUESTION {
+  questionId: "certyfikat-polski-B1-2023-06-rq-19"
+  passageRef: "certyfikat-polski-B1-2023-06-read-9"
+  questionType: multiple_choice
+  questionText: "TODO: fill from PDF"
+  options: "A|B|C"
+  correctAnswer: "?"
+  points: 1
+}
+READING_QUESTION {
+  questionId: "certyfikat-polski-B1-2023-06-rq-20"
+  passageRef: "certyfikat-polski-B1-2023-06-read-9"
+  questionType: multiple_choice
+  questionText: "TODO: fill from PDF"
+  options: "A|B|C"
+  correctAnswer: "?"
+  points: 1
+}

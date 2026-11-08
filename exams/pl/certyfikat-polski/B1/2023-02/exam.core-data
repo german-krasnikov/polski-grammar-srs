@@ -1,0 +1,10 @@
+DSL 1
+EXAM {
+  examId: "certyfikat-polski-B1-2023-02"
+  provider: "certyfikat-polski"
+  targetLanguage: "pl"
+  level: "B1"
+  year: 2023
+  sourceUrl: "https://certyfikatpolski.pl/wp-content/uploads/2025/07/2023_02_5_6_B1_arkusz_egzaminacyjny.pdf"
+  license: "Panstwowa Komisja ds. Poswiadczania Znajomosci Jezyka Polskiego jako Obcego"
+}

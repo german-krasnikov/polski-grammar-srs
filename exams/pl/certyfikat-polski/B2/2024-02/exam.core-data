@@ -1,0 +1,10 @@
+DSL 1
+EXAM {
+  examId: "certyfikat-polski-B2-2024-02"
+  provider: "certyfikat-polski"
+  targetLanguage: "pl"
+  level: "B2"
+  year: 2024
+  sourceUrl: "https://certyfikatpolski.pl/wp-content/uploads/2025/02/4-5.02.2024-B2_arkusz_egzaminacyjny.pdf"
+  license: "Panstwowa Komisja ds. Poswiadczania Znajomosci Jezyka Polskiego jako Obcego"
+}

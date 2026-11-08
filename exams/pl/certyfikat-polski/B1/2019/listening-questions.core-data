@@ -1,0 +1,226 @@
+DSL 1
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B1-2019-lq-1"
+  taskRef: "certyfikat-polski-B1-2019-listen-1"
+  questionType: multiple_choice
+  questionText: "TODO: fill from PDF"
+  options: "A|B|C"
+  correctAnswer: "?"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B1-2019-lq-2"
+  taskRef: "certyfikat-polski-B1-2019-listen-1"
+  questionType: multiple_choice
+  questionText: "TODO: fill from PDF"
+  options: "A|B|C"
+  correctAnswer: "?"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B1-2019-lq-3"
+  taskRef: "certyfikat-polski-B1-2019-listen-1"
+  questionType: multiple_choice
+  questionText: "TODO: fill from PDF"
+  options: "A|B|C"
+  correctAnswer: "?"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B1-2019-lq-4"
+  taskRef: "certyfikat-polski-B1-2019-listen-1"
+  questionType: multiple_choice
+  questionText: "TODO: fill from PDF"
+  options: "A|B|C"
+  correctAnswer: "?"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B1-2019-lq-5"
+  taskRef: "certyfikat-polski-B1-2019-listen-1"
+  questionType: multiple_choice
+  questionText: "TODO: fill from PDF"
+  options: "A|B|C"
+  correctAnswer: "?"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B1-2019-lq-6"
+  taskRef: "certyfikat-polski-B1-2019-listen-2"
+  questionType: multiple_choice
+  questionText: "TODO: fill from PDF"
+  options: "A|B|C"
+  correctAnswer: "?"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B1-2019-lq-7"
+  taskRef: "certyfikat-polski-B1-2019-listen-2"
+  questionType: multiple_choice
+  questionText: "TODO: fill from PDF"
+  options: "A|B|C"
+  correctAnswer: "?"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B1-2019-lq-8"
+  taskRef: "certyfikat-polski-B1-2019-listen-2"
+  questionType: multiple_choice
+  questionText: "TODO: fill from PDF"
+  options: "A|B|C"
+  correctAnswer: "?"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B1-2019-lq-9"
+  taskRef: "certyfikat-polski-B1-2019-listen-2"
+  questionType: multiple_choice
+  questionText: "TODO: fill from PDF"
+  options: "A|B|C"
+  correctAnswer: "?"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B1-2019-lq-10"
+  taskRef: "certyfikat-polski-B1-2019-listen-2"
+  questionType: multiple_choice
+  questionText: "TODO: fill from PDF"
+  options: "A|B|C"
+  correctAnswer: "?"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B1-2019-lq-11"
+  taskRef: "certyfikat-polski-B1-2019-listen-3"
+  questionType: multiple_choice
+  questionText: "TODO: fill from PDF"
+  options: "A|B|C"
+  correctAnswer: "?"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B1-2019-lq-12"
+  taskRef: "certyfikat-polski-B1-2019-listen-3"
+  questionType: multiple_choice
+  questionText: "TODO: fill from PDF"
+  options: "A|B|C"
+  correctAnswer: "?"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B1-2019-lq-13"
+  taskRef: "certyfikat-polski-B1-2019-listen-3"
+  questionType: multiple_choice
+  questionText: "TODO: fill from PDF"
+  options: "A|B|C"
+  correctAnswer: "?"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B1-2019-lq-14"
+  taskRef: "certyfikat-polski-B1-2019-listen-3"
+  questionType: multiple_choice
+  questionText: "TODO: fill from PDF"
+  options: "A|B|C"
+  correctAnswer: "?"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B1-2019-lq-15"
+  taskRef: "certyfikat-polski-B1-2019-listen-3"
+  questionType: multiple_choice
+  questionText: "TODO: fill from PDF"
+  options: "A|B|C"
+  correctAnswer: "?"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B1-2019-lq-16"
+  taskRef: "certyfikat-polski-B1-2019-listen-4"
+  questionType: multiple_choice
+  questionText: "TODO: fill from PDF"
+  options: "A|B|C"
+  correctAnswer: "?"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B1-2019-lq-17"
+  taskRef: "certyfikat-polski-B1-2019-listen-4"
+  questionType: multiple_choice
+  questionText: "TODO: fill from PDF"
+  options: "A|B|C"
+  correctAnswer: "?"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B1-2019-lq-18"
+  taskRef: "certyfikat-polski-B1-2019-listen-4"
+  questionType: multiple_choice
+  questionText: "TODO: fill from PDF"
+  options: "A|B|C"
+  correctAnswer: "?"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B1-2019-lq-19"
+  taskRef: "certyfikat-polski-B1-2019-listen-4"
+  questionType: multiple_choice
+  questionText: "TODO: fill from PDF"
+  options: "A|B|C"
+  correctAnswer: "?"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B1-2019-lq-20"
+  taskRef: "certyfikat-polski-B1-2019-listen-4"
+  questionType: multiple_choice
+  questionText: "TODO: fill from PDF"
+  options: "A|B|C"
+  correctAnswer: "?"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B1-2019-lq-21"
+  taskRef: "certyfikat-polski-B1-2019-listen-5"
+  questionType: multiple_choice
+  questionText: "TODO: fill from PDF"
+  options: "A|B|C"
+  correctAnswer: "?"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B1-2019-lq-22"
+  taskRef: "certyfikat-polski-B1-2019-listen-5"
+  questionType: multiple_choice
+  questionText: "TODO: fill from PDF"
+  options: "A|B|C"
+  correctAnswer: "?"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B1-2019-lq-23"
+  taskRef: "certyfikat-polski-B1-2019-listen-5"
+  questionType: multiple_choice
+  questionText: "TODO: fill from PDF"
+  options: "A|B|C"
+  correctAnswer: "?"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B1-2019-lq-24"
+  taskRef: "certyfikat-polski-B1-2019-listen-5"
+  questionType: multiple_choice
+  questionText: "TODO: fill from PDF"
+  options: "A|B|C"
+  correctAnswer: "?"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B1-2019-lq-25"
+  taskRef: "certyfikat-polski-B1-2019-listen-5"
+  questionType: multiple_choice
+  questionText: "TODO: fill from PDF"
+  options: "A|B|C"
+  correctAnswer: "?"
+  points: 1
+}
