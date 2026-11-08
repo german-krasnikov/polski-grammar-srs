@@ -48,3 +48,5 @@ APPROVED after test-only correction of the W3 gap. Reviewer confirmed mounted in
 ## Later runner correction
 
 The recorded 10-second failures above are historical observations, superseded for current composeApp verification by [measured runner correction](P8-JS-TEST-HARNESS-EVIDENCE.md): cold synchronous test fixture setup took 15–17 seconds. With a measured 30-second Mocha limit and unchanged assertions, complete JS **32/32** and Wasm **32/32** pass, including all four lifecycle cases. Independent review APPROVED; production source/artifact is unchanged. This does not relabel earlier runs or the separate shared-module P10 JS run.
+
+Artifact identity supplement: the P8 application Wasm is `77b89738a6523a91d373.wasm`, SHA-256 `199075f1cd8142255ae21e9e72f0f4f13e575cf6df2667729a24be4c0067fecf`. The loader JS hash alone can remain unchanged when application Wasm changes; use both files to distinguish builds.
