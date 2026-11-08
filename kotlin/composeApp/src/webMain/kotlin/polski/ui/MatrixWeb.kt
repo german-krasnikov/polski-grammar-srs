@@ -137,7 +137,7 @@ internal fun renderCaseReferenceWeb(root: HTMLElement, state: AppUiState, dispat
         tr.matrixAdd("td").apply {
             setAttribute("lang", "pl")
             if (row.isTarget && row.contrast == null) {
-                matrixContrastMasked(this, row.phrase)
+                matrixContrastMasked(this, ref.sourcePhrase)
             } else {
                 val pair = row.contrast ?: polski.presentation.ContrastPair.generated(row.phrase, row.phrase)
                 matrixContrast(this, pair.from, row.phrase)

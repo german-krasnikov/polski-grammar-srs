@@ -52,6 +52,7 @@ data class CaseReferenceRow(
 data class CaseReferenceModel(
     val title: String,
     val nounInfo: String,
+    val sourcePhrase: String,
     val rows: List<CaseReferenceRow>,
     val contextHelp: String,
 )
@@ -62,6 +63,7 @@ fun caseReferenceModel(exercise: Exercise, revealed: Boolean): CaseReferenceMode
     return CaseReferenceModel(
         title = "Таблица этого предложения",
         nounInfo = "${noun.lemma} · ${genderNames.getValue(noun.gender)} · ${if (exercise.number == NumberGram.SG) "ед. ч." else "мн. ч."}",
+        sourcePhrase = nomPhrase,
         rows = caseRows.map { row ->
             val isTarget = row.id.id in exercise.tags
             val phrase = nounPhrase(exercise.nounId, row.id, exercise.number, exercise.adjectiveId, exercise.possessive)
