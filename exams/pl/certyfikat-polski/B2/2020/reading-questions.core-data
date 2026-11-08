@@ -1,57 +1,407 @@
 DSL 1
+# B2/2020 arkusz pp. 10–16; key p. 6. Counts 5+10+10+10+10, total 40 points.
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-rq1"
-  passageRef: "certyfikat-polski-B2-2020-read-1"
-  questionType: fill_gap
-  questionText: "Pytanie 1"
-  correctAnswer: "c c b a b"
-  points: 1
+  questionId: certyfikat-polski-B2-2020-reading-1-1
+  passageRef: certyfikat-polski-B2-2020-read-1
+  questionType: multiple_choice
+  questionText: "Z tekstu dowiadujemy się, że uczulenie na kota"
+  options: "a) jest najpopularniejszym rodzajem alergii na zwierzęta.|b) można leczyć w sposób podobny do leczenia astmy.|c) daje objawy nie tylko przy bezpośrednim kontakcie ze zwierzęciem."
+  correctAnswer: "c) daje objawy nie tylko przy bezpośrednim kontakcie ze zwierzęciem."
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-rq2"
-  passageRef: "certyfikat-polski-B2-2020-read-2"
-  questionType: fill_gap
-  questionText: "Pytanie 2"
-  correctAnswer: "E I D K A F B G J H"
-  points: 1
+  questionId: certyfikat-polski-B2-2020-reading-1-2
+  passageRef: certyfikat-polski-B2-2020-read-1
+  questionType: multiple_choice
+  questionText: "Z tekstu dowiadujemy się, że bogacenie się społeczeństwa"
+  options: "a) powoduje rosnące zainteresowanie sprzętami gospodarstwa domowego.|b) wpływa na postęp technologiczny w dziedzinie sprzętów nowych generacji.|c) w pośredni sposób negatywnie wpływa na środowisko."
+  correctAnswer: "c) w pośredni sposób negatywnie wpływa na środowisko."
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-rq3"
-  passageRef: "certyfikat-polski-B2-2020-read-3"
-  questionType: fill_gap
-  questionText: "Pytanie 3"
-  correctAnswer: "E A J G H D B C K I"
-  points: 1
+  questionId: certyfikat-polski-B2-2020-reading-1-3
+  passageRef: certyfikat-polski-B2-2020-read-1
+  questionType: multiple_choice
+  questionText: "Z tekstu dowiadujemy się, że"
+  options: "a) zdecydowanie więcej Polaków mieszka na wsi niż w mieście.|b) przymiotnik „wiejski” nasuwa odmienne skojarzenia w różnych krajach.|c) wiejskie pochodzenie jest dla Polaków powodem do dumy."
+  correctAnswer: "b) przymiotnik „wiejski” nasuwa odmienne skojarzenia w różnych krajach."
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-rq4"
-  passageRef: "certyfikat-polski-B2-2020-read-4"
-  questionType: fill_gap
-  questionText: "Pytanie 4"
-  correctAnswer: "TAK NIE BI"
-  points: 1
+  questionId: certyfikat-polski-B2-2020-reading-1-4
+  passageRef: certyfikat-polski-B2-2020-read-1
+  questionType: multiple_choice
+  questionText: "Z tekstu dowiadujemy się, że"
+  options: "a) autor nie ceni powierzchownego zwiedzania.|b) duże miasta zachwycają autora swoją różnorodnością.|c) lotniska międzynarodowe wszędzie wyglądają tak samo."
+  correctAnswer: "a) autor nie ceni powierzchownego zwiedzania."
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-rq5"
-  passageRef: "certyfikat-polski-B2-2020-read-5"
-  questionType: fill_gap
-  questionText: "Pytanie 5"
-  correctAnswer: "TEST PRZYKŁADOWY"
-  points: 1
+  questionId: certyfikat-polski-B2-2020-reading-1-5
+  passageRef: certyfikat-polski-B2-2020-read-1
+  questionType: multiple_choice
+  questionText: "Z tekstu dowiadujemy się, że"
+  options: "a) ludzie niechętnie suszą ubrania na słońcu.|b) suszarki automatyczne nie niszczą tkanin.|c) wybór rodzaju suszenia zależy od koloru ubrań."
+  correctAnswer: "b) suszarki automatyczne nie niszczą tkanin."
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-rq6"
-  passageRef: "certyfikat-polski-B2-2020-read-5"
+  questionId: certyfikat-polski-B2-2020-reading-2-1
+  passageRef: certyfikat-polski-B2-2020-read-2
   questionType: fill_gap
-  questionText: "Pytanie 6"
-  correctAnswer: "POZIOM B"
-  points: 1
+  questionText: "Fragment do luki [1]"
+  options: "A|B|D|E|F|G|H|I|J|K"
+  correctAnswer: E
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-rq7"
-  passageRef: "certyfikat-polski-B2-2020-read-5"
+  questionId: certyfikat-polski-B2-2020-reading-2-2
+  passageRef: certyfikat-polski-B2-2020-read-2
   questionType: fill_gap
-  questionText: "Pytanie 7"
-  correctAnswer: "TRANSKRYPCJE I KLUCZ DO ZADAŃ"
-  points: 1
+  questionText: "Fragment do luki [2]"
+  options: "A|B|D|E|F|G|H|I|J|K"
+  correctAnswer: I
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-2-3
+  passageRef: certyfikat-polski-B2-2020-read-2
+  questionType: fill_gap
+  questionText: "Fragment do luki [3]"
+  options: "A|B|D|E|F|G|H|I|J|K"
+  correctAnswer: D
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-2-4
+  passageRef: certyfikat-polski-B2-2020-read-2
+  questionType: fill_gap
+  questionText: "Fragment do luki [4]"
+  options: "A|B|D|E|F|G|H|I|J|K"
+  correctAnswer: K
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-2-5
+  passageRef: certyfikat-polski-B2-2020-read-2
+  questionType: fill_gap
+  questionText: "Fragment do luki [5]"
+  options: "A|B|D|E|F|G|H|I|J|K"
+  correctAnswer: A
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-2-6
+  passageRef: certyfikat-polski-B2-2020-read-2
+  questionType: fill_gap
+  questionText: "Fragment do luki [6]"
+  options: "A|B|D|E|F|G|H|I|J|K"
+  correctAnswer: F
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-2-7
+  passageRef: certyfikat-polski-B2-2020-read-2
+  questionType: fill_gap
+  questionText: "Fragment do luki [7]"
+  options: "A|B|D|E|F|G|H|I|J|K"
+  correctAnswer: B
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-2-8
+  passageRef: certyfikat-polski-B2-2020-read-2
+  questionType: fill_gap
+  questionText: "Fragment do luki [8]"
+  options: "A|B|D|E|F|G|H|I|J|K"
+  correctAnswer: G
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-2-9
+  passageRef: certyfikat-polski-B2-2020-read-2
+  questionType: fill_gap
+  questionText: "Fragment do luki [9]"
+  options: "A|B|D|E|F|G|H|I|J|K"
+  correctAnswer: J
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-2-10
+  passageRef: certyfikat-polski-B2-2020-read-2
+  questionType: fill_gap
+  questionText: "Fragment do luki [10]"
+  options: "A|B|D|E|F|G|H|I|J|K"
+  correctAnswer: H
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-3-1
+  passageRef: certyfikat-polski-B2-2020-read-3
+  questionType: match_heading
+  questionText: "To, co niewypowiedziane"
+  options: "A|B|C|D|E|G|H|I|J|K"
+  correctAnswer: E
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-3-2
+  passageRef: certyfikat-polski-B2-2020-read-3
+  questionType: match_heading
+  questionText: "Informacja to nie wszystko"
+  options: "A|B|C|D|E|G|H|I|J|K"
+  correctAnswer: A
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-3-3
+  passageRef: certyfikat-polski-B2-2020-read-3
+  questionType: match_heading
+  questionText: "Klucz do sukcesu zawodowego"
+  options: "A|B|C|D|E|G|H|I|J|K"
+  correctAnswer: J
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-3-4
+  passageRef: certyfikat-polski-B2-2020-read-3
+  questionType: match_heading
+  questionText: "Zasada wzajemności"
+  options: "A|B|C|D|E|G|H|I|J|K"
+  correctAnswer: G
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-3-5
+  passageRef: certyfikat-polski-B2-2020-read-3
+  questionType: match_heading
+  questionText: "Tylko dla twoich uszu"
+  options: "A|B|C|D|E|G|H|I|J|K"
+  correctAnswer: H
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-3-6
+  passageRef: certyfikat-polski-B2-2020-read-3
+  questionType: match_heading
+  questionText: "Bez osądzania"
+  options: "A|B|C|D|E|G|H|I|J|K"
+  correctAnswer: D
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-3-7
+  passageRef: certyfikat-polski-B2-2020-read-3
+  questionType: match_heading
+  questionText: "Po prostu bądź!"
+  options: "A|B|C|D|E|G|H|I|J|K"
+  correctAnswer: B
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-3-8
+  passageRef: certyfikat-polski-B2-2020-read-3
+  questionType: match_heading
+  questionText: "Nie każda rada jest dobra"
+  options: "A|B|C|D|E|G|H|I|J|K"
+  correctAnswer: C
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-3-9
+  passageRef: certyfikat-polski-B2-2020-read-3
+  questionType: match_heading
+  questionText: "Mimo wszystko – rozmawiamy!"
+  options: "A|B|C|D|E|G|H|I|J|K"
+  correctAnswer: K
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-3-10
+  passageRef: certyfikat-polski-B2-2020-read-3
+  questionType: match_heading
+  questionText: "Za późno na rozmowę"
+  options: "A|B|C|D|E|G|H|I|J|K"
+  correctAnswer: I
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-4-1
+  passageRef: certyfikat-polski-B2-2020-read-4
+  questionType: true_false_not_given
+  questionText: "Urząd Miasta Częstochowy sfinansował wydanie „Podróży po Jurze”."
+  options: "TAK|NIE|BI"
+  correctAnswer: BI
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-4-2
+  passageRef: certyfikat-polski-B2-2020-read-4
+  questionType: true_false_not_given
+  questionText: "Gra, zapoznając z atrakcjami turystycznymi Jury, rozwija też inne umiejętności."
+  options: "TAK|NIE|BI"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-4-3
+  passageRef: certyfikat-polski-B2-2020-read-4
+  questionType: true_false_not_given
+  questionText: "Zamiast planszy używa się mapy z narysowanymi drogami."
+  options: "TAK|NIE|BI"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-4-4
+  passageRef: certyfikat-polski-B2-2020-read-4
+  questionType: true_false_not_given
+  questionText: "Grając w drużynach, można stworzyć zespoły złożone z 2-6 osób."
+  options: "TAK|NIE|BI"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-4-5
+  passageRef: certyfikat-polski-B2-2020-read-4
+  questionType: true_false_not_given
+  questionText: "W planie są też inne formy sprzedaży gry."
+  options: "TAK|NIE|BI"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-4-6
+  passageRef: certyfikat-polski-B2-2020-read-4
+  questionType: true_false_not_given
+  questionText: "Gra to pierwsza inicjatywa promocji tego regionu."
+  options: "TAK|NIE|BI"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-4-7
+  passageRef: certyfikat-polski-B2-2020-read-4
+  questionType: true_false_not_given
+  questionText: "Szlak Orlich Gniazd i związane z nim święto to inicjatywa dwóch województw."
+  options: "TAK|NIE|BI"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-4-8
+  passageRef: certyfikat-polski-B2-2020-read-4
+  questionType: true_false_not_given
+  questionText: "Festiwal kultury lokalnej organizowany jest od 5 lat."
+  options: "TAK|NIE|BI"
+  correctAnswer: BI
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-4-9
+  passageRef: certyfikat-polski-B2-2020-read-4
+  questionType: true_false_not_given
+  questionText: "Internetowy przewodnik rowerowy jest dostępny na 30 stronach internetowych."
+  options: "TAK|NIE|BI"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-4-10
+  passageRef: certyfikat-polski-B2-2020-read-4
+  questionType: true_false_not_given
+  questionText: "Użytkownicy mogą wpływać na kształt internetowego przewodnika rowerowego."
+  options: "TAK|NIE|BI"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-5-1
+  passageRef: certyfikat-polski-B2-2020-read-5
+  questionType: multiple_choice
+  questionText: "z [1] nauk ścisłych i przyrodniczych"
+  options: "okresu|epoki|gałęzi|zakresu"
+  correctAnswer: zakresu
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-5-2
+  passageRef: certyfikat-polski-B2-2020-read-5
+  questionType: multiple_choice
+  questionText: "którzy [2] wyprowadzą wzór czy wyuczą się regułki"
+  options: "wreszcie|zarazem|co prawda|naprawdę"
+  correctAnswer: "co prawda"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-5-3
+  passageRef: certyfikat-polski-B2-2020-read-5
+  questionType: multiple_choice
+  questionText: "[3] dla nich zadania"
+  options: "Wykreowane|Skomponowane|Opracowane|Odpracowane"
+  correctAnswer: Opracowane
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-5-4
+  passageRef: certyfikat-polski-B2-2020-read-5
+  questionType: multiple_choice
+  questionText: "[4] nastolatków ze specyfiką pracy naukowca"
+  options: "rozpoznać|zapoznać|zaznać|wyznać"
+  correctAnswer: "zapoznać"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-5-5
+  passageRef: certyfikat-polski-B2-2020-read-5
+  questionType: multiple_choice
+  questionText: "[5] podstaw analizy danych"
+  options: "zapanowanie|opanowanie|otrzymanie|dostanie"
+  correctAnswer: opanowanie
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-5-6
+  passageRef: certyfikat-polski-B2-2020-read-5
+  questionType: multiple_choice
+  questionText: "uczniowie [6] status stażystów"
+  options: "uzyskają|odbiorą|odzyskają|przyznają"
+  correctAnswer: "uzyskają"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-5-7
+  passageRef: certyfikat-polski-B2-2020-read-5
+  questionType: multiple_choice
+  questionText: "Tematyka łamigłówek będzie [7] biologię"
+  options: "ogarniała|obejmowała|zawierała|otaczała"
+  correctAnswer: "obejmowała"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-5-8
+  passageRef: certyfikat-polski-B2-2020-read-5
+  questionType: multiple_choice
+  questionText: "wysoki [8] merytoryczny"
+  options: "stopień|poziom|aspekt|wymiar"
+  correctAnswer: poziom
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-5-9
+  passageRef: certyfikat-polski-B2-2020-read-5
+  questionType: multiple_choice
+  questionText: "sukcesu nie [9] tu znajomość spisu treści"
+  options: "uniemożliwi|upewni|zapewni|osiągnie"
+  correctAnswer: zapewni
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-5-10
+  passageRef: certyfikat-polski-B2-2020-read-5
+  questionType: multiple_choice
+  questionText: "łączenia ze sobą [10] nieoczywistych faktów"
+  options: "pozornie|wyraźnie|specjalnie|faktycznie"
+  correctAnswer: pozornie
+  pointsQuarter: 2
 }

@@ -1,6 +1,8 @@
 package polski.ui
 
 import polski.exam.QuestionType
+import polski.exam.ExamAnswerMode
+import polski.exam.ExamGradingMode
 
 /** Listening exams from generated biome rows — single source of truth. */
 internal val examListeningData: Map<String, ListeningExam> by lazy {
@@ -14,7 +16,10 @@ private fun mapB1Listening(): ListeningExam {
         tasks.map { t ->
             ListeningTask(t.taskId, t.instruction,
                 qs.filter { it.taskRef == t.taskId }.map { q ->
-                    ListeningQ(q.questionId, QuestionType.fromTag(q.questionType.tag), q.questionText, q.options?.split("|") ?: emptyList(), q.correctAnswer, q.pointsQuarter ?: requireNotNull(q.points) { "Missing score for ${q.questionId}" } * 4)
+                    ListeningQ(q.questionId, QuestionType.fromTag(q.questionType.tag), q.questionText, q.options?.split("|") ?: emptyList(), q.correctAnswer, q.pointsQuarter ?: requireNotNull(q.points) { "Missing score for ${q.questionId}" } * 4,
+                        q.gradingMode?.tag?.let(ExamGradingMode::fromTag) ?: ExamGradingMode.Exact,
+                        q.answerMode?.tag?.let(ExamAnswerMode::fromTag) ?: ExamAnswerMode.Single,
+                        q.creditPerCorrectQuarter)
                 }, t.segmentStartMs.toLong(), t.segmentEndMs.toLong(), t.promptImageUrl, t.promptImageAlt)
         }, tasks.firstOrNull()?.audioUrl ?: "")
 }
@@ -26,7 +31,10 @@ private fun mapB2Listening(): ListeningExam {
         tasks.map { t ->
             ListeningTask(t.taskId, t.instruction,
                 qs.filter { it.taskRef == t.taskId }.map { q ->
-                    ListeningQ(q.questionId, QuestionType.fromTag(q.questionType.tag), q.questionText, q.options?.split("|") ?: emptyList(), q.correctAnswer, q.pointsQuarter ?: requireNotNull(q.points) { "Missing score for ${q.questionId}" } * 4)
+                    ListeningQ(q.questionId, QuestionType.fromTag(q.questionType.tag), q.questionText, q.options?.split("|") ?: emptyList(), q.correctAnswer, q.pointsQuarter ?: requireNotNull(q.points) { "Missing score for ${q.questionId}" } * 4,
+                        q.gradingMode?.tag?.let(ExamGradingMode::fromTag) ?: ExamGradingMode.Exact,
+                        q.answerMode?.tag?.let(ExamAnswerMode::fromTag) ?: ExamAnswerMode.Single,
+                        q.creditPerCorrectQuarter)
                 }, t.segmentStartMs.toLong(), t.segmentEndMs.toLong(), t.promptImageUrl, t.promptImageAlt)
         }, tasks.firstOrNull()?.audioUrl ?: "")
 }
@@ -47,6 +55,9 @@ private fun mapB1y2017Listening(): ListeningExam {
                         question.options?.split("|") ?: emptyList(),
                         question.correctAnswer,
                         question.pointsQuarter ?: requireNotNull(question.points) { "Missing score for ${question.questionId}" } * 4,
+                        question.gradingMode?.tag?.let(ExamGradingMode::fromTag) ?: ExamGradingMode.Exact,
+                        question.answerMode?.tag?.let(ExamAnswerMode::fromTag) ?: ExamAnswerMode.Single,
+                        question.creditPerCorrectQuarter,
                     )
                 },
                 task.segmentStartMs.toLong(),

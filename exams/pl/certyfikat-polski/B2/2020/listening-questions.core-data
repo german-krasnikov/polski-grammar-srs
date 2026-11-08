@@ -1,457 +1,351 @@
 DSL 1
+# B2/2020 arkusz pp. 3–8, key pp. 4–5. III/1 and III/6 are unordered TWO-answer sets, not independent questions.
+# V allows other transcript-consistent answers; open_manual is required. V/6 is one unordered two-word set with 0.5 point per correct word.
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-lq1"
-  taskRef: "certyfikat-polski-B2-2020-listen-1"
+  questionId: certyfikat-polski-B2-2020-listening-1-1
+  taskRef: certyfikat-polski-B2-2020-listen-1
   questionType: multiple_choice
-  questionText: "Pytanie 1"
-  correctAnswer: "c"
-  points: 1
+  questionText: "Z rozmowy wynika, że kobiety"
+  options: "a) znajdują się na terenie szpitala.|b) umawiają się na spotkanie.|c) poznały się w szpitalu."
+  correctAnswer: "c) poznały się w szpitalu."
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-lq2"
-  taskRef: "certyfikat-polski-B2-2020-listen-1"
+  questionId: certyfikat-polski-B2-2020-listening-1-2
+  taskRef: certyfikat-polski-B2-2020-listen-1
   questionType: multiple_choice
-  questionText: "Pytanie 2"
-  correctAnswer: "a b"
-  points: 1
+  questionText: "Jedna z kobiet"
+  options: "a) ma chorego dziadka.|b) cierpi na bóle głowy.|c) remontuje swój gabinet."
+  correctAnswer: "a) ma chorego dziadka."
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-lq3"
-  taskRef: "certyfikat-polski-B2-2020-listen-1"
+  questionId: certyfikat-polski-B2-2020-listening-1-3
+  taskRef: certyfikat-polski-B2-2020-listen-1
   questionType: multiple_choice
-  questionText: "Pytanie 3"
-  correctAnswer: "c a"
-  points: 1
+  questionText: "W tym fragmencie mówi się o"
+  options: "a) polskich firmach, które unikają płacenia podatków.|b) nieuczciwych praktykach zagranicznych firm.|c) stratach finansowych polskich przedsiębiorców."
+  correctAnswer: "b) nieuczciwych praktykach zagranicznych firm."
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-lq4"
-  taskRef: "certyfikat-polski-B2-2020-listen-1"
+  questionId: certyfikat-polski-B2-2020-listening-1-4
+  taskRef: certyfikat-polski-B2-2020-listen-1
   questionType: multiple_choice
-  questionText: "Pytanie 4"
-  correctAnswer: "c b"
-  points: 1
+  questionText: "Z nagrania wynika, że w Polsce"
+  options: "a) dzięki wpływom z podatku CIT są budowane drogi.|b) zagraniczne korporacje zyskują na budowie autostrad.|c) oszustwa podatkowe ograniczają możliwości inwestycji."
+  correctAnswer: "c) oszustwa podatkowe ograniczają możliwości inwestycji."
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-lq5"
-  taskRef: "certyfikat-polski-B2-2020-listen-1"
+  questionId: certyfikat-polski-B2-2020-listening-1-5
+  taskRef: certyfikat-polski-B2-2020-listen-1
   questionType: multiple_choice
-  questionText: "Pytanie 5"
-  correctAnswer: "a"
-  points: 1
+  questionText: "Z rozmowy wynika, że"
+  options: "a) kobieta rozstała się mężem.|b) sprawa rozwodowa ciągnie się od 11 lat.|c) kobieta nie chce mówić o dzieciach."
+  correctAnswer: "a) kobieta rozstała się mężem."
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-lq6"
-  taskRef: "certyfikat-polski-B2-2020-listen-2"
+  questionId: certyfikat-polski-B2-2020-listening-1-6
+  taskRef: certyfikat-polski-B2-2020-listen-1
   questionType: multiple_choice
-  questionText: "Pytanie 6"
-  correctAnswer: "TAK NIE"
-  points: 1
+  questionText: "Kobieta mówi o"
+  options: "a) wymaganiach dawnego partnera.|b) działalności zawodowej swojej i byłego męża.|c) obecnych relacjach z byłym partnerem."
+  correctAnswer: "c) obecnych relacjach z byłym partnerem."
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-lq7"
-  taskRef: "certyfikat-polski-B2-2020-listen-3"
+  questionId: certyfikat-polski-B2-2020-listening-1-7
+  taskRef: certyfikat-polski-B2-2020-listen-1
   questionType: multiple_choice
-  questionText: "Pytanie 7"
-  correctAnswer: "A"
-  points: 1
+  questionText: "Relacja dotyczy"
+  options: "a) wypadku drogowego podczas egzaminu na prawo jazdy.|b) reakcji kursanta na wynik egzaminu na prawo jazdy.|c) nowej formuły egzaminu na prawo jazdy w Koninie."
+  correctAnswer: "b) reakcji kursanta na wynik egzaminu na prawo jazdy."
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-lq8"
-  taskRef: "certyfikat-polski-B2-2020-listen-3"
+  questionId: certyfikat-polski-B2-2020-listening-1-8
+  taskRef: certyfikat-polski-B2-2020-listen-1
   questionType: multiple_choice
-  questionText: "Pytanie 8"
-  correctAnswer: "D D C D C A"
-  points: 1
+  questionText: "Z relacji wynika, że w Wojewódzkim Ośrodku Ruchu Drogowego w Koninie"
+  options: "a) nigdy wcześniej nie zdarzyła się podobna sytuacja.|b) działalność ośrodka po raz kolejny przyniosła straty.|c) egzamin na prawo jazdy odbył się po raz pierwszy."
+  correctAnswer: "a) nigdy wcześniej nie zdarzyła się podobna sytuacja."
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-lq9"
-  taskRef: "certyfikat-polski-B2-2020-listen-3"
-  questionType: multiple_choice
-  questionText: "Pytanie 9"
-  correctAnswer: "B B D"
-  points: 1
+  questionId: certyfikat-polski-B2-2020-listening-2-1
+  taskRef: certyfikat-polski-B2-2020-listen-2
+  questionType: true_false
+  questionText: "Gospodarka ta jest najbardziej rozpowszechnioną w internecie formą wymiany dóbr i usług."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-lq10"
-  taskRef: "certyfikat-polski-B2-2020-listen-3"
-  questionType: multiple_choice
-  questionText: "Pytanie 10"
-  correctAnswer: "Kolejność odpowiedzi jest dowolna"
-  points: 1
+  questionId: certyfikat-polski-B2-2020-listening-2-2
+  taskRef: certyfikat-polski-B2-2020-listen-2
+  questionType: true_false
+  questionText: "Współdzielenie mieszkania polega na codziennym użytkowaniu mieszkania przez właściciela i inne osoby."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-lq11"
-  taskRef: "certyfikat-polski-B2-2020-listen-4"
-  questionType: multiple_choice
-  questionText: "Pytanie 11"
-  correctAnswer: "c b b a c a c"
-  points: 1
+  questionId: certyfikat-polski-B2-2020-listening-2-3
+  taskRef: certyfikat-polski-B2-2020-listen-2
+  questionType: true_false
+  questionText: "Gospodarka współpracy może być atrakcyjnym rozwiązaniem dla osób niepracujących zawodowo."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-lq12"
-  taskRef: "certyfikat-polski-B2-2020-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 12"
-  correctAnswer: "TEST PRZYKŁADOWY"
-  points: 1
+  questionId: certyfikat-polski-B2-2020-listening-2-4
+  taskRef: certyfikat-polski-B2-2020-listen-2
+  questionType: true_false
+  questionText: "Pracownicy etatowi nie mogą korzystać z tej formy dodatkowego zarobkowania."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-lq13"
-  taskRef: "certyfikat-polski-B2-2020-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 13"
-  correctAnswer: "POZIOM B"
-  points: 1
+  questionId: certyfikat-polski-B2-2020-listening-2-5
+  taskRef: certyfikat-polski-B2-2020-listen-2
+  questionType: true_false
+  questionText: "Typowym przykładem gospodarki współpracy są usługi transportowe."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-lq14"
-  taskRef: "certyfikat-polski-B2-2020-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 14"
-  correctAnswer: "TRANSKRYPCJE I KLUCZ DO ZADAŃ"
-  points: 1
+  questionId: certyfikat-polski-B2-2020-listening-2-6
+  taskRef: certyfikat-polski-B2-2020-listen-2
+  questionType: true_false
+  questionText: "Rozwój ekonomii współdzielonej skutkuje dynamicznymi zmianami w regulacjach prawnych."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-lq15"
-  taskRef: "certyfikat-polski-B2-2020-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 15"
-  correctAnswer: "Odpowiedź Punkty Fragment transkrypcji"
-  points: 1
+  questionId: certyfikat-polski-B2-2020-listening-2-7
+  taskRef: certyfikat-polski-B2-2020-listen-2
+  questionType: true_false
+  questionText: "Uczestnicy tego rynku ekonomii zwykle nie legalizują swojej działalności."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-lq16"
-  taskRef: "certyfikat-polski-B2-2020-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 16"
-  correctAnswer: "z Afryki lub z regionu Kaffa"
-  points: 1
+  questionId: certyfikat-polski-B2-2020-listening-2-8
+  taskRef: certyfikat-polski-B2-2020-listen-2
+  questionType: true_false
+  questionText: "W Estonii wprowadzono nowe rozwiązania prawne regulujące tę formę zarobkowania."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-lq17"
-  taskRef: "certyfikat-polski-B2-2020-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 17"
-  correctAnswer: "należy szukać w Afryce na terenach dzisiejszej"
-  points: 1
+  questionId: certyfikat-polski-B2-2020-listening-2-9
+  taskRef: certyfikat-polski-B2-2020-listen-2
+  questionType: true_false
+  questionText: "Ekonomia współdzielenia może prowadzić do zagrożenia bezrobociem."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-lq18"
-  taskRef: "certyfikat-polski-B2-2020-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 18"
-  correctAnswer: "uznać za"
-  points: 1
+  questionId: certyfikat-polski-B2-2020-listening-3-1
+  taskRef: certyfikat-polski-B2-2020-listen-3
+  questionType: match
+  questionText: "W tym miejscu widoczne są wpływy innych kultur."
+  options: "A|B|C|D"
+  correctAnswer: "A|D"
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
+  pointsQuarter: 8
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-lq19"
-  taskRef: "certyfikat-polski-B2-2020-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 19"
-  correctAnswer: "p"
-  points: 1
+  questionId: certyfikat-polski-B2-2020-listening-3-2
+  taskRef: certyfikat-polski-B2-2020-listen-3
+  questionType: match
+  questionText: "Prace budowlane w tym miejscu nie zostały sfinalizowane."
+  options: "A|B|C|D"
+  correctAnswer: D
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-lq20"
-  taskRef: "certyfikat-polski-B2-2020-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 20"
-  correctAnswer: "Etiopii"
-  points: 1
+  questionId: certyfikat-polski-B2-2020-listening-3-3
+  taskRef: certyfikat-polski-B2-2020-listen-3
+  questionType: match
+  questionText: "To miejsce było odkrywane stopniowo."
+  options: "A|B|C|D"
+  correctAnswer: C
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-lq21"
-  taskRef: "certyfikat-polski-B2-2020-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 21"
-  correctAnswer: "w regionie Kaffa"
-  points: 1
+  questionId: certyfikat-polski-B2-2020-listening-3-4
+  taskRef: certyfikat-polski-B2-2020-listen-3
+  questionType: match
+  questionText: "Ozdobą tego miejsca były rzadkie okazy zwierząt."
+  options: "A|B|C|D"
+  correctAnswer: D
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-lq22"
-  taskRef: "certyfikat-polski-B2-2020-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 22"
-  correctAnswer: "zaskakująco"
-  points: 1
+  questionId: certyfikat-polski-B2-2020-listening-3-5
+  taskRef: certyfikat-polski-B2-2020-listen-3
+  questionType: match
+  questionText: "Celem wizyty w tym miejscu może być edukacja poprzez obserwację."
+  options: "A|B|C|D"
+  correctAnswer: C
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-lq23"
-  taskRef: "certyfikat-polski-B2-2020-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 23"
-  correctAnswer: "okazuje się"
-  points: 1
+  questionId: certyfikat-polski-B2-2020-listening-3-6
+  taskRef: certyfikat-polski-B2-2020-listen-3
+  questionType: match
+  questionText: "Jedną z funkcji tego obiektu jest zapewnienie miejsca wiecznego spoczynku."
+  options: "A|B|C|D"
+  correctAnswer: "A|B"
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
+  pointsQuarter: 8
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-lq24"
-  taskRef: "certyfikat-polski-B2-2020-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 24"
-  correctAnswer: "że wino"
-  points: 1
+  questionId: certyfikat-polski-B2-2020-listening-3-7
+  taskRef: certyfikat-polski-B2-2020-listen-3
+  questionType: match
+  questionText: "To miejsce związane jest z ówczesną sytuacją religijną."
+  options: "A|B|C|D"
+  correctAnswer: B
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-lq25"
-  taskRef: "certyfikat-polski-B2-2020-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 25"
-  correctAnswer: "pobudzenie"
-  points: 1
+  questionId: certyfikat-polski-B2-2020-listening-3-8
+  taskRef: certyfikat-polski-B2-2020-listen-3
+  questionType: match
+  questionText: "To największy obiekt tego typu w Polsce."
+  options: "A|B|C|D"
+  correctAnswer: D
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-lq26"
-  taskRef: "certyfikat-polski-B2-2020-listen-5"
+  questionId: certyfikat-polski-B2-2020-listening-4-1
+  taskRef: certyfikat-polski-B2-2020-listen-4
   questionType: multiple_choice
-  questionText: "Pytanie 26"
-  correctAnswer: "dzięki naturalnej a następnie żuto"
-  points: 1
+  questionText: "Jakub Błaszczykowski"
+  options: "a) jest miłośnikiem gołębi pocztowych.|b) wspiera hodowców gołębi pocztowych.|c) prowadzi działalność dobroczynną."
+  correctAnswer: "c) prowadzi działalność dobroczynną."
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-lq27"
-  taskRef: "certyfikat-polski-B2-2020-listen-5"
+  questionId: certyfikat-polski-B2-2020-listening-4-2
+  taskRef: certyfikat-polski-B2-2020-listen-4
   questionType: multiple_choice
-  questionText: "Pytanie 27"
-  correctAnswer: "Takie coś zapewniało"
-  points: 1
+  questionText: "Hodowcy gołębi pocztowych"
+  options: "a) założyli fundację wspierającą dzieci i młodzież.|b) powtórnie przeznaczają zyski z imprezy na cele charytatywne.|c) od wielu lat współpracują z fundacją „Ludzki Gest”."
+  correctAnswer: "b) powtórnie przeznaczają zyski z imprezy na cele charytatywne."
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-lq28"
-  taskRef: "certyfikat-polski-B2-2020-listen-5"
+  questionId: certyfikat-polski-B2-2020-listening-4-3
+  taskRef: certyfikat-polski-B2-2020-listen-4
   questionType: multiple_choice
-  questionText: "Pytanie 28"
-  correctAnswer: "kofeinie"
-  points: 1
+  questionText: "Osoby, które wsparły fundację, mogły liczyć na"
+  options: "a) spotkanie ze sportowcem i autograf.|b) różne nagrody rzeczowe.|c) wzięcie udziału w finale licytacji."
+  correctAnswer: "b) różne nagrody rzeczowe."
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-lq29"
-  taskRef: "certyfikat-polski-B2-2020-listen-5"
+  questionId: certyfikat-polski-B2-2020-listening-4-4
+  taskRef: certyfikat-polski-B2-2020-listen-4
   questionType: multiple_choice
-  questionText: "Pytanie 29"
-  correctAnswer: "miłe spędzanie czasu i odpowiednie"
-  points: 1
+  questionText: "Dochód z licytacji gołębi wesprze"
+  options: "a) działania fundacji Jakuba Błaszczykowskiego.|b) młodych hodowców tych ptaków.|c) organizację święta hodowców gołębi."
+  correctAnswer: "a) działania fundacji Jakuba Błaszczykowskiego."
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-lq30"
-  taskRef: "certyfikat-polski-B2-2020-listen-5"
+  questionId: certyfikat-polski-B2-2020-listening-4-5
+  taskRef: certyfikat-polski-B2-2020-listen-4
   questionType: multiple_choice
-  questionText: "Pytanie 30"
-  correctAnswer: "pobudzenie"
-  points: 1
+  questionText: "Podczas preaukcji gołębi"
+  options: "a) nie udało się sprzedać wszystkich ptaków.|b) zebrano kwotę 230 tysięcy złotych.|c) zlicytowano gołębie na kwotę 480 tysięcy złotych."
+  correctAnswer: "c) zlicytowano gołębie na kwotę 480 tysięcy złotych."
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-lq31"
-  taskRef: "certyfikat-polski-B2-2020-listen-5"
+  questionId: certyfikat-polski-B2-2020-listening-4-6
+  taskRef: certyfikat-polski-B2-2020-listen-4
   questionType: multiple_choice
-  questionText: "Pytanie 31"
-  correctAnswer: "dzięki naturalnej kofeinie"
-  points: 1
+  questionText: "W aukcji finałowej"
+  options: "a) licytowane będą najbardziej wartościowe ptaki.|b) weźmie udział około 230 zainteresowanych.|c) będą sprzedawane gołębie pozostałe z preaukcji."
+  correctAnswer: "a) licytowane będą najbardziej wartościowe ptaki."
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-lq32"
-  taskRef: "certyfikat-polski-B2-2020-listen-5"
+  questionId: certyfikat-polski-B2-2020-listening-4-7
+  taskRef: certyfikat-polski-B2-2020-listen-4
   questionType: multiple_choice
-  questionText: "Pytanie 32"
-  correctAnswer: "że takie właśnie żucie ziaren jest nie do"
-  points: 1
+  questionText: "Hodowcy gołębi pocztowych w Polsce"
+  options: "a) obecnie hodują 45 tysięcy ptaków.|b) prowadzą swoją działalność od 45 lat.|c) w chwili obecnej stanowią liczną grupę."
+  correctAnswer: "c) w chwili obecnej stanowią liczną grupę."
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-lq33"
-  taskRef: "certyfikat-polski-B2-2020-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 33"
-  correctAnswer: "pomyślenia przez ich dość cierpki smak"
-  points: 1
+  questionId: certyfikat-polski-B2-2020-listening-5-1
+  taskRef: certyfikat-polski-B2-2020-listen-5
+  questionType: fill_gap
+  questionText: "Z którego kraju pochodzi kawa?"
+  correctAnswer: "z dzisiejszej Etiopii"
+  pointsQuarter: 4
+  gradingMode: open_manual
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-lq34"
-  taskRef: "certyfikat-polski-B2-2020-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 34"
-  correctAnswer: "to pamiętajmy"
-  points: 1
+  questionId: certyfikat-polski-B2-2020-listening-5-2
+  taskRef: certyfikat-polski-B2-2020-listen-5
+  questionType: fill_gap
+  questionText: "Jakie znaczenie początkowo miało słowo kahva?"
+  correctAnswer: wino
+  pointsQuarter: 4
+  gradingMode: open_manual
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-lq35"
-  taskRef: "certyfikat-polski-B2-2020-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 35"
-  correctAnswer: "że jeszcze wtedy nie były"
-  points: 1
+  questionId: certyfikat-polski-B2-2020-listening-5-3
+  taskRef: certyfikat-polski-B2-2020-listen-5
+  questionType: fill_gap
+  questionText: "Jaki wpływ na organizm miało żucie ziaren kawy?"
+  correctAnswer: "pobudzający"
+  pointsQuarter: 4
+  gradingMode: open_manual
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-lq36"
-  taskRef: "certyfikat-polski-B2-2020-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 36"
-  correctAnswer: "one palone"
-  points: 1
+  questionId: certyfikat-polski-B2-2020-listening-5-4
+  taskRef: certyfikat-polski-B2-2020-listen-5
+  questionType: fill_gap
+  questionText: "Dlaczego ziarna kawy, które przeżuwano, nie miały cierpkiego posmaku?"
+  correctAnswer: "ponieważ nie były palone"
+  pointsQuarter: 4
+  gradingMode: open_manual
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-lq37"
-  taskRef: "certyfikat-polski-B2-2020-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 37"
-  correctAnswer: "ale w całym"
-  points: 1
+  questionId: certyfikat-polski-B2-2020-listening-5-5
+  taskRef: certyfikat-polski-B2-2020-listen-5
+  questionType: fill_gap
+  questionText: "Kiedy kawa rozpowszechniła się na terenach Polski?"
+  correctAnswer: "kilka, kilkanaście lat po śmierci króla Jana III Sobieskiego"
+  pointsQuarter: 4
+  gradingMode: open_manual
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-lq38"
-  taskRef: "certyfikat-polski-B2-2020-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 38"
-  correctAnswer: "królestwie kawa rozpowszechniła się"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-lq39"
-  taskRef: "certyfikat-polski-B2-2020-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 39"
-  correctAnswer: "dopiero kilka"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-lq40"
-  taskRef: "certyfikat-polski-B2-2020-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 40"
-  correctAnswer: "kilkanaście lat po śmierci"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-lq41"
-  taskRef: "certyfikat-polski-B2-2020-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 41"
-  correctAnswer: "króla"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-lq42"
-  taskRef: "certyfikat-polski-B2-2020-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 42"
-  correctAnswer: "b"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-lq43"
-  taskRef: "certyfikat-polski-B2-2020-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 43"
-  correctAnswer: "filiżanka"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-lq44"
-  taskRef: "certyfikat-polski-B2-2020-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 44"
-  correctAnswer: "p"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-lq45"
-  taskRef: "certyfikat-polski-B2-2020-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 45"
-  correctAnswer: "niektóre słowa"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-lq46"
-  taskRef: "certyfikat-polski-B2-2020-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 46"
-  correctAnswer: "które są powiązane"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-lq47"
-  taskRef: "certyfikat-polski-B2-2020-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 47"
-  correctAnswer: "z kawą"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-lq48"
-  taskRef: "certyfikat-polski-B2-2020-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 48"
-  correctAnswer: "na przykład nazywają narzędzie"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-lq49"
-  taskRef: "certyfikat-polski-B2-2020-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 49"
-  correctAnswer: "do jej serwowania"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-lq50"
-  taskRef: "certyfikat-polski-B2-2020-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 50"
-  correctAnswer: "Z tego języka mamy"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-lq51"
-  taskRef: "certyfikat-polski-B2-2020-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 51"
-  correctAnswer: "słowo"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-lq52"
-  taskRef: "certyfikat-polski-B2-2020-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 52"
-  correctAnswer: "czajnik"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-lq53"
-  taskRef: "certyfikat-polski-B2-2020-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 53"
-  correctAnswer: "albo słowo"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-lq54"
-  taskRef: "certyfikat-polski-B2-2020-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 54"
-  correctAnswer: "filiżanka"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-lq55"
-  taskRef: "certyfikat-polski-B2-2020-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 55"
-  correctAnswer: "TEST PRZYKŁADOWY"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-lq56"
-  taskRef: "certyfikat-polski-B2-2020-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 56"
-  correctAnswer: "POZIOM B"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-lq57"
-  taskRef: "certyfikat-polski-B2-2020-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 57"
-  correctAnswer: "TRANSKRYPCJE I KLUCZ DO ZADAŃ"
-  points: 1
+  questionId: certyfikat-polski-B2-2020-listening-5-6
+  taskRef: certyfikat-polski-B2-2020-listen-5
+  questionType: fill_gap
+  questionText: "Które dwa polskie słowa mają turecki rodowód? a) …; b) …"
+  correctAnswer: "czajnik|filiżanka"
+  answerMode: unordered_set
+  pointsQuarter: 4
+  creditPerCorrectQuarter: 2
+  gradingMode: open_manual
 }

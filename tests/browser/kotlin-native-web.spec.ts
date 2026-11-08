@@ -5,7 +5,8 @@ for (const width of [320, 390, 768, 1280]) {
     await page.setViewportSize({ width, height: 800 });
     await page.goto('/#/training');
     const nav = page.getByRole('navigation', { name: 'Основные разделы' });
-    await expect(nav.getByRole('button')).toHaveCount(5);
+    await expect(nav.getByRole('button')).toHaveCount(6);
+    await expect(nav.getByRole('button', { name: 'Экзамен' })).toBeVisible();
     await expect(page.locator('liquid-glass, #primary-nav-backdrop, #primary-nav-lens, nav canvas')).toHaveCount(0);
     expect(await page.locator('canvas').count()).toBeLessThanOrEqual(1); // Compose host canvas only.
     await expect(page.locator('#settings-glass-tint')).toHaveCount(0);

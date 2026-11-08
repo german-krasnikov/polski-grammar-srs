@@ -1,31 +1,42 @@
 DSL 1
+# B2/2020 arkusz pp. 10–16; key p. 6.
 READING_PASSAGE {
-  passageId: "certyfikat-polski-B2-2020-read-1"
-  examRef: "certyfikat-polski-B2-2020"
+  passageId: certyfikat-polski-B2-2020-read-1
+  examRef: certyfikat-polski-B2-2020
   taskNumber: 1
-  instruction: "Zadanie 1"
+  title: "Pięć krótkich tekstów"
+  instruction: "Proszę przeczytać fragmenty tekstów i zaznaczyć właściwą odpowiedź."
+  text: "1. Nawet kilkanaście procent Polaków jest uczulonych na zwierzęta, część z nich na kota. To specyficzna i trochę zapomniana alergia, która nieleczona może doprowadzić do astmy. Często utrudnia życie alergikowi nawet wtedy, gdy zwierzęcia nie ma w pobliżu i wydawałoby się, że nie ma też alergenu.\n\n2. Nasze społeczeństwo się bogaci – chętnie sięgamy po kolejne sprzęty coraz nowszych generacji. Urządzenia gospodarstwa domowego nie są największym problemem. Postęp techniczny w dziedzinie smartfonów czy komputerów jest bardziej dynamiczny i to właśnie je najchętniej zastępujemy nowymi, a stare urządzenia nie zawsze trafiają do właściwej utylizacji.\n\n3. Choć 90 procent z nas ma wiejskie korzenie, to o nich zapominamy albo celowo wypieramy ze świadomości. Przymiotnik „wiejski” kojarzy się nam negatywnie, tymczasem np. we Francji, kiedy mówisz, że jesteś ze wsi, od razu pytają cię, jakie sery i wino są tam produkowane.\n\n4. Znam osoby, które kilka razy okrążyły planetę w powietrzu, ale co widziały? Niewiele. Mnie interesuje autentyczny koloryt lokalny, a nie tylko wielkie miasta, w których działają lotniska międzynarodowe. Współczesne metropolie są do siebie podobne, a ludzi prawdziwych, ciekawych i otwartych można spotkać wyłącznie na prowincji.\n\n5. Słońce, na którym suszymy pranie, wcale nie jest tak niewinne, jak się wydaje. Natomiast suszarka tradycyjna na każdym ubraniu zostawia ślad w postaci mało estetycznej linii. W suszarkach automatycznych materiały nie tylko zachowują kolory, ale są traktowane bardzo delikatnie. Proces suszenia można dostosować zarówno do rodzaju tkaniny, jak i do stopnia wilgotności."
 }
 READING_PASSAGE {
-  passageId: "certyfikat-polski-B2-2020-read-2"
-  examRef: "certyfikat-polski-B2-2020"
+  passageId: certyfikat-polski-B2-2020-read-2
+  examRef: certyfikat-polski-B2-2020
   taskNumber: 2
-  instruction: "Zadanie 2"
+  title: "Czy wiesz, czym oddychasz w biurze?"
+  instruction: "Proszę przeczytać tekst i dopasować usunięte fragmenty A–K. C jest przykładem; jeden fragment jest zbędny."
+  text: "Myśląc o zanieczyszczeniach, najczęściej skupiamy się na smogu, [C]. Tymczasem niebezpieczne może być także powietrze, którym oddychamy w biurze. I nie jest to wcale wina smogu, który może [1].\n\nNowe badania sugerują, że [2], którzy nieświadomie przenoszą i rozpraszają niezdrowe lotne związki, [3]. Narażenie na działanie takich substancji może być bardzo szkodliwe, [4]. Ponieważ większość z nas spędza minimum 40 godzin tygodniowo w biurze, warto [5], może wpływać na nasze zdrowie.\n\nBadacze nie mają dobrych wiadomości. Chemia powietrza w pomieszczeniu jest dynamiczna. Zmienia się w ciągu dnia, [6], sposobu działania systemu wentylacyjnego i liczby pracowników w biurze. Badania wykazały, że wskaźniki obecności w powietrzu wielu związków [7]. Jeśli przestrzeń biurowa nie jest odpowiednio wentylowana, te lotne związki niekorzystnie [8].\n\nJednym ze związków obniżających jakość powietrza jest izopren, łatwopalna substancja obecna w olejkach eterycznych. Naukowcom udało się nawet [9]. Co ciekawe, lotne chemikalia obecne w dezodorancie, produktach do makijażu i produktach do pielęgnacji włosów mogą [10]. Dzieje się tak, ponieważ systemy wentylacyjne wyciągają powietrze i wyrzucają je na zewnątrz.\n\nA. zastanowić się, jak powietrze, którym oddychamy w miejscu pracy\nB. bywają w pomieszczeniach 10-20 razy wyższe niż poza nimi\nC. winą obarczając przemysł, samochody i stare piece (przykład)\nD. używając dezodorantów, lakierów do włosów, a nawet – oddychając\nE. dostawać się do budynku, ale w znacznej mierze – nas samych\nF. pozostając w ścisłej zależności od warunków zewnętrznych\nG. wpływają na zdrowie i wydajność pracowników\nH. w równym stopniu wpływać na jakość powietrza w biurze, jak i poza nim\nI. przyczyną największego zanieczyszczenia powietrza biurowego są ludzie\nJ. wykryć tę substancję w oddechu osób pracujących w biurze\nK. przyczyniając się do rozwoju raka, chorób płuc, a nawet chorób serca"
 }
 READING_PASSAGE {
-  passageId: "certyfikat-polski-B2-2020-read-3"
-  examRef: "certyfikat-polski-B2-2020"
+  passageId: certyfikat-polski-B2-2020-read-3
+  examRef: certyfikat-polski-B2-2020
   taskNumber: 3
-  instruction: "Zadanie 3"
+  title: "Rozmowa – tytuły i fragmenty"
+  instruction: "Proszę połączyć tytuły 1–10 z fragmentami A–K. F jest przykładem dla „Pozory komunikacji”; jeden fragment jest zbędny."
+  text: "1. To, co niewypowiedziane\n2. Informacja to nie wszystko\n3. Klucz do sukcesu zawodowego\n4. Zasada wzajemności\n5. Tylko dla twoich uszu\n6. Bez osądzania\n7. Po prostu bądź!\n8. Nie każda rada jest dobra\n9. Mimo wszystko – rozmawiamy!\n10. Za późno na rozmowę\n\nA. Coraz więcej psychoterapeutów i filozofów postrzega komunikację nie tylko jako przekazywanie sobie informacji, ale dialog, współdziałanie, proces.\nB. Często w traumatycznej sytuacji za wszelką cenę chcemy uspokoić rozmówcę albo odwrócić jego uwagę od problemu, a wystarczy zwyczajnie potrzymać za rękę.\nC. Udzielanie wskazówek, o które nikt nie prosi, jest wtrącaniem się i komunikatem typu: „Jesteś głupi, więc ci powiem, jak trzeba to zrobić”.\nD. Zamiast oceniać trzeba skoncentrować się na opisie sytuacji, którą rozmówca przedstawia, i na problemie.\nE. Przyjęło się, że komunikacja między ludźmi to przede wszystkim komunikacja werbalna, jednak ok. 60 proc. informacji czerpiemy z mowy ciała czy mimiki.\nF. Choć wydaje się, że nie ma nic prostszego niż rozmowa, często nasz rozmówca lub my sami wyczuwamy w trakcie dialogu zagrożenie lub przewidujemy, że ono się pojawi. (przykład)\nG. Zdolność słuchania to połowa sukcesu w komunikacji interpersonalnej, drugą jest dzielenie się z innymi ważnymi dla siebie przeżyciami.\nH. Aby druga osoba chciała nam swobodnie opowiedzieć o sobie, przede wszystkim trzeba być dyskretnym.\nI. Trzeba też zdać sobie jasno sprawę, że niektórych rozmów już nie da się przeprowadzić. Pewnych ważnych rzeczy nie da się powiedzieć, bo np. bliska osoba umarła.\nJ. Umiejętność słuchania jest rzadka, a jej rozwinięcie stanowi gwarancję sukcesu w wielu zawodach: od psychoterapeuty czy lekarza po fryzjera.\nK. Biorąc pod uwagę to, jak ludzie się od siebie różnią i z jakim wysiłkiem akceptują tę inność, cudem jest, że czasem dochodzi do autentycznej komunikacji."
 }
 READING_PASSAGE {
-  passageId: "certyfikat-polski-B2-2020-read-4"
-  examRef: "certyfikat-polski-B2-2020"
+  passageId: certyfikat-polski-B2-2020-read-4
+  examRef: certyfikat-polski-B2-2020
   taskNumber: 4
-  instruction: "Zadanie 4"
+  title: "Podróże po Jurze"
+  instruction: "Proszę przeczytać tekst i zaznaczyć TAK, NIE lub BI (brak informacji)."
+  text: "Poznawanie zamków, zabytków, jaskiń oraz innych ciekawych przyrodniczo lub krajobrazowo miejsc Jury Krakowsko-Częstochowskiej ma ułatwiać gra planszowa „Podróże po Jurze”. O wydaniu gry poinformował częstochowski urząd miasta. Wydawnictwu patronują Śląska i Małopolska Organizacja Turystyczna oraz Związek Gmin Jurajskich.\n\nCelem gry – oprócz dobrej zabawy, nauki logicznego myślenia i planowania – jest zapoznanie graczy z geografią oraz atrakcjami Jury Krakowsko-Częstochowskiej. Odwiedzając zamki, zabytki, jaskinie oraz inne charakterystyczne miejsca Jury, zdobywa się punkty.\n\nGra zawiera planszę z mapą, na której odwzorowano sieć dróg Jury, pionki-samochodziki, pionki symbolizujące remont drogi, 110 kart z atrakcjami turystycznymi oraz inne elementy służące rozgrywce. W zabawie może wziąć udział od dwóch do sześciu osób – indywidualnie albo też w dwóch lub trzech drużynach.\n\nNakład gry to na razie tysiąc egzemplarzy. Oprócz możliwości zamówienia jej na stronie producenta, ma być ona niebawem dostępna w sprzedaży, np. przy punktach informacji turystycznej na terenie Jury.\n\nChoć to pierwsza tego typu gra, to jest już kolejnym pomysłem promującym Jurę Krakowsko-Częstochowską i tamtejsze produkty turystyczne. Na 22 września br. samorządy woj. śląskiego i małopolskiego przygotowują pierwszą edycję święta Szlaku Orlich Gniazd, które odbędzie się w kilkunastu obiektach i gminach położonych między Krakowem i Częstochową.\n\nWykreowanie Szlaku Orlich Gniazd i święta z nim związanego oraz organizacja festiwalu kultury lokalnej to wspólna strategia rozwoju woj. śląskiego i małopolskiego, przyjęta w obu regionach pięć lat temu.\n\nZ kolei w ostatnich dniach częstochowski samorząd uruchomił internetowy przewodnik dla rowerzystów bramajury.pl. Strona zawiera na razie 30 tras z opisem, przekrojem i śladem GPS (wkrótce mają być też udostępnione w postaci aplikacji mobilnej). Projekt jest rozwojowy: można do niego zgłaszać kolejne, autorskie propozycje tras."
 }
 READING_PASSAGE {
-  passageId: "certyfikat-polski-B2-2020-read-5"
-  examRef: "certyfikat-polski-B2-2020"
+  passageId: certyfikat-polski-B2-2020-read-5
+  examRef: certyfikat-polski-B2-2020
   taskNumber: 5
-  instruction: "Zadanie 5"
+  title: Uniwernast
+  instruction: "Proszę uzupełnić tekst, wybierając najlepszą spośród podanych możliwości."
+  text: "Na ten uniwersytet (wyślesz, prześlesz, przepiszesz, nadasz) [PRZYKŁAD] dzieci jeszcze przed osiemnastką.\n\n„Uniwernast” to program, w ramach którego nastolatki mogą sprawdzić, jak to jest rozwijać swoją wiedzę z [1] nauk ścisłych i przyrodniczych poza szkołą. Idealna alternatywa dla tych, którzy [2] wyprowadzą wzór czy wyuczą się regułki, ale jednocześnie bardzo się przy tym wynudzą. [3] dla nich, w ramach projektu, zadania będą zdecydowanie bardziej kreatywne. Organizator stawia sobie ambitny cel: [4] nastolatków ze specyfiką pracy naukowca.\n\nNa pytanie, czy w realiach polskiej szkoły jest miejsce, aby poznawać, a nie wkuwać, chyba każdy z nas potrafi odpowiedzieć. Dla uczestników programu [5] podstaw analizy danych jest pierwszym zadaniem, z jakim będą musieli sobie poradzić. To jednak dopiero rozgrzewka. Zarejestrowani uczniowie [6] status stażystów tego niestandardowego uniwersytetu i będą otrzymywać różne zadania do wykonania. Tematyka tych łamigłówek będzie [7] chociażby biologię, informatykę czy astrofizykę. Gra rekrutacyjna programu jest wyzwaniem zarówno dla uczestników, jak i dla organizatorów, którzy dbają o jej atrakcyjność i wysoki [8] merytoryczny. Potwierdzają oni, że sukcesu nie [9] tu znajomość spisu treści kilku podręczników, a raczej kreatywne podejście do przedstawionych zagadnień oraz umiejętność łączenia ze sobą [10] nieoczywistych faktów."
 }

@@ -1,0 +1,27 @@
+DSL 1
+ANSWER_ATTEMPT_CASE {
+  id: known-plus-pending
+  exactAnswer: w
+  openAnswer: "Bardzo brakuje mi mamy."
+  exactResponse: w
+  openResponse: "Brakuje mi bardzo mamy."
+  exactMaximumQuarter: 4
+  openMaximumQuarter: 4
+  expectedConfirmedQuarter: 4
+  expectedPendingQuarter: 4
+  expectedPossibleQuarter: 8
+  expectedFinal: false
+}
+ANSWER_ATTEMPT_CASE {
+  id: wrong-plus-known
+  exactAnswer: w
+  openAnswer: "Bardzo brakuje mi mamy."
+  exactResponse: z
+  openResponse: "Bardzo brakuje mi mamy."
+  exactMaximumQuarter: 4
+  openMaximumQuarter: 4
+  expectedConfirmedQuarter: 4
+  expectedPendingQuarter: 0
+  expectedPossibleQuarter: 8
+  expectedFinal: true
+}

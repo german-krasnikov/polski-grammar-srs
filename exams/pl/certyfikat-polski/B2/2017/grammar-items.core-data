@@ -1,153 +1,542 @@
 DSL 1
+# B2/2017 arkusz pp. 15–20; answer key pp. 7–8. First five tasks 0.5/item, last three 1/item.
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2017-g1"
-  testRef: "certyfikat-polski-B2-2017-grammar-2"
-  questionType: fill_gap
-  context: "Zadanie II, pytanie 1"
-  correctAnswer: "W ramce dodatkowo"
-  points: 1
+  itemId: certyfikat-polski-B2-2017-grammar-1-1
+  testRef: certyfikat-polski-B2-2017-grammar-1
+  questionType: choose_form
+  context: " […] w światowych stolicach mody, wchodzą do elitarnego grona projektantów."
+  options: "Mieszkając|Zamieszkane|Mieszkającym"
+  correctAnswer: "Mieszkając"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2017-g2"
-  testRef: "certyfikat-polski-B2-2017-grammar-2"
-  questionType: fill_gap
-  context: "Zadanie II, pytanie 2"
-  correctAnswer: "o"
-  points: 1
+  itemId: certyfikat-polski-B2-2017-grammar-1-2
+  testRef: certyfikat-polski-B2-2017-grammar-1
+  questionType: choose_form
+  context: "Korzystać z doświadczeń […] w swej krótkiej karierze."
+  options: "zdobywających|zdobywając|zdobytych"
+  correctAnswer: zdobytych
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2017-g3"
-  testRef: "certyfikat-polski-B2-2017-grammar-5"
-  questionType: fill_gap
-  context: "Zadanie V, pytanie 3"
-  correctAnswer: "n"
-  points: 1
+  itemId: certyfikat-polski-B2-2017-grammar-1-3
+  testRef: certyfikat-polski-B2-2017-grammar-1
+  questionType: choose_form
+  context: "Prezentowania […] przez siebie kreacji."
+  options: "tworzone|tworzonych|tworzących"
+  correctAnswer: tworzonych
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2017-g4"
-  testRef: "certyfikat-polski-B2-2017-grammar-5"
-  questionType: fill_gap
-  context: "Zadanie V, pytanie 4"
-  correctAnswer: "o"
-  points: 1
+  itemId: certyfikat-polski-B2-2017-grammar-1-4
+  testRef: certyfikat-polski-B2-2017-grammar-1
+  questionType: choose_form
+  context: "[…] wystawy sklepów, możemy stwierdzić, że modne będą rzeczy inspirowane folklorem."
+  options: "Obserwując|Obserwowane|Obserwujące"
+  correctAnswer: "Obserwując"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2017-g5"
-  testRef: "certyfikat-polski-B2-2017-grammar-5"
-  questionType: fill_gap
-  context: "Zadanie V, pytanie 5"
-  correctAnswer: "t"
-  points: 1
+  itemId: certyfikat-polski-B2-2017-grammar-1-5
+  testRef: certyfikat-polski-B2-2017-grammar-1
+  questionType: choose_form
+  context: "Modne będą rzeczy […] folklorem."
+  options: "inspirując|inspirujące|inspirowane"
+  correctAnswer: inspirowane
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2017-g6"
-  testRef: "certyfikat-polski-B2-2017-grammar-5"
-  questionType: fill_gap
-  context: "Zadanie V, pytanie 6"
-  correctAnswer: "r"
-  points: 1
+  itemId: certyfikat-polski-B2-2017-grammar-1-6
+  testRef: certyfikat-polski-B2-2017-grammar-1
+  questionType: choose_form
+  context: "Płaszcze w stylu Anny Kareniny […] przez artystów."
+  options: "wymyślone|wymyślając|wymyśleni"
+  correctAnswer: "wymyślone"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2017-g7"
-  testRef: "certyfikat-polski-B2-2017-grammar-5"
-  questionType: fill_gap
-  context: "Zadanie V, pytanie 7"
-  correctAnswer: "S"
-  points: 1
+  itemId: certyfikat-polski-B2-2017-grammar-1-7
+  testRef: certyfikat-polski-B2-2017-grammar-1
+  questionType: choose_form
+  context: "Polscy projektanci […] po prestiżowe nagrody."
+  options: "sięgające|sięgając|sięgających"
+  correctAnswer: "sięgających"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2017-g8"
-  testRef: "certyfikat-polski-B2-2017-grammar-5"
-  questionType: fill_gap
-  context: "Zadanie V, pytanie 8"
-  correctAnswer: "TEST PRZYKŁADOWY"
-  points: 1
+  itemId: certyfikat-polski-B2-2017-grammar-1-8
+  testRef: certyfikat-polski-B2-2017-grammar-1
+  questionType: choose_form
+  context: "Natchnienie ze słońca […] nad horyzontem."
+  options: "wschodzącego|wschodząc|wschodzące"
+  correctAnswer: "wschodzącego"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2017-g9"
-  testRef: "certyfikat-polski-B2-2017-grammar-5"
-  questionType: fill_gap
-  context: "Zadanie V, pytanie 9"
-  correctAnswer: "B"
-  points: 1
+  itemId: certyfikat-polski-B2-2017-grammar-1-9
+  testRef: certyfikat-polski-B2-2017-grammar-1
+  questionType: choose_form
+  context: "Inni, […] inspiracji, sięgają do kultury."
+  options: "poszukujących|poszukując|poszukiwani"
+  correctAnswer: "poszukując"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2017-g10"
-  testRef: "certyfikat-polski-B2-2017-grammar-5"
-  questionType: fill_gap
-  context: "Zadanie V, pytanie 10"
-  correctAnswer: "TRANSKRYPCJE I KLUCZ DO ZADAŃ"
-  points: 1
+  itemId: certyfikat-polski-B2-2017-grammar-1-10
+  testRef: certyfikat-polski-B2-2017-grammar-1
+  questionType: choose_form
+  context: "Wspomnienia z młodzieńczych lat […] w czasach komunizmu."
+  options: "przeżywających|przeżywając|przeżytych"
+  correctAnswer: "przeżytych"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2017-g11"
-  testRef: "certyfikat-polski-B2-2017-grammar-8"
+  itemId: certyfikat-polski-B2-2017-grammar-2-1
+  testRef: certyfikat-polski-B2-2017-grammar-2
   questionType: fill_gap
-  context: "Zadanie VIII, pytanie 11"
-  correctAnswer: "a"
-  points: 1
+  context: "Kraszewski napisał najwięcej książek […] wszystkich polskich pisarzy."
+  correctAnswer: "spośród"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2017-g12"
-  testRef: "certyfikat-polski-B2-2017-grammar-8"
+  itemId: certyfikat-polski-B2-2017-grammar-2-2
+  testRef: certyfikat-polski-B2-2017-grammar-2
   questionType: fill_gap
-  context: "Zadanie VIII, pytanie 12"
-  correctAnswer: "n"
-  points: 1
+  context: "Miesięcznie produkował […] pięciuset stron maszynopisu."
+  correctAnswer: "około"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2017-g13"
-  testRef: "certyfikat-polski-B2-2017-grammar-8"
+  itemId: certyfikat-polski-B2-2017-grammar-2-3
+  testRef: certyfikat-polski-B2-2017-grammar-2
   questionType: fill_gap
-  context: "Zadanie VIII, pytanie 13"
-  correctAnswer: "o"
-  points: 1
+  context: "Oczywiście […] przeliczeniu na współczesne miary."
+  correctAnswer: w
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2017-g14"
-  testRef: "certyfikat-polski-B2-2017-grammar-8"
+  itemId: certyfikat-polski-B2-2017-grammar-2-4
+  testRef: certyfikat-polski-B2-2017-grammar-2
   questionType: fill_gap
-  context: "Zadanie VIII, pytanie 14"
-  correctAnswer: "r"
-  points: 1
+  context: "[…] współczesne miary."
+  correctAnswer: na
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2017-g15"
-  testRef: "certyfikat-polski-B2-2017-grammar-8"
+  itemId: certyfikat-polski-B2-2017-grammar-2-5
+  testRef: certyfikat-polski-B2-2017-grammar-2
   questionType: fill_gap
-  context: "Zadanie VIII, pytanie 15"
-  correctAnswer: "t"
-  points: 1
+  context: "Pisarz […] pisaniu słuchał muzyki."
+  correctAnswer: przy
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2017-g16"
-  testRef: "certyfikat-polski-B2-2017-grammar-8"
+  itemId: certyfikat-polski-B2-2017-grammar-2-6
+  testRef: certyfikat-polski-B2-2017-grammar-2
   questionType: fill_gap
-  context: "Zadanie VIII, pytanie 16"
-  correctAnswer: "S"
-  points: 1
+  context: "Kraszewski napisał […] sześćset powieści."
+  correctAnswer: ponad
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2017-g17"
-  testRef: "certyfikat-polski-B2-2017-grammar-8"
+  itemId: certyfikat-polski-B2-2017-grammar-2-7
+  testRef: certyfikat-polski-B2-2017-grammar-2
   questionType: fill_gap
-  context: "Zadanie VIII, pytanie 17"
-  correctAnswer: "TEST PRZYKŁADOWY"
-  points: 1
+  context: "Powieści nawiązujących […] historii Polski."
+  correctAnswer: do
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2017-g18"
-  testRef: "certyfikat-polski-B2-2017-grammar-8"
+  itemId: certyfikat-polski-B2-2017-grammar-2-8
+  testRef: certyfikat-polski-B2-2017-grammar-2
   questionType: fill_gap
-  context: "Zadanie VIII, pytanie 18"
-  correctAnswer: "B"
-  points: 1
+  context: "Od czasów najwcześniejszych: […] czasów najwcześniejszych."
+  correctAnswer: od
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2017-g19"
-  testRef: "certyfikat-polski-B2-2017-grammar-8"
+  itemId: certyfikat-polski-B2-2017-grammar-2-9
+  testRef: certyfikat-polski-B2-2017-grammar-2
   questionType: fill_gap
-  context: "Zadanie VIII, pytanie 19"
-  correctAnswer: "TRANSKRYPCJE I KLUCZ DO ZADAŃ"
-  points: 1
+  context: "Od czasów najwcześniejszych […] panowanie Sasów."
+  correctAnswer: po
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2017-grammar-2-10
+  testRef: certyfikat-polski-B2-2017-grammar-2
+  questionType: fill_gap
+  context: "Pisarz, […] tego, prowadził korespondencję."
+  correctAnswer: "oprócz"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2017-grammar-3-1
+  testRef: certyfikat-polski-B2-2017-grammar-3
+  questionType: choose_form
+  context: "Kilka tygodni temu […] budowa Obwodnicy Wrocławia."
+  options: "została zakończona|zakończono|zakończyło się"
+  correctAnswer: "została zakończona"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2017-grammar-3-2
+  testRef: certyfikat-polski-B2-2017-grammar-3
+  questionType: choose_form
+  context: "Niedługo […] nowy stadion miejski."
+  options: "otwarto|zostanie otwarty|otwierano"
+  correctAnswer: "zostanie otwarty"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2017-grammar-3-3
+  testRef: certyfikat-polski-B2-2017-grammar-3
+  questionType: choose_form
+  context: "Już wiele razy […] w czasie termin oddania linii tramwajowej."
+  options: "będzie odkładany|odłoży się|odkładano"
+  correctAnswer: "odkładano"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2017-grammar-3-4
+  testRef: certyfikat-polski-B2-2017-grammar-3
+  questionType: choose_form
+  context: "Obecnie […] że miasto zdąży do marca."
+  options: "mówiono|jest mówione|mówi się"
+  correctAnswer: "mówi się"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2017-grammar-3-5
+  testRef: certyfikat-polski-B2-2017-grammar-3
+  questionType: choose_form
+  context: "Od dwóch lat […] dworzec główny."
+  options: "przebudowano|jest przebudowywany|przebuduje się"
+  correctAnswer: "jest przebudowywany"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2017-grammar-3-6
+  testRef: certyfikat-polski-B2-2017-grammar-3
+  questionType: choose_form
+  context: "Dworzec prawdopodobnie […] do użytku wiosną."
+  options: "zostanie oddany|należy oddać|oddaje się"
+  correctAnswer: "zostanie oddany"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2017-grammar-3-7
+  testRef: certyfikat-polski-B2-2017-grammar-3
+  questionType: choose_form
+  context: "Remonty […] już tyle miesięcy temu."
+  options: "rozpoczęto|rozpocznie się|trzeba rozpoczynać"
+  correctAnswer: "rozpoczęto"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2017-grammar-3-8
+  testRef: certyfikat-polski-B2-2017-grammar-3
+  questionType: choose_form
+  context: "Prace wciąż nie […]."
+  options: "kończy się|zostaną ukończone|zostały ukończone"
+  correctAnswer: "zostały ukończone"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2017-grammar-3-9
+  testRef: certyfikat-polski-B2-2017-grammar-3
+  questionType: choose_form
+  context: "Na organizację imprezy […] tyle pieniędzy."
+  options: "zostały wydane|zostało wydanych|były wydane"
+  correctAnswer: "zostało wydanych"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2017-grammar-3-10
+  testRef: certyfikat-polski-B2-2017-grammar-3
+  questionType: choose_form
+  context: "W przyszłości wszystkie obiekty […] do innych celów."
+  options: "będą wykorzystywane|wykorzystywano|wykorzystuje się"
+  correctAnswer: "będą wykorzystywane"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2017-grammar-4-1
+  testRef: certyfikat-polski-B2-2017-grammar-4
+  questionType: fill_gap
+  context: "Coraz mniej czasu spędzamy z […] (bliski – l.mn.) ludźmi."
+  correctAnswer: bliskimi
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2017-grammar-4-2
+  testRef: certyfikat-polski-B2-2017-grammar-4
+  questionType: fill_gap
+  context: "Z bliskimi […] (człowiek – l.mn.)."
+  correctAnswer: "ludźmi"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2017-grammar-4-3
+  testRef: certyfikat-polski-B2-2017-grammar-4
+  questionType: fill_gap
+  context: "Nie dbamy o […] (zdrowa) dietę."
+  correctAnswer: "zdrową"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2017-grammar-4-4
+  testRef: certyfikat-polski-B2-2017-grammar-4
+  questionType: fill_gap
+  context: "Nie dbamy o zdrową […] (dieta)."
+  correctAnswer: "dietę"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2017-grammar-4-5
+  testRef: certyfikat-polski-B2-2017-grammar-4
+  questionType: fill_gap
+  context: "Bo […] (nikt) nie chce się tracić czasu w kuchni."
+  correctAnswer: nikomu
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2017-grammar-4-6
+  testRef: certyfikat-polski-B2-2017-grammar-4
+  questionType: fill_gap
+  context: "W […] (miasto) można zjeść obiad."
+  correctAnswer: "mieście"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2017-grammar-4-7
+  testRef: certyfikat-polski-B2-2017-grammar-4
+  questionType: fill_gap
+  context: "Wracamy do domu […] (zmęczony)."
+  correctAnswer: "zmęczeni"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2017-grammar-4-8
+  testRef: certyfikat-polski-B2-2017-grammar-4
+  questionType: fill_gap
+  context: "Obiecujemy […] (się), że od jutra zwolnimy."
+  correctAnswer: sobie
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2017-grammar-4-9
+  testRef: certyfikat-polski-B2-2017-grammar-4
+  questionType: fill_gap
+  context: "Ale […] (niektórzy) trudno zrezygnować z wyścigu."
+  correctAnswer: "niektórym"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2017-grammar-4-10
+  testRef: certyfikat-polski-B2-2017-grammar-4
+  questionType: fill_gap
+  context: "Dla części z […] (my) to już ostatni moment."
+  correctAnswer: nas
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2017-grammar-5-1
+  testRef: certyfikat-polski-B2-2017-grammar-5
+  questionType: fill_gap
+  context: "Rodzice chłopca […] (umierać / umrzeć) dawno temu."
+  correctAnswer: umarli
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2017-grammar-5-2
+  testRef: certyfikat-polski-B2-2017-grammar-5
+  questionType: fill_gap
+  context: "Babcia chciała jak najlepiej […] (kształcić / wykształcić) wnuka."
+  correctAnswer: "wykształcić"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2017-grammar-5-3
+  testRef: certyfikat-polski-B2-2017-grammar-5
+  questionType: fill_gap
+  context: "Więc […] (wysyłać / wysłać) go do Poznania."
+  correctAnswer: "wysłała"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2017-grammar-5-4
+  testRef: certyfikat-polski-B2-2017-grammar-5
+  questionType: fill_gap
+  context: "Jerzy przed momentem […] (podchodzić / podejść) do okna."
+  correctAnswer: "podszedł"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2017-grammar-5-5
+  testRef: certyfikat-polski-B2-2017-grammar-5
+  questionType: fill_gap
+  context: "Teraz stał tam i […] (łykać / łyknąć) powietrze."
+  correctAnswer: "łykał"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2017-grammar-5-6
+  testRef: certyfikat-polski-B2-2017-grammar-5
+  questionType: fill_gap
+  context: "Parę osób dosłownie przed chwilą […] (zaczynać / zacząć) się kręcić."
+  correctAnswer: "zaczęło"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2017-grammar-5-7
+  testRef: certyfikat-polski-B2-2017-grammar-5
+  questionType: fill_gap
+  context: "Na zimno Jerzy nie […] (zważać / zważyć)."
+  correctAnswer: "zważał"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2017-grammar-5-8
+  testRef: certyfikat-polski-B2-2017-grammar-5
+  questionType: fill_gap
+  context: "Stał przy oknie i […] (wpatrywać się / wpatrzyć się) w czubek wieżyczki."
+  correctAnswer: "wpatrywał się"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2017-grammar-5-9
+  testRef: certyfikat-polski-B2-2017-grammar-5
+  questionType: fill_gap
+  context: "Choćby nawet […] (wychylać się / wychylić się) z okna."
+  correctAnswer: "wychylił się"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2017-grammar-5-10
+  testRef: certyfikat-polski-B2-2017-grammar-5
+  questionType: fill_gap
+  context: "Co rano po przebudzeniu […] (stawać / stanąć) w oknie."
+  correctAnswer: "stawał"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2017-grammar-6-1
+  testRef: certyfikat-polski-B2-2017-grammar-6
+  questionType: fill_gap
+  context: "Czasami ogarnia mnie wielki […] (smutny)."
+  correctAnswer: smutek
+  pointsQuarter: 4
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2017-grammar-6-2
+  testRef: certyfikat-polski-B2-2017-grammar-6
+  questionType: fill_gap
+  context: "Od czasu […] (rozstać się) z Pawłem."
+  correctAnswer: rozstania
+  pointsQuarter: 4
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2017-grammar-6-3
+  testRef: certyfikat-polski-B2-2017-grammar-6
+  questionType: fill_gap
+  context: "Wszyscy prowadzą […] (rozmawiać)."
+  correctAnswer: rozmowy
+  pointsQuarter: 4
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2017-grammar-6-4
+  testRef: certyfikat-polski-B2-2017-grammar-6
+  questionType: fill_gap
+  context: "Na temat przyczyn naszego […] (rozwodzić się)."
+  correctAnswer: rozwodu
+  pointsQuarter: 4
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2017-grammar-6-5
+  testRef: certyfikat-polski-B2-2017-grammar-6
+  questionType: fill_gap
+  context: "Rośnie we mnie […] (niechętny) do ludzi."
+  correctAnswer: "niechęć"
+  pointsQuarter: 4
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2017-grammar-7-1
+  testRef: certyfikat-polski-B2-2017-grammar-7
+  questionType: fill_gap
+  context: "Promocje […] (4) płyt."
+  correctAnswer: czterech
+  pointsQuarter: 4
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2017-grammar-7-2
+  testRef: certyfikat-polski-B2-2017-grammar-7
+  questionType: fill_gap
+  context: "Mieszkam z mężem i […] (2) dzieci."
+  correctAnswer: "dwójką"
+  pointsQuarter: 4
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2017-grammar-7-3
+  testRef: certyfikat-polski-B2-2017-grammar-7
+  questionType: fill_gap
+  context: "W odległości […] (9) mil od Dublina."
+  correctAnswer: "dziewięciu"
+  pointsQuarter: 4
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2017-grammar-7-4
+  testRef: certyfikat-polski-B2-2017-grammar-7
+  questionType: fill_gap
+  context: "Mam pod […] (1) dachem muzykę i życie prywatne."
+  correctAnswer: jednym
+  pointsQuarter: 4
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2017-grammar-7-5
+  testRef: certyfikat-polski-B2-2017-grammar-7
+  questionType: fill_gap
+  context: "W tym roku skończę […] (30) lat."
+  correctAnswer: "trzydzieści"
+  pointsQuarter: 4
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2017-grammar-8-1
+  testRef: certyfikat-polski-B2-2017-grammar-8
+  questionType: fill_gap
+  context: "Policja zajęła […] (wysoki / wysoko) od lat pozycję."
+  correctAnswer: "najwyższą"
+  pointsQuarter: 4
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2017-grammar-8-2
+  testRef: certyfikat-polski-B2-2017-grammar-8
+  questionType: fill_gap
+  context: "Coraz […] (mały / mało) jest Polaków bez zaufania."
+  correctAnswer: mniej
+  pointsQuarter: 4
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2017-grammar-8-3
+  testRef: certyfikat-polski-B2-2017-grammar-8
+  questionType: fill_gap
+  context: "Strażacy są znacznie […] (odważny / odważnie) od nas."
+  correctAnswer: "odważniejsi"
+  pointsQuarter: 4
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2017-grammar-8-4
+  testRef: certyfikat-polski-B2-2017-grammar-8
+  questionType: fill_gap
+  context: "Zjawiają się na wezwanie […] (szybki / szybko) ze wszystkich służb."
+  correctAnswer: najszybciej
+  pointsQuarter: 4
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2017-grammar-8-5
+  testRef: certyfikat-polski-B2-2017-grammar-8
+  questionType: fill_gap
+  context: "Nasze życie staje się […] (lekki / lekko)."
+  correctAnswer: "lżejsze"
+  pointsQuarter: 4
 }

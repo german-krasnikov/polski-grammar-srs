@@ -1,0 +1,12 @@
+TEST "B1 2019 open transformation remains pending manual review" PROFILE playmode
+  open exam="B1 Certyfikat 2019" module="grammar"
+  advance count=35
+  ASSERT grammar.context == "Bardzo tęsknię za mamą. Użyj słowa „brakuje” i napisz zdanie o tym samym znaczeniu: ___."
+  enter text="Bardzo mi brakuje mojej mamy."
+  ASSERT exam.input == "Bardzo mi brakuje mojej mamy."
+  advance count=19
+  submit
+  ASSERT exam.score == "Подтверждено: 0 / 30"
+  ASSERT exam.scoreDetail == "Ожидает проверки: 1"
+  ASSERT grammar.manualReviewCount == 1
+END

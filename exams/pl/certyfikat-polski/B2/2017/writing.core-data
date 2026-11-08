@@ -1,10 +1,64 @@
 DSL 1
+# Arkusz B2/2017, p. 22: choose one of three sets, complete both tasks.
 WRITING_TASK {
-  taskId: "certyfikat-polski-B2-2017-writing-1"
-  examRef: "certyfikat-polski-B2-2017"
+  taskId: certyfikat-polski-B2-2017-writing-I-1
+  examRef: certyfikat-polski-B2-2017
   taskNumber: 1
-  instruction: "Zestaw I"
-  promptText: "Prosze wykonac zadanie pisemne zgodnie z poleceniem."
-  wordLimit: 200
-  genre: letter
+  setId: I
+  instruction: "Zestaw I, zadanie a. 20 słów."
+  promptText: "Pani / Pana szef obchodzi jubileusz pracy zawodowej. Proszę napisać życzenia z tej okazji."
+  wordLimit: 20
+  genre: wishes
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2017-writing-I-2
+  examRef: certyfikat-polski-B2-2017
+  taskNumber: 2
+  setId: I
+  instruction: "Zestaw I, zadanie b. 280 słów."
+  promptText: "Proszę napisać esej na temat: „Dorośli a młodzież”."
+  wordLimit: 280
+  genre: essay
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2017-writing-II-1
+  examRef: certyfikat-polski-B2-2017
+  taskNumber: 1
+  setId: II
+  instruction: "Zestaw II, zadanie a. 120 słów."
+  promptText: "Proszę napisać e-mail do koleżanki / kolegi o sukcesach w pracy."
+  wordLimit: 120
+  genre: email
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2017-writing-II-2
+  examRef: certyfikat-polski-B2-2017
+  taskNumber: 2
+  setId: II
+  instruction: "Zestaw II, zadanie b. 180 słów."
+  promptText: "Proszę napisać recenzję wybranego serialu lub filmu."
+  wordLimit: 180
+  genre: review
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2017-writing-III-1
+  examRef: certyfikat-polski-B2-2017
+  taskNumber: 1
+  setId: III
+  instruction: "Zestaw III, zadanie a. 60 słów."
+  promptText: "Proszę napisać tekst reklamujący kurs tańca dla dorosłych."
+  wordLimit: 60
+  genre: advertisement
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2017-writing-III-2
+  examRef: certyfikat-polski-B2-2017
+  taskNumber: 2
+  setId: III
+  instruction: "Zestaw III, zadanie b. 240 słów."
+  promptText: "„Język polski nas połączył”. Proszę napisać opowiadanie zainspirowane poniższym zdjęciem."
+  promptImageUrl: exam-images/B2-2017-writing-III-b.jpeg
+  promptImageAlt: "Grupa uśmiechniętych ludzi różnych narodowości wspólnie świętuje."
+  wordLimit: 240
+  genre: story
 }

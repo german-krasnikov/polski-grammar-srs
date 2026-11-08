@@ -2,6 +2,7 @@ import { expect, test } from '@playwright/test';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { continueIntroductionIfPresent } from './kotlin-introduction';
+import { progressAsLegacyShape } from './polski-text';
 
 const previewKey = 'polski-grammar-srs-kmp-preview-v1';
 type ReviewFixture = {
@@ -16,7 +17,7 @@ const fixtureFile = JSON.parse(readFileSync(resolve('tests/fixtures/kotlin-parit
 
 for (const id of ['P-oral-good', 'P-typed-wrong']) {
   const fixture = fixtureFile.cases.find(entry => entry.id === id)!;
-  test(`${id} matches the current React progress fixture after one review`, async ({ browser }) => {
+  test(`${id} matches the frozen progress fixture after one review`, async ({ browser }) => {
     const context = await browser.newContext({ locale: 'pl-PL', timezoneId: fixture.context.timeZone });
     try {
       const page = await context.newPage();
@@ -44,15 +45,15 @@ for (const id of ['P-oral-good', 'P-typed-wrong']) {
       }
       await page.getByRole('button', { name: /Показать ответ|Проверить и показать ответ/ }).click();
       await page.getByRole('button', { name: /2 Вспомнил/ }).click();
-      await expect.poll(() => page.evaluate(key => JSON.parse(localStorage.getItem(key) ?? '{}').totalReviews, previewKey)).toBe(1);
-      const actual = await page.evaluate(key => JSON.parse(localStorage.getItem(key)!), previewKey);
+      await expect.poll(async () => progressAsLegacyShape((await page.evaluate(key => localStorage.getItem(key), previewKey))!).totalReviews).toBe(1);
+      const actual = progressAsLegacyShape((await page.evaluate(key => localStorage.getItem(key), previewKey))!);
       expect(actual).toEqual(fixture.expected);
       await page.reload();
       await continueIntroductionIfPresent(page);
       await expect(page.getByRole('button', { name: 'Показать ответ' })).toBeVisible();
       await page.getByRole('button', { name: 'Прогресс' }).click();
       await expect(page.locator('.bigstats')).toContainText('1');
-      expect(await page.evaluate(key => JSON.parse(localStorage.getItem(key)!), previewKey)).toEqual(fixture.expected);
+      expect(progressAsLegacyShape((await page.evaluate(key => localStorage.getItem(key), previewKey))!)).toEqual(fixture.expected);
     } finally {
       await context.close();
     }

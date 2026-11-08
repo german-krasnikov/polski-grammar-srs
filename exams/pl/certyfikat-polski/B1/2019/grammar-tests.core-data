@@ -1,49 +1,49 @@
 DSL 1
 GRAMMAR_TEST {
-  testId: "B1-2019-grammar-1"
-  examRef: "certyfikat-polski-B1-2019"
+  testId: B1-2019-grammar-1
+  examRef: certyfikat-polski-B1-2019
   taskNumber: 1
-  instruction: "Prosze podkreslic poprawne formy wyrazow podanych w nawiasach (odmiana rzeczownikow, przymiotnikow i zaimkow)."
+  instruction: "Podkreśl poprawne formy wyrazów w nawiasach (odmiana rzeczowników, przymiotników i zaimków). (10 × 0,5 p.)"
 }
 GRAMMAR_TEST {
-  testId: "B1-2019-grammar-2"
-  examRef: "certyfikat-polski-B1-2019"
+  testId: B1-2019-grammar-2
+  examRef: certyfikat-polski-B1-2019
   taskNumber: 2
-  instruction: "Prosze uzupelnic zdania wyrazami z ramki (wskazniki zespolenia)."
+  instruction: "Uzupełnij zdania wyrazami z ramki: ponieważ, jeśli, czy, żeby, którzy, że, lecz. Jeden wyraz jest niepotrzebny. (5 × 0,5 p.)"
 }
 GRAMMAR_TEST {
-  testId: "B1-2019-grammar-3"
-  examRef: "certyfikat-polski-B1-2019"
+  testId: B1-2019-grammar-3
+  examRef: certyfikat-polski-B1-2019
   taskNumber: 3
-  instruction: "Prosze podkreslic poprawne formy wyrazow podanych w nawiasach (stopniowanie przymiotnikow i przyslowkow)."
+  instruction: "Podkreśl poprawne formy wyrazów w nawiasach (stopniowanie przymiotników i przysłówków). (5 × 0,5 p.)"
 }
 GRAMMAR_TEST {
-  testId: "B1-2019-grammar-4"
-  examRef: "certyfikat-polski-B1-2019"
+  testId: B1-2019-grammar-4
+  examRef: certyfikat-polski-B1-2019
   taskNumber: 4
-  instruction: "Prosze uzupelnic tekst poprawnymi formami wyrazow podanych w nawiasach (czas terazniejszy i przeszly)."
+  instruction: "Uzupełnij tekst poprawnymi formami wyrazów w nawiasach (czas teraźniejszy i przeszły). (10 × 0,5 p.)"
 }
 GRAMMAR_TEST {
-  testId: "B1-2019-grammar-5"
-  examRef: "certyfikat-polski-B1-2019"
+  testId: B1-2019-grammar-5
+  examRef: certyfikat-polski-B1-2019
   taskNumber: 5
-  instruction: "Prosze zapytac o podkreslona czesc zdania."
+  instruction: "Zapytaj o podkreśloną część zdania. (5 × 0,5 p.)"
 }
 GRAMMAR_TEST {
-  testId: "B1-2019-grammar-6"
-  examRef: "certyfikat-polski-B1-2019"
+  testId: B1-2019-grammar-6
+  examRef: certyfikat-polski-B1-2019
   taskNumber: 6
-  instruction: "Prosze uzyc wyrazu w nawiasie i przeksztalcic zdanie tak, by mialo ten sam sens."
+  instruction: "Użyj wyrazu w nawiasie i przekształć zdanie tak, by miało ten sam sens. (5 × 1 p.)"
 }
 GRAMMAR_TEST {
-  testId: "B1-2019-grammar-7"
-  examRef: "certyfikat-polski-B1-2019"
+  testId: B1-2019-grammar-7
+  examRef: certyfikat-polski-B1-2019
   taskNumber: 7
-  instruction: "Prosze podkreslic poprawna forme wyrazow podanych w nawiasach (aspekt i tryby)."
+  instruction: "Podkreśl poprawne formy wyrazów w nawiasach (aspekt i tryby). (10 × 0,5 p.)"
 }
 GRAMMAR_TEST {
-  testId: "B1-2019-grammar-8"
-  examRef: "certyfikat-polski-B1-2019"
+  testId: B1-2019-grammar-8
+  examRef: certyfikat-polski-B1-2019
   taskNumber: 8
-  instruction: "Prosze uzupelnic zdania wyrazami z ramki (przyimki)."
+  instruction: "Uzupełnij zdania wyrazami z ramki: bez, między, za, przez, w, około, oprócz. Jeden wyraz jest niepotrzebny. (5 × 0,5 p.)"
 }

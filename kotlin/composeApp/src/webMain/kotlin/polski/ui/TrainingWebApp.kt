@@ -22,6 +22,7 @@ import org.w3c.dom.HTMLDivElement
 import org.w3c.dom.HTMLElement
 import org.w3c.dom.HTMLSelectElement
 import org.w3c.dom.HTMLTextAreaElement
+import org.w3c.dom.HTMLInputElement
 import org.w3c.dom.events.Event
 import org.w3c.dom.events.KeyboardEvent
 import kotlin.random.Random
@@ -401,6 +402,20 @@ private class TrainingDomRenderer {
             previous = state
             return // Keep the live textarea, selection and IME composition intact.
         }
+        if (route == WebRoute.Exam && old != null && previousRoute == route &&
+            previousPreferences == preferences.value && previousStatus == preferences.status && !slider.isPending() &&
+            old.copy(
+                progress = state.progress, dueCount = state.dueCount, todayCount = state.todayCount,
+                nextDue = state.nextDue, intervals = state.intervals, now = state.now, localDay = state.localDay,
+            ) == state
+        ) {
+            // The exam controller owns its live editor. Clock/focus refreshes update the header
+            // without replacing that editor, which would interrupt typing and IME composition.
+            root.querySelector(".topstats div:first-child b")?.textContent = state.dueCount.toString()
+            root.querySelector(".topstats div:nth-child(2) b")?.textContent = state.todayCount.toString()
+            previous = state
+            return
+        }
         if (composing && old != null && previousRoute == route && previousPreferences == preferences.value && old.exerciseId == state.exerciseId && old.phase == CardPhase.Question) {
             previous = state
             return // A timer/visibility refresh must not replace an active IME editor.
@@ -408,8 +423,14 @@ private class TrainingDomRenderer {
         val focusId = (document.activeElement as? HTMLElement)?.id.orEmpty()
         // A rebuild always recreates the focused element, so caret and selection would otherwise
         // reset to the end of the text every time (e.g. the periodic RefreshTime timer).
-        val focusedTextArea = document.activeElement as? HTMLTextAreaElement
-        val focusedSelection = focusedTextArea?.let { Triple(it.selectionStart, it.selectionEnd, it.scrollTop) }
+        val focusedEditor = document.activeElement as? HTMLElement
+        val focusedSelection = when (focusedEditor) {
+            is HTMLTextAreaElement -> Triple(focusedEditor.selectionStart, focusedEditor.selectionEnd, focusedEditor.scrollTop)
+            is HTMLInputElement -> if (focusedEditor.type in setOf("text", "search", "tel", "url", "password")) {
+                Triple(focusedEditor.selectionStart, focusedEditor.selectionEnd, focusedEditor.scrollTop)
+            } else null
+            else -> null
+        }
         val scroll = root.scrollTop
         val innerScroll = root.querySelectorAll("[data-scroll-key]")
         val scrollPositions = buildMap {
@@ -467,6 +488,15 @@ private class TrainingDomRenderer {
             if (restoredFocus == null) return
             restoredFocus.focus()
             if (restoredFocus is HTMLTextAreaElement && focusedSelection != null) {
+                val (start, end, scrollTop) = focusedSelection
+                val length = restoredFocus.value.length
+                restoredFocus.selectionStart = start?.coerceAtMost(length)
+                restoredFocus.selectionEnd = end?.coerceAtMost(length)
+                restoredFocus.scrollTop = scrollTop
+            }
+            if (restoredFocus is HTMLInputElement &&
+                restoredFocus.type in setOf("text", "search", "tel", "url", "password") && focusedSelection != null
+            ) {
                 val (start, end, scrollTop) = focusedSelection
                 val length = restoredFocus.value.length
                 restoredFocus.selectionStart = start?.coerceAtMost(length)

@@ -1,67 +1,35 @@
 import { expect, test } from '@playwright/test';
-import { resolve } from 'node:path';
-import { createServer, type ViteDevServer } from 'vite';
 import { continueIntroductionIfPresent } from './kotlin-introduction';
+import { progressAsLegacyShape } from './polski-text';
 
 const kotlinKey = 'polski-grammar-srs-kmp-preview-v1';
-const reactKey = 'polski-grammar-srs-v1';
 const at = new Date('2026-09-23T12:00:00.000Z');
-let reactServer: ViteDevServer;
-let reactBaseUrl: string;
 
-test.beforeAll(async () => {
-  reactServer = await createServer({ configFile: resolve('vite.config.ts'), server: { host: '127.0.0.1', port: 0 } });
-  await reactServer.listen();
-  reactBaseUrl = reactServer.resolvedUrls!.local[0];
-});
+for (const rating of [
+  { label: 'Повторить', due: '2026-09-23T12:01:00.000Z', correct: 0, mistakes: 1 },
+  { label: 'Вспомнил', due: '2026-09-23T12:10:00.000Z', correct: 1, mistakes: 0 },
+]) {
+  test(`P05 Kotlin persists the pinned first oral ${rating.label} review`, async ({ page }) => {
+    await page.clock.install({ time: at });
+    await page.clock.setFixedTime(at);
+    await page.goto('/');
+    await continueIntroductionIfPresent(page);
+    await page.getByRole('button', { name: /Показать ответ/ }).click();
+    await page.getByRole('button', { name: new RegExp(rating.label) }).click();
 
-test.afterAll(async () => {
-  await reactServer?.close();
-});
-
-for (const label of ['Повторить', 'Вспомнил']) {
-  test(`P05 React and Kotlin persist the same first oral ${label} review`, async ({ page, browser }) => {
-    if (process.env.KOTLIN_SPIKE_BRANCH === 'js') {
-      await page.addInitScript(() => {
-        const validate = WebAssembly.validate;
-        WebAssembly.validate = function (bytes: BufferSource): boolean {
-          if (bytes instanceof Uint8Array && bytes.length < 200 && bytes[0] === 0 && bytes[1] === 97) return false;
-          return validate.call(WebAssembly, bytes);
-        };
-      });
-    }
-    const reactContext = await browser.newContext({ locale: 'pl-PL', timezoneId: 'Europe/Warsaw' });
-    try {
-      const react = await reactContext.newPage();
-      await Promise.all([page.clock.install({ time: at }), react.clock.install({ time: at })]);
-      await Promise.all([page.clock.setFixedTime(at), react.clock.setFixedTime(at)]);
-      await Promise.all([page.goto('/'), react.goto(reactBaseUrl)]);
-      for (const current of [page, react]) {
-        await continueIntroductionIfPresent(current);
-        await current.getByRole('button', { name: /Показать ответ/ }).click();
-        await current.getByRole('button', { name: new RegExp(label) }).click();
-      }
-      await expect.poll(() => page.evaluate(key => JSON.parse(localStorage.getItem(key) ?? '{}').totalReviews, kotlinKey)).toBe(1);
-      await expect.poll(() => react.evaluate(key => JSON.parse(localStorage.getItem(key) ?? '{}').totalReviews, reactKey)).toBe(1);
-      const kotlinProgress = await page.evaluate(key => JSON.parse(localStorage.getItem(key)!), kotlinKey);
-      const reactProgress = await react.evaluate(key => JSON.parse(localStorage.getItem(key)!), reactKey);
-      expect(kotlinProgress).toEqual(reactProgress);
-    } finally {
-      await reactContext.close();
-    }
+    await expect.poll(async () => progressAsLegacyShape((await page.evaluate(key => localStorage.getItem(key), kotlinKey))!).totalReviews).toBe(1);
+    const progress = progressAsLegacyShape((await page.evaluate(key => localStorage.getItem(key), kotlinKey))!);
+    expect(progress.reviewsToday).toBe(1);
+    expect(progress.lastDay).toBe('2026-09-23');
+    const card = (progress.cards as Array<{ skillId: string; card: Record<string, unknown> }>).find(entry => entry.skillId === 'case.acc.f')!;
+    expect(card.card).toMatchObject({ due: rating.due, reps: 1, last_review: at.toISOString() });
+    expect((progress.stats as Record<string, unknown>)['case.acc.f']).toMatchObject({
+      reviews: 1, correct: rating.correct, mistakes: rating.mistakes,
+    });
   });
 }
 
 test('P05 a second rating shortcut cannot review the next hidden card', async ({ page }) => {
-  if (process.env.KOTLIN_SPIKE_BRANCH === 'js') {
-    await page.addInitScript(() => {
-      const validate = WebAssembly.validate;
-      WebAssembly.validate = function (bytes: BufferSource): boolean {
-        if (bytes instanceof Uint8Array && bytes.length < 200 && bytes[0] === 0 && bytes[1] === 97) return false;
-        return validate.call(WebAssembly, bytes);
-      };
-    });
-  }
   await page.goto('/');
   await continueIntroductionIfPresent(page);
   await page.getByRole('button', { name: 'Показать ответ' }).click();
@@ -69,5 +37,5 @@ test('P05 a second rating shortcut cannot review the next hidden card', async ({
   await page.keyboard.press('2');
   await expect(page.locator('.card-meta')).toContainText('Цепочка · 2 / 5');
   await expect(page.locator('.answer-sentence')).toHaveCount(0);
-  await expect.poll(() => page.evaluate(key => JSON.parse(localStorage.getItem(key) ?? '{}').totalReviews, kotlinKey)).toBe(1);
+  await expect.poll(async () => progressAsLegacyShape((await page.evaluate(key => localStorage.getItem(key), kotlinKey))!).totalReviews).toBe(1);
 });

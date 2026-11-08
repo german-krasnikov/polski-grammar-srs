@@ -1,49 +1,50 @@
 DSL 1
+# B2/2020 arkusz pp. 18–24; eight tasks, 40 points.
 GRAMMAR_TEST {
-  testId: "certyfikat-polski-B2-2020-grammar-1"
-  examRef: "certyfikat-polski-B2-2020"
+  testId: certyfikat-polski-B2-2020-grammar-1
+  examRef: certyfikat-polski-B2-2020
   taskNumber: 1
-  instruction: "Zadanie 1"
+  instruction: "Proszę podkreślić poprawne formy wyrazów podanych w nawiasach (imiesłowy).\n\nNajwiększy wpływ na powstawanie smogu w Polsce mają zanieczyszczenia pochodzące z pieców zamontowanych w domach jednorodzinnych. Dążąc do poprawy stanu powietrza, musimy zadbać o ich wymianę. [1] źródło ciepła, każdy powinien się postarać, by [2] przez nie zanieczyszczenia szkodziły środowisku w jak najmniejszym stopniu i nie pogłębiały zjawiska smogu [3] zagrożenie dla ludzi. Niestety, niektóre polskie miasta jeszcze niedawno przodowały w rankingach najbardziej [4] miejscowości w Europie.\n\nW Polsce [5] paliwem używanym do ogrzewania nadal pozostaje węgiel, nierzadko ten o bardzo słabej jakości. Duży problem, i to mimo zagrożenia wysokimi karami, stanowią śmieci [6] w piecach, a [7] do atmosfery bardzo szkodliwe związki. [8] przez nie choroby i dolegliwości są coraz częstsze i uciążliwe dla wszystkich. [9] więc ze starych nieekologicznych pieców, uwalniamy powietrze od [10] w nim cząstek różnych substancji toksycznych."
 }
 GRAMMAR_TEST {
-  testId: "certyfikat-polski-B2-2020-grammar-2"
-  examRef: "certyfikat-polski-B2-2020"
+  testId: certyfikat-polski-B2-2020-grammar-2
+  examRef: certyfikat-polski-B2-2020
   taskNumber: 2
-  instruction: "Zadanie 2"
+  instruction: "Proszę uzupełnić tekst wyrazami z ramki. Każdego wyrazu można użyć tylko raz, dwa są zbędne. Ramka: dla, dzięki, na, na, o, od, do, przy, u, w, wokół, wbrew, za.\n\n„Lejesz miód na moje serce!” – wołamy, by wyrazić zadowolenie, choćby w sytuacji, gdy ktoś dobrze mówi [1] nasz temat. Nie wzięło się to znikąd, bo przecież miód jest uważany za doskonały naturalny lek [2] chorych na serce i dotyczy to wszystkich potencjalnych pacjentów – [3] tych najmłodszych [4] najstarszych.\n\nJuż dawno [5] nami ostatnia niedziela września, a to właśnie [6] tym dniu obchodzimy Światowy Dzień Serca. Ale przecież [7] serce należy dbać codziennie, dlatego warto wiedzieć, że miód nostrzykowy pomaga [8] nadciśnieniu, migrenie i nerwobólach. Nasze kości natomiast wzmocni miód gryczany, polecany szczególnie osobom, [9] których wystąpiły złamania. Ta odmiana przyspiesza też gojenie ran, a [10] zawartości rutyny dodatkowo spowalnia miażdżycę i łagodzi chorobę wieńcową."
 }
 GRAMMAR_TEST {
-  testId: "certyfikat-polski-B2-2020-grammar-3"
-  examRef: "certyfikat-polski-B2-2020"
+  testId: certyfikat-polski-B2-2020-grammar-3
+  examRef: certyfikat-polski-B2-2020
   taskNumber: 3
-  instruction: "Zadanie 3"
+  instruction: "Proszę podkreślić poprawną formę wyrazów podanych w nawiasach (formy nieosobowe i strona bierna).\n\nNiedawno oddano do użytku zabytkową kamienicę przy ulicy Kilińskiego w Łodzi. Choć początkowo zakładano, że koszt remontu wyniesie trzy miliony, aktualnie wylicza się, że przekroczył cztery miliony. Budynek [1] od grudnia 2018 roku. Przed modernizacją w kamienicy znajdowało się jedenaście mieszkań, jednak podczas remontu ich liczba [2] i pozostało tylko siedem lokali. Dzięki renowacji kamienicę w końcu [3] do dawnego stanu.\n\nObecnie podczas odnawiania zabytkowych obiektów coraz częściej [4] uwagę na historyczne szczegóły – dlatego na jednej z elewacji [5] zachować mural przedstawiający ogromne serce. Niebawem na fasadzie kamienicy [6] iluminacja. – Nie zapominamy też o innych mieszkańcach tego domu. W ubiegłym tygodniu na jego ścianach [7] budki dla różnych gatunków ptaków – chwalą się władze Łodzi.\n\nW przyjętym na następny rok budżecie miasta już [8] środki na remont dwóch kolejnych kamienic przy ul. Kilińskiego. Dzięki finansowaniu podobnych inwestycji [9] rewitalizacja całych obszarów miasta. To dobrze, ponieważ w ostatnich latach zbyt często [10] o komforcie życia zwykłych mieszkańców, stawiając przede wszystkim na rozwój biznesu."
 }
 GRAMMAR_TEST {
-  testId: "certyfikat-polski-B2-2020-grammar-4"
-  examRef: "certyfikat-polski-B2-2020"
+  testId: certyfikat-polski-B2-2020-grammar-4
+  examRef: certyfikat-polski-B2-2020
   taskNumber: 4
-  instruction: "Zadanie 4"
+  instruction: "Proszę uzupełnić tekst poprawnymi formami wyrazów podanych w nawiasach (odmiana rzeczowników, przymiotników i zaimków).\n\nW języku polskim osioł kojarzy się z tym, co negatywne: mówimy „uparty jak osioł” czy „osioł do kwadratu” (jeśli uważamy, że ktoś jest bardzo głupi).\n\nJednak nie wszędzie osioł cieszy się złą sławą – na przykład [1] (Meksykanin) co roku w maju obchodzą Dzień [2] (Osioł). W ten sposób ludzie dziękują [3] (to) [4] (zwierzę) za ich ciężką pracę. [5] (Główny) [6] (bohater) w dniu swojego święta noszą barwne stroje, nakrycia głowy, a nawet mają makijaż. Na [7] (wszyscy) [8] (właściciel) osiołków biorących udział w imprezie czeka natomiast poczęstunek oraz pulque – niskoalkoholowy, musujący napój. I [9] (nikt) nie przyjdzie do głowy powiedzieć o [10] (ktokolwiek) „osioł do kwadratu” – to zwierzę otoczone jest w Meksyku naprawdę dużym szacunkiem."
 }
 GRAMMAR_TEST {
-  testId: "certyfikat-polski-B2-2020-grammar-5"
-  examRef: "certyfikat-polski-B2-2020"
+  testId: certyfikat-polski-B2-2020-grammar-5
+  examRef: certyfikat-polski-B2-2020
   taskNumber: 5
-  instruction: "Zadanie 5"
+  instruction: "Proszę uzupełnić tekst poprawnymi formami wyrazów podanych w nawiasach (aspekt oraz czas przeszły i przyszły).\n\nJuż za kilka tygodni ruszy Festiwal Tajemnic w Zamku Książ. Wczoraj organizatorzy ogłosili długo wyczekiwany program tego wydarzenia.\n\nCo ostatecznie [1] (widzieć/zobaczyć) goście, którzy za kilkadziesiąt dni zdecydują się [2] (wybierać/wybrać) na wycieczkę do Zamku Książ?\n\nWystawa wynalazków Leonarda da Vinci czy wirtualny spacer po transatlantyku Piłsudski – to tylko niektóre spośród licznych atrakcji, które już niedługo organizatorzy [3] (zaczynać/zacząć) udostępniać zwiedzającym. Ale to nie koniec niespodzianek. Przez kilka minionych miesięcy pomysłodawcy festiwalu [4] (starać się/postarać się) nawiązywać kontakty z ekspertami, którzy mogliby wprowadzić zwiedzających w świat tajemnic. Dzięki ich wysiłkom zaproszenie [5] (przyjmować/przyjąć) między innymi dziennikarz i odkrywca Jacek Podemski, który zapowiedział, że [6] (opowiadać/opowiedzieć) pokrótce gościom o Czarnobylu. Oprócz niego przez cały czas trwania imprezy lekarze z Zakładu Medycyny Sądowej [7] (wprowadzać/wprowadzić) chętnych w mroczny świat narzędzi zbrodni i preparatów anatomicznych. To prawdziwa okazja, bo do tej pory wystawa ta rzadko [8] (opuszczać/opuścić) mury Muzeum Zakładu Medycyny Sądowej.\n\nPodczas poprzednich edycji odwiedzający zawsze chętnie [9] (korzystać/skorzystać) też z możliwości zwiedzenia samego Zamku Książ, uznawanego za jeden z najbardziej tajemniczych obiektów na Starym Kontynencie. Wyobraźnię wielbicieli legend, tajemnic i teorii spiskowych do dziś pobudza fakt, że w 1941 roku niemiecka organizacja Todt [10] (podejmować/podjąć) próbę przekształcenia budowli w jedną z kwater Adolfa Hitlera."
 }
 GRAMMAR_TEST {
-  testId: "certyfikat-polski-B2-2020-grammar-6"
-  examRef: "certyfikat-polski-B2-2020"
+  testId: certyfikat-polski-B2-2020-grammar-6
+  examRef: certyfikat-polski-B2-2020
   taskNumber: 6
-  instruction: "Zadanie 6"
+  instruction: "Proszę podkreślić poprawne formy wyrazów podanych w nawiasach (odmiana liczebników i rzeczowników).\n\nW domu państwa Oleksów od dziesięciu lat na honorowym miejscu wisi srebrny medal, który otrzymali od Ministra Obrony Narodowej.\n\n– Nagrodę przyznawano tym rodzinom, których przynajmniej [1] [2] wzorowo odbyli służbę wojskową. Złoty medal natomiast otrzymywali ci, którzy wojsku oddali aż [3] [4] – tłumaczy major Wojaczek.\n\nPaństwo Oleksowie nigdy nie liczyli na nagrodę, ale do dziś są z niej bardzo dumni – w Jastrzębiu podobne wyróżnienie przyznano tylko [5] [6]. Choć służba synów dawno już się zakończyła, matka chłopców doskonale pamięta, że każde odwiedziny w jednostce wojskowej oznaczały spędzenie [7] [8] w kuchni. – Za każdym razem ruszałam z wizytą do synów chyba z [9] [10] domowego jedzenia – wspomina ze śmiechem pani Oleksy."
 }
 GRAMMAR_TEST {
-  testId: "certyfikat-polski-B2-2020-grammar-7"
-  examRef: "certyfikat-polski-B2-2020"
+  testId: certyfikat-polski-B2-2020-grammar-7
+  examRef: certyfikat-polski-B2-2020
   taskNumber: 7
-  instruction: "Zadanie 7"
+  instruction: "Proszę uzupełnić tekst odpowiednimi formami wyrazów podanych w nawiasach (stopniowanie przymiotników i przysłówków).\n\nPolski klimat jest coraz bardziej zmienny, a temperatury rosną najbardziej dynamicznie od lat.\n\nSusza, ekstremalne zjawiska pogodowe, coraz [1] (dużo) szkodników roślin, [2] (częsty) niż w dawnych czasach przypadki martwych ryb w rzekach i jeziorach – to możliwe skutki zmian klimatycznych w Polsce. Zdaniem niektórych naukowców 2018 był [3] (gorący) rokiem w całej ostatniej dekadzie.\n\nW porównaniu z czasami sprzed rewolucji przemysłowej średnie temperatury na Ziemi są [4] (wysoki) o 1 stopień Celsjusza. O postępującym ociepleniu klimatu świadczą zjawiska pogodowe, np. susze i pustynnienie albo ulewne deszcze i powodzie – obecnie [5] (gwałtowny) na przestrzeni kilku dziesięcioleci. Z każdym rokiem [6] (ciepły) stają się morza i oceany.\n\nCoraz [7] (szybko) rosnące temperatury powodują przykre konsekwencje dla ludzi – musimy przyzwyczaić się do [8] (zły) niż kiedyś samopoczucia, a także nauczyć się radzić sobie ze skutkami zmian klimatycznych.\n\nFale upałów oraz [9] (łagodny) niż dawniej zimy mają również wpływ na świat roślin i zwierząt. „[10] (Wcześnie) nie mieliśmy np. do czynienia z tak dużą aktywnością owadów” – mówi dr Tończyk."
 }
 GRAMMAR_TEST {
-  testId: "certyfikat-polski-B2-2020-grammar-8"
-  examRef: "certyfikat-polski-B2-2020"
+  testId: certyfikat-polski-B2-2020-grammar-8
+  examRef: certyfikat-polski-B2-2020
   taskNumber: 8
-  instruction: "Zadanie 8"
+  instruction: "Proszę użyć wyrazu podanego w nawiasie i przekształcić zdanie bez zmiany sensu (zdanie złożone → pojedyncze).\n\nPrzykład: Kiedy skończył studia, przeniósł się do Wrocławia. (po) → Po skończeniu studiów przeniósł się do Wrocławia.\n\n1. Ponieważ codziennie się spóźniałeś, nie zdążyliśmy skończyć naszego projektu. (przez) → […] nie zdążyliśmy skończyć naszego projektu.\n2. Dobrze znała język chiński, więc znalazła pracę w tej firmie. (dzięki) → Znalazła pracę w tej firmie […].\n3. Nie poszedł na studia, chociaż jego rodzice tego oczekiwali. (wbrew) → Nie poszedł na studia […].\n4. Chorował długo i ciężko, ale w końcu powrócił do zdrowia. (po) → Powrócił do zdrowia […].\n5. Jeśli nie umie się pływać, nie można wyruszyć w taki rejs. (bez) → […] nie można wyruszyć w taki rejs."
 }

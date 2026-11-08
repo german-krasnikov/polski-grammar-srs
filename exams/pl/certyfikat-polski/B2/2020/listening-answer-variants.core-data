@@ -1,0 +1,33 @@
+DSL 1
+# B2/2020 official key p. 5: V/1 partial-credit alternatives (0.5 each).
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2020-listening-5-1-partial-1
+  questionRef: certyfikat-polski-B2-2020-listening-5-1
+  answer: "z Afryki"
+  earnedQuarter: 2
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2020-listening-5-1-partial-2
+  questionRef: certyfikat-polski-B2-2020-listening-5-1
+  answer: "z regionu Kaffa"
+  earnedQuarter: 2
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2020-listening-5-3-alt-1
+  questionRef: certyfikat-polski-B2-2020-listening-5-3
+  answer: pobudzenie
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2020-listening-5-3-alt-2
+  questionRef: certyfikat-polski-B2-2020-listening-5-3
+  answer: "odpowiednie pobudzenie"
+  earnedQuarter: 4
+}
+
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2020-listening-5-4-alt-1
+  questionRef: certyfikat-polski-B2-2020-listening-5-4
+  answer: "ponieważ ziarna nie były palone"
+  earnedQuarter: 4
+}

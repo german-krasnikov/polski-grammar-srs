@@ -1,17 +1,384 @@
 DSL 1
+# B2/2017 arkusz pp. 3–6; key pp. 4–5. Task IV sets are unordered and current single-select UI cannot score them.
+# Task V key explicitly allows other transcript-consistent answers; printed phrases are examples, not an exhaustive automatic oracle.
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2017-lq1"
-  taskRef: "certyfikat-polski-B2-2017-listen-2"
-  questionType: multiple_choice
-  questionText: "Pytanie 1"
-  correctAnswer: "c c c b a b a b"
-  points: 1
+  questionId: certyfikat-polski-B2-2017-listening-1-1
+  taskRef: certyfikat-polski-B2-2017-listen-1
+  questionType: fill_gap
+  questionText: "Uczczenia Wojtka […] (1)."
+  correctAnswer: pomnikiem
+  pointsQuarter: 2
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2017-lq2"
-  taskRef: "certyfikat-polski-B2-2017-listen-3"
+  questionId: certyfikat-polski-B2-2017-listening-1-2
+  taskRef: certyfikat-polski-B2-2017-listen-1
+  questionType: fill_gap
+  questionText: "Z doktorem Jarosławem Gdańskim, […] i wydawcą (2)."
+  correctAnswer: historykiem
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-1-3
+  taskRef: certyfikat-polski-B2-2017-listen-1
+  questionType: fill_gap
+  questionText: "Miał […] szeregowego (3)."
+  correctAnswer: "stopień"
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-1-4
+  taskRef: certyfikat-polski-B2-2017-listen-1
+  questionType: fill_gap
+  questionText: "Na czym […] jego obowiązki (4)?"
+  correctAnswer: "polegały"
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-1-5
+  taskRef: certyfikat-polski-B2-2017-listen-1
+  questionType: fill_gap
+  questionText: "Został przygarnięty, a […] odkupiony (5)."
+  correctAnswer: "właściwie"
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-1-6
+  taskRef: certyfikat-polski-B2-2017-listen-1
+  questionType: fill_gap
+  questionText: "Chłopaka, który go […] spotkał (6)."
+  correctAnswer: samotnego
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-1-7
+  taskRef: certyfikat-polski-B2-2017-listen-1
+  questionType: fill_gap
+  questionText: "Przez żołnierzy rozpieszczany, […] (7)."
+  correctAnswer: karmiony
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-1-8
+  taskRef: certyfikat-polski-B2-2017-listen-1
+  questionType: fill_gap
+  questionText: "Kolumna […] samochodowa (8)."
+  correctAnswer: zaopatrywania
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-1-9
+  taskRef: certyfikat-polski-B2-2017-listen-1
+  questionType: fill_gap
+  questionText: "Pilnował tam […] rodzaju rzeczy (9)."
+  correctAnswer: "różnego"
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-1-10
+  taskRef: certyfikat-polski-B2-2017-listen-1
+  questionType: fill_gap
+  questionText: "W czasie […] pod Monte Cassino (10)."
+  correctAnswer: bitwy
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-1-11
+  taskRef: certyfikat-polski-B2-2017-listen-1
+  questionType: fill_gap
+  questionText: "Dwudziesta druga […] (11)."
+  correctAnswer: kompania
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-1-12
+  taskRef: certyfikat-polski-B2-2017-listen-1
+  questionType: fill_gap
+  questionText: "Znak […] malowany na pojazdach (12)."
+  correctAnswer: "wyróżniający"
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-2-1
+  taskRef: certyfikat-polski-B2-2017-listen-2
   questionType: multiple_choice
-  questionText: "Pytanie 2"
-  correctAnswer: "P F P F P F P F"
-  points: 1
+  questionText: "Kolory granatowy i biały charakteryzowały"
+  options: "a) strój kobiety.|b) strój policjanta.|c) pociąg."
+  correctAnswer: "c) pociąg."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-2-2
+  taskRef: certyfikat-polski-B2-2017-listen-2
+  questionType: multiple_choice
+  questionText: "Pasażerami pociągu byli"
+  options: "a) warszawiacy.|b) wyłącznie cudzoziemcy.|c) cudzoziemcy i narratorka."
+  correctAnswer: "c) cudzoziemcy i narratorka."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-2-3
+  taskRef: certyfikat-polski-B2-2017-listen-2
+  questionType: multiple_choice
+  questionText: "Kobieta miała problem z"
+  options: "a) przewozem magnetofonu.|b) odnalezieniem przedziału.|c) dostaniem się do pociągu."
+  correctAnswer: "c) dostaniem się do pociągu."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-2-4
+  taskRef: certyfikat-polski-B2-2017-listen-2
+  questionType: multiple_choice
+  questionText: "Narratorka wsiadła do pociągu"
+  options: "a) od razu.|b) po interwencji członka załogi.|c) po interwencji policjanta."
+  correctAnswer: "b) po interwencji członka załogi."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-2-5
+  taskRef: certyfikat-polski-B2-2017-listen-2
+  questionType: multiple_choice
+  questionText: "Pasażerowie byli witani przez"
+  options: "a) członków załogi.|b) menedżera pociągu.|c) policjantów."
+  correctAnswer: "a) członków załogi."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-2-6
+  taskRef: certyfikat-polski-B2-2017-listen-2
+  questionType: multiple_choice
+  questionText: "Aby dojść do pociągu, należało"
+  options: "a) pokonać schody.|b) przejść po dywanie.|c) okazać bilet."
+  correctAnswer: "b) przejść po dywanie."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-2-7
+  taskRef: certyfikat-polski-B2-2017-listen-2
+  questionType: multiple_choice
+  questionText: "Orient Express jechał trasą"
+  options: "a) po kraju słowiańskim.|b) po Azji.|c) po krajach Orientu."
+  correctAnswer: "a) po kraju słowiańskim."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-2-8
+  taskRef: certyfikat-polski-B2-2017-listen-2
+  questionType: multiple_choice
+  questionText: "Narratorka spotkała miłego turystę"
+  options: "a) w przedziale.|b) w barze.|c) u menedżera pociągu."
+  correctAnswer: "b) w barze."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-3-1
+  taskRef: certyfikat-polski-B2-2017-listen-3
+  questionType: true_false
+  questionText: "Kobieta nie pierwszy raz miała problem z alarmem samochodowym."
+  options: "P|F"
+  correctAnswer: P
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-3-2
+  taskRef: certyfikat-polski-B2-2017-listen-3
+  questionType: true_false
+  questionText: "Najpierw próbowała otworzyć samochód kluczykiem."
+  options: "P|F"
+  correctAnswer: F
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-3-3
+  taskRef: certyfikat-polski-B2-2017-listen-3
+  questionType: true_false
+  questionText: "Zdarzenie miało miejsce w czasie mrozu."
+  options: "P|F"
+  correctAnswer: P
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-3-4
+  taskRef: certyfikat-polski-B2-2017-listen-3
+  questionType: true_false
+  questionText: "Kobiecie w otwarciu zamka próbował pomóc kolega z pracy."
+  options: "P|F"
+  correctAnswer: F
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-3-5
+  taskRef: certyfikat-polski-B2-2017-listen-3
+  questionType: true_false
+  questionText: "Mechanicy doszli do wniosku, że kluczyk jest zepsuty."
+  options: "P|F"
+  correctAnswer: P
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-3-6
+  taskRef: certyfikat-polski-B2-2017-listen-3
+  questionType: true_false
+  questionText: "Kobieta nie znała numeru rejestracyjnego swego auta."
+  options: "P|F"
+  correctAnswer: F
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-3-7
+  taskRef: certyfikat-polski-B2-2017-listen-3
+  questionType: true_false
+  questionText: "Właściciela samochodu rozbawiła ta sytuacja."
+  options: "P|F"
+  correctAnswer: P
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-3-8
+  taskRef: certyfikat-polski-B2-2017-listen-3
+  questionType: true_false
+  questionText: "Mechanicy naprawili zamek w 40 minut."
+  options: "P|F"
+  correctAnswer: F
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-4-1
+  taskRef: certyfikat-polski-B2-2017-listen-4
+  questionType: match
+  questionText: "B. mówi o różnych szkolnych pomieszczeniach"
+  options: "1|2|3|4"
+  correctAnswer: "1|2"
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
+  pointsQuarter: 8
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-4-2
+  taskRef: certyfikat-polski-B2-2017-listen-4
+  questionType: match
+  questionText: "C. wspomina szkolne jedzenie"
+  options: "1|2|3|4"
+  correctAnswer: "2"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-4-3
+  taskRef: certyfikat-polski-B2-2017-listen-4
+  questionType: match
+  questionText: "D. dobrze wspomina nauczycieli"
+  options: "1|2|3|4"
+  correctAnswer: "3|4"
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
+  pointsQuarter: 8
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-4-4
+  taskRef: certyfikat-polski-B2-2017-listen-4
+  questionType: match
+  questionText: "E. mówi o elementach szkolnego ubrania"
+  options: "1|2|3|4"
+  correctAnswer: "1|2|4"
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
+  pointsQuarter: 12
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-4-5
+  taskRef: certyfikat-polski-B2-2017-listen-4
+  questionType: match
+  questionText: "F. wspomina szkołę ponadpodstawową"
+  options: "1|2|3|4"
+  correctAnswer: "3"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-4-6
+  taskRef: certyfikat-polski-B2-2017-listen-4
+  questionType: match
+  questionText: "G. pamięta rok rozpoczęcia nauki"
+  options: "1|2|3|4"
+  correctAnswer: "1"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-5-1
+  taskRef: certyfikat-polski-B2-2017-listen-5
+  questionType: fill_gap
+  questionText: "Jakimi słowami klientka określiła pracownicę pralni? (a)"
+  correctAnswer: "młodą"
+  gradingMode: open_manual
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-5-2
+  taskRef: certyfikat-polski-B2-2017-listen-5
+  questionType: fill_gap
+  questionText: "Jakimi słowami klientka określiła pracownicę pralni? (b)"
+  correctAnswer: "miłą"
+  gradingMode: open_manual
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-5-3
+  taskRef: certyfikat-polski-B2-2017-listen-5
+  questionType: fill_gap
+  questionText: "Przed czym ostrzegano klientkę?"
+  correctAnswer: "że być może nic się nie da z plamą zrobić"
+  gradingMode: open_manual
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-5-4
+  taskRef: certyfikat-polski-B2-2017-listen-5
+  questionType: fill_gap
+  questionText: "Na co klientka zgodziła się w rozmowie telefonicznej?"
+  correctAnswer: "na poeksperymentowanie domowymi sposobami"
+  gradingMode: open_manual
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-5-5
+  taskRef: certyfikat-polski-B2-2017-listen-5
+  questionType: fill_gap
+  questionText: "Ile klientka musiała dopłacić za dodatkową usługę?"
+  correctAnswer: nic
+  gradingMode: open_manual
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-5-6
+  taskRef: certyfikat-polski-B2-2017-listen-5
+  questionType: fill_gap
+  questionText: "W jaki sposób klientka podziękowała pracownicy pralni?"
+  correctAnswer: "napisała list z podziękowaniami do dyrekcji pralni"
+  gradingMode: open_manual
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-5-7
+  taskRef: certyfikat-polski-B2-2017-listen-5
+  questionType: fill_gap
+  questionText: "Kiedy klientka otrzymała odpowiedź na swoje pismo?"
+  correctAnswer: "po trzech tygodniach"
+  gradingMode: open_manual
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-5-8
+  taskRef: certyfikat-polski-B2-2017-listen-5
+  questionType: fill_gap
+  questionText: "W jakim stylu było napisane pismo od dyrekcji pralni?"
+  correctAnswer: "urzędowym"
+  gradingMode: open_manual
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-5-9
+  taskRef: certyfikat-polski-B2-2017-listen-5
+  questionType: fill_gap
+  questionText: "Co spotkało pracownicę w wyniku listu klientki?"
+  correctAnswer: "została upomniana"
+  gradingMode: open_manual
+  pointsQuarter: 4
 }

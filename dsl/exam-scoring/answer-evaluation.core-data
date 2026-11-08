@@ -1,0 +1,94 @@
+DSL 1
+# Exact and open-answer status expectations independent of the Kotlin evaluator.
+ANSWER_EVALUATION_CASE {
+  id: exact-unknown
+  consumer: grammar
+  mode: exact
+  fullAnswer: Komu
+  maximumQuarter: 2
+  answer: "Z kim"
+  expectedStatus: wrong
+  expectedConfirmedQuarter: 0
+  expectedPendingQuarter: 0
+}
+ANSWER_EVALUATION_CASE {
+  id: open-known-full
+  consumer: grammar
+  mode: open_manual
+  fullAnswer: "Bardzo brakuje mi mamy."
+  maximumQuarter: 4
+  answer: "Bardzo brakuje mi mamy."
+  expectedStatus: confirmed_full
+  expectedConfirmedQuarter: 4
+  expectedPendingQuarter: 0
+}
+ANSWER_EVALUATION_CASE {
+  id: open-known-partial
+  consumer: grammar
+  mode: open_manual
+  fullAnswer: "Z czego"
+  variantAnswer: "Z jakiej kapusty"
+  variantQuarter: 1
+  maximumQuarter: 2
+  answer: "Z jakiej kapusty"
+  expectedStatus: confirmed_partial
+  expectedConfirmedQuarter: 1
+  expectedPendingQuarter: 0
+}
+ANSWER_EVALUATION_CASE {
+  id: open-empty
+  consumer: grammar
+  mode: open_manual
+  fullAnswer: "Bardzo brakuje mi mamy."
+  maximumQuarter: 4
+  answer: ""
+  expectedStatus: wrong
+  expectedConfirmedQuarter: 0
+  expectedPendingQuarter: 0
+}
+ANSWER_EVALUATION_CASE {
+  id: open-spaces
+  consumer: grammar
+  mode: open_manual
+  fullAnswer: "Bardzo brakuje mi mamy."
+  maximumQuarter: 4
+  answer: "   "
+  expectedStatus: wrong
+  expectedConfirmedQuarter: 0
+  expectedPendingQuarter: 0
+}
+ANSWER_EVALUATION_CASE {
+  id: open-unknown
+  consumer: grammar
+  mode: open_manual
+  fullAnswer: "Bardzo brakuje mi mamy."
+  maximumQuarter: 4
+  answer: "Brakuje mi bardzo mamy."
+  expectedStatus: pending_manual
+  expectedConfirmedQuarter: 0
+  expectedPendingQuarter: 4
+}
+ANSWER_EVALUATION_CASE {
+  id: listening-open-unknown
+  consumer: listening
+  mode: open_manual
+  fullAnswer: "młodą osobą"
+  maximumQuarter: 2
+  answer: "młodą dziewczyną"
+  expectedStatus: pending_manual
+  expectedConfirmedQuarter: 0
+  expectedPendingQuarter: 2
+}
+ANSWER_EVALUATION_CASE {
+  id: listening-open-known-partial
+  consumer: listening
+  mode: open_manual
+  fullAnswer: "z dzisiejszej Etiopii"
+  variantAnswer: "z Afryki"
+  variantQuarter: 2
+  maximumQuarter: 4
+  answer: "z Afryki"
+  expectedStatus: confirmed_partial
+  expectedConfirmedQuarter: 2
+  expectedPendingQuarter: 0
+}

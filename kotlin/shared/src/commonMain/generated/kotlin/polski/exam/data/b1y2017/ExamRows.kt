@@ -1,5 +1,5 @@
 // Generated from dsl/exam.data-contract
-// source-sha256=38312e40b51866266241f0d457f0b1f2091a4dc0f9c70d53551cb502cdd032fe
+// source-sha256=992a404f2b4446e2e0e639f8406138254b00bba16e0cbbd01dd5b91240805608
 // Edit the source, then run biome generate.
 
 package polski.exam.data.b1y2017
@@ -9,6 +9,16 @@ enum class ListeningQuestionRowQuestionType(val tag: String) {
     TRUE_FALSE("true_false"),
     FILL_GAP("fill_gap"),
     MATCH("match"),
+}
+
+enum class ListeningQuestionRowGradingMode(val tag: String) {
+    EXACT("exact"),
+    OPEN_MANUAL("open_manual"),
+}
+
+enum class ListeningQuestionRowAnswerMode(val tag: String) {
+    SINGLE("single"),
+    UNORDERED_SET("unordered_set"),
 }
 
 enum class ReadingQuestionRowQuestionType(val tag: String) {
@@ -26,6 +36,11 @@ enum class GrammarItemRowQuestionType(val tag: String) {
     WORD_FORMATION("word_formation"),
 }
 
+enum class GrammarItemRowGradingMode(val tag: String) {
+    EXACT("exact"),
+    OPEN_MANUAL("open_manual"),
+}
+
 enum class WritingTaskRowGenre(val tag: String) {
     LETTER("letter"),
     DESCRIPTION("description"),
@@ -37,12 +52,58 @@ enum class WritingTaskRowGenre(val tag: String) {
     REPORT("report"),
     SMS("sms"),
     OPINION("opinion"),
+    ANNOUNCEMENT("announcement"),
+    EMAIL("email"),
+    REVIEW("review"),
+    ADVERTISEMENT("advertisement"),
 }
 
 enum class ExamInventoryCaseRowSection(val tag: String) {
     LISTENING("listening"),
     READING("reading"),
     GRAMMAR("grammar"),
+}
+
+enum class AnswerEvaluationCaseRowConsumer(val tag: String) {
+    GRAMMAR("grammar"),
+    LISTENING("listening"),
+}
+
+enum class AnswerEvaluationCaseRowMode(val tag: String) {
+    EXACT("exact"),
+    OPEN_MANUAL("open_manual"),
+}
+
+enum class AnswerEvaluationCaseRowExpectedStatus(val tag: String) {
+    CONFIRMED_FULL("confirmed_full"),
+    CONFIRMED_PARTIAL("confirmed_partial"),
+    WRONG("wrong"),
+    PENDING_MANUAL("pending_manual"),
+}
+
+enum class UnorderedSetCaseRowMode(val tag: String) {
+    EXACT("exact"),
+    OPEN_MANUAL("open_manual"),
+}
+
+enum class UnorderedSetCaseRowExpectedStatus(val tag: String) {
+    CONFIRMED_FULL("confirmed_full"),
+    CONFIRMED_PARTIAL("confirmed_partial"),
+    WRONG("wrong"),
+    PENDING_MANUAL("pending_manual"),
+}
+
+enum class OpenItemGroupCaseRowSection(val tag: String) {
+    GRAMMAR("grammar"),
+    LISTENING("listening"),
+}
+
+enum class OpenItemGroupCaseRowExpectedUnknownStatus(val tag: String) {
+    PENDING_MANUAL("pending_manual"),
+}
+
+enum class OpenItemGroupCaseRowExpectedBlankStatus(val tag: String) {
+    WRONG("wrong"),
 }
 
 data class ExamRow(
@@ -77,6 +138,16 @@ data class ListeningQuestionRow(
     val correctAnswer: String,
     val points: Int? = null,
     val pointsQuarter: Int? = null,
+    val gradingMode: ListeningQuestionRowGradingMode? = null,
+    val answerMode: ListeningQuestionRowAnswerMode? = null,
+    val creditPerCorrectQuarter: Int? = null,
+)
+
+data class ListeningAnswerVariantRow(
+    val variantId: String,
+    val questionRef: String,
+    val answer: String,
+    val earnedQuarter: Int,
 )
 
 data class ReadingPassageRow(
@@ -118,6 +189,7 @@ data class GrammarItemRow(
     val correctAnswer: String,
     val points: Int? = null,
     val pointsQuarter: Int? = null,
+    val gradingMode: GrammarItemRowGradingMode? = null,
 )
 
 data class GrammarAnswerVariantRow(
@@ -188,6 +260,57 @@ data class QuarterFormatCaseRow(
     val id: String,
     val pointsQuarter: Int,
     val expectedText: String,
+)
+
+data class AnswerEvaluationCaseRow(
+    val id: String,
+    val consumer: AnswerEvaluationCaseRowConsumer,
+    val mode: AnswerEvaluationCaseRowMode,
+    val fullAnswer: String,
+    val variantAnswer: String? = null,
+    val variantQuarter: Int? = null,
+    val maximumQuarter: Int,
+    val answer: String,
+    val expectedStatus: AnswerEvaluationCaseRowExpectedStatus,
+    val expectedConfirmedQuarter: Int,
+    val expectedPendingQuarter: Int,
+)
+
+data class AnswerAttemptCaseRow(
+    val id: String,
+    val exactAnswer: String,
+    val openAnswer: String,
+    val exactResponse: String,
+    val openResponse: String,
+    val exactMaximumQuarter: Int,
+    val openMaximumQuarter: Int,
+    val expectedConfirmedQuarter: Int,
+    val expectedPendingQuarter: Int,
+    val expectedPossibleQuarter: Int,
+    val expectedFinal: Boolean,
+)
+
+data class UnorderedSetCaseRow(
+    val id: String,
+    val correctAnswer: String,
+    val options: String,
+    val answer: String,
+    val maximumQuarter: Int,
+    val creditPerCorrectQuarter: Int? = null,
+    val mode: UnorderedSetCaseRowMode? = null,
+    val expectedStatus: UnorderedSetCaseRowExpectedStatus,
+    val expectedConfirmedQuarter: Int,
+    val expectedPendingQuarter: Int? = null,
+)
+
+data class OpenItemGroupCaseRow(
+    val id: String,
+    val section: OpenItemGroupCaseRowSection,
+    val groupRef: String,
+    val expectedItemCount: Int,
+    val unknownAnswer: String,
+    val expectedUnknownStatus: OpenItemGroupCaseRowExpectedUnknownStatus,
+    val expectedBlankStatus: OpenItemGroupCaseRowExpectedBlankStatus,
 )
 
 val EXAM_ROW_ROWS: List<ExamRow> = listOf(

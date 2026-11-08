@@ -2,6 +2,7 @@ import { expect, test, type Browser, type Page } from '@playwright/test';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { continueIntroductionIfPresent } from './kotlin-introduction';
+import { progressAsLegacyShape } from './polski-text';
 
 const previewKey = 'polski-grammar-srs-kmp-preview-v1';
 const fixtures = JSON.parse(readFileSync(resolve('tests/fixtures/kotlin-parity/progress.json'), 'utf8')) as {
@@ -43,7 +44,7 @@ async function rateCurrentCard(page: Page): Promise<void> {
 
 async function storedProgress(page: Page): Promise<{ lastDay: string; reviewsToday: number; totalReviews: number }> {
   await expect.poll(() => page.evaluate(key => localStorage.getItem(key), previewKey)).not.toBeNull();
-  return page.evaluate(key => JSON.parse(localStorage.getItem(key)!), previewKey);
+  return progressAsLegacyShape((await page.evaluate(key => localStorage.getItem(key), previewKey))!) as { lastDay: string; reviewsToday: number; totalReviews: number };
 }
 
 for (const fixture of fixtures.cases.filter(entry => entry.id.startsWith('P-day-'))) {

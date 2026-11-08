@@ -24,6 +24,29 @@ The former rows included watermark text, key headers, aggregate answers and an i
 
 ## Acceptance blockers
 
-1. Every listening segment is still `0..0` (unmarked). `ffprobe` reports the local MP3 duration as 1491.173875 seconds. Segment boundaries and repeat behavior require listening verification; the local `ExamBin` URL is not yet a delivered web asset.
+1. Listening windows are now populated from the audio audit below. A browser playback check against a generated artifact remains pending.
 2. Listening task IV key explicitly says answer order is arbitrary. B and C are recorded as grouped sets `1|4` and `2|4`, worth two points each. Current single-select listening UI cannot answer or score these sets. A set-aware answer mode must accept both members in either order before this module is available.
 3. Grammar VI permits other correct transformations beyond the printed examples. The seven variant rows contain only alternatives printed in the key; exhaustive automatic grading is not established. Reading/listening end-to-end scoring and all browser input types also remain unverified.
+
+## Audio boundary update, 2026-11-08
+
+The local MP3 SHA-256 is `b88f61dea88036425bfd6990c07f308264a42b06d0aa9ce75a64a82bf3e840c8` and its `ffprobe` duration is 1491.173875 seconds. A full-file Whisper **tiny** Polish pass (`/tmp/polski-audio-audit/B1-2020/audio.json`, 298 segments) identified five task announcements and their content. A separate Whisper **base** pass over six transition clips (`/tmp/polski-audio-audit/B1-2020/base-boundaries.json`) checked the spoken closures and next announcements. `ffmpeg silencedetect=n=-35dB:d=0.25` checked the actual signal at each cut. The first base clip hallucinated/shifted words into a 90–102.19 s silence, so the first start uses the waveform and full-file timeline, not that clip's timestamp.
+
+| Task | Source window (s) | Boundary evidence |
+| --- | ---: | --- |
+| I | 102–271 | first announcement after 102.19 s silence; closure around 268.10–269.58; next speech starts 272.06 |
+| II | 272–553 | start 272.06; closure 550.85–552.09; next speech 554.32 |
+| III | 554–798 | start 554.32; closure 795.66–797.05; next speech 799.41 |
+| IV | 799–1154 | start 799.41; closure 1152.02–1153.28; next speech 1155.70 |
+| V | 1155–1418 | start 1155.70; closure 1415.13–1416.33; post-task instruction starts 1418.86 |
+
+Task I is announced as single-play. Tasks II–V explicitly announce two plays and the full-file ASR timeline contains repeated task content, so the player must use one playback of each entire window. This is ASR plus waveform verification, **not human acoustic listening** or a verbatim transcription audit. The new source windows need generated-row and browser artifact checks before catalog exposure.
+
+Paper p. 6 states Listening IV is `7 p. (7 × 1 p.)`; B and C each have two
+printed blanks, while A, D and E have one. Key p. 3 gives B=`1,4`, C=`2,4`
+and permits either order. Each correct member of B/C earns one point
+(`creditPerCorrectQuarter: 4`), including when the other is missing or wrong.
+
+Grammar VI's five transformations are now `open_manual`: key p. 6 accepts
+other correct solutions beyond the printed examples. Focused data check with
+the nine B1/2020 source bindings passes with 155 rows and zero problems.

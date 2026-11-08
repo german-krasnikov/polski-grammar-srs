@@ -307,6 +307,7 @@ GRAMMAR_ITEM {
   questionType: transform
   context: "Joanna przyglądała się małemu kotu. Użyj: obserwowała."
   correctAnswer: "Joanna obserwowała małego kota."
+  gradingMode: open_manual
   pointsQuarter: 4
 }
 GRAMMAR_ITEM {
@@ -315,6 +316,7 @@ GRAMMAR_ITEM {
   questionType: transform
   context: "W twoim pokoju zawsze jest bałagan. Użyj: porządku."
   correctAnswer: "W twoim pokoju nigdy nie ma porządku."
+  gradingMode: open_manual
   pointsQuarter: 4
 }
 GRAMMAR_ITEM {
@@ -323,6 +325,7 @@ GRAMMAR_ITEM {
   questionType: transform
   context: "Marta bez przerwy wspomina ten koncert. Użyj: opowiada."
   correctAnswer: "Marta bez przerwy opowiada o tym koncercie."
+  gradingMode: open_manual
   pointsQuarter: 4
 }
 GRAMMAR_ITEM {
@@ -331,6 +334,7 @@ GRAMMAR_ITEM {
   questionType: transform
   context: "Wczoraj Michał był w teatrze pierwszy raz w życiu. Użyj: poszedł."
   correctAnswer: "Wczoraj Michał poszedł do teatru pierwszy raz w życiu."
+  gradingMode: open_manual
   pointsQuarter: 4
 }
 GRAMMAR_ITEM {
@@ -339,6 +343,7 @@ GRAMMAR_ITEM {
   questionType: transform
   context: "Czy znasz adres tego sklepu? Użyj: wiesz."
   correctAnswer: "Czy wiesz, jaki jest adres tego sklepu?"
+  gradingMode: open_manual
   pointsQuarter: 4
 }
 GRAMMAR_ITEM {

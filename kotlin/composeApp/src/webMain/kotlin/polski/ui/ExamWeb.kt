@@ -11,7 +11,7 @@ internal data class ExamEntry(
 ) {
     val grammarCount: Int get() = examGrammarData[id]?.sumOf { it.items.size } ?: 0
     val readingCount: Int get() = examReadingData[id]?.questions?.size ?: 0
-    val listeningCount: Int get() = examListeningData[id]?.tasks?.sumOf { it.questions.size } ?: 0
+    val listeningCount: Int get() = examListeningData[id]?.tasks?.sumOf { task -> task.questions.sumOf { it.answerSlotCount } } ?: 0
     val writingCount: Int get() = examWritingData[id]?.tasks?.size ?: 0
 }
 

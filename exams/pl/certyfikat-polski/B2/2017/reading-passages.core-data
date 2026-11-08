@@ -1,31 +1,42 @@
 DSL 1
+# B2/2017 arkusz pp. 8–13; key p. 6.
 READING_PASSAGE {
-  passageId: "certyfikat-polski-B2-2017-read-1"
-  examRef: "certyfikat-polski-B2-2017"
+  passageId: certyfikat-polski-B2-2017-read-1
+  examRef: certyfikat-polski-B2-2017
   taskNumber: 1
-  instruction: "Zadanie 1"
+  title: "Pięć krótkich informacji"
+  instruction: "Proszę przeczytać fragmenty tekstów i pod każdym zaznaczyć prawidłową odpowiedź."
+  text: "1. Najlepsze testy i treningi psychologiczne nie powiedzą tyle o ludziach i relacjach między nimi, ile powie nawet krótki rejs na małym jachcie. Zwłaszcza, gdy silnie wieje.\n\n2. Jogurt późno pojawił się na europejskich stołach. Receptura pochodzi z Azji lub z Bałkanów. Chory król Francji posłał po bałkańskiego lekarza, który sporządził jogurt z mleka owiec. Po jego wypiciu król wyzdrowiał.\n\n3. Bankructwa przestają się opłacać. Większość polskich firm turystycznych w przypadku problemów z płynnością finansową stara się dojść do porozumienia z zagranicznymi hotelarzami czy liniami lotniczymi i uzyskać np. odroczenie płatności. Często się to udaje, bo polscy organizatorzy wypoczynku są klientami budzącymi zaufanie.\n\n4. W sobotni wietrzny wieczór ulice niemal całego powiatu wypełniły się przejmującym wyciem strażackich syren. W Lininie tuż przed godziną dwudziestą wybuchł pożar w sortowni odpadów, znajdującej się na terenie dawnej jednostki wojskowej.\n\n5. Co ważniejsze: nos czy dziurki w nosie? Dziurki. Zwłaszcza jeśli chodzi o węch. Od wielkości nosa nie zależy wyczuwanie zapachów. Natomiast im większe dziurki w nosie, tym zmysł powonienia jest bardziej wyczulony."
 }
 READING_PASSAGE {
-  passageId: "certyfikat-polski-B2-2017-read-2"
-  examRef: "certyfikat-polski-B2-2017"
+  passageId: certyfikat-polski-B2-2017-read-2
+  examRef: certyfikat-polski-B2-2017
   taskNumber: 2
-  instruction: "Zadanie 2"
+  title: "Lisy pod Warszawą"
+  instruction: "Proszę przeczytać tekst i zaznaczyć P (prawda), F (fałsz) lub BI (brak informacji)."
+  text: "Pani Katarzyna z rodziną mieszka 20 kilometrów od Warszawy. „Widzieliśmy lisy w okolicy już rok temu, ale wtedy znały swoje miejsce. Pojawiały się tylko pod lasem, obserwowały okolicę i z powrotem znikały w leśnych zaroślach. W tym roku lisy zaczęły wchodzić do przydomowych ogródków i zaglądać na podwórka. Zachowują się tak, jakby były u siebie. Dwa tygodnie temu zauważyliśmy próby podkopów pod płotem, a kilka dni później zobaczyliśmy lisicę z czwórką młodych przed furtką. W ubiegłą niedzielę zaprosiliśmy znajomych i rozpaliliśmy grill. Było piękne letnie popołudnie. Oglądamy finały mistrzostw świata w piłce nożnej, gdy nagle na podwórko wkracza lisica. Staje metr od nas i patrzy. Pierwszy zareagował nasz kot – uciekł pod samochód. Lisica znalazła go tam i pogryzła. Udało się ją przegonić z podwórka. Po minucie, jak gdyby nigdy nic, weszła znów główną bramą. To niesamowite. Boję się teraz wyjść z córką na podwórko. Nie wiem, czy zwierzę nie jest chore. I raczej się nie dowiem, bo leśnicy, do których zwróciłam się o pomoc, powiedzieli, że do sierpnia zwierzęta są pod ochroną. Mieli tylko jedną radę. Trzeba zabezpieczyć działkę, bo lisy wchodzą przez dziurę albo robią podkop, by sprawdzić, czy na podwórku nie ma kur, gęsi, kaczek.”\n\nPoinformowali mnie, że za bezpieczeństwo ludzi odpowiada starosta i tylko on może wydać decyzję o zastrzeleniu lisów. Jednak starostwo też umywa ręce – wobec okresu ochronnego jest bezradne."
 }
 READING_PASSAGE {
-  passageId: "certyfikat-polski-B2-2017-read-3"
-  examRef: "certyfikat-polski-B2-2017"
+  passageId: certyfikat-polski-B2-2017-read-3
+  examRef: certyfikat-polski-B2-2017
   taskNumber: 3
-  instruction: "Zadanie 3"
+  title: "Urządzamy mieszkanie"
+  instruction: "Połączyć tytuły z kolumny I z opisami A–K z kolumny II. D jest przykładem dla „Okno inaczej”."
+  text: "A. Ratunkiem na zbyt wąskie, za wysokie lub za niskie mieszkanie nie musi być gruntowna przebudowa. Można zastosować kilka prostych zabiegów, by wizualnie poprawić proporcje pomieszczenia.\n\nB. Odświętny, a jednocześnie kameralny – taki powinien być klimat domowej uroczystości. Najlepiej będą się prezentować naczynia i dekoracje w jasnych barwach.\n\nC. Teraz plecie się nie tylko z wikliny i rattanu, a nowoczesne i udoskonalone sprzęty śmiało przekraczają granice tarasów i wchodzą do salonów, sypialni, a nawet łazienek.\n\nD. Co zrobić, gdy tradycyjne firanki nie bardzo pasują do wystroju wnętrza albo znudziły się nam zwykłe rolety? Zastąpić je samodzielnie wykonanymi aranżacjami.\n\nE. Pojemniki, kosze i skrzynie stoją na straży porządku. Są w każdym domu, choć nie zawsze na pierwszym planie. Czasem wsunięte pod łóżko lub schody, ukrywają to, co nie mieści się w szafie.\n\nF. Gdy tylko wyjdzie z pieluch, natychmiast chce zdobywać świat. Jego pokój raz staje się okrętem, innym razem rakietą kosmiczną. Urządzając jego cztery ściany, zostawmy w nich jak najwięcej przestrzeni do fantazjowania.\n\nG. Dla dekoratorów wnętrz i artystów ściana jest swojego rodzaju obrazem bez ram. Twórcy i styliści proponują niecodzienne techniki dekoracyjne.\n\nH. Tradycyjnie umeblowane kuchnie mają wielu zwolenników i nigdy nie wychodzą z mody. Może dlatego, że kojarzą się z ciepłym rodzinnym domem?\n\nI. Dla wielu mieszkanie powinno być azylem. Chronić przed zimnem i hałasem. Pomoże w tym ciepła wykładzina lub puszysty dywan, które sprawią, że we wnętrzu zrobi się przytulniej.\n\nJ. Być blisko natury na co dzień, czerpać z niej spokój i korzystać z pozytywnego wpływu na nasze zdrowie. W mieście o to coraz trudniej. Dlatego modne stało się urządzanie mieszkań w stylu eko.\n\nK. Korzystamy z niego kilka razy dziennie. Ważne więc, żeby było funkcjonalne i zapewniało intymność. Istotne jest pomysłowe zaaranżowanie przestrzeni, dobór kafelków i odpowiedniego wyposażenia."
 }
 READING_PASSAGE {
-  passageId: "certyfikat-polski-B2-2017-read-4"
-  examRef: "certyfikat-polski-B2-2017"
+  passageId: certyfikat-polski-B2-2017-read-4
+  examRef: certyfikat-polski-B2-2017
   taskNumber: 4
-  instruction: "Zadanie 4"
+  title: Szacunek
+  instruction: "Uzupełnić luki w tekście, wybierając najlepszy fragment A–K."
+  text: "Szacunek – wyraz ten może mieć wiele znaczeń, [I] może m.in. oznaczać poważanie, uszanowanie, respekt, a także prestiż, znaczenie, autorytet i posłuch. Szacunek – do siebie i do innych – wyrasta z wrodzonego i niezbywalnego [1]. Szacunek służy jednocześnie jej ochronie. Jest podstawą wszystkich wartości moralnych. Jeśli mamy szacunek do siebie i do innych ludzi, [2]: nie kłamiemy, nie kradniemy, nie krzywdzimy innych, nie zaniedbujemy swych powinności ani talentów, staramy się postępować mądrze i sprawiedliwie, dbamy o przyrodę i piękno, [3].\n\nSzacunek jest to grzeczność [4] drugiej osoby. Jeśli chcemy nauczyć dziecko szacunku, [5], lecz płynącego z przekonania, że każdy człowiek jest godny szacunku, powinniśmy od urodzenia traktować je z szacunkiem i [6]. Sposoby okazywania szacunku to uśmiech, przyjazne patrzenie w oczy, używanie kulturalnego języka, przedstawianie się, [7], drobna pomoc, udzielanie informacji, dotrzymywanie słowa, prawdomówność, słuchanie cudzej wypowiedzi bez przerywania, punktualność, sprzątanie po sobie, mówienie [8], noszenie stroju stosownego do okazji, niezakłócanie spokoju innym, [9] bez zgody właściciela itp. Im więcej [10], tym więcej go do nas wraca!\n\nFragmenty: A. aby służyły nam i innym; B. okazywanego nie pod presją; C. gdy do kogoś telefonujemy; D. atrybutu każdego człowieka – ludzkiej godności; E. nieużywanie cudzych rzeczy; F. respektujemy także pozostałe wartości moralne; G. stopniowo wymagać od niego wzajemności; H. okazujemy szacunku innym ludziom; I. w zależności od kontekstu użycia (przykład); J. z życzliwością o innych; K. połączona z troską o uczucia i dobro."
 }
 READING_PASSAGE {
-  passageId: "certyfikat-polski-B2-2017-read-5"
-  examRef: "certyfikat-polski-B2-2017"
+  passageId: certyfikat-polski-B2-2017-read-5
+  examRef: certyfikat-polski-B2-2017
   taskNumber: 5
-  instruction: "Zadanie 5"
+  title: "Banki czasu"
+  instruction: "Proszę uzupełnić tekst, podkreślając najlepszą spośród podanych możliwości."
+  text: "Istnieją banki, których walutą nie są pieniądze, ale… czas. Ich [1] mogą nabywać różne usługi w bezgotówkowych transakcjach, pomagając sobie [2]. Dzięki temu można się nie martwić naprawą [3] kranu lub wyprowadzaniem psa, gdy nie uda się na czas wrócić z pracy.\n\nBanki czasu to stowarzyszenia, których [4] polega na bezgotówkowej wymianie usług. To rodzaj [5] pomocy. Działają na podobnej co banki zasadzie – każdy ma tu konto, na którym [6] są informacje o godzinach, które przepracował na rzecz innych osób. W zamian może liczyć na to, że ktoś inny tyle samo czasu [7] jemu.\n\nRóżnorodność usług oferowanych w bankach jest [8]. Począwszy od pomocy w pracach domowych, poprzez czytanie na głos bajek, [9] naukę pływania, aż do oprowadzania po mieście. „Dzięki bankowi czasu zawsze wiem, gdzie szukać pomocy, niezależnie od tego, czy jest to nowy pomysł na życie, czy codzienny drobiazg” – [10] ci, którzy skorzystali z bankowej oferty."
 }

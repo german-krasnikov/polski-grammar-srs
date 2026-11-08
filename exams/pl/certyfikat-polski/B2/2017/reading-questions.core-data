@@ -1,105 +1,407 @@
 DSL 1
+# B2/2017 arkusz pp. 8–13; key p. 6. Counts 5+10+10+10+10 and 40 points.
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2017-rq1"
-  passageRef: "certyfikat-polski-B2-2017-read-1"
-  questionType: fill_gap
-  questionText: "Pytanie 1"
-  correctAnswer: "b b c b a"
-  points: 1
-}
-READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2017-rq2"
-  passageRef: "certyfikat-polski-B2-2017-read-2"
-  questionType: fill_gap
-  questionText: "Pytanie 2"
-  correctAnswer: "P P F BI P F F F BI P"
-  points: 1
-}
-READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2017-rq3"
-  passageRef: "certyfikat-polski-B2-2017-read-3"
-  questionType: fill_gap
-  questionText: "Pytanie 3"
-  correctAnswer: "K A B E H I J G C F"
-  points: 1
-}
-READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2017-rq4"
-  passageRef: "certyfikat-polski-B2-2017-read-4"
-  questionType: fill_gap
-  questionText: "Pytanie 4"
-  correctAnswer: "D F A K B G C J E H"
-  points: 1
-}
-READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2017-rq5"
-  passageRef: "certyfikat-polski-B2-2017-read-5"
+  questionId: certyfikat-polski-B2-2017-reading-1-1
+  passageRef: certyfikat-polski-B2-2017-read-1
   questionType: multiple_choice
-  questionText: "Pytanie 5"
-  correctAnswer: "a"
-  points: 1
+  questionText: "Z tego tekstu dowiadujemy się, że"
+  options: "a) podczas wiatrów krótkie rejsy należy odbywać na małych jachtach.|b) człowieka poznaje się w trudnych warunkach.|c) relacje między ludźmi najlepiej badają testy i treningi psychologiczne."
+  correctAnswer: "b) człowieka poznaje się w trudnych warunkach."
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2017-rq6"
-  passageRef: "certyfikat-polski-B2-2017-read-5"
+  questionId: certyfikat-polski-B2-2017-reading-1-2
+  passageRef: certyfikat-polski-B2-2017-read-1
   questionType: multiple_choice
-  questionText: "Pytanie 6"
-  correctAnswer: "n"
-  points: 1
+  questionText: "Z tego tekstu dowiadujemy się, że"
+  options: "a) bałkańscy lekarze wypisywali recepty na jogurt.|b) pierwszy pity we Francji jogurt był napojem z owczego mleka.|c) spożycie jogurtu zaszkodziło królowi Francji."
+  correctAnswer: "b) pierwszy pity we Francji jogurt był napojem z owczego mleka."
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2017-rq7"
-  passageRef: "certyfikat-polski-B2-2017-read-5"
+  questionId: certyfikat-polski-B2-2017-reading-1-3
+  passageRef: certyfikat-polski-B2-2017-read-1
   questionType: multiple_choice
-  questionText: "Pytanie 7"
-  correctAnswer: "o"
-  points: 1
+  questionText: "Z tego tekstu dowiadujemy się, że polskie firmy turystyczne"
+  options: "a) już nie bankrutują.|b) nie mają kłopotów z płatnościami.|c) są coraz bardziej wiarygodne."
+  correctAnswer: "c) są coraz bardziej wiarygodne."
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2017-rq8"
-  passageRef: "certyfikat-polski-B2-2017-read-5"
+  questionId: certyfikat-polski-B2-2017-reading-1-4
+  passageRef: certyfikat-polski-B2-2017-read-1
   questionType: multiple_choice
-  questionText: "Pytanie 8"
-  correctAnswer: "r"
-  points: 1
+  questionText: "Z tego tekstu dowiadujemy się, że"
+  options: "a) z powodu silnego wiatru wybuchł pożar.|b) w miejscu segregacji śmieci pojawił się ogień.|c) w jednostce wojskowej zapaliły się śmieci."
+  correctAnswer: "b) w miejscu segregacji śmieci pojawił się ogień."
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2017-rq9"
-  passageRef: "certyfikat-polski-B2-2017-read-5"
+  questionId: certyfikat-polski-B2-2017-reading-1-5
+  passageRef: certyfikat-polski-B2-2017-read-1
   questionType: multiple_choice
-  questionText: "Pytanie 9"
-  correctAnswer: "t"
-  points: 1
+  questionText: "Z tego tekstu dowiadujemy się, że"
+  options: "a) odbieranie zapachów jest zależne od wielkości dziurek w nosie.|b) wielkość nosa wpływa na powonienie.|c) duże dziurki w nosie powodują, że zmysł węchu jest mniej wyostrzony."
+  correctAnswer: "a) odbieranie zapachów jest zależne od wielkości dziurek w nosie."
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2017-rq10"
-  passageRef: "certyfikat-polski-B2-2017-read-5"
+  questionId: certyfikat-polski-B2-2017-reading-2-1
+  passageRef: certyfikat-polski-B2-2017-read-2
+  questionType: true_false_not_given
+  questionText: "Rok wcześniej lisy trzymały się z daleka od gospodarstw i ludzi."
+  options: "P|F|BI"
+  correctAnswer: P
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-2-2
+  passageRef: certyfikat-polski-B2-2017-read-2
+  questionType: true_false_not_given
+  questionText: "Obecnie lisy czują się pewnie w pobliżu domów."
+  options: "P|F|BI"
+  correctAnswer: P
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-2-3
+  passageRef: certyfikat-polski-B2-2017-read-2
+  questionType: true_false_not_given
+  questionText: "Lisia rodzina zamieszkała w gospodarstwie domowym pani Kasi."
+  options: "P|F|BI"
+  correctAnswer: F
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-2-4
+  passageRef: certyfikat-polski-B2-2017-read-2
+  questionType: true_false_not_given
+  questionText: "Lisy lubią zapach grillowanego mięsa."
+  options: "P|F|BI"
+  correctAnswer: BI
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-2-5
+  passageRef: certyfikat-polski-B2-2017-read-2
+  questionType: true_false_not_given
+  questionText: "Kot ze strachu przed lisicą schował się pod auto."
+  options: "P|F|BI"
+  correctAnswer: P
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-2-6
+  passageRef: certyfikat-polski-B2-2017-read-2
+  questionType: true_false_not_given
+  questionText: "Podczas wizyty gości lisica cały czas chodziła po podwórku."
+  options: "P|F|BI"
+  correctAnswer: F
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-2-7
+  passageRef: certyfikat-polski-B2-2017-read-2
+  questionType: true_false_not_given
+  questionText: "Pani Kasia jest pewna, że zwierzę nie jest zdrowe."
+  options: "P|F|BI"
+  correctAnswer: F
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-2-8
+  passageRef: certyfikat-polski-B2-2017-read-2
+  questionType: true_false_not_given
+  questionText: "W lipcu wolno polować na lisy."
+  options: "P|F|BI"
+  correctAnswer: F
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-2-9
+  passageRef: certyfikat-polski-B2-2017-read-2
+  questionType: true_false_not_given
+  questionText: "Pani Kasia hoduje drób."
+  options: "P|F|BI"
+  correctAnswer: BI
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-2-10
+  passageRef: certyfikat-polski-B2-2017-read-2
+  questionType: true_false_not_given
+  questionText: "W chwili obecnej starosta nie może pomóc mieszkańcom."
+  options: "P|F|BI"
+  correctAnswer: P
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-3-1
+  passageRef: certyfikat-polski-B2-2017-read-3
   questionType: match_heading
-  questionText: "Pytanie 10"
-  correctAnswer: "S"
-  points: 1
+  questionText: "Niezbędne wnętrze"
+  options: "A|B|C|D|E|F|G|H|I|J|K"
+  correctAnswer: K
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2017-rq11"
-  passageRef: "certyfikat-polski-B2-2017-read-5"
-  questionType: fill_gap
-  questionText: "Pytanie 11"
-  correctAnswer: "TEST PRZYKŁADOWY"
-  points: 1
-}
-READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2017-rq12"
-  passageRef: "certyfikat-polski-B2-2017-read-5"
+  questionId: certyfikat-polski-B2-2017-reading-3-2
+  passageRef: certyfikat-polski-B2-2017-read-3
   questionType: match_heading
-  questionText: "Pytanie 12"
-  correctAnswer: "B"
-  points: 1
+  questionText: "Optyczna korekta"
+  options: "A|B|C|D|E|F|G|H|I|J|K"
+  correctAnswer: A
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2017-rq13"
-  passageRef: "certyfikat-polski-B2-2017-read-5"
+  questionId: certyfikat-polski-B2-2017-reading-3-3
+  passageRef: certyfikat-polski-B2-2017-read-3
+  questionType: match_heading
+  questionText: "Pastelowe przyjęcia"
+  options: "A|B|C|D|E|F|G|H|I|J|K"
+  correctAnswer: B
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-3-4
+  passageRef: certyfikat-polski-B2-2017-read-3
+  questionType: match_heading
+  questionText: "Zabawa w chowanego"
+  options: "A|B|C|D|E|F|G|H|I|J|K"
+  correctAnswer: E
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-3-5
+  passageRef: certyfikat-polski-B2-2017-read-3
+  questionType: match_heading
+  questionText: "Smaki i zapachy w starym stylu"
+  options: "A|B|C|D|E|F|G|H|I|J|K"
+  correctAnswer: H
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-3-6
+  passageRef: certyfikat-polski-B2-2017-read-3
+  questionType: match_heading
+  questionText: "Podłoga na miękko"
+  options: "A|B|C|D|E|F|G|H|I|J|K"
+  correctAnswer: I
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-3-7
+  passageRef: certyfikat-polski-B2-2017-read-3
+  questionType: match_heading
+  questionText: "Tworzymy zdrowy klimat"
+  options: "A|B|C|D|E|F|G|H|I|J|K"
+  correctAnswer: J
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-3-8
+  passageRef: certyfikat-polski-B2-2017-read-3
+  questionType: match_heading
+  questionText: "Naścienne dzieła sztuki"
+  options: "A|B|C|D|E|F|G|H|I|J|K"
+  correctAnswer: G
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-3-9
+  passageRef: certyfikat-polski-B2-2017-read-3
+  questionType: match_heading
+  questionText: "Z tarasu do wnętrza"
+  options: "A|B|C|D|E|F|G|H|I|J|K"
+  correctAnswer: C
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-3-10
+  passageRef: certyfikat-polski-B2-2017-read-3
+  questionType: match_heading
+  questionText: "Archipelag malucha"
+  options: "A|B|C|D|E|F|G|H|I|J|K"
+  correctAnswer: F
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-4-1
+  passageRef: certyfikat-polski-B2-2017-read-4
   questionType: fill_gap
-  questionText: "Pytanie 13"
-  correctAnswer: "TRANSKRYPCJE I KLUCZ DO ZADAŃ"
-  points: 1
+  questionText: "Luka [1] w tekście „Szacunek”."
+  options: "A|B|C|D|E|F|G|H|I|J|K"
+  correctAnswer: D
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-4-2
+  passageRef: certyfikat-polski-B2-2017-read-4
+  questionType: fill_gap
+  questionText: "Luka [2] w tekście „Szacunek”."
+  options: "A|B|C|D|E|F|G|H|I|J|K"
+  correctAnswer: F
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-4-3
+  passageRef: certyfikat-polski-B2-2017-read-4
+  questionType: fill_gap
+  questionText: "Luka [3] w tekście „Szacunek”."
+  options: "A|B|C|D|E|F|G|H|I|J|K"
+  correctAnswer: A
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-4-4
+  passageRef: certyfikat-polski-B2-2017-read-4
+  questionType: fill_gap
+  questionText: "Luka [4] w tekście „Szacunek”."
+  options: "A|B|C|D|E|F|G|H|I|J|K"
+  correctAnswer: K
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-4-5
+  passageRef: certyfikat-polski-B2-2017-read-4
+  questionType: fill_gap
+  questionText: "Luka [5] w tekście „Szacunek”."
+  options: "A|B|C|D|E|F|G|H|I|J|K"
+  correctAnswer: B
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-4-6
+  passageRef: certyfikat-polski-B2-2017-read-4
+  questionType: fill_gap
+  questionText: "Luka [6] w tekście „Szacunek”."
+  options: "A|B|C|D|E|F|G|H|I|J|K"
+  correctAnswer: G
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-4-7
+  passageRef: certyfikat-polski-B2-2017-read-4
+  questionType: fill_gap
+  questionText: "Luka [7] w tekście „Szacunek”."
+  options: "A|B|C|D|E|F|G|H|I|J|K"
+  correctAnswer: C
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-4-8
+  passageRef: certyfikat-polski-B2-2017-read-4
+  questionType: fill_gap
+  questionText: "Luka [8] w tekście „Szacunek”."
+  options: "A|B|C|D|E|F|G|H|I|J|K"
+  correctAnswer: J
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-4-9
+  passageRef: certyfikat-polski-B2-2017-read-4
+  questionType: fill_gap
+  questionText: "Luka [9] w tekście „Szacunek”."
+  options: "A|B|C|D|E|F|G|H|I|J|K"
+  correctAnswer: E
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-4-10
+  passageRef: certyfikat-polski-B2-2017-read-4
+  questionType: fill_gap
+  questionText: "Luka [10] w tekście „Szacunek”."
+  options: "A|B|C|D|E|F|G|H|I|J|K"
+  correctAnswer: H
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-5-1
+  passageRef: certyfikat-polski-B2-2017-read-5
+  questionType: fill_gap
+  questionText: "Ich […] mogą nabywać usługi."
+  options: "decydenci|klienci|konsumenci|kandydaci"
+  correctAnswer: klienci
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-5-2
+  passageRef: certyfikat-polski-B2-2017-read-5
+  questionType: fill_gap
+  questionText: "Pomagając sobie […]."
+  options: "wyłącznie|wzajemnie|samemu|jedynie"
+  correctAnswer: wzajemnie
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-5-3
+  passageRef: certyfikat-polski-B2-2017-read-5
+  questionType: fill_gap
+  questionText: "Naprawą […] kranu."
+  options: "lejącego|wylewającego|płynącego|cieknącego"
+  correctAnswer: "cieknącego"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-5-4
+  passageRef: certyfikat-polski-B2-2017-read-5
+  questionType: fill_gap
+  questionText: "Banki czasu to stowarzyszenia, których […] polega na wymianie usług."
+  options: "akcja|potęga|działalność|sprawność"
+  correctAnswer: "działalność"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-5-5
+  passageRef: certyfikat-polski-B2-2017-read-5
+  questionType: fill_gap
+  questionText: "To rodzaj […] pomocy."
+  options: "sąsiedniej|sąsiadującej|siedzącej|sąsiedzkiej"
+  correctAnswer: "sąsiedzkiej"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-5-6
+  passageRef: certyfikat-polski-B2-2017-read-5
+  questionType: fill_gap
+  questionText: "Na koncie […] są informacje o godzinach pracy."
+  options: "zachowane|ukrywane|gromadzone|wymieniane"
+  correctAnswer: gromadzone
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-5-7
+  passageRef: certyfikat-polski-B2-2017-read-5
+  questionType: fill_gap
+  questionText: "Ktoś inny tyle samo czasu […] jemu."
+  options: "pożyczy|poświęci|poda|przekaże"
+  correctAnswer: "poświęci"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-5-8
+  passageRef: certyfikat-polski-B2-2017-read-5
+  questionType: fill_gap
+  questionText: "Różnorodność usług jest […]."
+  options: "niepoliczona|niepoliczalna|nieznana|nieograniczona"
+  correctAnswer: nieograniczona
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-5-9
+  passageRef: certyfikat-polski-B2-2017-read-5
+  questionType: fill_gap
+  questionText: "[…] naukę pływania."
+  options: "bezstresową|bezczynną|bezpośrednią|bezwzględną"
+  correctAnswer: "bezstresową"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-5-10
+  passageRef: certyfikat-polski-B2-2017-read-5
+  questionType: fill_gap
+  questionText: "Dzięki bankowi wiem, gdzie szukać pomocy – […] ci, którzy skorzystali."
+  options: "uznają|zeznają|przyznają|doznają"
+  correctAnswer: "przyznają"
+  pointsQuarter: 2
 }

@@ -1,5 +1,5 @@
 // Generated from dsl/exam.data-contract
-// source-sha256=38312e40b51866266241f0d457f0b1f2091a4dc0f9c70d53551cb502cdd032fe
+// source-sha256=992a404f2b4446e2e0e639f8406138254b00bba16e0cbbd01dd5b91240805608
 // Edit the source, then run biome generate.
 
 package polski.exam.data.oracle
@@ -9,6 +9,16 @@ enum class ListeningQuestionRowQuestionType(val tag: String) {
     TRUE_FALSE("true_false"),
     FILL_GAP("fill_gap"),
     MATCH("match"),
+}
+
+enum class ListeningQuestionRowGradingMode(val tag: String) {
+    EXACT("exact"),
+    OPEN_MANUAL("open_manual"),
+}
+
+enum class ListeningQuestionRowAnswerMode(val tag: String) {
+    SINGLE("single"),
+    UNORDERED_SET("unordered_set"),
 }
 
 enum class ReadingQuestionRowQuestionType(val tag: String) {
@@ -26,6 +36,11 @@ enum class GrammarItemRowQuestionType(val tag: String) {
     WORD_FORMATION("word_formation"),
 }
 
+enum class GrammarItemRowGradingMode(val tag: String) {
+    EXACT("exact"),
+    OPEN_MANUAL("open_manual"),
+}
+
 enum class WritingTaskRowGenre(val tag: String) {
     LETTER("letter"),
     DESCRIPTION("description"),
@@ -37,12 +52,58 @@ enum class WritingTaskRowGenre(val tag: String) {
     REPORT("report"),
     SMS("sms"),
     OPINION("opinion"),
+    ANNOUNCEMENT("announcement"),
+    EMAIL("email"),
+    REVIEW("review"),
+    ADVERTISEMENT("advertisement"),
 }
 
 enum class ExamInventoryCaseRowSection(val tag: String) {
     LISTENING("listening"),
     READING("reading"),
     GRAMMAR("grammar"),
+}
+
+enum class AnswerEvaluationCaseRowConsumer(val tag: String) {
+    GRAMMAR("grammar"),
+    LISTENING("listening"),
+}
+
+enum class AnswerEvaluationCaseRowMode(val tag: String) {
+    EXACT("exact"),
+    OPEN_MANUAL("open_manual"),
+}
+
+enum class AnswerEvaluationCaseRowExpectedStatus(val tag: String) {
+    CONFIRMED_FULL("confirmed_full"),
+    CONFIRMED_PARTIAL("confirmed_partial"),
+    WRONG("wrong"),
+    PENDING_MANUAL("pending_manual"),
+}
+
+enum class UnorderedSetCaseRowMode(val tag: String) {
+    EXACT("exact"),
+    OPEN_MANUAL("open_manual"),
+}
+
+enum class UnorderedSetCaseRowExpectedStatus(val tag: String) {
+    CONFIRMED_FULL("confirmed_full"),
+    CONFIRMED_PARTIAL("confirmed_partial"),
+    WRONG("wrong"),
+    PENDING_MANUAL("pending_manual"),
+}
+
+enum class OpenItemGroupCaseRowSection(val tag: String) {
+    GRAMMAR("grammar"),
+    LISTENING("listening"),
+}
+
+enum class OpenItemGroupCaseRowExpectedUnknownStatus(val tag: String) {
+    PENDING_MANUAL("pending_manual"),
+}
+
+enum class OpenItemGroupCaseRowExpectedBlankStatus(val tag: String) {
+    WRONG("wrong"),
 }
 
 data class ExamRow(
@@ -77,6 +138,16 @@ data class ListeningQuestionRow(
     val correctAnswer: String,
     val points: Int? = null,
     val pointsQuarter: Int? = null,
+    val gradingMode: ListeningQuestionRowGradingMode? = null,
+    val answerMode: ListeningQuestionRowAnswerMode? = null,
+    val creditPerCorrectQuarter: Int? = null,
+)
+
+data class ListeningAnswerVariantRow(
+    val variantId: String,
+    val questionRef: String,
+    val answer: String,
+    val earnedQuarter: Int,
 )
 
 data class ReadingPassageRow(
@@ -118,6 +189,7 @@ data class GrammarItemRow(
     val correctAnswer: String,
     val points: Int? = null,
     val pointsQuarter: Int? = null,
+    val gradingMode: GrammarItemRowGradingMode? = null,
 )
 
 data class GrammarAnswerVariantRow(
@@ -188,6 +260,57 @@ data class QuarterFormatCaseRow(
     val id: String,
     val pointsQuarter: Int,
     val expectedText: String,
+)
+
+data class AnswerEvaluationCaseRow(
+    val id: String,
+    val consumer: AnswerEvaluationCaseRowConsumer,
+    val mode: AnswerEvaluationCaseRowMode,
+    val fullAnswer: String,
+    val variantAnswer: String? = null,
+    val variantQuarter: Int? = null,
+    val maximumQuarter: Int,
+    val answer: String,
+    val expectedStatus: AnswerEvaluationCaseRowExpectedStatus,
+    val expectedConfirmedQuarter: Int,
+    val expectedPendingQuarter: Int,
+)
+
+data class AnswerAttemptCaseRow(
+    val id: String,
+    val exactAnswer: String,
+    val openAnswer: String,
+    val exactResponse: String,
+    val openResponse: String,
+    val exactMaximumQuarter: Int,
+    val openMaximumQuarter: Int,
+    val expectedConfirmedQuarter: Int,
+    val expectedPendingQuarter: Int,
+    val expectedPossibleQuarter: Int,
+    val expectedFinal: Boolean,
+)
+
+data class UnorderedSetCaseRow(
+    val id: String,
+    val correctAnswer: String,
+    val options: String,
+    val answer: String,
+    val maximumQuarter: Int,
+    val creditPerCorrectQuarter: Int? = null,
+    val mode: UnorderedSetCaseRowMode? = null,
+    val expectedStatus: UnorderedSetCaseRowExpectedStatus,
+    val expectedConfirmedQuarter: Int,
+    val expectedPendingQuarter: Int? = null,
+)
+
+data class OpenItemGroupCaseRow(
+    val id: String,
+    val section: OpenItemGroupCaseRowSection,
+    val groupRef: String,
+    val expectedItemCount: Int,
+    val unknownAnswer: String,
+    val expectedUnknownStatus: OpenItemGroupCaseRowExpectedUnknownStatus,
+    val expectedBlankStatus: OpenItemGroupCaseRowExpectedBlankStatus,
 )
 
 val SCORING_CASE_ROW_ROWS: List<ScoringCaseRow> = listOf(
@@ -416,4 +539,323 @@ val QUARTER_FORMAT_CASE_ROW_ROWS: List<QuarterFormatCaseRow> = listOf(
     QuarterFormatCaseRow(id = "quarter-two", pointsQuarter = 2, expectedText = "0,5"),
     QuarterFormatCaseRow(id = "quarter-three", pointsQuarter = 3, expectedText = "0,75"),
     QuarterFormatCaseRow(id = "quarter-120", pointsQuarter = 120, expectedText = "30"),
+)
+
+val ANSWER_EVALUATION_CASE_ROW_ROWS: List<AnswerEvaluationCaseRow> = listOf(
+    AnswerEvaluationCaseRow(
+        id = "exact-unknown",
+        consumer = AnswerEvaluationCaseRowConsumer.GRAMMAR,
+        mode = AnswerEvaluationCaseRowMode.EXACT,
+        fullAnswer = "Komu",
+        maximumQuarter = 2,
+        answer = "Z kim",
+        expectedStatus = AnswerEvaluationCaseRowExpectedStatus.WRONG,
+        expectedConfirmedQuarter = 0,
+        expectedPendingQuarter = 0,
+    ),
+    AnswerEvaluationCaseRow(
+        id = "open-known-full",
+        consumer = AnswerEvaluationCaseRowConsumer.GRAMMAR,
+        mode = AnswerEvaluationCaseRowMode.OPEN_MANUAL,
+        fullAnswer = "Bardzo brakuje mi mamy.",
+        maximumQuarter = 4,
+        answer = "Bardzo brakuje mi mamy.",
+        expectedStatus = AnswerEvaluationCaseRowExpectedStatus.CONFIRMED_FULL,
+        expectedConfirmedQuarter = 4,
+        expectedPendingQuarter = 0,
+    ),
+    AnswerEvaluationCaseRow(
+        id = "open-known-partial",
+        consumer = AnswerEvaluationCaseRowConsumer.GRAMMAR,
+        mode = AnswerEvaluationCaseRowMode.OPEN_MANUAL,
+        fullAnswer = "Z czego",
+        variantAnswer = "Z jakiej kapusty",
+        variantQuarter = 1,
+        maximumQuarter = 2,
+        answer = "Z jakiej kapusty",
+        expectedStatus = AnswerEvaluationCaseRowExpectedStatus.CONFIRMED_PARTIAL,
+        expectedConfirmedQuarter = 1,
+        expectedPendingQuarter = 0,
+    ),
+    AnswerEvaluationCaseRow(
+        id = "open-empty",
+        consumer = AnswerEvaluationCaseRowConsumer.GRAMMAR,
+        mode = AnswerEvaluationCaseRowMode.OPEN_MANUAL,
+        fullAnswer = "Bardzo brakuje mi mamy.",
+        maximumQuarter = 4,
+        answer = "",
+        expectedStatus = AnswerEvaluationCaseRowExpectedStatus.WRONG,
+        expectedConfirmedQuarter = 0,
+        expectedPendingQuarter = 0,
+    ),
+    AnswerEvaluationCaseRow(
+        id = "open-spaces",
+        consumer = AnswerEvaluationCaseRowConsumer.GRAMMAR,
+        mode = AnswerEvaluationCaseRowMode.OPEN_MANUAL,
+        fullAnswer = "Bardzo brakuje mi mamy.",
+        maximumQuarter = 4,
+        answer = "   ",
+        expectedStatus = AnswerEvaluationCaseRowExpectedStatus.WRONG,
+        expectedConfirmedQuarter = 0,
+        expectedPendingQuarter = 0,
+    ),
+    AnswerEvaluationCaseRow(
+        id = "open-unknown",
+        consumer = AnswerEvaluationCaseRowConsumer.GRAMMAR,
+        mode = AnswerEvaluationCaseRowMode.OPEN_MANUAL,
+        fullAnswer = "Bardzo brakuje mi mamy.",
+        maximumQuarter = 4,
+        answer = "Brakuje mi bardzo mamy.",
+        expectedStatus = AnswerEvaluationCaseRowExpectedStatus.PENDING_MANUAL,
+        expectedConfirmedQuarter = 0,
+        expectedPendingQuarter = 4,
+    ),
+    AnswerEvaluationCaseRow(
+        id = "listening-open-unknown",
+        consumer = AnswerEvaluationCaseRowConsumer.LISTENING,
+        mode = AnswerEvaluationCaseRowMode.OPEN_MANUAL,
+        fullAnswer = "młodą osobą",
+        maximumQuarter = 2,
+        answer = "młodą dziewczyną",
+        expectedStatus = AnswerEvaluationCaseRowExpectedStatus.PENDING_MANUAL,
+        expectedConfirmedQuarter = 0,
+        expectedPendingQuarter = 2,
+    ),
+    AnswerEvaluationCaseRow(
+        id = "listening-open-known-partial",
+        consumer = AnswerEvaluationCaseRowConsumer.LISTENING,
+        mode = AnswerEvaluationCaseRowMode.OPEN_MANUAL,
+        fullAnswer = "z dzisiejszej Etiopii",
+        variantAnswer = "z Afryki",
+        variantQuarter = 2,
+        maximumQuarter = 4,
+        answer = "z Afryki",
+        expectedStatus = AnswerEvaluationCaseRowExpectedStatus.CONFIRMED_PARTIAL,
+        expectedConfirmedQuarter = 2,
+        expectedPendingQuarter = 0,
+    ),
+)
+
+val ANSWER_ATTEMPT_CASE_ROW_ROWS: List<AnswerAttemptCaseRow> = listOf(
+    AnswerAttemptCaseRow(
+        id = "known-plus-pending",
+        exactAnswer = "w",
+        openAnswer = "Bardzo brakuje mi mamy.",
+        exactResponse = "w",
+        openResponse = "Brakuje mi bardzo mamy.",
+        exactMaximumQuarter = 4,
+        openMaximumQuarter = 4,
+        expectedConfirmedQuarter = 4,
+        expectedPendingQuarter = 4,
+        expectedPossibleQuarter = 8,
+        expectedFinal = false,
+    ),
+    AnswerAttemptCaseRow(
+        id = "wrong-plus-known",
+        exactAnswer = "w",
+        openAnswer = "Bardzo brakuje mi mamy.",
+        exactResponse = "z",
+        openResponse = "Bardzo brakuje mi mamy.",
+        exactMaximumQuarter = 4,
+        openMaximumQuarter = 4,
+        expectedConfirmedQuarter = 4,
+        expectedPendingQuarter = 0,
+        expectedPossibleQuarter = 8,
+        expectedFinal = true,
+    ),
+)
+
+val UNORDERED_SET_CASE_ROW_ROWS: List<UnorderedSetCaseRow> = listOf(
+    UnorderedSetCaseRow(
+        id = "b1-2020-forward",
+        correctAnswer = "1|4",
+        options = "1|2|3|4",
+        answer = "1|4",
+        maximumQuarter = 8,
+        creditPerCorrectQuarter = 4,
+        expectedStatus = UnorderedSetCaseRowExpectedStatus.CONFIRMED_FULL,
+        expectedConfirmedQuarter = 8,
+    ),
+    UnorderedSetCaseRow(
+        id = "b1-2020-reversed",
+        correctAnswer = "1|4",
+        options = "1|2|3|4",
+        answer = "4|1",
+        maximumQuarter = 8,
+        creditPerCorrectQuarter = 4,
+        expectedStatus = UnorderedSetCaseRowExpectedStatus.CONFIRMED_FULL,
+        expectedConfirmedQuarter = 8,
+    ),
+    UnorderedSetCaseRow(
+        id = "b1-2020-single",
+        correctAnswer = "1|4",
+        options = "1|2|3|4",
+        answer = "1",
+        maximumQuarter = 8,
+        creditPerCorrectQuarter = 4,
+        expectedStatus = UnorderedSetCaseRowExpectedStatus.CONFIRMED_PARTIAL,
+        expectedConfirmedQuarter = 4,
+    ),
+    UnorderedSetCaseRow(
+        id = "b1-2020-one-correct-one-wrong",
+        correctAnswer = "1|4",
+        options = "1|2|3|4",
+        answer = "1|3",
+        maximumQuarter = 8,
+        creditPerCorrectQuarter = 4,
+        expectedStatus = UnorderedSetCaseRowExpectedStatus.CONFIRMED_PARTIAL,
+        expectedConfirmedQuarter = 4,
+    ),
+    UnorderedSetCaseRow(
+        id = "b1-2020-extra",
+        correctAnswer = "1|4",
+        options = "1|2|3|4",
+        answer = "1|4|3",
+        maximumQuarter = 8,
+        creditPerCorrectQuarter = 4,
+        expectedStatus = UnorderedSetCaseRowExpectedStatus.WRONG,
+        expectedConfirmedQuarter = 0,
+    ),
+    UnorderedSetCaseRow(
+        id = "b1-2020-duplicate",
+        correctAnswer = "1|4",
+        options = "1|2|3|4",
+        answer = "1|1",
+        maximumQuarter = 8,
+        creditPerCorrectQuarter = 4,
+        expectedStatus = UnorderedSetCaseRowExpectedStatus.WRONG,
+        expectedConfirmedQuarter = 0,
+    ),
+    UnorderedSetCaseRow(
+        id = "b1-2020-empty",
+        correctAnswer = "1|4",
+        options = "1|2|3|4",
+        answer = "",
+        maximumQuarter = 8,
+        creditPerCorrectQuarter = 4,
+        expectedStatus = UnorderedSetCaseRowExpectedStatus.WRONG,
+        expectedConfirmedQuarter = 0,
+    ),
+    UnorderedSetCaseRow(
+        id = "three-token-reversed",
+        correctAnswer = "1|2|4",
+        options = "1|2|3|4",
+        answer = "4|2|1",
+        maximumQuarter = 12,
+        creditPerCorrectQuarter = 4,
+        expectedStatus = UnorderedSetCaseRowExpectedStatus.CONFIRMED_FULL,
+        expectedConfirmedQuarter = 12,
+    ),
+    UnorderedSetCaseRow(
+        id = "b2-2017-duplicate",
+        correctAnswer = "1|2|4",
+        options = "1|2|3|4",
+        answer = "2|3|3",
+        maximumQuarter = 12,
+        creditPerCorrectQuarter = 4,
+        expectedStatus = UnorderedSetCaseRowExpectedStatus.WRONG,
+        expectedConfirmedQuarter = 0,
+    ),
+    UnorderedSetCaseRow(
+        id = "b2-2017-one-correct-one-wrong",
+        correctAnswer = "1|2|4",
+        options = "1|2|3|4",
+        answer = "2|3",
+        maximumQuarter = 12,
+        creditPerCorrectQuarter = 4,
+        expectedStatus = UnorderedSetCaseRowExpectedStatus.CONFIRMED_PARTIAL,
+        expectedConfirmedQuarter = 4,
+    ),
+    UnorderedSetCaseRow(
+        id = "b1-2020-all-wrong",
+        correctAnswer = "1|4",
+        options = "1|2|3|4",
+        answer = "2|3",
+        maximumQuarter = 8,
+        creditPerCorrectQuarter = 4,
+        expectedStatus = UnorderedSetCaseRowExpectedStatus.WRONG,
+        expectedConfirmedQuarter = 0,
+    ),
+    UnorderedSetCaseRow(
+        id = "generic-exact-single",
+        correctAnswer = "1|4",
+        options = "1|2|3|4",
+        answer = "1",
+        maximumQuarter = 8,
+        expectedStatus = UnorderedSetCaseRowExpectedStatus.WRONG,
+        expectedConfirmedQuarter = 0,
+    ),
+    UnorderedSetCaseRow(
+        id = "typed-pair-reversed",
+        correctAnswer = "czajnik|filiżanka",
+        options = "",
+        answer = "filiżanka|czajnik",
+        maximumQuarter = 4,
+        creditPerCorrectQuarter = 2,
+        expectedStatus = UnorderedSetCaseRowExpectedStatus.CONFIRMED_FULL,
+        expectedConfirmedQuarter = 4,
+    ),
+    UnorderedSetCaseRow(
+        id = "typed-one-known",
+        correctAnswer = "czajnik|filiżanka",
+        options = "",
+        answer = "czajnik",
+        maximumQuarter = 4,
+        creditPerCorrectQuarter = 2,
+        expectedStatus = UnorderedSetCaseRowExpectedStatus.CONFIRMED_PARTIAL,
+        expectedConfirmedQuarter = 2,
+    ),
+    UnorderedSetCaseRow(
+        id = "typed-one-known-one-wrong",
+        correctAnswer = "czajnik|filiżanka",
+        options = "",
+        answer = "czajnik|obce",
+        maximumQuarter = 4,
+        creditPerCorrectQuarter = 2,
+        expectedStatus = UnorderedSetCaseRowExpectedStatus.CONFIRMED_PARTIAL,
+        expectedConfirmedQuarter = 2,
+    ),
+    UnorderedSetCaseRow(
+        id = "typed-duplicate",
+        correctAnswer = "czajnik|filiżanka",
+        options = "",
+        answer = "czajnik|czajnik",
+        maximumQuarter = 4,
+        creditPerCorrectQuarter = 2,
+        expectedStatus = UnorderedSetCaseRowExpectedStatus.WRONG,
+        expectedConfirmedQuarter = 0,
+    ),
+    UnorderedSetCaseRow(
+        id = "typed-open-mixed",
+        correctAnswer = "czajnik|filiżanka",
+        options = "",
+        answer = "czajnik|inne poprawne słowo",
+        maximumQuarter = 4,
+        creditPerCorrectQuarter = 2,
+        mode = UnorderedSetCaseRowMode.OPEN_MANUAL,
+        expectedStatus = UnorderedSetCaseRowExpectedStatus.PENDING_MANUAL,
+        expectedConfirmedQuarter = 2,
+        expectedPendingQuarter = 2,
+    ),
+)
+
+val OPEN_ITEM_GROUP_CASE_ROW_ROWS: List<OpenItemGroupCaseRow> = listOf(
+    OpenItemGroupCaseRow(
+        id = "b1-2020-grammar-vi",
+        section = OpenItemGroupCaseRowSection.GRAMMAR,
+        groupRef = "certyfikat-polski-B1-2020-grammar-6",
+        expectedItemCount = 5,
+        unknownAnswer = "inna odpowiedź spoza drukowanego klucza",
+        expectedUnknownStatus = OpenItemGroupCaseRowExpectedUnknownStatus.PENDING_MANUAL,
+        expectedBlankStatus = OpenItemGroupCaseRowExpectedBlankStatus.WRONG,
+    ),
+    OpenItemGroupCaseRow(
+        id = "b2-2017-listening-v",
+        section = OpenItemGroupCaseRowSection.LISTENING,
+        groupRef = "certyfikat-polski-B2-2017-listen-5",
+        expectedItemCount = 9,
+        unknownAnswer = "inna odpowiedź spoza drukowanego klucza",
+        expectedUnknownStatus = OpenItemGroupCaseRowExpectedUnknownStatus.PENDING_MANUAL,
+        expectedBlankStatus = OpenItemGroupCaseRowExpectedBlankStatus.WRONG,
+    ),
 )

@@ -1,0 +1,14 @@
+DSL 1
+# Additional full-credit alternatives printed in B2/2017 klucz.pdf pp. 7–8.
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2017-grammar-2-3-alt-1
+  itemRef: certyfikat-polski-B2-2017-grammar-2-3
+  answer: po
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2017-grammar-7-2-alt-1
+  itemRef: certyfikat-polski-B2-2017-grammar-7-2
+  answer: dwojgiem
+  earnedQuarter: 4
+}

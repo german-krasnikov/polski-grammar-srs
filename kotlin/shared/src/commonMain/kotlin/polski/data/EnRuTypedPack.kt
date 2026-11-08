@@ -85,6 +85,8 @@ internal object EnRuTypedPack : CoursePackFields {
         "grammar" to "Grammar", "listening" to "Listening", "reading" to "Reading",
         "writing" to "Writing", "selectWritingSet" to "Select a set", "changeWritingSet" to "Change set", "writingSet" to "Set",
         "results" to "Results", "comingSoon" to "Coming soon", "exam" to "Exam",
+        "examConfirmedPoints" to "Confirmed", "examPendingPoints" to "Awaiting review",
+        "examManualReview" to "Needs manual review", "examOfficialExamples" to "Examples from the key",
         "cardsTab" to "Cards", "vocabularyTab" to "Vocabulary", "matrixTab" to "Tables & scheme",
         "lang.pl" to "Польский", "lang.en" to "Английский", "lang.ru" to "Русский",
         "adverb.pl" to "по-польски", "adverb.en" to "по-английски", "adverb.ru" to "по-русски",

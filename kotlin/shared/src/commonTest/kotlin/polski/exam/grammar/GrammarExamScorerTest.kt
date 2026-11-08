@@ -4,8 +4,10 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 import polski.exam.QuestionType
+import polski.exam.ExamGradingMode
 import polski.exam.data.oracle.SCORING_CASE_ROW_ROWS
 import polski.exam.data.oracle.QUARTER_SCORING_CASE_ROW_ROWS
+import polski.exam.data.oracle.ANSWER_ATTEMPT_CASE_ROW_ROWS
 
 /**
  * Loops [SCORING_CASE_ROW_ROWS] (generated from dsl/exam-scoring/scoring.core-data by biome generate).
@@ -69,6 +71,27 @@ class GrammarExamScorerTest {
             assertFailsWith<IllegalArgumentException> {
                 template.copy(correctAnswer = "z którym", pointsQuarter = 2, scoredVariants = listOf(variant))
             }
+        }
+    }
+
+    @Test fun provisionalAttemptOracle() {
+        for (row in ANSWER_ATTEMPT_CASE_ROW_ROWS) {
+            val exact = template.copy(itemId = "exact", correctAnswer = row.exactAnswer, pointsQuarter = row.exactMaximumQuarter)
+            val open = template.copy(itemId = "open", correctAnswer = row.openAnswer, pointsQuarter = row.openMaximumQuarter, gradingMode = ExamGradingMode.OpenManual)
+            val initial = GrammarExamState(GrammarTest(row.id, "", listOf(exact, open)))
+            val answered = reduceGrammarExam(
+                reduceGrammarExam(initial, GrammarExamAction.Answer(exact.itemId, row.exactResponse)),
+                GrammarExamAction.Answer(open.itemId, row.openResponse),
+            )
+            val submitted = reduceGrammarExam(answered, GrammarExamAction.Submit)
+            val result = requireNotNull(submitted.result)
+            assertEquals(row.expectedConfirmedQuarter, result.earnedQuarterPoints, row.id)
+            assertEquals(row.expectedPendingQuarter, result.manualPendingQuarterPoints, row.id)
+            assertEquals(row.expectedPossibleQuarter, result.possibleQuarterPoints, row.id)
+            assertEquals(row.expectedFinal, result.isFinal, row.id)
+            assertEquals(row.expectedConfirmedQuarter + row.expectedPendingQuarter, result.upperBoundQuarterPoints, row.id)
+            assertEquals(submitted, reduceGrammarExam(submitted, GrammarExamAction.Submit), row.id)
+            assertEquals(submitted, reduceGrammarExam(submitted, GrammarExamAction.Answer(open.itemId, "changed")), row.id)
         }
     }
 }

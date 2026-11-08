@@ -1,5 +1,8 @@
 package polski.exam.grammar
 
+import polski.exam.ExamAnswerEvaluation
+import polski.exam.ExamAnswerVariant
+import polski.exam.evaluateExamAnswer
 import polski.grammar.normalize
 
 data class GrammarExamResult(
@@ -9,30 +12,39 @@ data class GrammarExamResult(
     val percentage: Double,
     val earnedQuarterPoints: Int = correct * 4,
     val possibleQuarterPoints: Int = total * 4,
-)
+    val manualPendingQuarterPoints: Int = 0,
+) {
+    val isFinal: Boolean get() = manualPendingQuarterPoints == 0
+    val upperBoundQuarterPoints: Int get() = earnedQuarterPoints + manualPendingQuarterPoints
+}
 
 object GrammarExamScorer {
     fun score(item: GrammarItem, answer: String): Boolean =
         normalize(answer) == normalize(item.correctAnswer)
 
+    fun grade(item: GrammarItem, answer: String): ExamAnswerEvaluation = evaluateExamAnswer(
+        mode = item.gradingMode,
+        fullAnswer = item.correctAnswer,
+        variants = item.scoredVariants.map { ExamAnswerVariant(it.answer, it.earnedQuarter) },
+        answer = answer,
+        maximumQuarter = item.maximumQuarter,
+    )
+
     /** Earned score in exact quarter-point units. Full answer takes precedence over variants. */
-    fun earnedQuarter(item: GrammarItem, answer: String): Int {
-        if (score(item, answer)) return item.maximumQuarter
-        val normalized = normalize(answer)
-        return item.scoredVariants.firstOrNull { normalize(it.answer) == normalized }?.earnedQuarter ?: 0
-    }
+    fun earnedQuarter(item: GrammarItem, answer: String): Int = grade(item, answer).confirmedQuarter
 
     fun scoreAttempt(test: GrammarTest, answers: Map<String, String>): GrammarExamResult {
         val possibleQuarter = test.items.sumOf { it.maximumQuarter }
-        val earnedQuarter = test.items.sumOf { item ->
-            answers[item.itemId]?.let { earnedQuarter(item, it) } ?: 0
-        }
+        val evaluations = test.items.map { item -> grade(item, answers[item.itemId].orEmpty()) }
+        val earnedQuarter = evaluations.sumOf { it.confirmedQuarter }
+        val pendingQuarter = evaluations.sumOf { it.pendingQuarter }
         return GrammarExamResult(
             correct = earnedQuarter / 4,
             total = possibleQuarter / 4,
             percentage = if (possibleQuarter > 0) earnedQuarter.toDouble() / possibleQuarter * 100.0 else 0.0,
             earnedQuarterPoints = earnedQuarter,
             possibleQuarterPoints = possibleQuarter,
+            manualPendingQuarterPoints = pendingQuarter,
         )
     }
 }

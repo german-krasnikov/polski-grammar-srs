@@ -2,6 +2,7 @@ import { expect, test } from '@playwright/test';
 import { mkdirSync } from 'node:fs';
 import { waitForAnimationsSettled } from './kotlin-wait';
 import { installProgressReader } from './kotlin-storage';
+import { readPolskiText } from './polski-text';
 
 const preferencesKey = 'polski-preferences-v1';
 const progressKey = 'polski-grammar-srs-kmp-preview-v1';
@@ -70,7 +71,7 @@ test('legacy method migrates once and settings route preserves the question draf
   await expect(page).toHaveURL(/#\/training$/);
   await expect(page.getByRole('textbox', { name: 'Ответ по-польски' })).toHaveValue('Moja próba');
   expect(await page.evaluate(key => localStorage.getItem(key), progressKey)).toBe(before);
-  expect(await page.evaluate(key => JSON.parse(localStorage.getItem(key) ?? '{}').styleId, preferencesKey)).toBe('SituationFirst');
+  expect(readPolskiText((await page.evaluate(key => localStorage.getItem(key), preferencesKey))!, 'preferences').styleId).toBe('SituationFirst');
   await page.reload();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
 });
@@ -82,13 +83,13 @@ test('legacy tint is preserved in settings JSON without an optical control', asy
   await expect(page.locator('#settings-glass-tint')).toHaveCount(0);
   await page.getByRole('combobox', { name: 'Тема' }).selectOption('Light');
   expect(await page.evaluate(() => localStorage.getItem('polski-preferences-v1-backup'))).toBe(legacy);
-  const migrated = await page.evaluate(key => JSON.parse(localStorage.getItem(key)!), preferencesKey);
+  const migrated = readPolskiText((await page.evaluate(key => localStorage.getItem(key), preferencesKey))!, 'preferences');
   expect(migrated).toMatchObject({ schemaVersion: 3, appearance: 'Light', answerMode: 'Typed', glassTintPercent: 50 });
   const custom = { ...migrated, glassTintPercent: 17 };
   await page.addInitScript(([key, value]) => localStorage.setItem(key, JSON.stringify(value)), [preferencesKey, custom] as const);
   await page.reload();
   await page.getByRole('combobox', { name: 'Тема' }).selectOption('Dark');
-  expect(await page.evaluate(key => JSON.parse(localStorage.getItem(key)!).glassTintPercent, preferencesKey)).toBe(17);
+  expect(readPolskiText((await page.evaluate(key => localStorage.getItem(key), preferencesKey))!, 'preferences').glassTintPercent).toBe(17);
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
   await expect(page.locator('#settings-glass-tint')).toHaveCount(0);
 });
@@ -112,9 +113,30 @@ test('style picker offers all 4 recipes with a description and no native-contras
   await picker.selectOption('NativeContrast');
   await expect(page.locator('.settings-style-fallback-hint')).toHaveCount(0);
   await expect(page.locator('.settings-style-description')).toHaveText('По-родному так → по-изучаемому так: где совпадает, где отличается.');
-  expect(await page.evaluate(key => JSON.parse(localStorage.getItem(key) ?? '{}').styleId, preferencesKey)).toBe('NativeContrast');
+  expect(readPolskiText((await page.evaluate(key => localStorage.getItem(key), preferencesKey))!, 'preferences').styleId).toBe('NativeContrast');
   await page.reload();
   await expect(picker).toHaveValue('NativeContrast');
+});
+
+test('focused settings switches survive same-route save and clock refresh without browser errors', async ({ page }) => {
+  const errors: string[] = [];
+  page.on('pageerror', error => errors.push(error.message));
+  await page.clock.install({ time: new Date('2026-11-08T12:00:00.000Z') });
+  await page.goto('/#/settings');
+  for (const id of ['settings-swipe-rating', 'settings-animations']) {
+    const toggle = page.locator(`#${id}`);
+    const before = await toggle.isChecked();
+    await toggle.focus();
+    await page.keyboard.press('Space');
+    if (before) await expect(toggle).not.toBeChecked();
+    else await expect(toggle).toBeChecked();
+    await expect(toggle).toBeFocused();
+    await page.clock.runFor(60_000);
+    await expect(toggle).toBeFocused();
+    if (before) await expect(toggle).not.toBeChecked();
+    else await expect(toggle).toBeChecked();
+  }
+  expect(errors).toEqual([]);
 });
 
 test('the card quick switch offers the same 4 styles and never creates a review or clears the draft', async ({ page }) => {

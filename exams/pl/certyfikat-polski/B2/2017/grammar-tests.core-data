@@ -1,49 +1,50 @@
 DSL 1
+# B2/2017 arkusz pp. 15–20; eight tasks, 40 points.
 GRAMMAR_TEST {
-  testId: "certyfikat-polski-B2-2017-grammar-1"
-  examRef: "certyfikat-polski-B2-2017"
+  testId: certyfikat-polski-B2-2017-grammar-1
+  examRef: certyfikat-polski-B2-2017
   taskNumber: 1
-  instruction: "Zadanie 1"
+  instruction: "Proszę podkreślić poprawną formę wyrazów w nawiasach (imiesłowy)."
 }
 GRAMMAR_TEST {
-  testId: "certyfikat-polski-B2-2017-grammar-2"
-  examRef: "certyfikat-polski-B2-2017"
+  testId: certyfikat-polski-B2-2017-grammar-2
+  examRef: certyfikat-polski-B2-2017
   taskNumber: 2
-  instruction: "Zadanie 2"
+  instruction: "Proszę uzupełnić tekst wyrazami z ramki. Każdego wyrazu można użyć tylko raz; jeden jest zbędny. Ramka: z, oprócz, przy, o, około, spośród, do, po, od, na, w, ponad."
 }
 GRAMMAR_TEST {
-  testId: "certyfikat-polski-B2-2017-grammar-3"
-  examRef: "certyfikat-polski-B2-2017"
+  testId: certyfikat-polski-B2-2017-grammar-3
+  examRef: certyfikat-polski-B2-2017
   taskNumber: 3
-  instruction: "Zadanie 3"
+  instruction: "Proszę podkreślić poprawną formę wyrazów w nawiasach (formy nieosobowe i strona bierna)."
 }
 GRAMMAR_TEST {
-  testId: "certyfikat-polski-B2-2017-grammar-4"
-  examRef: "certyfikat-polski-B2-2017"
+  testId: certyfikat-polski-B2-2017-grammar-4
+  examRef: certyfikat-polski-B2-2017
   taskNumber: 4
-  instruction: "Zadanie 4"
+  instruction: "Proszę uzupełnić tekst poprawnymi formami wyrazów podanych w nawiasach (odmiana rzeczowników, przymiotników i zaimków)."
 }
 GRAMMAR_TEST {
-  testId: "certyfikat-polski-B2-2017-grammar-5"
-  examRef: "certyfikat-polski-B2-2017"
+  testId: certyfikat-polski-B2-2017-grammar-5
+  examRef: certyfikat-polski-B2-2017
   taskNumber: 5
-  instruction: "Zadanie 5"
+  instruction: "Proszę uzupełnić tekst poprawną formą jednego z wyrazów podanych w nawiasach (aspekt)."
 }
 GRAMMAR_TEST {
-  testId: "certyfikat-polski-B2-2017-grammar-6"
-  examRef: "certyfikat-polski-B2-2017"
+  testId: certyfikat-polski-B2-2017-grammar-6
+  examRef: certyfikat-polski-B2-2017
   taskNumber: 6
-  instruction: "Zadanie 6"
+  instruction: "Proszę uzupełnić tekst poprawnymi formami wyrazów utworzonych od słów w nawiasach (rzeczowniki odczasownikowe i odprzymiotnikowe)."
 }
 GRAMMAR_TEST {
-  testId: "certyfikat-polski-B2-2017-grammar-7"
-  examRef: "certyfikat-polski-B2-2017"
+  testId: certyfikat-polski-B2-2017-grammar-7
+  examRef: certyfikat-polski-B2-2017
   taskNumber: 7
-  instruction: "Zadanie 7"
+  instruction: "Proszę uzupełnić tekst słownymi formami cyfr podanych w nawiasach (odmiana liczebników)."
 }
 GRAMMAR_TEST {
-  testId: "certyfikat-polski-B2-2017-grammar-8"
-  examRef: "certyfikat-polski-B2-2017"
+  testId: certyfikat-polski-B2-2017-grammar-8
+  examRef: certyfikat-polski-B2-2017
   taskNumber: 8
-  instruction: "Zadanie 8"
+  instruction: "Proszę uzupełnić tekst poprawnymi formami wyrazów podanych w nawiasach (stopniowanie przymiotnika i przysłówka)."
 }

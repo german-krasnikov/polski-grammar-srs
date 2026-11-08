@@ -17,6 +17,7 @@ object ExamDataMapper {
         itemGap: (I) -> String?, itemOptions: (I) -> String?,
         itemAnswer: (I) -> String, itemPoints: (I) -> Int?,
         itemQuarter: (I) -> Int? = { null },
+        itemGradingMode: (I) -> String? = { null },
         variants: Map<String, List<GrammarScoredVariant>> = emptyMap(),
     ): List<GrammarTest> = tests.map { t ->
         val grouped = items.filter { itemTestRef(it) == testId(t) }
@@ -37,6 +38,7 @@ object ExamDataMapper {
                     points = points ?: 0,
                     pointsQuarter = quarter,
                     scoredVariants = variants[itemId(i)].orEmpty(),
+                    gradingMode = itemGradingMode(i)?.let(ExamGradingMode::fromTag) ?: ExamGradingMode.Exact,
                 )
             },
         )

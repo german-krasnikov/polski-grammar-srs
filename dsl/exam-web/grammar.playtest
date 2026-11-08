@@ -4,6 +4,10 @@ TEST "B1 exam typed answer and review" PROFILE playmode
   enter text="żółć"
   ASSERT exam.input == "żółć"
   ASSERT exam.focused == true
+  rememberEditor
+  refreshDuringComposition
+  ASSERT exam.editorPreserved == true
+  ASSERT exam.focused == true
   press key="ArrowLeft"
   enter text="ą"
   ASSERT exam.input == "żółąć"
@@ -11,7 +15,7 @@ TEST "B1 exam typed answer and review" PROFILE playmode
   next
   back
   ASSERT exam.input == "żółąć"
-  advance count=34
+  advance count=44
   submit
   ASSERT exam.score == "0%"
   ASSERT exam.reviewAnswer == "żółąć"

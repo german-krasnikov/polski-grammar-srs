@@ -1,10 +1,62 @@
 DSL 1
+# B2/2020 arkusz p. 26: select one set and complete both prompts.
 WRITING_TASK {
-  taskId: "certyfikat-polski-B2-2020-writing-1"
-  examRef: "certyfikat-polski-B2-2020"
+  taskId: certyfikat-polski-B2-2020-writing-I-1
+  examRef: certyfikat-polski-B2-2020
   taskNumber: 1
-  instruction: "Zestaw I"
-  promptText: "Prosze wykonac zadanie pisemne zgodnie z poleceniem."
-  wordLimit: 200
+  setId: I
+  instruction: "Zestaw I, zadanie a. 140 słów."
+  promptText: "Liczyła Pani / Liczył Pan na awans w pracy. Niestety, dyrektor przyznał go Pani/Pana współpracownikowi. Proszę napisać do swojej przyjaciółki / swojego przyjaciela z Polski e-mail, w którym wyrazi Pani/Pan rozgoryczenie związane z tą sytuacją."
+  wordLimit: 140
+  genre: email
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2020-writing-I-2
+  examRef: certyfikat-polski-B2-2020
+  taskNumber: 2
+  setId: I
+  instruction: "Zestaw I, zadanie b. 160 słów."
+  promptText: "„Do tego miasta w Polsce chętnie będę wracać”. Proszę je opisać."
+  wordLimit: 160
+  genre: description
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2020-writing-II-1
+  examRef: certyfikat-polski-B2-2020
+  taskNumber: 1
+  setId: II
+  instruction: "Zestaw II, zadanie a. 100 słów."
+  promptText: "Stara się Pani/Pan o stanowisko recepcjonisty w jednym z hoteli w Polsce. Proszę napisać list motywacyjny."
+  wordLimit: 100
   genre: letter
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2020-writing-II-2
+  examRef: certyfikat-polski-B2-2020
+  taskNumber: 2
+  setId: II
+  instruction: "Zestaw II, zadanie b. 200 słów."
+  promptText: "Proszę napisać sprawozdanie z międzynarodowej imprezy „Sport dla każdego”, które zamieści Pani/Pan na polskim portalu informacyjnym."
+  wordLimit: 200
+  genre: report
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2020-writing-III-1
+  examRef: certyfikat-polski-B2-2020
+  taskNumber: 1
+  setId: III
+  instruction: "Zestaw III, zadanie a. 40 słów."
+  promptText: "Chce Pani/Pan poznać ciekawą osobę. Proszę napisać ogłoszenie, które zamieści Pani/Pan na polskiej stronie internetowej „Bądźmy w Kontakcie”."
+  wordLimit: 40
+  genre: announcement
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2020-writing-III-2
+  examRef: certyfikat-polski-B2-2020
+  taskNumber: 2
+  setId: III
+  instruction: "Zestaw III, zadanie b. 260 słów."
+  promptText: "„Nauka to podróż, która trwa przez całe życie”. Inspirując się powyższym zdaniem, proszę napisać tekst argumentacyjny (rozprawkę), w którym wyrazi Pani/Pan swoją opinię."
+  wordLimit: 260
+  genre: argument
 }

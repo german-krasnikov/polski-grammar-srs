@@ -1,19 +1,62 @@
 DSL 1
+# Official example paper p22: choose one set and complete both tasks a and b.
 WRITING_TASK {
-  taskId: "B1-2019-writing-1a"
-  examRef: "certyfikat-polski-B1-2019"
+  taskId: B1-2019-writing-I-a
+  examRef: certyfikat-polski-B1-2019
   taskNumber: 1
-  instruction: "Zestaw I, zadanie a"
-  promptText: "Organizuje Pani / Pan impreze urodzinowa w swoim mieszkaniu dla wielu gosci. Halas moze przeszkadzac Pani / Pana sasiadom, dlatego chce Pani / Pan poinformowac ich o tym wydarzeniu. Prosze napisac ogloszenie, ktore powiesi Pani / Pan w windzie."
+  setId: I
+  instruction: "Zestaw I, zadanie a — ogłoszenie"
+  promptText: "Organizuje Pani / Pan imprezę urodzinową w swoim mieszkaniu dla wielu gości. Hałas może przeszkadzać Pani / Pana sąsiadom, dlatego chce Pani / Pan poinformować ich o tym wydarzeniu. Proszę napisać ogłoszenie, które powiesi Pani / Pan w windzie."
   wordLimit: 30
+  genre: announcement
+}
+WRITING_TASK {
+  taskId: B1-2019-writing-I-b
+  examRef: certyfikat-polski-B1-2019
+  taskNumber: 2
+  setId: I
+  instruction: "Zestaw I, zadanie b — list"
+  promptText: "Odpoczywa Pani / Pan na wakacjach w swoim rodzinnym kraju. Proszę napisać list do przyjaciółki / przyjaciela z Polski, w którym opowie Pani / Pan o swoim pobycie."
+  wordLimit: 170
   genre: letter
 }
 WRITING_TASK {
-  taskId: "B1-2019-writing-1b"
-  examRef: "certyfikat-polski-B1-2019"
+  taskId: B1-2019-writing-II-a
+  examRef: certyfikat-polski-B1-2019
+  taskNumber: 1
+  setId: II
+  instruction: "Zestaw II, zadanie a — zaproszenie e-mailowe"
+  promptText: "Od niedawna pracuje Pani / Pan w polskiej firmie. Chce Pani / Pan zorganizować spotkanie przy grillu w swoim ogrodzie dla nowych kolegów z pracy. Proszę napisać do nich e-mail z zaproszeniem."
+  wordLimit: 40
+  genre: invitation
+}
+WRITING_TASK {
+  taskId: B1-2019-writing-II-b
+  examRef: certyfikat-polski-B1-2019
   taskNumber: 2
-  instruction: "Zestaw I, zadanie b"
-  promptText: "Odpoczywa Pani / Pan na wakacjach w swoim rodzinnym kraju. Prosze napisac wiadomosc do polskiego kolegi / polskiej kolezanki. Prosze opisac miejsce, w ktorym Pani / Pan jest, napisac o planach na reszre wakacji i zaproponowac wspolne spotkanie."
-  wordLimit: 200
-  genre: letter
+  setId: II
+  instruction: "Zestaw II, zadanie b — opinia o serialu"
+  promptText: "„Ten serial ostatnio obejrzałam / obejrzałem”. Proszę zaprezentować serial i wyrazić własną opinię na jego temat."
+  wordLimit: 160
+  genre: opinion
+}
+WRITING_TASK {
+  taskId: B1-2019-writing-III-a
+  examRef: certyfikat-polski-B1-2019
+  taskNumber: 1
+  setId: III
+  instruction: "Zestaw III, zadanie a — życzenia"
+  promptText: "Pani / Pana przyjaciel z Polski za miesiąc bierze ślub. Niestety nie może Pani / Pan być na tej uroczystości. Proszę poinformować o tym przyjaciela i napisać życzenia, które wyśle Pani / Pan młodej parze."
+  wordLimit: 30
+  genre: wishes
+}
+WRITING_TASK {
+  taskId: B1-2019-writing-III-b
+  examRef: certyfikat-polski-B1-2019
+  taskNumber: 2
+  setId: III
+  instruction: "Zestaw III, zadanie b — charakterystyka"
+  promptText: "„Mam dobrą szefową / dobrego szefa”. Proszę napisać charakterystykę Pani / Pana pracodawcy."
+  wordLimit: 170
+  genre: description
 }

@@ -1,46 +1,47 @@
 DSL 1
+# B2/2020 arkusz pp. 3–8; key pp. 4–5. Audio segment boundaries await acoustic audit.
 LISTENING_TASK {
-  taskId: "certyfikat-polski-B2-2020-listen-1"
-  examRef: "certyfikat-polski-B2-2020"
+  taskId: certyfikat-polski-B2-2020-listen-1
+  examRef: certyfikat-polski-B2-2020
   taskNumber: 1
-  audioUrl: "exam-audio/B2-2020.mp3"
+  audioUrl: exam-audio/B2-2020.mp3
   segmentStartMs: 0
   segmentEndMs: 0
-  instruction: "Zadanie 1"
+  instruction: "Proszę wysłuchać kolejnych tekstów i zaznaczyć właściwe odpowiedzi. Nagranie zostanie odtworzone dwukrotnie."
 }
 LISTENING_TASK {
-  taskId: "certyfikat-polski-B2-2020-listen-2"
-  examRef: "certyfikat-polski-B2-2020"
+  taskId: certyfikat-polski-B2-2020-listen-2
+  examRef: certyfikat-polski-B2-2020
   taskNumber: 2
-  audioUrl: "exam-audio/B2-2020.mp3"
+  audioUrl: exam-audio/B2-2020.mp3
   segmentStartMs: 0
   segmentEndMs: 0
-  instruction: "Zadanie 2"
+  instruction: "Proszę wysłuchać wypowiedzi ekonomisty o gospodarce współpracy i zaznaczyć TAK albo NIE. Nagranie zostanie odtworzone dwukrotnie."
 }
 LISTENING_TASK {
-  taskId: "certyfikat-polski-B2-2020-listen-3"
-  examRef: "certyfikat-polski-B2-2020"
+  taskId: certyfikat-polski-B2-2020-listen-3
+  examRef: certyfikat-polski-B2-2020
   taskNumber: 3
-  audioUrl: "exam-audio/B2-2020.mp3"
+  audioUrl: exam-audio/B2-2020.mp3
   segmentStartMs: 0
   segmentEndMs: 0
-  instruction: "Zadanie 3"
+  instruction: "Proszę wysłuchać tekstu i przyporządkować opisy miejscom: A. Piramida w Rapie; B. Piramida w Krynicy; C. Kratery Morasko; D. Zamek Krzyżtopór. Jeden opis może dotyczyć więcej niż jednego miejsca; kolejność dwóch odpowiedzi jest dowolna. Nagranie zostanie odtworzone dwukrotnie."
 }
 LISTENING_TASK {
-  taskId: "certyfikat-polski-B2-2020-listen-4"
-  examRef: "certyfikat-polski-B2-2020"
+  taskId: certyfikat-polski-B2-2020-listen-4
+  examRef: certyfikat-polski-B2-2020
   taskNumber: 4
-  audioUrl: "exam-audio/B2-2020.mp3"
+  audioUrl: exam-audio/B2-2020.mp3
   segmentStartMs: 0
   segmentEndMs: 0
-  instruction: "Zadanie 4"
+  instruction: "Proszę wysłuchać tekstu o święcie hodowców gołębi pocztowych i zaznaczyć właściwe odpowiedzi. Nagranie zostanie odtworzone dwukrotnie."
 }
 LISTENING_TASK {
-  taskId: "certyfikat-polski-B2-2020-listen-5"
-  examRef: "certyfikat-polski-B2-2020"
+  taskId: certyfikat-polski-B2-2020-listen-5
+  examRef: certyfikat-polski-B2-2020
   taskNumber: 5
-  audioUrl: "exam-audio/B2-2020.mp3"
+  audioUrl: exam-audio/B2-2020.mp3
   segmentStartMs: 0
   segmentEndMs: 0
-  instruction: "Zadanie 5"
+  instruction: "Proszę wysłuchać tekstu o historii kawy i odpowiedzieć na pytania. Nagranie zostanie odtworzone dwukrotnie."
 }

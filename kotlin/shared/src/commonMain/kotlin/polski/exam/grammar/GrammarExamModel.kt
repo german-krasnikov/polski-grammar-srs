@@ -1,6 +1,7 @@
 package polski.exam.grammar
 
 import polski.exam.QuestionType
+import polski.exam.ExamGradingMode
 import polski.grammar.normalize
 
 data class GrammarTest(
@@ -20,6 +21,7 @@ data class GrammarItem(
     /** Authoritative maximum in quarter points; legacy [points] remains for integer exams. */
     val pointsQuarter: Int? = null,
     val scoredVariants: List<GrammarScoredVariant> = emptyList(),
+    val gradingMode: ExamGradingMode = ExamGradingMode.Exact,
 ) {
     val maximumQuarter: Int get() = pointsQuarter ?: points * 4
 

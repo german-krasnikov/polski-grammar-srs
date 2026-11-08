@@ -1,0 +1,44 @@
+DSL 1
+# Official key pp. 6–7. Quarter units preserve two 0.25-point alternatives.
+GRAMMAR_ANSWER_VARIANT {
+  variantId: B1-2019-g46-partial
+  itemRef: B1-2019-g46
+  answer: "Z jakiej kapusty"
+  earnedQuarter: 1
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: B1-2019-g49-alt1
+  itemRef: B1-2019-g49
+  answer: "Jak długo"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: B1-2019-g49-alt2
+  itemRef: B1-2019-g49
+  answer: "Od jak dawna"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: B1-2019-g49-alt3
+  itemRef: B1-2019-g49
+  answer: "Odkąd"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: B1-2019-g50-partial
+  itemRef: B1-2019-g50
+  answer: "Których"
+  earnedQuarter: 1
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: B1-2019-g54-alt1
+  itemRef: B1-2019-g54
+  answer: "Dziewczyny myślą o planach na dzisiejszy wieczór."
+  earnedQuarter: 4
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: B1-2019-g54-alt2
+  itemRef: B1-2019-g54
+  answer: "Dziewczyny myślą, jak spędzić dzisiejszy wieczór."
+  earnedQuarter: 4
+}

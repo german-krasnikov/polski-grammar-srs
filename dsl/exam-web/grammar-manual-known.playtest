@@ -1,0 +1,11 @@
+TEST "B1 2019 official transformation earns a confirmed point" PROFILE playmode
+  open exam="B1 Certyfikat 2019" module="grammar"
+  advance count=35
+  ASSERT grammar.context == "Bardzo tęsknię za mamą. Użyj słowa „brakuje” i napisz zdanie o tym samym znaczeniu: ___."
+  enter text="Bardzo brakuje mi mamy."
+  advance count=19
+  submit
+  ASSERT exam.score == "3%"
+  ASSERT exam.scoreDetail == "1 / 30 баллов"
+  ASSERT grammar.manualReviewCount == 0
+END

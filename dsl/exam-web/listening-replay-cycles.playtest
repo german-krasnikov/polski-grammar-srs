@@ -1,0 +1,20 @@
+TEST "B1 2019 real recording cold start and three user replay cycles" PROFILE playmode
+  open exam="B1 Certyfikat 2019" module="listening"
+  play
+  ASSERT media.playing == true
+  watchProgress seconds=1
+  seekEnd
+  ASSERT media.playing == false
+  play
+  ASSERT media.playing == true
+  watchProgress seconds=1
+  seekEnd
+  ASSERT media.playing == false
+  play
+  ASSERT media.playing == true
+  watchProgress seconds=1
+  seekEnd
+  ASSERT media.playing == false
+  leave
+  ASSERT media.closed == true
+END

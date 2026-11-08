@@ -1,81 +1,638 @@
 DSL 1
+# B2/2020 arkusz pp. 18–24; key pp. 7–8. Tasks I–VII: 0.5/item; VIII: 1/item.
+# VIII accepts other semantically correct transformations; examples are not exhaustive.
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2020-g1"
-  testRef: "certyfikat-polski-B2-2020-grammar-2"
-  questionType: fill_gap
-  context: "Zadanie II, pytanie 1"
-  correctAnswer: "wyrazy zbędne"
-  points: 1
+  itemId: certyfikat-polski-B2-2020-grammar-1-1
+  testRef: certyfikat-polski-B2-2020-grammar-1
+  questionType: choose_form
+  context: " […] źródło ciepła, każdy powinien się postarać o czystsze powietrze."
+  options: "Wybranych|Wybierającym|Wybierając"
+  correctAnswer: "Wybierając"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2020-g2"
-  testRef: "certyfikat-polski-B2-2020-grammar-2"
-  questionType: fill_gap
-  context: "Zadanie II, pytanie 2"
-  correctAnswer: "wbrew"
-  points: 1
+  itemId: certyfikat-polski-B2-2020-grammar-1-2
+  testRef: certyfikat-polski-B2-2020-grammar-1
+  questionType: choose_form
+  context: "By […] przez nie zanieczyszczenia szkodziły jak najmniej."
+  options: "produkowane|produkujące|produkując"
+  correctAnswer: produkowane
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2020-g3"
-  testRef: "certyfikat-polski-B2-2020-grammar-2"
-  questionType: fill_gap
-  context: "Zadanie II, pytanie 3"
-  correctAnswer: "wokół"
-  points: 1
+  itemId: certyfikat-polski-B2-2020-grammar-1-3
+  testRef: certyfikat-polski-B2-2020-grammar-1
+  questionType: choose_form
+  context: "Nie pogłębiały zjawiska smogu […] zagrożenie dla ludzi."
+  options: "stanowione|stanowiąc|stanowiącego"
+  correctAnswer: "stanowiącego"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2020-g4"
-  testRef: "certyfikat-polski-B2-2020-grammar-4"
-  questionType: fill_gap
-  context: "Zadanie IV, pytanie 4"
-  correctAnswer: "TEST PRZYKŁADOWY"
-  points: 1
+  itemId: certyfikat-polski-B2-2020-grammar-1-4
+  testRef: certyfikat-polski-B2-2020-grammar-1
+  questionType: choose_form
+  context: "Ranking najbardziej […] miejscowości w Europie."
+  options: "zanieczyszczających|zanieczyszczonych|zanieczyszczając"
+  correctAnswer: zanieczyszczonych
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2020-g5"
-  testRef: "certyfikat-polski-B2-2020-grammar-4"
-  questionType: fill_gap
-  context: "Zadanie IV, pytanie 5"
-  correctAnswer: "POZIOM B"
-  points: 1
+  itemId: certyfikat-polski-B2-2020-grammar-1-5
+  testRef: certyfikat-polski-B2-2020-grammar-1
+  questionType: choose_form
+  context: "W Polsce […] paliwem pozostaje węgiel."
+  options: "zdominowanym|dominującym|dominując"
+  correctAnswer: "dominującym"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2020-g6"
-  testRef: "certyfikat-polski-B2-2020-grammar-4"
-  questionType: fill_gap
-  context: "Zadanie IV, pytanie 6"
-  correctAnswer: "TRANSKRYPCJE I KLUCZ DO ZADAŃ"
-  points: 1
+  itemId: certyfikat-polski-B2-2020-grammar-1-6
+  testRef: certyfikat-polski-B2-2020-grammar-1
+  questionType: choose_form
+  context: "Duży problem stanowią śmieci […] w piecach."
+  options: "palące|palone|paląc"
+  correctAnswer: palone
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2020-g7"
-  testRef: "certyfikat-polski-B2-2020-grammar-8"
-  questionType: fill_gap
-  context: "Zadanie VIII, pytanie 7"
-  correctAnswer: "Należy uznać wszystkie inne poprawne rozwiązania zgodne z poleceniem"
-  points: 1
+  itemId: certyfikat-polski-B2-2020-grammar-1-7
+  testRef: certyfikat-polski-B2-2020-grammar-1
+  questionType: choose_form
+  context: "Śmieci […] do atmosfery szkodliwe związki."
+  options: "emitujące|emitowane|emitując"
+  correctAnswer: "emitujące"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2020-g8"
-  testRef: "certyfikat-polski-B2-2020-grammar-8"
-  questionType: fill_gap
-  context: "Zadanie VIII, pytanie 8"
-  correctAnswer: "TEST PRZYKŁADOWY"
-  points: 1
+  itemId: certyfikat-polski-B2-2020-grammar-1-8
+  testRef: certyfikat-polski-B2-2020-grammar-1
+  questionType: choose_form
+  context: "[…] przez nie choroby są coraz częstsze."
+  options: "Wywołujące|Wywoływane|Wywołując"
+  correctAnswer: "Wywoływane"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2020-g9"
-  testRef: "certyfikat-polski-B2-2020-grammar-8"
-  questionType: fill_gap
-  context: "Zadanie VIII, pytanie 9"
-  correctAnswer: "POZIOM B"
-  points: 1
+  itemId: certyfikat-polski-B2-2020-grammar-1-9
+  testRef: certyfikat-polski-B2-2020-grammar-1
+  questionType: choose_form
+  context: "[…] ze starych pieców, uwalniamy powietrze."
+  options: "Zrezygnowany|Rezygnując|Rezygnujący"
+  correctAnswer: "Rezygnując"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2020-g10"
-  testRef: "certyfikat-polski-B2-2020-grammar-8"
+  itemId: certyfikat-polski-B2-2020-grammar-1-10
+  testRef: certyfikat-polski-B2-2020-grammar-1
+  questionType: choose_form
+  context: "Uwalniamy powietrze od […] w nim cząstek."
+  options: "zawieszonych|zawieszając|zawieszających"
+  correctAnswer: zawieszonych
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2020-grammar-2-1
+  testRef: certyfikat-polski-B2-2020-grammar-2
   questionType: fill_gap
-  context: "Zadanie VIII, pytanie 10"
-  correctAnswer: "TRANSKRYPCJE I KLUCZ DO ZADAŃ"
-  points: 1
+  context: "Ktoś dobrze mówi […] nasz temat."
+  correctAnswer: na
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2020-grammar-2-2
+  testRef: certyfikat-polski-B2-2020-grammar-2
+  questionType: fill_gap
+  context: "Miód jest lekiem […] chorych na serce."
+  correctAnswer: dla
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2020-grammar-2-3
+  testRef: certyfikat-polski-B2-2020-grammar-2
+  questionType: fill_gap
+  context: "Dotyczy pacjentów – […] tych najmłodszych."
+  correctAnswer: od
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2020-grammar-2-4
+  testRef: certyfikat-polski-B2-2020-grammar-2
+  questionType: fill_gap
+  context: "Od tych najmłodszych […] najstarszych."
+  correctAnswer: do
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2020-grammar-2-5
+  testRef: certyfikat-polski-B2-2020-grammar-2
+  questionType: fill_gap
+  context: "Już dawno […] nami ostatnia niedziela września."
+  correctAnswer: za
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2020-grammar-2-6
+  testRef: certyfikat-polski-B2-2020-grammar-2
+  questionType: fill_gap
+  context: "To właśnie […] tym dniu obchodzimy Światowy Dzień Serca."
+  correctAnswer: w
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2020-grammar-2-7
+  testRef: certyfikat-polski-B2-2020-grammar-2
+  questionType: fill_gap
+  context: "[…] serce należy dbać codziennie."
+  correctAnswer: o
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2020-grammar-2-8
+  testRef: certyfikat-polski-B2-2020-grammar-2
+  questionType: fill_gap
+  context: "Miód nostrzykowy pomaga […] nadciśnieniu."
+  correctAnswer: przy
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2020-grammar-2-9
+  testRef: certyfikat-polski-B2-2020-grammar-2
+  questionType: fill_gap
+  context: "Osobom, […] których wystąpiły złamania."
+  correctAnswer: u
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2020-grammar-2-10
+  testRef: certyfikat-polski-B2-2020-grammar-2
+  questionType: fill_gap
+  context: "[…] zawartości rutyny spowalnia miażdżycę."
+  correctAnswer: "dzięki"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2020-grammar-3-1
+  testRef: certyfikat-polski-B2-2020-grammar-3
+  questionType: choose_form
+  context: "Budynek […] od grudnia 2018 roku."
+  options: "odnowi się|był odnawiany|odnowiono"
+  correctAnswer: "był odnawiany"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2020-grammar-3-2
+  testRef: certyfikat-polski-B2-2020-grammar-3
+  questionType: choose_form
+  context: "Liczba mieszkań […] i pozostało siedem."
+  options: "zmieniono|zmieniło się|została zmieniona"
+  correctAnswer: "została zmieniona"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2020-grammar-3-3
+  testRef: certyfikat-polski-B2-2020-grammar-3
+  questionType: choose_form
+  context: "Kamienicę w końcu […] do dawnego stanu."
+  options: "był przywracany|przywrócono|przywracało się"
+  correctAnswer: "przywrócono"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2020-grammar-3-4
+  testRef: certyfikat-polski-B2-2020-grammar-3
+  questionType: choose_form
+  context: "Coraz częściej […] uwagę na historyczne szczegóły."
+  options: "zwracano|zwraca się|jest zwracana"
+  correctAnswer: "zwraca się"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2020-grammar-3-5
+  testRef: certyfikat-polski-B2-2020-grammar-3
+  questionType: choose_form
+  context: "Na elewacji […] zachować mural."
+  options: "postanowiono|postanowi się|zostało postanowione"
+  correctAnswer: postanowiono
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2020-grammar-3-6
+  testRef: certyfikat-polski-B2-2020-grammar-3
+  questionType: choose_form
+  context: "Na fasadzie […] iluminacja."
+  options: "podłączono|podłączy się|zostanie podłączona"
+  correctAnswer: "zostanie podłączona"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2020-grammar-3-7
+  testRef: certyfikat-polski-B2-2020-grammar-3
+  questionType: choose_form
+  context: "Na ścianach […] budki dla ptaków."
+  options: "zamontowano|zamontuje się|będą montowane"
+  correctAnswer: zamontowano
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2020-grammar-3-8
+  testRef: certyfikat-polski-B2-2020-grammar-3
+  questionType: choose_form
+  context: "W budżecie miasta już […] środki na remont."
+  options: "zarezerwowano|były rezerwowane|zarezerwuje się"
+  correctAnswer: zarezerwowano
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2020-grammar-3-9
+  testRef: certyfikat-polski-B2-2020-grammar-3
+  questionType: choose_form
+  context: "Dzięki finansowaniu […] rewitalizacja całych obszarów."
+  options: "jest wspierana|wspierano|wspiera się"
+  correctAnswer: "jest wspierana"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2020-grammar-3-10
+  testRef: certyfikat-polski-B2-2020-grammar-3
+  questionType: choose_form
+  context: "Zbyt często […] o komforcie mieszkańców."
+  options: "zostało zapomniane|zapomniano|zapomina się"
+  correctAnswer: "zapomina się"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2020-grammar-4-1
+  testRef: certyfikat-polski-B2-2020-grammar-4
+  questionType: fill_gap
+  context: "[…] (Meksykanin) obchodzą Dzień Osła."
+  correctAnswer: Meksykanie
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2020-grammar-4-2
+  testRef: certyfikat-polski-B2-2020-grammar-4
+  questionType: fill_gap
+  context: "Meksykanie obchodzą Dzień […] (Osioł)."
+  correctAnswer: "Osła"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2020-grammar-4-3
+  testRef: certyfikat-polski-B2-2020-grammar-4
+  questionType: fill_gap
+  context: "Ludzie dziękują […] (to) zwierzętom."
+  correctAnswer: tym
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2020-grammar-4-4
+  testRef: certyfikat-polski-B2-2020-grammar-4
+  questionType: fill_gap
+  context: "Ludzie dziękują tym […] (zwierzę) za pracę."
+  correctAnswer: "zwierzętom"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2020-grammar-4-5
+  testRef: certyfikat-polski-B2-2020-grammar-4
+  questionType: fill_gap
+  context: "[…] (Główny) bohaterowie noszą barwne stroje."
+  correctAnswer: "Główni"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2020-grammar-4-6
+  testRef: certyfikat-polski-B2-2020-grammar-4
+  questionType: fill_gap
+  context: "Główni […] (bohater) noszą barwne stroje."
+  correctAnswer: bohaterowie
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2020-grammar-4-7
+  testRef: certyfikat-polski-B2-2020-grammar-4
+  questionType: fill_gap
+  context: "Na […] (wszyscy) właścicieli czeka poczęstunek."
+  correctAnswer: wszystkich
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2020-grammar-4-8
+  testRef: certyfikat-polski-B2-2020-grammar-4
+  questionType: fill_gap
+  context: "Na wszystkich […] (właściciel) czeka poczęstunek."
+  correctAnswer: "właścicieli"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2020-grammar-4-9
+  testRef: certyfikat-polski-B2-2020-grammar-4
+  questionType: fill_gap
+  context: "I […] (nikt) nie przyjdzie do głowy powiedzieć."
+  correctAnswer: nikomu
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2020-grammar-4-10
+  testRef: certyfikat-polski-B2-2020-grammar-4
+  questionType: fill_gap
+  context: "Powiedzieć o […] (ktokolwiek) „osioł do kwadratu”."
+  correctAnswer: kimkolwiek
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2020-grammar-5-1
+  testRef: certyfikat-polski-B2-2020-grammar-5
+  questionType: fill_gap
+  context: "Co ostatecznie […] (widzieć / zobaczyć) goście?"
+  correctAnswer: "zobaczą"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2020-grammar-5-2
+  testRef: certyfikat-polski-B2-2020-grammar-5
+  questionType: fill_gap
+  context: "Zdecydują się […] (wybierać / wybrać) na wycieczkę."
+  correctAnswer: "wybrać"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2020-grammar-5-3
+  testRef: certyfikat-polski-B2-2020-grammar-5
+  questionType: fill_gap
+  context: "Atrakcje, które organizatorzy […] (zaczynać / zacząć) udostępniać."
+  correctAnswer: "zaczną"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2020-grammar-5-4
+  testRef: certyfikat-polski-B2-2020-grammar-5
+  questionType: fill_gap
+  context: "Przez kilka miesięcy pomysłodawcy […] (starać się / postarać się) nawiązywać kontakty."
+  correctAnswer: "starali się"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2020-grammar-5-5
+  testRef: certyfikat-polski-B2-2020-grammar-5
+  questionType: fill_gap
+  context: "Zaproszenie […] (przyjmować / przyjąć) Jacek Podemski."
+  correctAnswer: "przyjął"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2020-grammar-5-6
+  testRef: certyfikat-polski-B2-2020-grammar-5
+  questionType: fill_gap
+  context: "Zapowiedział, że […] (opowiadać / opowiedzieć) o Czarnobylu."
+  correctAnswer: opowie
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2020-grammar-5-7
+  testRef: certyfikat-polski-B2-2020-grammar-5
+  questionType: fill_gap
+  context: "Lekarze […] (wprowadzać / wprowadzić) chętnych w świat narzędzi zbrodni."
+  correctAnswer: "będą wprowadzać"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2020-grammar-5-8
+  testRef: certyfikat-polski-B2-2020-grammar-5
+  questionType: fill_gap
+  context: "Do tej pory wystawa rzadko […] (opuszczać / opuścić) mury muzeum."
+  correctAnswer: "opuszczała"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2020-grammar-5-9
+  testRef: certyfikat-polski-B2-2020-grammar-5
+  questionType: fill_gap
+  context: "Podczas poprzednich edycji odwiedzający chętnie […] (korzystać / skorzystać) z możliwości."
+  correctAnswer: korzystali
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2020-grammar-5-10
+  testRef: certyfikat-polski-B2-2020-grammar-5
+  questionType: fill_gap
+  context: "Organizacja Todt […] (podejmować / podjąć) próbę przekształcenia budowli."
+  correctAnswer: "podjęła"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2020-grammar-6-1
+  testRef: certyfikat-polski-B2-2020-grammar-6
+  questionType: choose_form
+  context: "Przynajmniej […] synowie wzorowo odbyli służbę."
+  options: "trzej|trzech|trzem"
+  correctAnswer: trzej
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2020-grammar-6-2
+  testRef: certyfikat-polski-B2-2020-grammar-6
+  questionType: choose_form
+  context: "Przynajmniej trzej […] wzorowo odbyli służbę."
+  options: "synów|synom|synowie"
+  correctAnswer: synowie
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2020-grammar-6-3
+  testRef: certyfikat-polski-B2-2020-grammar-6
+  questionType: choose_form
+  context: "Wojsku oddali aż […] potomków."
+  options: "pięć|pięciu|pięcioma"
+  correctAnswer: "pięciu"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2020-grammar-6-4
+  testRef: certyfikat-polski-B2-2020-grammar-6
+  questionType: choose_form
+  context: "Wojsku oddali aż pięciu […]."
+  options: "potomkami|potomków|potomkowie"
+  correctAnswer: "potomków"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2020-grammar-6-5
+  testRef: certyfikat-polski-B2-2020-grammar-6
+  questionType: choose_form
+  context: "Wyróżnienie przyznano tylko […] rodzinom."
+  options: "dwu|dwiema|dwie"
+  correctAnswer: dwu
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2020-grammar-6-6
+  testRef: certyfikat-polski-B2-2020-grammar-6
+  questionType: choose_form
+  context: "Wyróżnienie przyznano tylko dwu […]."
+  options: "rodziny|rodzinom|rodzin"
+  correctAnswer: rodzinom
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2020-grammar-6-7
+  testRef: certyfikat-polski-B2-2020-grammar-6
+  questionType: choose_form
+  context: "Spędzenie […] godzin w kuchni."
+  options: "wiele|wielu|wieloma"
+  correctAnswer: wielu
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2020-grammar-6-8
+  testRef: certyfikat-polski-B2-2020-grammar-6
+  questionType: choose_form
+  context: "Spędzenie wielu […] w kuchni."
+  options: "godziny|godzinami|godzin"
+  correctAnswer: godzin
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2020-grammar-6-9
+  testRef: certyfikat-polski-B2-2020-grammar-6
+  questionType: choose_form
+  context: "Z […] torebek jedzenia."
+  options: "tysiąc|tysiąca|tysiącem"
+  correctAnswer: "tysiącem"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2020-grammar-6-10
+  testRef: certyfikat-polski-B2-2020-grammar-6
+  questionType: choose_form
+  context: "Z tysiącem […] jedzenia."
+  options: "torebkami|torebek|torebki"
+  correctAnswer: torebek
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2020-grammar-7-1
+  testRef: certyfikat-polski-B2-2020-grammar-7
+  questionType: fill_gap
+  context: "Coraz […] (dużo) szkodników roślin."
+  correctAnswer: "więcej"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2020-grammar-7-2
+  testRef: certyfikat-polski-B2-2020-grammar-7
+  questionType: fill_gap
+  context: "[…] (częsty) niż dawniej przypadki martwych ryb."
+  correctAnswer: "częstsze"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2020-grammar-7-3
+  testRef: certyfikat-polski-B2-2020-grammar-7
+  questionType: fill_gap
+  context: "2018 był […] (gorący) rokiem w dekadzie."
+  correctAnswer: "najgorętszym"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2020-grammar-7-4
+  testRef: certyfikat-polski-B2-2020-grammar-7
+  questionType: fill_gap
+  context: "Średnie temperatury są […] (wysoki) o 1 stopień."
+  correctAnswer: "wyższe"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2020-grammar-7-5
+  testRef: certyfikat-polski-B2-2020-grammar-7
+  questionType: fill_gap
+  context: "Powodzie – obecnie […] (gwałtowny) na przestrzeni dekad."
+  correctAnswer: "najgwałtowniejsze"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2020-grammar-7-6
+  testRef: certyfikat-polski-B2-2020-grammar-7
+  questionType: fill_gap
+  context: "Z każdym rokiem […] (ciepły) stają się morza."
+  correctAnswer: cieplejsze
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2020-grammar-7-7
+  testRef: certyfikat-polski-B2-2020-grammar-7
+  questionType: fill_gap
+  context: "Coraz […] (szybko) rosną temperatury."
+  correctAnswer: szybciej
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2020-grammar-7-8
+  testRef: certyfikat-polski-B2-2020-grammar-7
+  questionType: fill_gap
+  context: "Przyzwyczaić się do […] (zły) samopoczucia."
+  correctAnswer: gorszego
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2020-grammar-7-9
+  testRef: certyfikat-polski-B2-2020-grammar-7
+  questionType: fill_gap
+  context: "[…] (łagodny) niż dawniej zimy."
+  correctAnswer: "łagodniejsze"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2020-grammar-7-10
+  testRef: certyfikat-polski-B2-2020-grammar-7
+  questionType: fill_gap
+  context: "[…] (Wcześnie) nie było takiej aktywności owadów."
+  correctAnswer: "Wcześniej"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2020-grammar-8-1
+  testRef: certyfikat-polski-B2-2020-grammar-8
+  questionType: transform
+  context: "Ponieważ codziennie się spóźniałeś, nie zdążyliśmy skończyć projektu. Użyj: przez."
+  correctAnswer: "Przez twoje codzienne spóźnienia nie zdążyliśmy skończyć naszego projektu."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2020-grammar-8-2
+  testRef: certyfikat-polski-B2-2020-grammar-8
+  questionType: transform
+  context: "Dobrze znała język chiński, więc znalazła pracę w tej firmie. Użyj: dzięki."
+  correctAnswer: "Znalazła pracę w tej firmie dzięki dobrej znajomości języka chińskiego."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2020-grammar-8-3
+  testRef: certyfikat-polski-B2-2020-grammar-8
+  questionType: transform
+  context: "Nie poszedł na studia, chociaż jego rodzice tego oczekiwali. Użyj: wbrew."
+  correctAnswer: "Nie poszedł na studia wbrew oczekiwaniom swoich rodziców."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2020-grammar-8-4
+  testRef: certyfikat-polski-B2-2020-grammar-8
+  questionType: transform
+  context: "Chorował długo i ciężko, ale w końcu powrócił do zdrowia. Użyj: po."
+  correctAnswer: "Powrócił do zdrowia po długiej i ciężkiej chorobie."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2020-grammar-8-5
+  testRef: certyfikat-polski-B2-2020-grammar-8
+  questionType: transform
+  context: "Jeśli nie umie się pływać, nie można wyruszyć w taki rejs. Użyj: bez."
+  correctAnswer: "Bez umiejętności pływania nie można wyruszyć w taki rejs."
+  pointsQuarter: 4
+  gradingMode: open_manual
 }

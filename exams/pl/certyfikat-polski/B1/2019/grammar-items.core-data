@@ -1,386 +1,471 @@
 DSL 1
 GRAMMAR_ITEM {
-  itemId: "B1-2019-g1"
-  testRef: "B1-2019-grammar-1"
+  itemId: B1-2019-g1
+  testRef: B1-2019-grammar-1
   questionType: choose_form
-  context: "a teraz mysla o (czegos, czyms, cos)___ wiekszym"
-  options: "czegos|czyms|cos"
-  correctAnswer: "czyms"
-  points: 1
+  context: "Do tej pory mieli tylko jeden pokój połączony z kuchnią oraz niewielką łazienkę, a teraz myślą o ___ większym i wygodniejszym."
+  options: "czegoś|czymś|coś"
+  correctAnswer: "czymś"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B1-2019-g2"
-  testRef: "B1-2019-grammar-1"
+  itemId: B1-2019-g2
+  testRef: B1-2019-grammar-1
   questionType: choose_form
-  context: "mieszkanie z trzema (pokojach, pokoje, pokojami)___"
+  context: "Patrycja chce, żeby było to mieszkanie z trzema ___ i dużą kuchnią."
   options: "pokojach|pokoje|pokojami"
-  correctAnswer: "pokojami"
-  points: 1
+  correctAnswer: pokojami
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B1-2019-g3"
-  testRef: "B1-2019-grammar-1"
+  itemId: B1-2019-g3
+  testRef: B1-2019-grammar-1
   questionType: choose_form
-  context: "Olaf potrzebuje (sloneczny, slonecznego, slonecznemu)___"
-  options: "sloneczny|slonecznego|slonecznemu"
-  correctAnswer: "slonecznego"
-  points: 1
+  context: "Olaf potrzebuje ___ balkonu, bo lubi hodować kwiaty."
+  options: "słoneczny|słonecznego|słonecznemu"
+  correctAnswer: "słonecznego"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B1-2019-g4"
-  testRef: "B1-2019-grammar-1"
+  itemId: B1-2019-g4
+  testRef: B1-2019-grammar-1
   questionType: choose_form
-  context: "(balkonu, balkon, balkonowi)___, bo lubi hodowac"
+  context: "Olaf potrzebuje słonecznego ___, bo lubi hodować kwiaty."
   options: "balkonu|balkon|balkonowi"
-  correctAnswer: "balkonu"
-  points: 1
+  correctAnswer: balkonu
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B1-2019-g5"
-  testRef: "B1-2019-grammar-1"
+  itemId: B1-2019-g5
+  testRef: B1-2019-grammar-1
   questionType: choose_form
-  context: "bedzie mial wlasne. lubi hodowac (kwiatow, kwiatami, kwiaty)___"
-  options: "kwiatow|kwiatami|kwiaty"
-  correctAnswer: "kwiaty"
-  points: 1
+  context: "Olaf lubi hodować ___; teraz często je kupuje na rynku."
+  options: "kwiatów|kwiatami|kwiaty"
+  correctAnswer: kwiaty
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B1-2019-g6"
-  testRef: "B1-2019-grammar-1"
+  itemId: B1-2019-g6
+  testRef: B1-2019-grammar-1
   questionType: choose_form
-  context: "Teraz czesto (im, je, ich)___ kupuje na rynku"
+  context: "Teraz często ___ kupuje na rynku, ale niedługo będzie miał własne kwiaty."
   options: "im|je|ich"
-  correctAnswer: "je"
-  points: 1
+  correctAnswer: je
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B1-2019-g7"
-  testRef: "B1-2019-grammar-1"
+  itemId: B1-2019-g7
+  testRef: B1-2019-grammar-1
   questionType: choose_form
-  context: "najlepszy relaks po (meczacym, meczacego, meczacy)___"
-  options: "meczacym|meczacego|meczacy"
-  correctAnswer: "meczacym"
-  points: 1
+  context: "Patrycja uważa, że kąpiel to najlepszy relaks po ___ dniu."
+  options: "męczącym|męczącego|męczący"
+  correctAnswer: "męczącym"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B1-2019-g8"
-  testRef: "B1-2019-grammar-1"
+  itemId: B1-2019-g8
+  testRef: B1-2019-grammar-1
   questionType: choose_form
-  context: "(dzien, dniu, dnia)___, dlatego wygodna wanna"
-  options: "dzien|dniu|dnia"
-  correctAnswer: "dniu"
-  points: 1
+  context: "Patrycja uważa, że kąpiel to najlepszy relaks po męczącym ___, dlatego wygodna wanna jest dla niej najważniejsza."
+  options: "dzień|dniu|dnia"
+  correctAnswer: dniu
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B1-2019-g9"
-  testRef: "B1-2019-grammar-1"
+  itemId: B1-2019-g9
+  testRef: B1-2019-grammar-1
   questionType: choose_form
-  context: "jest dla (niej, nia, jej)___ najwazniejsza"
-  options: "niej|nia|jej"
-  correctAnswer: "niej"
-  points: 1
+  context: "Wygodna wanna jest dla ___ najważniejsza."
+  options: "niej|nią|jej"
+  correctAnswer: niej
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B1-2019-g10"
-  testRef: "B1-2019-grammar-1"
+  itemId: B1-2019-g10
+  testRef: B1-2019-grammar-1
   questionType: choose_form
-  context: "kiedys spodoba sie (dziecmi, dzieciach, dzieciom)___"
-  options: "dziecmi|dzieciach|dzieciom"
-  correctAnswer: "dzieciom"
-  points: 1
+  context: "Ich marzeniem jest też, żeby mieli blisko do parku, który kiedyś spodoba się ___."
+  options: "dziećmi|dzieciach|dzieciom"
+  correctAnswer: dzieciom
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B1-2019-g11"
-  testRef: "B1-2019-grammar-2"
+  itemId: B1-2019-g11
+  testRef: B1-2019-grammar-2
   questionType: fill_gap
-  context: "Psychologowie twierdza, ___ kontakt z psem"
-  correctAnswer: "ze"
-  points: 1
+  context: "Psychologowie twierdzą, ___ kontakt z psem, kotem czy królikiem dobrze wpływa na człowieka i jego samopoczucie."
+  correctAnswer: "że"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B1-2019-g12"
-  testRef: "B1-2019-grammar-2"
+  itemId: B1-2019-g12
+  testRef: B1-2019-grammar-2
   questionType: fill_gap
-  context: "kontakt z psem, kotem ___ krolikiem dobrze wplywa"
-  correctAnswer: "czy"
-  points: 1
+  context: "Psychologowie twierdzą, że kontakt z psem, kotem ___ królikiem dobrze wpływa na człowieka i jego samopoczucie."
+  correctAnswer: czy
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B1-2019-g13"
-  testRef: "B1-2019-grammar-2"
+  itemId: B1-2019-g13
+  testRef: B1-2019-grammar-2
   questionType: fill_gap
-  context: "Wydaje sie to oczywiste, ___ nie wszyscy o tym wiedza"
-  correctAnswer: "lecz"
-  points: 1
+  context: "Wydaje się to oczywiste, ___ nie wszyscy o tym wiedzą."
+  correctAnswer: lecz
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B1-2019-g14"
-  testRef: "B1-2019-grammar-2"
+  itemId: B1-2019-g14
+  testRef: B1-2019-grammar-2
   questionType: fill_gap
-  context: "___ lepiej sie czuc, zapros do swojego domu zwierze"
-  correctAnswer: "zeby"
-  points: 1
+  context: "Wniosek jest prosty: ___ lepiej się czuć, zaproś do swojego domu zwierzę."
+  correctAnswer: "żeby"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B1-2019-g15"
-  testRef: "B1-2019-grammar-2"
+  itemId: B1-2019-g15
+  testRef: B1-2019-grammar-2
   questionType: fill_gap
-  context: "___ ono z pewnoscia poprawi ci nastroj"
-  correctAnswer: "poniewaz"
-  points: 1
+  context: "Zaproś do swojego domu zwierzę, ___ ono z pewnością poprawi ci nastrój."
+  correctAnswer: "ponieważ"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B1-2019-g16"
-  testRef: "B1-2019-grammar-3"
+  itemId: B1-2019-g16
+  testRef: B1-2019-grammar-3
   questionType: choose_form
-  context: "to on (czestszym, najczesciej, czestym)___ podkresial"
-  options: "czestszym|najczesciej|czestym"
-  correctAnswer: "najczesciej"
-  points: 1
+  context: "Wśród moich znajomych to on ___ podkreślał, że chce wspinać się w górach."
+  options: "częstszym|najczęściej|częstym"
+  correctAnswer: "najczęściej"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B1-2019-g17"
-  testRef: "B1-2019-grammar-3"
+  itemId: B1-2019-g17
+  testRef: B1-2019-grammar-3
   questionType: choose_form
-  context: "wspinac sie w gorach jeszcze (wyzszy, najwyzej, wyzej)___"
-  options: "wyzszy|najwyzej|wyzej"
-  correctAnswer: "wyzej"
-  points: 1
+  context: "Chce wspinać się w górach jeszcze ___."
+  options: "wyższy|najwyżej|wyżej"
+  correctAnswer: "wyżej"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B1-2019-g18"
-  testRef: "B1-2019-grammar-3"
+  itemId: B1-2019-g18
+  testRef: B1-2019-grammar-3
   questionType: choose_form
-  context: "jezdzic tylko (najszybszymi, szybszym, najszybciej)___ samochodami"
+  context: "Chce jeździć tylko ___ samochodami na świecie."
   options: "najszybszymi|szybszym|najszybciej"
-  correctAnswer: "najszybszymi"
-  points: 1
+  correctAnswer: najszybszymi
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B1-2019-g19"
-  testRef: "B1-2019-grammar-3"
+  itemId: B1-2019-g19
+  testRef: B1-2019-grammar-3
   questionType: choose_form
-  context: "inne sprawy sa duzo (wazniejsze, wazniej, najwazniejszymi)___"
-  options: "wazniejsze|wazniej|najwazniejszymi"
-  correctAnswer: "wazniejsze"
-  points: 1
+  context: "Dziś mówi, że inne sprawy są dużo ___."
+  options: "ważniejsze|ważniej|najważniejszymi"
+  correctAnswer: "ważniejsze"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B1-2019-g20"
-  testRef: "B1-2019-grammar-3"
+  itemId: B1-2019-g20
+  testRef: B1-2019-grammar-3
   questionType: choose_form
-  context: "zyc (najspokojniej, spokojniej, spokojny)___ niz kiedys"
+  context: "Woli spędzać czas z przyjaciółmi i żyć ___ niż kiedyś."
   options: "najspokojniej|spokojniej|spokojny"
-  correctAnswer: "spokojniej"
-  points: 1
+  correctAnswer: spokojniej
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B1-2019-g21"
-  testRef: "B1-2019-grammar-4"
+  itemId: B1-2019-g21
+  testRef: B1-2019-grammar-4
   questionType: fill_gap
-  context: "zawsze, kiedy ___ (jezdzic - my) w odwiedziny do dziadkow"
-  correctAnswer: "jezdzilismy"
-  points: 1
+  context: "Jednak zawsze, kiedy ___ (jeździć – my) w odwiedziny do dziadków, babcia dzieliła się z nami opowieściami o wojnie."
+  correctAnswer: "jeździliśmy"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B1-2019-g22"
-  testRef: "B1-2019-grammar-4"
+  itemId: B1-2019-g22
+  testRef: B1-2019-grammar-4
   questionType: fill_gap
-  context: "Cala rodzina ___ (doswiadczyc) wtedy strachu"
-  correctAnswer: "doswiadczyla"
-  points: 1
+  context: "Cała rodzina ___ (doświadczyć) wtedy strachu, niepewności."
+  correctAnswer: "doświadczyła"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B1-2019-g23"
-  testRef: "B1-2019-grammar-4"
+  itemId: B1-2019-g23
+  testRef: B1-2019-grammar-4
   questionType: fill_gap
-  context: "jeden z braci Anny nigdy nie ___ (wrocic) do domu"
-  correctAnswer: "wrocil"
-  points: 1
+  context: "Jeden z braci Anny nigdy nie ___ (wrócić) do domu."
+  correctAnswer: "wrócił"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B1-2019-g24"
-  testRef: "B1-2019-grammar-4"
+  itemId: B1-2019-g24
+  testRef: B1-2019-grammar-4
   questionType: fill_gap
-  context: "ani jej siostry nie ___ (wiedziec), co sie z nim stalo"
-  correctAnswer: "wiedza"
-  points: 1
+  context: "Do dziś ani babcia, ani jej siostry nie ___ (wiedzieć), co się z nim stało."
+  correctAnswer: "wiedzą"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B1-2019-g25"
-  testRef: "B1-2019-grammar-4"
+  itemId: B1-2019-g25
+  testRef: B1-2019-grammar-4
   questionType: fill_gap
-  context: "jako bardzo mloda dziewczyna, ___ (zaczac) pracowac"
-  correctAnswer: "zaczela"
-  points: 1
+  context: "W czasie wojny babcia, jako bardzo młoda dziewczyna, ___ (zacząć) pracować w jedynej piekarni w mieście."
+  correctAnswer: "zaczęła"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B1-2019-g26"
-  testRef: "B1-2019-grammar-4"
+  itemId: B1-2019-g26
+  testRef: B1-2019-grammar-4
   questionType: fill_gap
-  context: "od czasu do czasu wszyscy ___ (jesc) chleb"
-  correctAnswer: "jedli"
-  points: 1
+  context: "Dzięki temu w domu od czasu do czasu wszyscy ___ (jeść) chleb."
+  correctAnswer: jedli
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B1-2019-g27"
-  testRef: "B1-2019-grammar-4"
+  itemId: B1-2019-g27
+  testRef: B1-2019-grammar-4
   questionType: fill_gap
-  context: "A my dzisiaj nie ___ (moc) wyobrazic sobie jednego dnia"
-  correctAnswer: "mozemy"
-  points: 1
+  context: "A my dzisiaj nie ___ (móc) wyobrazić sobie jednego dnia bez pieczywa!"
+  correctAnswer: "możemy"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B1-2019-g28"
-  testRef: "B1-2019-grammar-4"
+  itemId: B1-2019-g28
+  testRef: B1-2019-grammar-4
   questionType: fill_gap
-  context: "dzieci babci Anny na szczescie nie ___ (znac) glodu"
-  correctAnswer: "znaja"
-  points: 1
+  context: "Teraz dzieci babci Anny na szczęście nie ___ (znać) głodu."
+  correctAnswer: "znają"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B1-2019-g29"
-  testRef: "B1-2019-grammar-4"
+  itemId: B1-2019-g29
+  testRef: B1-2019-grammar-4
   questionType: fill_gap
-  context: "dwie corki, ktore dzis ___ (prowadzic) swoje firmy"
-  correctAnswer: "prowadza"
-  points: 1
+  context: "Babcia ma dwie córki, które dziś ___ (prowadzić) swoje firmy."
+  correctAnswer: "prowadzą"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B1-2019-g30"
-  testRef: "B1-2019-grammar-4"
+  itemId: B1-2019-g30
+  testRef: B1-2019-grammar-4
   questionType: fill_gap
-  context: "obecnie ___ (projektowac) domy"
-  correctAnswer: "projektuje"
-  points: 1
+  context: "Jej syn skończył studia i obecnie ___ (projektować) domy."
+  correctAnswer: projektuje
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B1-2019-g31"
-  testRef: "B1-2019-grammar-7"
+  itemId: B1-2019-g31
+  testRef: B1-2019-grammar-7
   questionType: choose_form
-  context: "dzis (bylismy, bylibysmy, byli)___ pilotami"
-  options: "bylismy|bylibysmy|byli"
-  correctAnswer: "bylibysmy"
-  points: 1
+  context: "Gdybyśmy 10 lat temu posłuchali rady dziadka, dziś ___ pilotami."
+  options: "byliśmy|bylibyśmy|byli"
+  correctAnswer: "bylibyśmy"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B1-2019-g32"
-  testRef: "B1-2019-grammar-7"
+  itemId: B1-2019-g32
+  testRef: B1-2019-grammar-7
   questionType: choose_form
-  context: "Gdybym tylko wtedy (wiedzial, wiedzialem, wiedzieli)___"
-  options: "wiedzial|wiedzialem|wiedzieli"
-  correctAnswer: "wiedzial"
-  points: 1
+  context: "Mateusz odpowiedział: „Gdybym tylko wtedy ___, co planuje dziadek…”."
+  options: "wiedział|wiedziałem|wiedzieli"
+  correctAnswer: "wiedział"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B1-2019-g33"
-  testRef: "B1-2019-grammar-7"
+  itemId: B1-2019-g33
+  testRef: B1-2019-grammar-7
   questionType: choose_form
-  context: "Gdyby (mogli, mogly, mogliby)___, spedzaliby cale dnie"
-  options: "mogli|mogly|mogliby"
-  correctAnswer: "mogli"
-  points: 1
+  context: "Gdyby ___, spędzaliby całe dnie na lotnisku."
+  options: "mogli|mogły|mogliby"
+  correctAnswer: mogli
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B1-2019-g34"
-  testRef: "B1-2019-grammar-7"
+  itemId: B1-2019-g34
+  testRef: B1-2019-grammar-7
   questionType: choose_form
-  context: "(poznawalyby, poznaj, poznawalby)___ samoloty i pilotow"
-  options: "poznawalyby|poznaj|poznawalby"
-  correctAnswer: "poznawalby"
-  points: 1
+  context: "Spędzaliby całe dnie na lotnisku, ___ samoloty i pilotów."
+  options: "poznawałyby|poznaj|poznawaliby"
+  correctAnswer: poznawaliby
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B1-2019-g35"
-  testRef: "B1-2019-grammar-7"
+  itemId: B1-2019-g35
+  testRef: B1-2019-grammar-7
   questionType: choose_form
-  context: "(Konczyliby, Skonczcie, Skoncz)___ jak najlepiej liceum"
-  options: "Konczyliby|Skonczcie|Skoncz"
-  correctAnswer: "Skonczcie"
-  points: 1
+  context: "Dziadek powiedział: „___ jak najlepiej liceum”."
+  options: "Kończyliby|Skończcie|Skończ"
+  correctAnswer: "Skończcie"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B1-2019-g36"
-  testRef: "B1-2019-grammar-7"
+  itemId: B1-2019-g36
+  testRef: B1-2019-grammar-7
   questionType: choose_form
-  context: "i (pojedz, jedzcie, pojechaliby)___ na studia do Kanady"
-  options: "pojedz|jedzcie|pojechaliby"
-  correctAnswer: "jedzcie"
-  points: 1
+  context: "Dziadek powiedział: „___ na studia do Kanady. Ja wam dam pieniądze”."
+  options: "pojedź|jedźcie|pojechaliby"
+  correctAnswer: "jedźcie"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B1-2019-g37"
-  testRef: "B1-2019-grammar-7"
+  itemId: B1-2019-g37
+  testRef: B1-2019-grammar-7
   questionType: choose_form
-  context: "Dziadku, nie (zartuj, zazartowalbys, zazartujcie)___!"
-  options: "zartuj|zazartowalbys|zazartujcie"
-  correctAnswer: "zartuj"
-  points: 1
+  context: "Chłopcy powiedzieli: „Dziadku, nie ___!”."
+  options: "żartuj|zażartowałbyś|zażartujcie"
+  correctAnswer: "żartuj"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B1-2019-g38"
-  testRef: "B1-2019-grammar-7"
+  itemId: B1-2019-g38
+  testRef: B1-2019-grammar-7
   questionType: choose_form
-  context: "Skad (wez, bralby, wzialbys)___ tyle pieniedzy?"
-  options: "wez|bralby|wzialbys"
-  correctAnswer: "wzialbys"
-  points: 1
+  context: "Chłopcy zapytali: „Skąd ___ tyle pieniędzy?”."
+  options: "weź|brałby|wziąłbyś"
+  correctAnswer: "wziąłbyś"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B1-2019-g39"
-  testRef: "B1-2019-grammar-7"
+  itemId: B1-2019-g39
+  testRef: B1-2019-grammar-7
   questionType: choose_form
-  context: "Gdyby wtedy (traktowalismy, potraktowali, potraktowaliby)___"
-  options: "traktowalismy|potraktowali|potraktowaliby"
-  correctAnswer: "potraktowali"
-  points: 1
+  context: "Gdyby wtedy ___ słowa dziadka poważnie, to dziś ich kariery wyglądałyby inaczej."
+  options: "traktowaliśmy|potraktowali|potraktowaliby"
+  correctAnswer: potraktowali
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B1-2019-g40"
-  testRef: "B1-2019-grammar-7"
+  itemId: B1-2019-g40
+  testRef: B1-2019-grammar-7
   questionType: choose_form
-  context: "to dzis ich kariery (wygladajmy, wygladaloby, wygladalyby)___"
-  options: "wygladajmy|wygladaloby|wygladalyby"
-  correctAnswer: "wygladaloby"
-  points: 1
+  context: "Dziś ich kariery zawodowe ___ inaczej."
+  options: "wyglądajmy|wyglądałby|wyglądałyby"
+  correctAnswer: "wyglądałyby"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B1-2019-g41"
-  testRef: "B1-2019-grammar-8"
+  itemId: B1-2019-g41
+  testRef: B1-2019-grammar-8
   questionType: fill_gap
-  context: "przecietny Polak spedza ___ 5 godzin dziennie"
-  correctAnswer: "okolo"
-  points: 1
+  context: "Badania pokazują, że przeciętny Polak spędza ___ 5 godzin dziennie na oglądaniu telewizji."
+  correctAnswer: "około"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B1-2019-g42"
-  testRef: "B1-2019-grammar-8"
+  itemId: B1-2019-g42
+  testRef: B1-2019-grammar-8
   questionType: fill_gap
-  context: "___ tym czasie interesuja go glownie programy"
-  correctAnswer: "W"
-  points: 1
+  context: "___ tym czasie interesują go głównie programy informacyjne i rozrywkowe."
+  correctAnswer: W
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B1-2019-g43"
-  testRef: "B1-2019-grammar-8"
+  itemId: B1-2019-g43
+  testRef: B1-2019-grammar-8
   questionType: fill_gap
-  context: "___ nich oglada filmy fabularne"
-  correctAnswer: "Oprocz"
-  points: 1
+  context: "___ nich ogląda filmy fabularne i wiele reklam."
+  correctAnswer: "Oprócz"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B1-2019-g44"
-  testRef: "B1-2019-grammar-8"
+  itemId: B1-2019-g44
+  testRef: B1-2019-grammar-8
   questionType: fill_gap
-  context: "___ promowania najpopularniejszych produktow"
-  correctAnswer: "bez"
-  points: 1
+  context: "___ promowania najpopularniejszych produktów i usług nie ma dziś telewizji."
+  correctAnswer: bez
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "B1-2019-g45"
-  testRef: "B1-2019-grammar-8"
+  itemId: B1-2019-g45
+  testRef: B1-2019-grammar-8
   questionType: fill_gap
-  context: "a takze ___ jego czesciami"
-  correctAnswer: "miedzy"
-  points: 1
+  context: "Coraz dłuższe bloki reklam są emitowane także ___ częściami programu."
+  correctAnswer: "między"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: B1-2019-g46
+  testRef: B1-2019-grammar-5
+  questionType: fill_gap
+  context: "Bigos robi się z kapusty kiszonej. — ___ się robi bigos? — Z kapusty kiszonej."
+  correctAnswer: "Z czego"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: B1-2019-g47
+  testRef: B1-2019-grammar-5
+  questionType: fill_gap
+  context: "Pożyczyłam Ewie swoją sukienkę. — ___ pożyczyłaś swoją sukienkę? — Ewie."
+  correctAnswer: Komu
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: B1-2019-g48
+  testRef: B1-2019-grammar-5
+  questionType: fill_gap
+  context: "Babcia cieszy się wiosennymi kwiatami. — ___ cieszy się babcia? — Wiosennymi kwiatami."
+  correctAnswer: Czym
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: B1-2019-g49
+  testRef: B1-2019-grammar-5
+  questionType: fill_gap
+  context: "Planowaliśmy ten wyjazd od zeszłej zimy. — ___ planowaliście ten wyjazd? — Od zeszłej zimy."
+  correctAnswer: "Od kiedy"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: B1-2019-g50
+  testRef: B1-2019-grammar-5
+  questionType: fill_gap
+  context: "Pani Ewelina szuka złotych kolczyków. — ___ kolczyków szuka pani Ewelina? — Złotych."
+  correctAnswer: Jakich
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: B1-2019-g51
+  testRef: B1-2019-grammar-6
+  questionType: transform
+  context: "Bardzo tęsknię za mamą. Użyj słowa „brakuje” i napisz zdanie o tym samym znaczeniu: ___."
+  correctAnswer: "Bardzo brakuje mi mamy."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+GRAMMAR_ITEM {
+  itemId: B1-2019-g52
+  testRef: B1-2019-grammar-6
+  questionType: transform
+  context: "Dzisiaj student nie zapomniał książki. Użyj słowa „pamiętał” i napisz zdanie o tym samym znaczeniu: ___."
+  correctAnswer: "Dzisiaj student pamiętał o książce."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+GRAMMAR_ITEM {
+  itemId: B1-2019-g53
+  testRef: B1-2019-grammar-6
+  questionType: transform
+  context: "Małgosia i Amelia dbają o chorego kota. Użyj wyrażenia „opiekują się” i napisz zdanie o tym samym znaczeniu: ___."
+  correctAnswer: "Małgosia i Amelia opiekują się chorym kotem."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+GRAMMAR_ITEM {
+  itemId: B1-2019-g54
+  testRef: B1-2019-grammar-6
+  questionType: transform
+  context: "Dziewczyny planują dzisiejszy wieczór. Użyj słowa „myślą” i napisz zdanie o tym samym znaczeniu: ___."
+  correctAnswer: "Dziewczyny myślą o dzisiejszym wieczorze."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+GRAMMAR_ITEM {
+  itemId: B1-2019-g55
+  testRef: B1-2019-grammar-6
+  questionType: transform
+  context: "Moi rodzice dostali od babci ciasto. Użyj słowa „dała” i napisz zdanie o tym samym znaczeniu: ___."
+  correctAnswer: "Babcia dała ciasto moim rodzicom."
+  pointsQuarter: 4
+  gradingMode: open_manual
 }

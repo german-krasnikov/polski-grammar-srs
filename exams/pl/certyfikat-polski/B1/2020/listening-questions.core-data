@@ -228,6 +228,8 @@ LISTENING_QUESTION {
   questionText: "B: wymienia miejsca, gdzie można spędzić wolny czas."
   options: "1|2|3|4"
   correctAnswer: "1|4"
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
   pointsQuarter: 8
 }
 LISTENING_QUESTION {
@@ -237,6 +239,8 @@ LISTENING_QUESTION {
   questionText: "C: mówi, że życie w mieście jest drogie."
   options: "1|2|3|4"
   correctAnswer: "2|4"
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
   pointsQuarter: 8
 }
 LISTENING_QUESTION {

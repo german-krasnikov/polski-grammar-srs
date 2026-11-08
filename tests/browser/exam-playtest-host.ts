@@ -15,9 +15,12 @@ export async function runExamPlaytest(page: Page, sourceFile: string) {
   const registry = createRuntimeRegistry();
   let snapshot: Snapshot = {};
   const pageErrors: string[] = [];
+  const consoleErrors: string[] = [];
   page.on('pageerror', error => pageErrors.push(error.message));
+  page.on('console', message => { if (message.type() === 'error') consoleErrors.push(message.text()); });
   let rememberedPosition = 0;
   let audioHandle: Awaited<ReturnType<ReturnType<Page['locator']>['elementHandle']>> = null;
+  let editorHandle: Awaited<ReturnType<ReturnType<Page['locator']>['elementHandle']>> = null;
 
   const refresh = async () => {
     snapshot = await page.evaluate(() => {
@@ -30,6 +33,10 @@ export async function runExamPlaytest(page: Page, sourceFile: string) {
       const readingRows = [...document.querySelectorAll<HTMLElement>('.exam-reading-q')];
       const firstReading = readingRows[0];
       const image = document.querySelector<HTMLImageElement>('.exam-writing-image');
+      const catalogCounts = (title: string) => {
+        const card = [...document.querySelectorAll<HTMLElement>('.exam-card')].find(node => node.querySelector('.exam-card-title')?.textContent === title);
+        return (card?.querySelector('.exam-card-counts')?.textContent?.match(/\d+/g) ?? []).join('|');
+      };
       return {
         'exam.input': input?.value ?? '',
         'exam.focused': !!input && document.activeElement === input,
@@ -39,8 +46,15 @@ export async function runExamPlaytest(page: Page, sourceFile: string) {
         'exam.reviewAnswer': answer,
         'exam.firstSelected': document.querySelector('.exam-option.selected')?.textContent ?? '',
         'exam.listVisible': !!document.querySelector('.exam-list'),
+        'catalog.b12019Counts': catalogCounts('B1 Certyfikat 2019'),
+        'catalog.b12017Counts': catalogCounts('B1 Certyfikat 2017'),
+        'catalog.b12020Visible': !![...document.querySelectorAll('.exam-card-title')].find(node => node.textContent === 'B1 Certyfikat 2020'),
+        'catalog.b22017Visible': !![...document.querySelectorAll('.exam-card-title')].find(node => node.textContent === 'B2 Certyfikat 2017'),
+        'catalog.b22020Visible': !![...document.querySelectorAll('.exam-card-title')].find(node => node.textContent === 'B2 Certyfikat 2020'),
         'exam.promptImageLoaded': !!image && image.complete && image.naturalWidth > 0,
         'exam.promptImageAlt': image?.alt ?? '',
+        'grammar.context': document.querySelector('.exam-context')?.textContent ?? '',
+        'grammar.manualReviewCount': document.querySelectorAll('.exam-review-manual').length,
         'reading.passageOpening': document.querySelector('.exam-reading-text p')?.textContent?.replace(/^\d+\.\s*/, '').split('.')[0] ?? '',
         'reading.passageChars': document.querySelector('.exam-reading-text')?.textContent?.length ?? 0,
         'reading.questionCount': readingRows.length,
@@ -68,6 +82,9 @@ export async function runExamPlaytest(page: Page, sourceFile: string) {
       };
     });
     snapshot['media.notRewound'] = Number(snapshot['media.position']) >= rememberedPosition;
+    snapshot['exam.editorPreserved'] = editorHandle
+      ? await editorHandle.evaluate(editor => editor.isConnected && editor === document.querySelector('.exam-input'))
+      : false;
     snapshot['media.closed'] = audioHandle
       ? await audioHandle.evaluate(audio => {
           const element = audio as HTMLAudioElement;
@@ -89,6 +106,10 @@ export async function runExamPlaytest(page: Page, sourceFile: string) {
   };
   const string = (name: string) => [{ name, type: 'string' }];
   const button = (label: string) => page.getByRole('button', { name: label }).click();
+  action('openCatalog', [], async () => {
+    await page.goto('/#/exam');
+    await expect(page.locator('.exam-list')).toBeVisible();
+  });
   action('open', [...string('exam'), ...string('module')], async args => {
     await page.goto('/#/exam');
     await expect(page.locator('.exam-list')).toBeVisible();
@@ -121,14 +142,74 @@ export async function runExamPlaytest(page: Page, sourceFile: string) {
     if (!(await input.evaluate(element => element === document.activeElement))) await input.click();
     await page.keyboard.type(String(args.text));
   });
+  action('rememberEditor', [], async () => { editorHandle = await page.locator('.exam-input').elementHandle(); });
+  action('refreshDuringComposition', [], async () => {
+    await page.evaluate(async () => {
+      const input = document.querySelector('.exam-input');
+      if (!input) throw new Error('No grammar editor');
+      input.dispatchEvent(new CompositionEvent('compositionstart', { bubbles: true }));
+      window.dispatchEvent(new Event('focus'));
+      await new Promise<void>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve())));
+      input.dispatchEvent(new CompositionEvent('compositionend', { bubbles: true }));
+      await new Promise<void>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve())));
+    });
+  });
   action('press', string('key'), async args => { await page.keyboard.press(String(args.key)); });
   action('play', [], async () => {
     await expect.poll(() => audioHandle?.evaluate(audio => {
       const media = audio as HTMLAudioElement;
       return media.seekable.length ? media.seekable.end(0) : 0;
     })).toBeGreaterThan(305);
+    const playButton = page.locator('.player-play-btn');
+    try {
+      await expect(playButton).toBeEnabled({ timeout: 5_000 });
+    } catch (error) {
+      const media = await audioHandle?.evaluate(audio => {
+        const element = audio as HTMLAudioElement;
+        return {
+          paused: element.paused, seeking: element.seeking, currentTime: element.currentTime,
+          readyState: element.readyState, networkState: element.networkState, errorCode: element.error?.code,
+          seekable: element.seekable.length ? [element.seekable.start(0), element.seekable.end(0)] : [],
+        };
+      });
+      throw new Error(`Recording play control stayed disabled: ${JSON.stringify({ media, pageErrors, consoleErrors })}`, { cause: error });
+    }
+    await playButton.click();
+    try {
+      await expect.poll(() => audioHandle?.evaluate(audio => !(audio as HTMLAudioElement).paused)).toBe(true);
+    } catch (error) {
+      const media = await audioHandle?.evaluate(audio => {
+        const element = audio as HTMLAudioElement;
+        return {
+          paused: element.paused, currentTime: element.currentTime, duration: element.duration,
+          readyState: element.readyState, networkState: element.networkState, errorCode: element.error?.code,
+          seekable: element.seekable.length ? [element.seekable.start(0), element.seekable.end(0)] : [],
+          source: element.currentSrc,
+        };
+      });
+      throw new Error(`Recording did not start: ${JSON.stringify({ media, pageErrors, consoleErrors })}`, { cause: error });
+    }
+  });
+  action('auditSegment', [{ name: 'start', type: 'number' }, { name: 'end', type: 'number' }], async args => {
+    const start = Number(args.start);
+    const end = Number(args.end);
+    const audio = page.locator('audio');
+    await expect.poll(() => audio.evaluate(element => {
+      const media = element as HTMLAudioElement;
+      return media.seekable.length ? media.seekable.end(0) : 0;
+    })).toBeGreaterThan(end - 1);
+    await expect.poll(() => audio.evaluate(element => (element as HTMLAudioElement).currentTime)).toBeGreaterThanOrEqual(start - 0.25);
+    expect(await audio.evaluate(element => (element as HTMLAudioElement).currentTime)).toBeLessThan(start + 1);
     await page.locator('.player-play-btn').click();
-    await expect.poll(() => audioHandle?.evaluate(audio => !(audio as HTMLAudioElement).paused)).toBe(true);
+    await expect.poll(() => audio.evaluate(element => !(element as HTMLAudioElement).paused)).toBe(true);
+    const bar = page.locator('.player-progress-bar');
+    const box = await bar.boundingBox();
+    if (!box) throw new Error('Player progress is not laid out');
+    await bar.click({ position: { x: box.width - 1, y: box.height / 2 } });
+    await expect.poll(() => audio.evaluate(element => (element as HTMLAudioElement).paused)).toBe(true);
+    const stopped = await audio.evaluate(element => (element as HTMLAudioElement).currentTime);
+    expect(stopped).toBeGreaterThan(end - 2);
+    expect(stopped).toBeLessThanOrEqual(end + 0.25);
   });
   action('rememberPosition', [], async () => { rememberedPosition = Number(snapshot['media.position']); });
   action('choose', string('answer'), async args => {
@@ -182,10 +263,13 @@ export async function runExamPlaytest(page: Page, sourceFile: string) {
     await expect(page.locator('.player-error')).toHaveText('Аудиозапись недоступна');
   });
   for (const [id, resultType] of Object.entries({
-    'exam.input': 'string', 'exam.focused': 'bool', 'exam.caret': 'number',
+    'exam.input': 'string', 'exam.focused': 'bool', 'exam.caret': 'number', 'exam.editorPreserved': 'bool',
     'exam.score': 'string', 'exam.scoreDetail': 'string', 'exam.reviewAnswer': 'string',
     'exam.firstSelected': 'string', 'exam.listVisible': 'bool',
+    'catalog.b12019Counts': 'string', 'catalog.b12017Counts': 'string',
+    'catalog.b12020Visible': 'bool', 'catalog.b22017Visible': 'bool', 'catalog.b22020Visible': 'bool',
     'exam.promptImageLoaded': 'bool', 'exam.promptImageAlt': 'string',
+    'grammar.context': 'string', 'grammar.manualReviewCount': 'number',
     'reading.passageOpening': 'string', 'reading.passageChars': 'number',
     'reading.questionCount': 'number', 'reading.firstQuestion': 'string',
     'reading.firstOptions': 'string', 'reading.genericQuestionCount': 'number',

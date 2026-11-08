@@ -36,6 +36,16 @@ RECORD ListeningQuestionRow KEY questionId COUNT 1..
   correctAnswer: string
   points: int OPTIONAL
   pointsQuarter: int OPTIONAL
+  gradingMode: enum exact|open_manual OPTIONAL
+  answerMode: enum single|unordered_set OPTIONAL
+  creditPerCorrectQuarter: int OPTIONAL
+END
+
+RECORD ListeningAnswerVariantRow KEY variantId COUNT 1..
+  variantId: string
+  questionRef: ref ListeningQuestionRow
+  answer: string
+  earnedQuarter: int
 END
 
 # Reading: passages with questions; paragraphs derived from text by blank-line split.
@@ -79,6 +89,7 @@ RECORD GrammarItemRow KEY itemId COUNT 1..
   correctAnswer: string
   points: int OPTIONAL
   pointsQuarter: int OPTIONAL
+  gradingMode: enum exact|open_manual OPTIONAL
 END
 
 # Additional accepted answers may earn part of the item's maximum, in quarter-point units.
@@ -100,7 +111,7 @@ RECORD WritingTaskRow KEY taskId COUNT 1..
   promptImageUrl: string OPTIONAL
   promptImageAlt: string OPTIONAL
   wordLimit: int OPTIONAL
-  genre: enum letter|description|argument|essay|invitation|wishes|story|report|sms|opinion
+  genre: enum letter|description|argument|essay|invitation|wishes|story|report|sms|opinion|announcement|email|review|advertisement
 END
 
 # Scoring oracle: input/output pairs for the answer-matching rule (P4: test expectations in DSL).
@@ -154,4 +165,56 @@ RECORD QuarterFormatCaseRow KEY id COUNT 1..
   id: string
   pointsQuarter: int
   expectedText: string
+END
+
+RECORD AnswerEvaluationCaseRow KEY id COUNT 1..
+  id: string
+  consumer: enum grammar|listening
+  mode: enum exact|open_manual
+  fullAnswer: string
+  variantAnswer: string OPTIONAL
+  variantQuarter: int OPTIONAL
+  maximumQuarter: int
+  answer: string
+  expectedStatus: enum confirmed_full|confirmed_partial|wrong|pending_manual
+  expectedConfirmedQuarter: int
+  expectedPendingQuarter: int
+END
+
+RECORD AnswerAttemptCaseRow KEY id COUNT 1..
+  id: string
+  exactAnswer: string
+  openAnswer: string
+  exactResponse: string
+  openResponse: string
+  exactMaximumQuarter: int
+  openMaximumQuarter: int
+  expectedConfirmedQuarter: int
+  expectedPendingQuarter: int
+  expectedPossibleQuarter: int
+  expectedFinal: bool
+END
+
+RECORD UnorderedSetCaseRow KEY id COUNT 1..
+  id: string
+  correctAnswer: string
+  options: string
+  answer: string
+  maximumQuarter: int
+  creditPerCorrectQuarter: int OPTIONAL
+  mode: enum exact|open_manual OPTIONAL
+  expectedStatus: enum confirmed_full|confirmed_partial|wrong|pending_manual
+  expectedConfirmedQuarter: int
+  expectedPendingQuarter: int OPTIONAL
+END
+
+# Source-grounded groups whose keys explicitly accept other correct answers.
+RECORD OpenItemGroupCaseRow KEY id COUNT 1..
+  id: string
+  section: enum grammar|listening
+  groupRef: string
+  expectedItemCount: int
+  unknownAnswer: string
+  expectedUnknownStatus: enum pending_manual
+  expectedBlankStatus: enum wrong
 END

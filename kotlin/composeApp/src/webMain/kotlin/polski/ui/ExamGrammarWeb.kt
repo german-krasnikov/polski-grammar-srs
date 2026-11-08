@@ -6,12 +6,16 @@ import org.w3c.dom.HTMLElement
 import polski.presentation.UiCopy
 import org.w3c.dom.HTMLInputElement
 import polski.exam.QuestionType
+import polski.exam.ExamAnswerStatus
 import polski.exam.formatQuarterPoints
 import polski.exam.grammar.*
 
 internal class ExamGrammarController(examId: String, private val onBack: () -> Unit) {
+    private val tests = examGrammarData.getValue(examId)
+    private val instructionsByItemId = tests.flatMap { test ->
+        test.items.map { item -> item.itemId to test.instruction }
+    }.toMap()
     private var state = run {
-        val tests = examGrammarData.getValue(examId)
         val merged = GrammarTest(examId, tests.firstOrNull()?.instruction ?: "", tests.flatMap { it.items })
         GrammarExamState(test = merged)
     }
@@ -54,7 +58,7 @@ internal class ExamGrammarController(examId: String, private val onBack: () -> U
 
     private fun renderQuestion(c: HTMLElement) {
         val card = grammarExamCardModel(state)
-        c.appendChild(node("h2", "exam-title", card.instruction))
+        c.appendChild(node("h2", "exam-title", instructionsByItemId[card.item.itemId] ?: card.instruction))
         c.appendChild(node("div", "exam-progress").apply {
             appendChild(node("span", "exam-progress-text", card.progress))
             appendChild(node("div", "exam-progress-bar").apply {
@@ -85,7 +89,7 @@ internal class ExamGrammarController(examId: String, private val onBack: () -> U
             })
         } else {
             val input = (document.createElement("input") as HTMLInputElement).apply {
-                type = "text"; className = "exam-input"; placeholder = "Wpisz odpowiedź..."
+                type = "text"; id = "exam-grammar-input"; className = "exam-input"; placeholder = "Wpisz odpowiedź..."
                 value = card.currentAnswer
                 addEventListener("input", {
                     dispatch(GrammarExamAction.Answer(card.item.itemId, this.value))
@@ -106,23 +110,33 @@ internal class ExamGrammarController(examId: String, private val onBack: () -> U
         val result = state.result ?: return
         c.appendChild(node("h2", "exam-title", "${UiCopy.Results} — ${UiCopy.Grammar}"))
         c.appendChild(node("div", "exam-score").apply {
-            appendChild(node("div", "exam-score-big", "${result.percentage.toInt()}%"))
-            appendChild(node("div", "exam-score-detail", "${formatQuarterPoints(result.earnedQuarterPoints)} / ${formatQuarterPoints(result.possibleQuarterPoints)} баллов"))
+            if (result.isFinal) {
+                appendChild(node("div", "exam-score-big", "${result.percentage.toInt()}%"))
+                appendChild(node("div", "exam-score-detail", "${formatQuarterPoints(result.earnedQuarterPoints)} / ${formatQuarterPoints(result.possibleQuarterPoints)} баллов"))
+            } else {
+                appendChild(node("div", "exam-score-big", "${UiCopy.ExamConfirmedPoints}: ${formatQuarterPoints(result.earnedQuarterPoints)} / ${formatQuarterPoints(result.possibleQuarterPoints)}"))
+                appendChild(node("div", "exam-score-detail", "${UiCopy.ExamPendingPoints}: ${formatQuarterPoints(result.manualPendingQuarterPoints)}"))
+            }
         })
         c.appendChild(node("div", "exam-review").apply {
             state.test.items.forEachIndexed { i, item ->
                 val answer = state.answers[item.itemId].orEmpty()
-                val earned = GrammarExamScorer.earnedQuarter(item, answer)
-                val status = when {
-                    earned == item.maximumQuarter -> "correct"
-                    earned > 0 -> "partial"
-                    else -> "wrong"
+                val evaluation = GrammarExamScorer.grade(item, answer)
+                val status = when (evaluation.status) {
+                    ExamAnswerStatus.ConfirmedFull -> "correct"
+                    ExamAnswerStatus.ConfirmedPartial -> "partial"
+                    ExamAnswerStatus.Wrong -> "wrong"
+                    ExamAnswerStatus.PendingManual -> "pending"
                 }
                 appendChild(node("div", "exam-review-item $status").apply {
                     appendChild(node("span", "exam-review-num", "${i + 1}."))
                     appendChild(node("span", "exam-review-context", item.context.replace("___", if (answer.isNotEmpty()) "[$answer]" else "[—]")))
-                    if (earned > 0 && earned < item.maximumQuarter) appendChild(node("span", "exam-review-correct", "+${formatQuarterPoints(earned)} / ${formatQuarterPoints(item.maximumQuarter)}"))
-                    if (earned < item.maximumQuarter) appendChild(node("span", "exam-review-correct", "→ ${item.correctAnswer}"))
+                    if (evaluation.status == ExamAnswerStatus.ConfirmedPartial) appendChild(node("span", "exam-review-correct", "+${formatQuarterPoints(evaluation.confirmedQuarter)} / ${formatQuarterPoints(item.maximumQuarter)}"))
+                    if (evaluation.status == ExamAnswerStatus.PendingManual) appendChild(node("span", "exam-review-manual", UiCopy.ExamManualReview))
+                    if (evaluation.status != ExamAnswerStatus.ConfirmedFull) {
+                        val examples = (listOf(item.correctAnswer) + item.scoredVariants.map { it.answer }).joinToString(" / ")
+                        appendChild(node("span", "exam-review-correct", "${UiCopy.ExamOfficialExamples}: $examples"))
+                    }
                 })
             }
         })

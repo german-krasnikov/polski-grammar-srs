@@ -1,0 +1,38 @@
+DSL 1
+# Key p. 5 prints nominative młoda/miła (osoba), while transcript has accusative młodą/miłą osobę; each slot earns 0.5 point.
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2017-listening-5-1-alt-1
+  questionRef: certyfikat-polski-B2-2017-listening-5-1
+  answer: "młoda"
+  earnedQuarter: 2
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2017-listening-5-1-alt-2
+  questionRef: certyfikat-polski-B2-2017-listening-5-1
+  answer: "młoda osoba"
+  earnedQuarter: 2
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2017-listening-5-1-alt-3
+  questionRef: certyfikat-polski-B2-2017-listening-5-1
+  answer: "młodą osobę"
+  earnedQuarter: 2
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2017-listening-5-2-alt-1
+  questionRef: certyfikat-polski-B2-2017-listening-5-2
+  answer: "miła"
+  earnedQuarter: 2
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2017-listening-5-2-alt-2
+  questionRef: certyfikat-polski-B2-2017-listening-5-2
+  answer: "miła osoba"
+  earnedQuarter: 2
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2017-listening-5-2-alt-3
+  questionRef: certyfikat-polski-B2-2017-listening-5-2
+  answer: "miłą osobę"
+  earnedQuarter: 2
+}

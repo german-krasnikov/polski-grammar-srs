@@ -84,6 +84,8 @@ internal object PlRuTypedPack : CoursePackFields {
         "grammar" to "Грамматика", "listening" to "Аудирование", "reading" to "Чтение",
         "writing" to "Письмо", "selectWritingSet" to "Выберите набор", "changeWritingSet" to "Сменить набор", "writingSet" to "Набор",
         "results" to "Результаты", "comingSoon" to "Скоро", "exam" to "Экзамен",
+        "examConfirmedPoints" to "Подтверждено", "examPendingPoints" to "Ожидает проверки",
+        "examManualReview" to "Требуется ручная проверка", "examOfficialExamples" to "Образцы из ключа",
         "cardsTab" to "Карточки", "vocabularyTab" to "Слова", "matrixTab" to "Таблицы и схема",
         "lang.pl" to "Польский", "lang.en" to "Английский", "lang.ru" to "Русский",
         "adverb.pl" to "по-польски", "adverb.en" to "по-английски", "adverb.ru" to "по-русски",

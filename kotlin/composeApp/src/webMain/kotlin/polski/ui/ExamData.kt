@@ -23,6 +23,11 @@ private fun mapB1Grammar(): List<GrammarTest> = ExamDataMapper.grammarTests(
     itemType = { it.questionType.tag }, itemContext = { it.context },
     itemGap = { it.gap }, itemOptions = { it.options },
     itemAnswer = { it.correctAnswer }, itemPoints = { it.points }, itemQuarter = { it.pointsQuarter },
+    itemGradingMode = { it.gradingMode?.tag },
+    variants = polski.exam.data.b1y2019.GRAMMAR_ANSWER_VARIANT_ROW_ROWS.groupBy(
+        keySelector = { it.itemRef },
+        valueTransform = { GrammarScoredVariant(it.answer, it.earnedQuarter) },
+    ),
 )
 
 private fun mapB2Grammar(): List<GrammarTest> = ExamDataMapper.grammarTests(

@@ -89,9 +89,10 @@ test('progress survives reload, exports the current document and confirms reset'
   const downloadPromise = page.waitForEvent('download');
   await page.locator('#progress-export').click();
   const download = await downloadPromise;
-  const exported = JSON.parse(readFileSync((await download.path())!, 'utf8')) as { version: number; totalReviews: number };
-  expect(exported.version).toBe(1);
-  expect(exported.totalReviews).toBe(1);
+  const exported = readFileSync((await download.path())!, 'utf8');
+  expect(exported).toMatch(/^POLSKI-TEXT\t1\tprogress\t2\n/);
+  expect(exported).toMatch(/^I\tK:totalReviews\t1$/m);
+  expect(exported).toBe(await page.evaluate(key => localStorage.getItem(key), previewKey));
 
   page.once('dialog', dialog => dialog.dismiss());
   await page.locator('#progress-reset').click();
@@ -102,6 +103,10 @@ test('progress survives reload, exports the current document and confirms reset'
   await expect(page.getByText('Цепочка · 1 / 5')).toBeVisible();
   await page.getByRole('button', { name: 'Прогресс' }).click();
   await expect(page.locator('.bigstats').getByText('0', { exact: true }).first()).toBeVisible();
+  await page.evaluate(([key, raw]) => localStorage.setItem(key, raw), [previewKey, exported] as const);
+  await page.reload();
+  await page.getByRole('button', { name: 'Прогресс', exact: true }).click();
+  await expect(page.locator('.bigstats').getByText('1', { exact: true }).first()).toBeVisible();
 });
 
 test('legacy progress waits for explicit migration and keeps its exact backup', async ({ page }) => {

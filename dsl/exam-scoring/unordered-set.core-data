@@ -1,0 +1,178 @@
+DSL 1
+# B1/2020 Listening IV B: paper p6 specifies seven 1-point answer slots;
+# key p3 gives B={1,4}. Each correct selected position earns 4 quarter units.
+UNORDERED_SET_CASE {
+  id: b1-2020-forward
+  correctAnswer: "1|4"
+  options: "1|2|3|4"
+  answer: "1|4"
+  maximumQuarter: 8
+  creditPerCorrectQuarter: 4
+  expectedStatus: confirmed_full
+  expectedConfirmedQuarter: 8
+}
+UNORDERED_SET_CASE {
+  id: b1-2020-reversed
+  correctAnswer: "1|4"
+  options: "1|2|3|4"
+  answer: "4|1"
+  maximumQuarter: 8
+  creditPerCorrectQuarter: 4
+  expectedStatus: confirmed_full
+  expectedConfirmedQuarter: 8
+}
+UNORDERED_SET_CASE {
+  id: b1-2020-single
+  correctAnswer: "1|4"
+  options: "1|2|3|4"
+  answer: "1"
+  maximumQuarter: 8
+  creditPerCorrectQuarter: 4
+  expectedStatus: confirmed_partial
+  expectedConfirmedQuarter: 4
+}
+UNORDERED_SET_CASE {
+  id: b1-2020-one-correct-one-wrong
+  correctAnswer: "1|4"
+  options: "1|2|3|4"
+  answer: "1|3"
+  maximumQuarter: 8
+  creditPerCorrectQuarter: 4
+  expectedStatus: confirmed_partial
+  expectedConfirmedQuarter: 4
+}
+UNORDERED_SET_CASE {
+  id: b1-2020-extra
+  correctAnswer: "1|4"
+  options: "1|2|3|4"
+  answer: "1|4|3"
+  maximumQuarter: 8
+  creditPerCorrectQuarter: 4
+  expectedStatus: wrong
+  expectedConfirmedQuarter: 0
+}
+UNORDERED_SET_CASE {
+  id: b1-2020-duplicate
+  correctAnswer: "1|4"
+  options: "1|2|3|4"
+  answer: "1|1"
+  maximumQuarter: 8
+  creditPerCorrectQuarter: 4
+  expectedStatus: wrong
+  expectedConfirmedQuarter: 0
+}
+UNORDERED_SET_CASE {
+  id: b1-2020-empty
+  correctAnswer: "1|4"
+  options: "1|2|3|4"
+  answer: ""
+  maximumQuarter: 8
+  creditPerCorrectQuarter: 4
+  expectedStatus: wrong
+  expectedConfirmedQuarter: 0
+}
+# B2/2017 IV E has three printed 1-point slots; key E={1,2,4}.
+UNORDERED_SET_CASE {
+  id: three-token-reversed
+  correctAnswer: "1|2|4"
+  options: "1|2|3|4"
+  answer: "4|2|1"
+  maximumQuarter: 12
+  creditPerCorrectQuarter: 4
+  expectedStatus: confirmed_full
+  expectedConfirmedQuarter: 12
+}
+UNORDERED_SET_CASE {
+  id: b2-2017-duplicate
+  correctAnswer: "1|2|4"
+  options: "1|2|3|4"
+  answer: "2|3|3"
+  maximumQuarter: 12
+  creditPerCorrectQuarter: 4
+  expectedStatus: wrong
+  expectedConfirmedQuarter: 0
+}
+UNORDERED_SET_CASE {
+  id: b2-2017-one-correct-one-wrong
+  correctAnswer: "1|2|4"
+  options: "1|2|3|4"
+  answer: "2|3"
+  maximumQuarter: 12
+  creditPerCorrectQuarter: 4
+  expectedStatus: confirmed_partial
+  expectedConfirmedQuarter: 4
+}
+UNORDERED_SET_CASE {
+  id: b1-2020-all-wrong
+  correctAnswer: "1|4"
+  options: "1|2|3|4"
+  answer: "2|3"
+  maximumQuarter: 8
+  creditPerCorrectQuarter: 4
+  expectedStatus: wrong
+  expectedConfirmedQuarter: 0
+}
+# Exact set matching without a per-choice rule remains a separate generic case.
+UNORDERED_SET_CASE {
+  id: generic-exact-single
+  correctAnswer: "1|4"
+  options: "1|2|3|4"
+  answer: "1"
+  maximumQuarter: 8
+  expectedStatus: wrong
+  expectedConfirmedQuarter: 0
+}
+# B2/2020 Listening V/6: two text answers, each worth 0.5 point, order arbitrary.
+UNORDERED_SET_CASE {
+  id: typed-pair-reversed
+  correctAnswer: "czajnik|filiżanka"
+  options: ""
+  answer: "filiżanka|czajnik"
+  maximumQuarter: 4
+  creditPerCorrectQuarter: 2
+  expectedStatus: confirmed_full
+  expectedConfirmedQuarter: 4
+}
+UNORDERED_SET_CASE {
+  id: typed-one-known
+  correctAnswer: "czajnik|filiżanka"
+  options: ""
+  answer: czajnik
+  maximumQuarter: 4
+  creditPerCorrectQuarter: 2
+  expectedStatus: confirmed_partial
+  expectedConfirmedQuarter: 2
+}
+UNORDERED_SET_CASE {
+  id: typed-one-known-one-wrong
+  correctAnswer: "czajnik|filiżanka"
+  options: ""
+  answer: "czajnik|obce"
+  maximumQuarter: 4
+  creditPerCorrectQuarter: 2
+  expectedStatus: confirmed_partial
+  expectedConfirmedQuarter: 2
+}
+UNORDERED_SET_CASE {
+  id: typed-duplicate
+  correctAnswer: "czajnik|filiżanka"
+  options: ""
+  answer: "czajnik|czajnik"
+  maximumQuarter: 4
+  creditPerCorrectQuarter: 2
+  expectedStatus: wrong
+  expectedConfirmedQuarter: 0
+}
+# Open text equivalence is modelled only when a particular key allows it.
+UNORDERED_SET_CASE {
+  id: typed-open-mixed
+  correctAnswer: "czajnik|filiżanka"
+  options: ""
+  answer: "czajnik|inne poprawne słowo"
+  maximumQuarter: 4
+  creditPerCorrectQuarter: 2
+  mode: open_manual
+  expectedStatus: pending_manual
+  expectedConfirmedQuarter: 2
+  expectedPendingQuarter: 2
+}

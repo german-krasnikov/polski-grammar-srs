@@ -2,6 +2,7 @@ import { expect, test } from '@playwright/test';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { continueIntroductionIfPresent } from './kotlin-introduction';
+import { progressAsLegacyShape } from './polski-text';
 
 const previewKey = 'polski-grammar-srs-kmp-preview-v1';
 type LoadFixture = {
@@ -16,7 +17,7 @@ const fixtureFile = JSON.parse(readFileSync(resolve('tests/fixtures/kotlin-parit
 
 for (const id of ['P-fresh', 'P-missing-skills', 'P-save-load', 'P-export-import']) {
   const fixture = fixtureFile.cases.find(entry => entry.id === id)!;
-  test(`${id} exports the React-compatible progress document`, async ({ browser }) => {
+  test(`${id} exports the frozen progress document through text wire`, async ({ browser }) => {
     const at = fixture.context?.nowIso ?? '2026-02-03T12:00:00.000Z';
     const context = await browser.newContext({ locale: 'pl-PL', timezoneId: fixture.context?.timeZone ?? 'Europe/Warsaw' });
     try {
@@ -42,7 +43,7 @@ for (const id of ['P-fresh', 'P-missing-skills', 'P-save-load', 'P-export-import
       const downloadPromise = page.waitForEvent('download');
       await page.locator('#progress-export').click();
       const download = await downloadPromise;
-      expect(JSON.parse(readFileSync((await download.path())!, 'utf8'))).toEqual(fixture.expected);
+      expect(progressAsLegacyShape(readFileSync((await download.path())!, 'utf8'))).toEqual(fixture.expected);
     } finally {
       await context.close();
     }

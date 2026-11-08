@@ -1,11 +1,12 @@
 DSL 1
+# Windows independently refined against original MP3 waveform, base transition clips, and task announcements.
 LISTENING_TASK {
   taskId: B1-2019-listen-1
   examRef: certyfikat-polski-B1-2019
   taskNumber: 1
   audioUrl: exam-audio/B1-2019.mp3
-  segmentStartMs: 85000
-  segmentEndMs: 305000
+  segmentStartMs: 103000
+  segmentEndMs: 309000
   instruction: "Proszę uważnie słuchać nagrania i zaznaczyć właściwe odpowiedzi. Nagranie zostanie odtworzone tylko jeden raz. (14 × 0,5 p.)"
 }
 LISTENING_TASK {
@@ -14,7 +15,7 @@ LISTENING_TASK {
   taskNumber: 2
   audioUrl: exam-audio/B1-2019.mp3
   segmentStartMs: 310000
-  segmentEndMs: 544000
+  segmentEndMs: 546000
   instruction: "Dziennikarz rozmawia o akcji „Torby bumerangi”. Zaznacz TAK, jeśli zdanie jest zgodne z tekstem, lub NIE, jeśli nie jest. Nagranie zostanie odtworzone dwa razy. (8 × 1 p.)"
 }
 LISTENING_TASK {
@@ -23,7 +24,7 @@ LISTENING_TASK {
   taskNumber: 3
   audioUrl: exam-audio/B1-2019.mp3
   segmentStartMs: 547000
-  segmentEndMs: 787000
+  segmentEndMs: 798000
   instruction: "Posłuchaj informacji o systemie ostrzegania SMS i zaznacz właściwe odpowiedzi. Nagranie zostanie odtworzone dwa razy. (5 × 1 p.)"
 }
 LISTENING_TASK {
@@ -31,8 +32,8 @@ LISTENING_TASK {
   examRef: certyfikat-polski-B1-2019
   taskNumber: 4
   audioUrl: exam-audio/B1-2019.mp3
-  segmentStartMs: 790000
-  segmentEndMs: 1061000
+  segmentStartMs: 799000
+  segmentEndMs: 1068000
   instruction: "Posłuchaj rad o rozmowach biznesowych. Dopasuj osobę 1–4 do opinii A–E; jedna osoba może wypowiadać więcej niż jedną opinię. Nagranie zostanie odtworzone dwa razy. (5 × 1 p.)"
 }
 LISTENING_TASK {
@@ -40,8 +41,8 @@ LISTENING_TASK {
   examRef: certyfikat-polski-B1-2019
   taskNumber: 5
   audioUrl: exam-audio/B1-2019.mp3
-  segmentStartMs: 1066000
-  segmentEndMs: 1472000
+  segmentStartMs: 1069000
+  segmentEndMs: 1475000
   instruction: "Posłuchaj tekstów o organizacji przeprowadzki i dopasuj numer tekstu 1–10 do ilustracji B–K. Ilustracja A jest przykładem. Nagranie zostanie odtworzone dwa razy. (10 × 0,5 p.)"
   promptImageUrl: exam-images/B1-2019-listening-V.jpeg
   promptImageAlt: "Ilustracje A–K do zadania V: A narzędzia jako przykład; B marker, C kosmetyczka, D ciężarówka, E pudła, F ubrania na wieszakach, G wspólny posiłek, H koce, I środki czystości, J osoba niosąca pudła, K pomoc przyjaciół."

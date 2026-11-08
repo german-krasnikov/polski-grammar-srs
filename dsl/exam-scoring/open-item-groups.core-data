@@ -1,0 +1,21 @@
+DSL 1
+# B1/2020 key p. 6: Grammar VI accepts other correct transformations.
+OPEN_ITEM_GROUP_CASE {
+  id: b1-2020-grammar-vi
+  section: grammar
+  groupRef: certyfikat-polski-B1-2020-grammar-6
+  expectedItemCount: 5
+  unknownAnswer: "inna odpowiedź spoza drukowanego klucza"
+  expectedUnknownStatus: pending_manual
+  expectedBlankStatus: wrong
+}
+# B2/2017 key p. 5: Listening V accepts other answers consistent with the transcript.
+OPEN_ITEM_GROUP_CASE {
+  id: b2-2017-listening-v
+  section: listening
+  groupRef: certyfikat-polski-B2-2017-listen-5
+  expectedItemCount: 9
+  unknownAnswer: "inna odpowiedź spoza drukowanego klucza"
+  expectedUnknownStatus: pending_manual
+  expectedBlankStatus: wrong
+}
