@@ -1,7 +1,7 @@
 // R1.16 (Plans/Biome/R1Design.md): the form table of en-ru is derived from the English lexicon rows by dsl/derive-forms.mjs. The rules on hand-built rows (expectations written out) and the real table against
 // the table that scripts/build-pack-en.mjs built from the JSON lexicon; the file left the tree in R1.17, so it is read from the commit that still has it (git show <rev>:path, sha256 pinned).
 // The data cases need a biome-dsl checkout (see course-data.test.ts); without one they are skipped, which is NOT RUN, not a pass.
-import { describe, expect, it } from 'vitest';
+import { beforeAll, describe, expect, it } from 'vitest';
 import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { join } from 'node:path';
@@ -86,12 +86,15 @@ describe('the rules of the English form table on hand-built rows', () => {
 });
 
 describe.skipIf(!hasCli)('the real table', () => {
-  const rows = (file: string) => {
-    const run = biome('read', join(repo, 'courses-biome/en-ru', `${file}.core-data`), '--format', 'json');
-    expect(run.status, run.stderr).toBe(0);
-    return (JSON.parse(run.stdout) as { value: any }[]).map(r => r.value);
-  };
-  const forms = enruForms({ nouns: rows('nouns'), adjectives: rows('adjectives'), verbs: rows('verbs'), possessives: rows('possessives'), pronouns: rows('personalPronouns'), prepositions: rows('prepositions') });
+  let forms: Record<string, any[]>;
+  beforeAll(() => {
+    const rows = (file: string) => {
+      const run = biome('read', join(repo, 'courses-biome/en-ru', `${file}.core-data`), '--format', 'json');
+      expect(run.status, run.stderr).toBe(0);
+      return (JSON.parse(run.stdout) as { value: any }[]).map(r => r.value);
+    };
+    forms = enruForms({ nouns: rows('nouns'), adjectives: rows('adjectives'), verbs: rows('verbs'), possessives: rows('possessives'), pronouns: rows('personalPronouns'), prepositions: rows('prepositions') });
+  });
   const sealed = () => {
     const raw = execFileSync('git', ['show', `${SEALED.rev}:${SEALED.path}`], { cwd: repo });
     expect(createHash('sha256').update(raw).digest('hex'), `${SEALED.path} at ${SEALED.rev}`).toBe(SEALED.sha256);

@@ -1,7 +1,7 @@
 // R1.12 (Plans/Biome/R1Design.md): the form table of pl-ru is derived from the lexicon rows by dsl/derive-forms.mjs. The rules on hand-built rows (expectations written out), the real table against
 // the pinned golden forms (tests/fixtures/core-golden/grammar.json, which scripts/build-pack.mjs checked before it lost its source), and the rows against dsl/forms.data-contract.
 // The data cases need a biome-dsl checkout (see course-data.test.ts); without one they are skipped, which is NOT RUN, not a pass.
-import { describe, expect, it } from 'vitest';
+import { beforeAll, describe, expect, it } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { formRows, plruForms, type FormEntry } from '../dsl/derive-forms.mjs';
@@ -96,13 +96,17 @@ describe('the rules of the form table on hand-built rows', () => {
 });
 
 describe.skipIf(!hasCli)('the real table', () => {
-  const rows = (file: string) => {
-    const run = biome('read', join(PACK, `${file}.core-data`), '--format', 'json');
-    expect(run.status, run.stderr).toBe(0);
-    return (JSON.parse(run.stdout) as { value: any }[]).map(r => r.value);
-  };
-  const forms = plruForms({ nouns: rows('nouns'), adjectives: rows('adjectives'), verbs: rows('verbs'), possessives: rows('possessives'), morphology: rows('morphology')[0] });
-  const entriesOf = (prefix: string) => Object.entries(forms).filter(([lexeme]) => lexeme.startsWith(`${prefix}:`)).map(([, entries]) => entries.length);
+  let forms: Record<string, any[]>;
+  let entriesOf: (prefix: string) => number[];
+  beforeAll(() => {
+    const rows = (file: string) => {
+      const run = biome('read', join(PACK, `${file}.core-data`), '--format', 'json');
+      expect(run.status, run.stderr).toBe(0);
+      return (JSON.parse(run.stdout) as { value: any }[]).map(r => r.value);
+    };
+    forms = plruForms({ nouns: rows('nouns'), adjectives: rows('adjectives'), verbs: rows('verbs'), possessives: rows('possessives'), morphology: rows('morphology')[0] });
+    entriesOf = (prefix: string) => Object.entries(forms).filter(([lexeme]) => lexeme.startsWith(`${prefix}:`)).map(([, entries]) => entries.length);
+  });
 
   it('has 14 nouns, 7 adjectives, 7 possessives and 11 verbs with 196, 490, 490 and 384 forms', () => {
     expect([entriesOf('noun').length, entriesOf('adjective').length, entriesOf('possessive').length, entriesOf('verb').length]).toEqual([14, 7, 7, 11]);

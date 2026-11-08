@@ -1,5 +1,5 @@
 // R1.8a (Plans/Biome/R1Design.md): the frequency rows against dsl/frequency.data-contract: what `biome data` rejects, with the exact position of each problem.
-import { describe, expect, it } from 'vitest';
+import { beforeAll, describe, expect, it } from 'vitest';
 import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { join } from 'node:path';
@@ -20,10 +20,16 @@ describe.skipIf(!hasCli)('frequency rows', () => {
 
 // R1.19: the en-ru list is a file of its own, checked and not connected to anything (a step without --target). Its JSON left the tree, so the comparison reads it from the commit that still has it.
 describe.skipIf(!hasCli)('the en-ru frequency rows against the sealed frequency-top1000.json', () => {
-  const raw = execFileSync('git', ['show', '7358aeb72ab79dce80fca1faadba6be64892fa18:courses/en-ru/frequency-top1000.json'], { cwd: repo });
-  const run = biome('read', join(repo, 'courses-biome/en-ru/frequency.core-data'), '--format', 'json');
-  const rows = (JSON.parse(run.stdout) as { value: { rank: number; lemma: string; count: number } }[]).map(r => r.value);
-  const items = JSON.parse(raw.toString('utf8')).items;
+  let raw: Buffer;
+  let run: ReturnType<typeof biome>;
+  let rows: { rank: number; lemma: string; count: number }[];
+  let items: any[];
+  beforeAll(() => {
+    raw = execFileSync('git', ['show', '7358aeb72ab79dce80fca1faadba6be64892fa18:courses/en-ru/frequency-top1000.json'], { cwd: repo });
+    run = biome('read', join(repo, 'courses-biome/en-ru/frequency.core-data'), '--format', 'json');
+    rows = (JSON.parse(run.stdout) as { value: { rank: number; lemma: string; count: number } }[]).map(r => r.value);
+    items = JSON.parse(raw.toString('utf8')).items;
+  });
 
   it('is the file that the pin in R1Receipt.md and ATTRIBUTION.md names (sha256 f64d9dce...)', () =>
     expect(createHash('sha256').update(raw).digest('hex')).toBe('f64d9dcebdff358135aec3b6031763c553f3cbc8f2603e525ea40c82c5050253'));

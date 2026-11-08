@@ -2,7 +2,7 @@
 // The chain of evidence: the cases are equal to the old lang/<code>/curriculum.json (scripts/check-nj03-old-curriculum-facts.mjs reads them from git at a pinned revision and checks
 // their sha256), and the rows are equal to the cases (this test); the engine reads the rows, and CurriculumReaderTest and EnRuEngineInputsTest check what it reads against their own expectations.
 // Needs a biome-dsl checkout (see course-data.test.ts); without one it is skipped, which is NOT RUN, not a pass.
-import { describe, expect, it } from 'vitest';
+import { beforeAll, describe, expect, it } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { biome, hasCli, repo } from './support/course-data';
@@ -21,10 +21,15 @@ const filter = (f: { slot: string; where: Record<string, string[]> } | null) => 
 
 for (const { pack, lang } of [{ pack: 'pl-ru', lang: 'pl' }, { pack: 'en-ru', lang: 'en' }]) {
   describe.skipIf(!hasCli)(`the skill rows of ${pack} against NJ03CurriculumIndependent.cases`, () => {
-    const cases = readFileSync(join(repo, 'Plans/Biome/NJ03CurriculumIndependent.cases'), 'utf8').split('\n').filter(line => line.startsWith(`ROW | ${lang} | `))
-      .map(line => line.split('|').map(cell => cell.trim()).slice(2));
-    const run = biome('read', join(repo, 'courses-biome', pack, 'skills.core-data'), '--format', 'json');
-    const rows = (JSON.parse(run.stdout) as { value: any }[]).map(r => r.value);
+    let cases: string[][];
+    let run: ReturnType<typeof biome>;
+    let rows: any[];
+    beforeAll(() => {
+      cases = readFileSync(join(repo, 'Plans/Biome/NJ03CurriculumIndependent.cases'), 'utf8').split('\n').filter(line => line.startsWith(`ROW | ${lang} | `))
+        .map(line => line.split('|').map(cell => cell.trim()).slice(2));
+      run = biome('read', join(repo, 'courses-biome', pack, 'skills.core-data'), '--format', 'json');
+      rows = (JSON.parse(run.stdout) as { value: any }[]).map(r => r.value);
+    });
 
     it('has the sixteen rows of the cases, in the same order', () => {
       expect(run.status, run.stderr).toBe(0);

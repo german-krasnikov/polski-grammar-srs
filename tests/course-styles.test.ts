@@ -1,7 +1,7 @@
 // R1.18 (Plans/Biome/R1Design.md): the four style rows of courses-biome/styles/styles.core-data against the sealed courses/styles/*.json, which left the tree in this slice, so they are read from the commit that
 // still has them (git show <rev>:path, sha256 pinned), and against dsl/style.data-contract: what `biome data check` rejects, with the exact position of each problem.
 // The data cases need a biome-dsl checkout (see course-data.test.ts); without one they are skipped, which is NOT RUN, not a pass.
-import { describe, expect, it } from 'vitest';
+import { beforeAll, describe, expect, it } from 'vitest';
 import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { join } from 'node:path';
@@ -17,12 +17,17 @@ const SEALED: [string, string][] = [
 ];
 
 describe.skipIf(!hasCli)('the style rows against the sealed courses/styles/*.json', () => {
-  const run = biome('read', join(repo, 'courses-biome/styles/styles.core-data'), '--format', 'json');
-  const rows = (JSON.parse(run.stdout) as { value: any }[]).map(r => r.value);
-  const sealed = SEALED.map(([name, sha256]) => {
-    const raw = execFileSync('git', ['show', `${REV}:courses/styles/${name}.json`], { cwd: repo });
-    expect(createHash('sha256').update(raw).digest('hex'), `courses/styles/${name}.json at ${REV}`).toBe(sha256);
-    return JSON.parse(raw.toString('utf8'));
+  let run: ReturnType<typeof biome>;
+  let rows: any[];
+  let sealed: any[];
+  beforeAll(() => {
+    run = biome('read', join(repo, 'courses-biome/styles/styles.core-data'), '--format', 'json');
+    rows = (JSON.parse(run.stdout) as { value: any }[]).map(r => r.value);
+    sealed = SEALED.map(([name, sha256]) => {
+      const raw = execFileSync('git', ['show', `${REV}:courses/styles/${name}.json`], { cwd: repo });
+      expect(createHash('sha256').update(raw).digest('hex'), `courses/styles/${name}.json at ${REV}`).toBe(sha256);
+      return JSON.parse(raw.toString('utf8'));
+    });
   });
 
   it('has the four rows, in the order of the file names', () => {

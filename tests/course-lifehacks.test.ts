@@ -2,7 +2,7 @@
 // read from the commit that still has them (git show <rev>:path, sha256 pinned), and against the lifehack records of dsl/course.data-contract: what `biome data check` rejects, with the exact position of
 // each problem. What the contract cannot state (an id prefix, a topic for a tip with no skill, a placeholder citation) is LifehackRowsTest. Replaces tests/lifehacks-pl-ru.test.ts and lifehacks-en-ru.test.ts.
 // The data cases need a biome-dsl checkout (see course-data.test.ts); without one they are skipped, which is NOT RUN, not a pass.
-import { describe, expect, it } from 'vitest';
+import { beforeAll, describe, expect, it } from 'vitest';
 import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { join } from 'node:path';
@@ -18,11 +18,16 @@ const OLD_KIND: Record<string, string> = { research: 'research', teaching_practi
 
 for (const { pair, step, nouns, sha256, skill, other } of PAIRS) {
   describe.skipIf(!hasCli)(`the lifehack rows of ${pair} against the sealed lifehacks.json`, () => {
-    const run = biome('read', join(repo, `courses-biome/${pair}/lifehacks.core-data`), '--format', 'json');
-    const rows = (JSON.parse(run.stdout) as { value: any }[]).map(r => r.value);
-    const raw = execFileSync('git', ['show', `${REV}:courses/pairs/${pair}/lifehacks.json`], { cwd: repo });
-    expect(createHash('sha256').update(raw).digest('hex'), `courses/pairs/${pair}/lifehacks.json at ${REV}`).toBe(sha256);
-    const sealed = JSON.parse(raw.toString('utf8'));
+    let run: ReturnType<typeof biome>;
+    let rows: any[];
+    let sealed: any;
+    beforeAll(() => {
+      run = biome('read', join(repo, `courses-biome/${pair}/lifehacks.core-data`), '--format', 'json');
+      rows = (JSON.parse(run.stdout) as { value: any }[]).map(r => r.value);
+      const raw = execFileSync('git', ['show', `${REV}:courses/pairs/${pair}/lifehacks.json`], { cwd: repo });
+      expect(createHash('sha256').update(raw).digest('hex'), `courses/pairs/${pair}/lifehacks.json at ${REV}`).toBe(sha256);
+      sealed = JSON.parse(raw.toString('utf8'));
+    });
 
     it('has the 32 rows of the file, in the same order', () => {
       expect(run.status, run.stderr).toBe(0);

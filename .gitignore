@@ -25,3 +25,4 @@ Plans/Kotlin/artifacts/**/*.zip
 # Xcode per-user state
 xcuserdata/
 __pycache__/
+kotlin/local.properties
