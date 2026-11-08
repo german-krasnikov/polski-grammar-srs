@@ -7,17 +7,20 @@ data class ExamId(val provider: String, val targetLanguage: String, val level: S
 enum class ExamModule { Listening, Reading, Grammar, Writing }
 
 /** Question types shared across modules — each module uses a subset. */
-enum class QuestionType {
-    MultipleChoice,
-    TrueFalse,
-    TrueFalseNotGiven,
-    FillGap,
-    Match,
-    MatchHeading,
-    ShortAnswer,
-    ChooseForm,
-    Transform,
-    WordFormation,
+enum class QuestionType(val tag: String) {
+    MultipleChoice("multiple_choice"),
+    TrueFalse("true_false"),
+    TrueFalseNotGiven("true_false_not_given"),
+    FillGap("fill_gap"),
+    Match("match"),
+    MatchHeading("match_heading"),
+    ShortAnswer("short_answer"),
+    ChooseForm("choose_form"),
+    Transform("transform"),
+    WordFormation("word_formation");
+    companion object {
+        fun fromTag(tag: String): QuestionType = entries.first { it.tag == tag }
+    }
 }
 
 /** Writing genre — extensible via the DSL enum, kept here for domain layer. */

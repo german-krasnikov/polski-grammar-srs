@@ -4,6 +4,7 @@ READING_PASSAGE {
   examRef: "certyfikat-polski-B1-2019"
   taskNumber: 1
   instruction: "Prosze przeczytac fragmenty tekstow i zaznaczyc wlasciwa odpowiedz."
+  text: "Krotkie fragmenty tekstow z pytaniami wielokrotnego wyboru."
 }
 READING_PASSAGE {
   passageId: "B1-2019-read-2"
@@ -24,6 +25,7 @@ READING_PASSAGE {
   examRef: "certyfikat-polski-B1-2019"
   taskNumber: 4
   instruction: "Prosze polaczyc tytuly z kolumny I z fragmentami tekstow z kolumny II."
+  text: "Jak polubic sprzatanie? Fragmenty tekstow z radami na temat sprzatania."
 }
 READING_PASSAGE {
   passageId: "B1-2019-read-5"

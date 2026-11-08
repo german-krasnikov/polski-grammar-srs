@@ -1,7 +1,7 @@
 DSL 1
 LISTENING_QUESTION {
   questionId: "B2-2019-l1-q1a"
-  taskRef: "certyfikat-polski-B2-2019-listening-1"
+  taskRef: "certyfikat-polski-B2-2019-listen-1"
   questionType: multiple_choice
   questionText: "Kobieta zali sie, ze jej partner"
   options: "a) ukrywa przed nia wazne informacje.|b) nie zajmowa sie nia naleycie.|c) zaprzeczy, ze jest ojcem Julii."
@@ -10,7 +10,7 @@ LISTENING_QUESTION {
 }
 LISTENING_QUESTION {
   questionId: "B2-2019-l1-q1b"
-  taskRef: "certyfikat-polski-B2-2019-listening-1"
+  taskRef: "certyfikat-polski-B2-2019-listen-1"
   questionType: multiple_choice
   questionText: "Ojciec Julii trafi do wiezienia"
   options: "a) kiedy dziewczynka miaa trzy lata.|b) na osiem lat.|c) trzy miesiace po narodzinach corki."
@@ -19,7 +19,7 @@ LISTENING_QUESTION {
 }
 LISTENING_QUESTION {
   questionId: "B2-2019-l1-q2a"
-  taskRef: "certyfikat-polski-B2-2019-listening-1"
+  taskRef: "certyfikat-polski-B2-2019-listen-1"
   questionType: multiple_choice
   questionText: "Rozmowa dotyczy"
   options: "a) problemow dotykajacych osoby leworeczne.|b) skutkow zmuszania osob leworecznych do korzystania z prawej reki.|c) zwiazkow miedzy leworecznoscia a problemami w nauce."
@@ -28,7 +28,7 @@ LISTENING_QUESTION {
 }
 LISTENING_QUESTION {
   questionId: "B2-2019-l1-q2b"
-  taskRef: "certyfikat-polski-B2-2019-listening-1"
+  taskRef: "certyfikat-polski-B2-2019-listen-1"
   questionType: multiple_choice
   questionText: "Komplikacje, o ktorych mowa w audycji, powstaja, poniewaz mozg"
   options: "a) nie odczytuje informacji zwiazanych z orientacja w przestrzeni.|b) otrzymuje informacje, z ktorymi sobie nie radzi.|c) gubi czesc informacji."
@@ -37,7 +37,7 @@ LISTENING_QUESTION {
 }
 LISTENING_QUESTION {
   questionId: "B2-2019-l1-q3a"
-  taskRef: "certyfikat-polski-B2-2019-listening-1"
+  taskRef: "certyfikat-polski-B2-2019-listen-1"
   questionType: multiple_choice
   questionText: "Rozmowa dotyczy"
   options: "a) uprawiania sportu.|b) prowadzenia samochodu.|c) cen mebli."
@@ -46,7 +46,7 @@ LISTENING_QUESTION {
 }
 LISTENING_QUESTION {
   questionId: "B2-2019-l1-q3b"
-  taskRef: "certyfikat-polski-B2-2019-listening-1"
+  taskRef: "certyfikat-polski-B2-2019-listen-1"
   questionType: multiple_choice
   questionText: "Wujek nie zgadza sie na propozycje chopca, poniewaz ten"
   options: "a) nie jest w odpowiednim wieku.|b) nie jest jego kolega.|c) od 9 miesiecy bierze udzia w kursie."
@@ -55,7 +55,7 @@ LISTENING_QUESTION {
 }
 LISTENING_QUESTION {
   questionId: "B2-2019-l1-q4a"
-  taskRef: "certyfikat-polski-B2-2019-listening-1"
+  taskRef: "certyfikat-polski-B2-2019-listen-1"
   questionType: multiple_choice
   questionText: "Corka rozmowcow ma kopoty"
   options: "a) zwiazane ze szkoa.|b) z wyprowadzka z domu.|c) z wyrazaniem emocji."
@@ -64,7 +64,7 @@ LISTENING_QUESTION {
 }
 LISTENING_QUESTION {
   questionId: "B2-2019-l1-q4b"
-  taskRef: "certyfikat-polski-B2-2019-listening-1"
+  taskRef: "certyfikat-polski-B2-2019-listen-1"
   questionType: multiple_choice
   questionText: "Wedug mezczyzny corka"
   options: "a) bardzo przezywa rozwod rodzicow.|b) obwinia sie o kopoty rodzicow.|c) wykorzystuje rozstanie rodzicow, by usprawiedliwic swoje zachowanie."
@@ -73,7 +73,7 @@ LISTENING_QUESTION {
 }
 LISTENING_QUESTION {
   questionId: "B2-2019-l2-q1"
-  taskRef: "certyfikat-polski-B2-2019-listening-2"
+  taskRef: "certyfikat-polski-B2-2019-listen-2"
   questionType: multiple_choice
   questionText: "915 to liczba piecow"
   options: "a) ktore zostay zlikwidowane podczas czterech lat trwania projektu.|b) ktorych nie udao sie usunac.|c) ktore znikna z Grudziadza w ciagu najblizszych czterech lat."
@@ -82,7 +82,7 @@ LISTENING_QUESTION {
 }
 LISTENING_QUESTION {
   questionId: "B2-2019-l2-q2"
-  taskRef: "certyfikat-polski-B2-2019-listening-2"
+  taskRef: "certyfikat-polski-B2-2019-listen-2"
   questionType: multiple_choice
   questionText: "Wojewodzki i Narodowy Fundusz Ochrony Srodowiska i Gospodarki Wodnej"
   options: "a) czesciowo dofinansowa prowadzone dziaania.|b) pokry cakowity koszt programu.|c) odpowiada za kampanie informacyjna."
@@ -91,7 +91,7 @@ LISTENING_QUESTION {
 }
 LISTENING_QUESTION {
   questionId: "B2-2019-l2-q3"
-  taskRef: "certyfikat-polski-B2-2019-listening-2"
+  taskRef: "certyfikat-polski-B2-2019-listen-2"
   questionType: multiple_choice
   questionText: "Pomorska Grupa Konsultingowa zajmowaa sie"
   options: "a) przygotowaniem projektu.|b) finansowaniem projektu.|c) projektem przez 4 lata."
@@ -100,7 +100,7 @@ LISTENING_QUESTION {
 }
 LISTENING_QUESTION {
   questionId: "B2-2019-l2-q4"
-  taskRef: "certyfikat-polski-B2-2019-listening-2"
+  taskRef: "certyfikat-polski-B2-2019-listen-2"
   questionType: multiple_choice
   questionText: "Kampania informacyjna skupiaa sie na"
   options: "a) szczegolowym instruktazu wymiany pieca.|b) promocji zachowan ekologicznych i informacjach praktycznych.|c) sposobach dziaania roznego rodzaju piecow."
@@ -109,7 +109,7 @@ LISTENING_QUESTION {
 }
 LISTENING_QUESTION {
   questionId: "B2-2019-l2-q5"
-  taskRef: "certyfikat-polski-B2-2019-listening-2"
+  taskRef: "certyfikat-polski-B2-2019-listen-2"
   questionType: multiple_choice
   questionText: "Podczas kampanii edukacyjnej co roku"
   options: "a) szkolono cztery grupy odbiorcow.|b) zmieniano jej program.|c) zmienia sie jej odbiorca."
@@ -118,7 +118,7 @@ LISTENING_QUESTION {
 }
 LISTENING_QUESTION {
   questionId: "B2-2019-l2-q6"
-  taskRef: "certyfikat-polski-B2-2019-listening-2"
+  taskRef: "certyfikat-polski-B2-2019-listen-2"
   questionType: multiple_choice
   questionText: "Program Kawka III"
   options: "a) nigdy nie by planowany.|b) nie doszed ostatecznie do skutku.|c) zakonczy sie wymiana 780 piecow."
@@ -127,7 +127,7 @@ LISTENING_QUESTION {
 }
 LISTENING_QUESTION {
   questionId: "B2-2019-l3-q1"
-  taskRef: "certyfikat-polski-B2-2019-listening-3"
+  taskRef: "certyfikat-polski-B2-2019-listen-3"
   questionType: true_false
   questionText: "W suwalskich rodzinach zastepczych wychowuje sie okoo 100 dzieci."
   options: "TAK|NIE"
@@ -136,7 +136,7 @@ LISTENING_QUESTION {
 }
 LISTENING_QUESTION {
   questionId: "B2-2019-l3-q2"
-  taskRef: "certyfikat-polski-B2-2019-listening-3"
+  taskRef: "certyfikat-polski-B2-2019-listen-3"
   questionType: true_false
   questionText: "MOPS planuje kolejne szkolenie jesienia."
   options: "TAK|NIE"
@@ -145,7 +145,7 @@ LISTENING_QUESTION {
 }
 LISTENING_QUESTION {
   questionId: "B2-2019-l3-q3"
-  taskRef: "certyfikat-polski-B2-2019-listening-3"
+  taskRef: "certyfikat-polski-B2-2019-listen-3"
   questionType: true_false
   questionText: "Wskazaniem do umieszczenia dziecka w rodzinie zastepczej jest m.in. wiek dziecka."
   options: "TAK|NIE"
@@ -154,7 +154,7 @@ LISTENING_QUESTION {
 }
 LISTENING_QUESTION {
   questionId: "B2-2019-l3-q4"
-  taskRef: "certyfikat-polski-B2-2019-listening-3"
+  taskRef: "certyfikat-polski-B2-2019-listen-3"
   questionType: true_false
   questionText: "W tej chwili w Suwakach jest 10 kandydatow czekajacych na przyjecie dziecka."
   options: "TAK|NIE"
@@ -163,7 +163,7 @@ LISTENING_QUESTION {
 }
 LISTENING_QUESTION {
   questionId: "B2-2019-l3-q5"
-  taskRef: "certyfikat-polski-B2-2019-listening-3"
+  taskRef: "certyfikat-polski-B2-2019-listen-3"
   questionType: true_false
   questionText: "MOPS zwraca sie z apelem do mieszkancow, ktorzy maja mozliwosci i sa dyspozycyjni."
   options: "TAK|NIE"
@@ -172,7 +172,7 @@ LISTENING_QUESTION {
 }
 LISTENING_QUESTION {
   questionId: "B2-2019-l3-q6"
-  taskRef: "certyfikat-polski-B2-2019-listening-3"
+  taskRef: "certyfikat-polski-B2-2019-listen-3"
   questionType: true_false
   questionText: "Sztuka pomaga w wychowaniu dzieci."
   options: "TAK|NIE"
@@ -181,7 +181,7 @@ LISTENING_QUESTION {
 }
 LISTENING_QUESTION {
   questionId: "B2-2019-l3-q7"
-  taskRef: "certyfikat-polski-B2-2019-listening-3"
+  taskRef: "certyfikat-polski-B2-2019-listen-3"
   questionType: true_false
   questionText: "Zdaniem Leszka Lewoca rodziny zastepcze w Suwakach przyjmuja dzieci z checi zysku."
   options: "TAK|NIE"
@@ -190,7 +190,7 @@ LISTENING_QUESTION {
 }
 LISTENING_QUESTION {
   questionId: "B2-2019-l3-q8"
-  taskRef: "certyfikat-polski-B2-2019-listening-3"
+  taskRef: "certyfikat-polski-B2-2019-listen-3"
   questionType: true_false
   questionText: "Pieniadze na utrzymanie dziecka w rodzinie zastepczej pochodza z dwoch zrode."
   options: "TAK|NIE"
@@ -199,7 +199,7 @@ LISTENING_QUESTION {
 }
 LISTENING_QUESTION {
   questionId: "B2-2019-l4-q1"
-  taskRef: "certyfikat-polski-B2-2019-listening-4"
+  taskRef: "certyfikat-polski-B2-2019-listen-4"
   questionType: match
   questionText: "Zatrucie sie nia nie musi oznaczac smierci."
   correctAnswer: "B"
@@ -207,7 +207,7 @@ LISTENING_QUESTION {
 }
 LISTENING_QUESTION {
   questionId: "B2-2019-l4-q2"
-  taskRef: "certyfikat-polski-B2-2019-listening-4"
+  taskRef: "certyfikat-polski-B2-2019-listen-4"
   questionType: match
   questionText: "Moze zabic nawet jej zapach."
   correctAnswer: "E"
@@ -215,7 +215,7 @@ LISTENING_QUESTION {
 }
 LISTENING_QUESTION {
   questionId: "B2-2019-l4-q3"
-  taskRef: "certyfikat-polski-B2-2019-listening-4"
+  taskRef: "certyfikat-polski-B2-2019-listen-4"
   questionType: match
   questionText: "Pomagaa kobietom stac sie bardziej atrakcyjnymi."
   correctAnswer: "B"
@@ -223,7 +223,7 @@ LISTENING_QUESTION {
 }
 LISTENING_QUESTION {
   questionId: "B2-2019-l4-q4"
-  taskRef: "certyfikat-polski-B2-2019-listening-4"
+  taskRef: "certyfikat-polski-B2-2019-listen-4"
   questionType: match
   questionText: "Zostaa wykorzystana w rozgrywkach na szczytach wadzy."
   correctAnswer: "B|D"
@@ -231,7 +231,7 @@ LISTENING_QUESTION {
 }
 LISTENING_QUESTION {
   questionId: "B2-2019-l4-q5"
-  taskRef: "certyfikat-polski-B2-2019-listening-4"
+  taskRef: "certyfikat-polski-B2-2019-listen-4"
   questionType: match
   questionText: "Bya uzywana podczas zdobywania pozywienia."
   correctAnswer: "D"
@@ -239,7 +239,7 @@ LISTENING_QUESTION {
 }
 LISTENING_QUESTION {
   questionId: "B2-2019-l4-q6"
-  taskRef: "certyfikat-polski-B2-2019-listening-4"
+  taskRef: "certyfikat-polski-B2-2019-listen-4"
   questionType: match
   questionText: "Jest lubiana w Europie roslina ozdobna."
   correctAnswer: "C"
@@ -247,7 +247,7 @@ LISTENING_QUESTION {
 }
 LISTENING_QUESTION {
   questionId: "B2-2019-l4-q7"
-  taskRef: "certyfikat-polski-B2-2019-listening-4"
+  taskRef: "certyfikat-polski-B2-2019-listen-4"
   questionType: match
   questionText: "Wystepuje powszechnie w roznych czesciach swiata."
   correctAnswer: "A|E"
@@ -255,7 +255,7 @@ LISTENING_QUESTION {
 }
 LISTENING_QUESTION {
   questionId: "B2-2019-l4-q8"
-  taskRef: "certyfikat-polski-B2-2019-listening-4"
+  taskRef: "certyfikat-polski-B2-2019-listen-4"
   questionType: match
   questionText: "Odpowiednie procesy pozwalaja pozbyc sie z niej trujacej substancji."
   correctAnswer: "A"
@@ -263,7 +263,7 @@ LISTENING_QUESTION {
 }
 LISTENING_QUESTION {
   questionId: "B2-2019-l5-q1a"
-  taskRef: "certyfikat-polski-B2-2019-listening-5"
+  taskRef: "certyfikat-polski-B2-2019-listen-5"
   questionType: fill_gap
   questionText: "Jakie skutki ma dla naszego organizmu nadmierne spozycie soli? (a)"
   correctAnswer: "opuchlizna / puchnie nam ciao / zatrzymanie wody w organizmie"
@@ -271,7 +271,7 @@ LISTENING_QUESTION {
 }
 LISTENING_QUESTION {
   questionId: "B2-2019-l5-q1b"
-  taskRef: "certyfikat-polski-B2-2019-listening-5"
+  taskRef: "certyfikat-polski-B2-2019-listen-5"
   questionType: fill_gap
   questionText: "Jakie skutki ma dla naszego organizmu nadmierne spozycie soli? (b)"
   correctAnswer: "utrudnienie i spowolnienie pracy nerek"
@@ -279,7 +279,7 @@ LISTENING_QUESTION {
 }
 LISTENING_QUESTION {
   questionId: "B2-2019-l5-q2"
-  taskRef: "certyfikat-polski-B2-2019-listening-5"
+  taskRef: "certyfikat-polski-B2-2019-listen-5"
   questionType: fill_gap
   questionText: "Czemu odpowiada zawartosc soli w hamburgerze i frytkach?"
   correctAnswer: "yzeczce soli / caodziennemu zapotrzebowaniu na sol"
@@ -287,7 +287,7 @@ LISTENING_QUESTION {
 }
 LISTENING_QUESTION {
   questionId: "B2-2019-l5-q3a"
-  taskRef: "certyfikat-polski-B2-2019-listening-5"
+  taskRef: "certyfikat-polski-B2-2019-listen-5"
   questionType: fill_gap
   questionText: "Jakie skadniki powoduja, ze w kebabie zawartosc soli jest az tak wysoka? (a)"
   correctAnswer: "posolone, przetworzone mieso"
@@ -295,7 +295,7 @@ LISTENING_QUESTION {
 }
 LISTENING_QUESTION {
   questionId: "B2-2019-l5-q3b"
-  taskRef: "certyfikat-polski-B2-2019-listening-5"
+  taskRef: "certyfikat-polski-B2-2019-listen-5"
   questionType: fill_gap
   questionText: "Jakie skadniki powoduja, ze w kebabie zawartosc soli jest az tak wysoka? (b)"
   correctAnswer: "sosy / sosy czosnkowe / sosy na bazie majonezu"
@@ -303,7 +303,7 @@ LISTENING_QUESTION {
 }
 LISTENING_QUESTION {
   questionId: "B2-2019-l5-q4"
-  taskRef: "certyfikat-polski-B2-2019-listening-5"
+  taskRef: "certyfikat-polski-B2-2019-listen-5"
   questionType: fill_gap
   questionText: "Co jeszcze przyswaja osoba spozywajaca co dzien fast foody?"
   correctAnswer: "tuszcz i weglowodany"
@@ -311,7 +311,7 @@ LISTENING_QUESTION {
 }
 LISTENING_QUESTION {
   questionId: "B2-2019-l5-q5"
-  taskRef: "certyfikat-polski-B2-2019-listening-5"
+  taskRef: "certyfikat-polski-B2-2019-listen-5"
   questionType: fill_gap
   questionText: "Dlaczego nadmierne spozycie soli moze prowadzic do osteoporozy?"
   correctAnswer: "zwieksza wydalanie magnezu i wapnia z organizmu"
@@ -319,7 +319,7 @@ LISTENING_QUESTION {
 }
 LISTENING_QUESTION {
   questionId: "B2-2019-l5-q6"
-  taskRef: "certyfikat-polski-B2-2019-listening-5"
+  taskRef: "certyfikat-polski-B2-2019-listen-5"
   questionType: fill_gap
   questionText: "Do jakich zmian w naszym organizmie moze dojsc bezposrednio po spozyciu fast foodow?"
   correctAnswer: "podwyzszenie cisnienia tetniczego"

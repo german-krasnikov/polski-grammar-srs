@@ -8,7 +8,11 @@ import polski.exam.QuestionType
 import polski.exam.grammar.*
 
 internal class ExamGrammarController(examId: String, private val onBack: () -> Unit) {
-    private var state = GrammarExamState(test = examGrammarTests.getValue(examId))
+    private var state = run {
+        val tests = examGrammarData.getValue(examId)
+        val merged = GrammarTest(examId, tests.firstOrNull()?.instruction ?: "", tests.flatMap { it.items })
+        GrammarExamState(test = merged)
+    }
     private var root: HTMLElement? = null
     private var inputRef: HTMLInputElement? = null
 

@@ -3,44 +3,44 @@ LISTENING_TASK {
   taskId: "certyfikat-polski-B2-2019-listen-1"
   examRef: "certyfikat-polski-B2-2019"
   taskNumber: 1
-  audioUrl: "ExamBin/pl/B2/2019/audio.mp3"
-  segmentStartMs: 0
-  segmentEndMs: 0
-  instruction: "Zadanie 1"
+  audioUrl: "exam-audio/B2-2019.mp3"
+  segmentStartMs: 62900
+  segmentEndMs: 424900
+  instruction: "Zadanie 1. Prosze uwazznie sluchac nagrania i wykonywac zadanie. Uwaga! Nagranie zostanie odtworzone tylko jeden raz."
 }
 LISTENING_TASK {
   taskId: "certyfikat-polski-B2-2019-listen-2"
   examRef: "certyfikat-polski-B2-2019"
   taskNumber: 2
-  audioUrl: "ExamBin/pl/B2/2019/audio.mp3"
-  segmentStartMs: 0
-  segmentEndMs: 0
-  instruction: "Zadanie 2"
+  audioUrl: "exam-audio/B2-2019.mp3"
+  segmentStartMs: 427900
+  segmentEndMs: 789900
+  instruction: "Zadanie 2. Prosze uwazznie sluchac nagrania. Uwaga! Nagranie zostanie odtworzone dwa razy."
 }
 LISTENING_TASK {
   taskId: "certyfikat-polski-B2-2019-listen-3"
   examRef: "certyfikat-polski-B2-2019"
   taskNumber: 3
-  audioUrl: "ExamBin/pl/B2/2019/audio.mp3"
-  segmentStartMs: 0
-  segmentEndMs: 0
-  instruction: "Zadanie 3"
+  audioUrl: "exam-audio/B2-2019.mp3"
+  segmentStartMs: 792900
+  segmentEndMs: 1144900
+  instruction: "Zadanie 3. Prosze uwazznie sluchac nagrania. Uwaga! Nagranie zostanie odtworzone dwa razy."
 }
 LISTENING_TASK {
   taskId: "certyfikat-polski-B2-2019-listen-4"
   examRef: "certyfikat-polski-B2-2019"
   taskNumber: 4
-  audioUrl: "ExamBin/pl/B2/2019/audio.mp3"
-  segmentStartMs: 0
-  segmentEndMs: 0
-  instruction: "Zadanie 4"
+  audioUrl: "exam-audio/B2-2019.mp3"
+  segmentStartMs: 1144900
+  segmentEndMs: 1577200
+  instruction: "Zadanie 4. Prosze uwazznie sluchac nagrania. Uwaga! Nagranie zostanie odtworzone dwa razy."
 }
 LISTENING_TASK {
   taskId: "certyfikat-polski-B2-2019-listen-5"
   examRef: "certyfikat-polski-B2-2019"
   taskNumber: 5
-  audioUrl: "ExamBin/pl/B2/2019/audio.mp3"
-  segmentStartMs: 0
-  segmentEndMs: 0
-  instruction: "Zadanie 5"
+  audioUrl: "exam-audio/B2-2019.mp3"
+  segmentStartMs: 1580200
+  segmentEndMs: 2003200
+  instruction: "Zadanie 5. Prosze uwazznie sluchac nagrania. Uwaga! Nagranie zostanie odtworzone dwa razy."
 }
