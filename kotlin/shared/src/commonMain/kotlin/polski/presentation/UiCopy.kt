@@ -22,6 +22,7 @@ object UiCopy {
     const val SettingsTab = "Настройки"
     const val Lifehacks = "Лайфхаки"
     const val ShowAnswer = "Показать ответ"
+    const val CheckAndShowAnswer = "Проверить и показать ответ"
     const val ExportJson = "Экспорт JSON"
     const val ResetProgress = "Сбросить прогресс"
     const val HideTable = "Скрыть таблицу"

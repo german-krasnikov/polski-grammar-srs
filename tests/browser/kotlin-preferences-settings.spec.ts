@@ -1,5 +1,6 @@
 import { expect, test } from '@playwright/test';
 import { mkdirSync } from 'node:fs';
+import { waitForAnimationsSettled } from './kotlin-wait';
 
 const preferencesKey = 'polski-preferences-v1';
 const progressKey = 'polski-grammar-srs-kmp-preview-v1';
@@ -274,7 +275,7 @@ test('grammar real touch completes after leaving the swipe zone', async ({ page,
   // v3/A: the answer now expands downward with a real transition (plus a short content stagger)
   // instead of appearing instantly — wait for it to fully settle before measuring coordinates,
   // or the bounding box below would be read mid-animation and the CDP touch would miss.
-  await page.waitForTimeout(700);
+  await waitForAnimationsSettled(page);
   await zoneElement.scrollIntoViewIfNeeded();
   const zone = await zoneElement.boundingBox();
   expect(zone).not.toBeNull();

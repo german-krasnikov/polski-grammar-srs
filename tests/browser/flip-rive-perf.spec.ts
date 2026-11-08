@@ -58,7 +58,9 @@ test('variant C (default motion, Rive enabled): rating creates the overlay and f
   await page.getByRole('button', { name: 'Показать ответ' }).click();
   await page.getByRole('button', { name: /2 Вспомнил/ }).click();
   await expect(page.locator('#polski-rive-overlay')).toHaveAttribute('data-rive-effect', /^remembered:/);
-  await page.waitForTimeout(1500); // let the Rive WASM module + confetti burst run
+  // rive-bridge.js hides the overlay (display:none) once its own hideTimer fires, after the
+  // confetti burst has fully run — a real DOM signal for "the burst is over", not a guessed delay.
+  await expect(page.locator('#polski-rive-overlay')).toHaveCSS('display', 'none');
   const longTasks: number[] = await page.evaluate(() => (window as any).__polskiLongTasks ?? []);
   // Indicative-only budget (Chromium headless, not device-grade — see the plan's §5 caveat):
   // the confetti burst must not produce a long task over 200ms (a visible multi-frame stall).
@@ -89,7 +91,10 @@ for (const rate of [1, 4, 6]) {
     await page.getByRole('button', { name: /2 Вспомнил/ }).click();
     await expect(page.locator('#polski-rive-overlay')).toHaveAttribute('data-rive-effect', /^remembered:/);
     const revealAndRateMs = Date.now() - start;
-    await page.waitForTimeout(1500);
+    // Same DOM-settled signal as variant C above, not a guessed delay — and it naturally adapts to
+    // whatever extra wall time the CPU throttle itself introduces, instead of assuming 1500ms is
+    // still enough once the main thread is 6x slower.
+    await expect(page.locator('#polski-rive-overlay')).toHaveCSS('display', 'none');
     await cdp.send('Emulation.setCPUThrottlingRate', { rate: 1 }); // restore before the next test/teardown
     const longTasks: number[] = await page.evaluate(() => (window as any).__polskiLongTasks ?? []);
     // Indicative-only (Chromium headless + CDP software throttling, not device-grade — §5's

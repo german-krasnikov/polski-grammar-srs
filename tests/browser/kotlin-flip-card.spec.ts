@@ -1,5 +1,6 @@
 import { expect, test, type Page } from '@playwright/test';
 import { continueIntroductionIfPresent } from './kotlin-introduction';
+import { waitForAnimationsSettled } from './kotlin-wait';
 
 const progressKey = 'polski-grammar-srs-kmp-preview-v1';
 const vocabularyKey = 'polski-vocabulary-pl-ru-v1';
@@ -76,7 +77,7 @@ test('a mouse swipe on the revealed answer rates exactly once; a short drag rate
   // P1-8 fix note: the reveal's own expand transition (0fr→1fr, 550ms) is still running right
   // after the click resolves — wait for it to settle before measuring, or the boundingBox below
   // (and every pixel offset computed from it) reads a mid-animation, not-yet-final layout.
-  await page.waitForTimeout(700);
+  await waitForAnimationsSettled(page);
   const hint = card.locator('.vocabulary-swipe-zone');
   await hint.scrollIntoViewIfNeeded();
   const hintBounds = await hint.boundingBox();
@@ -88,7 +89,7 @@ test('a mouse swipe on the revealed answer rates exactly once; a short drag rate
   await page.mouse.move(startX + 30, y, { steps: 5 });
   await page.mouse.up();
   expect((await page.evaluate(key => JSON.parse(localStorage.getItem(key) ?? '{}').totalReviews ?? 0, progressKey))).toBe(0);
-  await page.waitForTimeout(300); // let the short drag's own snap-back settle first
+  await waitForAnimationsSettled(page); // let the short drag's own snap-back settle first
   await page.mouse.move(startX, y);
   await page.mouse.down();
   await page.mouse.move(startX + 200, y, { steps: 8 });
@@ -144,6 +145,8 @@ test('Animations off: zero Rive network requests through reveal, flip and rating
   await openVocabularyCard(page);
   await page.getByRole('button', { name: 'Показать ответ' }).click();
   await page.getByRole('button', { name: 'Вспомнил' }).click();
+  // Negative/absence check: there is no DOM state to wait for "a request never arrives" — a
+  // genuinely needed fixed margin, not a disguised animation/DOM wait.
   await page.waitForTimeout(500);
   expect(riveRequests).toEqual([]);
 });
@@ -166,6 +169,9 @@ test('vocabulary flip swaps faces only past the 90° point in both directions (s
   await openVocabularyCard(page);
   await page.getByRole('button', { name: 'Показать ответ' }).click();
   const card = page.getByRole('region', { name: 'Карточка слова' });
+  // Genuinely time-based: the assertion is about a specific mid-animation progress point (still
+  // before vs. already past the 90° swap), not completion, so there is no DOM state to wait for —
+  // "finished" is the one state we must NOT have reached yet here.
   await page.waitForTimeout(4_000); // 40% of the slowed 10s total, still first half
   await expect(card.locator('.card-back')).toHaveAttribute('aria-hidden', 'true');
   await expect(card.locator('.card-back')).toHaveAttribute('inert', '');

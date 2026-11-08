@@ -1,6 +1,7 @@
 import { devices, expect, test, type Page } from '@playwright/test';
 import { mkdirSync } from 'node:fs';
 import { continueIntroductionIfPresent } from './kotlin-introduction';
+import { waitForAnimationsSettled } from './kotlin-wait';
 
 // FlipCardRivePlan.md §17 (v4): whole-panel vocabulary flip, swipe-first rating on both cards,
 // animated tab switching and collapsible panels, general UI/UX polish.
@@ -78,7 +79,7 @@ test('P0-1: a real touch swipe rates the training card on a touch device (not ju
     await continueIntroductionIfPresent(page);
     await page.getByRole('button', { name: 'Показать ответ' }).click();
     const wrap = page.getByRole('region', { name: 'Учебная карточка' }).locator('.card-answer-wrap');
-    await page.waitForTimeout(700); // let the expand-reveal transition settle before measuring
+    await waitForAnimationsSettled(page); // let the expand-reveal transition settle before measuring
     const bounds = await wrap.boundingBox();
     expect(bounds).not.toBeNull();
     const x1 = bounds!.x + bounds!.width - 30;
@@ -105,7 +106,7 @@ test('P1-8: the drag transform moves the whole training card (.flashcard), not j
   await page.getByRole('button', { name: 'Показать ответ' }).click();
   // `region "Учебная карточка"` IS the `.flashcard` element itself (its own aria-label).
   const flashcard = page.getByRole('region', { name: 'Учебная карточка' });
-  await page.waitForTimeout(700); // let the expand-reveal transition settle before measuring
+  await waitForAnimationsSettled(page); // let the expand-reveal transition settle before measuring
   const hint = flashcard.locator('.vocabulary-swipe-zone');
   await hint.scrollIntoViewIfNeeded();
   const hintBounds = await hint.boundingBox();
@@ -127,7 +128,7 @@ test('UX4-05/07: no ring Rive request or element on vocabulary flip or training 
   await page.getByRole('button', { name: 'Показать ответ' }).click();
   await openVocabularyCard(page);
   await page.getByRole('button', { name: 'Показать ответ' }).click();
-  await page.waitForTimeout(300);
+  await waitForAnimationsSettled(page);
   expect(riveRequests.some(u => u.endsWith('rings.riv'))).toBe(false);
   await expect(page.locator('.card-flip-rings')).toHaveCount(0);
 });
@@ -463,7 +464,7 @@ test('UX5: View Transitions is never invoked any more', async ({ page }) => {
   await page.goto('/#/training');
   await page.getByRole('button', { name: 'Слова', exact: true }).click();
   await page.getByRole('button', { name: 'Прогресс', exact: true }).click();
-  await page.waitForTimeout(500);
+  await expect(page.getByRole('heading', { name: 'Прогресс' })).toBeVisible(); // route switch landed
   expect(await page.evaluate(() => (window as any).__startViewTransitionCalls)).toBe(0);
 });
 

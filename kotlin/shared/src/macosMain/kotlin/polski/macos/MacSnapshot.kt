@@ -4,171 +4,33 @@ import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonNull
 import kotlinx.serialization.json.JsonObject
-import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
-import polski.data.adjectives
-import polski.data.nounById
-import polski.data.nounLemma
-import polski.data.nouns
-import polski.data.personalPronouns
-import polski.data.possessives
+import polski.data.presentationBySkillId
 import polski.data.skillById
-import polski.data.skills
-import polski.data.verbs
-import polski.data.referenceChainRows
-import polski.data.courseChainPresentation
-import polski.data.referenceSystemCards
-import polski.data.referencePipeline
-import polski.data.referenceRussianSupport
-import polski.data.referenceCaseTeaching
-import polski.data.referenceVerbTeaching
-import polski.data.referencePronounTeaching
-import polski.data.comparisonNounIds
-import polski.data.referenceTenseRows
-import polski.data.referenceAspectRows
-import polski.data.maleAccRows
-import polski.data.courseMatrixIntroduction
-import polski.data.courseAspectNoPresent
+import polski.data.styleContentBySkillId
 import polski.grammar.caseRows
 import polski.grammar.nounPhrase
-import polski.grammar.possessiveForm
-import polski.grammar.verbForm
-import polski.model.Aspect
-import polski.model.Gender
 import polski.model.GramCase
-import polski.model.NumberGram
-import polski.model.Person
-import polski.model.Tense
 import polski.presentation.AppUiState
-import polski.presentation.CardPhase
-import polski.presentation.UiCopy
-import polski.presentation.chainDisplayCount
-import polski.presentation.UiEffect
-import polski.presentation.endingHighlightParts
-import polski.presentation.changeHighlightParts
-import polski.presentation.sentenceHighlightParts
-import polski.presentation.ChangeSide
 import polski.presentation.ContrastPair
-import polski.presentation.casesFullTable
-import polski.presentation.comparisonTable
-import polski.presentation.contrastPairJson
-import polski.presentation.enDoSupportTable
-import polski.presentation.enVerbsTable
-import polski.presentation.personalPronounsTable
-import polski.presentation.possessivesTable
-import polski.presentation.toJson
-import polski.presentation.verbsTable
+import polski.presentation.Lifehack
+import polski.presentation.StaticPackLifehackProvider
 import polski.presentation.StyleComposer
-import polski.presentation.StyleId
 import polski.presentation.StylePhase
 import polski.presentation.StyleRegistry
-import polski.presentation.StaticPackLifehackProvider
-import polski.presentation.LifehackStatus
 import polski.presentation.blocksToJson
-import polski.presentation.toLegacyWireValue
-import polski.data.styleContentBySkillId
-import polski.data.presentationBySkillId
-import polski.srs.Rating
-import polski.training.sentenceSeeds
+import polski.presentation.contrastPairJson
+import polski.presentation.exerciseJson
+import polski.presentation.lifehackObjectJson
+import polski.presentation.putEffects
+import polski.presentation.putProgressFields
+import polski.presentation.putSharedSnapshotHeader
 
 internal fun snapshot(state: AppUiState): String = buildJsonObject {
     put("schemaVersion", 1)
-    put("loadStatus", state.loadStatus.name)
-    put("tab", state.tab.name)
-    put("mode", state.mode.name)
-    put("phase", state.phase.name)
-    put("answerMode", state.answerMode.name)
-    // Swift still speaks the pre-UC-10 2-value wire vocabulary (see [toLegacyWireValue]).
-    put("explanationMethod", state.styleId.toLegacyWireValue())
-    put("styleId", state.styleId.value)
-    put("styleBlocks", styleBlocksSnapshot(state))
-    put("draft", state.draft)
-    put("introPending", state.introPending)
-    put("dueCount", state.dueCount)
-    put("todayCount", state.todayCount)
-    put("chainIndex", state.chainIndex)
-    put("chainCount", state.chain.size)
-    put("chainDisplayCount", state.chainDisplayCount)
-    put("chainStepLabels", JsonArray(courseChainPresentation.steps.map { JsonPrimitive(it.label) }))
-    put("chainStepSummary", courseChainPresentation.summary)
-    put("chainCompletionTitle", courseChainPresentation.completion.title)
-    put("seedIndex", state.seedIndex)
-    put("showReference", state.showReference)
-    put("showSkillPicker", state.showSkillPicker)
-    put("revision", state.revision)
-    put("savedRevision", state.savedRevision)
-    put("resetProgress", UiCopy.ResetProgress)
-    put("progressTab", UiCopy.ProgressTab)
-    put("settingsTab", UiCopy.SettingsTab)
-    put("lifehacks", UiCopy.Lifehacks)
-    put("error", state.error?.let(::JsonPrimitive) ?: JsonNull)
-    put("nextDue", state.nextDue?.toEpochMilliseconds()?.let(::JsonPrimitive) ?: JsonNull)
-    put("now", state.now?.toEpochMilliseconds()?.let(::JsonPrimitive) ?: JsonNull)
-    put("seeds", JsonArray(sentenceSeeds.mapIndexed { index, seed -> choice(index.toString(), nounLemma(seed.nounId)) }))
-    put("skills", JsonArray(skills.map { skill -> buildJsonObject {
-        put("id", skill.id); put("title", skill.title); put("group", skill.group)
-        put("level", skill.level); put("formula", skill.formula); put("theory", skill.theory)
-        put("hasLifehack", StaticPackLifehackProvider.hasLifehacks(skill.id))
-    } }))
-    // EnRuPackPlan.md §4.3's pack-wide "Лайфхаки" listing (not the per-skill card block below,
-    // which stays inside styleBlocksSnapshot) — every skill/topic the active pack's own
-    // lifehacks.json actually covers, in curriculum order, so a settings/reference screen can
-    // draw one section without recomputing the grouping itself.
-    put("lifehackGroups", JsonArray(StaticPackLifehackProvider.listAll().map { group -> buildJsonObject {
-        put("skillId", group.skillId?.let(::JsonPrimitive) ?: JsonNull)
-        put("topic", group.topic?.let(::JsonPrimitive) ?: JsonNull)
-        put("title", group.title)
-        put("lifehacks", JsonArray(group.lifehacks.map { hack -> lifehackJson(hack) }))
-    } }))
-    put("chainAnswers", JsonArray(if (state.phase == CardPhase.ChainComplete) state.chain.map { JsonPrimitive(it.expected) } else emptyList()))
-    put("exercise", state.exercise?.let { exercise -> buildJsonObject {
-        val presentation = presentationBySkillId(exercise.primarySkill)
-        val method = if (state.styleId == StyleId.SituationFirst) presentation.situations else presentation.logic
-        put("id", exercise.id)
-        put("skillId", exercise.primarySkill)
-        put("skillTitle", skillById(exercise.primarySkill).title)
-        put("skillLevel", skillById(exercise.primarySkill).level)
-        // EnRuPackPlan.md §4.2: cheap enough to compute even on the front (unrevealed) face — a
-        // front-side badge can hint "this skill has a lifehack" before the back's own full list
-        // (styleBlocksSnapshot's "lifehacks") ever renders.
-        put("hasLifehack", StaticPackLifehackProvider.hasLifehacks(exercise.primarySkill))
-        put("source", exercise.source)
-        put("sourceParts", JsonArray(sentenceHighlightParts(exercise.source, exercise.changes, ChangeSide.Before).map { part -> buildJsonObject {
-            put("text", part.text); put("changed", part.isChanged)
-        } }))
-        if (state.phase == CardPhase.Question && state.introPending) {
-            put("methodIntroduce", method.introduce)
-        } else {
-        put("prompt", exercise.prompt)
-        put("methodLead", method.promptLead)
-        if (state.phase == CardPhase.Question) put("methodRetrieve", method.retrieve)
-        if (state.phase == CardPhase.Revealed) {
-            put("methodFeedback", method.feedback)
-            put("methodReview", method.review)
-            put("expected", exercise.expected)
-            put("expectedParts", JsonArray(sentenceHighlightParts(exercise.expected, exercise.changes, ChangeSide.After).map { part -> buildJsonObject {
-                put("text", part.text); put("changed", part.isChanged)
-            } }))
-            put("accepted", JsonArray(exercise.accepted.map(::JsonPrimitive)))
-            put("explanation", exercise.explanation)
-            put("formula", skillById(exercise.primarySkill).formula)
-            put("changes", JsonArray(exercise.changes.map { change -> buildJsonObject {
-                put("from", change.from); put("to", change.to); put("reason", change.reason)
-                put("toParts", JsonArray(endingHighlightParts(change.from, change.to).map { part -> buildJsonObject {
-                    put("text", part.text); put("changed", part.isChanged)
-                } }))
-            } }))
-            put("frozenAnswer", state.frozenAnswer?.let(::JsonPrimitive) ?: JsonNull)
-            put("correct", state.evaluation?.correct?.let(::JsonPrimitive) ?: JsonNull)
-            put("intervals", buildJsonObject {
-                Rating.entries.forEach { rating ->
-                    put(rating.name, state.intervals?.get(rating)?.toEpochMilliseconds()?.let(::JsonPrimitive) ?: JsonNull)
-                }
-            })
-        }
-        }
-    } } ?: JsonNull)
+    putSharedSnapshotHeader(state, styleBlocksSnapshot(state), ::lifehackJson)
+    put("exercise", exerciseJson(state))
     put("referenceRows", JsonArray(if (state.showReference && !state.introPending) state.exercise?.let { exercise -> caseRows.map { row -> buildJsonObject {
         put("title", "${row.pl} · ${row.ru}")
         val form = nounPhrase(exercise.nounId, row.id, exercise.number, exercise.adjectiveId, exercise.possessive)
@@ -177,29 +39,9 @@ internal fun snapshot(state: AppUiState): String = buildJsonObject {
             nounPhrase(exercise.nounId, GramCase.NOM, exercise.number, exercise.adjectiveId, exercise.possessive), form)))
     } } } ?: emptyList() else emptyList()))
     put("matrix", matrixSnapshot(state))
-    put("progress", JsonArray(state.progress?.cards?.mapNotNull { card ->
-        val skill = skills.firstOrNull { it.id == card.skillId } ?: return@mapNotNull null
-        val stats = state.progress.stats[card.skillId]
-        buildJsonObject {
-            put("id", skill.id); put("title", skill.title); put("group", skill.group)
-            put("reviews", stats?.reviews ?: 0); put("correct", stats?.correct ?: 0)
-            put("streak", stats?.streak ?: 0); put("mistakes", stats?.mistakes ?: 0)
-            put("due", card.card.due.toEpochMilliseconds())
-        }
-    } ?: emptyList()))
-    put("totalReviews", state.progress?.totalReviews ?: 0)
-    put("effects", JsonArray(state.pendingEffects.map { effect -> buildJsonObject {
-        put("id", effect.id)
-        when (effect) {
-            is UiEffect.FocusReveal -> { put("kind", "focus"); put("exerciseId", effect.exerciseId) }
-            is UiEffect.DownloadJson -> { put("kind", "export"); put("filename", effect.filename); put("json", effect.json) }
-            is UiEffect.DownloadText -> { put("kind", "exportText"); put("filename", effect.filename); put("text", effect.text) }
-            is UiEffect.ConfirmReset -> { put("kind", "reset"); put("prompt", effect.prompt) }
-        }
-    } }))
+    putProgressFields(state)
+    putEffects(state)
 }.toString()
-
-private fun choice(id: String, title: String): JsonObject = buildJsonObject { put("id", id); put("title", title) }
 
 /** UC-10 S2: the resolved (post-fallback) style's blocks, by the same [polski.presentation.blocksToJson]
  *  shape other snapshot sections already use. Both phases are always included — not just
@@ -224,174 +66,13 @@ private fun styleBlocksSnapshot(state: AppUiState): JsonElement {
         // EN-21 (EnRuPackPlan.md §4.2/§4.3): deliberately its own field, not a block kind inside
         // frontBlocks/backBlocks — a lifehack renders the same way for every style, so Swift shows
         // it once, outside MacStyleBlockView's per-kind switch (see MacFlashCardView's backFace).
-        put("lifehacks", JsonArray(StaticPackLifehackProvider.forSkill(exercise.primarySkill).map { hack -> lifehackJson(hack) }))
+        put("lifehacks", JsonArray(StaticPackLifehackProvider.forSkill(exercise.primarySkill).map(::lifehackJson)))
     }
 }
 
-/** Shared by the per-skill back-face block above and [lifehackGroups]'s pack-wide listing — one
- *  wire shape for a [polski.presentation.Lifehack], so the two never drift apart. */
-private fun lifehackJson(hack: polski.presentation.Lifehack): JsonObject = buildJsonObject {
-    put("id", hack.id)
-    put("text", hack.text)
-    put("citation", hack.source.citation)
-    put("url", hack.source.url?.let(::JsonPrimitive) ?: JsonNull)
-    put("status", when (hack.status) { LifehackStatus.Editorial -> "editorial"; LifehackStatus.Community -> "community" })
-}
+/** Shared by the per-skill back-face block above and [putSharedSnapshotHeader]'s pack-wide
+ *  `lifehackGroups` listing — one wire shape for a [Lifehack], so the two never drift apart.
+ *  macOS's own key for the status field is "status" (see [lifehackObjectJson]). */
+private fun lifehackJson(hack: Lifehack): JsonObject = lifehackObjectJson(hack, "status")
 
 private fun pairSnapshot(pair: ContrastPair): JsonObject = contrastPairJson(pair)
-
-private fun matrixSnapshot(state: AppUiState): JsonElement {
-    val selection = state.matrixSelection
-    val number = NumberGram.fromId(selection.numberId)
-    return buildJsonObject {
-        put("section", selection.section.name)
-        put("matrixIntroduction", courseMatrixIntroduction)
-        put("aspectNoPresent", courseAspectNoPresent.ios)
-        put("nounId", selection.nounId)
-        put("adjectiveId", selection.adjectiveId)
-        put("ownerId", selection.ownerId)
-        put("numberId", selection.numberId)
-        put("verbId", selection.verbId)
-        put("feminineGroup", selection.feminineGroup)
-        put("nouns", JsonArray(nouns.map { choice(it.id, "${it.lemma} — ${it.meaning}") }))
-        put("adjectives", JsonArray(adjectives.map { choice(it.id, "${it.lemma} — ${it.meaning}") }))
-        put("owners", JsonArray(possessives.map { choice(it.id.id, it.label) }))
-        put("numbers", JsonArray(listOf(choice("sg", "Единственное"), choice("pl", "Множественное"))))
-        put("verbs", JsonArray(verbs.filter { it.aspect == Aspect.IMPERFECTIVE }.map { choice(it.id, "${it.lemma} — ${it.meaning}") }))
-        put("pipelineTitle", referencePipeline.title)
-        put("pipelineSummary", referencePipeline.compactSummary)
-        put("pipelineExample", referencePipeline.compactExample)
-        put("supportTitle", referenceRussianSupport.compactTitle)
-        put("supportLines", JsonArray(referenceRussianSupport.rows.map { JsonPrimitive(it.mobileLine) }))
-        put("supportRows", JsonArray(referenceRussianSupport.rows.map { row -> buildJsonObject {
-            put("line", row.mobileLine)
-            put("comparisons", JsonArray(row.comparisons.map(::pairSnapshot)))
-        } }))
-        put("caseNote", referenceCaseTeaching.compactNote)
-        // UC-09 part 2/2 (UniversalCorePlan.md §5.3.3, ADR-21): these five tables replace what used
-        // to be hand-built per field below (`cases`/`comparison`/`verbsRows`/`pronouns`/`possessives`)
-        // with the shared engine's [MatrixTableViewModel], serialized once by [toJson]. The older
-        // per-field arrays stay below unchanged for now, so nothing already reading them breaks.
-        put("casesTable", casesFullTable(selection).toJson())
-        put("comparisonTable", comparisonTable(selection).toJson())
-        put("verbsTable", verbsTable(selection).toJson())
-        // EN-24 (UC-09 part 2/2 minimum, Plans/Kotlin/EnRuPackPlan.md §6, macOS slice): the one
-        // live English matrix on this host, read from `forms.generated.json`(en) through the same
-        // `enMorphology`/`MatrixTableEngine`/`MatrixTableViewModel` path the web host already
-        // uses — not a mock and not a second ad hoc table-building path.
-        put("enVerbsTable", enVerbsTable().toJson())
-        put("enDoSupportTable", enDoSupportTable().toJson())
-        put("personalPronounsTable", personalPronounsTable().toJson())
-        put("possessivesTable", possessivesTable().toJson())
-        put("systemCards", JsonArray(referenceSystemCards.map { card -> buildJsonObject {
-            put("id", card.id); put("title", card.title)
-            put("explanation", card.explanation); put("example", card.example)
-            put("steps", JsonArray(card.steps.zipWithNext { from, to -> pairSnapshot(ContrastPair.generated(from, to)) }))
-        } }))
-        put("chainRows", JsonArray(referenceChainRows.map { row -> buildJsonObject {
-            put("label", row.label); put("from", row.from); put("to", row.to); put("change", row.change)
-            put("beforeParts", JsonArray(changeHighlightParts(row.from, row.to, ChangeSide.Before).map { part -> buildJsonObject {
-                put("text", part.text); put("changed", part.isChanged)
-            } }))
-            put("afterParts", JsonArray(changeHighlightParts(row.from, row.to, ChangeSide.After).map { part -> buildJsonObject {
-                put("text", part.text); put("changed", part.isChanged)
-            } }))
-        } }))
-        put("tenseRows", JsonArray(referenceTenseRows.map { row -> buildJsonObject {
-            put("label", row.label); put("from", row.from); put("to", row.to)
-            put("beforeParts", JsonArray(changeHighlightParts(row.from, row.to, ChangeSide.Before).map { part -> buildJsonObject {
-                put("text", part.text); put("changed", part.isChanged)
-            } }))
-            put("afterParts", JsonArray(changeHighlightParts(row.from, row.to, ChangeSide.After).map { part -> buildJsonObject {
-                put("text", part.text); put("changed", part.isChanged)
-            } }))
-        } }))
-        put("aspectRows", JsonArray(referenceAspectRows.map { row -> buildJsonObject {
-            put("label", row.label); put("from", row.from)
-            put("entries", JsonArray(listOf(
-                "Настоящее" to row.present, "Прошедшее" to row.past, "Будущее" to row.future,
-            ).map { (label, form) -> buildJsonObject {
-                put("label", label); put("available", form != null)
-                if (form != null) {
-                    put("from", row.from); put("to", form)
-                    put("beforeParts", JsonArray(changeHighlightParts(row.from, form, ChangeSide.Before).map { part -> buildJsonObject {
-                        put("text", part.text); put("changed", part.isChanged)
-                    } }))
-                    put("afterParts", JsonArray(changeHighlightParts(row.from, form, ChangeSide.After).map { part -> buildJsonObject {
-                        put("text", part.text); put("changed", part.isChanged)
-                    } }))
-                }
-            } }))
-        } }))
-        put("maleAccRows", JsonArray(maleAccRows.map { row -> buildJsonObject {
-            put("label", row.label); put("title", row.title); put("rule", row.rule)
-            put("examples", JsonArray(row.examples.map { example -> buildJsonObject {
-                put("label", "Форма в Bierniku")
-                put("from", example.from); put("to", example.to); put("change", example.sentence)
-                put("beforeParts", JsonArray(changeHighlightParts(example.from, example.to, ChangeSide.Before).map { part -> buildJsonObject {
-                    put("text", part.text); put("changed", part.isChanged)
-                } }))
-                put("afterParts", JsonArray(changeHighlightParts(example.from, example.to, ChangeSide.After).map { part -> buildJsonObject {
-                    put("text", part.text); put("changed", part.isChanged)
-                } }))
-            } }))
-        } }))
-        put("comparisonCases", JsonArray(caseRows.map { choice(it.id.name, it.pl) }))
-        put("comparison", JsonArray(comparisonNounIds.map { id ->
-            val noun = nounById(id)
-            buildJsonObject {
-                put("title", noun.lemma)
-                GramCase.entries.forEach { gramCase ->
-                    val form = noun.forms.getValue(number).getValue(gramCase)
-                    put(gramCase.name, form)
-                    put("${gramCase.name}pair", pairSnapshot(ContrastPair.generated(
-                        noun.forms.getValue(number).getValue(GramCase.NOM), form)))
-                }
-            }
-        }))
-        put("verbGenderControlLabel", referenceVerbTeaching.genderControlLabel.compact)
-        put("verbGenderOptions", JsonArray(referenceVerbTeaching.genderOptions.map { choice(it.id, it.label.compact) }))
-        put("verbFutureExplanation", referenceVerbTeaching.compactFutureExplanation)
-        put("verbTenseLabels", buildJsonObject {
-            Tense.entries.forEach { tense -> put(tense.id, referenceVerbTeaching.tenseLabels.getValue(tense).compact) }
-        })
-        put("verbsRows", JsonArray(referenceVerbTeaching.subjects.map { subject -> buildJsonObject {
-            put("title", subject.label.compact)
-            listOf(Tense.PRESENT, Tense.PAST, Tense.FUTURE).forEach { tense ->
-                val form = verbForm(selection.verbId, tense, subject.person, subject.number, subject.gender(selection.feminineGroup))
-                put(tense.id, form)
-                put("${tense.id}Pair", pairSnapshot(ContrastPair.generated(verbs.first { it.id == selection.verbId }.lemma, form)))
-            }
-        } }))
-        put("pronounIntro", referencePronounTeaching.compactIntro)
-        put("pronounFooter", referencePronounTeaching.nativeFooter)
-        put("pronounContexts", JsonArray(referencePronounTeaching.contexts.map { context -> buildJsonObject {
-            put("id", context.id.id)
-            put("iosCue", context.cue.ios)
-        } }))
-        put("possessiveTitle", referencePronounTeaching.possessiveTitle)
-        put("possessiveCases", JsonArray(referencePronounTeaching.demo.cases.map { row -> buildJsonObject {
-            put("id", row.id.id)
-            put("iosCaption", row.ios)
-        } }))
-        put("pronouns", JsonArray(referencePronounTeaching.pronounIds.map { id ->
-            val forms = personalPronouns.getValue(id)
-            buildJsonObject {
-            put("title", id)
-            referencePronounTeaching.contexts.forEach { context ->
-                val form = if (context.id == GramCase.LOC) forms.getValue(GramCase.LOC) else context.value(id, forms)
-                put(context.id.id, form)
-                put("${context.id.id}pair", pairSnapshot(ContrastPair.generated(id, form)))
-            }
-        } }))
-        put("possessives", JsonArray(possessives.map { possessive -> buildJsonObject {
-            put("title", possessive.label)
-            referencePronounTeaching.demo.cases.forEach { row ->
-                val phrase = referencePronounTeaching.demo.phrase(possessive.id, row.id)
-                put(row.id.id, phrase)
-                put("${row.id.id}pair", pairSnapshot(ContrastPair.generated(
-                    referencePronounTeaching.demo.phrase(possessive.id, GramCase.NOM), phrase)))
-            }
-        } }))
-    }
-}
