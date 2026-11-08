@@ -17,6 +17,7 @@ end
 # dsl/effects/card-effects.core-data by dsl/derive-rive-effects.mjs (`biome generate`), not authored here.
 generated_group = source.new_group('Generated', 'Generated')
 target.source_build_phase.add_file_reference(generated_group.new_file('RiveEffects.swift'))
+target.source_build_phase.add_file_reference(generated_group.new_file('SharedConstants.swift'))
 
 # FC-15: confetti.riv/again.riv (vendored, byte-identical to iosApp/PolskiGrammar/Rive — see
 # THIRD_PARTY/credits.md) ride the app bundle as plain resources.

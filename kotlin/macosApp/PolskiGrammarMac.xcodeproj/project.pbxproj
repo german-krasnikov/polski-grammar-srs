@@ -7,128 +7,131 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		09E9206EFA9E6EA920EC2B2E /* RiveRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = DDE90E8C2B2BFA9511CBF551 /* RiveRuntime */; };
-		0A8E335DD8BB63EDC6506617 /* again.riv in Resources */ = {isa = PBXBuildFile; fileRef = E29F0F85A81AC8F642ECBE32 /* again.riv */; };
-		2F90913F79764DC6EB5128C4 /* MacLifehackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB1DFA5C0CBBB91A2D92C64 /* MacLifehackView.swift */; };
-		45E6FE7DADF9E2C09EBA3839 /* confetti.riv in Resources */ = {isa = PBXBuildFile; fileRef = 2A981ABB64A9890DB3E2762F /* confetti.riv */; };
-		5BA91F49E691022962EE7914 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B47B0EB4BDE69B5340B2795 /* Cocoa.framework */; };
-		5CE925F09CC3E89AA072D3EF /* MacStyleBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C13E0E8767D5F221AE818D34 /* MacStyleBlockView.swift */; };
-		7D0449F939F314CF42D73FD2 /* PolskiGrammarMacApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B1EB3F7581C0F2D50AFAD0 /* PolskiGrammarMacApp.swift */; };
-		7E491903D8A578C7F004A2A9 /* RiveEffectOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA52E986DCCDA6120B3201EB /* RiveEffectOverlay.swift */; };
-		83A89B6DDF102B96F69D0163 /* MacFlashCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BED0C535AABD1C61B65E958 /* MacFlashCardView.swift */; };
-		98939EC8B85542C81E7E7840 /* RiveEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2651B7BB5F270997621103B /* RiveEffects.swift */; };
-		C43B62A6F42BBC720A27E4F4 /* MacVocabularyCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0BEF2DD02DCAD4B0806CF38 /* MacVocabularyCardView.swift */; };
-		E999504CDD49698C0EEA0681 /* SwipeRating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6DE1A3B83C450490403B94 /* SwipeRating.swift */; };
+		0A80F317D68D748F691A7DA8 /* confetti.riv in Resources */ = {isa = PBXBuildFile; fileRef = 05F69824C0FAAB88236CCBCB /* confetti.riv */; };
+		0D6ADB4A4E43167063030807 /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AB97D0953B08B1FD52A804 /* SharedConstants.swift */; };
+		23CF763F7A6B5D42A594A7AA /* again.riv in Resources */ = {isa = PBXBuildFile; fileRef = E9F3BF029EE0021652C28EF3 /* again.riv */; };
+		34EBE00D8ECDD47D821FE598 /* PolskiGrammarMacApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEF89415ADFF3ECDBA4198D /* PolskiGrammarMacApp.swift */; };
+		8665814C35048CB5BA759097 /* MacLifehackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96A559F41ADECCD2239741E /* MacLifehackView.swift */; };
+		9325B690271D375BD8FE8A91 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C32ABCD776F05075D7C97DAD /* Cocoa.framework */; };
+		B92DAA5E5E067B752D1CFBCD /* MacStyleBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F913315E4B7FE453413F0F /* MacStyleBlockView.swift */; };
+		C0E71CB0D9A772A2C12FF919 /* SwipeRating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72457DE776FD7C0B98B986C4 /* SwipeRating.swift */; };
+		D5190353DFC72AAD0BD57235 /* RiveEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66278EB3E40E09BD95E608E0 /* RiveEffects.swift */; };
+		DDD5FE925F895A0C00E9E3A2 /* MacVocabularyCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30411EAF2FF5B641A4C66E12 /* MacVocabularyCardView.swift */; };
+		EB74E5F188AAE3ACA0AEB431 /* RiveRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = 834AD5BBCFC4551C97A5D631 /* RiveRuntime */; };
+		EDBE8228F4F715C8A3E820FA /* RiveEffectOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D3BC721FC8490308217957 /* RiveEffectOverlay.swift */; };
+		FD079E8BFC1427324FF5E9C2 /* MacFlashCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A72395E709726C149A58968 /* MacFlashCardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		13C2C199AD4A38B2C718AE2A /* PolskiGrammarMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PolskiGrammarMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		16B1EB3F7581C0F2D50AFAD0 /* PolskiGrammarMacApp.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PolskiGrammarMacApp.swift; sourceTree = "<group>"; };
-		1FB1DFA5C0CBBB91A2D92C64 /* MacLifehackView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MacLifehackView.swift; sourceTree = "<group>"; };
-		2A981ABB64A9890DB3E2762F /* confetti.riv */ = {isa = PBXFileReference; includeInIndex = 1; path = confetti.riv; sourceTree = "<group>"; };
-		2B47B0EB4BDE69B5340B2795 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.0.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
-		4D6DE1A3B83C450490403B94 /* SwipeRating.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SwipeRating.swift; sourceTree = "<group>"; };
-		6BED0C535AABD1C61B65E958 /* MacFlashCardView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MacFlashCardView.swift; sourceTree = "<group>"; };
-		B0BEF2DD02DCAD4B0806CF38 /* MacVocabularyCardView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MacVocabularyCardView.swift; sourceTree = "<group>"; };
-		BA52E986DCCDA6120B3201EB /* RiveEffectOverlay.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RiveEffectOverlay.swift; sourceTree = "<group>"; };
-		C13E0E8767D5F221AE818D34 /* MacStyleBlockView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MacStyleBlockView.swift; sourceTree = "<group>"; };
-		E29F0F85A81AC8F642ECBE32 /* again.riv */ = {isa = PBXFileReference; includeInIndex = 1; path = again.riv; sourceTree = "<group>"; };
-		F2651B7BB5F270997621103B /* RiveEffects.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RiveEffects.swift; sourceTree = "<group>"; };
+		05F69824C0FAAB88236CCBCB /* confetti.riv */ = {isa = PBXFileReference; includeInIndex = 1; path = confetti.riv; sourceTree = "<group>"; };
+		0CEF89415ADFF3ECDBA4198D /* PolskiGrammarMacApp.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PolskiGrammarMacApp.swift; sourceTree = "<group>"; };
+		26D3BC721FC8490308217957 /* RiveEffectOverlay.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RiveEffectOverlay.swift; sourceTree = "<group>"; };
+		30411EAF2FF5B641A4C66E12 /* MacVocabularyCardView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MacVocabularyCardView.swift; sourceTree = "<group>"; };
+		66278EB3E40E09BD95E608E0 /* RiveEffects.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RiveEffects.swift; sourceTree = "<group>"; };
+		69F913315E4B7FE453413F0F /* MacStyleBlockView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MacStyleBlockView.swift; sourceTree = "<group>"; };
+		72457DE776FD7C0B98B986C4 /* SwipeRating.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SwipeRating.swift; sourceTree = "<group>"; };
+		7A72395E709726C149A58968 /* MacFlashCardView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MacFlashCardView.swift; sourceTree = "<group>"; };
+		93AB97D0953B08B1FD52A804 /* SharedConstants.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SharedConstants.swift; sourceTree = "<group>"; };
+		B96A559F41ADECCD2239741E /* MacLifehackView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MacLifehackView.swift; sourceTree = "<group>"; };
+		C32ABCD776F05075D7C97DAD /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.0.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
+		E9F3BF029EE0021652C28EF3 /* again.riv */ = {isa = PBXFileReference; includeInIndex = 1; path = again.riv; sourceTree = "<group>"; };
+		F760D90FAFEA35DCB8DED18D /* PolskiGrammarMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PolskiGrammarMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		1342CCE1584D78DF3ED66150 /* Frameworks */ = {
+		42A082CBF8489161D79B9411 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5BA91F49E691022962EE7914 /* Cocoa.framework in Frameworks */,
-				09E9206EFA9E6EA920EC2B2E /* RiveRuntime in Frameworks */,
+				9325B690271D375BD8FE8A91 /* Cocoa.framework in Frameworks */,
+				EB74E5F188AAE3ACA0AEB431 /* RiveRuntime in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		04E528F9C686991D96BAFD9C /* Frameworks */ = {
+		0513C7E835B5A4BFCEADBCED /* Rive */ = {
 			isa = PBXGroup;
 			children = (
-				A7B75047D99B6E89523DDDD0 /* OS X */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		24A1FD32B3AA6A80FD9A4B07 /* Rive */ = {
-			isa = PBXGroup;
-			children = (
-				2A981ABB64A9890DB3E2762F /* confetti.riv */,
-				E29F0F85A81AC8F642ECBE32 /* again.riv */,
+				05F69824C0FAAB88236CCBCB /* confetti.riv */,
+				E9F3BF029EE0021652C28EF3 /* again.riv */,
 			);
 			name = Rive;
 			path = Rive;
 			sourceTree = "<group>";
 		};
-		3C3748B857C984BCE72A22CB /* Products */ = {
+		150941022B22CBC8F32E11E2 /* OS X */ = {
 			isa = PBXGroup;
 			children = (
-				13C2C199AD4A38B2C718AE2A /* PolskiGrammarMac.app */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		5391E180F16340BC7F1C05BC = {
-			isa = PBXGroup;
-			children = (
-				3C3748B857C984BCE72A22CB /* Products */,
-				04E528F9C686991D96BAFD9C /* Frameworks */,
-				CA4604BFF7BD399AAFDA54B2 /* PolskiGrammarMac */,
-			);
-			sourceTree = "<group>";
-		};
-		A7B75047D99B6E89523DDDD0 /* OS X */ = {
-			isa = PBXGroup;
-			children = (
-				2B47B0EB4BDE69B5340B2795 /* Cocoa.framework */,
+				C32ABCD776F05075D7C97DAD /* Cocoa.framework */,
 			);
 			name = "OS X";
 			sourceTree = "<group>";
 		};
-		CA4604BFF7BD399AAFDA54B2 /* PolskiGrammarMac */ = {
+		312051C1B136D365151D7EC2 /* Generated */ = {
 			isa = PBXGroup;
 			children = (
-				16B1EB3F7581C0F2D50AFAD0 /* PolskiGrammarMacApp.swift */,
-				6BED0C535AABD1C61B65E958 /* MacFlashCardView.swift */,
-				C13E0E8767D5F221AE818D34 /* MacStyleBlockView.swift */,
-				1FB1DFA5C0CBBB91A2D92C64 /* MacLifehackView.swift */,
-				B0BEF2DD02DCAD4B0806CF38 /* MacVocabularyCardView.swift */,
-				BA52E986DCCDA6120B3201EB /* RiveEffectOverlay.swift */,
-				4D6DE1A3B83C450490403B94 /* SwipeRating.swift */,
-				F8EE8BBA06105CB8FF7548D2 /* Generated */,
-				24A1FD32B3AA6A80FD9A4B07 /* Rive */,
-			);
-			name = PolskiGrammarMac;
-			path = PolskiGrammarMac;
-			sourceTree = "<group>";
-		};
-		F8EE8BBA06105CB8FF7548D2 /* Generated */ = {
-			isa = PBXGroup;
-			children = (
-				F2651B7BB5F270997621103B /* RiveEffects.swift */,
+				66278EB3E40E09BD95E608E0 /* RiveEffects.swift */,
+				93AB97D0953B08B1FD52A804 /* SharedConstants.swift */,
 			);
 			name = Generated;
 			path = Generated;
 			sourceTree = "<group>";
 		};
+		95C821EBE54F0538AFA07855 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F760D90FAFEA35DCB8DED18D /* PolskiGrammarMac.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C1A608DE1426F0C708EB628E /* PolskiGrammarMac */ = {
+			isa = PBXGroup;
+			children = (
+				0CEF89415ADFF3ECDBA4198D /* PolskiGrammarMacApp.swift */,
+				7A72395E709726C149A58968 /* MacFlashCardView.swift */,
+				69F913315E4B7FE453413F0F /* MacStyleBlockView.swift */,
+				B96A559F41ADECCD2239741E /* MacLifehackView.swift */,
+				30411EAF2FF5B641A4C66E12 /* MacVocabularyCardView.swift */,
+				26D3BC721FC8490308217957 /* RiveEffectOverlay.swift */,
+				72457DE776FD7C0B98B986C4 /* SwipeRating.swift */,
+				312051C1B136D365151D7EC2 /* Generated */,
+				0513C7E835B5A4BFCEADBCED /* Rive */,
+			);
+			name = PolskiGrammarMac;
+			path = PolskiGrammarMac;
+			sourceTree = "<group>";
+		};
+		C32DFA0A6DC8C5358E804EBF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				150941022B22CBC8F32E11E2 /* OS X */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DD0085C19DC45BCFAA9C7D4A = {
+			isa = PBXGroup;
+			children = (
+				95C821EBE54F0538AFA07855 /* Products */,
+				C32DFA0A6DC8C5358E804EBF /* Frameworks */,
+				C1A608DE1426F0C708EB628E /* PolskiGrammarMac */,
+			);
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		33C33486D13E3A53388E7F6F /* PolskiGrammarMac */ = {
+		943395AC533E1F46B73324A9 /* PolskiGrammarMac */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3F9F55339C2A9792932D7D6B /* Build configuration list for PBXNativeTarget "PolskiGrammarMac" */;
+			buildConfigurationList = 99956D9994D59DD6F203A7A8 /* Build configuration list for PBXNativeTarget "PolskiGrammarMac" */;
 			buildPhases = (
-				C5251E4BC698D6683B0C061A /* Build Kotlin macOS framework */,
-				2875B86F9663F59671B58A41 /* Sources */,
-				1342CCE1584D78DF3ED66150 /* Frameworks */,
-				797F6805C877A03A232D0791 /* Resources */,
+				F64BAE457AE7AAB9DAEA012F /* Build Kotlin macOS framework */,
+				88B11ED5B4E3311EE90098E1 /* Sources */,
+				42A082CBF8489161D79B9411 /* Frameworks */,
+				65C9476D987457B058A25CAB /* Resources */,
 			);
 			buildRules = (
 			);
@@ -136,22 +139,22 @@
 			);
 			name = PolskiGrammarMac;
 			packageProductDependencies = (
-				DDE90E8C2B2BFA9511CBF551 /* RiveRuntime */,
+				834AD5BBCFC4551C97A5D631 /* RiveRuntime */,
 			);
 			productName = PolskiGrammarMac;
-			productReference = 13C2C199AD4A38B2C718AE2A /* PolskiGrammarMac.app */;
+			productReference = F760D90FAFEA35DCB8DED18D /* PolskiGrammarMac.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		6BF049358DEA71F83D6E26DF /* Project object */ = {
+		4174D508A9086C3D7C8BEFCF /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1600;
 				LastUpgradeCheck = 1600;
 			};
-			buildConfigurationList = F79BF7D0A45C0C36CD9DF481 /* Build configuration list for PBXProject "PolskiGrammarMac" */;
+			buildConfigurationList = 5596389617009204A08559BC /* Build configuration list for PBXProject "PolskiGrammarMac" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = ru;
 			hasScannedForEncodings = 0;
@@ -159,35 +162,35 @@
 				en,
 				Base,
 			);
-			mainGroup = 5391E180F16340BC7F1C05BC;
+			mainGroup = DD0085C19DC45BCFAA9C7D4A;
 			minimizedProjectReferenceProxies = 0;
 			packageReferences = (
-				F98526430F8142E85E967F6D /* XCRemoteSwiftPackageReference "rive-ios" */,
+				E6B9C3E8059F5A558033E07A /* XCRemoteSwiftPackageReference "rive-ios" */,
 			);
 			preferredProjectObjectVersion = 77;
-			productRefGroup = 3C3748B857C984BCE72A22CB /* Products */;
+			productRefGroup = 95C821EBE54F0538AFA07855 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				33C33486D13E3A53388E7F6F /* PolskiGrammarMac */,
+				943395AC533E1F46B73324A9 /* PolskiGrammarMac */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		797F6805C877A03A232D0791 /* Resources */ = {
+		65C9476D987457B058A25CAB /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				45E6FE7DADF9E2C09EBA3839 /* confetti.riv in Resources */,
-				0A8E335DD8BB63EDC6506617 /* again.riv in Resources */,
+				0A80F317D68D748F691A7DA8 /* confetti.riv in Resources */,
+				23CF763F7A6B5D42A594A7AA /* again.riv in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		C5251E4BC698D6683B0C061A /* Build Kotlin macOS framework */ = {
+		F64BAE457AE7AAB9DAEA012F /* Build Kotlin macOS framework */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -209,135 +212,26 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		2875B86F9663F59671B58A41 /* Sources */ = {
+		88B11ED5B4E3311EE90098E1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7D0449F939F314CF42D73FD2 /* PolskiGrammarMacApp.swift in Sources */,
-				83A89B6DDF102B96F69D0163 /* MacFlashCardView.swift in Sources */,
-				5CE925F09CC3E89AA072D3EF /* MacStyleBlockView.swift in Sources */,
-				2F90913F79764DC6EB5128C4 /* MacLifehackView.swift in Sources */,
-				C43B62A6F42BBC720A27E4F4 /* MacVocabularyCardView.swift in Sources */,
-				7E491903D8A578C7F004A2A9 /* RiveEffectOverlay.swift in Sources */,
-				E999504CDD49698C0EEA0681 /* SwipeRating.swift in Sources */,
-				98939EC8B85542C81E7E7840 /* RiveEffects.swift in Sources */,
+				34EBE00D8ECDD47D821FE598 /* PolskiGrammarMacApp.swift in Sources */,
+				FD079E8BFC1427324FF5E9C2 /* MacFlashCardView.swift in Sources */,
+				B92DAA5E5E067B752D1CFBCD /* MacStyleBlockView.swift in Sources */,
+				8665814C35048CB5BA759097 /* MacLifehackView.swift in Sources */,
+				DDD5FE925F895A0C00E9E3A2 /* MacVocabularyCardView.swift in Sources */,
+				EDBE8228F4F715C8A3E820FA /* RiveEffectOverlay.swift in Sources */,
+				C0E71CB0D9A772A2C12FF919 /* SwipeRating.swift in Sources */,
+				D5190353DFC72AAD0BD57235 /* RiveEffects.swift in Sources */,
+				0D6ADB4A4E43167063030807 /* SharedConstants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		1B355B7DE6E042EB89E15D3D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = arm64;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(BUILT_PRODUCTS_DIR)",
-				);
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "Polski Grammar Matrix";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-framework",
-					PolskiShared,
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = dev.polski.grammarmatrix.mac;
-				PRODUCT_NAME = PolskiGrammarMac;
-				SDKROOT = macosx;
-				SWIFT_VERSION = 5.0;
-			};
-			name = Debug;
-		};
-		59361885D04E03D357B3766C /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = arm64;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(BUILT_PRODUCTS_DIR)",
-				);
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "Polski Grammar Matrix";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-framework",
-					PolskiShared,
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = dev.polski.grammarmatrix.mac;
-				PRODUCT_NAME = PolskiGrammarMac;
-				SDKROOT = macosx;
-				SWIFT_VERSION = 5.0;
-			};
-			name = Release;
-		};
-		C0BA6E6BD2342266A29CC243 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				MTL_FAST_MATH = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				SWIFT_VERSION = 5.0;
-			};
-			name = Release;
-		};
-		E2E0F8356B672A4C08851F92 /* Debug */ = {
+		1737967A9A77582C352569FC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -398,23 +292,133 @@
 			};
 			name = Debug;
 		};
+		4CD7920E512664CDE153DDFF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = arm64;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(BUILT_PRODUCTS_DIR)",
+				);
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Polski Grammar Matrix";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					PolskiShared,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = dev.polski.grammarmatrix.mac;
+				PRODUCT_NAME = PolskiGrammarMac;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		A4C83040B6A057E0848AAA92 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		EE34DE4D89916B64D9220F14 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = arm64;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(BUILT_PRODUCTS_DIR)",
+				);
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Polski Grammar Matrix";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					PolskiShared,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = dev.polski.grammarmatrix.mac;
+				PRODUCT_NAME = PolskiGrammarMac;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3F9F55339C2A9792932D7D6B /* Build configuration list for PBXNativeTarget "PolskiGrammarMac" */ = {
+		5596389617009204A08559BC /* Build configuration list for PBXProject "PolskiGrammarMac" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				59361885D04E03D357B3766C /* Release */,
-				1B355B7DE6E042EB89E15D3D /* Debug */,
+				1737967A9A77582C352569FC /* Debug */,
+				A4C83040B6A057E0848AAA92 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F79BF7D0A45C0C36CD9DF481 /* Build configuration list for PBXProject "PolskiGrammarMac" */ = {
+		99956D9994D59DD6F203A7A8 /* Build configuration list for PBXNativeTarget "PolskiGrammarMac" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				E2E0F8356B672A4C08851F92 /* Debug */,
-				C0BA6E6BD2342266A29CC243 /* Release */,
+				EE34DE4D89916B64D9220F14 /* Release */,
+				4CD7920E512664CDE153DDFF /* Debug */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -422,7 +426,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		F98526430F8142E85E967F6D /* XCRemoteSwiftPackageReference "rive-ios" */ = {
+		E6B9C3E8059F5A558033E07A /* XCRemoteSwiftPackageReference "rive-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/rive-app/rive-ios";
 			requirement = {
@@ -433,12 +437,12 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		DDE90E8C2B2BFA9511CBF551 /* RiveRuntime */ = {
+		834AD5BBCFC4551C97A5D631 /* RiveRuntime */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = F98526430F8142E85E967F6D /* XCRemoteSwiftPackageReference "rive-ios" */;
+			package = E6B9C3E8059F5A558033E07A /* XCRemoteSwiftPackageReference "rive-ios" */;
 			productName = RiveRuntime;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
-	rootObject = 6BF049358DEA71F83D6E26DF /* Project object */;
+	rootObject = 4174D508A9086C3D7C8BEFCF /* Project object */;
 }

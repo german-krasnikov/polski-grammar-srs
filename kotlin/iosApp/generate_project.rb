@@ -19,6 +19,7 @@ target.resources_build_phase.add_file_reference(assets_ref)
 # dsl/effects/card-effects.core-data by dsl/derive-rive-effects.mjs (`biome generate`), not authored here.
 generated_group = source.new_group('Generated', 'Generated')
 target.source_build_phase.add_file_reference(generated_group.new_file('RiveEffects.swift'))
+target.source_build_phase.add_file_reference(generated_group.new_file('SharedConstants.swift'))
 
 # FC-15/FC2-06/09/10: confetti.riv/again.riv/chain-complete.riv (vendored from rive-ios/
 # rive-android sample assets and the Rive Marketplace, see THIRD_PARTY/credits.md) ride the app

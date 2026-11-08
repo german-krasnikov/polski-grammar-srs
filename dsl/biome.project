@@ -42,6 +42,9 @@ GENERATE effects-kotlin derive {dir}/derive-rive-effects.mjs kotlin OUT_KOTLIN {
 GENERATE effects-ios derive {dir}/derive-rive-effects.mjs swift OUT_IOS {dir}/effects/card-effects.core-data
 GENERATE effects-macos derive {dir}/derive-rive-effects.mjs swift OUT_MACOS {dir}/effects/card-effects.core-data
 GENERATE effects-web derive {dir}/derive-rive-effects.mjs js OUT_JS {dir}/effects/card-effects.core-data
+# Swift shared constants (AXIS_RATIO, flip timing) — derived from Kotlin source files.
+GENERATE swift-constants-ios derive {dir}/derive-swift-constants.mjs swift OUT_IOS
+GENERATE swift-constants-macos derive {dir}/derive-swift-constants.mjs swift OUT_MACOS
 # Block F: grammar oracle — 1979 pinned cases from grammar.json.
 CONTRACT grammar-oracle FROM grammar-oracle.data-contract
 GENERATE grammar-oracle data --contract grammar-oracle --rows GrammarCaseRow {dir}/grammar-oracle/grammar.core-data --target kt --kt-package polski.data.rows.oracle --out {dir}/../kotlin/shared/src/commonTest/generated/kotlin/polski/data/rows/oracle/GrammarCaseRows.kt
