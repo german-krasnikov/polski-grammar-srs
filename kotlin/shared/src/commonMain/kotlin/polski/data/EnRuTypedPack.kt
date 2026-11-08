@@ -70,26 +70,7 @@ internal object EnRuTypedPack : CoursePackFields {
     override val vocabularyUnavailableLabel get() = generatedEnRuVocabularyUnavailableLabel
     override val lifehacks get() = generatedEnRuLifehacks
 
-    override val uiCopy = mapOf(
-        "again" to "Повторить", "good" to "Вспомнил",
-        "progressTab" to "Прогресс", "settingsTab" to "Настройки", "lifehacks" to "Лайфхаки",
-        "showAnswer" to "Показать ответ", "checkAndShowAnswer" to "Проверить и показать ответ",
-        "exportJson" to "Экспорт JSON", "resetProgress" to "Сбросить прогресс",
-        "hideTable" to "Скрыть таблицу", "tableAtHand" to "Таблица под рукой",
-        "allTablesAndSchema" to "Все таблицы и схема", "whenToReview" to "Когда повторить?",
-        "noDueTitle" to "No reviews due.", "compareAnswer" to "Compare your answer with the model",
-        "backSideReference" to "Back side · model answer", "noAnswerEntered" to "No answer entered",
-        "matches" to "Matches", "differs" to "Differs",
-        "selectExam" to "Select exam", "start" to "Start", "next" to "Next →",
-        "finish" to "Finish", "tryAgain" to "Try again", "task" to "Task",
-        "grammar" to "Grammar", "listening" to "Listening", "reading" to "Reading",
-        "writing" to "Writing", "selectWritingSet" to "Select a set", "changeWritingSet" to "Change set", "writingSet" to "Set",
-        "results" to "Results", "comingSoon" to "Coming soon", "exam" to "Exam",
-        "examConfirmedPoints" to "Confirmed", "examPendingPoints" to "Awaiting review",
-        "examManualReview" to "Needs manual review", "examOfficialExamples" to "Examples from the key",
-        "cardsTab" to "Cards", "vocabularyTab" to "Vocabulary", "matrixTab" to "Tables & scheme",
-        "lang.pl" to "Польский", "lang.en" to "Английский", "lang.ru" to "Русский",
-        "adverb.pl" to "по-польски", "adverb.en" to "по-английски", "adverb.ru" to "по-русски",
-        "tense.present" to "Present", "tense.past" to "Past", "tense.future" to "Future",
-    )
+    override val uiCopy by lazy {
+        uiCopyRowsToMap(polski.data.rows.enru.uicopy.UI_COPY_ROW_ROWS.map { it.key to it.text })
+    }
 }

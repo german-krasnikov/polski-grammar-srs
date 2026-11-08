@@ -1,0 +1,236 @@
+# Pack-aware UI labels. Existing values migrated unchanged from TypedPack.
+UI_COPY {key: again text: "Повторить"}
+UI_COPY {key: good text: "Вспомнил"}
+UI_COPY {key: progressTab text: "Прогресс"}
+UI_COPY {key: settingsTab text: "Настройки"}
+UI_COPY {key: lifehacks text: "Лайфхаки"}
+UI_COPY {key: showAnswer text: "Показать ответ"}
+UI_COPY {key: checkAndShowAnswer text: "Проверить и показать ответ"}
+UI_COPY {key: exportJson text: "Экспорт JSON"}
+UI_COPY {key: resetProgress text: "Сбросить прогресс"}
+UI_COPY {key: hideTable text: "Скрыть таблицу"}
+UI_COPY {key: tableAtHand text: "Таблица под рукой"}
+UI_COPY {key: allTablesAndSchema text: "Все таблицы и схема"}
+UI_COPY {key: whenToReview text: "Когда повторить?"}
+UI_COPY {key: noDueTitle text: "Новых повторений пока нет."}
+UI_COPY {key: compareAnswer text: "Сравни свой ответ с эталоном"}
+UI_COPY {key: backSideReference text: "Обратная сторона · эталон"}
+UI_COPY {key: noAnswerEntered text: "Ответ не введён"}
+UI_COPY {key: matches text: "Совпадает с правильным вариантом"}
+UI_COPY {key: differs text: "Отличается"}
+UI_COPY {key: selectExam text: "Выберите экзамен"}
+UI_COPY {key: start text: "Начать"}
+UI_COPY {key: next text: "Далее →"}
+UI_COPY {key: finish text: "Завершить"}
+UI_COPY {key: tryAgain text: "Пройти ещё раз"}
+UI_COPY {key: task text: "Задание"}
+UI_COPY {key: grammar text: "Грамматика"}
+UI_COPY {key: listening text: "Аудирование"}
+UI_COPY {key: reading text: "Чтение"}
+UI_COPY {key: writing text: "Письмо"}
+UI_COPY {key: selectWritingSet text: "Выберите набор"}
+UI_COPY {key: changeWritingSet text: "Сменить набор"}
+UI_COPY {key: writingSet text: "Набор"}
+UI_COPY {key: results text: "Результаты"}
+UI_COPY {key: comingSoon text: "Скоро"}
+UI_COPY {key: exam text: "Экзамен"}
+UI_COPY {key: examConfirmedPoints text: "Подтверждено"}
+UI_COPY {key: examPendingPoints text: "Ожидает проверки"}
+UI_COPY {key: examManualReview text: "Требуется ручная проверка"}
+UI_COPY {key: examOfficialExamples text: "Образцы из ключа"}
+UI_COPY {key: cardsTab text: "Карточки"}
+UI_COPY {key: vocabularyTab text: "Слова"}
+UI_COPY {key: matrixTab text: "Таблицы и схема"}
+UI_COPY {key: lang.pl text: "Польский"}
+UI_COPY {key: lang.en text: "Английский"}
+UI_COPY {key: lang.ru text: "Русский"}
+UI_COPY {key: adverb.pl text: "по-польски"}
+UI_COPY {key: adverb.en text: "по-английски"}
+UI_COPY {key: adverb.ru text: "по-русски"}
+UI_COPY {key: tense.present text: "Настоящее"}
+UI_COPY {key: tense.past text: "Прошедшее"}
+UI_COPY {key: tense.future text: "Будущее"}
+UI_COPY {key: trainingTab text: "Тренировка"}
+UI_COPY {key: matrixNavTitle text: "Матрица"}
+UI_COPY {key: resetTitle text: "Сбросить весь прогресс?"}
+UI_COPY {key: resetConfirm text: "Сбросить"}
+UI_COPY {key: cancel text: "Отмена"}
+UI_COPY {
+  key: resetWarning
+  text: "Все оценки и расписание повторений будут удалены."
+}
+UI_COPY {key: noticeTitle text: "Сообщение"}
+UI_COPY {key: ok text: "ОК"}
+UI_COPY {key: recoverySection text: "Восстановление"}
+UI_COPY {
+  key: recoveryAdvice
+  text: "Экспортируйте исходные настройки перед импортом проверенной копии."
+}
+UI_COPY {key: courseSection text: "Курс"}
+UI_COPY {key: targetLanguage text: "Изучаемый язык"}
+UI_COPY {key: nativeLanguage text: "Родной язык"}
+UI_COPY {key: learningSection text: "Обучение"}
+UI_COPY {key: explanationStyle text: "Стиль объяснений"}
+UI_COPY {
+  key: nativeContrastFallback
+  text: "Для текущего навыка пока нет пары для сравнения с родным — карточка показывается как «через правило»."
+}
+UI_COPY {key: appearanceSection text: "Внешний вид"}
+UI_COPY {key: answerModeTitle text: "Ответ"}
+UI_COPY {key: oralMode text: "Вслух"}
+UI_COPY {key: oralOrSilentMode text: "Вслух / про себя"}
+UI_COPY {key: typedMode text: "Напечатать"}
+UI_COPY {key: themeTitle text: "Тема"}
+UI_COPY {key: themeSystem text: "Системная"}
+UI_COPY {key: themeLight text: "Светлая"}
+UI_COPY {key: themeDark text: "Тёмная"}
+UI_COPY {key: motionTitle text: "Движение"}
+UI_COPY {key: motionSystem text: "Системное"}
+UI_COPY {key: motionReduced text: "Сокращённое"}
+UI_COPY {key: motionReducedStatus text: "Система сокращает движение"}
+UI_COPY {key: motionActiveStatus text: "Системное движение активно"}
+UI_COPY {key: animationsTitle text: "Анимации"}
+UI_COPY {key: settingsDataSection text: "Данные настроек"}
+UI_COPY {key: exportSettingsJson text: "Экспортировать настройки JSON"}
+UI_COPY {key: importSettingsJson text: "Импортировать настройки JSON"}
+UI_COPY {key: done text: "Готово"}
+UI_COPY {key: heroSubtitle text: "Говори целыми предложениями"}
+UI_COPY {key: dueStat text: "К повторению"}
+UI_COPY {key: todayStat text: "Сегодня"}
+UI_COPY {key: loading text: "Загружаем…"}
+UI_COPY {key: needsProgressCopy text: "Нужна копия прогресса"}
+UI_COPY {
+  key: openProgressForTransfer
+  text: "Откройте «Прогресс» для импорта или экспорта JSON."
+}
+UI_COPY {key: modeTemplate text: "Режим: {mode}"}
+UI_COPY {key: sentenceChain text: "Цепочка предложений"}
+UI_COPY {key: scheduledReviews text: "По расписанию"}
+UI_COPY {key: singleSkill text: "Отдельный навык"}
+UI_COPY {key: skillTitle text: "Навык"}
+UI_COPY {key: nextWordSet text: "Следующий набор слов"}
+UI_COPY {key: backToReviews text: "К повторениям"}
+UI_COPY {key: reviewsDone text: "Повторения на сейчас завершены"}
+UI_COPY {key: practiceChain text: "Потренировать цепочку"}
+UI_COPY {key: sourceSentence text: "Исходное предложение"}
+UI_COPY {key: skillIntroduction text: "Знакомство с навыком"}
+UI_COPY {key: goToTask text: "Перейти к заданию"}
+UI_COPY {key: modelAnswer text: "Эталон"}
+UI_COPY {key: alsoAcceptedTemplate text: "Также: {answers}"}
+UI_COPY {key: swipeHint text: "Свайп влево — повторить · вправо — вспомнил"}
+UI_COPY {key: polishAnswer text: "Ответ по-польски"}
+UI_COPY {
+  key: oralInstruction
+  text: "Произнеси целое предложение, затем покажи ответ."
+}
+UI_COPY {key: checkAnswer text: "Проверить ответ"}
+UI_COPY {key: before text: "Было"}
+UI_COPY {key: after text: "Стало"}
+UI_COPY {key: matrixMap text: "Карта системы"}
+UI_COPY {key: casesAndEndings text: "Падежи и окончания"}
+UI_COPY {key: tensesAndPersons text: "Времена и лица"}
+UI_COPY {key: pronouns text: "Местоимения"}
+UI_COPY {key: summary text: "Сводка"}
+UI_COPY {key: skills text: "Навыки"}
+UI_COPY {key: dataSection text: "Данные"}
+UI_COPY {
+  key: reviewsCountTemplate
+  text: "Повторений: {reviews} · Точно: {correct} · Серия: {streak}"
+}
+UI_COPY {key: nextDueTemplate text: "Следующее: {date}"}
+UI_COPY {key: noLifehacks text: "Для этого набора лайфхаков пока нет."}
+UI_COPY {key: vocabularyData text: "Данные словаря"}
+UI_COPY {key: importVocabularyJson text: "Импортировать словарь JSON"}
+UI_COPY {key: exportVocabularyJson text: "Экспортировать словарь JSON"}
+UI_COPY {key: statusSection text: "Состояние"}
+UI_COPY {key: directionSection text: "Направление"}
+UI_COPY {key: cardSection text: "Карточка"}
+UI_COPY {key: selectWords text: "Выберите слова для тренировки"}
+UI_COPY {key: allReviewed text: "На сейчас всё повторено"}
+UI_COPY {key: myWords text: "Мои слова"}
+UI_COPY {key: addOwnWord text: "Добавить своё слово"}
+UI_COPY {key: edit text: "Изменить"}
+UI_COPY {key: delete text: "Удалить"}
+UI_COPY {key: deleteWord text: "Удалить слово"}
+UI_COPY {key: save text: "Сохранить"}
+UI_COPY {
+  key: deleteWordWarning
+  text: "Слово исчезнет из каталога, история оценок сохранится в JSON."
+}
+UI_COPY {key: add text: "Добавить"}
+UI_COPY {key: remove text: "Убрать"}
+UI_COPY {key: deleteWordTitle text: "Удалить своё слово?"}
+UI_COPY {key: newWord text: "Новое слово"}
+UI_COPY {key: editWord text: "Изменить слово"}
+UI_COPY {key: polishWord text: "Польское слово"}
+UI_COPY {key: translation text: "Перевод"}
+UI_COPY {key: form text: "Форма"}
+UI_COPY {key: exampleSentence text: "Пример в предложении"}
+UI_COPY {key: level text: "Уровень"}
+UI_COPY {key: exportProgressJson text: "Экспортировать JSON"}
+UI_COPY {key: importProgressJson text: "Импортировать JSON"}
+UI_COPY {key: totalReviews text: "Всего повторений"}
+UI_COPY {key: nextDueLabel text: "Следующее"}
+UI_COPY {key: wordSet text: "Набор слов"}
+UI_COPY {key: matrixSection text: "Раздел"}
+UI_COPY {
+  key: vocabularyRecoveryAdvice
+  text: "Экспортируйте исходный JSON и импортируйте исправленный словарь."
+}
+UI_COPY {key: vocabularyUnavailable text: "Словарь пока недоступен"}
+UI_COPY {key: studyDirection text: "Учить"}
+UI_COPY {key: vocabularyCard text: "Карточка"}
+UI_COPY {key: myVocabularyTemplate text: "Мой словарь · {count}"}
+UI_COPY {key: vocabularyFilter text: "Подборка"}
+UI_COPY {key: remember text: "ЗАПОМНИ"}
+UI_COPY {key: why text: "Почему так?"}
+UI_COPY {key: expanded text: "развёрнуто"}
+UI_COPY {key: collapsed text: "свёрнуто"}
+UI_COPY {key: lifehackBadge text: "💡 Есть лайфхак"}
+UI_COPY {key: lifehackAccessibility text: "Есть лайфхак для этого навыка"}
+UI_COPY {key: lifehackSourceTemplate text: "Лайфхак · источник: {status}"}
+UI_COPY {key: sourceLink text: "источник"}
+UI_COPY {key: whatChanged text: "Что изменилось"}
+UI_COPY {key: langLower.pl text: "польский"}
+UI_COPY {key: langLower.en text: "английский"}
+UI_COPY {key: langLower.ru text: "русский"}
+UI_COPY {key: recallAdverb.pl text: "по-польски"}
+UI_COPY {key: recallAdverb.en text: "по-английски"}
+UI_COPY {key: recallAdverb.ru text: "по-русски"}
+UI_COPY {key: recallInTemplate text: "Вспомни {language}"}
+UI_COPY {key: typedAnswerToggle text: "Напечатать ответ"}
+UI_COPY {key: yourAnswer text: "Твой ответ"}
+UI_COPY {key: check text: "Проверить"}
+UI_COPY {
+  key: selfReviewTemplate
+  text: "Твой ответ: {answer}. Сравни сам и выбери оценку."
+}
+UI_COPY {key: matrixChooseWordGroup text: "Выбери группу слов"}
+UI_COPY {key: matrixWord text: "Слово"}
+UI_COPY {key: matrixAdjective text: "Прилагательное"}
+UI_COPY {key: matrixOwner text: "Владелец"}
+UI_COPY {key: matrixNumber text: "Число"}
+UI_COPY {key: matrixTrainChain text: "Тренировать эту цепочку"}
+UI_COPY {key: matrixTrainMasculine text: "Тренировать мужской род"}
+UI_COPY {key: matrixTrainNegation text: "Тренировать отрицание"}
+UI_COPY {key: matrixDeclensionComparison text: "Сравнение типов склонения"}
+UI_COPY {key: matrixCaseComparison text: "Падеж для сравнения"}
+UI_COPY {key: matrixVerb text: "Глагол"}
+UI_COPY {key: matrixTrainTenses text: "Тренировать времена"}
+UI_COPY {key: matrixTrainOwnerChange text: "Тренировать смену владельца"}
+UI_COPY {key: vocabularyTop100 text: "Топ 100"}
+UI_COPY {key: vocabularyTop500 text: "Топ 500"}
+UI_COPY {key: vocabularyTop1000 text: "Топ 1000"}
+UI_COPY {
+  key: importSettingsSizeLimit
+  text: "Файл должен быть UTF-8 JSON не больше 1 МБ"
+}
+UI_COPY {
+  key: importDataSizeLimit
+  text: "Файл должен быть UTF-8 JSON не больше 10 МБ"
+}
+UI_COPY {key: settingsImported text: "Настройки импортированы"}
+UI_COPY {key: vocabularyImported text: "Словарь импортирован"}
+UI_COPY {key: vocabularyImportFailed text: "Импорт словаря не удался"}
+UI_COPY {key: progressExported text: "Прогресс экспортирован"}
+UI_COPY {key: progressImported text: "Прогресс импортирован"}

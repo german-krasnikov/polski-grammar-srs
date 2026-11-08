@@ -1,5 +1,5 @@
 // Generated from dsl/course.data-contract
-// source-sha256=9b3a70bd0bf50cb735e315a4160f877aae25cba46d73a0976f6ed2fb65d4295e
+// source-sha256=8d297a43f02dd884a8988b7e3cf6d9b2864cf15bf767faa2680ef50be58bff1f
 // Edit the source, then run biome generate.
 
 package polski.data.rows.enru
@@ -238,6 +238,18 @@ data class SeedRow(
 data class CopyEntryRow(
     val key: String,
     val value: String,
+)
+
+data class UiCopyRow(
+    val key: String,
+    val text: String,
+)
+
+data class UiCopyCaseRow(
+    val key: String,
+    val plRu: String,
+    val enRu: String,
+    val placeholders: String,
 )
 
 data class PatternEntryRow(

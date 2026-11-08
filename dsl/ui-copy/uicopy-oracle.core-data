@@ -1,0 +1,430 @@
+# Frozen legacy values from the pre-P12 typed maps; new representative expectations follow.
+UI_COPY_CASE {key: again plRu: "Повторить" enRu: "Повторить" placeholders: ""}
+UI_COPY_CASE {key: good plRu: "Вспомнил" enRu: "Вспомнил" placeholders: ""}
+UI_COPY_CASE {
+  key: progressTab
+  plRu: "Прогресс"
+  enRu: "Прогресс"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: settingsTab
+  plRu: "Настройки"
+  enRu: "Настройки"
+  placeholders: ""
+}
+UI_COPY_CASE {key: lifehacks plRu: "Лайфхаки" enRu: "Лайфхаки" placeholders: ""}
+UI_COPY_CASE {
+  key: showAnswer
+  plRu: "Показать ответ"
+  enRu: "Показать ответ"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: checkAndShowAnswer
+  plRu: "Проверить и показать ответ"
+  enRu: "Проверить и показать ответ"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: exportJson
+  plRu: "Экспорт JSON"
+  enRu: "Экспорт JSON"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: resetProgress
+  plRu: "Сбросить прогресс"
+  enRu: "Сбросить прогресс"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: hideTable
+  plRu: "Скрыть таблицу"
+  enRu: "Скрыть таблицу"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: tableAtHand
+  plRu: "Таблица под рукой"
+  enRu: "Таблица под рукой"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: allTablesAndSchema
+  plRu: "Все таблицы и схема"
+  enRu: "Все таблицы и схема"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: whenToReview
+  plRu: "Когда повторить?"
+  enRu: "Когда повторить?"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: noDueTitle
+  plRu: "Новых повторений пока нет."
+  enRu: "No reviews due."
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: compareAnswer
+  plRu: "Сравни свой ответ с эталоном"
+  enRu: "Compare your answer with the model"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: backSideReference
+  plRu: "Обратная сторона · эталон"
+  enRu: "Back side · model answer"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: noAnswerEntered
+  plRu: "Ответ не введён"
+  enRu: "No answer entered"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: matches
+  plRu: "Совпадает с правильным вариантом"
+  enRu: Matches
+  placeholders: ""
+}
+UI_COPY_CASE {key: differs plRu: "Отличается" enRu: Differs placeholders: ""}
+UI_COPY_CASE {
+  key: selectExam
+  plRu: "Выберите экзамен"
+  enRu: "Select exam"
+  placeholders: ""
+}
+UI_COPY_CASE {key: start plRu: "Начать" enRu: Start placeholders: ""}
+UI_COPY_CASE {key: next plRu: "Далее →" enRu: "Next →" placeholders: ""}
+UI_COPY_CASE {key: finish plRu: "Завершить" enRu: Finish placeholders: ""}
+UI_COPY_CASE {
+  key: tryAgain
+  plRu: "Пройти ещё раз"
+  enRu: "Try again"
+  placeholders: ""
+}
+UI_COPY_CASE {key: task plRu: "Задание" enRu: Task placeholders: ""}
+UI_COPY_CASE {key: grammar plRu: "Грамматика" enRu: Grammar placeholders: ""}
+UI_COPY_CASE {
+  key: listening
+  plRu: "Аудирование"
+  enRu: Listening
+  placeholders: ""
+}
+UI_COPY_CASE {key: reading plRu: "Чтение" enRu: Reading placeholders: ""}
+UI_COPY_CASE {key: writing plRu: "Письмо" enRu: Writing placeholders: ""}
+UI_COPY_CASE {
+  key: selectWritingSet
+  plRu: "Выберите набор"
+  enRu: "Select a set"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: changeWritingSet
+  plRu: "Сменить набор"
+  enRu: "Change set"
+  placeholders: ""
+}
+UI_COPY_CASE {key: writingSet plRu: "Набор" enRu: Set placeholders: ""}
+UI_COPY_CASE {key: results plRu: "Результаты" enRu: Results placeholders: ""}
+UI_COPY_CASE {
+  key: comingSoon
+  plRu: "Скоро"
+  enRu: "Coming soon"
+  placeholders: ""
+}
+UI_COPY_CASE {key: exam plRu: "Экзамен" enRu: Exam placeholders: ""}
+UI_COPY_CASE {
+  key: examConfirmedPoints
+  plRu: "Подтверждено"
+  enRu: Confirmed
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: examPendingPoints
+  plRu: "Ожидает проверки"
+  enRu: "Awaiting review"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: examManualReview
+  plRu: "Требуется ручная проверка"
+  enRu: "Needs manual review"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: examOfficialExamples
+  plRu: "Образцы из ключа"
+  enRu: "Examples from the key"
+  placeholders: ""
+}
+UI_COPY_CASE {key: cardsTab plRu: "Карточки" enRu: Cards placeholders: ""}
+UI_COPY_CASE {
+  key: vocabularyTab
+  plRu: "Слова"
+  enRu: Vocabulary
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: matrixTab
+  plRu: "Таблицы и схема"
+  enRu: "Tables & scheme"
+  placeholders: ""
+}
+UI_COPY_CASE {key: lang.pl plRu: "Польский" enRu: "Польский" placeholders: ""}
+UI_COPY_CASE {
+  key: lang.en
+  plRu: "Английский"
+  enRu: "Английский"
+  placeholders: ""
+}
+UI_COPY_CASE {key: lang.ru plRu: "Русский" enRu: "Русский" placeholders: ""}
+UI_COPY_CASE {
+  key: adverb.pl
+  plRu: "по-польски"
+  enRu: "по-польски"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: adverb.en
+  plRu: "по-английски"
+  enRu: "по-английски"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: adverb.ru
+  plRu: "по-русски"
+  enRu: "по-русски"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: tense.present
+  plRu: "Настоящее"
+  enRu: Present
+  placeholders: ""
+}
+UI_COPY_CASE {key: tense.past plRu: "Прошедшее" enRu: Past placeholders: ""}
+UI_COPY_CASE {key: tense.future plRu: "Будущее" enRu: Future placeholders: ""}
+UI_COPY_CASE {
+  key: trainingTab
+  plRu: "Тренировка"
+  enRu: Training
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: resetTitle
+  plRu: "Сбросить весь прогресс?"
+  enRu: "Reset all progress?"
+  placeholders: ""
+}
+UI_COPY_CASE {key: answerModeTitle plRu: "Ответ" enRu: Answer placeholders: ""}
+UI_COPY_CASE {
+  key: modelAnswer
+  plRu: "Эталон"
+  enRu: "Model answer"
+  placeholders: ""
+}
+UI_COPY_CASE {key: themeTitle plRu: "Тема" enRu: Theme placeholders: ""}
+UI_COPY_CASE {
+  key: matrixMap
+  plRu: "Карта системы"
+  enRu: "System map"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: nextDueTemplate
+  plRu: "Следующее: {date}"
+  enRu: "Next: {date}"
+  placeholders: date
+}
+UI_COPY_CASE {
+  key: reviewsCountTemplate
+  plRu: "Повторений: {reviews} · Точно: {correct} · Серия: {streak}"
+  enRu: "Reviews: {reviews} · Correct: {correct} · Streak: {streak}"
+  placeholders: "reviews|correct|streak"
+}
+UI_COPY_CASE {
+  key: addOwnWord
+  plRu: "Добавить своё слово"
+  enRu: "Add your own word"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: settingsDataSection
+  plRu: "Данные настроек"
+  enRu: "Settings data"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: vocabularyData
+  plRu: "Данные словаря"
+  enRu: "Vocabulary data"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: myVocabularyTemplate
+  plRu: "Мой словарь · {count}"
+  enRu: "My vocabulary · {count}"
+  placeholders: count
+}
+UI_COPY_CASE {
+  key: lifehackSourceTemplate
+  plRu: "Лайфхак · источник: {status}"
+  enRu: "Lifehack · source: {status}"
+  placeholders: status
+}
+UI_COPY_CASE {key: langLower.pl plRu: "польский" enRu: polish placeholders: ""}
+UI_COPY_CASE {
+  key: langLower.en
+  plRu: "английский"
+  enRu: english
+  placeholders: ""
+}
+UI_COPY_CASE {key: langLower.ru plRu: "русский" enRu: russian placeholders: ""}
+UI_COPY_CASE {
+  key: recallAdverb.pl
+  plRu: "по-польски"
+  enRu: "in Polish"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: recallAdverb.en
+  plRu: "по-английски"
+  enRu: "in English"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: recallAdverb.ru
+  plRu: "по-русски"
+  enRu: "in Russian"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: recallInTemplate
+  plRu: "Вспомни {language}"
+  enRu: "Recall {language}"
+  placeholders: language
+}
+UI_COPY_CASE {
+  key: matrixChooseWordGroup
+  plRu: "Выбери группу слов"
+  enRu: "Choose a word group"
+  placeholders: ""
+}
+UI_COPY_CASE {key: matrixWord plRu: "Слово" enRu: Word placeholders: ""}
+UI_COPY_CASE {
+  key: matrixAdjective
+  plRu: "Прилагательное"
+  enRu: Adjective
+  placeholders: ""
+}
+UI_COPY_CASE {key: matrixOwner plRu: "Владелец" enRu: Owner placeholders: ""}
+UI_COPY_CASE {key: matrixNumber plRu: "Число" enRu: Number placeholders: ""}
+UI_COPY_CASE {
+  key: matrixTrainChain
+  plRu: "Тренировать эту цепочку"
+  enRu: "Practice this chain"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: matrixTrainMasculine
+  plRu: "Тренировать мужской род"
+  enRu: "Practice masculine forms"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: matrixTrainNegation
+  plRu: "Тренировать отрицание"
+  enRu: "Practice negation"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: matrixDeclensionComparison
+  plRu: "Сравнение типов склонения"
+  enRu: "Compare declension types"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: matrixCaseComparison
+  plRu: "Падеж для сравнения"
+  enRu: "Case to compare"
+  placeholders: ""
+}
+UI_COPY_CASE {key: matrixVerb plRu: "Глагол" enRu: Verb placeholders: ""}
+UI_COPY_CASE {
+  key: matrixTrainTenses
+  plRu: "Тренировать времена"
+  enRu: "Practice tenses"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: matrixTrainOwnerChange
+  plRu: "Тренировать смену владельца"
+  enRu: "Practice owner changes"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: vocabularyTop100
+  plRu: "Топ 100"
+  enRu: "Top 100"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: vocabularyTop500
+  plRu: "Топ 500"
+  enRu: "Top 500"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: vocabularyTop1000
+  plRu: "Топ 1000"
+  enRu: "Top 1000"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: importSettingsSizeLimit
+  plRu: "Файл должен быть UTF-8 JSON не больше 1 МБ"
+  enRu: "The file must be UTF-8 JSON and at most 1 MB"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: importDataSizeLimit
+  plRu: "Файл должен быть UTF-8 JSON не больше 10 МБ"
+  enRu: "The file must be UTF-8 JSON and at most 10 MB"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: settingsImported
+  plRu: "Настройки импортированы"
+  enRu: "Settings imported"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: vocabularyImported
+  plRu: "Словарь импортирован"
+  enRu: "Vocabulary imported"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: vocabularyImportFailed
+  plRu: "Импорт словаря не удался"
+  enRu: "Vocabulary import failed"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: progressExported
+  plRu: "Прогресс экспортирован"
+  enRu: "Progress exported"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: progressImported
+  plRu: "Прогресс импортирован"
+  enRu: "Progress imported"
+  placeholders: ""
+}

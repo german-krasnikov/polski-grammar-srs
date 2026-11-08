@@ -4,9 +4,46 @@ import PolskiShared
 
 typealias Record = [String: Any]
 
-/// Pack-aware UI string from the snapshot bridge (SnapshotCommon.kt puts them as "ui*" keys).
-private func uiText(_ state: Record, _ key: String, fallback: String) -> String {
-    state[key] as? String ?? fallback
+/// Reads the current pack's complete copy, then the seven legacy snapshot fields for old frameworks.
+func uiText(_ state: Record, _ key: String, fallback: String) -> String {
+    let semanticKey = key.hasPrefix("ui")
+        ? String(key.dropFirst(2).prefix(1)).lowercased() + String(key.dropFirst(3)) : key
+    if let value = (state["uiCopy"] as? Record)?[semanticKey] as? String { return value }
+    return state[key] as? String ?? fallback
+}
+
+/// Validates authored placeholders, then inserts values once so user text is never parsed as copy.
+func uiFormat(_ state: Record, _ key: String, fallback: String, values: [String: String]) -> String {
+    let template = uiText(state, key, fallback: fallback)
+    var fields: [(range: Range<String.Index>, name: String)] = []
+    var cursor = template.startIndex
+    var used = Set<String>()
+    while let open = template[cursor...].firstIndex(of: "{") {
+        assert(!template[cursor..<open].contains("}"), "Malformed UI copy template: \(key)")
+        guard let close = template[open...].firstIndex(of: "}") else {
+            assertionFailure("Unfilled UI copy template: \(key)")
+            return template
+        }
+        let name = String(template[template.index(after: open)..<close])
+        assert(values[name] != nil, "Unfilled UI copy template: \(key).\(name)")
+        used.insert(name)
+        let end = template.index(after: close)
+        fields.append((open..<end, name))
+        cursor = end
+    }
+    assert(!template[cursor...].contains("}"), "Malformed UI copy template: \(key)")
+    for name in values.keys {
+        precondition(used.contains(name), "Unknown UI copy placeholder: \(key).\(name)")
+    }
+    var result = ""
+    cursor = template.startIndex
+    for field in fields {
+        result.append(contentsOf: template[cursor..<field.range.lowerBound])
+        result.append(contentsOf: values[field.name] ?? String(template[field.range]))
+        cursor = field.range.upperBound
+    }
+    result.append(contentsOf: template[cursor...])
+    return result
 }
 
 private enum StudyStyle {
@@ -16,6 +53,7 @@ private enum StudyStyle {
 }
 
 private struct StudyHero: View {
+    let copy: Record
     let due: Int
     let today: Int
 
@@ -24,13 +62,13 @@ private struct StudyHero: View {
             Label("POLSKI · GRAMMAR MATRIX", systemImage: "sparkle")
                 .font(.caption.weight(.bold)).tracking(1.2)
                 .foregroundStyle(StudyStyle.amber)
-            Text("Говори целыми предложениями")
+            Text(uiText(copy, "heroSubtitle", fallback: "Говори целыми предложениями"))
                 .font(.system(.title3, design: .rounded, weight: .bold))
                 .foregroundStyle(.white)
                 .fixedSize(horizontal: false, vertical: true)
             HStack(spacing: 8) {
-                heroStat("К повторению", due)
-                heroStat("Сегодня", today)
+                heroStat(uiText(copy, "dueStat", fallback: "К повторению"), due)
+                heroStat(uiText(copy, "todayStat", fallback: "Сегодня"), today)
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -58,6 +96,7 @@ private struct StudyHero: View {
 /// C1: shown above every tab whenever `TrainingStore.state.error` is set (e.g. a progress save
 /// failure), regardless of `loadStatus`, with the export action always reachable.
 private struct ErrorBanner: View {
+    let copy: Record
     let message: String
     let onExport: () -> Void
 
@@ -66,7 +105,7 @@ private struct ErrorBanner: View {
             Image(systemName: "exclamationmark.triangle.fill").foregroundStyle(.red)
             VStack(alignment: .leading, spacing: 6) {
                 Text(message).font(.footnote).fontWeight(.semibold)
-                Button("Экспортировать JSON", action: onExport)
+                Button(uiText(copy, "exportProgressJson", fallback: "Экспортировать JSON"), action: onExport)
                     .font(.footnote)
                     .accessibilityIdentifier("errorBannerExport")
             }
@@ -135,18 +174,18 @@ private func styleOptions(_ preferences: Record) -> [StyleOption] {
 // is the real, currently-registered (target, native) pairs — pl-ru and en-ru today, never a
 // hardcoded literal pair here; only the *display* label for a known code is this file's own copy,
 // the same fallback pattern `styleFallbackLabel` above already uses for a style without recipe text.
-private let courseLanguageLabel: [String: String] = ["pl": "Польский", "en": "Английский", "ru": "Русский"]
-private func courseLanguageName(_ code: String) -> String { courseLanguageLabel[code] ?? code }
+private func courseLanguageName(_ code: String, state: Record) -> String {
+    uiText(state, "lang.\(code)", fallback: code)
+}
 
 // EnRuAcceptance-2026-09-28.md §7 item 4: the vocabulary screen's own 2 small Russian phrasings
 // that need a language's name lowercase (mid-clause, e.g. "Русский → польский") or as the
-// instrumental adverb ("Вспомни по-польски") — [courseLanguageLabel] above is capitalized (a
+// instrumental adverb ("Вспомни по-польски") — [courseLanguageName] above is capitalized (a
 // Settings picker's own leading word), so neither reuses it. Same fallback-to-code pattern.
-private let courseLanguageLower: [String: String] = ["pl": "польский", "en": "английский", "ru": "русский"]
-// internal (not `private`): also read by `VocabularyCardView`'s own reveal hint, a separate file.
-let courseLanguageAdverb: [String: String] = ["pl": "польски", "en": "английски", "ru": "русски"]
-private func courseDirectionLabel(from: String, to: String) -> String {
-    "\((courseLanguageLower[from] ?? from).prefix(1).uppercased() + (courseLanguageLower[from] ?? from).dropFirst()) → \(courseLanguageLower[to] ?? to)"
+private func courseDirectionLabel(from: String, to: String, state: Record) -> String {
+    let source = uiText(state, "langLower.\(from)", fallback: from)
+    let target = uiText(state, "langLower.\(to)", fallback: to)
+    return "\(source.prefix(1).uppercased() + source.dropFirst()) → \(target)"
 }
 
 /// The distinct values of [key] ("target"/"native") across every row of `preferences`'s
@@ -291,10 +330,11 @@ final class AppModel: ObservableObject {
             defer { try? handle.close() }
             let data = try handle.read(upToCount: 1_000_001) ?? Data()
             guard data.count <= 1_000_000, let raw = String(data: data, encoding: .utf8) else {
-                notice = "Файл должен быть UTF-8 JSON не больше 1 МБ"
+                notice = uiText(state, "importSettingsSizeLimit", fallback: "Файл должен быть UTF-8 JSON не больше 1 МБ")
                 return
             }
-            notice = preferencesSession.importJson(raw: raw) ?? "Настройки импортированы"
+            notice = preferencesSession.importJson(raw: raw)
+                ?? uiText(state, "settingsImported", fallback: "Настройки импортированы")
             receivePreferences(preferencesSession.currentSnapshot())
             if preferences.string("status") == "Ready" {
                 send("styleId", preferences.string("styleId"))
@@ -311,12 +351,17 @@ final class AppModel: ObservableObject {
             defer { try? handle.close() }
             let data = try handle.read(upToCount: 10_000_001) ?? Data()
             guard data.count <= 10_000_000, let raw = String(data: data, encoding: .utf8) else {
-                notice = "Файл должен быть UTF-8 JSON не больше 10 МБ"
+                notice = uiText(state, "importDataSizeLimit", fallback: "Файл должен быть UTF-8 JSON не больше 10 МБ")
                 return
             }
             vocabulary.importJson(raw: raw) { [weak self] success in
-                DispatchQueue.main.async { self?.notice = success.boolValue ? "Словарь импортирован" :
-                    (self?.vocabularyState.string("error") ?? "Импорт словаря не удался") }
+                DispatchQueue.main.async { [weak self] in
+                    guard let self else { return }
+                    let error = self.vocabularyState.string("error")
+                    self.notice = success.boolValue
+                        ? uiText(self.state, "vocabularyImported", fallback: "Словарь импортирован")
+                        : (error.isEmpty ? uiText(self.state, "vocabularyImportFailed", fallback: "Импорт словаря не удался") : error)
+                }
             }
         } catch { notice = error.localizedDescription }
     }
@@ -338,7 +383,7 @@ final class AppModel: ObservableObject {
         exportEffectId = nil
         exportFile = nil
         switch result {
-        case .success: acknowledge(id); notice = "Прогресс экспортирован"
+        case .success: acknowledge(id); notice = uiText(state, "progressExported", fallback: "Прогресс экспортирован")
         case .failure(let error): acknowledge(id, completed: false); notice = error.localizedDescription
         }
     }
@@ -351,7 +396,7 @@ final class AppModel: ObservableObject {
             defer { try? handle.close() }
             let data = try handle.read(upToCount: 10_000_001) ?? Data()
             guard data.count <= 10_000_000, let raw = String(data: data, encoding: .utf8) else {
-                notice = "Файл должен быть UTF-8 JSON не больше 10 МБ"
+                notice = uiText(state, "importDataSizeLimit", fallback: "Файл должен быть UTF-8 JSON не больше 10 МБ")
                 return
             }
             session.importJson(raw: raw) { [weak self] error in
@@ -364,7 +409,9 @@ final class AppModel: ObservableObject {
                         self?.lastSnapshot = ""
                         if let snapshot = self?.session.currentSnapshot() { self?.receive(snapshot) }
                     }
-                    self?.notice = error ?? "Прогресс импортирован"
+                    if let self {
+                        self.notice = error ?? uiText(self.state, "progressImported", fallback: "Прогресс импортирован")
+                    }
                 }
             }
         } catch { notice = error.localizedDescription }
@@ -439,10 +486,10 @@ struct PolskiGrammarApp: App {
     @State private var pagingEdge: Edge = .trailing
     private let tabOrder = ["Training", "Matrix", "Progress", "Vocabulary"]
     private var tabBarItems: [TabBarItem] { [
-        TabBarItem(tag: "Training", title: "Тренировка", icon: "square.stack"),
-        TabBarItem(tag: "Matrix", title: "Матрица", icon: "tablecells"),
+        TabBarItem(tag: "Training", title: uiText(model.state, "trainingTab", fallback: "Тренировка"), icon: "square.stack"),
+        TabBarItem(tag: "Matrix", title: uiText(model.state, "matrixNavTitle", fallback: "Матрица"), icon: "tablecells"),
         TabBarItem(tag: "Progress", title: uiText(model.state, "uiProgressTab", fallback: "Прогресс"), icon: "chart.bar"),
-        TabBarItem(tag: "Vocabulary", title: "Слова", icon: "character.book.closed"),
+        TabBarItem(tag: "Vocabulary", title: uiText(model.state, "vocabularyTab", fallback: "Слова"), icon: "character.book.closed"),
     ] }
 
     var body: some Scene {
@@ -451,7 +498,7 @@ struct PolskiGrammarApp: App {
                 // C1: a save failure (state.error) must stay visible above every tab, regardless
                 // of loadStatus, with the export action reachable so no reviewed progress is lost.
                 if let error = model.state["error"] as? String {
-                    ErrorBanner(message: error) { model.send("export") }
+                    ErrorBanner(copy: model.state, message: error) { model.send("export") }
                 }
                 // D4: a custom paging container, not `TabView` — `TabView` swaps tab content
                 // instantly with no transition slot, so there is no way to make old/new content
@@ -497,16 +544,16 @@ struct PolskiGrammarApp: App {
                 }
             }
             .onChange(of: model.exportEffectId) { _, id in if id != nil { exporting = true } }
-            .alert("Сбросить весь прогресс?", isPresented: Binding(
+            .alert(uiText(model.state, "resetTitle", fallback: "Сбросить весь прогресс?"), isPresented: Binding(
                 get: { model.resetEffectId != nil },
                 set: { if !$0 && model.resetEffectId != nil { model.decideReset(false) } }
             )) {
-                Button("Сбросить", role: .destructive) { model.decideReset(true) }
-                Button("Отмена", role: .cancel) { model.decideReset(false) }
-            } message: { Text("Все оценки и расписание повторений будут удалены.") }
-            .alert("Сообщение", isPresented: Binding(
+                Button(uiText(model.state, "resetConfirm", fallback: "Сбросить"), role: .destructive) { model.decideReset(true) }
+                Button(uiText(model.state, "cancel", fallback: "Отмена"), role: .cancel) { model.decideReset(false) }
+            } message: { Text(uiText(model.state, "resetWarning", fallback: "Все оценки и расписание повторений будут удалены.")) }
+            .alert(uiText(model.state, "noticeTitle", fallback: "Сообщение"), isPresented: Binding(
                 get: { model.notice != nil }, set: { if !$0 { model.notice = nil } }
-            )) { Button("ОК") { model.notice = nil } } message: { Text(model.notice ?? "") }
+            )) { Button(uiText(model.state, "ok", fallback: "ОК")) { model.notice = nil } } message: { Text(model.notice ?? "") }
             .onChange(of: scenePhase) { _, phase in
                 if phase == .active { model.send("refresh"); model.sendVocabulary("refresh") }
             }
@@ -573,40 +620,40 @@ private struct IosSettingsView: View {
     var body: some View {
         Form {
             if model.preferences.string("status") == "RecoveryRequired" {
-                Section("Восстановление") {
+                Section(uiText(model.state, "recoverySection", fallback: "Восстановление")) {
                     Text(model.preferences.string("error")).foregroundStyle(.red)
-                    Text("Экспортируйте исходные настройки перед импортом проверенной копии.")
+                    Text(uiText(model.state, "recoveryAdvice", fallback: "Экспортируйте исходные настройки перед импортом проверенной копии."))
                 }
             } else {
-                Section("Курс") {
+                Section(uiText(model.state, "courseSection", fallback: "Курс")) {
                     // EN-22: options come from `coursePacks` (every really-registered pack), not a
                     // hardcoded pl/en pair — picking a target keeps the current native unless that
                     // exact combination doesn't exist, in which case `model.setPreference` surfaces
                     // the real rejection as `notice` (see `set`'s "Неизвестная пара языков" error).
-                    Picker("Изучаемый язык", selection: Binding(
+                    Picker(uiText(model.state, "targetLanguage", fallback: "Изучаемый язык"), selection: Binding(
                         get: { model.preferences.string("target") },
                         set: { model.setPreference("target", $0) }
                     )) {
                         ForEach(coursePackValues(model.preferences, "target"), id: \.self) { code in
-                            Text(courseLanguageName(code)).tag(code)
+                            Text(courseLanguageName(code, state: model.state)).tag(code)
                         }
                     }
                     .accessibilityIdentifier("settingsTargetPicker")
-                    Picker("Родной язык", selection: Binding(
+                    Picker(uiText(model.state, "nativeLanguage", fallback: "Родной язык"), selection: Binding(
                         get: { model.preferences.string("native") },
                         set: { model.setPreference("native", $0) }
                     )) {
                         ForEach(coursePackValues(model.preferences, "native"), id: \.self) { code in
-                            Text(courseLanguageName(code)).tag(code)
+                            Text(courseLanguageName(code, state: model.state)).tag(code)
                         }
                     }
                     .accessibilityIdentifier("settingsNativePicker")
                 }
-                Section("Обучение") {
+                Section(uiText(model.state, "learningSection", fallback: "Обучение")) {
                     // UC-10/S1: 4 styles replace the old Logic/Situations selector — the picker's
                     // own selected-value row shows the label, the caption below shows its
                     // description (both prefer StyleRegistry's recipe text, see [styleOptions]).
-                    Picker("Стиль объяснений", selection: Binding(
+                    Picker(uiText(model.state, "explanationStyle", fallback: "Стиль объяснений"), selection: Binding(
                         get: { model.preferences.string("styleId") },
                         set: { model.setPreference("styleId", $0) }
                     )) {
@@ -625,53 +672,53 @@ private struct IosSettingsView: View {
                     // visible instead of surprising, using the currently focused card as the sample.
                     if model.preferences.string("styleId") == "NativeContrast"
                         && model.state.record("styleBlocks").bool("nativeContrastFallback") {
-                        Text("Для текущего навыка пока нет пары для сравнения с родным — карточка показывается как «через правило».")
+                        Text(uiText(model.state, "nativeContrastFallback", fallback: "Для текущего навыка пока нет пары для сравнения с родным — карточка показывается как «через правило»."))
                             .font(.footnote).foregroundStyle(.secondary)
                     }
-                    Picker("Ответ", selection: Binding(
+                    Picker(uiText(model.state, "answerModeTitle", fallback: "Ответ"), selection: Binding(
                         get: { model.preferences.string("answerMode") },
                         set: { model.setPreference("answerMode", $0) }
                     )) {
-                        Text("Вслух").tag("Oral")
-                        Text("Напечатать").tag("Typed")
+                        Text(uiText(model.state, "oralMode", fallback: "Вслух")).tag("Oral")
+                        Text(uiText(model.state, "typedMode", fallback: "Напечатать")).tag("Typed")
                     }
                     // Distinct from the training screen's own "Ответ" picker (FlashCardView),
                     // which stays mounted under this sheet and shares the same label — a
                     // label-based query can't tell them apart. See testAnswerModeChosenInSettingsSurvivesAppRestart.
                     .accessibilityIdentifier("settingsAnswerModePicker")
                 }
-                Section("Внешний вид") {
-                    Picker("Тема", selection: Binding(
+                Section(uiText(model.state, "appearanceSection", fallback: "Внешний вид")) {
+                    Picker(uiText(model.state, "themeTitle", fallback: "Тема"), selection: Binding(
                         get: { model.preferences.string("appearance") },
                         set: { model.setPreference("appearance", $0) }
                     )) {
-                        Text("Системная").tag("System")
-                        Text("Светлая").tag("Light")
-                        Text("Тёмная").tag("Dark")
+                        Text(uiText(model.state, "themeSystem", fallback: "Системная")).tag("System")
+                        Text(uiText(model.state, "themeLight", fallback: "Светлая")).tag("Light")
+                        Text(uiText(model.state, "themeDark", fallback: "Тёмная")).tag("Dark")
                     }
-                    Picker("Движение", selection: Binding(
+                    Picker(uiText(model.state, "motionTitle", fallback: "Движение"), selection: Binding(
                         get: { model.preferences.string("motion") },
                         set: { model.setPreference("motion", $0) }
                     )) {
-                        Text("Системное").tag("System")
-                        Text("Сокращённое").tag("Reduced")
+                        Text(uiText(model.state, "motionSystem", fallback: "Системное")).tag("System")
+                        Text(uiText(model.state, "motionReduced", fallback: "Сокращённое")).tag("Reduced")
                     }
-                    Text(reduceMotion ? "Система сокращает движение" : "Системное движение активно")
+                    Text(reduceMotion ? uiText(model.state, "motionReducedStatus", fallback: "Система сокращает движение") : uiText(model.state, "motionActiveStatus", fallback: "Системное движение активно"))
                         .font(.footnote).foregroundStyle(.secondary)
                     // D5: master switch — off means no card/tab/reveal animation and, per
                     // `cardMotionReduced`/`motionActive` above, RiveViewModel is never created.
-                    Toggle("Анимации", isOn: Binding(
+                    Toggle(uiText(model.state, "animationsTitle", fallback: "Анимации"), isOn: Binding(
                         get: { model.preferences.bool("animationsEnabled", default: true) },
                         set: { model.setPreference("animationsEnabled", $0 ? "true" : "false") }
                     ))
                 }
             }
-            Section("Данные настроек") {
-                Button("Экспортировать настройки JSON") {
+            Section(uiText(model.state, "settingsDataSection", fallback: "Данные настроек")) {
+                Button(uiText(model.state, "exportSettingsJson", fallback: "Экспортировать настройки JSON")) {
                     exportFile = model.exportPreferences()
                     exporting = exportFile != nil
                 }
-                Button("Импортировать настройки JSON") { importing = true }
+                Button(uiText(model.state, "importSettingsJson", fallback: "Импортировать настройки JSON")) { importing = true }
             }
             #if DEBUG
             // FlipCardRivePlan.md §5: a debug-only measurement toggle for variant B (native flip,
@@ -691,7 +738,7 @@ private struct IosSettingsView: View {
         }
         .navigationTitle(uiText(model.state, "uiSettingsTab", fallback: "Настройки"))
         .navigationBarTitleDisplayMode(.inline)
-        .toolbar { ToolbarItem(placement: .confirmationAction) { Button("Готово") { dismiss() } } }
+        .toolbar { ToolbarItem(placement: .confirmationAction) { Button(uiText(model.state, "done", fallback: "Готово")) { dismiss() } } }
     }
 }
 
@@ -730,35 +777,35 @@ private struct TrainingView: View {
     var body: some View {
         Form {
             Section {
-                StudyHero(due: state.int("dueCount"), today: state.int("todayCount"))
+                StudyHero(copy: state, due: state.int("dueCount"), today: state.int("todayCount"))
                     .listRowInsets(EdgeInsets())
                     .listRowBackground(Color.clear)
             }
             if state.string("loadStatus") != "Ready" {
                 Section(uiText(state, "uiProgressTab", fallback: "Прогресс")) {
-                    Text(state.string("loadStatus") == "Loading" ? "Загружаем…" : "Нужна копия прогресса")
+                    Text(state.string("loadStatus") == "Loading" ? uiText(model.state, "loading", fallback: "Загружаем…") : uiText(model.state, "needsProgressCopy", fallback: "Нужна копия прогресса"))
                     // state.error is shown by the global ErrorBanner above every tab (C1).
-                    Text("Откройте «Прогресс» для импорта или экспорта JSON.")
+                    Text(uiText(model.state, "openProgressForTransfer", fallback: "Откройте «Прогресс» для импорта или экспорта JSON."))
                 }
             } else {
                 Section {
-                    Menu("Режим: \(modeTitle)") {
-                        Button("Цепочка предложений") { model.send("chain") }
-                        Button("По расписанию") { model.send("schedule") }
-                        Button("Отдельный навык") { model.send("skillPicker") }
+                    Menu(uiFormat(state, "modeTemplate", fallback: "Режим: {mode}", values: ["mode": modeTitle])) {
+                        Button(uiText(model.state, "sentenceChain", fallback: "Цепочка предложений")) { model.send("chain") }
+                        Button(uiText(model.state, "scheduledReviews", fallback: "По расписанию")) { model.send("schedule") }
+                        Button(uiText(model.state, "singleSkill", fallback: "Отдельный навык")) { model.send("skillPicker") }
                     }
                     if state.bool("showSkillPicker") {
-                        ChoiceMenu(title: "Навык", selected: "", options: state.rows("skills")) { model.send("skill", $0) }
+                        ChoiceMenu(title: uiText(model.state, "skillTitle", fallback: "Навык"), selected: "", options: state.rows("skills")) { model.send("skill", $0) }
                     }
                     if state.string("mode") == "Chain" {
-                        ChoiceMenu(title: "Набор слов", selected: "\(state.int("seedIndex"))", options: state.rows("seeds")) { model.send("seed", $0) }
+                        ChoiceMenu(title: uiText(model.state, "wordSet", fallback: "Набор слов"), selected: "\(state.int("seedIndex"))", options: state.rows("seeds")) { model.send("seed", $0) }
                         Text("\(state.int("chainDisplayCount")) / \(state.int("chainCount")) · \(state.string("chainStepSummary"))")
                             .font(.footnote).foregroundStyle(.secondary)
                     }
                     // S1 compact quick switch — same 4 styles as Settings, same location the old
                     // Logic/Situations toggle held. Dispatches SetStyle only: never creates a
                     // review, never touches draft/frozenAnswer (TrainingStore.SetStyle, ST-04).
-                    Picker("Стиль объяснений", selection: Binding(
+                    Picker(uiText(model.state, "explanationStyle", fallback: "Стиль объяснений"), selection: Binding(
                         get: { state.string("styleId") },
                         set: { model.setPreference("styleId", $0) }
                     )) {
@@ -782,13 +829,14 @@ private struct TrainingView: View {
                         ForEach(Array(state.strings("chainAnswers").enumerated()), id: \.offset) { index, answer in
                             Text("\(index + 1). \(answer)")
                         }
-                        Button("Следующий набор слов") { model.send("seed", "\((state.int("seedIndex") + 1) % max(1, state.rows("seeds").count))") }
-                        Button("К повторениям") { model.send("schedule") }
+                        Button(uiText(model.state, "nextWordSet", fallback: "Следующий набор слов")) { model.send("seed", "\((state.int("seedIndex") + 1) % max(1, state.rows("seeds").count))") }
+                        Button(uiText(model.state, "backToReviews", fallback: "К повторениям")) { model.send("schedule") }
                     }
                 case "NoDue":
-                    Section("Повторения на сейчас завершены") {
-                        Text("Следующее: \(formattedDate(state.int64("nextDue")))")
-                        Button("Потренировать цепочку") { model.send("chain") }
+                    Section(uiText(model.state, "reviewsDone", fallback: "Повторения на сейчас завершены")) {
+                        Text(uiFormat(state, "nextDueTemplate", fallback: "Следующее: {date}",
+                            values: ["date": formattedDate(state.int64("nextDue"))]))
+                        Button(uiText(model.state, "practiceChain", fallback: "Потренировать цепочку")) { model.send("chain") }
                     }
                 default:
                     if !card.isEmpty {
@@ -811,7 +859,7 @@ private struct TrainingView: View {
                 }
                 Section {
                     let introducing = state.string("phase") == "Question" && state.bool("introPending")
-                    Button(!introducing && state.bool("showReference") ? "Скрыть таблицу" : "Таблица под рукой") {
+                    Button(!introducing && state.bool("showReference") ? uiText(model.state, "hideTable", fallback: "Скрыть таблицу") : uiText(model.state, "tableAtHand", fallback: "Таблица под рукой")) {
                         model.send("reference")
                     }
                     .disabled(introducing)
@@ -826,10 +874,10 @@ private struct TrainingView: View {
                             ForEach(Array(state.rows("referenceRows").enumerated()), id: \.offset) { _, row in
                                 VStack(alignment: .leading, spacing: 4) {
                                     Text(row.string("title")).font(.headline)
-                                    NativeContrastPairView(pair: row.record("pair"))
+                                    NativeContrastPairView(pair: row.record("pair"), copy: model.state)
                                 }
                             }
-                            Button("Все таблицы и схема") { model.send("tab", "Matrix") }
+                            Button(uiText(model.state, "allTablesAndSchema", fallback: "Все таблицы и схема")) { model.send("tab", "Matrix") }
                         }
                         .transition(.opacity.combined(with: .move(edge: .top)))
                     }
@@ -841,12 +889,12 @@ private struct TrainingView: View {
             ToolbarItemGroup(placement: .keyboard) {
                 if showsPinnedReveal {
                     Spacer()
-                    revealButton(title: "Проверить ответ", expands: false)
+                    revealButton(title: uiText(model.state, "checkAnswer", fallback: "Проверить ответ"), expands: false)
                 }
             }
         }
         .scrollDismissesKeyboard(.immediately)
-        .navigationTitle("Тренировка")
+        .navigationTitle(uiText(model.state, "trainingTab", fallback: "Тренировка"))
         .navigationBarTitleDisplayMode(.inline)
         .frame(maxWidth: 850).frame(maxWidth: .infinity)
         .onAppear { localDraft = state.string("draft") }
@@ -856,9 +904,9 @@ private struct TrainingView: View {
 
     private var modeTitle: String {
         switch state.string("mode") {
-        case "Schedule": "По расписанию"
-        case "Focused": "Отдельный навык"
-        default: "Цепочка предложений"
+        case "Schedule": uiText(model.state, "scheduledReviews", fallback: "По расписанию")
+        case "Focused": uiText(model.state, "singleSkill", fallback: "Отдельный навык")
+        default: uiText(model.state, "sentenceChain", fallback: "Цепочка предложений")
         }
     }
 
@@ -922,17 +970,18 @@ private struct TrainingView: View {
 /// `Cases`/`Verbs`/`Pronouns`/chain/system-map row below goes through it now, not a second copy.
 private struct NativeContrastPairView: View {
     let pair: Record
+    let copy: Record
 
     var body: some View {
         VStack(alignment: .leading, spacing: 3) {
-            Text("Было").font(.caption)
+            Text(uiText(copy, "before", fallback: "Было")).font(.caption)
             styledParts(pair.rows("beforeParts"), role: .before)
             Text("→").font(.caption)
-            Text("Стало").font(.caption)
+            Text(uiText(copy, "after", fallback: "Стало")).font(.caption)
             styledParts(pair.rows("afterParts"), role: .after)
         }
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel("Было: \(pair.string("from")); Стало: \(pair.string("to"))")
+        .accessibilityLabel("\(uiText(copy, "before", fallback: "Было")): \(pair.string("from")); \(uiText(copy, "after", fallback: "Стало")): \(pair.string("to"))")
     }
 }
 
@@ -955,18 +1004,19 @@ private struct MatrixView: View {
         Form {
             Section {
                 Text(matrix.string("matrixIntroduction"))
-                Picker("Раздел", selection: Binding(get: { section }, set: { newValue in
+                Picker(uiText(model.state, "matrixSection", fallback: "Раздел"), selection: Binding(get: { section }, set: { newValue in
                     if newValue == "Lifehacks" { localSection = "Lifehacks" } else {
                         localSection = nil
                         model.send("matrixSection", newValue)
                     }
                 })) {
-                    Text("Карта системы").tag("Map")
-                    Text("Падежи и окончания").tag("Cases")
-                    Text("Времена и лица").tag("Verbs")
-                    Text("Местоимения").tag("Pronouns")
+                    Text(uiText(model.state, "matrixMap", fallback: "Карта системы")).tag("Map")
+                    Text(uiText(model.state, "casesAndEndings", fallback: "Падежи и окончания")).tag("Cases")
+                    Text(uiText(model.state, "tensesAndPersons", fallback: "Времена и лица")).tag("Verbs")
+                    Text(uiText(model.state, "pronouns", fallback: "Местоимения")).tag("Pronouns")
                     Text(uiText(model.state, "uiLifehacks", fallback: "Лайфхаки")).tag("Lifehacks")
                 }
+                .accessibilityIdentifier("matrixSectionPicker")
             }
             switch section {
             case "Cases": cases
@@ -976,7 +1026,7 @@ private struct MatrixView: View {
             default: map
             }
         }
-        .navigationTitle("Матрица")
+        .navigationTitle(uiText(model.state, "matrixNavTitle", fallback: "Матрица"))
         .navigationBarTitleDisplayMode(.inline)
         .frame(maxWidth: 850).frame(maxWidth: .infinity)
     }
@@ -984,7 +1034,7 @@ private struct MatrixView: View {
     private func comparisonRow(_ row: Record, includeNote: Bool = false) -> some View {
         VStack(alignment: .leading, spacing: 6) {
             Text(row.string("label")).font(.headline)
-            NativeContrastPairView(pair: row)
+            NativeContrastPairView(pair: row, copy: model.state)
             if includeNote { Text(row.string("change")).font(.footnote) }
         }
         .accessibilityElement(children: .contain)
@@ -1005,7 +1055,7 @@ private struct MatrixView: View {
                     // reference material, not an exercise's own answer), so showing every step's
                     // "Стало" here is the emphasis contract's stated exception, not an answer leak.
                     ForEach(Array(card.rows("steps").enumerated()), id: \.offset) { step in
-                        NativeContrastPairView(pair: step.element)
+                        NativeContrastPairView(pair: step.element, copy: model.state)
                     }
                 }
                 .accessibilityElement(children: .contain)
@@ -1015,7 +1065,7 @@ private struct MatrixView: View {
             ForEach(Array(matrix.rows("chainRows").enumerated()), id: \.offset) { entry in
                 comparisonRow(entry.element, includeNote: true)
             }
-            Button("Тренировать эту цепочку") { model.send("skill", "chain") }
+            Button(uiText(model.state, "matrixTrainChain", fallback: "Тренировать эту цепочку")) { model.send("skill", "chain") }
         }
         Section("Мужской Biernik") {
             ForEach(Array(matrix.rows("maleAccRows").enumerated()), id: \.offset) { row in
@@ -1027,42 +1077,42 @@ private struct MatrixView: View {
                     Text(row.element.string("rule")).font(.footnote)
                 }
             }
-            Button("Тренировать мужской род") { model.send("skill", "case.acc.m") }
+            Button(uiText(model.state, "matrixTrainMasculine", fallback: "Тренировать мужской род")) { model.send("skill", "case.acc.m") }
         }
         Section(matrix.string("supportTitle")) {
             ForEach(Array(matrix.rows("supportRows").enumerated()), id: \.offset) { entry in
                 Text(entry.element.string("line"))
                 ForEach(Array(entry.element.rows("comparisons").enumerated()), id: \.offset) { pair in
-                    NativeContrastPairView(pair: pair.element)
+                    NativeContrastPairView(pair: pair.element, copy: model.state)
                 }
             }
         }
     }
 
     @ViewBuilder private var cases: some View {
-        Section("Выбери группу слов") {
-            ChoiceMenu(title: "Слово", selected: matrix.string("nounId"), options: matrix.rows("nouns")) { model.send("matrixNoun", $0) }
-            ChoiceMenu(title: "Прилагательное", selected: matrix.string("adjectiveId"), options: matrix.rows("adjectives")) { model.send("matrixAdjective", $0) }
-            ChoiceMenu(title: "Владелец", selected: matrix.string("ownerId"), options: matrix.rows("owners")) { model.send("matrixOwner", $0) }
-            ChoiceMenu(title: "Число", selected: matrix.string("numberId"), options: matrix.rows("numbers")) { model.send("matrixNumber", $0) }
+        Section(uiText(model.state, "matrixChooseWordGroup", fallback: "Выбери группу слов")) {
+            ChoiceMenu(title: uiText(model.state, "matrixWord", fallback: "Слово"), selected: matrix.string("nounId"), options: matrix.rows("nouns")) { model.send("matrixNoun", $0) }
+            ChoiceMenu(title: uiText(model.state, "matrixAdjective", fallback: "Прилагательное"), selected: matrix.string("adjectiveId"), options: matrix.rows("adjectives")) { model.send("matrixAdjective", $0) }
+            ChoiceMenu(title: uiText(model.state, "matrixOwner", fallback: "Владелец"), selected: matrix.string("ownerId"), options: matrix.rows("owners")) { model.send("matrixOwner", $0) }
+            ChoiceMenu(title: uiText(model.state, "matrixNumber", fallback: "Число"), selected: matrix.string("numberId"), options: matrix.rows("numbers")) { model.send("matrixNumber", $0) }
         }
         ForEach(Array(matrix.rows("cases").enumerated()), id: \.offset) { _, row in
             Section(row.string("title")) {
                 Text("\(row.string("question")) · \(row.string("trigger"))").font(.footnote).foregroundStyle(.secondary)
-                NativeContrastPairView(pair: row.record("phrasePair"))
-                NativeContrastPairView(pair: row.record("sentencePair"))
+                NativeContrastPairView(pair: row.record("phrasePair"), copy: model.state)
+                NativeContrastPairView(pair: row.record("sentencePair"), copy: model.state)
             }
         }
         Section {
             Text(matrix.string("caseNote"))
-            Button("Тренировать отрицание") { model.send("skill", "case.gen.neg") }
+            Button(uiText(model.state, "matrixTrainNegation", fallback: "Тренировать отрицание")) { model.send("skill", "case.gen.neg") }
         }
-        Section("Сравнение типов склонения") {
-            ChoiceMenu(title: "Падеж для сравнения", selected: comparisonCase, options: matrix.rows("comparisonCases")) { comparisonCase = $0 }
+        Section(uiText(model.state, "matrixDeclensionComparison", fallback: "Сравнение типов склонения")) {
+            ChoiceMenu(title: uiText(model.state, "matrixCaseComparison", fallback: "Падеж для сравнения"), selected: comparisonCase, options: matrix.rows("comparisonCases")) { comparisonCase = $0 }
             ForEach(Array(matrix.rows("comparison").enumerated()), id: \.offset) { _, row in
                 VStack(alignment: .leading) {
                     Text(row.string("title")).font(.headline)
-                    NativeContrastPairView(pair: row.record("\(comparisonCase)pair"))
+                    NativeContrastPairView(pair: row.record("\(comparisonCase)pair"), copy: model.state)
                 }
             }
         }
@@ -1070,7 +1120,7 @@ private struct MatrixView: View {
 
     @ViewBuilder private var verbs: some View {
         Section("Лицо × число × время") {
-            ChoiceMenu(title: "Глагол", selected: matrix.string("verbId"), options: matrix.rows("verbs")) { model.send("matrixVerb", $0) }
+            ChoiceMenu(title: uiText(model.state, "matrixVerb", fallback: "Глагол"), selected: matrix.string("verbId"), options: matrix.rows("verbs")) { model.send("matrixVerb", $0) }
             ChoiceMenu(title: matrix.string("verbGenderControlLabel"), selected: matrix.bool("feminineGroup") ? "f" : "m",
                        options: matrix.rows("verbGenderOptions")) { model.send("matrixGender", $0) }
             Text(matrix.string("verbFutureExplanation"))
@@ -1079,7 +1129,7 @@ private struct MatrixView: View {
             Section(row.string("title")) {
                 ForEach(["present", "past", "future"], id: \.self) { tense in
                     Text(matrix.record("verbTenseLabels").string(tense)).font(.subheadline)
-                    NativeContrastPairView(pair: row.record("\(tense)Pair"))
+                    NativeContrastPairView(pair: row.record("\(tense)Pair"), copy: model.state)
                 }
             }
         }
@@ -1096,7 +1146,7 @@ private struct MatrixView: View {
                     }
                 }
             }
-            Button("Тренировать времена") { model.send("skill", "verb.past") }
+            Button(uiText(model.state, "matrixTrainTenses", fallback: "Тренировать времена")) { model.send("skill", "verb.past") }
         }
         Section("Время меняется, предложение остаётся целым") {
             ForEach(Array(matrix.rows("tenseRows").enumerated()), id: \.offset) { entry in
@@ -1113,7 +1163,11 @@ private struct MatrixView: View {
     // `matrix.record("verbTenseLabels")` above — that map holds Polish glosses ("Teraz" etc.) for
     // pl's own tense column headers, which would be a real a11y/correctness bug on an English
     // table (the same class of bug ADR-28 fixed for `lang="pl"` on the web host).
-    private static let englishTenseLabel: [String: String] = ["present": "Настоящее", "past": "Прошедшее", "future": "Будущее"]
+    private var englishTenseLabel: [String: String] { [
+        "present": uiText(model.state, "tense.present", fallback: "Настоящее"),
+        "past": uiText(model.state, "tense.past", fallback: "Прошедшее"),
+        "future": uiText(model.state, "tense.future", fallback: "Будущее"),
+    ] }
 
     @ViewBuilder private var english: some View {
         Section("English: лицо × время (\"\(matrix.string("englishExampleLemma"))\")") {
@@ -1122,8 +1176,8 @@ private struct MatrixView: View {
         ForEach(Array(matrix.rows("englishVerbsRows").enumerated()), id: \.offset) { _, row in
             Section(row.string("title")) {
                 ForEach(["present", "past", "future"], id: \.self) { tense in
-                    Text(Self.englishTenseLabel[tense] ?? tense).font(.subheadline)
-                    NativeContrastPairView(pair: row.record("\(tense)Pair"))
+                    Text(englishTenseLabel[tense] ?? tense).font(.subheadline)
+                    NativeContrastPairView(pair: row.record("\(tense)Pair"), copy: model.state)
                 }
             }
         }
@@ -1133,10 +1187,10 @@ private struct MatrixView: View {
         ForEach(Array(matrix.rows("englishDoSupportRows").enumerated()), id: \.offset) { _, row in
             Section(row.string("title")) {
                 ForEach(["present", "past"], id: \.self) { tense in
-                    Text(Self.englishTenseLabel[tense] ?? tense).font(.subheadline)
-                    NativeContrastPairView(pair: row.record("\(tense)Pair"))
+                    Text(englishTenseLabel[tense] ?? tense).font(.subheadline)
+                    NativeContrastPairView(pair: row.record("\(tense)Pair"), copy: model.state)
                 }
-                Text(Self.englishTenseLabel["future"] ?? "future").font(.subheadline)
+                Text(englishTenseLabel["future"] ?? "future").font(.subheadline)
                 Text("не нужен — только will").font(.footnote).foregroundStyle(.secondary)
             }
         }
@@ -1148,7 +1202,7 @@ private struct MatrixView: View {
             Section(row.string("title")) {
                 ForEach(Array(matrix.rows("pronounContexts").enumerated()), id: \.offset) { _, context in
                     Text(context.string("iosCue")).font(.subheadline)
-                    NativeContrastPairView(pair: row.record("\(context.string("id"))pair"))
+                    NativeContrastPairView(pair: row.record("\(context.string("id"))pair"), copy: model.state)
                 }
             }
         }
@@ -1159,11 +1213,11 @@ private struct MatrixView: View {
                     Text(row.string("title")).font(.headline)
                     ForEach(Array(matrix.rows("possessiveCases").enumerated()), id: \.offset) { _, demoCase in
                         Text(demoCase.string("iosCaption")).font(.subheadline)
-                        NativeContrastPairView(pair: row.record("\(demoCase.string("id"))pair"))
+                        NativeContrastPairView(pair: row.record("\(demoCase.string("id"))pair"), copy: model.state)
                     }
                 }.accessibilityElement(children: .combine)
             }
-            Button("Тренировать смену владельца") { model.send("skill", "agreement.my") }
+            Button(uiText(model.state, "matrixTrainOwnerChange", fallback: "Тренировать смену владельца")) { model.send("skill", "agreement.my") }
         }
     }
 
@@ -1178,14 +1232,14 @@ private struct MatrixView: View {
         let groups = model.state.rows("lifehackGroups")
         if groups.isEmpty {
             Section(uiText(model.state, "uiLifehacks", fallback: "Лайфхаки")) {
-                Text("Для этого набора лайфхаков пока нет.").foregroundStyle(.secondary)
+                Text(uiText(model.state, "noLifehacks", fallback: "Для этого набора лайфхаков пока нет.")).foregroundStyle(.secondary)
             }
         } else {
             ForEach(Array(groups.enumerated()), id: \.offset) { groupIndex, group in
                 Section(group.string("title")) {
                     let hacks = group.rows("lifehacks")
                     ForEach(Array(hacks.enumerated()), id: \.offset) { index, hack in
-                        LifehackEntryView(hack: hack, index: index, reduceMotion: reduceMotion,
+                        LifehackEntryView(hack: hack, index: index, reduceMotion: reduceMotion, copy: model.state,
                             identifierPrefix: "matrixLifehack-\(groupIndex)")
                     }
                 }
@@ -1201,33 +1255,37 @@ private struct ProgressView: View {
 
     var body: some View {
         Form {
-            Section("Сводка") {
-                LabeledContent("Всего повторений", value: "\(state.int("totalReviews"))")
+            Section(uiText(model.state, "summary", fallback: "Сводка")) {
+                LabeledContent(uiText(model.state, "totalReviews", fallback: "Всего повторений"), value: "\(state.int("totalReviews"))")
                     .accessibilityElement(children: .combine)
                     .accessibilityIdentifier("totalReviews")
-                LabeledContent("Сегодня", value: "\(state.int("todayCount"))")
-                LabeledContent("К повторению", value: "\(state.int("dueCount"))")
-                LabeledContent("Следующее", value: formattedDate(state.int64("nextDue")))
+                LabeledContent(uiText(model.state, "todayStat", fallback: "Сегодня"), value: "\(state.int("todayCount"))")
+                LabeledContent(uiText(model.state, "dueStat", fallback: "К повторению"), value: "\(state.int("dueCount"))")
+                LabeledContent(uiText(model.state, "nextDueLabel", fallback: "Следующее"), value: formattedDate(state.int64("nextDue")))
                 // state.error is shown by the global ErrorBanner above every tab (C1).
             }
-            Section("Навыки") {
+            Section(uiText(model.state, "skills", fallback: "Навыки")) {
                 ForEach(state.rows("progress"), id: \.selfHash) { row in
                     Button {
                         model.send("skill", row.string("id"))
                     } label: {
                         VStack(alignment: .leading, spacing: 4) {
                             Text(row.string("title")).font(.headline)
-                            Text("Повторений: \(row.int("reviews")) · Точно: \(row.int("correct")) · Серия: \(row.int("streak"))")
+                            Text(uiFormat(state, "reviewsCountTemplate",
+                                fallback: "Повторений: {reviews} · Точно: {correct} · Серия: {streak}",
+                                values: ["reviews": "\(row.int("reviews"))", "correct": "\(row.int("correct"))",
+                                         "streak": "\(row.int("streak"))"]))
                                 .font(.footnote).foregroundStyle(.secondary)
-                            Text("Следующее: \(formattedDate(row.int64("due")))")
+                            Text(uiFormat(state, "nextDueTemplate", fallback: "Следующее: {date}",
+                                values: ["date": formattedDate(row.int64("due"))]))
                                 .font(.footnote).foregroundStyle(.secondary)
                         }
                     }
                 }
             }
-            Section("Данные") {
-                Button("Экспортировать JSON") { model.send("export") }
-                Button("Импортировать JSON") { importing = true }
+            Section(uiText(model.state, "dataSection", fallback: "Данные")) {
+                Button(uiText(model.state, "exportProgressJson", fallback: "Экспортировать JSON")) { model.send("export") }
+                Button(uiText(model.state, "importProgressJson", fallback: "Импортировать JSON")) { importing = true }
                 Button(uiText(model.state, "uiResetProgress", fallback: "Сбросить прогресс"), role: .destructive) { model.send("reset") }
             }
         }
@@ -1258,22 +1316,22 @@ private struct VocabularyView: View {
             if let error = state["error"] as? String {
                 Section { Text(error).foregroundStyle(.red) }
             }
-            Section("Данные словаря") {
-                Button("Импортировать словарь JSON") { importing = true }
-                Button("Экспортировать словарь JSON") {
+            Section(uiText(model.state, "vocabularyData", fallback: "Данные словаря")) {
+                Button(uiText(model.state, "importVocabularyJson", fallback: "Импортировать словарь JSON")) { importing = true }
+                Button(uiText(model.state, "exportVocabularyJson", fallback: "Экспортировать словарь JSON")) {
                     exportFile = model.exportVocabulary()
                     exporting = exportFile != nil
                 }
                 .disabled(state.string("loadStatus") == "Loading")
             }
             if state.string("loadStatus") != "Ready" {
-                Section("Состояние") {
+                Section(uiText(model.state, "statusSection", fallback: "Состояние")) {
                     Text(state.string("loadStatus") == "RecoveryRequired"
-                         ? "Экспортируйте исходный JSON и импортируйте исправленный словарь."
-                         : "Словарь пока недоступен")
+                         ? uiText(model.state, "vocabularyRecoveryAdvice", fallback: "Экспортируйте исходный JSON и импортируйте исправленный словарь.")
+                         : uiText(model.state, "vocabularyUnavailable", fallback: "Словарь пока недоступен"))
                 }
             } else {
-                Section("Направление") {
+                Section(uiText(model.state, "directionSection", fallback: "Направление")) {
                     // EnRuAcceptance-2026-09-28.md §7 item 4: was a hardcoded `"ru-pl"/"pl-ru"`
                     // pair. Tags/labels read `state`'s own `target`/`native` (this bridge's own
                     // snapshot, `IosVocabularySession`'s — see its own comment), never
@@ -1282,19 +1340,19 @@ private struct VocabularyView: View {
                     // reflects, which would tag a segment with a pair `state.string("direction")`
                     // never actually carries — reproduced live, both segments then show unselected.
                     // pl-ru keeps the exact same 2 tags/labels it always had.
-                    Picker("Учить", selection: Binding(
+                    Picker(uiText(model.state, "studyDirection", fallback: "Учить"), selection: Binding(
                         get: { state.string("direction") },
                         set: { model.sendVocabulary("direction", $0) }
                     )) {
                         let target = state.string("target"), native = state.string("native")
-                        Text(courseDirectionLabel(from: native, to: target)).tag("\(native)-\(target)")
-                        Text(courseDirectionLabel(from: target, to: native)).tag("\(target)-\(native)")
+                        Text(courseDirectionLabel(from: native, to: target, state: model.state)).tag("\(native)-\(target)")
+                        Text(courseDirectionLabel(from: target, to: native, state: model.state)).tag("\(target)-\(native)")
                     }
                     .pickerStyle(.segmented)
                 }
-                Section("Карточка") {
+                Section(uiText(model.state, "vocabularyCard", fallback: "Карточка")) {
                     if state.string("currentId").isEmpty {
-                        Text(state.int("selectedCount") == 0 ? "Выберите слова для тренировки" : "На сейчас всё повторено")
+                        Text(state.int("selectedCount") == 0 ? uiText(model.state, "selectWords", fallback: "Выберите слова для тренировки") : uiText(model.state, "allReviewed", fallback: "На сейчас всё повторено"))
                     } else {
                         ZStack {
                             VocabularyCardView(model: model, state: state, card: state.record("current"),
@@ -1305,14 +1363,17 @@ private struct VocabularyView: View {
                         .listRowBackground(Color.clear)
                     }
                 }
-                Section("Мой словарь · \(state.int("selectedCount"))") {
-                    Picker("Подборка", selection: Binding(
+                Section(uiFormat(model.state, "myVocabularyTemplate", fallback: "Мой словарь · {count}",
+                    values: ["count": "\(state.int("selectedCount"))"])) {
+                    Picker(uiText(model.state, "vocabularyFilter", fallback: "Подборка"), selection: Binding(
                         get: { state.string("filter") },
                         set: { model.sendVocabulary("filter", $0) }
                     )) {
                         Text("A1").tag("A1"); Text("A2").tag("A2"); Text("B1").tag("B1")
-                        Text("Топ 100").tag("100"); Text("Топ 500").tag("500")
-                        Text("Топ 1000").tag("1000"); Text("Мои слова").tag("mine")
+                        Text(uiText(model.state, "vocabularyTop100", fallback: "Топ 100")).tag("100")
+                        Text(uiText(model.state, "vocabularyTop500", fallback: "Топ 500")).tag("500")
+                        Text(uiText(model.state, "vocabularyTop1000", fallback: "Топ 1000")).tag("1000")
+                        Text(uiText(model.state, "myWords", fallback: "Мои слова")).tag("mine")
                     }
                     Text(state.string("instructions"))
                         .font(.footnote).foregroundStyle(.secondary)
@@ -1323,7 +1384,7 @@ private struct VocabularyView: View {
                     Link("Leksjo / NKJP · CC BY 4.0 · изменения: первые 1000 лемм, рангов и counts",
                          destination: URL(string: "https://github.com/KubaCiolo/leksjo-dane/blob/01782aa92cc842d0d3199079eba47ecbf05879e1/dane/nkjp-frekwencja.csv")!)
                         .font(.footnote)
-                    Button("Добавить своё слово") { editing = [:] }
+                    Button(uiText(model.state, "addOwnWord", fallback: "Добавить своё слово")) { editing = [:] }
                     ForEach(Array(state.rows("entries").enumerated()), id: \.offset) { _, entry in
                         HStack {
                             Button {
@@ -1334,7 +1395,7 @@ private struct VocabularyView: View {
                                     .contentShape(Rectangle())
                             }
                             .disabled(!entry.bool("available") || state.bool("busy"))
-                            .accessibilityLabel("\(entry.bool("selected") ? "Убрать" : "Добавить") \(entry.string("lemma"))")
+                            .accessibilityLabel("\(entry.bool("selected") ? uiText(model.state, "remove", fallback: "Убрать") : uiText(model.state, "add", fallback: "Добавить")) \(entry.string("lemma"))")
                             .accessibilityIdentifier("vocabularySelect-\(entry.string("id"))")
                             VStack(alignment: .leading) {
                                 Text(entry.string("lemma"))
@@ -1343,7 +1404,7 @@ private struct VocabularyView: View {
                             }
                             Spacer()
                             if entry.bool("custom") {
-                                Button("Изменить") { editing = entry }
+                                Button(uiText(model.state, "edit", fallback: "Изменить")) { editing = entry }
                                     .font(.caption)
                             }
                         }
@@ -1351,7 +1412,7 @@ private struct VocabularyView: View {
                 }
             }
         }
-        .navigationTitle("Слова")
+        .navigationTitle(uiText(model.state, "vocabularyTab", fallback: "Слова"))
         .navigationBarTitleDisplayMode(.inline)
         .sheet(item: Binding(
             get: { editing.map(VocabularyEdit.init) },
@@ -1360,15 +1421,15 @@ private struct VocabularyView: View {
             VocabularyEditor(model: model, initial: item.word, onClose: { editing = nil },
                 onDelete: { deletingId = $0; editing = nil })
         }
-        .alert("Удалить своё слово?", isPresented: Binding(
+        .alert(uiText(model.state, "deleteWordTitle", fallback: "Удалить своё слово?"), isPresented: Binding(
             get: { deletingId != nil }, set: { if !$0 { deletingId = nil } }
         )) {
-            Button("Удалить", role: .destructive) {
+            Button(uiText(model.state, "delete", fallback: "Удалить"), role: .destructive) {
                 if let id = deletingId { model.sendVocabulary("delete", id) }
                 deletingId = nil
             }
-            Button("Отмена", role: .cancel) { deletingId = nil }
-        } message: { Text("Слово исчезнет из каталога, история оценок сохранится в JSON.") }
+            Button(uiText(model.state, "cancel", fallback: "Отмена"), role: .cancel) { deletingId = nil }
+        } message: { Text(uiText(model.state, "deleteWordWarning", fallback: "Слово исчезнет из каталога, история оценок сохранится в JSON.")) }
     }
 }
 
@@ -1392,23 +1453,23 @@ private struct VocabularyEditor: View {
         NavigationStack {
             Form {
                 Section {
-                    TextField("Польское слово", text: $lemma)
-                    TextField("Перевод", text: $translation)
-                    TextField("Форма", text: $form)
-                    TextField("Пример в предложении", text: $example)
-                    Picker("Уровень", selection: $level) {
+                    TextField(uiText(model.state, "polishWord", fallback: "Польское слово"), text: $lemma)
+                    TextField(uiText(model.state, "translation", fallback: "Перевод"), text: $translation)
+                    TextField(uiText(model.state, "form", fallback: "Форма"), text: $form)
+                    TextField(uiText(model.state, "exampleSentence", fallback: "Пример в предложении"), text: $example)
+                    Picker(uiText(model.state, "level", fallback: "Уровень"), selection: $level) {
                         ForEach(["—", "A1", "A2", "B1", "B2", "C1", "C2"], id: \.self) { Text($0).tag($0) }
                     }
                     if !initial.string("id").isEmpty {
-                        Button("Удалить слово", role: .destructive) { onDelete(initial.string("id")) }
+                        Button(uiText(model.state, "deleteWord", fallback: "Удалить слово"), role: .destructive) { onDelete(initial.string("id")) }
                     }
                 }
             }
-            .navigationTitle(initial.string("id").isEmpty ? "Новое слово" : "Изменить слово")
+            .navigationTitle(initial.string("id").isEmpty ? uiText(model.state, "newWord", fallback: "Новое слово") : uiText(model.state, "editWord", fallback: "Изменить слово"))
             .toolbar {
-                ToolbarItem(placement: .cancellationAction) { Button("Отмена", action: onClose) }
+                ToolbarItem(placement: .cancellationAction) { Button(uiText(model.state, "cancel", fallback: "Отмена"), action: onClose) }
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Сохранить") {
+                    Button(uiText(model.state, "save", fallback: "Сохранить")) {
                         model.saveVocabularyWord(["lemma": lemma, "translation": translation,
                             "form": form, "example": example, "level": level],
                             editingId: initial.string("id").isEmpty ? nil : initial.string("id")) { saved in
