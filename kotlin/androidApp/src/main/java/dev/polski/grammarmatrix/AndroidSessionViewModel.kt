@@ -76,7 +76,7 @@ class AndroidSessionViewModel(context: Context) : ViewModel() {
         private set
     var store by mutableStateOf(newStore())
         private set
-    var pendingExport: UiEffect.DownloadJson? = null
+    var pendingExport: UiEffect? = null
         private set
 
     init {
@@ -212,7 +212,7 @@ class AndroidSessionViewModel(context: Context) : ViewModel() {
 
     fun claimEffect(id: Long): Boolean = startedEffectIds.add(id)
 
-    fun prepareExport(effect: UiEffect.DownloadJson) { pendingExport = effect }
+    fun prepareExport(effect: UiEffect) { pendingExport = effect }
 
     fun finishExport(uri: Uri?) {
         val effect = pendingExport ?: return
@@ -226,7 +226,12 @@ class AndroidSessionViewModel(context: Context) : ViewModel() {
                 withContext(Dispatchers.IO) {
                     val stream = appContext.contentResolver.openOutputStream(uri, "wt")
                         ?: error("Не удалось открыть файл для экспорта")
-                    stream.use { it.write(effect.json.toByteArray(Charsets.UTF_8)) }
+                    val content = when (effect) {
+                        is UiEffect.DownloadJson -> effect.json
+                        is UiEffect.DownloadText -> effect.text
+                        else -> error("unexpected effect type")
+                    }
+                    stream.use { it.write(content.toByteArray(Charsets.UTF_8)) }
                 }
                 store.dispatch(AppAction.EffectAcknowledged(effect.id, EffectOutcome.Completed))
                 notice = "Прогресс экспортирован"

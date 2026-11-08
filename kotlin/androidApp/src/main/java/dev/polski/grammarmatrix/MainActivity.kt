@@ -171,7 +171,12 @@ class MainActivity : ComponentActivity() {
                     AndroidScreen(session,
                         onImport = { importPicker.launch("application/json") }, onExport = { effect ->
                         session.prepareExport(effect)
-                        exportPicker.launch(effect.filename)
+                        val filename = when (effect) {
+                            is UiEffect.DownloadJson -> effect.filename
+                            is UiEffect.DownloadText -> effect.filename
+                            else -> "export"
+                        }
+                        exportPicker.launch(filename)
                     }, onVocabularyImport = { vocabularyImportPicker.launch("application/json") },
                         onVocabularyExport = { vocabularyExportPicker.launch("vocabulary-v1.json") })
                 }
@@ -185,7 +190,7 @@ class MainActivity : ComponentActivity() {
 private fun AndroidScreen(
     session: AndroidSessionViewModel,
     onImport: () -> Unit,
-    onExport: (UiEffect.DownloadJson) -> Unit,
+    onExport: (UiEffect) -> Unit,
     onVocabularyImport: () -> Unit,
     onVocabularyExport: () -> Unit,
 ) {
@@ -216,6 +221,7 @@ private fun AndroidScreen(
                     } else store.dispatch(AppAction.EffectAcknowledged(effect.id, EffectOutcome.Skipped))
                 }
                 is UiEffect.DownloadJson -> onExport(effect)
+                is UiEffect.DownloadText -> onExport(effect)
                 is UiEffect.ConfirmReset -> Unit
             }
         }
