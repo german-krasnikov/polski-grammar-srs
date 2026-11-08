@@ -7,7 +7,7 @@ import org.w3c.dom.HTMLElement
 import org.w3c.dom.HTMLInputElement
 import polski.exam.QuestionType
 
-internal data class ListeningTask(val id: String, val instruction: String, val questions: List<ListeningQ>)
+internal data class ListeningTask(val id: String, val instruction: String, val questions: List<ListeningQ>, val startMs: Long = 0, val endMs: Long = 0)
 internal data class ListeningQ(val id: String, val type: QuestionType, val questionText: String, val options: List<String>, val correctAnswer: String)
 internal data class ListeningExam(val tasks: List<ListeningTask>, val audioUrl: String)
 
@@ -39,16 +39,27 @@ internal class ExamListeningController(examId: String, private val onBack: () ->
             })
         })
         c.appendChild(node("h3", "exam-title", task.instruction))
-        // Audio player
+        // Audio player — seek to task segment
         if (exam.audioUrl.isNotBlank()) {
             val audio = (document.createElement("audio") as HTMLAudioElement).apply {
                 src = exam.audioUrl; controls = true; className = "exam-audio-player"
                 setAttribute("preload", "metadata")
+                if (task.startMs > 0) currentTime = task.startMs / 1000.0
+                if (task.endMs > 0) addEventListener("timeupdate", {
+                    if (currentTime >= task.endMs / 1000.0) { pause(); currentTime = task.endMs / 1000.0 }
+                })
             }
             audioElement = audio
             c.appendChild(node("div", "exam-audio-wrap").apply {
                 appendChild(audio)
-                appendChild(node("p", "exam-audio-hint", "Odtwórz nagranie i odpowiedz na pytania"))
+                val hint = if (task.startMs > 0) {
+                    val startMin = (task.startMs / 60000).toInt()
+                    val startSec = ((task.startMs % 60000) / 1000).toInt()
+                    val endMin = (task.endMs / 60000).toInt()
+                    val endSec = ((task.endMs % 60000) / 1000).toInt()
+                    "Odtwórz fragment ${startMin}:${startSec.toString().padStart(2, '0')} — ${endMin}:${endSec.toString().padStart(2, '0')}"
+                } else "Odtwórz nagranie i odpowiedz na pytania"
+                appendChild(node("p", "exam-audio-hint", hint))
             })
         }
         // Questions
