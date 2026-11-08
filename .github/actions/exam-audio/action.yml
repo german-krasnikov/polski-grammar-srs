@@ -1,0 +1,21 @@
+name: Restore verified exam audio
+description: Restore the owner-approved six-paper audio archive and verify each DSL-pinned MP3.
+runs:
+  using: composite
+  steps:
+    - name: Download pinned audio archive
+      shell: bash
+      working-directory: ${{ github.workspace }}
+      env:
+        GH_TOKEN: ${{ github.token }}
+        GH_REPO: ${{ github.repository }}
+      run: |
+        mkdir -p "$RUNNER_TEMP/exam-audio-release"
+        gh release download exam-audio-v1 --pattern polski-exam-audio-v1.tar --dir "$RUNNER_TEMP/exam-audio-release" --clobber
+        cd "$RUNNER_TEMP/exam-audio-release"
+        echo '1ef043108d29dd238e92edc8aa61736f1c343f170f352674324a8d34f0c5e829  polski-exam-audio-v1.tar' | sha256sum --check
+        tar -xf polski-exam-audio-v1.tar -C "$GITHUB_WORKSPACE"
+    - name: Verify and stage all six MP3 files
+      shell: bash
+      working-directory: ${{ github.workspace }}
+      run: npx tsx scripts/prepare-exam-audio.ts prepare --offline

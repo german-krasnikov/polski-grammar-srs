@@ -89,6 +89,7 @@ export async function runExamPlaytest(page: Page, sourceFile: string) {
         'writing.reviewCount': document.querySelectorAll('.exam-writing-review').length,
         'writing.reviewDrafts': [...document.querySelectorAll('.exam-writing-draft')].map(node => node.textContent).join('|'),
         'writing.manualAssessment': document.querySelector('.exam-writing-done')?.textContent ?? '',
+        'writing.manualPoints': (document.querySelector('.exam-writing-manual')?.textContent?.match(/\d+(?:[.,]\d+)?/g) ?? []).join('|'),
         'writing.autoScoreVisible': !!document.querySelector('.exam-score'),
         'media.playing': !!audio && !audio.paused,
         'media.position': audio?.currentTime ?? 0,
@@ -97,6 +98,11 @@ export async function runExamPlaytest(page: Page, sourceFile: string) {
         'media.taskLabel': document.querySelector('.exam-progress-text')?.textContent ?? '',
         'media.selected': selected?.textContent ?? '',
         'media.unavailable': !!audio?.error && !!document.querySelector<HTMLButtonElement>('.player-play-btn')?.disabled,
+        'timed.position': Number(document.querySelector('.exam-progress')?.textContent?.match(/Часть (\d+) \/ 4/)?.[1] ?? 0),
+        'timed.clockVisible': !!document.querySelector('.exam-timed-clock')?.textContent,
+        'timed.completed': document.querySelector('.exam-title')?.textContent === 'Экзамен завершён',
+        'timed.summary': document.querySelector('.exam-score')?.textContent ?? '',
+        'timed.percentVisible': !!document.querySelector('.exam-score-big'),
       };
     });
     snapshot['media.notRewound'] = Number(snapshot['media.position']) >= rememberedPosition;
@@ -136,6 +142,20 @@ export async function runExamPlaytest(page: Page, sourceFile: string) {
     if (!title) throw new Error(`Unknown exam module: ${String(args.module)}`);
     await page.locator('.exam-module-card').filter({ hasText: title }).getByRole('button', { name: 'Начать' }).click();
     audioHandle = await page.locator('audio').elementHandle({ timeout: 500 }).catch(() => null);
+  });
+  action('openTimed', string('exam'), async args => {
+    await page.goto('/#/exam');
+    await expect(page.locator('.exam-list')).toBeVisible();
+    await page.locator('.exam-card').filter({ hasText: String(args.exam) }).getByRole('button', { name: 'Начать' }).click();
+    await page.getByRole('button', { name: 'Полный экзамен по времени' }).click();
+    audioHandle = await page.locator('audio').elementHandle({ timeout: 500 }).catch(() => null);
+  });
+  action('finishTimedPart', [], async () => {
+    const part = page.locator('.exam-timed-part');
+    for (let i = 0; i < 100 && await part.locator('.exam-nav .exam-nav-btn.primary').count() === 0; i++) {
+      await part.getByRole('button', { name: 'Далее →' }).click();
+    }
+    await part.locator('.exam-nav .exam-nav-btn.primary').click();
   });
   action('advance', [{ name: 'count', type: 'number' }], async args => {
     for (let i = 0; i < Number(args.count); i++) await button('Далее →');
@@ -336,9 +356,12 @@ export async function runExamPlaytest(page: Page, sourceFile: string) {
     'writing.prompt': 'string', 'writing.draft': 'string', 'writing.reviewCount': 'number',
     'writing.promptOpening': 'string',
     'writing.reviewDrafts': 'string', 'writing.manualAssessment': 'string', 'writing.autoScoreVisible': 'bool',
+    'writing.manualPoints': 'string',
     'media.playing': 'bool', 'media.position': 'number', 'media.elapsed': 'number',
     'media.durationLabel': 'string', 'media.taskLabel': 'string', 'media.selected': 'string',
     'media.notRewound': 'bool', 'media.closed': 'bool', 'media.unavailable': 'bool',
+    'timed.position': 'number', 'timed.clockVisible': 'bool', 'timed.completed': 'bool',
+    'timed.summary': 'string', 'timed.percentVisible': 'bool',
   })) registry.registerQuery(id, { id, resultType });
 
   const source = readFileSync(sourceFile, 'utf8');
@@ -352,7 +375,7 @@ export async function runExamPlaytest(page: Page, sourceFile: string) {
     resolveQuery: (path: string[]) => snapshot[path.join('.')],
     async nextBoundary() { await refresh(); },
     dispose() {},
-  }, { wallTimeoutMs: 65_000 });
+  }, { wallTimeoutMs: 120_000 });
   expect(receipt.verdict, JSON.stringify(receipt)).toBe('PASSED');
   expect(receipt.receipts).toHaveLength(1);
   return receipt;

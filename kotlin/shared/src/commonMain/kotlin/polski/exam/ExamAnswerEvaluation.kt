@@ -1,5 +1,7 @@
 package polski.exam
 
+import polski.exam.policy.Policy
+import polski.exam.policy.data.ANSWER_POLICY_OUTCOME_ROW_ROWS
 import polski.grammar.normalize
 
 enum class ExamGradingMode(val tag: String) {
@@ -50,16 +52,29 @@ fun evaluateExamAnswer(
         "Answer variants must have nonblank text and a score within the maximum"
     }
     val normalized = normalize(answer)
-    if (normalized == normalize(fullAnswer)) return ExamAnswerEvaluation(ExamAnswerStatus.ConfirmedFull, maximumQuarter, 0)
-    val variant = variants.firstOrNull { normalize(it.answer) == normalized }
-    if (variant != null) {
-        val status = if (variant.earnedQuarter == maximumQuarter) ExamAnswerStatus.ConfirmedFull else ExamAnswerStatus.ConfirmedPartial
-        return ExamAnswerEvaluation(status, variant.earnedQuarter, 0)
+    val matchesCanonical = normalized == normalize(fullAnswer)
+    val variantQuarter = variants.firstOrNull { normalize(it.answer) == normalized }?.earnedQuarter ?: 0
+    val disposition = Policy.disposition(
+        Policy.DispositionInput(
+            answerNonblank = normalized.isNotBlank(),
+            matchesCanonical = matchesCanonical,
+            maximumQuarter = maximumQuarter.toDouble(),
+            openManual = mode == ExamGradingMode.OpenManual,
+            variantQuarter = variantQuarter.toDouble(),
+        ),
+    )
+    val outcome = ANSWER_POLICY_OUTCOME_ROW_ROWS.single { it.disposition == disposition }
+    fun quarterFrom(source: String): Int = when (source) {
+        "maximum" -> maximumQuarter
+        "variant" -> variantQuarter
+        "zero" -> 0
+        else -> error("Unknown exam answer credit source: $source")
     }
-    if (normalized.isNotBlank() && mode == ExamGradingMode.OpenManual) {
-        return ExamAnswerEvaluation(ExamAnswerStatus.PendingManual, 0, maximumQuarter)
-    }
-    return ExamAnswerEvaluation(ExamAnswerStatus.Wrong, 0, 0)
+    return ExamAnswerEvaluation(
+        status = ExamAnswerStatus.entries.first { it.tag == outcome.status.tag },
+        confirmedQuarter = quarterFrom(outcome.confirmedSource.tag),
+        pendingQuarter = quarterFrom(outcome.pendingSource.tag),
+    )
 }
 
 /** Evaluates a set answer; member order has no meaning. */

@@ -2,6 +2,161 @@ import XCTest
 import UIKit
 
 final class PolskiGrammarUITests: XCTestCase {
+    func testOfficialB12017GrammarUsesSharedNativeExam() {
+        let app = XCUIApplication()
+        app.launch()
+        let exam = app.buttons["Экзамен"]
+        XCTAssertTrue(exam.waitForExistence(timeout: 10), app.debugDescription)
+        exam.tap()
+        let paper = app.buttons["exam-b1-2017"]
+        XCTAssertTrue(paper.waitForExistence(timeout: 5), app.debugDescription)
+        paper.tap()
+        XCTAssertTrue(app.staticTexts["Пока недоступно на iPad"].exists, app.debugDescription)
+        app.buttons["exam-module-grammar"].tap()
+        XCTAssertTrue(app.staticTexts["dumni są z ___"].waitForExistence(timeout: 5), app.debugDescription)
+        app.buttons["exam-option-dobrego teatru"].tap()
+        app.buttons["exam-next"].tap()
+        XCTAssertTrue(app.staticTexts["w którym ___ odbywa się festiwal"].waitForExistence(timeout: 5), app.debugDescription)
+        app.buttons["Матрица"].tap()
+        app.buttons["Экзамен"].tap()
+        XCTAssertTrue(app.staticTexts["w którym ___ odbywa się festiwal"].waitForExistence(timeout: 5), app.debugDescription)
+        app.buttons["exam-previous"].tap()
+        XCTAssertTrue(app.buttons["exam-option-dobrego teatru"].isSelected, app.debugDescription)
+        for _ in 0..<60 {
+            if app.buttons["exam-submit"].exists { break }
+            app.buttons["exam-next"].tap()
+        }
+        let submit = app.buttons["exam-submit"]
+        XCTAssertTrue(submit.exists, app.debugDescription)
+        submit.tap()
+        XCTAssertTrue(app.staticTexts["Результаты"].waitForExistence(timeout: 5), app.debugDescription)
+        XCTAssertTrue(app.staticTexts["Подтверждено, 0,5 / 30"].exists, app.debugDescription)
+    }
+
+    func testNativeExamTypedPolishDraftSurvivesTabReturn() {
+        let app = XCUIApplication()
+        app.launch()
+        app.buttons["Экзамен"].tap()
+        app.buttons["exam-b1-2017"].tap()
+        app.buttons["exam-module-grammar"].tap()
+        let draft = app.textFields["exam-grammar-answer"]
+        for _ in 0..<50 {
+            if draft.exists { break }
+            app.buttons["exam-next"].tap()
+        }
+        XCTAssertTrue(draft.waitForExistence(timeout: 5), app.debugDescription)
+        draft.tap()
+        draft.typeText("żółć")
+        XCTAssertEqual(draft.value as? String, "żółć", app.debugDescription)
+        let sourceContext = app.staticTexts["exam-context"].label
+        let sourceInstruction = app.staticTexts["exam-instruction"].label
+        app.buttons["Матрица"].tap()
+        let matrixSelected = XCTNSPredicateExpectation(
+            predicate: NSPredicate(format: "selected == true"), object: app.buttons["Матрица"])
+        XCTAssertEqual(XCTWaiter.wait(for: [matrixSelected], timeout: 5), .completed, app.debugDescription)
+        XCTAssertTrue(app.navigationBars["Матрица"].waitForExistence(timeout: 5), app.debugDescription)
+        let examContentGone = XCTNSPredicateExpectation(
+            predicate: NSPredicate(format: "exists == false"), object: app.staticTexts["exam-context"])
+        XCTAssertEqual(XCTWaiter.wait(for: [examContentGone], timeout: 5), .completed, app.debugDescription)
+        app.buttons["Экзамен"].tap()
+        let examSelected = XCTNSPredicateExpectation(
+            predicate: NSPredicate(format: "selected == true"), object: app.buttons["Экзамен"])
+        XCTAssertEqual(XCTWaiter.wait(for: [examSelected], timeout: 5), .completed, app.debugDescription)
+        XCTAssertEqual(app.staticTexts["exam-context"].label, sourceContext, app.debugDescription)
+        XCTAssertEqual(app.staticTexts["exam-instruction"].label, sourceInstruction, app.debugDescription)
+        XCTAssertTrue(draft.waitForExistence(timeout: 5), app.debugDescription)
+        XCTAssertEqual(draft.value as? String, "żółć", app.debugDescription)
+    }
+
+    func testPackCopyUpdatesNativeControlsAfterCourseSwitch() {
+        let app = XCUIApplication()
+        app.launch()
+        if app.buttons["Training"].exists {
+            app.buttons["openSettings"].tap()
+            let currentTarget = app.descendants(matching: .any)["settingsTargetPicker"].firstMatch
+            currentTarget.tap()
+            app.buttons["Польский"].tap()
+            app.buttons["Done"].tap()
+            app.terminate()
+            app.launch()
+        }
+        XCTAssertTrue(app.buttons["Тренировка"].waitForExistence(timeout: 20), app.debugDescription)
+        XCTAssertTrue(app.buttons["Матрица"].exists)
+        app.buttons["Прогресс"].firstMatch.tap()
+        let reset = app.buttons["Сбросить прогресс"]
+        for _ in 0..<8 { if reset.isHittable { break }; app.swipeUp() }
+        reset.tap()
+        XCTAssertTrue(app.alerts["Сбросить весь прогресс?"].waitForExistence(timeout: 5))
+        app.alerts["Сбросить весь прогресс?"].buttons["Отмена"].tap()
+
+        app.buttons["openSettings"].tap()
+        let target = app.descendants(matching: .any)["settingsTargetPicker"].firstMatch
+        target.tap()
+        app.buttons["Английский"].tap()
+        app.buttons["Готово"].tap()
+        app.terminate()
+        app.launch()
+        XCTAssertTrue(app.buttons["Training"].waitForExistence(timeout: 20), app.debugDescription)
+        XCTAssertTrue(app.buttons["Matrix"].exists)
+        XCTAssertTrue(app.buttons["Vocabulary"].exists)
+        app.buttons["Matrix"].firstMatch.tap()
+        let matrixSection = app.descendants(matching: .any)["matrixSectionPicker"].firstMatch
+        XCTAssertTrue(matrixSection.waitForExistence(timeout: 5), app.debugDescription)
+        XCTAssertTrue(app.buttons["Practice this chain"].exists)
+        matrixSection.tap()
+        app.buttons["Cases and endings"].tap()
+        XCTAssertTrue(app.staticTexts["Choose a word group"].waitForExistence(timeout: 5), app.debugDescription)
+        XCTAssertTrue(app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", "Word")).firstMatch.exists)
+        matrixSection.tap()
+        app.buttons["Tenses and persons"].tap()
+        for _ in 0..<8 {
+            if app.buttons["Practice tenses"].exists { break }
+            app.swipeUp()
+        }
+        XCTAssertTrue(app.buttons["Practice tenses"].exists, app.debugDescription)
+        matrixSection.tap()
+        app.buttons["Pronouns"].tap()
+        for _ in 0..<8 {
+            if app.buttons["Practice owner changes"].exists { break }
+            app.swipeUp()
+        }
+        XCTAssertTrue(app.buttons["Practice owner changes"].exists, app.debugDescription)
+        app.buttons["Прогресс"].firstMatch.tap()
+        XCTAssertTrue(app.staticTexts["Summary"].waitForExistence(timeout: 5), app.debugDescription)
+        app.buttons["Vocabulary"].firstMatch.tap()
+        XCTAssertTrue(app.staticTexts["Vocabulary data"].waitForExistence(timeout: 5), app.debugDescription)
+        let vocabularyFilter = app.buttons.matching(NSPredicate(format: "label CONTAINS %@", "Selection")).firstMatch
+        for _ in 0..<8 { if vocabularyFilter.isHittable { break }; app.swipeDown() }
+        XCTAssertTrue(vocabularyFilter.isHittable, app.debugDescription)
+        vocabularyFilter.tap()
+        let top100 = app.descendants(matching: .any).matching(NSPredicate(format: "label == %@", "Top 100")).firstMatch
+        XCTAssertTrue(top100.waitForExistence(timeout: 5), app.debugDescription)
+        top100.tap()
+        app.buttons["Training"].firstMatch.tap()
+        XCTAssertTrue(app.staticTexts["Source sentence"].waitForExistence(timeout: 10), app.debugDescription)
+        let introduction = app.buttons["continueIntroduction"]
+        if introduction.exists {
+            for _ in 0..<7 { if introduction.isHittable { break }; app.swipeUp() }
+            introduction.tap()
+        }
+        let reveal = app.buttons["revealAnswer"]
+        for _ in 0..<7 { if reveal.isHittable { break }; app.swipeUp() }
+        XCTAssertTrue(reveal.isHittable, app.debugDescription)
+        reveal.tap()
+        XCTAssertTrue(app.staticTexts["Model answer"].waitForExistence(timeout: 5), app.debugDescription)
+        app.buttons["openSettings"].tap()
+        XCTAssertTrue(app.staticTexts["Course"].waitForExistence(timeout: 5))
+        let answer = app.descendants(matching: .any)["settingsAnswerModePicker"].firstMatch
+        for _ in 0..<7 { if answer.isHittable { break }; app.swipeUp() }
+        XCTAssertTrue(answer.label.contains("Answer"), answer.label)
+        target.tap()
+        app.buttons["Польский"].tap()
+        app.buttons["Done"].tap()
+        app.terminate()
+        app.launch()
+        XCTAssertTrue(app.buttons["Тренировка"].waitForExistence(timeout: 20), app.debugDescription)
+    }
+
     func testNativeAppearanceSettingsKeepsTrainingCard() {
         let app = XCUIApplication()
         app.launch()
@@ -70,7 +225,7 @@ final class PolskiGrammarUITests: XCTestCase {
         app.launch()
         XCTAssertFalse(app.staticTexts["To jest moja piękna żona."].waitForExistence(timeout: 5),
             "en-ru now builds for real (ADR-39) — must not silently stay on the old pl-ru sentence")
-        XCTAssertFalse(app.alerts["Сообщение"].waitForExistence(timeout: 2),
+        XCTAssertFalse(app.alerts["Notice"].waitForExistence(timeout: 2),
             "en-ru must not roll back — no self-correction notice is expected")
         continueIntroductionIfPresent(app)
         // A real English sentence, not a mock: purely-Latin card text (no Cyrillic/Polish
@@ -101,7 +256,8 @@ final class PolskiGrammarUITests: XCTestCase {
         XCTAssertTrue(app.buttons["Польский"].waitForExistence(timeout: 5), app.debugDescription)
         app.buttons["Польский"].tap()
         XCTAssertTrue(targetPickerAfterRelaunch.label.contains("Польский"), targetPickerAfterRelaunch.label)
-        app.buttons["Готово"].tap()
+        XCTAssertTrue(app.buttons["Done"].exists, app.debugDescription)
+        app.buttons["Done"].tap()
     }
 
     /// D5: the "Анимации" master switch defaults on and persists off across a relaunch, via the
@@ -380,7 +536,7 @@ final class PolskiGrammarUITests: XCTestCase {
     }
 
     private func continueIntroductionIfPresent(_ app: XCUIApplication) {
-        let next = app.buttons["Перейти к заданию"]
+        let next = app.buttons["continueIntroduction"]
         for _ in 0..<7 {
             if !next.exists || next.isHittable { break }
             app.swipeUp()
@@ -1108,6 +1264,30 @@ final class PolskiGrammarUITests: XCTestCase {
         app.launch()
         app.buttons["Слова"].firstMatch.tap()
         XCTAssertTrue(app.staticTexts["Мой словарь · 1"].waitForExistence(timeout: 10))
+    }
+
+    func testTypedVocabularyAnswerKeepsLiteralBracesOnReveal() {
+        let app = XCUIApplication()
+        app.launch()
+        app.buttons["Слова"].firstMatch.tap()
+        let select = app.buttons["vocabularySelect-noun.wife"]
+        for _ in 0..<8 { if select.isHittable { break }; app.swipeUp() }
+        XCTAssertTrue(select.isHittable, app.debugDescription)
+        if select.label.hasPrefix("Добавить") { select.tap() }
+        let typed = app.switches["Напечатать ответ"]
+        for _ in 0..<8 { if typed.isHittable { break }; app.swipeDown() }
+        XCTAssertTrue(typed.isHittable, app.debugDescription)
+        if typed.value as? String != "1" {
+            typed.coordinate(withNormalizedOffset: CGVector(dx: 0.92, dy: 0.5)).tap()
+        }
+        XCTAssertEqual(typed.value as? String, "1", app.debugDescription)
+        let draft = app.textFields["vocabularyDraft"]
+        XCTAssertTrue(draft.waitForExistence(timeout: 5), app.debugDescription)
+        draft.tap()
+        draft.typeText("{answer}")
+        XCTAssertEqual(draft.value as? String, "{answer}", app.debugDescription)
+        app.buttons["vocabularyCheck"].tap()
+        XCTAssertTrue(app.staticTexts["Твой ответ: {answer}. Сравни сам и выбери оценку."].waitForExistence(timeout: 5), app.debugDescription)
     }
 
     func testBinaryRatingSwipesAdvanceOnceInEachDirection() {

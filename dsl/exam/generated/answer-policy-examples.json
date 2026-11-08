@@ -1,0 +1,15 @@
+{
+  "generated": "from answer-policy.examples by npm run logic -- examples; do not edit",
+  "provenance": "Hand-authored from certified exam answer scoring: canonical beats variants; known alternatives earn their documented quarters; unknown nonblank open answers await review; blank and unknown exact answers earn zero. Quarter units are 0.25 point. The outcome map in answer-policy-outcomes.core-data resolves each disposition to public status and credit source.",
+  "disposition": [
+    { "id": "canonical", "facts": { "matchesCanonical": true, "variantQuarter": 0, "maximumQuarter": 4, "answerNonblank": true, "openManual": false }, "expected": "canonical" },
+    { "id": "canonical-over-variant", "facts": { "matchesCanonical": true, "variantQuarter": 1, "maximumQuarter": 4, "answerNonblank": true, "openManual": true }, "expected": "canonical" },
+    { "id": "full-variant", "facts": { "matchesCanonical": false, "variantQuarter": 4, "maximumQuarter": 4, "answerNonblank": true, "openManual": false }, "expected": "full_variant" },
+    { "id": "quarter-variant", "facts": { "matchesCanonical": false, "variantQuarter": 1, "maximumQuarter": 4, "answerNonblank": true, "openManual": true }, "expected": "partial_variant" },
+    { "id": "partial-variant", "facts": { "matchesCanonical": false, "variantQuarter": 2, "maximumQuarter": 4, "answerNonblank": true, "openManual": false }, "expected": "partial_variant" },
+    { "id": "blank-exact", "facts": { "matchesCanonical": false, "variantQuarter": 0, "maximumQuarter": 4, "answerNonblank": false, "openManual": false }, "expected": "wrong" },
+    { "id": "blank-open", "facts": { "matchesCanonical": false, "variantQuarter": 0, "maximumQuarter": 4, "answerNonblank": false, "openManual": true }, "expected": "wrong" },
+    { "id": "unknown-exact", "facts": { "matchesCanonical": false, "variantQuarter": 0, "maximumQuarter": 4, "answerNonblank": true, "openManual": false }, "expected": "wrong" },
+    { "id": "unknown-open", "facts": { "matchesCanonical": false, "variantQuarter": 0, "maximumQuarter": 4, "answerNonblank": true, "openManual": true }, "expected": "open_unknown" }
+  ]
+}

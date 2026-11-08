@@ -1,0 +1,8 @@
+DSL 1
+# Public scoring result and quarter sources for each single-answer Logic disposition.
+RECORD AnswerPolicyOutcomeRow KEY disposition COUNT 5
+  disposition: string
+  status: enum confirmed_full|confirmed_partial|pending_manual|wrong
+  confirmedSource: enum maximum|variant|zero
+  pendingSource: enum maximum|zero
+END

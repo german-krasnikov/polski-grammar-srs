@@ -1,5 +1,5 @@
 import { resolve } from 'node:path';
-import { test } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 import { runExamPlaytest } from './exam-playtest-host';
 
 test('DSL grammar PlayTest: Polish input, caret, return and score', async ({ page }) => {
@@ -149,3 +149,38 @@ for (const exam of ['b1-2019', 'b1-2020']) {
     await runExamPlaytest(page, resolve(`dsl/exam-web/grammar-bank-${exam}-viii.playtest`));
   });
 }
+
+test('DSL timed PlayTest: B1 2017 four certified parts and manual writing', async ({ page }) => {
+  test.setTimeout(120_000);
+  await runExamPlaytest(page, resolve('dsl/exam-web/timed-b1-2017.playtest'));
+});
+
+test('certified timed entry is limited to the six complete source papers', async ({ page }) => {
+  await page.goto('/#/exam');
+  for (const title of ['B1 Certyfikat 2017', 'B1 Certyfikat 2019', 'B1 Certyfikat 2020', 'B2 Certyfikat 2017', 'B2 Certyfikat 2019', 'B2 Certyfikat 2020']) {
+    await page.locator('.exam-card').filter({ hasText: title }).getByRole('button', { name: 'Начать' }).click();
+    await expect(page.getByRole('button', { name: 'Полный экзамен по времени' })).toBeVisible();
+    await page.getByRole('button', { name: '← Выберите экзамен' }).click();
+  }
+  await page.locator('.exam-card').filter({ hasText: 'B1 Przykładowy' }).getByRole('button', { name: 'Начать' }).click();
+  await expect(page.getByRole('button', { name: 'Полный экзамен по времени' })).toHaveCount(0);
+});
+
+test('DSL writing PlayTest: certified maximum remains pending manual assessment', async ({ page }) => {
+  await runExamPlaytest(page, resolve('dsl/exam-web/writing-certified-manual.playtest'));
+});
+
+test('timed session expires on tab focus after a wall-clock jump', async ({ page }) => {
+  await page.clock.install({ time: new Date('2026-11-08T12:00:00.000Z') });
+  await page.goto('/#/exam');
+  await page.locator('.exam-card').filter({ hasText: 'B1 Certyfikat 2017' }).getByRole('button', { name: 'Начать' }).click();
+  await page.getByRole('button', { name: 'Полный экзамен по времени' }).click();
+  await expect(page.locator('.exam-timed-clock')).toHaveText('25:00');
+  await page.clock.setFixedTime(new Date('2026-11-08T12:25:01.000Z'));
+  await page.evaluate(() => window.dispatchEvent(new Event('focus')));
+  await expect(page.locator('.exam-progress').first()).toHaveText('Часть 2 / 4');
+  await expect(page.locator('.exam-timed-clock')).toHaveText('45:00');
+  await expect(page.locator('audio')).toHaveCount(0);
+  await page.evaluate(() => window.dispatchEvent(new Event('focus')));
+  await expect(page.locator('.exam-progress').first()).toHaveText('Часть 2 / 4');
+});

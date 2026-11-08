@@ -7,9 +7,10 @@ import { join } from 'node:path';
 import { biome, hasCli, repo, rowsOf } from './support/course-data';
 
 const tracked = () => execFileSync('git', ['ls-files', 'courses-biome'], { cwd: repo, encoding: 'utf8' }).split('\n').filter(Boolean).sort();
-/** The files that the `fmt` steps of the project name, as paths from the repository root. */
+/** Course files named by `fmt` steps; other steps also format independent DSL oracles. */
 const formatted = () => readFileSync(join(repo, 'dsl/biome.project'), 'utf8').split('\n').filter(line => /^GENERATE \S+ fmt /.test(line))
-  .flatMap(line => line.split(/\s+/).slice(3)).map(file => file.replace('{dir}/../', '')).sort();
+  .flatMap(line => line.split(/\s+/).slice(3)).map(file => file.replace('{dir}/../', ''))
+  .filter(file => file.startsWith('courses-biome/')).sort();
 
 describe('the fmt steps of dsl/biome.project', () => {
   it('name every tracked file of courses-biome once, and nothing else', () => {

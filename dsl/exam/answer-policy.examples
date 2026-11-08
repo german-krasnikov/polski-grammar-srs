@@ -1,0 +1,14 @@
+PROVENANCE "Hand-authored from certified exam answer scoring: canonical beats variants; known alternatives earn their documented quarters; unknown nonblank open answers await review; blank and unknown exact answers earn zero. Quarter units are 0.25 point. The outcome map in answer-policy-outcomes.core-data resolves each disposition to public status and credit source."
+
+EXAMPLES disposition
+  id | matchesCanonical | variantQuarter | maximumQuarter | answerNonblank | openManual -> expected
+  canonical | true | 0 | 4 | true | false -> canonical
+  canonical-over-variant | true | 1 | 4 | true | true -> canonical
+  full-variant | false | 4 | 4 | true | false -> full_variant
+  quarter-variant | false | 1 | 4 | true | true -> partial_variant
+  partial-variant | false | 2 | 4 | true | false -> partial_variant
+  blank-exact | false | 0 | 4 | false | false -> wrong
+  blank-open | false | 0 | 4 | false | true -> wrong
+  unknown-exact | false | 0 | 4 | true | false -> wrong
+  unknown-open | false | 0 | 4 | true | true -> open_unknown
+END

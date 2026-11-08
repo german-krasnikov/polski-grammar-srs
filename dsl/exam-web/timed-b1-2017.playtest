@@ -1,0 +1,19 @@
+TEST "B1 2017 certified timed session freezes four parts and writing remains manual" PROFILE playmode
+  openTimed exam="B1 Certyfikat 2017"
+  ASSERT timed.position == 1
+  ASSERT timed.clockVisible == true
+  finishTimedPart
+  ASSERT timed.position == 2
+  ASSERT media.closed == true
+  finishTimedPart
+  ASSERT timed.position == 3
+  finishTimedPart
+  ASSERT timed.position == 4
+  selectWritingSet set="II"
+  writeDraft text="Życzymy wam szczęścia."
+  nextWriting
+  writeDraft text="Jesteśmy razem trzy lata."
+  finishTimedPart
+  ASSERT timed.completed == true
+  ASSERT timed.percentVisible == false
+END

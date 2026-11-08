@@ -1,0 +1,10 @@
+TEST "B1 2017 writing uses certified manual maximum without an automatic percentage" PROFILE playmode
+  open exam="B1 Certyfikat 2017" module="writing"
+  selectWritingSet set="II"
+  writeDraft text="Życzymy wam szczęścia."
+  nextWriting
+  writeDraft text="Jesteśmy razem trzy lata."
+  submitWriting
+  ASSERT writing.manualPoints == "0|30|30"
+  ASSERT writing.autoScoreVisible == false
+END

@@ -13,6 +13,16 @@ RECORD ExamRow KEY examId COUNT 1..
   license: string OPTIONAL
 END
 
+# Certified written-module cover values. A timed sitting requires all four rows.
+RECORD ExamModuleRow KEY moduleId COUNT 1..
+  moduleId: string
+  examRef: ref ExamRow
+  module: enum listening|reading|grammar|writing
+  order: int
+  durationSeconds: int
+  maximumQuarter: int
+END
+
 # Listening: one audio file per exam, each task plays a segment (startMs..endMs).
 RECORD ListeningTaskRow KEY taskId COUNT 1..
   taskId: string
@@ -68,7 +78,17 @@ RECORD ReadingQuestionRow KEY questionId COUNT 1..
   correctAnswer: string
   points: int OPTIONAL
   pointsQuarter: int OPTIONAL
+  gradingMode: enum exact|open_manual OPTIONAL
+  answerMode: enum single|unordered_set OPTIONAL
+  creditPerCorrectQuarter: int OPTIONAL
   relevantParagraph: int OPTIONAL
+END
+
+RECORD ReadingAnswerVariantRow KEY variantId COUNT 1..
+  variantId: string
+  questionRef: ref ReadingQuestionRow
+  answer: string
+  earnedQuarter: int
 END
 
 # Grammar: structured tests with items of various types.
@@ -121,7 +141,7 @@ RECORD WritingTaskRow KEY taskId COUNT 1..
   promptImageUrl: string OPTIONAL
   promptImageAlt: string OPTIONAL
   wordLimit: int OPTIONAL
-  genre: enum letter|description|argument|essay|invitation|wishes|story|report|sms|opinion|announcement|email|review|advertisement|application
+  genre: enum letter|description|argument|essay|invitation|wishes|story|report|sms|opinion|announcement|email|review|advertisement|application|speech|characterization
 END
 
 # Scoring oracle: input/output pairs for the answer-matching rule (P4: test expectations in DSL).
@@ -216,6 +236,26 @@ RECORD UnorderedSetCaseRow KEY id COUNT 1..
   expectedStatus: enum confirmed_full|confirmed_partial|wrong|pending_manual
   expectedConfirmedQuarter: int
   expectedPendingQuarter: int OPTIONAL
+END
+
+# Independently transcribed cover values and grouped reading keys for P11 acceptance.
+RECORD ExamModuleCaseRow KEY id COUNT 1..
+  id: string
+  examRef: string
+  module: enum listening|reading|grammar|writing
+  order: int
+  durationSeconds: int
+  maximumQuarter: int
+END
+
+RECORD ReadingSetCaseRow KEY id COUNT 1..
+  id: string
+  correctAnswer: string
+  options: string
+  answer: string
+  maximumQuarter: int
+  creditPerCorrectQuarter: int
+  expectedConfirmedQuarter: int
 END
 
 # Source-grounded groups whose keys explicitly accept other correct answers.

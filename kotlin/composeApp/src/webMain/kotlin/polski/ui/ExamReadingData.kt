@@ -1,6 +1,10 @@
 package polski.ui
 
+import polski.exam.reading.*
+
 import polski.exam.QuestionType
+import polski.exam.ExamGradingMode
+import polski.exam.ExamAnswerMode
 
 /** Reading exams from generated biome rows — single source of truth. */
 internal val examReadingData: Map<String, ReadingExam> by lazy {
@@ -16,7 +20,7 @@ private fun mapB1Reading(): ReadingExam {
     val qRows = polski.exam.data.b1y2019.READING_QUESTION_ROW_ROWS
     return ReadingExam(
         passages = pRows.map { ReadingPassage(it.passageId, it.instruction, it.text) },
-        questions = qRows.map { ReadingQuestion(it.questionId, it.passageRef, QuestionType.fromTag(it.questionType.tag), it.questionText, it.options?.split("|") ?: emptyList(), it.correctAnswer, it.pointsQuarter ?: requireNotNull(it.points) { "Missing score for ${it.questionId}" } * 4) },
+        questions = qRows.map { ReadingQuestion(it.questionId, it.passageRef, QuestionType.fromTag(it.questionType.tag), it.questionText, it.options?.split("|") ?: emptyList(), it.correctAnswer, it.pointsQuarter ?: requireNotNull(it.points) { "Missing score for ${it.questionId}" } * 4, it.gradingMode?.tag?.let(ExamGradingMode::fromTag) ?: ExamGradingMode.Exact, it.answerMode?.tag?.let(ExamAnswerMode::fromTag) ?: ExamAnswerMode.Single, it.creditPerCorrectQuarter) },
     )
 }
 
@@ -25,7 +29,7 @@ private fun mapB1y2017Reading(): ReadingExam {
     val qRows = polski.exam.data.b1y2017.READING_QUESTION_ROW_ROWS
     return ReadingExam(
         passages = pRows.map { ReadingPassage(it.passageId, it.instruction, it.text) },
-        questions = qRows.map { ReadingQuestion(it.questionId, it.passageRef, QuestionType.fromTag(it.questionType.tag), it.questionText, it.options?.split("|") ?: emptyList(), it.correctAnswer, it.pointsQuarter ?: requireNotNull(it.points) { "Missing score for ${it.questionId}" } * 4) },
+        questions = qRows.map { ReadingQuestion(it.questionId, it.passageRef, QuestionType.fromTag(it.questionType.tag), it.questionText, it.options?.split("|") ?: emptyList(), it.correctAnswer, it.pointsQuarter ?: requireNotNull(it.points) { "Missing score for ${it.questionId}" } * 4, it.gradingMode?.tag?.let(ExamGradingMode::fromTag) ?: ExamGradingMode.Exact, it.answerMode?.tag?.let(ExamAnswerMode::fromTag) ?: ExamAnswerMode.Single, it.creditPerCorrectQuarter) },
     )
 }
 
@@ -34,7 +38,7 @@ private fun mapB1y2020Reading(): ReadingExam {
     val questions = polski.exam.data.b1y2020.READING_QUESTION_ROW_ROWS
     return ReadingExam(
         passages.map { ReadingPassage(it.passageId, it.instruction, it.text) },
-        questions.map { ReadingQuestion(it.questionId, it.passageRef, QuestionType.fromTag(it.questionType.tag), it.questionText, it.options?.split("|") ?: emptyList(), it.correctAnswer, it.pointsQuarter ?: requireNotNull(it.points) { "Missing score for ${it.questionId}" } * 4) },
+        questions.map { ReadingQuestion(it.questionId, it.passageRef, QuestionType.fromTag(it.questionType.tag), it.questionText, it.options?.split("|") ?: emptyList(), it.correctAnswer, it.pointsQuarter ?: requireNotNull(it.points) { "Missing score for ${it.questionId}" } * 4, it.gradingMode?.tag?.let(ExamGradingMode::fromTag) ?: ExamGradingMode.Exact, it.answerMode?.tag?.let(ExamAnswerMode::fromTag) ?: ExamAnswerMode.Single, it.creditPerCorrectQuarter) },
     )
 }
 
@@ -43,7 +47,7 @@ private fun mapB2y2017Reading(): ReadingExam {
     val questions = polski.exam.data.b2y2017.READING_QUESTION_ROW_ROWS
     return ReadingExam(
         passages.map { ReadingPassage(it.passageId, it.instruction, it.text) },
-        questions.map { ReadingQuestion(it.questionId, it.passageRef, QuestionType.fromTag(it.questionType.tag), it.questionText, it.options?.split("|") ?: emptyList(), it.correctAnswer, it.pointsQuarter ?: requireNotNull(it.points) { "Missing score for ${it.questionId}" } * 4) },
+        questions.map { ReadingQuestion(it.questionId, it.passageRef, QuestionType.fromTag(it.questionType.tag), it.questionText, it.options?.split("|") ?: emptyList(), it.correctAnswer, it.pointsQuarter ?: requireNotNull(it.points) { "Missing score for ${it.questionId}" } * 4, it.gradingMode?.tag?.let(ExamGradingMode::fromTag) ?: ExamGradingMode.Exact, it.answerMode?.tag?.let(ExamAnswerMode::fromTag) ?: ExamAnswerMode.Single, it.creditPerCorrectQuarter) },
     )
 }
 
@@ -52,7 +56,7 @@ private fun mapB2y2019Reading(): ReadingExam {
     val questions = polski.exam.data.b2y2019.READING_QUESTION_ROW_ROWS
     return ReadingExam(
         passages.map { ReadingPassage(it.passageId, it.instruction, it.text) },
-        questions.map { ReadingQuestion(it.questionId, it.passageRef, QuestionType.fromTag(it.questionType.tag), it.questionText, it.options?.split("|") ?: emptyList(), it.correctAnswer, it.pointsQuarter ?: requireNotNull(it.points) { "Missing score for ${it.questionId}" } * 4) },
+        questions.map { ReadingQuestion(it.questionId, it.passageRef, QuestionType.fromTag(it.questionType.tag), it.questionText, it.options?.split("|") ?: emptyList(), it.correctAnswer, it.pointsQuarter ?: requireNotNull(it.points) { "Missing score for ${it.questionId}" } * 4, it.gradingMode?.tag?.let(ExamGradingMode::fromTag) ?: ExamGradingMode.Exact, it.answerMode?.tag?.let(ExamAnswerMode::fromTag) ?: ExamAnswerMode.Single, it.creditPerCorrectQuarter) },
     )
 }
 
@@ -61,6 +65,6 @@ private fun mapB2y2020Reading(): ReadingExam {
     val questions = polski.exam.data.b2y2020.READING_QUESTION_ROW_ROWS
     return ReadingExam(
         passages.map { ReadingPassage(it.passageId, it.instruction, it.text) },
-        questions.map { ReadingQuestion(it.questionId, it.passageRef, QuestionType.fromTag(it.questionType.tag), it.questionText, it.options?.split("|") ?: emptyList(), it.correctAnswer, it.pointsQuarter ?: requireNotNull(it.points) { "Missing score for ${it.questionId}" } * 4) },
+        questions.map { ReadingQuestion(it.questionId, it.passageRef, QuestionType.fromTag(it.questionType.tag), it.questionText, it.options?.split("|") ?: emptyList(), it.correctAnswer, it.pointsQuarter ?: requireNotNull(it.points) { "Missing score for ${it.questionId}" } * 4, it.gradingMode?.tag?.let(ExamGradingMode::fromTag) ?: ExamGradingMode.Exact, it.answerMode?.tag?.let(ExamAnswerMode::fromTag) ?: ExamAnswerMode.Single, it.creditPerCorrectQuarter) },
     )
 }

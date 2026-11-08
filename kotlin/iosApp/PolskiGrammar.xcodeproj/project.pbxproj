@@ -12,6 +12,7 @@
 		159E693D25326883695D3AFB /* RiveEffectOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190921AC354942D4B54A1C51 /* RiveEffectOverlay.swift */; };
 		1F7BEFE0453303E589E7F46D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F02BED59AF0CECE077B9890 /* Assets.xcassets */; };
 		3F6C88E9728BB36822867B2A /* PolskiGrammarApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699AE034748243FD00681B74 /* PolskiGrammarApp.swift */; };
+		AA1137D93471A861FA66C901 /* NativeExamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1137D93471A861FA66C902 /* NativeExamView.swift */; };
 		48C37C46326D37EE105A6248 /* VocabularyCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED3DE1B91715EE06B6A6FE5 /* VocabularyCardView.swift */; };
 		48D4BFBDF6FB9F63BEAB9859 /* confetti.riv in Resources */ = {isa = PBXBuildFile; fileRef = ECFE76112B77691B15451A43 /* confetti.riv */; };
 		7F7E48AC56EFA426003600A5 /* FlashCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD32CB6B1D6FA69C3924935F /* FlashCardView.swift */; };
@@ -47,6 +48,7 @@
 		34B448205E1D1781CCA4BBC6 /* SwipeToRate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SwipeToRate.swift; sourceTree = "<group>"; };
 		3F02BED59AF0CECE077B9890 /* Assets.xcassets */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		699AE034748243FD00681B74 /* PolskiGrammarApp.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PolskiGrammarApp.swift; sourceTree = "<group>"; };
+		AA1137D93471A861FA66C902 /* NativeExamView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NativeExamView.swift; sourceTree = "<group>"; };
 		86DA8C5109EDB71CC2A483C2 /* PolskiGrammar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PolskiGrammar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D1DAEF779BDB76A97B3894E /* FlipCorrectnessUITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FlipCorrectnessUITests.swift; sourceTree = "<group>"; };
 		8E3BCCC8FAFE8B2252512F26 /* PolskiGrammarUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PolskiGrammarUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -95,6 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				699AE034748243FD00681B74 /* PolskiGrammarApp.swift */,
+				AA1137D93471A861FA66C902 /* NativeExamView.swift */,
 				CD32CB6B1D6FA69C3924935F /* FlashCardView.swift */,
 				0ED3DE1B91715EE06B6A6FE5 /* VocabularyCardView.swift */,
 				34B448205E1D1781CCA4BBC6 /* SwipeToRate.swift */,
@@ -290,6 +293,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F6C88E9728BB36822867B2A /* PolskiGrammarApp.swift in Sources */,
+				AA1137D93471A861FA66C901 /* NativeExamView.swift in Sources */,
 				7F7E48AC56EFA426003600A5 /* FlashCardView.swift in Sources */,
 				48C37C46326D37EE105A6248 /* VocabularyCardView.swift in Sources */,
 				BB6DAB7336FF02C8468FE417 /* SwipeToRate.swift in Sources */,

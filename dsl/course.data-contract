@@ -194,6 +194,18 @@ RECORD CopyEntryRow KEY key COUNT 1..
   value: string
 END
 
+RECORD UiCopyRow KEY key COUNT 1..
+  key: string
+  text: string
+END
+
+RECORD UiCopyCaseRow KEY key COUNT 1..
+  key: string
+  plRu: string
+  enRu: string
+  placeholders: string
+END
+
 RECORD PatternEntryRow KEY key COUNT 1..
   key: string
   value: string

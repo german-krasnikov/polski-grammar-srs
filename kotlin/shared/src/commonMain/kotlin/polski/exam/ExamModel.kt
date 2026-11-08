@@ -28,7 +28,7 @@ enum class QuestionType(val tag: String) {
 }
 
 /** Writing genre — extensible via the DSL enum, kept here for domain layer. */
-enum class WritingGenre { Letter, Description, Argument, Essay }
+enum class WritingGenre { Letter, Description, Argument, Essay, Speech, Characterization }
 
 /** An audio segment within a single exam audio file (milliseconds). */
 data class AudioSegment(val url: String, val startMs: Int, val endMs: Int)

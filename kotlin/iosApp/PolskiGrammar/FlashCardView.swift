@@ -83,14 +83,14 @@ struct FlashCardView<RevealButton: View>: View {
             // EnRuPackPlan.md §4.2/§4.3: cheap, non-spoiling front-side hint (`exercise.hasLifehack`,
             // `IosSnapshot.kt`) — never the tip text itself, just "a tip exists" — so it may show
             // before reveal (unlike `answerFace`'s own `LifehackEntryView` list, gated by phase).
-            if card.bool("hasLifehack") { LifehackBadge() }
-            Text("Исходное предложение").font(.caption).foregroundStyle(.secondary)
+            if card.bool("hasLifehack") { LifehackBadge(copy: state) }
+            Text(uiText(state, "sourceSentence", fallback: "Исходное предложение")).font(.caption).foregroundStyle(.secondary)
             emphasizedText(card.rows("sourceParts"), role: .before, accessibilityLabel: card.string("source"))
                 .font(.system(.title2, design: .rounded, weight: .semibold))
             if introPending {
-                Text("Знакомство с навыком").font(.headline)
+                Text(uiText(state, "skillIntroduction", fallback: "Знакомство с навыком")).font(.headline)
                 Text(card.string("methodIntroduce"))
-                Button("Перейти к заданию") { model.send("continueIntroduction") }
+                Button(uiText(state, "goToTask", fallback: "Перейти к заданию")) { model.send("continueIntroduction") }
                     .buttonStyle(.borderedProminent)
                     .accessibilityIdentifier("continueIntroduction")
             } else {
@@ -111,24 +111,24 @@ struct FlashCardView<RevealButton: View>: View {
         if !introPending {
             VStack(alignment: .leading, spacing: 12) {
                 Text(card.string("methodRetrieve"))
-                Picker("Ответ", selection: Binding(get: { state.string("answerMode") }, set: { model.send("answerMode", $0) })) {
-                    Text("Вслух / про себя").tag("Oral")
-                    Text("Напечатать").tag("Typed")
+                Picker(uiText(state, "answerModeTitle", fallback: "Ответ"), selection: Binding(get: { state.string("answerMode") }, set: { model.send("answerMode", $0) })) {
+                    Text(uiText(state, "oralOrSilentMode", fallback: "Вслух / про себя")).tag("Oral")
+                    Text(uiText(state, "typedMode", fallback: "Напечатать")).tag("Typed")
                 }
                 if state.string("answerMode") == "Typed" {
-                    TextField("Ответ по-польски", text: Binding(get: { localDraft }, set: {
+                    TextField(uiText(state, "polishAnswer", fallback: "Ответ по-польски"), text: Binding(get: { localDraft }, set: {
                         localDraft = $0
                         model.send("draft", $0)
                     }), axis: .vertical)
                         .lineLimit(2...5).textInputAutocapitalization(.sentences)
                         .focused(answerFocused)
-                        .accessibilityLabel("Ответ по-польски")
+                        .accessibilityLabel(uiText(state, "polishAnswer", fallback: "Ответ по-польски"))
                         .accessibilityIdentifier("typedAnswer")
                 } else {
-                    Text("Произнеси целое предложение, затем покажи ответ.").foregroundStyle(.secondary)
+                    Text(uiText(state, "oralInstruction", fallback: "Произнеси целое предложение, затем покажи ответ.")).foregroundStyle(.secondary)
                 }
                 if state.string("answerMode") != "Typed" || !answerFocused.wrappedValue {
-                    revealButton(state.string("answerMode") == "Typed" ? "Проверить ответ" : "Показать ответ", true)
+                    revealButton(state.string("answerMode") == "Typed" ? uiText(state, "checkAnswer", fallback: "Проверить ответ") : uiText(state, "showAnswer", fallback: "Показать ответ"), true)
                 }
             }
         }
@@ -145,14 +145,17 @@ struct FlashCardView<RevealButton: View>: View {
         let lifehacks = state.record("styleBlocks").rows("lifehacks")
         VStack(alignment: .leading, spacing: 12) {
             VStack(alignment: .leading, spacing: 12) {
-                Text("Эталон").font(.caption).foregroundStyle(.secondary)
+                Text(uiText(state, "modelAnswer", fallback: "Эталон")).font(.caption).foregroundStyle(.secondary)
                 emphasizedText(card.rows("expectedParts"), role: .after, accessibilityLabel: card.string("expected"))
                     .font(.system(.title2, design: .rounded, weight: .semibold))
-                if !card.strings("accepted").isEmpty { Text("Также: \(card.strings("accepted").joined(separator: " / "))") }
+                if !card.strings("accepted").isEmpty {
+                    Text(uiFormat(state, "alsoAcceptedTemplate", fallback: "Также: {answers}",
+                        values: ["answers": card.strings("accepted").joined(separator: " / ")]))
+                }
                 if state.string("answerMode") == "Typed" {
-                    Label(card.bool("correct") ? "Совпадает с правильным вариантом" : "Сравни свой ответ с эталоном",
+                    Label(card.bool("correct") ? uiText(state, "matches", fallback: "Совпадает с правильным вариантом") : uiText(state, "compareAnswer", fallback: "Сравни свой ответ с эталоном"),
                           systemImage: card.bool("correct") ? "checkmark.circle" : "info.circle")
-                    Text(card.string("frozenAnswer").isEmpty ? "Ответ не введён" : card.string("frozenAnswer"))
+                    Text(card.string("frozenAnswer").isEmpty ? uiText(state, "noAnswerEntered", fallback: "Ответ не введён") : card.string("frozenAnswer"))
                 }
                 // The retrieve/feedback/review cycle text is not a style block (StylesBlueprint.md
                 // §1) — it stays independent of which blocks the current style composes, always
@@ -171,14 +174,14 @@ struct FlashCardView<RevealButton: View>: View {
             // inside `styleBlockView`'s switch (it isn't a `Block.*` kind, see `lifehacks`'s doc
             // above) — and entirely absent, not an empty section, when `lifehacks` is empty.
             ForEach(Array(lifehacks.enumerated()), id: \.offset) { index, hack in
-                LifehackEntryView(hack: hack, index: index, reduceMotion: reduceMotion)
+                LifehackEntryView(hack: hack, index: index, reduceMotion: reduceMotion, copy: state)
                     .transition(staggeredReveal(blocks.count + 1 + index))
             }
 
             VStack(alignment: .leading, spacing: 9) {
-                Text("Когда повторить?").font(.headline)
+                Text(uiText(state, "whenToReview", fallback: "Когда повторить?")).font(.headline)
                 Text(card.string("methodReview"))
-                Text("Свайп влево — повторить · вправо — вспомнил")
+                Text(uiText(state, "swipeHint", fallback: "Свайп влево — повторить · вправо — вспомнил"))
                     .font(.footnote).foregroundStyle(.secondary)
                     // See `SwipeToRate`'s own doc comment for why this identifier lives on this
                     // long-text leaf specifically, and not on the shared gesture container.
@@ -188,8 +191,8 @@ struct FlashCardView<RevealButton: View>: View {
                     // reached via VoiceOver's Actions rotor once focus lands on this hint, are the
                     // only rating path for a VoiceOver user — no visible button is added.
                     .accessibilityActions {
-                        Button("Повторить") { rate(remembered: false) }
-                        Button("Вспомнил") { rate(remembered: true) }
+                        Button(uiText(state, "again", fallback: "Повторить")) { rate(remembered: false) }
+                        Button(uiText(state, "good", fallback: "Вспомнил")) { rate(remembered: true) }
                     }
             }
             .padding(.vertical, 4)
@@ -400,15 +403,15 @@ extension FlashCardView {
     @ViewBuilder
     fileprivate func styleBlockView(_ block: Record) -> some View {
         switch block.string("kind") {
-        case "formula": StyleFormulaBlock(text: block.string("text"), parts: block.rows("parts"))
+        case "formula": StyleFormulaBlock(text: block.string("text"), parts: block.rows("parts"), copy: state)
         case "rule": StyleRuleBlock(text: block.string("text"), detail: block.string("detail"), parts: block.rows("parts"))
         case "table": StyleTableBlock(caption: block.string("caption"), rows: block.rows("rows"))
         case "scene": StyleSceneBlock(text: block.string("text"), parts: block.rows("parts"))
-        case "nativeParallel": StyleNativeParallelBlock(pairs: block.rows("pairs"))
+        case "nativeParallel": StyleNativeParallelBlock(pairs: block.rows("pairs"), copy: state)
         case "examples": StyleExamplesBlock(items: block.strings("items"), itemParts: block.rowsOfRows("itemParts"))
         case "whyOnDemand": StyleWhyOnDemandBlock(
-            text: block.string("text"), parts: block.rows("parts"), label: block.string("collapsedLabel"), reduceMotion: reduceMotion)
-        case "changes": StyleChangesBlock(items: block.rows("items"))
+            text: block.string("text"), parts: block.rows("parts"), label: block.string("collapsedLabel"), reduceMotion: reduceMotion, copy: state)
+        case "changes": StyleChangesBlock(items: block.rows("items"), copy: state)
         case "contrast": StyleContrastBlock(before: block.rows("before"), after: block.rows("after"))
         default: EmptyView()
         }
@@ -421,9 +424,10 @@ extension FlashCardView {
 private struct StyleFormulaBlock: View {
     let text: String
     let parts: [Record]
+    let copy: Record
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text("ЗАПОМНИ").font(.caption.weight(.semibold))
+            Text(uiText(copy, "remember", fallback: "ЗАПОМНИ")).font(.caption.weight(.semibold))
             emphasizedText(parts, role: .after, accessibilityLabel: text)
                 .font(.headline).bold()
         }
@@ -507,6 +511,7 @@ private struct StyleSceneBlock: View {
 /// VoiceOver doesn't just hear "image").
 private struct StyleNativeParallelBlock: View {
     let pairs: [Record]
+    let copy: Record
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             ForEach(Array(pairs.enumerated()), id: \.offset) { _, pair in
@@ -530,7 +535,8 @@ private struct StyleNativeParallelBlock: View {
                 .accessibilityElement(children: .ignore)
                 .accessibilityLabel(
                     "\(pair.string("native")); \(pair.string("target")); "
-                    + (matches ? "совпадает" : "отличается")
+                    + (matches ? uiText(copy, "matches", fallback: "совпадает")
+                               : uiText(copy, "differs", fallback: "отличается"))
                     + (pair.string("note").isEmpty ? "" : "; \(pair.string("note"))"))
             }
         }
@@ -575,6 +581,7 @@ private struct StyleWhyOnDemandBlock: View {
     let parts: [Record]
     let label: String
     let reduceMotion: Bool
+    let copy: Record
     @State private var expanded = false
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
@@ -584,12 +591,13 @@ private struct StyleWhyOnDemandBlock: View {
                 }
             } label: {
                 HStack(spacing: 4) {
-                    Text(label.isEmpty ? "Почему так?" : label)
+                    Text(label.isEmpty ? uiText(copy, "why", fallback: "Почему так?") : label)
                     Image(systemName: expanded ? "chevron.up" : "chevron.down")
                 }
             }
             .accessibilityIdentifier("styleBlock-whyOnDemand")
-            .accessibilityValue(expanded ? "развёрнуто" : "свёрнуто")
+            .accessibilityValue(expanded ? uiText(copy, "expanded", fallback: "развёрнуто")
+                                         : uiText(copy, "collapsed", fallback: "свёрнуто"))
             if expanded {
                 emphasizedText(parts, role: .after, accessibilityLabel: text)
                     .transition(reduceMotion ? .identity : .opacity.combined(with: .move(edge: .top)))
@@ -606,12 +614,13 @@ private struct StyleWhyOnDemandBlock: View {
 /// task's "tapping it does not reveal" requirement — without needing a `Button` that would read
 /// as an actionable control to VoiceOver despite doing nothing.
 private struct LifehackBadge: View {
+    let copy: Record
     var body: some View {
-        Text("💡 Есть лайфхак")
+        Text(uiText(copy, "lifehackBadge", fallback: "💡 Есть лайфхак"))
             .font(.caption.weight(.semibold))
             .padding(.horizontal, 10).padding(.vertical, 4)
             .background(Color(uiColor: .systemYellow).opacity(0.22), in: Capsule())
-            .accessibilityLabel("Есть лайфхак для этого навыка")
+            .accessibilityLabel(uiText(copy, "lifehackAccessibility", fallback: "Есть лайфхак для этого навыка"))
             .accessibilityIdentifier("lifehackBadge")
             .onTapGesture {}
     }
@@ -632,6 +641,7 @@ struct LifehackEntryView: View {
     let hack: Record
     let index: Int
     let reduceMotion: Bool
+    let copy: Record
     var identifierPrefix: String = "lifehack"
     @State private var expanded = false
     var body: some View {
@@ -642,7 +652,8 @@ struct LifehackEntryView: View {
                 }
             } label: {
                 HStack(spacing: 4) {
-                    Text("Лайфхак · источник: \(hack.string("statusLabel"))")
+                    Text(uiFormat(copy, "lifehackSourceTemplate", fallback: "Лайфхак · источник: {status}",
+                        values: ["status": hack.string("statusLabel")]))
                     Image(systemName: expanded ? "chevron.up" : "chevron.down")
                 }
             }
@@ -650,14 +661,15 @@ struct LifehackEntryView: View {
             // keeps each entry's toggle independent once a skill has 2+ lifehacks.
             .buttonStyle(.borderless)
             .accessibilityIdentifier("\(identifierPrefix)-toggle-\(index)")
-            .accessibilityValue(expanded ? "развёрнуто" : "свёрнуто")
+            .accessibilityValue(expanded ? uiText(copy, "expanded", fallback: "развёрнуто")
+                                         : uiText(copy, "collapsed", fallback: "свёрнуто"))
             if expanded {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(hack.string("text")).accessibilityIdentifier("\(identifierPrefix)-text-\(index)")
                     if let url = hack["url"] as? String, let link = URL(string: url) {
                         HStack(spacing: 4) {
                             Text(hack.string("citation"))
-                            Link("источник", destination: link)
+                            Link(uiText(copy, "sourceLink", fallback: "источник"), destination: link)
                         }
                         .font(.footnote).foregroundStyle(.secondary)
                     } else {
@@ -674,11 +686,12 @@ struct LifehackEntryView: View {
 /// the composed block instead of `card.rows("changes")` directly — same data, one less special case.
 private struct StyleChangesBlock: View {
     let items: [Record]
+    let copy: Record
     var body: some View {
         Group {
             if !items.isEmpty {
                 VStack(alignment: .leading, spacing: 6) {
-                    Text("Что изменилось").font(.headline)
+                    Text(uiText(copy, "whatChanged", fallback: "Что изменилось")).font(.headline)
                     ForEach(Array(items.enumerated()), id: \.offset) { _, item in
                         VStack(alignment: .leading, spacing: 3) {
                             HStack(spacing: 4) {

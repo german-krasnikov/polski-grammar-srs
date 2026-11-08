@@ -72,7 +72,10 @@ struct VocabularyCardView: View {
     @ViewBuilder private var questionFace: some View {
         VStack(alignment: .leading, spacing: 12) {
             VStack(alignment: .leading, spacing: 4) {
-                Text("Вспомни по-\(courseLanguageAdverb[recallsTarget ? state.string("target") : state.string("native")] ?? "")")
+                Text(uiFormat(model.state, "recallInTemplate", fallback: "Вспомни {language}",
+                    values: ["language": uiText(model.state,
+                        "recallAdverb.\(recallsTarget ? state.string("target") : state.string("native"))",
+                        fallback: "")]))
                     .font(.caption).foregroundStyle(.secondary)
                 Text(recallsTarget ? card.string("translation") : card.string("lemma"))
                     .font(.title2.weight(.semibold))
@@ -80,22 +83,22 @@ struct VocabularyCardView: View {
             .contentShape(Rectangle())
             .accessibilityElement(children: .combine)
             .accessibilityAddTraits(.isButton)
-            .accessibilityLabel("Показать ответ")
+            .accessibilityLabel(uiText(model.state, "showAnswer", fallback: "Показать ответ"))
             .accessibilityIdentifier("vocabularyReveal")
             .onTapGesture { model.sendVocabulary("reveal") }
 
-            Toggle("Напечатать ответ", isOn: Binding(
+            Toggle(uiText(model.state, "typedAnswerToggle", fallback: "Напечатать ответ"), isOn: Binding(
                 get: { state.bool("typed") },
                 set: { model.sendVocabulary("typed", $0 ? "true" : "false") }
             ))
             if state.bool("typed") {
-                TextField("Твой ответ", text: Binding(
+                TextField(uiText(model.state, "yourAnswer", fallback: "Твой ответ"), text: Binding(
                     get: { state.string("draft") },
                     set: { model.sendVocabulary("draft", $0) }
                 ))
                 .textInputAutocapitalization(.never)
                 .accessibilityIdentifier("vocabularyDraft")
-                Button("Проверить") { model.sendVocabulary("reveal") }
+                Button(uiText(model.state, "check", fallback: "Проверить")) { model.sendVocabulary("reveal") }
                     .buttonStyle(.borderedProminent)
                     .accessibilityIdentifier("vocabularyCheck")
             }
@@ -110,18 +113,20 @@ struct VocabularyCardView: View {
                 // not a button and not wired to any action itself; the whole answer face's own
                 // `onTapGesture` (below) is what handles the tap.
                 .accessibilityIdentifier("vocabularyAnswerFace")
-            LabeledContent("Перевод", value: card.string("translation"))
-            LabeledContent("Форма", value: card.string("form"))
+            LabeledContent(uiText(model.state, "translation", fallback: "Перевод"), value: card.string("translation"))
+            LabeledContent(uiText(model.state, "form", fallback: "Форма"), value: card.string("form"))
             Text(card.string("example")).font(.callout)
             if state.bool("typed") {
-                Text("Твой ответ: \(state.string("draft")). Сравни сам и выбери оценку.")
+                Text(uiFormat(model.state, "selfReviewTemplate",
+                    fallback: "Твой ответ: {answer}. Сравни сам и выбери оценку.",
+                    values: ["answer": state.string("draft")]))
                     .font(.footnote)
             }
             // D3: no rating buttons on touch — the whole panel is the swipe-to-rate gesture
             // surface, attached at this view's outer container (see [SwipeToRate]'s own call
             // site). The identifier lives on this long-text leaf, not the shared container — see
             // `SwipeToRate`'s own doc comment for why.
-            Text("Свайп влево — повторить · вправо — вспомнил")
+            Text(uiText(model.state, "swipeHint", fallback: "Свайп влево — повторить · вправо — вспомнил"))
                 .font(.footnote).foregroundStyle(.secondary)
                 .accessibilityIdentifier("ratingSwipeArea")
                 // VoiceOver intercepts raw finger drags for its own navigation, so the swipe
@@ -129,8 +134,8 @@ struct VocabularyCardView: View {
                 // actions, reached via VoiceOver's Actions rotor once focus lands on this hint, are
                 // the only rating path for a VoiceOver user — no visible button is added.
                 .accessibilityActions {
-                    Button("Повторить") { rate(remembered: false) }
-                    Button("Вспомнил") { rate(remembered: true) }
+                    Button(uiText(model.state, "again", fallback: "Повторить")) { rate(remembered: false) }
+                    Button(uiText(model.state, "good", fallback: "Вспомнил")) { rate(remembered: true) }
                 }
         }
         // Undoes the outer panel's own 180° rotation so the back face's own content reads

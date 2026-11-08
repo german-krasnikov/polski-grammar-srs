@@ -13,8 +13,9 @@ const ROWS: Record<string, number> = {
 };
 
 describe.skipIf(!hasCli)('courses-biome/en-ru is Core data', () => {
-  it('holds exactly the 19 known files', () => {
-    expect(readdirSync(EN).filter(name => name.endsWith('.core-data')).map(name => name.replace('.core-data', '')).sort()).toEqual(Object.keys(ROWS).sort());
+  it('holds the sealed course files and the separate DSL UI copy catalog', () => {
+    // P12 adds UI copy; the sealed language-source row counts above stay unchanged.
+    expect(readdirSync(EN).filter(name => name.endsWith('.core-data')).map(name => name.replace('.core-data', '')).sort()).toEqual([...Object.keys(ROWS), 'uiCopy'].sort());
   });
   for (const [file, rows] of Object.entries(ROWS)) {
     it(`biome read ${file}.core-data reads ${rows} row(s)`, () => {

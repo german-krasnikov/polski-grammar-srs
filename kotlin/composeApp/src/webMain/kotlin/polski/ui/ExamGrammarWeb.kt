@@ -10,7 +10,12 @@ import polski.exam.ExamAnswerStatus
 import polski.exam.formatQuarterPoints
 import polski.exam.grammar.*
 
-internal class ExamGrammarController(examId: String, private val onBack: () -> Unit) {
+internal class ExamGrammarController(
+    examId: String, private val onBack: () -> Unit,
+    private val externalState: (() -> GrammarExamState)? = null,
+    private val onAction: ((GrammarExamAction) -> Unit)? = null,
+    private val onTimedFinish: (() -> Unit)? = null,
+) {
     private val tests = examGrammarData.getValue(examId)
     private val instructionsByItemId = tests.flatMap { test ->
         test.items.map { item -> item.itemId to test.instruction }
@@ -19,19 +24,21 @@ internal class ExamGrammarController(examId: String, private val onBack: () -> U
         test.items.map { item -> item.itemId to test.bankTokens }
     }.toMap()
     private val selectedBankTokenByItemId = mutableMapOf<String, String>()
-    private var state = run {
+    private var ownState = run {
         val mergedBank = tests.flatMap { it.bankTokens }.mapIndexed { index, token -> token.copy(position = index + 1) }
         val merged = GrammarTest(examId, tests.firstOrNull()?.instruction ?: "", tests.flatMap { it.items }, mergedBank)
         GrammarExamState(test = merged)
     }
+    private val state get() = externalState?.invoke() ?: ownState
     private var root: HTMLElement? = null
     private var inputRef: HTMLInputElement? = null
 
     fun render(container: HTMLElement) { root = container; redraw() }
+    fun close() { root = null }
 
     private fun dispatch(action: GrammarExamAction) {
         val oldIndex = state.currentIndex
-        state = reduceGrammarExam(state, action)
+        if (onAction != null) onAction.invoke(action) else ownState = reduceGrammarExam(ownState, action)
         if (state.submitted && state.result != null) { root?.let { it.innerHTML = ""; renderResult(it) }; return }
         if (state.currentIndex != oldIndex) { redraw(); return }
         // Same question — update without full redraw to keep focus
@@ -137,7 +144,7 @@ internal class ExamGrammarController(examId: String, private val onBack: () -> U
             if (!card.isFirst) appendChild(navBtn("← Назад") { dispatch(GrammarExamAction.Previous) })
             appendChild(node("span", "exam-nav-spacer"))
             if (!card.isLast) appendChild(navBtn(UiCopy.Next) { dispatch(GrammarExamAction.Next) })
-            if (card.isLast) appendChild(navBtn(UiCopy.Finish, primary = true) { dispatch(GrammarExamAction.Submit) })
+            if (card.isLast) appendChild(navBtn(UiCopy.Finish, primary = true) { if (onTimedFinish != null) onTimedFinish.invoke() else dispatch(GrammarExamAction.Submit) })
         })
     }
 
@@ -179,7 +186,7 @@ internal class ExamGrammarController(examId: String, private val onBack: () -> U
             appendChild(navBtn("← К модулям") { onBack() })
             appendChild(node("span", "exam-nav-spacer"))
             appendChild(navBtn(UiCopy.TryAgain, primary = true) {
-                state = GrammarExamState(test = state.test); selectedBankTokenByItemId.clear(); inputRef = null; redraw()
+                ownState = GrammarExamState(test = state.test); selectedBankTokenByItemId.clear(); inputRef = null; redraw()
             })
         })
     }

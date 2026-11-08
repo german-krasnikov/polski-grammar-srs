@@ -1,0 +1,9 @@
+# Exam worktree checkpoint — 2026-11-08
+
+This is an isolated work-in-progress branch, not completed P11 or a production merge. The single-answer DSL policy and native grammar consumer passed bounded independent reviews. The branch also preserves the earlier shared four-part/timed Kotlin prototype; unordered-set and session decisions still need the accepted DSL migration before P11 closes. Do not mistake their functional test results for DSL compliance.
+
+Observed: authored Logic cases/mutation sensitivity and generation checks PASS; focused JVM scorer/evaluator tests PASS; repository tests 330 + P12 source test 1 PASS; fresh production JS/Wasm build and six MP3 hash gates PASS; immutable artifact `/tmp/polski-p11-web-artifact.Bf4GL5`, application Wasm SHA-256 `3ab208703d2b20348ce42fbe89de774b5740437aaf0e58a42ba094ab9a2695ab`; Chromium exam Playwright 53/53 and focused Firefox/WebKit 6/6 PASS without retries.
+
+Independent native acceptance: iPad Simulator UI 2/2 and bridge 6/6 PASS; source/target concealment, draft retention and shared scorer integration verified. Physical build/install PASS, launch deferred by owner; physical VoiceOver NOT RUN. Native exposes grammar only; three other parts and full timed native mode remain unavailable. Local Karma browser unit completion remains NOT RUN after an interrupted stall; real production browser checks above are separate evidence.
+
+Next: accepted set/fact DSL policy and generated published catalog, then remaining session/result/timer rules and native parts. Preserve old frozen expectations and all source IDs. Detailed evidence: EXAM-ANSWER-POLICY-INDEPENDENT-EVIDENCE.md, IPAD-EXAM-GRAMMAR-EVIDENCE.md, IPAD-EXAM-GRAMMAR-INDEPENDENT-EVIDENCE.md. CI audio restore files copied from reviewed main to keep the six-byte-pinned media delivery path reproducible.

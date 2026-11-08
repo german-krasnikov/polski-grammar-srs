@@ -7,6 +7,9 @@ import polski.data.packRegistry
  * so switching packs changes all labels. Fallback = key name (visibly broken if a pack omits it).
  */
 object UiCopy {
+    /** Complete read-only label snapshot for the currently selected course pack. */
+    fun all(): Map<String, String> = packRegistry.active.uiCopy.toMap()
+
     val Again: String get() = text("again")
     val Good: String get() = text("good")
     val ProgressTab: String get() = text("progressTab")
@@ -44,6 +47,14 @@ object UiCopy {
     val ExamPendingPoints: String get() = text("examPendingPoints")
     val ExamManualReview: String get() = text("examManualReview")
     val ExamOfficialExamples: String get() = text("examOfficialExamples")
+    val ExamTimedStart: String get() = text("examTimedStart")
+    val ExamTimedPart: String get() = text("examTimedPart")
+    val ExamTimedComplete: String get() = text("examTimedComplete")
+    val ExamBackToModules: String get() = text("examBackToModules")
+    val ExamPrevious: String get() = text("examPrevious")
+    val ExamAnswerPrompt: String get() = text("examAnswerPrompt")
+    val ExamNativeUnavailable: String get() = text("examNativeUnavailable")
+    val ExamChooseModule: String get() = text("examChooseModule")
     val ComingSoon: String get() = text("comingSoon")
     val Exam: String get() = text("exam")
     val CardsTab: String get() = text("cardsTab")

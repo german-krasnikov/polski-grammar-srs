@@ -1,8 +1,15 @@
 // Generated from dsl/exam.data-contract
-// source-sha256=36cfafebca8fc22dc8a31c76161792ced0b69ac872ae298f7b83376d02344c88
+// source-sha256=b3f85a462ee514db3f071eb400b8895577e80025c6f80bb9ba5c8530e44462d7
 // Edit the source, then run biome generate.
 
 package polski.exam.data.b1y2020
+
+enum class ExamModuleRowModule(val tag: String) {
+    LISTENING("listening"),
+    READING("reading"),
+    GRAMMAR("grammar"),
+    WRITING("writing"),
+}
 
 enum class ListeningQuestionRowQuestionType(val tag: String) {
     MULTIPLE_CHOICE("multiple_choice"),
@@ -30,6 +37,16 @@ enum class ReadingQuestionRowQuestionType(val tag: String) {
     SHORT_ANSWER("short_answer"),
     GAP_FILL_FRAGMENT("gap_fill_fragment"),
     MATCHING("matching"),
+}
+
+enum class ReadingQuestionRowGradingMode(val tag: String) {
+    EXACT("exact"),
+    OPEN_MANUAL("open_manual"),
+}
+
+enum class ReadingQuestionRowAnswerMode(val tag: String) {
+    SINGLE("single"),
+    UNORDERED_SET("unordered_set"),
 }
 
 enum class GrammarItemRowQuestionType(val tag: String) {
@@ -62,6 +79,8 @@ enum class WritingTaskRowGenre(val tag: String) {
     REVIEW("review"),
     ADVERTISEMENT("advertisement"),
     APPLICATION("application"),
+    SPEECH("speech"),
+    CHARACTERIZATION("characterization"),
 }
 
 enum class ExamInventoryCaseRowSection(val tag: String) {
@@ -99,6 +118,13 @@ enum class UnorderedSetCaseRowExpectedStatus(val tag: String) {
     PENDING_MANUAL("pending_manual"),
 }
 
+enum class ExamModuleCaseRowModule(val tag: String) {
+    LISTENING("listening"),
+    READING("reading"),
+    GRAMMAR("grammar"),
+    WRITING("writing"),
+}
+
 enum class OpenItemGroupCaseRowSection(val tag: String) {
     GRAMMAR("grammar"),
     LISTENING("listening"),
@@ -134,6 +160,15 @@ data class ExamRow(
     val year: Int? = null,
     val sourceUrl: String? = null,
     val license: String? = null,
+)
+
+data class ExamModuleRow(
+    val moduleId: String,
+    val examRef: String,
+    val module: ExamModuleRowModule,
+    val order: Int,
+    val durationSeconds: Int,
+    val maximumQuarter: Int,
 )
 
 data class ListeningTaskRow(
@@ -189,7 +224,17 @@ data class ReadingQuestionRow(
     val correctAnswer: String,
     val points: Int? = null,
     val pointsQuarter: Int? = null,
+    val gradingMode: ReadingQuestionRowGradingMode? = null,
+    val answerMode: ReadingQuestionRowAnswerMode? = null,
+    val creditPerCorrectQuarter: Int? = null,
     val relevantParagraph: Int? = null,
+)
+
+data class ReadingAnswerVariantRow(
+    val variantId: String,
+    val questionRef: String,
+    val answer: String,
+    val earnedQuarter: Int,
 )
 
 data class GrammarTestRow(
@@ -330,6 +375,25 @@ data class UnorderedSetCaseRow(
     val expectedStatus: UnorderedSetCaseRowExpectedStatus,
     val expectedConfirmedQuarter: Int,
     val expectedPendingQuarter: Int? = null,
+)
+
+data class ExamModuleCaseRow(
+    val id: String,
+    val examRef: String,
+    val module: ExamModuleCaseRowModule,
+    val order: Int,
+    val durationSeconds: Int,
+    val maximumQuarter: Int,
+)
+
+data class ReadingSetCaseRow(
+    val id: String,
+    val correctAnswer: String,
+    val options: String,
+    val answer: String,
+    val maximumQuarter: Int,
+    val creditPerCorrectQuarter: Int,
+    val expectedConfirmedQuarter: Int,
 )
 
 data class OpenItemGroupCaseRow(
@@ -1814,5 +1878,40 @@ val GRAMMAR_ANSWER_VARIANT_ROW_ROWS: List<GrammarAnswerVariantRow> = listOf(
         itemRef = "certyfikat-polski-B1-2020-grammar-6-5",
         answer = "Czy wiesz, jaki adres ma ten sklep?",
         earnedQuarter = 4,
+    ),
+)
+
+val EXAM_MODULE_ROW_ROWS: List<ExamModuleRow> = listOf(
+    ExamModuleRow(
+        moduleId = "certyfikat-polski-B1-2020-listening",
+        examRef = "certyfikat-polski-B1-2020",
+        module = ExamModuleRowModule.LISTENING,
+        order = 1,
+        durationSeconds = 1800,
+        maximumQuarter = 120,
+    ),
+    ExamModuleRow(
+        moduleId = "certyfikat-polski-B1-2020-reading",
+        examRef = "certyfikat-polski-B1-2020",
+        module = ExamModuleRowModule.READING,
+        order = 2,
+        durationSeconds = 2400,
+        maximumQuarter = 120,
+    ),
+    ExamModuleRow(
+        moduleId = "certyfikat-polski-B1-2020-grammar",
+        examRef = "certyfikat-polski-B1-2020",
+        module = ExamModuleRowModule.GRAMMAR,
+        order = 3,
+        durationSeconds = 2700,
+        maximumQuarter = 120,
+    ),
+    ExamModuleRow(
+        moduleId = "certyfikat-polski-B1-2020-writing",
+        examRef = "certyfikat-polski-B1-2020",
+        module = ExamModuleRowModule.WRITING,
+        order = 4,
+        durationSeconds = 4500,
+        maximumQuarter = 120,
     ),
 )

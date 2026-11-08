@@ -5,53 +5,27 @@ import org.w3c.dom.HTMLAudioElement
 import org.w3c.dom.HTMLButtonElement
 import org.w3c.dom.HTMLElement
 import org.w3c.dom.HTMLInputElement
+import polski.exam.listening.*
 import polski.exam.formatQuarterPoints
 import polski.exam.QuestionType
-import polski.exam.ExamAnswerEvaluation
 import polski.exam.ExamAnswerMode
 import polski.exam.ExamAnswerStatus
-import polski.exam.ExamAnswerVariant
-import polski.exam.ExamGradingMode
-import polski.exam.evaluateExamAnswer
-import polski.exam.evaluateUnorderedSetAnswer
 import polski.presentation.UiCopy
 
-internal data class ListeningTask(
-    val id: String,
-    val instruction: String,
-    val questions: List<ListeningQ>,
-    val startMs: Long = 0,
-    val endMs: Long = 0,
-    val promptImageUrl: String? = null,
-    val promptImageAlt: String? = null,
-)
-internal data class ListeningQ(
-    val id: String,
-    val type: QuestionType,
-    val questionText: String,
-    val options: List<String>,
-    val correctAnswer: String,
-    val pointsQuarter: Int = 4,
-    val gradingMode: ExamGradingMode = ExamGradingMode.Exact,
-    val answerMode: ExamAnswerMode = ExamAnswerMode.Single,
-    val creditPerCorrectQuarter: Int? = null,
-    val scoredVariants: List<ExamAnswerVariant> = emptyList(),
+internal class ExamListeningController(
+    examId: String, private val onBack: () -> Unit,
+    private val externalState: (() -> ListeningExamState)? = null,
+    private val onAction: ((ListeningExamAction) -> Unit)? = null,
+    private val onTimedFinish: (() -> Unit)? = null,
 ) {
-    val answerSlotCount: Int get() = if (answerMode == ExamAnswerMode.UnorderedSet) correctAnswer.split("|").size else 1
-    init {
-        require(type !in setOf(QuestionType.MultipleChoice, QuestionType.Match, QuestionType.Matching) || options.isNotEmpty()) {
-            "Missing options for listening question $id ($type)"
-        }
-    }
-}
-internal data class ListeningExam(val tasks: List<ListeningTask>, val audioUrl: String)
-
-internal class ExamListeningController(examId: String, private val onBack: () -> Unit) {
     private val exam = examListeningData[examId] ?: ListeningExam(emptyList(), "")
-    private var currentTaskIdx = 0
-    private var answers = mutableMapOf<String, String>()
+    private var ownState = ListeningExamState(exam)
+    private val state get() = externalState?.invoke() ?: ownState
+    private val currentTaskIdx get() = state.currentIndex
+    private val answers get() = state.answers
+    private fun dispatch(action: ListeningExamAction) { if (onAction != null) onAction.invoke(action) else ownState = reduceListeningExam(ownState, action) }
     private val setInputValues = mutableMapOf<String, MutableList<String>>()
-    private var submitted = false
+    private val submitted get() = state.submitted
     private var root: HTMLElement? = null
     private var audioElement: HTMLAudioElement? = null
     private var playButton: HTMLButtonElement? = null
@@ -237,7 +211,8 @@ internal class ExamListeningController(examId: String, private val onBack: () ->
     }
 
     private fun renderTask(c: HTMLElement) {
-        val task = exam.tasks[currentTaskIdx]
+        val card = listeningExamCardModel(state)
+        val task = card.task
         c.appendChild(node("div", "exam-progress").apply {
             appendChild(node("span", "exam-progress-text", "${UiCopy.Task} ${currentTaskIdx + 1} / ${exam.tasks.size}"))
             appendChild(node("div", "exam-progress-bar").apply {
@@ -277,10 +252,10 @@ internal class ExamListeningController(examId: String, private val onBack: () ->
             }
         })
         c.appendChild(node("div", "exam-nav").apply {
-            if (currentTaskIdx > 0) appendChild(navBtn("← Назад") { currentTaskIdx--; redraw() })
+            if (currentTaskIdx > 0) appendChild(navBtn("← Назад") { dispatch(ListeningExamAction.Previous); redraw() })
             appendChild(node("span", "exam-nav-spacer"))
-            if (currentTaskIdx < exam.tasks.lastIndex) appendChild(navBtn(UiCopy.Next) { currentTaskIdx++; redraw() })
-            if (currentTaskIdx == exam.tasks.lastIndex) appendChild(navBtn(UiCopy.Finish, true) { submitted = true; redraw() })
+            if (currentTaskIdx < exam.tasks.lastIndex) appendChild(navBtn(UiCopy.Next) { dispatch(ListeningExamAction.Next); redraw() })
+            if (currentTaskIdx == exam.tasks.lastIndex) appendChild(navBtn(UiCopy.Finish, true) { if (onTimedFinish != null) onTimedFinish.invoke() else { dispatch(ListeningExamAction.Submit); redraw() } })
         })
     }
 
@@ -303,7 +278,7 @@ internal class ExamListeningController(examId: String, private val onBack: () ->
             else if (choices.size < current.answerSlotCount) choices.add(answer)
             choices
         } else mutableListOf(answer)
-        answers[questionId] = selected.joinToString("|")
+        dispatch(ListeningExamAction.Answer(questionId, selected.joinToString("|")))
         val question = root?.querySelectorAll(".exam-reading-q") ?: return
         for (i in 0 until question.length) {
             val row = question.item(i) as? HTMLElement ?: continue
@@ -334,7 +309,7 @@ internal class ExamListeningController(examId: String, private val onBack: () ->
         appendChild((document.createElement("input") as HTMLInputElement).apply {
             type = "text"; className = "exam-input"; placeholder = "Wpisz odpowiedź..."
             value = answers[q.id].orEmpty()
-            addEventListener("input", { answers[q.id] = this.value })
+            addEventListener("input", { dispatch(ListeningExamAction.Answer(q.id, this.value)) })
         })
     }
 
@@ -348,32 +323,23 @@ internal class ExamListeningController(examId: String, private val onBack: () ->
                 value = values[index]
                 addEventListener("input", {
                     values[index] = this.value
-                    answers[q.id] = values.filter { it.isNotBlank() }.joinToString("|")
+                    dispatch(ListeningExamAction.Answer(q.id, values.filter { it.isNotBlank() }.joinToString("|")))
                 })
             })
         }
     }
 
-    private fun grade(q: ListeningQ): ExamAnswerEvaluation {
-        val answer = answers[q.id].orEmpty()
-        return if (q.answerMode == ExamAnswerMode.UnorderedSet) {
-            evaluateUnorderedSetAnswer(q.correctAnswer, q.options, answer, q.pointsQuarter, q.creditPerCorrectQuarter, q.gradingMode)
-        } else {
-            evaluateExamAnswer(q.gradingMode, q.correctAnswer, q.scoredVariants, answer, q.pointsQuarter)
-        }
-    }
-
     private fun renderResult(c: HTMLElement) {
         val questions = exam.tasks.flatMap { it.questions }
-        val evaluations = questions.map(::grade)
-        val earnedQuarter = evaluations.sumOf { it.confirmedQuarter }
-        val pendingQuarter = evaluations.sumOf { it.pendingQuarter }
-        val totalQuarter = questions.sumOf { it.pointsQuarter }
-        val pct = if (totalQuarter > 0) (earnedQuarter.toDouble() / totalQuarter * 100).toInt() else 0
+        val result = requireNotNull(state.result)
+        val evaluations = questions.map { result.evaluations.getValue(it.id) }
+        val earnedQuarter = result.confirmedQuarter
+        val pendingQuarter = result.manualPendingQuarter
+        val totalQuarter = result.possibleQuarter
         c.appendChild(node("h2", "exam-title", "${UiCopy.Results} — ${UiCopy.Listening}"))
         c.appendChild(node("div", "exam-score").apply {
             if (pendingQuarter == 0) {
-                appendChild(node("div", "exam-score-big", "$pct%"))
+                appendChild(node("div", "exam-score-big", "${requireNotNull(result.finalPercent)}%"))
                 appendChild(node("div", "exam-score-detail", "${formatQuarterPoints(earnedQuarter)} / ${formatQuarterPoints(totalQuarter)} баллов"))
             } else {
                 appendChild(node("div", "exam-score-big", "${UiCopy.ExamConfirmedPoints}: ${formatQuarterPoints(earnedQuarter)} / ${formatQuarterPoints(totalQuarter)}"))
@@ -406,7 +372,7 @@ internal class ExamListeningController(examId: String, private val onBack: () ->
             appendChild(navBtn("← К модулям") { onBack() })
             appendChild(node("span", "exam-nav-spacer"))
             appendChild(navBtn(UiCopy.TryAgain, true) {
-                disposeAudio(); answers.clear(); setInputValues.clear(); currentTaskIdx = 0; submitted = false; setupAudio(); redraw()
+                disposeAudio(); ownState = ListeningExamState(exam); setInputValues.clear(); setupAudio(); redraw()
             })
         })
     }

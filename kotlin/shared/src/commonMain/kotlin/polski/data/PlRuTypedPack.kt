@@ -69,26 +69,7 @@ internal object PlRuTypedPack : CoursePackFields {
     override val vocabularyUnavailableLabel get() = generatedPlRuVocabularyUnavailableLabel
     override val lifehacks get() = generatedPlRuLifehacks
 
-    override val uiCopy = mapOf(
-        "again" to "Повторить", "good" to "Вспомнил",
-        "progressTab" to "Прогресс", "settingsTab" to "Настройки", "lifehacks" to "Лайфхаки",
-        "showAnswer" to "Показать ответ", "checkAndShowAnswer" to "Проверить и показать ответ",
-        "exportJson" to "Экспорт JSON", "resetProgress" to "Сбросить прогресс",
-        "hideTable" to "Скрыть таблицу", "tableAtHand" to "Таблица под рукой",
-        "allTablesAndSchema" to "Все таблицы и схема", "whenToReview" to "Когда повторить?",
-        "noDueTitle" to "Новых повторений пока нет.", "compareAnswer" to "Сравни свой ответ с эталоном",
-        "backSideReference" to "Обратная сторона · эталон", "noAnswerEntered" to "Ответ не введён",
-        "matches" to "Совпадает с правильным вариантом", "differs" to "Отличается",
-        "selectExam" to "Выберите экзамен", "start" to "Начать", "next" to "Далее →",
-        "finish" to "Завершить", "tryAgain" to "Пройти ещё раз", "task" to "Задание",
-        "grammar" to "Грамматика", "listening" to "Аудирование", "reading" to "Чтение",
-        "writing" to "Письмо", "selectWritingSet" to "Выберите набор", "changeWritingSet" to "Сменить набор", "writingSet" to "Набор",
-        "results" to "Результаты", "comingSoon" to "Скоро", "exam" to "Экзамен",
-        "examConfirmedPoints" to "Подтверждено", "examPendingPoints" to "Ожидает проверки",
-        "examManualReview" to "Требуется ручная проверка", "examOfficialExamples" to "Образцы из ключа",
-        "cardsTab" to "Карточки", "vocabularyTab" to "Слова", "matrixTab" to "Таблицы и схема",
-        "lang.pl" to "Польский", "lang.en" to "Английский", "lang.ru" to "Русский",
-        "adverb.pl" to "по-польски", "adverb.en" to "по-английски", "adverb.ru" to "по-русски",
-        "tense.present" to "Настоящее", "tense.past" to "Прошедшее", "tense.future" to "Будущее",
-    )
+    override val uiCopy by lazy {
+        uiCopyRowsToMap(polski.data.rows.plru.uicopy.UI_COPY_ROW_ROWS.map { it.key to it.text })
+    }
 }

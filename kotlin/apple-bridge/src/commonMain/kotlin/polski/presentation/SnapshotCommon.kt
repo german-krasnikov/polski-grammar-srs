@@ -89,6 +89,7 @@ internal fun JsonObjectBuilder.putSharedSnapshotHeader(
     put("uiAgain", UiCopy.Again)
     put("uiGood", UiCopy.Good)
     put("uiShowAnswer", UiCopy.ShowAnswer)
+    put("uiCopy", JsonObject(UiCopy.all().mapValues { (_, value) -> JsonPrimitive(value) }))
 }
 
 /** UC-10/exercise wire shape: identical on every host because the question/reveal fields a

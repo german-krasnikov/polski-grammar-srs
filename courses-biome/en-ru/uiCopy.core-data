@@ -1,0 +1,244 @@
+# Pack-aware UI labels. Existing values migrated unchanged from TypedPack.
+UI_COPY {key: again text: "Повторить"}
+UI_COPY {key: good text: "Вспомнил"}
+UI_COPY {key: progressTab text: "Прогресс"}
+UI_COPY {key: settingsTab text: "Настройки"}
+UI_COPY {key: lifehacks text: "Лайфхаки"}
+UI_COPY {key: showAnswer text: "Показать ответ"}
+UI_COPY {key: checkAndShowAnswer text: "Проверить и показать ответ"}
+UI_COPY {key: exportJson text: "Экспорт JSON"}
+UI_COPY {key: resetProgress text: "Сбросить прогресс"}
+UI_COPY {key: hideTable text: "Скрыть таблицу"}
+UI_COPY {key: tableAtHand text: "Таблица под рукой"}
+UI_COPY {key: allTablesAndSchema text: "Все таблицы и схема"}
+UI_COPY {key: whenToReview text: "Когда повторить?"}
+UI_COPY {key: noDueTitle text: "No reviews due."}
+UI_COPY {key: compareAnswer text: "Compare your answer with the model"}
+UI_COPY {key: backSideReference text: "Back side · model answer"}
+UI_COPY {key: noAnswerEntered text: "No answer entered"}
+UI_COPY {key: matches text: Matches}
+UI_COPY {key: differs text: Differs}
+UI_COPY {key: selectExam text: "Select exam"}
+UI_COPY {key: start text: Start}
+UI_COPY {key: next text: "Next →"}
+UI_COPY {key: finish text: Finish}
+UI_COPY {key: tryAgain text: "Try again"}
+UI_COPY {key: task text: Task}
+UI_COPY {key: grammar text: Grammar}
+UI_COPY {key: listening text: Listening}
+UI_COPY {key: reading text: Reading}
+UI_COPY {key: writing text: Writing}
+UI_COPY {key: selectWritingSet text: "Select a set"}
+UI_COPY {key: changeWritingSet text: "Change set"}
+UI_COPY {key: writingSet text: Set}
+UI_COPY {key: results text: Results}
+UI_COPY {key: comingSoon text: "Coming soon"}
+UI_COPY {key: exam text: Exam}
+UI_COPY {key: examConfirmedPoints text: Confirmed}
+UI_COPY {key: examPendingPoints text: "Awaiting review"}
+UI_COPY {key: examManualReview text: "Needs manual review"}
+UI_COPY {key: examOfficialExamples text: "Examples from the key"}
+UI_COPY {key: cardsTab text: Cards}
+UI_COPY {key: vocabularyTab text: Vocabulary}
+UI_COPY {key: matrixTab text: "Tables & scheme"}
+UI_COPY {key: lang.pl text: "Польский"}
+UI_COPY {key: lang.en text: "Английский"}
+UI_COPY {key: lang.ru text: "Русский"}
+UI_COPY {key: adverb.pl text: "по-польски"}
+UI_COPY {key: adverb.en text: "по-английски"}
+UI_COPY {key: adverb.ru text: "по-русски"}
+UI_COPY {key: tense.present text: Present}
+UI_COPY {key: tense.past text: Past}
+UI_COPY {key: tense.future text: Future}
+UI_COPY {key: trainingTab text: Training}
+UI_COPY {key: matrixNavTitle text: Matrix}
+UI_COPY {key: resetTitle text: "Reset all progress?"}
+UI_COPY {key: resetConfirm text: Reset}
+UI_COPY {key: cancel text: Cancel}
+UI_COPY {
+  key: resetWarning
+  text: "All ratings and review schedules will be deleted."
+}
+UI_COPY {key: noticeTitle text: Notice}
+UI_COPY {key: ok text: OK}
+UI_COPY {key: recoverySection text: Recovery}
+UI_COPY {
+  key: recoveryAdvice
+  text: "Export the original settings before importing a verified copy."
+}
+UI_COPY {key: courseSection text: Course}
+UI_COPY {key: targetLanguage text: "Target language"}
+UI_COPY {key: nativeLanguage text: "Native language"}
+UI_COPY {key: learningSection text: Learning}
+UI_COPY {key: explanationStyle text: "Explanation style"}
+UI_COPY {
+  key: nativeContrastFallback
+  text: "This skill has no native-language comparison yet; the card uses the rule-first style."
+}
+UI_COPY {key: appearanceSection text: Appearance}
+UI_COPY {key: answerModeTitle text: Answer}
+UI_COPY {key: oralMode text: "Speak aloud"}
+UI_COPY {key: oralOrSilentMode text: "Aloud / silently"}
+UI_COPY {key: typedMode text: Type}
+UI_COPY {key: themeTitle text: Theme}
+UI_COPY {key: themeSystem text: System}
+UI_COPY {key: themeLight text: Light}
+UI_COPY {key: themeDark text: Dark}
+UI_COPY {key: motionTitle text: Motion}
+UI_COPY {key: motionSystem text: System}
+UI_COPY {key: motionReduced text: Reduced}
+UI_COPY {key: motionReducedStatus text: "System reduces motion"}
+UI_COPY {key: motionActiveStatus text: "System motion is active"}
+UI_COPY {key: animationsTitle text: Animations}
+UI_COPY {key: settingsDataSection text: "Settings data"}
+UI_COPY {key: exportSettingsJson text: "Export settings JSON"}
+UI_COPY {key: importSettingsJson text: "Import settings JSON"}
+UI_COPY {key: done text: Done}
+UI_COPY {key: heroSubtitle text: "Speak in complete sentences"}
+UI_COPY {key: dueStat text: Due}
+UI_COPY {key: todayStat text: Today}
+UI_COPY {key: loading text: "Loading…"}
+UI_COPY {key: needsProgressCopy text: "A progress copy is needed"}
+UI_COPY {
+  key: openProgressForTransfer
+  text: "Open Progress to import or export JSON."
+}
+UI_COPY {key: modeTemplate text: "Mode: {mode}"}
+UI_COPY {key: sentenceChain text: "Sentence chain"}
+UI_COPY {key: scheduledReviews text: "Scheduled reviews"}
+UI_COPY {key: singleSkill text: "Single skill"}
+UI_COPY {key: skillTitle text: Skill}
+UI_COPY {key: nextWordSet text: "Next word set"}
+UI_COPY {key: backToReviews text: "Back to reviews"}
+UI_COPY {key: reviewsDone text: "Reviews are done for now"}
+UI_COPY {key: practiceChain text: "Practice a chain"}
+UI_COPY {key: sourceSentence text: "Source sentence"}
+UI_COPY {key: skillIntroduction text: "Meet the skill"}
+UI_COPY {key: goToTask text: "Go to task"}
+UI_COPY {key: modelAnswer text: "Model answer"}
+UI_COPY {key: alsoAcceptedTemplate text: "Also accepted: {answers}"}
+UI_COPY {key: swipeHint text: "Swipe left to repeat · right if remembered"}
+UI_COPY {key: polishAnswer text: "Answer in Polish"}
+UI_COPY {
+  key: oralInstruction
+  text: "Say the whole sentence, then show the answer."
+}
+UI_COPY {key: checkAnswer text: "Check answer"}
+UI_COPY {key: before text: Before}
+UI_COPY {key: after text: After}
+UI_COPY {key: matrixMap text: "System map"}
+UI_COPY {key: casesAndEndings text: "Cases and endings"}
+UI_COPY {key: tensesAndPersons text: "Tenses and persons"}
+UI_COPY {key: pronouns text: Pronouns}
+UI_COPY {key: summary text: Summary}
+UI_COPY {key: skills text: Skills}
+UI_COPY {key: dataSection text: Data}
+UI_COPY {
+  key: reviewsCountTemplate
+  text: "Reviews: {reviews} · Correct: {correct} · Streak: {streak}"
+}
+UI_COPY {key: nextDueTemplate text: "Next: {date}"}
+UI_COPY {key: noLifehacks text: "No lifehacks for this set yet."}
+UI_COPY {key: vocabularyData text: "Vocabulary data"}
+UI_COPY {key: importVocabularyJson text: "Import vocabulary JSON"}
+UI_COPY {key: exportVocabularyJson text: "Export vocabulary JSON"}
+UI_COPY {key: statusSection text: Status}
+UI_COPY {key: directionSection text: Direction}
+UI_COPY {key: cardSection text: Card}
+UI_COPY {key: selectWords text: "Select words to study"}
+UI_COPY {key: allReviewed text: "All reviews are done for now"}
+UI_COPY {key: myWords text: "My words"}
+UI_COPY {key: addOwnWord text: "Add your own word"}
+UI_COPY {key: edit text: Edit}
+UI_COPY {key: delete text: Delete}
+UI_COPY {key: deleteWord text: "Delete word"}
+UI_COPY {key: save text: Save}
+UI_COPY {
+  key: deleteWordWarning
+  text: "The word will leave the catalog; its rating history stays in JSON."
+}
+UI_COPY {key: add text: Add}
+UI_COPY {key: remove text: Remove}
+UI_COPY {key: deleteWordTitle text: "Delete your word?"}
+UI_COPY {key: newWord text: "New word"}
+UI_COPY {key: editWord text: "Edit word"}
+UI_COPY {key: polishWord text: "Polish word"}
+UI_COPY {key: translation text: Translation}
+UI_COPY {key: form text: Form}
+UI_COPY {key: exampleSentence text: "Example sentence"}
+UI_COPY {key: level text: Level}
+UI_COPY {key: exportProgressJson text: "Export JSON"}
+UI_COPY {key: importProgressJson text: "Import JSON"}
+UI_COPY {key: totalReviews text: "Total reviews"}
+UI_COPY {key: nextDueLabel text: Next}
+UI_COPY {key: wordSet text: "Word set"}
+UI_COPY {key: matrixSection text: Section}
+UI_COPY {
+  key: vocabularyRecoveryAdvice
+  text: "Export the original JSON and import a corrected vocabulary."
+}
+UI_COPY {key: vocabularyUnavailable text: "Vocabulary is unavailable for now"}
+UI_COPY {key: studyDirection text: Study}
+UI_COPY {key: vocabularyCard text: Card}
+UI_COPY {key: myVocabularyTemplate text: "My vocabulary · {count}"}
+UI_COPY {key: vocabularyFilter text: Selection}
+UI_COPY {key: remember text: REMEMBER}
+UI_COPY {key: why text: "Why?"}
+UI_COPY {key: expanded text: expanded}
+UI_COPY {key: collapsed text: collapsed}
+UI_COPY {key: lifehackBadge text: "💡 Lifehack available"}
+UI_COPY {key: lifehackAccessibility text: "There is a lifehack for this skill"}
+UI_COPY {key: lifehackSourceTemplate text: "Lifehack · source: {status}"}
+UI_COPY {key: sourceLink text: source}
+UI_COPY {key: whatChanged text: "What changed"}
+UI_COPY {key: langLower.pl text: polish}
+UI_COPY {key: langLower.en text: english}
+UI_COPY {key: langLower.ru text: russian}
+UI_COPY {key: recallAdverb.pl text: "in Polish"}
+UI_COPY {key: recallAdverb.en text: "in English"}
+UI_COPY {key: recallAdverb.ru text: "in Russian"}
+UI_COPY {key: recallInTemplate text: "Recall {language}"}
+UI_COPY {key: typedAnswerToggle text: "Type the answer"}
+UI_COPY {key: yourAnswer text: "Your answer"}
+UI_COPY {key: check text: Check}
+UI_COPY {
+  key: selfReviewTemplate
+  text: "Your answer: {answer}. Compare it and choose a rating."
+}
+UI_COPY {key: matrixChooseWordGroup text: "Choose a word group"}
+UI_COPY {key: matrixWord text: Word}
+UI_COPY {key: matrixAdjective text: Adjective}
+UI_COPY {key: matrixOwner text: Owner}
+UI_COPY {key: matrixNumber text: Number}
+UI_COPY {key: matrixTrainChain text: "Practice this chain"}
+UI_COPY {key: matrixTrainMasculine text: "Practice masculine forms"}
+UI_COPY {key: matrixTrainNegation text: "Practice negation"}
+UI_COPY {key: matrixDeclensionComparison text: "Compare declension types"}
+UI_COPY {key: matrixCaseComparison text: "Case to compare"}
+UI_COPY {key: matrixVerb text: Verb}
+UI_COPY {key: matrixTrainTenses text: "Practice tenses"}
+UI_COPY {key: matrixTrainOwnerChange text: "Practice owner changes"}
+UI_COPY {key: vocabularyTop100 text: "Top 100"}
+UI_COPY {key: vocabularyTop500 text: "Top 500"}
+UI_COPY {key: vocabularyTop1000 text: "Top 1000"}
+UI_COPY {
+  key: importSettingsSizeLimit
+  text: "The file must be UTF-8 JSON and at most 1 MB"
+}
+UI_COPY {
+  key: importDataSizeLimit
+  text: "The file must be UTF-8 JSON and at most 10 MB"
+}
+UI_COPY {key: settingsImported text: "Settings imported"}
+UI_COPY {key: vocabularyImported text: "Vocabulary imported"}
+UI_COPY {key: vocabularyImportFailed text: "Vocabulary import failed"}
+UI_COPY {key: progressExported text: "Progress exported"}
+UI_COPY {key: progressImported text: "Progress imported"}
+UI_COPY {key: examTimedStart text: "Full timed exam"}
+UI_COPY {key: examTimedPart text: Part}
+UI_COPY {key: examTimedComplete text: "Exam completed"}
+UI_COPY {key: examBackToModules text: "← Modules"}
+UI_COPY {key: examPrevious text: "← Previous"}
+UI_COPY {key: examAnswerPrompt text: "Enter an answer"}
+UI_COPY {key: examNativeUnavailable text: "Not available on iPad yet"}
+UI_COPY {key: examChooseModule text: "Choose a part"}
