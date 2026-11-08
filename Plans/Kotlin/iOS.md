@@ -139,3 +139,7 @@ self-corrected it back to `pl-ru` before ever trying to apply it. Full root caus
 | Android / web / desktop / macOS hosts | **NOT RUN** — iOS-only lane; `MacPreferencesSession` never had this hazard (applies the saved pack synchronously in its own `init`, not a separately-ordered host call) |
 
 See [decisions.md ADR-43](../../AI/decisions.md) for the full contract.
+
+### Physical iPad launch — 2026-11-08
+
+Revision `7135717`: signed Debug build **PASS** with existing team `57E7J6MPML`, installed and launched on connected physical iPad Air 4 (`00008101-00154D5218E1401E`); `devicectl` confirmed the installed application process. Existing progress was not cleared. This is a build/install/launch check, not a UI acceptance run. Native iOS currently has no exam screen; owner highlighted that gap. Safari was launched with the deployed web URL, but physical-device Safari rendering/media was **NOT VERIFIED**. Shared DSL exam logic and native exam consumption require the corrected architecture plan; launch does not close those gates.
