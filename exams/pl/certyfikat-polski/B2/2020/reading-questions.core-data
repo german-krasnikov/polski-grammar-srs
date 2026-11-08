@@ -1,201 +1,57 @@
 DSL 1
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-r1-q1"
-  passageRef: "certyfikat-polski-B2-2020-reading-1"
-  questionType: multiple_choice
-  questionText: "zadanie 1, pytanie 1"
-  correctAnswer: "c"
+  questionId: "certyfikat-polski-B2-2020-rq1"
+  passageRef: "certyfikat-polski-B2-2020-read-1"
+  questionType: fill_gap
+  questionText: "Pytanie 1"
+  correctAnswer: "c c b a b"
   points: 1
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-r1-q2"
-  passageRef: "certyfikat-polski-B2-2020-reading-1"
-  questionType: multiple_choice
-  questionText: "zadanie 1, pytanie 2"
-  correctAnswer: "c"
+  questionId: "certyfikat-polski-B2-2020-rq2"
+  passageRef: "certyfikat-polski-B2-2020-read-2"
+  questionType: fill_gap
+  questionText: "Pytanie 2"
+  correctAnswer: "E I D K A F B G J H"
   points: 1
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-r1-q3"
-  passageRef: "certyfikat-polski-B2-2020-reading-1"
-  questionType: multiple_choice
-  questionText: "zadanie 1, pytanie 3"
-  correctAnswer: "b"
+  questionId: "certyfikat-polski-B2-2020-rq3"
+  passageRef: "certyfikat-polski-B2-2020-read-3"
+  questionType: fill_gap
+  questionText: "Pytanie 3"
+  correctAnswer: "E A J G H D B C K I"
   points: 1
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-r1-q4"
-  passageRef: "certyfikat-polski-B2-2020-reading-1"
-  questionType: multiple_choice
-  questionText: "zadanie 1, pytanie 4"
-  correctAnswer: "a"
+  questionId: "certyfikat-polski-B2-2020-rq4"
+  passageRef: "certyfikat-polski-B2-2020-read-4"
+  questionType: fill_gap
+  questionText: "Pytanie 4"
+  correctAnswer: "TAK NIE BI"
   points: 1
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-r1-q5"
-  passageRef: "certyfikat-polski-B2-2020-reading-1"
-  questionType: multiple_choice
-  questionText: "zadanie 1, pytanie 5"
-  correctAnswer: "b"
+  questionId: "certyfikat-polski-B2-2020-rq5"
+  passageRef: "certyfikat-polski-B2-2020-read-5"
+  questionType: fill_gap
+  questionText: "Pytanie 5"
+  correctAnswer: "TEST PRZYKŁADOWY"
   points: 1
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-r2-q1"
-  passageRef: "certyfikat-polski-B2-2020-reading-2"
-  questionType: multiple_choice
-  questionText: "zadanie 2, pytanie 1"
-  correctAnswer: "E"
+  questionId: "certyfikat-polski-B2-2020-rq6"
+  passageRef: "certyfikat-polski-B2-2020-read-5"
+  questionType: fill_gap
+  questionText: "Pytanie 6"
+  correctAnswer: "POZIOM B"
   points: 1
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-r2-q2"
-  passageRef: "certyfikat-polski-B2-2020-reading-2"
-  questionType: multiple_choice
-  questionText: "zadanie 2, pytanie 2"
-  correctAnswer: "I"
-  points: 1
-}
-READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-r2-q3"
-  passageRef: "certyfikat-polski-B2-2020-reading-2"
-  questionType: multiple_choice
-  questionText: "zadanie 2, pytanie 3"
-  correctAnswer: "D"
-  points: 1
-}
-READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-r3-q1"
-  passageRef: "certyfikat-polski-B2-2020-reading-3"
-  questionType: multiple_choice
-  questionText: "zadanie 3, pytanie 1"
-  correctAnswer: "E"
-  points: 1
-}
-READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-r3-q2"
-  passageRef: "certyfikat-polski-B2-2020-reading-3"
-  questionType: multiple_choice
-  questionText: "zadanie 3, pytanie 2"
-  correctAnswer: "A"
-  points: 1
-}
-READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-r4-q1"
-  passageRef: "certyfikat-polski-B2-2020-reading-4"
-  questionType: multiple_choice
-  questionText: "zadanie 4, pytanie 1"
-  correctAnswer: "?"
-  points: 1
-}
-READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-r4-q2"
-  passageRef: "certyfikat-polski-B2-2020-reading-4"
-  questionType: multiple_choice
-  questionText: "zadanie 4, pytanie 2"
-  correctAnswer: "?"
-  points: 1
-}
-READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-r4-q3"
-  passageRef: "certyfikat-polski-B2-2020-reading-4"
-  questionType: multiple_choice
-  questionText: "zadanie 4, pytanie 3"
-  correctAnswer: "?"
-  points: 1
-}
-READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-r4-q4"
-  passageRef: "certyfikat-polski-B2-2020-reading-4"
-  questionType: multiple_choice
-  questionText: "zadanie 4, pytanie 4"
-  correctAnswer: "?"
-  points: 1
-}
-READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-r4-q5"
-  passageRef: "certyfikat-polski-B2-2020-reading-4"
-  questionType: multiple_choice
-  questionText: "zadanie 4, pytanie 5"
-  correctAnswer: "?"
-  points: 1
-}
-READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-r5-q1"
-  passageRef: "certyfikat-polski-B2-2020-reading-5"
-  questionType: multiple_choice
-  questionText: "zadanie 5, pytanie 1"
-  correctAnswer: "zakresu"
-  points: 1
-}
-READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-r5-q2"
-  passageRef: "certyfikat-polski-B2-2020-reading-5"
-  questionType: multiple_choice
-  questionText: "zadanie 5, pytanie 2"
-  correctAnswer: "co"
-  points: 1
-}
-READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-r5-q3"
-  passageRef: "certyfikat-polski-B2-2020-reading-5"
-  questionType: multiple_choice
-  questionText: "zadanie 5, pytanie 3"
-  correctAnswer: "Opracowane"
-  points: 1
-}
-READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-r5-q4"
-  passageRef: "certyfikat-polski-B2-2020-reading-5"
-  questionType: multiple_choice
-  questionText: "zadanie 5, pytanie 4"
-  correctAnswer: "zapoznać"
-  points: 1
-}
-READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-r5-q5"
-  passageRef: "certyfikat-polski-B2-2020-reading-5"
-  questionType: multiple_choice
-  questionText: "zadanie 5, pytanie 5"
-  correctAnswer: "opanowanie"
-  points: 1
-}
-READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-r5-q6"
-  passageRef: "certyfikat-polski-B2-2020-reading-5"
-  questionType: multiple_choice
-  questionText: "zadanie 5, pytanie 6"
-  correctAnswer: "uzyskają"
-  points: 1
-}
-READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-r5-q7"
-  passageRef: "certyfikat-polski-B2-2020-reading-5"
-  questionType: multiple_choice
-  questionText: "zadanie 5, pytanie 7"
-  correctAnswer: "obejmowała"
-  points: 1
-}
-READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-r5-q8"
-  passageRef: "certyfikat-polski-B2-2020-reading-5"
-  questionType: multiple_choice
-  questionText: "zadanie 5, pytanie 8"
-  correctAnswer: "poziom"
-  points: 1
-}
-READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-r5-q9"
-  passageRef: "certyfikat-polski-B2-2020-reading-5"
-  questionType: multiple_choice
-  questionText: "zadanie 5, pytanie 9"
-  correctAnswer: "zapewni"
-  points: 1
-}
-READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-r5-q10"
-  passageRef: "certyfikat-polski-B2-2020-reading-5"
-  questionType: multiple_choice
-  questionText: "zadanie 5, pytanie 10"
-  correctAnswer: "pozornie"
+  questionId: "certyfikat-polski-B2-2020-rq7"
+  passageRef: "certyfikat-polski-B2-2020-read-5"
+  questionType: fill_gap
+  questionText: "Pytanie 7"
+  correctAnswer: "TRANSKRYPCJE I KLUCZ DO ZADAŃ"
   points: 1
 }

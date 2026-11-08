@@ -3,17 +3,8 @@ WRITING_TASK {
   taskId: "certyfikat-polski-B2-2020-writing-1"
   examRef: "certyfikat-polski-B2-2020"
   taskNumber: 1
-  instruction: "Zadanie pisemne"
-  promptText: "See PDF for full prompt"
-  wordLimit: 80
+  instruction: "Zestaw I"
+  promptText: "Prosze wykonac zadanie pisemne zgodnie z poleceniem."
+  wordLimit: 200
   genre: letter
-}
-WRITING_TASK {
-  taskId: "certyfikat-polski-B2-2020-writing-2"
-  examRef: "certyfikat-polski-B2-2020"
-  taskNumber: 2
-  instruction: "Zadanie pisemne rozszerzone"
-  promptText: "See PDF for full prompt"
-  wordLimit: 190
-  genre: description
 }

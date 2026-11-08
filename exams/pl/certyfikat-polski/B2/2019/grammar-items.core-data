@@ -1,321 +1,113 @@
 DSL 1
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2019-g1-q1"
-  testRef: "certyfikat-polski-B2-2019-grammar-1"
-  questionType: fill_gap
-  context: "zadanie 1, pytanie 1"
-  correctAnswer: "zobowiązującą 6. włączonego"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2019-g1-q2"
-  testRef: "certyfikat-polski-B2-2019-grammar-1"
-  questionType: fill_gap
-  context: "zadanie 1, pytanie 2"
-  correctAnswer: "uszkodzony 7. pociągając"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2019-g1-q3"
-  testRef: "certyfikat-polski-B2-2019-grammar-1"
-  questionType: fill_gap
-  context: "zadanie 1, pytanie 3"
-  correctAnswer: "wskazane 8. Wybierając"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2019-g1-q4"
-  testRef: "certyfikat-polski-B2-2019-grammar-1"
-  questionType: fill_gap
-  context: "zadanie 1, pytanie 4"
-  correctAnswer: "podłączając 9. przeznaczoną"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2019-g1-q5"
-  testRef: "certyfikat-polski-B2-2019-grammar-1"
-  questionType: fill_gap
-  context: "zadanie 1, pytanie 5"
-  correctAnswer: "powodującymi 10. oferującym"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2019-g2-q1"
+  itemId: "certyfikat-polski-B2-2019-g1"
   testRef: "certyfikat-polski-B2-2019-grammar-2"
   questionType: fill_gap
-  context: "zadanie 2, pytanie 1"
-  correctAnswer: "na 6. po"
+  context: "Zadanie II, pytanie 1"
+  correctAnswer: "Wyrazy zbędne"
   points: 1
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2019-g2-q2"
+  itemId: "certyfikat-polski-B2-2019-g2"
   testRef: "certyfikat-polski-B2-2019-grammar-2"
   questionType: fill_gap
-  context: "zadanie 2, pytanie 2"
-  correctAnswer: "o 7. między"
+  context: "Zadanie II, pytanie 2"
+  correctAnswer: "wbrew"
   points: 1
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2019-g2-q3"
+  itemId: "certyfikat-polski-B2-2019-g3"
   testRef: "certyfikat-polski-B2-2019-grammar-2"
   questionType: fill_gap
-  context: "zadanie 2, pytanie 3"
-  correctAnswer: "ponad 8. przy"
+  context: "Zadanie II, pytanie 3"
+  correctAnswer: "z"
   points: 1
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2019-g2-q4"
-  testRef: "certyfikat-polski-B2-2019-grammar-2"
-  questionType: fill_gap
-  context: "zadanie 2, pytanie 4"
-  correctAnswer: "do 9. nad"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2019-g2-q5"
-  testRef: "certyfikat-polski-B2-2019-grammar-2"
-  questionType: fill_gap
-  context: "zadanie 2, pytanie 5"
-  correctAnswer: "według 10. Dzięki"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2019-g3-q1"
-  testRef: "certyfikat-polski-B2-2019-grammar-3"
-  questionType: fill_gap
-  context: "zadanie 3, pytanie 1"
-  correctAnswer: "wylewało się 6. powierzono"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2019-g3-q2"
-  testRef: "certyfikat-polski-B2-2019-grammar-3"
-  questionType: fill_gap
-  context: "zadanie 3, pytanie 2"
-  correctAnswer: "odnotowywano 7. pobierało się"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2019-g3-q3"
-  testRef: "certyfikat-polski-B2-2019-grammar-3"
-  questionType: fill_gap
-  context: "zadanie 3, pytanie 3"
-  correctAnswer: "odprowadzano 8. byli obsługiwani"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2019-g3-q4"
-  testRef: "certyfikat-polski-B2-2019-grammar-3"
-  questionType: fill_gap
-  context: "zadanie 3, pytanie 4"
-  correctAnswer: "wysłano 9. zostanie zaprezentowany"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2019-g3-q5"
-  testRef: "certyfikat-polski-B2-2019-grammar-3"
-  questionType: fill_gap
-  context: "zadanie 3, pytanie 5"
-  correctAnswer: "została podjęta 10. będzie wyświetlany"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2019-g4-q1"
-  testRef: "certyfikat-polski-B2-2019-grammar-4"
-  questionType: fill_gap
-  context: "zadanie 4, pytanie 1"
-  correctAnswer: "centrum 6. pediatrów"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2019-g4-q2"
-  testRef: "certyfikat-polski-B2-2019-grammar-4"
-  questionType: fill_gap
-  context: "zadanie 4, pytanie 2"
-  correctAnswer: "kongresowym 7. nikomu"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2019-g4-q3"
-  testRef: "certyfikat-polski-B2-2019-grammar-4"
-  questionType: fill_gap
-  context: "zadanie 4, pytanie 3"
-  correctAnswer: "znani 8. dorosłych"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2019-g4-q4"
-  testRef: "certyfikat-polski-B2-2019-grammar-4"
-  questionType: fill_gap
-  context: "zadanie 4, pytanie 4"
-  correctAnswer: "dietetycy 9. je"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2019-g4-q5"
-  testRef: "certyfikat-polski-B2-2019-grammar-4"
-  questionType: fill_gap
-  context: "zadanie 4, pytanie 5"
-  correctAnswer: "doświadczonych 10. je"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2019-g5-q1"
+  itemId: "certyfikat-polski-B2-2019-g4"
   testRef: "certyfikat-polski-B2-2019-grammar-5"
   questionType: fill_gap
-  context: "zadanie 5, pytanie 1"
-  correctAnswer: "trzej 6. latach"
+  context: "Zadanie V, pytanie 4"
+  correctAnswer: "TEST PRZYKŁADOWY"
   points: 1
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2019-g5-q2"
+  itemId: "certyfikat-polski-B2-2019-g5"
   testRef: "certyfikat-polski-B2-2019-grammar-5"
   questionType: fill_gap
-  context: "zadanie 5, pytanie 2"
-  correctAnswer: "bracia 7. kilka"
+  context: "Zadanie V, pytanie 5"
+  correctAnswer: "POZIOM B"
   points: 1
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2019-g5-q3"
+  itemId: "certyfikat-polski-B2-2019-g6"
   testRef: "certyfikat-polski-B2-2019-grammar-5"
   questionType: fill_gap
-  context: "zadanie 5, pytanie 3"
-  correctAnswer: "trzem 8. miesięcy"
+  context: "Zadanie V, pytanie 6"
+  correctAnswer: "TRANSKRYPCJE I KLUCZ DO ZADAŃ"
   points: 1
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2019-g5-q4"
-  testRef: "certyfikat-polski-B2-2019-grammar-5"
-  questionType: fill_gap
-  context: "zadanie 5, pytanie 4"
-  correctAnswer: "biskupstwom 9. trzydziestu trzech"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2019-g5-q5"
-  testRef: "certyfikat-polski-B2-2019-grammar-5"
-  questionType: fill_gap
-  context: "zadanie 5, pytanie 5"
-  correctAnswer: "szesnastu 10. lat"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2019-g6-q1"
-  testRef: "certyfikat-polski-B2-2019-grammar-6"
-  questionType: fill_gap
-  context: "zadanie 6, pytanie 1"
-  correctAnswer: "pozostawały 6. zniszczyła"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2019-g6-q2"
-  testRef: "certyfikat-polski-B2-2019-grammar-6"
-  questionType: fill_gap
-  context: "zadanie 6, pytanie 2"
-  correctAnswer: "ingerowali 7. zwracali"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2019-g6-q3"
-  testRef: "certyfikat-polski-B2-2019-grammar-6"
-  questionType: fill_gap
-  context: "zadanie 6, pytanie 3"
-  correctAnswer: "zaczęła 8. odwołał"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2019-g6-q4"
-  testRef: "certyfikat-polski-B2-2019-grammar-6"
-  questionType: fill_gap
-  context: "zadanie 6, pytanie 4"
-  correctAnswer: "stwierdził 9. będą stosowali / będą stosować"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2019-g6-q5"
-  testRef: "certyfikat-polski-B2-2019-grammar-6"
-  questionType: fill_gap
-  context: "zadanie 6, pytanie 5"
-  correctAnswer: "skupią się 10. przyczyni się"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2019-g7-q1"
-  testRef: "certyfikat-polski-B2-2019-grammar-7"
-  questionType: fill_gap
-  context: "zadanie 7, pytanie 1"
-  correctAnswer: "więcej 6. obszerniejszy/bardziej obszerny"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2019-g7-q2"
-  testRef: "certyfikat-polski-B2-2019-grammar-7"
-  questionType: fill_gap
-  context: "zadanie 7, pytanie 2"
-  correctAnswer: "droższe 7. najrzadziej"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2019-g7-q3"
-  testRef: "certyfikat-polski-B2-2019-grammar-7"
-  questionType: fill_gap
-  context: "zadanie 7, pytanie 3"
-  correctAnswer: "częściej 8. najlepiej"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2019-g7-q4"
-  testRef: "certyfikat-polski-B2-2019-grammar-7"
-  questionType: fill_gap
-  context: "zadanie 7, pytanie 4"
-  correctAnswer: "wyższym 9. krócej"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2019-g7-q5"
-  testRef: "certyfikat-polski-B2-2019-grammar-7"
-  questionType: fill_gap
-  context: "zadanie 7, pytanie 5"
-  correctAnswer: "najważniejsze 10. atrakcyjniejszym/bardziej atrakcyjnym"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2019-g8-q1"
+  itemId: "certyfikat-polski-B2-2019-g7"
   testRef: "certyfikat-polski-B2-2019-grammar-8"
   questionType: fill_gap
-  context: "zadanie 8, pytanie 1"
-  correctAnswer: "Wbrew protestom rodziców szkolny sklepik został zamknięty. / Wbrew protestującym"
+  context: "Zadanie VIII, pytanie 7"
+  correctAnswer: "rodzicom"
   points: 1
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2019-g8-q2"
+  itemId: "certyfikat-polski-B2-2019-g8"
   testRef: "certyfikat-polski-B2-2019-grammar-8"
   questionType: fill_gap
-  context: "zadanie 8, pytanie 2"
-  correctAnswer: "Robertowi nie udało się zdać testu przez ciągłą nieobecność na lekcjach / przez ciągłe"
+  context: "Zadanie VIII, pytanie 8"
+  correctAnswer: "nieobecności na lekcjach"
   points: 1
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2019-g8-q3"
+  itemId: "certyfikat-polski-B2-2019-g9"
   testRef: "certyfikat-polski-B2-2019-grammar-8"
   questionType: fill_gap
-  context: "zadanie 8, pytanie 3"
-  correctAnswer: "Beata jest gotowa poświęcić wiele dla zachowania smukłej sylwetki."
+  context: "Zadanie VIII, pytanie 9"
+  correctAnswer: "przez to"
   points: 1
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2019-g8-q4"
+  itemId: "certyfikat-polski-B2-2019-g10"
   testRef: "certyfikat-polski-B2-2019-grammar-8"
   questionType: fill_gap
-  context: "zadanie 8, pytanie 4"
-  correctAnswer: "Po powrocie z urlopu musimy wziąć się do remontu mieszkania. / Po urlopie…"
+  context: "Zadanie VIII, pytanie 10"
+  correctAnswer: "że był ciągle nieobecny na lekcjach"
   points: 1
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2019-g8-q5"
+  itemId: "certyfikat-polski-B2-2019-g11"
   testRef: "certyfikat-polski-B2-2019-grammar-8"
   questionType: fill_gap
-  context: "zadanie 8, pytanie 5"
-  correctAnswer: "W razie silnych zawrotów głowy zadzwoń po pogotowie."
+  context: "Zadanie VIII, pytanie 11"
+  correctAnswer: "Należy uznać wszystkie inne poprawne rozwiązania zgodne z poleceniem"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B2-2019-g12"
+  testRef: "certyfikat-polski-B2-2019-grammar-8"
+  questionType: fill_gap
+  context: "Zadanie VIII, pytanie 12"
+  correctAnswer: "TEST PRZYKŁADOWY"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B2-2019-g13"
+  testRef: "certyfikat-polski-B2-2019-grammar-8"
+  questionType: fill_gap
+  context: "Zadanie VIII, pytanie 13"
+  correctAnswer: "POZIOM B"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B2-2019-g14"
+  testRef: "certyfikat-polski-B2-2019-grammar-8"
+  questionType: fill_gap
+  context: "Zadanie VIII, pytanie 14"
+  correctAnswer: "TRANSKRYPCJE I KLUCZ DO ZADAŃ"
   points: 1
 }

@@ -1,281 +1,137 @@
 DSL 1
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2017-g1-q1"
-  testRef: "certyfikat-polski-B1-2017-grammar-1"
-  questionType: fill_gap
-  context: "zadanie 1, pytanie 1"
-  correctAnswer: "dobrego teatru 6. zwierząt"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2017-g1-q2"
-  testRef: "certyfikat-polski-B1-2017-grammar-1"
-  questionType: fill_gap
-  context: "zadanie 1, pytanie 2"
-  correctAnswer: "późnym latem 7. je"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2017-g1-q3"
-  testRef: "certyfikat-polski-B1-2017-grammar-1"
-  questionType: fill_gap
-  context: "zadanie 1, pytanie 3"
-  correctAnswer: "nimi 8. dużego parku"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2017-g1-q4"
-  testRef: "certyfikat-polski-B1-2017-grammar-1"
-  questionType: fill_gap
-  context: "zadanie 1, pytanie 4"
-  correctAnswer: "wygodne hotele 9. nad"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2017-g1-q5"
-  testRef: "certyfikat-polski-B1-2017-grammar-1"
-  questionType: fill_gap
-  context: "zadanie 1, pytanie 5"
-  correctAnswer: "naszym mieście 10. w"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2017-g2-q1"
-  testRef: "certyfikat-polski-B1-2017-grammar-2"
-  questionType: fill_gap
-  context: "zadanie 2, pytanie 1"
-  correctAnswer: "dłuższy"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2017-g2-q2"
-  testRef: "certyfikat-polski-B1-2017-grammar-2"
-  questionType: fill_gap
-  context: "zadanie 2, pytanie 2"
-  correctAnswer: "więcej"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2017-g2-q3"
-  testRef: "certyfikat-polski-B1-2017-grammar-2"
-  questionType: fill_gap
-  context: "zadanie 2, pytanie 3"
-  correctAnswer: "trudniej"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2017-g2-q4"
-  testRef: "certyfikat-polski-B1-2017-grammar-2"
-  questionType: fill_gap
-  context: "zadanie 2, pytanie 4"
-  correctAnswer: "najlepsze"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2017-g2-q5"
-  testRef: "certyfikat-polski-B1-2017-grammar-2"
-  questionType: fill_gap
-  context: "zadanie 2, pytanie 5"
-  correctAnswer: "najbardziej"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2017-g3-q1"
-  testRef: "certyfikat-polski-B1-2017-grammar-3"
-  questionType: fill_gap
-  context: "zadanie 3, pytanie 1"
-  correctAnswer: "przyjechałybyśmy 6. czekamy"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2017-g3-q2"
-  testRef: "certyfikat-polski-B1-2017-grammar-3"
-  questionType: fill_gap
-  context: "zadanie 3, pytanie 2"
-  correctAnswer: "wynajmij 7. Skontaktuj"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2017-g3-q3"
-  testRef: "certyfikat-polski-B1-2017-grammar-3"
-  questionType: fill_gap
-  context: "zadanie 3, pytanie 3"
-  correctAnswer: "zadzwonimy 8. odpowiem"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2017-g3-q4"
-  testRef: "certyfikat-polski-B1-2017-grammar-3"
-  questionType: fill_gap
-  context: "zadanie 3, pytanie 4"
-  correctAnswer: "znajdziemy 9. dostały"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2017-g3-q5"
-  testRef: "certyfikat-polski-B1-2017-grammar-3"
-  questionType: fill_gap
-  context: "zadanie 3, pytanie 5"
-  correctAnswer: "zarezerwujemy 10. patrz"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2017-g4-q1"
+  itemId: "certyfikat-polski-B1-2017-g1"
   testRef: "certyfikat-polski-B1-2017-grammar-4"
   questionType: fill_gap
-  context: "zadanie 4, pytanie 1"
-  correctAnswer: "skąd"
+  context: "Zadanie IV, pytanie 1"
+  correctAnswer: "z kim"
   points: 1
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2017-g4-q2"
+  itemId: "certyfikat-polski-B1-2017-g2"
   testRef: "certyfikat-polski-B1-2017-grammar-4"
   questionType: fill_gap
-  context: "zadanie 4, pytanie 2"
-  correctAnswer: "z którym"
+  context: "Zadanie IV, pytanie 2"
+  correctAnswer: "p"
   points: 1
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2017-g4-q3"
+  itemId: "certyfikat-polski-B1-2017-g3"
   testRef: "certyfikat-polski-B1-2017-grammar-4"
   questionType: fill_gap
-  context: "zadanie 4, pytanie 3"
-  correctAnswer: "po co"
+  context: "Zadanie IV, pytanie 3"
+  correctAnswer: "dlaczego"
   points: 1
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2017-g4-q4"
+  itemId: "certyfikat-polski-B1-2017-g4"
   testRef: "certyfikat-polski-B1-2017-grammar-4"
   questionType: fill_gap
-  context: "zadanie 4, pytanie 4"
-  correctAnswer: "jakich"
+  context: "Zadanie IV, pytanie 4"
+  correctAnswer: "p"
   points: 1
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2017-g4-q5"
+  itemId: "certyfikat-polski-B1-2017-g5"
   testRef: "certyfikat-polski-B1-2017-grammar-4"
   questionType: fill_gap
-  context: "zadanie 4, pytanie 5"
-  correctAnswer: "czego"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2017-g5-q1"
-  testRef: "certyfikat-polski-B1-2017-grammar-5"
-  questionType: fill_gap
-  context: "zadanie 5, pytanie 1"
-  correctAnswer: "byliśmy 6. mam"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2017-g5-q2"
-  testRef: "certyfikat-polski-B1-2017-grammar-5"
-  questionType: fill_gap
-  context: "zadanie 5, pytanie 2"
-  correctAnswer: "chcieliśmy 7. uczą"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2017-g5-q3"
-  testRef: "certyfikat-polski-B1-2017-grammar-5"
-  questionType: fill_gap
-  context: "zadanie 5, pytanie 3"
-  correctAnswer: "zmieniłem 8. chodzi"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2017-g5-q4"
-  testRef: "certyfikat-polski-B1-2017-grammar-5"
-  questionType: fill_gap
-  context: "zadanie 5, pytanie 4"
-  correctAnswer: "zamierzam 9. mogą"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2017-g5-q5"
-  testRef: "certyfikat-polski-B1-2017-grammar-5"
-  questionType: fill_gap
-  context: "zadanie 5, pytanie 5"
-  correctAnswer: "planuję 10. widziałem"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2017-g6-q1"
-  testRef: "certyfikat-polski-B1-2017-grammar-6"
-  questionType: fill_gap
-  context: "zadanie 6, pytanie 1"
-  correctAnswer: "Chociaż"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2017-g6-q2"
-  testRef: "certyfikat-polski-B1-2017-grammar-6"
-  questionType: fill_gap
-  context: "zadanie 6, pytanie 2"
-  correctAnswer: "czy"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2017-g6-q3"
-  testRef: "certyfikat-polski-B1-2017-grammar-6"
-  questionType: fill_gap
-  context: "zadanie 6, pytanie 3"
-  correctAnswer: "że"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2017-g6-q4"
-  testRef: "certyfikat-polski-B1-2017-grammar-6"
-  questionType: fill_gap
-  context: "zadanie 6, pytanie 4"
+  context: "Zadanie IV, pytanie 5"
   correctAnswer: "a"
   points: 1
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2017-g6-q5"
+  itemId: "certyfikat-polski-B1-2017-g6"
+  testRef: "certyfikat-polski-B1-2017-grammar-4"
+  questionType: fill_gap
+  context: "Zadanie IV, pytanie 6"
+  correctAnswer: "n"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B1-2017-g7"
+  testRef: "certyfikat-polski-B1-2017-grammar-4"
+  questionType: fill_gap
+  context: "Zadanie IV, pytanie 7"
+  correctAnswer: "o"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B1-2017-g8"
+  testRef: "certyfikat-polski-B1-2017-grammar-4"
+  questionType: fill_gap
+  context: "Zadanie IV, pytanie 8"
+  correctAnswer: "r"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B1-2017-g9"
+  testRef: "certyfikat-polski-B1-2017-grammar-4"
+  questionType: fill_gap
+  context: "Zadanie IV, pytanie 9"
+  correctAnswer: "t"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B1-2017-g10"
+  testRef: "certyfikat-polski-B1-2017-grammar-4"
+  questionType: fill_gap
+  context: "Zadanie IV, pytanie 10"
+  correctAnswer: "S"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B1-2017-g11"
+  testRef: "certyfikat-polski-B1-2017-grammar-4"
+  questionType: fill_gap
+  context: "Zadanie IV, pytanie 11"
+  correctAnswer: "TEST PRZYKŁADOWY"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B1-2017-g12"
+  testRef: "certyfikat-polski-B1-2017-grammar-4"
+  questionType: fill_gap
+  context: "Zadanie IV, pytanie 12"
+  correctAnswer: "B"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B1-2017-g13"
+  testRef: "certyfikat-polski-B1-2017-grammar-4"
+  questionType: fill_gap
+  context: "Zadanie IV, pytanie 13"
+  correctAnswer: "TRANSKRYPCJE I KLUCZ DO ZADAŃ"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B1-2017-g14"
   testRef: "certyfikat-polski-B1-2017-grammar-6"
   questionType: fill_gap
-  context: "zadanie 6, pytanie 5"
-  correctAnswer: "Gdyby"
+  context: "Zadanie VI, pytanie 14"
+  correctAnswer: "Zbędny spójnik"
   points: 1
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2017-g7-q1"
-  testRef: "certyfikat-polski-B1-2017-grammar-7"
+  itemId: "certyfikat-polski-B1-2017-g15"
+  testRef: "certyfikat-polski-B1-2017-grammar-6"
   questionType: fill_gap
-  context: "zadanie 7, pytanie 1"
-  correctAnswer: "dla"
+  context: "Zadanie VI, pytanie 15"
+  correctAnswer: "ale"
   points: 1
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2017-g7-q2"
+  itemId: "certyfikat-polski-B1-2017-g16"
   testRef: "certyfikat-polski-B1-2017-grammar-7"
   questionType: fill_gap
-  context: "zadanie 7, pytanie 2"
-  correctAnswer: "przy"
+  context: "Zadanie VII, pytanie 16"
+  correctAnswer: "Oraz inne poprawne zdania o tej treści"
   points: 1
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2017-g7-q3"
+  itemId: "certyfikat-polski-B1-2017-g17"
   testRef: "certyfikat-polski-B1-2017-grammar-7"
   questionType: fill_gap
-  context: "zadanie 7, pytanie 3"
-  correctAnswer: "po"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2017-g7-q4"
-  testRef: "certyfikat-polski-B1-2017-grammar-7"
-  questionType: fill_gap
-  context: "zadanie 7, pytanie 4"
-  correctAnswer: "z"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2017-g7-q5"
-  testRef: "certyfikat-polski-B1-2017-grammar-7"
-  questionType: fill_gap
-  context: "zadanie 7, pytanie 5"
-  correctAnswer: "bez"
+  context: "Zadanie VII, pytanie 17"
+  correctAnswer: "ZADANIA DODATKOWE"
   points: 1
 }

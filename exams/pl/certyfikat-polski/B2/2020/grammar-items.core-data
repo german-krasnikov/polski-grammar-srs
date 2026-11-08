@@ -1,321 +1,81 @@
 DSL 1
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2020-g1-q1"
-  testRef: "certyfikat-polski-B2-2020-grammar-1"
-  questionType: fill_gap
-  context: "zadanie 1, pytanie 1"
-  correctAnswer: "Wybierając 6. palone"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2020-g1-q2"
-  testRef: "certyfikat-polski-B2-2020-grammar-1"
-  questionType: fill_gap
-  context: "zadanie 1, pytanie 2"
-  correctAnswer: "produkowane 7. emitujące"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2020-g1-q3"
-  testRef: "certyfikat-polski-B2-2020-grammar-1"
-  questionType: fill_gap
-  context: "zadanie 1, pytanie 3"
-  correctAnswer: "stanowiącego 8. Wywoływane"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2020-g1-q4"
-  testRef: "certyfikat-polski-B2-2020-grammar-1"
-  questionType: fill_gap
-  context: "zadanie 1, pytanie 4"
-  correctAnswer: "zanieczyszczonych 9. Rezygnując"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2020-g1-q5"
-  testRef: "certyfikat-polski-B2-2020-grammar-1"
-  questionType: fill_gap
-  context: "zadanie 1, pytanie 5"
-  correctAnswer: "dominującym 10. zawieszonych"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2020-g2-q1"
+  itemId: "certyfikat-polski-B2-2020-g1"
   testRef: "certyfikat-polski-B2-2020-grammar-2"
   questionType: fill_gap
-  context: "zadanie 2, pytanie 1"
-  correctAnswer: "na 6. w"
+  context: "Zadanie II, pytanie 1"
+  correctAnswer: "wyrazy zbędne"
   points: 1
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2020-g2-q2"
+  itemId: "certyfikat-polski-B2-2020-g2"
   testRef: "certyfikat-polski-B2-2020-grammar-2"
   questionType: fill_gap
-  context: "zadanie 2, pytanie 2"
-  correctAnswer: "dla 7. o"
+  context: "Zadanie II, pytanie 2"
+  correctAnswer: "wbrew"
   points: 1
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2020-g2-q3"
+  itemId: "certyfikat-polski-B2-2020-g3"
   testRef: "certyfikat-polski-B2-2020-grammar-2"
   questionType: fill_gap
-  context: "zadanie 2, pytanie 3"
-  correctAnswer: "od 8. przy / w (jeżeli nie został wykorzystany w p. 6)"
+  context: "Zadanie II, pytanie 3"
+  correctAnswer: "wokół"
   points: 1
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2020-g2-q4"
-  testRef: "certyfikat-polski-B2-2020-grammar-2"
-  questionType: fill_gap
-  context: "zadanie 2, pytanie 4"
-  correctAnswer: "do 9. u"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2020-g2-q5"
-  testRef: "certyfikat-polski-B2-2020-grammar-2"
-  questionType: fill_gap
-  context: "zadanie 2, pytanie 5"
-  correctAnswer: "za 10. dzięki"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2020-g3-q1"
-  testRef: "certyfikat-polski-B2-2020-grammar-3"
-  questionType: fill_gap
-  context: "zadanie 3, pytanie 1"
-  correctAnswer: "był odnawiany 6. zostanie podłączona"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2020-g3-q2"
-  testRef: "certyfikat-polski-B2-2020-grammar-3"
-  questionType: fill_gap
-  context: "zadanie 3, pytanie 2"
-  correctAnswer: "została zmieniona 7. zamontowano"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2020-g3-q3"
-  testRef: "certyfikat-polski-B2-2020-grammar-3"
-  questionType: fill_gap
-  context: "zadanie 3, pytanie 3"
-  correctAnswer: "przywrócono 8. zarezerwowano"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2020-g3-q4"
-  testRef: "certyfikat-polski-B2-2020-grammar-3"
-  questionType: fill_gap
-  context: "zadanie 3, pytanie 4"
-  correctAnswer: "zwraca się 9. jest wspierana"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2020-g3-q5"
-  testRef: "certyfikat-polski-B2-2020-grammar-3"
-  questionType: fill_gap
-  context: "zadanie 3, pytanie 5"
-  correctAnswer: "postanowiono 10. zapomina się"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2020-g4-q1"
+  itemId: "certyfikat-polski-B2-2020-g4"
   testRef: "certyfikat-polski-B2-2020-grammar-4"
   questionType: fill_gap
-  context: "zadanie 4, pytanie 1"
-  correctAnswer: "Meksykanie 6. bohaterowie / bohaterzy"
+  context: "Zadanie IV, pytanie 4"
+  correctAnswer: "TEST PRZYKŁADOWY"
   points: 1
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2020-g4-q2"
+  itemId: "certyfikat-polski-B2-2020-g5"
   testRef: "certyfikat-polski-B2-2020-grammar-4"
   questionType: fill_gap
-  context: "zadanie 4, pytanie 2"
-  correctAnswer: "Osła / Osłów 7. wszystkich"
+  context: "Zadanie IV, pytanie 5"
+  correctAnswer: "POZIOM B"
   points: 1
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2020-g4-q3"
+  itemId: "certyfikat-polski-B2-2020-g6"
   testRef: "certyfikat-polski-B2-2020-grammar-4"
   questionType: fill_gap
-  context: "zadanie 4, pytanie 3"
-  correctAnswer: "tym 8. właścicieli"
+  context: "Zadanie IV, pytanie 6"
+  correctAnswer: "TRANSKRYPCJE I KLUCZ DO ZADAŃ"
   points: 1
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2020-g4-q4"
-  testRef: "certyfikat-polski-B2-2020-grammar-4"
-  questionType: fill_gap
-  context: "zadanie 4, pytanie 4"
-  correctAnswer: "zwierzętom 9. nikomu"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2020-g4-q5"
-  testRef: "certyfikat-polski-B2-2020-grammar-4"
-  questionType: fill_gap
-  context: "zadanie 4, pytanie 5"
-  correctAnswer: "Główni 10. kimkolwiek"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2020-g5-q1"
-  testRef: "certyfikat-polski-B2-2020-grammar-5"
-  questionType: fill_gap
-  context: "zadanie 5, pytanie 1"
-  correctAnswer: "zobaczą 6. opowie"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2020-g5-q2"
-  testRef: "certyfikat-polski-B2-2020-grammar-5"
-  questionType: fill_gap
-  context: "zadanie 5, pytanie 2"
-  correctAnswer: "wybrać 7. będą wprowadzać / będą wprowadzali"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2020-g5-q3"
-  testRef: "certyfikat-polski-B2-2020-grammar-5"
-  questionType: fill_gap
-  context: "zadanie 5, pytanie 3"
-  correctAnswer: "zaczną 8. opuszczała"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2020-g5-q4"
-  testRef: "certyfikat-polski-B2-2020-grammar-5"
-  questionType: fill_gap
-  context: "zadanie 5, pytanie 4"
-  correctAnswer: "starali się 9. korzystali"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2020-g5-q5"
-  testRef: "certyfikat-polski-B2-2020-grammar-5"
-  questionType: fill_gap
-  context: "zadanie 5, pytanie 5"
-  correctAnswer: "przyjął 10. podjęła"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2020-g6-q1"
-  testRef: "certyfikat-polski-B2-2020-grammar-6"
-  questionType: fill_gap
-  context: "zadanie 6, pytanie 1"
-  correctAnswer: "trzej 6. rodzinom"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2020-g6-q2"
-  testRef: "certyfikat-polski-B2-2020-grammar-6"
-  questionType: fill_gap
-  context: "zadanie 6, pytanie 2"
-  correctAnswer: "synowie 7. wielu"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2020-g6-q3"
-  testRef: "certyfikat-polski-B2-2020-grammar-6"
-  questionType: fill_gap
-  context: "zadanie 6, pytanie 3"
-  correctAnswer: "pięciu 8. godzin"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2020-g6-q4"
-  testRef: "certyfikat-polski-B2-2020-grammar-6"
-  questionType: fill_gap
-  context: "zadanie 6, pytanie 4"
-  correctAnswer: "potomków 9. tysiącem"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2020-g6-q5"
-  testRef: "certyfikat-polski-B2-2020-grammar-6"
-  questionType: fill_gap
-  context: "zadanie 6, pytanie 5"
-  correctAnswer: "dwu 10. torebek"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2020-g7-q1"
-  testRef: "certyfikat-polski-B2-2020-grammar-7"
-  questionType: fill_gap
-  context: "zadanie 7, pytanie 1"
-  correctAnswer: "więcej 6. cieplejsze"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2020-g7-q2"
-  testRef: "certyfikat-polski-B2-2020-grammar-7"
-  questionType: fill_gap
-  context: "zadanie 7, pytanie 2"
-  correctAnswer: "częstsze 7. szybciej"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2020-g7-q3"
-  testRef: "certyfikat-polski-B2-2020-grammar-7"
-  questionType: fill_gap
-  context: "zadanie 7, pytanie 3"
-  correctAnswer: "najgorętszym/najbardziej gorącym 8. gorszego"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2020-g7-q4"
-  testRef: "certyfikat-polski-B2-2020-grammar-7"
-  questionType: fill_gap
-  context: "zadanie 7, pytanie 4"
-  correctAnswer: "wyższe 9. łagodniejsze"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2020-g7-q5"
-  testRef: "certyfikat-polski-B2-2020-grammar-7"
-  questionType: fill_gap
-  context: "zadanie 7, pytanie 5"
-  correctAnswer: "najgwałtowniejsze/najbardziej gwałtowne 10. Wcześniej"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2020-g8-q1"
+  itemId: "certyfikat-polski-B2-2020-g7"
   testRef: "certyfikat-polski-B2-2020-grammar-8"
   questionType: fill_gap
-  context: "zadanie 8, pytanie 1"
-  correctAnswer: "Przez twoje codzienne spóźnienia / spóźnianie się nie zdążyliśmy skończyć naszego"
+  context: "Zadanie VIII, pytanie 7"
+  correctAnswer: "Należy uznać wszystkie inne poprawne rozwiązania zgodne z poleceniem"
   points: 1
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2020-g8-q2"
+  itemId: "certyfikat-polski-B2-2020-g8"
   testRef: "certyfikat-polski-B2-2020-grammar-8"
   questionType: fill_gap
-  context: "zadanie 8, pytanie 2"
-  correctAnswer: "p Zn ro a j l e a k zł t a u . p racę w tej firmie dzięki dobrej znajomości języka chińskiego."
+  context: "Zadanie VIII, pytanie 8"
+  correctAnswer: "TEST PRZYKŁADOWY"
   points: 1
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2020-g8-q3"
+  itemId: "certyfikat-polski-B2-2020-g9"
   testRef: "certyfikat-polski-B2-2020-grammar-8"
   questionType: fill_gap
-  context: "zadanie 8, pytanie 3"
-  correctAnswer: "Nie poszedł na studia wbrew oczekiwaniom (swoich) rodziców."
+  context: "Zadanie VIII, pytanie 9"
+  correctAnswer: "POZIOM B"
   points: 1
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2020-g8-q4"
+  itemId: "certyfikat-polski-B2-2020-g10"
   testRef: "certyfikat-polski-B2-2020-grammar-8"
   questionType: fill_gap
-  context: "zadanie 8, pytanie 4"
-  correctAnswer: "Powrócił do zdrowia po długiej i ciężkiej chorobie."
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2020-g8-q5"
-  testRef: "certyfikat-polski-B2-2020-grammar-8"
-  questionType: fill_gap
-  context: "zadanie 8, pytanie 5"
-  correctAnswer: "Bez umiejętności pływania / pływackich nie można wyruszyć w taki rejs."
+  context: "Zadanie VIII, pytanie 10"
+  correctAnswer: "TRANSKRYPCJE I KLUCZ DO ZADAŃ"
   points: 1
 }

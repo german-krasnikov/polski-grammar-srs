@@ -1,45 +1,45 @@
 DSL 1
 LISTENING_TASK {
-  taskId: "certyfikat-polski-B2-2017-listening-1"
+  taskId: "certyfikat-polski-B2-2017-listen-1"
   examRef: "certyfikat-polski-B2-2017"
   taskNumber: 1
-  audioUrl: "https://certyfikatpolski.pl/audio/B2_2017.mp3"
+  audioUrl: "ExamBin/pl/B2/2017/audio.mp3"
   segmentStartMs: 0
   segmentEndMs: 0
   instruction: "Zadanie 1"
 }
 LISTENING_TASK {
-  taskId: "certyfikat-polski-B2-2017-listening-2"
+  taskId: "certyfikat-polski-B2-2017-listen-2"
   examRef: "certyfikat-polski-B2-2017"
   taskNumber: 2
-  audioUrl: "https://certyfikatpolski.pl/audio/B2_2017.mp3"
+  audioUrl: "ExamBin/pl/B2/2017/audio.mp3"
   segmentStartMs: 0
   segmentEndMs: 0
   instruction: "Zadanie 2"
 }
 LISTENING_TASK {
-  taskId: "certyfikat-polski-B2-2017-listening-3"
+  taskId: "certyfikat-polski-B2-2017-listen-3"
   examRef: "certyfikat-polski-B2-2017"
   taskNumber: 3
-  audioUrl: "https://certyfikatpolski.pl/audio/B2_2017.mp3"
+  audioUrl: "ExamBin/pl/B2/2017/audio.mp3"
   segmentStartMs: 0
   segmentEndMs: 0
   instruction: "Zadanie 3"
 }
 LISTENING_TASK {
-  taskId: "certyfikat-polski-B2-2017-listening-4"
+  taskId: "certyfikat-polski-B2-2017-listen-4"
   examRef: "certyfikat-polski-B2-2017"
   taskNumber: 4
-  audioUrl: "https://certyfikatpolski.pl/audio/B2_2017.mp3"
+  audioUrl: "ExamBin/pl/B2/2017/audio.mp3"
   segmentStartMs: 0
   segmentEndMs: 0
   instruction: "Zadanie 4"
 }
 LISTENING_TASK {
-  taskId: "certyfikat-polski-B2-2017-listening-5"
+  taskId: "certyfikat-polski-B2-2017-listen-5"
   examRef: "certyfikat-polski-B2-2017"
   taskNumber: 5
-  audioUrl: "https://certyfikatpolski.pl/audio/B2_2017.mp3"
+  audioUrl: "ExamBin/pl/B2/2017/audio.mp3"
   segmentStartMs: 0
   segmentEndMs: 0
   instruction: "Zadanie 5"

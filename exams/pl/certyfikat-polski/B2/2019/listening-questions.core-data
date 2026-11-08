@@ -1,235 +1,425 @@
 DSL 1
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-l1-q1"
-  taskRef: "certyfikat-polski-B2-2019-listening-1"
+  questionId: "certyfikat-polski-B2-2019-lq1"
+  taskRef: "certyfikat-polski-B2-2019-listen-1"
   questionType: multiple_choice
-  questionText: "zadanie 1, pytanie 1"
-  options: "a|b|c"
-  correctAnswer: "?"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-l1-q2"
-  taskRef: "certyfikat-polski-B2-2019-listening-1"
-  questionType: multiple_choice
-  questionText: "zadanie 1, pytanie 2"
-  options: "a|b|c"
-  correctAnswer: "?"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-l1-q3"
-  taskRef: "certyfikat-polski-B2-2019-listening-1"
-  questionType: multiple_choice
-  questionText: "zadanie 1, pytanie 3"
-  options: "a|b|c"
-  correctAnswer: "?"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-l1-q4"
-  taskRef: "certyfikat-polski-B2-2019-listening-1"
-  questionType: multiple_choice
-  questionText: "zadanie 1, pytanie 4"
-  options: "a|b|c"
-  correctAnswer: "?"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-l1-q5"
-  taskRef: "certyfikat-polski-B2-2019-listening-1"
-  questionType: multiple_choice
-  questionText: "zadanie 1, pytanie 5"
-  options: "a|b|c"
-  correctAnswer: "?"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-l2-q1"
-  taskRef: "certyfikat-polski-B2-2019-listening-2"
-  questionType: multiple_choice
-  questionText: "zadanie 2, pytanie 1"
-  options: "a|b|c"
+  questionText: "Pytanie 1"
   correctAnswer: "a"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-l2-q2"
-  taskRef: "certyfikat-polski-B2-2019-listening-2"
+  questionId: "certyfikat-polski-B2-2019-lq2"
+  taskRef: "certyfikat-polski-B2-2019-listen-1"
   questionType: multiple_choice
-  questionText: "zadanie 2, pytanie 2"
-  options: "a|b|c"
-  correctAnswer: "a"
+  questionText: "Pytanie 2"
+  correctAnswer: "c b"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-l2-q3"
-  taskRef: "certyfikat-polski-B2-2019-listening-2"
+  questionId: "certyfikat-polski-B2-2019-lq3"
+  taskRef: "certyfikat-polski-B2-2019-listen-1"
   questionType: multiple_choice
-  questionText: "zadanie 2, pytanie 3"
-  options: "a|b|c"
+  questionText: "Pytanie 3"
+  correctAnswer: "b b"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2019-lq4"
+  taskRef: "certyfikat-polski-B2-2019-listen-1"
+  questionType: multiple_choice
+  questionText: "Pytanie 4"
+  correctAnswer: "a a"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2019-lq5"
+  taskRef: "certyfikat-polski-B2-2019-listen-1"
+  questionType: multiple_choice
+  questionText: "Pytanie 5"
   correctAnswer: "c"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-l2-q4"
-  taskRef: "certyfikat-polski-B2-2019-listening-2"
+  questionId: "certyfikat-polski-B2-2019-lq6"
+  taskRef: "certyfikat-polski-B2-2019-listen-2"
   questionType: multiple_choice
-  questionText: "zadanie 2, pytanie 4"
-  options: "a|b|c"
-  correctAnswer: "b"
+  questionText: "Pytanie 6"
+  correctAnswer: "a a c b c b"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-l2-q5"
-  taskRef: "certyfikat-polski-B2-2019-listening-2"
+  questionId: "certyfikat-polski-B2-2019-lq7"
+  taskRef: "certyfikat-polski-B2-2019-listen-3"
   questionType: multiple_choice
-  questionText: "zadanie 2, pytanie 5"
-  options: "a|b|c"
-  correctAnswer: "c"
+  questionText: "Pytanie 7"
+  correctAnswer: "TAK NIE"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-l2-q6"
-  taskRef: "certyfikat-polski-B2-2019-listening-2"
+  questionId: "certyfikat-polski-B2-2019-lq8"
+  taskRef: "certyfikat-polski-B2-2019-listen-4"
   questionType: multiple_choice
-  questionText: "zadanie 2, pytanie 6"
-  options: "a|b|c"
-  correctAnswer: "b"
+  questionText: "Pytanie 8"
+  correctAnswer: "B E B B"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-l3-q1"
-  taskRef: "certyfikat-polski-B2-2019-listening-3"
+  questionId: "certyfikat-polski-B2-2019-lq9"
+  taskRef: "certyfikat-polski-B2-2019-listen-4"
   questionType: multiple_choice
-  questionText: "zadanie 3, pytanie 1"
-  options: "a|b|c"
-  correctAnswer: "?"
+  questionText: "Pytanie 9"
+  correctAnswer: "D"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-l3-q2"
-  taskRef: "certyfikat-polski-B2-2019-listening-3"
+  questionId: "certyfikat-polski-B2-2019-lq10"
+  taskRef: "certyfikat-polski-B2-2019-listen-4"
   questionType: multiple_choice
-  questionText: "zadanie 3, pytanie 2"
-  options: "a|b|c"
-  correctAnswer: "?"
+  questionText: "Pytanie 10"
+  correctAnswer: "D C A"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-l3-q3"
-  taskRef: "certyfikat-polski-B2-2019-listening-3"
+  questionId: "certyfikat-polski-B2-2019-lq11"
+  taskRef: "certyfikat-polski-B2-2019-listen-4"
   questionType: multiple_choice
-  questionText: "zadanie 3, pytanie 3"
-  options: "a|b|c"
-  correctAnswer: "?"
+  questionText: "Pytanie 11"
+  correctAnswer: "E"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-l3-q4"
-  taskRef: "certyfikat-polski-B2-2019-listening-3"
+  questionId: "certyfikat-polski-B2-2019-lq12"
+  taskRef: "certyfikat-polski-B2-2019-listen-4"
   questionType: multiple_choice
-  questionText: "zadanie 3, pytanie 4"
-  options: "a|b|c"
-  correctAnswer: "?"
+  questionText: "Pytanie 12"
+  correctAnswer: "A"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-l3-q5"
-  taskRef: "certyfikat-polski-B2-2019-listening-3"
+  questionId: "certyfikat-polski-B2-2019-lq13"
+  taskRef: "certyfikat-polski-B2-2019-listen-4"
   questionType: multiple_choice
-  questionText: "zadanie 3, pytanie 5"
-  options: "a|b|c"
-  correctAnswer: "?"
+  questionText: "Pytanie 13"
+  correctAnswer: "Kolejność odpowiedzi dowolna"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-l4-q1"
-  taskRef: "certyfikat-polski-B2-2019-listening-4"
+  questionId: "certyfikat-polski-B2-2019-lq14"
+  taskRef: "certyfikat-polski-B2-2019-listen-5"
   questionType: multiple_choice
-  questionText: "zadanie 4, pytanie 1"
-  options: "a|b|c"
-  correctAnswer: "?"
+  questionText: "Pytanie 14"
+  correctAnswer: "Odpowiedź Punkty Fragment transkrypcji"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-l4-q2"
-  taskRef: "certyfikat-polski-B2-2019-listening-4"
+  questionId: "certyfikat-polski-B2-2019-lq15"
+  taskRef: "certyfikat-polski-B2-2019-listen-5"
   questionType: multiple_choice
-  questionText: "zadanie 4, pytanie 2"
-  options: "a|b|c"
-  correctAnswer: "?"
+  questionText: "Pytanie 15"
+  correctAnswer: "opuchlizna"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-l4-q3"
-  taskRef: "certyfikat-polski-B2-2019-listening-4"
+  questionId: "certyfikat-polski-B2-2019-lq16"
+  taskRef: "certyfikat-polski-B2-2019-listen-5"
   questionType: multiple_choice
-  questionText: "zadanie 4, pytanie 3"
-  options: "a|b|c"
-  correctAnswer: "?"
+  questionText: "Pytanie 16"
+  correctAnswer: "puchnie nam ciało"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-l4-q4"
-  taskRef: "certyfikat-polski-B2-2019-listening-4"
+  questionId: "certyfikat-polski-B2-2019-lq17"
+  taskRef: "certyfikat-polski-B2-2019-listen-5"
   questionType: multiple_choice
-  questionText: "zadanie 4, pytanie 4"
-  options: "a|b|c"
-  correctAnswer: "?"
+  questionText: "Pytanie 17"
+  correctAnswer: "zatrzymanie"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-l4-q5"
-  taskRef: "certyfikat-polski-B2-2019-listening-4"
+  questionId: "certyfikat-polski-B2-2019-lq18"
+  taskRef: "certyfikat-polski-B2-2019-listen-5"
   questionType: multiple_choice
-  questionText: "zadanie 4, pytanie 5"
-  options: "a|b|c"
-  correctAnswer: "?"
+  questionText: "Pytanie 18"
+  correctAnswer: "p"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-l5-q1"
-  taskRef: "certyfikat-polski-B2-2019-listening-5"
+  questionId: "certyfikat-polski-B2-2019-lq19"
+  taskRef: "certyfikat-polski-B2-2019-listen-5"
   questionType: multiple_choice
-  questionText: "zadanie 5, pytanie 1"
-  options: "a|b|c"
-  correctAnswer: "?"
+  questionText: "Pytanie 19"
+  correctAnswer: "puchnie nam ciało i zatrzymuje nam się woda"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-l5-q2"
-  taskRef: "certyfikat-polski-B2-2019-listening-5"
+  questionId: "certyfikat-polski-B2-2019-lq20"
+  taskRef: "certyfikat-polski-B2-2019-listen-5"
   questionType: multiple_choice
-  questionText: "zadanie 5, pytanie 2"
-  options: "a|b|c"
-  correctAnswer: "?"
+  questionText: "Pytanie 20"
+  correctAnswer: "wody w organizmie"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-l5-q3"
-  taskRef: "certyfikat-polski-B2-2019-listening-5"
+  questionId: "certyfikat-polski-B2-2019-lq21"
+  taskRef: "certyfikat-polski-B2-2019-listen-5"
   questionType: multiple_choice
-  questionText: "zadanie 5, pytanie 3"
-  options: "a|b|c"
-  correctAnswer: "?"
+  questionText: "Pytanie 21"
+  correctAnswer: "utrudnienie i spowolnienie pracy nerek"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-l5-q4"
-  taskRef: "certyfikat-polski-B2-2019-listening-5"
+  questionId: "certyfikat-polski-B2-2019-lq22"
+  taskRef: "certyfikat-polski-B2-2019-listen-5"
   questionType: multiple_choice
-  questionText: "zadanie 5, pytanie 4"
-  options: "a|b|c"
-  correctAnswer: "?"
+  questionText: "Pytanie 22"
+  correctAnswer: "nerki"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-l5-q5"
-  taskRef: "certyfikat-polski-B2-2019-listening-5"
+  questionId: "certyfikat-polski-B2-2019-lq23"
+  taskRef: "certyfikat-polski-B2-2019-listen-5"
   questionType: multiple_choice
-  questionText: "zadanie 5, pytanie 5"
-  options: "a|b|c"
-  correctAnswer: "?"
+  questionText: "Pytanie 23"
+  correctAnswer: "powoli zaczynają pracować"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2019-lq24"
+  taskRef: "certyfikat-polski-B2-2019-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 24"
+  correctAnswer: "p"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2019-lq25"
+  taskRef: "certyfikat-polski-B2-2019-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 25"
+  correctAnswer: "pracują ciężko i powoli"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2019-lq26"
+  taskRef: "certyfikat-polski-B2-2019-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 26"
+  correctAnswer: "łyżeczce soli"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2019-lq27"
+  taskRef: "certyfikat-polski-B2-2019-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 27"
+  correctAnswer: "sól czyli łyżeczka soli"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2019-lq28"
+  taskRef: "certyfikat-polski-B2-2019-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 28"
+  correctAnswer: "pięć gramów"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2019-lq29"
+  taskRef: "certyfikat-polski-B2-2019-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 29"
+  correctAnswer: "posolone"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2019-lq30"
+  taskRef: "certyfikat-polski-B2-2019-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 30"
+  correctAnswer: "przetworzone mięso"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2019-lq31"
+  taskRef: "certyfikat-polski-B2-2019-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 31"
+  correctAnswer: "p"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2019-lq32"
+  taskRef: "certyfikat-polski-B2-2019-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 32"
+  correctAnswer: "tutaj z kolei mamy dużo przetworzonego"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2019-lq33"
+  taskRef: "certyfikat-polski-B2-2019-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 33"
+  correctAnswer: "sosy"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2019-lq34"
+  taskRef: "certyfikat-polski-B2-2019-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 34"
+  correctAnswer: "sosy czosnkowe"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2019-lq35"
+  taskRef: "certyfikat-polski-B2-2019-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 35"
+  correctAnswer: "sosy na bazie majonezu"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2019-lq36"
+  taskRef: "certyfikat-polski-B2-2019-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 36"
+  correctAnswer: "p"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2019-lq37"
+  taskRef: "certyfikat-polski-B2-2019-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 37"
+  correctAnswer: "czosnkowe"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2019-lq38"
+  taskRef: "certyfikat-polski-B2-2019-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 38"
+  correctAnswer: "często na bazie majonezu"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2019-lq39"
+  taskRef: "certyfikat-polski-B2-2019-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 39"
+  correctAnswer: "tłuszcz"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2019-lq40"
+  taskRef: "certyfikat-polski-B2-2019-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 40"
+  correctAnswer: "p"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2019-lq41"
+  taskRef: "certyfikat-polski-B2-2019-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 41"
+  correctAnswer: "dochodzi jeszcze i tłuszcz"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2019-lq42"
+  taskRef: "certyfikat-polski-B2-2019-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 42"
+  correctAnswer: "i węglowodany"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2019-lq43"
+  taskRef: "certyfikat-polski-B2-2019-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 43"
+  correctAnswer: "które są w fast foodach"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2019-lq44"
+  taskRef: "certyfikat-polski-B2-2019-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 44"
+  correctAnswer: "węglowodany"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2019-lq45"
+  taskRef: "certyfikat-polski-B2-2019-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 45"
+  correctAnswer: "p"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2019-lq46"
+  taskRef: "certyfikat-polski-B2-2019-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 46"
+  correctAnswer: "bo"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2019-lq47"
+  taskRef: "certyfikat-polski-B2-2019-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 47"
+  correctAnswer: "wapnia organizmu"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2019-lq48"
+  taskRef: "certyfikat-polski-B2-2019-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 48"
+  correctAnswer: "do podwyższenia ciśnienia tętniczego"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2019-lq49"
+  taskRef: "certyfikat-polski-B2-2019-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 49"
+  correctAnswer: "ciśnienie zjemy fast food i możemy mieć wyższe"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2019-lq50"
+  taskRef: "certyfikat-polski-B2-2019-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 50"
+  correctAnswer: "tętnicze rośnie ciśnienie tętnicze"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2019-lq51"
+  taskRef: "certyfikat-polski-B2-2019-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 51"
+  correctAnswer: "TEST PRZYKŁADOWY"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2019-lq52"
+  taskRef: "certyfikat-polski-B2-2019-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 52"
+  correctAnswer: "POZIOM B"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2019-lq53"
+  taskRef: "certyfikat-polski-B2-2019-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 53"
+  correctAnswer: "TRANSKRYPCJE I KLUCZ DO ZADAŃ"
   points: 1
 }

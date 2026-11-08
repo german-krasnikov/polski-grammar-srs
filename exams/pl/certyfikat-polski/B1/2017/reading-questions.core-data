@@ -1,257 +1,105 @@
 DSL 1
 READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2017-r1-q1"
-  passageRef: "certyfikat-polski-B1-2017-reading-1"
-  questionType: multiple_choice
-  questionText: "zadanie 1, pytanie 1"
-  correctAnswer: "c"
+  questionId: "certyfikat-polski-B1-2017-rq1"
+  passageRef: "certyfikat-polski-B1-2017-read-1"
+  questionType: fill_gap
+  questionText: "Pytanie 1"
+  correctAnswer: "c b b a c"
   points: 1
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2017-r1-q2"
-  passageRef: "certyfikat-polski-B1-2017-reading-1"
+  questionId: "certyfikat-polski-B1-2017-rq2"
+  passageRef: "certyfikat-polski-B1-2017-read-2"
   questionType: multiple_choice
-  questionText: "zadanie 1, pytanie 2"
-  correctAnswer: "b"
+  questionText: "Pytanie 2"
+  correctAnswer: "P F"
   points: 1
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2017-r1-q3"
-  passageRef: "certyfikat-polski-B1-2017-reading-1"
-  questionType: multiple_choice
-  questionText: "zadanie 1, pytanie 3"
-  correctAnswer: "b"
+  questionId: "certyfikat-polski-B1-2017-rq3"
+  passageRef: "certyfikat-polski-B1-2017-read-3"
+  questionType: fill_gap
+  questionText: "Pytanie 3"
+  correctAnswer: "F C B E D H G"
   points: 1
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2017-r1-q4"
-  passageRef: "certyfikat-polski-B1-2017-reading-1"
+  questionId: "certyfikat-polski-B1-2017-rq4"
+  passageRef: "certyfikat-polski-B1-2017-read-4"
+  questionType: fill_gap
+  questionText: "Pytanie 4"
+  correctAnswer: "G F H C B E A"
+  points: 1
+}
+READING_QUESTION {
+  questionId: "certyfikat-polski-B1-2017-rq5"
+  passageRef: "certyfikat-polski-B1-2017-read-5"
   questionType: multiple_choice
-  questionText: "zadanie 1, pytanie 4"
+  questionText: "Pytanie 5"
   correctAnswer: "a"
   points: 1
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2017-r1-q5"
-  passageRef: "certyfikat-polski-B1-2017-reading-1"
+  questionId: "certyfikat-polski-B1-2017-rq6"
+  passageRef: "certyfikat-polski-B1-2017-read-5"
   questionType: multiple_choice
-  questionText: "zadanie 1, pytanie 5"
-  correctAnswer: "c"
+  questionText: "Pytanie 6"
+  correctAnswer: "n"
   points: 1
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2017-r2-q1"
-  passageRef: "certyfikat-polski-B1-2017-reading-2"
+  questionId: "certyfikat-polski-B1-2017-rq7"
+  passageRef: "certyfikat-polski-B1-2017-read-5"
   questionType: multiple_choice
-  questionText: "zadanie 2, pytanie 1"
-  correctAnswer: "?"
+  questionText: "Pytanie 7"
+  correctAnswer: "o"
   points: 1
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2017-r2-q2"
-  passageRef: "certyfikat-polski-B1-2017-reading-2"
+  questionId: "certyfikat-polski-B1-2017-rq8"
+  passageRef: "certyfikat-polski-B1-2017-read-5"
   questionType: multiple_choice
-  questionText: "zadanie 2, pytanie 2"
-  correctAnswer: "?"
+  questionText: "Pytanie 8"
+  correctAnswer: "r"
   points: 1
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2017-r2-q3"
-  passageRef: "certyfikat-polski-B1-2017-reading-2"
+  questionId: "certyfikat-polski-B1-2017-rq9"
+  passageRef: "certyfikat-polski-B1-2017-read-5"
   questionType: multiple_choice
-  questionText: "zadanie 2, pytanie 3"
-  correctAnswer: "?"
+  questionText: "Pytanie 9"
+  correctAnswer: "t"
   points: 1
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2017-r2-q4"
-  passageRef: "certyfikat-polski-B1-2017-reading-2"
-  questionType: multiple_choice
-  questionText: "zadanie 2, pytanie 4"
-  correctAnswer: "?"
+  questionId: "certyfikat-polski-B1-2017-rq10"
+  passageRef: "certyfikat-polski-B1-2017-read-5"
+  questionType: match_heading
+  questionText: "Pytanie 10"
+  correctAnswer: "S"
   points: 1
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2017-r2-q5"
-  passageRef: "certyfikat-polski-B1-2017-reading-2"
-  questionType: multiple_choice
-  questionText: "zadanie 2, pytanie 5"
-  correctAnswer: "?"
+  questionId: "certyfikat-polski-B1-2017-rq11"
+  passageRef: "certyfikat-polski-B1-2017-read-5"
+  questionType: fill_gap
+  questionText: "Pytanie 11"
+  correctAnswer: "TEST PRZYKŁADOWY"
   points: 1
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2017-r3-q1"
-  passageRef: "certyfikat-polski-B1-2017-reading-3"
-  questionType: multiple_choice
-  questionText: "zadanie 3, pytanie 1"
-  correctAnswer: "F"
-  points: 1
-}
-READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2017-r3-q2"
-  passageRef: "certyfikat-polski-B1-2017-reading-3"
-  questionType: multiple_choice
-  questionText: "zadanie 3, pytanie 2"
-  correctAnswer: "C"
-  points: 1
-}
-READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2017-r3-q3"
-  passageRef: "certyfikat-polski-B1-2017-reading-3"
-  questionType: multiple_choice
-  questionText: "zadanie 3, pytanie 3"
+  questionId: "certyfikat-polski-B1-2017-rq12"
+  passageRef: "certyfikat-polski-B1-2017-read-5"
+  questionType: match_heading
+  questionText: "Pytanie 12"
   correctAnswer: "B"
   points: 1
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2017-r3-q4"
-  passageRef: "certyfikat-polski-B1-2017-reading-3"
-  questionType: multiple_choice
-  questionText: "zadanie 3, pytanie 4"
-  correctAnswer: "E"
-  points: 1
-}
-READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2017-r3-q5"
-  passageRef: "certyfikat-polski-B1-2017-reading-3"
-  questionType: multiple_choice
-  questionText: "zadanie 3, pytanie 5"
-  correctAnswer: "D"
-  points: 1
-}
-READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2017-r3-q6"
-  passageRef: "certyfikat-polski-B1-2017-reading-3"
-  questionType: multiple_choice
-  questionText: "zadanie 3, pytanie 6"
-  correctAnswer: "H"
-  points: 1
-}
-READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2017-r3-q7"
-  passageRef: "certyfikat-polski-B1-2017-reading-3"
-  questionType: multiple_choice
-  questionText: "zadanie 3, pytanie 7"
-  correctAnswer: "G"
-  points: 1
-}
-READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2017-r4-q1"
-  passageRef: "certyfikat-polski-B1-2017-reading-4"
-  questionType: multiple_choice
-  questionText: "zadanie 4, pytanie 1"
-  correctAnswer: "G"
-  points: 1
-}
-READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2017-r4-q2"
-  passageRef: "certyfikat-polski-B1-2017-reading-4"
-  questionType: multiple_choice
-  questionText: "zadanie 4, pytanie 2"
-  correctAnswer: "F"
-  points: 1
-}
-READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2017-r4-q3"
-  passageRef: "certyfikat-polski-B1-2017-reading-4"
-  questionType: multiple_choice
-  questionText: "zadanie 4, pytanie 3"
-  correctAnswer: "H"
-  points: 1
-}
-READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2017-r4-q4"
-  passageRef: "certyfikat-polski-B1-2017-reading-4"
-  questionType: multiple_choice
-  questionText: "zadanie 4, pytanie 4"
-  correctAnswer: "C"
-  points: 1
-}
-READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2017-r4-q5"
-  passageRef: "certyfikat-polski-B1-2017-reading-4"
-  questionType: multiple_choice
-  questionText: "zadanie 4, pytanie 5"
-  correctAnswer: "B"
-  points: 1
-}
-READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2017-r4-q6"
-  passageRef: "certyfikat-polski-B1-2017-reading-4"
-  questionType: multiple_choice
-  questionText: "zadanie 4, pytanie 6"
-  correctAnswer: "E"
-  points: 1
-}
-READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2017-r4-q7"
-  passageRef: "certyfikat-polski-B1-2017-reading-4"
-  questionType: multiple_choice
-  questionText: "zadanie 4, pytanie 7"
-  correctAnswer: "A"
-  points: 1
-}
-READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2017-r5-q1"
-  passageRef: "certyfikat-polski-B1-2017-reading-5"
-  questionType: multiple_choice
-  questionText: "zadanie 5, pytanie 1"
-  correctAnswer: "Zna"
-  points: 1
-}
-READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2017-r5-q2"
-  passageRef: "certyfikat-polski-B1-2017-reading-5"
-  questionType: multiple_choice
-  questionText: "zadanie 5, pytanie 2"
-  correctAnswer: "zorganizowała"
-  points: 1
-}
-READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2017-r5-q3"
-  passageRef: "certyfikat-polski-B1-2017-reading-5"
-  questionType: multiple_choice
-  questionText: "zadanie 5, pytanie 3"
-  correctAnswer: "dlatego"
-  points: 1
-}
-READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2017-r5-q4"
-  passageRef: "certyfikat-polski-B1-2017-reading-5"
-  questionType: multiple_choice
-  questionText: "zadanie 5, pytanie 4"
-  correctAnswer: "potem"
-  points: 1
-}
-READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2017-r5-q5"
-  passageRef: "certyfikat-polski-B1-2017-reading-5"
-  questionType: multiple_choice
-  questionText: "zadanie 5, pytanie 5"
-  correctAnswer: "Na"
-  points: 1
-}
-READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2017-r5-q6"
-  passageRef: "certyfikat-polski-B1-2017-reading-5"
-  questionType: multiple_choice
-  questionText: "zadanie 5, pytanie 6"
-  correctAnswer: "wystawę"
-  points: 1
-}
-READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2017-r5-q7"
-  passageRef: "certyfikat-polski-B1-2017-reading-5"
-  questionType: multiple_choice
-  questionText: "zadanie 5, pytanie 7"
-  correctAnswer: "zdjęcia"
-  points: 1
-}
-READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2017-r5-q8"
-  passageRef: "certyfikat-polski-B1-2017-reading-5"
-  questionType: multiple_choice
-  questionText: "zadanie 5, pytanie 8"
-  correctAnswer: "kościołów"
+  questionId: "certyfikat-polski-B1-2017-rq13"
+  passageRef: "certyfikat-polski-B1-2017-read-5"
+  questionType: fill_gap
+  questionText: "Pytanie 13"
+  correctAnswer: "TRANSKRYPCJE I KLUCZ DO ZADAŃ"
   points: 1
 }

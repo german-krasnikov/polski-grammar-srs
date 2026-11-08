@@ -1,244 +1,457 @@
 DSL 1
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-l1-q1"
-  taskRef: "certyfikat-polski-B2-2020-listening-1"
+  questionId: "certyfikat-polski-B2-2020-lq1"
+  taskRef: "certyfikat-polski-B2-2020-listen-1"
   questionType: multiple_choice
-  questionText: "zadanie 1, pytanie 1"
-  options: "a|b|c"
-  correctAnswer: "?"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-l1-q2"
-  taskRef: "certyfikat-polski-B2-2020-listening-1"
-  questionType: multiple_choice
-  questionText: "zadanie 1, pytanie 2"
-  options: "a|b|c"
-  correctAnswer: "?"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-l1-q3"
-  taskRef: "certyfikat-polski-B2-2020-listening-1"
-  questionType: multiple_choice
-  questionText: "zadanie 1, pytanie 3"
-  options: "a|b|c"
-  correctAnswer: "?"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-l1-q4"
-  taskRef: "certyfikat-polski-B2-2020-listening-1"
-  questionType: multiple_choice
-  questionText: "zadanie 1, pytanie 4"
-  options: "a|b|c"
-  correctAnswer: "?"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-l1-q5"
-  taskRef: "certyfikat-polski-B2-2020-listening-1"
-  questionType: multiple_choice
-  questionText: "zadanie 1, pytanie 5"
-  options: "a|b|c"
-  correctAnswer: "?"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-l2-q1"
-  taskRef: "certyfikat-polski-B2-2020-listening-2"
-  questionType: multiple_choice
-  questionText: "zadanie 2, pytanie 1"
-  options: "a|b|c"
-  correctAnswer: "?"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-l2-q2"
-  taskRef: "certyfikat-polski-B2-2020-listening-2"
-  questionType: multiple_choice
-  questionText: "zadanie 2, pytanie 2"
-  options: "a|b|c"
-  correctAnswer: "?"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-l2-q3"
-  taskRef: "certyfikat-polski-B2-2020-listening-2"
-  questionType: multiple_choice
-  questionText: "zadanie 2, pytanie 3"
-  options: "a|b|c"
-  correctAnswer: "?"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-l2-q4"
-  taskRef: "certyfikat-polski-B2-2020-listening-2"
-  questionType: multiple_choice
-  questionText: "zadanie 2, pytanie 4"
-  options: "a|b|c"
-  correctAnswer: "?"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-l2-q5"
-  taskRef: "certyfikat-polski-B2-2020-listening-2"
-  questionType: multiple_choice
-  questionText: "zadanie 2, pytanie 5"
-  options: "a|b|c"
-  correctAnswer: "?"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-l3-q1"
-  taskRef: "certyfikat-polski-B2-2020-listening-3"
-  questionType: multiple_choice
-  questionText: "zadanie 3, pytanie 1"
-  options: "a|b|c"
-  correctAnswer: "?"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-l3-q2"
-  taskRef: "certyfikat-polski-B2-2020-listening-3"
-  questionType: multiple_choice
-  questionText: "zadanie 3, pytanie 2"
-  options: "a|b|c"
-  correctAnswer: "?"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-l3-q3"
-  taskRef: "certyfikat-polski-B2-2020-listening-3"
-  questionType: multiple_choice
-  questionText: "zadanie 3, pytanie 3"
-  options: "a|b|c"
-  correctAnswer: "?"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-l3-q4"
-  taskRef: "certyfikat-polski-B2-2020-listening-3"
-  questionType: multiple_choice
-  questionText: "zadanie 3, pytanie 4"
-  options: "a|b|c"
-  correctAnswer: "?"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-l3-q5"
-  taskRef: "certyfikat-polski-B2-2020-listening-3"
-  questionType: multiple_choice
-  questionText: "zadanie 3, pytanie 5"
-  options: "a|b|c"
-  correctAnswer: "?"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-l4-q1"
-  taskRef: "certyfikat-polski-B2-2020-listening-4"
-  questionType: multiple_choice
-  questionText: "zadanie 4, pytanie 1"
-  options: "a|b|c"
+  questionText: "Pytanie 1"
   correctAnswer: "c"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-l4-q2"
-  taskRef: "certyfikat-polski-B2-2020-listening-4"
+  questionId: "certyfikat-polski-B2-2020-lq2"
+  taskRef: "certyfikat-polski-B2-2020-listen-1"
   questionType: multiple_choice
-  questionText: "zadanie 4, pytanie 2"
-  options: "a|b|c"
-  correctAnswer: "b"
+  questionText: "Pytanie 2"
+  correctAnswer: "a b"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-l4-q3"
-  taskRef: "certyfikat-polski-B2-2020-listening-4"
+  questionId: "certyfikat-polski-B2-2020-lq3"
+  taskRef: "certyfikat-polski-B2-2020-listen-1"
   questionType: multiple_choice
-  questionText: "zadanie 4, pytanie 3"
-  options: "a|b|c"
-  correctAnswer: "b"
+  questionText: "Pytanie 3"
+  correctAnswer: "c a"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-l4-q4"
-  taskRef: "certyfikat-polski-B2-2020-listening-4"
+  questionId: "certyfikat-polski-B2-2020-lq4"
+  taskRef: "certyfikat-polski-B2-2020-listen-1"
   questionType: multiple_choice
-  questionText: "zadanie 4, pytanie 4"
-  options: "a|b|c"
+  questionText: "Pytanie 4"
+  correctAnswer: "c b"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-lq5"
+  taskRef: "certyfikat-polski-B2-2020-listen-1"
+  questionType: multiple_choice
+  questionText: "Pytanie 5"
   correctAnswer: "a"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-l4-q5"
-  taskRef: "certyfikat-polski-B2-2020-listening-4"
+  questionId: "certyfikat-polski-B2-2020-lq6"
+  taskRef: "certyfikat-polski-B2-2020-listen-2"
   questionType: multiple_choice
-  questionText: "zadanie 4, pytanie 5"
-  options: "a|b|c"
-  correctAnswer: "c"
+  questionText: "Pytanie 6"
+  correctAnswer: "TAK NIE"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-l4-q6"
-  taskRef: "certyfikat-polski-B2-2020-listening-4"
+  questionId: "certyfikat-polski-B2-2020-lq7"
+  taskRef: "certyfikat-polski-B2-2020-listen-3"
   questionType: multiple_choice
-  questionText: "zadanie 4, pytanie 6"
-  options: "a|b|c"
-  correctAnswer: "a"
+  questionText: "Pytanie 7"
+  correctAnswer: "A"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-l4-q7"
-  taskRef: "certyfikat-polski-B2-2020-listening-4"
+  questionId: "certyfikat-polski-B2-2020-lq8"
+  taskRef: "certyfikat-polski-B2-2020-listen-3"
   questionType: multiple_choice
-  questionText: "zadanie 4, pytanie 7"
-  options: "a|b|c"
-  correctAnswer: "c"
+  questionText: "Pytanie 8"
+  correctAnswer: "D D C D C A"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-l5-q1"
-  taskRef: "certyfikat-polski-B2-2020-listening-5"
+  questionId: "certyfikat-polski-B2-2020-lq9"
+  taskRef: "certyfikat-polski-B2-2020-listen-3"
   questionType: multiple_choice
-  questionText: "zadanie 5, pytanie 1"
-  options: "a|b|c"
-  correctAnswer: "?"
+  questionText: "Pytanie 9"
+  correctAnswer: "B B D"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-l5-q2"
-  taskRef: "certyfikat-polski-B2-2020-listening-5"
+  questionId: "certyfikat-polski-B2-2020-lq10"
+  taskRef: "certyfikat-polski-B2-2020-listen-3"
   questionType: multiple_choice
-  questionText: "zadanie 5, pytanie 2"
-  options: "a|b|c"
-  correctAnswer: "?"
+  questionText: "Pytanie 10"
+  correctAnswer: "Kolejność odpowiedzi jest dowolna"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-l5-q3"
-  taskRef: "certyfikat-polski-B2-2020-listening-5"
+  questionId: "certyfikat-polski-B2-2020-lq11"
+  taskRef: "certyfikat-polski-B2-2020-listen-4"
   questionType: multiple_choice
-  questionText: "zadanie 5, pytanie 3"
-  options: "a|b|c"
-  correctAnswer: "?"
+  questionText: "Pytanie 11"
+  correctAnswer: "c b b a c a c"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-l5-q4"
-  taskRef: "certyfikat-polski-B2-2020-listening-5"
+  questionId: "certyfikat-polski-B2-2020-lq12"
+  taskRef: "certyfikat-polski-B2-2020-listen-5"
   questionType: multiple_choice
-  questionText: "zadanie 5, pytanie 4"
-  options: "a|b|c"
-  correctAnswer: "?"
+  questionText: "Pytanie 12"
+  correctAnswer: "TEST PRZYKŁADOWY"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2020-l5-q5"
-  taskRef: "certyfikat-polski-B2-2020-listening-5"
+  questionId: "certyfikat-polski-B2-2020-lq13"
+  taskRef: "certyfikat-polski-B2-2020-listen-5"
   questionType: multiple_choice
-  questionText: "zadanie 5, pytanie 5"
-  options: "a|b|c"
-  correctAnswer: "?"
+  questionText: "Pytanie 13"
+  correctAnswer: "POZIOM B"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-lq14"
+  taskRef: "certyfikat-polski-B2-2020-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 14"
+  correctAnswer: "TRANSKRYPCJE I KLUCZ DO ZADAŃ"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-lq15"
+  taskRef: "certyfikat-polski-B2-2020-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 15"
+  correctAnswer: "Odpowiedź Punkty Fragment transkrypcji"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-lq16"
+  taskRef: "certyfikat-polski-B2-2020-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 16"
+  correctAnswer: "z Afryki lub z regionu Kaffa"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-lq17"
+  taskRef: "certyfikat-polski-B2-2020-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 17"
+  correctAnswer: "należy szukać w Afryce na terenach dzisiejszej"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-lq18"
+  taskRef: "certyfikat-polski-B2-2020-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 18"
+  correctAnswer: "uznać za"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-lq19"
+  taskRef: "certyfikat-polski-B2-2020-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 19"
+  correctAnswer: "p"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-lq20"
+  taskRef: "certyfikat-polski-B2-2020-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 20"
+  correctAnswer: "Etiopii"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-lq21"
+  taskRef: "certyfikat-polski-B2-2020-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 21"
+  correctAnswer: "w regionie Kaffa"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-lq22"
+  taskRef: "certyfikat-polski-B2-2020-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 22"
+  correctAnswer: "zaskakująco"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-lq23"
+  taskRef: "certyfikat-polski-B2-2020-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 23"
+  correctAnswer: "okazuje się"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-lq24"
+  taskRef: "certyfikat-polski-B2-2020-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 24"
+  correctAnswer: "że wino"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-lq25"
+  taskRef: "certyfikat-polski-B2-2020-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 25"
+  correctAnswer: "pobudzenie"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-lq26"
+  taskRef: "certyfikat-polski-B2-2020-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 26"
+  correctAnswer: "dzięki naturalnej a następnie żuto"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-lq27"
+  taskRef: "certyfikat-polski-B2-2020-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 27"
+  correctAnswer: "Takie coś zapewniało"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-lq28"
+  taskRef: "certyfikat-polski-B2-2020-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 28"
+  correctAnswer: "kofeinie"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-lq29"
+  taskRef: "certyfikat-polski-B2-2020-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 29"
+  correctAnswer: "miłe spędzanie czasu i odpowiednie"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-lq30"
+  taskRef: "certyfikat-polski-B2-2020-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 30"
+  correctAnswer: "pobudzenie"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-lq31"
+  taskRef: "certyfikat-polski-B2-2020-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 31"
+  correctAnswer: "dzięki naturalnej kofeinie"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-lq32"
+  taskRef: "certyfikat-polski-B2-2020-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 32"
+  correctAnswer: "że takie właśnie żucie ziaren jest nie do"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-lq33"
+  taskRef: "certyfikat-polski-B2-2020-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 33"
+  correctAnswer: "pomyślenia przez ich dość cierpki smak"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-lq34"
+  taskRef: "certyfikat-polski-B2-2020-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 34"
+  correctAnswer: "to pamiętajmy"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-lq35"
+  taskRef: "certyfikat-polski-B2-2020-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 35"
+  correctAnswer: "że jeszcze wtedy nie były"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-lq36"
+  taskRef: "certyfikat-polski-B2-2020-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 36"
+  correctAnswer: "one palone"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-lq37"
+  taskRef: "certyfikat-polski-B2-2020-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 37"
+  correctAnswer: "ale w całym"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-lq38"
+  taskRef: "certyfikat-polski-B2-2020-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 38"
+  correctAnswer: "królestwie kawa rozpowszechniła się"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-lq39"
+  taskRef: "certyfikat-polski-B2-2020-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 39"
+  correctAnswer: "dopiero kilka"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-lq40"
+  taskRef: "certyfikat-polski-B2-2020-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 40"
+  correctAnswer: "kilkanaście lat po śmierci"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-lq41"
+  taskRef: "certyfikat-polski-B2-2020-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 41"
+  correctAnswer: "króla"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-lq42"
+  taskRef: "certyfikat-polski-B2-2020-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 42"
+  correctAnswer: "b"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-lq43"
+  taskRef: "certyfikat-polski-B2-2020-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 43"
+  correctAnswer: "filiżanka"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-lq44"
+  taskRef: "certyfikat-polski-B2-2020-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 44"
+  correctAnswer: "p"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-lq45"
+  taskRef: "certyfikat-polski-B2-2020-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 45"
+  correctAnswer: "niektóre słowa"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-lq46"
+  taskRef: "certyfikat-polski-B2-2020-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 46"
+  correctAnswer: "które są powiązane"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-lq47"
+  taskRef: "certyfikat-polski-B2-2020-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 47"
+  correctAnswer: "z kawą"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-lq48"
+  taskRef: "certyfikat-polski-B2-2020-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 48"
+  correctAnswer: "na przykład nazywają narzędzie"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-lq49"
+  taskRef: "certyfikat-polski-B2-2020-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 49"
+  correctAnswer: "do jej serwowania"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-lq50"
+  taskRef: "certyfikat-polski-B2-2020-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 50"
+  correctAnswer: "Z tego języka mamy"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-lq51"
+  taskRef: "certyfikat-polski-B2-2020-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 51"
+  correctAnswer: "słowo"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-lq52"
+  taskRef: "certyfikat-polski-B2-2020-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 52"
+  correctAnswer: "czajnik"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-lq53"
+  taskRef: "certyfikat-polski-B2-2020-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 53"
+  correctAnswer: "albo słowo"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-lq54"
+  taskRef: "certyfikat-polski-B2-2020-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 54"
+  correctAnswer: "filiżanka"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-lq55"
+  taskRef: "certyfikat-polski-B2-2020-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 55"
+  correctAnswer: "TEST PRZYKŁADOWY"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-lq56"
+  taskRef: "certyfikat-polski-B2-2020-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 56"
+  correctAnswer: "POZIOM B"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-lq57"
+  taskRef: "certyfikat-polski-B2-2020-listen-5"
+  questionType: multiple_choice
+  questionText: "Pytanie 57"
+  correctAnswer: "TRANSKRYPCJE I KLUCZ DO ZADAŃ"
   points: 1
 }
