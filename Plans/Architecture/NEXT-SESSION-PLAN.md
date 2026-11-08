@@ -77,7 +77,7 @@
 Контракты и порядок пунктов 9–12: [план исполнения](NEXT-SESSION-P9-P12-PLAN.md).
 9. **Exam B2/C1 данные** из certyfikatpolski.pl (сессии 2022-2024) — [инвентарь официальных источников](EXAM-2022-2024-SOURCE-INVENTORY.md): 11 взрослых вариантов; все 33 PDF/MP3 получены и SHA-256 проверены ([provenance](P9-SOURCE-PROVENANCE.md)); нужны ID с датой сессии, данные и дополнительные правила зависимых ответов C1
 10. **Grammar exam: все типы — завершено для шести исходных экзаменов**: восемь банков/73 печатных токена, question/word formation, выделение вопросного фрагмента, matching/fragment controls и ранняя валидация. Независимая source/browser приёмка и ревью APPROVED; основной объединённый Chromium exam 49/49 PASS, [evidence](P10-EVIDENCE.md).
-11. **Reading/Listening/Writing session** в shared (сейчас только в webMain)
+11. **Reading/Listening/Writing session и правила экзамена через DSL** — не закрыто. По уточнению владельца DSL содержит бизнес-решения, а не только данные/oracle; рукописные Kotlin reducers/scorers сами по себе не закрывают этот пункт. Сначала `.logic` → generated Kotlin policy, затем общий контракт и нативный экран iPad; [коррекция](EXAM-DSL-LOGIC-CORRECTION-PLAN.md). WIP сохраняется без объявления готовности.
 12. **Swift UiCopy — завершено**: 202 DSL-ключа на pack, 94 oracle cases, Apple snapshot и SwiftUI consumers; formatter сохраняет скобки в пользовательском вводе. Независимые tester/reviewer PASS/APPROVED; main generation, desktop/native snapshot и signed device build PASS; [evidence](SWIFT-UICOPY-DSL-EVIDENCE.md). Физическая VoiceOver-проверка NOT RUN.
 
 ## DSL-first принцип (память)
