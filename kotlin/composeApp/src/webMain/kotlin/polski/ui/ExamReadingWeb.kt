@@ -3,6 +3,7 @@ package polski.ui
 import kotlinx.browser.document
 import org.w3c.dom.HTMLButtonElement
 import org.w3c.dom.HTMLElement
+import org.w3c.dom.HTMLInputElement
 import polski.exam.QuestionType
 
 internal data class ReadingPassage(val id: String, val instruction: String, val text: String)
@@ -21,7 +22,7 @@ internal class ExamReadingController(examId: String, private val onBack: () -> U
     private fun redraw() {
         val c = root ?: return; c.innerHTML = ""
         if (submitted) renderResult(c)
-        else if (exam.passages.isEmpty()) renderEmpty(c)
+        else if (exam.passages.isEmpty()) { c.appendChild(node("h2", "exam-title", "Нет данных")); c.appendChild(navBtn("← Назад") { onBack() }) }
         else renderPassage(c)
     }
 
@@ -49,17 +50,55 @@ internal class ExamReadingController(examId: String, private val onBack: () -> U
             questions.forEachIndexed { i, q ->
                 appendChild(node("div", "exam-reading-q").apply {
                     appendChild(node("div", "exam-reading-q-text", "${i + 1}. ${q.questionText}"))
-                    appendChild(node("div", "exam-options").apply {
-                        q.options.forEach { opt ->
-                            val selected = answers[q.id] == opt
-                            appendChild((document.createElement("button") as HTMLButtonElement).apply {
-                                type = "button"
-                                className = if (selected) "exam-option selected" else "exam-option"
-                                textContent = opt
-                                addEventListener("click", { answers[q.id] = opt; redraw() })
+                    when (q.type) {
+                        QuestionType.TrueFalse, QuestionType.TrueFalseNotGiven -> {
+                            val opts = if (q.type == QuestionType.TrueFalseNotGiven) listOf("TAK", "NIE", "BRAK INFORMACJI") else listOf("TAK", "NIE")
+                            appendChild(node("div", "exam-options").apply {
+                                opts.forEach { opt ->
+                                    appendChild((document.createElement("button") as HTMLButtonElement).apply {
+                                        type = "button"
+                                        className = if (answers[q.id] == opt) "exam-option selected" else "exam-option"
+                                        textContent = opt
+                                        addEventListener("click", { answers[q.id] = opt; redraw() })
+                                    })
+                                }
                             })
                         }
-                    })
+                        QuestionType.FillGap -> {
+                            if (q.options.isNotEmpty()) {
+                                appendChild(node("div", "exam-options").apply {
+                                    q.options.forEach { opt ->
+                                        appendChild((document.createElement("button") as HTMLButtonElement).apply {
+                                            type = "button"
+                                            className = if (answers[q.id] == opt) "exam-option selected" else "exam-option"
+                                            textContent = opt
+                                            addEventListener("click", { answers[q.id] = opt; redraw() })
+                                        })
+                                    }
+                                })
+                            } else {
+                                appendChild(node("div", "exam-input-wrap").apply {
+                                    appendChild((document.createElement("input") as HTMLInputElement).apply {
+                                        type = "text"; className = "exam-input"; placeholder = "Wpisz..."
+                                        value = answers[q.id].orEmpty()
+                                        addEventListener("change", { answers[q.id] = this.value })
+                                    })
+                                })
+                            }
+                        }
+                        else -> {
+                            appendChild(node("div", "exam-options").apply {
+                                q.options.forEach { opt ->
+                                    appendChild((document.createElement("button") as HTMLButtonElement).apply {
+                                        type = "button"
+                                        className = if (answers[q.id] == opt) "exam-option selected" else "exam-option"
+                                        textContent = opt
+                                        addEventListener("click", { answers[q.id] = opt; redraw() })
+                                    })
+                                }
+                            })
+                        }
+                    }
                 })
             }
         })
@@ -83,18 +122,22 @@ internal class ExamReadingController(examId: String, private val onBack: () -> U
             appendChild(node("div", "exam-score-big", "$pct%"))
             appendChild(node("div", "exam-score-detail", "$correct / $total"))
         })
+        c.appendChild(node("div", "exam-review").apply {
+            exam.questions.forEachIndexed { i, q ->
+                val ans = answers[q.id].orEmpty()
+                val ok = ans.trim().lowercase() == q.correctAnswer.trim().lowercase()
+                appendChild(node("div", if (ok) "exam-review-item correct" else "exam-review-item wrong").apply {
+                    appendChild(node("span", "exam-review-num", "${i + 1}."))
+                    appendChild(node("span", "exam-review-context", "${q.questionText}: ${ans.ifEmpty { "[—]" }}"))
+                    if (!ok) appendChild(node("span", "exam-review-correct", "→ ${q.correctAnswer}"))
+                })
+            }
+        })
         c.appendChild(node("div", "exam-nav").apply {
             appendChild(navBtn("← К модулям") { onBack() })
             appendChild(node("span", "exam-nav-spacer"))
-            appendChild(navBtn("Пройти ещё раз", true) {
-                answers.clear(); currentPassageIdx = 0; submitted = false; redraw()
-            })
+            appendChild(navBtn("Пройти ещё раз", true) { answers.clear(); currentPassageIdx = 0; submitted = false; redraw() })
         })
-    }
-
-    private fun renderEmpty(c: HTMLElement) {
-        c.appendChild(node("h2", "exam-title", "Данные чтения ещё не загружены"))
-        c.appendChild(navBtn("← Назад") { onBack() })
     }
 
     private fun navBtn(label: String, primary: Boolean = false, onClick: () -> Unit) =

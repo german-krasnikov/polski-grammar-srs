@@ -10,13 +10,39 @@ import polski.exam.grammar.*
 internal class ExamGrammarController(examId: String, private val onBack: () -> Unit) {
     private var state = GrammarExamState(test = examGrammarTests.getValue(examId))
     private var root: HTMLElement? = null
+    private var inputRef: HTMLInputElement? = null
 
     fun render(container: HTMLElement) { root = container; redraw() }
 
-    private fun dispatch(action: GrammarExamAction) { state = reduceGrammarExam(state, action); redraw() }
+    private fun dispatch(action: GrammarExamAction) {
+        val oldIndex = state.currentIndex
+        state = reduceGrammarExam(state, action)
+        if (state.submitted && state.result != null) { root?.let { it.innerHTML = ""; renderResult(it) }; return }
+        if (state.currentIndex != oldIndex) { redraw(); return }
+        // Same question — update without full redraw to keep focus
+        updateInPlace()
+    }
+
+    private fun updateInPlace() {
+        val c = root ?: return
+        val card = grammarExamCardModel(state)
+        // Update progress
+        c.querySelector(".exam-progress-text")?.textContent = card.progress
+        (c.querySelector(".exam-progress-fill") as? HTMLElement)?.style?.setProperty(
+            "width", "${((state.currentIndex + 1).toDouble() / state.test.items.size * 100).toInt()}%"
+        )
+        // Update option buttons selection
+        c.querySelectorAll(".exam-option").let { nodes ->
+            for (i in 0 until nodes.length) {
+                val btn = nodes.item(i) as? HTMLButtonElement ?: continue
+                val isSelected = card.item.options.getOrNull(i)?.let { it == card.currentAnswer } == true
+                btn.className = if (isSelected) "exam-option selected" else "exam-option"
+            }
+        }
+    }
 
     private fun redraw() {
-        val c = root ?: return; c.innerHTML = ""
+        val c = root ?: return; c.innerHTML = ""; inputRef = null
         if (state.submitted && state.result != null) renderResult(c) else renderQuestion(c)
     }
 
@@ -52,13 +78,15 @@ internal class ExamGrammarController(examId: String, private val onBack: () -> U
                 }
             })
         } else {
-            c.appendChild(node("div", "exam-input-wrap").apply {
-                appendChild((document.createElement("input") as HTMLInputElement).apply {
-                    type = "text"; className = "exam-input"; placeholder = "Wpisz odpowiedź..."
-                    value = card.currentAnswer
-                    addEventListener("input", { dispatch(GrammarExamAction.Answer(card.item.itemId, this.value)) })
+            val input = (document.createElement("input") as HTMLInputElement).apply {
+                type = "text"; className = "exam-input"; placeholder = "Wpisz odpowiedź..."
+                value = card.currentAnswer
+                addEventListener("input", {
+                    dispatch(GrammarExamAction.Answer(card.item.itemId, this.value))
                 })
-            })
+            }
+            inputRef = input
+            c.appendChild(node("div", "exam-input-wrap").apply { appendChild(input) })
         }
         c.appendChild(node("div", "exam-nav").apply {
             if (!card.isFirst) appendChild(navBtn("← Назад") { dispatch(GrammarExamAction.Previous) })
@@ -90,7 +118,7 @@ internal class ExamGrammarController(examId: String, private val onBack: () -> U
             appendChild(navBtn("← К модулям") { onBack() })
             appendChild(node("span", "exam-nav-spacer"))
             appendChild(navBtn("Пройти ещё раз", primary = true) {
-                state = GrammarExamState(test = state.test); redraw()
+                state = GrammarExamState(test = state.test); inputRef = null; redraw()
             })
         })
     }
