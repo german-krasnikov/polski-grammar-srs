@@ -68,4 +68,14 @@ internal object PlRuTypedPack : CoursePackFields {
     override val vocabularyInstructions get() = generatedPlRuVocabularyInstructions
     override val vocabularyUnavailableLabel get() = generatedPlRuVocabularyUnavailableLabel
     override val lifehacks get() = generatedPlRuLifehacks
+
+    override val uiCopy = mapOf(
+        "again" to "Повторить", "good" to "Вспомнил",
+        "progressTab" to "Прогресс", "settingsTab" to "Настройки", "lifehacks" to "Лайфхаки",
+        "showAnswer" to "Показать ответ", "checkAndShowAnswer" to "Проверить и показать ответ",
+        "exportJson" to "Экспорт JSON", "resetProgress" to "Сбросить прогресс",
+        "hideTable" to "Скрыть таблицу", "tableAtHand" to "Таблица под рукой",
+        "allTablesAndSchema" to "Все таблицы и схема", "whenToReview" to "Когда повторить?",
+        "noDueTitle" to "Новых повторений пока нет.", "compareAnswer" to "Сравни свой ответ с эталоном",
+    )
 }

@@ -1,34 +1,27 @@
 package polski.presentation
 
+import polski.data.packRegistry
+
 /**
- * Catalog of UI strings duplicated across 4-5 Kotlin hosts today (DSL-MIGRATION-PLAN.md block D).
- * Those hosts (web/desktop/Android) reference these constants instead of their own literal, so
- * changing a label is a one-place edit for them.
- *
- * iOS/macOS are out of scope here: their chrome labels (e.g. "Повторить"/"Вспомнил"/"Прогресс")
- * are plain Swift literals today, not values read from the `IosSnapshot`/`MacSnapshot`
- * `put(...)` bridge (that bridge only carries pack-authored *content* such as
- * `chainCompletionTitle`, never UI chrome). Routing these constants to Swift would need a new
- * bridge entry plus a Swift-side read for each one — a follow-up for the Swift developer, not a
- * drop-in addition to an existing `put(...)` call.
- *
- * Wording here is copied verbatim from each string's current majority host; this catalog does
- * not reconcile the cross-host inconsistencies the scan found elsewhere.
+ * Pack-aware UI string catalog. Each property reads the active pack's `uiCopy` map,
+ * so switching packs changes all labels. Fallback = key name (visibly broken if a pack omits it).
  */
 object UiCopy {
-    const val Again = "Повторить"
-    const val Good = "Вспомнил"
-    const val ProgressTab = "Прогресс"
-    const val SettingsTab = "Настройки"
-    const val Lifehacks = "Лайфхаки"
-    const val ShowAnswer = "Показать ответ"
-    const val CheckAndShowAnswer = "Проверить и показать ответ"
-    const val ExportJson = "Экспорт JSON"
-    const val ResetProgress = "Сбросить прогресс"
-    const val HideTable = "Скрыть таблицу"
-    const val TableAtHand = "Таблица под рукой"
-    const val AllTablesAndSchema = "Все таблицы и схема"
-    const val WhenToReview = "Когда повторить?"
-    const val NoDueTitle = "Новых повторений пока нет."
-    const val CompareAnswer = "Сравни свой ответ с эталоном"
+    val Again: String get() = text("again")
+    val Good: String get() = text("good")
+    val ProgressTab: String get() = text("progressTab")
+    val SettingsTab: String get() = text("settingsTab")
+    val Lifehacks: String get() = text("lifehacks")
+    val ShowAnswer: String get() = text("showAnswer")
+    val CheckAndShowAnswer: String get() = text("checkAndShowAnswer")
+    val ExportJson: String get() = text("exportJson")
+    val ResetProgress: String get() = text("resetProgress")
+    val HideTable: String get() = text("hideTable")
+    val TableAtHand: String get() = text("tableAtHand")
+    val AllTablesAndSchema: String get() = text("allTablesAndSchema")
+    val WhenToReview: String get() = text("whenToReview")
+    val NoDueTitle: String get() = text("noDueTitle")
+    val CompareAnswer: String get() = text("compareAnswer")
 }
+
+private fun text(key: String): String = packRegistry.active.uiCopy[key] ?: key

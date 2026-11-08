@@ -81,4 +81,6 @@ internal interface CoursePackFields {
     val possessives: List<Possessive>
     val possessiveForms: Map<PossessiveId, CoursePossessiveForms>
     val futureAuxiliary: FutureAuxiliary?
+
+    val uiCopy: Map<String, String>
 }
