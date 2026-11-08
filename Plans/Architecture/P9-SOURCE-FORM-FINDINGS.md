@@ -24,3 +24,7 @@ All eleven extracted papers contain four written-module cover times in source or
 ## Transformation grading
 
 B2 February 2024 key page 8 contains per-transformation quarter-point annotations and explicitly accepts other correct solutions. Preserve canonical complete answers and source-backed variants; unmatched nonblank free text requires manual evaluation. Do not infer automatic partial points from substring overlap with transformed fragments. C1 April 2024 dependent forms already have their dedicated [contract](C1-2024-ANSWER-CONSTRAINT-ADDENDUM.md).
+
+## C1 writing sets contain either one or two prompts
+
+Visually checked C1 April 2024 arkusz physical page 27 (printed writing page 2): set I has a 100-word speech and 300-word argument; set II has a 180-word group characterization and 220-word report; set III has one 400-word essay. All five extracted C1 papers explicitly describe two prompts in I/II and one prompt in III; other C1 pages still need their per-paper visual gate. A writing session must derive the selected set's prompt count from DSL rows, preserve its draft(s), and avoid a global two-prompt requirement or invented III/b. The current writing genre enum lacks `speech`; source-backed speech support is needed before C1 activation, while characterization must be classified explicitly rather than silently losing its instruction. The common writing maximum is confirmed here as 40 points; manual assessment remains required.
