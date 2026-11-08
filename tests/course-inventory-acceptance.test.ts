@@ -106,7 +106,7 @@ test('nested interpolation strings remain separately classifiable', () => {
   }
 
   for (const [path, phrases] of [
-    ['kotlin/composeApp/src/webMain/kotlin/polski/ui/MatrixWeb.kt', ['"ед. ч."', '"мн. ч."']],
+    ['kotlin/shared/src/commonMain/kotlin/polski/presentation/MatrixTables.kt', ['"ед. ч."', '"мн. ч."']],
     ['kotlin/composeApp/src/commonMain/kotlin/polski/ui/screens/VocabularyScreen.kt', ['"не введён"']],
   ] as const) {
     const source = readFileSync(path, 'utf8');
