@@ -70,7 +70,7 @@
 
 Границы и критерии пунктов 5–8: [план исполнения](NEXT-SESSION-P5-P8-PLAN.md).
 5. **:srs-progress модуль — завершено**, коммит `c19e599`: перенос без изменения форматов прогресса/публичных пакетов, обновлены derive/Python и Apple bridge. Независимые Tester/Reviewer: PASS/APPROVED; после объединения генерация, 56 module + 423 shared Desktop tests и JS/Wasm compilation PASS. Ограничения браузерного повторного прогона и native UI — в [evidence](P5-SRS-PROGRESS-EVIDENCE.md).
-6. **EndingHighlightTest → DSL oracle** — 65 assertions → .core-data
+6. **EndingHighlightTest → DSL oracle — завершено**, `bdbf83f`: прежние 65 assert sites сохранены в 34 DSL cases/93 expected parts и retained property/integration tests. Независимая сверка покрытия и свежий JVM 6/6 PASS, генерация PASS, ревью APPROVED. Kotlin 244→93 строки; полный авторский DSL+test footprint вырос до 1140 строк, см. [evidence](P6-ENDING-HIGHLIGHT-EVIDENCE.md).
 7. **MatrixTablesTest → DSL oracle** — 43 assertions → .core-data
 8. **TrainingWebApp.kt split** — 1040 строк, >200 line rule
 
