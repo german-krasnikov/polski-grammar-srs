@@ -5,6 +5,7 @@ import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 import polski.exam.ExamDataMapper
 import polski.exam.data.b2y2020.GRAMMAR_ANSWER_VARIANT_ROW_ROWS
+import polski.exam.data.b2y2020.GRAMMAR_BANK_TOKEN_ROW_ROWS
 import polski.exam.data.b2y2020.GRAMMAR_ITEM_ROW_ROWS
 import polski.exam.data.b2y2020.GRAMMAR_TEST_ROW_ROWS
 import polski.exam.data.oracle.GRAMMAR_CONSTRAINT_CASE_ROW_ROWS
@@ -24,6 +25,7 @@ class GrammarWordBankConstraintTest {
                 keySelector = { it.itemRef },
                 valueTransform = { GrammarScoredVariant(it.answer, it.earnedQuarter, it.onlyIfNotUsedBy) },
             ),
+            bankTokens = GRAMMAR_BANK_TOKEN_ROW_ROWS.groupBy({ it.testRef }, { GrammarBankToken(it.tokenId, it.position, it.text) }),
         ).single { it.testId == "certyfikat-polski-B2-2020-grammar-2" }
     }
 
@@ -47,7 +49,7 @@ class GrammarWordBankConstraintTest {
             assertFailsWith<IllegalArgumentException>(badReference) {
                 GrammarTest("invalid", "", listOf(item6, item8.copy(
                     scoredVariants = listOf(GrammarScoredVariant("w", 2, badReference)),
-                )))
+                )), actualTest.bankTokens)
             }
         }
     }

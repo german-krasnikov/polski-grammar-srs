@@ -1,5 +1,5 @@
 // Generated from dsl/exam.data-contract
-// source-sha256=a57e78c0c7e995774d3b275d965c3ed5eaf230d29d01cb66a06330174c9e816d
+// source-sha256=36cfafebca8fc22dc8a31c76161792ced0b69ac872ae298f7b83376d02344c88
 // Edit the source, then run biome generate.
 
 package polski.exam.data.b1y2020
@@ -9,6 +9,7 @@ enum class ListeningQuestionRowQuestionType(val tag: String) {
     TRUE_FALSE("true_false"),
     FILL_GAP("fill_gap"),
     MATCH("match"),
+    MATCHING("matching"),
 }
 
 enum class ListeningQuestionRowGradingMode(val tag: String) {
@@ -27,6 +28,8 @@ enum class ReadingQuestionRowQuestionType(val tag: String) {
     MATCH_HEADING("match_heading"),
     FILL_GAP("fill_gap"),
     SHORT_ANSWER("short_answer"),
+    GAP_FILL_FRAGMENT("gap_fill_fragment"),
+    MATCHING("matching"),
 }
 
 enum class GrammarItemRowQuestionType(val tag: String) {
@@ -34,6 +37,8 @@ enum class GrammarItemRowQuestionType(val tag: String) {
     FILL_GAP("fill_gap"),
     TRANSFORM("transform"),
     WORD_FORMATION("word_formation"),
+    WORD_BANK("word_bank"),
+    QUESTION_FORMATION("question_formation"),
 }
 
 enum class GrammarItemRowGradingMode(val tag: String) {
@@ -105,6 +110,20 @@ enum class OpenItemGroupCaseRowExpectedUnknownStatus(val tag: String) {
 
 enum class OpenItemGroupCaseRowExpectedBlankStatus(val tag: String) {
     WRONG("wrong"),
+}
+
+enum class QuestionControlCaseRowExpectedKind(val tag: String) {
+    SINGLE_OPTION("single_option"),
+    TEXT("text"),
+    UNORDERED_SET("unordered_set"),
+    BANK_OPTION("bank_option"),
+}
+
+enum class QuestionControlCaseRowExpectedStatus(val tag: String) {
+    CONFIRMED_FULL("confirmed_full"),
+    CONFIRMED_PARTIAL("confirmed_partial"),
+    WRONG("wrong"),
+    PENDING_MANUAL("pending_manual"),
 }
 
 data class ExamRow(
@@ -180,11 +199,19 @@ data class GrammarTestRow(
     val instruction: String,
 )
 
+data class GrammarBankTokenRow(
+    val tokenId: String,
+    val testRef: String,
+    val position: Int,
+    val text: String,
+)
+
 data class GrammarItemRow(
     val itemId: String,
     val testRef: String,
     val questionType: GrammarItemRowQuestionType,
     val context: String,
+    val questionTarget: String? = null,
     val gap: String? = null,
     val options: String? = null,
     val correctAnswer: String,
@@ -321,6 +348,25 @@ data class GrammarConstraintCaseRow(
     val answer8: String,
     val expected6Quarter: Int,
     val expected8Quarter: Int,
+)
+
+data class BankTokenCaseRow(
+    val id: String,
+    val testId: String,
+    val expectedOrderedTokenText: String,
+    val expectedDuplicateCount: Int,
+)
+
+data class QuestionControlCaseRow(
+    val id: String,
+    val sourceItemId: String,
+    val expectedTag: String,
+    val expectedKind: QuestionControlCaseRowExpectedKind,
+    val expectedOptionCount: Int,
+    val expectedRawAnswer: String,
+    val expectedQuestionTarget: String? = null,
+    val expectedQuarter: Int,
+    val expectedStatus: QuestionControlCaseRowExpectedStatus,
 )
 
 val EXAM_ROW_ROWS: List<ExamRow> = listOf(
@@ -602,7 +648,7 @@ val LISTENING_QUESTION_ROW_ROWS: List<ListeningQuestionRow> = listOf(
     ListeningQuestionRow(
         questionId = "certyfikat-polski-B1-2020-listening-4-1",
         taskRef = "certyfikat-polski-B1-2020-listen-4",
-        questionType = ListeningQuestionRowQuestionType.MATCH,
+        questionType = ListeningQuestionRowQuestionType.MATCHING,
         questionText = "A: narzeka na hałaśliwych sąsiadów.",
         options = "1|2|3|4",
         correctAnswer = "3",
@@ -611,7 +657,7 @@ val LISTENING_QUESTION_ROW_ROWS: List<ListeningQuestionRow> = listOf(
     ListeningQuestionRow(
         questionId = "certyfikat-polski-B1-2020-listening-4-2",
         taskRef = "certyfikat-polski-B1-2020-listen-4",
-        questionType = ListeningQuestionRowQuestionType.MATCH,
+        questionType = ListeningQuestionRowQuestionType.MATCHING,
         questionText = "B: wymienia miejsca, gdzie można spędzić wolny czas.",
         options = "1|2|3|4",
         correctAnswer = "1|4",
@@ -622,7 +668,7 @@ val LISTENING_QUESTION_ROW_ROWS: List<ListeningQuestionRow> = listOf(
     ListeningQuestionRow(
         questionId = "certyfikat-polski-B1-2020-listening-4-3",
         taskRef = "certyfikat-polski-B1-2020-listen-4",
-        questionType = ListeningQuestionRowQuestionType.MATCH,
+        questionType = ListeningQuestionRowQuestionType.MATCHING,
         questionText = "C: mówi, że życie w mieście jest drogie.",
         options = "1|2|3|4",
         correctAnswer = "2|4",
@@ -633,7 +679,7 @@ val LISTENING_QUESTION_ROW_ROWS: List<ListeningQuestionRow> = listOf(
     ListeningQuestionRow(
         questionId = "certyfikat-polski-B1-2020-listening-4-4",
         taskRef = "certyfikat-polski-B1-2020-listen-4",
-        questionType = ListeningQuestionRowQuestionType.MATCH,
+        questionType = ListeningQuestionRowQuestionType.MATCHING,
         questionText = "D: zwraca uwagę na zanieczyszczenie.",
         options = "1|2|3|4",
         correctAnswer = "4",
@@ -642,7 +688,7 @@ val LISTENING_QUESTION_ROW_ROWS: List<ListeningQuestionRow> = listOf(
     ListeningQuestionRow(
         questionId = "certyfikat-polski-B1-2020-listening-4-5",
         taskRef = "certyfikat-polski-B1-2020-listen-4",
-        questionType = ListeningQuestionRowQuestionType.MATCH,
+        questionType = ListeningQuestionRowQuestionType.MATCHING,
         questionText = "E: nie lubi osób za bardzo ciekawych tego, jak żyją inni.",
         options = "1|2|3|4",
         correctAnswer = "2",
@@ -651,7 +697,7 @@ val LISTENING_QUESTION_ROW_ROWS: List<ListeningQuestionRow> = listOf(
     ListeningQuestionRow(
         questionId = "certyfikat-polski-B1-2020-listening-5-1",
         taskRef = "certyfikat-polski-B1-2020-listen-5",
-        questionType = ListeningQuestionRowQuestionType.MATCH,
+        questionType = ListeningQuestionRowQuestionType.MATCHING,
         questionText = "Łyżwy",
         options = "A|B|C|D|E|F",
         correctAnswer = "E",
@@ -660,7 +706,7 @@ val LISTENING_QUESTION_ROW_ROWS: List<ListeningQuestionRow> = listOf(
     ListeningQuestionRow(
         questionId = "certyfikat-polski-B1-2020-listening-5-2",
         taskRef = "certyfikat-polski-B1-2020-listen-5",
-        questionType = ListeningQuestionRowQuestionType.MATCH,
+        questionType = ListeningQuestionRowQuestionType.MATCHING,
         questionText = "Sporty wodne",
         options = "A|B|C|D|E|F",
         correctAnswer = "D",
@@ -669,7 +715,7 @@ val LISTENING_QUESTION_ROW_ROWS: List<ListeningQuestionRow> = listOf(
     ListeningQuestionRow(
         questionId = "certyfikat-polski-B1-2020-listening-5-3",
         taskRef = "certyfikat-polski-B1-2020-listen-5",
-        questionType = ListeningQuestionRowQuestionType.MATCH,
+        questionType = ListeningQuestionRowQuestionType.MATCHING,
         questionText = "Jazda konna",
         options = "A|B|C|D|E|F",
         correctAnswer = "B",
@@ -678,7 +724,7 @@ val LISTENING_QUESTION_ROW_ROWS: List<ListeningQuestionRow> = listOf(
     ListeningQuestionRow(
         questionId = "certyfikat-polski-B1-2020-listening-5-4",
         taskRef = "certyfikat-polski-B1-2020-listen-5",
-        questionType = ListeningQuestionRowQuestionType.MATCH,
+        questionType = ListeningQuestionRowQuestionType.MATCHING,
         questionText = "Tenis",
         options = "A|B|C|D|E|F",
         correctAnswer = "F",
@@ -687,7 +733,7 @@ val LISTENING_QUESTION_ROW_ROWS: List<ListeningQuestionRow> = listOf(
     ListeningQuestionRow(
         questionId = "certyfikat-polski-B1-2020-listening-5-5",
         taskRef = "certyfikat-polski-B1-2020-listen-5",
-        questionType = ListeningQuestionRowQuestionType.MATCH,
+        questionType = ListeningQuestionRowQuestionType.MATCHING,
         questionText = "Gra w siatkówkę",
         options = "A|B|C|D|E|F",
         correctAnswer = "A",
@@ -976,7 +1022,7 @@ val READING_QUESTION_ROW_ROWS: List<ReadingQuestionRow> = listOf(
     ReadingQuestionRow(
         questionId = "certyfikat-polski-B1-2020-reading-5-1",
         passageRef = "certyfikat-polski-B1-2020-read-5",
-        questionType = ReadingQuestionRowQuestionType.FILL_GAP,
+        questionType = ReadingQuestionRowQuestionType.GAP_FILL_FRAGMENT,
         questionText = "Na ulicach można […] radość.",
         options = "widać|zobaczyć|przeglądać",
         correctAnswer = "zobaczyć",
@@ -985,7 +1031,7 @@ val READING_QUESTION_ROW_ROWS: List<ReadingQuestionRow> = listOf(
     ReadingQuestionRow(
         questionId = "certyfikat-polski-B1-2020-reading-5-2",
         passageRef = "certyfikat-polski-B1-2020-read-5",
-        questionType = ReadingQuestionRowQuestionType.FILL_GAP,
+        questionType = ReadingQuestionRowQuestionType.GAP_FILL_FRAGMENT,
         questionText = "Ludzie są serdeczni bardziej niż […].",
         options = "zwykle|często|rzadko",
         correctAnswer = "zwykle",
@@ -994,7 +1040,7 @@ val READING_QUESTION_ROW_ROWS: List<ReadingQuestionRow> = listOf(
     ReadingQuestionRow(
         questionId = "certyfikat-polski-B1-2020-reading-5-3",
         passageRef = "certyfikat-polski-B1-2020-read-5",
-        questionType = ReadingQuestionRowQuestionType.FILL_GAP,
+        questionType = ReadingQuestionRowQuestionType.GAP_FILL_FRAGMENT,
         questionText = "[…] dnia rano odbywa się karnawał kolorów.",
         options = "Następnego|dalszego|przyszłego",
         correctAnswer = "Następnego",
@@ -1003,7 +1049,7 @@ val READING_QUESTION_ROW_ROWS: List<ReadingQuestionRow> = listOf(
     ReadingQuestionRow(
         questionId = "certyfikat-polski-B1-2020-reading-5-4",
         passageRef = "certyfikat-polski-B1-2020-read-5",
-        questionType = ReadingQuestionRowQuestionType.FILL_GAP,
+        questionType = ReadingQuestionRowQuestionType.GAP_FILL_FRAGMENT,
         questionText = "Uczestnicy […] przyjaciół i rodzinę.",
         options = "zwiedzają|odwiedzają|widzą",
         correctAnswer = "odwiedzają",
@@ -1012,7 +1058,7 @@ val READING_QUESTION_ROW_ROWS: List<ReadingQuestionRow> = listOf(
     ReadingQuestionRow(
         questionId = "certyfikat-polski-B1-2020-reading-5-5",
         passageRef = "certyfikat-polski-B1-2020-read-5",
-        questionType = ReadingQuestionRowQuestionType.FILL_GAP,
+        questionType = ReadingQuestionRowQuestionType.GAP_FILL_FRAGMENT,
         questionText = "W Polsce także […] to święto.",
         options = "odbywamy|obchodzimy|bierzemy",
         correctAnswer = "obchodzimy",
@@ -1021,7 +1067,7 @@ val READING_QUESTION_ROW_ROWS: List<ReadingQuestionRow> = listOf(
     ReadingQuestionRow(
         questionId = "certyfikat-polski-B1-2020-reading-5-6",
         passageRef = "certyfikat-polski-B1-2020-read-5",
-        questionType = ReadingQuestionRowQuestionType.FILL_GAP,
+        questionType = ReadingQuestionRowQuestionType.GAP_FILL_FRAGMENT,
         questionText = "Nie ma wiele […] z kulturą Indii.",
         options = "takiego samego|identycznego|wspólnego",
         correctAnswer = "wspólnego",
@@ -1030,7 +1076,7 @@ val READING_QUESTION_ROW_ROWS: List<ReadingQuestionRow> = listOf(
     ReadingQuestionRow(
         questionId = "certyfikat-polski-B1-2020-reading-5-7",
         passageRef = "certyfikat-polski-B1-2020-read-5",
-        questionType = ReadingQuestionRowQuestionType.FILL_GAP,
+        questionType = ReadingQuestionRowQuestionType.GAP_FILL_FRAGMENT,
         questionText = "To ma być przede wszystkim dobra […].",
         options = "gra|zabawa|nauka",
         correctAnswer = "zabawa",
@@ -1039,7 +1085,7 @@ val READING_QUESTION_ROW_ROWS: List<ReadingQuestionRow> = listOf(
     ReadingQuestionRow(
         questionId = "certyfikat-polski-B1-2020-reading-5-8",
         passageRef = "certyfikat-polski-B1-2020-read-5",
-        questionType = ReadingQuestionRowQuestionType.FILL_GAP,
+        questionType = ReadingQuestionRowQuestionType.GAP_FILL_FRAGMENT,
         questionText = "Przygotowano wiele dodatkowych […].",
         options = "spektakli|pomysłów|atrakcji",
         correctAnswer = "atrakcji",
@@ -1095,6 +1141,93 @@ val GRAMMAR_TEST_ROW_ROWS: List<GrammarTestRow> = listOf(
         examRef = "certyfikat-polski-B1-2020",
         taskNumber = 8,
         instruction = "Proszę – zgodnie z przykładem – uzupełnić zdania wyrazami z ramki (przyimki). Uwaga! Jeden wyraz w ramce jest niepotrzebny.",
+    ),
+)
+
+val GRAMMAR_BANK_TOKEN_ROW_ROWS: List<GrammarBankTokenRow> = listOf(
+    GrammarBankTokenRow(
+        tokenId = "certyfikat-polski-B1-2020-grammar-2-bank-1",
+        testRef = "certyfikat-polski-B1-2020-grammar-2",
+        position = 1,
+        text = "że",
+    ),
+    GrammarBankTokenRow(
+        tokenId = "certyfikat-polski-B1-2020-grammar-2-bank-2",
+        testRef = "certyfikat-polski-B1-2020-grammar-2",
+        position = 2,
+        text = "oraz",
+    ),
+    GrammarBankTokenRow(
+        tokenId = "certyfikat-polski-B1-2020-grammar-2-bank-3",
+        testRef = "certyfikat-polski-B1-2020-grammar-2",
+        position = 3,
+        text = "ale",
+    ),
+    GrammarBankTokenRow(
+        tokenId = "certyfikat-polski-B1-2020-grammar-2-bank-4",
+        testRef = "certyfikat-polski-B1-2020-grammar-2",
+        position = 4,
+        text = "chociaż",
+    ),
+    GrammarBankTokenRow(
+        tokenId = "certyfikat-polski-B1-2020-grammar-2-bank-5",
+        testRef = "certyfikat-polski-B1-2020-grammar-2",
+        position = 5,
+        text = "czyli",
+    ),
+    GrammarBankTokenRow(
+        tokenId = "certyfikat-polski-B1-2020-grammar-2-bank-6",
+        testRef = "certyfikat-polski-B1-2020-grammar-2",
+        position = 6,
+        text = "ani",
+    ),
+    GrammarBankTokenRow(
+        tokenId = "certyfikat-polski-B1-2020-grammar-2-bank-7",
+        testRef = "certyfikat-polski-B1-2020-grammar-2",
+        position = 7,
+        text = "więc",
+    ),
+    GrammarBankTokenRow(
+        tokenId = "certyfikat-polski-B1-2020-grammar-8-bank-1",
+        testRef = "certyfikat-polski-B1-2020-grammar-8",
+        position = 1,
+        text = "do",
+    ),
+    GrammarBankTokenRow(
+        tokenId = "certyfikat-polski-B1-2020-grammar-8-bank-2",
+        testRef = "certyfikat-polski-B1-2020-grammar-8",
+        position = 2,
+        text = "w",
+    ),
+    GrammarBankTokenRow(
+        tokenId = "certyfikat-polski-B1-2020-grammar-8-bank-3",
+        testRef = "certyfikat-polski-B1-2020-grammar-8",
+        position = 3,
+        text = "nad",
+    ),
+    GrammarBankTokenRow(
+        tokenId = "certyfikat-polski-B1-2020-grammar-8-bank-4",
+        testRef = "certyfikat-polski-B1-2020-grammar-8",
+        position = 4,
+        text = "przed",
+    ),
+    GrammarBankTokenRow(
+        tokenId = "certyfikat-polski-B1-2020-grammar-8-bank-5",
+        testRef = "certyfikat-polski-B1-2020-grammar-8",
+        position = 5,
+        text = "z",
+    ),
+    GrammarBankTokenRow(
+        tokenId = "certyfikat-polski-B1-2020-grammar-8-bank-6",
+        testRef = "certyfikat-polski-B1-2020-grammar-8",
+        position = 6,
+        text = "na",
+    ),
+    GrammarBankTokenRow(
+        tokenId = "certyfikat-polski-B1-2020-grammar-8-bank-7",
+        testRef = "certyfikat-polski-B1-2020-grammar-8",
+        position = 7,
+        text = "w",
     ),
 )
 
@@ -1192,45 +1325,40 @@ val GRAMMAR_ITEM_ROW_ROWS: List<GrammarItemRow> = listOf(
     GrammarItemRow(
         itemId = "certyfikat-polski-B1-2020-grammar-2-1",
         testRef = "certyfikat-polski-B1-2020-grammar-2",
-        questionType = GrammarItemRowQuestionType.FILL_GAP,
+        questionType = GrammarItemRowQuestionType.WORD_BANK,
         context = "Podczas koncertów studenci używają języka migowego, […] języka osób niesłyszących.",
-        options = "że|oraz|ale|chociaż|czyli|ani|więc",
         correctAnswer = "czyli",
         pointsQuarter = 2,
     ),
     GrammarItemRow(
         itemId = "certyfikat-polski-B1-2020-grammar-2-2",
         testRef = "certyfikat-polski-B1-2020-grammar-2",
-        questionType = GrammarItemRowQuestionType.FILL_GAP,
+        questionType = GrammarItemRowQuestionType.WORD_BANK,
         context = "W chórze występują osoby po kursach tego języka […] tacy, którzy go nie znają.",
-        options = "że|oraz|ale|chociaż|czyli|ani|więc",
         correctAnswer = "oraz",
         pointsQuarter = 2,
     ),
     GrammarItemRow(
         itemId = "certyfikat-polski-B1-2020-grammar-2-3",
         testRef = "certyfikat-polski-B1-2020-grammar-2",
-        questionType = GrammarItemRowQuestionType.FILL_GAP,
+        questionType = GrammarItemRowQuestionType.WORD_BANK,
         context = "Nie znają języka migowego, […] bardzo chcą się go nauczyć.",
-        options = "że|oraz|ale|chociaż|czyli|ani|więc",
         correctAnswer = "ale",
         pointsQuarter = 2,
     ),
     GrammarItemRow(
         itemId = "certyfikat-polski-B1-2020-grammar-2-4",
         testRef = "certyfikat-polski-B1-2020-grammar-2",
-        questionType = GrammarItemRowQuestionType.FILL_GAP,
+        questionType = GrammarItemRowQuestionType.WORD_BANK,
         context = "Utwory są tak ciekawe, […] wszyscy mogą się czegoś dowiedzieć.",
-        options = "że|oraz|ale|chociaż|czyli|ani|więc",
         correctAnswer = "że",
         pointsQuarter = 2,
     ),
     GrammarItemRow(
         itemId = "certyfikat-polski-B1-2020-grammar-2-5",
         testRef = "certyfikat-polski-B1-2020-grammar-2",
-        questionType = GrammarItemRowQuestionType.FILL_GAP,
+        questionType = GrammarItemRowQuestionType.WORD_BANK,
         context = "Zainteresowanie chórem rośnie, […] spotkania odbywają się coraz częściej.",
-        options = "że|oraz|ale|chociaż|czyli|ani|więc",
         correctAnswer = "więc",
         pointsQuarter = 2,
     ),
@@ -1362,40 +1490,45 @@ val GRAMMAR_ITEM_ROW_ROWS: List<GrammarItemRow> = listOf(
     GrammarItemRow(
         itemId = "certyfikat-polski-B1-2020-grammar-5-1",
         testRef = "certyfikat-polski-B1-2020-grammar-5",
-        questionType = GrammarItemRowQuestionType.TRANSFORM,
+        questionType = GrammarItemRowQuestionType.QUESTION_FORMATION,
         context = "Michał próbował podzielić jabłko widelcem. – […] Michał próbował podzielić jabłko? – Widelcem.",
+        questionTarget = "widelcem",
         correctAnswer = "Czym",
         pointsQuarter = 2,
     ),
     GrammarItemRow(
         itemId = "certyfikat-polski-B1-2020-grammar-5-2",
         testRef = "certyfikat-polski-B1-2020-grammar-5",
-        questionType = GrammarItemRowQuestionType.TRANSFORM,
+        questionType = GrammarItemRowQuestionType.QUESTION_FORMATION,
         context = "Nasi koledzy czekali dwa tygodnie na wyniki egzaminu. – […] wasi koledzy czekali na wyniki egzaminu? – Dwa tygodnie.",
+        questionTarget = "dwa tygodnie",
         correctAnswer = "Jak długo",
         pointsQuarter = 2,
     ),
     GrammarItemRow(
         itemId = "certyfikat-polski-B1-2020-grammar-5-3",
         testRef = "certyfikat-polski-B1-2020-grammar-5",
-        questionType = GrammarItemRowQuestionType.TRANSFORM,
+        questionType = GrammarItemRowQuestionType.QUESTION_FORMATION,
         context = "Znalazłem to ogłoszenie w sklepie. – […] znalazłeś to ogłoszenie? – W sklepie.",
+        questionTarget = "w sklepie",
         correctAnswer = "Gdzie",
         pointsQuarter = 2,
     ),
     GrammarItemRow(
         itemId = "certyfikat-polski-B1-2020-grammar-5-4",
         testRef = "certyfikat-polski-B1-2020-grammar-5",
-        questionType = GrammarItemRowQuestionType.TRANSFORM,
+        questionType = GrammarItemRowQuestionType.QUESTION_FORMATION,
         context = "Matka pomogła Piotrowi znaleźć pracę. – […] matka pomogła znaleźć pracę? – Piotrowi.",
+        questionTarget = "Piotrowi",
         correctAnswer = "Komu",
         pointsQuarter = 2,
     ),
     GrammarItemRow(
         itemId = "certyfikat-polski-B1-2020-grammar-5-5",
         testRef = "certyfikat-polski-B1-2020-grammar-5",
-        questionType = GrammarItemRowQuestionType.TRANSFORM,
+        questionType = GrammarItemRowQuestionType.QUESTION_FORMATION,
         context = "Anna czekała na schodach na koleżankę. – […] Anna czekała na schodach? – Na koleżankę.",
+        questionTarget = "na koleżankę",
         correctAnswer = "Na kogo",
         pointsQuarter = 2,
     ),
@@ -1537,45 +1670,40 @@ val GRAMMAR_ITEM_ROW_ROWS: List<GrammarItemRow> = listOf(
     GrammarItemRow(
         itemId = "certyfikat-polski-B1-2020-grammar-8-1",
         testRef = "certyfikat-polski-B1-2020-grammar-8",
-        questionType = GrammarItemRowQuestionType.FILL_GAP,
+        questionType = GrammarItemRowQuestionType.WORD_BANK,
         context = "Kilka miesięcy […] wakacjami szukali domku.",
-        options = "do|w|nad|przed|z|na",
         correctAnswer = "przed",
         pointsQuarter = 2,
     ),
     GrammarItemRow(
         itemId = "certyfikat-polski-B1-2020-grammar-8-2",
         testRef = "certyfikat-polski-B1-2020-grammar-8",
-        questionType = GrammarItemRowQuestionType.FILL_GAP,
+        questionType = GrammarItemRowQuestionType.WORD_BANK,
         context = "Szukali […] internecie domku.",
-        options = "do|w|nad|przed|z|na",
         correctAnswer = "w",
         pointsQuarter = 2,
     ),
     GrammarItemRow(
         itemId = "certyfikat-polski-B1-2020-grammar-8-3",
         testRef = "certyfikat-polski-B1-2020-grammar-8",
-        questionType = GrammarItemRowQuestionType.FILL_GAP,
+        questionType = GrammarItemRowQuestionType.WORD_BANK,
         context = "Domek […] polskim morzem.",
-        options = "do|w|nad|przed|z|na",
         correctAnswer = "nad",
         pointsQuarter = 2,
     ),
     GrammarItemRow(
         itemId = "certyfikat-polski-B1-2020-grammar-8-4",
         testRef = "certyfikat-polski-B1-2020-grammar-8",
-        questionType = GrammarItemRowQuestionType.FILL_GAP,
+        questionType = GrammarItemRowQuestionType.WORD_BANK,
         context = "Chcieli wynająć go […] trzy tygodnie.",
-        options = "do|w|nad|przed|z|na",
         correctAnswer = "na",
         pointsQuarter = 2,
     ),
     GrammarItemRow(
         itemId = "certyfikat-polski-B1-2020-grammar-8-5",
         testRef = "certyfikat-polski-B1-2020-grammar-8",
-        questionType = GrammarItemRowQuestionType.FILL_GAP,
+        questionType = GrammarItemRowQuestionType.WORD_BANK,
         context = "Zdecydowali się na wyjazd […] Grecji.",
-        options = "do|w|nad|przed|z|na",
         correctAnswer = "do",
         pointsQuarter = 2,
     ),

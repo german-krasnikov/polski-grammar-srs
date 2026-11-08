@@ -94,45 +94,40 @@ GRAMMAR_ITEM {
 GRAMMAR_ITEM {
   itemId: certyfikat-polski-B1-2020-grammar-2-1
   testRef: certyfikat-polski-B1-2020-grammar-2
-  questionType: fill_gap
+  questionType: word_bank
   context: "Podczas koncertów studenci używają języka migowego, […] języka osób niesłyszących."
-  options: "że|oraz|ale|chociaż|czyli|ani|więc"
   correctAnswer: czyli
   pointsQuarter: 2
 }
 GRAMMAR_ITEM {
   itemId: certyfikat-polski-B1-2020-grammar-2-2
   testRef: certyfikat-polski-B1-2020-grammar-2
-  questionType: fill_gap
+  questionType: word_bank
   context: "W chórze występują osoby po kursach tego języka […] tacy, którzy go nie znają."
-  options: "że|oraz|ale|chociaż|czyli|ani|więc"
   correctAnswer: oraz
   pointsQuarter: 2
 }
 GRAMMAR_ITEM {
   itemId: certyfikat-polski-B1-2020-grammar-2-3
   testRef: certyfikat-polski-B1-2020-grammar-2
-  questionType: fill_gap
+  questionType: word_bank
   context: "Nie znają języka migowego, […] bardzo chcą się go nauczyć."
-  options: "że|oraz|ale|chociaż|czyli|ani|więc"
   correctAnswer: ale
   pointsQuarter: 2
 }
 GRAMMAR_ITEM {
   itemId: certyfikat-polski-B1-2020-grammar-2-4
   testRef: certyfikat-polski-B1-2020-grammar-2
-  questionType: fill_gap
+  questionType: word_bank
   context: "Utwory są tak ciekawe, […] wszyscy mogą się czegoś dowiedzieć."
-  options: "że|oraz|ale|chociaż|czyli|ani|więc"
   correctAnswer: "że"
   pointsQuarter: 2
 }
 GRAMMAR_ITEM {
   itemId: certyfikat-polski-B1-2020-grammar-2-5
   testRef: certyfikat-polski-B1-2020-grammar-2
-  questionType: fill_gap
+  questionType: word_bank
   context: "Zainteresowanie chórem rośnie, […] spotkania odbywają się coraz częściej."
-  options: "że|oraz|ale|chociaż|czyli|ani|więc"
   correctAnswer: "więc"
   pointsQuarter: 2
 }
@@ -264,7 +259,8 @@ GRAMMAR_ITEM {
 GRAMMAR_ITEM {
   itemId: certyfikat-polski-B1-2020-grammar-5-1
   testRef: certyfikat-polski-B1-2020-grammar-5
-  questionType: transform
+  questionType: question_formation
+  questionTarget: widelcem
   context: "Michał próbował podzielić jabłko widelcem. – […] Michał próbował podzielić jabłko? – Widelcem."
   correctAnswer: Czym
   pointsQuarter: 2
@@ -272,7 +268,8 @@ GRAMMAR_ITEM {
 GRAMMAR_ITEM {
   itemId: certyfikat-polski-B1-2020-grammar-5-2
   testRef: certyfikat-polski-B1-2020-grammar-5
-  questionType: transform
+  questionType: question_formation
+  questionTarget: "dwa tygodnie"
   context: "Nasi koledzy czekali dwa tygodnie na wyniki egzaminu. – […] wasi koledzy czekali na wyniki egzaminu? – Dwa tygodnie."
   correctAnswer: "Jak długo"
   pointsQuarter: 2
@@ -280,7 +277,8 @@ GRAMMAR_ITEM {
 GRAMMAR_ITEM {
   itemId: certyfikat-polski-B1-2020-grammar-5-3
   testRef: certyfikat-polski-B1-2020-grammar-5
-  questionType: transform
+  questionType: question_formation
+  questionTarget: "w sklepie"
   context: "Znalazłem to ogłoszenie w sklepie. – […] znalazłeś to ogłoszenie? – W sklepie."
   correctAnswer: Gdzie
   pointsQuarter: 2
@@ -288,7 +286,8 @@ GRAMMAR_ITEM {
 GRAMMAR_ITEM {
   itemId: certyfikat-polski-B1-2020-grammar-5-4
   testRef: certyfikat-polski-B1-2020-grammar-5
-  questionType: transform
+  questionType: question_formation
+  questionTarget: Piotrowi
   context: "Matka pomogła Piotrowi znaleźć pracę. – […] matka pomogła znaleźć pracę? – Piotrowi."
   correctAnswer: Komu
   pointsQuarter: 2
@@ -296,7 +295,8 @@ GRAMMAR_ITEM {
 GRAMMAR_ITEM {
   itemId: certyfikat-polski-B1-2020-grammar-5-5
   testRef: certyfikat-polski-B1-2020-grammar-5
-  questionType: transform
+  questionType: question_formation
+  questionTarget: "na koleżankę"
   context: "Anna czekała na schodach na koleżankę. – […] Anna czekała na schodach? – Na koleżankę."
   correctAnswer: "Na kogo"
   pointsQuarter: 2
@@ -439,45 +439,40 @@ GRAMMAR_ITEM {
 GRAMMAR_ITEM {
   itemId: certyfikat-polski-B1-2020-grammar-8-1
   testRef: certyfikat-polski-B1-2020-grammar-8
-  questionType: fill_gap
+  questionType: word_bank
   context: "Kilka miesięcy […] wakacjami szukali domku."
-  options: "do|w|nad|przed|z|na"
   correctAnswer: przed
   pointsQuarter: 2
 }
 GRAMMAR_ITEM {
   itemId: certyfikat-polski-B1-2020-grammar-8-2
   testRef: certyfikat-polski-B1-2020-grammar-8
-  questionType: fill_gap
+  questionType: word_bank
   context: "Szukali […] internecie domku."
-  options: "do|w|nad|przed|z|na"
   correctAnswer: w
   pointsQuarter: 2
 }
 GRAMMAR_ITEM {
   itemId: certyfikat-polski-B1-2020-grammar-8-3
   testRef: certyfikat-polski-B1-2020-grammar-8
-  questionType: fill_gap
+  questionType: word_bank
   context: "Domek […] polskim morzem."
-  options: "do|w|nad|przed|z|na"
   correctAnswer: nad
   pointsQuarter: 2
 }
 GRAMMAR_ITEM {
   itemId: certyfikat-polski-B1-2020-grammar-8-4
   testRef: certyfikat-polski-B1-2020-grammar-8
-  questionType: fill_gap
+  questionType: word_bank
   context: "Chcieli wynająć go […] trzy tygodnie."
-  options: "do|w|nad|przed|z|na"
   correctAnswer: na
   pointsQuarter: 2
 }
 GRAMMAR_ITEM {
   itemId: certyfikat-polski-B1-2020-grammar-8-5
   testRef: certyfikat-polski-B1-2020-grammar-8
-  questionType: fill_gap
+  questionType: word_bank
   context: "Zdecydowali się na wyjazd […] Grecji."
-  options: "do|w|nad|przed|z|na"
   correctAnswer: do
   pointsQuarter: 2
 }

@@ -8,11 +8,20 @@ data class GrammarTest(
     val testId: String,
     val instruction: String,
     val items: List<GrammarItem>,
+    val bankTokens: List<GrammarBankToken> = emptyList(),
 ) {
     init {
+        require(bankTokens.map { it.tokenId }.distinct().size == bankTokens.size) { "Duplicate bank token ID in $testId" }
+        require(bankTokens.map { it.position }.distinct().size == bankTokens.size) { "Duplicate bank position in $testId" }
+        require(bankTokens.all { it.position > 0 && it.text.isNotBlank() }) { "Invalid bank token in $testId" }
+        require(items.none { it.questionType == QuestionType.WordBank } || bankTokens.isNotEmpty()) { "Missing word bank in $testId" }
         val itemIds = items.map { it.itemId }.toSet()
         require(itemIds.size == items.size) { "Duplicate item in $testId" }
         items.forEach { item ->
+            require(item.questionType != QuestionType.ChooseForm ||
+                (item.options.isNotEmpty() && item.options.all { it.isNotBlank() })) {
+                "Missing choice options for $testId/${item.itemId}"
+            }
             item.scoredVariants.forEach { variant ->
                 variant.onlyIfNotUsedByItemId?.let { otherId ->
                     require(otherId != item.itemId && otherId in itemIds) {
@@ -23,6 +32,8 @@ data class GrammarTest(
         }
     }
 }
+
+data class GrammarBankToken(val tokenId: String, val position: Int, val text: String)
 
 data class GrammarItem(
     val itemId: String,
@@ -36,12 +47,14 @@ data class GrammarItem(
     val pointsQuarter: Int? = null,
     val scoredVariants: List<GrammarScoredVariant> = emptyList(),
     val gradingMode: ExamGradingMode = ExamGradingMode.Exact,
+    val questionTarget: String? = null,
 ) {
     val maximumQuarter: Int get() = pointsQuarter ?: points * 4
 
     init {
         require(maximumQuarter > 0) { "Item $itemId must have a positive maximum" }
         require(normalize(correctAnswer).isNotBlank()) { "Missing answer for $itemId" }
+        require(questionType != QuestionType.QuestionFormation || !questionTarget.isNullOrBlank()) { "Missing question target for $itemId" }
         require(scoredVariants.all { it.earnedQuarter in 1..maximumQuarter }) { "Invalid variant score for $itemId" }
         require(scoredVariants.all { normalize(it.answer).isNotBlank() }) { "Blank variant answer for $itemId" }
         val accepted = listOf(correctAnswer) + scoredVariants.map { it.answer }

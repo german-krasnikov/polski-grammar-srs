@@ -1,5 +1,5 @@
 // Generated from dsl/exam.data-contract
-// source-sha256=a57e78c0c7e995774d3b275d965c3ed5eaf230d29d01cb66a06330174c9e816d
+// source-sha256=36cfafebca8fc22dc8a31c76161792ced0b69ac872ae298f7b83376d02344c88
 // Edit the source, then run biome generate.
 
 package polski.exam.data.b1y2017
@@ -9,6 +9,7 @@ enum class ListeningQuestionRowQuestionType(val tag: String) {
     TRUE_FALSE("true_false"),
     FILL_GAP("fill_gap"),
     MATCH("match"),
+    MATCHING("matching"),
 }
 
 enum class ListeningQuestionRowGradingMode(val tag: String) {
@@ -27,6 +28,8 @@ enum class ReadingQuestionRowQuestionType(val tag: String) {
     MATCH_HEADING("match_heading"),
     FILL_GAP("fill_gap"),
     SHORT_ANSWER("short_answer"),
+    GAP_FILL_FRAGMENT("gap_fill_fragment"),
+    MATCHING("matching"),
 }
 
 enum class GrammarItemRowQuestionType(val tag: String) {
@@ -34,6 +37,8 @@ enum class GrammarItemRowQuestionType(val tag: String) {
     FILL_GAP("fill_gap"),
     TRANSFORM("transform"),
     WORD_FORMATION("word_formation"),
+    WORD_BANK("word_bank"),
+    QUESTION_FORMATION("question_formation"),
 }
 
 enum class GrammarItemRowGradingMode(val tag: String) {
@@ -105,6 +110,20 @@ enum class OpenItemGroupCaseRowExpectedUnknownStatus(val tag: String) {
 
 enum class OpenItemGroupCaseRowExpectedBlankStatus(val tag: String) {
     WRONG("wrong"),
+}
+
+enum class QuestionControlCaseRowExpectedKind(val tag: String) {
+    SINGLE_OPTION("single_option"),
+    TEXT("text"),
+    UNORDERED_SET("unordered_set"),
+    BANK_OPTION("bank_option"),
+}
+
+enum class QuestionControlCaseRowExpectedStatus(val tag: String) {
+    CONFIRMED_FULL("confirmed_full"),
+    CONFIRMED_PARTIAL("confirmed_partial"),
+    WRONG("wrong"),
+    PENDING_MANUAL("pending_manual"),
 }
 
 data class ExamRow(
@@ -180,11 +199,19 @@ data class GrammarTestRow(
     val instruction: String,
 )
 
+data class GrammarBankTokenRow(
+    val tokenId: String,
+    val testRef: String,
+    val position: Int,
+    val text: String,
+)
+
 data class GrammarItemRow(
     val itemId: String,
     val testRef: String,
     val questionType: GrammarItemRowQuestionType,
     val context: String,
+    val questionTarget: String? = null,
     val gap: String? = null,
     val options: String? = null,
     val correctAnswer: String,
@@ -321,6 +348,25 @@ data class GrammarConstraintCaseRow(
     val answer8: String,
     val expected6Quarter: Int,
     val expected8Quarter: Int,
+)
+
+data class BankTokenCaseRow(
+    val id: String,
+    val testId: String,
+    val expectedOrderedTokenText: String,
+    val expectedDuplicateCount: Int,
+)
+
+data class QuestionControlCaseRow(
+    val id: String,
+    val sourceItemId: String,
+    val expectedTag: String,
+    val expectedKind: QuestionControlCaseRowExpectedKind,
+    val expectedOptionCount: Int,
+    val expectedRawAnswer: String,
+    val expectedQuestionTarget: String? = null,
+    val expectedQuarter: Int,
+    val expectedStatus: QuestionControlCaseRowExpectedStatus,
 )
 
 val EXAM_ROW_ROWS: List<ExamRow> = listOf(
@@ -661,7 +707,7 @@ val LISTENING_QUESTION_ROW_ROWS: List<ListeningQuestionRow> = listOf(
     ListeningQuestionRow(
         questionId = "B1-2017-l5-1",
         taskRef = "certyfikat-polski-B1-2017-listen-5",
-        questionType = ListeningQuestionRowQuestionType.MATCH,
+        questionType = ListeningQuestionRowQuestionType.MATCHING,
         questionText = "opłata paszportowa w wysokości 30 zł",
         options = "A. paszport dla emerytów i rencistów|B. paszport tymczasowy dla dorosłych|C. paszport dla osób powyżej 70 lat|D. paszport dla dzieci do 7 lat|E. paszport dla dorosłych na 10 lat|F. paszport dla dzieci poniżej 13 lat",
         correctAnswer = "D. paszport dla dzieci do 7 lat",
@@ -670,7 +716,7 @@ val LISTENING_QUESTION_ROW_ROWS: List<ListeningQuestionRow> = listOf(
     ListeningQuestionRow(
         questionId = "B1-2017-l5-2",
         taskRef = "certyfikat-polski-B1-2017-listen-5",
-        questionType = ListeningQuestionRowQuestionType.MATCH,
+        questionType = ListeningQuestionRowQuestionType.MATCHING,
         questionText = "opłata paszportowa w wysokości 60 zł",
         options = "A. paszport dla emerytów i rencistów|B. paszport tymczasowy dla dorosłych|C. paszport dla osób powyżej 70 lat|D. paszport dla dzieci do 7 lat|E. paszport dla dorosłych na 10 lat|F. paszport dla dzieci poniżej 13 lat",
         correctAnswer = "F. paszport dla dzieci poniżej 13 lat",
@@ -679,7 +725,7 @@ val LISTENING_QUESTION_ROW_ROWS: List<ListeningQuestionRow> = listOf(
     ListeningQuestionRow(
         questionId = "B1-2017-l5-3",
         taskRef = "certyfikat-polski-B1-2017-listen-5",
-        questionType = ListeningQuestionRowQuestionType.MATCH,
+        questionType = ListeningQuestionRowQuestionType.MATCHING,
         questionText = "opłata paszportowa w wysokości 45 zł",
         options = "A. paszport dla emerytów i rencistów|B. paszport tymczasowy dla dorosłych|C. paszport dla osób powyżej 70 lat|D. paszport dla dzieci do 7 lat|E. paszport dla dorosłych na 10 lat|F. paszport dla dzieci poniżej 13 lat",
         correctAnswer = "B. paszport tymczasowy dla dorosłych",
@@ -688,7 +734,7 @@ val LISTENING_QUESTION_ROW_ROWS: List<ListeningQuestionRow> = listOf(
     ListeningQuestionRow(
         questionId = "B1-2017-l5-4",
         taskRef = "certyfikat-polski-B1-2017-listen-5",
-        questionType = ListeningQuestionRowQuestionType.MATCH,
+        questionType = ListeningQuestionRowQuestionType.MATCHING,
         questionText = "paszport bez opłaty",
         options = "A. paszport dla emerytów i rencistów|B. paszport tymczasowy dla dorosłych|C. paszport dla osób powyżej 70 lat|D. paszport dla dzieci do 7 lat|E. paszport dla dorosłych na 10 lat|F. paszport dla dzieci poniżej 13 lat",
         correctAnswer = "C. paszport dla osób powyżej 70 lat",
@@ -697,7 +743,7 @@ val LISTENING_QUESTION_ROW_ROWS: List<ListeningQuestionRow> = listOf(
     ListeningQuestionRow(
         questionId = "B1-2017-l5-5",
         taskRef = "certyfikat-polski-B1-2017-listen-5",
-        questionType = ListeningQuestionRowQuestionType.MATCH,
+        questionType = ListeningQuestionRowQuestionType.MATCHING,
         questionText = "50% ulgi w opłacie paszportowej",
         options = "A. paszport dla emerytów i rencistów|B. paszport tymczasowy dla dorosłych|C. paszport dla osób powyżej 70 lat|D. paszport dla dzieci do 7 lat|E. paszport dla dorosłych na 10 lat|F. paszport dla dzieci poniżej 13 lat",
         correctAnswer = "A. paszport dla emerytów i rencistów",
@@ -1097,6 +1143,51 @@ val GRAMMAR_TEST_ROW_ROWS: List<GrammarTestRow> = listOf(
     ),
 )
 
+val GRAMMAR_BANK_TOKEN_ROW_ROWS: List<GrammarBankTokenRow> = listOf(
+    GrammarBankTokenRow(
+        tokenId = "certyfikat-polski-B1-2017-grammar-6-bank-1",
+        testRef = "certyfikat-polski-B1-2017-grammar-6",
+        position = 1,
+        text = "a",
+    ),
+    GrammarBankTokenRow(
+        tokenId = "certyfikat-polski-B1-2017-grammar-6-bank-2",
+        testRef = "certyfikat-polski-B1-2017-grammar-6",
+        position = 2,
+        text = "ale",
+    ),
+    GrammarBankTokenRow(
+        tokenId = "certyfikat-polski-B1-2017-grammar-6-bank-3",
+        testRef = "certyfikat-polski-B1-2017-grammar-6",
+        position = 3,
+        text = "chociaż",
+    ),
+    GrammarBankTokenRow(
+        tokenId = "certyfikat-polski-B1-2017-grammar-6-bank-4",
+        testRef = "certyfikat-polski-B1-2017-grammar-6",
+        position = 4,
+        text = "czy",
+    ),
+    GrammarBankTokenRow(
+        tokenId = "certyfikat-polski-B1-2017-grammar-6-bank-5",
+        testRef = "certyfikat-polski-B1-2017-grammar-6",
+        position = 5,
+        text = "gdyby",
+    ),
+    GrammarBankTokenRow(
+        tokenId = "certyfikat-polski-B1-2017-grammar-6-bank-6",
+        testRef = "certyfikat-polski-B1-2017-grammar-6",
+        position = 6,
+        text = "i",
+    ),
+    GrammarBankTokenRow(
+        tokenId = "certyfikat-polski-B1-2017-grammar-6-bank-7",
+        testRef = "certyfikat-polski-B1-2017-grammar-6",
+        position = 7,
+        text = "że",
+    ),
+)
+
 val GRAMMAR_ITEM_ROW_ROWS: List<GrammarItemRow> = listOf(
     GrammarItemRow(
         itemId = "B1-2017-g1-1",
@@ -1326,40 +1417,45 @@ val GRAMMAR_ITEM_ROW_ROWS: List<GrammarItemRow> = listOf(
     GrammarItemRow(
         itemId = "B1-2017-g4-1",
         testRef = "certyfikat-polski-B1-2017-grammar-4",
-        questionType = GrammarItemRowQuestionType.FILL_GAP,
+        questionType = GrammarItemRowQuestionType.QUESTION_FORMATION,
         context = "Łukasz dowiedział się o tym z gazety. — ___ Łukasz się o tym dowiedział?",
+        questionTarget = "z gazety",
         correctAnswer = "skąd",
         pointsQuarter = 2,
     ),
     GrammarItemRow(
         itemId = "B1-2017-g4-2",
         testRef = "certyfikat-polski-B1-2017-grammar-4",
-        questionType = GrammarItemRowQuestionType.FILL_GAP,
+        questionType = GrammarItemRowQuestionType.QUESTION_FORMATION,
         context = "Agata chce porozmawiać tylko z tym nowym studentem. — ___ studentem Agata chce porozmawiać?",
+        questionTarget = "z tym nowym",
         correctAnswer = "z którym",
         pointsQuarter = 2,
     ),
     GrammarItemRow(
         itemId = "B1-2017-g4-3",
         testRef = "certyfikat-polski-B1-2017-grammar-4",
-        questionType = GrammarItemRowQuestionType.FILL_GAP,
+        questionType = GrammarItemRowQuestionType.QUESTION_FORMATION,
         context = "Anka poszła do swojego pokoju po książkę telefoniczną. — ___ Anka poszła do swojego pokoju?",
+        questionTarget = "po książkę telefoniczną",
         correctAnswer = "po co",
         pointsQuarter = 2,
     ),
     GrammarItemRow(
         itemId = "B1-2017-g4-4",
         testRef = "certyfikat-polski-B1-2017-grammar-4",
-        questionType = GrammarItemRowQuestionType.FILL_GAP,
+        questionType = GrammarItemRowQuestionType.QUESTION_FORMATION,
         context = "Oni nie lubią filmów historycznych. — ___ filmów oni nie lubią?",
+        questionTarget = "historycznych",
         correctAnswer = "jakich",
         pointsQuarter = 2,
     ),
     GrammarItemRow(
         itemId = "B1-2017-g4-5",
         testRef = "certyfikat-polski-B1-2017-grammar-4",
-        questionType = GrammarItemRowQuestionType.FILL_GAP,
+        questionType = GrammarItemRowQuestionType.QUESTION_FORMATION,
         context = "Marcin potrzebuje nowego roweru. — ___ potrzebuje Marcin?",
+        questionTarget = "nowego roweru",
         correctAnswer = "czego",
         pointsQuarter = 2,
     ),
@@ -1446,45 +1542,40 @@ val GRAMMAR_ITEM_ROW_ROWS: List<GrammarItemRow> = listOf(
     GrammarItemRow(
         itemId = "B1-2017-g6-1",
         testRef = "certyfikat-polski-B1-2017-grammar-6",
-        questionType = GrammarItemRowQuestionType.FILL_GAP,
+        questionType = GrammarItemRowQuestionType.WORD_BANK,
         context = "___ w dzieciństwie marzył o karierze aktora, wybrał studia",
-        options = "a|ale|chociaż|czy|gdyby|że",
         correctAnswer = "Chociaż",
         pointsQuarter = 2,
     ),
     GrammarItemRow(
         itemId = "B1-2017-g6-2",
         testRef = "certyfikat-polski-B1-2017-grammar-6",
-        questionType = GrammarItemRowQuestionType.FILL_GAP,
+        questionType = GrammarItemRowQuestionType.WORD_BANK,
         context = "Na początku nie był pewien, ___ to dobry wybór",
-        options = "a|ale|chociaż|czy|gdyby|że",
         correctAnswer = "czy",
         pointsQuarter = 2,
     ),
     GrammarItemRow(
         itemId = "B1-2017-g6-3",
         testRef = "certyfikat-polski-B1-2017-grammar-6",
-        questionType = GrammarItemRowQuestionType.FILL_GAP,
+        questionType = GrammarItemRowQuestionType.WORD_BANK,
         context = "zrozumiał jednak, ___ właśnie tym chce się zajmować",
-        options = "a|ale|chociaż|czy|gdyby|że",
         correctAnswer = "że",
         pointsQuarter = 2,
     ),
     GrammarItemRow(
         itemId = "B1-2017-g6-4",
         testRef = "certyfikat-polski-B1-2017-grammar-6",
-        questionType = GrammarItemRowQuestionType.FILL_GAP,
+        questionType = GrammarItemRowQuestionType.WORD_BANK,
         context = "Ma codziennie kontakt z ludźmi, ___ to jego zdaniem najważniejsze",
-        options = "a|ale|chociaż|czy|gdyby|że",
         correctAnswer = "a",
         pointsQuarter = 2,
     ),
     GrammarItemRow(
         itemId = "B1-2017-g6-5",
         testRef = "certyfikat-polski-B1-2017-grammar-6",
-        questionType = GrammarItemRowQuestionType.FILL_GAP,
+        questionType = GrammarItemRowQuestionType.WORD_BANK,
         context = "___ miał wybierać jeszcze raz, na pewno zrobiłby to samo",
-        options = "a|ale|chociaż|czy|gdyby|że",
         correctAnswer = "Gdyby",
         pointsQuarter = 2,
     ),

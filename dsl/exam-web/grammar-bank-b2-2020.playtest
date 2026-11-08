@@ -1,0 +1,9 @@
+TEST "B2 Certyfikat 2020 printed grammar bank" PROFILE playmode
+  open exam="B2 Certyfikat 2020" module="grammar"
+  advance count=10
+  ASSERT grammar.bankTexts == "dla|dzięki|na|na|o|od|do|przy|u|w|wokół|wbrew|za"
+  chooseBank answer="dla" occurrence=1
+  next
+  back
+  ASSERT grammar.bankSelectedText == "dla"
+END

@@ -1,0 +1,50 @@
+DSL 1
+# Bank strings transcribed from the six local arkusz PDFs; occurrence order includes printed examples.
+BANK_TOKEN_CASE {
+  id: b1-2017-6
+  testId: certyfikat-polski-B1-2017-grammar-6
+  expectedOrderedTokenText: "a|ale|chociaż|czy|gdyby|i|że"
+  expectedDuplicateCount: 0
+}
+BANK_TOKEN_CASE {
+  id: b1-2019-2
+  testId: B1-2019-grammar-2
+  expectedOrderedTokenText: "ponieważ|jeśli|czy|żeby|którzy|że|lecz"
+  expectedDuplicateCount: 0
+}
+BANK_TOKEN_CASE {
+  id: b1-2019-8
+  testId: B1-2019-grammar-8
+  expectedOrderedTokenText: "bez|między|za|przez|w|około|oprócz"
+  expectedDuplicateCount: 0
+}
+BANK_TOKEN_CASE {
+  id: b1-2020-2
+  testId: certyfikat-polski-B1-2020-grammar-2
+  expectedOrderedTokenText: "że|oraz|ale|chociaż|czyli|ani|więc"
+  expectedDuplicateCount: 0
+}
+BANK_TOKEN_CASE {
+  id: b1-2020-8
+  testId: certyfikat-polski-B1-2020-grammar-8
+  expectedOrderedTokenText: "do|w|nad|przed|z|na|w"
+  expectedDuplicateCount: 1
+}
+BANK_TOKEN_CASE {
+  id: b2-2017-2
+  testId: certyfikat-polski-B2-2017-grammar-2
+  expectedOrderedTokenText: "z|oprócz|przy|o|około|spośród|do|po|od|na|w|ponad"
+  expectedDuplicateCount: 0
+}
+BANK_TOKEN_CASE {
+  id: b2-2019-2
+  testId: certyfikat-polski-B2-2019-grammar-2
+  expectedOrderedTokenText: "ponad|przy|wbrew|na|między|nad|na|po|o|do|według|z|dzięki"
+  expectedDuplicateCount: 1
+}
+BANK_TOKEN_CASE {
+  id: b2-2020-2
+  testId: certyfikat-polski-B2-2020-grammar-2
+  expectedOrderedTokenText: "dla|dzięki|na|na|o|od|do|przy|u|w|wokół|wbrew|za"
+  expectedDuplicateCount: 1
+}

@@ -125,3 +125,27 @@ test('DSL listening PlayTest: B2 2017 unknown word awaits review', async ({ page
 test('DSL listening PlayTest: B2 2019 task IV loads source photographs', async ({ page }) => {
   await runExamPlaytest(page, resolve('dsl/exam-web/listening-b2-2019-image.playtest'));
 });
+
+for (const exam of ['b1-2017', 'b1-2019', 'b1-2020', 'b2-2017', 'b2-2019', 'b2-2020']) {
+  test(`DSL grammar PlayTest: ${exam} printed bank is selectable`, async ({ page }) => {
+    await runExamPlaytest(page, resolve(`dsl/exam-web/grammar-bank-${exam}.playtest`));
+  });
+}
+
+test('DSL grammar PlayTest: B1 2020 question target and answer survive navigation', async ({ page }) => {
+  await runExamPlaytest(page, resolve('dsl/exam-web/grammar-question-target-2020.playtest'));
+});
+
+test('DSL grammar PlayTest: B2 2017 derived word survives navigation and scores', async ({ page }) => {
+  await runExamPlaytest(page, resolve('dsl/exam-web/grammar-word-formation-2017.playtest'));
+});
+
+test('DSL reading PlayTest: B2 2020 printed fragment labels survive navigation', async ({ page }) => {
+  await runExamPlaytest(page, resolve('dsl/exam-web/reading-fragment-2020.playtest'));
+});
+
+for (const exam of ['b1-2019', 'b1-2020']) {
+  test(`DSL grammar PlayTest: ${exam} task VIII printed bank`, async ({ page }) => {
+    await runExamPlaytest(page, resolve(`dsl/exam-web/grammar-bank-${exam}-viii.playtest`));
+  });
+}

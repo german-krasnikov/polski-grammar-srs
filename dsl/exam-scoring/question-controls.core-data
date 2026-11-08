@@ -1,0 +1,95 @@
+DSL 1
+# Source-backed controls and keys from six local arkusz/klucz PDFs.
+QUESTION_CONTROL_CASE {
+  id: b2-2020-bank-full
+  sourceItemId: certyfikat-polski-B2-2020-grammar-2-1
+  expectedTag: word_bank
+  expectedKind: bank_option
+  expectedOptionCount: 13
+  expectedRawAnswer: na
+  expectedQuarter: 2
+  expectedStatus: confirmed_full
+}
+QUESTION_CONTROL_CASE {
+  id: b1-2020-question-formation
+  sourceItemId: certyfikat-polski-B1-2020-grammar-5-1
+  expectedTag: question_formation
+  expectedKind: text
+  expectedOptionCount: 0
+  expectedRawAnswer: Czym
+  expectedQuestionTarget: widelcem
+  expectedQuarter: 2
+  expectedStatus: confirmed_full
+}
+QUESTION_CONTROL_CASE {
+  id: b1-2017-underlined-target
+  sourceItemId: B1-2017-g4-2
+  expectedTag: question_formation
+  expectedKind: text
+  expectedOptionCount: 0
+  expectedRawAnswer: "z którym"
+  expectedQuestionTarget: "z tym nowym"
+  expectedQuarter: 2
+  expectedStatus: confirmed_full
+}
+QUESTION_CONTROL_CASE {
+  id: b1-2019-underlined-target
+  sourceItemId: B1-2019-g47
+  expectedTag: question_formation
+  expectedKind: text
+  expectedOptionCount: 0
+  expectedRawAnswer: Komu
+  expectedQuestionTarget: Ewie
+  expectedQuarter: 2
+  expectedStatus: confirmed_full
+}
+QUESTION_CONTROL_CASE {
+  id: b2-2017-derived-word
+  sourceItemId: certyfikat-polski-B2-2017-grammar-6-1
+  expectedTag: word_formation
+  expectedKind: text
+  expectedOptionCount: 0
+  expectedRawAnswer: smutek
+  expectedQuarter: 4
+  expectedStatus: confirmed_full
+}
+QUESTION_CONTROL_CASE {
+  id: b2-2020-fragment
+  sourceItemId: certyfikat-polski-B2-2020-reading-2-1
+  expectedTag: gap_fill_fragment
+  expectedKind: single_option
+  expectedOptionCount: 10
+  expectedRawAnswer: E
+  expectedQuarter: 4
+  expectedStatus: confirmed_full
+}
+QUESTION_CONTROL_CASE {
+  id: b2-2017-matching-partial
+  sourceItemId: certyfikat-polski-B2-2017-listening-4-1
+  expectedTag: matching
+  expectedKind: unordered_set
+  expectedOptionCount: 4
+  expectedRawAnswer: "1"
+  expectedQuarter: 4
+  expectedStatus: confirmed_partial
+}
+QUESTION_CONTROL_CASE {
+  id: b2-2020-open-pending
+  sourceItemId: certyfikat-polski-B2-2020-listening-5-1
+  expectedTag: fill_gap
+  expectedKind: text
+  expectedOptionCount: 0
+  expectedRawAnswer: nieznany
+  expectedQuarter: 0
+  expectedStatus: pending_manual
+}
+QUESTION_CONTROL_CASE {
+  id: b2-2020-bank-wrong
+  sourceItemId: certyfikat-polski-B2-2020-grammar-2-1
+  expectedTag: word_bank
+  expectedKind: bank_option
+  expectedOptionCount: 13
+  expectedRawAnswer: wbrew
+  expectedQuarter: 0
+  expectedStatus: wrong
+}

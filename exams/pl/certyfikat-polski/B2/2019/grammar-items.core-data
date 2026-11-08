@@ -94,7 +94,7 @@ GRAMMAR_ITEM {
 GRAMMAR_ITEM {
   itemId: certyfikat-polski-B2-2019-grammar-2-1
   testRef: certyfikat-polski-B2-2019-grammar-2
-  questionType: fill_gap
+  questionType: word_bank
   context: "Inwestycja została podzielona […] dwa etapy."
   correctAnswer: na
   pointsQuarter: 2
@@ -102,7 +102,7 @@ GRAMMAR_ITEM {
 GRAMMAR_ITEM {
   itemId: certyfikat-polski-B2-2019-grammar-2-2
   testRef: certyfikat-polski-B2-2019-grammar-2
-  questionType: fill_gap
+  questionType: word_bank
   context: "Oferta przewyższała kwotę planowaną […] 123 mln zł."
   correctAnswer: o
   pointsQuarter: 2
@@ -110,7 +110,7 @@ GRAMMAR_ITEM {
 GRAMMAR_ITEM {
   itemId: certyfikat-polski-B2-2019-grammar-2-3
   testRef: certyfikat-polski-B2-2019-grammar-2
-  questionType: fill_gap
+  questionType: word_bank
   context: "Powinna kosztować nieco […] 122 mln zł."
   correctAnswer: ponad
   pointsQuarter: 2
@@ -118,7 +118,7 @@ GRAMMAR_ITEM {
 GRAMMAR_ITEM {
   itemId: certyfikat-polski-B2-2019-grammar-2-4
   testRef: certyfikat-polski-B2-2019-grammar-2
-  questionType: fill_gap
+  questionType: word_bank
   context: "Zostaną zakończone […] 2023 roku."
   correctAnswer: do
   pointsQuarter: 2
@@ -126,7 +126,7 @@ GRAMMAR_ITEM {
 GRAMMAR_ITEM {
   itemId: certyfikat-polski-B2-2019-grammar-2-5
   testRef: certyfikat-polski-B2-2019-grammar-2
-  questionType: fill_gap
+  questionType: word_bank
   context: "Pierwsze prace – […] nowego planu – rozpoczną się."
   correctAnswer: "według"
   pointsQuarter: 2
@@ -134,7 +134,7 @@ GRAMMAR_ITEM {
 GRAMMAR_ITEM {
   itemId: certyfikat-polski-B2-2019-grammar-2-6
   testRef: certyfikat-polski-B2-2019-grammar-2
-  questionType: fill_gap
+  questionType: word_bank
   context: "Rozpoczną się tuż […] długim majowym weekendzie."
   correctAnswer: po
   pointsQuarter: 2
@@ -142,7 +142,7 @@ GRAMMAR_ITEM {
 GRAMMAR_ITEM {
   itemId: certyfikat-polski-B2-2019-grammar-2-7
   testRef: certyfikat-polski-B2-2019-grammar-2
-  questionType: fill_gap
+  questionType: word_bank
   context: "Tory powstaną […] ulicą Długą a przystankiem."
   correctAnswer: "między"
   pointsQuarter: 2
@@ -150,7 +150,7 @@ GRAMMAR_ITEM {
 GRAMMAR_ITEM {
   itemId: certyfikat-polski-B2-2019-grammar-2-8
   testRef: certyfikat-polski-B2-2019-grammar-2
-  questionType: fill_gap
+  questionType: word_bank
   context: "Przystankiem autobusowym […] Politechnice."
   correctAnswer: przy
   pointsQuarter: 2
@@ -158,7 +158,7 @@ GRAMMAR_ITEM {
 GRAMMAR_ITEM {
   itemId: certyfikat-polski-B2-2019-grammar-2-9
   testRef: certyfikat-polski-B2-2019-grammar-2
-  questionType: fill_gap
+  questionType: word_bank
   context: "Przebudowa wiaduktu […] ulicą Długą."
   correctAnswer: nad
   pointsQuarter: 2
@@ -166,7 +166,7 @@ GRAMMAR_ITEM {
 GRAMMAR_ITEM {
   itemId: certyfikat-polski-B2-2019-grammar-2-10
   testRef: certyfikat-polski-B2-2019-grammar-2
-  questionType: fill_gap
+  questionType: word_bank
   context: "[…] planowanym pracom miasto zyska połączenie."
   correctAnswer: "Dzięki"
   pointsQuarter: 2

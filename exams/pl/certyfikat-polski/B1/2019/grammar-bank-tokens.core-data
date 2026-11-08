@@ -1,0 +1,86 @@
+DSL 1
+# Printed task banks from ExamBin/pl/B1/2019/arkusz.pdf. Example tokens are retained.
+GRAMMAR_BANK_TOKEN {
+  tokenId: B1-2019-grammar-2-bank-1
+  testRef: B1-2019-grammar-2
+  position: 1
+  text: "ponieważ"
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: B1-2019-grammar-2-bank-2
+  testRef: B1-2019-grammar-2
+  position: 2
+  text: "jeśli"
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: B1-2019-grammar-2-bank-3
+  testRef: B1-2019-grammar-2
+  position: 3
+  text: czy
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: B1-2019-grammar-2-bank-4
+  testRef: B1-2019-grammar-2
+  position: 4
+  text: "żeby"
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: B1-2019-grammar-2-bank-5
+  testRef: B1-2019-grammar-2
+  position: 5
+  text: "którzy"
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: B1-2019-grammar-2-bank-6
+  testRef: B1-2019-grammar-2
+  position: 6
+  text: "że"
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: B1-2019-grammar-2-bank-7
+  testRef: B1-2019-grammar-2
+  position: 7
+  text: lecz
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: B1-2019-grammar-8-bank-1
+  testRef: B1-2019-grammar-8
+  position: 1
+  text: bez
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: B1-2019-grammar-8-bank-2
+  testRef: B1-2019-grammar-8
+  position: 2
+  text: "między"
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: B1-2019-grammar-8-bank-3
+  testRef: B1-2019-grammar-8
+  position: 3
+  text: za
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: B1-2019-grammar-8-bank-4
+  testRef: B1-2019-grammar-8
+  position: 4
+  text: przez
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: B1-2019-grammar-8-bank-5
+  testRef: B1-2019-grammar-8
+  position: 5
+  text: w
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: B1-2019-grammar-8-bank-6
+  testRef: B1-2019-grammar-8
+  position: 6
+  text: "około"
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: B1-2019-grammar-8-bank-7
+  testRef: B1-2019-grammar-8
+  position: 7
+  text: "oprócz"
+}

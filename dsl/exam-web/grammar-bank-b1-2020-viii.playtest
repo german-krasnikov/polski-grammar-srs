@@ -1,0 +1,9 @@
+TEST "B1 2020 grammar VIII printed duplicate w" PROFILE playmode
+  open exam="B1 Certyfikat 2020" module="grammar"
+  advance count=50
+  ASSERT grammar.bankTexts == "do|w|nad|przed|z|na|w"
+  chooseBank answer="w" occurrence=2
+  back
+  next
+  ASSERT grammar.bankSelectedId == "certyfikat-polski-B1-2020-grammar-8-bank-7"
+END

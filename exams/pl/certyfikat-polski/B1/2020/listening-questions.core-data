@@ -220,7 +220,7 @@ LISTENING_QUESTION {
 LISTENING_QUESTION {
   questionId: certyfikat-polski-B1-2020-listening-4-1
   taskRef: certyfikat-polski-B1-2020-listen-4
-  questionType: match
+  questionType: matching
   questionText: "A: narzeka na hałaśliwych sąsiadów."
   options: "1|2|3|4"
   correctAnswer: "3"
@@ -229,7 +229,7 @@ LISTENING_QUESTION {
 LISTENING_QUESTION {
   questionId: certyfikat-polski-B1-2020-listening-4-2
   taskRef: certyfikat-polski-B1-2020-listen-4
-  questionType: match
+  questionType: matching
   questionText: "B: wymienia miejsca, gdzie można spędzić wolny czas."
   options: "1|2|3|4"
   correctAnswer: "1|4"
@@ -240,7 +240,7 @@ LISTENING_QUESTION {
 LISTENING_QUESTION {
   questionId: certyfikat-polski-B1-2020-listening-4-3
   taskRef: certyfikat-polski-B1-2020-listen-4
-  questionType: match
+  questionType: matching
   questionText: "C: mówi, że życie w mieście jest drogie."
   options: "1|2|3|4"
   correctAnswer: "2|4"
@@ -251,7 +251,7 @@ LISTENING_QUESTION {
 LISTENING_QUESTION {
   questionId: certyfikat-polski-B1-2020-listening-4-4
   taskRef: certyfikat-polski-B1-2020-listen-4
-  questionType: match
+  questionType: matching
   questionText: "D: zwraca uwagę na zanieczyszczenie."
   options: "1|2|3|4"
   correctAnswer: "4"
@@ -260,7 +260,7 @@ LISTENING_QUESTION {
 LISTENING_QUESTION {
   questionId: certyfikat-polski-B1-2020-listening-4-5
   taskRef: certyfikat-polski-B1-2020-listen-4
-  questionType: match
+  questionType: matching
   questionText: "E: nie lubi osób za bardzo ciekawych tego, jak żyją inni."
   options: "1|2|3|4"
   correctAnswer: "2"
@@ -269,7 +269,7 @@ LISTENING_QUESTION {
 LISTENING_QUESTION {
   questionId: certyfikat-polski-B1-2020-listening-5-1
   taskRef: certyfikat-polski-B1-2020-listen-5
-  questionType: match
+  questionType: matching
   questionText: "Łyżwy"
   options: "A|B|C|D|E|F"
   correctAnswer: E
@@ -278,7 +278,7 @@ LISTENING_QUESTION {
 LISTENING_QUESTION {
   questionId: certyfikat-polski-B1-2020-listening-5-2
   taskRef: certyfikat-polski-B1-2020-listen-5
-  questionType: match
+  questionType: matching
   questionText: "Sporty wodne"
   options: "A|B|C|D|E|F"
   correctAnswer: D
@@ -287,7 +287,7 @@ LISTENING_QUESTION {
 LISTENING_QUESTION {
   questionId: certyfikat-polski-B1-2020-listening-5-3
   taskRef: certyfikat-polski-B1-2020-listen-5
-  questionType: match
+  questionType: matching
   questionText: "Jazda konna"
   options: "A|B|C|D|E|F"
   correctAnswer: B
@@ -296,7 +296,7 @@ LISTENING_QUESTION {
 LISTENING_QUESTION {
   questionId: certyfikat-polski-B1-2020-listening-5-4
   taskRef: certyfikat-polski-B1-2020-listen-5
-  questionType: match
+  questionType: matching
   questionText: Tenis
   options: "A|B|C|D|E|F"
   correctAnswer: F
@@ -305,7 +305,7 @@ LISTENING_QUESTION {
 LISTENING_QUESTION {
   questionId: certyfikat-polski-B1-2020-listening-5-5
   taskRef: certyfikat-polski-B1-2020-listen-5
-  questionType: match
+  questionType: matching
   questionText: "Gra w siatkówkę"
   options: "A|B|C|D|E|F"
   correctAnswer: A

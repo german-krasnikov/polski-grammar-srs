@@ -30,7 +30,7 @@ END
 RECORD ListeningQuestionRow KEY questionId COUNT 1..
   questionId: string
   taskRef: ref ListeningTaskRow
-  questionType: enum multiple_choice|true_false|fill_gap|match
+  questionType: enum multiple_choice|true_false|fill_gap|match|matching
   questionText: string
   options: string OPTIONAL
   correctAnswer: string
@@ -62,7 +62,7 @@ END
 RECORD ReadingQuestionRow KEY questionId COUNT 1..
   questionId: string
   passageRef: ref ReadingPassageRow
-  questionType: enum multiple_choice|true_false_not_given|match_heading|fill_gap|short_answer
+  questionType: enum multiple_choice|true_false_not_given|match_heading|fill_gap|short_answer|gap_fill_fragment|matching
   questionText: string
   options: string OPTIONAL
   correctAnswer: string
@@ -79,11 +79,20 @@ RECORD GrammarTestRow KEY testId COUNT 1..
   instruction: string
 END
 
+# One row per printed occurrence, including repeated words in a task bank.
+RECORD GrammarBankTokenRow KEY tokenId COUNT 1..
+  tokenId: string
+  testRef: ref GrammarTestRow
+  position: int
+  text: string
+END
+
 RECORD GrammarItemRow KEY itemId COUNT 1..
   itemId: string
   testRef: ref GrammarTestRow
-  questionType: enum choose_form|fill_gap|transform|word_formation
+  questionType: enum choose_form|fill_gap|transform|word_formation|word_bank|question_formation
   context: string
+  questionTarget: string OPTIONAL
   gap: string OPTIONAL
   options: string OPTIONAL
   correctAnswer: string
@@ -227,4 +236,24 @@ RECORD GrammarConstraintCaseRow KEY id COUNT 1..
   answer8: string
   expected6Quarter: int
   expected8Quarter: int
+END
+
+# Independent printed controls and keys for P10 (source: six local arkusz/klucz PDFs).
+RECORD BankTokenCaseRow KEY id COUNT 1..
+  id: string
+  testId: string
+  expectedOrderedTokenText: string
+  expectedDuplicateCount: int
+END
+
+RECORD QuestionControlCaseRow KEY id COUNT 1..
+  id: string
+  sourceItemId: string
+  expectedTag: string
+  expectedKind: enum single_option|text|unordered_set|bank_option
+  expectedOptionCount: int
+  expectedRawAnswer: string
+  expectedQuestionTarget: string OPTIONAL
+  expectedQuarter: int
+  expectedStatus: enum confirmed_full|confirmed_partial|wrong|pending_manual
 END

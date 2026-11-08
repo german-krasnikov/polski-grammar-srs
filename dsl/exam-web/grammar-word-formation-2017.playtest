@@ -1,0 +1,14 @@
+TEST "B2 2017 derived word keeps typed answer and earns credit" PROFILE playmode
+  open exam="B2 Certyfikat 2017" module="grammar"
+  advance count=50
+  ASSERT grammar.context == "Czasami ogarnia mnie wielki […] (smutny)."
+  enter text="smutek"
+  ASSERT exam.input == "smutek"
+  back
+  next
+  ASSERT exam.input == "smutek"
+  advance count=14
+  submit
+  inspectReview index=51
+  ASSERT grammar.reviewStatus == "correct"
+END

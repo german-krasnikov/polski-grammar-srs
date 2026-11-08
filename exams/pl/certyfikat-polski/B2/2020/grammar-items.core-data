@@ -94,7 +94,7 @@ GRAMMAR_ITEM {
 GRAMMAR_ITEM {
   itemId: certyfikat-polski-B2-2020-grammar-2-1
   testRef: certyfikat-polski-B2-2020-grammar-2
-  questionType: fill_gap
+  questionType: word_bank
   context: "Ktoś dobrze mówi […] nasz temat."
   correctAnswer: na
   pointsQuarter: 2
@@ -102,7 +102,7 @@ GRAMMAR_ITEM {
 GRAMMAR_ITEM {
   itemId: certyfikat-polski-B2-2020-grammar-2-2
   testRef: certyfikat-polski-B2-2020-grammar-2
-  questionType: fill_gap
+  questionType: word_bank
   context: "Miód jest lekiem […] chorych na serce."
   correctAnswer: dla
   pointsQuarter: 2
@@ -110,7 +110,7 @@ GRAMMAR_ITEM {
 GRAMMAR_ITEM {
   itemId: certyfikat-polski-B2-2020-grammar-2-3
   testRef: certyfikat-polski-B2-2020-grammar-2
-  questionType: fill_gap
+  questionType: word_bank
   context: "Dotyczy pacjentów – […] tych najmłodszych."
   correctAnswer: od
   pointsQuarter: 2
@@ -118,7 +118,7 @@ GRAMMAR_ITEM {
 GRAMMAR_ITEM {
   itemId: certyfikat-polski-B2-2020-grammar-2-4
   testRef: certyfikat-polski-B2-2020-grammar-2
-  questionType: fill_gap
+  questionType: word_bank
   context: "Od tych najmłodszych […] najstarszych."
   correctAnswer: do
   pointsQuarter: 2
@@ -126,7 +126,7 @@ GRAMMAR_ITEM {
 GRAMMAR_ITEM {
   itemId: certyfikat-polski-B2-2020-grammar-2-5
   testRef: certyfikat-polski-B2-2020-grammar-2
-  questionType: fill_gap
+  questionType: word_bank
   context: "Już dawno […] nami ostatnia niedziela września."
   correctAnswer: za
   pointsQuarter: 2
@@ -134,7 +134,7 @@ GRAMMAR_ITEM {
 GRAMMAR_ITEM {
   itemId: certyfikat-polski-B2-2020-grammar-2-6
   testRef: certyfikat-polski-B2-2020-grammar-2
-  questionType: fill_gap
+  questionType: word_bank
   context: "To właśnie […] tym dniu obchodzimy Światowy Dzień Serca."
   correctAnswer: w
   pointsQuarter: 2
@@ -142,7 +142,7 @@ GRAMMAR_ITEM {
 GRAMMAR_ITEM {
   itemId: certyfikat-polski-B2-2020-grammar-2-7
   testRef: certyfikat-polski-B2-2020-grammar-2
-  questionType: fill_gap
+  questionType: word_bank
   context: "[…] serce należy dbać codziennie."
   correctAnswer: o
   pointsQuarter: 2
@@ -150,7 +150,7 @@ GRAMMAR_ITEM {
 GRAMMAR_ITEM {
   itemId: certyfikat-polski-B2-2020-grammar-2-8
   testRef: certyfikat-polski-B2-2020-grammar-2
-  questionType: fill_gap
+  questionType: word_bank
   context: "Miód nostrzykowy pomaga […] nadciśnieniu."
   correctAnswer: przy
   pointsQuarter: 2
@@ -158,7 +158,7 @@ GRAMMAR_ITEM {
 GRAMMAR_ITEM {
   itemId: certyfikat-polski-B2-2020-grammar-2-9
   testRef: certyfikat-polski-B2-2020-grammar-2
-  questionType: fill_gap
+  questionType: word_bank
   context: "Osobom, […] których wystąpiły złamania."
   correctAnswer: u
   pointsQuarter: 2
@@ -166,7 +166,7 @@ GRAMMAR_ITEM {
 GRAMMAR_ITEM {
   itemId: certyfikat-polski-B2-2020-grammar-2-10
   testRef: certyfikat-polski-B2-2020-grammar-2
-  questionType: fill_gap
+  questionType: word_bank
   context: "[…] zawartości rutyny spowalnia miażdżycę."
   correctAnswer: "dzięki"
   pointsQuarter: 2

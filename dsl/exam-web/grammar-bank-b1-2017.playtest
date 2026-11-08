@@ -1,0 +1,9 @@
+TEST "B1 Certyfikat 2017 printed grammar bank" PROFILE playmode
+  open exam="B1 Certyfikat 2017" module="grammar"
+  advance count=40
+  ASSERT grammar.bankTexts == "a|ale|chociaż|czy|gdyby|i|że"
+  chooseBank answer="a" occurrence=1
+  next
+  back
+  ASSERT grammar.bankSelectedText == "a"
+END

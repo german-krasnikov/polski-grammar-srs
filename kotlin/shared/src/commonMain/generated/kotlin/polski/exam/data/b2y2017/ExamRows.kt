@@ -1,5 +1,5 @@
 // Generated from dsl/exam.data-contract
-// source-sha256=a57e78c0c7e995774d3b275d965c3ed5eaf230d29d01cb66a06330174c9e816d
+// source-sha256=36cfafebca8fc22dc8a31c76161792ced0b69ac872ae298f7b83376d02344c88
 // Edit the source, then run biome generate.
 
 package polski.exam.data.b2y2017
@@ -9,6 +9,7 @@ enum class ListeningQuestionRowQuestionType(val tag: String) {
     TRUE_FALSE("true_false"),
     FILL_GAP("fill_gap"),
     MATCH("match"),
+    MATCHING("matching"),
 }
 
 enum class ListeningQuestionRowGradingMode(val tag: String) {
@@ -27,6 +28,8 @@ enum class ReadingQuestionRowQuestionType(val tag: String) {
     MATCH_HEADING("match_heading"),
     FILL_GAP("fill_gap"),
     SHORT_ANSWER("short_answer"),
+    GAP_FILL_FRAGMENT("gap_fill_fragment"),
+    MATCHING("matching"),
 }
 
 enum class GrammarItemRowQuestionType(val tag: String) {
@@ -34,6 +37,8 @@ enum class GrammarItemRowQuestionType(val tag: String) {
     FILL_GAP("fill_gap"),
     TRANSFORM("transform"),
     WORD_FORMATION("word_formation"),
+    WORD_BANK("word_bank"),
+    QUESTION_FORMATION("question_formation"),
 }
 
 enum class GrammarItemRowGradingMode(val tag: String) {
@@ -105,6 +110,20 @@ enum class OpenItemGroupCaseRowExpectedUnknownStatus(val tag: String) {
 
 enum class OpenItemGroupCaseRowExpectedBlankStatus(val tag: String) {
     WRONG("wrong"),
+}
+
+enum class QuestionControlCaseRowExpectedKind(val tag: String) {
+    SINGLE_OPTION("single_option"),
+    TEXT("text"),
+    UNORDERED_SET("unordered_set"),
+    BANK_OPTION("bank_option"),
+}
+
+enum class QuestionControlCaseRowExpectedStatus(val tag: String) {
+    CONFIRMED_FULL("confirmed_full"),
+    CONFIRMED_PARTIAL("confirmed_partial"),
+    WRONG("wrong"),
+    PENDING_MANUAL("pending_manual"),
 }
 
 data class ExamRow(
@@ -180,11 +199,19 @@ data class GrammarTestRow(
     val instruction: String,
 )
 
+data class GrammarBankTokenRow(
+    val tokenId: String,
+    val testRef: String,
+    val position: Int,
+    val text: String,
+)
+
 data class GrammarItemRow(
     val itemId: String,
     val testRef: String,
     val questionType: GrammarItemRowQuestionType,
     val context: String,
+    val questionTarget: String? = null,
     val gap: String? = null,
     val options: String? = null,
     val correctAnswer: String,
@@ -321,6 +348,25 @@ data class GrammarConstraintCaseRow(
     val answer8: String,
     val expected6Quarter: Int,
     val expected8Quarter: Int,
+)
+
+data class BankTokenCaseRow(
+    val id: String,
+    val testId: String,
+    val expectedOrderedTokenText: String,
+    val expectedDuplicateCount: Int,
+)
+
+data class QuestionControlCaseRow(
+    val id: String,
+    val sourceItemId: String,
+    val expectedTag: String,
+    val expectedKind: QuestionControlCaseRowExpectedKind,
+    val expectedOptionCount: Int,
+    val expectedRawAnswer: String,
+    val expectedQuestionTarget: String? = null,
+    val expectedQuarter: Int,
+    val expectedStatus: QuestionControlCaseRowExpectedStatus,
 )
 
 val EXAM_ROW_ROWS: List<ExamRow> = listOf(
@@ -626,7 +672,7 @@ val LISTENING_QUESTION_ROW_ROWS: List<ListeningQuestionRow> = listOf(
     ListeningQuestionRow(
         questionId = "certyfikat-polski-B2-2017-listening-4-1",
         taskRef = "certyfikat-polski-B2-2017-listen-4",
-        questionType = ListeningQuestionRowQuestionType.MATCH,
+        questionType = ListeningQuestionRowQuestionType.MATCHING,
         questionText = "B. mówi o różnych szkolnych pomieszczeniach",
         options = "1|2|3|4",
         correctAnswer = "1|2",
@@ -637,7 +683,7 @@ val LISTENING_QUESTION_ROW_ROWS: List<ListeningQuestionRow> = listOf(
     ListeningQuestionRow(
         questionId = "certyfikat-polski-B2-2017-listening-4-2",
         taskRef = "certyfikat-polski-B2-2017-listen-4",
-        questionType = ListeningQuestionRowQuestionType.MATCH,
+        questionType = ListeningQuestionRowQuestionType.MATCHING,
         questionText = "C. wspomina szkolne jedzenie",
         options = "1|2|3|4",
         correctAnswer = "2",
@@ -646,7 +692,7 @@ val LISTENING_QUESTION_ROW_ROWS: List<ListeningQuestionRow> = listOf(
     ListeningQuestionRow(
         questionId = "certyfikat-polski-B2-2017-listening-4-3",
         taskRef = "certyfikat-polski-B2-2017-listen-4",
-        questionType = ListeningQuestionRowQuestionType.MATCH,
+        questionType = ListeningQuestionRowQuestionType.MATCHING,
         questionText = "D. dobrze wspomina nauczycieli",
         options = "1|2|3|4",
         correctAnswer = "3|4",
@@ -657,7 +703,7 @@ val LISTENING_QUESTION_ROW_ROWS: List<ListeningQuestionRow> = listOf(
     ListeningQuestionRow(
         questionId = "certyfikat-polski-B2-2017-listening-4-4",
         taskRef = "certyfikat-polski-B2-2017-listen-4",
-        questionType = ListeningQuestionRowQuestionType.MATCH,
+        questionType = ListeningQuestionRowQuestionType.MATCHING,
         questionText = "E. mówi o elementach szkolnego ubrania",
         options = "1|2|3|4",
         correctAnswer = "1|2|4",
@@ -668,7 +714,7 @@ val LISTENING_QUESTION_ROW_ROWS: List<ListeningQuestionRow> = listOf(
     ListeningQuestionRow(
         questionId = "certyfikat-polski-B2-2017-listening-4-5",
         taskRef = "certyfikat-polski-B2-2017-listen-4",
-        questionType = ListeningQuestionRowQuestionType.MATCH,
+        questionType = ListeningQuestionRowQuestionType.MATCHING,
         questionText = "F. wspomina szkołę ponadpodstawową",
         options = "1|2|3|4",
         correctAnswer = "3",
@@ -677,7 +723,7 @@ val LISTENING_QUESTION_ROW_ROWS: List<ListeningQuestionRow> = listOf(
     ListeningQuestionRow(
         questionId = "certyfikat-polski-B2-2017-listening-4-6",
         taskRef = "certyfikat-polski-B2-2017-listen-4",
-        questionType = ListeningQuestionRowQuestionType.MATCH,
+        questionType = ListeningQuestionRowQuestionType.MATCHING,
         questionText = "G. pamięta rok rozpoczęcia nauki",
         options = "1|2|3|4",
         correctAnswer = "1",
@@ -1077,7 +1123,7 @@ val READING_QUESTION_ROW_ROWS: List<ReadingQuestionRow> = listOf(
     ReadingQuestionRow(
         questionId = "certyfikat-polski-B2-2017-reading-4-1",
         passageRef = "certyfikat-polski-B2-2017-read-4",
-        questionType = ReadingQuestionRowQuestionType.FILL_GAP,
+        questionType = ReadingQuestionRowQuestionType.GAP_FILL_FRAGMENT,
         questionText = "Luka [1] w tekście „Szacunek”.",
         options = "A|B|C|D|E|F|G|H|I|J|K",
         correctAnswer = "D",
@@ -1086,7 +1132,7 @@ val READING_QUESTION_ROW_ROWS: List<ReadingQuestionRow> = listOf(
     ReadingQuestionRow(
         questionId = "certyfikat-polski-B2-2017-reading-4-2",
         passageRef = "certyfikat-polski-B2-2017-read-4",
-        questionType = ReadingQuestionRowQuestionType.FILL_GAP,
+        questionType = ReadingQuestionRowQuestionType.GAP_FILL_FRAGMENT,
         questionText = "Luka [2] w tekście „Szacunek”.",
         options = "A|B|C|D|E|F|G|H|I|J|K",
         correctAnswer = "F",
@@ -1095,7 +1141,7 @@ val READING_QUESTION_ROW_ROWS: List<ReadingQuestionRow> = listOf(
     ReadingQuestionRow(
         questionId = "certyfikat-polski-B2-2017-reading-4-3",
         passageRef = "certyfikat-polski-B2-2017-read-4",
-        questionType = ReadingQuestionRowQuestionType.FILL_GAP,
+        questionType = ReadingQuestionRowQuestionType.GAP_FILL_FRAGMENT,
         questionText = "Luka [3] w tekście „Szacunek”.",
         options = "A|B|C|D|E|F|G|H|I|J|K",
         correctAnswer = "A",
@@ -1104,7 +1150,7 @@ val READING_QUESTION_ROW_ROWS: List<ReadingQuestionRow> = listOf(
     ReadingQuestionRow(
         questionId = "certyfikat-polski-B2-2017-reading-4-4",
         passageRef = "certyfikat-polski-B2-2017-read-4",
-        questionType = ReadingQuestionRowQuestionType.FILL_GAP,
+        questionType = ReadingQuestionRowQuestionType.GAP_FILL_FRAGMENT,
         questionText = "Luka [4] w tekście „Szacunek”.",
         options = "A|B|C|D|E|F|G|H|I|J|K",
         correctAnswer = "K",
@@ -1113,7 +1159,7 @@ val READING_QUESTION_ROW_ROWS: List<ReadingQuestionRow> = listOf(
     ReadingQuestionRow(
         questionId = "certyfikat-polski-B2-2017-reading-4-5",
         passageRef = "certyfikat-polski-B2-2017-read-4",
-        questionType = ReadingQuestionRowQuestionType.FILL_GAP,
+        questionType = ReadingQuestionRowQuestionType.GAP_FILL_FRAGMENT,
         questionText = "Luka [5] w tekście „Szacunek”.",
         options = "A|B|C|D|E|F|G|H|I|J|K",
         correctAnswer = "B",
@@ -1122,7 +1168,7 @@ val READING_QUESTION_ROW_ROWS: List<ReadingQuestionRow> = listOf(
     ReadingQuestionRow(
         questionId = "certyfikat-polski-B2-2017-reading-4-6",
         passageRef = "certyfikat-polski-B2-2017-read-4",
-        questionType = ReadingQuestionRowQuestionType.FILL_GAP,
+        questionType = ReadingQuestionRowQuestionType.GAP_FILL_FRAGMENT,
         questionText = "Luka [6] w tekście „Szacunek”.",
         options = "A|B|C|D|E|F|G|H|I|J|K",
         correctAnswer = "G",
@@ -1131,7 +1177,7 @@ val READING_QUESTION_ROW_ROWS: List<ReadingQuestionRow> = listOf(
     ReadingQuestionRow(
         questionId = "certyfikat-polski-B2-2017-reading-4-7",
         passageRef = "certyfikat-polski-B2-2017-read-4",
-        questionType = ReadingQuestionRowQuestionType.FILL_GAP,
+        questionType = ReadingQuestionRowQuestionType.GAP_FILL_FRAGMENT,
         questionText = "Luka [7] w tekście „Szacunek”.",
         options = "A|B|C|D|E|F|G|H|I|J|K",
         correctAnswer = "C",
@@ -1140,7 +1186,7 @@ val READING_QUESTION_ROW_ROWS: List<ReadingQuestionRow> = listOf(
     ReadingQuestionRow(
         questionId = "certyfikat-polski-B2-2017-reading-4-8",
         passageRef = "certyfikat-polski-B2-2017-read-4",
-        questionType = ReadingQuestionRowQuestionType.FILL_GAP,
+        questionType = ReadingQuestionRowQuestionType.GAP_FILL_FRAGMENT,
         questionText = "Luka [8] w tekście „Szacunek”.",
         options = "A|B|C|D|E|F|G|H|I|J|K",
         correctAnswer = "J",
@@ -1149,7 +1195,7 @@ val READING_QUESTION_ROW_ROWS: List<ReadingQuestionRow> = listOf(
     ReadingQuestionRow(
         questionId = "certyfikat-polski-B2-2017-reading-4-9",
         passageRef = "certyfikat-polski-B2-2017-read-4",
-        questionType = ReadingQuestionRowQuestionType.FILL_GAP,
+        questionType = ReadingQuestionRowQuestionType.GAP_FILL_FRAGMENT,
         questionText = "Luka [9] w tekście „Szacunek”.",
         options = "A|B|C|D|E|F|G|H|I|J|K",
         correctAnswer = "E",
@@ -1158,7 +1204,7 @@ val READING_QUESTION_ROW_ROWS: List<ReadingQuestionRow> = listOf(
     ReadingQuestionRow(
         questionId = "certyfikat-polski-B2-2017-reading-4-10",
         passageRef = "certyfikat-polski-B2-2017-read-4",
-        questionType = ReadingQuestionRowQuestionType.FILL_GAP,
+        questionType = ReadingQuestionRowQuestionType.GAP_FILL_FRAGMENT,
         questionText = "Luka [10] w tekście „Szacunek”.",
         options = "A|B|C|D|E|F|G|H|I|J|K",
         correctAnswer = "H",
@@ -1307,6 +1353,81 @@ val GRAMMAR_TEST_ROW_ROWS: List<GrammarTestRow> = listOf(
     ),
 )
 
+val GRAMMAR_BANK_TOKEN_ROW_ROWS: List<GrammarBankTokenRow> = listOf(
+    GrammarBankTokenRow(
+        tokenId = "certyfikat-polski-B2-2017-grammar-2-bank-1",
+        testRef = "certyfikat-polski-B2-2017-grammar-2",
+        position = 1,
+        text = "z",
+    ),
+    GrammarBankTokenRow(
+        tokenId = "certyfikat-polski-B2-2017-grammar-2-bank-2",
+        testRef = "certyfikat-polski-B2-2017-grammar-2",
+        position = 2,
+        text = "oprócz",
+    ),
+    GrammarBankTokenRow(
+        tokenId = "certyfikat-polski-B2-2017-grammar-2-bank-3",
+        testRef = "certyfikat-polski-B2-2017-grammar-2",
+        position = 3,
+        text = "przy",
+    ),
+    GrammarBankTokenRow(
+        tokenId = "certyfikat-polski-B2-2017-grammar-2-bank-4",
+        testRef = "certyfikat-polski-B2-2017-grammar-2",
+        position = 4,
+        text = "o",
+    ),
+    GrammarBankTokenRow(
+        tokenId = "certyfikat-polski-B2-2017-grammar-2-bank-5",
+        testRef = "certyfikat-polski-B2-2017-grammar-2",
+        position = 5,
+        text = "około",
+    ),
+    GrammarBankTokenRow(
+        tokenId = "certyfikat-polski-B2-2017-grammar-2-bank-6",
+        testRef = "certyfikat-polski-B2-2017-grammar-2",
+        position = 6,
+        text = "spośród",
+    ),
+    GrammarBankTokenRow(
+        tokenId = "certyfikat-polski-B2-2017-grammar-2-bank-7",
+        testRef = "certyfikat-polski-B2-2017-grammar-2",
+        position = 7,
+        text = "do",
+    ),
+    GrammarBankTokenRow(
+        tokenId = "certyfikat-polski-B2-2017-grammar-2-bank-8",
+        testRef = "certyfikat-polski-B2-2017-grammar-2",
+        position = 8,
+        text = "po",
+    ),
+    GrammarBankTokenRow(
+        tokenId = "certyfikat-polski-B2-2017-grammar-2-bank-9",
+        testRef = "certyfikat-polski-B2-2017-grammar-2",
+        position = 9,
+        text = "od",
+    ),
+    GrammarBankTokenRow(
+        tokenId = "certyfikat-polski-B2-2017-grammar-2-bank-10",
+        testRef = "certyfikat-polski-B2-2017-grammar-2",
+        position = 10,
+        text = "na",
+    ),
+    GrammarBankTokenRow(
+        tokenId = "certyfikat-polski-B2-2017-grammar-2-bank-11",
+        testRef = "certyfikat-polski-B2-2017-grammar-2",
+        position = 11,
+        text = "w",
+    ),
+    GrammarBankTokenRow(
+        tokenId = "certyfikat-polski-B2-2017-grammar-2-bank-12",
+        testRef = "certyfikat-polski-B2-2017-grammar-2",
+        position = 12,
+        text = "ponad",
+    ),
+)
+
 val GRAMMAR_ITEM_ROW_ROWS: List<GrammarItemRow> = listOf(
     GrammarItemRow(
         itemId = "certyfikat-polski-B2-2017-grammar-1-1",
@@ -1401,7 +1522,7 @@ val GRAMMAR_ITEM_ROW_ROWS: List<GrammarItemRow> = listOf(
     GrammarItemRow(
         itemId = "certyfikat-polski-B2-2017-grammar-2-1",
         testRef = "certyfikat-polski-B2-2017-grammar-2",
-        questionType = GrammarItemRowQuestionType.FILL_GAP,
+        questionType = GrammarItemRowQuestionType.WORD_BANK,
         context = "Kraszewski napisał najwięcej książek […] wszystkich polskich pisarzy.",
         correctAnswer = "spośród",
         pointsQuarter = 2,
@@ -1409,7 +1530,7 @@ val GRAMMAR_ITEM_ROW_ROWS: List<GrammarItemRow> = listOf(
     GrammarItemRow(
         itemId = "certyfikat-polski-B2-2017-grammar-2-2",
         testRef = "certyfikat-polski-B2-2017-grammar-2",
-        questionType = GrammarItemRowQuestionType.FILL_GAP,
+        questionType = GrammarItemRowQuestionType.WORD_BANK,
         context = "Miesięcznie produkował […] pięciuset stron maszynopisu.",
         correctAnswer = "około",
         pointsQuarter = 2,
@@ -1417,7 +1538,7 @@ val GRAMMAR_ITEM_ROW_ROWS: List<GrammarItemRow> = listOf(
     GrammarItemRow(
         itemId = "certyfikat-polski-B2-2017-grammar-2-3",
         testRef = "certyfikat-polski-B2-2017-grammar-2",
-        questionType = GrammarItemRowQuestionType.FILL_GAP,
+        questionType = GrammarItemRowQuestionType.WORD_BANK,
         context = "Oczywiście […] przeliczeniu na współczesne miary.",
         correctAnswer = "w",
         pointsQuarter = 2,
@@ -1425,7 +1546,7 @@ val GRAMMAR_ITEM_ROW_ROWS: List<GrammarItemRow> = listOf(
     GrammarItemRow(
         itemId = "certyfikat-polski-B2-2017-grammar-2-4",
         testRef = "certyfikat-polski-B2-2017-grammar-2",
-        questionType = GrammarItemRowQuestionType.FILL_GAP,
+        questionType = GrammarItemRowQuestionType.WORD_BANK,
         context = "[…] współczesne miary.",
         correctAnswer = "na",
         pointsQuarter = 2,
@@ -1433,7 +1554,7 @@ val GRAMMAR_ITEM_ROW_ROWS: List<GrammarItemRow> = listOf(
     GrammarItemRow(
         itemId = "certyfikat-polski-B2-2017-grammar-2-5",
         testRef = "certyfikat-polski-B2-2017-grammar-2",
-        questionType = GrammarItemRowQuestionType.FILL_GAP,
+        questionType = GrammarItemRowQuestionType.WORD_BANK,
         context = "Pisarz […] pisaniu słuchał muzyki.",
         correctAnswer = "przy",
         pointsQuarter = 2,
@@ -1441,7 +1562,7 @@ val GRAMMAR_ITEM_ROW_ROWS: List<GrammarItemRow> = listOf(
     GrammarItemRow(
         itemId = "certyfikat-polski-B2-2017-grammar-2-6",
         testRef = "certyfikat-polski-B2-2017-grammar-2",
-        questionType = GrammarItemRowQuestionType.FILL_GAP,
+        questionType = GrammarItemRowQuestionType.WORD_BANK,
         context = "Kraszewski napisał […] sześćset powieści.",
         correctAnswer = "ponad",
         pointsQuarter = 2,
@@ -1449,7 +1570,7 @@ val GRAMMAR_ITEM_ROW_ROWS: List<GrammarItemRow> = listOf(
     GrammarItemRow(
         itemId = "certyfikat-polski-B2-2017-grammar-2-7",
         testRef = "certyfikat-polski-B2-2017-grammar-2",
-        questionType = GrammarItemRowQuestionType.FILL_GAP,
+        questionType = GrammarItemRowQuestionType.WORD_BANK,
         context = "Powieści nawiązujących […] historii Polski.",
         correctAnswer = "do",
         pointsQuarter = 2,
@@ -1457,7 +1578,7 @@ val GRAMMAR_ITEM_ROW_ROWS: List<GrammarItemRow> = listOf(
     GrammarItemRow(
         itemId = "certyfikat-polski-B2-2017-grammar-2-8",
         testRef = "certyfikat-polski-B2-2017-grammar-2",
-        questionType = GrammarItemRowQuestionType.FILL_GAP,
+        questionType = GrammarItemRowQuestionType.WORD_BANK,
         context = "Od czasów najwcześniejszych: […] czasów najwcześniejszych.",
         correctAnswer = "od",
         pointsQuarter = 2,
@@ -1465,7 +1586,7 @@ val GRAMMAR_ITEM_ROW_ROWS: List<GrammarItemRow> = listOf(
     GrammarItemRow(
         itemId = "certyfikat-polski-B2-2017-grammar-2-9",
         testRef = "certyfikat-polski-B2-2017-grammar-2",
-        questionType = GrammarItemRowQuestionType.FILL_GAP,
+        questionType = GrammarItemRowQuestionType.WORD_BANK,
         context = "Od czasów najwcześniejszych […] panowanie Sasów.",
         correctAnswer = "po",
         pointsQuarter = 2,
@@ -1473,7 +1594,7 @@ val GRAMMAR_ITEM_ROW_ROWS: List<GrammarItemRow> = listOf(
     GrammarItemRow(
         itemId = "certyfikat-polski-B2-2017-grammar-2-10",
         testRef = "certyfikat-polski-B2-2017-grammar-2",
-        questionType = GrammarItemRowQuestionType.FILL_GAP,
+        questionType = GrammarItemRowQuestionType.WORD_BANK,
         context = "Pisarz, […] tego, prowadził korespondencję.",
         correctAnswer = "oprócz",
         pointsQuarter = 2,
@@ -1731,7 +1852,7 @@ val GRAMMAR_ITEM_ROW_ROWS: List<GrammarItemRow> = listOf(
     GrammarItemRow(
         itemId = "certyfikat-polski-B2-2017-grammar-6-1",
         testRef = "certyfikat-polski-B2-2017-grammar-6",
-        questionType = GrammarItemRowQuestionType.FILL_GAP,
+        questionType = GrammarItemRowQuestionType.WORD_FORMATION,
         context = "Czasami ogarnia mnie wielki […] (smutny).",
         correctAnswer = "smutek",
         pointsQuarter = 4,
@@ -1739,7 +1860,7 @@ val GRAMMAR_ITEM_ROW_ROWS: List<GrammarItemRow> = listOf(
     GrammarItemRow(
         itemId = "certyfikat-polski-B2-2017-grammar-6-2",
         testRef = "certyfikat-polski-B2-2017-grammar-6",
-        questionType = GrammarItemRowQuestionType.FILL_GAP,
+        questionType = GrammarItemRowQuestionType.WORD_FORMATION,
         context = "Od czasu […] (rozstać się) z Pawłem.",
         correctAnswer = "rozstania",
         pointsQuarter = 4,
@@ -1747,7 +1868,7 @@ val GRAMMAR_ITEM_ROW_ROWS: List<GrammarItemRow> = listOf(
     GrammarItemRow(
         itemId = "certyfikat-polski-B2-2017-grammar-6-3",
         testRef = "certyfikat-polski-B2-2017-grammar-6",
-        questionType = GrammarItemRowQuestionType.FILL_GAP,
+        questionType = GrammarItemRowQuestionType.WORD_FORMATION,
         context = "Wszyscy prowadzą […] (rozmawiać).",
         correctAnswer = "rozmowy",
         pointsQuarter = 4,
@@ -1755,7 +1876,7 @@ val GRAMMAR_ITEM_ROW_ROWS: List<GrammarItemRow> = listOf(
     GrammarItemRow(
         itemId = "certyfikat-polski-B2-2017-grammar-6-4",
         testRef = "certyfikat-polski-B2-2017-grammar-6",
-        questionType = GrammarItemRowQuestionType.FILL_GAP,
+        questionType = GrammarItemRowQuestionType.WORD_FORMATION,
         context = "Na temat przyczyn naszego […] (rozwodzić się).",
         correctAnswer = "rozwodu",
         pointsQuarter = 4,
@@ -1763,7 +1884,7 @@ val GRAMMAR_ITEM_ROW_ROWS: List<GrammarItemRow> = listOf(
     GrammarItemRow(
         itemId = "certyfikat-polski-B2-2017-grammar-6-5",
         testRef = "certyfikat-polski-B2-2017-grammar-6",
-        questionType = GrammarItemRowQuestionType.FILL_GAP,
+        questionType = GrammarItemRowQuestionType.WORD_FORMATION,
         context = "Rośnie we mnie […] (niechętny) do ludzi.",
         correctAnswer = "niechęć",
         pointsQuarter = 4,

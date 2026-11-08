@@ -157,7 +157,7 @@ LISTENING_QUESTION {
 LISTENING_QUESTION {
   questionId: certyfikat-polski-B2-2020-listening-3-1
   taskRef: certyfikat-polski-B2-2020-listen-3
-  questionType: match
+  questionType: matching
   questionText: "W tym miejscu widoczne są wpływy innych kultur."
   options: "A|B|C|D"
   correctAnswer: "A|D"
@@ -168,7 +168,7 @@ LISTENING_QUESTION {
 LISTENING_QUESTION {
   questionId: certyfikat-polski-B2-2020-listening-3-2
   taskRef: certyfikat-polski-B2-2020-listen-3
-  questionType: match
+  questionType: matching
   questionText: "Prace budowlane w tym miejscu nie zostały sfinalizowane."
   options: "A|B|C|D"
   correctAnswer: D
@@ -177,7 +177,7 @@ LISTENING_QUESTION {
 LISTENING_QUESTION {
   questionId: certyfikat-polski-B2-2020-listening-3-3
   taskRef: certyfikat-polski-B2-2020-listen-3
-  questionType: match
+  questionType: matching
   questionText: "To miejsce było odkrywane stopniowo."
   options: "A|B|C|D"
   correctAnswer: C
@@ -186,7 +186,7 @@ LISTENING_QUESTION {
 LISTENING_QUESTION {
   questionId: certyfikat-polski-B2-2020-listening-3-4
   taskRef: certyfikat-polski-B2-2020-listen-3
-  questionType: match
+  questionType: matching
   questionText: "Ozdobą tego miejsca były rzadkie okazy zwierząt."
   options: "A|B|C|D"
   correctAnswer: D
@@ -195,7 +195,7 @@ LISTENING_QUESTION {
 LISTENING_QUESTION {
   questionId: certyfikat-polski-B2-2020-listening-3-5
   taskRef: certyfikat-polski-B2-2020-listen-3
-  questionType: match
+  questionType: matching
   questionText: "Celem wizyty w tym miejscu może być edukacja poprzez obserwację."
   options: "A|B|C|D"
   correctAnswer: C
@@ -204,7 +204,7 @@ LISTENING_QUESTION {
 LISTENING_QUESTION {
   questionId: certyfikat-polski-B2-2020-listening-3-6
   taskRef: certyfikat-polski-B2-2020-listen-3
-  questionType: match
+  questionType: matching
   questionText: "Jedną z funkcji tego obiektu jest zapewnienie miejsca wiecznego spoczynku."
   options: "A|B|C|D"
   correctAnswer: "A|B"
@@ -215,7 +215,7 @@ LISTENING_QUESTION {
 LISTENING_QUESTION {
   questionId: certyfikat-polski-B2-2020-listening-3-7
   taskRef: certyfikat-polski-B2-2020-listen-3
-  questionType: match
+  questionType: matching
   questionText: "To miejsce związane jest z ówczesną sytuacją religijną."
   options: "A|B|C|D"
   correctAnswer: B
@@ -224,7 +224,7 @@ LISTENING_QUESTION {
 LISTENING_QUESTION {
   questionId: certyfikat-polski-B2-2020-listening-3-8
   taskRef: certyfikat-polski-B2-2020-listen-3
-  questionType: match
+  questionType: matching
   questionText: "To największy obiekt tego typu w Polsce."
   options: "A|B|C|D"
   correctAnswer: D

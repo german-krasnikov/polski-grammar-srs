@@ -1,0 +1,9 @@
+TEST "B1 Certyfikat 2019 printed grammar bank" PROFILE playmode
+  open exam="B1 Certyfikat 2019" module="grammar"
+  advance count=10
+  ASSERT grammar.bankTexts == "ponieważ|jeśli|czy|żeby|którzy|że|lecz"
+  chooseBank answer="ponieważ" occurrence=1
+  next
+  back
+  ASSERT grammar.bankSelectedText == "ponieważ"
+END

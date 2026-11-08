@@ -17,7 +17,11 @@ enum class QuestionType(val tag: String) {
     ShortAnswer("short_answer"),
     ChooseForm("choose_form"),
     Transform("transform"),
-    WordFormation("word_formation");
+    WordFormation("word_formation"),
+    WordBank("word_bank"),
+    QuestionFormation("question_formation"),
+    GapFillFragment("gap_fill_fragment"),
+    Matching("matching");
     companion object {
         fun fromTag(tag: String): QuestionType = entries.first { it.tag == tag }
     }

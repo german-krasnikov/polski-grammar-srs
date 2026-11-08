@@ -3,6 +3,7 @@ package polski.exam
 import polski.exam.grammar.GrammarItem
 import polski.exam.grammar.GrammarTest
 import polski.exam.grammar.GrammarScoredVariant
+import polski.exam.grammar.GrammarBankToken
 
 /** Maps generated biome rows to domain model. Each pack provides its own generated rows;
  *  this mapper works generically over the row shapes (all packs share the same contract). */
@@ -19,11 +20,14 @@ object ExamDataMapper {
         itemQuarter: (I) -> Int? = { null },
         itemGradingMode: (I) -> String? = { null },
         variants: Map<String, List<GrammarScoredVariant>> = emptyMap(),
+        bankTokens: Map<String, List<GrammarBankToken>> = emptyMap(),
+        itemQuestionTarget: (I) -> String? = { null },
     ): List<GrammarTest> = tests.map { t ->
         val grouped = items.filter { itemTestRef(it) == testId(t) }
         GrammarTest(
             testId = testId(t),
             instruction = testInstruction(t),
+            bankTokens = bankTokens[testId(t)].orEmpty().sortedBy { it.position },
             items = grouped.map { i ->
                 val points = itemPoints(i)
                 val quarter = itemQuarter(i)
@@ -39,6 +43,7 @@ object ExamDataMapper {
                     pointsQuarter = quarter,
                     scoredVariants = variants[itemId(i)].orEmpty(),
                     gradingMode = itemGradingMode(i)?.let(ExamGradingMode::fromTag) ?: ExamGradingMode.Exact,
+                    questionTarget = itemQuestionTarget(i),
                 )
             },
         )

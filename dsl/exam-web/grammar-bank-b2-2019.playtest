@@ -1,0 +1,9 @@
+TEST "B2 Certyfikat 2019 printed grammar bank" PROFILE playmode
+  open exam="B2 Certyfikat 2019" module="grammar"
+  advance count=10
+  ASSERT grammar.bankTexts == "ponad|przy|wbrew|na|między|nad|na|po|o|do|według|z|dzięki"
+  chooseBank answer="ponad" occurrence=1
+  next
+  back
+  ASSERT grammar.bankSelectedText == "ponad"
+END

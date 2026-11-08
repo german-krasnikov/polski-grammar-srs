@@ -6,6 +6,7 @@
 .exam-progress-fill { height: 100%; background: var(--primary, #7eb6ff); border-radius: 3px; transition: width 0.2s; }
 .exam-context { font-size: 1.05rem; line-height: 1.6; margin-bottom: 16px; padding: 16px; background: var(--surface-container, #1a1f2a); border-radius: 12px; }
 .exam-context[lang="pl"] { font-style: italic; }
+.exam-question-target { display: inline-block; margin: 0 0 16px 16px; padding: 2px 6px; border-radius: 4px; background: var(--primary, #7eb6ff); color: var(--on-primary, #071524); }
 .exam-gap { color: var(--primary, #7eb6ff); font-weight: 600; padding: 0 2px; }
 .exam-options { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
 .exam-option { text-align: left; padding: 12px 16px; border: 1.5px solid var(--outline, #444); border-radius: 10px; background: transparent; color: inherit; font-size: 1rem; cursor: pointer; transition: border-color 0.15s, background 0.15s; }

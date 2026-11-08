@@ -1,0 +1,86 @@
+DSL 1
+# Printed task banks from ExamBin/pl/B1/2020/arkusz.pdf. Example tokens are retained.
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B1-2020-grammar-2-bank-1
+  testRef: certyfikat-polski-B1-2020-grammar-2
+  position: 1
+  text: "że"
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B1-2020-grammar-2-bank-2
+  testRef: certyfikat-polski-B1-2020-grammar-2
+  position: 2
+  text: oraz
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B1-2020-grammar-2-bank-3
+  testRef: certyfikat-polski-B1-2020-grammar-2
+  position: 3
+  text: ale
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B1-2020-grammar-2-bank-4
+  testRef: certyfikat-polski-B1-2020-grammar-2
+  position: 4
+  text: "chociaż"
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B1-2020-grammar-2-bank-5
+  testRef: certyfikat-polski-B1-2020-grammar-2
+  position: 5
+  text: czyli
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B1-2020-grammar-2-bank-6
+  testRef: certyfikat-polski-B1-2020-grammar-2
+  position: 6
+  text: ani
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B1-2020-grammar-2-bank-7
+  testRef: certyfikat-polski-B1-2020-grammar-2
+  position: 7
+  text: "więc"
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B1-2020-grammar-8-bank-1
+  testRef: certyfikat-polski-B1-2020-grammar-8
+  position: 1
+  text: do
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B1-2020-grammar-8-bank-2
+  testRef: certyfikat-polski-B1-2020-grammar-8
+  position: 2
+  text: w
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B1-2020-grammar-8-bank-3
+  testRef: certyfikat-polski-B1-2020-grammar-8
+  position: 3
+  text: nad
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B1-2020-grammar-8-bank-4
+  testRef: certyfikat-polski-B1-2020-grammar-8
+  position: 4
+  text: przed
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B1-2020-grammar-8-bank-5
+  testRef: certyfikat-polski-B1-2020-grammar-8
+  position: 5
+  text: z
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B1-2020-grammar-8-bank-6
+  testRef: certyfikat-polski-B1-2020-grammar-8
+  position: 6
+  text: na
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B1-2020-grammar-8-bank-7
+  testRef: certyfikat-polski-B1-2020-grammar-8
+  position: 7
+  text: w
+}

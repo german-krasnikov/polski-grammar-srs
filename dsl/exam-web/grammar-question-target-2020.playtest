@@ -1,0 +1,15 @@
+TEST "B1 2020 marked question target keeps typed answer" PROFILE playmode
+  open exam="B1 Certyfikat 2020" module="grammar"
+  advance count=30
+  ASSERT grammar.questionTarget == "widelcem"
+  ASSERT grammar.targetMarked == true
+  enter text="Czym"
+  ASSERT exam.input == "Czym"
+  back
+  next
+  ASSERT exam.input == "Czym"
+  advance count=24
+  submit
+  inspectReview index=31
+  ASSERT grammar.reviewStatus == "correct"
+END

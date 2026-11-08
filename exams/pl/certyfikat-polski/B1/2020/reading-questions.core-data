@@ -238,7 +238,7 @@ READING_QUESTION {
 READING_QUESTION {
   questionId: certyfikat-polski-B1-2020-reading-5-1
   passageRef: certyfikat-polski-B1-2020-read-5
-  questionType: fill_gap
+  questionType: gap_fill_fragment
   questionText: "Na ulicach można […] radość."
   options: "widać|zobaczyć|przeglądać"
   correctAnswer: "zobaczyć"
@@ -247,7 +247,7 @@ READING_QUESTION {
 READING_QUESTION {
   questionId: certyfikat-polski-B1-2020-reading-5-2
   passageRef: certyfikat-polski-B1-2020-read-5
-  questionType: fill_gap
+  questionType: gap_fill_fragment
   questionText: "Ludzie są serdeczni bardziej niż […]."
   options: "zwykle|często|rzadko"
   correctAnswer: zwykle
@@ -256,7 +256,7 @@ READING_QUESTION {
 READING_QUESTION {
   questionId: certyfikat-polski-B1-2020-reading-5-3
   passageRef: certyfikat-polski-B1-2020-read-5
-  questionType: fill_gap
+  questionType: gap_fill_fragment
   questionText: "[…] dnia rano odbywa się karnawał kolorów."
   options: "Następnego|dalszego|przyszłego"
   correctAnswer: "Następnego"
@@ -265,7 +265,7 @@ READING_QUESTION {
 READING_QUESTION {
   questionId: certyfikat-polski-B1-2020-reading-5-4
   passageRef: certyfikat-polski-B1-2020-read-5
-  questionType: fill_gap
+  questionType: gap_fill_fragment
   questionText: "Uczestnicy […] przyjaciół i rodzinę."
   options: "zwiedzają|odwiedzają|widzą"
   correctAnswer: "odwiedzają"
@@ -274,7 +274,7 @@ READING_QUESTION {
 READING_QUESTION {
   questionId: certyfikat-polski-B1-2020-reading-5-5
   passageRef: certyfikat-polski-B1-2020-read-5
-  questionType: fill_gap
+  questionType: gap_fill_fragment
   questionText: "W Polsce także […] to święto."
   options: "odbywamy|obchodzimy|bierzemy"
   correctAnswer: obchodzimy
@@ -283,7 +283,7 @@ READING_QUESTION {
 READING_QUESTION {
   questionId: certyfikat-polski-B1-2020-reading-5-6
   passageRef: certyfikat-polski-B1-2020-read-5
-  questionType: fill_gap
+  questionType: gap_fill_fragment
   questionText: "Nie ma wiele […] z kulturą Indii."
   options: "takiego samego|identycznego|wspólnego"
   correctAnswer: "wspólnego"
@@ -292,7 +292,7 @@ READING_QUESTION {
 READING_QUESTION {
   questionId: certyfikat-polski-B1-2020-reading-5-7
   passageRef: certyfikat-polski-B1-2020-read-5
-  questionType: fill_gap
+  questionType: gap_fill_fragment
   questionText: "To ma być przede wszystkim dobra […]."
   options: "gra|zabawa|nauka"
   correctAnswer: zabawa
@@ -301,7 +301,7 @@ READING_QUESTION {
 READING_QUESTION {
   questionId: certyfikat-polski-B1-2020-reading-5-8
   passageRef: certyfikat-polski-B1-2020-read-5
-  questionType: fill_gap
+  questionType: gap_fill_fragment
   questionText: "Przygotowano wiele dodatkowych […]."
   options: "spektakli|pomysłów|atrakcji"
   correctAnswer: atrakcji

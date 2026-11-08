@@ -244,7 +244,7 @@ LISTENING_QUESTION {
 LISTENING_QUESTION {
   questionId: certyfikat-polski-B2-2017-listening-4-1
   taskRef: certyfikat-polski-B2-2017-listen-4
-  questionType: match
+  questionType: matching
   questionText: "B. mówi o różnych szkolnych pomieszczeniach"
   options: "1|2|3|4"
   correctAnswer: "1|2"
@@ -255,7 +255,7 @@ LISTENING_QUESTION {
 LISTENING_QUESTION {
   questionId: certyfikat-polski-B2-2017-listening-4-2
   taskRef: certyfikat-polski-B2-2017-listen-4
-  questionType: match
+  questionType: matching
   questionText: "C. wspomina szkolne jedzenie"
   options: "1|2|3|4"
   correctAnswer: "2"
@@ -264,7 +264,7 @@ LISTENING_QUESTION {
 LISTENING_QUESTION {
   questionId: certyfikat-polski-B2-2017-listening-4-3
   taskRef: certyfikat-polski-B2-2017-listen-4
-  questionType: match
+  questionType: matching
   questionText: "D. dobrze wspomina nauczycieli"
   options: "1|2|3|4"
   correctAnswer: "3|4"
@@ -275,7 +275,7 @@ LISTENING_QUESTION {
 LISTENING_QUESTION {
   questionId: certyfikat-polski-B2-2017-listening-4-4
   taskRef: certyfikat-polski-B2-2017-listen-4
-  questionType: match
+  questionType: matching
   questionText: "E. mówi o elementach szkolnego ubrania"
   options: "1|2|3|4"
   correctAnswer: "1|2|4"
@@ -286,7 +286,7 @@ LISTENING_QUESTION {
 LISTENING_QUESTION {
   questionId: certyfikat-polski-B2-2017-listening-4-5
   taskRef: certyfikat-polski-B2-2017-listen-4
-  questionType: match
+  questionType: matching
   questionText: "F. wspomina szkołę ponadpodstawową"
   options: "1|2|3|4"
   correctAnswer: "3"
@@ -295,7 +295,7 @@ LISTENING_QUESTION {
 LISTENING_QUESTION {
   questionId: certyfikat-polski-B2-2017-listening-4-6
   taskRef: certyfikat-polski-B2-2017-listen-4
-  questionType: match
+  questionType: matching
   questionText: "G. pamięta rok rozpoczęcia nauki"
   options: "1|2|3|4"
   correctAnswer: "1"

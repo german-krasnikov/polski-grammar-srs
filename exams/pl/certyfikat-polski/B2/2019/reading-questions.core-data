@@ -48,7 +48,7 @@ READING_QUESTION {
 READING_QUESTION {
   questionId: certyfikat-polski-B2-2019-reading-2-1
   passageRef: certyfikat-polski-B2-2019-read-2
-  questionType: fill_gap
+  questionType: gap_fill_fragment
   questionText: "Fragment do luki [1]"
   options: "A|B|D|E|F|G|H|I|J|K"
   correctAnswer: H
@@ -57,7 +57,7 @@ READING_QUESTION {
 READING_QUESTION {
   questionId: certyfikat-polski-B2-2019-reading-2-2
   passageRef: certyfikat-polski-B2-2019-read-2
-  questionType: fill_gap
+  questionType: gap_fill_fragment
   questionText: "Fragment do luki [2]"
   options: "A|B|D|E|F|G|H|I|J|K"
   correctAnswer: A
@@ -66,7 +66,7 @@ READING_QUESTION {
 READING_QUESTION {
   questionId: certyfikat-polski-B2-2019-reading-2-3
   passageRef: certyfikat-polski-B2-2019-read-2
-  questionType: fill_gap
+  questionType: gap_fill_fragment
   questionText: "Fragment do luki [3]"
   options: "A|B|D|E|F|G|H|I|J|K"
   correctAnswer: I
@@ -75,7 +75,7 @@ READING_QUESTION {
 READING_QUESTION {
   questionId: certyfikat-polski-B2-2019-reading-2-4
   passageRef: certyfikat-polski-B2-2019-read-2
-  questionType: fill_gap
+  questionType: gap_fill_fragment
   questionText: "Fragment do luki [4]"
   options: "A|B|D|E|F|G|H|I|J|K"
   correctAnswer: D
@@ -84,7 +84,7 @@ READING_QUESTION {
 READING_QUESTION {
   questionId: certyfikat-polski-B2-2019-reading-2-5
   passageRef: certyfikat-polski-B2-2019-read-2
-  questionType: fill_gap
+  questionType: gap_fill_fragment
   questionText: "Fragment do luki [5]"
   options: "A|B|D|E|F|G|H|I|J|K"
   correctAnswer: E
@@ -93,7 +93,7 @@ READING_QUESTION {
 READING_QUESTION {
   questionId: certyfikat-polski-B2-2019-reading-2-6
   passageRef: certyfikat-polski-B2-2019-read-2
-  questionType: fill_gap
+  questionType: gap_fill_fragment
   questionText: "Fragment do luki [6]"
   options: "A|B|D|E|F|G|H|I|J|K"
   correctAnswer: B
@@ -102,7 +102,7 @@ READING_QUESTION {
 READING_QUESTION {
   questionId: certyfikat-polski-B2-2019-reading-2-7
   passageRef: certyfikat-polski-B2-2019-read-2
-  questionType: fill_gap
+  questionType: gap_fill_fragment
   questionText: "Fragment do luki [7]"
   options: "A|B|D|E|F|G|H|I|J|K"
   correctAnswer: G
@@ -111,7 +111,7 @@ READING_QUESTION {
 READING_QUESTION {
   questionId: certyfikat-polski-B2-2019-reading-2-8
   passageRef: certyfikat-polski-B2-2019-read-2
-  questionType: fill_gap
+  questionType: gap_fill_fragment
   questionText: "Fragment do luki [8]"
   options: "A|B|D|E|F|G|H|I|J|K"
   correctAnswer: K
@@ -120,7 +120,7 @@ READING_QUESTION {
 READING_QUESTION {
   questionId: certyfikat-polski-B2-2019-reading-2-9
   passageRef: certyfikat-polski-B2-2019-read-2
-  questionType: fill_gap
+  questionType: gap_fill_fragment
   questionText: "Fragment do luki [9]"
   options: "A|B|D|E|F|G|H|I|J|K"
   correctAnswer: F
@@ -129,7 +129,7 @@ READING_QUESTION {
 READING_QUESTION {
   questionId: certyfikat-polski-B2-2019-reading-2-10
   passageRef: certyfikat-polski-B2-2019-read-2
-  questionType: fill_gap
+  questionType: gap_fill_fragment
   questionText: "Fragment do luki [10]"
   options: "A|B|D|E|F|G|H|I|J|K"
   correctAnswer: J

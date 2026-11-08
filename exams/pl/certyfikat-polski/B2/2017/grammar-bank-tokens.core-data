@@ -1,0 +1,74 @@
+DSL 1
+# Printed task banks from ExamBin/pl/B2/2017/arkusz.pdf. Example tokens are retained.
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2017-grammar-2-bank-1
+  testRef: certyfikat-polski-B2-2017-grammar-2
+  position: 1
+  text: z
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2017-grammar-2-bank-2
+  testRef: certyfikat-polski-B2-2017-grammar-2
+  position: 2
+  text: "oprócz"
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2017-grammar-2-bank-3
+  testRef: certyfikat-polski-B2-2017-grammar-2
+  position: 3
+  text: przy
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2017-grammar-2-bank-4
+  testRef: certyfikat-polski-B2-2017-grammar-2
+  position: 4
+  text: o
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2017-grammar-2-bank-5
+  testRef: certyfikat-polski-B2-2017-grammar-2
+  position: 5
+  text: "około"
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2017-grammar-2-bank-6
+  testRef: certyfikat-polski-B2-2017-grammar-2
+  position: 6
+  text: "spośród"
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2017-grammar-2-bank-7
+  testRef: certyfikat-polski-B2-2017-grammar-2
+  position: 7
+  text: do
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2017-grammar-2-bank-8
+  testRef: certyfikat-polski-B2-2017-grammar-2
+  position: 8
+  text: po
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2017-grammar-2-bank-9
+  testRef: certyfikat-polski-B2-2017-grammar-2
+  position: 9
+  text: od
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2017-grammar-2-bank-10
+  testRef: certyfikat-polski-B2-2017-grammar-2
+  position: 10
+  text: na
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2017-grammar-2-bank-11
+  testRef: certyfikat-polski-B2-2017-grammar-2
+  position: 11
+  text: w
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2017-grammar-2-bank-12
+  testRef: certyfikat-polski-B2-2017-grammar-2
+  position: 12
+  text: ponad
+}

@@ -1,5 +1,5 @@
 // Generated from dsl/exam.data-contract
-// source-sha256=a57e78c0c7e995774d3b275d965c3ed5eaf230d29d01cb66a06330174c9e816d
+// source-sha256=36cfafebca8fc22dc8a31c76161792ced0b69ac872ae298f7b83376d02344c88
 // Edit the source, then run biome generate.
 
 package polski.exam.data.b1y2019
@@ -9,6 +9,7 @@ enum class ListeningQuestionRowQuestionType(val tag: String) {
     TRUE_FALSE("true_false"),
     FILL_GAP("fill_gap"),
     MATCH("match"),
+    MATCHING("matching"),
 }
 
 enum class ListeningQuestionRowGradingMode(val tag: String) {
@@ -27,6 +28,8 @@ enum class ReadingQuestionRowQuestionType(val tag: String) {
     MATCH_HEADING("match_heading"),
     FILL_GAP("fill_gap"),
     SHORT_ANSWER("short_answer"),
+    GAP_FILL_FRAGMENT("gap_fill_fragment"),
+    MATCHING("matching"),
 }
 
 enum class GrammarItemRowQuestionType(val tag: String) {
@@ -34,6 +37,8 @@ enum class GrammarItemRowQuestionType(val tag: String) {
     FILL_GAP("fill_gap"),
     TRANSFORM("transform"),
     WORD_FORMATION("word_formation"),
+    WORD_BANK("word_bank"),
+    QUESTION_FORMATION("question_formation"),
 }
 
 enum class GrammarItemRowGradingMode(val tag: String) {
@@ -105,6 +110,20 @@ enum class OpenItemGroupCaseRowExpectedUnknownStatus(val tag: String) {
 
 enum class OpenItemGroupCaseRowExpectedBlankStatus(val tag: String) {
     WRONG("wrong"),
+}
+
+enum class QuestionControlCaseRowExpectedKind(val tag: String) {
+    SINGLE_OPTION("single_option"),
+    TEXT("text"),
+    UNORDERED_SET("unordered_set"),
+    BANK_OPTION("bank_option"),
+}
+
+enum class QuestionControlCaseRowExpectedStatus(val tag: String) {
+    CONFIRMED_FULL("confirmed_full"),
+    CONFIRMED_PARTIAL("confirmed_partial"),
+    WRONG("wrong"),
+    PENDING_MANUAL("pending_manual"),
 }
 
 data class ExamRow(
@@ -180,11 +199,19 @@ data class GrammarTestRow(
     val instruction: String,
 )
 
+data class GrammarBankTokenRow(
+    val tokenId: String,
+    val testRef: String,
+    val position: Int,
+    val text: String,
+)
+
 data class GrammarItemRow(
     val itemId: String,
     val testRef: String,
     val questionType: GrammarItemRowQuestionType,
     val context: String,
+    val questionTarget: String? = null,
     val gap: String? = null,
     val options: String? = null,
     val correctAnswer: String,
@@ -321,6 +348,25 @@ data class GrammarConstraintCaseRow(
     val answer8: String,
     val expected6Quarter: Int,
     val expected8Quarter: Int,
+)
+
+data class BankTokenCaseRow(
+    val id: String,
+    val testId: String,
+    val expectedOrderedTokenText: String,
+    val expectedDuplicateCount: Int,
+)
+
+data class QuestionControlCaseRow(
+    val id: String,
+    val sourceItemId: String,
+    val expectedTag: String,
+    val expectedKind: QuestionControlCaseRowExpectedKind,
+    val expectedOptionCount: Int,
+    val expectedRawAnswer: String,
+    val expectedQuestionTarget: String? = null,
+    val expectedQuarter: Int,
+    val expectedStatus: QuestionControlCaseRowExpectedStatus,
 )
 
 val EXAM_ROW_ROWS: List<ExamRow> = listOf(
@@ -631,7 +677,7 @@ val LISTENING_QUESTION_ROW_ROWS: List<ListeningQuestionRow> = listOf(
     ListeningQuestionRow(
         questionId = "B1-2019-lq4-1",
         taskRef = "B1-2019-listen-4",
-        questionType = ListeningQuestionRowQuestionType.MATCH,
+        questionType = ListeningQuestionRowQuestionType.MATCHING,
         questionText = "A. Mówi, że bardzo ważne jest słuchanie partnera.",
         options = "1|2|3|4",
         correctAnswer = "4",
@@ -640,7 +686,7 @@ val LISTENING_QUESTION_ROW_ROWS: List<ListeningQuestionRow> = listOf(
     ListeningQuestionRow(
         questionId = "B1-2019-lq4-2",
         taskRef = "B1-2019-listen-4",
-        questionType = ListeningQuestionRowQuestionType.MATCH,
+        questionType = ListeningQuestionRowQuestionType.MATCHING,
         questionText = "B. Uważa, że do sukcesu potrzebne jest poznanie rozmówcy.",
         options = "1|2|3|4",
         correctAnswer = "2",
@@ -649,7 +695,7 @@ val LISTENING_QUESTION_ROW_ROWS: List<ListeningQuestionRow> = listOf(
     ListeningQuestionRow(
         questionId = "B1-2019-lq4-3",
         taskRef = "B1-2019-listen-4",
-        questionType = ListeningQuestionRowQuestionType.MATCH,
+        questionType = ListeningQuestionRowQuestionType.MATCHING,
         questionText = "C. Zwraca uwagę na grzeczność i kulturę osobistą.",
         options = "1|2|3|4",
         correctAnswer = "3",
@@ -658,7 +704,7 @@ val LISTENING_QUESTION_ROW_ROWS: List<ListeningQuestionRow> = listOf(
     ListeningQuestionRow(
         questionId = "B1-2019-lq4-4",
         taskRef = "B1-2019-listen-4",
-        questionType = ListeningQuestionRowQuestionType.MATCH,
+        questionType = ListeningQuestionRowQuestionType.MATCHING,
         questionText = "D. Twierdzi, że czasem warto zmienić zdanie.",
         options = "1|2|3|4",
         correctAnswer = "1",
@@ -667,7 +713,7 @@ val LISTENING_QUESTION_ROW_ROWS: List<ListeningQuestionRow> = listOf(
     ListeningQuestionRow(
         questionId = "B1-2019-lq4-5",
         taskRef = "B1-2019-listen-4",
-        questionType = ListeningQuestionRowQuestionType.MATCH,
+        questionType = ListeningQuestionRowQuestionType.MATCHING,
         questionText = "E. Podkreśla, że nie należy bać się ciszy.",
         options = "1|2|3|4",
         correctAnswer = "4",
@@ -676,7 +722,7 @@ val LISTENING_QUESTION_ROW_ROWS: List<ListeningQuestionRow> = listOf(
     ListeningQuestionRow(
         questionId = "B1-2019-lq5-1",
         taskRef = "B1-2019-listen-5",
-        questionType = ListeningQuestionRowQuestionType.MATCH,
+        questionType = ListeningQuestionRowQuestionType.MATCHING,
         questionText = "Ilustracja B",
         options = "1|2|3|4|5|6|7|8|9|10",
         correctAnswer = "6",
@@ -685,7 +731,7 @@ val LISTENING_QUESTION_ROW_ROWS: List<ListeningQuestionRow> = listOf(
     ListeningQuestionRow(
         questionId = "B1-2019-lq5-2",
         taskRef = "B1-2019-listen-5",
-        questionType = ListeningQuestionRowQuestionType.MATCH,
+        questionType = ListeningQuestionRowQuestionType.MATCHING,
         questionText = "Ilustracja C",
         options = "1|2|3|4|5|6|7|8|9|10",
         correctAnswer = "7",
@@ -694,7 +740,7 @@ val LISTENING_QUESTION_ROW_ROWS: List<ListeningQuestionRow> = listOf(
     ListeningQuestionRow(
         questionId = "B1-2019-lq5-3",
         taskRef = "B1-2019-listen-5",
-        questionType = ListeningQuestionRowQuestionType.MATCH,
+        questionType = ListeningQuestionRowQuestionType.MATCHING,
         questionText = "Ilustracja D",
         options = "1|2|3|4|5|6|7|8|9|10",
         correctAnswer = "5",
@@ -703,7 +749,7 @@ val LISTENING_QUESTION_ROW_ROWS: List<ListeningQuestionRow> = listOf(
     ListeningQuestionRow(
         questionId = "B1-2019-lq5-4",
         taskRef = "B1-2019-listen-5",
-        questionType = ListeningQuestionRowQuestionType.MATCH,
+        questionType = ListeningQuestionRowQuestionType.MATCHING,
         questionText = "Ilustracja E",
         options = "1|2|3|4|5|6|7|8|9|10",
         correctAnswer = "1",
@@ -712,7 +758,7 @@ val LISTENING_QUESTION_ROW_ROWS: List<ListeningQuestionRow> = listOf(
     ListeningQuestionRow(
         questionId = "B1-2019-lq5-5",
         taskRef = "B1-2019-listen-5",
-        questionType = ListeningQuestionRowQuestionType.MATCH,
+        questionType = ListeningQuestionRowQuestionType.MATCHING,
         questionText = "Ilustracja F",
         options = "1|2|3|4|5|6|7|8|9|10",
         correctAnswer = "9",
@@ -721,7 +767,7 @@ val LISTENING_QUESTION_ROW_ROWS: List<ListeningQuestionRow> = listOf(
     ListeningQuestionRow(
         questionId = "B1-2019-lq5-6",
         taskRef = "B1-2019-listen-5",
-        questionType = ListeningQuestionRowQuestionType.MATCH,
+        questionType = ListeningQuestionRowQuestionType.MATCHING,
         questionText = "Ilustracja G",
         options = "1|2|3|4|5|6|7|8|9|10",
         correctAnswer = "10",
@@ -730,7 +776,7 @@ val LISTENING_QUESTION_ROW_ROWS: List<ListeningQuestionRow> = listOf(
     ListeningQuestionRow(
         questionId = "B1-2019-lq5-7",
         taskRef = "B1-2019-listen-5",
-        questionType = ListeningQuestionRowQuestionType.MATCH,
+        questionType = ListeningQuestionRowQuestionType.MATCHING,
         questionText = "Ilustracja H",
         options = "1|2|3|4|5|6|7|8|9|10",
         correctAnswer = "3",
@@ -739,7 +785,7 @@ val LISTENING_QUESTION_ROW_ROWS: List<ListeningQuestionRow> = listOf(
     ListeningQuestionRow(
         questionId = "B1-2019-lq5-8",
         taskRef = "B1-2019-listen-5",
-        questionType = ListeningQuestionRowQuestionType.MATCH,
+        questionType = ListeningQuestionRowQuestionType.MATCHING,
         questionText = "Ilustracja I",
         options = "1|2|3|4|5|6|7|8|9|10",
         correctAnswer = "4",
@@ -748,7 +794,7 @@ val LISTENING_QUESTION_ROW_ROWS: List<ListeningQuestionRow> = listOf(
     ListeningQuestionRow(
         questionId = "B1-2019-lq5-9",
         taskRef = "B1-2019-listen-5",
-        questionType = ListeningQuestionRowQuestionType.MATCH,
+        questionType = ListeningQuestionRowQuestionType.MATCHING,
         questionText = "Ilustracja J",
         options = "1|2|3|4|5|6|7|8|9|10",
         correctAnswer = "8",
@@ -757,7 +803,7 @@ val LISTENING_QUESTION_ROW_ROWS: List<ListeningQuestionRow> = listOf(
     ListeningQuestionRow(
         questionId = "B1-2019-lq5-10",
         taskRef = "B1-2019-listen-5",
-        questionType = ListeningQuestionRowQuestionType.MATCH,
+        questionType = ListeningQuestionRowQuestionType.MATCHING,
         questionText = "Ilustracja K",
         options = "1|2|3|4|5|6|7|8|9|10",
         correctAnswer = "2",
@@ -1172,6 +1218,78 @@ val GRAMMAR_TEST_ROW_ROWS: List<GrammarTestRow> = listOf(
     ),
 )
 
+val GRAMMAR_BANK_TOKEN_ROW_ROWS: List<GrammarBankTokenRow> = listOf(
+    GrammarBankTokenRow(
+        tokenId = "B1-2019-grammar-2-bank-1",
+        testRef = "B1-2019-grammar-2",
+        position = 1,
+        text = "ponieważ",
+    ),
+    GrammarBankTokenRow(
+        tokenId = "B1-2019-grammar-2-bank-2",
+        testRef = "B1-2019-grammar-2",
+        position = 2,
+        text = "jeśli",
+    ),
+    GrammarBankTokenRow(
+        tokenId = "B1-2019-grammar-2-bank-3",
+        testRef = "B1-2019-grammar-2",
+        position = 3,
+        text = "czy",
+    ),
+    GrammarBankTokenRow(
+        tokenId = "B1-2019-grammar-2-bank-4",
+        testRef = "B1-2019-grammar-2",
+        position = 4,
+        text = "żeby",
+    ),
+    GrammarBankTokenRow(
+        tokenId = "B1-2019-grammar-2-bank-5",
+        testRef = "B1-2019-grammar-2",
+        position = 5,
+        text = "którzy",
+    ),
+    GrammarBankTokenRow(tokenId = "B1-2019-grammar-2-bank-6", testRef = "B1-2019-grammar-2", position = 6, text = "że"),
+    GrammarBankTokenRow(
+        tokenId = "B1-2019-grammar-2-bank-7",
+        testRef = "B1-2019-grammar-2",
+        position = 7,
+        text = "lecz",
+    ),
+    GrammarBankTokenRow(
+        tokenId = "B1-2019-grammar-8-bank-1",
+        testRef = "B1-2019-grammar-8",
+        position = 1,
+        text = "bez",
+    ),
+    GrammarBankTokenRow(
+        tokenId = "B1-2019-grammar-8-bank-2",
+        testRef = "B1-2019-grammar-8",
+        position = 2,
+        text = "między",
+    ),
+    GrammarBankTokenRow(tokenId = "B1-2019-grammar-8-bank-3", testRef = "B1-2019-grammar-8", position = 3, text = "za"),
+    GrammarBankTokenRow(
+        tokenId = "B1-2019-grammar-8-bank-4",
+        testRef = "B1-2019-grammar-8",
+        position = 4,
+        text = "przez",
+    ),
+    GrammarBankTokenRow(tokenId = "B1-2019-grammar-8-bank-5", testRef = "B1-2019-grammar-8", position = 5, text = "w"),
+    GrammarBankTokenRow(
+        tokenId = "B1-2019-grammar-8-bank-6",
+        testRef = "B1-2019-grammar-8",
+        position = 6,
+        text = "około",
+    ),
+    GrammarBankTokenRow(
+        tokenId = "B1-2019-grammar-8-bank-7",
+        testRef = "B1-2019-grammar-8",
+        position = 7,
+        text = "oprócz",
+    ),
+)
+
 val GRAMMAR_ITEM_ROW_ROWS: List<GrammarItemRow> = listOf(
     GrammarItemRow(
         itemId = "B1-2019-g1",
@@ -1266,7 +1384,7 @@ val GRAMMAR_ITEM_ROW_ROWS: List<GrammarItemRow> = listOf(
     GrammarItemRow(
         itemId = "B1-2019-g11",
         testRef = "B1-2019-grammar-2",
-        questionType = GrammarItemRowQuestionType.FILL_GAP,
+        questionType = GrammarItemRowQuestionType.WORD_BANK,
         context = "Psychologowie twierdzą, ___ kontakt z psem, kotem czy królikiem dobrze wpływa na człowieka i jego samopoczucie.",
         correctAnswer = "że",
         pointsQuarter = 2,
@@ -1274,7 +1392,7 @@ val GRAMMAR_ITEM_ROW_ROWS: List<GrammarItemRow> = listOf(
     GrammarItemRow(
         itemId = "B1-2019-g12",
         testRef = "B1-2019-grammar-2",
-        questionType = GrammarItemRowQuestionType.FILL_GAP,
+        questionType = GrammarItemRowQuestionType.WORD_BANK,
         context = "Psychologowie twierdzą, że kontakt z psem, kotem ___ królikiem dobrze wpływa na człowieka i jego samopoczucie.",
         correctAnswer = "czy",
         pointsQuarter = 2,
@@ -1282,7 +1400,7 @@ val GRAMMAR_ITEM_ROW_ROWS: List<GrammarItemRow> = listOf(
     GrammarItemRow(
         itemId = "B1-2019-g13",
         testRef = "B1-2019-grammar-2",
-        questionType = GrammarItemRowQuestionType.FILL_GAP,
+        questionType = GrammarItemRowQuestionType.WORD_BANK,
         context = "Wydaje się to oczywiste, ___ nie wszyscy o tym wiedzą.",
         correctAnswer = "lecz",
         pointsQuarter = 2,
@@ -1290,7 +1408,7 @@ val GRAMMAR_ITEM_ROW_ROWS: List<GrammarItemRow> = listOf(
     GrammarItemRow(
         itemId = "B1-2019-g14",
         testRef = "B1-2019-grammar-2",
-        questionType = GrammarItemRowQuestionType.FILL_GAP,
+        questionType = GrammarItemRowQuestionType.WORD_BANK,
         context = "Wniosek jest prosty: ___ lepiej się czuć, zaproś do swojego domu zwierzę.",
         correctAnswer = "żeby",
         pointsQuarter = 2,
@@ -1298,7 +1416,7 @@ val GRAMMAR_ITEM_ROW_ROWS: List<GrammarItemRow> = listOf(
     GrammarItemRow(
         itemId = "B1-2019-g15",
         testRef = "B1-2019-grammar-2",
-        questionType = GrammarItemRowQuestionType.FILL_GAP,
+        questionType = GrammarItemRowQuestionType.WORD_BANK,
         context = "Zaproś do swojego domu zwierzę, ___ ono z pewnością poprawi ci nastrój.",
         correctAnswer = "ponieważ",
         pointsQuarter = 2,
@@ -1521,7 +1639,7 @@ val GRAMMAR_ITEM_ROW_ROWS: List<GrammarItemRow> = listOf(
     GrammarItemRow(
         itemId = "B1-2019-g41",
         testRef = "B1-2019-grammar-8",
-        questionType = GrammarItemRowQuestionType.FILL_GAP,
+        questionType = GrammarItemRowQuestionType.WORD_BANK,
         context = "Badania pokazują, że przeciętny Polak spędza ___ 5 godzin dziennie na oglądaniu telewizji.",
         correctAnswer = "około",
         pointsQuarter = 2,
@@ -1529,7 +1647,7 @@ val GRAMMAR_ITEM_ROW_ROWS: List<GrammarItemRow> = listOf(
     GrammarItemRow(
         itemId = "B1-2019-g42",
         testRef = "B1-2019-grammar-8",
-        questionType = GrammarItemRowQuestionType.FILL_GAP,
+        questionType = GrammarItemRowQuestionType.WORD_BANK,
         context = "___ tym czasie interesują go głównie programy informacyjne i rozrywkowe.",
         correctAnswer = "W",
         pointsQuarter = 2,
@@ -1537,7 +1655,7 @@ val GRAMMAR_ITEM_ROW_ROWS: List<GrammarItemRow> = listOf(
     GrammarItemRow(
         itemId = "B1-2019-g43",
         testRef = "B1-2019-grammar-8",
-        questionType = GrammarItemRowQuestionType.FILL_GAP,
+        questionType = GrammarItemRowQuestionType.WORD_BANK,
         context = "___ nich ogląda filmy fabularne i wiele reklam.",
         correctAnswer = "Oprócz",
         pointsQuarter = 2,
@@ -1545,7 +1663,7 @@ val GRAMMAR_ITEM_ROW_ROWS: List<GrammarItemRow> = listOf(
     GrammarItemRow(
         itemId = "B1-2019-g44",
         testRef = "B1-2019-grammar-8",
-        questionType = GrammarItemRowQuestionType.FILL_GAP,
+        questionType = GrammarItemRowQuestionType.WORD_BANK,
         context = "___ promowania najpopularniejszych produktów i usług nie ma dziś telewizji.",
         correctAnswer = "bez",
         pointsQuarter = 2,
@@ -1553,7 +1671,7 @@ val GRAMMAR_ITEM_ROW_ROWS: List<GrammarItemRow> = listOf(
     GrammarItemRow(
         itemId = "B1-2019-g45",
         testRef = "B1-2019-grammar-8",
-        questionType = GrammarItemRowQuestionType.FILL_GAP,
+        questionType = GrammarItemRowQuestionType.WORD_BANK,
         context = "Coraz dłuższe bloki reklam są emitowane także ___ częściami programu.",
         correctAnswer = "między",
         pointsQuarter = 2,
@@ -1561,40 +1679,45 @@ val GRAMMAR_ITEM_ROW_ROWS: List<GrammarItemRow> = listOf(
     GrammarItemRow(
         itemId = "B1-2019-g46",
         testRef = "B1-2019-grammar-5",
-        questionType = GrammarItemRowQuestionType.FILL_GAP,
+        questionType = GrammarItemRowQuestionType.QUESTION_FORMATION,
         context = "Bigos robi się z kapusty kiszonej. — ___ się robi bigos? — Z kapusty kiszonej.",
+        questionTarget = "z kapusty kiszonej",
         correctAnswer = "Z czego",
         pointsQuarter = 2,
     ),
     GrammarItemRow(
         itemId = "B1-2019-g47",
         testRef = "B1-2019-grammar-5",
-        questionType = GrammarItemRowQuestionType.FILL_GAP,
+        questionType = GrammarItemRowQuestionType.QUESTION_FORMATION,
         context = "Pożyczyłam Ewie swoją sukienkę. — ___ pożyczyłaś swoją sukienkę? — Ewie.",
+        questionTarget = "Ewie",
         correctAnswer = "Komu",
         pointsQuarter = 2,
     ),
     GrammarItemRow(
         itemId = "B1-2019-g48",
         testRef = "B1-2019-grammar-5",
-        questionType = GrammarItemRowQuestionType.FILL_GAP,
+        questionType = GrammarItemRowQuestionType.QUESTION_FORMATION,
         context = "Babcia cieszy się wiosennymi kwiatami. — ___ cieszy się babcia? — Wiosennymi kwiatami.",
+        questionTarget = "wiosennymi kwiatami",
         correctAnswer = "Czym",
         pointsQuarter = 2,
     ),
     GrammarItemRow(
         itemId = "B1-2019-g49",
         testRef = "B1-2019-grammar-5",
-        questionType = GrammarItemRowQuestionType.FILL_GAP,
+        questionType = GrammarItemRowQuestionType.QUESTION_FORMATION,
         context = "Planowaliśmy ten wyjazd od zeszłej zimy. — ___ planowaliście ten wyjazd? — Od zeszłej zimy.",
+        questionTarget = "od zeszłej zimy",
         correctAnswer = "Od kiedy",
         pointsQuarter = 2,
     ),
     GrammarItemRow(
         itemId = "B1-2019-g50",
         testRef = "B1-2019-grammar-5",
-        questionType = GrammarItemRowQuestionType.FILL_GAP,
+        questionType = GrammarItemRowQuestionType.QUESTION_FORMATION,
         context = "Pani Ewelina szuka złotych kolczyków. — ___ kolczyków szuka pani Ewelina? — Złotych.",
+        questionTarget = "złotych",
         correctAnswer = "Jakich",
         pointsQuarter = 2,
     ),

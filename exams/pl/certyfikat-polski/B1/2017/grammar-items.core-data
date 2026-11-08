@@ -227,7 +227,8 @@ GRAMMAR_ITEM {
 GRAMMAR_ITEM {
   itemId: B1-2017-g4-1
   testRef: certyfikat-polski-B1-2017-grammar-4
-  questionType: fill_gap
+  questionType: question_formation
+  questionTarget: "z gazety"
   context: "Łukasz dowiedział się o tym z gazety. — ___ Łukasz się o tym dowiedział?"
   correctAnswer: "skąd"
   pointsQuarter: 2
@@ -235,7 +236,8 @@ GRAMMAR_ITEM {
 GRAMMAR_ITEM {
   itemId: B1-2017-g4-2
   testRef: certyfikat-polski-B1-2017-grammar-4
-  questionType: fill_gap
+  questionType: question_formation
+  questionTarget: "z tym nowym"
   context: "Agata chce porozmawiać tylko z tym nowym studentem. — ___ studentem Agata chce porozmawiać?"
   correctAnswer: "z którym"
   pointsQuarter: 2
@@ -243,7 +245,8 @@ GRAMMAR_ITEM {
 GRAMMAR_ITEM {
   itemId: B1-2017-g4-3
   testRef: certyfikat-polski-B1-2017-grammar-4
-  questionType: fill_gap
+  questionType: question_formation
+  questionTarget: "po książkę telefoniczną"
   context: "Anka poszła do swojego pokoju po książkę telefoniczną. — ___ Anka poszła do swojego pokoju?"
   correctAnswer: "po co"
   pointsQuarter: 2
@@ -251,7 +254,8 @@ GRAMMAR_ITEM {
 GRAMMAR_ITEM {
   itemId: B1-2017-g4-4
   testRef: certyfikat-polski-B1-2017-grammar-4
-  questionType: fill_gap
+  questionType: question_formation
+  questionTarget: historycznych
   context: "Oni nie lubią filmów historycznych. — ___ filmów oni nie lubią?"
   correctAnswer: jakich
   pointsQuarter: 2
@@ -259,7 +263,8 @@ GRAMMAR_ITEM {
 GRAMMAR_ITEM {
   itemId: B1-2017-g4-5
   testRef: certyfikat-polski-B1-2017-grammar-4
-  questionType: fill_gap
+  questionType: question_formation
+  questionTarget: "nowego roweru"
   context: "Marcin potrzebuje nowego roweru. — ___ potrzebuje Marcin?"
   correctAnswer: czego
   pointsQuarter: 2
@@ -347,45 +352,40 @@ GRAMMAR_ITEM {
 GRAMMAR_ITEM {
   itemId: B1-2017-g6-1
   testRef: certyfikat-polski-B1-2017-grammar-6
-  questionType: fill_gap
+  questionType: word_bank
   context: "___ w dzieciństwie marzył o karierze aktora, wybrał studia"
-  options: "a|ale|chociaż|czy|gdyby|że"
   correctAnswer: "Chociaż"
   pointsQuarter: 2
 }
 GRAMMAR_ITEM {
   itemId: B1-2017-g6-2
   testRef: certyfikat-polski-B1-2017-grammar-6
-  questionType: fill_gap
+  questionType: word_bank
   context: "Na początku nie był pewien, ___ to dobry wybór"
-  options: "a|ale|chociaż|czy|gdyby|że"
   correctAnswer: czy
   pointsQuarter: 2
 }
 GRAMMAR_ITEM {
   itemId: B1-2017-g6-3
   testRef: certyfikat-polski-B1-2017-grammar-6
-  questionType: fill_gap
+  questionType: word_bank
   context: "zrozumiał jednak, ___ właśnie tym chce się zajmować"
-  options: "a|ale|chociaż|czy|gdyby|że"
   correctAnswer: "że"
   pointsQuarter: 2
 }
 GRAMMAR_ITEM {
   itemId: B1-2017-g6-4
   testRef: certyfikat-polski-B1-2017-grammar-6
-  questionType: fill_gap
+  questionType: word_bank
   context: "Ma codziennie kontakt z ludźmi, ___ to jego zdaniem najważniejsze"
-  options: "a|ale|chociaż|czy|gdyby|że"
   correctAnswer: a
   pointsQuarter: 2
 }
 GRAMMAR_ITEM {
   itemId: B1-2017-g6-5
   testRef: certyfikat-polski-B1-2017-grammar-6
-  questionType: fill_gap
+  questionType: word_bank
   context: "___ miał wybierać jeszcze raz, na pewno zrobiłby to samo"
-  options: "a|ale|chociaż|czy|gdyby|że"
   correctAnswer: Gdyby
   pointsQuarter: 2
 }

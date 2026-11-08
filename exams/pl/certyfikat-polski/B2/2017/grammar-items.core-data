@@ -93,7 +93,7 @@ GRAMMAR_ITEM {
 GRAMMAR_ITEM {
   itemId: certyfikat-polski-B2-2017-grammar-2-1
   testRef: certyfikat-polski-B2-2017-grammar-2
-  questionType: fill_gap
+  questionType: word_bank
   context: "Kraszewski napisał najwięcej książek […] wszystkich polskich pisarzy."
   correctAnswer: "spośród"
   pointsQuarter: 2
@@ -101,7 +101,7 @@ GRAMMAR_ITEM {
 GRAMMAR_ITEM {
   itemId: certyfikat-polski-B2-2017-grammar-2-2
   testRef: certyfikat-polski-B2-2017-grammar-2
-  questionType: fill_gap
+  questionType: word_bank
   context: "Miesięcznie produkował […] pięciuset stron maszynopisu."
   correctAnswer: "około"
   pointsQuarter: 2
@@ -109,7 +109,7 @@ GRAMMAR_ITEM {
 GRAMMAR_ITEM {
   itemId: certyfikat-polski-B2-2017-grammar-2-3
   testRef: certyfikat-polski-B2-2017-grammar-2
-  questionType: fill_gap
+  questionType: word_bank
   context: "Oczywiście […] przeliczeniu na współczesne miary."
   correctAnswer: w
   pointsQuarter: 2
@@ -117,7 +117,7 @@ GRAMMAR_ITEM {
 GRAMMAR_ITEM {
   itemId: certyfikat-polski-B2-2017-grammar-2-4
   testRef: certyfikat-polski-B2-2017-grammar-2
-  questionType: fill_gap
+  questionType: word_bank
   context: "[…] współczesne miary."
   correctAnswer: na
   pointsQuarter: 2
@@ -125,7 +125,7 @@ GRAMMAR_ITEM {
 GRAMMAR_ITEM {
   itemId: certyfikat-polski-B2-2017-grammar-2-5
   testRef: certyfikat-polski-B2-2017-grammar-2
-  questionType: fill_gap
+  questionType: word_bank
   context: "Pisarz […] pisaniu słuchał muzyki."
   correctAnswer: przy
   pointsQuarter: 2
@@ -133,7 +133,7 @@ GRAMMAR_ITEM {
 GRAMMAR_ITEM {
   itemId: certyfikat-polski-B2-2017-grammar-2-6
   testRef: certyfikat-polski-B2-2017-grammar-2
-  questionType: fill_gap
+  questionType: word_bank
   context: "Kraszewski napisał […] sześćset powieści."
   correctAnswer: ponad
   pointsQuarter: 2
@@ -141,7 +141,7 @@ GRAMMAR_ITEM {
 GRAMMAR_ITEM {
   itemId: certyfikat-polski-B2-2017-grammar-2-7
   testRef: certyfikat-polski-B2-2017-grammar-2
-  questionType: fill_gap
+  questionType: word_bank
   context: "Powieści nawiązujących […] historii Polski."
   correctAnswer: do
   pointsQuarter: 2
@@ -149,7 +149,7 @@ GRAMMAR_ITEM {
 GRAMMAR_ITEM {
   itemId: certyfikat-polski-B2-2017-grammar-2-8
   testRef: certyfikat-polski-B2-2017-grammar-2
-  questionType: fill_gap
+  questionType: word_bank
   context: "Od czasów najwcześniejszych: […] czasów najwcześniejszych."
   correctAnswer: od
   pointsQuarter: 2
@@ -157,7 +157,7 @@ GRAMMAR_ITEM {
 GRAMMAR_ITEM {
   itemId: certyfikat-polski-B2-2017-grammar-2-9
   testRef: certyfikat-polski-B2-2017-grammar-2
-  questionType: fill_gap
+  questionType: word_bank
   context: "Od czasów najwcześniejszych […] panowanie Sasów."
   correctAnswer: po
   pointsQuarter: 2
@@ -165,7 +165,7 @@ GRAMMAR_ITEM {
 GRAMMAR_ITEM {
   itemId: certyfikat-polski-B2-2017-grammar-2-10
   testRef: certyfikat-polski-B2-2017-grammar-2
-  questionType: fill_gap
+  questionType: word_bank
   context: "Pisarz, […] tego, prowadził korespondencję."
   correctAnswer: "oprócz"
   pointsQuarter: 2
@@ -423,7 +423,7 @@ GRAMMAR_ITEM {
 GRAMMAR_ITEM {
   itemId: certyfikat-polski-B2-2017-grammar-6-1
   testRef: certyfikat-polski-B2-2017-grammar-6
-  questionType: fill_gap
+  questionType: word_formation
   context: "Czasami ogarnia mnie wielki […] (smutny)."
   correctAnswer: smutek
   pointsQuarter: 4
@@ -431,7 +431,7 @@ GRAMMAR_ITEM {
 GRAMMAR_ITEM {
   itemId: certyfikat-polski-B2-2017-grammar-6-2
   testRef: certyfikat-polski-B2-2017-grammar-6
-  questionType: fill_gap
+  questionType: word_formation
   context: "Od czasu […] (rozstać się) z Pawłem."
   correctAnswer: rozstania
   pointsQuarter: 4
@@ -439,7 +439,7 @@ GRAMMAR_ITEM {
 GRAMMAR_ITEM {
   itemId: certyfikat-polski-B2-2017-grammar-6-3
   testRef: certyfikat-polski-B2-2017-grammar-6
-  questionType: fill_gap
+  questionType: word_formation
   context: "Wszyscy prowadzą […] (rozmawiać)."
   correctAnswer: rozmowy
   pointsQuarter: 4
@@ -447,7 +447,7 @@ GRAMMAR_ITEM {
 GRAMMAR_ITEM {
   itemId: certyfikat-polski-B2-2017-grammar-6-4
   testRef: certyfikat-polski-B2-2017-grammar-6
-  questionType: fill_gap
+  questionType: word_formation
   context: "Na temat przyczyn naszego […] (rozwodzić się)."
   correctAnswer: rozwodu
   pointsQuarter: 4
@@ -455,7 +455,7 @@ GRAMMAR_ITEM {
 GRAMMAR_ITEM {
   itemId: certyfikat-polski-B2-2017-grammar-6-5
   testRef: certyfikat-polski-B2-2017-grammar-6
-  questionType: fill_gap
+  questionType: word_formation
   context: "Rośnie we mnie […] (niechętny) do ludzi."
   correctAnswer: "niechęć"
   pointsQuarter: 4

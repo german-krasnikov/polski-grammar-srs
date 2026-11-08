@@ -38,6 +38,11 @@ internal data class ListeningQ(
     val scoredVariants: List<ExamAnswerVariant> = emptyList(),
 ) {
     val answerSlotCount: Int get() = if (answerMode == ExamAnswerMode.UnorderedSet) correctAnswer.split("|").size else 1
+    init {
+        require(type !in setOf(QuestionType.MultipleChoice, QuestionType.Match, QuestionType.Matching) || options.isNotEmpty()) {
+            "Missing options for listening question $id ($type)"
+        }
+    }
 }
 internal data class ListeningExam(val tasks: List<ListeningTask>, val audioUrl: String)
 
@@ -265,7 +270,8 @@ internal class ExamListeningController(examId: String, private val onBack: () ->
                         QuestionType.TrueFalse -> appendChild(trueFalseOptions(q))
                         QuestionType.MultipleChoice -> appendChild(mcOptions(q))
                         QuestionType.FillGap -> appendChild(if (q.answerMode == ExamAnswerMode.UnorderedSet) unorderedFillInputs(q) else fillGapInput(q))
-                        else -> appendChild(mcOptions(q))
+                        QuestionType.Match, QuestionType.Matching -> appendChild(mcOptions(q))
+                        else -> error("Unsupported listening control ${q.type} for ${task.id}/${q.id}")
                     }
                 })
             }

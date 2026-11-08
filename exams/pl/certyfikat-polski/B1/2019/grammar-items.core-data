@@ -92,7 +92,7 @@ GRAMMAR_ITEM {
 GRAMMAR_ITEM {
   itemId: B1-2019-g11
   testRef: B1-2019-grammar-2
-  questionType: fill_gap
+  questionType: word_bank
   context: "Psychologowie twierdzą, ___ kontakt z psem, kotem czy królikiem dobrze wpływa na człowieka i jego samopoczucie."
   correctAnswer: "że"
   pointsQuarter: 2
@@ -100,7 +100,7 @@ GRAMMAR_ITEM {
 GRAMMAR_ITEM {
   itemId: B1-2019-g12
   testRef: B1-2019-grammar-2
-  questionType: fill_gap
+  questionType: word_bank
   context: "Psychologowie twierdzą, że kontakt z psem, kotem ___ królikiem dobrze wpływa na człowieka i jego samopoczucie."
   correctAnswer: czy
   pointsQuarter: 2
@@ -108,7 +108,7 @@ GRAMMAR_ITEM {
 GRAMMAR_ITEM {
   itemId: B1-2019-g13
   testRef: B1-2019-grammar-2
-  questionType: fill_gap
+  questionType: word_bank
   context: "Wydaje się to oczywiste, ___ nie wszyscy o tym wiedzą."
   correctAnswer: lecz
   pointsQuarter: 2
@@ -116,7 +116,7 @@ GRAMMAR_ITEM {
 GRAMMAR_ITEM {
   itemId: B1-2019-g14
   testRef: B1-2019-grammar-2
-  questionType: fill_gap
+  questionType: word_bank
   context: "Wniosek jest prosty: ___ lepiej się czuć, zaproś do swojego domu zwierzę."
   correctAnswer: "żeby"
   pointsQuarter: 2
@@ -124,7 +124,7 @@ GRAMMAR_ITEM {
 GRAMMAR_ITEM {
   itemId: B1-2019-g15
   testRef: B1-2019-grammar-2
-  questionType: fill_gap
+  questionType: word_bank
   context: "Zaproś do swojego domu zwierzę, ___ ono z pewnością poprawi ci nastrój."
   correctAnswer: "ponieważ"
   pointsQuarter: 2
@@ -347,7 +347,7 @@ GRAMMAR_ITEM {
 GRAMMAR_ITEM {
   itemId: B1-2019-g41
   testRef: B1-2019-grammar-8
-  questionType: fill_gap
+  questionType: word_bank
   context: "Badania pokazują, że przeciętny Polak spędza ___ 5 godzin dziennie na oglądaniu telewizji."
   correctAnswer: "około"
   pointsQuarter: 2
@@ -355,7 +355,7 @@ GRAMMAR_ITEM {
 GRAMMAR_ITEM {
   itemId: B1-2019-g42
   testRef: B1-2019-grammar-8
-  questionType: fill_gap
+  questionType: word_bank
   context: "___ tym czasie interesują go głównie programy informacyjne i rozrywkowe."
   correctAnswer: W
   pointsQuarter: 2
@@ -363,7 +363,7 @@ GRAMMAR_ITEM {
 GRAMMAR_ITEM {
   itemId: B1-2019-g43
   testRef: B1-2019-grammar-8
-  questionType: fill_gap
+  questionType: word_bank
   context: "___ nich ogląda filmy fabularne i wiele reklam."
   correctAnswer: "Oprócz"
   pointsQuarter: 2
@@ -371,7 +371,7 @@ GRAMMAR_ITEM {
 GRAMMAR_ITEM {
   itemId: B1-2019-g44
   testRef: B1-2019-grammar-8
-  questionType: fill_gap
+  questionType: word_bank
   context: "___ promowania najpopularniejszych produktów i usług nie ma dziś telewizji."
   correctAnswer: bez
   pointsQuarter: 2
@@ -379,7 +379,7 @@ GRAMMAR_ITEM {
 GRAMMAR_ITEM {
   itemId: B1-2019-g45
   testRef: B1-2019-grammar-8
-  questionType: fill_gap
+  questionType: word_bank
   context: "Coraz dłuższe bloki reklam są emitowane także ___ częściami programu."
   correctAnswer: "między"
   pointsQuarter: 2
@@ -387,7 +387,8 @@ GRAMMAR_ITEM {
 GRAMMAR_ITEM {
   itemId: B1-2019-g46
   testRef: B1-2019-grammar-5
-  questionType: fill_gap
+  questionType: question_formation
+  questionTarget: "z kapusty kiszonej"
   context: "Bigos robi się z kapusty kiszonej. — ___ się robi bigos? — Z kapusty kiszonej."
   correctAnswer: "Z czego"
   pointsQuarter: 2
@@ -395,7 +396,8 @@ GRAMMAR_ITEM {
 GRAMMAR_ITEM {
   itemId: B1-2019-g47
   testRef: B1-2019-grammar-5
-  questionType: fill_gap
+  questionType: question_formation
+  questionTarget: Ewie
   context: "Pożyczyłam Ewie swoją sukienkę. — ___ pożyczyłaś swoją sukienkę? — Ewie."
   correctAnswer: Komu
   pointsQuarter: 2
@@ -403,7 +405,8 @@ GRAMMAR_ITEM {
 GRAMMAR_ITEM {
   itemId: B1-2019-g48
   testRef: B1-2019-grammar-5
-  questionType: fill_gap
+  questionType: question_formation
+  questionTarget: "wiosennymi kwiatami"
   context: "Babcia cieszy się wiosennymi kwiatami. — ___ cieszy się babcia? — Wiosennymi kwiatami."
   correctAnswer: Czym
   pointsQuarter: 2
@@ -411,7 +414,8 @@ GRAMMAR_ITEM {
 GRAMMAR_ITEM {
   itemId: B1-2019-g49
   testRef: B1-2019-grammar-5
-  questionType: fill_gap
+  questionType: question_formation
+  questionTarget: "od zeszłej zimy"
   context: "Planowaliśmy ten wyjazd od zeszłej zimy. — ___ planowaliście ten wyjazd? — Od zeszłej zimy."
   correctAnswer: "Od kiedy"
   pointsQuarter: 2
@@ -419,7 +423,8 @@ GRAMMAR_ITEM {
 GRAMMAR_ITEM {
   itemId: B1-2019-g50
   testRef: B1-2019-grammar-5
-  questionType: fill_gap
+  questionType: question_formation
+  questionTarget: "złotych"
   context: "Pani Ewelina szuka złotych kolczyków. — ___ kolczyków szuka pani Ewelina? — Złotych."
   correctAnswer: Jakich
   pointsQuarter: 2

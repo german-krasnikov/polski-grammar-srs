@@ -1,0 +1,9 @@
+TEST "B1 2019 grammar VIII printed bank" PROFILE playmode
+  open exam="B1 Certyfikat 2019" module="grammar"
+  advance count=50
+  ASSERT grammar.bankTexts == "bez|między|za|przez|w|około|oprócz"
+  chooseBank answer="w" occurrence=1
+  back
+  next
+  ASSERT grammar.bankSelectedText == "w"
+END

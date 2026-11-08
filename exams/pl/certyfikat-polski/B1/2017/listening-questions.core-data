@@ -277,7 +277,7 @@ LISTENING_QUESTION {
 LISTENING_QUESTION {
   questionId: B1-2017-l5-1
   taskRef: certyfikat-polski-B1-2017-listen-5
-  questionType: match
+  questionType: matching
   questionText: "opłata paszportowa w wysokości 30 zł"
   options: "A. paszport dla emerytów i rencistów|B. paszport tymczasowy dla dorosłych|C. paszport dla osób powyżej 70 lat|D. paszport dla dzieci do 7 lat|E. paszport dla dorosłych na 10 lat|F. paszport dla dzieci poniżej 13 lat"
   correctAnswer: "D. paszport dla dzieci do 7 lat"
@@ -286,7 +286,7 @@ LISTENING_QUESTION {
 LISTENING_QUESTION {
   questionId: B1-2017-l5-2
   taskRef: certyfikat-polski-B1-2017-listen-5
-  questionType: match
+  questionType: matching
   questionText: "opłata paszportowa w wysokości 60 zł"
   options: "A. paszport dla emerytów i rencistów|B. paszport tymczasowy dla dorosłych|C. paszport dla osób powyżej 70 lat|D. paszport dla dzieci do 7 lat|E. paszport dla dorosłych na 10 lat|F. paszport dla dzieci poniżej 13 lat"
   correctAnswer: "F. paszport dla dzieci poniżej 13 lat"
@@ -295,7 +295,7 @@ LISTENING_QUESTION {
 LISTENING_QUESTION {
   questionId: B1-2017-l5-3
   taskRef: certyfikat-polski-B1-2017-listen-5
-  questionType: match
+  questionType: matching
   questionText: "opłata paszportowa w wysokości 45 zł"
   options: "A. paszport dla emerytów i rencistów|B. paszport tymczasowy dla dorosłych|C. paszport dla osób powyżej 70 lat|D. paszport dla dzieci do 7 lat|E. paszport dla dorosłych na 10 lat|F. paszport dla dzieci poniżej 13 lat"
   correctAnswer: "B. paszport tymczasowy dla dorosłych"
@@ -304,7 +304,7 @@ LISTENING_QUESTION {
 LISTENING_QUESTION {
   questionId: B1-2017-l5-4
   taskRef: certyfikat-polski-B1-2017-listen-5
-  questionType: match
+  questionType: matching
   questionText: "paszport bez opłaty"
   options: "A. paszport dla emerytów i rencistów|B. paszport tymczasowy dla dorosłych|C. paszport dla osób powyżej 70 lat|D. paszport dla dzieci do 7 lat|E. paszport dla dorosłych na 10 lat|F. paszport dla dzieci poniżej 13 lat"
   correctAnswer: "C. paszport dla osób powyżej 70 lat"
@@ -313,7 +313,7 @@ LISTENING_QUESTION {
 LISTENING_QUESTION {
   questionId: B1-2017-l5-5
   taskRef: certyfikat-polski-B1-2017-listen-5
-  questionType: match
+  questionType: matching
   questionText: "50% ulgi w opłacie paszportowej"
   options: "A. paszport dla emerytów i rencistów|B. paszport tymczasowy dla dorosłych|C. paszport dla osób powyżej 70 lat|D. paszport dla dzieci do 7 lat|E. paszport dla dorosłych na 10 lat|F. paszport dla dzieci poniżej 13 lat"
   correctAnswer: "A. paszport dla emerytów i rencistów"

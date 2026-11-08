@@ -1,24 +1,31 @@
-TEST "B2 2020 conditional word bank uses current answer snapshot" PROFILE playmode
+TEST "B2 2020 printed bank keeps both na and conditional w credit" PROFILE playmode
   open exam="B2 Certyfikat 2020" module="grammar"
-  advance count=15
-  enter text="w"
+  advance count=10
+  ASSERT grammar.bankTexts == "dla|dzięki|na|na|o|od|do|przy|u|w|wokół|wbrew|za"
+  chooseBank answer="na" occurrence=2
+  ASSERT grammar.bankSelectedText == "na"
+  next
+  back
+  ASSERT grammar.bankSelectedId == "certyfikat-polski-B2-2020-grammar-2-bank-4"
+  advance count=5
+  chooseBank answer="w" occurrence=1
   advance count=2
-  enter text="w"
+  chooseBank answer="w" occurrence=1
   advance count=57
   submit
   inspectReview index=18
   ASSERT grammar.reviewStatus == "wrong"
   retry
   advance count=15
-  enter text="w"
+  chooseBank answer="w" occurrence=1
   advance count=2
-  enter text="w"
+  chooseBank answer="w" occurrence=1
   back
   back
-  enter text="inne"
+  chooseBank answer="na" occurrence=1
   next
   next
-  ASSERT exam.input == "w"
+  ASSERT grammar.bankSelectedText == "w"
   advance count=57
   submit
   inspectReview index=18

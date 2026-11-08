@@ -1,0 +1,9 @@
+TEST "B1 Certyfikat 2020 printed grammar bank" PROFILE playmode
+  open exam="B1 Certyfikat 2020" module="grammar"
+  advance count=10
+  ASSERT grammar.bankTexts == "że|oraz|ale|chociaż|czyli|ani|więc"
+  chooseBank answer="że" occurrence=1
+  next
+  back
+  ASSERT grammar.bankSelectedText == "że"
+END

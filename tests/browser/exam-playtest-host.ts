@@ -29,7 +29,7 @@ export async function runExamPlaytest(page: Page, sourceFile: string) {
       const audio = document.querySelector<HTMLAudioElement>('audio');
       const selected = document.querySelector<HTMLElement>('.exam-reading-q .exam-option.selected');
       const review = document.querySelectorAll<HTMLElement>('.exam-review-item');
-      const answer = review.item(10)?.textContent?.match(/\[([^\]]+)\]/)?.[1] ?? '';
+      const answer = review.item((window as Window & { __examReviewIndex?: number }).__examReviewIndex ?? 10)?.textContent?.match(/\[([^\]]+)\]/)?.[1] ?? '';
       const time = document.querySelector('.player-time')?.textContent ?? '';
       const readingRows = [...document.querySelectorAll<HTMLElement>('.exam-reading-q')];
       const firstReading = readingRows[0];
@@ -62,6 +62,11 @@ export async function runExamPlaytest(page: Page, sourceFile: string) {
         'exam.promptImageLoaded': !!image && image.complete && image.naturalWidth > 0,
         'exam.promptImageAlt': image?.alt ?? '',
         'grammar.context': document.querySelector('.exam-context')?.textContent ?? '',
+        'grammar.questionTarget': document.querySelector('.exam-question-target')?.textContent ?? '',
+        'grammar.targetMarked': document.querySelector('.exam-question-target')?.tagName === 'MARK',
+        'grammar.bankTexts': [...document.querySelectorAll<HTMLButtonElement>('.exam-word-bank .exam-option')].map(button => button.textContent).join('|'),
+        'grammar.bankSelectedText': document.querySelector('.exam-word-bank .exam-option.selected')?.textContent ?? '',
+        'grammar.bankSelectedId': document.querySelector('.exam-word-bank .exam-option.selected')?.getAttribute('data-bank-token-id') ?? '',
         'grammar.manualReviewCount': document.querySelectorAll('.exam-review-manual').length,
         'grammar.reviewStatus': inspectedReview?.classList.contains('correct') ? 'correct' : inspectedReview?.classList.contains('partial') ? 'partial' : inspectedReview?.classList.contains('pending') ? 'pending' : inspectedReview?.classList.contains('wrong') ? 'wrong' : '',
         'reading.passageOpening': document.querySelector('.exam-reading-text p')?.textContent?.replace(/^\d+\.\s*/, '').split('.')[0] ?? '',
@@ -262,6 +267,12 @@ export async function runExamPlaytest(page: Page, sourceFile: string) {
     if (matches.length !== 1) throw new Error(`Grammar option ${answer} has ${matches.length} exact matches: ${labels.join('|')}`);
     await options.nth(matches[0]).click();
   });
+  action('chooseBank', [...string('answer'), { name: 'occurrence', type: 'number' }], async args => {
+    const matches = page.locator('.exam-word-bank .exam-option').filter({ hasText: new RegExp(`^${String(args.answer)}$`) });
+    const position = Number(args.occurrence) - 1;
+    if (position < 0 || position >= await matches.count()) throw new Error(`Bank token ${String(args.answer)} occurrence ${String(args.occurrence)} not found`);
+    await matches.nth(position).click();
+  });
   action('chooseReading', [{ name: 'index', type: 'number' }, ...string('answer')], async args => {
     await page.locator('.exam-reading-q').nth(Number(args.index) - 1).getByRole('button', { name: String(args.answer), exact: true }).click();
   });
@@ -312,7 +323,9 @@ export async function runExamPlaytest(page: Page, sourceFile: string) {
     'catalog.b12020Counts': 'string', 'catalog.b22017Counts': 'string', 'catalog.b22019Counts': 'string', 'catalog.b22020Counts': 'string',
     'catalog.b12020Visible': 'bool', 'catalog.b22017Visible': 'bool', 'catalog.b22020Visible': 'bool',
     'exam.promptImageLoaded': 'bool', 'exam.promptImageAlt': 'string',
-    'grammar.context': 'string', 'grammar.manualReviewCount': 'number', 'grammar.reviewStatus': 'string',
+    'grammar.context': 'string', 'grammar.questionTarget': 'string', 'grammar.targetMarked': 'bool',
+    'grammar.bankTexts': 'string', 'grammar.bankSelectedText': 'string', 'grammar.bankSelectedId': 'string',
+    'grammar.manualReviewCount': 'number', 'grammar.reviewStatus': 'string',
     'reading.passageOpening': 'string', 'reading.passageChars': 'number',
     'reading.questionCount': 'number', 'reading.firstQuestion': 'string',
     'reading.firstOptions': 'string', 'reading.genericQuestionCount': 'number',

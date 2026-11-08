@@ -3,6 +3,7 @@ package polski.exam
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import polski.exam.data.b1y2020.GRAMMAR_ANSWER_VARIANT_ROW_ROWS as B1_GRAMMAR_VARIANTS
+import polski.exam.data.b1y2020.GRAMMAR_BANK_TOKEN_ROW_ROWS as B1_GRAMMAR_BANK
 import polski.exam.data.b1y2020.GRAMMAR_ITEM_ROW_ROWS as B1_GRAMMAR_ITEMS
 import polski.exam.data.b1y2020.GRAMMAR_TEST_ROW_ROWS as B1_GRAMMAR_TESTS
 import polski.exam.data.b2y2017.LISTENING_ANSWER_VARIANT_ROW_ROWS as B2_LISTENING_VARIANTS
@@ -11,6 +12,7 @@ import polski.exam.data.oracle.OPEN_ITEM_GROUP_CASE_ROW_ROWS
 import polski.exam.data.oracle.OpenItemGroupCaseRowSection
 import polski.exam.grammar.GrammarExamScorer
 import polski.exam.grammar.GrammarScoredVariant
+import polski.exam.grammar.GrammarBankToken
 
 /** Exercises official open-answer rows through the same mapper and evaluator used by the app. */
 class OpenExamSourceRowsTest {
@@ -28,6 +30,8 @@ class OpenExamSourceRowsTest {
             itemGap = { it.gap }, itemOptions = { it.options },
             itemAnswer = { it.correctAnswer }, itemPoints = { it.points }, itemQuarter = { it.pointsQuarter },
             itemGradingMode = { it.gradingMode?.tag }, variants = grammarVariants,
+            bankTokens = B1_GRAMMAR_BANK.groupBy({ it.testRef }, { GrammarBankToken(it.tokenId, it.position, it.text) }),
+            itemQuestionTarget = { it.questionTarget },
         )
         val listeningVariants = B2_LISTENING_VARIANTS.groupBy(
             keySelector = { it.questionRef },

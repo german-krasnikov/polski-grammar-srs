@@ -1,5 +1,5 @@
 // Generated from dsl/exam.data-contract
-// source-sha256=a57e78c0c7e995774d3b275d965c3ed5eaf230d29d01cb66a06330174c9e816d
+// source-sha256=36cfafebca8fc22dc8a31c76161792ced0b69ac872ae298f7b83376d02344c88
 // Edit the source, then run biome generate.
 
 package polski.exam.data.b2y2019
@@ -9,6 +9,7 @@ enum class ListeningQuestionRowQuestionType(val tag: String) {
     TRUE_FALSE("true_false"),
     FILL_GAP("fill_gap"),
     MATCH("match"),
+    MATCHING("matching"),
 }
 
 enum class ListeningQuestionRowGradingMode(val tag: String) {
@@ -27,6 +28,8 @@ enum class ReadingQuestionRowQuestionType(val tag: String) {
     MATCH_HEADING("match_heading"),
     FILL_GAP("fill_gap"),
     SHORT_ANSWER("short_answer"),
+    GAP_FILL_FRAGMENT("gap_fill_fragment"),
+    MATCHING("matching"),
 }
 
 enum class GrammarItemRowQuestionType(val tag: String) {
@@ -34,6 +37,8 @@ enum class GrammarItemRowQuestionType(val tag: String) {
     FILL_GAP("fill_gap"),
     TRANSFORM("transform"),
     WORD_FORMATION("word_formation"),
+    WORD_BANK("word_bank"),
+    QUESTION_FORMATION("question_formation"),
 }
 
 enum class GrammarItemRowGradingMode(val tag: String) {
@@ -105,6 +110,20 @@ enum class OpenItemGroupCaseRowExpectedUnknownStatus(val tag: String) {
 
 enum class OpenItemGroupCaseRowExpectedBlankStatus(val tag: String) {
     WRONG("wrong"),
+}
+
+enum class QuestionControlCaseRowExpectedKind(val tag: String) {
+    SINGLE_OPTION("single_option"),
+    TEXT("text"),
+    UNORDERED_SET("unordered_set"),
+    BANK_OPTION("bank_option"),
+}
+
+enum class QuestionControlCaseRowExpectedStatus(val tag: String) {
+    CONFIRMED_FULL("confirmed_full"),
+    CONFIRMED_PARTIAL("confirmed_partial"),
+    WRONG("wrong"),
+    PENDING_MANUAL("pending_manual"),
 }
 
 data class ExamRow(
@@ -180,11 +199,19 @@ data class GrammarTestRow(
     val instruction: String,
 )
 
+data class GrammarBankTokenRow(
+    val tokenId: String,
+    val testRef: String,
+    val position: Int,
+    val text: String,
+)
+
 data class GrammarItemRow(
     val itemId: String,
     val testRef: String,
     val questionType: GrammarItemRowQuestionType,
     val context: String,
+    val questionTarget: String? = null,
     val gap: String? = null,
     val options: String? = null,
     val correctAnswer: String,
@@ -323,7 +350,26 @@ data class GrammarConstraintCaseRow(
     val expected8Quarter: Int,
 )
 
-val EXAM_ROW_ROWS: List<ExamRow> = listOf(
+data class BankTokenCaseRow(
+    val id: String,
+    val testId: String,
+    val expectedOrderedTokenText: String,
+    val expectedDuplicateCount: Int,
+)
+
+data class QuestionControlCaseRow(
+    val id: String,
+    val sourceItemId: String,
+    val expectedTag: String,
+    val expectedKind: QuestionControlCaseRowExpectedKind,
+    val expectedOptionCount: Int,
+    val expectedRawAnswer: String,
+    val expectedQuestionTarget: String? = null,
+    val expectedQuarter: Int,
+    val expectedStatus: QuestionControlCaseRowExpectedStatus,
+)
+
+private fun examRowRowsPart0(): List<ExamRow> = listOf(
     ExamRow(
         examId = "certyfikat-polski-B2-2019",
         provider = "certyfikat-polski",
@@ -334,7 +380,9 @@ val EXAM_ROW_ROWS: List<ExamRow> = listOf(
     ),
 )
 
-val LISTENING_TASK_ROW_ROWS: List<ListeningTaskRow> = listOf(
+val EXAM_ROW_ROWS: List<ExamRow> = examRowRowsPart0()
+
+private fun listeningTaskRowRowsPart0(): List<ListeningTaskRow> = listOf(
     ListeningTaskRow(
         taskId = "certyfikat-polski-B2-2019-listen-1",
         examRef = "certyfikat-polski-B2-2019",
@@ -384,7 +432,9 @@ val LISTENING_TASK_ROW_ROWS: List<ListeningTaskRow> = listOf(
     ),
 )
 
-val LISTENING_QUESTION_ROW_ROWS: List<ListeningQuestionRow> = listOf(
+val LISTENING_TASK_ROW_ROWS: List<ListeningTaskRow> = listeningTaskRowRowsPart0()
+
+private fun listeningQuestionRowRowsPart0(): List<ListeningQuestionRow> = listOf(
     ListeningQuestionRow(
         questionId = "certyfikat-polski-B2-2019-listening-1-1",
         taskRef = "certyfikat-polski-B2-2019-listen-1",
@@ -586,7 +636,7 @@ val LISTENING_QUESTION_ROW_ROWS: List<ListeningQuestionRow> = listOf(
     ListeningQuestionRow(
         questionId = "certyfikat-polski-B2-2019-listening-4-1",
         taskRef = "certyfikat-polski-B2-2019-listen-4",
-        questionType = ListeningQuestionRowQuestionType.MATCH,
+        questionType = ListeningQuestionRowQuestionType.MATCHING,
         questionText = "Zatrucie się nią nie musi oznaczać śmierci.",
         options = "A|B|C|D|E",
         correctAnswer = "B",
@@ -595,7 +645,7 @@ val LISTENING_QUESTION_ROW_ROWS: List<ListeningQuestionRow> = listOf(
     ListeningQuestionRow(
         questionId = "certyfikat-polski-B2-2019-listening-4-2",
         taskRef = "certyfikat-polski-B2-2019-listen-4",
-        questionType = ListeningQuestionRowQuestionType.MATCH,
+        questionType = ListeningQuestionRowQuestionType.MATCHING,
         questionText = "Może zabić nawet jej zapach.",
         options = "A|B|C|D|E",
         correctAnswer = "E",
@@ -604,7 +654,7 @@ val LISTENING_QUESTION_ROW_ROWS: List<ListeningQuestionRow> = listOf(
     ListeningQuestionRow(
         questionId = "certyfikat-polski-B2-2019-listening-4-3",
         taskRef = "certyfikat-polski-B2-2019-listen-4",
-        questionType = ListeningQuestionRowQuestionType.MATCH,
+        questionType = ListeningQuestionRowQuestionType.MATCHING,
         questionText = "Pomagała kobietom stać się bardziej atrakcyjnymi.",
         options = "A|B|C|D|E",
         correctAnswer = "B",
@@ -613,7 +663,7 @@ val LISTENING_QUESTION_ROW_ROWS: List<ListeningQuestionRow> = listOf(
     ListeningQuestionRow(
         questionId = "certyfikat-polski-B2-2019-listening-4-4",
         taskRef = "certyfikat-polski-B2-2019-listen-4",
-        questionType = ListeningQuestionRowQuestionType.MATCH,
+        questionType = ListeningQuestionRowQuestionType.MATCHING,
         questionText = "Została wykorzystana w rozgrywkach na szczytach władzy.",
         options = "A|B|C|D|E",
         correctAnswer = "B|D",
@@ -624,7 +674,7 @@ val LISTENING_QUESTION_ROW_ROWS: List<ListeningQuestionRow> = listOf(
     ListeningQuestionRow(
         questionId = "certyfikat-polski-B2-2019-listening-4-5",
         taskRef = "certyfikat-polski-B2-2019-listen-4",
-        questionType = ListeningQuestionRowQuestionType.MATCH,
+        questionType = ListeningQuestionRowQuestionType.MATCHING,
         questionText = "Była używana podczas zdobywania pożywienia.",
         options = "A|B|C|D|E",
         correctAnswer = "D",
@@ -633,7 +683,7 @@ val LISTENING_QUESTION_ROW_ROWS: List<ListeningQuestionRow> = listOf(
     ListeningQuestionRow(
         questionId = "certyfikat-polski-B2-2019-listening-4-6",
         taskRef = "certyfikat-polski-B2-2019-listen-4",
-        questionType = ListeningQuestionRowQuestionType.MATCH,
+        questionType = ListeningQuestionRowQuestionType.MATCHING,
         questionText = "Jest lubianą w Europie rośliną ozdobną.",
         options = "A|B|C|D|E",
         correctAnswer = "C",
@@ -642,7 +692,7 @@ val LISTENING_QUESTION_ROW_ROWS: List<ListeningQuestionRow> = listOf(
     ListeningQuestionRow(
         questionId = "certyfikat-polski-B2-2019-listening-4-7",
         taskRef = "certyfikat-polski-B2-2019-listen-4",
-        questionType = ListeningQuestionRowQuestionType.MATCH,
+        questionType = ListeningQuestionRowQuestionType.MATCHING,
         questionText = "Występuje powszechnie w różnych częściach świata.",
         options = "A|B|C|D|E",
         correctAnswer = "A|E",
@@ -653,7 +703,7 @@ val LISTENING_QUESTION_ROW_ROWS: List<ListeningQuestionRow> = listOf(
     ListeningQuestionRow(
         questionId = "certyfikat-polski-B2-2019-listening-4-8",
         taskRef = "certyfikat-polski-B2-2019-listen-4",
-        questionType = ListeningQuestionRowQuestionType.MATCH,
+        questionType = ListeningQuestionRowQuestionType.MATCHING,
         questionText = "Odpowiednie procesy pozwalają pozbyć się z niej trującej substancji.",
         options = "A|B|C|D|E",
         correctAnswer = "A",
@@ -721,7 +771,9 @@ val LISTENING_QUESTION_ROW_ROWS: List<ListeningQuestionRow> = listOf(
     ),
 )
 
-val READING_PASSAGE_ROW_ROWS: List<ReadingPassageRow> = listOf(
+val LISTENING_QUESTION_ROW_ROWS: List<ListeningQuestionRow> = listeningQuestionRowRowsPart0()
+
+private fun readingPassageRowRowsPart0(): List<ReadingPassageRow> = listOf(
     ReadingPassageRow(
         passageId = "certyfikat-polski-B2-2019-read-1",
         examRef = "certyfikat-polski-B2-2019",
@@ -764,7 +816,9 @@ val READING_PASSAGE_ROW_ROWS: List<ReadingPassageRow> = listOf(
     ),
 )
 
-val READING_QUESTION_ROW_ROWS: List<ReadingQuestionRow> = listOf(
+val READING_PASSAGE_ROW_ROWS: List<ReadingPassageRow> = readingPassageRowRowsPart0()
+
+private fun readingQuestionRowRowsPart0(): List<ReadingQuestionRow> = listOf(
     ReadingQuestionRow(
         questionId = "certyfikat-polski-B2-2019-reading-1-1",
         passageRef = "certyfikat-polski-B2-2019-read-1",
@@ -813,7 +867,7 @@ val READING_QUESTION_ROW_ROWS: List<ReadingQuestionRow> = listOf(
     ReadingQuestionRow(
         questionId = "certyfikat-polski-B2-2019-reading-2-1",
         passageRef = "certyfikat-polski-B2-2019-read-2",
-        questionType = ReadingQuestionRowQuestionType.FILL_GAP,
+        questionType = ReadingQuestionRowQuestionType.GAP_FILL_FRAGMENT,
         questionText = "Fragment do luki [1]",
         options = "A|B|D|E|F|G|H|I|J|K",
         correctAnswer = "H",
@@ -822,7 +876,7 @@ val READING_QUESTION_ROW_ROWS: List<ReadingQuestionRow> = listOf(
     ReadingQuestionRow(
         questionId = "certyfikat-polski-B2-2019-reading-2-2",
         passageRef = "certyfikat-polski-B2-2019-read-2",
-        questionType = ReadingQuestionRowQuestionType.FILL_GAP,
+        questionType = ReadingQuestionRowQuestionType.GAP_FILL_FRAGMENT,
         questionText = "Fragment do luki [2]",
         options = "A|B|D|E|F|G|H|I|J|K",
         correctAnswer = "A",
@@ -831,7 +885,7 @@ val READING_QUESTION_ROW_ROWS: List<ReadingQuestionRow> = listOf(
     ReadingQuestionRow(
         questionId = "certyfikat-polski-B2-2019-reading-2-3",
         passageRef = "certyfikat-polski-B2-2019-read-2",
-        questionType = ReadingQuestionRowQuestionType.FILL_GAP,
+        questionType = ReadingQuestionRowQuestionType.GAP_FILL_FRAGMENT,
         questionText = "Fragment do luki [3]",
         options = "A|B|D|E|F|G|H|I|J|K",
         correctAnswer = "I",
@@ -840,7 +894,7 @@ val READING_QUESTION_ROW_ROWS: List<ReadingQuestionRow> = listOf(
     ReadingQuestionRow(
         questionId = "certyfikat-polski-B2-2019-reading-2-4",
         passageRef = "certyfikat-polski-B2-2019-read-2",
-        questionType = ReadingQuestionRowQuestionType.FILL_GAP,
+        questionType = ReadingQuestionRowQuestionType.GAP_FILL_FRAGMENT,
         questionText = "Fragment do luki [4]",
         options = "A|B|D|E|F|G|H|I|J|K",
         correctAnswer = "D",
@@ -849,7 +903,7 @@ val READING_QUESTION_ROW_ROWS: List<ReadingQuestionRow> = listOf(
     ReadingQuestionRow(
         questionId = "certyfikat-polski-B2-2019-reading-2-5",
         passageRef = "certyfikat-polski-B2-2019-read-2",
-        questionType = ReadingQuestionRowQuestionType.FILL_GAP,
+        questionType = ReadingQuestionRowQuestionType.GAP_FILL_FRAGMENT,
         questionText = "Fragment do luki [5]",
         options = "A|B|D|E|F|G|H|I|J|K",
         correctAnswer = "E",
@@ -858,7 +912,7 @@ val READING_QUESTION_ROW_ROWS: List<ReadingQuestionRow> = listOf(
     ReadingQuestionRow(
         questionId = "certyfikat-polski-B2-2019-reading-2-6",
         passageRef = "certyfikat-polski-B2-2019-read-2",
-        questionType = ReadingQuestionRowQuestionType.FILL_GAP,
+        questionType = ReadingQuestionRowQuestionType.GAP_FILL_FRAGMENT,
         questionText = "Fragment do luki [6]",
         options = "A|B|D|E|F|G|H|I|J|K",
         correctAnswer = "B",
@@ -867,7 +921,7 @@ val READING_QUESTION_ROW_ROWS: List<ReadingQuestionRow> = listOf(
     ReadingQuestionRow(
         questionId = "certyfikat-polski-B2-2019-reading-2-7",
         passageRef = "certyfikat-polski-B2-2019-read-2",
-        questionType = ReadingQuestionRowQuestionType.FILL_GAP,
+        questionType = ReadingQuestionRowQuestionType.GAP_FILL_FRAGMENT,
         questionText = "Fragment do luki [7]",
         options = "A|B|D|E|F|G|H|I|J|K",
         correctAnswer = "G",
@@ -876,7 +930,7 @@ val READING_QUESTION_ROW_ROWS: List<ReadingQuestionRow> = listOf(
     ReadingQuestionRow(
         questionId = "certyfikat-polski-B2-2019-reading-2-8",
         passageRef = "certyfikat-polski-B2-2019-read-2",
-        questionType = ReadingQuestionRowQuestionType.FILL_GAP,
+        questionType = ReadingQuestionRowQuestionType.GAP_FILL_FRAGMENT,
         questionText = "Fragment do luki [8]",
         options = "A|B|D|E|F|G|H|I|J|K",
         correctAnswer = "K",
@@ -885,7 +939,7 @@ val READING_QUESTION_ROW_ROWS: List<ReadingQuestionRow> = listOf(
     ReadingQuestionRow(
         questionId = "certyfikat-polski-B2-2019-reading-2-9",
         passageRef = "certyfikat-polski-B2-2019-read-2",
-        questionType = ReadingQuestionRowQuestionType.FILL_GAP,
+        questionType = ReadingQuestionRowQuestionType.GAP_FILL_FRAGMENT,
         questionText = "Fragment do luki [9]",
         options = "A|B|D|E|F|G|H|I|J|K",
         correctAnswer = "F",
@@ -894,7 +948,7 @@ val READING_QUESTION_ROW_ROWS: List<ReadingQuestionRow> = listOf(
     ReadingQuestionRow(
         questionId = "certyfikat-polski-B2-2019-reading-2-10",
         passageRef = "certyfikat-polski-B2-2019-read-2",
-        questionType = ReadingQuestionRowQuestionType.FILL_GAP,
+        questionType = ReadingQuestionRowQuestionType.GAP_FILL_FRAGMENT,
         questionText = "Fragment do luki [10]",
         options = "A|B|D|E|F|G|H|I|J|K",
         correctAnswer = "J",
@@ -1172,7 +1226,9 @@ val READING_QUESTION_ROW_ROWS: List<ReadingQuestionRow> = listOf(
     ),
 )
 
-val GRAMMAR_TEST_ROW_ROWS: List<GrammarTestRow> = listOf(
+val READING_QUESTION_ROW_ROWS: List<ReadingQuestionRow> = readingQuestionRowRowsPart0()
+
+private fun grammarTestRowRowsPart0(): List<GrammarTestRow> = listOf(
     GrammarTestRow(
         testId = "certyfikat-polski-B2-2019-grammar-1",
         examRef = "certyfikat-polski-B2-2019",
@@ -1223,7 +1279,92 @@ val GRAMMAR_TEST_ROW_ROWS: List<GrammarTestRow> = listOf(
     ),
 )
 
-val GRAMMAR_ITEM_ROW_ROWS: List<GrammarItemRow> = listOf(
+val GRAMMAR_TEST_ROW_ROWS: List<GrammarTestRow> = grammarTestRowRowsPart0()
+
+private fun grammarBankTokenRowRowsPart0(): List<GrammarBankTokenRow> = listOf(
+    GrammarBankTokenRow(
+        tokenId = "certyfikat-polski-B2-2019-grammar-2-bank-1",
+        testRef = "certyfikat-polski-B2-2019-grammar-2",
+        position = 1,
+        text = "ponad",
+    ),
+    GrammarBankTokenRow(
+        tokenId = "certyfikat-polski-B2-2019-grammar-2-bank-2",
+        testRef = "certyfikat-polski-B2-2019-grammar-2",
+        position = 2,
+        text = "przy",
+    ),
+    GrammarBankTokenRow(
+        tokenId = "certyfikat-polski-B2-2019-grammar-2-bank-3",
+        testRef = "certyfikat-polski-B2-2019-grammar-2",
+        position = 3,
+        text = "wbrew",
+    ),
+    GrammarBankTokenRow(
+        tokenId = "certyfikat-polski-B2-2019-grammar-2-bank-4",
+        testRef = "certyfikat-polski-B2-2019-grammar-2",
+        position = 4,
+        text = "na",
+    ),
+    GrammarBankTokenRow(
+        tokenId = "certyfikat-polski-B2-2019-grammar-2-bank-5",
+        testRef = "certyfikat-polski-B2-2019-grammar-2",
+        position = 5,
+        text = "między",
+    ),
+    GrammarBankTokenRow(
+        tokenId = "certyfikat-polski-B2-2019-grammar-2-bank-6",
+        testRef = "certyfikat-polski-B2-2019-grammar-2",
+        position = 6,
+        text = "nad",
+    ),
+    GrammarBankTokenRow(
+        tokenId = "certyfikat-polski-B2-2019-grammar-2-bank-7",
+        testRef = "certyfikat-polski-B2-2019-grammar-2",
+        position = 7,
+        text = "na",
+    ),
+    GrammarBankTokenRow(
+        tokenId = "certyfikat-polski-B2-2019-grammar-2-bank-8",
+        testRef = "certyfikat-polski-B2-2019-grammar-2",
+        position = 8,
+        text = "po",
+    ),
+    GrammarBankTokenRow(
+        tokenId = "certyfikat-polski-B2-2019-grammar-2-bank-9",
+        testRef = "certyfikat-polski-B2-2019-grammar-2",
+        position = 9,
+        text = "o",
+    ),
+    GrammarBankTokenRow(
+        tokenId = "certyfikat-polski-B2-2019-grammar-2-bank-10",
+        testRef = "certyfikat-polski-B2-2019-grammar-2",
+        position = 10,
+        text = "do",
+    ),
+    GrammarBankTokenRow(
+        tokenId = "certyfikat-polski-B2-2019-grammar-2-bank-11",
+        testRef = "certyfikat-polski-B2-2019-grammar-2",
+        position = 11,
+        text = "według",
+    ),
+    GrammarBankTokenRow(
+        tokenId = "certyfikat-polski-B2-2019-grammar-2-bank-12",
+        testRef = "certyfikat-polski-B2-2019-grammar-2",
+        position = 12,
+        text = "z",
+    ),
+    GrammarBankTokenRow(
+        tokenId = "certyfikat-polski-B2-2019-grammar-2-bank-13",
+        testRef = "certyfikat-polski-B2-2019-grammar-2",
+        position = 13,
+        text = "dzięki",
+    ),
+)
+
+val GRAMMAR_BANK_TOKEN_ROW_ROWS: List<GrammarBankTokenRow> = grammarBankTokenRowRowsPart0()
+
+private fun grammarItemRowRowsPart0(): List<GrammarItemRow> = listOf(
     GrammarItemRow(
         itemId = "certyfikat-polski-B2-2019-grammar-1-1",
         testRef = "certyfikat-polski-B2-2019-grammar-1",
@@ -1317,7 +1458,7 @@ val GRAMMAR_ITEM_ROW_ROWS: List<GrammarItemRow> = listOf(
     GrammarItemRow(
         itemId = "certyfikat-polski-B2-2019-grammar-2-1",
         testRef = "certyfikat-polski-B2-2019-grammar-2",
-        questionType = GrammarItemRowQuestionType.FILL_GAP,
+        questionType = GrammarItemRowQuestionType.WORD_BANK,
         context = "Inwestycja została podzielona […] dwa etapy.",
         correctAnswer = "na",
         pointsQuarter = 2,
@@ -1325,7 +1466,7 @@ val GRAMMAR_ITEM_ROW_ROWS: List<GrammarItemRow> = listOf(
     GrammarItemRow(
         itemId = "certyfikat-polski-B2-2019-grammar-2-2",
         testRef = "certyfikat-polski-B2-2019-grammar-2",
-        questionType = GrammarItemRowQuestionType.FILL_GAP,
+        questionType = GrammarItemRowQuestionType.WORD_BANK,
         context = "Oferta przewyższała kwotę planowaną […] 123 mln zł.",
         correctAnswer = "o",
         pointsQuarter = 2,
@@ -1333,7 +1474,7 @@ val GRAMMAR_ITEM_ROW_ROWS: List<GrammarItemRow> = listOf(
     GrammarItemRow(
         itemId = "certyfikat-polski-B2-2019-grammar-2-3",
         testRef = "certyfikat-polski-B2-2019-grammar-2",
-        questionType = GrammarItemRowQuestionType.FILL_GAP,
+        questionType = GrammarItemRowQuestionType.WORD_BANK,
         context = "Powinna kosztować nieco […] 122 mln zł.",
         correctAnswer = "ponad",
         pointsQuarter = 2,
@@ -1341,7 +1482,7 @@ val GRAMMAR_ITEM_ROW_ROWS: List<GrammarItemRow> = listOf(
     GrammarItemRow(
         itemId = "certyfikat-polski-B2-2019-grammar-2-4",
         testRef = "certyfikat-polski-B2-2019-grammar-2",
-        questionType = GrammarItemRowQuestionType.FILL_GAP,
+        questionType = GrammarItemRowQuestionType.WORD_BANK,
         context = "Zostaną zakończone […] 2023 roku.",
         correctAnswer = "do",
         pointsQuarter = 2,
@@ -1349,7 +1490,7 @@ val GRAMMAR_ITEM_ROW_ROWS: List<GrammarItemRow> = listOf(
     GrammarItemRow(
         itemId = "certyfikat-polski-B2-2019-grammar-2-5",
         testRef = "certyfikat-polski-B2-2019-grammar-2",
-        questionType = GrammarItemRowQuestionType.FILL_GAP,
+        questionType = GrammarItemRowQuestionType.WORD_BANK,
         context = "Pierwsze prace – […] nowego planu – rozpoczną się.",
         correctAnswer = "według",
         pointsQuarter = 2,
@@ -1357,7 +1498,7 @@ val GRAMMAR_ITEM_ROW_ROWS: List<GrammarItemRow> = listOf(
     GrammarItemRow(
         itemId = "certyfikat-polski-B2-2019-grammar-2-6",
         testRef = "certyfikat-polski-B2-2019-grammar-2",
-        questionType = GrammarItemRowQuestionType.FILL_GAP,
+        questionType = GrammarItemRowQuestionType.WORD_BANK,
         context = "Rozpoczną się tuż […] długim majowym weekendzie.",
         correctAnswer = "po",
         pointsQuarter = 2,
@@ -1365,7 +1506,7 @@ val GRAMMAR_ITEM_ROW_ROWS: List<GrammarItemRow> = listOf(
     GrammarItemRow(
         itemId = "certyfikat-polski-B2-2019-grammar-2-7",
         testRef = "certyfikat-polski-B2-2019-grammar-2",
-        questionType = GrammarItemRowQuestionType.FILL_GAP,
+        questionType = GrammarItemRowQuestionType.WORD_BANK,
         context = "Tory powstaną […] ulicą Długą a przystankiem.",
         correctAnswer = "między",
         pointsQuarter = 2,
@@ -1373,7 +1514,7 @@ val GRAMMAR_ITEM_ROW_ROWS: List<GrammarItemRow> = listOf(
     GrammarItemRow(
         itemId = "certyfikat-polski-B2-2019-grammar-2-8",
         testRef = "certyfikat-polski-B2-2019-grammar-2",
-        questionType = GrammarItemRowQuestionType.FILL_GAP,
+        questionType = GrammarItemRowQuestionType.WORD_BANK,
         context = "Przystankiem autobusowym […] Politechnice.",
         correctAnswer = "przy",
         pointsQuarter = 2,
@@ -1381,7 +1522,7 @@ val GRAMMAR_ITEM_ROW_ROWS: List<GrammarItemRow> = listOf(
     GrammarItemRow(
         itemId = "certyfikat-polski-B2-2019-grammar-2-9",
         testRef = "certyfikat-polski-B2-2019-grammar-2",
-        questionType = GrammarItemRowQuestionType.FILL_GAP,
+        questionType = GrammarItemRowQuestionType.WORD_BANK,
         context = "Przebudowa wiaduktu […] ulicą Długą.",
         correctAnswer = "nad",
         pointsQuarter = 2,
@@ -1389,7 +1530,7 @@ val GRAMMAR_ITEM_ROW_ROWS: List<GrammarItemRow> = listOf(
     GrammarItemRow(
         itemId = "certyfikat-polski-B2-2019-grammar-2-10",
         testRef = "certyfikat-polski-B2-2019-grammar-2",
-        questionType = GrammarItemRowQuestionType.FILL_GAP,
+        questionType = GrammarItemRowQuestionType.WORD_BANK,
         context = "[…] planowanym pracom miasto zyska połączenie.",
         correctAnswer = "Dzięki",
         pointsQuarter = 2,
@@ -1861,7 +2002,9 @@ val GRAMMAR_ITEM_ROW_ROWS: List<GrammarItemRow> = listOf(
     ),
 )
 
-val GRAMMAR_ANSWER_VARIANT_ROW_ROWS: List<GrammarAnswerVariantRow> = listOf(
+val GRAMMAR_ITEM_ROW_ROWS: List<GrammarItemRow> = grammarItemRowRowsPart0()
+
+private fun grammarAnswerVariantRowRowsPart0(): List<GrammarAnswerVariantRow> = listOf(
     GrammarAnswerVariantRow(
         variantId = "certyfikat-polski-B2-2019-grammar-6-9-alt-1",
         itemRef = "certyfikat-polski-B2-2019-grammar-6-9",
@@ -1906,7 +2049,9 @@ val GRAMMAR_ANSWER_VARIANT_ROW_ROWS: List<GrammarAnswerVariantRow> = listOf(
     ),
 )
 
-val LISTENING_ANSWER_VARIANT_ROW_ROWS: List<ListeningAnswerVariantRow> = listOf(
+val GRAMMAR_ANSWER_VARIANT_ROW_ROWS: List<GrammarAnswerVariantRow> = grammarAnswerVariantRowRowsPart0()
+
+private fun listeningAnswerVariantRowRowsPart0(): List<ListeningAnswerVariantRow> = listOf(
     ListeningAnswerVariantRow(
         variantId = "certyfikat-polski-B2-2019-listening-5-2-alt-1",
         questionRef = "certyfikat-polski-B2-2019-listening-5-2",
@@ -1927,7 +2072,9 @@ val LISTENING_ANSWER_VARIANT_ROW_ROWS: List<ListeningAnswerVariantRow> = listOf(
     ),
 )
 
-val WRITING_TASK_ROW_ROWS: List<WritingTaskRow> = listOf(
+val LISTENING_ANSWER_VARIANT_ROW_ROWS: List<ListeningAnswerVariantRow> = listeningAnswerVariantRowRowsPart0()
+
+private fun writingTaskRowRowsPart0(): List<WritingTaskRow> = listOf(
     WritingTaskRow(
         taskId = "B2-2019-writing-1a",
         examRef = "certyfikat-polski-B2-2019",
@@ -1989,3 +2136,5 @@ val WRITING_TASK_ROW_ROWS: List<WritingTaskRow> = listOf(
         genre = WritingTaskRowGenre.STORY,
     ),
 )
+
+val WRITING_TASK_ROW_ROWS: List<WritingTaskRow> = writingTaskRowRowsPart0()

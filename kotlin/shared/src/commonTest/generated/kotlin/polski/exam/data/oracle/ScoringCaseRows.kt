@@ -1,5 +1,5 @@
 // Generated from dsl/exam.data-contract
-// source-sha256=a57e78c0c7e995774d3b275d965c3ed5eaf230d29d01cb66a06330174c9e816d
+// source-sha256=36cfafebca8fc22dc8a31c76161792ced0b69ac872ae298f7b83376d02344c88
 // Edit the source, then run biome generate.
 
 package polski.exam.data.oracle
@@ -9,6 +9,7 @@ enum class ListeningQuestionRowQuestionType(val tag: String) {
     TRUE_FALSE("true_false"),
     FILL_GAP("fill_gap"),
     MATCH("match"),
+    MATCHING("matching"),
 }
 
 enum class ListeningQuestionRowGradingMode(val tag: String) {
@@ -27,6 +28,8 @@ enum class ReadingQuestionRowQuestionType(val tag: String) {
     MATCH_HEADING("match_heading"),
     FILL_GAP("fill_gap"),
     SHORT_ANSWER("short_answer"),
+    GAP_FILL_FRAGMENT("gap_fill_fragment"),
+    MATCHING("matching"),
 }
 
 enum class GrammarItemRowQuestionType(val tag: String) {
@@ -34,6 +37,8 @@ enum class GrammarItemRowQuestionType(val tag: String) {
     FILL_GAP("fill_gap"),
     TRANSFORM("transform"),
     WORD_FORMATION("word_formation"),
+    WORD_BANK("word_bank"),
+    QUESTION_FORMATION("question_formation"),
 }
 
 enum class GrammarItemRowGradingMode(val tag: String) {
@@ -105,6 +110,20 @@ enum class OpenItemGroupCaseRowExpectedUnknownStatus(val tag: String) {
 
 enum class OpenItemGroupCaseRowExpectedBlankStatus(val tag: String) {
     WRONG("wrong"),
+}
+
+enum class QuestionControlCaseRowExpectedKind(val tag: String) {
+    SINGLE_OPTION("single_option"),
+    TEXT("text"),
+    UNORDERED_SET("unordered_set"),
+    BANK_OPTION("bank_option"),
+}
+
+enum class QuestionControlCaseRowExpectedStatus(val tag: String) {
+    CONFIRMED_FULL("confirmed_full"),
+    CONFIRMED_PARTIAL("confirmed_partial"),
+    WRONG("wrong"),
+    PENDING_MANUAL("pending_manual"),
 }
 
 data class ExamRow(
@@ -180,11 +199,19 @@ data class GrammarTestRow(
     val instruction: String,
 )
 
+data class GrammarBankTokenRow(
+    val tokenId: String,
+    val testRef: String,
+    val position: Int,
+    val text: String,
+)
+
 data class GrammarItemRow(
     val itemId: String,
     val testRef: String,
     val questionType: GrammarItemRowQuestionType,
     val context: String,
+    val questionTarget: String? = null,
     val gap: String? = null,
     val options: String? = null,
     val correctAnswer: String,
@@ -321,6 +348,25 @@ data class GrammarConstraintCaseRow(
     val answer8: String,
     val expected6Quarter: Int,
     val expected8Quarter: Int,
+)
+
+data class BankTokenCaseRow(
+    val id: String,
+    val testId: String,
+    val expectedOrderedTokenText: String,
+    val expectedDuplicateCount: Int,
+)
+
+data class QuestionControlCaseRow(
+    val id: String,
+    val sourceItemId: String,
+    val expectedTag: String,
+    val expectedKind: QuestionControlCaseRowExpectedKind,
+    val expectedOptionCount: Int,
+    val expectedRawAnswer: String,
+    val expectedQuestionTarget: String? = null,
+    val expectedQuarter: Int,
+    val expectedStatus: QuestionControlCaseRowExpectedStatus,
 )
 
 val SCORING_CASE_ROW_ROWS: List<ScoringCaseRow> = listOf(
@@ -906,5 +952,152 @@ val GRAMMAR_CONSTRAINT_CASE_ROW_ROWS: List<GrammarConstraintCaseRow> = listOf(
         answer8 = "",
         expected6Quarter = 2,
         expected8Quarter = 0,
+    ),
+)
+
+val BANK_TOKEN_CASE_ROW_ROWS: List<BankTokenCaseRow> = listOf(
+    BankTokenCaseRow(
+        id = "b1-2017-6",
+        testId = "certyfikat-polski-B1-2017-grammar-6",
+        expectedOrderedTokenText = "a|ale|chociaż|czy|gdyby|i|że",
+        expectedDuplicateCount = 0,
+    ),
+    BankTokenCaseRow(
+        id = "b1-2019-2",
+        testId = "B1-2019-grammar-2",
+        expectedOrderedTokenText = "ponieważ|jeśli|czy|żeby|którzy|że|lecz",
+        expectedDuplicateCount = 0,
+    ),
+    BankTokenCaseRow(
+        id = "b1-2019-8",
+        testId = "B1-2019-grammar-8",
+        expectedOrderedTokenText = "bez|między|za|przez|w|około|oprócz",
+        expectedDuplicateCount = 0,
+    ),
+    BankTokenCaseRow(
+        id = "b1-2020-2",
+        testId = "certyfikat-polski-B1-2020-grammar-2",
+        expectedOrderedTokenText = "że|oraz|ale|chociaż|czyli|ani|więc",
+        expectedDuplicateCount = 0,
+    ),
+    BankTokenCaseRow(
+        id = "b1-2020-8",
+        testId = "certyfikat-polski-B1-2020-grammar-8",
+        expectedOrderedTokenText = "do|w|nad|przed|z|na|w",
+        expectedDuplicateCount = 1,
+    ),
+    BankTokenCaseRow(
+        id = "b2-2017-2",
+        testId = "certyfikat-polski-B2-2017-grammar-2",
+        expectedOrderedTokenText = "z|oprócz|przy|o|około|spośród|do|po|od|na|w|ponad",
+        expectedDuplicateCount = 0,
+    ),
+    BankTokenCaseRow(
+        id = "b2-2019-2",
+        testId = "certyfikat-polski-B2-2019-grammar-2",
+        expectedOrderedTokenText = "ponad|przy|wbrew|na|między|nad|na|po|o|do|według|z|dzięki",
+        expectedDuplicateCount = 1,
+    ),
+    BankTokenCaseRow(
+        id = "b2-2020-2",
+        testId = "certyfikat-polski-B2-2020-grammar-2",
+        expectedOrderedTokenText = "dla|dzięki|na|na|o|od|do|przy|u|w|wokół|wbrew|za",
+        expectedDuplicateCount = 1,
+    ),
+)
+
+val QUESTION_CONTROL_CASE_ROW_ROWS: List<QuestionControlCaseRow> = listOf(
+    QuestionControlCaseRow(
+        id = "b2-2020-bank-full",
+        sourceItemId = "certyfikat-polski-B2-2020-grammar-2-1",
+        expectedTag = "word_bank",
+        expectedKind = QuestionControlCaseRowExpectedKind.BANK_OPTION,
+        expectedOptionCount = 13,
+        expectedRawAnswer = "na",
+        expectedQuarter = 2,
+        expectedStatus = QuestionControlCaseRowExpectedStatus.CONFIRMED_FULL,
+    ),
+    QuestionControlCaseRow(
+        id = "b1-2020-question-formation",
+        sourceItemId = "certyfikat-polski-B1-2020-grammar-5-1",
+        expectedTag = "question_formation",
+        expectedKind = QuestionControlCaseRowExpectedKind.TEXT,
+        expectedOptionCount = 0,
+        expectedRawAnswer = "Czym",
+        expectedQuestionTarget = "widelcem",
+        expectedQuarter = 2,
+        expectedStatus = QuestionControlCaseRowExpectedStatus.CONFIRMED_FULL,
+    ),
+    QuestionControlCaseRow(
+        id = "b1-2017-underlined-target",
+        sourceItemId = "B1-2017-g4-2",
+        expectedTag = "question_formation",
+        expectedKind = QuestionControlCaseRowExpectedKind.TEXT,
+        expectedOptionCount = 0,
+        expectedRawAnswer = "z którym",
+        expectedQuestionTarget = "z tym nowym",
+        expectedQuarter = 2,
+        expectedStatus = QuestionControlCaseRowExpectedStatus.CONFIRMED_FULL,
+    ),
+    QuestionControlCaseRow(
+        id = "b1-2019-underlined-target",
+        sourceItemId = "B1-2019-g47",
+        expectedTag = "question_formation",
+        expectedKind = QuestionControlCaseRowExpectedKind.TEXT,
+        expectedOptionCount = 0,
+        expectedRawAnswer = "Komu",
+        expectedQuestionTarget = "Ewie",
+        expectedQuarter = 2,
+        expectedStatus = QuestionControlCaseRowExpectedStatus.CONFIRMED_FULL,
+    ),
+    QuestionControlCaseRow(
+        id = "b2-2017-derived-word",
+        sourceItemId = "certyfikat-polski-B2-2017-grammar-6-1",
+        expectedTag = "word_formation",
+        expectedKind = QuestionControlCaseRowExpectedKind.TEXT,
+        expectedOptionCount = 0,
+        expectedRawAnswer = "smutek",
+        expectedQuarter = 4,
+        expectedStatus = QuestionControlCaseRowExpectedStatus.CONFIRMED_FULL,
+    ),
+    QuestionControlCaseRow(
+        id = "b2-2020-fragment",
+        sourceItemId = "certyfikat-polski-B2-2020-reading-2-1",
+        expectedTag = "gap_fill_fragment",
+        expectedKind = QuestionControlCaseRowExpectedKind.SINGLE_OPTION,
+        expectedOptionCount = 10,
+        expectedRawAnswer = "E",
+        expectedQuarter = 4,
+        expectedStatus = QuestionControlCaseRowExpectedStatus.CONFIRMED_FULL,
+    ),
+    QuestionControlCaseRow(
+        id = "b2-2017-matching-partial",
+        sourceItemId = "certyfikat-polski-B2-2017-listening-4-1",
+        expectedTag = "matching",
+        expectedKind = QuestionControlCaseRowExpectedKind.UNORDERED_SET,
+        expectedOptionCount = 4,
+        expectedRawAnswer = "1",
+        expectedQuarter = 4,
+        expectedStatus = QuestionControlCaseRowExpectedStatus.CONFIRMED_PARTIAL,
+    ),
+    QuestionControlCaseRow(
+        id = "b2-2020-open-pending",
+        sourceItemId = "certyfikat-polski-B2-2020-listening-5-1",
+        expectedTag = "fill_gap",
+        expectedKind = QuestionControlCaseRowExpectedKind.TEXT,
+        expectedOptionCount = 0,
+        expectedRawAnswer = "nieznany",
+        expectedQuarter = 0,
+        expectedStatus = QuestionControlCaseRowExpectedStatus.PENDING_MANUAL,
+    ),
+    QuestionControlCaseRow(
+        id = "b2-2020-bank-wrong",
+        sourceItemId = "certyfikat-polski-B2-2020-grammar-2-1",
+        expectedTag = "word_bank",
+        expectedKind = QuestionControlCaseRowExpectedKind.BANK_OPTION,
+        expectedOptionCount = 13,
+        expectedRawAnswer = "wbrew",
+        expectedQuarter = 0,
+        expectedStatus = QuestionControlCaseRowExpectedStatus.WRONG,
     ),
 )

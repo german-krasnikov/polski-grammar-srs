@@ -1,6 +1,6 @@
 TEST "B1 exam typed answer and review" PROFILE playmode
   open exam="B1 Certyfikat 2019" module="grammar"
-  advance count=10
+  advance count=20
   enter text="żółć"
   ASSERT exam.input == "żółć"
   ASSERT exam.focused == true
@@ -15,8 +15,9 @@ TEST "B1 exam typed answer and review" PROFILE playmode
   next
   back
   ASSERT exam.input == "żółąć"
-  advance count=44
+  advance count=34
   submit
   ASSERT exam.score == "0%"
+  inspectReview index=21
   ASSERT exam.reviewAnswer == "żółąć"
 END

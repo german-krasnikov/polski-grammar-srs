@@ -10,7 +10,13 @@ import polski.exam.exactAnswerQuarter
 import polski.exam.formatQuarterPoints
 
 internal data class ReadingPassage(val id: String, val instruction: String, val text: String)
-internal data class ReadingQuestion(val id: String, val passageId: String, val type: QuestionType, val questionText: String, val options: List<String>, val correctAnswer: String, val pointsQuarter: Int = 4)
+internal data class ReadingQuestion(val id: String, val passageId: String, val type: QuestionType, val questionText: String, val options: List<String>, val correctAnswer: String, val pointsQuarter: Int = 4) {
+    init {
+        require(type !in setOf(QuestionType.MultipleChoice, QuestionType.MatchHeading, QuestionType.Matching, QuestionType.GapFillFragment) || options.isNotEmpty()) {
+            "Missing options for $passageId/$id ($type)"
+        }
+    }
+}
 internal data class ReadingExam(val passages: List<ReadingPassage>, val questions: List<ReadingQuestion>)
 
 internal class ExamReadingController(examId: String, private val onBack: () -> Unit) {
@@ -67,7 +73,7 @@ internal class ExamReadingController(examId: String, private val onBack: () -> U
                                 }
                             })
                         }
-                        QuestionType.FillGap -> {
+                        QuestionType.FillGap, QuestionType.ShortAnswer -> {
                             if (q.options.isNotEmpty()) {
                                 appendChild(node("div", "exam-options").apply {
                                     q.options.forEach { opt ->
@@ -89,7 +95,7 @@ internal class ExamReadingController(examId: String, private val onBack: () -> U
                                 })
                             }
                         }
-                        else -> {
+                        QuestionType.MultipleChoice, QuestionType.MatchHeading, QuestionType.Matching, QuestionType.GapFillFragment -> {
                             appendChild(node("div", "exam-options").apply {
                                 q.options.forEach { opt ->
                                     appendChild((document.createElement("button") as HTMLButtonElement).apply {
@@ -101,6 +107,7 @@ internal class ExamReadingController(examId: String, private val onBack: () -> U
                                 }
                             })
                         }
+                        else -> error("Unsupported reading control ${q.type} for ${passage.id}/${q.id}")
                     }
                 })
             }

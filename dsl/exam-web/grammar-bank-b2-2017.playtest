@@ -1,0 +1,9 @@
+TEST "B2 Certyfikat 2017 printed grammar bank" PROFILE playmode
+  open exam="B2 Certyfikat 2017" module="grammar"
+  advance count=10
+  ASSERT grammar.bankTexts == "z|oprócz|przy|o|około|spośród|do|po|od|na|w|ponad"
+  chooseBank answer="z" occurrence=1
+  next
+  back
+  ASSERT grammar.bankSelectedText == "z"
+END

@@ -1,0 +1,10 @@
+TEST "B2 2020 printed reading fragments preserve labels and selection" PROFILE playmode
+  open exam="B2 Certyfikat 2020" module="reading"
+  next
+  ASSERT reading.firstOptions == "A|B|D|E|F|G|H|I|J|K"
+  chooseReading index=1 answer="E"
+  ASSERT reading.selectedFirst == "E"
+  back
+  next
+  ASSERT reading.selectedFirst == "E"
+END

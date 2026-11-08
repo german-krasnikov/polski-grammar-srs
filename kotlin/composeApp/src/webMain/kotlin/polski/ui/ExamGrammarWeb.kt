@@ -15,8 +15,13 @@ internal class ExamGrammarController(examId: String, private val onBack: () -> U
     private val instructionsByItemId = tests.flatMap { test ->
         test.items.map { item -> item.itemId to test.instruction }
     }.toMap()
+    private val bankByItemId = tests.flatMap { test ->
+        test.items.map { item -> item.itemId to test.bankTokens }
+    }.toMap()
+    private val selectedBankTokenByItemId = mutableMapOf<String, String>()
     private var state = run {
-        val merged = GrammarTest(examId, tests.firstOrNull()?.instruction ?: "", tests.flatMap { it.items })
+        val mergedBank = tests.flatMap { it.bankTokens }.mapIndexed { index, token -> token.copy(position = index + 1) }
+        val merged = GrammarTest(examId, tests.firstOrNull()?.instruction ?: "", tests.flatMap { it.items }, mergedBank)
         GrammarExamState(test = merged)
     }
     private var root: HTMLElement? = null
@@ -45,7 +50,9 @@ internal class ExamGrammarController(examId: String, private val onBack: () -> U
         c.querySelectorAll(".exam-option").let { nodes ->
             for (i in 0 until nodes.length) {
                 val btn = nodes.item(i) as? HTMLButtonElement ?: continue
-                val isSelected = card.item.options.getOrNull(i)?.let { it == card.currentAnswer } == true
+                val bankId = btn.getAttribute("data-bank-token-id")
+                val isSelected = if (bankId != null) selectedBankTokenByItemId[card.item.itemId] == bankId
+                    else card.item.options.getOrNull(i)?.let { it == card.currentAnswer } == true
                 btn.className = if (isSelected) "exam-option selected" else "exam-option"
             }
         }
@@ -76,7 +83,32 @@ internal class ExamGrammarController(examId: String, private val onBack: () -> U
                 appendChild(node("span", text = parts[1]))
             } else textContent = card.item.context
         })
-        if (card.item.options.isNotEmpty()) {
+        card.item.questionTarget?.let { target ->
+            c.appendChild(node("mark", "exam-question-target", target).apply { setAttribute("lang", "pl") })
+        }
+        when (card.item.questionType) {
+        QuestionType.WordBank -> {
+            val bank = bankByItemId.getValue(card.item.itemId)
+            require(bank.isNotEmpty()) { "Missing bank for ${card.item.itemId}" }
+            c.appendChild(node("div", "exam-options exam-word-bank").apply {
+                bank.forEach { token ->
+                    val occurrence = bank.count { it.position <= token.position && it.text == token.text }
+                    appendChild((document.createElement("button") as HTMLButtonElement).apply {
+                        type = "button"
+                        className = if (selectedBankTokenByItemId[card.item.itemId] == token.tokenId) "exam-option selected" else "exam-option"
+                        textContent = token.text
+                        setAttribute("data-bank-token-id", token.tokenId)
+                        setAttribute("aria-label", "${token.text}, $occurrence")
+                        addEventListener("click", {
+                            selectedBankTokenByItemId[card.item.itemId] = token.tokenId
+                            dispatch(GrammarExamAction.Answer(card.item.itemId, token.text))
+                        })
+                    })
+                }
+            })
+        }
+        QuestionType.ChooseForm -> {
+            require(card.item.options.isNotEmpty()) { "Missing options for ${card.item.itemId}" }
             c.appendChild(node("div", "exam-options").apply {
                 card.item.options.forEachIndexed { i, opt ->
                     appendChild((document.createElement("button") as HTMLButtonElement).apply {
@@ -87,7 +119,8 @@ internal class ExamGrammarController(examId: String, private val onBack: () -> U
                     })
                 }
             })
-        } else {
+        }
+        QuestionType.FillGap, QuestionType.Transform, QuestionType.WordFormation, QuestionType.QuestionFormation -> {
             val input = (document.createElement("input") as HTMLInputElement).apply {
                 type = "text"; id = "exam-grammar-input"; className = "exam-input"; placeholder = "Wpisz odpowiedź..."
                 value = card.currentAnswer
@@ -97,6 +130,8 @@ internal class ExamGrammarController(examId: String, private val onBack: () -> U
             }
             inputRef = input
             c.appendChild(node("div", "exam-input-wrap").apply { appendChild(input) })
+        }
+        else -> error("Unsupported grammar control ${card.item.questionType} for ${card.item.itemId}")
         }
         c.appendChild(node("div", "exam-nav").apply {
             if (!card.isFirst) appendChild(navBtn("← Назад") { dispatch(GrammarExamAction.Previous) })
@@ -144,7 +179,7 @@ internal class ExamGrammarController(examId: String, private val onBack: () -> U
             appendChild(navBtn("← К модулям") { onBack() })
             appendChild(node("span", "exam-nav-spacer"))
             appendChild(navBtn(UiCopy.TryAgain, primary = true) {
-                state = GrammarExamState(test = state.test); inputRef = null; redraw()
+                state = GrammarExamState(test = state.test); selectedBankTokenByItemId.clear(); inputRef = null; redraw()
             })
         })
     }

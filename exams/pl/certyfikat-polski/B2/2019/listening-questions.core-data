@@ -202,7 +202,7 @@ LISTENING_QUESTION {
 LISTENING_QUESTION {
   questionId: certyfikat-polski-B2-2019-listening-4-1
   taskRef: certyfikat-polski-B2-2019-listen-4
-  questionType: match
+  questionType: matching
   questionText: "Zatrucie się nią nie musi oznaczać śmierci."
   options: "A|B|C|D|E"
   correctAnswer: B
@@ -211,7 +211,7 @@ LISTENING_QUESTION {
 LISTENING_QUESTION {
   questionId: certyfikat-polski-B2-2019-listening-4-2
   taskRef: certyfikat-polski-B2-2019-listen-4
-  questionType: match
+  questionType: matching
   questionText: "Może zabić nawet jej zapach."
   options: "A|B|C|D|E"
   correctAnswer: E
@@ -220,7 +220,7 @@ LISTENING_QUESTION {
 LISTENING_QUESTION {
   questionId: certyfikat-polski-B2-2019-listening-4-3
   taskRef: certyfikat-polski-B2-2019-listen-4
-  questionType: match
+  questionType: matching
   questionText: "Pomagała kobietom stać się bardziej atrakcyjnymi."
   options: "A|B|C|D|E"
   correctAnswer: B
@@ -229,7 +229,7 @@ LISTENING_QUESTION {
 LISTENING_QUESTION {
   questionId: certyfikat-polski-B2-2019-listening-4-4
   taskRef: certyfikat-polski-B2-2019-listen-4
-  questionType: match
+  questionType: matching
   questionText: "Została wykorzystana w rozgrywkach na szczytach władzy."
   options: "A|B|C|D|E"
   correctAnswer: "B|D"
@@ -240,7 +240,7 @@ LISTENING_QUESTION {
 LISTENING_QUESTION {
   questionId: certyfikat-polski-B2-2019-listening-4-5
   taskRef: certyfikat-polski-B2-2019-listen-4
-  questionType: match
+  questionType: matching
   questionText: "Była używana podczas zdobywania pożywienia."
   options: "A|B|C|D|E"
   correctAnswer: D
@@ -249,7 +249,7 @@ LISTENING_QUESTION {
 LISTENING_QUESTION {
   questionId: certyfikat-polski-B2-2019-listening-4-6
   taskRef: certyfikat-polski-B2-2019-listen-4
-  questionType: match
+  questionType: matching
   questionText: "Jest lubianą w Europie rośliną ozdobną."
   options: "A|B|C|D|E"
   correctAnswer: C
@@ -258,7 +258,7 @@ LISTENING_QUESTION {
 LISTENING_QUESTION {
   questionId: certyfikat-polski-B2-2019-listening-4-7
   taskRef: certyfikat-polski-B2-2019-listen-4
-  questionType: match
+  questionType: matching
   questionText: "Występuje powszechnie w różnych częściach świata."
   options: "A|B|C|D|E"
   correctAnswer: "A|E"
@@ -269,7 +269,7 @@ LISTENING_QUESTION {
 LISTENING_QUESTION {
   questionId: certyfikat-polski-B2-2019-listening-4-8
   taskRef: certyfikat-polski-B2-2019-listen-4
-  questionType: match
+  questionType: matching
   questionText: "Odpowiednie procesy pozwalają pozbyć się z niej trującej substancji."
   options: "A|B|C|D|E"
   correctAnswer: A
