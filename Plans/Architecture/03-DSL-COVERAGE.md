@@ -144,6 +144,8 @@ genderOf(nounId) == "m-personal" && nomSingularOf(nounId).endsWith("a") -> "pers
 
 ### 3.5. Тестовые оракулы - главная возможность по местам правки
 
+Обновление 2026-11-08: `SchedulerExpandedTest` перенесён в 70 строк-записей `.core-data` и 85 строк Kotlin-потребителя; `biome.project` включает генерацию и проверку свежести. Ожидания сохранены из прежнего зафиксированного оракула. Числа ниже относятся к исходному аудиту, текущие проверки и открытые gates — в [evidence](SCHEDULER-DSL-ORACLE-EVIDENCE.md).
+
 Факты:
 - Тесты = 19 467 строк (51%). `GrammarParityTest` 2 069, `SchedulerExpandedTest` 1 144, `TrainingParityTest` 636, `SchedulerOracleTest` 403, `TrainingParityEnTest` 496.
 - Четыре Python-генератора (`grammar` 107, `progress` 69, `training` 84, `srs` 31 = 291 строка) печатают Kotlin-ассерты из JSON-фикстур `tests/fixtures/kotlin-parity/*.json`.

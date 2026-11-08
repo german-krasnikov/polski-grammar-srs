@@ -1,0 +1,33 @@
+DSL 1
+# Scheduler expanded oracle: 70 cases from ts-fsrs 5.4.2 (P4: test expectations as data).
+# Each row captures input card + rating → expected preview intervals + expected output card.
+RECORD SchedulerExpandedCaseRow KEY id COUNT 1..
+  id: string
+  at: string
+  rating: int
+  fuzzEnabled: bool
+  srcDue: string
+  srcStability: string
+  srcDifficulty: string
+  srcElapsed: int
+  srcScheduled: int
+  srcReps: int
+  srcLapses: int
+  srcSteps: int
+  srcState: int
+  srcLastReview: string OPTIONAL
+  previewAgain: string
+  previewHard: string
+  previewGood: string
+  previewEasy: string
+  expDue: string
+  expStability: string
+  expDifficulty: string
+  expElapsed: int
+  expScheduled: int
+  expReps: int
+  expLapses: int
+  expSteps: int
+  expState: int
+  expLastReview: string
+END

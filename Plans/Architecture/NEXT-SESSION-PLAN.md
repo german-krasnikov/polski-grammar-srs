@@ -2,6 +2,8 @@
 
 Дата: 2026-11-08. 51 коммит за сессию, все сборки GREEN.
 
+Продолжение 2026-11-08: исторический GREEN выше не заменяет текущие проверки. Работа идёт по [плану исполнения](NEXT-SESSION-EXECUTION.md) и [уточнению контракта B1/2017](B1-2017-CONTRACT-ADDENDUM.md). Сверка B1/2017 выявила повреждённые извлечённые ответы, дробные веса и комплекты письменных заданий; сдача требует восстановления по PDF, а не только подключения генерации. Scheduler DSL-перенос реализован, независимые gates отражаются в [evidence](SCHEDULER-DSL-ORACLE-EVIDENCE.md).
+
 ## Выполнено
 
 ### DSL-миграция (Phase 0-1-2)
@@ -39,9 +41,9 @@
    - Whisper timestamps для аудио
    - GENERATE steps в biome.project
    
-2. **SchedulerExpandedTest → DSL oracle** — 1144→~50 строк (429 assertions → .core-data)
-   - Contract `scheduler-expanded.data-contract` уже спроектирован
-   - Начат но прерван
+2. **SchedulerExpandedTest → DSL oracle — завершено** (1144→85 строк Kotlin)
+   - Реализовано: 70 сохранённых случаев → `.core-data`, типизированный генерат, 85 строк Kotlin-потребителя
+   - Frozen-oracle audit, намеренно неверное ожидание RED → восстановление GREEN, `generate --check`: PASS; независимая сверка 70 случаев и JVM-проверка: PASS; независимое ревью: APPROVED. JS/Wasm scheduler checks: NOT RUN; см. evidence выше
 
 3. **Exam UI баги**:
    - Focus loss при вводе текста (fix сделан но проверить)
