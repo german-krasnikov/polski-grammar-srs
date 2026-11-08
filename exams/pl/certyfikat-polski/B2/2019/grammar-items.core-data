@@ -1,113 +1,631 @@
 DSL 1
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2019-g1"
+  itemId: "B2-2019-g1-q1"
+  testRef: "certyfikat-polski-B2-2019-grammar-1"
+  questionType: choose_form
+  context: "Drogi Uzytkowniku! Przy zakupie naszego sprzetu otrzymasz gwarancje ___ Cie do przestrzegania ponizszej instrukcji."
+  options: "obowiazujac|zobowiazujaca|zobowiazana"
+  correctAnswer: "zobowiazujaca"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B2-2019-g1-q2"
+  testRef: "certyfikat-polski-B2-2019-grammar-1"
+  questionType: choose_form
+  context: "Przed podaczeniem drukarki do pradu upewnij sie, ze kabel nie jest ___"
+  options: "uszkadzajacy|uszkodzony|uszkadzajac"
+  correctAnswer: "uszkodzony"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B2-2019-g1-q3"
+  testRef: "certyfikat-polski-B2-2019-grammar-1"
+  questionType: choose_form
+  context: "a w gniazdku jest napiecie ___ w instrukcji."
+  options: "wskazujac|wskazujace|wskazane"
+  correctAnswer: "wskazane"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B2-2019-g1-q4"
+  testRef: "certyfikat-polski-B2-2019-grammar-1"
+  questionType: choose_form
+  context: "Pamietaj, ze ___ wiele urzadzen do jednego zroda pradu, mozesz spowodowac jego przeciazenie."
+  options: "podaczajac|podaczajace|podaczane"
+  correctAnswer: "podaczajac"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B2-2019-g1-q5"
+  testRef: "certyfikat-polski-B2-2019-grammar-1"
+  questionType: choose_form
+  context: "Chron urzadzenie przed czynnikami ___ jej przegrzanie, a nawet pozar."
+  options: "spowodowanymi|powodujacymi|powodujac"
+  correctAnswer: "powodujacymi"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B2-2019-g1-q6"
+  testRef: "certyfikat-polski-B2-2019-grammar-1"
+  questionType: choose_form
+  context: "a takze nie obsuguj ___ sprzetu mokrymi rekami."
+  options: "waczajacego|waczonego|waczajac"
+  correctAnswer: "waczonego"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B2-2019-g1-q7"
+  testRef: "certyfikat-polski-B2-2019-grammar-1"
+  questionType: choose_form
+  context: "Pamietaj, ___ za kabel, mozesz go urwac, a takze uszkodzic cae urzadzenie."
+  options: "pociagniety|pociagajacy|pociagajac"
+  correctAnswer: "pociagajac"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B2-2019-g1-q8"
+  testRef: "certyfikat-polski-B2-2019-grammar-1"
+  questionType: choose_form
+  context: "___ w mieszkaniu odpowiednia poke"
+  options: "Wybierajac|Wybierajace|Wybrane"
+  correctAnswer: "Wybierajac"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B2-2019-g1-q9"
+  testRef: "certyfikat-polski-B2-2019-grammar-1"
+  questionType: choose_form
+  context: "___ na miejsce dla Twojej drukarki, upewnij sie, ze jest ona stabilna."
+  options: "przeznaczajaca|przeznaczajac|przeznaczona"
+  correctAnswer: "przeznaczona"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B2-2019-g1-q10"
+  testRef: "certyfikat-polski-B2-2019-grammar-1"
+  questionType: choose_form
+  context: "skontaktuj sie ze sprzedawca lub punktem ___ serwis urzadzen tego typu."
+  options: "oferowanym|oferujac|oferujacym"
+  correctAnswer: "oferujacym"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B2-2019-g2-q1"
   testRef: "certyfikat-polski-B2-2019-grammar-2"
   questionType: fill_gap
-  context: "Zadanie II, pytanie 1"
-  correctAnswer: "Wyrazy zbędne"
+  context: "Caa inwestycja juz rok temu zostaa podzielona ___ dwa etapy."
+  correctAnswer: "na"
   points: 1
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2019-g2"
+  itemId: "B2-2019-g2-q2"
   testRef: "certyfikat-polski-B2-2019-grammar-2"
   questionType: fill_gap
-  context: "Zadanie II, pytanie 2"
-  correctAnswer: "wbrew"
+  context: "Stao sie tak dlatego, ze najtansza oferta dotyczaca caosci przewyzszaa kwote planowana przez miasto ___ 123 mln z."
+  correctAnswer: "o"
   points: 1
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2019-g3"
+  itemId: "B2-2019-g2-q3"
   testRef: "certyfikat-polski-B2-2019-grammar-2"
   questionType: fill_gap
-  context: "Zadanie II, pytanie 3"
-  correctAnswer: "z"
+  context: "Dzis realizacja pierwszego etapu powinna kosztowac nieco ___ 122 mln z,"
+  correctAnswer: "ponad"
   points: 1
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2019-g4"
+  itemId: "B2-2019-g2-q4"
+  testRef: "certyfikat-polski-B2-2019-grammar-2"
+  questionType: fill_gap
+  context: "a roboty powinny zostac zakonczone ___ 2023 roku."
+  correctAnswer: "do"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B2-2019-g2-q5"
+  testRef: "certyfikat-polski-B2-2019-grammar-2"
+  questionType: fill_gap
+  context: "Pierwsze prace - ___ nowego planu -"
+  correctAnswer: "wedug"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B2-2019-g2-q6"
+  testRef: "certyfikat-polski-B2-2019-grammar-2"
+  questionType: fill_gap
+  context: "rozpoczna sie tuz ___ dugim majowym weekendzie."
+  correctAnswer: "po"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B2-2019-g2-q7"
+  testRef: "certyfikat-polski-B2-2019-grammar-2"
+  questionType: fill_gap
+  context: "nowe tory tramwajowe powstana ___ ulica Duga a przystankiem autobusowym"
+  correctAnswer: "miedzy"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B2-2019-g2-q8"
+  testRef: "certyfikat-polski-B2-2019-grammar-2"
+  questionType: fill_gap
+  context: "___ Politechnice."
+  correctAnswer: "przy"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B2-2019-g2-q9"
+  testRef: "certyfikat-polski-B2-2019-grammar-2"
+  questionType: fill_gap
+  context: "Najwazniejsza i najtrudniejsza bedzie jednak przebudowa wiaduktu ___ ulica Duga."
+  correctAnswer: "nad"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B2-2019-g2-q10"
+  testRef: "certyfikat-polski-B2-2019-grammar-2"
+  questionType: fill_gap
+  context: "___ planowanym pracom zachodnia czesc miasta zyska nowe, wazne poaczenie."
+  correctAnswer: "Dzieki"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B2-2019-g3-q1"
+  testRef: "certyfikat-polski-B2-2019-grammar-3"
+  questionType: choose_form
+  context: "nieczystosci wciaz ___ na ulice lub do rzek."
+  options: ""
+  correctAnswer: "wylewao sie"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B2-2019-g3-q2"
+  testRef: "certyfikat-polski-B2-2019-grammar-3"
+  questionType: choose_form
+  context: "co roku w miescie ___ wiele tysiecy zachorowan na cholere czy czerwonke."
+  options: ""
+  correctAnswer: "odnotowywano"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B2-2019-g3-q3"
+  testRef: "certyfikat-polski-B2-2019-grammar-3"
+  questionType: choose_form
+  context: "scieki z fabryk wokienniczych, ktore nieprzerwanie ___ do odzkich rzek i rzeczek."
+  options: ""
+  correctAnswer: "odprowadzano"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B2-2019-g3-q4"
+  testRef: "certyfikat-polski-B2-2019-grammar-3"
+  questionType: choose_form
+  context: "w 1924 roku do Warszawy ___ analize stanu sanitarnego miasta"
+  options: ""
+  correctAnswer: "wysano"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B2-2019-g3-q5"
+  testRef: "certyfikat-polski-B2-2019-grammar-3"
+  questionType: choose_form
+  context: "Decyzja o jej rozpoczeciu ___ natychmiast po lekturze raportu."
+  options: ""
+  correctAnswer: "zostaa podjeta"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B2-2019-g3-q6"
+  testRef: "certyfikat-polski-B2-2019-grammar-3"
+  questionType: choose_form
+  context: "Prace przy budowie ___ ostatecznie Stefanowi Skrzywanie."
+  options: ""
+  correctAnswer: "powierzono"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B2-2019-g3-q7"
+  testRef: "certyfikat-polski-B2-2019-grammar-3"
+  questionType: choose_form
+  context: "wode ___ juz ze studni gebinowych,"
+  options: ""
+  correctAnswer: "pobierao sie"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B2-2019-g3-q8"
+  testRef: "certyfikat-polski-B2-2019-grammar-3"
+  questionType: choose_form
+  context: "a odzianie ___ przez stukilometrowa siec wodociagowa."
+  options: ""
+  correctAnswer: "byli obsugiwani"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B2-2019-g3-q9"
+  testRef: "certyfikat-polski-B2-2019-grammar-3"
+  questionType: choose_form
+  context: "juz niebawem ___ specjalny komiks poswiecony dramatycznym warunkom sanitarnym"
+  options: ""
+  correctAnswer: "zostanie zaprezentowany"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B2-2019-g3-q10"
+  testRef: "certyfikat-polski-B2-2019-grammar-3"
+  questionType: choose_form
+  context: "Komiks ten ___ na ekranach miejskich autobusow przez najblizszych kilka miesiecy."
+  options: ""
+  correctAnswer: "bedzie wyswietlany"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B2-2019-g4-q1"
+  testRef: "certyfikat-polski-B2-2019-grammar-4"
+  questionType: fill_gap
+  context: "Konferencja bedzie miaa miejsce w ___ (centrum)"
+  correctAnswer: "centrum"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B2-2019-g4-q2"
+  testRef: "certyfikat-polski-B2-2019-grammar-4"
+  questionType: fill_gap
+  context: "___ (kongresowe)"
+  correctAnswer: "kongresowym"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B2-2019-g4-q3"
+  testRef: "certyfikat-polski-B2-2019-grammar-4"
+  questionType: fill_gap
+  context: "a wykady otwarte dla szerokiej publicznosci wygosza ___ (znany)"
+  correctAnswer: "znani"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B2-2019-g4-q4"
+  testRef: "certyfikat-polski-B2-2019-grammar-4"
+  questionType: fill_gap
+  context: "___ (dietetyk)"
+  correctAnswer: "dietetycy"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B2-2019-g4-q5"
+  testRef: "certyfikat-polski-B2-2019-grammar-4"
+  questionType: fill_gap
+  context: "Nie zabraknie tez ___ (doswiadczony)"
+  correctAnswer: "doswiadczonych"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B2-2019-g4-q6"
+  testRef: "certyfikat-polski-B2-2019-grammar-4"
+  questionType: fill_gap
+  context: "___ (pediatra) z wielu osrodkow krajowych i zagranicznych."
+  correctAnswer: "pediatrow"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B2-2019-g4-q7"
+  testRef: "certyfikat-polski-B2-2019-grammar-4"
+  questionType: fill_gap
+  context: "Chyba ___ (nikt) nie trzeba tumaczyc, jak wazna dla zdrowego rozwoju dziecka jest zbilansowana dieta."
+  correctAnswer: "nikomu"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B2-2019-g4-q8"
+  testRef: "certyfikat-polski-B2-2019-grammar-4"
+  questionType: fill_gap
+  context: "to nas, ___ (dorosy), trzeba przekonywac,"
+  correctAnswer: "dorosych"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B2-2019-g4-q9"
+  testRef: "certyfikat-polski-B2-2019-grammar-4"
+  questionType: fill_gap
+  context: "zebysmy uczyli ___ (ono) prawidowego odzywiania sie"
+  correctAnswer: "je"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B2-2019-g4-q10"
+  testRef: "certyfikat-polski-B2-2019-grammar-4"
+  questionType: fill_gap
+  context: "jak ___ (one) przygotowywac, zeby szybko i bez problemu znikay z talerza"
+  correctAnswer: "je"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B2-2019-g5-q1"
   testRef: "certyfikat-polski-B2-2019-grammar-5"
-  questionType: fill_gap
-  context: "Zadanie V, pytanie 4"
-  correctAnswer: "TEST PRZYKŁADOWY"
+  questionType: choose_form
+  context: "jego ___ (trzech/trzy/trzej)"
+  options: ""
+  correctAnswer: "trzej"
   points: 1
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2019-g5"
+  itemId: "B2-2019-g5-q2"
   testRef: "certyfikat-polski-B2-2019-grammar-5"
-  questionType: fill_gap
-  context: "Zadanie V, pytanie 5"
-  correctAnswer: "POZIOM B"
+  questionType: choose_form
+  context: "___ (braci/bracia/braciom) musieli opuscic dwor"
+  options: ""
+  correctAnswer: "bracia"
   points: 1
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2019-g6"
+  itemId: "B2-2019-g5-q3"
   testRef: "certyfikat-polski-B2-2019-grammar-5"
-  questionType: fill_gap
-  context: "Zadanie V, pytanie 6"
-  correctAnswer: "TRANSKRYPCJE I KLUCZ DO ZADAŃ"
+  questionType: choose_form
+  context: "dzieki ___ (trzem/trzema/trzej)"
+  options: ""
+  correctAnswer: "trzem"
   points: 1
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2019-g7"
-  testRef: "certyfikat-polski-B2-2019-grammar-8"
-  questionType: fill_gap
-  context: "Zadanie VIII, pytanie 7"
-  correctAnswer: "rodzicom"
+  itemId: "B2-2019-g5-q4"
+  testRef: "certyfikat-polski-B2-2019-grammar-5"
+  questionType: choose_form
+  context: "___ (biskupstwami/biskupstw/biskupstwom) utworzonym za jego rzadow"
+  options: ""
+  correctAnswer: "biskupstwom"
   points: 1
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2019-g8"
-  testRef: "certyfikat-polski-B2-2019-grammar-8"
-  questionType: fill_gap
-  context: "Zadanie VIII, pytanie 8"
-  correctAnswer: "nieobecności na lekcjach"
+  itemId: "B2-2019-g5-q5"
+  testRef: "certyfikat-polski-B2-2019-grammar-5"
+  questionType: choose_form
+  context: "po ___ (szesnastu/szesnascie/szesnastoma)"
+  options: ""
+  correctAnswer: "szesnastu"
   points: 1
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2019-g9"
-  testRef: "certyfikat-polski-B2-2019-grammar-8"
-  questionType: fill_gap
-  context: "Zadanie VIII, pytanie 9"
-  correctAnswer: "przez to"
+  itemId: "B2-2019-g5-q6"
+  testRef: "certyfikat-polski-B2-2019-grammar-5"
+  questionType: choose_form
+  context: "___ (lata/latach/latom)"
+  options: ""
+  correctAnswer: "latach"
   points: 1
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2019-g10"
-  testRef: "certyfikat-polski-B2-2019-grammar-8"
-  questionType: fill_gap
-  context: "Zadanie VIII, pytanie 10"
-  correctAnswer: "że był ciągle nieobecny na lekcjach"
+  itemId: "B2-2019-g5-q7"
+  testRef: "certyfikat-polski-B2-2019-grammar-5"
+  questionType: choose_form
+  context: "na ___ (kilka/kilku/kilkoma)"
+  options: ""
+  correctAnswer: "kilka"
   points: 1
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2019-g11"
-  testRef: "certyfikat-polski-B2-2019-grammar-8"
-  questionType: fill_gap
-  context: "Zadanie VIII, pytanie 11"
-  correctAnswer: "Należy uznać wszystkie inne poprawne rozwiązania zgodne z poleceniem"
+  itemId: "B2-2019-g5-q8"
+  testRef: "certyfikat-polski-B2-2019-grammar-5"
+  questionType: choose_form
+  context: "___ (miesiecy/miesiącach/miesiącami) przed swoja smiercia."
+  options: ""
+  correctAnswer: "miesiecy"
   points: 1
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2019-g12"
-  testRef: "certyfikat-polski-B2-2019-grammar-8"
-  questionType: fill_gap
-  context: "Zadanie VIII, pytanie 12"
-  correctAnswer: "TEST PRZYKŁADOWY"
+  itemId: "B2-2019-g5-q9"
+  testRef: "certyfikat-polski-B2-2019-grammar-5"
+  questionType: choose_form
+  context: "w wieku ___ (trzydziesci trzy/trzydziestoma trzema/trzydziestu trzech)"
+  options: ""
+  correctAnswer: "trzydziestu trzech"
   points: 1
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2019-g13"
-  testRef: "certyfikat-polski-B2-2019-grammar-8"
-  questionType: fill_gap
-  context: "Zadanie VIII, pytanie 13"
-  correctAnswer: "POZIOM B"
+  itemId: "B2-2019-g5-q10"
+  testRef: "certyfikat-polski-B2-2019-grammar-5"
+  questionType: choose_form
+  context: "___ (lata/lat/latom)"
+  options: ""
+  correctAnswer: "lat"
   points: 1
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2019-g14"
-  testRef: "certyfikat-polski-B2-2019-grammar-8"
+  itemId: "B2-2019-g6-q1"
+  testRef: "certyfikat-polski-B2-2019-grammar-6"
   questionType: fill_gap
-  context: "Zadanie VIII, pytanie 14"
-  correctAnswer: "TRANSKRYPCJE I KLUCZ DO ZADAŃ"
+  context: "W ubiegych latach niektore czesci parkow ___ przez duzszy czas dzikie."
+  correctAnswer: "pozostaway"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B2-2019-g6-q2"
+  testRef: "certyfikat-polski-B2-2019-grammar-6"
+  questionType: fill_gap
+  context: "Nasi pracownicy bowiem w minimalnym tylko stopniu ___ tu w zycie przyrody."
+  correctAnswer: "ingerowali"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B2-2019-g6-q3"
+  testRef: "certyfikat-polski-B2-2019-grammar-6"
+  questionType: fill_gap
+  context: "Chcielismy, zeby w koncu ___ sie w nich rozwijac bujna zielen"
+  correctAnswer: "zaczea"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B2-2019-g6-q4"
+  testRef: "certyfikat-polski-B2-2019-grammar-6"
+  questionType: fill_gap
+  context: "___ przedstawiciel ZZM."
+  correctAnswer: "stwierdzil"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B2-2019-g6-q5"
+  testRef: "certyfikat-polski-B2-2019-grammar-6"
+  questionType: fill_gap
+  context: "wadze miejskie zapowiadaja, ze w pierwszej kolejnosci ___ na parku Grabiszynskim."
+  correctAnswer: "skupia sie"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B2-2019-g6-q6"
+  testRef: "certyfikat-polski-B2-2019-grammar-6"
+  questionType: fill_gap
+  context: "firma ogrodnicza kompletnie ___ duzy fragment parku,"
+  correctAnswer: "zniszczya"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B2-2019-g6-q7"
+  testRef: "certyfikat-polski-B2-2019-grammar-6"
+  questionType: fill_gap
+  context: "mimo ze mieszkancy niejednokrotnie ___ uwage na niefrasobliwosc jej robotnikow."
+  correctAnswer: "zwracali"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B2-2019-g6-q8"
+  testRef: "certyfikat-polski-B2-2019-grammar-6"
+  questionType: fill_gap
+  context: "Z tego powodu prezydent miasta ___ poprzedniego dyrektora ZZM."
+  correctAnswer: "odwoal"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B2-2019-g6-q9"
+  testRef: "certyfikat-polski-B2-2019-grammar-6"
+  questionType: fill_gap
+  context: "pracownicy ___ konsekwentnie nowe techniki pielegnacji drzew,"
+  correctAnswer: "beda stosowali"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B2-2019-g6-q10"
+  testRef: "certyfikat-polski-B2-2019-grammar-6"
+  questionType: fill_gap
+  context: "co ___ ostatecznie do lepszej ochrony tego terenu."
+  correctAnswer: "przyczyni sie"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B2-2019-g7-q1"
+  testRef: "certyfikat-polski-B2-2019-grammar-7"
+  questionType: fill_gap
+  context: "odwiedzio je ponad 300 tysiecy ___ (duzo) turystow niz Zamek Krolewski na Wawelu."
+  correctAnswer: "wiecej"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B2-2019-g7-q2"
+  testRef: "certyfikat-polski-B2-2019-grammar-7"
+  questionType: fill_gap
+  context: "Dzis bilety do zoo sa 5 razy ___ (drogi) od tych sprzed kilku lat,"
+  correctAnswer: "drozsze"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B2-2019-g7-q3"
+  testRef: "certyfikat-polski-B2-2019-grammar-7"
+  questionType: fill_gap
+  context: "zwiedzajacy przychodza tu piec razy ___ (czesto) niz przed dekada."
+  correctAnswer: "czesciej"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B2-2019-g7-q4"
+  testRef: "certyfikat-polski-B2-2019-grammar-7"
+  questionType: fill_gap
+  context: "Dzieki coraz ___ (wysokie) dochodom"
+  correctAnswer: "wyzszym"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B2-2019-g7-q5"
+  testRef: "certyfikat-polski-B2-2019-grammar-7"
+  questionType: fill_gap
+  context: "___ (wazne) ze wszystkich sa prace przy starym Akwarium."
+  correctAnswer: "najwazniejsze"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B2-2019-g7-q6"
+  testRef: "certyfikat-polski-B2-2019-grammar-7"
+  questionType: fill_gap
+  context: "przeniesienie wilkow na wybieg ___ (obszerny) niz ich dotychczasowy."
+  correctAnswer: "obszerniejszy"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B2-2019-g7-q7"
+  testRef: "certyfikat-polski-B2-2019-grammar-7"
+  questionType: fill_gap
+  context: "ktore sa ___ (rzadko) wystepujacymi przedstawicielami rodziny kotowatych"
+  correctAnswer: "najrzadziej"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B2-2019-g7-q8"
+  testRef: "certyfikat-polski-B2-2019-grammar-7"
+  questionType: fill_gap
+  context: "Kiedy ___ (dobrze) zaplanowac wizyte w zoo?"
+  correctAnswer: "najlepiej"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B2-2019-g7-q9"
+  testRef: "certyfikat-polski-B2-2019-grammar-7"
+  questionType: fill_gap
+  context: "po bilet do Afrykarium trzeba czekac nie ___ (krotko) niz dwie godziny."
+  correctAnswer: "krocej"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B2-2019-g7-q10"
+  testRef: "certyfikat-polski-B2-2019-grammar-7"
+  questionType: fill_gap
+  context: "wroawskie zoo staje sie coraz ___ (atrakcyjne) miejscem turystycznym w regionie."
+  correctAnswer: "atrakcyjniejszym"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B2-2019-g8-q1"
+  testRef: "certyfikat-polski-B2-2019-grammar-8"
+  questionType: transform
+  context: "Chociaz rodzice protestowali, szkolny sklepik zosta zamkniety. -> ___ szkolny sklepik zosta zamkniety."
+  correctAnswer: "Wbrew protestom rodzicow"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B2-2019-g8-q2"
+  testRef: "certyfikat-polski-B2-2019-grammar-8"
+  questionType: transform
+  context: "Robertowi nie udao sie zdac testu, poniewaz by ciagle nieobecny na lekcjach. -> Robertowi nie udao sie zdac testu ___."
+  correctAnswer: "przez ciaga nieobecnosc na lekcjach"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B2-2019-g8-q3"
+  testRef: "certyfikat-polski-B2-2019-grammar-8"
+  questionType: transform
+  context: "Beata jest gotowa poswiecic wiele, zeby zachowac smugla sylwetke. -> Beata jest gotowa poswiecic wiele ___."
+  correctAnswer: "dla zachowania smugej sylwetki"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B2-2019-g8-q4"
+  testRef: "certyfikat-polski-B2-2019-grammar-8"
+  questionType: transform
+  context: "Kiedy wrocimy z urlopu, musimy sie wziac do remontu mieszkania. -> ___ musimy sie wziac do remontu mieszkania."
+  correctAnswer: "Po powrocie z urlopu"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "B2-2019-g8-q5"
+  testRef: "certyfikat-polski-B2-2019-grammar-8"
+  questionType: transform
+  context: "Jesli bedziesz mia silne zawroty gowy, zadzwon po pogotowie. -> ___ zadzwon po pogotowie."
+  correctAnswer: "W razie silnych zawrotow gowy"
   points: 1
 }

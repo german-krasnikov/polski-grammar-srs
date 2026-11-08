@@ -1,31 +1,49 @@
 DSL 1
 READING_PASSAGE {
-  passageId: "certyfikat-polski-B2-2019-read-1"
+  passageId: "B2-2019-r1-p1"
   examRef: "certyfikat-polski-B2-2019"
   taskNumber: 1
-  instruction: "Zadanie 1"
+  title: "Stres a jedzenie"
+  instruction: "Prosze przeczytac fragment tekstu i zaznaczyc waciwa odpowiedz."
+  text: "Jedzenie jest niejednokrotnie reakcja na stres. Uwaza sie nawet, ze okresy stresu, czyli wiekszego pobudzenia organizmu do dziaania, wymagaja wiekszego spozycia energii, co budzi przyzwolenie na jedzenie wiecej i bardziej kalorycznie, a to powoduje, ze tyjemy. Wedug badan u wiekszosci z nas stres wzmaga ilosc zjadanych przekasek, a zmniejsza konsumpcje zwykych posikow."
 }
 READING_PASSAGE {
-  passageId: "certyfikat-polski-B2-2019-read-2"
+  passageId: "B2-2019-r1-p2"
   examRef: "certyfikat-polski-B2-2019"
   taskNumber: 2
-  instruction: "Zadanie 2"
+  title: "Kolej Transsyberyjska"
+  instruction: "Prosze przeczytac fragment tekstu i zaznaczyc waciwa odpowiedz."
+  text: "Podroz Koleja Transsyberyjska jest przeznaczona dla cierpliwych - pociagi jada ze srednia predkoscia 60 km na godzine. Trudno tu o luksusy, chyba ze stac was na najdrozsze bilety. Ale nawet jezeli nie zachwycca was widoki z okien czy odwiedzane miasta, spotkacie na swojej drodze niezwykych ludzi z caego swiata, z ktorymi bedziecie dzielic wspaniae chwile."
 }
 READING_PASSAGE {
-  passageId: "certyfikat-polski-B2-2019-read-3"
+  passageId: "B2-2019-r1-p3"
   examRef: "certyfikat-polski-B2-2019"
   taskNumber: 3
-  instruction: "Zadanie 3"
+  title: "Bol"
+  instruction: "Prosze przeczytac fragment tekstu i zaznaczyc waciwa odpowiedz."
+  text: "Bol ma nas informowac o nieprawidowosciach w funkcjonowaniu caego ciaa. Jesli jest ostry, gwatowny i pojawia sie jako konsekwencja nagego pogorszenia stanu zdrowia, staje sie przyjacielem. Jednak dugo utrzymujacy sie bol zaburza prace organizmu. Moga pojawic sie bezsennosc, brak apetytu, rozdraznienie lub apatia. Dlatego bol trzeba leczyc."
 }
 READING_PASSAGE {
-  passageId: "certyfikat-polski-B2-2019-read-4"
+  passageId: "B2-2019-r1-p4"
   examRef: "certyfikat-polski-B2-2019"
   taskNumber: 4
-  instruction: "Zadanie 4"
+  title: "Astronautki NASA"
+  instruction: "Prosze przeczytac fragment tekstu i zaznaczyc waciwa odpowiedz."
+  text: "Dwie amerykanskie astronautki, Anne McClain i Christina Koch, odbeda pierwszy wyacznie kobiecy spacer kosmiczny. NASA zatrudnia pierwsze astronautki w 1978 roku. Odsetek kobiet uprawiajacych ten zawod wynosi obecnie 34%, ale dotychczasowe kosmiczne spacery odbyway sie w wyacznie meskich lub mieszanych skadach."
 }
 READING_PASSAGE {
-  passageId: "certyfikat-polski-B2-2019-read-5"
+  passageId: "B2-2019-r1-p5"
   examRef: "certyfikat-polski-B2-2019"
   taskNumber: 5
-  instruction: "Zadanie 5"
+  title: "Podcasty"
+  instruction: "Prosze przeczytac fragment tekstu i zaznaczyc waciwa odpowiedz."
+  text: "W 2005 roku w Internecie dostepnych byo okoo 3 tysiecy darmowych suchowisk. Dzis suchowisk jest ponad 600 tysiecy. Wiekszosc Amerykanow deklaruje, ze regularnie sucha podcastow (az 42 miliony robia to przynajmniej raz w tygodniu). Suchanie podcastow deklaruje juz ponad 50 proc. mieszkancow Korei Poudniowej."
+}
+READING_PASSAGE {
+  passageId: "B2-2019-r4-p1"
+  examRef: "certyfikat-polski-B2-2019"
+  taskNumber: 14
+  title: "Arktyka"
+  instruction: "Prosze przeczytac tekst i zaznaczyc TAK/NIE/BI."
+  text: "Zmiany klimatu dokonuja sie w Arktyce dwukrotnie szybciej niz gdziekolwiek na swiecie. Ryby, ktore sa ekstremalnie wrazliwe na wahania temperatury i pH wody, przenoszą sie coraz dalej na polnoc. Losie rosna mniejsze niz kiedys. Rozmarza ziemia, a nieliczne lasy wymieraja masowo przez niespotkana dotad liczbe insektow. Zmienia sie takze zycie ludzi. Ludom tym nie zawsze jest po drodze z organizacjami ekologicznymi. Ludzie na dalekiej polnocy wciaz poluja. Fok sa miliony, a biae niedzwiedzie maja sie swietnie."
 }

@@ -1,425 +1,327 @@
 DSL 1
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-lq1"
-  taskRef: "certyfikat-polski-B2-2019-listen-1"
+  questionId: "B2-2019-l1-q1a"
+  taskRef: "certyfikat-polski-B2-2019-listening-1"
   questionType: multiple_choice
-  questionText: "Pytanie 1"
+  questionText: "Kobieta zali sie, ze jej partner"
+  options: "a) ukrywa przed nia wazne informacje.|b) nie zajmowa sie nia naleycie.|c) zaprzeczy, ze jest ojcem Julii."
   correctAnswer: "a"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-lq2"
-  taskRef: "certyfikat-polski-B2-2019-listen-1"
+  questionId: "B2-2019-l1-q1b"
+  taskRef: "certyfikat-polski-B2-2019-listening-1"
   questionType: multiple_choice
-  questionText: "Pytanie 2"
-  correctAnswer: "c b"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-lq3"
-  taskRef: "certyfikat-polski-B2-2019-listen-1"
-  questionType: multiple_choice
-  questionText: "Pytanie 3"
-  correctAnswer: "b b"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-lq4"
-  taskRef: "certyfikat-polski-B2-2019-listen-1"
-  questionType: multiple_choice
-  questionText: "Pytanie 4"
-  correctAnswer: "a a"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-lq5"
-  taskRef: "certyfikat-polski-B2-2019-listen-1"
-  questionType: multiple_choice
-  questionText: "Pytanie 5"
+  questionText: "Ojciec Julii trafi do wiezienia"
+  options: "a) kiedy dziewczynka miaa trzy lata.|b) na osiem lat.|c) trzy miesiace po narodzinach corki."
   correctAnswer: "c"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-lq6"
-  taskRef: "certyfikat-polski-B2-2019-listen-2"
+  questionId: "B2-2019-l1-q2a"
+  taskRef: "certyfikat-polski-B2-2019-listening-1"
   questionType: multiple_choice
-  questionText: "Pytanie 6"
-  correctAnswer: "a a c b c b"
+  questionText: "Rozmowa dotyczy"
+  options: "a) problemow dotykajacych osoby leworeczne.|b) skutkow zmuszania osob leworecznych do korzystania z prawej reki.|c) zwiazkow miedzy leworecznoscia a problemami w nauce."
+  correctAnswer: "b"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-lq7"
-  taskRef: "certyfikat-polski-B2-2019-listen-3"
+  questionId: "B2-2019-l1-q2b"
+  taskRef: "certyfikat-polski-B2-2019-listening-1"
   questionType: multiple_choice
-  questionText: "Pytanie 7"
-  correctAnswer: "TAK NIE"
+  questionText: "Komplikacje, o ktorych mowa w audycji, powstaja, poniewaz mozg"
+  options: "a) nie odczytuje informacji zwiazanych z orientacja w przestrzeni.|b) otrzymuje informacje, z ktorymi sobie nie radzi.|c) gubi czesc informacji."
+  correctAnswer: "b"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-lq8"
-  taskRef: "certyfikat-polski-B2-2019-listen-4"
+  questionId: "B2-2019-l1-q3a"
+  taskRef: "certyfikat-polski-B2-2019-listening-1"
   questionType: multiple_choice
-  questionText: "Pytanie 8"
-  correctAnswer: "B E B B"
+  questionText: "Rozmowa dotyczy"
+  options: "a) uprawiania sportu.|b) prowadzenia samochodu.|c) cen mebli."
+  correctAnswer: "b"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-lq9"
-  taskRef: "certyfikat-polski-B2-2019-listen-4"
+  questionId: "B2-2019-l1-q3b"
+  taskRef: "certyfikat-polski-B2-2019-listening-1"
   questionType: multiple_choice
-  questionText: "Pytanie 9"
-  correctAnswer: "D"
+  questionText: "Wujek nie zgadza sie na propozycje chopca, poniewaz ten"
+  options: "a) nie jest w odpowiednim wieku.|b) nie jest jego kolega.|c) od 9 miesiecy bierze udzia w kursie."
+  correctAnswer: "a"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-lq10"
-  taskRef: "certyfikat-polski-B2-2019-listen-4"
+  questionId: "B2-2019-l1-q4a"
+  taskRef: "certyfikat-polski-B2-2019-listening-1"
   questionType: multiple_choice
-  questionText: "Pytanie 10"
-  correctAnswer: "D C A"
+  questionText: "Corka rozmowcow ma kopoty"
+  options: "a) zwiazane ze szkoa.|b) z wyprowadzka z domu.|c) z wyrazaniem emocji."
+  correctAnswer: "a"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-lq11"
-  taskRef: "certyfikat-polski-B2-2019-listen-4"
+  questionId: "B2-2019-l1-q4b"
+  taskRef: "certyfikat-polski-B2-2019-listening-1"
   questionType: multiple_choice
-  questionText: "Pytanie 11"
+  questionText: "Wedug mezczyzny corka"
+  options: "a) bardzo przezywa rozwod rodzicow.|b) obwinia sie o kopoty rodzicow.|c) wykorzystuje rozstanie rodzicow, by usprawiedliwic swoje zachowanie."
+  correctAnswer: "c"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "B2-2019-l2-q1"
+  taskRef: "certyfikat-polski-B2-2019-listening-2"
+  questionType: multiple_choice
+  questionText: "915 to liczba piecow"
+  options: "a) ktore zostay zlikwidowane podczas czterech lat trwania projektu.|b) ktorych nie udao sie usunac.|c) ktore znikna z Grudziadza w ciagu najblizszych czterech lat."
+  correctAnswer: "a"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "B2-2019-l2-q2"
+  taskRef: "certyfikat-polski-B2-2019-listening-2"
+  questionType: multiple_choice
+  questionText: "Wojewodzki i Narodowy Fundusz Ochrony Srodowiska i Gospodarki Wodnej"
+  options: "a) czesciowo dofinansowa prowadzone dziaania.|b) pokry cakowity koszt programu.|c) odpowiada za kampanie informacyjna."
+  correctAnswer: "a"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "B2-2019-l2-q3"
+  taskRef: "certyfikat-polski-B2-2019-listening-2"
+  questionType: multiple_choice
+  questionText: "Pomorska Grupa Konsultingowa zajmowaa sie"
+  options: "a) przygotowaniem projektu.|b) finansowaniem projektu.|c) projektem przez 4 lata."
+  correctAnswer: "c"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "B2-2019-l2-q4"
+  taskRef: "certyfikat-polski-B2-2019-listening-2"
+  questionType: multiple_choice
+  questionText: "Kampania informacyjna skupiaa sie na"
+  options: "a) szczegolowym instruktazu wymiany pieca.|b) promocji zachowan ekologicznych i informacjach praktycznych.|c) sposobach dziaania roznego rodzaju piecow."
+  correctAnswer: "b"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "B2-2019-l2-q5"
+  taskRef: "certyfikat-polski-B2-2019-listening-2"
+  questionType: multiple_choice
+  questionText: "Podczas kampanii edukacyjnej co roku"
+  options: "a) szkolono cztery grupy odbiorcow.|b) zmieniano jej program.|c) zmienia sie jej odbiorca."
+  correctAnswer: "c"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "B2-2019-l2-q6"
+  taskRef: "certyfikat-polski-B2-2019-listening-2"
+  questionType: multiple_choice
+  questionText: "Program Kawka III"
+  options: "a) nigdy nie by planowany.|b) nie doszed ostatecznie do skutku.|c) zakonczy sie wymiana 780 piecow."
+  correctAnswer: "b"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "B2-2019-l3-q1"
+  taskRef: "certyfikat-polski-B2-2019-listening-3"
+  questionType: true_false
+  questionText: "W suwalskich rodzinach zastepczych wychowuje sie okoo 100 dzieci."
+  options: "TAK|NIE"
+  correctAnswer: "TAK"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "B2-2019-l3-q2"
+  taskRef: "certyfikat-polski-B2-2019-listening-3"
+  questionType: true_false
+  questionText: "MOPS planuje kolejne szkolenie jesienia."
+  options: "TAK|NIE"
+  correctAnswer: "NIE"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "B2-2019-l3-q3"
+  taskRef: "certyfikat-polski-B2-2019-listening-3"
+  questionType: true_false
+  questionText: "Wskazaniem do umieszczenia dziecka w rodzinie zastepczej jest m.in. wiek dziecka."
+  options: "TAK|NIE"
+  correctAnswer: "NIE"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "B2-2019-l3-q4"
+  taskRef: "certyfikat-polski-B2-2019-listening-3"
+  questionType: true_false
+  questionText: "W tej chwili w Suwakach jest 10 kandydatow czekajacych na przyjecie dziecka."
+  options: "TAK|NIE"
+  correctAnswer: "NIE"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "B2-2019-l3-q5"
+  taskRef: "certyfikat-polski-B2-2019-listening-3"
+  questionType: true_false
+  questionText: "MOPS zwraca sie z apelem do mieszkancow, ktorzy maja mozliwosci i sa dyspozycyjni."
+  options: "TAK|NIE"
+  correctAnswer: "TAK"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "B2-2019-l3-q6"
+  taskRef: "certyfikat-polski-B2-2019-listening-3"
+  questionType: true_false
+  questionText: "Sztuka pomaga w wychowaniu dzieci."
+  options: "TAK|NIE"
+  correctAnswer: "TAK"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "B2-2019-l3-q7"
+  taskRef: "certyfikat-polski-B2-2019-listening-3"
+  questionType: true_false
+  questionText: "Zdaniem Leszka Lewoca rodziny zastepcze w Suwakach przyjmuja dzieci z checi zysku."
+  options: "TAK|NIE"
+  correctAnswer: "NIE"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "B2-2019-l3-q8"
+  taskRef: "certyfikat-polski-B2-2019-listening-3"
+  questionType: true_false
+  questionText: "Pieniadze na utrzymanie dziecka w rodzinie zastepczej pochodza z dwoch zrode."
+  options: "TAK|NIE"
+  correctAnswer: "TAK"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "B2-2019-l4-q1"
+  taskRef: "certyfikat-polski-B2-2019-listening-4"
+  questionType: match
+  questionText: "Zatrucie sie nia nie musi oznaczac smierci."
+  correctAnswer: "B"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "B2-2019-l4-q2"
+  taskRef: "certyfikat-polski-B2-2019-listening-4"
+  questionType: match
+  questionText: "Moze zabic nawet jej zapach."
   correctAnswer: "E"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-lq12"
-  taskRef: "certyfikat-polski-B2-2019-listen-4"
-  questionType: multiple_choice
-  questionText: "Pytanie 12"
+  questionId: "B2-2019-l4-q3"
+  taskRef: "certyfikat-polski-B2-2019-listening-4"
+  questionType: match
+  questionText: "Pomagaa kobietom stac sie bardziej atrakcyjnymi."
+  correctAnswer: "B"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "B2-2019-l4-q4"
+  taskRef: "certyfikat-polski-B2-2019-listening-4"
+  questionType: match
+  questionText: "Zostaa wykorzystana w rozgrywkach na szczytach wadzy."
+  correctAnswer: "B|D"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "B2-2019-l4-q5"
+  taskRef: "certyfikat-polski-B2-2019-listening-4"
+  questionType: match
+  questionText: "Bya uzywana podczas zdobywania pozywienia."
+  correctAnswer: "D"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "B2-2019-l4-q6"
+  taskRef: "certyfikat-polski-B2-2019-listening-4"
+  questionType: match
+  questionText: "Jest lubiana w Europie roslina ozdobna."
+  correctAnswer: "C"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "B2-2019-l4-q7"
+  taskRef: "certyfikat-polski-B2-2019-listening-4"
+  questionType: match
+  questionText: "Wystepuje powszechnie w roznych czesciach swiata."
+  correctAnswer: "A|E"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "B2-2019-l4-q8"
+  taskRef: "certyfikat-polski-B2-2019-listening-4"
+  questionType: match
+  questionText: "Odpowiednie procesy pozwalaja pozbyc sie z niej trujacej substancji."
   correctAnswer: "A"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-lq13"
-  taskRef: "certyfikat-polski-B2-2019-listen-4"
-  questionType: multiple_choice
-  questionText: "Pytanie 13"
-  correctAnswer: "Kolejność odpowiedzi dowolna"
+  questionId: "B2-2019-l5-q1a"
+  taskRef: "certyfikat-polski-B2-2019-listening-5"
+  questionType: fill_gap
+  questionText: "Jakie skutki ma dla naszego organizmu nadmierne spozycie soli? (a)"
+  correctAnswer: "opuchlizna / puchnie nam ciao / zatrzymanie wody w organizmie"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-lq14"
-  taskRef: "certyfikat-polski-B2-2019-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 14"
-  correctAnswer: "Odpowiedź Punkty Fragment transkrypcji"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-lq15"
-  taskRef: "certyfikat-polski-B2-2019-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 15"
-  correctAnswer: "opuchlizna"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-lq16"
-  taskRef: "certyfikat-polski-B2-2019-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 16"
-  correctAnswer: "puchnie nam ciało"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-lq17"
-  taskRef: "certyfikat-polski-B2-2019-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 17"
-  correctAnswer: "zatrzymanie"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-lq18"
-  taskRef: "certyfikat-polski-B2-2019-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 18"
-  correctAnswer: "p"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-lq19"
-  taskRef: "certyfikat-polski-B2-2019-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 19"
-  correctAnswer: "puchnie nam ciało i zatrzymuje nam się woda"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-lq20"
-  taskRef: "certyfikat-polski-B2-2019-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 20"
-  correctAnswer: "wody w organizmie"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-lq21"
-  taskRef: "certyfikat-polski-B2-2019-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 21"
+  questionId: "B2-2019-l5-q1b"
+  taskRef: "certyfikat-polski-B2-2019-listening-5"
+  questionType: fill_gap
+  questionText: "Jakie skutki ma dla naszego organizmu nadmierne spozycie soli? (b)"
   correctAnswer: "utrudnienie i spowolnienie pracy nerek"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-lq22"
-  taskRef: "certyfikat-polski-B2-2019-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 22"
-  correctAnswer: "nerki"
+  questionId: "B2-2019-l5-q2"
+  taskRef: "certyfikat-polski-B2-2019-listening-5"
+  questionType: fill_gap
+  questionText: "Czemu odpowiada zawartosc soli w hamburgerze i frytkach?"
+  correctAnswer: "yzeczce soli / caodziennemu zapotrzebowaniu na sol"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-lq23"
-  taskRef: "certyfikat-polski-B2-2019-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 23"
-  correctAnswer: "powoli zaczynają pracować"
+  questionId: "B2-2019-l5-q3a"
+  taskRef: "certyfikat-polski-B2-2019-listening-5"
+  questionType: fill_gap
+  questionText: "Jakie skadniki powoduja, ze w kebabie zawartosc soli jest az tak wysoka? (a)"
+  correctAnswer: "posolone, przetworzone mieso"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-lq24"
-  taskRef: "certyfikat-polski-B2-2019-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 24"
-  correctAnswer: "p"
+  questionId: "B2-2019-l5-q3b"
+  taskRef: "certyfikat-polski-B2-2019-listening-5"
+  questionType: fill_gap
+  questionText: "Jakie skadniki powoduja, ze w kebabie zawartosc soli jest az tak wysoka? (b)"
+  correctAnswer: "sosy / sosy czosnkowe / sosy na bazie majonezu"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-lq25"
-  taskRef: "certyfikat-polski-B2-2019-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 25"
-  correctAnswer: "pracują ciężko i powoli"
+  questionId: "B2-2019-l5-q4"
+  taskRef: "certyfikat-polski-B2-2019-listening-5"
+  questionType: fill_gap
+  questionText: "Co jeszcze przyswaja osoba spozywajaca co dzien fast foody?"
+  correctAnswer: "tuszcz i weglowodany"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-lq26"
-  taskRef: "certyfikat-polski-B2-2019-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 26"
-  correctAnswer: "łyżeczce soli"
+  questionId: "B2-2019-l5-q5"
+  taskRef: "certyfikat-polski-B2-2019-listening-5"
+  questionType: fill_gap
+  questionText: "Dlaczego nadmierne spozycie soli moze prowadzic do osteoporozy?"
+  correctAnswer: "zwieksza wydalanie magnezu i wapnia z organizmu"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-lq27"
-  taskRef: "certyfikat-polski-B2-2019-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 27"
-  correctAnswer: "sól czyli łyżeczka soli"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-lq28"
-  taskRef: "certyfikat-polski-B2-2019-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 28"
-  correctAnswer: "pięć gramów"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-lq29"
-  taskRef: "certyfikat-polski-B2-2019-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 29"
-  correctAnswer: "posolone"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-lq30"
-  taskRef: "certyfikat-polski-B2-2019-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 30"
-  correctAnswer: "przetworzone mięso"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-lq31"
-  taskRef: "certyfikat-polski-B2-2019-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 31"
-  correctAnswer: "p"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-lq32"
-  taskRef: "certyfikat-polski-B2-2019-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 32"
-  correctAnswer: "tutaj z kolei mamy dużo przetworzonego"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-lq33"
-  taskRef: "certyfikat-polski-B2-2019-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 33"
-  correctAnswer: "sosy"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-lq34"
-  taskRef: "certyfikat-polski-B2-2019-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 34"
-  correctAnswer: "sosy czosnkowe"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-lq35"
-  taskRef: "certyfikat-polski-B2-2019-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 35"
-  correctAnswer: "sosy na bazie majonezu"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-lq36"
-  taskRef: "certyfikat-polski-B2-2019-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 36"
-  correctAnswer: "p"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-lq37"
-  taskRef: "certyfikat-polski-B2-2019-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 37"
-  correctAnswer: "czosnkowe"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-lq38"
-  taskRef: "certyfikat-polski-B2-2019-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 38"
-  correctAnswer: "często na bazie majonezu"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-lq39"
-  taskRef: "certyfikat-polski-B2-2019-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 39"
-  correctAnswer: "tłuszcz"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-lq40"
-  taskRef: "certyfikat-polski-B2-2019-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 40"
-  correctAnswer: "p"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-lq41"
-  taskRef: "certyfikat-polski-B2-2019-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 41"
-  correctAnswer: "dochodzi jeszcze i tłuszcz"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-lq42"
-  taskRef: "certyfikat-polski-B2-2019-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 42"
-  correctAnswer: "i węglowodany"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-lq43"
-  taskRef: "certyfikat-polski-B2-2019-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 43"
-  correctAnswer: "które są w fast foodach"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-lq44"
-  taskRef: "certyfikat-polski-B2-2019-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 44"
-  correctAnswer: "węglowodany"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-lq45"
-  taskRef: "certyfikat-polski-B2-2019-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 45"
-  correctAnswer: "p"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-lq46"
-  taskRef: "certyfikat-polski-B2-2019-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 46"
-  correctAnswer: "bo"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-lq47"
-  taskRef: "certyfikat-polski-B2-2019-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 47"
-  correctAnswer: "wapnia organizmu"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-lq48"
-  taskRef: "certyfikat-polski-B2-2019-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 48"
-  correctAnswer: "do podwyższenia ciśnienia tętniczego"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-lq49"
-  taskRef: "certyfikat-polski-B2-2019-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 49"
-  correctAnswer: "ciśnienie zjemy fast food i możemy mieć wyższe"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-lq50"
-  taskRef: "certyfikat-polski-B2-2019-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 50"
-  correctAnswer: "tętnicze rośnie ciśnienie tętnicze"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-lq51"
-  taskRef: "certyfikat-polski-B2-2019-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 51"
-  correctAnswer: "TEST PRZYKŁADOWY"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-lq52"
-  taskRef: "certyfikat-polski-B2-2019-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 52"
-  correctAnswer: "POZIOM B"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-lq53"
-  taskRef: "certyfikat-polski-B2-2019-listen-5"
-  questionType: multiple_choice
-  questionText: "Pytanie 53"
-  correctAnswer: "TRANSKRYPCJE I KLUCZ DO ZADAŃ"
+  questionId: "B2-2019-l5-q6"
+  taskRef: "certyfikat-polski-B2-2019-listening-5"
+  questionType: fill_gap
+  questionText: "Do jakich zmian w naszym organizmie moze dojsc bezposrednio po spozyciu fast foodow?"
+  correctAnswer: "podwyzszenie cisnienia tetniczego"
   points: 1
 }

@@ -1,89 +1,136 @@
 DSL 1
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-rq1"
-  passageRef: "certyfikat-polski-B2-2019-read-1"
-  questionType: fill_gap
-  questionText: "Pytanie 1"
-  correctAnswer: "b c a c b"
+  questionId: "B2-2019-r1-q1"
+  passageRef: "B2-2019-r1-p1"
+  questionType: multiple_choice
+  questionText: "Z tego tekstu dowiadujemy sie, ze"
+  options: "a) w stresie spozycie posikow i przekasek jest wieksze.|b) w okresie pobudzenia organizmu do dziaania czesciej tyjemy.|c) zajadanie stresu pojawia sie u wszystkich zestresowanych."
+  correctAnswer: "b"
   points: 1
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-rq2"
-  passageRef: "certyfikat-polski-B2-2019-read-2"
-  questionType: fill_gap
-  questionText: "Pytanie 2"
-  correctAnswer: "H A I D E B G K F J"
+  questionId: "B2-2019-r1-q2"
+  passageRef: "B2-2019-r1-p2"
+  questionType: multiple_choice
+  questionText: "Z tego tekstu dowiadujemy sie, ze"
+  options: "a) pociag nie moze jechac szybciej niz 60 km na godzine.|b) mijane krajobrazy nie sa atrakcyjne.|c) podroz Koleja Transsyberyjska moze byc komfortowa za wysoka cene."
+  correctAnswer: "c"
   points: 1
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-rq3"
-  passageRef: "certyfikat-polski-B2-2019-read-3"
-  questionType: fill_gap
-  questionText: "Pytanie 3"
-  correctAnswer: "D A E K I B C G H J"
+  questionId: "B2-2019-r1-q3"
+  passageRef: "B2-2019-r1-p3"
+  questionType: multiple_choice
+  questionText: "Z tego tekstu dowiadujemy sie, ze"
+  options: "a) nagy i silny bol moze okazac sie pozyteczny.|b) istnieje sprawdzona skuteczna metoda walki z bolem.|c) bezsennosc i brak apetytu moga byc przyczyna bolu."
+  correctAnswer: "a"
   points: 1
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-rq4"
-  passageRef: "certyfikat-polski-B2-2019-read-4"
-  questionType: fill_gap
-  questionText: "Pytanie 4"
-  correctAnswer: "TAK NIE BI"
+  questionId: "B2-2019-r1-q4"
+  passageRef: "B2-2019-r1-p4"
+  questionType: multiple_choice
+  questionText: "Z tego tekstu dowiadujemy sie, ze"
+  options: "a) kobiecy spacer kosmiczny jest corocznym obyczajem.|b) McClain i Koch beda pierwszymi kobietami odbywajacymi spacer kosmiczny.|c) kobiety-astronautki sa obecne w NASA juz od ponad czterdziestu lat."
+  correctAnswer: "c"
   points: 1
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-rq5"
-  passageRef: "certyfikat-polski-B2-2019-read-5"
-  questionType: fill_gap
-  questionText: "Pytanie 5"
-  correctAnswer: "Wyrazy zbędne"
+  questionId: "B2-2019-r1-q5"
+  passageRef: "B2-2019-r1-p5"
+  questionType: multiple_choice
+  questionText: "Z tego tekstu dowiadujemy sie, ze"
+  options: "a) juz poowa ludzi na swiecie sucha podcastow.|b) przez ostatnie lata liczba suchowisk znacznie wzrosa.|c) 42 miliony wielbicieli sucha podcastow tylko raz w tygodniu."
+  correctAnswer: "b"
   points: 1
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-rq6"
-  passageRef: "certyfikat-polski-B2-2019-read-5"
-  questionType: fill_gap
-  questionText: "Pytanie 6"
-  correctAnswer: "postanawiają"
+  questionId: "B2-2019-r4-q1"
+  passageRef: "B2-2019-r4-p1"
+  questionType: true_false_not_given
+  questionText: "W Arktyce skutki globalnego ocieplenia widac goym okiem."
+  options: "TAK|NIE|BI"
+  correctAnswer: "BI"
   points: 1
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-rq7"
-  passageRef: "certyfikat-polski-B2-2019-read-5"
-  questionType: fill_gap
-  questionText: "Pytanie 7"
-  correctAnswer: "zależnością"
+  questionId: "B2-2019-r4-q2"
+  passageRef: "B2-2019-r4-p1"
+  questionType: true_false_not_given
+  questionText: "Zmiany klimatyczne sa przyczyna migracji ryb w kierunku polnocnym."
+  options: "TAK|NIE|BI"
+  correctAnswer: "TAK"
   points: 1
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-rq8"
-  passageRef: "certyfikat-polski-B2-2019-read-5"
-  questionType: fill_gap
-  questionText: "Pytanie 8"
-  correctAnswer: "oczyszczają"
+  questionId: "B2-2019-r4-q3"
+  passageRef: "B2-2019-r4-p1"
+  questionType: true_false_not_given
+  questionText: "W Arktyce liczba ryb sodkowodnych zmniejsza sie szybciej niz liczba ryb morskich."
+  options: "TAK|NIE|BI"
+  correctAnswer: "BI"
   points: 1
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-rq9"
-  passageRef: "certyfikat-polski-B2-2019-read-5"
-  questionType: fill_gap
-  questionText: "Pytanie 9"
-  correctAnswer: "TEST PRZYKŁADOWY"
+  questionId: "B2-2019-r4-q4"
+  passageRef: "B2-2019-r4-p1"
+  questionType: true_false_not_given
+  questionText: "Rozmarzanie ziemi w Arktyce ma zwiazek z licznie wystepujacymi tam lasami."
+  options: "TAK|NIE|BI"
+  correctAnswer: "NIE"
   points: 1
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-rq10"
-  passageRef: "certyfikat-polski-B2-2019-read-5"
-  questionType: fill_gap
-  questionText: "Pytanie 10"
-  correctAnswer: "POZIOM B"
+  questionId: "B2-2019-r4-q5"
+  passageRef: "B2-2019-r4-p1"
+  questionType: true_false_not_given
+  questionText: "Owady na polnocy potrzebuja drzew, zeby sie rozmnazac."
+  options: "TAK|NIE|BI"
+  correctAnswer: "BI"
   points: 1
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2019-rq11"
-  passageRef: "certyfikat-polski-B2-2019-read-5"
-  questionType: fill_gap
-  questionText: "Pytanie 11"
-  correctAnswer: "TRANSKRYPCJE I KLUCZ DO ZADAŃ"
+  questionId: "B2-2019-r4-q6"
+  passageRef: "B2-2019-r4-p1"
+  questionType: true_false_not_given
+  questionText: "Przodkowie dzisiejszych ludow Arktyki nazywali siebie Eskimosami."
+  options: "TAK|NIE|BI"
+  correctAnswer: "BI"
+  points: 1
+}
+READING_QUESTION {
+  questionId: "B2-2019-r4-q7"
+  passageRef: "B2-2019-r4-p1"
+  questionType: true_false_not_given
+  questionText: "W dzisiejszych czasach ludnosc Arktyki czesto zmienia miejsce zamieszkania."
+  options: "TAK|NIE|BI"
+  correctAnswer: "NIE"
+  points: 1
+}
+READING_QUESTION {
+  questionId: "B2-2019-r4-q8"
+  passageRef: "B2-2019-r4-p1"
+  questionType: true_false_not_given
+  questionText: "Ludzie na dalekiej polnocy kultywuja odwieczne tradycje myliwskie."
+  options: "TAK|NIE|BI"
+  correctAnswer: "TAK"
+  points: 1
+}
+READING_QUESTION {
+  questionId: "B2-2019-r4-q9"
+  passageRef: "B2-2019-r4-p1"
+  questionType: true_false_not_given
+  questionText: "Liczenie arktycznych zwierzat przez naukowcow potwierdzio opinie ekologow."
+  options: "TAK|NIE|BI"
+  correctAnswer: "NIE"
+  points: 1
+}
+READING_QUESTION {
+  questionId: "B2-2019-r4-q10"
+  passageRef: "B2-2019-r4-p1"
+  questionType: true_false_not_given
+  questionText: "Migracje ryb pociagaja za soba wedrowki innych gatunkow zwierzat."
+  options: "TAK|NIE|BI"
+  correctAnswer: "TAK"
   points: 1
 }
