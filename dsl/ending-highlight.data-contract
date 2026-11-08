@@ -1,0 +1,23 @@
+DSL 1
+# Literal, ordered display fragments from the reviewed Emphasis and Kotlin parity cases.
+RECORD HighlightCaseRow KEY id COUNT 1..
+  id: string
+  operation: enum ending|change|sentence|style
+  before: string
+  after: string
+  side: enum before|after OPTIONAL
+  text: string OPTIONAL
+  alternationA: string OPTIONAL
+  alternationB: string OPTIONAL
+  noAlternations: bool OPTIONAL
+END
+
+RECORD HighlightPartRow KEY partId COUNT 1..
+  partId: string
+  caseRef: ref HighlightCaseRow
+  ordinal: int
+  text: string
+  isEnding: bool
+  isChanged: bool
+  changeSide: enum before|after OPTIONAL
+END

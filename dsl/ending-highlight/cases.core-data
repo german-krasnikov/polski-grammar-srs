@@ -1,0 +1,245 @@
+DSL 1
+# P6: review-literal Emphasis cases; expected parts are authored, not captured from the Kotlin implementation.
+HIGHLIGHT_CASE {
+  id: accusative-three-endings
+  operation: ending
+  before: "moja piękna żona"
+  after: "moją piękną żonę"
+}
+HIGHLIGHT_CASE {
+  id: whole-replacement-1
+  operation: ending
+  before: mojej
+  after: ich
+}
+HIGHLIGHT_CASE {
+  id: whole-replacement-2
+  operation: ending
+  before: "Widzę"
+  after: "Widziałem"
+}
+HIGHLIGHT_CASE {
+  id: whole-replacement-3
+  operation: ending
+  before: "kupuję"
+  after: "kupiłem / kupiłam"
+}
+HIGHLIGHT_CASE {
+  id: replacement-before
+  operation: change
+  before: mojej
+  after: ich
+  side: before
+}
+HIGHLIGHT_CASE {
+  id: replacement-after
+  operation: change
+  before: mojej
+  after: ich
+  side: after
+}
+HIGHLIGHT_CASE {
+  id: ambiguous-before
+  operation: change
+  before: "robić"
+  after: "robiłem / robiłam"
+  side: before
+}
+HIGHLIGHT_CASE {
+  id: ambiguous-after
+  operation: change
+  before: "robić"
+  after: "robiłem / robiłam"
+  side: after
+}
+HIGHLIGHT_CASE {
+  id: punctuation-period
+  operation: ending
+  before: "żona."
+  after: "żonę."
+}
+HIGHLIGHT_CASE {
+  id: punctuation-question
+  operation: ending
+  before: "żona?"
+  after: "żonę?"
+}
+HIGHLIGHT_CASE {
+  id: punctuation-exclamation
+  operation: ending
+  before: "żona!"
+  after: "żonę!"
+}
+HIGHLIGHT_CASE {
+  id: sentence-old-suffixes
+  operation: sentence
+  before: "moja piękna żona"
+  after: "moją piękną żonę"
+  side: before
+  text: "To jest moja piękna żona."
+}
+HIGHLIGHT_CASE {
+  id: sentence-new-suffixes
+  operation: sentence
+  before: "moja piękna żona"
+  after: "moją piękną żonę"
+  side: after
+  text: "Widzę moją piękną żonę."
+}
+HIGHLIGHT_CASE {
+  id: substring-not-word
+  operation: sentence
+  before: ona
+  after: "nią"
+  side: before
+  text: "Moja żona mówi."
+}
+HIGHLIGHT_CASE {
+  id: declared-stem-after
+  operation: change
+  before: "mój"
+  after: mojego
+  side: after
+  alternationA: "ó"
+  alternationB: o
+}
+HIGHLIGHT_CASE {
+  id: declared-stem-short-after
+  operation: change
+  before: "mój"
+  after: "moją"
+  side: after
+  alternationA: "ó"
+  alternationB: o
+}
+HIGHLIGHT_CASE {
+  id: declared-stem-before
+  operation: change
+  before: "mój"
+  after: mojego
+  side: before
+  alternationA: "ó"
+  alternationB: o
+}
+HIGHLIGHT_CASE {
+  id: missing-stem-declaration
+  operation: change
+  before: "mój"
+  after: mojego
+  side: after
+  noAlternations: true
+}
+HIGHLIGHT_CASE {
+  id: generic-alternation
+  operation: change
+  before: abx
+  after: abyzzz
+  side: after
+  alternationA: x
+  alternationB: y
+}
+HIGHLIGHT_CASE {
+  id: generic-no-alternation
+  operation: change
+  before: abx
+  after: abyzzz
+  side: after
+}
+HIGHLIGHT_CASE {
+  id: insert-before
+  operation: change
+  before: "Widzę…"
+  after: "Nie widzę…"
+  side: before
+}
+HIGHLIGHT_CASE {
+  id: insert-after
+  operation: change
+  before: "Widzę…"
+  after: "Nie widzę…"
+  side: after
+}
+HIGHLIGHT_CASE {
+  id: delete-before
+  operation: change
+  before: "Nie widzę…"
+  after: "widzę…"
+  side: before
+}
+HIGHLIGHT_CASE {
+  id: delete-after
+  operation: change
+  before: "Nie widzę…"
+  after: "widzę…"
+  side: after
+}
+HIGHLIGHT_CASE {
+  id: punctuation-only-before
+  operation: change
+  before: "widzę…"
+  after: "widzę…?"
+  side: before
+}
+HIGHLIGHT_CASE {
+  id: punctuation-only-after
+  operation: change
+  before: "widzę…"
+  after: "widzę…?"
+  side: after
+}
+HIGHLIGHT_CASE {
+  id: future-auxiliary-after
+  operation: change
+  before: "Moja piękna żona szła do domu."
+  after: "Moja piękna żona będzie szła do domu."
+  side: after
+}
+HIGHLIGHT_CASE {
+  id: aspect-auxiliary-before
+  operation: change
+  before: "robić"
+  after: "będę robić"
+  side: before
+}
+HIGHLIGHT_CASE {
+  id: aspect-auxiliary-after
+  operation: change
+  before: "robić"
+  after: "będę robić"
+  side: after
+}
+HIGHLIGHT_CASE {
+  id: style-explicit-pair
+  operation: style
+  before: mojej
+  after: ich
+  text: "Widzę mojej siostry, a nie ich."
+}
+HIGHLIGHT_CASE {
+  id: style-free-prose
+  operation: style
+  before: "moja siostra"
+  after: "moją siostrę"
+  text: "Прямой объект после глаголов действия обычно стоит в винительном."
+}
+HIGHLIGHT_CASE {
+  id: zero-ending-before
+  operation: change
+  before: kobiety
+  after: kobiet
+  side: before
+}
+HIGHLIGHT_CASE {
+  id: zero-ending-after
+  operation: change
+  before: kobiety
+  after: kobiet
+  side: after
+}
+HIGHLIGHT_CASE {
+  id: zero-no-phantom
+  operation: change
+  before: abcxyz
+  after: abc
+  side: after
+}

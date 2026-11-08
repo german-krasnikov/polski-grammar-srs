@@ -1,0 +1,779 @@
+DSL 1
+# Ordered literal display fragments for cases.core-data.
+HIGHLIGHT_PART {
+  partId: accusative-three-endings-1
+  caseRef: accusative-three-endings
+  ordinal: 1
+  text: moj
+  isEnding: false
+  isChanged: false
+}
+HIGHLIGHT_PART {
+  partId: accusative-three-endings-2
+  caseRef: accusative-three-endings
+  ordinal: 2
+  text: "ą"
+  isEnding: true
+  isChanged: true
+  changeSide: after
+}
+HIGHLIGHT_PART {
+  partId: accusative-three-endings-3
+  caseRef: accusative-three-endings
+  ordinal: 3
+  text: " "
+  isEnding: false
+  isChanged: false
+}
+HIGHLIGHT_PART {
+  partId: accusative-three-endings-4
+  caseRef: accusative-three-endings
+  ordinal: 4
+  text: "piękn"
+  isEnding: false
+  isChanged: false
+}
+HIGHLIGHT_PART {
+  partId: accusative-three-endings-5
+  caseRef: accusative-three-endings
+  ordinal: 5
+  text: "ą"
+  isEnding: true
+  isChanged: true
+  changeSide: after
+}
+HIGHLIGHT_PART {
+  partId: accusative-three-endings-6
+  caseRef: accusative-three-endings
+  ordinal: 6
+  text: " "
+  isEnding: false
+  isChanged: false
+}
+HIGHLIGHT_PART {
+  partId: accusative-three-endings-7
+  caseRef: accusative-three-endings
+  ordinal: 7
+  text: "żon"
+  isEnding: false
+  isChanged: false
+}
+HIGHLIGHT_PART {
+  partId: accusative-three-endings-8
+  caseRef: accusative-three-endings
+  ordinal: 8
+  text: "ę"
+  isEnding: true
+  isChanged: true
+  changeSide: after
+}
+HIGHLIGHT_PART {
+  partId: whole-replacement-1-1
+  caseRef: whole-replacement-1
+  ordinal: 1
+  text: ich
+  isEnding: false
+  isChanged: true
+  changeSide: after
+}
+HIGHLIGHT_PART {
+  partId: whole-replacement-2-1
+  caseRef: whole-replacement-2
+  ordinal: 1
+  text: "Widziałem"
+  isEnding: false
+  isChanged: true
+  changeSide: after
+}
+HIGHLIGHT_PART {
+  partId: whole-replacement-3-1
+  caseRef: whole-replacement-3
+  ordinal: 1
+  text: "kupiłem / kupiłam"
+  isEnding: false
+  isChanged: true
+  changeSide: after
+}
+HIGHLIGHT_PART {
+  partId: replacement-before-1
+  caseRef: replacement-before
+  ordinal: 1
+  text: mojej
+  isEnding: false
+  isChanged: true
+  changeSide: before
+}
+HIGHLIGHT_PART {
+  partId: replacement-after-1
+  caseRef: replacement-after
+  ordinal: 1
+  text: ich
+  isEnding: false
+  isChanged: true
+  changeSide: after
+}
+HIGHLIGHT_PART {
+  partId: ambiguous-before-1
+  caseRef: ambiguous-before
+  ordinal: 1
+  text: "robić"
+  isEnding: false
+  isChanged: true
+  changeSide: before
+}
+HIGHLIGHT_PART {
+  partId: ambiguous-after-1
+  caseRef: ambiguous-after
+  ordinal: 1
+  text: "robiłem / robiłam"
+  isEnding: false
+  isChanged: true
+  changeSide: after
+}
+HIGHLIGHT_PART {
+  partId: punctuation-period-1
+  caseRef: punctuation-period
+  ordinal: 1
+  text: "żon"
+  isEnding: false
+  isChanged: false
+}
+HIGHLIGHT_PART {
+  partId: punctuation-period-2
+  caseRef: punctuation-period
+  ordinal: 2
+  text: "ę"
+  isEnding: true
+  isChanged: true
+  changeSide: after
+}
+HIGHLIGHT_PART {
+  partId: punctuation-period-3
+  caseRef: punctuation-period
+  ordinal: 3
+  text: "."
+  isEnding: false
+  isChanged: false
+}
+HIGHLIGHT_PART {
+  partId: punctuation-question-1
+  caseRef: punctuation-question
+  ordinal: 1
+  text: "żon"
+  isEnding: false
+  isChanged: false
+}
+HIGHLIGHT_PART {
+  partId: punctuation-question-2
+  caseRef: punctuation-question
+  ordinal: 2
+  text: "ę"
+  isEnding: true
+  isChanged: true
+  changeSide: after
+}
+HIGHLIGHT_PART {
+  partId: punctuation-question-3
+  caseRef: punctuation-question
+  ordinal: 3
+  text: "?"
+  isEnding: false
+  isChanged: false
+}
+HIGHLIGHT_PART {
+  partId: punctuation-exclamation-1
+  caseRef: punctuation-exclamation
+  ordinal: 1
+  text: "żon"
+  isEnding: false
+  isChanged: false
+}
+HIGHLIGHT_PART {
+  partId: punctuation-exclamation-2
+  caseRef: punctuation-exclamation
+  ordinal: 2
+  text: "ę"
+  isEnding: true
+  isChanged: true
+  changeSide: after
+}
+HIGHLIGHT_PART {
+  partId: punctuation-exclamation-3
+  caseRef: punctuation-exclamation
+  ordinal: 3
+  text: "!"
+  isEnding: false
+  isChanged: false
+}
+HIGHLIGHT_PART {
+  partId: sentence-old-suffixes-1
+  caseRef: sentence-old-suffixes
+  ordinal: 1
+  text: "To jest "
+  isEnding: false
+  isChanged: false
+}
+HIGHLIGHT_PART {
+  partId: sentence-old-suffixes-2
+  caseRef: sentence-old-suffixes
+  ordinal: 2
+  text: moj
+  isEnding: false
+  isChanged: false
+}
+HIGHLIGHT_PART {
+  partId: sentence-old-suffixes-3
+  caseRef: sentence-old-suffixes
+  ordinal: 3
+  text: a
+  isEnding: true
+  isChanged: true
+  changeSide: before
+}
+HIGHLIGHT_PART {
+  partId: sentence-old-suffixes-4
+  caseRef: sentence-old-suffixes
+  ordinal: 4
+  text: " "
+  isEnding: false
+  isChanged: false
+}
+HIGHLIGHT_PART {
+  partId: sentence-old-suffixes-5
+  caseRef: sentence-old-suffixes
+  ordinal: 5
+  text: "piękn"
+  isEnding: false
+  isChanged: false
+}
+HIGHLIGHT_PART {
+  partId: sentence-old-suffixes-6
+  caseRef: sentence-old-suffixes
+  ordinal: 6
+  text: a
+  isEnding: true
+  isChanged: true
+  changeSide: before
+}
+HIGHLIGHT_PART {
+  partId: sentence-old-suffixes-7
+  caseRef: sentence-old-suffixes
+  ordinal: 7
+  text: " "
+  isEnding: false
+  isChanged: false
+}
+HIGHLIGHT_PART {
+  partId: sentence-old-suffixes-8
+  caseRef: sentence-old-suffixes
+  ordinal: 8
+  text: "żon"
+  isEnding: false
+  isChanged: false
+}
+HIGHLIGHT_PART {
+  partId: sentence-old-suffixes-9
+  caseRef: sentence-old-suffixes
+  ordinal: 9
+  text: a
+  isEnding: true
+  isChanged: true
+  changeSide: before
+}
+HIGHLIGHT_PART {
+  partId: sentence-old-suffixes-10
+  caseRef: sentence-old-suffixes
+  ordinal: 10
+  text: "."
+  isEnding: false
+  isChanged: false
+}
+HIGHLIGHT_PART {
+  partId: sentence-new-suffixes-1
+  caseRef: sentence-new-suffixes
+  ordinal: 1
+  text: "Widzę "
+  isEnding: false
+  isChanged: false
+}
+HIGHLIGHT_PART {
+  partId: sentence-new-suffixes-2
+  caseRef: sentence-new-suffixes
+  ordinal: 2
+  text: moj
+  isEnding: false
+  isChanged: false
+}
+HIGHLIGHT_PART {
+  partId: sentence-new-suffixes-3
+  caseRef: sentence-new-suffixes
+  ordinal: 3
+  text: "ą"
+  isEnding: true
+  isChanged: true
+  changeSide: after
+}
+HIGHLIGHT_PART {
+  partId: sentence-new-suffixes-4
+  caseRef: sentence-new-suffixes
+  ordinal: 4
+  text: " "
+  isEnding: false
+  isChanged: false
+}
+HIGHLIGHT_PART {
+  partId: sentence-new-suffixes-5
+  caseRef: sentence-new-suffixes
+  ordinal: 5
+  text: "piękn"
+  isEnding: false
+  isChanged: false
+}
+HIGHLIGHT_PART {
+  partId: sentence-new-suffixes-6
+  caseRef: sentence-new-suffixes
+  ordinal: 6
+  text: "ą"
+  isEnding: true
+  isChanged: true
+  changeSide: after
+}
+HIGHLIGHT_PART {
+  partId: sentence-new-suffixes-7
+  caseRef: sentence-new-suffixes
+  ordinal: 7
+  text: " "
+  isEnding: false
+  isChanged: false
+}
+HIGHLIGHT_PART {
+  partId: sentence-new-suffixes-8
+  caseRef: sentence-new-suffixes
+  ordinal: 8
+  text: "żon"
+  isEnding: false
+  isChanged: false
+}
+HIGHLIGHT_PART {
+  partId: sentence-new-suffixes-9
+  caseRef: sentence-new-suffixes
+  ordinal: 9
+  text: "ę"
+  isEnding: true
+  isChanged: true
+  changeSide: after
+}
+HIGHLIGHT_PART {
+  partId: sentence-new-suffixes-10
+  caseRef: sentence-new-suffixes
+  ordinal: 10
+  text: "."
+  isEnding: false
+  isChanged: false
+}
+HIGHLIGHT_PART {
+  partId: substring-not-word-1
+  caseRef: substring-not-word
+  ordinal: 1
+  text: "Moja żona mówi."
+  isEnding: false
+  isChanged: false
+}
+HIGHLIGHT_PART {
+  partId: declared-stem-after-1
+  caseRef: declared-stem-after
+  ordinal: 1
+  text: moj
+  isEnding: false
+  isChanged: false
+}
+HIGHLIGHT_PART {
+  partId: declared-stem-after-2
+  caseRef: declared-stem-after
+  ordinal: 2
+  text: ego
+  isEnding: true
+  isChanged: true
+  changeSide: after
+}
+HIGHLIGHT_PART {
+  partId: declared-stem-short-after-1
+  caseRef: declared-stem-short-after
+  ordinal: 1
+  text: moj
+  isEnding: false
+  isChanged: false
+}
+HIGHLIGHT_PART {
+  partId: declared-stem-short-after-2
+  caseRef: declared-stem-short-after
+  ordinal: 2
+  text: "ą"
+  isEnding: true
+  isChanged: true
+  changeSide: after
+}
+HIGHLIGHT_PART {
+  partId: declared-stem-before-1
+  caseRef: declared-stem-before
+  ordinal: 1
+  text: "mój"
+  isEnding: false
+  isChanged: false
+}
+HIGHLIGHT_PART {
+  partId: missing-stem-declaration-1
+  caseRef: missing-stem-declaration
+  ordinal: 1
+  text: mojego
+  isEnding: false
+  isChanged: true
+  changeSide: after
+}
+HIGHLIGHT_PART {
+  partId: generic-alternation-1
+  caseRef: generic-alternation
+  ordinal: 1
+  text: aby
+  isEnding: false
+  isChanged: false
+}
+HIGHLIGHT_PART {
+  partId: generic-alternation-2
+  caseRef: generic-alternation
+  ordinal: 2
+  text: zzz
+  isEnding: true
+  isChanged: true
+  changeSide: after
+}
+HIGHLIGHT_PART {
+  partId: generic-no-alternation-1
+  caseRef: generic-no-alternation
+  ordinal: 1
+  text: abyzzz
+  isEnding: false
+  isChanged: true
+  changeSide: after
+}
+HIGHLIGHT_PART {
+  partId: insert-before-1
+  caseRef: insert-before
+  ordinal: 1
+  text: "Widzę…"
+  isEnding: false
+  isChanged: false
+}
+HIGHLIGHT_PART {
+  partId: insert-after-1
+  caseRef: insert-after
+  ordinal: 1
+  text: Nie
+  isEnding: false
+  isChanged: true
+  changeSide: after
+}
+HIGHLIGHT_PART {
+  partId: insert-after-2
+  caseRef: insert-after
+  ordinal: 2
+  text: " "
+  isEnding: false
+  isChanged: false
+}
+HIGHLIGHT_PART {
+  partId: insert-after-3
+  caseRef: insert-after
+  ordinal: 3
+  text: "widzę…"
+  isEnding: false
+  isChanged: false
+}
+HIGHLIGHT_PART {
+  partId: delete-before-1
+  caseRef: delete-before
+  ordinal: 1
+  text: Nie
+  isEnding: false
+  isChanged: true
+  changeSide: before
+}
+HIGHLIGHT_PART {
+  partId: delete-before-2
+  caseRef: delete-before
+  ordinal: 2
+  text: " "
+  isEnding: false
+  isChanged: false
+}
+HIGHLIGHT_PART {
+  partId: delete-before-3
+  caseRef: delete-before
+  ordinal: 3
+  text: "widzę…"
+  isEnding: false
+  isChanged: false
+}
+HIGHLIGHT_PART {
+  partId: delete-after-1
+  caseRef: delete-after
+  ordinal: 1
+  text: "widzę…"
+  isEnding: false
+  isChanged: false
+}
+HIGHLIGHT_PART {
+  partId: punctuation-only-before-1
+  caseRef: punctuation-only-before
+  ordinal: 1
+  text: "widzę"
+  isEnding: false
+  isChanged: false
+}
+HIGHLIGHT_PART {
+  partId: punctuation-only-before-2
+  caseRef: punctuation-only-before
+  ordinal: 2
+  text: "…"
+  isEnding: false
+  isChanged: false
+}
+HIGHLIGHT_PART {
+  partId: punctuation-only-after-1
+  caseRef: punctuation-only-after
+  ordinal: 1
+  text: "widzę"
+  isEnding: false
+  isChanged: false
+}
+HIGHLIGHT_PART {
+  partId: punctuation-only-after-2
+  caseRef: punctuation-only-after
+  ordinal: 2
+  text: "…?"
+  isEnding: false
+  isChanged: false
+}
+HIGHLIGHT_PART {
+  partId: future-auxiliary-after-1
+  caseRef: future-auxiliary-after
+  ordinal: 1
+  text: Moja
+  isEnding: false
+  isChanged: false
+}
+HIGHLIGHT_PART {
+  partId: future-auxiliary-after-2
+  caseRef: future-auxiliary-after
+  ordinal: 2
+  text: " "
+  isEnding: false
+  isChanged: false
+}
+HIGHLIGHT_PART {
+  partId: future-auxiliary-after-3
+  caseRef: future-auxiliary-after
+  ordinal: 3
+  text: "piękna"
+  isEnding: false
+  isChanged: false
+}
+HIGHLIGHT_PART {
+  partId: future-auxiliary-after-4
+  caseRef: future-auxiliary-after
+  ordinal: 4
+  text: " "
+  isEnding: false
+  isChanged: false
+}
+HIGHLIGHT_PART {
+  partId: future-auxiliary-after-5
+  caseRef: future-auxiliary-after
+  ordinal: 5
+  text: "żona"
+  isEnding: false
+  isChanged: false
+}
+HIGHLIGHT_PART {
+  partId: future-auxiliary-after-6
+  caseRef: future-auxiliary-after
+  ordinal: 6
+  text: " "
+  isEnding: false
+  isChanged: false
+}
+HIGHLIGHT_PART {
+  partId: future-auxiliary-after-7
+  caseRef: future-auxiliary-after
+  ordinal: 7
+  text: "będzie"
+  isEnding: false
+  isChanged: true
+  changeSide: after
+}
+HIGHLIGHT_PART {
+  partId: future-auxiliary-after-8
+  caseRef: future-auxiliary-after
+  ordinal: 8
+  text: " "
+  isEnding: false
+  isChanged: false
+}
+HIGHLIGHT_PART {
+  partId: future-auxiliary-after-9
+  caseRef: future-auxiliary-after
+  ordinal: 9
+  text: "szła"
+  isEnding: false
+  isChanged: false
+}
+HIGHLIGHT_PART {
+  partId: future-auxiliary-after-10
+  caseRef: future-auxiliary-after
+  ordinal: 10
+  text: " "
+  isEnding: false
+  isChanged: false
+}
+HIGHLIGHT_PART {
+  partId: future-auxiliary-after-11
+  caseRef: future-auxiliary-after
+  ordinal: 11
+  text: do
+  isEnding: false
+  isChanged: false
+}
+HIGHLIGHT_PART {
+  partId: future-auxiliary-after-12
+  caseRef: future-auxiliary-after
+  ordinal: 12
+  text: " "
+  isEnding: false
+  isChanged: false
+}
+HIGHLIGHT_PART {
+  partId: future-auxiliary-after-13
+  caseRef: future-auxiliary-after
+  ordinal: 13
+  text: domu.
+  isEnding: false
+  isChanged: false
+}
+HIGHLIGHT_PART {
+  partId: aspect-auxiliary-before-1
+  caseRef: aspect-auxiliary-before
+  ordinal: 1
+  text: "robić"
+  isEnding: false
+  isChanged: false
+}
+HIGHLIGHT_PART {
+  partId: aspect-auxiliary-after-1
+  caseRef: aspect-auxiliary-after
+  ordinal: 1
+  text: "będę"
+  isEnding: false
+  isChanged: true
+  changeSide: after
+}
+HIGHLIGHT_PART {
+  partId: aspect-auxiliary-after-2
+  caseRef: aspect-auxiliary-after
+  ordinal: 2
+  text: " "
+  isEnding: false
+  isChanged: false
+}
+HIGHLIGHT_PART {
+  partId: aspect-auxiliary-after-3
+  caseRef: aspect-auxiliary-after
+  ordinal: 3
+  text: "robić"
+  isEnding: false
+  isChanged: false
+}
+HIGHLIGHT_PART {
+  partId: style-explicit-pair-1
+  caseRef: style-explicit-pair
+  ordinal: 1
+  text: "Widzę "
+  isEnding: false
+  isChanged: false
+}
+HIGHLIGHT_PART {
+  partId: style-explicit-pair-2
+  caseRef: style-explicit-pair
+  ordinal: 2
+  text: mojej
+  isEnding: false
+  isChanged: true
+  changeSide: before
+}
+HIGHLIGHT_PART {
+  partId: style-explicit-pair-3
+  caseRef: style-explicit-pair
+  ordinal: 3
+  text: " siostry, a nie "
+  isEnding: false
+  isChanged: false
+}
+HIGHLIGHT_PART {
+  partId: style-explicit-pair-4
+  caseRef: style-explicit-pair
+  ordinal: 4
+  text: ich
+  isEnding: false
+  isChanged: true
+  changeSide: after
+}
+HIGHLIGHT_PART {
+  partId: style-explicit-pair-5
+  caseRef: style-explicit-pair
+  ordinal: 5
+  text: "."
+  isEnding: false
+  isChanged: false
+}
+HIGHLIGHT_PART {
+  partId: style-free-prose-1
+  caseRef: style-free-prose
+  ordinal: 1
+  text: "Прямой объект после глаголов действия обычно стоит в винительном."
+  isEnding: false
+  isChanged: false
+}
+HIGHLIGHT_PART {
+  partId: zero-ending-before-1
+  caseRef: zero-ending-before
+  ordinal: 1
+  text: kobiet
+  isEnding: false
+  isChanged: false
+}
+HIGHLIGHT_PART {
+  partId: zero-ending-before-2
+  caseRef: zero-ending-before
+  ordinal: 2
+  text: y
+  isEnding: true
+  isChanged: true
+  changeSide: before
+}
+HIGHLIGHT_PART {
+  partId: zero-ending-after-1
+  caseRef: zero-ending-after
+  ordinal: 1
+  text: kobiet
+  isEnding: false
+  isChanged: true
+  changeSide: after
+}
+HIGHLIGHT_PART {
+  partId: zero-no-phantom-1
+  caseRef: zero-no-phantom
+  ordinal: 1
+  text: abc
+  isEnding: false
+  isChanged: true
+  changeSide: after
+}
