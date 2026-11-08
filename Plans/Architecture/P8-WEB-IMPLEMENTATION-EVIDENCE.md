@@ -44,3 +44,7 @@ The tester reproduced the same focused `TrainingStoreTest.tabNavigationResetsMat
 ## Final independent review
 
 APPROVED after test-only correction of the W3 gap. Reviewer confirmed mounted incoming-layer disposal, remount, forced stale build/rAF1/rAF2/finish callbacks, no old completion, intact new root, cleared inert/aria-hidden state and WebNav resize-listener cleanup. No remaining production blocker was found. Selected new cases are JS 2/2 and Wasm 2/2 PASS. This approval does not change either recorded full-class/broad-JS timeout into PASS.
+
+## Later runner correction
+
+The recorded 10-second failures above are historical observations, superseded for current composeApp verification by [measured runner correction](P8-JS-TEST-HARNESS-EVIDENCE.md): cold synchronous test fixture setup took 15–17 seconds. With a measured 30-second Mocha limit and unchanged assertions, complete JS **32/32** and Wasm **32/32** pass, including all four lifecycle cases. Independent review APPROVED; production source/artifact is unchanged. This does not relabel earlier runs or the separate shared-module P10 JS run.
