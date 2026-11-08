@@ -57,7 +57,7 @@ class AndroidUserPreferencesStoreTest {
         val repository = AndroidUserPreferencesStore(context)
         val loaded = (repository.load() as PreferencesLoad.Loaded).value
         assertEquals("SituationFirst", loaded.styleId.name)
-        assertTrue(UserPreferencesCodec.encode(loaded).contains("\"schemaVersion\":3"))
+        assertTrue(UserPreferencesCodec.encode(loaded).startsWith("POLSKI-TEXT"))
     }
 
     @Test fun v1DocumentMigratesBeforeTintChange() = runBlocking {
