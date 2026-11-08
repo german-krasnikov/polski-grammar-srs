@@ -62,14 +62,14 @@ describe.skipIf(!hasCli)('text specs, reasons and changes against the contract',
 
   const reasonRow = (fields: Record<string, string>) => row('REASON', fields);
   it('a fixed reason and a classified one with its rules are accepted', () => {
-    const rows = [reasonRow({ kind: 'fixed', key: '"accPrompt"' }), reasonRow({ kind: 'classified', rules: '[{whenClass: "default" key: "accPrompt"}]' })];
+    const rows = [reasonRow({ kind: 'fixed', key: '"accPrompt"' }), reasonRow({ kind: 'classified', rules: '[{key: "accPrompt"}]' })];
     expect(reason.check(rows.join('\n') + '\n')).toEqual({ status: 0, problems: [] });
   });
   it('a reason kind outside the enum is DATA_ENUM at the value', () => reason.problem([reasonRow({ kind: 'fix', key: '"accPrompt"' })], 0, 'fix', 'DATA_ENUM'));
   it('a rule without its key is DATA_REQUIRED at the { of the rule', () =>
-    reason.problem([reasonRow({ kind: 'classified', rules: '[{whenClass: "default"}]' })], 0, '{whenClass: "default"}', 'DATA_REQUIRED'));
+    reason.problem([reasonRow({ kind: 'classified', rules: '[{whenUnchanged: true}]' })], 0, '{whenUnchanged: true}', 'DATA_REQUIRED'));
   it('a rule whose key is no copy entry is DATA_REF at the value', () =>
-    reason.problem([reasonRow({ kind: 'classified', rules: '[{whenClass: "default" key: "nope"}]' })], 0, '"nope"', 'DATA_REF'));
+    reason.problem([reasonRow({ kind: 'classified', rules: '[{key: "nope"}]' })], 0, '"nope"', 'DATA_REF'));
 
   it('a change needs both texts and a reason', () => {
     const fields = { from: '{kind: copy key: "accPrompt"}', to: '{kind: literal value: "x"}', reason: '{kind: fixed key: "accPrompt"}' };
