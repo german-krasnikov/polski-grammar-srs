@@ -1,49 +1,49 @@
 DSL 1
 GRAMMAR_TEST {
-  testId: "certyfikat-polski-B1-2019-grammar-1"
+  testId: "B1-2019-grammar-1"
   examRef: "certyfikat-polski-B1-2019"
   taskNumber: 1
-  instruction: "Proszę podkreślić poprawne formy wyrazów (deklinacja)"
+  instruction: "Prosze podkreslic poprawne formy wyrazow podanych w nawiasach (odmiana rzeczownikow, przymiotnikow i zaimkow)."
 }
 GRAMMAR_TEST {
-  testId: "certyfikat-polski-B1-2019-grammar-2"
+  testId: "B1-2019-grammar-2"
   examRef: "certyfikat-polski-B1-2019"
   taskNumber: 2
-  instruction: "Proszę uzupełnić zdania spójnikami z ramki"
+  instruction: "Prosze uzupelnic zdania wyrazami z ramki (wskazniki zespolenia)."
 }
 GRAMMAR_TEST {
-  testId: "certyfikat-polski-B1-2019-grammar-3"
+  testId: "B1-2019-grammar-3"
   examRef: "certyfikat-polski-B1-2019"
   taskNumber: 3
-  instruction: "Proszę podkreślić poprawne formy stopniowania przymiotników i przysłówków"
+  instruction: "Prosze podkreslic poprawne formy wyrazow podanych w nawiasach (stopniowanie przymiotnikow i przyslowkow)."
 }
 GRAMMAR_TEST {
-  testId: "certyfikat-polski-B1-2019-grammar-4"
+  testId: "B1-2019-grammar-4"
   examRef: "certyfikat-polski-B1-2019"
   taskNumber: 4
-  instruction: "Proszę uzupełnić tekst czasownikami w odpowiednim czasie"
+  instruction: "Prosze uzupelnic tekst poprawnymi formami wyrazow podanych w nawiasach (czas terazniejszy i przeszly)."
 }
 GRAMMAR_TEST {
-  testId: "certyfikat-polski-B1-2019-grammar-5"
+  testId: "B1-2019-grammar-5"
   examRef: "certyfikat-polski-B1-2019"
   taskNumber: 5
-  instruction: "Proszę zapytać o podkreśloną część zdania"
+  instruction: "Prosze zapytac o podkreslona czesc zdania."
 }
 GRAMMAR_TEST {
-  testId: "certyfikat-polski-B1-2019-grammar-6"
+  testId: "B1-2019-grammar-6"
   examRef: "certyfikat-polski-B1-2019"
   taskNumber: 6
-  instruction: "Proszę przekształcić zdanie z użyciem wyrazu w nawiasie"
+  instruction: "Prosze uzyc wyrazu w nawiasie i przeksztalcic zdanie tak, by mialo ten sam sens."
 }
 GRAMMAR_TEST {
-  testId: "certyfikat-polski-B1-2019-grammar-7"
+  testId: "B1-2019-grammar-7"
   examRef: "certyfikat-polski-B1-2019"
   taskNumber: 7
-  instruction: "Proszę podkreślić poprawną formę wyrazów (aspekt i tryby)"
+  instruction: "Prosze podkreslic poprawna forme wyrazow podanych w nawiasach (aspekt i tryby)."
 }
 GRAMMAR_TEST {
-  testId: "certyfikat-polski-B1-2019-grammar-8"
+  testId: "B1-2019-grammar-8"
   examRef: "certyfikat-polski-B1-2019"
   taskNumber: 8
-  instruction: "Proszę uzupełnić zdania przyimkami z ramki"
+  instruction: "Prosze uzupelnic zdania wyrazami z ramki (przyimki)."
 }

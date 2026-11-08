@@ -1,0 +1,6 @@
+# Exam source materials (PDF, MP3) — copyrighted publisher content.
+# Only transcribed .core-data goes into git; originals stay local.
+*.pdf
+*.mp3
+*.m4a
+*.wav

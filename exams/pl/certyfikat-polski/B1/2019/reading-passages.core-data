@@ -1,36 +1,34 @@
 DSL 1
 READING_PASSAGE {
-  passageId: "certyfikat-polski-B1-2019-reading-1"
+  passageId: "B1-2019-read-1"
   examRef: "certyfikat-polski-B1-2019"
   taskNumber: 1
-  instruction: "Proszę przeczytać fragmenty tekstów i wybrać odpowiedź"
-  text: "See PDF page for full text"
+  instruction: "Prosze przeczytac fragmenty tekstow i zaznaczyc wlasciwa odpowiedz."
 }
 READING_PASSAGE {
-  passageId: "certyfikat-polski-B1-2019-reading-2"
+  passageId: "B1-2019-read-2"
   examRef: "certyfikat-polski-B1-2019"
   taskNumber: 2
-  instruction: "Proszę przeczytać tekst i zaznaczyć TAK lub NIE"
-  text: "See PDF page for full text"
+  instruction: "Prosze przeczytac tekst i zaznaczyc: TAK lub NIE."
+  text: "Wedlug przepisow pasazer ma prawo do zwrotu pieniedzy, jezeli rejs zostal odwolany na krocej niz 14 dni przed wylotem lub jest opozniony o ponad 3 godziny..."
 }
 READING_PASSAGE {
-  passageId: "certyfikat-polski-B1-2019-reading-3"
+  passageId: "B1-2019-read-3"
   examRef: "certyfikat-polski-B1-2019"
   taskNumber: 3
-  instruction: "Proszę dopasować usunięte fragmenty do tekstu"
-  text: "See PDF page for full text"
+  instruction: "Prosze przeczytac tekst i dopasowac usuniete fragmenty (A-I)."
+  text: "Slynny na caly swiat Jarmark Dominikanski w Gdansku ma bardzo dluga tradycje..."
 }
 READING_PASSAGE {
-  passageId: "certyfikat-polski-B1-2019-reading-4"
+  passageId: "B1-2019-read-4"
   examRef: "certyfikat-polski-B1-2019"
   taskNumber: 4
-  instruction: "Proszę połączyć tytuły z fragmentami tekstów"
-  text: "See PDF page for full text"
+  instruction: "Prosze polaczyc tytuly z kolumny I z fragmentami tekstow z kolumny II."
 }
 READING_PASSAGE {
-  passageId: "certyfikat-polski-B1-2019-reading-5"
+  passageId: "B1-2019-read-5"
   examRef: "certyfikat-polski-B1-2019"
   taskNumber: 5
-  instruction: "Proszę uzupełnić tekst wyrazami z ramki"
-  text: "See PDF page for full text"
+  instruction: "Prosze uzupelnic tekst wyrazami z ramki."
+  text: "Akcja 'Majewskich posadzili' jest czescia kampanii, ktora prowadzi fundacja 'Zmiana'..."
 }

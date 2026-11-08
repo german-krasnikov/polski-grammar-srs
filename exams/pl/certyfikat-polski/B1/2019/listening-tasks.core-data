@@ -1,46 +1,46 @@
 DSL 1
 LISTENING_TASK {
-  taskId: "certyfikat-polski-B1-2019-listening-1"
+  taskId: "B1-2019-listen-1"
   examRef: "certyfikat-polski-B1-2019"
   taskNumber: 1
-  audioUrl: "https://certyfikatpolski.pl/B1_audio.mp3"
+  audioUrl: "ExamBin/pl/B1/2019/audio.mp3"
   segmentStartMs: 0
   segmentEndMs: 0
-  instruction: "Proszę zaznaczyć właściwe odpowiedzi"
+  instruction: "Prosze zaznczyc wlasciwe odpowiedzi."
 }
 LISTENING_TASK {
-  taskId: "certyfikat-polski-B1-2019-listening-2"
+  taskId: "B1-2019-listen-2"
   examRef: "certyfikat-polski-B1-2019"
   taskNumber: 2
-  audioUrl: "https://certyfikatpolski.pl/B1_audio.mp3"
+  audioUrl: "ExamBin/pl/B1/2019/audio.mp3"
   segmentStartMs: 0
   segmentEndMs: 0
-  instruction: "Proszę zaznaczyć TAK lub NIE"
+  instruction: "Dziennikarz rozmawia na temat akcji 'Torby bumerangi'. Prosze zaznaczyc: TAK lub NIE."
 }
 LISTENING_TASK {
-  taskId: "certyfikat-polski-B1-2019-listening-3"
+  taskId: "B1-2019-listen-3"
   examRef: "certyfikat-polski-B1-2019"
   taskNumber: 3
-  audioUrl: "https://certyfikatpolski.pl/B1_audio.mp3"
+  audioUrl: "ExamBin/pl/B1/2019/audio.mp3"
   segmentStartMs: 0
   segmentEndMs: 0
-  instruction: "Proszę zaznaczyć właściwą odpowiedź"
+  instruction: "Prosze wysluchac informacji o nowym systemie informowania o zagrozeniach i zaznaczyc wlasciwe odpowiedzi."
 }
 LISTENING_TASK {
-  taskId: "certyfikat-polski-B1-2019-listening-4"
+  taskId: "B1-2019-listen-4"
   examRef: "certyfikat-polski-B1-2019"
   taskNumber: 4
-  audioUrl: "https://certyfikatpolski.pl/B1_audio.mp3"
+  audioUrl: "ExamBin/pl/B1/2019/audio.mp3"
   segmentStartMs: 0
   segmentEndMs: 0
-  instruction: "Proszę dopasować osoby do rad"
+  instruction: "Prosze wysluchac tekstu o rozmowach biznesowych i dopasowac osoby do ich rad."
 }
 LISTENING_TASK {
-  taskId: "certyfikat-polski-B1-2019-listening-5"
+  taskId: "B1-2019-listen-5"
   examRef: "certyfikat-polski-B1-2019"
   taskNumber: 5
-  audioUrl: "https://certyfikatpolski.pl/B1_audio.mp3"
+  audioUrl: "ExamBin/pl/B1/2019/audio.mp3"
   segmentStartMs: 0
   segmentEndMs: 0
-  instruction: "Proszę dopasować rady do osób"
+  instruction: "Prosze wysluchac tekstow o sposobach organizacji przeprowadzki i dopasowac numer tekstu do ilustracji."
 }

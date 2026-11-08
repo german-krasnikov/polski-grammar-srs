@@ -1,19 +1,19 @@
 DSL 1
 WRITING_TASK {
-  taskId: "certyfikat-polski-B1-2019-writing-1a"
+  taskId: "B1-2019-writing-1a"
   examRef: "certyfikat-polski-B1-2019"
   taskNumber: 1
-  instruction: "Zestaw I, Zadanie a: napisz e-mail/list"
-  promptText: "See PDF page 22 for full prompt"
-  wordLimit: 80
+  instruction: "Zestaw I, zadanie a"
+  promptText: "Organizuje Pani / Pan impreze urodzinowa w swoim mieszkaniu dla wielu gosci. Halas moze przeszkadzac Pani / Pana sasiadom, dlatego chce Pani / Pan poinformowac ich o tym wydarzeniu. Prosze napisac ogloszenie, ktore powiesi Pani / Pan w windzie."
+  wordLimit: 30
   genre: letter
 }
 WRITING_TASK {
-  taskId: "certyfikat-polski-B1-2019-writing-1b"
+  taskId: "B1-2019-writing-1b"
   examRef: "certyfikat-polski-B1-2019"
   taskNumber: 2
-  instruction: "Zestaw I, Zadanie b: napisz tekst"
-  promptText: "See PDF page 22 for full prompt"
-  wordLimit: 190
-  genre: description
+  instruction: "Zestaw I, zadanie b"
+  promptText: "Odpoczywa Pani / Pan na wakacjach w swoim rodzinnym kraju. Prosze napisac wiadomosc do polskiego kolegi / polskiej kolezanki. Prosze opisac miejsce, w ktorym Pani / Pan jest, napisac o planach na reszre wakacji i zaproponowac wspolne spotkanie."
+  wordLimit: 200
+  genre: letter
 }

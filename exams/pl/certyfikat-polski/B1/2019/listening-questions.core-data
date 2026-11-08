@@ -1,364 +1,356 @@
 DSL 1
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-l1-q1"
-  taskRef: "certyfikat-polski-B1-2019-listening-1"
+  questionId: "B1-2019-lq1-1"
+  taskRef: "B1-2019-listen-1"
   questionType: multiple_choice
-  questionText: "zadanie 1, pytanie 1"
+  questionText: "Pytanie 1"
   options: "a|b|c"
   correctAnswer: "b"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-l1-q2"
-  taskRef: "certyfikat-polski-B1-2019-listening-1"
+  questionId: "B1-2019-lq1-2"
+  taskRef: "B1-2019-listen-1"
   questionType: multiple_choice
-  questionText: "zadanie 1, pytanie 2"
+  questionText: "Pytanie 2"
   options: "a|b|c"
   correctAnswer: "c"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-l1-q3"
-  taskRef: "certyfikat-polski-B1-2019-listening-1"
+  questionId: "B1-2019-lq1-3"
+  taskRef: "B1-2019-listen-1"
   questionType: multiple_choice
-  questionText: "zadanie 1, pytanie 3"
+  questionText: "Pytanie 3"
   options: "a|b|c"
   correctAnswer: "b"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-l1-q4"
-  taskRef: "certyfikat-polski-B1-2019-listening-1"
+  questionId: "B1-2019-lq1-4"
+  taskRef: "B1-2019-listen-1"
   questionType: multiple_choice
-  questionText: "zadanie 1, pytanie 4"
+  questionText: "Pytanie 4"
   options: "a|b|c"
   correctAnswer: "a"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-l1-q5"
-  taskRef: "certyfikat-polski-B1-2019-listening-1"
+  questionId: "B1-2019-lq1-5"
+  taskRef: "B1-2019-listen-1"
   questionType: multiple_choice
-  questionText: "zadanie 1, pytanie 5"
+  questionText: "Pytanie 5"
   options: "a|b|c"
   correctAnswer: "a"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-l1-q6"
-  taskRef: "certyfikat-polski-B1-2019-listening-1"
+  questionId: "B1-2019-lq1-6"
+  taskRef: "B1-2019-listen-1"
   questionType: multiple_choice
-  questionText: "zadanie 1, pytanie 6"
+  questionText: "Pytanie 6"
   options: "a|b|c"
   correctAnswer: "c"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-l1-q7"
-  taskRef: "certyfikat-polski-B1-2019-listening-1"
+  questionId: "B1-2019-lq1-7"
+  taskRef: "B1-2019-listen-1"
   questionType: multiple_choice
-  questionText: "zadanie 1, pytanie 7"
+  questionText: "Pytanie 7"
   options: "a|b|c"
   correctAnswer: "a"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-l1-q8"
-  taskRef: "certyfikat-polski-B1-2019-listening-1"
+  questionId: "B1-2019-lq1-8"
+  taskRef: "B1-2019-listen-1"
   questionType: multiple_choice
-  questionText: "zadanie 1, pytanie 8"
+  questionText: "Pytanie 8"
   options: "a|b|c"
   correctAnswer: "b"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-l1-q9"
-  taskRef: "certyfikat-polski-B1-2019-listening-1"
+  questionId: "B1-2019-lq1-9"
+  taskRef: "B1-2019-listen-1"
   questionType: multiple_choice
-  questionText: "zadanie 1, pytanie 9"
+  questionText: "Pytanie 9"
   options: "a|b|c"
   correctAnswer: "a"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-l1-q10"
-  taskRef: "certyfikat-polski-B1-2019-listening-1"
+  questionId: "B1-2019-lq1-10"
+  taskRef: "B1-2019-listen-1"
   questionType: multiple_choice
-  questionText: "zadanie 1, pytanie 10"
+  questionText: "Pytanie 10"
   options: "a|b|c"
   correctAnswer: "b"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-l1-q11"
-  taskRef: "certyfikat-polski-B1-2019-listening-1"
+  questionId: "B1-2019-lq1-11"
+  taskRef: "B1-2019-listen-1"
   questionType: multiple_choice
-  questionText: "zadanie 1, pytanie 11"
+  questionText: "Pytanie 11"
   options: "a|b|c"
   correctAnswer: "c"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-l1-q12"
-  taskRef: "certyfikat-polski-B1-2019-listening-1"
+  questionId: "B1-2019-lq1-12"
+  taskRef: "B1-2019-listen-1"
   questionType: multiple_choice
-  questionText: "zadanie 1, pytanie 12"
+  questionText: "Pytanie 12"
   options: "a|b|c"
   correctAnswer: "c"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-l1-q13"
-  taskRef: "certyfikat-polski-B1-2019-listening-1"
+  questionId: "B1-2019-lq1-13"
+  taskRef: "B1-2019-listen-1"
   questionType: multiple_choice
-  questionText: "zadanie 1, pytanie 13"
+  questionText: "Pytanie 13"
   options: "a|b|c"
   correctAnswer: "a"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-l1-q14"
-  taskRef: "certyfikat-polski-B1-2019-listening-1"
+  questionId: "B1-2019-lq1-14"
+  taskRef: "B1-2019-listen-1"
   questionType: multiple_choice
-  questionText: "zadanie 1, pytanie 14"
+  questionText: "Pytanie 14"
   options: "a|b|c"
   correctAnswer: "c"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-l2-q1"
-  taskRef: "certyfikat-polski-B1-2019-listening-2"
+  questionId: "B1-2019-lq2-1"
+  taskRef: "B1-2019-listen-2"
   questionType: true_false
-  questionText: "zadanie 2, pytanie 1"
-  options: "TAK|NIE"
-  correctAnswer: "?"
+  questionText: "Pytanie 1"
+  correctAnswer: "NIE"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-l2-q2"
-  taskRef: "certyfikat-polski-B1-2019-listening-2"
+  questionId: "B1-2019-lq2-2"
+  taskRef: "B1-2019-listen-2"
   questionType: true_false
-  questionText: "zadanie 2, pytanie 2"
-  options: "TAK|NIE"
-  correctAnswer: "?"
+  questionText: "Pytanie 2"
+  correctAnswer: "TAK"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-l2-q3"
-  taskRef: "certyfikat-polski-B1-2019-listening-2"
+  questionId: "B1-2019-lq2-3"
+  taskRef: "B1-2019-listen-2"
   questionType: true_false
-  questionText: "zadanie 2, pytanie 3"
-  options: "TAK|NIE"
-  correctAnswer: "?"
+  questionText: "Pytanie 3"
+  correctAnswer: "TAK"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-l2-q4"
-  taskRef: "certyfikat-polski-B1-2019-listening-2"
+  questionId: "B1-2019-lq2-4"
+  taskRef: "B1-2019-listen-2"
   questionType: true_false
-  questionText: "zadanie 2, pytanie 4"
-  options: "TAK|NIE"
-  correctAnswer: "?"
+  questionText: "Pytanie 4"
+  correctAnswer: "NIE"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-l2-q5"
-  taskRef: "certyfikat-polski-B1-2019-listening-2"
+  questionId: "B1-2019-lq2-5"
+  taskRef: "B1-2019-listen-2"
   questionType: true_false
-  questionText: "zadanie 2, pytanie 5"
-  options: "TAK|NIE"
-  correctAnswer: "?"
+  questionText: "Pytanie 5"
+  correctAnswer: "TAK"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-l2-q6"
-  taskRef: "certyfikat-polski-B1-2019-listening-2"
+  questionId: "B1-2019-lq2-6"
+  taskRef: "B1-2019-listen-2"
   questionType: true_false
-  questionText: "zadanie 2, pytanie 6"
-  options: "TAK|NIE"
-  correctAnswer: "?"
+  questionText: "Pytanie 6"
+  correctAnswer: "NIE"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-l2-q7"
-  taskRef: "certyfikat-polski-B1-2019-listening-2"
+  questionId: "B1-2019-lq2-7"
+  taskRef: "B1-2019-listen-2"
   questionType: true_false
-  questionText: "zadanie 2, pytanie 7"
-  options: "TAK|NIE"
-  correctAnswer: "?"
+  questionText: "Pytanie 7"
+  correctAnswer: "TAK"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-l2-q8"
-  taskRef: "certyfikat-polski-B1-2019-listening-2"
+  questionId: "B1-2019-lq2-8"
+  taskRef: "B1-2019-listen-2"
   questionType: true_false
-  questionText: "zadanie 2, pytanie 8"
-  options: "TAK|NIE"
-  correctAnswer: "?"
+  questionText: "Pytanie 8"
+  correctAnswer: "NIE"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-l3-q1"
-  taskRef: "certyfikat-polski-B1-2019-listening-3"
+  questionId: "B1-2019-lq3-1"
+  taskRef: "B1-2019-listen-3"
   questionType: multiple_choice
-  questionText: "zadanie 3, pytanie 1"
+  questionText: "Pytanie 1"
   options: "a|b|c"
   correctAnswer: "b"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-l3-q2"
-  taskRef: "certyfikat-polski-B1-2019-listening-3"
+  questionId: "B1-2019-lq3-2"
+  taskRef: "B1-2019-listen-3"
   questionType: multiple_choice
-  questionText: "zadanie 3, pytanie 2"
+  questionText: "Pytanie 2"
   options: "a|b|c"
   correctAnswer: "c"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-l3-q3"
-  taskRef: "certyfikat-polski-B1-2019-listening-3"
+  questionId: "B1-2019-lq3-3"
+  taskRef: "B1-2019-listen-3"
   questionType: multiple_choice
-  questionText: "zadanie 3, pytanie 3"
+  questionText: "Pytanie 3"
   options: "a|b|c"
   correctAnswer: "c"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-l3-q4"
-  taskRef: "certyfikat-polski-B1-2019-listening-3"
+  questionId: "B1-2019-lq3-4"
+  taskRef: "B1-2019-listen-3"
   questionType: multiple_choice
-  questionText: "zadanie 3, pytanie 4"
+  questionText: "Pytanie 4"
   options: "a|b|c"
   correctAnswer: "a"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-l3-q5"
-  taskRef: "certyfikat-polski-B1-2019-listening-3"
+  questionId: "B1-2019-lq3-5"
+  taskRef: "B1-2019-listen-3"
   questionType: multiple_choice
-  questionText: "zadanie 3, pytanie 5"
+  questionText: "Pytanie 5"
   options: "a|b|c"
   correctAnswer: "c"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-l4-q1"
-  taskRef: "certyfikat-polski-B1-2019-listening-4"
+  questionId: "B1-2019-lq4-1"
+  taskRef: "B1-2019-listen-4"
   questionType: match
-  questionText: "zadanie 4, pytanie 1"
-  correctAnswer: "?"
+  questionText: "A"
+  correctAnswer: "4"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-l4-q2"
-  taskRef: "certyfikat-polski-B1-2019-listening-4"
+  questionId: "B1-2019-lq4-2"
+  taskRef: "B1-2019-listen-4"
   questionType: match
-  questionText: "zadanie 4, pytanie 2"
-  correctAnswer: "?"
+  questionText: "B"
+  correctAnswer: "2"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-l4-q3"
-  taskRef: "certyfikat-polski-B1-2019-listening-4"
+  questionId: "B1-2019-lq4-3"
+  taskRef: "B1-2019-listen-4"
   questionType: match
-  questionText: "zadanie 4, pytanie 3"
-  correctAnswer: "?"
+  questionText: "C"
+  correctAnswer: "3"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-l4-q4"
-  taskRef: "certyfikat-polski-B1-2019-listening-4"
+  questionId: "B1-2019-lq4-4"
+  taskRef: "B1-2019-listen-4"
   questionType: match
-  questionText: "zadanie 4, pytanie 4"
-  correctAnswer: "?"
+  questionText: "D"
+  correctAnswer: "1"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-l4-q5"
-  taskRef: "certyfikat-polski-B1-2019-listening-4"
+  questionId: "B1-2019-lq4-5"
+  taskRef: "B1-2019-listen-4"
   questionType: match
-  questionText: "zadanie 4, pytanie 5"
-  correctAnswer: "?"
+  questionText: "E"
+  correctAnswer: "4"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-l5-q1"
-  taskRef: "certyfikat-polski-B1-2019-listening-5"
+  questionId: "B1-2019-lq5-1"
+  taskRef: "B1-2019-listen-5"
   questionType: match
-  questionText: "zadanie 5, pytanie 1"
-  correctAnswer: "?"
+  questionText: "B"
+  correctAnswer: "6"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-l5-q2"
-  taskRef: "certyfikat-polski-B1-2019-listening-5"
+  questionId: "B1-2019-lq5-2"
+  taskRef: "B1-2019-listen-5"
   questionType: match
-  questionText: "zadanie 5, pytanie 2"
-  correctAnswer: "?"
+  questionText: "C"
+  correctAnswer: "7"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-l5-q3"
-  taskRef: "certyfikat-polski-B1-2019-listening-5"
+  questionId: "B1-2019-lq5-3"
+  taskRef: "B1-2019-listen-5"
   questionType: match
-  questionText: "zadanie 5, pytanie 3"
-  correctAnswer: "?"
+  questionText: "D"
+  correctAnswer: "5"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-l5-q4"
-  taskRef: "certyfikat-polski-B1-2019-listening-5"
+  questionId: "B1-2019-lq5-4"
+  taskRef: "B1-2019-listen-5"
   questionType: match
-  questionText: "zadanie 5, pytanie 4"
-  correctAnswer: "?"
+  questionText: "E"
+  correctAnswer: "1"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-l5-q5"
-  taskRef: "certyfikat-polski-B1-2019-listening-5"
+  questionId: "B1-2019-lq5-5"
+  taskRef: "B1-2019-listen-5"
   questionType: match
-  questionText: "zadanie 5, pytanie 5"
-  correctAnswer: "?"
+  questionText: "F"
+  correctAnswer: "9"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-l5-q6"
-  taskRef: "certyfikat-polski-B1-2019-listening-5"
+  questionId: "B1-2019-lq5-6"
+  taskRef: "B1-2019-listen-5"
   questionType: match
-  questionText: "zadanie 5, pytanie 6"
-  correctAnswer: "?"
+  questionText: "G"
+  correctAnswer: "10"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-l5-q7"
-  taskRef: "certyfikat-polski-B1-2019-listening-5"
+  questionId: "B1-2019-lq5-7"
+  taskRef: "B1-2019-listen-5"
   questionType: match
-  questionText: "zadanie 5, pytanie 7"
-  correctAnswer: "?"
+  questionText: "H"
+  correctAnswer: "3"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-l5-q8"
-  taskRef: "certyfikat-polski-B1-2019-listening-5"
+  questionId: "B1-2019-lq5-8"
+  taskRef: "B1-2019-listen-5"
   questionType: match
-  questionText: "zadanie 5, pytanie 8"
-  correctAnswer: "?"
+  questionText: "I"
+  correctAnswer: "4"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-l5-q9"
-  taskRef: "certyfikat-polski-B1-2019-listening-5"
+  questionId: "B1-2019-lq5-9"
+  taskRef: "B1-2019-listen-5"
   questionType: match
-  questionText: "zadanie 5, pytanie 9"
-  correctAnswer: "?"
+  questionText: "J"
+  correctAnswer: "8"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-l5-q10"
-  taskRef: "certyfikat-polski-B1-2019-listening-5"
+  questionId: "B1-2019-lq5-10"
+  taskRef: "B1-2019-listen-5"
   questionType: match
-  questionText: "zadanie 5, pytanie 10"
-  correctAnswer: "?"
+  questionText: "K"
+  correctAnswer: "2"
   points: 1
 }
