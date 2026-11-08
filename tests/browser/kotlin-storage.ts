@@ -16,7 +16,8 @@ export async function installProgressReader(page: Page) {
       }
       // POLSKI-TEXT: line-based, tab-delimited
       if (field) {
-        const re = new RegExp('^I\\t' + field + '\\t(-?\\d+)$', 'm');
+        const escapedField = field.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const re = new RegExp('^I\\tK:' + escapedField + '\\t(-?\\d+)$', 'm');
         const m = raw.match(re);
         return m ? parseInt(m[1], 10) : 0;
       }
@@ -24,10 +25,11 @@ export async function installProgressReader(page: Page) {
       const obj: any = {};
       for (const line of raw.split('\n')) {
         const p = line.split('\t');
-        if (p.length >= 3 && p[1] !== '-') {
-          if (p[0] === 'I') obj[p[1]] = parseInt(p[2], 10);
-          else if (p[0] === 'S') obj[p[1]] = p[2];
-          else if (p[0] === 'D') obj[p[1]] = parseFloat(p[2]);
+        if (p.length >= 3 && p[1]?.startsWith('K:')) {
+          const key = p[1].slice(2);
+          if (p[0] === 'I') obj[key] = parseInt(p[2], 10);
+          else if (p[0] === 'S') obj[key] = p[2];
+          else if (p[0] === 'B') obj[key] = p[2] === '1';
         }
       }
       return obj;
