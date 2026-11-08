@@ -9,6 +9,7 @@ internal enum class WebRoute(val slug: String, val tab: AppTab?) {
     Vocabulary("vocabulary", AppTab.Vocabulary),
     Matrix("matrix", AppTab.Matrix),
     Progress("progress", AppTab.Progress),
+    Exam("exam", null),
     Settings("settings", null);
 
     companion object {

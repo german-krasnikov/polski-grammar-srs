@@ -323,6 +323,7 @@ private class TrainingDomRenderer {
     private var previousStatus: String? = null
     var composing = false
     private val vocabulary = VocabularyWebController()
+    private val exam = ExamWebController()
     private var navigation: WebNav? = null
     private val riveOverlay = RiveEffectOverlay()
     private val slider = RouteSlider()
@@ -449,6 +450,7 @@ private class TrainingDomRenderer {
                 }
                 WebRoute.Matrix -> renderMatrixWeb(node("main", "matrix-page").also(content::appendChild), state, dispatch)
                 WebRoute.Progress -> renderProgressWeb(node("main", "progress-page").also(content::appendChild), state, dispatch)
+                WebRoute.Exam -> exam.render(node("main", "exam-page").also(content::appendChild))
                 WebRoute.Settings -> renderSettingsWeb(node("main", "settings-page").also(content::appendChild), preferences, store, returnTo, navigate)
             }
             content.appendChild(node("footer", text = ROUTE_FOOTER_TEXT))

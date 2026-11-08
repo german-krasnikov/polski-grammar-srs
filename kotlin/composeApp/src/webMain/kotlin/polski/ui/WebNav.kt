@@ -21,6 +21,7 @@ internal class WebNav(app: HTMLElement, navigate: (WebRoute) -> Unit) {
         WebRoute.Vocabulary to "Слова",
         WebRoute.Matrix to "Таблицы и схема",
         WebRoute.Progress to UiCopy.ProgressTab,
+        WebRoute.Exam to "Экзамен",
         WebRoute.Settings to UiCopy.SettingsTab,
     )
     // P2-10: "Таблицы и схема" wraps onto two lines inside the mobile nav's fixed-height buttons;
