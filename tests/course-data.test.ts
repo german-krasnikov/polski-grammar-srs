@@ -14,8 +14,9 @@ const ROWS: Record<string, number> = {
 };
 
 describe.skipIf(!hasCli)('courses-biome/pl-ru is Core data', () => {
-  it('holds exactly the 21 known sections', () => {
-    expect(readdirSync(PACK).filter(name => name.endsWith('.core-data')).map(name => name.replace('.core-data', '')).sort()).toEqual(Object.keys(ROWS).sort());
+  it('holds the sealed course sections and the separate DSL UI copy catalog', () => {
+    // P12 adds UI copy; the sealed language-source row counts above stay unchanged.
+    expect(readdirSync(PACK).filter(name => name.endsWith('.core-data')).map(name => name.replace('.core-data', '')).sort()).toEqual([...Object.keys(ROWS), 'uiCopy'].sort());
   });
 
   for (const [section, rows] of Object.entries(ROWS)) {
