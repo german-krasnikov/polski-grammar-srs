@@ -1,226 +1,364 @@
 DSL 1
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-lq-1"
-  taskRef: "certyfikat-polski-B1-2019-listen-1"
+  questionId: "certyfikat-polski-B1-2019-l1-q1"
+  taskRef: "certyfikat-polski-B1-2019-listening-1"
   questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
+  questionText: "zadanie 1, pytanie 1"
+  options: "a|b|c"
+  correctAnswer: "b"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B1-2019-l1-q2"
+  taskRef: "certyfikat-polski-B1-2019-listening-1"
+  questionType: multiple_choice
+  questionText: "zadanie 1, pytanie 2"
+  options: "a|b|c"
+  correctAnswer: "c"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B1-2019-l1-q3"
+  taskRef: "certyfikat-polski-B1-2019-listening-1"
+  questionType: multiple_choice
+  questionText: "zadanie 1, pytanie 3"
+  options: "a|b|c"
+  correctAnswer: "b"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B1-2019-l1-q4"
+  taskRef: "certyfikat-polski-B1-2019-listening-1"
+  questionType: multiple_choice
+  questionText: "zadanie 1, pytanie 4"
+  options: "a|b|c"
+  correctAnswer: "a"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B1-2019-l1-q5"
+  taskRef: "certyfikat-polski-B1-2019-listening-1"
+  questionType: multiple_choice
+  questionText: "zadanie 1, pytanie 5"
+  options: "a|b|c"
+  correctAnswer: "a"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B1-2019-l1-q6"
+  taskRef: "certyfikat-polski-B1-2019-listening-1"
+  questionType: multiple_choice
+  questionText: "zadanie 1, pytanie 6"
+  options: "a|b|c"
+  correctAnswer: "c"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B1-2019-l1-q7"
+  taskRef: "certyfikat-polski-B1-2019-listening-1"
+  questionType: multiple_choice
+  questionText: "zadanie 1, pytanie 7"
+  options: "a|b|c"
+  correctAnswer: "a"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B1-2019-l1-q8"
+  taskRef: "certyfikat-polski-B1-2019-listening-1"
+  questionType: multiple_choice
+  questionText: "zadanie 1, pytanie 8"
+  options: "a|b|c"
+  correctAnswer: "b"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B1-2019-l1-q9"
+  taskRef: "certyfikat-polski-B1-2019-listening-1"
+  questionType: multiple_choice
+  questionText: "zadanie 1, pytanie 9"
+  options: "a|b|c"
+  correctAnswer: "a"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B1-2019-l1-q10"
+  taskRef: "certyfikat-polski-B1-2019-listening-1"
+  questionType: multiple_choice
+  questionText: "zadanie 1, pytanie 10"
+  options: "a|b|c"
+  correctAnswer: "b"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B1-2019-l1-q11"
+  taskRef: "certyfikat-polski-B1-2019-listening-1"
+  questionType: multiple_choice
+  questionText: "zadanie 1, pytanie 11"
+  options: "a|b|c"
+  correctAnswer: "c"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B1-2019-l1-q12"
+  taskRef: "certyfikat-polski-B1-2019-listening-1"
+  questionType: multiple_choice
+  questionText: "zadanie 1, pytanie 12"
+  options: "a|b|c"
+  correctAnswer: "c"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B1-2019-l1-q13"
+  taskRef: "certyfikat-polski-B1-2019-listening-1"
+  questionType: multiple_choice
+  questionText: "zadanie 1, pytanie 13"
+  options: "a|b|c"
+  correctAnswer: "a"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B1-2019-l1-q14"
+  taskRef: "certyfikat-polski-B1-2019-listening-1"
+  questionType: multiple_choice
+  questionText: "zadanie 1, pytanie 14"
+  options: "a|b|c"
+  correctAnswer: "c"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B1-2019-l2-q1"
+  taskRef: "certyfikat-polski-B1-2019-listening-2"
+  questionType: true_false
+  questionText: "zadanie 2, pytanie 1"
+  options: "TAK|NIE"
   correctAnswer: "?"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-lq-2"
-  taskRef: "certyfikat-polski-B1-2019-listen-1"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
+  questionId: "certyfikat-polski-B1-2019-l2-q2"
+  taskRef: "certyfikat-polski-B1-2019-listening-2"
+  questionType: true_false
+  questionText: "zadanie 2, pytanie 2"
+  options: "TAK|NIE"
   correctAnswer: "?"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-lq-3"
-  taskRef: "certyfikat-polski-B1-2019-listen-1"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
+  questionId: "certyfikat-polski-B1-2019-l2-q3"
+  taskRef: "certyfikat-polski-B1-2019-listening-2"
+  questionType: true_false
+  questionText: "zadanie 2, pytanie 3"
+  options: "TAK|NIE"
   correctAnswer: "?"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-lq-4"
-  taskRef: "certyfikat-polski-B1-2019-listen-1"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
+  questionId: "certyfikat-polski-B1-2019-l2-q4"
+  taskRef: "certyfikat-polski-B1-2019-listening-2"
+  questionType: true_false
+  questionText: "zadanie 2, pytanie 4"
+  options: "TAK|NIE"
   correctAnswer: "?"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-lq-5"
-  taskRef: "certyfikat-polski-B1-2019-listen-1"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
+  questionId: "certyfikat-polski-B1-2019-l2-q5"
+  taskRef: "certyfikat-polski-B1-2019-listening-2"
+  questionType: true_false
+  questionText: "zadanie 2, pytanie 5"
+  options: "TAK|NIE"
   correctAnswer: "?"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-lq-6"
-  taskRef: "certyfikat-polski-B1-2019-listen-2"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
+  questionId: "certyfikat-polski-B1-2019-l2-q6"
+  taskRef: "certyfikat-polski-B1-2019-listening-2"
+  questionType: true_false
+  questionText: "zadanie 2, pytanie 6"
+  options: "TAK|NIE"
   correctAnswer: "?"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-lq-7"
-  taskRef: "certyfikat-polski-B1-2019-listen-2"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
+  questionId: "certyfikat-polski-B1-2019-l2-q7"
+  taskRef: "certyfikat-polski-B1-2019-listening-2"
+  questionType: true_false
+  questionText: "zadanie 2, pytanie 7"
+  options: "TAK|NIE"
   correctAnswer: "?"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-lq-8"
-  taskRef: "certyfikat-polski-B1-2019-listen-2"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
+  questionId: "certyfikat-polski-B1-2019-l2-q8"
+  taskRef: "certyfikat-polski-B1-2019-listening-2"
+  questionType: true_false
+  questionText: "zadanie 2, pytanie 8"
+  options: "TAK|NIE"
   correctAnswer: "?"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-lq-9"
-  taskRef: "certyfikat-polski-B1-2019-listen-2"
+  questionId: "certyfikat-polski-B1-2019-l3-q1"
+  taskRef: "certyfikat-polski-B1-2019-listening-3"
   questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
+  questionText: "zadanie 3, pytanie 1"
+  options: "a|b|c"
+  correctAnswer: "b"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B1-2019-l3-q2"
+  taskRef: "certyfikat-polski-B1-2019-listening-3"
+  questionType: multiple_choice
+  questionText: "zadanie 3, pytanie 2"
+  options: "a|b|c"
+  correctAnswer: "c"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B1-2019-l3-q3"
+  taskRef: "certyfikat-polski-B1-2019-listening-3"
+  questionType: multiple_choice
+  questionText: "zadanie 3, pytanie 3"
+  options: "a|b|c"
+  correctAnswer: "c"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B1-2019-l3-q4"
+  taskRef: "certyfikat-polski-B1-2019-listening-3"
+  questionType: multiple_choice
+  questionText: "zadanie 3, pytanie 4"
+  options: "a|b|c"
+  correctAnswer: "a"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B1-2019-l3-q5"
+  taskRef: "certyfikat-polski-B1-2019-listening-3"
+  questionType: multiple_choice
+  questionText: "zadanie 3, pytanie 5"
+  options: "a|b|c"
+  correctAnswer: "c"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B1-2019-l4-q1"
+  taskRef: "certyfikat-polski-B1-2019-listening-4"
+  questionType: match
+  questionText: "zadanie 4, pytanie 1"
   correctAnswer: "?"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-lq-10"
-  taskRef: "certyfikat-polski-B1-2019-listen-2"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
+  questionId: "certyfikat-polski-B1-2019-l4-q2"
+  taskRef: "certyfikat-polski-B1-2019-listening-4"
+  questionType: match
+  questionText: "zadanie 4, pytanie 2"
   correctAnswer: "?"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-lq-11"
-  taskRef: "certyfikat-polski-B1-2019-listen-3"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
+  questionId: "certyfikat-polski-B1-2019-l4-q3"
+  taskRef: "certyfikat-polski-B1-2019-listening-4"
+  questionType: match
+  questionText: "zadanie 4, pytanie 3"
   correctAnswer: "?"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-lq-12"
-  taskRef: "certyfikat-polski-B1-2019-listen-3"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
+  questionId: "certyfikat-polski-B1-2019-l4-q4"
+  taskRef: "certyfikat-polski-B1-2019-listening-4"
+  questionType: match
+  questionText: "zadanie 4, pytanie 4"
   correctAnswer: "?"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-lq-13"
-  taskRef: "certyfikat-polski-B1-2019-listen-3"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
+  questionId: "certyfikat-polski-B1-2019-l4-q5"
+  taskRef: "certyfikat-polski-B1-2019-listening-4"
+  questionType: match
+  questionText: "zadanie 4, pytanie 5"
   correctAnswer: "?"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-lq-14"
-  taskRef: "certyfikat-polski-B1-2019-listen-3"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
+  questionId: "certyfikat-polski-B1-2019-l5-q1"
+  taskRef: "certyfikat-polski-B1-2019-listening-5"
+  questionType: match
+  questionText: "zadanie 5, pytanie 1"
   correctAnswer: "?"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-lq-15"
-  taskRef: "certyfikat-polski-B1-2019-listen-3"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
+  questionId: "certyfikat-polski-B1-2019-l5-q2"
+  taskRef: "certyfikat-polski-B1-2019-listening-5"
+  questionType: match
+  questionText: "zadanie 5, pytanie 2"
   correctAnswer: "?"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-lq-16"
-  taskRef: "certyfikat-polski-B1-2019-listen-4"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
+  questionId: "certyfikat-polski-B1-2019-l5-q3"
+  taskRef: "certyfikat-polski-B1-2019-listening-5"
+  questionType: match
+  questionText: "zadanie 5, pytanie 3"
   correctAnswer: "?"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-lq-17"
-  taskRef: "certyfikat-polski-B1-2019-listen-4"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
+  questionId: "certyfikat-polski-B1-2019-l5-q4"
+  taskRef: "certyfikat-polski-B1-2019-listening-5"
+  questionType: match
+  questionText: "zadanie 5, pytanie 4"
   correctAnswer: "?"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-lq-18"
-  taskRef: "certyfikat-polski-B1-2019-listen-4"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
+  questionId: "certyfikat-polski-B1-2019-l5-q5"
+  taskRef: "certyfikat-polski-B1-2019-listening-5"
+  questionType: match
+  questionText: "zadanie 5, pytanie 5"
   correctAnswer: "?"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-lq-19"
-  taskRef: "certyfikat-polski-B1-2019-listen-4"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
+  questionId: "certyfikat-polski-B1-2019-l5-q6"
+  taskRef: "certyfikat-polski-B1-2019-listening-5"
+  questionType: match
+  questionText: "zadanie 5, pytanie 6"
   correctAnswer: "?"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-lq-20"
-  taskRef: "certyfikat-polski-B1-2019-listen-4"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
+  questionId: "certyfikat-polski-B1-2019-l5-q7"
+  taskRef: "certyfikat-polski-B1-2019-listening-5"
+  questionType: match
+  questionText: "zadanie 5, pytanie 7"
   correctAnswer: "?"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-lq-21"
-  taskRef: "certyfikat-polski-B1-2019-listen-5"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
+  questionId: "certyfikat-polski-B1-2019-l5-q8"
+  taskRef: "certyfikat-polski-B1-2019-listening-5"
+  questionType: match
+  questionText: "zadanie 5, pytanie 8"
   correctAnswer: "?"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-lq-22"
-  taskRef: "certyfikat-polski-B1-2019-listen-5"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
+  questionId: "certyfikat-polski-B1-2019-l5-q9"
+  taskRef: "certyfikat-polski-B1-2019-listening-5"
+  questionType: match
+  questionText: "zadanie 5, pytanie 9"
   correctAnswer: "?"
   points: 1
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-lq-23"
-  taskRef: "certyfikat-polski-B1-2019-listen-5"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-lq-24"
-  taskRef: "certyfikat-polski-B1-2019-listen-5"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
-}
-LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-lq-25"
-  taskRef: "certyfikat-polski-B1-2019-listen-5"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
+  questionId: "certyfikat-polski-B1-2019-l5-q10"
+  taskRef: "certyfikat-polski-B1-2019-listening-5"
+  questionType: match
+  questionText: "zadanie 5, pytanie 10"
   correctAnswer: "?"
   points: 1
 }

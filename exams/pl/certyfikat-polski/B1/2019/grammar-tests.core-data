@@ -1,13 +1,49 @@
 DSL 1
 GRAMMAR_TEST {
-  testId: "certyfikat-polski-B1-2019-grammar-10"
+  testId: "certyfikat-polski-B1-2019-grammar-1"
   examRef: "certyfikat-polski-B1-2019"
-  taskNumber: 10
-  instruction: "Prosze przeczytac tekst i uzupelnic luki, wybierajac jedna z trzech mozliwosci (A, B, C)."
+  taskNumber: 1
+  instruction: "Proszę podkreślić poprawne formy wyrazów (deklinacja)"
 }
 GRAMMAR_TEST {
-  testId: "certyfikat-polski-B1-2019-grammar-11"
+  testId: "certyfikat-polski-B1-2019-grammar-2"
   examRef: "certyfikat-polski-B1-2019"
-  taskNumber: 11
-  instruction: "Prosze przeczytac tekst i uzupelnic kazda luke jednym slowem."
+  taskNumber: 2
+  instruction: "Proszę uzupełnić zdania spójnikami z ramki"
+}
+GRAMMAR_TEST {
+  testId: "certyfikat-polski-B1-2019-grammar-3"
+  examRef: "certyfikat-polski-B1-2019"
+  taskNumber: 3
+  instruction: "Proszę podkreślić poprawne formy stopniowania przymiotników i przysłówków"
+}
+GRAMMAR_TEST {
+  testId: "certyfikat-polski-B1-2019-grammar-4"
+  examRef: "certyfikat-polski-B1-2019"
+  taskNumber: 4
+  instruction: "Proszę uzupełnić tekst czasownikami w odpowiednim czasie"
+}
+GRAMMAR_TEST {
+  testId: "certyfikat-polski-B1-2019-grammar-5"
+  examRef: "certyfikat-polski-B1-2019"
+  taskNumber: 5
+  instruction: "Proszę zapytać o podkreśloną część zdania"
+}
+GRAMMAR_TEST {
+  testId: "certyfikat-polski-B1-2019-grammar-6"
+  examRef: "certyfikat-polski-B1-2019"
+  taskNumber: 6
+  instruction: "Proszę przekształcić zdanie z użyciem wyrazu w nawiasie"
+}
+GRAMMAR_TEST {
+  testId: "certyfikat-polski-B1-2019-grammar-7"
+  examRef: "certyfikat-polski-B1-2019"
+  taskNumber: 7
+  instruction: "Proszę podkreślić poprawną formę wyrazów (aspekt i tryby)"
+}
+GRAMMAR_TEST {
+  testId: "certyfikat-polski-B1-2019-grammar-8"
+  examRef: "certyfikat-polski-B1-2019"
+  taskNumber: 8
+  instruction: "Proszę uzupełnić zdania przyimkami z ramki"
 }

@@ -5,6 +5,5 @@ EXAM {
   targetLanguage: "pl"
   level: "B1"
   year: 2019
-  sourceUrl: "https://certyfikatpolski.pl/wp-content/uploads/2019/09/B1_test.pdf"
-  license: "Panstwowa Komisja ds. Poswiadczania Znajomosci Jezyka Polskiego jako Obcego"
+  sourceUrl: "https://certyfikatpolski.pl/o-egzaminie/przykladowe-testy-zbiory-zadan/"
 }

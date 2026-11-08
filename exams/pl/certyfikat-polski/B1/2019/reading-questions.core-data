@@ -1,181 +1,292 @@
 DSL 1
 READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-rq-1"
-  passageRef: "certyfikat-polski-B1-2019-read-6"
+  questionId: "certyfikat-polski-B1-2019-r1-q1"
+  passageRef: "certyfikat-polski-B1-2019-reading-1"
   questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
+  questionText: "zadanie 1, pytanie 1"
+  options: "a|b|c"
+  correctAnswer: "b"
+  points: 1
+}
+READING_QUESTION {
+  questionId: "certyfikat-polski-B1-2019-r1-q2"
+  passageRef: "certyfikat-polski-B1-2019-reading-1"
+  questionType: multiple_choice
+  questionText: "zadanie 1, pytanie 2"
+  options: "a|b|c"
+  correctAnswer: "a"
+  points: 1
+}
+READING_QUESTION {
+  questionId: "certyfikat-polski-B1-2019-r1-q3"
+  passageRef: "certyfikat-polski-B1-2019-reading-1"
+  questionType: multiple_choice
+  questionText: "zadanie 1, pytanie 3"
+  options: "a|b|c"
+  correctAnswer: "b"
+  points: 1
+}
+READING_QUESTION {
+  questionId: "certyfikat-polski-B1-2019-r1-q4"
+  passageRef: "certyfikat-polski-B1-2019-reading-1"
+  questionType: multiple_choice
+  questionText: "zadanie 1, pytanie 4"
+  options: "a|b|c"
+  correctAnswer: "c"
+  points: 1
+}
+READING_QUESTION {
+  questionId: "certyfikat-polski-B1-2019-r2-q1"
+  passageRef: "certyfikat-polski-B1-2019-reading-2"
+  questionType: true_false
+  questionText: "zadanie 2, pytanie 1"
+  options: "TAK|NIE"
   correctAnswer: "?"
   points: 1
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-rq-2"
-  passageRef: "certyfikat-polski-B1-2019-read-6"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
+  questionId: "certyfikat-polski-B1-2019-r2-q2"
+  passageRef: "certyfikat-polski-B1-2019-reading-2"
+  questionType: true_false
+  questionText: "zadanie 2, pytanie 2"
+  options: "TAK|NIE"
   correctAnswer: "?"
   points: 1
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-rq-3"
-  passageRef: "certyfikat-polski-B1-2019-read-6"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
+  questionId: "certyfikat-polski-B1-2019-r2-q3"
+  passageRef: "certyfikat-polski-B1-2019-reading-2"
+  questionType: true_false
+  questionText: "zadanie 2, pytanie 3"
+  options: "TAK|NIE"
   correctAnswer: "?"
   points: 1
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-rq-4"
-  passageRef: "certyfikat-polski-B1-2019-read-6"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
+  questionId: "certyfikat-polski-B1-2019-r2-q4"
+  passageRef: "certyfikat-polski-B1-2019-reading-2"
+  questionType: true_false
+  questionText: "zadanie 2, pytanie 4"
+  options: "TAK|NIE"
   correctAnswer: "?"
   points: 1
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-rq-5"
-  passageRef: "certyfikat-polski-B1-2019-read-6"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
+  questionId: "certyfikat-polski-B1-2019-r2-q5"
+  passageRef: "certyfikat-polski-B1-2019-reading-2"
+  questionType: true_false
+  questionText: "zadanie 2, pytanie 5"
+  options: "TAK|NIE"
   correctAnswer: "?"
   points: 1
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-rq-6"
-  passageRef: "certyfikat-polski-B1-2019-read-7"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
+  questionId: "certyfikat-polski-B1-2019-r2-q6"
+  passageRef: "certyfikat-polski-B1-2019-reading-2"
+  questionType: true_false
+  questionText: "zadanie 2, pytanie 6"
+  options: "TAK|NIE"
   correctAnswer: "?"
   points: 1
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-rq-7"
-  passageRef: "certyfikat-polski-B1-2019-read-7"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
+  questionId: "certyfikat-polski-B1-2019-r2-q7"
+  passageRef: "certyfikat-polski-B1-2019-reading-2"
+  questionType: true_false
+  questionText: "zadanie 2, pytanie 7"
+  options: "TAK|NIE"
   correctAnswer: "?"
   points: 1
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-rq-8"
-  passageRef: "certyfikat-polski-B1-2019-read-7"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
+  questionId: "certyfikat-polski-B1-2019-r3-q1"
+  passageRef: "certyfikat-polski-B1-2019-reading-3"
+  questionType: match_heading
+  questionText: "zadanie 3, pytanie 1"
+  correctAnswer: "H"
   points: 1
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-rq-9"
-  passageRef: "certyfikat-polski-B1-2019-read-7"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
+  questionId: "certyfikat-polski-B1-2019-r3-q2"
+  passageRef: "certyfikat-polski-B1-2019-reading-3"
+  questionType: match_heading
+  questionText: "zadanie 3, pytanie 2"
+  correctAnswer: "A"
   points: 1
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-rq-10"
-  passageRef: "certyfikat-polski-B1-2019-read-7"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
+  questionId: "certyfikat-polski-B1-2019-r3-q3"
+  passageRef: "certyfikat-polski-B1-2019-reading-3"
+  questionType: match_heading
+  questionText: "zadanie 3, pytanie 3"
+  correctAnswer: "E"
   points: 1
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-rq-11"
-  passageRef: "certyfikat-polski-B1-2019-read-8"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
+  questionId: "certyfikat-polski-B1-2019-r3-q4"
+  passageRef: "certyfikat-polski-B1-2019-reading-3"
+  questionType: match_heading
+  questionText: "zadanie 3, pytanie 4"
+  correctAnswer: "F"
   points: 1
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-rq-12"
-  passageRef: "certyfikat-polski-B1-2019-read-8"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
+  questionId: "certyfikat-polski-B1-2019-r3-q5"
+  passageRef: "certyfikat-polski-B1-2019-reading-3"
+  questionType: match_heading
+  questionText: "zadanie 3, pytanie 5"
+  correctAnswer: "C"
   points: 1
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-rq-13"
-  passageRef: "certyfikat-polski-B1-2019-read-8"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
+  questionId: "certyfikat-polski-B1-2019-r3-q6"
+  passageRef: "certyfikat-polski-B1-2019-reading-3"
+  questionType: match_heading
+  questionText: "zadanie 3, pytanie 6"
+  correctAnswer: "D"
   points: 1
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-rq-14"
-  passageRef: "certyfikat-polski-B1-2019-read-8"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
+  questionId: "certyfikat-polski-B1-2019-r3-q7"
+  passageRef: "certyfikat-polski-B1-2019-reading-3"
+  questionType: match_heading
+  questionText: "zadanie 3, pytanie 7"
+  correctAnswer: "I"
   points: 1
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-rq-15"
-  passageRef: "certyfikat-polski-B1-2019-read-8"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
+  questionId: "certyfikat-polski-B1-2019-r3-q8"
+  passageRef: "certyfikat-polski-B1-2019-reading-3"
+  questionType: match_heading
+  questionText: "zadanie 3, pytanie 8"
+  correctAnswer: "G"
   points: 1
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-rq-16"
-  passageRef: "certyfikat-polski-B1-2019-read-9"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
+  questionId: "certyfikat-polski-B1-2019-r4-q1"
+  passageRef: "certyfikat-polski-B1-2019-reading-4"
+  questionType: match_heading
+  questionText: "zadanie 4, pytanie 1"
+  correctAnswer: "G"
   points: 1
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-rq-17"
-  passageRef: "certyfikat-polski-B1-2019-read-9"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
+  questionId: "certyfikat-polski-B1-2019-r4-q2"
+  passageRef: "certyfikat-polski-B1-2019-reading-4"
+  questionType: match_heading
+  questionText: "zadanie 4, pytanie 2"
+  correctAnswer: "A"
   points: 1
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-rq-18"
-  passageRef: "certyfikat-polski-B1-2019-read-9"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
+  questionId: "certyfikat-polski-B1-2019-r4-q3"
+  passageRef: "certyfikat-polski-B1-2019-reading-4"
+  questionType: match_heading
+  questionText: "zadanie 4, pytanie 3"
+  correctAnswer: "F"
   points: 1
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-rq-19"
-  passageRef: "certyfikat-polski-B1-2019-read-9"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
+  questionId: "certyfikat-polski-B1-2019-r4-q4"
+  passageRef: "certyfikat-polski-B1-2019-reading-4"
+  questionType: match_heading
+  questionText: "zadanie 4, pytanie 4"
+  correctAnswer: "D"
   points: 1
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B1-2019-rq-20"
-  passageRef: "certyfikat-polski-B1-2019-read-9"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
+  questionId: "certyfikat-polski-B1-2019-r4-q5"
+  passageRef: "certyfikat-polski-B1-2019-reading-4"
+  questionType: match_heading
+  questionText: "zadanie 4, pytanie 5"
+  correctAnswer: "C"
+  points: 1
+}
+READING_QUESTION {
+  questionId: "certyfikat-polski-B1-2019-r4-q6"
+  passageRef: "certyfikat-polski-B1-2019-reading-4"
+  questionType: match_heading
+  questionText: "zadanie 4, pytanie 6"
+  correctAnswer: "E"
+  points: 1
+}
+READING_QUESTION {
+  questionId: "certyfikat-polski-B1-2019-r5-q1"
+  passageRef: "certyfikat-polski-B1-2019-reading-5"
+  questionType: fill_gap
+  questionText: "zadanie 5, pytanie 1"
+  correctAnswer: "nowych"
+  points: 1
+}
+READING_QUESTION {
+  questionId: "certyfikat-polski-B1-2019-r5-q2"
+  passageRef: "certyfikat-polski-B1-2019-reading-5"
+  questionType: fill_gap
+  questionText: "zadanie 5, pytanie 2"
+  correctAnswer: "wysokie"
+  points: 1
+}
+READING_QUESTION {
+  questionId: "certyfikat-polski-B1-2019-r5-q3"
+  passageRef: "certyfikat-polski-B1-2019-reading-5"
+  questionType: fill_gap
+  questionText: "zadanie 5, pytanie 3"
+  correctAnswer: "zorganizować"
+  points: 1
+}
+READING_QUESTION {
+  questionId: "certyfikat-polski-B1-2019-r5-q4"
+  passageRef: "certyfikat-polski-B1-2019-reading-5"
+  questionType: fill_gap
+  questionText: "zadanie 5, pytanie 4"
+  correctAnswer: "mieszkańców"
+  points: 1
+}
+READING_QUESTION {
+  questionId: "certyfikat-polski-B1-2019-r5-q5"
+  passageRef: "certyfikat-polski-B1-2019-reading-5"
+  questionType: fill_gap
+  questionText: "zadanie 5, pytanie 5"
+  correctAnswer: "popularne"
+  points: 1
+}
+READING_QUESTION {
+  questionId: "certyfikat-polski-B1-2019-r5-q6"
+  passageRef: "certyfikat-polski-B1-2019-reading-5"
+  questionType: fill_gap
+  questionText: "zadanie 5, pytanie 6"
+  correctAnswer: "wolność"
+  points: 1
+}
+READING_QUESTION {
+  questionId: "certyfikat-polski-B1-2019-r5-q7"
+  passageRef: "certyfikat-polski-B1-2019-reading-5"
+  questionType: fill_gap
+  questionText: "zadanie 5, pytanie 7"
+  correctAnswer: "młodzieży"
+  points: 1
+}
+READING_QUESTION {
+  questionId: "certyfikat-polski-B1-2019-r5-q8"
+  passageRef: "certyfikat-polski-B1-2019-reading-5"
+  questionType: fill_gap
+  questionText: "zadanie 5, pytanie 8"
+  correctAnswer: "książkę"
+  points: 1
+}
+READING_QUESTION {
+  questionId: "certyfikat-polski-B1-2019-r5-q9"
+  passageRef: "certyfikat-polski-B1-2019-reading-5"
+  questionType: fill_gap
+  questionText: "zadanie 5, pytanie 9"
+  correctAnswer: "przyłączyło"
+  points: 1
+}
+READING_QUESTION {
+  questionId: "certyfikat-polski-B1-2019-r5-q10"
+  passageRef: "certyfikat-polski-B1-2019-reading-5"
+  questionType: fill_gap
+  questionText: "zadanie 5, pytanie 10"
+  correctAnswer: "pojawiło"
   points: 1
 }

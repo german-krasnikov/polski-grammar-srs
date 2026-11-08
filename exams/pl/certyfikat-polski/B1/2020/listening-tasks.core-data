@@ -1,47 +1,46 @@
 DSL 1
-# Audio timestamps need manual verification
 LISTENING_TASK {
-  taskId: "certyfikat-polski-B1-2020-listen-1"
+  taskId: "certyfikat-polski-B1-2020-listening-1"
   examRef: "certyfikat-polski-B1-2020"
   taskNumber: 1
-  audioUrl: "https://certyfikatpolski.pl/wp-content/uploads/2020/12/B1_przykladowy_transkrypcje_i_klucz_2020_03.mp3"
+  audioUrl: "https://certyfikatpolski.pl/audio/B1_2020.mp3"
   segmentStartMs: 0
   segmentEndMs: 0
-  instruction: "TODO: fill from PDF"
+  instruction: "Zadanie 1"
 }
 LISTENING_TASK {
-  taskId: "certyfikat-polski-B1-2020-listen-2"
+  taskId: "certyfikat-polski-B1-2020-listening-2"
   examRef: "certyfikat-polski-B1-2020"
   taskNumber: 2
-  audioUrl: "https://certyfikatpolski.pl/wp-content/uploads/2020/12/B1_przykladowy_transkrypcje_i_klucz_2020_03.mp3"
+  audioUrl: "https://certyfikatpolski.pl/audio/B1_2020.mp3"
   segmentStartMs: 0
   segmentEndMs: 0
-  instruction: "TODO: fill from PDF"
+  instruction: "Zadanie 2"
 }
 LISTENING_TASK {
-  taskId: "certyfikat-polski-B1-2020-listen-3"
+  taskId: "certyfikat-polski-B1-2020-listening-3"
   examRef: "certyfikat-polski-B1-2020"
   taskNumber: 3
-  audioUrl: "https://certyfikatpolski.pl/wp-content/uploads/2020/12/B1_przykladowy_transkrypcje_i_klucz_2020_03.mp3"
+  audioUrl: "https://certyfikatpolski.pl/audio/B1_2020.mp3"
   segmentStartMs: 0
   segmentEndMs: 0
-  instruction: "TODO: fill from PDF"
+  instruction: "Zadanie 3"
 }
 LISTENING_TASK {
-  taskId: "certyfikat-polski-B1-2020-listen-4"
+  taskId: "certyfikat-polski-B1-2020-listening-4"
   examRef: "certyfikat-polski-B1-2020"
   taskNumber: 4
-  audioUrl: "https://certyfikatpolski.pl/wp-content/uploads/2020/12/B1_przykladowy_transkrypcje_i_klucz_2020_03.mp3"
+  audioUrl: "https://certyfikatpolski.pl/audio/B1_2020.mp3"
   segmentStartMs: 0
   segmentEndMs: 0
-  instruction: "TODO: fill from PDF"
+  instruction: "Zadanie 4"
 }
 LISTENING_TASK {
-  taskId: "certyfikat-polski-B1-2020-listen-5"
+  taskId: "certyfikat-polski-B1-2020-listening-5"
   examRef: "certyfikat-polski-B1-2020"
   taskNumber: 5
-  audioUrl: "https://certyfikatpolski.pl/wp-content/uploads/2020/12/B1_przykladowy_transkrypcje_i_klucz_2020_03.mp3"
+  audioUrl: "https://certyfikatpolski.pl/audio/B1_2020.mp3"
   segmentStartMs: 0
   segmentEndMs: 0
-  instruction: "TODO: fill from PDF"
+  instruction: "Zadanie 5"
 }

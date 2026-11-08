@@ -1,0 +1,9 @@
+DSL 1
+EXAM {
+  examId: "certyfikat-polski-B2-2020"
+  provider: "certyfikat-polski"
+  targetLanguage: "pl"
+  level: "B2"
+  year: 2020
+  sourceUrl: "https://certyfikatpolski.pl/o-egzaminie/przykladowe-testy-zbiory-zadan/"
+}

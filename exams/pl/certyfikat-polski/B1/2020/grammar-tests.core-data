@@ -1,13 +1,49 @@
 DSL 1
 GRAMMAR_TEST {
-  testId: "certyfikat-polski-B1-2020-grammar-10"
+  testId: "certyfikat-polski-B1-2020-grammar-1"
   examRef: "certyfikat-polski-B1-2020"
-  taskNumber: 10
-  instruction: "Prosze przeczytac tekst i uzupelnic luki, wybierajac jedna z trzech mozliwosci (A, B, C)."
+  taskNumber: 1
+  instruction: "Zadanie 1"
 }
 GRAMMAR_TEST {
-  testId: "certyfikat-polski-B1-2020-grammar-11"
+  testId: "certyfikat-polski-B1-2020-grammar-2"
   examRef: "certyfikat-polski-B1-2020"
-  taskNumber: 11
-  instruction: "Prosze przeczytac tekst i uzupelnic kazda luke jednym slowem."
+  taskNumber: 2
+  instruction: "Zadanie 2"
+}
+GRAMMAR_TEST {
+  testId: "certyfikat-polski-B1-2020-grammar-3"
+  examRef: "certyfikat-polski-B1-2020"
+  taskNumber: 3
+  instruction: "Zadanie 3"
+}
+GRAMMAR_TEST {
+  testId: "certyfikat-polski-B1-2020-grammar-4"
+  examRef: "certyfikat-polski-B1-2020"
+  taskNumber: 4
+  instruction: "Zadanie 4"
+}
+GRAMMAR_TEST {
+  testId: "certyfikat-polski-B1-2020-grammar-5"
+  examRef: "certyfikat-polski-B1-2020"
+  taskNumber: 5
+  instruction: "Zadanie 5"
+}
+GRAMMAR_TEST {
+  testId: "certyfikat-polski-B1-2020-grammar-6"
+  examRef: "certyfikat-polski-B1-2020"
+  taskNumber: 6
+  instruction: "Zadanie 6"
+}
+GRAMMAR_TEST {
+  testId: "certyfikat-polski-B1-2020-grammar-7"
+  examRef: "certyfikat-polski-B1-2020"
+  taskNumber: 7
+  instruction: "Zadanie 7"
+}
+GRAMMAR_TEST {
+  testId: "certyfikat-polski-B1-2020-grammar-8"
+  examRef: "certyfikat-polski-B1-2020"
+  taskNumber: 8
+  instruction: "Zadanie 8"
 }

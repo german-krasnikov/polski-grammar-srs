@@ -1,29 +1,36 @@
 DSL 1
 READING_PASSAGE {
-  passageId: "certyfikat-polski-B1-2019-read-6"
+  passageId: "certyfikat-polski-B1-2019-reading-1"
   examRef: "certyfikat-polski-B1-2019"
-  taskNumber: 6
-  instruction: "TODO: fill from PDF"
-  text: "TODO: fill from PDF"
+  taskNumber: 1
+  instruction: "Proszę przeczytać fragmenty tekstów i wybrać odpowiedź"
+  text: "See PDF page for full text"
 }
 READING_PASSAGE {
-  passageId: "certyfikat-polski-B1-2019-read-7"
+  passageId: "certyfikat-polski-B1-2019-reading-2"
   examRef: "certyfikat-polski-B1-2019"
-  taskNumber: 7
-  instruction: "TODO: fill from PDF"
-  text: "TODO: fill from PDF"
+  taskNumber: 2
+  instruction: "Proszę przeczytać tekst i zaznaczyć TAK lub NIE"
+  text: "See PDF page for full text"
 }
 READING_PASSAGE {
-  passageId: "certyfikat-polski-B1-2019-read-8"
+  passageId: "certyfikat-polski-B1-2019-reading-3"
   examRef: "certyfikat-polski-B1-2019"
-  taskNumber: 8
-  instruction: "TODO: fill from PDF"
-  text: "TODO: fill from PDF"
+  taskNumber: 3
+  instruction: "Proszę dopasować usunięte fragmenty do tekstu"
+  text: "See PDF page for full text"
 }
 READING_PASSAGE {
-  passageId: "certyfikat-polski-B1-2019-read-9"
+  passageId: "certyfikat-polski-B1-2019-reading-4"
   examRef: "certyfikat-polski-B1-2019"
-  taskNumber: 9
-  instruction: "TODO: fill from PDF"
-  text: "TODO: fill from PDF"
+  taskNumber: 4
+  instruction: "Proszę połączyć tytuły z fragmentami tekstów"
+  text: "See PDF page for full text"
+}
+READING_PASSAGE {
+  passageId: "certyfikat-polski-B1-2019-reading-5"
+  examRef: "certyfikat-polski-B1-2019"
+  taskNumber: 5
+  instruction: "Proszę uzupełnić tekst wyrazami z ramki"
+  text: "See PDF page for full text"
 }

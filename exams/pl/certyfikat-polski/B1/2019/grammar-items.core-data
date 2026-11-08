@@ -1,162 +1,441 @@
 DSL 1
-# Answers need manual fill from PDF (Cloudflare blocks automated download)
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2019-g10-q1"
-  testRef: "certyfikat-polski-B1-2019-grammar-10"
-  questionType: choose_form
-  context: "TODO: fill from PDF"
-  correctAnswer: "?"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2019-g10-q2"
-  testRef: "certyfikat-polski-B1-2019-grammar-10"
-  questionType: choose_form
-  context: "TODO: fill from PDF"
-  correctAnswer: "?"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2019-g10-q3"
-  testRef: "certyfikat-polski-B1-2019-grammar-10"
-  questionType: choose_form
-  context: "TODO: fill from PDF"
-  correctAnswer: "?"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2019-g10-q4"
-  testRef: "certyfikat-polski-B1-2019-grammar-10"
-  questionType: choose_form
-  context: "TODO: fill from PDF"
-  correctAnswer: "?"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2019-g10-q5"
-  testRef: "certyfikat-polski-B1-2019-grammar-10"
-  questionType: choose_form
-  context: "TODO: fill from PDF"
-  correctAnswer: "?"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2019-g10-q6"
-  testRef: "certyfikat-polski-B1-2019-grammar-10"
-  questionType: choose_form
-  context: "TODO: fill from PDF"
-  correctAnswer: "?"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2019-g10-q7"
-  testRef: "certyfikat-polski-B1-2019-grammar-10"
-  questionType: choose_form
-  context: "TODO: fill from PDF"
-  correctAnswer: "?"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2019-g10-q8"
-  testRef: "certyfikat-polski-B1-2019-grammar-10"
-  questionType: choose_form
-  context: "TODO: fill from PDF"
-  correctAnswer: "?"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2019-g10-q9"
-  testRef: "certyfikat-polski-B1-2019-grammar-10"
-  questionType: choose_form
-  context: "TODO: fill from PDF"
-  correctAnswer: "?"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2019-g10-q10"
-  testRef: "certyfikat-polski-B1-2019-grammar-10"
-  questionType: choose_form
-  context: "TODO: fill from PDF"
-  correctAnswer: "?"
-  points: 1
-}
-GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2019-g11-q11"
-  testRef: "certyfikat-polski-B1-2019-grammar-11"
+  itemId: "certyfikat-polski-B1-2019-g1-q1"
+  testRef: "certyfikat-polski-B1-2019-grammar-1"
   questionType: fill_gap
-  context: "TODO: fill from PDF"
+  context: "zadanie 1, pytanie 1"
+  correctAnswer: "czymś 6. je"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B1-2019-g1-q2"
+  testRef: "certyfikat-polski-B1-2019-grammar-1"
+  questionType: fill_gap
+  context: "zadanie 1, pytanie 2"
+  correctAnswer: "pokojami 7. męczącym"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B1-2019-g1-q3"
+  testRef: "certyfikat-polski-B1-2019-grammar-1"
+  questionType: fill_gap
+  context: "zadanie 1, pytanie 3"
+  correctAnswer: "słonecznego 8. dniu"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B1-2019-g1-q4"
+  testRef: "certyfikat-polski-B1-2019-grammar-1"
+  questionType: fill_gap
+  context: "zadanie 1, pytanie 4"
+  correctAnswer: "balkonu 9. niej"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B1-2019-g1-q5"
+  testRef: "certyfikat-polski-B1-2019-grammar-1"
+  questionType: fill_gap
+  context: "zadanie 1, pytanie 5"
+  correctAnswer: "kwiaty 10. dzieciom"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B1-2019-g1-q6"
+  testRef: "certyfikat-polski-B1-2019-grammar-1"
+  questionType: fill_gap
+  context: "zadanie 1, pytanie 6"
   correctAnswer: "?"
   points: 1
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2019-g11-q12"
-  testRef: "certyfikat-polski-B1-2019-grammar-11"
+  itemId: "certyfikat-polski-B1-2019-g1-q7"
+  testRef: "certyfikat-polski-B1-2019-grammar-1"
   questionType: fill_gap
-  context: "TODO: fill from PDF"
+  context: "zadanie 1, pytanie 7"
   correctAnswer: "?"
   points: 1
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2019-g11-q13"
-  testRef: "certyfikat-polski-B1-2019-grammar-11"
+  itemId: "certyfikat-polski-B1-2019-g1-q8"
+  testRef: "certyfikat-polski-B1-2019-grammar-1"
   questionType: fill_gap
-  context: "TODO: fill from PDF"
+  context: "zadanie 1, pytanie 8"
   correctAnswer: "?"
   points: 1
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2019-g11-q14"
-  testRef: "certyfikat-polski-B1-2019-grammar-11"
+  itemId: "certyfikat-polski-B1-2019-g1-q9"
+  testRef: "certyfikat-polski-B1-2019-grammar-1"
   questionType: fill_gap
-  context: "TODO: fill from PDF"
+  context: "zadanie 1, pytanie 9"
   correctAnswer: "?"
   points: 1
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2019-g11-q15"
-  testRef: "certyfikat-polski-B1-2019-grammar-11"
+  itemId: "certyfikat-polski-B1-2019-g1-q10"
+  testRef: "certyfikat-polski-B1-2019-grammar-1"
   questionType: fill_gap
-  context: "TODO: fill from PDF"
+  context: "zadanie 1, pytanie 10"
   correctAnswer: "?"
   points: 1
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2019-g11-q16"
-  testRef: "certyfikat-polski-B1-2019-grammar-11"
+  itemId: "certyfikat-polski-B1-2019-g2-q1"
+  testRef: "certyfikat-polski-B1-2019-grammar-2"
   questionType: fill_gap
-  context: "TODO: fill from PDF"
+  context: "zadanie 2, pytanie 1"
+  correctAnswer: "że"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B1-2019-g2-q2"
+  testRef: "certyfikat-polski-B1-2019-grammar-2"
+  questionType: fill_gap
+  context: "zadanie 2, pytanie 2"
+  correctAnswer: "czy"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B1-2019-g2-q3"
+  testRef: "certyfikat-polski-B1-2019-grammar-2"
+  questionType: fill_gap
+  context: "zadanie 2, pytanie 3"
+  correctAnswer: "lecz"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B1-2019-g2-q4"
+  testRef: "certyfikat-polski-B1-2019-grammar-2"
+  questionType: fill_gap
+  context: "zadanie 2, pytanie 4"
+  correctAnswer: "żeby"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B1-2019-g2-q5"
+  testRef: "certyfikat-polski-B1-2019-grammar-2"
+  questionType: fill_gap
+  context: "zadanie 2, pytanie 5"
+  correctAnswer: "ponieważ"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B1-2019-g3-q1"
+  testRef: "certyfikat-polski-B1-2019-grammar-3"
+  questionType: choose_form
+  context: "zadanie 3, pytanie 1"
+  correctAnswer: "najczęściej"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B1-2019-g3-q2"
+  testRef: "certyfikat-polski-B1-2019-grammar-3"
+  questionType: choose_form
+  context: "zadanie 3, pytanie 2"
+  correctAnswer: "wyżej"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B1-2019-g3-q3"
+  testRef: "certyfikat-polski-B1-2019-grammar-3"
+  questionType: choose_form
+  context: "zadanie 3, pytanie 3"
+  correctAnswer: "najszybszymi"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B1-2019-g3-q4"
+  testRef: "certyfikat-polski-B1-2019-grammar-3"
+  questionType: choose_form
+  context: "zadanie 3, pytanie 4"
+  correctAnswer: "ważniejsze"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B1-2019-g3-q5"
+  testRef: "certyfikat-polski-B1-2019-grammar-3"
+  questionType: choose_form
+  context: "zadanie 3, pytanie 5"
+  correctAnswer: "spokojniej"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B1-2019-g4-q1"
+  testRef: "certyfikat-polski-B1-2019-grammar-4"
+  questionType: fill_gap
+  context: "zadanie 4, pytanie 1"
+  correctAnswer: "jeździliśmy 6. jedli"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B1-2019-g4-q2"
+  testRef: "certyfikat-polski-B1-2019-grammar-4"
+  questionType: fill_gap
+  context: "zadanie 4, pytanie 2"
+  correctAnswer: "doświadczyła 7. możemy"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B1-2019-g4-q3"
+  testRef: "certyfikat-polski-B1-2019-grammar-4"
+  questionType: fill_gap
+  context: "zadanie 4, pytanie 3"
+  correctAnswer: "wrócił 8. znają"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B1-2019-g4-q4"
+  testRef: "certyfikat-polski-B1-2019-grammar-4"
+  questionType: fill_gap
+  context: "zadanie 4, pytanie 4"
+  correctAnswer: "wiedzą 9. prowadzą"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B1-2019-g4-q5"
+  testRef: "certyfikat-polski-B1-2019-grammar-4"
+  questionType: fill_gap
+  context: "zadanie 4, pytanie 5"
+  correctAnswer: "zaczęła 10. projektuje"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B1-2019-g4-q6"
+  testRef: "certyfikat-polski-B1-2019-grammar-4"
+  questionType: fill_gap
+  context: "zadanie 4, pytanie 6"
   correctAnswer: "?"
   points: 1
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2019-g11-q17"
-  testRef: "certyfikat-polski-B1-2019-grammar-11"
+  itemId: "certyfikat-polski-B1-2019-g4-q7"
+  testRef: "certyfikat-polski-B1-2019-grammar-4"
   questionType: fill_gap
-  context: "TODO: fill from PDF"
+  context: "zadanie 4, pytanie 7"
   correctAnswer: "?"
   points: 1
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2019-g11-q18"
-  testRef: "certyfikat-polski-B1-2019-grammar-11"
+  itemId: "certyfikat-polski-B1-2019-g4-q8"
+  testRef: "certyfikat-polski-B1-2019-grammar-4"
   questionType: fill_gap
-  context: "TODO: fill from PDF"
+  context: "zadanie 4, pytanie 8"
   correctAnswer: "?"
   points: 1
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2019-g11-q19"
-  testRef: "certyfikat-polski-B1-2019-grammar-11"
+  itemId: "certyfikat-polski-B1-2019-g4-q9"
+  testRef: "certyfikat-polski-B1-2019-grammar-4"
   questionType: fill_gap
-  context: "TODO: fill from PDF"
+  context: "zadanie 4, pytanie 9"
   correctAnswer: "?"
   points: 1
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B1-2019-g11-q20"
-  testRef: "certyfikat-polski-B1-2019-grammar-11"
+  itemId: "certyfikat-polski-B1-2019-g4-q10"
+  testRef: "certyfikat-polski-B1-2019-grammar-4"
   questionType: fill_gap
-  context: "TODO: fill from PDF"
+  context: "zadanie 4, pytanie 10"
   correctAnswer: "?"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B1-2019-g5-q1"
+  testRef: "certyfikat-polski-B1-2019-grammar-5"
+  questionType: fill_gap
+  context: "zadanie 5, pytanie 1"
+  correctAnswer: "Z czego…? / Z jakiej kapusty…? – 0,25 p."
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B1-2019-g5-q2"
+  testRef: "certyfikat-polski-B1-2019-grammar-5"
+  questionType: fill_gap
+  context: "zadanie 5, pytanie 2"
+  correctAnswer: "Komu…?"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B1-2019-g5-q3"
+  testRef: "certyfikat-polski-B1-2019-grammar-5"
+  questionType: fill_gap
+  context: "zadanie 5, pytanie 3"
+  correctAnswer: "Czym…?"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B1-2019-g5-q4"
+  testRef: "certyfikat-polski-B1-2019-grammar-5"
+  questionType: fill_gap
+  context: "zadanie 5, pytanie 4"
+  correctAnswer: "Od kiedy…? / Jak długo…? / Od jak dawna…? / Odkąd…?"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B1-2019-g5-q5"
+  testRef: "certyfikat-polski-B1-2019-grammar-5"
+  questionType: fill_gap
+  context: "zadanie 5, pytanie 5"
+  correctAnswer: "Jakich…? / Których…? – 0,25 p."
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B1-2019-g6-q1"
+  testRef: "certyfikat-polski-B1-2019-grammar-6"
+  questionType: transform
+  context: "zadanie 6, pytanie 1"
+  correctAnswer: "Bardzo brakuje mi mamy."
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B1-2019-g6-q2"
+  testRef: "certyfikat-polski-B1-2019-grammar-6"
+  questionType: transform
+  context: "zadanie 6, pytanie 2"
+  correctAnswer: "Dzisiaj student pamiętał o książce."
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B1-2019-g6-q3"
+  testRef: "certyfikat-polski-B1-2019-grammar-6"
+  questionType: transform
+  context: "zadanie 6, pytanie 3"
+  correctAnswer: "Małgosia i Amelia opiekują się chorym kotem."
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B1-2019-g6-q4"
+  testRef: "certyfikat-polski-B1-2019-grammar-6"
+  questionType: transform
+  context: "zadanie 6, pytanie 4"
+  correctAnswer: "dzisiejszy wieczór. / Dziewczyny myślą, jak spędzić dzisiejszy wieczór."
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B1-2019-g6-q5"
+  testRef: "certyfikat-polski-B1-2019-grammar-6"
+  questionType: transform
+  context: "zadanie 6, pytanie 5"
+  correctAnswer: "Babcia dała ciasto moim rodzicom."
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B1-2019-g7-q1"
+  testRef: "certyfikat-polski-B1-2019-grammar-7"
+  questionType: choose_form
+  context: "zadanie 7, pytanie 1"
+  correctAnswer: "bylibyśmy 6. jedźcie"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B1-2019-g7-q2"
+  testRef: "certyfikat-polski-B1-2019-grammar-7"
+  questionType: choose_form
+  context: "zadanie 7, pytanie 2"
+  correctAnswer: "wiedział 7. żartuj"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B1-2019-g7-q3"
+  testRef: "certyfikat-polski-B1-2019-grammar-7"
+  questionType: choose_form
+  context: "zadanie 7, pytanie 3"
+  correctAnswer: "mogli 8. wziąłbyś"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B1-2019-g7-q4"
+  testRef: "certyfikat-polski-B1-2019-grammar-7"
+  questionType: choose_form
+  context: "zadanie 7, pytanie 4"
+  correctAnswer: "poznawaliby 9. potraktowali"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B1-2019-g7-q5"
+  testRef: "certyfikat-polski-B1-2019-grammar-7"
+  questionType: choose_form
+  context: "zadanie 7, pytanie 5"
+  correctAnswer: "Skończcie 10. wyglądałyby"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B1-2019-g7-q6"
+  testRef: "certyfikat-polski-B1-2019-grammar-7"
+  questionType: choose_form
+  context: "zadanie 7, pytanie 6"
+  correctAnswer: "?"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B1-2019-g7-q7"
+  testRef: "certyfikat-polski-B1-2019-grammar-7"
+  questionType: choose_form
+  context: "zadanie 7, pytanie 7"
+  correctAnswer: "?"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B1-2019-g7-q8"
+  testRef: "certyfikat-polski-B1-2019-grammar-7"
+  questionType: choose_form
+  context: "zadanie 7, pytanie 8"
+  correctAnswer: "?"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B1-2019-g7-q9"
+  testRef: "certyfikat-polski-B1-2019-grammar-7"
+  questionType: choose_form
+  context: "zadanie 7, pytanie 9"
+  correctAnswer: "?"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B1-2019-g7-q10"
+  testRef: "certyfikat-polski-B1-2019-grammar-7"
+  questionType: choose_form
+  context: "zadanie 7, pytanie 10"
+  correctAnswer: "?"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B1-2019-g8-q1"
+  testRef: "certyfikat-polski-B1-2019-grammar-8"
+  questionType: fill_gap
+  context: "zadanie 8, pytanie 1"
+  correctAnswer: "około"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B1-2019-g8-q2"
+  testRef: "certyfikat-polski-B1-2019-grammar-8"
+  questionType: fill_gap
+  context: "zadanie 8, pytanie 2"
+  correctAnswer: "W"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B1-2019-g8-q3"
+  testRef: "certyfikat-polski-B1-2019-grammar-8"
+  questionType: fill_gap
+  context: "zadanie 8, pytanie 3"
+  correctAnswer: "Oprócz"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B1-2019-g8-q4"
+  testRef: "certyfikat-polski-B1-2019-grammar-8"
+  questionType: fill_gap
+  context: "zadanie 8, pytanie 4"
+  correctAnswer: "bez"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B1-2019-g8-q5"
+  testRef: "certyfikat-polski-B1-2019-grammar-8"
+  questionType: fill_gap
+  context: "zadanie 8, pytanie 5"
+  correctAnswer: "między"
   points: 1
 }

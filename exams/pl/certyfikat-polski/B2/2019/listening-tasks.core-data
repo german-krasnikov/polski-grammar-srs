@@ -1,0 +1,46 @@
+DSL 1
+LISTENING_TASK {
+  taskId: "certyfikat-polski-B2-2019-listening-1"
+  examRef: "certyfikat-polski-B2-2019"
+  taskNumber: 1
+  audioUrl: "https://certyfikatpolski.pl/audio/B2_2019.mp3"
+  segmentStartMs: 0
+  segmentEndMs: 0
+  instruction: "Zadanie 1"
+}
+LISTENING_TASK {
+  taskId: "certyfikat-polski-B2-2019-listening-2"
+  examRef: "certyfikat-polski-B2-2019"
+  taskNumber: 2
+  audioUrl: "https://certyfikatpolski.pl/audio/B2_2019.mp3"
+  segmentStartMs: 0
+  segmentEndMs: 0
+  instruction: "Zadanie 2"
+}
+LISTENING_TASK {
+  taskId: "certyfikat-polski-B2-2019-listening-3"
+  examRef: "certyfikat-polski-B2-2019"
+  taskNumber: 3
+  audioUrl: "https://certyfikatpolski.pl/audio/B2_2019.mp3"
+  segmentStartMs: 0
+  segmentEndMs: 0
+  instruction: "Zadanie 3"
+}
+LISTENING_TASK {
+  taskId: "certyfikat-polski-B2-2019-listening-4"
+  examRef: "certyfikat-polski-B2-2019"
+  taskNumber: 4
+  audioUrl: "https://certyfikatpolski.pl/audio/B2_2019.mp3"
+  segmentStartMs: 0
+  segmentEndMs: 0
+  instruction: "Zadanie 4"
+}
+LISTENING_TASK {
+  taskId: "certyfikat-polski-B2-2019-listening-5"
+  examRef: "certyfikat-polski-B2-2019"
+  taskNumber: 5
+  audioUrl: "https://certyfikatpolski.pl/audio/B2_2019.mp3"
+  segmentStartMs: 0
+  segmentEndMs: 0
+  instruction: "Zadanie 5"
+}

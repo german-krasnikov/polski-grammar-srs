@@ -1,0 +1,244 @@
+DSL 1
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-l1-q1"
+  taskRef: "certyfikat-polski-B2-2020-listening-1"
+  questionType: multiple_choice
+  questionText: "zadanie 1, pytanie 1"
+  options: "a|b|c"
+  correctAnswer: "?"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-l1-q2"
+  taskRef: "certyfikat-polski-B2-2020-listening-1"
+  questionType: multiple_choice
+  questionText: "zadanie 1, pytanie 2"
+  options: "a|b|c"
+  correctAnswer: "?"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-l1-q3"
+  taskRef: "certyfikat-polski-B2-2020-listening-1"
+  questionType: multiple_choice
+  questionText: "zadanie 1, pytanie 3"
+  options: "a|b|c"
+  correctAnswer: "?"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-l1-q4"
+  taskRef: "certyfikat-polski-B2-2020-listening-1"
+  questionType: multiple_choice
+  questionText: "zadanie 1, pytanie 4"
+  options: "a|b|c"
+  correctAnswer: "?"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-l1-q5"
+  taskRef: "certyfikat-polski-B2-2020-listening-1"
+  questionType: multiple_choice
+  questionText: "zadanie 1, pytanie 5"
+  options: "a|b|c"
+  correctAnswer: "?"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-l2-q1"
+  taskRef: "certyfikat-polski-B2-2020-listening-2"
+  questionType: multiple_choice
+  questionText: "zadanie 2, pytanie 1"
+  options: "a|b|c"
+  correctAnswer: "?"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-l2-q2"
+  taskRef: "certyfikat-polski-B2-2020-listening-2"
+  questionType: multiple_choice
+  questionText: "zadanie 2, pytanie 2"
+  options: "a|b|c"
+  correctAnswer: "?"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-l2-q3"
+  taskRef: "certyfikat-polski-B2-2020-listening-2"
+  questionType: multiple_choice
+  questionText: "zadanie 2, pytanie 3"
+  options: "a|b|c"
+  correctAnswer: "?"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-l2-q4"
+  taskRef: "certyfikat-polski-B2-2020-listening-2"
+  questionType: multiple_choice
+  questionText: "zadanie 2, pytanie 4"
+  options: "a|b|c"
+  correctAnswer: "?"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-l2-q5"
+  taskRef: "certyfikat-polski-B2-2020-listening-2"
+  questionType: multiple_choice
+  questionText: "zadanie 2, pytanie 5"
+  options: "a|b|c"
+  correctAnswer: "?"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-l3-q1"
+  taskRef: "certyfikat-polski-B2-2020-listening-3"
+  questionType: multiple_choice
+  questionText: "zadanie 3, pytanie 1"
+  options: "a|b|c"
+  correctAnswer: "?"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-l3-q2"
+  taskRef: "certyfikat-polski-B2-2020-listening-3"
+  questionType: multiple_choice
+  questionText: "zadanie 3, pytanie 2"
+  options: "a|b|c"
+  correctAnswer: "?"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-l3-q3"
+  taskRef: "certyfikat-polski-B2-2020-listening-3"
+  questionType: multiple_choice
+  questionText: "zadanie 3, pytanie 3"
+  options: "a|b|c"
+  correctAnswer: "?"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-l3-q4"
+  taskRef: "certyfikat-polski-B2-2020-listening-3"
+  questionType: multiple_choice
+  questionText: "zadanie 3, pytanie 4"
+  options: "a|b|c"
+  correctAnswer: "?"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-l3-q5"
+  taskRef: "certyfikat-polski-B2-2020-listening-3"
+  questionType: multiple_choice
+  questionText: "zadanie 3, pytanie 5"
+  options: "a|b|c"
+  correctAnswer: "?"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-l4-q1"
+  taskRef: "certyfikat-polski-B2-2020-listening-4"
+  questionType: multiple_choice
+  questionText: "zadanie 4, pytanie 1"
+  options: "a|b|c"
+  correctAnswer: "c"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-l4-q2"
+  taskRef: "certyfikat-polski-B2-2020-listening-4"
+  questionType: multiple_choice
+  questionText: "zadanie 4, pytanie 2"
+  options: "a|b|c"
+  correctAnswer: "b"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-l4-q3"
+  taskRef: "certyfikat-polski-B2-2020-listening-4"
+  questionType: multiple_choice
+  questionText: "zadanie 4, pytanie 3"
+  options: "a|b|c"
+  correctAnswer: "b"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-l4-q4"
+  taskRef: "certyfikat-polski-B2-2020-listening-4"
+  questionType: multiple_choice
+  questionText: "zadanie 4, pytanie 4"
+  options: "a|b|c"
+  correctAnswer: "a"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-l4-q5"
+  taskRef: "certyfikat-polski-B2-2020-listening-4"
+  questionType: multiple_choice
+  questionText: "zadanie 4, pytanie 5"
+  options: "a|b|c"
+  correctAnswer: "c"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-l4-q6"
+  taskRef: "certyfikat-polski-B2-2020-listening-4"
+  questionType: multiple_choice
+  questionText: "zadanie 4, pytanie 6"
+  options: "a|b|c"
+  correctAnswer: "a"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-l4-q7"
+  taskRef: "certyfikat-polski-B2-2020-listening-4"
+  questionType: multiple_choice
+  questionText: "zadanie 4, pytanie 7"
+  options: "a|b|c"
+  correctAnswer: "c"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-l5-q1"
+  taskRef: "certyfikat-polski-B2-2020-listening-5"
+  questionType: multiple_choice
+  questionText: "zadanie 5, pytanie 1"
+  options: "a|b|c"
+  correctAnswer: "?"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-l5-q2"
+  taskRef: "certyfikat-polski-B2-2020-listening-5"
+  questionType: multiple_choice
+  questionText: "zadanie 5, pytanie 2"
+  options: "a|b|c"
+  correctAnswer: "?"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-l5-q3"
+  taskRef: "certyfikat-polski-B2-2020-listening-5"
+  questionType: multiple_choice
+  questionText: "zadanie 5, pytanie 3"
+  options: "a|b|c"
+  correctAnswer: "?"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-l5-q4"
+  taskRef: "certyfikat-polski-B2-2020-listening-5"
+  questionType: multiple_choice
+  questionText: "zadanie 5, pytanie 4"
+  options: "a|b|c"
+  correctAnswer: "?"
+  points: 1
+}
+LISTENING_QUESTION {
+  questionId: "certyfikat-polski-B2-2020-l5-q5"
+  taskRef: "certyfikat-polski-B2-2020-listening-5"
+  questionType: multiple_choice
+  questionText: "zadanie 5, pytanie 5"
+  options: "a|b|c"
+  correctAnswer: "?"
+  points: 1
+}

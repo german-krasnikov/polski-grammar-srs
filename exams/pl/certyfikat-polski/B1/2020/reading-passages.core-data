@@ -1,29 +1,36 @@
 DSL 1
 READING_PASSAGE {
-  passageId: "certyfikat-polski-B1-2020-read-6"
+  passageId: "certyfikat-polski-B1-2020-reading-1"
   examRef: "certyfikat-polski-B1-2020"
-  taskNumber: 6
-  instruction: "TODO: fill from PDF"
-  text: "TODO: fill from PDF"
+  taskNumber: 1
+  instruction: "Zadanie 1"
+  text: "See PDF for full text"
 }
 READING_PASSAGE {
-  passageId: "certyfikat-polski-B1-2020-read-7"
+  passageId: "certyfikat-polski-B1-2020-reading-2"
   examRef: "certyfikat-polski-B1-2020"
-  taskNumber: 7
-  instruction: "TODO: fill from PDF"
-  text: "TODO: fill from PDF"
+  taskNumber: 2
+  instruction: "Zadanie 2"
+  text: "See PDF for full text"
 }
 READING_PASSAGE {
-  passageId: "certyfikat-polski-B1-2020-read-8"
+  passageId: "certyfikat-polski-B1-2020-reading-3"
   examRef: "certyfikat-polski-B1-2020"
-  taskNumber: 8
-  instruction: "TODO: fill from PDF"
-  text: "TODO: fill from PDF"
+  taskNumber: 3
+  instruction: "Zadanie 3"
+  text: "See PDF for full text"
 }
 READING_PASSAGE {
-  passageId: "certyfikat-polski-B1-2020-read-9"
+  passageId: "certyfikat-polski-B1-2020-reading-4"
   examRef: "certyfikat-polski-B1-2020"
-  taskNumber: 9
-  instruction: "TODO: fill from PDF"
-  text: "TODO: fill from PDF"
+  taskNumber: 4
+  instruction: "Zadanie 4"
+  text: "See PDF for full text"
+}
+READING_PASSAGE {
+  passageId: "certyfikat-polski-B1-2020-reading-5"
+  examRef: "certyfikat-polski-B1-2020"
+  taskNumber: 5
+  instruction: "Zadanie 5"
+  text: "See PDF for full text"
 }

@@ -5,6 +5,5 @@ EXAM {
   targetLanguage: "pl"
   level: "B1"
   year: 2020
-  sourceUrl: "https://certyfikatpolski.pl/wp-content/uploads/2020/12/B1_przykladowy_transkrypcje_i_klucz_2020_03.pdf"
-  license: "Panstwowa Komisja ds. Poswiadczania Znajomosci Jezyka Polskiego jako Obcego"
+  sourceUrl: "https://certyfikatpolski.pl/o-egzaminie/przykladowe-testy-zbiory-zadan/"
 }

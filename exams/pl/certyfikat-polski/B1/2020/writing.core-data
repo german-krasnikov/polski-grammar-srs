@@ -1,19 +1,19 @@
 DSL 1
 WRITING_TASK {
-  taskId: "certyfikat-polski-B1-2020-write-12"
+  taskId: "certyfikat-polski-B1-2020-writing-1"
   examRef: "certyfikat-polski-B1-2020"
-  taskNumber: 12
-  instruction: "TODO: fill from PDF"
-  promptText: "TODO: fill from PDF"
-  wordLimit: 200
+  taskNumber: 1
+  instruction: "Zadanie pisemne"
+  promptText: "See PDF for full prompt"
+  wordLimit: 80
   genre: letter
 }
 WRITING_TASK {
-  taskId: "certyfikat-polski-B1-2020-write-13"
+  taskId: "certyfikat-polski-B1-2020-writing-2"
   examRef: "certyfikat-polski-B1-2020"
-  taskNumber: 13
-  instruction: "TODO: fill from PDF"
-  promptText: "TODO: fill from PDF"
-  wordLimit: 200
+  taskNumber: 2
+  instruction: "Zadanie pisemne rozszerzone"
+  promptText: "See PDF for full prompt"
+  wordLimit: 190
   genre: description
 }

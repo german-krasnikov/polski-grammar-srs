@@ -1,47 +1,46 @@
 DSL 1
-# Audio timestamps need manual verification
 LISTENING_TASK {
-  taskId: "certyfikat-polski-B1-2019-listen-1"
+  taskId: "certyfikat-polski-B1-2019-listening-1"
   examRef: "certyfikat-polski-B1-2019"
   taskNumber: 1
-  audioUrl: "https://certyfikatpolski.pl/wp-content/uploads/2019/09/B1_test.mp3"
+  audioUrl: "https://certyfikatpolski.pl/B1_audio.mp3"
   segmentStartMs: 0
   segmentEndMs: 0
-  instruction: "TODO: fill from PDF"
+  instruction: "Proszę zaznaczyć właściwe odpowiedzi"
 }
 LISTENING_TASK {
-  taskId: "certyfikat-polski-B1-2019-listen-2"
+  taskId: "certyfikat-polski-B1-2019-listening-2"
   examRef: "certyfikat-polski-B1-2019"
   taskNumber: 2
-  audioUrl: "https://certyfikatpolski.pl/wp-content/uploads/2019/09/B1_test.mp3"
+  audioUrl: "https://certyfikatpolski.pl/B1_audio.mp3"
   segmentStartMs: 0
   segmentEndMs: 0
-  instruction: "TODO: fill from PDF"
+  instruction: "Proszę zaznaczyć TAK lub NIE"
 }
 LISTENING_TASK {
-  taskId: "certyfikat-polski-B1-2019-listen-3"
+  taskId: "certyfikat-polski-B1-2019-listening-3"
   examRef: "certyfikat-polski-B1-2019"
   taskNumber: 3
-  audioUrl: "https://certyfikatpolski.pl/wp-content/uploads/2019/09/B1_test.mp3"
+  audioUrl: "https://certyfikatpolski.pl/B1_audio.mp3"
   segmentStartMs: 0
   segmentEndMs: 0
-  instruction: "TODO: fill from PDF"
+  instruction: "Proszę zaznaczyć właściwą odpowiedź"
 }
 LISTENING_TASK {
-  taskId: "certyfikat-polski-B1-2019-listen-4"
+  taskId: "certyfikat-polski-B1-2019-listening-4"
   examRef: "certyfikat-polski-B1-2019"
   taskNumber: 4
-  audioUrl: "https://certyfikatpolski.pl/wp-content/uploads/2019/09/B1_test.mp3"
+  audioUrl: "https://certyfikatpolski.pl/B1_audio.mp3"
   segmentStartMs: 0
   segmentEndMs: 0
-  instruction: "TODO: fill from PDF"
+  instruction: "Proszę dopasować osoby do rad"
 }
 LISTENING_TASK {
-  taskId: "certyfikat-polski-B1-2019-listen-5"
+  taskId: "certyfikat-polski-B1-2019-listening-5"
   examRef: "certyfikat-polski-B1-2019"
   taskNumber: 5
-  audioUrl: "https://certyfikatpolski.pl/wp-content/uploads/2019/09/B1_test.mp3"
+  audioUrl: "https://certyfikatpolski.pl/B1_audio.mp3"
   segmentStartMs: 0
   segmentEndMs: 0
-  instruction: "TODO: fill from PDF"
+  instruction: "Proszę dopasować rady do osób"
 }

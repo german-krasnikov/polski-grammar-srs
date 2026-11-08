@@ -1,0 +1,321 @@
+DSL 1
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B2-2017-g1-q1"
+  testRef: "certyfikat-polski-B2-2017-grammar-1"
+  questionType: fill_gap
+  context: "zadanie 1, pytanie 1"
+  correctAnswer: "Mieszkając 6. wymyślone"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B2-2017-g1-q2"
+  testRef: "certyfikat-polski-B2-2017-grammar-1"
+  questionType: fill_gap
+  context: "zadanie 1, pytanie 2"
+  correctAnswer: "zdobytych 7. sięgających"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B2-2017-g1-q3"
+  testRef: "certyfikat-polski-B2-2017-grammar-1"
+  questionType: fill_gap
+  context: "zadanie 1, pytanie 3"
+  correctAnswer: "tworzonych 8. wschodzącego"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B2-2017-g1-q4"
+  testRef: "certyfikat-polski-B2-2017-grammar-1"
+  questionType: fill_gap
+  context: "zadanie 1, pytanie 4"
+  correctAnswer: "Obserwując 9. poszukując"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B2-2017-g1-q5"
+  testRef: "certyfikat-polski-B2-2017-grammar-1"
+  questionType: fill_gap
+  context: "zadanie 1, pytanie 5"
+  correctAnswer: "inspirowane 10. przeżytych"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B2-2017-g2-q1"
+  testRef: "certyfikat-polski-B2-2017-grammar-2"
+  questionType: fill_gap
+  context: "zadanie 2, pytanie 1"
+  correctAnswer: "spośród 6. ponad"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B2-2017-g2-q2"
+  testRef: "certyfikat-polski-B2-2017-grammar-2"
+  questionType: fill_gap
+  context: "zadanie 2, pytanie 2"
+  correctAnswer: "około 7. do"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B2-2017-g2-q3"
+  testRef: "certyfikat-polski-B2-2017-grammar-2"
+  questionType: fill_gap
+  context: "zadanie 2, pytanie 3"
+  correctAnswer: "w/po 8. od"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B2-2017-g2-q4"
+  testRef: "certyfikat-polski-B2-2017-grammar-2"
+  questionType: fill_gap
+  context: "zadanie 2, pytanie 4"
+  correctAnswer: "na 9. po"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B2-2017-g2-q5"
+  testRef: "certyfikat-polski-B2-2017-grammar-2"
+  questionType: fill_gap
+  context: "zadanie 2, pytanie 5"
+  correctAnswer: "przy 10. oprócz"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B2-2017-g3-q1"
+  testRef: "certyfikat-polski-B2-2017-grammar-3"
+  questionType: fill_gap
+  context: "zadanie 3, pytanie 1"
+  correctAnswer: "została zakończona 6. zostanie oddany"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B2-2017-g3-q2"
+  testRef: "certyfikat-polski-B2-2017-grammar-3"
+  questionType: fill_gap
+  context: "zadanie 3, pytanie 2"
+  correctAnswer: "zostanie otwarty 7. rozpoczęto"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B2-2017-g3-q3"
+  testRef: "certyfikat-polski-B2-2017-grammar-3"
+  questionType: fill_gap
+  context: "zadanie 3, pytanie 3"
+  correctAnswer: "odkładano 8. zostały ukończone"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B2-2017-g3-q4"
+  testRef: "certyfikat-polski-B2-2017-grammar-3"
+  questionType: fill_gap
+  context: "zadanie 3, pytanie 4"
+  correctAnswer: "mówi się 9. zostało wydanych"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B2-2017-g3-q5"
+  testRef: "certyfikat-polski-B2-2017-grammar-3"
+  questionType: fill_gap
+  context: "zadanie 3, pytanie 5"
+  correctAnswer: "jest przebudowywany 10. będą wykorzystywane"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B2-2017-g4-q1"
+  testRef: "certyfikat-polski-B2-2017-grammar-4"
+  questionType: fill_gap
+  context: "zadanie 4, pytanie 1"
+  correctAnswer: "bliskimi 6. mieście"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B2-2017-g4-q2"
+  testRef: "certyfikat-polski-B2-2017-grammar-4"
+  questionType: fill_gap
+  context: "zadanie 4, pytanie 2"
+  correctAnswer: "ludźmi 7. zmęczeni"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B2-2017-g4-q3"
+  testRef: "certyfikat-polski-B2-2017-grammar-4"
+  questionType: fill_gap
+  context: "zadanie 4, pytanie 3"
+  correctAnswer: "zdrową 8. sobie"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B2-2017-g4-q4"
+  testRef: "certyfikat-polski-B2-2017-grammar-4"
+  questionType: fill_gap
+  context: "zadanie 4, pytanie 4"
+  correctAnswer: "dietę 9. niektórym"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B2-2017-g4-q5"
+  testRef: "certyfikat-polski-B2-2017-grammar-4"
+  questionType: fill_gap
+  context: "zadanie 4, pytanie 5"
+  correctAnswer: "nikomu 10. nas"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B2-2017-g5-q1"
+  testRef: "certyfikat-polski-B2-2017-grammar-5"
+  questionType: fill_gap
+  context: "zadanie 5, pytanie 1"
+  correctAnswer: "umarli 6. zaczęło"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B2-2017-g5-q2"
+  testRef: "certyfikat-polski-B2-2017-grammar-5"
+  questionType: fill_gap
+  context: "zadanie 5, pytanie 2"
+  correctAnswer: "wykształcić 7. zważał"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B2-2017-g5-q3"
+  testRef: "certyfikat-polski-B2-2017-grammar-5"
+  questionType: fill_gap
+  context: "zadanie 5, pytanie 3"
+  correctAnswer: "wysłała 8. wpatrywał się"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B2-2017-g5-q4"
+  testRef: "certyfikat-polski-B2-2017-grammar-5"
+  questionType: fill_gap
+  context: "zadanie 5, pytanie 4"
+  correctAnswer: "podszedł 9. wychylił się"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B2-2017-g5-q5"
+  testRef: "certyfikat-polski-B2-2017-grammar-5"
+  questionType: fill_gap
+  context: "zadanie 5, pytanie 5"
+  correctAnswer: "łykał 10. stawał a"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B2-2017-g6-q1"
+  testRef: "certyfikat-polski-B2-2017-grammar-6"
+  questionType: fill_gap
+  context: "zadanie 6, pytanie 1"
+  correctAnswer: "smutek"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B2-2017-g6-q2"
+  testRef: "certyfikat-polski-B2-2017-grammar-6"
+  questionType: fill_gap
+  context: "zadanie 6, pytanie 2"
+  correctAnswer: "rozstania"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B2-2017-g6-q3"
+  testRef: "certyfikat-polski-B2-2017-grammar-6"
+  questionType: fill_gap
+  context: "zadanie 6, pytanie 3"
+  correctAnswer: "rozmowy"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B2-2017-g6-q4"
+  testRef: "certyfikat-polski-B2-2017-grammar-6"
+  questionType: fill_gap
+  context: "zadanie 6, pytanie 4"
+  correctAnswer: "rozwodu"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B2-2017-g6-q5"
+  testRef: "certyfikat-polski-B2-2017-grammar-6"
+  questionType: fill_gap
+  context: "zadanie 6, pytanie 5"
+  correctAnswer: "niechęć"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B2-2017-g7-q1"
+  testRef: "certyfikat-polski-B2-2017-grammar-7"
+  questionType: fill_gap
+  context: "zadanie 7, pytanie 1"
+  correctAnswer: "czterech"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B2-2017-g7-q2"
+  testRef: "certyfikat-polski-B2-2017-grammar-7"
+  questionType: fill_gap
+  context: "zadanie 7, pytanie 2"
+  correctAnswer: "dwójką/dwojgiem"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B2-2017-g7-q3"
+  testRef: "certyfikat-polski-B2-2017-grammar-7"
+  questionType: fill_gap
+  context: "zadanie 7, pytanie 3"
+  correctAnswer: "dziewięciu"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B2-2017-g7-q4"
+  testRef: "certyfikat-polski-B2-2017-grammar-7"
+  questionType: fill_gap
+  context: "zadanie 7, pytanie 4"
+  correctAnswer: "jednym"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B2-2017-g7-q5"
+  testRef: "certyfikat-polski-B2-2017-grammar-7"
+  questionType: fill_gap
+  context: "zadanie 7, pytanie 5"
+  correctAnswer: "trzydzieści"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B2-2017-g8-q1"
+  testRef: "certyfikat-polski-B2-2017-grammar-8"
+  questionType: fill_gap
+  context: "zadanie 8, pytanie 1"
+  correctAnswer: "najwyższą"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B2-2017-g8-q2"
+  testRef: "certyfikat-polski-B2-2017-grammar-8"
+  questionType: fill_gap
+  context: "zadanie 8, pytanie 2"
+  correctAnswer: "mniej"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B2-2017-g8-q3"
+  testRef: "certyfikat-polski-B2-2017-grammar-8"
+  questionType: fill_gap
+  context: "zadanie 8, pytanie 3"
+  correctAnswer: "odważniejsi"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B2-2017-g8-q4"
+  testRef: "certyfikat-polski-B2-2017-grammar-8"
+  questionType: fill_gap
+  context: "zadanie 8, pytanie 4"
+  correctAnswer: "najszybciej"
+  points: 1
+}
+GRAMMAR_ITEM {
+  itemId: "certyfikat-polski-B2-2017-g8-q5"
+  testRef: "certyfikat-polski-B2-2017-grammar-8"
+  questionType: fill_gap
+  context: "zadanie 8, pytanie 5"
+  correctAnswer: "lżejsze"
+  points: 1
+}
