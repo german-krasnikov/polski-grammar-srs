@@ -52,6 +52,7 @@ import polski.presentation.ChangeSide
 import polski.presentation.ContrastPair
 import polski.presentation.MatrixTableCell
 import polski.presentation.MatrixTableViewModel
+import polski.presentation.UiCopy
 import polski.presentation.toViewModel
 
 /** Browser-semantic matrix: real selectors and tables, with the same seven case rows as the shared engine. */
@@ -66,7 +67,7 @@ internal fun renderMatrixWeb(root: HTMLElement, state: AppUiState, dispatch: (Ap
         MatrixSection.Cases to "Падежи и окончания",
         MatrixSection.Verbs to "Времена и лица",
         MatrixSection.Pronouns to "Местоимения",
-        MatrixSection.Lifehacks to "Лайфхаки",
+        MatrixSection.Lifehacks to UiCopy.Lifehacks,
     ).forEach { (section, label) ->
         nav.matrixButton(label, "matrix-section-${section.name.lowercase()}") {
             dispatch(AppAction.SelectMatrixSection(section))
@@ -144,7 +145,7 @@ internal fun renderCaseReferenceWeb(root: HTMLElement, state: AppUiState, dispat
         }
     }
     root.matrixAdd("p", courseContextHelp.compact, "muted small")
-    root.matrixButton("Все таблицы и схема") { dispatch(AppAction.SelectTab(polski.presentation.AppTab.Matrix)) }
+    root.matrixButton(UiCopy.AllTablesAndSchema) { dispatch(AppAction.SelectTab(polski.presentation.AppTab.Matrix)) }
 }
 
 private fun renderMap(root: HTMLElement, dispatch: (AppAction) -> Unit) {

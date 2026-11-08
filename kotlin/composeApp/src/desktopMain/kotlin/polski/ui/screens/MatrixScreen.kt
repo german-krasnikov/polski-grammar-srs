@@ -64,6 +64,7 @@ import polski.presentation.MatrixSection
 import polski.presentation.MatrixTableViewModel
 import polski.presentation.ContrastPair
 import polski.presentation.StaticPackLifehackProvider
+import polski.presentation.UiCopy
 import polski.presentation.casesFullTable
 import polski.presentation.comparisonTable
 import polski.presentation.enDoSupportTable
@@ -83,7 +84,7 @@ internal fun MatrixScreen(state: AppUiState, dispatch: (AppAction) -> Unit) {
                 MatrixSection.Cases to "Падежи и окончания",
                 MatrixSection.Verbs to "Времена и лица",
                 MatrixSection.Pronouns to "Местоимения",
-                MatrixSection.Lifehacks to "Лайфхаки",
+                MatrixSection.Lifehacks to UiCopy.Lifehacks,
             ).forEach { (section, label) ->
                 OutlinedButton(onClick = { dispatch(AppAction.SelectMatrixSection(section)) }) {
                     Text(if (state.matrixSelection.section == section) "• $label" else label)
@@ -111,7 +112,7 @@ internal fun MatrixScreen(state: AppUiState, dispatch: (AppAction) -> Unit) {
 private fun LifehacksDesktop() {
     val groups = StaticPackLifehackProvider.listAll()
     if (groups.isEmpty()) {
-        MatrixCard("Лайфхаки") { Text("Для активного набора лайфхаков пока нет.") }
+        MatrixCard(UiCopy.Lifehacks) { Text("Для активного набора лайфхаков пока нет.") }
         return
     }
     groups.forEach { group -> LifehackGroupCard(group) }
@@ -153,7 +154,7 @@ internal fun CaseReferenceScreen(state: AppUiState, dispatch: (AppAction) -> Uni
                 exercise.number, exercise.adjectiveId, exercise.possessive) else null },
         )
         Text(courseContextHelp.compact)
-        OutlinedButton(onClick = { dispatch(AppAction.SelectTab(AppTab.Matrix)) }) { Text("Все таблицы и схема") }
+        OutlinedButton(onClick = { dispatch(AppAction.SelectTab(AppTab.Matrix)) }) { Text(UiCopy.AllTablesAndSchema) }
     }
 }
 

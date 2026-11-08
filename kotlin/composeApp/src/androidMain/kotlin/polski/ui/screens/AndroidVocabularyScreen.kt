@@ -25,6 +25,7 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import polski.data.VocabularyItem
 import polski.presentation.CardEffect
+import polski.presentation.UiCopy
 import polski.srs.Rating
 import polski.vocabulary.StudyDirection
 import polski.vocabulary.activeStudyDirections
@@ -149,7 +150,7 @@ private fun VocabularyFrontFace(
     Card(Modifier.fillMaxWidth(), shape = RoundedCornerShape(24.dp)) {
         Column(Modifier.padding(22.dp), verticalArrangement = Arrangement.spacedBy(14.dp)) {
             Column(
-                Modifier.fillMaxWidth().clickable(onClickLabel = "Показать ответ", role = Role.Button) { reveal() },
+                Modifier.fillMaxWidth().clickable(onClickLabel = UiCopy.ShowAnswer, role = Role.Button) { reveal() },
                 verticalArrangement = Arrangement.spacedBy(4.dp),
             ) {
                 Text("Вспомни ${recallAdverb(recalledCode)}", style = MaterialTheme.typography.labelLarge)

@@ -218,6 +218,8 @@ kotlin {
             kotlin.srcDir(generateLegacyAdmissionTestSource.map { it.outputs.files.singleFile })
             kotlin.srcDir(generateRepresentabilityTestSource.map { it.outputs.files.singleFile })
             kotlin.srcDir(generateAcCorpusTestSource.map { it.outputs.files.singleFile })
+            // Rows printed by `biome generate --project dsl/biome.project` from dsl/grammar-oracle/*.core-data (same layout as commonMain's generated rows, line 200, but test-only data has no business being in commonMain).
+            kotlin.srcDir("src/commonTest/generated/kotlin")
         }
     }
 }

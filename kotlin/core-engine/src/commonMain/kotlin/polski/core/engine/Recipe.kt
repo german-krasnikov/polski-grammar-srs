@@ -46,12 +46,18 @@ sealed interface TextSpec {
     data class Prefixed(val spec: PhraseSpec, val prefixCase: String, val punct: String) : TextSpec
 }
 
-data class ReasonRule(val whenClass: String, val key: String)
+/** First rule whose conditions all hold (an unset condition always holds) wins; a rule with none set is the unconditional fallback, which must come last. */
+data class ReasonRule(
+    val whenUnchanged: Boolean? = null,
+    val whenGender: String? = null,
+    val whenNomSingularSuffix: String? = null,
+    val key: String,
+)
 
 sealed interface ReasonSpec {
     data class Fixed(val key: String) : ReasonSpec
 
-    /** Branches on a caller-supplied classifier name (e.g. `"unchanged"`/`"personalA"`/`"changed"`); [ReasonRule.whenClass] `"default"` is the fallback. */
+    /** Branches on [ReasonRule]'s own conditions, computed inline from the resolved texts and the noun's lexical facts — no caller-supplied classifier name. */
     data class Classified(val rules: List<ReasonRule>) : ReasonSpec
 }
 

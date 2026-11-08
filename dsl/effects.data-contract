@@ -1,0 +1,25 @@
+DSL 1
+# The Rive effect catalog (Plans/Architecture/DSL-MIGRATION-PLAN.md Block A): which Rive trigger(s) fire for a rating effect, and the one chain-complete celebration clip.
+# Four hosts (Android, web, iOS, macOS) used to each carry their own copy of this table; dsl/effects/card-effects.core-data is now the one source, checked against this contract,
+# and dsl/derive-rive-effects.mjs prints it for every host. Not a pair's data, so a contract and a package of its own, like style.data-contract.
+RECORD EffectPlayRow
+  asset: string
+  stateMachine: string
+  trigger: string
+END
+
+RECORD CardEffectRow KEY effect COUNT 1..
+  effect: enum remembered|again
+  plays: [EffectPlayRow]
+END
+
+RECORD ChainCompleteRow COUNT 1
+  asset: string
+  artboard: string
+  animation: string
+END
+
+RECORD RiveCatalogRow COUNT 1
+  effects: [CardEffectRow]
+  chainComplete: ChainCompleteRow
+END

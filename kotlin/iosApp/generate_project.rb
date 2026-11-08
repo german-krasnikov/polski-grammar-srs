@@ -15,6 +15,11 @@ end
 assets_ref = source.new_file('Assets.xcassets')
 target.resources_build_phase.add_file_reference(assets_ref)
 
+# Block A (DSL-MIGRATION-PLAN.md): the effect -> Rive trigger table, printed from
+# dsl/effects/card-effects.core-data by dsl/derive-rive-effects.mjs (`biome generate`), not authored here.
+generated_group = source.new_group('Generated', 'Generated')
+target.source_build_phase.add_file_reference(generated_group.new_file('RiveEffects.swift'))
+
 # FC-15/FC2-06/09/10: confetti.riv/again.riv/chain-complete.riv (vendored from rive-ios/
 # rive-android sample assets and the Rive Marketplace, see THIRD_PARTY/credits.md) ride the app
 # bundle as plain resources, same as Assets.xcassets above. `rings.riv` (the flip-in-progress ring

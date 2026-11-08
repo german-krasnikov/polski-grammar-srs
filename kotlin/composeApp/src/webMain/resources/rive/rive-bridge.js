@@ -12,20 +12,25 @@
 // v4/UX4-06: the flip/reveal-in-progress ring cue (`.card-flip-rings`/`data-rive-rings`/
 // `rings.riv`) has been removed at the user's explicit request (FlipCardRivePlan.md §17.2).
 (function () {
-  // v2 FC2-09: "again.riv" was replaced (it used to paint an opaque scene, RiveCatalog.md §0.1).
-  // "Remembered" now plays confetti together with the new file's "Check" trigger (accepted
-  // FlipCardRivePlan.md §12.7 recommendation); "Again" plays only its "Error" trigger.
-  var RATING_EFFECTS = {
-    remembered: [
-      { src: 'rive/confetti.riv', stateMachine: 'State Machine 1', input: 'Trigger explosion' },
-      { src: 'rive/again.riv', stateMachine: 'State Machine 1', input: 'Check' },
-    ],
-    again: [
-      { src: 'rive/again.riv', stateMachine: 'State Machine 1', input: 'Error' },
-    ],
-  };
+  // Block A (DSL-MIGRATION-PLAN.md): the effect -> trigger table (RATING_EFFECTS/CHAIN_COMPLETE)
+  // used to be written inline here, duplicating the same table in the Android/iOS/macOS hosts. It
+  // now lives once in dsl/effects/card-effects.core-data and is printed as rive-effects.generated.js
+  // (plain globals, no module system — loaded the same lazy <script> way as rive.js itself below).
+  var effectsData = null;
   var wasmConfigured = false;
   var currentRating = []; // [{instance, hideTimer}] for the active rating layer's canvases
+
+  function withEffects(onReady) {
+    if (effectsData) { onReady(effectsData); return; }
+    var script = document.createElement('script');
+    script.src = 'rive/rive-effects.generated.js';
+    script.onload = function () {
+      effectsData = { RATING_EFFECTS: window.RATING_EFFECTS, CHAIN_COMPLETE: window.CHAIN_COMPLETE };
+      onReady(effectsData);
+    };
+    script.onerror = function () {};
+    document.head.appendChild(script);
+  }
 
   function withRive(onReady) {
     if (window.rive && window.rive.Rive) { onReady(window.rive); return; }
@@ -58,61 +63,65 @@
   }
 
   function playRating(overlay, canvases, kind) {
-    var specs = RATING_EFFECTS[kind];
-    if (!specs) return;
-    withRive(function (rive) {
-      try {
-        configureWasm(rive);
-        stopRating();
-        var rect = overlay.getBoundingClientRect();
-        var created = [];
-        specs.forEach(function (spec, index) {
-          var canvas = canvases[index];
-          if (!canvas) return;
-          canvas.width = Math.max(1, Math.round(rect.width));
-          canvas.height = Math.max(1, Math.round(rect.height));
-          var instance = new rive.Rive({
-            src: spec.src,
-            canvas: canvas,
-            stateMachines: spec.stateMachine,
-            autoplay: true,
-            onLoad: function () { fireInput(instance, spec.stateMachine, spec.input); },
+    withEffects(function (effects) {
+      var specs = effects.RATING_EFFECTS[kind];
+      if (!specs) return;
+      withRive(function (rive) {
+        try {
+          configureWasm(rive);
+          stopRating();
+          var rect = overlay.getBoundingClientRect();
+          var created = [];
+          specs.forEach(function (spec, index) {
+            var canvas = canvases[index];
+            if (!canvas) return;
+            canvas.width = Math.max(1, Math.round(rect.width));
+            canvas.height = Math.max(1, Math.round(rect.height));
+            var instance = new rive.Rive({
+              src: spec.src,
+              canvas: canvas,
+              stateMachines: spec.stateMachine,
+              autoplay: true,
+              onLoad: function () { fireInput(instance, spec.stateMachine, spec.input); },
+            });
+            created.push({ instance: instance });
           });
-          created.push({ instance: instance });
-        });
-        var hideTimer = setTimeout(function () { overlay.style.display = 'none'; stopRating(); }, 2600);
-        created.forEach(function (entry) { entry.hideTimer = hideTimer; });
-        currentRating = created;
-      } catch (e) {
-        overlay.style.display = 'none';
-      }
+          var hideTimer = setTimeout(function () { overlay.style.display = 'none'; stopRating(); }, 2600);
+          created.forEach(function (entry) { entry.hideTimer = hideTimer; });
+          currentRating = created;
+        } catch (e) {
+          overlay.style.display = 'none';
+        }
+      });
     });
   }
 
   var currentChain = null;
 
   function playChain(overlay, canvas) {
-    withRive(function (rive) {
-      try {
-        configureWasm(rive);
-        if (currentChain) { try { currentChain.cleanup(); } catch (e) {} }
-        var rect = overlay.getBoundingClientRect();
-        canvas.width = Math.max(1, Math.round(rect.width));
-        canvas.height = Math.max(1, Math.round(rect.height));
-        currentChain = new rive.Rive({
-          src: 'rive/chain-complete.riv',
-          canvas: canvas,
-          artboard: 'Tada',
-          animations: ['Reveal'],
-          autoplay: true,
-        });
-        setTimeout(function () {
+    withEffects(function (effects) {
+      withRive(function (rive) {
+        try {
+          configureWasm(rive);
+          if (currentChain) { try { currentChain.cleanup(); } catch (e) {} }
+          var rect = overlay.getBoundingClientRect();
+          canvas.width = Math.max(1, Math.round(rect.width));
+          canvas.height = Math.max(1, Math.round(rect.height));
+          currentChain = new rive.Rive({
+            src: effects.CHAIN_COMPLETE.src,
+            canvas: canvas,
+            artboard: effects.CHAIN_COMPLETE.artboard,
+            animations: [effects.CHAIN_COMPLETE.animation],
+            autoplay: true,
+          });
+          setTimeout(function () {
+            overlay.style.display = 'none';
+            if (currentChain) { try { currentChain.cleanup(); } catch (e) {} currentChain = null; }
+          }, 3200);
+        } catch (e) {
           overlay.style.display = 'none';
-          if (currentChain) { try { currentChain.cleanup(); } catch (e) {} currentChain = null; }
-        }, 3200);
-      } catch (e) {
-        overlay.style.display = 'none';
-      }
+        }
+      });
     });
   }
 

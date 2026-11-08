@@ -15,31 +15,31 @@ private let riveSignpostLog = OSLog(subsystem: "dev.polski.grammarmatrix", categ
 /// the flip or swipe gestures underneath, and `.accessibilityHidden(true)` so VoiceOver never lands
 /// on it.
 ///
-/// The two `RiveViewModel`s (one per vendored `.riv` file, `confetti.riv`/`again.riv`, see
-/// `THIRD_PARTY/credits.md`) are created lazily, on the first accepted rating, not eagerly at this
-/// view's first appearance. Loading a `.riv` file and mounting its Metal-backed render surface has
-/// real per-frame cost; creating it while the user is still just reading or typing the Question
-/// side of a card (i.e. always, since this overlay sits over the card from the start) measurably
-/// slowed down every keystroke's re-render and caused an XCUITest run to drop characters mid-type —
-/// a real, reproduced regression, not a hypothetical one. Deferring creation until the moment it is
-/// actually needed (mirroring the web host's own lazy-load of the Rive runtime, per the plan's §8
-/// evidence log) keeps the Question/typing path exactly as cheap as it was before this feature.
+/// The `RiveViewModel`s (one per distinct vendored `.riv` asset the table in `RiveEffects` names —
+/// today `confetti.riv`/`again.riv`, see `THIRD_PARTY/credits.md`) are created lazily, on the first
+/// accepted rating, not eagerly at this view's first appearance. Loading a `.riv` file and mounting
+/// its Metal-backed render surface has real per-frame cost; creating it while the user is still just
+/// reading or typing the Question side of a card (i.e. always, since this overlay sits over the card
+/// from the start) measurably slowed down every keystroke's re-render and caused an XCUITest run to
+/// drop characters mid-type — a real, reproduced regression, not a hypothetical one. Deferring
+/// creation until the moment it is actually needed (mirroring the web host's own lazy-load of the
+/// Rive runtime, per the plan's §8 evidence log) keeps the Question/typing path exactly as cheap as
+/// it was before this feature.
 ///
-/// **FC2-09 (R3, Pick A):** `again.riv` was replaced — it used to paint an opaque scene over the
-/// card (`RiveCatalog.md` §0.1). The new file's `Check`/`Error` triggers on `State Machine 1` play
-/// alongside `confetti.riv` for `Remembered` (both together, not either/or — the same pairing the
-/// web/Android hosts already ship, `FlipCardRivePlan.md` §12.7) and alone for `Again`.
+/// Which asset/state-machine/trigger plays for which rating (`RiveEffects`, generated from
+/// `dsl/effects/card-effects.core-data`, DSL-MIGRATION-PLAN.md Block A) is no longer written here:
+/// this view only walks [RiveEffects.plays(for:)] and fires whatever it lists, keyed by asset name
+/// so `Remembered`'s `confetti`+`again` pairing (`FlipCardRivePlan.md` §12.7, FC2-09 Pick A) and
+/// `Again`'s lone trigger both fall out of the same loop.
 struct RiveEffectOverlay: View {
     let effect: CardEffectEvent?
     let reduceMotion: Bool
 
-    @State private var rememberedViewModel: RiveViewModel?
-    @State private var againViewModel: RiveViewModel?
+    @State private var viewModels: [String: RiveViewModel] = [:]
 
     var body: some View {
         ZStack {
-            rememberedViewModel?.view()
-            againViewModel?.view()
+            ForEach(Array(viewModels.keys), id: \.self) { asset in viewModels[asset]?.view() }
         }
         .allowsHitTesting(false)
         .accessibilityHidden(true)
@@ -49,22 +49,10 @@ struct RiveEffectOverlay: View {
             let signpostID = OSSignpostID(log: riveSignpostLog)
             os_signpost(.begin, log: riveSignpostLog, name: "RiveRatingEffect", signpostID: signpostID)
             #endif
-            switch event.name {
-            case "Remembered":
-                if rememberedViewModel == nil {
-                    rememberedViewModel = RiveViewModel(fileName: "confetti", stateMachineName: "State Machine 1")
-                }
-                if againViewModel == nil {
-                    againViewModel = RiveViewModel(fileName: "again", stateMachineName: "State Machine 1")
-                }
-                rememberedViewModel?.triggerInput("Trigger explosion")
-                againViewModel?.triggerInput("Check")
-            case "Again":
-                if againViewModel == nil {
-                    againViewModel = RiveViewModel(fileName: "again", stateMachineName: "State Machine 1")
-                }
-                againViewModel?.triggerInput("Error")
-            default: break
+            for play in RiveEffects.plays(for: event.name) {
+                let model = viewModels[play.asset] ?? RiveViewModel(fileName: play.asset, stateMachineName: play.stateMachine)
+                viewModels[play.asset] = model
+                model.triggerInput(play.trigger)
             }
             #if DEBUG
             os_signpost(.end, log: riveSignpostLog, name: "RiveRatingEffect", signpostID: signpostID)
@@ -80,7 +68,11 @@ struct RiveEffectOverlay: View {
 /// itself, and only when reduced motion/the measurement variant don't suppress it (same gate as
 /// [RiveEffectOverlay]), so this view's own body has nothing left to gate.
 struct RiveChainCompleteOverlay: View {
-    private let viewModel = RiveViewModel(fileName: "chain-complete", animationName: "Reveal", artboardName: "Tada")
+    private let viewModel = RiveViewModel(
+        fileName: RiveEffects.chainComplete.asset,
+        animationName: RiveEffects.chainComplete.animation,
+        artboardName: RiveEffects.chainComplete.artboard
+    )
 
     var body: some View {
         viewModel.view().allowsHitTesting(false).accessibilityHidden(true)

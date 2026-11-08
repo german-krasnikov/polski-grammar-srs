@@ -5,6 +5,7 @@ Run from the repository root:
 """
 
 import json
+import sys
 from pathlib import Path
 
 root = Path(__file__).resolve().parents[7]
@@ -65,5 +66,9 @@ for case in cases:
         ]
 
 lines.append("}")
-out.write_text("\n".join(lines) + "\n")
-print(f"Wrote {out} with 5 fixture cases")
+generated = "\n".join(lines) + "\n"
+if "--print" in sys.argv:
+    print(generated, end="")
+else:
+    out.write_text(generated)
+    print(f"Wrote {out} with 5 fixture cases")

@@ -46,6 +46,7 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
 import polski.presentation.CardEffect
+import polski.presentation.UiCopy
 import polski.presentation.cardEffectFor
 import polski.interaction.SwipeDecision
 import polski.srs.Rating
@@ -206,8 +207,8 @@ fun AndroidRatingDragSurface(
             .semantics {
                 contentDescription = "Оценка карточки"
                 customActions = listOf(
-                    CustomAccessibilityAction("Повторить") { onRate(Rating.Again); true },
-                    CustomAccessibilityAction("Вспомнил") { onRate(Rating.Good); true },
+                    CustomAccessibilityAction(UiCopy.Again) { onRate(Rating.Again); true },
+                    CustomAccessibilityAction(UiCopy.Good) { onRate(Rating.Good); true },
                 )
             },
     ) {
@@ -244,7 +245,7 @@ private fun BoxScope.AndroidDragRatingOverlay(progress: Float) {
             shape = RoundedCornerShape(24.dp),
             modifier = Modifier.matchParentSize(),
         ) {}
-        val (label, weight) = if (again >= good) "Повторить" to again else "Вспомнил" to good
+        val (label, weight) = if (again >= good) UiCopy.Again to again else UiCopy.Good to good
         if (weight > 0.05f) Text(
             label,
             style = MaterialTheme.typography.headlineSmall,
@@ -299,7 +300,7 @@ fun AndroidSwipeHint(nudgeGate: SwipeNudgeGate, reduceMotion: Boolean) {
         horizontalArrangement = Arrangement.spacedBy(6.dp),
     ) {
         Text("←", style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.error)
-        Text("Повторить · Вспомнил", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        Text("${UiCopy.Again} · ${UiCopy.Good}", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
         Text("→", style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.primary)
     }
 }

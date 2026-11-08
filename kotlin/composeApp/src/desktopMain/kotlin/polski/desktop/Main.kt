@@ -86,6 +86,7 @@ import polski.presentation.TimeCapture
 import polski.presentation.TimeSource
 import polski.presentation.TrainingMode
 import polski.presentation.TrainingStore
+import polski.presentation.UiCopy
 import polski.presentation.UiEffect
 import polski.srs.FsrsScheduler
 import polski.srs.Rating
@@ -233,7 +234,7 @@ private fun DesktopSession(
                         try {
                             val file = chooser.selectedFile.toPath()
                             val replace = !Files.exists(file) || JOptionPane.showConfirmDialog(
-                                null, "Заменить существующий файл ${file.fileName}?", "Экспорт JSON", JOptionPane.YES_NO_OPTION,
+                                null, "Заменить существующий файл ${file.fileName}?", UiCopy.ExportJson, JOptionPane.YES_NO_OPTION,
                             ) == JOptionPane.YES_OPTION
                             if (replace) {
                                 withContext(Dispatchers.IO) { writeDesktopJsonAtomically(file, effect.json) }
@@ -427,20 +428,20 @@ private fun DesktopSession(
 private fun DesktopNavigation(tab: AppTab, vertical: Boolean, settingsOpen: Boolean,
                               settingsFocus: FocusRequester, onTab: (AppTab) -> Unit, onSettings: () -> Unit) {
     val entries = listOf(AppTab.Training to "Карточки", AppTab.Vocabulary to "Слова",
-        AppTab.Matrix to "Таблицы и схема", AppTab.Progress to "Прогресс")
+        AppTab.Matrix to "Таблицы и схема", AppTab.Progress to UiCopy.ProgressTab)
     if (vertical) {
         Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
             entries.forEach { (destination, label) ->
                 TabButton(label, tab == destination && !settingsOpen) { onTab(destination) }
             }
-            OutlinedButton(onClick = onSettings, modifier = Modifier.focusRequester(settingsFocus)) { Text("Настройки") }
+            OutlinedButton(onClick = onSettings, modifier = Modifier.focusRequester(settingsFocus)) { Text(UiCopy.SettingsTab) }
         }
     } else {
         Row(Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             entries.forEach { (destination, label) ->
                 TabButton(label, tab == destination && !settingsOpen) { onTab(destination) }
             }
-            OutlinedButton(onClick = onSettings, modifier = Modifier.focusRequester(settingsFocus)) { Text("Настройки") }
+            OutlinedButton(onClick = onSettings, modifier = Modifier.focusRequester(settingsFocus)) { Text(UiCopy.SettingsTab) }
         }
     }
 }

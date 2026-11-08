@@ -25,6 +25,7 @@ import polski.preferences.PreferredStyle
 import polski.presentation.AnswerMode
 import polski.presentation.StyleId
 import polski.presentation.StyleRegistry
+import polski.presentation.UiCopy
 import polski.presentation.builtInStyleIds
 
 /** Mac-only settings destination; actions are owned by the window and its repositories. */
@@ -48,7 +49,7 @@ internal fun DesktopSettingsScreen(
 ) {
     Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-            Text("Настройки", style = MaterialTheme.typography.headlineMedium,
+            Text(UiCopy.SettingsTab, style = MaterialTheme.typography.headlineMedium,
                 color = MaterialTheme.colorScheme.onBackground)
             OutlinedButton(onClick = onClose) { Text("Вернуться к разделу") }
         }

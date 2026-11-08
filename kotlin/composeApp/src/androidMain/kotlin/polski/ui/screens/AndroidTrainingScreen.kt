@@ -55,6 +55,7 @@ import polski.presentation.StylePhase
 import polski.presentation.StyleRegistry
 import polski.presentation.ContrastPair
 import polski.presentation.sentenceHighlightParts
+import polski.presentation.UiCopy
 import polski.srs.Rating
 import polski.training.sentenceSeeds
 import polski.ui.ContrastPairText
@@ -249,7 +250,7 @@ internal fun AndroidTrainingScreen(
                                         onClick = { dispatch(AppAction.Reveal(exercise.id)) },
                                         modifier = Modifier.fillMaxWidth().focusRequester(focusReveal),
                                         shape = RoundedCornerShape(16.dp),
-                                    ) { Text(if (state.answerMode == AnswerMode.Typed) "Проверить ответ" else "Показать ответ",
+                                    ) { Text(if (state.answerMode == AnswerMode.Typed) "Проверить ответ" else UiCopy.ShowAnswer,
                                         modifier = Modifier.padding(vertical = 7.dp)) }
                                 }
                             }
@@ -305,7 +306,7 @@ internal fun AndroidTrainingScreen(
 
         OutlinedButton(onClick = { dispatch(AppAction.ToggleReference) }, enabled = !introducing,
             modifier = Modifier.fillMaxWidth()) {
-            Text(if (!introducing && state.showReference) "Скрыть таблицу" else "Таблица под рукой")
+            Text(if (!introducing && state.showReference) UiCopy.HideTable else UiCopy.TableAtHand)
         }
         AndroidCollapsible(visible = state.showReference && !introducing, reduceMotion = reduceMotion) {
             AndroidCaseReference(state, dispatch)
@@ -342,7 +343,7 @@ fun AndroidCaseReference(state: AppUiState, dispatch: (AppAction) -> Unit) {
         }
         Text(courseContextHelp.compact)
         OutlinedButton(onClick = { dispatch(AppAction.SelectTab(AppTab.Matrix)) }, modifier = Modifier.fillMaxWidth()) {
-            Text("Все таблицы и схема")
+            Text(UiCopy.AllTablesAndSchema)
         }
     }
 }

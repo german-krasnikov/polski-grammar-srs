@@ -41,6 +41,7 @@ import polski.data.courseVocabularyUnavailableLabel
 import polski.data.VocabularyItem
 import polski.data.frequencyItems
 import polski.data.vocabularyItems
+import polski.presentation.UiCopy
 import polski.srs.Rating
 import polski.vocabulary.VocabularyCodec
 import polski.vocabulary.VocabularyLoadStatus
@@ -134,7 +135,7 @@ fun VocabularyScreen(session: VocabularySession, onImport: () -> Unit, onExport:
                         else Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) { answerModeContent() }
                         if (state.typed) OutlinedTextField(state.draft, session::setDraft,
                             label = { Text("Твой ответ") }, modifier = Modifier.fillMaxWidth())
-                        Button(onClick = { session.reveal() }, enabled = !state.busy) { Text("Показать ответ") }
+                        Button(onClick = { session.reveal() }, enabled = !state.busy) { Text(UiCopy.ShowAnswer) }
                     } else {
                         Text("Эталон · ${state.direction.answerLanguageLabel(pack.target, pack.native)}",
                             style = MaterialTheme.typography.labelLarge)
@@ -146,10 +147,10 @@ fun VocabularyScreen(session: VocabularySession, onImport: () -> Unit, onExport:
                         if (state.typed) Text("Твой ответ: ${state.draft.ifBlank { "не введён" }}. Сравни сам и выбери оценку.")
                         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                             OutlinedButton(onClick = { launchMutation { session.rate(Rating.Again) } }, enabled = !state.busy) {
-                                Text("Повторить")
+                                Text(UiCopy.Again)
                             }
                             Button(onClick = { launchMutation { session.rate(Rating.Good) } }, enabled = !state.busy) {
-                                Text("Вспомнил")
+                                Text(UiCopy.Good)
                             }
                         }
                     }

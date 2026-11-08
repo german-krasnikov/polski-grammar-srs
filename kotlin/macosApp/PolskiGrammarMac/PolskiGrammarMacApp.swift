@@ -735,6 +735,9 @@ private struct TrainingView: View {
                     .font(.largeTitle).foregroundStyle(.tint)
                 Text(state.phase == "ChainComplete" ? "Цепочка завершена" : "Заданий сейчас нет")
                     .font(.title2.weight(.semibold))
+                if state.phase == "ChainComplete" && !riveEffectsSuppressed {
+                    RiveChainCompleteOverlay().frame(height: 120)
+                }
                 HStack {
                     Button("Следующая цепочка") { model.send("chain") }
                         .buttonStyle(.borderedProminent)

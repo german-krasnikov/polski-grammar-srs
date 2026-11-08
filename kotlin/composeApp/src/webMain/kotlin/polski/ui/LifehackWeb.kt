@@ -8,6 +8,7 @@ import polski.presentation.Lifehack
 import polski.presentation.LifehackGroup
 import polski.presentation.LifehackStatus
 import polski.presentation.StaticPackLifehackProvider
+import polski.presentation.UiCopy
 
 /**
  * EN-21 (`Plans/Kotlin/EnRuPackPlan.md` §4.3): a lifehack is not a 10th [polski.presentation.BlockKind]
@@ -57,7 +58,7 @@ internal fun renderLifehackBadge(container: HTMLElement, skillId: String) {
  */
 internal fun renderLifehackMatrixSection(root: HTMLElement) {
     val groups = StaticPackLifehackProvider.listAll()
-    val section = root.matrixSection("Лайфхаки")
+    val section = root.matrixSection(UiCopy.Lifehacks)
     if (groups.isEmpty()) {
         section.matrixAdd("p", "Для активного курса лайфхаков пока нет.", "muted")
         return

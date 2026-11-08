@@ -13,6 +13,11 @@ source = project.main_group.new_group('PolskiGrammarMac', 'PolskiGrammarMac')
   target.source_build_phase.add_file_reference(source.new_file(file))
 end
 
+# Block A (DSL-MIGRATION-PLAN.md): the effect -> Rive trigger table, printed from
+# dsl/effects/card-effects.core-data by dsl/derive-rive-effects.mjs (`biome generate`), not authored here.
+generated_group = source.new_group('Generated', 'Generated')
+target.source_build_phase.add_file_reference(generated_group.new_file('RiveEffects.swift'))
+
 # FC-15: confetti.riv/again.riv (vendored, byte-identical to iosApp/PolskiGrammar/Rive — see
 # THIRD_PARTY/credits.md) ride the app bundle as plain resources.
 rive_group = source.new_group('Rive', 'Rive')

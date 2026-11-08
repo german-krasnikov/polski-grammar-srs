@@ -1,0 +1,10 @@
+DSL 1
+RIVE_CATALOG {
+  effects: [
+    {effect: remembered plays: [
+      {asset: "confetti" stateMachine: "State Machine 1" trigger: "Trigger explosion"}
+      {asset: "again" stateMachine: "State Machine 1" trigger: "Check"}]}
+    {effect: again plays: [
+      {asset: "again" stateMachine: "State Machine 1" trigger: "Error"}]}]
+  chainComplete: {asset: "chain-complete" artboard: "Tada" animation: "Reveal"}
+}

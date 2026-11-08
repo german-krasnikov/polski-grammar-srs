@@ -60,7 +60,9 @@ import polski.presentation.TrainingMode
 import polski.presentation.ChangeSide
 import polski.presentation.StaticPackLifehackProvider
 import polski.presentation.StyleId
+import polski.presentation.UiCopy
 import polski.presentation.changeHighlightParts
+import polski.presentation.intervalLabel
 import polski.presentation.sentenceHighlightParts
 import polski.srs.Rating
 import polski.training.sentenceSeeds
@@ -103,7 +105,7 @@ internal fun TrainingScreen(state: AppUiState, dispatch: (AppAction) -> Unit, fo
             TabButton("По расписанию · ${state.dueCount}", state.mode == TrainingMode.Schedule) { dispatch(AppAction.StartSchedule) }
             TabButton("Отдельный навык", state.mode == TrainingMode.Focused) { dispatch(AppAction.OpenSkillPicker) }
             OutlinedButton(onClick = { dispatch(AppAction.ToggleReference) }, enabled = !introducing) {
-                Text(if (!introducing && state.showReference) "Скрыть таблицу" else "Таблица под рукой")
+                Text(if (!introducing && state.showReference) UiCopy.HideTable else UiCopy.TableAtHand)
             }
         }
         if (state.showSkillPicker) {
@@ -233,7 +235,7 @@ internal fun TrainingScreen(state: AppUiState, dispatch: (AppAction) -> Unit, fo
                                 Button(
                                     onClick = { dispatch(AppAction.Reveal(exercise.id)) },
                                     modifier = Modifier.focusRequester(focusReveal),
-                                ) { Text(if (state.answerMode == AnswerMode.Typed) "Проверить и показать ответ" else "Показать ответ") }
+                                ) { Text(if (state.answerMode == AnswerMode.Typed) "Проверить и показать ответ" else UiCopy.ShowAnswer) }
                             } else {
                                 Text("Эталон", color = MaterialTheme.colorScheme.onSurfaceVariant)
                                 Text(contrastAnnotatedText(sentenceHighlightParts(exercise.expected, exercise.changes, ChangeSide.After), MaterialTheme.colorScheme.primary),
@@ -283,10 +285,10 @@ internal fun TrainingScreen(state: AppUiState, dispatch: (AppAction) -> Unit, fo
                                 // EN-21: same lifehack list every host now renders after the
                                 // style's own back content — absent entirely for a skill with none.
                                 DesktopLifehackBlock(StaticPackLifehackProvider.forSkill(exercise.primarySkill))
-                                Text("Когда повторить?", style = MaterialTheme.typography.titleMedium)
+                                Text(UiCopy.WhenToReview, style = MaterialTheme.typography.titleMedium)
                                 Text(method.review)
                                 Row(Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                                    listOf(Rating.Again to "1 Повторить", Rating.Good to "2 Вспомнил")
+                                    listOf(Rating.Again to "1 ${UiCopy.Again}", Rating.Good to "2 ${UiCopy.Good}")
                                         .forEach { (rating, label) ->
                                             OutlinedButton(onClick = { dispatch(AppAction.Rate(exercise.id, rating)) }) {
                                                 Column {
@@ -304,14 +306,5 @@ internal fun TrainingScreen(state: AppUiState, dispatch: (AppAction) -> Unit, fo
             }
         }
         if (state.showReference && !introducing) CaseReferenceScreen(state, dispatch)
-    }
-}
-
-private fun intervalLabel(dueMillis: Long, nowMillis: Long): String {
-    val minutes = maxOf(1L, (dueMillis - nowMillis + 30_000L) / 60_000L)
-    return when {
-        minutes < 60 -> "$minutes мин"
-        minutes < 2_880 -> "${(minutes + 30) / 60} ч"
-        else -> "${(minutes + 720) / 1_440} дн"
     }
 }

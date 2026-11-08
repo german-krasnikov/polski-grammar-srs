@@ -4,6 +4,7 @@ Source: tests/fixtures/kotlin-parity/scheduler.json, generated against ts-fsrs 5
 Run from repository root: python3 kotlin/shared/src/commonTest/kotlin/polski/srs/generate_parity.py
 """
 import json
+import sys
 from pathlib import Path
 
 root = Path(__file__).resolve().parents[7]
@@ -27,5 +28,9 @@ for x in fixture['cases']:
         lines += [f'        assertEquals(Instant.parse({q(expected["preview"][rating])}), preview.{rating}, {q(x["id"] + " preview " + rating)})']
     lines += [f'        val reviewed = scheduler.review(source, Rating.{input["rating"].title()}, at)', f'        assertEquals({q(expected["review"]["skillId"])}, reviewed.skillId)', f'        assertCard({card(expected["review"]["card"])}, reviewed.card, {q(x["id"])})', f'        assertEquals({str(expected["due"]).lower()}, scheduler.isDue(source, at))', '        assertEquals(before, source)', '        assertEquals(preview[Rating.'+input['rating'].title()+'], reviewed.card.due)', '    }', '']
 lines += ['}']
-out.write_text('\n'.join(lines)+'\n')
-print(f'Wrote {out} with {len(fixture["cases"])} cases')
+generated = '\n'.join(lines) + '\n'
+if '--print' in sys.argv:
+    print(generated, end='')
+else:
+    out.write_text(generated)
+    print(f'Wrote {out} with {len(fixture["cases"])} cases')

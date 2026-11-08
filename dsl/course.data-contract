@@ -564,7 +564,7 @@ RECORD PatternValueRow
   value: TextValueRow
 END
 
-# What changed between two texts and why: the reason is one copy entry, or one for each class of change (the class "default" is the one left over).
+# What changed between two texts and why: the reason is one copy entry, or picked by the first matching rule of a list (a rule with no conditions set is the unconditional fallback, and must come last).
 RECORD ChangeSpecRow
   from: TextValueRow
   to: TextValueRow
@@ -577,8 +577,11 @@ RECORD ReasonSpecRow
   rules: [ReasonRuleRow] OPTIONAL
 END
 
+# First rule whose conditions all hold (a condition left unset always holds) wins; same "first condition that holds wins" convention as GovWhenRow/OrderWhenRow.
 RECORD ReasonRuleRow
-  whenClass: string
+  whenUnchanged: bool OPTIONAL
+  whenGender: string OPTIONAL
+  whenNomSingularSuffix: string OPTIONAL
   key: ref CopyEntryRow
 END
 

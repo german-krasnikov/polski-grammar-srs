@@ -6,6 +6,7 @@ import org.w3c.dom.Element
 import org.w3c.dom.HTMLElement
 import org.w3c.dom.events.MouseEvent
 import polski.interaction.SwipeDecision
+import polski.presentation.UiCopy
 import polski.srs.Rating
 
 private const val SWIPE_THRESHOLD_PX = 75.0
@@ -144,7 +145,7 @@ internal fun installSwipeCard(zone: HTMLElement, faceForTransform: HTMLElement, 
  * copy of this markup.
  */
 internal fun appendSwipeLabels(face: HTMLElement) {
-    listOf("again" to "Повторить", "good" to "Вспомнил").forEach { (kind, label) ->
+    listOf("again" to UiCopy.Again, "good" to UiCopy.Good).forEach { (kind, label) ->
         val span = document.createElement("span") as HTMLElement
         span.className = "swipe-label swipe-label-$kind"
         span.textContent = label

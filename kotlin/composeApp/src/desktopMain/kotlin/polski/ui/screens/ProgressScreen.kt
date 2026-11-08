@@ -20,6 +20,7 @@ import kotlin.math.floor
 import polski.data.skills
 import polski.presentation.AppAction
 import polski.presentation.AppUiState
+import polski.presentation.UiCopy
 
 @Composable
 internal fun ProgressScreen(state: AppUiState, formatDate: (Long) -> String, dispatch: (AppAction) -> Unit) {
@@ -27,12 +28,12 @@ internal fun ProgressScreen(state: AppUiState, formatDate: (Long) -> String, dis
     Column(verticalArrangement = Arrangement.spacedBy(14.dp)) {
         Card(Modifier.fillMaxWidth()) {
             Column(Modifier.padding(20.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                Text("Прогресс", style = MaterialTheme.typography.headlineSmall)
+                Text(UiCopy.ProgressTab, style = MaterialTheme.typography.headlineSmall)
                 Text("${progress.totalReviews} всего карточек    ${state.todayCount} сегодня    ${state.dueCount} к повторению")
                 Text("При ответе вслух точность считается по самооценке; при печати — по проверке ответа.")
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    Button(onClick = { dispatch(AppAction.RequestExport) }) { Text("Экспорт JSON") }
-                    OutlinedButton(onClick = { dispatch(AppAction.RequestReset) }) { Text("Сбросить прогресс") }
+                    Button(onClick = { dispatch(AppAction.RequestExport) }) { Text(UiCopy.ExportJson) }
+                    OutlinedButton(onClick = { dispatch(AppAction.RequestReset) }) { Text(UiCopy.ResetProgress) }
                 }
             }
         }

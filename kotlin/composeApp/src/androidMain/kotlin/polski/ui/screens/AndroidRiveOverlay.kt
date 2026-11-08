@@ -20,6 +20,7 @@ import app.rive.runtime.kotlin.RiveAnimationView
 import app.rive.runtime.kotlin.core.Rive
 import dev.polski.grammarmatrix.compose.R
 import java.util.concurrent.atomic.AtomicBoolean
+import polski.data.rows.effects.CardEffectSpecs
 import polski.presentation.CardEffect
 
 /** Loads the native Rive runtime once per process; [RiveAnimationView] requires this before construction. */
@@ -45,21 +46,14 @@ private object RiveFirstEffectTrace {
     fun endOnce() { if (began.get() && ended.compareAndSet(false, true)) Trace.endSection() }
 }
 
-private class RiveEffectSpec(val resId: Int, val stateMachine: String, val trigger: String)
-
-/**
- * Which `.riv`/state-machine/trigger to fire for [effect] (FC2-09: Pick A replaces the old, opaque
- * `again.riv` with a transparent "Check/Error" asset). `Remembered` plays it together with
- * `confetti.riv`, not instead of it — the same "both, not either/or" pairing the web bridge uses
- * (`rive-bridge.js`'s `RATING_EFFECTS`, `FlipCardRivePlan.md` §12.7).
- */
-private fun effectSpecs(effect: CardEffect): List<RiveEffectSpec> = when (effect) {
-    CardEffect.Remembered -> listOf(
-        RiveEffectSpec(R.raw.confetti, "State Machine 1", "Trigger explosion"),
-        RiveEffectSpec(R.raw.again, "State Machine 1", "Check"),
-    )
-    CardEffect.Again -> listOf(RiveEffectSpec(R.raw.again, "State Machine 1", "Error"))
-    CardEffect.None -> emptyList()
+/** The `.riv` raw resource for a [CardEffectSpecs] asset name (DSL-MIGRATION-PLAN.md Block A: the
+ *  table itself — which asset/state-machine/trigger fires for which effect — now lives once in
+ *  `dsl/effects/card-effects.core-data`; this is only the per-platform resource lookup it needs). */
+private fun assetResId(name: String): Int = when (name) {
+    "confetti" -> R.raw.confetti
+    "again" -> R.raw.again
+    "chain_complete" -> R.raw.chain_complete
+    else -> error("unknown Rive asset: $name")
 }
 
 /**
@@ -69,8 +63,8 @@ private fun effectSpecs(effect: CardEffect): List<RiveEffectSpec> = when (effect
  * Reduced motion and the measurement-variant debug flag are decided one level up (see
  * [cardEffectToPlay]); this composable simply plays whatever non-null [effect] it is given, once,
  * then calls [onConsumed] so the same rating never re-fires on recomposition. Up to two views are
- * kept warm (the largest [effectSpecs] list needs two, for `Remembered`); only as many as the
- * current effect needs are actually attached to the tree.
+ * kept warm (the largest [CardEffectSpecs.plays] list needs two, for `Remembered`); only as many as
+ * the current effect needs are actually attached to the tree.
  */
 @Composable
 fun AndroidRiveOverlay(effect: CardEffect?, onConsumed: () -> Unit) {
@@ -83,9 +77,9 @@ fun AndroidRiveOverlay(effect: CardEffect?, onConsumed: () -> Unit) {
     DisposableEffect(effect) {
         if (effect != null && effect != CardEffect.None) {
             RiveFirstEffectTrace.beginOnce()
-            val specs = effectSpecs(effect)
+            val specs = CardEffectSpecs.plays(effect)
             specs.forEachIndexed { index, spec ->
-                views[index].setRiveResource(spec.resId, stateMachineName = spec.stateMachine)
+                views[index].setRiveResource(assetResId(spec.asset), stateMachineName = spec.stateMachine)
                 views[index].fireState(spec.stateMachine, spec.trigger)
             }
             RiveFirstEffectTrace.endOnce()

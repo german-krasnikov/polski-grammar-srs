@@ -1,0 +1,27 @@
+DSL 1
+# One pinned grammar-oracle case (R1-style migration of tests/fixtures/kotlin-parity/grammar.json,
+# schemaVersion 1, sourceRevision df59774e153a5bdf590fe27bd8780c7bd5457a26 — carried as a header
+# comment in dsl/grammar-oracle/grammar.core-data, not re-derived from Kotlin, P15). Every kind uses
+# a subset of these fields; GrammarParityTest.allCases() refuses a row whose fields don't match its
+# own kind (same "kind + OPTIONAL fields" idiom as TextValueRow in course.data-contract). Two verb
+# cases (buyDone/doDone, present tense of a perfective verb) expect verbForm() to throw rather than
+# return a form: expectError marks those, and expected then holds the thrown message instead of the
+# joined form string (an addition beyond the migration task's literal contract text, needed to keep
+# the two assertFailsWith cases from today's GrammarParityTest.kt without inventing a second record).
+RECORD GrammarCaseRow KEY id COUNT 1..
+  id: string
+  kind: enum noun|adjective|verb|pronoun|possessive|phrase|sentence|skill
+  nounId: string OPTIONAL
+  adjectiveId: string OPTIONAL
+  verbId: string OPTIONAL
+  pronounId: string OPTIONAL
+  skillId: string OPTIONAL
+  owner: string OPTIONAL
+  number: string OPTIONAL
+  gramCase: string OPTIONAL
+  gender: string OPTIONAL
+  tense: string OPTIONAL
+  person: int OPTIONAL
+  expectError: bool OPTIONAL
+  expected: string
+END

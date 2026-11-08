@@ -48,9 +48,9 @@ RECIPE {
       reason: {
         kind: classified
         rules: [
-          {whenClass: unchanged key: accReasonUnchanged}
-          {whenClass: personalA key: accReasonPersonalA}
-          {whenClass: default key: accReasonChanged}
+          {whenUnchanged: true key: accReasonUnchanged}
+          {whenGender: "m-personal" whenNomSingularSuffix: "a" key: accReasonPersonalA}
+          {key: accReasonChanged}
         ]
       }
     }
@@ -106,9 +106,9 @@ RECIPE {
       reason: {
         kind: classified
         rules: [
-          {whenClass: unchanged key: accReasonUnchanged}
-          {whenClass: personalA key: accReasonPersonalA}
-          {whenClass: default key: accReasonChanged}
+          {whenUnchanged: true key: accReasonUnchanged}
+          {whenGender: "m-personal" whenNomSingularSuffix: "a" key: accReasonPersonalA}
+          {key: accReasonChanged}
         ]
       }
     }
@@ -164,9 +164,9 @@ RECIPE {
       reason: {
         kind: classified
         rules: [
-          {whenClass: unchanged key: accReasonUnchanged}
-          {whenClass: personalA key: accReasonPersonalA}
-          {whenClass: default key: accReasonChanged}
+          {whenUnchanged: true key: accReasonUnchanged}
+          {whenGender: "m-personal" whenNomSingularSuffix: "a" key: accReasonPersonalA}
+          {key: accReasonChanged}
         ]
       }
     }

@@ -6,6 +6,7 @@ import org.w3c.dom.HTMLCanvasElement
 import org.w3c.dom.HTMLElement
 import org.w3c.dom.HTMLScriptElement
 import polski.presentation.CardEffect
+import polski.presentation.RiveGate
 
 /** True when the app's Motion setting (or the OS reduce-motion signal) disables animation. */
 internal fun reducedMotionActive(): Boolean =
@@ -24,8 +25,10 @@ internal fun motionInstantActive(): Boolean = reducedMotionActive() || animation
 /** Debug-only escape hatch for the A/B/C measurement variants (§5): `?riveDisabled=1`. */
 private fun disabledForMeasurement(): Boolean = window.location.search.contains("riveDisabled=1")
 
-/** Whether ANY Rive call (bridge load, trigger, prewarm) is allowed right now. */
-internal fun riveGated(): Boolean = motionInstantActive() || disabledForMeasurement()
+/** Whether ANY Rive call (bridge load, trigger, prewarm) is allowed right now, via the shared
+ *  [RiveGate.skip] (`DSL-MIGRATION-PLAN.md` block B). */
+internal fun riveGated(): Boolean =
+    RiveGate.skip(motionInstantActive(), animationsEnabled = !animationsDisabledActive(), measurementDisabled = disabledForMeasurement())
 
 /**
  * Each half of the card flip's duration in ms (R1's two-half swap-at-90°, [FlipCard.apply]).

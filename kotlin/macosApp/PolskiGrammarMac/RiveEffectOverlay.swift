@@ -6,24 +6,26 @@ import RiveRuntime
 /// swipe gestures underneath, and `.accessibilityHidden(true)` so VoiceOver/assistive tech never
 /// lands on it.
 ///
-/// The two `RiveViewModel`s (one per vendored `.riv` file, `confetti.riv`/`again.riv`, see
-/// `THIRD_PARTY/credits.md`) are created lazily, on the first accepted rating, not eagerly at this
-/// view's first appearance — mirroring `iosApp/PolskiGrammar/RiveEffectOverlay.swift`, where an
-/// XCUITest run caught a real regression from eager creation (a Metal-backed render surface loading
-/// on every Question-phase re-render slowed typing enough to drop characters). Deferring creation
-/// until the moment it is actually needed keeps the Question/typing path exactly as cheap as it was
-/// before this feature.
+/// The `RiveViewModel`s (one per distinct vendored `.riv` asset the table in `RiveEffects` names —
+/// today `confetti.riv`/`again.riv`, see `THIRD_PARTY/credits.md`) are created lazily, on the first
+/// accepted rating, not eagerly at this view's first appearance — mirroring
+/// `iosApp/PolskiGrammar/RiveEffectOverlay.swift`, where an XCUITest run caught a real regression
+/// from eager creation (a Metal-backed render surface loading on every Question-phase re-render
+/// slowed typing enough to drop characters). Deferring creation until the moment it is actually
+/// needed keeps the Question/typing path exactly as cheap as it was before this feature.
+///
+/// Which asset/state-machine/trigger plays for which rating (`RiveEffects`, generated from
+/// `dsl/effects/card-effects.core-data`, DSL-MIGRATION-PLAN.md Block A) is no longer written here:
+/// this view only walks [RiveEffects.plays(for:)], the same shared table the iOS host reads.
 struct RiveEffectOverlay: View {
     let effect: CardEffectEvent?
     let reduceMotion: Bool
 
-    @State private var rememberedViewModel: RiveViewModel?
-    @State private var againViewModel: RiveViewModel?
+    @State private var viewModels: [String: RiveViewModel] = [:]
 
     var body: some View {
         ZStack {
-            rememberedViewModel?.view()
-            againViewModel?.view()
+            ForEach(Array(viewModels.keys), id: \.self) { asset in viewModels[asset]?.view() }
         }
         .allowsHitTesting(false)
         .accessibilityHidden(true)
@@ -32,23 +34,14 @@ struct RiveEffectOverlay: View {
         // created, not just skip creating new ones below.
         .onChange(of: reduceMotion) { _, isReduced in
             guard isReduced else { return }
-            rememberedViewModel = nil
-            againViewModel = nil
+            viewModels = [:]
         }
         .onChange(of: effect) { _, event in
             guard let event, !reduceMotion else { return }
-            switch event.name {
-            case "Remembered":
-                if rememberedViewModel == nil {
-                    rememberedViewModel = RiveViewModel(fileName: "confetti", stateMachineName: "State Machine 1")
-                }
-                rememberedViewModel?.triggerInput("Trigger explosion")
-            case "Again":
-                if againViewModel == nil {
-                    againViewModel = RiveViewModel(fileName: "again", stateMachineName: "Swipe to delete")
-                }
-                againViewModel?.triggerInput("Trigger Delete")
-            default: break
+            for play in RiveEffects.plays(for: event.name) {
+                let model = viewModels[play.asset] ?? RiveViewModel(fileName: play.asset, stateMachineName: play.stateMachine)
+                viewModels[play.asset] = model
+                model.triggerInput(play.trigger)
             }
         }
     }

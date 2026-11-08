@@ -5,6 +5,7 @@ import kotlinx.browser.window
 import org.w3c.dom.HTMLButtonElement
 import org.w3c.dom.HTMLElement
 import org.w3c.dom.events.Event
+import polski.presentation.UiCopy
 
 /** Stable browser navigation shared by all routes in one mounted web host. */
 internal class WebNav(app: HTMLElement, navigate: (WebRoute) -> Unit) {
@@ -19,8 +20,8 @@ internal class WebNav(app: HTMLElement, navigate: (WebRoute) -> Unit) {
         WebRoute.Training to "Карточки",
         WebRoute.Vocabulary to "Слова",
         WebRoute.Matrix to "Таблицы и схема",
-        WebRoute.Progress to "Прогресс",
-        WebRoute.Settings to "Настройки",
+        WebRoute.Progress to UiCopy.ProgressTab,
+        WebRoute.Settings to UiCopy.SettingsTab,
     )
     // P2-10: "Таблицы и схема" wraps onto two lines inside the mobile nav's fixed-height buttons;
     // a shorter label swaps in there via CSS (`.nav-label-short`/`.nav-label-full`) while

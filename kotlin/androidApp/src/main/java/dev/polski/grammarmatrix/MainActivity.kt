@@ -81,6 +81,7 @@ import polski.presentation.UiEffect
 import polski.preferences.Motion
 import polski.preferences.UserPreferencesV2
 import polski.presentation.StyleId
+import polski.presentation.UiCopy
 import polski.ui.screens.AndroidContent
 import polski.ui.screens.AndroidCoursePicker
 import polski.ui.screens.AndroidStylePicker
@@ -223,7 +224,7 @@ private fun AndroidScreen(
     if (resetEffect != null) {
         AlertDialog(
             onDismissRequest = { store.dispatch(AppAction.ResetDecision(resetEffect.id, false)) },
-            title = { Text("Сбросить прогресс?") },
+            title = { Text("${UiCopy.ResetProgress}?") },
             text = { Text(resetEffect.prompt) },
             confirmButton = { TextButton(onClick = { store.dispatch(AppAction.ResetDecision(resetEffect.id, true)) }) { Text("Сбросить") } },
             dismissButton = { TextButton(onClick = { store.dispatch(AppAction.ResetDecision(resetEffect.id, false)) }) { Text("Отмена") } },
@@ -267,7 +268,7 @@ private fun AndroidScreen(
                         if (state.revision == state.savedRevision) confirmImport = true
                         else session.showNotice("Дождитесь сохранения прогресса или экспортируйте JSON перед импортом")
                     }) { Text("Импорт") }
-                    if (!showSettings) TextButton(onClick = { showSettings = true }) { Text("Настройки") }
+                    if (!showSettings) TextButton(onClick = { showSettings = true }) { Text(UiCopy.SettingsTab) }
                 },
             )
         },
@@ -317,7 +318,7 @@ private fun AndroidSettingsScreen(
     dispatch: (AppAction) -> Unit,
 ) {
     Column(verticalArrangement = Arrangement.spacedBy(14.dp)) {
-        Text("Настройки", style = MaterialTheme.typography.headlineSmall)
+        Text(UiCopy.SettingsTab, style = MaterialTheme.typography.headlineSmall)
         // EN-22: target/native pickers next to the style picker below. A course switch can't just
         // flip a preference in place (every `packRegistry.active`-derived global is cached for the
         // process's lifetime once touched) — persistCourseSelectionAndRestart persists, then

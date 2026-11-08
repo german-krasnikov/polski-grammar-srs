@@ -8,18 +8,19 @@ import polski.platform.browserFormatDate
 import polski.presentation.AppAction
 import polski.presentation.AppUiState
 import polski.presentation.LoadStatus
+import polski.presentation.UiCopy
 
 /** Current, in-memory progress view. Storage errors never hide its export action. */
 internal fun renderProgressWeb(root: HTMLElement, state: AppUiState, dispatch: (AppAction) -> Unit) {
     root.className = "progress-page"
     val progress = state.progress
     if (progress == null) {
-        root.progressAdd("h2", "Прогресс")
+        root.progressAdd("h2", UiCopy.ProgressTab)
         root.progressAdd("p", "Сначала загрузи или восстанови сохранённый прогресс.")
         return
     }
     val summary = root.progressAdd("section", cls = "card matrix-section")
-    summary.progressAdd("h2", "Прогресс")
+    summary.progressAdd("h2", UiCopy.ProgressTab)
     val stats = summary.progressAdd("div", cls = "bigstats")
     listOf(
         progress.totalReviews.toString() to "всего карточек",
@@ -30,11 +31,11 @@ internal fun renderProgressWeb(root: HTMLElement, state: AppUiState, dispatch: (
         block.progressAdd("b", count)
         block.progressAdd("span", title)
     }
-    summary.progressAdd("p", "При ответе вслух «Повторить» считается ошибкой, «Вспомнил» — успешным воспоминанием. При печати точность определяется проверкой текста, а время следующего повтора выбираешь сам.")
+    summary.progressAdd("p", "При ответе вслух «${UiCopy.Again}» считается ошибкой, «${UiCopy.Good}» — успешным воспоминанием. При печати точность определяется проверкой текста, а время следующего повтора выбираешь сам.")
     val actions = summary.progressAdd("div", cls = "actions")
-    actions.progressButton("Экспорт JSON", "progress-export") { dispatch(AppAction.RequestExport) }
+    actions.progressButton(UiCopy.ExportJson, "progress-export") { dispatch(AppAction.RequestExport) }
     if (state.loadStatus == LoadStatus.Ready) {
-        actions.progressButton("Сбросить прогресс", "progress-reset") { dispatch(AppAction.RequestReset) }
+        actions.progressButton(UiCopy.ResetProgress, "progress-reset") { dispatch(AppAction.RequestReset) }
     }
 
     val detail = root.progressAdd("section", cls = "card matrix-section")

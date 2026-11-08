@@ -14,6 +14,7 @@ import kotlin.math.floor
 import polski.data.skills
 import polski.presentation.AppAction
 import polski.presentation.AppUiState
+import polski.presentation.UiCopy
 
 @Composable
 internal fun AndroidProgressScreen(
@@ -23,15 +24,15 @@ internal fun AndroidProgressScreen(
 ) {
     val progress = state.progress ?: return
     Column(verticalArrangement = Arrangement.spacedBy(14.dp)) {
-        Text("Прогресс", style = MaterialTheme.typography.headlineSmall)
+        Text(UiCopy.ProgressTab, style = MaterialTheme.typography.headlineSmall)
         AndroidInfoCard("Обзор") {
             Text("${progress.totalReviews} всего карточек · ${state.todayCount} сегодня · ${state.dueCount} к повторению")
             Text("При ответе вслух точность считается по самооценке; при печати — по проверке ответа.")
             Button(onClick = { dispatch(AppAction.RequestExport) }, modifier = Modifier.fillMaxWidth()) {
-                Text("Экспорт JSON")
+                Text(UiCopy.ExportJson)
             }
             OutlinedButton(onClick = { dispatch(AppAction.RequestReset) }, modifier = Modifier.fillMaxWidth()) {
-                Text("Сбросить прогресс")
+                Text(UiCopy.ResetProgress)
             }
         }
         Text("Навыки", style = MaterialTheme.typography.titleLarge)

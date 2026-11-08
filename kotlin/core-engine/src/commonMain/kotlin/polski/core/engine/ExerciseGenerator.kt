@@ -158,12 +158,6 @@ class ExerciseGenerator(
         }
     }
 
-    private fun classify(fromText: String, toText: String, nounId: String): String = when {
-        fromText == toText -> "unchanged"
-        genderOf(nounId) == "m-personal" && nomSingularOf(nounId).endsWith("a") -> "personalA"
-        else -> "changed"
-    }
-
     private fun nomSingularOf(nounId: String): String =
         morphology.form("noun:$nounId", mapOf(FeatureKey("Number") to FeatureValue("sg"), FeatureKey("Case") to FeatureValue("nom")))
 
@@ -173,9 +167,12 @@ class ExerciseGenerator(
         val reasonKey = when (val reason = change.reason) {
             is ReasonSpec.Fixed -> reason.key
             is ReasonSpec.Classified -> {
-                val classification = classify(from, to, lexicalSlots.getValue("noun"))
-                reason.rules.firstOrNull { it.whenClass == classification }?.key
-                    ?: reason.rules.first { it.whenClass == "default" }.key
+                val nounId = lexicalSlots.getValue("noun")
+                reason.rules.first { rule ->
+                    (rule.whenUnchanged != true || from == to) &&
+                        (rule.whenGender == null || rule.whenGender == genderOf(nounId)) &&
+                        (rule.whenNomSingularSuffix == null || nomSingularOf(nounId).endsWith(rule.whenNomSingularSuffix))
+                }.key
             }
         }
         return CoreFormChange(from, to, copy.text(reasonKey))

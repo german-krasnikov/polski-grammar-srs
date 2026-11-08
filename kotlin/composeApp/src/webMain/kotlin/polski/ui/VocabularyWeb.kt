@@ -19,7 +19,9 @@ import polski.data.VocabularyItem
 import polski.data.frequencyItems
 import polski.data.vocabularyItems
 import polski.grammar.trimJsWhitespace
+import polski.presentation.UiCopy
 import polski.presentation.cardEffectFor
+import polski.presentation.intervalLabel
 import polski.srs.FsrsScheduler
 import polski.srs.Rating
 import polski.vocabulary.StudyDirection
@@ -238,7 +240,7 @@ internal class VocabularyWebController {
             // live on that button, under the same accessible name.
             promptBlock.setAttribute("role", "button")
             promptBlock.setAttribute("tabindex", "0")
-            promptBlock.setAttribute("aria-label", "Показать ответ")
+            promptBlock.setAttribute("aria-label", UiCopy.ShowAnswer)
             val modes = front.add("div", cls = "answer-mode")
             modes.button("Ответ вслух / про себя") { typed = false; refresh() }.apply {
                 setAttribute("aria-pressed", (!typed).toString())
@@ -308,7 +310,7 @@ internal class VocabularyWebController {
             // see `installSwipeCard`'s own doc comment for why, and `baseTransform` for how this
             // face's own resting `rotateY(180deg)` (undoing the flip's mirroring) survives every
             // drag/settle transform this sets rather than being clobbered by it.
-            answer.add("p", "← Повторить · Вспомнил →", "vocabulary-swipe-zone muted small").apply {
+            answer.add("p", "← ${UiCopy.Again} · ${UiCopy.Good} →", "vocabulary-swipe-zone muted small").apply {
                 setAttribute("aria-hidden", "true")
             }
             appendSwipeLabels(answer)
@@ -324,10 +326,10 @@ internal class VocabularyWebController {
         val at = Clock.System.now()
         val preview = VocabularyCodec.preview(document, item.id, direction, scheduler, at)
         val ratings = answer.add("div", cls = "ratings")
-        ratings.button("Повторить", hint = "Ошибка или не уверен", interval = intervalLabel(preview[Rating.Again].toEpochMilliseconds(), at.toEpochMilliseconds()), cls = "rating-again") {
+        ratings.button(UiCopy.Again, hint = "Ошибка или не уверен", interval = intervalLabel(preview[Rating.Again].toEpochMilliseconds(), at.toEpochMilliseconds()), cls = "rating-again") {
             riveOverlay.trigger(outerRoot, answer, cardEffectFor(Rating.Again)); rate(item.id, Rating.Again, refresh)
         }
-        ratings.button("Вспомнил", hint = "Воспроизвёл сам", interval = intervalLabel(preview[Rating.Good].toEpochMilliseconds(), at.toEpochMilliseconds()), cls = "rating-good") {
+        ratings.button(UiCopy.Good, hint = "Воспроизвёл сам", interval = intervalLabel(preview[Rating.Good].toEpochMilliseconds(), at.toEpochMilliseconds()), cls = "rating-good") {
             riveOverlay.trigger(outerRoot, answer, cardEffectFor(Rating.Good)); rate(item.id, Rating.Good, refresh)
         }
     }

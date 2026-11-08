@@ -58,6 +58,7 @@ import polski.model.Tense
 import polski.presentation.AppAction
 import polski.presentation.AppUiState
 import polski.presentation.MatrixSection
+import polski.presentation.UiCopy
 import polski.presentation.toViewModel
 import polski.core.engine.MatrixColumn
 import polski.core.engine.MatrixTableEngine
@@ -86,7 +87,7 @@ internal fun AndroidMatrixScreen(state: AppUiState, dispatch: (AppAction) -> Uni
                 // EnRuPackPlan.md §4.3/ADR-46: a sub-section here, not a new top-level `AppTab` —
                 // the listing (StaticPackLifehackProvider.listAll) is Matrix reference material,
                 // same status as Cases/Verbs/Pronouns, not its own destination.
-                MatrixSection.Lifehacks.name to "Лайфхаки",
+                MatrixSection.Lifehacks.name to UiCopy.Lifehacks,
             ),
         ) { dispatch(AppAction.SelectMatrixSection(MatrixSection.valueOf(it))) }
         when (state.matrixSelection.section) {
