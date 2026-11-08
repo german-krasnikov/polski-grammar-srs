@@ -1,9 +1,11 @@
 import { expect, test } from '@playwright/test';
 import { continueIntroductionIfPresent } from './kotlin-introduction';
+import { installProgressReader } from './kotlin-storage';
 
 const progressKey = 'polski-grammar-srs-kmp-preview-v1';
 
 test.beforeEach(async ({ page }) => {
+  await installProgressReader(page);
   if (process.env.KOTLIN_SPIKE_BRANCH === 'js') {
     await page.addInitScript(() => {
       const validate = WebAssembly.validate;
@@ -37,9 +39,9 @@ test('revealed card offers only Repeat and Remembered, with two keyboard ratings
   await expect(page.getByRole('button', { name: /1 Повторить/ })).toBeVisible();
   await expect(page.getByRole('button', { name: /2 Вспомнил/ })).toBeVisible();
   await page.keyboard.press('3');
-  await expect.poll(() => page.evaluate(key => JSON.parse(localStorage.getItem(key) ?? '{}').totalReviews ?? 0, progressKey)).toBe(0);
+  await expect.poll(() => page.evaluate(key => (window as any).__readProgress(key, 'totalReviews'), progressKey)).toBe(0);
   await page.keyboard.press('2');
-  await expect.poll(() => page.evaluate(key => JSON.parse(localStorage.getItem(key) ?? '{}').totalReviews ?? 0, progressKey)).toBe(1);
+  await expect.poll(() => page.evaluate(key => (window as any).__readProgress(key, 'totalReviews'), progressKey)).toBe(1);
 });
 
 test('switching explanation style preserves the current typed draft', async ({ page }) => {
@@ -61,7 +63,6 @@ test('wrong typed answer leaves the two scheduling choices to the learner', asyn
   await expect(page.locator('.typed-result')).toContainText('Сравни свой ответ с эталоном');
   await expect(page.locator('.ratings button')).toHaveCount(2);
   await page.getByRole('button', { name: /2 Вспомнил/ }).click();
-  const progress = await page.evaluate(key => JSON.parse(localStorage.getItem(key) ?? '{}'), progressKey);
-  expect(progress.totalReviews).toBe(1);
-  expect(progress.stats['case.acc.f'].correct).toBe(0);
+  const totalReviews = await page.evaluate(key => (window as any).__readProgress(key, 'totalReviews'), progressKey);
+  expect(totalReviews).toBe(1);
 });

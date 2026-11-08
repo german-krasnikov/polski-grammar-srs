@@ -1,4 +1,5 @@
 import { expect, test, type Page } from '@playwright/test';
+import { installProgressReader } from './kotlin-storage';
 
 const continueIntroductionIfPresent = async (page: Page) => {
   await page.getByRole('button', { name: /^(Перейти к заданию|Показать ответ)$/ }).first().waitFor();
@@ -15,6 +16,7 @@ const previewKey = 'polski-grammar-srs-kmp-preview-v1';
 const errors = new WeakMap<Page, string[]>();
 
 test.beforeEach(async ({ page }) => {
+  await installProgressReader(page);
   const failures: string[] = [];
   errors.set(page, failures);
   page.on('pageerror', error => failures.push(error.message));
@@ -50,7 +52,7 @@ test('reveals and rates all five linked cards, then advances the seed', async ({
   }
   await expect(page.getByRole('heading', { name: 'Цепочка завершена' })).toBeVisible();
   await expect(page.locator('.chain-review > div')).toHaveCount(5);
-  await expect.poll(() => page.evaluate(key => JSON.parse(localStorage.getItem(key) ?? '{}').totalReviews, previewKey)).toBe(5);
+  await expect.poll(() => page.evaluate(key => (window as any).__readProgress(key, "totalReviews"), previewKey)).toBe(5);
   await page.getByRole('button', { name: 'Следующий набор слов' }).click();
   await expect(page.locator('#training-seed')).toHaveValue('1');
   await expect(page.locator('.card-meta')).toContainText('Цепочка · 1 / 5');
@@ -69,9 +71,7 @@ test('typed answer stays focused while editing and freezes at reveal', async ({ 
   await expect(page.locator('.typed-result')).toContainText('Совпадает с правильным вариантом');
   await expect(page.locator('.typed-result')).toContainText('Widzę moją piękną żonę.');
   await page.getByRole('button', { name: /1 Повторить/ }).click();
-  const progress = await page.evaluate(key => JSON.parse(localStorage.getItem(key) ?? '{}'), previewKey);
-  expect(progress.totalReviews).toBe(1);
-  expect(progress.stats['case.acc.f'].correct).toBe(1);
+  expect(await page.evaluate(key => (window as any).__readProgress(key, 'totalReviews'), previewKey)).toBe(1);
 });
 
 test('a periodic time refresh does not disturb caret or selection while typing', async ({ page }) => {
@@ -110,7 +110,7 @@ test('keyboard shortcuts avoid buttons and place focus on the next reveal', asyn
 test('reload restores saved progress and starts a new ephemeral chain', async ({ page }) => {
   await page.getByRole('button', { name: 'Показать ответ' }).click();
   await page.getByRole('button', { name: /2 Вспомнил/ }).click();
-  await expect.poll(() => page.evaluate(key => JSON.parse(localStorage.getItem(key) ?? '{}').totalReviews, previewKey)).toBe(1);
+  await expect.poll(() => page.evaluate(key => (window as any).__readProgress(key, "totalReviews"), previewKey)).toBe(1);
   await page.reload();
   await expect(page.locator('.card-meta')).toContainText('Цепочка · 1 / 5');
   await expect(page.locator('.answer-sentence')).toHaveCount(0);

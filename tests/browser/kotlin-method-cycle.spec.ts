@@ -1,8 +1,10 @@
 import { expect, test } from '@playwright/test';
+import { installProgressReader } from './kotlin-storage';
 
 const progressKey = 'polski-grammar-srs-kmp-preview-v1';
 
 test('first method cycle keeps the draft and stores exactly one rating', async ({ page }) => {
+  await installProgressReader(page);
   if (process.env.KOTLIN_SPIKE_BRANCH === 'js') {
     await page.addInitScript(() => {
       const validate = WebAssembly.validate;
@@ -45,11 +47,11 @@ test('first method cycle keeps the draft and stores exactly one rating', async (
   await method.selectOption('SituationFirst');
   await expect(page.locator('.method-feedback h3')).toHaveText('Сравни смысл и форму');
   await expect(page.locator('.typed-result p')).toHaveText('Moja próba');
-  expect(await page.evaluate(key => JSON.parse(localStorage.getItem(key) ?? '{}').totalReviews, progressKey)).toBe(0);
+  expect(await page.evaluate(key => (window as any).__readProgress(key, "totalReviews"), progressKey)).toBe(0);
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(320);
   await page.getByRole('button', { name: 'Таблица под рукой' }).click();
   await page.getByRole('button', { name: /2 Вспомнил/ }).click();
-  await expect.poll(() => page.evaluate(key => JSON.parse(localStorage.getItem(key) ?? '{}').totalReviews, progressKey)).toBe(1);
+  await expect.poll(() => page.evaluate(key => (window as any).__readProgress(key, "totalReviews"), progressKey)).toBe(1);
   await expect(page.locator('.reference-panel')).toHaveCount(0);
   await expect(page.getByRole('button', { name: 'Таблица под рукой' })).toBeDisabled();
   await page.getByRole('button', { name: 'Перейти к заданию' }).click();

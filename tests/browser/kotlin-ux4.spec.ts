@@ -2,11 +2,13 @@ import { devices, expect, test, type Page } from '@playwright/test';
 import { mkdirSync } from 'node:fs';
 import { continueIntroductionIfPresent } from './kotlin-introduction';
 import { waitForAnimationsSettled } from './kotlin-wait';
+import { installProgressReader } from './kotlin-storage';
 
 // FlipCardRivePlan.md §17 (v4): whole-panel vocabulary flip, swipe-first rating on both cards,
 // animated tab switching and collapsible panels, general UI/UX polish.
 
 test.beforeEach(async ({ page }) => {
+  await installProgressReader(page);
   if (process.env.KOTLIN_SPIKE_BRANCH === 'js') {
     await page.addInitScript(() => {
       const validate = WebAssembly.validate;
@@ -89,7 +91,7 @@ test('P0-1: a real touch swipe rates the training card on a touch device (not ju
     await session.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ x: x1, y, id: 1 }] });
     await session.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: [{ x: x2, y, id: 1 }] });
     await session.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
-    await expect.poll(() => page.evaluate(key => JSON.parse(localStorage.getItem(key) ?? '{}').totalReviews, 'polski-grammar-srs-kmp-preview-v1')).toBe(1);
+    await expect.poll(() => page.evaluate(key => (window as any).__readProgress(key, "totalReviews"), 'polski-grammar-srs-kmp-preview-v1')).toBe(1);
   } finally {
     await context.close();
   }
@@ -161,7 +163,7 @@ test('UX4-14: ArrowLeft rates "Again" on the revealed training card, alongside t
   await continueIntroductionIfPresent(page);
   await page.getByRole('button', { name: 'Показать ответ' }).click();
   await page.keyboard.press('ArrowLeft');
-  await expect.poll(() => page.evaluate(key => JSON.parse(localStorage.getItem(key) ?? '{}').totalReviews, 'polski-grammar-srs-kmp-preview-v1')).toBe(1);
+  await expect.poll(() => page.evaluate(key => (window as any).__readProgress(key, "totalReviews"), 'polski-grammar-srs-kmp-preview-v1')).toBe(1);
 });
 
 // v4/UX4-11: gated on `(pointer: coarse)` alone (a real touch/stylus device), not also on a
@@ -234,7 +236,7 @@ test('UX4-11: a narrow but fine-pointer desktop window keeps normal, mouse-click
   const box = await again.boundingBox();
   expect(box!.width).toBeGreaterThan(20); // NOT clipped — this is a mouse-driven desktop window
   await again.click();
-  await expect.poll(() => page.evaluate(key => JSON.parse(localStorage.getItem(key) ?? '{}').totalReviews, 'polski-grammar-srs-kmp-preview-v1')).toBe(1);
+  await expect.poll(() => page.evaluate(key => (window as any).__readProgress(key, "totalReviews"), 'polski-grammar-srs-kmp-preview-v1')).toBe(1);
 });
 
 test('UX4-20/21/22: "Скрыть каталог" collapses with aria-expanded/inert and returns focus to the toggle', async ({ page }) => {

@@ -3,6 +3,7 @@ import type { Page } from '@playwright/test';
 import { resolve } from 'node:path';
 import { createServer, type ViteDevServer } from 'vite';
 import { continueIntroductionIfPresent } from './kotlin-introduction';
+import { installProgressReader } from './kotlin-storage';
 
 let reactServer: ViteDevServer;
 let reactBaseUrl: string;
@@ -25,6 +26,7 @@ test.afterAll(async () => {
 const normalized = (value: string | null) => (value ?? '').replace(/\s+/g, ' ').trim();
 
 test('P02 React and Kotlin show the same 12 five-step chains', async ({ page, browser }) => {
+  await installProgressReader(page);
   test.setTimeout(180_000);
   const errors: string[] = [];
   page.on('pageerror', error => errors.push(`Kotlin: ${error.message}`));
@@ -84,7 +86,7 @@ test('P02 React and Kotlin show the same 12 five-step chains', async ({ page, br
         if (seed === 0) {
           for (const [current, key] of [[page, 'polski-grammar-srs-kmp-preview-v1'], [react, 'polski-grammar-srs-v1']] as const) {
             await expect.poll(() => current.evaluate(storageKey =>
-              JSON.parse(localStorage.getItem(storageKey) ?? '{}').totalReviews, key)).toBe(step);
+              (window as any).__readProgress(storageKey, "totalReviews"), key)).toBe(step);
           }
         }
       }
@@ -104,7 +106,7 @@ test('P02 React and Kotlin show the same 12 five-step chains', async ({ page, br
       if (seed === 11) {
         for (const [current, key] of [[page, 'polski-grammar-srs-kmp-preview-v1'], [react, 'polski-grammar-srs-v1']] as const) {
           await expect.poll(() => current.evaluate(storageKey =>
-            JSON.parse(localStorage.getItem(storageKey) ?? '{}').totalReviews, key)).toBe(60);
+            (window as any).__readProgress(storageKey, "totalReviews"), key)).toBe(60);
           await current.reload();
           await current.getByRole('button', { name: 'Прогресс' }).click();
           await expect(current.locator('.bigstats')).toContainText('60');

@@ -1,6 +1,7 @@
 import { expect, test, type Page } from '@playwright/test';
 import { continueIntroductionIfPresent } from './kotlin-introduction';
 import { waitForAnimationsSettled } from './kotlin-wait';
+import { installProgressReader } from './kotlin-storage';
 
 const progressKey = 'polski-grammar-srs-kmp-preview-v1';
 const vocabularyKey = 'polski-vocabulary-pl-ru-v1';
@@ -16,6 +17,7 @@ const openVocabularyCard = async (page: Page) => {
 };
 
 test.beforeEach(async ({ page }) => {
+  await installProgressReader(page);
   if (process.env.KOTLIN_SPIKE_BRANCH === 'js') {
     await page.addInitScript(() => {
       const validate = WebAssembly.validate;
@@ -51,8 +53,7 @@ test('clicking the question card reveals exactly once, like the button/Space; a 
   await expect(card.locator('.answer-sentence')).toBeVisible();
   await card.locator('.card-front').click({ position: { x: 10, y: 10 } });
   await expect(card.locator('.answer-sentence')).toBeVisible(); // still revealed, nothing toggled back
-  const progress = await page.evaluate(key => JSON.parse(localStorage.getItem(key) ?? '{}'), progressKey);
-  expect(progress.totalReviews ?? 0).toBe(0); // a click on the card is never a rating
+  expect(await page.evaluate(key => (window as any).__readProgress(key, 'totalReviews'), progressKey)).toBe(0); // a click on the card is never a rating
 });
 
 test('Space still reveals the question card', async ({ page }) => {
@@ -67,7 +68,7 @@ test('clicking a rating button rates the revealed card', async ({ page }) => {
   await page.goto('/');
   await revealAnswer(page);
   await page.getByRole('button', { name: /2 Вспомнил/ }).click();
-  await expect.poll(() => page.evaluate(key => JSON.parse(localStorage.getItem(key) ?? '{}').totalReviews ?? 0, progressKey)).toBe(1);
+  await expect.poll(() => page.evaluate(key => (window as any).__readProgress(key, "totalReviews"), progressKey)).toBe(1);
 });
 
 test('a mouse swipe on the revealed answer rates exactly once; a short drag rates nothing', async ({ page }) => {
@@ -88,13 +89,13 @@ test('a mouse swipe on the revealed answer rates exactly once; a short drag rate
   await page.mouse.down();
   await page.mouse.move(startX + 30, y, { steps: 5 });
   await page.mouse.up();
-  expect((await page.evaluate(key => JSON.parse(localStorage.getItem(key) ?? '{}').totalReviews ?? 0, progressKey))).toBe(0);
+  expect((await page.evaluate(key => (window as any).__readProgress(key, "totalReviews"), progressKey))).toBe(0);
   await waitForAnimationsSettled(page); // let the short drag's own snap-back settle first
   await page.mouse.move(startX, y);
   await page.mouse.down();
   await page.mouse.move(startX + 200, y, { steps: 8 });
   await page.mouse.up();
-  await expect.poll(() => page.evaluate(key => JSON.parse(localStorage.getItem(key) ?? '{}').totalReviews ?? 0, progressKey)).toBe(1);
+  await expect.poll(() => page.evaluate(key => (window as any).__readProgress(key, "totalReviews"), progressKey)).toBe(1);
 });
 
 test('reduced motion (app Motion setting): the expand is instant and rating never creates the Rive overlay', async ({ page }) => {
@@ -106,7 +107,7 @@ test('reduced motion (app Motion setting): the expand is instant and rating neve
   const wrap = page.getByRole('region', { name: 'Учебная карточка' }).locator('.card-answer-wrap');
   await expect(wrap).toHaveCSS('transition-duration', '0s');
   await page.getByRole('button', { name: /2 Вспомнил/ }).click();
-  await expect.poll(() => page.evaluate(key => JSON.parse(localStorage.getItem(key) ?? '{}').totalReviews ?? 0, progressKey)).toBe(1);
+  await expect.poll(() => page.evaluate(key => (window as any).__readProgress(key, "totalReviews"), progressKey)).toBe(1);
   await expect(page.locator('#polski-rive-overlay')).toHaveCount(0);
 });
 

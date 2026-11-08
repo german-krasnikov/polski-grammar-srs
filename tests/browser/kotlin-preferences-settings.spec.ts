@@ -1,11 +1,13 @@
 import { expect, test } from '@playwright/test';
 import { mkdirSync } from 'node:fs';
 import { waitForAnimationsSettled } from './kotlin-wait';
+import { installProgressReader } from './kotlin-storage';
 
 const preferencesKey = 'polski-preferences-v1';
 const progressKey = 'polski-grammar-srs-kmp-preview-v1';
 
 test.beforeEach(async ({ page }) => {
+  await installProgressReader(page);
   if (process.env.KOTLIN_SPIKE_BRANCH === 'js') {
     await page.addInitScript(() => {
       const validate = WebAssembly.validate;
@@ -126,10 +128,10 @@ test('the card quick switch offers the same 4 styles and never creates a review 
   await quickSwitch.selectOption('MinimalTheory');
   await expect(quickSwitch).toHaveValue('MinimalTheory');
   await expect(page.getByRole('textbox', { name: 'Ответ по-польски' })).toHaveValue('Moja próba');
-  expect(await page.evaluate(key => JSON.parse(localStorage.getItem(key) ?? '{}').totalReviews, progressKey)).toBe(0);
+  expect(await page.evaluate(key => (window as any).__readProgress(key, "totalReviews"), progressKey)).toBe(0);
   await quickSwitch.selectOption('NativeContrast');
   await expect(page.getByRole('textbox', { name: 'Ответ по-польски' })).toHaveValue('Moja próba');
-  expect(await page.evaluate(key => JSON.parse(localStorage.getItem(key) ?? '{}').totalReviews, progressKey)).toBe(0);
+  expect(await page.evaluate(key => (window as any).__readProgress(key, "totalReviews"), progressKey)).toBe(0);
 });
 
 test('direct Settings link and browser history keep four destinations available', async ({ page }) => {
@@ -240,7 +242,7 @@ test('grammar swipe is disabled until reveal and remains governed by the shared 
   const back = card.locator('.card-answer-wrap');
   await back.dispatchEvent('pointerdown', { clientX: 100, clientY: 100, pointerId: 10, pointerType: 'touch', isPrimary: true });
   await back.dispatchEvent('pointerup', { clientX: 250, clientY: 102, pointerId: 10, pointerType: 'touch', isPrimary: true });
-  await expect.poll(() => page.evaluate(() => JSON.parse(localStorage.getItem('polski-grammar-srs-kmp-preview-v1') ?? '{}').totalReviews)).toBe(1);
+  await expect.poll(() => page.evaluate(() => (window as any).__readProgress('polski-grammar-srs-kmp-preview-v1', 'totalReviews'))).toBe(1);
 });
 
 test('grammar swipe preference off leaves the revealed answer to rating buttons', async ({ page }) => {
@@ -257,8 +259,7 @@ test('grammar swipe preference off leaves the revealed answer to rating buttons'
   await card.dispatchEvent('pointerdown', { clientX: 100, clientY: 100, pointerId: 10, pointerType: 'touch', isPrimary: true });
   await card.dispatchEvent('pointerup', { clientX: 250, clientY: 102, pointerId: 10, pointerType: 'touch', isPrimary: true });
   await expect(card.getByRole('button', { name: /Вспомнил/ })).toBeVisible();
-  const saved = await page.evaluate(() => JSON.parse(localStorage.getItem('polski-grammar-srs-kmp-preview-v1') ?? '{}'));
-  expect(saved.totalReviews ?? 0).toBe(0);
+  expect(await page.evaluate(() => (window as any).__readProgress('polski-grammar-srs-kmp-preview-v1', 'totalReviews'))).toBe(0);
 });
 
 test('grammar real touch completes after leaving the swipe zone', async ({ page, browserName }) => {
@@ -308,7 +309,7 @@ test('grammar real touch completes after leaving the swipe zone', async ({ page,
     });
     await session.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: [{ x: x2, y, id: 1 }] });
     await session.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
-    await expect.poll(() => page.evaluate(() => JSON.parse(localStorage.getItem('polski-grammar-srs-kmp-preview-v1') ?? '{}').totalReviews)).toBe(1);
+    await expect.poll(() => page.evaluate(() => (window as any).__readProgress('polski-grammar-srs-kmp-preview-v1', 'totalReviews'))).toBe(1);
   } finally {
     await session.detach();
   }
