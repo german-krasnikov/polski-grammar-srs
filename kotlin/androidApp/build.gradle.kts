@@ -6,12 +6,12 @@ plugins {
 
 android {
     namespace = "dev.polski.grammarmatrix"
-    compileSdk = 37
+    compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {
         applicationId = "dev.polski.grammarmatrix"
-        minSdk = 24
-        targetSdk = 35
+        minSdk = libs.versions.android.minSdk.get().toInt()
+        targetSdk = libs.versions.android.targetSdk.get().toInt()
         versionCode = 1
         versionName = "0.1.0"
     }

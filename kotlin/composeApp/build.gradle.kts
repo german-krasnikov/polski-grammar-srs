@@ -62,12 +62,12 @@ tasks.matching { it.name == "createDistributable" || it.name == "createReleaseDi
 }
 
 kotlin {
-    jvmToolchain(21)
+    jvmToolchain(libs.versions.jvm.toolchain.get().toInt())
     jvm("desktop")
     android {
         namespace = "dev.polski.grammarmatrix.compose"
-        compileSdk = 37
-        minSdk = 24
+        compileSdk = libs.versions.android.compileSdk.get().toInt()
+        minSdk = libs.versions.android.minSdk.get().toInt()
         androidResources { enable = true }
     }
     js {

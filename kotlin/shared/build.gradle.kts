@@ -168,15 +168,15 @@ val generateAcCorpusTestSource by tasks.registering {
 }
 
 kotlin {
-    jvmToolchain(21)
+    jvmToolchain(libs.versions.jvm.toolchain.get().toInt())
     jvm("desktop")
     val iosDevice = iosArm64()
     val iosSimulator = iosSimulatorArm64()
     val macDevice = macosArm64()
     android {
         namespace = "dev.polski.grammarmatrix.shared"
-        compileSdk = 37
-        minSdk = 24
+        compileSdk = libs.versions.android.compileSdk.get().toInt()
+        minSdk = libs.versions.android.minSdk.get().toInt()
     }
     js {
         browser()

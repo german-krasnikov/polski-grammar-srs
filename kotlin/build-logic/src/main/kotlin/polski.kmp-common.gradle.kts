@@ -11,15 +11,15 @@ plugins {
 }
 
 kotlin {
-    jvmToolchain(21)
+    jvmToolchain(PolskiSdkVersions.JVM_TOOLCHAIN)
     jvm("desktop")
     iosArm64()
     iosSimulatorArm64()
     macosArm64()
     android {
         namespace = "dev.polski.grammarmatrix.${project.name.replace("-", "")}"
-        compileSdk = 37
-        minSdk = 24
+        compileSdk = PolskiSdkVersions.COMPILE_SDK
+        minSdk = PolskiSdkVersions.MIN_SDK
     }
     js { browser() }
     @OptIn(ExperimentalWasmDsl::class)

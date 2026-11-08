@@ -1,4 +1,8 @@
 [versions]
+android-compileSdk = "37"
+android-minSdk = "24"
+android-targetSdk = "35"
+jvm-toolchain = "21"
 kotlin = "2.4.20"
 compose = "1.12.1"
 kotlinx-browser = "0.5.0"
