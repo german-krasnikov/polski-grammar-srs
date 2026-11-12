@@ -178,6 +178,16 @@ internal class ExamGrammarController(
                         val examples = (listOf(item.correctAnswer) + item.scoredVariants.map { it.answer }).joinToString(" / ")
                         appendChild(node("span", "exam-review-correct", "${UiCopy.ExamOfficialExamples}: $examples"))
                     }
+                    if (item.rubricComponents.isNotEmpty()) {
+                        appendChild(node("ol", "exam-review-rubric").apply {
+                            item.rubricComponents.sortedBy { it.order }.forEach { component ->
+                                appendChild(node("li", "exam-review-rubric-component",
+                                    "${component.criterionText} · ${formatQuarterPoints(component.creditQuarter)}").apply {
+                                    setAttribute("lang", "pl")
+                                })
+                            }
+                        })
+                    }
                 })
             }
         })
