@@ -53,3 +53,9 @@ All 33 files are now present and SHA-256 checked. MP3 durations below are contai
 | C1/2022-03 | 2506.44898 |
 | B2/2022-06 | 2180.440816 |
 | C1/2022-11 | 2245.250612 |
+
+## Integrity correction — B2/2022-06 audio
+
+2026-11-08: earlier SHA-256 verification pins received bytes, not complete decodability. `B2/2022-06/audio.mp3` (87218721 bytes, SHA-256 `171c36bfa5304217ea9c0e4e40d99ba5b4905da4ad41dba2a9adaa0f049ff57b`) has **11721249 trailing zero bytes**; last nonzero byte offset 75497471. ffprobe nominal duration 2180.44s is not reliable completion evidence: ASR stops around 1887s and decoding a clip at 2095s fails. A second normal Brave Save As download from the same official URL visibly completed at 83.2 MB and produced **identical bytes/hash/zero tail**. It does not resolve whether the origin or browser cache supplied damaged bytes. Other 32 downloaded sources have no trailing zero run >100 bytes; this check alone does not certify their full decoding.
+
+**FAIL / activation blocked for B2/2022-06 listening:** source-integrity gate. Preserve the pinned damaged bytes as evidence; do not manufacture a shorter window, fill speech, or declare five complete tasks. Need an independently obtained intact source and renewed provenance, then full decode, transcript alignment and real-media acceptance. Existing six original published papers are unaffected. Neither CLI HTTP 403 nor ASR text proves a replacement recording is available.

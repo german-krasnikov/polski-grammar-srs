@@ -1,0 +1,13 @@
+DSL 1
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-C1-2022-11-l5-q3-fact-inkow
+  questionRef: certyfikat-polski-C1-2022-11-l5-q3
+  creditQuarter: 2
+  displayText: "Inków"
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-C1-2022-11-l5-q3-fact-skarbu
+  questionRef: certyfikat-polski-C1-2022-11-l5-q3
+  creditQuarter: 2
+  displayText: skarbu
+}

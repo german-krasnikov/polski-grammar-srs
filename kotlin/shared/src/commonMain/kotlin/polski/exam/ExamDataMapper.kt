@@ -4,6 +4,8 @@ import polski.exam.grammar.GrammarItem
 import polski.exam.grammar.GrammarTest
 import polski.exam.grammar.GrammarScoredVariant
 import polski.exam.grammar.GrammarBankToken
+import polski.exam.grammar.GrammarAnswerPair
+import polski.exam.grammar.GrammarRubricComponent
 
 /** Maps generated biome rows to domain model. Each pack provides its own generated rows;
  *  this mapper works generically over the row shapes (all packs share the same contract). */
@@ -22,12 +24,22 @@ object ExamDataMapper {
         variants: Map<String, List<GrammarScoredVariant>> = emptyMap(),
         bankTokens: Map<String, List<GrammarBankToken>> = emptyMap(),
         itemQuestionTarget: (I) -> String? = { null },
+        answerPairs: Map<String, List<GrammarAnswerPair>> = emptyMap(),
+        rubricComponents: Map<String, List<GrammarRubricComponent>> = emptyMap(),
     ): List<GrammarTest> = tests.map { t ->
         val grouped = items.filter { itemTestRef(it) == testId(t) }
+        val testPairs = answerPairs[testId(t)].orEmpty()
+        val partners = buildMap {
+            testPairs.forEach { pair ->
+                put(pair.firstItemId, pair.secondItemId)
+                put(pair.secondItemId, pair.firstItemId)
+            }
+        }
         GrammarTest(
             testId = testId(t),
             instruction = testInstruction(t),
             bankTokens = bankTokens[testId(t)].orEmpty().sortedBy { it.position },
+            answerPairs = testPairs,
             items = grouped.map { i ->
                 val points = itemPoints(i)
                 val quarter = itemQuarter(i)
@@ -44,6 +56,8 @@ object ExamDataMapper {
                     scoredVariants = variants[itemId(i)].orEmpty(),
                     gradingMode = itemGradingMode(i)?.let(ExamGradingMode::fromTag) ?: ExamGradingMode.Exact,
                     questionTarget = itemQuestionTarget(i),
+                    pairedWithItemId = partners[itemId(i)],
+                    rubricComponents = rubricComponents[itemId(i)].orEmpty().sortedBy { it.order },
                 )
             },
         )

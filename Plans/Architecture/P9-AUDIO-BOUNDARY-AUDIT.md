@@ -55,3 +55,34 @@ Measured closure spans I–V (seconds):
 Source transcript phrases found in two separated blocks of each twice-recorded task (approximate locator times): B2/2023 I stone dialogue 148/346, II professor Jan Miodek 525/676, III Powstańców Śląskich crossing 905/1023, IV programme introduction 1202/1392, V derelict building 1663/1827; B2/2024 I Martyna dialogue 172/408, II 21 March 585/686, III holiday-season introduction 864/1138, IV experience introduction 1402/1589, V parents and teachers 1772/1952; C1/2023 II printed body parts 516/644, III opening interview 852/1096, IV nursery/uniform passage 1420/1696, V researchers warning about waste 1980/2189. Exact normalized five-word anchors were also matched against each official key transcript. C1 I is explicitly recorded once; no additional loop is appropriate for any complete segment.
 
 These are source-audited candidate windows, still pending independent reviewer/source checks and new-session real-media browser tests. Other P9 recordings are being processed separately.
+
+## Next three candidate audits: B2 February 2022, B2 June 2023, C1 November 2023
+
+Same locator/independent clip/signal method; source hashes remain in provenance. Cut points lie in measured inter-task silence, not the early ASR word alignment. Reproduction clips/manifests: `/tmp/polski-p9-audio/<level-session>/clips/{aligned-base.json,clip-manifest.json,*-silence.log}`.
+
+| Session | I | II | III | IV | V |
+| --- | --- | --- | --- | --- | --- |
+| B2/2022-02 | 107–448 | 448–769 | 769–1241 | 1241–1609 | 1609–1923 |
+| B2/2023-06 | 109–728 | 728–1085 | 1085–1429 | 1429–1869 | 1869–2249 |
+| C1/2023-11 | 110–478 | 478–809 | 809–1401 | 1401–1760 | 1760–2152 |
+
+Signal closure spans I–V: B2/2022-02 **444.949–446.654; 766.546–768.112; 1237.905–1239.447; 1606.115–1607.631; 1920.826–1922.385**. Next announcements begin 448.892, 770.146, 1241.639, 1609.909; whole-test checking begins 1924.443. B2/2023-06 **725.126–726.831; 1082.444–1084.010; 1425.643–1427.184; 1865.914–1867.430; 2246.732–2248.292**; next announcements 729.069, 1086.044, 1429.376, 1869.708; checking 2250.350. C1/2023-11 **475.536–476.855; 806.100–807.440; 1398.030–1399.301; 1757.553–1758.791; 2149.238–2150.661**; next announcements 479.486, 809.602, 1401.534, 1760.943; checking 2152.755.
+
+Approximate matching-transcript repeat locators (ASR segment positions, not exact speech onsets): B2/2022 I “pochwalić się może na pewno” 138/313, II Slovenia introduction 461/642, III Robert Kubica 798/987, IV 9 October Katowice 1254/1458, V music collection 1642/1806. B2/2023 I child punishment 140/452, II historical meetings 741/889, III kea parrot 1113/1290, IV department store 1459/1686, V inventor 1897/2041. C1/2023 II investment around 32 million 491/633, III Środa treasure 820/1091, IV birds in cities 1411/1623, V music-festival discussion in segments 1771–1810/1995–1998. C1 task I explicitly says “tylko jeden raz” (arkusz physical p3/printed p2); II–V twice. Whole recorded segments are played once, without an extra software loop.
+
+**NOT RUN:** human acoustic confirmation, independent source boundary review and new-paper media Playwright. B2/2022-06 is explicitly excluded: its received MP3 has a damaged zero tail (see provenance), so no complete task V interval is certified or proposed from its nominal duration.
+
+## Remaining intact C1 sources: March and November 2022
+
+Both use full base locators plus separately cut 40-second aligned-base/VAD clips and measured signal intervals, as above. One CPU thread was used for this final clip pass; official PDF transcript remains authoritative. Temporary outputs: `/tmp/polski-p9-audio/C1-2022-{03,11}/clips/` and `/tmp/polski-p9-last-two-c1-clips.log`.
+
+| Session | I | II | III | IV | V |
+| --- | --- | --- | --- | --- | --- |
+| C1/2022-03 | 110–547 | 547–902 | 902–1344 | 1344–2018 | 2018–2436 |
+| C1/2022-11 | 110–444 | 444–853 | 853–1257 | 1257–1733 | 1733–2174 |
+
+C1/2022-03 closure signal spans: **543.935–545.231; 899.102–900.438; 1341.029–1342.300; 2015.094–2016.315; 2433.023–2434.441**. Next announcements begin 547.886, 902.608, 1344.536, 2018.483; final whole-test checking begins 2436.539. C1/2022-11 closure spans: **440.829–442.125; 849.846–851.183; 1254.144–1255.416; 1729.778–1731.000; 2171.565–2172.983**. Next announcements begin 444.780, 853.353, 1257.652, 1733.168; checking begins 2175.082. First announcement begins 110.275 in both files. Each proposed cut lies in the measured silence after a complete closure and before the next announcement.
+
+Source-matching repeated five-word phrase locators for March II “tak naprawdę ta piękna era” 595/714, III “to jest dla mnie oznaka” 957/1167, IV crash-test introduction 1394/1726, V “nie przypominać utartych wynurzeń jubilackich” 2029/2211. November II “cechy umożliwiające współżycie w grupie” 499/696, III “w nim szczególnego nie było” 864/1044, IV Polish machinery industry 1268/1538, V “to jest takie niezwykłe miejsce” 1781/1994. Locator positions are approximate ASR segments, not exact word onsets. Task I in both papers is once; II–V twice. Do not add software repeats to these complete segments.
+
+P9 now has candidate tables for **10 intact source recordings / 50 task windows**. The eleventh (B2/2022-06) remains blocked by damaged received bytes. **NOT RUN for these new-session windows:** human acoustic confirmation, independent boundary review, distribution/media Playwright and native device playback. No new-paper activation is implied.

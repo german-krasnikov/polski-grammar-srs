@@ -54,12 +54,31 @@ fun evaluateExamAnswer(
     val normalized = normalize(answer)
     val matchesCanonical = normalized == normalize(fullAnswer)
     val variantQuarter = variants.firstOrNull { normalize(it.answer) == normalized }?.earnedQuarter ?: 0
+    return evaluateAnswerPolicyFacts(
+        matchesCanonical = matchesCanonical,
+        variantQuarter = variantQuarter,
+        maximumQuarter = maximumQuarter,
+        answerNonblank = normalized.isNotBlank(),
+        openManual = mode == ExamGradingMode.OpenManual,
+    )
+}
+
+/** Shared generated DSL verdict for validated answer facts, including paired answers. */
+internal fun evaluateAnswerPolicyFacts(
+    matchesCanonical: Boolean,
+    variantQuarter: Int,
+    maximumQuarter: Int,
+    answerNonblank: Boolean,
+    openManual: Boolean,
+): ExamAnswerEvaluation {
+    require(maximumQuarter > 0 && variantQuarter in 0..maximumQuarter) { "Invalid answer policy quarters" }
+    require(!matchesCanonical || answerNonblank) { "A blank answer cannot match the canonical answer" }
     val disposition = Policy.disposition(
         Policy.DispositionInput(
-            answerNonblank = normalized.isNotBlank(),
+            answerNonblank = answerNonblank,
             matchesCanonical = matchesCanonical,
             maximumQuarter = maximumQuarter.toDouble(),
-            openManual = mode == ExamGradingMode.OpenManual,
+            openManual = openManual,
             variantQuarter = variantQuarter.toDouble(),
         ),
     )

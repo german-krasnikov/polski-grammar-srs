@@ -9,6 +9,8 @@ data class GrammarTest(
     val instruction: String,
     val items: List<GrammarItem>,
     val bankTokens: List<GrammarBankToken> = emptyList(),
+    /** Official whole-answer combinations; no cross-product is implied. */
+    val answerPairs: List<GrammarAnswerPair> = emptyList(),
 ) {
     init {
         require(bankTokens.map { it.tokenId }.distinct().size == bankTokens.size) { "Duplicate bank token ID in $testId" }
@@ -30,10 +32,62 @@ data class GrammarTest(
                 }
             }
         }
+        val partners = mutableMapOf<String, String>()
+        val firstItems = mutableSetOf<String>()
+        val secondItems = mutableSetOf<String>()
+        val tuples = mutableSetOf<List<String>>()
+        answerPairs.forEach { pair ->
+            require(pair.firstItemId != pair.secondItemId && pair.firstItemId in itemIds && pair.secondItemId in itemIds) {
+                "Pair ${pair.pairId} must reference two items in $testId"
+            }
+            firstItems.add(pair.firstItemId)
+            secondItems.add(pair.secondItemId)
+            require(pair.firstItemId !in secondItems && pair.secondItemId !in firstItems) {
+                "Pair order conflicts in $testId"
+            }
+            require((partners[pair.firstItemId] == null || partners[pair.firstItemId] == pair.secondItemId) &&
+                (partners[pair.secondItemId] == null || partners[pair.secondItemId] == pair.firstItemId)) {
+                "Inconsistent pair partners in $testId"
+            }
+            partners[pair.firstItemId] = pair.secondItemId
+            partners[pair.secondItemId] = pair.firstItemId
+            val first = items.single { it.itemId == pair.firstItemId }
+            val second = items.single { it.itemId == pair.secondItemId }
+            require(pair.firstEarnedQuarter in 1..first.maximumQuarter && pair.secondEarnedQuarter in 1..second.maximumQuarter) {
+                "Invalid pair credit in ${pair.pairId}"
+            }
+            val firstAnswer = normalize(pair.firstAnswer)
+            val secondAnswer = normalize(pair.secondAnswer)
+            val tuple = listOf(pair.firstItemId, pair.secondItemId, firstAnswer, secondAnswer)
+            require(firstAnswer.isNotBlank() && secondAnswer.isNotBlank() && tuples.add(tuple)) {
+                "Blank or duplicate pair answer in ${pair.pairId}"
+            }
+        }
+        items.forEach { item -> require(item.pairedWithItemId == partners[item.itemId]) {
+            "Pair marker mismatch for ${item.itemId}"
+        } }
     }
 }
 
 data class GrammarBankToken(val tokenId: String, val position: Int, val text: String)
+
+data class GrammarAnswerPair(
+    val pairId: String,
+    val firstItemId: String,
+    val firstAnswer: String,
+    val secondItemId: String,
+    val secondAnswer: String,
+    val firstEarnedQuarter: Int,
+    val secondEarnedQuarter: Int,
+)
+
+/** Official review criterion, displayed without automatic text matching. */
+data class GrammarRubricComponent(
+    val componentId: String,
+    val order: Int,
+    val creditQuarter: Int,
+    val criterionText: String,
+)
 
 data class GrammarItem(
     val itemId: String,
@@ -48,6 +102,8 @@ data class GrammarItem(
     val scoredVariants: List<GrammarScoredVariant> = emptyList(),
     val gradingMode: ExamGradingMode = ExamGradingMode.Exact,
     val questionTarget: String? = null,
+    val pairedWithItemId: String? = null,
+    val rubricComponents: List<GrammarRubricComponent> = emptyList(),
 ) {
     val maximumQuarter: Int get() = pointsQuarter ?: points * 4
 
@@ -59,6 +115,12 @@ data class GrammarItem(
         require(scoredVariants.all { normalize(it.answer).isNotBlank() }) { "Blank variant answer for $itemId" }
         val accepted = listOf(correctAnswer) + scoredVariants.map { it.answer }
         require(accepted.map(::normalize).toSet().size == accepted.size) { "Duplicate answer for $itemId" }
+        require(rubricComponents.map { it.componentId }.distinct().size == rubricComponents.size &&
+            rubricComponents.map { it.order }.distinct().size == rubricComponents.size &&
+            rubricComponents.all { it.order > 0 && it.creditQuarter > 0 && it.criterionText.isNotBlank() } &&
+            (rubricComponents.isEmpty() || rubricComponents.sumOf { it.creditQuarter } == maximumQuarter)) {
+            "Invalid rubric components for $itemId"
+        }
     }
 }
 

@@ -17,9 +17,10 @@ internal class ExamReadingController(
     private val onAction: ((ReadingExamAction) -> Unit)? = null,
     private val onTimedFinish: (() -> Unit)? = null,
 ) {
-    private val exam = examReadingData[examId] ?: ReadingExam(emptyList(), emptyList())
-    private var ownState = ReadingExamState(exam)
+    private val initialExam = examReadingData[examId] ?: ReadingExam(emptyList(), emptyList())
+    private var ownState = ReadingExamState(initialExam)
     private val state get() = externalState?.invoke() ?: ownState
+    private val exam get() = state.exam
     private val currentPassageIdx get() = state.currentIndex
     private val answers get() = state.answers
     private val submitted get() = state.submitted
@@ -109,8 +110,8 @@ internal class ExamReadingController(
                                 }
                             })
                         }
-                        QuestionType.FillGap, QuestionType.ShortAnswer -> {
-                            if (q.options.isNotEmpty()) {
+                        QuestionType.FillGap, QuestionType.ShortAnswer, QuestionType.WordBank -> {
+                            if (q.type != QuestionType.WordBank && q.options.isNotEmpty()) {
                                 appendChild(node("div", "exam-options").apply {
                                     q.options.forEach { opt ->
                                         appendChild((document.createElement("button") as HTMLButtonElement).apply {

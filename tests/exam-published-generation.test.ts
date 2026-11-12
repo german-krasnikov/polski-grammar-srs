@@ -4,7 +4,7 @@ import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { cli, hasCli, repo } from './support/course-data';
-import { RECORD_TAGS, aggregate, discoverSources, validateSources } from '../dsl/exam-published/pipeline.mjs';
+import { RECORD_TAGS, aggregate, discoverSources, validateForwardSourceRecords, validateSources } from '../dsl/exam-published/pipeline.mjs';
 
 const temporary: string[] = [];
 const paper = 'exams/pl/certyfikat-polski/B1/2017';
@@ -22,6 +22,46 @@ afterEach(() => {
 });
 
 describe.skipIf(!hasCli)('published exam source gate', () => {
+  it('discovers forward grammar pair and rubric records in authored source', () => {
+    const directory = join(repo, 'exams/pl/certyfikat-polski/C1/2024-04');
+    expect(discoverSources(cli, directory).find((source) => source.record === 'GrammarAnswerPairRow')?.rows).toHaveLength(3);
+    const november = join(repo, 'exams/pl/certyfikat-polski/C1/2022-11');
+    expect(discoverSources(cli, november).find((source) => source.record === 'GrammarRubricComponentRow')?.rows).toHaveLength(20);
+  }, 20_000);
+
+  it('rejects a mismatched pair partner and incomplete component credits', () => {
+    const april = discoverSources(cli, join(repo, 'exams/pl/certyfikat-polski/C1/2024-04'));
+    validateForwardSourceRecords(april);
+    const pairs = april.find((source) => source.record === 'GrammarAnswerPairRow')!;
+    pairs.rows[1].value.secondItemRef = 'certyfikat-polski-C1-2024-04-g1-q7';
+    expect(() => validateForwardSourceRecords(april)).toThrow(/grammar-answer-pairs\.core-data:\d+:1: inconsistent pair partner/);
+    const november = discoverSources(cli, join(repo, 'exams/pl/certyfikat-polski/C1/2022-11'));
+    validateForwardSourceRecords(november);
+    const rubrics = november.find((source) => source.record === 'GrammarRubricComponentRow')!;
+    rubrics.rows[0].value.creditQuarter = 2;
+    expect(() => validateForwardSourceRecords(november)).toThrow(/grammar-rubric-components\.core-data:\d+:1: invalid rubric credit/);
+  }, 20_000);
+
+  it('retains explicit identities for every P9 open listening set', () => {
+    const papers = ['B2/2022-02', 'B2/2022-06', 'B2/2023-02', 'B2/2023-06',
+      'B2/2024-06', 'C1/2022-11', 'C1/2023-04', 'C1/2023-11'];
+    let count = 0;
+    for (const paper of papers) {
+      const sources = discoverSources(cli, join(repo, 'exams/pl/certyfikat-polski', paper));
+      validateForwardSourceRecords(sources);
+      const factIds = new Set(sources.filter((source) => source.record === 'ListeningAcceptedFactRow')
+        .flatMap((source) => source.rows.map((row) => row.value.questionRef)));
+      const questions = sources.filter((source) => source.record === 'ListeningQuestionRow')
+        .flatMap((source) => source.rows.map((row) => row.value));
+      for (const question of questions) {
+        if (question.answerMode !== 'unordered_set' || question.gradingMode !== 'open_manual') continue;
+        expect(factIds.has(question.questionId), String(question.questionId)).toBe(true);
+        count++;
+      }
+    }
+    expect(count).toBe(19);
+  }, 60_000);
+
   it('accepts either module filename and rejects both as duplicate source records', async () => {
     const { root, directory, publication } = fixture();
     renameSync(join(directory, 'modules.core-data'), join(directory, 'exam-modules.core-data'));

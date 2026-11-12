@@ -285,6 +285,7 @@ LISTENING_QUESTION {
   answerMode: unordered_set
   creditPerCorrectQuarter: 2
   gradingMode: open_manual
+  requiredSelections: 2
 }
 LISTENING_QUESTION {
   questionId: certyfikat-polski-B2-2023-02-l5-q4
@@ -332,4 +333,5 @@ LISTENING_QUESTION {
   answerMode: unordered_set
   creditPerCorrectQuarter: 2
   gradingMode: open_manual
+  requiredSelections: 2
 }

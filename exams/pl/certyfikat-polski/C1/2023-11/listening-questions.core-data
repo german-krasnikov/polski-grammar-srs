@@ -327,4 +327,5 @@ LISTENING_QUESTION {
   answerMode: unordered_set
   creditPerCorrectQuarter: 2
   gradingMode: open_manual
+  requiredSelections: 2
 }

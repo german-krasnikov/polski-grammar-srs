@@ -1,0 +1,11 @@
+DSL 1
+LISTENING_ACCEPTED_FACT_ALIAS {
+  aliasId: certyfikat-polski-C1-2022-11-l5-q3-alias-zamek-niedzicki
+  factRef: certyfikat-polski-C1-2022-11-l5-q3-fact-skarbu
+  answerText: "zamku niedzickiego"
+}
+LISTENING_ACCEPTED_FACT_ALIAS {
+  aliasId: certyfikat-polski-C1-2022-11-l5-q3-alias-zamek-w-niedzicy
+  factRef: certyfikat-polski-C1-2022-11-l5-q3-fact-skarbu
+  answerText: "zamku w Niedzicy"
+}

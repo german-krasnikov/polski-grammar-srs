@@ -96,7 +96,7 @@ END
 RECORD ReadingQuestionRow KEY questionId COUNT 1..
   questionId: string
   passageRef: ref ReadingPassageRow
-  questionType: enum multiple_choice|true_false_not_given|match_heading|fill_gap|short_answer|gap_fill_fragment|matching
+  questionType: enum multiple_choice|true_false_not_given|match_heading|fill_gap|short_answer|gap_fill_fragment|matching|word_bank
   questionText: string
   options: string OPTIONAL
   correctAnswer: string
@@ -167,6 +167,26 @@ RECORD GrammarAnswerVariantRow KEY variantId COUNT 1..
   answer: string
   earnedQuarter: int
   onlyIfNotUsedBy: ref GrammarItemRow OPTIONAL
+END
+
+# Official review criteria; these do not authorize automatic substring scoring.
+RECORD GrammarRubricComponentRow KEY componentId COUNT 0..
+  componentId: string
+  itemRef: ref GrammarItemRow
+  order: int
+  creditQuarter: int
+  criterionText: string
+END
+
+# An explicitly accepted combination of two answers from one grammar test.
+RECORD GrammarAnswerPairRow KEY pairId COUNT 0..
+  pairId: string
+  firstItemRef: ref GrammarItemRow
+  firstAnswer: string
+  secondItemRef: ref GrammarItemRow
+  secondAnswer: string
+  firstEarnedQuarter: int
+  secondEarnedQuarter: int
 END
 
 # Writing: prompts with genre and optional word limit.
@@ -262,6 +282,36 @@ RECORD AnswerAttemptCaseRow KEY id COUNT 1..
   expectedPendingQuarter: int
   expectedPossibleQuarter: int
   expectedFinal: bool
+END
+
+# Independently transcribed pair outcomes from the C1 April 2024 key.
+RECORD GrammarPairCaseRow KEY id COUNT 0..
+  id: string
+  answer8: string
+  answer9: string
+  status8: enum confirmed_full|wrong|pending_manual
+  status9: enum confirmed_full|wrong|pending_manual
+  confirmed8: int
+  confirmed9: int
+  pending8: int
+  pending9: int
+END
+
+RECORD NovemberListeningCaseRow KEY id COUNT 0..
+  id: string
+  answer: string
+  expectedStatus: enum confirmed_full|confirmed_partial|wrong|pending_manual
+  confirmedQuarter: int
+  pendingQuarter: int
+END
+
+RECORD GrammarRubricCaseRow KEY id COUNT 0..
+  id: string
+  itemRef: string
+  componentCount: int
+  maximumQuarter: int
+  unknownAnswer: string
+  unknownPendingQuarter: int
 END
 
 RECORD UnorderedSetCaseRow KEY id COUNT 1..

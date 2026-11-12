@@ -1,0 +1,16 @@
+DSL 1
+LISTENING_ACCEPTED_FACT_ALIAS {
+  aliasId: certyfikat-polski-B2-2022-02-l5-q3-alias-1-1
+  factRef: certyfikat-polski-B2-2022-02-l5-q3-fact-1
+  answerText: "bogate opisy"
+}
+LISTENING_ACCEPTED_FACT_ALIAS {
+  aliasId: certyfikat-polski-B2-2022-02-l5-q3-alias-2-1
+  factRef: certyfikat-polski-B2-2022-02-l5-q3-fact-2
+  answerText: "fotografie z prywatnych zbiorów rodziny kompozytora"
+}
+LISTENING_ACCEPTED_FACT_ALIAS {
+  aliasId: certyfikat-polski-B2-2022-02-l5-q3-alias-2-2
+  factRef: certyfikat-polski-B2-2022-02-l5-q3-fact-2
+  answerText: "prywatne fotografie"
+}

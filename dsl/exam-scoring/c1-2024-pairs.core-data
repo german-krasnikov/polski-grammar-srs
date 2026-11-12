@@ -1,0 +1,100 @@
+DSL 1
+GRAMMAR_PAIR_CASE {
+  id: c1-2024-first
+  answer8: kilku
+  answer9: "przyjaciółmi"
+  status8: confirmed_full
+  status9: confirmed_full
+  confirmed8: 2
+  confirmed9: 2
+  pending8: 0
+  pending9: 0
+}
+GRAMMAR_PAIR_CASE {
+  id: c1-2024-second
+  answer8: kilkoma
+  answer9: "przyjaciółmi"
+  status8: confirmed_full
+  status9: confirmed_full
+  confirmed8: 2
+  confirmed9: 2
+  pending8: 0
+  pending9: 0
+}
+GRAMMAR_PAIR_CASE {
+  id: c1-2024-third
+  answer8: kilkorgiem
+  answer9: "przyjaciół"
+  status8: confirmed_full
+  status9: confirmed_full
+  confirmed8: 2
+  confirmed9: 2
+  pending8: 0
+  pending9: 0
+}
+GRAMMAR_PAIR_CASE {
+  id: c1-2024-crossed-a
+  answer8: kilkorgiem
+  answer9: "przyjaciółmi"
+  status8: pending_manual
+  status9: pending_manual
+  confirmed8: 0
+  confirmed9: 0
+  pending8: 2
+  pending9: 2
+}
+GRAMMAR_PAIR_CASE {
+  id: c1-2024-crossed-b
+  answer8: kilku
+  answer9: "przyjaciół"
+  status8: pending_manual
+  status9: pending_manual
+  confirmed8: 0
+  confirmed9: 0
+  pending8: 2
+  pending9: 2
+}
+GRAMMAR_PAIR_CASE {
+  id: c1-2024-crossed-c
+  answer8: kilkoma
+  answer9: "przyjaciół"
+  status8: pending_manual
+  status9: pending_manual
+  confirmed8: 0
+  confirmed9: 0
+  pending8: 2
+  pending9: 2
+}
+GRAMMAR_PAIR_CASE {
+  id: c1-2024-blank-first
+  answer8: ""
+  answer9: "przyjaciółmi"
+  status8: wrong
+  status9: pending_manual
+  confirmed8: 0
+  confirmed9: 0
+  pending8: 0
+  pending9: 2
+}
+GRAMMAR_PAIR_CASE {
+  id: c1-2024-blank-second
+  answer8: kilku
+  answer9: ""
+  status8: pending_manual
+  status9: wrong
+  confirmed8: 0
+  confirmed9: 0
+  pending8: 2
+  pending9: 0
+}
+GRAMMAR_PAIR_CASE {
+  id: c1-2024-both-blank
+  answer8: ""
+  answer9: ""
+  status8: wrong
+  status9: wrong
+  confirmed8: 0
+  confirmed9: 0
+  pending8: 0
+  pending9: 0
+}

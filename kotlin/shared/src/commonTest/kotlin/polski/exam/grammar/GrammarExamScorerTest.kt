@@ -8,12 +8,57 @@ import polski.exam.ExamGradingMode
 import polski.exam.data.oracle.SCORING_CASE_ROW_ROWS
 import polski.exam.data.oracle.QUARTER_SCORING_CASE_ROW_ROWS
 import polski.exam.data.oracle.ANSWER_ATTEMPT_CASE_ROW_ROWS
+import polski.exam.data.oracle.GRAMMAR_PAIR_CASE_ROW_ROWS
+import polski.exam.data.p9oracle.GRAMMAR_TEST_ROW_ROWS
+import polski.exam.data.p9oracle.GRAMMAR_ITEM_ROW_ROWS
+import polski.exam.data.p9oracle.GRAMMAR_ANSWER_PAIR_ROW_ROWS
+import polski.exam.ExamDataMapper
 
 /**
  * Loops [SCORING_CASE_ROW_ROWS] (generated from dsl/exam-scoring/scoring.core-data by biome generate).
  * Adding a scoring test case = one line in the .core-data file (P4: test expectations in DSL).
  */
 class GrammarExamScorerTest {
+    @Test fun officialPairOracleUsesCompleteAnswerSnapshot() {
+        val testId = "certyfikat-polski-C1-2024-04-grammar-1"
+        val pairs = GRAMMAR_ANSWER_PAIR_ROW_ROWS.map { row -> GrammarAnswerPair(
+            row.pairId, row.firstItemRef, row.firstAnswer, row.secondItemRef, row.secondAnswer,
+            row.firstEarnedQuarter, row.secondEarnedQuarter,
+        ) }
+        val test = ExamDataMapper.grammarTests(
+            tests = GRAMMAR_TEST_ROW_ROWS.filter { it.testId == testId },
+            items = GRAMMAR_ITEM_ROW_ROWS,
+            testId = { it.testId }, testInstruction = { it.instruction },
+            itemTestRef = { it.testRef }, itemId = { it.itemId },
+            itemType = { it.questionType.tag }, itemContext = { it.context },
+            itemGap = { it.gap }, itemOptions = { it.options },
+            itemAnswer = { it.correctAnswer }, itemPoints = { it.points }, itemQuarter = { it.pointsQuarter },
+            itemGradingMode = { it.gradingMode?.tag },
+            answerPairs = mapOf(testId to pairs),
+        ).single()
+        val first = test.items.single { it.itemId.endsWith("g1-q8") }
+        val second = test.items.single { it.itemId.endsWith("g1-q9") }
+        assertEquals(false, GrammarExamScorer.score(first, first.correctAnswer))
+        assertEquals("pending_manual", GrammarExamScorer.grade(first, first.correctAnswer).status.tag)
+        for (row in GRAMMAR_PAIR_CASE_ROW_ROWS) {
+            val answers = mapOf(first.itemId to row.answer8, second.itemId to row.answer9)
+            val firstGrade = GrammarExamScorer.gradeInAttempt(test, first, answers)
+            val secondGrade = GrammarExamScorer.gradeInAttempt(test, second, answers)
+            assertEquals(row.status8.tag, firstGrade.status.tag, row.id)
+            assertEquals(row.status9.tag, secondGrade.status.tag, row.id)
+            assertEquals(row.confirmed8, firstGrade.confirmedQuarter, row.id)
+            assertEquals(row.confirmed9, secondGrade.confirmedQuarter, row.id)
+            assertEquals(row.pending8, firstGrade.pendingQuarter, row.id)
+            assertEquals(row.pending9, secondGrade.pendingQuarter, row.id)
+            val result = GrammarExamScorer.scoreAttempt(test, answers)
+            assertEquals(row.confirmed8 + row.confirmed9, result.earnedQuarterPoints, row.id)
+            assertEquals(row.pending8 + row.pending9, result.manualPendingQuarterPoints, row.id)
+        }
+        assertFailsWith<IllegalArgumentException> {
+            test.copy(items = test.items.map { if (it.itemId == first.itemId) it.copy(pairedWithItemId = null) else it })
+        }
+    }
+
     private val template = GrammarItem(
         itemId = "q1", questionType = QuestionType.ChooseForm,
         context = "test ___", gap = "___", options = listOf("a", "b", "c"),

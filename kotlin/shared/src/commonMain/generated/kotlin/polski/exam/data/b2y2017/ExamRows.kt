@@ -1,5 +1,5 @@
 // Generated from dsl/exam.data-contract
-// source-sha256=9f2773168dc0b459612d773f233da80748fbf9916ca5bae13c27401bf0105706
+// source-sha256=c25663c7842effa836bb812b389b1c0384ddfb8c602fa15fdc03765737f8cfa6
 // Edit the source, then run biome generate.
 
 package polski.exam.data.b2y2017
@@ -42,6 +42,7 @@ enum class ReadingQuestionRowQuestionType(val tag: String) {
     SHORT_ANSWER("short_answer"),
     GAP_FILL_FRAGMENT("gap_fill_fragment"),
     MATCHING("matching"),
+    WORD_BANK("word_bank"),
 }
 
 enum class ReadingQuestionRowGradingMode(val tag: String) {
@@ -110,6 +111,25 @@ enum class AnswerEvaluationCaseRowMode(val tag: String) {
 }
 
 enum class AnswerEvaluationCaseRowExpectedStatus(val tag: String) {
+    CONFIRMED_FULL("confirmed_full"),
+    CONFIRMED_PARTIAL("confirmed_partial"),
+    WRONG("wrong"),
+    PENDING_MANUAL("pending_manual"),
+}
+
+enum class GrammarPairCaseRowStatus8(val tag: String) {
+    CONFIRMED_FULL("confirmed_full"),
+    WRONG("wrong"),
+    PENDING_MANUAL("pending_manual"),
+}
+
+enum class GrammarPairCaseRowStatus9(val tag: String) {
+    CONFIRMED_FULL("confirmed_full"),
+    WRONG("wrong"),
+    PENDING_MANUAL("pending_manual"),
+}
+
+enum class NovemberListeningCaseRowExpectedStatus(val tag: String) {
     CONFIRMED_FULL("confirmed_full"),
     CONFIRMED_PARTIAL("confirmed_partial"),
     WRONG("wrong"),
@@ -320,6 +340,24 @@ data class GrammarAnswerVariantRow(
     val onlyIfNotUsedBy: String? = null,
 )
 
+data class GrammarRubricComponentRow(
+    val componentId: String,
+    val itemRef: String,
+    val order: Int,
+    val creditQuarter: Int,
+    val criterionText: String,
+)
+
+data class GrammarAnswerPairRow(
+    val pairId: String,
+    val firstItemRef: String,
+    val firstAnswer: String,
+    val secondItemRef: String,
+    val secondAnswer: String,
+    val firstEarnedQuarter: Int,
+    val secondEarnedQuarter: Int,
+)
+
 data class WritingTaskRow(
     val taskId: String,
     val examRef: String,
@@ -409,6 +447,35 @@ data class AnswerAttemptCaseRow(
     val expectedPendingQuarter: Int,
     val expectedPossibleQuarter: Int,
     val expectedFinal: Boolean,
+)
+
+data class GrammarPairCaseRow(
+    val id: String,
+    val answer8: String,
+    val answer9: String,
+    val status8: GrammarPairCaseRowStatus8,
+    val status9: GrammarPairCaseRowStatus9,
+    val confirmed8: Int,
+    val confirmed9: Int,
+    val pending8: Int,
+    val pending9: Int,
+)
+
+data class NovemberListeningCaseRow(
+    val id: String,
+    val answer: String,
+    val expectedStatus: NovemberListeningCaseRowExpectedStatus,
+    val confirmedQuarter: Int,
+    val pendingQuarter: Int,
+)
+
+data class GrammarRubricCaseRow(
+    val id: String,
+    val itemRef: String,
+    val componentCount: Int,
+    val maximumQuarter: Int,
+    val unknownAnswer: String,
+    val unknownPendingQuarter: Int,
 )
 
 data class UnorderedSetCaseRow(

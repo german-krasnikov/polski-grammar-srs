@@ -12,7 +12,7 @@ data class ExamSessionState(
     val config: ExamSessionConfig, val currentModuleIndex: Int = 0,
     val listening: ListeningExamState = ListeningExamState(config.listening),
     val reading: ReadingExamState = ReadingExamState(config.reading),
-    val grammar: GrammarExamState = GrammarExamState(mergedGrammar(config)),
+    val grammar: GrammarExamState = GrammarExamState(mergeGrammarTests(config.examId, config.grammar)),
     val writing: WritingExamState = WritingExamState(config.writing),
     val deadlineEpochMs: Long? = null, val frozenResults: Map<ExamModule, ExamPartScore> = emptyMap(),
     val completed: Boolean = false,
@@ -28,10 +28,6 @@ sealed interface ExamPartAction {
     data class Reading(val action: ReadingExamAction) : ExamPartAction
     data class Grammar(val action: GrammarExamAction) : ExamPartAction
     data class Writing(val action: WritingExamAction) : ExamPartAction
-}
-private fun mergedGrammar(config: ExamSessionConfig): GrammarTest {
-    val tokens = config.grammar.flatMap { it.bankTokens }.mapIndexed { index, token -> token.copy(position = index + 1) }
-    return GrammarTest(config.examId, config.grammar.first().instruction, config.grammar.flatMap { it.items }, tokens)
 }
 /** Applies one event; a stale part identity is ignored before its deadline is checked. */
 fun reduceExamSession(state: ExamSessionState, action: ExamSessionAction): ExamSessionState {

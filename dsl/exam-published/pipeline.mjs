@@ -19,6 +19,7 @@ export const RECORD_TAGS = new Map(Object.entries({
   ReadingAcceptedFactRow: 'READING_ACCEPTED_FACT', ReadingAcceptedFactAliasRow: 'READING_ACCEPTED_FACT_ALIAS',
   GrammarTestRow: 'GRAMMAR_TEST', GrammarBankTokenRow: 'GRAMMAR_BANK_TOKEN',
   GrammarItemRow: 'GRAMMAR_ITEM', GrammarAnswerVariantRow: 'GRAMMAR_ANSWER_VARIANT',
+  GrammarRubricComponentRow: 'GRAMMAR_RUBRIC_COMPONENT', GrammarAnswerPairRow: 'GRAMMAR_ANSWER_PAIR',
   WritingTaskRow: 'WRITING_TASK',
 }));
 const RECORD_BY_TAG = new Map([...RECORD_TAGS].map(([record, tag]) => [tag, record]));
@@ -76,6 +77,92 @@ export function discoverSources(cli, directory) {
   return sources;
 }
 
+const answerKey = (value) => value.normalize('NFC').toLocaleLowerCase('pl-PL').trim()
+  .replace(/[.!?]+$/, '').replace(/\s+/gu, ' ');
+
+/** Arithmetic and cross-row checks that Core's record grammar cannot express. */
+export function validateForwardSourceRecords(sources) {
+  const sourceOf = (record) => sources.find((source) => source.record === record);
+  const rowsOf = (record) => sourceOf(record)?.rows.map(({ value }) => value) ?? [];
+  const fail = (record, key, id, message) => {
+    const file = sourceOf(record).file;
+    const line = readFileSync(file, 'utf8').split('\n').findIndex((text) => text.trim() === `${key}: ${id}`) + 1;
+    throw new Error(`${file}:${line || 1}:1: ${message}`);
+  };
+  const items = new Map(rowsOf('GrammarItemRow').map((item) => [item.itemId, item]));
+  const questions = new Map(rowsOf('ListeningQuestionRow').map((question) => [question.questionId, question]));
+  const partner = new Map(), tuples = new Set(), firstItems = new Set(), secondItems = new Set();
+  for (const pair of rowsOf('GrammarAnswerPairRow')) {
+    const first = items.get(pair.firstItemRef), second = items.get(pair.secondItemRef);
+    if (!first || !second || first.itemId === second.itemId || first.testRef !== second.testRef) {
+      fail('GrammarAnswerPairRow', 'pairId', pair.pairId, `invalid pair items in ${pair.pairId}`);
+    }
+    if ((partner.has(first.itemId) && partner.get(first.itemId) !== second.itemId) ||
+        (partner.has(second.itemId) && partner.get(second.itemId) !== first.itemId) ||
+        secondItems.has(first.itemId) || firstItems.has(second.itemId)) {
+      fail('GrammarAnswerPairRow', 'pairId', pair.pairId, `inconsistent pair partner in ${pair.pairId}`);
+    }
+    firstItems.add(first.itemId); secondItems.add(second.itemId);
+    partner.set(first.itemId, second.itemId); partner.set(second.itemId, first.itemId);
+    const firstAnswer = answerKey(pair.firstAnswer), secondAnswer = answerKey(pair.secondAnswer);
+    const tuple = `${first.itemId}\u0000${second.itemId}\u0000${firstAnswer}\u0000${secondAnswer}`;
+    if (!firstAnswer || !secondAnswer || tuples.has(tuple) ||
+        pair.firstEarnedQuarter < 1 || pair.firstEarnedQuarter > (first.pointsQuarter ?? first.points * 4) ||
+        pair.secondEarnedQuarter < 1 || pair.secondEarnedQuarter > (second.pointsQuarter ?? second.points * 4)) {
+      fail('GrammarAnswerPairRow', 'pairId', pair.pairId, `invalid pair answer or credit in ${pair.pairId}`);
+    }
+    tuples.add(tuple);
+  }
+  const rubricByItem = new Map();
+  for (const component of rowsOf('GrammarRubricComponentRow')) {
+    const group = rubricByItem.get(component.itemRef) ?? [];
+    group.push(component);
+    rubricByItem.set(component.itemRef, group);
+  }
+  for (const [itemId, components] of rubricByItem) {
+    const item = items.get(itemId);
+    if (!item || components.some((component) => component.order < 1 || component.creditQuarter < 1 || !component.criterionText.trim()) ||
+        new Set(components.map((component) => component.order)).size !== components.length ||
+        components.reduce((sum, component) => sum + component.creditQuarter, 0) !== (item.pointsQuarter ?? item.points * 4)) {
+      fail('GrammarRubricComponentRow', 'itemRef', itemId, `invalid rubric credit or order for ${itemId}`);
+    }
+  }
+  const factById = new Map(), acceptedByQuestion = new Map();
+  for (const fact of rowsOf('ListeningAcceptedFactRow')) {
+    const question = questions.get(fact.questionRef);
+    const maximum = question?.pointsQuarter ?? (question?.points ?? 0) * 4;
+    if (!question || question.answerMode !== 'unordered_set' || question.requiredSelections == null ||
+        fact.creditQuarter !== question.creditPerCorrectQuarter || fact.creditQuarter < 1 ||
+        question.requiredSelections * fact.creditQuarter !== maximum || !answerKey(fact.displayText)) {
+      fail('ListeningAcceptedFactRow', 'factId', fact.factId, `invalid accepted fact ${fact.factId}`);
+    }
+    factById.set(fact.factId, fact);
+    const accepted = acceptedByQuestion.get(fact.questionRef) ?? new Map();
+    const key = answerKey(fact.displayText);
+    if (accepted.has(key)) fail('ListeningAcceptedFactRow', 'factId', fact.factId, `duplicate fact wording ${key}`);
+    accepted.set(key, fact.factId); acceptedByQuestion.set(fact.questionRef, accepted);
+  }
+  for (const question of questions.values()) {
+    if (question.answerMode === 'unordered_set' && question.gradingMode === 'open_manual' &&
+        question.requiredSelections != null && !acceptedByQuestion.has(question.questionId)) {
+      fail('ListeningQuestionRow', 'questionId', question.questionId, `source set ${question.questionId} needs accepted facts`);
+    }
+    const accepted = acceptedByQuestion.get(question.questionId);
+    if (accepted && new Set(accepted.values()).size < question.requiredSelections) {
+      fail('ListeningQuestionRow', 'questionId', question.questionId, `insufficient accepted facts for ${question.questionId}`);
+    }
+  }
+  for (const alias of rowsOf('ListeningAcceptedFactAliasRow')) {
+    const fact = factById.get(alias.factRef);
+    const accepted = fact && acceptedByQuestion.get(fact.questionRef);
+    const key = answerKey(alias.answerText);
+    if (!accepted || !key || accepted.has(key)) {
+      fail('ListeningAcceptedFactAliasRow', 'aliasId', alias.aliasId, `duplicate or invalid fact alias ${alias.aliasId}`);
+    }
+    accepted.set(key, fact.factId);
+  }
+}
+
 /** Source check precedes aggregation and keeps Core diagnostics at the author's file/line. */
 export async function validateSources(cli, { root = projectRoot, publication = publicationFile } = {}) {
   const readDataText = await locatedReader(cli);
@@ -97,6 +184,7 @@ export async function validateSources(cli, { root = projectRoot, publication = p
     const directory = resolve(root, sourceDir);
     if (!inside(join(root, 'exams'), directory)) throw new Error(`${publication}: sourceDir escapes exams: ${sourceDir}`);
     const sources = discoverSources(cli, directory);
+    validateForwardSourceRecords(sources);
     command(cli, ['data', 'check', '--contract', contractFile,
       ...sources.flatMap(({ record, file }) => ['--rows', record, file])]);
     const byRecord = new Map();

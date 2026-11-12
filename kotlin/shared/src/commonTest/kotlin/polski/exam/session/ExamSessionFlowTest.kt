@@ -6,8 +6,40 @@ import polski.exam.grammar.*
 import polski.exam.listening.*
 import polski.exam.reading.*
 import polski.exam.writing.*
+import polski.exam.data.p9oracle.GRAMMAR_TEST_ROW_ROWS
+import polski.exam.data.p9oracle.GRAMMAR_ITEM_ROW_ROWS
+import polski.exam.data.p9oracle.GRAMMAR_ANSWER_PAIR_ROW_ROWS
 
 class ExamSessionFlowTest {
+    @Test fun officialPairedAnswersSurviveSessionGrammarMerge() {
+        val testId = "certyfikat-polski-C1-2024-04-grammar-1"
+        val pairs = GRAMMAR_ANSWER_PAIR_ROW_ROWS.map { row -> GrammarAnswerPair(
+            row.pairId, row.firstItemRef, row.firstAnswer, row.secondItemRef, row.secondAnswer,
+            row.firstEarnedQuarter, row.secondEarnedQuarter,
+        ) }
+        val sourceTest = ExamDataMapper.grammarTests(
+            tests = GRAMMAR_TEST_ROW_ROWS.filter { it.testId == testId },
+            items = GRAMMAR_ITEM_ROW_ROWS,
+            testId = { it.testId }, testInstruction = { it.instruction },
+            itemTestRef = { it.testRef }, itemId = { it.itemId },
+            itemType = { it.questionType.tag }, itemContext = { it.context },
+            itemGap = { it.gap }, itemOptions = { it.options },
+            itemAnswer = { it.correctAnswer }, itemPoints = { it.points }, itemQuarter = { it.pointsQuarter },
+            itemGradingMode = { it.gradingMode?.tag }, answerPairs = mapOf(testId to pairs),
+        ).single()
+        val base = config()
+        val certified = base.copy(
+            grammar = listOf(sourceTest),
+            modules = base.modules.map { module ->
+                if (module.module == ExamModule.Grammar) module.copy(
+                    maximumQuarter = sourceTest.items.sumOf { it.maximumQuarter },
+                ) else module
+            },
+        )
+        val state = ExamSessionState(certified)
+        assertEquals(pairs.size, state.grammar.test.answerPairs.size)
+    }
+
     @Test fun emptyGrammarDoesNotAdvanceOnNext() {
         val grammar = GrammarExamState(GrammarTest("empty", "", emptyList()))
         assertEquals(grammar, reduceGrammarExam(grammar, GrammarExamAction.Next))

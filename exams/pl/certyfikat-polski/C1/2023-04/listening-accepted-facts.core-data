@@ -1,0 +1,49 @@
+DSL 1
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-C1-2023-04-l5-q2-fact-1
+  questionRef: certyfikat-polski-C1-2023-04-l5-q2
+  creditQuarter: 2
+  displayText: "sprzęt astronautów"
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-C1-2023-04-l5-q2-fact-2
+  questionRef: certyfikat-polski-C1-2023-04-l5-q2
+  creditQuarter: 2
+  displayText: "nieczynne satelity"
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-C1-2023-04-l5-q4-fact-1
+  questionRef: certyfikat-polski-C1-2023-04-l5-q4
+  creditQuarter: 4
+  displayText: "problemy komunikacyjne w Stanach Zjednoczonych"
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-C1-2023-04-l5-q4-fact-2
+  questionRef: certyfikat-polski-C1-2023-04-l5-q4
+  creditQuarter: 4
+  displayText: "powstanie 600 nowych odpadów"
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-C1-2023-04-l5-q5-fact-1
+  questionRef: certyfikat-polski-C1-2023-04-l5-q5
+  creditQuarter: 2
+  displayText: "brak nawigacji samochodowej"
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-C1-2023-04-l5-q5-fact-2
+  questionRef: certyfikat-polski-C1-2023-04-l5-q5
+  creditQuarter: 2
+  displayText: "brak dostępu do bieżących informacji"
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-C1-2023-04-l5-q7-fact-1
+  questionRef: certyfikat-polski-C1-2023-04-l5-q7
+  creditQuarter: 2
+  displayText: "loty kosmiczne"
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-C1-2023-04-l5-q7-fact-2
+  questionRef: certyfikat-polski-C1-2023-04-l5-q7
+  creditQuarter: 2
+  displayText: "międzynarodowa stacja kosmiczna"
+}

@@ -1,0 +1,41 @@
+DSL 1
+GRAMMAR_RUBRIC_CASE {
+  id: c1-2022-11-grammar-ii-1
+  itemRef: certyfikat-polski-C1-2022-11-g2-q1
+  componentCount: 4
+  maximumQuarter: 4
+  unknownAnswer: "inna odpowiedź do sprawdzenia"
+  unknownPendingQuarter: 4
+}
+GRAMMAR_RUBRIC_CASE {
+  id: c1-2022-11-grammar-ii-2
+  itemRef: certyfikat-polski-C1-2022-11-g2-q2
+  componentCount: 4
+  maximumQuarter: 4
+  unknownAnswer: "inna odpowiedź do sprawdzenia"
+  unknownPendingQuarter: 4
+}
+GRAMMAR_RUBRIC_CASE {
+  id: c1-2022-11-grammar-ii-3
+  itemRef: certyfikat-polski-C1-2022-11-g2-q3
+  componentCount: 4
+  maximumQuarter: 4
+  unknownAnswer: "inna odpowiedź do sprawdzenia"
+  unknownPendingQuarter: 4
+}
+GRAMMAR_RUBRIC_CASE {
+  id: c1-2022-11-grammar-ii-4
+  itemRef: certyfikat-polski-C1-2022-11-g2-q4
+  componentCount: 4
+  maximumQuarter: 4
+  unknownAnswer: "inna odpowiedź do sprawdzenia"
+  unknownPendingQuarter: 4
+}
+GRAMMAR_RUBRIC_CASE {
+  id: c1-2022-11-grammar-ii-5
+  itemRef: certyfikat-polski-C1-2022-11-g2-q5
+  componentCount: 4
+  maximumQuarter: 4
+  unknownAnswer: "inna odpowiedź do sprawdzenia"
+  unknownPendingQuarter: 4
+}
