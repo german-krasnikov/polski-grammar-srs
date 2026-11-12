@@ -1,0 +1,8 @@
+# A result is final only when all manual credit is resolved. Sitting completion is separate.
+DECISION disposition DEFAULT hidden
+  sittingFinalNoPercent AT 10 WHEN result.resultReady AND result.scope == sitting AND result.sittingCompleted AND result.manualPendingQuarter == 0 AND result.possibleQuarter == 0 -> final_no_percent
+  sittingFinal AT 20 WHEN result.resultReady AND result.scope == sitting AND result.sittingCompleted AND result.manualPendingQuarter == 0 -> final
+  partFinalNoPercent AT 30 WHEN result.resultReady AND result.scope == part AND result.manualPendingQuarter == 0 AND result.possibleQuarter == 0 -> final_no_percent
+  partFinal AT 40 WHEN result.resultReady AND result.scope == part AND result.manualPendingQuarter == 0 -> final
+  available AT 50 WHEN result.resultReady -> provisional
+END

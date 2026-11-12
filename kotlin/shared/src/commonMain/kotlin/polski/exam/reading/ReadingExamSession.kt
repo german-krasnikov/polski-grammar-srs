@@ -1,6 +1,8 @@
 package polski.exam.reading
 
 import polski.exam.ExamPartScore
+import polski.exam.examPartActionPermission
+import polski.exam.partactionpolicy.data.PartActionPolicyOutcomeRowMutation
 
 data class ReadingExamState(
     val exam: ReadingExam, val currentIndex: Int = 0, val answers: Map<String, String> = emptyMap(),
@@ -13,11 +15,29 @@ sealed interface ReadingExamAction {
     data object Submit : ReadingExamAction
 }
 fun reduceReadingExam(state: ReadingExamState, action: ReadingExamAction): ReadingExamState {
-    if (state.submitted) return state
-    return when (action) {
-        is ReadingExamAction.Answer -> if (state.exam.questions.none { it.id == action.questionId }) state else state.copy(answers = state.answers.toMap() + (action.questionId to action.answer))
-        ReadingExamAction.Next -> state.copy(currentIndex = (state.currentIndex + 1).coerceAtMost(state.exam.passages.lastIndex))
-        ReadingExamAction.Previous -> state.copy(currentIndex = (state.currentIndex - 1).coerceAtLeast(0))
-        ReadingExamAction.Submit -> state.copy(answers = state.answers.toMap(), submitted = true, result = ReadingExamScorer.scoreAttempt(state.exam, state.answers))
+    val actionKind = when (action) {
+        is ReadingExamAction.Answer -> "answer"
+        ReadingExamAction.Next -> "next"
+        ReadingExamAction.Previous -> "previous"
+        ReadingExamAction.Submit -> "submit"
+    }
+    val permission = examPartActionPermission(
+        kind = "reading", action = actionKind, submitted = state.submitted,
+        validTarget = action is ReadingExamAction.Answer && state.exam.questions.any { it.id == action.questionId },
+        atFirst = state.currentIndex == 0, atLast = state.currentIndex == state.exam.passages.lastIndex,
+    )
+    return when (permission) {
+        PartActionPolicyOutcomeRowMutation.IGNORE -> state
+        PartActionPolicyOutcomeRowMutation.APPLY_ANSWER -> {
+            action as ReadingExamAction.Answer
+            state.copy(answers = state.answers.toMap() + (action.questionId to action.answer))
+        }
+        PartActionPolicyOutcomeRowMutation.MOVE -> when (action) {
+            ReadingExamAction.Next -> state.copy(currentIndex = state.currentIndex + 1)
+            ReadingExamAction.Previous -> state.copy(currentIndex = state.currentIndex - 1)
+            else -> error("Unexpected Reading move action: $action")
+        }
+        PartActionPolicyOutcomeRowMutation.SUBMIT -> state.copy(answers = state.answers.toMap(), submitted = true, result = ReadingExamScorer.scoreAttempt(state.exam, state.answers))
+        else -> error("Unexpected Reading action permission: $permission")
     }
 }

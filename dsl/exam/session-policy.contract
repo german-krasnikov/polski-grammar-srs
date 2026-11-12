@@ -1,0 +1,9 @@
+CONTRACT exam.sessionPolicy
+COVERAGE declared-scope
+MODULE ../../kotlin/shared/src/commonMain/kotlin/polski/exam/session/ExamSessionSession.kt
+FACT session.event enum=start,part_action,finish_part,tick member=event
+FACT session.completed bool member=completed
+FACT session.started bool member=started
+FACT session.moduleMatchesCurrent bool member=moduleMatchesCurrent
+FACT session.deadlineReached bool member=deadlineReached
+INPUT disposition session.event session.completed session.started session.moduleMatchesCurrent session.deadlineReached

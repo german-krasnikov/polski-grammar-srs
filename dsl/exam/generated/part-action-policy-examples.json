@@ -1,0 +1,24 @@
+{
+  "generated": "from part-action-policy.examples by npm run logic -- examples; do not edit",
+  "provenance": "Authored reducer acceptance: only known item IDs may mutate; writing tasks belong to the selected set; null set selection is valid; boundaries and submitted parts are immutable.",
+  "disposition": [
+    { "id": "grammar-known", "facts": { "kind": "grammar", "action": "answer", "submitted": false, "validTarget": true, "validSelectedSet": false, "targetInSelectedSet": false, "atFirst": true, "atLast": false }, "expected": "apply_answer" },
+    { "id": "grammar-unknown", "facts": { "kind": "grammar", "action": "answer", "submitted": false, "validTarget": false, "validSelectedSet": false, "targetInSelectedSet": false, "atFirst": true, "atLast": false }, "expected": "ignore" },
+    { "id": "reading-unknown", "facts": { "kind": "reading", "action": "answer", "submitted": false, "validTarget": false, "validSelectedSet": false, "targetInSelectedSet": false, "atFirst": true, "atLast": false }, "expected": "ignore" },
+    { "id": "listening-known", "facts": { "kind": "listening", "action": "answer", "submitted": false, "validTarget": true, "validSelectedSet": false, "targetInSelectedSet": false, "atFirst": true, "atLast": false }, "expected": "apply_answer" },
+    { "id": "writing-active-task", "facts": { "kind": "writing", "action": "answer", "submitted": false, "validTarget": true, "validSelectedSet": false, "targetInSelectedSet": true, "atFirst": true, "atLast": false }, "expected": "apply_answer" },
+    { "id": "writing-inactive-task", "facts": { "kind": "writing", "action": "answer", "submitted": false, "validTarget": true, "validSelectedSet": false, "targetInSelectedSet": false, "atFirst": true, "atLast": false }, "expected": "ignore" },
+    { "id": "writing-unknown-task", "facts": { "kind": "writing", "action": "answer", "submitted": false, "validTarget": false, "validSelectedSet": false, "targetInSelectedSet": true, "atFirst": true, "atLast": false }, "expected": "ignore" },
+    { "id": "writing-valid-set", "facts": { "kind": "writing", "action": "select_set", "submitted": false, "validTarget": false, "validSelectedSet": true, "targetInSelectedSet": false, "atFirst": true, "atLast": false }, "expected": "select_set" },
+    { "id": "writing-null-set", "facts": { "kind": "writing", "action": "select_set", "submitted": false, "validTarget": false, "validSelectedSet": true, "targetInSelectedSet": false, "atFirst": true, "atLast": false }, "expected": "select_set" },
+    { "id": "writing-invalid-set", "facts": { "kind": "writing", "action": "select_set", "submitted": false, "validTarget": false, "validSelectedSet": false, "targetInSelectedSet": false, "atFirst": true, "atLast": false }, "expected": "ignore" },
+    { "id": "nonwriting-set", "facts": { "kind": "grammar", "action": "select_set", "submitted": false, "validTarget": false, "validSelectedSet": true, "targetInSelectedSet": false, "atFirst": true, "atLast": false }, "expected": "ignore" },
+    { "id": "first-previous", "facts": { "kind": "grammar", "action": "previous", "submitted": false, "validTarget": false, "validSelectedSet": false, "targetInSelectedSet": false, "atFirst": true, "atLast": false }, "expected": "ignore" },
+    { "id": "later-previous", "facts": { "kind": "grammar", "action": "previous", "submitted": false, "validTarget": false, "validSelectedSet": false, "targetInSelectedSet": false, "atFirst": false, "atLast": true }, "expected": "move" },
+    { "id": "last-next", "facts": { "kind": "reading", "action": "next", "submitted": false, "validTarget": false, "validSelectedSet": false, "targetInSelectedSet": false, "atFirst": false, "atLast": true }, "expected": "ignore" },
+    { "id": "earlier-next", "facts": { "kind": "reading", "action": "next", "submitted": false, "validTarget": false, "validSelectedSet": false, "targetInSelectedSet": false, "atFirst": true, "atLast": false }, "expected": "move" },
+    { "id": "first-submit", "facts": { "kind": "writing", "action": "submit", "submitted": false, "validTarget": false, "validSelectedSet": false, "targetInSelectedSet": false, "atFirst": true, "atLast": false }, "expected": "submit" },
+    { "id": "repeated-submit", "facts": { "kind": "writing", "action": "submit", "submitted": true, "validTarget": false, "validSelectedSet": false, "targetInSelectedSet": false, "atFirst": true, "atLast": false }, "expected": "ignore" },
+    { "id": "answer-after-submit", "facts": { "kind": "grammar", "action": "answer", "submitted": true, "validTarget": true, "validSelectedSet": false, "targetInSelectedSet": false, "atFirst": true, "atLast": false }, "expected": "ignore" }
+  ]
+}

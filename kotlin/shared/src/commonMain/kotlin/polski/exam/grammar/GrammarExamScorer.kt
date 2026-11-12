@@ -3,6 +3,7 @@ package polski.exam.grammar
 import polski.exam.ExamAnswerEvaluation
 import polski.exam.ExamAnswerVariant
 import polski.exam.evaluateExamAnswer
+import polski.exam.examResultVisibility
 import polski.grammar.normalize
 
 data class GrammarExamResult(
@@ -14,7 +15,7 @@ data class GrammarExamResult(
     val possibleQuarterPoints: Int = total * 4,
     val manualPendingQuarterPoints: Int = 0,
 ) {
-    val isFinal: Boolean get() = manualPendingQuarterPoints == 0
+    val isFinal: Boolean get() = examResultVisibility(true, false, manualPendingQuarterPoints, possibleQuarterPoints).isFinal
     val upperBoundQuarterPoints: Int get() = earnedQuarterPoints + manualPendingQuarterPoints
 }
 

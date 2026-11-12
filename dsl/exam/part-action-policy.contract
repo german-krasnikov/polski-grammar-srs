@@ -1,0 +1,12 @@
+CONTRACT exam.partActionPolicy
+COVERAGE declared-scope
+MODULE ../../kotlin/shared/src/commonMain/kotlin/polski/exam/grammar/GrammarExamSession.kt
+FACT part.kind enum=grammar,reading,listening,writing member=kind
+FACT part.action enum=answer,select_set,next,previous,submit member=action
+FACT part.submitted bool member=submitted
+FACT part.validTarget bool member=validTarget
+FACT part.validSelectedSet bool member=validSelectedSet
+FACT part.targetInSelectedSet bool member=targetInSelectedSet
+FACT part.atFirst bool member=atFirst
+FACT part.atLast bool member=atLast
+INPUT disposition part.kind part.action part.submitted part.validTarget part.validSelectedSet part.targetInSelectedSet part.atFirst part.atLast

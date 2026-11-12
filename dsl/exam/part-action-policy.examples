@@ -1,0 +1,23 @@
+PROVENANCE "Authored reducer acceptance: only known item IDs may mutate; writing tasks belong to the selected set; null set selection is valid; boundaries and submitted parts are immutable."
+
+EXAMPLES disposition
+  id | kind | action | submitted | validTarget | validSelectedSet | targetInSelectedSet | atFirst | atLast -> expected
+  grammar-known | grammar | answer | false | true | false | false | true | false -> apply_answer
+  grammar-unknown | grammar | answer | false | false | false | false | true | false -> ignore
+  reading-unknown | reading | answer | false | false | false | false | true | false -> ignore
+  listening-known | listening | answer | false | true | false | false | true | false -> apply_answer
+  writing-active-task | writing | answer | false | true | false | true | true | false -> apply_answer
+  writing-inactive-task | writing | answer | false | true | false | false | true | false -> ignore
+  writing-unknown-task | writing | answer | false | false | false | true | true | false -> ignore
+  writing-valid-set | writing | select_set | false | false | true | false | true | false -> select_set
+  writing-null-set | writing | select_set | false | false | true | false | true | false -> select_set
+  writing-invalid-set | writing | select_set | false | false | false | false | true | false -> ignore
+  nonwriting-set | grammar | select_set | false | false | true | false | true | false -> ignore
+  first-previous | grammar | previous | false | false | false | false | true | false -> ignore
+  later-previous | grammar | previous | false | false | false | false | false | true -> move
+  last-next | reading | next | false | false | false | false | false | true -> ignore
+  earlier-next | reading | next | false | false | false | false | true | false -> move
+  first-submit | writing | submit | false | false | false | false | true | false -> submit
+  repeated-submit | writing | submit | true | false | false | false | true | false -> ignore
+  answer-after-submit | grammar | answer | true | true | false | false | true | false -> ignore
+END

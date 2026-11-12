@@ -1,0 +1,8 @@
+DSL 1
+SESSION_POLICY_OUTCOME {disposition: ignore effect: ignore}
+SESSION_POLICY_OUTCOME {disposition: set_deadline effect: set_deadline}
+SESSION_POLICY_OUTCOME {disposition: freeze effect: freeze}
+SESSION_POLICY_OUTCOME {
+  disposition: dispatch_part_action
+  effect: dispatch_part_action
+}

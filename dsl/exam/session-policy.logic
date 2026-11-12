@@ -1,0 +1,9 @@
+# One event can freeze at most the current part. Stale module identity wins over time.
+DECISION disposition DEFAULT ignore
+  start AT 10 WHEN NOT session.completed AND session.event == start AND NOT session.started -> set_deadline
+  deadline AT 20 WHEN NOT session.completed AND session.started AND session.moduleMatchesCurrent AND session.deadlineReached AND session.event == part_action -> freeze
+  finishDeadline AT 30 WHEN NOT session.completed AND session.started AND session.moduleMatchesCurrent AND session.deadlineReached AND session.event == finish_part -> freeze
+  tickDeadline AT 40 WHEN NOT session.completed AND session.started AND session.deadlineReached AND session.event == tick -> freeze
+  earlyFinish AT 50 WHEN NOT session.completed AND session.started AND session.moduleMatchesCurrent AND session.event == finish_part -> freeze
+  dispatch AT 60 WHEN NOT session.completed AND session.started AND session.moduleMatchesCurrent AND session.event == part_action -> dispatch_part_action
+END

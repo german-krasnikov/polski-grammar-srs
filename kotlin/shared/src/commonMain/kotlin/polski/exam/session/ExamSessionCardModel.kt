@@ -1,6 +1,7 @@
 package polski.exam.session
 
 import polski.exam.ExamModule
+import polski.exam.examResultVisibility
 import polski.exam.grammar.GrammarExamCard
 import polski.exam.grammar.grammarExamCardModel
 import polski.exam.listening.ListeningExamCardModel
@@ -28,12 +29,12 @@ fun examSessionCardModel(state: ExamSessionState, nowEpochMs: Long): ExamSession
     val confirmed = state.frozenResults.values.sumOf { it.confirmedQuarter }
     val pending = state.frozenResults.values.sumOf { it.manualPendingQuarter }
     val possible = state.config.modules.sumOf { it.maximumQuarter }
-    val final = state.completed && pending == 0
+    val visibility = examResultVisibility(true, state.completed, pending, possible, scope = "sitting")
     return ExamSessionCardModel(
         state.config.modules.getOrNull(state.currentModuleIndex)?.module,
         state.deadlineEpochMs?.let { (it - nowEpochMs).coerceAtLeast(0) } ?: 0,
-        state.currentModuleIndex + 1, confirmed, pending, possible, final,
-        if (final) (confirmed.toDouble() / possible * 100).toInt() else null,
+        state.currentModuleIndex + 1, confirmed, pending, possible, visibility.isFinal,
+        if (visibility.showFinalPercent) (confirmed.toDouble() / possible * 100).toInt() else null,
         when (state.config.modules.getOrNull(state.currentModuleIndex)?.module) {
             ExamModule.Listening -> ExamSessionPartCard.Listening(listeningExamCardModel(state.listening))
             ExamModule.Reading -> ExamSessionPartCard.Reading(readingExamCardModel(state.reading))

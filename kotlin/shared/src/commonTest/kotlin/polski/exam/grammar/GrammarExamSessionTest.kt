@@ -28,6 +28,11 @@ class GrammarExamSessionTest {
         assertEquals("a", s.answers["q1"])
     }
 
+    @Test fun unknownItemIdDoesNotEnterAnswerSnapshot() {
+        val s = reduceGrammarExam(initial, GrammarExamAction.Answer("missing", "a"))
+        assertEquals(initial, s)
+    }
+
     @Test fun nextAndPrevious() {
         val s1 = reduceGrammarExam(initial, GrammarExamAction.Next)
         assertEquals(1, s1.currentIndex)

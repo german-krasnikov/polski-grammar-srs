@@ -33,6 +33,20 @@ class ExamSessionFlowTest {
         assertEquals(4, expired.frozenResults[ExamModule.Listening]?.confirmedQuarter)
     }
 
+    @Test fun staleModuleAtDeadlineDoesNotFreezeCurrentPart() {
+        val started = reduceExamSession(ExamSessionState(config()), ExamSessionAction.Start(0))
+        assertEquals(started, reduceExamSession(started, ExamSessionAction.FinishPart(ExamModule.Reading, 10_000)))
+        val frozen = reduceExamSession(started, ExamSessionAction.Tick(10_000))
+        assertEquals(ExamModule.Reading, examSessionCardModel(frozen, 10_000).currentModule)
+        assertEquals(30_000, frozen.deadlineEpochMs)
+    }
+
+    @Test fun deadlineOverflowFailsExplicitly() {
+        assertFailsWith<IllegalArgumentException> {
+            reduceExamSession(ExamSessionState(config()), ExamSessionAction.Start(Long.MAX_VALUE))
+        }
+    }
+
     @Test fun manualReviewSeparatesOfficialDenominatorAndScoreRange() {
         var state = reduceExamSession(ExamSessionState(config()), ExamSessionAction.Start(0))
         state = reduceExamSession(state, ExamSessionAction.FinishPart(ExamModule.Listening, 1))
@@ -105,6 +119,20 @@ class ExamSessionFlowTest {
         assertEquals("one prompt", state.drafts["iiia"])
         assertEquals(160, state.result?.manualPendingQuarter)
         assertEquals(state, reduceWritingExam(state, WritingExamAction.SelectSet("III")))
+    }
+
+    @Test fun nullWritingSetClearsSelectionAndKeepsDraft() {
+        val exam = WritingExam(listOf(
+            WritingTask("a", "Write", "A", null, "I"),
+            WritingTask("b", "Write", "B", null, "I"),
+        ), 8)
+        var state = reduceWritingExam(WritingExamState(exam), WritingExamAction.SelectSet("I"))
+        state = reduceWritingExam(state, WritingExamAction.Answer("a", "draft"))
+        state = reduceWritingExam(state, WritingExamAction.Next)
+        state = reduceWritingExam(state, WritingExamAction.SelectSet(null))
+        assertNull(state.selectedSetId)
+        assertEquals(0, state.currentIndex)
+        assertEquals("draft", state.drafts["a"])
     }
 
     @Test fun incompleteOrMismatchedCertificationIsRejected() {

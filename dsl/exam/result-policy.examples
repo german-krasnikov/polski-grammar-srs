@@ -1,0 +1,14 @@
+PROVENANCE "Authored acceptance: pending manual credit hides finality; a ready part with zero pending is final even with zero denominator; a sitting additionally requires completion. Percentage visibility requires a positive denominator."
+
+EXAMPLES disposition
+  id | resultReady | scope | sittingCompleted | manualPendingQuarter | possibleQuarter -> expected
+  absent-part | false | part | false | 0 | 4 -> hidden
+  automatic-part | true | part | false | 0 | 4 -> final
+  partial-pending | true | part | false | 2 | 4 -> provisional
+  manual-only | true | part | false | 4 | 4 -> provisional
+  zero-denominator-part | true | part | false | 0 | 0 -> final_no_percent
+  incomplete-sitting | true | sitting | false | 0 | 16 -> provisional
+  completed-sitting | true | sitting | true | 0 | 16 -> final
+  completed-pending | true | sitting | true | 2 | 16 -> provisional
+  zero-denominator-sitting | true | sitting | true | 0 | 0 -> final_no_percent
+END

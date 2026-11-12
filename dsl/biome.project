@@ -9,6 +9,9 @@ CONTRACT exam FROM exam.data-contract
 CONTRACT answer-policy-outcomes FROM answer-policy.data-contract
 CONTRACT set-policy-outcomes FROM set-policy.data-contract
 CONTRACT set-facts FROM set-facts.data-contract
+CONTRACT result-policy-outcomes FROM result-policy.data-contract
+CONTRACT part-action-policy-outcomes FROM part-action-policy.data-contract
+CONTRACT session-policy-outcomes FROM session-policy.data-contract
 GENERATE exam-answer-policy logic generate --source {dir}/exam/answer-policy.logic --contract {dir}/exam/answer-policy.contract --target "kt {dir}/../kotlin/shared/src/commonMain/generated/kotlin/polski/exam/policy/ExamAnswerPolicy.kt AS polski.exam.policy"
 GENERATE exam-answer-policy-outcomes data --contract answer-policy-outcomes --rows AnswerPolicyOutcomeRow {dir}/exam/answer-policy-outcomes.core-data --target kt --kt-package polski.exam.policy.data --out {dir}/../kotlin/shared/src/commonMain/generated/kotlin/polski/exam/policy/data/AnswerPolicyOutcomeRows.kt
 GENERATE exam-answer-policy-examples logic examples --source {dir}/exam/answer-policy.examples --logic {dir}/exam/answer-policy.logic --contract {dir}/exam/answer-policy.contract --out {dir}/exam/generated/answer-policy-examples.json
@@ -18,6 +21,18 @@ GENERATE exam-set-policy-outcomes data --contract set-policy-outcomes --rows Set
 GENERATE exam-set-policy-examples logic examples --source {dir}/exam/set-policy.examples --logic {dir}/exam/set-policy.logic --contract {dir}/exam/set-policy.contract --out {dir}/exam/generated/set-policy-examples.json
 GENERATE exam-set-policy-oracle derive {dir}/exam/derive-set-policy-oracle.mjs kotlin OUT {dir}/exam/generated/set-policy-examples.json
 GENERATE exam-set-facts-oracle data --contract set-facts --rows SetFactCaseRow {dir}/exam-scoring/set-facts.core-data --rows SetFixtureFactRow {dir}/exam-scoring/set-fact-entries.core-data --rows SetFixtureAliasRow {dir}/exam-scoring/set-fact-aliases.core-data --target kt --kt-package polski.exam.setpolicy.oracle --out {dir}/../kotlin/shared/src/commonTest/generated/kotlin/polski/exam/setpolicy/oracle/SetFactRows.kt
+GENERATE exam-result-policy logic generate --source {dir}/exam/result-policy.logic --contract {dir}/exam/result-policy.contract --target "kt {dir}/../kotlin/shared/src/commonMain/generated/kotlin/polski/exam/resultpolicy/ExamResultPolicy.kt AS polski.exam.resultpolicy"
+GENERATE exam-result-policy-outcomes data --contract result-policy-outcomes --rows ResultPolicyOutcomeRow {dir}/exam/result-policy-outcomes.core-data --target kt --kt-package polski.exam.resultpolicy.data --out {dir}/../kotlin/shared/src/commonMain/generated/kotlin/polski/exam/resultpolicy/data/ResultPolicyOutcomeRows.kt
+GENERATE exam-result-policy-examples logic examples --source {dir}/exam/result-policy.examples --logic {dir}/exam/result-policy.logic --contract {dir}/exam/result-policy.contract --out {dir}/exam/generated/result-policy-examples.json
+GENERATE exam-result-policy-oracle derive {dir}/exam/derive-result-session-policy-oracles.mjs result OUT_RESULT {dir}/exam/generated/result-policy-examples.json
+GENERATE exam-part-action-policy logic generate --source {dir}/exam/part-action-policy.logic --contract {dir}/exam/part-action-policy.contract --target "kt {dir}/../kotlin/shared/src/commonMain/generated/kotlin/polski/exam/partactionpolicy/ExamPartActionPolicy.kt AS polski.exam.partactionpolicy"
+GENERATE exam-part-action-policy-outcomes data --contract part-action-policy-outcomes --rows PartActionPolicyOutcomeRow {dir}/exam/part-action-policy-outcomes.core-data --target kt --kt-package polski.exam.partactionpolicy.data --out {dir}/../kotlin/shared/src/commonMain/generated/kotlin/polski/exam/partactionpolicy/data/PartActionPolicyOutcomeRows.kt
+GENERATE exam-part-action-policy-examples logic examples --source {dir}/exam/part-action-policy.examples --logic {dir}/exam/part-action-policy.logic --contract {dir}/exam/part-action-policy.contract --out {dir}/exam/generated/part-action-policy-examples.json
+GENERATE exam-part-action-policy-oracle derive {dir}/exam/derive-result-session-policy-oracles.mjs part OUT_PART {dir}/exam/generated/part-action-policy-examples.json
+GENERATE exam-session-policy logic generate --source {dir}/exam/session-policy.logic --contract {dir}/exam/session-policy.contract --target "kt {dir}/../kotlin/shared/src/commonMain/generated/kotlin/polski/exam/sessionpolicy/ExamSessionPolicy.kt AS polski.exam.sessionpolicy"
+GENERATE exam-session-policy-outcomes data --contract session-policy-outcomes --rows SessionPolicyOutcomeRow {dir}/exam/session-policy-outcomes.core-data --target kt --kt-package polski.exam.sessionpolicy.data --out {dir}/../kotlin/shared/src/commonMain/generated/kotlin/polski/exam/sessionpolicy/data/SessionPolicyOutcomeRows.kt
+GENERATE exam-session-policy-examples logic examples --source {dir}/exam/session-policy.examples --logic {dir}/exam/session-policy.logic --contract {dir}/exam/session-policy.contract --out {dir}/exam/generated/session-policy-examples.json
+GENERATE exam-session-policy-oracle derive {dir}/exam/derive-result-session-policy-oracles.mjs session OUT_SESSION {dir}/exam/generated/session-policy-examples.json
 CONTRACT exam-assets FROM exam-assets.data-contract
 CONTRACT scheduler-expanded FROM scheduler-expanded.data-contract
 CONTRACT ending-highlight FROM ending-highlight.data-contract
@@ -69,6 +84,7 @@ GENERATE exam-answer-policy-outcomes-fmt fmt {dir}/exam/answer-policy-outcomes.c
 GENERATE exam-answer-policy-public-fmt fmt {dir}/exam/answer-policy-public-cases.core-data
 GENERATE exam-set-policy-outcomes-fmt fmt {dir}/exam/set-policy-outcomes.core-data
 GENERATE exam-set-facts-oracle-fmt fmt {dir}/exam-scoring/set-facts.core-data {dir}/exam-scoring/set-fact-entries.core-data {dir}/exam-scoring/set-fact-aliases.core-data
+GENERATE exam-result-session-policy-outcomes-fmt fmt {dir}/exam/result-policy-outcomes.core-data {dir}/exam/part-action-policy-outcomes.core-data {dir}/exam/session-policy-outcomes.core-data
 GENERATE styles-fmt fmt {dir}/../courses-biome/styles/styles.core-data
 # Block G: progress/srs oracle tests via Python --print wrappers.
 GENERATE progress-oracle derive {dir}/derive-progress-oracle.mjs progress OUT {dir}/../tests/fixtures/kotlin-parity/progress.json

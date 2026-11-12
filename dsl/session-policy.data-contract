@@ -1,0 +1,5 @@
+DSL 1
+RECORD SessionPolicyOutcomeRow KEY disposition COUNT 4
+  disposition: string
+  effect: enum ignore|set_deadline|freeze|dispatch_part_action
+END

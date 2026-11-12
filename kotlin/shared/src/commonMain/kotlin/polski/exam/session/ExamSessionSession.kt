@@ -5,6 +5,7 @@ import polski.exam.grammar.*
 import polski.exam.listening.*
 import polski.exam.reading.*
 import polski.exam.writing.*
+import polski.exam.sessionpolicy.data.SessionPolicyOutcomeRowEffect
 
 /** Reducer snapshot. The host supplies wall time for every event. */
 data class ExamSessionState(
@@ -34,28 +35,43 @@ private fun mergedGrammar(config: ExamSessionConfig): GrammarTest {
 }
 /** Applies one event; a stale part identity is ignored before its deadline is checked. */
 fun reduceExamSession(state: ExamSessionState, action: ExamSessionAction): ExamSessionState {
-    if (state.completed) return state
-    if (action is ExamSessionAction.Start) {
-        if (state.deadlineEpochMs != null) return state
-        return state.copy(deadlineEpochMs = deadline(action.nowEpochMs, state.config.modules[0].durationSeconds))
+    val module = state.config.modules.getOrNull(state.currentModuleIndex)?.module
+    val event = when (action) {
+        is ExamSessionAction.Start -> "start"
+        is ExamSessionAction.PartAction -> "part_action"
+        is ExamSessionAction.FinishPart -> "finish_part"
+        is ExamSessionAction.Tick -> "tick"
     }
-    if (state.deadlineEpochMs == null) return state
-    val module = state.config.modules[state.currentModuleIndex].module
     val now = when (action) {
-        is ExamSessionAction.PartAction -> { if (action.module != module) return state; action.nowEpochMs }
-        is ExamSessionAction.FinishPart -> { if (action.module != module) return state; action.nowEpochMs }
+        is ExamSessionAction.Start -> action.nowEpochMs
+        is ExamSessionAction.PartAction -> action.nowEpochMs
+        is ExamSessionAction.FinishPart -> action.nowEpochMs
         is ExamSessionAction.Tick -> action.nowEpochMs
-        is ExamSessionAction.Start -> error("handled")
     }
-    if (now >= state.deadlineEpochMs) return finishCurrent(state, now)
-    if (action is ExamSessionAction.FinishPart) return finishCurrent(state, now)
-    if (action is ExamSessionAction.Tick) return state
-    action as ExamSessionAction.PartAction
-    return when (module) {
-        ExamModule.Listening -> if (action.action is ExamPartAction.Listening) state.copy(listening = reduceListeningExam(state.listening, action.action.action)) else state
-        ExamModule.Reading -> if (action.action is ExamPartAction.Reading) state.copy(reading = reduceReadingExam(state.reading, action.action.action)) else state
-        ExamModule.Writing -> if (action.action is ExamPartAction.Writing) state.copy(writing = reduceWritingExam(state.writing, action.action.action)) else state
-        ExamModule.Grammar -> if (action.action is ExamPartAction.Grammar) state.copy(grammar = reduceGrammarExam(state.grammar, action.action.action)) else state
+    val matches = when (action) {
+        is ExamSessionAction.PartAction -> action.module == module
+        is ExamSessionAction.FinishPart -> action.module == module
+        else -> true
+    }
+    val disposition = examSessionEventDisposition(
+        event = event, completed = state.completed, started = state.deadlineEpochMs != null,
+        moduleMatchesCurrent = matches,
+        deadlineReached = state.deadlineEpochMs?.let { now >= it } ?: false,
+    )
+    return when (disposition) {
+        SessionPolicyOutcomeRowEffect.IGNORE -> state
+        SessionPolicyOutcomeRowEffect.SET_DEADLINE -> state.copy(deadlineEpochMs = deadline(now, state.config.modules[0].durationSeconds))
+        SessionPolicyOutcomeRowEffect.FREEZE -> finishCurrent(state, now)
+        SessionPolicyOutcomeRowEffect.DISPATCH_PART_ACTION -> {
+            action as ExamSessionAction.PartAction
+            when (module) {
+                ExamModule.Listening -> if (action.action is ExamPartAction.Listening) state.copy(listening = reduceListeningExam(state.listening, action.action.action)) else state
+                ExamModule.Reading -> if (action.action is ExamPartAction.Reading) state.copy(reading = reduceReadingExam(state.reading, action.action.action)) else state
+                ExamModule.Writing -> if (action.action is ExamPartAction.Writing) state.copy(writing = reduceWritingExam(state.writing, action.action.action)) else state
+                ExamModule.Grammar -> if (action.action is ExamPartAction.Grammar) state.copy(grammar = reduceGrammarExam(state.grammar, action.action.action)) else state
+                null -> error("Cannot dispatch a completed sitting")
+            }
+        }
     }
 }
 private fun finishCurrent(state: ExamSessionState, now: Long): ExamSessionState {

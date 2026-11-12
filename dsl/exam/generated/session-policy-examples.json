@@ -1,0 +1,23 @@
+{
+  "generated": "from session-policy.examples by npm run logic -- examples; do not edit",
+  "provenance": "Authored timed reducer acceptance: first Start establishes time; stale module events do not advance, even after deadline; matching deadline equality freezes before answer/finish; one observed event freezes one part. Backward time is a predeadline fact, and overflow is validated by native arithmetic.",
+  "disposition": [
+    { "id": "first-start", "facts": { "event": "start", "completed": false, "started": false, "moduleMatchesCurrent": true, "deadlineReached": false }, "expected": "set_deadline" },
+    { "id": "repeated-start", "facts": { "event": "start", "completed": false, "started": true, "moduleMatchesCurrent": true, "deadlineReached": true }, "expected": "ignore" },
+    { "id": "completed-start", "facts": { "event": "start", "completed": true, "started": false, "moduleMatchesCurrent": true, "deadlineReached": false }, "expected": "ignore" },
+    { "id": "completed-action", "facts": { "event": "part_action", "completed": true, "started": true, "moduleMatchesCurrent": true, "deadlineReached": true }, "expected": "ignore" },
+    { "id": "prestart-action", "facts": { "event": "part_action", "completed": false, "started": false, "moduleMatchesCurrent": true, "deadlineReached": false }, "expected": "ignore" },
+    { "id": "prestart-tick", "facts": { "event": "tick", "completed": false, "started": false, "moduleMatchesCurrent": true, "deadlineReached": true }, "expected": "ignore" },
+    { "id": "stale-action-before-deadline", "facts": { "event": "part_action", "completed": false, "started": true, "moduleMatchesCurrent": false, "deadlineReached": false }, "expected": "ignore" },
+    { "id": "stale-action-at-deadline", "facts": { "event": "part_action", "completed": false, "started": true, "moduleMatchesCurrent": false, "deadlineReached": true }, "expected": "ignore" },
+    { "id": "stale-finish-at-deadline", "facts": { "event": "finish_part", "completed": false, "started": true, "moduleMatchesCurrent": false, "deadlineReached": true }, "expected": "ignore" },
+    { "id": "matching-action-before-deadline", "facts": { "event": "part_action", "completed": false, "started": true, "moduleMatchesCurrent": true, "deadlineReached": false }, "expected": "dispatch_part_action" },
+    { "id": "matching-action-at-deadline", "facts": { "event": "part_action", "completed": false, "started": true, "moduleMatchesCurrent": true, "deadlineReached": true }, "expected": "freeze" },
+    { "id": "matching-finish-before-deadline", "facts": { "event": "finish_part", "completed": false, "started": true, "moduleMatchesCurrent": true, "deadlineReached": false }, "expected": "freeze" },
+    { "id": "matching-finish-at-deadline", "facts": { "event": "finish_part", "completed": false, "started": true, "moduleMatchesCurrent": true, "deadlineReached": true }, "expected": "freeze" },
+    { "id": "tick-before-deadline", "facts": { "event": "tick", "completed": false, "started": true, "moduleMatchesCurrent": true, "deadlineReached": false }, "expected": "ignore" },
+    { "id": "tick-at-deadline", "facts": { "event": "tick", "completed": false, "started": true, "moduleMatchesCurrent": true, "deadlineReached": true }, "expected": "freeze" },
+    { "id": "tick-after-backward-clock", "facts": { "event": "tick", "completed": false, "started": true, "moduleMatchesCurrent": true, "deadlineReached": false }, "expected": "ignore" },
+    { "id": "completed-tick", "facts": { "event": "tick", "completed": true, "started": true, "moduleMatchesCurrent": true, "deadlineReached": true }, "expected": "ignore" }
+  ]
+}
