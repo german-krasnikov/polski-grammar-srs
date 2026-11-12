@@ -1,0 +1,6 @@
+TEST "B2 June 2024 printed first reading choice survives the published web projection" PROFILE playmode
+  open exam="B2 Certyfikat 2024-06" module="reading"
+  ASSERT reading.questionCount == 5
+  ASSERT reading.firstQuestion == "1. Z tekstu dowiadujemy się, że"
+  ASSERT reading.firstOptions == "a) protestujący rolnicy będą eskortowani na lotnisko przez policję.|b) po godzinie 15:00 policjanci opuszczą miejsce rolniczego protestu.|c) klienci linii lotniczych mogą mieć problem, żeby zdążyć na swój lot."
+END
