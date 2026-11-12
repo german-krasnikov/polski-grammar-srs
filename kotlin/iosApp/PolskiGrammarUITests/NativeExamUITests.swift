@@ -73,7 +73,80 @@ final class NativeExamUITests: XCTestCase {
             app.buttons["exam-next"].tap()
         }
         XCTAssertTrue(app.images["exam-prompt-image"].waitForExistence(timeout: 5), app.debugDescription)
+        XCTAssertEqual(app.images["exam-prompt-image"].label,
+                       "Ilustracje A–K do zadania V: A narzędzia jako przykład; B marker, C kosmetyczka, D ciężarówka, E pudła, F ubrania na wieszakach, G wspólny posiłek, H koce, I środki czystości, J osoba niosąca pudła, K pomoc przyjaciół.")
         XCTAssertFalse(app.staticTexts["Изображение недоступно"].exists)
+    }
+
+    func testPublishedMatchingChoicesPreserveSelectionByQuestion() {
+        let app = openPaper("b1-2017")
+        app.buttons["exam-module-listening"].tap()
+        for _ in 0..<4 { app.buttons["exam-next"].tap() }
+        XCTAssertTrue(app.staticTexts["exam-question-B1-2017-l5-1"].waitForExistence(timeout: 5), app.debugDescription)
+        XCTAssertEqual(app.staticTexts["exam-question-B1-2017-l5-1"].label,
+                       "opłata paszportowa w wysokości 30 zł")
+        let choices = ["A. paszport dla emerytów i rencistów", "B. paszport tymczasowy dla dorosłych",
+                       "C. paszport dla osób powyżej 70 lat", "D. paszport dla dzieci do 7 lat",
+                       "E. paszport dla dorosłych na 10 lat", "F. paszport dla dzieci poniżej 13 lat"]
+        for choice in choices {
+            XCTAssertTrue(app.buttons[choice].firstMatch.exists, "Missing source matching choice: \(choice)")
+        }
+        let selected = app.buttons[choices[3]].firstMatch
+        selected.tap()
+        XCTAssertTrue(selected.isSelected, "The first matching question must retain its choice")
+        app.buttons["exam-previous"].tap()
+        app.buttons["exam-next"].tap()
+        XCTAssertTrue(selected.isSelected, "Matching answer must survive task navigation")
+    }
+
+    func testPublishedReadingFragmentsRetainFirstAnswer() {
+        let app = openPaper("b2-2020")
+        app.buttons["exam-module-reading"].tap()
+        app.buttons["exam-next"].tap()
+        XCTAssertTrue(app.staticTexts["exam-question-certyfikat-polski-B2-2020-reading-2-1"]
+            .waitForExistence(timeout: 5), app.debugDescription)
+        XCTAssertEqual(app.staticTexts["exam-question-certyfikat-polski-B2-2020-reading-2-1"].label,
+                       "Fragment do luki [1]")
+        let sourceChoices = ["A", "B", "D", "E", "F", "G", "H", "I", "J", "K"]
+        for choice in sourceChoices {
+            XCTAssertTrue(app.buttons[choice].firstMatch.exists, "Missing source fragment: \(choice)")
+        }
+        XCTAssertFalse(app.buttons["C"].exists, "The source fragment list omits C")
+        let selected = app.buttons["E"].firstMatch
+        for _ in 0..<8 {
+            if selected.frame.maxY < 1000 { break }
+            app.scrollViews.firstMatch.swipeUp()
+        }
+        XCTAssertLessThan(selected.frame.maxY, 1000,
+                          "Scroll the first source fragment above the fixed navigation controls")
+        XCTAssertTrue(selected.isHittable, "The first source fragment E must be reachable")
+        selected.tap()
+        XCTAssertTrue(selected.isSelected, "First gap should hold E")
+        app.buttons["exam-previous"].tap()
+        app.buttons["exam-next"].tap()
+        XCTAssertTrue(selected.isSelected, "First gap should still hold E after navigation")
+    }
+
+    func testPublishedGrammarDuplicateBankTokensKeepSelectedIdentity() {
+        let app = openPaper("b1-2020")
+        app.buttons["exam-module-grammar"].tap()
+        let first = app.buttons["exam-bank-certyfikat-polski-B1-2020-grammar-8-bank-2"]
+        let second = app.buttons["exam-bank-certyfikat-polski-B1-2020-grammar-8-bank-7"]
+        for _ in 0..<55 {
+            if first.exists { break }
+            app.buttons["exam-next"].tap()
+        }
+        XCTAssertTrue(first.waitForExistence(timeout: 5), app.debugDescription)
+        XCTAssertTrue(second.exists, app.debugDescription)
+        XCTAssertEqual(first.label, "w, 2")
+        XCTAssertEqual(second.label, "w, 7")
+        second.tap()
+        XCTAssertTrue(second.isSelected, "The second printed w must be selected by token ID")
+        XCTAssertFalse(first.isSelected, "The first printed w must remain unselected")
+        app.buttons["exam-previous"].tap()
+        app.buttons["exam-next"].tap()
+        XCTAssertTrue(second.isSelected, "The second w token identity must survive navigation")
+        XCTAssertFalse(first.isSelected)
     }
 
     func testListeningFreeSetOffersSeparateAnswerSlots() {
@@ -362,4 +435,68 @@ final class NativeExamUITests: XCTestCase {
         XCTAssertEqual(answer.value as? String, "przyjaciół",
                        "Second paired inflection must survive back navigation")
     }
+
+    func testWindowedAppsMenuResizePreservesAnswerDraftAndSubmit() {
+        let app = openPaper("b2-2019")
+        let springboard = XCUIApplication(bundleIdentifier: "com.apple.springboard")
+        let tileControls = springboard.buttons["window-controls:dev.polski.grammarmatrix.ios"]
+        if app.windows.firstMatch.frame.width < 800 {
+            XCTAssertTrue(tileControls.waitForExistence(timeout: 5), springboard.debugDescription)
+            tileControls.tap()
+            springboard.buttons["Zoom-button"].tap()
+        }
+        app.buttons["exam-module-listening"].tap()
+        let draft = app.textFields["exam-answer-certyfikat-polski-B2-2019-listening-5-1-1"]
+        for _ in 0..<6 {
+            if draft.exists { break }
+            app.buttons["exam-next"].tap()
+        }
+        XCTAssertTrue(draft.waitForExistence(timeout: 5), app.debugDescription)
+        draft.tap()
+        draft.typeText("żółć przy zmianie rozmiaru")
+        app.staticTexts["exam-part-instruction"].tap()
+        let before = app.windows.firstMatch.frame
+        XCTAssertGreaterThan(before.width, 800, "Start with the 834-point iPad display")
+        let menuReveal = springboard.coordinate(withNormalizedOffset: CGVector(dx: 0.50, dy: 0.01))
+        menuReveal.press(forDuration: 0.1, thenDragTo:
+            springboard.coordinate(withNormalizedOffset: CGVector(dx: 0.50, dy: 0.11)))
+        let windowControls = springboard.buttons["Window Controls"]
+        XCTAssertTrue(windowControls.waitForExistence(timeout: 5), springboard.debugDescription)
+        windowControls.tap()
+        let windowMenu = springboard.buttons["Окно"]
+        XCTAssertTrue(windowMenu.waitForExistence(timeout: 5), springboard.debugDescription)
+        windowMenu.tap()
+        let moveAndResize = springboard.buttons["Move & Resize"]
+        XCTAssertTrue(moveAndResize.waitForExistence(timeout: 5), springboard.debugDescription)
+        moveAndResize.tap()
+        let leftHalf = springboard.buttons["Left"]
+        XCTAssertTrue(leftHalf.waitForExistence(timeout: 5), springboard.debugDescription)
+        leftHalf.tap()
+        let after = app.windows.firstMatch.frame
+        print("WINDOWED_APPS_FRAME_BEFORE=\(before) AFTER=\(after)")
+        XCTAssertLessThan(after.width, before.width - 100,
+                          "The iPadOS Left layout must narrow the app window: \(app.debugDescription)")
+        let tiledScreenshot = XCTAttachment(screenshot: XCUIScreen.main.screenshot())
+        tiledScreenshot.name = "Published exam at 412-point iPad window"
+        tiledScreenshot.lifetime = .keepAlways
+        add(tiledScreenshot)
+        XCTAssertTrue(draft.waitForExistence(timeout: 5), app.debugDescription)
+        XCTAssertEqual(draft.value as? String, "żółć przy zmianie rozmiaru", app.debugDescription)
+        let submit = app.buttons["exam-submit"]
+        for _ in 0..<5 {
+            if submit.isHittable { break }
+            app.swipeUp()
+        }
+        XCTAssertTrue(submit.isHittable, "Submit must remain reachable after genuine iPad window resize")
+        XCTAssertTrue(tileControls.waitForExistence(timeout: 5), springboard.debugDescription)
+        tileControls.tap()
+        let zoom = springboard.buttons["Zoom-button"]
+        XCTAssertTrue(zoom.waitForExistence(timeout: 5), springboard.debugDescription)
+        zoom.tap()
+        let restored = app.windows.firstMatch.frame
+        print("WINDOWED_APPS_FRAME_RESTORED=\(restored)")
+        XCTAssertGreaterThanOrEqual(restored.width, before.width - 1,
+                                    "The test must leave the app at its original width")
+    }
+
 }
