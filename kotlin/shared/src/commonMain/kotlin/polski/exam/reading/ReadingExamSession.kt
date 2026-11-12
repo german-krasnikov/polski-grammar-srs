@@ -24,7 +24,7 @@ fun reduceReadingExam(state: ReadingExamState, action: ReadingExamAction): Readi
     val permission = examPartActionPermission(
         kind = "reading", action = actionKind, submitted = state.submitted,
         validTarget = action is ReadingExamAction.Answer && state.exam.questions.any { it.id == action.questionId },
-        atFirst = state.currentIndex == 0, atLast = state.currentIndex == state.exam.passages.lastIndex,
+        atFirst = state.currentIndex == 0, atLast = state.currentIndex >= state.exam.passages.lastIndex,
     )
     return when (permission) {
         PartActionPolicyOutcomeRowMutation.IGNORE -> state

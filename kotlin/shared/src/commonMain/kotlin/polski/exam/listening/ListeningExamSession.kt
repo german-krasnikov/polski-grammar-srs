@@ -24,7 +24,7 @@ fun reduceListeningExam(state: ListeningExamState, action: ListeningExamAction):
     val permission = examPartActionPermission(
         kind = "listening", action = actionKind, submitted = state.submitted,
         validTarget = action is ListeningExamAction.Answer && state.exam.tasks.any { task -> task.questions.any { it.id == action.questionId } },
-        atFirst = state.currentIndex == 0, atLast = state.currentIndex == state.exam.tasks.lastIndex,
+        atFirst = state.currentIndex == 0, atLast = state.currentIndex >= state.exam.tasks.lastIndex,
     )
     return when (permission) {
         PartActionPolicyOutcomeRowMutation.IGNORE -> state

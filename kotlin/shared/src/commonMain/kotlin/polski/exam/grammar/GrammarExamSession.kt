@@ -28,7 +28,7 @@ fun reduceGrammarExam(state: GrammarExamState, action: GrammarExamAction): Gramm
     val permission = examPartActionPermission(
         kind = "grammar", action = actionKind, submitted = state.submitted,
         validTarget = action is GrammarExamAction.Answer && state.test.items.any { it.itemId == action.itemId },
-        atFirst = state.currentIndex == 0, atLast = state.currentIndex == state.test.items.lastIndex,
+        atFirst = state.currentIndex == 0, atLast = state.currentIndex >= state.test.items.lastIndex,
     )
     return when (permission) {
         PartActionPolicyOutcomeRowMutation.IGNORE -> state

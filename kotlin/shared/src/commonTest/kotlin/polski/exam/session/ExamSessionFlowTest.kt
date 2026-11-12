@@ -8,6 +8,21 @@ import polski.exam.reading.*
 import polski.exam.writing.*
 
 class ExamSessionFlowTest {
+    @Test fun emptyGrammarDoesNotAdvanceOnNext() {
+        val grammar = GrammarExamState(GrammarTest("empty", "", emptyList()))
+        assertEquals(grammar, reduceGrammarExam(grammar, GrammarExamAction.Next))
+    }
+
+    @Test fun emptyReadingDoesNotAdvanceOnNext() {
+        val reading = ReadingExamState(ReadingExam(emptyList(), emptyList()))
+        assertEquals(reading, reduceReadingExam(reading, ReadingExamAction.Next))
+    }
+
+    @Test fun emptyListeningDoesNotAdvanceOnNext() {
+        val listening = ListeningExamState(ListeningExam(emptyList(), ""))
+        assertEquals(listening, reduceListeningExam(listening, ListeningExamAction.Next))
+    }
+
     private fun config() = ExamSessionConfig(
         "paper", listOf(
             ExamModuleConfig(ExamModule.Listening, 10, 4), ExamModuleConfig(ExamModule.Reading, 20, 4),
