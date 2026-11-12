@@ -48,7 +48,7 @@ describe.skipIf(!hasCli)('published exam source gate', () => {
   }, 20_000);
 
   it('retains explicit identities for every P9 open listening set', () => {
-    const papers = ['B2/2022-02', 'B2/2022-06', 'B2/2023-02', 'B2/2023-06',
+    const papers = ['B2/2022-02', 'B2/2023-02', 'B2/2023-06',
       'B2/2024-06', 'C1/2022-11', 'C1/2023-04', 'C1/2023-11'];
     let count = 0;
     for (const paper of papers) {
@@ -64,7 +64,7 @@ describe.skipIf(!hasCli)('published exam source gate', () => {
         count++;
       }
     }
-    expect(count).toBe(19);
+    expect(count).toBe(17);
   }, 60_000);
 
   it('accepts either module filename and rejects both as duplicate source records', async () => {

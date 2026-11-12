@@ -20,8 +20,8 @@ class ReadingWordBankWebTest {
         val bank = listOf("aktualne", "dziedziczone", "kończą", "nadawane", "nowoczesne", "podkreślają",
             "postępu", "regionalne", "uroku", "wzmocnienia", "zaostrzają", "zabronione", "zdawania", "zjawiska")
         val text = "Po co nam tradycja? Globalizacja ................ 1 konflikt między dawnym i nowym. Bank: ${bank.joinToString(" | ")}"
-        val passage = ReadingPassage("certyfikat-polski-B2-2022-06-read-5", "Uzupełnij tekst słowami z ramki.", text)
-        val question = ReadingQuestion("certyfikat-polski-B2-2022-06-r5-q1", passage.id, QuestionType.WordBank,
+        val passage = ReadingPassage("word-bank-fixture-passage", "Uzupełnij tekst słowami z ramki.", text)
+        val question = ReadingQuestion("word-bank-fixture-question", passage.id, QuestionType.WordBank,
             "Luka 1 w tekście „Po co nam tradycja?”", bank, "zaostrzają", pointsQuarter = 2)
         var state = ReadingExamState(ReadingExam(listOf(passage), listOf(question)))
         val container = document.createElement("div") as HTMLElement
