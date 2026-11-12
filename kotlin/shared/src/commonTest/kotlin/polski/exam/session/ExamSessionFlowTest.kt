@@ -47,6 +47,13 @@ class ExamSessionFlowTest {
         }
     }
 
+    @Test fun backwardClockDoesNotShowAnExpiredDeadline() {
+        val started = reduceExamSession(ExamSessionState(config()), ExamSessionAction.Start(0))
+        val card = examSessionCardModel(started, Long.MIN_VALUE)
+        assertTrue(card.remainingMs > 0)
+        assertEquals(started, reduceExamSession(started, ExamSessionAction.Tick(Long.MIN_VALUE)))
+    }
+
     @Test fun manualReviewSeparatesOfficialDenominatorAndScoreRange() {
         var state = reduceExamSession(ExamSessionState(config()), ExamSessionAction.Start(0))
         state = reduceExamSession(state, ExamSessionAction.FinishPart(ExamModule.Listening, 1))
@@ -133,6 +140,14 @@ class ExamSessionFlowTest {
         assertNull(state.selectedSetId)
         assertEquals(0, state.currentIndex)
         assertEquals("draft", state.drafts["a"])
+    }
+
+    @Test fun directWritingSubmitWithoutCertifiedMaximumKeepsResultAbsent() {
+        val exam = WritingExam(listOf(WritingTask("a", "Write", "Prompt", null)))
+        val submitted = reduceWritingExam(WritingExamState(exam), WritingExamAction.Submit)
+        assertTrue(submitted.submitted)
+        assertEquals(listOf("a"), submitted.submittedTaskIds)
+        assertNull(submitted.result)
     }
 
     @Test fun incompleteOrMismatchedCertificationIsRejected() {

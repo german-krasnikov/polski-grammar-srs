@@ -338,12 +338,13 @@ internal class ExamListeningController(
         val totalQuarter = result.possibleQuarter
         c.appendChild(node("h2", "exam-title", "${UiCopy.Results} — ${UiCopy.Listening}"))
         c.appendChild(node("div", "exam-score").apply {
-            if (pendingQuarter == 0) {
-                appendChild(node("div", "exam-score-big", "${requireNotNull(result.finalPercent)}%"))
+            val percent = result.finalPercent
+            if (percent != null) {
+                appendChild(node("div", "exam-score-big", "$percent%"))
                 appendChild(node("div", "exam-score-detail", "${formatQuarterPoints(earnedQuarter)} / ${formatQuarterPoints(totalQuarter)} баллов"))
             } else {
                 appendChild(node("div", "exam-score-big", "${UiCopy.ExamConfirmedPoints}: ${formatQuarterPoints(earnedQuarter)} / ${formatQuarterPoints(totalQuarter)}"))
-                appendChild(node("div", "exam-score-detail", "${UiCopy.ExamPendingPoints}: ${formatQuarterPoints(pendingQuarter)}"))
+                if (!result.isFinal) appendChild(node("div", "exam-score-detail", "${UiCopy.ExamPendingPoints}: ${formatQuarterPoints(pendingQuarter)}"))
             }
         })
         c.appendChild(node("div", "exam-review").apply {

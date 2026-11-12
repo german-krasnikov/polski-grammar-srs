@@ -32,7 +32,7 @@ fun examSessionCardModel(state: ExamSessionState, nowEpochMs: Long): ExamSession
     val visibility = examResultVisibility(true, state.completed, pending, possible, scope = "sitting")
     return ExamSessionCardModel(
         state.config.modules.getOrNull(state.currentModuleIndex)?.module,
-        state.deadlineEpochMs?.let { (it - nowEpochMs).coerceAtLeast(0) } ?: 0,
+        state.deadlineEpochMs?.let { remainingMillis(it, nowEpochMs) } ?: 0,
         state.currentModuleIndex + 1, confirmed, pending, possible, visibility.isFinal,
         if (visibility.showFinalPercent) (confirmed.toDouble() / possible * 100).toInt() else null,
         when (state.config.modules.getOrNull(state.currentModuleIndex)?.module) {
@@ -43,4 +43,11 @@ fun examSessionCardModel(state: ExamSessionState, nowEpochMs: Long): ExamSession
             null -> null
         },
     )
+}
+
+/** Saturates a future interval when a backward clock makes it exceed signed milliseconds. */
+private fun remainingMillis(deadline: Long, now: Long): Long = when {
+    now >= deadline -> 0L
+    now < 0 && deadline > Long.MAX_VALUE + now -> Long.MAX_VALUE
+    else -> deadline - now
 }
