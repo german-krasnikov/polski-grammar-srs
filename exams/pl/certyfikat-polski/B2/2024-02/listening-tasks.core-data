@@ -3,7 +3,7 @@ LISTENING_TASK {
   taskId: certyfikat-polski-B2-2024-02-listen-1
   examRef: certyfikat-polski-B2-2024-02
   taskNumber: 1
-  audioUrl: "https://certyfikatpolski.pl/wp-content/uploads/2025/02/4-5.02.2024-B2_plik_dzwiekowy.mp3"
+  audioUrl: exam-audio/B2-2024-02.mp3
   segmentStartMs: 109000
   segmentEndMs: 500000
   instruction: "I. Proszę uważnie słuchać tego nagrania i wykonywać zadanie zgodnie z podanym przykładem. Uwaga! Nagranie zostanie odtworzone dwukrotnie. _____ / 6 p. (6 x 1 p.) Proszę wysłuchać kolejnych nagrań i zaznaczyć właściwe odpowiedzi. PRZYKŁAD Proszę wysłuchać informacji o Amy Bauernschmidt i zaznaczyć właściwe odpowiedzi. Ten fragment mówi o a) trudnościach kobiet służących w marynarce wojennej. b) kobiecie, która obejmie stanowisko pilota lotniskowca. c) przewidywaniach dotyczących sukcesów kobiet w wojsku. Amy Bauernschmidt a) jest związana z marynarką wojenną od lat 90. b) wspólnie z innymi kobietami przeciera szlaki w marynarce wojennej. c) zajmuje się historią marynarki wojennej w Stanach Zjednoczonych. Na podstawie: https://www.youtube.com/watch?v=8g1AzxMhw1Y [W przykładzie zaznaczono: b), a).] Na podstawie: https://www.youtube.com/watch?v=HF324n_z4no Na podstawie: https://www.youtube.com/watch?v=b_jmelYtVYU"
@@ -13,7 +13,7 @@ LISTENING_TASK {
   taskId: certyfikat-polski-B2-2024-02-listen-2
   examRef: certyfikat-polski-B2-2024-02
   taskNumber: 2
-  audioUrl: "https://certyfikatpolski.pl/wp-content/uploads/2025/02/4-5.02.2024-B2_plik_dzwiekowy.mp3"
+  audioUrl: exam-audio/B2-2024-02.mp3
   segmentStartMs: 500000
   segmentEndMs: 1028000
   instruction: "II. Proszę uważnie słuchać tego nagrania i wykonywać zadanie zgodnie z podanym przykładem. Uwaga! Nagranie zostanie odtworzone dwukrotnie. _____ / 10 p. (10 x 1 p.) Proszę wysłuchać audycji na temat kariery Mariusza Świtalskiego i zaznaczyć: TAK – gdy zdanie jest zgodne z tekstem; NIE – gdy nie jest zgodne z tekstem. TAK NIE PRZYKŁAD Pierwsza działalność biznesowa Świtalskiego była związana z jego wykształceniem. X [W przykładzie zaznaczono: NIE.] Na podstawie: https://www.youtube.com/watch?v=l_cyknLFwSI&t=10s"
@@ -23,7 +23,7 @@ LISTENING_TASK {
   taskId: certyfikat-polski-B2-2024-02-listen-3
   examRef: certyfikat-polski-B2-2024-02
   taskNumber: 3
-  audioUrl: "https://certyfikatpolski.pl/wp-content/uploads/2025/02/4-5.02.2024-B2_plik_dzwiekowy.mp3"
+  audioUrl: exam-audio/B2-2024-02.mp3
   segmentStartMs: 1028000
   segmentEndMs: 1591000
   instruction: "III. Proszę uważnie słuchać tego nagrania i wykonywać zadanie zgodnie z podanym przykładem. Uwaga! Nagranie zostanie odtworzone dwukrotnie. _____ / 8 p. (8 x 1 p.) Proszę wysłuchać informacji na temat czterech wybranych atrakcji turystycznych i zdecydować, których miejsc (A–D) dotyczą podane poniżej opisy. Uwaga! Jeden opis może dotyczyć więcej niż jednego miejsca. A. Devils Tower B. Grand Prismatic Spring C. Uluru D. Hang Son Doong PRZYKŁAD Jest pozostałością po wybuchu wulkanu. [___A___] Na podstawie: https://www.youtube.com/watch?v=2jIqC9SnU5Y&list=UULP8IAR2gn8UoYhr25ETiW_mg&index=62"
@@ -33,7 +33,7 @@ LISTENING_TASK {
   taskId: certyfikat-polski-B2-2024-02-listen-4
   examRef: certyfikat-polski-B2-2024-02
   taskNumber: 4
-  audioUrl: "https://certyfikatpolski.pl/wp-content/uploads/2025/02/4-5.02.2024-B2_plik_dzwiekowy.mp3"
+  audioUrl: exam-audio/B2-2024-02.mp3
   segmentStartMs: 1591000
   segmentEndMs: 1978000
   instruction: "IV. Proszę uważnie słuchać tego nagrania i wykonywać zadanie zgodnie z podanym przykładem. Uwaga! Nagranie zostanie odtworzone dwukrotnie. _____ / 8 p. (8 x 1 p.) Proszę wysłuchać tekstu na temat wydarzenia popularyzującego naukę i zaznaczyć właściwe odpowiedzi. PRZYKŁAD Zapowiadane wydarzenie wzbudzi ciekawość u osób lubiących a) nauki ścisłe b) nauki medyczne. c) nauki humanistyczne. [W przykładzie zaznaczono: a).] Na podstawie: https://www.youtube.com/watch?v=NrGWvZSK5As"
@@ -43,7 +43,7 @@ LISTENING_TASK {
   taskId: certyfikat-polski-B2-2024-02-listen-5
   examRef: certyfikat-polski-B2-2024-02
   taskNumber: 5
-  audioUrl: "https://certyfikatpolski.pl/wp-content/uploads/2025/02/4-5.02.2024-B2_plik_dzwiekowy.mp3"
+  audioUrl: exam-audio/B2-2024-02.mp3
   segmentStartMs: 1978000
   segmentEndMs: 2309000
   instruction: "V. Proszę uważnie słuchać tego nagrania i wykonywać zadanie zgodnie z podanym przykładem. Uwaga! Nagranie zostanie odtworzone dwukrotnie. _____ / 8 p. Proszę wysłuchać informacji na temat sytuacji, do której doszło na skutek działania bobrów i odpowiedzieć na pytania. PRZYKŁAD Do czego doprowadziły działania bobrów? Do zamknięcia drogi. Na podstawie: https://www.youtube.com/watch?v=npEc_xCDy4g"

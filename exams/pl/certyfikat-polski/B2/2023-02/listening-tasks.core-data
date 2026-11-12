@@ -3,7 +3,7 @@ LISTENING_TASK {
   taskId: certyfikat-polski-B2-2023-02-listen-1
   examRef: certyfikat-polski-B2-2023-02
   taskNumber: 1
-  audioUrl: "https://certyfikatpolski.pl/wp-content/uploads/2025/07/2023_02_5_6_B2_plik_dzwiekowy.mp3.mp3"
+  audioUrl: exam-audio/B2-2023-02.mp3
   segmentStartMs: 109000
   segmentEndMs: 496000
   instruction: "I. Proszę uważnie słuchać tego nagrania i wykonywać zadanie zgodnie z podanym przykładem. Uwaga! Nagranie zostanie odtworzone dwukrotnie. ______ / 6 p. (6 x 1 p.) Proszę wysłuchać kolejnych tekstów i zaznaczyć właściwe odpowiedzi. PRZYKŁAD Proszę wysłuchać fragmentu programu informacyjnego i zaznaczyć prawidłowe odpowiedzi. Informacja dotyczy a) nowych obiektów przy ulicy Drutowej. b) ograniczenia prędkości na ulicy Drutowej. c) nietypowego zdarzania na ulicy Drutowej. Pan Damian a) uratował spacerujące po ulicy zwierzę. b) potrzebował pomocy w wyniku zdarzenia drogowego. c) opowiada o kursie udzielania pierwszej pomocy. Na podstawie: https://www.youtube.com/watch?v=UMQ1tL1nJ4E [W przykładzie zaznaczono: c), a).] Na podstawie: https://www.youtube.com/watch?v=cnImhy9LUcM"
@@ -13,7 +13,7 @@ LISTENING_TASK {
   taskId: certyfikat-polski-B2-2023-02-listen-2
   examRef: certyfikat-polski-B2-2023-02
   taskNumber: 2
-  audioUrl: "https://certyfikatpolski.pl/wp-content/uploads/2025/07/2023_02_5_6_B2_plik_dzwiekowy.mp3.mp3"
+  audioUrl: exam-audio/B2-2023-02.mp3
   segmentStartMs: 496000
   segmentEndMs: 892000
   instruction: "II. Proszę uważnie słuchać tego nagrania i wykonywać zadanie zgodnie z podanym przykładem. Uwaga! Nagranie zostanie odtworzone dwukrotnie. _____ / 7 p. (7 x 1 p.) Proszę wysłuchać tekstu na temat najnowszej książki profesora Jana Miodka i zaznaczyć właściwe odpowiedzi. PRZYKŁAD Nowa książka profesora Miodka a) poświęcona jest językowi polskiemu. b) powstawała przez wiele lat. c) zawiera felietony dwustu językoznawców. [W przykładzie zaznaczono: a).] Na podstawie: https://www.youtube.com/watch?v=Qx3KA5GvDJs&list=RDCMUCdoilpG38E_GuLKu5DPwchw&index=26"
@@ -23,7 +23,7 @@ LISTENING_TASK {
   taskId: certyfikat-polski-B2-2023-02-listen-3
   examRef: certyfikat-polski-B2-2023-02
   taskNumber: 3
-  audioUrl: "https://certyfikatpolski.pl/wp-content/uploads/2025/07/2023_02_5_6_B2_plik_dzwiekowy.mp3.mp3"
+  audioUrl: exam-audio/B2-2023-02.mp3
   segmentStartMs: 892000
   segmentEndMs: 1189000
   instruction: "III. Proszę uważnie słuchać tego nagrania i wykonywać zadanie zgodnie z podanym przykładem. Uwaga! Nagranie zostanie odtworzone dwukrotnie. ______ / 9 p. ( 9 x 1 p.) Proszę wysłuchać tekstu na temat infrastruktury rowerowej we Wrocławiu i zaznaczyć: TAK – gdy zdanie jest zgodne z tekstem; NIE – gdy nie jest zgodne z tekstem. TAK NIE PRZYKŁAD We Wrocławiu jest 1000 tras rowerowych. X [W przykładzie zaznaczono: NIE.] Na podstawie: https://www.youtube.com/watch?v=8R6MLFmS1WE&list=RDCMUCdoilpG38E_GuLKu5DPwchw&index=6"
@@ -33,7 +33,7 @@ LISTENING_TASK {
   taskId: certyfikat-polski-B2-2023-02-listen-4
   examRef: certyfikat-polski-B2-2023-02
   taskNumber: 4
-  audioUrl: "https://certyfikatpolski.pl/wp-content/uploads/2025/07/2023_02_5_6_B2_plik_dzwiekowy.mp3.mp3"
+  audioUrl: exam-audio/B2-2023-02.mp3
   segmentStartMs: 1189000
   segmentEndMs: 1635000
   instruction: "IV. Proszę uważnie słuchać tego nagrania i wykonywać zadanie zgodnie z podanym przykładem. Uwaga! Nagranie zostanie odtworzone dwukrotnie. ______ / 10 p. (10 x 1 p.) 1. Pies Quasimodo 2. Kot Wilfred 3. Chart afgański Vito 4. Tygrys Keny PRZYKŁAD Jego nietypowy wygląd jest wynikiem deformacji kręgosłupa. [___1___] Na podstawie: https://www.youtube.com/watch?v=-VqnrDMUXdA"
@@ -43,7 +43,7 @@ LISTENING_TASK {
   taskId: certyfikat-polski-B2-2023-02-listen-5
   examRef: certyfikat-polski-B2-2023-02
   taskNumber: 5
-  audioUrl: "https://certyfikatpolski.pl/wp-content/uploads/2025/07/2023_02_5_6_B2_plik_dzwiekowy.mp3.mp3"
+  audioUrl: exam-audio/B2-2023-02.mp3
   segmentStartMs: 1635000
   segmentEndMs: 1954000
   instruction: "V. Proszę uważnie słuchać tego nagrania i wykonywać zadanie zgodnie z podanym przykładem. Uwaga! Nagranie zostanie odtworzone dwukrotnie. _____ / 8 p. Proszę wysłuchać tekstu na temat nowej inwestycji budowlanej w jednej z nadmorskich miejscowości i odpowiedzieć na pytania. PRZYKŁAD Co obecnie znajduje się w miejscu planowanej inwestycji? Parterowa rudera. Na podstawie: https://www.youtube.com/watch?v=C6IlITiSkc8&list=PL3tbuFnhc9p8usrjCNl-JRIJjPu3FlHGG&index=30"

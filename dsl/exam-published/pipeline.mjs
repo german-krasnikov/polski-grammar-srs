@@ -43,7 +43,7 @@ function inside(root, path) {
   return rel !== '' && rel !== '..' && !rel.startsWith(`..${sep}`) && !isAbsolute(rel);
 }
 
-async function locatedReader(cli) {
+export async function loadExamDataReader(cli) {
   const reader = pathToFileURL(join(dirname(cli), 'support/data-reader.mjs')).href;
   return (await import(reader)).readDataText; // Documented Biome JS extension seam.
 }
@@ -58,14 +58,24 @@ function sourceFieldError(file, entry, field, message) {
 }
 
 /** Find source records by the tag returned by the supported Biome reader. */
-export function discoverSources(cli, directory) {
+export function discoverSources(cli, directory, readDataText) {
   if (!existsSync(directory)) throw new Error(`${directory}: missing source directory`);
   const paths = readdirSync(directory).filter((name) => name.endsWith('.core-data')).sort();
   if (!paths.length) throw new Error(`${directory}: no .core-data files`);
   const sources = [];
   for (const name of paths) {
     const file = join(directory, name);
-    const rows = read(cli, file);
+    let rows;
+    if (readDataText) {
+      const result = readDataText(readFileSync(file, 'utf8'), file);
+      if (result.diagnostics.length) {
+        const diagnostic = result.diagnostics[0];
+        throw new Error(`${file}:${diagnostic.line}:${diagnostic.col}: ${diagnostic.code}: ${diagnostic.message}`);
+      }
+      rows = result.entries.map(({ tag, value }) => ({ tag, value }));
+    } else {
+      rows = read(cli, file);
+    }
     if (!rows.length) throw new Error(`${file}: empty source file`);
     const records = new Set(rows.map(({ tag }) => RECORD_BY_TAG.get(tag)));
     if (records.has(undefined) || records.size !== 1) throw new Error(`${file}: unknown or mixed exam record tags`);
@@ -164,13 +174,20 @@ export function validateForwardSourceRecords(sources) {
 }
 
 /** Source check precedes aggregation and keeps Core diagnostics at the author's file/line. */
-export async function validateSources(cli, { root = projectRoot, publication = publicationFile } = {}) {
-  const readDataText = await locatedReader(cli);
+export async function validateSources(cli, { root = projectRoot, publication = publicationFile, audioManifest = audioFile } = {}) {
+  const readDataText = await loadExamDataReader(cli);
   const published = read(cli, publication);
   if (!published.length || published.some(({ tag }) => tag !== RECORD_TAGS.get('ExamPublicationRow'))) {
     throw new Error(`${publication}: expected EXAM_PUBLICATION rows`);
   }
-  const audio = read(cli, audioFile).map(({ value }) => value);
+  const audio = read(cli, audioManifest).map(({ value }) => value);
+  const publishedIds = new Set(published.map(({ value }) => value.examRef));
+  const audioIds = new Set(audio.map(({ examId }) => examId));
+  const missingAudio = [...publishedIds].filter((id) => !audioIds.has(id));
+  const surplusAudio = [...audioIds].filter((id) => !publishedIds.has(id));
+  if (audioIds.size !== audio.length || missingAudio.length || surplusAudio.length) {
+    throw new Error(`${audioManifest}: audio asset coverage missing ${missingAudio.join(', ') || '(none)'}; surplus ${surplusAudio.join(', ') || '(none)'}`);
+  }
   const audioByExam = new Map(audio.map((asset) => [asset.examId, asset.webPath]));
   const seenRoute = new Set(), seenExam = new Set(), seenDir = new Set();
   const papers = [];
@@ -183,8 +200,9 @@ export async function validateSources(cli, { root = projectRoot, publication = p
     seenRoute.add(routeId); seenExam.add(examRef); seenDir.add(sourceDir);
     const directory = resolve(root, sourceDir);
     if (!inside(join(root, 'exams'), directory)) throw new Error(`${publication}: sourceDir escapes exams: ${sourceDir}`);
-    const sources = discoverSources(cli, directory);
+    const sources = discoverSources(cli, directory, readDataText);
     validateForwardSourceRecords(sources);
+    // Keep each paper's Core ref scope separate: a question cannot refer to another sitting.
     command(cli, ['data', 'check', '--contract', contractFile,
       ...sources.flatMap(({ record, file }) => ['--rows', record, file])]);
     const byRecord = new Map();
@@ -232,9 +250,10 @@ export async function validateSources(cli, { root = projectRoot, publication = p
         }
       }
     }
-    command(cli, ['fmt', '--check', ...sources.map(({ file }) => file)]);
     papers.push({ publication: publicationRow, sources });
   }
+  const sourceFiles = papers.flatMap(({ sources }) => sources);
+  command(cli, ['fmt', '--check', ...sourceFiles.map(({ file }) => file)]);
   // The publication ref is validated against all original ExamRow sources together.
   command(cli, ['data', 'check', '--contract', contractFile, '--rows', 'ExamPublicationRow', publication,
     ...papers.flatMap(({ sources }) => sources.filter(({ record }) => record === 'ExamRow')
@@ -245,7 +264,7 @@ export async function validateSources(cli, { root = projectRoot, publication = p
 
 /** Preserve authored row slices and a map from every aggregate line to its original file/line. */
 export async function aggregate(cli, papers, { outputDir = join(projectRoot, 'dsl/exam-published/generated') } = {}) {
-  const readDataText = await locatedReader(cli);
+  const readDataText = await loadExamDataReader(cli);
   const result = [];
   for (const [record, tag] of RECORD_TAGS) {
     const files = record === 'ExamPublicationRow' ? [publicationFile] : papers.flatMap(({ sources }) =>

@@ -3,7 +3,7 @@ LISTENING_TASK {
   taskId: certyfikat-polski-C1-2024-04-listen-1
   examRef: certyfikat-polski-C1-2024-04
   taskNumber: 1
-  audioUrl: "https://certyfikatpolski.pl/wp-content/uploads/2025/02/20-21.04.2024-C1_plik_dzwiekowy.mp3"
+  audioUrl: exam-audio/C1-2024-04.mp3
   segmentStartMs: 110000
   segmentEndMs: 468000
   instruction: "I. Proszę uważnie słuchać tego nagrania i wykonywać zadanie zgodnie z podanym przykładem. Uwaga! Nagranie zostanie odtworzone tylko jeden raz. _____ / 7 p. (7 x 1 p.) Proszę wysłuchać wiadomości z radiowego serwisu informacyjnego i zaznaczyć właściwe odpowiedzi. PRZYKŁAD Z tego nagrania wynika, że a) branża medialna interpretuje nowe obowiązki fiskalne inaczej niż rząd. b) rząd chce ograniczyć publikowanie reklam w prasie. c) placówki kulturalne oraz medyczne również będą płaciły nowe podatki. Na podstawie: https://audycje.tokfm.pl/podcast/101814 [W przykładzie zaznaczono: a).] Na podstawie: Aktualności Jedynki (Polskie Radio) z dni: 12 stycznia 2024, 29 września 2022, 23 maja 2023, 11 lipca 2023, 17 stycznia 2024, 27 grudnia 2023, 14 listopada 2014, 17 stycznia 2024."
@@ -13,7 +13,7 @@ LISTENING_TASK {
   taskId: certyfikat-polski-C1-2024-04-listen-2
   examRef: certyfikat-polski-C1-2024-04
   taskNumber: 2
-  audioUrl: "https://certyfikatpolski.pl/wp-content/uploads/2025/02/20-21.04.2024-C1_plik_dzwiekowy.mp3"
+  audioUrl: exam-audio/C1-2024-04.mp3
   segmentStartMs: 468000
   segmentEndMs: 978000
   instruction: "II. Proszę uważnie słuchać tego nagrania i wykonywać zadanie zgodnie z podanym przykładem. Uwaga! Nagranie zostanie odtworzone dwukrotnie. _____ / 9 p. (9 x 1 p.) Proszę wysłuchać informacji o niezwykłych roślinach i dopasować gatunek rośliny (1-4) do jej opisu (A-G). Uwaga! Jeden opis może pasować do więcej niż jednej rośliny. 1 – MUCHOŁÓWKA AMERYKAŃSKA 2 – MIMOZA NIEŚMIAŁA 3 – DZBANECZNIK 4 – CZYSTEK Która z roślin PRZYKŁAD umie poradzić sobie z niedoborem azotu w podłożu. [___1___] Na podstawie: https://www.youtube.com/watch?v=f8o2-OPCU1c"
@@ -23,7 +23,7 @@ LISTENING_TASK {
   taskId: certyfikat-polski-C1-2024-04-listen-3
   examRef: certyfikat-polski-C1-2024-04
   taskNumber: 3
-  audioUrl: "https://certyfikatpolski.pl/wp-content/uploads/2025/02/20-21.04.2024-C1_plik_dzwiekowy.mp3"
+  audioUrl: exam-audio/C1-2024-04.mp3
   segmentStartMs: 978000
   segmentEndMs: 1436000
   instruction: "III. Proszę uważnie słuchać tego nagrania i wykonywać zadanie zgodnie z podanym przykładem. Uwaga! Nagranie zostanie odtworzone dwukrotnie. _____ / 9 p. (9 x 1 p.) Proszę wysłuchać rozmowy na temat serwisu muzycznego MySpace. Proszę zaznaczyć: TAK – gdy zdanie jest zgodne z tekstem; NIE – gdy nie jest zgodne z tekstem. TAK NIE PRZYKŁAD Portal internetowy MySpace powstał przed Facebookiem i YouTubem. X [W przykładzie zaznaczono: TAK.] Na podstawie: https://www.polskieradio.pl/8/2890/artykul/881402,myspace-youtube-facebook-%E2%80%93-tam-mozesz- zostac-gwiazda"
@@ -33,7 +33,7 @@ LISTENING_TASK {
   taskId: certyfikat-polski-C1-2024-04-listen-4
   examRef: certyfikat-polski-C1-2024-04
   taskNumber: 4
-  audioUrl: "https://certyfikatpolski.pl/wp-content/uploads/2025/02/20-21.04.2024-C1_plik_dzwiekowy.mp3"
+  audioUrl: exam-audio/C1-2024-04.mp3
   segmentStartMs: 1436000
   segmentEndMs: 1952000
   instruction: "IV. Proszę uważnie słuchać tego nagrania i wykonywać zadanie zgodnie z podanym przykładem. Uwaga! Nagranie zostanie odtworzone dwukrotnie. _____ / 7 p. (7 x 1 p.) Proszę wysłuchać audycji na temat badań związanych z zaburzeniami snu i zaznaczyć właściwą odpowiedź. PRZYKŁAD Zespół eksplodującej głowy a) zawdzięcza swoją nazwę filmowi animowanemu. b) objawia się podczas zapadania w sen i przebudzania się. c) może być wywoływany przez ciągły hałas. [W przykładzie zaznaczono: b).] Na podstawie: G. Dobroń-Nowakowska, Zaburzenia snu – zespół eksplodującej głowy, Polskie Radio."
@@ -43,7 +43,7 @@ LISTENING_TASK {
   taskId: certyfikat-polski-C1-2024-04-listen-5
   examRef: certyfikat-polski-C1-2024-04
   taskNumber: 5
-  audioUrl: "https://certyfikatpolski.pl/wp-content/uploads/2025/02/20-21.04.2024-C1_plik_dzwiekowy.mp3"
+  audioUrl: exam-audio/C1-2024-04.mp3
   segmentStartMs: 1952000
   segmentEndMs: 2322000
   instruction: "V. Proszę uważnie słuchać tego nagrania i wykonywać zadanie zgodnie z podanym przykładem. Uwaga! Nagranie zostanie odtworzone dwukrotnie. _____ / 8 p. (8 x 1 p.) Proszę wysłuchać wypowiedzi na temat świątecznej diety i połączyć informacje z dwóch kolumn. Odpowiedzi proszę wpisać do tabeli. PRZYKŁAD: Jedzenie spożywane w złym towarzystwie → E. Kolumna II: A może powodować niepożądane skutki. B wspomaga pracę żołądka. C to produkt zalecany cukrzykom. D stanowi dobre środowisko dla bakterii. E prowokuje skurcze mięśni. F usprawnia pracę wielu organów. G chroni przed zapominaniem. H ma właściwości relaksacyjne i uspokajające. I wpływa na działanie mózgu. Na podstawie: Materiały dźwiękowe Polskiego Radia."

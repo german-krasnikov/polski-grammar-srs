@@ -69,6 +69,8 @@ export async function runExamPlaytest(page: Page, sourceFile: string) {
         'grammar.bankSelectedId': document.querySelector('.exam-word-bank .exam-option.selected')?.getAttribute('data-bank-token-id') ?? '',
         'grammar.manualReviewCount': document.querySelectorAll('.exam-review-manual').length,
         'grammar.reviewStatus': inspectedReview?.classList.contains('correct') ? 'correct' : inspectedReview?.classList.contains('partial') ? 'partial' : inspectedReview?.classList.contains('pending') ? 'pending' : inspectedReview?.classList.contains('wrong') ? 'wrong' : '',
+        'grammar.rubricItems': [...(inspectedReview?.querySelectorAll<HTMLElement>('.exam-review-rubric-component') ?? [])]
+          .map(item => item.textContent ?? '').join('|'),
         'reading.passageOpening': document.querySelector('.exam-reading-text p')?.textContent?.replace(/^\d+\.\s*/, '').split('.')[0] ?? '',
         'reading.passageChars': document.querySelector('.exam-reading-text')?.textContent?.length ?? 0,
         'reading.questionCount': readingRows.length,
@@ -345,7 +347,7 @@ export async function runExamPlaytest(page: Page, sourceFile: string) {
     'exam.promptImageLoaded': 'bool', 'exam.promptImageAlt': 'string',
     'grammar.context': 'string', 'grammar.questionTarget': 'string', 'grammar.targetMarked': 'bool',
     'grammar.bankTexts': 'string', 'grammar.bankSelectedText': 'string', 'grammar.bankSelectedId': 'string',
-    'grammar.manualReviewCount': 'number', 'grammar.reviewStatus': 'string',
+    'grammar.manualReviewCount': 'number', 'grammar.reviewStatus': 'string', 'grammar.rubricItems': 'string',
     'reading.passageOpening': 'string', 'reading.passageChars': 'number',
     'reading.questionCount': 'number', 'reading.firstQuestion': 'string',
     'reading.firstOptions': 'string', 'reading.genericQuestionCount': 'number',

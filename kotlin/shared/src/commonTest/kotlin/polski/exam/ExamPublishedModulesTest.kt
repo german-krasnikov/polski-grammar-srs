@@ -12,9 +12,13 @@ import polski.exam.data.published.WRITING_TASK_ROW_ROWS
 
 class ExamPublishedModulesTest {
     @Test
-    fun everyHostReceivesTheSixPublishedPapersAndNoSample() {
+    fun everyHostReceivesSixLegacyAndTenDatedPublishedPapersAndNoSample() {
         val routes = EXAM_PUBLICATION_ROW_ROWS.map { it.routeId }
-        assertEquals(listOf("b1-2017", "b1-2019", "b1-2020", "b2-2017", "b2-2019", "b2-2020"), routes)
+        assertEquals(listOf(
+            "b1-2017", "b1-2019", "b1-2020", "b2-2017", "b2-2019", "b2-2020",
+            "b2-2022-02", "b2-2023-02", "b2-2023-06", "b2-2024-02", "b2-2024-06",
+            "c1-2022-03", "c1-2022-11", "c1-2023-04", "c1-2023-11", "c1-2024-04",
+        ), routes)
         assertEquals(routes.toSet(), officialListeningData.keys)
         assertEquals(routes.toSet(), officialReadingData.keys)
         assertEquals(routes.toSet(), officialWritingData.keys)

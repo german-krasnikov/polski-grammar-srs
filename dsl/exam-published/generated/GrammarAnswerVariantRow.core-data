@@ -204,3 +204,460 @@ GRAMMAR_ANSWER_VARIANT {
   answer: "Nie poszedł na studia wbrew oczekiwaniom rodziców."
   earnedQuarter: 4
 }
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2022-02-g2-q4-v1
+  itemRef: certyfikat-polski-B2-2022-02-g2-q4
+  answer: miastach
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2022-02-g5-q6-v1
+  itemRef: certyfikat-polski-B2-2022-02-g5-q6
+  answer: "będą sprawdzali"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2022-02-g5-q8-v1
+  itemRef: certyfikat-polski-B2-2022-02-g5-q8
+  answer: znajdziemy
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2022-02-g7-q4-v1
+  itemRef: certyfikat-polski-B2-2022-02-g7-q4
+  answer: "najczęstsze"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2022-02-g7-q8-v1
+  itemRef: certyfikat-polski-B2-2022-02-g7-q8
+  answer: tolerancyjniejsi
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2023-02-g6-q5-v1
+  itemRef: certyfikat-polski-B2-2023-02-g6-q5
+  answer: "będzie informowała"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2023-02-g8-q1-v1
+  itemRef: certyfikat-polski-B2-2023-02-g8-q1
+  answer: "Pożar udało się opanować dzięki szybko podjętej akcji gaśniczej."
+  earnedQuarter: 4
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2023-02-g8-q3-v1
+  itemRef: certyfikat-polski-B2-2023-02-g8-q3
+  answer: "Od ciągłej gry na komputerze będzie bolała cię głowa."
+  earnedQuarter: 4
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2023-06-g6-q4-v1
+  itemRef: certyfikat-polski-B2-2023-06-g6-q4
+  answer: "będzie zajmować"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2023-06-g7-q3-v1
+  itemRef: certyfikat-polski-B2-2023-06-g7-q3
+  answer: "najbardziej znanych"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2023-06-g8-q1-v1
+  itemRef: certyfikat-polski-B2-2023-06-g8-q1
+  answer: "Wszyscy czekamy na poprawienie się sytuacji ekonomicznej w kraju."
+  earnedQuarter: 4
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2023-06-g8-q2-v1
+  itemRef: certyfikat-polski-B2-2023-06-g8-q2
+  answer: "Olek znowu zapomniał o zakupie chleba razowego."
+  earnedQuarter: 4
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2023-06-g8-q2-v2
+  itemRef: certyfikat-polski-B2-2023-06-g8-q2
+  answer: "Olek znowu zapomniał o kupnie chleba razowego."
+  earnedQuarter: 4
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2023-06-g8-q5-v1
+  itemRef: certyfikat-polski-B2-2023-06-g8-q5
+  answer: "Rodzice ucieszyli się z sukcesu osiągniętego przez ich córkę."
+  earnedQuarter: 4
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2023-06-g8-q5-v2
+  itemRef: certyfikat-polski-B2-2023-06-g8-q5
+  answer: "Rodzice ucieszyli się z sukcesu ich córki."
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2023-06-g8-q5-v3
+  itemRef: certyfikat-polski-B2-2023-06-g8-q5
+  answer: "Rodzice ucieszyli się z sukcesu swojej córki."
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2023-06-g8-q5-v4
+  itemRef: certyfikat-polski-B2-2023-06-g8-q5
+  answer: "Rodzice ucieszyli się z osiągnięć córki."
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-02-g5-q3-v1
+  itemRef: certyfikat-polski-B2-2024-02-g5-q3
+  answer: "będzie się cieszyć"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-02-g5-q3-v2
+  itemRef: certyfikat-polski-B2-2024-02-g5-q3
+  answer: "będzie cieszył się"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-02-g5-q3-v3
+  itemRef: certyfikat-polski-B2-2024-02-g5-q3
+  answer: "będzie cieszyć się"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-02-g5-q8-v1
+  itemRef: certyfikat-polski-B2-2024-02-g5-q8
+  answer: "będzie wyświetlała"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-02-g7-q1-v1
+  itemRef: certyfikat-polski-B2-2024-02-g7-q1
+  answer: "bardziej brutalna"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-02-g8-q3-v1
+  itemRef: certyfikat-polski-B2-2024-02-g8-q3
+  answer: "Utracili władzę w wyniku przegranych wyborów samorządowych."
+  earnedQuarter: 4
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-02-g8-q3-v2
+  itemRef: certyfikat-polski-B2-2024-02-g8-q3
+  answer: "Utracili władzę w wyniku przegrania wyborów samorządowych."
+  earnedQuarter: 4
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-06-g5-q6-v1
+  itemRef: certyfikat-polski-B2-2024-06-g5-q6
+  answer: "będą pilnowali"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-06-g6-q9-v1
+  itemRef: certyfikat-polski-B2-2024-06-g6-q9
+  answer: "najprzyjaźniejszej"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-06-g7-q8-v1
+  itemRef: certyfikat-polski-B2-2024-06-g7-q8
+  answer: "wartości"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-06-g8-q1-v1
+  itemRef: certyfikat-polski-B2-2024-06-g8-q1
+  answer: "Trasa linii 2 została zmieniona w związku z przeprowadzanym gruntownym remontem torowiska."
+  earnedQuarter: 4
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-06-g8-q5-v1
+  itemRef: certyfikat-polski-B2-2024-06-g8-q5
+  answer: "Mogliśmy wyjechać na kurs do Portugalii dzięki otrzymaniu pomocy finansowej z Urzędu Miasta."
+  earnedQuarter: 4
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-03-g1-q2-v1
+  itemRef: certyfikat-polski-C1-2022-03-g1-q2
+  answer: latami
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-03-g2-q1-v1
+  itemRef: certyfikat-polski-C1-2022-03-g2-q1
+  answer: "Rewolucję streamingową umożliwił szybki wzrost popularności urządzeń z dostępem do internetu."
+  earnedQuarter: 4
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-03-g2-q2-v1
+  itemRef: certyfikat-polski-C1-2022-03-g2-q2
+  answer: "Korzystanie z oferty wymaga utworzenia własnego profilu przez użytkownika."
+  earnedQuarter: 4
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-03-g2-q4-v1
+  itemRef: certyfikat-polski-C1-2022-03-g2-q4
+  answer: "Widzowie są zaskoczeni tak bogatą ofertą platform z płatnym dostępem do filmów."
+  earnedQuarter: 4
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-03-g2-q4-v2
+  itemRef: certyfikat-polski-C1-2022-03-g2-q4
+  answer: "Widzowie byli zaskoczeni tak bogatą ofertą platform z płatnym dostępem do filmów."
+  earnedQuarter: 4
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-03-g2-q5-v1
+  itemRef: certyfikat-polski-C1-2022-03-g2-q5
+  answer: "Fani zwykle zastanawiają się nad przyczynami nagłego zniknięcia ich ulubionego serialu z danej platformy."
+  earnedQuarter: 4
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-03-g3-q9-v1
+  itemRef: certyfikat-polski-C1-2022-03-g3-q9
+  answer: "związku"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-03-g6-q6-v1
+  itemRef: certyfikat-polski-C1-2022-03-g6-q6
+  answer: "tonące"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-03-g7-q1-v1
+  itemRef: certyfikat-polski-C1-2022-03-g7-q1
+  answer: "będą się rozlegać"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-03-g7-q1-v2
+  itemRef: certyfikat-polski-C1-2022-03-g7-q1
+  answer: "będą się rozlegały"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-03-g7-q4-v1
+  itemRef: certyfikat-polski-C1-2022-03-g7-q4
+  answer: "będą wspierać"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-03-g7-q4-v2
+  itemRef: certyfikat-polski-C1-2022-03-g7-q4
+  answer: "wesprą"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-03-g7-q8-v1
+  itemRef: certyfikat-polski-C1-2022-03-g7-q8
+  answer: "osiągnęły"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-11-g1-q1-v1
+  itemRef: certyfikat-polski-C1-2022-11-g1-q1
+  answer: "kilkudziesięcioro"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-11-g1-q3-v1
+  itemRef: certyfikat-polski-C1-2022-11-g1-q3
+  answer: kilkoma
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-11-g1-q4-v1
+  itemRef: certyfikat-polski-C1-2022-11-g1-q4
+  answer: latami
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-11-g1-q9-v1
+  itemRef: certyfikat-polski-C1-2022-11-g1-q9
+  answer: trzydziestoma
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-11-g1-q9-v2
+  itemRef: certyfikat-polski-C1-2022-11-g1-q9
+  answer: "trzydzieściorgiem"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-11-g1-q10-v1
+  itemRef: certyfikat-polski-C1-2022-11-g1-q10
+  answer: "rozbitków"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-11-g2-q3-v1
+  itemRef: certyfikat-polski-C1-2022-11-g2-q3
+  answer: "Nowa odmiana survivalu to rodzaj aktywności pozbawiony ograniczeń finansowych i wiekowych."
+  earnedQuarter: 4
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-11-g2-q5-v1
+  itemRef: certyfikat-polski-C1-2022-11-g2-q5
+  answer: "Chętni liczą się z możliwością spędzenia całej nocy w lesie."
+  earnedQuarter: 4
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-11-g5-q4-v1
+  itemRef: certyfikat-polski-C1-2022-11-g5-q4
+  answer: mianowicie
+  earnedQuarter: 2
+  onlyIfNotUsedBy: certyfikat-polski-C1-2022-11-g5-q9
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-11-g7-q5-v1
+  itemRef: certyfikat-polski-C1-2022-11-g7-q5
+  answer: "dowiodły"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-11-g7-q7-v1
+  itemRef: certyfikat-polski-C1-2022-11-g7-q7
+  answer: "odnotowuje się"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-11-g7-q8-v1
+  itemRef: certyfikat-polski-C1-2022-11-g7-q8
+  answer: doprowadzimy
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-11-g8-q4-v1
+  itemRef: certyfikat-polski-C1-2022-11-g8-q4
+  answer: "sędzi"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2023-04-g1-q1-v1
+  itemRef: certyfikat-polski-C1-2023-04-g1-q1
+  answer: kilkunastu
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2023-04-g1-q9-v1
+  itemRef: certyfikat-polski-C1-2023-04-g1-q9
+  answer: Trojgu
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2023-04-g2-q3-v1
+  itemRef: certyfikat-polski-C1-2023-04-g2-q3
+  answer: "Brak mokrych wiatrów zachodnich przy silnych prądach południowych i północnych będzie sprzyjać występowaniu w Polsce długotrwałych susz."
+  earnedQuarter: 4
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2023-04-g2-q5-v1
+  itemRef: certyfikat-polski-C1-2023-04-g2-q5
+  answer: "Ze względu na niedobór wody powinniśmy spodziewać się częstego wyłączania prądu."
+  earnedQuarter: 4
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2023-04-g3-q3-v1
+  itemRef: certyfikat-polski-C1-2023-04-g3-q3
+  answer: "następstwami"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2023-04-g3-q6-v1
+  itemRef: certyfikat-polski-C1-2023-04-g3-q6
+  answer: przybyli
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2023-04-g3-q7-v1
+  itemRef: certyfikat-polski-C1-2023-04-g3-q7
+  answer: wycinaniem
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2023-04-g3-q9-v1
+  itemRef: certyfikat-polski-C1-2023-04-g3-q9
+  answer: nachylenia
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2023-04-g6-q9-v1
+  itemRef: certyfikat-polski-C1-2023-04-g6-q9
+  answer: "dostosowujących się"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2023-04-g7-q8-v1
+  itemRef: certyfikat-polski-C1-2023-04-g7-q8
+  answer: "upuszcza się"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2023-04-g8-q2-v1
+  itemRef: certyfikat-polski-C1-2023-04-g8-q2
+  answer: will
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2023-04-g8-q6-v1
+  itemRef: certyfikat-polski-C1-2023-04-g8-q6
+  answer: "którekolwiek"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2023-11-g1-q1-v1
+  itemRef: certyfikat-polski-C1-2023-11-g1-q1
+  answer: trzystoma
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2023-11-g1-q4-v1
+  itemRef: certyfikat-polski-C1-2023-11-g1-q4
+  answer: "czwórki"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2023-11-g3-q6-v1
+  itemRef: certyfikat-polski-C1-2023-11-g3-q6
+  answer: "przesileń"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2023-11-g7-q4-v1
+  itemRef: certyfikat-polski-C1-2023-11-g7-q4
+  answer: "dobiłyby"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2023-11-g7-q7-v1
+  itemRef: certyfikat-polski-C1-2023-11-g7-q7
+  answer: "wyposażyć"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2023-11-g7-q8-v1
+  itemRef: certyfikat-polski-C1-2023-11-g7-q8
+  answer: "dowiedzieliby się"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2024-04-g1-q4-v1
+  itemRef: certyfikat-polski-C1-2024-04-g1-q4
+  answer: dwu
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2024-04-g7-q2-v1
+  itemRef: certyfikat-polski-C1-2024-04-g7-q2
+  answer: "niszczały"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2024-04-g7-q7-v1
+  itemRef: certyfikat-polski-C1-2024-04-g7-q7
+  answer: znajdujemy
+  earnedQuarter: 2
+}

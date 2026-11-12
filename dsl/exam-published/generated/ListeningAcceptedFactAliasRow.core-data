@@ -1,1 +1,131 @@
 DSL 1
+LISTENING_ACCEPTED_FACT_ALIAS {
+  aliasId: certyfikat-polski-B2-2022-02-l5-q3-alias-1-1
+  factRef: certyfikat-polski-B2-2022-02-l5-q3-fact-1
+  answerText: "bogate opisy"
+}
+LISTENING_ACCEPTED_FACT_ALIAS {
+  aliasId: certyfikat-polski-B2-2022-02-l5-q3-alias-2-1
+  factRef: certyfikat-polski-B2-2022-02-l5-q3-fact-2
+  answerText: "fotografie z prywatnych zbiorów rodziny kompozytora"
+}
+LISTENING_ACCEPTED_FACT_ALIAS {
+  aliasId: certyfikat-polski-B2-2022-02-l5-q3-alias-2-2
+  factRef: certyfikat-polski-B2-2022-02-l5-q3-fact-2
+  answerText: "prywatne fotografie"
+}
+LISTENING_ACCEPTED_FACT_ALIAS {
+  aliasId: certyfikat-polski-B2-2023-06-l5-q6-alias-1-1
+  factRef: certyfikat-polski-B2-2023-06-l5-q6-fact-1
+  answerText: "w fotografii"
+}
+LISTENING_ACCEPTED_FACT_ALIAS {
+  aliasId: certyfikat-polski-B2-2023-06-l5-q6-alias-2-1
+  factRef: certyfikat-polski-B2-2023-06-l5-q6-fact-2
+  answerText: "w filmie"
+}
+LISTENING_ACCEPTED_FACT_ALIAS {
+  aliasId: certyfikat-polski-B2-2023-06-l5-q7-alias-1-1
+  factRef: certyfikat-polski-B2-2023-06-l5-q7-fact-1
+  answerText: "papier fotograficzny czuły pod względem barw"
+}
+LISTENING_ACCEPTED_FACT_ALIAS {
+  aliasId: certyfikat-polski-B2-2023-06-l5-q7-alias-2-1
+  factRef: certyfikat-polski-B2-2023-06-l5-q7-fact-2
+  answerText: "urządzenia do pomiaru intensywności kolorów"
+}
+LISTENING_ACCEPTED_FACT_ALIAS {
+  aliasId: certyfikat-polski-B2-2024-06-l5-q1-alias-1-1
+  factRef: certyfikat-polski-B2-2024-06-l5-q1-fact-1
+  answerText: "sala gimnastyczna"
+}
+LISTENING_ACCEPTED_FACT_ALIAS {
+  aliasId: certyfikat-polski-B2-2024-06-l5-q1-alias-2-1
+  factRef: certyfikat-polski-B2-2024-06-l5-q1-fact-2
+  answerText: "powstała stołówka"
+}
+LISTENING_ACCEPTED_FACT_ALIAS {
+  aliasId: certyfikat-polski-B2-2024-06-l5-q1-alias-2-2
+  factRef: certyfikat-polski-B2-2024-06-l5-q1-fact-2
+  answerText: "stołówka"
+}
+LISTENING_ACCEPTED_FACT_ALIAS {
+  aliasId: certyfikat-polski-B2-2024-06-l5-q3-alias-1-1
+  factRef: certyfikat-polski-B2-2024-06-l5-q3-fact-1
+  answerText: "są przestronne"
+}
+LISTENING_ACCEPTED_FACT_ALIAS {
+  aliasId: certyfikat-polski-B2-2024-06-l5-q3-alias-1-2
+  factRef: certyfikat-polski-B2-2024-06-l5-q3-fact-1
+  answerText: przestronne
+}
+LISTENING_ACCEPTED_FACT_ALIAS {
+  aliasId: certyfikat-polski-B2-2024-06-l5-q3-alias-3-1
+  factRef: certyfikat-polski-B2-2024-06-l5-q3-fact-3
+  answerText: "są wyposażone w nowe sprzęty"
+}
+LISTENING_ACCEPTED_FACT_ALIAS {
+  aliasId: certyfikat-polski-C1-2022-11-l5-q3-alias-zamek-niedzicki
+  factRef: certyfikat-polski-C1-2022-11-l5-q3-fact-skarbu
+  answerText: "zamku niedzickiego"
+}
+LISTENING_ACCEPTED_FACT_ALIAS {
+  aliasId: certyfikat-polski-C1-2022-11-l5-q3-alias-zamek-w-niedzicy
+  factRef: certyfikat-polski-C1-2022-11-l5-q3-fact-skarbu
+  answerText: "zamku w Niedzicy"
+}
+LISTENING_ACCEPTED_FACT_ALIAS {
+  aliasId: certyfikat-polski-C1-2023-04-l5-q4-alias-1-1
+  factRef: certyfikat-polski-C1-2023-04-l5-q4-fact-1
+  answerText: "problemy komunikacyjne w USA"
+}
+LISTENING_ACCEPTED_FACT_ALIAS {
+  aliasId: certyfikat-polski-C1-2023-04-l5-q4-alias-2-1
+  factRef: certyfikat-polski-C1-2023-04-l5-q4-fact-2
+  answerText: "powstanie nowych odpadów"
+}
+LISTENING_ACCEPTED_FACT_ALIAS {
+  aliasId: certyfikat-polski-C1-2023-04-l5-q5-alias-2-1
+  factRef: certyfikat-polski-C1-2023-04-l5-q5-fact-2
+  answerText: "brak dostępu do bieżących informacji, np. pogody"
+}
+LISTENING_ACCEPTED_FACT_ALIAS {
+  aliasId: certyfikat-polski-C1-2023-04-l5-q7-alias-2-1
+  factRef: certyfikat-polski-C1-2023-04-l5-q7-fact-2
+  answerText: "stacja kosmiczna"
+}
+LISTENING_ACCEPTED_FACT_ALIAS {
+  aliasId: certyfikat-polski-C1-2023-11-l5-q1-alias-2-1
+  factRef: certyfikat-polski-C1-2023-11-l5-q1-fact-2
+  answerText: "denerwuje go hałas"
+}
+LISTENING_ACCEPTED_FACT_ALIAS {
+  aliasId: certyfikat-polski-C1-2023-11-l5-q1-alias-3-1
+  factRef: certyfikat-polski-C1-2023-11-l5-q1-fact-3
+  answerText: "Irytują go wrzeszczący ludzie"
+}
+LISTENING_ACCEPTED_FACT_ALIAS {
+  aliasId: certyfikat-polski-C1-2023-11-l5-q2-alias-1-1
+  factRef: certyfikat-polski-C1-2023-11-l5-q2-fact-1
+  answerText: spokoju
+}
+LISTENING_ACCEPTED_FACT_ALIAS {
+  aliasId: certyfikat-polski-C1-2023-11-l5-q2-alias-2-1
+  factRef: certyfikat-polski-C1-2023-11-l5-q2-fact-2
+  answerText: relaksu
+}
+LISTENING_ACCEPTED_FACT_ALIAS {
+  aliasId: certyfikat-polski-C1-2023-11-l5-q2-alias-3-1
+  factRef: certyfikat-polski-C1-2023-11-l5-q2-fact-3
+  answerText: "braku napinki"
+}
+LISTENING_ACCEPTED_FACT_ALIAS {
+  aliasId: certyfikat-polski-C1-2023-11-l5-q2-alias-4-1
+  factRef: certyfikat-polski-C1-2023-11-l5-q2-fact-4
+  answerText: wzruszenia
+}
+LISTENING_ACCEPTED_FACT_ALIAS {
+  aliasId: certyfikat-polski-C1-2023-11-l5-q8-alias-2-1
+  factRef: certyfikat-polski-C1-2023-11-l5-q8-fact-2
+  answerText: "kończy nową płytę"
+}

@@ -3,7 +3,7 @@ LISTENING_TASK {
   taskId: certyfikat-polski-B2-2022-02-listen-1
   examRef: certyfikat-polski-B2-2022-02
   taskNumber: 1
-  audioUrl: "https://certyfikatpolski.pl/wp-content/uploads/2026/01/2022.02.6-7_B2_Plik_dzwiekowy.mp3"
+  audioUrl: exam-audio/B2-2022-02.mp3
   segmentStartMs: 107000
   segmentEndMs: 448000
   instruction: "I. Proszę uważnie słuchać tego nagrania i wykonywać zadanie zgodnie z podanym przykładem. Uwaga! Nagranie zostanie odtworzone dwukrotnie. _____ / 6 p. (6 x 1 p.) Proszę wysłuchać kolejnych tekstów i zaznaczyć właściwe odpowiedzi. PRZYKŁAD Proszę wysłuchać informacji i zaznaczyć właściwe odpowiedzi. Ten fragment mówi o a) trudnościach kobiet służących w marynarce wojennej. b) kobiecie, która obejmie stanowisko pilota lotniskowca. c) przewidywaniach dotyczących sukcesów kobiet w wojsku. Amy Bauernschmidt a) jest związana z marynarką wojenną od lat 90. b) nie odnosiła dotychczas sukcesów w służbie wojskowej. c) zajmuje się historią marynarki wojennej w Stanach Zjednoczonych. Na podstawie: https://www.youtube.com/watch?v=8g1AzxMhw1Y"
@@ -13,7 +13,7 @@ LISTENING_TASK {
   taskId: certyfikat-polski-B2-2022-02-listen-2
   examRef: certyfikat-polski-B2-2022-02
   taskNumber: 2
-  audioUrl: "https://certyfikatpolski.pl/wp-content/uploads/2026/01/2022.02.6-7_B2_Plik_dzwiekowy.mp3"
+  audioUrl: exam-audio/B2-2022-02.mp3
   segmentStartMs: 448000
   segmentEndMs: 769000
   instruction: "II. Proszę uważnie słuchać tego nagrania i wykonywać zadanie zgodnie z podanym przykładem. Uwaga! Nagranie zostanie odtworzone dwukrotnie. _____ / 8 p. ( 8 x 1 p.) Proszę wysłuchać informacji turystycznej o Słowenii i zaznaczyć: TAK – gdy zdanie jest zgodne z tekstem; NIE – gdy nie jest zgodne z tekstem. TAK NIE PRZYKŁAD Materiał stanowi pierwszą część cyklu poświęconego Słowenii. X"
@@ -23,7 +23,7 @@ LISTENING_TASK {
   taskId: certyfikat-polski-B2-2022-02-listen-3
   examRef: certyfikat-polski-B2-2022-02
   taskNumber: 3
-  audioUrl: "https://certyfikatpolski.pl/wp-content/uploads/2026/01/2022.02.6-7_B2_Plik_dzwiekowy.mp3"
+  audioUrl: exam-audio/B2-2022-02.mp3
   segmentStartMs: 769000
   segmentEndMs: 1241000
   instruction: "III. Proszę uważnie słuchać tego nagrania i wykonywać zadanie zgodnie z podanym przykładem. Uwaga! Nagranie zostanie odtworzone dwukrotnie. _____ / 10 p. (10 x 1 p.) Proszę wysłuchać tekstu i zdecydować, którego ze sportowców (A–E) dotyczą poniższe informacje. Uwaga! Jedna informacja może dotyczyć więcej niż jednej osoby. Która z osób: A. Robert Kubica B. Grzegorz Krychowiak C. Agnieszka Radwańska D. Ewa Chodakowska E. Marcin Gortat PRZYKŁAD posługuje się kilkoma językami obcymi. [___E___]"
@@ -33,7 +33,7 @@ LISTENING_TASK {
   taskId: certyfikat-polski-B2-2022-02-listen-4
   examRef: certyfikat-polski-B2-2022-02
   taskNumber: 4
-  audioUrl: "https://certyfikatpolski.pl/wp-content/uploads/2026/01/2022.02.6-7_B2_Plik_dzwiekowy.mp3"
+  audioUrl: exam-audio/B2-2022-02.mp3
   segmentStartMs: 1241000
   segmentEndMs: 1609000
   instruction: "IV. Proszę uważnie słuchać tego nagrania i wykonywać zadanie zgodnie z podanym przykładem. Uwaga! Nagranie zostanie odtworzone dwukrotnie. _____ / 8 p. (8 x 1 p.) Proszę wysłuchać tekstu nagranego przed Festiwalem Nauki w Katowicach i zaznaczyć właściwe odpowiedzi. PRZYKŁAD Festiwal Nauki w Katowicach a) odbywa się po raz pierwszy. b) przyjmie mieszaną formułę. c) rozpocznie się 5 października."
@@ -43,7 +43,7 @@ LISTENING_TASK {
   taskId: certyfikat-polski-B2-2022-02-listen-5
   examRef: certyfikat-polski-B2-2022-02
   taskNumber: 5
-  audioUrl: "https://certyfikatpolski.pl/wp-content/uploads/2026/01/2022.02.6-7_B2_Plik_dzwiekowy.mp3"
+  audioUrl: exam-audio/B2-2022-02.mp3
   segmentStartMs: 1609000
   segmentEndMs: 1923000
   instruction: "V. Proszę uważnie słuchać tego nagrania i wykonywać zadanie zgodnie z podanym przykładem. Uwaga! Nagranie zostanie odtworzone dwukrotnie. _______ / 8 p. Proszę wysłuchać tekstu na temat prezentacji dorobku artystycznego kompozytora Andrzeja Panufnika i odpowiedzieć na pytania. PRZYKŁAD Kto jest pomysłodawcą prezentacji dorobku Andrzeja Panufnika? Narodowy Instytut Audiowizualny."

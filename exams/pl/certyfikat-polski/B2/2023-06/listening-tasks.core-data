@@ -3,7 +3,7 @@ LISTENING_TASK {
   taskId: certyfikat-polski-B2-2023-06-listen-1
   examRef: certyfikat-polski-B2-2023-06
   taskNumber: 1
-  audioUrl: "https://certyfikatpolski.pl/wp-content/uploads/2025/07/2023_06_24_25_B2_plik_dzwiekowy.mp3"
+  audioUrl: exam-audio/B2-2023-06.mp3
   segmentStartMs: 109000
   segmentEndMs: 728000
   instruction: "I. Proszę uważnie słuchać tego nagrania i wykonywać zadanie zgodnie z podanym przykładem. Uwaga! Nagranie zostanie odtworzone dwukrotnie. _____ / 8 p. (8 x 1 p.) Proszę wysłuchać kolejnych tekstów i zaznaczyć właściwe odpowiedzi. PRZYKŁAD Proszę wysłuchać audycji i zaznaczyć prawidłowe odpowiedzi. Audycja a) poświęcona jest prezentacji poglądów różnych psychologów. b) zawiera rady dotyczące sposobu wychowania dzieci. c) jest polemiką Aleksandry Piotrowskiej z innymi specjalistami. Aleksandra Piotrowska uważa, że stosowanie jakichkolwiek kar a) w ogóle nie powinno mieć miejsca. b) to jedyny skuteczny sposób wpływania na zachowanie dziecka. c) nie może być jedyną metodą wychowawczą. Na podstawie: https://www.youtube.com/watch?v=cnImhy9LUcM"
@@ -13,7 +13,7 @@ LISTENING_TASK {
   taskId: certyfikat-polski-B2-2023-06-listen-2
   examRef: certyfikat-polski-B2-2023-06
   taskNumber: 2
-  audioUrl: "https://certyfikatpolski.pl/wp-content/uploads/2025/07/2023_06_24_25_B2_plik_dzwiekowy.mp3"
+  audioUrl: exam-audio/B2-2023-06.mp3
   segmentStartMs: 728000
   segmentEndMs: 1085000
   instruction: "II. Proszę uważnie słuchać tego nagrania i wykonywać zadanie zgodnie z podanym przykładem. Uwaga! Nagranie zostanie odtworzone dwukrotnie. _____ / 6 p. (6 x 1 p.) Proszę wysłuchać audycji radiowej o królowej Jadwidze i zaznaczyć właściwe odpowiedzi. PRZYKŁAD Królową Jadwigę i Świętą Kingę a) łączył kraj pochodzenia. b) dzieliło dwanaście lat różnicy. c) łączył kraj ojczysty małżonka."
@@ -23,7 +23,7 @@ LISTENING_TASK {
   taskId: certyfikat-polski-B2-2023-06-listen-3
   examRef: certyfikat-polski-B2-2023-06
   taskNumber: 3
-  audioUrl: "https://certyfikatpolski.pl/wp-content/uploads/2025/07/2023_06_24_25_B2_plik_dzwiekowy.mp3"
+  audioUrl: exam-audio/B2-2023-06.mp3
   segmentStartMs: 1085000
   segmentEndMs: 1429000
   instruction: "III. Proszę uważnie słuchać tego nagrania i wykonywać zadanie zgodnie z podanym przykładem. Uwaga! Nagranie zostanie odtworzone dwukrotnie. _____ / 9 p. ( 9 x 1 p.) Proszę wysłuchać reportażu na temat papug kea i zaznaczyć: TAK – gdy zdanie jest zgodne z tekstem; NIE – gdy nie jest zgodne z tekstem. TAK NIE PRZYKŁAD Papugi kea są bardzo inteligentne. X"
@@ -33,7 +33,7 @@ LISTENING_TASK {
   taskId: certyfikat-polski-B2-2023-06-listen-4
   examRef: certyfikat-polski-B2-2023-06
   taskNumber: 4
-  audioUrl: "https://certyfikatpolski.pl/wp-content/uploads/2025/07/2023_06_24_25_B2_plik_dzwiekowy.mp3"
+  audioUrl: exam-audio/B2-2023-06.mp3
   segmentStartMs: 1429000
   segmentEndMs: 1869000
   instruction: "IV. Proszę uważnie słuchać tego nagrania i wykonywać zadanie zgodnie z podanym przykładem. Uwaga! Nagranie zostanie odtworzone dwukrotnie. _____ / 9 p. (9 x 1 p.) Proszę wysłuchać tekstu i zdecydować, który z obiektów (A–D) odpowiada podanym poniżej opisom. Uwaga! Jedna opinia może dotyczyć więcej niż jednego obiektu. A. Dom Handlowy Vitkac B. Hotel InterContinental C. Restauracja Amaro D. Restauracja Belvedere PRZYKŁAD Swoją nazwę zawdzięcza artyście, który mieszkał po sąsiedzku. [___A___]"
@@ -43,7 +43,7 @@ LISTENING_TASK {
   taskId: certyfikat-polski-B2-2023-06-listen-5
   examRef: certyfikat-polski-B2-2023-06
   taskNumber: 5
-  audioUrl: "https://certyfikatpolski.pl/wp-content/uploads/2025/07/2023_06_24_25_B2_plik_dzwiekowy.mp3"
+  audioUrl: exam-audio/B2-2023-06.mp3
   segmentStartMs: 1869000
   segmentEndMs: 2249000
   instruction: "V. Proszę uważnie słuchać tego nagrania i wykonywać zadanie zgodnie z podanym przykładem. Uwaga! Nagranie zostanie odtworzone dwukrotnie. _____ / 8 p. Proszę wysłuchać tekstu na temat polskiego wynalazcy Jana Szczepanika i odpowiedzieć na pytania. PRZYKŁAD Gdzie urodził się Jan Szczepanik? W Rudnikach."

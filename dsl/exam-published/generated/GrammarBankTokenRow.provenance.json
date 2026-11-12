@@ -2188,5 +2188,3785 @@
     "aggregateLine": 439,
     "source": "exams/pl/certyfikat-polski/B2/2020/grammar-bank-tokens.core-data",
     "sourceLine": 80
+  },
+  {
+    "aggregateLine": 440,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 2
+  },
+  {
+    "aggregateLine": 441,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 3
+  },
+  {
+    "aggregateLine": 442,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 4
+  },
+  {
+    "aggregateLine": 443,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 5
+  },
+  {
+    "aggregateLine": 444,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 6
+  },
+  {
+    "aggregateLine": 445,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 7
+  },
+  {
+    "aggregateLine": 446,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 8
+  },
+  {
+    "aggregateLine": 447,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 9
+  },
+  {
+    "aggregateLine": 448,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 10
+  },
+  {
+    "aggregateLine": 449,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 11
+  },
+  {
+    "aggregateLine": 450,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 12
+  },
+  {
+    "aggregateLine": 451,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 13
+  },
+  {
+    "aggregateLine": 452,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 14
+  },
+  {
+    "aggregateLine": 453,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 15
+  },
+  {
+    "aggregateLine": 454,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 16
+  },
+  {
+    "aggregateLine": 455,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 17
+  },
+  {
+    "aggregateLine": 456,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 18
+  },
+  {
+    "aggregateLine": 457,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 19
+  },
+  {
+    "aggregateLine": 458,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 20
+  },
+  {
+    "aggregateLine": 459,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 21
+  },
+  {
+    "aggregateLine": 460,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 22
+  },
+  {
+    "aggregateLine": 461,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 23
+  },
+  {
+    "aggregateLine": 462,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 24
+  },
+  {
+    "aggregateLine": 463,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 25
+  },
+  {
+    "aggregateLine": 464,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 26
+  },
+  {
+    "aggregateLine": 465,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 27
+  },
+  {
+    "aggregateLine": 466,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 28
+  },
+  {
+    "aggregateLine": 467,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 29
+  },
+  {
+    "aggregateLine": 468,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 30
+  },
+  {
+    "aggregateLine": 469,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 31
+  },
+  {
+    "aggregateLine": 470,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 32
+  },
+  {
+    "aggregateLine": 471,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 33
+  },
+  {
+    "aggregateLine": 472,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 34
+  },
+  {
+    "aggregateLine": 473,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 35
+  },
+  {
+    "aggregateLine": 474,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 36
+  },
+  {
+    "aggregateLine": 475,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 37
+  },
+  {
+    "aggregateLine": 476,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 38
+  },
+  {
+    "aggregateLine": 477,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 39
+  },
+  {
+    "aggregateLine": 478,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 40
+  },
+  {
+    "aggregateLine": 479,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 41
+  },
+  {
+    "aggregateLine": 480,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 42
+  },
+  {
+    "aggregateLine": 481,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 43
+  },
+  {
+    "aggregateLine": 482,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 44
+  },
+  {
+    "aggregateLine": 483,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 45
+  },
+  {
+    "aggregateLine": 484,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 46
+  },
+  {
+    "aggregateLine": 485,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 47
+  },
+  {
+    "aggregateLine": 486,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 48
+  },
+  {
+    "aggregateLine": 487,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 49
+  },
+  {
+    "aggregateLine": 488,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 50
+  },
+  {
+    "aggregateLine": 489,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 51
+  },
+  {
+    "aggregateLine": 490,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 52
+  },
+  {
+    "aggregateLine": 491,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 53
+  },
+  {
+    "aggregateLine": 492,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 54
+  },
+  {
+    "aggregateLine": 493,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 55
+  },
+  {
+    "aggregateLine": 494,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 56
+  },
+  {
+    "aggregateLine": 495,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 57
+  },
+  {
+    "aggregateLine": 496,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 58
+  },
+  {
+    "aggregateLine": 497,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 59
+  },
+  {
+    "aggregateLine": 498,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 60
+  },
+  {
+    "aggregateLine": 499,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 61
+  },
+  {
+    "aggregateLine": 500,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 62
+  },
+  {
+    "aggregateLine": 501,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 63
+  },
+  {
+    "aggregateLine": 502,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 64
+  },
+  {
+    "aggregateLine": 503,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 65
+  },
+  {
+    "aggregateLine": 504,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 66
+  },
+  {
+    "aggregateLine": 505,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 67
+  },
+  {
+    "aggregateLine": 506,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 68
+  },
+  {
+    "aggregateLine": 507,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 69
+  },
+  {
+    "aggregateLine": 508,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 70
+  },
+  {
+    "aggregateLine": 509,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 71
+  },
+  {
+    "aggregateLine": 510,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 72
+  },
+  {
+    "aggregateLine": 511,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 73
+  },
+  {
+    "aggregateLine": 512,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 74
+  },
+  {
+    "aggregateLine": 513,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 75
+  },
+  {
+    "aggregateLine": 514,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 76
+  },
+  {
+    "aggregateLine": 515,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 77
+  },
+  {
+    "aggregateLine": 516,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 78
+  },
+  {
+    "aggregateLine": 517,
+    "source": "exams/pl/certyfikat-polski/B2/2022-02/grammar-bank-tokens.core-data",
+    "sourceLine": 79
+  },
+  {
+    "aggregateLine": 518,
+    "source": "exams/pl/certyfikat-polski/B2/2023-02/grammar-bank-tokens.core-data",
+    "sourceLine": 2
+  },
+  {
+    "aggregateLine": 519,
+    "source": "exams/pl/certyfikat-polski/B2/2023-02/grammar-bank-tokens.core-data",
+    "sourceLine": 3
+  },
+  {
+    "aggregateLine": 520,
+    "source": "exams/pl/certyfikat-polski/B2/2023-02/grammar-bank-tokens.core-data",
+    "sourceLine": 4
+  },
+  {
+    "aggregateLine": 521,
+    "source": "exams/pl/certyfikat-polski/B2/2023-02/grammar-bank-tokens.core-data",
+    "sourceLine": 5
+  },
+  {
+    "aggregateLine": 522,
+    "source": "exams/pl/certyfikat-polski/B2/2023-02/grammar-bank-tokens.core-data",
+    "sourceLine": 6
+  },
+  {
+    "aggregateLine": 523,
+    "source": "exams/pl/certyfikat-polski/B2/2023-02/grammar-bank-tokens.core-data",
+    "sourceLine": 7
+  },
+  {
+    "aggregateLine": 524,
+    "source": "exams/pl/certyfikat-polski/B2/2023-02/grammar-bank-tokens.core-data",
+    "sourceLine": 8
+  },
+  {
+    "aggregateLine": 525,
+    "source": "exams/pl/certyfikat-polski/B2/2023-02/grammar-bank-tokens.core-data",
+    "sourceLine": 9
+  },
+  {
+    "aggregateLine": 526,
+    "source": "exams/pl/certyfikat-polski/B2/2023-02/grammar-bank-tokens.core-data",
+    "sourceLine": 10
+  },
+  {
+    "aggregateLine": 527,
+    "source": "exams/pl/certyfikat-polski/B2/2023-02/grammar-bank-tokens.core-data",
+    "sourceLine": 11
+  },
+  {
+    "aggregateLine": 528,
+    "source": "exams/pl/certyfikat-polski/B2/2023-02/grammar-bank-tokens.core-data",
+    "sourceLine": 12
+  },
+  {
+    "aggregateLine": 529,
+    "source": "exams/pl/certyfikat-polski/B2/2023-02/grammar-bank-tokens.core-data",
+    "sourceLine": 13
+  },
+  {
+    "aggregateLine": 530,
+    "source": "exams/pl/certyfikat-polski/B2/2023-02/grammar-bank-tokens.core-data",
+    "sourceLine": 14
+  },
+  {
+    "aggregateLine": 531,
+    "source": "exams/pl/certyfikat-polski/B2/2023-02/grammar-bank-tokens.core-data",
+    "sourceLine": 15
+  },
+  {
+    "aggregateLine": 532,
+    "source": "exams/pl/certyfikat-polski/B2/2023-02/grammar-bank-tokens.core-data",
+    "sourceLine": 16
+  },
+  {
+    "aggregateLine": 533,
+    "source": "exams/pl/certyfikat-polski/B2/2023-02/grammar-bank-tokens.core-data",
+    "sourceLine": 17
+  },
+  {
+    "aggregateLine": 534,
+    "source": "exams/pl/certyfikat-polski/B2/2023-02/grammar-bank-tokens.core-data",
+    "sourceLine": 18
+  },
+  {
+    "aggregateLine": 535,
+    "source": "exams/pl/certyfikat-polski/B2/2023-02/grammar-bank-tokens.core-data",
+    "sourceLine": 19
+  },
+  {
+    "aggregateLine": 536,
+    "source": "exams/pl/certyfikat-polski/B2/2023-02/grammar-bank-tokens.core-data",
+    "sourceLine": 20
+  },
+  {
+    "aggregateLine": 537,
+    "source": "exams/pl/certyfikat-polski/B2/2023-02/grammar-bank-tokens.core-data",
+    "sourceLine": 21
+  },
+  {
+    "aggregateLine": 538,
+    "source": "exams/pl/certyfikat-polski/B2/2023-02/grammar-bank-tokens.core-data",
+    "sourceLine": 22
+  },
+  {
+    "aggregateLine": 539,
+    "source": "exams/pl/certyfikat-polski/B2/2023-02/grammar-bank-tokens.core-data",
+    "sourceLine": 23
+  },
+  {
+    "aggregateLine": 540,
+    "source": "exams/pl/certyfikat-polski/B2/2023-02/grammar-bank-tokens.core-data",
+    "sourceLine": 24
+  },
+  {
+    "aggregateLine": 541,
+    "source": "exams/pl/certyfikat-polski/B2/2023-02/grammar-bank-tokens.core-data",
+    "sourceLine": 25
+  },
+  {
+    "aggregateLine": 542,
+    "source": "exams/pl/certyfikat-polski/B2/2023-02/grammar-bank-tokens.core-data",
+    "sourceLine": 26
+  },
+  {
+    "aggregateLine": 543,
+    "source": "exams/pl/certyfikat-polski/B2/2023-02/grammar-bank-tokens.core-data",
+    "sourceLine": 27
+  },
+  {
+    "aggregateLine": 544,
+    "source": "exams/pl/certyfikat-polski/B2/2023-02/grammar-bank-tokens.core-data",
+    "sourceLine": 28
+  },
+  {
+    "aggregateLine": 545,
+    "source": "exams/pl/certyfikat-polski/B2/2023-02/grammar-bank-tokens.core-data",
+    "sourceLine": 29
+  },
+  {
+    "aggregateLine": 546,
+    "source": "exams/pl/certyfikat-polski/B2/2023-02/grammar-bank-tokens.core-data",
+    "sourceLine": 30
+  },
+  {
+    "aggregateLine": 547,
+    "source": "exams/pl/certyfikat-polski/B2/2023-02/grammar-bank-tokens.core-data",
+    "sourceLine": 31
+  },
+  {
+    "aggregateLine": 548,
+    "source": "exams/pl/certyfikat-polski/B2/2023-02/grammar-bank-tokens.core-data",
+    "sourceLine": 32
+  },
+  {
+    "aggregateLine": 549,
+    "source": "exams/pl/certyfikat-polski/B2/2023-02/grammar-bank-tokens.core-data",
+    "sourceLine": 33
+  },
+  {
+    "aggregateLine": 550,
+    "source": "exams/pl/certyfikat-polski/B2/2023-02/grammar-bank-tokens.core-data",
+    "sourceLine": 34
+  },
+  {
+    "aggregateLine": 551,
+    "source": "exams/pl/certyfikat-polski/B2/2023-02/grammar-bank-tokens.core-data",
+    "sourceLine": 35
+  },
+  {
+    "aggregateLine": 552,
+    "source": "exams/pl/certyfikat-polski/B2/2023-02/grammar-bank-tokens.core-data",
+    "sourceLine": 36
+  },
+  {
+    "aggregateLine": 553,
+    "source": "exams/pl/certyfikat-polski/B2/2023-02/grammar-bank-tokens.core-data",
+    "sourceLine": 37
+  },
+  {
+    "aggregateLine": 554,
+    "source": "exams/pl/certyfikat-polski/B2/2023-02/grammar-bank-tokens.core-data",
+    "sourceLine": 38
+  },
+  {
+    "aggregateLine": 555,
+    "source": "exams/pl/certyfikat-polski/B2/2023-02/grammar-bank-tokens.core-data",
+    "sourceLine": 39
+  },
+  {
+    "aggregateLine": 556,
+    "source": "exams/pl/certyfikat-polski/B2/2023-02/grammar-bank-tokens.core-data",
+    "sourceLine": 40
+  },
+  {
+    "aggregateLine": 557,
+    "source": "exams/pl/certyfikat-polski/B2/2023-02/grammar-bank-tokens.core-data",
+    "sourceLine": 41
+  },
+  {
+    "aggregateLine": 558,
+    "source": "exams/pl/certyfikat-polski/B2/2023-02/grammar-bank-tokens.core-data",
+    "sourceLine": 42
+  },
+  {
+    "aggregateLine": 559,
+    "source": "exams/pl/certyfikat-polski/B2/2023-02/grammar-bank-tokens.core-data",
+    "sourceLine": 43
+  },
+  {
+    "aggregateLine": 560,
+    "source": "exams/pl/certyfikat-polski/B2/2023-02/grammar-bank-tokens.core-data",
+    "sourceLine": 44
+  },
+  {
+    "aggregateLine": 561,
+    "source": "exams/pl/certyfikat-polski/B2/2023-02/grammar-bank-tokens.core-data",
+    "sourceLine": 45
+  },
+  {
+    "aggregateLine": 562,
+    "source": "exams/pl/certyfikat-polski/B2/2023-02/grammar-bank-tokens.core-data",
+    "sourceLine": 46
+  },
+  {
+    "aggregateLine": 563,
+    "source": "exams/pl/certyfikat-polski/B2/2023-02/grammar-bank-tokens.core-data",
+    "sourceLine": 47
+  },
+  {
+    "aggregateLine": 564,
+    "source": "exams/pl/certyfikat-polski/B2/2023-02/grammar-bank-tokens.core-data",
+    "sourceLine": 48
+  },
+  {
+    "aggregateLine": 565,
+    "source": "exams/pl/certyfikat-polski/B2/2023-02/grammar-bank-tokens.core-data",
+    "sourceLine": 49
+  },
+  {
+    "aggregateLine": 566,
+    "source": "exams/pl/certyfikat-polski/B2/2023-02/grammar-bank-tokens.core-data",
+    "sourceLine": 50
+  },
+  {
+    "aggregateLine": 567,
+    "source": "exams/pl/certyfikat-polski/B2/2023-02/grammar-bank-tokens.core-data",
+    "sourceLine": 51
+  },
+  {
+    "aggregateLine": 568,
+    "source": "exams/pl/certyfikat-polski/B2/2023-02/grammar-bank-tokens.core-data",
+    "sourceLine": 52
+  },
+  {
+    "aggregateLine": 569,
+    "source": "exams/pl/certyfikat-polski/B2/2023-02/grammar-bank-tokens.core-data",
+    "sourceLine": 53
+  },
+  {
+    "aggregateLine": 570,
+    "source": "exams/pl/certyfikat-polski/B2/2023-02/grammar-bank-tokens.core-data",
+    "sourceLine": 54
+  },
+  {
+    "aggregateLine": 571,
+    "source": "exams/pl/certyfikat-polski/B2/2023-02/grammar-bank-tokens.core-data",
+    "sourceLine": 55
+  },
+  {
+    "aggregateLine": 572,
+    "source": "exams/pl/certyfikat-polski/B2/2023-02/grammar-bank-tokens.core-data",
+    "sourceLine": 56
+  },
+  {
+    "aggregateLine": 573,
+    "source": "exams/pl/certyfikat-polski/B2/2023-02/grammar-bank-tokens.core-data",
+    "sourceLine": 57
+  },
+  {
+    "aggregateLine": 574,
+    "source": "exams/pl/certyfikat-polski/B2/2023-02/grammar-bank-tokens.core-data",
+    "sourceLine": 58
+  },
+  {
+    "aggregateLine": 575,
+    "source": "exams/pl/certyfikat-polski/B2/2023-02/grammar-bank-tokens.core-data",
+    "sourceLine": 59
+  },
+  {
+    "aggregateLine": 576,
+    "source": "exams/pl/certyfikat-polski/B2/2023-02/grammar-bank-tokens.core-data",
+    "sourceLine": 60
+  },
+  {
+    "aggregateLine": 577,
+    "source": "exams/pl/certyfikat-polski/B2/2023-02/grammar-bank-tokens.core-data",
+    "sourceLine": 61
+  },
+  {
+    "aggregateLine": 578,
+    "source": "exams/pl/certyfikat-polski/B2/2023-02/grammar-bank-tokens.core-data",
+    "sourceLine": 62
+  },
+  {
+    "aggregateLine": 579,
+    "source": "exams/pl/certyfikat-polski/B2/2023-02/grammar-bank-tokens.core-data",
+    "sourceLine": 63
+  },
+  {
+    "aggregateLine": 580,
+    "source": "exams/pl/certyfikat-polski/B2/2023-02/grammar-bank-tokens.core-data",
+    "sourceLine": 64
+  },
+  {
+    "aggregateLine": 581,
+    "source": "exams/pl/certyfikat-polski/B2/2023-02/grammar-bank-tokens.core-data",
+    "sourceLine": 65
+  },
+  {
+    "aggregateLine": 582,
+    "source": "exams/pl/certyfikat-polski/B2/2023-02/grammar-bank-tokens.core-data",
+    "sourceLine": 66
+  },
+  {
+    "aggregateLine": 583,
+    "source": "exams/pl/certyfikat-polski/B2/2023-02/grammar-bank-tokens.core-data",
+    "sourceLine": 67
+  },
+  {
+    "aggregateLine": 584,
+    "source": "exams/pl/certyfikat-polski/B2/2023-06/grammar-bank-tokens.core-data",
+    "sourceLine": 2
+  },
+  {
+    "aggregateLine": 585,
+    "source": "exams/pl/certyfikat-polski/B2/2023-06/grammar-bank-tokens.core-data",
+    "sourceLine": 3
+  },
+  {
+    "aggregateLine": 586,
+    "source": "exams/pl/certyfikat-polski/B2/2023-06/grammar-bank-tokens.core-data",
+    "sourceLine": 4
+  },
+  {
+    "aggregateLine": 587,
+    "source": "exams/pl/certyfikat-polski/B2/2023-06/grammar-bank-tokens.core-data",
+    "sourceLine": 5
+  },
+  {
+    "aggregateLine": 588,
+    "source": "exams/pl/certyfikat-polski/B2/2023-06/grammar-bank-tokens.core-data",
+    "sourceLine": 6
+  },
+  {
+    "aggregateLine": 589,
+    "source": "exams/pl/certyfikat-polski/B2/2023-06/grammar-bank-tokens.core-data",
+    "sourceLine": 7
+  },
+  {
+    "aggregateLine": 590,
+    "source": "exams/pl/certyfikat-polski/B2/2023-06/grammar-bank-tokens.core-data",
+    "sourceLine": 8
+  },
+  {
+    "aggregateLine": 591,
+    "source": "exams/pl/certyfikat-polski/B2/2023-06/grammar-bank-tokens.core-data",
+    "sourceLine": 9
+  },
+  {
+    "aggregateLine": 592,
+    "source": "exams/pl/certyfikat-polski/B2/2023-06/grammar-bank-tokens.core-data",
+    "sourceLine": 10
+  },
+  {
+    "aggregateLine": 593,
+    "source": "exams/pl/certyfikat-polski/B2/2023-06/grammar-bank-tokens.core-data",
+    "sourceLine": 11
+  },
+  {
+    "aggregateLine": 594,
+    "source": "exams/pl/certyfikat-polski/B2/2023-06/grammar-bank-tokens.core-data",
+    "sourceLine": 12
+  },
+  {
+    "aggregateLine": 595,
+    "source": "exams/pl/certyfikat-polski/B2/2023-06/grammar-bank-tokens.core-data",
+    "sourceLine": 13
+  },
+  {
+    "aggregateLine": 596,
+    "source": "exams/pl/certyfikat-polski/B2/2023-06/grammar-bank-tokens.core-data",
+    "sourceLine": 14
+  },
+  {
+    "aggregateLine": 597,
+    "source": "exams/pl/certyfikat-polski/B2/2023-06/grammar-bank-tokens.core-data",
+    "sourceLine": 15
+  },
+  {
+    "aggregateLine": 598,
+    "source": "exams/pl/certyfikat-polski/B2/2023-06/grammar-bank-tokens.core-data",
+    "sourceLine": 16
+  },
+  {
+    "aggregateLine": 599,
+    "source": "exams/pl/certyfikat-polski/B2/2023-06/grammar-bank-tokens.core-data",
+    "sourceLine": 17
+  },
+  {
+    "aggregateLine": 600,
+    "source": "exams/pl/certyfikat-polski/B2/2023-06/grammar-bank-tokens.core-data",
+    "sourceLine": 18
+  },
+  {
+    "aggregateLine": 601,
+    "source": "exams/pl/certyfikat-polski/B2/2023-06/grammar-bank-tokens.core-data",
+    "sourceLine": 19
+  },
+  {
+    "aggregateLine": 602,
+    "source": "exams/pl/certyfikat-polski/B2/2023-06/grammar-bank-tokens.core-data",
+    "sourceLine": 20
+  },
+  {
+    "aggregateLine": 603,
+    "source": "exams/pl/certyfikat-polski/B2/2023-06/grammar-bank-tokens.core-data",
+    "sourceLine": 21
+  },
+  {
+    "aggregateLine": 604,
+    "source": "exams/pl/certyfikat-polski/B2/2023-06/grammar-bank-tokens.core-data",
+    "sourceLine": 22
+  },
+  {
+    "aggregateLine": 605,
+    "source": "exams/pl/certyfikat-polski/B2/2023-06/grammar-bank-tokens.core-data",
+    "sourceLine": 23
+  },
+  {
+    "aggregateLine": 606,
+    "source": "exams/pl/certyfikat-polski/B2/2023-06/grammar-bank-tokens.core-data",
+    "sourceLine": 24
+  },
+  {
+    "aggregateLine": 607,
+    "source": "exams/pl/certyfikat-polski/B2/2023-06/grammar-bank-tokens.core-data",
+    "sourceLine": 25
+  },
+  {
+    "aggregateLine": 608,
+    "source": "exams/pl/certyfikat-polski/B2/2023-06/grammar-bank-tokens.core-data",
+    "sourceLine": 26
+  },
+  {
+    "aggregateLine": 609,
+    "source": "exams/pl/certyfikat-polski/B2/2023-06/grammar-bank-tokens.core-data",
+    "sourceLine": 27
+  },
+  {
+    "aggregateLine": 610,
+    "source": "exams/pl/certyfikat-polski/B2/2023-06/grammar-bank-tokens.core-data",
+    "sourceLine": 28
+  },
+  {
+    "aggregateLine": 611,
+    "source": "exams/pl/certyfikat-polski/B2/2023-06/grammar-bank-tokens.core-data",
+    "sourceLine": 29
+  },
+  {
+    "aggregateLine": 612,
+    "source": "exams/pl/certyfikat-polski/B2/2023-06/grammar-bank-tokens.core-data",
+    "sourceLine": 30
+  },
+  {
+    "aggregateLine": 613,
+    "source": "exams/pl/certyfikat-polski/B2/2023-06/grammar-bank-tokens.core-data",
+    "sourceLine": 31
+  },
+  {
+    "aggregateLine": 614,
+    "source": "exams/pl/certyfikat-polski/B2/2023-06/grammar-bank-tokens.core-data",
+    "sourceLine": 32
+  },
+  {
+    "aggregateLine": 615,
+    "source": "exams/pl/certyfikat-polski/B2/2023-06/grammar-bank-tokens.core-data",
+    "sourceLine": 33
+  },
+  {
+    "aggregateLine": 616,
+    "source": "exams/pl/certyfikat-polski/B2/2023-06/grammar-bank-tokens.core-data",
+    "sourceLine": 34
+  },
+  {
+    "aggregateLine": 617,
+    "source": "exams/pl/certyfikat-polski/B2/2023-06/grammar-bank-tokens.core-data",
+    "sourceLine": 35
+  },
+  {
+    "aggregateLine": 618,
+    "source": "exams/pl/certyfikat-polski/B2/2023-06/grammar-bank-tokens.core-data",
+    "sourceLine": 36
+  },
+  {
+    "aggregateLine": 619,
+    "source": "exams/pl/certyfikat-polski/B2/2023-06/grammar-bank-tokens.core-data",
+    "sourceLine": 37
+  },
+  {
+    "aggregateLine": 620,
+    "source": "exams/pl/certyfikat-polski/B2/2023-06/grammar-bank-tokens.core-data",
+    "sourceLine": 38
+  },
+  {
+    "aggregateLine": 621,
+    "source": "exams/pl/certyfikat-polski/B2/2023-06/grammar-bank-tokens.core-data",
+    "sourceLine": 39
+  },
+  {
+    "aggregateLine": 622,
+    "source": "exams/pl/certyfikat-polski/B2/2023-06/grammar-bank-tokens.core-data",
+    "sourceLine": 40
+  },
+  {
+    "aggregateLine": 623,
+    "source": "exams/pl/certyfikat-polski/B2/2023-06/grammar-bank-tokens.core-data",
+    "sourceLine": 41
+  },
+  {
+    "aggregateLine": 624,
+    "source": "exams/pl/certyfikat-polski/B2/2023-06/grammar-bank-tokens.core-data",
+    "sourceLine": 42
+  },
+  {
+    "aggregateLine": 625,
+    "source": "exams/pl/certyfikat-polski/B2/2023-06/grammar-bank-tokens.core-data",
+    "sourceLine": 43
+  },
+  {
+    "aggregateLine": 626,
+    "source": "exams/pl/certyfikat-polski/B2/2023-06/grammar-bank-tokens.core-data",
+    "sourceLine": 44
+  },
+  {
+    "aggregateLine": 627,
+    "source": "exams/pl/certyfikat-polski/B2/2023-06/grammar-bank-tokens.core-data",
+    "sourceLine": 45
+  },
+  {
+    "aggregateLine": 628,
+    "source": "exams/pl/certyfikat-polski/B2/2023-06/grammar-bank-tokens.core-data",
+    "sourceLine": 46
+  },
+  {
+    "aggregateLine": 629,
+    "source": "exams/pl/certyfikat-polski/B2/2023-06/grammar-bank-tokens.core-data",
+    "sourceLine": 47
+  },
+  {
+    "aggregateLine": 630,
+    "source": "exams/pl/certyfikat-polski/B2/2023-06/grammar-bank-tokens.core-data",
+    "sourceLine": 48
+  },
+  {
+    "aggregateLine": 631,
+    "source": "exams/pl/certyfikat-polski/B2/2023-06/grammar-bank-tokens.core-data",
+    "sourceLine": 49
+  },
+  {
+    "aggregateLine": 632,
+    "source": "exams/pl/certyfikat-polski/B2/2023-06/grammar-bank-tokens.core-data",
+    "sourceLine": 50
+  },
+  {
+    "aggregateLine": 633,
+    "source": "exams/pl/certyfikat-polski/B2/2023-06/grammar-bank-tokens.core-data",
+    "sourceLine": 51
+  },
+  {
+    "aggregateLine": 634,
+    "source": "exams/pl/certyfikat-polski/B2/2023-06/grammar-bank-tokens.core-data",
+    "sourceLine": 52
+  },
+  {
+    "aggregateLine": 635,
+    "source": "exams/pl/certyfikat-polski/B2/2023-06/grammar-bank-tokens.core-data",
+    "sourceLine": 53
+  },
+  {
+    "aggregateLine": 636,
+    "source": "exams/pl/certyfikat-polski/B2/2023-06/grammar-bank-tokens.core-data",
+    "sourceLine": 54
+  },
+  {
+    "aggregateLine": 637,
+    "source": "exams/pl/certyfikat-polski/B2/2023-06/grammar-bank-tokens.core-data",
+    "sourceLine": 55
+  },
+  {
+    "aggregateLine": 638,
+    "source": "exams/pl/certyfikat-polski/B2/2023-06/grammar-bank-tokens.core-data",
+    "sourceLine": 56
+  },
+  {
+    "aggregateLine": 639,
+    "source": "exams/pl/certyfikat-polski/B2/2023-06/grammar-bank-tokens.core-data",
+    "sourceLine": 57
+  },
+  {
+    "aggregateLine": 640,
+    "source": "exams/pl/certyfikat-polski/B2/2023-06/grammar-bank-tokens.core-data",
+    "sourceLine": 58
+  },
+  {
+    "aggregateLine": 641,
+    "source": "exams/pl/certyfikat-polski/B2/2023-06/grammar-bank-tokens.core-data",
+    "sourceLine": 59
+  },
+  {
+    "aggregateLine": 642,
+    "source": "exams/pl/certyfikat-polski/B2/2023-06/grammar-bank-tokens.core-data",
+    "sourceLine": 60
+  },
+  {
+    "aggregateLine": 643,
+    "source": "exams/pl/certyfikat-polski/B2/2023-06/grammar-bank-tokens.core-data",
+    "sourceLine": 61
+  },
+  {
+    "aggregateLine": 644,
+    "source": "exams/pl/certyfikat-polski/B2/2023-06/grammar-bank-tokens.core-data",
+    "sourceLine": 62
+  },
+  {
+    "aggregateLine": 645,
+    "source": "exams/pl/certyfikat-polski/B2/2023-06/grammar-bank-tokens.core-data",
+    "sourceLine": 63
+  },
+  {
+    "aggregateLine": 646,
+    "source": "exams/pl/certyfikat-polski/B2/2023-06/grammar-bank-tokens.core-data",
+    "sourceLine": 64
+  },
+  {
+    "aggregateLine": 647,
+    "source": "exams/pl/certyfikat-polski/B2/2023-06/grammar-bank-tokens.core-data",
+    "sourceLine": 65
+  },
+  {
+    "aggregateLine": 648,
+    "source": "exams/pl/certyfikat-polski/B2/2023-06/grammar-bank-tokens.core-data",
+    "sourceLine": 66
+  },
+  {
+    "aggregateLine": 649,
+    "source": "exams/pl/certyfikat-polski/B2/2023-06/grammar-bank-tokens.core-data",
+    "sourceLine": 67
+  },
+  {
+    "aggregateLine": 650,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 2
+  },
+  {
+    "aggregateLine": 651,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 3
+  },
+  {
+    "aggregateLine": 652,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 4
+  },
+  {
+    "aggregateLine": 653,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 5
+  },
+  {
+    "aggregateLine": 654,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 6
+  },
+  {
+    "aggregateLine": 655,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 7
+  },
+  {
+    "aggregateLine": 656,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 8
+  },
+  {
+    "aggregateLine": 657,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 9
+  },
+  {
+    "aggregateLine": 658,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 10
+  },
+  {
+    "aggregateLine": 659,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 11
+  },
+  {
+    "aggregateLine": 660,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 12
+  },
+  {
+    "aggregateLine": 661,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 13
+  },
+  {
+    "aggregateLine": 662,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 14
+  },
+  {
+    "aggregateLine": 663,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 15
+  },
+  {
+    "aggregateLine": 664,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 16
+  },
+  {
+    "aggregateLine": 665,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 17
+  },
+  {
+    "aggregateLine": 666,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 18
+  },
+  {
+    "aggregateLine": 667,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 19
+  },
+  {
+    "aggregateLine": 668,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 20
+  },
+  {
+    "aggregateLine": 669,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 21
+  },
+  {
+    "aggregateLine": 670,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 22
+  },
+  {
+    "aggregateLine": 671,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 23
+  },
+  {
+    "aggregateLine": 672,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 24
+  },
+  {
+    "aggregateLine": 673,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 25
+  },
+  {
+    "aggregateLine": 674,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 26
+  },
+  {
+    "aggregateLine": 675,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 27
+  },
+  {
+    "aggregateLine": 676,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 28
+  },
+  {
+    "aggregateLine": 677,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 29
+  },
+  {
+    "aggregateLine": 678,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 30
+  },
+  {
+    "aggregateLine": 679,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 31
+  },
+  {
+    "aggregateLine": 680,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 32
+  },
+  {
+    "aggregateLine": 681,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 33
+  },
+  {
+    "aggregateLine": 682,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 34
+  },
+  {
+    "aggregateLine": 683,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 35
+  },
+  {
+    "aggregateLine": 684,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 36
+  },
+  {
+    "aggregateLine": 685,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 37
+  },
+  {
+    "aggregateLine": 686,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 38
+  },
+  {
+    "aggregateLine": 687,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 39
+  },
+  {
+    "aggregateLine": 688,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 40
+  },
+  {
+    "aggregateLine": 689,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 41
+  },
+  {
+    "aggregateLine": 690,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 42
+  },
+  {
+    "aggregateLine": 691,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 43
+  },
+  {
+    "aggregateLine": 692,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 44
+  },
+  {
+    "aggregateLine": 693,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 45
+  },
+  {
+    "aggregateLine": 694,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 46
+  },
+  {
+    "aggregateLine": 695,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 47
+  },
+  {
+    "aggregateLine": 696,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 48
+  },
+  {
+    "aggregateLine": 697,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 49
+  },
+  {
+    "aggregateLine": 698,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 50
+  },
+  {
+    "aggregateLine": 699,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 51
+  },
+  {
+    "aggregateLine": 700,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 52
+  },
+  {
+    "aggregateLine": 701,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 53
+  },
+  {
+    "aggregateLine": 702,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 54
+  },
+  {
+    "aggregateLine": 703,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 55
+  },
+  {
+    "aggregateLine": 704,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 56
+  },
+  {
+    "aggregateLine": 705,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 57
+  },
+  {
+    "aggregateLine": 706,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 58
+  },
+  {
+    "aggregateLine": 707,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 59
+  },
+  {
+    "aggregateLine": 708,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 60
+  },
+  {
+    "aggregateLine": 709,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 61
+  },
+  {
+    "aggregateLine": 710,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 62
+  },
+  {
+    "aggregateLine": 711,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 63
+  },
+  {
+    "aggregateLine": 712,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 64
+  },
+  {
+    "aggregateLine": 713,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 65
+  },
+  {
+    "aggregateLine": 714,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 66
+  },
+  {
+    "aggregateLine": 715,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 67
+  },
+  {
+    "aggregateLine": 716,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 68
+  },
+  {
+    "aggregateLine": 717,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 69
+  },
+  {
+    "aggregateLine": 718,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 70
+  },
+  {
+    "aggregateLine": 719,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 71
+  },
+  {
+    "aggregateLine": 720,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 72
+  },
+  {
+    "aggregateLine": 721,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 73
+  },
+  {
+    "aggregateLine": 722,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 74
+  },
+  {
+    "aggregateLine": 723,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 75
+  },
+  {
+    "aggregateLine": 724,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 76
+  },
+  {
+    "aggregateLine": 725,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 77
+  },
+  {
+    "aggregateLine": 726,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 78
+  },
+  {
+    "aggregateLine": 727,
+    "source": "exams/pl/certyfikat-polski/B2/2024-02/grammar-bank-tokens.core-data",
+    "sourceLine": 79
+  },
+  {
+    "aggregateLine": 728,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 2
+  },
+  {
+    "aggregateLine": 729,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 3
+  },
+  {
+    "aggregateLine": 730,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 4
+  },
+  {
+    "aggregateLine": 731,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 5
+  },
+  {
+    "aggregateLine": 732,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 6
+  },
+  {
+    "aggregateLine": 733,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 7
+  },
+  {
+    "aggregateLine": 734,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 8
+  },
+  {
+    "aggregateLine": 735,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 9
+  },
+  {
+    "aggregateLine": 736,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 10
+  },
+  {
+    "aggregateLine": 737,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 11
+  },
+  {
+    "aggregateLine": 738,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 12
+  },
+  {
+    "aggregateLine": 739,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 13
+  },
+  {
+    "aggregateLine": 740,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 14
+  },
+  {
+    "aggregateLine": 741,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 15
+  },
+  {
+    "aggregateLine": 742,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 16
+  },
+  {
+    "aggregateLine": 743,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 17
+  },
+  {
+    "aggregateLine": 744,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 18
+  },
+  {
+    "aggregateLine": 745,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 19
+  },
+  {
+    "aggregateLine": 746,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 20
+  },
+  {
+    "aggregateLine": 747,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 21
+  },
+  {
+    "aggregateLine": 748,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 22
+  },
+  {
+    "aggregateLine": 749,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 23
+  },
+  {
+    "aggregateLine": 750,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 24
+  },
+  {
+    "aggregateLine": 751,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 25
+  },
+  {
+    "aggregateLine": 752,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 26
+  },
+  {
+    "aggregateLine": 753,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 27
+  },
+  {
+    "aggregateLine": 754,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 28
+  },
+  {
+    "aggregateLine": 755,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 29
+  },
+  {
+    "aggregateLine": 756,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 30
+  },
+  {
+    "aggregateLine": 757,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 31
+  },
+  {
+    "aggregateLine": 758,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 32
+  },
+  {
+    "aggregateLine": 759,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 33
+  },
+  {
+    "aggregateLine": 760,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 34
+  },
+  {
+    "aggregateLine": 761,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 35
+  },
+  {
+    "aggregateLine": 762,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 36
+  },
+  {
+    "aggregateLine": 763,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 37
+  },
+  {
+    "aggregateLine": 764,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 38
+  },
+  {
+    "aggregateLine": 765,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 39
+  },
+  {
+    "aggregateLine": 766,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 40
+  },
+  {
+    "aggregateLine": 767,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 41
+  },
+  {
+    "aggregateLine": 768,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 42
+  },
+  {
+    "aggregateLine": 769,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 43
+  },
+  {
+    "aggregateLine": 770,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 44
+  },
+  {
+    "aggregateLine": 771,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 45
+  },
+  {
+    "aggregateLine": 772,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 46
+  },
+  {
+    "aggregateLine": 773,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 47
+  },
+  {
+    "aggregateLine": 774,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 48
+  },
+  {
+    "aggregateLine": 775,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 49
+  },
+  {
+    "aggregateLine": 776,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 50
+  },
+  {
+    "aggregateLine": 777,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 51
+  },
+  {
+    "aggregateLine": 778,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 52
+  },
+  {
+    "aggregateLine": 779,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 53
+  },
+  {
+    "aggregateLine": 780,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 54
+  },
+  {
+    "aggregateLine": 781,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 55
+  },
+  {
+    "aggregateLine": 782,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 56
+  },
+  {
+    "aggregateLine": 783,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 57
+  },
+  {
+    "aggregateLine": 784,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 58
+  },
+  {
+    "aggregateLine": 785,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 59
+  },
+  {
+    "aggregateLine": 786,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 60
+  },
+  {
+    "aggregateLine": 787,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 61
+  },
+  {
+    "aggregateLine": 788,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 62
+  },
+  {
+    "aggregateLine": 789,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 63
+  },
+  {
+    "aggregateLine": 790,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 64
+  },
+  {
+    "aggregateLine": 791,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 65
+  },
+  {
+    "aggregateLine": 792,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 66
+  },
+  {
+    "aggregateLine": 793,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 67
+  },
+  {
+    "aggregateLine": 794,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 68
+  },
+  {
+    "aggregateLine": 795,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 69
+  },
+  {
+    "aggregateLine": 796,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 70
+  },
+  {
+    "aggregateLine": 797,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 71
+  },
+  {
+    "aggregateLine": 798,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 72
+  },
+  {
+    "aggregateLine": 799,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 73
+  },
+  {
+    "aggregateLine": 800,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 74
+  },
+  {
+    "aggregateLine": 801,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 75
+  },
+  {
+    "aggregateLine": 802,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 76
+  },
+  {
+    "aggregateLine": 803,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 77
+  },
+  {
+    "aggregateLine": 804,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 78
+  },
+  {
+    "aggregateLine": 805,
+    "source": "exams/pl/certyfikat-polski/B2/2024-06/grammar-bank-tokens.core-data",
+    "sourceLine": 79
+  },
+  {
+    "aggregateLine": 806,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 2
+  },
+  {
+    "aggregateLine": 807,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 3
+  },
+  {
+    "aggregateLine": 808,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 4
+  },
+  {
+    "aggregateLine": 809,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 5
+  },
+  {
+    "aggregateLine": 810,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 6
+  },
+  {
+    "aggregateLine": 811,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 7
+  },
+  {
+    "aggregateLine": 812,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 8
+  },
+  {
+    "aggregateLine": 813,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 9
+  },
+  {
+    "aggregateLine": 814,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 10
+  },
+  {
+    "aggregateLine": 815,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 11
+  },
+  {
+    "aggregateLine": 816,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 12
+  },
+  {
+    "aggregateLine": 817,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 13
+  },
+  {
+    "aggregateLine": 818,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 14
+  },
+  {
+    "aggregateLine": 819,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 15
+  },
+  {
+    "aggregateLine": 820,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 16
+  },
+  {
+    "aggregateLine": 821,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 17
+  },
+  {
+    "aggregateLine": 822,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 18
+  },
+  {
+    "aggregateLine": 823,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 19
+  },
+  {
+    "aggregateLine": 824,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 20
+  },
+  {
+    "aggregateLine": 825,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 21
+  },
+  {
+    "aggregateLine": 826,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 22
+  },
+  {
+    "aggregateLine": 827,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 23
+  },
+  {
+    "aggregateLine": 828,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 24
+  },
+  {
+    "aggregateLine": 829,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 25
+  },
+  {
+    "aggregateLine": 830,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 26
+  },
+  {
+    "aggregateLine": 831,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 27
+  },
+  {
+    "aggregateLine": 832,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 28
+  },
+  {
+    "aggregateLine": 833,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 29
+  },
+  {
+    "aggregateLine": 834,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 30
+  },
+  {
+    "aggregateLine": 835,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 31
+  },
+  {
+    "aggregateLine": 836,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 32
+  },
+  {
+    "aggregateLine": 837,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 33
+  },
+  {
+    "aggregateLine": 838,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 34
+  },
+  {
+    "aggregateLine": 839,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 35
+  },
+  {
+    "aggregateLine": 840,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 36
+  },
+  {
+    "aggregateLine": 841,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 37
+  },
+  {
+    "aggregateLine": 842,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 38
+  },
+  {
+    "aggregateLine": 843,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 39
+  },
+  {
+    "aggregateLine": 844,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 40
+  },
+  {
+    "aggregateLine": 845,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 41
+  },
+  {
+    "aggregateLine": 846,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 42
+  },
+  {
+    "aggregateLine": 847,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 43
+  },
+  {
+    "aggregateLine": 848,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 44
+  },
+  {
+    "aggregateLine": 849,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 45
+  },
+  {
+    "aggregateLine": 850,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 46
+  },
+  {
+    "aggregateLine": 851,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 47
+  },
+  {
+    "aggregateLine": 852,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 48
+  },
+  {
+    "aggregateLine": 853,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 49
+  },
+  {
+    "aggregateLine": 854,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 50
+  },
+  {
+    "aggregateLine": 855,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 51
+  },
+  {
+    "aggregateLine": 856,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 52
+  },
+  {
+    "aggregateLine": 857,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 53
+  },
+  {
+    "aggregateLine": 858,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 54
+  },
+  {
+    "aggregateLine": 859,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 55
+  },
+  {
+    "aggregateLine": 860,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 56
+  },
+  {
+    "aggregateLine": 861,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 57
+  },
+  {
+    "aggregateLine": 862,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 58
+  },
+  {
+    "aggregateLine": 863,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 59
+  },
+  {
+    "aggregateLine": 864,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 60
+  },
+  {
+    "aggregateLine": 865,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 61
+  },
+  {
+    "aggregateLine": 866,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 62
+  },
+  {
+    "aggregateLine": 867,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 63
+  },
+  {
+    "aggregateLine": 868,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 64
+  },
+  {
+    "aggregateLine": 869,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 65
+  },
+  {
+    "aggregateLine": 870,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 66
+  },
+  {
+    "aggregateLine": 871,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 67
+  },
+  {
+    "aggregateLine": 872,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 68
+  },
+  {
+    "aggregateLine": 873,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 69
+  },
+  {
+    "aggregateLine": 874,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 70
+  },
+  {
+    "aggregateLine": 875,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 71
+  },
+  {
+    "aggregateLine": 876,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 72
+  },
+  {
+    "aggregateLine": 877,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 73
+  },
+  {
+    "aggregateLine": 878,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 74
+  },
+  {
+    "aggregateLine": 879,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 75
+  },
+  {
+    "aggregateLine": 880,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 76
+  },
+  {
+    "aggregateLine": 881,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 77
+  },
+  {
+    "aggregateLine": 882,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 78
+  },
+  {
+    "aggregateLine": 883,
+    "source": "exams/pl/certyfikat-polski/C1/2022-03/grammar-bank-tokens.core-data",
+    "sourceLine": 79
+  },
+  {
+    "aggregateLine": 884,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 2
+  },
+  {
+    "aggregateLine": 885,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 3
+  },
+  {
+    "aggregateLine": 886,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 4
+  },
+  {
+    "aggregateLine": 887,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 5
+  },
+  {
+    "aggregateLine": 888,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 6
+  },
+  {
+    "aggregateLine": 889,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 7
+  },
+  {
+    "aggregateLine": 890,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 8
+  },
+  {
+    "aggregateLine": 891,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 9
+  },
+  {
+    "aggregateLine": 892,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 10
+  },
+  {
+    "aggregateLine": 893,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 11
+  },
+  {
+    "aggregateLine": 894,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 12
+  },
+  {
+    "aggregateLine": 895,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 13
+  },
+  {
+    "aggregateLine": 896,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 14
+  },
+  {
+    "aggregateLine": 897,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 15
+  },
+  {
+    "aggregateLine": 898,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 16
+  },
+  {
+    "aggregateLine": 899,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 17
+  },
+  {
+    "aggregateLine": 900,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 18
+  },
+  {
+    "aggregateLine": 901,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 19
+  },
+  {
+    "aggregateLine": 902,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 20
+  },
+  {
+    "aggregateLine": 903,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 21
+  },
+  {
+    "aggregateLine": 904,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 22
+  },
+  {
+    "aggregateLine": 905,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 23
+  },
+  {
+    "aggregateLine": 906,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 24
+  },
+  {
+    "aggregateLine": 907,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 25
+  },
+  {
+    "aggregateLine": 908,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 26
+  },
+  {
+    "aggregateLine": 909,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 27
+  },
+  {
+    "aggregateLine": 910,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 28
+  },
+  {
+    "aggregateLine": 911,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 29
+  },
+  {
+    "aggregateLine": 912,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 30
+  },
+  {
+    "aggregateLine": 913,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 31
+  },
+  {
+    "aggregateLine": 914,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 32
+  },
+  {
+    "aggregateLine": 915,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 33
+  },
+  {
+    "aggregateLine": 916,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 34
+  },
+  {
+    "aggregateLine": 917,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 35
+  },
+  {
+    "aggregateLine": 918,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 36
+  },
+  {
+    "aggregateLine": 919,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 37
+  },
+  {
+    "aggregateLine": 920,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 38
+  },
+  {
+    "aggregateLine": 921,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 39
+  },
+  {
+    "aggregateLine": 922,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 40
+  },
+  {
+    "aggregateLine": 923,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 41
+  },
+  {
+    "aggregateLine": 924,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 42
+  },
+  {
+    "aggregateLine": 925,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 43
+  },
+  {
+    "aggregateLine": 926,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 44
+  },
+  {
+    "aggregateLine": 927,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 45
+  },
+  {
+    "aggregateLine": 928,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 46
+  },
+  {
+    "aggregateLine": 929,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 47
+  },
+  {
+    "aggregateLine": 930,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 48
+  },
+  {
+    "aggregateLine": 931,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 49
+  },
+  {
+    "aggregateLine": 932,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 50
+  },
+  {
+    "aggregateLine": 933,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 51
+  },
+  {
+    "aggregateLine": 934,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 52
+  },
+  {
+    "aggregateLine": 935,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 53
+  },
+  {
+    "aggregateLine": 936,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 54
+  },
+  {
+    "aggregateLine": 937,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 55
+  },
+  {
+    "aggregateLine": 938,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 56
+  },
+  {
+    "aggregateLine": 939,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 57
+  },
+  {
+    "aggregateLine": 940,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 58
+  },
+  {
+    "aggregateLine": 941,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 59
+  },
+  {
+    "aggregateLine": 942,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 60
+  },
+  {
+    "aggregateLine": 943,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 61
+  },
+  {
+    "aggregateLine": 944,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 62
+  },
+  {
+    "aggregateLine": 945,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 63
+  },
+  {
+    "aggregateLine": 946,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 64
+  },
+  {
+    "aggregateLine": 947,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 65
+  },
+  {
+    "aggregateLine": 948,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 66
+  },
+  {
+    "aggregateLine": 949,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 67
+  },
+  {
+    "aggregateLine": 950,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 68
+  },
+  {
+    "aggregateLine": 951,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 69
+  },
+  {
+    "aggregateLine": 952,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 70
+  },
+  {
+    "aggregateLine": 953,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 71
+  },
+  {
+    "aggregateLine": 954,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 72
+  },
+  {
+    "aggregateLine": 955,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 73
+  },
+  {
+    "aggregateLine": 956,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 74
+  },
+  {
+    "aggregateLine": 957,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 75
+  },
+  {
+    "aggregateLine": 958,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 76
+  },
+  {
+    "aggregateLine": 959,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 77
+  },
+  {
+    "aggregateLine": 960,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 78
+  },
+  {
+    "aggregateLine": 961,
+    "source": "exams/pl/certyfikat-polski/C1/2022-11/grammar-bank-tokens.core-data",
+    "sourceLine": 79
+  },
+  {
+    "aggregateLine": 962,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 2
+  },
+  {
+    "aggregateLine": 963,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 3
+  },
+  {
+    "aggregateLine": 964,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 4
+  },
+  {
+    "aggregateLine": 965,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 5
+  },
+  {
+    "aggregateLine": 966,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 6
+  },
+  {
+    "aggregateLine": 967,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 7
+  },
+  {
+    "aggregateLine": 968,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 8
+  },
+  {
+    "aggregateLine": 969,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 9
+  },
+  {
+    "aggregateLine": 970,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 10
+  },
+  {
+    "aggregateLine": 971,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 11
+  },
+  {
+    "aggregateLine": 972,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 12
+  },
+  {
+    "aggregateLine": 973,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 13
+  },
+  {
+    "aggregateLine": 974,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 14
+  },
+  {
+    "aggregateLine": 975,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 15
+  },
+  {
+    "aggregateLine": 976,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 16
+  },
+  {
+    "aggregateLine": 977,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 17
+  },
+  {
+    "aggregateLine": 978,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 18
+  },
+  {
+    "aggregateLine": 979,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 19
+  },
+  {
+    "aggregateLine": 980,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 20
+  },
+  {
+    "aggregateLine": 981,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 21
+  },
+  {
+    "aggregateLine": 982,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 22
+  },
+  {
+    "aggregateLine": 983,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 23
+  },
+  {
+    "aggregateLine": 984,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 24
+  },
+  {
+    "aggregateLine": 985,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 25
+  },
+  {
+    "aggregateLine": 986,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 26
+  },
+  {
+    "aggregateLine": 987,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 27
+  },
+  {
+    "aggregateLine": 988,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 28
+  },
+  {
+    "aggregateLine": 989,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 29
+  },
+  {
+    "aggregateLine": 990,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 30
+  },
+  {
+    "aggregateLine": 991,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 31
+  },
+  {
+    "aggregateLine": 992,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 32
+  },
+  {
+    "aggregateLine": 993,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 33
+  },
+  {
+    "aggregateLine": 994,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 34
+  },
+  {
+    "aggregateLine": 995,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 35
+  },
+  {
+    "aggregateLine": 996,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 36
+  },
+  {
+    "aggregateLine": 997,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 37
+  },
+  {
+    "aggregateLine": 998,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 38
+  },
+  {
+    "aggregateLine": 999,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 39
+  },
+  {
+    "aggregateLine": 1000,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 40
+  },
+  {
+    "aggregateLine": 1001,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 41
+  },
+  {
+    "aggregateLine": 1002,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 42
+  },
+  {
+    "aggregateLine": 1003,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 43
+  },
+  {
+    "aggregateLine": 1004,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 44
+  },
+  {
+    "aggregateLine": 1005,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 45
+  },
+  {
+    "aggregateLine": 1006,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 46
+  },
+  {
+    "aggregateLine": 1007,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 47
+  },
+  {
+    "aggregateLine": 1008,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 48
+  },
+  {
+    "aggregateLine": 1009,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 49
+  },
+  {
+    "aggregateLine": 1010,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 50
+  },
+  {
+    "aggregateLine": 1011,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 51
+  },
+  {
+    "aggregateLine": 1012,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 52
+  },
+  {
+    "aggregateLine": 1013,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 53
+  },
+  {
+    "aggregateLine": 1014,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 54
+  },
+  {
+    "aggregateLine": 1015,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 55
+  },
+  {
+    "aggregateLine": 1016,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 56
+  },
+  {
+    "aggregateLine": 1017,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 57
+  },
+  {
+    "aggregateLine": 1018,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 58
+  },
+  {
+    "aggregateLine": 1019,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 59
+  },
+  {
+    "aggregateLine": 1020,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 60
+  },
+  {
+    "aggregateLine": 1021,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 61
+  },
+  {
+    "aggregateLine": 1022,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 62
+  },
+  {
+    "aggregateLine": 1023,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 63
+  },
+  {
+    "aggregateLine": 1024,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 64
+  },
+  {
+    "aggregateLine": 1025,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 65
+  },
+  {
+    "aggregateLine": 1026,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 66
+  },
+  {
+    "aggregateLine": 1027,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 67
+  },
+  {
+    "aggregateLine": 1028,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 68
+  },
+  {
+    "aggregateLine": 1029,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 69
+  },
+  {
+    "aggregateLine": 1030,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 70
+  },
+  {
+    "aggregateLine": 1031,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 71
+  },
+  {
+    "aggregateLine": 1032,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 72
+  },
+  {
+    "aggregateLine": 1033,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 73
+  },
+  {
+    "aggregateLine": 1034,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 74
+  },
+  {
+    "aggregateLine": 1035,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 75
+  },
+  {
+    "aggregateLine": 1036,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 76
+  },
+  {
+    "aggregateLine": 1037,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 77
+  },
+  {
+    "aggregateLine": 1038,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 78
+  },
+  {
+    "aggregateLine": 1039,
+    "source": "exams/pl/certyfikat-polski/C1/2023-04/grammar-bank-tokens.core-data",
+    "sourceLine": 79
+  },
+  {
+    "aggregateLine": 1040,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 2
+  },
+  {
+    "aggregateLine": 1041,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 3
+  },
+  {
+    "aggregateLine": 1042,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 4
+  },
+  {
+    "aggregateLine": 1043,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 5
+  },
+  {
+    "aggregateLine": 1044,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 6
+  },
+  {
+    "aggregateLine": 1045,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 7
+  },
+  {
+    "aggregateLine": 1046,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 8
+  },
+  {
+    "aggregateLine": 1047,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 9
+  },
+  {
+    "aggregateLine": 1048,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 10
+  },
+  {
+    "aggregateLine": 1049,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 11
+  },
+  {
+    "aggregateLine": 1050,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 12
+  },
+  {
+    "aggregateLine": 1051,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 13
+  },
+  {
+    "aggregateLine": 1052,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 14
+  },
+  {
+    "aggregateLine": 1053,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 15
+  },
+  {
+    "aggregateLine": 1054,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 16
+  },
+  {
+    "aggregateLine": 1055,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 17
+  },
+  {
+    "aggregateLine": 1056,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 18
+  },
+  {
+    "aggregateLine": 1057,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 19
+  },
+  {
+    "aggregateLine": 1058,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 20
+  },
+  {
+    "aggregateLine": 1059,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 21
+  },
+  {
+    "aggregateLine": 1060,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 22
+  },
+  {
+    "aggregateLine": 1061,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 23
+  },
+  {
+    "aggregateLine": 1062,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 24
+  },
+  {
+    "aggregateLine": 1063,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 25
+  },
+  {
+    "aggregateLine": 1064,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 26
+  },
+  {
+    "aggregateLine": 1065,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 27
+  },
+  {
+    "aggregateLine": 1066,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 28
+  },
+  {
+    "aggregateLine": 1067,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 29
+  },
+  {
+    "aggregateLine": 1068,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 30
+  },
+  {
+    "aggregateLine": 1069,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 31
+  },
+  {
+    "aggregateLine": 1070,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 32
+  },
+  {
+    "aggregateLine": 1071,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 33
+  },
+  {
+    "aggregateLine": 1072,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 34
+  },
+  {
+    "aggregateLine": 1073,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 35
+  },
+  {
+    "aggregateLine": 1074,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 36
+  },
+  {
+    "aggregateLine": 1075,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 37
+  },
+  {
+    "aggregateLine": 1076,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 38
+  },
+  {
+    "aggregateLine": 1077,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 39
+  },
+  {
+    "aggregateLine": 1078,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 40
+  },
+  {
+    "aggregateLine": 1079,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 41
+  },
+  {
+    "aggregateLine": 1080,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 42
+  },
+  {
+    "aggregateLine": 1081,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 43
+  },
+  {
+    "aggregateLine": 1082,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 44
+  },
+  {
+    "aggregateLine": 1083,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 45
+  },
+  {
+    "aggregateLine": 1084,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 46
+  },
+  {
+    "aggregateLine": 1085,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 47
+  },
+  {
+    "aggregateLine": 1086,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 48
+  },
+  {
+    "aggregateLine": 1087,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 49
+  },
+  {
+    "aggregateLine": 1088,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 50
+  },
+  {
+    "aggregateLine": 1089,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 51
+  },
+  {
+    "aggregateLine": 1090,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 52
+  },
+  {
+    "aggregateLine": 1091,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 53
+  },
+  {
+    "aggregateLine": 1092,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 54
+  },
+  {
+    "aggregateLine": 1093,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 55
+  },
+  {
+    "aggregateLine": 1094,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 56
+  },
+  {
+    "aggregateLine": 1095,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 57
+  },
+  {
+    "aggregateLine": 1096,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 58
+  },
+  {
+    "aggregateLine": 1097,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 59
+  },
+  {
+    "aggregateLine": 1098,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 60
+  },
+  {
+    "aggregateLine": 1099,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 61
+  },
+  {
+    "aggregateLine": 1100,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 62
+  },
+  {
+    "aggregateLine": 1101,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 63
+  },
+  {
+    "aggregateLine": 1102,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 64
+  },
+  {
+    "aggregateLine": 1103,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 65
+  },
+  {
+    "aggregateLine": 1104,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 66
+  },
+  {
+    "aggregateLine": 1105,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 67
+  },
+  {
+    "aggregateLine": 1106,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 68
+  },
+  {
+    "aggregateLine": 1107,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 69
+  },
+  {
+    "aggregateLine": 1108,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 70
+  },
+  {
+    "aggregateLine": 1109,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 71
+  },
+  {
+    "aggregateLine": 1110,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 72
+  },
+  {
+    "aggregateLine": 1111,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 73
+  },
+  {
+    "aggregateLine": 1112,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 74
+  },
+  {
+    "aggregateLine": 1113,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 75
+  },
+  {
+    "aggregateLine": 1114,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 76
+  },
+  {
+    "aggregateLine": 1115,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 77
+  },
+  {
+    "aggregateLine": 1116,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 78
+  },
+  {
+    "aggregateLine": 1117,
+    "source": "exams/pl/certyfikat-polski/C1/2023-11/grammar-bank-tokens.core-data",
+    "sourceLine": 79
+  },
+  {
+    "aggregateLine": 1118,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 2
+  },
+  {
+    "aggregateLine": 1119,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 3
+  },
+  {
+    "aggregateLine": 1120,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 4
+  },
+  {
+    "aggregateLine": 1121,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 5
+  },
+  {
+    "aggregateLine": 1122,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 6
+  },
+  {
+    "aggregateLine": 1123,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 7
+  },
+  {
+    "aggregateLine": 1124,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 8
+  },
+  {
+    "aggregateLine": 1125,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 9
+  },
+  {
+    "aggregateLine": 1126,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 10
+  },
+  {
+    "aggregateLine": 1127,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 11
+  },
+  {
+    "aggregateLine": 1128,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 12
+  },
+  {
+    "aggregateLine": 1129,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 13
+  },
+  {
+    "aggregateLine": 1130,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 14
+  },
+  {
+    "aggregateLine": 1131,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 15
+  },
+  {
+    "aggregateLine": 1132,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 16
+  },
+  {
+    "aggregateLine": 1133,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 17
+  },
+  {
+    "aggregateLine": 1134,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 18
+  },
+  {
+    "aggregateLine": 1135,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 19
+  },
+  {
+    "aggregateLine": 1136,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 20
+  },
+  {
+    "aggregateLine": 1137,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 21
+  },
+  {
+    "aggregateLine": 1138,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 22
+  },
+  {
+    "aggregateLine": 1139,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 23
+  },
+  {
+    "aggregateLine": 1140,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 24
+  },
+  {
+    "aggregateLine": 1141,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 25
+  },
+  {
+    "aggregateLine": 1142,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 26
+  },
+  {
+    "aggregateLine": 1143,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 27
+  },
+  {
+    "aggregateLine": 1144,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 28
+  },
+  {
+    "aggregateLine": 1145,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 29
+  },
+  {
+    "aggregateLine": 1146,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 30
+  },
+  {
+    "aggregateLine": 1147,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 31
+  },
+  {
+    "aggregateLine": 1148,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 32
+  },
+  {
+    "aggregateLine": 1149,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 33
+  },
+  {
+    "aggregateLine": 1150,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 34
+  },
+  {
+    "aggregateLine": 1151,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 35
+  },
+  {
+    "aggregateLine": 1152,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 36
+  },
+  {
+    "aggregateLine": 1153,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 37
+  },
+  {
+    "aggregateLine": 1154,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 38
+  },
+  {
+    "aggregateLine": 1155,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 39
+  },
+  {
+    "aggregateLine": 1156,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 40
+  },
+  {
+    "aggregateLine": 1157,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 41
+  },
+  {
+    "aggregateLine": 1158,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 42
+  },
+  {
+    "aggregateLine": 1159,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 43
+  },
+  {
+    "aggregateLine": 1160,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 44
+  },
+  {
+    "aggregateLine": 1161,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 45
+  },
+  {
+    "aggregateLine": 1162,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 46
+  },
+  {
+    "aggregateLine": 1163,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 47
+  },
+  {
+    "aggregateLine": 1164,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 48
+  },
+  {
+    "aggregateLine": 1165,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 49
+  },
+  {
+    "aggregateLine": 1166,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 50
+  },
+  {
+    "aggregateLine": 1167,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 51
+  },
+  {
+    "aggregateLine": 1168,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 52
+  },
+  {
+    "aggregateLine": 1169,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 53
+  },
+  {
+    "aggregateLine": 1170,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 54
+  },
+  {
+    "aggregateLine": 1171,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 55
+  },
+  {
+    "aggregateLine": 1172,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 56
+  },
+  {
+    "aggregateLine": 1173,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 57
+  },
+  {
+    "aggregateLine": 1174,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 58
+  },
+  {
+    "aggregateLine": 1175,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 59
+  },
+  {
+    "aggregateLine": 1176,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 60
+  },
+  {
+    "aggregateLine": 1177,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 61
+  },
+  {
+    "aggregateLine": 1178,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 62
+  },
+  {
+    "aggregateLine": 1179,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 63
+  },
+  {
+    "aggregateLine": 1180,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 64
+  },
+  {
+    "aggregateLine": 1181,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 65
+  },
+  {
+    "aggregateLine": 1182,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 66
+  },
+  {
+    "aggregateLine": 1183,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 67
+  },
+  {
+    "aggregateLine": 1184,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 68
+  },
+  {
+    "aggregateLine": 1185,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 69
+  },
+  {
+    "aggregateLine": 1186,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 70
+  },
+  {
+    "aggregateLine": 1187,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 71
+  },
+  {
+    "aggregateLine": 1188,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 72
+  },
+  {
+    "aggregateLine": 1189,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 73
+  },
+  {
+    "aggregateLine": 1190,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 74
+  },
+  {
+    "aggregateLine": 1191,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 75
+  },
+  {
+    "aggregateLine": 1192,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 76
+  },
+  {
+    "aggregateLine": 1193,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 77
+  },
+  {
+    "aggregateLine": 1194,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 78
+  },
+  {
+    "aggregateLine": 1195,
+    "source": "exams/pl/certyfikat-polski/C1/2024-04/grammar-bank-tokens.core-data",
+    "sourceLine": 79
   }
 ]

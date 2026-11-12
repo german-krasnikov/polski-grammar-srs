@@ -2070,3 +2070,3454 @@ LISTENING_QUESTION {
   creditPerCorrectQuarter: 2
   gradingMode: open_manual
 }
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l1-q1
+  taskRef: certyfikat-polski-B2-2022-02-listen-1
+  questionType: multiple_choice
+  questionText: "Tematem wiadomości"
+  options: "a) są problemy rolników wynikające z warunków pogodowych.|b) są ubezpieczenia gospodarstw rolnych.|c) jest nowy program wsparcia finansowego dla rolników."
+  correctAnswer: "a) są problemy rolników wynikające z warunków pogodowych."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l1-q2
+  taskRef: certyfikat-polski-B2-2022-02-listen-1
+  questionType: multiple_choice
+  questionText: "W ostatnich latach"
+  options: "a) wzrosła liczba rolników ubiegających się o pomoc finansową.|b) nie każdy rolnik uzyskał rekompensatę z firmy ubezpieczeniowej.|c) dotacje finansowe dla rolników zostały ograniczone."
+  correctAnswer: "b) nie każdy rolnik uzyskał rekompensatę z firmy ubezpieczeniowej."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l1-q3
+  taskRef: certyfikat-polski-B2-2022-02-listen-1
+  questionType: multiple_choice
+  questionText: "Rozmowa dotyczy"
+  options: "a) aktywności fizycznej podczas egzotycznych podróży.|b) profesjonalnego podejścia do uprawiania sportu.|c) poszukiwania własnych sposobów na regenerację."
+  correctAnswer: "c) poszukiwania własnych sposobów na regenerację."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l1-q4
+  taskRef: certyfikat-polski-B2-2022-02-listen-1
+  questionType: multiple_choice
+  questionText: Kobieta
+  options: "a) skarży się, że bieganie jest bardzo wyczerpujące.|b) narzeka, że podczas uprawiania sportu trudno jej myśleć.|c) uważa, że bieganie pozwala jej przezwyciężyć własną słabość."
+  correctAnswer: "c) uważa, że bieganie pozwala jej przezwyciężyć własną słabość."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l1-q5
+  taskRef: certyfikat-polski-B2-2022-02-listen-1
+  questionType: multiple_choice
+  questionText: "Jedna z kobiet martwi się, ponieważ jej syn"
+  options: "a) ma przed nią tajemnice.|b) od wczoraj nie wrócił do domu.|c) zachowuje się agresywnie."
+  correctAnswer: "a) ma przed nią tajemnice."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l1-q6
+  taskRef: certyfikat-polski-B2-2022-02-listen-1
+  questionType: multiple_choice
+  questionText: "Zdaniem drugiej kobiety"
+  options: "a) Adam ma problemy z nadmierną zazdrością.|b) zachowanie Adama było odpowiednie do sytuacji.|c) Adam wpadł w kłopoty, próbując poznać nową dziewczynę."
+  correctAnswer: "b) zachowanie Adama było odpowiednie do sytuacji."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l2-q1
+  taskRef: certyfikat-polski-B2-2022-02-listen-2
+  questionType: true_false
+  questionText: "Zdaniem dziennikarza Słowenia rzadko stanowi cel turystycznych wyjazdów."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l2-q2
+  taskRef: certyfikat-polski-B2-2022-02-listen-2
+  questionType: true_false
+  questionText: "Alpy Kamnickie tylko wizualnie przypominają polskie Tatry."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l2-q3
+  taskRef: certyfikat-polski-B2-2022-02-listen-2
+  questionType: true_false
+  questionText: "Ojstrica jest najwyższym szczytem w Alpach Kamnickich."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l2-q4
+  taskRef: certyfikat-polski-B2-2022-02-listen-2
+  questionType: true_false
+  questionText: "Najwyższe szczyty Polski i Słowenii są zbliżonej wysokości."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l2-q5
+  taskRef: certyfikat-polski-B2-2022-02-listen-2
+  questionType: true_false
+  questionText: "Ponad połowa terytorium Słowenii jest obszarem chronionym."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l2-q6
+  taskRef: certyfikat-polski-B2-2022-02-listen-2
+  questionType: true_false
+  questionText: "W Słowenii żyje więcej gatunków zwierząt niż w Polsce."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l2-q7
+  taskRef: certyfikat-polski-B2-2022-02-listen-2
+  questionType: true_false
+  questionText: "Większa część powierzchni Słowenii jest pokryta lasami."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l2-q8
+  taskRef: certyfikat-polski-B2-2022-02-listen-2
+  questionType: true_false
+  questionText: "Udział terenów leśnych w powierzchni Polski i Słowenii jest podobny."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l3-q1
+  taskRef: certyfikat-polski-B2-2022-02-listen-3
+  questionType: matching
+  questionText: "zarobione pieniądze lokuje w nieruchomości."
+  options: "A|B|C|D|E"
+  correctAnswer: "C|E"
+  pointsQuarter: 8
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l3-q2
+  taskRef: certyfikat-polski-B2-2022-02-listen-3
+  questionType: matching
+  questionText: "na razie nie myśli o zakończeniu kariery zawodowej."
+  options: "A|B|C|D|E"
+  correctAnswer: A
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l3-q3
+  taskRef: certyfikat-polski-B2-2022-02-listen-3
+  questionType: matching
+  questionText: "otrzymała specjalny tytuł od organizacji międzynarodowej."
+  options: "A|B|C|D|E"
+  correctAnswer: C
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l3-q4
+  taskRef: certyfikat-polski-B2-2022-02-listen-3
+  questionType: matching
+  questionText: "uprawiała różne dyscypliny sportowe."
+  options: "A|B|C|D|E"
+  correctAnswer: "A|E"
+  pointsQuarter: 8
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l3-q5
+  taskRef: certyfikat-polski-B2-2022-02-listen-3
+  questionType: matching
+  questionText: "ma wykształcenie związane ze środowiskiem sportowym."
+  options: "A|B|C|D|E"
+  correctAnswer: B
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l3-q6
+  taskRef: certyfikat-polski-B2-2022-02-listen-3
+  questionType: matching
+  questionText: "posiada dyplom zagranicznej uczelni."
+  options: "A|B|C|D|E"
+  correctAnswer: B
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l3-q7
+  taskRef: certyfikat-polski-B2-2022-02-listen-3
+  questionType: matching
+  questionText: "nie zrezygnowała ze sportu pomimo nieszczęśliwego wydarzenia."
+  options: "A|B|C|D|E"
+  correctAnswer: A
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l3-q8
+  taskRef: certyfikat-polski-B2-2022-02-listen-3
+  questionType: matching
+  questionText: "zajmuje się działalnością publicystyczną."
+  options: "A|B|C|D|E"
+  correctAnswer: D
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l4-q1
+  taskRef: certyfikat-polski-B2-2022-02-listen-4
+  questionType: multiple_choice
+  questionText: "Zwiedzanie miasta nauki"
+  options: "a) będzie niemożliwe 10 października.|b) wymaga wykupienia specjalnej karty wstępu.|c) będzie odbywać się na otwartej przestrzeni."
+  correctAnswer: "c) będzie odbywać się na otwartej przestrzeni."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l4-q2
+  taskRef: certyfikat-polski-B2-2022-02-listen-4
+  questionType: multiple_choice
+  questionText: "Wydarzenia festiwalowe"
+  options: "a) wymagają budowy jednej wielkiej sceny.|b) będą pogrupowane według dziedziny nauki.|c) odbędą się po jednej stronie Doliny Rawy."
+  correctAnswer: "b) będą pogrupowane według dziedziny nauki."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l4-q3
+  taskRef: certyfikat-polski-B2-2022-02-listen-4
+  questionType: multiple_choice
+  questionText: "Strefa Lema"
+  options: "a) umożliwi obserwację gwiazdozbiorów na niebie.|b) zostanie umieszczona we wschodniej części Katowic.|c) wciąż jeszcze nie ma wyznaczonej lokalizacji."
+  correctAnswer: "b) zostanie umieszczona we wschodniej części Katowic."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l4-q4
+  taskRef: certyfikat-polski-B2-2022-02-listen-4
+  questionType: multiple_choice
+  questionText: "Wybór Doliny Rawy"
+  options: "a) to próba zapewnienia bezpieczeństwa uczestnikom.|b) może powodować pewne zagrożenia dla uczestników.|c) jest kwestią zupełnie przypadkowej decyzji."
+  correctAnswer: "a) to próba zapewnienia bezpieczeństwa uczestnikom."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l4-q5
+  taskRef: certyfikat-polski-B2-2022-02-listen-4
+  questionType: multiple_choice
+  questionText: "Festiwal ma na celu zwrócenie uwagi na to, w jaki sposób"
+  options: "a) miasto walczy z degradacją terenów nadrzecznych.|b) mieszkańcy regionu mogą włączyć się w akcje ekologiczne.|c) nauka może pomóc zrewitalizować zniszczone tereny."
+  correctAnswer: "c) nauka może pomóc zrewitalizować zniszczone tereny."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l4-q6
+  taskRef: certyfikat-polski-B2-2022-02-listen-4
+  questionType: multiple_choice
+  questionText: "Tematy związane z sytuacją epidemiczną"
+  options: "a) są obecne na festiwalu już od kilku lat.|b) są dowodem na związek nauki z życiem człowieka.|c) nie będą poruszane podczas tej edycji festiwalu."
+  correctAnswer: "b) są dowodem na związek nauki z życiem człowieka."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l4-q7
+  taskRef: certyfikat-polski-B2-2022-02-listen-4
+  questionType: multiple_choice
+  questionText: "Współpraca miasta ze światem nauki"
+  options: "a) umożliwi otwarcie kolejnej uczelni w Katowicach.|b) była możliwa dzięki udziałowi uczelni spoza regionu.|c) umożliwiła metamorfozę Katowic."
+  correctAnswer: "c) umożliwiła metamorfozę Katowic."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l4-q8
+  taskRef: certyfikat-polski-B2-2022-02-listen-4
+  questionType: multiple_choice
+  questionText: "Tegoroczna formuła festiwalu"
+  options: "a) zakłada organizację części wydarzeń w sieci.|b) rezygnuje z wydarzeń innych niż plenerowe.|c) została już wypróbowana przy poprzednich edycjach."
+  correctAnswer: "a) zakłada organizację części wydarzeń w sieci."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l5-q1
+  taskRef: certyfikat-polski-B2-2022-02-listen-5
+  questionType: fill_gap
+  questionText: "Z jakiej okazji zebrano nagrania?"
+  correctAnswer: "100. rocznica urodzin kompozytora"
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l5-q2
+  taskRef: certyfikat-polski-B2-2022-02-listen-5
+  questionType: fill_gap
+  questionText: "Ile kosztuje dostęp do zgromadzonych materiałów audio i wideo?"
+  correctAnswer: "jest bezpłatny"
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l5-q3
+  taskRef: certyfikat-polski-B2-2022-02-listen-5
+  questionType: fill_gap
+  questionText: "Co, oprócz nagrań, można znaleźć na stronie?"
+  correctAnswer: "opisy|fotografie|filmy biograficzne|filmy dokumentalne|reportaże|playlisty"
+  pointsQuarter: 4
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 2
+  gradingMode: open_manual
+  requiredSelections: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l5-q4
+  taskRef: certyfikat-polski-B2-2022-02-listen-5
+  questionType: fill_gap
+  questionText: "Gdzie znaleziono partytury ołówkowe?"
+  correctAnswer: "za olbrzymią szafą"
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l5-q5
+  taskRef: certyfikat-polski-B2-2022-02-listen-5
+  questionType: fill_gap
+  questionText: "Jakie informacje mieszczą się na osi czasu?"
+  correctAnswer: "dorobek i wydarzenia z życia Andrzeja Panufnika"
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l5-q6
+  taskRef: certyfikat-polski-B2-2022-02-listen-5
+  questionType: fill_gap
+  questionText: "Z biografiami ilu polskich kompozytorów jest łączone życie Andrzeja Panufnika?"
+  correctAnswer: trzech
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l5-q7
+  taskRef: certyfikat-polski-B2-2022-02-listen-5
+  questionType: fill_gap
+  questionText: "Która instytucja przekazała większość nagrań?"
+  correctAnswer: "Polskie Radio"
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l5-q8
+  taskRef: certyfikat-polski-B2-2022-02-listen-5
+  questionType: fill_gap
+  questionText: "Co to jest Ruch Muzyczny?"
+  correctAnswer: "miesięcznik"
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l1-q1
+  taskRef: certyfikat-polski-B2-2023-02-listen-1
+  questionType: multiple_choice
+  questionText: "Z rozmowy wynika, że mężczyzna"
+  options: "a) żałuje, że kobieta nie poszła z nim na kręgle.|b) świetnie bawił się na kręgielni.|c) jest zawiedziony rekomendacją kolegi."
+  correctAnswer: "c) jest zawiedziony rekomendacją kolegi."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l1-q2
+  taskRef: certyfikat-polski-B2-2023-02-listen-1
+  questionType: multiple_choice
+  questionText: "Z dialogu wynika, że"
+  options: "a) jest zmiana organizacji ruchu.|b) kobieta prowadzi samochód.|c) mężczyzna i kobieta utknęli w korku."
+  correctAnswer: "a) jest zmiana organizacji ruchu."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l1-q3
+  taskRef: certyfikat-polski-B2-2023-02-listen-1
+  questionType: multiple_choice
+  questionText: Audycja
+  options: "a) poświęcona jest prezentacji poglądów różnych psychologów.|b) zawiera rady dotyczące sposobu wychowania dzieci.|c) jest polemiką Aleksandry Piotrowskiej z innymi specjalistami."
+  correctAnswer: "b) zawiera rady dotyczące sposobu wychowania dzieci."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l1-q4
+  taskRef: certyfikat-polski-B2-2023-02-listen-1
+  questionType: multiple_choice
+  questionText: "Aleksandra Piotrowska uważa, że stosowanie jakichkolwiek kar"
+  options: "a) w ogóle nie powinno mieć miejsca.|b) to jedyny skuteczny sposób wpływania na zachowanie dziecka.|c) nie może być jedyną stosowaną metodą wychowawczą."
+  correctAnswer: "c) nie może być jedyną stosowaną metodą wychowawczą."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l1-q5
+  taskRef: certyfikat-polski-B2-2023-02-listen-1
+  questionType: multiple_choice
+  questionText: "Rozmowa dotyczy"
+  options: "a) pomocy w opiece nad dzieckiem.|b) przeniesienia terminu wizyty lekarskiej.|c) planów rodzinnego wyjazdu do Łodzi."
+  correctAnswer: "a) pomocy w opiece nad dzieckiem."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l1-q6
+  taskRef: certyfikat-polski-B2-2023-02-listen-1
+  questionType: multiple_choice
+  questionText: "Wizyta u dentysty"
+  options: "a) nie była wcześniej planowana.|b) odbędzie się przed południem.|c) zmusi matkę kobiety do zmiany planów."
+  correctAnswer: "b) odbędzie się przed południem."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l2-q1
+  taskRef: certyfikat-polski-B2-2023-02-listen-2
+  questionType: multiple_choice
+  questionText: "Słownik polsko-polski"
+  options: "a) to tytuł najnowszej publikacji profesora Miodka.|b) stracił w ostatnich latach na popularności.|c) można obejrzeć w telewizji."
+  correctAnswer: "c) można obejrzeć w telewizji."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l2-q2
+  taskRef: certyfikat-polski-B2-2023-02-listen-2
+  questionType: multiple_choice
+  questionText: "Justyna Janus-Konarska"
+  options: "a) poprosiła profesora Miodka o poradę językową.|b) od kilkunastu lat jest związana ze Słownikiem polsko-polskim.|c) występuje w telewizji u boku profesora Miodka."
+  correctAnswer: "c) występuje w telewizji u boku profesora Miodka."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l2-q3
+  taskRef: certyfikat-polski-B2-2023-02-listen-2
+  questionType: multiple_choice
+  questionText: Janus-Konarska
+  options: "a) ciągle doskonali swoje kompetencje językowe.|b) uważa, że błędy są wyrazem braku szacunku do języka.|c) zachęca wszystkich do poszerzania swojej wiedzy językowej."
+  correctAnswer: "a) ciągle doskonali swoje kompetencje językowe."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l2-q4
+  taskRef: certyfikat-polski-B2-2023-02-listen-2
+  questionType: multiple_choice
+  questionText: "Profesor Miodek"
+  options: "a) świetnie opanował wiele języków obcych.|b) w stosunku do języka nie jest wielkim tradycjonalistą.|c) uważa, że konflikt pokoleń widoczny w języku jest typowy dla polszczyzny."
+  correctAnswer: "b) w stosunku do języka nie jest wielkim tradycjonalistą."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l2-q5
+  taskRef: certyfikat-polski-B2-2023-02-listen-2
+  questionType: multiple_choice
+  questionText: "Jan Miodek wspomina rok 1989 w kontekście"
+  options: "a) konfliktów społecznych, które pojawiły się w Polsce.|b) napływu do języka polskiego słów pochodzenia angielskiego.|c) publikacji jednej ze swoich książek."
+  correctAnswer: "b) napływu do języka polskiego słów pochodzenia angielskiego."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l2-q6
+  taskRef: certyfikat-polski-B2-2023-02-listen-2
+  questionType: multiple_choice
+  questionText: "Profesor Miodek uważa, że"
+  options: "a) sposoby komunikacji zmieniają się z pokolenia na pokolenia.|b) zmiany językowe są źródłem konfliktów pomiędzy ludźmi.|c) starsze pokolenie z chęcią przyswaja młodzieżowe sformułowania."
+  correctAnswer: "a) sposoby komunikacji zmieniają się z pokolenia na pokolenia."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l2-q7
+  taskRef: certyfikat-polski-B2-2023-02-listen-2
+  questionType: multiple_choice
+  questionText: "Materiały opublikowane w książce prof. Miodka"
+  options: "a) zostały przygotowane specjalnie na potrzeby tej publikacji.|b) to zbiór tekstów poświęconych poprawności językowej.|c) to pierwsza tego rodzaju pozycja na rynku wydawniczym."
+  correctAnswer: "b) to zbiór tekstów poświęconych poprawności językowej."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l3-q1
+  taskRef: certyfikat-polski-B2-2023-02-listen-3
+  questionType: true_false
+  questionText: "Ocena intensywności ruchu rowerowego we Wrocławiu miała miejsce po raz pierwszy."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l3-q2
+  taskRef: certyfikat-polski-B2-2023-02-listen-3
+  questionType: true_false
+  questionText: "Mieszkańcy Wrocławia coraz częściej korzystają z rowerów."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l3-q3
+  taskRef: certyfikat-polski-B2-2023-02-listen-3
+  questionType: true_false
+  questionText: "Miasto chwilowo planuje zaprzestać dalszych inwestycji w infrastrukturę rowerową."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l3-q4
+  taskRef: certyfikat-polski-B2-2023-02-listen-3
+  questionType: true_false
+  questionText: "Trasa rowerowa jest planowana także w zabytkowej części miasta."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l3-q5
+  taskRef: certyfikat-polski-B2-2023-02-listen-3
+  questionType: true_false
+  questionText: "Przebieg nowych tras rowerowych dostosowany jest do potrzeb mieszkańców."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l3-q6
+  taskRef: certyfikat-polski-B2-2023-02-listen-3
+  questionType: true_false
+  questionText: "Kilka z planowanych dróg wyjdzie poza granice administracyjne miasta."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l3-q7
+  taskRef: certyfikat-polski-B2-2023-02-listen-3
+  questionType: true_false
+  questionText: "Firma Nextbike planuje uruchomić kolejne stacje rowerowe dopiero za dwa lata."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l3-q8
+  taskRef: certyfikat-polski-B2-2023-02-listen-3
+  questionType: true_false
+  questionText: "Zimą chętni do wypożyczenia rowerów będą mieli do dyspozycji więcej pojazdów."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l3-q9
+  taskRef: certyfikat-polski-B2-2023-02-listen-3
+  questionType: true_false
+  questionText: "Niektóre stacje będą umożliwiały skorzystanie z narzędzi do serwisu rowerów."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l4-q1
+  taskRef: certyfikat-polski-B2-2023-02-listen-4
+  questionType: matching
+  questionText: "Jest połączeniem dwóch ras."
+  options: "1|2|3|4"
+  correctAnswer: "1"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l4-q2
+  taskRef: certyfikat-polski-B2-2023-02-listen-4
+  questionType: matching
+  questionText: "Należy do rasy wykorzystywanej w celach leczniczych."
+  options: "1|2|3|4"
+  correctAnswer: "2"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l4-q3
+  taskRef: certyfikat-polski-B2-2023-02-listen-4
+  questionType: matching
+  questionText: "Cieszy się popularnością w różnego rodzaju mediach."
+  options: "1|2|3|4"
+  correctAnswer: "1|2|4"
+  pointsQuarter: 12
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l4-q4
+  taskRef: certyfikat-polski-B2-2023-02-listen-4
+  questionType: matching
+  questionText: "Jest świetnym towarzyszem zabaw."
+  options: "1|2|3|4"
+  correctAnswer: "2|3"
+  pointsQuarter: 8
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l4-q5
+  taskRef: certyfikat-polski-B2-2023-02-listen-4
+  questionType: matching
+  questionText: "Ma na swoim koncie wygraną w jednym z konkursów."
+  options: "1|2|3|4"
+  correctAnswer: "1|4"
+  pointsQuarter: 8
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l4-q6
+  taskRef: certyfikat-polski-B2-2023-02-listen-4
+  questionType: matching
+  questionText: "Jego wygląd jest konsekwencją życia w niewoli."
+  options: "1|2|3|4"
+  correctAnswer: "4"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l5-q1
+  taskRef: certyfikat-polski-B2-2023-02-listen-5
+  questionType: fill_gap
+  questionText: "Jaka jest wysokość pagórków znajdujących się w okolicy miejsca inwestycji?"
+  correctAnswer: "100 metrów"
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l5-q2
+  taskRef: certyfikat-polski-B2-2023-02-listen-5
+  questionType: fill_gap
+  questionText: "Co ma powstać w bliskim sąsiedztwie plaży?"
+  correctAnswer: apartamentowce
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l5-q3
+  taskRef: certyfikat-polski-B2-2023-02-listen-5
+  questionType: fill_gap
+  questionText: "O jakich rodzajach „zbrodni” wspomina Andrzej Pawełczyk?"
+  correctAnswer: "architektoniczna|społeczna"
+  pointsQuarter: 4
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 2
+  gradingMode: open_manual
+  requiredSelections: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l5-q4
+  taskRef: certyfikat-polski-B2-2023-02-listen-5
+  questionType: fill_gap
+  questionText: "Kto wydał zgodę na nowe inwestycje?"
+  correctAnswer: "samorząd"
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l5-q5
+  taskRef: certyfikat-polski-B2-2023-02-listen-5
+  questionType: fill_gap
+  questionText: "Jak reaguje deweloper na zgłaszane zastrzeżenia?"
+  correctAnswer: "Nie obchodzi go to."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l5-q6
+  taskRef: certyfikat-polski-B2-2023-02-listen-5
+  questionType: fill_gap
+  questionText: "Jaka jest maksymalna wysokość zabudowy dopuszczalnej na spornym terenie?"
+  correctAnswer: "150 m"
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l5-q7
+  taskRef: certyfikat-polski-B2-2023-02-listen-5
+  questionType: fill_gap
+  questionText: "Z jakich form oszczędności rezygnują Polacy?"
+  correctAnswer: "z lokat bankowych"
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l5-q8
+  taskRef: certyfikat-polski-B2-2023-02-listen-5
+  questionType: fill_gap
+  questionText: "Jakie wady inwestycji wymienia mieszkaniec miasta?"
+  correctAnswer: "cień|wiatr"
+  pointsQuarter: 4
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 2
+  gradingMode: open_manual
+  requiredSelections: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-l1-q1
+  taskRef: certyfikat-polski-B2-2023-06-listen-1
+  questionType: multiple_choice
+  questionText: "Reklamowany program będzie poświęcony"
+  options: "a) przepisom na dania wegetariańskie.|b) miejscom, w których można kupić zdrową żywność.|c) poradom, jak nie marnować jedzenia."
+  correctAnswer: "c) poradom, jak nie marnować jedzenia."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-l1-q2
+  taskRef: certyfikat-polski-B2-2023-06-listen-1
+  questionType: multiple_choice
+  questionText: "Zastosowanie się do wskazówek przekazywanych w programie pozwoli"
+  options: "a) ograniczyć koszty przygotowywanych posiłków.|b) spędzać na gotowaniu mniej czasu niż dotychczas.|c) cieszyć się dłuższym życiem."
+  correctAnswer: "a) ograniczyć koszty przygotowywanych posiłków."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-l1-q3
+  taskRef: certyfikat-polski-B2-2023-06-listen-1
+  questionType: multiple_choice
+  questionText: "W programie prezentowane są miejsca"
+  options: "a) najchętniej odwiedzane przez turystów.|b) niespełniające oczekiwań przyjezdnych.|c) pozwalające na niskobudżetową podróż."
+  correctAnswer: "b) niespełniające oczekiwań przyjezdnych."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-l1-q4
+  taskRef: certyfikat-polski-B2-2023-06-listen-1
+  questionType: multiple_choice
+  questionText: "Według rankingu główny problem z Aleją Gwiazd polega na tym, że"
+  options: "a) nie oferuje dostatecznie rozwiniętej bazy noclegowej.|b) odwiedzenie jej wiąże się ze znaczącymi wydatkami.|c) nieatrakcyjnie prezentuje się w mediach społecznościowych."
+  correctAnswer: "c) nieatrakcyjnie prezentuje się w mediach społecznościowych."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-l1-q5
+  taskRef: certyfikat-polski-B2-2023-06-listen-1
+  questionType: multiple_choice
+  questionText: "Mężczyzna zapomniał o wizycie Piotrusia"
+  options: "a) u okulisty.|b) u kolegi.|c) u fryzjera."
+  correctAnswer: "c) u fryzjera."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-l1-q6
+  taskRef: certyfikat-polski-B2-2023-06-listen-1
+  questionType: multiple_choice
+  questionText: "W wyniku zmiany planów"
+  options: "a) wizyta u dziadków rozpocznie się później niż planowano.|b) trzeba będzie odwołać odwiedziny u dziadków.|c) spotkanie z dziadkami trzeba przesunąć na godzinę 10."
+  correctAnswer: "a) wizyta u dziadków rozpocznie się później niż planowano."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-l1-q7
+  taskRef: certyfikat-polski-B2-2023-06-listen-1
+  questionType: multiple_choice
+  questionText: "Algorytm wykorzystujący sztuczną inteligencję"
+  options: "a) 9 stycznia poinformował Światową Organizację Zdrowia o epidemii.|b) odnotował sytuację epidemiczną wcześniej niż Światowa Organizacja Zdrowia.|c) został przedstawiony jako narzędzie w służbie Światowej Organizacji Zdrowia."
+  correctAnswer: "b) odnotował sytuację epidemiczną wcześniej niż Światowa Organizacja Zdrowia."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-l1-q8
+  taskRef: certyfikat-polski-B2-2023-06-listen-1
+  questionType: multiple_choice
+  questionText: "512 megabajtów to liczba danych"
+  options: "a) które będą wytwarzane przez każdą osobę w 2025 roku.|b) generowanych przez przeciętnego człowieka w 2012 roku.|c) wytwarzanych w 2012 roku przez wszystkich ludzi."
+  correctAnswer: "b) generowanych przez przeciętnego człowieka w 2012 roku."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-l2-q1
+  taskRef: certyfikat-polski-B2-2023-06-listen-2
+  questionType: multiple_choice
+  questionText: "Przed zawarciem ślubu z Jagiełłą Jadwiga"
+  options: "a) była już zamężna z austriackim następcą tronu.|b) miała za sobą ucieczkę z Wawelu.|c) miała wyjść za mąż za innego mężczyznę."
+  correctAnswer: "c) miała wyjść za mąż za innego mężczyznę."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-l2-q2
+  taskRef: certyfikat-polski-B2-2023-06-listen-2
+  questionType: multiple_choice
+  questionText: "Uroczystość przyjęcia chrztu przez Jagiełłę"
+  options: "a) miała miejsce w Czechach.|b) trwała aż trzy dni.|c) odbyła się w Krakowie."
+  correctAnswer: "c) odbyła się w Krakowie."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-l2-q3
+  taskRef: certyfikat-polski-B2-2023-06-listen-2
+  questionType: multiple_choice
+  questionText: "Krakowski kościół Na Piasku"
+  options: "a) został zbudowany pod czujnym okiem Jadwigi.|b) powstał z inicjatywy zwykłych ludzi.|c) był ulubioną świątynią królowej Jadwigi."
+  correctAnswer: "a) został zbudowany pod czujnym okiem Jadwigi."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-l2-q4
+  taskRef: certyfikat-polski-B2-2023-06-listen-2
+  questionType: multiple_choice
+  questionText: "Spotkany w kościele robotnik budowlany"
+  options: "a) poskarżył się na swoją chorobę.|b) opowiedział Jadwidze o sytuacji swojej żony.|c) zrobił przykrość królowej Jadwidze."
+  correctAnswer: "b) opowiedział Jadwidze o sytuacji swojej żony."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-l2-q5
+  taskRef: certyfikat-polski-B2-2023-06-listen-2
+  questionType: multiple_choice
+  questionText: "Na ścianie kościoła Najświętszej Marii Panny można zobaczyć"
+  options: "a) złoto i szlachetne kamienie.|b) ślad bosej stopy królowej Jadwigi.|c) but noszony przez królową Jadwigę."
+  correctAnswer: "b) ślad bosej stopy królowej Jadwigi."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-l2-q6
+  taskRef: certyfikat-polski-B2-2023-06-listen-2
+  questionType: multiple_choice
+  questionText: "Kiedy królowa Jadwiga zmarła, Jagiełło"
+  options: "a) kontynuował dotychczasową politykę.|b) przegrał wojnę z zakonem krzyżackim.|c) postanowił zacząć studia na uniwersytecie."
+  correctAnswer: "a) kontynuował dotychczasową politykę."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-l3-q1
+  taskRef: certyfikat-polski-B2-2023-06-listen-3
+  questionType: true_false
+  questionText: "Nazwa ptaków pochodzi od wydawanych przez nie dźwięków."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-l3-q2
+  taskRef: certyfikat-polski-B2-2023-06-listen-3
+  questionType: true_false
+  questionText: "Hodowcy owiec w Nowej Zelandii dokarmiali papugi kea."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-l3-q3
+  taskRef: certyfikat-polski-B2-2023-06-listen-3
+  questionType: true_false
+  questionText: "Obecnie papuga kea jest gatunkiem zagrożonym wyginięciem."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-l3-q4
+  taskRef: certyfikat-polski-B2-2023-06-listen-3
+  questionType: true_false
+  questionText: "W niektórych miejscach umieszcza się napisy ostrzegające przed keą."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-l3-q5
+  taskRef: certyfikat-polski-B2-2023-06-listen-3
+  questionType: true_false
+  questionText: "Kea potrafią być złośliwe, czego przejawem jest niszczenie samochodów."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-l3-q6
+  taskRef: certyfikat-polski-B2-2023-06-listen-3
+  questionType: true_false
+  questionText: "Papugi kea uzyskują dojrzałość w wieku czterech lat."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-l3-q7
+  taskRef: certyfikat-polski-B2-2023-06-listen-3
+  questionType: true_false
+  questionText: "Kea różnią się od innych papug sposobem podejścia do nowych przedmiotów."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-l3-q8
+  taskRef: certyfikat-polski-B2-2023-06-listen-3
+  questionType: true_false
+  questionText: "Omawiane papugi ukrywały korki do zlewu, ponieważ nie lubiły wody."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-l3-q9
+  taskRef: certyfikat-polski-B2-2023-06-listen-3
+  questionType: true_false
+  questionText: "Papugi użyły piłki golfowej do rozwiązania problemu ze zbiornikiem."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-l4-q1
+  taskRef: certyfikat-polski-B2-2023-06-listen-4
+  questionType: matching
+  questionText: "Tymczasowo zniknął z mapy lokali dostępnych dla klientów."
+  options: "A|B|C|D"
+  correctAnswer: C
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-l4-q2
+  taskRef: certyfikat-polski-B2-2023-06-listen-4
+  questionType: matching
+  questionText: "Znajduje się w bliskim sąsiedztwie węzłów komunikacyjnych."
+  options: "A|B|C|D"
+  correctAnswer: B
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-l4-q3
+  taskRef: certyfikat-polski-B2-2023-06-listen-4
+  questionType: matching
+  questionText: "Dobrze się tu poczują miłośnicy egzotycznej flory."
+  options: "A|B|C|D"
+  correctAnswer: D
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-l4-q4
+  taskRef: certyfikat-polski-B2-2023-06-listen-4
+  questionType: matching
+  questionText: "Cieszy się wyróżnieniem ważnej i cenionej organizacji."
+  options: "A|B|C|D"
+  correctAnswer: D
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-l4-q5
+  taskRef: certyfikat-polski-B2-2023-06-listen-4
+  questionType: matching
+  questionText: "Oferuje możliwość podziwiania imponujących widoków."
+  options: "A|B|C|D"
+  correctAnswer: B
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-l4-q6
+  taskRef: certyfikat-polski-B2-2023-06-listen-4
+  questionType: matching
+  questionText: "Szczególną wagę przywiązuje do jakości wykorzystywanych produktów."
+  options: "A|B|C|D"
+  correctAnswer: "C|D"
+  pointsQuarter: 8
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-l4-q7
+  taskRef: certyfikat-polski-B2-2023-06-listen-4
+  questionType: matching
+  questionText: "Łączy tradycję z nowoczesnością."
+  options: "A|B|C|D"
+  correctAnswer: D
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-l4-q8
+  taskRef: certyfikat-polski-B2-2023-06-listen-4
+  questionType: matching
+  questionText: "Dba o wygodę zmotoryzowanych gości."
+  options: "A|B|C|D"
+  correctAnswer: A
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-l5-q1
+  taskRef: certyfikat-polski-B2-2023-06-listen-5
+  questionType: fill_gap
+  questionText: "Co Jan Szczepanik robił w Jaśle?"
+  correctAnswer: "chodził do gimnazjum"
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-l5-q2
+  taskRef: certyfikat-polski-B2-2023-06-listen-5
+  questionType: fill_gap
+  questionText: "W jakim zawodzie pracował Jan Szczepanik?"
+  correctAnswer: "nauczyciel fizyki"
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-l5-q3
+  taskRef: certyfikat-polski-B2-2023-06-listen-5
+  questionType: fill_gap
+  questionText: "W których częściach świata szczególnie interesowano się jego wynalazkami?"
+  correctAnswer: "w Ameryce|w Europie"
+  pointsQuarter: 4
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 2
+  gradingMode: open_manual
+  requiredSelections: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-l5-q4
+  taskRef: certyfikat-polski-B2-2023-06-listen-5
+  questionType: fill_gap
+  questionText: "W jaki sposób Mark Twain okazał swoje zainteresowanie postacią Szczepanika?"
+  correctAnswer: "Napisał dla niego dwa opowiadania."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-l5-q5
+  taskRef: certyfikat-polski-B2-2023-06-listen-5
+  questionType: fill_gap
+  questionText: "Ile wynalazków przypisuje się Janowi Szczepanikowi?"
+  correctAnswer: "ponad 90"
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-l5-q6
+  taskRef: certyfikat-polski-B2-2023-06-listen-5
+  questionType: fill_gap
+  questionText: "W jakich dziedzinach specjalizował się wynalazca?"
+  correctAnswer: "fotografia|film"
+  pointsQuarter: 4
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 2
+  gradingMode: open_manual
+  requiredSelections: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-l5-q7
+  taskRef: certyfikat-polski-B2-2023-06-listen-5
+  questionType: fill_gap
+  questionText: "Co wynalazł Jan Szczepanik?"
+  correctAnswer: "papier fotograficzny|urządzenia do pomiaru intensywności barw|kamizelka kuloodporna"
+  pointsQuarter: 4
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
+  gradingMode: open_manual
+  requiredSelections: 1
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-l5-q8
+  taskRef: certyfikat-polski-B2-2023-06-listen-5
+  questionType: fill_gap
+  questionText: "Co na swoich zdjęciach przedstawił i uwiecznił Tadeusz Rząsa?"
+  correctAnswer: "fragmenty Krakowa"
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-l1-q1
+  taskRef: certyfikat-polski-B2-2024-02-listen-1
+  questionType: multiple_choice
+  questionText: "Rozmowa dotyczy"
+  options: "a) wyjścia w góry.|b) wyjazdu na narty.|c) podróży służbowej."
+  correctAnswer: "b) wyjazdu na narty."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-l1-q2
+  taskRef: certyfikat-polski-B2-2024-02-listen-1
+  questionType: multiple_choice
+  questionText: "Marta nie skorzysta z propozycji"
+  options: "a) z powodu niedawnego uszkodzenia kolana.|b) ze względu na złą pogodę.|c) ponieważ ma inne zobowiązania."
+  correctAnswer: "c) ponieważ ma inne zobowiązania."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-l1-q3
+  taskRef: certyfikat-polski-B2-2024-02-listen-1
+  questionType: multiple_choice
+  questionText: "Rozmowa dotyczy"
+  options: "a) sytuacji rodzinnej mężczyzny.|b) problemów zdrowotnych Darka.|c) planów zawodowych rozmówcy."
+  correctAnswer: "b) problemów zdrowotnych Darka."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-l1-q4
+  taskRef: certyfikat-polski-B2-2024-02-listen-1
+  questionType: multiple_choice
+  questionText: "Po usłyszeniu serii zaleceń na przyszłość Darek"
+  options: "a) miał problem z przyjęciem ich do wiadomości.|b) zaczął się zastanawiać nad rzuceniem pracy.|c) odkrył, że brakuje mu miejsca, w którym mógłby odpocząć."
+  correctAnswer: "a) miał problem z przyjęciem ich do wiadomości."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-l1-q5
+  taskRef: certyfikat-polski-B2-2024-02-listen-1
+  questionType: multiple_choice
+  questionText: "Tematem audycji są"
+  options: "a) rozmaite propozycje spędzania wolnego czasu z nastoletnimi dziećmi.|b) przekąski towarzyszące różnym formom wypoczynku nastolatków.|c) preferencje nastolatków odnośnie do osób, z którymi spędzają czas."
+  correctAnswer: "c) preferencje nastolatków odnośnie do osób, z którymi spędzają czas."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-l1-q6
+  taskRef: certyfikat-polski-B2-2024-02-listen-1
+  questionType: multiple_choice
+  questionText: "Kobieta uważa, że zachowanie nastoletnich córek jej rozmówczyni świadczy o tym, że"
+  options: "a) właśnie wkroczyły w kolejny naturalny etap rozwoju.|b) rodzice nie zapewnili im wystarczającego poczucia bliskości.|c) doświadczają pewnych problemów rozwojowych."
+  correctAnswer: "a) właśnie wkroczyły w kolejny naturalny etap rozwoju."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-l2-q1
+  taskRef: certyfikat-polski-B2-2024-02-listen-2
+  questionType: true_false
+  questionText: "Mariusz Świtalski należy do grona najzamożniejszych Polaków."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-l2-q2
+  taskRef: certyfikat-polski-B2-2024-02-listen-2
+  questionType: true_false
+  questionText: "Znajomości zawarte w domu dziecka pomogły Świtalskiemu przy stawianiu pierwszych kroków w biznesie."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-l2-q3
+  taskRef: certyfikat-polski-B2-2024-02-listen-2
+  questionType: true_false
+  questionText: "Przedsiębiorca zawsze cieszył się nienaganną opinią."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-l2-q4
+  taskRef: certyfikat-polski-B2-2024-02-listen-2
+  questionType: true_false
+  questionText: "Firma Świtalskiego stopniowo poszerzała zakres swojej działalności."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-l2-q5
+  taskRef: certyfikat-polski-B2-2024-02-listen-2
+  questionType: true_false
+  questionText: "Świtalski został oskarżony o nieprawidłowości finansowe."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-l2-q6
+  taskRef: certyfikat-polski-B2-2024-02-listen-2
+  questionType: true_false
+  questionText: "Po sprzedaży firmy Eurocash biznesmen postanowił odpocząć od działalności gospodarczej."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-l2-q7
+  taskRef: certyfikat-polski-B2-2024-02-listen-2
+  questionType: true_false
+  questionText: "Logo sieci Biedronka zachowało swój pierwotny wygląd."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-l2-q8
+  taskRef: certyfikat-polski-B2-2024-02-listen-2
+  questionType: true_false
+  questionText: "Świtalski wyspecjalizował się w tworzeniu firm i przekazywaniu ich w inne ręce."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-l2-q9
+  taskRef: certyfikat-polski-B2-2024-02-listen-2
+  questionType: true_false
+  questionText: "Pierwowzoru sieci sklepów Żabka należy szukać w Stanach Zjednoczonych."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-l2-q10
+  taskRef: certyfikat-polski-B2-2024-02-listen-2
+  questionType: true_false
+  questionText: "Obecnie Świtalski zaprzestał jakiejkolwiek działalności biznesowej."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-l3-q1
+  taskRef: certyfikat-polski-B2-2024-02-listen-3
+  questionType: matching
+  questionText: "Władze krajowe celowo utrudniają zdobycie tego miejsca."
+  options: "A|B|C|D"
+  correctAnswer: D
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-l3-q2
+  taskRef: certyfikat-polski-B2-2024-02-listen-3
+  questionType: matching
+  questionText: "Zdobycie tego miejsca może kosztować życie."
+  options: "A|B|C|D"
+  correctAnswer: "A|C"
+  pointsQuarter: 8
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-l3-q3
+  taskRef: certyfikat-polski-B2-2024-02-listen-3
+  questionType: matching
+  questionText: "Przekonania co do charakteru tego miejsca były błędne."
+  options: "A|B|C|D"
+  correctAnswer: C
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-l3-q4
+  taskRef: certyfikat-polski-B2-2024-02-listen-3
+  questionType: matching
+  questionText: "Atrakcja zachwyca różnorodnością i zmiennością kolorów."
+  options: "A|B|C|D"
+  correctAnswer: "B|C"
+  pointsQuarter: 8
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-l3-q5
+  taskRef: certyfikat-polski-B2-2024-02-listen-3
+  questionType: matching
+  questionText: "Obiekt znajduje się na terenach przygranicznych."
+  options: "A|B|C|D"
+  correctAnswer: D
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-l3-q6
+  taskRef: certyfikat-polski-B2-2024-02-listen-3
+  questionType: matching
+  questionText: "Zdobycie tego miejsca wymagało stworzenia specjalnej konstrukcji."
+  options: "A|B|C|D"
+  correctAnswer: A
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-l4-q1
+  taskRef: certyfikat-polski-B2-2024-02-listen-4
+  questionType: multiple_choice
+  questionText: "Noc Politechniki odbędzie się"
+  options: "a) w tym roku już po raz siedemnasty.|b) na terenie jednej z wrocławskich uczelni.|c) w jednym z warsztatów należących do Politechniki."
+  correctAnswer: "b) na terenie jednej z wrocławskich uczelni."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-l4-q2
+  taskRef: certyfikat-polski-B2-2024-02-listen-4
+  questionType: multiple_choice
+  questionText: "Podczas tego wydarzenia będzie okazja do"
+  options: "a) poznania liczby atomów w ludzkim ciele.|b) skonstruowania modelu kosmosu.|c) wysłuchania prelekcji o poszukiwaniu życia w kosmosie."
+  correctAnswer: "c) wysłuchania prelekcji o poszukiwaniu życia w kosmosie."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-l4-q3
+  taskRef: certyfikat-polski-B2-2024-02-listen-4
+  questionType: multiple_choice
+  questionText: "W wydarzeniu mogą wziąć udział"
+  options: "a) wszyscy chętni.|b) tylko dzieci.|c) tylko dorośli."
+  correctAnswer: "a) wszyscy chętni."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-l4-q4
+  taskRef: certyfikat-polski-B2-2024-02-listen-4
+  questionType: multiple_choice
+  questionText: "Koło fortuny to atrakcja, która"
+  options: "a) będzie miała miejsce w plenerze.|b) wzbudziła zainteresowanie w poprzedniej edycji.|c) została wprowadzona w tegorocznej edycji."
+  correctAnswer: "c) została wprowadzona w tegorocznej edycji."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-l4-q5
+  taskRef: certyfikat-polski-B2-2024-02-listen-4
+  questionType: multiple_choice
+  questionText: "Pokazy filmowe"
+  options: "a) przybliżą naukowe tematy w interesujący sposób.|b) zostały odwołane z uwagi na remont sali.|c) adresowane są tylko do naukowców."
+  correctAnswer: "a) przybliżą naukowe tematy w interesujący sposób."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-l4-q6
+  taskRef: certyfikat-polski-B2-2024-02-listen-4
+  questionType: multiple_choice
+  questionText: "Na wszystkie wydarzenia"
+  options: "a) można przyjść po wcześniejszym zakupie wejściówek.|b) warto uprzednio się zarejestrować.|c) jest wciąż bardzo dużo miejsc."
+  correctAnswer: "b) warto uprzednio się zarejestrować."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-l4-q7
+  taskRef: certyfikat-polski-B2-2024-02-listen-4
+  questionType: multiple_choice
+  questionText: "Organizatorzy serdecznie zachęcają do udziału w wykładach,"
+  options: "a) zanim zostaną wyprzedane ostatnie bilety.|b) przypominając o możliwości skorzystania z poczęstunku.|c) podkreślając ich bogatą ofertę."
+  correctAnswer: "c) podkreślając ich bogatą ofertę."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-l4-q8
+  taskRef: certyfikat-polski-B2-2024-02-listen-4
+  questionType: multiple_choice
+  questionText: "Noc Politechniki"
+  options: "a) inspiruje się zachodnimi wzorcami.|b) w tym roku ugości Isaaka Asimova.|c) jest prezentacją pasji studentów fizyki, chemii i matematyki."
+  correctAnswer: "a) inspiruje się zachodnimi wzorcami."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-l5-q1
+  taskRef: certyfikat-polski-B2-2024-02-listen-5
+  questionType: fill_gap
+  questionText: "W jaki sposób zorientowano się, że bobry zniszczyły drogę?"
+  correctAnswer: "(Na drodze) zapadł się asfalt."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-l5-q2
+  taskRef: certyfikat-polski-B2-2024-02-listen-5
+  questionType: fill_gap
+  questionText: "Co odkrył nadzór budowlany pod powierzchnią jezdni?"
+  correctAnswer: "Sieć korytarzy/tuneli (zbudowanych przez bobry)."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-l5-q3
+  taskRef: certyfikat-polski-B2-2024-02-listen-5
+  questionType: fill_gap
+  questionText: "Jak inspektor nadzoru budowlanego zareagował na odkrycie?"
+  correctAnswer: "Zamknął drogę."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-l5-q4
+  taskRef: certyfikat-polski-B2-2024-02-listen-5
+  questionType: fill_gap
+  questionText: "Dlaczego uszkodzona droga była tak ważna dla okolicznych mieszkańców?"
+  correctAnswer: "Ponieważ był to dojazd do drogi ekspresowej."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-l5-q5
+  taskRef: certyfikat-polski-B2-2024-02-listen-5
+  questionType: fill_gap
+  questionText: "Jaki jest stosunek okolicznych mieszkańców do bobrów?"
+  correctAnswer: "Są źli na bobry."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-l5-q6
+  taskRef: certyfikat-polski-B2-2024-02-listen-5
+  questionType: fill_gap
+  questionText: "Kogo lub co wini mężczyzna za niszczycielską działalność bobrów?"
+  correctAnswer: "Głupotę ochrony środowiska."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-l5-q7
+  taskRef: certyfikat-polski-B2-2024-02-listen-5
+  questionType: fill_gap
+  questionText: "Na czym polegają ryzykowne działania mieszkańców?"
+  correctAnswer: "Próbują przedostać się przez zamkniętą drogę."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-l5-q8
+  taskRef: certyfikat-polski-B2-2024-02-listen-5
+  questionType: fill_gap
+  questionText: "Dlaczego przed naprawą drogi trzeba będzie wystąpić o specjalne zezwolenia?"
+  correctAnswer: "Ponieważ teren leży na obszarze Natura 2000."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-l1-q1
+  taskRef: certyfikat-polski-B2-2024-06-listen-1
+  questionType: multiple_choice
+  questionText: "Dziewczyna rozmawia"
+  options: "a) ze swoim ojcem.|b) z trenerem.|c) z nauczycielem angielskiego."
+  correctAnswer: "b) z trenerem."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-l1-q2
+  taskRef: certyfikat-polski-B2-2024-06-listen-1
+  questionType: multiple_choice
+  questionText: "Martyna obawia się, że"
+  options: "a) nie jest jeszcze gotowa na proponowany krok.|b) nie uda jej się przekonać rodziców.|c) nie poradzi sobie na egzaminie z angielskiego."
+  correctAnswer: "a) nie jest jeszcze gotowa na proponowany krok."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-l1-q3
+  taskRef: certyfikat-polski-B2-2024-06-listen-1
+  questionType: multiple_choice
+  questionText: "Głównym tematem rozmowy"
+  options: "a) są warunki klimatyczne w różnych porach roku.|b) jest sposób radzenia sobie z nadmiernym poceniem się.|c) jest dobór odpowiednich kosmetyków pielęgnacyjnych."
+  correctAnswer: "c) jest dobór odpowiednich kosmetyków pielęgnacyjnych."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-l1-q4
+  taskRef: certyfikat-polski-B2-2024-06-listen-1
+  questionType: multiple_choice
+  questionText: "Opinie wygłaszane przez kobietę"
+  options: "a) spowodowały zdenerwowanie mężczyzny.|b) były dla mężczyzny czymś oczywistym.|c) są dla mężczyzny sporym zaskoczeniem."
+  correctAnswer: "c) są dla mężczyzny sporym zaskoczeniem."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-l1-q5
+  taskRef: certyfikat-polski-B2-2024-06-listen-1
+  questionType: multiple_choice
+  questionText: "Audycja dotyczy"
+  options: "a) sposobu aktywnego spędzania czasu z dziećmi.|b) przyczyn unikania przez dzieci niektórych aktywności.|c) skomplikowanych relacji dziecka z rodzicem."
+  correctAnswer: "b) przyczyn unikania przez dzieci niektórych aktywności."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-l1-q6
+  taskRef: certyfikat-polski-B2-2024-06-listen-1
+  questionType: multiple_choice
+  questionText: "Kobieta uważa, że w opisywanym przypadku"
+  options: "a) należy spróbować znaleźć przyczynę problemu.|b) nie ma sensu podejmować żadnych działań.|c) najlepiej poczekać, aż dziecko urośnie."
+  correctAnswer: "a) należy spróbować znaleźć przyczynę problemu."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-l2-q1
+  taskRef: certyfikat-polski-B2-2024-06-listen-2
+  questionType: true_false
+  questionText: "W dzień wagarowicza uczniowie wszystkich szkół we Wrocławiu spotykają się nad rzeką Odrą."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-l2-q2
+  taskRef: certyfikat-polski-B2-2024-06-listen-2
+  questionType: true_false
+  questionText: "Uczniom zaproponowano alternatywę dla tradycyjnego topienia marzanny."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-l2-q3
+  taskRef: certyfikat-polski-B2-2024-06-listen-2
+  questionType: true_false
+  questionText: "Młodzież mogła pływać po Odrze kajakami."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-l2-q4
+  taskRef: certyfikat-polski-B2-2024-06-listen-2
+  questionType: true_false
+  questionText: "Zorganizowana akcja rozwijała wśród uczniów m.in. umiejętność współpracy."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-l2-q5
+  taskRef: certyfikat-polski-B2-2024-06-listen-2
+  questionType: true_false
+  questionText: "Popularność akcji w tym roku zaskoczyła organizatorów."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-l2-q6
+  taskRef: certyfikat-polski-B2-2024-06-listen-2
+  questionType: true_false
+  questionText: "Chłopak zmienił swoje plany, ponieważ obawiał się konsekwencji."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-l2-q7
+  taskRef: certyfikat-polski-B2-2024-06-listen-2
+  questionType: true_false
+  questionText: "Dzień Wagarowicza jest świętem powszechnie akceptowanym przez władze szkolne."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-l2-q8
+  taskRef: certyfikat-polski-B2-2024-06-listen-2
+  questionType: true_false
+  questionText: "Podczas rejsów po Odrze można zobaczyć miasto z innej perspektywy."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-l3-q1
+  taskRef: certyfikat-polski-B2-2024-06-listen-3
+  questionType: matching
+  questionText: "Pobyt na niej możliwy jest tylko w określonych porach."
+  options: "A|B|C|D"
+  correctAnswer: C
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-l3-q2
+  taskRef: certyfikat-polski-B2-2024-06-listen-3
+  questionType: matching
+  questionText: "Z wizyty na tej plaży będą zadowoleni miłośnicy zwierząt morskich lub lądowych."
+  options: "A|B|C|D"
+  correctAnswer: "A|C"
+  pointsQuarter: 8
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-l3-q3
+  taskRef: certyfikat-polski-B2-2024-06-listen-3
+  questionType: matching
+  questionText: "Warunki pogodowe w różnych jej częściach bywają odmienne."
+  options: "A|B|C|D"
+  correctAnswer: D
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-l3-q4
+  taskRef: certyfikat-polski-B2-2024-06-listen-3
+  questionType: matching
+  questionText: "Nie znajdziemy na niej piasku."
+  options: "A|B|C|D"
+  correctAnswer: A
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-l3-q5
+  taskRef: certyfikat-polski-B2-2024-06-listen-3
+  questionType: matching
+  questionText: "Niewiele brakowało, a zostałaby zniszczona przez odwiedzających."
+  options: "A|B|C|D"
+  correctAnswer: B
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-l3-q6
+  taskRef: certyfikat-polski-B2-2024-06-listen-3
+  questionType: matching
+  questionText: "Kształt tej plaży nieustannie się zmienia."
+  options: "A|B|C|D"
+  correctAnswer: D
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-l3-q7
+  taskRef: certyfikat-polski-B2-2024-06-listen-3
+  questionType: matching
+  questionText: "Niegdyś dostęp do niej był możliwy również drogą lądową."
+  options: "A|B|C|D"
+  correctAnswer: C
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-l3-q8
+  taskRef: certyfikat-polski-B2-2024-06-listen-3
+  questionType: matching
+  questionText: "Znajduje się ona na obszarze objętym szczególną ochroną."
+  options: "A|B|C|D"
+  correctAnswer: "B|C"
+  pointsQuarter: 8
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-l4-q1
+  taskRef: certyfikat-polski-B2-2024-06-listen-4
+  questionType: multiple_choice
+  questionText: "Dzięki piosence zespołu Lady Pank klub Maxim"
+  options: "a) zmienił profil swojej działalności.|b) stał się znany w Trójmieście.|c) zasłynął również poza Trójmiastem."
+  correctAnswer: "c) zasłynął również poza Trójmiastem."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-l4-q2
+  taskRef: certyfikat-polski-B2-2024-06-listen-4
+  questionType: multiple_choice
+  questionText: "Michał Antoniszyn"
+  options: "a) urodził się w latach 60. XX wieku.|b) mógł się pochwalić stopniem naukowym.|c) był posiadaczem ponad 40 lokali."
+  correctAnswer: "b) mógł się pochwalić stopniem naukowym."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-l4-q3
+  taskRef: certyfikat-polski-B2-2024-06-listen-4
+  questionType: multiple_choice
+  questionText: "Wyposażenie lokalu Maxim"
+  options: "a) było charakterystyczne dla czasów Polski Ludowej.|b) nawiązywało do nadmorskiego położenia klubu.|c) łączyło w sobie luksus i zamiłowanie do sztuki."
+  correctAnswer: "c) łączyło w sobie luksus i zamiłowanie do sztuki."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-l4-q4
+  taskRef: certyfikat-polski-B2-2024-06-listen-4
+  questionType: multiple_choice
+  questionText: "W Maximie"
+  options: "a) ceny napojów nie należały do niskich.|b) można było zarobić średnią krajową pensję.|c) oferowano niewiele rodzajów drinków."
+  correctAnswer: "a) ceny napojów nie należały do niskich."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-l4-q5
+  taskRef: certyfikat-polski-B2-2024-06-listen-4
+  questionType: multiple_choice
+  questionText: "Pracownicy Służby Bezpieczeństwa"
+  options: "a) odwiedzali lokal jako goście.|b) pilnowali bezpieczeństwa w klubie.|c) szukali w Maximie przestępców."
+  correctAnswer: "a) odwiedzali lokal jako goście."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-l4-q6
+  taskRef: certyfikat-polski-B2-2024-06-listen-4
+  questionType: multiple_choice
+  questionText: "Uważa się, że Nikodem Skotarczak"
+  options: "a) przepracował w klubie Maxim 19 lat.|b) zakończył współpracę z lokalem w latach 70.|c) jako nastolatek ochraniał klub Maxim."
+  correctAnswer: "c) jako nastolatek ochraniał klub Maxim."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-l4-q7
+  taskRef: certyfikat-polski-B2-2024-06-listen-4
+  questionType: multiple_choice
+  questionText: "Zdaniem Michała Antoniszyna Skotarczak nie mógł pracować w Maximie"
+  options: "a) ze względu na swój nazbyt młody wiek.|b) ponieważ nie miał odpowiednich warunków fizycznych.|c) z powodu towarzyszącej mu złej sławy."
+  correctAnswer: "b) ponieważ nie miał odpowiednich warunków fizycznych."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-l4-q8
+  taskRef: certyfikat-polski-B2-2024-06-listen-4
+  questionType: multiple_choice
+  questionText: "W 2004 roku klub Maxim"
+  options: "a) zakończył swoją działalność.|b) uległ całkowitemu zawaleniu.|c) odzyskał swoją świetność."
+  correctAnswer: "a) zakończył swoją działalność."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-l5-q1
+  taskRef: certyfikat-polski-B2-2024-06-listen-5
+  questionType: fill_gap
+  questionText: "Co, oprócz sal dydaktycznych, zostało zmienione w rozbudowanej szkole?"
+  correctAnswer: "nowo wyremontowana sala gimnastyczna|nowa stołówka"
+  pointsQuarter: 8
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
+  gradingMode: open_manual
+  requiredSelections: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-l5-q2
+  taskRef: certyfikat-polski-B2-2024-06-listen-5
+  questionType: fill_gap
+  questionText: "Jak długo obecna dyrektorka szkoły sprawuje swoją funkcję?"
+  correctAnswer: "10 lat"
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-l5-q3
+  taskRef: certyfikat-polski-B2-2024-06-listen-5
+  questionType: fill_gap
+  questionText: "Dlaczego nowe sale podobają się uczniom? Proszę wymienić dwa powody."
+  correctAnswer: "są duże|są jasne|jest w nich nowy sprzęt"
+  pointsQuarter: 4
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 2
+  gradingMode: open_manual
+  requiredSelections: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-l5-q4
+  taskRef: certyfikat-polski-B2-2024-06-listen-5
+  questionType: fill_gap
+  questionText: "Co stało się ze starą częścią budynku szkoły?"
+  correctAnswer: "została wyremontowana"
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-l5-q5
+  taskRef: certyfikat-polski-B2-2024-06-listen-5
+  questionType: fill_gap
+  questionText: "Co zmieniło się w rozkładzie lekcji uczniów klas 1-5 po rozbudowie szkoły?"
+  correctAnswer: "dzieci nie chodzą do szkoły na dwie zmiany"
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-l5-q6
+  taskRef: certyfikat-polski-B2-2024-06-listen-5
+  questionType: fill_gap
+  questionText: "Do której godziny trwały lekcje w szkole przed rozbudową?"
+  correctAnswer: "do 16.00"
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-l5-q7
+  taskRef: certyfikat-polski-B2-2024-06-listen-5
+  questionType: fill_gap
+  questionText: "Na co jest przygotowana szkoła po remoncie?"
+  correctAnswer: "na dalszy rozwój gminy"
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l1-q1
+  taskRef: certyfikat-polski-C1-2022-03-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a) w pożarze budynku nikt nie ucierpiał.|b) oczekiwanie na interwencję odpowiednich służb trwało długo.|c) strażacy wyprowadzili mieszkańców z płonącego mieszkania."
+  correctAnswer: "a) w pożarze budynku nikt nie ucierpiał."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l1-q2
+  taskRef: certyfikat-polski-C1-2022-03-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a) naprawa fontann będzie okazją do unowocześnienia ich wyglądu.|b) fontanny musiały być naprawione, by zapobiec marnowaniu wody.|c) wiceprezydent miasta od dawna walczyła o remont fontann."
+  correctAnswer: "b) fontanny musiały być naprawione, by zapobiec marnowaniu wody."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l1-q3
+  taskRef: certyfikat-polski-C1-2022-03-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a) pani Helena świętowała swoje urodziny w gronie 120 osób.|b) seniorka zmieniła niedawno miejsce zamieszkania.|c) w ostatnich latach kobieta bardzo dbała o swoje zdrowie."
+  correctAnswer: "b) seniorka zmieniła niedawno miejsce zamieszkania."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l1-q4
+  taskRef: certyfikat-polski-C1-2022-03-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a) grudniowa uchwała nadal nie obowiązuje.|b) niezadowolenie pracowników wzbudził brak decyzji o podwyżkach.|c) protestujący pracownicy systematycznie zakłócali obrady rady miasta."
+  correctAnswer: "a) grudniowa uchwała nadal nie obowiązuje."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l1-q5
+  taskRef: certyfikat-polski-C1-2022-03-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a) klub zamierza odwołać się od decyzji w sprawie kary finansowej.|b) piłkarze Zagłębia zostali ukarani za agresywne przyśpiewki.|c) kibice jednej z drużyn niszczyli symbole klubowe przeciwnej drużyny."
+  correctAnswer: "c) kibice jednej z drużyn niszczyli symbole klubowe przeciwnej drużyny."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l1-q6
+  taskRef: certyfikat-polski-C1-2022-03-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a) darmowe posiłki są na razie wydawane tylko w jednym lokalu.|b) posiłki dla potrzebujących zostały ufundowane przez restauracje.|c) klienci zostawiają napiwek, który mogą odebrać potrzebujący."
+  correctAnswer: "a) darmowe posiłki są na razie wydawane tylko w jednym lokalu."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l1-q7
+  taskRef: certyfikat-polski-C1-2022-03-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a) referendum jest inicjatywą rady gminy.|b) większość głosujących wsparła urzędującego wójta.|c) wójt i radni nie brali pod uwagę głosu mieszkańców."
+  correctAnswer: "c) wójt i radni nie brali pod uwagę głosu mieszkańców."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l1-q8
+  taskRef: certyfikat-polski-C1-2022-03-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a) inwestycja drogowa została w pełni sfinansowana przez rząd.|b) kierowcy często przekraczają prędkość na tym odcinku drogi.|c) 5 listopada na drodze miał miejsce śmiertelny wypadek."
+  correctAnswer: "b) kierowcy często przekraczają prędkość na tym odcinku drogi."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l2-q1
+  taskRef: certyfikat-polski-C1-2022-03-listen-2
+  questionType: true_false
+  questionText: "W 1996 roku Apoloniusz Tajner startował w igrzyskach olimpijskich."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l2-q2
+  taskRef: certyfikat-polski-C1-2022-03-listen-2
+  questionType: true_false
+  questionText: "Tadeusz Bafia został zmuszony do pobytu w Kanadzie."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l2-q3
+  taskRef: certyfikat-polski-C1-2022-03-listen-2
+  questionType: true_false
+  questionText: "Apoloniusz Tajner stracił pracę z powodu braku ważnego zawodnika w kadrze skoczków."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l2-q4
+  taskRef: certyfikat-polski-C1-2022-03-listen-2
+  questionType: true_false
+  questionText: "Praca w związku sportowym była dla Tajnera jedynym źródłem utrzymania."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l2-q5
+  taskRef: certyfikat-polski-C1-2022-03-listen-2
+  questionType: true_false
+  questionText: "Występ Adama Małysza w Nagano był pozytywnym zaskoczeniem."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l2-q6
+  taskRef: certyfikat-polski-C1-2022-03-listen-2
+  questionType: true_false
+  questionText: "Dla Małysza alternatywą dla kariery skoczka była praca w branży budowlanej."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l2-q7
+  taskRef: certyfikat-polski-C1-2022-03-listen-2
+  questionType: true_false
+  questionText: "Andrzej Kozak i Leszek Nadarkiewicz dostrzegli potencjał sportowy Małysza."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l2-q8
+  taskRef: certyfikat-polski-C1-2022-03-listen-2
+  questionType: true_false
+  questionText: "Władze Związku Narciarskiego początkowo podważały kompetencje trenerskie Apoloniusza Tajnera."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l2-q9
+  taskRef: certyfikat-polski-C1-2022-03-listen-2
+  questionType: true_false
+  questionText: "Mówiący mężczyzna stara się ukryć nieprzyjemne fakty."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l3-q1
+  taskRef: certyfikat-polski-C1-2022-03-listen-3
+  questionType: matching
+  questionText: "A. cieszy się z zaangażowania młodzieży w działalność charytatywną."
+  options: "1|2|3|4"
+  correctAnswer: "1"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l3-q2
+  taskRef: certyfikat-polski-C1-2022-03-listen-3
+  questionType: matching
+  questionText: "B. jest zaskoczona umiejętnościami osób kierujących wydarzeniem."
+  options: "1|2|3|4"
+  correctAnswer: "4"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l3-q3
+  taskRef: certyfikat-polski-C1-2022-03-listen-3
+  questionType: matching
+  questionText: "C. przyznaje, że nie zawsze brała udział w akcji WOŚP."
+  options: "1|2|3|4"
+  correctAnswer: "3"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l3-q4
+  taskRef: certyfikat-polski-C1-2022-03-listen-3
+  questionType: matching
+  questionText: "D. podkreśla wyjątkowy sposób powstania i funkcjonowania fundacji."
+  options: "1|2|3|4"
+  correctAnswer: "4"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l3-q5
+  taskRef: certyfikat-polski-C1-2022-03-listen-3
+  questionType: matching
+  questionText: "E. uważa, że wyposażenie służby zdrowia powinno być finansowane z innych źródeł."
+  options: "1|2|3|4"
+  correctAnswer: "2"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l3-q6
+  taskRef: certyfikat-polski-C1-2022-03-listen-3
+  questionType: matching
+  questionText: "F. uważa dzień zbiórki za jeden z najważniejszych w roku."
+  options: "1|2|3|4"
+  correctAnswer: "3"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l3-q7
+  taskRef: certyfikat-polski-C1-2022-03-listen-3
+  questionType: matching
+  questionText: "G. podchodzi do akcji w sposób bardzo emocjonalny."
+  options: "1|2|3|4"
+  correctAnswer: "1"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l3-q8
+  taskRef: certyfikat-polski-C1-2022-03-listen-3
+  questionType: matching
+  questionText: "H. obecnie włącza się do akcji z większym zaangażowaniem."
+  options: "1|2|3|4"
+  correctAnswer: "4"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l4-q1
+  taskRef: certyfikat-polski-C1-2022-03-listen-4
+  questionType: matching
+  questionText: "Teleskop ALMA"
+  options: "A. nie doprowadził jak dotąd do ważnych odkryć.|B. okazał się projektem droższym niż oczekiwano.|C. ma zastąpić obecnie używane urządzenie.|D. wymagał ćwiczeń i testów na różnych typach terenu.|E. wykorzystują dane z różnych źródeł.|F. bazował na wcześniejszych badaniach prowadzonych w innym celu.|G. wymaga szczególnych warunków meteorologicznych, żeby działać.|H. uzmysłowił konieczność budowy kolejnego narzędzia tego rodzaju.|I. był przedmiotem wielu kontrowersji i obaw."
+  correctAnswer: "G. wymaga szczególnych warunków meteorologicznych, żeby działać."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l4-q2
+  taskRef: certyfikat-polski-C1-2022-03-listen-4
+  questionType: matching
+  questionText: "Teleskop Jamesa Webba"
+  options: "A. nie doprowadził jak dotąd do ważnych odkryć.|B. okazał się projektem droższym niż oczekiwano.|C. ma zastąpić obecnie używane urządzenie.|D. wymagał ćwiczeń i testów na różnych typach terenu.|E. wykorzystują dane z różnych źródeł.|F. bazował na wcześniejszych badaniach prowadzonych w innym celu.|G. wymaga szczególnych warunków meteorologicznych, żeby działać.|H. uzmysłowił konieczność budowy kolejnego narzędzia tego rodzaju.|I. był przedmiotem wielu kontrowersji i obaw."
+  correctAnswer: "C. ma zastąpić obecnie używane urządzenie."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l4-q3
+  taskRef: certyfikat-polski-C1-2022-03-listen-4
+  questionType: matching
+  questionText: "Wielki Zderzacz Hadronów"
+  options: "A. nie doprowadził jak dotąd do ważnych odkryć.|B. okazał się projektem droższym niż oczekiwano.|C. ma zastąpić obecnie używane urządzenie.|D. wymagał ćwiczeń i testów na różnych typach terenu.|E. wykorzystują dane z różnych źródeł.|F. bazował na wcześniejszych badaniach prowadzonych w innym celu.|G. wymaga szczególnych warunków meteorologicznych, żeby działać.|H. uzmysłowił konieczność budowy kolejnego narzędzia tego rodzaju.|I. był przedmiotem wielu kontrowersji i obaw."
+  correctAnswer: "H. uzmysłowił konieczność budowy kolejnego narzędzia tego rodzaju."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l4-q4
+  taskRef: certyfikat-polski-C1-2022-03-listen-4
+  questionType: matching
+  questionText: "Projekt Manhattan"
+  options: "A. nie doprowadził jak dotąd do ważnych odkryć.|B. okazał się projektem droższym niż oczekiwano.|C. ma zastąpić obecnie używane urządzenie.|D. wymagał ćwiczeń i testów na różnych typach terenu.|E. wykorzystują dane z różnych źródeł.|F. bazował na wcześniejszych badaniach prowadzonych w innym celu.|G. wymaga szczególnych warunków meteorologicznych, żeby działać.|H. uzmysłowił konieczność budowy kolejnego narzędzia tego rodzaju.|I. był przedmiotem wielu kontrowersji i obaw."
+  correctAnswer: "F. bazował na wcześniejszych badaniach prowadzonych w innym celu."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l4-q5
+  taskRef: certyfikat-polski-C1-2022-03-listen-4
+  questionType: matching
+  questionText: "Reaktor termonuklearny ITER"
+  options: "A. nie doprowadził jak dotąd do ważnych odkryć.|B. okazał się projektem droższym niż oczekiwano.|C. ma zastąpić obecnie używane urządzenie.|D. wymagał ćwiczeń i testów na różnych typach terenu.|E. wykorzystują dane z różnych źródeł.|F. bazował na wcześniejszych badaniach prowadzonych w innym celu.|G. wymaga szczególnych warunków meteorologicznych, żeby działać.|H. uzmysłowił konieczność budowy kolejnego narzędzia tego rodzaju.|I. był przedmiotem wielu kontrowersji i obaw."
+  correctAnswer: "I. był przedmiotem wielu kontrowersji i obaw."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l4-q6
+  taskRef: certyfikat-polski-C1-2022-03-listen-4
+  questionType: matching
+  questionText: "Projekt Międzynarodowej Stacji Kosmicznej ISS"
+  options: "A. nie doprowadził jak dotąd do ważnych odkryć.|B. okazał się projektem droższym niż oczekiwano.|C. ma zastąpić obecnie używane urządzenie.|D. wymagał ćwiczeń i testów na różnych typach terenu.|E. wykorzystują dane z różnych źródeł.|F. bazował na wcześniejszych badaniach prowadzonych w innym celu.|G. wymaga szczególnych warunków meteorologicznych, żeby działać.|H. uzmysłowił konieczność budowy kolejnego narzędzia tego rodzaju.|I. był przedmiotem wielu kontrowersji i obaw."
+  correctAnswer: "A. nie doprowadził jak dotąd do ważnych odkryć."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l4-q7
+  taskRef: certyfikat-polski-C1-2022-03-listen-4
+  questionType: matching
+  questionText: "Program Apollo"
+  options: "A. nie doprowadził jak dotąd do ważnych odkryć.|B. okazał się projektem droższym niż oczekiwano.|C. ma zastąpić obecnie używane urządzenie.|D. wymagał ćwiczeń i testów na różnych typach terenu.|E. wykorzystują dane z różnych źródeł.|F. bazował na wcześniejszych badaniach prowadzonych w innym celu.|G. wymaga szczególnych warunków meteorologicznych, żeby działać.|H. uzmysłowił konieczność budowy kolejnego narzędzia tego rodzaju.|I. był przedmiotem wielu kontrowersji i obaw."
+  correctAnswer: "D. wymagał ćwiczeń i testów na różnych typach terenu."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l4-q8
+  taskRef: certyfikat-polski-C1-2022-03-listen-4
+  questionType: matching
+  questionText: "System transportu kosmicznego"
+  options: "A. nie doprowadził jak dotąd do ważnych odkryć.|B. okazał się projektem droższym niż oczekiwano.|C. ma zastąpić obecnie używane urządzenie.|D. wymagał ćwiczeń i testów na różnych typach terenu.|E. wykorzystują dane z różnych źródeł.|F. bazował na wcześniejszych badaniach prowadzonych w innym celu.|G. wymaga szczególnych warunków meteorologicznych, żeby działać.|H. uzmysłowił konieczność budowy kolejnego narzędzia tego rodzaju.|I. był przedmiotem wielu kontrowersji i obaw."
+  correctAnswer: "B. okazał się projektem droższym niż oczekiwano."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l5-q1
+  taskRef: certyfikat-polski-C1-2022-03-listen-5
+  questionType: fill_gap
+  questionText: "Dlaczego bohater reportażu nie mógł mieć zwierząt w domu?"
+  correctAnswer: "Ponieważ ojciec nie lubił zwierząt."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l5-q2
+  taskRef: certyfikat-polski-C1-2022-03-listen-5
+  questionType: fill_gap
+  questionText: "Jakie żywe istoty Jan Żabiński hodował w swoim domu jako pierwsze?"
+  correctAnswer: Kijanki.
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l5-q3
+  taskRef: certyfikat-polski-C1-2022-03-listen-5
+  questionType: fill_gap
+  questionText: "W jaki sposób chłopiec przekonał ojca do swojej pasji?"
+  correctAnswer: "Skłamał, że nauczyciel przyrody kazał je hodować."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l5-q4
+  taskRef: certyfikat-polski-C1-2022-03-listen-5
+  questionType: fill_gap
+  questionText: "W jakim miejscu młody Jan Żabiński założył swoją pierwszą hodowlę?"
+  correctAnswer: "Na oknie."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l5-q5
+  taskRef: certyfikat-polski-C1-2022-03-listen-5
+  questionType: fill_gap
+  questionText: "Jakie zwierzęta, poza wodnymi, hodował bohater reportażu?"
+  correctAnswer: Jaszczurki.
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l5-q6
+  taskRef: certyfikat-polski-C1-2022-03-listen-5
+  questionType: fill_gap
+  questionText: "Jakie domowe wydarzenie sprawiło, że Jan Żabiński poczuł się jak tryumfator?"
+  correctAnswer: "Jego ojciec też zaczął hodować zwierzę."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l5-q7
+  taskRef: certyfikat-polski-C1-2022-03-listen-5
+  questionType: fill_gap
+  questionText: "Jakie plany wobec Jana Żabińskiego miał jego ojciec?"
+  correctAnswer: "Chciał przekazać mu kancelarię prawniczą."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l1-q1
+  taskRef: certyfikat-polski-C1-2022-11-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a) ptaki zachowywały się agresywnie wobec policjantów.|b) łabędzie chciały dostać się na drugą stronę ulicy.|c) po interwencji utrudnienia w ruchu utrzymały się do końca dnia."
+  correctAnswer: "b) łabędzie chciały dostać się na drugą stronę ulicy."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l1-q2
+  taskRef: certyfikat-polski-C1-2022-11-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a) kradzieży koparki dokonał dawny pracownik firmy.|b) koparka została sprzedana za kwotę 150 tysięcy złotych.|c) sprawca już wcześniej okradał swojego pracodawcę."
+  correctAnswer: "a) kradzieży koparki dokonał dawny pracownik firmy."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l1-q3
+  taskRef: certyfikat-polski-C1-2022-11-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a) dyrektor orkiestry zaoferował najwyższą kwotę podczas licytacji.|b) koncert był transmitowany na żywo na portalu społecznościowym.|c) koncert przyciągnął rzesze słuchaczy."
+  correctAnswer: "c) koncert przyciągnął rzesze słuchaczy."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l1-q4
+  taskRef: certyfikat-polski-C1-2022-11-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a) projekt został zainicjowany przez prezesów klubów sportowych.|b) w konkursie mogą wziąć udział zarówno organizacje, jak i osoby prywatne.|c) twarzą projektu jest uznany na świecie polski sportowiec."
+  correctAnswer: "c) twarzą projektu jest uznany na świecie polski sportowiec."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l1-q5
+  taskRef: certyfikat-polski-C1-2022-11-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a) całkowite koszty remontu ponosi Unia Europejska.|b) instalacja elektryczna w budynku wymagała modernizacji.|c) planowana jest budowa nowego obiektu sportowego w pobliżu."
+  correctAnswer: "b) instalacja elektryczna w budynku wymagała modernizacji."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l1-q6
+  taskRef: certyfikat-polski-C1-2022-11-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a) studenci mogą poznać topografię Legnicy bez opuszczania sali lekcyjnej.|b) w pracowni są prowadzone specjalne szkolenia dla kierowców.|c) w ostatnich latach znacząco wzrosła liczba wypadków drogowych."
+  correctAnswer: "a) studenci mogą poznać topografię Legnicy bez opuszczania sali lekcyjnej."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l2-q1
+  taskRef: certyfikat-polski-C1-2022-11-listen-2
+  questionType: true_false
+  questionText: "Zdaniem narratora pszczoły są bardziej skłonne do poświęceń niż ludzie."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l2-q2
+  taskRef: certyfikat-polski-C1-2022-11-listen-2
+  questionType: true_false
+  questionText: "Prace plastyczne Piotra Sochy wyróżnia koncentracja na szczegółach."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l2-q3
+  taskRef: certyfikat-polski-C1-2022-11-listen-2
+  questionType: true_false
+  questionText: "Strona graficzna „Pszczół” dostarcza silniejszych doznań intelektualnych niż sam tekst."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l2-q4
+  taskRef: certyfikat-polski-C1-2022-11-listen-2
+  questionType: true_false
+  questionText: "Narrator spodziewał się, że książka Sochy będzie bardziej jednoznaczna."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l2-q5
+  taskRef: certyfikat-polski-C1-2022-11-listen-2
+  questionType: true_false
+  questionText: "Narratora razi nadmiernie naukowy charakter opisów."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l2-q6
+  taskRef: certyfikat-polski-C1-2022-11-listen-2
+  questionType: true_false
+  questionText: "Sukcesem ilustratora jest umiejętność lekkiego ujęcia istotnego tematu."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l2-q7
+  taskRef: certyfikat-polski-C1-2022-11-listen-2
+  questionType: true_false
+  questionText: "Książka stanowi kompendium wiedzy na temat pszczół."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l2-q8
+  taskRef: certyfikat-polski-C1-2022-11-listen-2
+  questionType: true_false
+  questionText: "Według narratora najlepszym sposobem na przedstawienie uli figuralnych jest ich wizualizacja."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l2-q9
+  taskRef: certyfikat-polski-C1-2022-11-listen-2
+  questionType: true_false
+  questionText: "Publikacja zawiera pomysły na wspieranie pszczół w niesprzyjającym im środowisku."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l2-q10
+  taskRef: certyfikat-polski-C1-2022-11-listen-2
+  questionType: true_false
+  questionText: "Narratorowi nie podoba się, że „Pszczoły” z taką łatwością są klasyfikowane jako arcydzieło."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l3-q1
+  taskRef: certyfikat-polski-C1-2022-11-listen-3
+  questionType: matching
+  questionText: "Proszę wybrać pięć zdań prawdziwych (zgodnych z treścią nagrania)."
+  options: "1|2|3|4|5|6|7|8|9|10"
+  correctAnswer: "2|3|6|8|10"
+  pointsQuarter: 20
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
+  requiredSelections: 5
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l4-q1
+  taskRef: certyfikat-polski-C1-2022-11-listen-4
+  questionType: matching
+  questionText: "A. Technologie dostarczane przez tę branżę podnoszą poziom bezpieczeństwa pracy."
+  options: "1|2|3|4|5"
+  correctAnswer: "4"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l4-q2
+  taskRef: certyfikat-polski-C1-2022-11-listen-4
+  questionType: matching
+  questionText: "B. Urządzenia z tej branży odpowiadają bieżącym koncepcjom inżynierskim."
+  options: "1|2|3|4|5"
+  correctAnswer: "3"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l4-q3
+  taskRef: certyfikat-polski-C1-2022-11-listen-4
+  questionType: matching
+  questionText: "C. W tej branży planowana jest obecnie duża inwestycja."
+  options: "1|2|3|4|5"
+  correctAnswer: "1"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l4-q4
+  taskRef: certyfikat-polski-C1-2022-11-listen-4
+  questionType: matching
+  questionText: "D. Ta gałąź wspiera rozwiązania proekologiczne."
+  options: "1|2|3|4|5"
+  correctAnswer: "4"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l4-q5
+  taskRef: certyfikat-polski-C1-2022-11-listen-4
+  questionType: matching
+  questionText: "E. Niebawem Polska znajdzie się w gronie najlepszych państw w tej branży."
+  options: "1|2|3|4|5"
+  correctAnswer: "1"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l4-q6
+  taskRef: certyfikat-polski-C1-2022-11-listen-4
+  questionType: matching
+  questionText: "F. Polski projekt znajduje się w pierwszej dziesiątce tego rodzaju inwestycji w Europie."
+  options: "1|2|3|4|5"
+  correctAnswer: "4"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l4-q7
+  taskRef: certyfikat-polski-C1-2022-11-listen-4
+  questionType: matching
+  questionText: "G. Przemysł ten rozwija się w Polsce od siedemdziesięciu lat."
+  options: "1|2|3|4|5"
+  correctAnswer: "2"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l4-q8
+  taskRef: certyfikat-polski-C1-2022-11-listen-4
+  questionType: matching
+  questionText: "H. Zasięg terytorialny tej branży stopniowo się poszerza."
+  options: "1|2|3|4|5"
+  correctAnswer: "4"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l4-q9
+  taskRef: certyfikat-polski-C1-2022-11-listen-4
+  questionType: matching
+  questionText: "I. Produkcja w tej gałęzi nie jest masowa, ale bardzo wyspecjalizowana."
+  options: "1|2|3|4|5"
+  correctAnswer: "5"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l4-q10
+  taskRef: certyfikat-polski-C1-2022-11-listen-4
+  questionType: matching
+  questionText: "J. Ta branża wspomaga rozwój sieci infrastrukturalnych w Europie."
+  options: "1|2|3|4|5"
+  correctAnswer: "2"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l5-q1
+  taskRef: certyfikat-polski-C1-2022-11-listen-5
+  questionType: fill_gap
+  questionText: "Kiedy narrator był ostatni raz w Wirakoczy?"
+  correctAnswer: "Kilka tygodni temu."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l5-q2
+  taskRef: certyfikat-polski-C1-2022-11-listen-5
+  questionType: fill_gap
+  questionText: "Jaka była rola Staszka Tyczyńskiego w projekcie?"
+  correctAnswer: "Był jego pomysłodawcą."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l5-q3
+  taskRef: certyfikat-polski-C1-2022-11-listen-5
+  questionType: fill_gap
+  questionText: "Czego dotyczyły lokalne legendy?"
+  correctAnswer: "Inków|skarbu"
+  pointsQuarter: 4
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 2
+  gradingMode: open_manual
+  requiredSelections: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l5-q4
+  taskRef: certyfikat-polski-C1-2022-11-listen-5
+  questionType: fill_gap
+  questionText: "Czym zajmował się Staszek Tyczyński w tym projekcie?"
+  correctAnswer: "Organizacją pracy."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l5-q5
+  taskRef: certyfikat-polski-C1-2022-11-listen-5
+  questionType: fill_gap
+  questionText: "Co dziennikarze zamontowali w osadzie?"
+  correctAnswer: "Antenę do transmisji."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l5-q6
+  taskRef: certyfikat-polski-C1-2022-11-listen-5
+  questionType: fill_gap
+  questionText: "W czym uczestniczyli zaproszeni goście?"
+  correctAnswer: "W grze terenowej."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l5-q7
+  taskRef: certyfikat-polski-C1-2022-11-listen-5
+  questionType: fill_gap
+  questionText: "Dlaczego program, który tworzyli radiowcy, był przełomowy?"
+  correctAnswer: "Ponieważ jeszcze nie było podobnych programów w telewizji."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l5-q8
+  taskRef: certyfikat-polski-C1-2022-11-listen-5
+  questionType: fill_gap
+  questionText: "Jaka była rola narratora w organizacji programu?"
+  correctAnswer: "Kwalifikował uczestników."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l5-q9
+  taskRef: certyfikat-polski-C1-2022-11-listen-5
+  questionType: fill_gap
+  questionText: "Co zmieniło się w życiu narratora podczas realizacji programu?"
+  correctAnswer: "Rzucił palenie."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l1-q1
+  taskRef: certyfikat-polski-C1-2023-04-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a) polityka klimatyczna jest punktem spornym pomiędzy Niemcami a Francją.|b) państwa Unii Europejskiej dążą do ujednolicenia polityki klimatycznej.|c) zmniejszenie emisji jest jedynym celem polityki klimatycznej."
+  correctAnswer: "a) polityka klimatyczna jest punktem spornym pomiędzy Niemcami a Francją."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l1-q2
+  taskRef: certyfikat-polski-C1-2023-04-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a) pomysłodawca od początku był pewien powodzenia akcji.|b) niewidome dzieci odbyły lot helikopterem.|c) fundusze na wyjazd pochodziły z utylizacji telefonów."
+  correctAnswer: "c) fundusze na wyjazd pochodziły z utylizacji telefonów."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l1-q3
+  taskRef: certyfikat-polski-C1-2023-04-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a) Antoni Ptak dorobił się fortuny dzięki uprawie czereśni.|b) pierwsza praca Antoniego Ptaka była związana z ogrodnictwem.|c) Antoni Ptak przejął firmę ogrodniczą po rodzicach."
+  correctAnswer: "b) pierwsza praca Antoniego Ptaka była związana z ogrodnictwem."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l1-q4
+  taskRef: certyfikat-polski-C1-2023-04-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a) mężczyzna miał spore doświadczenie w pracy z dziećmi.|b) mężczyznę irytuje zachowanie prowadzących programy z dziećmi.|c) partnerskie podejście do dzieci nie przyniosło oczekiwanych efektów."
+  correctAnswer: "b) mężczyznę irytuje zachowanie prowadzących programy z dziećmi."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l1-q5
+  taskRef: certyfikat-polski-C1-2023-04-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a) zasypanie dziury nie będzie możliwe ze względu na brak dojazdu.|b) zapadlisko pojawiło się na jednym z osiedli mieszkaniowych.|c) usuwanie szkód muszą poprzedzić prace przygotowawcze."
+  correctAnswer: "c) usuwanie szkód muszą poprzedzić prace przygotowawcze."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l1-q6
+  taskRef: certyfikat-polski-C1-2023-04-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a) przejęcie kamienicy przez samorząd gminy było nieuniknione.|b) omawiana kamienica jest w nienagannym stanie.|c) spadkobiercy zostali pozbawieni prawa do dziedziczenia budynku."
+  correctAnswer: "a) przejęcie kamienicy przez samorząd gminy było nieuniknione."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l2-q1
+  taskRef: certyfikat-polski-C1-2023-04-listen-2
+  questionType: true_false
+  questionText: "Substancje potrzebne do biodruku umieszczone są w różnych zbiornikach w drukarce."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l2-q2
+  taskRef: certyfikat-polski-C1-2023-04-listen-2
+  questionType: true_false
+  questionText: "Zaraz po zakończeniu wydruku organ jest gotowy do wykorzystania."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l2-q3
+  taskRef: certyfikat-polski-C1-2023-04-listen-2
+  questionType: true_false
+  questionText: "Każdy z ośrodków zaangażowanych w projekt odpowiada za inny jego aspekt."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l2-q4
+  taskRef: certyfikat-polski-C1-2023-04-listen-2
+  questionType: true_false
+  questionText: "Według narratora za 3-4 lata przeszczepy drukowanych organów będą mogły być wykonywane na szeroką skalę."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l2-q5
+  taskRef: certyfikat-polski-C1-2023-04-listen-2
+  questionType: true_false
+  questionText: "Szacuje się, że w Polsce liczba chorych na cukrzycę wzrośnie do 5 milionów osób."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l2-q6
+  taskRef: certyfikat-polski-C1-2023-04-listen-2
+  questionType: true_false
+  questionText: "Narrator nakreśla kolejne etapy w rozwoju przeszczepów przy użyciu biodruku."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l2-q7
+  taskRef: certyfikat-polski-C1-2023-04-listen-2
+  questionType: true_false
+  questionText: "W bioprintingu wykorzystuje się materiał komórkowy osoby chorej."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l2-q8
+  taskRef: certyfikat-polski-C1-2023-04-listen-2
+  questionType: true_false
+  questionText: "Narrator uważa rozwiązania medyczne przedstawiane w utworach fantastycznych za mało prawdopodobne."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l3-q1
+  taskRef: certyfikat-polski-C1-2023-04-listen-3
+  questionType: multiple_choice
+  questionText: "Sylwia zajęła się remontem mieszkania, ponieważ"
+  options: "a) chciała pomóc fachowcom.|b) nalegała na to jej rodzina.|c) prace wykończeniowe zbytnio się przeciągały."
+  correctAnswer: "c) prace wykończeniowe zbytnio się przeciągały."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l3-q2
+  taskRef: certyfikat-polski-C1-2023-04-listen-3
+  questionType: multiple_choice
+  questionText: "Sylwia zaczęła uczyć się majsterkowania"
+  options: "a) podczas pisania artykułu na ten temat.|b) bez pomocy innych osób.|c) chodząc na warsztaty dla początkujących."
+  correctAnswer: "b) bez pomocy innych osób."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l3-q3
+  taskRef: certyfikat-polski-C1-2023-04-listen-3
+  questionType: multiple_choice
+  questionText: "Sylwia uważa, że"
+  options: "a) kobiety mają więcej zrozumienia dla jej pasji niż mężczyźni.|b) kupowanie gotowych rzeczy jest domeną kobiet.|c) mężczyźni mają opory przed proszeniem o pomoc lub radę."
+  correctAnswer: "c) mężczyźni mają opory przed proszeniem o pomoc lub radę."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l3-q4
+  taskRef: certyfikat-polski-C1-2023-04-listen-3
+  questionType: multiple_choice
+  questionText: "Bracia Sylwii"
+  options: "a) regularnie przywożą jej własne meble do naprawy.|b) przekonali siostrę do majsterkowania.|c) zmienili swoją opinię, widząc rezultaty wysiłków siostry."
+  correctAnswer: "c) zmienili swoją opinię, widząc rezultaty wysiłków siostry."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l3-q5
+  taskRef: certyfikat-polski-C1-2023-04-listen-3
+  questionType: multiple_choice
+  questionText: "Barbara w dzieciństwie"
+  options: "a) razem z przyjaciółkami odnawiała stare przedmioty.|b) obserwowała pracę znajomych nad naprawą mebli.|c) uczęszczała na zajęcia artystyczne prowadzone w ASP."
+  correctAnswer: "b) obserwowała pracę znajomych nad naprawą mebli."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l3-q6
+  taskRef: certyfikat-polski-C1-2023-04-listen-3
+  questionType: multiple_choice
+  questionText: "Barbara podczas remontu"
+  options: "a) odkryła, że z Sylwią łączy ją coś więcej niż tylko obowiązki zawodowe.|b) musiała wyrzucić wiele mebli z powodu ich złej jakości.|c) publikowała w sieci zdjęcia dokumentujące prace renowacyjne."
+  correctAnswer: "a) odkryła, że z Sylwią łączy ją coś więcej niż tylko obowiązki zawodowe."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l3-q7
+  taskRef: certyfikat-polski-C1-2023-04-listen-3
+  questionType: multiple_choice
+  questionText: "Oprócz renowacji mebli kobiety"
+  options: "a) wykonują ozdoby z nietypowych materiałów.|b) zajęły się naprawą starego sprzętu elektronicznego.|c) odnawiają starą i zniszczoną biżuterię."
+  correctAnswer: "a) wykonują ozdoby z nietypowych materiałów."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l4-q1
+  taskRef: certyfikat-polski-C1-2023-04-listen-4
+  questionType: matching
+  questionText: "A. Podkreśla życiową przydatność cech wyniesionych z harcerstwa."
+  options: "1|2|3|4|5|6"
+  correctAnswer: "2"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l4-q2
+  taskRef: certyfikat-polski-C1-2023-04-listen-4
+  questionType: matching
+  questionText: "B. Jest przeciwieństwem stereotypowego wyobrażenia harcerza."
+  options: "1|2|3|4|5|6"
+  correctAnswer: "2"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l4-q3
+  taskRef: certyfikat-polski-C1-2023-04-listen-4
+  questionType: matching
+  questionText: "C. Dała się poznać szerszym kręgom dzięki rozwijaniu w harcerstwie swoich zainteresowań."
+  options: "1|2|3|4|5|6"
+  correctAnswer: "3"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l4-q4
+  taskRef: certyfikat-polski-C1-2023-04-listen-4
+  questionType: matching
+  questionText: "D. Tłumaczy pochodzenie swojego pseudonimu."
+  options: "1|2|3|4|5|6"
+  correctAnswer: "4"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l4-q5
+  taskRef: certyfikat-polski-C1-2023-04-listen-4
+  questionType: matching
+  questionText: "E. Nawiązuje do ważnej postaci z historii harcerstwa."
+  options: "1|2|3|4|5|6"
+  correctAnswer: "4|5"
+  pointsQuarter: 8
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l4-q6
+  taskRef: certyfikat-polski-C1-2023-04-listen-4
+  questionType: matching
+  questionText: "F. Przedstawia elementy wyróżniające Leśną Szkółkę."
+  options: "1|2|3|4|5|6"
+  correctAnswer: "1|6"
+  pointsQuarter: 8
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l4-q7
+  taskRef: certyfikat-polski-C1-2023-04-listen-4
+  questionType: matching
+  questionText: "G. Przybliża genezę jednej z zasad stosowanych w harcerstwie."
+  options: "1|2|3|4|5|6"
+  correctAnswer: "5"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l5-q1
+  taskRef: certyfikat-polski-C1-2023-04-listen-5
+  questionType: fill_gap
+  questionText: "Ile śmieci krąży po orbicie okołoziemskiej?"
+  correctAnswer: "Około 20 tys. śmieci"
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l5-q2
+  taskRef: certyfikat-polski-C1-2023-04-listen-5
+  questionType: fill_gap
+  questionText: "Co – oprócz części rakiet – znajduje się na orbicie okołoziemskiej?"
+  correctAnswer: "sprzęt astronautów|nieczynne satelity"
+  pointsQuarter: 4
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 2
+  gradingMode: open_manual
+  requiredSelections: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l5-q3
+  taskRef: certyfikat-polski-C1-2023-04-listen-5
+  questionType: fill_gap
+  questionText: "Jakie są konsekwencje zderzenia się obiektów na orbicie?"
+  correctAnswer: "Powstanie 2–3 tys. nowych śmieci"
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l5-q4
+  taskRef: certyfikat-polski-C1-2023-04-listen-5
+  questionType: fill_gap
+  questionText: "Jakie były następstwa pierwszego zderzenia się odpadów na orbicie?"
+  correctAnswer: "problemy komunikacyjne w Stanach Zjednoczonych|powstanie 600 nowych odpadów"
+  pointsQuarter: 8
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
+  gradingMode: open_manual
+  requiredSelections: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l5-q5
+  taskRef: certyfikat-polski-C1-2023-04-listen-5
+  questionType: fill_gap
+  questionText: "Jakie utrudnienia w codziennym życiu może spowodować uszkodzenie satelity?"
+  correctAnswer: "brak nawigacji samochodowej|brak dostępu do bieżących informacji"
+  pointsQuarter: 4
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 2
+  gradingMode: open_manual
+  requiredSelections: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l5-q6
+  taskRef: certyfikat-polski-C1-2023-04-listen-5
+  questionType: fill_gap
+  questionText: "Co było bezpośrednią przyczyną wypadku wahadłowca w 1983 roku?"
+  correctAnswer: "Odprysk farby uszkodził szybę."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l5-q7
+  taskRef: certyfikat-polski-C1-2023-04-listen-5
+  questionType: fill_gap
+  questionText: "Co jest szczególnie narażone na konsekwencje zetknięcia z kosmośmieciami?"
+  correctAnswer: "loty kosmiczne|międzynarodowa stacja kosmiczna"
+  pointsQuarter: 4
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 2
+  gradingMode: open_manual
+  requiredSelections: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l5-q8
+  taskRef: certyfikat-polski-C1-2023-04-listen-5
+  questionType: fill_gap
+  questionText: "Gdzie szukali schronienia astronauci pracujący w stacji kosmicznej?"
+  correctAnswer: "Schowali się w statku Sojuz."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l5-q9
+  taskRef: certyfikat-polski-C1-2023-04-listen-5
+  questionType: fill_gap
+  questionText: "Dlaczego należy monitorować przemieszczanie się śmieci po orbitach?"
+  correctAnswer: "Aby móc zmienić położenie statku lub satelity."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l1-q1
+  taskRef: certyfikat-polski-C1-2023-11-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a. lekarze rodzinni będą mogli prowadzić terapię onkologiczną.|b. osoby z nowotworami uzyskają prawo do szybszej diagnostyki.|c. proponowane zmiany wejdą w życie za 9 tygodni."
+  correctAnswer: "b. osoby z nowotworami uzyskają prawo do szybszej diagnostyki."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l1-q2
+  taskRef: certyfikat-polski-C1-2023-11-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a. tylko 2 miliony Polaków regularnie odwiedzają kina.|b. coraz więcej polskich filmów jest dostępnych w sieci.|c. Polacy wolą produkcje zagraniczne od krajowych."
+  correctAnswer: "c. Polacy wolą produkcje zagraniczne od krajowych."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l1-q3
+  taskRef: certyfikat-polski-C1-2023-11-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a. do emisji banknotu 500 zł przyczyniła się w głównej mierze inflacja.|b. Polacy nawykli do transakcji gotówkowych.|c. w Polsce nastąpił czteroprocentowy wzrost gospodarczy."
+  correctAnswer: "b. Polacy nawykli do transakcji gotówkowych."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l1-q4
+  taskRef: certyfikat-polski-C1-2023-11-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a. prywatne maile pisane w godzinach pracy mogą zostać skontrolowane przez pracodawcę.|b. wysyłanie prywatnych wiadomości w pracy nie może być podstawą wypowiedzenia umowy pracownikowi.|c. skarga pracownika została rozpatrzona pozytywnie przez Europejski Trybunał Praw Człowieka."
+  correctAnswer: "a. prywatne maile pisane w godzinach pracy mogą zostać skontrolowane przez pracodawcę."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l1-q5
+  taskRef: certyfikat-polski-C1-2023-11-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a. program „Mieszkanie dla młodych” polega na dofinansowaniu wynajmu.|b. w styczniu połowa złożonych wniosków została odrzucona.|c. budżet programu może wyczerpać się wcześniej, niż zakładano."
+  correctAnswer: "c. budżet programu może wyczerpać się wcześniej, niż zakładano."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l1-q6
+  taskRef: certyfikat-polski-C1-2023-11-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a. w Krakowie od dawna obowiązuje zakaz ogrzewania drewnem i węglem.|b. uchwały nie poparło piętnastu radnych.|c. decyzja sejmiku jest krytykowana jako zbyt radykalna."
+  correctAnswer: "b. uchwały nie poparło piętnastu radnych."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l1-q7
+  taskRef: certyfikat-polski-C1-2023-11-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a. ekologiczne choinki będzie można zobaczyć tylko w Warszawie.|b. celem akcji jest zwrócenie uwagi na osoby spędzające święta samotnie.|c. każde z drzewek zostało przygotowane w innym mieście."
+  correctAnswer: "b. celem akcji jest zwrócenie uwagi na osoby spędzające święta samotnie."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l1-q8
+  taskRef: certyfikat-polski-C1-2023-11-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a. gospodarzami turnieju noworocznego w piłce ręcznej są Czechy.|b. Polacy nie wystartują w Mistrzostwach Europy.|c. Polacy ustąpili Białorusinom jednym punktem."
+  correctAnswer: "c. Polacy ustąpili Białorusinom jednym punktem."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l2-q1
+  taskRef: certyfikat-polski-C1-2023-11-listen-2
+  questionType: true_false
+  questionText: "W ramach działań rewitalizacyjnych powstała m.in. Baszta Czarownic."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l2-q2
+  taskRef: certyfikat-polski-C1-2023-11-listen-2
+  questionType: true_false
+  questionText: "Nazwa parku ma proweniencję muzyczną."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l2-q3
+  taskRef: certyfikat-polski-C1-2023-11-listen-2
+  questionType: true_false
+  questionText: "Przed inwestycją nie było połączenia pomiędzy brzegami rzeki."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l2-q4
+  taskRef: certyfikat-polski-C1-2023-11-listen-2
+  questionType: true_false
+  questionText: "Na nowo powstałych placach są dobre warunki do uprawiania sportu."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l2-q5
+  taskRef: certyfikat-polski-C1-2023-11-listen-2
+  questionType: true_false
+  questionText: "W miejscu inwestycji zadbano o architekturę krajobrazu."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l2-q6
+  taskRef: certyfikat-polski-C1-2023-11-listen-2
+  questionType: true_false
+  questionText: "Mieszkanka miasta uważa, że kładki nie są dobrym rozwiązaniem."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l2-q7
+  taskRef: certyfikat-polski-C1-2023-11-listen-2
+  questionType: true_false
+  questionText: "Na bulwarach znajdują się najważniejsze pomniki związane z historią miasta."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l2-q8
+  taskRef: certyfikat-polski-C1-2023-11-listen-2
+  questionType: true_false
+  questionText: "Jeden z inwestorów planuje otworzenie restauracji w pobliżu wałów."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l3-q1
+  taskRef: certyfikat-polski-C1-2023-11-listen-3
+  questionType: matching
+  questionText: "A. Skarb składa się z monet pochodzących z różnych krajów."
+  options: "1|2|3|4|5"
+  correctAnswer: "4"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l3-q2
+  taskRef: certyfikat-polski-C1-2023-11-listen-3
+  questionType: matching
+  questionText: "B. Nie udało się sporządzić kompletnego katalogu znalezionych kosztowności."
+  options: "1|2|3|4|5"
+  correctAnswer: "3"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l3-q3
+  taskRef: certyfikat-polski-C1-2023-11-listen-3
+  questionType: matching
+  questionText: "C. Odkrycie nie cieszyło się zainteresowaniem władz."
+  options: "1|2|3|4|5"
+  correctAnswer: "1"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l3-q4
+  taskRef: certyfikat-polski-C1-2023-11-listen-3
+  questionType: matching
+  questionText: "D. Nie wiadomo, do kogo należał ten skarb."
+  options: "1|2|3|4|5"
+  correctAnswer: "4"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l3-q5
+  taskRef: certyfikat-polski-C1-2023-11-listen-3
+  questionType: matching
+  questionText: "E. Odkrycie jest cennym materiałem także dla językoznawców."
+  options: "1|2|3|4|5"
+  correctAnswer: "2"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l3-q6
+  taskRef: certyfikat-polski-C1-2023-11-listen-3
+  questionType: matching
+  questionText: "F. Kosztowności trafiły w ręce niewłaściwych osób."
+  options: "1|2|3|4|5"
+  correctAnswer: "3"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l3-q7
+  taskRef: certyfikat-polski-C1-2023-11-listen-3
+  questionType: matching
+  questionText: "G. W skład skarbu wchodzą elementy dekoracyjne ubioru regionalnego."
+  options: "1|2|3|4|5"
+  correctAnswer: "5"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l3-q8
+  taskRef: certyfikat-polski-C1-2023-11-listen-3
+  questionType: matching
+  questionText: "H. Kosztowności przeleżały schowane kilka wieków w budynku."
+  options: "1|2|3|4|5"
+  correctAnswer: "1"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l3-q9
+  taskRef: certyfikat-polski-C1-2023-11-listen-3
+  questionType: matching
+  questionText: "I. Żaden inny skarb odkryty w Polsce nie dorównuje mu wielkością."
+  options: "1|2|3|4|5"
+  correctAnswer: "2"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l3-q10
+  taskRef: certyfikat-polski-C1-2023-11-listen-3
+  questionType: matching
+  questionText: "J. To najbardziej wiekowy z odkrytych skarbów."
+  options: "1|2|3|4|5"
+  correctAnswer: "5"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l4-q1
+  taskRef: certyfikat-polski-C1-2023-11-listen-4
+  questionType: matching
+  questionText: "Proszę wybrać sześć wypowiedzi zgodnych z treścią nagrania."
+  options: "1|2|3|4|5|6|7|8|9|10|11|12"
+  correctAnswer: "2|5|6|8|9|12"
+  pointsQuarter: 24
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
+  requiredSelections: 6
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l5-q1
+  taskRef: certyfikat-polski-C1-2023-11-listen-5
+  questionType: fill_gap
+  questionText: "Dlaczego muzyk nie przepada za festiwalami?"
+  correctAnswer: "Jest na nie za stary|Irytuje/denerwuje go hałas|Irytują go tłumy/wrzeszczący ludzie|Irytuje go alkohol na festiwalu"
+  pointsQuarter: 4
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 2
+  gradingMode: open_manual
+  requiredSelections: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l5-q2
+  taskRef: certyfikat-polski-C1-2023-11-listen-5
+  questionType: fill_gap
+  questionText: "Z jakimi uczuciami, nieobecnymi przy okazji innych festiwali, muzyk kojarzy OFF Festival?"
+  correctAnswer: "spokój|relaks|brak napinki|wzruszenie"
+  pointsQuarter: 4
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 2
+  gradingMode: open_manual
+  requiredSelections: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l5-q3
+  taskRef: certyfikat-polski-C1-2023-11-listen-5
+  questionType: fill_gap
+  questionText: "Co Staniszewski sądzi o koncercie Iggy’ego Popa?"
+  correctAnswer: "Uważa, że był fantastyczny."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l5-q4
+  taskRef: certyfikat-polski-C1-2023-11-listen-5
+  questionType: fill_gap
+  questionText: "W jakim miejscu występował Staniszewski z zespołem Beneficjenci Splendoru na OFF Festivalu?"
+  correctAnswer: "Na małej scenie."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l5-q5
+  taskRef: certyfikat-polski-C1-2023-11-listen-5
+  questionType: fill_gap
+  questionText: "Dlaczego koncert na festiwalu był dla niego wyjątkowy?"
+  correctAnswer: "Był to ich pierwszy duży koncert."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l5-q6
+  taskRef: certyfikat-polski-C1-2023-11-listen-5
+  questionType: fill_gap
+  questionText: "Co spowodowało złe samopoczucie muzyka przed koncertem?"
+  correctAnswer: "Było mu gorąco."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l5-q7
+  taskRef: certyfikat-polski-C1-2023-11-listen-5
+  questionType: fill_gap
+  questionText: "Co zaskoczyło muzyka w zachowaniu publiczności w trakcie koncertu i po nim?"
+  correctAnswer: "Znali jego piosenki|Śpiewali razem z nim|Prosili o autografy"
+  pointsQuarter: 4
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 2
+  gradingMode: open_manual
+  requiredSelections: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l5-q8
+  taskRef: certyfikat-polski-C1-2023-11-listen-5
+  questionType: fill_gap
+  questionText: "Dlaczego w tym roku muzyk nie weźmie udziału w festiwalu?"
+  correctAnswer: "Będzie za granicą|Nagrywa/kończy nową płytę"
+  pointsQuarter: 4
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 2
+  gradingMode: open_manual
+  requiredSelections: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l1-q1
+  taskRef: certyfikat-polski-C1-2024-04-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a) uczniowie z południowej Polski rozpoczynają ferie jako pierwsi.|b) kierowcy dzielą się w internecie informacjami o kontrolach drogowych.|c) policja zachęca do zgłaszania autobusów wycieczkowych do kontroli."
+  correctAnswer: "c) policja zachęca do zgłaszania autobusów wycieczkowych do kontroli."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l1-q2
+  taskRef: certyfikat-polski-C1-2024-04-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a) cena energii będzie stała, jeśli użytkownik nie przekroczy limitu zużycia prądu.|b) planowane są dopłaty w wysokości 2000 zł dla trzech grup konsumentów.|c) program został wprowadzony jako reakcja na wyjątkowo niskie temperatury."
+  correctAnswer: "a) cena energii będzie stała, jeśli użytkownik nie przekroczy limitu zużycia prądu."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l1-q3
+  taskRef: certyfikat-polski-C1-2024-04-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a) leśnicy dążą do połączenia stad w celu zwiększenia populacji żubrów.|b) niższa liczebność stada ogranicza rozprzestrzenianie się chorób.|c) bieszczadzkie żubry migrują do innych polskich lasów."
+  correctAnswer: "b) niższa liczebność stada ogranicza rozprzestrzenianie się chorób."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l1-q4
+  taskRef: certyfikat-polski-C1-2024-04-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a) akcja miała na celu promocję fundacji charytatywnej.|b) ostatni odcinek trasy Kamil przeszedł w towarzystwie innych osób.|c) mężczyzna planuje pokonać pieszo trasę z Krakowa do Porto."
+  correctAnswer: "b) ostatni odcinek trasy Kamil przeszedł w towarzystwie innych osób."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l1-q5
+  taskRef: certyfikat-polski-C1-2024-04-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a) powodem utraty pieniędzy była nietrafiona inwestycja.|b) oszust podawał się za policjanta z wydziału cyberprzestępstw.|c) kobieta utraciła dostęp do konta, na które przelała swoje pieniądze."
+  correctAnswer: "c) kobieta utraciła dostęp do konta, na które przelała swoje pieniądze."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l1-q6
+  taskRef: certyfikat-polski-C1-2024-04-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a) awaria systemu nawigacji przyczyniła się do zagrożenia w ruchu lotniczym.|b) ruch lotniczy kontynuowano mimo zakłóceń w działaniu systemu GPS.|c) powodem awarii była niezgodność nawigacji satelitarnej z polskimi radarami."
+  correctAnswer: "b) ruch lotniczy kontynuowano mimo zakłóceń w działaniu systemu GPS."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l1-q7
+  taskRef: certyfikat-polski-C1-2024-04-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a) system informatyczny stanowi wsparcie dla komisji wyborczych.|b) w wyborach samorządowych będzie można zagłosować zdalnie.|c) problemy w działaniu serwerów mogły wpłynąć na wynik wyborów."
+  correctAnswer: "a) system informatyczny stanowi wsparcie dla komisji wyborczych."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l2-q1
+  taskRef: certyfikat-polski-C1-2024-04-listen-2
+  questionType: matching
+  questionText: "Która z roślin jest wrażliwa nawet na najsubtelniejsze bodźce."
+  options: "1|2|3|4"
+  correctAnswer: "2"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l2-q2
+  taskRef: certyfikat-polski-C1-2024-04-listen-2
+  questionType: matching
+  questionText: "Która z roślin może stać się źródłem składników odżywczych dla kolejnych roślin tego samego gatunku."
+  options: "1|2|3|4"
+  correctAnswer: "4"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l2-q3
+  taskRef: certyfikat-polski-C1-2024-04-listen-2
+  questionType: matching
+  questionText: "Która z roślin wytwarza płyny rozkładające substancje organiczne."
+  options: "1|2|3|4"
+  correctAnswer: "1|3"
+  pointsQuarter: 8
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l2-q4
+  taskRef: certyfikat-polski-C1-2024-04-listen-2
+  questionType: matching
+  questionText: "Która z roślin wabi swoje ofiary aromatem wytwarzanego nektaru."
+  options: "1|2|3|4"
+  correctAnswer: "3"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l2-q5
+  taskRef: certyfikat-polski-C1-2024-04-listen-2
+  questionType: matching
+  questionText: "Która z roślin zachowuje ciągłość gatunku nawet w trudnych warunkach."
+  options: "1|2|3|4"
+  correctAnswer: "4"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l2-q6
+  taskRef: certyfikat-polski-C1-2024-04-listen-2
+  questionType: matching
+  questionText: "Która z roślin ma niezwykłe właściwości dzięki szybkiemu przemieszczaniu się płynów w jej obrębie."
+  options: "1|2|3|4"
+  correctAnswer: "1|2"
+  pointsQuarter: 8
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l2-q7
+  taskRef: certyfikat-polski-C1-2024-04-listen-2
+  questionType: matching
+  questionText: "Która z roślin wykorzystuje fakt, że niektóre z jej powierzchni są nieprzyczepne."
+  options: "1|2|3|4"
+  correctAnswer: "3"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l3-q1
+  taskRef: certyfikat-polski-C1-2024-04-listen-3
+  questionType: true_false
+  questionText: "Serwis MySpace był bezpośrednią inspiracją dla portali Facebook i YouTube."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l3-q2
+  taskRef: certyfikat-polski-C1-2024-04-listen-3
+  questionType: true_false
+  questionText: "MySpace pozwolił zaistnieć muzykom, których twórczość często nie mieściła się w głównych nurtach."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l3-q3
+  taskRef: certyfikat-polski-C1-2024-04-listen-3
+  questionType: true_false
+  questionText: "MySpace pozwalał słuchaczom wpływać na sukces nieznanych powszechnie twórców."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l3-q4
+  taskRef: certyfikat-polski-C1-2024-04-listen-3
+  questionType: true_false
+  questionText: "Na rozwój serwisu duży wpływ miało rozpoczęcie współpracy z wytwórniami muzycznymi."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l3-q5
+  taskRef: certyfikat-polski-C1-2024-04-listen-3
+  questionType: true_false
+  questionText: "Aby zdobyć rozgłos, muzycy mający wsparcie wytwórni podawali się za debiutantów."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l3-q6
+  taskRef: certyfikat-polski-C1-2024-04-listen-3
+  questionType: true_false
+  questionText: "Dołączenie profesjonalnych muzyków do serwisu umożliwiło promocję twórczości amatorów."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l3-q7
+  taskRef: certyfikat-polski-C1-2024-04-listen-3
+  questionType: true_false
+  questionText: "W dzisiejszych czasach to przede wszystkim autentyczność twórcy stanowi o wartości jego dzieła."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l3-q8
+  taskRef: certyfikat-polski-C1-2024-04-listen-3
+  questionType: true_false
+  questionText: "Na serwisie MySpace pojawiły się pierwsze reklamy w mediach społecznościowych."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l3-q9
+  taskRef: certyfikat-polski-C1-2024-04-listen-3
+  questionType: true_false
+  questionText: "W ostatnich latach rola internetu w promocji twórczości artystycznej uległa zmianie."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l4-q1
+  taskRef: certyfikat-polski-C1-2024-04-listen-4
+  questionType: multiple_choice
+  questionText: "Towarzyszące temu zespołowi dolegliwości"
+  options: "a) wpływają na funkcjonowanie w ciągu dnia.|b) mają podłoże fizjologiczne.|c) wynikają z zaburzeń i stanów lękowych."
+  correctAnswer: "a) wpływają na funkcjonowanie w ciągu dnia."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l4-q2
+  taskRef: certyfikat-polski-C1-2024-04-listen-4
+  questionType: multiple_choice
+  questionText: "Powodem występowania zespołu eksplodującej głowy jest"
+  options: "a) za duża ilość snu głębokiego.|b) brak wyciszenia podczas zasypiania.|c) niewłaściwa aktywność neuronów."
+  correctAnswer: "c) niewłaściwa aktywność neuronów."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l4-q3
+  taskRef: certyfikat-polski-C1-2024-04-listen-4
+  questionType: multiple_choice
+  questionText: "Aplikacja Happy Wake Up"
+  options: "a) została opracowana dzięki współpracy lekarza i pacjenta.|b) na bieżąco analizuje sen użytkownika.|c) gwarantuje pobudki o tej samej porze."
+  correctAnswer: "b) na bieżąco analizuje sen użytkownika."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l4-q4
+  taskRef: certyfikat-polski-C1-2024-04-listen-4
+  questionType: multiple_choice
+  questionText: "Słabą stroną aplikacji jest to, że"
+  options: "a) wymaga położenia urządzenia przy ciele.|b) nie uwzględnia różnic w zegarze biologicznym.|c) może błędnie rozpoznać chrapanie."
+  correctAnswer: "a) wymaga położenia urządzenia przy ciele."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l4-q5
+  taskRef: certyfikat-polski-C1-2024-04-listen-4
+  questionType: multiple_choice
+  questionText: "Badanie snu amerykańskich nastolatków"
+  options: "a) potwierdziło negatywny wpływ gier na jakość snu.|b) było oceniane jako kontrowersyjne przez innych naukowców.|c) wykazało zaskakująco niewielką różnicę między badanymi grupami."
+  correctAnswer: "c) wykazało zaskakująco niewielką różnicę między badanymi grupami."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l4-q6
+  taskRef: certyfikat-polski-C1-2024-04-listen-4
+  questionType: multiple_choice
+  questionText: "Według informacji zawartych w nagraniu niewłaściwe odżywianie"
+  options: "a) wynika z rozkojarzenia u osób z bezsennością.|b) wiąże się z modą na jedzenie poza domem.|c) może być przyczyną zaburzeń snu."
+  correctAnswer: "a) wynika z rozkojarzenia u osób z bezsennością."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l4-q7
+  taskRef: certyfikat-polski-C1-2024-04-listen-4
+  questionType: multiple_choice
+  questionText: "Szwajcarskie badanie wykazało, że"
+  options: "a) lepiej w nocy spać w hamaku niż w łóżku.|b) drzemka powinna trwać maksymalnie godzinę.|c) kołysanie sprzyja zasypianiu również u dorosłych."
+  correctAnswer: "c) kołysanie sprzyja zasypianiu również u dorosłych."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l5-q1
+  taskRef: certyfikat-polski-C1-2024-04-listen-5
+  questionType: matching
+  questionText: "Świeżo wyciskany sok warzywno-owocowy"
+  options: "A|B|C|D|E|F|G|H|I"
+  correctAnswer: F
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l5-q2
+  taskRef: certyfikat-polski-C1-2024-04-listen-5
+  questionType: matching
+  questionText: "Woda z octem"
+  options: "A|B|C|D|E|F|G|H|I"
+  correctAnswer: H
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l5-q3
+  taskRef: certyfikat-polski-C1-2024-04-listen-5
+  questionType: matching
+  questionText: Tabletka
+  options: "A|B|C|D|E|F|G|H|I"
+  correctAnswer: A
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l5-q4
+  taskRef: certyfikat-polski-C1-2024-04-listen-5
+  questionType: matching
+  questionText: "Lepkie jedzenie"
+  options: "A|B|C|D|E|F|G|H|I"
+  correctAnswer: D
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l5-q5
+  taskRef: certyfikat-polski-C1-2024-04-listen-5
+  questionType: matching
+  questionText: "Kompot z przyprawami korzennymi"
+  options: "A|B|C|D|E|F|G|H|I"
+  correctAnswer: B
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l5-q6
+  taskRef: certyfikat-polski-C1-2024-04-listen-5
+  questionType: matching
+  questionText: "Zielona herbata"
+  options: "A|B|C|D|E|F|G|H|I"
+  correctAnswer: I
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l5-q7
+  taskRef: certyfikat-polski-C1-2024-04-listen-5
+  questionType: matching
+  questionText: Kawa
+  options: "A|B|C|D|E|F|G|H|I"
+  correctAnswer: C
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l5-q8
+  taskRef: certyfikat-polski-C1-2024-04-listen-5
+  questionType: matching
+  questionText: Kofeina
+  options: "A|B|C|D|E|F|G|H|I"
+  correctAnswer: G
+  pointsQuarter: 4
+}

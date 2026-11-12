@@ -1,9 +1,11 @@
 DSL 1
 # Pinned local exam media inputs and browser paths. SHA-256 covers exact MP3 bytes.
-RECORD ExamAudioAssetRow KEY examId COUNT 6
+RECORD ExamAudioAssetRow KEY examId COUNT 1..
   examId: string
   officialDownloadUrl: string
   sha256: string
   webPath: string
   localSourcePath: string
+  webSha256: string OPTIONAL
+  webLocalSourcePath: string OPTIONAL
 END

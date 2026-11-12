@@ -1,0 +1,12 @@
+TEST "B2 2024-06 all five source-audited recording windows" PROFILE playmode
+  open exam="B2 Certyfikat 2024-06" module="listening"
+  auditSegment start=109 end=572
+  advanceTask count=1
+  auditSegment start=572 end=835
+  advanceTask count=1
+  auditSegment start=835 end=1376
+  advanceTask count=1
+  auditSegment start=1376 end=1740
+  advanceTask count=1
+  auditSegment start=1740 end=2093
+END

@@ -1,0 +1,11 @@
+TEST "C1 November 2022 Grammar II review shows four official quarter criteria" PROFILE playmode
+  open exam="C1 Certyfikat 2022-11" module="grammar"
+  advance count=10
+  ASSERT grammar.context == "Agencje turystyczne obserwują, że wśród klientów spada zainteresowanie typowymi propozycjami. (odnotowywać)"
+  enter text="Zdanie do sprawdzenia"
+  advance count=64
+  submit
+  inspectReview index=11
+  ASSERT grammar.reviewStatus == "pending"
+  ASSERT grammar.rubricItems == "odnotowują · 0,25|spadek · 0,25|zainteresowania · 0,25|klientów · 0,25"
+END

@@ -3,7 +3,7 @@ LISTENING_TASK {
   taskId: certyfikat-polski-C1-2023-04-listen-1
   examRef: certyfikat-polski-C1-2023-04
   taskNumber: 1
-  audioUrl: "https://certyfikatpolski.pl/wp-content/uploads/2025/07/2023_04_15_16_C1_plik_dzwiekowy.mp3"
+  audioUrl: exam-audio/C1-2023-04.mp3
   segmentStartMs: 110000
   segmentEndMs: 467000
   instruction: "I. Proszę uważnie słuchać tego nagrania i wykonywać zadanie zgodnie z podanym przykładem. Uwaga! Nagranie zostanie odtworzone tylko jeden raz. _____ / 6 p. (6 x 1 p.) Proszę wysłuchać kilku krótkich nagrań i zaznaczyć właściwe odpowiedzi. PRZYKŁAD Z tego nagrania wynika, że a) branża medialna interpretuje nowe obowiązki fiskalne inaczej niż rząd. b) rząd chce ograniczyć publikowanie reklam w prasie. c) nowe podatki dotkną też placówki kulturalne oraz medyczne. Na podstawie: https://audycje.tokfm.pl/podcast/101814 [W przykładzie zaznaczono: a).] Na podstawie: https://www.youtube.com/watch?v=IWHsnaqGB30&ab_channel=Tr%C3%B3jkaProgram3PolskiegoRadia; https://www.youtube.com/watch?v=l32gv7BQHRU&feature=youtu.be; https://www.youtube.com/watch?v=rrVhyRuTIhA&ab_channel=Nabogato; https://www.youtube.com/watch?v=th-eVckNL5M&ab_channel=TVNStyle; https://www.youtube.com/watch?v=pjf9v18KJpA&ab_channel=polsatnews.pl; https://www.youtube.com/watch?v=CnsUPDyq8Vs&ab_channel=TVSUDECKAPL"
@@ -13,7 +13,7 @@ LISTENING_TASK {
   taskId: certyfikat-polski-C1-2023-04-listen-2
   examRef: certyfikat-polski-C1-2023-04
   taskNumber: 2
-  audioUrl: "https://certyfikatpolski.pl/wp-content/uploads/2025/07/2023_04_15_16_C1_plik_dzwiekowy.mp3"
+  audioUrl: exam-audio/C1-2023-04.mp3
   segmentStartMs: 467000
   segmentEndMs: 841000
   instruction: "II. Proszę uważnie słuchać tego nagrania i wykonywać zadanie zgodnie z podanym przykładem. Uwaga! Nagranie zostanie odtworzone dwukrotnie. _____ / 8 p. (8 x 1 p.) Proszę wysłuchać felietonu na temat bioprintingu (biodruku), czyli możliwości tworzenia organów i zaznaczyć: TAK – gdy zdanie jest zgodne z nagraniem; NIE – gdy nie jest zgodne z nagraniem. TAK NIE PRZYKŁAD Polscy naukowcy pracują nad stworzeniem trzustki. X [W przykładzie zaznaczono: TAK.] Na podstawie: https://www.youtube.com/watch?v=m-AqFsZwvoY&t=186s&ab _ channel=Nauka.ToLubi%C4%99"
@@ -23,7 +23,7 @@ LISTENING_TASK {
   taskId: certyfikat-polski-C1-2023-04-listen-3
   examRef: certyfikat-polski-C1-2023-04
   taskNumber: 3
-  audioUrl: "https://certyfikatpolski.pl/wp-content/uploads/2025/07/2023_04_15_16_C1_plik_dzwiekowy.mp3"
+  audioUrl: exam-audio/C1-2023-04.mp3
   segmentStartMs: 841000
   segmentEndMs: 1372000
   instruction: "III. Proszę uważnie słuchać tego nagrania i wykonywać zadanie zgodnie z podanym przykładem. Uwaga! Nagranie zostanie odtworzone dwukrotnie. _____ / 7 p. (7 x 1 p.) Proszę wysłuchać wypowiedzi trzech kobiet: Sylwii, Barbary oraz Alicji na temat domowego majsterkowania i zaznaczyć właściwe odpowiedzi. PRZYKŁAD Mieszkanie Sylwii a) po remoncie zmieniło wygląd na bardziej klasyczny. b) było remontowane przez nieprofesjonalnych fachowców. c) było remontowane przez kilka ekip. [W przykładzie zaznaczono: b).] Na podstawie: https://reportaz.polskieradio.pl/artykul/1512426"
@@ -33,7 +33,7 @@ LISTENING_TASK {
   taskId: certyfikat-polski-C1-2023-04-listen-4
   examRef: certyfikat-polski-C1-2023-04
   taskNumber: 4
-  audioUrl: "https://certyfikatpolski.pl/wp-content/uploads/2025/07/2023_04_15_16_C1_plik_dzwiekowy.mp3"
+  audioUrl: exam-audio/C1-2023-04.mp3
   segmentStartMs: 1372000
   segmentEndMs: 1934000
   instruction: "IV. Proszę uważnie słuchać tego nagrania i wykonywać zadanie zgodnie z podanym przykładem. Uwaga! Nagranie zostanie odtworzone dwukrotnie. ______ / 9 p. (9 x 1 p.) Proszę wysłuchać reportażu na temat organizacji harcerskiej Leśna Szkółka i dopasować osoby (1-6) do wypowiadanych przez nie informacji (A-G). Uwaga! Jedna osoba może wypowiadać więcej niż jedną opinię. Która z osób: Osoba: PRZYKŁAD Porównuje różne organizacje harcerskie. [___1___] Na podstawie: https://jedynka.polskieradio.pl/artykul/1401243"
@@ -43,7 +43,7 @@ LISTENING_TASK {
   taskId: certyfikat-polski-C1-2023-04-listen-5
   examRef: certyfikat-polski-C1-2023-04
   taskNumber: 5
-  audioUrl: "https://certyfikatpolski.pl/wp-content/uploads/2025/07/2023_04_15_16_C1_plik_dzwiekowy.mp3"
+  audioUrl: exam-audio/C1-2023-04.mp3
   segmentStartMs: 1934000
   segmentEndMs: 2365000
   instruction: "V. Proszę uważnie słuchać tego nagrania i wykonywać zadanie zgodnie z podanym przykładem. Uwaga! Nagranie zostanie odtworzone dwukrotnie. ______ / 10 p. Proszę wysłuchać wypowiedzi na temat zagrożeń, jakie niosą za sobą kosmiczne śmieci, i odpowiedzieć na pytania. Uwaga! Forma gramatyczna odpowiedzi powinna być dopasowana do pytania. PRZYKŁAD Co się wydarzyło w 2001 roku na pustyni w Arabii Saudyjskiej? Spadł tam (siedemdziesięciokilogramowy) kawałek silnika rakiety. Na podstawie: https://www.youtube.com/watch?v=2kJaCeI99Pw&t=45s&ab_channel=TTV"

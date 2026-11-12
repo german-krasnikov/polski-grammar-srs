@@ -5,6 +5,7 @@ import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
+import polski.exam.data.published.EXAM_PUBLICATION_ROW_ROWS
 
 class ExamCatalogTest {
     @Test
@@ -17,8 +18,10 @@ class ExamCatalogTest {
             polski.exam.data.b2y2019.EXAM_ROW_ROWS.single().examId,
             polski.exam.data.b2y2020.EXAM_ROW_ROWS.single().examId,
         )
-        assertEquals(papers.toSet(), ExamCatalog.entries.map { it.sourceExamId }.toSet())
-        assertEquals(6, ExamCatalog.entries.size)
+        assertEquals(papers, ExamCatalog.entries.take(6).map { it.sourceExamId })
+        assertEquals(EXAM_PUBLICATION_ROW_ROWS.map { it.routeId }, ExamCatalog.entries.map { it.routeId })
+        assertEquals(16, ExamCatalog.entries.size)
+        assertNull(ExamCatalog.find("b2-2022-06"))
         assertNull(ExamCatalog.find("b1-sample"))
         for (exam in ExamCatalog.entries) {
             assertEquals(exam, ExamCatalog.find(exam.routeId))

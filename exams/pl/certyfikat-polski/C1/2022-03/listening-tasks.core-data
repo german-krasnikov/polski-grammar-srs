@@ -3,7 +3,7 @@ LISTENING_TASK {
   taskId: certyfikat-polski-C1-2022-03-listen-1
   examRef: certyfikat-polski-C1-2022-03
   taskNumber: 1
-  audioUrl: "https://certyfikatpolski.pl/wp-content/uploads/2026/02/2022.03.26-27_C1_Plik_dzwiekowy_v2.mp3"
+  audioUrl: exam-audio/C1-2022-03.mp3
   segmentStartMs: 110000
   segmentEndMs: 547000
   instruction: "I. Proszę uważnie słuchać tego nagrania i wykonywać zadanie zgodnie z podanym przykładem. Uwaga! Nagranie zostanie odtworzone tylko jeden raz. _____ / 8 p. (8 x 1 p.) Proszę wysłuchać kilku krótkich nagrań i zaznaczyć właściwe odpowiedzi. PRZYKŁAD Z tego nagrania wynika, że a) sąd nakazał mężczyźnie zapłacenie wysokiego odszkodowania. b) mężczyzna został niesprawiedliwie pozbawiony wolności. c) dzięki odszkodowaniu mężczyzna zapomni o wyrządzonej mu krzywdzie. Na podstawie: https://audycje.tokfm.pl/podcast/101760 [W przykładzie zaznaczono: b).]"
@@ -13,7 +13,7 @@ LISTENING_TASK {
   taskId: certyfikat-polski-C1-2022-03-listen-2
   examRef: certyfikat-polski-C1-2022-03
   taskNumber: 2
-  audioUrl: "https://certyfikatpolski.pl/wp-content/uploads/2026/02/2022.03.26-27_C1_Plik_dzwiekowy_v2.mp3"
+  audioUrl: exam-audio/C1-2022-03.mp3
   segmentStartMs: 547000
   segmentEndMs: 902000
   instruction: "II. Proszę uważnie słuchać tego nagrania i wykonywać zadanie zgodnie z podanym przykładem. Uwaga! Nagranie zostanie odtworzone dwukrotnie. _____ / 9 p. (9 x 1 p.) Proszę wysłuchać wypowiedzi na temat początków kariery polskiego skoczka narciarskiego Adama Małysza i zaznaczyć: TAK – gdy zdanie jest zgodne z tekstem; NIE – gdy nie jest zgodne z tekstem. TAK NIE PRZYKŁAD Mężczyzna specjalizuje się w skokach narciarskich od połowy lat 90. X [W przykładzie zaznaczono: TAK.]"
@@ -23,7 +23,7 @@ LISTENING_TASK {
   taskId: certyfikat-polski-C1-2022-03-listen-3
   examRef: certyfikat-polski-C1-2022-03
   taskNumber: 3
-  audioUrl: "https://certyfikatpolski.pl/wp-content/uploads/2026/02/2022.03.26-27_C1_Plik_dzwiekowy_v2.mp3"
+  audioUrl: exam-audio/C1-2022-03.mp3
   segmentStartMs: 902000
   segmentEndMs: 1344000
   instruction: "III. Proszę uważnie słuchać tego nagrania i wykonywać zadanie zgodnie z podanym przykładem. Uwaga! Nagranie zostanie odtworzone dwukrotnie. ______ / 8 p. (8 x 1 p.) Proszę wysłuchać opinii słuchaczy radia na temat akcji charytatywnej o nazwie Wielka Orkiestra Świątecznej Pomocy (WOŚP) i dopasować osoby (1–4) do wypowiedzi (A–H). Która z osób: 1. PANI ANTONINA 2. PAN SŁAWEK 3. PAN GRZEGORZ 4. PAN MAREK Ta osoba: PRZYKŁAD uznaje akcję i udział w niej za oznakę najgłębszych uczuć. [___ ___] [W przykładzie zaznaczono: 1.]"
@@ -33,7 +33,7 @@ LISTENING_TASK {
   taskId: certyfikat-polski-C1-2022-03-listen-4
   examRef: certyfikat-polski-C1-2022-03
   taskNumber: 4
-  audioUrl: "https://certyfikatpolski.pl/wp-content/uploads/2026/02/2022.03.26-27_C1_Plik_dzwiekowy_v2.mp3"
+  audioUrl: exam-audio/C1-2022-03.mp3
   segmentStartMs: 1344000
   segmentEndMs: 2018000
   instruction: "IV. Proszę uważnie słuchać tego nagrania i wykonywać zadanie zgodnie z podanym przykładem. Uwaga! Nagranie zostanie odtworzone dwukrotnie. _____ / 8 p. (8 x 1 p.) Proszę wysłuchać prezentacji na temat różnych zaawansowanych projektów badawczych i połączyć informacje z dwóch kolumn. Odpowiedzi proszę wpisać do tabeli. PRZYKŁAD Testy zderzeniowe supersamochodów → E. Kolumna II: A. nie doprowadził jak dotąd do ważnych odkryć. B. okazał się projektem droższym niż oczekiwano. C. ma zastąpić obecnie używane urządzenie. D. wymagał ćwiczeń i testów na różnych typach terenu. E. wykorzystują dane z różnych źródeł. F. bazował na wcześniejszych badaniach prowadzonych w innym celu. G. wymaga szczególnych warunków meteorologicznych, żeby działać. H. uzmysłowił konieczność budowy kolejnego narzędzia tego rodzaju. I. był przedmiotem wielu kontrowersji i obaw. Na podstawie: https://youtu.be/FeMsEnHg43s [W przykładzie zaznaczono: E.]"
@@ -43,7 +43,7 @@ LISTENING_TASK {
   taskId: certyfikat-polski-C1-2022-03-listen-5
   examRef: certyfikat-polski-C1-2022-03
   taskNumber: 5
-  audioUrl: "https://certyfikatpolski.pl/wp-content/uploads/2026/02/2022.03.26-27_C1_Plik_dzwiekowy_v2.mp3"
+  audioUrl: exam-audio/C1-2022-03.mp3
   segmentStartMs: 2018000
   segmentEndMs: 2436000
   instruction: "V. Proszę uważnie słuchać tego nagrania i wykonywać zadanie zgodnie z podanym przykładem. Uwaga! Nagranie zostanie odtworzone dwukrotnie. ______ / 7 p. (7 x 1 p.) Proszę wysłuchać wspomnień dotyczących dzieciństwa Jana Żabińskiego, znanego polskiego zoologa, i odpowiedzieć na pytania. Uwaga! Forma gramatyczna odpowiedzi powinna być dopasowana do pytania. PRZYKŁAD Kto przedstawia zdarzenia z dzieciństwa Jana Żabińskiego? On sam / Jan Żabiński sam mówi o sobie."

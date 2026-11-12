@@ -3,7 +3,7 @@ LISTENING_TASK {
   taskId: certyfikat-polski-C1-2023-11-listen-1
   examRef: certyfikat-polski-C1-2023-11
   taskNumber: 1
-  audioUrl: "https://certyfikatpolski.pl/wp-content/uploads/2025/07/2023_11_18_19_C1_plik_dzwiekowy.mp3"
+  audioUrl: exam-audio/C1-2023-11.mp3
   segmentStartMs: 110000
   segmentEndMs: 478000
   instruction: "I. Proszę uważnie słuchać tego nagrania i wykonywać zadanie zgodnie z podanym przykładem. Uwaga! Nagranie zostanie odtworzone tylko jeden raz. _____ / 8 p. (8 x 1 p.) Proszę wysłuchać wiadomości z radiowego serwisu informacyjnego i zaznaczyć właściwe odpowiedzi. PRZYKŁAD Z tego nagrania wynika, że a) sąd nakazał mężczyźnie zapłacenie wysokiego odszkodowania. b) mężczyzna został niesprawiedliwie pozbawiony wolności. c) dzięki odszkodowaniu mężczyzna zapomni o wyrządzonej mu krzywdzie. Na podstawie: https://audycje.tokfm.pl/podcast/101760 [W przykładzie zaznaczono: b).] Na podstawie audycji emitowanych przez Polskie Radio: Polska i Świat, Świat w powiększeniu, Kronika sportowa."
@@ -13,7 +13,7 @@ LISTENING_TASK {
   taskId: certyfikat-polski-C1-2023-11-listen-2
   examRef: certyfikat-polski-C1-2023-11
   taskNumber: 2
-  audioUrl: "https://certyfikatpolski.pl/wp-content/uploads/2025/07/2023_11_18_19_C1_plik_dzwiekowy.mp3"
+  audioUrl: exam-audio/C1-2023-11.mp3
   segmentStartMs: 478000
   segmentEndMs: 809000
   instruction: "II. Proszę uważnie słuchać tego nagrania i wykonywać zadanie zgodnie z podanym przykładem. Uwaga! Nagranie zostanie odtworzone dwukrotnie. _____ / 8 p. (8 x 1 p.) Proszę wysłuchać tekstu na temat nowej inwestycji w Słupsku i zaznaczyć: TAK – gdy zdanie jest zgodne z nagraniem; NIE – gdy nie jest zgodne z nagraniem. TAK NIE PRZYKŁAD Całkowity koszt inwestycji pokryto ze środków urzędu miejskiego. X [W przykładzie zaznaczono: NIE.] Na podstawie: https://www.youtube.com/watch?v=BWiaI83rCcs"
@@ -23,7 +23,7 @@ LISTENING_TASK {
   taskId: certyfikat-polski-C1-2023-11-listen-3
   examRef: certyfikat-polski-C1-2023-11
   taskNumber: 3
-  audioUrl: "https://certyfikatpolski.pl/wp-content/uploads/2025/07/2023_11_18_19_C1_plik_dzwiekowy.mp3"
+  audioUrl: exam-audio/C1-2023-11.mp3
   segmentStartMs: 809000
   segmentEndMs: 1401000
   instruction: "III. Proszę uważnie słuchać tego nagrania i wykonywać zadanie zgodnie z podanym przykładem. Uwaga! Nagranie zostanie odtworzone dwukrotnie. _____ / 10 p. (10 x 1 p.) Proszę wysłuchać audycji na temat najciekawszych skarbów ukrytych przed wiekami na ziemiach polskich i dopasować nazwy (1-5) do ich opisów (A-J). Uwaga! Do każdego stwierdzenia pasuje tylko jeden opis. 1. SKARB ŚREDZKI 2. SKARB ZE SŁUŻKOWA 3. SKARB Z ZAGÓRZYNA 4. SKARB ZE WSI LUBAJNY 5. SKARB Z MIEJSCOWOŚCI LUBNOWY WIELKIE PRZYKŁAD Jego fragmenty odkrywano w odstępie kilku lat. [___1___] Na podstawie: https://www.youtube.com/watch?v=Bm8jEydtBaw&ab_channel=DarekRybacki"
@@ -33,7 +33,7 @@ LISTENING_TASK {
   taskId: certyfikat-polski-C1-2023-11-listen-4
   examRef: certyfikat-polski-C1-2023-11
   taskNumber: 4
-  audioUrl: "https://certyfikatpolski.pl/wp-content/uploads/2025/07/2023_11_18_19_C1_plik_dzwiekowy.mp3"
+  audioUrl: exam-audio/C1-2023-11.mp3
   segmentStartMs: 1401000
   segmentEndMs: 1760000
   instruction: "IV. Proszę uważnie słuchać tego nagrania i wykonywać zadanie zgodnie z podanym przykładem. Uwaga! Nagranie zostanie odtworzone dwukrotnie. ______ / 6 p. (6 x 1 p.) Proszę wysłuchać rozmowy na temat życia ptaków w mieście i wybrać z podanych zdań 6 wypowiedzi zgodnych z treścią nagrania. Odpowiedzi proszę wpisać do tabeli. 0. Linie elektryczne stanowią niebezpieczeństwo dla ptaków przylatujących do miasta. 1. Ptaki szybko przystosowują się do życia w mieście. 2. Dla niektórych gatunków ptaków miasto może być dobrą przestrzenią do życia. 3. Miasto pozwala ptakom ukryć się przed drapieżnikami. 4. Nawet sokół nie jest w stanie uciec przed pędzącym samochodem. 5. Niektóre gatunki potrafią odpowiednio ocenić prędkość jadącego pojazdu. 6. Pliszka wykształciła pewne umiejętności na skutek życia przy szlakach komunikacyjnych. 7. W ostatnich latach do miast przylatuje coraz więcej ptaków. 8. Jemiołuszki od jakiegoś czasu nie były obserwowane w mieście. 9. Pas przydrożny często obsadzany jest roślinami służącymi ptakom za pożywienie. 10. Ptaki lecące w stadzie mogą uniknąć potrącenia przez samochody. 11. Część ptaków zatruwa się roślinami rosnącymi przy drogach. 12. Ptaki nie potrafią ocenić szkodliwości substancji chemicznych zawartych w wodzie. Na podstawie: https://trojka.polskieradio.pl/artykul/2450929 PRZYKŁAD Zdania prawdziwe [W przykładzie wpisano: 0.]"
@@ -43,7 +43,7 @@ LISTENING_TASK {
   taskId: certyfikat-polski-C1-2023-11-listen-5
   examRef: certyfikat-polski-C1-2023-11
   taskNumber: 5
-  audioUrl: "https://certyfikatpolski.pl/wp-content/uploads/2025/07/2023_11_18_19_C1_plik_dzwiekowy.mp3"
+  audioUrl: exam-audio/C1-2023-11.mp3
   segmentStartMs: 1760000
   segmentEndMs: 2152000
   instruction: "V. Proszę uważnie słuchać tego nagrania i wykonywać zadanie zgodnie z podanym przykładem. Uwaga! Nagranie zostanie odtworzone dwukrotnie. ______ / 8 p. Proszę wysłuchać fragmentu wywiadu z muzykiem Marcinem Staniszewskim, wokalistą zespołu „Beneficjenci Splendoru”, na temat festiwalu muzyki niezależnej OFF i odpowiedzieć na pytania. Uwaga! Forma gramatyczna odpowiedzi powinna być dopasowana do pytania. PRZYKŁAD Kim był wcześniej z zawodu Marcin Staniszewski? Dziennikarzem. Na podstawie: Polskie Radio, Pop-południe ([24 [v2013005004] pop-południebdce9d34[00])"

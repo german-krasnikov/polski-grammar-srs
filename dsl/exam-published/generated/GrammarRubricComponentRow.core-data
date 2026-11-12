@@ -1,1 +1,141 @@
 DSL 1
+GRAMMAR_RUBRIC_COMPONENT {
+  componentId: certyfikat-polski-C1-2022-11-g2-q1-c1
+  itemRef: certyfikat-polski-C1-2022-11-g2-q1
+  order: 1
+  creditQuarter: 1
+  criterionText: "odnotowują"
+}
+GRAMMAR_RUBRIC_COMPONENT {
+  componentId: certyfikat-polski-C1-2022-11-g2-q1-c2
+  itemRef: certyfikat-polski-C1-2022-11-g2-q1
+  order: 2
+  creditQuarter: 1
+  criterionText: spadek
+}
+GRAMMAR_RUBRIC_COMPONENT {
+  componentId: certyfikat-polski-C1-2022-11-g2-q1-c3
+  itemRef: certyfikat-polski-C1-2022-11-g2-q1
+  order: 3
+  creditQuarter: 1
+  criterionText: zainteresowania
+}
+GRAMMAR_RUBRIC_COMPONENT {
+  componentId: certyfikat-polski-C1-2022-11-g2-q1-c4
+  itemRef: certyfikat-polski-C1-2022-11-g2-q1
+  order: 4
+  creditQuarter: 1
+  criterionText: "klientów"
+}
+GRAMMAR_RUBRIC_COMPONENT {
+  componentId: certyfikat-polski-C1-2022-11-g2-q2-c1
+  itemRef: certyfikat-polski-C1-2022-11-g2-q2
+  order: 1
+  creditQuarter: 1
+  criterionText: "rozumieją"
+}
+GRAMMAR_RUBRIC_COMPONENT {
+  componentId: certyfikat-polski-C1-2022-11-g2-q2-c2
+  itemRef: certyfikat-polski-C1-2022-11-g2-q2
+  order: 2
+  creditQuarter: 1
+  criterionText: "konieczność"
+}
+GRAMMAR_RUBRIC_COMPONENT {
+  componentId: certyfikat-polski-C1-2022-11-g2-q2-c3
+  itemRef: certyfikat-polski-C1-2022-11-g2-q2
+  order: 3
+  creditQuarter: 1
+  criterionText: rozszerzenia
+}
+GRAMMAR_RUBRIC_COMPONENT {
+  componentId: certyfikat-polski-C1-2022-11-g2-q2-c4
+  itemRef: certyfikat-polski-C1-2022-11-g2-q2
+  order: 4
+  creditQuarter: 1
+  criterionText: oferty
+}
+GRAMMAR_RUBRIC_COMPONENT {
+  componentId: certyfikat-polski-C1-2022-11-g2-q3-c1
+  itemRef: certyfikat-polski-C1-2022-11-g2-q3
+  order: 1
+  creditQuarter: 1
+  criterionText: pozbawionej/pozbawiony
+}
+GRAMMAR_RUBRIC_COMPONENT {
+  componentId: certyfikat-polski-C1-2022-11-g2-q3-c2
+  itemRef: certyfikat-polski-C1-2022-11-g2-q3
+  order: 2
+  creditQuarter: 1
+  criterionText: "ograniczeń"
+}
+GRAMMAR_RUBRIC_COMPONENT {
+  componentId: certyfikat-polski-C1-2022-11-g2-q3-c3
+  itemRef: certyfikat-polski-C1-2022-11-g2-q3
+  order: 3
+  creditQuarter: 1
+  criterionText: finansowych
+}
+GRAMMAR_RUBRIC_COMPONENT {
+  componentId: certyfikat-polski-C1-2022-11-g2-q3-c4
+  itemRef: certyfikat-polski-C1-2022-11-g2-q3
+  order: 4
+  creditQuarter: 1
+  criterionText: "i wiekowych"
+}
+GRAMMAR_RUBRIC_COMPONENT {
+  componentId: certyfikat-polski-C1-2022-11-g2-q4-c1
+  itemRef: certyfikat-polski-C1-2022-11-g2-q4
+  order: 1
+  creditQuarter: 1
+  criterionText: "przetestować"
+}
+GRAMMAR_RUBRIC_COMPONENT {
+  componentId: certyfikat-polski-C1-2022-11-g2-q4-c2
+  itemRef: certyfikat-polski-C1-2022-11-g2-q4
+  order: 2
+  creditQuarter: 1
+  criterionText: "umiejętność"
+}
+GRAMMAR_RUBRIC_COMPONENT {
+  componentId: certyfikat-polski-C1-2022-11-g2-q4-c3
+  itemRef: certyfikat-polski-C1-2022-11-g2-q4
+  order: 3
+  creditQuarter: 1
+  criterionText: "poradzenia sobie"
+}
+GRAMMAR_RUBRIC_COMPONENT {
+  componentId: certyfikat-polski-C1-2022-11-g2-q4-c4
+  itemRef: certyfikat-polski-C1-2022-11-g2-q4
+  order: 4
+  creditQuarter: 1
+  criterionText: "i przetrwania"
+}
+GRAMMAR_RUBRIC_COMPONENT {
+  componentId: certyfikat-polski-C1-2022-11-g2-q5-c1
+  itemRef: certyfikat-polski-C1-2022-11-g2-q5
+  order: 1
+  creditQuarter: 1
+  criterionText: "liczą się ze / liczą się z"
+}
+GRAMMAR_RUBRIC_COMPONENT {
+  componentId: certyfikat-polski-C1-2022-11-g2-q5-c2
+  itemRef: certyfikat-polski-C1-2022-11-g2-q5
+  order: 2
+  creditQuarter: 1
+  criterionText: "spędzeniem / możliwością"
+}
+GRAMMAR_RUBRIC_COMPONENT {
+  componentId: certyfikat-polski-C1-2022-11-g2-q5-c3
+  itemRef: certyfikat-polski-C1-2022-11-g2-q5
+  order: 3
+  creditQuarter: 1
+  criterionText: "całej / spędzenia"
+}
+GRAMMAR_RUBRIC_COMPONENT {
+  componentId: certyfikat-polski-C1-2022-11-g2-q5-c4
+  itemRef: certyfikat-polski-C1-2022-11-g2-q5
+  order: 4
+  creditQuarter: 1
+  criterionText: "nocy / całej nocy"
+}

@@ -1,1 +1,271 @@
 DSL 1
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-B2-2022-02-l5-q3-fact-1
+  questionRef: certyfikat-polski-B2-2022-02-l5-q3
+  creditQuarter: 2
+  displayText: opisy
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-B2-2022-02-l5-q3-fact-2
+  questionRef: certyfikat-polski-B2-2022-02-l5-q3
+  creditQuarter: 2
+  displayText: fotografie
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-B2-2022-02-l5-q3-fact-3
+  questionRef: certyfikat-polski-B2-2022-02-l5-q3
+  creditQuarter: 2
+  displayText: "filmy biograficzne"
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-B2-2022-02-l5-q3-fact-4
+  questionRef: certyfikat-polski-B2-2022-02-l5-q3
+  creditQuarter: 2
+  displayText: "filmy dokumentalne"
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-B2-2022-02-l5-q3-fact-5
+  questionRef: certyfikat-polski-B2-2022-02-l5-q3
+  creditQuarter: 2
+  displayText: "reportaże"
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-B2-2022-02-l5-q3-fact-6
+  questionRef: certyfikat-polski-B2-2022-02-l5-q3
+  creditQuarter: 2
+  displayText: playlisty
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-B2-2023-02-l5-q3-fact-1
+  questionRef: certyfikat-polski-B2-2023-02-l5-q3
+  creditQuarter: 2
+  displayText: architektoniczna
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-B2-2023-02-l5-q3-fact-2
+  questionRef: certyfikat-polski-B2-2023-02-l5-q3
+  creditQuarter: 2
+  displayText: "społeczna"
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-B2-2023-02-l5-q8-fact-1
+  questionRef: certyfikat-polski-B2-2023-02-l5-q8
+  creditQuarter: 2
+  displayText: "cień"
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-B2-2023-02-l5-q8-fact-2
+  questionRef: certyfikat-polski-B2-2023-02-l5-q8
+  creditQuarter: 2
+  displayText: wiatr
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-B2-2023-06-l5-q3-fact-1
+  questionRef: certyfikat-polski-B2-2023-06-l5-q3
+  creditQuarter: 2
+  displayText: "w Ameryce"
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-B2-2023-06-l5-q3-fact-2
+  questionRef: certyfikat-polski-B2-2023-06-l5-q3
+  creditQuarter: 2
+  displayText: "w Europie"
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-B2-2023-06-l5-q6-fact-1
+  questionRef: certyfikat-polski-B2-2023-06-l5-q6
+  creditQuarter: 2
+  displayText: fotografia
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-B2-2023-06-l5-q6-fact-2
+  questionRef: certyfikat-polski-B2-2023-06-l5-q6
+  creditQuarter: 2
+  displayText: film
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-B2-2023-06-l5-q7-fact-1
+  questionRef: certyfikat-polski-B2-2023-06-l5-q7
+  creditQuarter: 4
+  displayText: "papier fotograficzny"
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-B2-2023-06-l5-q7-fact-2
+  questionRef: certyfikat-polski-B2-2023-06-l5-q7
+  creditQuarter: 4
+  displayText: "urządzenia do pomiaru intensywności barw"
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-B2-2023-06-l5-q7-fact-3
+  questionRef: certyfikat-polski-B2-2023-06-l5-q7
+  creditQuarter: 4
+  displayText: "kamizelka kuloodporna"
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-B2-2024-06-l5-q1-fact-1
+  questionRef: certyfikat-polski-B2-2024-06-l5-q1
+  creditQuarter: 4
+  displayText: "nowo wyremontowana sala gimnastyczna"
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-B2-2024-06-l5-q1-fact-2
+  questionRef: certyfikat-polski-B2-2024-06-l5-q1
+  creditQuarter: 4
+  displayText: "nowa stołówka"
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-B2-2024-06-l5-q3-fact-1
+  questionRef: certyfikat-polski-B2-2024-06-l5-q3
+  creditQuarter: 2
+  displayText: "są duże"
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-B2-2024-06-l5-q3-fact-2
+  questionRef: certyfikat-polski-B2-2024-06-l5-q3
+  creditQuarter: 2
+  displayText: "są jasne"
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-B2-2024-06-l5-q3-fact-3
+  questionRef: certyfikat-polski-B2-2024-06-l5-q3
+  creditQuarter: 2
+  displayText: "jest w nich nowy sprzęt"
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-C1-2022-11-l5-q3-fact-inkow
+  questionRef: certyfikat-polski-C1-2022-11-l5-q3
+  creditQuarter: 2
+  displayText: "Inków"
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-C1-2022-11-l5-q3-fact-skarbu
+  questionRef: certyfikat-polski-C1-2022-11-l5-q3
+  creditQuarter: 2
+  displayText: skarbu
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-C1-2023-04-l5-q2-fact-1
+  questionRef: certyfikat-polski-C1-2023-04-l5-q2
+  creditQuarter: 2
+  displayText: "sprzęt astronautów"
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-C1-2023-04-l5-q2-fact-2
+  questionRef: certyfikat-polski-C1-2023-04-l5-q2
+  creditQuarter: 2
+  displayText: "nieczynne satelity"
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-C1-2023-04-l5-q4-fact-1
+  questionRef: certyfikat-polski-C1-2023-04-l5-q4
+  creditQuarter: 4
+  displayText: "problemy komunikacyjne w Stanach Zjednoczonych"
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-C1-2023-04-l5-q4-fact-2
+  questionRef: certyfikat-polski-C1-2023-04-l5-q4
+  creditQuarter: 4
+  displayText: "powstanie 600 nowych odpadów"
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-C1-2023-04-l5-q5-fact-1
+  questionRef: certyfikat-polski-C1-2023-04-l5-q5
+  creditQuarter: 2
+  displayText: "brak nawigacji samochodowej"
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-C1-2023-04-l5-q5-fact-2
+  questionRef: certyfikat-polski-C1-2023-04-l5-q5
+  creditQuarter: 2
+  displayText: "brak dostępu do bieżących informacji"
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-C1-2023-04-l5-q7-fact-1
+  questionRef: certyfikat-polski-C1-2023-04-l5-q7
+  creditQuarter: 2
+  displayText: "loty kosmiczne"
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-C1-2023-04-l5-q7-fact-2
+  questionRef: certyfikat-polski-C1-2023-04-l5-q7
+  creditQuarter: 2
+  displayText: "międzynarodowa stacja kosmiczna"
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-C1-2023-11-l5-q1-fact-1
+  questionRef: certyfikat-polski-C1-2023-11-l5-q1
+  creditQuarter: 2
+  displayText: "Jest na nie za stary"
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-C1-2023-11-l5-q1-fact-2
+  questionRef: certyfikat-polski-C1-2023-11-l5-q1
+  creditQuarter: 2
+  displayText: "Irytuje go hałas"
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-C1-2023-11-l5-q1-fact-3
+  questionRef: certyfikat-polski-C1-2023-11-l5-q1
+  creditQuarter: 2
+  displayText: "Irytują go tłumy"
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-C1-2023-11-l5-q1-fact-4
+  questionRef: certyfikat-polski-C1-2023-11-l5-q1
+  creditQuarter: 2
+  displayText: "Irytuje go alkohol na festiwalu"
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-C1-2023-11-l5-q2-fact-1
+  questionRef: certyfikat-polski-C1-2023-11-l5-q2
+  creditQuarter: 2
+  displayText: "spokój"
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-C1-2023-11-l5-q2-fact-2
+  questionRef: certyfikat-polski-C1-2023-11-l5-q2
+  creditQuarter: 2
+  displayText: relaks
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-C1-2023-11-l5-q2-fact-3
+  questionRef: certyfikat-polski-C1-2023-11-l5-q2
+  creditQuarter: 2
+  displayText: "brak napinki"
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-C1-2023-11-l5-q2-fact-4
+  questionRef: certyfikat-polski-C1-2023-11-l5-q2
+  creditQuarter: 2
+  displayText: wzruszenie
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-C1-2023-11-l5-q7-fact-1
+  questionRef: certyfikat-polski-C1-2023-11-l5-q7
+  creditQuarter: 2
+  displayText: "Znali jego piosenki"
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-C1-2023-11-l5-q7-fact-2
+  questionRef: certyfikat-polski-C1-2023-11-l5-q7
+  creditQuarter: 2
+  displayText: "Śpiewali razem z nim"
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-C1-2023-11-l5-q7-fact-3
+  questionRef: certyfikat-polski-C1-2023-11-l5-q7
+  creditQuarter: 2
+  displayText: "Prosili o autografy"
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-C1-2023-11-l5-q8-fact-1
+  questionRef: certyfikat-polski-C1-2023-11-l5-q8
+  creditQuarter: 2
+  displayText: "Będzie za granicą"
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-C1-2023-11-l5-q8-fact-2
+  questionRef: certyfikat-polski-C1-2023-11-l5-q8
+  creditQuarter: 2
+  displayText: "Nagrywa nową płytę"
+}
