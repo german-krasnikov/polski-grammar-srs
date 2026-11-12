@@ -242,3 +242,16 @@ UI_COPY {key: examPrevious text: "← Назад"}
 UI_COPY {key: examAnswerPrompt text: "Введи ответ"}
 UI_COPY {key: examNativeUnavailable text: "Пока недоступно на iPad"}
 UI_COPY {key: examChooseModule text: "Выберите часть"}
+UI_COPY {key: examAudioPlay text: "Воспроизвести"}
+UI_COPY {key: examAudioPause text: "Пауза"}
+UI_COPY {key: examAudioReplay text: "С начала"}
+UI_COPY {key: examAudioSeek text: "Перемотка записи"}
+UI_COPY {key: examAudioElapsed text: "Прослушано"}
+UI_COPY {key: examAudioDuration text: "Длительность"}
+UI_COPY {key: examAudioUnavailable text: "Аудиозапись недоступна"}
+UI_COPY {key: examAudioInvalidSegment text: "Фрагмент аудиозаписи недоступен"}
+UI_COPY {
+  key: examAudioPlaybackFailed
+  text: "Не удалось воспроизвести аудиозапись"
+}
+UI_COPY {key: examImageUnavailable text: "Изображение недоступно"}

@@ -14,6 +14,13 @@ source = project.main_group.new_group('PolskiGrammar', 'PolskiGrammar')
 end
 assets_ref = source.new_file('Assets.xcassets')
 target.resources_build_phase.add_file_reference(assets_ref)
+exam_assets = source.new_group('ExamAssets', 'ExamAssets')
+# Prepared from published DSL rows by scripts/prepare-ios-exam-assets.ts. Keep
+# the Xcode resource list in sync with the staged directory, never an authored
+# per-paper list in project configuration.
+Dir.glob(File.join(root, 'PolskiGrammar/ExamAssets/*')).sort.each do |asset|
+  target.resources_build_phase.add_file_reference(exam_assets.new_file(File.basename(asset)))
+end
 
 # Block A (DSL-MIGRATION-PLAN.md): the effect -> Rive trigger table, printed from
 # dsl/effects/card-effects.core-data by dsl/derive-rive-effects.mjs (`biome generate`), not authored here.
@@ -68,6 +75,34 @@ SH
 script.always_out_of_date = '1'
 target.build_phases.move(script, 0)
 
+# Validate the staged set against the published manifest before Xcode copies
+# resources. A copied byte-for-byte match alone would also accept tampered stage.
+verify_assets = target.new_shell_script_build_phase('Verify published exam media')
+verify_assets.always_out_of_date = '1'
+verify_assets.shell_script = <<~SH
+  set -euo pipefail
+  cd "${SRCROOT}/../.."
+  ./node_modules/.bin/tsx scripts/prepare-ios-exam-assets.ts check
+SH
+target.build_phases.move(verify_assets, 0)
+
+# Xcode rewrites PNG bytes in Copy Bundle Resources even for ordinary files.
+# Restore the verified staged bytes after that phase so the app bundle retains
+# the exact published images and MP3s (before the ordinary code-sign step).
+exact_assets = target.new_shell_script_build_phase('Restore exact exam media')
+exact_assets.always_out_of_date = '1'
+exact_assets.shell_script = <<~SH
+  set -euo pipefail
+  source_dir="${SRCROOT}/PolskiGrammar/ExamAssets"
+  bundle_dir="${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"
+  [[ -d "$source_dir" ]] || { echo "Prepare iOS exam assets first" >&2; exit 1; }
+  for asset in "$source_dir"/*; do
+    [[ -f "$asset" ]] || { echo "No staged exam assets" >&2; exit 1; }
+    cp -f "$asset" "$bundle_dir/$(basename "$asset")"
+    cmp -s "$asset" "$bundle_dir/$(basename "$asset")"
+  done
+SH
+
 project.build_configurations.each do |config|
   config.build_settings['SWIFT_VERSION'] = '5.0'
   config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '17.0'
@@ -93,6 +128,7 @@ end
 tests = project.new_target(:ui_test_bundle, 'PolskiGrammarUITests', :ios, '17.0')
 test_group = project.main_group.new_group('PolskiGrammarUITests', 'PolskiGrammarUITests')
 tests.source_build_phase.add_file_reference(test_group.new_file('PolskiGrammarUITests.swift'))
+tests.source_build_phase.add_file_reference(test_group.new_file('NativeExamUITests.swift'))
 # Tester-only perf harness for FlipCardRivePlan.md §5 (variants A/B/C); adds no production code.
 tests.source_build_phase.add_file_reference(test_group.new_file('FlipRivePerfUITests.swift'))
 # FC2-05's correctness proof (§12.1, R1): mid-flip screenshots/assertions, not performance.

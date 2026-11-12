@@ -11,7 +11,9 @@ final class PolskiGrammarUITests: XCTestCase {
         let paper = app.buttons["exam-b1-2017"]
         XCTAssertTrue(paper.waitForExistence(timeout: 5), app.debugDescription)
         paper.tap()
-        XCTAssertTrue(app.staticTexts["Пока недоступно на iPad"].exists, app.debugDescription)
+        for module in ["listening", "reading", "grammar", "writing"] {
+            XCTAssertTrue(app.buttons["exam-module-\(module)"].exists, app.debugDescription)
+        }
         app.buttons["exam-module-grammar"].tap()
         XCTAssertTrue(app.staticTexts["dumni są z ___"].waitForExistence(timeout: 5), app.debugDescription)
         app.buttons["exam-option-dobrego teatru"].tap()

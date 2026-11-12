@@ -139,3 +139,47 @@ self-corrected it back to `pl-ru` before ever trying to apply it. Full root caus
 | Android / web / desktop / macOS hosts | **NOT RUN** — iOS-only lane; `MacPreferencesSession` never had this hazard (applies the saved pack synchronously in its own `init`, not a separately-ordered host call) |
 
 See [decisions.md ADR-43](../../AI/decisions.md) for the full contract.
+
+## 2026-11-12 — P11 published native exams on iPad Simulator
+
+The SwiftUI **Экзамен** tab now offers all four parts for the six published papers. `IosExamSession` projects source instructions, questions, passages, writing sets, scores, and timed state from the shared Kotlin catalog/reducers. Native `AVAudioPlayer` owns offline listening segment playback; `scripts/prepare-ios-exam-assets.ts` stages only published media through Biome's public `read` command, checks pinned MP3 SHA-256 values, and verifies the exact bundle file set. Native audio and image control phrases are read from the selected course pack's `UiCopy` rows. The November 2022 C1 source remains unpublished and is absent from this catalog and bundle.
+
+| Check | Result |
+| --- | --- |
+| `npx tsx scripts/prepare-ios-exam-assets.ts check-app kotlin/iosApp/build/Build/Products/Debug-iphonesimulator/PolskiGrammar.app` (repository root) | **PASS** — six pinned MP3s and four published images are byte exact in the built `.app` after Xcode's resource phase |
+| `./gradlew :apple-bridge:iosSimulatorArm64Test :apple-bridge:linkDebugFrameworkIosSimulatorArm64 --console=plain` (`kotlin/`) | **PASS** — including 10/10 `IosExamSessionTest`; framework link succeeded |
+| `xcodebuild ... -destination 'platform=iOS Simulator,id=AD9779D0-EAAC-40F0-8D29-C293BD5D5912' ... build` (repository root) | **PASS** — iPad Simulator app build |
+| `xcodebuild ... -only-testing:PolskiGrammarUITests/NativeExamUITests -only-testing:PolskiGrammarUITests/PolskiGrammarUITests/testOfficialB12017GrammarUsesSharedNativeExam -only-testing:PolskiGrammarUITests/PolskiGrammarUITests/testNativeExamTypedPolishDraftSurvivesTabReturn ... test` (same iPad Simulator) | **PASS** — 7/7: offline MP3 first segment advanced beyond 40 seconds and replay control was exercised; published image loaded; free set's second Polish slot survived tab return and yielded pending manual review; reading/writing accepted native input; timed flow advanced from listening to reading; both retained Grammar scenarios passed |
+| Physical iPad and signed distribution | **NOT RUN** — owner-deferred device gate; simulator result does not prove physical device behavior |
+
+The previous Grammar-only availability assertion was updated to require all four module buttons. The first native focused run observed one failure at that obsolete assertion; the rerun above passed. Two added Simulator checks exposed long-task navigation taps being lost when controls were at the bottom of the scroll view; placing them in a safe-area bar made both pass. The new bridge tests were compiled and run after implementation, so they provide regression evidence, not a claimed test-first RED for the new parts. Build/test logs and the final `.xcresult` are preserved under `/Users/german/Work/JS/polski-grammar-srs-worktrees/recovery-logs/20261112/`.
+
+### 2026-11-12 follow-up: seek and source rubric review
+
+The listening player now shows a single accessible segment seek slider with elapsed and duration text. Seeking uses the source task's absolute segment start/end, clamps to that segment, and updates playback position without altering shared answer or score state. Replay returns to the segment start. When the scene becomes active, the host immediately forwards current wall time to the shared timed session; inactive scenes pause audio at its current position. `UiCopy` supplies the new Russian/English media labels.
+
+The submitted Grammar review JSON now projects source `GrammarRubricComponent` rows (criterion, order, and quarter-point weight) without making an automatic award. SwiftUI renders those rows under the existing manual-review copy. The six published papers have no such rows; nonempty November 2022 C1 rubric rendering in an installed app is **NOT RUN** until that paper is published.
+
+| Check | Result |
+| --- | --- |
+| Independent seek XCTest RED on the prior installed app | **FAIL as expected** — no accessible Slider; `IndependentSeekRedExecuted.xcresult` |
+| Independent seek XCTest GREEN on iPad Simulator | **PASS** — B1-2017 first segment shows 4:14, seek to 80% shows 3:xx, Replay returns 0:xx |
+| Independent >40-second Slider playback and free-set tab-return/manual-review checks | **PASS** — the corrected free-set test waited for native tab selection; the first attempt tapped Exam before Matrix navigation completed |
+| New focused `IosExamSessionTest.submittedReviewProjectsFourSourceRubricCriteriaInOrderWithoutAwardingThem` | **RED then GREEN** — before: `rubricComponents` absent; after: four source-style criteria ordered 1–4, each formatted 0,25, no award field |
+| `./gradlew :apple-bridge:iosSimulatorArm64Test :apple-bridge:linkDebugFrameworkIosSimulatorArm64` (`kotlin/`) | **PASS** — 11/11 exam bridge tests, framework linked |
+| Xcode iPad Simulator build and `prepare-ios-exam-assets.ts check-app` | **PASS** — app compiled; six MP3s and four images remained byte exact in bundle |
+
+### 2026-11-12 independent reviewer corrections
+
+Swift passes the rendered part's origin to the bridge for answers, navigation, and submission. The shared timed reducer receives that origin, so a queued event from a previous part cannot act on the new part. The bridge reports unknown source item and invalid writing set IDs while keeping the attempt intact. Writing's placeholder maps to a null set; selecting the original set restores its draft. Swift caps option selections at the source slot count, clears free-set slot drafts when a submitted attempt is left or retried, and pauses listening on tab/background changes while retaining position. Xcode verifies staged audio hashes and the published asset set before Copy Bundle Resources, then restores exact bytes after Xcode's resource processing.
+
+| Check | Result |
+| --- | --- |
+| Independent reviewer UI tests against prior build | **RED** — 4/4 behavioral failures: third choice selected, old retry slot shown, audio position lost, writing placeholder retained editor |
+| Independent staged MP3 tamper build against prior project | **RED** — Xcode incorrectly succeeded; `check-app` then detected corrupted bundled audio |
+| `./gradlew :apple-bridge:iosSimulatorArm64Test --tests 'polski.ios.IosExamSessionTest'` (`kotlin/`) | **PASS** — 15/15 including stale timed origin and independent/timed nullable writing set boundaries |
+| Xcode iPad Simulator build with manifest check; `prepare-ios-exam-assets.ts check-app` | **PASS** — six pinned MP3s and four published images in app |
+| Independent four UI corrections on installed iPad Simulator | **PASS** — each case 1/1; `IndependentChoiceGreen`, `IndependentRetryGreen`, `IndependentAudioLifecycleGreen`, `IndependentWritingSetGreen` xcresults |
+| Final corrected app native UI regression | **PASS** — entire `NativeExamUITests` class 10/10; retained official B1-2017 Grammar and typed Polish draft cases 1/1 each, with result bundles under `recovery-logs/20261112/p11-independent-native/` |
+| Independent staged MP3 tamper against corrected project | **PASS** — Xcode exits 65 at staged audio mismatch before resource copy; stage restored and `check-app` passes |
+| Physical iPad | **NOT RUN** — owner-deferred gate |

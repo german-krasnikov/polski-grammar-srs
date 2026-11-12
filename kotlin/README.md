@@ -99,6 +99,15 @@ The **Слова** tab keeps `vocabulary-v1.json` in app-private storage, separa
 
 The SwiftUI **Слова** tab keeps an independent vocabulary document with two directions and editable personal words. It uses its own JSON file importer/exporter; after reveal, swipe left/right or use the two rating buttons. The Kotlin session alone calculates the two FSRS schedules.
 
+The native **Экзамен** tab reads the six published papers through `IosExamSession`. Before building the app, stage offline media from the DSL publication and audio manifests. The command verifies each MP3 against its pinned SHA-256 and copies only images referenced by published listening/writing rows; staged media stays out of Git. Re-run the project generator after publication or asset references change so Xcode's resource phase includes the staged files:
+Set `BIOME_BIN` to the Biome checkout's `packages/biome/src/bin.mjs` when it is outside the neighboring checkout layout.
+
+```sh
+npx tsx scripts/prepare-ios-exam-assets.ts prepare
+ruby kotlin/iosApp/generate_project.rb
+npx tsx scripts/prepare-ios-exam-assets.ts check
+```
+
 With Xcode 27 and its license accepted, run the Kotlin Native tests and build the Swift app on an Apple Silicon Mac from the repository root:
 
 ```sh
@@ -106,6 +115,7 @@ cd kotlin
 ./gradlew :srs-progress:compileKotlinIosSimulatorArm64 :apple-bridge:iosSimulatorArm64Test
 cd ..
 xcodebuild -project kotlin/iosApp/PolskiGrammar.xcodeproj -scheme PolskiGrammar -configuration Debug -destination 'generic/platform=iOS Simulator' -derivedDataPath kotlin/iosApp/build CODE_SIGNING_ALLOWED=NO build
+npx tsx scripts/prepare-ios-exam-assets.ts check-app kotlin/iosApp/build/Build/Products/Debug-iphonesimulator/PolskiGrammar.app
 ```
 
 To run Swift UI tests, select an installed simulator from `xcodebuild -showdestinations -project kotlin/iosApp/PolskiGrammar.xcodeproj -scheme PolskiGrammar` and use its destination with `xcodebuild test`; a generic build destination cannot run tests.

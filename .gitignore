@@ -26,3 +26,4 @@ Plans/Kotlin/artifacts/**/*.zip
 xcuserdata/
 __pycache__/
 kotlin/local.properties
+kotlin/iosApp/PolskiGrammar/ExamAssets/
