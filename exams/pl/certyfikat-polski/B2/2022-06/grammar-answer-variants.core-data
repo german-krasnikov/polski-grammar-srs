@@ -1,0 +1,13 @@
+DSL 1
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2022-06-g5-q9-v1
+  itemRef: certyfikat-polski-B2-2022-06-g5-q9
+  answer: "będą wymieniali"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2022-06-g8-q5-v1
+  itemRef: certyfikat-polski-B2-2022-06-g8-q5
+  answer: "Podczas remontowania starego mieszkania korzystaliśmy z pomocy projektanta wnętrz."
+  earnedQuarter: 4
+}

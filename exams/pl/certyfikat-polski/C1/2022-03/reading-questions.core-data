@@ -1,0 +1,379 @@
+DSL 1
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-r1-q1
+  passageRef: certyfikat-polski-C1-2022-03-read-1
+  questionType: multiple_choice
+  questionText: "Na rozpoznanie dawnej zabudowy miejskiej naprowadził"
+  options: "a) równoboczny wymiar pól.|b) osobliwy odcień terenów uprawnych.|c) zachowany typ zabudowy jednorodzinnej."
+  correctAnswer: "b) osobliwy odcień terenów uprawnych."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-r1-q2
+  passageRef: certyfikat-polski-C1-2022-03-read-1
+  questionType: multiple_choice
+  questionText: "Liczbę domostw odkrytego miasta określa się za pomocą"
+  options: "a) przybliżonych danych.|b) żmudnych pomiarów.|c) zmiennych wartości."
+  correctAnswer: "a) przybliżonych danych."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-r1-q3
+  passageRef: certyfikat-polski-C1-2022-03-read-1
+  questionType: multiple_choice
+  questionText: "Zagrody wiejskie skupione były wokół placu"
+  options: "a) ze studnią kopaną.|b) z wysoką wieżą.|c) ze zbiornikiem wodnym."
+  correctAnswer: "c) ze zbiornikiem wodnym."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-r1-q4
+  passageRef: certyfikat-polski-C1-2022-03-read-1
+  questionType: multiple_choice
+  questionText: "Ustalanie lokalizacji znaleziska polegało na"
+  options: "a) uważnym przemierzaniu terenu.|b) skanowaniu przestrzeni ze wzniesień.|c) lekturze zachowanych świadectw."
+  correctAnswer: "a) uważnym przemierzaniu terenu."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-r1-q5
+  passageRef: certyfikat-polski-C1-2022-03-read-1
+  questionType: multiple_choice
+  questionText: "Istnienie dawnej miejscowości zostało potwierdzone na podstawie"
+  options: "a) badania gleby z użyciem siarki.|b) analizy składu podłoża.|c) analizy zachowanych fragmentów kości."
+  correctAnswer: "b) analizy składu podłoża."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-r1-q6
+  passageRef: certyfikat-polski-C1-2022-03-read-1
+  questionType: multiple_choice
+  questionText: "Na terenie prac archeologicznych rozpoznano"
+  options: "a) fragmenty narzędzi rolniczych.|b) miejsca kultu pogańskiego.|c) pozostałości naczyń."
+  correctAnswer: "c) pozostałości naczyń."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-r1-q7
+  passageRef: certyfikat-polski-C1-2022-03-read-1
+  questionType: multiple_choice
+  questionText: "Miejsce rozpoznania archeologicznego, o którym mowa w tekście, znajduje się na terenie"
+  options: "a) o pełnym zalesieniu zupełnie uniemożliwiającym badania.|b) nieużytków rolnych z dużymi skupiskami drzewostanów.|c) wykorzystywanym obecnie jako użytki rolne."
+  correctAnswer: "c) wykorzystywanym obecnie jako użytki rolne."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-r1-q8
+  passageRef: certyfikat-polski-C1-2022-03-read-1
+  questionType: multiple_choice
+  questionText: "Z tekstu wynika, że"
+  options: "a) odkryte miasto było dawniej objęte prawem dziedziczenia.|b) o statusie odkrytego miasta decydowały konflikty zbrojne.|c) odkryte miasto podlegało kiedyś prawu wykupu przez wojewodów."
+  correctAnswer: "a) odkryte miasto było dawniej objęte prawem dziedziczenia."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-r1-q9
+  passageRef: certyfikat-polski-C1-2022-03-read-1
+  questionType: multiple_choice
+  questionText: "Z tekstu wynika, że odkryte miejscowości (wieś i miasto)"
+  options: "a) zaopatrywały okoliczne grody w towary garncarskie.|b) leżały na szlaku handlowym.|c) pełniły funkcję spichlerza."
+  correctAnswer: "b) leżały na szlaku handlowym."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-r1-q10
+  passageRef: certyfikat-polski-C1-2022-03-read-1
+  questionType: multiple_choice
+  questionText: "Tekst zawiera informacje"
+  options: "a) o ochronie tożsamości regionalnej mieszkańców Wielkopolski.|b) o sposobach i technikach pracy stosowanych w archeologii.|c) o celach i metodach prowadzenia dalszych badań archeologicznych w Wielkopolsce."
+  correctAnswer: "b) o sposobach i technikach pracy stosowanych w archeologii."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-r2-q1
+  passageRef: certyfikat-polski-C1-2022-03-read-2
+  questionType: gap_fill_fragment
+  questionText: "Luka 1 w tekście „Ważne i ważniejsze”"
+  options: "A. Takie właśnie pytanie zadał mi mój czternastoletni potomek.|B. Uśmiech na twarzy mi gaśnie, mina rzednie, słowa stają ością w gardle.|C. Od Ajschylosa po Shakespeare’a, od Homera po Blankę Lipińską.|D. Otworzyłem przepastną księgę, wziąłem łyk świeżego powietrza i odetchnąłem z ulgą.|E. Rodziciele stają się zatruwającymi życie figurami, a wyrocznią zostają kumple z liceum.|F. Sądzę jednak, że mówiąc, pisząc, opowiadając, wiele na świecie można zmienić.|G. Uśmiechnąłem się pod nieistniejącym wąsem, wziąłem wdech i zamierzałem odpowiedzieć.|H. Zatem opowieści to niezaprzeczalnie największy wynalazek człowieka!|I. Przypomniały mi się te wszystkie brawurowe anegdoty, bajki, opowiastki, żarty."
+  correctAnswer: "E. Rodziciele stają się zatruwającymi życie figurami, a wyrocznią zostają kumple z liceum."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-r2-q2
+  passageRef: certyfikat-polski-C1-2022-03-read-2
+  questionType: gap_fill_fragment
+  questionText: "Luka 2 w tekście „Ważne i ważniejsze”"
+  options: "A. Takie właśnie pytanie zadał mi mój czternastoletni potomek.|B. Uśmiech na twarzy mi gaśnie, mina rzednie, słowa stają ością w gardle.|C. Od Ajschylosa po Shakespeare’a, od Homera po Blankę Lipińską.|D. Otworzyłem przepastną księgę, wziąłem łyk świeżego powietrza i odetchnąłem z ulgą.|E. Rodziciele stają się zatruwającymi życie figurami, a wyrocznią zostają kumple z liceum.|F. Sądzę jednak, że mówiąc, pisząc, opowiadając, wiele na świecie można zmienić.|G. Uśmiechnąłem się pod nieistniejącym wąsem, wziąłem wdech i zamierzałem odpowiedzieć.|H. Zatem opowieści to niezaprzeczalnie największy wynalazek człowieka!|I. Przypomniały mi się te wszystkie brawurowe anegdoty, bajki, opowiastki, żarty."
+  correctAnswer: "G. Uśmiechnąłem się pod nieistniejącym wąsem, wziąłem wdech i zamierzałem odpowiedzieć."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-r2-q3
+  passageRef: certyfikat-polski-C1-2022-03-read-2
+  questionType: gap_fill_fragment
+  questionText: "Luka 3 w tekście „Ważne i ważniejsze”"
+  options: "A. Takie właśnie pytanie zadał mi mój czternastoletni potomek.|B. Uśmiech na twarzy mi gaśnie, mina rzednie, słowa stają ością w gardle.|C. Od Ajschylosa po Shakespeare’a, od Homera po Blankę Lipińską.|D. Otworzyłem przepastną księgę, wziąłem łyk świeżego powietrza i odetchnąłem z ulgą.|E. Rodziciele stają się zatruwającymi życie figurami, a wyrocznią zostają kumple z liceum.|F. Sądzę jednak, że mówiąc, pisząc, opowiadając, wiele na świecie można zmienić.|G. Uśmiechnąłem się pod nieistniejącym wąsem, wziąłem wdech i zamierzałem odpowiedzieć.|H. Zatem opowieści to niezaprzeczalnie największy wynalazek człowieka!|I. Przypomniały mi się te wszystkie brawurowe anegdoty, bajki, opowiastki, żarty."
+  correctAnswer: "B. Uśmiech na twarzy mi gaśnie, mina rzednie, słowa stają ością w gardle."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-r2-q4
+  passageRef: certyfikat-polski-C1-2022-03-read-2
+  questionType: gap_fill_fragment
+  questionText: "Luka 4 w tekście „Ważne i ważniejsze”"
+  options: "A. Takie właśnie pytanie zadał mi mój czternastoletni potomek.|B. Uśmiech na twarzy mi gaśnie, mina rzednie, słowa stają ością w gardle.|C. Od Ajschylosa po Shakespeare’a, od Homera po Blankę Lipińską.|D. Otworzyłem przepastną księgę, wziąłem łyk świeżego powietrza i odetchnąłem z ulgą.|E. Rodziciele stają się zatruwającymi życie figurami, a wyrocznią zostają kumple z liceum.|F. Sądzę jednak, że mówiąc, pisząc, opowiadając, wiele na świecie można zmienić.|G. Uśmiechnąłem się pod nieistniejącym wąsem, wziąłem wdech i zamierzałem odpowiedzieć.|H. Zatem opowieści to niezaprzeczalnie największy wynalazek człowieka!|I. Przypomniały mi się te wszystkie brawurowe anegdoty, bajki, opowiastki, żarty."
+  correctAnswer: "I. Przypomniały mi się te wszystkie brawurowe anegdoty, bajki, opowiastki, żarty."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-r2-q5
+  passageRef: certyfikat-polski-C1-2022-03-read-2
+  questionType: gap_fill_fragment
+  questionText: "Luka 5 w tekście „Ważne i ważniejsze”"
+  options: "A. Takie właśnie pytanie zadał mi mój czternastoletni potomek.|B. Uśmiech na twarzy mi gaśnie, mina rzednie, słowa stają ością w gardle.|C. Od Ajschylosa po Shakespeare’a, od Homera po Blankę Lipińską.|D. Otworzyłem przepastną księgę, wziąłem łyk świeżego powietrza i odetchnąłem z ulgą.|E. Rodziciele stają się zatruwającymi życie figurami, a wyrocznią zostają kumple z liceum.|F. Sądzę jednak, że mówiąc, pisząc, opowiadając, wiele na świecie można zmienić.|G. Uśmiechnąłem się pod nieistniejącym wąsem, wziąłem wdech i zamierzałem odpowiedzieć.|H. Zatem opowieści to niezaprzeczalnie największy wynalazek człowieka!|I. Przypomniały mi się te wszystkie brawurowe anegdoty, bajki, opowiastki, żarty."
+  correctAnswer: "H. Zatem opowieści to niezaprzeczalnie największy wynalazek człowieka!"
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-r2-q6
+  passageRef: certyfikat-polski-C1-2022-03-read-2
+  questionType: gap_fill_fragment
+  questionText: "Luka 6 w tekście „Ważne i ważniejsze”"
+  options: "A. Takie właśnie pytanie zadał mi mój czternastoletni potomek.|B. Uśmiech na twarzy mi gaśnie, mina rzednie, słowa stają ością w gardle.|C. Od Ajschylosa po Shakespeare’a, od Homera po Blankę Lipińską.|D. Otworzyłem przepastną księgę, wziąłem łyk świeżego powietrza i odetchnąłem z ulgą.|E. Rodziciele stają się zatruwającymi życie figurami, a wyrocznią zostają kumple z liceum.|F. Sądzę jednak, że mówiąc, pisząc, opowiadając, wiele na świecie można zmienić.|G. Uśmiechnąłem się pod nieistniejącym wąsem, wziąłem wdech i zamierzałem odpowiedzieć.|H. Zatem opowieści to niezaprzeczalnie największy wynalazek człowieka!|I. Przypomniały mi się te wszystkie brawurowe anegdoty, bajki, opowiastki, żarty."
+  correctAnswer: "C. Od Ajschylosa po Shakespeare’a, od Homera po Blankę Lipińską."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-r2-q7
+  passageRef: certyfikat-polski-C1-2022-03-read-2
+  questionType: gap_fill_fragment
+  questionText: "Luka 7 w tekście „Ważne i ważniejsze”"
+  options: "A. Takie właśnie pytanie zadał mi mój czternastoletni potomek.|B. Uśmiech na twarzy mi gaśnie, mina rzednie, słowa stają ością w gardle.|C. Od Ajschylosa po Shakespeare’a, od Homera po Blankę Lipińską.|D. Otworzyłem przepastną księgę, wziąłem łyk świeżego powietrza i odetchnąłem z ulgą.|E. Rodziciele stają się zatruwającymi życie figurami, a wyrocznią zostają kumple z liceum.|F. Sądzę jednak, że mówiąc, pisząc, opowiadając, wiele na świecie można zmienić.|G. Uśmiechnąłem się pod nieistniejącym wąsem, wziąłem wdech i zamierzałem odpowiedzieć.|H. Zatem opowieści to niezaprzeczalnie największy wynalazek człowieka!|I. Przypomniały mi się te wszystkie brawurowe anegdoty, bajki, opowiastki, żarty."
+  correctAnswer: "F. Sądzę jednak, że mówiąc, pisząc, opowiadając, wiele na świecie można zmienić."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-r3-q1
+  passageRef: certyfikat-polski-C1-2022-03-read-3
+  questionType: true_false_not_given
+  questionText: "Prace nad wyznaczeniem biegu planowanych autostrad są prowadzone zwykle na szczeblu lokalnym."
+  options: "TAK|NIE|BI"
+  correctAnswer: BI
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-r3-q2
+  passageRef: certyfikat-polski-C1-2022-03-read-3
+  questionType: true_false_not_given
+  questionText: "Powody słabego rozwoju infrastruktury drogowej są dostępne opinii publicznej."
+  options: "TAK|NIE|BI"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-r3-q3
+  passageRef: certyfikat-polski-C1-2022-03-read-3
+  questionType: true_false_not_given
+  questionText: "Przeciwnicy budowania autostrad dostrzegają tylko ich wady."
+  options: "TAK|NIE|BI"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-r3-q4
+  passageRef: certyfikat-polski-C1-2022-03-read-3
+  questionType: true_false_not_given
+  questionText: "Konieczność zabezpieczenia środowiska naturalnego podczas budowy autostrady jest zagwarantowana prawnie."
+  options: "TAK|NIE|BI"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-r3-q5
+  passageRef: certyfikat-polski-C1-2022-03-read-3
+  questionType: true_false_not_given
+  questionText: "Do oczyszczania skażonego gruntu wzdłuż autostrad wykorzystuje się odpowiednio dobraną roślinność."
+  options: "TAK|NIE|BI"
+  correctAnswer: BI
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-r3-q6
+  passageRef: certyfikat-polski-C1-2022-03-read-3
+  questionType: true_false_not_given
+  questionText: "Roboty prowadzone przy budowie autostrad przyczyniają się do eksploatacji cennych złóż."
+  options: "TAK|NIE|BI"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-r3-q7
+  passageRef: certyfikat-polski-C1-2022-03-read-3
+  questionType: true_false_not_given
+  questionText: "Rolą mediatora jest łagodzenie konfliktów, które podczas planowania autostrad powstają między projektantami a instytucjami zajmującymi się ochroną zabytków."
+  options: "TAK|NIE|BI"
+  correctAnswer: BI
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-r3-q8
+  passageRef: certyfikat-polski-C1-2022-03-read-3
+  questionType: true_false_not_given
+  questionText: "Autostrady mogą stać się integralną częścią obszarów chronionych przyrodniczo."
+  options: "TAK|NIE|BI"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-r4-q1
+  passageRef: certyfikat-polski-C1-2022-03-read-4
+  questionType: matching
+  questionText: "Jak po kaczce"
+  options: "A. Niezwykłe jest to, że kiedy samiec i samica zwracają na siebie uwagę, rozpoczynają widowiskowy taniec, podczas którego partnerzy wykonują dokładnie te same ruchy. Odnosi się wrażenie, jakby oba ptaki były idealnie zsynchronizowane.|B. W sezonie lęgowym pingwiny przylądkowe wykopują płytkie dołki na plaży osłoniętej przed intruzami. Potem wyścielają je gałązkami i wodorostami i w ten sposób szykują miejsce na wysiadywanie jaj.|C. Pingwiny nie ulegają wychłodzeniu, bo ich układ krwionośny działa tak, że napływającą z całego ciała krwią ogrzewają zimną krew odpływającą z łap.|D. Siedzibą jednej z największych kolonii pingwinów przylądkowych jest niewielka sielankowa zatoka otoczona skałami z przepiękną plażą usypaną z drobnych ziaren piasku. To miejsce leży na przedmieściach Kapsztadu.|E. Młode pingwiny wykluwają się zazwyczaj w październiku. Choć ojcowie są zmęczeni wysiadywaniem, to przez pewien czas sprawują opiekę nad potomstwem i karmią pisklęta specjalną wydzieliną wytwarzaną w przełyku.|F. Pingwiny cesarskie to gatunek zwany, z racji swych zwyczajów, seryjnym monogamistą. Zaobserwowano, że na początku każdej pory lęgowej osobniki dobierają się w nowe pary i za każdym razem wysiadują i wychowują pisklęta w nowym związku.|G. Dla ludzkiego oka wszystkie pingwiny są takie same. Zwierzęta te mają jednak niezawodne sposoby, aby wśród setek innych przedstawicieli własnego gatunku – na pozór identycznych – rozpoznać swojego partnera i pozostać mu wiernym.|H. Pingwiny monogamiczne, do których należą pingwiny przylądkowe, co roku bezbłędnie trafiają do tych samych gniazd. Naukowcy odkryli niedawno, że ptaki doskonale znają raz wybrane miejsca lęgowe.|I. Zadziwiające, jak niezwykle rozwinięty instynkt rodzicielski mają pingwiny. Okazuje się, że przez większą część swojego życia rok w rok wszystkie siły poświęcają odchowaniu potomstwa, czyniąc to w ekstremalnych warunkach.|J. Kiedy pingwiny wychodzą z wody, na ich piórach nie tworzą się nawet najmniejsze kryształki lodu. Pióra te są wyposażone w maleńkie, nanomilimetrowe pory, dzięki którym woda do nich nie przylega, lecz osiada w formie kropli i spływa, zanim zdąży zamarznąć.|K. Do tej pory umiejętność integrowania różnych informacji o innych przedstawicielach gatunku została potwierdzona jedynie u kilku gatunków ssaków żyjących w stadach, poza tym u wron oraz właśnie u pingwinów."
+  correctAnswer: "J. Kiedy pingwiny wychodzą z wody, na ich piórach nie tworzą się nawet najmniejsze kryształki lodu. Pióra te są wyposażone w maleńkie, nanomilimetrowe pory, dzięki którym woda do nich nie przylega, lecz osiada w formie kropli i spływa, zanim zdąży zamarznąć."
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-r4-q2
+  passageRef: certyfikat-polski-C1-2022-03-read-4
+  questionType: matching
+  questionText: "Jak własną kieszeń"
+  options: "A. Niezwykłe jest to, że kiedy samiec i samica zwracają na siebie uwagę, rozpoczynają widowiskowy taniec, podczas którego partnerzy wykonują dokładnie te same ruchy. Odnosi się wrażenie, jakby oba ptaki były idealnie zsynchronizowane.|B. W sezonie lęgowym pingwiny przylądkowe wykopują płytkie dołki na plaży osłoniętej przed intruzami. Potem wyścielają je gałązkami i wodorostami i w ten sposób szykują miejsce na wysiadywanie jaj.|C. Pingwiny nie ulegają wychłodzeniu, bo ich układ krwionośny działa tak, że napływającą z całego ciała krwią ogrzewają zimną krew odpływającą z łap.|D. Siedzibą jednej z największych kolonii pingwinów przylądkowych jest niewielka sielankowa zatoka otoczona skałami z przepiękną plażą usypaną z drobnych ziaren piasku. To miejsce leży na przedmieściach Kapsztadu.|E. Młode pingwiny wykluwają się zazwyczaj w październiku. Choć ojcowie są zmęczeni wysiadywaniem, to przez pewien czas sprawują opiekę nad potomstwem i karmią pisklęta specjalną wydzieliną wytwarzaną w przełyku.|F. Pingwiny cesarskie to gatunek zwany, z racji swych zwyczajów, seryjnym monogamistą. Zaobserwowano, że na początku każdej pory lęgowej osobniki dobierają się w nowe pary i za każdym razem wysiadują i wychowują pisklęta w nowym związku.|G. Dla ludzkiego oka wszystkie pingwiny są takie same. Zwierzęta te mają jednak niezawodne sposoby, aby wśród setek innych przedstawicieli własnego gatunku – na pozór identycznych – rozpoznać swojego partnera i pozostać mu wiernym.|H. Pingwiny monogamiczne, do których należą pingwiny przylądkowe, co roku bezbłędnie trafiają do tych samych gniazd. Naukowcy odkryli niedawno, że ptaki doskonale znają raz wybrane miejsca lęgowe.|I. Zadziwiające, jak niezwykle rozwinięty instynkt rodzicielski mają pingwiny. Okazuje się, że przez większą część swojego życia rok w rok wszystkie siły poświęcają odchowaniu potomstwa, czyniąc to w ekstremalnych warunkach.|J. Kiedy pingwiny wychodzą z wody, na ich piórach nie tworzą się nawet najmniejsze kryształki lodu. Pióra te są wyposażone w maleńkie, nanomilimetrowe pory, dzięki którym woda do nich nie przylega, lecz osiada w formie kropli i spływa, zanim zdąży zamarznąć.|K. Do tej pory umiejętność integrowania różnych informacji o innych przedstawicielach gatunku została potwierdzona jedynie u kilku gatunków ssaków żyjących w stadach, poza tym u wron oraz właśnie u pingwinów."
+  correctAnswer: "H. Pingwiny monogamiczne, do których należą pingwiny przylądkowe, co roku bezbłędnie trafiają do tych samych gniazd. Naukowcy odkryli niedawno, że ptaki doskonale znają raz wybrane miejsca lęgowe."
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-r4-q3
+  passageRef: certyfikat-polski-C1-2022-03-read-4
+  questionType: matching
+  questionText: Nadrodzice
+  options: "A. Niezwykłe jest to, że kiedy samiec i samica zwracają na siebie uwagę, rozpoczynają widowiskowy taniec, podczas którego partnerzy wykonują dokładnie te same ruchy. Odnosi się wrażenie, jakby oba ptaki były idealnie zsynchronizowane.|B. W sezonie lęgowym pingwiny przylądkowe wykopują płytkie dołki na plaży osłoniętej przed intruzami. Potem wyścielają je gałązkami i wodorostami i w ten sposób szykują miejsce na wysiadywanie jaj.|C. Pingwiny nie ulegają wychłodzeniu, bo ich układ krwionośny działa tak, że napływającą z całego ciała krwią ogrzewają zimną krew odpływającą z łap.|D. Siedzibą jednej z największych kolonii pingwinów przylądkowych jest niewielka sielankowa zatoka otoczona skałami z przepiękną plażą usypaną z drobnych ziaren piasku. To miejsce leży na przedmieściach Kapsztadu.|E. Młode pingwiny wykluwają się zazwyczaj w październiku. Choć ojcowie są zmęczeni wysiadywaniem, to przez pewien czas sprawują opiekę nad potomstwem i karmią pisklęta specjalną wydzieliną wytwarzaną w przełyku.|F. Pingwiny cesarskie to gatunek zwany, z racji swych zwyczajów, seryjnym monogamistą. Zaobserwowano, że na początku każdej pory lęgowej osobniki dobierają się w nowe pary i za każdym razem wysiadują i wychowują pisklęta w nowym związku.|G. Dla ludzkiego oka wszystkie pingwiny są takie same. Zwierzęta te mają jednak niezawodne sposoby, aby wśród setek innych przedstawicieli własnego gatunku – na pozór identycznych – rozpoznać swojego partnera i pozostać mu wiernym.|H. Pingwiny monogamiczne, do których należą pingwiny przylądkowe, co roku bezbłędnie trafiają do tych samych gniazd. Naukowcy odkryli niedawno, że ptaki doskonale znają raz wybrane miejsca lęgowe.|I. Zadziwiające, jak niezwykle rozwinięty instynkt rodzicielski mają pingwiny. Okazuje się, że przez większą część swojego życia rok w rok wszystkie siły poświęcają odchowaniu potomstwa, czyniąc to w ekstremalnych warunkach.|J. Kiedy pingwiny wychodzą z wody, na ich piórach nie tworzą się nawet najmniejsze kryształki lodu. Pióra te są wyposażone w maleńkie, nanomilimetrowe pory, dzięki którym woda do nich nie przylega, lecz osiada w formie kropli i spływa, zanim zdąży zamarznąć.|K. Do tej pory umiejętność integrowania różnych informacji o innych przedstawicielach gatunku została potwierdzona jedynie u kilku gatunków ssaków żyjących w stadach, poza tym u wron oraz właśnie u pingwinów."
+  correctAnswer: "I. Zadziwiające, jak niezwykle rozwinięty instynkt rodzicielski mają pingwiny. Okazuje się, że przez większą część swojego życia rok w rok wszystkie siły poświęcają odchowaniu potomstwa, czyniąc to w ekstremalnych warunkach."
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-r4-q4
+  passageRef: certyfikat-polski-C1-2022-03-read-4
+  questionType: matching
+  questionText: "Do grobowej deski"
+  options: "A. Niezwykłe jest to, że kiedy samiec i samica zwracają na siebie uwagę, rozpoczynają widowiskowy taniec, podczas którego partnerzy wykonują dokładnie te same ruchy. Odnosi się wrażenie, jakby oba ptaki były idealnie zsynchronizowane.|B. W sezonie lęgowym pingwiny przylądkowe wykopują płytkie dołki na plaży osłoniętej przed intruzami. Potem wyścielają je gałązkami i wodorostami i w ten sposób szykują miejsce na wysiadywanie jaj.|C. Pingwiny nie ulegają wychłodzeniu, bo ich układ krwionośny działa tak, że napływającą z całego ciała krwią ogrzewają zimną krew odpływającą z łap.|D. Siedzibą jednej z największych kolonii pingwinów przylądkowych jest niewielka sielankowa zatoka otoczona skałami z przepiękną plażą usypaną z drobnych ziaren piasku. To miejsce leży na przedmieściach Kapsztadu.|E. Młode pingwiny wykluwają się zazwyczaj w październiku. Choć ojcowie są zmęczeni wysiadywaniem, to przez pewien czas sprawują opiekę nad potomstwem i karmią pisklęta specjalną wydzieliną wytwarzaną w przełyku.|F. Pingwiny cesarskie to gatunek zwany, z racji swych zwyczajów, seryjnym monogamistą. Zaobserwowano, że na początku każdej pory lęgowej osobniki dobierają się w nowe pary i za każdym razem wysiadują i wychowują pisklęta w nowym związku.|G. Dla ludzkiego oka wszystkie pingwiny są takie same. Zwierzęta te mają jednak niezawodne sposoby, aby wśród setek innych przedstawicieli własnego gatunku – na pozór identycznych – rozpoznać swojego partnera i pozostać mu wiernym.|H. Pingwiny monogamiczne, do których należą pingwiny przylądkowe, co roku bezbłędnie trafiają do tych samych gniazd. Naukowcy odkryli niedawno, że ptaki doskonale znają raz wybrane miejsca lęgowe.|I. Zadziwiające, jak niezwykle rozwinięty instynkt rodzicielski mają pingwiny. Okazuje się, że przez większą część swojego życia rok w rok wszystkie siły poświęcają odchowaniu potomstwa, czyniąc to w ekstremalnych warunkach.|J. Kiedy pingwiny wychodzą z wody, na ich piórach nie tworzą się nawet najmniejsze kryształki lodu. Pióra te są wyposażone w maleńkie, nanomilimetrowe pory, dzięki którym woda do nich nie przylega, lecz osiada w formie kropli i spływa, zanim zdąży zamarznąć.|K. Do tej pory umiejętność integrowania różnych informacji o innych przedstawicielach gatunku została potwierdzona jedynie u kilku gatunków ssaków żyjących w stadach, poza tym u wron oraz właśnie u pingwinów."
+  correctAnswer: "G. Dla ludzkiego oka wszystkie pingwiny są takie same. Zwierzęta te mają jednak niezawodne sposoby, aby wśród setek innych przedstawicieli własnego gatunku – na pozór identycznych – rozpoznać swojego partnera i pozostać mu wiernym."
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-r4-q5
+  passageRef: certyfikat-polski-C1-2022-03-read-4
+  questionType: matching
+  questionText: "Pingwini móżdżek"
+  options: "A. Niezwykłe jest to, że kiedy samiec i samica zwracają na siebie uwagę, rozpoczynają widowiskowy taniec, podczas którego partnerzy wykonują dokładnie te same ruchy. Odnosi się wrażenie, jakby oba ptaki były idealnie zsynchronizowane.|B. W sezonie lęgowym pingwiny przylądkowe wykopują płytkie dołki na plaży osłoniętej przed intruzami. Potem wyścielają je gałązkami i wodorostami i w ten sposób szykują miejsce na wysiadywanie jaj.|C. Pingwiny nie ulegają wychłodzeniu, bo ich układ krwionośny działa tak, że napływającą z całego ciała krwią ogrzewają zimną krew odpływającą z łap.|D. Siedzibą jednej z największych kolonii pingwinów przylądkowych jest niewielka sielankowa zatoka otoczona skałami z przepiękną plażą usypaną z drobnych ziaren piasku. To miejsce leży na przedmieściach Kapsztadu.|E. Młode pingwiny wykluwają się zazwyczaj w październiku. Choć ojcowie są zmęczeni wysiadywaniem, to przez pewien czas sprawują opiekę nad potomstwem i karmią pisklęta specjalną wydzieliną wytwarzaną w przełyku.|F. Pingwiny cesarskie to gatunek zwany, z racji swych zwyczajów, seryjnym monogamistą. Zaobserwowano, że na początku każdej pory lęgowej osobniki dobierają się w nowe pary i za każdym razem wysiadują i wychowują pisklęta w nowym związku.|G. Dla ludzkiego oka wszystkie pingwiny są takie same. Zwierzęta te mają jednak niezawodne sposoby, aby wśród setek innych przedstawicieli własnego gatunku – na pozór identycznych – rozpoznać swojego partnera i pozostać mu wiernym.|H. Pingwiny monogamiczne, do których należą pingwiny przylądkowe, co roku bezbłędnie trafiają do tych samych gniazd. Naukowcy odkryli niedawno, że ptaki doskonale znają raz wybrane miejsca lęgowe.|I. Zadziwiające, jak niezwykle rozwinięty instynkt rodzicielski mają pingwiny. Okazuje się, że przez większą część swojego życia rok w rok wszystkie siły poświęcają odchowaniu potomstwa, czyniąc to w ekstremalnych warunkach.|J. Kiedy pingwiny wychodzą z wody, na ich piórach nie tworzą się nawet najmniejsze kryształki lodu. Pióra te są wyposażone w maleńkie, nanomilimetrowe pory, dzięki którym woda do nich nie przylega, lecz osiada w formie kropli i spływa, zanim zdąży zamarznąć.|K. Do tej pory umiejętność integrowania różnych informacji o innych przedstawicielach gatunku została potwierdzona jedynie u kilku gatunków ssaków żyjących w stadach, poza tym u wron oraz właśnie u pingwinów."
+  correctAnswer: "K. Do tej pory umiejętność integrowania różnych informacji o innych przedstawicielach gatunku została potwierdzona jedynie u kilku gatunków ssaków żyjących w stadach, poza tym u wron oraz właśnie u pingwinów."
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-r4-q6
+  passageRef: certyfikat-polski-C1-2022-03-read-4
+  questionType: matching
+  questionText: "Harmonijne gody"
+  options: "A. Niezwykłe jest to, że kiedy samiec i samica zwracają na siebie uwagę, rozpoczynają widowiskowy taniec, podczas którego partnerzy wykonują dokładnie te same ruchy. Odnosi się wrażenie, jakby oba ptaki były idealnie zsynchronizowane.|B. W sezonie lęgowym pingwiny przylądkowe wykopują płytkie dołki na plaży osłoniętej przed intruzami. Potem wyścielają je gałązkami i wodorostami i w ten sposób szykują miejsce na wysiadywanie jaj.|C. Pingwiny nie ulegają wychłodzeniu, bo ich układ krwionośny działa tak, że napływającą z całego ciała krwią ogrzewają zimną krew odpływającą z łap.|D. Siedzibą jednej z największych kolonii pingwinów przylądkowych jest niewielka sielankowa zatoka otoczona skałami z przepiękną plażą usypaną z drobnych ziaren piasku. To miejsce leży na przedmieściach Kapsztadu.|E. Młode pingwiny wykluwają się zazwyczaj w październiku. Choć ojcowie są zmęczeni wysiadywaniem, to przez pewien czas sprawują opiekę nad potomstwem i karmią pisklęta specjalną wydzieliną wytwarzaną w przełyku.|F. Pingwiny cesarskie to gatunek zwany, z racji swych zwyczajów, seryjnym monogamistą. Zaobserwowano, że na początku każdej pory lęgowej osobniki dobierają się w nowe pary i za każdym razem wysiadują i wychowują pisklęta w nowym związku.|G. Dla ludzkiego oka wszystkie pingwiny są takie same. Zwierzęta te mają jednak niezawodne sposoby, aby wśród setek innych przedstawicieli własnego gatunku – na pozór identycznych – rozpoznać swojego partnera i pozostać mu wiernym.|H. Pingwiny monogamiczne, do których należą pingwiny przylądkowe, co roku bezbłędnie trafiają do tych samych gniazd. Naukowcy odkryli niedawno, że ptaki doskonale znają raz wybrane miejsca lęgowe.|I. Zadziwiające, jak niezwykle rozwinięty instynkt rodzicielski mają pingwiny. Okazuje się, że przez większą część swojego życia rok w rok wszystkie siły poświęcają odchowaniu potomstwa, czyniąc to w ekstremalnych warunkach.|J. Kiedy pingwiny wychodzą z wody, na ich piórach nie tworzą się nawet najmniejsze kryształki lodu. Pióra te są wyposażone w maleńkie, nanomilimetrowe pory, dzięki którym woda do nich nie przylega, lecz osiada w formie kropli i spływa, zanim zdąży zamarznąć.|K. Do tej pory umiejętność integrowania różnych informacji o innych przedstawicielach gatunku została potwierdzona jedynie u kilku gatunków ssaków żyjących w stadach, poza tym u wron oraz właśnie u pingwinów."
+  correctAnswer: "A. Niezwykłe jest to, że kiedy samiec i samica zwracają na siebie uwagę, rozpoczynają widowiskowy taniec, podczas którego partnerzy wykonują dokładnie te same ruchy. Odnosi się wrażenie, jakby oba ptaki były idealnie zsynchronizowane."
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-r4-q7
+  passageRef: certyfikat-polski-C1-2022-03-read-4
+  questionType: matching
+  questionText: "Gardłowa strawa"
+  options: "A. Niezwykłe jest to, że kiedy samiec i samica zwracają na siebie uwagę, rozpoczynają widowiskowy taniec, podczas którego partnerzy wykonują dokładnie te same ruchy. Odnosi się wrażenie, jakby oba ptaki były idealnie zsynchronizowane.|B. W sezonie lęgowym pingwiny przylądkowe wykopują płytkie dołki na plaży osłoniętej przed intruzami. Potem wyścielają je gałązkami i wodorostami i w ten sposób szykują miejsce na wysiadywanie jaj.|C. Pingwiny nie ulegają wychłodzeniu, bo ich układ krwionośny działa tak, że napływającą z całego ciała krwią ogrzewają zimną krew odpływającą z łap.|D. Siedzibą jednej z największych kolonii pingwinów przylądkowych jest niewielka sielankowa zatoka otoczona skałami z przepiękną plażą usypaną z drobnych ziaren piasku. To miejsce leży na przedmieściach Kapsztadu.|E. Młode pingwiny wykluwają się zazwyczaj w październiku. Choć ojcowie są zmęczeni wysiadywaniem, to przez pewien czas sprawują opiekę nad potomstwem i karmią pisklęta specjalną wydzieliną wytwarzaną w przełyku.|F. Pingwiny cesarskie to gatunek zwany, z racji swych zwyczajów, seryjnym monogamistą. Zaobserwowano, że na początku każdej pory lęgowej osobniki dobierają się w nowe pary i za każdym razem wysiadują i wychowują pisklęta w nowym związku.|G. Dla ludzkiego oka wszystkie pingwiny są takie same. Zwierzęta te mają jednak niezawodne sposoby, aby wśród setek innych przedstawicieli własnego gatunku – na pozór identycznych – rozpoznać swojego partnera i pozostać mu wiernym.|H. Pingwiny monogamiczne, do których należą pingwiny przylądkowe, co roku bezbłędnie trafiają do tych samych gniazd. Naukowcy odkryli niedawno, że ptaki doskonale znają raz wybrane miejsca lęgowe.|I. Zadziwiające, jak niezwykle rozwinięty instynkt rodzicielski mają pingwiny. Okazuje się, że przez większą część swojego życia rok w rok wszystkie siły poświęcają odchowaniu potomstwa, czyniąc to w ekstremalnych warunkach.|J. Kiedy pingwiny wychodzą z wody, na ich piórach nie tworzą się nawet najmniejsze kryształki lodu. Pióra te są wyposażone w maleńkie, nanomilimetrowe pory, dzięki którym woda do nich nie przylega, lecz osiada w formie kropli i spływa, zanim zdąży zamarznąć.|K. Do tej pory umiejętność integrowania różnych informacji o innych przedstawicielach gatunku została potwierdzona jedynie u kilku gatunków ssaków żyjących w stadach, poza tym u wron oraz właśnie u pingwinów."
+  correctAnswer: "E. Młode pingwiny wykluwają się zazwyczaj w październiku. Choć ojcowie są zmęczeni wysiadywaniem, to przez pewien czas sprawują opiekę nad potomstwem i karmią pisklęta specjalną wydzieliną wytwarzaną w przełyku."
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-r4-q8
+  passageRef: certyfikat-polski-C1-2022-03-read-4
+  questionType: matching
+  questionText: "Ptasi raj"
+  options: "A. Niezwykłe jest to, że kiedy samiec i samica zwracają na siebie uwagę, rozpoczynają widowiskowy taniec, podczas którego partnerzy wykonują dokładnie te same ruchy. Odnosi się wrażenie, jakby oba ptaki były idealnie zsynchronizowane.|B. W sezonie lęgowym pingwiny przylądkowe wykopują płytkie dołki na plaży osłoniętej przed intruzami. Potem wyścielają je gałązkami i wodorostami i w ten sposób szykują miejsce na wysiadywanie jaj.|C. Pingwiny nie ulegają wychłodzeniu, bo ich układ krwionośny działa tak, że napływającą z całego ciała krwią ogrzewają zimną krew odpływającą z łap.|D. Siedzibą jednej z największych kolonii pingwinów przylądkowych jest niewielka sielankowa zatoka otoczona skałami z przepiękną plażą usypaną z drobnych ziaren piasku. To miejsce leży na przedmieściach Kapsztadu.|E. Młode pingwiny wykluwają się zazwyczaj w październiku. Choć ojcowie są zmęczeni wysiadywaniem, to przez pewien czas sprawują opiekę nad potomstwem i karmią pisklęta specjalną wydzieliną wytwarzaną w przełyku.|F. Pingwiny cesarskie to gatunek zwany, z racji swych zwyczajów, seryjnym monogamistą. Zaobserwowano, że na początku każdej pory lęgowej osobniki dobierają się w nowe pary i za każdym razem wysiadują i wychowują pisklęta w nowym związku.|G. Dla ludzkiego oka wszystkie pingwiny są takie same. Zwierzęta te mają jednak niezawodne sposoby, aby wśród setek innych przedstawicieli własnego gatunku – na pozór identycznych – rozpoznać swojego partnera i pozostać mu wiernym.|H. Pingwiny monogamiczne, do których należą pingwiny przylądkowe, co roku bezbłędnie trafiają do tych samych gniazd. Naukowcy odkryli niedawno, że ptaki doskonale znają raz wybrane miejsca lęgowe.|I. Zadziwiające, jak niezwykle rozwinięty instynkt rodzicielski mają pingwiny. Okazuje się, że przez większą część swojego życia rok w rok wszystkie siły poświęcają odchowaniu potomstwa, czyniąc to w ekstremalnych warunkach.|J. Kiedy pingwiny wychodzą z wody, na ich piórach nie tworzą się nawet najmniejsze kryształki lodu. Pióra te są wyposażone w maleńkie, nanomilimetrowe pory, dzięki którym woda do nich nie przylega, lecz osiada w formie kropli i spływa, zanim zdąży zamarznąć.|K. Do tej pory umiejętność integrowania różnych informacji o innych przedstawicielach gatunku została potwierdzona jedynie u kilku gatunków ssaków żyjących w stadach, poza tym u wron oraz właśnie u pingwinów."
+  correctAnswer: "D. Siedzibą jednej z największych kolonii pingwinów przylądkowych jest niewielka sielankowa zatoka otoczona skałami z przepiękną plażą usypaną z drobnych ziaren piasku. To miejsce leży na przedmieściach Kapsztadu."
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-r4-q9
+  passageRef: certyfikat-polski-C1-2022-03-read-4
+  questionType: matching
+  questionText: "Sezonowy mariaż"
+  options: "A. Niezwykłe jest to, że kiedy samiec i samica zwracają na siebie uwagę, rozpoczynają widowiskowy taniec, podczas którego partnerzy wykonują dokładnie te same ruchy. Odnosi się wrażenie, jakby oba ptaki były idealnie zsynchronizowane.|B. W sezonie lęgowym pingwiny przylądkowe wykopują płytkie dołki na plaży osłoniętej przed intruzami. Potem wyścielają je gałązkami i wodorostami i w ten sposób szykują miejsce na wysiadywanie jaj.|C. Pingwiny nie ulegają wychłodzeniu, bo ich układ krwionośny działa tak, że napływającą z całego ciała krwią ogrzewają zimną krew odpływającą z łap.|D. Siedzibą jednej z największych kolonii pingwinów przylądkowych jest niewielka sielankowa zatoka otoczona skałami z przepiękną plażą usypaną z drobnych ziaren piasku. To miejsce leży na przedmieściach Kapsztadu.|E. Młode pingwiny wykluwają się zazwyczaj w październiku. Choć ojcowie są zmęczeni wysiadywaniem, to przez pewien czas sprawują opiekę nad potomstwem i karmią pisklęta specjalną wydzieliną wytwarzaną w przełyku.|F. Pingwiny cesarskie to gatunek zwany, z racji swych zwyczajów, seryjnym monogamistą. Zaobserwowano, że na początku każdej pory lęgowej osobniki dobierają się w nowe pary i za każdym razem wysiadują i wychowują pisklęta w nowym związku.|G. Dla ludzkiego oka wszystkie pingwiny są takie same. Zwierzęta te mają jednak niezawodne sposoby, aby wśród setek innych przedstawicieli własnego gatunku – na pozór identycznych – rozpoznać swojego partnera i pozostać mu wiernym.|H. Pingwiny monogamiczne, do których należą pingwiny przylądkowe, co roku bezbłędnie trafiają do tych samych gniazd. Naukowcy odkryli niedawno, że ptaki doskonale znają raz wybrane miejsca lęgowe.|I. Zadziwiające, jak niezwykle rozwinięty instynkt rodzicielski mają pingwiny. Okazuje się, że przez większą część swojego życia rok w rok wszystkie siły poświęcają odchowaniu potomstwa, czyniąc to w ekstremalnych warunkach.|J. Kiedy pingwiny wychodzą z wody, na ich piórach nie tworzą się nawet najmniejsze kryształki lodu. Pióra te są wyposażone w maleńkie, nanomilimetrowe pory, dzięki którym woda do nich nie przylega, lecz osiada w formie kropli i spływa, zanim zdąży zamarznąć.|K. Do tej pory umiejętność integrowania różnych informacji o innych przedstawicielach gatunku została potwierdzona jedynie u kilku gatunków ssaków żyjących w stadach, poza tym u wron oraz właśnie u pingwinów."
+  correctAnswer: "F. Pingwiny cesarskie to gatunek zwany, z racji swych zwyczajów, seryjnym monogamistą. Zaobserwowano, że na początku każdej pory lęgowej osobniki dobierają się w nowe pary i za każdym razem wysiadują i wychowują pisklęta w nowym związku."
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-r4-q10
+  passageRef: certyfikat-polski-C1-2022-03-read-4
+  questionType: matching
+  questionText: "Piaszczyste gniazdko"
+  options: "A. Niezwykłe jest to, że kiedy samiec i samica zwracają na siebie uwagę, rozpoczynają widowiskowy taniec, podczas którego partnerzy wykonują dokładnie te same ruchy. Odnosi się wrażenie, jakby oba ptaki były idealnie zsynchronizowane.|B. W sezonie lęgowym pingwiny przylądkowe wykopują płytkie dołki na plaży osłoniętej przed intruzami. Potem wyścielają je gałązkami i wodorostami i w ten sposób szykują miejsce na wysiadywanie jaj.|C. Pingwiny nie ulegają wychłodzeniu, bo ich układ krwionośny działa tak, że napływającą z całego ciała krwią ogrzewają zimną krew odpływającą z łap.|D. Siedzibą jednej z największych kolonii pingwinów przylądkowych jest niewielka sielankowa zatoka otoczona skałami z przepiękną plażą usypaną z drobnych ziaren piasku. To miejsce leży na przedmieściach Kapsztadu.|E. Młode pingwiny wykluwają się zazwyczaj w październiku. Choć ojcowie są zmęczeni wysiadywaniem, to przez pewien czas sprawują opiekę nad potomstwem i karmią pisklęta specjalną wydzieliną wytwarzaną w przełyku.|F. Pingwiny cesarskie to gatunek zwany, z racji swych zwyczajów, seryjnym monogamistą. Zaobserwowano, że na początku każdej pory lęgowej osobniki dobierają się w nowe pary i za każdym razem wysiadują i wychowują pisklęta w nowym związku.|G. Dla ludzkiego oka wszystkie pingwiny są takie same. Zwierzęta te mają jednak niezawodne sposoby, aby wśród setek innych przedstawicieli własnego gatunku – na pozór identycznych – rozpoznać swojego partnera i pozostać mu wiernym.|H. Pingwiny monogamiczne, do których należą pingwiny przylądkowe, co roku bezbłędnie trafiają do tych samych gniazd. Naukowcy odkryli niedawno, że ptaki doskonale znają raz wybrane miejsca lęgowe.|I. Zadziwiające, jak niezwykle rozwinięty instynkt rodzicielski mają pingwiny. Okazuje się, że przez większą część swojego życia rok w rok wszystkie siły poświęcają odchowaniu potomstwa, czyniąc to w ekstremalnych warunkach.|J. Kiedy pingwiny wychodzą z wody, na ich piórach nie tworzą się nawet najmniejsze kryształki lodu. Pióra te są wyposażone w maleńkie, nanomilimetrowe pory, dzięki którym woda do nich nie przylega, lecz osiada w formie kropli i spływa, zanim zdąży zamarznąć.|K. Do tej pory umiejętność integrowania różnych informacji o innych przedstawicielach gatunku została potwierdzona jedynie u kilku gatunków ssaków żyjących w stadach, poza tym u wron oraz właśnie u pingwinów."
+  correctAnswer: "B. W sezonie lęgowym pingwiny przylądkowe wykopują płytkie dołki na plaży osłoniętej przed intruzami. Potem wyścielają je gałązkami i wodorostami i w ten sposób szykują miejsce na wysiadywanie jaj."
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-r5-q1
+  passageRef: certyfikat-polski-C1-2022-03-read-5
+  questionType: matching
+  questionText: "Oglądanie programów daje telewidzom złudne wrażenie przynależności do wspólnoty i zastępuje uczestnictwo w życiu społecznym."
+  options: "A|B|C|D|E"
+  correctAnswer: "A|D"
+  pointsQuarter: 8
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
+  requiredSelections: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-r5-q2
+  passageRef: certyfikat-polski-C1-2022-03-read-5
+  questionType: matching
+  questionText: "Media stosują podstępne wybiegi oparte na fragmentaryczności przekazywanej informacji."
+  options: "A|B|C|D|E"
+  correctAnswer: A
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-r5-q3
+  passageRef: certyfikat-polski-C1-2022-03-read-5
+  questionType: matching
+  questionText: "Media unikają igrania z etyką, świadome prawnych konsekwencji i społecznej dezaprobaty wobec takich działań."
+  options: "A|B|C|D|E"
+  correctAnswer: "B|C"
+  pointsQuarter: 8
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
+  requiredSelections: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-r5-q4
+  passageRef: certyfikat-polski-C1-2022-03-read-5
+  questionType: matching
+  questionText: "W wartościowym przekazie telewizyjnym powinien zostać uwzględniony indywidualny wymiar ludzkiej egzystencji."
+  options: "A|B|C|D|E"
+  correctAnswer: E
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-r5-q5
+  passageRef: certyfikat-polski-C1-2022-03-read-5
+  questionType: matching
+  questionText: "Czwarta władza bywa uważana za bezwzględne narzędzie wykorzystywane do manipulowania widzami i ograniczania im dostępu do prawdy."
+  options: "A|B|C|D|E"
+  correctAnswer: "A|B|D"
+  pointsQuarter: 12
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
+  requiredSelections: 3
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-r5-q6
+  passageRef: certyfikat-polski-C1-2022-03-read-5
+  questionType: matching
+  questionText: "Nietykalność instytucji przemysłu medialnego jest zagrożona, co więcej – media mają swoich zagorzałych przeciwników."
+  options: "A|B|C|D|E"
+  correctAnswer: B
+  pointsQuarter: 4
+}

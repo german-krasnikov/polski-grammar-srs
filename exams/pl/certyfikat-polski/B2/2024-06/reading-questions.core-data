@@ -1,181 +1,406 @@
 DSL 1
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-06-rq-1"
-  passageRef: "certyfikat-polski-B2-2024-06-read-6"
+  questionId: certyfikat-polski-B2-2024-06-r1-q1
+  passageRef: certyfikat-polski-B2-2024-06-read-1
   questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionText: "Z tekstu o blokadzie drogi do lotniska dowiadujemy się, że"
+  options: "a) protestujący rolnicy będą eskortowani na lotnisko przez policję.|b) po godzinie 15:00 policjanci opuszczą miejsce rolniczego protestu.|c) klienci linii lotniczych mogą mieć problem, żeby zdążyć na swój lot."
+  correctAnswer: "c) klienci linii lotniczych mogą mieć problem, żeby zdążyć na swój lot."
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-06-rq-2"
-  passageRef: "certyfikat-polski-B2-2024-06-read-6"
+  questionId: certyfikat-polski-B2-2024-06-r1-q2
+  passageRef: certyfikat-polski-B2-2024-06-read-1
   questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionText: "Z tekstu o przedmiotach zostawionych w pociągach wynika, że"
+  options: "a) ten rok był rekordowy pod względem liczby rzeczy pozostawionych w pociągach.|b) przedmioty zebrane przez pracowników kolei trafiają do wskazanego miejsca.|c) w ramach akcji przeszukano ponad 13 tysięcy wagonów należących do PKP."
+  correctAnswer: "b) przedmioty zebrane przez pracowników kolei trafiają do wskazanego miejsca."
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-06-rq-3"
-  passageRef: "certyfikat-polski-B2-2024-06-read-6"
+  questionId: certyfikat-polski-B2-2024-06-r1-q3
+  passageRef: certyfikat-polski-B2-2024-06-read-1
   questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionText: "Z tekstu o velostradzie dowiadujemy się, że"
+  options: "a) nowa droga rowerowa będzie mieć znaczenie dla lokalnego transportu.|b) dzięki trasie rowerowej miasto zaoferuje mieszkańcom więcej form wypoczynku.|c) velostrada ułatwi dojazd z Katowic do sąsiadujących miast."
+  correctAnswer: "a) nowa droga rowerowa będzie mieć znaczenie dla lokalnego transportu."
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-06-rq-4"
-  passageRef: "certyfikat-polski-B2-2024-06-read-6"
+  questionId: certyfikat-polski-B2-2024-06-r1-q4
+  passageRef: certyfikat-polski-B2-2024-06-read-1
   questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionText: "Z tekstu o zaśmiecaniu lasów dowiadujemy się, że"
+  options: "a) wywiezienie odpadów z lasu kosztowało kilka tysięcy złotych.|b) osoby pozostawiające śmieci w lesie nie unikną kary.|c) w lesie znaleziono odpady pochodzące sprzed kilku wieków."
+  correctAnswer: "b) osoby pozostawiające śmieci w lesie nie unikną kary."
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-06-rq-5"
-  passageRef: "certyfikat-polski-B2-2024-06-read-6"
+  questionId: certyfikat-polski-B2-2024-06-r1-q5
+  passageRef: certyfikat-polski-B2-2024-06-read-1
   questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionText: "Z tekstu o wernisażu dowiadujemy się, że"
+  options: "a) wystawione prace spotkały się z krytyką kolegów po fachu.|b) Krzysztof Kopeć zadebiutował właśnie w Galerii Centrum.|c) otwarcie wystawy można uznać za udane wydarzenie artystyczne."
+  correctAnswer: "c) otwarcie wystawy można uznać za udane wydarzenie artystyczne."
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-06-rq-6"
-  passageRef: "certyfikat-polski-B2-2024-06-read-7"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2024-06-r2-q1
+  passageRef: certyfikat-polski-B2-2024-06-read-2
+  questionType: true_false_not_given
+  questionText: "Fred Astaire miał swój sposób na zwrócenie uwagi płci pięknej."
+  options: "TAK|NIE|BI"
+  correctAnswer: TAK
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-06-rq-7"
-  passageRef: "certyfikat-polski-B2-2024-06-read-7"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2024-06-r2-q2
+  passageRef: certyfikat-polski-B2-2024-06-read-2
+  questionType: true_false_not_given
+  questionText: "Odbiór produkcji z Astairem nie zmienił się na przestrzeni lat."
+  options: "TAK|NIE|BI"
+  correctAnswer: NIE
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-06-rq-8"
-  passageRef: "certyfikat-polski-B2-2024-06-read-7"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2024-06-r2-q3
+  passageRef: certyfikat-polski-B2-2024-06-read-2
+  questionType: true_false_not_given
+  questionText: "Filmy z tancerzem pozwalały oderwać się od powszechnych problemów."
+  options: "TAK|NIE|BI"
+  correctAnswer: TAK
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-06-rq-9"
-  passageRef: "certyfikat-polski-B2-2024-06-read-7"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2024-06-r2-q4
+  passageRef: certyfikat-polski-B2-2024-06-read-2
+  questionType: true_false_not_given
+  questionText: "Tancerzowi powierzano role romantycznych amantów."
+  options: "TAK|NIE|BI"
+  correctAnswer: NIE
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-06-rq-10"
-  passageRef: "certyfikat-polski-B2-2024-06-read-7"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2024-06-r2-q5
+  passageRef: certyfikat-polski-B2-2024-06-read-2
+  questionType: true_false_not_given
+  questionText: "Filmy z tancerzem kręcone były na łonie natury."
+  options: "TAK|NIE|BI"
+  correctAnswer: NIE
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-06-rq-11"
-  passageRef: "certyfikat-polski-B2-2024-06-read-8"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2024-06-r2-q6
+  passageRef: certyfikat-polski-B2-2024-06-read-2
+  questionType: true_false_not_given
+  questionText: "Stare taśmy nie eliminowały odgłosów spoza kadru."
+  options: "TAK|NIE|BI"
+  correctAnswer: BI
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-06-rq-12"
-  passageRef: "certyfikat-polski-B2-2024-06-read-8"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2024-06-r2-q7
+  passageRef: certyfikat-polski-B2-2024-06-read-2
+  questionType: true_false_not_given
+  questionText: "Astaire specjalizował się w jednym gatunku muzycznym."
+  options: "TAK|NIE|BI"
+  correctAnswer: NIE
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-06-rq-13"
-  passageRef: "certyfikat-polski-B2-2024-06-read-8"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2024-06-r2-q8
+  passageRef: certyfikat-polski-B2-2024-06-read-2
+  questionType: true_false_not_given
+  questionText: "Trenując do występów, aktor często niszczył wynajmowane pokoje."
+  options: "TAK|NIE|BI"
+  correctAnswer: BI
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-06-rq-14"
-  passageRef: "certyfikat-polski-B2-2024-06-read-8"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2024-06-r2-q9
+  passageRef: certyfikat-polski-B2-2024-06-read-2
+  questionType: true_false_not_given
+  questionText: "Astaire miał licznych naśladowców w świecie artystycznym."
+  options: "TAK|NIE|BI"
+  correctAnswer: TAK
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-06-rq-15"
-  passageRef: "certyfikat-polski-B2-2024-06-read-8"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2024-06-r2-q10
+  passageRef: certyfikat-polski-B2-2024-06-read-2
+  questionType: true_false_not_given
+  questionText: "Stroje sceniczne Astaire’a fascynowały Michaela Jacksona."
+  options: "TAK|NIE|BI"
+  correctAnswer: BI
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-06-rq-16"
-  passageRef: "certyfikat-polski-B2-2024-06-read-9"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2024-06-r3-q1
+  passageRef: certyfikat-polski-B2-2024-06-read-3
+  questionType: gap_fill_fragment
+  questionText: "Luka 1 w tekście „Czy świat bez kawy to nasza przyszłość?”"
+  options: "A. sprzyjające uprawie rośliny panują na terenach górzystych|B. drugim po oleju najczęściej sprzedawanym towarem|C. w obliczu zachodzących zmian klimatu|D. promujące jeden typ genetyczny danej rośliny|E. nasiona aż 45% dzikich gatunków kawowca|F. sporej ilości światła słonecznego w ciągu dnia|G. kilkunastu gatunków warzyw i owoców|H. wahania temperatury potrafią zahamować wzrost|I. kryzysu związanego z brakiem ziaren kawowca|J. osłabione przez niedobór wody egzemplarze|K. niekorzystne warunki środowiskowe"
+  correctAnswer: "G. kilkunastu gatunków warzyw i owoców"
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-06-rq-17"
-  passageRef: "certyfikat-polski-B2-2024-06-read-9"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2024-06-r3-q2
+  passageRef: certyfikat-polski-B2-2024-06-read-3
+  questionType: gap_fill_fragment
+  questionText: "Luka 2 w tekście „Czy świat bez kawy to nasza przyszłość?”"
+  options: "A. sprzyjające uprawie rośliny panują na terenach górzystych|B. drugim po oleju najczęściej sprzedawanym towarem|C. w obliczu zachodzących zmian klimatu|D. promujące jeden typ genetyczny danej rośliny|E. nasiona aż 45% dzikich gatunków kawowca|F. sporej ilości światła słonecznego w ciągu dnia|G. kilkunastu gatunków warzyw i owoców|H. wahania temperatury potrafią zahamować wzrost|I. kryzysu związanego z brakiem ziaren kawowca|J. osłabione przez niedobór wody egzemplarze|K. niekorzystne warunki środowiskowe"
+  correctAnswer: "D. promujące jeden typ genetyczny danej rośliny"
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-06-rq-18"
-  passageRef: "certyfikat-polski-B2-2024-06-read-9"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2024-06-r3-q3
+  passageRef: certyfikat-polski-B2-2024-06-read-3
+  questionType: gap_fill_fragment
+  questionText: "Luka 3 w tekście „Czy świat bez kawy to nasza przyszłość?”"
+  options: "A. sprzyjające uprawie rośliny panują na terenach górzystych|B. drugim po oleju najczęściej sprzedawanym towarem|C. w obliczu zachodzących zmian klimatu|D. promujące jeden typ genetyczny danej rośliny|E. nasiona aż 45% dzikich gatunków kawowca|F. sporej ilości światła słonecznego w ciągu dnia|G. kilkunastu gatunków warzyw i owoców|H. wahania temperatury potrafią zahamować wzrost|I. kryzysu związanego z brakiem ziaren kawowca|J. osłabione przez niedobór wody egzemplarze|K. niekorzystne warunki środowiskowe"
+  correctAnswer: "K. niekorzystne warunki środowiskowe"
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-06-rq-19"
-  passageRef: "certyfikat-polski-B2-2024-06-read-9"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2024-06-r3-q4
+  passageRef: certyfikat-polski-B2-2024-06-read-3
+  questionType: gap_fill_fragment
+  questionText: "Luka 4 w tekście „Czy świat bez kawy to nasza przyszłość?”"
+  options: "A. sprzyjające uprawie rośliny panują na terenach górzystych|B. drugim po oleju najczęściej sprzedawanym towarem|C. w obliczu zachodzących zmian klimatu|D. promujące jeden typ genetyczny danej rośliny|E. nasiona aż 45% dzikich gatunków kawowca|F. sporej ilości światła słonecznego w ciągu dnia|G. kilkunastu gatunków warzyw i owoców|H. wahania temperatury potrafią zahamować wzrost|I. kryzysu związanego z brakiem ziaren kawowca|J. osłabione przez niedobór wody egzemplarze|K. niekorzystne warunki środowiskowe"
+  correctAnswer: "J. osłabione przez niedobór wody egzemplarze"
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-06-rq-20"
-  passageRef: "certyfikat-polski-B2-2024-06-read-9"
+  questionId: certyfikat-polski-B2-2024-06-r3-q5
+  passageRef: certyfikat-polski-B2-2024-06-read-3
+  questionType: gap_fill_fragment
+  questionText: "Luka 5 w tekście „Czy świat bez kawy to nasza przyszłość?”"
+  options: "A. sprzyjające uprawie rośliny panują na terenach górzystych|B. drugim po oleju najczęściej sprzedawanym towarem|C. w obliczu zachodzących zmian klimatu|D. promujące jeden typ genetyczny danej rośliny|E. nasiona aż 45% dzikich gatunków kawowca|F. sporej ilości światła słonecznego w ciągu dnia|G. kilkunastu gatunków warzyw i owoców|H. wahania temperatury potrafią zahamować wzrost|I. kryzysu związanego z brakiem ziaren kawowca|J. osłabione przez niedobór wody egzemplarze|K. niekorzystne warunki środowiskowe"
+  correctAnswer: "F. sporej ilości światła słonecznego w ciągu dnia"
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-r3-q6
+  passageRef: certyfikat-polski-B2-2024-06-read-3
+  questionType: gap_fill_fragment
+  questionText: "Luka 6 w tekście „Czy świat bez kawy to nasza przyszłość?”"
+  options: "A. sprzyjające uprawie rośliny panują na terenach górzystych|B. drugim po oleju najczęściej sprzedawanym towarem|C. w obliczu zachodzących zmian klimatu|D. promujące jeden typ genetyczny danej rośliny|E. nasiona aż 45% dzikich gatunków kawowca|F. sporej ilości światła słonecznego w ciągu dnia|G. kilkunastu gatunków warzyw i owoców|H. wahania temperatury potrafią zahamować wzrost|I. kryzysu związanego z brakiem ziaren kawowca|J. osłabione przez niedobór wody egzemplarze|K. niekorzystne warunki środowiskowe"
+  correctAnswer: "A. sprzyjające uprawie rośliny panują na terenach górzystych"
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-r3-q7
+  passageRef: certyfikat-polski-B2-2024-06-read-3
+  questionType: gap_fill_fragment
+  questionText: "Luka 7 w tekście „Czy świat bez kawy to nasza przyszłość?”"
+  options: "A. sprzyjające uprawie rośliny panują na terenach górzystych|B. drugim po oleju najczęściej sprzedawanym towarem|C. w obliczu zachodzących zmian klimatu|D. promujące jeden typ genetyczny danej rośliny|E. nasiona aż 45% dzikich gatunków kawowca|F. sporej ilości światła słonecznego w ciągu dnia|G. kilkunastu gatunków warzyw i owoców|H. wahania temperatury potrafią zahamować wzrost|I. kryzysu związanego z brakiem ziaren kawowca|J. osłabione przez niedobór wody egzemplarze|K. niekorzystne warunki środowiskowe"
+  correctAnswer: "H. wahania temperatury potrafią zahamować wzrost"
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-r3-q8
+  passageRef: certyfikat-polski-B2-2024-06-read-3
+  questionType: gap_fill_fragment
+  questionText: "Luka 8 w tekście „Czy świat bez kawy to nasza przyszłość?”"
+  options: "A. sprzyjające uprawie rośliny panują na terenach górzystych|B. drugim po oleju najczęściej sprzedawanym towarem|C. w obliczu zachodzących zmian klimatu|D. promujące jeden typ genetyczny danej rośliny|E. nasiona aż 45% dzikich gatunków kawowca|F. sporej ilości światła słonecznego w ciągu dnia|G. kilkunastu gatunków warzyw i owoców|H. wahania temperatury potrafią zahamować wzrost|I. kryzysu związanego z brakiem ziaren kawowca|J. osłabione przez niedobór wody egzemplarze|K. niekorzystne warunki środowiskowe"
+  correctAnswer: "E. nasiona aż 45% dzikich gatunków kawowca"
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-r3-q9
+  passageRef: certyfikat-polski-B2-2024-06-read-3
+  questionType: gap_fill_fragment
+  questionText: "Luka 9 w tekście „Czy świat bez kawy to nasza przyszłość?”"
+  options: "A. sprzyjające uprawie rośliny panują na terenach górzystych|B. drugim po oleju najczęściej sprzedawanym towarem|C. w obliczu zachodzących zmian klimatu|D. promujące jeden typ genetyczny danej rośliny|E. nasiona aż 45% dzikich gatunków kawowca|F. sporej ilości światła słonecznego w ciągu dnia|G. kilkunastu gatunków warzyw i owoców|H. wahania temperatury potrafią zahamować wzrost|I. kryzysu związanego z brakiem ziaren kawowca|J. osłabione przez niedobór wody egzemplarze|K. niekorzystne warunki środowiskowe"
+  correctAnswer: "C. w obliczu zachodzących zmian klimatu"
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-r3-q10
+  passageRef: certyfikat-polski-B2-2024-06-read-3
+  questionType: gap_fill_fragment
+  questionText: "Luka 10 w tekście „Czy świat bez kawy to nasza przyszłość?”"
+  options: "A. sprzyjające uprawie rośliny panują na terenach górzystych|B. drugim po oleju najczęściej sprzedawanym towarem|C. w obliczu zachodzących zmian klimatu|D. promujące jeden typ genetyczny danej rośliny|E. nasiona aż 45% dzikich gatunków kawowca|F. sporej ilości światła słonecznego w ciągu dnia|G. kilkunastu gatunków warzyw i owoców|H. wahania temperatury potrafią zahamować wzrost|I. kryzysu związanego z brakiem ziaren kawowca|J. osłabione przez niedobór wody egzemplarze|K. niekorzystne warunki środowiskowe"
+  correctAnswer: "I. kryzysu związanego z brakiem ziaren kawowca"
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-r4-q1
+  passageRef: certyfikat-polski-B2-2024-06-read-4
+  questionType: matching
+  questionText: "Mokro, ciepło i szaro"
+  options: "A. Obecnie śnieg zimą jest rzadkim zjawiskiem. To oznacza, że prawdopodobnie już niebawem w górach nie będziemy mogli jeździć na nartach.|B. Szczególnie ciepło jest w centralnej części Europy, czyli na obszarach górskich. W tym roku temperatury były tam wyższe od średniej o 4 stopnie Celsjusza. Ta zima była drugą najcieplejszą w historii Europy.|C. Sytuacji winien jest człowiek. Emisja gazów cieplarnianych w latach 1850-1900 stanowiła ułamek tego, co emitujemy od 20-30 lat.|D. Biała niegdyś pora roku dziś oznacza dodatnie temperatury, deszcze i smutny, pochmurny krajobraz.|E. Sezon narciarski w Alpach stanął pod znakiem zapytania, a przecież zawsze przynosił on lokalnej społeczności duże dochody.|F. Branża narciarska należy do najbardziej narażonych na zmianę klimatu sektorów gospodarki. I, niestety, do najbardziej ją ignorujących.|G. Grubość warstwy śniegu na stokach wynosi obecnie 76% normy. Narciarzy nie dziwią już zielone łąki wokół tras, nawet w środku zimy.|H. Kiedy śniegu brak, armatki śnieżne stanowią ratunek dla wielu ośrodków narciarskich, ale pod jednym warunkiem – temperatura nie może być dodatnia.|I. Oprócz armatek trzeba przygotować zbiorniki z wodą lub pobierać wodę wprost z potoków, a to z kolei oznacza naruszenie prawa.|J. W Alpach budowane są magazyny, które gromadzą wodę. W Polsce natomiast naśnieżanie konkuruje o zasoby wody pitnej dla ludzi.|K. Godzinne naśnieżanie nartostrady o długości 30 km zużywa tyle prądu, co czteroosobowa rodzina przez cały rok."
+  correctAnswer: "D. Biała niegdyś pora roku dziś oznacza dodatnie temperatury, deszcze i smutny, pochmurny krajobraz."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-r4-q2
+  passageRef: certyfikat-polski-B2-2024-06-read-4
+  questionType: matching
+  questionText: "Rozrywka kontra podstawowe potrzeby"
+  options: "A. Obecnie śnieg zimą jest rzadkim zjawiskiem. To oznacza, że prawdopodobnie już niebawem w górach nie będziemy mogli jeździć na nartach.|B. Szczególnie ciepło jest w centralnej części Europy, czyli na obszarach górskich. W tym roku temperatury były tam wyższe od średniej o 4 stopnie Celsjusza. Ta zima była drugą najcieplejszą w historii Europy.|C. Sytuacji winien jest człowiek. Emisja gazów cieplarnianych w latach 1850-1900 stanowiła ułamek tego, co emitujemy od 20-30 lat.|D. Biała niegdyś pora roku dziś oznacza dodatnie temperatury, deszcze i smutny, pochmurny krajobraz.|E. Sezon narciarski w Alpach stanął pod znakiem zapytania, a przecież zawsze przynosił on lokalnej społeczności duże dochody.|F. Branża narciarska należy do najbardziej narażonych na zmianę klimatu sektorów gospodarki. I, niestety, do najbardziej ją ignorujących.|G. Grubość warstwy śniegu na stokach wynosi obecnie 76% normy. Narciarzy nie dziwią już zielone łąki wokół tras, nawet w środku zimy.|H. Kiedy śniegu brak, armatki śnieżne stanowią ratunek dla wielu ośrodków narciarskich, ale pod jednym warunkiem – temperatura nie może być dodatnia.|I. Oprócz armatek trzeba przygotować zbiorniki z wodą lub pobierać wodę wprost z potoków, a to z kolei oznacza naruszenie prawa.|J. W Alpach budowane są magazyny, które gromadzą wodę. W Polsce natomiast naśnieżanie konkuruje o zasoby wody pitnej dla ludzi.|K. Godzinne naśnieżanie nartostrady o długości 30 km zużywa tyle prądu, co czteroosobowa rodzina przez cały rok."
+  correctAnswer: "J. W Alpach budowane są magazyny, które gromadzą wodę. W Polsce natomiast naśnieżanie konkuruje o zasoby wody pitnej dla ludzi."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-r4-q3
+  passageRef: certyfikat-polski-B2-2024-06-read-4
+  questionType: matching
+  questionText: "Zamykanie oczu na problem"
+  options: "A. Obecnie śnieg zimą jest rzadkim zjawiskiem. To oznacza, że prawdopodobnie już niebawem w górach nie będziemy mogli jeździć na nartach.|B. Szczególnie ciepło jest w centralnej części Europy, czyli na obszarach górskich. W tym roku temperatury były tam wyższe od średniej o 4 stopnie Celsjusza. Ta zima była drugą najcieplejszą w historii Europy.|C. Sytuacji winien jest człowiek. Emisja gazów cieplarnianych w latach 1850-1900 stanowiła ułamek tego, co emitujemy od 20-30 lat.|D. Biała niegdyś pora roku dziś oznacza dodatnie temperatury, deszcze i smutny, pochmurny krajobraz.|E. Sezon narciarski w Alpach stanął pod znakiem zapytania, a przecież zawsze przynosił on lokalnej społeczności duże dochody.|F. Branża narciarska należy do najbardziej narażonych na zmianę klimatu sektorów gospodarki. I, niestety, do najbardziej ją ignorujących.|G. Grubość warstwy śniegu na stokach wynosi obecnie 76% normy. Narciarzy nie dziwią już zielone łąki wokół tras, nawet w środku zimy.|H. Kiedy śniegu brak, armatki śnieżne stanowią ratunek dla wielu ośrodków narciarskich, ale pod jednym warunkiem – temperatura nie może być dodatnia.|I. Oprócz armatek trzeba przygotować zbiorniki z wodą lub pobierać wodę wprost z potoków, a to z kolei oznacza naruszenie prawa.|J. W Alpach budowane są magazyny, które gromadzą wodę. W Polsce natomiast naśnieżanie konkuruje o zasoby wody pitnej dla ludzi.|K. Godzinne naśnieżanie nartostrady o długości 30 km zużywa tyle prądu, co czteroosobowa rodzina przez cały rok."
+  correctAnswer: "F. Branża narciarska należy do najbardziej narażonych na zmianę klimatu sektorów gospodarki. I, niestety, do najbardziej ją ignorujących."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-r4-q4
+  passageRef: certyfikat-polski-B2-2024-06-read-4
+  questionType: matching
+  questionText: "Trawka w styczniu"
+  options: "A. Obecnie śnieg zimą jest rzadkim zjawiskiem. To oznacza, że prawdopodobnie już niebawem w górach nie będziemy mogli jeździć na nartach.|B. Szczególnie ciepło jest w centralnej części Europy, czyli na obszarach górskich. W tym roku temperatury były tam wyższe od średniej o 4 stopnie Celsjusza. Ta zima była drugą najcieplejszą w historii Europy.|C. Sytuacji winien jest człowiek. Emisja gazów cieplarnianych w latach 1850-1900 stanowiła ułamek tego, co emitujemy od 20-30 lat.|D. Biała niegdyś pora roku dziś oznacza dodatnie temperatury, deszcze i smutny, pochmurny krajobraz.|E. Sezon narciarski w Alpach stanął pod znakiem zapytania, a przecież zawsze przynosił on lokalnej społeczności duże dochody.|F. Branża narciarska należy do najbardziej narażonych na zmianę klimatu sektorów gospodarki. I, niestety, do najbardziej ją ignorujących.|G. Grubość warstwy śniegu na stokach wynosi obecnie 76% normy. Narciarzy nie dziwią już zielone łąki wokół tras, nawet w środku zimy.|H. Kiedy śniegu brak, armatki śnieżne stanowią ratunek dla wielu ośrodków narciarskich, ale pod jednym warunkiem – temperatura nie może być dodatnia.|I. Oprócz armatek trzeba przygotować zbiorniki z wodą lub pobierać wodę wprost z potoków, a to z kolei oznacza naruszenie prawa.|J. W Alpach budowane są magazyny, które gromadzą wodę. W Polsce natomiast naśnieżanie konkuruje o zasoby wody pitnej dla ludzi.|K. Godzinne naśnieżanie nartostrady o długości 30 km zużywa tyle prądu, co czteroosobowa rodzina przez cały rok."
+  correctAnswer: "G. Grubość warstwy śniegu na stokach wynosi obecnie 76% normy. Narciarzy nie dziwią już zielone łąki wokół tras, nawet w środku zimy."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-r4-q5
+  passageRef: certyfikat-polski-B2-2024-06-read-4
+  questionType: matching
+  questionText: "Nie zawsze legalnie"
+  options: "A. Obecnie śnieg zimą jest rzadkim zjawiskiem. To oznacza, że prawdopodobnie już niebawem w górach nie będziemy mogli jeździć na nartach.|B. Szczególnie ciepło jest w centralnej części Europy, czyli na obszarach górskich. W tym roku temperatury były tam wyższe od średniej o 4 stopnie Celsjusza. Ta zima była drugą najcieplejszą w historii Europy.|C. Sytuacji winien jest człowiek. Emisja gazów cieplarnianych w latach 1850-1900 stanowiła ułamek tego, co emitujemy od 20-30 lat.|D. Biała niegdyś pora roku dziś oznacza dodatnie temperatury, deszcze i smutny, pochmurny krajobraz.|E. Sezon narciarski w Alpach stanął pod znakiem zapytania, a przecież zawsze przynosił on lokalnej społeczności duże dochody.|F. Branża narciarska należy do najbardziej narażonych na zmianę klimatu sektorów gospodarki. I, niestety, do najbardziej ją ignorujących.|G. Grubość warstwy śniegu na stokach wynosi obecnie 76% normy. Narciarzy nie dziwią już zielone łąki wokół tras, nawet w środku zimy.|H. Kiedy śniegu brak, armatki śnieżne stanowią ratunek dla wielu ośrodków narciarskich, ale pod jednym warunkiem – temperatura nie może być dodatnia.|I. Oprócz armatek trzeba przygotować zbiorniki z wodą lub pobierać wodę wprost z potoków, a to z kolei oznacza naruszenie prawa.|J. W Alpach budowane są magazyny, które gromadzą wodę. W Polsce natomiast naśnieżanie konkuruje o zasoby wody pitnej dla ludzi.|K. Godzinne naśnieżanie nartostrady o długości 30 km zużywa tyle prądu, co czteroosobowa rodzina przez cały rok."
+  correctAnswer: "I. Oprócz armatek trzeba przygotować zbiorniki z wodą lub pobierać wodę wprost z potoków, a to z kolei oznacza naruszenie prawa."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-r4-q6
+  passageRef: certyfikat-polski-B2-2024-06-read-4
+  questionType: matching
+  questionText: "Górale z pustymi kieszeniami"
+  options: "A. Obecnie śnieg zimą jest rzadkim zjawiskiem. To oznacza, że prawdopodobnie już niebawem w górach nie będziemy mogli jeździć na nartach.|B. Szczególnie ciepło jest w centralnej części Europy, czyli na obszarach górskich. W tym roku temperatury były tam wyższe od średniej o 4 stopnie Celsjusza. Ta zima była drugą najcieplejszą w historii Europy.|C. Sytuacji winien jest człowiek. Emisja gazów cieplarnianych w latach 1850-1900 stanowiła ułamek tego, co emitujemy od 20-30 lat.|D. Biała niegdyś pora roku dziś oznacza dodatnie temperatury, deszcze i smutny, pochmurny krajobraz.|E. Sezon narciarski w Alpach stanął pod znakiem zapytania, a przecież zawsze przynosił on lokalnej społeczności duże dochody.|F. Branża narciarska należy do najbardziej narażonych na zmianę klimatu sektorów gospodarki. I, niestety, do najbardziej ją ignorujących.|G. Grubość warstwy śniegu na stokach wynosi obecnie 76% normy. Narciarzy nie dziwią już zielone łąki wokół tras, nawet w środku zimy.|H. Kiedy śniegu brak, armatki śnieżne stanowią ratunek dla wielu ośrodków narciarskich, ale pod jednym warunkiem – temperatura nie może być dodatnia.|I. Oprócz armatek trzeba przygotować zbiorniki z wodą lub pobierać wodę wprost z potoków, a to z kolei oznacza naruszenie prawa.|J. W Alpach budowane są magazyny, które gromadzą wodę. W Polsce natomiast naśnieżanie konkuruje o zasoby wody pitnej dla ludzi.|K. Godzinne naśnieżanie nartostrady o długości 30 km zużywa tyle prądu, co czteroosobowa rodzina przez cały rok."
+  correctAnswer: "E. Sezon narciarski w Alpach stanął pod znakiem zapytania, a przecież zawsze przynosił on lokalnej społeczności duże dochody."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-r4-q7
+  passageRef: certyfikat-polski-B2-2024-06-read-4
+  questionType: matching
+  questionText: "Świat bez sportów zimowych coraz bliżej"
+  options: "A. Obecnie śnieg zimą jest rzadkim zjawiskiem. To oznacza, że prawdopodobnie już niebawem w górach nie będziemy mogli jeździć na nartach.|B. Szczególnie ciepło jest w centralnej części Europy, czyli na obszarach górskich. W tym roku temperatury były tam wyższe od średniej o 4 stopnie Celsjusza. Ta zima była drugą najcieplejszą w historii Europy.|C. Sytuacji winien jest człowiek. Emisja gazów cieplarnianych w latach 1850-1900 stanowiła ułamek tego, co emitujemy od 20-30 lat.|D. Biała niegdyś pora roku dziś oznacza dodatnie temperatury, deszcze i smutny, pochmurny krajobraz.|E. Sezon narciarski w Alpach stanął pod znakiem zapytania, a przecież zawsze przynosił on lokalnej społeczności duże dochody.|F. Branża narciarska należy do najbardziej narażonych na zmianę klimatu sektorów gospodarki. I, niestety, do najbardziej ją ignorujących.|G. Grubość warstwy śniegu na stokach wynosi obecnie 76% normy. Narciarzy nie dziwią już zielone łąki wokół tras, nawet w środku zimy.|H. Kiedy śniegu brak, armatki śnieżne stanowią ratunek dla wielu ośrodków narciarskich, ale pod jednym warunkiem – temperatura nie może być dodatnia.|I. Oprócz armatek trzeba przygotować zbiorniki z wodą lub pobierać wodę wprost z potoków, a to z kolei oznacza naruszenie prawa.|J. W Alpach budowane są magazyny, które gromadzą wodę. W Polsce natomiast naśnieżanie konkuruje o zasoby wody pitnej dla ludzi.|K. Godzinne naśnieżanie nartostrady o długości 30 km zużywa tyle prądu, co czteroosobowa rodzina przez cały rok."
+  correctAnswer: "A. Obecnie śnieg zimą jest rzadkim zjawiskiem. To oznacza, że prawdopodobnie już niebawem w górach nie będziemy mogli jeździć na nartach."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-r4-q8
+  passageRef: certyfikat-polski-B2-2024-06-read-4
+  questionType: matching
+  questionText: "Czy warto zużywać tyle energii?"
+  options: "A. Obecnie śnieg zimą jest rzadkim zjawiskiem. To oznacza, że prawdopodobnie już niebawem w górach nie będziemy mogli jeździć na nartach.|B. Szczególnie ciepło jest w centralnej części Europy, czyli na obszarach górskich. W tym roku temperatury były tam wyższe od średniej o 4 stopnie Celsjusza. Ta zima była drugą najcieplejszą w historii Europy.|C. Sytuacji winien jest człowiek. Emisja gazów cieplarnianych w latach 1850-1900 stanowiła ułamek tego, co emitujemy od 20-30 lat.|D. Biała niegdyś pora roku dziś oznacza dodatnie temperatury, deszcze i smutny, pochmurny krajobraz.|E. Sezon narciarski w Alpach stanął pod znakiem zapytania, a przecież zawsze przynosił on lokalnej społeczności duże dochody.|F. Branża narciarska należy do najbardziej narażonych na zmianę klimatu sektorów gospodarki. I, niestety, do najbardziej ją ignorujących.|G. Grubość warstwy śniegu na stokach wynosi obecnie 76% normy. Narciarzy nie dziwią już zielone łąki wokół tras, nawet w środku zimy.|H. Kiedy śniegu brak, armatki śnieżne stanowią ratunek dla wielu ośrodków narciarskich, ale pod jednym warunkiem – temperatura nie może być dodatnia.|I. Oprócz armatek trzeba przygotować zbiorniki z wodą lub pobierać wodę wprost z potoków, a to z kolei oznacza naruszenie prawa.|J. W Alpach budowane są magazyny, które gromadzą wodę. W Polsce natomiast naśnieżanie konkuruje o zasoby wody pitnej dla ludzi.|K. Godzinne naśnieżanie nartostrady o długości 30 km zużywa tyle prądu, co czteroosobowa rodzina przez cały rok."
+  correctAnswer: "K. Godzinne naśnieżanie nartostrady o długości 30 km zużywa tyle prądu, co czteroosobowa rodzina przez cały rok."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-r4-q9
+  passageRef: certyfikat-polski-B2-2024-06-read-4
+  questionType: matching
+  questionText: "Blisko rekordu"
+  options: "A. Obecnie śnieg zimą jest rzadkim zjawiskiem. To oznacza, że prawdopodobnie już niebawem w górach nie będziemy mogli jeździć na nartach.|B. Szczególnie ciepło jest w centralnej części Europy, czyli na obszarach górskich. W tym roku temperatury były tam wyższe od średniej o 4 stopnie Celsjusza. Ta zima była drugą najcieplejszą w historii Europy.|C. Sytuacji winien jest człowiek. Emisja gazów cieplarnianych w latach 1850-1900 stanowiła ułamek tego, co emitujemy od 20-30 lat.|D. Biała niegdyś pora roku dziś oznacza dodatnie temperatury, deszcze i smutny, pochmurny krajobraz.|E. Sezon narciarski w Alpach stanął pod znakiem zapytania, a przecież zawsze przynosił on lokalnej społeczności duże dochody.|F. Branża narciarska należy do najbardziej narażonych na zmianę klimatu sektorów gospodarki. I, niestety, do najbardziej ją ignorujących.|G. Grubość warstwy śniegu na stokach wynosi obecnie 76% normy. Narciarzy nie dziwią już zielone łąki wokół tras, nawet w środku zimy.|H. Kiedy śniegu brak, armatki śnieżne stanowią ratunek dla wielu ośrodków narciarskich, ale pod jednym warunkiem – temperatura nie może być dodatnia.|I. Oprócz armatek trzeba przygotować zbiorniki z wodą lub pobierać wodę wprost z potoków, a to z kolei oznacza naruszenie prawa.|J. W Alpach budowane są magazyny, które gromadzą wodę. W Polsce natomiast naśnieżanie konkuruje o zasoby wody pitnej dla ludzi.|K. Godzinne naśnieżanie nartostrady o długości 30 km zużywa tyle prądu, co czteroosobowa rodzina przez cały rok."
+  correctAnswer: "B. Szczególnie ciepło jest w centralnej części Europy, czyli na obszarach górskich. W tym roku temperatury były tam wyższe od średniej o 4 stopnie Celsjusza. Ta zima była drugą najcieplejszą w historii Europy."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-r4-q10
+  passageRef: certyfikat-polski-B2-2024-06-read-4
+  questionType: matching
+  questionText: "Wspomaganie natury"
+  options: "A. Obecnie śnieg zimą jest rzadkim zjawiskiem. To oznacza, że prawdopodobnie już niebawem w górach nie będziemy mogli jeździć na nartach.|B. Szczególnie ciepło jest w centralnej części Europy, czyli na obszarach górskich. W tym roku temperatury były tam wyższe od średniej o 4 stopnie Celsjusza. Ta zima była drugą najcieplejszą w historii Europy.|C. Sytuacji winien jest człowiek. Emisja gazów cieplarnianych w latach 1850-1900 stanowiła ułamek tego, co emitujemy od 20-30 lat.|D. Biała niegdyś pora roku dziś oznacza dodatnie temperatury, deszcze i smutny, pochmurny krajobraz.|E. Sezon narciarski w Alpach stanął pod znakiem zapytania, a przecież zawsze przynosił on lokalnej społeczności duże dochody.|F. Branża narciarska należy do najbardziej narażonych na zmianę klimatu sektorów gospodarki. I, niestety, do najbardziej ją ignorujących.|G. Grubość warstwy śniegu na stokach wynosi obecnie 76% normy. Narciarzy nie dziwią już zielone łąki wokół tras, nawet w środku zimy.|H. Kiedy śniegu brak, armatki śnieżne stanowią ratunek dla wielu ośrodków narciarskich, ale pod jednym warunkiem – temperatura nie może być dodatnia.|I. Oprócz armatek trzeba przygotować zbiorniki z wodą lub pobierać wodę wprost z potoków, a to z kolei oznacza naruszenie prawa.|J. W Alpach budowane są magazyny, które gromadzą wodę. W Polsce natomiast naśnieżanie konkuruje o zasoby wody pitnej dla ludzi.|K. Godzinne naśnieżanie nartostrady o długości 30 km zużywa tyle prądu, co czteroosobowa rodzina przez cały rok."
+  correctAnswer: "H. Kiedy śniegu brak, armatki śnieżne stanowią ratunek dla wielu ośrodków narciarskich, ale pod jednym warunkiem – temperatura nie może być dodatnia."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-r5-q1
+  passageRef: certyfikat-polski-B2-2024-06-read-5
   questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionText: "Luka 1 w tekście „Miejsce dla seniorów w przestrzeni obywatelskiej”"
+  options: "zanikające|pogłębiające się|różnicujące się|wycofujące się"
+  correctAnswer: "pogłębiające się"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-r5-q2
+  passageRef: certyfikat-polski-B2-2024-06-read-5
+  questionType: multiple_choice
+  questionText: "Luka 2 w tekście „Miejsce dla seniorów w przestrzeni obywatelskiej”"
+  options: "zabierają|mają|pociągają|niosą"
+  correctAnswer: "pociągają"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-r5-q3
+  passageRef: certyfikat-polski-B2-2024-06-read-5
+  questionType: multiple_choice
+  questionText: "Luka 3 w tekście „Miejsce dla seniorów w przestrzeni obywatelskiej”"
+  options: "istotne|nieznaczne|wykluczone|niepożądane"
+  correctAnswer: istotne
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-r5-q4
+  passageRef: certyfikat-polski-B2-2024-06-read-5
+  questionType: multiple_choice
+  questionText: "Luka 4 w tekście „Miejsce dla seniorów w przestrzeni obywatelskiej”"
+  options: "chorobowy|schorowany|zdrowiejący|uzdrowiony"
+  correctAnswer: schorowany
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-r5-q5
+  passageRef: certyfikat-polski-B2-2024-06-read-5
+  questionType: multiple_choice
+  questionText: "Luka 5 w tekście „Miejsce dla seniorów w przestrzeni obywatelskiej”"
+  options: "dostęp|wstęp|udział|postęp"
+  correctAnswer: "dostęp"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-r5-q6
+  passageRef: certyfikat-polski-B2-2024-06-read-5
+  questionType: multiple_choice
+  questionText: "Luka 6 w tekście „Miejsce dla seniorów w przestrzeni obywatelskiej”"
+  options: "ponadto|wcale|w ogóle|na ogół"
+  correctAnswer: "na ogół"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-r5-q7
+  passageRef: certyfikat-polski-B2-2024-06-read-5
+  questionType: multiple_choice
+  questionText: "Luka 7 w tekście „Miejsce dla seniorów w przestrzeni obywatelskiej”"
+  options: "rywalizuje|współtworzy|działa|współpracuje"
+  correctAnswer: "współpracuje"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-r5-q8
+  passageRef: certyfikat-polski-B2-2024-06-read-5
+  questionType: multiple_choice
+  questionText: "Luka 8 w tekście „Miejsce dla seniorów w przestrzeni obywatelskiej”"
+  options: "słyną|zajmują się|martwią się|cieszą się"
+  correctAnswer: "cieszą się"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-r5-q9
+  passageRef: certyfikat-polski-B2-2024-06-read-5
+  questionType: multiple_choice
+  questionText: "Luka 9 w tekście „Miejsce dla seniorów w przestrzeni obywatelskiej”"
+  options: "Zamiast|Oprócz|Pomimo|Z powodu"
+  correctAnswer: "Oprócz"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-r5-q10
+  passageRef: certyfikat-polski-B2-2024-06-read-5
+  questionType: multiple_choice
+  questionText: "Luka 10 w tekście „Miejsce dla seniorów w przestrzeni obywatelskiej”"
+  options: "poświęcone|przeznaczone|kierowane|służące"
+  correctAnswer: "poświęcone"
+  pointsQuarter: 2
 }

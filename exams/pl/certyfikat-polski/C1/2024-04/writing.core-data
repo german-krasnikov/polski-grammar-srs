@@ -1,0 +1,51 @@
+DSL 1
+WRITING_TASK {
+  taskId: certyfikat-polski-C1-2024-04-write-i-a
+  examRef: certyfikat-polski-C1-2024-04
+  taskNumber: 1
+  setId: I
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III"
+  promptText: "Jest Pani organizatorką / Jest Pan organizatorem konferencji studenckiej „Wiedza kluczem do sukcesu”. Proszę napisać tekst przemówienia, które wygłosi Pani/Pan podczas rozpoczęcia obrad."
+  wordLimit: 100
+  genre: speech
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-C1-2024-04-write-i-b
+  examRef: certyfikat-polski-C1-2024-04
+  taskNumber: 1
+  setId: I
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III"
+  promptText: "Czy zgadza się Pani/Pan ze stwierdzeniem, że kult młodości to w dzisiejszych czasach przeżytek? Proszę napisać tekst argumentacyjny, w którym wyrazi Pani/Pan swoją opinię."
+  wordLimit: 300
+  genre: argument
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-C1-2024-04-write-ii-a
+  examRef: certyfikat-polski-C1-2024-04
+  taskNumber: 2
+  setId: II
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III"
+  promptText: "Proszę napisać charakterystykę wybranej grupy (np. społecznej, zawodowej), z którą się Pani/Pan utożsamia."
+  wordLimit: 180
+  genre: characterization
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-C1-2024-04-write-ii-b
+  examRef: certyfikat-polski-C1-2024-04
+  taskNumber: 2
+  setId: II
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III"
+  promptText: "Uczestniczyła Pani / Uczestniczył Pan w debacie Miasto przyjazne mieszkańcom i turystom zorganizowanej przez lokalną stację telewizyjną. Na prośbę polskiej strony internetowej „Co nowego w naszym mieście”, z którą Pani/Pan współpracuje, proszę napisać sprawozdanie z tego wydarzenia."
+  wordLimit: 220
+  genre: report
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-C1-2024-04-write-iii-a
+  examRef: certyfikat-polski-C1-2024-04
+  taskNumber: 3
+  setId: III
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III"
+  promptText: "Proszę napisać esej zainspirowany cytatem: „Kultura to (…) budowanie wartości, dla których warto żyć” (Zbigniew Herbert)."
+  wordLimit: 400
+  genre: essay
+}

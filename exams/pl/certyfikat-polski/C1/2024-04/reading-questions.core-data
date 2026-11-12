@@ -1,0 +1,478 @@
+DSL 1
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-r1-q1
+  passageRef: certyfikat-polski-C1-2024-04-read-1
+  questionType: multiple_choice
+  questionText: "Komunistyczne mieszkania"
+  options: "a) wymagały od lokatorów dużych nakładów finansowych.|b) powstawały w oparciu o wytyczne władz.|c) odznaczały się ergonomicznością."
+  correctAnswer: "b) powstawały w oparciu o wytyczne władz."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-r1-q2
+  passageRef: certyfikat-polski-C1-2024-04-read-1
+  questionType: multiple_choice
+  questionText: "Zbiorowe pralnie"
+  options: "a) nie cieszyły się popularnością wśród gospodyń domowych.|b) stały się składowiskiem zepsutego sprzętu.|c) na początku nie były w pełni wyposażone."
+  correctAnswer: "c) na początku nie były w pełni wyposażone."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-r1-q3
+  passageRef: certyfikat-polski-C1-2024-04-read-1
+  questionType: multiple_choice
+  questionText: "Niewielkie mieszkania, które wówczas projektowano"
+  options: "a) były trudne do umeblowania.|b) dawały możliwość zredukowania kosztów inwestycji.|c) pozwalały łatwo utrzymać porządek."
+  correctAnswer: "b) dawały możliwość zredukowania kosztów inwestycji."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-r1-q4
+  passageRef: certyfikat-polski-C1-2024-04-read-1
+  questionType: multiple_choice
+  questionText: "Początkowo w czasach komunistycznych"
+  options: "a) blat kuchenny służył dzieciom do zabawy.|b) stół kuchenny był jednym z podstawowych mebli.|c) rola stołu była marginalizowana."
+  correctAnswer: "c) rola stołu była marginalizowana."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-r1-q5
+  passageRef: certyfikat-polski-C1-2024-04-read-1
+  questionType: multiple_choice
+  questionText: "W latach 60. XX wieku"
+  options: "a) zaczęto wreszcie doceniać wspólne rodzinne przestrzenie.|b) pokój dzienny zwykle był nieużywanym pomieszczeniem.|c) w mieszkaniach urządzano dzieciom specjalne miejsca do nauki."
+  correctAnswer: "a) zaczęto wreszcie doceniać wspólne rodzinne przestrzenie."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-r1-q6
+  passageRef: certyfikat-polski-C1-2024-04-read-1
+  questionType: multiple_choice
+  questionText: "Meble Kontiki"
+  options: "a) zaprojektowano z myślą o polskich mieszkaniach.|b) produkowane były przez firmę z zagranicznym kapitałem.|c) trafiały do mieszkań robotników zatrudnionych przy ich produkcji."
+  correctAnswer: "b) produkowane były przez firmę z zagranicznym kapitałem."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-r1-q7
+  passageRef: certyfikat-polski-C1-2024-04-read-1
+  questionType: multiple_choice
+  questionText: "Podczas aranżowania wnętrz w czasach komunizmu Polacy"
+  options: "a) nie mogli sobie pozwolić na niektóre rozwiązania ze względu na metraż pomieszczeń.|b) masowo wybierali duże sosnowe meble i jednobarwne naturalne materiały.|c) sprowadzali niektóre elementy wyposażenia z zagranicy."
+  correctAnswer: "a) nie mogli sobie pozwolić na niektóre rozwiązania ze względu na metraż pomieszczeń."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-r1-q8
+  passageRef: certyfikat-polski-C1-2024-04-read-1
+  questionType: multiple_choice
+  questionText: "Przytoczony tekst"
+  options: "a) przekazuje informację o zaradności Polek i Polaków.|b) podkreśla wpływ oczekiwań społecznych na rozwiązania architektoniczne.|c) docenia rozwiązania przestrzenne lat powojennych."
+  correctAnswer: "a) przekazuje informację o zaradności Polek i Polaków."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-r2-q1
+  passageRef: certyfikat-polski-C1-2024-04-read-2
+  questionType: true_false_not_given
+  questionText: "Dawni władcy przywiązywali wagę do ochrony określonych gatunków fauny i flory."
+  options: "TAK|NIE|BI"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-r2-q2
+  passageRef: certyfikat-polski-C1-2024-04-read-2
+  questionType: true_false_not_given
+  questionText: "Tereny kościelne były wyłączone spod kurateli państwa w zakresie ochrony środowiska."
+  options: "TAK|NIE|BI"
+  correctAnswer: BI
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-r2-q3
+  passageRef: certyfikat-polski-C1-2024-04-read-2
+  questionType: true_false_not_given
+  questionText: "Drewno z cisów nie nadawało się do wyrobu broni."
+  options: "TAK|NIE|BI"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-r2-q4
+  passageRef: certyfikat-polski-C1-2024-04-read-2
+  questionType: true_false_not_given
+  questionText: "Polska była pierwszym krajem na świecie, który otoczył ochroną ginące gatunki roślin i zwierząt."
+  options: "TAK|NIE|BI"
+  correctAnswer: BI
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-r2-q5
+  passageRef: certyfikat-polski-C1-2024-04-read-2
+  questionType: true_false_not_given
+  questionText: "Decyzja Sejmu Krajowego w Galicji zapewniająca ochronę zwierzętom tatrzańskim natychmiastowo weszła w życie."
+  options: "TAK|NIE|BI"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-r2-q6
+  passageRef: certyfikat-polski-C1-2024-04-read-2
+  questionType: true_false_not_given
+  questionText: "Zabór rosyjski charakteryzował się skąpymi obostrzeniami w zakresie zachowania naturalnego ekosystemu."
+  options: "TAK|NIE|BI"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-r2-q7
+  passageRef: certyfikat-polski-C1-2024-04-read-2
+  questionType: true_false_not_given
+  questionText: "Przed odzyskaniem przez Polskę niepodległości polowanie na ptaki drapieżne było intratnym zajęciem."
+  options: "TAK|NIE|BI"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-r2-q8
+  passageRef: certyfikat-polski-C1-2024-04-read-2
+  questionType: true_false_not_given
+  questionText: "Potrzeba objęcia pieczą latających łowców została przedstawiona w dziełach naukowych."
+  options: "TAK|NIE|BI"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-r2-q9
+  passageRef: certyfikat-polski-C1-2024-04-read-2
+  questionType: true_false_not_given
+  questionText: "Dokument z 1983 roku ostatecznie nie wszedł w życie."
+  options: "TAK|NIE|BI"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-r3-q1
+  passageRef: certyfikat-polski-C1-2024-04-read-3
+  questionType: gap_fill_fragment
+  questionText: "Luka 1 w tekście „Spuścizna po niewiedzy”"
+  options: "A. Obecnie, niecałe sto lat później, stoimy w obliczu poważnego kryzysu zdrowotnego.|B. Ich budowa jest odmienna, stąd też inne reakcje na opracowywane przez człowieka substancje.|C. Lekarze coraz częściej zalecają wspomaganie leczenia infekcji z towarzyszącym bólem gardła za pomocą leków z flurbiprofenem.|D. To znacznie usprawnia proces zdrowienia i przyspiesza powrót do pełnej dyspozycji.|E. Jak każdy żywy organizm ewoluują, aby przystosować się do zmieniającego się środowiska.|F. Nie jest to trudne, jeżeli każdą decyzję dotyczącą leczenia konsultujemy z lekarzem i nie działamy na własną rękę.|G. Należy przeciwdziałać temu procesowi i podtrzymywać siłę antybiotyków.|H. Oporność na środki przeciwdrobnoustrojowe dotyka wszystkie kraje, chociaż niektóre odczuwają skutki bardziej niż inne.|I. Antybiotykoterapia okazuje się wtedy nieskuteczna, a dodatkowo naraża nas na ryzyko wystąpienia działań niepożądanych, np. wysypki.|J. Przede wszystkim nadużywanie antybiotyków i stosowanie ich niezgodnie z przeznaczeniem.|K. Leki łagodzące objawy w zdecydowanej większości przypadków są dostępne bez recepty, zatem warto po nie sięgać w ramach odpowiedzialnego i świadomego samoleczenia.|L. Jeżeli objawy choroby utrzymują się dłużej niż kilka dni, a gorączka nie ustępuje, konieczna jest konsultacja z internistą.|M. Często tacy „mieszkańcy” są nieszkodliwi, a wręcz są niezbędni dla organizmu (np. bakterie jelitowe pomagają trawić pokarm)."
+  correctAnswer: "G. Należy przeciwdziałać temu procesowi i podtrzymywać siłę antybiotyków."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-r3-q2
+  passageRef: certyfikat-polski-C1-2024-04-read-3
+  questionType: gap_fill_fragment
+  questionText: "Luka 2 w tekście „Spuścizna po niewiedzy”"
+  options: "A. Obecnie, niecałe sto lat później, stoimy w obliczu poważnego kryzysu zdrowotnego.|B. Ich budowa jest odmienna, stąd też inne reakcje na opracowywane przez człowieka substancje.|C. Lekarze coraz częściej zalecają wspomaganie leczenia infekcji z towarzyszącym bólem gardła za pomocą leków z flurbiprofenem.|D. To znacznie usprawnia proces zdrowienia i przyspiesza powrót do pełnej dyspozycji.|E. Jak każdy żywy organizm ewoluują, aby przystosować się do zmieniającego się środowiska.|F. Nie jest to trudne, jeżeli każdą decyzję dotyczącą leczenia konsultujemy z lekarzem i nie działamy na własną rękę.|G. Należy przeciwdziałać temu procesowi i podtrzymywać siłę antybiotyków.|H. Oporność na środki przeciwdrobnoustrojowe dotyka wszystkie kraje, chociaż niektóre odczuwają skutki bardziej niż inne.|I. Antybiotykoterapia okazuje się wtedy nieskuteczna, a dodatkowo naraża nas na ryzyko wystąpienia działań niepożądanych, np. wysypki.|J. Przede wszystkim nadużywanie antybiotyków i stosowanie ich niezgodnie z przeznaczeniem.|K. Leki łagodzące objawy w zdecydowanej większości przypadków są dostępne bez recepty, zatem warto po nie sięgać w ramach odpowiedzialnego i świadomego samoleczenia.|L. Jeżeli objawy choroby utrzymują się dłużej niż kilka dni, a gorączka nie ustępuje, konieczna jest konsultacja z internistą.|M. Często tacy „mieszkańcy” są nieszkodliwi, a wręcz są niezbędni dla organizmu (np. bakterie jelitowe pomagają trawić pokarm)."
+  correctAnswer: "J. Przede wszystkim nadużywanie antybiotyków i stosowanie ich niezgodnie z przeznaczeniem."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-r3-q3
+  passageRef: certyfikat-polski-C1-2024-04-read-3
+  questionType: gap_fill_fragment
+  questionText: "Luka 3 w tekście „Spuścizna po niewiedzy”"
+  options: "A. Obecnie, niecałe sto lat później, stoimy w obliczu poważnego kryzysu zdrowotnego.|B. Ich budowa jest odmienna, stąd też inne reakcje na opracowywane przez człowieka substancje.|C. Lekarze coraz częściej zalecają wspomaganie leczenia infekcji z towarzyszącym bólem gardła za pomocą leków z flurbiprofenem.|D. To znacznie usprawnia proces zdrowienia i przyspiesza powrót do pełnej dyspozycji.|E. Jak każdy żywy organizm ewoluują, aby przystosować się do zmieniającego się środowiska.|F. Nie jest to trudne, jeżeli każdą decyzję dotyczącą leczenia konsultujemy z lekarzem i nie działamy na własną rękę.|G. Należy przeciwdziałać temu procesowi i podtrzymywać siłę antybiotyków.|H. Oporność na środki przeciwdrobnoustrojowe dotyka wszystkie kraje, chociaż niektóre odczuwają skutki bardziej niż inne.|I. Antybiotykoterapia okazuje się wtedy nieskuteczna, a dodatkowo naraża nas na ryzyko wystąpienia działań niepożądanych, np. wysypki.|J. Przede wszystkim nadużywanie antybiotyków i stosowanie ich niezgodnie z przeznaczeniem.|K. Leki łagodzące objawy w zdecydowanej większości przypadków są dostępne bez recepty, zatem warto po nie sięgać w ramach odpowiedzialnego i świadomego samoleczenia.|L. Jeżeli objawy choroby utrzymują się dłużej niż kilka dni, a gorączka nie ustępuje, konieczna jest konsultacja z internistą.|M. Często tacy „mieszkańcy” są nieszkodliwi, a wręcz są niezbędni dla organizmu (np. bakterie jelitowe pomagają trawić pokarm)."
+  correctAnswer: "M. Często tacy „mieszkańcy” są nieszkodliwi, a wręcz są niezbędni dla organizmu (np. bakterie jelitowe pomagają trawić pokarm)."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-r3-q4
+  passageRef: certyfikat-polski-C1-2024-04-read-3
+  questionType: gap_fill_fragment
+  questionText: "Luka 4 w tekście „Spuścizna po niewiedzy”"
+  options: "A. Obecnie, niecałe sto lat później, stoimy w obliczu poważnego kryzysu zdrowotnego.|B. Ich budowa jest odmienna, stąd też inne reakcje na opracowywane przez człowieka substancje.|C. Lekarze coraz częściej zalecają wspomaganie leczenia infekcji z towarzyszącym bólem gardła za pomocą leków z flurbiprofenem.|D. To znacznie usprawnia proces zdrowienia i przyspiesza powrót do pełnej dyspozycji.|E. Jak każdy żywy organizm ewoluują, aby przystosować się do zmieniającego się środowiska.|F. Nie jest to trudne, jeżeli każdą decyzję dotyczącą leczenia konsultujemy z lekarzem i nie działamy na własną rękę.|G. Należy przeciwdziałać temu procesowi i podtrzymywać siłę antybiotyków.|H. Oporność na środki przeciwdrobnoustrojowe dotyka wszystkie kraje, chociaż niektóre odczuwają skutki bardziej niż inne.|I. Antybiotykoterapia okazuje się wtedy nieskuteczna, a dodatkowo naraża nas na ryzyko wystąpienia działań niepożądanych, np. wysypki.|J. Przede wszystkim nadużywanie antybiotyków i stosowanie ich niezgodnie z przeznaczeniem.|K. Leki łagodzące objawy w zdecydowanej większości przypadków są dostępne bez recepty, zatem warto po nie sięgać w ramach odpowiedzialnego i świadomego samoleczenia.|L. Jeżeli objawy choroby utrzymują się dłużej niż kilka dni, a gorączka nie ustępuje, konieczna jest konsultacja z internistą.|M. Często tacy „mieszkańcy” są nieszkodliwi, a wręcz są niezbędni dla organizmu (np. bakterie jelitowe pomagają trawić pokarm)."
+  correctAnswer: "B. Ich budowa jest odmienna, stąd też inne reakcje na opracowywane przez człowieka substancje."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-r3-q5
+  passageRef: certyfikat-polski-C1-2024-04-read-3
+  questionType: gap_fill_fragment
+  questionText: "Luka 5 w tekście „Spuścizna po niewiedzy”"
+  options: "A. Obecnie, niecałe sto lat później, stoimy w obliczu poważnego kryzysu zdrowotnego.|B. Ich budowa jest odmienna, stąd też inne reakcje na opracowywane przez człowieka substancje.|C. Lekarze coraz częściej zalecają wspomaganie leczenia infekcji z towarzyszącym bólem gardła za pomocą leków z flurbiprofenem.|D. To znacznie usprawnia proces zdrowienia i przyspiesza powrót do pełnej dyspozycji.|E. Jak każdy żywy organizm ewoluują, aby przystosować się do zmieniającego się środowiska.|F. Nie jest to trudne, jeżeli każdą decyzję dotyczącą leczenia konsultujemy z lekarzem i nie działamy na własną rękę.|G. Należy przeciwdziałać temu procesowi i podtrzymywać siłę antybiotyków.|H. Oporność na środki przeciwdrobnoustrojowe dotyka wszystkie kraje, chociaż niektóre odczuwają skutki bardziej niż inne.|I. Antybiotykoterapia okazuje się wtedy nieskuteczna, a dodatkowo naraża nas na ryzyko wystąpienia działań niepożądanych, np. wysypki.|J. Przede wszystkim nadużywanie antybiotyków i stosowanie ich niezgodnie z przeznaczeniem.|K. Leki łagodzące objawy w zdecydowanej większości przypadków są dostępne bez recepty, zatem warto po nie sięgać w ramach odpowiedzialnego i świadomego samoleczenia.|L. Jeżeli objawy choroby utrzymują się dłużej niż kilka dni, a gorączka nie ustępuje, konieczna jest konsultacja z internistą.|M. Często tacy „mieszkańcy” są nieszkodliwi, a wręcz są niezbędni dla organizmu (np. bakterie jelitowe pomagają trawić pokarm)."
+  correctAnswer: "E. Jak każdy żywy organizm ewoluują, aby przystosować się do zmieniającego się środowiska."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-r3-q6
+  passageRef: certyfikat-polski-C1-2024-04-read-3
+  questionType: gap_fill_fragment
+  questionText: "Luka 6 w tekście „Spuścizna po niewiedzy”"
+  options: "A. Obecnie, niecałe sto lat później, stoimy w obliczu poważnego kryzysu zdrowotnego.|B. Ich budowa jest odmienna, stąd też inne reakcje na opracowywane przez człowieka substancje.|C. Lekarze coraz częściej zalecają wspomaganie leczenia infekcji z towarzyszącym bólem gardła za pomocą leków z flurbiprofenem.|D. To znacznie usprawnia proces zdrowienia i przyspiesza powrót do pełnej dyspozycji.|E. Jak każdy żywy organizm ewoluują, aby przystosować się do zmieniającego się środowiska.|F. Nie jest to trudne, jeżeli każdą decyzję dotyczącą leczenia konsultujemy z lekarzem i nie działamy na własną rękę.|G. Należy przeciwdziałać temu procesowi i podtrzymywać siłę antybiotyków.|H. Oporność na środki przeciwdrobnoustrojowe dotyka wszystkie kraje, chociaż niektóre odczuwają skutki bardziej niż inne.|I. Antybiotykoterapia okazuje się wtedy nieskuteczna, a dodatkowo naraża nas na ryzyko wystąpienia działań niepożądanych, np. wysypki.|J. Przede wszystkim nadużywanie antybiotyków i stosowanie ich niezgodnie z przeznaczeniem.|K. Leki łagodzące objawy w zdecydowanej większości przypadków są dostępne bez recepty, zatem warto po nie sięgać w ramach odpowiedzialnego i świadomego samoleczenia.|L. Jeżeli objawy choroby utrzymują się dłużej niż kilka dni, a gorączka nie ustępuje, konieczna jest konsultacja z internistą.|M. Często tacy „mieszkańcy” są nieszkodliwi, a wręcz są niezbędni dla organizmu (np. bakterie jelitowe pomagają trawić pokarm)."
+  correctAnswer: "I. Antybiotykoterapia okazuje się wtedy nieskuteczna, a dodatkowo naraża nas na ryzyko wystąpienia działań niepożądanych, np. wysypki."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-r3-q7
+  passageRef: certyfikat-polski-C1-2024-04-read-3
+  questionType: gap_fill_fragment
+  questionText: "Luka 7 w tekście „Spuścizna po niewiedzy”"
+  options: "A. Obecnie, niecałe sto lat później, stoimy w obliczu poważnego kryzysu zdrowotnego.|B. Ich budowa jest odmienna, stąd też inne reakcje na opracowywane przez człowieka substancje.|C. Lekarze coraz częściej zalecają wspomaganie leczenia infekcji z towarzyszącym bólem gardła za pomocą leków z flurbiprofenem.|D. To znacznie usprawnia proces zdrowienia i przyspiesza powrót do pełnej dyspozycji.|E. Jak każdy żywy organizm ewoluują, aby przystosować się do zmieniającego się środowiska.|F. Nie jest to trudne, jeżeli każdą decyzję dotyczącą leczenia konsultujemy z lekarzem i nie działamy na własną rękę.|G. Należy przeciwdziałać temu procesowi i podtrzymywać siłę antybiotyków.|H. Oporność na środki przeciwdrobnoustrojowe dotyka wszystkie kraje, chociaż niektóre odczuwają skutki bardziej niż inne.|I. Antybiotykoterapia okazuje się wtedy nieskuteczna, a dodatkowo naraża nas na ryzyko wystąpienia działań niepożądanych, np. wysypki.|J. Przede wszystkim nadużywanie antybiotyków i stosowanie ich niezgodnie z przeznaczeniem.|K. Leki łagodzące objawy w zdecydowanej większości przypadków są dostępne bez recepty, zatem warto po nie sięgać w ramach odpowiedzialnego i świadomego samoleczenia.|L. Jeżeli objawy choroby utrzymują się dłużej niż kilka dni, a gorączka nie ustępuje, konieczna jest konsultacja z internistą.|M. Często tacy „mieszkańcy” są nieszkodliwi, a wręcz są niezbędni dla organizmu (np. bakterie jelitowe pomagają trawić pokarm)."
+  correctAnswer: "H. Oporność na środki przeciwdrobnoustrojowe dotyka wszystkie kraje, chociaż niektóre odczuwają skutki bardziej niż inne."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-r3-q8
+  passageRef: certyfikat-polski-C1-2024-04-read-3
+  questionType: gap_fill_fragment
+  questionText: "Luka 8 w tekście „Spuścizna po niewiedzy”"
+  options: "A. Obecnie, niecałe sto lat później, stoimy w obliczu poważnego kryzysu zdrowotnego.|B. Ich budowa jest odmienna, stąd też inne reakcje na opracowywane przez człowieka substancje.|C. Lekarze coraz częściej zalecają wspomaganie leczenia infekcji z towarzyszącym bólem gardła za pomocą leków z flurbiprofenem.|D. To znacznie usprawnia proces zdrowienia i przyspiesza powrót do pełnej dyspozycji.|E. Jak każdy żywy organizm ewoluują, aby przystosować się do zmieniającego się środowiska.|F. Nie jest to trudne, jeżeli każdą decyzję dotyczącą leczenia konsultujemy z lekarzem i nie działamy na własną rękę.|G. Należy przeciwdziałać temu procesowi i podtrzymywać siłę antybiotyków.|H. Oporność na środki przeciwdrobnoustrojowe dotyka wszystkie kraje, chociaż niektóre odczuwają skutki bardziej niż inne.|I. Antybiotykoterapia okazuje się wtedy nieskuteczna, a dodatkowo naraża nas na ryzyko wystąpienia działań niepożądanych, np. wysypki.|J. Przede wszystkim nadużywanie antybiotyków i stosowanie ich niezgodnie z przeznaczeniem.|K. Leki łagodzące objawy w zdecydowanej większości przypadków są dostępne bez recepty, zatem warto po nie sięgać w ramach odpowiedzialnego i świadomego samoleczenia.|L. Jeżeli objawy choroby utrzymują się dłużej niż kilka dni, a gorączka nie ustępuje, konieczna jest konsultacja z internistą.|M. Często tacy „mieszkańcy” są nieszkodliwi, a wręcz są niezbędni dla organizmu (np. bakterie jelitowe pomagają trawić pokarm)."
+  correctAnswer: "C. Lekarze coraz częściej zalecają wspomaganie leczenia infekcji z towarzyszącym bólem gardła za pomocą leków z flurbiprofenem."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-r3-q9
+  passageRef: certyfikat-polski-C1-2024-04-read-3
+  questionType: gap_fill_fragment
+  questionText: "Luka 9 w tekście „Spuścizna po niewiedzy”"
+  options: "A. Obecnie, niecałe sto lat później, stoimy w obliczu poważnego kryzysu zdrowotnego.|B. Ich budowa jest odmienna, stąd też inne reakcje na opracowywane przez człowieka substancje.|C. Lekarze coraz częściej zalecają wspomaganie leczenia infekcji z towarzyszącym bólem gardła za pomocą leków z flurbiprofenem.|D. To znacznie usprawnia proces zdrowienia i przyspiesza powrót do pełnej dyspozycji.|E. Jak każdy żywy organizm ewoluują, aby przystosować się do zmieniającego się środowiska.|F. Nie jest to trudne, jeżeli każdą decyzję dotyczącą leczenia konsultujemy z lekarzem i nie działamy na własną rękę.|G. Należy przeciwdziałać temu procesowi i podtrzymywać siłę antybiotyków.|H. Oporność na środki przeciwdrobnoustrojowe dotyka wszystkie kraje, chociaż niektóre odczuwają skutki bardziej niż inne.|I. Antybiotykoterapia okazuje się wtedy nieskuteczna, a dodatkowo naraża nas na ryzyko wystąpienia działań niepożądanych, np. wysypki.|J. Przede wszystkim nadużywanie antybiotyków i stosowanie ich niezgodnie z przeznaczeniem.|K. Leki łagodzące objawy w zdecydowanej większości przypadków są dostępne bez recepty, zatem warto po nie sięgać w ramach odpowiedzialnego i świadomego samoleczenia.|L. Jeżeli objawy choroby utrzymują się dłużej niż kilka dni, a gorączka nie ustępuje, konieczna jest konsultacja z internistą.|M. Często tacy „mieszkańcy” są nieszkodliwi, a wręcz są niezbędni dla organizmu (np. bakterie jelitowe pomagają trawić pokarm)."
+  correctAnswer: "L. Jeżeli objawy choroby utrzymują się dłużej niż kilka dni, a gorączka nie ustępuje, konieczna jest konsultacja z internistą."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-r3-q10
+  passageRef: certyfikat-polski-C1-2024-04-read-3
+  questionType: gap_fill_fragment
+  questionText: "Luka 10 w tekście „Spuścizna po niewiedzy”"
+  options: "A. Obecnie, niecałe sto lat później, stoimy w obliczu poważnego kryzysu zdrowotnego.|B. Ich budowa jest odmienna, stąd też inne reakcje na opracowywane przez człowieka substancje.|C. Lekarze coraz częściej zalecają wspomaganie leczenia infekcji z towarzyszącym bólem gardła za pomocą leków z flurbiprofenem.|D. To znacznie usprawnia proces zdrowienia i przyspiesza powrót do pełnej dyspozycji.|E. Jak każdy żywy organizm ewoluują, aby przystosować się do zmieniającego się środowiska.|F. Nie jest to trudne, jeżeli każdą decyzję dotyczącą leczenia konsultujemy z lekarzem i nie działamy na własną rękę.|G. Należy przeciwdziałać temu procesowi i podtrzymywać siłę antybiotyków.|H. Oporność na środki przeciwdrobnoustrojowe dotyka wszystkie kraje, chociaż niektóre odczuwają skutki bardziej niż inne.|I. Antybiotykoterapia okazuje się wtedy nieskuteczna, a dodatkowo naraża nas na ryzyko wystąpienia działań niepożądanych, np. wysypki.|J. Przede wszystkim nadużywanie antybiotyków i stosowanie ich niezgodnie z przeznaczeniem.|K. Leki łagodzące objawy w zdecydowanej większości przypadków są dostępne bez recepty, zatem warto po nie sięgać w ramach odpowiedzialnego i świadomego samoleczenia.|L. Jeżeli objawy choroby utrzymują się dłużej niż kilka dni, a gorączka nie ustępuje, konieczna jest konsultacja z internistą.|M. Często tacy „mieszkańcy” są nieszkodliwi, a wręcz są niezbędni dla organizmu (np. bakterie jelitowe pomagają trawić pokarm)."
+  correctAnswer: "D. To znacznie usprawnia proces zdrowienia i przyspiesza powrót do pełnej dyspozycji."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-r4-q1
+  passageRef: certyfikat-polski-C1-2024-04-read-4
+  questionType: matching
+  questionText: "Zabytkowa opowiastka"
+  options: "A. Nazwa „Halloween” wywodzi się od określenia wigilii Wszystkich Świętych (All Hallows' Eve), obchodzonej już od wczesnego średniowiecza. Był to czas żartów i drobnych figli związanych z poważnym tematem śmierci.|B. Możnym trzeba było przypomnieć, że pieniądze i władza nie uchronią ich przed śmiercią – taki wydźwięk miało zresztą wiele przedstawień zwanych tańcem śmierci.|C. Przedstawienia tańca śmierci przeważnie ukazują umarłych jako zdecydowanie wesołe ciała. Uśmiechają się one szeroko, bawią się przerażeniem żywych. Tańczące i grające postaci są w gruncie rzeczy raczej pogodne.|D. Halloween, święto zmarłych, duchy, widziadła, żywe trupy – czy to wymysł współczesności? Otóż nie do końca. Człowiek średniowieczny miał – jak mawia mediewista, doktor Andrzej Gierszewski – Halloween przez cały rok.|E. Lęk ośmieszony staje się lękiem oswojonym, podczas gdy wypieranie trudnych tematów tylko potęguje przytłaczający strach, który może nawet powodować zaburzenia psychiczne.|F. Zabawy w upiory i ośmieszanie strachów neutralizują lęki dorosłych, pozwalają nawet dzieciom zmierzyć się z trudnym tematem przemijania, który także je dotyka.|G. Niewątpliwie wszystkie sposoby przedstawienia przemijania, tak powszechne w dawnej kulturze wizualnej, miały niezwykle ważną funkcję: pomagały pogodzić się z przeznaczeniem.|H. Popularnym motywem wykorzystywanym niegdyś przy okazji Wszystkich Świętych była ilustracja tzw. Legendy o trzech żywych i trzech umarłych. Historia ta mogła powstać nawet w XI lub XII stuleciu, ale najstarsza zachowana wersja (co ciekawe – francuska) datowana jest na wiek XIII.|I. W obiegu była szablonowa historia: oto trzech żywych spotkało trzech umarłych. Rzecz w tym, że ci ostatni byli jak zombie: poruszali się i mówili, co oczywiście wprawiło żywych w stan przedzawałowy.|J. Trzej żywi, którzy zostali przez umarłych pouczeni o przemijaniu, według legendy pochodzili z wyższych sfer: królowie, w niektórych wersjach w towarzystwie biskupa, reprezentowali elity ówczesnego społeczeństwa.|K. Średniowieczne zombie nie były jednak spragnione ludzkich mózgów. Wygłosiły tylko swoją przemowę zakończoną słowami: Takimi niegdyś byliśmy, jakimi wy dziś jesteście. Jakimi jesteśmy teraz, takimi i wy będziecie!"
+  correctAnswer: "H. Popularnym motywem wykorzystywanym niegdyś przy okazji Wszystkich Świętych była ilustracja tzw. Legendy o trzech żywych i trzech umarłych. Historia ta mogła powstać nawet w XI lub XII stuleciu, ale najstarsza zachowana wersja (co ciekawe – francuska) datowana jest na wiek XIII."
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-r4-q2
+  passageRef: certyfikat-polski-C1-2024-04-read-4
+  questionType: matching
+  questionText: "Psikus dzień przed"
+  options: "A. Nazwa „Halloween” wywodzi się od określenia wigilii Wszystkich Świętych (All Hallows' Eve), obchodzonej już od wczesnego średniowiecza. Był to czas żartów i drobnych figli związanych z poważnym tematem śmierci.|B. Możnym trzeba było przypomnieć, że pieniądze i władza nie uchronią ich przed śmiercią – taki wydźwięk miało zresztą wiele przedstawień zwanych tańcem śmierci.|C. Przedstawienia tańca śmierci przeważnie ukazują umarłych jako zdecydowanie wesołe ciała. Uśmiechają się one szeroko, bawią się przerażeniem żywych. Tańczące i grające postaci są w gruncie rzeczy raczej pogodne.|D. Halloween, święto zmarłych, duchy, widziadła, żywe trupy – czy to wymysł współczesności? Otóż nie do końca. Człowiek średniowieczny miał – jak mawia mediewista, doktor Andrzej Gierszewski – Halloween przez cały rok.|E. Lęk ośmieszony staje się lękiem oswojonym, podczas gdy wypieranie trudnych tematów tylko potęguje przytłaczający strach, który może nawet powodować zaburzenia psychiczne.|F. Zabawy w upiory i ośmieszanie strachów neutralizują lęki dorosłych, pozwalają nawet dzieciom zmierzyć się z trudnym tematem przemijania, który także je dotyka.|G. Niewątpliwie wszystkie sposoby przedstawienia przemijania, tak powszechne w dawnej kulturze wizualnej, miały niezwykle ważną funkcję: pomagały pogodzić się z przeznaczeniem.|H. Popularnym motywem wykorzystywanym niegdyś przy okazji Wszystkich Świętych była ilustracja tzw. Legendy o trzech żywych i trzech umarłych. Historia ta mogła powstać nawet w XI lub XII stuleciu, ale najstarsza zachowana wersja (co ciekawe – francuska) datowana jest na wiek XIII.|I. W obiegu była szablonowa historia: oto trzech żywych spotkało trzech umarłych. Rzecz w tym, że ci ostatni byli jak zombie: poruszali się i mówili, co oczywiście wprawiło żywych w stan przedzawałowy.|J. Trzej żywi, którzy zostali przez umarłych pouczeni o przemijaniu, według legendy pochodzili z wyższych sfer: królowie, w niektórych wersjach w towarzystwie biskupa, reprezentowali elity ówczesnego społeczeństwa.|K. Średniowieczne zombie nie były jednak spragnione ludzkich mózgów. Wygłosiły tylko swoją przemowę zakończoną słowami: Takimi niegdyś byliśmy, jakimi wy dziś jesteście. Jakimi jesteśmy teraz, takimi i wy będziecie!"
+  correctAnswer: "A. Nazwa „Halloween” wywodzi się od określenia wigilii Wszystkich Świętych (All Hallows' Eve), obchodzonej już od wczesnego średniowiecza. Był to czas żartów i drobnych figli związanych z poważnym tematem śmierci."
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-r4-q3
+  passageRef: certyfikat-polski-C1-2024-04-read-4
+  questionType: matching
+  questionText: "Przeraźliwi kompani"
+  options: "A. Nazwa „Halloween” wywodzi się od określenia wigilii Wszystkich Świętych (All Hallows' Eve), obchodzonej już od wczesnego średniowiecza. Był to czas żartów i drobnych figli związanych z poważnym tematem śmierci.|B. Możnym trzeba było przypomnieć, że pieniądze i władza nie uchronią ich przed śmiercią – taki wydźwięk miało zresztą wiele przedstawień zwanych tańcem śmierci.|C. Przedstawienia tańca śmierci przeważnie ukazują umarłych jako zdecydowanie wesołe ciała. Uśmiechają się one szeroko, bawią się przerażeniem żywych. Tańczące i grające postaci są w gruncie rzeczy raczej pogodne.|D. Halloween, święto zmarłych, duchy, widziadła, żywe trupy – czy to wymysł współczesności? Otóż nie do końca. Człowiek średniowieczny miał – jak mawia mediewista, doktor Andrzej Gierszewski – Halloween przez cały rok.|E. Lęk ośmieszony staje się lękiem oswojonym, podczas gdy wypieranie trudnych tematów tylko potęguje przytłaczający strach, który może nawet powodować zaburzenia psychiczne.|F. Zabawy w upiory i ośmieszanie strachów neutralizują lęki dorosłych, pozwalają nawet dzieciom zmierzyć się z trudnym tematem przemijania, który także je dotyka.|G. Niewątpliwie wszystkie sposoby przedstawienia przemijania, tak powszechne w dawnej kulturze wizualnej, miały niezwykle ważną funkcję: pomagały pogodzić się z przeznaczeniem.|H. Popularnym motywem wykorzystywanym niegdyś przy okazji Wszystkich Świętych była ilustracja tzw. Legendy o trzech żywych i trzech umarłych. Historia ta mogła powstać nawet w XI lub XII stuleciu, ale najstarsza zachowana wersja (co ciekawe – francuska) datowana jest na wiek XIII.|I. W obiegu była szablonowa historia: oto trzech żywych spotkało trzech umarłych. Rzecz w tym, że ci ostatni byli jak zombie: poruszali się i mówili, co oczywiście wprawiło żywych w stan przedzawałowy.|J. Trzej żywi, którzy zostali przez umarłych pouczeni o przemijaniu, według legendy pochodzili z wyższych sfer: królowie, w niektórych wersjach w towarzystwie biskupa, reprezentowali elity ówczesnego społeczeństwa.|K. Średniowieczne zombie nie były jednak spragnione ludzkich mózgów. Wygłosiły tylko swoją przemowę zakończoną słowami: Takimi niegdyś byliśmy, jakimi wy dziś jesteście. Jakimi jesteśmy teraz, takimi i wy będziecie!"
+  correctAnswer: "I. W obiegu była szablonowa historia: oto trzech żywych spotkało trzech umarłych. Rzecz w tym, że ci ostatni byli jak zombie: poruszali się i mówili, co oczywiście wprawiło żywych w stan przedzawałowy."
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-r4-q4
+  passageRef: certyfikat-polski-C1-2024-04-read-4
+  questionType: matching
+  questionText: "Nie tani horror, ale cenne przesłanie"
+  options: "A. Nazwa „Halloween” wywodzi się od określenia wigilii Wszystkich Świętych (All Hallows' Eve), obchodzonej już od wczesnego średniowiecza. Był to czas żartów i drobnych figli związanych z poważnym tematem śmierci.|B. Możnym trzeba było przypomnieć, że pieniądze i władza nie uchronią ich przed śmiercią – taki wydźwięk miało zresztą wiele przedstawień zwanych tańcem śmierci.|C. Przedstawienia tańca śmierci przeważnie ukazują umarłych jako zdecydowanie wesołe ciała. Uśmiechają się one szeroko, bawią się przerażeniem żywych. Tańczące i grające postaci są w gruncie rzeczy raczej pogodne.|D. Halloween, święto zmarłych, duchy, widziadła, żywe trupy – czy to wymysł współczesności? Otóż nie do końca. Człowiek średniowieczny miał – jak mawia mediewista, doktor Andrzej Gierszewski – Halloween przez cały rok.|E. Lęk ośmieszony staje się lękiem oswojonym, podczas gdy wypieranie trudnych tematów tylko potęguje przytłaczający strach, który może nawet powodować zaburzenia psychiczne.|F. Zabawy w upiory i ośmieszanie strachów neutralizują lęki dorosłych, pozwalają nawet dzieciom zmierzyć się z trudnym tematem przemijania, który także je dotyka.|G. Niewątpliwie wszystkie sposoby przedstawienia przemijania, tak powszechne w dawnej kulturze wizualnej, miały niezwykle ważną funkcję: pomagały pogodzić się z przeznaczeniem.|H. Popularnym motywem wykorzystywanym niegdyś przy okazji Wszystkich Świętych była ilustracja tzw. Legendy o trzech żywych i trzech umarłych. Historia ta mogła powstać nawet w XI lub XII stuleciu, ale najstarsza zachowana wersja (co ciekawe – francuska) datowana jest na wiek XIII.|I. W obiegu była szablonowa historia: oto trzech żywych spotkało trzech umarłych. Rzecz w tym, że ci ostatni byli jak zombie: poruszali się i mówili, co oczywiście wprawiło żywych w stan przedzawałowy.|J. Trzej żywi, którzy zostali przez umarłych pouczeni o przemijaniu, według legendy pochodzili z wyższych sfer: królowie, w niektórych wersjach w towarzystwie biskupa, reprezentowali elity ówczesnego społeczeństwa.|K. Średniowieczne zombie nie były jednak spragnione ludzkich mózgów. Wygłosiły tylko swoją przemowę zakończoną słowami: Takimi niegdyś byliśmy, jakimi wy dziś jesteście. Jakimi jesteśmy teraz, takimi i wy będziecie!"
+  correctAnswer: "K. Średniowieczne zombie nie były jednak spragnione ludzkich mózgów. Wygłosiły tylko swoją przemowę zakończoną słowami: Takimi niegdyś byliśmy, jakimi wy dziś jesteście. Jakimi jesteśmy teraz, takimi i wy będziecie!"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-r4-q5
+  passageRef: certyfikat-polski-C1-2024-04-read-4
+  questionType: matching
+  questionText: "Przedstawiciele najwyższych stanów"
+  options: "A. Nazwa „Halloween” wywodzi się od określenia wigilii Wszystkich Świętych (All Hallows' Eve), obchodzonej już od wczesnego średniowiecza. Był to czas żartów i drobnych figli związanych z poważnym tematem śmierci.|B. Możnym trzeba było przypomnieć, że pieniądze i władza nie uchronią ich przed śmiercią – taki wydźwięk miało zresztą wiele przedstawień zwanych tańcem śmierci.|C. Przedstawienia tańca śmierci przeważnie ukazują umarłych jako zdecydowanie wesołe ciała. Uśmiechają się one szeroko, bawią się przerażeniem żywych. Tańczące i grające postaci są w gruncie rzeczy raczej pogodne.|D. Halloween, święto zmarłych, duchy, widziadła, żywe trupy – czy to wymysł współczesności? Otóż nie do końca. Człowiek średniowieczny miał – jak mawia mediewista, doktor Andrzej Gierszewski – Halloween przez cały rok.|E. Lęk ośmieszony staje się lękiem oswojonym, podczas gdy wypieranie trudnych tematów tylko potęguje przytłaczający strach, który może nawet powodować zaburzenia psychiczne.|F. Zabawy w upiory i ośmieszanie strachów neutralizują lęki dorosłych, pozwalają nawet dzieciom zmierzyć się z trudnym tematem przemijania, który także je dotyka.|G. Niewątpliwie wszystkie sposoby przedstawienia przemijania, tak powszechne w dawnej kulturze wizualnej, miały niezwykle ważną funkcję: pomagały pogodzić się z przeznaczeniem.|H. Popularnym motywem wykorzystywanym niegdyś przy okazji Wszystkich Świętych była ilustracja tzw. Legendy o trzech żywych i trzech umarłych. Historia ta mogła powstać nawet w XI lub XII stuleciu, ale najstarsza zachowana wersja (co ciekawe – francuska) datowana jest na wiek XIII.|I. W obiegu była szablonowa historia: oto trzech żywych spotkało trzech umarłych. Rzecz w tym, że ci ostatni byli jak zombie: poruszali się i mówili, co oczywiście wprawiło żywych w stan przedzawałowy.|J. Trzej żywi, którzy zostali przez umarłych pouczeni o przemijaniu, według legendy pochodzili z wyższych sfer: królowie, w niektórych wersjach w towarzystwie biskupa, reprezentowali elity ówczesnego społeczeństwa.|K. Średniowieczne zombie nie były jednak spragnione ludzkich mózgów. Wygłosiły tylko swoją przemowę zakończoną słowami: Takimi niegdyś byliśmy, jakimi wy dziś jesteście. Jakimi jesteśmy teraz, takimi i wy będziecie!"
+  correctAnswer: "J. Trzej żywi, którzy zostali przez umarłych pouczeni o przemijaniu, według legendy pochodzili z wyższych sfer: królowie, w niektórych wersjach w towarzystwie biskupa, reprezentowali elity ówczesnego społeczeństwa."
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-r4-q6
+  passageRef: certyfikat-polski-C1-2024-04-read-4
+  questionType: matching
+  questionText: "Bogactwa i wpływy nic tu nie pomogą"
+  options: "A. Nazwa „Halloween” wywodzi się od określenia wigilii Wszystkich Świętych (All Hallows' Eve), obchodzonej już od wczesnego średniowiecza. Był to czas żartów i drobnych figli związanych z poważnym tematem śmierci.|B. Możnym trzeba było przypomnieć, że pieniądze i władza nie uchronią ich przed śmiercią – taki wydźwięk miało zresztą wiele przedstawień zwanych tańcem śmierci.|C. Przedstawienia tańca śmierci przeważnie ukazują umarłych jako zdecydowanie wesołe ciała. Uśmiechają się one szeroko, bawią się przerażeniem żywych. Tańczące i grające postaci są w gruncie rzeczy raczej pogodne.|D. Halloween, święto zmarłych, duchy, widziadła, żywe trupy – czy to wymysł współczesności? Otóż nie do końca. Człowiek średniowieczny miał – jak mawia mediewista, doktor Andrzej Gierszewski – Halloween przez cały rok.|E. Lęk ośmieszony staje się lękiem oswojonym, podczas gdy wypieranie trudnych tematów tylko potęguje przytłaczający strach, który może nawet powodować zaburzenia psychiczne.|F. Zabawy w upiory i ośmieszanie strachów neutralizują lęki dorosłych, pozwalają nawet dzieciom zmierzyć się z trudnym tematem przemijania, który także je dotyka.|G. Niewątpliwie wszystkie sposoby przedstawienia przemijania, tak powszechne w dawnej kulturze wizualnej, miały niezwykle ważną funkcję: pomagały pogodzić się z przeznaczeniem.|H. Popularnym motywem wykorzystywanym niegdyś przy okazji Wszystkich Świętych była ilustracja tzw. Legendy o trzech żywych i trzech umarłych. Historia ta mogła powstać nawet w XI lub XII stuleciu, ale najstarsza zachowana wersja (co ciekawe – francuska) datowana jest na wiek XIII.|I. W obiegu była szablonowa historia: oto trzech żywych spotkało trzech umarłych. Rzecz w tym, że ci ostatni byli jak zombie: poruszali się i mówili, co oczywiście wprawiło żywych w stan przedzawałowy.|J. Trzej żywi, którzy zostali przez umarłych pouczeni o przemijaniu, według legendy pochodzili z wyższych sfer: królowie, w niektórych wersjach w towarzystwie biskupa, reprezentowali elity ówczesnego społeczeństwa.|K. Średniowieczne zombie nie były jednak spragnione ludzkich mózgów. Wygłosiły tylko swoją przemowę zakończoną słowami: Takimi niegdyś byliśmy, jakimi wy dziś jesteście. Jakimi jesteśmy teraz, takimi i wy będziecie!"
+  correctAnswer: "B. Możnym trzeba było przypomnieć, że pieniądze i władza nie uchronią ich przed śmiercią – taki wydźwięk miało zresztą wiele przedstawień zwanych tańcem śmierci."
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-r4-q7
+  passageRef: certyfikat-polski-C1-2024-04-read-4
+  questionType: matching
+  questionText: "Strasznie upiorni, ale promienni"
+  options: "A. Nazwa „Halloween” wywodzi się od określenia wigilii Wszystkich Świętych (All Hallows' Eve), obchodzonej już od wczesnego średniowiecza. Był to czas żartów i drobnych figli związanych z poważnym tematem śmierci.|B. Możnym trzeba było przypomnieć, że pieniądze i władza nie uchronią ich przed śmiercią – taki wydźwięk miało zresztą wiele przedstawień zwanych tańcem śmierci.|C. Przedstawienia tańca śmierci przeważnie ukazują umarłych jako zdecydowanie wesołe ciała. Uśmiechają się one szeroko, bawią się przerażeniem żywych. Tańczące i grające postaci są w gruncie rzeczy raczej pogodne.|D. Halloween, święto zmarłych, duchy, widziadła, żywe trupy – czy to wymysł współczesności? Otóż nie do końca. Człowiek średniowieczny miał – jak mawia mediewista, doktor Andrzej Gierszewski – Halloween przez cały rok.|E. Lęk ośmieszony staje się lękiem oswojonym, podczas gdy wypieranie trudnych tematów tylko potęguje przytłaczający strach, który może nawet powodować zaburzenia psychiczne.|F. Zabawy w upiory i ośmieszanie strachów neutralizują lęki dorosłych, pozwalają nawet dzieciom zmierzyć się z trudnym tematem przemijania, który także je dotyka.|G. Niewątpliwie wszystkie sposoby przedstawienia przemijania, tak powszechne w dawnej kulturze wizualnej, miały niezwykle ważną funkcję: pomagały pogodzić się z przeznaczeniem.|H. Popularnym motywem wykorzystywanym niegdyś przy okazji Wszystkich Świętych była ilustracja tzw. Legendy o trzech żywych i trzech umarłych. Historia ta mogła powstać nawet w XI lub XII stuleciu, ale najstarsza zachowana wersja (co ciekawe – francuska) datowana jest na wiek XIII.|I. W obiegu była szablonowa historia: oto trzech żywych spotkało trzech umarłych. Rzecz w tym, że ci ostatni byli jak zombie: poruszali się i mówili, co oczywiście wprawiło żywych w stan przedzawałowy.|J. Trzej żywi, którzy zostali przez umarłych pouczeni o przemijaniu, według legendy pochodzili z wyższych sfer: królowie, w niektórych wersjach w towarzystwie biskupa, reprezentowali elity ówczesnego społeczeństwa.|K. Średniowieczne zombie nie były jednak spragnione ludzkich mózgów. Wygłosiły tylko swoją przemowę zakończoną słowami: Takimi niegdyś byliśmy, jakimi wy dziś jesteście. Jakimi jesteśmy teraz, takimi i wy będziecie!"
+  correctAnswer: "C. Przedstawienia tańca śmierci przeważnie ukazują umarłych jako zdecydowanie wesołe ciała. Uśmiechają się one szeroko, bawią się przerażeniem żywych. Tańczące i grające postaci są w gruncie rzeczy raczej pogodne."
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-r4-q8
+  passageRef: certyfikat-polski-C1-2024-04-read-4
+  questionType: matching
+  questionText: "Taki to już los – próżno z nim walczyć"
+  options: "A. Nazwa „Halloween” wywodzi się od określenia wigilii Wszystkich Świętych (All Hallows' Eve), obchodzonej już od wczesnego średniowiecza. Był to czas żartów i drobnych figli związanych z poważnym tematem śmierci.|B. Możnym trzeba było przypomnieć, że pieniądze i władza nie uchronią ich przed śmiercią – taki wydźwięk miało zresztą wiele przedstawień zwanych tańcem śmierci.|C. Przedstawienia tańca śmierci przeważnie ukazują umarłych jako zdecydowanie wesołe ciała. Uśmiechają się one szeroko, bawią się przerażeniem żywych. Tańczące i grające postaci są w gruncie rzeczy raczej pogodne.|D. Halloween, święto zmarłych, duchy, widziadła, żywe trupy – czy to wymysł współczesności? Otóż nie do końca. Człowiek średniowieczny miał – jak mawia mediewista, doktor Andrzej Gierszewski – Halloween przez cały rok.|E. Lęk ośmieszony staje się lękiem oswojonym, podczas gdy wypieranie trudnych tematów tylko potęguje przytłaczający strach, który może nawet powodować zaburzenia psychiczne.|F. Zabawy w upiory i ośmieszanie strachów neutralizują lęki dorosłych, pozwalają nawet dzieciom zmierzyć się z trudnym tematem przemijania, który także je dotyka.|G. Niewątpliwie wszystkie sposoby przedstawienia przemijania, tak powszechne w dawnej kulturze wizualnej, miały niezwykle ważną funkcję: pomagały pogodzić się z przeznaczeniem.|H. Popularnym motywem wykorzystywanym niegdyś przy okazji Wszystkich Świętych była ilustracja tzw. Legendy o trzech żywych i trzech umarłych. Historia ta mogła powstać nawet w XI lub XII stuleciu, ale najstarsza zachowana wersja (co ciekawe – francuska) datowana jest na wiek XIII.|I. W obiegu była szablonowa historia: oto trzech żywych spotkało trzech umarłych. Rzecz w tym, że ci ostatni byli jak zombie: poruszali się i mówili, co oczywiście wprawiło żywych w stan przedzawałowy.|J. Trzej żywi, którzy zostali przez umarłych pouczeni o przemijaniu, według legendy pochodzili z wyższych sfer: królowie, w niektórych wersjach w towarzystwie biskupa, reprezentowali elity ówczesnego społeczeństwa.|K. Średniowieczne zombie nie były jednak spragnione ludzkich mózgów. Wygłosiły tylko swoją przemowę zakończoną słowami: Takimi niegdyś byliśmy, jakimi wy dziś jesteście. Jakimi jesteśmy teraz, takimi i wy będziecie!"
+  correctAnswer: "G. Niewątpliwie wszystkie sposoby przedstawienia przemijania, tak powszechne w dawnej kulturze wizualnej, miały niezwykle ważną funkcję: pomagały pogodzić się z przeznaczeniem."
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-r4-q9
+  passageRef: certyfikat-polski-C1-2024-04-read-4
+  questionType: matching
+  questionText: "Śmiech jest zdrowszy od ucieczki"
+  options: "A. Nazwa „Halloween” wywodzi się od określenia wigilii Wszystkich Świętych (All Hallows' Eve), obchodzonej już od wczesnego średniowiecza. Był to czas żartów i drobnych figli związanych z poważnym tematem śmierci.|B. Możnym trzeba było przypomnieć, że pieniądze i władza nie uchronią ich przed śmiercią – taki wydźwięk miało zresztą wiele przedstawień zwanych tańcem śmierci.|C. Przedstawienia tańca śmierci przeważnie ukazują umarłych jako zdecydowanie wesołe ciała. Uśmiechają się one szeroko, bawią się przerażeniem żywych. Tańczące i grające postaci są w gruncie rzeczy raczej pogodne.|D. Halloween, święto zmarłych, duchy, widziadła, żywe trupy – czy to wymysł współczesności? Otóż nie do końca. Człowiek średniowieczny miał – jak mawia mediewista, doktor Andrzej Gierszewski – Halloween przez cały rok.|E. Lęk ośmieszony staje się lękiem oswojonym, podczas gdy wypieranie trudnych tematów tylko potęguje przytłaczający strach, który może nawet powodować zaburzenia psychiczne.|F. Zabawy w upiory i ośmieszanie strachów neutralizują lęki dorosłych, pozwalają nawet dzieciom zmierzyć się z trudnym tematem przemijania, który także je dotyka.|G. Niewątpliwie wszystkie sposoby przedstawienia przemijania, tak powszechne w dawnej kulturze wizualnej, miały niezwykle ważną funkcję: pomagały pogodzić się z przeznaczeniem.|H. Popularnym motywem wykorzystywanym niegdyś przy okazji Wszystkich Świętych była ilustracja tzw. Legendy o trzech żywych i trzech umarłych. Historia ta mogła powstać nawet w XI lub XII stuleciu, ale najstarsza zachowana wersja (co ciekawe – francuska) datowana jest na wiek XIII.|I. W obiegu była szablonowa historia: oto trzech żywych spotkało trzech umarłych. Rzecz w tym, że ci ostatni byli jak zombie: poruszali się i mówili, co oczywiście wprawiło żywych w stan przedzawałowy.|J. Trzej żywi, którzy zostali przez umarłych pouczeni o przemijaniu, według legendy pochodzili z wyższych sfer: królowie, w niektórych wersjach w towarzystwie biskupa, reprezentowali elity ówczesnego społeczeństwa.|K. Średniowieczne zombie nie były jednak spragnione ludzkich mózgów. Wygłosiły tylko swoją przemowę zakończoną słowami: Takimi niegdyś byliśmy, jakimi wy dziś jesteście. Jakimi jesteśmy teraz, takimi i wy będziecie!"
+  correctAnswer: "E. Lęk ośmieszony staje się lękiem oswojonym, podczas gdy wypieranie trudnych tematów tylko potęguje przytłaczający strach, który może nawet powodować zaburzenia psychiczne."
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-r4-q10
+  passageRef: certyfikat-polski-C1-2024-04-read-4
+  questionType: matching
+  questionText: "Z korzyścią dla starszych i młodszych"
+  options: "A. Nazwa „Halloween” wywodzi się od określenia wigilii Wszystkich Świętych (All Hallows' Eve), obchodzonej już od wczesnego średniowiecza. Był to czas żartów i drobnych figli związanych z poważnym tematem śmierci.|B. Możnym trzeba było przypomnieć, że pieniądze i władza nie uchronią ich przed śmiercią – taki wydźwięk miało zresztą wiele przedstawień zwanych tańcem śmierci.|C. Przedstawienia tańca śmierci przeważnie ukazują umarłych jako zdecydowanie wesołe ciała. Uśmiechają się one szeroko, bawią się przerażeniem żywych. Tańczące i grające postaci są w gruncie rzeczy raczej pogodne.|D. Halloween, święto zmarłych, duchy, widziadła, żywe trupy – czy to wymysł współczesności? Otóż nie do końca. Człowiek średniowieczny miał – jak mawia mediewista, doktor Andrzej Gierszewski – Halloween przez cały rok.|E. Lęk ośmieszony staje się lękiem oswojonym, podczas gdy wypieranie trudnych tematów tylko potęguje przytłaczający strach, który może nawet powodować zaburzenia psychiczne.|F. Zabawy w upiory i ośmieszanie strachów neutralizują lęki dorosłych, pozwalają nawet dzieciom zmierzyć się z trudnym tematem przemijania, który także je dotyka.|G. Niewątpliwie wszystkie sposoby przedstawienia przemijania, tak powszechne w dawnej kulturze wizualnej, miały niezwykle ważną funkcję: pomagały pogodzić się z przeznaczeniem.|H. Popularnym motywem wykorzystywanym niegdyś przy okazji Wszystkich Świętych była ilustracja tzw. Legendy o trzech żywych i trzech umarłych. Historia ta mogła powstać nawet w XI lub XII stuleciu, ale najstarsza zachowana wersja (co ciekawe – francuska) datowana jest na wiek XIII.|I. W obiegu była szablonowa historia: oto trzech żywych spotkało trzech umarłych. Rzecz w tym, że ci ostatni byli jak zombie: poruszali się i mówili, co oczywiście wprawiło żywych w stan przedzawałowy.|J. Trzej żywi, którzy zostali przez umarłych pouczeni o przemijaniu, według legendy pochodzili z wyższych sfer: królowie, w niektórych wersjach w towarzystwie biskupa, reprezentowali elity ówczesnego społeczeństwa.|K. Średniowieczne zombie nie były jednak spragnione ludzkich mózgów. Wygłosiły tylko swoją przemowę zakończoną słowami: Takimi niegdyś byliśmy, jakimi wy dziś jesteście. Jakimi jesteśmy teraz, takimi i wy będziecie!"
+  correctAnswer: "F. Zabawy w upiory i ośmieszanie strachów neutralizują lęki dorosłych, pozwalają nawet dzieciom zmierzyć się z trudnym tematem przemijania, który także je dotyka."
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-r5-q1
+  passageRef: certyfikat-polski-C1-2024-04-read-5
+  questionType: multiple_choice
+  questionText: "Luka 1 w tekście „Kosztowna nostalgia”"
+  options: "przedmiotem|przykładem|eksponatem|gmachem"
+  correctAnswer: przedmiotem
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-r5-q2
+  passageRef: certyfikat-polski-C1-2024-04-read-5
+  questionType: multiple_choice
+  questionText: "Luka 2 w tekście „Kosztowna nostalgia”"
+  options: "celu|brylancika|majstersztyku|perełki"
+  correctAnswer: "perełki"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-r5-q3
+  passageRef: certyfikat-polski-C1-2024-04-read-5
+  questionType: multiple_choice
+  questionText: "Luka 3 w tekście „Kosztowna nostalgia”"
+  options: "zasłana|rozścielona|wyłożona|obstawiona"
+  correctAnswer: "wyłożona"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-r5-q4
+  passageRef: certyfikat-polski-C1-2024-04-read-5
+  questionType: multiple_choice
+  questionText: "Luka 4 w tekście „Kosztowna nostalgia”"
+  options: "wzruszają|rozpalają|nagrzewają|studzą"
+  correctAnswer: "rozpalają"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-r5-q5
+  passageRef: certyfikat-polski-C1-2024-04-read-5
+  questionType: multiple_choice
+  questionText: "Luka 5 w tekście „Kosztowna nostalgia”"
+  options: "Kłusuje się|Porywa się|Poszukuje się|Poluje się"
+  correctAnswer: "Poluje się"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-r5-q6
+  passageRef: certyfikat-polski-C1-2024-04-read-5
+  questionType: multiple_choice
+  questionText: "Luka 6 w tekście „Kosztowna nostalgia”"
+  options: "dokładnie|wręcz|jednoznacznie|faktycznie"
+  correctAnswer: "wręcz"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-r5-q7
+  passageRef: certyfikat-polski-C1-2024-04-read-5
+  questionType: multiple_choice
+  questionText: "Luka 7 w tekście „Kosztowna nostalgia”"
+  options: "inwentarza|kapitału|nieruchomości|mienia"
+  correctAnswer: "nieruchomości"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-r5-q8
+  passageRef: certyfikat-polski-C1-2024-04-read-5
+  questionType: multiple_choice
+  questionText: "Luka 8 w tekście „Kosztowna nostalgia”"
+  options: "rysę|przepaść|szczelinę|lukę"
+  correctAnswer: "przepaść"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-r5-q9
+  passageRef: certyfikat-polski-C1-2024-04-read-5
+  questionType: multiple_choice
+  questionText: "Luka 9 w tekście „Kosztowna nostalgia”"
+  options: "skali|szablonie|makiecie|kategorii"
+  correctAnswer: kategorii
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-r5-q10
+  passageRef: certyfikat-polski-C1-2024-04-read-5
+  questionType: multiple_choice
+  questionText: "Luka 10 w tekście „Kosztowna nostalgia”"
+  options: "osobistymi|osobnymi|wybranymi|osobowymi"
+  correctAnswer: osobistymi
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-r5-q11
+  passageRef: certyfikat-polski-C1-2024-04-read-5
+  questionType: multiple_choice
+  questionText: "Luka 11 w tekście „Kosztowna nostalgia”"
+  options: "zjednoczona|złączona|związana|sprzężona"
+  correctAnswer: "związana"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-r5-q12
+  passageRef: certyfikat-polski-C1-2024-04-read-5
+  questionType: multiple_choice
+  questionText: "Luka 12 w tekście „Kosztowna nostalgia”"
+  options: "dochód|utarg|obchód|skup"
+  correctAnswer: "dochód"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-r5-q13
+  passageRef: certyfikat-polski-C1-2024-04-read-5
+  questionType: multiple_choice
+  questionText: "Luka 13 w tekście „Kosztowna nostalgia”"
+  options: "pożyteczną|pewną|wiarygodną|niezbitą"
+  correctAnswer: "pewną"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-r5-q14
+  passageRef: certyfikat-polski-C1-2024-04-read-5
+  questionType: multiple_choice
+  questionText: "Luka 14 w tekście „Kosztowna nostalgia”"
+  options: "rezerwy|pułapki|podstępy|wykręty"
+  correctAnswer: "pułapki"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-r5-q15
+  passageRef: certyfikat-polski-C1-2024-04-read-5
+  questionType: multiple_choice
+  questionText: "Luka 15 w tekście „Kosztowna nostalgia”"
+  options: "więźniem|aresztantem|winowajcą|sprawcą"
+  correctAnswer: "więźniem"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-r5-q16
+  passageRef: certyfikat-polski-C1-2024-04-read-5
+  questionType: multiple_choice
+  questionText: "Luka 16 w tekście „Kosztowna nostalgia”"
+  options: "powadze|racji|istocie|smakowi"
+  correctAnswer: smakowi
+  pointsQuarter: 2
+}

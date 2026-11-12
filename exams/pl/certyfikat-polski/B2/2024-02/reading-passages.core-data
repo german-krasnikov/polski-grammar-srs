@@ -1,29 +1,39 @@
 DSL 1
 READING_PASSAGE {
-  passageId: "certyfikat-polski-B2-2024-02-read-6"
-  examRef: "certyfikat-polski-B2-2024-02"
-  taskNumber: 6
-  instruction: "TODO: fill from PDF"
-  text: "TODO: fill from PDF"
+  passageId: certyfikat-polski-B2-2024-02-read-1
+  examRef: certyfikat-polski-B2-2024-02
+  taskNumber: 1
+  instruction: "Proszę przeczytać fragmenty tekstów i – zgodnie z przykładem – zaznaczyć właściwą odpowiedź."
+  text: "PRZYKŁAD U osób zakochanych wykonywano rezonans magnetyczny mózgu. Badania pokazały, że w okresie zakochania kora czołowa jest wyłączona. Stąd może powiedzenie, że miłość jest ślepa i nie zauważamy negatywnych cech u osoby, w której jesteśmy zakochani. Na podstawie: https://natemat.pl/zdrowie/468803,stan-zakochania-ma-medyczne-uzasadnienie-skad-biora-sie-motyle-w- brzuchu Z tekstu dowiadujemy się, że a) mózg osób zakochanych wyjątkowo intensywnie przetwarza informacje. b) wyłączenie kory czołowej ma wpływ na poprawę samopoczucia. c) powiedzenie, że „miłość jest ślepa” ma medyczne uzasadnienie.  1. Przedepty to ścieżki wydeptane przez mieszkańców, którzy skracają sobie drogę w dogodnych dla siebie miejscach. W rezultacie tego powstają klepiska, a te nie wyglądają schludnie, dlatego mieszkańcy Ursynowa zaproponowali położenie płyt chodnikowych w najpopularniejszych miejscach. Na tym miała polegać akcja „Stop przedeptom\". Zamiast tego władze dzielnicy postawiły jednak płotki i posadziły w tych miejscach trawę.  2. Zgodnie z nowymi zasadami realizacji recept pacjent może jednorazowo otrzymać w aptece dawkę leku maksymalnie na 120 dni. Kolejną partię leku będzie mógł wykupić dopiero po 90 dniach od wydania poprzedniej. Resort zdrowia zapowiada, że od 1 marca wyliczeń z tym związanych dokonywać ma system informatyczny, co powinno odciążyć farmaceutów.  3. Co roku Polacy wydają na znicze nawet 700 000 złotych. Kwota ta wzrosła w minionym roku o ok. 38% z powodu inflacji. Urząd Miasta Poznania przy cmentarzach ustawił zniczodzielnię - regał zachęcający do korzystania z używanych zniczy. Zamiast kupować nowe lampki, które każdego roku lądują w koszu, można zabrać z półki używaną lub zostawić tam zbędną  4. Biedronkę azjatycką zwaną arlekinem w Polsce po raz pierwszy zaobserwowano 20 lat temu. Biedronki azjatyckie są inwazyjne i stanowią zagrożenie dla naszych rodzimych biedronek, a tych ostatnich mamy w Polsce ok. 80 gatunków – najpopularniejsze z nich to dwu- i siedmiokropki. Ukąszenie arlekina nie jest bolesne, lecz może wywołać reakcję alergiczną. Biedronki azjatyckie odstrasza zapach mięty i kamfory.  5. Mieszkańcy Poznania będą musieli zapłacić podatek z tytułu posiadania balkonu. Nowe opłaty będą dotyczyły obiektów, które powstaną po wejściu w życie uchwały rady miasta. Konieczność przygotowania takiego rozwiązania wynika m.in. ze zmian definicji elementów składowych pasa drogowego (m.in. samej drogi) wprowadzonych w nowelizacji Ustawy o drogach publicznych."
 }
 READING_PASSAGE {
-  passageId: "certyfikat-polski-B2-2024-02-read-7"
-  examRef: "certyfikat-polski-B2-2024-02"
-  taskNumber: 7
-  instruction: "TODO: fill from PDF"
-  text: "TODO: fill from PDF"
+  passageId: certyfikat-polski-B2-2024-02-read-2
+  examRef: certyfikat-polski-B2-2024-02
+  taskNumber: 2
+  title: "Tajemnice Dolnego Śląska"
+  instruction: "Proszę przeczytać tekst i – zgodnie z przykładem – dopasować usunięte z niego fragmenty (A–K)."
+  text: "Tajemnice Dolnego Śląska Średniowieczne sztolnie, podziemia projektu Riese czy Jaskinia Niedźwiedzia — [__B__]PRZYKŁAD na Dolnym Śląsku. Zgłębiaj tajemnice to nowa akcja, która [_____]1 odkrywania sekretów regionu. Zaprezentuje nie tylko obiekty należące do Szlaku Tajemniczych Podziemi, ale także [_____]2, które skrywają pod ziemią historię. „Zauważyliśmy niestety, że [_____]3 na Dolnym Śląsku. Z tego powodu rozpoczęliśmy akcję Zgłębiaj tajemnice, żeby pokazać, że [_____]4 . W październiku w Sudetach jest przepięknie, ale [_____]5, dlatego proponujemy wycieczki do miejsc, które [_____]6 — powiedział Krzysztof Maj z zarządu województwa dolnośląskiego. Szlak Tajemniczych Podziemi to dziesięć atrakcji: podziemia dolnośląskich twierdz i zamków, czy wnętrza dawnych kopalni, które [_____]7 cennych surowców. Na głębokości 50 metrów pod Zamkiem Książ można zwiedzić podziemną trasę turystyczną, [_____]8 z okresu II wojny światowej oraz tajemnicą zaginionego złotego pociągu, która [_____]9 . Do obiektów projektu Riese, największego projektu nazistowskich Niemiec, należy również Podziemne Miasto Osówka. Zwiedzający mają tam do dyspozycji 1200 m korytarzy, hal i wyrobisk z 1945 roku, a, wybierając trasę ekstremalną, [_____]10 . Na podstawie: https://podroze.onet.pl/aktualnosci/zglebiaj-tajemnice-akcja-promujaca-atrakcje-turystyczne-dolnego- slaska/yhqkth7"
 }
 READING_PASSAGE {
-  passageId: "certyfikat-polski-B2-2024-02-read-8"
-  examRef: "certyfikat-polski-B2-2024-02"
-  taskNumber: 8
-  instruction: "TODO: fill from PDF"
-  text: "TODO: fill from PDF"
+  passageId: certyfikat-polski-B2-2024-02-read-3
+  examRef: certyfikat-polski-B2-2024-02
+  taskNumber: 3
+  title: "Jak skutecznie się uczyć?"
+  instruction: "Proszę – zgodnie z przykładem – połączyć wypowiedzi z kolumny I z fragmentami tekstu z kolumny II. Odpowiedzi proszę wpisać do tabeli."
+  text: "Jak skutecznie się uczyć?"
 }
 READING_PASSAGE {
-  passageId: "certyfikat-polski-B2-2024-02-read-9"
-  examRef: "certyfikat-polski-B2-2024-02"
-  taskNumber: 9
-  instruction: "TODO: fill from PDF"
-  text: "TODO: fill from PDF"
+  passageId: certyfikat-polski-B2-2024-02-read-4
+  examRef: certyfikat-polski-B2-2024-02
+  taskNumber: 4
+  title: "Ukryty skarb Europy"
+  instruction: "Proszę – zgodnie z przykładem – uzupełnić tekst, podkreślając najlepszą spośród podanych możliwości."
+  text: "Ukryty skarb Europy Polskie wybrzeże nieczęsto wybierane jest przez europejskich turystów jako (przeznaczenie, powód, planowanie, cel)PRZYKŁAD wakacyjnych podróży. Z powodu niedużej odległości oraz korzystnych [____1____] najchętniej odwiedzają je Niemcy. Jednakże plaże nad Bałtykiem [____2____] częściej dostrzegane są przez zagraniczne media. Niedawno w brytyjskim dzienniku The Sun [____3____] artykuł dotyczący jednej z nich – plaży na Półwyspie Helskim. Długi na 35 km pas lądu [____4____] Bałtyk od Zatoki Puckiej zachwyca pięknymi piaszczystymi plażami, czystą wodą oraz urokliwymi miasteczkami. Mimo wielu [____5____] Półwyspu Helskiego do tej pory zagraniczni turyści raczej [____6____] to miejsce z uwagi na dość zimną wodę Bałtyku oraz nieprzewidywalną pogodę. Jak się [____7____] okazuje, zaczyna się to zmieniać. Dziennik The Sun [____8____] , że Półwysep Helski to idealne miejsce na letni urlop z uwagi na łatwą dostępność i niedrogie, bezpośrednie loty z Wielkiej Brytanii do Gdańska. Warto [____9____], że to nie pierwszy raz, gdy piękno Półwyspu Helskiego zostało docenione przez zagraniczne media. Rok temu znalazł się on w pierwszej dziesiątce rankingu najpiękniejszych europejskich plaż, który został [____10____] przez portal European Best Destinations."
+}
+READING_PASSAGE {
+  passageId: certyfikat-polski-B2-2024-02-read-5
+  examRef: certyfikat-polski-B2-2024-02
+  taskNumber: 5
+  instruction: "Proszę – zgodnie z przykładem – wpisać, do których roślin wykorzystywanych przy tworzeniu żywopłotów pasuje podana informacja. Uwaga! Jedna informacja może pasować do kilku gatunków roślin."
+  text: "A. Berberys Krzew doskonały na niezbyt wysokie żywopłoty. Jego drobne liście jesienią przebarwiają się na pomarańczowo i czerwono. Tworzy też dekoracyjne czerwone jagody, które zimą są chętnie zjadane przez ptaki, a w apteczce babuni pomagają walczyć z gorączką. Jest bardzo mało wymagający - odporny na mróz, suszę i warunki miejskie. B. Złotlin To dekoracyjny krzew liściasty który, gdy obsypie się morzem żółtych kwiatów, tworzy wspaniałe, złociste „mury\". Kwiaty pojawiają się w maju i czerwcu, ale często krzew powtarza kwitnienie jesienią. Źle znosi cięcie. To roślina często tworząca odrosty korzeniowe i wkraczająca na sąsiednie rabaty. C. Ognik Pędy ognika pokryte są ostrymi kolcami. Wykorzystują to ptaki, które często zakładają gniazda w gęstwinie jego pędów. Ognik pięknie kwitnie i tworzy kolorowe owoce, z których można robić konfitury czy soki bogate w witaminę C, pomocne w walce z przeziębieniem. Zanim nadejdą mrozy, roślina może wymagać okrycia. D. Bukszpan Liściasty krzew doskonale nadający się na niskie formowane żywopłoty i jako obwódki kwietników i rabat. Jest podatny na ataki ćmy bukszpanowej, która w kilka dni potrafi doprowadzić do śmierci rośliny. Potrzebuje intensywnego podlewania przez cały rok, również przed nadejściem mrozów. E. Ligustr Pospolity krzew żywopłotowy, który doskonale rośnie w każdych warunkach i na każdej glebie. Nie przeszkadza mu susza ani zanieczyszczone powietrze, jest odporny również na szkodniki. Jesienią na jego pędach pojawiają się czarne, błyszczące jagody – trujące dla człowieka, ale uwielbiane przez ptaki. Podczas mrozów, jeżeli bryła korzeniowa nie jest okryta śniegiem, może wymagać obsypania ziemią."
 }

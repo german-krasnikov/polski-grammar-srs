@@ -1,0 +1,347 @@
+DSL 1
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l1-q1
+  taskRef: certyfikat-polski-C1-2024-04-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a) uczniowie z południowej Polski rozpoczynają ferie jako pierwsi.|b) kierowcy dzielą się w internecie informacjami o kontrolach drogowych.|c) policja zachęca do zgłaszania autobusów wycieczkowych do kontroli."
+  correctAnswer: "c) policja zachęca do zgłaszania autobusów wycieczkowych do kontroli."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l1-q2
+  taskRef: certyfikat-polski-C1-2024-04-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a) cena energii będzie stała, jeśli użytkownik nie przekroczy limitu zużycia prądu.|b) planowane są dopłaty w wysokości 2000 zł dla trzech grup konsumentów.|c) program został wprowadzony jako reakcja na wyjątkowo niskie temperatury."
+  correctAnswer: "a) cena energii będzie stała, jeśli użytkownik nie przekroczy limitu zużycia prądu."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l1-q3
+  taskRef: certyfikat-polski-C1-2024-04-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a) leśnicy dążą do połączenia stad w celu zwiększenia populacji żubrów.|b) niższa liczebność stada ogranicza rozprzestrzenianie się chorób.|c) bieszczadzkie żubry migrują do innych polskich lasów."
+  correctAnswer: "b) niższa liczebność stada ogranicza rozprzestrzenianie się chorób."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l1-q4
+  taskRef: certyfikat-polski-C1-2024-04-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a) akcja miała na celu promocję fundacji charytatywnej.|b) ostatni odcinek trasy Kamil przeszedł w towarzystwie innych osób.|c) mężczyzna planuje pokonać pieszo trasę z Krakowa do Porto."
+  correctAnswer: "b) ostatni odcinek trasy Kamil przeszedł w towarzystwie innych osób."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l1-q5
+  taskRef: certyfikat-polski-C1-2024-04-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a) powodem utraty pieniędzy była nietrafiona inwestycja.|b) oszust podawał się za policjanta z wydziału cyberprzestępstw.|c) kobieta utraciła dostęp do konta, na które przelała swoje pieniądze."
+  correctAnswer: "c) kobieta utraciła dostęp do konta, na które przelała swoje pieniądze."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l1-q6
+  taskRef: certyfikat-polski-C1-2024-04-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a) awaria systemu nawigacji przyczyniła się do zagrożenia w ruchu lotniczym.|b) ruch lotniczy kontynuowano mimo zakłóceń w działaniu systemu GPS.|c) powodem awarii była niezgodność nawigacji satelitarnej z polskimi radarami."
+  correctAnswer: "b) ruch lotniczy kontynuowano mimo zakłóceń w działaniu systemu GPS."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l1-q7
+  taskRef: certyfikat-polski-C1-2024-04-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a) system informatyczny stanowi wsparcie dla komisji wyborczych.|b) w wyborach samorządowych będzie można zagłosować zdalnie.|c) problemy w działaniu serwerów mogły wpłynąć na wynik wyborów."
+  correctAnswer: "a) system informatyczny stanowi wsparcie dla komisji wyborczych."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l2-q1
+  taskRef: certyfikat-polski-C1-2024-04-listen-2
+  questionType: matching
+  questionText: "Która z roślin jest wrażliwa nawet na najsubtelniejsze bodźce."
+  options: "1|2|3|4"
+  correctAnswer: "2"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l2-q2
+  taskRef: certyfikat-polski-C1-2024-04-listen-2
+  questionType: matching
+  questionText: "Która z roślin może stać się źródłem składników odżywczych dla kolejnych roślin tego samego gatunku."
+  options: "1|2|3|4"
+  correctAnswer: "4"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l2-q3
+  taskRef: certyfikat-polski-C1-2024-04-listen-2
+  questionType: matching
+  questionText: "Która z roślin wytwarza płyny rozkładające substancje organiczne."
+  options: "1|2|3|4"
+  correctAnswer: "1|3"
+  pointsQuarter: 8
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l2-q4
+  taskRef: certyfikat-polski-C1-2024-04-listen-2
+  questionType: matching
+  questionText: "Która z roślin wabi swoje ofiary aromatem wytwarzanego nektaru."
+  options: "1|2|3|4"
+  correctAnswer: "3"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l2-q5
+  taskRef: certyfikat-polski-C1-2024-04-listen-2
+  questionType: matching
+  questionText: "Która z roślin zachowuje ciągłość gatunku nawet w trudnych warunkach."
+  options: "1|2|3|4"
+  correctAnswer: "4"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l2-q6
+  taskRef: certyfikat-polski-C1-2024-04-listen-2
+  questionType: matching
+  questionText: "Która z roślin ma niezwykłe właściwości dzięki szybkiemu przemieszczaniu się płynów w jej obrębie."
+  options: "1|2|3|4"
+  correctAnswer: "1|2"
+  pointsQuarter: 8
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l2-q7
+  taskRef: certyfikat-polski-C1-2024-04-listen-2
+  questionType: matching
+  questionText: "Która z roślin wykorzystuje fakt, że niektóre z jej powierzchni są nieprzyczepne."
+  options: "1|2|3|4"
+  correctAnswer: "3"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l3-q1
+  taskRef: certyfikat-polski-C1-2024-04-listen-3
+  questionType: true_false
+  questionText: "Serwis MySpace był bezpośrednią inspiracją dla portali Facebook i YouTube."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l3-q2
+  taskRef: certyfikat-polski-C1-2024-04-listen-3
+  questionType: true_false
+  questionText: "MySpace pozwolił zaistnieć muzykom, których twórczość często nie mieściła się w głównych nurtach."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l3-q3
+  taskRef: certyfikat-polski-C1-2024-04-listen-3
+  questionType: true_false
+  questionText: "MySpace pozwalał słuchaczom wpływać na sukces nieznanych powszechnie twórców."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l3-q4
+  taskRef: certyfikat-polski-C1-2024-04-listen-3
+  questionType: true_false
+  questionText: "Na rozwój serwisu duży wpływ miało rozpoczęcie współpracy z wytwórniami muzycznymi."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l3-q5
+  taskRef: certyfikat-polski-C1-2024-04-listen-3
+  questionType: true_false
+  questionText: "Aby zdobyć rozgłos, muzycy mający wsparcie wytwórni podawali się za debiutantów."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l3-q6
+  taskRef: certyfikat-polski-C1-2024-04-listen-3
+  questionType: true_false
+  questionText: "Dołączenie profesjonalnych muzyków do serwisu umożliwiło promocję twórczości amatorów."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l3-q7
+  taskRef: certyfikat-polski-C1-2024-04-listen-3
+  questionType: true_false
+  questionText: "W dzisiejszych czasach to przede wszystkim autentyczność twórcy stanowi o wartości jego dzieła."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l3-q8
+  taskRef: certyfikat-polski-C1-2024-04-listen-3
+  questionType: true_false
+  questionText: "Na serwisie MySpace pojawiły się pierwsze reklamy w mediach społecznościowych."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l3-q9
+  taskRef: certyfikat-polski-C1-2024-04-listen-3
+  questionType: true_false
+  questionText: "W ostatnich latach rola internetu w promocji twórczości artystycznej uległa zmianie."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l4-q1
+  taskRef: certyfikat-polski-C1-2024-04-listen-4
+  questionType: multiple_choice
+  questionText: "Towarzyszące temu zespołowi dolegliwości"
+  options: "a) wpływają na funkcjonowanie w ciągu dnia.|b) mają podłoże fizjologiczne.|c) wynikają z zaburzeń i stanów lękowych."
+  correctAnswer: "a) wpływają na funkcjonowanie w ciągu dnia."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l4-q2
+  taskRef: certyfikat-polski-C1-2024-04-listen-4
+  questionType: multiple_choice
+  questionText: "Powodem występowania zespołu eksplodującej głowy jest"
+  options: "a) za duża ilość snu głębokiego.|b) brak wyciszenia podczas zasypiania.|c) niewłaściwa aktywność neuronów."
+  correctAnswer: "c) niewłaściwa aktywność neuronów."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l4-q3
+  taskRef: certyfikat-polski-C1-2024-04-listen-4
+  questionType: multiple_choice
+  questionText: "Aplikacja Happy Wake Up"
+  options: "a) została opracowana dzięki współpracy lekarza i pacjenta.|b) na bieżąco analizuje sen użytkownika.|c) gwarantuje pobudki o tej samej porze."
+  correctAnswer: "b) na bieżąco analizuje sen użytkownika."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l4-q4
+  taskRef: certyfikat-polski-C1-2024-04-listen-4
+  questionType: multiple_choice
+  questionText: "Słabą stroną aplikacji jest to, że"
+  options: "a) wymaga położenia urządzenia przy ciele.|b) nie uwzględnia różnic w zegarze biologicznym.|c) może błędnie rozpoznać chrapanie."
+  correctAnswer: "a) wymaga położenia urządzenia przy ciele."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l4-q5
+  taskRef: certyfikat-polski-C1-2024-04-listen-4
+  questionType: multiple_choice
+  questionText: "Badanie snu amerykańskich nastolatków"
+  options: "a) potwierdziło negatywny wpływ gier na jakość snu.|b) było oceniane jako kontrowersyjne przez innych naukowców.|c) wykazało zaskakująco niewielką różnicę między badanymi grupami."
+  correctAnswer: "c) wykazało zaskakująco niewielką różnicę między badanymi grupami."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l4-q6
+  taskRef: certyfikat-polski-C1-2024-04-listen-4
+  questionType: multiple_choice
+  questionText: "Według informacji zawartych w nagraniu niewłaściwe odżywianie"
+  options: "a) wynika z rozkojarzenia u osób z bezsennością.|b) wiąże się z modą na jedzenie poza domem.|c) może być przyczyną zaburzeń snu."
+  correctAnswer: "a) wynika z rozkojarzenia u osób z bezsennością."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l4-q7
+  taskRef: certyfikat-polski-C1-2024-04-listen-4
+  questionType: multiple_choice
+  questionText: "Szwajcarskie badanie wykazało, że"
+  options: "a) lepiej w nocy spać w hamaku niż w łóżku.|b) drzemka powinna trwać maksymalnie godzinę.|c) kołysanie sprzyja zasypianiu również u dorosłych."
+  correctAnswer: "c) kołysanie sprzyja zasypianiu również u dorosłych."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l5-q1
+  taskRef: certyfikat-polski-C1-2024-04-listen-5
+  questionType: matching
+  questionText: "Świeżo wyciskany sok warzywno-owocowy"
+  options: "A|B|C|D|E|F|G|H|I"
+  correctAnswer: F
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l5-q2
+  taskRef: certyfikat-polski-C1-2024-04-listen-5
+  questionType: matching
+  questionText: "Woda z octem"
+  options: "A|B|C|D|E|F|G|H|I"
+  correctAnswer: H
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l5-q3
+  taskRef: certyfikat-polski-C1-2024-04-listen-5
+  questionType: matching
+  questionText: Tabletka
+  options: "A|B|C|D|E|F|G|H|I"
+  correctAnswer: A
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l5-q4
+  taskRef: certyfikat-polski-C1-2024-04-listen-5
+  questionType: matching
+  questionText: "Lepkie jedzenie"
+  options: "A|B|C|D|E|F|G|H|I"
+  correctAnswer: D
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l5-q5
+  taskRef: certyfikat-polski-C1-2024-04-listen-5
+  questionType: matching
+  questionText: "Kompot z przyprawami korzennymi"
+  options: "A|B|C|D|E|F|G|H|I"
+  correctAnswer: B
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l5-q6
+  taskRef: certyfikat-polski-C1-2024-04-listen-5
+  questionType: matching
+  questionText: "Zielona herbata"
+  options: "A|B|C|D|E|F|G|H|I"
+  correctAnswer: I
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l5-q7
+  taskRef: certyfikat-polski-C1-2024-04-listen-5
+  questionType: matching
+  questionText: Kawa
+  options: "A|B|C|D|E|F|G|H|I"
+  correctAnswer: C
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2024-04-l5-q8
+  taskRef: certyfikat-polski-C1-2024-04-listen-5
+  questionType: matching
+  questionText: Kofeina
+  options: "A|B|C|D|E|F|G|H|I"
+  correctAnswer: G
+  pointsQuarter: 4
+}

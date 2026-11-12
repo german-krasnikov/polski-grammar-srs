@@ -1,0 +1,49 @@
+DSL 1
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2023-11-l5-q3-v1
+  questionRef: certyfikat-polski-C1-2023-11-l5-q3
+  answer: "Uważa, że był jednym z najlepszych koncertów w życiu."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2023-11-l5-q3-v2
+  questionRef: certyfikat-polski-C1-2023-11-l5-q3
+  answer: "Bardzo mu się podobał."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2023-11-l5-q4-v1
+  questionRef: certyfikat-polski-C1-2023-11-l5-q4
+  answer: "W namiocie."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2023-11-l5-q5-v1
+  questionRef: certyfikat-polski-C1-2023-11-l5-q5
+  answer: "Był to ich pierwszy znaczący występ."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2023-11-l5-q5-v2
+  questionRef: certyfikat-polski-C1-2023-11-l5-q5
+  answer: "Był to ich pierwszy duży występ."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2023-11-l5-q6-v1
+  questionRef: certyfikat-polski-C1-2023-11-l5-q6
+  answer: "Było mu słabo."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2023-11-l5-q6-v2
+  questionRef: certyfikat-polski-C1-2023-11-l5-q6
+  answer: "Było mu duszno."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2023-11-l5-q6-v3
+  questionRef: certyfikat-polski-C1-2023-11-l5-q6
+  answer: "Miał za ciepłe ubranie."
+  earnedQuarter: 4
+}

@@ -1,19 +1,61 @@
 DSL 1
 WRITING_TASK {
-  taskId: "certyfikat-polski-B2-2023-06-write-12"
-  examRef: "certyfikat-polski-B2-2023-06"
-  taskNumber: 12
-  instruction: "TODO: fill from PDF"
-  promptText: "TODO: fill from PDF"
-  wordLimit: 200
-  genre: letter
+  taskId: certyfikat-polski-B2-2023-06-write-i-a
+  examRef: certyfikat-polski-B2-2023-06
+  taskNumber: 1
+  setId: I
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. W każdym zestawie są dwa zadania: a i b. Należy wybrać tylko jeden zestaw i wykonać obydwa zadania (a i b) z danego zestawu, zgodnie z poleceniami, np.: • zestaw I – zadania a i b z zestawu I lub • zestaw II – zadania a i b z zestawu II lub • zestaw III – zadania a i b z zestawu III"
+  promptText: "Obchodzi Pani/Pan urodziny i z tej okazji organizuje Pani/Pan imprezę w restauracji. Proszę napisać e-mail z zaproszeniem, które wyśle Pani/Pan do swojej polskiej koleżanki / swojego polskiego kolegi."
+  wordLimit: 40
+  genre: email
 }
 WRITING_TASK {
-  taskId: "certyfikat-polski-B2-2023-06-write-13"
-  examRef: "certyfikat-polski-B2-2023-06"
-  taskNumber: 13
-  instruction: "TODO: fill from PDF"
-  promptText: "TODO: fill from PDF"
-  wordLimit: 200
-  genre: description
+  taskId: certyfikat-polski-B2-2023-06-write-i-b
+  examRef: certyfikat-polski-B2-2023-06
+  taskNumber: 1
+  setId: I
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. W każdym zestawie są dwa zadania: a i b. Należy wybrać tylko jeden zestaw i wykonać obydwa zadania (a i b) z danego zestawu, zgodnie z poleceniami, np.: • zestaw I – zadania a i b z zestawu I lub • zestaw II – zadania a i b z zestawu II lub • zestaw III – zadania a i b z zestawu III"
+  promptText: "„Czy pieniądze są najważniejszym czynnikiem motywującym w pracy?”. Proszę napisać tekst argumentacyjny (rozprawkę), w którym wyrazi Pani/Pan swoją opinię."
+  wordLimit: 260
+  genre: argument
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2023-06-write-ii-a
+  examRef: certyfikat-polski-B2-2023-06
+  taskNumber: 2
+  setId: II
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. W każdym zestawie są dwa zadania: a i b. Należy wybrać tylko jeden zestaw i wykonać obydwa zadania (a i b) z danego zestawu, zgodnie z poleceniami, np.: • zestaw I – zadania a i b z zestawu I lub • zestaw II – zadania a i b z zestawu II lub • zestaw III – zadania a i b z zestawu III"
+  promptText: "„Dzięki takim ludziom świat jest piękny, a życie ma smak”. Proszę napisać charakterystykę osoby, którą Pani/Pan szanuje i podziwia."
+  wordLimit: 150
+  genre: characterization
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2023-06-write-ii-b
+  examRef: certyfikat-polski-B2-2023-06
+  taskNumber: 2
+  setId: II
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. W każdym zestawie są dwa zadania: a i b. Należy wybrać tylko jeden zestaw i wykonać obydwa zadania (a i b) z danego zestawu, zgodnie z poleceniami, np.: • zestaw I – zadania a i b z zestawu I lub • zestaw II – zadania a i b z zestawu II lub • zestaw III – zadania a i b z zestawu III"
+  promptText: "Współpracuje Pani/Pan z redakcją miesięcznika „Nasze Miasto”. Proszę napisać sprawozdanie z rodzinnego turnieju sportowego, zorganizowanego dla mieszkańców."
+  wordLimit: 150
+  genre: report
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2023-06-write-iii-a
+  examRef: certyfikat-polski-B2-2023-06
+  taskNumber: 3
+  setId: III
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. W każdym zestawie są dwa zadania: a i b. Należy wybrać tylko jeden zestaw i wykonać obydwa zadania (a i b) z danego zestawu, zgodnie z poleceniami, np.: • zestaw I – zadania a i b z zestawu I lub • zestaw II – zadania a i b z zestawu II lub • zestaw III – zadania a i b z zestawu III"
+  promptText: "Jest Pani/Pan na szkoleniu za granicą, a Pani/Pana szef obchodzi imieniny. Proszę napisać życzenia, które wyśle mu Pani/Pan drogą e-mailową."
+  wordLimit: 40
+  genre: wishes
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2023-06-write-iii-b
+  examRef: certyfikat-polski-B2-2023-06
+  taskNumber: 3
+  setId: III
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. W każdym zestawie są dwa zadania: a i b. Należy wybrać tylko jeden zestaw i wykonać obydwa zadania (a i b) z danego zestawu, zgodnie z poleceniami, np.: • zestaw I – zadania a i b z zestawu I lub • zestaw II – zadania a i b z zestawu II lub • zestaw III – zadania a i b z zestawu III"
+  promptText: "Proszę napisać esej (wypracowanie szkolne) pt. „Rola portali społecznościowych w XXI wieku”."
+  wordLimit: 260
+  genre: essay
 }

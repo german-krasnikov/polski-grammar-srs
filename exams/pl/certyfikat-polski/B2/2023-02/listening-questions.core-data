@@ -1,0 +1,335 @@
+DSL 1
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l1-q1
+  taskRef: certyfikat-polski-B2-2023-02-listen-1
+  questionType: multiple_choice
+  questionText: "Z rozmowy wynika, że mężczyzna"
+  options: "a) żałuje, że kobieta nie poszła z nim na kręgle.|b) świetnie bawił się na kręgielni.|c) jest zawiedziony rekomendacją kolegi."
+  correctAnswer: "c) jest zawiedziony rekomendacją kolegi."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l1-q2
+  taskRef: certyfikat-polski-B2-2023-02-listen-1
+  questionType: multiple_choice
+  questionText: "Z dialogu wynika, że"
+  options: "a) jest zmiana organizacji ruchu.|b) kobieta prowadzi samochód.|c) mężczyzna i kobieta utknęli w korku."
+  correctAnswer: "a) jest zmiana organizacji ruchu."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l1-q3
+  taskRef: certyfikat-polski-B2-2023-02-listen-1
+  questionType: multiple_choice
+  questionText: Audycja
+  options: "a) poświęcona jest prezentacji poglądów różnych psychologów.|b) zawiera rady dotyczące sposobu wychowania dzieci.|c) jest polemiką Aleksandry Piotrowskiej z innymi specjalistami."
+  correctAnswer: "b) zawiera rady dotyczące sposobu wychowania dzieci."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l1-q4
+  taskRef: certyfikat-polski-B2-2023-02-listen-1
+  questionType: multiple_choice
+  questionText: "Aleksandra Piotrowska uważa, że stosowanie jakichkolwiek kar"
+  options: "a) w ogóle nie powinno mieć miejsca.|b) to jedyny skuteczny sposób wpływania na zachowanie dziecka.|c) nie może być jedyną stosowaną metodą wychowawczą."
+  correctAnswer: "c) nie może być jedyną stosowaną metodą wychowawczą."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l1-q5
+  taskRef: certyfikat-polski-B2-2023-02-listen-1
+  questionType: multiple_choice
+  questionText: "Rozmowa dotyczy"
+  options: "a) pomocy w opiece nad dzieckiem.|b) przeniesienia terminu wizyty lekarskiej.|c) planów rodzinnego wyjazdu do Łodzi."
+  correctAnswer: "a) pomocy w opiece nad dzieckiem."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l1-q6
+  taskRef: certyfikat-polski-B2-2023-02-listen-1
+  questionType: multiple_choice
+  questionText: "Wizyta u dentysty"
+  options: "a) nie była wcześniej planowana.|b) odbędzie się przed południem.|c) zmusi matkę kobiety do zmiany planów."
+  correctAnswer: "b) odbędzie się przed południem."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l2-q1
+  taskRef: certyfikat-polski-B2-2023-02-listen-2
+  questionType: multiple_choice
+  questionText: "Słownik polsko-polski"
+  options: "a) to tytuł najnowszej publikacji profesora Miodka.|b) stracił w ostatnich latach na popularności.|c) można obejrzeć w telewizji."
+  correctAnswer: "c) można obejrzeć w telewizji."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l2-q2
+  taskRef: certyfikat-polski-B2-2023-02-listen-2
+  questionType: multiple_choice
+  questionText: "Justyna Janus-Konarska"
+  options: "a) poprosiła profesora Miodka o poradę językową.|b) od kilkunastu lat jest związana ze Słownikiem polsko-polskim.|c) występuje w telewizji u boku profesora Miodka."
+  correctAnswer: "c) występuje w telewizji u boku profesora Miodka."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l2-q3
+  taskRef: certyfikat-polski-B2-2023-02-listen-2
+  questionType: multiple_choice
+  questionText: Janus-Konarska
+  options: "a) ciągle doskonali swoje kompetencje językowe.|b) uważa, że błędy są wyrazem braku szacunku do języka.|c) zachęca wszystkich do poszerzania swojej wiedzy językowej."
+  correctAnswer: "a) ciągle doskonali swoje kompetencje językowe."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l2-q4
+  taskRef: certyfikat-polski-B2-2023-02-listen-2
+  questionType: multiple_choice
+  questionText: "Profesor Miodek"
+  options: "a) świetnie opanował wiele języków obcych.|b) w stosunku do języka nie jest wielkim tradycjonalistą.|c) uważa, że konflikt pokoleń widoczny w języku jest typowy dla polszczyzny."
+  correctAnswer: "b) w stosunku do języka nie jest wielkim tradycjonalistą."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l2-q5
+  taskRef: certyfikat-polski-B2-2023-02-listen-2
+  questionType: multiple_choice
+  questionText: "Jan Miodek wspomina rok 1989 w kontekście"
+  options: "a) konfliktów społecznych, które pojawiły się w Polsce.|b) napływu do języka polskiego słów pochodzenia angielskiego.|c) publikacji jednej ze swoich książek."
+  correctAnswer: "b) napływu do języka polskiego słów pochodzenia angielskiego."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l2-q6
+  taskRef: certyfikat-polski-B2-2023-02-listen-2
+  questionType: multiple_choice
+  questionText: "Profesor Miodek uważa, że"
+  options: "a) sposoby komunikacji zmieniają się z pokolenia na pokolenia.|b) zmiany językowe są źródłem konfliktów pomiędzy ludźmi.|c) starsze pokolenie z chęcią przyswaja młodzieżowe sformułowania."
+  correctAnswer: "a) sposoby komunikacji zmieniają się z pokolenia na pokolenia."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l2-q7
+  taskRef: certyfikat-polski-B2-2023-02-listen-2
+  questionType: multiple_choice
+  questionText: "Materiały opublikowane w książce prof. Miodka"
+  options: "a) zostały przygotowane specjalnie na potrzeby tej publikacji.|b) to zbiór tekstów poświęconych poprawności językowej.|c) to pierwsza tego rodzaju pozycja na rynku wydawniczym."
+  correctAnswer: "b) to zbiór tekstów poświęconych poprawności językowej."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l3-q1
+  taskRef: certyfikat-polski-B2-2023-02-listen-3
+  questionType: true_false
+  questionText: "Ocena intensywności ruchu rowerowego we Wrocławiu miała miejsce po raz pierwszy."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l3-q2
+  taskRef: certyfikat-polski-B2-2023-02-listen-3
+  questionType: true_false
+  questionText: "Mieszkańcy Wrocławia coraz częściej korzystają z rowerów."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l3-q3
+  taskRef: certyfikat-polski-B2-2023-02-listen-3
+  questionType: true_false
+  questionText: "Miasto chwilowo planuje zaprzestać dalszych inwestycji w infrastrukturę rowerową."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l3-q4
+  taskRef: certyfikat-polski-B2-2023-02-listen-3
+  questionType: true_false
+  questionText: "Trasa rowerowa jest planowana także w zabytkowej części miasta."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l3-q5
+  taskRef: certyfikat-polski-B2-2023-02-listen-3
+  questionType: true_false
+  questionText: "Przebieg nowych tras rowerowych dostosowany jest do potrzeb mieszkańców."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l3-q6
+  taskRef: certyfikat-polski-B2-2023-02-listen-3
+  questionType: true_false
+  questionText: "Kilka z planowanych dróg wyjdzie poza granice administracyjne miasta."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l3-q7
+  taskRef: certyfikat-polski-B2-2023-02-listen-3
+  questionType: true_false
+  questionText: "Firma Nextbike planuje uruchomić kolejne stacje rowerowe dopiero za dwa lata."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l3-q8
+  taskRef: certyfikat-polski-B2-2023-02-listen-3
+  questionType: true_false
+  questionText: "Zimą chętni do wypożyczenia rowerów będą mieli do dyspozycji więcej pojazdów."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l3-q9
+  taskRef: certyfikat-polski-B2-2023-02-listen-3
+  questionType: true_false
+  questionText: "Niektóre stacje będą umożliwiały skorzystanie z narzędzi do serwisu rowerów."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l4-q1
+  taskRef: certyfikat-polski-B2-2023-02-listen-4
+  questionType: matching
+  questionText: "Jest połączeniem dwóch ras."
+  options: "1|2|3|4"
+  correctAnswer: "1"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l4-q2
+  taskRef: certyfikat-polski-B2-2023-02-listen-4
+  questionType: matching
+  questionText: "Należy do rasy wykorzystywanej w celach leczniczych."
+  options: "1|2|3|4"
+  correctAnswer: "2"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l4-q3
+  taskRef: certyfikat-polski-B2-2023-02-listen-4
+  questionType: matching
+  questionText: "Cieszy się popularnością w różnego rodzaju mediach."
+  options: "1|2|3|4"
+  correctAnswer: "1|2|4"
+  pointsQuarter: 12
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l4-q4
+  taskRef: certyfikat-polski-B2-2023-02-listen-4
+  questionType: matching
+  questionText: "Jest świetnym towarzyszem zabaw."
+  options: "1|2|3|4"
+  correctAnswer: "2|3"
+  pointsQuarter: 8
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l4-q5
+  taskRef: certyfikat-polski-B2-2023-02-listen-4
+  questionType: matching
+  questionText: "Ma na swoim koncie wygraną w jednym z konkursów."
+  options: "1|2|3|4"
+  correctAnswer: "1|4"
+  pointsQuarter: 8
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l4-q6
+  taskRef: certyfikat-polski-B2-2023-02-listen-4
+  questionType: matching
+  questionText: "Jego wygląd jest konsekwencją życia w niewoli."
+  options: "1|2|3|4"
+  correctAnswer: "4"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l5-q1
+  taskRef: certyfikat-polski-B2-2023-02-listen-5
+  questionType: fill_gap
+  questionText: "Jaka jest wysokość pagórków znajdujących się w okolicy miejsca inwestycji?"
+  correctAnswer: "100 metrów"
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l5-q2
+  taskRef: certyfikat-polski-B2-2023-02-listen-5
+  questionType: fill_gap
+  questionText: "Co ma powstać w bliskim sąsiedztwie plaży?"
+  correctAnswer: apartamentowce
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l5-q3
+  taskRef: certyfikat-polski-B2-2023-02-listen-5
+  questionType: fill_gap
+  questionText: "O jakich rodzajach „zbrodni” wspomina Andrzej Pawełczyk?"
+  correctAnswer: "architektoniczna|społeczna"
+  pointsQuarter: 4
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 2
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l5-q4
+  taskRef: certyfikat-polski-B2-2023-02-listen-5
+  questionType: fill_gap
+  questionText: "Kto wydał zgodę na nowe inwestycje?"
+  correctAnswer: "samorząd"
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l5-q5
+  taskRef: certyfikat-polski-B2-2023-02-listen-5
+  questionType: fill_gap
+  questionText: "Jak reaguje deweloper na zgłaszane zastrzeżenia?"
+  correctAnswer: "Nie obchodzi go to."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l5-q6
+  taskRef: certyfikat-polski-B2-2023-02-listen-5
+  questionType: fill_gap
+  questionText: "Jaka jest maksymalna wysokość zabudowy dopuszczalnej na spornym terenie?"
+  correctAnswer: "150 m"
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l5-q7
+  taskRef: certyfikat-polski-B2-2023-02-listen-5
+  questionType: fill_gap
+  questionText: "Z jakich form oszczędności rezygnują Polacy?"
+  correctAnswer: "z lokat bankowych"
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-l5-q8
+  taskRef: certyfikat-polski-B2-2023-02-listen-5
+  questionType: fill_gap
+  questionText: "Jakie wady inwestycji wymienia mieszkaniec miasta?"
+  correctAnswer: "cień|wiatr"
+  pointsQuarter: 4
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 2
+  gradingMode: open_manual
+}

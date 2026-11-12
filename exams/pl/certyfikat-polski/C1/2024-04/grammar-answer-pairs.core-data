@@ -1,0 +1,28 @@
+DSL 1
+GRAMMAR_ANSWER_PAIR {
+  pairId: certyfikat-polski-C1-2024-04-g1-pair-1
+  firstItemRef: certyfikat-polski-C1-2024-04-g1-q8
+  firstAnswer: kilku
+  secondItemRef: certyfikat-polski-C1-2024-04-g1-q9
+  secondAnswer: "przyjaciółmi"
+  firstEarnedQuarter: 2
+  secondEarnedQuarter: 2
+}
+GRAMMAR_ANSWER_PAIR {
+  pairId: certyfikat-polski-C1-2024-04-g1-pair-2
+  firstItemRef: certyfikat-polski-C1-2024-04-g1-q8
+  firstAnswer: kilkoma
+  secondItemRef: certyfikat-polski-C1-2024-04-g1-q9
+  secondAnswer: "przyjaciółmi"
+  firstEarnedQuarter: 2
+  secondEarnedQuarter: 2
+}
+GRAMMAR_ANSWER_PAIR {
+  pairId: certyfikat-polski-C1-2024-04-g1-pair-3
+  firstItemRef: certyfikat-polski-C1-2024-04-g1-q8
+  firstAnswer: kilkorgiem
+  secondItemRef: certyfikat-polski-C1-2024-04-g1-q9
+  secondAnswer: "przyjaciół"
+  firstEarnedQuarter: 2
+  secondEarnedQuarter: 2
+}

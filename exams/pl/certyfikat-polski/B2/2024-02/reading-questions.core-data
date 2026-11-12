@@ -1,181 +1,376 @@
 DSL 1
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-02-rq-1"
-  passageRef: "certyfikat-polski-B2-2024-02-read-6"
+  questionId: certyfikat-polski-B2-2024-02-r1-q1
+  passageRef: certyfikat-polski-B2-2024-02-read-1
   questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionText: "Z tekstu o „Stop przedeptom” dowiadujemy się, że"
+  options: "a) mieszkańcy Ursynowa prosili władze o zastąpienie płyt chodnikowych zielenią.|b) na Ursynowie mieszkańcy będą zmuszeni wybierać dłuższą drogę do celu.|c) władze Ursynowa spełniły postulaty zgłaszane przez mieszkańców dzielnicy."
+  correctAnswer: "b) na Ursynowie mieszkańcy będą zmuszeni wybierać dłuższą drogę do celu."
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-02-rq-2"
-  passageRef: "certyfikat-polski-B2-2024-02-read-6"
+  questionId: certyfikat-polski-B2-2024-02-r1-q2
+  passageRef: certyfikat-polski-B2-2024-02-read-1
   questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionText: "Z tekstu o receptach dowiadujemy się, że w wyniku planowanych zmian"
+  options: "a) pacjent będzie mógł wykupić leki starczające najwyżej na 90-dniową kurację.|b) chory nie zrealizuje za jednym razem recepty na leki do przyjmowania powyżej 120 dni.|c) po 1 marca pracownikom aptek przybędzie obowiązków związanych z receptami."
+  correctAnswer: "b) chory nie zrealizuje za jednym razem recepty na leki do przyjmowania powyżej 120 dni."
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-02-rq-3"
-  passageRef: "certyfikat-polski-B2-2024-02-read-6"
+  questionId: certyfikat-polski-B2-2024-02-r1-q3
+  passageRef: certyfikat-polski-B2-2024-02-read-1
   questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionText: "Z tekstu o zniczach dowiadujemy się, że"
+  options: "a) zniczodzielnie to alternatywa dla kupowania nowych zniczy.|b) w Poznaniu zniczodzielnie zastąpią punkty sprzedaży lampek.|c) w minionym roku z powodu inflacji Polacy kupili mniej zniczy."
+  correctAnswer: "a) zniczodzielnie to alternatywa dla kupowania nowych zniczy."
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-02-rq-4"
-  passageRef: "certyfikat-polski-B2-2024-02-read-6"
+  questionId: certyfikat-polski-B2-2024-02-r1-q4
+  passageRef: certyfikat-polski-B2-2024-02-read-1
   questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionText: "Z tekstu o biedronce azjatyckiej dowiadujemy się, że"
+  options: "a) do Polski trafiło ok. 80 gatunków biedronki azjatyckiej.|b) kamfora może złagodzić dolegliwości po ugryzieniu przez arlekina.|c) kontakt z biedronką azjatycką może wywołać uczulenie."
+  correctAnswer: "c) kontakt z biedronką azjatycką może wywołać uczulenie."
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-02-rq-5"
-  passageRef: "certyfikat-polski-B2-2024-02-read-6"
+  questionId: certyfikat-polski-B2-2024-02-r1-q5
+  passageRef: certyfikat-polski-B2-2024-02-read-1
   questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionText: "Z tekstu o balkonach dowiadujemy się, że"
+  options: "a) omawianą formą podatku nie zostaną objęte istniejące już obiekty.|b) nowelizacja Ustawy o drogach publicznych wprowadza nową definicję balkonu.|c) budynki powstające po przyjęciu uchwały nie będą mogły mieć balkonów."
+  correctAnswer: "a) omawianą formą podatku nie zostaną objęte istniejące już obiekty."
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-02-rq-6"
-  passageRef: "certyfikat-polski-B2-2024-02-read-7"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2024-02-r2-q1
+  passageRef: certyfikat-polski-B2-2024-02-read-2
+  questionType: gap_fill_fragment
+  questionText: "Luka 1 w tekście „Tajemnice Dolnego Śląska”"
+  options: "A. nasz region jest atrakcyjny przez cały rok|B. to przykłady miejsc należących do Szlaku Tajemniczych Podziemi|C. zachwycą turystów bez względu na warunki atmosferyczne|D. inne miejsca znajdujące się na Dolnym Śląsku|E. mogą nawet pokonać ją łódką desantową|F. powstawały w górzystych partiach regionu w celu poszukiwania|G. jesienią następuje znaczący spadek ruchu turystycznego|H. nie przestaje oddziaływać na wyobraźnię turystów|I. czyli półkilometrowy odcinek intrygujący historią|J. ma na celu zachęcanie turystów do|K. pogoda może być kapryśna"
+  correctAnswer: "J. ma na celu zachęcanie turystów do"
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-02-rq-7"
-  passageRef: "certyfikat-polski-B2-2024-02-read-7"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2024-02-r2-q2
+  passageRef: certyfikat-polski-B2-2024-02-read-2
+  questionType: gap_fill_fragment
+  questionText: "Luka 2 w tekście „Tajemnice Dolnego Śląska”"
+  options: "A. nasz region jest atrakcyjny przez cały rok|B. to przykłady miejsc należących do Szlaku Tajemniczych Podziemi|C. zachwycą turystów bez względu na warunki atmosferyczne|D. inne miejsca znajdujące się na Dolnym Śląsku|E. mogą nawet pokonać ją łódką desantową|F. powstawały w górzystych partiach regionu w celu poszukiwania|G. jesienią następuje znaczący spadek ruchu turystycznego|H. nie przestaje oddziaływać na wyobraźnię turystów|I. czyli półkilometrowy odcinek intrygujący historią|J. ma na celu zachęcanie turystów do|K. pogoda może być kapryśna"
+  correctAnswer: "D. inne miejsca znajdujące się na Dolnym Śląsku"
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-02-rq-8"
-  passageRef: "certyfikat-polski-B2-2024-02-read-7"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2024-02-r2-q3
+  passageRef: certyfikat-polski-B2-2024-02-read-2
+  questionType: gap_fill_fragment
+  questionText: "Luka 3 w tekście „Tajemnice Dolnego Śląska”"
+  options: "A. nasz region jest atrakcyjny przez cały rok|B. to przykłady miejsc należących do Szlaku Tajemniczych Podziemi|C. zachwycą turystów bez względu na warunki atmosferyczne|D. inne miejsca znajdujące się na Dolnym Śląsku|E. mogą nawet pokonać ją łódką desantową|F. powstawały w górzystych partiach regionu w celu poszukiwania|G. jesienią następuje znaczący spadek ruchu turystycznego|H. nie przestaje oddziaływać na wyobraźnię turystów|I. czyli półkilometrowy odcinek intrygujący historią|J. ma na celu zachęcanie turystów do|K. pogoda może być kapryśna"
+  correctAnswer: "G. jesienią następuje znaczący spadek ruchu turystycznego"
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-02-rq-9"
-  passageRef: "certyfikat-polski-B2-2024-02-read-7"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2024-02-r2-q4
+  passageRef: certyfikat-polski-B2-2024-02-read-2
+  questionType: gap_fill_fragment
+  questionText: "Luka 4 w tekście „Tajemnice Dolnego Śląska”"
+  options: "A. nasz region jest atrakcyjny przez cały rok|B. to przykłady miejsc należących do Szlaku Tajemniczych Podziemi|C. zachwycą turystów bez względu na warunki atmosferyczne|D. inne miejsca znajdujące się na Dolnym Śląsku|E. mogą nawet pokonać ją łódką desantową|F. powstawały w górzystych partiach regionu w celu poszukiwania|G. jesienią następuje znaczący spadek ruchu turystycznego|H. nie przestaje oddziaływać na wyobraźnię turystów|I. czyli półkilometrowy odcinek intrygujący historią|J. ma na celu zachęcanie turystów do|K. pogoda może być kapryśna"
+  correctAnswer: "A. nasz region jest atrakcyjny przez cały rok"
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-02-rq-10"
-  passageRef: "certyfikat-polski-B2-2024-02-read-7"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2024-02-r2-q5
+  passageRef: certyfikat-polski-B2-2024-02-read-2
+  questionType: gap_fill_fragment
+  questionText: "Luka 5 w tekście „Tajemnice Dolnego Śląska”"
+  options: "A. nasz region jest atrakcyjny przez cały rok|B. to przykłady miejsc należących do Szlaku Tajemniczych Podziemi|C. zachwycą turystów bez względu na warunki atmosferyczne|D. inne miejsca znajdujące się na Dolnym Śląsku|E. mogą nawet pokonać ją łódką desantową|F. powstawały w górzystych partiach regionu w celu poszukiwania|G. jesienią następuje znaczący spadek ruchu turystycznego|H. nie przestaje oddziaływać na wyobraźnię turystów|I. czyli półkilometrowy odcinek intrygujący historią|J. ma na celu zachęcanie turystów do|K. pogoda może być kapryśna"
+  correctAnswer: "K. pogoda może być kapryśna"
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-02-rq-11"
-  passageRef: "certyfikat-polski-B2-2024-02-read-8"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2024-02-r2-q6
+  passageRef: certyfikat-polski-B2-2024-02-read-2
+  questionType: gap_fill_fragment
+  questionText: "Luka 6 w tekście „Tajemnice Dolnego Śląska”"
+  options: "A. nasz region jest atrakcyjny przez cały rok|B. to przykłady miejsc należących do Szlaku Tajemniczych Podziemi|C. zachwycą turystów bez względu na warunki atmosferyczne|D. inne miejsca znajdujące się na Dolnym Śląsku|E. mogą nawet pokonać ją łódką desantową|F. powstawały w górzystych partiach regionu w celu poszukiwania|G. jesienią następuje znaczący spadek ruchu turystycznego|H. nie przestaje oddziaływać na wyobraźnię turystów|I. czyli półkilometrowy odcinek intrygujący historią|J. ma na celu zachęcanie turystów do|K. pogoda może być kapryśna"
+  correctAnswer: "C. zachwycą turystów bez względu na warunki atmosferyczne"
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-02-rq-12"
-  passageRef: "certyfikat-polski-B2-2024-02-read-8"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2024-02-r2-q7
+  passageRef: certyfikat-polski-B2-2024-02-read-2
+  questionType: gap_fill_fragment
+  questionText: "Luka 7 w tekście „Tajemnice Dolnego Śląska”"
+  options: "A. nasz region jest atrakcyjny przez cały rok|B. to przykłady miejsc należących do Szlaku Tajemniczych Podziemi|C. zachwycą turystów bez względu na warunki atmosferyczne|D. inne miejsca znajdujące się na Dolnym Śląsku|E. mogą nawet pokonać ją łódką desantową|F. powstawały w górzystych partiach regionu w celu poszukiwania|G. jesienią następuje znaczący spadek ruchu turystycznego|H. nie przestaje oddziaływać na wyobraźnię turystów|I. czyli półkilometrowy odcinek intrygujący historią|J. ma na celu zachęcanie turystów do|K. pogoda może być kapryśna"
+  correctAnswer: "F. powstawały w górzystych partiach regionu w celu poszukiwania"
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-02-rq-13"
-  passageRef: "certyfikat-polski-B2-2024-02-read-8"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2024-02-r2-q8
+  passageRef: certyfikat-polski-B2-2024-02-read-2
+  questionType: gap_fill_fragment
+  questionText: "Luka 8 w tekście „Tajemnice Dolnego Śląska”"
+  options: "A. nasz region jest atrakcyjny przez cały rok|B. to przykłady miejsc należących do Szlaku Tajemniczych Podziemi|C. zachwycą turystów bez względu na warunki atmosferyczne|D. inne miejsca znajdujące się na Dolnym Śląsku|E. mogą nawet pokonać ją łódką desantową|F. powstawały w górzystych partiach regionu w celu poszukiwania|G. jesienią następuje znaczący spadek ruchu turystycznego|H. nie przestaje oddziaływać na wyobraźnię turystów|I. czyli półkilometrowy odcinek intrygujący historią|J. ma na celu zachęcanie turystów do|K. pogoda może być kapryśna"
+  correctAnswer: "I. czyli półkilometrowy odcinek intrygujący historią"
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-02-rq-14"
-  passageRef: "certyfikat-polski-B2-2024-02-read-8"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2024-02-r2-q9
+  passageRef: certyfikat-polski-B2-2024-02-read-2
+  questionType: gap_fill_fragment
+  questionText: "Luka 9 w tekście „Tajemnice Dolnego Śląska”"
+  options: "A. nasz region jest atrakcyjny przez cały rok|B. to przykłady miejsc należących do Szlaku Tajemniczych Podziemi|C. zachwycą turystów bez względu na warunki atmosferyczne|D. inne miejsca znajdujące się na Dolnym Śląsku|E. mogą nawet pokonać ją łódką desantową|F. powstawały w górzystych partiach regionu w celu poszukiwania|G. jesienią następuje znaczący spadek ruchu turystycznego|H. nie przestaje oddziaływać na wyobraźnię turystów|I. czyli półkilometrowy odcinek intrygujący historią|J. ma na celu zachęcanie turystów do|K. pogoda może być kapryśna"
+  correctAnswer: "H. nie przestaje oddziaływać na wyobraźnię turystów"
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-02-rq-15"
-  passageRef: "certyfikat-polski-B2-2024-02-read-8"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2024-02-r2-q10
+  passageRef: certyfikat-polski-B2-2024-02-read-2
+  questionType: gap_fill_fragment
+  questionText: "Luka 10 w tekście „Tajemnice Dolnego Śląska”"
+  options: "A. nasz region jest atrakcyjny przez cały rok|B. to przykłady miejsc należących do Szlaku Tajemniczych Podziemi|C. zachwycą turystów bez względu na warunki atmosferyczne|D. inne miejsca znajdujące się na Dolnym Śląsku|E. mogą nawet pokonać ją łódką desantową|F. powstawały w górzystych partiach regionu w celu poszukiwania|G. jesienią następuje znaczący spadek ruchu turystycznego|H. nie przestaje oddziaływać na wyobraźnię turystów|I. czyli półkilometrowy odcinek intrygujący historią|J. ma na celu zachęcanie turystów do|K. pogoda może być kapryśna"
+  correctAnswer: "E. mogą nawet pokonać ją łódką desantową"
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-02-rq-16"
-  passageRef: "certyfikat-polski-B2-2024-02-read-9"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2024-02-r3-q1
+  passageRef: certyfikat-polski-B2-2024-02-read-3
+  questionType: matching
+  questionText: "Zero hałasów"
+  options: "A. W trakcie długotrwałej nauki koncentracja spada. Dziesięć minut to optymalny czas na odpoczynek. Ważne, aby nie przeglądać w tym czasie internetu ani telefonu. Lepiej na przykład wyjść na zewnątrz.|B. Bądź jak Sokrates – badaj, dlaczego coś ma prawo się wydarzyć, podczas gdy inne teorie łatwo jest podać w wątpliwość. Im lepiej coś zrozumiesz, tym łatwiej zapamiętasz.|C. Zapisywanie najważniejszych informacji pomaga lepiej zapamiętać materiał i jest równie skuteczne co siedmiokrotne przeczytanie tekstu.|D. To bardzo ważne, ponieważ mózg potrzebuje tlenu, aby dobrze pracować. Brak dopływu tlenu sprawi, że szybciej się męczysz.|E. Niektórzy ludzie szybciej zapamiętują ważne rzeczy, będąc w ruchu. Możesz na przykład spacerować z książką po pokoju.|F. Może pamiętasz z maturalnych czasów memy uspokajające, że czas na naukę znajdzie się zawsze. Nic bardziej mylnego! Sam Einstein mógłby mieć problem z opanowaniem materiału w kilkadziesiąt godzin. Naukę zdecydowanie lepiej jest rozłożyć w czasie.|G. Jeżeli, powtarzając konkretny materiał, odgrywasz rolę nauczyciela i udajesz, że to ty tłumaczysz, łatwiej zapamiętasz informacje.|H. Dźwięk przychodzących SMS-ów oraz wiadomości na Messengerze rozprasza. Podobnie jak karetka na sygnale za oknem. Postaraj się wyeliminować różne odgłosy tak, żeby nie wybijały cię z rytmu.|I. Niektórzy myślą, że mocne oświetlenie sprzyja nauce. Lepiej sprawdza się jednak to łagodne – czytanie jest przyjemniejsze, więc szybciej przyswaja się informacje.|J. Co wywiera pozytywny wpływ na pracę mózgu, opóźnia procesy starzenia oraz poprawia humor? Czekolada! To obowiązkowa pomoc w trakcie nauki.|K. Podobno łatwiej zapamiętuje się treści zapisane niebieskim tuszem niż czarnym. Może warto sprawdzić?"
+  correctAnswer: "H. Dźwięk przychodzących SMS-ów oraz wiadomości na Messengerze rozprasza. Podobnie jak karetka na sygnale za oknem. Postaraj się wyeliminować różne odgłosy tak, żeby nie wybijały cię z rytmu."
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-02-rq-17"
-  passageRef: "certyfikat-polski-B2-2024-02-read-9"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2024-02-r3-q2
+  passageRef: certyfikat-polski-B2-2024-02-read-3
+  questionType: matching
+  questionText: "Wietrzenie to podstawa"
+  options: "A. W trakcie długotrwałej nauki koncentracja spada. Dziesięć minut to optymalny czas na odpoczynek. Ważne, aby nie przeglądać w tym czasie internetu ani telefonu. Lepiej na przykład wyjść na zewnątrz.|B. Bądź jak Sokrates – badaj, dlaczego coś ma prawo się wydarzyć, podczas gdy inne teorie łatwo jest podać w wątpliwość. Im lepiej coś zrozumiesz, tym łatwiej zapamiętasz.|C. Zapisywanie najważniejszych informacji pomaga lepiej zapamiętać materiał i jest równie skuteczne co siedmiokrotne przeczytanie tekstu.|D. To bardzo ważne, ponieważ mózg potrzebuje tlenu, aby dobrze pracować. Brak dopływu tlenu sprawi, że szybciej się męczysz.|E. Niektórzy ludzie szybciej zapamiętują ważne rzeczy, będąc w ruchu. Możesz na przykład spacerować z książką po pokoju.|F. Może pamiętasz z maturalnych czasów memy uspokajające, że czas na naukę znajdzie się zawsze. Nic bardziej mylnego! Sam Einstein mógłby mieć problem z opanowaniem materiału w kilkadziesiąt godzin. Naukę zdecydowanie lepiej jest rozłożyć w czasie.|G. Jeżeli, powtarzając konkretny materiał, odgrywasz rolę nauczyciela i udajesz, że to ty tłumaczysz, łatwiej zapamiętasz informacje.|H. Dźwięk przychodzących SMS-ów oraz wiadomości na Messengerze rozprasza. Podobnie jak karetka na sygnale za oknem. Postaraj się wyeliminować różne odgłosy tak, żeby nie wybijały cię z rytmu.|I. Niektórzy myślą, że mocne oświetlenie sprzyja nauce. Lepiej sprawdza się jednak to łagodne – czytanie jest przyjemniejsze, więc szybciej przyswaja się informacje.|J. Co wywiera pozytywny wpływ na pracę mózgu, opóźnia procesy starzenia oraz poprawia humor? Czekolada! To obowiązkowa pomoc w trakcie nauki.|K. Podobno łatwiej zapamiętuje się treści zapisane niebieskim tuszem niż czarnym. Może warto sprawdzić?"
+  correctAnswer: "D. To bardzo ważne, ponieważ mózg potrzebuje tlenu, aby dobrze pracować. Brak dopływu tlenu sprawi, że szybciej się męczysz."
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-02-rq-18"
-  passageRef: "certyfikat-polski-B2-2024-02-read-9"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2024-02-r3-q3
+  passageRef: certyfikat-polski-B2-2024-02-read-3
+  questionType: matching
+  questionText: "Dobrze wykorzystać przerwę"
+  options: "A. W trakcie długotrwałej nauki koncentracja spada. Dziesięć minut to optymalny czas na odpoczynek. Ważne, aby nie przeglądać w tym czasie internetu ani telefonu. Lepiej na przykład wyjść na zewnątrz.|B. Bądź jak Sokrates – badaj, dlaczego coś ma prawo się wydarzyć, podczas gdy inne teorie łatwo jest podać w wątpliwość. Im lepiej coś zrozumiesz, tym łatwiej zapamiętasz.|C. Zapisywanie najważniejszych informacji pomaga lepiej zapamiętać materiał i jest równie skuteczne co siedmiokrotne przeczytanie tekstu.|D. To bardzo ważne, ponieważ mózg potrzebuje tlenu, aby dobrze pracować. Brak dopływu tlenu sprawi, że szybciej się męczysz.|E. Niektórzy ludzie szybciej zapamiętują ważne rzeczy, będąc w ruchu. Możesz na przykład spacerować z książką po pokoju.|F. Może pamiętasz z maturalnych czasów memy uspokajające, że czas na naukę znajdzie się zawsze. Nic bardziej mylnego! Sam Einstein mógłby mieć problem z opanowaniem materiału w kilkadziesiąt godzin. Naukę zdecydowanie lepiej jest rozłożyć w czasie.|G. Jeżeli, powtarzając konkretny materiał, odgrywasz rolę nauczyciela i udajesz, że to ty tłumaczysz, łatwiej zapamiętasz informacje.|H. Dźwięk przychodzących SMS-ów oraz wiadomości na Messengerze rozprasza. Podobnie jak karetka na sygnale za oknem. Postaraj się wyeliminować różne odgłosy tak, żeby nie wybijały cię z rytmu.|I. Niektórzy myślą, że mocne oświetlenie sprzyja nauce. Lepiej sprawdza się jednak to łagodne – czytanie jest przyjemniejsze, więc szybciej przyswaja się informacje.|J. Co wywiera pozytywny wpływ na pracę mózgu, opóźnia procesy starzenia oraz poprawia humor? Czekolada! To obowiązkowa pomoc w trakcie nauki.|K. Podobno łatwiej zapamiętuje się treści zapisane niebieskim tuszem niż czarnym. Może warto sprawdzić?"
+  correctAnswer: "A. W trakcie długotrwałej nauki koncentracja spada. Dziesięć minut to optymalny czas na odpoczynek. Ważne, aby nie przeglądać w tym czasie internetu ani telefonu. Lepiej na przykład wyjść na zewnątrz."
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-02-rq-19"
-  passageRef: "certyfikat-polski-B2-2024-02-read-9"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2024-02-r3-q4
+  passageRef: certyfikat-polski-B2-2024-02-read-3
+  questionType: matching
+  questionText: "Wybór lampy ma znaczenie"
+  options: "A. W trakcie długotrwałej nauki koncentracja spada. Dziesięć minut to optymalny czas na odpoczynek. Ważne, aby nie przeglądać w tym czasie internetu ani telefonu. Lepiej na przykład wyjść na zewnątrz.|B. Bądź jak Sokrates – badaj, dlaczego coś ma prawo się wydarzyć, podczas gdy inne teorie łatwo jest podać w wątpliwość. Im lepiej coś zrozumiesz, tym łatwiej zapamiętasz.|C. Zapisywanie najważniejszych informacji pomaga lepiej zapamiętać materiał i jest równie skuteczne co siedmiokrotne przeczytanie tekstu.|D. To bardzo ważne, ponieważ mózg potrzebuje tlenu, aby dobrze pracować. Brak dopływu tlenu sprawi, że szybciej się męczysz.|E. Niektórzy ludzie szybciej zapamiętują ważne rzeczy, będąc w ruchu. Możesz na przykład spacerować z książką po pokoju.|F. Może pamiętasz z maturalnych czasów memy uspokajające, że czas na naukę znajdzie się zawsze. Nic bardziej mylnego! Sam Einstein mógłby mieć problem z opanowaniem materiału w kilkadziesiąt godzin. Naukę zdecydowanie lepiej jest rozłożyć w czasie.|G. Jeżeli, powtarzając konkretny materiał, odgrywasz rolę nauczyciela i udajesz, że to ty tłumaczysz, łatwiej zapamiętasz informacje.|H. Dźwięk przychodzących SMS-ów oraz wiadomości na Messengerze rozprasza. Podobnie jak karetka na sygnale za oknem. Postaraj się wyeliminować różne odgłosy tak, żeby nie wybijały cię z rytmu.|I. Niektórzy myślą, że mocne oświetlenie sprzyja nauce. Lepiej sprawdza się jednak to łagodne – czytanie jest przyjemniejsze, więc szybciej przyswaja się informacje.|J. Co wywiera pozytywny wpływ na pracę mózgu, opóźnia procesy starzenia oraz poprawia humor? Czekolada! To obowiązkowa pomoc w trakcie nauki.|K. Podobno łatwiej zapamiętuje się treści zapisane niebieskim tuszem niż czarnym. Może warto sprawdzić?"
+  correctAnswer: "I. Niektórzy myślą, że mocne oświetlenie sprzyja nauce. Lepiej sprawdza się jednak to łagodne – czytanie jest przyjemniejsze, więc szybciej przyswaja się informacje."
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-02-rq-20"
-  passageRef: "certyfikat-polski-B2-2024-02-read-9"
+  questionId: certyfikat-polski-B2-2024-02-r3-q5
+  passageRef: certyfikat-polski-B2-2024-02-read-3
+  questionType: matching
+  questionText: "Niekoniecznie przy biurku"
+  options: "A. W trakcie długotrwałej nauki koncentracja spada. Dziesięć minut to optymalny czas na odpoczynek. Ważne, aby nie przeglądać w tym czasie internetu ani telefonu. Lepiej na przykład wyjść na zewnątrz.|B. Bądź jak Sokrates – badaj, dlaczego coś ma prawo się wydarzyć, podczas gdy inne teorie łatwo jest podać w wątpliwość. Im lepiej coś zrozumiesz, tym łatwiej zapamiętasz.|C. Zapisywanie najważniejszych informacji pomaga lepiej zapamiętać materiał i jest równie skuteczne co siedmiokrotne przeczytanie tekstu.|D. To bardzo ważne, ponieważ mózg potrzebuje tlenu, aby dobrze pracować. Brak dopływu tlenu sprawi, że szybciej się męczysz.|E. Niektórzy ludzie szybciej zapamiętują ważne rzeczy, będąc w ruchu. Możesz na przykład spacerować z książką po pokoju.|F. Może pamiętasz z maturalnych czasów memy uspokajające, że czas na naukę znajdzie się zawsze. Nic bardziej mylnego! Sam Einstein mógłby mieć problem z opanowaniem materiału w kilkadziesiąt godzin. Naukę zdecydowanie lepiej jest rozłożyć w czasie.|G. Jeżeli, powtarzając konkretny materiał, odgrywasz rolę nauczyciela i udajesz, że to ty tłumaczysz, łatwiej zapamiętasz informacje.|H. Dźwięk przychodzących SMS-ów oraz wiadomości na Messengerze rozprasza. Podobnie jak karetka na sygnale za oknem. Postaraj się wyeliminować różne odgłosy tak, żeby nie wybijały cię z rytmu.|I. Niektórzy myślą, że mocne oświetlenie sprzyja nauce. Lepiej sprawdza się jednak to łagodne – czytanie jest przyjemniejsze, więc szybciej przyswaja się informacje.|J. Co wywiera pozytywny wpływ na pracę mózgu, opóźnia procesy starzenia oraz poprawia humor? Czekolada! To obowiązkowa pomoc w trakcie nauki.|K. Podobno łatwiej zapamiętuje się treści zapisane niebieskim tuszem niż czarnym. Może warto sprawdzić?"
+  correctAnswer: "E. Niektórzy ludzie szybciej zapamiętują ważne rzeczy, będąc w ruchu. Możesz na przykład spacerować z książką po pokoju."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-r3-q6
+  passageRef: certyfikat-polski-B2-2024-02-read-3
+  questionType: matching
+  questionText: "Kolor ma znaczenie"
+  options: "A. W trakcie długotrwałej nauki koncentracja spada. Dziesięć minut to optymalny czas na odpoczynek. Ważne, aby nie przeglądać w tym czasie internetu ani telefonu. Lepiej na przykład wyjść na zewnątrz.|B. Bądź jak Sokrates – badaj, dlaczego coś ma prawo się wydarzyć, podczas gdy inne teorie łatwo jest podać w wątpliwość. Im lepiej coś zrozumiesz, tym łatwiej zapamiętasz.|C. Zapisywanie najważniejszych informacji pomaga lepiej zapamiętać materiał i jest równie skuteczne co siedmiokrotne przeczytanie tekstu.|D. To bardzo ważne, ponieważ mózg potrzebuje tlenu, aby dobrze pracować. Brak dopływu tlenu sprawi, że szybciej się męczysz.|E. Niektórzy ludzie szybciej zapamiętują ważne rzeczy, będąc w ruchu. Możesz na przykład spacerować z książką po pokoju.|F. Może pamiętasz z maturalnych czasów memy uspokajające, że czas na naukę znajdzie się zawsze. Nic bardziej mylnego! Sam Einstein mógłby mieć problem z opanowaniem materiału w kilkadziesiąt godzin. Naukę zdecydowanie lepiej jest rozłożyć w czasie.|G. Jeżeli, powtarzając konkretny materiał, odgrywasz rolę nauczyciela i udajesz, że to ty tłumaczysz, łatwiej zapamiętasz informacje.|H. Dźwięk przychodzących SMS-ów oraz wiadomości na Messengerze rozprasza. Podobnie jak karetka na sygnale za oknem. Postaraj się wyeliminować różne odgłosy tak, żeby nie wybijały cię z rytmu.|I. Niektórzy myślą, że mocne oświetlenie sprzyja nauce. Lepiej sprawdza się jednak to łagodne – czytanie jest przyjemniejsze, więc szybciej przyswaja się informacje.|J. Co wywiera pozytywny wpływ na pracę mózgu, opóźnia procesy starzenia oraz poprawia humor? Czekolada! To obowiązkowa pomoc w trakcie nauki.|K. Podobno łatwiej zapamiętuje się treści zapisane niebieskim tuszem niż czarnym. Może warto sprawdzić?"
+  correctAnswer: "K. Podobno łatwiej zapamiętuje się treści zapisane niebieskim tuszem niż czarnym. Może warto sprawdzić?"
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-r3-q7
+  passageRef: certyfikat-polski-B2-2024-02-read-3
+  questionType: matching
+  questionText: "Pomocna przekąska"
+  options: "A. W trakcie długotrwałej nauki koncentracja spada. Dziesięć minut to optymalny czas na odpoczynek. Ważne, aby nie przeglądać w tym czasie internetu ani telefonu. Lepiej na przykład wyjść na zewnątrz.|B. Bądź jak Sokrates – badaj, dlaczego coś ma prawo się wydarzyć, podczas gdy inne teorie łatwo jest podać w wątpliwość. Im lepiej coś zrozumiesz, tym łatwiej zapamiętasz.|C. Zapisywanie najważniejszych informacji pomaga lepiej zapamiętać materiał i jest równie skuteczne co siedmiokrotne przeczytanie tekstu.|D. To bardzo ważne, ponieważ mózg potrzebuje tlenu, aby dobrze pracować. Brak dopływu tlenu sprawi, że szybciej się męczysz.|E. Niektórzy ludzie szybciej zapamiętują ważne rzeczy, będąc w ruchu. Możesz na przykład spacerować z książką po pokoju.|F. Może pamiętasz z maturalnych czasów memy uspokajające, że czas na naukę znajdzie się zawsze. Nic bardziej mylnego! Sam Einstein mógłby mieć problem z opanowaniem materiału w kilkadziesiąt godzin. Naukę zdecydowanie lepiej jest rozłożyć w czasie.|G. Jeżeli, powtarzając konkretny materiał, odgrywasz rolę nauczyciela i udajesz, że to ty tłumaczysz, łatwiej zapamiętasz informacje.|H. Dźwięk przychodzących SMS-ów oraz wiadomości na Messengerze rozprasza. Podobnie jak karetka na sygnale za oknem. Postaraj się wyeliminować różne odgłosy tak, żeby nie wybijały cię z rytmu.|I. Niektórzy myślą, że mocne oświetlenie sprzyja nauce. Lepiej sprawdza się jednak to łagodne – czytanie jest przyjemniejsze, więc szybciej przyswaja się informacje.|J. Co wywiera pozytywny wpływ na pracę mózgu, opóźnia procesy starzenia oraz poprawia humor? Czekolada! To obowiązkowa pomoc w trakcie nauki.|K. Podobno łatwiej zapamiętuje się treści zapisane niebieskim tuszem niż czarnym. Może warto sprawdzić?"
+  correctAnswer: "J. Co wywiera pozytywny wpływ na pracę mózgu, opóźnia procesy starzenia oraz poprawia humor? Czekolada! To obowiązkowa pomoc w trakcie nauki."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-r3-q8
+  passageRef: certyfikat-polski-B2-2024-02-read-3
+  questionType: matching
+  questionText: "Zamiana ról"
+  options: "A. W trakcie długotrwałej nauki koncentracja spada. Dziesięć minut to optymalny czas na odpoczynek. Ważne, aby nie przeglądać w tym czasie internetu ani telefonu. Lepiej na przykład wyjść na zewnątrz.|B. Bądź jak Sokrates – badaj, dlaczego coś ma prawo się wydarzyć, podczas gdy inne teorie łatwo jest podać w wątpliwość. Im lepiej coś zrozumiesz, tym łatwiej zapamiętasz.|C. Zapisywanie najważniejszych informacji pomaga lepiej zapamiętać materiał i jest równie skuteczne co siedmiokrotne przeczytanie tekstu.|D. To bardzo ważne, ponieważ mózg potrzebuje tlenu, aby dobrze pracować. Brak dopływu tlenu sprawi, że szybciej się męczysz.|E. Niektórzy ludzie szybciej zapamiętują ważne rzeczy, będąc w ruchu. Możesz na przykład spacerować z książką po pokoju.|F. Może pamiętasz z maturalnych czasów memy uspokajające, że czas na naukę znajdzie się zawsze. Nic bardziej mylnego! Sam Einstein mógłby mieć problem z opanowaniem materiału w kilkadziesiąt godzin. Naukę zdecydowanie lepiej jest rozłożyć w czasie.|G. Jeżeli, powtarzając konkretny materiał, odgrywasz rolę nauczyciela i udajesz, że to ty tłumaczysz, łatwiej zapamiętasz informacje.|H. Dźwięk przychodzących SMS-ów oraz wiadomości na Messengerze rozprasza. Podobnie jak karetka na sygnale za oknem. Postaraj się wyeliminować różne odgłosy tak, żeby nie wybijały cię z rytmu.|I. Niektórzy myślą, że mocne oświetlenie sprzyja nauce. Lepiej sprawdza się jednak to łagodne – czytanie jest przyjemniejsze, więc szybciej przyswaja się informacje.|J. Co wywiera pozytywny wpływ na pracę mózgu, opóźnia procesy starzenia oraz poprawia humor? Czekolada! To obowiązkowa pomoc w trakcie nauki.|K. Podobno łatwiej zapamiętuje się treści zapisane niebieskim tuszem niż czarnym. Może warto sprawdzić?"
+  correctAnswer: "G. Jeżeli, powtarzając konkretny materiał, odgrywasz rolę nauczyciela i udajesz, że to ty tłumaczysz, łatwiej zapamiętasz informacje."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-r3-q9
+  passageRef: certyfikat-polski-B2-2024-02-read-3
+  questionType: matching
+  questionText: "Notowanie ma moc"
+  options: "A. W trakcie długotrwałej nauki koncentracja spada. Dziesięć minut to optymalny czas na odpoczynek. Ważne, aby nie przeglądać w tym czasie internetu ani telefonu. Lepiej na przykład wyjść na zewnątrz.|B. Bądź jak Sokrates – badaj, dlaczego coś ma prawo się wydarzyć, podczas gdy inne teorie łatwo jest podać w wątpliwość. Im lepiej coś zrozumiesz, tym łatwiej zapamiętasz.|C. Zapisywanie najważniejszych informacji pomaga lepiej zapamiętać materiał i jest równie skuteczne co siedmiokrotne przeczytanie tekstu.|D. To bardzo ważne, ponieważ mózg potrzebuje tlenu, aby dobrze pracować. Brak dopływu tlenu sprawi, że szybciej się męczysz.|E. Niektórzy ludzie szybciej zapamiętują ważne rzeczy, będąc w ruchu. Możesz na przykład spacerować z książką po pokoju.|F. Może pamiętasz z maturalnych czasów memy uspokajające, że czas na naukę znajdzie się zawsze. Nic bardziej mylnego! Sam Einstein mógłby mieć problem z opanowaniem materiału w kilkadziesiąt godzin. Naukę zdecydowanie lepiej jest rozłożyć w czasie.|G. Jeżeli, powtarzając konkretny materiał, odgrywasz rolę nauczyciela i udajesz, że to ty tłumaczysz, łatwiej zapamiętasz informacje.|H. Dźwięk przychodzących SMS-ów oraz wiadomości na Messengerze rozprasza. Podobnie jak karetka na sygnale za oknem. Postaraj się wyeliminować różne odgłosy tak, żeby nie wybijały cię z rytmu.|I. Niektórzy myślą, że mocne oświetlenie sprzyja nauce. Lepiej sprawdza się jednak to łagodne – czytanie jest przyjemniejsze, więc szybciej przyswaja się informacje.|J. Co wywiera pozytywny wpływ na pracę mózgu, opóźnia procesy starzenia oraz poprawia humor? Czekolada! To obowiązkowa pomoc w trakcie nauki.|K. Podobno łatwiej zapamiętuje się treści zapisane niebieskim tuszem niż czarnym. Może warto sprawdzić?"
+  correctAnswer: "C. Zapisywanie najważniejszych informacji pomaga lepiej zapamiętać materiał i jest równie skuteczne co siedmiokrotne przeczytanie tekstu."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-r3-q10
+  passageRef: certyfikat-polski-B2-2024-02-read-3
+  questionType: matching
+  questionText: "Kto pyta, nie błądzi"
+  options: "A. W trakcie długotrwałej nauki koncentracja spada. Dziesięć minut to optymalny czas na odpoczynek. Ważne, aby nie przeglądać w tym czasie internetu ani telefonu. Lepiej na przykład wyjść na zewnątrz.|B. Bądź jak Sokrates – badaj, dlaczego coś ma prawo się wydarzyć, podczas gdy inne teorie łatwo jest podać w wątpliwość. Im lepiej coś zrozumiesz, tym łatwiej zapamiętasz.|C. Zapisywanie najważniejszych informacji pomaga lepiej zapamiętać materiał i jest równie skuteczne co siedmiokrotne przeczytanie tekstu.|D. To bardzo ważne, ponieważ mózg potrzebuje tlenu, aby dobrze pracować. Brak dopływu tlenu sprawi, że szybciej się męczysz.|E. Niektórzy ludzie szybciej zapamiętują ważne rzeczy, będąc w ruchu. Możesz na przykład spacerować z książką po pokoju.|F. Może pamiętasz z maturalnych czasów memy uspokajające, że czas na naukę znajdzie się zawsze. Nic bardziej mylnego! Sam Einstein mógłby mieć problem z opanowaniem materiału w kilkadziesiąt godzin. Naukę zdecydowanie lepiej jest rozłożyć w czasie.|G. Jeżeli, powtarzając konkretny materiał, odgrywasz rolę nauczyciela i udajesz, że to ty tłumaczysz, łatwiej zapamiętasz informacje.|H. Dźwięk przychodzących SMS-ów oraz wiadomości na Messengerze rozprasza. Podobnie jak karetka na sygnale za oknem. Postaraj się wyeliminować różne odgłosy tak, żeby nie wybijały cię z rytmu.|I. Niektórzy myślą, że mocne oświetlenie sprzyja nauce. Lepiej sprawdza się jednak to łagodne – czytanie jest przyjemniejsze, więc szybciej przyswaja się informacje.|J. Co wywiera pozytywny wpływ na pracę mózgu, opóźnia procesy starzenia oraz poprawia humor? Czekolada! To obowiązkowa pomoc w trakcie nauki.|K. Podobno łatwiej zapamiętuje się treści zapisane niebieskim tuszem niż czarnym. Może warto sprawdzić?"
+  correctAnswer: "B. Bądź jak Sokrates – badaj, dlaczego coś ma prawo się wydarzyć, podczas gdy inne teorie łatwo jest podać w wątpliwość. Im lepiej coś zrozumiesz, tym łatwiej zapamiętasz."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-r4-q1
+  passageRef: certyfikat-polski-B2-2024-02-read-4
   questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionText: "Luka 1 w tekście „Ukryty skarb Europy”"
+  options: "kosztów|cen|wartości|wydatków"
+  correctAnswer: cen
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-r4-q2
+  passageRef: certyfikat-polski-B2-2024-02-read-4
+  questionType: multiple_choice
+  questionText: "Luka 2 w tekście „Ukryty skarb Europy”"
+  options: "coraz|im|jeszcze|znacznie"
+  correctAnswer: coraz
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-r4-q3
+  passageRef: certyfikat-polski-B2-2024-02-read-4
+  questionType: multiple_choice
+  questionText: "Luka 3 w tekście „Ukryty skarb Europy”"
+  options: "nastąpił|zjawił się|pojawił się|zawitał"
+  correctAnswer: "pojawił się"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-r4-q4
+  passageRef: certyfikat-polski-B2-2024-02-read-4
+  questionType: multiple_choice
+  questionText: "Luka 4 w tekście „Ukryty skarb Europy”"
+  options: "separujący|oddzielający|wydzielający|odłączający"
+  correctAnswer: "oddzielający"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-r4-q5
+  passageRef: certyfikat-polski-B2-2024-02-read-4
+  questionType: multiple_choice
+  questionText: "Luka 5 w tekście „Ukryty skarb Europy”"
+  options: "zalet|cech|okoliczności|wad"
+  correctAnswer: zalet
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-r4-q6
+  passageRef: certyfikat-polski-B2-2024-02-read-4
+  questionType: multiple_choice
+  questionText: "Luka 6 w tekście „Ukryty skarb Europy”"
+  options: "wybierali|preferowali|opuszczali|omijali"
+  correctAnswer: omijali
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-r4-q7
+  passageRef: certyfikat-polski-B2-2024-02-read-4
+  questionType: multiple_choice
+  questionText: "Luka 7 w tekście „Ukryty skarb Europy”"
+  options: "więc|ostatecznie|jednak|przynajmniej"
+  correctAnswer: jednak
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-r4-q8
+  passageRef: certyfikat-polski-B2-2024-02-read-4
+  questionType: multiple_choice
+  questionText: "Luka 8 w tekście „Ukryty skarb Europy”"
+  options: "zaprzeczył|podkreślił|przekreślił|poradził"
+  correctAnswer: "podkreślił"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-r4-q9
+  passageRef: certyfikat-polski-B2-2024-02-read-4
+  questionType: multiple_choice
+  questionText: "Luka 9 w tekście „Ukryty skarb Europy”"
+  options: "spojrzeć|oglądać|zauważyć|zapomnieć"
+  correctAnswer: "zauważyć"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-r4-q10
+  passageRef: certyfikat-polski-B2-2024-02-read-4
+  questionType: multiple_choice
+  questionText: "Luka 10 w tekście „Ukryty skarb Europy”"
+  options: "stworzony|zbudowany|napisany|założony"
+  correctAnswer: stworzony
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-r5-q1
+  passageRef: certyfikat-polski-B2-2024-02-read-5
+  questionType: matching
+  questionText: "Ta roślina… może paść ofiarą szkodników."
+  options: "A|B|C|D|E"
+  correctAnswer: D
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-r5-q2
+  passageRef: certyfikat-polski-B2-2024-02-read-5
+  questionType: matching
+  questionText: "Ta roślina… może wymagać szczególnych zabiegów, aby przetrwać zimę."
+  options: "A|B|C|D|E"
+  correctAnswer: "C|D|E"
+  pointsQuarter: 12
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-r5-q3
+  passageRef: certyfikat-polski-B2-2024-02-read-5
+  questionType: matching
+  questionText: "Ta roślina… daje zwierzętom schronienie."
+  options: "A|B|C|D|E"
+  correctAnswer: C
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-r5-q4
+  passageRef: certyfikat-polski-B2-2024-02-read-5
+  questionType: matching
+  questionText: "Ta roślina… jest źródłem substancji wspierających nasze zdrowie."
+  options: "A|B|C|D|E"
+  correctAnswer: "A|C"
+  pointsQuarter: 8
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-r5-q5
+  passageRef: certyfikat-polski-B2-2024-02-read-5
+  questionType: matching
+  questionText: "Ta roślina… bywa ekspansywna."
+  options: "A|B|C|D|E"
+  correctAnswer: B
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-r5-q6
+  passageRef: certyfikat-polski-B2-2024-02-read-5
+  questionType: matching
+  questionText: "Ta roślina… dobrze znosi brak podlewania."
+  options: "A|B|C|D|E"
+  correctAnswer: "A|E"
+  pointsQuarter: 8
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
 }

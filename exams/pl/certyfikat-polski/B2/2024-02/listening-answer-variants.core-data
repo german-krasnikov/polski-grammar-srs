@@ -1,0 +1,97 @@
+DSL 1
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-02-l5-q1-v1
+  questionRef: certyfikat-polski-B2-2024-02-l5-q1
+  answer: "Droga się zapadła."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-02-l5-q2-v1
+  questionRef: certyfikat-polski-B2-2024-02-l5-q2
+  answer: labirynt
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-02-l5-q2-v2
+  questionRef: certyfikat-polski-B2-2024-02-l5-q2
+  answer: "podziemne korytarze"
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-02-l5-q2-v3
+  questionRef: certyfikat-polski-B2-2024-02-l5-q2
+  answer: "podziemne tunele"
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-02-l5-q3-v1
+  questionRef: certyfikat-polski-B2-2024-02-l5-q3
+  answer: "Nakazał zamknięcie drogi."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-02-l5-q3-v2
+  questionRef: certyfikat-polski-B2-2024-02-l5-q3
+  answer: "Polecił zamknięcie drogi."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-02-l5-q4-v1
+  questionRef: certyfikat-polski-B2-2024-02-l5-q4
+  answer: "Pozwalała dojechać do drogi ekspresowej."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-02-l5-q4-v2
+  questionRef: certyfikat-polski-B2-2024-02-l5-q4
+  answer: "Pozwalała dostać się do drogi ekspresowej."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-02-l5-q5-v1
+  questionRef: certyfikat-polski-B2-2024-02-l5-q5
+  answer: "Są wściekli na bobry."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-02-l5-q5-v2
+  questionRef: certyfikat-polski-B2-2024-02-l5-q5
+  answer: "Złoszczą się na bobry."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-02-l5-q5-v3
+  questionRef: certyfikat-polski-B2-2024-02-l5-q5
+  answer: "Odgrażają się bobrom."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-02-l5-q6-v1
+  questionRef: certyfikat-polski-B2-2024-02-l5-q6
+  answer: "Ochronę środowiska."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-02-l5-q7-v1
+  questionRef: certyfikat-polski-B2-2024-02-l5-q7
+  answer: "Łamią zakaz wjazdu na drogę."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-02-l5-q7-v2
+  questionRef: certyfikat-polski-B2-2024-02-l5-q7
+  answer: "Łamią zakaz korzystania z drogi."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-02-l5-q7-v3
+  questionRef: certyfikat-polski-B2-2024-02-l5-q7
+  answer: "Dalej korzystają z drogi."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-02-l5-q8-v1
+  questionRef: certyfikat-polski-B2-2024-02-l5-q8
+  answer: "Ponieważ droga jest na obszarze Natura 2000."
+  earnedQuarter: 4
+}

@@ -1,0 +1,73 @@
+DSL 1
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-11-l5-q1-v1
+  questionRef: certyfikat-polski-C1-2022-11-l5-q1
+  answer: "Podczas wiosennego weekendu."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-11-l5-q2-v1
+  questionRef: certyfikat-polski-C1-2022-11-l5-q2
+  answer: "Znalazł osadę w internecie."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-11-l5-q2-v2
+  questionRef: certyfikat-polski-C1-2022-11-l5-q2
+  answer: "Chciał zrobić program w osadzie."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-11-l5-q3-v1
+  questionRef: certyfikat-polski-C1-2022-11-l5-q3
+  answer: "Inków|zamku niedzickiego"
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-11-l5-q3-v2
+  questionRef: certyfikat-polski-C1-2022-11-l5-q3
+  answer: "Inków|zamku w Niedzicy"
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-11-l5-q4-v1
+  questionRef: certyfikat-polski-C1-2022-11-l5-q4
+  answer: "Planował cały dzień."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-11-l5-q4-v2
+  questionRef: certyfikat-polski-C1-2022-11-l5-q4
+  answer: "Robił rozpiskę w Excelu."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-11-l5-q4-v3
+  questionRef: certyfikat-polski-C1-2022-11-l5-q4
+  answer: "Wręczał instrukcje."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-11-l5-q7-v1
+  questionRef: certyfikat-polski-C1-2022-11-l5-q7
+  answer: "Ponieważ telewizja robiła podobne programy później."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-11-l5-q7-v2
+  questionRef: certyfikat-polski-C1-2022-11-l5-q7
+  answer: "Był nowatorski."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-11-l5-q8-v1
+  questionRef: certyfikat-polski-C1-2022-11-l5-q8
+  answer: "Wybierał osoby do programu."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-11-l5-q9-v1
+  questionRef: certyfikat-polski-C1-2022-11-l5-q9
+  answer: "Zrezygnował z palenia."
+  earnedQuarter: 4
+}

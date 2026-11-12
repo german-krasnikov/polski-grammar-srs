@@ -1,0 +1,350 @@
+DSL 1
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l1-q1
+  taskRef: certyfikat-polski-B2-2022-02-listen-1
+  questionType: multiple_choice
+  questionText: "Tematem wiadomości"
+  options: "a) są problemy rolników wynikające z warunków pogodowych.|b) są ubezpieczenia gospodarstw rolnych.|c) jest nowy program wsparcia finansowego dla rolników."
+  correctAnswer: "a) są problemy rolników wynikające z warunków pogodowych."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l1-q2
+  taskRef: certyfikat-polski-B2-2022-02-listen-1
+  questionType: multiple_choice
+  questionText: "W ostatnich latach"
+  options: "a) wzrosła liczba rolników ubiegających się o pomoc finansową.|b) nie każdy rolnik uzyskał rekompensatę z firmy ubezpieczeniowej.|c) dotacje finansowe dla rolników zostały ograniczone."
+  correctAnswer: "b) nie każdy rolnik uzyskał rekompensatę z firmy ubezpieczeniowej."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l1-q3
+  taskRef: certyfikat-polski-B2-2022-02-listen-1
+  questionType: multiple_choice
+  questionText: "Rozmowa dotyczy"
+  options: "a) aktywności fizycznej podczas egzotycznych podróży.|b) profesjonalnego podejścia do uprawiania sportu.|c) poszukiwania własnych sposobów na regenerację."
+  correctAnswer: "c) poszukiwania własnych sposobów na regenerację."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l1-q4
+  taskRef: certyfikat-polski-B2-2022-02-listen-1
+  questionType: multiple_choice
+  questionText: Kobieta
+  options: "a) skarży się, że bieganie jest bardzo wyczerpujące.|b) narzeka, że podczas uprawiania sportu trudno jej myśleć.|c) uważa, że bieganie pozwala jej przezwyciężyć własną słabość."
+  correctAnswer: "c) uważa, że bieganie pozwala jej przezwyciężyć własną słabość."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l1-q5
+  taskRef: certyfikat-polski-B2-2022-02-listen-1
+  questionType: multiple_choice
+  questionText: "Jedna z kobiet martwi się, ponieważ jej syn"
+  options: "a) ma przed nią tajemnice.|b) od wczoraj nie wrócił do domu.|c) zachowuje się agresywnie."
+  correctAnswer: "a) ma przed nią tajemnice."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l1-q6
+  taskRef: certyfikat-polski-B2-2022-02-listen-1
+  questionType: multiple_choice
+  questionText: "Zdaniem drugiej kobiety"
+  options: "a) Adam ma problemy z nadmierną zazdrością.|b) zachowanie Adama było odpowiednie do sytuacji.|c) Adam wpadł w kłopoty, próbując poznać nową dziewczynę."
+  correctAnswer: "b) zachowanie Adama było odpowiednie do sytuacji."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l2-q1
+  taskRef: certyfikat-polski-B2-2022-02-listen-2
+  questionType: true_false
+  questionText: "Zdaniem dziennikarza Słowenia rzadko stanowi cel turystycznych wyjazdów."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l2-q2
+  taskRef: certyfikat-polski-B2-2022-02-listen-2
+  questionType: true_false
+  questionText: "Alpy Kamnickie tylko wizualnie przypominają polskie Tatry."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l2-q3
+  taskRef: certyfikat-polski-B2-2022-02-listen-2
+  questionType: true_false
+  questionText: "Ojstrica jest najwyższym szczytem w Alpach Kamnickich."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l2-q4
+  taskRef: certyfikat-polski-B2-2022-02-listen-2
+  questionType: true_false
+  questionText: "Najwyższe szczyty Polski i Słowenii są zbliżonej wysokości."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l2-q5
+  taskRef: certyfikat-polski-B2-2022-02-listen-2
+  questionType: true_false
+  questionText: "Ponad połowa terytorium Słowenii jest obszarem chronionym."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l2-q6
+  taskRef: certyfikat-polski-B2-2022-02-listen-2
+  questionType: true_false
+  questionText: "W Słowenii żyje więcej gatunków zwierząt niż w Polsce."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l2-q7
+  taskRef: certyfikat-polski-B2-2022-02-listen-2
+  questionType: true_false
+  questionText: "Większa część powierzchni Słowenii jest pokryta lasami."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l2-q8
+  taskRef: certyfikat-polski-B2-2022-02-listen-2
+  questionType: true_false
+  questionText: "Udział terenów leśnych w powierzchni Polski i Słowenii jest podobny."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l3-q1
+  taskRef: certyfikat-polski-B2-2022-02-listen-3
+  questionType: matching
+  questionText: "zarobione pieniądze lokuje w nieruchomości."
+  options: "A|B|C|D|E"
+  correctAnswer: "C|E"
+  pointsQuarter: 8
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l3-q2
+  taskRef: certyfikat-polski-B2-2022-02-listen-3
+  questionType: matching
+  questionText: "na razie nie myśli o zakończeniu kariery zawodowej."
+  options: "A|B|C|D|E"
+  correctAnswer: A
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l3-q3
+  taskRef: certyfikat-polski-B2-2022-02-listen-3
+  questionType: matching
+  questionText: "otrzymała specjalny tytuł od organizacji międzynarodowej."
+  options: "A|B|C|D|E"
+  correctAnswer: C
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l3-q4
+  taskRef: certyfikat-polski-B2-2022-02-listen-3
+  questionType: matching
+  questionText: "uprawiała różne dyscypliny sportowe."
+  options: "A|B|C|D|E"
+  correctAnswer: "A|E"
+  pointsQuarter: 8
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l3-q5
+  taskRef: certyfikat-polski-B2-2022-02-listen-3
+  questionType: matching
+  questionText: "ma wykształcenie związane ze środowiskiem sportowym."
+  options: "A|B|C|D|E"
+  correctAnswer: B
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l3-q6
+  taskRef: certyfikat-polski-B2-2022-02-listen-3
+  questionType: matching
+  questionText: "posiada dyplom zagranicznej uczelni."
+  options: "A|B|C|D|E"
+  correctAnswer: B
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l3-q7
+  taskRef: certyfikat-polski-B2-2022-02-listen-3
+  questionType: matching
+  questionText: "nie zrezygnowała ze sportu pomimo nieszczęśliwego wydarzenia."
+  options: "A|B|C|D|E"
+  correctAnswer: A
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l3-q8
+  taskRef: certyfikat-polski-B2-2022-02-listen-3
+  questionType: matching
+  questionText: "zajmuje się działalnością publicystyczną."
+  options: "A|B|C|D|E"
+  correctAnswer: D
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l4-q1
+  taskRef: certyfikat-polski-B2-2022-02-listen-4
+  questionType: multiple_choice
+  questionText: "Zwiedzanie miasta nauki"
+  options: "a) będzie niemożliwe 10 października.|b) wymaga wykupienia specjalnej karty wstępu.|c) będzie odbywać się na otwartej przestrzeni."
+  correctAnswer: "c) będzie odbywać się na otwartej przestrzeni."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l4-q2
+  taskRef: certyfikat-polski-B2-2022-02-listen-4
+  questionType: multiple_choice
+  questionText: "Wydarzenia festiwalowe"
+  options: "a) wymagają budowy jednej wielkiej sceny.|b) będą pogrupowane według dziedziny nauki.|c) odbędą się po jednej stronie Doliny Rawy."
+  correctAnswer: "b) będą pogrupowane według dziedziny nauki."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l4-q3
+  taskRef: certyfikat-polski-B2-2022-02-listen-4
+  questionType: multiple_choice
+  questionText: "Strefa Lema"
+  options: "a) umożliwi obserwację gwiazdozbiorów na niebie.|b) zostanie umieszczona we wschodniej części Katowic.|c) wciąż jeszcze nie ma wyznaczonej lokalizacji."
+  correctAnswer: "b) zostanie umieszczona we wschodniej części Katowic."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l4-q4
+  taskRef: certyfikat-polski-B2-2022-02-listen-4
+  questionType: multiple_choice
+  questionText: "Wybór Doliny Rawy"
+  options: "a) to próba zapewnienia bezpieczeństwa uczestnikom.|b) może powodować pewne zagrożenia dla uczestników.|c) jest kwestią zupełnie przypadkowej decyzji."
+  correctAnswer: "a) to próba zapewnienia bezpieczeństwa uczestnikom."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l4-q5
+  taskRef: certyfikat-polski-B2-2022-02-listen-4
+  questionType: multiple_choice
+  questionText: "Festiwal ma na celu zwrócenie uwagi na to, w jaki sposób"
+  options: "a) miasto walczy z degradacją terenów nadrzecznych.|b) mieszkańcy regionu mogą włączyć się w akcje ekologiczne.|c) nauka może pomóc zrewitalizować zniszczone tereny."
+  correctAnswer: "c) nauka może pomóc zrewitalizować zniszczone tereny."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l4-q6
+  taskRef: certyfikat-polski-B2-2022-02-listen-4
+  questionType: multiple_choice
+  questionText: "Tematy związane z sytuacją epidemiczną"
+  options: "a) są obecne na festiwalu już od kilku lat.|b) są dowodem na związek nauki z życiem człowieka.|c) nie będą poruszane podczas tej edycji festiwalu."
+  correctAnswer: "b) są dowodem na związek nauki z życiem człowieka."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l4-q7
+  taskRef: certyfikat-polski-B2-2022-02-listen-4
+  questionType: multiple_choice
+  questionText: "Współpraca miasta ze światem nauki"
+  options: "a) umożliwi otwarcie kolejnej uczelni w Katowicach.|b) była możliwa dzięki udziałowi uczelni spoza regionu.|c) umożliwiła metamorfozę Katowic."
+  correctAnswer: "c) umożliwiła metamorfozę Katowic."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l4-q8
+  taskRef: certyfikat-polski-B2-2022-02-listen-4
+  questionType: multiple_choice
+  questionText: "Tegoroczna formuła festiwalu"
+  options: "a) zakłada organizację części wydarzeń w sieci.|b) rezygnuje z wydarzeń innych niż plenerowe.|c) została już wypróbowana przy poprzednich edycjach."
+  correctAnswer: "a) zakłada organizację części wydarzeń w sieci."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l5-q1
+  taskRef: certyfikat-polski-B2-2022-02-listen-5
+  questionType: fill_gap
+  questionText: "Z jakiej okazji zebrano nagrania?"
+  correctAnswer: "100. rocznica urodzin kompozytora"
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l5-q2
+  taskRef: certyfikat-polski-B2-2022-02-listen-5
+  questionType: fill_gap
+  questionText: "Ile kosztuje dostęp do zgromadzonych materiałów audio i wideo?"
+  correctAnswer: "jest bezpłatny"
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l5-q3
+  taskRef: certyfikat-polski-B2-2022-02-listen-5
+  questionType: fill_gap
+  questionText: "Co, oprócz nagrań, można znaleźć na stronie?"
+  correctAnswer: "opisy|fotografie|filmy biograficzne|filmy dokumentalne|reportaże|playlisty"
+  pointsQuarter: 4
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 2
+  gradingMode: open_manual
+  requiredSelections: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l5-q4
+  taskRef: certyfikat-polski-B2-2022-02-listen-5
+  questionType: fill_gap
+  questionText: "Gdzie znaleziono partytury ołówkowe?"
+  correctAnswer: "za olbrzymią szafą"
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l5-q5
+  taskRef: certyfikat-polski-B2-2022-02-listen-5
+  questionType: fill_gap
+  questionText: "Jakie informacje mieszczą się na osi czasu?"
+  correctAnswer: "dorobek i wydarzenia z życia Andrzeja Panufnika"
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l5-q6
+  taskRef: certyfikat-polski-B2-2022-02-listen-5
+  questionType: fill_gap
+  questionText: "Z biografiami ilu polskich kompozytorów jest łączone życie Andrzeja Panufnika?"
+  correctAnswer: trzech
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l5-q7
+  taskRef: certyfikat-polski-B2-2022-02-listen-5
+  questionType: fill_gap
+  questionText: "Która instytucja przekazała większość nagrań?"
+  correctAnswer: "Polskie Radio"
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-l5-q8
+  taskRef: certyfikat-polski-B2-2022-02-listen-5
+  questionType: fill_gap
+  questionText: "Co to jest Ruch Muzyczny?"
+  correctAnswer: "miesięcznik"
+  pointsQuarter: 4
+  gradingMode: open_manual
+}

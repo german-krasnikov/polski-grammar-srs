@@ -1,0 +1,37 @@
+DSL 1
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-03-l5-q1-v1
+  questionRef: certyfikat-polski-C1-2022-03-l5-q1
+  answer: "Nie znosił zwierząt w mieszkaniu."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-03-l5-q1-v2
+  questionRef: certyfikat-polski-C1-2022-03-l5-q1
+  answer: "Nie tolerował zwierząt w mieszkaniu."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-03-l5-q3-v1
+  questionRef: certyfikat-polski-C1-2022-03-l5-q3
+  answer: "Oszukał ojca."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-03-l5-q4-v1
+  questionRef: certyfikat-polski-C1-2022-03-l5-q4
+  answer: "Na parapecie."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-03-l5-q6-v1
+  questionRef: certyfikat-polski-C1-2022-03-l5-q6
+  answer: "Jego ojciec też zaczął hodować rybkę."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-03-l5-q7-v1
+  questionRef: certyfikat-polski-C1-2022-03-l5-q7
+  answer: "Chciał, żeby został prawnikiem."
+  earnedQuarter: 4
+}

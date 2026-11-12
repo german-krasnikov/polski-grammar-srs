@@ -1,0 +1,51 @@
+DSL 1
+WRITING_TASK {
+  taskId: certyfikat-polski-C1-2022-03-write-i-a
+  examRef: certyfikat-polski-C1-2022-03
+  taskNumber: 1
+  setId: I
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III"
+  promptText: "Jest Pani/Pan prezesem Fundacji „Uśmiech” działającej na rzecz chorych dzieci. Chce Pani/Pan pomóc w wyposażeniu sali zabaw dla małych pacjentów jednego ze szpitali. Proszę napisać w tej sprawie list do dyrekcji placówki."
+  wordLimit: 180
+  genre: letter
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-C1-2022-03-write-i-b
+  examRef: certyfikat-polski-C1-2022-03
+  taskNumber: 1
+  setId: I
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III"
+  promptText: "Firma wydawnicza „Dookoła Świata” wydała książkę Warto zobaczyć w Polsce. Proszę napisać recenzję tej publikacji przeznaczoną na polskojęzyczną stronę internetową wydawnictwa."
+  wordLimit: 220
+  genre: review
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-C1-2022-03-write-ii-a
+  examRef: certyfikat-polski-C1-2022-03
+  taskNumber: 2
+  setId: II
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III"
+  promptText: "Wzięła Pani / Wziął Pan udział w kongresie „Na ratunek ginącym zwierzętom”. Jedno z polskich czasopism poświęconych tematyce ekologicznej poprosiło o sprawozdanie z tego spotkania – proszę je napisać."
+  wordLimit: 200
+  genre: report
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-C1-2022-03-write-ii-b
+  examRef: certyfikat-polski-C1-2022-03
+  taskNumber: 2
+  setId: II
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III"
+  promptText: "Proszę napisać przemówienie uzasadniające wybór laureata, które wygłosi Pani/Pan w imieniu jury plebiscytu podczas ceremonii przyznania tytułu Człowieka Roku 2021."
+  wordLimit: 200
+  genre: speech
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-C1-2022-03-write-iii-a
+  examRef: certyfikat-polski-C1-2022-03
+  taskNumber: 3
+  setId: III
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III"
+  promptText: "„Śmiech to zdolność człowieka do obrony przed światem, przed sobą. Pozbawić go tej zdolności, to uczynić bezbronnym” (Wiesław Myśliwski). Proszę napisać esej zainspirowany powyższym cytatem."
+  wordLimit: 400
+  genre: essay
+}

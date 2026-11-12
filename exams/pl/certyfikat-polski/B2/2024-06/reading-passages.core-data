@@ -1,29 +1,40 @@
 DSL 1
 READING_PASSAGE {
-  passageId: "certyfikat-polski-B2-2024-06-read-6"
-  examRef: "certyfikat-polski-B2-2024-06"
-  taskNumber: 6
-  instruction: "TODO: fill from PDF"
-  text: "TODO: fill from PDF"
+  passageId: certyfikat-polski-B2-2024-06-read-1
+  examRef: certyfikat-polski-B2-2024-06
+  taskNumber: 1
+  instruction: "I. Proszę przeczytać fragmenty tekstów i – zgodnie z przykładem – zaznaczyć właściwą odpowiedź. "
+  text: "PRZYKŁAD Jako że tej zimy na stokach nie brakuje śniegu, Krystian Bryła z Górskiego Ochotniczego Pogotowia Ratunkowego przypomina narciarzom o podstawowych zasadach bezpieczeństwa. Jedną z nich jest odpowiednia rozgrzewka. Na podstawie: https://radio.katowice.pl/zobacz,67581,Wielki-poczatek-ferii-z-Radiem-Katowice.html Z tekstu dowiadujemy się, że a) narciarze powinni skontrolować swój stan zdrowia przed jazdą. b) w tym sezonie w górach panują sprzyjające warunki narciarskie. c) ratownicy górscy sprawdzają, czy narciarze mają odpowiedni sprzęt.  1. Podróżni i kierowcy muszą liczyć się jutro z utrudnieniami na drogach dojazdowych do lotniska. Będą one zamknięte z powodu strajku rolników. Według komendanta lokalnej policji, która będzie pilnować blokady, protest potrwa przynajmniej do godziny 15:00.  2. Obsługa pociągów PKP regularnie kontroluje wagony, a wszystkie znalezione w nich rzeczy są przekazywane do wyznaczonych punktów. W ubiegłym roku w składach zebrano ponad 13 tys. przedmiotów. Pasażerowie najczęściej zostawiają w pociągach małą elektronikę, np. ładowarki do telefonów oraz części garderoby – czapki czy rękawiczki.  3. Jeszcze w tym roku mieszkańcy Katowic będą mogli korzystać z pierwszej velostrady, czyli autostrady dla rowerów. Odcinek będzie mieć prawie 4,5 km długości i połączy poszczególne dzielnice. Nie będzie to jednak infrastruktura rekreacyjna, ale służąca skomunikowaniu miasta.  4. Policja identyfikuje sprawców zaśmiecania lasów. Tym, którzy wywożą odpady do lasu, grozi areszt lub mandat w wysokości kilku tysięcy złotych. Śmieci pozostawione w lesie grożą zatruciem gleby, wody i otruciem zwierząt, a tworzywa sztuczne mogą rozkładać się przez nawet kilkaset lat.  5. Obrazy Krzysztofa Kopcia gościły w Galerii Centrum już dwukrotnie, za każdym razem budząc zainteresowanie publiczności. Na wernisażu pojawili się reprezentanci lokalnego świata kultury oraz krytycy, którzy docenili talent malarza."
 }
 READING_PASSAGE {
-  passageId: "certyfikat-polski-B2-2024-06-read-7"
-  examRef: "certyfikat-polski-B2-2024-06"
-  taskNumber: 7
-  instruction: "TODO: fill from PDF"
-  text: "TODO: fill from PDF"
+  passageId: certyfikat-polski-B2-2024-06-read-2
+  examRef: certyfikat-polski-B2-2024-06
+  taskNumber: 2
+  title: "Pan w cylindrze"
+  instruction: "II. Proszę przeczytać tekst, a następnie – jak w przykładzie – zaznaczyć: TAK – gdy zdanie jest zgodne z tekstem; NIE – gdy nie jest zgodne z tekstem; BI – gdy w tekście brakuje informacji na dany temat."
+  text: "Pan w cylindrze Fredowi Astaire’owi daleko było do typowego filmowego gwiazdora: był drobnym, chudym mężczyzną, z dużymi uszami, szpiczastym podbródkiem i szerokim czołem. Jego jedyną szansą na zdobycie dziewczyny było zaproszenie jej na parkiet, gdyż tam tańcem uwodził każdą kobietę. Astaire potrafił jednak oczarować nie tylko tańcem, ale także śpiewem. Dziś komedie z jego udziałem mogą wydawać się zbyt naiwne, jednak w latach 30. XX wieku odgrywały rolę terapeutyczną. W Stanach Zjednoczonych wspomnienie wielkiego kryzysu wciąż było świeże, więc lekkie, zabawne historie pozwalały zapomnieć o szarej codzienności. czerwiec 2024 W filmach Fred był zwykle nerwowym i irytującym typem, ale gdy tylko porywał partnerkę do tańca, oczarowywał i ją, i widzów. W dawnych filmach uwagę zwracały także stroje, rekwizyty, efektowna scenografia przygotowana w całości w studiu. Śpiew aktora zapisany na taśmach filmowych nie brzmiał zbyt dobrze. Powodem tego była niska jakość dźwięku ówczesnych produkcji. By w pełni docenić delikatny, lekki i łagodny głos Astaire’a, należy wysłuchać utworów nagranych w studiu. Repertuar Amerykanina to nie tylko ballady. Publiczności znany był wesoły kawałek pt. „Panowie w cylindrach” o młodym kawalerze, który cieszy się życiem. Astaire tańczy w nim z taką energią, że prawie demoluje apartament. Tancerz inspirował wielu, ale chyba Michael Jackson najlepiej oddał mu cześć. Jeden z występów Astaire’a stał się inspiracją dla teledysku Jacksona. Młodszy kolega „pożyczył” od tancerza biały garnitur, charakterystyczną scenerię i choreografię. Klip upamiętniający Freda Astaire’a ukazał się w 1988 roku – rok po śmierci „pana w cylindrze”.  PRZYKŁAD Fred Astaire nie przypominał wyglądem typowych gwiazdorów kina. X"
 }
 READING_PASSAGE {
-  passageId: "certyfikat-polski-B2-2024-06-read-8"
-  examRef: "certyfikat-polski-B2-2024-06"
-  taskNumber: 8
-  instruction: "TODO: fill from PDF"
-  text: "TODO: fill from PDF"
+  passageId: certyfikat-polski-B2-2024-06-read-3
+  examRef: certyfikat-polski-B2-2024-06
+  taskNumber: 3
+  title: "Czy świat bez kawy to nasza przyszłość?"
+  instruction: "III. Proszę przeczytać tekst i – zgodnie z przykładem – dopasować usunięte z niego fragmenty (A–K). "
+  text: "Czy świat bez kawy to nasza przyszłość? Kawa jest jednym z najbardziej lubianych napojów na świecie i [__B__]PRZYKŁAD . Jednak przyszłość jej upraw staje dzisiaj pod znakiem zapytania. W 2009 roku Organizacja Narodów Zjednoczonych do spraw Wyżywienia i Rolnictwa (FAO) wymieniała kawę wśród [_____]1 , które mogą wkrótce zniknąć z naszego menu. Zwrócono uwagę, że światowe rolnictwo stawia na modele uprawy [_____]2 , przez co zmniejsza się różnorodność gatunkowa. Rośliny tracą odporność na choroby oraz szkodniki, a w konsekwencji stają się bardziej wrażliwe na [_____]3. Już dzisiaj kawowcom zagrażają susze, z kolei [_____]4 narażone są na patogeny, w tym choroby grzybowe. Kawowiec wymaga bardzo specyficznych stałych warunków: żyznej gleby, [_____]5 i niższej temperatury w nocy. Warunki [_____]6 w strefie międzyzwrotnikowej, ale i tam pogoda staje się coraz mniej przewidywalna. Niewielkie [_____]7 i zakwitanie kawowca, a w konsekwencji uniemożliwić mu owocowanie. Dzikie odmiany kawowców posiadają zbiór genów gwarantujący im odporność na choroby, szkodniki i suszę. Niestety, choć różnorodność genetyczna rośliny się zmniejsza, [_____]8 nie są przechowywane w żadnym banku nasion. Tymczasem przejście na bardziej odporne odmiany byłoby najrozsądniejszą opcją [_____]9 . Liczne badania wskazują, że w połowie XXI wieku możemy spodziewać się [_____]10 . Czy jesteśmy gotowi na codzienne życie bez kawy?"
 }
 READING_PASSAGE {
-  passageId: "certyfikat-polski-B2-2024-06-read-9"
-  examRef: "certyfikat-polski-B2-2024-06"
-  taskNumber: 9
-  instruction: "TODO: fill from PDF"
-  text: "TODO: fill from PDF"
+  passageId: certyfikat-polski-B2-2024-06-read-4
+  examRef: certyfikat-polski-B2-2024-06
+  taskNumber: 4
+  title: "Góralu, czy nie żal ci śniegu?"
+  instruction: "IV. Proszę – zgodnie z przykładem – połączyć wypowiedzi z kolumny I z fragmentami tekstu z kolumny II. Odpowiedzi proszę wpisać do tabeli. "
+  text: "Góralu, czy nie żal ci śniegu?  PRZYKŁAD Diametralny wzrost → C"
+}
+READING_PASSAGE {
+  passageId: certyfikat-polski-B2-2024-06-read-5
+  examRef: certyfikat-polski-B2-2024-06
+  taskNumber: 5
+  title: "Miejsce dla seniorów w przestrzeni obywatelskiej"
+  instruction: "V. Proszę – zgodnie z przykładem – uzupełnić tekst, podkreślając najlepszą spośród podanych możliwości. "
+  text: "Miejsce dla seniorów w przestrzeni obywatelskiej Na jednej z polskich państwowych uczelni (zrobiono, wytworzono, wynaleziono, powołano)PRZYKŁAD Centrum Badawcze Społecznej Aktywizacji Seniorów. Powstało ono w odpowiedzi na [____1____] zmiany demograficzne. Stoimy przed prognozami mocno starzejącego się społeczeństwa w Polsce i na świecie. Trendy te [____2____] za sobą poważne zmiany ekonomiczne, społeczne, psychologiczne oraz polityczne. Nie mają one wyłącznie charakteru ilościowego, [____3____] są tutaj również zmiany jakościowe. Stereotypowy senior to [____4____] człowiek o lasce. Jednak rozwój medycyny i powszechny [____5____] do różnych form aktywności ruchowej sprawiają, że obecnie ludzie starsi są [____6____] zdrowsi niż bywało to kiedyś oraz wciąż chętni do wykonywania dodatkowej pracy. Głównymi założeniami Centrum są: aktywizacja społeczna obywateli 65+ oraz dbanie o ich kondycję fizyczną i psychiczną. Jednostka [____7____] z wieloma domami kultury i fundacjami, organizuje szkolenia. Największym zainteresowaniem seniorów [____8____] warsztaty o tematyce psychologicznej wzmacniające poczucie własnej wartości oraz uczące radzenia sobie z trudnymi sytuacjami, w tym z samotnością. [____9____] wsparcia psychologicznego Centrum oferuje seniorom również kursy podnoszące kompetencje cyfrowe oraz zajęcia [____10____] kulturze regionu."
 }

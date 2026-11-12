@@ -1,19 +1,61 @@
 DSL 1
 WRITING_TASK {
-  taskId: "certyfikat-polski-B2-2024-02-write-12"
-  examRef: "certyfikat-polski-B2-2024-02"
-  taskNumber: 12
-  instruction: "TODO: fill from PDF"
-  promptText: "TODO: fill from PDF"
-  wordLimit: 200
+  taskId: certyfikat-polski-B2-2024-02-write-i-a
+  examRef: certyfikat-polski-B2-2024-02
+  taskNumber: 1
+  setId: I
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. W każdym zestawie są dwa zadania: a i b. Należy wybrać tylko jeden zestaw i wykonać obydwa zadania (a i b) z danego zestawu, zgodnie z poleceniami, np.: • zestaw I – zadania a i b z zestawu I lub • zestaw II – zadania a i b z zestawu II lub • zestaw III – zadania a i b z zestawu III"
+  promptText: "Proszę napisać e-mail do swojej polskiej przyjaciółki / swojego polskiego przyjaciela i opisać w nim swój nowy samochód / swój nowy sprzęt kuchenny."
+  wordLimit: 120
+  genre: email
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2024-02-write-i-b
+  examRef: certyfikat-polski-B2-2024-02
+  taskNumber: 1
+  setId: I
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. W każdym zestawie są dwa zadania: a i b. Należy wybrać tylko jeden zestaw i wykonać obydwa zadania (a i b) z danego zestawu, zgodnie z poleceniami, np.: • zestaw I – zadania a i b z zestawu I lub • zestaw II – zadania a i b z zestawu II lub • zestaw III – zadania a i b z zestawu III"
+  promptText: "Współpracuje Pani/Pan z polską gazetą. Proszę napisać dla niej sprawozdanie z dwudniowej wystawy zoologicznej / targów zabawek i artykułów dla dzieci."
+  wordLimit: 180
+  genre: report
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2024-02-write-ii-a
+  examRef: certyfikat-polski-B2-2024-02
+  taskNumber: 2
+  setId: II
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. W każdym zestawie są dwa zadania: a i b. Należy wybrać tylko jeden zestaw i wykonać obydwa zadania (a i b) z danego zestawu, zgodnie z poleceniami, np.: • zestaw I – zadania a i b z zestawu I lub • zestaw II – zadania a i b z zestawu II lub • zestaw III – zadania a i b z zestawu III"
+  promptText: "Stara się Pani/Pan o pracę jako opiekun osób starszych w „Domu Seniora” w jednej z polskich miejscowości. Proszę napisać list motywacyjny."
+  wordLimit: 150
+  genre: application
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2024-02-write-ii-b
+  examRef: certyfikat-polski-B2-2024-02
+  taskNumber: 2
+  setId: II
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. W każdym zestawie są dwa zadania: a i b. Należy wybrać tylko jeden zestaw i wykonać obydwa zadania (a i b) z danego zestawu, zgodnie z poleceniami, np.: • zestaw I – zadania a i b z zestawu I lub • zestaw II – zadania a i b z zestawu II lub • zestaw III – zadania a i b z zestawu III"
+  promptText: "Zaprosiła Pani / Zaprosił Pan na jednodniową wycieczkę po znanym polskim mieście ważnych dla Pani/Pana gości. Nie była Pani zadowolona / Nie był Pan zadowolony ani z programu, ani z usług przewodnika. Proszę napisać skargę do dyrekcji biura podróży."
+  wordLimit: 150
   genre: letter
 }
 WRITING_TASK {
-  taskId: "certyfikat-polski-B2-2024-02-write-13"
-  examRef: "certyfikat-polski-B2-2024-02"
-  taskNumber: 13
-  instruction: "TODO: fill from PDF"
-  promptText: "TODO: fill from PDF"
-  wordLimit: 200
-  genre: description
+  taskId: certyfikat-polski-B2-2024-02-write-iii-a
+  examRef: certyfikat-polski-B2-2024-02
+  taskNumber: 3
+  setId: III
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. W każdym zestawie są dwa zadania: a i b. Należy wybrać tylko jeden zestaw i wykonać obydwa zadania (a i b) z danego zestawu, zgodnie z poleceniami, np.: • zestaw I – zadania a i b z zestawu I lub • zestaw II – zadania a i b z zestawu II lub • zestaw III – zadania a i b z zestawu III"
+  promptText: "Proszę napisać zaproszenie dla swoich polskich koleżanek i kolegów z pracy na wystawę fotograficzną „Najciekawsze miejsca w moim kraju”, którą Pani/Pan organizuje."
+  wordLimit: 30
+  genre: invitation
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2024-02-write-iii-b
+  examRef: certyfikat-polski-B2-2024-02
+  taskNumber: 3
+  setId: III
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. W każdym zestawie są dwa zadania: a i b. Należy wybrać tylko jeden zestaw i wykonać obydwa zadania (a i b) z danego zestawu, zgodnie z poleceniami, np.: • zestaw I – zadania a i b z zestawu I lub • zestaw II – zadania a i b z zestawu II lub • zestaw III – zadania a i b z zestawu III"
+  promptText: "Praca zdalna otworzyła okno na świat i dała wiele możliwości. Niektórych jednak nie satysfakcjonuje – widzą w niej więcej wad niż zalet. Jakie jest Pani/Pana zdanie na ten temat? Proszę napisać tekst argumentacyjny (rozprawkę), w którym wyrazi Pani/Pan swoją opinię."
+  wordLimit: 270
+  genre: argument
 }

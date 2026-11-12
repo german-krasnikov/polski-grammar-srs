@@ -1,226 +1,343 @@
 DSL 1
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-06-lq-1"
-  taskRef: "certyfikat-polski-B2-2024-06-listen-1"
+  questionId: certyfikat-polski-B2-2024-06-l1-q1
+  taskRef: certyfikat-polski-B2-2024-06-listen-1
   questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionText: "Dziewczyna rozmawia"
+  options: "a) ze swoim ojcem.|b) z trenerem.|c) z nauczycielem angielskiego."
+  correctAnswer: "b) z trenerem."
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-06-lq-2"
-  taskRef: "certyfikat-polski-B2-2024-06-listen-1"
+  questionId: certyfikat-polski-B2-2024-06-l1-q2
+  taskRef: certyfikat-polski-B2-2024-06-listen-1
   questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionText: "Martyna obawia się, że"
+  options: "a) nie jest jeszcze gotowa na proponowany krok.|b) nie uda jej się przekonać rodziców.|c) nie poradzi sobie na egzaminie z angielskiego."
+  correctAnswer: "a) nie jest jeszcze gotowa na proponowany krok."
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-06-lq-3"
-  taskRef: "certyfikat-polski-B2-2024-06-listen-1"
+  questionId: certyfikat-polski-B2-2024-06-l1-q3
+  taskRef: certyfikat-polski-B2-2024-06-listen-1
   questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionText: "Głównym tematem rozmowy"
+  options: "a) są warunki klimatyczne w różnych porach roku.|b) jest sposób radzenia sobie z nadmiernym poceniem się.|c) jest dobór odpowiednich kosmetyków pielęgnacyjnych."
+  correctAnswer: "c) jest dobór odpowiednich kosmetyków pielęgnacyjnych."
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-06-lq-4"
-  taskRef: "certyfikat-polski-B2-2024-06-listen-1"
+  questionId: certyfikat-polski-B2-2024-06-l1-q4
+  taskRef: certyfikat-polski-B2-2024-06-listen-1
   questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionText: "Opinie wygłaszane przez kobietę"
+  options: "a) spowodowały zdenerwowanie mężczyzny.|b) były dla mężczyzny czymś oczywistym.|c) są dla mężczyzny sporym zaskoczeniem."
+  correctAnswer: "c) są dla mężczyzny sporym zaskoczeniem."
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-06-lq-5"
-  taskRef: "certyfikat-polski-B2-2024-06-listen-1"
+  questionId: certyfikat-polski-B2-2024-06-l1-q5
+  taskRef: certyfikat-polski-B2-2024-06-listen-1
   questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionText: "Audycja dotyczy"
+  options: "a) sposobu aktywnego spędzania czasu z dziećmi.|b) przyczyn unikania przez dzieci niektórych aktywności.|c) skomplikowanych relacji dziecka z rodzicem."
+  correctAnswer: "b) przyczyn unikania przez dzieci niektórych aktywności."
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-06-lq-6"
-  taskRef: "certyfikat-polski-B2-2024-06-listen-2"
+  questionId: certyfikat-polski-B2-2024-06-l1-q6
+  taskRef: certyfikat-polski-B2-2024-06-listen-1
   questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionText: "Kobieta uważa, że w opisywanym przypadku"
+  options: "a) należy spróbować znaleźć przyczynę problemu.|b) nie ma sensu podejmować żadnych działań.|c) najlepiej poczekać, aż dziecko urośnie."
+  correctAnswer: "a) należy spróbować znaleźć przyczynę problemu."
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-06-lq-7"
-  taskRef: "certyfikat-polski-B2-2024-06-listen-2"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2024-06-l2-q1
+  taskRef: certyfikat-polski-B2-2024-06-listen-2
+  questionType: true_false
+  questionText: "W dzień wagarowicza uczniowie wszystkich szkół we Wrocławiu spotykają się nad rzeką Odrą."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-06-lq-8"
-  taskRef: "certyfikat-polski-B2-2024-06-listen-2"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2024-06-l2-q2
+  taskRef: certyfikat-polski-B2-2024-06-listen-2
+  questionType: true_false
+  questionText: "Uczniom zaproponowano alternatywę dla tradycyjnego topienia marzanny."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-06-lq-9"
-  taskRef: "certyfikat-polski-B2-2024-06-listen-2"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2024-06-l2-q3
+  taskRef: certyfikat-polski-B2-2024-06-listen-2
+  questionType: true_false
+  questionText: "Młodzież mogła pływać po Odrze kajakami."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-06-lq-10"
-  taskRef: "certyfikat-polski-B2-2024-06-listen-2"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2024-06-l2-q4
+  taskRef: certyfikat-polski-B2-2024-06-listen-2
+  questionType: true_false
+  questionText: "Zorganizowana akcja rozwijała wśród uczniów m.in. umiejętność współpracy."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-06-lq-11"
-  taskRef: "certyfikat-polski-B2-2024-06-listen-3"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2024-06-l2-q5
+  taskRef: certyfikat-polski-B2-2024-06-listen-2
+  questionType: true_false
+  questionText: "Popularność akcji w tym roku zaskoczyła organizatorów."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-06-lq-12"
-  taskRef: "certyfikat-polski-B2-2024-06-listen-3"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2024-06-l2-q6
+  taskRef: certyfikat-polski-B2-2024-06-listen-2
+  questionType: true_false
+  questionText: "Chłopak zmienił swoje plany, ponieważ obawiał się konsekwencji."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-06-lq-13"
-  taskRef: "certyfikat-polski-B2-2024-06-listen-3"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2024-06-l2-q7
+  taskRef: certyfikat-polski-B2-2024-06-listen-2
+  questionType: true_false
+  questionText: "Dzień Wagarowicza jest świętem powszechnie akceptowanym przez władze szkolne."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-06-lq-14"
-  taskRef: "certyfikat-polski-B2-2024-06-listen-3"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2024-06-l2-q8
+  taskRef: certyfikat-polski-B2-2024-06-listen-2
+  questionType: true_false
+  questionText: "Podczas rejsów po Odrze można zobaczyć miasto z innej perspektywy."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-06-lq-15"
-  taskRef: "certyfikat-polski-B2-2024-06-listen-3"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2024-06-l3-q1
+  taskRef: certyfikat-polski-B2-2024-06-listen-3
+  questionType: matching
+  questionText: "Pobyt na niej możliwy jest tylko w określonych porach."
+  options: "A|B|C|D"
+  correctAnswer: C
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-06-lq-16"
-  taskRef: "certyfikat-polski-B2-2024-06-listen-4"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2024-06-l3-q2
+  taskRef: certyfikat-polski-B2-2024-06-listen-3
+  questionType: matching
+  questionText: "Z wizyty na tej plaży będą zadowoleni miłośnicy zwierząt morskich lub lądowych."
+  options: "A|B|C|D"
+  correctAnswer: "A|C"
+  pointsQuarter: 8
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-06-lq-17"
-  taskRef: "certyfikat-polski-B2-2024-06-listen-4"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2024-06-l3-q3
+  taskRef: certyfikat-polski-B2-2024-06-listen-3
+  questionType: matching
+  questionText: "Warunki pogodowe w różnych jej częściach bywają odmienne."
+  options: "A|B|C|D"
+  correctAnswer: D
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-06-lq-18"
-  taskRef: "certyfikat-polski-B2-2024-06-listen-4"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2024-06-l3-q4
+  taskRef: certyfikat-polski-B2-2024-06-listen-3
+  questionType: matching
+  questionText: "Nie znajdziemy na niej piasku."
+  options: "A|B|C|D"
+  correctAnswer: A
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-06-lq-19"
-  taskRef: "certyfikat-polski-B2-2024-06-listen-4"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2024-06-l3-q5
+  taskRef: certyfikat-polski-B2-2024-06-listen-3
+  questionType: matching
+  questionText: "Niewiele brakowało, a zostałaby zniszczona przez odwiedzających."
+  options: "A|B|C|D"
+  correctAnswer: B
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-06-lq-20"
-  taskRef: "certyfikat-polski-B2-2024-06-listen-4"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2024-06-l3-q6
+  taskRef: certyfikat-polski-B2-2024-06-listen-3
+  questionType: matching
+  questionText: "Kształt tej plaży nieustannie się zmienia."
+  options: "A|B|C|D"
+  correctAnswer: D
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-06-lq-21"
-  taskRef: "certyfikat-polski-B2-2024-06-listen-5"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2024-06-l3-q7
+  taskRef: certyfikat-polski-B2-2024-06-listen-3
+  questionType: matching
+  questionText: "Niegdyś dostęp do niej był możliwy również drogą lądową."
+  options: "A|B|C|D"
+  correctAnswer: C
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-06-lq-22"
-  taskRef: "certyfikat-polski-B2-2024-06-listen-5"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2024-06-l3-q8
+  taskRef: certyfikat-polski-B2-2024-06-listen-3
+  questionType: matching
+  questionText: "Znajduje się ona na obszarze objętym szczególną ochroną."
+  options: "A|B|C|D"
+  correctAnswer: "B|C"
+  pointsQuarter: 8
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-06-lq-23"
-  taskRef: "certyfikat-polski-B2-2024-06-listen-5"
+  questionId: certyfikat-polski-B2-2024-06-l4-q1
+  taskRef: certyfikat-polski-B2-2024-06-listen-4
   questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionText: "Dzięki piosence zespołu Lady Pank klub Maxim"
+  options: "a) zmienił profil swojej działalności.|b) stał się znany w Trójmieście.|c) zasłynął również poza Trójmiastem."
+  correctAnswer: "c) zasłynął również poza Trójmiastem."
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-06-lq-24"
-  taskRef: "certyfikat-polski-B2-2024-06-listen-5"
+  questionId: certyfikat-polski-B2-2024-06-l4-q2
+  taskRef: certyfikat-polski-B2-2024-06-listen-4
   questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionText: "Michał Antoniszyn"
+  options: "a) urodził się w latach 60. XX wieku.|b) mógł się pochwalić stopniem naukowym.|c) był posiadaczem ponad 40 lokali."
+  correctAnswer: "b) mógł się pochwalić stopniem naukowym."
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-06-lq-25"
-  taskRef: "certyfikat-polski-B2-2024-06-listen-5"
+  questionId: certyfikat-polski-B2-2024-06-l4-q3
+  taskRef: certyfikat-polski-B2-2024-06-listen-4
   questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionText: "Wyposażenie lokalu Maxim"
+  options: "a) było charakterystyczne dla czasów Polski Ludowej.|b) nawiązywało do nadmorskiego położenia klubu.|c) łączyło w sobie luksus i zamiłowanie do sztuki."
+  correctAnswer: "c) łączyło w sobie luksus i zamiłowanie do sztuki."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-l4-q4
+  taskRef: certyfikat-polski-B2-2024-06-listen-4
+  questionType: multiple_choice
+  questionText: "W Maximie"
+  options: "a) ceny napojów nie należały do niskich.|b) można było zarobić średnią krajową pensję.|c) oferowano niewiele rodzajów drinków."
+  correctAnswer: "a) ceny napojów nie należały do niskich."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-l4-q5
+  taskRef: certyfikat-polski-B2-2024-06-listen-4
+  questionType: multiple_choice
+  questionText: "Pracownicy Służby Bezpieczeństwa"
+  options: "a) odwiedzali lokal jako goście.|b) pilnowali bezpieczeństwa w klubie.|c) szukali w Maximie przestępców."
+  correctAnswer: "a) odwiedzali lokal jako goście."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-l4-q6
+  taskRef: certyfikat-polski-B2-2024-06-listen-4
+  questionType: multiple_choice
+  questionText: "Uważa się, że Nikodem Skotarczak"
+  options: "a) przepracował w klubie Maxim 19 lat.|b) zakończył współpracę z lokalem w latach 70.|c) jako nastolatek ochraniał klub Maxim."
+  correctAnswer: "c) jako nastolatek ochraniał klub Maxim."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-l4-q7
+  taskRef: certyfikat-polski-B2-2024-06-listen-4
+  questionType: multiple_choice
+  questionText: "Zdaniem Michała Antoniszyna Skotarczak nie mógł pracować w Maximie"
+  options: "a) ze względu na swój nazbyt młody wiek.|b) ponieważ nie miał odpowiednich warunków fizycznych.|c) z powodu towarzyszącej mu złej sławy."
+  correctAnswer: "b) ponieważ nie miał odpowiednich warunków fizycznych."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-l4-q8
+  taskRef: certyfikat-polski-B2-2024-06-listen-4
+  questionType: multiple_choice
+  questionText: "W 2004 roku klub Maxim"
+  options: "a) zakończył swoją działalność.|b) uległ całkowitemu zawaleniu.|c) odzyskał swoją świetność."
+  correctAnswer: "a) zakończył swoją działalność."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-l5-q1
+  taskRef: certyfikat-polski-B2-2024-06-listen-5
+  questionType: fill_gap
+  questionText: "Co, oprócz sal dydaktycznych, zostało zmienione w rozbudowanej szkole?"
+  correctAnswer: "nowo wyremontowana sala gimnastyczna|nowa stołówka"
+  pointsQuarter: 8
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-l5-q2
+  taskRef: certyfikat-polski-B2-2024-06-listen-5
+  questionType: fill_gap
+  questionText: "Jak długo obecna dyrektorka szkoły sprawuje swoją funkcję?"
+  correctAnswer: "10 lat"
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-l5-q3
+  taskRef: certyfikat-polski-B2-2024-06-listen-5
+  questionType: fill_gap
+  questionText: "Dlaczego nowe sale podobają się uczniom? Proszę wymienić dwa powody."
+  correctAnswer: "są duże|są jasne|jest w nich nowy sprzęt"
+  pointsQuarter: 4
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 2
+  gradingMode: open_manual
+  requiredSelections: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-l5-q4
+  taskRef: certyfikat-polski-B2-2024-06-listen-5
+  questionType: fill_gap
+  questionText: "Co stało się ze starą częścią budynku szkoły?"
+  correctAnswer: "została wyremontowana"
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-l5-q5
+  taskRef: certyfikat-polski-B2-2024-06-listen-5
+  questionType: fill_gap
+  questionText: "Co zmieniło się w rozkładzie lekcji uczniów klas 1-5 po rozbudowie szkoły?"
+  correctAnswer: "dzieci nie chodzą do szkoły na dwie zmiany"
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-l5-q6
+  taskRef: certyfikat-polski-B2-2024-06-listen-5
+  questionType: fill_gap
+  questionText: "Do której godziny trwały lekcje w szkole przed rozbudową?"
+  correctAnswer: "do 16.00"
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-06-l5-q7
+  taskRef: certyfikat-polski-B2-2024-06-listen-5
+  questionType: fill_gap
+  questionText: "Na co jest przygotowana szkoła po remoncie?"
+  correctAnswer: "na dalszy rozwój gminy"
+  pointsQuarter: 4
+  gradingMode: open_manual
 }

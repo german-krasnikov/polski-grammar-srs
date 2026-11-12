@@ -1,0 +1,606 @@
+DSL 1
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g1-q1
+  testRef: certyfikat-polski-C1-2023-11-grammar-1
+  questionType: fill_gap
+  context: "()"
+  correctAnswer: trzystu
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g1-q2
+  testRef: certyfikat-polski-C1-2023-11-grammar-1
+  questionType: fill_gap
+  context: "(tysiąc)"
+  correctAnswer: "tysiącami"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g1-q3
+  testRef: certyfikat-polski-C1-2023-11-grammar-1
+  questionType: fill_gap
+  context: "(obiekt)"
+  correctAnswer: "obiektów"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g1-q4
+  testRef: certyfikat-polski-C1-2023-11-grammar-1
+  questionType: fill_gap
+  context: "()"
+  correctAnswer: czworga
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g1-q5
+  testRef: certyfikat-polski-C1-2023-11-grammar-1
+  questionType: fill_gap
+  context: "(artysta)"
+  correctAnswer: "artystów"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g1-q6
+  testRef: certyfikat-polski-C1-2023-11-grammar-1
+  questionType: fill_gap
+  context: "()"
+  correctAnswer: "pięćdziesięciu"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g1-q7
+  testRef: certyfikat-polski-C1-2023-11-grammar-1
+  questionType: fill_gap
+  context: "(osoba)"
+  correctAnswer: osobom
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g1-q8
+  testRef: certyfikat-polski-C1-2023-11-grammar-1
+  questionType: fill_gap
+  context: "()"
+  correctAnswer: "dziesięciu"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g1-q9
+  testRef: certyfikat-polski-C1-2023-11-grammar-1
+  questionType: fill_gap
+  context: "(odcinek)"
+  correctAnswer: "odcinków"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g1-q10
+  testRef: certyfikat-polski-C1-2023-11-grammar-1
+  questionType: fill_gap
+  context: "(90.)"
+  correctAnswer: "dziewięćdziesiątych"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g2-q1
+  testRef: certyfikat-polski-C1-2023-11-grammar-2
+  questionType: transform
+  context: "Każdego roku obserwujemy, że eksperci w dziedzinie technologii stają się coraz bardziej potrzebni. (wzrost)"
+  correctAnswer: "Każdego roku obserwujemy wzrost zapotrzebowania na ekspertów w dziedzinie technologii."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g2-q2
+  testRef: certyfikat-polski-C1-2023-11-grammar-2
+  questionType: transform
+  context: "Jedna ze znanych firm informatycznych zamierza zmienić to, że w środowisku zawodowym programistów dominują mężczyźni. (zerwać)"
+  correctAnswer: "Jedna ze znanych firm informatycznych zamierza zerwać z dominacją mężczyzn w środowisku zawodowym programistów."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g2-q3
+  testRef: certyfikat-polski-C1-2023-11-grammar-2
+  questionType: transform
+  context: "Przedsiębiorstwo chce również zmienić proporcje zatrudnienia mężczyzn i kobiet, które wynoszą obecnie w Polsce 5:1. (zapowiadać)"
+  correctAnswer: "Przedsiębiorstwo zapowiada również zmianę proporcji zatrudnienia mężczyzn i kobiet, wynoszącej obecnie w Polsce 5:1."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g2-q4
+  testRef: certyfikat-polski-C1-2023-11-grammar-2
+  questionType: transform
+  context: "Jego szefowie planują, że do roku 2030 udział kobiet w strukturach firmy podniesie się do 50 procent. (dążyć)"
+  correctAnswer: "Jego szefowie dążą do podniesienia udziału kobiet w strukturach firmy do 50 procent do roku 2030."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g2-q5
+  testRef: certyfikat-polski-C1-2023-11-grammar-2
+  questionType: transform
+  context: "Coraz więcej firm ma nadzieję, że osiągnie równowagę zatrudnienia według płci na wszystkich typach stanowisk. (liczyć)"
+  correctAnswer: "Coraz więcej firm liczy na osiągnięcie równowagi zatrudnienia według płci na wszystkich typach stanowisk."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g3-q1
+  testRef: certyfikat-polski-C1-2023-11-grammar-3
+  questionType: fill_gap
+  context: "(odkryć)"
+  correctAnswer: odkrycia
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g3-q2
+  testRef: certyfikat-polski-C1-2023-11-grammar-3
+  questionType: fill_gap
+  context: "(spostrzec)"
+  correctAnswer: "spostrzeżenie"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g3-q3
+  testRef: certyfikat-polski-C1-2023-11-grammar-3
+  questionType: fill_gap
+  context: "(obrobić)"
+  correctAnswer: "obróbce"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g3-q4
+  testRef: certyfikat-polski-C1-2023-11-grammar-3
+  questionType: fill_gap
+  context: "(pozostać)"
+  correctAnswer: "pozostałościami"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g3-q5
+  testRef: certyfikat-polski-C1-2023-11-grammar-3
+  questionType: fill_gap
+  context: "(znać)"
+  correctAnswer: znawcy
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g3-q6
+  testRef: certyfikat-polski-C1-2023-11-grammar-3
+  questionType: fill_gap
+  context: "(przesilić)"
+  correctAnswer: przesilenia
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g3-q7
+  testRef: certyfikat-polski-C1-2023-11-grammar-3
+  questionType: fill_gap
+  context: "(istnieć)"
+  correctAnswer: istnienie
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g3-q8
+  testRef: certyfikat-polski-C1-2023-11-grammar-3
+  questionType: fill_gap
+  context: "(rozpocząć)"
+  correctAnswer: "rozpoczęciu"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g3-q9
+  testRef: certyfikat-polski-C1-2023-11-grammar-3
+  questionType: fill_gap
+  context: "(przekonać)"
+  correctAnswer: przekonanie
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g3-q10
+  testRef: certyfikat-polski-C1-2023-11-grammar-3
+  questionType: fill_gap
+  context: "(tworzyć)"
+  correctAnswer: "twórcami"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g4-q1
+  testRef: certyfikat-polski-C1-2023-11-grammar-4
+  questionType: fill_gap
+  context: "(klasyka)"
+  correctAnswer: klasyczne
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g4-q2
+  testRef: certyfikat-polski-C1-2023-11-grammar-4
+  questionType: fill_gap
+  context: "(bez, awaria)"
+  correctAnswer: bezawaryjnego
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g4-q3
+  testRef: certyfikat-polski-C1-2023-11-grammar-4
+  questionType: fill_gap
+  context: "(prawda)"
+  correctAnswer: prawdziwa
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g4-q4
+  testRef: certyfikat-polski-C1-2023-11-grammar-4
+  questionType: fill_gap
+  context: "(ciśnienie)"
+  correctAnswer: "ciśnieniowym"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g4-q5
+  testRef: certyfikat-polski-C1-2023-11-grammar-4
+  questionType: fill_gap
+  context: "(owoc)"
+  correctAnswer: owocne
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g4-q6
+  testRef: certyfikat-polski-C1-2023-11-grammar-4
+  questionType: fill_gap
+  context: "(rewelacja)"
+  correctAnswer: rewelacyjny
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g4-q7
+  testRef: certyfikat-polski-C1-2023-11-grammar-4
+  questionType: fill_gap
+  context: "(ekstremum)"
+  correctAnswer: ekstremalnych
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g4-q8
+  testRef: certyfikat-polski-C1-2023-11-grammar-4
+  questionType: fill_gap
+  context: "(wytrzymałość)"
+  correctAnswer: "wytrzymałościowym"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g4-q9
+  testRef: certyfikat-polski-C1-2023-11-grammar-4
+  questionType: fill_gap
+  context: "(atmosfera)"
+  correctAnswer: atmosferycznego
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g4-q10
+  testRef: certyfikat-polski-C1-2023-11-grammar-4
+  questionType: fill_gap
+  context: "(nie zawodzić)"
+  correctAnswer: niezawodny
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g5-q1
+  testRef: certyfikat-polski-C1-2023-11-grammar-5
+  questionType: word_bank
+  context: "Luka 1 w tekście powyżej"
+  correctAnswer: jakoby
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g5-q2
+  testRef: certyfikat-polski-C1-2023-11-grammar-5
+  questionType: word_bank
+  context: "Luka 2 w tekście powyżej"
+  correctAnswer: bowiem
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g5-q3
+  testRef: certyfikat-polski-C1-2023-11-grammar-5
+  questionType: word_bank
+  context: "Luka 3 w tekście powyżej"
+  correctAnswer: "to jednak"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g5-q4
+  testRef: certyfikat-polski-C1-2023-11-grammar-5
+  questionType: word_bank
+  context: "Luka 4 w tekście powyżej"
+  correctAnswer: "w tym także"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g5-q5
+  testRef: certyfikat-polski-C1-2023-11-grammar-5
+  questionType: word_bank
+  context: "Luka 5 w tekście powyżej"
+  correctAnswer: co
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g5-q6
+  testRef: certyfikat-polski-C1-2023-11-grammar-5
+  questionType: word_bank
+  context: "Luka 6 w tekście powyżej"
+  correctAnswer: tymczasem
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g5-q7
+  testRef: certyfikat-polski-C1-2023-11-grammar-5
+  questionType: word_bank
+  context: "Luka 7 w tekście powyżej"
+  correctAnswer: "niż"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g5-q8
+  testRef: certyfikat-polski-C1-2023-11-grammar-5
+  questionType: word_bank
+  context: "Luka 8 w tekście powyżej"
+  correctAnswer: by
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g5-q9
+  testRef: certyfikat-polski-C1-2023-11-grammar-5
+  questionType: word_bank
+  context: "Luka 9 w tekście powyżej"
+  correctAnswer: dopiero
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g5-q10
+  testRef: certyfikat-polski-C1-2023-11-grammar-5
+  questionType: word_bank
+  context: "Luka 10 w tekście powyżej"
+  correctAnswer: "słowem"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g6-q1
+  testRef: certyfikat-polski-C1-2023-11-grammar-6
+  questionType: fill_gap
+  context: "(zaczynać)"
+  correctAnswer: "zaczynając"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g6-q2
+  testRef: certyfikat-polski-C1-2023-11-grammar-6
+  questionType: fill_gap
+  context: "(zamknąć)"
+  correctAnswer: "zamknięty"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g6-q3
+  testRef: certyfikat-polski-C1-2023-11-grammar-6
+  questionType: fill_gap
+  context: "(spełnić)"
+  correctAnswer: "spełnionych"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g6-q4
+  testRef: certyfikat-polski-C1-2023-11-grammar-6
+  questionType: fill_gap
+  context: "(kochać)"
+  correctAnswer: "kochającymi"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g6-q5
+  testRef: certyfikat-polski-C1-2023-11-grammar-6
+  questionType: fill_gap
+  context: "(spostrzec)"
+  correctAnswer: "spostrzegłszy"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g6-q6
+  testRef: certyfikat-polski-C1-2023-11-grammar-6
+  questionType: fill_gap
+  context: "(oferować)"
+  correctAnswer: "oferujące"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g6-q7
+  testRef: certyfikat-polski-C1-2023-11-grammar-6
+  questionType: fill_gap
+  context: "(wiedzieć)"
+  correctAnswer: "wiedząc"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g6-q8
+  testRef: certyfikat-polski-C1-2023-11-grammar-6
+  questionType: fill_gap
+  context: "(zapalić)"
+  correctAnswer: "zapaloną"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g6-q9
+  testRef: certyfikat-polski-C1-2023-11-grammar-6
+  questionType: fill_gap
+  context: "(usłyszeć)"
+  correctAnswer: "usłyszawszy"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g6-q10
+  testRef: certyfikat-polski-C1-2023-11-grammar-6
+  questionType: fill_gap
+  context: "(porywać)"
+  correctAnswer: "porywającym"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g7-q1
+  testRef: certyfikat-polski-C1-2023-11-grammar-7
+  questionType: fill_gap
+  context: "(rozstrzygać/rozstrzygnąć)"
+  correctAnswer: "rozstrzygnęły"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g7-q2
+  testRef: certyfikat-polski-C1-2023-11-grammar-7
+  questionType: fill_gap
+  context: "(uzgadniać/uzgodnić)"
+  correctAnswer: "uzgadniają"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g7-q3
+  testRef: certyfikat-polski-C1-2023-11-grammar-7
+  questionType: fill_gap
+  context: "(krytykować/skrytykować)"
+  correctAnswer: krytykowano
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g7-q4
+  testRef: certyfikat-polski-C1-2023-11-grammar-7
+  questionType: fill_gap
+  context: "(dobijać/dobić)"
+  correctAnswer: "dobiją"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g7-q5
+  testRef: certyfikat-polski-C1-2023-11-grammar-7
+  questionType: fill_gap
+  context: "(odbywać się/odbyć się)"
+  correctAnswer: "odbyłoby się"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g7-q6
+  testRef: certyfikat-polski-C1-2023-11-grammar-7
+  questionType: fill_gap
+  context: "(stwierdzać/stwierdzić)"
+  correctAnswer: stwierdzi
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g7-q7
+  testRef: certyfikat-polski-C1-2023-11-grammar-7
+  questionType: fill_gap
+  context: "(wyposażać/wyposażyć)"
+  correctAnswer: "wyposażono"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g7-q8
+  testRef: certyfikat-polski-C1-2023-11-grammar-7
+  questionType: fill_gap
+  context: "(dowiadywać się/dowiedzieć się)"
+  correctAnswer: "dowiedzielibyśmy się"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g7-q9
+  testRef: certyfikat-polski-C1-2023-11-grammar-7
+  questionType: fill_gap
+  context: "(wchodzić/wejść)"
+  correctAnswer: "weszła"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g7-q10
+  testRef: certyfikat-polski-C1-2023-11-grammar-7
+  questionType: fill_gap
+  context: "(stawać się/stać się)"
+  correctAnswer: "stanie się"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g8-q1
+  testRef: certyfikat-polski-C1-2023-11-grammar-8
+  questionType: fill_gap
+  context: "(epitafium)"
+  correctAnswer: epitafia
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g8-q2
+  testRef: certyfikat-polski-C1-2023-11-grammar-8
+  questionType: fill_gap
+  context: "(wolny)"
+  correctAnswer: wolnymi
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g8-q3
+  testRef: certyfikat-polski-C1-2023-11-grammar-8
+  questionType: fill_gap
+  context: "(człowiek)"
+  correctAnswer: "ludźmi"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g8-q4
+  testRef: certyfikat-polski-C1-2023-11-grammar-8
+  questionType: fill_gap
+  context: "(niektóry)"
+  correctAnswer: "niektórzy"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g8-q5
+  testRef: certyfikat-polski-C1-2023-11-grammar-8
+  questionType: fill_gap
+  context: "(który)"
+  correctAnswer: "których"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g8-q6
+  testRef: certyfikat-polski-C1-2023-11-grammar-8
+  questionType: fill_gap
+  context: "(wiertło)"
+  correctAnswer: "wierteł"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g8-q7
+  testRef: certyfikat-polski-C1-2023-11-grammar-8
+  questionType: fill_gap
+  context: "(ono – lm)"
+  correctAnswer: je
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g8-q8
+  testRef: certyfikat-polski-C1-2023-11-grammar-8
+  questionType: fill_gap
+  context: "(Rzymianin)"
+  correctAnswer: Rzymian
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g8-q9
+  testRef: certyfikat-polski-C1-2023-11-grammar-8
+  questionType: fill_gap
+  context: "(staż)"
+  correctAnswer: "staże"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2023-11-g8-q10
+  testRef: certyfikat-polski-C1-2023-11-grammar-8
+  questionType: fill_gap
+  context: "(Włochy)"
+  correctAnswer: "Włoszech"
+  pointsQuarter: 2
+}

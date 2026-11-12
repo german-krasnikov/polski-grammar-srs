@@ -1,0 +1,367 @@
+DSL 1
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-r1-q1
+  passageRef: certyfikat-polski-B2-2022-02-read-1
+  questionType: multiple_choice
+  questionText: "Z tekstu dowiadujemy się, że"
+  options: "a) akcja filmu „Armageddon” została zainspirowana realnymi działaniami NASA.|b) podczas kręcenia „Armageddonu” rozbito statek kosmiczny należący do NASA.|c) NASA chce sprawdzić skuteczność jednego ze swoich programów ochrony Ziemi."
+  correctAnswer: "c) NASA chce sprawdzić skuteczność jednego ze swoich programów ochrony Ziemi."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-r1-q2
+  passageRef: certyfikat-polski-B2-2022-02-read-1
+  questionType: multiple_choice
+  questionText: "Z tekstu dowiadujemy się, że zgodnie z ustawą o odpadach liście"
+  options: "a) mogą być palone, gdyż nie są zaliczane do odpadów ulegających biodegradacji.|b) można spalać, jeśli gmina nie zapewnia odpowiedniej formy ich odbioru.|c) w każdej sytuacji muszą zostać oddane do wyspecjalizowanego punktu."
+  correctAnswer: "b) można spalać, jeśli gmina nie zapewnia odpowiedniej formy ich odbioru."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-r1-q3
+  passageRef: certyfikat-polski-B2-2022-02-read-1
+  questionType: multiple_choice
+  questionText: "Z tekstu dowiadujemy się, że stadnina w Janowie Podlaskim"
+  options: "a) mogła ucierpieć finansowo z powodu nieumiejętnego zarządzania kadrami.|b) w sumie otrzymała już 7 mln złotych dopłat z budżetu państwa.|c) zawsze odnotowywała znaczące straty finansowe."
+  correctAnswer: "a) mogła ucierpieć finansowo z powodu nieumiejętnego zarządzania kadrami."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-r1-q4
+  passageRef: certyfikat-polski-B2-2022-02-read-1
+  questionType: multiple_choice
+  questionText: "Z tekstu dowiadujemy się, że naukowcy"
+  options: "a) uważają dotychczas obowiązującą wersję historii człowieka za skomplikowaną.|b) odkryli na terenie Afryki i Eurazji szczątki dwóch nowych gatunków człowieka.|c) chcą wprowadzenia bardziej uszczegółowionego podziału gatunków człowieka."
+  correctAnswer: "a) uważają dotychczas obowiązującą wersję historii człowieka za skomplikowaną."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-r1-q5
+  passageRef: certyfikat-polski-B2-2022-02-read-1
+  questionType: multiple_choice
+  questionText: "Z tekstu dowiadujemy się, że XVIII edycja Konkursu Chopinowskiego"
+  options: "a) była śledzona przez dwa razy więcej słuchaczy Polskiego Radia niż poprzednie.|b) wzbudziła największe zainteresowanie wśród warszawiaków i poznaniaków.|c) była dla radiowców wymagającym zadaniem z uwagi na panującą sytuację sanitarną."
+  correctAnswer: "c) była dla radiowców wymagającym zadaniem z uwagi na panującą sytuację sanitarną."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-r2-q1
+  passageRef: certyfikat-polski-B2-2022-02-read-2
+  questionType: gap_fill_fragment
+  questionText: "Luka 1 w tekście „Pożegnanie z palmą”"
+  options: "A. zapewniała, że w ciągu ostatnich miesięcy|B. nie doszło do całkowitego obumarcia rośliny|C. znajdująca się w palmiarni w Gdańsku-Oliwie|D. niekiedy trzeba naprawdę sporo czasu|E. to prawdopodobnie najstarsza sztucznie hodowana palma daktylowa|F. w obawie o stan sąsiadujących z nią roślin|G. zdaniem naukowców z Uniwersytetów Gdańskiego i Jagiellońskiego|H. zostaną zakupione trzy nowe palmy|I. systematycznie była zasilana specjalistycznymi preparatami|J. służąc jako materiał badawczy dla studentów|K. będący przez dwa lata w stanie obumierania"
+  correctAnswer: "G. zdaniem naukowców z Uniwersytetów Gdańskiego i Jagiellońskiego"
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-r2-q2
+  passageRef: certyfikat-polski-B2-2022-02-read-2
+  questionType: gap_fill_fragment
+  questionText: "Luka 2 w tekście „Pożegnanie z palmą”"
+  options: "A. zapewniała, że w ciągu ostatnich miesięcy|B. nie doszło do całkowitego obumarcia rośliny|C. znajdująca się w palmiarni w Gdańsku-Oliwie|D. niekiedy trzeba naprawdę sporo czasu|E. to prawdopodobnie najstarsza sztucznie hodowana palma daktylowa|F. w obawie o stan sąsiadujących z nią roślin|G. zdaniem naukowców z Uniwersytetów Gdańskiego i Jagiellońskiego|H. zostaną zakupione trzy nowe palmy|I. systematycznie była zasilana specjalistycznymi preparatami|J. służąc jako materiał badawczy dla studentów|K. będący przez dwa lata w stanie obumierania"
+  correctAnswer: "A. zapewniała, że w ciągu ostatnich miesięcy"
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-r2-q3
+  passageRef: certyfikat-polski-B2-2022-02-read-2
+  questionType: gap_fill_fragment
+  questionText: "Luka 3 w tekście „Pożegnanie z palmą”"
+  options: "A. zapewniała, że w ciągu ostatnich miesięcy|B. nie doszło do całkowitego obumarcia rośliny|C. znajdująca się w palmiarni w Gdańsku-Oliwie|D. niekiedy trzeba naprawdę sporo czasu|E. to prawdopodobnie najstarsza sztucznie hodowana palma daktylowa|F. w obawie o stan sąsiadujących z nią roślin|G. zdaniem naukowców z Uniwersytetów Gdańskiego i Jagiellońskiego|H. zostaną zakupione trzy nowe palmy|I. systematycznie była zasilana specjalistycznymi preparatami|J. służąc jako materiał badawczy dla studentów|K. będący przez dwa lata w stanie obumierania"
+  correctAnswer: "B. nie doszło do całkowitego obumarcia rośliny"
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-r2-q4
+  passageRef: certyfikat-polski-B2-2022-02-read-2
+  questionType: gap_fill_fragment
+  questionText: "Luka 4 w tekście „Pożegnanie z palmą”"
+  options: "A. zapewniała, że w ciągu ostatnich miesięcy|B. nie doszło do całkowitego obumarcia rośliny|C. znajdująca się w palmiarni w Gdańsku-Oliwie|D. niekiedy trzeba naprawdę sporo czasu|E. to prawdopodobnie najstarsza sztucznie hodowana palma daktylowa|F. w obawie o stan sąsiadujących z nią roślin|G. zdaniem naukowców z Uniwersytetów Gdańskiego i Jagiellońskiego|H. zostaną zakupione trzy nowe palmy|I. systematycznie była zasilana specjalistycznymi preparatami|J. służąc jako materiał badawczy dla studentów|K. będący przez dwa lata w stanie obumierania"
+  correctAnswer: "E. to prawdopodobnie najstarsza sztucznie hodowana palma daktylowa"
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-r2-q5
+  passageRef: certyfikat-polski-B2-2022-02-read-2
+  questionType: gap_fill_fragment
+  questionText: "Luka 5 w tekście „Pożegnanie z palmą”"
+  options: "A. zapewniała, że w ciągu ostatnich miesięcy|B. nie doszło do całkowitego obumarcia rośliny|C. znajdująca się w palmiarni w Gdańsku-Oliwie|D. niekiedy trzeba naprawdę sporo czasu|E. to prawdopodobnie najstarsza sztucznie hodowana palma daktylowa|F. w obawie o stan sąsiadujących z nią roślin|G. zdaniem naukowców z Uniwersytetów Gdańskiego i Jagiellońskiego|H. zostaną zakupione trzy nowe palmy|I. systematycznie była zasilana specjalistycznymi preparatami|J. służąc jako materiał badawczy dla studentów|K. będący przez dwa lata w stanie obumierania"
+  correctAnswer: "I. systematycznie była zasilana specjalistycznymi preparatami"
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-r2-q6
+  passageRef: certyfikat-polski-B2-2022-02-read-2
+  questionType: gap_fill_fragment
+  questionText: "Luka 6 w tekście „Pożegnanie z palmą”"
+  options: "A. zapewniała, że w ciągu ostatnich miesięcy|B. nie doszło do całkowitego obumarcia rośliny|C. znajdująca się w palmiarni w Gdańsku-Oliwie|D. niekiedy trzeba naprawdę sporo czasu|E. to prawdopodobnie najstarsza sztucznie hodowana palma daktylowa|F. w obawie o stan sąsiadujących z nią roślin|G. zdaniem naukowców z Uniwersytetów Gdańskiego i Jagiellońskiego|H. zostaną zakupione trzy nowe palmy|I. systematycznie była zasilana specjalistycznymi preparatami|J. służąc jako materiał badawczy dla studentów|K. będący przez dwa lata w stanie obumierania"
+  correctAnswer: "D. niekiedy trzeba naprawdę sporo czasu"
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-r2-q7
+  passageRef: certyfikat-polski-B2-2022-02-read-2
+  questionType: gap_fill_fragment
+  questionText: "Luka 7 w tekście „Pożegnanie z palmą”"
+  options: "A. zapewniała, że w ciągu ostatnich miesięcy|B. nie doszło do całkowitego obumarcia rośliny|C. znajdująca się w palmiarni w Gdańsku-Oliwie|D. niekiedy trzeba naprawdę sporo czasu|E. to prawdopodobnie najstarsza sztucznie hodowana palma daktylowa|F. w obawie o stan sąsiadujących z nią roślin|G. zdaniem naukowców z Uniwersytetów Gdańskiego i Jagiellońskiego|H. zostaną zakupione trzy nowe palmy|I. systematycznie była zasilana specjalistycznymi preparatami|J. służąc jako materiał badawczy dla studentów|K. będący przez dwa lata w stanie obumierania"
+  correctAnswer: "K. będący przez dwa lata w stanie obumierania"
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-r2-q8
+  passageRef: certyfikat-polski-B2-2022-02-read-2
+  questionType: gap_fill_fragment
+  questionText: "Luka 8 w tekście „Pożegnanie z palmą”"
+  options: "A. zapewniała, że w ciągu ostatnich miesięcy|B. nie doszło do całkowitego obumarcia rośliny|C. znajdująca się w palmiarni w Gdańsku-Oliwie|D. niekiedy trzeba naprawdę sporo czasu|E. to prawdopodobnie najstarsza sztucznie hodowana palma daktylowa|F. w obawie o stan sąsiadujących z nią roślin|G. zdaniem naukowców z Uniwersytetów Gdańskiego i Jagiellońskiego|H. zostaną zakupione trzy nowe palmy|I. systematycznie była zasilana specjalistycznymi preparatami|J. służąc jako materiał badawczy dla studentów|K. będący przez dwa lata w stanie obumierania"
+  correctAnswer: "F. w obawie o stan sąsiadujących z nią roślin"
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-r2-q9
+  passageRef: certyfikat-polski-B2-2022-02-read-2
+  questionType: gap_fill_fragment
+  questionText: "Luka 9 w tekście „Pożegnanie z palmą”"
+  options: "A. zapewniała, że w ciągu ostatnich miesięcy|B. nie doszło do całkowitego obumarcia rośliny|C. znajdująca się w palmiarni w Gdańsku-Oliwie|D. niekiedy trzeba naprawdę sporo czasu|E. to prawdopodobnie najstarsza sztucznie hodowana palma daktylowa|F. w obawie o stan sąsiadujących z nią roślin|G. zdaniem naukowców z Uniwersytetów Gdańskiego i Jagiellońskiego|H. zostaną zakupione trzy nowe palmy|I. systematycznie była zasilana specjalistycznymi preparatami|J. służąc jako materiał badawczy dla studentów|K. będący przez dwa lata w stanie obumierania"
+  correctAnswer: "J. służąc jako materiał badawczy dla studentów"
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-r2-q10
+  passageRef: certyfikat-polski-B2-2022-02-read-2
+  questionType: gap_fill_fragment
+  questionText: "Luka 10 w tekście „Pożegnanie z palmą”"
+  options: "A. zapewniała, że w ciągu ostatnich miesięcy|B. nie doszło do całkowitego obumarcia rośliny|C. znajdująca się w palmiarni w Gdańsku-Oliwie|D. niekiedy trzeba naprawdę sporo czasu|E. to prawdopodobnie najstarsza sztucznie hodowana palma daktylowa|F. w obawie o stan sąsiadujących z nią roślin|G. zdaniem naukowców z Uniwersytetów Gdańskiego i Jagiellońskiego|H. zostaną zakupione trzy nowe palmy|I. systematycznie była zasilana specjalistycznymi preparatami|J. służąc jako materiał badawczy dla studentów|K. będący przez dwa lata w stanie obumierania"
+  correctAnswer: "H. zostaną zakupione trzy nowe palmy"
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-r3-q1
+  passageRef: certyfikat-polski-B2-2022-02-read-3
+  questionType: matching
+  questionText: "Pokochać wodę z kranu"
+  options: "A. Torby na zakupy wielorazowego użytku mogą wyglądać naprawdę super. Lepiej używać tych z naturalnych materiałów zamiast za każdym razem kupować nowe plastikowe.|B. Jeśli nie chcemy rezygnować z wody butelkowanej, kupujmy ją w większych opakowaniach. Zamiast małej półlitrowej butelki bierzmy pięciolitrową.|C. Wykorzystuję wszystkie kosmetyki i produkty do końca – przecinam opakowanie i wybieram to, co pozostało na dnie.|D. Nie jest tajemnicą, że przemysł mięsny pochłania ogromne ilości wody, paszy do wykarmienia zwierząt, a przy tym produkuje mnóstwo związków chemicznych, które trafiają do środowiska.|E. Kontroluję zawartość lodówki, by wyrzucać jak najmniej produktów (pilnuję terminów ważności, rozpisuję menu na kolejne dni).|F. Nie kupuję przedmiotów, które ładnie wyglądają, ale nie są użyteczne. Podejmuję przemyślane decyzje zakupowe, unikam gromadzenia rzeczy.|G. Zabieram ze sobą własne jedzenie na uczelnię lub do pracy. Kanapka lub obiad zapakowane w pudełko wielokrotnego użytku to mniej śmieci. I zysk w portfelu.|H. Jeśli już mam w domu torebki plastikowe – nie wyrzucam ich. Mogą posłużyć do kolejnych zakupów lub jako worki na śmieci.|I. W wielu miastach Polski jest ona zdatna do picia nawet bez filtrowania, ale jeśli mamy wątpliwości – wystarczy starym, babcinym sposobem ją przegotować.|J. Często gdy kupujemy lody albo jemy coś na mieście, dostajemy plastikowe łyżeczki i widelczyki. A można mieć pod ręką swój zestaw wielokrotnego użytku.|K. Kupuję owoce i warzywa u lokalnych sprzedawców. Te od babci z targu są smaczniejsze, a w dodatku nie muszą być transportowane z odległych zakątków świata, co zmniejsza ślad węglowy."
+  correctAnswer: "I. W wielu miastach Polski jest ona zdatna do picia nawet bez filtrowania, ale jeśli mamy wątpliwości – wystarczy starym, babcinym sposobem ją przegotować."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-r3-q2
+  passageRef: certyfikat-polski-B2-2022-02-read-3
+  questionType: matching
+  questionText: "Większe znaczy lepsze"
+  options: "A. Torby na zakupy wielorazowego użytku mogą wyglądać naprawdę super. Lepiej używać tych z naturalnych materiałów zamiast za każdym razem kupować nowe plastikowe.|B. Jeśli nie chcemy rezygnować z wody butelkowanej, kupujmy ją w większych opakowaniach. Zamiast małej półlitrowej butelki bierzmy pięciolitrową.|C. Wykorzystuję wszystkie kosmetyki i produkty do końca – przecinam opakowanie i wybieram to, co pozostało na dnie.|D. Nie jest tajemnicą, że przemysł mięsny pochłania ogromne ilości wody, paszy do wykarmienia zwierząt, a przy tym produkuje mnóstwo związków chemicznych, które trafiają do środowiska.|E. Kontroluję zawartość lodówki, by wyrzucać jak najmniej produktów (pilnuję terminów ważności, rozpisuję menu na kolejne dni).|F. Nie kupuję przedmiotów, które ładnie wyglądają, ale nie są użyteczne. Podejmuję przemyślane decyzje zakupowe, unikam gromadzenia rzeczy.|G. Zabieram ze sobą własne jedzenie na uczelnię lub do pracy. Kanapka lub obiad zapakowane w pudełko wielokrotnego użytku to mniej śmieci. I zysk w portfelu.|H. Jeśli już mam w domu torebki plastikowe – nie wyrzucam ich. Mogą posłużyć do kolejnych zakupów lub jako worki na śmieci.|I. W wielu miastach Polski jest ona zdatna do picia nawet bez filtrowania, ale jeśli mamy wątpliwości – wystarczy starym, babcinym sposobem ją przegotować.|J. Często gdy kupujemy lody albo jemy coś na mieście, dostajemy plastikowe łyżeczki i widelczyki. A można mieć pod ręką swój zestaw wielokrotnego użytku.|K. Kupuję owoce i warzywa u lokalnych sprzedawców. Te od babci z targu są smaczniejsze, a w dodatku nie muszą być transportowane z odległych zakątków świata, co zmniejsza ślad węglowy."
+  correctAnswer: "B. Jeśli nie chcemy rezygnować z wody butelkowanej, kupujmy ją w większych opakowaniach. Zamiast małej półlitrowej butelki bierzmy pięciolitrową."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-r3-q3
+  passageRef: certyfikat-polski-B2-2022-02-read-3
+  questionType: matching
+  questionText: "Domowe na wynos"
+  options: "A. Torby na zakupy wielorazowego użytku mogą wyglądać naprawdę super. Lepiej używać tych z naturalnych materiałów zamiast za każdym razem kupować nowe plastikowe.|B. Jeśli nie chcemy rezygnować z wody butelkowanej, kupujmy ją w większych opakowaniach. Zamiast małej półlitrowej butelki bierzmy pięciolitrową.|C. Wykorzystuję wszystkie kosmetyki i produkty do końca – przecinam opakowanie i wybieram to, co pozostało na dnie.|D. Nie jest tajemnicą, że przemysł mięsny pochłania ogromne ilości wody, paszy do wykarmienia zwierząt, a przy tym produkuje mnóstwo związków chemicznych, które trafiają do środowiska.|E. Kontroluję zawartość lodówki, by wyrzucać jak najmniej produktów (pilnuję terminów ważności, rozpisuję menu na kolejne dni).|F. Nie kupuję przedmiotów, które ładnie wyglądają, ale nie są użyteczne. Podejmuję przemyślane decyzje zakupowe, unikam gromadzenia rzeczy.|G. Zabieram ze sobą własne jedzenie na uczelnię lub do pracy. Kanapka lub obiad zapakowane w pudełko wielokrotnego użytku to mniej śmieci. I zysk w portfelu.|H. Jeśli już mam w domu torebki plastikowe – nie wyrzucam ich. Mogą posłużyć do kolejnych zakupów lub jako worki na śmieci.|I. W wielu miastach Polski jest ona zdatna do picia nawet bez filtrowania, ale jeśli mamy wątpliwości – wystarczy starym, babcinym sposobem ją przegotować.|J. Często gdy kupujemy lody albo jemy coś na mieście, dostajemy plastikowe łyżeczki i widelczyki. A można mieć pod ręką swój zestaw wielokrotnego użytku.|K. Kupuję owoce i warzywa u lokalnych sprzedawców. Te od babci z targu są smaczniejsze, a w dodatku nie muszą być transportowane z odległych zakątków świata, co zmniejsza ślad węglowy."
+  correctAnswer: "G. Zabieram ze sobą własne jedzenie na uczelnię lub do pracy. Kanapka lub obiad zapakowane w pudełko wielokrotnego użytku to mniej śmieci. I zysk w portfelu."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-r3-q4
+  passageRef: certyfikat-polski-B2-2022-02-read-3
+  questionType: matching
+  questionText: "Sztućce zawsze pod ręką"
+  options: "A. Torby na zakupy wielorazowego użytku mogą wyglądać naprawdę super. Lepiej używać tych z naturalnych materiałów zamiast za każdym razem kupować nowe plastikowe.|B. Jeśli nie chcemy rezygnować z wody butelkowanej, kupujmy ją w większych opakowaniach. Zamiast małej półlitrowej butelki bierzmy pięciolitrową.|C. Wykorzystuję wszystkie kosmetyki i produkty do końca – przecinam opakowanie i wybieram to, co pozostało na dnie.|D. Nie jest tajemnicą, że przemysł mięsny pochłania ogromne ilości wody, paszy do wykarmienia zwierząt, a przy tym produkuje mnóstwo związków chemicznych, które trafiają do środowiska.|E. Kontroluję zawartość lodówki, by wyrzucać jak najmniej produktów (pilnuję terminów ważności, rozpisuję menu na kolejne dni).|F. Nie kupuję przedmiotów, które ładnie wyglądają, ale nie są użyteczne. Podejmuję przemyślane decyzje zakupowe, unikam gromadzenia rzeczy.|G. Zabieram ze sobą własne jedzenie na uczelnię lub do pracy. Kanapka lub obiad zapakowane w pudełko wielokrotnego użytku to mniej śmieci. I zysk w portfelu.|H. Jeśli już mam w domu torebki plastikowe – nie wyrzucam ich. Mogą posłużyć do kolejnych zakupów lub jako worki na śmieci.|I. W wielu miastach Polski jest ona zdatna do picia nawet bez filtrowania, ale jeśli mamy wątpliwości – wystarczy starym, babcinym sposobem ją przegotować.|J. Często gdy kupujemy lody albo jemy coś na mieście, dostajemy plastikowe łyżeczki i widelczyki. A można mieć pod ręką swój zestaw wielokrotnego użytku.|K. Kupuję owoce i warzywa u lokalnych sprzedawców. Te od babci z targu są smaczniejsze, a w dodatku nie muszą być transportowane z odległych zakątków świata, co zmniejsza ślad węglowy."
+  correctAnswer: "J. Często gdy kupujemy lody albo jemy coś na mieście, dostajemy plastikowe łyżeczki i widelczyki. A można mieć pod ręką swój zestaw wielokrotnego użytku."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-r3-q5
+  passageRef: certyfikat-polski-B2-2022-02-read-3
+  questionType: matching
+  questionText: "Bawełna jest eko"
+  options: "A. Torby na zakupy wielorazowego użytku mogą wyglądać naprawdę super. Lepiej używać tych z naturalnych materiałów zamiast za każdym razem kupować nowe plastikowe.|B. Jeśli nie chcemy rezygnować z wody butelkowanej, kupujmy ją w większych opakowaniach. Zamiast małej półlitrowej butelki bierzmy pięciolitrową.|C. Wykorzystuję wszystkie kosmetyki i produkty do końca – przecinam opakowanie i wybieram to, co pozostało na dnie.|D. Nie jest tajemnicą, że przemysł mięsny pochłania ogromne ilości wody, paszy do wykarmienia zwierząt, a przy tym produkuje mnóstwo związków chemicznych, które trafiają do środowiska.|E. Kontroluję zawartość lodówki, by wyrzucać jak najmniej produktów (pilnuję terminów ważności, rozpisuję menu na kolejne dni).|F. Nie kupuję przedmiotów, które ładnie wyglądają, ale nie są użyteczne. Podejmuję przemyślane decyzje zakupowe, unikam gromadzenia rzeczy.|G. Zabieram ze sobą własne jedzenie na uczelnię lub do pracy. Kanapka lub obiad zapakowane w pudełko wielokrotnego użytku to mniej śmieci. I zysk w portfelu.|H. Jeśli już mam w domu torebki plastikowe – nie wyrzucam ich. Mogą posłużyć do kolejnych zakupów lub jako worki na śmieci.|I. W wielu miastach Polski jest ona zdatna do picia nawet bez filtrowania, ale jeśli mamy wątpliwości – wystarczy starym, babcinym sposobem ją przegotować.|J. Często gdy kupujemy lody albo jemy coś na mieście, dostajemy plastikowe łyżeczki i widelczyki. A można mieć pod ręką swój zestaw wielokrotnego użytku.|K. Kupuję owoce i warzywa u lokalnych sprzedawców. Te od babci z targu są smaczniejsze, a w dodatku nie muszą być transportowane z odległych zakątków świata, co zmniejsza ślad węglowy."
+  correctAnswer: "A. Torby na zakupy wielorazowego użytku mogą wyglądać naprawdę super. Lepiej używać tych z naturalnych materiałów zamiast za każdym razem kupować nowe plastikowe."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-r3-q6
+  passageRef: certyfikat-polski-B2-2022-02-read-3
+  questionType: matching
+  questionText: "Drugie życie"
+  options: "A. Torby na zakupy wielorazowego użytku mogą wyglądać naprawdę super. Lepiej używać tych z naturalnych materiałów zamiast za każdym razem kupować nowe plastikowe.|B. Jeśli nie chcemy rezygnować z wody butelkowanej, kupujmy ją w większych opakowaniach. Zamiast małej półlitrowej butelki bierzmy pięciolitrową.|C. Wykorzystuję wszystkie kosmetyki i produkty do końca – przecinam opakowanie i wybieram to, co pozostało na dnie.|D. Nie jest tajemnicą, że przemysł mięsny pochłania ogromne ilości wody, paszy do wykarmienia zwierząt, a przy tym produkuje mnóstwo związków chemicznych, które trafiają do środowiska.|E. Kontroluję zawartość lodówki, by wyrzucać jak najmniej produktów (pilnuję terminów ważności, rozpisuję menu na kolejne dni).|F. Nie kupuję przedmiotów, które ładnie wyglądają, ale nie są użyteczne. Podejmuję przemyślane decyzje zakupowe, unikam gromadzenia rzeczy.|G. Zabieram ze sobą własne jedzenie na uczelnię lub do pracy. Kanapka lub obiad zapakowane w pudełko wielokrotnego użytku to mniej śmieci. I zysk w portfelu.|H. Jeśli już mam w domu torebki plastikowe – nie wyrzucam ich. Mogą posłużyć do kolejnych zakupów lub jako worki na śmieci.|I. W wielu miastach Polski jest ona zdatna do picia nawet bez filtrowania, ale jeśli mamy wątpliwości – wystarczy starym, babcinym sposobem ją przegotować.|J. Często gdy kupujemy lody albo jemy coś na mieście, dostajemy plastikowe łyżeczki i widelczyki. A można mieć pod ręką swój zestaw wielokrotnego użytku.|K. Kupuję owoce i warzywa u lokalnych sprzedawców. Te od babci z targu są smaczniejsze, a w dodatku nie muszą być transportowane z odległych zakątków świata, co zmniejsza ślad węglowy."
+  correctAnswer: "H. Jeśli już mam w domu torebki plastikowe – nie wyrzucam ich. Mogą posłużyć do kolejnych zakupów lub jako worki na śmieci."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-r3-q7
+  passageRef: certyfikat-polski-B2-2022-02-read-3
+  questionType: matching
+  questionText: "Po sąsiedzku"
+  options: "A. Torby na zakupy wielorazowego użytku mogą wyglądać naprawdę super. Lepiej używać tych z naturalnych materiałów zamiast za każdym razem kupować nowe plastikowe.|B. Jeśli nie chcemy rezygnować z wody butelkowanej, kupujmy ją w większych opakowaniach. Zamiast małej półlitrowej butelki bierzmy pięciolitrową.|C. Wykorzystuję wszystkie kosmetyki i produkty do końca – przecinam opakowanie i wybieram to, co pozostało na dnie.|D. Nie jest tajemnicą, że przemysł mięsny pochłania ogromne ilości wody, paszy do wykarmienia zwierząt, a przy tym produkuje mnóstwo związków chemicznych, które trafiają do środowiska.|E. Kontroluję zawartość lodówki, by wyrzucać jak najmniej produktów (pilnuję terminów ważności, rozpisuję menu na kolejne dni).|F. Nie kupuję przedmiotów, które ładnie wyglądają, ale nie są użyteczne. Podejmuję przemyślane decyzje zakupowe, unikam gromadzenia rzeczy.|G. Zabieram ze sobą własne jedzenie na uczelnię lub do pracy. Kanapka lub obiad zapakowane w pudełko wielokrotnego użytku to mniej śmieci. I zysk w portfelu.|H. Jeśli już mam w domu torebki plastikowe – nie wyrzucam ich. Mogą posłużyć do kolejnych zakupów lub jako worki na śmieci.|I. W wielu miastach Polski jest ona zdatna do picia nawet bez filtrowania, ale jeśli mamy wątpliwości – wystarczy starym, babcinym sposobem ją przegotować.|J. Często gdy kupujemy lody albo jemy coś na mieście, dostajemy plastikowe łyżeczki i widelczyki. A można mieć pod ręką swój zestaw wielokrotnego użytku.|K. Kupuję owoce i warzywa u lokalnych sprzedawców. Te od babci z targu są smaczniejsze, a w dodatku nie muszą być transportowane z odległych zakątków świata, co zmniejsza ślad węglowy."
+  correctAnswer: "K. Kupuję owoce i warzywa u lokalnych sprzedawców. Te od babci z targu są smaczniejsze, a w dodatku nie muszą być transportowane z odległych zakątków świata, co zmniejsza ślad węglowy."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-r3-q8
+  passageRef: certyfikat-polski-B2-2022-02-read-3
+  questionType: matching
+  questionText: "Planować zamiast marnować"
+  options: "A. Torby na zakupy wielorazowego użytku mogą wyglądać naprawdę super. Lepiej używać tych z naturalnych materiałów zamiast za każdym razem kupować nowe plastikowe.|B. Jeśli nie chcemy rezygnować z wody butelkowanej, kupujmy ją w większych opakowaniach. Zamiast małej półlitrowej butelki bierzmy pięciolitrową.|C. Wykorzystuję wszystkie kosmetyki i produkty do końca – przecinam opakowanie i wybieram to, co pozostało na dnie.|D. Nie jest tajemnicą, że przemysł mięsny pochłania ogromne ilości wody, paszy do wykarmienia zwierząt, a przy tym produkuje mnóstwo związków chemicznych, które trafiają do środowiska.|E. Kontroluję zawartość lodówki, by wyrzucać jak najmniej produktów (pilnuję terminów ważności, rozpisuję menu na kolejne dni).|F. Nie kupuję przedmiotów, które ładnie wyglądają, ale nie są użyteczne. Podejmuję przemyślane decyzje zakupowe, unikam gromadzenia rzeczy.|G. Zabieram ze sobą własne jedzenie na uczelnię lub do pracy. Kanapka lub obiad zapakowane w pudełko wielokrotnego użytku to mniej śmieci. I zysk w portfelu.|H. Jeśli już mam w domu torebki plastikowe – nie wyrzucam ich. Mogą posłużyć do kolejnych zakupów lub jako worki na śmieci.|I. W wielu miastach Polski jest ona zdatna do picia nawet bez filtrowania, ale jeśli mamy wątpliwości – wystarczy starym, babcinym sposobem ją przegotować.|J. Często gdy kupujemy lody albo jemy coś na mieście, dostajemy plastikowe łyżeczki i widelczyki. A można mieć pod ręką swój zestaw wielokrotnego użytku.|K. Kupuję owoce i warzywa u lokalnych sprzedawców. Te od babci z targu są smaczniejsze, a w dodatku nie muszą być transportowane z odległych zakątków świata, co zmniejsza ślad węglowy."
+  correctAnswer: "E. Kontroluję zawartość lodówki, by wyrzucać jak najmniej produktów (pilnuję terminów ważności, rozpisuję menu na kolejne dni)."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-r3-q9
+  passageRef: certyfikat-polski-B2-2022-02-read-3
+  questionType: matching
+  questionText: "Cena kotleta"
+  options: "A. Torby na zakupy wielorazowego użytku mogą wyglądać naprawdę super. Lepiej używać tych z naturalnych materiałów zamiast za każdym razem kupować nowe plastikowe.|B. Jeśli nie chcemy rezygnować z wody butelkowanej, kupujmy ją w większych opakowaniach. Zamiast małej półlitrowej butelki bierzmy pięciolitrową.|C. Wykorzystuję wszystkie kosmetyki i produkty do końca – przecinam opakowanie i wybieram to, co pozostało na dnie.|D. Nie jest tajemnicą, że przemysł mięsny pochłania ogromne ilości wody, paszy do wykarmienia zwierząt, a przy tym produkuje mnóstwo związków chemicznych, które trafiają do środowiska.|E. Kontroluję zawartość lodówki, by wyrzucać jak najmniej produktów (pilnuję terminów ważności, rozpisuję menu na kolejne dni).|F. Nie kupuję przedmiotów, które ładnie wyglądają, ale nie są użyteczne. Podejmuję przemyślane decyzje zakupowe, unikam gromadzenia rzeczy.|G. Zabieram ze sobą własne jedzenie na uczelnię lub do pracy. Kanapka lub obiad zapakowane w pudełko wielokrotnego użytku to mniej śmieci. I zysk w portfelu.|H. Jeśli już mam w domu torebki plastikowe – nie wyrzucam ich. Mogą posłużyć do kolejnych zakupów lub jako worki na śmieci.|I. W wielu miastach Polski jest ona zdatna do picia nawet bez filtrowania, ale jeśli mamy wątpliwości – wystarczy starym, babcinym sposobem ją przegotować.|J. Często gdy kupujemy lody albo jemy coś na mieście, dostajemy plastikowe łyżeczki i widelczyki. A można mieć pod ręką swój zestaw wielokrotnego użytku.|K. Kupuję owoce i warzywa u lokalnych sprzedawców. Te od babci z targu są smaczniejsze, a w dodatku nie muszą być transportowane z odległych zakątków świata, co zmniejsza ślad węglowy."
+  correctAnswer: "D. Nie jest tajemnicą, że przemysł mięsny pochłania ogromne ilości wody, paszy do wykarmienia zwierząt, a przy tym produkuje mnóstwo związków chemicznych, które trafiają do środowiska."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-r3-q10
+  passageRef: certyfikat-polski-B2-2022-02-read-3
+  questionType: matching
+  questionText: "Do ostatniej kropli"
+  options: "A. Torby na zakupy wielorazowego użytku mogą wyglądać naprawdę super. Lepiej używać tych z naturalnych materiałów zamiast za każdym razem kupować nowe plastikowe.|B. Jeśli nie chcemy rezygnować z wody butelkowanej, kupujmy ją w większych opakowaniach. Zamiast małej półlitrowej butelki bierzmy pięciolitrową.|C. Wykorzystuję wszystkie kosmetyki i produkty do końca – przecinam opakowanie i wybieram to, co pozostało na dnie.|D. Nie jest tajemnicą, że przemysł mięsny pochłania ogromne ilości wody, paszy do wykarmienia zwierząt, a przy tym produkuje mnóstwo związków chemicznych, które trafiają do środowiska.|E. Kontroluję zawartość lodówki, by wyrzucać jak najmniej produktów (pilnuję terminów ważności, rozpisuję menu na kolejne dni).|F. Nie kupuję przedmiotów, które ładnie wyglądają, ale nie są użyteczne. Podejmuję przemyślane decyzje zakupowe, unikam gromadzenia rzeczy.|G. Zabieram ze sobą własne jedzenie na uczelnię lub do pracy. Kanapka lub obiad zapakowane w pudełko wielokrotnego użytku to mniej śmieci. I zysk w portfelu.|H. Jeśli już mam w domu torebki plastikowe – nie wyrzucam ich. Mogą posłużyć do kolejnych zakupów lub jako worki na śmieci.|I. W wielu miastach Polski jest ona zdatna do picia nawet bez filtrowania, ale jeśli mamy wątpliwości – wystarczy starym, babcinym sposobem ją przegotować.|J. Często gdy kupujemy lody albo jemy coś na mieście, dostajemy plastikowe łyżeczki i widelczyki. A można mieć pod ręką swój zestaw wielokrotnego użytku.|K. Kupuję owoce i warzywa u lokalnych sprzedawców. Te od babci z targu są smaczniejsze, a w dodatku nie muszą być transportowane z odległych zakątków świata, co zmniejsza ślad węglowy."
+  correctAnswer: "C. Wykorzystuję wszystkie kosmetyki i produkty do końca – przecinam opakowanie i wybieram to, co pozostało na dnie."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-r4-q1
+  passageRef: certyfikat-polski-B2-2022-02-read-4
+  questionType: matching
+  questionText: "bohaterowie nosili charakterystyczne ubrania."
+  options: "A|B|C|D|E"
+  correctAnswer: "A|D"
+  pointsQuarter: 8
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-r4-q2
+  passageRef: certyfikat-polski-B2-2022-02-read-4
+  questionType: matching
+  questionText: "oprawa muzyczna odgrywała ważną rolę."
+  options: "A|B|C|D|E"
+  correctAnswer: "C|D|E"
+  pointsQuarter: 12
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-r4-q3
+  passageRef: certyfikat-polski-B2-2022-02-read-4
+  questionType: matching
+  questionText: "jeden z bohaterów nie zagościł na długo."
+  options: "A|B|C|D|E"
+  correctAnswer: B
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-r4-q4
+  passageRef: certyfikat-polski-B2-2022-02-read-4
+  questionType: matching
+  questionText: "sportretowano realnie istniejące postaci."
+  options: "A|B|C|D|E"
+  correctAnswer: B
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-r4-q5
+  passageRef: certyfikat-polski-B2-2022-02-read-4
+  questionType: matching
+  questionText: "liczyła się nie tylko rozrywka, ale i walory edukacyjne."
+  options: "A|B|C|D|E"
+  correctAnswer: "A|C|D"
+  pointsQuarter: 12
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-r5-q1
+  passageRef: certyfikat-polski-B2-2022-02-read-5
+  questionType: multiple_choice
+  questionText: "Luka 1 w tekście „Ringo. Sport eksportowy PRL-u”"
+  options: "powstała|ustanowiła się|stała się|wykształciła się"
+  correctAnswer: "powstała"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-r5-q2
+  passageRef: certyfikat-polski-B2-2022-02-read-5
+  questionType: multiple_choice
+  questionText: "Luka 2 w tekście „Ringo. Sport eksportowy PRL-u”"
+  options: "pracy|urzędu|zawodu|etatu"
+  correctAnswer: zawodu
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-r5-q3
+  passageRef: certyfikat-polski-B2-2022-02-read-5
+  questionType: multiple_choice
+  questionText: "Luka 3 w tekście „Ringo. Sport eksportowy PRL-u”"
+  options: "zażądał|otrzymał|osiągnął|stracił"
+  correctAnswer: "otrzymał"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-r5-q4
+  passageRef: certyfikat-polski-B2-2022-02-read-5
+  questionType: multiple_choice
+  questionText: "Luka 4 w tekście „Ringo. Sport eksportowy PRL-u”"
+  options: "wroga|przeciwnika|zwolennika|konkurenta"
+  correctAnswer: przeciwnika
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-r5-q5
+  passageRef: certyfikat-polski-B2-2022-02-read-5
+  questionType: multiple_choice
+  questionText: "Luka 5 w tekście „Ringo. Sport eksportowy PRL-u”"
+  options: "obawy|nakazu|zakazu|potrzeby"
+  correctAnswer: potrzeby
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-r5-q6
+  passageRef: certyfikat-polski-B2-2022-02-read-5
+  questionType: multiple_choice
+  questionText: "Luka 6 w tekście „Ringo. Sport eksportowy PRL-u”"
+  options: "żąda|wymaga|odmawia|chce"
+  correctAnswer: wymaga
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-r5-q7
+  passageRef: certyfikat-polski-B2-2022-02-read-5
+  questionType: multiple_choice
+  questionText: "Luka 7 w tekście „Ringo. Sport eksportowy PRL-u”"
+  options: "dostępna|cenna|bezwartościowa|kosztowna"
+  correctAnswer: kosztowna
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-r5-q8
+  passageRef: certyfikat-polski-B2-2022-02-read-5
+  questionType: multiple_choice
+  questionText: "Luka 8 w tekście „Ringo. Sport eksportowy PRL-u”"
+  options: "pochwalenia się|zajęcia się|zainteresowania się|ucieszenia się"
+  correctAnswer: "pochwalenia się"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-r5-q9
+  passageRef: certyfikat-polski-B2-2022-02-read-5
+  questionType: multiple_choice
+  questionText: "Luka 9 w tekście „Ringo. Sport eksportowy PRL-u”"
+  options: "wygrywanych|rozgrywanych|zachodzących|następujących"
+  correctAnswer: rozgrywanych
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-02-r5-q10
+  passageRef: certyfikat-polski-B2-2022-02-read-5
+  questionType: multiple_choice
+  questionText: "Luka 10 w tekście „Ringo. Sport eksportowy PRL-u”"
+  options: "tylko|choćby|również|właśnie"
+  correctAnswer: "właśnie"
+  pointsQuarter: 2
+}

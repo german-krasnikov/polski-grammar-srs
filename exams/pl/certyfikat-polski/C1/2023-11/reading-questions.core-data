@@ -1,0 +1,392 @@
+DSL 1
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-r1-q1
+  passageRef: certyfikat-polski-C1-2023-11-read-1
+  questionType: multiple_choice
+  questionText: "Program „Szansa na sukces” był"
+  options: "a) pierwszym programem rozrywkowym w polskiej telewizji.|b) prekursorską produkcją polegającą na wyłanianiu talentów.|c) rodzajem mecenatu doświadczonego muzyka nad adeptem sztuki wokalnej."
+  correctAnswer: "b) prekursorską produkcją polegającą na wyłanianiu talentów."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-r1-q2
+  passageRef: certyfikat-polski-C1-2023-11-read-1
+  questionType: multiple_choice
+  questionText: "Dzięki wygraniu rocznego cyklu „Szansy na sukces” można"
+  options: "a) nagrać piosenkę wraz ze swoim idolem.|b) poprowadzić koncert w Opolu.|c) otrzymać możliwość występu na prawdziwej estradzie."
+  correctAnswer: "c) otrzymać możliwość występu na prawdziwej estradzie."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-r1-q3
+  passageRef: certyfikat-polski-C1-2023-11-read-1
+  questionType: multiple_choice
+  questionText: "Kolejne muzyczne konkursy"
+  options: "a) nie sprzyjają trwałemu zapamiętywaniu ich zwycięzców.|b) ugruntowują pozycję ich twórców i zapewniają sławę następnym wykonawcom.|c) sprawiają, że widzowie doświadczają poczucia przesytu i znudzenia."
+  correctAnswer: "a) nie sprzyjają trwałemu zapamiętywaniu ich zwycięzców."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-r1-q4
+  passageRef: certyfikat-polski-C1-2023-11-read-1
+  questionType: multiple_choice
+  questionText: "Laureaci pierwszych edycji „Idola”"
+  options: "a) w krótkim czasie sięgali po kolejne trofea.|b) wkrótce rozstali się z branżą muzyczną.|c) nie zdołali szybko wybić się w branży."
+  correctAnswer: "c) nie zdołali szybko wybić się w branży."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-r1-q5
+  passageRef: certyfikat-polski-C1-2023-11-read-1
+  questionType: multiple_choice
+  questionText: "Repertuar obejmujący cudze utwory"
+  options: "a) stanowi wielkie wyzwanie dla początkujących artystów.|b) sprzyja medialnemu promowaniu niedoświadczonych wokalistów.|c) oznacza, że wykonawcy brak kreatywności."
+  correctAnswer: "b) sprzyja medialnemu promowaniu niedoświadczonych wokalistów."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-r1-q6
+  passageRef: certyfikat-polski-C1-2023-11-read-1
+  questionType: multiple_choice
+  questionText: "Laureaci programów telewizyjnych nie osiągają sukcesu, ponieważ"
+  options: "a) nie mogą się porozumieć z przedstawicielami branży.|b) stają się ofiarami pazerności najbliższych.|c) nie potrafią sprostać narzuconej im roli idola."
+  correctAnswer: "c) nie potrafią sprostać narzuconej im roli idola."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-r1-q7
+  passageRef: certyfikat-polski-C1-2023-11-read-1
+  questionType: multiple_choice
+  questionText: "Zdaniem Jacka Cygana program „Idol”"
+  options: "a) dawał uczestnikom przedsmak pracy estradowej.|b) był udaną formą szlifowania muzycznych talentów.|c) stwarzał pozory koncertu na żywo i zarabiał na oglądalności."
+  correctAnswer: "a) dawał uczestnikom przedsmak pracy estradowej."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-r2-q1
+  passageRef: certyfikat-polski-C1-2023-11-read-2
+  questionType: true_false_not_given
+  questionText: "Wszystkie biegi w Parku Saskim można było oglądać za darmo."
+  options: "TAK|NIE|BI"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-r2-q2
+  passageRef: certyfikat-polski-C1-2023-11-read-2
+  questionType: true_false_not_given
+  questionText: "Pierwszy mecz rozegrany przez zawodników „Sokoła” zakończył się remisem."
+  options: "TAK|NIE|BI"
+  correctAnswer: BI
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-r2-q3
+  passageRef: certyfikat-polski-C1-2023-11-read-2
+  questionType: true_false_not_given
+  questionText: "Obserwowanie kolarzy podczas pierwszych igrzysk olimpijskich wymagało od widzów ogromnej koncentracji."
+  options: "TAK|NIE|BI"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-r2-q4
+  passageRef: certyfikat-polski-C1-2023-11-read-2
+  questionType: true_false_not_given
+  questionText: "W czasach rozbiorów Polacy nie mogli uczestniczyć w rozgrywkach olimpijskich"
+  options: "TAK|NIE|BI"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-r2-q5
+  passageRef: certyfikat-polski-C1-2023-11-read-2
+  questionType: true_false_not_given
+  questionText: "Pierwsze igrzyska nowożytne wzbudzały powszechną ekscytację."
+  options: "TAK|NIE|BI"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-r2-q6
+  passageRef: certyfikat-polski-C1-2023-11-read-2
+  questionType: true_false_not_given
+  questionText: "Widok mężczyzn w strojach sportowych wywoływał dezaprobatę zarówno w mieście, jak i na wsi."
+  options: "TAK|NIE|BI"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-r2-q7
+  passageRef: certyfikat-polski-C1-2023-11-read-2
+  questionType: true_false_not_given
+  questionText: "Politycy starali się wykorzystywać sportowców, by zwiększyć poparcie dla swoich partii."
+  options: "TAK|NIE|BI"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-r2-q8
+  passageRef: certyfikat-polski-C1-2023-11-read-2
+  questionType: true_false_not_given
+  questionText: "Polski Komitet Olimpijski początkowo nie zyskał akceptacji władz niepodległej Polski."
+  options: "TAK|NIE|BI"
+  correctAnswer: BI
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-r3-q1
+  passageRef: certyfikat-polski-C1-2023-11-read-3
+  questionType: gap_fill_fragment
+  questionText: "Luka 1 w tekście „Wszystko to nie miało prawa się zdarzyć”"
+  options: "A. Niemniej sprawy oczywiste, kiedy je trochę poskrobać ciekawskim pazurem, oczywiste być przestają.|B. To, co nie przystoi naukowcom, uchodzi jednak pisarzom, którzy mogą używać swojej wyobraźni i zachęcać odbiorcę do snucia kolejnych domysłów.|C. Autor książki nie może uwolnić się od myśli, że astronom celowo starał się zostawiać jak najmniej papierowych śladów po swoim życiu.|D. Wypada więc docenić skłonność do rozważania biegu dziejów w kategoriach historii alternatywnych.|E. Przy czym nie czyni tego z poczuciem wyższości, ale zaprasza do wspólnego odkrywania jego zawiłych losów.|F. Przecież nie analizowano w nich uczciwie dowodów, nie można było też liczyć na mowy obrońców!|G. Sam jeden wywołał rewolucję w nauce i żył na przełomie dwóch epok.|H. I może to dobrze, bo wszak po śmierci Kopernika jego idee były zwalczane zarówno w katolickiej, jak i protestanckiej Europie.|I. Każde bowiem stulecie obfitowało w spektakularne wydarzenia, również te czasy, w których żył Kopernik.|J. W istocie chodzi o zrozumienie całej złożoności unikatowego odkrycia naukowego, które nigdy nie wydarza się w próżni.|K. Metaforycznie rzecz ujmując, jest to opowieść o tym, jak wielbłąd przecisnął się przez ucho igielne.|L. Alternatywą wobec takich poglądów jest hipoteza o istnieniu nieskończenie wielu wszechświatów.|M. Pomimo to czytelnik musi przedzierać się przez zawiłe przemyślenia autora na temat idei uniwersytetu i kondycji średniowiecznej nauki."
+  correctAnswer: "E. Przy czym nie czyni tego z poczuciem wyższości, ale zaprasza do wspólnego odkrywania jego zawiłych losów."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-r3-q2
+  passageRef: certyfikat-polski-C1-2023-11-read-3
+  questionType: gap_fill_fragment
+  questionText: "Luka 2 w tekście „Wszystko to nie miało prawa się zdarzyć”"
+  options: "A. Niemniej sprawy oczywiste, kiedy je trochę poskrobać ciekawskim pazurem, oczywiste być przestają.|B. To, co nie przystoi naukowcom, uchodzi jednak pisarzom, którzy mogą używać swojej wyobraźni i zachęcać odbiorcę do snucia kolejnych domysłów.|C. Autor książki nie może uwolnić się od myśli, że astronom celowo starał się zostawiać jak najmniej papierowych śladów po swoim życiu.|D. Wypada więc docenić skłonność do rozważania biegu dziejów w kategoriach historii alternatywnych.|E. Przy czym nie czyni tego z poczuciem wyższości, ale zaprasza do wspólnego odkrywania jego zawiłych losów.|F. Przecież nie analizowano w nich uczciwie dowodów, nie można było też liczyć na mowy obrońców!|G. Sam jeden wywołał rewolucję w nauce i żył na przełomie dwóch epok.|H. I może to dobrze, bo wszak po śmierci Kopernika jego idee były zwalczane zarówno w katolickiej, jak i protestanckiej Europie.|I. Każde bowiem stulecie obfitowało w spektakularne wydarzenia, również te czasy, w których żył Kopernik.|J. W istocie chodzi o zrozumienie całej złożoności unikatowego odkrycia naukowego, które nigdy nie wydarza się w próżni.|K. Metaforycznie rzecz ujmując, jest to opowieść o tym, jak wielbłąd przecisnął się przez ucho igielne.|L. Alternatywą wobec takich poglądów jest hipoteza o istnieniu nieskończenie wielu wszechświatów.|M. Pomimo to czytelnik musi przedzierać się przez zawiłe przemyślenia autora na temat idei uniwersytetu i kondycji średniowiecznej nauki."
+  correctAnswer: "I. Każde bowiem stulecie obfitowało w spektakularne wydarzenia, również te czasy, w których żył Kopernik."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-r3-q3
+  passageRef: certyfikat-polski-C1-2023-11-read-3
+  questionType: gap_fill_fragment
+  questionText: "Luka 3 w tekście „Wszystko to nie miało prawa się zdarzyć”"
+  options: "A. Niemniej sprawy oczywiste, kiedy je trochę poskrobać ciekawskim pazurem, oczywiste być przestają.|B. To, co nie przystoi naukowcom, uchodzi jednak pisarzom, którzy mogą używać swojej wyobraźni i zachęcać odbiorcę do snucia kolejnych domysłów.|C. Autor książki nie może uwolnić się od myśli, że astronom celowo starał się zostawiać jak najmniej papierowych śladów po swoim życiu.|D. Wypada więc docenić skłonność do rozważania biegu dziejów w kategoriach historii alternatywnych.|E. Przy czym nie czyni tego z poczuciem wyższości, ale zaprasza do wspólnego odkrywania jego zawiłych losów.|F. Przecież nie analizowano w nich uczciwie dowodów, nie można było też liczyć na mowy obrońców!|G. Sam jeden wywołał rewolucję w nauce i żył na przełomie dwóch epok.|H. I może to dobrze, bo wszak po śmierci Kopernika jego idee były zwalczane zarówno w katolickiej, jak i protestanckiej Europie.|I. Każde bowiem stulecie obfitowało w spektakularne wydarzenia, również te czasy, w których żył Kopernik.|J. W istocie chodzi o zrozumienie całej złożoności unikatowego odkrycia naukowego, które nigdy nie wydarza się w próżni.|K. Metaforycznie rzecz ujmując, jest to opowieść o tym, jak wielbłąd przecisnął się przez ucho igielne.|L. Alternatywą wobec takich poglądów jest hipoteza o istnieniu nieskończenie wielu wszechświatów.|M. Pomimo to czytelnik musi przedzierać się przez zawiłe przemyślenia autora na temat idei uniwersytetu i kondycji średniowiecznej nauki."
+  correctAnswer: "G. Sam jeden wywołał rewolucję w nauce i żył na przełomie dwóch epok."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-r3-q4
+  passageRef: certyfikat-polski-C1-2023-11-read-3
+  questionType: gap_fill_fragment
+  questionText: "Luka 4 w tekście „Wszystko to nie miało prawa się zdarzyć”"
+  options: "A. Niemniej sprawy oczywiste, kiedy je trochę poskrobać ciekawskim pazurem, oczywiste być przestają.|B. To, co nie przystoi naukowcom, uchodzi jednak pisarzom, którzy mogą używać swojej wyobraźni i zachęcać odbiorcę do snucia kolejnych domysłów.|C. Autor książki nie może uwolnić się od myśli, że astronom celowo starał się zostawiać jak najmniej papierowych śladów po swoim życiu.|D. Wypada więc docenić skłonność do rozważania biegu dziejów w kategoriach historii alternatywnych.|E. Przy czym nie czyni tego z poczuciem wyższości, ale zaprasza do wspólnego odkrywania jego zawiłych losów.|F. Przecież nie analizowano w nich uczciwie dowodów, nie można było też liczyć na mowy obrońców!|G. Sam jeden wywołał rewolucję w nauce i żył na przełomie dwóch epok.|H. I może to dobrze, bo wszak po śmierci Kopernika jego idee były zwalczane zarówno w katolickiej, jak i protestanckiej Europie.|I. Każde bowiem stulecie obfitowało w spektakularne wydarzenia, również te czasy, w których żył Kopernik.|J. W istocie chodzi o zrozumienie całej złożoności unikatowego odkrycia naukowego, które nigdy nie wydarza się w próżni.|K. Metaforycznie rzecz ujmując, jest to opowieść o tym, jak wielbłąd przecisnął się przez ucho igielne.|L. Alternatywą wobec takich poglądów jest hipoteza o istnieniu nieskończenie wielu wszechświatów.|M. Pomimo to czytelnik musi przedzierać się przez zawiłe przemyślenia autora na temat idei uniwersytetu i kondycji średniowiecznej nauki."
+  correctAnswer: "C. Autor książki nie może uwolnić się od myśli, że astronom celowo starał się zostawiać jak najmniej papierowych śladów po swoim życiu."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-r3-q5
+  passageRef: certyfikat-polski-C1-2023-11-read-3
+  questionType: gap_fill_fragment
+  questionText: "Luka 5 w tekście „Wszystko to nie miało prawa się zdarzyć”"
+  options: "A. Niemniej sprawy oczywiste, kiedy je trochę poskrobać ciekawskim pazurem, oczywiste być przestają.|B. To, co nie przystoi naukowcom, uchodzi jednak pisarzom, którzy mogą używać swojej wyobraźni i zachęcać odbiorcę do snucia kolejnych domysłów.|C. Autor książki nie może uwolnić się od myśli, że astronom celowo starał się zostawiać jak najmniej papierowych śladów po swoim życiu.|D. Wypada więc docenić skłonność do rozważania biegu dziejów w kategoriach historii alternatywnych.|E. Przy czym nie czyni tego z poczuciem wyższości, ale zaprasza do wspólnego odkrywania jego zawiłych losów.|F. Przecież nie analizowano w nich uczciwie dowodów, nie można było też liczyć na mowy obrońców!|G. Sam jeden wywołał rewolucję w nauce i żył na przełomie dwóch epok.|H. I może to dobrze, bo wszak po śmierci Kopernika jego idee były zwalczane zarówno w katolickiej, jak i protestanckiej Europie.|I. Każde bowiem stulecie obfitowało w spektakularne wydarzenia, również te czasy, w których żył Kopernik.|J. W istocie chodzi o zrozumienie całej złożoności unikatowego odkrycia naukowego, które nigdy nie wydarza się w próżni.|K. Metaforycznie rzecz ujmując, jest to opowieść o tym, jak wielbłąd przecisnął się przez ucho igielne.|L. Alternatywą wobec takich poglądów jest hipoteza o istnieniu nieskończenie wielu wszechświatów.|M. Pomimo to czytelnik musi przedzierać się przez zawiłe przemyślenia autora na temat idei uniwersytetu i kondycji średniowiecznej nauki."
+  correctAnswer: "H. I może to dobrze, bo wszak po śmierci Kopernika jego idee były zwalczane zarówno w katolickiej, jak i protestanckiej Europie."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-r3-q6
+  passageRef: certyfikat-polski-C1-2023-11-read-3
+  questionType: gap_fill_fragment
+  questionText: "Luka 6 w tekście „Wszystko to nie miało prawa się zdarzyć”"
+  options: "A. Niemniej sprawy oczywiste, kiedy je trochę poskrobać ciekawskim pazurem, oczywiste być przestają.|B. To, co nie przystoi naukowcom, uchodzi jednak pisarzom, którzy mogą używać swojej wyobraźni i zachęcać odbiorcę do snucia kolejnych domysłów.|C. Autor książki nie może uwolnić się od myśli, że astronom celowo starał się zostawiać jak najmniej papierowych śladów po swoim życiu.|D. Wypada więc docenić skłonność do rozważania biegu dziejów w kategoriach historii alternatywnych.|E. Przy czym nie czyni tego z poczuciem wyższości, ale zaprasza do wspólnego odkrywania jego zawiłych losów.|F. Przecież nie analizowano w nich uczciwie dowodów, nie można było też liczyć na mowy obrońców!|G. Sam jeden wywołał rewolucję w nauce i żył na przełomie dwóch epok.|H. I może to dobrze, bo wszak po śmierci Kopernika jego idee były zwalczane zarówno w katolickiej, jak i protestanckiej Europie.|I. Każde bowiem stulecie obfitowało w spektakularne wydarzenia, również te czasy, w których żył Kopernik.|J. W istocie chodzi o zrozumienie całej złożoności unikatowego odkrycia naukowego, które nigdy nie wydarza się w próżni.|K. Metaforycznie rzecz ujmując, jest to opowieść o tym, jak wielbłąd przecisnął się przez ucho igielne.|L. Alternatywą wobec takich poglądów jest hipoteza o istnieniu nieskończenie wielu wszechświatów.|M. Pomimo to czytelnik musi przedzierać się przez zawiłe przemyślenia autora na temat idei uniwersytetu i kondycji średniowiecznej nauki."
+  correctAnswer: "F. Przecież nie analizowano w nich uczciwie dowodów, nie można było też liczyć na mowy obrońców!"
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-r3-q7
+  passageRef: certyfikat-polski-C1-2023-11-read-3
+  questionType: gap_fill_fragment
+  questionText: "Luka 7 w tekście „Wszystko to nie miało prawa się zdarzyć”"
+  options: "A. Niemniej sprawy oczywiste, kiedy je trochę poskrobać ciekawskim pazurem, oczywiste być przestają.|B. To, co nie przystoi naukowcom, uchodzi jednak pisarzom, którzy mogą używać swojej wyobraźni i zachęcać odbiorcę do snucia kolejnych domysłów.|C. Autor książki nie może uwolnić się od myśli, że astronom celowo starał się zostawiać jak najmniej papierowych śladów po swoim życiu.|D. Wypada więc docenić skłonność do rozważania biegu dziejów w kategoriach historii alternatywnych.|E. Przy czym nie czyni tego z poczuciem wyższości, ale zaprasza do wspólnego odkrywania jego zawiłych losów.|F. Przecież nie analizowano w nich uczciwie dowodów, nie można było też liczyć na mowy obrońców!|G. Sam jeden wywołał rewolucję w nauce i żył na przełomie dwóch epok.|H. I może to dobrze, bo wszak po śmierci Kopernika jego idee były zwalczane zarówno w katolickiej, jak i protestanckiej Europie.|I. Każde bowiem stulecie obfitowało w spektakularne wydarzenia, również te czasy, w których żył Kopernik.|J. W istocie chodzi o zrozumienie całej złożoności unikatowego odkrycia naukowego, które nigdy nie wydarza się w próżni.|K. Metaforycznie rzecz ujmując, jest to opowieść o tym, jak wielbłąd przecisnął się przez ucho igielne.|L. Alternatywą wobec takich poglądów jest hipoteza o istnieniu nieskończenie wielu wszechświatów.|M. Pomimo to czytelnik musi przedzierać się przez zawiłe przemyślenia autora na temat idei uniwersytetu i kondycji średniowiecznej nauki."
+  correctAnswer: "B. To, co nie przystoi naukowcom, uchodzi jednak pisarzom, którzy mogą używać swojej wyobraźni i zachęcać odbiorcę do snucia kolejnych domysłów."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-r3-q8
+  passageRef: certyfikat-polski-C1-2023-11-read-3
+  questionType: gap_fill_fragment
+  questionText: "Luka 8 w tekście „Wszystko to nie miało prawa się zdarzyć”"
+  options: "A. Niemniej sprawy oczywiste, kiedy je trochę poskrobać ciekawskim pazurem, oczywiste być przestają.|B. To, co nie przystoi naukowcom, uchodzi jednak pisarzom, którzy mogą używać swojej wyobraźni i zachęcać odbiorcę do snucia kolejnych domysłów.|C. Autor książki nie może uwolnić się od myśli, że astronom celowo starał się zostawiać jak najmniej papierowych śladów po swoim życiu.|D. Wypada więc docenić skłonność do rozważania biegu dziejów w kategoriach historii alternatywnych.|E. Przy czym nie czyni tego z poczuciem wyższości, ale zaprasza do wspólnego odkrywania jego zawiłych losów.|F. Przecież nie analizowano w nich uczciwie dowodów, nie można było też liczyć na mowy obrońców!|G. Sam jeden wywołał rewolucję w nauce i żył na przełomie dwóch epok.|H. I może to dobrze, bo wszak po śmierci Kopernika jego idee były zwalczane zarówno w katolickiej, jak i protestanckiej Europie.|I. Każde bowiem stulecie obfitowało w spektakularne wydarzenia, również te czasy, w których żył Kopernik.|J. W istocie chodzi o zrozumienie całej złożoności unikatowego odkrycia naukowego, które nigdy nie wydarza się w próżni.|K. Metaforycznie rzecz ujmując, jest to opowieść o tym, jak wielbłąd przecisnął się przez ucho igielne.|L. Alternatywą wobec takich poglądów jest hipoteza o istnieniu nieskończenie wielu wszechświatów.|M. Pomimo to czytelnik musi przedzierać się przez zawiłe przemyślenia autora na temat idei uniwersytetu i kondycji średniowiecznej nauki."
+  correctAnswer: "D. Wypada więc docenić skłonność do rozważania biegu dziejów w kategoriach historii alternatywnych."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-r3-q9
+  passageRef: certyfikat-polski-C1-2023-11-read-3
+  questionType: gap_fill_fragment
+  questionText: "Luka 9 w tekście „Wszystko to nie miało prawa się zdarzyć”"
+  options: "A. Niemniej sprawy oczywiste, kiedy je trochę poskrobać ciekawskim pazurem, oczywiste być przestają.|B. To, co nie przystoi naukowcom, uchodzi jednak pisarzom, którzy mogą używać swojej wyobraźni i zachęcać odbiorcę do snucia kolejnych domysłów.|C. Autor książki nie może uwolnić się od myśli, że astronom celowo starał się zostawiać jak najmniej papierowych śladów po swoim życiu.|D. Wypada więc docenić skłonność do rozważania biegu dziejów w kategoriach historii alternatywnych.|E. Przy czym nie czyni tego z poczuciem wyższości, ale zaprasza do wspólnego odkrywania jego zawiłych losów.|F. Przecież nie analizowano w nich uczciwie dowodów, nie można było też liczyć na mowy obrońców!|G. Sam jeden wywołał rewolucję w nauce i żył na przełomie dwóch epok.|H. I może to dobrze, bo wszak po śmierci Kopernika jego idee były zwalczane zarówno w katolickiej, jak i protestanckiej Europie.|I. Każde bowiem stulecie obfitowało w spektakularne wydarzenia, również te czasy, w których żył Kopernik.|J. W istocie chodzi o zrozumienie całej złożoności unikatowego odkrycia naukowego, które nigdy nie wydarza się w próżni.|K. Metaforycznie rzecz ujmując, jest to opowieść o tym, jak wielbłąd przecisnął się przez ucho igielne.|L. Alternatywą wobec takich poglądów jest hipoteza o istnieniu nieskończenie wielu wszechświatów.|M. Pomimo to czytelnik musi przedzierać się przez zawiłe przemyślenia autora na temat idei uniwersytetu i kondycji średniowiecznej nauki."
+  correctAnswer: "K. Metaforycznie rzecz ujmując, jest to opowieść o tym, jak wielbłąd przecisnął się przez ucho igielne."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-r3-q10
+  passageRef: certyfikat-polski-C1-2023-11-read-3
+  questionType: gap_fill_fragment
+  questionText: "Luka 10 w tekście „Wszystko to nie miało prawa się zdarzyć”"
+  options: "A. Niemniej sprawy oczywiste, kiedy je trochę poskrobać ciekawskim pazurem, oczywiste być przestają.|B. To, co nie przystoi naukowcom, uchodzi jednak pisarzom, którzy mogą używać swojej wyobraźni i zachęcać odbiorcę do snucia kolejnych domysłów.|C. Autor książki nie może uwolnić się od myśli, że astronom celowo starał się zostawiać jak najmniej papierowych śladów po swoim życiu.|D. Wypada więc docenić skłonność do rozważania biegu dziejów w kategoriach historii alternatywnych.|E. Przy czym nie czyni tego z poczuciem wyższości, ale zaprasza do wspólnego odkrywania jego zawiłych losów.|F. Przecież nie analizowano w nich uczciwie dowodów, nie można było też liczyć na mowy obrońców!|G. Sam jeden wywołał rewolucję w nauce i żył na przełomie dwóch epok.|H. I może to dobrze, bo wszak po śmierci Kopernika jego idee były zwalczane zarówno w katolickiej, jak i protestanckiej Europie.|I. Każde bowiem stulecie obfitowało w spektakularne wydarzenia, również te czasy, w których żył Kopernik.|J. W istocie chodzi o zrozumienie całej złożoności unikatowego odkrycia naukowego, które nigdy nie wydarza się w próżni.|K. Metaforycznie rzecz ujmując, jest to opowieść o tym, jak wielbłąd przecisnął się przez ucho igielne.|L. Alternatywą wobec takich poglądów jest hipoteza o istnieniu nieskończenie wielu wszechświatów.|M. Pomimo to czytelnik musi przedzierać się przez zawiłe przemyślenia autora na temat idei uniwersytetu i kondycji średniowiecznej nauki."
+  correctAnswer: "J. W istocie chodzi o zrozumienie całej złożoności unikatowego odkrycia naukowego, które nigdy nie wydarza się w próżni."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-r4-q1
+  passageRef: certyfikat-polski-C1-2023-11-read-4
+  questionType: matching
+  questionText: "Nierówności w poziomie dochodów i długości życia zaczynają coraz bardziej wpływać na kształt programów społeczno-politycznych."
+  options: "A|B|C|D|E"
+  correctAnswer: D
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-r4-q2
+  passageRef: certyfikat-polski-C1-2023-11-read-4
+  questionType: matching
+  questionText: "Wiek mierzony liczbą lat wyznacza określone sposoby postępowania i wpływa na to, jak odbieramy siebie i innych."
+  options: "A|B|C|D|E"
+  correctAnswer: "B|E"
+  pointsQuarter: 8
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-r4-q3
+  passageRef: certyfikat-polski-C1-2023-11-read-4
+  questionType: matching
+  questionText: "Ludzkiemu dążeniu do zabezpieczenia potrzeb bytowych towarzyszy pragnienie utrzymania swojej podmiotowości w zmieniającym się świecie."
+  options: "A|B|C|D|E"
+  correctAnswer: A
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-r4-q4
+  passageRef: certyfikat-polski-C1-2023-11-read-4
+  questionType: matching
+  questionText: "Transformacja technologiczna stwarza też obawy o naszą przyszłość."
+  options: "A|B|C|D|E"
+  correctAnswer: A
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-r4-q5
+  passageRef: certyfikat-polski-C1-2023-11-read-4
+  questionType: matching
+  questionText: "Przywiązanie do dat, tak powszechne w naszej kulturze, nie ma zbyt długiej tradycji."
+  options: "A|B|C|D|E"
+  correctAnswer: E
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-r4-q6
+  passageRef: certyfikat-polski-C1-2023-11-read-4
+  questionType: matching
+  questionText: "Odrzucenie sztywnych podziałów między różnymi sposobami pojmowania wieku człowieka pozwala zrezygnować z utrwalonego zwyczajem odmierzania upływu życia."
+  options: "A|B|C|D|E"
+  correctAnswer: "B|C"
+  pointsQuarter: 8
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-r4-q7
+  passageRef: certyfikat-polski-C1-2023-11-read-4
+  questionType: matching
+  questionText: "Coraz bardziej realne perspektywy osiągnięcia sędziwego wieku modelują osobistą narrację dotyczącą starzenia się."
+  options: "A|B|C|D|E"
+  correctAnswer: C
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-r4-q8
+  passageRef: certyfikat-polski-C1-2023-11-read-4
+  questionType: matching
+  questionText: "Potrzebny będzie szereg dalszych regulacji prawnych, abyśmy skorzystali z przeobrażeń związanych z długością życia oraz rozwojem technologii."
+  options: "A|B|C|D|E"
+  correctAnswer: D
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-r5-q1
+  passageRef: certyfikat-polski-C1-2023-11-read-5
+  questionType: multiple_choice
+  questionText: "Luka 1 w tekście „Skąd w Poznaniu wzięły się koszyki i piwo”"
+  options: "placówki|agencji|pozycji|komórki"
+  correctAnswer: "placówki"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-r5-q2
+  passageRef: certyfikat-polski-C1-2023-11-read-5
+  questionType: multiple_choice
+  questionText: "Luka 2 w tekście „Skąd w Poznaniu wzięły się koszyki i piwo”"
+  options: "hodowli|gospodarki|agronomii|uprawy"
+  correctAnswer: uprawy
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-r5-q3
+  passageRef: certyfikat-polski-C1-2023-11-read-5
+  questionType: multiple_choice
+  questionText: "Luka 3 w tekście „Skąd w Poznaniu wzięły się koszyki i piwo”"
+  options: "napływem|tłokiem|wpływem|najściem"
+  correctAnswer: "napływem"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-r5-q4
+  passageRef: certyfikat-polski-C1-2023-11-read-5
+  questionType: multiple_choice
+  questionText: "Luka 4 w tekście „Skąd w Poznaniu wzięły się koszyki i piwo”"
+  options: "ułożeniu|rodzaju|stanie|natężeniu"
+  correctAnswer: stanie
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-r5-q5
+  passageRef: certyfikat-polski-C1-2023-11-read-5
+  questionType: multiple_choice
+  questionText: "Luka 5 w tekście „Skąd w Poznaniu wzięły się koszyki i piwo”"
+  options: "podnóże|poparcie|zaplecze|dojście"
+  correctAnswer: zaplecze
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-r5-q6
+  passageRef: certyfikat-polski-C1-2023-11-read-5
+  questionType: multiple_choice
+  questionText: "Luka 6 w tekście „Skąd w Poznaniu wzięły się koszyki i piwo”"
+  options: "wiążą się|stapiają się|integrują się|skupiają się"
+  correctAnswer: "wiążą się"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-r5-q7
+  passageRef: certyfikat-polski-C1-2023-11-read-5
+  questionType: multiple_choice
+  questionText: "Luka 7 w tekście „Skąd w Poznaniu wzięły się koszyki i piwo”"
+  options: "preferencje|priorytety|awanse|przywileje"
+  correctAnswer: przywileje
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-r5-q8
+  passageRef: certyfikat-polski-C1-2023-11-read-5
+  questionType: multiple_choice
+  questionText: "Luka 8 w tekście „Skąd w Poznaniu wzięły się koszyki i piwo”"
+  options: "stada|fermy|zagrody|poletka"
+  correctAnswer: poletka
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-r5-q9
+  passageRef: certyfikat-polski-C1-2023-11-read-5
+  questionType: multiple_choice
+  questionText: "Luka 9 w tekście „Skąd w Poznaniu wzięły się koszyki i piwo”"
+  options: "filia|miejscówka|siedziba|instancja"
+  correctAnswer: siedziba
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-r5-q10
+  passageRef: certyfikat-polski-C1-2023-11-read-5
+  questionType: multiple_choice
+  questionText: "Luka 10 w tekście „Skąd w Poznaniu wzięły się koszyki i piwo”"
+  options: "kruszców|substancji|surowców|budulców"
+  correctAnswer: "surowców"
+  pointsQuarter: 2
+}

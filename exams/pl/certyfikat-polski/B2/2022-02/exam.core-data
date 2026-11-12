@@ -1,0 +1,10 @@
+DSL 1
+EXAM {
+  examId: certyfikat-polski-B2-2022-02
+  provider: certyfikat-polski
+  targetLanguage: pl
+  level: B2
+  year: 2022
+  sourceUrl: "https://certyfikatpolski.pl/wp-content/uploads/2026/01/2022.02.6-7_B2_Arkusz_egzaminacyjny.pdf"
+  license: "Państwowa Komisja ds. Poświadczania Znajomości Języka Polskiego jako Obcego"
+}

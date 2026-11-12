@@ -1,0 +1,63 @@
+DSL 1
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2022-02-write-i-a
+  examRef: certyfikat-polski-B2-2022-02
+  taskNumber: 1
+  setId: I
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. W każdym zestawie są dwa zadania: a i b. Należy wybrać tylko jeden zestaw i wykonać obydwa zadania (a i b) z danego zestawu, zgodnie z poleceniami, np.: • zestaw I – zadania a i b z zestawu I lub • zestaw II – zadania a i b z zestawu II lub • zestaw III – zadania a i b z zestawu III"
+  promptText: "Jest Pani/Pan animatorem zabaw dla dzieci. Proszę zareklamować swoje usługi na polskim portalu internetowym „Atrakcje dla Najmłodszych”."
+  wordLimit: 60
+  genre: advertisement
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2022-02-write-i-b
+  examRef: certyfikat-polski-B2-2022-02
+  taskNumber: 1
+  setId: I
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. W każdym zestawie są dwa zadania: a i b. Należy wybrać tylko jeden zestaw i wykonać obydwa zadania (a i b) z danego zestawu, zgodnie z poleceniami, np.: • zestaw I – zadania a i b z zestawu I lub • zestaw II – zadania a i b z zestawu II lub • zestaw III – zadania a i b z zestawu III"
+  promptText: "Proszę napisać opowiadanie zainspirowane poniższym zdjęciem."
+  promptImageUrl: exam-images/B2-2022-02-writing-I-b.png
+  promptImageAlt: "Dwie osoby w motorowej łodzi na jeziorze, widziane od przodu."
+  wordLimit: 240
+  genre: story
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2022-02-write-ii-a
+  examRef: certyfikat-polski-B2-2022-02
+  taskNumber: 2
+  setId: II
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. W każdym zestawie są dwa zadania: a i b. Należy wybrać tylko jeden zestaw i wykonać obydwa zadania (a i b) z danego zestawu, zgodnie z poleceniami, np.: • zestaw I – zadania a i b z zestawu I lub • zestaw II – zadania a i b z zestawu II lub • zestaw III – zadania a i b z zestawu III"
+  promptText: "„Ta polska miejscowość przyciąga wielu turystów”. Proszę opisać to miejsce."
+  wordLimit: 140
+  genre: description
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2022-02-write-ii-b
+  examRef: certyfikat-polski-B2-2022-02
+  taskNumber: 2
+  setId: II
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. W każdym zestawie są dwa zadania: a i b. Należy wybrać tylko jeden zestaw i wykonać obydwa zadania (a i b) z danego zestawu, zgodnie z poleceniami, np.: • zestaw I – zadania a i b z zestawu I lub • zestaw II – zadania a i b z zestawu II lub • zestaw III – zadania a i b z zestawu III"
+  promptText: "Planuje Pani/Pan zorganizować kilkudniowy wyjazd dla swoich podopiecznych z Fundacji „Aktywni Seniorzy”. Proszę napisać list do dyrektora banku z prośbą o wsparcie finansowe."
+  wordLimit: 160
+  genre: letter
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2022-02-write-iii-a
+  examRef: certyfikat-polski-B2-2022-02
+  taskNumber: 3
+  setId: III
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. W każdym zestawie są dwa zadania: a i b. Należy wybrać tylko jeden zestaw i wykonać obydwa zadania (a i b) z danego zestawu, zgodnie z poleceniami, np.: • zestaw I – zadania a i b z zestawu I lub • zestaw II – zadania a i b z zestawu II lub • zestaw III – zadania a i b z zestawu III"
+  promptText: "Jest Pani właścicielką / Pan właścicielem salonu kosmetycznego / warsztatu samochodowego i szuka Pani/Pan osoby do pracy. Proszę napisać ogłoszenie, które zamieści Pani/Pan na polskiej stronie internetowej praca.pl."
+  wordLimit: 40
+  genre: announcement
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2022-02-write-iii-b
+  examRef: certyfikat-polski-B2-2022-02
+  taskNumber: 3
+  setId: III
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. W każdym zestawie są dwa zadania: a i b. Należy wybrać tylko jeden zestaw i wykonać obydwa zadania (a i b) z danego zestawu, zgodnie z poleceniami, np.: • zestaw I – zadania a i b z zestawu I lub • zestaw II – zadania a i b z zestawu II lub • zestaw III – zadania a i b z zestawu III"
+  promptText: "Czy zgadza się Pani/Pan ze stwierdzeniem, że efekty uczenia się zależą nie tylko od motywacji do nauki, lecz także od planowania pracy i odpoczynku? Proszę napisać tekst argumentacyjny (rozprawkę), w którym wyrazi Pani/Pan swoją opinię."
+  wordLimit: 260
+  genre: argument
+}

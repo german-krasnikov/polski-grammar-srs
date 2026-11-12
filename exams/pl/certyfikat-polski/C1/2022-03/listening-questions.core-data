@@ -1,0 +1,361 @@
+DSL 1
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l1-q1
+  taskRef: certyfikat-polski-C1-2022-03-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a) w pożarze budynku nikt nie ucierpiał.|b) oczekiwanie na interwencję odpowiednich służb trwało długo.|c) strażacy wyprowadzili mieszkańców z płonącego mieszkania."
+  correctAnswer: "a) w pożarze budynku nikt nie ucierpiał."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l1-q2
+  taskRef: certyfikat-polski-C1-2022-03-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a) naprawa fontann będzie okazją do unowocześnienia ich wyglądu.|b) fontanny musiały być naprawione, by zapobiec marnowaniu wody.|c) wiceprezydent miasta od dawna walczyła o remont fontann."
+  correctAnswer: "b) fontanny musiały być naprawione, by zapobiec marnowaniu wody."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l1-q3
+  taskRef: certyfikat-polski-C1-2022-03-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a) pani Helena świętowała swoje urodziny w gronie 120 osób.|b) seniorka zmieniła niedawno miejsce zamieszkania.|c) w ostatnich latach kobieta bardzo dbała o swoje zdrowie."
+  correctAnswer: "b) seniorka zmieniła niedawno miejsce zamieszkania."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l1-q4
+  taskRef: certyfikat-polski-C1-2022-03-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a) grudniowa uchwała nadal nie obowiązuje.|b) niezadowolenie pracowników wzbudził brak decyzji o podwyżkach.|c) protestujący pracownicy systematycznie zakłócali obrady rady miasta."
+  correctAnswer: "a) grudniowa uchwała nadal nie obowiązuje."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l1-q5
+  taskRef: certyfikat-polski-C1-2022-03-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a) klub zamierza odwołać się od decyzji w sprawie kary finansowej.|b) piłkarze Zagłębia zostali ukarani za agresywne przyśpiewki.|c) kibice jednej z drużyn niszczyli symbole klubowe przeciwnej drużyny."
+  correctAnswer: "c) kibice jednej z drużyn niszczyli symbole klubowe przeciwnej drużyny."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l1-q6
+  taskRef: certyfikat-polski-C1-2022-03-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a) darmowe posiłki są na razie wydawane tylko w jednym lokalu.|b) posiłki dla potrzebujących zostały ufundowane przez restauracje.|c) klienci zostawiają napiwek, który mogą odebrać potrzebujący."
+  correctAnswer: "a) darmowe posiłki są na razie wydawane tylko w jednym lokalu."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l1-q7
+  taskRef: certyfikat-polski-C1-2022-03-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a) referendum jest inicjatywą rady gminy.|b) większość głosujących wsparła urzędującego wójta.|c) wójt i radni nie brali pod uwagę głosu mieszkańców."
+  correctAnswer: "c) wójt i radni nie brali pod uwagę głosu mieszkańców."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l1-q8
+  taskRef: certyfikat-polski-C1-2022-03-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a) inwestycja drogowa została w pełni sfinansowana przez rząd.|b) kierowcy często przekraczają prędkość na tym odcinku drogi.|c) 5 listopada na drodze miał miejsce śmiertelny wypadek."
+  correctAnswer: "b) kierowcy często przekraczają prędkość na tym odcinku drogi."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l2-q1
+  taskRef: certyfikat-polski-C1-2022-03-listen-2
+  questionType: true_false
+  questionText: "W 1996 roku Apoloniusz Tajner startował w igrzyskach olimpijskich."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l2-q2
+  taskRef: certyfikat-polski-C1-2022-03-listen-2
+  questionType: true_false
+  questionText: "Tadeusz Bafia został zmuszony do pobytu w Kanadzie."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l2-q3
+  taskRef: certyfikat-polski-C1-2022-03-listen-2
+  questionType: true_false
+  questionText: "Apoloniusz Tajner stracił pracę z powodu braku ważnego zawodnika w kadrze skoczków."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l2-q4
+  taskRef: certyfikat-polski-C1-2022-03-listen-2
+  questionType: true_false
+  questionText: "Praca w związku sportowym była dla Tajnera jedynym źródłem utrzymania."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l2-q5
+  taskRef: certyfikat-polski-C1-2022-03-listen-2
+  questionType: true_false
+  questionText: "Występ Adama Małysza w Nagano był pozytywnym zaskoczeniem."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l2-q6
+  taskRef: certyfikat-polski-C1-2022-03-listen-2
+  questionType: true_false
+  questionText: "Dla Małysza alternatywą dla kariery skoczka była praca w branży budowlanej."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l2-q7
+  taskRef: certyfikat-polski-C1-2022-03-listen-2
+  questionType: true_false
+  questionText: "Andrzej Kozak i Leszek Nadarkiewicz dostrzegli potencjał sportowy Małysza."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l2-q8
+  taskRef: certyfikat-polski-C1-2022-03-listen-2
+  questionType: true_false
+  questionText: "Władze Związku Narciarskiego początkowo podważały kompetencje trenerskie Apoloniusza Tajnera."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l2-q9
+  taskRef: certyfikat-polski-C1-2022-03-listen-2
+  questionType: true_false
+  questionText: "Mówiący mężczyzna stara się ukryć nieprzyjemne fakty."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l3-q1
+  taskRef: certyfikat-polski-C1-2022-03-listen-3
+  questionType: matching
+  questionText: "A. cieszy się z zaangażowania młodzieży w działalność charytatywną."
+  options: "1|2|3|4"
+  correctAnswer: "1"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l3-q2
+  taskRef: certyfikat-polski-C1-2022-03-listen-3
+  questionType: matching
+  questionText: "B. jest zaskoczona umiejętnościami osób kierujących wydarzeniem."
+  options: "1|2|3|4"
+  correctAnswer: "4"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l3-q3
+  taskRef: certyfikat-polski-C1-2022-03-listen-3
+  questionType: matching
+  questionText: "C. przyznaje, że nie zawsze brała udział w akcji WOŚP."
+  options: "1|2|3|4"
+  correctAnswer: "3"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l3-q4
+  taskRef: certyfikat-polski-C1-2022-03-listen-3
+  questionType: matching
+  questionText: "D. podkreśla wyjątkowy sposób powstania i funkcjonowania fundacji."
+  options: "1|2|3|4"
+  correctAnswer: "4"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l3-q5
+  taskRef: certyfikat-polski-C1-2022-03-listen-3
+  questionType: matching
+  questionText: "E. uważa, że wyposażenie służby zdrowia powinno być finansowane z innych źródeł."
+  options: "1|2|3|4"
+  correctAnswer: "2"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l3-q6
+  taskRef: certyfikat-polski-C1-2022-03-listen-3
+  questionType: matching
+  questionText: "F. uważa dzień zbiórki za jeden z najważniejszych w roku."
+  options: "1|2|3|4"
+  correctAnswer: "3"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l3-q7
+  taskRef: certyfikat-polski-C1-2022-03-listen-3
+  questionType: matching
+  questionText: "G. podchodzi do akcji w sposób bardzo emocjonalny."
+  options: "1|2|3|4"
+  correctAnswer: "1"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l3-q8
+  taskRef: certyfikat-polski-C1-2022-03-listen-3
+  questionType: matching
+  questionText: "H. obecnie włącza się do akcji z większym zaangażowaniem."
+  options: "1|2|3|4"
+  correctAnswer: "4"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l4-q1
+  taskRef: certyfikat-polski-C1-2022-03-listen-4
+  questionType: matching
+  questionText: "Teleskop ALMA"
+  options: "A. nie doprowadził jak dotąd do ważnych odkryć.|B. okazał się projektem droższym niż oczekiwano.|C. ma zastąpić obecnie używane urządzenie.|D. wymagał ćwiczeń i testów na różnych typach terenu.|E. wykorzystują dane z różnych źródeł.|F. bazował na wcześniejszych badaniach prowadzonych w innym celu.|G. wymaga szczególnych warunków meteorologicznych, żeby działać.|H. uzmysłowił konieczność budowy kolejnego narzędzia tego rodzaju.|I. był przedmiotem wielu kontrowersji i obaw."
+  correctAnswer: "G. wymaga szczególnych warunków meteorologicznych, żeby działać."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l4-q2
+  taskRef: certyfikat-polski-C1-2022-03-listen-4
+  questionType: matching
+  questionText: "Teleskop Jamesa Webba"
+  options: "A. nie doprowadził jak dotąd do ważnych odkryć.|B. okazał się projektem droższym niż oczekiwano.|C. ma zastąpić obecnie używane urządzenie.|D. wymagał ćwiczeń i testów na różnych typach terenu.|E. wykorzystują dane z różnych źródeł.|F. bazował na wcześniejszych badaniach prowadzonych w innym celu.|G. wymaga szczególnych warunków meteorologicznych, żeby działać.|H. uzmysłowił konieczność budowy kolejnego narzędzia tego rodzaju.|I. był przedmiotem wielu kontrowersji i obaw."
+  correctAnswer: "C. ma zastąpić obecnie używane urządzenie."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l4-q3
+  taskRef: certyfikat-polski-C1-2022-03-listen-4
+  questionType: matching
+  questionText: "Wielki Zderzacz Hadronów"
+  options: "A. nie doprowadził jak dotąd do ważnych odkryć.|B. okazał się projektem droższym niż oczekiwano.|C. ma zastąpić obecnie używane urządzenie.|D. wymagał ćwiczeń i testów na różnych typach terenu.|E. wykorzystują dane z różnych źródeł.|F. bazował na wcześniejszych badaniach prowadzonych w innym celu.|G. wymaga szczególnych warunków meteorologicznych, żeby działać.|H. uzmysłowił konieczność budowy kolejnego narzędzia tego rodzaju.|I. był przedmiotem wielu kontrowersji i obaw."
+  correctAnswer: "H. uzmysłowił konieczność budowy kolejnego narzędzia tego rodzaju."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l4-q4
+  taskRef: certyfikat-polski-C1-2022-03-listen-4
+  questionType: matching
+  questionText: "Projekt Manhattan"
+  options: "A. nie doprowadził jak dotąd do ważnych odkryć.|B. okazał się projektem droższym niż oczekiwano.|C. ma zastąpić obecnie używane urządzenie.|D. wymagał ćwiczeń i testów na różnych typach terenu.|E. wykorzystują dane z różnych źródeł.|F. bazował na wcześniejszych badaniach prowadzonych w innym celu.|G. wymaga szczególnych warunków meteorologicznych, żeby działać.|H. uzmysłowił konieczność budowy kolejnego narzędzia tego rodzaju.|I. był przedmiotem wielu kontrowersji i obaw."
+  correctAnswer: "F. bazował na wcześniejszych badaniach prowadzonych w innym celu."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l4-q5
+  taskRef: certyfikat-polski-C1-2022-03-listen-4
+  questionType: matching
+  questionText: "Reaktor termonuklearny ITER"
+  options: "A. nie doprowadził jak dotąd do ważnych odkryć.|B. okazał się projektem droższym niż oczekiwano.|C. ma zastąpić obecnie używane urządzenie.|D. wymagał ćwiczeń i testów na różnych typach terenu.|E. wykorzystują dane z różnych źródeł.|F. bazował na wcześniejszych badaniach prowadzonych w innym celu.|G. wymaga szczególnych warunków meteorologicznych, żeby działać.|H. uzmysłowił konieczność budowy kolejnego narzędzia tego rodzaju.|I. był przedmiotem wielu kontrowersji i obaw."
+  correctAnswer: "I. był przedmiotem wielu kontrowersji i obaw."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l4-q6
+  taskRef: certyfikat-polski-C1-2022-03-listen-4
+  questionType: matching
+  questionText: "Projekt Międzynarodowej Stacji Kosmicznej ISS"
+  options: "A. nie doprowadził jak dotąd do ważnych odkryć.|B. okazał się projektem droższym niż oczekiwano.|C. ma zastąpić obecnie używane urządzenie.|D. wymagał ćwiczeń i testów na różnych typach terenu.|E. wykorzystują dane z różnych źródeł.|F. bazował na wcześniejszych badaniach prowadzonych w innym celu.|G. wymaga szczególnych warunków meteorologicznych, żeby działać.|H. uzmysłowił konieczność budowy kolejnego narzędzia tego rodzaju.|I. był przedmiotem wielu kontrowersji i obaw."
+  correctAnswer: "A. nie doprowadził jak dotąd do ważnych odkryć."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l4-q7
+  taskRef: certyfikat-polski-C1-2022-03-listen-4
+  questionType: matching
+  questionText: "Program Apollo"
+  options: "A. nie doprowadził jak dotąd do ważnych odkryć.|B. okazał się projektem droższym niż oczekiwano.|C. ma zastąpić obecnie używane urządzenie.|D. wymagał ćwiczeń i testów na różnych typach terenu.|E. wykorzystują dane z różnych źródeł.|F. bazował na wcześniejszych badaniach prowadzonych w innym celu.|G. wymaga szczególnych warunków meteorologicznych, żeby działać.|H. uzmysłowił konieczność budowy kolejnego narzędzia tego rodzaju.|I. był przedmiotem wielu kontrowersji i obaw."
+  correctAnswer: "D. wymagał ćwiczeń i testów na różnych typach terenu."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l4-q8
+  taskRef: certyfikat-polski-C1-2022-03-listen-4
+  questionType: matching
+  questionText: "System transportu kosmicznego"
+  options: "A. nie doprowadził jak dotąd do ważnych odkryć.|B. okazał się projektem droższym niż oczekiwano.|C. ma zastąpić obecnie używane urządzenie.|D. wymagał ćwiczeń i testów na różnych typach terenu.|E. wykorzystują dane z różnych źródeł.|F. bazował na wcześniejszych badaniach prowadzonych w innym celu.|G. wymaga szczególnych warunków meteorologicznych, żeby działać.|H. uzmysłowił konieczność budowy kolejnego narzędzia tego rodzaju.|I. był przedmiotem wielu kontrowersji i obaw."
+  correctAnswer: "B. okazał się projektem droższym niż oczekiwano."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l5-q1
+  taskRef: certyfikat-polski-C1-2022-03-listen-5
+  questionType: fill_gap
+  questionText: "Dlaczego bohater reportażu nie mógł mieć zwierząt w domu?"
+  correctAnswer: "Ponieważ ojciec nie lubił zwierząt."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l5-q2
+  taskRef: certyfikat-polski-C1-2022-03-listen-5
+  questionType: fill_gap
+  questionText: "Jakie żywe istoty Jan Żabiński hodował w swoim domu jako pierwsze?"
+  correctAnswer: Kijanki.
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l5-q3
+  taskRef: certyfikat-polski-C1-2022-03-listen-5
+  questionType: fill_gap
+  questionText: "W jaki sposób chłopiec przekonał ojca do swojej pasji?"
+  correctAnswer: "Skłamał, że nauczyciel przyrody kazał je hodować."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l5-q4
+  taskRef: certyfikat-polski-C1-2022-03-listen-5
+  questionType: fill_gap
+  questionText: "W jakim miejscu młody Jan Żabiński założył swoją pierwszą hodowlę?"
+  correctAnswer: "Na oknie."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l5-q5
+  taskRef: certyfikat-polski-C1-2022-03-listen-5
+  questionType: fill_gap
+  questionText: "Jakie zwierzęta, poza wodnymi, hodował bohater reportażu?"
+  correctAnswer: Jaszczurki.
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l5-q6
+  taskRef: certyfikat-polski-C1-2022-03-listen-5
+  questionType: fill_gap
+  questionText: "Jakie domowe wydarzenie sprawiło, że Jan Żabiński poczuł się jak tryumfator?"
+  correctAnswer: "Jego ojciec też zaczął hodować zwierzę."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-03-l5-q7
+  taskRef: certyfikat-polski-C1-2022-03-listen-5
+  questionType: fill_gap
+  questionText: "Jakie plany wobec Jana Żabińskiego miał jego ojciec?"
+  correctAnswer: "Chciał przekazać mu kancelarię prawniczą."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}

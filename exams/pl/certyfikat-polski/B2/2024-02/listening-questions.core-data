@@ -1,226 +1,347 @@
 DSL 1
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-02-lq-1"
-  taskRef: "certyfikat-polski-B2-2024-02-listen-1"
+  questionId: certyfikat-polski-B2-2024-02-l1-q1
+  taskRef: certyfikat-polski-B2-2024-02-listen-1
   questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionText: "Rozmowa dotyczy"
+  options: "a) wyjścia w góry.|b) wyjazdu na narty.|c) podróży służbowej."
+  correctAnswer: "b) wyjazdu na narty."
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-02-lq-2"
-  taskRef: "certyfikat-polski-B2-2024-02-listen-1"
+  questionId: certyfikat-polski-B2-2024-02-l1-q2
+  taskRef: certyfikat-polski-B2-2024-02-listen-1
   questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionText: "Marta nie skorzysta z propozycji"
+  options: "a) z powodu niedawnego uszkodzenia kolana.|b) ze względu na złą pogodę.|c) ponieważ ma inne zobowiązania."
+  correctAnswer: "c) ponieważ ma inne zobowiązania."
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-02-lq-3"
-  taskRef: "certyfikat-polski-B2-2024-02-listen-1"
+  questionId: certyfikat-polski-B2-2024-02-l1-q3
+  taskRef: certyfikat-polski-B2-2024-02-listen-1
   questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionText: "Rozmowa dotyczy"
+  options: "a) sytuacji rodzinnej mężczyzny.|b) problemów zdrowotnych Darka.|c) planów zawodowych rozmówcy."
+  correctAnswer: "b) problemów zdrowotnych Darka."
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-02-lq-4"
-  taskRef: "certyfikat-polski-B2-2024-02-listen-1"
+  questionId: certyfikat-polski-B2-2024-02-l1-q4
+  taskRef: certyfikat-polski-B2-2024-02-listen-1
   questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionText: "Po usłyszeniu serii zaleceń na przyszłość Darek"
+  options: "a) miał problem z przyjęciem ich do wiadomości.|b) zaczął się zastanawiać nad rzuceniem pracy.|c) odkrył, że brakuje mu miejsca, w którym mógłby odpocząć."
+  correctAnswer: "a) miał problem z przyjęciem ich do wiadomości."
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-02-lq-5"
-  taskRef: "certyfikat-polski-B2-2024-02-listen-1"
+  questionId: certyfikat-polski-B2-2024-02-l1-q5
+  taskRef: certyfikat-polski-B2-2024-02-listen-1
   questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionText: "Tematem audycji są"
+  options: "a) rozmaite propozycje spędzania wolnego czasu z nastoletnimi dziećmi.|b) przekąski towarzyszące różnym formom wypoczynku nastolatków.|c) preferencje nastolatków odnośnie do osób, z którymi spędzają czas."
+  correctAnswer: "c) preferencje nastolatków odnośnie do osób, z którymi spędzają czas."
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-02-lq-6"
-  taskRef: "certyfikat-polski-B2-2024-02-listen-2"
+  questionId: certyfikat-polski-B2-2024-02-l1-q6
+  taskRef: certyfikat-polski-B2-2024-02-listen-1
   questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionText: "Kobieta uważa, że zachowanie nastoletnich córek jej rozmówczyni świadczy o tym, że"
+  options: "a) właśnie wkroczyły w kolejny naturalny etap rozwoju.|b) rodzice nie zapewnili im wystarczającego poczucia bliskości.|c) doświadczają pewnych problemów rozwojowych."
+  correctAnswer: "a) właśnie wkroczyły w kolejny naturalny etap rozwoju."
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-02-lq-7"
-  taskRef: "certyfikat-polski-B2-2024-02-listen-2"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2024-02-l2-q1
+  taskRef: certyfikat-polski-B2-2024-02-listen-2
+  questionType: true_false
+  questionText: "Mariusz Świtalski należy do grona najzamożniejszych Polaków."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-02-lq-8"
-  taskRef: "certyfikat-polski-B2-2024-02-listen-2"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2024-02-l2-q2
+  taskRef: certyfikat-polski-B2-2024-02-listen-2
+  questionType: true_false
+  questionText: "Znajomości zawarte w domu dziecka pomogły Świtalskiemu przy stawianiu pierwszych kroków w biznesie."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-02-lq-9"
-  taskRef: "certyfikat-polski-B2-2024-02-listen-2"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2024-02-l2-q3
+  taskRef: certyfikat-polski-B2-2024-02-listen-2
+  questionType: true_false
+  questionText: "Przedsiębiorca zawsze cieszył się nienaganną opinią."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-02-lq-10"
-  taskRef: "certyfikat-polski-B2-2024-02-listen-2"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2024-02-l2-q4
+  taskRef: certyfikat-polski-B2-2024-02-listen-2
+  questionType: true_false
+  questionText: "Firma Świtalskiego stopniowo poszerzała zakres swojej działalności."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-02-lq-11"
-  taskRef: "certyfikat-polski-B2-2024-02-listen-3"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2024-02-l2-q5
+  taskRef: certyfikat-polski-B2-2024-02-listen-2
+  questionType: true_false
+  questionText: "Świtalski został oskarżony o nieprawidłowości finansowe."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-02-lq-12"
-  taskRef: "certyfikat-polski-B2-2024-02-listen-3"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2024-02-l2-q6
+  taskRef: certyfikat-polski-B2-2024-02-listen-2
+  questionType: true_false
+  questionText: "Po sprzedaży firmy Eurocash biznesmen postanowił odpocząć od działalności gospodarczej."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-02-lq-13"
-  taskRef: "certyfikat-polski-B2-2024-02-listen-3"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2024-02-l2-q7
+  taskRef: certyfikat-polski-B2-2024-02-listen-2
+  questionType: true_false
+  questionText: "Logo sieci Biedronka zachowało swój pierwotny wygląd."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-02-lq-14"
-  taskRef: "certyfikat-polski-B2-2024-02-listen-3"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2024-02-l2-q8
+  taskRef: certyfikat-polski-B2-2024-02-listen-2
+  questionType: true_false
+  questionText: "Świtalski wyspecjalizował się w tworzeniu firm i przekazywaniu ich w inne ręce."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-02-lq-15"
-  taskRef: "certyfikat-polski-B2-2024-02-listen-3"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2024-02-l2-q9
+  taskRef: certyfikat-polski-B2-2024-02-listen-2
+  questionType: true_false
+  questionText: "Pierwowzoru sieci sklepów Żabka należy szukać w Stanach Zjednoczonych."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-02-lq-16"
-  taskRef: "certyfikat-polski-B2-2024-02-listen-4"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2024-02-l2-q10
+  taskRef: certyfikat-polski-B2-2024-02-listen-2
+  questionType: true_false
+  questionText: "Obecnie Świtalski zaprzestał jakiejkolwiek działalności biznesowej."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-02-lq-17"
-  taskRef: "certyfikat-polski-B2-2024-02-listen-4"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2024-02-l3-q1
+  taskRef: certyfikat-polski-B2-2024-02-listen-3
+  questionType: matching
+  questionText: "Władze krajowe celowo utrudniają zdobycie tego miejsca."
+  options: "A|B|C|D"
+  correctAnswer: D
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-02-lq-18"
-  taskRef: "certyfikat-polski-B2-2024-02-listen-4"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2024-02-l3-q2
+  taskRef: certyfikat-polski-B2-2024-02-listen-3
+  questionType: matching
+  questionText: "Zdobycie tego miejsca może kosztować życie."
+  options: "A|B|C|D"
+  correctAnswer: "A|C"
+  pointsQuarter: 8
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-02-lq-19"
-  taskRef: "certyfikat-polski-B2-2024-02-listen-4"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2024-02-l3-q3
+  taskRef: certyfikat-polski-B2-2024-02-listen-3
+  questionType: matching
+  questionText: "Przekonania co do charakteru tego miejsca były błędne."
+  options: "A|B|C|D"
+  correctAnswer: C
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-02-lq-20"
-  taskRef: "certyfikat-polski-B2-2024-02-listen-4"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2024-02-l3-q4
+  taskRef: certyfikat-polski-B2-2024-02-listen-3
+  questionType: matching
+  questionText: "Atrakcja zachwyca różnorodnością i zmiennością kolorów."
+  options: "A|B|C|D"
+  correctAnswer: "B|C"
+  pointsQuarter: 8
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-02-lq-21"
-  taskRef: "certyfikat-polski-B2-2024-02-listen-5"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2024-02-l3-q5
+  taskRef: certyfikat-polski-B2-2024-02-listen-3
+  questionType: matching
+  questionText: "Obiekt znajduje się na terenach przygranicznych."
+  options: "A|B|C|D"
+  correctAnswer: D
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-02-lq-22"
-  taskRef: "certyfikat-polski-B2-2024-02-listen-5"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2024-02-l3-q6
+  taskRef: certyfikat-polski-B2-2024-02-listen-3
+  questionType: matching
+  questionText: "Zdobycie tego miejsca wymagało stworzenia specjalnej konstrukcji."
+  options: "A|B|C|D"
+  correctAnswer: A
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-02-lq-23"
-  taskRef: "certyfikat-polski-B2-2024-02-listen-5"
+  questionId: certyfikat-polski-B2-2024-02-l4-q1
+  taskRef: certyfikat-polski-B2-2024-02-listen-4
   questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionText: "Noc Politechniki odbędzie się"
+  options: "a) w tym roku już po raz siedemnasty.|b) na terenie jednej z wrocławskich uczelni.|c) w jednym z warsztatów należących do Politechniki."
+  correctAnswer: "b) na terenie jednej z wrocławskich uczelni."
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-02-lq-24"
-  taskRef: "certyfikat-polski-B2-2024-02-listen-5"
+  questionId: certyfikat-polski-B2-2024-02-l4-q2
+  taskRef: certyfikat-polski-B2-2024-02-listen-4
   questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionText: "Podczas tego wydarzenia będzie okazja do"
+  options: "a) poznania liczby atomów w ludzkim ciele.|b) skonstruowania modelu kosmosu.|c) wysłuchania prelekcji o poszukiwaniu życia w kosmosie."
+  correctAnswer: "c) wysłuchania prelekcji o poszukiwaniu życia w kosmosie."
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2024-02-lq-25"
-  taskRef: "certyfikat-polski-B2-2024-02-listen-5"
+  questionId: certyfikat-polski-B2-2024-02-l4-q3
+  taskRef: certyfikat-polski-B2-2024-02-listen-4
   questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionText: "W wydarzeniu mogą wziąć udział"
+  options: "a) wszyscy chętni.|b) tylko dzieci.|c) tylko dorośli."
+  correctAnswer: "a) wszyscy chętni."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-l4-q4
+  taskRef: certyfikat-polski-B2-2024-02-listen-4
+  questionType: multiple_choice
+  questionText: "Koło fortuny to atrakcja, która"
+  options: "a) będzie miała miejsce w plenerze.|b) wzbudziła zainteresowanie w poprzedniej edycji.|c) została wprowadzona w tegorocznej edycji."
+  correctAnswer: "c) została wprowadzona w tegorocznej edycji."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-l4-q5
+  taskRef: certyfikat-polski-B2-2024-02-listen-4
+  questionType: multiple_choice
+  questionText: "Pokazy filmowe"
+  options: "a) przybliżą naukowe tematy w interesujący sposób.|b) zostały odwołane z uwagi na remont sali.|c) adresowane są tylko do naukowców."
+  correctAnswer: "a) przybliżą naukowe tematy w interesujący sposób."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-l4-q6
+  taskRef: certyfikat-polski-B2-2024-02-listen-4
+  questionType: multiple_choice
+  questionText: "Na wszystkie wydarzenia"
+  options: "a) można przyjść po wcześniejszym zakupie wejściówek.|b) warto uprzednio się zarejestrować.|c) jest wciąż bardzo dużo miejsc."
+  correctAnswer: "b) warto uprzednio się zarejestrować."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-l4-q7
+  taskRef: certyfikat-polski-B2-2024-02-listen-4
+  questionType: multiple_choice
+  questionText: "Organizatorzy serdecznie zachęcają do udziału w wykładach,"
+  options: "a) zanim zostaną wyprzedane ostatnie bilety.|b) przypominając o możliwości skorzystania z poczęstunku.|c) podkreślając ich bogatą ofertę."
+  correctAnswer: "c) podkreślając ich bogatą ofertę."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-l4-q8
+  taskRef: certyfikat-polski-B2-2024-02-listen-4
+  questionType: multiple_choice
+  questionText: "Noc Politechniki"
+  options: "a) inspiruje się zachodnimi wzorcami.|b) w tym roku ugości Isaaka Asimova.|c) jest prezentacją pasji studentów fizyki, chemii i matematyki."
+  correctAnswer: "a) inspiruje się zachodnimi wzorcami."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-l5-q1
+  taskRef: certyfikat-polski-B2-2024-02-listen-5
+  questionType: fill_gap
+  questionText: "W jaki sposób zorientowano się, że bobry zniszczyły drogę?"
+  correctAnswer: "(Na drodze) zapadł się asfalt."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-l5-q2
+  taskRef: certyfikat-polski-B2-2024-02-listen-5
+  questionType: fill_gap
+  questionText: "Co odkrył nadzór budowlany pod powierzchnią jezdni?"
+  correctAnswer: "Sieć korytarzy/tuneli (zbudowanych przez bobry)."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-l5-q3
+  taskRef: certyfikat-polski-B2-2024-02-listen-5
+  questionType: fill_gap
+  questionText: "Jak inspektor nadzoru budowlanego zareagował na odkrycie?"
+  correctAnswer: "Zamknął drogę."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-l5-q4
+  taskRef: certyfikat-polski-B2-2024-02-listen-5
+  questionType: fill_gap
+  questionText: "Dlaczego uszkodzona droga była tak ważna dla okolicznych mieszkańców?"
+  correctAnswer: "Ponieważ był to dojazd do drogi ekspresowej."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-l5-q5
+  taskRef: certyfikat-polski-B2-2024-02-listen-5
+  questionType: fill_gap
+  questionText: "Jaki jest stosunek okolicznych mieszkańców do bobrów?"
+  correctAnswer: "Są źli na bobry."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-l5-q6
+  taskRef: certyfikat-polski-B2-2024-02-listen-5
+  questionType: fill_gap
+  questionText: "Kogo lub co wini mężczyzna za niszczycielską działalność bobrów?"
+  correctAnswer: "Głupotę ochrony środowiska."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-l5-q7
+  taskRef: certyfikat-polski-B2-2024-02-listen-5
+  questionType: fill_gap
+  questionText: "Na czym polegają ryzykowne działania mieszkańców?"
+  correctAnswer: "Próbują przedostać się przez zamkniętą drogę."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2024-02-l5-q8
+  taskRef: certyfikat-polski-B2-2024-02-listen-5
+  questionType: fill_gap
+  questionText: "Dlaczego przed naprawą drogi trzeba będzie wystąpić o specjalne zezwolenia?"
+  correctAnswer: "Ponieważ teren leży na obszarze Natura 2000."
+  pointsQuarter: 4
+  gradingMode: open_manual
 }

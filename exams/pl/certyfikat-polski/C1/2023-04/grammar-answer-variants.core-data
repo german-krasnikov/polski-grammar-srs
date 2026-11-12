@@ -1,0 +1,73 @@
+DSL 1
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2023-04-g1-q1-v1
+  itemRef: certyfikat-polski-C1-2023-04-g1-q1
+  answer: kilkunastu
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2023-04-g1-q9-v1
+  itemRef: certyfikat-polski-C1-2023-04-g1-q9
+  answer: Trojgu
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2023-04-g2-q3-v1
+  itemRef: certyfikat-polski-C1-2023-04-g2-q3
+  answer: "Brak mokrych wiatrów zachodnich przy silnych prądach południowych i północnych będzie sprzyjać występowaniu w Polsce długotrwałych susz."
+  earnedQuarter: 4
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2023-04-g2-q5-v1
+  itemRef: certyfikat-polski-C1-2023-04-g2-q5
+  answer: "Ze względu na niedobór wody powinniśmy spodziewać się częstego wyłączania prądu."
+  earnedQuarter: 4
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2023-04-g3-q3-v1
+  itemRef: certyfikat-polski-C1-2023-04-g3-q3
+  answer: "następstwami"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2023-04-g3-q6-v1
+  itemRef: certyfikat-polski-C1-2023-04-g3-q6
+  answer: przybyli
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2023-04-g3-q7-v1
+  itemRef: certyfikat-polski-C1-2023-04-g3-q7
+  answer: wycinaniem
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2023-04-g3-q9-v1
+  itemRef: certyfikat-polski-C1-2023-04-g3-q9
+  answer: nachylenia
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2023-04-g6-q9-v1
+  itemRef: certyfikat-polski-C1-2023-04-g6-q9
+  answer: "dostosowujących się"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2023-04-g7-q8-v1
+  itemRef: certyfikat-polski-C1-2023-04-g7-q8
+  answer: "upuszcza się"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2023-04-g8-q2-v1
+  itemRef: certyfikat-polski-C1-2023-04-g8-q2
+  answer: will
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2023-04-g8-q6-v1
+  itemRef: certyfikat-polski-C1-2023-04-g8-q6
+  answer: "którekolwiek"
+  earnedQuarter: 2
+}

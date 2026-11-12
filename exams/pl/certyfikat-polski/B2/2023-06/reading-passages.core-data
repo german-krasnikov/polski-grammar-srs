@@ -1,29 +1,40 @@
 DSL 1
 READING_PASSAGE {
-  passageId: "certyfikat-polski-B2-2023-06-read-6"
-  examRef: "certyfikat-polski-B2-2023-06"
-  taskNumber: 6
-  instruction: "TODO: fill from PDF"
-  text: "TODO: fill from PDF"
+  passageId: certyfikat-polski-B2-2023-06-read-1
+  examRef: certyfikat-polski-B2-2023-06
+  taskNumber: 1
+  instruction: "I. Proszę przeczytać fragmenty tekstów i – zgodnie z przykładem – zaznaczyć właściwą odpowiedź."
+  text: "PRZYKŁAD U osób zakochanych wykonywano rezonans magnetyczny mózgu. Badania pokazały, że w okresie zakochania kora czołowa jest wyłączona. Stąd może powiedzenie, że miłość jest ślepa i nie zauważamy negatywnych cech u osoby, w której jesteśmy zakochani. Na podstawie: https://natemat.pl/zdrowie/468803,stan-zakochania-ma-medyczne-uzasadnienie-skad-biora-sie-motyle-w- brzuchu Z tekstu dowiadujemy się, że a) mózg osób zakochanych wyjątkowo intensywnie przetwarza informacje. b) wyłączenie kory czołowej ma wpływ na poprawę samopoczucia. c) powiedzenie, że „miłość jest ślepa” ma medyczne uzasadnienie.  1. Otwieranie kolejnych kierunków lekarskich na uczelniach niebędących uniwersytetami budzi sprzeciw wśród lekarzy. Obawiają się oni obniżenia poziomu kształcenia i nieprzygotowania absolwentów do opieki nad pacjentami. Samorząd lekarski wystąpił do Komisji Europejskiej o interpretację przepisów dotyczących minimalnych wymogów kształcenia lekarzy.  2. Ich logo to znak jakości i oryginalności. O kim mowa? Oczywiście o studiu A24, które w ostatnich latach stało się kopalnią świetnego kina, kreatorem dobrego smaku i marzeniem gwiazd głodnych występów w świeżych, odważnych filmach. Na tegorocznej gali Oscarów A24 zgarnęło aż dziewięć statuetek, bijąc na głowy hollywoodzkich gigantów.  3. Rolls-Royce to jedna z nielicznych marek, w której dawniej sprzedawano samochody nie z myślą o kierowcy, a o pasażerach. Ponad 60% aut było bowiem przeznaczonych dla klientów, którzy mieli prywatnego szofera. Dziś ten trend się zmienił. Zaledwie 30% klientów kupuje te pojazdy z myślą o byciu pasażerem. I dobrze, bo prowadzenie tego samochodu to niezapomniane wrażenie.  4. Każdy alergik powinien posiadać terminarz pylenia roślin. W dostępnych aplikacjach i na specjalnych portalach można szukać aktualnych komunikatów o lokalnym stężeniu określonych pyłków. Sezon pyleń zaczyna się bowiem później na przykład na ścianie wschodniej i na północy naszego kraju, a różnice mogą dochodzić nawet do dwóch tygodni.  5. Mężczyźni w Polsce są bardziej aktywni zawodowo niż mężczyźni w Unii Europejskiej, za to kobiety wypadają poniżej unijnej średniej. Powody? Kobiety kształcą się dłużej, co w Polsce rzadko da się łączyć z pracą, a w sytuacji braku dostępu do publicznych usług opiekuńczych to na barki kobiet spada obowiązek wypełnienia tej luki – zarówno jeżeli chodzi o opiekę nad dziećmi, jak i bliskimi wymagającymi wsparcia."
 }
 READING_PASSAGE {
-  passageId: "certyfikat-polski-B2-2023-06-read-7"
-  examRef: "certyfikat-polski-B2-2023-06"
-  taskNumber: 7
-  instruction: "TODO: fill from PDF"
-  text: "TODO: fill from PDF"
+  passageId: certyfikat-polski-B2-2023-06-read-2
+  examRef: certyfikat-polski-B2-2023-06
+  taskNumber: 2
+  title: Morsowanie
+  instruction: "II. Proszę przeczytać tekst i – zgodnie z przykładem – dopasować usunięte z niego fragmenty (A–K)."
+  text: "Morsowanie to forma rekreacji, polegająca na krótkotrwałym zanurzaniu się w wodzie w niskich temperaturach (poniżej 5⁰C) [__B__]PRZYKŁAD. Coraz więcej osób aktywnych zawodowo decyduje się na takie kąpiele, bo [_____]1 . Morsowanie to bowiem świetna rozrywka, a ponadto [_____]2 . Zalety oddziaływania zimna na organizm ludzki znane są od wieków. Przy zachowaniu odpowiedniej ostrożności i dobrym przygotowaniu do morsowania minimalizuje się ryzyko, [_____]3. Morsowania nie można porównywać z zabiegami leczniczymi wykorzystującymi efekty zimna (kriokomory, kriosauny), które [_____]4. Należy pamiętać, że oddziaływanie zimnego powietrza i wody może przynieść też odmienny i niezamierzony efekt – [_____]5 . Istnieje np. ryzyko wychłodzenia organizmu, które może zagrażać życiu. Jednak u osób praktykujących morsowanie zauważa się pozytywny wpływ [_____]6. Regularna ekspozycja na niskie temperatury polepsza ich ogólne samopoczucie. W jeziorze, morzu, w przeręblu – uśmiechnięte twarze w czapkach, rękawiczkach i stroju kąpielowym zimą [_____]7. Zimno poprawia zakres ruchomości w stawach i jest silnie działającym „środkiem” przeciwbólowym. Podczas chłodnych kąpieli – wbrew pozorom – ciało się relaksuje, [_____]8. Regularne adaptowanie się do niekorzystnych warunków (hartowanie), sprzyja zwiększeniu tolerancji na zimne bodźce. Ekspozycja na obniżoną temperaturę pobudza też produkcję komórek układu odpornościowego, dlatego ludzie, którzy regularnie i prawidłowo morsują, [_____]9 . Należy jednak pamiętać, że nie każdy może lub powinien korzystać z zimowej rozrywki, jaką jest morsowanie. Stan wychłodzenia organizmu (hipotermia) może wiązać się z poważnymi konsekwencjami zdrowotnymi, dlatego warto skonsultować się z lekarzem, [_____]10 ."
 }
 READING_PASSAGE {
-  passageId: "certyfikat-polski-B2-2023-06-read-8"
-  examRef: "certyfikat-polski-B2-2023-06"
-  taskNumber: 8
-  instruction: "TODO: fill from PDF"
-  text: "TODO: fill from PDF"
+  passageId: certyfikat-polski-B2-2023-06-read-3
+  examRef: certyfikat-polski-B2-2023-06
+  taskNumber: 3
+  title: "Mickiewicz, Słowacki i Krasiński niczym XIX-wieczne gwiazdy rocka"
+  instruction: "III. Proszę – zgodnie z przykładem – połączyć wypowiedzi z kolumny I z fragmentami tekstu z kolumny II. Odpowiedzi proszę wpisać do tabeli."
+  text: "Mickiewicz, Słowacki i Krasiński niczym XIX-wieczne gwiazdy rocka  PRZYKŁAD Czy polscy poeci romantyzmu byli jak współczesne gwiazdy rocka? → F"
 }
 READING_PASSAGE {
-  passageId: "certyfikat-polski-B2-2023-06-read-9"
-  examRef: "certyfikat-polski-B2-2023-06"
-  taskNumber: 9
-  instruction: "TODO: fill from PDF"
-  text: "TODO: fill from PDF"
+  passageId: certyfikat-polski-B2-2023-06-read-4
+  examRef: certyfikat-polski-B2-2023-06
+  taskNumber: 4
+  title: "Powrót do przeszłości"
+  instruction: "IV. Proszę przeczytać tekst, a następnie – jak w przykładzie – zaznaczyć: TAK – gdy zdanie jest zgodne z tekstem; NIE – gdy nie jest zgodne z tekstem; BI – gdy w tekście brakuje informacji na dany temat."
+  text: "Powrót do przeszłości Kilkaset eksponatów (zabawek, gier, wydawnictw, fotografii) zebrano na wystawie „Trzepaki, Reksio, Atari, czyli jak bawiły się dzieci w PRL-u” w Muzeum Nowej Huty – oddziale Muzeum Krakowa, mieszczącym się w dawnym kinie Światowid. To wystawa niezwykła z kilku powodów. Po pierwsze dlatego, że organizatorzy namawiają do zwiedzania jej całymi rodzinami. Kto bowiem lepiej niż dziadkowie, babcie, mamy i tatowie opowie dzieciom oraz wnukom o tym, jak bawiono się i spędzano czas wolny w PRL-u? Po drugie, ponieważ nie jest to tradycyjna wystawa, na której nie wolno niczego dotykać. Owszem, część eksponatów umieszczono w gablotach, równocześnie jednak zaplanowano wiele przestrzeni interaktywnych, na których po prostu można się bawić – klockami, układankami, grami, lalkami, misiami, autkami…, a także zagrać w klasy, państwa-miasta, bierki, pchełki i kapsle, poczytać komiksy i książki. Po trzecie dlatego, że ma osobną ścieżkę zwiedzania dla dzieci, którą stworzyli uczniowie i uczennice Szkoły Podstawowej nr 52 w Krakowie. Na wystawie ich opowieść przypisano dwójce powołanych z tej okazji do życia dziecięcych narratorów – Zosi i Antosiowi, którzy odbyli podróż w czasie i opowiadają rówieśnikom o tym, czego się dowiedzieli. W centrum wystawy stanął trzepak. W PRL-u był najważniejszym miejscem na podwórku. To przy nim się umawiało i spotykało, bawiło, rozmawiało. To przy i na nim rodziły się przyjaźnie na lata i pierwsze dziecięce miłości. Był on też jednym z najczęściej odwiedzanych miejsc wystawy. Każdy chciał mieć na nim zdjęcie, podobnie zresztą jak przy starym komputerze, fliperze, czy figurkach Misia Uszatka oraz Colargola - bohaterach popularnych filmów wyświetlanych dla dzieci na dobranoc. Wystawę można oglądać do 7 stycznia 2024 roku. Bilety można kupić zarówno na miejscu, jak i on-line. To bardzo dobry pretekst, żeby odwiedzić Kraków.  PRZYKŁAD Nazwa wystawy nawiązuje do polskich realiów z czasów PRL-u. X"
+}
+READING_PASSAGE {
+  passageId: certyfikat-polski-B2-2023-06-read-5
+  examRef: certyfikat-polski-B2-2023-06
+  taskNumber: 5
+  title: "Dom bez tarasu?"
+  instruction: "V. Proszę – zgodnie z przykładem – uzupełnić tekst, podkreślając najlepszą spośród podanych możliwości."
+  text: "Dom bez tarasu? O posiadaniu tarasu najlepiej jest pomyśleć już na etapie (zakładania, wymyślania, planowania, projektowania)PRZYKŁAD i budowy domu – tak aby był to element [____1____] w bryłę budynku. Taras najczęściej projektuje się przy części parterowej domu, [____2____] w przypadku działek bardzo małych można zaplanować go również na piętrze, np. na dachu garażu [____3____] do domu. Jeżeli zdarzyło się tak, że podczas budowy pominęliśmy kwestię tarasu, w każdej chwili da się go również dobudować. [____4____] taki taras można postawić na gruncie lub na palach. Przy planowaniu tarasu usytuowanego na gruncie mamy na ogół [____5____] w wyborze jego formy, choć i tak najczęściej spotyka się kształty prostokąta, półokręgu oraz liter: „T” lub „L”. Na dużych działkach i [____6____] obszernych brył domów tarasy lokalizuje się np. wzdłuż dwóch sąsiadujących ze sobą ścian zewnętrznych. W ten sposób powstaje duża przestrzeń o kształcie litery „L”, na którą mogą [____7____] dwa wyjścia z niezależnych od siebie pomieszczeń, np. z salonu i z kuchni. Niestety, na [____8____] z dużym, ustawnym tarasem nie wszyscy mogą sobie jednak pozwolić. Niekiedy trzeba się cieszyć z możliwości zorganizowania tarasu, choćby najmniejszych rozmiarów i najprostszego w kształcie. Warto tylko pomyśleć o jego [____9____] usytuowaniu względem stron świata. Sporą popularnością cieszy się ekspozycja na południe lub zachód. Przy takiej lokalizacji szczególnie cenionym typem tarasu jest taras [____10____], który w dodatku częściowo znajduje się w cieniu drzew."
 }

@@ -1,0 +1,330 @@
+DSL 1
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l1-q1
+  taskRef: certyfikat-polski-C1-2023-11-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a. lekarze rodzinni będą mogli prowadzić terapię onkologiczną.|b. osoby z nowotworami uzyskają prawo do szybszej diagnostyki.|c. proponowane zmiany wejdą w życie za 9 tygodni."
+  correctAnswer: "b. osoby z nowotworami uzyskają prawo do szybszej diagnostyki."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l1-q2
+  taskRef: certyfikat-polski-C1-2023-11-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a. tylko 2 miliony Polaków regularnie odwiedzają kina.|b. coraz więcej polskich filmów jest dostępnych w sieci.|c. Polacy wolą produkcje zagraniczne od krajowych."
+  correctAnswer: "c. Polacy wolą produkcje zagraniczne od krajowych."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l1-q3
+  taskRef: certyfikat-polski-C1-2023-11-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a. do emisji banknotu 500 zł przyczyniła się w głównej mierze inflacja.|b. Polacy nawykli do transakcji gotówkowych.|c. w Polsce nastąpił czteroprocentowy wzrost gospodarczy."
+  correctAnswer: "b. Polacy nawykli do transakcji gotówkowych."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l1-q4
+  taskRef: certyfikat-polski-C1-2023-11-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a. prywatne maile pisane w godzinach pracy mogą zostać skontrolowane przez pracodawcę.|b. wysyłanie prywatnych wiadomości w pracy nie może być podstawą wypowiedzenia umowy pracownikowi.|c. skarga pracownika została rozpatrzona pozytywnie przez Europejski Trybunał Praw Człowieka."
+  correctAnswer: "a. prywatne maile pisane w godzinach pracy mogą zostać skontrolowane przez pracodawcę."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l1-q5
+  taskRef: certyfikat-polski-C1-2023-11-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a. program „Mieszkanie dla młodych” polega na dofinansowaniu wynajmu.|b. w styczniu połowa złożonych wniosków została odrzucona.|c. budżet programu może wyczerpać się wcześniej, niż zakładano."
+  correctAnswer: "c. budżet programu może wyczerpać się wcześniej, niż zakładano."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l1-q6
+  taskRef: certyfikat-polski-C1-2023-11-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a. w Krakowie od dawna obowiązuje zakaz ogrzewania drewnem i węglem.|b. uchwały nie poparło piętnastu radnych.|c. decyzja sejmiku jest krytykowana jako zbyt radykalna."
+  correctAnswer: "b. uchwały nie poparło piętnastu radnych."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l1-q7
+  taskRef: certyfikat-polski-C1-2023-11-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a. ekologiczne choinki będzie można zobaczyć tylko w Warszawie.|b. celem akcji jest zwrócenie uwagi na osoby spędzające święta samotnie.|c. każde z drzewek zostało przygotowane w innym mieście."
+  correctAnswer: "b. celem akcji jest zwrócenie uwagi na osoby spędzające święta samotnie."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l1-q8
+  taskRef: certyfikat-polski-C1-2023-11-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a. gospodarzami turnieju noworocznego w piłce ręcznej są Czechy.|b. Polacy nie wystartują w Mistrzostwach Europy.|c. Polacy ustąpili Białorusinom jednym punktem."
+  correctAnswer: "c. Polacy ustąpili Białorusinom jednym punktem."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l2-q1
+  taskRef: certyfikat-polski-C1-2023-11-listen-2
+  questionType: true_false
+  questionText: "W ramach działań rewitalizacyjnych powstała m.in. Baszta Czarownic."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l2-q2
+  taskRef: certyfikat-polski-C1-2023-11-listen-2
+  questionType: true_false
+  questionText: "Nazwa parku ma proweniencję muzyczną."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l2-q3
+  taskRef: certyfikat-polski-C1-2023-11-listen-2
+  questionType: true_false
+  questionText: "Przed inwestycją nie było połączenia pomiędzy brzegami rzeki."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l2-q4
+  taskRef: certyfikat-polski-C1-2023-11-listen-2
+  questionType: true_false
+  questionText: "Na nowo powstałych placach są dobre warunki do uprawiania sportu."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l2-q5
+  taskRef: certyfikat-polski-C1-2023-11-listen-2
+  questionType: true_false
+  questionText: "W miejscu inwestycji zadbano o architekturę krajobrazu."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l2-q6
+  taskRef: certyfikat-polski-C1-2023-11-listen-2
+  questionType: true_false
+  questionText: "Mieszkanka miasta uważa, że kładki nie są dobrym rozwiązaniem."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l2-q7
+  taskRef: certyfikat-polski-C1-2023-11-listen-2
+  questionType: true_false
+  questionText: "Na bulwarach znajdują się najważniejsze pomniki związane z historią miasta."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l2-q8
+  taskRef: certyfikat-polski-C1-2023-11-listen-2
+  questionType: true_false
+  questionText: "Jeden z inwestorów planuje otworzenie restauracji w pobliżu wałów."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l3-q1
+  taskRef: certyfikat-polski-C1-2023-11-listen-3
+  questionType: matching
+  questionText: "A. Skarb składa się z monet pochodzących z różnych krajów."
+  options: "1|2|3|4|5"
+  correctAnswer: "4"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l3-q2
+  taskRef: certyfikat-polski-C1-2023-11-listen-3
+  questionType: matching
+  questionText: "B. Nie udało się sporządzić kompletnego katalogu znalezionych kosztowności."
+  options: "1|2|3|4|5"
+  correctAnswer: "3"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l3-q3
+  taskRef: certyfikat-polski-C1-2023-11-listen-3
+  questionType: matching
+  questionText: "C. Odkrycie nie cieszyło się zainteresowaniem władz."
+  options: "1|2|3|4|5"
+  correctAnswer: "1"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l3-q4
+  taskRef: certyfikat-polski-C1-2023-11-listen-3
+  questionType: matching
+  questionText: "D. Nie wiadomo, do kogo należał ten skarb."
+  options: "1|2|3|4|5"
+  correctAnswer: "4"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l3-q5
+  taskRef: certyfikat-polski-C1-2023-11-listen-3
+  questionType: matching
+  questionText: "E. Odkrycie jest cennym materiałem także dla językoznawców."
+  options: "1|2|3|4|5"
+  correctAnswer: "2"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l3-q6
+  taskRef: certyfikat-polski-C1-2023-11-listen-3
+  questionType: matching
+  questionText: "F. Kosztowności trafiły w ręce niewłaściwych osób."
+  options: "1|2|3|4|5"
+  correctAnswer: "3"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l3-q7
+  taskRef: certyfikat-polski-C1-2023-11-listen-3
+  questionType: matching
+  questionText: "G. W skład skarbu wchodzą elementy dekoracyjne ubioru regionalnego."
+  options: "1|2|3|4|5"
+  correctAnswer: "5"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l3-q8
+  taskRef: certyfikat-polski-C1-2023-11-listen-3
+  questionType: matching
+  questionText: "H. Kosztowności przeleżały schowane kilka wieków w budynku."
+  options: "1|2|3|4|5"
+  correctAnswer: "1"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l3-q9
+  taskRef: certyfikat-polski-C1-2023-11-listen-3
+  questionType: matching
+  questionText: "I. Żaden inny skarb odkryty w Polsce nie dorównuje mu wielkością."
+  options: "1|2|3|4|5"
+  correctAnswer: "2"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l3-q10
+  taskRef: certyfikat-polski-C1-2023-11-listen-3
+  questionType: matching
+  questionText: "J. To najbardziej wiekowy z odkrytych skarbów."
+  options: "1|2|3|4|5"
+  correctAnswer: "5"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l4-q1
+  taskRef: certyfikat-polski-C1-2023-11-listen-4
+  questionType: matching
+  questionText: "Proszę wybrać sześć wypowiedzi zgodnych z treścią nagrania."
+  options: "1|2|3|4|5|6|7|8|9|10|11|12"
+  correctAnswer: "2|5|6|8|9|12"
+  pointsQuarter: 24
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
+  requiredSelections: 6
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l5-q1
+  taskRef: certyfikat-polski-C1-2023-11-listen-5
+  questionType: fill_gap
+  questionText: "Dlaczego muzyk nie przepada za festiwalami?"
+  correctAnswer: "Jest na nie za stary|Irytuje/denerwuje go hałas|Irytują go tłumy/wrzeszczący ludzie|Irytuje go alkohol na festiwalu"
+  pointsQuarter: 4
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 2
+  gradingMode: open_manual
+  requiredSelections: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l5-q2
+  taskRef: certyfikat-polski-C1-2023-11-listen-5
+  questionType: fill_gap
+  questionText: "Z jakimi uczuciami, nieobecnymi przy okazji innych festiwali, muzyk kojarzy OFF Festival?"
+  correctAnswer: "spokój|relaks|brak napinki|wzruszenie"
+  pointsQuarter: 4
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 2
+  gradingMode: open_manual
+  requiredSelections: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l5-q3
+  taskRef: certyfikat-polski-C1-2023-11-listen-5
+  questionType: fill_gap
+  questionText: "Co Staniszewski sądzi o koncercie Iggy’ego Popa?"
+  correctAnswer: "Uważa, że był fantastyczny."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l5-q4
+  taskRef: certyfikat-polski-C1-2023-11-listen-5
+  questionType: fill_gap
+  questionText: "W jakim miejscu występował Staniszewski z zespołem Beneficjenci Splendoru na OFF Festivalu?"
+  correctAnswer: "Na małej scenie."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l5-q5
+  taskRef: certyfikat-polski-C1-2023-11-listen-5
+  questionType: fill_gap
+  questionText: "Dlaczego koncert na festiwalu był dla niego wyjątkowy?"
+  correctAnswer: "Był to ich pierwszy duży koncert."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l5-q6
+  taskRef: certyfikat-polski-C1-2023-11-listen-5
+  questionType: fill_gap
+  questionText: "Co spowodowało złe samopoczucie muzyka przed koncertem?"
+  correctAnswer: "Było mu gorąco."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l5-q7
+  taskRef: certyfikat-polski-C1-2023-11-listen-5
+  questionType: fill_gap
+  questionText: "Co zaskoczyło muzyka w zachowaniu publiczności w trakcie koncertu i po nim?"
+  correctAnswer: "Znali jego piosenki|Śpiewali razem z nim|Prosili o autografy"
+  pointsQuarter: 4
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 2
+  gradingMode: open_manual
+  requiredSelections: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-11-l5-q8
+  taskRef: certyfikat-polski-C1-2023-11-listen-5
+  questionType: fill_gap
+  questionText: "Dlaczego w tym roku muzyk nie weźmie udziału w festiwalu?"
+  correctAnswer: "Będzie za granicą|Nagrywa/kończy nową płytę"
+  pointsQuarter: 4
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 2
+  gradingMode: open_manual
+}

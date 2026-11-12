@@ -1,0 +1,33 @@
+DSL 1
+EXAM_MODULE {
+  moduleId: certyfikat-polski-B2-2023-06-listening
+  examRef: certyfikat-polski-B2-2023-06
+  module: listening
+  order: 1
+  durationSeconds: 2400
+  maximumQuarter: 160
+}
+EXAM_MODULE {
+  moduleId: certyfikat-polski-B2-2023-06-reading
+  examRef: certyfikat-polski-B2-2023-06
+  module: reading
+  order: 2
+  durationSeconds: 3600
+  maximumQuarter: 160
+}
+EXAM_MODULE {
+  moduleId: certyfikat-polski-B2-2023-06-grammar
+  examRef: certyfikat-polski-B2-2023-06
+  module: grammar
+  order: 3
+  durationSeconds: 3600
+  maximumQuarter: 160
+}
+EXAM_MODULE {
+  moduleId: certyfikat-polski-B2-2023-06-writing
+  examRef: certyfikat-polski-B2-2023-06
+  module: writing
+  order: 4
+  durationSeconds: 5400
+  maximumQuarter: 160
+}

@@ -1,0 +1,37 @@
+DSL 1
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2023-11-g1-q1-v1
+  itemRef: certyfikat-polski-C1-2023-11-g1-q1
+  answer: trzystoma
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2023-11-g1-q4-v1
+  itemRef: certyfikat-polski-C1-2023-11-g1-q4
+  answer: "czwórki"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2023-11-g3-q6-v1
+  itemRef: certyfikat-polski-C1-2023-11-g3-q6
+  answer: "przesileń"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2023-11-g7-q4-v1
+  itemRef: certyfikat-polski-C1-2023-11-g7-q4
+  answer: "dobiłyby"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2023-11-g7-q7-v1
+  itemRef: certyfikat-polski-C1-2023-11-g7-q7
+  answer: "wyposażyć"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2023-11-g7-q8-v1
+  itemRef: certyfikat-polski-C1-2023-11-g7-q8
+  answer: "dowiedzieliby się"
+  earnedQuarter: 2
+}

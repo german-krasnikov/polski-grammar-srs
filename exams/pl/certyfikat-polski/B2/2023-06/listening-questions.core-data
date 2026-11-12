@@ -1,226 +1,361 @@
 DSL 1
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2023-06-lq-1"
-  taskRef: "certyfikat-polski-B2-2023-06-listen-1"
+  questionId: certyfikat-polski-B2-2023-06-l1-q1
+  taskRef: certyfikat-polski-B2-2023-06-listen-1
   questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionText: "Reklamowany program będzie poświęcony"
+  options: "a) przepisom na dania wegetariańskie.|b) miejscom, w których można kupić zdrową żywność.|c) poradom, jak nie marnować jedzenia."
+  correctAnswer: "c) poradom, jak nie marnować jedzenia."
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2023-06-lq-2"
-  taskRef: "certyfikat-polski-B2-2023-06-listen-1"
+  questionId: certyfikat-polski-B2-2023-06-l1-q2
+  taskRef: certyfikat-polski-B2-2023-06-listen-1
   questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionText: "Zastosowanie się do wskazówek przekazywanych w programie pozwoli"
+  options: "a) ograniczyć koszty przygotowywanych posiłków.|b) spędzać na gotowaniu mniej czasu niż dotychczas.|c) cieszyć się dłuższym życiem."
+  correctAnswer: "a) ograniczyć koszty przygotowywanych posiłków."
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2023-06-lq-3"
-  taskRef: "certyfikat-polski-B2-2023-06-listen-1"
+  questionId: certyfikat-polski-B2-2023-06-l1-q3
+  taskRef: certyfikat-polski-B2-2023-06-listen-1
   questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionText: "W programie prezentowane są miejsca"
+  options: "a) najchętniej odwiedzane przez turystów.|b) niespełniające oczekiwań przyjezdnych.|c) pozwalające na niskobudżetową podróż."
+  correctAnswer: "b) niespełniające oczekiwań przyjezdnych."
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2023-06-lq-4"
-  taskRef: "certyfikat-polski-B2-2023-06-listen-1"
+  questionId: certyfikat-polski-B2-2023-06-l1-q4
+  taskRef: certyfikat-polski-B2-2023-06-listen-1
   questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionText: "Według rankingu główny problem z Aleją Gwiazd polega na tym, że"
+  options: "a) nie oferuje dostatecznie rozwiniętej bazy noclegowej.|b) odwiedzenie jej wiąże się ze znaczącymi wydatkami.|c) nieatrakcyjnie prezentuje się w mediach społecznościowych."
+  correctAnswer: "c) nieatrakcyjnie prezentuje się w mediach społecznościowych."
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2023-06-lq-5"
-  taskRef: "certyfikat-polski-B2-2023-06-listen-1"
+  questionId: certyfikat-polski-B2-2023-06-l1-q5
+  taskRef: certyfikat-polski-B2-2023-06-listen-1
   questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionText: "Mężczyzna zapomniał o wizycie Piotrusia"
+  options: "a) u okulisty.|b) u kolegi.|c) u fryzjera."
+  correctAnswer: "c) u fryzjera."
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2023-06-lq-6"
-  taskRef: "certyfikat-polski-B2-2023-06-listen-2"
+  questionId: certyfikat-polski-B2-2023-06-l1-q6
+  taskRef: certyfikat-polski-B2-2023-06-listen-1
   questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionText: "W wyniku zmiany planów"
+  options: "a) wizyta u dziadków rozpocznie się później niż planowano.|b) trzeba będzie odwołać odwiedziny u dziadków.|c) spotkanie z dziadkami trzeba przesunąć na godzinę 10."
+  correctAnswer: "a) wizyta u dziadków rozpocznie się później niż planowano."
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2023-06-lq-7"
-  taskRef: "certyfikat-polski-B2-2023-06-listen-2"
+  questionId: certyfikat-polski-B2-2023-06-l1-q7
+  taskRef: certyfikat-polski-B2-2023-06-listen-1
   questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionText: "Algorytm wykorzystujący sztuczną inteligencję"
+  options: "a) 9 stycznia poinformował Światową Organizację Zdrowia o epidemii.|b) odnotował sytuację epidemiczną wcześniej niż Światowa Organizacja Zdrowia.|c) został przedstawiony jako narzędzie w służbie Światowej Organizacji Zdrowia."
+  correctAnswer: "b) odnotował sytuację epidemiczną wcześniej niż Światowa Organizacja Zdrowia."
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2023-06-lq-8"
-  taskRef: "certyfikat-polski-B2-2023-06-listen-2"
+  questionId: certyfikat-polski-B2-2023-06-l1-q8
+  taskRef: certyfikat-polski-B2-2023-06-listen-1
   questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionText: "512 megabajtów to liczba danych"
+  options: "a) które będą wytwarzane przez każdą osobę w 2025 roku.|b) generowanych przez przeciętnego człowieka w 2012 roku.|c) wytwarzanych w 2012 roku przez wszystkich ludzi."
+  correctAnswer: "b) generowanych przez przeciętnego człowieka w 2012 roku."
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2023-06-lq-9"
-  taskRef: "certyfikat-polski-B2-2023-06-listen-2"
+  questionId: certyfikat-polski-B2-2023-06-l2-q1
+  taskRef: certyfikat-polski-B2-2023-06-listen-2
   questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionText: "Przed zawarciem ślubu z Jagiełłą Jadwiga"
+  options: "a) była już zamężna z austriackim następcą tronu.|b) miała za sobą ucieczkę z Wawelu.|c) miała wyjść za mąż za innego mężczyznę."
+  correctAnswer: "c) miała wyjść za mąż za innego mężczyznę."
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2023-06-lq-10"
-  taskRef: "certyfikat-polski-B2-2023-06-listen-2"
+  questionId: certyfikat-polski-B2-2023-06-l2-q2
+  taskRef: certyfikat-polski-B2-2023-06-listen-2
   questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionText: "Uroczystość przyjęcia chrztu przez Jagiełłę"
+  options: "a) miała miejsce w Czechach.|b) trwała aż trzy dni.|c) odbyła się w Krakowie."
+  correctAnswer: "c) odbyła się w Krakowie."
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2023-06-lq-11"
-  taskRef: "certyfikat-polski-B2-2023-06-listen-3"
+  questionId: certyfikat-polski-B2-2023-06-l2-q3
+  taskRef: certyfikat-polski-B2-2023-06-listen-2
   questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionText: "Krakowski kościół Na Piasku"
+  options: "a) został zbudowany pod czujnym okiem Jadwigi.|b) powstał z inicjatywy zwykłych ludzi.|c) był ulubioną świątynią królowej Jadwigi."
+  correctAnswer: "a) został zbudowany pod czujnym okiem Jadwigi."
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2023-06-lq-12"
-  taskRef: "certyfikat-polski-B2-2023-06-listen-3"
+  questionId: certyfikat-polski-B2-2023-06-l2-q4
+  taskRef: certyfikat-polski-B2-2023-06-listen-2
   questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionText: "Spotkany w kościele robotnik budowlany"
+  options: "a) poskarżył się na swoją chorobę.|b) opowiedział Jadwidze o sytuacji swojej żony.|c) zrobił przykrość królowej Jadwidze."
+  correctAnswer: "b) opowiedział Jadwidze o sytuacji swojej żony."
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2023-06-lq-13"
-  taskRef: "certyfikat-polski-B2-2023-06-listen-3"
+  questionId: certyfikat-polski-B2-2023-06-l2-q5
+  taskRef: certyfikat-polski-B2-2023-06-listen-2
   questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionText: "Na ścianie kościoła Najświętszej Marii Panny można zobaczyć"
+  options: "a) złoto i szlachetne kamienie.|b) ślad bosej stopy królowej Jadwigi.|c) but noszony przez królową Jadwigę."
+  correctAnswer: "b) ślad bosej stopy królowej Jadwigi."
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2023-06-lq-14"
-  taskRef: "certyfikat-polski-B2-2023-06-listen-3"
+  questionId: certyfikat-polski-B2-2023-06-l2-q6
+  taskRef: certyfikat-polski-B2-2023-06-listen-2
   questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionText: "Kiedy królowa Jadwiga zmarła, Jagiełło"
+  options: "a) kontynuował dotychczasową politykę.|b) przegrał wojnę z zakonem krzyżackim.|c) postanowił zacząć studia na uniwersytecie."
+  correctAnswer: "a) kontynuował dotychczasową politykę."
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2023-06-lq-15"
-  taskRef: "certyfikat-polski-B2-2023-06-listen-3"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2023-06-l3-q1
+  taskRef: certyfikat-polski-B2-2023-06-listen-3
+  questionType: true_false
+  questionText: "Nazwa ptaków pochodzi od wydawanych przez nie dźwięków."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2023-06-lq-16"
-  taskRef: "certyfikat-polski-B2-2023-06-listen-4"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2023-06-l3-q2
+  taskRef: certyfikat-polski-B2-2023-06-listen-3
+  questionType: true_false
+  questionText: "Hodowcy owiec w Nowej Zelandii dokarmiali papugi kea."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2023-06-lq-17"
-  taskRef: "certyfikat-polski-B2-2023-06-listen-4"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2023-06-l3-q3
+  taskRef: certyfikat-polski-B2-2023-06-listen-3
+  questionType: true_false
+  questionText: "Obecnie papuga kea jest gatunkiem zagrożonym wyginięciem."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2023-06-lq-18"
-  taskRef: "certyfikat-polski-B2-2023-06-listen-4"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2023-06-l3-q4
+  taskRef: certyfikat-polski-B2-2023-06-listen-3
+  questionType: true_false
+  questionText: "W niektórych miejscach umieszcza się napisy ostrzegające przed keą."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2023-06-lq-19"
-  taskRef: "certyfikat-polski-B2-2023-06-listen-4"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2023-06-l3-q5
+  taskRef: certyfikat-polski-B2-2023-06-listen-3
+  questionType: true_false
+  questionText: "Kea potrafią być złośliwe, czego przejawem jest niszczenie samochodów."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2023-06-lq-20"
-  taskRef: "certyfikat-polski-B2-2023-06-listen-4"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2023-06-l3-q6
+  taskRef: certyfikat-polski-B2-2023-06-listen-3
+  questionType: true_false
+  questionText: "Papugi kea uzyskują dojrzałość w wieku czterech lat."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2023-06-lq-21"
-  taskRef: "certyfikat-polski-B2-2023-06-listen-5"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2023-06-l3-q7
+  taskRef: certyfikat-polski-B2-2023-06-listen-3
+  questionType: true_false
+  questionText: "Kea różnią się od innych papug sposobem podejścia do nowych przedmiotów."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2023-06-lq-22"
-  taskRef: "certyfikat-polski-B2-2023-06-listen-5"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2023-06-l3-q8
+  taskRef: certyfikat-polski-B2-2023-06-listen-3
+  questionType: true_false
+  questionText: "Omawiane papugi ukrywały korki do zlewu, ponieważ nie lubiły wody."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2023-06-lq-23"
-  taskRef: "certyfikat-polski-B2-2023-06-listen-5"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2023-06-l3-q9
+  taskRef: certyfikat-polski-B2-2023-06-listen-3
+  questionType: true_false
+  questionText: "Papugi użyły piłki golfowej do rozwiązania problemu ze zbiornikiem."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2023-06-lq-24"
-  taskRef: "certyfikat-polski-B2-2023-06-listen-5"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2023-06-l4-q1
+  taskRef: certyfikat-polski-B2-2023-06-listen-4
+  questionType: matching
+  questionText: "Tymczasowo zniknął z mapy lokali dostępnych dla klientów."
+  options: "A|B|C|D"
+  correctAnswer: C
+  pointsQuarter: 4
 }
 LISTENING_QUESTION {
-  questionId: "certyfikat-polski-B2-2023-06-lq-25"
-  taskRef: "certyfikat-polski-B2-2023-06-listen-5"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2023-06-l4-q2
+  taskRef: certyfikat-polski-B2-2023-06-listen-4
+  questionType: matching
+  questionText: "Znajduje się w bliskim sąsiedztwie węzłów komunikacyjnych."
+  options: "A|B|C|D"
+  correctAnswer: B
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-l4-q3
+  taskRef: certyfikat-polski-B2-2023-06-listen-4
+  questionType: matching
+  questionText: "Dobrze się tu poczują miłośnicy egzotycznej flory."
+  options: "A|B|C|D"
+  correctAnswer: D
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-l4-q4
+  taskRef: certyfikat-polski-B2-2023-06-listen-4
+  questionType: matching
+  questionText: "Cieszy się wyróżnieniem ważnej i cenionej organizacji."
+  options: "A|B|C|D"
+  correctAnswer: D
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-l4-q5
+  taskRef: certyfikat-polski-B2-2023-06-listen-4
+  questionType: matching
+  questionText: "Oferuje możliwość podziwiania imponujących widoków."
+  options: "A|B|C|D"
+  correctAnswer: B
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-l4-q6
+  taskRef: certyfikat-polski-B2-2023-06-listen-4
+  questionType: matching
+  questionText: "Szczególną wagę przywiązuje do jakości wykorzystywanych produktów."
+  options: "A|B|C|D"
+  correctAnswer: "C|D"
+  pointsQuarter: 8
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-l4-q7
+  taskRef: certyfikat-polski-B2-2023-06-listen-4
+  questionType: matching
+  questionText: "Łączy tradycję z nowoczesnością."
+  options: "A|B|C|D"
+  correctAnswer: D
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-l4-q8
+  taskRef: certyfikat-polski-B2-2023-06-listen-4
+  questionType: matching
+  questionText: "Dba o wygodę zmotoryzowanych gości."
+  options: "A|B|C|D"
+  correctAnswer: A
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-l5-q1
+  taskRef: certyfikat-polski-B2-2023-06-listen-5
+  questionType: fill_gap
+  questionText: "Co Jan Szczepanik robił w Jaśle?"
+  correctAnswer: "chodził do gimnazjum"
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-l5-q2
+  taskRef: certyfikat-polski-B2-2023-06-listen-5
+  questionType: fill_gap
+  questionText: "W jakim zawodzie pracował Jan Szczepanik?"
+  correctAnswer: "nauczyciel fizyki"
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-l5-q3
+  taskRef: certyfikat-polski-B2-2023-06-listen-5
+  questionType: fill_gap
+  questionText: "W których częściach świata szczególnie interesowano się jego wynalazkami?"
+  correctAnswer: "w Ameryce|w Europie"
+  pointsQuarter: 4
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 2
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-l5-q4
+  taskRef: certyfikat-polski-B2-2023-06-listen-5
+  questionType: fill_gap
+  questionText: "W jaki sposób Mark Twain okazał swoje zainteresowanie postacią Szczepanika?"
+  correctAnswer: "Napisał dla niego dwa opowiadania."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-l5-q5
+  taskRef: certyfikat-polski-B2-2023-06-listen-5
+  questionType: fill_gap
+  questionText: "Ile wynalazków przypisuje się Janowi Szczepanikowi?"
+  correctAnswer: "ponad 90"
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-l5-q6
+  taskRef: certyfikat-polski-B2-2023-06-listen-5
+  questionType: fill_gap
+  questionText: "W jakich dziedzinach specjalizował się wynalazca?"
+  correctAnswer: "fotografia|film"
+  pointsQuarter: 4
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 2
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-l5-q7
+  taskRef: certyfikat-polski-B2-2023-06-listen-5
+  questionType: fill_gap
+  questionText: "Co wynalazł Jan Szczepanik?"
+  correctAnswer: "papier fotograficzny|urządzenia do pomiaru intensywności barw|kamizelka kuloodporna"
+  pointsQuarter: 4
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
+  gradingMode: open_manual
+  requiredSelections: 1
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-l5-q8
+  taskRef: certyfikat-polski-B2-2023-06-listen-5
+  questionType: fill_gap
+  questionText: "Co na swoich zdjęciach przedstawił i uwiecznił Tadeusz Rząsa?"
+  correctAnswer: "fragmenty Krakowa"
+  pointsQuarter: 4
+  gradingMode: open_manual
 }

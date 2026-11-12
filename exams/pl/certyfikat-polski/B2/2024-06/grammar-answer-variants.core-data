@@ -1,0 +1,31 @@
+DSL 1
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-06-g5-q6-v1
+  itemRef: certyfikat-polski-B2-2024-06-g5-q6
+  answer: "będą pilnowali"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-06-g6-q9-v1
+  itemRef: certyfikat-polski-B2-2024-06-g6-q9
+  answer: "najprzyjaźniejszej"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-06-g7-q8-v1
+  itemRef: certyfikat-polski-B2-2024-06-g7-q8
+  answer: "wartości"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-06-g8-q1-v1
+  itemRef: certyfikat-polski-B2-2024-06-g8-q1
+  answer: "Trasa linii 2 została zmieniona w związku z przeprowadzanym gruntownym remontem torowiska."
+  earnedQuarter: 4
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-06-g8-q5-v1
+  itemRef: certyfikat-polski-B2-2024-06-g8-q5
+  answer: "Mogliśmy wyjechać na kurs do Portugalii dzięki otrzymaniu pomocy finansowej z Urzędu Miasta."
+  earnedQuarter: 4
+}

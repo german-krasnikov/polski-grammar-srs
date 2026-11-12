@@ -1,181 +1,406 @@
 DSL 1
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2023-06-rq-1"
-  passageRef: "certyfikat-polski-B2-2023-06-read-6"
+  questionId: certyfikat-polski-B2-2023-06-r1-q1
+  passageRef: certyfikat-polski-B2-2023-06-read-1
   questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionText: "Z tekstu dowiadujemy się, że"
+  options: "a) poproszono Komisję Europejską o zmianę regulacji w zakresie kształcenia lekarzy.|b) środowisko lekarskie jest zaniepokojone nowymi trendami w szkolnictwie wyższym.|c) kształcenie lekarzy przez większą liczbę placówek zapewni pacjentom lepszą opiekę."
+  correctAnswer: "b) środowisko lekarskie jest zaniepokojone nowymi trendami w szkolnictwie wyższym."
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2023-06-rq-2"
-  passageRef: "certyfikat-polski-B2-2023-06-read-6"
+  questionId: certyfikat-polski-B2-2023-06-r1-q2
+  passageRef: certyfikat-polski-B2-2023-06-read-1
   questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionText: "Z tekstu dowiadujemy się, że studio A24"
+  options: "a) ma problemy z obsadą aktorską w swoich oryginalnych produkcjach.|b) w ostatnich latach wyznacza standardy w kinematografii.|c) zdobyło najwięcej Oscarów w historii przyznawania tych nagród."
+  correctAnswer: "b) w ostatnich latach wyznacza standardy w kinematografii."
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2023-06-rq-3"
-  passageRef: "certyfikat-polski-B2-2023-06-read-6"
+  questionId: certyfikat-polski-B2-2023-06-r1-q3
+  passageRef: certyfikat-polski-B2-2023-06-read-1
   questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionText: "Z tekstu dowiadujemy się, że"
+  options: "a) Rolls-Royce sprzedaje samochody głównie tym, którzy mają osobistych kierowców.|b) obecnie Rolls-Royce sprzedaje więcej samochodów niż wcześniej.|c) kierowanie autem marki Rolls-Royce jest źródłem przyjemności."
+  correctAnswer: "c) kierowanie autem marki Rolls-Royce jest źródłem przyjemności."
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2023-06-rq-4"
-  passageRef: "certyfikat-polski-B2-2023-06-read-6"
+  questionId: certyfikat-polski-B2-2023-06-r1-q4
+  passageRef: certyfikat-polski-B2-2023-06-read-1
   questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionText: "Z tekstu dowiadujemy się, że"
+  options: "a) kalendarz pylenia roślin w Polsce jest zróżnicowany geograficznie.|b) na wschodzie kraju rośliny zaczynają pylić dwa tygodnie później niż na północy.|c) osoby uczulone na pyłki mają obowiązek zainstalowania odpowiedniej aplikacji."
+  correctAnswer: "a) kalendarz pylenia roślin w Polsce jest zróżnicowany geograficznie."
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2023-06-rq-5"
-  passageRef: "certyfikat-polski-B2-2023-06-read-6"
+  questionId: certyfikat-polski-B2-2023-06-r1-q5
+  passageRef: certyfikat-polski-B2-2023-06-read-1
   questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionText: "Z tekstu dowiadujemy się, że"
+  options: "a) zobowiązania rodzinne zmniejszają aktywność zawodową Polek.|b) kobiety w krajach Unii Europejskiej częściej korzystają z publicznych usług opiekuńczych.|c) w Polsce powszechne są rozwiązania wspierające aktywność zawodową osób uczących się."
+  correctAnswer: "a) zobowiązania rodzinne zmniejszają aktywność zawodową Polek."
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2023-06-rq-6"
-  passageRef: "certyfikat-polski-B2-2023-06-read-7"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2023-06-r2-q1
+  passageRef: certyfikat-polski-B2-2023-06-read-2
+  questionType: gap_fill_fragment
+  questionText: "Luka 1 w tekście „Morsowanie”"
+  options: "A. a zwiększa korzyści zdrowotne|B. zwykle od jesieni do wiosny|C. dawka pozytywnej energii i moc zdrowia|D. zimna woda schładza bowiem szybciej i silniej niż powietrze|E. zarówno na ciało, jak i umysł|F. to coraz częstszy widok|G. mogą być one odskocznią od rutynowych obowiązków|H. rzadziej zapadają na różne infekcje|I. zanim rozpoczniemy przygodę z lodowatymi kąpielami|J. dzięki czemu lepiej śpimy i jesteśmy wypoczęci|K. zostały lepiej poznane w badaniach naukowych"
+  correctAnswer: "G. mogą być one odskocznią od rutynowych obowiązków"
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2023-06-rq-7"
-  passageRef: "certyfikat-polski-B2-2023-06-read-7"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2023-06-r2-q2
+  passageRef: certyfikat-polski-B2-2023-06-read-2
+  questionType: gap_fill_fragment
+  questionText: "Luka 2 w tekście „Morsowanie”"
+  options: "A. a zwiększa korzyści zdrowotne|B. zwykle od jesieni do wiosny|C. dawka pozytywnej energii i moc zdrowia|D. zimna woda schładza bowiem szybciej i silniej niż powietrze|E. zarówno na ciało, jak i umysł|F. to coraz częstszy widok|G. mogą być one odskocznią od rutynowych obowiązków|H. rzadziej zapadają na różne infekcje|I. zanim rozpoczniemy przygodę z lodowatymi kąpielami|J. dzięki czemu lepiej śpimy i jesteśmy wypoczęci|K. zostały lepiej poznane w badaniach naukowych"
+  correctAnswer: "C. dawka pozytywnej energii i moc zdrowia"
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2023-06-rq-8"
-  passageRef: "certyfikat-polski-B2-2023-06-read-7"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2023-06-r2-q3
+  passageRef: certyfikat-polski-B2-2023-06-read-2
+  questionType: gap_fill_fragment
+  questionText: "Luka 3 w tekście „Morsowanie”"
+  options: "A. a zwiększa korzyści zdrowotne|B. zwykle od jesieni do wiosny|C. dawka pozytywnej energii i moc zdrowia|D. zimna woda schładza bowiem szybciej i silniej niż powietrze|E. zarówno na ciało, jak i umysł|F. to coraz częstszy widok|G. mogą być one odskocznią od rutynowych obowiązków|H. rzadziej zapadają na różne infekcje|I. zanim rozpoczniemy przygodę z lodowatymi kąpielami|J. dzięki czemu lepiej śpimy i jesteśmy wypoczęci|K. zostały lepiej poznane w badaniach naukowych"
+  correctAnswer: "A. a zwiększa korzyści zdrowotne"
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2023-06-rq-9"
-  passageRef: "certyfikat-polski-B2-2023-06-read-7"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2023-06-r2-q4
+  passageRef: certyfikat-polski-B2-2023-06-read-2
+  questionType: gap_fill_fragment
+  questionText: "Luka 4 w tekście „Morsowanie”"
+  options: "A. a zwiększa korzyści zdrowotne|B. zwykle od jesieni do wiosny|C. dawka pozytywnej energii i moc zdrowia|D. zimna woda schładza bowiem szybciej i silniej niż powietrze|E. zarówno na ciało, jak i umysł|F. to coraz częstszy widok|G. mogą być one odskocznią od rutynowych obowiązków|H. rzadziej zapadają na różne infekcje|I. zanim rozpoczniemy przygodę z lodowatymi kąpielami|J. dzięki czemu lepiej śpimy i jesteśmy wypoczęci|K. zostały lepiej poznane w badaniach naukowych"
+  correctAnswer: "K. zostały lepiej poznane w badaniach naukowych"
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2023-06-rq-10"
-  passageRef: "certyfikat-polski-B2-2023-06-read-7"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2023-06-r2-q5
+  passageRef: certyfikat-polski-B2-2023-06-read-2
+  questionType: gap_fill_fragment
+  questionText: "Luka 5 w tekście „Morsowanie”"
+  options: "A. a zwiększa korzyści zdrowotne|B. zwykle od jesieni do wiosny|C. dawka pozytywnej energii i moc zdrowia|D. zimna woda schładza bowiem szybciej i silniej niż powietrze|E. zarówno na ciało, jak i umysł|F. to coraz częstszy widok|G. mogą być one odskocznią od rutynowych obowiązków|H. rzadziej zapadają na różne infekcje|I. zanim rozpoczniemy przygodę z lodowatymi kąpielami|J. dzięki czemu lepiej śpimy i jesteśmy wypoczęci|K. zostały lepiej poznane w badaniach naukowych"
+  correctAnswer: "D. zimna woda schładza bowiem szybciej i silniej niż powietrze"
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2023-06-rq-11"
-  passageRef: "certyfikat-polski-B2-2023-06-read-8"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2023-06-r2-q6
+  passageRef: certyfikat-polski-B2-2023-06-read-2
+  questionType: gap_fill_fragment
+  questionText: "Luka 6 w tekście „Morsowanie”"
+  options: "A. a zwiększa korzyści zdrowotne|B. zwykle od jesieni do wiosny|C. dawka pozytywnej energii i moc zdrowia|D. zimna woda schładza bowiem szybciej i silniej niż powietrze|E. zarówno na ciało, jak i umysł|F. to coraz częstszy widok|G. mogą być one odskocznią od rutynowych obowiązków|H. rzadziej zapadają na różne infekcje|I. zanim rozpoczniemy przygodę z lodowatymi kąpielami|J. dzięki czemu lepiej śpimy i jesteśmy wypoczęci|K. zostały lepiej poznane w badaniach naukowych"
+  correctAnswer: "E. zarówno na ciało, jak i umysł"
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2023-06-rq-12"
-  passageRef: "certyfikat-polski-B2-2023-06-read-8"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2023-06-r2-q7
+  passageRef: certyfikat-polski-B2-2023-06-read-2
+  questionType: gap_fill_fragment
+  questionText: "Luka 7 w tekście „Morsowanie”"
+  options: "A. a zwiększa korzyści zdrowotne|B. zwykle od jesieni do wiosny|C. dawka pozytywnej energii i moc zdrowia|D. zimna woda schładza bowiem szybciej i silniej niż powietrze|E. zarówno na ciało, jak i umysł|F. to coraz częstszy widok|G. mogą być one odskocznią od rutynowych obowiązków|H. rzadziej zapadają na różne infekcje|I. zanim rozpoczniemy przygodę z lodowatymi kąpielami|J. dzięki czemu lepiej śpimy i jesteśmy wypoczęci|K. zostały lepiej poznane w badaniach naukowych"
+  correctAnswer: "F. to coraz częstszy widok"
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2023-06-rq-13"
-  passageRef: "certyfikat-polski-B2-2023-06-read-8"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2023-06-r2-q8
+  passageRef: certyfikat-polski-B2-2023-06-read-2
+  questionType: gap_fill_fragment
+  questionText: "Luka 8 w tekście „Morsowanie”"
+  options: "A. a zwiększa korzyści zdrowotne|B. zwykle od jesieni do wiosny|C. dawka pozytywnej energii i moc zdrowia|D. zimna woda schładza bowiem szybciej i silniej niż powietrze|E. zarówno na ciało, jak i umysł|F. to coraz częstszy widok|G. mogą być one odskocznią od rutynowych obowiązków|H. rzadziej zapadają na różne infekcje|I. zanim rozpoczniemy przygodę z lodowatymi kąpielami|J. dzięki czemu lepiej śpimy i jesteśmy wypoczęci|K. zostały lepiej poznane w badaniach naukowych"
+  correctAnswer: "J. dzięki czemu lepiej śpimy i jesteśmy wypoczęci"
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2023-06-rq-14"
-  passageRef: "certyfikat-polski-B2-2023-06-read-8"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2023-06-r2-q9
+  passageRef: certyfikat-polski-B2-2023-06-read-2
+  questionType: gap_fill_fragment
+  questionText: "Luka 9 w tekście „Morsowanie”"
+  options: "A. a zwiększa korzyści zdrowotne|B. zwykle od jesieni do wiosny|C. dawka pozytywnej energii i moc zdrowia|D. zimna woda schładza bowiem szybciej i silniej niż powietrze|E. zarówno na ciało, jak i umysł|F. to coraz częstszy widok|G. mogą być one odskocznią od rutynowych obowiązków|H. rzadziej zapadają na różne infekcje|I. zanim rozpoczniemy przygodę z lodowatymi kąpielami|J. dzięki czemu lepiej śpimy i jesteśmy wypoczęci|K. zostały lepiej poznane w badaniach naukowych"
+  correctAnswer: "H. rzadziej zapadają na różne infekcje"
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2023-06-rq-15"
-  passageRef: "certyfikat-polski-B2-2023-06-read-8"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2023-06-r2-q10
+  passageRef: certyfikat-polski-B2-2023-06-read-2
+  questionType: gap_fill_fragment
+  questionText: "Luka 10 w tekście „Morsowanie”"
+  options: "A. a zwiększa korzyści zdrowotne|B. zwykle od jesieni do wiosny|C. dawka pozytywnej energii i moc zdrowia|D. zimna woda schładza bowiem szybciej i silniej niż powietrze|E. zarówno na ciało, jak i umysł|F. to coraz częstszy widok|G. mogą być one odskocznią od rutynowych obowiązków|H. rzadziej zapadają na różne infekcje|I. zanim rozpoczniemy przygodę z lodowatymi kąpielami|J. dzięki czemu lepiej śpimy i jesteśmy wypoczęci|K. zostały lepiej poznane w badaniach naukowych"
+  correctAnswer: "I. zanim rozpoczniemy przygodę z lodowatymi kąpielami"
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2023-06-rq-16"
-  passageRef: "certyfikat-polski-B2-2023-06-read-9"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2023-06-r3-q1
+  passageRef: certyfikat-polski-B2-2023-06-read-3
+  questionType: matching
+  questionText: "Czy wszyscy trzej byli tak samo popularni?"
+  options: "A. Przede wszystkim wybierał te niedostępne – głównie mężatki. Mogło to wynikać z niechęci do pełnego zaangażowania się w związek. Myślę, że wiek miał mniejsze znaczenie.|B. Autor przewidział między innymi samoloty i rakiety kosmiczne, numery ewidencji ludzkości, a także urządzenia do transmisji i zapisywania obrazu i dźwięku.|C. O ile Słowacki nie zdobył za życia ogromnej sławy, to Mickiewicza czy Krasińskiego znali wszyscy i na bieżąco komentowali zawirowania w ich życiu.|D. Zdecydowanie twórczość Słowackiego oddziałuje na mnie najmocniej. Natomiast najwięcej czasu spędziłem nad życiorysem Mickiewicza.|E. Artysta panicznie obawiał się wszelkich rewolucji, które mogłyby odebrać mu szlacheckie tytuły. W swoich utworach nie poruszał więc drażliwych tematów.|F. W pewnym sensie – jak najbardziej. To właśnie żywotami wielkich literatów czy muzyków klasycznych ekscytowano się wtedy – i to wcale nie mniej niż dzisiejszymi celebrytami.|G. Poeta stracił w dzieciństwie matkę i był wychowywany przez apodyktycznego ojca. Miał także tendencję do użalania się nad sobą.|H. To skomplikowany temat. Panowie poznali się w Wilnie, a później wielokrotnie spotykali się na emigracji. Prywatnie nie łączyła ich bliższa relacja, lecz nie można też mówić o otwartej wrogości.|I. Gdyby dzieło zostało faktycznie ukończone i wydane, byłoby jedną z pierwszych powieści science fiction w historii, powstałą na długo przed dziełem Verne’a.|J. Słowacki był oburzony, że Mickiewicz negatywnie opisał jego zmarłego ojczyma w „Dziadach”, i początkowo faktycznie planował klasyczny pojedynek. Ostatecznie zmienił zdanie i postanowił zemścić się w poezji.|K. Twórca zdecydował się zniszczyć rękopis, obawiając się, że opisywana przez niego rzeczywistość polityczna świata przyszłości mogłaby zostać potraktowana jako prowokacja."
+  correctAnswer: "C. O ile Słowacki nie zdobył za życia ogromnej sławy, to Mickiewicza czy Krasińskiego znali wszyscy i na bieżąco komentowali zawirowania w ich życiu."
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2023-06-rq-17"
-  passageRef: "certyfikat-polski-B2-2023-06-read-9"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2023-06-r3-q2
+  passageRef: certyfikat-polski-B2-2023-06-read-3
+  questionType: matching
+  questionText: "Czy to prawda, że Mickiewicz kochał kobiety starsze od siebie?"
+  options: "A. Przede wszystkim wybierał te niedostępne – głównie mężatki. Mogło to wynikać z niechęci do pełnego zaangażowania się w związek. Myślę, że wiek miał mniejsze znaczenie.|B. Autor przewidział między innymi samoloty i rakiety kosmiczne, numery ewidencji ludzkości, a także urządzenia do transmisji i zapisywania obrazu i dźwięku.|C. O ile Słowacki nie zdobył za życia ogromnej sławy, to Mickiewicza czy Krasińskiego znali wszyscy i na bieżąco komentowali zawirowania w ich życiu.|D. Zdecydowanie twórczość Słowackiego oddziałuje na mnie najmocniej. Natomiast najwięcej czasu spędziłem nad życiorysem Mickiewicza.|E. Artysta panicznie obawiał się wszelkich rewolucji, które mogłyby odebrać mu szlacheckie tytuły. W swoich utworach nie poruszał więc drażliwych tematów.|F. W pewnym sensie – jak najbardziej. To właśnie żywotami wielkich literatów czy muzyków klasycznych ekscytowano się wtedy – i to wcale nie mniej niż dzisiejszymi celebrytami.|G. Poeta stracił w dzieciństwie matkę i był wychowywany przez apodyktycznego ojca. Miał także tendencję do użalania się nad sobą.|H. To skomplikowany temat. Panowie poznali się w Wilnie, a później wielokrotnie spotykali się na emigracji. Prywatnie nie łączyła ich bliższa relacja, lecz nie można też mówić o otwartej wrogości.|I. Gdyby dzieło zostało faktycznie ukończone i wydane, byłoby jedną z pierwszych powieści science fiction w historii, powstałą na długo przed dziełem Verne’a.|J. Słowacki był oburzony, że Mickiewicz negatywnie opisał jego zmarłego ojczyma w „Dziadach”, i początkowo faktycznie planował klasyczny pojedynek. Ostatecznie zmienił zdanie i postanowił zemścić się w poezji.|K. Twórca zdecydował się zniszczyć rękopis, obawiając się, że opisywana przez niego rzeczywistość polityczna świata przyszłości mogłaby zostać potraktowana jako prowokacja."
+  correctAnswer: "A. Przede wszystkim wybierał te niedostępne – głównie mężatki. Mogło to wynikać z niechęci do pełnego zaangażowania się w związek. Myślę, że wiek miał mniejsze znaczenie."
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2023-06-rq-18"
-  passageRef: "certyfikat-polski-B2-2023-06-read-9"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2023-06-r3-q3
+  passageRef: certyfikat-polski-B2-2023-06-read-3
+  questionType: matching
+  questionText: "Czym była „Historia przyszłości” , nad którą pracował Mickiewicz?"
+  options: "A. Przede wszystkim wybierał te niedostępne – głównie mężatki. Mogło to wynikać z niechęci do pełnego zaangażowania się w związek. Myślę, że wiek miał mniejsze znaczenie.|B. Autor przewidział między innymi samoloty i rakiety kosmiczne, numery ewidencji ludzkości, a także urządzenia do transmisji i zapisywania obrazu i dźwięku.|C. O ile Słowacki nie zdobył za życia ogromnej sławy, to Mickiewicza czy Krasińskiego znali wszyscy i na bieżąco komentowali zawirowania w ich życiu.|D. Zdecydowanie twórczość Słowackiego oddziałuje na mnie najmocniej. Natomiast najwięcej czasu spędziłem nad życiorysem Mickiewicza.|E. Artysta panicznie obawiał się wszelkich rewolucji, które mogłyby odebrać mu szlacheckie tytuły. W swoich utworach nie poruszał więc drażliwych tematów.|F. W pewnym sensie – jak najbardziej. To właśnie żywotami wielkich literatów czy muzyków klasycznych ekscytowano się wtedy – i to wcale nie mniej niż dzisiejszymi celebrytami.|G. Poeta stracił w dzieciństwie matkę i był wychowywany przez apodyktycznego ojca. Miał także tendencję do użalania się nad sobą.|H. To skomplikowany temat. Panowie poznali się w Wilnie, a później wielokrotnie spotykali się na emigracji. Prywatnie nie łączyła ich bliższa relacja, lecz nie można też mówić o otwartej wrogości.|I. Gdyby dzieło zostało faktycznie ukończone i wydane, byłoby jedną z pierwszych powieści science fiction w historii, powstałą na długo przed dziełem Verne’a.|J. Słowacki był oburzony, że Mickiewicz negatywnie opisał jego zmarłego ojczyma w „Dziadach”, i początkowo faktycznie planował klasyczny pojedynek. Ostatecznie zmienił zdanie i postanowił zemścić się w poezji.|K. Twórca zdecydował się zniszczyć rękopis, obawiając się, że opisywana przez niego rzeczywistość polityczna świata przyszłości mogłaby zostać potraktowana jako prowokacja."
+  correctAnswer: "I. Gdyby dzieło zostało faktycznie ukończone i wydane, byłoby jedną z pierwszych powieści science fiction w historii, powstałą na długo przed dziełem Verne’a."
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2023-06-rq-19"
-  passageRef: "certyfikat-polski-B2-2023-06-read-9"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2023-06-r3-q4
+  passageRef: certyfikat-polski-B2-2023-06-read-3
+  questionType: matching
+  questionText: "Co niezwykłego było w jej treści?"
+  options: "A. Przede wszystkim wybierał te niedostępne – głównie mężatki. Mogło to wynikać z niechęci do pełnego zaangażowania się w związek. Myślę, że wiek miał mniejsze znaczenie.|B. Autor przewidział między innymi samoloty i rakiety kosmiczne, numery ewidencji ludzkości, a także urządzenia do transmisji i zapisywania obrazu i dźwięku.|C. O ile Słowacki nie zdobył za życia ogromnej sławy, to Mickiewicza czy Krasińskiego znali wszyscy i na bieżąco komentowali zawirowania w ich życiu.|D. Zdecydowanie twórczość Słowackiego oddziałuje na mnie najmocniej. Natomiast najwięcej czasu spędziłem nad życiorysem Mickiewicza.|E. Artysta panicznie obawiał się wszelkich rewolucji, które mogłyby odebrać mu szlacheckie tytuły. W swoich utworach nie poruszał więc drażliwych tematów.|F. W pewnym sensie – jak najbardziej. To właśnie żywotami wielkich literatów czy muzyków klasycznych ekscytowano się wtedy – i to wcale nie mniej niż dzisiejszymi celebrytami.|G. Poeta stracił w dzieciństwie matkę i był wychowywany przez apodyktycznego ojca. Miał także tendencję do użalania się nad sobą.|H. To skomplikowany temat. Panowie poznali się w Wilnie, a później wielokrotnie spotykali się na emigracji. Prywatnie nie łączyła ich bliższa relacja, lecz nie można też mówić o otwartej wrogości.|I. Gdyby dzieło zostało faktycznie ukończone i wydane, byłoby jedną z pierwszych powieści science fiction w historii, powstałą na długo przed dziełem Verne’a.|J. Słowacki był oburzony, że Mickiewicz negatywnie opisał jego zmarłego ojczyma w „Dziadach”, i początkowo faktycznie planował klasyczny pojedynek. Ostatecznie zmienił zdanie i postanowił zemścić się w poezji.|K. Twórca zdecydował się zniszczyć rękopis, obawiając się, że opisywana przez niego rzeczywistość polityczna świata przyszłości mogłaby zostać potraktowana jako prowokacja."
+  correctAnswer: "B. Autor przewidział między innymi samoloty i rakiety kosmiczne, numery ewidencji ludzkości, a także urządzenia do transmisji i zapisywania obrazu i dźwięku."
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2023-06-rq-20"
-  passageRef: "certyfikat-polski-B2-2023-06-read-9"
+  questionId: certyfikat-polski-B2-2023-06-r3-q5
+  passageRef: certyfikat-polski-B2-2023-06-read-3
+  questionType: matching
+  questionText: "Dlaczego powieść nie została opublikowana?"
+  options: "A. Przede wszystkim wybierał te niedostępne – głównie mężatki. Mogło to wynikać z niechęci do pełnego zaangażowania się w związek. Myślę, że wiek miał mniejsze znaczenie.|B. Autor przewidział między innymi samoloty i rakiety kosmiczne, numery ewidencji ludzkości, a także urządzenia do transmisji i zapisywania obrazu i dźwięku.|C. O ile Słowacki nie zdobył za życia ogromnej sławy, to Mickiewicza czy Krasińskiego znali wszyscy i na bieżąco komentowali zawirowania w ich życiu.|D. Zdecydowanie twórczość Słowackiego oddziałuje na mnie najmocniej. Natomiast najwięcej czasu spędziłem nad życiorysem Mickiewicza.|E. Artysta panicznie obawiał się wszelkich rewolucji, które mogłyby odebrać mu szlacheckie tytuły. W swoich utworach nie poruszał więc drażliwych tematów.|F. W pewnym sensie – jak najbardziej. To właśnie żywotami wielkich literatów czy muzyków klasycznych ekscytowano się wtedy – i to wcale nie mniej niż dzisiejszymi celebrytami.|G. Poeta stracił w dzieciństwie matkę i był wychowywany przez apodyktycznego ojca. Miał także tendencję do użalania się nad sobą.|H. To skomplikowany temat. Panowie poznali się w Wilnie, a później wielokrotnie spotykali się na emigracji. Prywatnie nie łączyła ich bliższa relacja, lecz nie można też mówić o otwartej wrogości.|I. Gdyby dzieło zostało faktycznie ukończone i wydane, byłoby jedną z pierwszych powieści science fiction w historii, powstałą na długo przed dziełem Verne’a.|J. Słowacki był oburzony, że Mickiewicz negatywnie opisał jego zmarłego ojczyma w „Dziadach”, i początkowo faktycznie planował klasyczny pojedynek. Ostatecznie zmienił zdanie i postanowił zemścić się w poezji.|K. Twórca zdecydował się zniszczyć rękopis, obawiając się, że opisywana przez niego rzeczywistość polityczna świata przyszłości mogłaby zostać potraktowana jako prowokacja."
+  correctAnswer: "K. Twórca zdecydował się zniszczyć rękopis, obawiając się, że opisywana przez niego rzeczywistość polityczna świata przyszłości mogłaby zostać potraktowana jako prowokacja."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-r3-q6
+  passageRef: certyfikat-polski-B2-2023-06-read-3
+  questionType: matching
+  questionText: "Jakie były relacje Mickiewicza ze Słowackim?"
+  options: "A. Przede wszystkim wybierał te niedostępne – głównie mężatki. Mogło to wynikać z niechęci do pełnego zaangażowania się w związek. Myślę, że wiek miał mniejsze znaczenie.|B. Autor przewidział między innymi samoloty i rakiety kosmiczne, numery ewidencji ludzkości, a także urządzenia do transmisji i zapisywania obrazu i dźwięku.|C. O ile Słowacki nie zdobył za życia ogromnej sławy, to Mickiewicza czy Krasińskiego znali wszyscy i na bieżąco komentowali zawirowania w ich życiu.|D. Zdecydowanie twórczość Słowackiego oddziałuje na mnie najmocniej. Natomiast najwięcej czasu spędziłem nad życiorysem Mickiewicza.|E. Artysta panicznie obawiał się wszelkich rewolucji, które mogłyby odebrać mu szlacheckie tytuły. W swoich utworach nie poruszał więc drażliwych tematów.|F. W pewnym sensie – jak najbardziej. To właśnie żywotami wielkich literatów czy muzyków klasycznych ekscytowano się wtedy – i to wcale nie mniej niż dzisiejszymi celebrytami.|G. Poeta stracił w dzieciństwie matkę i był wychowywany przez apodyktycznego ojca. Miał także tendencję do użalania się nad sobą.|H. To skomplikowany temat. Panowie poznali się w Wilnie, a później wielokrotnie spotykali się na emigracji. Prywatnie nie łączyła ich bliższa relacja, lecz nie można też mówić o otwartej wrogości.|I. Gdyby dzieło zostało faktycznie ukończone i wydane, byłoby jedną z pierwszych powieści science fiction w historii, powstałą na długo przed dziełem Verne’a.|J. Słowacki był oburzony, że Mickiewicz negatywnie opisał jego zmarłego ojczyma w „Dziadach”, i początkowo faktycznie planował klasyczny pojedynek. Ostatecznie zmienił zdanie i postanowił zemścić się w poezji.|K. Twórca zdecydował się zniszczyć rękopis, obawiając się, że opisywana przez niego rzeczywistość polityczna świata przyszłości mogłaby zostać potraktowana jako prowokacja."
+  correctAnswer: "H. To skomplikowany temat. Panowie poznali się w Wilnie, a później wielokrotnie spotykali się na emigracji. Prywatnie nie łączyła ich bliższa relacja, lecz nie można też mówić o otwartej wrogości."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-r3-q7
+  passageRef: certyfikat-polski-B2-2023-06-read-3
+  questionType: matching
+  questionText: "A jak wygląda sprawa niedoszłego pojedynku między poetami?"
+  options: "A. Przede wszystkim wybierał te niedostępne – głównie mężatki. Mogło to wynikać z niechęci do pełnego zaangażowania się w związek. Myślę, że wiek miał mniejsze znaczenie.|B. Autor przewidział między innymi samoloty i rakiety kosmiczne, numery ewidencji ludzkości, a także urządzenia do transmisji i zapisywania obrazu i dźwięku.|C. O ile Słowacki nie zdobył za życia ogromnej sławy, to Mickiewicza czy Krasińskiego znali wszyscy i na bieżąco komentowali zawirowania w ich życiu.|D. Zdecydowanie twórczość Słowackiego oddziałuje na mnie najmocniej. Natomiast najwięcej czasu spędziłem nad życiorysem Mickiewicza.|E. Artysta panicznie obawiał się wszelkich rewolucji, które mogłyby odebrać mu szlacheckie tytuły. W swoich utworach nie poruszał więc drażliwych tematów.|F. W pewnym sensie – jak najbardziej. To właśnie żywotami wielkich literatów czy muzyków klasycznych ekscytowano się wtedy – i to wcale nie mniej niż dzisiejszymi celebrytami.|G. Poeta stracił w dzieciństwie matkę i był wychowywany przez apodyktycznego ojca. Miał także tendencję do użalania się nad sobą.|H. To skomplikowany temat. Panowie poznali się w Wilnie, a później wielokrotnie spotykali się na emigracji. Prywatnie nie łączyła ich bliższa relacja, lecz nie można też mówić o otwartej wrogości.|I. Gdyby dzieło zostało faktycznie ukończone i wydane, byłoby jedną z pierwszych powieści science fiction w historii, powstałą na długo przed dziełem Verne’a.|J. Słowacki był oburzony, że Mickiewicz negatywnie opisał jego zmarłego ojczyma w „Dziadach”, i początkowo faktycznie planował klasyczny pojedynek. Ostatecznie zmienił zdanie i postanowił zemścić się w poezji.|K. Twórca zdecydował się zniszczyć rękopis, obawiając się, że opisywana przez niego rzeczywistość polityczna świata przyszłości mogłaby zostać potraktowana jako prowokacja."
+  correctAnswer: "J. Słowacki był oburzony, że Mickiewicz negatywnie opisał jego zmarłego ojczyma w „Dziadach”, i początkowo faktycznie planował klasyczny pojedynek. Ostatecznie zmienił zdanie i postanowił zemścić się w poezji."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-r3-q8
+  passageRef: certyfikat-polski-B2-2023-06-read-3
+  questionType: matching
+  questionText: "Twórczość Krasińskiego jest bardzo ponura. Z czego to wynika?"
+  options: "A. Przede wszystkim wybierał te niedostępne – głównie mężatki. Mogło to wynikać z niechęci do pełnego zaangażowania się w związek. Myślę, że wiek miał mniejsze znaczenie.|B. Autor przewidział między innymi samoloty i rakiety kosmiczne, numery ewidencji ludzkości, a także urządzenia do transmisji i zapisywania obrazu i dźwięku.|C. O ile Słowacki nie zdobył za życia ogromnej sławy, to Mickiewicza czy Krasińskiego znali wszyscy i na bieżąco komentowali zawirowania w ich życiu.|D. Zdecydowanie twórczość Słowackiego oddziałuje na mnie najmocniej. Natomiast najwięcej czasu spędziłem nad życiorysem Mickiewicza.|E. Artysta panicznie obawiał się wszelkich rewolucji, które mogłyby odebrać mu szlacheckie tytuły. W swoich utworach nie poruszał więc drażliwych tematów.|F. W pewnym sensie – jak najbardziej. To właśnie żywotami wielkich literatów czy muzyków klasycznych ekscytowano się wtedy – i to wcale nie mniej niż dzisiejszymi celebrytami.|G. Poeta stracił w dzieciństwie matkę i był wychowywany przez apodyktycznego ojca. Miał także tendencję do użalania się nad sobą.|H. To skomplikowany temat. Panowie poznali się w Wilnie, a później wielokrotnie spotykali się na emigracji. Prywatnie nie łączyła ich bliższa relacja, lecz nie można też mówić o otwartej wrogości.|I. Gdyby dzieło zostało faktycznie ukończone i wydane, byłoby jedną z pierwszych powieści science fiction w historii, powstałą na długo przed dziełem Verne’a.|J. Słowacki był oburzony, że Mickiewicz negatywnie opisał jego zmarłego ojczyma w „Dziadach”, i początkowo faktycznie planował klasyczny pojedynek. Ostatecznie zmienił zdanie i postanowił zemścić się w poezji.|K. Twórca zdecydował się zniszczyć rękopis, obawiając się, że opisywana przez niego rzeczywistość polityczna świata przyszłości mogłaby zostać potraktowana jako prowokacja."
+  correctAnswer: "G. Poeta stracił w dzieciństwie matkę i był wychowywany przez apodyktycznego ojca. Miał także tendencję do użalania się nad sobą."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-r3-q9
+  passageRef: certyfikat-polski-B2-2023-06-read-3
+  questionType: matching
+  questionText: "Czy pochodzenie miało wpływ na twórczość Krasińskiego?"
+  options: "A. Przede wszystkim wybierał te niedostępne – głównie mężatki. Mogło to wynikać z niechęci do pełnego zaangażowania się w związek. Myślę, że wiek miał mniejsze znaczenie.|B. Autor przewidział między innymi samoloty i rakiety kosmiczne, numery ewidencji ludzkości, a także urządzenia do transmisji i zapisywania obrazu i dźwięku.|C. O ile Słowacki nie zdobył za życia ogromnej sławy, to Mickiewicza czy Krasińskiego znali wszyscy i na bieżąco komentowali zawirowania w ich życiu.|D. Zdecydowanie twórczość Słowackiego oddziałuje na mnie najmocniej. Natomiast najwięcej czasu spędziłem nad życiorysem Mickiewicza.|E. Artysta panicznie obawiał się wszelkich rewolucji, które mogłyby odebrać mu szlacheckie tytuły. W swoich utworach nie poruszał więc drażliwych tematów.|F. W pewnym sensie – jak najbardziej. To właśnie żywotami wielkich literatów czy muzyków klasycznych ekscytowano się wtedy – i to wcale nie mniej niż dzisiejszymi celebrytami.|G. Poeta stracił w dzieciństwie matkę i był wychowywany przez apodyktycznego ojca. Miał także tendencję do użalania się nad sobą.|H. To skomplikowany temat. Panowie poznali się w Wilnie, a później wielokrotnie spotykali się na emigracji. Prywatnie nie łączyła ich bliższa relacja, lecz nie można też mówić o otwartej wrogości.|I. Gdyby dzieło zostało faktycznie ukończone i wydane, byłoby jedną z pierwszych powieści science fiction w historii, powstałą na długo przed dziełem Verne’a.|J. Słowacki był oburzony, że Mickiewicz negatywnie opisał jego zmarłego ojczyma w „Dziadach”, i początkowo faktycznie planował klasyczny pojedynek. Ostatecznie zmienił zdanie i postanowił zemścić się w poezji.|K. Twórca zdecydował się zniszczyć rękopis, obawiając się, że opisywana przez niego rzeczywistość polityczna świata przyszłości mogłaby zostać potraktowana jako prowokacja."
+  correctAnswer: "E. Artysta panicznie obawiał się wszelkich rewolucji, które mogłyby odebrać mu szlacheckie tytuły. W swoich utworach nie poruszał więc drażliwych tematów."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-r3-q10
+  passageRef: certyfikat-polski-B2-2023-06-read-3
+  questionType: matching
+  questionText: "A który z poetów jest pana faworytem?"
+  options: "A. Przede wszystkim wybierał te niedostępne – głównie mężatki. Mogło to wynikać z niechęci do pełnego zaangażowania się w związek. Myślę, że wiek miał mniejsze znaczenie.|B. Autor przewidział między innymi samoloty i rakiety kosmiczne, numery ewidencji ludzkości, a także urządzenia do transmisji i zapisywania obrazu i dźwięku.|C. O ile Słowacki nie zdobył za życia ogromnej sławy, to Mickiewicza czy Krasińskiego znali wszyscy i na bieżąco komentowali zawirowania w ich życiu.|D. Zdecydowanie twórczość Słowackiego oddziałuje na mnie najmocniej. Natomiast najwięcej czasu spędziłem nad życiorysem Mickiewicza.|E. Artysta panicznie obawiał się wszelkich rewolucji, które mogłyby odebrać mu szlacheckie tytuły. W swoich utworach nie poruszał więc drażliwych tematów.|F. W pewnym sensie – jak najbardziej. To właśnie żywotami wielkich literatów czy muzyków klasycznych ekscytowano się wtedy – i to wcale nie mniej niż dzisiejszymi celebrytami.|G. Poeta stracił w dzieciństwie matkę i był wychowywany przez apodyktycznego ojca. Miał także tendencję do użalania się nad sobą.|H. To skomplikowany temat. Panowie poznali się w Wilnie, a później wielokrotnie spotykali się na emigracji. Prywatnie nie łączyła ich bliższa relacja, lecz nie można też mówić o otwartej wrogości.|I. Gdyby dzieło zostało faktycznie ukończone i wydane, byłoby jedną z pierwszych powieści science fiction w historii, powstałą na długo przed dziełem Verne’a.|J. Słowacki był oburzony, że Mickiewicz negatywnie opisał jego zmarłego ojczyma w „Dziadach”, i początkowo faktycznie planował klasyczny pojedynek. Ostatecznie zmienił zdanie i postanowił zemścić się w poezji.|K. Twórca zdecydował się zniszczyć rękopis, obawiając się, że opisywana przez niego rzeczywistość polityczna świata przyszłości mogłaby zostać potraktowana jako prowokacja."
+  correctAnswer: "D. Zdecydowanie twórczość Słowackiego oddziałuje na mnie najmocniej. Natomiast najwięcej czasu spędziłem nad życiorysem Mickiewicza."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-r4-q1
+  passageRef: certyfikat-polski-B2-2023-06-read-4
+  questionType: true_false_not_given
+  questionText: "Ekspozycja mieści się w budynku, w którym kiedyś znajdowało się kino."
+  options: "TAK|NIE|BI"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-r4-q2
+  passageRef: certyfikat-polski-B2-2023-06-read-4
+  questionType: true_false_not_given
+  questionText: "Wystawa jest adresowana do przedstawicieli różnych pokoleń."
+  options: "TAK|NIE|BI"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-r4-q3
+  passageRef: certyfikat-polski-B2-2023-06-read-4
+  questionType: true_false_not_given
+  questionText: "Zwiedzający mogą dotykać dowolnych eksponatów."
+  options: "TAK|NIE|BI"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-r4-q4
+  passageRef: certyfikat-polski-B2-2023-06-read-4
+  questionType: true_false_not_given
+  questionText: "Klocki i lalki czekają na zwiedzających w tej samej przestrzeni interaktywnej."
+  options: "TAK|NIE|BI"
+  correctAnswer: BI
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-r4-q5
+  passageRef: certyfikat-polski-B2-2023-06-read-4
+  questionType: true_false_not_given
+  questionText: "Dzieci są oprowadzane po wystawie przez rówieśników ze Szkoły Podstawowej nr 52."
+  options: "TAK|NIE|BI"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-r4-q6
+  passageRef: certyfikat-polski-B2-2023-06-read-4
+  questionType: true_false_not_given
+  questionText: "Zosia i Antoś to znane postaci przygodowej literatury dziecięcej PRL-u."
+  options: "TAK|NIE|BI"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-r4-q7
+  passageRef: certyfikat-polski-B2-2023-06-read-4
+  questionType: true_false_not_given
+  questionText: "W czasach PRL-u trzepak stanowił centrum życia towarzyskiego młodego pokolenia."
+  options: "TAK|NIE|BI"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-r4-q8
+  passageRef: certyfikat-polski-B2-2023-06-read-4
+  questionType: true_false_not_given
+  questionText: "Żeby zrobić sobie zdjęcie na trzepaku znajdującym się na wystawie, trzeba czasami poczekać w kolejce."
+  options: "TAK|NIE|BI"
+  correctAnswer: BI
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-r4-q9
+  passageRef: certyfikat-polski-B2-2023-06-read-4
+  questionType: true_false_not_given
+  questionText: "Miś Uszatek to postać, którą w PRL-u w telewizji zazwyczaj można było zobaczyć wieczorem."
+  options: "TAK|NIE|BI"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-r4-q10
+  passageRef: certyfikat-polski-B2-2023-06-read-4
+  questionType: true_false_not_given
+  questionText: "Wielu odwiedzających wystawę przy okazji postanawia zwiedzić Kraków."
+  options: "TAK|NIE|BI"
+  correctAnswer: BI
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-r5-q1
+  passageRef: certyfikat-polski-B2-2023-06-read-5
   questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionText: "Luka 1 w tekście „Dom bez tarasu?”"
+  options: "wkomponowany|złączony|wciągnięty|włożony"
+  correctAnswer: wkomponowany
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-r5-q2
+  passageRef: certyfikat-polski-B2-2023-06-read-5
+  questionType: multiple_choice
+  questionText: "Luka 2 w tekście „Dom bez tarasu?”"
+  options: "więc|dlatego|jednak|aby"
+  correctAnswer: jednak
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-r5-q3
+  passageRef: certyfikat-polski-B2-2023-06-read-5
+  questionType: multiple_choice
+  questionText: "Luka 3 w tekście „Dom bez tarasu?”"
+  options: "przyklejonego|przylegającego|pobliskiego|sąsiedniego"
+  correctAnswer: "przylegającego"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-r5-q4
+  passageRef: certyfikat-polski-B2-2023-06-read-5
+  questionType: multiple_choice
+  questionText: "Luka 4 w tekście „Dom bez tarasu?”"
+  options: "Dotychczas|Natychmiast|Następnie|Wówczas"
+  correctAnswer: "Wówczas"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-r5-q5
+  passageRef: certyfikat-polski-B2-2023-06-read-5
+  questionType: multiple_choice
+  questionText: "Luka 5 w tekście „Dom bez tarasu?”"
+  options: "ograniczenia|dowolność|spokój|wskazówki"
+  correctAnswer: "dowolność"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-r5-q6
+  passageRef: certyfikat-polski-B2-2023-06-read-5
+  questionType: multiple_choice
+  questionText: "Luka 6 w tekście „Dom bez tarasu?”"
+  options: "w przypadku|w wyniku|z powodu|na skutek"
+  correctAnswer: "w przypadku"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-r5-q7
+  passageRef: certyfikat-polski-B2-2023-06-read-5
+  questionType: multiple_choice
+  questionText: "Luka 7 w tekście „Dom bez tarasu?”"
+  options: "kierować|prowadzić|przebiegać|wskazywać"
+  correctAnswer: "prowadzić"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-r5-q8
+  passageRef: certyfikat-polski-B2-2023-06-read-5
+  questionType: multiple_choice
+  questionText: "Luka 8 w tekście „Dom bez tarasu?”"
+  options: "odpowiedzi|rozwiązania|recepty|środki"
+  correctAnswer: "rozwiązania"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-r5-q9
+  passageRef: certyfikat-polski-B2-2023-06-read-5
+  questionType: multiple_choice
+  questionText: "Luka 9 w tekście „Dom bez tarasu?”"
+  options: "prawdziwym|odpowiadającym|korzystnym|trafionym"
+  correctAnswer: korzystnym
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-06-r5-q10
+  passageRef: certyfikat-polski-B2-2023-06-read-5
+  questionType: multiple_choice
+  questionText: "Luka 10 w tekście „Dom bez tarasu?”"
+  options: "zakryty|odsłonięty|okryty|zadaszony"
+  correctAnswer: zadaszony
+  pointsQuarter: 2
 }
