@@ -396,6 +396,7 @@ GRAMMAR_ITEM {
   context: "Ewelina nie wie, kim jest ta pani. (zna) → ___"
   correctAnswer: "Ewelina nie zna tej pani."
   pointsQuarter: 4
+  gradingMode: open_manual
 }
 GRAMMAR_ITEM {
   itemId: B1-2017-g7-2
@@ -404,6 +405,7 @@ GRAMMAR_ITEM {
   context: "Jestem starszy niż ty. (od) → ___"
   correctAnswer: "Jestem starszy od ciebie."
   pointsQuarter: 4
+  gradingMode: open_manual
 }
 GRAMMAR_ITEM {
   itemId: B1-2017-g7-3
@@ -412,6 +414,7 @@ GRAMMAR_ITEM {
   context: "Magdę interesują stare fotografie. (interesuje się) → ___"
   correctAnswer: "Magda interesuje się starymi fotografiami."
   pointsQuarter: 4
+  gradingMode: open_manual
 }
 GRAMMAR_ITEM {
   itemId: B1-2017-g7-4
@@ -420,6 +423,7 @@ GRAMMAR_ITEM {
   context: "Michel jest francuskim studentem. (to) → ___"
   correctAnswer: "Michel to francuski student."
   pointsQuarter: 4
+  gradingMode: open_manual
 }
 GRAMMAR_ITEM {
   itemId: B1-2017-g7-5
@@ -428,6 +432,7 @@ GRAMMAR_ITEM {
   context: "Jak nazywa się autor tej powieści? (napisał) → ___"
   correctAnswer: "Kto napisał tę powieść."
   pointsQuarter: 4
+  gradingMode: open_manual
 }
 GRAMMAR_ITEM {
   itemId: B1-2019-g1

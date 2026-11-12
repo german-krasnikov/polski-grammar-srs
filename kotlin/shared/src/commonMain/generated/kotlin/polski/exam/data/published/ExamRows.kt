@@ -17795,6 +17795,7 @@ private fun grammarItemRowRowsPart0(): List<GrammarItemRow> = listOf(
         context = "Ewelina nie wie, kim jest ta pani. (zna) → ___",
         correctAnswer = "Ewelina nie zna tej pani.",
         pointsQuarter = 4,
+        gradingMode = GrammarItemRowGradingMode.OPEN_MANUAL,
     ),
     GrammarItemRow(
         itemId = "B1-2017-g7-2",
@@ -17803,6 +17804,7 @@ private fun grammarItemRowRowsPart0(): List<GrammarItemRow> = listOf(
         context = "Jestem starszy niż ty. (od) → ___",
         correctAnswer = "Jestem starszy od ciebie.",
         pointsQuarter = 4,
+        gradingMode = GrammarItemRowGradingMode.OPEN_MANUAL,
     ),
     GrammarItemRow(
         itemId = "B1-2017-g7-3",
@@ -17811,6 +17813,7 @@ private fun grammarItemRowRowsPart0(): List<GrammarItemRow> = listOf(
         context = "Magdę interesują stare fotografie. (interesuje się) → ___",
         correctAnswer = "Magda interesuje się starymi fotografiami.",
         pointsQuarter = 4,
+        gradingMode = GrammarItemRowGradingMode.OPEN_MANUAL,
     ),
     GrammarItemRow(
         itemId = "B1-2017-g7-4",
@@ -17819,6 +17822,7 @@ private fun grammarItemRowRowsPart0(): List<GrammarItemRow> = listOf(
         context = "Michel jest francuskim studentem. (to) → ___",
         correctAnswer = "Michel to francuski student.",
         pointsQuarter = 4,
+        gradingMode = GrammarItemRowGradingMode.OPEN_MANUAL,
     ),
     GrammarItemRow(
         itemId = "B1-2017-g7-5",
@@ -17827,6 +17831,7 @@ private fun grammarItemRowRowsPart0(): List<GrammarItemRow> = listOf(
         context = "Jak nazywa się autor tej powieści? (napisał) → ___",
         correctAnswer = "Kto napisał tę powieść.",
         pointsQuarter = 4,
+        gradingMode = GrammarItemRowGradingMode.OPEN_MANUAL,
     ),
     GrammarItemRow(
         itemId = "B1-2019-g1",
@@ -19086,6 +19091,9 @@ private fun grammarItemRowRowsPart0(): List<GrammarItemRow> = listOf(
         correctAnswer = "mieście",
         pointsQuarter = 2,
     ),
+)
+
+private fun grammarItemRowRowsPart1(): List<GrammarItemRow> = listOf(
     GrammarItemRow(
         itemId = "certyfikat-polski-B2-2017-grammar-4-7",
         testRef = "certyfikat-polski-B2-2017-grammar-4",
@@ -19094,9 +19102,6 @@ private fun grammarItemRowRowsPart0(): List<GrammarItemRow> = listOf(
         correctAnswer = "zmęczeni",
         pointsQuarter = 2,
     ),
-)
-
-private fun grammarItemRowRowsPart1(): List<GrammarItemRow> = listOf(
     GrammarItemRow(
         itemId = "certyfikat-polski-B2-2017-grammar-4-8",
         testRef = "certyfikat-polski-B2-2017-grammar-4",
@@ -20788,6 +20793,9 @@ private fun grammarItemRowRowsPart1(): List<GrammarItemRow> = listOf(
         correctAnswer = "rozebrano",
         pointsQuarter = 2,
     ),
+)
+
+private fun grammarItemRowRowsPart2(): List<GrammarItemRow> = listOf(
     GrammarItemRow(
         itemId = "certyfikat-polski-B2-2022-02-g3-q4",
         testRef = "certyfikat-polski-B2-2022-02-grammar-3",
@@ -20797,9 +20805,6 @@ private fun grammarItemRowRowsPart1(): List<GrammarItemRow> = listOf(
         correctAnswer = "uznaje się",
         pointsQuarter = 2,
     ),
-)
-
-private fun grammarItemRowRowsPart2(): List<GrammarItemRow> = listOf(
     GrammarItemRow(
         itemId = "certyfikat-polski-B2-2022-02-g3-q5",
         testRef = "certyfikat-polski-B2-2022-02-grammar-3",
@@ -22490,6 +22495,9 @@ private fun grammarItemRowRowsPart2(): List<GrammarItemRow> = listOf(
         pointsQuarter = 4,
         gradingMode = GrammarItemRowGradingMode.OPEN_MANUAL,
     ),
+)
+
+private fun grammarItemRowRowsPart3(): List<GrammarItemRow> = listOf(
     GrammarItemRow(
         itemId = "certyfikat-polski-B2-2023-06-g8-q5",
         testRef = "certyfikat-polski-B2-2023-06-grammar-8",
@@ -22499,9 +22507,6 @@ private fun grammarItemRowRowsPart2(): List<GrammarItemRow> = listOf(
         pointsQuarter = 4,
         gradingMode = GrammarItemRowGradingMode.OPEN_MANUAL,
     ),
-)
-
-private fun grammarItemRowRowsPart3(): List<GrammarItemRow> = listOf(
     GrammarItemRow(
         itemId = "certyfikat-polski-B2-2024-02-g1-q1",
         testRef = "certyfikat-polski-B2-2024-02-grammar-1",
@@ -24193,6 +24198,9 @@ private fun grammarItemRowRowsPart3(): List<GrammarItemRow> = listOf(
         correctAnswer = "zalegających",
         pointsQuarter = 2,
     ),
+)
+
+private fun grammarItemRowRowsPart4(): List<GrammarItemRow> = listOf(
     GrammarItemRow(
         itemId = "certyfikat-polski-C1-2022-03-g6-q8",
         testRef = "certyfikat-polski-C1-2022-03-grammar-6",
@@ -24201,9 +24209,6 @@ private fun grammarItemRowRowsPart3(): List<GrammarItemRow> = listOf(
         correctAnswer = "oddający",
         pointsQuarter = 2,
     ),
-)
-
-private fun grammarItemRowRowsPart4(): List<GrammarItemRow> = listOf(
     GrammarItemRow(
         itemId = "certyfikat-polski-C1-2022-03-g6-q9",
         testRef = "certyfikat-polski-C1-2022-03-grammar-6",
@@ -25907,6 +25912,9 @@ private fun grammarItemRowRowsPart4(): List<GrammarItemRow> = listOf(
         correctAnswer = "w tym także",
         pointsQuarter = 2,
     ),
+)
+
+private fun grammarItemRowRowsPart5(): List<GrammarItemRow> = listOf(
     GrammarItemRow(
         itemId = "certyfikat-polski-C1-2023-11-g5-q5",
         testRef = "certyfikat-polski-C1-2023-11-grammar-5",
@@ -25915,9 +25923,6 @@ private fun grammarItemRowRowsPart4(): List<GrammarItemRow> = listOf(
         correctAnswer = "co",
         pointsQuarter = 2,
     ),
-)
-
-private fun grammarItemRowRowsPart5(): List<GrammarItemRow> = listOf(
     GrammarItemRow(
         itemId = "certyfikat-polski-C1-2023-11-g5-q6",
         testRef = "certyfikat-polski-C1-2023-11-grammar-5",

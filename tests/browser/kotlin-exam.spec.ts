@@ -31,6 +31,10 @@ test('DSL grammar PlayTest: open transformation stays pending manual review', as
   await runExamPlaytest(page, resolve('dsl/exam-web/grammar-manual.playtest'));
 });
 
+test('DSL grammar PlayTest: B1 2017 key permits other same-meaning sentences', async ({ page }) => {
+  await runExamPlaytest(page, resolve('dsl/exam-web/grammar-b1-2017-open-manual.playtest'));
+});
+
 test('DSL grammar PlayTest: official transformation earns confirmed point', async ({ page }) => {
   await runExamPlaytest(page, resolve('dsl/exam-web/grammar-manual-known.playtest'));
 });

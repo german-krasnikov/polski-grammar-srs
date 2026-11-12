@@ -1764,6 +1764,7 @@ val GRAMMAR_ITEM_ROW_ROWS: List<GrammarItemRow> = listOf(
         context = "Ewelina nie wie, kim jest ta pani. (zna) → ___",
         correctAnswer = "Ewelina nie zna tej pani.",
         pointsQuarter = 4,
+        gradingMode = GrammarItemRowGradingMode.OPEN_MANUAL,
     ),
     GrammarItemRow(
         itemId = "B1-2017-g7-2",
@@ -1772,6 +1773,7 @@ val GRAMMAR_ITEM_ROW_ROWS: List<GrammarItemRow> = listOf(
         context = "Jestem starszy niż ty. (od) → ___",
         correctAnswer = "Jestem starszy od ciebie.",
         pointsQuarter = 4,
+        gradingMode = GrammarItemRowGradingMode.OPEN_MANUAL,
     ),
     GrammarItemRow(
         itemId = "B1-2017-g7-3",
@@ -1780,6 +1782,7 @@ val GRAMMAR_ITEM_ROW_ROWS: List<GrammarItemRow> = listOf(
         context = "Magdę interesują stare fotografie. (interesuje się) → ___",
         correctAnswer = "Magda interesuje się starymi fotografiami.",
         pointsQuarter = 4,
+        gradingMode = GrammarItemRowGradingMode.OPEN_MANUAL,
     ),
     GrammarItemRow(
         itemId = "B1-2017-g7-4",
@@ -1788,6 +1791,7 @@ val GRAMMAR_ITEM_ROW_ROWS: List<GrammarItemRow> = listOf(
         context = "Michel jest francuskim studentem. (to) → ___",
         correctAnswer = "Michel to francuski student.",
         pointsQuarter = 4,
+        gradingMode = GrammarItemRowGradingMode.OPEN_MANUAL,
     ),
     GrammarItemRow(
         itemId = "B1-2017-g7-5",
@@ -1796,6 +1800,7 @@ val GRAMMAR_ITEM_ROW_ROWS: List<GrammarItemRow> = listOf(
         context = "Jak nazywa się autor tej powieści? (napisał) → ___",
         correctAnswer = "Kto napisał tę powieść.",
         pointsQuarter = 4,
+        gradingMode = GrammarItemRowGradingMode.OPEN_MANUAL,
     ),
 )
 
