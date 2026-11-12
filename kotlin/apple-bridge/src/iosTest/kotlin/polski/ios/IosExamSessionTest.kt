@@ -236,9 +236,14 @@ class IosExamSessionTest {
         val session = IosExamSession()
         val catalog = session.view()
         assertEquals("catalog", catalog.getValue("screen").jsonPrimitive.content)
-        assertEquals(6, catalog.getValue("catalog").jsonArray.size)
+        assertEquals(16, catalog.getValue("catalog").jsonArray.size)
         assertEquals("B1 Certyfikat 2017", catalog.getValue("catalog").jsonArray.first().jsonObject
             .getValue("displayTitle").jsonPrimitive.content)
+        val published = catalog.getValue("catalog").jsonArray.map { it.jsonObject }
+        assertEquals(listOf("c1-2022-03", "c1-2022-11", "c1-2023-04", "c1-2023-11", "c1-2024-04"),
+            published.takeLast(5).map { it.getValue("routeId").jsonPrimitive.content })
+        assertEquals("C1 Certyfikat 2022-11", published[12].getValue("displayTitle").jsonPrimitive.content)
+        assertEquals("C1 Certyfikat 2024-04", published.last().getValue("displayTitle").jsonPrimitive.content)
         session.selectExam("b1-2017")
         val modules = session.view().getValue("modules").jsonArray
         assertEquals(listOf("listening", "reading", "grammar", "writing"), modules.map { it.jsonObject.getValue("module").jsonPrimitive.content })
@@ -267,6 +272,59 @@ class IosExamSessionTest {
         assertEquals(expected.status.name, result.getValue("review").jsonArray[0].jsonObject.getValue("status").jsonPrimitive.content)
         session.answer("B1-2017-g1-1", "wrong")
         assertEquals("dobrego teatru", session.view().getValue("grammar").jsonObject.getValue("answer").jsonPrimitive.content)
+    }
+
+    @Test
+    fun c1AprilPairedInflectionsUseWholeNativeAttempt() {
+        val firstId = "certyfikat-polski-C1-2024-04-g1-q8"
+        val secondId = "certyfikat-polski-C1-2024-04-g1-q9"
+        for ((firstAnswer, secondAnswer, expectedStatus) in listOf(
+            Triple("kilkorgiem", "przyjaciół", "ConfirmedFull"),
+            Triple("kilku", "przyjaciół", "PendingManual"),
+        )) {
+            val session = IosExamSession()
+            session.selectExam("c1-2024-04")
+            session.selectModule("grammar")
+            repeat(7) { session.next() }
+            assertEquals(firstId, session.view().getValue("grammar").jsonObject.getValue("itemId").jsonPrimitive.content)
+            session.answer(firstId, firstAnswer)
+            session.next()
+            assertEquals(secondId, session.view().getValue("grammar").jsonObject.getValue("itemId").jsonPrimitive.content)
+            session.answer(secondId, secondAnswer)
+            while (!session.view().getValue("grammar").jsonObject.getValue("isLast").jsonPrimitive.content.toBoolean()) {
+                session.next()
+            }
+            session.submit()
+            val review = session.view().getValue("grammar").jsonObject.getValue("review").jsonArray
+                .map { it.jsonObject }.associateBy { it.getValue("itemId").jsonPrimitive.content }
+            assertEquals(expectedStatus, review.getValue(firstId).getValue("status").jsonPrimitive.content)
+            assertEquals(expectedStatus, review.getValue(secondId).getValue("status").jsonPrimitive.content)
+        }
+    }
+
+    @Test
+    fun c1NovemberPublishedRubricAppearsOnlyAfterNativeSubmit() {
+        val targetId = "certyfikat-polski-C1-2022-11-g2-q1"
+        val session = IosExamSession()
+        session.selectExam("c1-2022-11")
+        session.selectModule("grammar")
+        repeat(10) { session.next() }
+        val before = session.view().getValue("grammar").jsonObject
+        assertEquals(targetId, before.getValue("itemId").jsonPrimitive.content)
+        assertFalse(before.containsKey("rubricComponents"))
+        session.answer(targetId, "Agencje turystyczne odnotowują spadek zainteresowania klientów.")
+        while (!session.view().getValue("grammar").jsonObject.getValue("isLast").jsonPrimitive.content.toBoolean()) {
+            session.next()
+        }
+        session.submit()
+        val review = session.view().getValue("grammar").jsonObject.getValue("review").jsonArray
+            .map { it.jsonObject }.single { it.getValue("itemId").jsonPrimitive.content == targetId }
+        val rubric = review.getValue("rubricComponents").jsonArray.map { it.jsonObject }
+        assertEquals((1..4).map { "$targetId-c$it" }, rubric.map { it.getValue("componentId").jsonPrimitive.content })
+        assertEquals(listOf("odnotowują", "spadek", "zainteresowania", "klientów"),
+            rubric.map { it.getValue("criterionText").jsonPrimitive.content })
+        assertEquals(listOf("0,25", "0,25", "0,25", "0,25"),
+            rubric.map { it.getValue("creditPoints").jsonPrimitive.content })
     }
 
     @Test
