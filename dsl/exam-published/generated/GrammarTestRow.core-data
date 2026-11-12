@@ -1,0 +1,283 @@
+DSL 1
+GRAMMAR_TEST {
+  testId: certyfikat-polski-B1-2017-grammar-1
+  examRef: certyfikat-polski-B1-2017
+  taskNumber: 1
+  instruction: "Proszę podkreślić poprawną formę wyrazów podanych w nawiasach (odmiana rzeczowników, przymiotników, zaimków oraz przyimki)."
+}
+GRAMMAR_TEST {
+  testId: certyfikat-polski-B1-2017-grammar-2
+  examRef: certyfikat-polski-B1-2017
+  taskNumber: 2
+  instruction: "Proszę podkreślić poprawną formę wyrazów podanych w nawiasach (stopniowanie przymiotników i przysłówków)."
+}
+GRAMMAR_TEST {
+  testId: certyfikat-polski-B1-2017-grammar-3
+  examRef: certyfikat-polski-B1-2017
+  taskNumber: 3
+  instruction: "Proszę podkreślić poprawną formę wyrazów podanych w nawiasach (aspekt i tryby)."
+}
+GRAMMAR_TEST {
+  testId: certyfikat-polski-B1-2017-grammar-4
+  examRef: certyfikat-polski-B1-2017
+  taskNumber: 4
+  instruction: "Proszę zapytać o podkreśloną część zdania."
+}
+GRAMMAR_TEST {
+  testId: certyfikat-polski-B1-2017-grammar-5
+  examRef: certyfikat-polski-B1-2017
+  taskNumber: 5
+  instruction: "Proszę uzupełnić tekst poprawnymi formami wyrazów podanych w nawiasach (czas teraźniejszy i przeszły)."
+}
+GRAMMAR_TEST {
+  testId: certyfikat-polski-B1-2017-grammar-6
+  examRef: certyfikat-polski-B1-2017
+  taskNumber: 6
+  instruction: "Proszę uzupełnić tekst wyrazami z ramki. Jeden wyraz jest niepotrzebny."
+}
+GRAMMAR_TEST {
+  testId: certyfikat-polski-B1-2017-grammar-7
+  examRef: certyfikat-polski-B1-2017
+  taskNumber: 7
+  instruction: "Proszę użyć wyrazu podanego w nawiasie i przekształcić zdanie tak, by nie zmieniło sensu."
+}
+GRAMMAR_TEST {
+  testId: B1-2019-grammar-1
+  examRef: certyfikat-polski-B1-2019
+  taskNumber: 1
+  instruction: "Podkreśl poprawne formy wyrazów w nawiasach (odmiana rzeczowników, przymiotników i zaimków). (10 × 0,5 p.)"
+}
+GRAMMAR_TEST {
+  testId: B1-2019-grammar-2
+  examRef: certyfikat-polski-B1-2019
+  taskNumber: 2
+  instruction: "Uzupełnij zdania wyrazami z ramki: ponieważ, jeśli, czy, żeby, którzy, że, lecz. Jeden wyraz jest niepotrzebny. (5 × 0,5 p.)"
+}
+GRAMMAR_TEST {
+  testId: B1-2019-grammar-3
+  examRef: certyfikat-polski-B1-2019
+  taskNumber: 3
+  instruction: "Podkreśl poprawne formy wyrazów w nawiasach (stopniowanie przymiotników i przysłówków). (5 × 0,5 p.)"
+}
+GRAMMAR_TEST {
+  testId: B1-2019-grammar-4
+  examRef: certyfikat-polski-B1-2019
+  taskNumber: 4
+  instruction: "Uzupełnij tekst poprawnymi formami wyrazów w nawiasach (czas teraźniejszy i przeszły). (10 × 0,5 p.)"
+}
+GRAMMAR_TEST {
+  testId: B1-2019-grammar-5
+  examRef: certyfikat-polski-B1-2019
+  taskNumber: 5
+  instruction: "Zapytaj o podkreśloną część zdania. (5 × 0,5 p.)"
+}
+GRAMMAR_TEST {
+  testId: B1-2019-grammar-6
+  examRef: certyfikat-polski-B1-2019
+  taskNumber: 6
+  instruction: "Użyj wyrazu w nawiasie i przekształć zdanie tak, by miało ten sam sens. (5 × 1 p.)"
+}
+GRAMMAR_TEST {
+  testId: B1-2019-grammar-7
+  examRef: certyfikat-polski-B1-2019
+  taskNumber: 7
+  instruction: "Podkreśl poprawne formy wyrazów w nawiasach (aspekt i tryby). (10 × 0,5 p.)"
+}
+GRAMMAR_TEST {
+  testId: B1-2019-grammar-8
+  examRef: certyfikat-polski-B1-2019
+  taskNumber: 8
+  instruction: "Uzupełnij zdania wyrazami z ramki: bez, między, za, przez, w, około, oprócz. Jeden wyraz jest niepotrzebny. (5 × 0,5 p.)"
+}
+GRAMMAR_TEST {
+  testId: certyfikat-polski-B1-2020-grammar-1
+  examRef: certyfikat-polski-B1-2020
+  taskNumber: 1
+  instruction: "Proszę – zgodnie z przykładami – podkreślić poprawne formy wyrazów podanych w nawiasach (odmiana rzeczowników, przymiotników i zaimków)."
+}
+GRAMMAR_TEST {
+  testId: certyfikat-polski-B1-2020-grammar-2
+  examRef: certyfikat-polski-B1-2020
+  taskNumber: 2
+  instruction: "Proszę – zgodnie z przykładem – uzupełnić zdania wyrazami z ramki (spójniki). Uwaga! Jeden wyraz w ramce jest niepotrzebny."
+}
+GRAMMAR_TEST {
+  testId: certyfikat-polski-B1-2020-grammar-3
+  examRef: certyfikat-polski-B1-2020
+  taskNumber: 3
+  instruction: "Proszę – zgodnie z przykładami – podkreślić poprawne formy wyrazów podanych w nawiasach (stopniowanie przymiotników i przysłówków)."
+}
+GRAMMAR_TEST {
+  testId: certyfikat-polski-B1-2020-grammar-4
+  examRef: certyfikat-polski-B1-2020
+  taskNumber: 4
+  instruction: "Proszę – zgodnie z przykładami – uzupełnić tekst poprawnymi formami wyrazów podanych w nawiasach (czas teraźniejszy i przyszły)."
+}
+GRAMMAR_TEST {
+  testId: certyfikat-polski-B1-2020-grammar-5
+  examRef: certyfikat-polski-B1-2020
+  taskNumber: 5
+  instruction: "Proszę – zgodnie z przykładem – zapytać o podkreśloną część zdania."
+}
+GRAMMAR_TEST {
+  testId: certyfikat-polski-B1-2020-grammar-6
+  examRef: certyfikat-polski-B1-2020
+  taskNumber: 6
+  instruction: "Proszę – zgodnie z przykładem – użyć wyrazu w nawiasie i przekształcić zdanie tak, by miało ten sam sens."
+}
+GRAMMAR_TEST {
+  testId: certyfikat-polski-B1-2020-grammar-7
+  examRef: certyfikat-polski-B1-2020
+  taskNumber: 7
+  instruction: "Proszę – zgodnie z przykładami – podkreślić poprawną formę wyrazów podanych w nawiasach (aspekt i tryby)."
+}
+GRAMMAR_TEST {
+  testId: certyfikat-polski-B1-2020-grammar-8
+  examRef: certyfikat-polski-B1-2020
+  taskNumber: 8
+  instruction: "Proszę – zgodnie z przykładem – uzupełnić zdania wyrazami z ramki (przyimki). Uwaga! Jeden wyraz w ramce jest niepotrzebny."
+}
+GRAMMAR_TEST {
+  testId: certyfikat-polski-B2-2017-grammar-1
+  examRef: certyfikat-polski-B2-2017
+  taskNumber: 1
+  instruction: "Proszę podkreślić poprawną formę wyrazów w nawiasach (imiesłowy)."
+}
+GRAMMAR_TEST {
+  testId: certyfikat-polski-B2-2017-grammar-2
+  examRef: certyfikat-polski-B2-2017
+  taskNumber: 2
+  instruction: "Proszę uzupełnić tekst wyrazami z ramki. Każdego wyrazu można użyć tylko raz; jeden jest zbędny. Ramka: z, oprócz, przy, o, około, spośród, do, po, od, na, w, ponad."
+}
+GRAMMAR_TEST {
+  testId: certyfikat-polski-B2-2017-grammar-3
+  examRef: certyfikat-polski-B2-2017
+  taskNumber: 3
+  instruction: "Proszę podkreślić poprawną formę wyrazów w nawiasach (formy nieosobowe i strona bierna)."
+}
+GRAMMAR_TEST {
+  testId: certyfikat-polski-B2-2017-grammar-4
+  examRef: certyfikat-polski-B2-2017
+  taskNumber: 4
+  instruction: "Proszę uzupełnić tekst poprawnymi formami wyrazów podanych w nawiasach (odmiana rzeczowników, przymiotników i zaimków)."
+}
+GRAMMAR_TEST {
+  testId: certyfikat-polski-B2-2017-grammar-5
+  examRef: certyfikat-polski-B2-2017
+  taskNumber: 5
+  instruction: "Proszę uzupełnić tekst poprawną formą jednego z wyrazów podanych w nawiasach (aspekt)."
+}
+GRAMMAR_TEST {
+  testId: certyfikat-polski-B2-2017-grammar-6
+  examRef: certyfikat-polski-B2-2017
+  taskNumber: 6
+  instruction: "Proszę uzupełnić tekst poprawnymi formami wyrazów utworzonych od słów w nawiasach (rzeczowniki odczasownikowe i odprzymiotnikowe)."
+}
+GRAMMAR_TEST {
+  testId: certyfikat-polski-B2-2017-grammar-7
+  examRef: certyfikat-polski-B2-2017
+  taskNumber: 7
+  instruction: "Proszę uzupełnić tekst słownymi formami cyfr podanych w nawiasach (odmiana liczebników)."
+}
+GRAMMAR_TEST {
+  testId: certyfikat-polski-B2-2017-grammar-8
+  examRef: certyfikat-polski-B2-2017
+  taskNumber: 8
+  instruction: "Proszę uzupełnić tekst poprawnymi formami wyrazów podanych w nawiasach (stopniowanie przymiotnika i przysłówka)."
+}
+GRAMMAR_TEST {
+  testId: certyfikat-polski-B2-2019-grammar-1
+  examRef: certyfikat-polski-B2-2019
+  taskNumber: 1
+  instruction: "I. Proszę – zgodnie z przykładami – podkreślić poprawne formy wyrazów\npodanych w nawiasach (imiesłowy).\n_____ / 5 p. (10 x 0,5 p.)\nInstrukcja obsługi drukarki – informacje na temat bezpieczeństwa\nPrzed użyciem drukarki zapoznaj się z zasadami bezpieczeństwa (zamieszczając,\nzamieszczonymi, zamieszczającymi)PRZYKŁAD poniżej. (Przestrzegany, przestrzegający,\nprzestrzegając)PRZYKŁAD tych zasad, unikniesz zagrożenia dla zdrowia oraz szkód\n(wynikających, wynikając, wynikające)PRZYKŁAD z niewłaściwego użytkowania urządzenia.\nDrogi Użytkowniku! Przy zakupie naszego sprzętu otrzymasz gwarancję (obowiązując,\nzobowiązującą, zobowiązaną)1 Cię do przestrzegania poniższej instrukcji.\nPrzed podłączeniem drukarki do prądu upewnij się, że kabel nie jest (uszkadzający,\nuszkodzony, uszkadzając)2, a w gniazdku jest napięcie (wskazując, wskazujące, wskazane)3\nw instrukcji.\nPamiętaj, że (podłączając, podłączające, podłączane)4 wiele urządzeń do jednego\nźródła prądu, możesz spowodować jego przeciążenie.\nNie trzymaj drukarki w zbyt ciasnym lub niewentylowanym miejscu, a uchronisz ją\nprzed czynnikami (spowodowanymi, powodującymi, powodując)5 jej przegrzanie, a nawet\npożar.\nChroń urządzenie przed dostępem wody i innych płynów, a także nie obsługuj\n(włączającego, włączonego, włączając)6 sprzętu mokrymi rękami.\nPo zakończeniu pracy zawsze wyłączaj urządzenie z prądu. Używaj wtyczki! Pamiętaj,\n(pociągnięty, pociągający, pociągając)7 za kabel, możesz go urwać, a także uszkodzić całe\nurządzenie.\n(Wybierając, Wybierające, Wybrane)8 w mieszkaniu odpowiednią półkę (przeznaczającą,\nprzeznaczając, przeznaczoną)9 na miejsce dla Twojej drukarki, upewnij się, że jest ona\nstabilna.\nJeżeli drukarka jest uszkodzona lub nie działa prawidłowo, skontaktuj się ze\nsprzedawcą lub punktem (oferowanym, oferując, oferującym)10 serwis urządzeń tego typu.\nNa podstawie: https://stx.pl/uploads/files/Instrukcja%20obs%C5%82ugi%20Wzmacniacza%20Estradowego%20PA%201800.pdf"
+}
+GRAMMAR_TEST {
+  testId: certyfikat-polski-B2-2019-grammar-2
+  examRef: certyfikat-polski-B2-2019
+  taskNumber: 2
+  instruction: "II. Proszę – zgodnie z przykładem – uzupełnić tekst odpowiednimi wyrazami\nz ramki. Uwaga! Każdego wyrazu można użyć tylko raz, a dwa wyrazy\nsą zbędne.\n_____ / 5 p. (10 x 0,5 p.)\nponad przy wbrew na między nad na po o do według z dzięki\nUmowa na PRZYKŁAD budowę pierwszego etapu linii tramwajowej podpisana!\nCała inwestycja już rok temu została podzielona .........................................1 dwa\netapy. Stało się tak dlatego, że najtańsza oferta dotycząca całości przewyższała kwotę\nplanowaną przez miasto .........................................2 123 mln zł.\nDziś realizacja pierwszego etapu powinna kosztować nieco .........................................3\n122 mln zł, a roboty powinny zostać zakończone .........................................4 2023 roku.\nPierwsze prace – .........................................5 nowego planu – rozpoczną się tuż\n.........................................6 długim majowym weekendzie. W ramach pierwszego etapu nowe\ntory tramwajowe powstaną .........................................7 ulicą Długą a przystankiem\nautobusowym .........................................8 Politechnice. Najważniejsza i najtrudniejsza będzie\njednak przebudowa wiaduktu .........................................9 ulicą Długą.\n.........................................10 planowanym pracom zachodnia część miasta zyska nowe, ważne\npołączenie.\nNa podstawie: https://wroclaw.onet.pl/tramwaj-na-popowice"
+}
+GRAMMAR_TEST {
+  testId: certyfikat-polski-B2-2019-grammar-3
+  examRef: certyfikat-polski-B2-2019
+  taskNumber: 3
+  instruction: "III. Proszę – zgodnie z przykładami – podkreślić poprawną formę wyrazów\npodanych w nawiasach (formy nieosobowe i strona bierna).\n_____ / 5 p. (10 x 0,5 p.)\nDokładnie 90 lat temu (rozpoczęto, została rozpoczęta, rozpocznie się)PRZYKŁAD\nbudowę kanalizacji i wodociągów w Łodzi. Z tej okazji przed kilkunastoma dniami w siedzibie\nRady Miejskiej (otworzy się, została otwarta, otwarto)PRZYKŁAD wystawa poświęcona temu\nprzedsięwzięciu.\nMożna się z niej dowiedzieć, że na początku XX wieku Łódź była jednym z ostatnich\ndużych miast europejskich, w których nieczystości wciąż (wylano, wylewało się, zostały\nwylane)1 na ulice lub do rzek. W czasie deszczu ścieki często dostawały się do studni\nz wodą pitną, dlatego co roku w mieście (były odnotowywane, odnotowywano,\nodnotowano)2 wiele tysięcy zachorowań na cholerę czy czerwonkę. Sytuację pogarszały\nścieki z fabryk włókienniczych, które nieprzerwanie (odprowadzano, zostały odprowadzone,\nodprowadziło się)3 do łódzkich rzek i rzeczek.\nSytuacja w mieście była tak zła, że w 1924 roku do Warszawy (wysłano, została\nwysłana, wysyłało się)4 analizę stanu sanitarnego miasta z prośbą o środki na budowę\nkanalizacji.\nDecyzja o jej rozpoczęciu (została podjęta, podjęto, podjęło się)5 natychmiast po\nlekturze raportu. Prace przy budowie (powierzało się, były powierzane, powierzono)6\nostatecznie Stefanowi Skrzywanie. Dzięki niemu i jego ekipie przed wybuchem II wojny\nświatowej wodę (pobierało się, była pobierana, pobrano)7 już ze studni głębinowych,\na łodzianie (obsługiwano, obsługiwało się, byli obsługiwani)8 przez stukilometrową sieć\nwodociągową.\nZ okazji 90-lecia Zakładu Wodociągów i Kanalizacji na mieszkańców Łodzi czeka wiele\natrakcji: już niebawem (zaprezentuje się, zostanie zaprezentowany, zaprezentowano)9\nspecjalny komiks poświęcony dramatycznym warunkom sanitarnym w Łodzi na początku\nXX wieku. Komiks ten (wyświetlano, będzie wyświetlany, wyświetli się)10 na ekranach\nmiejskich autobusów przez najbliższych kilka miesięcy.\nNa podstawie: http://www.zwik.lodz.pl/dzialania-csr/90-lat-zwik/ i https://www.srodowisko.pl/wiadomosci-i-\nkomunikaty/90-lat-temu-podjeto-decyzje-o-budowie-w-lodzi-wodociagow-i-kanalizacji-wideo--82448-10"
+}
+GRAMMAR_TEST {
+  testId: certyfikat-polski-B2-2019-grammar-4
+  examRef: certyfikat-polski-B2-2019
+  taskNumber: 4
+  instruction: "IV. Proszę – zgodnie z przykładami – uzupełnić tekst poprawnymi formami\nwyrazów podanych w nawiasach (odmiana rzeczowników, przymiotników\ni zaimków).\n_____ / 5 p. (10 x 0,5 p.)\nJuż w najbliższą (najbliższa)PRZYKŁAD sobotę (sobota)PRZYKŁAD w Krakowie rozpocznie się\nkonferencja naukowa poświęcona zdrowej diecie i jej (ona)PRZYKŁAD roli w rozwoju dziecka.\nKonferencja będzie miała miejsce w .............................................1 (centrum)1\n.............................................2 (kongresowe)2, a wykłady otwarte dla szerokiej publiczności\nwygłoszą .............................................3 (znany)3 ....................................................4 (dietetyk)4.\nNie zabraknie też ...........................................................5 (doświadczony)5\n.........................................................6 (pediatra)6 z wielu ośrodków krajowych i zagranicznych.\n– Chyba .............................................7 (nikt)7 nie trzeba tłumaczyć, jak ważna dla\nzdrowego rozwoju dziecka jest zbilansowana dieta. Małe dziecko jest otwarte na różne\nsmaki, ale to nas, ........................................................8 (dorosły)8, trzeba przekonywać,\nżebyśmy uczyli .............................................9 (ono)9 prawidłowego odżywiania się od\nnajmłodszych lat. Brokuły, marchew, seler, jajko czy ryba powinny gościć na naszych\ntalerzach codziennie. Czasami wystarczy drobna sztuczka, by mały niejadek polubił warzywa\ni owoce, a podczas praktycznych warsztatów towarzyszących konferencji pokażemy, jak\n..................................................10 (one)10 przygotowywać, żeby szybko i bez problemu znikały\nz talerza – mówi jedna z organizatorek.\nNa podstawie: https://parenting.pl/jak-sklonic-dzieci-do-jedzenia-warzyw-i-owocow"
+}
+GRAMMAR_TEST {
+  testId: certyfikat-polski-B2-2019-grammar-5
+  examRef: certyfikat-polski-B2-2019
+  taskNumber: 5
+  instruction: "V. Proszę – zgodnie z przykładami – podkreślić poprawną formę wyrazów\npodanych w nawiasach (odmiana liczebników i rzeczowników).\n_____ / 5 p. (10 x 0,5 p)\nBolesław Chrobry był najstarszym z (cztery, czterema, czterech)PRZYKŁAD (synowie, synów,\nsynami)PRZYKŁAD księcia Polski, Mieszka I. Kiedy po śmierci ojca objął rządy, jego (trzech, trzy,\ntrzej)1 (braci, bracia, braciom)2 musieli opuścić dwór, a potem i kraj. Chrobry utrzymywał\nścisłe kontakty z hierarchią kościelną i wykorzystywał ją do celów politycznych: dzięki (trzem,\ntrzema, trzej)3 (biskupstwami, biskupstw, biskupstwom)4 utworzonym za jego rządów\nw Krakowie, Wrocławiu i Kołobrzegu oraz dzięki założeniu metropolii kościelnej w Gnieźnie\nzyskał sympatię cesarza Ottona III i szansę na uznanie samodzielności Polski. Niestety,\nOtton III zmarł, a Chrobry rozpoczął wojnę z jego następcą. Konflikt ten skończył się dopiero\npo (szesnastu, szesnaście, szesnastoma)5 (lata, latach, latom)6. Jeżeli chodzi o datę koronacji\n\nChrobrego, większość historyków uważa, że został on królem Polski na (kilka, kilku, kilkoma)7\n(miesięcy, miesiącach, miesiącami)8 przed swoją śmiercią. Według innej wersji historii\nBolesław Chrobry zasiadł na tronie już w wieku (trzydzieści trzy, trzydziestoma trzema,\ntrzydziestu trzech)9 (lata, lat, latom)10, a w ostatnich miesiącach życia koronację jedynie\npowtórzył.\nNa podstawie: https://ciekawostkihistoryczne.pl/leksykon/boleslaw-i-chrobry-967-1025/ i\nhttps://pl.wikipedia.org/wiki/Boles%C5%82aw_I_Chrobry"
+}
+GRAMMAR_TEST {
+  testId: certyfikat-polski-B2-2019-grammar-6
+  examRef: certyfikat-polski-B2-2019
+  taskNumber: 6
+  instruction: "VI. Proszę – zgodnie z przykładami – uzupełnić tekst poprawnymi formami\nwyrazów podanych w nawiasach (aspekt oraz czas przeszły i przyszły).\n_____ / 5 p. (10 x 0,5 p.)\nZarząd Zieleni Miejskiej (ZZM) ogłosił (ogłaszać / ogłosić)PRZYKŁAD nowy przetarg na prace\npielęgnacyjne w parkach. – Dzięki planowanym inwestycjom znacznie lepiej będziemy dbać\n(dbać / zadbać)PRZYKŁAD o parki – zapewniają urzędnicy.\n– W ubiegłych latach niektóre części parków ......................................................................1\n(pozostawać / pozostać)1 przez dłuższy czas dzikie. Nasi pracownicy bowiem w minimalnym\ntylko stopniu ......................................................................2 (ingerować / zaingerować)2 tu\nw życie przyrody. Chcieliśmy, żeby w końcu ............................................................3 (zaczynać\n/ zacząć)3 się w nich rozwijać bujna zieleń – ......................................................................4\n(stwierdzać / stwierdzić)4 przedstawiciel ZZM.\nWładze miejskie zapowiadają, że w pierwszej kolejności\n......................................................................5 (skupiać się / skupić się)5 na parku\nGrabiszyńskim. Wynika to z faktu, iż przed rokiem firma ogrodnicza kompletnie\n......................................................................6 (niszczyć / zniszczyć)6 duży fragment parku,\nmimo że mieszkańcy niejednokrotnie ......................................................................7 (zwracać /\nzwrócić)7 uwagę na niefrasobliwość jej robotników. Z tego powodu prezydent miasta\n......................................................................8 (odwoływać / odwołać)8 poprzedniego\ndyrektora ZZM.\nW nadchodzącym sezonie przez całą wiosnę pracownicy\n......................................................................9 (stosować / zastosować)9 konsekwentnie nowe\ntechniki pielęgnacji drzew, co ......................................................................10 (przyczyniać się /\nprzyczynić się)10 ostatecznie do lepszej ochrony tego terenu.\nNa podstawie: wroclaw.wyborcza.pl [20.03.2019]"
+}
+GRAMMAR_TEST {
+  testId: certyfikat-polski-B2-2019-grammar-7
+  examRef: certyfikat-polski-B2-2019
+  taskNumber: 7
+  instruction: "VII. Proszę – zgodnie z przykładami – uzupełnić tekst odpowiednimi formami\nwyrazów podanych w nawiasach (stopniowanie przymiotników i przysłówków).\n_____ / 5 p. (10 x 0,5 p.)\nW 2014 roku we wrocławskim ogrodzie zoologicznym po dłuższych (długie)PRZYKŁAD niż\nsię spodziewano przygotowaniach otwarto w końcu Afrykarium. Dzięki tej inwestycji w 2015\nroku zoo było najchętniej (chętnie)PRZYKŁAD odwiedzaną atrakcją turystyczną w Polsce –\nodwiedziło je ponad 300 tysięcy ......................................................................1 (dużo)1\nturystów niż Zamek Królewski na Wawelu.\nDziś bilety do zoo są 5 razy ......................................................................2 (drogi)2 od\ntych sprzed kilku lat, a mimo to zwiedzający przychodzą tu pięć razy\n......................................................................3 (często)3 niż przed dekadą. Dzięki coraz\n......................................................................4 (wysokie)4 dochodom wrocławskie zoo stać też\nna remonty starej części ogrodu, a tu ......................................................................5 (ważne)5\nze wszystkich są prace przy starym Akwarium. Wpływy z biletów umożliwiły również\nprzeniesienie wilków na wybieg ......................................................................6 (obszerny)6 niż\nich dotychczasowy. Być może uda się też sfinansować sprowadzenie do zoo nowych\ngatunków zwierząt – na przykład panter śnieżnych, które są\n......................................................................7 (rzadko)7 występującymi przedstawicielami\nrodziny kotowatych w ogrodach zoologicznych na świecie.\nKiedy ......................................................................8 (dobrze)8 zaplanować wizytę\nw zoo? Na pewno w któryś z dni roboczych, bo w weekendy po bilet do Afrykarium trzeba\nczekać nie ......................................................................9 (krótko)9 niż dwie godziny. Ale ci,\nktórzy wychodzą z zoo, zapewniają, że warto. Nie może więc dziwić, że wrocławskie zoo\nz każdym miesiącem staje się coraz ......................................................................10\n(atrakcyjne)10 miejscem turystycznym w regionie.\nNa podstawie: http://wroclaw.wyborcza.pl/wroclaw/1,35771,20387920,afrykarium-i-zoo-z-wieksza-frekwencja-niz-wawel-i-\nwieliczka.html?disableRedirects=true"
+}
+GRAMMAR_TEST {
+  testId: certyfikat-polski-B2-2019-grammar-8
+  examRef: certyfikat-polski-B2-2019
+  taskNumber: 8
+  instruction: "VIII. Proszę – zgodnie z przykładem – użyć wyrazów lub wyrażeń podanych\nw ramce i przekształcić zdania tak, by nie zmieniły sensu (zamiana zdań\nzłożonych na pojedyncze).\nUwaga! Każdego wyrazu / wyrażenia można użyć tylko raz.\n_____ / 5 p. (5 x 1 p.)\ndla po przez w razie wbrew ze względu na\nPRZYKŁAD\nWykład został odwołany, ponieważ niespodziewanie rozchorował się profesor Jarosz.\nWykład został odwołany ze względu na niespodziewaną chorobę profesora Jarosza.\n1. Chociaż rodzice protestowali, szkolny sklepik został zamknięty.\n………………..............................………………………………..............................................................\nszkolny sklepik został zamknięty.\n2. Robertowi nie udało się zdać testu, ponieważ był ciągle nieobecny na lekcjach.\nRobertowi nie udało się zdać testu ...............................................................\n……………..............................……………………………….................................................................... .\n3. Beata jest gotowa poświęcić wiele, żeby zachować smukłą sylwetkę.\nBeata jest gotowa poświęcić wiele …………………………………………………………………………………………\n………………..............................……………………………….................................................................... .\n4. Kiedy wrócimy z urlopu, musimy się wziąć do remontu mieszkania.\n……………………………………………………………………………….............................................................\nmusimy się wziąć do remontu mieszkania.\n5. Jeśli będziesz miał silne zawroty głowy, zadzwoń po pogotowie.\n……………………………………………………………………………………………………………………………………………….\nzadzwoń po pogotowie.\n\n© Państwowa Komisja ds. Poświadczania Znajomości\nJęzyka Polskiego jako Obcego\nB2"
+}
+GRAMMAR_TEST {
+  testId: certyfikat-polski-B2-2020-grammar-1
+  examRef: certyfikat-polski-B2-2020
+  taskNumber: 1
+  instruction: "Proszę podkreślić poprawne formy wyrazów podanych w nawiasach (imiesłowy).\n\nNajwiększy wpływ na powstawanie smogu w Polsce mają zanieczyszczenia pochodzące z pieców zamontowanych w domach jednorodzinnych. Dążąc do poprawy stanu powietrza, musimy zadbać o ich wymianę. [1] źródło ciepła, każdy powinien się postarać, by [2] przez nie zanieczyszczenia szkodziły środowisku w jak najmniejszym stopniu i nie pogłębiały zjawiska smogu [3] zagrożenie dla ludzi. Niestety, niektóre polskie miasta jeszcze niedawno przodowały w rankingach najbardziej [4] miejscowości w Europie.\n\nW Polsce [5] paliwem używanym do ogrzewania nadal pozostaje węgiel, nierzadko ten o bardzo słabej jakości. Duży problem, i to mimo zagrożenia wysokimi karami, stanowią śmieci [6] w piecach, a [7] do atmosfery bardzo szkodliwe związki. [8] przez nie choroby i dolegliwości są coraz częstsze i uciążliwe dla wszystkich. [9] więc ze starych nieekologicznych pieców, uwalniamy powietrze od [10] w nim cząstek różnych substancji toksycznych."
+}
+GRAMMAR_TEST {
+  testId: certyfikat-polski-B2-2020-grammar-2
+  examRef: certyfikat-polski-B2-2020
+  taskNumber: 2
+  instruction: "Proszę uzupełnić tekst wyrazami z ramki. Każdego wyrazu można użyć tylko raz, dwa są zbędne. Ramka: dla, dzięki, na, na, o, od, do, przy, u, w, wokół, wbrew, za.\n\n„Lejesz miód na moje serce!” – wołamy, by wyrazić zadowolenie, choćby w sytuacji, gdy ktoś dobrze mówi [1] nasz temat. Nie wzięło się to znikąd, bo przecież miód jest uważany za doskonały naturalny lek [2] chorych na serce i dotyczy to wszystkich potencjalnych pacjentów – [3] tych najmłodszych [4] najstarszych.\n\nJuż dawno [5] nami ostatnia niedziela września, a to właśnie [6] tym dniu obchodzimy Światowy Dzień Serca. Ale przecież [7] serce należy dbać codziennie, dlatego warto wiedzieć, że miód nostrzykowy pomaga [8] nadciśnieniu, migrenie i nerwobólach. Nasze kości natomiast wzmocni miód gryczany, polecany szczególnie osobom, [9] których wystąpiły złamania. Ta odmiana przyspiesza też gojenie ran, a [10] zawartości rutyny dodatkowo spowalnia miażdżycę i łagodzi chorobę wieńcową."
+}
+GRAMMAR_TEST {
+  testId: certyfikat-polski-B2-2020-grammar-3
+  examRef: certyfikat-polski-B2-2020
+  taskNumber: 3
+  instruction: "Proszę podkreślić poprawną formę wyrazów podanych w nawiasach (formy nieosobowe i strona bierna).\n\nNiedawno oddano do użytku zabytkową kamienicę przy ulicy Kilińskiego w Łodzi. Choć początkowo zakładano, że koszt remontu wyniesie trzy miliony, aktualnie wylicza się, że przekroczył cztery miliony. Budynek [1] od grudnia 2018 roku. Przed modernizacją w kamienicy znajdowało się jedenaście mieszkań, jednak podczas remontu ich liczba [2] i pozostało tylko siedem lokali. Dzięki renowacji kamienicę w końcu [3] do dawnego stanu.\n\nObecnie podczas odnawiania zabytkowych obiektów coraz częściej [4] uwagę na historyczne szczegóły – dlatego na jednej z elewacji [5] zachować mural przedstawiający ogromne serce. Niebawem na fasadzie kamienicy [6] iluminacja. – Nie zapominamy też o innych mieszkańcach tego domu. W ubiegłym tygodniu na jego ścianach [7] budki dla różnych gatunków ptaków – chwalą się władze Łodzi.\n\nW przyjętym na następny rok budżecie miasta już [8] środki na remont dwóch kolejnych kamienic przy ul. Kilińskiego. Dzięki finansowaniu podobnych inwestycji [9] rewitalizacja całych obszarów miasta. To dobrze, ponieważ w ostatnich latach zbyt często [10] o komforcie życia zwykłych mieszkańców, stawiając przede wszystkim na rozwój biznesu."
+}
+GRAMMAR_TEST {
+  testId: certyfikat-polski-B2-2020-grammar-4
+  examRef: certyfikat-polski-B2-2020
+  taskNumber: 4
+  instruction: "Proszę uzupełnić tekst poprawnymi formami wyrazów podanych w nawiasach (odmiana rzeczowników, przymiotników i zaimków).\n\nW języku polskim osioł kojarzy się z tym, co negatywne: mówimy „uparty jak osioł” czy „osioł do kwadratu” (jeśli uważamy, że ktoś jest bardzo głupi).\n\nJednak nie wszędzie osioł cieszy się złą sławą – na przykład [1] (Meksykanin) co roku w maju obchodzą Dzień [2] (Osioł). W ten sposób ludzie dziękują [3] (to) [4] (zwierzę) za ich ciężką pracę. [5] (Główny) [6] (bohater) w dniu swojego święta noszą barwne stroje, nakrycia głowy, a nawet mają makijaż. Na [7] (wszyscy) [8] (właściciel) osiołków biorących udział w imprezie czeka natomiast poczęstunek oraz pulque – niskoalkoholowy, musujący napój. I [9] (nikt) nie przyjdzie do głowy powiedzieć o [10] (ktokolwiek) „osioł do kwadratu” – to zwierzę otoczone jest w Meksyku naprawdę dużym szacunkiem."
+}
+GRAMMAR_TEST {
+  testId: certyfikat-polski-B2-2020-grammar-5
+  examRef: certyfikat-polski-B2-2020
+  taskNumber: 5
+  instruction: "Proszę uzupełnić tekst poprawnymi formami wyrazów podanych w nawiasach (aspekt oraz czas przeszły i przyszły).\n\nJuż za kilka tygodni ruszy Festiwal Tajemnic w Zamku Książ. Wczoraj organizatorzy ogłosili długo wyczekiwany program tego wydarzenia.\n\nCo ostatecznie [1] (widzieć/zobaczyć) goście, którzy za kilkadziesiąt dni zdecydują się [2] (wybierać/wybrać) na wycieczkę do Zamku Książ?\n\nWystawa wynalazków Leonarda da Vinci czy wirtualny spacer po transatlantyku Piłsudski – to tylko niektóre spośród licznych atrakcji, które już niedługo organizatorzy [3] (zaczynać/zacząć) udostępniać zwiedzającym. Ale to nie koniec niespodzianek. Przez kilka minionych miesięcy pomysłodawcy festiwalu [4] (starać się/postarać się) nawiązywać kontakty z ekspertami, którzy mogliby wprowadzić zwiedzających w świat tajemnic. Dzięki ich wysiłkom zaproszenie [5] (przyjmować/przyjąć) między innymi dziennikarz i odkrywca Jacek Podemski, który zapowiedział, że [6] (opowiadać/opowiedzieć) pokrótce gościom o Czarnobylu. Oprócz niego przez cały czas trwania imprezy lekarze z Zakładu Medycyny Sądowej [7] (wprowadzać/wprowadzić) chętnych w mroczny świat narzędzi zbrodni i preparatów anatomicznych. To prawdziwa okazja, bo do tej pory wystawa ta rzadko [8] (opuszczać/opuścić) mury Muzeum Zakładu Medycyny Sądowej.\n\nPodczas poprzednich edycji odwiedzający zawsze chętnie [9] (korzystać/skorzystać) też z możliwości zwiedzenia samego Zamku Książ, uznawanego za jeden z najbardziej tajemniczych obiektów na Starym Kontynencie. Wyobraźnię wielbicieli legend, tajemnic i teorii spiskowych do dziś pobudza fakt, że w 1941 roku niemiecka organizacja Todt [10] (podejmować/podjąć) próbę przekształcenia budowli w jedną z kwater Adolfa Hitlera."
+}
+GRAMMAR_TEST {
+  testId: certyfikat-polski-B2-2020-grammar-6
+  examRef: certyfikat-polski-B2-2020
+  taskNumber: 6
+  instruction: "Proszę podkreślić poprawne formy wyrazów podanych w nawiasach (odmiana liczebników i rzeczowników).\n\nW domu państwa Oleksów od dziesięciu lat na honorowym miejscu wisi srebrny medal, który otrzymali od Ministra Obrony Narodowej.\n\n– Nagrodę przyznawano tym rodzinom, których przynajmniej [1] [2] wzorowo odbyli służbę wojskową. Złoty medal natomiast otrzymywali ci, którzy wojsku oddali aż [3] [4] – tłumaczy major Wojaczek.\n\nPaństwo Oleksowie nigdy nie liczyli na nagrodę, ale do dziś są z niej bardzo dumni – w Jastrzębiu podobne wyróżnienie przyznano tylko [5] [6]. Choć służba synów dawno już się zakończyła, matka chłopców doskonale pamięta, że każde odwiedziny w jednostce wojskowej oznaczały spędzenie [7] [8] w kuchni. – Za każdym razem ruszałam z wizytą do synów chyba z [9] [10] domowego jedzenia – wspomina ze śmiechem pani Oleksy."
+}
+GRAMMAR_TEST {
+  testId: certyfikat-polski-B2-2020-grammar-7
+  examRef: certyfikat-polski-B2-2020
+  taskNumber: 7
+  instruction: "Proszę uzupełnić tekst odpowiednimi formami wyrazów podanych w nawiasach (stopniowanie przymiotników i przysłówków).\n\nPolski klimat jest coraz bardziej zmienny, a temperatury rosną najbardziej dynamicznie od lat.\n\nSusza, ekstremalne zjawiska pogodowe, coraz [1] (dużo) szkodników roślin, [2] (częsty) niż w dawnych czasach przypadki martwych ryb w rzekach i jeziorach – to możliwe skutki zmian klimatycznych w Polsce. Zdaniem niektórych naukowców 2018 był [3] (gorący) rokiem w całej ostatniej dekadzie.\n\nW porównaniu z czasami sprzed rewolucji przemysłowej średnie temperatury na Ziemi są [4] (wysoki) o 1 stopień Celsjusza. O postępującym ociepleniu klimatu świadczą zjawiska pogodowe, np. susze i pustynnienie albo ulewne deszcze i powodzie – obecnie [5] (gwałtowny) na przestrzeni kilku dziesięcioleci. Z każdym rokiem [6] (ciepły) stają się morza i oceany.\n\nCoraz [7] (szybko) rosnące temperatury powodują przykre konsekwencje dla ludzi – musimy przyzwyczaić się do [8] (zły) niż kiedyś samopoczucia, a także nauczyć się radzić sobie ze skutkami zmian klimatycznych.\n\nFale upałów oraz [9] (łagodny) niż dawniej zimy mają również wpływ na świat roślin i zwierząt. „[10] (Wcześnie) nie mieliśmy np. do czynienia z tak dużą aktywnością owadów” – mówi dr Tończyk."
+}
+GRAMMAR_TEST {
+  testId: certyfikat-polski-B2-2020-grammar-8
+  examRef: certyfikat-polski-B2-2020
+  taskNumber: 8
+  instruction: "Proszę użyć wyrazu podanego w nawiasie i przekształcić zdanie bez zmiany sensu (zdanie złożone → pojedyncze).\n\nPrzykład: Kiedy skończył studia, przeniósł się do Wrocławia. (po) → Po skończeniu studiów przeniósł się do Wrocławia.\n\n1. Ponieważ codziennie się spóźniałeś, nie zdążyliśmy skończyć naszego projektu. (przez) → […] nie zdążyliśmy skończyć naszego projektu.\n2. Dobrze znała język chiński, więc znalazła pracę w tej firmie. (dzięki) → Znalazła pracę w tej firmie […].\n3. Nie poszedł na studia, chociaż jego rodzice tego oczekiwali. (wbrew) → Nie poszedł na studia […].\n4. Chorował długo i ciężko, ale w końcu powrócił do zdrowia. (po) → Powrócił do zdrowia […].\n5. Jeśli nie umie się pływać, nie można wyruszyć w taki rejs. (bez) → […] nie można wyruszyć w taki rejs."
+}

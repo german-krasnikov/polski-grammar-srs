@@ -1,0 +1,365 @@
+DSL 1
+WRITING_TASK {
+  taskId: B1-2017-writing-I-1
+  examRef: certyfikat-polski-B1-2017
+  taskNumber: 1
+  setId: I
+  instruction: "Zestaw I, zadanie a"
+  promptText: "Proszę napisać zaproszenie dla nauczyciela lub szefa na swoje urodziny / imieniny, które organizuje Pani / Pan w restauracji."
+  wordLimit: 20
+  genre: invitation
+}
+WRITING_TASK {
+  taskId: B1-2017-writing-I-2
+  examRef: certyfikat-polski-B1-2017
+  taskNumber: 2
+  setId: I
+  instruction: "Zestaw I, zadanie b"
+  promptText: "„Wakacje w domu…”. Proszę napisać wypracowanie (esej szkolny)."
+  wordLimit: 180
+  genre: essay
+}
+WRITING_TASK {
+  taskId: B1-2017-writing-II-1
+  examRef: certyfikat-polski-B1-2017
+  taskNumber: 1
+  setId: II
+  instruction: "Zestaw II, zadanie a"
+  promptText: "Proszę napisać życzenia dla przyjaciół z okazji ich ślubu."
+  wordLimit: 25
+  genre: wishes
+}
+WRITING_TASK {
+  taskId: B1-2017-writing-II-2
+  examRef: certyfikat-polski-B1-2017
+  taskNumber: 2
+  setId: II
+  instruction: "Zestaw II, zadanie b"
+  promptText: "Proszę napisać opowiadanie pt. „Jesteśmy razem już trzy lata…”. Proszę wykorzystać zdjęcie."
+  promptImageUrl: exam-images/B1-2017-writing-II-2.jpeg
+  promptImageAlt: "Mężczyzna siedzi nad wodą i głaszcze psa."
+  wordLimit: 175
+  genre: story
+}
+WRITING_TASK {
+  taskId: B1-2017-writing-III-1
+  examRef: certyfikat-polski-B1-2017
+  taskNumber: 1
+  setId: III
+  instruction: "Zestaw III, zadanie a"
+  promptText: "Proszę opisać najpiękniejszy prezent, który dostała Pani / dostał Pan na urodziny lub imieniny."
+  wordLimit: 60
+  genre: description
+}
+WRITING_TASK {
+  taskId: B1-2017-writing-III-2
+  examRef: certyfikat-polski-B1-2017
+  taskNumber: 2
+  setId: III
+  instruction: "Zestaw III, zadanie b"
+  promptText: "Proszę napisać sprawozdanie (relację) z wycieczki lub podróży."
+  wordLimit: 140
+  genre: report
+}
+WRITING_TASK {
+  taskId: B1-2019-writing-I-a
+  examRef: certyfikat-polski-B1-2019
+  taskNumber: 1
+  setId: I
+  instruction: "Zestaw I, zadanie a — ogłoszenie"
+  promptText: "Organizuje Pani / Pan imprezę urodzinową w swoim mieszkaniu dla wielu gości. Hałas może przeszkadzać Pani / Pana sąsiadom, dlatego chce Pani / Pan poinformować ich o tym wydarzeniu. Proszę napisać ogłoszenie, które powiesi Pani / Pan w windzie."
+  wordLimit: 30
+  genre: announcement
+}
+WRITING_TASK {
+  taskId: B1-2019-writing-I-b
+  examRef: certyfikat-polski-B1-2019
+  taskNumber: 2
+  setId: I
+  instruction: "Zestaw I, zadanie b — list"
+  promptText: "Odpoczywa Pani / Pan na wakacjach w swoim rodzinnym kraju. Proszę napisać list do przyjaciółki / przyjaciela z Polski, w którym opowie Pani / Pan o swoim pobycie."
+  wordLimit: 170
+  genre: letter
+}
+WRITING_TASK {
+  taskId: B1-2019-writing-II-a
+  examRef: certyfikat-polski-B1-2019
+  taskNumber: 1
+  setId: II
+  instruction: "Zestaw II, zadanie a — zaproszenie e-mailowe"
+  promptText: "Od niedawna pracuje Pani / Pan w polskiej firmie. Chce Pani / Pan zorganizować spotkanie przy grillu w swoim ogrodzie dla nowych kolegów z pracy. Proszę napisać do nich e-mail z zaproszeniem."
+  wordLimit: 40
+  genre: invitation
+}
+WRITING_TASK {
+  taskId: B1-2019-writing-II-b
+  examRef: certyfikat-polski-B1-2019
+  taskNumber: 2
+  setId: II
+  instruction: "Zestaw II, zadanie b — opinia o serialu"
+  promptText: "„Ten serial ostatnio obejrzałam / obejrzałem”. Proszę zaprezentować serial i wyrazić własną opinię na jego temat."
+  wordLimit: 160
+  genre: opinion
+}
+WRITING_TASK {
+  taskId: B1-2019-writing-III-a
+  examRef: certyfikat-polski-B1-2019
+  taskNumber: 1
+  setId: III
+  instruction: "Zestaw III, zadanie a — życzenia"
+  promptText: "Pani / Pana przyjaciel z Polski za miesiąc bierze ślub. Niestety nie może Pani / Pan być na tej uroczystości. Proszę poinformować o tym przyjaciela i napisać życzenia, które wyśle Pani / Pan młodej parze."
+  wordLimit: 30
+  genre: wishes
+}
+WRITING_TASK {
+  taskId: B1-2019-writing-III-b
+  examRef: certyfikat-polski-B1-2019
+  taskNumber: 2
+  setId: III
+  instruction: "Zestaw III, zadanie b — charakterystyka"
+  promptText: "„Mam dobrą szefową / dobrego szefa”. Proszę napisać charakterystykę Pani / Pana pracodawcy."
+  wordLimit: 170
+  genre: description
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B1-2020-writing-I-a
+  examRef: certyfikat-polski-B1-2020
+  taskNumber: 1
+  setId: I
+  instruction: "Zestaw I, zadanie a. 25 słów. Ogłoszenie: Drodzy Sąsiedzi! Zamienię mieszkanie dwupokojowe na większe w tym samym bloku. Tel. 506 34 34 51. Anna."
+  promptText: "Jest Pani zainteresowana / Pan zainteresowany tym ogłoszeniem. Proszę napisać SMS do pani Anny, zapytać o szczegóły (cena, piętro) i umówić się na spotkanie."
+  wordLimit: 25
+  genre: sms
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B1-2020-writing-I-b
+  examRef: certyfikat-polski-B1-2020
+  taskNumber: 2
+  setId: I
+  instruction: "Zestaw I, zadanie b. 175 słów."
+  promptText: "Proszę napisać sprawozdanie z uroczystości rodzinnej (np. z wesela siostry lub brata, z urodzin babci), w której ostatnio Pani uczestniczyła / Pan uczestniczył."
+  wordLimit: 175
+  genre: report
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B1-2020-writing-II-a
+  examRef: certyfikat-polski-B1-2020
+  taskNumber: 1
+  setId: II
+  instruction: "Zestaw II, zadanie a. 40 słów."
+  promptText: "Spędziła Pani / Spędził Pan wakacje w małym hotelu nad morzem. Proszę napisać opinię o tym miejscu, którą zamieści Pani / Pan na polskim portalu turystycznym „(Nie)Polecamy”."
+  wordLimit: 40
+  genre: opinion
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B1-2020-writing-II-b
+  examRef: certyfikat-polski-B1-2020
+  taskNumber: 2
+  setId: II
+  instruction: "Zestaw II, zadanie b. 160 słów."
+  promptText: "Proszę napisać esej (wypracowanie szkolne) na temat: „To jest praca moich marzeń”."
+  wordLimit: 160
+  genre: essay
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B1-2020-writing-III-a
+  examRef: certyfikat-polski-B1-2020
+  taskNumber: 1
+  setId: III
+  instruction: "Zestaw III, zadanie a. 25 słów."
+  promptText: "Proszę napisać życzenia z okazji świąt Bożego Narodzenia dla swojej dawnej nauczycielki / swojego dawnego nauczyciela języka polskiego."
+  wordLimit: 25
+  genre: wishes
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B1-2020-writing-III-b
+  examRef: certyfikat-polski-B1-2020
+  taskNumber: 2
+  setId: III
+  instruction: "Zestaw III, zadanie b. 175 słów."
+  promptText: "Proszę napisać opowiadanie pod tytułem „Przygoda na lotnisku”."
+  wordLimit: 175
+  genre: story
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2017-writing-I-1
+  examRef: certyfikat-polski-B2-2017
+  taskNumber: 1
+  setId: I
+  instruction: "Zestaw I, zadanie a. 20 słów."
+  promptText: "Pani / Pana szef obchodzi jubileusz pracy zawodowej. Proszę napisać życzenia z tej okazji."
+  wordLimit: 20
+  genre: wishes
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2017-writing-I-2
+  examRef: certyfikat-polski-B2-2017
+  taskNumber: 2
+  setId: I
+  instruction: "Zestaw I, zadanie b. 280 słów."
+  promptText: "Proszę napisać esej na temat: „Dorośli a młodzież”."
+  wordLimit: 280
+  genre: essay
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2017-writing-II-1
+  examRef: certyfikat-polski-B2-2017
+  taskNumber: 1
+  setId: II
+  instruction: "Zestaw II, zadanie a. 120 słów."
+  promptText: "Proszę napisać e-mail do koleżanki / kolegi o sukcesach w pracy."
+  wordLimit: 120
+  genre: email
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2017-writing-II-2
+  examRef: certyfikat-polski-B2-2017
+  taskNumber: 2
+  setId: II
+  instruction: "Zestaw II, zadanie b. 180 słów."
+  promptText: "Proszę napisać recenzję wybranego serialu lub filmu."
+  wordLimit: 180
+  genre: review
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2017-writing-III-1
+  examRef: certyfikat-polski-B2-2017
+  taskNumber: 1
+  setId: III
+  instruction: "Zestaw III, zadanie a. 60 słów."
+  promptText: "Proszę napisać tekst reklamujący kurs tańca dla dorosłych."
+  wordLimit: 60
+  genre: advertisement
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2017-writing-III-2
+  examRef: certyfikat-polski-B2-2017
+  taskNumber: 2
+  setId: III
+  instruction: "Zestaw III, zadanie b. 240 słów."
+  promptText: "„Język polski nas połączył”. Proszę napisać opowiadanie zainspirowane poniższym zdjęciem."
+  promptImageUrl: exam-images/B2-2017-writing-III-b.jpeg
+  promptImageAlt: "Grupa uśmiechniętych ludzi różnych narodowości wspólnie świętuje."
+  wordLimit: 240
+  genre: story
+}
+WRITING_TASK {
+  taskId: B2-2019-writing-1a
+  examRef: certyfikat-polski-B2-2019
+  taskNumber: 1
+  setId: I
+  instruction: "Zestaw I, zadanie a. 100 słów."
+  promptText: "Jest Pani zainteresowana / Pan zainteresowany poniższą ofertą pracy. Proszę napisać list motywacyjny.\n\nFundacja Zwierzęta Niczyje poszukuje opiekuna do pomocy w schronisku.\n* Masz minimum 18 lat i kochasz zwierzęta?\n* Chcesz pospacerować, ale nie masz z kim?\n* Nie chcesz siedzieć w biurze od 8.00 do 16.00?\n* A może robisz świetne zdjęcia i w ten sposób będziesz promować adopcje?\nJeśli na któreś z tych pytań odpowiedziałeś „tak”, to mamy dla Ciebie propozycję – dołącz do nas!\nCo prawda oferujemy minimalne stawki, ale w ramach premii możesz liczyć na mnóstwo miłości i wdzięczności.\nListy motywacyjne proszę kierować na adres: zwierzeta.niczyje@org.pl"
+  wordLimit: 100
+  genre: letter
+}
+WRITING_TASK {
+  taskId: B2-2019-writing-1b
+  examRef: certyfikat-polski-B2-2019
+  taskNumber: 2
+  setId: I
+  instruction: "Zestaw I, zadanie b. 200 słów."
+  promptText: "„Cała widownia płakała ze śmiechu”. Proszę napisać recenzję filmu lub przedstawienia teatralnego, którą zamieści Pani / Pan na polskim portalu „Propozycje na Weekend”."
+  wordLimit: 200
+  genre: review
+}
+WRITING_TASK {
+  taskId: B2-2019-writing-2a
+  examRef: certyfikat-polski-B2-2019
+  taskNumber: 1
+  setId: II
+  instruction: "Zestaw II, zadanie a. 30 słów."
+  promptText: "Organizuje Pani / Pan w jednym z polskich miast uroczyste otwarcie własnej cukierni. Proszę napisać zaproszenie dla swojego nauczyciela z kursu kulinarnego."
+  wordLimit: 30
+  genre: invitation
+}
+WRITING_TASK {
+  taskId: B2-2019-writing-2b
+  examRef: certyfikat-polski-B2-2019
+  taskNumber: 2
+  setId: II
+  instruction: "Zestaw II, zadanie b. 270 słów."
+  promptText: "„Złość jest chorobą duszy” (Eliza Orzeszkowa). Czy zgadza się Pani / Pan z tym stwierdzeniem? Proszę napisać tekst argumentacyjny (rozprawkę)."
+  wordLimit: 270
+  genre: argument
+}
+WRITING_TASK {
+  taskId: B2-2019-writing-3a
+  examRef: certyfikat-polski-B2-2019
+  taskNumber: 1
+  setId: III
+  instruction: "Zestaw III, zadanie a. 100 słów."
+  promptText: "Niedawno kupiła Pani / kupił Pan w Polsce mieszkanie. W imieniu lokatorów domu proszę napisać podanie do zarządcy osiedla, prosząc o budowę placu zabaw dla dzieci."
+  wordLimit: 100
+  genre: application
+}
+WRITING_TASK {
+  taskId: B2-2019-writing-3b
+  examRef: certyfikat-polski-B2-2019
+  taskNumber: 2
+  setId: III
+  instruction: "Zestaw III, zadanie b. 200 słów."
+  promptText: "„Gdybym mogła / Gdybym mógł cofnąć czas, to wszystko bym zmieniła / bym zmienił”. Proszę napisać opowiadanie zainspirowane powyższym zdaniem."
+  wordLimit: 200
+  genre: story
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2020-writing-I-1
+  examRef: certyfikat-polski-B2-2020
+  taskNumber: 1
+  setId: I
+  instruction: "Zestaw I, zadanie a. 140 słów."
+  promptText: "Liczyła Pani / Liczył Pan na awans w pracy. Niestety, dyrektor przyznał go Pani/Pana współpracownikowi. Proszę napisać do swojej przyjaciółki / swojego przyjaciela z Polski e-mail, w którym wyrazi Pani/Pan rozgoryczenie związane z tą sytuacją."
+  wordLimit: 140
+  genre: email
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2020-writing-I-2
+  examRef: certyfikat-polski-B2-2020
+  taskNumber: 2
+  setId: I
+  instruction: "Zestaw I, zadanie b. 160 słów."
+  promptText: "„Do tego miasta w Polsce chętnie będę wracać”. Proszę je opisać."
+  wordLimit: 160
+  genre: description
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2020-writing-II-1
+  examRef: certyfikat-polski-B2-2020
+  taskNumber: 1
+  setId: II
+  instruction: "Zestaw II, zadanie a. 100 słów."
+  promptText: "Stara się Pani/Pan o stanowisko recepcjonisty w jednym z hoteli w Polsce. Proszę napisać list motywacyjny."
+  wordLimit: 100
+  genre: letter
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2020-writing-II-2
+  examRef: certyfikat-polski-B2-2020
+  taskNumber: 2
+  setId: II
+  instruction: "Zestaw II, zadanie b. 200 słów."
+  promptText: "Proszę napisać sprawozdanie z międzynarodowej imprezy „Sport dla każdego”, które zamieści Pani/Pan na polskim portalu informacyjnym."
+  wordLimit: 200
+  genre: report
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2020-writing-III-1
+  examRef: certyfikat-polski-B2-2020
+  taskNumber: 1
+  setId: III
+  instruction: "Zestaw III, zadanie a. 40 słów."
+  promptText: "Chce Pani/Pan poznać ciekawą osobę. Proszę napisać ogłoszenie, które zamieści Pani/Pan na polskiej stronie internetowej „Bądźmy w Kontakcie”."
+  wordLimit: 40
+  genre: announcement
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2020-writing-III-2
+  examRef: certyfikat-polski-B2-2020
+  taskNumber: 2
+  setId: III
+  instruction: "Zestaw III, zadanie b. 260 słów."
+  promptText: "„Nauka to podróż, która trwa przez całe życie”. Inspirując się powyższym zdaniem, proszę napisać tekst argumentacyjny (rozprawkę), w którym wyrazi Pani/Pan swoją opinię."
+  wordLimit: 260
+  genre: argument
+}

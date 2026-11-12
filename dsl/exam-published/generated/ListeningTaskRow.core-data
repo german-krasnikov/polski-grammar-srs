@@ -1,0 +1,275 @@
+DSL 1
+LISTENING_TASK {
+  taskId: certyfikat-polski-B1-2017-listen-1
+  examRef: certyfikat-polski-B1-2017
+  taskNumber: 1
+  audioUrl: exam-audio/B1-2017.mp3
+  segmentStartMs: 115000
+  segmentEndMs: 369000
+  instruction: "Proszę uważnie słuchać tego nagrania i zaznaczać właściwe odpowiedzi. Nagranie zostanie odtworzone tylko jeden raz."
+}
+LISTENING_TASK {
+  taskId: certyfikat-polski-B1-2017-listen-2
+  examRef: certyfikat-polski-B1-2017
+  taskNumber: 2
+  audioUrl: exam-audio/B1-2017.mp3
+  segmentStartMs: 369000
+  segmentEndMs: 599000
+  instruction: "Proszę wpisać brakujące słowa. Nagranie zostanie odtworzone dwa razy."
+}
+LISTENING_TASK {
+  taskId: certyfikat-polski-B1-2017-listen-3
+  examRef: certyfikat-polski-B1-2017
+  taskNumber: 3
+  audioUrl: exam-audio/B1-2017.mp3
+  segmentStartMs: 599000
+  segmentEndMs: 877000
+  instruction: "Proszę zaznaczyć właściwe odpowiedzi. Nagranie zostanie odtworzone dwa razy."
+}
+LISTENING_TASK {
+  taskId: certyfikat-polski-B1-2017-listen-4
+  examRef: certyfikat-polski-B1-2017
+  taskNumber: 4
+  audioUrl: exam-audio/B1-2017.mp3
+  segmentStartMs: 877000
+  segmentEndMs: 1116000
+  instruction: "Proszę zaznaczyć, czy podane zdania są prawdziwe – P, czy fałszywe – F. Nagranie zostanie odtworzone dwa razy."
+}
+LISTENING_TASK {
+  taskId: certyfikat-polski-B1-2017-listen-5
+  examRef: certyfikat-polski-B1-2017
+  taskNumber: 5
+  audioUrl: exam-audio/B1-2017.mp3
+  segmentStartMs: 1116000
+  segmentEndMs: 1395000
+  instruction: "Proszę połączyć opłaty z rodzajami paszportów. Nagranie zostanie odtworzone dwa razy."
+}
+LISTENING_TASK {
+  taskId: B1-2019-listen-1
+  examRef: certyfikat-polski-B1-2019
+  taskNumber: 1
+  audioUrl: exam-audio/B1-2019.mp3
+  segmentStartMs: 103000
+  segmentEndMs: 309000
+  instruction: "Proszę uważnie słuchać nagrania i zaznaczyć właściwe odpowiedzi. Nagranie zostanie odtworzone tylko jeden raz. (14 × 0,5 p.)"
+}
+LISTENING_TASK {
+  taskId: B1-2019-listen-2
+  examRef: certyfikat-polski-B1-2019
+  taskNumber: 2
+  audioUrl: exam-audio/B1-2019.mp3
+  segmentStartMs: 310000
+  segmentEndMs: 546000
+  instruction: "Dziennikarz rozmawia o akcji „Torby bumerangi”. Zaznacz TAK, jeśli zdanie jest zgodne z tekstem, lub NIE, jeśli nie jest. Nagranie zostanie odtworzone dwa razy. (8 × 1 p.)"
+}
+LISTENING_TASK {
+  taskId: B1-2019-listen-3
+  examRef: certyfikat-polski-B1-2019
+  taskNumber: 3
+  audioUrl: exam-audio/B1-2019.mp3
+  segmentStartMs: 547000
+  segmentEndMs: 798000
+  instruction: "Posłuchaj informacji o systemie ostrzegania SMS i zaznacz właściwe odpowiedzi. Nagranie zostanie odtworzone dwa razy. (5 × 1 p.)"
+}
+LISTENING_TASK {
+  taskId: B1-2019-listen-4
+  examRef: certyfikat-polski-B1-2019
+  taskNumber: 4
+  audioUrl: exam-audio/B1-2019.mp3
+  segmentStartMs: 799000
+  segmentEndMs: 1068000
+  instruction: "Posłuchaj rad o rozmowach biznesowych. Dopasuj osobę 1–4 do opinii A–E; jedna osoba może wypowiadać więcej niż jedną opinię. Nagranie zostanie odtworzone dwa razy. (5 × 1 p.)"
+}
+LISTENING_TASK {
+  taskId: B1-2019-listen-5
+  examRef: certyfikat-polski-B1-2019
+  taskNumber: 5
+  audioUrl: exam-audio/B1-2019.mp3
+  segmentStartMs: 1069000
+  segmentEndMs: 1475000
+  instruction: "Posłuchaj tekstów o organizacji przeprowadzki i dopasuj numer tekstu 1–10 do ilustracji B–K. Ilustracja A jest przykładem. Nagranie zostanie odtworzone dwa razy. (10 × 0,5 p.)"
+  promptImageUrl: exam-images/B1-2019-listening-V.jpeg
+  promptImageAlt: "Ilustracje A–K do zadania V: A narzędzia jako przykład; B marker, C kosmetyczka, D ciężarówka, E pudła, F ubrania na wieszakach, G wspólny posiłek, H koce, I środki czystości, J osoba niosąca pudła, K pomoc przyjaciół."
+}
+LISTENING_TASK {
+  taskId: certyfikat-polski-B1-2020-listen-1
+  examRef: certyfikat-polski-B1-2020
+  taskNumber: 1
+  audioUrl: exam-audio/B1-2020.mp3
+  segmentStartMs: 102000
+  segmentEndMs: 271000
+  instruction: "Proszę uważnie słuchać nagrania i zaznaczyć właściwe odpowiedzi. Nagranie zostanie odtworzone tylko jeden raz."
+}
+LISTENING_TASK {
+  taskId: certyfikat-polski-B1-2020-listen-2
+  examRef: certyfikat-polski-B1-2020
+  taskNumber: 2
+  audioUrl: exam-audio/B1-2020.mp3
+  segmentStartMs: 272000
+  segmentEndMs: 553000
+  instruction: "Proszę wysłuchać dialogów i zaznaczyć właściwe odpowiedzi. Nagranie zostanie odtworzone dwa razy."
+}
+LISTENING_TASK {
+  taskId: certyfikat-polski-B1-2020-listen-3
+  examRef: certyfikat-polski-B1-2020
+  taskNumber: 3
+  audioUrl: exam-audio/B1-2020.mp3
+  segmentStartMs: 554000
+  segmentEndMs: 798000
+  instruction: "Dziennikarz rozmawia z Joanną Kamińską, współwłaścicielką międzynarodowej firmy. Zaznaczyć TAK, gdy zdanie jest zgodne z tekstem, lub NIE. Nagranie zostanie odtworzone dwa razy."
+}
+LISTENING_TASK {
+  taskId: certyfikat-polski-B1-2020-listen-4
+  examRef: certyfikat-polski-B1-2020
+  taskNumber: 4
+  audioUrl: exam-audio/B1-2020.mp3
+  segmentStartMs: 799000
+  segmentEndMs: 1154000
+  instruction: "Wypowiedzi osób (1–4) o życiu w dużych miastach: dopasować do opinii A–E. Jedna osoba może wypowiadać więcej niż jedną opinię. Nagranie zostanie odtworzone dwa razy."
+}
+LISTENING_TASK {
+  taskId: certyfikat-polski-B1-2020-listen-5
+  examRef: certyfikat-polski-B1-2020
+  taskNumber: 5
+  audioUrl: exam-audio/B1-2020.mp3
+  segmentStartMs: 1155000
+  segmentEndMs: 1418000
+  instruction: "Popularne wśród Polaków 100 lat temu dyscypliny sportowe: połączyć informacje z kolumn I i II. A: bez specjalnego stroju; B: polskie sukcesy; C: równie popularny co narty; D: sport i turystyka; E: stosunkowo niedrogi; F: moda sportowa. Nagranie zostanie odtworzone dwa razy."
+}
+LISTENING_TASK {
+  taskId: certyfikat-polski-B2-2017-listen-1
+  examRef: certyfikat-polski-B2-2017
+  taskNumber: 1
+  audioUrl: exam-audio/B2-2017.mp3
+  segmentStartMs: 162000
+  segmentEndMs: 445000
+  instruction: "Proszę uzupełnić brakujące słowa w nagraniu o niedźwiedziu Wojtku. Nagranie zostanie odtworzone dwukrotnie."
+}
+LISTENING_TASK {
+  taskId: certyfikat-polski-B2-2017-listen-2
+  examRef: certyfikat-polski-B2-2017
+  taskNumber: 2
+  audioUrl: exam-audio/B2-2017.mp3
+  segmentStartMs: 446000
+  segmentEndMs: 772000
+  instruction: "Podróż Orient Expressem. Proszę zaznaczyć właściwe odpowiedzi. Nagranie zostanie odtworzone dwukrotnie."
+}
+LISTENING_TASK {
+  taskId: certyfikat-polski-B2-2017-listen-3
+  examRef: certyfikat-polski-B2-2017
+  taskNumber: 3
+  audioUrl: exam-audio/B2-2017.mp3
+  segmentStartMs: 773000
+  segmentEndMs: 1055000
+  instruction: "Przygoda motoryzacyjna. Proszę zaznaczyć P (prawdziwe) lub F (fałszywe). Nagranie zostanie odtworzone dwukrotnie."
+}
+LISTENING_TASK {
+  taskId: certyfikat-polski-B2-2017-listen-4
+  examRef: certyfikat-polski-B2-2017
+  taskNumber: 4
+  audioUrl: exam-audio/B2-2017.mp3
+  segmentStartMs: 1056000
+  segmentEndMs: 1400000
+  instruction: "Osoby wspominające pierwszy dzień w szkole: 1 Eulalia, 2 Leonard, 3 Przemysław, 4 Iwona. Dopasować osoby do opisów B–G; A={1,2} jest przykładem. Nagranie zostanie odtworzone dwukrotnie."
+}
+LISTENING_TASK {
+  taskId: certyfikat-polski-B2-2017-listen-5
+  examRef: certyfikat-polski-B2-2017
+  taskNumber: 5
+  audioUrl: exam-audio/B2-2017.mp3
+  segmentStartMs: 1401000
+  segmentEndMs: 1692000
+  instruction: "Przygody klientki pralni. Proszę odpowiedzieć na pytania. W pytaniu 1 podać dwa określenia po 0,5 punktu. Nagranie zostanie odtworzone dwukrotnie."
+}
+LISTENING_TASK {
+  taskId: certyfikat-polski-B2-2019-listen-1
+  examRef: certyfikat-polski-B2-2019
+  taskNumber: 1
+  audioUrl: exam-audio/B2-2019.mp3
+  segmentStartMs: 68000
+  segmentEndMs: 427000
+  instruction: "Proszę wysłuchać kolejnych tekstów i zaznaczyć właściwe odpowiedzi. Nagranie zostanie odtworzone dwukrotnie."
+}
+LISTENING_TASK {
+  taskId: certyfikat-polski-B2-2019-listen-2
+  examRef: certyfikat-polski-B2-2019
+  taskNumber: 2
+  audioUrl: exam-audio/B2-2019.mp3
+  segmentStartMs: 428000
+  segmentEndMs: 792000
+  instruction: "Proszę słuchać nagrania na temat programu Kawka II i zaznaczyć właściwe odpowiedzi. Nagranie zostanie odtworzone dwukrotnie."
+}
+LISTENING_TASK {
+  taskId: certyfikat-polski-B2-2019-listen-3
+  examRef: certyfikat-polski-B2-2019
+  taskNumber: 3
+  audioUrl: exam-audio/B2-2019.mp3
+  segmentStartMs: 793000
+  segmentEndMs: 1163000
+  instruction: "Proszę słuchać wypowiedzi na temat rodzin zastępczych i zaznaczyć TAK albo NIE. Nagranie zostanie odtworzone dwukrotnie."
+}
+LISTENING_TASK {
+  taskId: certyfikat-polski-B2-2019-listen-4
+  examRef: certyfikat-polski-B2-2019
+  taskNumber: 4
+  audioUrl: exam-audio/B2-2019.mp3
+  segmentStartMs: 1164000
+  segmentEndMs: 1580000
+  instruction: "Proszę przyporządkować opisy roślinom: A. rącznik pospolity; B. pokrzyk wilcza jagoda; C. oleander; D. tojad sudecki; E. szczwół plamisty. Dwa opisy wymagają dwóch roślin; kolejność jest dowolna. Nagranie zostanie odtworzone dwukrotnie."
+  promptImageUrl: exam-images/B2-2019-listening-IV.png
+  promptImageAlt: "Pięć zdjęć roślin A–E: A rącznik pospolity, B pokrzyk wilcza jagoda, C oleander, D tojad sudecki, E szczwół plamisty."
+}
+LISTENING_TASK {
+  taskId: certyfikat-polski-B2-2019-listen-5
+  examRef: certyfikat-polski-B2-2019
+  taskNumber: 5
+  audioUrl: exam-audio/B2-2019.mp3
+  segmentStartMs: 1580000
+  segmentEndMs: 2006000
+  instruction: "Proszę wysłuchać tekstu na temat soli w fast foodach i odpowiedzieć na pytania. Nagranie zostanie odtworzone dwukrotnie."
+}
+LISTENING_TASK {
+  taskId: certyfikat-polski-B2-2020-listen-1
+  examRef: certyfikat-polski-B2-2020
+  taskNumber: 1
+  audioUrl: exam-audio/B2-2020.mp3
+  segmentStartMs: 97000
+  segmentEndMs: 417000
+  instruction: "Proszę wysłuchać kolejnych tekstów i zaznaczyć właściwe odpowiedzi. Nagranie zostanie odtworzone dwukrotnie."
+}
+LISTENING_TASK {
+  taskId: certyfikat-polski-B2-2020-listen-2
+  examRef: certyfikat-polski-B2-2020
+  taskNumber: 2
+  audioUrl: exam-audio/B2-2020.mp3
+  segmentStartMs: 418000
+  segmentEndMs: 702000
+  instruction: "Proszę wysłuchać wypowiedzi ekonomisty o gospodarce współpracy i zaznaczyć TAK albo NIE. Nagranie zostanie odtworzone dwukrotnie."
+}
+LISTENING_TASK {
+  taskId: certyfikat-polski-B2-2020-listen-3
+  examRef: certyfikat-polski-B2-2020
+  taskNumber: 3
+  audioUrl: exam-audio/B2-2020.mp3
+  segmentStartMs: 703000
+  segmentEndMs: 1082000
+  instruction: "Proszę wysłuchać tekstu i przyporządkować opisy miejscom: A. Piramida w Rapie; B. Piramida w Krynicy; C. Kratery Morasko; D. Zamek Krzyżtopór. Jeden opis może dotyczyć więcej niż jednego miejsca; kolejność dwóch odpowiedzi jest dowolna. Nagranie zostanie odtworzone dwukrotnie."
+}
+LISTENING_TASK {
+  taskId: certyfikat-polski-B2-2020-listen-4
+  examRef: certyfikat-polski-B2-2020
+  taskNumber: 4
+  audioUrl: exam-audio/B2-2020.mp3
+  segmentStartMs: 1083000
+  segmentEndMs: 1357000
+  instruction: "Proszę wysłuchać tekstu o święcie hodowców gołębi pocztowych i zaznaczyć właściwe odpowiedzi. Nagranie zostanie odtworzone dwukrotnie."
+}
+LISTENING_TASK {
+  taskId: certyfikat-polski-B2-2020-listen-5
+  examRef: certyfikat-polski-B2-2020
+  taskNumber: 5
+  audioUrl: exam-audio/B2-2020.mp3
+  segmentStartMs: 1357000
+  segmentEndMs: 1672000
+  instruction: "Proszę wysłuchać tekstu o historii kawy i odpowiedzieć na pytania. Nagranie zostanie odtworzone dwukrotnie."
+}

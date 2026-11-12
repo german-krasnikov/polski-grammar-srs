@@ -99,29 +99,26 @@ fun evaluateUnorderedSetAnswer(
         }
     }
     val selected = answer.split("|").map(::normalize)
-    if (selected.any { it.isBlank() } || selected.distinct().size != selected.size || selected.size > key.size) {
-        return ExamAnswerEvaluation(ExamAnswerStatus.Wrong, 0, 0)
-    }
-    if (choices.isNotEmpty() && !choices.containsAll(selected)) {
-        return ExamAnswerEvaluation(ExamAnswerStatus.Wrong, 0, 0)
-    }
-    if (selected.size == key.size && selected.containsAll(key)) {
-        return ExamAnswerEvaluation(ExamAnswerStatus.ConfirmedFull, maximumQuarter, 0)
-    }
     val confirmedTokens = selected.count { it in key }
     val unknownTokens = selected.size - confirmedTokens
-    if (creditPerCorrectQuarter != null) {
-        val confirmedQuarter = confirmedTokens * creditPerCorrectQuarter
-        val pendingQuarter = if (choices.isEmpty() && mode == ExamGradingMode.OpenManual) unknownTokens * creditPerCorrectQuarter else 0
-        val status = when {
-            pendingQuarter > 0 -> ExamAnswerStatus.PendingManual
-            confirmedQuarter > 0 -> ExamAnswerStatus.ConfirmedPartial
-            else -> ExamAnswerStatus.Wrong
-        }
-        return ExamAnswerEvaluation(status, confirmedQuarter, pendingQuarter)
-    }
-    if (choices.isEmpty() && unknownTokens > 0 && mode == ExamGradingMode.OpenManual) {
-        return ExamAnswerEvaluation(ExamAnswerStatus.PendingManual, 0, maximumQuarter)
-    }
-    return ExamAnswerEvaluation(ExamAnswerStatus.Wrong, 0, 0)
+    val open = choices.isEmpty() && mode == ExamGradingMode.OpenManual
+    val malformed = selected.any { it.isBlank() } || selected.distinct().size != selected.size ||
+        (choices.isNotEmpty() && !choices.containsAll(selected))
+    val knownCredit = confirmedTokens * (creditPerCorrectQuarter ?: 0)
+    return evaluateSetPolicy(
+        SetPolicyFacts(
+            answerNonblank = normalize(answer).isNotBlank(),
+            selectionCount = selected.size,
+            requiredSelections = key.size,
+            distinctKnownFactCount = confirmedTokens,
+            knownCreditQuarter = knownCredit,
+            maximumQuarter = maximumQuarter,
+            unknownNonblankCount = if (open) unknownTokens else 0,
+            hasMalformedSelection = malformed,
+            hasPerFactCredit = creditPerCorrectQuarter != null,
+            openManual = open,
+            sourceConservative = false,
+            pendingBudgetQuarter = if (creditPerCorrectQuarter == null) maximumQuarter else unknownTokens * creditPerCorrectQuarter,
+        ),
+    )
 }

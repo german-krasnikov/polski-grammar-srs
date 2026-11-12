@@ -12,13 +12,17 @@ data class ListeningQuestion(
     val gradingMode: ExamGradingMode = ExamGradingMode.Exact,
     val answerMode: ExamAnswerMode = ExamAnswerMode.Single,
     val creditPerCorrectQuarter: Int? = null, val scoredVariants: List<ExamAnswerVariant> = emptyList(),
+    val requiredSelections: Int? = null, val acceptedFacts: List<ExamAcceptedFact> = emptyList(),
+    val setOverselectionMode: ExamSetOverselectionMode? = null,
 ) {
-    val answerSlotCount: Int get() = if (answerMode == ExamAnswerMode.UnorderedSet) correctAnswer.split("|").size else 1
+    val answerSlotCount: Int get() = if (answerMode == ExamAnswerMode.UnorderedSet) requiredSelections ?: correctAnswer.split("|").size else 1
     init {
         require(pointsQuarter > 0)
+        require(acceptedFacts.isEmpty() || requiredSelections != null && answerMode == ExamAnswerMode.UnorderedSet) { "Source facts require explicit set slots" }
         require(type !in setOf(QuestionType.MultipleChoice, QuestionType.Match, QuestionType.Matching) || options.isNotEmpty()) { "Missing options for listening question $id ($type)" }
         if (answerMode == ExamAnswerMode.UnorderedSet) {
-            evaluateUnorderedSetAnswer(correctAnswer, options, "", pointsQuarter, creditPerCorrectQuarter, gradingMode)
+            if (acceptedFacts.isEmpty() && requiredSelections == null) evaluateUnorderedSetAnswer(correctAnswer, options, "", pointsQuarter, creditPerCorrectQuarter, gradingMode)
+            else evaluateFactSetAnswer(sourceSetAnswerSpec(answerSlotCount, pointsQuarter, acceptedFacts, options, gradingMode, setOverselectionMode, correctAnswer, creditPerCorrectQuarter), "")
         } else {
             evaluateExamAnswer(gradingMode, correctAnswer, scoredVariants, "", pointsQuarter)
         }

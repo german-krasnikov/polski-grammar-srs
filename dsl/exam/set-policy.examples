@@ -1,0 +1,24 @@
+PROVENANCE "Hand-authored from frozen unordered-set oracle and source-form scenarios in EXAM-DSL-SET-AND-CATALOG-PLAN.md. New-paper examples are model cases only; unpublished P9 draft rows are not activated. Quarter units are 0.25 point."
+
+EXAMPLES disposition
+  id | selectionCount | requiredSelections | distinctKnownFactCount | knownCreditQuarter | maximumQuarter | unknownNonblankCount | hasMalformedSelection | answerNonblank | openManual | usesSourceConservativeOverselection | hasPerFactCredit -> expected
+  legacy-full-weighted | 2 | 2 | 2 | 8 | 8 | 0 | false | true | false | false | true -> full
+  legacy-partial-wrong-choice | 2 | 2 | 1 | 4 | 8 | 1 | false | true | false | false | true -> partial
+  legacy-over-limit | 3 | 2 | 2 | 8 | 8 | 1 | false | true | false | false | true -> wrong
+  legacy-duplicate | 2 | 2 | 1 | 4 | 8 | 0 | true | true | false | false | true -> wrong
+  legacy-blank | 0 | 2 | 0 | 0 | 8 | 0 | false | false | false | false | true -> wrong
+  legacy-no-credit-one | 1 | 2 | 1 | 0 | 8 | 0 | false | true | false | false | false -> wrong
+  legacy-no-credit-full | 2 | 2 | 2 | 0 | 8 | 0 | false | true | false | false | false -> full
+  legacy-open-mixed | 2 | 2 | 1 | 2 | 4 | 1 | false | true | true | false | true -> pending
+  b2-any-two-of-three | 2 | 2 | 2 | 4 | 4 | 0 | false | true | true | true | true -> full
+  b2-one-of-three | 1 | 2 | 1 | 2 | 4 | 0 | false | true | true | true | true -> partial
+  b2-three-over-limit | 3 | 2 | 3 | 6 | 4 | 0 | false | true | true | true | true -> manual_review
+  alias-same-fact-twice | 2 | 2 | 1 | 2 | 4 | 0 | false | true | true | true | true -> partial
+  new-blank | 0 | 2 | 0 | 0 | 4 | 0 | false | false | true | true | true -> wrong
+  new-open-mixed | 2 | 2 | 1 | 2 | 4 | 1 | false | true | true | true | true -> pending
+  new-unparseable | 1 | 2 | 0 | 0 | 4 | 0 | true | true | false | true | true -> manual_review
+  new-unused-empty-slot | 1 | 2 | 1 | 2 | 4 | 0 | false | true | true | true | true -> partial
+  c1-six-of-twelve | 6 | 6 | 6 | 24 | 24 | 0 | false | true | false | true | true -> full
+  c1-april-two-by-four | 2 | 2 | 2 | 8 | 8 | 0 | false | true | true | true | true -> full
+  c1-april-two-by-two | 2 | 2 | 2 | 4 | 4 | 0 | false | true | true | true | true -> full
+END

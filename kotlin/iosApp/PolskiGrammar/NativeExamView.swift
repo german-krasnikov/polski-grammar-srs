@@ -54,7 +54,7 @@ struct NativeExamView: View {
                         model.selectExam(exam.string("routeId"))
                     } label: {
                         VStack(alignment: .leading, spacing: 4) {
-                            Text("\(exam.string("level")) · \(exam.int("year"))")
+                            Text(exam.string("displayTitle"))
                                 .font(.headline)
                             Text("\(uiText(copy, "grammar", fallback: "grammar")) · \(exam.int("grammarItemCount"))")
                                 .font(.subheadline).foregroundStyle(.secondary)

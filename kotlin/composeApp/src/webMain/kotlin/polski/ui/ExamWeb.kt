@@ -25,7 +25,7 @@ internal data class ExamEntry(
 }
 
 private val exams = listOf(ExamEntry("b1-sample", "B1 Przykładowy", "B1", "sample")) +
-    ExamCatalog.entries.map { ExamEntry(it.routeId, "${it.level} Certyfikat ${it.year}", it.level, it.year.toString()) }
+    ExamCatalog.entries.map { ExamEntry(it.routeId, it.displayTitle, it.level, it.year.toString()) }
 
 internal enum class ExamScreen { List, Modules, Grammar, Reading, Listening, Writing, Timed }
 

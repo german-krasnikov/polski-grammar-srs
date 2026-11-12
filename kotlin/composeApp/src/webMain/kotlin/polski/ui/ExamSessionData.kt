@@ -1,19 +1,18 @@
 package polski.ui
 
 import polski.exam.ExamModule
+import polski.exam.ExamCatalog
 import polski.exam.session.ExamModuleConfig
 import polski.exam.session.ExamSessionConfig
 
 /** Certified module covers, keyed by the existing route IDs. */
 internal val examSessionData: Map<String, ExamSessionConfig> by lazy {
-    val rows = mapOf(
-        "b1-2017" to polski.exam.data.b1y2017.EXAM_MODULE_ROW_ROWS.map { ModuleCover(it.examRef, it.module.tag, it.order, it.durationSeconds, it.maximumQuarter) },
-        "b1-2019" to polski.exam.data.b1y2019.EXAM_MODULE_ROW_ROWS.map { ModuleCover(it.examRef, it.module.tag, it.order, it.durationSeconds, it.maximumQuarter) },
-        "b1-2020" to polski.exam.data.b1y2020.EXAM_MODULE_ROW_ROWS.map { ModuleCover(it.examRef, it.module.tag, it.order, it.durationSeconds, it.maximumQuarter) },
-        "b2-2017" to polski.exam.data.b2y2017.EXAM_MODULE_ROW_ROWS.map { ModuleCover(it.examRef, it.module.tag, it.order, it.durationSeconds, it.maximumQuarter) },
-        "b2-2019" to polski.exam.data.b2y2019.EXAM_MODULE_ROW_ROWS.map { ModuleCover(it.examRef, it.module.tag, it.order, it.durationSeconds, it.maximumQuarter) },
-        "b2-2020" to polski.exam.data.b2y2020.EXAM_MODULE_ROW_ROWS.map { ModuleCover(it.examRef, it.module.tag, it.order, it.durationSeconds, it.maximumQuarter) },
-    )
+    val rows = ExamCatalog.entries.associate { exam ->
+        exam.routeId to exam.modules.map { module ->
+            ModuleCover(exam.sourceExamId, module.module.name.lowercase(), module.order,
+                module.durationSeconds, module.maximumQuarter)
+        }
+    }
     rows.mapNotNull { (routeId, covers) ->
         val listening = examListeningData[routeId]
         val reading = examReadingData[routeId]

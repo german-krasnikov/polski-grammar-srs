@@ -1,0 +1,2072 @@
+DSL 1
+LISTENING_QUESTION {
+  questionId: B1-2017-l1-1
+  taskRef: certyfikat-polski-B1-2017-listen-1
+  questionType: multiple_choice
+  questionText: "Ta wypowiedź jest typowa"
+  options: "w tramwaju|w kinie|w muzeum"
+  correctAnswer: "w tramwaju"
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: B1-2017-l1-2
+  taskRef: certyfikat-polski-B1-2017-listen-1
+  questionType: multiple_choice
+  questionText: "Ta wypowiedź jest typowa"
+  options: "w sklepie|u dentysty|w aptece"
+  correctAnswer: "w aptece"
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: B1-2017-l1-3
+  taskRef: certyfikat-polski-B1-2017-listen-1
+  questionType: multiple_choice
+  questionText: "Ta wypowiedź jest typowa"
+  options: "w salonie Bingo|w punkcie LOTTO|w szatni"
+  correctAnswer: "w szatni"
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: B1-2017-l1-4
+  taskRef: certyfikat-polski-B1-2017-listen-1
+  questionType: multiple_choice
+  questionText: "Ta wypowiedź jest typowa"
+  options: "w autobusie|w taksówce|w pociągu"
+  correctAnswer: "w taksówce"
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: B1-2017-l1-5
+  taskRef: certyfikat-polski-B1-2017-listen-1
+  questionType: multiple_choice
+  questionText: "Ta wypowiedź jest typowa podczas"
+  options: "zakupów|posiłku|zebrania"
+  correctAnswer: "posiłku"
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: B1-2017-l1-6
+  taskRef: certyfikat-polski-B1-2017-listen-1
+  questionType: multiple_choice
+  questionText: "Ta wypowiedź oznacza"
+  options: "Tak!|Nie!|Nigdy!"
+  correctAnswer: "Tak!"
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: B1-2017-l1-7
+  taskRef: certyfikat-polski-B1-2017-listen-1
+  questionType: multiple_choice
+  questionText: "Ta wypowiedź oznacza, że"
+  options: "mam jutro czas|spotkamy się jutro|muszę to zrobić do jutra"
+  correctAnswer: "muszę to zrobić do jutra"
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: B1-2017-l1-8
+  taskRef: certyfikat-polski-B1-2017-listen-1
+  questionType: multiple_choice
+  questionText: "Ta wypowiedź oznacza"
+  options: "Nie wiem, dokąd idziesz|Nie rozumiem|Chodź ze mną"
+  correctAnswer: "Nie rozumiem"
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: B1-2017-l1-9
+  taskRef: certyfikat-polski-B1-2017-listen-1
+  questionType: multiple_choice
+  questionText: "Ta wypowiedź oznacza, że"
+  options: "nic nie wiem na ten temat|nie chcę o tym mówić|nie rozumiem tego tematu"
+  correctAnswer: "nie chcę o tym mówić"
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: B1-2017-l1-10
+  taskRef: certyfikat-polski-B1-2017-listen-1
+  questionType: multiple_choice
+  questionText: "Ta wypowiedź oznacza, że"
+  options: "rozmawiam z dyrektorem|proszę o rozmowę z dyrektorem|wołam dyrektora"
+  correctAnswer: "proszę o rozmowę z dyrektorem"
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: B1-2017-l1-11
+  taskRef: certyfikat-polski-B1-2017-listen-1
+  questionType: multiple_choice
+  questionText: "Ta wypowiedź oznacza, że kupuję bilet"
+  options: "w obie strony|tylko powrotny|w jedną stronę"
+  correctAnswer: "w obie strony"
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: B1-2017-l1-12
+  taskRef: certyfikat-polski-B1-2017-listen-1
+  questionType: multiple_choice
+  questionText: "Ta wypowiedź oznacza"
+  options: "Dokąd idziesz?|Co wybrałeś?|Jakie są wyniki wyborów?"
+  correctAnswer: "Dokąd idziesz?"
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: B1-2017-l1-13
+  taskRef: certyfikat-polski-B1-2017-listen-1
+  questionType: multiple_choice
+  questionText: "Ta wypowiedź to"
+  options: "odmowa|zaproszenie|zawiadomienie"
+  correctAnswer: zaproszenie
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: B1-2017-l1-14
+  taskRef: certyfikat-polski-B1-2017-listen-1
+  questionType: multiple_choice
+  questionText: "Tę wypowiedź można najczęściej usłyszeć"
+  options: "w sklepie|przy stole|nad morzem"
+  correctAnswer: "w sklepie"
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: B1-2017-l2-1
+  taskRef: certyfikat-polski-B1-2017-listen-2
+  questionType: fill_gap
+  questionText: "od dzieciństwa ___ wiek dojrzały po starość"
+  correctAnswer: przez
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: B1-2017-l2-2
+  taskRef: certyfikat-polski-B1-2017-listen-2
+  questionType: fill_gap
+  questionText: "są ___ rzesze tych"
+  correctAnswer: "całe"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: B1-2017-l2-3
+  taskRef: certyfikat-polski-B1-2017-listen-2
+  questionType: fill_gap
+  questionText: "uczą się, ___, później zawierają związek"
+  correctAnswer: "studiują"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: B1-2017-l2-4
+  taskRef: certyfikat-polski-B1-2017-listen-2
+  questionType: fill_gap
+  questionText: "o tym ___ pierwszym mieszkaniu"
+  correctAnswer: swoim
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: B1-2017-l2-5
+  taskRef: certyfikat-polski-B1-2017-listen-2
+  questionType: fill_gap
+  questionText: "to, co się ___ na ścianach"
+  correctAnswer: powiesi
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: B1-2017-l2-6
+  taskRef: certyfikat-polski-B1-2017-listen-2
+  questionType: fill_gap
+  questionText: "ale zawsze był ten ___"
+  correctAnswer: moment
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: B1-2017-l2-7
+  taskRef: certyfikat-polski-B1-2017-listen-2
+  questionType: fill_gap
+  questionText: "widok z okna, który nam ___ przez tyle lat"
+  correctAnswer: towarzyszy
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: B1-2017-l3-1
+  taskRef: certyfikat-polski-B1-2017-listen-3
+  questionType: multiple_choice
+  questionText: "W podróży uczestniczyły"
+  options: "dwie studentki|starsze panie|chińskie uczennice"
+  correctAnswer: "starsze panie"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: B1-2017-l3-2
+  taskRef: certyfikat-polski-B1-2017-listen-3
+  questionType: multiple_choice
+  questionText: "Podróż została zorganizowana przez"
+  options: "firmę transportową|jedną ze stacji telewizyjnych|producenta herbaty"
+  correctAnswer: "producenta herbaty"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: B1-2017-l3-3
+  taskRef: certyfikat-polski-B1-2017-listen-3
+  questionType: multiple_choice
+  questionText: "Kobiety są w dobrej kondycji fizycznej, bo"
+  options: "uprawiają sport|piją herbatę|jedzą zdrowo"
+  correctAnswer: "piją herbatę"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: B1-2017-l3-4
+  taskRef: certyfikat-polski-B1-2017-listen-3
+  questionType: multiple_choice
+  questionText: "Lot trwał"
+  options: "30 minut|50 minut|godzinę"
+  correctAnswer: "30 minut"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: B1-2017-l3-5
+  taskRef: certyfikat-polski-B1-2017-listen-3
+  questionType: multiple_choice
+  questionText: "Kobiety całe życie"
+  options: "wiele podróżowały|ciężko pracowały|latały samolotem"
+  correctAnswer: "ciężko pracowały"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: B1-2017-l4-1
+  taskRef: certyfikat-polski-B1-2017-listen-4
+  questionType: true_false
+  questionText: "Konkurs mogą wygrać dwie osoby."
+  correctAnswer: "FAŁSZ"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: B1-2017-l4-2
+  taskRef: certyfikat-polski-B1-2017-listen-4
+  questionType: true_false
+  questionText: "Nagrodą w konkursie jest wyjazd do Sosnowca."
+  correctAnswer: "FAŁSZ"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: B1-2017-l4-3
+  taskRef: certyfikat-polski-B1-2017-listen-4
+  questionType: true_false
+  questionText: "Wycieczka będzie trwać kilka dni."
+  correctAnswer: PRAWDA
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: B1-2017-l4-4
+  taskRef: certyfikat-polski-B1-2017-listen-4
+  questionType: true_false
+  questionText: "Współorganizatorem konkursu jest Telewizja Polska."
+  correctAnswer: "FAŁSZ"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: B1-2017-l4-5
+  taskRef: certyfikat-polski-B1-2017-listen-4
+  questionType: true_false
+  questionText: "Pytania dotyczą Unii Europejskiej."
+  correctAnswer: PRAWDA
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: B1-2017-l4-6
+  taskRef: certyfikat-polski-B1-2017-listen-4
+  questionType: true_false
+  questionText: "Według redaktora pytania konkursowe są dość trudne."
+  correctAnswer: PRAWDA
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: B1-2017-l5-1
+  taskRef: certyfikat-polski-B1-2017-listen-5
+  questionType: matching
+  questionText: "opłata paszportowa w wysokości 30 zł"
+  options: "A. paszport dla emerytów i rencistów|B. paszport tymczasowy dla dorosłych|C. paszport dla osób powyżej 70 lat|D. paszport dla dzieci do 7 lat|E. paszport dla dorosłych na 10 lat|F. paszport dla dzieci poniżej 13 lat"
+  correctAnswer: "D. paszport dla dzieci do 7 lat"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: B1-2017-l5-2
+  taskRef: certyfikat-polski-B1-2017-listen-5
+  questionType: matching
+  questionText: "opłata paszportowa w wysokości 60 zł"
+  options: "A. paszport dla emerytów i rencistów|B. paszport tymczasowy dla dorosłych|C. paszport dla osób powyżej 70 lat|D. paszport dla dzieci do 7 lat|E. paszport dla dorosłych na 10 lat|F. paszport dla dzieci poniżej 13 lat"
+  correctAnswer: "F. paszport dla dzieci poniżej 13 lat"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: B1-2017-l5-3
+  taskRef: certyfikat-polski-B1-2017-listen-5
+  questionType: matching
+  questionText: "opłata paszportowa w wysokości 45 zł"
+  options: "A. paszport dla emerytów i rencistów|B. paszport tymczasowy dla dorosłych|C. paszport dla osób powyżej 70 lat|D. paszport dla dzieci do 7 lat|E. paszport dla dorosłych na 10 lat|F. paszport dla dzieci poniżej 13 lat"
+  correctAnswer: "B. paszport tymczasowy dla dorosłych"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: B1-2017-l5-4
+  taskRef: certyfikat-polski-B1-2017-listen-5
+  questionType: matching
+  questionText: "paszport bez opłaty"
+  options: "A. paszport dla emerytów i rencistów|B. paszport tymczasowy dla dorosłych|C. paszport dla osób powyżej 70 lat|D. paszport dla dzieci do 7 lat|E. paszport dla dorosłych na 10 lat|F. paszport dla dzieci poniżej 13 lat"
+  correctAnswer: "C. paszport dla osób powyżej 70 lat"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: B1-2017-l5-5
+  taskRef: certyfikat-polski-B1-2017-listen-5
+  questionType: matching
+  questionText: "50% ulgi w opłacie paszportowej"
+  options: "A. paszport dla emerytów i rencistów|B. paszport tymczasowy dla dorosłych|C. paszport dla osób powyżej 70 lat|D. paszport dla dzieci do 7 lat|E. paszport dla dorosłych na 10 lat|F. paszport dla dzieci poniżej 13 lat"
+  correctAnswer: "A. paszport dla emerytów i rencistów"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: B1-2019-lq1-1
+  taskRef: B1-2019-listen-1
+  questionType: multiple_choice
+  questionText: "Ta wypowiedź jest typowa"
+  options: "a) w kinie.|b) w bibliotece.|c) w księgarni."
+  correctAnswer: "b) w bibliotece."
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: B1-2019-lq1-2
+  taskRef: B1-2019-listen-1
+  questionType: multiple_choice
+  questionText: "Ta wypowiedź to fragment"
+  options: "a) wizyty u lekarza.|b) egzaminu na prawo jazdy.|c) rozmowy o pracę."
+  correctAnswer: "c) rozmowy o pracę."
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: B1-2019-lq1-3
+  taskRef: B1-2019-listen-1
+  questionType: multiple_choice
+  questionText: "Ta wypowiedź oznacza"
+  options: "a) odmowę.|b) niepewność.|c) komplement."
+  correctAnswer: "b) niepewność."
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: B1-2019-lq1-4
+  taskRef: B1-2019-listen-1
+  questionType: multiple_choice
+  questionText: "Ta wypowiedź jest typowa"
+  options: "a) u fryzjera.|b) w drogerii.|c) u lekarza."
+  correctAnswer: "a) u fryzjera."
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: B1-2019-lq1-5
+  taskRef: B1-2019-listen-1
+  questionType: multiple_choice
+  questionText: "Ta wypowiedź oznacza"
+  options: "a) radę.|b) prośbę.|c) ofertę."
+  correctAnswer: "a) radę."
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: B1-2019-lq1-6
+  taskRef: B1-2019-listen-1
+  questionType: multiple_choice
+  questionText: "Ta wypowiedź jest typowa"
+  options: "a) w księgarni.|b) u optyka.|c) w kwiaciarni."
+  correctAnswer: "c) w kwiaciarni."
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: B1-2019-lq1-7
+  taskRef: B1-2019-listen-1
+  questionType: multiple_choice
+  questionText: "Ta wypowiedź jest typowa"
+  options: "a) w banku.|b) w kinie.|c) w kantorze."
+  correctAnswer: "a) w banku."
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: B1-2019-lq1-8
+  taskRef: B1-2019-listen-1
+  questionType: multiple_choice
+  questionText: "Ta wypowiedź to fragment"
+  options: "a) diagnozy lekarza.|b) prognozy pogody.|c) rozmowy o pracę."
+  correctAnswer: "b) prognozy pogody."
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: B1-2019-lq1-9
+  taskRef: B1-2019-listen-1
+  questionType: multiple_choice
+  questionText: "Ta wypowiedź to"
+  options: "a) życzenia ślubne.|b) kondolencje.|c) życzenia urodzinowe."
+  correctAnswer: "a) życzenia ślubne."
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: B1-2019-lq1-10
+  taskRef: B1-2019-listen-1
+  questionType: multiple_choice
+  questionText: "Ta wypowiedź to fragment audycji"
+  options: "a) o podróżach.|b) o sporcie.|c) o religii."
+  correctAnswer: "b) o sporcie."
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: B1-2019-lq1-11
+  taskRef: B1-2019-listen-1
+  questionType: multiple_choice
+  questionText: "Ta wypowiedź oznacza"
+  options: "a) prośbę.|b) propozycję.|c) zakaz."
+  correctAnswer: "c) zakaz."
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: B1-2019-lq1-12
+  taskRef: B1-2019-listen-1
+  questionType: multiple_choice
+  questionText: "Ta wypowiedź jest typowa"
+  options: "a) w tramwaju.|b) w kasie biletowej.|c) w taksówce."
+  correctAnswer: "c) w taksówce."
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: B1-2019-lq1-13
+  taskRef: B1-2019-listen-1
+  questionType: multiple_choice
+  questionText: "Ta wypowiedź dotyczy"
+  options: "a) ubioru.|b) fryzury.|c) makijażu."
+  correctAnswer: "a) ubioru."
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: B1-2019-lq1-14
+  taskRef: B1-2019-listen-1
+  questionType: multiple_choice
+  questionText: "Ta wypowiedź to fragment"
+  options: "a) relacji sportowej.|b) charakterystyki.|c) komunikatu policji."
+  correctAnswer: "c) komunikatu policji."
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: B1-2019-lq2-1
+  taskRef: B1-2019-listen-2
+  questionType: true_false
+  questionText: "Do tej pory niezbyt dużo sklepów bierze udział w akcji."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: B1-2019-lq2-2
+  taskRef: B1-2019-listen-2
+  questionType: true_false
+  questionText: "Akcja „Torby bumerangi” ma pomóc dbać o środowisko."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: B1-2019-lq2-3
+  taskRef: B1-2019-listen-2
+  questionType: true_false
+  questionText: "Włączenie się do projektu jest dosyć skomplikowane."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: B1-2019-lq2-4
+  taskRef: B1-2019-listen-2
+  questionType: true_false
+  questionText: "W projekcie wykorzystywane są tylko nowe torby."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: B1-2019-lq2-5
+  taskRef: B1-2019-listen-2
+  questionType: true_false
+  questionText: "Pomysł na zorganizowanie takiej akcji powstał poza Polską."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: B1-2019-lq2-6
+  taskRef: B1-2019-listen-2
+  questionType: true_false
+  questionText: "Czasami właściciele sklepów sami kontaktują się z organizatorami."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: B1-2019-lq2-7
+  taskRef: B1-2019-listen-2
+  questionType: true_false
+  questionText: "Przede wszystkim sklepy spożywcze zainteresowały się tą akcją."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: B1-2019-lq2-8
+  taskRef: B1-2019-listen-2
+  questionType: true_false
+  questionText: "Organizatorzy bali się, że torby nie będą wracały do koszy."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: B1-2019-lq3-1
+  taskRef: B1-2019-listen-3
+  questionType: multiple_choice
+  questionText: "Wiadomości alarmowe"
+  options: "a) przesyła policja i straż pożarna.|b) powstają w Centrum Bezpieczeństwa.|c) przygotowują operatorzy komórkowi."
+  correctAnswer: "b) powstają w Centrum Bezpieczeństwa."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: B1-2019-lq3-2
+  taskRef: B1-2019-listen-3
+  questionType: multiple_choice
+  questionText: "Aby otrzymać wiadomość,"
+  options: "a) należy wpisać się na specjalną listę.|b) trzeba zarejestrować się na stronie internetowej.|c) nie trzeba robić niczego szczególnego."
+  correctAnswer: "c) nie trzeba robić niczego szczególnego."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: B1-2019-lq3-3
+  taskRef: B1-2019-listen-3
+  questionType: multiple_choice
+  questionText: "System nie ostrzega przed"
+  options: "a) silnymi wiatrami.|b) zmianami temperatury.|c) niebezpiecznymi drogami."
+  correctAnswer: "c) niebezpiecznymi drogami."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: B1-2019-lq3-4
+  taskRef: B1-2019-listen-3
+  questionType: multiple_choice
+  questionText: "Po przeczytaniu wiadomości należy"
+  options: "a) zrobić to, co jest w niej napisane.|b) zadzwonić na numer nadawcy.|c) uciekać tak szybko, jak to tylko możliwe."
+  correctAnswer: "a) zrobić to, co jest w niej napisane."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: B1-2019-lq3-5
+  taskRef: B1-2019-listen-3
+  questionType: multiple_choice
+  questionText: "System alarmowy"
+  options: "a) działa w Polsce od wielu lat.|b) od niedawna źle funkcjonuje.|c) może być oceniany przez Polaków."
+  correctAnswer: "c) może być oceniany przez Polaków."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: B1-2019-lq4-1
+  taskRef: B1-2019-listen-4
+  questionType: matching
+  questionText: "A. Mówi, że bardzo ważne jest słuchanie partnera."
+  options: "1|2|3|4"
+  correctAnswer: "4"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: B1-2019-lq4-2
+  taskRef: B1-2019-listen-4
+  questionType: matching
+  questionText: "B. Uważa, że do sukcesu potrzebne jest poznanie rozmówcy."
+  options: "1|2|3|4"
+  correctAnswer: "2"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: B1-2019-lq4-3
+  taskRef: B1-2019-listen-4
+  questionType: matching
+  questionText: "C. Zwraca uwagę na grzeczność i kulturę osobistą."
+  options: "1|2|3|4"
+  correctAnswer: "3"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: B1-2019-lq4-4
+  taskRef: B1-2019-listen-4
+  questionType: matching
+  questionText: "D. Twierdzi, że czasem warto zmienić zdanie."
+  options: "1|2|3|4"
+  correctAnswer: "1"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: B1-2019-lq4-5
+  taskRef: B1-2019-listen-4
+  questionType: matching
+  questionText: "E. Podkreśla, że nie należy bać się ciszy."
+  options: "1|2|3|4"
+  correctAnswer: "4"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: B1-2019-lq5-1
+  taskRef: B1-2019-listen-5
+  questionType: matching
+  questionText: "Ilustracja B"
+  options: "1|2|3|4|5|6|7|8|9|10"
+  correctAnswer: "6"
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: B1-2019-lq5-2
+  taskRef: B1-2019-listen-5
+  questionType: matching
+  questionText: "Ilustracja C"
+  options: "1|2|3|4|5|6|7|8|9|10"
+  correctAnswer: "7"
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: B1-2019-lq5-3
+  taskRef: B1-2019-listen-5
+  questionType: matching
+  questionText: "Ilustracja D"
+  options: "1|2|3|4|5|6|7|8|9|10"
+  correctAnswer: "5"
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: B1-2019-lq5-4
+  taskRef: B1-2019-listen-5
+  questionType: matching
+  questionText: "Ilustracja E"
+  options: "1|2|3|4|5|6|7|8|9|10"
+  correctAnswer: "1"
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: B1-2019-lq5-5
+  taskRef: B1-2019-listen-5
+  questionType: matching
+  questionText: "Ilustracja F"
+  options: "1|2|3|4|5|6|7|8|9|10"
+  correctAnswer: "9"
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: B1-2019-lq5-6
+  taskRef: B1-2019-listen-5
+  questionType: matching
+  questionText: "Ilustracja G"
+  options: "1|2|3|4|5|6|7|8|9|10"
+  correctAnswer: "10"
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: B1-2019-lq5-7
+  taskRef: B1-2019-listen-5
+  questionType: matching
+  questionText: "Ilustracja H"
+  options: "1|2|3|4|5|6|7|8|9|10"
+  correctAnswer: "3"
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: B1-2019-lq5-8
+  taskRef: B1-2019-listen-5
+  questionType: matching
+  questionText: "Ilustracja I"
+  options: "1|2|3|4|5|6|7|8|9|10"
+  correctAnswer: "4"
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: B1-2019-lq5-9
+  taskRef: B1-2019-listen-5
+  questionType: matching
+  questionText: "Ilustracja J"
+  options: "1|2|3|4|5|6|7|8|9|10"
+  correctAnswer: "8"
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: B1-2019-lq5-10
+  taskRef: B1-2019-listen-5
+  questionType: matching
+  questionText: "Ilustracja K"
+  options: "1|2|3|4|5|6|7|8|9|10"
+  correctAnswer: "2"
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-listening-1-1
+  taskRef: certyfikat-polski-B1-2020-listen-1
+  questionType: multiple_choice
+  questionText: "Ta wypowiedź jest typowa"
+  options: "a) na stacji benzynowej.|b) w sklepie z meblami.|c) w kinie przy kasie."
+  correctAnswer: "b) w sklepie z meblami."
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-listening-1-2
+  taskRef: certyfikat-polski-B1-2020-listen-1
+  questionType: multiple_choice
+  questionText: "Ta wypowiedź jest typowa w"
+  options: "a) siłowni.|b) restauracji.|c) hotelu."
+  correctAnswer: "c) hotelu."
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-listening-1-3
+  taskRef: certyfikat-polski-B1-2020-listen-1
+  questionType: multiple_choice
+  questionText: "Ta wypowiedź jest typowa w"
+  options: "a) samolocie.|b) taksówce.|c) autobusie."
+  correctAnswer: "c) autobusie."
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-listening-1-4
+  taskRef: certyfikat-polski-B1-2020-listen-1
+  questionType: multiple_choice
+  questionText: "Ta wypowiedź jest typowa"
+  options: "a) w aptece.|b) u dentysty.|c) w sekretariacie."
+  correctAnswer: "a) w aptece."
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-listening-1-5
+  taskRef: certyfikat-polski-B1-2020-listen-1
+  questionType: multiple_choice
+  questionText: "Ta wypowiedź to fragment"
+  options: "a) komunikatu na dworcu.|b) reklamy radiowej.|c) instrukcji obsługi."
+  correctAnswer: "b) reklamy radiowej."
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-listening-1-6
+  taskRef: certyfikat-polski-B1-2020-listen-1
+  questionType: multiple_choice
+  questionText: "Ta wypowiedź to fragment rozmowy"
+  options: "a) w dziekanacie.|b) przez telefon.|c) dwóch koleżanek."
+  correctAnswer: "b) przez telefon."
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-listening-1-7
+  taskRef: certyfikat-polski-B1-2020-listen-1
+  questionType: multiple_choice
+  questionText: "Ta wypowiedź to pytanie o"
+  options: "a) czas.|b) miejsce.|c) środek transportu."
+  correctAnswer: "c) środek transportu."
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-listening-1-8
+  taskRef: certyfikat-polski-B1-2020-listen-1
+  questionType: multiple_choice
+  questionText: "Ta wypowiedź oznacza, że ta osoba"
+  options: "a) planuje wizytę u lekarza.|b) dawno nie leczyła zębów.|c) często odwiedza dentystę."
+  correctAnswer: "b) dawno nie leczyła zębów."
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-listening-1-9
+  taskRef: certyfikat-polski-B1-2020-listen-1
+  questionType: multiple_choice
+  questionText: "Ta wypowiedź oznacza"
+  options: "a) krytykę.|b) życzenie.|c) akceptację."
+  correctAnswer: "a) krytykę."
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-listening-1-10
+  taskRef: certyfikat-polski-B1-2020-listen-1
+  questionType: multiple_choice
+  questionText: "Ta wypowiedź oznacza"
+  options: "a) niepokój.|b) radość.|c) satysfakcję."
+  correctAnswer: "a) niepokój."
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-listening-1-11
+  taskRef: certyfikat-polski-B1-2020-listen-1
+  questionType: multiple_choice
+  questionText: "Ta wypowiedź oznacza, że"
+  options: "a) mamy dużo czasu.|b) będziemy punktualnie.|c) spóźnimy się."
+  correctAnswer: "c) spóźnimy się."
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-listening-1-12
+  taskRef: certyfikat-polski-B1-2020-listen-1
+  questionType: multiple_choice
+  questionText: "Ta wypowiedź oznacza, że trzeba"
+  options: "a) włączyć światło.|b) zamknąć okno.|c) zgasić światło."
+  correctAnswer: "a) włączyć światło."
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-listening-2-1
+  taskRef: certyfikat-polski-B1-2020-listen-2
+  questionType: multiple_choice
+  questionText: "Z tego dialogu dowiadujemy się, że mężczyzna"
+  options: "a) idzie do hotelu.|b) zatrzymuje taksówkę.|c) jedzie w złym kierunku."
+  correctAnswer: "c) jedzie w złym kierunku."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-listening-2-2
+  taskRef: certyfikat-polski-B1-2020-listen-2
+  questionType: multiple_choice
+  questionText: "Z tego dialogu dowiadujemy się, że"
+  options: "a) kobieta studiuje i zajmuje się domem.|b) mąż robi wszystko w domu.|c) kobiecie nikt nie pomaga."
+  correctAnswer: "a) kobieta studiuje i zajmuje się domem."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-listening-2-3
+  taskRef: certyfikat-polski-B1-2020-listen-2
+  questionType: multiple_choice
+  questionText: "Z tego dialogu dowiadujemy się, że mężczyzna"
+  options: "a) jest autorem projektu.|b) krytykuje projekt.|c) nie mówi, co myśli."
+  correctAnswer: "c) nie mówi, co myśli."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-listening-2-4
+  taskRef: certyfikat-polski-B1-2020-listen-2
+  questionType: multiple_choice
+  questionText: "Z tego dialogu dowiadujemy się, że mężczyzna"
+  options: "a) chce wydać nową płytę.|b) jest za stary na kolejną płytę.|c) komponuje muzykę do nowej płyty."
+  correctAnswer: "b) jest za stary na kolejną płytę."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-listening-2-5
+  taskRef: certyfikat-polski-B1-2020-listen-2
+  questionType: multiple_choice
+  questionText: "Z tego dialogu dowiadujemy się, że mężczyzna"
+  options: "a) jeździ na rowerze z dzieckiem.|b) dostał rower od dziecka.|c) jeździł na rowerze już w dzieciństwie."
+  correctAnswer: "c) jeździł na rowerze już w dzieciństwie."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-listening-2-6
+  taskRef: certyfikat-polski-B1-2020-listen-2
+  questionType: multiple_choice
+  questionText: "Z tego dialogu dowiadujemy się, że uczestnicy kursu"
+  options: "a) są pracownikami urzędu miasta.|b) biorą w nim udział bezpłatnie.|c) muszą zapłacić za zajęcia."
+  correctAnswer: "b) biorą w nim udział bezpłatnie."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-listening-2-7
+  taskRef: certyfikat-polski-B1-2020-listen-2
+  questionType: multiple_choice
+  questionText: "Z tego dialogu dowiadujemy się, że w sobotę kobieta i mężczyzna"
+  options: "a) mają inne plany na wieczór.|b) spędzą razem wieczór.|c) idą wieczorem na mecz."
+  correctAnswer: "a) mają inne plany na wieczór."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-listening-3-1
+  taskRef: certyfikat-polski-B1-2020-listen-3
+  questionType: true_false
+  questionText: "Bohaterka wywiadu w dzieciństwie podróżowała po Europie."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-listening-3-2
+  taskRef: certyfikat-polski-B1-2020-listen-3
+  questionType: true_false
+  questionText: "Bohaterka wywiadu w szkole średniej wyjeżdżała z rodzicami do Anglii."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-listening-3-3
+  taskRef: certyfikat-polski-B1-2020-listen-3
+  questionType: true_false
+  questionText: "Bohaterka wywiadu obecnie podróżuje z grupą przyjaciół."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-listening-3-4
+  taskRef: certyfikat-polski-B1-2020-listen-3
+  questionType: true_false
+  questionText: "Bohaterka wywiadu wybiera środek transportu w zależności od miejsca, w którym jest."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-listening-3-5
+  taskRef: certyfikat-polski-B1-2020-listen-3
+  questionType: true_false
+  questionText: "Bohaterka wywiadu boi się kłopotów z powodu braku znajomości języków obcych."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-listening-4-1
+  taskRef: certyfikat-polski-B1-2020-listen-4
+  questionType: matching
+  questionText: "A: narzeka na hałaśliwych sąsiadów."
+  options: "1|2|3|4"
+  correctAnswer: "3"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-listening-4-2
+  taskRef: certyfikat-polski-B1-2020-listen-4
+  questionType: matching
+  questionText: "B: wymienia miejsca, gdzie można spędzić wolny czas."
+  options: "1|2|3|4"
+  correctAnswer: "1|4"
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
+  pointsQuarter: 8
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-listening-4-3
+  taskRef: certyfikat-polski-B1-2020-listen-4
+  questionType: matching
+  questionText: "C: mówi, że życie w mieście jest drogie."
+  options: "1|2|3|4"
+  correctAnswer: "2|4"
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
+  pointsQuarter: 8
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-listening-4-4
+  taskRef: certyfikat-polski-B1-2020-listen-4
+  questionType: matching
+  questionText: "D: zwraca uwagę na zanieczyszczenie."
+  options: "1|2|3|4"
+  correctAnswer: "4"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-listening-4-5
+  taskRef: certyfikat-polski-B1-2020-listen-4
+  questionType: matching
+  questionText: "E: nie lubi osób za bardzo ciekawych tego, jak żyją inni."
+  options: "1|2|3|4"
+  correctAnswer: "2"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-listening-5-1
+  taskRef: certyfikat-polski-B1-2020-listen-5
+  questionType: matching
+  questionText: "Łyżwy"
+  options: "A|B|C|D|E|F"
+  correctAnswer: E
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-listening-5-2
+  taskRef: certyfikat-polski-B1-2020-listen-5
+  questionType: matching
+  questionText: "Sporty wodne"
+  options: "A|B|C|D|E|F"
+  correctAnswer: D
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-listening-5-3
+  taskRef: certyfikat-polski-B1-2020-listen-5
+  questionType: matching
+  questionText: "Jazda konna"
+  options: "A|B|C|D|E|F"
+  correctAnswer: B
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-listening-5-4
+  taskRef: certyfikat-polski-B1-2020-listen-5
+  questionType: matching
+  questionText: Tenis
+  options: "A|B|C|D|E|F"
+  correctAnswer: F
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-listening-5-5
+  taskRef: certyfikat-polski-B1-2020-listen-5
+  questionType: matching
+  questionText: "Gra w siatkówkę"
+  options: "A|B|C|D|E|F"
+  correctAnswer: A
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-1-1
+  taskRef: certyfikat-polski-B2-2017-listen-1
+  questionType: fill_gap
+  questionText: "Uczczenia Wojtka […] (1)."
+  correctAnswer: pomnikiem
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-1-2
+  taskRef: certyfikat-polski-B2-2017-listen-1
+  questionType: fill_gap
+  questionText: "Z doktorem Jarosławem Gdańskim, […] i wydawcą (2)."
+  correctAnswer: historykiem
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-1-3
+  taskRef: certyfikat-polski-B2-2017-listen-1
+  questionType: fill_gap
+  questionText: "Miał […] szeregowego (3)."
+  correctAnswer: "stopień"
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-1-4
+  taskRef: certyfikat-polski-B2-2017-listen-1
+  questionType: fill_gap
+  questionText: "Na czym […] jego obowiązki (4)?"
+  correctAnswer: "polegały"
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-1-5
+  taskRef: certyfikat-polski-B2-2017-listen-1
+  questionType: fill_gap
+  questionText: "Został przygarnięty, a […] odkupiony (5)."
+  correctAnswer: "właściwie"
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-1-6
+  taskRef: certyfikat-polski-B2-2017-listen-1
+  questionType: fill_gap
+  questionText: "Chłopaka, który go […] spotkał (6)."
+  correctAnswer: samotnego
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-1-7
+  taskRef: certyfikat-polski-B2-2017-listen-1
+  questionType: fill_gap
+  questionText: "Przez żołnierzy rozpieszczany, […] (7)."
+  correctAnswer: karmiony
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-1-8
+  taskRef: certyfikat-polski-B2-2017-listen-1
+  questionType: fill_gap
+  questionText: "Kolumna […] samochodowa (8)."
+  correctAnswer: zaopatrywania
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-1-9
+  taskRef: certyfikat-polski-B2-2017-listen-1
+  questionType: fill_gap
+  questionText: "Pilnował tam […] rodzaju rzeczy (9)."
+  correctAnswer: "różnego"
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-1-10
+  taskRef: certyfikat-polski-B2-2017-listen-1
+  questionType: fill_gap
+  questionText: "W czasie […] pod Monte Cassino (10)."
+  correctAnswer: bitwy
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-1-11
+  taskRef: certyfikat-polski-B2-2017-listen-1
+  questionType: fill_gap
+  questionText: "Dwudziesta druga […] (11)."
+  correctAnswer: kompania
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-1-12
+  taskRef: certyfikat-polski-B2-2017-listen-1
+  questionType: fill_gap
+  questionText: "Znak […] malowany na pojazdach (12)."
+  correctAnswer: "wyróżniający"
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-2-1
+  taskRef: certyfikat-polski-B2-2017-listen-2
+  questionType: multiple_choice
+  questionText: "Kolory granatowy i biały charakteryzowały"
+  options: "a) strój kobiety.|b) strój policjanta.|c) pociąg."
+  correctAnswer: "c) pociąg."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-2-2
+  taskRef: certyfikat-polski-B2-2017-listen-2
+  questionType: multiple_choice
+  questionText: "Pasażerami pociągu byli"
+  options: "a) warszawiacy.|b) wyłącznie cudzoziemcy.|c) cudzoziemcy i narratorka."
+  correctAnswer: "c) cudzoziemcy i narratorka."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-2-3
+  taskRef: certyfikat-polski-B2-2017-listen-2
+  questionType: multiple_choice
+  questionText: "Kobieta miała problem z"
+  options: "a) przewozem magnetofonu.|b) odnalezieniem przedziału.|c) dostaniem się do pociągu."
+  correctAnswer: "c) dostaniem się do pociągu."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-2-4
+  taskRef: certyfikat-polski-B2-2017-listen-2
+  questionType: multiple_choice
+  questionText: "Narratorka wsiadła do pociągu"
+  options: "a) od razu.|b) po interwencji członka załogi.|c) po interwencji policjanta."
+  correctAnswer: "b) po interwencji członka załogi."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-2-5
+  taskRef: certyfikat-polski-B2-2017-listen-2
+  questionType: multiple_choice
+  questionText: "Pasażerowie byli witani przez"
+  options: "a) członków załogi.|b) menedżera pociągu.|c) policjantów."
+  correctAnswer: "a) członków załogi."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-2-6
+  taskRef: certyfikat-polski-B2-2017-listen-2
+  questionType: multiple_choice
+  questionText: "Aby dojść do pociągu, należało"
+  options: "a) pokonać schody.|b) przejść po dywanie.|c) okazać bilet."
+  correctAnswer: "b) przejść po dywanie."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-2-7
+  taskRef: certyfikat-polski-B2-2017-listen-2
+  questionType: multiple_choice
+  questionText: "Orient Express jechał trasą"
+  options: "a) po kraju słowiańskim.|b) po Azji.|c) po krajach Orientu."
+  correctAnswer: "a) po kraju słowiańskim."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-2-8
+  taskRef: certyfikat-polski-B2-2017-listen-2
+  questionType: multiple_choice
+  questionText: "Narratorka spotkała miłego turystę"
+  options: "a) w przedziale.|b) w barze.|c) u menedżera pociągu."
+  correctAnswer: "b) w barze."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-3-1
+  taskRef: certyfikat-polski-B2-2017-listen-3
+  questionType: true_false
+  questionText: "Kobieta nie pierwszy raz miała problem z alarmem samochodowym."
+  options: "P|F"
+  correctAnswer: P
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-3-2
+  taskRef: certyfikat-polski-B2-2017-listen-3
+  questionType: true_false
+  questionText: "Najpierw próbowała otworzyć samochód kluczykiem."
+  options: "P|F"
+  correctAnswer: F
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-3-3
+  taskRef: certyfikat-polski-B2-2017-listen-3
+  questionType: true_false
+  questionText: "Zdarzenie miało miejsce w czasie mrozu."
+  options: "P|F"
+  correctAnswer: P
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-3-4
+  taskRef: certyfikat-polski-B2-2017-listen-3
+  questionType: true_false
+  questionText: "Kobiecie w otwarciu zamka próbował pomóc kolega z pracy."
+  options: "P|F"
+  correctAnswer: F
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-3-5
+  taskRef: certyfikat-polski-B2-2017-listen-3
+  questionType: true_false
+  questionText: "Mechanicy doszli do wniosku, że kluczyk jest zepsuty."
+  options: "P|F"
+  correctAnswer: P
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-3-6
+  taskRef: certyfikat-polski-B2-2017-listen-3
+  questionType: true_false
+  questionText: "Kobieta nie znała numeru rejestracyjnego swego auta."
+  options: "P|F"
+  correctAnswer: F
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-3-7
+  taskRef: certyfikat-polski-B2-2017-listen-3
+  questionType: true_false
+  questionText: "Właściciela samochodu rozbawiła ta sytuacja."
+  options: "P|F"
+  correctAnswer: P
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-3-8
+  taskRef: certyfikat-polski-B2-2017-listen-3
+  questionType: true_false
+  questionText: "Mechanicy naprawili zamek w 40 minut."
+  options: "P|F"
+  correctAnswer: F
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-4-1
+  taskRef: certyfikat-polski-B2-2017-listen-4
+  questionType: matching
+  questionText: "B. mówi o różnych szkolnych pomieszczeniach"
+  options: "1|2|3|4"
+  correctAnswer: "1|2"
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
+  pointsQuarter: 8
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-4-2
+  taskRef: certyfikat-polski-B2-2017-listen-4
+  questionType: matching
+  questionText: "C. wspomina szkolne jedzenie"
+  options: "1|2|3|4"
+  correctAnswer: "2"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-4-3
+  taskRef: certyfikat-polski-B2-2017-listen-4
+  questionType: matching
+  questionText: "D. dobrze wspomina nauczycieli"
+  options: "1|2|3|4"
+  correctAnswer: "3|4"
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
+  pointsQuarter: 8
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-4-4
+  taskRef: certyfikat-polski-B2-2017-listen-4
+  questionType: matching
+  questionText: "E. mówi o elementach szkolnego ubrania"
+  options: "1|2|3|4"
+  correctAnswer: "1|2|4"
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
+  pointsQuarter: 12
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-4-5
+  taskRef: certyfikat-polski-B2-2017-listen-4
+  questionType: matching
+  questionText: "F. wspomina szkołę ponadpodstawową"
+  options: "1|2|3|4"
+  correctAnswer: "3"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-4-6
+  taskRef: certyfikat-polski-B2-2017-listen-4
+  questionType: matching
+  questionText: "G. pamięta rok rozpoczęcia nauki"
+  options: "1|2|3|4"
+  correctAnswer: "1"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-5-1
+  taskRef: certyfikat-polski-B2-2017-listen-5
+  questionType: fill_gap
+  questionText: "Jakimi słowami klientka określiła pracownicę pralni? (a)"
+  correctAnswer: "młodą"
+  gradingMode: open_manual
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-5-2
+  taskRef: certyfikat-polski-B2-2017-listen-5
+  questionType: fill_gap
+  questionText: "Jakimi słowami klientka określiła pracownicę pralni? (b)"
+  correctAnswer: "miłą"
+  gradingMode: open_manual
+  pointsQuarter: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-5-3
+  taskRef: certyfikat-polski-B2-2017-listen-5
+  questionType: fill_gap
+  questionText: "Przed czym ostrzegano klientkę?"
+  correctAnswer: "że być może nic się nie da z plamą zrobić"
+  gradingMode: open_manual
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-5-4
+  taskRef: certyfikat-polski-B2-2017-listen-5
+  questionType: fill_gap
+  questionText: "Na co klientka zgodziła się w rozmowie telefonicznej?"
+  correctAnswer: "na poeksperymentowanie domowymi sposobami"
+  gradingMode: open_manual
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-5-5
+  taskRef: certyfikat-polski-B2-2017-listen-5
+  questionType: fill_gap
+  questionText: "Ile klientka musiała dopłacić za dodatkową usługę?"
+  correctAnswer: nic
+  gradingMode: open_manual
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-5-6
+  taskRef: certyfikat-polski-B2-2017-listen-5
+  questionType: fill_gap
+  questionText: "W jaki sposób klientka podziękowała pracownicy pralni?"
+  correctAnswer: "napisała list z podziękowaniami do dyrekcji pralni"
+  gradingMode: open_manual
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-5-7
+  taskRef: certyfikat-polski-B2-2017-listen-5
+  questionType: fill_gap
+  questionText: "Kiedy klientka otrzymała odpowiedź na swoje pismo?"
+  correctAnswer: "po trzech tygodniach"
+  gradingMode: open_manual
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-5-8
+  taskRef: certyfikat-polski-B2-2017-listen-5
+  questionType: fill_gap
+  questionText: "W jakim stylu było napisane pismo od dyrekcji pralni?"
+  correctAnswer: "urzędowym"
+  gradingMode: open_manual
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-listening-5-9
+  taskRef: certyfikat-polski-B2-2017-listen-5
+  questionType: fill_gap
+  questionText: "Co spotkało pracownicę w wyniku listu klientki?"
+  correctAnswer: "została upomniana"
+  gradingMode: open_manual
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-listening-1-1
+  taskRef: certyfikat-polski-B2-2019-listen-1
+  questionType: multiple_choice
+  questionText: "Kobieta żali się, że jej partner"
+  options: "a) ukrywał przed nią ważne informacje.|b) nie zajmował się nią należycie.|c) zaprzeczył, że jest ojcem Julii."
+  correctAnswer: "a) ukrywał przed nią ważne informacje."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-listening-1-2
+  taskRef: certyfikat-polski-B2-2019-listen-1
+  questionType: multiple_choice
+  questionText: "Ojciec Julii trafił do więzienia"
+  options: "a) kiedy dziewczynka miała trzy lata.|b) na osiem lat.|c) trzy miesiące po narodzinach córki."
+  correctAnswer: "c) trzy miesiące po narodzinach córki."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-listening-1-3
+  taskRef: certyfikat-polski-B2-2019-listen-1
+  questionType: multiple_choice
+  questionText: "Rozmowa dotyczy"
+  options: "a) problemów dotykających osoby leworęczne.|b) skutków zmuszania osób leworęcznych do korzystania z prawej ręki.|c) związków między leworęcznością a problemami w nauce."
+  correctAnswer: "b) skutków zmuszania osób leworęcznych do korzystania z prawej ręki."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-listening-1-4
+  taskRef: certyfikat-polski-B2-2019-listen-1
+  questionType: multiple_choice
+  questionText: "Komplikacje, o których mowa w audycji, powstają, ponieważ mózg"
+  options: "a) nie odczytuje informacji związanych z orientacją w przestrzeni.|b) otrzymuje informacje, z którymi sobie nie radzi.|c) gubi część informacji."
+  correctAnswer: "b) otrzymuje informacje, z którymi sobie nie radzi."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-listening-1-5
+  taskRef: certyfikat-polski-B2-2019-listen-1
+  questionType: multiple_choice
+  questionText: "Rozmowa dotyczy"
+  options: "a) uprawiania sportu.|b) prowadzenia samochodu.|c) cen mebli."
+  correctAnswer: "b) prowadzenia samochodu."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-listening-1-6
+  taskRef: certyfikat-polski-B2-2019-listen-1
+  questionType: multiple_choice
+  questionText: "Wujek nie zgadza się na propozycję chłopca, ponieważ ten"
+  options: "a) nie jest w odpowiednim wieku.|b) nie jest jego kolegą.|c) od 9 miesięcy bierze udział w kursie."
+  correctAnswer: "a) nie jest w odpowiednim wieku."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-listening-1-7
+  taskRef: certyfikat-polski-B2-2019-listen-1
+  questionType: multiple_choice
+  questionText: "Córka rozmówców ma kłopoty"
+  options: "a) związane ze szkołą.|b) z wyprowadzką z domu.|c) z wyrażaniem emocji."
+  correctAnswer: "a) związane ze szkołą."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-listening-1-8
+  taskRef: certyfikat-polski-B2-2019-listen-1
+  questionType: multiple_choice
+  questionText: "Według mężczyzny córka"
+  options: "a) bardzo przeżywa rozwód rodziców.|b) obwinia się o kłopoty rodziców.|c) wykorzystuje rozstanie rodziców, by usprawiedliwić swoje zachowanie."
+  correctAnswer: "c) wykorzystuje rozstanie rodziców, by usprawiedliwić swoje zachowanie."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-listening-2-1
+  taskRef: certyfikat-polski-B2-2019-listen-2
+  questionType: multiple_choice
+  questionText: "915 to liczba pieców"
+  options: "a) które zostały zlikwidowane podczas czterech lat trwania projektu.|b) których nie udało się usunąć.|c) które znikną z Grudziądza w ciągu najbliższych czterech lat."
+  correctAnswer: "a) które zostały zlikwidowane podczas czterech lat trwania projektu."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-listening-2-2
+  taskRef: certyfikat-polski-B2-2019-listen-2
+  questionType: multiple_choice
+  questionText: "Wojewódzki i Narodowy Fundusz Ochrony Środowiska i Gospodarki Wodnej"
+  options: "a) częściowo dofinansował prowadzone działania.|b) pokrył całkowity koszt programu.|c) odpowiadał za kampanię informacyjną."
+  correctAnswer: "a) częściowo dofinansował prowadzone działania."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-listening-2-3
+  taskRef: certyfikat-polski-B2-2019-listen-2
+  questionType: multiple_choice
+  questionText: "Pomorska Grupa Konsultingowa zajmowała się"
+  options: "a) przygotowaniem projektu.|b) finansowaniem projektu.|c) projektem przez 4 lata."
+  correctAnswer: "c) projektem przez 4 lata."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-listening-2-4
+  taskRef: certyfikat-polski-B2-2019-listen-2
+  questionType: multiple_choice
+  questionText: "Kampania informacyjna skupiała się na"
+  options: "a) szczegółowym instruktażu wymiany pieca.|b) promocji zachowań ekologicznych i informacjach praktycznych.|c) sposobach działania różnego rodzaju pieców."
+  correctAnswer: "b) promocji zachowań ekologicznych i informacjach praktycznych."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-listening-2-5
+  taskRef: certyfikat-polski-B2-2019-listen-2
+  questionType: multiple_choice
+  questionText: "Podczas kampanii edukacyjnej co roku"
+  options: "a) szkolono cztery grupy odbiorców.|b) zmieniano jej program.|c) zmieniał się jej odbiorca."
+  correctAnswer: "c) zmieniał się jej odbiorca."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-listening-2-6
+  taskRef: certyfikat-polski-B2-2019-listen-2
+  questionType: multiple_choice
+  questionText: "Program Kawka III"
+  options: "a) nigdy nie był planowany.|b) nie doszedł ostatecznie do skutku.|c) zakończył się wymianą 780 pieców."
+  correctAnswer: "b) nie doszedł ostatecznie do skutku."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-listening-3-1
+  taskRef: certyfikat-polski-B2-2019-listen-3
+  questionType: true_false
+  questionText: "W suwalskich rodzinach zastępczych wychowuje się około 100 dzieci."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-listening-3-2
+  taskRef: certyfikat-polski-B2-2019-listen-3
+  questionType: true_false
+  questionText: "MOPS planuje kolejne szkolenie jesienią."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-listening-3-3
+  taskRef: certyfikat-polski-B2-2019-listen-3
+  questionType: true_false
+  questionText: "Wskazaniem do umieszczenia dziecka w rodzinie zastępczej jest m.in. wiek dziecka."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-listening-3-4
+  taskRef: certyfikat-polski-B2-2019-listen-3
+  questionType: true_false
+  questionText: "W tej chwili w Suwałkach jest 10 kandydatów czekających na przyjęcie dziecka."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-listening-3-5
+  taskRef: certyfikat-polski-B2-2019-listen-3
+  questionType: true_false
+  questionText: "MOPS zwraca się z apelem do mieszkańców, którzy mają możliwości i są dyspozycyjni."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-listening-3-6
+  taskRef: certyfikat-polski-B2-2019-listen-3
+  questionType: true_false
+  questionText: "Sztuka pomaga w wychowaniu dzieci."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-listening-3-7
+  taskRef: certyfikat-polski-B2-2019-listen-3
+  questionType: true_false
+  questionText: "Zdaniem Leszka Lewoca rodziny zastępcze w Suwałkach przyjmują dzieci z chęci zysku."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-listening-3-8
+  taskRef: certyfikat-polski-B2-2019-listen-3
+  questionType: true_false
+  questionText: "Pieniądze na utrzymanie dziecka w rodzinie zastępczej pochodzą z dwóch źródeł."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-listening-4-1
+  taskRef: certyfikat-polski-B2-2019-listen-4
+  questionType: matching
+  questionText: "Zatrucie się nią nie musi oznaczać śmierci."
+  options: "A|B|C|D|E"
+  correctAnswer: B
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-listening-4-2
+  taskRef: certyfikat-polski-B2-2019-listen-4
+  questionType: matching
+  questionText: "Może zabić nawet jej zapach."
+  options: "A|B|C|D|E"
+  correctAnswer: E
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-listening-4-3
+  taskRef: certyfikat-polski-B2-2019-listen-4
+  questionType: matching
+  questionText: "Pomagała kobietom stać się bardziej atrakcyjnymi."
+  options: "A|B|C|D|E"
+  correctAnswer: B
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-listening-4-4
+  taskRef: certyfikat-polski-B2-2019-listen-4
+  questionType: matching
+  questionText: "Została wykorzystana w rozgrywkach na szczytach władzy."
+  options: "A|B|C|D|E"
+  correctAnswer: "B|D"
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
+  pointsQuarter: 8
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-listening-4-5
+  taskRef: certyfikat-polski-B2-2019-listen-4
+  questionType: matching
+  questionText: "Była używana podczas zdobywania pożywienia."
+  options: "A|B|C|D|E"
+  correctAnswer: D
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-listening-4-6
+  taskRef: certyfikat-polski-B2-2019-listen-4
+  questionType: matching
+  questionText: "Jest lubianą w Europie rośliną ozdobną."
+  options: "A|B|C|D|E"
+  correctAnswer: C
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-listening-4-7
+  taskRef: certyfikat-polski-B2-2019-listen-4
+  questionType: matching
+  questionText: "Występuje powszechnie w różnych częściach świata."
+  options: "A|B|C|D|E"
+  correctAnswer: "A|E"
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
+  pointsQuarter: 8
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-listening-4-8
+  taskRef: certyfikat-polski-B2-2019-listen-4
+  questionType: matching
+  questionText: "Odpowiednie procesy pozwalają pozbyć się z niej trującej substancji."
+  options: "A|B|C|D|E"
+  correctAnswer: A
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-listening-5-1
+  taskRef: certyfikat-polski-B2-2019-listen-5
+  questionType: fill_gap
+  questionText: "Jakie skutki ma dla naszego organizmu nadmierne spożycie soli? a) …; b) …"
+  correctAnswer: "opuchlizna|utrudnienie i spowolnienie pracy nerek"
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
+  gradingMode: open_manual
+  pointsQuarter: 8
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-listening-5-2
+  taskRef: certyfikat-polski-B2-2019-listen-5
+  questionType: fill_gap
+  questionText: "Czemu odpowiada zawartość soli w hamburgerze i frytkach?"
+  correctAnswer: "łyżeczce soli"
+  gradingMode: open_manual
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-listening-5-3
+  taskRef: certyfikat-polski-B2-2019-listen-5
+  questionType: fill_gap
+  questionText: "Jakie składniki powodują, że w kebabie zawartość soli jest aż tak wysoka? a) …; b) …"
+  correctAnswer: "posolone, przetworzone mięso|sosy"
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
+  gradingMode: open_manual
+  pointsQuarter: 8
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-listening-5-4
+  taskRef: certyfikat-polski-B2-2019-listen-5
+  questionType: fill_gap
+  questionText: "Co jeszcze przyswaja osoba spożywająca co dzień fast foody? Dwie odpowiedzi po 0,5 p."
+  correctAnswer: "tłuszcz|węglowodany"
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 2
+  gradingMode: open_manual
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-listening-5-5
+  taskRef: certyfikat-polski-B2-2019-listen-5
+  questionType: fill_gap
+  questionText: "Dlaczego nadmierne spożycie soli może prowadzić do osteoporozy?"
+  correctAnswer: "zwiększa wydalanie magnezu i wapnia z organizmu"
+  gradingMode: open_manual
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-listening-5-6
+  taskRef: certyfikat-polski-B2-2019-listen-5
+  questionType: fill_gap
+  questionText: "Do jakich zmian w naszym organizmie może dojść bezpośrednio po spożyciu fast foodów?"
+  correctAnswer: "do podwyższenia ciśnienia tętniczego"
+  gradingMode: open_manual
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-listening-1-1
+  taskRef: certyfikat-polski-B2-2020-listen-1
+  questionType: multiple_choice
+  questionText: "Z rozmowy wynika, że kobiety"
+  options: "a) znajdują się na terenie szpitala.|b) umawiają się na spotkanie.|c) poznały się w szpitalu."
+  correctAnswer: "c) poznały się w szpitalu."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-listening-1-2
+  taskRef: certyfikat-polski-B2-2020-listen-1
+  questionType: multiple_choice
+  questionText: "Jedna z kobiet"
+  options: "a) ma chorego dziadka.|b) cierpi na bóle głowy.|c) remontuje swój gabinet."
+  correctAnswer: "a) ma chorego dziadka."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-listening-1-3
+  taskRef: certyfikat-polski-B2-2020-listen-1
+  questionType: multiple_choice
+  questionText: "W tym fragmencie mówi się o"
+  options: "a) polskich firmach, które unikają płacenia podatków.|b) nieuczciwych praktykach zagranicznych firm.|c) stratach finansowych polskich przedsiębiorców."
+  correctAnswer: "b) nieuczciwych praktykach zagranicznych firm."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-listening-1-4
+  taskRef: certyfikat-polski-B2-2020-listen-1
+  questionType: multiple_choice
+  questionText: "Z nagrania wynika, że w Polsce"
+  options: "a) dzięki wpływom z podatku CIT są budowane drogi.|b) zagraniczne korporacje zyskują na budowie autostrad.|c) oszustwa podatkowe ograniczają możliwości inwestycji."
+  correctAnswer: "c) oszustwa podatkowe ograniczają możliwości inwestycji."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-listening-1-5
+  taskRef: certyfikat-polski-B2-2020-listen-1
+  questionType: multiple_choice
+  questionText: "Z rozmowy wynika, że"
+  options: "a) kobieta rozstała się mężem.|b) sprawa rozwodowa ciągnie się od 11 lat.|c) kobieta nie chce mówić o dzieciach."
+  correctAnswer: "a) kobieta rozstała się mężem."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-listening-1-6
+  taskRef: certyfikat-polski-B2-2020-listen-1
+  questionType: multiple_choice
+  questionText: "Kobieta mówi o"
+  options: "a) wymaganiach dawnego partnera.|b) działalności zawodowej swojej i byłego męża.|c) obecnych relacjach z byłym partnerem."
+  correctAnswer: "c) obecnych relacjach z byłym partnerem."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-listening-1-7
+  taskRef: certyfikat-polski-B2-2020-listen-1
+  questionType: multiple_choice
+  questionText: "Relacja dotyczy"
+  options: "a) wypadku drogowego podczas egzaminu na prawo jazdy.|b) reakcji kursanta na wynik egzaminu na prawo jazdy.|c) nowej formuły egzaminu na prawo jazdy w Koninie."
+  correctAnswer: "b) reakcji kursanta na wynik egzaminu na prawo jazdy."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-listening-1-8
+  taskRef: certyfikat-polski-B2-2020-listen-1
+  questionType: multiple_choice
+  questionText: "Z relacji wynika, że w Wojewódzkim Ośrodku Ruchu Drogowego w Koninie"
+  options: "a) nigdy wcześniej nie zdarzyła się podobna sytuacja.|b) działalność ośrodka po raz kolejny przyniosła straty.|c) egzamin na prawo jazdy odbył się po raz pierwszy."
+  correctAnswer: "a) nigdy wcześniej nie zdarzyła się podobna sytuacja."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-listening-2-1
+  taskRef: certyfikat-polski-B2-2020-listen-2
+  questionType: true_false
+  questionText: "Gospodarka ta jest najbardziej rozpowszechnioną w internecie formą wymiany dóbr i usług."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-listening-2-2
+  taskRef: certyfikat-polski-B2-2020-listen-2
+  questionType: true_false
+  questionText: "Współdzielenie mieszkania polega na codziennym użytkowaniu mieszkania przez właściciela i inne osoby."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-listening-2-3
+  taskRef: certyfikat-polski-B2-2020-listen-2
+  questionType: true_false
+  questionText: "Gospodarka współpracy może być atrakcyjnym rozwiązaniem dla osób niepracujących zawodowo."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-listening-2-4
+  taskRef: certyfikat-polski-B2-2020-listen-2
+  questionType: true_false
+  questionText: "Pracownicy etatowi nie mogą korzystać z tej formy dodatkowego zarobkowania."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-listening-2-5
+  taskRef: certyfikat-polski-B2-2020-listen-2
+  questionType: true_false
+  questionText: "Typowym przykładem gospodarki współpracy są usługi transportowe."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-listening-2-6
+  taskRef: certyfikat-polski-B2-2020-listen-2
+  questionType: true_false
+  questionText: "Rozwój ekonomii współdzielonej skutkuje dynamicznymi zmianami w regulacjach prawnych."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-listening-2-7
+  taskRef: certyfikat-polski-B2-2020-listen-2
+  questionType: true_false
+  questionText: "Uczestnicy tego rynku ekonomii zwykle nie legalizują swojej działalności."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-listening-2-8
+  taskRef: certyfikat-polski-B2-2020-listen-2
+  questionType: true_false
+  questionText: "W Estonii wprowadzono nowe rozwiązania prawne regulujące tę formę zarobkowania."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-listening-2-9
+  taskRef: certyfikat-polski-B2-2020-listen-2
+  questionType: true_false
+  questionText: "Ekonomia współdzielenia może prowadzić do zagrożenia bezrobociem."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-listening-3-1
+  taskRef: certyfikat-polski-B2-2020-listen-3
+  questionType: matching
+  questionText: "W tym miejscu widoczne są wpływy innych kultur."
+  options: "A|B|C|D"
+  correctAnswer: "A|D"
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
+  pointsQuarter: 8
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-listening-3-2
+  taskRef: certyfikat-polski-B2-2020-listen-3
+  questionType: matching
+  questionText: "Prace budowlane w tym miejscu nie zostały sfinalizowane."
+  options: "A|B|C|D"
+  correctAnswer: D
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-listening-3-3
+  taskRef: certyfikat-polski-B2-2020-listen-3
+  questionType: matching
+  questionText: "To miejsce było odkrywane stopniowo."
+  options: "A|B|C|D"
+  correctAnswer: C
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-listening-3-4
+  taskRef: certyfikat-polski-B2-2020-listen-3
+  questionType: matching
+  questionText: "Ozdobą tego miejsca były rzadkie okazy zwierząt."
+  options: "A|B|C|D"
+  correctAnswer: D
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-listening-3-5
+  taskRef: certyfikat-polski-B2-2020-listen-3
+  questionType: matching
+  questionText: "Celem wizyty w tym miejscu może być edukacja poprzez obserwację."
+  options: "A|B|C|D"
+  correctAnswer: C
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-listening-3-6
+  taskRef: certyfikat-polski-B2-2020-listen-3
+  questionType: matching
+  questionText: "Jedną z funkcji tego obiektu jest zapewnienie miejsca wiecznego spoczynku."
+  options: "A|B|C|D"
+  correctAnswer: "A|B"
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
+  pointsQuarter: 8
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-listening-3-7
+  taskRef: certyfikat-polski-B2-2020-listen-3
+  questionType: matching
+  questionText: "To miejsce związane jest z ówczesną sytuacją religijną."
+  options: "A|B|C|D"
+  correctAnswer: B
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-listening-3-8
+  taskRef: certyfikat-polski-B2-2020-listen-3
+  questionType: matching
+  questionText: "To największy obiekt tego typu w Polsce."
+  options: "A|B|C|D"
+  correctAnswer: D
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-listening-4-1
+  taskRef: certyfikat-polski-B2-2020-listen-4
+  questionType: multiple_choice
+  questionText: "Jakub Błaszczykowski"
+  options: "a) jest miłośnikiem gołębi pocztowych.|b) wspiera hodowców gołębi pocztowych.|c) prowadzi działalność dobroczynną."
+  correctAnswer: "c) prowadzi działalność dobroczynną."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-listening-4-2
+  taskRef: certyfikat-polski-B2-2020-listen-4
+  questionType: multiple_choice
+  questionText: "Hodowcy gołębi pocztowych"
+  options: "a) założyli fundację wspierającą dzieci i młodzież.|b) powtórnie przeznaczają zyski z imprezy na cele charytatywne.|c) od wielu lat współpracują z fundacją „Ludzki Gest”."
+  correctAnswer: "b) powtórnie przeznaczają zyski z imprezy na cele charytatywne."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-listening-4-3
+  taskRef: certyfikat-polski-B2-2020-listen-4
+  questionType: multiple_choice
+  questionText: "Osoby, które wsparły fundację, mogły liczyć na"
+  options: "a) spotkanie ze sportowcem i autograf.|b) różne nagrody rzeczowe.|c) wzięcie udziału w finale licytacji."
+  correctAnswer: "b) różne nagrody rzeczowe."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-listening-4-4
+  taskRef: certyfikat-polski-B2-2020-listen-4
+  questionType: multiple_choice
+  questionText: "Dochód z licytacji gołębi wesprze"
+  options: "a) działania fundacji Jakuba Błaszczykowskiego.|b) młodych hodowców tych ptaków.|c) organizację święta hodowców gołębi."
+  correctAnswer: "a) działania fundacji Jakuba Błaszczykowskiego."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-listening-4-5
+  taskRef: certyfikat-polski-B2-2020-listen-4
+  questionType: multiple_choice
+  questionText: "Podczas preaukcji gołębi"
+  options: "a) nie udało się sprzedać wszystkich ptaków.|b) zebrano kwotę 230 tysięcy złotych.|c) zlicytowano gołębie na kwotę 480 tysięcy złotych."
+  correctAnswer: "c) zlicytowano gołębie na kwotę 480 tysięcy złotych."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-listening-4-6
+  taskRef: certyfikat-polski-B2-2020-listen-4
+  questionType: multiple_choice
+  questionText: "W aukcji finałowej"
+  options: "a) licytowane będą najbardziej wartościowe ptaki.|b) weźmie udział około 230 zainteresowanych.|c) będą sprzedawane gołębie pozostałe z preaukcji."
+  correctAnswer: "a) licytowane będą najbardziej wartościowe ptaki."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-listening-4-7
+  taskRef: certyfikat-polski-B2-2020-listen-4
+  questionType: multiple_choice
+  questionText: "Hodowcy gołębi pocztowych w Polsce"
+  options: "a) obecnie hodują 45 tysięcy ptaków.|b) prowadzą swoją działalność od 45 lat.|c) w chwili obecnej stanowią liczną grupę."
+  correctAnswer: "c) w chwili obecnej stanowią liczną grupę."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-listening-5-1
+  taskRef: certyfikat-polski-B2-2020-listen-5
+  questionType: fill_gap
+  questionText: "Z którego kraju pochodzi kawa?"
+  correctAnswer: "z dzisiejszej Etiopii"
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-listening-5-2
+  taskRef: certyfikat-polski-B2-2020-listen-5
+  questionType: fill_gap
+  questionText: "Jakie znaczenie początkowo miało słowo kahva?"
+  correctAnswer: wino
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-listening-5-3
+  taskRef: certyfikat-polski-B2-2020-listen-5
+  questionType: fill_gap
+  questionText: "Jaki wpływ na organizm miało żucie ziaren kawy?"
+  correctAnswer: "pobudzający"
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-listening-5-4
+  taskRef: certyfikat-polski-B2-2020-listen-5
+  questionType: fill_gap
+  questionText: "Dlaczego ziarna kawy, które przeżuwano, nie miały cierpkiego posmaku?"
+  correctAnswer: "ponieważ nie były palone"
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-listening-5-5
+  taskRef: certyfikat-polski-B2-2020-listen-5
+  questionType: fill_gap
+  questionText: "Kiedy kawa rozpowszechniła się na terenach Polski?"
+  correctAnswer: "kilka, kilkanaście lat po śmierci króla Jana III Sobieskiego"
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-listening-5-6
+  taskRef: certyfikat-polski-B2-2020-listen-5
+  questionType: fill_gap
+  questionText: "Które dwa polskie słowa mają turecki rodowód? a) …; b) …"
+  correctAnswer: "czajnik|filiżanka"
+  answerMode: unordered_set
+  pointsQuarter: 4
+  creditPerCorrectQuarter: 2
+  gradingMode: open_manual
+}

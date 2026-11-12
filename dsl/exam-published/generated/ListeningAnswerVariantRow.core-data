@@ -1,0 +1,85 @@
+DSL 1
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2017-listening-5-1-alt-1
+  questionRef: certyfikat-polski-B2-2017-listening-5-1
+  answer: "młoda"
+  earnedQuarter: 2
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2017-listening-5-1-alt-2
+  questionRef: certyfikat-polski-B2-2017-listening-5-1
+  answer: "młoda osoba"
+  earnedQuarter: 2
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2017-listening-5-1-alt-3
+  questionRef: certyfikat-polski-B2-2017-listening-5-1
+  answer: "młodą osobę"
+  earnedQuarter: 2
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2017-listening-5-2-alt-1
+  questionRef: certyfikat-polski-B2-2017-listening-5-2
+  answer: "miła"
+  earnedQuarter: 2
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2017-listening-5-2-alt-2
+  questionRef: certyfikat-polski-B2-2017-listening-5-2
+  answer: "miła osoba"
+  earnedQuarter: 2
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2017-listening-5-2-alt-3
+  questionRef: certyfikat-polski-B2-2017-listening-5-2
+  answer: "miłą osobę"
+  earnedQuarter: 2
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2019-listening-5-2-alt-1
+  questionRef: certyfikat-polski-B2-2019-listening-5-2
+  answer: "całodziennemu zapotrzebowaniu na sól"
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2019-listening-5-5-alt-1
+  questionRef: certyfikat-polski-B2-2019-listening-5-5
+  answer: "organizm wydala więcej magnezu i wapnia"
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2019-listening-5-6-alt-1
+  questionRef: certyfikat-polski-B2-2019-listening-5-6
+  answer: "ciśnienie tętnicze rośnie"
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2020-listening-5-1-partial-1
+  questionRef: certyfikat-polski-B2-2020-listening-5-1
+  answer: "z Afryki"
+  earnedQuarter: 2
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2020-listening-5-1-partial-2
+  questionRef: certyfikat-polski-B2-2020-listening-5-1
+  answer: "z regionu Kaffa"
+  earnedQuarter: 2
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2020-listening-5-3-alt-1
+  questionRef: certyfikat-polski-B2-2020-listening-5-3
+  answer: pobudzenie
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2020-listening-5-3-alt-2
+  questionRef: certyfikat-polski-B2-2020-listening-5-3
+  answer: "odpowiednie pobudzenie"
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2020-listening-5-4-alt-1
+  questionRef: certyfikat-polski-B2-2020-listening-5-4
+  answer: "ponieważ ziarna nie były palone"
+  earnedQuarter: 4
+}

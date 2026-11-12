@@ -1,0 +1,49 @@
+DSL 1
+EXAM {
+  examId: certyfikat-polski-B1-2017
+  provider: certyfikat-polski
+  targetLanguage: pl
+  level: B1
+  year: 2017
+  sourceUrl: "https://certyfikatpolski.pl/o-egzaminie/przykladowe-testy-zbiory-zadan/"
+}
+EXAM {
+  examId: certyfikat-polski-B1-2019
+  provider: certyfikat-polski
+  targetLanguage: pl
+  level: B1
+  year: 2019
+  sourceUrl: "https://certyfikatpolski.pl/o-egzaminie/przykladowe-testy-zbiory-zadan/"
+}
+EXAM {
+  examId: certyfikat-polski-B1-2020
+  provider: certyfikat-polski
+  targetLanguage: pl
+  level: B1
+  year: 2020
+  sourceUrl: "https://certyfikatpolski.pl/o-egzaminie/przykladowe-testy-zbiory-zadan/"
+}
+EXAM {
+  examId: certyfikat-polski-B2-2017
+  provider: certyfikat-polski
+  targetLanguage: pl
+  level: B2
+  year: 2017
+  sourceUrl: "https://certyfikatpolski.pl/o-egzaminie/przykladowe-testy-zbiory-zadan/"
+}
+EXAM {
+  examId: certyfikat-polski-B2-2019
+  provider: certyfikat-polski
+  targetLanguage: pl
+  level: B2
+  year: 2019
+  sourceUrl: "https://certyfikatpolski.pl/o-egzaminie/przykladowe-testy-zbiory-zadan/"
+}
+EXAM {
+  examId: certyfikat-polski-B2-2020
+  provider: certyfikat-polski
+  targetLanguage: pl
+  level: B2
+  year: 2020
+  sourceUrl: "https://certyfikatpolski.pl/o-egzaminie/przykladowe-testy-zbiory-zadan/"
+}

@@ -13,6 +13,14 @@ RECORD ExamRow KEY examId COUNT 1..
   license: string OPTIONAL
 END
 
+# A reviewed source directory becomes visible under a stable public route.
+RECORD ExamPublicationRow KEY routeId COUNT 1..
+  routeId: string
+  examRef: ref ExamRow
+  displayTitle: string
+  sourceDir: string
+END
+
 # Certified written-module cover values. A timed sitting requires all four rows.
 RECORD ExamModuleRow KEY moduleId COUNT 1..
   moduleId: string
@@ -49,6 +57,8 @@ RECORD ListeningQuestionRow KEY questionId COUNT 1..
   gradingMode: enum exact|open_manual OPTIONAL
   answerMode: enum single|unordered_set OPTIONAL
   creditPerCorrectQuarter: int OPTIONAL
+  requiredSelections: int OPTIONAL
+  setOverselectionMode: enum legacy_wrong|manual_review OPTIONAL
 END
 
 RECORD ListeningAnswerVariantRow KEY variantId COUNT 1..
@@ -56,6 +66,20 @@ RECORD ListeningAnswerVariantRow KEY variantId COUNT 1..
   questionRef: ref ListeningQuestionRow
   answer: string
   earnedQuarter: int
+END
+
+# A fact is an independently creditable answer; aliases never create new credit.
+RECORD ListeningAcceptedFactRow KEY factId COUNT 0..
+  factId: string
+  questionRef: ref ListeningQuestionRow
+  creditQuarter: int
+  displayText: string
+END
+
+RECORD ListeningAcceptedFactAliasRow KEY aliasId COUNT 0..
+  aliasId: string
+  factRef: ref ListeningAcceptedFactRow
+  answerText: string
 END
 
 # Reading: passages with questions; paragraphs derived from text by blank-line split.
@@ -81,14 +105,29 @@ RECORD ReadingQuestionRow KEY questionId COUNT 1..
   gradingMode: enum exact|open_manual OPTIONAL
   answerMode: enum single|unordered_set OPTIONAL
   creditPerCorrectQuarter: int OPTIONAL
+  requiredSelections: int OPTIONAL
+  setOverselectionMode: enum legacy_wrong|manual_review OPTIONAL
   relevantParagraph: int OPTIONAL
 END
 
-RECORD ReadingAnswerVariantRow KEY variantId COUNT 1..
+RECORD ReadingAnswerVariantRow KEY variantId COUNT 0..
   variantId: string
   questionRef: ref ReadingQuestionRow
   answer: string
   earnedQuarter: int
+END
+
+RECORD ReadingAcceptedFactRow KEY factId COUNT 0..
+  factId: string
+  questionRef: ref ReadingQuestionRow
+  creditQuarter: int
+  displayText: string
+END
+
+RECORD ReadingAcceptedFactAliasRow KEY aliasId COUNT 0..
+  aliasId: string
+  factRef: ref ReadingAcceptedFactRow
+  answerText: string
 END
 
 # Grammar: structured tests with items of various types.

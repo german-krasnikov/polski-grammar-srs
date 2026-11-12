@@ -1,0 +1,439 @@
+DSL 1
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B1-2017-grammar-6-bank-1
+  testRef: certyfikat-polski-B1-2017-grammar-6
+  position: 1
+  text: a
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B1-2017-grammar-6-bank-2
+  testRef: certyfikat-polski-B1-2017-grammar-6
+  position: 2
+  text: ale
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B1-2017-grammar-6-bank-3
+  testRef: certyfikat-polski-B1-2017-grammar-6
+  position: 3
+  text: "chociaż"
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B1-2017-grammar-6-bank-4
+  testRef: certyfikat-polski-B1-2017-grammar-6
+  position: 4
+  text: czy
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B1-2017-grammar-6-bank-5
+  testRef: certyfikat-polski-B1-2017-grammar-6
+  position: 5
+  text: gdyby
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B1-2017-grammar-6-bank-6
+  testRef: certyfikat-polski-B1-2017-grammar-6
+  position: 6
+  text: i
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B1-2017-grammar-6-bank-7
+  testRef: certyfikat-polski-B1-2017-grammar-6
+  position: 7
+  text: "że"
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: B1-2019-grammar-2-bank-1
+  testRef: B1-2019-grammar-2
+  position: 1
+  text: "ponieważ"
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: B1-2019-grammar-2-bank-2
+  testRef: B1-2019-grammar-2
+  position: 2
+  text: "jeśli"
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: B1-2019-grammar-2-bank-3
+  testRef: B1-2019-grammar-2
+  position: 3
+  text: czy
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: B1-2019-grammar-2-bank-4
+  testRef: B1-2019-grammar-2
+  position: 4
+  text: "żeby"
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: B1-2019-grammar-2-bank-5
+  testRef: B1-2019-grammar-2
+  position: 5
+  text: "którzy"
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: B1-2019-grammar-2-bank-6
+  testRef: B1-2019-grammar-2
+  position: 6
+  text: "że"
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: B1-2019-grammar-2-bank-7
+  testRef: B1-2019-grammar-2
+  position: 7
+  text: lecz
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: B1-2019-grammar-8-bank-1
+  testRef: B1-2019-grammar-8
+  position: 1
+  text: bez
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: B1-2019-grammar-8-bank-2
+  testRef: B1-2019-grammar-8
+  position: 2
+  text: "między"
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: B1-2019-grammar-8-bank-3
+  testRef: B1-2019-grammar-8
+  position: 3
+  text: za
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: B1-2019-grammar-8-bank-4
+  testRef: B1-2019-grammar-8
+  position: 4
+  text: przez
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: B1-2019-grammar-8-bank-5
+  testRef: B1-2019-grammar-8
+  position: 5
+  text: w
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: B1-2019-grammar-8-bank-6
+  testRef: B1-2019-grammar-8
+  position: 6
+  text: "około"
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: B1-2019-grammar-8-bank-7
+  testRef: B1-2019-grammar-8
+  position: 7
+  text: "oprócz"
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B1-2020-grammar-2-bank-1
+  testRef: certyfikat-polski-B1-2020-grammar-2
+  position: 1
+  text: "że"
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B1-2020-grammar-2-bank-2
+  testRef: certyfikat-polski-B1-2020-grammar-2
+  position: 2
+  text: oraz
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B1-2020-grammar-2-bank-3
+  testRef: certyfikat-polski-B1-2020-grammar-2
+  position: 3
+  text: ale
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B1-2020-grammar-2-bank-4
+  testRef: certyfikat-polski-B1-2020-grammar-2
+  position: 4
+  text: "chociaż"
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B1-2020-grammar-2-bank-5
+  testRef: certyfikat-polski-B1-2020-grammar-2
+  position: 5
+  text: czyli
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B1-2020-grammar-2-bank-6
+  testRef: certyfikat-polski-B1-2020-grammar-2
+  position: 6
+  text: ani
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B1-2020-grammar-2-bank-7
+  testRef: certyfikat-polski-B1-2020-grammar-2
+  position: 7
+  text: "więc"
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B1-2020-grammar-8-bank-1
+  testRef: certyfikat-polski-B1-2020-grammar-8
+  position: 1
+  text: do
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B1-2020-grammar-8-bank-2
+  testRef: certyfikat-polski-B1-2020-grammar-8
+  position: 2
+  text: w
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B1-2020-grammar-8-bank-3
+  testRef: certyfikat-polski-B1-2020-grammar-8
+  position: 3
+  text: nad
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B1-2020-grammar-8-bank-4
+  testRef: certyfikat-polski-B1-2020-grammar-8
+  position: 4
+  text: przed
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B1-2020-grammar-8-bank-5
+  testRef: certyfikat-polski-B1-2020-grammar-8
+  position: 5
+  text: z
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B1-2020-grammar-8-bank-6
+  testRef: certyfikat-polski-B1-2020-grammar-8
+  position: 6
+  text: na
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B1-2020-grammar-8-bank-7
+  testRef: certyfikat-polski-B1-2020-grammar-8
+  position: 7
+  text: w
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2017-grammar-2-bank-1
+  testRef: certyfikat-polski-B2-2017-grammar-2
+  position: 1
+  text: z
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2017-grammar-2-bank-2
+  testRef: certyfikat-polski-B2-2017-grammar-2
+  position: 2
+  text: "oprócz"
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2017-grammar-2-bank-3
+  testRef: certyfikat-polski-B2-2017-grammar-2
+  position: 3
+  text: przy
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2017-grammar-2-bank-4
+  testRef: certyfikat-polski-B2-2017-grammar-2
+  position: 4
+  text: o
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2017-grammar-2-bank-5
+  testRef: certyfikat-polski-B2-2017-grammar-2
+  position: 5
+  text: "około"
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2017-grammar-2-bank-6
+  testRef: certyfikat-polski-B2-2017-grammar-2
+  position: 6
+  text: "spośród"
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2017-grammar-2-bank-7
+  testRef: certyfikat-polski-B2-2017-grammar-2
+  position: 7
+  text: do
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2017-grammar-2-bank-8
+  testRef: certyfikat-polski-B2-2017-grammar-2
+  position: 8
+  text: po
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2017-grammar-2-bank-9
+  testRef: certyfikat-polski-B2-2017-grammar-2
+  position: 9
+  text: od
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2017-grammar-2-bank-10
+  testRef: certyfikat-polski-B2-2017-grammar-2
+  position: 10
+  text: na
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2017-grammar-2-bank-11
+  testRef: certyfikat-polski-B2-2017-grammar-2
+  position: 11
+  text: w
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2017-grammar-2-bank-12
+  testRef: certyfikat-polski-B2-2017-grammar-2
+  position: 12
+  text: ponad
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2019-grammar-2-bank-1
+  testRef: certyfikat-polski-B2-2019-grammar-2
+  position: 1
+  text: ponad
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2019-grammar-2-bank-2
+  testRef: certyfikat-polski-B2-2019-grammar-2
+  position: 2
+  text: przy
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2019-grammar-2-bank-3
+  testRef: certyfikat-polski-B2-2019-grammar-2
+  position: 3
+  text: wbrew
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2019-grammar-2-bank-4
+  testRef: certyfikat-polski-B2-2019-grammar-2
+  position: 4
+  text: na
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2019-grammar-2-bank-5
+  testRef: certyfikat-polski-B2-2019-grammar-2
+  position: 5
+  text: "między"
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2019-grammar-2-bank-6
+  testRef: certyfikat-polski-B2-2019-grammar-2
+  position: 6
+  text: nad
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2019-grammar-2-bank-7
+  testRef: certyfikat-polski-B2-2019-grammar-2
+  position: 7
+  text: na
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2019-grammar-2-bank-8
+  testRef: certyfikat-polski-B2-2019-grammar-2
+  position: 8
+  text: po
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2019-grammar-2-bank-9
+  testRef: certyfikat-polski-B2-2019-grammar-2
+  position: 9
+  text: o
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2019-grammar-2-bank-10
+  testRef: certyfikat-polski-B2-2019-grammar-2
+  position: 10
+  text: do
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2019-grammar-2-bank-11
+  testRef: certyfikat-polski-B2-2019-grammar-2
+  position: 11
+  text: "według"
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2019-grammar-2-bank-12
+  testRef: certyfikat-polski-B2-2019-grammar-2
+  position: 12
+  text: z
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2019-grammar-2-bank-13
+  testRef: certyfikat-polski-B2-2019-grammar-2
+  position: 13
+  text: "dzięki"
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2020-grammar-2-bank-1
+  testRef: certyfikat-polski-B2-2020-grammar-2
+  position: 1
+  text: dla
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2020-grammar-2-bank-2
+  testRef: certyfikat-polski-B2-2020-grammar-2
+  position: 2
+  text: "dzięki"
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2020-grammar-2-bank-3
+  testRef: certyfikat-polski-B2-2020-grammar-2
+  position: 3
+  text: na
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2020-grammar-2-bank-4
+  testRef: certyfikat-polski-B2-2020-grammar-2
+  position: 4
+  text: na
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2020-grammar-2-bank-5
+  testRef: certyfikat-polski-B2-2020-grammar-2
+  position: 5
+  text: o
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2020-grammar-2-bank-6
+  testRef: certyfikat-polski-B2-2020-grammar-2
+  position: 6
+  text: od
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2020-grammar-2-bank-7
+  testRef: certyfikat-polski-B2-2020-grammar-2
+  position: 7
+  text: do
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2020-grammar-2-bank-8
+  testRef: certyfikat-polski-B2-2020-grammar-2
+  position: 8
+  text: przy
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2020-grammar-2-bank-9
+  testRef: certyfikat-polski-B2-2020-grammar-2
+  position: 9
+  text: u
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2020-grammar-2-bank-10
+  testRef: certyfikat-polski-B2-2020-grammar-2
+  position: 10
+  text: w
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2020-grammar-2-bank-11
+  testRef: certyfikat-polski-B2-2020-grammar-2
+  position: 11
+  text: "wokół"
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2020-grammar-2-bank-12
+  testRef: certyfikat-polski-B2-2020-grammar-2
+  position: 12
+  text: wbrew
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2020-grammar-2-bank-13
+  testRef: certyfikat-polski-B2-2020-grammar-2
+  position: 13
+  text: za
+}

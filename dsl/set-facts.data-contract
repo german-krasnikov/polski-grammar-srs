@@ -1,0 +1,29 @@
+DSL 1
+# Independent new fact-set scorer cases; each fact and alias belongs to one case.
+RECORD SetFactCaseRow KEY id COUNT 1..
+  id: string
+  requiredSelections: int
+  maximumQuarter: int
+  answer: string
+  options: string OPTIONAL
+  mode: enum exact|open_manual
+  setOverselectionMode: enum legacy_wrong|manual_review OPTIONAL
+  verifyModelDefault: bool OPTIONAL
+  expectedStatus: enum confirmed_full|confirmed_partial|pending_manual|wrong OPTIONAL
+  expectedConfirmedQuarter: int OPTIONAL
+  expectedPendingQuarter: int OPTIONAL
+  expectIntegrityFailure: bool OPTIONAL
+END
+
+RECORD SetFixtureFactRow KEY factId COUNT 1..
+  factId: string
+  caseRef: ref SetFactCaseRow
+  displayText: string
+  creditQuarter: int
+END
+
+RECORD SetFixtureAliasRow KEY aliasId COUNT 1..
+  aliasId: string
+  factRef: ref SetFixtureFactRow
+  answerText: string
+END

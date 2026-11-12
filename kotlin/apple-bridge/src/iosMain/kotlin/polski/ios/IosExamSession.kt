@@ -86,6 +86,7 @@ class IosExamSession {
             put("routeId", exam.routeId); put("sourceExamId", exam.sourceExamId)
             put("provider", exam.provider); put("targetLanguage", exam.targetLanguage)
             put("level", exam.level); put("year", exam.year)
+            put("displayTitle", exam.displayTitle)
             put("grammarItemCount", exam.grammarItemCount)
         } }))
         put("selectedExamId", selectedExam?.routeId?.let(::JsonPrimitive) ?: JsonNull)

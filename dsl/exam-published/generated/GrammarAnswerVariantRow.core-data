@@ -1,0 +1,206 @@
+DSL 1
+GRAMMAR_ANSWER_VARIANT {
+  variantId: B1-2017-g4-2-partial
+  itemRef: B1-2017-g4-2
+  answer: "z kim"
+  earnedQuarter: 1
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: B1-2017-g4-3-partial
+  itemRef: B1-2017-g4-3
+  answer: dlaczego
+  earnedQuarter: 1
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: B1-2019-g46-partial
+  itemRef: B1-2019-g46
+  answer: "Z jakiej kapusty"
+  earnedQuarter: 1
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: B1-2019-g49-alt1
+  itemRef: B1-2019-g49
+  answer: "Jak długo"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: B1-2019-g49-alt2
+  itemRef: B1-2019-g49
+  answer: "Od jak dawna"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: B1-2019-g49-alt3
+  itemRef: B1-2019-g49
+  answer: "Odkąd"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: B1-2019-g50-partial
+  itemRef: B1-2019-g50
+  answer: "Których"
+  earnedQuarter: 1
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: B1-2019-g54-alt1
+  itemRef: B1-2019-g54
+  answer: "Dziewczyny myślą o planach na dzisiejszy wieczór."
+  earnedQuarter: 4
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: B1-2019-g54-alt2
+  itemRef: B1-2019-g54
+  answer: "Dziewczyny myślą, jak spędzić dzisiejszy wieczór."
+  earnedQuarter: 4
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B1-2020-grammar-4-4-alt-1
+  itemRef: certyfikat-polski-B1-2020-grammar-4-4
+  answer: "będziemy pracować"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B1-2020-grammar-4-8-alt-1
+  itemRef: certyfikat-polski-B1-2020-grammar-4-8
+  answer: "będziemy mieć"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B1-2020-grammar-4-10-alt-1
+  itemRef: certyfikat-polski-B1-2020-grammar-4-10
+  answer: "będziemy mogli"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B1-2020-grammar-5-1-alt-1
+  itemRef: certyfikat-polski-B1-2020-grammar-5-1
+  answer: "W jaki sposób"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B1-2020-grammar-5-2-alt-1
+  itemRef: certyfikat-polski-B1-2020-grammar-5-2
+  answer: "Ile tygodni"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B1-2020-grammar-5-2-alt-2
+  itemRef: certyfikat-polski-B1-2020-grammar-5-2
+  answer: "Ile czasu"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B1-2020-grammar-6-5-alt-1
+  itemRef: certyfikat-polski-B1-2020-grammar-6-5
+  answer: "Czy wiesz, jaki adres ma ten sklep?"
+  earnedQuarter: 4
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2017-grammar-2-3-alt-1
+  itemRef: certyfikat-polski-B2-2017-grammar-2-3
+  answer: po
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2017-grammar-7-2-alt-1
+  itemRef: certyfikat-polski-B2-2017-grammar-7-2
+  answer: dwojgiem
+  earnedQuarter: 4
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2019-grammar-6-9-alt-1
+  itemRef: certyfikat-polski-B2-2019-grammar-6-9
+  answer: "będą stosować"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2019-grammar-7-6-alt-1
+  itemRef: certyfikat-polski-B2-2019-grammar-7-6
+  answer: "bardziej obszerny"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2019-grammar-7-10-alt-1
+  itemRef: certyfikat-polski-B2-2019-grammar-7-10
+  answer: "bardziej atrakcyjnym"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2019-grammar-8-1-alt-1
+  itemRef: certyfikat-polski-B2-2019-grammar-8-1
+  answer: "Wbrew protestującym rodzicom szkolny sklepik został zamknięty."
+  earnedQuarter: 4
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2019-grammar-8-2-alt-1
+  itemRef: certyfikat-polski-B2-2019-grammar-8-2
+  answer: "Robertowi nie udało się zdać testu przez ciągłe nieobecności na lekcjach."
+  earnedQuarter: 4
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2019-grammar-8-2-alt-2
+  itemRef: certyfikat-polski-B2-2019-grammar-8-2
+  answer: "Robertowi nie udało się zdać testu przez to, że był ciągle nieobecny na lekcjach."
+  earnedQuarter: 4
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2019-grammar-8-4-alt-1
+  itemRef: certyfikat-polski-B2-2019-grammar-8-4
+  answer: "Po urlopie musimy wziąć się do remontu mieszkania."
+  earnedQuarter: 4
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2020-grammar-2-8-alt-w
+  itemRef: certyfikat-polski-B2-2020-grammar-2-8
+  answer: w
+  earnedQuarter: 2
+  onlyIfNotUsedBy: certyfikat-polski-B2-2020-grammar-2-6
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2020-grammar-4-2-alt-1
+  itemRef: certyfikat-polski-B2-2020-grammar-4-2
+  answer: "Osłów"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2020-grammar-4-6-alt-1
+  itemRef: certyfikat-polski-B2-2020-grammar-4-6
+  answer: bohaterzy
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2020-grammar-5-7-alt-1
+  itemRef: certyfikat-polski-B2-2020-grammar-5-7
+  answer: "będą wprowadzali"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2020-grammar-7-3-alt-1
+  itemRef: certyfikat-polski-B2-2020-grammar-7-3
+  answer: "najbardziej gorącym"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2020-grammar-7-5-alt-1
+  itemRef: certyfikat-polski-B2-2020-grammar-7-5
+  answer: "najbardziej gwałtowne"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2020-grammar-8-1-alt-1
+  itemRef: certyfikat-polski-B2-2020-grammar-8-1
+  answer: "Przez twoje codzienne spóźnianie się nie zdążyliśmy skończyć naszego projektu."
+  earnedQuarter: 4
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2020-grammar-8-5-alt-1
+  itemRef: certyfikat-polski-B2-2020-grammar-8-5
+  answer: "Bez umiejętności pływackich nie można wyruszyć w taki rejs."
+  earnedQuarter: 4
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2020-grammar-8-3-alt-1
+  itemRef: certyfikat-polski-B2-2020-grammar-8-3
+  answer: "Nie poszedł na studia wbrew oczekiwaniom rodziców."
+  earnedQuarter: 4
+}

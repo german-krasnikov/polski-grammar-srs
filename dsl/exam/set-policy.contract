@@ -1,0 +1,15 @@
+CONTRACT exam.setPolicy
+COVERAGE declared-scope
+MODULE ../../kotlin/shared/src/commonMain/kotlin/polski/exam/ExamAnswerEvaluation.kt
+FACT set.selectionCount number min=0 max=2147483647 integer member=selectionCount
+FACT set.requiredSelections number min=1 max=2147483647 integer member=requiredSelections
+FACT set.distinctKnownFactCount number min=0 max=2147483647 integer member=distinctKnownFactCount
+FACT set.knownCreditQuarter number min=0 max=2147483647 integer member=knownCreditQuarter
+FACT set.maximumQuarter number min=1 max=2147483647 integer member=maximumQuarter
+FACT set.unknownNonblankCount number min=0 max=2147483647 integer member=unknownNonblankCount
+FACT set.hasMalformedSelection bool member=hasMalformedSelection
+FACT set.answerNonblank bool member=answerNonblank
+FACT set.openManual bool member=openManual
+FACT set.usesSourceConservativeOverselection bool member=usesSourceConservativeOverselection
+FACT set.hasPerFactCredit bool member=hasPerFactCredit
+INPUT disposition set.selectionCount set.requiredSelections set.distinctKnownFactCount set.knownCreditQuarter set.maximumQuarter set.unknownNonblankCount set.hasMalformedSelection set.answerNonblank set.openManual set.usesSourceConservativeOverselection set.hasPerFactCredit

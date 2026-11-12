@@ -1,0 +1,2143 @@
+DSL 1
+READING_QUESTION {
+  questionId: B1-2017-r1-1
+  passageRef: certyfikat-polski-B1-2017-read-1
+  questionType: multiple_choice
+  questionText: "Ten tekst informuje, że"
+  options: "kioski internetowe są popularne w całym kraju|w kiosku z gazetami można skorzystać z Internetu|kioski internetowe oferują dostęp do Internetu"
+  correctAnswer: "kioski internetowe oferują dostęp do Internetu"
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2017-r1-2
+  passageRef: certyfikat-polski-B1-2017-read-1
+  questionType: multiple_choice
+  questionText: "Z tego tekstu wynika, że kluby"
+  options: "dają bezrobotnym pracę|uczą, jak efektywniej poszukiwać pracy|oferują bezrobotnym pomoc materialną"
+  correctAnswer: "uczą, jak efektywniej poszukiwać pracy"
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2017-r1-3
+  passageRef: certyfikat-polski-B1-2017-read-1
+  questionType: multiple_choice
+  questionText: "Z tego tekstu wynika, że"
+  options: "Polacy i Brytyjczycy jedzą najwięcej chipsów|w Polsce je się coraz więcej chipsów|Polacy jedzą chipsy od lat 90"
+  correctAnswer: "w Polsce je się coraz więcej chipsów"
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2017-r1-4
+  passageRef: certyfikat-polski-B1-2017-read-1
+  questionType: multiple_choice
+  questionText: "Z tego tekstu wynika, że narrator"
+  options: "miał ciotkę w USA|tęsknił za USA|wyemigrował z USA"
+  correctAnswer: "miał ciotkę w USA"
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2017-r1-5
+  passageRef: certyfikat-polski-B1-2017-read-1
+  questionType: multiple_choice
+  questionText: "Ten tekst informuje, że"
+  options: "każdy student musi mieć konto|należy przechowywać pieniądze w domu akademickim|banki dadzą kredyt tylko właścicielowi konta"
+  correctAnswer: "banki dadzą kredyt tylko właścicielowi konta"
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2017-r2-1
+  passageRef: certyfikat-polski-B1-2017-read-2
+  questionType: true_false_not_given
+  questionText: "Martina mogła sobie nie poradzić sama ze znalezieniem mieszkania."
+  options: "PRAWDA|FAŁSZ"
+  correctAnswer: PRAWDA
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2017-r2-2
+  passageRef: certyfikat-polski-B1-2017-read-2
+  questionType: true_false_not_given
+  questionText: "Aby być mentorem, należy bardzo dobrze znać angielski."
+  options: "PRAWDA|FAŁSZ"
+  correctAnswer: "FAŁSZ"
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2017-r2-3
+  passageRef: certyfikat-polski-B1-2017-read-2
+  questionType: true_false_not_given
+  questionText: "Mentorowanie to nie tylko obowiązki."
+  options: "PRAWDA|FAŁSZ"
+  correctAnswer: PRAWDA
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2017-r2-4
+  passageRef: certyfikat-polski-B1-2017-read-2
+  questionType: true_false_not_given
+  questionText: "Grupa Szybkiego Reagowania organizuje zajęcia na uczelni."
+  options: "PRAWDA|FAŁSZ"
+  correctAnswer: "FAŁSZ"
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2017-r2-5
+  passageRef: certyfikat-polski-B1-2017-read-2
+  questionType: true_false_not_given
+  questionText: "Włoszka spędziła święta w polskiej rodzinie."
+  options: "PRAWDA|FAŁSZ"
+  correctAnswer: PRAWDA
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2017-r2-6
+  passageRef: certyfikat-polski-B1-2017-read-2
+  questionType: true_false_not_given
+  questionText: "Mama Oli nie rozumiała przyjaciółki córki."
+  options: "PRAWDA|FAŁSZ"
+  correctAnswer: "FAŁSZ"
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2017-r2-7
+  passageRef: certyfikat-polski-B1-2017-read-2
+  questionType: true_false_not_given
+  questionText: "Ola będzie mentorką we Włoszech."
+  options: "PRAWDA|FAŁSZ"
+  correctAnswer: "FAŁSZ"
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2017-r3-1
+  passageRef: certyfikat-polski-B1-2017-read-3
+  questionType: match_heading
+  questionText: "Fragment do luki 1"
+  options: "B|C|D|E|F|G|H"
+  correctAnswer: F
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2017-r3-2
+  passageRef: certyfikat-polski-B1-2017-read-3
+  questionType: match_heading
+  questionText: "Fragment do luki 2"
+  options: "B|C|D|E|F|G|H"
+  correctAnswer: C
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2017-r3-3
+  passageRef: certyfikat-polski-B1-2017-read-3
+  questionType: match_heading
+  questionText: "Fragment do luki 3"
+  options: "B|C|D|E|F|G|H"
+  correctAnswer: B
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2017-r3-4
+  passageRef: certyfikat-polski-B1-2017-read-3
+  questionType: match_heading
+  questionText: "Fragment do luki 4"
+  options: "B|C|D|E|F|G|H"
+  correctAnswer: E
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2017-r3-5
+  passageRef: certyfikat-polski-B1-2017-read-3
+  questionType: match_heading
+  questionText: "Fragment do luki 5"
+  options: "B|C|D|E|F|G|H"
+  correctAnswer: D
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2017-r3-6
+  passageRef: certyfikat-polski-B1-2017-read-3
+  questionType: match_heading
+  questionText: "Fragment do luki 6"
+  options: "B|C|D|E|F|G|H"
+  correctAnswer: H
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2017-r3-7
+  passageRef: certyfikat-polski-B1-2017-read-3
+  questionType: match_heading
+  questionText: "Fragment do luki 7"
+  options: "B|C|D|E|F|G|H"
+  correctAnswer: G
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2017-r4-1
+  passageRef: certyfikat-polski-B1-2017-read-4
+  questionType: match_heading
+  questionText: "Lektura w wannie"
+  options: "A|B|C|D|E|F|G|H"
+  correctAnswer: G
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2017-r4-2
+  passageRef: certyfikat-polski-B1-2017-read-4
+  questionType: match_heading
+  questionText: "Własna półka na książki"
+  options: "A|B|C|D|E|F|G|H"
+  correctAnswer: F
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2017-r4-3
+  passageRef: certyfikat-polski-B1-2017-read-4
+  questionType: match_heading
+  questionText: "Propozycja nie wybór"
+  options: "A|B|C|D|E|F|G|H"
+  correctAnswer: H
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2017-r4-4
+  passageRef: certyfikat-polski-B1-2017-read-4
+  questionType: match_heading
+  questionText: "Wieczór z bajką"
+  options: "A|B|C|D|E|F|G|H"
+  correctAnswer: C
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2017-r4-5
+  passageRef: certyfikat-polski-B1-2017-read-4
+  questionType: match_heading
+  questionText: "Dobry przykład"
+  options: "A|B|C|D|E|F|G|H"
+  correctAnswer: B
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2017-r4-6
+  passageRef: certyfikat-polski-B1-2017-read-4
+  questionType: match_heading
+  questionText: "Cierpliwość"
+  options: "A|B|C|D|E|F|G|H"
+  correctAnswer: E
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2017-r4-7
+  passageRef: certyfikat-polski-B1-2017-read-4
+  questionType: match_heading
+  questionText: "Nie ma oglądania bez czytania"
+  options: "A|B|C|D|E|F|G|H"
+  correctAnswer: A
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2017-r5-1
+  passageRef: certyfikat-polski-B1-2017-read-5
+  questionType: multiple_choice
+  questionText: "Żona Marka dobrze ___ koncerty"
+  options: "wie|umie|zna"
+  correctAnswer: zna
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: B1-2017-r5-2
+  passageRef: certyfikat-polski-B1-2017-read-5
+  questionType: multiple_choice
+  questionText: "żebym ___ koncert"
+  options: "zorganizowała|zbudowała|zagrała"
+  correctAnswer: "zorganizowała"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: B1-2017-r5-3
+  passageRef: certyfikat-polski-B1-2017-read-5
+  questionType: multiple_choice
+  questionText: "___ postanowiłam zrealizować ten pomysł"
+  options: "dlatego|ponieważ|dlaczego"
+  correctAnswer: dlatego
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: B1-2017-r5-4
+  passageRef: certyfikat-polski-B1-2017-read-5
+  questionType: multiple_choice
+  questionText: "a ___ zdecydowaliśmy się dołączyć nowe elementy"
+  options: "późno|dalej|potem"
+  correctAnswer: potem
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: B1-2017-r5-5
+  passageRef: certyfikat-polski-B1-2017-read-5
+  questionType: multiple_choice
+  questionText: "___ festiwalu będzie można nie tylko słuchać muzyki"
+  options: "Dla|Po|Na"
+  correctAnswer: Na
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: B1-2017-r5-6
+  passageRef: certyfikat-polski-B1-2017-read-5
+  questionType: multiple_choice
+  questionText: "Przygotowujemy również ___ obrazów"
+  options: "wystawę|przedstawienie|spektakl"
+  correctAnswer: "wystawę"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: B1-2017-r5-7
+  passageRef: certyfikat-polski-B1-2017-read-5
+  questionType: multiple_choice
+  questionText: "swoje archiwalne ___"
+  options: "zdjęcia|płyty|rysunki"
+  correctAnswer: "zdjęcia"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: B1-2017-r5-8
+  passageRef: certyfikat-polski-B1-2017-read-5
+  questionType: multiple_choice
+  questionText: "w jednym z krakowskich ___"
+  options: "teatrów|kościołów|parków"
+  correctAnswer: "kościołów"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: B1-2019-rq1-1
+  passageRef: B1-2019-read-1
+  questionType: multiple_choice
+  questionText: "Z tego tekstu wynika, że z projektu może skorzystać"
+  options: "każdy, kto chce otworzyć własną firmę|bezrobotny powyżej 30. roku życia|każda osoba bez wykształcenia"
+  correctAnswer: "bezrobotny powyżej 30. roku życia"
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2019-rq1-2
+  passageRef: B1-2019-read-1
+  questionType: multiple_choice
+  questionText: "Z tego tekstu wynika, że w klubie fitness"
+  options: "po zajęciach można się wykąpać|przez cały rok zajęcia są za darmo|popularni instruktorzy prowadzą bufet"
+  correctAnswer: "po zajęciach można się wykąpać"
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2019-rq1-3
+  passageRef: B1-2019-read-1
+  questionType: multiple_choice
+  questionText: "Z tego tekstu wynika, że"
+  options: "„La Musicienne” to najdroższy obraz na świecie|cena obrazu była dla wszystkich zaskoczeniem|obraz kupił amerykański biznesmen"
+  correctAnswer: "cena obrazu była dla wszystkich zaskoczeniem"
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2019-rq1-4
+  passageRef: B1-2019-read-1
+  questionType: multiple_choice
+  questionText: "Z tego tekstu wynika, że"
+  options: "w rankingu znalazło się 28 uczelni z całej Polski|konkurs zorganizowały szkoły wyższe i media|Szkoła Główna Handlowa niejednokrotnie wygrała ten konkurs"
+  correctAnswer: "Szkoła Główna Handlowa niejednokrotnie wygrała ten konkurs"
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2019-rq2-1
+  passageRef: B1-2019-read-2
+  questionType: true_false_not_given
+  questionText: "W ciągu pół roku 256 lotów jednej z linii lotniczych było opóźnionych o ponad 3 godziny."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2019-rq2-2
+  passageRef: B1-2019-read-2
+  questionType: true_false_not_given
+  questionText: "Według przepisów pasażerowie mogą otrzymać pieniądze za opóźniony lub odwołany lot."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2019-rq2-3
+  passageRef: B1-2019-read-2
+  questionType: true_false_not_given
+  questionText: "Linie lotnicze regularnie publikują dane dotyczące faktycznych godzin lądowania ich samolotów."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2019-rq2-4
+  passageRef: B1-2019-read-2
+  questionType: true_false_not_given
+  questionText: "Pieniądze za bilet mogą być zwrócone, jeśli lot odwołano na przykład tydzień przed wylotem."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2019-rq2-5
+  passageRef: B1-2019-read-2
+  questionType: true_false_not_given
+  questionText: "Za anulowanie każdego biletu z winy linii lotniczych pasażerowie dostają 600 euro."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2019-rq2-6
+  passageRef: B1-2019-read-2
+  questionType: true_false_not_given
+  questionText: "Formularze o zwrot kosztów pasażerowie wypełniają zazwyczaj starannie i szybko."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2019-rq2-7
+  passageRef: B1-2019-read-2
+  questionType: true_false_not_given
+  questionText: "Pasażerowie mogą liczyć na pomoc specjalnych firm, jeśli chcą dostać pieniądze od linii lotniczych."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2019-rq3-1
+  passageRef: B1-2019-read-3
+  questionType: match_heading
+  questionText: "Fragment do luki 1"
+  options: "A|C|D|E|F|G|H|I"
+  correctAnswer: H
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2019-rq3-2
+  passageRef: B1-2019-read-3
+  questionType: match_heading
+  questionText: "Fragment do luki 2"
+  options: "A|C|D|E|F|G|H|I"
+  correctAnswer: A
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2019-rq3-3
+  passageRef: B1-2019-read-3
+  questionType: match_heading
+  questionText: "Fragment do luki 3"
+  options: "A|C|D|E|F|G|H|I"
+  correctAnswer: E
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2019-rq3-4
+  passageRef: B1-2019-read-3
+  questionType: match_heading
+  questionText: "Fragment do luki 4"
+  options: "A|C|D|E|F|G|H|I"
+  correctAnswer: F
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2019-rq3-5
+  passageRef: B1-2019-read-3
+  questionType: match_heading
+  questionText: "Fragment do luki 5"
+  options: "A|C|D|E|F|G|H|I"
+  correctAnswer: C
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2019-rq3-6
+  passageRef: B1-2019-read-3
+  questionType: match_heading
+  questionText: "Fragment do luki 6"
+  options: "A|C|D|E|F|G|H|I"
+  correctAnswer: D
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2019-rq3-7
+  passageRef: B1-2019-read-3
+  questionType: match_heading
+  questionText: "Fragment do luki 7"
+  options: "A|C|D|E|F|G|H|I"
+  correctAnswer: I
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2019-rq3-8
+  passageRef: B1-2019-read-3
+  questionType: match_heading
+  questionText: "Fragment do luki 8"
+  options: "A|C|D|E|F|G|H|I"
+  correctAnswer: G
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2019-rq4-1
+  passageRef: B1-2019-read-4
+  questionType: match_heading
+  questionText: "Ważny jest cel"
+  options: "A|B|C|D|E|F|G"
+  correctAnswer: G
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2019-rq4-2
+  passageRef: B1-2019-read-4
+  questionType: match_heading
+  questionText: "Odpowiedni czas"
+  options: "A|B|C|D|E|F|G"
+  correctAnswer: A
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2019-rq4-3
+  passageRef: B1-2019-read-4
+  questionType: match_heading
+  questionText: "Najpierw to, co dla ciebie ważne"
+  options: "A|B|C|D|E|F|G"
+  correctAnswer: F
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2019-rq4-4
+  passageRef: B1-2019-read-4
+  questionType: match_heading
+  questionText: "Małe kroki"
+  options: "A|B|C|D|E|F|G"
+  correctAnswer: D
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2019-rq4-5
+  passageRef: B1-2019-read-4
+  questionType: match_heading
+  questionText: "Dobry sprzęt i środki czystości"
+  options: "A|B|C|D|E|F|G"
+  correctAnswer: C
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2019-rq4-6
+  passageRef: B1-2019-read-4
+  questionType: match_heading
+  questionText: "Wykorzystaj czas"
+  options: "A|B|C|D|E|F|G"
+  correctAnswer: E
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: B1-2019-rq5-1
+  passageRef: B1-2019-read-5
+  questionType: fill_gap
+  questionText: "W polskich więzieniach nie ma ___ książek"
+  options: "pojawiło się|wysokie|nowych|zorganizować|mieszkańców|książkę|młodzieży|wolność|przyłączyło się|popularne"
+  correctAnswer: nowych
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: B1-2019-rq5-2
+  passageRef: B1-2019-read-5
+  questionType: fill_gap
+  questionText: "ich ceny są za ___"
+  options: "pojawiło się|wysokie|nowych|zorganizować|mieszkańców|książkę|młodzieży|wolność|przyłączyło się|popularne"
+  correctAnswer: wysokie
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: B1-2019-rq5-3
+  passageRef: B1-2019-read-5
+  questionType: fill_gap
+  questionText: "postanowiła ___ zbiórkę"
+  options: "pojawiło się|wysokie|nowych|zorganizować|mieszkańców|książkę|młodzieży|wolność|przyłączyło się|popularne"
+  correctAnswer: "zorganizować"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: B1-2019-rq5-4
+  passageRef: B1-2019-read-5
+  questionType: fill_gap
+  questionText: "zachęcenie wszystkich ___ Warszawy"
+  options: "pojawiło się|wysokie|nowych|zorganizować|mieszkańców|książkę|młodzieży|wolność|przyłączyło się|popularne"
+  correctAnswer: "mieszkańców"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: B1-2019-rq5-5
+  passageRef: B1-2019-read-5
+  questionType: fill_gap
+  questionText: "Majewski to ___ nazwisko"
+  options: "pojawiło się|wysokie|nowych|zorganizować|mieszkańców|książkę|młodzieży|wolność|przyłączyło się|popularne"
+  correctAnswer: popularne
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: B1-2019-rq5-6
+  passageRef: B1-2019-read-5
+  questionType: fill_gap
+  questionText: "po wyjściu na ___"
+  options: "pojawiło się|wysokie|nowych|zorganizować|mieszkańców|książkę|młodzieży|wolność|przyłączyło się|popularne"
+  correctAnswer: "wolność"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: B1-2019-rq5-7
+  passageRef: B1-2019-read-5
+  questionType: fill_gap
+  questionText: "dajemy szansę nie tylko ___"
+  options: "pojawiło się|wysokie|nowych|zorganizować|mieszkańców|książkę|młodzieży|wolność|przyłączyło się|popularne"
+  correctAnswer: "młodzieży"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: B1-2019-rq5-8
+  passageRef: B1-2019-read-5
+  questionType: fill_gap
+  questionText: "Mogą oni zwrócić ___"
+  options: "pojawiło się|wysokie|nowych|zorganizować|mieszkańców|książkę|młodzieży|wolność|przyłączyło się|popularne"
+  correctAnswer: "książkę"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: B1-2019-rq5-9
+  passageRef: B1-2019-read-5
+  questionType: fill_gap
+  questionText: "Do akcji ___ kilka znanych osób"
+  options: "pojawiło się|wysokie|nowych|zorganizować|mieszkańców|książkę|młodzieży|wolność|przyłączyło się|popularne"
+  correctAnswer: "przyłączyło się"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: B1-2019-rq5-10
+  passageRef: B1-2019-read-5
+  questionType: fill_gap
+  questionText: "nazwisko, które ___ w kampanii"
+  options: "pojawiło się|wysokie|nowych|zorganizować|mieszkańców|książkę|młodzieży|wolność|przyłączyło się|popularne"
+  correctAnswer: "pojawiło się"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-reading-1-1
+  passageRef: certyfikat-polski-B1-2020-read-1
+  questionType: multiple_choice
+  questionText: "Z tego tekstu wynika, że opłata za wjazd do Wenecji"
+  options: "nie będzie taka sama przez cały rok.|obowiązuje już od dawna.|będzie wyższa dla uczestników imprez miejskich."
+  correctAnswer: "nie będzie taka sama przez cały rok."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-reading-1-2
+  passageRef: certyfikat-polski-B1-2020-read-1
+  questionType: multiple_choice
+  questionText: "Z tego tekstu wynika, że"
+  options: "konkurs teatralny od lat istnieje w takiej samej formie.|w spektaklach mogą wziąć udział zawodowi aktorzy.|aktorzy będą prezentować znane wiersze."
+  correctAnswer: "w spektaklach mogą wziąć udział zawodowi aktorzy."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-reading-1-3
+  passageRef: certyfikat-polski-B1-2020-read-1
+  questionType: multiple_choice
+  questionText: "Z tego tekstu wynika, że nowy znak reklamowy"
+  options: "był inspirowany jesienną modą.|stworzyły dzieci.|ma przywoływać dobry nastrój."
+  correctAnswer: "ma przywoływać dobry nastrój."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-reading-1-4
+  passageRef: certyfikat-polski-B1-2020-read-1
+  questionType: multiple_choice
+  questionText: "Ten tekst informuje, że"
+  options: "złe zachowanie dzieci w samochodzie powoduje brak uwagi u kierowcy.|co trzeci kierowca ma problem z koncentracją na drodze.|kierowcy, którzy są rodzicami, nie potrafią ostrożnie jeździć."
+  correctAnswer: "złe zachowanie dzieci w samochodzie powoduje brak uwagi u kierowcy."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-reading-1-5
+  passageRef: certyfikat-polski-B1-2020-read-1
+  questionType: multiple_choice
+  questionText: "Z tego tekstu wynika, że"
+  options: "w maratonie biegło mało zawodników.|lista zapisów była otwarta do 6 stycznia.|były osoby, które zrezygnowały z biegu."
+  correctAnswer: "były osoby, które zrezygnowały z biegu."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-reading-2-1
+  passageRef: certyfikat-polski-B1-2020-read-2
+  questionType: true_false_not_given
+  questionText: "Pierwszy odcinek serialu był nieudany."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-reading-2-2
+  passageRef: certyfikat-polski-B1-2020-read-2
+  questionType: true_false_not_given
+  questionText: "Nagrywanie kolejnych odcinków zależało od zainteresowania widzów."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-reading-2-3
+  passageRef: certyfikat-polski-B1-2020-read-2
+  questionType: true_false_not_given
+  questionText: "Bohaterowie serialu należą do najbogatszych ludzi w Polsce."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-reading-2-4
+  passageRef: certyfikat-polski-B1-2020-read-2
+  questionType: true_false_not_given
+  questionText: "Sąsiad Ferdynanda zajmuje się handlem."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-reading-2-5
+  passageRef: certyfikat-polski-B1-2020-read-2
+  questionType: true_false_not_given
+  questionText: "Serial od początku jest nagrywany w studiu filmowym."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-reading-2-6
+  passageRef: certyfikat-polski-B1-2020-read-2
+  questionType: true_false_not_given
+  questionText: "Niektóre przedmioty można zobaczyć w serialu od pierwszych odcinków aż do dziś."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-reading-2-7
+  passageRef: certyfikat-polski-B1-2020-read-2
+  questionType: true_false_not_given
+  questionText: "Cały serial jest dostępny w telewizji i w internecie."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-reading-3-1
+  passageRef: certyfikat-polski-B1-2020-read-3
+  questionType: match_heading
+  questionText: "Fragment [ 1 ]"
+  options: "A|B|C|D|E|F|G|H"
+  correctAnswer: D
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-reading-3-2
+  passageRef: certyfikat-polski-B1-2020-read-3
+  questionType: match_heading
+  questionText: "Fragment [ 2 ]"
+  options: "A|B|C|D|E|F|G|H"
+  correctAnswer: B
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-reading-3-3
+  passageRef: certyfikat-polski-B1-2020-read-3
+  questionType: match_heading
+  questionText: "Fragment [ 3 ]"
+  options: "A|B|C|D|E|F|G|H"
+  correctAnswer: E
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-reading-3-4
+  passageRef: certyfikat-polski-B1-2020-read-3
+  questionType: match_heading
+  questionText: "Fragment [ 4 ]"
+  options: "A|B|C|D|E|F|G|H"
+  correctAnswer: G
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-reading-3-5
+  passageRef: certyfikat-polski-B1-2020-read-3
+  questionType: match_heading
+  questionText: "Fragment [ 5 ]"
+  options: "A|B|C|D|E|F|G|H"
+  correctAnswer: A
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-reading-3-6
+  passageRef: certyfikat-polski-B1-2020-read-3
+  questionType: match_heading
+  questionText: "Fragment [ 6 ]"
+  options: "A|B|C|D|E|F|G|H"
+  correctAnswer: H
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-reading-3-7
+  passageRef: certyfikat-polski-B1-2020-read-3
+  questionType: match_heading
+  questionText: "Fragment [ 7 ]"
+  options: "A|B|C|D|E|F|G|H"
+  correctAnswer: F
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-reading-4-1
+  passageRef: certyfikat-polski-B1-2020-read-4
+  questionType: match_heading
+  questionText: "Kary dla kierowców"
+  options: "A|B|C|D|E|F|G|H"
+  correctAnswer: H
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-reading-4-2
+  passageRef: certyfikat-polski-B1-2020-read-4
+  questionType: match_heading
+  questionText: "Choroby w okresie zimowym"
+  options: "A|B|C|D|E|F|G|H"
+  correctAnswer: E
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-reading-4-3
+  passageRef: certyfikat-polski-B1-2020-read-4
+  questionType: match_heading
+  questionText: "Za pół ceny"
+  options: "A|B|C|D|E|F|G|H"
+  correctAnswer: C
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-reading-4-4
+  passageRef: certyfikat-polski-B1-2020-read-4
+  questionType: match_heading
+  questionText: "Opłaty w górę"
+  options: "A|B|C|D|E|F|G|H"
+  correctAnswer: G
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-reading-4-5
+  passageRef: certyfikat-polski-B1-2020-read-4
+  questionType: match_heading
+  questionText: "Praca w straży miejskiej"
+  options: "A|B|C|D|E|F|G|H"
+  correctAnswer: A
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-reading-4-6
+  passageRef: certyfikat-polski-B1-2020-read-4
+  questionType: match_heading
+  questionText: "Zakupy coraz droższe"
+  options: "A|B|C|D|E|F|G|H"
+  correctAnswer: F
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-reading-4-7
+  passageRef: certyfikat-polski-B1-2020-read-4
+  questionType: match_heading
+  questionText: "Nowe zasady segregacji"
+  options: "A|B|C|D|E|F|G|H"
+  correctAnswer: D
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-reading-5-1
+  passageRef: certyfikat-polski-B1-2020-read-5
+  questionType: gap_fill_fragment
+  questionText: "Na ulicach można […] radość."
+  options: "widać|zobaczyć|przeglądać"
+  correctAnswer: "zobaczyć"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-reading-5-2
+  passageRef: certyfikat-polski-B1-2020-read-5
+  questionType: gap_fill_fragment
+  questionText: "Ludzie są serdeczni bardziej niż […]."
+  options: "zwykle|często|rzadko"
+  correctAnswer: zwykle
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-reading-5-3
+  passageRef: certyfikat-polski-B1-2020-read-5
+  questionType: gap_fill_fragment
+  questionText: "[…] dnia rano odbywa się karnawał kolorów."
+  options: "Następnego|dalszego|przyszłego"
+  correctAnswer: "Następnego"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-reading-5-4
+  passageRef: certyfikat-polski-B1-2020-read-5
+  questionType: gap_fill_fragment
+  questionText: "Uczestnicy […] przyjaciół i rodzinę."
+  options: "zwiedzają|odwiedzają|widzą"
+  correctAnswer: "odwiedzają"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-reading-5-5
+  passageRef: certyfikat-polski-B1-2020-read-5
+  questionType: gap_fill_fragment
+  questionText: "W Polsce także […] to święto."
+  options: "odbywamy|obchodzimy|bierzemy"
+  correctAnswer: obchodzimy
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-reading-5-6
+  passageRef: certyfikat-polski-B1-2020-read-5
+  questionType: gap_fill_fragment
+  questionText: "Nie ma wiele […] z kulturą Indii."
+  options: "takiego samego|identycznego|wspólnego"
+  correctAnswer: "wspólnego"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-reading-5-7
+  passageRef: certyfikat-polski-B1-2020-read-5
+  questionType: gap_fill_fragment
+  questionText: "To ma być przede wszystkim dobra […]."
+  options: "gra|zabawa|nauka"
+  correctAnswer: zabawa
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B1-2020-reading-5-8
+  passageRef: certyfikat-polski-B1-2020-read-5
+  questionType: gap_fill_fragment
+  questionText: "Przygotowano wiele dodatkowych […]."
+  options: "spektakli|pomysłów|atrakcji"
+  correctAnswer: atrakcji
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-1-1
+  passageRef: certyfikat-polski-B2-2017-read-1
+  questionType: multiple_choice
+  questionText: "Z tego tekstu dowiadujemy się, że"
+  options: "a) podczas wiatrów krótkie rejsy należy odbywać na małych jachtach.|b) człowieka poznaje się w trudnych warunkach.|c) relacje między ludźmi najlepiej badają testy i treningi psychologiczne."
+  correctAnswer: "b) człowieka poznaje się w trudnych warunkach."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-1-2
+  passageRef: certyfikat-polski-B2-2017-read-1
+  questionType: multiple_choice
+  questionText: "Z tego tekstu dowiadujemy się, że"
+  options: "a) bałkańscy lekarze wypisywali recepty na jogurt.|b) pierwszy pity we Francji jogurt był napojem z owczego mleka.|c) spożycie jogurtu zaszkodziło królowi Francji."
+  correctAnswer: "b) pierwszy pity we Francji jogurt był napojem z owczego mleka."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-1-3
+  passageRef: certyfikat-polski-B2-2017-read-1
+  questionType: multiple_choice
+  questionText: "Z tego tekstu dowiadujemy się, że polskie firmy turystyczne"
+  options: "a) już nie bankrutują.|b) nie mają kłopotów z płatnościami.|c) są coraz bardziej wiarygodne."
+  correctAnswer: "c) są coraz bardziej wiarygodne."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-1-4
+  passageRef: certyfikat-polski-B2-2017-read-1
+  questionType: multiple_choice
+  questionText: "Z tego tekstu dowiadujemy się, że"
+  options: "a) z powodu silnego wiatru wybuchł pożar.|b) w miejscu segregacji śmieci pojawił się ogień.|c) w jednostce wojskowej zapaliły się śmieci."
+  correctAnswer: "b) w miejscu segregacji śmieci pojawił się ogień."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-1-5
+  passageRef: certyfikat-polski-B2-2017-read-1
+  questionType: multiple_choice
+  questionText: "Z tego tekstu dowiadujemy się, że"
+  options: "a) odbieranie zapachów jest zależne od wielkości dziurek w nosie.|b) wielkość nosa wpływa na powonienie.|c) duże dziurki w nosie powodują, że zmysł węchu jest mniej wyostrzony."
+  correctAnswer: "a) odbieranie zapachów jest zależne od wielkości dziurek w nosie."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-2-1
+  passageRef: certyfikat-polski-B2-2017-read-2
+  questionType: true_false_not_given
+  questionText: "Rok wcześniej lisy trzymały się z daleka od gospodarstw i ludzi."
+  options: "P|F|BI"
+  correctAnswer: P
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-2-2
+  passageRef: certyfikat-polski-B2-2017-read-2
+  questionType: true_false_not_given
+  questionText: "Obecnie lisy czują się pewnie w pobliżu domów."
+  options: "P|F|BI"
+  correctAnswer: P
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-2-3
+  passageRef: certyfikat-polski-B2-2017-read-2
+  questionType: true_false_not_given
+  questionText: "Lisia rodzina zamieszkała w gospodarstwie domowym pani Kasi."
+  options: "P|F|BI"
+  correctAnswer: F
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-2-4
+  passageRef: certyfikat-polski-B2-2017-read-2
+  questionType: true_false_not_given
+  questionText: "Lisy lubią zapach grillowanego mięsa."
+  options: "P|F|BI"
+  correctAnswer: BI
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-2-5
+  passageRef: certyfikat-polski-B2-2017-read-2
+  questionType: true_false_not_given
+  questionText: "Kot ze strachu przed lisicą schował się pod auto."
+  options: "P|F|BI"
+  correctAnswer: P
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-2-6
+  passageRef: certyfikat-polski-B2-2017-read-2
+  questionType: true_false_not_given
+  questionText: "Podczas wizyty gości lisica cały czas chodziła po podwórku."
+  options: "P|F|BI"
+  correctAnswer: F
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-2-7
+  passageRef: certyfikat-polski-B2-2017-read-2
+  questionType: true_false_not_given
+  questionText: "Pani Kasia jest pewna, że zwierzę nie jest zdrowe."
+  options: "P|F|BI"
+  correctAnswer: F
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-2-8
+  passageRef: certyfikat-polski-B2-2017-read-2
+  questionType: true_false_not_given
+  questionText: "W lipcu wolno polować na lisy."
+  options: "P|F|BI"
+  correctAnswer: F
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-2-9
+  passageRef: certyfikat-polski-B2-2017-read-2
+  questionType: true_false_not_given
+  questionText: "Pani Kasia hoduje drób."
+  options: "P|F|BI"
+  correctAnswer: BI
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-2-10
+  passageRef: certyfikat-polski-B2-2017-read-2
+  questionType: true_false_not_given
+  questionText: "W chwili obecnej starosta nie może pomóc mieszkańcom."
+  options: "P|F|BI"
+  correctAnswer: P
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-3-1
+  passageRef: certyfikat-polski-B2-2017-read-3
+  questionType: match_heading
+  questionText: "Niezbędne wnętrze"
+  options: "A|B|C|D|E|F|G|H|I|J|K"
+  correctAnswer: K
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-3-2
+  passageRef: certyfikat-polski-B2-2017-read-3
+  questionType: match_heading
+  questionText: "Optyczna korekta"
+  options: "A|B|C|D|E|F|G|H|I|J|K"
+  correctAnswer: A
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-3-3
+  passageRef: certyfikat-polski-B2-2017-read-3
+  questionType: match_heading
+  questionText: "Pastelowe przyjęcia"
+  options: "A|B|C|D|E|F|G|H|I|J|K"
+  correctAnswer: B
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-3-4
+  passageRef: certyfikat-polski-B2-2017-read-3
+  questionType: match_heading
+  questionText: "Zabawa w chowanego"
+  options: "A|B|C|D|E|F|G|H|I|J|K"
+  correctAnswer: E
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-3-5
+  passageRef: certyfikat-polski-B2-2017-read-3
+  questionType: match_heading
+  questionText: "Smaki i zapachy w starym stylu"
+  options: "A|B|C|D|E|F|G|H|I|J|K"
+  correctAnswer: H
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-3-6
+  passageRef: certyfikat-polski-B2-2017-read-3
+  questionType: match_heading
+  questionText: "Podłoga na miękko"
+  options: "A|B|C|D|E|F|G|H|I|J|K"
+  correctAnswer: I
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-3-7
+  passageRef: certyfikat-polski-B2-2017-read-3
+  questionType: match_heading
+  questionText: "Tworzymy zdrowy klimat"
+  options: "A|B|C|D|E|F|G|H|I|J|K"
+  correctAnswer: J
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-3-8
+  passageRef: certyfikat-polski-B2-2017-read-3
+  questionType: match_heading
+  questionText: "Naścienne dzieła sztuki"
+  options: "A|B|C|D|E|F|G|H|I|J|K"
+  correctAnswer: G
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-3-9
+  passageRef: certyfikat-polski-B2-2017-read-3
+  questionType: match_heading
+  questionText: "Z tarasu do wnętrza"
+  options: "A|B|C|D|E|F|G|H|I|J|K"
+  correctAnswer: C
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-3-10
+  passageRef: certyfikat-polski-B2-2017-read-3
+  questionType: match_heading
+  questionText: "Archipelag malucha"
+  options: "A|B|C|D|E|F|G|H|I|J|K"
+  correctAnswer: F
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-4-1
+  passageRef: certyfikat-polski-B2-2017-read-4
+  questionType: gap_fill_fragment
+  questionText: "Luka [1] w tekście „Szacunek”."
+  options: "A|B|C|D|E|F|G|H|I|J|K"
+  correctAnswer: D
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-4-2
+  passageRef: certyfikat-polski-B2-2017-read-4
+  questionType: gap_fill_fragment
+  questionText: "Luka [2] w tekście „Szacunek”."
+  options: "A|B|C|D|E|F|G|H|I|J|K"
+  correctAnswer: F
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-4-3
+  passageRef: certyfikat-polski-B2-2017-read-4
+  questionType: gap_fill_fragment
+  questionText: "Luka [3] w tekście „Szacunek”."
+  options: "A|B|C|D|E|F|G|H|I|J|K"
+  correctAnswer: A
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-4-4
+  passageRef: certyfikat-polski-B2-2017-read-4
+  questionType: gap_fill_fragment
+  questionText: "Luka [4] w tekście „Szacunek”."
+  options: "A|B|C|D|E|F|G|H|I|J|K"
+  correctAnswer: K
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-4-5
+  passageRef: certyfikat-polski-B2-2017-read-4
+  questionType: gap_fill_fragment
+  questionText: "Luka [5] w tekście „Szacunek”."
+  options: "A|B|C|D|E|F|G|H|I|J|K"
+  correctAnswer: B
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-4-6
+  passageRef: certyfikat-polski-B2-2017-read-4
+  questionType: gap_fill_fragment
+  questionText: "Luka [6] w tekście „Szacunek”."
+  options: "A|B|C|D|E|F|G|H|I|J|K"
+  correctAnswer: G
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-4-7
+  passageRef: certyfikat-polski-B2-2017-read-4
+  questionType: gap_fill_fragment
+  questionText: "Luka [7] w tekście „Szacunek”."
+  options: "A|B|C|D|E|F|G|H|I|J|K"
+  correctAnswer: C
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-4-8
+  passageRef: certyfikat-polski-B2-2017-read-4
+  questionType: gap_fill_fragment
+  questionText: "Luka [8] w tekście „Szacunek”."
+  options: "A|B|C|D|E|F|G|H|I|J|K"
+  correctAnswer: J
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-4-9
+  passageRef: certyfikat-polski-B2-2017-read-4
+  questionType: gap_fill_fragment
+  questionText: "Luka [9] w tekście „Szacunek”."
+  options: "A|B|C|D|E|F|G|H|I|J|K"
+  correctAnswer: E
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-4-10
+  passageRef: certyfikat-polski-B2-2017-read-4
+  questionType: gap_fill_fragment
+  questionText: "Luka [10] w tekście „Szacunek”."
+  options: "A|B|C|D|E|F|G|H|I|J|K"
+  correctAnswer: H
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-5-1
+  passageRef: certyfikat-polski-B2-2017-read-5
+  questionType: fill_gap
+  questionText: "Ich […] mogą nabywać usługi."
+  options: "decydenci|klienci|konsumenci|kandydaci"
+  correctAnswer: klienci
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-5-2
+  passageRef: certyfikat-polski-B2-2017-read-5
+  questionType: fill_gap
+  questionText: "Pomagając sobie […]."
+  options: "wyłącznie|wzajemnie|samemu|jedynie"
+  correctAnswer: wzajemnie
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-5-3
+  passageRef: certyfikat-polski-B2-2017-read-5
+  questionType: fill_gap
+  questionText: "Naprawą […] kranu."
+  options: "lejącego|wylewającego|płynącego|cieknącego"
+  correctAnswer: "cieknącego"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-5-4
+  passageRef: certyfikat-polski-B2-2017-read-5
+  questionType: fill_gap
+  questionText: "Banki czasu to stowarzyszenia, których […] polega na wymianie usług."
+  options: "akcja|potęga|działalność|sprawność"
+  correctAnswer: "działalność"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-5-5
+  passageRef: certyfikat-polski-B2-2017-read-5
+  questionType: fill_gap
+  questionText: "To rodzaj […] pomocy."
+  options: "sąsiedniej|sąsiadującej|siedzącej|sąsiedzkiej"
+  correctAnswer: "sąsiedzkiej"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-5-6
+  passageRef: certyfikat-polski-B2-2017-read-5
+  questionType: fill_gap
+  questionText: "Na koncie […] są informacje o godzinach pracy."
+  options: "zachowane|ukrywane|gromadzone|wymieniane"
+  correctAnswer: gromadzone
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-5-7
+  passageRef: certyfikat-polski-B2-2017-read-5
+  questionType: fill_gap
+  questionText: "Ktoś inny tyle samo czasu […] jemu."
+  options: "pożyczy|poświęci|poda|przekaże"
+  correctAnswer: "poświęci"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-5-8
+  passageRef: certyfikat-polski-B2-2017-read-5
+  questionType: fill_gap
+  questionText: "Różnorodność usług jest […]."
+  options: "niepoliczona|niepoliczalna|nieznana|nieograniczona"
+  correctAnswer: nieograniczona
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-5-9
+  passageRef: certyfikat-polski-B2-2017-read-5
+  questionType: fill_gap
+  questionText: "[…] naukę pływania."
+  options: "bezstresową|bezczynną|bezpośrednią|bezwzględną"
+  correctAnswer: "bezstresową"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2017-reading-5-10
+  passageRef: certyfikat-polski-B2-2017-read-5
+  questionType: fill_gap
+  questionText: "Dzięki bankowi wiem, gdzie szukać pomocy – […] ci, którzy skorzystali."
+  options: "uznają|zeznają|przyznają|doznają"
+  correctAnswer: "przyznają"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-1-1
+  passageRef: certyfikat-polski-B2-2019-read-1
+  questionType: multiple_choice
+  questionText: "Z tego tekstu dowiadujemy się, że"
+  options: "a) w stresie spożycie posiłków i przekąsek jest większe.|b) w okresie pobudzenia organizmu do działania częściej tyjemy.|c) zajadanie stresu pojawia się u wszystkich zestresowanych."
+  correctAnswer: "b) w okresie pobudzenia organizmu do działania częściej tyjemy."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-1-2
+  passageRef: certyfikat-polski-B2-2019-read-1
+  questionType: multiple_choice
+  questionText: "Z tego tekstu dowiadujemy się, że"
+  options: "a) pociąg nie może jechać szybciej niż 60 km na godzinę.|b) mijane krajobrazy nie są atrakcyjne.|c) podróż Koleją Transsyberyjską może być komfortowa za wysoką cenę."
+  correctAnswer: "c) podróż Koleją Transsyberyjską może być komfortowa za wysoką cenę."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-1-3
+  passageRef: certyfikat-polski-B2-2019-read-1
+  questionType: multiple_choice
+  questionText: "Z tego tekstu dowiadujemy się, że"
+  options: "a) nagły i silny ból może okazać się pożyteczny.|b) istnieje sprawdzona skuteczna metoda walki z bólem.|c) bezsenność i brak apetytu mogą być przyczyną bólu."
+  correctAnswer: "a) nagły i silny ból może okazać się pożyteczny."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-1-4
+  passageRef: certyfikat-polski-B2-2019-read-1
+  questionType: multiple_choice
+  questionText: "Z tego tekstu dowiadujemy się, że"
+  options: "a) kobiecy spacer kosmiczny jest corocznym obyczajem.|b) McClain i Koch będą pierwszymi kobietami odbywającymi spacer kosmiczny.|c) kobiety-astronautki są obecne w NASA już od ponad czterdziestu lat."
+  correctAnswer: "c) kobiety-astronautki są obecne w NASA już od ponad czterdziestu lat."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-1-5
+  passageRef: certyfikat-polski-B2-2019-read-1
+  questionType: multiple_choice
+  questionText: "Z tego tekstu dowiadujemy się, że"
+  options: "a) już połowa ludzi na świecie słucha podcastów.|b) przez ostatnie lata liczba słuchowisk znacznie wzrosła.|c) 42 miliony wielbicieli słucha podcastów tylko raz w tygodniu."
+  correctAnswer: "b) przez ostatnie lata liczba słuchowisk znacznie wzrosła."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-2-1
+  passageRef: certyfikat-polski-B2-2019-read-2
+  questionType: gap_fill_fragment
+  questionText: "Fragment do luki [1]"
+  options: "A|B|D|E|F|G|H|I|J|K"
+  correctAnswer: H
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-2-2
+  passageRef: certyfikat-polski-B2-2019-read-2
+  questionType: gap_fill_fragment
+  questionText: "Fragment do luki [2]"
+  options: "A|B|D|E|F|G|H|I|J|K"
+  correctAnswer: A
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-2-3
+  passageRef: certyfikat-polski-B2-2019-read-2
+  questionType: gap_fill_fragment
+  questionText: "Fragment do luki [3]"
+  options: "A|B|D|E|F|G|H|I|J|K"
+  correctAnswer: I
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-2-4
+  passageRef: certyfikat-polski-B2-2019-read-2
+  questionType: gap_fill_fragment
+  questionText: "Fragment do luki [4]"
+  options: "A|B|D|E|F|G|H|I|J|K"
+  correctAnswer: D
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-2-5
+  passageRef: certyfikat-polski-B2-2019-read-2
+  questionType: gap_fill_fragment
+  questionText: "Fragment do luki [5]"
+  options: "A|B|D|E|F|G|H|I|J|K"
+  correctAnswer: E
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-2-6
+  passageRef: certyfikat-polski-B2-2019-read-2
+  questionType: gap_fill_fragment
+  questionText: "Fragment do luki [6]"
+  options: "A|B|D|E|F|G|H|I|J|K"
+  correctAnswer: B
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-2-7
+  passageRef: certyfikat-polski-B2-2019-read-2
+  questionType: gap_fill_fragment
+  questionText: "Fragment do luki [7]"
+  options: "A|B|D|E|F|G|H|I|J|K"
+  correctAnswer: G
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-2-8
+  passageRef: certyfikat-polski-B2-2019-read-2
+  questionType: gap_fill_fragment
+  questionText: "Fragment do luki [8]"
+  options: "A|B|D|E|F|G|H|I|J|K"
+  correctAnswer: K
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-2-9
+  passageRef: certyfikat-polski-B2-2019-read-2
+  questionType: gap_fill_fragment
+  questionText: "Fragment do luki [9]"
+  options: "A|B|D|E|F|G|H|I|J|K"
+  correctAnswer: F
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-2-10
+  passageRef: certyfikat-polski-B2-2019-read-2
+  questionType: gap_fill_fragment
+  questionText: "Fragment do luki [10]"
+  options: "A|B|D|E|F|G|H|I|J|K"
+  correctAnswer: J
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-3-1
+  passageRef: certyfikat-polski-B2-2019-read-3
+  questionType: match_heading
+  questionText: "Co wpłynęło na Twoją decyzję o udziale w tym projekcie?"
+  options: "A|B|C|D|E|G|H|I|J|K"
+  correctAnswer: D
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-3-2
+  passageRef: certyfikat-polski-B2-2019-read-3
+  questionType: match_heading
+  questionText: "Jak wyglądała praca nad piosenką do „Kuriera”?"
+  options: "A|B|C|D|E|G|H|I|J|K"
+  correctAnswer: A
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-3-3
+  passageRef: certyfikat-polski-B2-2019-read-3
+  questionType: match_heading
+  questionText: "Czy łatwo było napisać tekst?"
+  options: "A|B|C|D|E|G|H|I|J|K"
+  correctAnswer: E
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-3-4
+  passageRef: certyfikat-polski-B2-2019-read-3
+  questionType: match_heading
+  questionText: "Co Cię najbardziej zafascynowało w historii Nowaka-Jeziorańskiego?"
+  options: "A|B|C|D|E|G|H|I|J|K"
+  correctAnswer: K
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-3-5
+  passageRef: certyfikat-polski-B2-2019-read-3
+  questionType: match_heading
+  questionText: "Nie jest to Twoja pierwsza przygoda z kinem historycznym. To przypadek?"
+  options: "A|B|C|D|E|G|H|I|J|K"
+  correctAnswer: I
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-3-6
+  passageRef: certyfikat-polski-B2-2019-read-3
+  questionType: match_heading
+  questionText: "Jak Twoim zdaniem powinien wyglądać współczesny patriotyzm?"
+  options: "A|B|C|D|E|G|H|I|J|K"
+  correctAnswer: B
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-3-7
+  passageRef: certyfikat-polski-B2-2019-read-3
+  questionType: match_heading
+  questionText: "Niektórzy mówią, że artyści są od grania, a nie manifestowania poglądów politycznych. Jakie jest Twoje zdanie?"
+  options: "A|B|C|D|E|G|H|I|J|K"
+  correctAnswer: C
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-3-8
+  passageRef: certyfikat-polski-B2-2019-read-3
+  questionType: match_heading
+  questionText: "Karierę zaczynałeś od ciężkich brzmień, teraz zmieniłeś styl. Nie brakuje Ci metalu?"
+  options: "A|B|C|D|E|G|H|I|J|K"
+  correctAnswer: G
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-3-9
+  passageRef: certyfikat-polski-B2-2019-read-3
+  questionType: match_heading
+  questionText: "Sięgnąłeś też po twórczość Czesława Niemena, nie obawiałeś się reakcji publiczności?"
+  options: "A|B|C|D|E|G|H|I|J|K"
+  correctAnswer: H
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-3-10
+  passageRef: certyfikat-polski-B2-2019-read-3
+  questionType: match_heading
+  questionText: "Jakie są Twoje muzyczne plany?"
+  options: "A|B|C|D|E|G|H|I|J|K"
+  correctAnswer: J
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-4-1
+  passageRef: certyfikat-polski-B2-2019-read-4
+  questionType: true_false_not_given
+  questionText: "W Arktyce skutki globalnego ocieplenia widać gołym okiem."
+  options: "TAK|NIE|BI"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-4-2
+  passageRef: certyfikat-polski-B2-2019-read-4
+  questionType: true_false_not_given
+  questionText: "Zmiany klimatyczne są przyczyną migracji ryb w kierunku północnym."
+  options: "TAK|NIE|BI"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-4-3
+  passageRef: certyfikat-polski-B2-2019-read-4
+  questionType: true_false_not_given
+  questionText: "W Arktyce liczba ryb słodkowodnych zmniejsza się szybciej niż liczba ryb morskich."
+  options: "TAK|NIE|BI"
+  correctAnswer: BI
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-4-4
+  passageRef: certyfikat-polski-B2-2019-read-4
+  questionType: true_false_not_given
+  questionText: "Rozmarzanie ziemi w Arktyce ma związek z licznie występującymi tam lasami."
+  options: "TAK|NIE|BI"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-4-5
+  passageRef: certyfikat-polski-B2-2019-read-4
+  questionType: true_false_not_given
+  questionText: "Owady na północy potrzebują drzew, żeby się rozmnażać."
+  options: "TAK|NIE|BI"
+  correctAnswer: BI
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-4-6
+  passageRef: certyfikat-polski-B2-2019-read-4
+  questionType: true_false_not_given
+  questionText: "Przodkowie dzisiejszych ludów Arktyki nazywali siebie Eskimosami."
+  options: "TAK|NIE|BI"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-4-7
+  passageRef: certyfikat-polski-B2-2019-read-4
+  questionType: true_false_not_given
+  questionText: "W dzisiejszych czasach ludność Arktyki często zmienia miejsce zamieszkania."
+  options: "TAK|NIE|BI"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-4-8
+  passageRef: certyfikat-polski-B2-2019-read-4
+  questionType: true_false_not_given
+  questionText: "Ludzie na dalekiej północy kultywują odwieczne tradycje myśliwskie."
+  options: "TAK|NIE|BI"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-4-9
+  passageRef: certyfikat-polski-B2-2019-read-4
+  questionType: true_false_not_given
+  questionText: "Liczenie arktycznych zwierząt przez naukowców potwierdziło opinie ekologów."
+  options: "TAK|NIE|BI"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-4-10
+  passageRef: certyfikat-polski-B2-2019-read-4
+  questionType: true_false_not_given
+  questionText: "Migracje ryb pociągają za sobą wędrówki innych gatunków zwierząt."
+  options: "TAK|NIE|BI"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-5-1
+  passageRef: certyfikat-polski-B2-2019-read-5
+  questionType: fill_gap
+  questionText: "zbyt częste picie groziło [1]"
+  options: "chronią|postanawiają|zależnością|nadają|niepożądanych|oczyszczają|cennych|warunki|smaku|pomieszczenie|uzależnieniem|zapach|zastanawiają się"
+  correctAnswer: "uzależnieniem"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-5-2
+  passageRef: certyfikat-polski-B2-2019-read-5
+  questionType: fill_gap
+  questionText: "składniki, które [2] organizm"
+  options: "chronią|postanawiają|zależnością|nadają|niepożądanych|oczyszczają|cennych|warunki|smaku|pomieszczenie|uzależnieniem|zapach|zastanawiają się"
+  correctAnswer: "chronią"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-5-3
+  passageRef: certyfikat-polski-B2-2019-read-5
+  questionType: fill_gap
+  questionText: "Nad tym [3] ostatnio fizycy i chemicy"
+  options: "chronią|postanawiają|zależnością|nadają|niepożądanych|oczyszczają|cennych|warunki|smaku|pomieszczenie|uzależnieniem|zapach|zastanawiają się"
+  correctAnswer: "zastanawiają się"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-5-4
+  passageRef: certyfikat-polski-B2-2019-read-5
+  questionType: fill_gap
+  questionText: "zarówno [4] palenia ziaren"
+  options: "chronią|postanawiają|zależnością|nadają|niepożądanych|oczyszczają|cennych|warunki|smaku|pomieszczenie|uzależnieniem|zapach|zastanawiają się"
+  correctAnswer: warunki
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-5-5
+  passageRef: certyfikat-polski-B2-2019-read-5
+  questionType: fill_gap
+  questionText: "napój jest nijaki w [5]"
+  options: "chronią|postanawiają|zależnością|nadają|niepożądanych|oczyszczają|cennych|warunki|smaku|pomieszczenie|uzależnieniem|zapach|zastanawiają się"
+  correctAnswer: smaku
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-5-6
+  passageRef: certyfikat-polski-B2-2019-read-5
+  questionType: fill_gap
+  questionText: "reakcje, które [6] kawie smak"
+  options: "chronią|postanawiają|zależnością|nadają|niepożądanych|oczyszczają|cennych|warunki|smaku|pomieszczenie|uzależnieniem|zapach|zastanawiają się"
+  correctAnswer: "nadają"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-5-7
+  passageRef: certyfikat-polski-B2-2019-read-5
+  questionType: fill_gap
+  questionText: "owocowy, kwaskowy [7]"
+  options: "chronią|postanawiają|zależnością|nadają|niepożądanych|oczyszczają|cennych|warunki|smaku|pomieszczenie|uzależnieniem|zapach|zastanawiają się"
+  correctAnswer: zapach
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-5-8
+  passageRef: certyfikat-polski-B2-2019-read-5
+  questionType: fill_gap
+  questionText: "zbyt mało [8] składników"
+  options: "chronią|postanawiają|zależnością|nadają|niepożądanych|oczyszczają|cennych|warunki|smaku|pomieszczenie|uzależnieniem|zapach|zastanawiają się"
+  correctAnswer: cennych
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-5-9
+  passageRef: certyfikat-polski-B2-2019-read-5
+  questionType: fill_gap
+  questionText: "pojawi się wiele [9]"
+  options: "chronią|postanawiają|zależnością|nadają|niepożądanych|oczyszczają|cennych|warunki|smaku|pomieszczenie|uzależnieniem|zapach|zastanawiają się"
+  correctAnswer: "niepożądanych"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2019-reading-5-10
+  passageRef: certyfikat-polski-B2-2019-read-5
+  questionType: fill_gap
+  questionText: "gdy [10], w którym się ją podaje"
+  options: "chronią|postanawiają|zależnością|nadają|niepożądanych|oczyszczają|cennych|warunki|smaku|pomieszczenie|uzależnieniem|zapach|zastanawiają się"
+  correctAnswer: pomieszczenie
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-1-1
+  passageRef: certyfikat-polski-B2-2020-read-1
+  questionType: multiple_choice
+  questionText: "Z tekstu dowiadujemy się, że uczulenie na kota"
+  options: "a) jest najpopularniejszym rodzajem alergii na zwierzęta.|b) można leczyć w sposób podobny do leczenia astmy.|c) daje objawy nie tylko przy bezpośrednim kontakcie ze zwierzęciem."
+  correctAnswer: "c) daje objawy nie tylko przy bezpośrednim kontakcie ze zwierzęciem."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-1-2
+  passageRef: certyfikat-polski-B2-2020-read-1
+  questionType: multiple_choice
+  questionText: "Z tekstu dowiadujemy się, że bogacenie się społeczeństwa"
+  options: "a) powoduje rosnące zainteresowanie sprzętami gospodarstwa domowego.|b) wpływa na postęp technologiczny w dziedzinie sprzętów nowych generacji.|c) w pośredni sposób negatywnie wpływa na środowisko."
+  correctAnswer: "c) w pośredni sposób negatywnie wpływa na środowisko."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-1-3
+  passageRef: certyfikat-polski-B2-2020-read-1
+  questionType: multiple_choice
+  questionText: "Z tekstu dowiadujemy się, że"
+  options: "a) zdecydowanie więcej Polaków mieszka na wsi niż w mieście.|b) przymiotnik „wiejski” nasuwa odmienne skojarzenia w różnych krajach.|c) wiejskie pochodzenie jest dla Polaków powodem do dumy."
+  correctAnswer: "b) przymiotnik „wiejski” nasuwa odmienne skojarzenia w różnych krajach."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-1-4
+  passageRef: certyfikat-polski-B2-2020-read-1
+  questionType: multiple_choice
+  questionText: "Z tekstu dowiadujemy się, że"
+  options: "a) autor nie ceni powierzchownego zwiedzania.|b) duże miasta zachwycają autora swoją różnorodnością.|c) lotniska międzynarodowe wszędzie wyglądają tak samo."
+  correctAnswer: "a) autor nie ceni powierzchownego zwiedzania."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-1-5
+  passageRef: certyfikat-polski-B2-2020-read-1
+  questionType: multiple_choice
+  questionText: "Z tekstu dowiadujemy się, że"
+  options: "a) ludzie niechętnie suszą ubrania na słońcu.|b) suszarki automatyczne nie niszczą tkanin.|c) wybór rodzaju suszenia zależy od koloru ubrań."
+  correctAnswer: "b) suszarki automatyczne nie niszczą tkanin."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-2-1
+  passageRef: certyfikat-polski-B2-2020-read-2
+  questionType: gap_fill_fragment
+  questionText: "Fragment do luki [1]"
+  options: "A|B|D|E|F|G|H|I|J|K"
+  correctAnswer: E
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-2-2
+  passageRef: certyfikat-polski-B2-2020-read-2
+  questionType: gap_fill_fragment
+  questionText: "Fragment do luki [2]"
+  options: "A|B|D|E|F|G|H|I|J|K"
+  correctAnswer: I
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-2-3
+  passageRef: certyfikat-polski-B2-2020-read-2
+  questionType: gap_fill_fragment
+  questionText: "Fragment do luki [3]"
+  options: "A|B|D|E|F|G|H|I|J|K"
+  correctAnswer: D
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-2-4
+  passageRef: certyfikat-polski-B2-2020-read-2
+  questionType: gap_fill_fragment
+  questionText: "Fragment do luki [4]"
+  options: "A|B|D|E|F|G|H|I|J|K"
+  correctAnswer: K
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-2-5
+  passageRef: certyfikat-polski-B2-2020-read-2
+  questionType: gap_fill_fragment
+  questionText: "Fragment do luki [5]"
+  options: "A|B|D|E|F|G|H|I|J|K"
+  correctAnswer: A
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-2-6
+  passageRef: certyfikat-polski-B2-2020-read-2
+  questionType: gap_fill_fragment
+  questionText: "Fragment do luki [6]"
+  options: "A|B|D|E|F|G|H|I|J|K"
+  correctAnswer: F
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-2-7
+  passageRef: certyfikat-polski-B2-2020-read-2
+  questionType: gap_fill_fragment
+  questionText: "Fragment do luki [7]"
+  options: "A|B|D|E|F|G|H|I|J|K"
+  correctAnswer: B
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-2-8
+  passageRef: certyfikat-polski-B2-2020-read-2
+  questionType: gap_fill_fragment
+  questionText: "Fragment do luki [8]"
+  options: "A|B|D|E|F|G|H|I|J|K"
+  correctAnswer: G
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-2-9
+  passageRef: certyfikat-polski-B2-2020-read-2
+  questionType: gap_fill_fragment
+  questionText: "Fragment do luki [9]"
+  options: "A|B|D|E|F|G|H|I|J|K"
+  correctAnswer: J
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-2-10
+  passageRef: certyfikat-polski-B2-2020-read-2
+  questionType: gap_fill_fragment
+  questionText: "Fragment do luki [10]"
+  options: "A|B|D|E|F|G|H|I|J|K"
+  correctAnswer: H
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-3-1
+  passageRef: certyfikat-polski-B2-2020-read-3
+  questionType: match_heading
+  questionText: "To, co niewypowiedziane"
+  options: "A|B|C|D|E|G|H|I|J|K"
+  correctAnswer: E
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-3-2
+  passageRef: certyfikat-polski-B2-2020-read-3
+  questionType: match_heading
+  questionText: "Informacja to nie wszystko"
+  options: "A|B|C|D|E|G|H|I|J|K"
+  correctAnswer: A
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-3-3
+  passageRef: certyfikat-polski-B2-2020-read-3
+  questionType: match_heading
+  questionText: "Klucz do sukcesu zawodowego"
+  options: "A|B|C|D|E|G|H|I|J|K"
+  correctAnswer: J
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-3-4
+  passageRef: certyfikat-polski-B2-2020-read-3
+  questionType: match_heading
+  questionText: "Zasada wzajemności"
+  options: "A|B|C|D|E|G|H|I|J|K"
+  correctAnswer: G
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-3-5
+  passageRef: certyfikat-polski-B2-2020-read-3
+  questionType: match_heading
+  questionText: "Tylko dla twoich uszu"
+  options: "A|B|C|D|E|G|H|I|J|K"
+  correctAnswer: H
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-3-6
+  passageRef: certyfikat-polski-B2-2020-read-3
+  questionType: match_heading
+  questionText: "Bez osądzania"
+  options: "A|B|C|D|E|G|H|I|J|K"
+  correctAnswer: D
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-3-7
+  passageRef: certyfikat-polski-B2-2020-read-3
+  questionType: match_heading
+  questionText: "Po prostu bądź!"
+  options: "A|B|C|D|E|G|H|I|J|K"
+  correctAnswer: B
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-3-8
+  passageRef: certyfikat-polski-B2-2020-read-3
+  questionType: match_heading
+  questionText: "Nie każda rada jest dobra"
+  options: "A|B|C|D|E|G|H|I|J|K"
+  correctAnswer: C
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-3-9
+  passageRef: certyfikat-polski-B2-2020-read-3
+  questionType: match_heading
+  questionText: "Mimo wszystko – rozmawiamy!"
+  options: "A|B|C|D|E|G|H|I|J|K"
+  correctAnswer: K
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-3-10
+  passageRef: certyfikat-polski-B2-2020-read-3
+  questionType: match_heading
+  questionText: "Za późno na rozmowę"
+  options: "A|B|C|D|E|G|H|I|J|K"
+  correctAnswer: I
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-4-1
+  passageRef: certyfikat-polski-B2-2020-read-4
+  questionType: true_false_not_given
+  questionText: "Urząd Miasta Częstochowy sfinansował wydanie „Podróży po Jurze”."
+  options: "TAK|NIE|BI"
+  correctAnswer: BI
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-4-2
+  passageRef: certyfikat-polski-B2-2020-read-4
+  questionType: true_false_not_given
+  questionText: "Gra, zapoznając z atrakcjami turystycznymi Jury, rozwija też inne umiejętności."
+  options: "TAK|NIE|BI"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-4-3
+  passageRef: certyfikat-polski-B2-2020-read-4
+  questionType: true_false_not_given
+  questionText: "Zamiast planszy używa się mapy z narysowanymi drogami."
+  options: "TAK|NIE|BI"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-4-4
+  passageRef: certyfikat-polski-B2-2020-read-4
+  questionType: true_false_not_given
+  questionText: "Grając w drużynach, można stworzyć zespoły złożone z 2-6 osób."
+  options: "TAK|NIE|BI"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-4-5
+  passageRef: certyfikat-polski-B2-2020-read-4
+  questionType: true_false_not_given
+  questionText: "W planie są też inne formy sprzedaży gry."
+  options: "TAK|NIE|BI"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-4-6
+  passageRef: certyfikat-polski-B2-2020-read-4
+  questionType: true_false_not_given
+  questionText: "Gra to pierwsza inicjatywa promocji tego regionu."
+  options: "TAK|NIE|BI"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-4-7
+  passageRef: certyfikat-polski-B2-2020-read-4
+  questionType: true_false_not_given
+  questionText: "Szlak Orlich Gniazd i związane z nim święto to inicjatywa dwóch województw."
+  options: "TAK|NIE|BI"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-4-8
+  passageRef: certyfikat-polski-B2-2020-read-4
+  questionType: true_false_not_given
+  questionText: "Festiwal kultury lokalnej organizowany jest od 5 lat."
+  options: "TAK|NIE|BI"
+  correctAnswer: BI
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-4-9
+  passageRef: certyfikat-polski-B2-2020-read-4
+  questionType: true_false_not_given
+  questionText: "Internetowy przewodnik rowerowy jest dostępny na 30 stronach internetowych."
+  options: "TAK|NIE|BI"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-4-10
+  passageRef: certyfikat-polski-B2-2020-read-4
+  questionType: true_false_not_given
+  questionText: "Użytkownicy mogą wpływać na kształt internetowego przewodnika rowerowego."
+  options: "TAK|NIE|BI"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-5-1
+  passageRef: certyfikat-polski-B2-2020-read-5
+  questionType: multiple_choice
+  questionText: "z [1] nauk ścisłych i przyrodniczych"
+  options: "okresu|epoki|gałęzi|zakresu"
+  correctAnswer: zakresu
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-5-2
+  passageRef: certyfikat-polski-B2-2020-read-5
+  questionType: multiple_choice
+  questionText: "którzy [2] wyprowadzą wzór czy wyuczą się regułki"
+  options: "wreszcie|zarazem|co prawda|naprawdę"
+  correctAnswer: "co prawda"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-5-3
+  passageRef: certyfikat-polski-B2-2020-read-5
+  questionType: multiple_choice
+  questionText: "[3] dla nich zadania"
+  options: "Wykreowane|Skomponowane|Opracowane|Odpracowane"
+  correctAnswer: Opracowane
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-5-4
+  passageRef: certyfikat-polski-B2-2020-read-5
+  questionType: multiple_choice
+  questionText: "[4] nastolatków ze specyfiką pracy naukowca"
+  options: "rozpoznać|zapoznać|zaznać|wyznać"
+  correctAnswer: "zapoznać"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-5-5
+  passageRef: certyfikat-polski-B2-2020-read-5
+  questionType: multiple_choice
+  questionText: "[5] podstaw analizy danych"
+  options: "zapanowanie|opanowanie|otrzymanie|dostanie"
+  correctAnswer: opanowanie
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-5-6
+  passageRef: certyfikat-polski-B2-2020-read-5
+  questionType: multiple_choice
+  questionText: "uczniowie [6] status stażystów"
+  options: "uzyskają|odbiorą|odzyskają|przyznają"
+  correctAnswer: "uzyskają"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-5-7
+  passageRef: certyfikat-polski-B2-2020-read-5
+  questionType: multiple_choice
+  questionText: "Tematyka łamigłówek będzie [7] biologię"
+  options: "ogarniała|obejmowała|zawierała|otaczała"
+  correctAnswer: "obejmowała"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-5-8
+  passageRef: certyfikat-polski-B2-2020-read-5
+  questionType: multiple_choice
+  questionText: "wysoki [8] merytoryczny"
+  options: "stopień|poziom|aspekt|wymiar"
+  correctAnswer: poziom
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-5-9
+  passageRef: certyfikat-polski-B2-2020-read-5
+  questionType: multiple_choice
+  questionText: "sukcesu nie [9] tu znajomość spisu treści"
+  options: "uniemożliwi|upewni|zapewni|osiągnie"
+  correctAnswer: zapewni
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2020-reading-5-10
+  passageRef: certyfikat-polski-B2-2020-read-5
+  questionType: multiple_choice
+  questionText: "łączenia ze sobą [10] nieoczywistych faktów"
+  options: "pozornie|wyraźnie|specjalnie|faktycznie"
+  correctAnswer: pozornie
+  pointsQuarter: 2
+}

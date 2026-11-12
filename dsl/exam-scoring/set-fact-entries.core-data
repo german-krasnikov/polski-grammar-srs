@@ -1,0 +1,374 @@
+DSL 1
+# Fact identities and per-question source credit for set-facts.core-data.
+SET_FIXTURE_FACT {
+  factId: metadata-absent-a
+  caseRef: metadata-absent-over-limit
+  displayText: A
+  creditQuarter: 2
+}
+SET_FIXTURE_FACT {
+  factId: metadata-absent-b
+  caseRef: metadata-absent-over-limit
+  displayText: B
+  creditQuarter: 2
+}
+SET_FIXTURE_FACT {
+  factId: metadata-absent-c
+  caseRef: metadata-absent-over-limit
+  displayText: C
+  creditQuarter: 2
+}
+SET_FIXTURE_FACT {
+  factId: metadata-manual-a
+  caseRef: metadata-explicit-manual-over-limit
+  displayText: A
+  creditQuarter: 2
+}
+SET_FIXTURE_FACT {
+  factId: metadata-manual-b
+  caseRef: metadata-explicit-manual-over-limit
+  displayText: B
+  creditQuarter: 2
+}
+SET_FIXTURE_FACT {
+  factId: metadata-manual-c
+  caseRef: metadata-explicit-manual-over-limit
+  displayText: C
+  creditQuarter: 2
+}
+SET_FIXTURE_FACT {
+  factId: metadata-empty-a
+  caseRef: metadata-absent-empty-segment
+  displayText: A
+  creditQuarter: 2
+}
+SET_FIXTURE_FACT {
+  factId: metadata-empty-b
+  caseRef: metadata-absent-empty-segment
+  displayText: B
+  creditQuarter: 2
+}
+SET_FIXTURE_FACT {
+  factId: metadata-empty-c
+  caseRef: metadata-absent-empty-segment
+  displayText: C
+  creditQuarter: 2
+}
+SET_FIXTURE_FACT {
+  factId: metadata-manual-empty-a
+  caseRef: metadata-explicit-manual-empty-segment
+  displayText: A
+  creditQuarter: 2
+}
+SET_FIXTURE_FACT {
+  factId: metadata-manual-empty-b
+  caseRef: metadata-explicit-manual-empty-segment
+  displayText: B
+  creditQuarter: 2
+}
+SET_FIXTURE_FACT {
+  factId: metadata-manual-empty-c
+  caseRef: metadata-explicit-manual-empty-segment
+  displayText: C
+  creditQuarter: 2
+}
+SET_FIXTURE_FACT {
+  factId: closed-valid-a
+  caseRef: closed-valid-distractor
+  displayText: A
+  creditQuarter: 2
+}
+SET_FIXTURE_FACT {
+  factId: closed-valid-b
+  caseRef: closed-valid-distractor
+  displayText: B
+  creditQuarter: 2
+}
+SET_FIXTURE_FACT {
+  factId: closed-valid-c
+  caseRef: closed-valid-distractor
+  displayText: C
+  creditQuarter: 2
+}
+SET_FIXTURE_FACT {
+  factId: b2-large
+  caseRef: b2-any-two-forward
+  displayText: "są duże"
+  creditQuarter: 2
+}
+SET_FIXTURE_FACT {
+  factId: b2-bright
+  caseRef: b2-any-two-forward
+  displayText: "są jasne"
+  creditQuarter: 2
+}
+SET_FIXTURE_FACT {
+  factId: b2-equipment
+  caseRef: b2-any-two-forward
+  displayText: "jest w nich nowy sprzęt"
+  creditQuarter: 2
+}
+SET_FIXTURE_FACT {
+  factId: b2r-large
+  caseRef: b2-any-two-reversed
+  displayText: "są duże"
+  creditQuarter: 2
+}
+SET_FIXTURE_FACT {
+  factId: b2r-bright
+  caseRef: b2-any-two-reversed
+  displayText: "są jasne"
+  creditQuarter: 2
+}
+SET_FIXTURE_FACT {
+  factId: b2r-equipment
+  caseRef: b2-any-two-reversed
+  displayText: "jest w nich nowy sprzęt"
+  creditQuarter: 2
+}
+SET_FIXTURE_FACT {
+  factId: b2o-large
+  caseRef: b2-one-known
+  displayText: "są duże"
+  creditQuarter: 2
+}
+SET_FIXTURE_FACT {
+  factId: b2o-bright
+  caseRef: b2-one-known
+  displayText: "są jasne"
+  creditQuarter: 2
+}
+SET_FIXTURE_FACT {
+  factId: b2o-equipment
+  caseRef: b2-one-known
+  displayText: "jest w nich nowy sprzęt"
+  creditQuarter: 2
+}
+SET_FIXTURE_FACT {
+  factId: b2x-large
+  caseRef: b2-three-over-limit
+  displayText: "są duże"
+  creditQuarter: 2
+}
+SET_FIXTURE_FACT {
+  factId: b2x-bright
+  caseRef: b2-three-over-limit
+  displayText: "są jasne"
+  creditQuarter: 2
+}
+SET_FIXTURE_FACT {
+  factId: b2x-equipment
+  caseRef: b2-three-over-limit
+  displayText: "jest w nich nowy sprzęt"
+  creditQuarter: 2
+}
+SET_FIXTURE_FACT {
+  factId: b2a-large
+  caseRef: b2-alias-same-fact
+  displayText: "są duże"
+  creditQuarter: 2
+}
+SET_FIXTURE_FACT {
+  factId: b2a-bright
+  caseRef: b2-alias-same-fact
+  displayText: "są jasne"
+  creditQuarter: 2
+}
+SET_FIXTURE_FACT {
+  factId: b2a-equipment
+  caseRef: b2-alias-same-fact
+  displayText: "jest w nich nowy sprzęt"
+  creditQuarter: 2
+}
+SET_FIXTURE_FACT {
+  factId: b2u-large
+  caseRef: b2-open-unknown
+  displayText: "są duże"
+  creditQuarter: 2
+}
+SET_FIXTURE_FACT {
+  factId: b2u-bright
+  caseRef: b2-open-unknown
+  displayText: "są jasne"
+  creditQuarter: 2
+}
+SET_FIXTURE_FACT {
+  factId: b2u-equipment
+  caseRef: b2-open-unknown
+  displayText: "jest w nich nowy sprzęt"
+  creditQuarter: 2
+}
+SET_FIXTURE_FACT {
+  factId: b2b-large
+  caseRef: b2-blank
+  displayText: "są duże"
+  creditQuarter: 2
+}
+SET_FIXTURE_FACT {
+  factId: b2b-bright
+  caseRef: b2-blank
+  displayText: "są jasne"
+  creditQuarter: 2
+}
+SET_FIXTURE_FACT {
+  factId: b2b-equipment
+  caseRef: b2-blank
+  displayText: "jest w nich nowy sprzęt"
+  creditQuarter: 2
+}
+SET_FIXTURE_FACT {
+  factId: b2e-large
+  caseRef: b2-unused-empty-slot
+  displayText: "są duże"
+  creditQuarter: 2
+}
+SET_FIXTURE_FACT {
+  factId: b2e-bright
+  caseRef: b2-unused-empty-slot
+  displayText: "są jasne"
+  creditQuarter: 2
+}
+SET_FIXTURE_FACT {
+  factId: b2e-equipment
+  caseRef: b2-unused-empty-slot
+  displayText: "jest w nich nowy sprzęt"
+  creditQuarter: 2
+}
+SET_FIXTURE_FACT {
+  factId: closed-a
+  caseRef: closed-unparseable
+  displayText: A
+  creditQuarter: 2
+}
+SET_FIXTURE_FACT {
+  factId: closed-b
+  caseRef: closed-unparseable
+  displayText: B
+  creditQuarter: 2
+}
+SET_FIXTURE_FACT {
+  factId: closed-c
+  caseRef: closed-unparseable
+  displayText: C
+  creditQuarter: 2
+}
+SET_FIXTURE_FACT {
+  factId: c1-2
+  caseRef: c1-six-of-twelve
+  displayText: "2"
+  creditQuarter: 4
+}
+SET_FIXTURE_FACT {
+  factId: c1-5
+  caseRef: c1-six-of-twelve
+  displayText: "5"
+  creditQuarter: 4
+}
+SET_FIXTURE_FACT {
+  factId: c1-6
+  caseRef: c1-six-of-twelve
+  displayText: "6"
+  creditQuarter: 4
+}
+SET_FIXTURE_FACT {
+  factId: c1-8
+  caseRef: c1-six-of-twelve
+  displayText: "8"
+  creditQuarter: 4
+}
+SET_FIXTURE_FACT {
+  factId: c1-9
+  caseRef: c1-six-of-twelve
+  displayText: "9"
+  creditQuarter: 4
+}
+SET_FIXTURE_FACT {
+  factId: c1-12
+  caseRef: c1-six-of-twelve
+  displayText: "12"
+  creditQuarter: 4
+}
+SET_FIXTURE_FACT {
+  factId: c1a4-a
+  caseRef: c1-april-two-by-four
+  displayText: A
+  creditQuarter: 4
+}
+SET_FIXTURE_FACT {
+  factId: c1a4-b
+  caseRef: c1-april-two-by-four
+  displayText: B
+  creditQuarter: 4
+}
+SET_FIXTURE_FACT {
+  factId: c1a2-a
+  caseRef: c1-april-two-by-two
+  displayText: A
+  creditQuarter: 2
+}
+SET_FIXTURE_FACT {
+  factId: c1a2-b
+  caseRef: c1-april-two-by-two
+  displayText: B
+  creditQuarter: 2
+}
+SET_FIXTURE_FACT {
+  factId: read1-b
+  caseRef: reading-b-first-question
+  displayText: B
+  creditQuarter: 2
+}
+SET_FIXTURE_FACT {
+  factId: read1-e
+  caseRef: reading-b-first-question
+  displayText: E
+  creditQuarter: 2
+}
+SET_FIXTURE_FACT {
+  factId: read2-b
+  caseRef: reading-b-second-question
+  displayText: B
+  creditQuarter: 2
+}
+SET_FIXTURE_FACT {
+  factId: read2-c
+  caseRef: reading-b-second-question
+  displayText: C
+  creditQuarter: 2
+}
+SET_FIXTURE_FACT {
+  factId: bad1-a
+  caseRef: ambiguous-normalized-alias
+  displayText: "Są duże"
+  creditQuarter: 2
+}
+SET_FIXTURE_FACT {
+  factId: bad1-b
+  caseRef: ambiguous-normalized-alias
+  displayText: "są jasne"
+  creditQuarter: 2
+}
+SET_FIXTURE_FACT {
+  factId: bad2-a
+  caseRef: zero-fact-weight
+  displayText: A
+  creditQuarter: 0
+}
+SET_FIXTURE_FACT {
+  factId: bad2-b
+  caseRef: zero-fact-weight
+  displayText: B
+  creditQuarter: 2
+}
+SET_FIXTURE_FACT {
+  factId: bad3-a
+  caseRef: impossible-slot-count
+  displayText: A
+  creditQuarter: 2
+}
+SET_FIXTURE_FACT {
+  factId: bad3-b
+  caseRef: impossible-slot-count
+  displayText: B
+  creditQuarter: 2
+}

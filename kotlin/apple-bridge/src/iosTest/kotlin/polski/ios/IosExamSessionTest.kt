@@ -42,6 +42,8 @@ class IosExamSessionTest {
         val catalog = session.view()
         assertEquals("catalog", catalog.getValue("screen").jsonPrimitive.content)
         assertEquals(6, catalog.getValue("catalog").jsonArray.size)
+        assertEquals("B1 Certyfikat 2017", catalog.getValue("catalog").jsonArray.first().jsonObject
+            .getValue("displayTitle").jsonPrimitive.content)
         session.selectExam("b1-2017")
         val modules = session.view().getValue("modules").jsonArray
         assertEquals(listOf("listening", "reading", "grammar", "writing"), modules.map { it.jsonObject.getValue("module").jsonPrimitive.content })

@@ -1,0 +1,231 @@
+DSL 1
+# Independent API cases. B2/C1 forms model the source shape; P9 paper drafts remain unpublished.
+SET_FACT_CASE {
+  id: b2-any-two-forward
+  requiredSelections: 2
+  maximumQuarter: 4
+  answer: "są duże|są jasne"
+  mode: open_manual
+  expectedStatus: confirmed_full
+  expectedConfirmedQuarter: 4
+  expectedPendingQuarter: 0
+}
+SET_FACT_CASE {
+  id: b2-any-two-reversed
+  requiredSelections: 2
+  maximumQuarter: 4
+  answer: "jest w nich nowy sprzęt|są duże"
+  mode: open_manual
+  expectedStatus: confirmed_full
+  expectedConfirmedQuarter: 4
+  expectedPendingQuarter: 0
+}
+SET_FACT_CASE {
+  id: b2-one-known
+  requiredSelections: 2
+  maximumQuarter: 4
+  answer: "są duże"
+  mode: open_manual
+  expectedStatus: confirmed_partial
+  expectedConfirmedQuarter: 2
+  expectedPendingQuarter: 0
+}
+SET_FACT_CASE {
+  id: b2-three-over-limit
+  requiredSelections: 2
+  maximumQuarter: 4
+  answer: "są duże|są jasne|jest w nich nowy sprzęt"
+  mode: open_manual
+  expectedStatus: pending_manual
+  expectedConfirmedQuarter: 0
+  expectedPendingQuarter: 4
+}
+SET_FACT_CASE {
+  id: metadata-absent-over-limit
+  requiredSelections: 2
+  maximumQuarter: 4
+  answer: "A|B|C"
+  options: "A|B|C"
+  mode: exact
+  verifyModelDefault: true
+  expectedStatus: wrong
+  expectedConfirmedQuarter: 0
+  expectedPendingQuarter: 0
+}
+SET_FACT_CASE {
+  id: metadata-explicit-manual-over-limit
+  requiredSelections: 2
+  maximumQuarter: 4
+  answer: "A|B|C"
+  options: "A|B|C"
+  mode: exact
+  setOverselectionMode: manual_review
+  verifyModelDefault: true
+  expectedStatus: pending_manual
+  expectedConfirmedQuarter: 0
+  expectedPendingQuarter: 4
+}
+SET_FACT_CASE {
+  id: metadata-absent-empty-segment
+  requiredSelections: 2
+  maximumQuarter: 4
+  answer: "A||B"
+  options: "A|B|C"
+  mode: exact
+  verifyModelDefault: true
+  expectedStatus: wrong
+  expectedConfirmedQuarter: 0
+  expectedPendingQuarter: 0
+}
+SET_FACT_CASE {
+  id: metadata-explicit-manual-empty-segment
+  requiredSelections: 2
+  maximumQuarter: 4
+  answer: "A||B"
+  options: "A|B|C"
+  mode: exact
+  setOverselectionMode: manual_review
+  verifyModelDefault: true
+  expectedStatus: pending_manual
+  expectedConfirmedQuarter: 0
+  expectedPendingQuarter: 4
+}
+SET_FACT_CASE {
+  id: b2-alias-same-fact
+  requiredSelections: 2
+  maximumQuarter: 4
+  answer: "są duże|duże"
+  mode: open_manual
+  expectedStatus: confirmed_partial
+  expectedConfirmedQuarter: 2
+  expectedPendingQuarter: 0
+}
+SET_FACT_CASE {
+  id: b2-open-unknown
+  requiredSelections: 2
+  maximumQuarter: 4
+  answer: "są duże|inne poprawne uzasadnienie"
+  mode: open_manual
+  expectedStatus: pending_manual
+  expectedConfirmedQuarter: 2
+  expectedPendingQuarter: 2
+}
+SET_FACT_CASE {
+  id: b2-blank
+  requiredSelections: 2
+  maximumQuarter: 4
+  answer: ""
+  mode: open_manual
+  expectedStatus: wrong
+  expectedConfirmedQuarter: 0
+  expectedPendingQuarter: 0
+}
+SET_FACT_CASE {
+  id: b2-unused-empty-slot
+  requiredSelections: 2
+  maximumQuarter: 4
+  answer: "są duże|"
+  mode: open_manual
+  expectedStatus: confirmed_partial
+  expectedConfirmedQuarter: 2
+  expectedPendingQuarter: 0
+}
+SET_FACT_CASE {
+  id: closed-unparseable
+  requiredSelections: 2
+  maximumQuarter: 4
+  answer: "???"
+  options: "A|B|C"
+  mode: exact
+  expectedStatus: pending_manual
+  expectedConfirmedQuarter: 0
+  expectedPendingQuarter: 4
+}
+SET_FACT_CASE {
+  id: closed-valid-distractor
+  requiredSelections: 2
+  maximumQuarter: 4
+  answer: "A|D"
+  options: "A|B|C|D"
+  mode: exact
+  expectedStatus: confirmed_partial
+  expectedConfirmedQuarter: 2
+  expectedPendingQuarter: 0
+}
+SET_FACT_CASE {
+  id: c1-six-of-twelve
+  requiredSelections: 6
+  maximumQuarter: 24
+  answer: "12|2|5|6|8|9"
+  options: "1|2|3|4|5|6|7|8|9|10|11|12"
+  mode: exact
+  expectedStatus: confirmed_full
+  expectedConfirmedQuarter: 24
+  expectedPendingQuarter: 0
+}
+SET_FACT_CASE {
+  id: c1-april-two-by-four
+  requiredSelections: 2
+  maximumQuarter: 8
+  answer: "A|B"
+  mode: open_manual
+  expectedStatus: confirmed_full
+  expectedConfirmedQuarter: 8
+  expectedPendingQuarter: 0
+}
+SET_FACT_CASE {
+  id: c1-april-two-by-two
+  requiredSelections: 2
+  maximumQuarter: 4
+  answer: "A|B"
+  mode: open_manual
+  expectedStatus: confirmed_full
+  expectedConfirmedQuarter: 4
+  expectedPendingQuarter: 0
+}
+SET_FACT_CASE {
+  id: reading-b-first-question
+  requiredSelections: 2
+  maximumQuarter: 4
+  answer: "B|E"
+  options: "A|B|C|D|E"
+  mode: exact
+  expectedStatus: confirmed_full
+  expectedConfirmedQuarter: 4
+  expectedPendingQuarter: 0
+}
+SET_FACT_CASE {
+  id: reading-b-second-question
+  requiredSelections: 2
+  maximumQuarter: 4
+  answer: "B|C"
+  options: "A|B|C|D|E"
+  mode: exact
+  expectedStatus: confirmed_full
+  expectedConfirmedQuarter: 4
+  expectedPendingQuarter: 0
+}
+SET_FACT_CASE {
+  id: ambiguous-normalized-alias
+  requiredSelections: 2
+  maximumQuarter: 4
+  answer: "duże"
+  mode: open_manual
+  expectIntegrityFailure: true
+}
+SET_FACT_CASE {
+  id: zero-fact-weight
+  requiredSelections: 2
+  maximumQuarter: 4
+  answer: A
+  mode: open_manual
+  expectIntegrityFailure: true
+}
+SET_FACT_CASE {
+  id: impossible-slot-count
+  requiredSelections: 3
+  maximumQuarter: 6
+  answer: A
+  mode: open_manual
+  expectIntegrityFailure: true
+}

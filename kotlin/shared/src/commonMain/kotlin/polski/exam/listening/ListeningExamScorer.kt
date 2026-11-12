@@ -5,7 +5,8 @@ import polski.exam.*
 object ListeningExamScorer {
     fun grade(question: ListeningQuestion, answer: String): ExamAnswerEvaluation =
         if (question.answerMode == ExamAnswerMode.UnorderedSet)
-            evaluateUnorderedSetAnswer(question.correctAnswer, question.options, answer, question.pointsQuarter, question.creditPerCorrectQuarter, question.gradingMode)
+            if (question.acceptedFacts.isEmpty() && question.requiredSelections == null) evaluateUnorderedSetAnswer(question.correctAnswer, question.options, answer, question.pointsQuarter, question.creditPerCorrectQuarter, question.gradingMode)
+            else evaluateFactSetAnswer(sourceSetAnswerSpec(question.answerSlotCount, question.pointsQuarter, question.acceptedFacts, question.options, question.gradingMode, question.setOverselectionMode, question.correctAnswer, question.creditPerCorrectQuarter), answer)
         else evaluateExamAnswer(question.gradingMode, question.correctAnswer, question.scoredVariants, answer, question.pointsQuarter)
 
     fun scoreAttempt(exam: ListeningExam, answers: Map<String, String>): ExamPartScore {

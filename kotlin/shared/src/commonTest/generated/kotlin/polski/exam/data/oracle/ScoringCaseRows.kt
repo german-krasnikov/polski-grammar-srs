@@ -1,5 +1,5 @@
 // Generated from dsl/exam.data-contract
-// source-sha256=b3f85a462ee514db3f071eb400b8895577e80025c6f80bb9ba5c8530e44462d7
+// source-sha256=9f2773168dc0b459612d773f233da80748fbf9916ca5bae13c27401bf0105706
 // Edit the source, then run biome generate.
 
 package polski.exam.data.oracle
@@ -29,6 +29,11 @@ enum class ListeningQuestionRowAnswerMode(val tag: String) {
     UNORDERED_SET("unordered_set"),
 }
 
+enum class ListeningQuestionRowSetOverselectionMode(val tag: String) {
+    LEGACY_WRONG("legacy_wrong"),
+    MANUAL_REVIEW("manual_review"),
+}
+
 enum class ReadingQuestionRowQuestionType(val tag: String) {
     MULTIPLE_CHOICE("multiple_choice"),
     TRUE_FALSE_NOT_GIVEN("true_false_not_given"),
@@ -47,6 +52,11 @@ enum class ReadingQuestionRowGradingMode(val tag: String) {
 enum class ReadingQuestionRowAnswerMode(val tag: String) {
     SINGLE("single"),
     UNORDERED_SET("unordered_set"),
+}
+
+enum class ReadingQuestionRowSetOverselectionMode(val tag: String) {
+    LEGACY_WRONG("legacy_wrong"),
+    MANUAL_REVIEW("manual_review"),
 }
 
 enum class GrammarItemRowQuestionType(val tag: String) {
@@ -162,6 +172,13 @@ data class ExamRow(
     val license: String? = null,
 )
 
+data class ExamPublicationRow(
+    val routeId: String,
+    val examRef: String,
+    val displayTitle: String,
+    val sourceDir: String,
+)
+
 data class ExamModuleRow(
     val moduleId: String,
     val examRef: String,
@@ -196,6 +213,8 @@ data class ListeningQuestionRow(
     val gradingMode: ListeningQuestionRowGradingMode? = null,
     val answerMode: ListeningQuestionRowAnswerMode? = null,
     val creditPerCorrectQuarter: Int? = null,
+    val requiredSelections: Int? = null,
+    val setOverselectionMode: ListeningQuestionRowSetOverselectionMode? = null,
 )
 
 data class ListeningAnswerVariantRow(
@@ -203,6 +222,19 @@ data class ListeningAnswerVariantRow(
     val questionRef: String,
     val answer: String,
     val earnedQuarter: Int,
+)
+
+data class ListeningAcceptedFactRow(
+    val factId: String,
+    val questionRef: String,
+    val creditQuarter: Int,
+    val displayText: String,
+)
+
+data class ListeningAcceptedFactAliasRow(
+    val aliasId: String,
+    val factRef: String,
+    val answerText: String,
 )
 
 data class ReadingPassageRow(
@@ -227,6 +259,8 @@ data class ReadingQuestionRow(
     val gradingMode: ReadingQuestionRowGradingMode? = null,
     val answerMode: ReadingQuestionRowAnswerMode? = null,
     val creditPerCorrectQuarter: Int? = null,
+    val requiredSelections: Int? = null,
+    val setOverselectionMode: ReadingQuestionRowSetOverselectionMode? = null,
     val relevantParagraph: Int? = null,
 )
 
@@ -235,6 +269,19 @@ data class ReadingAnswerVariantRow(
     val questionRef: String,
     val answer: String,
     val earnedQuarter: Int,
+)
+
+data class ReadingAcceptedFactRow(
+    val factId: String,
+    val questionRef: String,
+    val creditQuarter: Int,
+    val displayText: String,
+)
+
+data class ReadingAcceptedFactAliasRow(
+    val aliasId: String,
+    val factRef: String,
+    val answerText: String,
 )
 
 data class GrammarTestRow(
