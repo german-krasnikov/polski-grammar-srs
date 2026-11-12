@@ -51,6 +51,8 @@ To jest moja piękna żona.
 
 ## Запуск
 
+Команды Vite ниже запускают сохранённый React-эталон. Опубликованная браузерная версия собирается из Kotlin; её запуск, аудиоархивы и нативные сборки описаны в [kotlin/README.md](kotlin/README.md).
+
 Node.js 22.12+ (в `.nvmrc` указан 22); также Node.js 20.19+ или 24+.
 
 ```bash
@@ -62,15 +64,20 @@ npm run dev
 
 ```bash
 npm test
-npm run course:validate
-npm run course:inventory:check
+npm run typecheck
 npm run build
 npm run preview
 ```
 
-В опубликованной ветке используется React, TypeScript, Vite и `ts-fsrs`. В рабочем дереве общие данные курса, тексты и шаблоны генератора, подписи падежей и родов уже вынесены в [courses/pl-ru/course.json](courses/pl-ru/course.json) и подключены к React и Kotlin. Проверка формата и ссылок выполняется перед `npm run build`; [инвентаризация исходных строк](courses/pl-ru/source-inventory.json) помогает переносить оставшиеся схемы и статические таблицы без потери польских примеров.
+Данные курса хранятся в [courses-biome/](courses-biome/) и проверяются контрактами [dsl/biome.project](dsl/biome.project). Biome генерирует типизированные Kotlin-строки; правила оценивания экзаменов и переходов сеанса задаются DSL. React-исходники сохранены как эталон миграции.
 
-Переход на Kotlin Multiplatform описан в [Plans/Kotlin/Plan.md](Plans/Kotlin/Plan.md). В рабочем дереве есть Kotlin-версия для браузера и нативные приложения для macOS, Android и iPhone/iPad; [виртуальная приёмка](Plans/Kotlin/FinalVirtualAcceptance-Tester.md) прошла адресные браузерные, Android, iPhone/iPad и Mac Compose-сценарии, а физические устройства, реальная IME и screen readers остаются непроверенными. Команды выше запускают и собирают React-версию, которая остаётся опубликованной. Для запуска Mac-приложения, Android debug-сборки, iOS Simulator и переноса прогресса через JSON см. [kotlin/README.md](kotlin/README.md). В локальной Kotlin web-версии реализованы отдельный экран настроек, системная/светлая/тёмная темы, уменьшение движения и дополнительный touch-свайп оценки для грамматики и слов; независимые результаты — в [UX2 отчёте](Plans/Kotlin/UX2WebTester.md). Настройки и платформенный UI для Mac, Android и iOS ещё выполняются по [плану UX](Plans/Kotlin/PlatformUXPlan.md); системные напоминания пока не обещаются. Новый [значок приложения](assets/branding/README.md) не привязан к польскому языку и включён в браузерную, Android, iOS и macOS сборки. Android/iOS требуют отдельных проверок перед объявлением поддержки. Локальные роли и навыки для разработки перечислены в [AGENTS.md](AGENTS.md), вход для Claude — [CLAUDE.md](CLAUDE.md).
+Переход на Kotlin Multiplatform описан в [Plans/Kotlin/Plan.md](Plans/Kotlin/Plan.md). Общую Kotlin-логику используют браузер и нативные хосты Android, iPhone/iPad и macOS. Команды сборки, перенос прогресса и границы проверок — в [kotlin/README.md](kotlin/README.md); текущая работа — в [плане следующей сессии](Plans/Architecture/NEXT-SESSION-PLAN.md). Проверка физических устройств, реальной IME и screen readers ведётся отдельно от браузерных и Simulator-тестов. Роли и навыки разработки перечислены в [AGENTS.md](AGENTS.md), вход для Claude — [CLAUDE.md](CLAUDE.md).
+
+## Экзамены
+
+В разделе «Экзамен» доступны официальные письменные варианты B1/B2/C1: аудирование, чтение, грамматика и письмо. Можно выбрать отдельный раздел или пройти четыре части подряд с официальными лимитами времени. Задания, иллюстрации, записи и веса ответов берутся из проверенных исходных материалов; [доставка аудио](Plans/Architecture/WEB-EXAM-AUDIO-DELIVERY-PLAN.md) воспроизводится через архивы с закреплёнными хешами.
+
+Письмо и допустимые ответы, требующие решения экзаменатора, остаются на ручной проверке. Результат отдельно показывает подтверждённые баллы и баллы, ожидающие проверки; при наличии непроверенных ответов он остаётся предварительным. [Браузерная приёмка](Plans/Architecture/P9-PUBLICATION-BROWSER-INDEPENDENT-EVIDENCE.md) фиксирует проверенную сборку и ограничения.
 
 ## Прогресс
 
@@ -84,6 +91,6 @@ npm run preview
 
 Публичный репозиторий: [german-krasnikov/polski-grammar-srs](https://github.com/german-krasnikov/polski-grammar-srs). Видимость изменена с разрешения владельца 14 сентября 2026 года для использования GitHub Pages.
 
-Workflow `.github/workflows/deploy.yml` после push в `main` (или вручную: Actions → Deploy to GitHub Pages → Run workflow) выполняет `npm ci`, тесты и проверку курса, собирает Kotlin web-приложение (`./gradlew :composeApp:composeCompatibilityBrowserDistribution`, JS + Wasm) и публикует его в корне сайта. Прежняя React-версия публикуется рядом по адресу **https://german-krasnikov.github.io/polski-grammar-srs/react/** как копия для отката. Все пути относительные, поэтому сайт работает из подпути репозитория.
+Workflow `.github/workflows/deploy.yml` после push в `main` (или ручного запуска) выполняет `npm ci` и тесты, восстанавливает закреплённый веб-архив аудио, собирает Kotlin JS + Wasm с проверкой медиа и отсутствия source maps, проверяет бюджет сайта 850 МБ и публикует его в GitHub Pages. React-эталон остаётся в исходниках. Относительные пути поддерживают подпуть репозитория.
 
 Локальный запуск работает независимо от хостинга. Состояние проверки — в [docs/verification.md](docs/verification.md), исходные требования — в [docs/product-contract.md](docs/product-contract.md).
