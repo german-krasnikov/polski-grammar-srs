@@ -1,0 +1,23 @@
+TEST "C1 2022-03 official Writing set I retains Polish drafts and awaits manual assessment" PROFILE playmode
+  open exam="C1 Certyfikat 2022-03" module="writing"
+  ASSERT writing.setChoiceCount == 3
+  selectWritingSet set="I"
+  ASSERT writing.taskLabel == "Задание 1 / 2"
+  ASSERT writing.instructionOpening == "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy."
+  ASSERT writing.promptOpening == "Jest Pani/Pan prezesem Fundacji „Uśmiech” działającej na rzecz chorych dzieci. Chce Pani/Pan pomóc w wyposażeniu sali zabaw dla małych pacjentów jednego ze szpitali. Proszę napisać w tej sprawie list do dyrekcji placówki."
+  writeDraft text="Życzę Państwu sukcesów."
+  ASSERT writing.draft == "Życzę Państwu sukcesów."
+  nextWriting
+  ASSERT writing.taskLabel == "Задание 2 / 2"
+  ASSERT writing.promptOpening == "Firma wydawnicza „Dookoła Świata” wydała książkę Warto zobaczyć w Polsce. Proszę napisać recenzję tej publikacji przeznaczoną na polskojęzyczną stronę internetową wydawnictwa."
+  writeDraft text="Łódź inspiruje mnie do pisania."
+  back
+  ASSERT writing.draft == "Życzę Państwu sukcesów."
+  nextWriting
+  ASSERT writing.draft == "Łódź inspiruje mnie do pisania."
+  submitWriting
+  ASSERT writing.reviewCount == 2
+  ASSERT writing.reviewDrafts == "Życzę Państwu sukcesów.|Łódź inspiruje mnie do pisania."
+  ASSERT writing.manualPoints == "0|40|40"
+  ASSERT writing.autoScoreVisible == false
+END

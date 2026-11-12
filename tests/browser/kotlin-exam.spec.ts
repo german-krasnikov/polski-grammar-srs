@@ -271,6 +271,10 @@ for (const [level, session] of [
     test.setTimeout(120_000);
     await runExamPlaytest(page, resolve(`dsl/exam-web/listening-boundaries-${level.toLowerCase()}-${session}.playtest`));
   });
+
+  test(`${level} ${session} Writing set I preserves official prompts and manual drafts`, async ({ page }) => {
+    await runExamPlaytest(page, resolve(`dsl/exam-web/writing-new-${level.toLowerCase()}-${session}.playtest`));
+  });
 }
 
 test('DSL writing PlayTest: certified maximum remains pending manual assessment', async ({ page }) => {

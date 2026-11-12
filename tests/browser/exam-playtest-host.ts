@@ -85,6 +85,7 @@ export async function runExamPlaytest(page: Page, sourceFile: string) {
         'reading.selectedSecond': readingRows[1]?.querySelector('.exam-option.selected')?.textContent ?? '',
         'writing.setChoiceCount': [...document.querySelectorAll<HTMLButtonElement>('.exam-nav-btn')].filter(button => button.textContent?.startsWith('Набор ')).length,
         'writing.taskLabel': document.querySelector('.exam-progress-text')?.textContent ?? '',
+        'writing.instructionOpening': document.querySelector('h3.exam-title')?.textContent?.split('.')[0]?.trim() + '.' || '',
         'writing.prompt': document.querySelector('.exam-writing-prompt')?.textContent ?? '',
         'writing.promptOpening': document.querySelector('.exam-writing-prompt p')?.textContent ?? '',
         'writing.draft': document.querySelector<HTMLTextAreaElement>('.exam-textarea')?.value ?? '',
@@ -265,7 +266,23 @@ export async function runExamPlaytest(page: Page, sourceFile: string) {
     const box = await bar.boundingBox();
     if (!box) throw new Error('Player progress is not laid out');
     await bar.click({ position: { x: box.width - 1, y: box.height / 2 } });
-    await expect.poll(() => audio.evaluate(element => (element as HTMLAudioElement).paused)).toBe(true);
+    try {
+      await expect.poll(() => audio.evaluate(element => (element as HTMLAudioElement).paused)).toBe(true);
+    } catch (error) {
+      const media = await audio.evaluate(element => {
+        const item = element as HTMLAudioElement;
+        return {
+          paused: item.paused, seeking: item.seeking, readyState: item.readyState,
+          currentTime: item.currentTime, duration: item.duration, errorCode: item.error?.code,
+          buffered: [...Array(item.buffered.length)].map((_, i) => [item.buffered.start(i), item.buffered.end(i)]),
+          seekable: [...Array(item.seekable.length)].map((_, i) => [item.seekable.start(i), item.seekable.end(i)]),
+        };
+      });
+      const playButton = await page.locator('.player-play-btn').evaluate(button => ({
+        text: button.textContent, title: button.getAttribute('title'), ariaLabel: button.getAttribute('aria-label'),
+      }));
+      throw new Error(`Recording window ${start}–${end} did not pause after seek: ${JSON.stringify({ media, playButton, pageErrors, consoleErrors })}`, { cause: error });
+    }
     const stopped = await audio.evaluate(element => (element as HTMLAudioElement).currentTime);
     expect(stopped).toBeGreaterThan(end - 2);
     expect(stopped).toBeLessThanOrEqual(end + 0.25);
@@ -355,7 +372,7 @@ export async function runExamPlaytest(page: Page, sourceFile: string) {
     'listening.selectedSecond': 'string', 'listening.selectedFourth': 'string',
     'reading.genericOptionCount': 'number', 'reading.selectedFirst': 'string', 'reading.selectedSecond': 'string',
     'writing.setChoiceCount': 'number', 'writing.taskLabel': 'string',
-    'writing.prompt': 'string', 'writing.draft': 'string', 'writing.reviewCount': 'number',
+    'writing.instructionOpening': 'string', 'writing.prompt': 'string', 'writing.draft': 'string', 'writing.reviewCount': 'number',
     'writing.promptOpening': 'string',
     'writing.reviewDrafts': 'string', 'writing.manualAssessment': 'string', 'writing.autoScoreVisible': 'bool',
     'writing.manualPoints': 'string',
