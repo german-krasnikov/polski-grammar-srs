@@ -1,0 +1,517 @@
+DSL 1
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2017-listening-5-1-alt-1
+  questionRef: certyfikat-polski-B2-2017-listening-5-1
+  answer: "młoda"
+  earnedQuarter: 2
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2017-listening-5-1-alt-2
+  questionRef: certyfikat-polski-B2-2017-listening-5-1
+  answer: "młoda osoba"
+  earnedQuarter: 2
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2017-listening-5-1-alt-3
+  questionRef: certyfikat-polski-B2-2017-listening-5-1
+  answer: "młodą osobę"
+  earnedQuarter: 2
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2017-listening-5-2-alt-1
+  questionRef: certyfikat-polski-B2-2017-listening-5-2
+  answer: "miła"
+  earnedQuarter: 2
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2017-listening-5-2-alt-2
+  questionRef: certyfikat-polski-B2-2017-listening-5-2
+  answer: "miła osoba"
+  earnedQuarter: 2
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2017-listening-5-2-alt-3
+  questionRef: certyfikat-polski-B2-2017-listening-5-2
+  answer: "miłą osobę"
+  earnedQuarter: 2
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2019-listening-5-2-alt-1
+  questionRef: certyfikat-polski-B2-2019-listening-5-2
+  answer: "całodziennemu zapotrzebowaniu na sól"
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2019-listening-5-5-alt-1
+  questionRef: certyfikat-polski-B2-2019-listening-5-5
+  answer: "organizm wydala więcej magnezu i wapnia"
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2019-listening-5-6-alt-1
+  questionRef: certyfikat-polski-B2-2019-listening-5-6
+  answer: "ciśnienie tętnicze rośnie"
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2020-listening-5-1-partial-1
+  questionRef: certyfikat-polski-B2-2020-listening-5-1
+  answer: "z Afryki"
+  earnedQuarter: 2
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2020-listening-5-1-partial-2
+  questionRef: certyfikat-polski-B2-2020-listening-5-1
+  answer: "z regionu Kaffa"
+  earnedQuarter: 2
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2020-listening-5-3-alt-1
+  questionRef: certyfikat-polski-B2-2020-listening-5-3
+  answer: pobudzenie
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2020-listening-5-3-alt-2
+  questionRef: certyfikat-polski-B2-2020-listening-5-3
+  answer: "odpowiednie pobudzenie"
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2020-listening-5-4-alt-1
+  questionRef: certyfikat-polski-B2-2020-listening-5-4
+  answer: "ponieważ ziarna nie były palone"
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2022-02-l5-q1-v1
+  questionRef: certyfikat-polski-B2-2022-02-l5-q1
+  answer: "setna rocznica urodzin kompozytora"
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2022-02-l5-q2-v1
+  questionRef: certyfikat-polski-B2-2022-02-l5-q2
+  answer: "jest darmowy"
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2022-02-l5-q2-v2
+  questionRef: certyfikat-polski-B2-2022-02-l5-q2
+  answer: "jest gratis"
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2022-02-l5-q2-v3
+  questionRef: certyfikat-polski-B2-2022-02-l5-q2
+  answer: "jest za darmo"
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2022-02-l5-q2-v4
+  questionRef: certyfikat-polski-B2-2022-02-l5-q2
+  answer: "nic nie kosztuje"
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2022-02-l5-q4-v1
+  questionRef: certyfikat-polski-B2-2022-02-l5-q4
+  answer: "w Łodzi"
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2022-02-l5-q4-v2
+  questionRef: certyfikat-polski-B2-2022-02-l5-q4
+  answer: "za dużą szafą"
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2022-02-l5-q4-v3
+  questionRef: certyfikat-polski-B2-2022-02-l5-q4
+  answer: "za wielką szafą"
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2022-02-l5-q6-v1
+  questionRef: certyfikat-polski-B2-2022-02-l5-q6
+  answer: "z biografiami trzech kompozytorów"
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2022-02-l5-q6-v2
+  questionRef: certyfikat-polski-B2-2022-02-l5-q6
+  answer: "z trzema biografiami"
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2022-02-l5-q7-v1
+  questionRef: certyfikat-polski-B2-2022-02-l5-q7
+  answer: "nagrania z archiwum Polskiego Radia"
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2023-02-l5-q2-v1
+  questionRef: certyfikat-polski-B2-2023-02-l5-q2
+  answer: "wysokie budynki"
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2023-02-l5-q2-v2
+  questionRef: certyfikat-polski-B2-2023-02-l5-q2
+  answer: "2 apartamentowce"
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2023-02-l5-q5-v1
+  questionRef: certyfikat-polski-B2-2023-02-l5-q5
+  answer: "Nie interesuje go to."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2023-02-l5-q6-v1
+  questionRef: certyfikat-polski-B2-2023-02-l5-q6
+  answer: "150 metrów"
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2023-06-l5-q1-v1
+  questionRef: certyfikat-polski-B2-2023-06-l5-q1
+  answer: "zdobywał pierwszą wiedzę"
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2023-06-l5-q1-v2
+  questionRef: certyfikat-polski-B2-2023-06-l5-q1
+  answer: "zdobywał umiejętności techniczne"
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2023-06-l5-q2-v1
+  questionRef: certyfikat-polski-B2-2023-06-l5-q2
+  answer: "był nauczycielem fizyki"
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2023-06-l5-q4-v1
+  questionRef: certyfikat-polski-B2-2023-06-l5-q4
+  answer: "Poświęcił mu dwa opowiadania."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2023-06-l5-q5-v1
+  questionRef: certyfikat-polski-B2-2023-06-l5-q5
+  answer: "90"
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2023-06-l5-q8-v1
+  questionRef: certyfikat-polski-B2-2023-06-l5-q8
+  answer: "Kraków"
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-02-l5-q1-v1
+  questionRef: certyfikat-polski-B2-2024-02-l5-q1
+  answer: "Droga się zapadła."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-02-l5-q2-v1
+  questionRef: certyfikat-polski-B2-2024-02-l5-q2
+  answer: labirynt
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-02-l5-q2-v2
+  questionRef: certyfikat-polski-B2-2024-02-l5-q2
+  answer: "podziemne korytarze"
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-02-l5-q2-v3
+  questionRef: certyfikat-polski-B2-2024-02-l5-q2
+  answer: "podziemne tunele"
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-02-l5-q3-v1
+  questionRef: certyfikat-polski-B2-2024-02-l5-q3
+  answer: "Nakazał zamknięcie drogi."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-02-l5-q3-v2
+  questionRef: certyfikat-polski-B2-2024-02-l5-q3
+  answer: "Polecił zamknięcie drogi."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-02-l5-q4-v1
+  questionRef: certyfikat-polski-B2-2024-02-l5-q4
+  answer: "Pozwalała dojechać do drogi ekspresowej."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-02-l5-q4-v2
+  questionRef: certyfikat-polski-B2-2024-02-l5-q4
+  answer: "Pozwalała dostać się do drogi ekspresowej."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-02-l5-q5-v1
+  questionRef: certyfikat-polski-B2-2024-02-l5-q5
+  answer: "Są wściekli na bobry."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-02-l5-q5-v2
+  questionRef: certyfikat-polski-B2-2024-02-l5-q5
+  answer: "Złoszczą się na bobry."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-02-l5-q5-v3
+  questionRef: certyfikat-polski-B2-2024-02-l5-q5
+  answer: "Odgrażają się bobrom."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-02-l5-q6-v1
+  questionRef: certyfikat-polski-B2-2024-02-l5-q6
+  answer: "Ochronę środowiska."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-02-l5-q7-v1
+  questionRef: certyfikat-polski-B2-2024-02-l5-q7
+  answer: "Łamią zakaz wjazdu na drogę."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-02-l5-q7-v2
+  questionRef: certyfikat-polski-B2-2024-02-l5-q7
+  answer: "Łamią zakaz korzystania z drogi."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-02-l5-q7-v3
+  questionRef: certyfikat-polski-B2-2024-02-l5-q7
+  answer: "Dalej korzystają z drogi."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-02-l5-q8-v1
+  questionRef: certyfikat-polski-B2-2024-02-l5-q8
+  answer: "Ponieważ droga jest na obszarze Natura 2000."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-06-l5-q1-v1
+  questionRef: certyfikat-polski-B2-2024-06-l5-q1
+  answer: "sala gimnastyczna|stołówka"
+  earnedQuarter: 8
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-06-l5-q2-v1
+  questionRef: certyfikat-polski-B2-2024-06-l5-q2
+  answer: "od 10 lat"
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-06-l5-q2-v2
+  questionRef: certyfikat-polski-B2-2024-06-l5-q2
+  answer: "dziesięć lat"
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-06-l5-q2-v3
+  questionRef: certyfikat-polski-B2-2024-06-l5-q2
+  answer: "od dziesięciu lat"
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-06-l5-q4-v1
+  questionRef: certyfikat-polski-B2-2024-06-l5-q4
+  answer: "wyremontowano ją"
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-06-l5-q6-v1
+  questionRef: certyfikat-polski-B2-2024-06-l5-q6
+  answer: "do szesnastej"
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-06-l5-q7-v1
+  questionRef: certyfikat-polski-B2-2024-06-l5-q7
+  answer: "na przyjęcie jeszcze większej liczby uczniów"
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-03-l5-q1-v1
+  questionRef: certyfikat-polski-C1-2022-03-l5-q1
+  answer: "Nie znosił zwierząt w mieszkaniu."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-03-l5-q1-v2
+  questionRef: certyfikat-polski-C1-2022-03-l5-q1
+  answer: "Nie tolerował zwierząt w mieszkaniu."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-03-l5-q3-v1
+  questionRef: certyfikat-polski-C1-2022-03-l5-q3
+  answer: "Oszukał ojca."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-03-l5-q4-v1
+  questionRef: certyfikat-polski-C1-2022-03-l5-q4
+  answer: "Na parapecie."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-03-l5-q6-v1
+  questionRef: certyfikat-polski-C1-2022-03-l5-q6
+  answer: "Jego ojciec też zaczął hodować rybkę."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-03-l5-q7-v1
+  questionRef: certyfikat-polski-C1-2022-03-l5-q7
+  answer: "Chciał, żeby został prawnikiem."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-11-l5-q1-v1
+  questionRef: certyfikat-polski-C1-2022-11-l5-q1
+  answer: "Podczas wiosennego weekendu."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-11-l5-q2-v1
+  questionRef: certyfikat-polski-C1-2022-11-l5-q2
+  answer: "Znalazł osadę w internecie."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-11-l5-q2-v2
+  questionRef: certyfikat-polski-C1-2022-11-l5-q2
+  answer: "Chciał zrobić program w osadzie."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-11-l5-q4-v1
+  questionRef: certyfikat-polski-C1-2022-11-l5-q4
+  answer: "Planował cały dzień."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-11-l5-q4-v2
+  questionRef: certyfikat-polski-C1-2022-11-l5-q4
+  answer: "Robił rozpiskę w Excelu."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-11-l5-q4-v3
+  questionRef: certyfikat-polski-C1-2022-11-l5-q4
+  answer: "Wręczał instrukcje."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-11-l5-q7-v1
+  questionRef: certyfikat-polski-C1-2022-11-l5-q7
+  answer: "Ponieważ telewizja robiła podobne programy później."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-11-l5-q7-v2
+  questionRef: certyfikat-polski-C1-2022-11-l5-q7
+  answer: "Był nowatorski."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-11-l5-q8-v1
+  questionRef: certyfikat-polski-C1-2022-11-l5-q8
+  answer: "Wybierał osoby do programu."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-11-l5-q9-v1
+  questionRef: certyfikat-polski-C1-2022-11-l5-q9
+  answer: "Zrezygnował z palenia."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2023-04-l5-q1-v1
+  questionRef: certyfikat-polski-C1-2023-04-l5-q1
+  answer: "ponad 8 tys. ton"
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2023-04-l5-q1-v2
+  questionRef: certyfikat-polski-C1-2023-04-l5-q1
+  answer: "więcej niż waży rama wieży Eiffla"
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2023-04-l5-q3-v1
+  questionRef: certyfikat-polski-C1-2023-04-l5-q3
+  answer: "Powstanie dużych ilości nowych śmieci"
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2023-04-l5-q6-v1
+  questionRef: certyfikat-polski-C1-2023-04-l5-q6
+  answer: "Listek farby uszkodził szybę."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2023-11-l5-q3-v1
+  questionRef: certyfikat-polski-C1-2023-11-l5-q3
+  answer: "Uważa, że był jednym z najlepszych koncertów w życiu."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2023-11-l5-q3-v2
+  questionRef: certyfikat-polski-C1-2023-11-l5-q3
+  answer: "Bardzo mu się podobał."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2023-11-l5-q4-v1
+  questionRef: certyfikat-polski-C1-2023-11-l5-q4
+  answer: "W namiocie."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2023-11-l5-q5-v1
+  questionRef: certyfikat-polski-C1-2023-11-l5-q5
+  answer: "Był to ich pierwszy znaczący występ."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2023-11-l5-q5-v2
+  questionRef: certyfikat-polski-C1-2023-11-l5-q5
+  answer: "Był to ich pierwszy duży występ."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2023-11-l5-q6-v1
+  questionRef: certyfikat-polski-C1-2023-11-l5-q6
+  answer: "Było mu słabo."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2023-11-l5-q6-v2
+  questionRef: certyfikat-polski-C1-2023-11-l5-q6
+  answer: "Było mu duszno."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2023-11-l5-q6-v3
+  questionRef: certyfikat-polski-C1-2023-11-l5-q6
+  answer: "Miał za ciepłe ubranie."
+  earnedQuarter: 4
+}

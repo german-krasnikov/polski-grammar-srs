@@ -1,0 +1,23 @@
+TEST "C1 2023-04 official Writing set I retains Polish drafts and awaits manual assessment" PROFILE playmode
+  open exam="C1 Certyfikat 2023-04" module="writing"
+  ASSERT writing.setChoiceCount == 3
+  selectWritingSet set="I"
+  ASSERT writing.taskLabel == "Задание 1 / 2"
+  ASSERT writing.instructionOpening == "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy."
+  ASSERT writing.promptOpening == "Otwiera Pani/Pan w Polsce klub fitness/restaurację. Proszę napisać reklamę tego miejsca, którą zamieści Pani/Pan w internecie."
+  writeDraft text="Życzę Państwu sukcesów."
+  ASSERT writing.draft == "Życzę Państwu sukcesów."
+  nextWriting
+  ASSERT writing.taskLabel == "Задание 2 / 2"
+  ASSERT writing.promptOpening == "„Ziarnko do ziarnka zbierając, do niczego nie dojdziesz, chyba żebyś żył kilkaset lat” (Stefan Kisielewski). Czy zgadza się Pani/Pan z tym stwierdzeniem? Proszę napisać tekst argumentacyjny (rozprawkę), w którym wyrazi Pani/Pan swoją opinię."
+  writeDraft text="Łódź inspiruje mnie do pisania."
+  back
+  ASSERT writing.draft == "Życzę Państwu sukcesów."
+  nextWriting
+  ASSERT writing.draft == "Łódź inspiruje mnie do pisania."
+  submitWriting
+  ASSERT writing.reviewCount == 2
+  ASSERT writing.reviewDrafts == "Życzę Państwu sukcesów.|Łódź inspiruje mnie do pisania."
+  ASSERT writing.manualPoints == "0|40|40"
+  ASSERT writing.autoScoreVisible == false
+END

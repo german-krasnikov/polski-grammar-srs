@@ -1,0 +1,10 @@
+DSL 1
+EXAM {
+  examId: certyfikat-polski-C1-2023-04
+  provider: certyfikat-polski
+  targetLanguage: pl
+  level: C1
+  year: 2023
+  sourceUrl: "https://certyfikatpolski.pl/wp-content/uploads/2025/07/2023_04_15_16_C1_arkusz_egzaminacyjny.pdf"
+  license: "Państwowa Komisja ds. Poświadczania Znajomości Języka Polskiego jako Obcego"
+}

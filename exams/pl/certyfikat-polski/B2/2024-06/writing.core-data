@@ -1,19 +1,63 @@
 DSL 1
 WRITING_TASK {
-  taskId: "certyfikat-polski-B2-2024-06-write-12"
-  examRef: "certyfikat-polski-B2-2024-06"
-  taskNumber: 12
-  instruction: "TODO: fill from PDF"
-  promptText: "TODO: fill from PDF"
-  wordLimit: 200
-  genre: letter
+  taskId: certyfikat-polski-B2-2024-06-write-i-a
+  examRef: certyfikat-polski-B2-2024-06
+  taskNumber: 1
+  setId: I
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. W każdym zestawie są dwa zadania: a i b. Należy wybrać tylko jeden zestaw i wykonać obydwa zadania (a i b) z danego zestawu, zgodnie z poleceniami, np.: • zestaw I – zadania a i b z zestawu I lub • zestaw II – zadania a i b z zestawu II lub • zestaw III – zadania a i b z zestawu III"
+  promptText: "Prowadzi Pani/Pan w Polsce hotel dla zwierząt. Proszę napisać reklamę, którą zamieści Pani/Pan na portalu „Usługi na Wysokim Poziomie”."
+  wordLimit: 60
+  genre: advertisement
 }
 WRITING_TASK {
-  taskId: "certyfikat-polski-B2-2024-06-write-13"
-  examRef: "certyfikat-polski-B2-2024-06"
-  taskNumber: 13
-  instruction: "TODO: fill from PDF"
-  promptText: "TODO: fill from PDF"
-  wordLimit: 200
-  genre: description
+  taskId: certyfikat-polski-B2-2024-06-write-i-b
+  examRef: certyfikat-polski-B2-2024-06
+  taskNumber: 1
+  setId: I
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. W każdym zestawie są dwa zadania: a i b. Należy wybrać tylko jeden zestaw i wykonać obydwa zadania (a i b) z danego zestawu, zgodnie z poleceniami, np.: • zestaw I – zadania a i b z zestawu I lub • zestaw II – zadania a i b z zestawu II lub • zestaw III – zadania a i b z zestawu III"
+  promptText: "Proszę napisać opowiadanie zainspirowane poniższym zdjęciem. Proszę nadać mu tytuł."
+  promptImageUrl: exam-images/B2-2024-06-writing-I-b.png
+  promptImageAlt: "Dwa samoloty na lotnisku; jeden stoi na trawie, drugi leci nad nim."
+  wordLimit: 240
+  genre: story
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2024-06-write-ii-a
+  examRef: certyfikat-polski-B2-2024-06
+  taskNumber: 2
+  setId: II
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. W każdym zestawie są dwa zadania: a i b. Należy wybrać tylko jeden zestaw i wykonać obydwa zadania (a i b) z danego zestawu, zgodnie z poleceniami, np.: • zestaw I – zadania a i b z zestawu I lub • zestaw II – zadania a i b z zestawu II lub • zestaw III – zadania a i b z zestawu III"
+  promptText: "Znalazła Pani / Znalazł Pan w internecie nowy portal: „Widzowie (Nie)Polecają”. Proszę napisać recenzję serialu kryminalnego/obyczajowego, który ostatnio Pani oglądała / Pan oglądał."
+  wordLimit: 150
+  genre: review
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2024-06-write-ii-b
+  examRef: certyfikat-polski-B2-2024-06
+  taskNumber: 2
+  setId: II
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. W każdym zestawie są dwa zadania: a i b. Należy wybrać tylko jeden zestaw i wykonać obydwa zadania (a i b) z danego zestawu, zgodnie z poleceniami, np.: • zestaw I – zadania a i b z zestawu I lub • zestaw II – zadania a i b z zestawu II lub • zestaw III – zadania a i b z zestawu III"
+  promptText: "Uczestniczy Pani/Pan w kursie na prawo jazdy. Proszę napisać e-mail do swojej polskiej koleżanki / swojego polskiego kolegi, w którym zrelacjonuje Pani/Pan, jak sobie radzi z prowadzeniem samochodu."
+  wordLimit: 150
+  genre: email
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2024-06-write-iii-a
+  examRef: certyfikat-polski-B2-2024-06
+  taskNumber: 3
+  setId: III
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. W każdym zestawie są dwa zadania: a i b. Należy wybrać tylko jeden zestaw i wykonać obydwa zadania (a i b) z danego zestawu, zgodnie z poleceniami, np.: • zestaw I – zadania a i b z zestawu I lub • zestaw II – zadania a i b z zestawu II lub • zestaw III – zadania a i b z zestawu III"
+  promptText: "Sąsiadka, obok której przez kilka lat wynajmowała Pani / wynajmował Pan mieszkanie, za kilka dni skończy 80 lat. Proszę napisać życzenia z tej okazji."
+  wordLimit: 30
+  genre: wishes
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2024-06-write-iii-b
+  examRef: certyfikat-polski-B2-2024-06
+  taskNumber: 3
+  setId: III
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. W każdym zestawie są dwa zadania: a i b. Należy wybrać tylko jeden zestaw i wykonać obydwa zadania (a i b) z danego zestawu, zgodnie z poleceniami, np.: • zestaw I – zadania a i b z zestawu I lub • zestaw II – zadania a i b z zestawu II lub • zestaw III – zadania a i b z zestawu III"
+  promptText: "„Jak być ekologicznym?”. To pytanie w ostatnich latach stawiane jest coraz częściej w polskich domach. „To trudne…, wymaga nakładów…, nie mam na to czasu…”. Wymówki są rożne i wynikają głównie z niewiedzy, bo żeby sięgnąć po ekologiczne rzeczy i rozwiązania, wcale nie trzeba dużo wydawać, ani dokładać sobie obowiązków. Wystarczy wypracować pewne nawyki. Jakie jest Pani/Pana zdanie na ten temat? Proszę napisać tekst argumentacyjny (rozprawkę), w którym wyrazi Pani/Pan swoją opinię."
+  wordLimit: 270
+  genre: argument
 }

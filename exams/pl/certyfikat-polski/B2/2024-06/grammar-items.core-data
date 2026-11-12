@@ -1,162 +1,636 @@
 DSL 1
-# Answers need manual fill from PDF (Cloudflare blocks automated download)
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2024-06-g10-q1"
-  testRef: "certyfikat-polski-B2-2024-06-grammar-10"
+  itemId: certyfikat-polski-B2-2024-06-g1-q1
+  testRef: certyfikat-polski-B2-2024-06-grammar-1
   questionType: choose_form
-  context: "TODO: fill from PDF"
-  correctAnswer: "?"
-  points: 1
+  context: "(stanowiąc, stanowiącą, stanowionym)"
+  options: "stanowiąc|stanowiącą|stanowionym"
+  correctAnswer: "stanowiąc"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2024-06-g10-q2"
-  testRef: "certyfikat-polski-B2-2024-06-grammar-10"
+  itemId: certyfikat-polski-B2-2024-06-g1-q2
+  testRef: certyfikat-polski-B2-2024-06-grammar-1
   questionType: choose_form
-  context: "TODO: fill from PDF"
-  correctAnswer: "?"
-  points: 1
+  context: "(mierzący, mierzony, mierząc)"
+  options: "mierzący|mierzony|mierząc"
+  correctAnswer: "mierzący"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2024-06-g10-q3"
-  testRef: "certyfikat-polski-B2-2024-06-grammar-10"
+  itemId: certyfikat-polski-B2-2024-06-g1-q3
+  testRef: certyfikat-polski-B2-2024-06-grammar-1
   questionType: choose_form
-  context: "TODO: fill from PDF"
-  correctAnswer: "?"
-  points: 1
+  context: "(znaczący, znaczony, znacząc)"
+  options: "znaczący|znaczony|znacząc"
+  correctAnswer: "znaczący"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2024-06-g10-q4"
-  testRef: "certyfikat-polski-B2-2024-06-grammar-10"
+  itemId: certyfikat-polski-B2-2024-06-g1-q4
+  testRef: certyfikat-polski-B2-2024-06-grammar-1
   questionType: choose_form
-  context: "TODO: fill from PDF"
-  correctAnswer: "?"
-  points: 1
+  context: "(Zapisując, Zapisujący, Zapisany)"
+  options: "Zapisując|Zapisujący|Zapisany"
+  correctAnswer: Zapisany
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2024-06-g10-q5"
-  testRef: "certyfikat-polski-B2-2024-06-grammar-10"
+  itemId: certyfikat-polski-B2-2024-06-g1-q5
+  testRef: certyfikat-polski-B2-2024-06-grammar-1
   questionType: choose_form
-  context: "TODO: fill from PDF"
-  correctAnswer: "?"
-  points: 1
+  context: "(informowany, informując, informujący)"
+  options: "informowany|informując|informujący"
+  correctAnswer: "informując"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2024-06-g10-q6"
-  testRef: "certyfikat-polski-B2-2024-06-grammar-10"
+  itemId: certyfikat-polski-B2-2024-06-g1-q6
+  testRef: certyfikat-polski-B2-2024-06-grammar-1
   questionType: choose_form
-  context: "TODO: fill from PDF"
-  correctAnswer: "?"
-  points: 1
+  context: "(łączonej, łączącej, łącząc)"
+  options: "łączonej|łączącej|łącząc"
+  correctAnswer: "łączącej"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2024-06-g10-q7"
-  testRef: "certyfikat-polski-B2-2024-06-grammar-10"
+  itemId: certyfikat-polski-B2-2024-06-g1-q7
+  testRef: certyfikat-polski-B2-2024-06-grammar-1
   questionType: choose_form
-  context: "TODO: fill from PDF"
-  correctAnswer: "?"
-  points: 1
+  context: "(realizujących, zrealizowanych, realizując)"
+  options: "realizujących|zrealizowanych|realizując"
+  correctAnswer: zrealizowanych
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2024-06-g10-q8"
-  testRef: "certyfikat-polski-B2-2024-06-grammar-10"
+  itemId: certyfikat-polski-B2-2024-06-g1-q8
+  testRef: certyfikat-polski-B2-2024-06-grammar-1
   questionType: choose_form
-  context: "TODO: fill from PDF"
-  correctAnswer: "?"
-  points: 1
+  context: "(prowadzącym, prowadzonym, prowadzących)"
+  options: "prowadzącym|prowadzonym|prowadzących"
+  correctAnswer: "prowadzącym"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2024-06-g10-q9"
-  testRef: "certyfikat-polski-B2-2024-06-grammar-10"
+  itemId: certyfikat-polski-B2-2024-06-g1-q9
+  testRef: certyfikat-polski-B2-2024-06-grammar-1
   questionType: choose_form
-  context: "TODO: fill from PDF"
-  correctAnswer: "?"
-  points: 1
+  context: "(rozbierającego, rozebranego, rozbierając)"
+  options: "rozbierającego|rozebranego|rozbierając"
+  correctAnswer: rozebranego
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2024-06-g10-q10"
-  testRef: "certyfikat-polski-B2-2024-06-grammar-10"
+  itemId: certyfikat-polski-B2-2024-06-g1-q10
+  testRef: certyfikat-polski-B2-2024-06-grammar-1
   questionType: choose_form
-  context: "TODO: fill from PDF"
-  correctAnswer: "?"
-  points: 1
+  context: "(uznając, uznający, uznawany)"
+  options: "uznając|uznający|uznawany"
+  correctAnswer: uznawany
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2024-06-g11-q11"
-  testRef: "certyfikat-polski-B2-2024-06-grammar-11"
-  questionType: transform
-  context: "TODO: fill from PDF"
-  correctAnswer: "?"
-  points: 1
+  itemId: certyfikat-polski-B2-2024-06-g2-q1
+  testRef: certyfikat-polski-B2-2024-06-grammar-2
+  questionType: choose_form
+  context: "(Trzecią, Trzeciej, Trzecia)"
+  options: "Trzecią|Trzeciej|Trzecia"
+  correctAnswer: Trzeciej
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2024-06-g11-q12"
-  testRef: "certyfikat-polski-B2-2024-06-grammar-11"
-  questionType: transform
-  context: "TODO: fill from PDF"
-  correctAnswer: "?"
-  points: 1
+  itemId: certyfikat-polski-B2-2024-06-g2-q2
+  testRef: certyfikat-polski-B2-2024-06-grammar-2
+  questionType: choose_form
+  context: "(Rzeczpospolitą, Rzeczpospolita, Rzeczpospolitej)"
+  options: "Rzeczpospolitą|Rzeczpospolita|Rzeczpospolitej"
+  correctAnswer: Rzeczpospolitej
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2024-06-g11-q13"
-  testRef: "certyfikat-polski-B2-2024-06-grammar-11"
-  questionType: transform
-  context: "TODO: fill from PDF"
-  correctAnswer: "?"
-  points: 1
+  itemId: certyfikat-polski-B2-2024-06-g2-q3
+  testRef: certyfikat-polski-B2-2024-06-grammar-2
+  questionType: choose_form
+  context: "(sześć, sześciu, sześcioma)"
+  options: "sześć|sześciu|sześcioma"
+  correctAnswer: "sześciu"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2024-06-g11-q14"
-  testRef: "certyfikat-polski-B2-2024-06-grammar-11"
-  questionType: transform
-  context: "TODO: fill from PDF"
-  correctAnswer: "?"
-  points: 1
+  itemId: certyfikat-polski-B2-2024-06-g2-q4
+  testRef: certyfikat-polski-B2-2024-06-grammar-2
+  questionType: choose_form
+  context: "(prezydenci, prezydentami, prezydentów)"
+  options: "prezydenci|prezydentami|prezydentów"
+  correctAnswer: "prezydentów"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2024-06-g11-q15"
-  testRef: "certyfikat-polski-B2-2024-06-grammar-11"
-  questionType: transform
-  context: "TODO: fill from PDF"
-  correctAnswer: "?"
-  points: 1
+  itemId: certyfikat-polski-B2-2024-06-g2-q5
+  testRef: certyfikat-polski-B2-2024-06-grammar-2
+  questionType: choose_form
+  context: "(czterdzieści jeden, czterdziestoma jeden, czterdziestu jeden)"
+  options: "czterdzieści jeden|czterdziestoma jeden|czterdziestu jeden"
+  correctAnswer: "czterdziestu jeden"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2024-06-g12-q16"
-  testRef: "certyfikat-polski-B2-2024-06-grammar-12"
+  itemId: certyfikat-polski-B2-2024-06-g2-q6
+  testRef: certyfikat-polski-B2-2024-06-grammar-2
+  questionType: choose_form
+  context: "(lat, lata, rok)"
+  options: "lat|lata|rok"
+  correctAnswer: lat
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2024-06-g2-q7
+  testRef: certyfikat-polski-B2-2024-06-grammar-2
+  questionType: choose_form
+  context: "(dwóch, dwa, dwaj)"
+  options: "dwóch|dwa|dwaj"
+  correctAnswer: dwaj
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2024-06-g2-q8
+  testRef: certyfikat-polski-B2-2024-06-grammar-2
+  questionType: choose_form
+  context: "(rządzący, rządzących, rządzącymi)"
+  options: "rządzący|rządzących|rządzącymi"
+  correctAnswer: "rządzących"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2024-06-g2-q9
+  testRef: certyfikat-polski-B2-2024-06-grammar-2
+  questionType: choose_form
+  context: "(razu, razem, raz)"
+  options: "razu|razem|raz"
+  correctAnswer: raz
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2024-06-g2-q10
+  testRef: certyfikat-polski-B2-2024-06-grammar-2
+  questionType: choose_form
+  context: "(drugi, drugim, drugiego)"
+  options: "drugi|drugim|drugiego"
+  correctAnswer: drugi
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2024-06-g3-q1
+  testRef: certyfikat-polski-B2-2024-06-grammar-3
+  questionType: word_bank
+  context: "Luka 1 w tekście powyżej"
+  correctAnswer: za
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2024-06-g3-q2
+  testRef: certyfikat-polski-B2-2024-06-grammar-3
+  questionType: word_bank
+  context: "Luka 2 w tekście powyżej"
+  correctAnswer: o
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2024-06-g3-q3
+  testRef: certyfikat-polski-B2-2024-06-grammar-3
+  questionType: word_bank
+  context: "Luka 3 w tekście powyżej"
+  correctAnswer: w
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2024-06-g3-q4
+  testRef: certyfikat-polski-B2-2024-06-grammar-3
+  questionType: word_bank
+  context: "Luka 4 w tekście powyżej"
+  correctAnswer: do
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2024-06-g3-q5
+  testRef: certyfikat-polski-B2-2024-06-grammar-3
+  questionType: word_bank
+  context: "Luka 5 w tekście powyżej"
+  correctAnswer: pod
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2024-06-g3-q6
+  testRef: certyfikat-polski-B2-2024-06-grammar-3
+  questionType: word_bank
+  context: "Luka 6 w tekście powyżej"
+  correctAnswer: po
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2024-06-g3-q7
+  testRef: certyfikat-polski-B2-2024-06-grammar-3
+  questionType: word_bank
+  context: "Luka 7 w tekście powyżej"
+  correctAnswer: bez
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2024-06-g3-q8
+  testRef: certyfikat-polski-B2-2024-06-grammar-3
+  questionType: word_bank
+  context: "Luka 8 w tekście powyżej"
+  correctAnswer: w
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2024-06-g3-q9
+  testRef: certyfikat-polski-B2-2024-06-grammar-3
+  questionType: word_bank
+  context: "Luka 9 w tekście powyżej"
+  correctAnswer: "Dzięki"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2024-06-g3-q10
+  testRef: certyfikat-polski-B2-2024-06-grammar-3
+  questionType: word_bank
+  context: "Luka 10 w tekście powyżej"
+  correctAnswer: przeciwko
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2024-06-g4-q1
+  testRef: certyfikat-polski-B2-2024-06-grammar-4
+  questionType: choose_form
+  context: "(zostało powiedziane, powiedziano, mówiło się)"
+  options: "zostało powiedziane|powiedziano|mówiło się"
+  correctAnswer: "mówiło się"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2024-06-g4-q2
+  testRef: certyfikat-polski-B2-2024-06-grammar-4
+  questionType: choose_form
+  context: "(rozpoczynało się, była rozpoczynana, rozpoczęto)"
+  options: "rozpoczynało się|była rozpoczynana|rozpoczęto"
+  correctAnswer: "rozpoczęto"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2024-06-g4-q3
+  testRef: certyfikat-polski-B2-2024-06-grammar-4
+  questionType: choose_form
+  context: "(przeniesiono, została przeniesiona, przeniosło się)"
+  options: "przeniesiono|została przeniesiona|przeniosło się"
+  correctAnswer: "została przeniesiona"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2024-06-g4-q4
+  testRef: certyfikat-polski-B2-2024-06-grammar-4
+  questionType: choose_form
+  context: "(zaczęto, został zaczęty, zaczynało się)"
+  options: "zaczęto|został zaczęty|zaczynało się"
+  correctAnswer: "zaczęto"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2024-06-g4-q5
+  testRef: certyfikat-polski-B2-2024-06-grammar-4
+  questionType: choose_form
+  context: "(używano, był używany, używało się)"
+  options: "używano|był używany|używało się"
+  correctAnswer: "był używany"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2024-06-g4-q6
+  testRef: certyfikat-polski-B2-2024-06-grammar-4
+  questionType: choose_form
+  context: "(szacuje się, jest szacowana, szacowano)"
+  options: "szacuje się|jest szacowana|szacowano"
+  correctAnswer: "szacuje się"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2024-06-g4-q7
+  testRef: certyfikat-polski-B2-2024-06-grammar-4
+  questionType: choose_form
+  context: "(realizowano, realizuje się, będą realizowane)"
+  options: "realizowano|realizuje się|będą realizowane"
+  correctAnswer: "będą realizowane"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2024-06-g4-q8
+  testRef: certyfikat-polski-B2-2024-06-grammar-4
+  questionType: choose_form
+  context: "(planuje się, planowało się, jest planowana)"
+  options: "planuje się|planowało się|jest planowana"
+  correctAnswer: "planuje się"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2024-06-g4-q9
+  testRef: certyfikat-polski-B2-2024-06-grammar-4
+  questionType: choose_form
+  context: "(prowadzi się, będą prowadzone, prowadzono)"
+  options: "prowadzi się|będą prowadzone|prowadzono"
+  correctAnswer: "będą prowadzone"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2024-06-g4-q10
+  testRef: certyfikat-polski-B2-2024-06-grammar-4
+  questionType: choose_form
+  context: "(poświęcało się, była poświęcana, będzie poświęcana)"
+  options: "poświęcało się|była poświęcana|będzie poświęcana"
+  correctAnswer: "poświęcało się"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2024-06-g5-q1
+  testRef: certyfikat-polski-B2-2024-06-grammar-5
   questionType: fill_gap
-  context: "TODO: fill from PDF"
-  correctAnswer: "?"
-  points: 1
+  context: "(jechać/pojechać)"
+  correctAnswer: pojedzie
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2024-06-g12-q17"
-  testRef: "certyfikat-polski-B2-2024-06-grammar-12"
+  itemId: certyfikat-polski-B2-2024-06-g5-q2
+  testRef: certyfikat-polski-B2-2024-06-grammar-5
   questionType: fill_gap
-  context: "TODO: fill from PDF"
-  correctAnswer: "?"
-  points: 1
+  context: "(decydować się/zdecydować się)"
+  correctAnswer: "zdecydowało się"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2024-06-g12-q18"
-  testRef: "certyfikat-polski-B2-2024-06-grammar-12"
+  itemId: certyfikat-polski-B2-2024-06-g5-q3
+  testRef: certyfikat-polski-B2-2024-06-grammar-5
   questionType: fill_gap
-  context: "TODO: fill from PDF"
-  correctAnswer: "?"
-  points: 1
+  context: "(wybierać/wybrać)"
+  correctAnswer: wybierali
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2024-06-g12-q19"
-  testRef: "certyfikat-polski-B2-2024-06-grammar-12"
+  itemId: certyfikat-polski-B2-2024-06-g5-q4
+  testRef: certyfikat-polski-B2-2024-06-grammar-5
   questionType: fill_gap
-  context: "TODO: fill from PDF"
-  correctAnswer: "?"
-  points: 1
+  context: "(dominować/zdominować)"
+  correctAnswer: "dominowały"
+  pointsQuarter: 2
 }
 GRAMMAR_ITEM {
-  itemId: "certyfikat-polski-B2-2024-06-g12-q20"
-  testRef: "certyfikat-polski-B2-2024-06-grammar-12"
+  itemId: certyfikat-polski-B2-2024-06-g5-q5
+  testRef: certyfikat-polski-B2-2024-06-grammar-5
   questionType: fill_gap
-  context: "TODO: fill from PDF"
-  correctAnswer: "?"
-  points: 1
+  context: "(tracić/stracić)"
+  correctAnswer: "straciło"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2024-06-g5-q6
+  testRef: certyfikat-polski-B2-2024-06-grammar-5
+  questionType: fill_gap
+  context: "(pilnować/upilnować)"
+  correctAnswer: "będą pilnować"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2024-06-g5-q7
+  testRef: certyfikat-polski-B2-2024-06-grammar-5
+  questionType: fill_gap
+  context: "(zostawać/zostać)"
+  correctAnswer: "zostaną"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2024-06-g5-q8
+  testRef: certyfikat-polski-B2-2024-06-grammar-5
+  questionType: fill_gap
+  context: "(szukać/poszukać)"
+  correctAnswer: "szukały"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2024-06-g5-q9
+  testRef: certyfikat-polski-B2-2024-06-grammar-5
+  questionType: fill_gap
+  context: "(podpisywać/podpisać)"
+  correctAnswer: "podpisało"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2024-06-g5-q10
+  testRef: certyfikat-polski-B2-2024-06-grammar-5
+  questionType: fill_gap
+  context: "(podnosić/podnieść)"
+  correctAnswer: "podniosły"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2024-06-g6-q1
+  testRef: certyfikat-polski-B2-2024-06-grammar-6
+  questionType: fill_gap
+  context: "(często)"
+  correctAnswer: "najczęściej"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2024-06-g6-q2
+  testRef: certyfikat-polski-B2-2024-06-grammar-6
+  questionType: fill_gap
+  context: "(mało)"
+  correctAnswer: najmniej
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2024-06-g6-q3
+  testRef: certyfikat-polski-B2-2024-06-grammar-6
+  questionType: fill_gap
+  context: "(niski)"
+  correctAnswer: "niższe"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2024-06-g6-q4
+  testRef: certyfikat-polski-B2-2024-06-grammar-6
+  questionType: fill_gap
+  context: "(korzystny)"
+  correctAnswer: "najkorzystniejszą"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2024-06-g6-q5
+  testRef: certyfikat-polski-B2-2024-06-grammar-6
+  questionType: fill_gap
+  context: "(długi)"
+  correctAnswer: "dłuższe"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2024-06-g6-q6
+  testRef: certyfikat-polski-B2-2024-06-grammar-6
+  questionType: fill_gap
+  context: "(bardzo)"
+  correctAnswer: najbardziej
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2024-06-g6-q7
+  testRef: certyfikat-polski-B2-2024-06-grammar-6
+  questionType: fill_gap
+  context: "(rzadko)"
+  correctAnswer: rzadziej
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2024-06-g6-q8
+  testRef: certyfikat-polski-B2-2024-06-grammar-6
+  questionType: fill_gap
+  context: "(jasny)"
+  correctAnswer: "jaśniejszych"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2024-06-g6-q9
+  testRef: certyfikat-polski-B2-2024-06-grammar-6
+  questionType: fill_gap
+  context: "(przyjazny)"
+  correctAnswer: "najbardziej przyjaznej"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2024-06-g6-q10
+  testRef: certyfikat-polski-B2-2024-06-grammar-6
+  questionType: fill_gap
+  context: "(atrakcyjny)"
+  correctAnswer: atrakcyjniejszy
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2024-06-g7-q1
+  testRef: certyfikat-polski-B2-2024-06-grammar-7
+  questionType: fill_gap
+  context: "(krakowianin)"
+  correctAnswer: krakowianie
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2024-06-g7-q2
+  testRef: certyfikat-polski-B2-2024-06-grammar-7
+  questionType: fill_gap
+  context: "(zwycięzca)"
+  correctAnswer: "zwycięzcą"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2024-06-g7-q3
+  testRef: certyfikat-polski-B2-2024-06-grammar-7
+  questionType: fill_gap
+  context: "(artysta)"
+  correctAnswer: "artyści"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2024-06-g7-q4
+  testRef: certyfikat-polski-B2-2024-06-grammar-7
+  questionType: fill_gap
+  context: "(wykraczający)"
+  correctAnswer: "wykraczający"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2024-06-g7-q5
+  testRef: certyfikat-polski-B2-2024-06-grammar-7
+  questionType: fill_gap
+  context: "(który)"
+  correctAnswer: "którzy"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2024-06-g7-q6
+  testRef: certyfikat-polski-B2-2024-06-grammar-7
+  questionType: fill_gap
+  context: "(płeć)"
+  correctAnswer: "płci"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2024-06-g7-q7
+  testRef: certyfikat-polski-B2-2024-06-grammar-7
+  questionType: fill_gap
+  context: "(wiek)"
+  correctAnswer: wieku
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2024-06-g7-q8
+  testRef: certyfikat-polski-B2-2024-06-grammar-7
+  questionType: fill_gap
+  context: "(wartość)"
+  correctAnswer: "wartość"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2024-06-g7-q9
+  testRef: certyfikat-polski-B2-2024-06-grammar-7
+  questionType: fill_gap
+  context: "(miasto)"
+  correctAnswer: "mieście"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2024-06-g7-q10
+  testRef: certyfikat-polski-B2-2024-06-grammar-7
+  questionType: fill_gap
+  context: "(taki)"
+  correctAnswer: tacy
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2024-06-g8-q1
+  testRef: certyfikat-polski-B2-2024-06-grammar-8
+  questionType: transform
+  context: "Trasa linii 2 została zmieniona, ponieważ jest przeprowadzany gruntowny remont torowiska. (w związku z)"
+  correctAnswer: "Trasa linii 2 została zmieniona w związku z przeprowadzaniem gruntownego remontu torowiska."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2024-06-g8-q2
+  testRef: certyfikat-polski-B2-2024-06-grammar-8
+  questionType: transform
+  context: "Pojechał do ambasady Kuwejtu, żeby odebrać przyznaną mu wizę. (w celu)"
+  correctAnswer: "Pojechał do ambasady Kuwejtu w celu odebrania przyznanej mu wizy."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2024-06-g8-q3
+  testRef: certyfikat-polski-B2-2024-06-grammar-8
+  questionType: transform
+  context: "Zanim podejmiesz taką decyzję, pomyśl o konsekwencjach. (przed)"
+  correctAnswer: "Przed podjęciem takiej decyzji pomyśl o konsekwencjach."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2024-06-g8-q4
+  testRef: certyfikat-polski-B2-2024-06-grammar-8
+  questionType: transform
+  context: "Najpierw należy dokładnie wymieszać wszystkie składniki, a potem nanieść klej na miejsce pęknięcia. (po)"
+  correctAnswer: "Po dokładnym wymieszaniu wszystkich składników należy nanieść klej na miejsce pęknięcia."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-B2-2024-06-g8-q5
+  testRef: certyfikat-polski-B2-2024-06-grammar-8
+  questionType: transform
+  context: "Mogliśmy wyjechać na kurs do Portugalii, ponieważ otrzymaliśmy pomoc finansową z Urzędu Miasta. (dzięki)"
+  correctAnswer: "Mogliśmy wyjechać na kurs do Portugalii dzięki pomocy finansowej otrzymanej z Urzędu Miasta."
+  pointsQuarter: 4
+  gradingMode: open_manual
 }

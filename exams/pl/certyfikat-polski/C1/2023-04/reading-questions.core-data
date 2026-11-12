@@ -1,0 +1,451 @@
+DSL 1
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-r1-q1
+  passageRef: certyfikat-polski-C1-2023-04-read-1
+  questionType: multiple_choice
+  questionText: "Wyjątkowość nowego oprogramowania tkwi"
+  options: "a) w jego nieomylności i niezawodności.|b) w dużych możliwościach przerobowych.|c) w zdolności do stawiania hipotez badawczych."
+  correctAnswer: "b) w dużych możliwościach przerobowych."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-r1-q2
+  passageRef: certyfikat-polski-C1-2023-04-read-1
+  questionType: multiple_choice
+  questionText: "Sztuczna inteligencja ułatwia ekspertom"
+  options: "a) lokalizację materiału i zebranie go w jedno miejsce.|b) zapisywanie tekstów starożytnymi znakami.|c) odszyfrowanie inskrypcji rozsianych po świecie."
+  correctAnswer: "c) odszyfrowanie inskrypcji rozsianych po świecie."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-r1-q3
+  passageRef: certyfikat-polski-C1-2023-04-read-1
+  questionType: multiple_choice
+  questionText: "Grupa specjalistów w dziedzinie starożytnego pisma"
+  options: "a) gromadzi się regularnie.|b) jest bardzo wąska.|c) prowadzi projekty porównawcze."
+  correctAnswer: "b) jest bardzo wąska."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-r1-q4
+  passageRef: certyfikat-polski-C1-2023-04-read-1
+  questionType: multiple_choice
+  questionText: "Niebagatelną zaletą sztucznej inteligencji jest"
+  options: "a) odnajdywanie obiektów w podłożu lub w głębinach.|b) sprawność w trudnych warunkach atmosferycznych.|c) efektywność w odnajdywaniu ludzkich szczątków."
+  correctAnswer: "a) odnajdywanie obiektów w podłożu lub w głębinach."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-r1-q5
+  passageRef: certyfikat-polski-C1-2023-04-read-1
+  questionType: multiple_choice
+  questionText: "Profesor polskiej uczelni"
+  options: "a) poddał rozpoznaniu terytorium kraju.|b) bada dna różnych zbiorników.|c) skanuje wybrane obszary leśne."
+  correctAnswer: "a) poddał rozpoznaniu terytorium kraju."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-r1-q6
+  passageRef: certyfikat-polski-C1-2023-04-read-1
+  questionType: multiple_choice
+  questionText: "Nowoczesne oprogramowanie pomaga odnaleźć"
+  options: "a) nowe stanowiska pracy.|b) cenne paliwa kopalne.|c) porosłe florą artefakty."
+  correctAnswer: "c) porosłe florą artefakty."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-r1-q7
+  passageRef: certyfikat-polski-C1-2023-04-read-1
+  questionType: multiple_choice
+  questionText: "Archeologia cyfrowa jest lepsza od tradycyjnej, ponieważ"
+  options: "a) nie naraża na szwank terenu badawczego.|b) dewastuje szatę roślinną.|c) nie wymaga podejmowania dodatkowych badań."
+  correctAnswer: "a) nie naraża na szwank terenu badawczego."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-r1-q8
+  passageRef: certyfikat-polski-C1-2023-04-read-1
+  questionType: multiple_choice
+  questionText: "Modele agentowe"
+  options: "a) wyręczają archeologa w interpretacji zjawiska badawczego.|b) dokonują wyczerpujących analiz nieprzystających do siebie danych.|c) przedstawiają scenariusze domniemanych wydarzeń."
+  correctAnswer: "c) przedstawiają scenariusze domniemanych wydarzeń."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-r1-q9
+  passageRef: certyfikat-polski-C1-2023-04-read-1
+  questionType: multiple_choice
+  questionText: "Szacunki uzyskane w wyniku modelowania będą dokładniejsze, kiedy"
+  options: "a) informatycy wprowadzą poprawki systemowe.|b) materiał źródłowy będzie na bieżąco uzupełniany.|c) system będzie dokonywać autokorekty danych."
+  correctAnswer: "b) materiał źródłowy będzie na bieżąco uzupełniany."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-r1-q10
+  passageRef: certyfikat-polski-C1-2023-04-read-1
+  questionType: multiple_choice
+  questionText: "Polska badaczka"
+  options: "a) została doceniona i wyróżniona za swoje badania.|b) otrzymała grant na badania porównawcze.|c) bada dawne metody wytwarzania trunków."
+  correctAnswer: "a) została doceniona i wyróżniona za swoje badania."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-r2-q1
+  passageRef: certyfikat-polski-C1-2023-04-read-2
+  questionType: matching
+  questionText: "Dom w bąbelkach"
+  options: "A. Ptaszniki często towarzyszą płazom, z niektórymi koegzystują nawet w norach. W tym symbiotycznym układzie żaby żywią się larwami pasożytującymi na ciele pajęczego gospodarza.|B. Muszle ślimaków służą krabowi do ochrony miękkiego odwłoka. Kiedy stworzenie rośnie, wprowadza się do kolejnego „domu”, uprzednio pozbywszy się właściciela.|C. Japońska wyspa Okunoshima opanowana jest przez króliki. Zwierzęta uciekły z laboratorium, w którym badano na nich działanie gazu musztardowego.|D. Natura nie lubi pustki, szczególnie jeśli chodzi o miejsce zamieszkiwania organizmów. Pomysłowość przyrody na zajmowanie najdziwaczniejszych siedlisk bywa zaskakująca.|E. Bakteria Deinococcus radiodurans potrafi przeżyć zarówno w wysokich temperaturach, jak i zamrożona w ciekłym gazie; nie straszny jest jej ani stężony kwas, ani próżnia. Wytrzymuje również promieniowanie gamma.|F. Bywa, że krab hoduje na muszli swojego ukwiała. Parzydełka gościa gwarantują gospodarzowi ochronę, a ukwiał ma zapewniony transport i możliwość zbierania pożywienia.|G. Dalecy krewni dżdżownicy, rurkoczułkowce, zamiast sterty kompostu wybierają na miejsce zamieszkania dna oceanów, a dokładniej okolice podmorskich szczelin w skorupie ziemskiej, przez które wydobywają się gorące gazy wulkaniczne.|H. Na jednej z wysp na Bahamach mieszka spore stado świń, które szukają pożywienia na łódkach turystów. Skąd się tam wzięły? Prawdopodobnie uciekły z jakiegoś wraku.|I. Krewetka i ryba zwana babką mieszkają razem w norze wykopanej przez poruszającą się po omacku krewetkę. Gdy w pobliżu siedliska pojawia się drapieżnik, babka ostrzega współlokatora za pomocą określonego ruchu ogona i oba stworzenia chowają się w jamie.|J. Bakteria Ferroplasma acidarmanus zamieszkuje podziemne żrące bajorka nasycone rozpuszczonymi metalami. Temperatura przekracza w nich 40 stopni Celsjusza.|K. Niesporczaki odkryto na szczytach Himalajów i w osadach na dnie rowów oceanicznych. Latają wokół naszej planety na granicy stratosfery i nieuszkodzone wracają do życia po 120 latach bez wody."
+  correctAnswer: "G. Dalecy krewni dżdżownicy, rurkoczułkowce, zamiast sterty kompostu wybierają na miejsce zamieszkania dna oceanów, a dokładniej okolice podmorskich szczelin w skorupie ziemskiej, przez które wydobywają się gorące gazy wulkaniczne."
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-r2-q2
+  passageRef: certyfikat-polski-C1-2023-04-read-2
+  questionType: matching
+  questionText: "Toksyczny basenik"
+  options: "A. Ptaszniki często towarzyszą płazom, z niektórymi koegzystują nawet w norach. W tym symbiotycznym układzie żaby żywią się larwami pasożytującymi na ciele pajęczego gospodarza.|B. Muszle ślimaków służą krabowi do ochrony miękkiego odwłoka. Kiedy stworzenie rośnie, wprowadza się do kolejnego „domu”, uprzednio pozbywszy się właściciela.|C. Japońska wyspa Okunoshima opanowana jest przez króliki. Zwierzęta uciekły z laboratorium, w którym badano na nich działanie gazu musztardowego.|D. Natura nie lubi pustki, szczególnie jeśli chodzi o miejsce zamieszkiwania organizmów. Pomysłowość przyrody na zajmowanie najdziwaczniejszych siedlisk bywa zaskakująca.|E. Bakteria Deinococcus radiodurans potrafi przeżyć zarówno w wysokich temperaturach, jak i zamrożona w ciekłym gazie; nie straszny jest jej ani stężony kwas, ani próżnia. Wytrzymuje również promieniowanie gamma.|F. Bywa, że krab hoduje na muszli swojego ukwiała. Parzydełka gościa gwarantują gospodarzowi ochronę, a ukwiał ma zapewniony transport i możliwość zbierania pożywienia.|G. Dalecy krewni dżdżownicy, rurkoczułkowce, zamiast sterty kompostu wybierają na miejsce zamieszkania dna oceanów, a dokładniej okolice podmorskich szczelin w skorupie ziemskiej, przez które wydobywają się gorące gazy wulkaniczne.|H. Na jednej z wysp na Bahamach mieszka spore stado świń, które szukają pożywienia na łódkach turystów. Skąd się tam wzięły? Prawdopodobnie uciekły z jakiegoś wraku.|I. Krewetka i ryba zwana babką mieszkają razem w norze wykopanej przez poruszającą się po omacku krewetkę. Gdy w pobliżu siedliska pojawia się drapieżnik, babka ostrzega współlokatora za pomocą określonego ruchu ogona i oba stworzenia chowają się w jamie.|J. Bakteria Ferroplasma acidarmanus zamieszkuje podziemne żrące bajorka nasycone rozpuszczonymi metalami. Temperatura przekracza w nich 40 stopni Celsjusza.|K. Niesporczaki odkryto na szczytach Himalajów i w osadach na dnie rowów oceanicznych. Latają wokół naszej planety na granicy stratosfery i nieuszkodzone wracają do życia po 120 latach bez wody."
+  correctAnswer: "J. Bakteria Ferroplasma acidarmanus zamieszkuje podziemne żrące bajorka nasycone rozpuszczonymi metalami. Temperatura przekracza w nich 40 stopni Celsjusza."
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-r2-q3
+  passageRef: certyfikat-polski-C1-2023-04-read-2
+  questionType: matching
+  questionText: "Twardy zawodnik"
+  options: "A. Ptaszniki często towarzyszą płazom, z niektórymi koegzystują nawet w norach. W tym symbiotycznym układzie żaby żywią się larwami pasożytującymi na ciele pajęczego gospodarza.|B. Muszle ślimaków służą krabowi do ochrony miękkiego odwłoka. Kiedy stworzenie rośnie, wprowadza się do kolejnego „domu”, uprzednio pozbywszy się właściciela.|C. Japońska wyspa Okunoshima opanowana jest przez króliki. Zwierzęta uciekły z laboratorium, w którym badano na nich działanie gazu musztardowego.|D. Natura nie lubi pustki, szczególnie jeśli chodzi o miejsce zamieszkiwania organizmów. Pomysłowość przyrody na zajmowanie najdziwaczniejszych siedlisk bywa zaskakująca.|E. Bakteria Deinococcus radiodurans potrafi przeżyć zarówno w wysokich temperaturach, jak i zamrożona w ciekłym gazie; nie straszny jest jej ani stężony kwas, ani próżnia. Wytrzymuje również promieniowanie gamma.|F. Bywa, że krab hoduje na muszli swojego ukwiała. Parzydełka gościa gwarantują gospodarzowi ochronę, a ukwiał ma zapewniony transport i możliwość zbierania pożywienia.|G. Dalecy krewni dżdżownicy, rurkoczułkowce, zamiast sterty kompostu wybierają na miejsce zamieszkania dna oceanów, a dokładniej okolice podmorskich szczelin w skorupie ziemskiej, przez które wydobywają się gorące gazy wulkaniczne.|H. Na jednej z wysp na Bahamach mieszka spore stado świń, które szukają pożywienia na łódkach turystów. Skąd się tam wzięły? Prawdopodobnie uciekły z jakiegoś wraku.|I. Krewetka i ryba zwana babką mieszkają razem w norze wykopanej przez poruszającą się po omacku krewetkę. Gdy w pobliżu siedliska pojawia się drapieżnik, babka ostrzega współlokatora za pomocą określonego ruchu ogona i oba stworzenia chowają się w jamie.|J. Bakteria Ferroplasma acidarmanus zamieszkuje podziemne żrące bajorka nasycone rozpuszczonymi metalami. Temperatura przekracza w nich 40 stopni Celsjusza.|K. Niesporczaki odkryto na szczytach Himalajów i w osadach na dnie rowów oceanicznych. Latają wokół naszej planety na granicy stratosfery i nieuszkodzone wracają do życia po 120 latach bez wody."
+  correctAnswer: "E. Bakteria Deinococcus radiodurans potrafi przeżyć zarówno w wysokich temperaturach, jak i zamrożona w ciekłym gazie; nie straszny jest jej ani stężony kwas, ani próżnia. Wytrzymuje również promieniowanie gamma."
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-r2-q4
+  passageRef: certyfikat-polski-C1-2023-04-read-2
+  questionType: matching
+  questionText: "Podniebne sucharki"
+  options: "A. Ptaszniki często towarzyszą płazom, z niektórymi koegzystują nawet w norach. W tym symbiotycznym układzie żaby żywią się larwami pasożytującymi na ciele pajęczego gospodarza.|B. Muszle ślimaków służą krabowi do ochrony miękkiego odwłoka. Kiedy stworzenie rośnie, wprowadza się do kolejnego „domu”, uprzednio pozbywszy się właściciela.|C. Japońska wyspa Okunoshima opanowana jest przez króliki. Zwierzęta uciekły z laboratorium, w którym badano na nich działanie gazu musztardowego.|D. Natura nie lubi pustki, szczególnie jeśli chodzi o miejsce zamieszkiwania organizmów. Pomysłowość przyrody na zajmowanie najdziwaczniejszych siedlisk bywa zaskakująca.|E. Bakteria Deinococcus radiodurans potrafi przeżyć zarówno w wysokich temperaturach, jak i zamrożona w ciekłym gazie; nie straszny jest jej ani stężony kwas, ani próżnia. Wytrzymuje również promieniowanie gamma.|F. Bywa, że krab hoduje na muszli swojego ukwiała. Parzydełka gościa gwarantują gospodarzowi ochronę, a ukwiał ma zapewniony transport i możliwość zbierania pożywienia.|G. Dalecy krewni dżdżownicy, rurkoczułkowce, zamiast sterty kompostu wybierają na miejsce zamieszkania dna oceanów, a dokładniej okolice podmorskich szczelin w skorupie ziemskiej, przez które wydobywają się gorące gazy wulkaniczne.|H. Na jednej z wysp na Bahamach mieszka spore stado świń, które szukają pożywienia na łódkach turystów. Skąd się tam wzięły? Prawdopodobnie uciekły z jakiegoś wraku.|I. Krewetka i ryba zwana babką mieszkają razem w norze wykopanej przez poruszającą się po omacku krewetkę. Gdy w pobliżu siedliska pojawia się drapieżnik, babka ostrzega współlokatora za pomocą określonego ruchu ogona i oba stworzenia chowają się w jamie.|J. Bakteria Ferroplasma acidarmanus zamieszkuje podziemne żrące bajorka nasycone rozpuszczonymi metalami. Temperatura przekracza w nich 40 stopni Celsjusza.|K. Niesporczaki odkryto na szczytach Himalajów i w osadach na dnie rowów oceanicznych. Latają wokół naszej planety na granicy stratosfery i nieuszkodzone wracają do życia po 120 latach bez wody."
+  correctAnswer: "K. Niesporczaki odkryto na szczytach Himalajów i w osadach na dnie rowów oceanicznych. Latają wokół naszej planety na granicy stratosfery i nieuszkodzone wracają do życia po 120 latach bez wody."
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-r2-q5
+  passageRef: certyfikat-polski-C1-2023-04-read-2
+  questionType: matching
+  questionText: "Posiłek u współlokatora"
+  options: "A. Ptaszniki często towarzyszą płazom, z niektórymi koegzystują nawet w norach. W tym symbiotycznym układzie żaby żywią się larwami pasożytującymi na ciele pajęczego gospodarza.|B. Muszle ślimaków służą krabowi do ochrony miękkiego odwłoka. Kiedy stworzenie rośnie, wprowadza się do kolejnego „domu”, uprzednio pozbywszy się właściciela.|C. Japońska wyspa Okunoshima opanowana jest przez króliki. Zwierzęta uciekły z laboratorium, w którym badano na nich działanie gazu musztardowego.|D. Natura nie lubi pustki, szczególnie jeśli chodzi o miejsce zamieszkiwania organizmów. Pomysłowość przyrody na zajmowanie najdziwaczniejszych siedlisk bywa zaskakująca.|E. Bakteria Deinococcus radiodurans potrafi przeżyć zarówno w wysokich temperaturach, jak i zamrożona w ciekłym gazie; nie straszny jest jej ani stężony kwas, ani próżnia. Wytrzymuje również promieniowanie gamma.|F. Bywa, że krab hoduje na muszli swojego ukwiała. Parzydełka gościa gwarantują gospodarzowi ochronę, a ukwiał ma zapewniony transport i możliwość zbierania pożywienia.|G. Dalecy krewni dżdżownicy, rurkoczułkowce, zamiast sterty kompostu wybierają na miejsce zamieszkania dna oceanów, a dokładniej okolice podmorskich szczelin w skorupie ziemskiej, przez które wydobywają się gorące gazy wulkaniczne.|H. Na jednej z wysp na Bahamach mieszka spore stado świń, które szukają pożywienia na łódkach turystów. Skąd się tam wzięły? Prawdopodobnie uciekły z jakiegoś wraku.|I. Krewetka i ryba zwana babką mieszkają razem w norze wykopanej przez poruszającą się po omacku krewetkę. Gdy w pobliżu siedliska pojawia się drapieżnik, babka ostrzega współlokatora za pomocą określonego ruchu ogona i oba stworzenia chowają się w jamie.|J. Bakteria Ferroplasma acidarmanus zamieszkuje podziemne żrące bajorka nasycone rozpuszczonymi metalami. Temperatura przekracza w nich 40 stopni Celsjusza.|K. Niesporczaki odkryto na szczytach Himalajów i w osadach na dnie rowów oceanicznych. Latają wokół naszej planety na granicy stratosfery i nieuszkodzone wracają do życia po 120 latach bez wody."
+  correctAnswer: "A. Ptaszniki często towarzyszą płazom, z niektórymi koegzystują nawet w norach. W tym symbiotycznym układzie żaby żywią się larwami pasożytującymi na ciele pajęczego gospodarza."
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-r2-q6
+  passageRef: certyfikat-polski-C1-2023-04-read-2
+  questionType: matching
+  questionText: "Znak umowny"
+  options: "A. Ptaszniki często towarzyszą płazom, z niektórymi koegzystują nawet w norach. W tym symbiotycznym układzie żaby żywią się larwami pasożytującymi na ciele pajęczego gospodarza.|B. Muszle ślimaków służą krabowi do ochrony miękkiego odwłoka. Kiedy stworzenie rośnie, wprowadza się do kolejnego „domu”, uprzednio pozbywszy się właściciela.|C. Japońska wyspa Okunoshima opanowana jest przez króliki. Zwierzęta uciekły z laboratorium, w którym badano na nich działanie gazu musztardowego.|D. Natura nie lubi pustki, szczególnie jeśli chodzi o miejsce zamieszkiwania organizmów. Pomysłowość przyrody na zajmowanie najdziwaczniejszych siedlisk bywa zaskakująca.|E. Bakteria Deinococcus radiodurans potrafi przeżyć zarówno w wysokich temperaturach, jak i zamrożona w ciekłym gazie; nie straszny jest jej ani stężony kwas, ani próżnia. Wytrzymuje również promieniowanie gamma.|F. Bywa, że krab hoduje na muszli swojego ukwiała. Parzydełka gościa gwarantują gospodarzowi ochronę, a ukwiał ma zapewniony transport i możliwość zbierania pożywienia.|G. Dalecy krewni dżdżownicy, rurkoczułkowce, zamiast sterty kompostu wybierają na miejsce zamieszkania dna oceanów, a dokładniej okolice podmorskich szczelin w skorupie ziemskiej, przez które wydobywają się gorące gazy wulkaniczne.|H. Na jednej z wysp na Bahamach mieszka spore stado świń, które szukają pożywienia na łódkach turystów. Skąd się tam wzięły? Prawdopodobnie uciekły z jakiegoś wraku.|I. Krewetka i ryba zwana babką mieszkają razem w norze wykopanej przez poruszającą się po omacku krewetkę. Gdy w pobliżu siedliska pojawia się drapieżnik, babka ostrzega współlokatora za pomocą określonego ruchu ogona i oba stworzenia chowają się w jamie.|J. Bakteria Ferroplasma acidarmanus zamieszkuje podziemne żrące bajorka nasycone rozpuszczonymi metalami. Temperatura przekracza w nich 40 stopni Celsjusza.|K. Niesporczaki odkryto na szczytach Himalajów i w osadach na dnie rowów oceanicznych. Latają wokół naszej planety na granicy stratosfery i nieuszkodzone wracają do życia po 120 latach bez wody."
+  correctAnswer: "I. Krewetka i ryba zwana babką mieszkają razem w norze wykopanej przez poruszającą się po omacku krewetkę. Gdy w pobliżu siedliska pojawia się drapieżnik, babka ostrzega współlokatora za pomocą określonego ruchu ogona i oba stworzenia chowają się w jamie."
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-r2-q7
+  passageRef: certyfikat-polski-C1-2023-04-read-2
+  questionType: matching
+  questionText: "Nowy lokator"
+  options: "A. Ptaszniki często towarzyszą płazom, z niektórymi koegzystują nawet w norach. W tym symbiotycznym układzie żaby żywią się larwami pasożytującymi na ciele pajęczego gospodarza.|B. Muszle ślimaków służą krabowi do ochrony miękkiego odwłoka. Kiedy stworzenie rośnie, wprowadza się do kolejnego „domu”, uprzednio pozbywszy się właściciela.|C. Japońska wyspa Okunoshima opanowana jest przez króliki. Zwierzęta uciekły z laboratorium, w którym badano na nich działanie gazu musztardowego.|D. Natura nie lubi pustki, szczególnie jeśli chodzi o miejsce zamieszkiwania organizmów. Pomysłowość przyrody na zajmowanie najdziwaczniejszych siedlisk bywa zaskakująca.|E. Bakteria Deinococcus radiodurans potrafi przeżyć zarówno w wysokich temperaturach, jak i zamrożona w ciekłym gazie; nie straszny jest jej ani stężony kwas, ani próżnia. Wytrzymuje również promieniowanie gamma.|F. Bywa, że krab hoduje na muszli swojego ukwiała. Parzydełka gościa gwarantują gospodarzowi ochronę, a ukwiał ma zapewniony transport i możliwość zbierania pożywienia.|G. Dalecy krewni dżdżownicy, rurkoczułkowce, zamiast sterty kompostu wybierają na miejsce zamieszkania dna oceanów, a dokładniej okolice podmorskich szczelin w skorupie ziemskiej, przez które wydobywają się gorące gazy wulkaniczne.|H. Na jednej z wysp na Bahamach mieszka spore stado świń, które szukają pożywienia na łódkach turystów. Skąd się tam wzięły? Prawdopodobnie uciekły z jakiegoś wraku.|I. Krewetka i ryba zwana babką mieszkają razem w norze wykopanej przez poruszającą się po omacku krewetkę. Gdy w pobliżu siedliska pojawia się drapieżnik, babka ostrzega współlokatora za pomocą określonego ruchu ogona i oba stworzenia chowają się w jamie.|J. Bakteria Ferroplasma acidarmanus zamieszkuje podziemne żrące bajorka nasycone rozpuszczonymi metalami. Temperatura przekracza w nich 40 stopni Celsjusza.|K. Niesporczaki odkryto na szczytach Himalajów i w osadach na dnie rowów oceanicznych. Latają wokół naszej planety na granicy stratosfery i nieuszkodzone wracają do życia po 120 latach bez wody."
+  correctAnswer: "B. Muszle ślimaków służą krabowi do ochrony miękkiego odwłoka. Kiedy stworzenie rośnie, wprowadza się do kolejnego „domu”, uprzednio pozbywszy się właściciela."
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-r2-q8
+  passageRef: certyfikat-polski-C1-2023-04-read-2
+  questionType: matching
+  questionText: "Bryczką na żer"
+  options: "A. Ptaszniki często towarzyszą płazom, z niektórymi koegzystują nawet w norach. W tym symbiotycznym układzie żaby żywią się larwami pasożytującymi na ciele pajęczego gospodarza.|B. Muszle ślimaków służą krabowi do ochrony miękkiego odwłoka. Kiedy stworzenie rośnie, wprowadza się do kolejnego „domu”, uprzednio pozbywszy się właściciela.|C. Japońska wyspa Okunoshima opanowana jest przez króliki. Zwierzęta uciekły z laboratorium, w którym badano na nich działanie gazu musztardowego.|D. Natura nie lubi pustki, szczególnie jeśli chodzi o miejsce zamieszkiwania organizmów. Pomysłowość przyrody na zajmowanie najdziwaczniejszych siedlisk bywa zaskakująca.|E. Bakteria Deinococcus radiodurans potrafi przeżyć zarówno w wysokich temperaturach, jak i zamrożona w ciekłym gazie; nie straszny jest jej ani stężony kwas, ani próżnia. Wytrzymuje również promieniowanie gamma.|F. Bywa, że krab hoduje na muszli swojego ukwiała. Parzydełka gościa gwarantują gospodarzowi ochronę, a ukwiał ma zapewniony transport i możliwość zbierania pożywienia.|G. Dalecy krewni dżdżownicy, rurkoczułkowce, zamiast sterty kompostu wybierają na miejsce zamieszkania dna oceanów, a dokładniej okolice podmorskich szczelin w skorupie ziemskiej, przez które wydobywają się gorące gazy wulkaniczne.|H. Na jednej z wysp na Bahamach mieszka spore stado świń, które szukają pożywienia na łódkach turystów. Skąd się tam wzięły? Prawdopodobnie uciekły z jakiegoś wraku.|I. Krewetka i ryba zwana babką mieszkają razem w norze wykopanej przez poruszającą się po omacku krewetkę. Gdy w pobliżu siedliska pojawia się drapieżnik, babka ostrzega współlokatora za pomocą określonego ruchu ogona i oba stworzenia chowają się w jamie.|J. Bakteria Ferroplasma acidarmanus zamieszkuje podziemne żrące bajorka nasycone rozpuszczonymi metalami. Temperatura przekracza w nich 40 stopni Celsjusza.|K. Niesporczaki odkryto na szczytach Himalajów i w osadach na dnie rowów oceanicznych. Latają wokół naszej planety na granicy stratosfery i nieuszkodzone wracają do życia po 120 latach bez wody."
+  correctAnswer: "F. Bywa, że krab hoduje na muszli swojego ukwiała. Parzydełka gościa gwarantują gospodarzowi ochronę, a ukwiał ma zapewniony transport i możliwość zbierania pożywienia."
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-r2-q9
+  passageRef: certyfikat-polski-C1-2023-04-read-2
+  questionType: matching
+  questionText: "Rajskie rozbitki"
+  options: "A. Ptaszniki często towarzyszą płazom, z niektórymi koegzystują nawet w norach. W tym symbiotycznym układzie żaby żywią się larwami pasożytującymi na ciele pajęczego gospodarza.|B. Muszle ślimaków służą krabowi do ochrony miękkiego odwłoka. Kiedy stworzenie rośnie, wprowadza się do kolejnego „domu”, uprzednio pozbywszy się właściciela.|C. Japońska wyspa Okunoshima opanowana jest przez króliki. Zwierzęta uciekły z laboratorium, w którym badano na nich działanie gazu musztardowego.|D. Natura nie lubi pustki, szczególnie jeśli chodzi o miejsce zamieszkiwania organizmów. Pomysłowość przyrody na zajmowanie najdziwaczniejszych siedlisk bywa zaskakująca.|E. Bakteria Deinococcus radiodurans potrafi przeżyć zarówno w wysokich temperaturach, jak i zamrożona w ciekłym gazie; nie straszny jest jej ani stężony kwas, ani próżnia. Wytrzymuje również promieniowanie gamma.|F. Bywa, że krab hoduje na muszli swojego ukwiała. Parzydełka gościa gwarantują gospodarzowi ochronę, a ukwiał ma zapewniony transport i możliwość zbierania pożywienia.|G. Dalecy krewni dżdżownicy, rurkoczułkowce, zamiast sterty kompostu wybierają na miejsce zamieszkania dna oceanów, a dokładniej okolice podmorskich szczelin w skorupie ziemskiej, przez które wydobywają się gorące gazy wulkaniczne.|H. Na jednej z wysp na Bahamach mieszka spore stado świń, które szukają pożywienia na łódkach turystów. Skąd się tam wzięły? Prawdopodobnie uciekły z jakiegoś wraku.|I. Krewetka i ryba zwana babką mieszkają razem w norze wykopanej przez poruszającą się po omacku krewetkę. Gdy w pobliżu siedliska pojawia się drapieżnik, babka ostrzega współlokatora za pomocą określonego ruchu ogona i oba stworzenia chowają się w jamie.|J. Bakteria Ferroplasma acidarmanus zamieszkuje podziemne żrące bajorka nasycone rozpuszczonymi metalami. Temperatura przekracza w nich 40 stopni Celsjusza.|K. Niesporczaki odkryto na szczytach Himalajów i w osadach na dnie rowów oceanicznych. Latają wokół naszej planety na granicy stratosfery i nieuszkodzone wracają do życia po 120 latach bez wody."
+  correctAnswer: "H. Na jednej z wysp na Bahamach mieszka spore stado świń, które szukają pożywienia na łódkach turystów. Skąd się tam wzięły? Prawdopodobnie uciekły z jakiegoś wraku."
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-r2-q10
+  passageRef: certyfikat-polski-C1-2023-04-read-2
+  questionType: matching
+  questionText: "Zbieg doświadczalny"
+  options: "A. Ptaszniki często towarzyszą płazom, z niektórymi koegzystują nawet w norach. W tym symbiotycznym układzie żaby żywią się larwami pasożytującymi na ciele pajęczego gospodarza.|B. Muszle ślimaków służą krabowi do ochrony miękkiego odwłoka. Kiedy stworzenie rośnie, wprowadza się do kolejnego „domu”, uprzednio pozbywszy się właściciela.|C. Japońska wyspa Okunoshima opanowana jest przez króliki. Zwierzęta uciekły z laboratorium, w którym badano na nich działanie gazu musztardowego.|D. Natura nie lubi pustki, szczególnie jeśli chodzi o miejsce zamieszkiwania organizmów. Pomysłowość przyrody na zajmowanie najdziwaczniejszych siedlisk bywa zaskakująca.|E. Bakteria Deinococcus radiodurans potrafi przeżyć zarówno w wysokich temperaturach, jak i zamrożona w ciekłym gazie; nie straszny jest jej ani stężony kwas, ani próżnia. Wytrzymuje również promieniowanie gamma.|F. Bywa, że krab hoduje na muszli swojego ukwiała. Parzydełka gościa gwarantują gospodarzowi ochronę, a ukwiał ma zapewniony transport i możliwość zbierania pożywienia.|G. Dalecy krewni dżdżownicy, rurkoczułkowce, zamiast sterty kompostu wybierają na miejsce zamieszkania dna oceanów, a dokładniej okolice podmorskich szczelin w skorupie ziemskiej, przez które wydobywają się gorące gazy wulkaniczne.|H. Na jednej z wysp na Bahamach mieszka spore stado świń, które szukają pożywienia na łódkach turystów. Skąd się tam wzięły? Prawdopodobnie uciekły z jakiegoś wraku.|I. Krewetka i ryba zwana babką mieszkają razem w norze wykopanej przez poruszającą się po omacku krewetkę. Gdy w pobliżu siedliska pojawia się drapieżnik, babka ostrzega współlokatora za pomocą określonego ruchu ogona i oba stworzenia chowają się w jamie.|J. Bakteria Ferroplasma acidarmanus zamieszkuje podziemne żrące bajorka nasycone rozpuszczonymi metalami. Temperatura przekracza w nich 40 stopni Celsjusza.|K. Niesporczaki odkryto na szczytach Himalajów i w osadach na dnie rowów oceanicznych. Latają wokół naszej planety na granicy stratosfery i nieuszkodzone wracają do życia po 120 latach bez wody."
+  correctAnswer: "C. Japońska wyspa Okunoshima opanowana jest przez króliki. Zwierzęta uciekły z laboratorium, w którym badano na nich działanie gazu musztardowego."
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-r3-q1
+  passageRef: certyfikat-polski-C1-2023-04-read-3
+  questionType: true_false_not_given
+  questionText: "Dzielenie średniowiecznych monet czyniło je bezużytecznymi."
+  options: "TAK|NIE|BI"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-r3-q2
+  passageRef: certyfikat-polski-C1-2023-04-read-3
+  questionType: true_false_not_given
+  questionText: "Średniowieczni kupcy musieli płacić monetami, które pochodziły z tego samego kraju."
+  options: "TAK|NIE|BI"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-r3-q3
+  passageRef: certyfikat-polski-C1-2023-04-read-3
+  questionType: true_false_not_given
+  questionText: "Przed uregulowaniem płatności monety ważono i badano pod lupą czystość użytego kruszcu."
+  options: "TAK|NIE|BI"
+  correctAnswer: BI
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-r3-q4
+  passageRef: certyfikat-polski-C1-2023-04-read-3
+  questionType: true_false_not_given
+  questionText: "W przeciągu wieków cena srebra podlegała istotnym wahaniom."
+  options: "TAK|NIE|BI"
+  correctAnswer: BI
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-r3-q5
+  passageRef: certyfikat-polski-C1-2023-04-read-3
+  questionType: true_false_not_given
+  questionText: "Konstantyn Wielki wywodził się z tego samego rodu co cesarz Dioklecjan."
+  options: "TAK|NIE|BI"
+  correctAnswer: BI
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-r3-q6
+  passageRef: certyfikat-polski-C1-2023-04-read-3
+  questionType: true_false_not_given
+  questionText: "W Rzymie ustanowiono monopol na produkcję pieniądza dla całego imperium."
+  options: "TAK|NIE|BI"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-r3-q7
+  passageRef: certyfikat-polski-C1-2023-04-read-3
+  questionType: true_false_not_given
+  questionText: "Środki na produkcję pieniądza w Europie Zachodniej pochodziły z łupów od pokonanego wroga."
+  options: "TAK|NIE|BI"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-r3-q8
+  passageRef: certyfikat-polski-C1-2023-04-read-3
+  questionType: true_false_not_given
+  questionText: "Na dzisiejszych polskich papierowych środkach płatniczych widnieją wizerunki starych monet."
+  options: "TAK|NIE|BI"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-r3-q9
+  passageRef: certyfikat-polski-C1-2023-04-read-3
+  questionType: true_false_not_given
+  questionText: "Za czasów pierwszych władców w Polsce obowiązywała jedna waluta."
+  options: "TAK|NIE|BI"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-r3-q10
+  passageRef: certyfikat-polski-C1-2023-04-read-3
+  questionType: true_false_not_given
+  questionText: "Czechy – w odróżnieniu od Polski – eksploatowały własne złoża cennego kruszcu."
+  options: "TAK|NIE|BI"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-r4-q1
+  passageRef: certyfikat-polski-C1-2023-04-read-4
+  questionType: gap_fill_fragment
+  questionText: "Luka 1 w tekście „Życie w wodzie”"
+  options: "A. Imponujący koncept podbija świat, w którym ekstremalne zjawiska pogodowe stają się normą.|B. Krótko mówiąc, betonowanie trzeba ograniczyć, a chodniki i drogi powinny w jak największym stopniu pozwolić wodzie docierać do gleby.|C. Przykładem mogą być przepełnione kanały ściekowe, które w trakcie intensywnych opadów nie odprowadzają nadmiaru wody.|D. Powodzie spowodowane ulewnymi deszczami od zamierzchłych czasów są tu prawdziwą zmorą.|E. Dodatkowo w okolicznym morzu betonu takie skwery czy zagajniki stanowią oazę bioróżnorodności i miejsce ukojenia dla mieszkańców.|F. Zatem dlaczego niektóre kraje już teraz zbierają gorzkie owoce pozbywania się szaty roślinnej z aglomeracji i ośrodków przemysłowych?|G. W arsenale miast gąbek znajdują się m.in. ogrody deszczowe, łąki kwietne czy też zielone dachy i ściany.|H. Należy zaplanować gruntowne, wielopłaszczyznowe i systemowe przeobrażenie tkanki miejskiej.|I. Miasta bunkry to pokłosie niegdysiejszych potrzeb urbanizacyjnych, które dziś nie są aktualne.|J. Zamiast czym prędzej pozbywać się deszczówki, trzeba ją wchłonąć przy pomocy specjalnie zaprojektowanej infrastruktury.|K. Założenie jest takie, że 80 procent terenów tych miast powinno ponownie wykorzystywać 70 procent deszczówki.|L. Na zmianie zyskała też estetyka samego miasta, którego krajobraz jest teraz zdominowany przez florę."
+  correctAnswer: "D. Powodzie spowodowane ulewnymi deszczami od zamierzchłych czasów są tu prawdziwą zmorą."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-r4-q2
+  passageRef: certyfikat-polski-C1-2023-04-read-4
+  questionType: gap_fill_fragment
+  questionText: "Luka 2 w tekście „Życie w wodzie”"
+  options: "A. Imponujący koncept podbija świat, w którym ekstremalne zjawiska pogodowe stają się normą.|B. Krótko mówiąc, betonowanie trzeba ograniczyć, a chodniki i drogi powinny w jak największym stopniu pozwolić wodzie docierać do gleby.|C. Przykładem mogą być przepełnione kanały ściekowe, które w trakcie intensywnych opadów nie odprowadzają nadmiaru wody.|D. Powodzie spowodowane ulewnymi deszczami od zamierzchłych czasów są tu prawdziwą zmorą.|E. Dodatkowo w okolicznym morzu betonu takie skwery czy zagajniki stanowią oazę bioróżnorodności i miejsce ukojenia dla mieszkańców.|F. Zatem dlaczego niektóre kraje już teraz zbierają gorzkie owoce pozbywania się szaty roślinnej z aglomeracji i ośrodków przemysłowych?|G. W arsenale miast gąbek znajdują się m.in. ogrody deszczowe, łąki kwietne czy też zielone dachy i ściany.|H. Należy zaplanować gruntowne, wielopłaszczyznowe i systemowe przeobrażenie tkanki miejskiej.|I. Miasta bunkry to pokłosie niegdysiejszych potrzeb urbanizacyjnych, które dziś nie są aktualne.|J. Zamiast czym prędzej pozbywać się deszczówki, trzeba ją wchłonąć przy pomocy specjalnie zaprojektowanej infrastruktury.|K. Założenie jest takie, że 80 procent terenów tych miast powinno ponownie wykorzystywać 70 procent deszczówki.|L. Na zmianie zyskała też estetyka samego miasta, którego krajobraz jest teraz zdominowany przez florę."
+  correctAnswer: "J. Zamiast czym prędzej pozbywać się deszczówki, trzeba ją wchłonąć przy pomocy specjalnie zaprojektowanej infrastruktury."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-r4-q3
+  passageRef: certyfikat-polski-C1-2023-04-read-4
+  questionType: gap_fill_fragment
+  questionText: "Luka 3 w tekście „Życie w wodzie”"
+  options: "A. Imponujący koncept podbija świat, w którym ekstremalne zjawiska pogodowe stają się normą.|B. Krótko mówiąc, betonowanie trzeba ograniczyć, a chodniki i drogi powinny w jak największym stopniu pozwolić wodzie docierać do gleby.|C. Przykładem mogą być przepełnione kanały ściekowe, które w trakcie intensywnych opadów nie odprowadzają nadmiaru wody.|D. Powodzie spowodowane ulewnymi deszczami od zamierzchłych czasów są tu prawdziwą zmorą.|E. Dodatkowo w okolicznym morzu betonu takie skwery czy zagajniki stanowią oazę bioróżnorodności i miejsce ukojenia dla mieszkańców.|F. Zatem dlaczego niektóre kraje już teraz zbierają gorzkie owoce pozbywania się szaty roślinnej z aglomeracji i ośrodków przemysłowych?|G. W arsenale miast gąbek znajdują się m.in. ogrody deszczowe, łąki kwietne czy też zielone dachy i ściany.|H. Należy zaplanować gruntowne, wielopłaszczyznowe i systemowe przeobrażenie tkanki miejskiej.|I. Miasta bunkry to pokłosie niegdysiejszych potrzeb urbanizacyjnych, które dziś nie są aktualne.|J. Zamiast czym prędzej pozbywać się deszczówki, trzeba ją wchłonąć przy pomocy specjalnie zaprojektowanej infrastruktury.|K. Założenie jest takie, że 80 procent terenów tych miast powinno ponownie wykorzystywać 70 procent deszczówki.|L. Na zmianie zyskała też estetyka samego miasta, którego krajobraz jest teraz zdominowany przez florę."
+  correctAnswer: "G. W arsenale miast gąbek znajdują się m.in. ogrody deszczowe, łąki kwietne czy też zielone dachy i ściany."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-r4-q4
+  passageRef: certyfikat-polski-C1-2023-04-read-4
+  questionType: gap_fill_fragment
+  questionText: "Luka 4 w tekście „Życie w wodzie”"
+  options: "A. Imponujący koncept podbija świat, w którym ekstremalne zjawiska pogodowe stają się normą.|B. Krótko mówiąc, betonowanie trzeba ograniczyć, a chodniki i drogi powinny w jak największym stopniu pozwolić wodzie docierać do gleby.|C. Przykładem mogą być przepełnione kanały ściekowe, które w trakcie intensywnych opadów nie odprowadzają nadmiaru wody.|D. Powodzie spowodowane ulewnymi deszczami od zamierzchłych czasów są tu prawdziwą zmorą.|E. Dodatkowo w okolicznym morzu betonu takie skwery czy zagajniki stanowią oazę bioróżnorodności i miejsce ukojenia dla mieszkańców.|F. Zatem dlaczego niektóre kraje już teraz zbierają gorzkie owoce pozbywania się szaty roślinnej z aglomeracji i ośrodków przemysłowych?|G. W arsenale miast gąbek znajdują się m.in. ogrody deszczowe, łąki kwietne czy też zielone dachy i ściany.|H. Należy zaplanować gruntowne, wielopłaszczyznowe i systemowe przeobrażenie tkanki miejskiej.|I. Miasta bunkry to pokłosie niegdysiejszych potrzeb urbanizacyjnych, które dziś nie są aktualne.|J. Zamiast czym prędzej pozbywać się deszczówki, trzeba ją wchłonąć przy pomocy specjalnie zaprojektowanej infrastruktury.|K. Założenie jest takie, że 80 procent terenów tych miast powinno ponownie wykorzystywać 70 procent deszczówki.|L. Na zmianie zyskała też estetyka samego miasta, którego krajobraz jest teraz zdominowany przez florę."
+  correctAnswer: "B. Krótko mówiąc, betonowanie trzeba ograniczyć, a chodniki i drogi powinny w jak największym stopniu pozwolić wodzie docierać do gleby."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-r4-q5
+  passageRef: certyfikat-polski-C1-2023-04-read-4
+  questionType: gap_fill_fragment
+  questionText: "Luka 5 w tekście „Życie w wodzie”"
+  options: "A. Imponujący koncept podbija świat, w którym ekstremalne zjawiska pogodowe stają się normą.|B. Krótko mówiąc, betonowanie trzeba ograniczyć, a chodniki i drogi powinny w jak największym stopniu pozwolić wodzie docierać do gleby.|C. Przykładem mogą być przepełnione kanały ściekowe, które w trakcie intensywnych opadów nie odprowadzają nadmiaru wody.|D. Powodzie spowodowane ulewnymi deszczami od zamierzchłych czasów są tu prawdziwą zmorą.|E. Dodatkowo w okolicznym morzu betonu takie skwery czy zagajniki stanowią oazę bioróżnorodności i miejsce ukojenia dla mieszkańców.|F. Zatem dlaczego niektóre kraje już teraz zbierają gorzkie owoce pozbywania się szaty roślinnej z aglomeracji i ośrodków przemysłowych?|G. W arsenale miast gąbek znajdują się m.in. ogrody deszczowe, łąki kwietne czy też zielone dachy i ściany.|H. Należy zaplanować gruntowne, wielopłaszczyznowe i systemowe przeobrażenie tkanki miejskiej.|I. Miasta bunkry to pokłosie niegdysiejszych potrzeb urbanizacyjnych, które dziś nie są aktualne.|J. Zamiast czym prędzej pozbywać się deszczówki, trzeba ją wchłonąć przy pomocy specjalnie zaprojektowanej infrastruktury.|K. Założenie jest takie, że 80 procent terenów tych miast powinno ponownie wykorzystywać 70 procent deszczówki.|L. Na zmianie zyskała też estetyka samego miasta, którego krajobraz jest teraz zdominowany przez florę."
+  correctAnswer: "H. Należy zaplanować gruntowne, wielopłaszczyznowe i systemowe przeobrażenie tkanki miejskiej."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-r4-q6
+  passageRef: certyfikat-polski-C1-2023-04-read-4
+  questionType: gap_fill_fragment
+  questionText: "Luka 6 w tekście „Życie w wodzie”"
+  options: "A. Imponujący koncept podbija świat, w którym ekstremalne zjawiska pogodowe stają się normą.|B. Krótko mówiąc, betonowanie trzeba ograniczyć, a chodniki i drogi powinny w jak największym stopniu pozwolić wodzie docierać do gleby.|C. Przykładem mogą być przepełnione kanały ściekowe, które w trakcie intensywnych opadów nie odprowadzają nadmiaru wody.|D. Powodzie spowodowane ulewnymi deszczami od zamierzchłych czasów są tu prawdziwą zmorą.|E. Dodatkowo w okolicznym morzu betonu takie skwery czy zagajniki stanowią oazę bioróżnorodności i miejsce ukojenia dla mieszkańców.|F. Zatem dlaczego niektóre kraje już teraz zbierają gorzkie owoce pozbywania się szaty roślinnej z aglomeracji i ośrodków przemysłowych?|G. W arsenale miast gąbek znajdują się m.in. ogrody deszczowe, łąki kwietne czy też zielone dachy i ściany.|H. Należy zaplanować gruntowne, wielopłaszczyznowe i systemowe przeobrażenie tkanki miejskiej.|I. Miasta bunkry to pokłosie niegdysiejszych potrzeb urbanizacyjnych, które dziś nie są aktualne.|J. Zamiast czym prędzej pozbywać się deszczówki, trzeba ją wchłonąć przy pomocy specjalnie zaprojektowanej infrastruktury.|K. Założenie jest takie, że 80 procent terenów tych miast powinno ponownie wykorzystywać 70 procent deszczówki.|L. Na zmianie zyskała też estetyka samego miasta, którego krajobraz jest teraz zdominowany przez florę."
+  correctAnswer: "K. Założenie jest takie, że 80 procent terenów tych miast powinno ponownie wykorzystywać 70 procent deszczówki."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-r4-q7
+  passageRef: certyfikat-polski-C1-2023-04-read-4
+  questionType: gap_fill_fragment
+  questionText: "Luka 7 w tekście „Życie w wodzie”"
+  options: "A. Imponujący koncept podbija świat, w którym ekstremalne zjawiska pogodowe stają się normą.|B. Krótko mówiąc, betonowanie trzeba ograniczyć, a chodniki i drogi powinny w jak największym stopniu pozwolić wodzie docierać do gleby.|C. Przykładem mogą być przepełnione kanały ściekowe, które w trakcie intensywnych opadów nie odprowadzają nadmiaru wody.|D. Powodzie spowodowane ulewnymi deszczami od zamierzchłych czasów są tu prawdziwą zmorą.|E. Dodatkowo w okolicznym morzu betonu takie skwery czy zagajniki stanowią oazę bioróżnorodności i miejsce ukojenia dla mieszkańców.|F. Zatem dlaczego niektóre kraje już teraz zbierają gorzkie owoce pozbywania się szaty roślinnej z aglomeracji i ośrodków przemysłowych?|G. W arsenale miast gąbek znajdują się m.in. ogrody deszczowe, łąki kwietne czy też zielone dachy i ściany.|H. Należy zaplanować gruntowne, wielopłaszczyznowe i systemowe przeobrażenie tkanki miejskiej.|I. Miasta bunkry to pokłosie niegdysiejszych potrzeb urbanizacyjnych, które dziś nie są aktualne.|J. Zamiast czym prędzej pozbywać się deszczówki, trzeba ją wchłonąć przy pomocy specjalnie zaprojektowanej infrastruktury.|K. Założenie jest takie, że 80 procent terenów tych miast powinno ponownie wykorzystywać 70 procent deszczówki.|L. Na zmianie zyskała też estetyka samego miasta, którego krajobraz jest teraz zdominowany przez florę."
+  correctAnswer: "C. Przykładem mogą być przepełnione kanały ściekowe, które w trakcie intensywnych opadów nie odprowadzają nadmiaru wody."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-r4-q8
+  passageRef: certyfikat-polski-C1-2023-04-read-4
+  questionType: gap_fill_fragment
+  questionText: "Luka 8 w tekście „Życie w wodzie”"
+  options: "A. Imponujący koncept podbija świat, w którym ekstremalne zjawiska pogodowe stają się normą.|B. Krótko mówiąc, betonowanie trzeba ograniczyć, a chodniki i drogi powinny w jak największym stopniu pozwolić wodzie docierać do gleby.|C. Przykładem mogą być przepełnione kanały ściekowe, które w trakcie intensywnych opadów nie odprowadzają nadmiaru wody.|D. Powodzie spowodowane ulewnymi deszczami od zamierzchłych czasów są tu prawdziwą zmorą.|E. Dodatkowo w okolicznym morzu betonu takie skwery czy zagajniki stanowią oazę bioróżnorodności i miejsce ukojenia dla mieszkańców.|F. Zatem dlaczego niektóre kraje już teraz zbierają gorzkie owoce pozbywania się szaty roślinnej z aglomeracji i ośrodków przemysłowych?|G. W arsenale miast gąbek znajdują się m.in. ogrody deszczowe, łąki kwietne czy też zielone dachy i ściany.|H. Należy zaplanować gruntowne, wielopłaszczyznowe i systemowe przeobrażenie tkanki miejskiej.|I. Miasta bunkry to pokłosie niegdysiejszych potrzeb urbanizacyjnych, które dziś nie są aktualne.|J. Zamiast czym prędzej pozbywać się deszczówki, trzeba ją wchłonąć przy pomocy specjalnie zaprojektowanej infrastruktury.|K. Założenie jest takie, że 80 procent terenów tych miast powinno ponownie wykorzystywać 70 procent deszczówki.|L. Na zmianie zyskała też estetyka samego miasta, którego krajobraz jest teraz zdominowany przez florę."
+  correctAnswer: "E. Dodatkowo w okolicznym morzu betonu takie skwery czy zagajniki stanowią oazę bioróżnorodności i miejsce ukojenia dla mieszkańców."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-r4-q9
+  passageRef: certyfikat-polski-C1-2023-04-read-4
+  questionType: gap_fill_fragment
+  questionText: "Luka 9 w tekście „Życie w wodzie”"
+  options: "A. Imponujący koncept podbija świat, w którym ekstremalne zjawiska pogodowe stają się normą.|B. Krótko mówiąc, betonowanie trzeba ograniczyć, a chodniki i drogi powinny w jak największym stopniu pozwolić wodzie docierać do gleby.|C. Przykładem mogą być przepełnione kanały ściekowe, które w trakcie intensywnych opadów nie odprowadzają nadmiaru wody.|D. Powodzie spowodowane ulewnymi deszczami od zamierzchłych czasów są tu prawdziwą zmorą.|E. Dodatkowo w okolicznym morzu betonu takie skwery czy zagajniki stanowią oazę bioróżnorodności i miejsce ukojenia dla mieszkańców.|F. Zatem dlaczego niektóre kraje już teraz zbierają gorzkie owoce pozbywania się szaty roślinnej z aglomeracji i ośrodków przemysłowych?|G. W arsenale miast gąbek znajdują się m.in. ogrody deszczowe, łąki kwietne czy też zielone dachy i ściany.|H. Należy zaplanować gruntowne, wielopłaszczyznowe i systemowe przeobrażenie tkanki miejskiej.|I. Miasta bunkry to pokłosie niegdysiejszych potrzeb urbanizacyjnych, które dziś nie są aktualne.|J. Zamiast czym prędzej pozbywać się deszczówki, trzeba ją wchłonąć przy pomocy specjalnie zaprojektowanej infrastruktury.|K. Założenie jest takie, że 80 procent terenów tych miast powinno ponownie wykorzystywać 70 procent deszczówki.|L. Na zmianie zyskała też estetyka samego miasta, którego krajobraz jest teraz zdominowany przez florę."
+  correctAnswer: "L. Na zmianie zyskała też estetyka samego miasta, którego krajobraz jest teraz zdominowany przez florę."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-r4-q10
+  passageRef: certyfikat-polski-C1-2023-04-read-4
+  questionType: gap_fill_fragment
+  questionText: "Luka 10 w tekście „Życie w wodzie”"
+  options: "A. Imponujący koncept podbija świat, w którym ekstremalne zjawiska pogodowe stają się normą.|B. Krótko mówiąc, betonowanie trzeba ograniczyć, a chodniki i drogi powinny w jak największym stopniu pozwolić wodzie docierać do gleby.|C. Przykładem mogą być przepełnione kanały ściekowe, które w trakcie intensywnych opadów nie odprowadzają nadmiaru wody.|D. Powodzie spowodowane ulewnymi deszczami od zamierzchłych czasów są tu prawdziwą zmorą.|E. Dodatkowo w okolicznym morzu betonu takie skwery czy zagajniki stanowią oazę bioróżnorodności i miejsce ukojenia dla mieszkańców.|F. Zatem dlaczego niektóre kraje już teraz zbierają gorzkie owoce pozbywania się szaty roślinnej z aglomeracji i ośrodków przemysłowych?|G. W arsenale miast gąbek znajdują się m.in. ogrody deszczowe, łąki kwietne czy też zielone dachy i ściany.|H. Należy zaplanować gruntowne, wielopłaszczyznowe i systemowe przeobrażenie tkanki miejskiej.|I. Miasta bunkry to pokłosie niegdysiejszych potrzeb urbanizacyjnych, które dziś nie są aktualne.|J. Zamiast czym prędzej pozbywać się deszczówki, trzeba ją wchłonąć przy pomocy specjalnie zaprojektowanej infrastruktury.|K. Założenie jest takie, że 80 procent terenów tych miast powinno ponownie wykorzystywać 70 procent deszczówki.|L. Na zmianie zyskała też estetyka samego miasta, którego krajobraz jest teraz zdominowany przez florę."
+  correctAnswer: "I. Miasta bunkry to pokłosie niegdysiejszych potrzeb urbanizacyjnych, które dziś nie są aktualne."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-r5-q1
+  passageRef: certyfikat-polski-C1-2023-04-read-5
+  questionType: multiple_choice
+  questionText: "Luka 1 w tekście „Poznańska książnica”"
+  options: "rozbieżności|rozdzielności|indywidualności|odrębności"
+  correctAnswer: "odrębności"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-r5-q2
+  passageRef: certyfikat-polski-C1-2023-04-read-5
+  questionType: multiple_choice
+  questionText: "Luka 2 w tekście „Poznańska książnica”"
+  options: "sadził|nasilał|krzewił|wytężał"
+  correctAnswer: "krzewił"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-r5-q3
+  passageRef: certyfikat-polski-C1-2023-04-read-5
+  questionType: multiple_choice
+  questionText: "Luka 3 w tekście „Poznańska książnica”"
+  options: "krocie|mrowie|szereg|pełno"
+  correctAnswer: krocie
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-r5-q4
+  passageRef: certyfikat-polski-C1-2023-04-read-5
+  questionType: multiple_choice
+  questionText: "Luka 4 w tekście „Poznańska książnica”"
+  options: "kryterium|względu|przesłanki|wymogu"
+  correctAnswer: "względu"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-r5-q5
+  passageRef: certyfikat-polski-C1-2023-04-read-5
+  questionType: multiple_choice
+  questionText: "Luka 5 w tekście „Poznańska książnica”"
+  options: "spędów|zbiórek|zgromadzeń|zlotów"
+  correctAnswer: "zgromadzeń"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-r5-q6
+  passageRef: certyfikat-polski-C1-2023-04-read-5
+  questionType: multiple_choice
+  questionText: "Luka 6 w tekście „Poznańska książnica”"
+  options: "uzupełniany|doładowany|wypełniany|nadrabiany"
+  correctAnswer: "uzupełniany"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-r5-q7
+  passageRef: certyfikat-polski-C1-2023-04-read-5
+  questionType: multiple_choice
+  questionText: "Luka 7 w tekście „Poznańska książnica”"
+  options: "umieścić|posadzić|rozłożyć|rozmieścić"
+  correctAnswer: "umieścić"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-r5-q8
+  passageRef: certyfikat-polski-C1-2023-04-read-5
+  questionType: multiple_choice
+  questionText: "Luka 8 w tekście „Poznańska książnica”"
+  options: "profilami|zabiegami|zapędami|wymogami"
+  correctAnswer: wymogami
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-r5-q9
+  passageRef: certyfikat-polski-C1-2023-04-read-5
+  questionType: multiple_choice
+  questionText: "Luka 9 w tekście „Poznańska książnica”"
+  options: "swobodę|poczucie|pojęcie|wrażenie"
+  correctAnswer: poczucie
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-r5-q10
+  passageRef: certyfikat-polski-C1-2023-04-read-5
+  questionType: multiple_choice
+  questionText: "Luka 10 w tekście „Poznańska książnica”"
+  options: "zawieszeni|wykluczeni|odwołani|wyodrębnieni"
+  correctAnswer: wykluczeni
+  pointsQuarter: 2
+}

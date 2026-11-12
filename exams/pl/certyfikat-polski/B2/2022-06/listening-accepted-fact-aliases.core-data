@@ -1,0 +1,26 @@
+DSL 1
+LISTENING_ACCEPTED_FACT_ALIAS {
+  aliasId: certyfikat-polski-B2-2022-06-l5-q3-alias-1-1
+  factRef: certyfikat-polski-B2-2022-06-l5-q3-fact-1
+  answerText: "lokalizacja w centrum"
+}
+LISTENING_ACCEPTED_FACT_ALIAS {
+  aliasId: certyfikat-polski-B2-2022-06-l5-q3-alias-2-1
+  factRef: certyfikat-polski-B2-2022-06-l5-q3-fact-2
+  answerText: "wysoki standard"
+}
+LISTENING_ACCEPTED_FACT_ALIAS {
+  aliasId: certyfikat-polski-B2-2022-06-l5-q3-alias-2-2
+  factRef: certyfikat-polski-B2-2022-06-l5-q3-fact-2
+  answerText: "dobry standard"
+}
+LISTENING_ACCEPTED_FACT_ALIAS {
+  aliasId: certyfikat-polski-B2-2022-06-l5-q8-alias-1-1
+  factRef: certyfikat-polski-B2-2022-06-l5-q8-fact-1
+  answerText: "zmywarkę"
+}
+LISTENING_ACCEPTED_FACT_ALIAS {
+  aliasId: certyfikat-polski-B2-2022-06-l5-q8-alias-2-1
+  factRef: certyfikat-polski-B2-2022-06-l5-q8-fact-2
+  answerText: "pralkę"
+}

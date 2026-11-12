@@ -1,0 +1,25 @@
+DSL 1
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2023-02-l5-q2-v1
+  questionRef: certyfikat-polski-B2-2023-02-l5-q2
+  answer: "wysokie budynki"
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2023-02-l5-q2-v2
+  questionRef: certyfikat-polski-B2-2023-02-l5-q2
+  answer: "2 apartamentowce"
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2023-02-l5-q5-v1
+  questionRef: certyfikat-polski-B2-2023-02-l5-q5
+  answer: "Nie interesuje go to."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2023-02-l5-q6-v1
+  questionRef: certyfikat-polski-B2-2023-02-l5-q6
+  answer: "150 metrów"
+  earnedQuarter: 4
+}

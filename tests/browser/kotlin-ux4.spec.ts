@@ -77,6 +77,7 @@ test('P0-1: a real touch swipe rates the training card on a touch device (not ju
   const context = await browser.newContext({ ...devices['Pixel 7'], viewport: { width: 390, height: 844 } });
   const page = await context.newPage();
   try {
+    await installProgressReader(page);
     await page.goto('/#/training');
     await continueIntroductionIfPresent(page);
     await page.getByRole('button', { name: 'Показать ответ' }).click();

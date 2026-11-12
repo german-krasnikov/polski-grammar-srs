@@ -1,0 +1,25 @@
+DSL 1
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-B2-2022-06-l5-q3-fact-1
+  questionRef: certyfikat-polski-B2-2022-06-l5-q3
+  creditQuarter: 4
+  displayText: "Lokalizacja w centrum miasta"
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-B2-2022-06-l5-q3-fact-2
+  questionRef: certyfikat-polski-B2-2022-06-l5-q3
+  creditQuarter: 4
+  displayText: "Podwyższony standard"
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-B2-2022-06-l5-q8-fact-1
+  questionRef: certyfikat-polski-B2-2022-06-l5-q8
+  creditQuarter: 2
+  displayText: Zmywarka
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-B2-2022-06-l5-q8-fact-2
+  questionRef: certyfikat-polski-B2-2022-06-l5-q8
+  creditQuarter: 2
+  displayText: pralka
+}

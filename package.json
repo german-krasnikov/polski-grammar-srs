@@ -27,7 +27,11 @@
     "exam:audio:prepare": "tsx scripts/prepare-exam-audio.ts prepare",
     "exam:audio:check-paths": "tsx scripts/prepare-exam-audio.ts check-paths",
     "exam:audio:check-dist": "tsx scripts/prepare-exam-audio.ts check-dist",
-    "exam:audio:check-url": "tsx scripts/prepare-exam-audio.ts check-url"
+    "exam:audio:check-url": "tsx scripts/prepare-exam-audio.ts check-url",
+    "exam:audio:check-source": "tsx scripts/prepare-exam-audio.ts check-source",
+    "exam:audio:verify-derivatives": "tsx scripts/encode-exam-web-audio.ts verify-derivatives",
+    "exam:audio:check-archive": "tsx scripts/verify-exam-web-audio-archive.ts",
+    "site:check-size": "tsx scripts/check-site-size.ts"
   },
   "dependencies": {
     "react": "^19.1.1",

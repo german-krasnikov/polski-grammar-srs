@@ -1,0 +1,11 @@
+# One set-answer disposition chain. Source-conservative review precedes all credit.
+DECISION disposition DEFAULT wrong
+  sourceMalformed AT 10 WHEN set.usesSourceConservativeOverselection AND set.answerNonblank AND set.hasMalformedSelection -> manual_review
+  sourceOverLimit AT 20 WHEN set.usesSourceConservativeOverselection AND set.selectionCount > set.requiredSelections -> manual_review
+  legacyMalformed AT 30 WHEN set.hasMalformedSelection -> wrong
+  legacyOverLimit AT 40 WHEN set.selectionCount > set.requiredSelections -> wrong
+  weightedFull AT 50 WHEN set.hasPerFactCredit AND set.selectionCount == set.requiredSelections AND set.distinctKnownFactCount == set.requiredSelections AND set.knownCreditQuarter == set.maximumQuarter -> full
+  unweightedFull AT 60 WHEN NOT set.hasPerFactCredit AND set.selectionCount == set.requiredSelections AND set.distinctKnownFactCount == set.requiredSelections -> full
+  openUnknown AT 70 WHEN set.openManual AND set.unknownNonblankCount > 0 -> pending
+  partialCredit AT 80 WHEN set.knownCreditQuarter > 0 -> partial
+END

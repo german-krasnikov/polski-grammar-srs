@@ -13,6 +13,24 @@ RECORD ExamRow KEY examId COUNT 1..
   license: string OPTIONAL
 END
 
+# A reviewed source directory becomes visible under a stable public route.
+RECORD ExamPublicationRow KEY routeId COUNT 1..
+  routeId: string
+  examRef: ref ExamRow
+  displayTitle: string
+  sourceDir: string
+END
+
+# Certified written-module cover values. A timed sitting requires all four rows.
+RECORD ExamModuleRow KEY moduleId COUNT 1..
+  moduleId: string
+  examRef: ref ExamRow
+  module: enum listening|reading|grammar|writing
+  order: int
+  durationSeconds: int
+  maximumQuarter: int
+END
+
 # Listening: one audio file per exam, each task plays a segment (startMs..endMs).
 RECORD ListeningTaskRow KEY taskId COUNT 1..
   taskId: string
@@ -39,6 +57,8 @@ RECORD ListeningQuestionRow KEY questionId COUNT 1..
   gradingMode: enum exact|open_manual OPTIONAL
   answerMode: enum single|unordered_set OPTIONAL
   creditPerCorrectQuarter: int OPTIONAL
+  requiredSelections: int OPTIONAL
+  setOverselectionMode: enum legacy_wrong|manual_review OPTIONAL
 END
 
 RECORD ListeningAnswerVariantRow KEY variantId COUNT 1..
@@ -46,6 +66,20 @@ RECORD ListeningAnswerVariantRow KEY variantId COUNT 1..
   questionRef: ref ListeningQuestionRow
   answer: string
   earnedQuarter: int
+END
+
+# A fact is an independently creditable answer; aliases never create new credit.
+RECORD ListeningAcceptedFactRow KEY factId COUNT 0..
+  factId: string
+  questionRef: ref ListeningQuestionRow
+  creditQuarter: int
+  displayText: string
+END
+
+RECORD ListeningAcceptedFactAliasRow KEY aliasId COUNT 0..
+  aliasId: string
+  factRef: ref ListeningAcceptedFactRow
+  answerText: string
 END
 
 # Reading: passages with questions; paragraphs derived from text by blank-line split.
@@ -62,13 +96,38 @@ END
 RECORD ReadingQuestionRow KEY questionId COUNT 1..
   questionId: string
   passageRef: ref ReadingPassageRow
-  questionType: enum multiple_choice|true_false_not_given|match_heading|fill_gap|short_answer|gap_fill_fragment|matching
+  questionType: enum multiple_choice|true_false_not_given|match_heading|fill_gap|short_answer|gap_fill_fragment|matching|word_bank
   questionText: string
   options: string OPTIONAL
   correctAnswer: string
   points: int OPTIONAL
   pointsQuarter: int OPTIONAL
+  gradingMode: enum exact|open_manual OPTIONAL
+  answerMode: enum single|unordered_set OPTIONAL
+  creditPerCorrectQuarter: int OPTIONAL
+  requiredSelections: int OPTIONAL
+  setOverselectionMode: enum legacy_wrong|manual_review OPTIONAL
   relevantParagraph: int OPTIONAL
+END
+
+RECORD ReadingAnswerVariantRow KEY variantId COUNT 0..
+  variantId: string
+  questionRef: ref ReadingQuestionRow
+  answer: string
+  earnedQuarter: int
+END
+
+RECORD ReadingAcceptedFactRow KEY factId COUNT 0..
+  factId: string
+  questionRef: ref ReadingQuestionRow
+  creditQuarter: int
+  displayText: string
+END
+
+RECORD ReadingAcceptedFactAliasRow KEY aliasId COUNT 0..
+  aliasId: string
+  factRef: ref ReadingAcceptedFactRow
+  answerText: string
 END
 
 # Grammar: structured tests with items of various types.
@@ -110,6 +169,26 @@ RECORD GrammarAnswerVariantRow KEY variantId COUNT 1..
   onlyIfNotUsedBy: ref GrammarItemRow OPTIONAL
 END
 
+# Official review criteria; these do not authorize automatic substring scoring.
+RECORD GrammarRubricComponentRow KEY componentId COUNT 0..
+  componentId: string
+  itemRef: ref GrammarItemRow
+  order: int
+  creditQuarter: int
+  criterionText: string
+END
+
+# An explicitly accepted combination of two answers from one grammar test.
+RECORD GrammarAnswerPairRow KEY pairId COUNT 0..
+  pairId: string
+  firstItemRef: ref GrammarItemRow
+  firstAnswer: string
+  secondItemRef: ref GrammarItemRow
+  secondAnswer: string
+  firstEarnedQuarter: int
+  secondEarnedQuarter: int
+END
+
 # Writing: prompts with genre and optional word limit.
 RECORD WritingTaskRow KEY taskId COUNT 1..
   taskId: string
@@ -121,7 +200,7 @@ RECORD WritingTaskRow KEY taskId COUNT 1..
   promptImageUrl: string OPTIONAL
   promptImageAlt: string OPTIONAL
   wordLimit: int OPTIONAL
-  genre: enum letter|description|argument|essay|invitation|wishes|story|report|sms|opinion|announcement|email|review|advertisement|application
+  genre: enum letter|description|argument|essay|invitation|wishes|story|report|sms|opinion|announcement|email|review|advertisement|application|speech|characterization
 END
 
 # Scoring oracle: input/output pairs for the answer-matching rule (P4: test expectations in DSL).
@@ -205,6 +284,36 @@ RECORD AnswerAttemptCaseRow KEY id COUNT 1..
   expectedFinal: bool
 END
 
+# Independently transcribed pair outcomes from the C1 April 2024 key.
+RECORD GrammarPairCaseRow KEY id COUNT 0..
+  id: string
+  answer8: string
+  answer9: string
+  status8: enum confirmed_full|wrong|pending_manual
+  status9: enum confirmed_full|wrong|pending_manual
+  confirmed8: int
+  confirmed9: int
+  pending8: int
+  pending9: int
+END
+
+RECORD NovemberListeningCaseRow KEY id COUNT 0..
+  id: string
+  answer: string
+  expectedStatus: enum confirmed_full|confirmed_partial|wrong|pending_manual
+  confirmedQuarter: int
+  pendingQuarter: int
+END
+
+RECORD GrammarRubricCaseRow KEY id COUNT 0..
+  id: string
+  itemRef: string
+  componentCount: int
+  maximumQuarter: int
+  unknownAnswer: string
+  unknownPendingQuarter: int
+END
+
 RECORD UnorderedSetCaseRow KEY id COUNT 1..
   id: string
   correctAnswer: string
@@ -216,6 +325,26 @@ RECORD UnorderedSetCaseRow KEY id COUNT 1..
   expectedStatus: enum confirmed_full|confirmed_partial|wrong|pending_manual
   expectedConfirmedQuarter: int
   expectedPendingQuarter: int OPTIONAL
+END
+
+# Independently transcribed cover values and grouped reading keys for P11 acceptance.
+RECORD ExamModuleCaseRow KEY id COUNT 1..
+  id: string
+  examRef: string
+  module: enum listening|reading|grammar|writing
+  order: int
+  durationSeconds: int
+  maximumQuarter: int
+END
+
+RECORD ReadingSetCaseRow KEY id COUNT 1..
+  id: string
+  correctAnswer: string
+  options: string
+  answer: string
+  maximumQuarter: int
+  creditPerCorrectQuarter: int
+  expectedConfirmedQuarter: int
 END
 
 # Source-grounded groups whose keys explicitly accept other correct answers.

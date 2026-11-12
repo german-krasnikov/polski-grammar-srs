@@ -1,0 +1,139 @@
+DSL 1
+EXAM {
+  examId: certyfikat-polski-B1-2017
+  provider: certyfikat-polski
+  targetLanguage: pl
+  level: B1
+  year: 2017
+  sourceUrl: "https://certyfikatpolski.pl/o-egzaminie/przykladowe-testy-zbiory-zadan/"
+}
+EXAM {
+  examId: certyfikat-polski-B1-2019
+  provider: certyfikat-polski
+  targetLanguage: pl
+  level: B1
+  year: 2019
+  sourceUrl: "https://certyfikatpolski.pl/o-egzaminie/przykladowe-testy-zbiory-zadan/"
+}
+EXAM {
+  examId: certyfikat-polski-B1-2020
+  provider: certyfikat-polski
+  targetLanguage: pl
+  level: B1
+  year: 2020
+  sourceUrl: "https://certyfikatpolski.pl/o-egzaminie/przykladowe-testy-zbiory-zadan/"
+}
+EXAM {
+  examId: certyfikat-polski-B2-2017
+  provider: certyfikat-polski
+  targetLanguage: pl
+  level: B2
+  year: 2017
+  sourceUrl: "https://certyfikatpolski.pl/o-egzaminie/przykladowe-testy-zbiory-zadan/"
+}
+EXAM {
+  examId: certyfikat-polski-B2-2019
+  provider: certyfikat-polski
+  targetLanguage: pl
+  level: B2
+  year: 2019
+  sourceUrl: "https://certyfikatpolski.pl/o-egzaminie/przykladowe-testy-zbiory-zadan/"
+}
+EXAM {
+  examId: certyfikat-polski-B2-2020
+  provider: certyfikat-polski
+  targetLanguage: pl
+  level: B2
+  year: 2020
+  sourceUrl: "https://certyfikatpolski.pl/o-egzaminie/przykladowe-testy-zbiory-zadan/"
+}
+EXAM {
+  examId: certyfikat-polski-B2-2022-02
+  provider: certyfikat-polski
+  targetLanguage: pl
+  level: B2
+  year: 2022
+  sourceUrl: "https://certyfikatpolski.pl/wp-content/uploads/2026/01/2022.02.6-7_B2_Arkusz_egzaminacyjny.pdf"
+  license: "Państwowa Komisja ds. Poświadczania Znajomości Języka Polskiego jako Obcego"
+}
+EXAM {
+  examId: certyfikat-polski-B2-2023-02
+  provider: certyfikat-polski
+  targetLanguage: pl
+  level: B2
+  year: 2023
+  sourceUrl: "https://certyfikatpolski.pl/wp-content/uploads/2025/07/2023_02_5_6_B2_arkusz_egzaminacyjny.pdf"
+  license: "Państwowa Komisja ds. Poświadczania Znajomości Języka Polskiego jako Obcego"
+}
+EXAM {
+  examId: certyfikat-polski-B2-2023-06
+  provider: certyfikat-polski
+  targetLanguage: pl
+  level: B2
+  year: 2023
+  sourceUrl: "https://certyfikatpolski.pl/wp-content/uploads/2025/07/2023_06_24_25_B2_arkusz_egzaminacyjny.pdf"
+  license: "Państwowa Komisja ds. Poświadczania Znajomości Języka Polskiego jako Obcego"
+}
+EXAM {
+  examId: certyfikat-polski-B2-2024-02
+  provider: certyfikat-polski
+  targetLanguage: pl
+  level: B2
+  year: 2024
+  sourceUrl: "https://certyfikatpolski.pl/wp-content/uploads/2025/02/4-5.02.2024-B2_arkusz_egzaminacyjny.pdf"
+  license: "Państwowa Komisja ds. Poświadczania Znajomości Języka Polskiego jako Obcego"
+}
+EXAM {
+  examId: certyfikat-polski-B2-2024-06
+  provider: certyfikat-polski
+  targetLanguage: pl
+  level: B2
+  year: 2024
+  sourceUrl: "https://certyfikatpolski.pl/wp-content/uploads/2025/02/22-23.06.2024-B2_arkusz_egzaminacyjny.pdf"
+  license: "Państwowa Komisja ds. Poświadczania Znajomości Języka Polskiego jako Obcego"
+}
+EXAM {
+  examId: certyfikat-polski-C1-2022-03
+  provider: certyfikat-polski
+  targetLanguage: pl
+  level: C1
+  year: 2022
+  sourceUrl: "https://certyfikatpolski.pl/wp-content/uploads/2026/01/2022.03.26-27_C1_Arkusz_egzaminacyjny.pdf"
+  license: "Państwowa Komisja ds. Poświadczania Znajomości Języka Polskiego jako Obcego"
+}
+EXAM {
+  examId: certyfikat-polski-C1-2022-11
+  provider: certyfikat-polski
+  targetLanguage: pl
+  level: C1
+  year: 2022
+  sourceUrl: "https://certyfikatpolski.pl/wp-content/uploads/2026/01/2022.11.5-6_C1_Arkusz_egzaminacyjny.pdf"
+  license: "Państwowa Komisja ds. Poświadczania Znajomości Języka Polskiego jako Obcego"
+}
+EXAM {
+  examId: certyfikat-polski-C1-2023-04
+  provider: certyfikat-polski
+  targetLanguage: pl
+  level: C1
+  year: 2023
+  sourceUrl: "https://certyfikatpolski.pl/wp-content/uploads/2025/07/2023_04_15_16_C1_arkusz_egzaminacyjny.pdf"
+  license: "Państwowa Komisja ds. Poświadczania Znajomości Języka Polskiego jako Obcego"
+}
+EXAM {
+  examId: certyfikat-polski-C1-2023-11
+  provider: certyfikat-polski
+  targetLanguage: pl
+  level: C1
+  year: 2023
+  sourceUrl: "https://certyfikatpolski.pl/wp-content/uploads/2025/07/2023_11_18_19_C1_arkusz_egzaminacyjny.pdf"
+  license: "Państwowa Komisja ds. Poświadczania Znajomości Języka Polskiego jako Obcego"
+}
+EXAM {
+  examId: certyfikat-polski-C1-2024-04
+  provider: certyfikat-polski
+  targetLanguage: pl
+  level: C1
+  year: 2024
+  sourceUrl: "https://certyfikatpolski.pl/wp-content/uploads/2025/02/20-21.04.2024-C1_arkusz_egzaminacyjny.pdf"
+  license: "Państwowa Komisja ds. Poświadczania Znajomości Języka Polskiego jako Obcego"
+}

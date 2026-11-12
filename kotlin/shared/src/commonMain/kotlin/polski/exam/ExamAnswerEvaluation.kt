@@ -1,5 +1,7 @@
 package polski.exam
 
+import polski.exam.policy.Policy
+import polski.exam.policy.data.ANSWER_POLICY_OUTCOME_ROW_ROWS
 import polski.grammar.normalize
 
 enum class ExamGradingMode(val tag: String) {
@@ -50,16 +52,48 @@ fun evaluateExamAnswer(
         "Answer variants must have nonblank text and a score within the maximum"
     }
     val normalized = normalize(answer)
-    if (normalized == normalize(fullAnswer)) return ExamAnswerEvaluation(ExamAnswerStatus.ConfirmedFull, maximumQuarter, 0)
-    val variant = variants.firstOrNull { normalize(it.answer) == normalized }
-    if (variant != null) {
-        val status = if (variant.earnedQuarter == maximumQuarter) ExamAnswerStatus.ConfirmedFull else ExamAnswerStatus.ConfirmedPartial
-        return ExamAnswerEvaluation(status, variant.earnedQuarter, 0)
+    val matchesCanonical = normalized == normalize(fullAnswer)
+    val variantQuarter = variants.firstOrNull { normalize(it.answer) == normalized }?.earnedQuarter ?: 0
+    return evaluateAnswerPolicyFacts(
+        matchesCanonical = matchesCanonical,
+        variantQuarter = variantQuarter,
+        maximumQuarter = maximumQuarter,
+        answerNonblank = normalized.isNotBlank(),
+        openManual = mode == ExamGradingMode.OpenManual,
+    )
+}
+
+/** Shared generated DSL verdict for validated answer facts, including paired answers. */
+internal fun evaluateAnswerPolicyFacts(
+    matchesCanonical: Boolean,
+    variantQuarter: Int,
+    maximumQuarter: Int,
+    answerNonblank: Boolean,
+    openManual: Boolean,
+): ExamAnswerEvaluation {
+    require(maximumQuarter > 0 && variantQuarter in 0..maximumQuarter) { "Invalid answer policy quarters" }
+    require(!matchesCanonical || answerNonblank) { "A blank answer cannot match the canonical answer" }
+    val disposition = Policy.disposition(
+        Policy.DispositionInput(
+            answerNonblank = answerNonblank,
+            matchesCanonical = matchesCanonical,
+            maximumQuarter = maximumQuarter.toDouble(),
+            openManual = openManual,
+            variantQuarter = variantQuarter.toDouble(),
+        ),
+    )
+    val outcome = ANSWER_POLICY_OUTCOME_ROW_ROWS.single { it.disposition == disposition }
+    fun quarterFrom(source: String): Int = when (source) {
+        "maximum" -> maximumQuarter
+        "variant" -> variantQuarter
+        "zero" -> 0
+        else -> error("Unknown exam answer credit source: $source")
     }
-    if (normalized.isNotBlank() && mode == ExamGradingMode.OpenManual) {
-        return ExamAnswerEvaluation(ExamAnswerStatus.PendingManual, 0, maximumQuarter)
-    }
-    return ExamAnswerEvaluation(ExamAnswerStatus.Wrong, 0, 0)
+    return ExamAnswerEvaluation(
+        status = ExamAnswerStatus.entries.first { it.tag == outcome.status.tag },
+        confirmedQuarter = quarterFrom(outcome.confirmedSource.tag),
+        pendingQuarter = quarterFrom(outcome.pendingSource.tag),
+    )
 }
 
 /** Evaluates a set answer; member order has no meaning. */
@@ -84,29 +118,26 @@ fun evaluateUnorderedSetAnswer(
         }
     }
     val selected = answer.split("|").map(::normalize)
-    if (selected.any { it.isBlank() } || selected.distinct().size != selected.size || selected.size > key.size) {
-        return ExamAnswerEvaluation(ExamAnswerStatus.Wrong, 0, 0)
-    }
-    if (choices.isNotEmpty() && !choices.containsAll(selected)) {
-        return ExamAnswerEvaluation(ExamAnswerStatus.Wrong, 0, 0)
-    }
-    if (selected.size == key.size && selected.containsAll(key)) {
-        return ExamAnswerEvaluation(ExamAnswerStatus.ConfirmedFull, maximumQuarter, 0)
-    }
     val confirmedTokens = selected.count { it in key }
     val unknownTokens = selected.size - confirmedTokens
-    if (creditPerCorrectQuarter != null) {
-        val confirmedQuarter = confirmedTokens * creditPerCorrectQuarter
-        val pendingQuarter = if (choices.isEmpty() && mode == ExamGradingMode.OpenManual) unknownTokens * creditPerCorrectQuarter else 0
-        val status = when {
-            pendingQuarter > 0 -> ExamAnswerStatus.PendingManual
-            confirmedQuarter > 0 -> ExamAnswerStatus.ConfirmedPartial
-            else -> ExamAnswerStatus.Wrong
-        }
-        return ExamAnswerEvaluation(status, confirmedQuarter, pendingQuarter)
-    }
-    if (choices.isEmpty() && unknownTokens > 0 && mode == ExamGradingMode.OpenManual) {
-        return ExamAnswerEvaluation(ExamAnswerStatus.PendingManual, 0, maximumQuarter)
-    }
-    return ExamAnswerEvaluation(ExamAnswerStatus.Wrong, 0, 0)
+    val open = choices.isEmpty() && mode == ExamGradingMode.OpenManual
+    val malformed = selected.any { it.isBlank() } || selected.distinct().size != selected.size ||
+        (choices.isNotEmpty() && !choices.containsAll(selected))
+    val knownCredit = confirmedTokens * (creditPerCorrectQuarter ?: 0)
+    return evaluateSetPolicy(
+        SetPolicyFacts(
+            answerNonblank = normalize(answer).isNotBlank(),
+            selectionCount = selected.size,
+            requiredSelections = key.size,
+            distinctKnownFactCount = confirmedTokens,
+            knownCreditQuarter = knownCredit,
+            maximumQuarter = maximumQuarter,
+            unknownNonblankCount = if (open) unknownTokens else 0,
+            hasMalformedSelection = malformed,
+            hasPerFactCredit = creditPerCorrectQuarter != null,
+            openManual = open,
+            sourceConservative = false,
+            pendingBudgetQuarter = if (creditPerCorrectQuarter == null) maximumQuarter else unknownTokens * creditPerCorrectQuarter,
+        ),
+    )
 }

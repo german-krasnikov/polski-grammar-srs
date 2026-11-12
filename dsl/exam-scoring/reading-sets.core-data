@@ -1,0 +1,55 @@
+DSL 1
+READING_SET_CASE {
+  id: b2-2024-02-v-1
+  correctAnswer: D
+  options: "A|B|C|D|E"
+  answer: D
+  maximumQuarter: 4
+  creditPerCorrectQuarter: 4
+  expectedConfirmedQuarter: 4
+}
+READING_SET_CASE {
+  id: b2-2024-02-v-2
+  correctAnswer: "C|D|E"
+  options: "A|B|C|D|E"
+  answer: "E|C|D"
+  maximumQuarter: 12
+  creditPerCorrectQuarter: 4
+  expectedConfirmedQuarter: 12
+}
+READING_SET_CASE {
+  id: b2-2024-02-v-3
+  correctAnswer: C
+  options: "A|B|C|D|E"
+  answer: C
+  maximumQuarter: 4
+  creditPerCorrectQuarter: 4
+  expectedConfirmedQuarter: 4
+}
+READING_SET_CASE {
+  id: b2-2024-02-v-4
+  correctAnswer: "A|C"
+  options: "A|B|C|D|E"
+  answer: "C|A"
+  maximumQuarter: 8
+  creditPerCorrectQuarter: 4
+  expectedConfirmedQuarter: 8
+}
+READING_SET_CASE {
+  id: b2-2024-02-v-5
+  correctAnswer: B
+  options: "A|B|C|D|E"
+  answer: B
+  maximumQuarter: 4
+  creditPerCorrectQuarter: 4
+  expectedConfirmedQuarter: 4
+}
+READING_SET_CASE {
+  id: b2-2024-02-v-6
+  correctAnswer: "A|E"
+  options: "A|B|C|D|E"
+  answer: "E|A"
+  maximumQuarter: 8
+  creditPerCorrectQuarter: 4
+  expectedConfirmedQuarter: 8
+}

@@ -1,0 +1,21 @@
+DSL 1
+LISTENING_ACCEPTED_FACT_ALIAS {
+  aliasId: certyfikat-polski-B2-2023-06-l5-q6-alias-1-1
+  factRef: certyfikat-polski-B2-2023-06-l5-q6-fact-1
+  answerText: "w fotografii"
+}
+LISTENING_ACCEPTED_FACT_ALIAS {
+  aliasId: certyfikat-polski-B2-2023-06-l5-q6-alias-2-1
+  factRef: certyfikat-polski-B2-2023-06-l5-q6-fact-2
+  answerText: "w filmie"
+}
+LISTENING_ACCEPTED_FACT_ALIAS {
+  aliasId: certyfikat-polski-B2-2023-06-l5-q7-alias-1-1
+  factRef: certyfikat-polski-B2-2023-06-l5-q7-fact-1
+  answerText: "papier fotograficzny czuły pod względem barw"
+}
+LISTENING_ACCEPTED_FACT_ALIAS {
+  aliasId: certyfikat-polski-B2-2023-06-l5-q7-alias-2-1
+  factRef: certyfikat-polski-B2-2023-06-l5-q7-fact-2
+  answerText: "urządzenia do pomiaru intensywności kolorów"
+}

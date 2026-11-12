@@ -1,0 +1,8 @@
+DSL 1
+# Additional accepted wording maps to an existing fact identity.
+SET_FIXTURE_ALIAS {
+  aliasId: b2a-large-short
+  factRef: b2a-large
+  answerText: "duże"
+}
+SET_FIXTURE_ALIAS {aliasId: bad1-conflict factRef: bad1-b answerText: "są duże"}

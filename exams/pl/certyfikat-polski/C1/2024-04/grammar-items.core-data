@@ -1,0 +1,606 @@
+DSL 1
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g1-q1
+  testRef: certyfikat-polski-C1-2024-04-grammar-1
+  questionType: fill_gap
+  context: "(9)"
+  correctAnswer: "dziewięciu"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g1-q2
+  testRef: certyfikat-polski-C1-2024-04-grammar-1
+  questionType: fill_gap
+  context: "(tysiąc)"
+  correctAnswer: "tysięcy"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g1-q3
+  testRef: certyfikat-polski-C1-2024-04-grammar-1
+  questionType: fill_gap
+  context: "(złoty)"
+  correctAnswer: "złotych"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g1-q4
+  testRef: certyfikat-polski-C1-2024-04-grammar-1
+  questionType: fill_gap
+  context: "(2)"
+  correctAnswer: "dwóch"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g1-q5
+  testRef: certyfikat-polski-C1-2024-04-grammar-1
+  questionType: fill_gap
+  context: "(doba)"
+  correctAnswer: "dób"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g1-q6
+  testRef: certyfikat-polski-C1-2024-04-grammar-1
+  questionType: fill_gap
+  context: "(parę)"
+  correctAnswer: paru
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g1-q7
+  testRef: certyfikat-polski-C1-2024-04-grammar-1
+  questionType: fill_gap
+  context: "(zapaleniec)"
+  correctAnswer: "zapaleńców"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g1-q8
+  testRef: certyfikat-polski-C1-2024-04-grammar-1
+  questionType: fill_gap
+  context: "(kilka)"
+  correctAnswer: kilku
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g1-q9
+  testRef: certyfikat-polski-C1-2024-04-grammar-1
+  questionType: fill_gap
+  context: "(przyjaciel)"
+  correctAnswer: "przyjaciółmi"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g1-q10
+  testRef: certyfikat-polski-C1-2024-04-grammar-1
+  questionType: fill_gap
+  context: "(15)"
+  correctAnswer: "piętnastu"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g2-q1
+  testRef: certyfikat-polski-C1-2024-04-grammar-2
+  questionType: transform
+  context: "Programiści sugerowali, że będzie można wykorzystać technologię AI do zarabiania pieniędzy. (przewidywać)"
+  correctAnswer: "Programiści przewidywali możliwość wykorzystania technologii AI do zarabiania pieniędzy."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g2-q2
+  testRef: certyfikat-polski-C1-2024-04-grammar-2
+  questionType: transform
+  context: "Zastosowanie sztucznej inteligencji spowodowało, że użytkownik nie musi posiadać specjalistycznej wiedzy na temat giełdy. (zwolnić)"
+  correctAnswer: "Zastosowanie sztucznej inteligencji zwolniło użytkownika z konieczności posiadania specjalistycznej wiedzy na temat giełdy."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g2-q3
+  testRef: certyfikat-polski-C1-2024-04-grammar-2
+  questionType: transform
+  context: "Wbudowany algorytm pozwala aplikacji, by samodzielnie podjęła decyzję. (umożliwiać)"
+  correctAnswer: "Wbudowany algorytm umożliwia aplikacji samodzielne podjęcie decyzji."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g2-q4
+  testRef: certyfikat-polski-C1-2024-04-grammar-2
+  questionType: transform
+  context: "Wirtualny asystent sprawia, że konfiguracja konta przebiega sprawnie. (zapewniać)"
+  correctAnswer: "Wirtualny asystent zapewnia sprawny przebieg konfiguracji konta."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g2-q5
+  testRef: certyfikat-polski-C1-2024-04-grammar-2
+  questionType: transform
+  context: "Użytkowanie tego typu aplikacji zwykle jest możliwe, gdy niezwłocznie uiścimy opłatę. (wiązać się)"
+  correctAnswer: "Użytkowanie tego typu aplikacji zwykle wiąże się z niezwłocznym uiszczeniem opłaty."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g3-q1
+  testRef: certyfikat-polski-C1-2024-04-grammar-3
+  questionType: word_formation
+  context: "(reżyserować)"
+  correctAnswer: "reżyserii"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g3-q2
+  testRef: certyfikat-polski-C1-2024-04-grammar-3
+  questionType: word_formation
+  context: "(adaptować)"
+  correctAnswer: adaptacja
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g3-q3
+  testRef: certyfikat-polski-C1-2024-04-grammar-3
+  questionType: word_formation
+  context: "(dystrybuować)"
+  correctAnswer: dystrybutora
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g3-q4
+  testRef: certyfikat-polski-C1-2024-04-grammar-3
+  questionType: word_formation
+  context: "(pochwalić)"
+  correctAnswer: "pochwał"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g3-q5
+  testRef: certyfikat-polski-C1-2024-04-grammar-3
+  questionType: word_formation
+  context: "(zbierać)"
+  correctAnswer: zbiorach
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g3-q6
+  testRef: certyfikat-polski-C1-2024-04-grammar-3
+  questionType: word_formation
+  context: "(wprowadzić)"
+  correctAnswer: wprowadzenie
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g3-q7
+  testRef: certyfikat-polski-C1-2024-04-grammar-3
+  questionType: word_formation
+  context: "(wyczuć)"
+  correctAnswer: wyczuciem
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g3-q8
+  testRef: certyfikat-polski-C1-2024-04-grammar-3
+  questionType: word_formation
+  context: "(wystawić)"
+  correctAnswer: wystawie
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g3-q9
+  testRef: certyfikat-polski-C1-2024-04-grammar-3
+  questionType: word_formation
+  context: "(tworzyć)"
+  correctAnswer: "twórców"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g3-q10
+  testRef: certyfikat-polski-C1-2024-04-grammar-3
+  questionType: word_formation
+  context: "(obejrzeć)"
+  correctAnswer: obejrzenia
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g4-q1
+  testRef: certyfikat-polski-C1-2024-04-grammar-4
+  questionType: word_formation
+  context: "(Innowacja)"
+  correctAnswer: Innowacyjne
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g4-q2
+  testRef: certyfikat-polski-C1-2024-04-grammar-4
+  questionType: word_formation
+  context: "(osiemnasty wiek)"
+  correctAnswer: osiemnastowiecznej
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g4-q3
+  testRef: certyfikat-polski-C1-2024-04-grammar-4
+  questionType: word_formation
+  context: "(anonim)"
+  correctAnswer: anonimowego
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g4-q4
+  testRef: certyfikat-polski-C1-2024-04-grammar-4
+  questionType: word_formation
+  context: "(instrument)"
+  correctAnswer: instrumentalna
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g4-q5
+  testRef: certyfikat-polski-C1-2024-04-grammar-4
+  questionType: word_formation
+  context: "(mistrz)"
+  correctAnswer: mistrzowskim
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g4-q6
+  testRef: certyfikat-polski-C1-2024-04-grammar-4
+  questionType: word_formation
+  context: "(Trójmiasto)"
+  correctAnswer: "trójmiejscy"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g4-q7
+  testRef: certyfikat-polski-C1-2024-04-grammar-4
+  questionType: word_formation
+  context: "(tematyka)"
+  correctAnswer: tematyczny
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g4-q8
+  testRef: certyfikat-polski-C1-2024-04-grammar-4
+  questionType: word_formation
+  context: "(tutaj)"
+  correctAnswer: tutejszym
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g4-q9
+  testRef: certyfikat-polski-C1-2024-04-grammar-4
+  questionType: word_formation
+  context: "(monument)"
+  correctAnswer: monumentalne
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g4-q10
+  testRef: certyfikat-polski-C1-2024-04-grammar-4
+  questionType: word_formation
+  context: "(wirtuoz)"
+  correctAnswer: wirtuozerskim
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g5-q1
+  testRef: certyfikat-polski-C1-2024-04-grammar-5
+  questionType: word_bank
+  context: "Luka 1 w tekście powyżej"
+  correctAnswer: Jeszcze
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g5-q2
+  testRef: certyfikat-polski-C1-2024-04-grammar-5
+  questionType: word_bank
+  context: "Luka 2 w tekście powyżej"
+  correctAnswer: "właśnie"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g5-q3
+  testRef: certyfikat-polski-C1-2024-04-grammar-5
+  questionType: word_bank
+  context: "Luka 3 w tekście powyżej"
+  correctAnswer: "nie tylko"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g5-q4
+  testRef: certyfikat-polski-C1-2024-04-grammar-5
+  questionType: word_bank
+  context: "Luka 4 w tekście powyżej"
+  correctAnswer: "lecz także"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g5-q5
+  testRef: certyfikat-polski-C1-2024-04-grammar-5
+  questionType: word_bank
+  context: "Luka 5 w tekście powyżej"
+  correctAnswer: "mimo wszystko"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g5-q6
+  testRef: certyfikat-polski-C1-2024-04-grammar-5
+  questionType: word_bank
+  context: "Luka 6 w tekście powyżej"
+  correctAnswer: a
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g5-q7
+  testRef: certyfikat-polski-C1-2024-04-grammar-5
+  questionType: word_bank
+  context: "Luka 7 w tekście powyżej"
+  correctAnswer: "bo przecież"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g5-q8
+  testRef: certyfikat-polski-C1-2024-04-grammar-5
+  questionType: word_bank
+  context: "Luka 8 w tekście powyżej"
+  correctAnswer: "chociażby"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g5-q9
+  testRef: certyfikat-polski-C1-2024-04-grammar-5
+  questionType: word_bank
+  context: "Luka 9 w tekście powyżej"
+  correctAnswer: "Zresztą"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g5-q10
+  testRef: certyfikat-polski-C1-2024-04-grammar-5
+  questionType: word_bank
+  context: "Luka 10 w tekście powyżej"
+  correctAnswer: gdzie
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g6-q1
+  testRef: certyfikat-polski-C1-2024-04-grammar-6
+  questionType: word_formation
+  context: "(strzec)"
+  correctAnswer: "strzeżoną"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g6-q2
+  testRef: certyfikat-polski-C1-2024-04-grammar-6
+  questionType: word_formation
+  context: "(urodzić się)"
+  correctAnswer: urodzonym
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g6-q3
+  testRef: certyfikat-polski-C1-2024-04-grammar-6
+  questionType: word_formation
+  context: "(sprzedawać)"
+  correctAnswer: sprzedawane
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g6-q4
+  testRef: certyfikat-polski-C1-2024-04-grammar-6
+  questionType: word_formation
+  context: "(nagłaśniać)"
+  correctAnswer: "nagłaśniając"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g6-q5
+  testRef: certyfikat-polski-C1-2024-04-grammar-6
+  questionType: word_formation
+  context: "(zajmować się)"
+  correctAnswer: "zajmującemu się"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g6-q6
+  testRef: certyfikat-polski-C1-2024-04-grammar-6
+  questionType: word_formation
+  context: "(zagadnąć)"
+  correctAnswer: "zagadnięty"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g6-q7
+  testRef: certyfikat-polski-C1-2024-04-grammar-6
+  questionType: word_formation
+  context: "(brać)"
+  correctAnswer: "biorąc"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g6-q8
+  testRef: certyfikat-polski-C1-2024-04-grammar-6
+  questionType: word_formation
+  context: "(przeprowadzić się)"
+  correctAnswer: "przeprowadziwszy się"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g6-q9
+  testRef: certyfikat-polski-C1-2024-04-grammar-6
+  questionType: word_formation
+  context: "(rzucać)"
+  correctAnswer: "rzucającego"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g6-q10
+  testRef: certyfikat-polski-C1-2024-04-grammar-6
+  questionType: word_formation
+  context: "(potwierdzić)"
+  correctAnswer: potwierdzona
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g7-q1
+  testRef: certyfikat-polski-C1-2024-04-grammar-7
+  questionType: fill_gap
+  context: "(wychodzić/wyjść)"
+  correctAnswer: "wyszedł"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g7-q2
+  testRef: certyfikat-polski-C1-2024-04-grammar-7
+  questionType: fill_gap
+  context: "(niszczeć/zniszczeć)"
+  correctAnswer: "niszczeją"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g7-q3
+  testRef: certyfikat-polski-C1-2024-04-grammar-7
+  questionType: fill_gap
+  context: "(podejmować/podjąć)"
+  correctAnswer: "podjęto"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g7-q4
+  testRef: certyfikat-polski-C1-2024-04-grammar-7
+  questionType: fill_gap
+  context: "(popadać/popaść)"
+  correctAnswer: "popadłoby"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g7-q5
+  testRef: certyfikat-polski-C1-2024-04-grammar-7
+  questionType: fill_gap
+  context: "(rozpoczynać/rozpocząć)"
+  correctAnswer: "rozpoczęli"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g7-q6
+  testRef: certyfikat-polski-C1-2024-04-grammar-7
+  questionType: fill_gap
+  context: "(odpowiadać/odpowiedzieć)"
+  correctAnswer: odpowie
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g7-q7
+  testRef: certyfikat-polski-C1-2024-04-grammar-7
+  questionType: fill_gap
+  context: "(my – znajdować/znaleźć)"
+  correctAnswer: znajdziemy
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g7-q8
+  testRef: certyfikat-polski-C1-2024-04-grammar-7
+  questionType: fill_gap
+  context: "(odbywać się/odbyć się)"
+  correctAnswer: "odbywa się"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g7-q9
+  testRef: certyfikat-polski-C1-2024-04-grammar-7
+  questionType: fill_gap
+  context: "(uzyskiwać/uzyskać)"
+  correctAnswer: "uzyskały"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g7-q10
+  testRef: certyfikat-polski-C1-2024-04-grammar-7
+  questionType: fill_gap
+  context: "(wy – wpadać/wpaść)"
+  correctAnswer: wpadnijcie
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g8-q1
+  testRef: certyfikat-polski-C1-2024-04-grammar-8
+  questionType: fill_gap
+  context: "(koczowniczy)"
+  correctAnswer: koczowniczy
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g8-q2
+  testRef: certyfikat-polski-C1-2024-04-grammar-8
+  questionType: fill_gap
+  context: "(Węgier – lm)"
+  correctAnswer: "Węgrzy"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g8-q3
+  testRef: certyfikat-polski-C1-2024-04-grammar-8
+  questionType: fill_gap
+  context: "(one)"
+  correctAnswer: je
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g8-q4
+  testRef: certyfikat-polski-C1-2024-04-grammar-8
+  questionType: fill_gap
+  context: "(strzecha)"
+  correctAnswer: strzesze
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g8-q5
+  testRef: certyfikat-polski-C1-2024-04-grammar-8
+  questionType: fill_gap
+  context: "(Nasz)"
+  correctAnswer: Nasi
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g8-q6
+  testRef: certyfikat-polski-C1-2024-04-grammar-8
+  questionType: fill_gap
+  context: "(przodek)"
+  correctAnswer: przodkowie
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g8-q7
+  testRef: certyfikat-polski-C1-2024-04-grammar-8
+  questionType: fill_gap
+  context: "(wieś)"
+  correctAnswer: wsiach
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g8-q8
+  testRef: certyfikat-polski-C1-2024-04-grammar-8
+  questionType: fill_gap
+  context: "(obrąb)"
+  correctAnswer: "obrębie"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g8-q9
+  testRef: certyfikat-polski-C1-2024-04-grammar-8
+  questionType: fill_gap
+  context: "(niespodziewana)"
+  correctAnswer: niespodziewane
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2024-04-g8-q10
+  testRef: certyfikat-polski-C1-2024-04-grammar-8
+  questionType: fill_gap
+  context: "(trudność – lm)"
+  correctAnswer: "trudności"
+  pointsQuarter: 2
+}

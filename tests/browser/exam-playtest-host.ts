@@ -69,6 +69,8 @@ export async function runExamPlaytest(page: Page, sourceFile: string) {
         'grammar.bankSelectedId': document.querySelector('.exam-word-bank .exam-option.selected')?.getAttribute('data-bank-token-id') ?? '',
         'grammar.manualReviewCount': document.querySelectorAll('.exam-review-manual').length,
         'grammar.reviewStatus': inspectedReview?.classList.contains('correct') ? 'correct' : inspectedReview?.classList.contains('partial') ? 'partial' : inspectedReview?.classList.contains('pending') ? 'pending' : inspectedReview?.classList.contains('wrong') ? 'wrong' : '',
+        'grammar.rubricItems': [...(inspectedReview?.querySelectorAll<HTMLElement>('.exam-review-rubric-component') ?? [])]
+          .map(item => item.textContent ?? '').join('|'),
         'reading.passageOpening': document.querySelector('.exam-reading-text p')?.textContent?.replace(/^\d+\.\s*/, '').split('.')[0] ?? '',
         'reading.passageChars': document.querySelector('.exam-reading-text')?.textContent?.length ?? 0,
         'reading.questionCount': readingRows.length,
@@ -83,12 +85,14 @@ export async function runExamPlaytest(page: Page, sourceFile: string) {
         'reading.selectedSecond': readingRows[1]?.querySelector('.exam-option.selected')?.textContent ?? '',
         'writing.setChoiceCount': [...document.querySelectorAll<HTMLButtonElement>('.exam-nav-btn')].filter(button => button.textContent?.startsWith('Набор ')).length,
         'writing.taskLabel': document.querySelector('.exam-progress-text')?.textContent ?? '',
+        'writing.instructionOpening': document.querySelector('h3.exam-title')?.textContent?.split('.')[0]?.trim() + '.' || '',
         'writing.prompt': document.querySelector('.exam-writing-prompt')?.textContent ?? '',
         'writing.promptOpening': document.querySelector('.exam-writing-prompt p')?.textContent ?? '',
         'writing.draft': document.querySelector<HTMLTextAreaElement>('.exam-textarea')?.value ?? '',
         'writing.reviewCount': document.querySelectorAll('.exam-writing-review').length,
         'writing.reviewDrafts': [...document.querySelectorAll('.exam-writing-draft')].map(node => node.textContent).join('|'),
         'writing.manualAssessment': document.querySelector('.exam-writing-done')?.textContent ?? '',
+        'writing.manualPoints': (document.querySelector('.exam-writing-manual')?.textContent?.match(/\d+(?:[.,]\d+)?/g) ?? []).join('|'),
         'writing.autoScoreVisible': !!document.querySelector('.exam-score'),
         'media.playing': !!audio && !audio.paused,
         'media.position': audio?.currentTime ?? 0,
@@ -97,6 +101,11 @@ export async function runExamPlaytest(page: Page, sourceFile: string) {
         'media.taskLabel': document.querySelector('.exam-progress-text')?.textContent ?? '',
         'media.selected': selected?.textContent ?? '',
         'media.unavailable': !!audio?.error && !!document.querySelector<HTMLButtonElement>('.player-play-btn')?.disabled,
+        'timed.position': Number(document.querySelector('.exam-progress')?.textContent?.match(/Часть (\d+) \/ 4/)?.[1] ?? 0),
+        'timed.clockVisible': !!document.querySelector('.exam-timed-clock')?.textContent,
+        'timed.completed': document.querySelector('.exam-title')?.textContent === 'Экзамен завершён',
+        'timed.summary': document.querySelector('.exam-score')?.textContent ?? '',
+        'timed.percentVisible': !!document.querySelector('.exam-score-big'),
       };
     });
     snapshot['media.notRewound'] = Number(snapshot['media.position']) >= rememberedPosition;
@@ -136,6 +145,20 @@ export async function runExamPlaytest(page: Page, sourceFile: string) {
     if (!title) throw new Error(`Unknown exam module: ${String(args.module)}`);
     await page.locator('.exam-module-card').filter({ hasText: title }).getByRole('button', { name: 'Начать' }).click();
     audioHandle = await page.locator('audio').elementHandle({ timeout: 500 }).catch(() => null);
+  });
+  action('openTimed', string('exam'), async args => {
+    await page.goto('/#/exam');
+    await expect(page.locator('.exam-list')).toBeVisible();
+    await page.locator('.exam-card').filter({ hasText: String(args.exam) }).getByRole('button', { name: 'Начать' }).click();
+    await page.getByRole('button', { name: 'Полный экзамен по времени' }).click();
+    audioHandle = await page.locator('audio').elementHandle({ timeout: 500 }).catch(() => null);
+  });
+  action('finishTimedPart', [], async () => {
+    const part = page.locator('.exam-timed-part');
+    for (let i = 0; i < 100 && await part.locator('.exam-nav .exam-nav-btn.primary').count() === 0; i++) {
+      await part.getByRole('button', { name: 'Далее →' }).click();
+    }
+    await part.locator('.exam-nav .exam-nav-btn.primary').click();
   });
   action('advance', [{ name: 'count', type: 'number' }], async args => {
     for (let i = 0; i < Number(args.count); i++) await button('Далее →');
@@ -243,7 +266,23 @@ export async function runExamPlaytest(page: Page, sourceFile: string) {
     const box = await bar.boundingBox();
     if (!box) throw new Error('Player progress is not laid out');
     await bar.click({ position: { x: box.width - 1, y: box.height / 2 } });
-    await expect.poll(() => audio.evaluate(element => (element as HTMLAudioElement).paused)).toBe(true);
+    try {
+      await expect.poll(() => audio.evaluate(element => (element as HTMLAudioElement).paused)).toBe(true);
+    } catch (error) {
+      const media = await audio.evaluate(element => {
+        const item = element as HTMLAudioElement;
+        return {
+          paused: item.paused, seeking: item.seeking, readyState: item.readyState,
+          currentTime: item.currentTime, duration: item.duration, errorCode: item.error?.code,
+          buffered: [...Array(item.buffered.length)].map((_, i) => [item.buffered.start(i), item.buffered.end(i)]),
+          seekable: [...Array(item.seekable.length)].map((_, i) => [item.seekable.start(i), item.seekable.end(i)]),
+        };
+      });
+      const playButton = await page.locator('.player-play-btn').evaluate(button => ({
+        text: button.textContent, title: button.getAttribute('title'), ariaLabel: button.getAttribute('aria-label'),
+      }));
+      throw new Error(`Recording window ${start}–${end} did not pause after seek: ${JSON.stringify({ media, playButton, pageErrors, consoleErrors })}`, { cause: error });
+    }
     const stopped = await audio.evaluate(element => (element as HTMLAudioElement).currentTime);
     expect(stopped).toBeGreaterThan(end - 2);
     expect(stopped).toBeLessThanOrEqual(end + 0.25);
@@ -325,7 +364,7 @@ export async function runExamPlaytest(page: Page, sourceFile: string) {
     'exam.promptImageLoaded': 'bool', 'exam.promptImageAlt': 'string',
     'grammar.context': 'string', 'grammar.questionTarget': 'string', 'grammar.targetMarked': 'bool',
     'grammar.bankTexts': 'string', 'grammar.bankSelectedText': 'string', 'grammar.bankSelectedId': 'string',
-    'grammar.manualReviewCount': 'number', 'grammar.reviewStatus': 'string',
+    'grammar.manualReviewCount': 'number', 'grammar.reviewStatus': 'string', 'grammar.rubricItems': 'string',
     'reading.passageOpening': 'string', 'reading.passageChars': 'number',
     'reading.questionCount': 'number', 'reading.firstQuestion': 'string',
     'reading.firstOptions': 'string', 'reading.genericQuestionCount': 'number',
@@ -333,12 +372,15 @@ export async function runExamPlaytest(page: Page, sourceFile: string) {
     'listening.selectedSecond': 'string', 'listening.selectedFourth': 'string',
     'reading.genericOptionCount': 'number', 'reading.selectedFirst': 'string', 'reading.selectedSecond': 'string',
     'writing.setChoiceCount': 'number', 'writing.taskLabel': 'string',
-    'writing.prompt': 'string', 'writing.draft': 'string', 'writing.reviewCount': 'number',
+    'writing.instructionOpening': 'string', 'writing.prompt': 'string', 'writing.draft': 'string', 'writing.reviewCount': 'number',
     'writing.promptOpening': 'string',
     'writing.reviewDrafts': 'string', 'writing.manualAssessment': 'string', 'writing.autoScoreVisible': 'bool',
+    'writing.manualPoints': 'string',
     'media.playing': 'bool', 'media.position': 'number', 'media.elapsed': 'number',
     'media.durationLabel': 'string', 'media.taskLabel': 'string', 'media.selected': 'string',
     'media.notRewound': 'bool', 'media.closed': 'bool', 'media.unavailable': 'bool',
+    'timed.position': 'number', 'timed.clockVisible': 'bool', 'timed.completed': 'bool',
+    'timed.summary': 'string', 'timed.percentVisible': 'bool',
   })) registry.registerQuery(id, { id, resultType });
 
   const source = readFileSync(sourceFile, 'utf8');
@@ -352,7 +394,7 @@ export async function runExamPlaytest(page: Page, sourceFile: string) {
     resolveQuery: (path: string[]) => snapshot[path.join('.')],
     async nextBoundary() { await refresh(); },
     dispose() {},
-  }, { wallTimeoutMs: 65_000 });
+  }, { wallTimeoutMs: 120_000 });
   expect(receipt.verdict, JSON.stringify(receipt)).toBe('PASSED');
   expect(receipt.receipts).toHaveLength(1);
   return receipt;

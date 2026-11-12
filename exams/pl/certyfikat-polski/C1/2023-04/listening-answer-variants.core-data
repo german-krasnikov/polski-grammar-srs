@@ -1,0 +1,25 @@
+DSL 1
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2023-04-l5-q1-v1
+  questionRef: certyfikat-polski-C1-2023-04-l5-q1
+  answer: "ponad 8 tys. ton"
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2023-04-l5-q1-v2
+  questionRef: certyfikat-polski-C1-2023-04-l5-q1
+  answer: "więcej niż waży rama wieży Eiffla"
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2023-04-l5-q3-v1
+  questionRef: certyfikat-polski-C1-2023-04-l5-q3
+  answer: "Powstanie dużych ilości nowych śmieci"
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2023-04-l5-q6-v1
+  questionRef: certyfikat-polski-C1-2023-04-l5-q6
+  answer: "Listek farby uszkodził szybę."
+  earnedQuarter: 4
+}

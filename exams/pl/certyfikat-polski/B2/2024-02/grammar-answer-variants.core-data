@@ -1,0 +1,43 @@
+DSL 1
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-02-g5-q3-v1
+  itemRef: certyfikat-polski-B2-2024-02-g5-q3
+  answer: "będzie się cieszyć"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-02-g5-q3-v2
+  itemRef: certyfikat-polski-B2-2024-02-g5-q3
+  answer: "będzie cieszył się"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-02-g5-q3-v3
+  itemRef: certyfikat-polski-B2-2024-02-g5-q3
+  answer: "będzie cieszyć się"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-02-g5-q8-v1
+  itemRef: certyfikat-polski-B2-2024-02-g5-q8
+  answer: "będzie wyświetlała"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-02-g7-q1-v1
+  itemRef: certyfikat-polski-B2-2024-02-g7-q1
+  answer: "bardziej brutalna"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-02-g8-q3-v1
+  itemRef: certyfikat-polski-B2-2024-02-g8-q3
+  answer: "Utracili władzę w wyniku przegranych wyborów samorządowych."
+  earnedQuarter: 4
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-02-g8-q3-v2
+  itemRef: certyfikat-polski-B2-2024-02-g8-q3
+  answer: "Utracili władzę w wyniku przegrania wyborów samorządowych."
+  earnedQuarter: 4
+}

@@ -1,0 +1,6 @@
+DSL 1
+PART_ACTION_POLICY_OUTCOME {disposition: ignore mutation: ignore}
+PART_ACTION_POLICY_OUTCOME {disposition: apply_answer mutation: apply_answer}
+PART_ACTION_POLICY_OUTCOME {disposition: select_set mutation: select_set}
+PART_ACTION_POLICY_OUTCOME {disposition: move mutation: move}
+PART_ACTION_POLICY_OUTCOME {disposition: submit mutation: submit}

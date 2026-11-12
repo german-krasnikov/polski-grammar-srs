@@ -2,6 +2,74 @@ import XCTest
 import UIKit
 
 final class PolskiGrammarUITests: XCTestCase {
+    func testOfficialB12017GrammarUsesSharedNativeExam() {
+        let app = XCUIApplication()
+        app.launch()
+        let exam = app.buttons["Экзамен"]
+        XCTAssertTrue(exam.waitForExistence(timeout: 10), app.debugDescription)
+        exam.tap()
+        let paper = app.buttons["exam-b1-2017"]
+        XCTAssertTrue(paper.waitForExistence(timeout: 5), app.debugDescription)
+        paper.tap()
+        for module in ["listening", "reading", "grammar", "writing"] {
+            XCTAssertTrue(app.buttons["exam-module-\(module)"].exists, app.debugDescription)
+        }
+        app.buttons["exam-module-grammar"].tap()
+        XCTAssertTrue(app.staticTexts["dumni są z ___"].waitForExistence(timeout: 5), app.debugDescription)
+        app.buttons["exam-option-dobrego teatru"].tap()
+        app.buttons["exam-next"].tap()
+        XCTAssertTrue(app.staticTexts["w którym ___ odbywa się festiwal"].waitForExistence(timeout: 5), app.debugDescription)
+        app.buttons["Матрица"].tap()
+        app.buttons["Экзамен"].tap()
+        XCTAssertTrue(app.staticTexts["w którym ___ odbywa się festiwal"].waitForExistence(timeout: 5), app.debugDescription)
+        app.buttons["exam-previous"].tap()
+        XCTAssertTrue(app.buttons["exam-option-dobrego teatru"].isSelected, app.debugDescription)
+        for _ in 0..<60 {
+            if app.buttons["exam-submit"].exists { break }
+            app.buttons["exam-next"].tap()
+        }
+        let submit = app.buttons["exam-submit"]
+        XCTAssertTrue(submit.exists, app.debugDescription)
+        submit.tap()
+        XCTAssertTrue(app.staticTexts["Результаты"].waitForExistence(timeout: 5), app.debugDescription)
+        XCTAssertTrue(app.staticTexts["Подтверждено, 0,5 / 30"].exists, app.debugDescription)
+    }
+
+    func testNativeExamTypedPolishDraftSurvivesTabReturn() {
+        let app = XCUIApplication()
+        app.launch()
+        app.buttons["Экзамен"].tap()
+        app.buttons["exam-b1-2017"].tap()
+        app.buttons["exam-module-grammar"].tap()
+        let draft = app.textFields["exam-grammar-answer"]
+        for _ in 0..<50 {
+            if draft.exists { break }
+            app.buttons["exam-next"].tap()
+        }
+        XCTAssertTrue(draft.waitForExistence(timeout: 5), app.debugDescription)
+        draft.tap()
+        draft.typeText("żółć")
+        XCTAssertEqual(draft.value as? String, "żółć", app.debugDescription)
+        let sourceContext = app.staticTexts["exam-context"].label
+        let sourceInstruction = app.staticTexts["exam-instruction"].label
+        app.buttons["Матрица"].tap()
+        let matrixSelected = XCTNSPredicateExpectation(
+            predicate: NSPredicate(format: "selected == true"), object: app.buttons["Матрица"])
+        XCTAssertEqual(XCTWaiter.wait(for: [matrixSelected], timeout: 5), .completed, app.debugDescription)
+        XCTAssertTrue(app.navigationBars["Матрица"].waitForExistence(timeout: 5), app.debugDescription)
+        let examContentGone = XCTNSPredicateExpectation(
+            predicate: NSPredicate(format: "exists == false"), object: app.staticTexts["exam-context"])
+        XCTAssertEqual(XCTWaiter.wait(for: [examContentGone], timeout: 5), .completed, app.debugDescription)
+        app.buttons["Экзамен"].tap()
+        let examSelected = XCTNSPredicateExpectation(
+            predicate: NSPredicate(format: "selected == true"), object: app.buttons["Экзамен"])
+        XCTAssertEqual(XCTWaiter.wait(for: [examSelected], timeout: 5), .completed, app.debugDescription)
+        XCTAssertEqual(app.staticTexts["exam-context"].label, sourceContext, app.debugDescription)
+        XCTAssertEqual(app.staticTexts["exam-instruction"].label, sourceInstruction, app.debugDescription)
+        XCTAssertTrue(draft.waitForExistence(timeout: 5), app.debugDescription)
+        XCTAssertEqual(draft.value as? String, "żółć", app.debugDescription)
+    }
+
     func testPackCopyUpdatesNativeControlsAfterCourseSwitch() {
         let app = XCUIApplication()
         app.launch()

@@ -1,0 +1,21 @@
+DSL 1
+LISTENING_ACCEPTED_FACT_ALIAS {
+  aliasId: certyfikat-polski-C1-2023-04-l5-q4-alias-1-1
+  factRef: certyfikat-polski-C1-2023-04-l5-q4-fact-1
+  answerText: "problemy komunikacyjne w USA"
+}
+LISTENING_ACCEPTED_FACT_ALIAS {
+  aliasId: certyfikat-polski-C1-2023-04-l5-q4-alias-2-1
+  factRef: certyfikat-polski-C1-2023-04-l5-q4-fact-2
+  answerText: "powstanie nowych odpadów"
+}
+LISTENING_ACCEPTED_FACT_ALIAS {
+  aliasId: certyfikat-polski-C1-2023-04-l5-q5-alias-2-1
+  factRef: certyfikat-polski-C1-2023-04-l5-q5-fact-2
+  answerText: "brak dostępu do bieżących informacji, np. pogody"
+}
+LISTENING_ACCEPTED_FACT_ALIAS {
+  aliasId: certyfikat-polski-C1-2023-04-l5-q7-alias-2-1
+  factRef: certyfikat-polski-C1-2023-04-l5-q7-fact-2
+  answerText: "stacja kosmiczna"
+}

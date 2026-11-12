@@ -1,0 +1,79 @@
+DSL 1
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2024-02-g2-bank-1
+  testRef: certyfikat-polski-B2-2024-02-grammar-2
+  position: 1
+  text: dla
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2024-02-g2-bank-2
+  testRef: certyfikat-polski-B2-2024-02-grammar-2
+  position: 2
+  text: na
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2024-02-g2-bank-3
+  testRef: certyfikat-polski-B2-2024-02-grammar-2
+  position: 3
+  text: o
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2024-02-g2-bank-4
+  testRef: certyfikat-polski-B2-2024-02-grammar-2
+  position: 4
+  text: od
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2024-02-g2-bank-5
+  testRef: certyfikat-polski-B2-2024-02-grammar-2
+  position: 5
+  text: nad
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2024-02-g2-bank-6
+  testRef: certyfikat-polski-B2-2024-02-grammar-2
+  position: 6
+  text: pod
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2024-02-g2-bank-7
+  testRef: certyfikat-polski-B2-2024-02-grammar-2
+  position: 7
+  text: podczas
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2024-02-g2-bank-8
+  testRef: certyfikat-polski-B2-2024-02-grammar-2
+  position: 8
+  text: pomimo
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2024-02-g2-bank-9
+  testRef: certyfikat-polski-B2-2024-02-grammar-2
+  position: 9
+  text: w
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2024-02-g2-bank-10
+  testRef: certyfikat-polski-B2-2024-02-grammar-2
+  position: 10
+  text: w
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2024-02-g2-bank-11
+  testRef: certyfikat-polski-B2-2024-02-grammar-2
+  position: 11
+  text: "wśród"
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2024-02-g2-bank-12
+  testRef: certyfikat-polski-B2-2024-02-grammar-2
+  position: 12
+  text: z
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2024-02-g2-bank-13
+  testRef: certyfikat-polski-B2-2024-02-grammar-2
+  position: 13
+  text: ze
+}

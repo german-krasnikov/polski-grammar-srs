@@ -469,6 +469,8 @@ final class AppModel: ObservableObject {
 @main
 struct PolskiGrammarApp: App {
     @StateObject private var model = AppModel()
+    @StateObject private var nativeExam = NativeExamModel()
+    @State private var examTabSelected = false
     @Environment(\.scenePhase) private var scenePhase
     @State private var importing = false
     @State private var exporting = false
@@ -484,12 +486,14 @@ struct PolskiGrammarApp: App {
     // below, strictly before the switch's own body re-renders with the new `tab`, so the
     // transition this drives is always keyed by the switch that is actually happening.
     @State private var pagingEdge: Edge = .trailing
-    private let tabOrder = ["Training", "Matrix", "Progress", "Vocabulary"]
+    private let tabOrder = ["Training", "Matrix", "Progress", "Vocabulary", "Exam"]
+    private var selectedTab: String { examTabSelected ? "Exam" : model.state.string("tab") }
     private var tabBarItems: [TabBarItem] { [
         TabBarItem(tag: "Training", title: uiText(model.state, "trainingTab", fallback: "Тренировка"), icon: "square.stack"),
         TabBarItem(tag: "Matrix", title: uiText(model.state, "matrixNavTitle", fallback: "Матрица"), icon: "tablecells"),
         TabBarItem(tag: "Progress", title: uiText(model.state, "uiProgressTab", fallback: "Прогресс"), icon: "chart.bar"),
         TabBarItem(tag: "Vocabulary", title: uiText(model.state, "vocabularyTab", fallback: "Слова"), icon: "character.book.closed"),
+        TabBarItem(tag: "Exam", title: uiText(model.state, "exam", fallback: "exam"), icon: "text.book.closed"),
     ] }
 
     var body: some Scene {
@@ -508,7 +512,7 @@ struct PolskiGrammarApp: App {
                 // insertion/removal, not just a value change, for exactly one tab at a time.
                 ZStack {
                     ForEach(tabOrder, id: \.self) { tab in
-                        if tab == model.state.string("tab") {
+                        if tab == selectedTab {
                             tabContent(tab)
                                 .transition(.asymmetric(
                                     insertion: .move(edge: pagingEdge),
@@ -516,14 +520,17 @@ struct PolskiGrammarApp: App {
                         }
                     }
                 }
-                .animation(motionActive ? .easeOut(duration: 0.3) : nil, value: model.state.string("tab"))
-                .onChange(of: model.state.string("tab")) { old, new in
+                .animation(motionActive ? .easeOut(duration: 0.3) : nil, value: selectedTab)
+                .onChange(of: selectedTab) { old, new in
                     let oldIndex = tabOrder.firstIndex(of: old) ?? 0
                     let newIndex = tabOrder.firstIndex(of: new) ?? 0
                     pagingEdge = newIndex >= oldIndex ? .trailing : .leading
                 }
                 Divider()
-                PagingTabBar(selected: model.state.string("tab"), items: tabBarItems) { model.send("tab", $0) }
+                PagingTabBar(selected: selectedTab, items: tabBarItems) { tab in
+                    if tab == "Exam" { examTabSelected = true }
+                    else { examTabSelected = false; model.send("tab", tab) }
+                }
             }
             .fileImporter(isPresented: $importing, allowedContentTypes: [.json]) { model.importFile($0) }
             .fileExporter(isPresented: $exporting, document: model.exportFile,
@@ -579,6 +586,8 @@ struct PolskiGrammarApp: App {
             NavigationStack { MatrixView(model: model).toolbar { settingsToolbar } }
         case "Progress":
             NavigationStack { ProgressView(model: model, importing: $importing).toolbar { settingsToolbar } }
+        case "Exam":
+            NavigationStack { NativeExamView(model: nativeExam, copy: model.state).toolbar { settingsToolbar } }
         default:
             NavigationStack { VocabularyView(model: model, importing: $importingVocabulary,
                 exporting: $exportingVocabulary, exportFile: $vocabularyFile).toolbar { settingsToolbar } }

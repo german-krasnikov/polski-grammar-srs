@@ -39,6 +39,8 @@ jobs:
           mkdir site
           cp -R kotlin/composeApp/build/dist/composeWebCompatibility/productionExecutable/. site/
           touch site/.nojekyll
+      - name: Check assembled Pages byte budget
+        run: npx tsx scripts/check-site-size.ts site
       - uses: actions/configure-pages@v6
       - uses: actions/upload-pages-artifact@v5
         with:

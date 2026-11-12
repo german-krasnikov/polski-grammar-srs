@@ -1,19 +1,61 @@
 DSL 1
 WRITING_TASK {
-  taskId: "certyfikat-polski-B2-2022-06-write-12"
-  examRef: "certyfikat-polski-B2-2022-06"
-  taskNumber: 12
-  instruction: "TODO: fill from PDF"
-  promptText: "TODO: fill from PDF"
-  wordLimit: 200
+  taskId: certyfikat-polski-B2-2022-06-write-i-a
+  examRef: certyfikat-polski-B2-2022-06
+  taskNumber: 1
+  setId: I
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. W każdym zestawie są dwa zadania: a i b. Należy wybrać tylko jeden zestaw i wykonać obydwa zadania (a i b) z danego zestawu, zgodnie z poleceniami, np.: • zestaw I – zadania a i b z zestawu I lub • zestaw II – zadania a i b z zestawu II lub • zestaw III – zadania a i b z zestawu III"
+  promptText: "Pani/Pana firma obchodzi 10-lecie istnienia na polskim rynku. Proszę napisać zaproszenie na ten jubileusz do prezydenta miasta."
+  wordLimit: 30
+  genre: invitation
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2022-06-write-i-b
+  examRef: certyfikat-polski-B2-2022-06
+  taskNumber: 1
+  setId: I
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. W każdym zestawie są dwa zadania: a i b. Należy wybrać tylko jeden zestaw i wykonać obydwa zadania (a i b) z danego zestawu, zgodnie z poleceniami, np.: • zestaw I – zadania a i b z zestawu I lub • zestaw II – zadania a i b z zestawu II lub • zestaw III – zadania a i b z zestawu III"
+  promptText: "„Przyjaźń to jest coś niezwykle ważnego, co nie wszyscy w życiu znajdują” (ks. Jan Twardowski). Czy zgadza się Pani/Pan z tą opinią? Proszę napisać tekst argumentacyjny (rozprawkę), w którym wyrazi Pani/Pan swoje zdanie."
+  wordLimit: 270
+  genre: argument
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2022-06-write-ii-a
+  examRef: certyfikat-polski-B2-2022-06
+  taskNumber: 2
+  setId: II
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. W każdym zestawie są dwa zadania: a i b. Należy wybrać tylko jeden zestaw i wykonać obydwa zadania (a i b) z danego zestawu, zgodnie z poleceniami, np.: • zestaw I – zadania a i b z zestawu I lub • zestaw II – zadania a i b z zestawu II lub • zestaw III – zadania a i b z zestawu III"
+  promptText: "Chciała Pani / Chciał Pan wziąć kredyt. Nie jest Pani zadowolona / Pan zadowolony z rozmowy z doradcą finansowym, który Panią/Pana obsługiwał. Proszę napisać w tej sprawie skargę (list urzędowy) do dyrektora banku."
+  wordLimit: 140
   genre: letter
 }
 WRITING_TASK {
-  taskId: "certyfikat-polski-B2-2022-06-write-13"
-  examRef: "certyfikat-polski-B2-2022-06"
-  taskNumber: 13
-  instruction: "TODO: fill from PDF"
-  promptText: "TODO: fill from PDF"
-  wordLimit: 200
-  genre: description
+  taskId: certyfikat-polski-B2-2022-06-write-ii-b
+  examRef: certyfikat-polski-B2-2022-06
+  taskNumber: 2
+  setId: II
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. W każdym zestawie są dwa zadania: a i b. Należy wybrać tylko jeden zestaw i wykonać obydwa zadania (a i b) z danego zestawu, zgodnie z poleceniami, np.: • zestaw I – zadania a i b z zestawu I lub • zestaw II – zadania a i b z zestawu II lub • zestaw III – zadania a i b z zestawu III"
+  promptText: "Współpracuje Pani/Pan z portalem „W Naszym Mieście”. Proszę napisać sprawozdanie (relację) z prezentacji nowych gier komputerowych lub z targów ślubnych."
+  wordLimit: 160
+  genre: report
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2022-06-write-iii-a
+  examRef: certyfikat-polski-B2-2022-06
+  taskNumber: 3
+  setId: III
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. W każdym zestawie są dwa zadania: a i b. Należy wybrać tylko jeden zestaw i wykonać obydwa zadania (a i b) z danego zestawu, zgodnie z poleceniami, np.: • zestaw I – zadania a i b z zestawu I lub • zestaw II – zadania a i b z zestawu II lub • zestaw III – zadania a i b z zestawu III"
+  promptText: "Podróżuje Pani/Pan ekskluzywnym statkiem wycieczkowym. Proszę napisać e-mail z pozdrowieniami do swoich polskich przyjaciół."
+  wordLimit: 50
+  genre: email
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2022-06-write-iii-b
+  examRef: certyfikat-polski-B2-2022-06
+  taskNumber: 3
+  setId: III
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. W każdym zestawie są dwa zadania: a i b. Należy wybrać tylko jeden zestaw i wykonać obydwa zadania (a i b) z danego zestawu, zgodnie z poleceniami, np.: • zestaw I – zadania a i b z zestawu I lub • zestaw II – zadania a i b z zestawu II lub • zestaw III – zadania a i b z zestawu III"
+  promptText: "Proszę napisać esej (wypracowanie szkolne) pt. „Człowiek uczy się przez całe życie”."
+  wordLimit: 250
+  genre: essay
 }

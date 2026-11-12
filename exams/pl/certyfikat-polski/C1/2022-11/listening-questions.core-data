@@ -1,0 +1,331 @@
+DSL 1
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l1-q1
+  taskRef: certyfikat-polski-C1-2022-11-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a) ptaki zachowywały się agresywnie wobec policjantów.|b) łabędzie chciały dostać się na drugą stronę ulicy.|c) po interwencji utrudnienia w ruchu utrzymały się do końca dnia."
+  correctAnswer: "b) łabędzie chciały dostać się na drugą stronę ulicy."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l1-q2
+  taskRef: certyfikat-polski-C1-2022-11-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a) kradzieży koparki dokonał dawny pracownik firmy.|b) koparka została sprzedana za kwotę 150 tysięcy złotych.|c) sprawca już wcześniej okradał swojego pracodawcę."
+  correctAnswer: "a) kradzieży koparki dokonał dawny pracownik firmy."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l1-q3
+  taskRef: certyfikat-polski-C1-2022-11-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a) dyrektor orkiestry zaoferował najwyższą kwotę podczas licytacji.|b) koncert był transmitowany na żywo na portalu społecznościowym.|c) koncert przyciągnął rzesze słuchaczy."
+  correctAnswer: "c) koncert przyciągnął rzesze słuchaczy."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l1-q4
+  taskRef: certyfikat-polski-C1-2022-11-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a) projekt został zainicjowany przez prezesów klubów sportowych.|b) w konkursie mogą wziąć udział zarówno organizacje, jak i osoby prywatne.|c) twarzą projektu jest uznany na świecie polski sportowiec."
+  correctAnswer: "c) twarzą projektu jest uznany na świecie polski sportowiec."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l1-q5
+  taskRef: certyfikat-polski-C1-2022-11-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a) całkowite koszty remontu ponosi Unia Europejska.|b) instalacja elektryczna w budynku wymagała modernizacji.|c) planowana jest budowa nowego obiektu sportowego w pobliżu."
+  correctAnswer: "b) instalacja elektryczna w budynku wymagała modernizacji."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l1-q6
+  taskRef: certyfikat-polski-C1-2022-11-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a) studenci mogą poznać topografię Legnicy bez opuszczania sali lekcyjnej.|b) w pracowni są prowadzone specjalne szkolenia dla kierowców.|c) w ostatnich latach znacząco wzrosła liczba wypadków drogowych."
+  correctAnswer: "a) studenci mogą poznać topografię Legnicy bez opuszczania sali lekcyjnej."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l2-q1
+  taskRef: certyfikat-polski-C1-2022-11-listen-2
+  questionType: true_false
+  questionText: "Zdaniem narratora pszczoły są bardziej skłonne do poświęceń niż ludzie."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l2-q2
+  taskRef: certyfikat-polski-C1-2022-11-listen-2
+  questionType: true_false
+  questionText: "Prace plastyczne Piotra Sochy wyróżnia koncentracja na szczegółach."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l2-q3
+  taskRef: certyfikat-polski-C1-2022-11-listen-2
+  questionType: true_false
+  questionText: "Strona graficzna „Pszczół” dostarcza silniejszych doznań intelektualnych niż sam tekst."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l2-q4
+  taskRef: certyfikat-polski-C1-2022-11-listen-2
+  questionType: true_false
+  questionText: "Narrator spodziewał się, że książka Sochy będzie bardziej jednoznaczna."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l2-q5
+  taskRef: certyfikat-polski-C1-2022-11-listen-2
+  questionType: true_false
+  questionText: "Narratora razi nadmiernie naukowy charakter opisów."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l2-q6
+  taskRef: certyfikat-polski-C1-2022-11-listen-2
+  questionType: true_false
+  questionText: "Sukcesem ilustratora jest umiejętność lekkiego ujęcia istotnego tematu."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l2-q7
+  taskRef: certyfikat-polski-C1-2022-11-listen-2
+  questionType: true_false
+  questionText: "Książka stanowi kompendium wiedzy na temat pszczół."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l2-q8
+  taskRef: certyfikat-polski-C1-2022-11-listen-2
+  questionType: true_false
+  questionText: "Według narratora najlepszym sposobem na przedstawienie uli figuralnych jest ich wizualizacja."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l2-q9
+  taskRef: certyfikat-polski-C1-2022-11-listen-2
+  questionType: true_false
+  questionText: "Publikacja zawiera pomysły na wspieranie pszczół w niesprzyjającym im środowisku."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l2-q10
+  taskRef: certyfikat-polski-C1-2022-11-listen-2
+  questionType: true_false
+  questionText: "Narratorowi nie podoba się, że „Pszczoły” z taką łatwością są klasyfikowane jako arcydzieło."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l3-q1
+  taskRef: certyfikat-polski-C1-2022-11-listen-3
+  questionType: matching
+  questionText: "Proszę wybrać pięć zdań prawdziwych (zgodnych z treścią nagrania)."
+  options: "1|2|3|4|5|6|7|8|9|10"
+  correctAnswer: "2|3|6|8|10"
+  pointsQuarter: 20
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
+  requiredSelections: 5
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l4-q1
+  taskRef: certyfikat-polski-C1-2022-11-listen-4
+  questionType: matching
+  questionText: "A. Technologie dostarczane przez tę branżę podnoszą poziom bezpieczeństwa pracy."
+  options: "1|2|3|4|5"
+  correctAnswer: "4"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l4-q2
+  taskRef: certyfikat-polski-C1-2022-11-listen-4
+  questionType: matching
+  questionText: "B. Urządzenia z tej branży odpowiadają bieżącym koncepcjom inżynierskim."
+  options: "1|2|3|4|5"
+  correctAnswer: "3"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l4-q3
+  taskRef: certyfikat-polski-C1-2022-11-listen-4
+  questionType: matching
+  questionText: "C. W tej branży planowana jest obecnie duża inwestycja."
+  options: "1|2|3|4|5"
+  correctAnswer: "1"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l4-q4
+  taskRef: certyfikat-polski-C1-2022-11-listen-4
+  questionType: matching
+  questionText: "D. Ta gałąź wspiera rozwiązania proekologiczne."
+  options: "1|2|3|4|5"
+  correctAnswer: "4"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l4-q5
+  taskRef: certyfikat-polski-C1-2022-11-listen-4
+  questionType: matching
+  questionText: "E. Niebawem Polska znajdzie się w gronie najlepszych państw w tej branży."
+  options: "1|2|3|4|5"
+  correctAnswer: "1"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l4-q6
+  taskRef: certyfikat-polski-C1-2022-11-listen-4
+  questionType: matching
+  questionText: "F. Polski projekt znajduje się w pierwszej dziesiątce tego rodzaju inwestycji w Europie."
+  options: "1|2|3|4|5"
+  correctAnswer: "4"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l4-q7
+  taskRef: certyfikat-polski-C1-2022-11-listen-4
+  questionType: matching
+  questionText: "G. Przemysł ten rozwija się w Polsce od siedemdziesięciu lat."
+  options: "1|2|3|4|5"
+  correctAnswer: "2"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l4-q8
+  taskRef: certyfikat-polski-C1-2022-11-listen-4
+  questionType: matching
+  questionText: "H. Zasięg terytorialny tej branży stopniowo się poszerza."
+  options: "1|2|3|4|5"
+  correctAnswer: "4"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l4-q9
+  taskRef: certyfikat-polski-C1-2022-11-listen-4
+  questionType: matching
+  questionText: "I. Produkcja w tej gałęzi nie jest masowa, ale bardzo wyspecjalizowana."
+  options: "1|2|3|4|5"
+  correctAnswer: "5"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l4-q10
+  taskRef: certyfikat-polski-C1-2022-11-listen-4
+  questionType: matching
+  questionText: "J. Ta branża wspomaga rozwój sieci infrastrukturalnych w Europie."
+  options: "1|2|3|4|5"
+  correctAnswer: "2"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l5-q1
+  taskRef: certyfikat-polski-C1-2022-11-listen-5
+  questionType: fill_gap
+  questionText: "Kiedy narrator był ostatni raz w Wirakoczy?"
+  correctAnswer: "Kilka tygodni temu."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l5-q2
+  taskRef: certyfikat-polski-C1-2022-11-listen-5
+  questionType: fill_gap
+  questionText: "Jaka była rola Staszka Tyczyńskiego w projekcie?"
+  correctAnswer: "Był jego pomysłodawcą."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l5-q3
+  taskRef: certyfikat-polski-C1-2022-11-listen-5
+  questionType: fill_gap
+  questionText: "Czego dotyczyły lokalne legendy?"
+  correctAnswer: "Inków|skarbu"
+  pointsQuarter: 4
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 2
+  gradingMode: open_manual
+  requiredSelections: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l5-q4
+  taskRef: certyfikat-polski-C1-2022-11-listen-5
+  questionType: fill_gap
+  questionText: "Czym zajmował się Staszek Tyczyński w tym projekcie?"
+  correctAnswer: "Organizacją pracy."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l5-q5
+  taskRef: certyfikat-polski-C1-2022-11-listen-5
+  questionType: fill_gap
+  questionText: "Co dziennikarze zamontowali w osadzie?"
+  correctAnswer: "Antenę do transmisji."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l5-q6
+  taskRef: certyfikat-polski-C1-2022-11-listen-5
+  questionType: fill_gap
+  questionText: "W czym uczestniczyli zaproszeni goście?"
+  correctAnswer: "W grze terenowej."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l5-q7
+  taskRef: certyfikat-polski-C1-2022-11-listen-5
+  questionType: fill_gap
+  questionText: "Dlaczego program, który tworzyli radiowcy, był przełomowy?"
+  correctAnswer: "Ponieważ jeszcze nie było podobnych programów w telewizji."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l5-q8
+  taskRef: certyfikat-polski-C1-2022-11-listen-5
+  questionType: fill_gap
+  questionText: "Jaka była rola narratora w organizacji programu?"
+  correctAnswer: "Kwalifikował uczestników."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-l5-q9
+  taskRef: certyfikat-polski-C1-2022-11-listen-5
+  questionType: fill_gap
+  questionText: "Co zmieniło się w życiu narratora podczas realizacji programu?"
+  correctAnswer: "Rzucił palenie."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}

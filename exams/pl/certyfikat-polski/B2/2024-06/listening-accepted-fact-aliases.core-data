@@ -1,0 +1,31 @@
+DSL 1
+LISTENING_ACCEPTED_FACT_ALIAS {
+  aliasId: certyfikat-polski-B2-2024-06-l5-q1-alias-1-1
+  factRef: certyfikat-polski-B2-2024-06-l5-q1-fact-1
+  answerText: "sala gimnastyczna"
+}
+LISTENING_ACCEPTED_FACT_ALIAS {
+  aliasId: certyfikat-polski-B2-2024-06-l5-q1-alias-2-1
+  factRef: certyfikat-polski-B2-2024-06-l5-q1-fact-2
+  answerText: "powstała stołówka"
+}
+LISTENING_ACCEPTED_FACT_ALIAS {
+  aliasId: certyfikat-polski-B2-2024-06-l5-q1-alias-2-2
+  factRef: certyfikat-polski-B2-2024-06-l5-q1-fact-2
+  answerText: "stołówka"
+}
+LISTENING_ACCEPTED_FACT_ALIAS {
+  aliasId: certyfikat-polski-B2-2024-06-l5-q3-alias-1-1
+  factRef: certyfikat-polski-B2-2024-06-l5-q3-fact-1
+  answerText: "są przestronne"
+}
+LISTENING_ACCEPTED_FACT_ALIAS {
+  aliasId: certyfikat-polski-B2-2024-06-l5-q3-alias-1-2
+  factRef: certyfikat-polski-B2-2024-06-l5-q3-fact-1
+  answerText: przestronne
+}
+LISTENING_ACCEPTED_FACT_ALIAS {
+  aliasId: certyfikat-polski-B2-2024-06-l5-q3-alias-3-1
+  factRef: certyfikat-polski-B2-2024-06-l5-q3-fact-3
+  answerText: "są wyposażone w nowe sprzęty"
+}

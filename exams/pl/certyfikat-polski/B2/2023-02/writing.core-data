@@ -1,0 +1,63 @@
+DSL 1
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2023-02-write-i-a
+  examRef: certyfikat-polski-B2-2023-02
+  taskNumber: 1
+  setId: I
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. W każdym zestawie są dwa zadania: a i b. Należy wybrać tylko jeden zestaw i wykonać obydwa zadania (a i b) z danego zestawu, zgodnie z poleceniami, np.: • zestaw I – zadania a i b z zestawu I lub • zestaw II – zadania a i b z zestawu II lub • zestaw III – zadania a i b z zestawu III"
+  promptText: "Spędza Pani/Pan wakacje w gospodarstwie agroturystycznym. Proszę napisać pozdrowienia do swoich polskich kolegów/koleżanek z pracy."
+  wordLimit: 30
+  genre: wishes
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2023-02-write-i-b
+  examRef: certyfikat-polski-B2-2023-02
+  taskNumber: 1
+  setId: I
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. W każdym zestawie są dwa zadania: a i b. Należy wybrać tylko jeden zestaw i wykonać obydwa zadania (a i b) z danego zestawu, zgodnie z poleceniami, np.: • zestaw I – zadania a i b z zestawu I lub • zestaw II – zadania a i b z zestawu II lub • zestaw III – zadania a i b z zestawu III"
+  promptText: "Proszę napisać opowiadanie zainspirowane poniższym zdjęciem."
+  promptImageUrl: exam-images/B2-2023-02-writing-I-b.png
+  promptImageAlt: "Czterech muzyków z gitarami, klawiszami i mikrofonami gra nad wodą."
+  wordLimit: 270
+  genre: story
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2023-02-write-ii-a
+  examRef: certyfikat-polski-B2-2023-02
+  taskNumber: 2
+  setId: II
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. W każdym zestawie są dwa zadania: a i b. Należy wybrać tylko jeden zestaw i wykonać obydwa zadania (a i b) z danego zestawu, zgodnie z poleceniami, np.: • zestaw I – zadania a i b z zestawu I lub • zestaw II – zadania a i b z zestawu II lub • zestaw III – zadania a i b z zestawu III"
+  promptText: "Stara się Pani/Pan o pracę jako przewodniczka/przewodnik po Polsce dla turystów ze swojego kraju. Proszę napisać list motywacyjny do polskiego biura podróży."
+  wordLimit: 100
+  genre: application
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2023-02-write-ii-b
+  examRef: certyfikat-polski-B2-2023-02
+  taskNumber: 2
+  setId: II
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. W każdym zestawie są dwa zadania: a i b. Należy wybrać tylko jeden zestaw i wykonać obydwa zadania (a i b) z danego zestawu, zgodnie z poleceniami, np.: • zestaw I – zadania a i b z zestawu I lub • zestaw II – zadania a i b z zestawu II lub • zestaw III – zadania a i b z zestawu III"
+  promptText: "Niedawno ukazało się polskie wydanie książki kucharskiej, promującej potrawy z Pani/Pana kraju. Proszę napisać recenzję tej publikacji, którą zamieści Pani/Pan na stronie internetowej „Ciekawostki spoza Polski”."
+  wordLimit: 200
+  genre: review
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2023-02-write-iii-a
+  examRef: certyfikat-polski-B2-2023-02
+  taskNumber: 3
+  setId: III
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. W każdym zestawie są dwa zadania: a i b. Należy wybrać tylko jeden zestaw i wykonać obydwa zadania (a i b) z danego zestawu, zgodnie z poleceniami, np.: • zestaw I – zadania a i b z zestawu I lub • zestaw II – zadania a i b z zestawu II lub • zestaw III – zadania a i b z zestawu III"
+  promptText: "Chce Pani/Pan poznać ciekawą osobę. Proszę napisać ogłoszenie, które zamieści Pani/Pan na polskiej stronie internetowej „My Dwoje”."
+  wordLimit: 50
+  genre: announcement
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2023-02-write-iii-b
+  examRef: certyfikat-polski-B2-2023-02
+  taskNumber: 3
+  setId: III
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. W każdym zestawie są dwa zadania: a i b. Należy wybrać tylko jeden zestaw i wykonać obydwa zadania (a i b) z danego zestawu, zgodnie z poleceniami, np.: • zestaw I – zadania a i b z zestawu I lub • zestaw II – zadania a i b z zestawu II lub • zestaw III – zadania a i b z zestawu III"
+  promptText: "„Czy posiadanie majątku daje wolność?”. Proszę napisać tekst argumentacyjny (rozprawkę), w którym wyrazi Pani/Pan swoją opinię."
+  wordLimit: 250
+  genre: argument
+}

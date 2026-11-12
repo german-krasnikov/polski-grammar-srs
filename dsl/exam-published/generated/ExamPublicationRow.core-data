@@ -1,0 +1,97 @@
+DSL 1
+EXAM_PUBLICATION {
+  routeId: b1-2017
+  examRef: certyfikat-polski-B1-2017
+  displayTitle: "B1 Certyfikat 2017"
+  sourceDir: exams/pl/certyfikat-polski/B1/2017
+}
+EXAM_PUBLICATION {
+  routeId: b1-2019
+  examRef: certyfikat-polski-B1-2019
+  displayTitle: "B1 Certyfikat 2019"
+  sourceDir: exams/pl/certyfikat-polski/B1/2019
+}
+EXAM_PUBLICATION {
+  routeId: b1-2020
+  examRef: certyfikat-polski-B1-2020
+  displayTitle: "B1 Certyfikat 2020"
+  sourceDir: exams/pl/certyfikat-polski/B1/2020
+}
+EXAM_PUBLICATION {
+  routeId: b2-2017
+  examRef: certyfikat-polski-B2-2017
+  displayTitle: "B2 Certyfikat 2017"
+  sourceDir: exams/pl/certyfikat-polski/B2/2017
+}
+EXAM_PUBLICATION {
+  routeId: b2-2019
+  examRef: certyfikat-polski-B2-2019
+  displayTitle: "B2 Certyfikat 2019"
+  sourceDir: exams/pl/certyfikat-polski/B2/2019
+}
+EXAM_PUBLICATION {
+  routeId: b2-2020
+  examRef: certyfikat-polski-B2-2020
+  displayTitle: "B2 Certyfikat 2020"
+  sourceDir: exams/pl/certyfikat-polski/B2/2020
+}
+EXAM_PUBLICATION {
+  routeId: b2-2022-02
+  examRef: certyfikat-polski-B2-2022-02
+  displayTitle: "B2 Certyfikat 2022-02"
+  sourceDir: exams/pl/certyfikat-polski/B2/2022-02
+}
+EXAM_PUBLICATION {
+  routeId: b2-2023-02
+  examRef: certyfikat-polski-B2-2023-02
+  displayTitle: "B2 Certyfikat 2023-02"
+  sourceDir: exams/pl/certyfikat-polski/B2/2023-02
+}
+EXAM_PUBLICATION {
+  routeId: b2-2023-06
+  examRef: certyfikat-polski-B2-2023-06
+  displayTitle: "B2 Certyfikat 2023-06"
+  sourceDir: exams/pl/certyfikat-polski/B2/2023-06
+}
+EXAM_PUBLICATION {
+  routeId: b2-2024-02
+  examRef: certyfikat-polski-B2-2024-02
+  displayTitle: "B2 Certyfikat 2024-02"
+  sourceDir: exams/pl/certyfikat-polski/B2/2024-02
+}
+EXAM_PUBLICATION {
+  routeId: b2-2024-06
+  examRef: certyfikat-polski-B2-2024-06
+  displayTitle: "B2 Certyfikat 2024-06"
+  sourceDir: exams/pl/certyfikat-polski/B2/2024-06
+}
+EXAM_PUBLICATION {
+  routeId: c1-2022-03
+  examRef: certyfikat-polski-C1-2022-03
+  displayTitle: "C1 Certyfikat 2022-03"
+  sourceDir: exams/pl/certyfikat-polski/C1/2022-03
+}
+EXAM_PUBLICATION {
+  routeId: c1-2022-11
+  examRef: certyfikat-polski-C1-2022-11
+  displayTitle: "C1 Certyfikat 2022-11"
+  sourceDir: exams/pl/certyfikat-polski/C1/2022-11
+}
+EXAM_PUBLICATION {
+  routeId: c1-2023-04
+  examRef: certyfikat-polski-C1-2023-04
+  displayTitle: "C1 Certyfikat 2023-04"
+  sourceDir: exams/pl/certyfikat-polski/C1/2023-04
+}
+EXAM_PUBLICATION {
+  routeId: c1-2023-11
+  examRef: certyfikat-polski-C1-2023-11
+  displayTitle: "C1 Certyfikat 2023-11"
+  sourceDir: exams/pl/certyfikat-polski/C1/2023-11
+}
+EXAM_PUBLICATION {
+  routeId: c1-2024-04
+  examRef: certyfikat-polski-C1-2024-04
+  displayTitle: "C1 Certyfikat 2024-04"
+  sourceDir: exams/pl/certyfikat-polski/C1/2024-04
+}

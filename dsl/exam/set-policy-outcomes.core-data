@@ -1,0 +1,31 @@
+DSL 1
+SET_POLICY_OUTCOME {
+  disposition: full
+  status: confirmed_full
+  confirmedSource: maximum
+  pendingSource: zero
+}
+SET_POLICY_OUTCOME {
+  disposition: partial
+  status: confirmed_partial
+  confirmedSource: known
+  pendingSource: zero
+}
+SET_POLICY_OUTCOME {
+  disposition: pending
+  status: pending_manual
+  confirmedSource: known
+  pendingSource: remaining
+}
+SET_POLICY_OUTCOME {
+  disposition: wrong
+  status: wrong
+  confirmedSource: zero
+  pendingSource: zero
+}
+SET_POLICY_OUTCOME {
+  disposition: manual_review
+  status: pending_manual
+  confirmedSource: zero
+  pendingSource: maximum
+}

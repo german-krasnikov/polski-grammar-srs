@@ -1,0 +1,15 @@
+{
+  "generated": "from result-policy.examples by npm run logic -- examples; do not edit",
+  "provenance": "Authored acceptance: pending manual credit hides finality; a ready part with zero pending is final even with zero denominator; a sitting additionally requires completion. Percentage visibility requires a positive denominator.",
+  "disposition": [
+    { "id": "absent-part", "facts": { "resultReady": false, "scope": "part", "sittingCompleted": false, "manualPendingQuarter": 0, "possibleQuarter": 4 }, "expected": "hidden" },
+    { "id": "automatic-part", "facts": { "resultReady": true, "scope": "part", "sittingCompleted": false, "manualPendingQuarter": 0, "possibleQuarter": 4 }, "expected": "final" },
+    { "id": "partial-pending", "facts": { "resultReady": true, "scope": "part", "sittingCompleted": false, "manualPendingQuarter": 2, "possibleQuarter": 4 }, "expected": "provisional" },
+    { "id": "manual-only", "facts": { "resultReady": true, "scope": "part", "sittingCompleted": false, "manualPendingQuarter": 4, "possibleQuarter": 4 }, "expected": "provisional" },
+    { "id": "zero-denominator-part", "facts": { "resultReady": true, "scope": "part", "sittingCompleted": false, "manualPendingQuarter": 0, "possibleQuarter": 0 }, "expected": "final_no_percent" },
+    { "id": "incomplete-sitting", "facts": { "resultReady": true, "scope": "sitting", "sittingCompleted": false, "manualPendingQuarter": 0, "possibleQuarter": 16 }, "expected": "provisional" },
+    { "id": "completed-sitting", "facts": { "resultReady": true, "scope": "sitting", "sittingCompleted": true, "manualPendingQuarter": 0, "possibleQuarter": 16 }, "expected": "final" },
+    { "id": "completed-pending", "facts": { "resultReady": true, "scope": "sitting", "sittingCompleted": true, "manualPendingQuarter": 2, "possibleQuarter": 16 }, "expected": "provisional" },
+    { "id": "zero-denominator-sitting", "facts": { "resultReady": true, "scope": "sitting", "sittingCompleted": true, "manualPendingQuarter": 0, "possibleQuarter": 0 }, "expected": "final_no_percent" }
+  ]
+}

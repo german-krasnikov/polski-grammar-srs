@@ -1,0 +1,9 @@
+CONTRACT exam.answerPolicy
+COVERAGE declared-scope
+MODULE ../../kotlin/shared/src/commonMain/kotlin/polski/exam/ExamAnswerEvaluation.kt
+FACT answer.matchesCanonical bool member=matchesCanonical
+FACT answer.variantQuarter number min=0 max=2147483647 integer member=variantQuarter
+FACT answer.maximumQuarter number min=1 max=2147483647 integer member=maximumQuarter
+FACT answer.answerNonblank bool member=answerNonblank
+FACT answer.openManual bool member=openManual
+INPUT disposition answer.matchesCanonical answer.variantQuarter answer.maximumQuarter answer.answerNonblank answer.openManual

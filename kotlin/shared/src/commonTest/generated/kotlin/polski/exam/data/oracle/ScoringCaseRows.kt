@@ -1,8 +1,15 @@
 // Generated from dsl/exam.data-contract
-// source-sha256=36cfafebca8fc22dc8a31c76161792ced0b69ac872ae298f7b83376d02344c88
+// source-sha256=c25663c7842effa836bb812b389b1c0384ddfb8c602fa15fdc03765737f8cfa6
 // Edit the source, then run biome generate.
 
 package polski.exam.data.oracle
+
+enum class ExamModuleRowModule(val tag: String) {
+    LISTENING("listening"),
+    READING("reading"),
+    GRAMMAR("grammar"),
+    WRITING("writing"),
+}
 
 enum class ListeningQuestionRowQuestionType(val tag: String) {
     MULTIPLE_CHOICE("multiple_choice"),
@@ -22,6 +29,11 @@ enum class ListeningQuestionRowAnswerMode(val tag: String) {
     UNORDERED_SET("unordered_set"),
 }
 
+enum class ListeningQuestionRowSetOverselectionMode(val tag: String) {
+    LEGACY_WRONG("legacy_wrong"),
+    MANUAL_REVIEW("manual_review"),
+}
+
 enum class ReadingQuestionRowQuestionType(val tag: String) {
     MULTIPLE_CHOICE("multiple_choice"),
     TRUE_FALSE_NOT_GIVEN("true_false_not_given"),
@@ -30,6 +42,22 @@ enum class ReadingQuestionRowQuestionType(val tag: String) {
     SHORT_ANSWER("short_answer"),
     GAP_FILL_FRAGMENT("gap_fill_fragment"),
     MATCHING("matching"),
+    WORD_BANK("word_bank"),
+}
+
+enum class ReadingQuestionRowGradingMode(val tag: String) {
+    EXACT("exact"),
+    OPEN_MANUAL("open_manual"),
+}
+
+enum class ReadingQuestionRowAnswerMode(val tag: String) {
+    SINGLE("single"),
+    UNORDERED_SET("unordered_set"),
+}
+
+enum class ReadingQuestionRowSetOverselectionMode(val tag: String) {
+    LEGACY_WRONG("legacy_wrong"),
+    MANUAL_REVIEW("manual_review"),
 }
 
 enum class GrammarItemRowQuestionType(val tag: String) {
@@ -62,6 +90,8 @@ enum class WritingTaskRowGenre(val tag: String) {
     REVIEW("review"),
     ADVERTISEMENT("advertisement"),
     APPLICATION("application"),
+    SPEECH("speech"),
+    CHARACTERIZATION("characterization"),
 }
 
 enum class ExamInventoryCaseRowSection(val tag: String) {
@@ -87,6 +117,25 @@ enum class AnswerEvaluationCaseRowExpectedStatus(val tag: String) {
     PENDING_MANUAL("pending_manual"),
 }
 
+enum class GrammarPairCaseRowStatus8(val tag: String) {
+    CONFIRMED_FULL("confirmed_full"),
+    WRONG("wrong"),
+    PENDING_MANUAL("pending_manual"),
+}
+
+enum class GrammarPairCaseRowStatus9(val tag: String) {
+    CONFIRMED_FULL("confirmed_full"),
+    WRONG("wrong"),
+    PENDING_MANUAL("pending_manual"),
+}
+
+enum class NovemberListeningCaseRowExpectedStatus(val tag: String) {
+    CONFIRMED_FULL("confirmed_full"),
+    CONFIRMED_PARTIAL("confirmed_partial"),
+    WRONG("wrong"),
+    PENDING_MANUAL("pending_manual"),
+}
+
 enum class UnorderedSetCaseRowMode(val tag: String) {
     EXACT("exact"),
     OPEN_MANUAL("open_manual"),
@@ -97,6 +146,13 @@ enum class UnorderedSetCaseRowExpectedStatus(val tag: String) {
     CONFIRMED_PARTIAL("confirmed_partial"),
     WRONG("wrong"),
     PENDING_MANUAL("pending_manual"),
+}
+
+enum class ExamModuleCaseRowModule(val tag: String) {
+    LISTENING("listening"),
+    READING("reading"),
+    GRAMMAR("grammar"),
+    WRITING("writing"),
 }
 
 enum class OpenItemGroupCaseRowSection(val tag: String) {
@@ -136,6 +192,22 @@ data class ExamRow(
     val license: String? = null,
 )
 
+data class ExamPublicationRow(
+    val routeId: String,
+    val examRef: String,
+    val displayTitle: String,
+    val sourceDir: String,
+)
+
+data class ExamModuleRow(
+    val moduleId: String,
+    val examRef: String,
+    val module: ExamModuleRowModule,
+    val order: Int,
+    val durationSeconds: Int,
+    val maximumQuarter: Int,
+)
+
 data class ListeningTaskRow(
     val taskId: String,
     val examRef: String,
@@ -161,6 +233,8 @@ data class ListeningQuestionRow(
     val gradingMode: ListeningQuestionRowGradingMode? = null,
     val answerMode: ListeningQuestionRowAnswerMode? = null,
     val creditPerCorrectQuarter: Int? = null,
+    val requiredSelections: Int? = null,
+    val setOverselectionMode: ListeningQuestionRowSetOverselectionMode? = null,
 )
 
 data class ListeningAnswerVariantRow(
@@ -168,6 +242,19 @@ data class ListeningAnswerVariantRow(
     val questionRef: String,
     val answer: String,
     val earnedQuarter: Int,
+)
+
+data class ListeningAcceptedFactRow(
+    val factId: String,
+    val questionRef: String,
+    val creditQuarter: Int,
+    val displayText: String,
+)
+
+data class ListeningAcceptedFactAliasRow(
+    val aliasId: String,
+    val factRef: String,
+    val answerText: String,
 )
 
 data class ReadingPassageRow(
@@ -189,7 +276,32 @@ data class ReadingQuestionRow(
     val correctAnswer: String,
     val points: Int? = null,
     val pointsQuarter: Int? = null,
+    val gradingMode: ReadingQuestionRowGradingMode? = null,
+    val answerMode: ReadingQuestionRowAnswerMode? = null,
+    val creditPerCorrectQuarter: Int? = null,
+    val requiredSelections: Int? = null,
+    val setOverselectionMode: ReadingQuestionRowSetOverselectionMode? = null,
     val relevantParagraph: Int? = null,
+)
+
+data class ReadingAnswerVariantRow(
+    val variantId: String,
+    val questionRef: String,
+    val answer: String,
+    val earnedQuarter: Int,
+)
+
+data class ReadingAcceptedFactRow(
+    val factId: String,
+    val questionRef: String,
+    val creditQuarter: Int,
+    val displayText: String,
+)
+
+data class ReadingAcceptedFactAliasRow(
+    val aliasId: String,
+    val factRef: String,
+    val answerText: String,
 )
 
 data class GrammarTestRow(
@@ -226,6 +338,24 @@ data class GrammarAnswerVariantRow(
     val answer: String,
     val earnedQuarter: Int,
     val onlyIfNotUsedBy: String? = null,
+)
+
+data class GrammarRubricComponentRow(
+    val componentId: String,
+    val itemRef: String,
+    val order: Int,
+    val creditQuarter: Int,
+    val criterionText: String,
+)
+
+data class GrammarAnswerPairRow(
+    val pairId: String,
+    val firstItemRef: String,
+    val firstAnswer: String,
+    val secondItemRef: String,
+    val secondAnswer: String,
+    val firstEarnedQuarter: Int,
+    val secondEarnedQuarter: Int,
 )
 
 data class WritingTaskRow(
@@ -319,6 +449,35 @@ data class AnswerAttemptCaseRow(
     val expectedFinal: Boolean,
 )
 
+data class GrammarPairCaseRow(
+    val id: String,
+    val answer8: String,
+    val answer9: String,
+    val status8: GrammarPairCaseRowStatus8,
+    val status9: GrammarPairCaseRowStatus9,
+    val confirmed8: Int,
+    val confirmed9: Int,
+    val pending8: Int,
+    val pending9: Int,
+)
+
+data class NovemberListeningCaseRow(
+    val id: String,
+    val answer: String,
+    val expectedStatus: NovemberListeningCaseRowExpectedStatus,
+    val confirmedQuarter: Int,
+    val pendingQuarter: Int,
+)
+
+data class GrammarRubricCaseRow(
+    val id: String,
+    val itemRef: String,
+    val componentCount: Int,
+    val maximumQuarter: Int,
+    val unknownAnswer: String,
+    val unknownPendingQuarter: Int,
+)
+
 data class UnorderedSetCaseRow(
     val id: String,
     val correctAnswer: String,
@@ -330,6 +489,25 @@ data class UnorderedSetCaseRow(
     val expectedStatus: UnorderedSetCaseRowExpectedStatus,
     val expectedConfirmedQuarter: Int,
     val expectedPendingQuarter: Int? = null,
+)
+
+data class ExamModuleCaseRow(
+    val id: String,
+    val examRef: String,
+    val module: ExamModuleCaseRowModule,
+    val order: Int,
+    val durationSeconds: Int,
+    val maximumQuarter: Int,
+)
+
+data class ReadingSetCaseRow(
+    val id: String,
+    val correctAnswer: String,
+    val options: String,
+    val answer: String,
+    val maximumQuarter: Int,
+    val creditPerCorrectQuarter: Int,
+    val expectedConfirmedQuarter: Int,
 )
 
 data class OpenItemGroupCaseRow(
@@ -688,6 +866,32 @@ val ANSWER_EVALUATION_CASE_ROW_ROWS: List<AnswerEvaluationCaseRow> = listOf(
         answer = "z Afryki",
         expectedStatus = AnswerEvaluationCaseRowExpectedStatus.CONFIRMED_PARTIAL,
         expectedConfirmedQuarter = 2,
+        expectedPendingQuarter = 0,
+    ),
+    AnswerEvaluationCaseRow(
+        id = "policy-public-canonical-over-variant",
+        consumer = AnswerEvaluationCaseRowConsumer.GRAMMAR,
+        mode = AnswerEvaluationCaseRowMode.OPEN_MANUAL,
+        fullAnswer = "tak",
+        variantAnswer = "tak",
+        variantQuarter = 1,
+        maximumQuarter = 4,
+        answer = "tak",
+        expectedStatus = AnswerEvaluationCaseRowExpectedStatus.CONFIRMED_FULL,
+        expectedConfirmedQuarter = 4,
+        expectedPendingQuarter = 0,
+    ),
+    AnswerEvaluationCaseRow(
+        id = "policy-public-full-variant",
+        consumer = AnswerEvaluationCaseRowConsumer.GRAMMAR,
+        mode = AnswerEvaluationCaseRowMode.EXACT,
+        fullAnswer = "tak",
+        variantAnswer = "owszem",
+        variantQuarter = 4,
+        maximumQuarter = 4,
+        answer = "owszem",
+        expectedStatus = AnswerEvaluationCaseRowExpectedStatus.CONFIRMED_FULL,
+        expectedConfirmedQuarter = 4,
         expectedPendingQuarter = 0,
     ),
 )
@@ -1099,5 +1303,454 @@ val QUESTION_CONTROL_CASE_ROW_ROWS: List<QuestionControlCaseRow> = listOf(
         expectedRawAnswer = "wbrew",
         expectedQuarter = 0,
         expectedStatus = QuestionControlCaseRowExpectedStatus.WRONG,
+    ),
+)
+
+val EXAM_MODULE_CASE_ROW_ROWS: List<ExamModuleCaseRow> = listOf(
+    ExamModuleCaseRow(
+        id = "certyfikat-polski-B1-2017-listening",
+        examRef = "certyfikat-polski-B1-2017",
+        module = ExamModuleCaseRowModule.LISTENING,
+        order = 1,
+        durationSeconds = 1500,
+        maximumQuarter = 120,
+    ),
+    ExamModuleCaseRow(
+        id = "certyfikat-polski-B1-2017-reading",
+        examRef = "certyfikat-polski-B1-2017",
+        module = ExamModuleCaseRowModule.READING,
+        order = 2,
+        durationSeconds = 2700,
+        maximumQuarter = 120,
+    ),
+    ExamModuleCaseRow(
+        id = "certyfikat-polski-B1-2017-grammar",
+        examRef = "certyfikat-polski-B1-2017",
+        module = ExamModuleCaseRowModule.GRAMMAR,
+        order = 3,
+        durationSeconds = 2700,
+        maximumQuarter = 120,
+    ),
+    ExamModuleCaseRow(
+        id = "certyfikat-polski-B1-2017-writing",
+        examRef = "certyfikat-polski-B1-2017",
+        module = ExamModuleCaseRowModule.WRITING,
+        order = 4,
+        durationSeconds = 4500,
+        maximumQuarter = 120,
+    ),
+    ExamModuleCaseRow(
+        id = "certyfikat-polski-B1-2019-listening",
+        examRef = "certyfikat-polski-B1-2019",
+        module = ExamModuleCaseRowModule.LISTENING,
+        order = 1,
+        durationSeconds = 1500,
+        maximumQuarter = 120,
+    ),
+    ExamModuleCaseRow(
+        id = "certyfikat-polski-B1-2019-reading",
+        examRef = "certyfikat-polski-B1-2019",
+        module = ExamModuleCaseRowModule.READING,
+        order = 2,
+        durationSeconds = 2700,
+        maximumQuarter = 120,
+    ),
+    ExamModuleCaseRow(
+        id = "certyfikat-polski-B1-2019-grammar",
+        examRef = "certyfikat-polski-B1-2019",
+        module = ExamModuleCaseRowModule.GRAMMAR,
+        order = 3,
+        durationSeconds = 2700,
+        maximumQuarter = 120,
+    ),
+    ExamModuleCaseRow(
+        id = "certyfikat-polski-B1-2019-writing",
+        examRef = "certyfikat-polski-B1-2019",
+        module = ExamModuleCaseRowModule.WRITING,
+        order = 4,
+        durationSeconds = 4500,
+        maximumQuarter = 120,
+    ),
+    ExamModuleCaseRow(
+        id = "certyfikat-polski-B1-2020-listening",
+        examRef = "certyfikat-polski-B1-2020",
+        module = ExamModuleCaseRowModule.LISTENING,
+        order = 1,
+        durationSeconds = 1800,
+        maximumQuarter = 120,
+    ),
+    ExamModuleCaseRow(
+        id = "certyfikat-polski-B1-2020-reading",
+        examRef = "certyfikat-polski-B1-2020",
+        module = ExamModuleCaseRowModule.READING,
+        order = 2,
+        durationSeconds = 2400,
+        maximumQuarter = 120,
+    ),
+    ExamModuleCaseRow(
+        id = "certyfikat-polski-B1-2020-grammar",
+        examRef = "certyfikat-polski-B1-2020",
+        module = ExamModuleCaseRowModule.GRAMMAR,
+        order = 3,
+        durationSeconds = 2700,
+        maximumQuarter = 120,
+    ),
+    ExamModuleCaseRow(
+        id = "certyfikat-polski-B1-2020-writing",
+        examRef = "certyfikat-polski-B1-2020",
+        module = ExamModuleCaseRowModule.WRITING,
+        order = 4,
+        durationSeconds = 4500,
+        maximumQuarter = 120,
+    ),
+    ExamModuleCaseRow(
+        id = "certyfikat-polski-B2-2017-listening",
+        examRef = "certyfikat-polski-B2-2017",
+        module = ExamModuleCaseRowModule.LISTENING,
+        order = 1,
+        durationSeconds = 1800,
+        maximumQuarter = 160,
+    ),
+    ExamModuleCaseRow(
+        id = "certyfikat-polski-B2-2017-reading",
+        examRef = "certyfikat-polski-B2-2017",
+        module = ExamModuleCaseRowModule.READING,
+        order = 2,
+        durationSeconds = 3600,
+        maximumQuarter = 160,
+    ),
+    ExamModuleCaseRow(
+        id = "certyfikat-polski-B2-2017-grammar",
+        examRef = "certyfikat-polski-B2-2017",
+        module = ExamModuleCaseRowModule.GRAMMAR,
+        order = 3,
+        durationSeconds = 3600,
+        maximumQuarter = 160,
+    ),
+    ExamModuleCaseRow(
+        id = "certyfikat-polski-B2-2017-writing",
+        examRef = "certyfikat-polski-B2-2017",
+        module = ExamModuleCaseRowModule.WRITING,
+        order = 4,
+        durationSeconds = 5400,
+        maximumQuarter = 160,
+    ),
+    ExamModuleCaseRow(
+        id = "certyfikat-polski-B2-2019-listening",
+        examRef = "certyfikat-polski-B2-2019",
+        module = ExamModuleCaseRowModule.LISTENING,
+        order = 1,
+        durationSeconds = 1800,
+        maximumQuarter = 160,
+    ),
+    ExamModuleCaseRow(
+        id = "certyfikat-polski-B2-2019-reading",
+        examRef = "certyfikat-polski-B2-2019",
+        module = ExamModuleCaseRowModule.READING,
+        order = 2,
+        durationSeconds = 3600,
+        maximumQuarter = 160,
+    ),
+    ExamModuleCaseRow(
+        id = "certyfikat-polski-B2-2019-grammar",
+        examRef = "certyfikat-polski-B2-2019",
+        module = ExamModuleCaseRowModule.GRAMMAR,
+        order = 3,
+        durationSeconds = 3600,
+        maximumQuarter = 160,
+    ),
+    ExamModuleCaseRow(
+        id = "certyfikat-polski-B2-2019-writing",
+        examRef = "certyfikat-polski-B2-2019",
+        module = ExamModuleCaseRowModule.WRITING,
+        order = 4,
+        durationSeconds = 5400,
+        maximumQuarter = 160,
+    ),
+    ExamModuleCaseRow(
+        id = "certyfikat-polski-B2-2020-listening",
+        examRef = "certyfikat-polski-B2-2020",
+        module = ExamModuleCaseRowModule.LISTENING,
+        order = 1,
+        durationSeconds = 2400,
+        maximumQuarter = 160,
+    ),
+    ExamModuleCaseRow(
+        id = "certyfikat-polski-B2-2020-reading",
+        examRef = "certyfikat-polski-B2-2020",
+        module = ExamModuleCaseRowModule.READING,
+        order = 2,
+        durationSeconds = 3600,
+        maximumQuarter = 160,
+    ),
+    ExamModuleCaseRow(
+        id = "certyfikat-polski-B2-2020-grammar",
+        examRef = "certyfikat-polski-B2-2020",
+        module = ExamModuleCaseRowModule.GRAMMAR,
+        order = 3,
+        durationSeconds = 3600,
+        maximumQuarter = 160,
+    ),
+    ExamModuleCaseRow(
+        id = "certyfikat-polski-B2-2020-writing",
+        examRef = "certyfikat-polski-B2-2020",
+        module = ExamModuleCaseRowModule.WRITING,
+        order = 4,
+        durationSeconds = 5400,
+        maximumQuarter = 160,
+    ),
+)
+
+val READING_SET_CASE_ROW_ROWS: List<ReadingSetCaseRow> = listOf(
+    ReadingSetCaseRow(
+        id = "b2-2024-02-v-1",
+        correctAnswer = "D",
+        options = "A|B|C|D|E",
+        answer = "D",
+        maximumQuarter = 4,
+        creditPerCorrectQuarter = 4,
+        expectedConfirmedQuarter = 4,
+    ),
+    ReadingSetCaseRow(
+        id = "b2-2024-02-v-2",
+        correctAnswer = "C|D|E",
+        options = "A|B|C|D|E",
+        answer = "E|C|D",
+        maximumQuarter = 12,
+        creditPerCorrectQuarter = 4,
+        expectedConfirmedQuarter = 12,
+    ),
+    ReadingSetCaseRow(
+        id = "b2-2024-02-v-3",
+        correctAnswer = "C",
+        options = "A|B|C|D|E",
+        answer = "C",
+        maximumQuarter = 4,
+        creditPerCorrectQuarter = 4,
+        expectedConfirmedQuarter = 4,
+    ),
+    ReadingSetCaseRow(
+        id = "b2-2024-02-v-4",
+        correctAnswer = "A|C",
+        options = "A|B|C|D|E",
+        answer = "C|A",
+        maximumQuarter = 8,
+        creditPerCorrectQuarter = 4,
+        expectedConfirmedQuarter = 8,
+    ),
+    ReadingSetCaseRow(
+        id = "b2-2024-02-v-5",
+        correctAnswer = "B",
+        options = "A|B|C|D|E",
+        answer = "B",
+        maximumQuarter = 4,
+        creditPerCorrectQuarter = 4,
+        expectedConfirmedQuarter = 4,
+    ),
+    ReadingSetCaseRow(
+        id = "b2-2024-02-v-6",
+        correctAnswer = "A|E",
+        options = "A|B|C|D|E",
+        answer = "E|A",
+        maximumQuarter = 8,
+        creditPerCorrectQuarter = 4,
+        expectedConfirmedQuarter = 8,
+    ),
+)
+
+val GRAMMAR_PAIR_CASE_ROW_ROWS: List<GrammarPairCaseRow> = listOf(
+    GrammarPairCaseRow(
+        id = "c1-2024-first",
+        answer8 = "kilku",
+        answer9 = "przyjaciółmi",
+        status8 = GrammarPairCaseRowStatus8.CONFIRMED_FULL,
+        status9 = GrammarPairCaseRowStatus9.CONFIRMED_FULL,
+        confirmed8 = 2,
+        confirmed9 = 2,
+        pending8 = 0,
+        pending9 = 0,
+    ),
+    GrammarPairCaseRow(
+        id = "c1-2024-second",
+        answer8 = "kilkoma",
+        answer9 = "przyjaciółmi",
+        status8 = GrammarPairCaseRowStatus8.CONFIRMED_FULL,
+        status9 = GrammarPairCaseRowStatus9.CONFIRMED_FULL,
+        confirmed8 = 2,
+        confirmed9 = 2,
+        pending8 = 0,
+        pending9 = 0,
+    ),
+    GrammarPairCaseRow(
+        id = "c1-2024-third",
+        answer8 = "kilkorgiem",
+        answer9 = "przyjaciół",
+        status8 = GrammarPairCaseRowStatus8.CONFIRMED_FULL,
+        status9 = GrammarPairCaseRowStatus9.CONFIRMED_FULL,
+        confirmed8 = 2,
+        confirmed9 = 2,
+        pending8 = 0,
+        pending9 = 0,
+    ),
+    GrammarPairCaseRow(
+        id = "c1-2024-crossed-a",
+        answer8 = "kilkorgiem",
+        answer9 = "przyjaciółmi",
+        status8 = GrammarPairCaseRowStatus8.PENDING_MANUAL,
+        status9 = GrammarPairCaseRowStatus9.PENDING_MANUAL,
+        confirmed8 = 0,
+        confirmed9 = 0,
+        pending8 = 2,
+        pending9 = 2,
+    ),
+    GrammarPairCaseRow(
+        id = "c1-2024-crossed-b",
+        answer8 = "kilku",
+        answer9 = "przyjaciół",
+        status8 = GrammarPairCaseRowStatus8.PENDING_MANUAL,
+        status9 = GrammarPairCaseRowStatus9.PENDING_MANUAL,
+        confirmed8 = 0,
+        confirmed9 = 0,
+        pending8 = 2,
+        pending9 = 2,
+    ),
+    GrammarPairCaseRow(
+        id = "c1-2024-crossed-c",
+        answer8 = "kilkoma",
+        answer9 = "przyjaciół",
+        status8 = GrammarPairCaseRowStatus8.PENDING_MANUAL,
+        status9 = GrammarPairCaseRowStatus9.PENDING_MANUAL,
+        confirmed8 = 0,
+        confirmed9 = 0,
+        pending8 = 2,
+        pending9 = 2,
+    ),
+    GrammarPairCaseRow(
+        id = "c1-2024-blank-first",
+        answer8 = "",
+        answer9 = "przyjaciółmi",
+        status8 = GrammarPairCaseRowStatus8.WRONG,
+        status9 = GrammarPairCaseRowStatus9.PENDING_MANUAL,
+        confirmed8 = 0,
+        confirmed9 = 0,
+        pending8 = 0,
+        pending9 = 2,
+    ),
+    GrammarPairCaseRow(
+        id = "c1-2024-blank-second",
+        answer8 = "kilku",
+        answer9 = "",
+        status8 = GrammarPairCaseRowStatus8.PENDING_MANUAL,
+        status9 = GrammarPairCaseRowStatus9.WRONG,
+        confirmed8 = 0,
+        confirmed9 = 0,
+        pending8 = 2,
+        pending9 = 0,
+    ),
+    GrammarPairCaseRow(
+        id = "c1-2024-both-blank",
+        answer8 = "",
+        answer9 = "",
+        status8 = GrammarPairCaseRowStatus8.WRONG,
+        status9 = GrammarPairCaseRowStatus9.WRONG,
+        confirmed8 = 0,
+        confirmed9 = 0,
+        pending8 = 0,
+        pending9 = 0,
+    ),
+)
+
+val NOVEMBER_LISTENING_CASE_ROW_ROWS: List<NovemberListeningCaseRow> = listOf(
+    NovemberListeningCaseRow(
+        id = "c1-2022-11-v3-printed",
+        answer = "Inków|skarbu",
+        expectedStatus = NovemberListeningCaseRowExpectedStatus.CONFIRMED_FULL,
+        confirmedQuarter = 4,
+        pendingQuarter = 0,
+    ),
+    NovemberListeningCaseRow(
+        id = "c1-2022-11-v3-reversed",
+        answer = "skarbu|Inków",
+        expectedStatus = NovemberListeningCaseRowExpectedStatus.CONFIRMED_FULL,
+        confirmedQuarter = 4,
+        pendingQuarter = 0,
+    ),
+    NovemberListeningCaseRow(
+        id = "c1-2022-11-v3-castle",
+        answer = "Inków|zamku niedzickiego",
+        expectedStatus = NovemberListeningCaseRowExpectedStatus.CONFIRMED_FULL,
+        confirmedQuarter = 4,
+        pendingQuarter = 0,
+    ),
+    NovemberListeningCaseRow(
+        id = "c1-2022-11-v3-niedzica",
+        answer = "zamku w Niedzicy|Inków",
+        expectedStatus = NovemberListeningCaseRowExpectedStatus.CONFIRMED_FULL,
+        confirmedQuarter = 4,
+        pendingQuarter = 0,
+    ),
+    NovemberListeningCaseRow(
+        id = "c1-2022-11-v3-duplicate-fact",
+        answer = "skarbu|zamku w Niedzicy",
+        expectedStatus = NovemberListeningCaseRowExpectedStatus.CONFIRMED_PARTIAL,
+        confirmedQuarter = 2,
+        pendingQuarter = 0,
+    ),
+    NovemberListeningCaseRow(
+        id = "c1-2022-11-v3-unknown",
+        answer = "Inków|nieznane miejsce",
+        expectedStatus = NovemberListeningCaseRowExpectedStatus.PENDING_MANUAL,
+        confirmedQuarter = 2,
+        pendingQuarter = 2,
+    ),
+    NovemberListeningCaseRow(
+        id = "c1-2022-11-v3-blank",
+        answer = "",
+        expectedStatus = NovemberListeningCaseRowExpectedStatus.WRONG,
+        confirmedQuarter = 0,
+        pendingQuarter = 0,
+    ),
+)
+
+val GRAMMAR_RUBRIC_CASE_ROW_ROWS: List<GrammarRubricCaseRow> = listOf(
+    GrammarRubricCaseRow(
+        id = "c1-2022-11-grammar-ii-1",
+        itemRef = "certyfikat-polski-C1-2022-11-g2-q1",
+        componentCount = 4,
+        maximumQuarter = 4,
+        unknownAnswer = "inna odpowiedź do sprawdzenia",
+        unknownPendingQuarter = 4,
+    ),
+    GrammarRubricCaseRow(
+        id = "c1-2022-11-grammar-ii-2",
+        itemRef = "certyfikat-polski-C1-2022-11-g2-q2",
+        componentCount = 4,
+        maximumQuarter = 4,
+        unknownAnswer = "inna odpowiedź do sprawdzenia",
+        unknownPendingQuarter = 4,
+    ),
+    GrammarRubricCaseRow(
+        id = "c1-2022-11-grammar-ii-3",
+        itemRef = "certyfikat-polski-C1-2022-11-g2-q3",
+        componentCount = 4,
+        maximumQuarter = 4,
+        unknownAnswer = "inna odpowiedź do sprawdzenia",
+        unknownPendingQuarter = 4,
+    ),
+    GrammarRubricCaseRow(
+        id = "c1-2022-11-grammar-ii-4",
+        itemRef = "certyfikat-polski-C1-2022-11-g2-q4",
+        componentCount = 4,
+        maximumQuarter = 4,
+        unknownAnswer = "inna odpowiedź do sprawdzenia",
+        unknownPendingQuarter = 4,
+    ),
+    GrammarRubricCaseRow(
+        id = "c1-2022-11-grammar-ii-5",
+        itemRef = "certyfikat-polski-C1-2022-11-g2-q5",
+        componentCount = 4,
+        maximumQuarter = 4,
+        unknownAnswer = "inna odpowiedź do sprawdzenia",
+        unknownPendingQuarter = 4,
     ),
 )

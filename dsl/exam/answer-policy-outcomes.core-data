@@ -1,0 +1,32 @@
+DSL 1
+# One source-backed translation from a disposition to public status and quarter sources.
+ANSWER_POLICY_OUTCOME {
+  disposition: canonical
+  status: confirmed_full
+  confirmedSource: maximum
+  pendingSource: zero
+}
+ANSWER_POLICY_OUTCOME {
+  disposition: full_variant
+  status: confirmed_full
+  confirmedSource: variant
+  pendingSource: zero
+}
+ANSWER_POLICY_OUTCOME {
+  disposition: partial_variant
+  status: confirmed_partial
+  confirmedSource: variant
+  pendingSource: zero
+}
+ANSWER_POLICY_OUTCOME {
+  disposition: open_unknown
+  status: pending_manual
+  confirmedSource: zero
+  pendingSource: maximum
+}
+ANSWER_POLICY_OUTCOME {
+  disposition: wrong
+  status: wrong
+  confirmedSource: zero
+  pendingSource: zero
+}

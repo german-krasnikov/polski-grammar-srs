@@ -1,0 +1,19 @@
+DSL 1
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2024-04-g1-q4-v1
+  itemRef: certyfikat-polski-C1-2024-04-g1-q4
+  answer: dwu
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2024-04-g7-q2-v1
+  itemRef: certyfikat-polski-C1-2024-04-g7-q2
+  answer: "niszczały"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2024-04-g7-q7-v1
+  itemRef: certyfikat-polski-C1-2024-04-g7-q7
+  answer: znajdujemy
+  earnedQuarter: 2
+}

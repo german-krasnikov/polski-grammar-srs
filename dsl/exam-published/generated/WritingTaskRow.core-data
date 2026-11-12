@@ -1,0 +1,921 @@
+DSL 1
+WRITING_TASK {
+  taskId: B1-2017-writing-I-1
+  examRef: certyfikat-polski-B1-2017
+  taskNumber: 1
+  setId: I
+  instruction: "Zestaw I, zadanie a"
+  promptText: "Proszę napisać zaproszenie dla nauczyciela lub szefa na swoje urodziny / imieniny, które organizuje Pani / Pan w restauracji."
+  wordLimit: 20
+  genre: invitation
+}
+WRITING_TASK {
+  taskId: B1-2017-writing-I-2
+  examRef: certyfikat-polski-B1-2017
+  taskNumber: 2
+  setId: I
+  instruction: "Zestaw I, zadanie b"
+  promptText: "„Wakacje w domu…”. Proszę napisać wypracowanie (esej szkolny)."
+  wordLimit: 180
+  genre: essay
+}
+WRITING_TASK {
+  taskId: B1-2017-writing-II-1
+  examRef: certyfikat-polski-B1-2017
+  taskNumber: 1
+  setId: II
+  instruction: "Zestaw II, zadanie a"
+  promptText: "Proszę napisać życzenia dla przyjaciół z okazji ich ślubu."
+  wordLimit: 25
+  genre: wishes
+}
+WRITING_TASK {
+  taskId: B1-2017-writing-II-2
+  examRef: certyfikat-polski-B1-2017
+  taskNumber: 2
+  setId: II
+  instruction: "Zestaw II, zadanie b"
+  promptText: "Proszę napisać opowiadanie pt. „Jesteśmy razem już trzy lata…”. Proszę wykorzystać zdjęcie."
+  promptImageUrl: exam-images/B1-2017-writing-II-2.jpeg
+  promptImageAlt: "Mężczyzna siedzi nad wodą i głaszcze psa."
+  wordLimit: 175
+  genre: story
+}
+WRITING_TASK {
+  taskId: B1-2017-writing-III-1
+  examRef: certyfikat-polski-B1-2017
+  taskNumber: 1
+  setId: III
+  instruction: "Zestaw III, zadanie a"
+  promptText: "Proszę opisać najpiękniejszy prezent, który dostała Pani / dostał Pan na urodziny lub imieniny."
+  wordLimit: 60
+  genre: description
+}
+WRITING_TASK {
+  taskId: B1-2017-writing-III-2
+  examRef: certyfikat-polski-B1-2017
+  taskNumber: 2
+  setId: III
+  instruction: "Zestaw III, zadanie b"
+  promptText: "Proszę napisać sprawozdanie (relację) z wycieczki lub podróży."
+  wordLimit: 140
+  genre: report
+}
+WRITING_TASK {
+  taskId: B1-2019-writing-I-a
+  examRef: certyfikat-polski-B1-2019
+  taskNumber: 1
+  setId: I
+  instruction: "Zestaw I, zadanie a — ogłoszenie"
+  promptText: "Organizuje Pani / Pan imprezę urodzinową w swoim mieszkaniu dla wielu gości. Hałas może przeszkadzać Pani / Pana sąsiadom, dlatego chce Pani / Pan poinformować ich o tym wydarzeniu. Proszę napisać ogłoszenie, które powiesi Pani / Pan w windzie."
+  wordLimit: 30
+  genre: announcement
+}
+WRITING_TASK {
+  taskId: B1-2019-writing-I-b
+  examRef: certyfikat-polski-B1-2019
+  taskNumber: 2
+  setId: I
+  instruction: "Zestaw I, zadanie b — list"
+  promptText: "Odpoczywa Pani / Pan na wakacjach w swoim rodzinnym kraju. Proszę napisać list do przyjaciółki / przyjaciela z Polski, w którym opowie Pani / Pan o swoim pobycie."
+  wordLimit: 170
+  genre: letter
+}
+WRITING_TASK {
+  taskId: B1-2019-writing-II-a
+  examRef: certyfikat-polski-B1-2019
+  taskNumber: 1
+  setId: II
+  instruction: "Zestaw II, zadanie a — zaproszenie e-mailowe"
+  promptText: "Od niedawna pracuje Pani / Pan w polskiej firmie. Chce Pani / Pan zorganizować spotkanie przy grillu w swoim ogrodzie dla nowych kolegów z pracy. Proszę napisać do nich e-mail z zaproszeniem."
+  wordLimit: 40
+  genre: invitation
+}
+WRITING_TASK {
+  taskId: B1-2019-writing-II-b
+  examRef: certyfikat-polski-B1-2019
+  taskNumber: 2
+  setId: II
+  instruction: "Zestaw II, zadanie b — opinia o serialu"
+  promptText: "„Ten serial ostatnio obejrzałam / obejrzałem”. Proszę zaprezentować serial i wyrazić własną opinię na jego temat."
+  wordLimit: 160
+  genre: opinion
+}
+WRITING_TASK {
+  taskId: B1-2019-writing-III-a
+  examRef: certyfikat-polski-B1-2019
+  taskNumber: 1
+  setId: III
+  instruction: "Zestaw III, zadanie a — życzenia"
+  promptText: "Pani / Pana przyjaciel z Polski za miesiąc bierze ślub. Niestety nie może Pani / Pan być na tej uroczystości. Proszę poinformować o tym przyjaciela i napisać życzenia, które wyśle Pani / Pan młodej parze."
+  wordLimit: 30
+  genre: wishes
+}
+WRITING_TASK {
+  taskId: B1-2019-writing-III-b
+  examRef: certyfikat-polski-B1-2019
+  taskNumber: 2
+  setId: III
+  instruction: "Zestaw III, zadanie b — charakterystyka"
+  promptText: "„Mam dobrą szefową / dobrego szefa”. Proszę napisać charakterystykę Pani / Pana pracodawcy."
+  wordLimit: 170
+  genre: description
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B1-2020-writing-I-a
+  examRef: certyfikat-polski-B1-2020
+  taskNumber: 1
+  setId: I
+  instruction: "Zestaw I, zadanie a. 25 słów. Ogłoszenie: Drodzy Sąsiedzi! Zamienię mieszkanie dwupokojowe na większe w tym samym bloku. Tel. 506 34 34 51. Anna."
+  promptText: "Jest Pani zainteresowana / Pan zainteresowany tym ogłoszeniem. Proszę napisać SMS do pani Anny, zapytać o szczegóły (cena, piętro) i umówić się na spotkanie."
+  wordLimit: 25
+  genre: sms
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B1-2020-writing-I-b
+  examRef: certyfikat-polski-B1-2020
+  taskNumber: 2
+  setId: I
+  instruction: "Zestaw I, zadanie b. 175 słów."
+  promptText: "Proszę napisać sprawozdanie z uroczystości rodzinnej (np. z wesela siostry lub brata, z urodzin babci), w której ostatnio Pani uczestniczyła / Pan uczestniczył."
+  wordLimit: 175
+  genre: report
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B1-2020-writing-II-a
+  examRef: certyfikat-polski-B1-2020
+  taskNumber: 1
+  setId: II
+  instruction: "Zestaw II, zadanie a. 40 słów."
+  promptText: "Spędziła Pani / Spędził Pan wakacje w małym hotelu nad morzem. Proszę napisać opinię o tym miejscu, którą zamieści Pani / Pan na polskim portalu turystycznym „(Nie)Polecamy”."
+  wordLimit: 40
+  genre: opinion
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B1-2020-writing-II-b
+  examRef: certyfikat-polski-B1-2020
+  taskNumber: 2
+  setId: II
+  instruction: "Zestaw II, zadanie b. 160 słów."
+  promptText: "Proszę napisać esej (wypracowanie szkolne) na temat: „To jest praca moich marzeń”."
+  wordLimit: 160
+  genre: essay
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B1-2020-writing-III-a
+  examRef: certyfikat-polski-B1-2020
+  taskNumber: 1
+  setId: III
+  instruction: "Zestaw III, zadanie a. 25 słów."
+  promptText: "Proszę napisać życzenia z okazji świąt Bożego Narodzenia dla swojej dawnej nauczycielki / swojego dawnego nauczyciela języka polskiego."
+  wordLimit: 25
+  genre: wishes
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B1-2020-writing-III-b
+  examRef: certyfikat-polski-B1-2020
+  taskNumber: 2
+  setId: III
+  instruction: "Zestaw III, zadanie b. 175 słów."
+  promptText: "Proszę napisać opowiadanie pod tytułem „Przygoda na lotnisku”."
+  wordLimit: 175
+  genre: story
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2017-writing-I-1
+  examRef: certyfikat-polski-B2-2017
+  taskNumber: 1
+  setId: I
+  instruction: "Zestaw I, zadanie a. 20 słów."
+  promptText: "Pani / Pana szef obchodzi jubileusz pracy zawodowej. Proszę napisać życzenia z tej okazji."
+  wordLimit: 20
+  genre: wishes
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2017-writing-I-2
+  examRef: certyfikat-polski-B2-2017
+  taskNumber: 2
+  setId: I
+  instruction: "Zestaw I, zadanie b. 280 słów."
+  promptText: "Proszę napisać esej na temat: „Dorośli a młodzież”."
+  wordLimit: 280
+  genre: essay
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2017-writing-II-1
+  examRef: certyfikat-polski-B2-2017
+  taskNumber: 1
+  setId: II
+  instruction: "Zestaw II, zadanie a. 120 słów."
+  promptText: "Proszę napisać e-mail do koleżanki / kolegi o sukcesach w pracy."
+  wordLimit: 120
+  genre: email
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2017-writing-II-2
+  examRef: certyfikat-polski-B2-2017
+  taskNumber: 2
+  setId: II
+  instruction: "Zestaw II, zadanie b. 180 słów."
+  promptText: "Proszę napisać recenzję wybranego serialu lub filmu."
+  wordLimit: 180
+  genre: review
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2017-writing-III-1
+  examRef: certyfikat-polski-B2-2017
+  taskNumber: 1
+  setId: III
+  instruction: "Zestaw III, zadanie a. 60 słów."
+  promptText: "Proszę napisać tekst reklamujący kurs tańca dla dorosłych."
+  wordLimit: 60
+  genre: advertisement
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2017-writing-III-2
+  examRef: certyfikat-polski-B2-2017
+  taskNumber: 2
+  setId: III
+  instruction: "Zestaw III, zadanie b. 240 słów."
+  promptText: "„Język polski nas połączył”. Proszę napisać opowiadanie zainspirowane poniższym zdjęciem."
+  promptImageUrl: exam-images/B2-2017-writing-III-b.jpeg
+  promptImageAlt: "Grupa uśmiechniętych ludzi różnych narodowości wspólnie świętuje."
+  wordLimit: 240
+  genre: story
+}
+WRITING_TASK {
+  taskId: B2-2019-writing-1a
+  examRef: certyfikat-polski-B2-2019
+  taskNumber: 1
+  setId: I
+  instruction: "Zestaw I, zadanie a. 100 słów."
+  promptText: "Jest Pani zainteresowana / Pan zainteresowany poniższą ofertą pracy. Proszę napisać list motywacyjny.\n\nFundacja Zwierzęta Niczyje poszukuje opiekuna do pomocy w schronisku.\n* Masz minimum 18 lat i kochasz zwierzęta?\n* Chcesz pospacerować, ale nie masz z kim?\n* Nie chcesz siedzieć w biurze od 8.00 do 16.00?\n* A może robisz świetne zdjęcia i w ten sposób będziesz promować adopcje?\nJeśli na któreś z tych pytań odpowiedziałeś „tak”, to mamy dla Ciebie propozycję – dołącz do nas!\nCo prawda oferujemy minimalne stawki, ale w ramach premii możesz liczyć na mnóstwo miłości i wdzięczności.\nListy motywacyjne proszę kierować na adres: zwierzeta.niczyje@org.pl"
+  wordLimit: 100
+  genre: letter
+}
+WRITING_TASK {
+  taskId: B2-2019-writing-1b
+  examRef: certyfikat-polski-B2-2019
+  taskNumber: 2
+  setId: I
+  instruction: "Zestaw I, zadanie b. 200 słów."
+  promptText: "„Cała widownia płakała ze śmiechu”. Proszę napisać recenzję filmu lub przedstawienia teatralnego, którą zamieści Pani / Pan na polskim portalu „Propozycje na Weekend”."
+  wordLimit: 200
+  genre: review
+}
+WRITING_TASK {
+  taskId: B2-2019-writing-2a
+  examRef: certyfikat-polski-B2-2019
+  taskNumber: 1
+  setId: II
+  instruction: "Zestaw II, zadanie a. 30 słów."
+  promptText: "Organizuje Pani / Pan w jednym z polskich miast uroczyste otwarcie własnej cukierni. Proszę napisać zaproszenie dla swojego nauczyciela z kursu kulinarnego."
+  wordLimit: 30
+  genre: invitation
+}
+WRITING_TASK {
+  taskId: B2-2019-writing-2b
+  examRef: certyfikat-polski-B2-2019
+  taskNumber: 2
+  setId: II
+  instruction: "Zestaw II, zadanie b. 270 słów."
+  promptText: "„Złość jest chorobą duszy” (Eliza Orzeszkowa). Czy zgadza się Pani / Pan z tym stwierdzeniem? Proszę napisać tekst argumentacyjny (rozprawkę)."
+  wordLimit: 270
+  genre: argument
+}
+WRITING_TASK {
+  taskId: B2-2019-writing-3a
+  examRef: certyfikat-polski-B2-2019
+  taskNumber: 1
+  setId: III
+  instruction: "Zestaw III, zadanie a. 100 słów."
+  promptText: "Niedawno kupiła Pani / kupił Pan w Polsce mieszkanie. W imieniu lokatorów domu proszę napisać podanie do zarządcy osiedla, prosząc o budowę placu zabaw dla dzieci."
+  wordLimit: 100
+  genre: application
+}
+WRITING_TASK {
+  taskId: B2-2019-writing-3b
+  examRef: certyfikat-polski-B2-2019
+  taskNumber: 2
+  setId: III
+  instruction: "Zestaw III, zadanie b. 200 słów."
+  promptText: "„Gdybym mogła / Gdybym mógł cofnąć czas, to wszystko bym zmieniła / bym zmienił”. Proszę napisać opowiadanie zainspirowane powyższym zdaniem."
+  wordLimit: 200
+  genre: story
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2020-writing-I-1
+  examRef: certyfikat-polski-B2-2020
+  taskNumber: 1
+  setId: I
+  instruction: "Zestaw I, zadanie a. 140 słów."
+  promptText: "Liczyła Pani / Liczył Pan na awans w pracy. Niestety, dyrektor przyznał go Pani/Pana współpracownikowi. Proszę napisać do swojej przyjaciółki / swojego przyjaciela z Polski e-mail, w którym wyrazi Pani/Pan rozgoryczenie związane z tą sytuacją."
+  wordLimit: 140
+  genre: email
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2020-writing-I-2
+  examRef: certyfikat-polski-B2-2020
+  taskNumber: 2
+  setId: I
+  instruction: "Zestaw I, zadanie b. 160 słów."
+  promptText: "„Do tego miasta w Polsce chętnie będę wracać”. Proszę je opisać."
+  wordLimit: 160
+  genre: description
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2020-writing-II-1
+  examRef: certyfikat-polski-B2-2020
+  taskNumber: 1
+  setId: II
+  instruction: "Zestaw II, zadanie a. 100 słów."
+  promptText: "Stara się Pani/Pan o stanowisko recepcjonisty w jednym z hoteli w Polsce. Proszę napisać list motywacyjny."
+  wordLimit: 100
+  genre: letter
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2020-writing-II-2
+  examRef: certyfikat-polski-B2-2020
+  taskNumber: 2
+  setId: II
+  instruction: "Zestaw II, zadanie b. 200 słów."
+  promptText: "Proszę napisać sprawozdanie z międzynarodowej imprezy „Sport dla każdego”, które zamieści Pani/Pan na polskim portalu informacyjnym."
+  wordLimit: 200
+  genre: report
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2020-writing-III-1
+  examRef: certyfikat-polski-B2-2020
+  taskNumber: 1
+  setId: III
+  instruction: "Zestaw III, zadanie a. 40 słów."
+  promptText: "Chce Pani/Pan poznać ciekawą osobę. Proszę napisać ogłoszenie, które zamieści Pani/Pan na polskiej stronie internetowej „Bądźmy w Kontakcie”."
+  wordLimit: 40
+  genre: announcement
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2020-writing-III-2
+  examRef: certyfikat-polski-B2-2020
+  taskNumber: 2
+  setId: III
+  instruction: "Zestaw III, zadanie b. 260 słów."
+  promptText: "„Nauka to podróż, która trwa przez całe życie”. Inspirując się powyższym zdaniem, proszę napisać tekst argumentacyjny (rozprawkę), w którym wyrazi Pani/Pan swoją opinię."
+  wordLimit: 260
+  genre: argument
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2022-02-write-i-a
+  examRef: certyfikat-polski-B2-2022-02
+  taskNumber: 1
+  setId: I
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. W każdym zestawie są dwa zadania: a i b. Należy wybrać tylko jeden zestaw i wykonać obydwa zadania (a i b) z danego zestawu, zgodnie z poleceniami, np.: • zestaw I – zadania a i b z zestawu I lub • zestaw II – zadania a i b z zestawu II lub • zestaw III – zadania a i b z zestawu III"
+  promptText: "Jest Pani/Pan animatorem zabaw dla dzieci. Proszę zareklamować swoje usługi na polskim portalu internetowym „Atrakcje dla Najmłodszych”."
+  wordLimit: 60
+  genre: advertisement
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2022-02-write-i-b
+  examRef: certyfikat-polski-B2-2022-02
+  taskNumber: 1
+  setId: I
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. W każdym zestawie są dwa zadania: a i b. Należy wybrać tylko jeden zestaw i wykonać obydwa zadania (a i b) z danego zestawu, zgodnie z poleceniami, np.: • zestaw I – zadania a i b z zestawu I lub • zestaw II – zadania a i b z zestawu II lub • zestaw III – zadania a i b z zestawu III"
+  promptText: "Proszę napisać opowiadanie zainspirowane poniższym zdjęciem."
+  promptImageUrl: exam-images/B2-2022-02-writing-I-b.png
+  promptImageAlt: "Dwie osoby w motorowej łodzi na jeziorze, widziane od przodu."
+  wordLimit: 240
+  genre: story
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2022-02-write-ii-a
+  examRef: certyfikat-polski-B2-2022-02
+  taskNumber: 2
+  setId: II
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. W każdym zestawie są dwa zadania: a i b. Należy wybrać tylko jeden zestaw i wykonać obydwa zadania (a i b) z danego zestawu, zgodnie z poleceniami, np.: • zestaw I – zadania a i b z zestawu I lub • zestaw II – zadania a i b z zestawu II lub • zestaw III – zadania a i b z zestawu III"
+  promptText: "„Ta polska miejscowość przyciąga wielu turystów”. Proszę opisać to miejsce."
+  wordLimit: 140
+  genre: description
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2022-02-write-ii-b
+  examRef: certyfikat-polski-B2-2022-02
+  taskNumber: 2
+  setId: II
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. W każdym zestawie są dwa zadania: a i b. Należy wybrać tylko jeden zestaw i wykonać obydwa zadania (a i b) z danego zestawu, zgodnie z poleceniami, np.: • zestaw I – zadania a i b z zestawu I lub • zestaw II – zadania a i b z zestawu II lub • zestaw III – zadania a i b z zestawu III"
+  promptText: "Planuje Pani/Pan zorganizować kilkudniowy wyjazd dla swoich podopiecznych z Fundacji „Aktywni Seniorzy”. Proszę napisać list do dyrektora banku z prośbą o wsparcie finansowe."
+  wordLimit: 160
+  genre: letter
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2022-02-write-iii-a
+  examRef: certyfikat-polski-B2-2022-02
+  taskNumber: 3
+  setId: III
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. W każdym zestawie są dwa zadania: a i b. Należy wybrać tylko jeden zestaw i wykonać obydwa zadania (a i b) z danego zestawu, zgodnie z poleceniami, np.: • zestaw I – zadania a i b z zestawu I lub • zestaw II – zadania a i b z zestawu II lub • zestaw III – zadania a i b z zestawu III"
+  promptText: "Jest Pani właścicielką / Pan właścicielem salonu kosmetycznego / warsztatu samochodowego i szuka Pani/Pan osoby do pracy. Proszę napisać ogłoszenie, które zamieści Pani/Pan na polskiej stronie internetowej praca.pl."
+  wordLimit: 40
+  genre: announcement
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2022-02-write-iii-b
+  examRef: certyfikat-polski-B2-2022-02
+  taskNumber: 3
+  setId: III
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. W każdym zestawie są dwa zadania: a i b. Należy wybrać tylko jeden zestaw i wykonać obydwa zadania (a i b) z danego zestawu, zgodnie z poleceniami, np.: • zestaw I – zadania a i b z zestawu I lub • zestaw II – zadania a i b z zestawu II lub • zestaw III – zadania a i b z zestawu III"
+  promptText: "Czy zgadza się Pani/Pan ze stwierdzeniem, że efekty uczenia się zależą nie tylko od motywacji do nauki, lecz także od planowania pracy i odpoczynku? Proszę napisać tekst argumentacyjny (rozprawkę), w którym wyrazi Pani/Pan swoją opinię."
+  wordLimit: 260
+  genre: argument
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2023-02-write-i-a
+  examRef: certyfikat-polski-B2-2023-02
+  taskNumber: 1
+  setId: I
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. W każdym zestawie są dwa zadania: a i b. Należy wybrać tylko jeden zestaw i wykonać obydwa zadania (a i b) z danego zestawu, zgodnie z poleceniami, np.: • zestaw I – zadania a i b z zestawu I lub • zestaw II – zadania a i b z zestawu II lub • zestaw III – zadania a i b z zestawu III"
+  promptText: "Spędza Pani/Pan wakacje w gospodarstwie agroturystycznym. Proszę napisać pozdrowienia do swoich polskich kolegów/koleżanek z pracy."
+  wordLimit: 30
+  genre: wishes
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2023-02-write-i-b
+  examRef: certyfikat-polski-B2-2023-02
+  taskNumber: 1
+  setId: I
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. W każdym zestawie są dwa zadania: a i b. Należy wybrać tylko jeden zestaw i wykonać obydwa zadania (a i b) z danego zestawu, zgodnie z poleceniami, np.: • zestaw I – zadania a i b z zestawu I lub • zestaw II – zadania a i b z zestawu II lub • zestaw III – zadania a i b z zestawu III"
+  promptText: "Proszę napisać opowiadanie zainspirowane poniższym zdjęciem."
+  promptImageUrl: exam-images/B2-2023-02-writing-I-b.png
+  promptImageAlt: "Czterech muzyków z gitarami, klawiszami i mikrofonami gra nad wodą."
+  wordLimit: 270
+  genre: story
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2023-02-write-ii-a
+  examRef: certyfikat-polski-B2-2023-02
+  taskNumber: 2
+  setId: II
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. W każdym zestawie są dwa zadania: a i b. Należy wybrać tylko jeden zestaw i wykonać obydwa zadania (a i b) z danego zestawu, zgodnie z poleceniami, np.: • zestaw I – zadania a i b z zestawu I lub • zestaw II – zadania a i b z zestawu II lub • zestaw III – zadania a i b z zestawu III"
+  promptText: "Stara się Pani/Pan o pracę jako przewodniczka/przewodnik po Polsce dla turystów ze swojego kraju. Proszę napisać list motywacyjny do polskiego biura podróży."
+  wordLimit: 100
+  genre: application
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2023-02-write-ii-b
+  examRef: certyfikat-polski-B2-2023-02
+  taskNumber: 2
+  setId: II
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. W każdym zestawie są dwa zadania: a i b. Należy wybrać tylko jeden zestaw i wykonać obydwa zadania (a i b) z danego zestawu, zgodnie z poleceniami, np.: • zestaw I – zadania a i b z zestawu I lub • zestaw II – zadania a i b z zestawu II lub • zestaw III – zadania a i b z zestawu III"
+  promptText: "Niedawno ukazało się polskie wydanie książki kucharskiej, promującej potrawy z Pani/Pana kraju. Proszę napisać recenzję tej publikacji, którą zamieści Pani/Pan na stronie internetowej „Ciekawostki spoza Polski”."
+  wordLimit: 200
+  genre: review
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2023-02-write-iii-a
+  examRef: certyfikat-polski-B2-2023-02
+  taskNumber: 3
+  setId: III
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. W każdym zestawie są dwa zadania: a i b. Należy wybrać tylko jeden zestaw i wykonać obydwa zadania (a i b) z danego zestawu, zgodnie z poleceniami, np.: • zestaw I – zadania a i b z zestawu I lub • zestaw II – zadania a i b z zestawu II lub • zestaw III – zadania a i b z zestawu III"
+  promptText: "Chce Pani/Pan poznać ciekawą osobę. Proszę napisać ogłoszenie, które zamieści Pani/Pan na polskiej stronie internetowej „My Dwoje”."
+  wordLimit: 50
+  genre: announcement
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2023-02-write-iii-b
+  examRef: certyfikat-polski-B2-2023-02
+  taskNumber: 3
+  setId: III
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. W każdym zestawie są dwa zadania: a i b. Należy wybrać tylko jeden zestaw i wykonać obydwa zadania (a i b) z danego zestawu, zgodnie z poleceniami, np.: • zestaw I – zadania a i b z zestawu I lub • zestaw II – zadania a i b z zestawu II lub • zestaw III – zadania a i b z zestawu III"
+  promptText: "„Czy posiadanie majątku daje wolność?”. Proszę napisać tekst argumentacyjny (rozprawkę), w którym wyrazi Pani/Pan swoją opinię."
+  wordLimit: 250
+  genre: argument
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2023-06-write-i-a
+  examRef: certyfikat-polski-B2-2023-06
+  taskNumber: 1
+  setId: I
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. W każdym zestawie są dwa zadania: a i b. Należy wybrać tylko jeden zestaw i wykonać obydwa zadania (a i b) z danego zestawu, zgodnie z poleceniami, np.: • zestaw I – zadania a i b z zestawu I lub • zestaw II – zadania a i b z zestawu II lub • zestaw III – zadania a i b z zestawu III"
+  promptText: "Obchodzi Pani/Pan urodziny i z tej okazji organizuje Pani/Pan imprezę w restauracji. Proszę napisać e-mail z zaproszeniem, które wyśle Pani/Pan do swojej polskiej koleżanki / swojego polskiego kolegi."
+  wordLimit: 40
+  genre: email
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2023-06-write-i-b
+  examRef: certyfikat-polski-B2-2023-06
+  taskNumber: 1
+  setId: I
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. W każdym zestawie są dwa zadania: a i b. Należy wybrać tylko jeden zestaw i wykonać obydwa zadania (a i b) z danego zestawu, zgodnie z poleceniami, np.: • zestaw I – zadania a i b z zestawu I lub • zestaw II – zadania a i b z zestawu II lub • zestaw III – zadania a i b z zestawu III"
+  promptText: "„Czy pieniądze są najważniejszym czynnikiem motywującym w pracy?”. Proszę napisać tekst argumentacyjny (rozprawkę), w którym wyrazi Pani/Pan swoją opinię."
+  wordLimit: 260
+  genre: argument
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2023-06-write-ii-a
+  examRef: certyfikat-polski-B2-2023-06
+  taskNumber: 2
+  setId: II
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. W każdym zestawie są dwa zadania: a i b. Należy wybrać tylko jeden zestaw i wykonać obydwa zadania (a i b) z danego zestawu, zgodnie z poleceniami, np.: • zestaw I – zadania a i b z zestawu I lub • zestaw II – zadania a i b z zestawu II lub • zestaw III – zadania a i b z zestawu III"
+  promptText: "„Dzięki takim ludziom świat jest piękny, a życie ma smak”. Proszę napisać charakterystykę osoby, którą Pani/Pan szanuje i podziwia."
+  wordLimit: 150
+  genre: characterization
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2023-06-write-ii-b
+  examRef: certyfikat-polski-B2-2023-06
+  taskNumber: 2
+  setId: II
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. W każdym zestawie są dwa zadania: a i b. Należy wybrać tylko jeden zestaw i wykonać obydwa zadania (a i b) z danego zestawu, zgodnie z poleceniami, np.: • zestaw I – zadania a i b z zestawu I lub • zestaw II – zadania a i b z zestawu II lub • zestaw III – zadania a i b z zestawu III"
+  promptText: "Współpracuje Pani/Pan z redakcją miesięcznika „Nasze Miasto”. Proszę napisać sprawozdanie z rodzinnego turnieju sportowego, zorganizowanego dla mieszkańców."
+  wordLimit: 150
+  genre: report
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2023-06-write-iii-a
+  examRef: certyfikat-polski-B2-2023-06
+  taskNumber: 3
+  setId: III
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. W każdym zestawie są dwa zadania: a i b. Należy wybrać tylko jeden zestaw i wykonać obydwa zadania (a i b) z danego zestawu, zgodnie z poleceniami, np.: • zestaw I – zadania a i b z zestawu I lub • zestaw II – zadania a i b z zestawu II lub • zestaw III – zadania a i b z zestawu III"
+  promptText: "Jest Pani/Pan na szkoleniu za granicą, a Pani/Pana szef obchodzi imieniny. Proszę napisać życzenia, które wyśle mu Pani/Pan drogą e-mailową."
+  wordLimit: 40
+  genre: wishes
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2023-06-write-iii-b
+  examRef: certyfikat-polski-B2-2023-06
+  taskNumber: 3
+  setId: III
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. W każdym zestawie są dwa zadania: a i b. Należy wybrać tylko jeden zestaw i wykonać obydwa zadania (a i b) z danego zestawu, zgodnie z poleceniami, np.: • zestaw I – zadania a i b z zestawu I lub • zestaw II – zadania a i b z zestawu II lub • zestaw III – zadania a i b z zestawu III"
+  promptText: "Proszę napisać esej (wypracowanie szkolne) pt. „Rola portali społecznościowych w XXI wieku”."
+  wordLimit: 260
+  genre: essay
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2024-02-write-i-a
+  examRef: certyfikat-polski-B2-2024-02
+  taskNumber: 1
+  setId: I
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. W każdym zestawie są dwa zadania: a i b. Należy wybrać tylko jeden zestaw i wykonać obydwa zadania (a i b) z danego zestawu, zgodnie z poleceniami, np.: • zestaw I – zadania a i b z zestawu I lub • zestaw II – zadania a i b z zestawu II lub • zestaw III – zadania a i b z zestawu III"
+  promptText: "Proszę napisać e-mail do swojej polskiej przyjaciółki / swojego polskiego przyjaciela i opisać w nim swój nowy samochód / swój nowy sprzęt kuchenny."
+  wordLimit: 120
+  genre: email
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2024-02-write-i-b
+  examRef: certyfikat-polski-B2-2024-02
+  taskNumber: 1
+  setId: I
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. W każdym zestawie są dwa zadania: a i b. Należy wybrać tylko jeden zestaw i wykonać obydwa zadania (a i b) z danego zestawu, zgodnie z poleceniami, np.: • zestaw I – zadania a i b z zestawu I lub • zestaw II – zadania a i b z zestawu II lub • zestaw III – zadania a i b z zestawu III"
+  promptText: "Współpracuje Pani/Pan z polską gazetą. Proszę napisać dla niej sprawozdanie z dwudniowej wystawy zoologicznej / targów zabawek i artykułów dla dzieci."
+  wordLimit: 180
+  genre: report
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2024-02-write-ii-a
+  examRef: certyfikat-polski-B2-2024-02
+  taskNumber: 2
+  setId: II
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. W każdym zestawie są dwa zadania: a i b. Należy wybrać tylko jeden zestaw i wykonać obydwa zadania (a i b) z danego zestawu, zgodnie z poleceniami, np.: • zestaw I – zadania a i b z zestawu I lub • zestaw II – zadania a i b z zestawu II lub • zestaw III – zadania a i b z zestawu III"
+  promptText: "Stara się Pani/Pan o pracę jako opiekun osób starszych w „Domu Seniora” w jednej z polskich miejscowości. Proszę napisać list motywacyjny."
+  wordLimit: 150
+  genre: application
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2024-02-write-ii-b
+  examRef: certyfikat-polski-B2-2024-02
+  taskNumber: 2
+  setId: II
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. W każdym zestawie są dwa zadania: a i b. Należy wybrać tylko jeden zestaw i wykonać obydwa zadania (a i b) z danego zestawu, zgodnie z poleceniami, np.: • zestaw I – zadania a i b z zestawu I lub • zestaw II – zadania a i b z zestawu II lub • zestaw III – zadania a i b z zestawu III"
+  promptText: "Zaprosiła Pani / Zaprosił Pan na jednodniową wycieczkę po znanym polskim mieście ważnych dla Pani/Pana gości. Nie była Pani zadowolona / Nie był Pan zadowolony ani z programu, ani z usług przewodnika. Proszę napisać skargę do dyrekcji biura podróży."
+  wordLimit: 150
+  genre: letter
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2024-02-write-iii-a
+  examRef: certyfikat-polski-B2-2024-02
+  taskNumber: 3
+  setId: III
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. W każdym zestawie są dwa zadania: a i b. Należy wybrać tylko jeden zestaw i wykonać obydwa zadania (a i b) z danego zestawu, zgodnie z poleceniami, np.: • zestaw I – zadania a i b z zestawu I lub • zestaw II – zadania a i b z zestawu II lub • zestaw III – zadania a i b z zestawu III"
+  promptText: "Proszę napisać zaproszenie dla swoich polskich koleżanek i kolegów z pracy na wystawę fotograficzną „Najciekawsze miejsca w moim kraju”, którą Pani/Pan organizuje."
+  wordLimit: 30
+  genre: invitation
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2024-02-write-iii-b
+  examRef: certyfikat-polski-B2-2024-02
+  taskNumber: 3
+  setId: III
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. W każdym zestawie są dwa zadania: a i b. Należy wybrać tylko jeden zestaw i wykonać obydwa zadania (a i b) z danego zestawu, zgodnie z poleceniami, np.: • zestaw I – zadania a i b z zestawu I lub • zestaw II – zadania a i b z zestawu II lub • zestaw III – zadania a i b z zestawu III"
+  promptText: "Praca zdalna otworzyła okno na świat i dała wiele możliwości. Niektórych jednak nie satysfakcjonuje – widzą w niej więcej wad niż zalet. Jakie jest Pani/Pana zdanie na ten temat? Proszę napisać tekst argumentacyjny (rozprawkę), w którym wyrazi Pani/Pan swoją opinię."
+  wordLimit: 270
+  genre: argument
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2024-06-write-i-a
+  examRef: certyfikat-polski-B2-2024-06
+  taskNumber: 1
+  setId: I
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. W każdym zestawie są dwa zadania: a i b. Należy wybrać tylko jeden zestaw i wykonać obydwa zadania (a i b) z danego zestawu, zgodnie z poleceniami, np.: • zestaw I – zadania a i b z zestawu I lub • zestaw II – zadania a i b z zestawu II lub • zestaw III – zadania a i b z zestawu III"
+  promptText: "Prowadzi Pani/Pan w Polsce hotel dla zwierząt. Proszę napisać reklamę, którą zamieści Pani/Pan na portalu „Usługi na Wysokim Poziomie”."
+  wordLimit: 60
+  genre: advertisement
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2024-06-write-i-b
+  examRef: certyfikat-polski-B2-2024-06
+  taskNumber: 1
+  setId: I
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. W każdym zestawie są dwa zadania: a i b. Należy wybrać tylko jeden zestaw i wykonać obydwa zadania (a i b) z danego zestawu, zgodnie z poleceniami, np.: • zestaw I – zadania a i b z zestawu I lub • zestaw II – zadania a i b z zestawu II lub • zestaw III – zadania a i b z zestawu III"
+  promptText: "Proszę napisać opowiadanie zainspirowane poniższym zdjęciem. Proszę nadać mu tytuł."
+  promptImageUrl: exam-images/B2-2024-06-writing-I-b.png
+  promptImageAlt: "Dwa samoloty na lotnisku; jeden stoi na trawie, drugi leci nad nim."
+  wordLimit: 240
+  genre: story
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2024-06-write-ii-a
+  examRef: certyfikat-polski-B2-2024-06
+  taskNumber: 2
+  setId: II
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. W każdym zestawie są dwa zadania: a i b. Należy wybrać tylko jeden zestaw i wykonać obydwa zadania (a i b) z danego zestawu, zgodnie z poleceniami, np.: • zestaw I – zadania a i b z zestawu I lub • zestaw II – zadania a i b z zestawu II lub • zestaw III – zadania a i b z zestawu III"
+  promptText: "Znalazła Pani / Znalazł Pan w internecie nowy portal: „Widzowie (Nie)Polecają”. Proszę napisać recenzję serialu kryminalnego/obyczajowego, który ostatnio Pani oglądała / Pan oglądał."
+  wordLimit: 150
+  genre: review
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2024-06-write-ii-b
+  examRef: certyfikat-polski-B2-2024-06
+  taskNumber: 2
+  setId: II
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. W każdym zestawie są dwa zadania: a i b. Należy wybrać tylko jeden zestaw i wykonać obydwa zadania (a i b) z danego zestawu, zgodnie z poleceniami, np.: • zestaw I – zadania a i b z zestawu I lub • zestaw II – zadania a i b z zestawu II lub • zestaw III – zadania a i b z zestawu III"
+  promptText: "Uczestniczy Pani/Pan w kursie na prawo jazdy. Proszę napisać e-mail do swojej polskiej koleżanki / swojego polskiego kolegi, w którym zrelacjonuje Pani/Pan, jak sobie radzi z prowadzeniem samochodu."
+  wordLimit: 150
+  genre: email
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2024-06-write-iii-a
+  examRef: certyfikat-polski-B2-2024-06
+  taskNumber: 3
+  setId: III
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. W każdym zestawie są dwa zadania: a i b. Należy wybrać tylko jeden zestaw i wykonać obydwa zadania (a i b) z danego zestawu, zgodnie z poleceniami, np.: • zestaw I – zadania a i b z zestawu I lub • zestaw II – zadania a i b z zestawu II lub • zestaw III – zadania a i b z zestawu III"
+  promptText: "Sąsiadka, obok której przez kilka lat wynajmowała Pani / wynajmował Pan mieszkanie, za kilka dni skończy 80 lat. Proszę napisać życzenia z tej okazji."
+  wordLimit: 30
+  genre: wishes
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-B2-2024-06-write-iii-b
+  examRef: certyfikat-polski-B2-2024-06
+  taskNumber: 3
+  setId: III
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. W każdym zestawie są dwa zadania: a i b. Należy wybrać tylko jeden zestaw i wykonać obydwa zadania (a i b) z danego zestawu, zgodnie z poleceniami, np.: • zestaw I – zadania a i b z zestawu I lub • zestaw II – zadania a i b z zestawu II lub • zestaw III – zadania a i b z zestawu III"
+  promptText: "„Jak być ekologicznym?”. To pytanie w ostatnich latach stawiane jest coraz częściej w polskich domach. „To trudne…, wymaga nakładów…, nie mam na to czasu…”. Wymówki są rożne i wynikają głównie z niewiedzy, bo żeby sięgnąć po ekologiczne rzeczy i rozwiązania, wcale nie trzeba dużo wydawać, ani dokładać sobie obowiązków. Wystarczy wypracować pewne nawyki. Jakie jest Pani/Pana zdanie na ten temat? Proszę napisać tekst argumentacyjny (rozprawkę), w którym wyrazi Pani/Pan swoją opinię."
+  wordLimit: 270
+  genre: argument
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-C1-2022-03-write-i-a
+  examRef: certyfikat-polski-C1-2022-03
+  taskNumber: 1
+  setId: I
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III"
+  promptText: "Jest Pani/Pan prezesem Fundacji „Uśmiech” działającej na rzecz chorych dzieci. Chce Pani/Pan pomóc w wyposażeniu sali zabaw dla małych pacjentów jednego ze szpitali. Proszę napisać w tej sprawie list do dyrekcji placówki."
+  wordLimit: 180
+  genre: letter
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-C1-2022-03-write-i-b
+  examRef: certyfikat-polski-C1-2022-03
+  taskNumber: 1
+  setId: I
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III"
+  promptText: "Firma wydawnicza „Dookoła Świata” wydała książkę Warto zobaczyć w Polsce. Proszę napisać recenzję tej publikacji przeznaczoną na polskojęzyczną stronę internetową wydawnictwa."
+  wordLimit: 220
+  genre: review
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-C1-2022-03-write-ii-a
+  examRef: certyfikat-polski-C1-2022-03
+  taskNumber: 2
+  setId: II
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III"
+  promptText: "Wzięła Pani / Wziął Pan udział w kongresie „Na ratunek ginącym zwierzętom”. Jedno z polskich czasopism poświęconych tematyce ekologicznej poprosiło o sprawozdanie z tego spotkania – proszę je napisać."
+  wordLimit: 200
+  genre: report
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-C1-2022-03-write-ii-b
+  examRef: certyfikat-polski-C1-2022-03
+  taskNumber: 2
+  setId: II
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III"
+  promptText: "Proszę napisać przemówienie uzasadniające wybór laureata, które wygłosi Pani/Pan w imieniu jury plebiscytu podczas ceremonii przyznania tytułu Człowieka Roku 2021."
+  wordLimit: 200
+  genre: speech
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-C1-2022-03-write-iii-a
+  examRef: certyfikat-polski-C1-2022-03
+  taskNumber: 3
+  setId: III
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III"
+  promptText: "„Śmiech to zdolność człowieka do obrony przed światem, przed sobą. Pozbawić go tej zdolności, to uczynić bezbronnym” (Wiesław Myśliwski). Proszę napisać esej zainspirowany powyższym cytatem."
+  wordLimit: 400
+  genre: essay
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-C1-2022-11-write-i-a
+  examRef: certyfikat-polski-C1-2022-11
+  taskNumber: 1
+  setId: I
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III"
+  promptText: "Jest Pani/Pan dyrektorem firmy motoryzacyjnej (lub firmy produkującej zdrową żywność), która w tym roku obchodzi swoje dziesięciolecie. Proszę napisać przemówienie, które wygłosi Pani/Pan na uroczystości z okazji jubileuszu."
+  wordLimit: 100
+  genre: speech
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-C1-2022-11-write-i-b
+  examRef: certyfikat-polski-C1-2022-11
+  taskNumber: 1
+  setId: I
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III"
+  promptText: "Optymiści mają łatwiejsze życie? Proszę napisać tekst argumentacyjny (rozprawkę), w którym wyrazi Pani/Pan swoją opinię."
+  wordLimit: 300
+  genre: argument
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-C1-2022-11-write-ii-a
+  examRef: certyfikat-polski-C1-2022-11
+  taskNumber: 2
+  setId: II
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III"
+  promptText: "Pani/Pana pasją jest przerabianie niepotrzebnych, starych rzeczy na nowe, funkcjonalne przedmioty. Proszę napisać reklamę swoich usług, którą zamieści Pani/Pan na stronie internetowej „Ekologia i Sztuka Użytkowa”."
+  wordLimit: 80
+  genre: advertisement
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-C1-2022-11-write-ii-b
+  examRef: certyfikat-polski-C1-2022-11
+  taskNumber: 2
+  setId: II
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III"
+  promptText: "Jest Pani/Pan miłośnikiem kryminałów. Portal „Sztuka Dedukcji” ogłosił konkurs literacki na najlepsze opowiadanie detektywistyczne. Chce Pani/Pan wziąć udział w tym konkursie. Proszę napisać opowiadanie pt. „Zagadka kryminalna”."
+  wordLimit: 320
+  genre: story
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-C1-2022-11-write-iii-a
+  examRef: certyfikat-polski-C1-2022-11
+  taskNumber: 3
+  setId: III
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III"
+  promptText: "„Ludzie mówią – »czas to pieniądz«. Ja mówię inaczej – »czas to miłość«. Pieniądz jest znikomy, a miłość trwa” (Stefan Wyszyński). Proszę napisać esej zainspirowany powyższym cytatem."
+  wordLimit: 400
+  genre: essay
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-C1-2023-04-write-i-a
+  examRef: certyfikat-polski-C1-2023-04
+  taskNumber: 1
+  setId: I
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III KRYTERIA OCENY • Wykonanie zadania (treść, forma, objętość) 0 – 10 p. • Środki językowe 0 – 18 p. • Poprawność językowa 0 – 12 p. RAZEM: maksymalnie 40 p. PISANIE"
+  promptText: "Otwiera Pani/Pan w Polsce klub fitness/restaurację. Proszę napisać reklamę tego miejsca, którą zamieści Pani/Pan w internecie."
+  wordLimit: 80
+  genre: advertisement
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-C1-2023-04-write-i-b
+  examRef: certyfikat-polski-C1-2023-04
+  taskNumber: 1
+  setId: I
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III KRYTERIA OCENY • Wykonanie zadania (treść, forma, objętość) 0 – 10 p. • Środki językowe 0 – 18 p. • Poprawność językowa 0 – 12 p. RAZEM: maksymalnie 40 p. PISANIE"
+  promptText: "„Ziarnko do ziarnka zbierając, do niczego nie dojdziesz, chyba żebyś żył kilkaset lat” (Stefan Kisielewski). Czy zgadza się Pani/Pan z tym stwierdzeniem? Proszę napisać tekst argumentacyjny (rozprawkę), w którym wyrazi Pani/Pan swoją opinię."
+  wordLimit: 320
+  genre: argument
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-C1-2023-04-write-ii-a
+  examRef: certyfikat-polski-C1-2023-04
+  taskNumber: 2
+  setId: II
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III KRYTERIA OCENY • Wykonanie zadania (treść, forma, objętość) 0 – 10 p. • Środki językowe 0 – 18 p. • Poprawność językowa 0 – 12 p. RAZEM: maksymalnie 40 p. PISANIE"
+  promptText: "Jest Pani/Pan w sanatorium w jednej z polskich miejscowości uzdrowiskowych. Nie jest Pani zadowolona / Pan zadowolony z pobytu (m.in. z mieszkania, wyżywienia, opieki medycznej, zabiegów). Proszę napisać w tej sprawie e-mail (skargę) do dyrektora placówki."
+  wordLimit: 200
+  genre: email
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-C1-2023-04-write-ii-b
+  examRef: certyfikat-polski-C1-2023-04
+  taskNumber: 2
+  setId: II
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III KRYTERIA OCENY • Wykonanie zadania (treść, forma, objętość) 0 – 10 p. • Środki językowe 0 – 18 p. • Poprawność językowa 0 – 12 p. RAZEM: maksymalnie 40 p. PISANIE"
+  promptText: "W celu uzyskania uprawnień opiekuna zwierząt uczestniczyła Pani / uczestniczył Pan w szkoleniu organizowanym przez jedną z polskich fundacji ratującej życie koniom i osłom. Proszę napisać sprawozdanie z tego kursu na prośbę redakcji czasopisma „Człowiek i Natura”, z którą Pani/Pan współpracuje."
+  wordLimit: 200
+  genre: report
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-C1-2023-04-write-iii-a
+  examRef: certyfikat-polski-C1-2023-04
+  taskNumber: 3
+  setId: III
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III KRYTERIA OCENY • Wykonanie zadania (treść, forma, objętość) 0 – 10 p. • Środki językowe 0 – 18 p. • Poprawność językowa 0 – 12 p. RAZEM: maksymalnie 40 p. PISANIE"
+  promptText: "„Prawdziwy sportowiec walczy do końca. Nawet jeśli wie, że dobiegnie na metę ostatni, nie przestaje biec” (Małgorzata Wach). Proszę napisać esej zainspirowany tym cytatem."
+  wordLimit: 400
+  genre: essay
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-C1-2023-11-write-i-a
+  examRef: certyfikat-polski-C1-2023-11
+  taskNumber: 1
+  setId: I
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III KRYTERIA OCENY • Wykonanie zadania (treść, forma, objętość) 0 – 10 p. • Środki językowe 0 – 18 p. • Poprawność językowa 0 – 12 p. RAZEM: maksymalnie 40 p. PISANIE"
+  promptText: "Zmienia Pani/Pan pracę ze względu na przeprowadzkę do innego miasta. Proszę napisać pożegnalny e-mail do swoich dotychczasowych współpracowników z Polski."
+  wordLimit: 80
+  genre: email
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-C1-2023-11-write-i-b
+  examRef: certyfikat-polski-C1-2023-11
+  taskNumber: 1
+  setId: I
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III KRYTERIA OCENY • Wykonanie zadania (treść, forma, objętość) 0 – 10 p. • Środki językowe 0 – 18 p. • Poprawność językowa 0 – 12 p. RAZEM: maksymalnie 40 p. PISANIE"
+  promptText: "Proszę napisać opowiadanie zaczynające się od słów: „Nigdy nie sądziłam / nie sądziłem, że zwykła pomyłka telefoniczna całkowicie odmieni moje życie…”."
+  wordLimit: 320
+  genre: story
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-C1-2023-11-write-ii-a
+  examRef: certyfikat-polski-C1-2023-11
+  taskNumber: 2
+  setId: II
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III KRYTERIA OCENY • Wykonanie zadania (treść, forma, objętość) 0 – 10 p. • Środki językowe 0 – 18 p. • Poprawność językowa 0 – 12 p. RAZEM: maksymalnie 40 p. PISANIE"
+  promptText: "„Ta książka wywołuje wiele emocji”. Proszę napisać recenzję o takim tytule, którą zamieści Pani/Pan na stronie internetowej wydawnictwa."
+  wordLimit: 200
+  genre: review
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-C1-2023-11-write-ii-b
+  examRef: certyfikat-polski-C1-2023-11
+  taskNumber: 2
+  setId: II
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III KRYTERIA OCENY • Wykonanie zadania (treść, forma, objętość) 0 – 10 p. • Środki językowe 0 – 18 p. • Poprawność językowa 0 – 12 p. RAZEM: maksymalnie 40 p. PISANIE"
+  promptText: "Prowadzi Pani/Pan w swojej miejscowości klub dla seniorów i potrzebuje dodatkowych funduszy na poszerzenie jego oferty. Proszę napisać w tej sprawie list do właściciela lokalnej firmy, znanego z działalności charytatywnej."
+  wordLimit: 200
+  genre: letter
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-C1-2023-11-write-iii-a
+  examRef: certyfikat-polski-C1-2023-11
+  taskNumber: 3
+  setId: III
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III KRYTERIA OCENY • Wykonanie zadania (treść, forma, objętość) 0 – 10 p. • Środki językowe 0 – 18 p. • Poprawność językowa 0 – 12 p. RAZEM: maksymalnie 40 p. PISANIE"
+  promptText: "„Każdy z nas jest – lepszym lub gorszym – aktorem, każdy czasem udaje, zmyśla, mija się z prawdą” (Wojciech Pokora). Czy zgadza się Pani/Pan z tą opinią? Proszę napisać tekst argumentacyjny (rozprawkę)."
+  wordLimit: 400
+  genre: argument
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-C1-2024-04-write-i-a
+  examRef: certyfikat-polski-C1-2024-04
+  taskNumber: 1
+  setId: I
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III"
+  promptText: "Jest Pani organizatorką / Jest Pan organizatorem konferencji studenckiej „Wiedza kluczem do sukcesu”. Proszę napisać tekst przemówienia, które wygłosi Pani/Pan podczas rozpoczęcia obrad."
+  wordLimit: 100
+  genre: speech
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-C1-2024-04-write-i-b
+  examRef: certyfikat-polski-C1-2024-04
+  taskNumber: 1
+  setId: I
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III"
+  promptText: "Czy zgadza się Pani/Pan ze stwierdzeniem, że kult młodości to w dzisiejszych czasach przeżytek? Proszę napisać tekst argumentacyjny, w którym wyrazi Pani/Pan swoją opinię."
+  wordLimit: 300
+  genre: argument
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-C1-2024-04-write-ii-a
+  examRef: certyfikat-polski-C1-2024-04
+  taskNumber: 2
+  setId: II
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III"
+  promptText: "Proszę napisać charakterystykę wybranej grupy (np. społecznej, zawodowej), z którą się Pani/Pan utożsamia."
+  wordLimit: 180
+  genre: characterization
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-C1-2024-04-write-ii-b
+  examRef: certyfikat-polski-C1-2024-04
+  taskNumber: 2
+  setId: II
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III"
+  promptText: "Uczestniczyła Pani / Uczestniczył Pan w debacie Miasto przyjazne mieszkańcom i turystom zorganizowanej przez lokalną stację telewizyjną. Na prośbę polskiej strony internetowej „Co nowego w naszym mieście”, z którą Pani/Pan współpracuje, proszę napisać sprawozdanie z tego wydarzenia."
+  wordLimit: 220
+  genre: report
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-C1-2024-04-write-iii-a
+  examRef: certyfikat-polski-C1-2024-04
+  taskNumber: 3
+  setId: III
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III"
+  promptText: "Proszę napisać esej zainspirowany cytatem: „Kultura to (…) budowanie wartości, dla których warto żyć” (Zbigniew Herbert)."
+  wordLimit: 400
+  genre: essay
+}

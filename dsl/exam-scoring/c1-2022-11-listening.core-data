@@ -1,0 +1,50 @@
+DSL 1
+NOVEMBER_LISTENING_CASE {
+  id: c1-2022-11-v3-printed
+  answer: "Inków|skarbu"
+  expectedStatus: confirmed_full
+  confirmedQuarter: 4
+  pendingQuarter: 0
+}
+NOVEMBER_LISTENING_CASE {
+  id: c1-2022-11-v3-reversed
+  answer: "skarbu|Inków"
+  expectedStatus: confirmed_full
+  confirmedQuarter: 4
+  pendingQuarter: 0
+}
+NOVEMBER_LISTENING_CASE {
+  id: c1-2022-11-v3-castle
+  answer: "Inków|zamku niedzickiego"
+  expectedStatus: confirmed_full
+  confirmedQuarter: 4
+  pendingQuarter: 0
+}
+NOVEMBER_LISTENING_CASE {
+  id: c1-2022-11-v3-niedzica
+  answer: "zamku w Niedzicy|Inków"
+  expectedStatus: confirmed_full
+  confirmedQuarter: 4
+  pendingQuarter: 0
+}
+NOVEMBER_LISTENING_CASE {
+  id: c1-2022-11-v3-duplicate-fact
+  answer: "skarbu|zamku w Niedzicy"
+  expectedStatus: confirmed_partial
+  confirmedQuarter: 2
+  pendingQuarter: 0
+}
+NOVEMBER_LISTENING_CASE {
+  id: c1-2022-11-v3-unknown
+  answer: "Inków|nieznane miejsce"
+  expectedStatus: pending_manual
+  confirmedQuarter: 2
+  pendingQuarter: 2
+}
+NOVEMBER_LISTENING_CASE {
+  id: c1-2022-11-v3-blank
+  answer: ""
+  expectedStatus: wrong
+  confirmedQuarter: 0
+  pendingQuarter: 0
+}

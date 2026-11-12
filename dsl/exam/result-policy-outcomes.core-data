@@ -1,0 +1,17 @@
+DSL 1
+RESULT_POLICY_OUTCOME {
+  disposition: hidden
+  isFinal: false
+  showFinalPercent: false
+}
+RESULT_POLICY_OUTCOME {
+  disposition: provisional
+  isFinal: false
+  showFinalPercent: false
+}
+RESULT_POLICY_OUTCOME {disposition: final isFinal: true showFinalPercent: true}
+RESULT_POLICY_OUTCOME {
+  disposition: final_no_percent
+  isFinal: true
+  showFinalPercent: false
+}

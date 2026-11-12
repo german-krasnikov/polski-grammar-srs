@@ -1,0 +1,55 @@
+DSL 1
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2023-06-g6-q4-v1
+  itemRef: certyfikat-polski-B2-2023-06-g6-q4
+  answer: "będzie zajmować"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2023-06-g7-q3-v1
+  itemRef: certyfikat-polski-B2-2023-06-g7-q3
+  answer: "najbardziej znanych"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2023-06-g8-q1-v1
+  itemRef: certyfikat-polski-B2-2023-06-g8-q1
+  answer: "Wszyscy czekamy na poprawienie się sytuacji ekonomicznej w kraju."
+  earnedQuarter: 4
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2023-06-g8-q2-v1
+  itemRef: certyfikat-polski-B2-2023-06-g8-q2
+  answer: "Olek znowu zapomniał o zakupie chleba razowego."
+  earnedQuarter: 4
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2023-06-g8-q2-v2
+  itemRef: certyfikat-polski-B2-2023-06-g8-q2
+  answer: "Olek znowu zapomniał o kupnie chleba razowego."
+  earnedQuarter: 4
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2023-06-g8-q5-v1
+  itemRef: certyfikat-polski-B2-2023-06-g8-q5
+  answer: "Rodzice ucieszyli się z sukcesu osiągniętego przez ich córkę."
+  earnedQuarter: 4
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2023-06-g8-q5-v2
+  itemRef: certyfikat-polski-B2-2023-06-g8-q5
+  answer: "Rodzice ucieszyli się z sukcesu ich córki."
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2023-06-g8-q5-v3
+  itemRef: certyfikat-polski-B2-2023-06-g8-q5
+  answer: "Rodzice ucieszyli się z sukcesu swojej córki."
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2023-06-g8-q5-v4
+  itemRef: certyfikat-polski-B2-2023-06-g8-q5
+  answer: "Rodzice ucieszyli się z osiągnięć córki."
+  earnedQuarter: 2
+}

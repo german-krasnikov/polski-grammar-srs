@@ -1,0 +1,22 @@
+PROVENANCE "Authored timed reducer acceptance: first Start establishes time; stale module events do not advance, even after deadline; matching deadline equality freezes before answer/finish; one observed event freezes one part. Backward time is a predeadline fact, and overflow is validated by native arithmetic."
+
+EXAMPLES disposition
+  id | event | completed | started | moduleMatchesCurrent | deadlineReached -> expected
+  first-start | start | false | false | true | false -> set_deadline
+  repeated-start | start | false | true | true | true -> ignore
+  completed-start | start | true | false | true | false -> ignore
+  completed-action | part_action | true | true | true | true -> ignore
+  prestart-action | part_action | false | false | true | false -> ignore
+  prestart-tick | tick | false | false | true | true -> ignore
+  stale-action-before-deadline | part_action | false | true | false | false -> ignore
+  stale-action-at-deadline | part_action | false | true | false | true -> ignore
+  stale-finish-at-deadline | finish_part | false | true | false | true -> ignore
+  matching-action-before-deadline | part_action | false | true | true | false -> dispatch_part_action
+  matching-action-at-deadline | part_action | false | true | true | true -> freeze
+  matching-finish-before-deadline | finish_part | false | true | true | false -> freeze
+  matching-finish-at-deadline | finish_part | false | true | true | true -> freeze
+  tick-before-deadline | tick | false | true | true | false -> ignore
+  tick-at-deadline | tick | false | true | true | true -> freeze
+  tick-after-backward-clock | tick | false | true | true | false -> ignore
+  completed-tick | tick | true | true | true | true -> ignore
+END

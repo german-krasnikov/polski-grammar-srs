@@ -1,0 +1,31 @@
+DSL 1
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2022-02-g2-q4-v1
+  itemRef: certyfikat-polski-B2-2022-02-g2-q4
+  answer: miastach
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2022-02-g5-q6-v1
+  itemRef: certyfikat-polski-B2-2022-02-g5-q6
+  answer: "będą sprawdzali"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2022-02-g5-q8-v1
+  itemRef: certyfikat-polski-B2-2022-02-g5-q8
+  answer: znajdziemy
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2022-02-g7-q4-v1
+  itemRef: certyfikat-polski-B2-2022-02-g7-q4
+  answer: "najczęstsze"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2022-02-g7-q8-v1
+  itemRef: certyfikat-polski-B2-2022-02-g7-q8
+  answer: tolerancyjniejsi
+  earnedQuarter: 2
+}

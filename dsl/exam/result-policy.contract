@@ -1,0 +1,9 @@
+CONTRACT exam.resultPolicy
+COVERAGE declared-scope
+MODULE ../../kotlin/shared/src/commonMain/kotlin/polski/exam/ExamPartScore.kt
+FACT result.resultReady bool member=resultReady
+FACT result.scope enum=part,sitting member=scope
+FACT result.sittingCompleted bool member=sittingCompleted
+FACT result.manualPendingQuarter number min=0 max=2147483647 integer member=manualPendingQuarter
+FACT result.possibleQuarter number min=0 max=2147483647 integer member=possibleQuarter
+INPUT disposition result.resultReady result.scope result.sittingCompleted result.manualPendingQuarter result.possibleQuarter

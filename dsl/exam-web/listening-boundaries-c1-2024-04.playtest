@@ -1,0 +1,12 @@
+TEST "C1 2024-04 all five source-audited recording windows" PROFILE playmode
+  open exam="C1 Certyfikat 2024-04" module="listening"
+  auditSegment start=110 end=468
+  advanceTask count=1
+  auditSegment start=468 end=978
+  advanceTask count=1
+  auditSegment start=978 end=1436
+  advanceTask count=1
+  auditSegment start=1436 end=1952
+  advanceTask count=1
+  auditSegment start=1952 end=2322
+END

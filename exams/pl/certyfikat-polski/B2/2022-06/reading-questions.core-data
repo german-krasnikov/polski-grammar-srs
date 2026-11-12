@@ -1,181 +1,406 @@
 DSL 1
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2022-06-rq-1"
-  passageRef: "certyfikat-polski-B2-2022-06-read-6"
+  questionId: certyfikat-polski-B2-2022-06-r1-q1
+  passageRef: certyfikat-polski-B2-2022-06-read-1
   questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionText: "Z tekstu dowiadujemy się, że"
+  options: "a) wystawa poświęcona jest wyłącznie wizerunkom udomowionych kotów.|b) do tej pory nie było w Europie wystawy poświęconej kotom w sztuce japońskiej.|c) wystawa prezentuje wyobrażenia różnych zwierząt żyjących w XXI wieku."
+  correctAnswer: "b) do tej pory nie było w Europie wystawy poświęconej kotom w sztuce japońskiej."
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2022-06-rq-2"
-  passageRef: "certyfikat-polski-B2-2022-06-read-6"
+  questionId: certyfikat-polski-B2-2022-06-r1-q2
+  passageRef: certyfikat-polski-B2-2022-06-read-1
   questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionText: "Z tekstu dowiadujemy się, że"
+  options: "a) poszukiwania kobiety zaczęły się przed północą.|b) ratownicy GOPR zostali wezwani przez rodzinę zaginionej.|c) w odnalezieniu kobiety pomógł użyty przez nią dron."
+  correctAnswer: "a) poszukiwania kobiety zaczęły się przed północą."
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2022-06-rq-3"
-  passageRef: "certyfikat-polski-B2-2022-06-read-6"
+  questionId: certyfikat-polski-B2-2022-06-r1-q3
+  passageRef: certyfikat-polski-B2-2022-06-read-1
   questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionText: "Z tekstu dowiadujemy się, że"
+  options: "a) Poczta Polska zmieniła wysokość opłat za przesyłki polecone.|b) Poczta Polska wycofała ze swojej oferty jedną z usług.|c) decyzja Poczty Polskiej może narazić na straty część jej klientów."
+  correctAnswer: "c) decyzja Poczty Polskiej może narazić na straty część jej klientów."
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2022-06-rq-4"
-  passageRef: "certyfikat-polski-B2-2022-06-read-6"
+  questionId: certyfikat-polski-B2-2022-06-r1-q4
+  passageRef: certyfikat-polski-B2-2022-06-read-1
   questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionText: "Z tekstu dowiadujemy się, że"
+  options: "a) wartość zamówienia nie będzie jedynym kryterium branym pod uwagę przez miasto.|b) większość pojazdów będzie przystosowana dla osób z niepełnosprawnością.|c) producenci powinni do końca sierpnia przekazać miastu gotowe autobusy."
+  correctAnswer: "a) wartość zamówienia nie będzie jedynym kryterium branym pod uwagę przez miasto."
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2022-06-rq-5"
-  passageRef: "certyfikat-polski-B2-2022-06-read-6"
+  questionId: certyfikat-polski-B2-2022-06-r1-q5
+  passageRef: certyfikat-polski-B2-2022-06-read-1
   questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionText: "Z tekstu dowiadujemy się, że"
+  options: "a) na świecie pozostało tylko pięć osobników kuskusa niedźwiedziego.|b) wrocławski ogród zoologiczny doczekał się młodych kuskusów już po raz piąty.|c) wygląd kuskusa nie wskazuje na jego przynależność do rodziny, z której pochodzi."
+  correctAnswer: "c) wygląd kuskusa nie wskazuje na jego przynależność do rodziny, z której pochodzi."
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2022-06-rq-6"
-  passageRef: "certyfikat-polski-B2-2022-06-read-7"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2022-06-r2-q1
+  passageRef: certyfikat-polski-B2-2022-06-read-2
+  questionType: gap_fill_fragment
+  questionText: "Luka 1 w tekście „W świecie zapachów”"
+  options: "A. po zapachu rozpoznają|B. użył kiedyś tego zwrotu|C. do zapachowych poszukiwań|D. są wrażliwe nawet|E. jest z pewnością niestandardowy|F. czasami specjalizują się nawet|G. rozbudza wszystkie jego możliwości|H. pracują nieprzerwanie i intensywnie|I. polega na wąchaniu|J. do rozbudzania węchowej ciekawości|K. jest na tyle silnie rozwinięty"
+  correctAnswer: "H. pracują nieprzerwanie i intensywnie"
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2022-06-rq-7"
-  passageRef: "certyfikat-polski-B2-2022-06-read-7"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2022-06-r2-q2
+  passageRef: certyfikat-polski-B2-2022-06-read-2
+  questionType: gap_fill_fragment
+  questionText: "Luka 2 w tekście „W świecie zapachów”"
+  options: "A. po zapachu rozpoznają|B. użył kiedyś tego zwrotu|C. do zapachowych poszukiwań|D. są wrażliwe nawet|E. jest z pewnością niestandardowy|F. czasami specjalizują się nawet|G. rozbudza wszystkie jego możliwości|H. pracują nieprzerwanie i intensywnie|I. polega na wąchaniu|J. do rozbudzania węchowej ciekawości|K. jest na tyle silnie rozwinięty"
+  correctAnswer: "K. jest na tyle silnie rozwinięty"
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2022-06-rq-8"
-  passageRef: "certyfikat-polski-B2-2022-06-read-7"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2022-06-r2-q3
+  passageRef: certyfikat-polski-B2-2022-06-read-2
+  questionType: gap_fill_fragment
+  questionText: "Luka 3 w tekście „W świecie zapachów”"
+  options: "A. po zapachu rozpoznają|B. użył kiedyś tego zwrotu|C. do zapachowych poszukiwań|D. są wrażliwe nawet|E. jest z pewnością niestandardowy|F. czasami specjalizują się nawet|G. rozbudza wszystkie jego możliwości|H. pracują nieprzerwanie i intensywnie|I. polega na wąchaniu|J. do rozbudzania węchowej ciekawości|K. jest na tyle silnie rozwinięty"
+  correctAnswer: "I. polega na wąchaniu"
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2022-06-rq-9"
-  passageRef: "certyfikat-polski-B2-2022-06-read-7"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2022-06-r2-q4
+  passageRef: certyfikat-polski-B2-2022-06-read-2
+  questionType: gap_fill_fragment
+  questionText: "Luka 4 w tekście „W świecie zapachów”"
+  options: "A. po zapachu rozpoznają|B. użył kiedyś tego zwrotu|C. do zapachowych poszukiwań|D. są wrażliwe nawet|E. jest z pewnością niestandardowy|F. czasami specjalizują się nawet|G. rozbudza wszystkie jego możliwości|H. pracują nieprzerwanie i intensywnie|I. polega na wąchaniu|J. do rozbudzania węchowej ciekawości|K. jest na tyle silnie rozwinięty"
+  correctAnswer: "D. są wrażliwe nawet"
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2022-06-rq-10"
-  passageRef: "certyfikat-polski-B2-2022-06-read-7"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2022-06-r2-q5
+  passageRef: certyfikat-polski-B2-2022-06-read-2
+  questionType: gap_fill_fragment
+  questionText: "Luka 5 w tekście „W świecie zapachów”"
+  options: "A. po zapachu rozpoznają|B. użył kiedyś tego zwrotu|C. do zapachowych poszukiwań|D. są wrażliwe nawet|E. jest z pewnością niestandardowy|F. czasami specjalizują się nawet|G. rozbudza wszystkie jego możliwości|H. pracują nieprzerwanie i intensywnie|I. polega na wąchaniu|J. do rozbudzania węchowej ciekawości|K. jest na tyle silnie rozwinięty"
+  correctAnswer: "F. czasami specjalizują się nawet"
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2022-06-rq-11"
-  passageRef: "certyfikat-polski-B2-2022-06-read-8"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2022-06-r2-q6
+  passageRef: certyfikat-polski-B2-2022-06-read-2
+  questionType: gap_fill_fragment
+  questionText: "Luka 6 w tekście „W świecie zapachów”"
+  options: "A. po zapachu rozpoznają|B. użył kiedyś tego zwrotu|C. do zapachowych poszukiwań|D. są wrażliwe nawet|E. jest z pewnością niestandardowy|F. czasami specjalizują się nawet|G. rozbudza wszystkie jego możliwości|H. pracują nieprzerwanie i intensywnie|I. polega na wąchaniu|J. do rozbudzania węchowej ciekawości|K. jest na tyle silnie rozwinięty"
+  correctAnswer: "G. rozbudza wszystkie jego możliwości"
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2022-06-rq-12"
-  passageRef: "certyfikat-polski-B2-2022-06-read-8"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2022-06-r2-q7
+  passageRef: certyfikat-polski-B2-2022-06-read-2
+  questionType: gap_fill_fragment
+  questionText: "Luka 7 w tekście „W świecie zapachów”"
+  options: "A. po zapachu rozpoznają|B. użył kiedyś tego zwrotu|C. do zapachowych poszukiwań|D. są wrażliwe nawet|E. jest z pewnością niestandardowy|F. czasami specjalizują się nawet|G. rozbudza wszystkie jego możliwości|H. pracują nieprzerwanie i intensywnie|I. polega na wąchaniu|J. do rozbudzania węchowej ciekawości|K. jest na tyle silnie rozwinięty"
+  correctAnswer: "A. po zapachu rozpoznają"
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2022-06-rq-13"
-  passageRef: "certyfikat-polski-B2-2022-06-read-8"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2022-06-r2-q8
+  passageRef: certyfikat-polski-B2-2022-06-read-2
+  questionType: gap_fill_fragment
+  questionText: "Luka 8 w tekście „W świecie zapachów”"
+  options: "A. po zapachu rozpoznają|B. użył kiedyś tego zwrotu|C. do zapachowych poszukiwań|D. są wrażliwe nawet|E. jest z pewnością niestandardowy|F. czasami specjalizują się nawet|G. rozbudza wszystkie jego możliwości|H. pracują nieprzerwanie i intensywnie|I. polega na wąchaniu|J. do rozbudzania węchowej ciekawości|K. jest na tyle silnie rozwinięty"
+  correctAnswer: "E. jest z pewnością niestandardowy"
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2022-06-rq-14"
-  passageRef: "certyfikat-polski-B2-2022-06-read-8"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2022-06-r2-q9
+  passageRef: certyfikat-polski-B2-2022-06-read-2
+  questionType: gap_fill_fragment
+  questionText: "Luka 9 w tekście „W świecie zapachów”"
+  options: "A. po zapachu rozpoznają|B. użył kiedyś tego zwrotu|C. do zapachowych poszukiwań|D. są wrażliwe nawet|E. jest z pewnością niestandardowy|F. czasami specjalizują się nawet|G. rozbudza wszystkie jego możliwości|H. pracują nieprzerwanie i intensywnie|I. polega na wąchaniu|J. do rozbudzania węchowej ciekawości|K. jest na tyle silnie rozwinięty"
+  correctAnswer: "J. do rozbudzania węchowej ciekawości"
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2022-06-rq-15"
-  passageRef: "certyfikat-polski-B2-2022-06-read-8"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2022-06-r2-q10
+  passageRef: certyfikat-polski-B2-2022-06-read-2
+  questionType: gap_fill_fragment
+  questionText: "Luka 10 w tekście „W świecie zapachów”"
+  options: "A. po zapachu rozpoznają|B. użył kiedyś tego zwrotu|C. do zapachowych poszukiwań|D. są wrażliwe nawet|E. jest z pewnością niestandardowy|F. czasami specjalizują się nawet|G. rozbudza wszystkie jego możliwości|H. pracują nieprzerwanie i intensywnie|I. polega na wąchaniu|J. do rozbudzania węchowej ciekawości|K. jest na tyle silnie rozwinięty"
+  correctAnswer: "C. do zapachowych poszukiwań"
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2022-06-rq-16"
-  passageRef: "certyfikat-polski-B2-2022-06-read-9"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2022-06-r3-q1
+  passageRef: certyfikat-polski-B2-2022-06-read-3
+  questionType: matching
+  questionText: "Kierunek podróży"
+  options: "A. Po wybraniu kierunku podróży zastanówmy się, jak tam dotrzeć. Wykorzystajmy internetowe narzędzia: wyszukiwarki połączeń i kalkulatory cen.|B. Wypożyczenie samochodu daje zwiedzającym ogromną swobodę, ale koniecznie trzeba sprawdzić warunki ubezpieczenia auta oraz wysokość kaucji.|C. Pomoże nam znajomość waluty danego kraju oraz świadomość, że w niektórych miejscach kurs wymiany bywa mało atrakcyjny.|D. Na terenie Unii Europejskiej otrzymamy niezbędną pomoc medyczną dzięki karcie EKUZ. Jednak w przypadku nagłej choroby i potrzeby transportu medycznego dostaniemy zwrot kosztów, tylko jeśli wcześniej wykupiliśmy odpowiednią polisę.|E. Zanim zarezerwujemy bilety, powinniśmy sprawdzić, czy do przekroczenia granicy wystarczy dowód osobisty.|F. To gwarancja, że podróż będzie skrojona na miarę naszych oczekiwań i skupimy się na aktywnościach sprawiających nam przyjemność.|G. Wybór uzależniony jest od osobistych preferencji, budżetu oraz oczekiwanego poziomu komfortu. Podróżując z dziećmi, często szukamy specjalnych udogodnień - choćby krzesełka do karmienia.|H. Wyboru dokonujemy na podstawie naszych upodobań i możliwości – uwzględniając pogodę, ceny oraz imprezy odbywające się na miejscu w interesującym nas terminie.|I. Liczy się zdrowy rozsądek – wszystkiego zrobić i doświadczyć się nie da. Nieocenionym źródłem informacji są blogi podróżnicze, na których znajdziemy mnóstwo inspiracji i pomysłów.|J. To indywidualna kwestia, ale przed wyjazdem zawsze warto porozmawiać z zaprzyjaźnionym lekarzem. Sprawdźmy też wymagania i zalecenia dotyczące szczepień w kraju, do którego się wybieramy.|K. Szybki dojazd z lotniska czy dworca do wybranego miejsca to kwestia, którą należy zaplanować, zwłaszcza jeśli lądujemy lub dojeżdżamy nocą."
+  correctAnswer: "H. Wyboru dokonujemy na podstawie naszych upodobań i możliwości – uwzględniając pogodę, ceny oraz imprezy odbywające się na miejscu w interesującym nas terminie."
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2022-06-rq-17"
-  passageRef: "certyfikat-polski-B2-2022-06-read-9"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2022-06-r3-q2
+  passageRef: certyfikat-polski-B2-2022-06-read-3
+  questionType: matching
+  questionText: "Wymagane dokumenty"
+  options: "A. Po wybraniu kierunku podróży zastanówmy się, jak tam dotrzeć. Wykorzystajmy internetowe narzędzia: wyszukiwarki połączeń i kalkulatory cen.|B. Wypożyczenie samochodu daje zwiedzającym ogromną swobodę, ale koniecznie trzeba sprawdzić warunki ubezpieczenia auta oraz wysokość kaucji.|C. Pomoże nam znajomość waluty danego kraju oraz świadomość, że w niektórych miejscach kurs wymiany bywa mało atrakcyjny.|D. Na terenie Unii Europejskiej otrzymamy niezbędną pomoc medyczną dzięki karcie EKUZ. Jednak w przypadku nagłej choroby i potrzeby transportu medycznego dostaniemy zwrot kosztów, tylko jeśli wcześniej wykupiliśmy odpowiednią polisę.|E. Zanim zarezerwujemy bilety, powinniśmy sprawdzić, czy do przekroczenia granicy wystarczy dowód osobisty.|F. To gwarancja, że podróż będzie skrojona na miarę naszych oczekiwań i skupimy się na aktywnościach sprawiających nam przyjemność.|G. Wybór uzależniony jest od osobistych preferencji, budżetu oraz oczekiwanego poziomu komfortu. Podróżując z dziećmi, często szukamy specjalnych udogodnień - choćby krzesełka do karmienia.|H. Wyboru dokonujemy na podstawie naszych upodobań i możliwości – uwzględniając pogodę, ceny oraz imprezy odbywające się na miejscu w interesującym nas terminie.|I. Liczy się zdrowy rozsądek – wszystkiego zrobić i doświadczyć się nie da. Nieocenionym źródłem informacji są blogi podróżnicze, na których znajdziemy mnóstwo inspiracji i pomysłów.|J. To indywidualna kwestia, ale przed wyjazdem zawsze warto porozmawiać z zaprzyjaźnionym lekarzem. Sprawdźmy też wymagania i zalecenia dotyczące szczepień w kraju, do którego się wybieramy.|K. Szybki dojazd z lotniska czy dworca do wybranego miejsca to kwestia, którą należy zaplanować, zwłaszcza jeśli lądujemy lub dojeżdżamy nocą."
+  correctAnswer: "E. Zanim zarezerwujemy bilety, powinniśmy sprawdzić, czy do przekroczenia granicy wystarczy dowód osobisty."
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2022-06-rq-18"
-  passageRef: "certyfikat-polski-B2-2022-06-read-9"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2022-06-r3-q3
+  passageRef: certyfikat-polski-B2-2022-06-read-3
+  questionType: matching
+  questionText: "Dojazd na miejsce"
+  options: "A. Po wybraniu kierunku podróży zastanówmy się, jak tam dotrzeć. Wykorzystajmy internetowe narzędzia: wyszukiwarki połączeń i kalkulatory cen.|B. Wypożyczenie samochodu daje zwiedzającym ogromną swobodę, ale koniecznie trzeba sprawdzić warunki ubezpieczenia auta oraz wysokość kaucji.|C. Pomoże nam znajomość waluty danego kraju oraz świadomość, że w niektórych miejscach kurs wymiany bywa mało atrakcyjny.|D. Na terenie Unii Europejskiej otrzymamy niezbędną pomoc medyczną dzięki karcie EKUZ. Jednak w przypadku nagłej choroby i potrzeby transportu medycznego dostaniemy zwrot kosztów, tylko jeśli wcześniej wykupiliśmy odpowiednią polisę.|E. Zanim zarezerwujemy bilety, powinniśmy sprawdzić, czy do przekroczenia granicy wystarczy dowód osobisty.|F. To gwarancja, że podróż będzie skrojona na miarę naszych oczekiwań i skupimy się na aktywnościach sprawiających nam przyjemność.|G. Wybór uzależniony jest od osobistych preferencji, budżetu oraz oczekiwanego poziomu komfortu. Podróżując z dziećmi, często szukamy specjalnych udogodnień - choćby krzesełka do karmienia.|H. Wyboru dokonujemy na podstawie naszych upodobań i możliwości – uwzględniając pogodę, ceny oraz imprezy odbywające się na miejscu w interesującym nas terminie.|I. Liczy się zdrowy rozsądek – wszystkiego zrobić i doświadczyć się nie da. Nieocenionym źródłem informacji są blogi podróżnicze, na których znajdziemy mnóstwo inspiracji i pomysłów.|J. To indywidualna kwestia, ale przed wyjazdem zawsze warto porozmawiać z zaprzyjaźnionym lekarzem. Sprawdźmy też wymagania i zalecenia dotyczące szczepień w kraju, do którego się wybieramy.|K. Szybki dojazd z lotniska czy dworca do wybranego miejsca to kwestia, którą należy zaplanować, zwłaszcza jeśli lądujemy lub dojeżdżamy nocą."
+  correctAnswer: "A. Po wybraniu kierunku podróży zastanówmy się, jak tam dotrzeć. Wykorzystajmy internetowe narzędzia: wyszukiwarki połączeń i kalkulatory cen."
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2022-06-rq-19"
-  passageRef: "certyfikat-polski-B2-2022-06-read-9"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2022-06-r3-q4
+  passageRef: certyfikat-polski-B2-2022-06-read-3
+  questionType: matching
+  questionText: Apteczka
+  options: "A. Po wybraniu kierunku podróży zastanówmy się, jak tam dotrzeć. Wykorzystajmy internetowe narzędzia: wyszukiwarki połączeń i kalkulatory cen.|B. Wypożyczenie samochodu daje zwiedzającym ogromną swobodę, ale koniecznie trzeba sprawdzić warunki ubezpieczenia auta oraz wysokość kaucji.|C. Pomoże nam znajomość waluty danego kraju oraz świadomość, że w niektórych miejscach kurs wymiany bywa mało atrakcyjny.|D. Na terenie Unii Europejskiej otrzymamy niezbędną pomoc medyczną dzięki karcie EKUZ. Jednak w przypadku nagłej choroby i potrzeby transportu medycznego dostaniemy zwrot kosztów, tylko jeśli wcześniej wykupiliśmy odpowiednią polisę.|E. Zanim zarezerwujemy bilety, powinniśmy sprawdzić, czy do przekroczenia granicy wystarczy dowód osobisty.|F. To gwarancja, że podróż będzie skrojona na miarę naszych oczekiwań i skupimy się na aktywnościach sprawiających nam przyjemność.|G. Wybór uzależniony jest od osobistych preferencji, budżetu oraz oczekiwanego poziomu komfortu. Podróżując z dziećmi, często szukamy specjalnych udogodnień - choćby krzesełka do karmienia.|H. Wyboru dokonujemy na podstawie naszych upodobań i możliwości – uwzględniając pogodę, ceny oraz imprezy odbywające się na miejscu w interesującym nas terminie.|I. Liczy się zdrowy rozsądek – wszystkiego zrobić i doświadczyć się nie da. Nieocenionym źródłem informacji są blogi podróżnicze, na których znajdziemy mnóstwo inspiracji i pomysłów.|J. To indywidualna kwestia, ale przed wyjazdem zawsze warto porozmawiać z zaprzyjaźnionym lekarzem. Sprawdźmy też wymagania i zalecenia dotyczące szczepień w kraju, do którego się wybieramy.|K. Szybki dojazd z lotniska czy dworca do wybranego miejsca to kwestia, którą należy zaplanować, zwłaszcza jeśli lądujemy lub dojeżdżamy nocą."
+  correctAnswer: "J. To indywidualna kwestia, ale przed wyjazdem zawsze warto porozmawiać z zaprzyjaźnionym lekarzem. Sprawdźmy też wymagania i zalecenia dotyczące szczepień w kraju, do którego się wybieramy."
+  pointsQuarter: 4
 }
 READING_QUESTION {
-  questionId: "certyfikat-polski-B2-2022-06-rq-20"
-  passageRef: "certyfikat-polski-B2-2022-06-read-9"
-  questionType: multiple_choice
-  questionText: "TODO: fill from PDF"
-  options: "A|B|C"
-  correctAnswer: "?"
-  points: 1
+  questionId: certyfikat-polski-B2-2022-06-r3-q5
+  passageRef: certyfikat-polski-B2-2022-06-read-3
+  questionType: matching
+  questionText: Zakwaterowanie
+  options: "A. Po wybraniu kierunku podróży zastanówmy się, jak tam dotrzeć. Wykorzystajmy internetowe narzędzia: wyszukiwarki połączeń i kalkulatory cen.|B. Wypożyczenie samochodu daje zwiedzającym ogromną swobodę, ale koniecznie trzeba sprawdzić warunki ubezpieczenia auta oraz wysokość kaucji.|C. Pomoże nam znajomość waluty danego kraju oraz świadomość, że w niektórych miejscach kurs wymiany bywa mało atrakcyjny.|D. Na terenie Unii Europejskiej otrzymamy niezbędną pomoc medyczną dzięki karcie EKUZ. Jednak w przypadku nagłej choroby i potrzeby transportu medycznego dostaniemy zwrot kosztów, tylko jeśli wcześniej wykupiliśmy odpowiednią polisę.|E. Zanim zarezerwujemy bilety, powinniśmy sprawdzić, czy do przekroczenia granicy wystarczy dowód osobisty.|F. To gwarancja, że podróż będzie skrojona na miarę naszych oczekiwań i skupimy się na aktywnościach sprawiających nam przyjemność.|G. Wybór uzależniony jest od osobistych preferencji, budżetu oraz oczekiwanego poziomu komfortu. Podróżując z dziećmi, często szukamy specjalnych udogodnień - choćby krzesełka do karmienia.|H. Wyboru dokonujemy na podstawie naszych upodobań i możliwości – uwzględniając pogodę, ceny oraz imprezy odbywające się na miejscu w interesującym nas terminie.|I. Liczy się zdrowy rozsądek – wszystkiego zrobić i doświadczyć się nie da. Nieocenionym źródłem informacji są blogi podróżnicze, na których znajdziemy mnóstwo inspiracji i pomysłów.|J. To indywidualna kwestia, ale przed wyjazdem zawsze warto porozmawiać z zaprzyjaźnionym lekarzem. Sprawdźmy też wymagania i zalecenia dotyczące szczepień w kraju, do którego się wybieramy.|K. Szybki dojazd z lotniska czy dworca do wybranego miejsca to kwestia, którą należy zaplanować, zwłaszcza jeśli lądujemy lub dojeżdżamy nocą."
+  correctAnswer: "G. Wybór uzależniony jest od osobistych preferencji, budżetu oraz oczekiwanego poziomu komfortu. Podróżując z dziećmi, często szukamy specjalnych udogodnień - choćby krzesełka do karmienia."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-06-r3-q6
+  passageRef: certyfikat-polski-B2-2022-06-read-3
+  questionType: matching
+  questionText: Transfer
+  options: "A. Po wybraniu kierunku podróży zastanówmy się, jak tam dotrzeć. Wykorzystajmy internetowe narzędzia: wyszukiwarki połączeń i kalkulatory cen.|B. Wypożyczenie samochodu daje zwiedzającym ogromną swobodę, ale koniecznie trzeba sprawdzić warunki ubezpieczenia auta oraz wysokość kaucji.|C. Pomoże nam znajomość waluty danego kraju oraz świadomość, że w niektórych miejscach kurs wymiany bywa mało atrakcyjny.|D. Na terenie Unii Europejskiej otrzymamy niezbędną pomoc medyczną dzięki karcie EKUZ. Jednak w przypadku nagłej choroby i potrzeby transportu medycznego dostaniemy zwrot kosztów, tylko jeśli wcześniej wykupiliśmy odpowiednią polisę.|E. Zanim zarezerwujemy bilety, powinniśmy sprawdzić, czy do przekroczenia granicy wystarczy dowód osobisty.|F. To gwarancja, że podróż będzie skrojona na miarę naszych oczekiwań i skupimy się na aktywnościach sprawiających nam przyjemność.|G. Wybór uzależniony jest od osobistych preferencji, budżetu oraz oczekiwanego poziomu komfortu. Podróżując z dziećmi, często szukamy specjalnych udogodnień - choćby krzesełka do karmienia.|H. Wyboru dokonujemy na podstawie naszych upodobań i możliwości – uwzględniając pogodę, ceny oraz imprezy odbywające się na miejscu w interesującym nas terminie.|I. Liczy się zdrowy rozsądek – wszystkiego zrobić i doświadczyć się nie da. Nieocenionym źródłem informacji są blogi podróżnicze, na których znajdziemy mnóstwo inspiracji i pomysłów.|J. To indywidualna kwestia, ale przed wyjazdem zawsze warto porozmawiać z zaprzyjaźnionym lekarzem. Sprawdźmy też wymagania i zalecenia dotyczące szczepień w kraju, do którego się wybieramy.|K. Szybki dojazd z lotniska czy dworca do wybranego miejsca to kwestia, którą należy zaplanować, zwłaszcza jeśli lądujemy lub dojeżdżamy nocą."
+  correctAnswer: "K. Szybki dojazd z lotniska czy dworca do wybranego miejsca to kwestia, którą należy zaplanować, zwłaszcza jeśli lądujemy lub dojeżdżamy nocą."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-06-r3-q7
+  passageRef: certyfikat-polski-B2-2022-06-read-3
+  questionType: matching
+  questionText: "Plan zwiedzania"
+  options: "A. Po wybraniu kierunku podróży zastanówmy się, jak tam dotrzeć. Wykorzystajmy internetowe narzędzia: wyszukiwarki połączeń i kalkulatory cen.|B. Wypożyczenie samochodu daje zwiedzającym ogromną swobodę, ale koniecznie trzeba sprawdzić warunki ubezpieczenia auta oraz wysokość kaucji.|C. Pomoże nam znajomość waluty danego kraju oraz świadomość, że w niektórych miejscach kurs wymiany bywa mało atrakcyjny.|D. Na terenie Unii Europejskiej otrzymamy niezbędną pomoc medyczną dzięki karcie EKUZ. Jednak w przypadku nagłej choroby i potrzeby transportu medycznego dostaniemy zwrot kosztów, tylko jeśli wcześniej wykupiliśmy odpowiednią polisę.|E. Zanim zarezerwujemy bilety, powinniśmy sprawdzić, czy do przekroczenia granicy wystarczy dowód osobisty.|F. To gwarancja, że podróż będzie skrojona na miarę naszych oczekiwań i skupimy się na aktywnościach sprawiających nam przyjemność.|G. Wybór uzależniony jest od osobistych preferencji, budżetu oraz oczekiwanego poziomu komfortu. Podróżując z dziećmi, często szukamy specjalnych udogodnień - choćby krzesełka do karmienia.|H. Wyboru dokonujemy na podstawie naszych upodobań i możliwości – uwzględniając pogodę, ceny oraz imprezy odbywające się na miejscu w interesującym nas terminie.|I. Liczy się zdrowy rozsądek – wszystkiego zrobić i doświadczyć się nie da. Nieocenionym źródłem informacji są blogi podróżnicze, na których znajdziemy mnóstwo inspiracji i pomysłów.|J. To indywidualna kwestia, ale przed wyjazdem zawsze warto porozmawiać z zaprzyjaźnionym lekarzem. Sprawdźmy też wymagania i zalecenia dotyczące szczepień w kraju, do którego się wybieramy.|K. Szybki dojazd z lotniska czy dworca do wybranego miejsca to kwestia, którą należy zaplanować, zwłaszcza jeśli lądujemy lub dojeżdżamy nocą."
+  correctAnswer: "I. Liczy się zdrowy rozsądek – wszystkiego zrobić i doświadczyć się nie da. Nieocenionym źródłem informacji są blogi podróżnicze, na których znajdziemy mnóstwo inspiracji i pomysłów."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-06-r3-q8
+  passageRef: certyfikat-polski-B2-2022-06-read-3
+  questionType: matching
+  questionText: "Niekoniecznie pieszo"
+  options: "A. Po wybraniu kierunku podróży zastanówmy się, jak tam dotrzeć. Wykorzystajmy internetowe narzędzia: wyszukiwarki połączeń i kalkulatory cen.|B. Wypożyczenie samochodu daje zwiedzającym ogromną swobodę, ale koniecznie trzeba sprawdzić warunki ubezpieczenia auta oraz wysokość kaucji.|C. Pomoże nam znajomość waluty danego kraju oraz świadomość, że w niektórych miejscach kurs wymiany bywa mało atrakcyjny.|D. Na terenie Unii Europejskiej otrzymamy niezbędną pomoc medyczną dzięki karcie EKUZ. Jednak w przypadku nagłej choroby i potrzeby transportu medycznego dostaniemy zwrot kosztów, tylko jeśli wcześniej wykupiliśmy odpowiednią polisę.|E. Zanim zarezerwujemy bilety, powinniśmy sprawdzić, czy do przekroczenia granicy wystarczy dowód osobisty.|F. To gwarancja, że podróż będzie skrojona na miarę naszych oczekiwań i skupimy się na aktywnościach sprawiających nam przyjemność.|G. Wybór uzależniony jest od osobistych preferencji, budżetu oraz oczekiwanego poziomu komfortu. Podróżując z dziećmi, często szukamy specjalnych udogodnień - choćby krzesełka do karmienia.|H. Wyboru dokonujemy na podstawie naszych upodobań i możliwości – uwzględniając pogodę, ceny oraz imprezy odbywające się na miejscu w interesującym nas terminie.|I. Liczy się zdrowy rozsądek – wszystkiego zrobić i doświadczyć się nie da. Nieocenionym źródłem informacji są blogi podróżnicze, na których znajdziemy mnóstwo inspiracji i pomysłów.|J. To indywidualna kwestia, ale przed wyjazdem zawsze warto porozmawiać z zaprzyjaźnionym lekarzem. Sprawdźmy też wymagania i zalecenia dotyczące szczepień w kraju, do którego się wybieramy.|K. Szybki dojazd z lotniska czy dworca do wybranego miejsca to kwestia, którą należy zaplanować, zwłaszcza jeśli lądujemy lub dojeżdżamy nocą."
+  correctAnswer: "B. Wypożyczenie samochodu daje zwiedzającym ogromną swobodę, ale koniecznie trzeba sprawdzić warunki ubezpieczenia auta oraz wysokość kaucji."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-06-r3-q9
+  passageRef: certyfikat-polski-B2-2022-06-read-3
+  questionType: matching
+  questionText: "Ubezpieczenie w podróży"
+  options: "A. Po wybraniu kierunku podróży zastanówmy się, jak tam dotrzeć. Wykorzystajmy internetowe narzędzia: wyszukiwarki połączeń i kalkulatory cen.|B. Wypożyczenie samochodu daje zwiedzającym ogromną swobodę, ale koniecznie trzeba sprawdzić warunki ubezpieczenia auta oraz wysokość kaucji.|C. Pomoże nam znajomość waluty danego kraju oraz świadomość, że w niektórych miejscach kurs wymiany bywa mało atrakcyjny.|D. Na terenie Unii Europejskiej otrzymamy niezbędną pomoc medyczną dzięki karcie EKUZ. Jednak w przypadku nagłej choroby i potrzeby transportu medycznego dostaniemy zwrot kosztów, tylko jeśli wcześniej wykupiliśmy odpowiednią polisę.|E. Zanim zarezerwujemy bilety, powinniśmy sprawdzić, czy do przekroczenia granicy wystarczy dowód osobisty.|F. To gwarancja, że podróż będzie skrojona na miarę naszych oczekiwań i skupimy się na aktywnościach sprawiających nam przyjemność.|G. Wybór uzależniony jest od osobistych preferencji, budżetu oraz oczekiwanego poziomu komfortu. Podróżując z dziećmi, często szukamy specjalnych udogodnień - choćby krzesełka do karmienia.|H. Wyboru dokonujemy na podstawie naszych upodobań i możliwości – uwzględniając pogodę, ceny oraz imprezy odbywające się na miejscu w interesującym nas terminie.|I. Liczy się zdrowy rozsądek – wszystkiego zrobić i doświadczyć się nie da. Nieocenionym źródłem informacji są blogi podróżnicze, na których znajdziemy mnóstwo inspiracji i pomysłów.|J. To indywidualna kwestia, ale przed wyjazdem zawsze warto porozmawiać z zaprzyjaźnionym lekarzem. Sprawdźmy też wymagania i zalecenia dotyczące szczepień w kraju, do którego się wybieramy.|K. Szybki dojazd z lotniska czy dworca do wybranego miejsca to kwestia, którą należy zaplanować, zwłaszcza jeśli lądujemy lub dojeżdżamy nocą."
+  correctAnswer: "D. Na terenie Unii Europejskiej otrzymamy niezbędną pomoc medyczną dzięki karcie EKUZ. Jednak w przypadku nagłej choroby i potrzeby transportu medycznego dostaniemy zwrot kosztów, tylko jeśli wcześniej wykupiliśmy odpowiednią polisę."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-06-r3-q10
+  passageRef: certyfikat-polski-B2-2022-06-read-3
+  questionType: matching
+  questionText: "Finanse w podróży"
+  options: "A. Po wybraniu kierunku podróży zastanówmy się, jak tam dotrzeć. Wykorzystajmy internetowe narzędzia: wyszukiwarki połączeń i kalkulatory cen.|B. Wypożyczenie samochodu daje zwiedzającym ogromną swobodę, ale koniecznie trzeba sprawdzić warunki ubezpieczenia auta oraz wysokość kaucji.|C. Pomoże nam znajomość waluty danego kraju oraz świadomość, że w niektórych miejscach kurs wymiany bywa mało atrakcyjny.|D. Na terenie Unii Europejskiej otrzymamy niezbędną pomoc medyczną dzięki karcie EKUZ. Jednak w przypadku nagłej choroby i potrzeby transportu medycznego dostaniemy zwrot kosztów, tylko jeśli wcześniej wykupiliśmy odpowiednią polisę.|E. Zanim zarezerwujemy bilety, powinniśmy sprawdzić, czy do przekroczenia granicy wystarczy dowód osobisty.|F. To gwarancja, że podróż będzie skrojona na miarę naszych oczekiwań i skupimy się na aktywnościach sprawiających nam przyjemność.|G. Wybór uzależniony jest od osobistych preferencji, budżetu oraz oczekiwanego poziomu komfortu. Podróżując z dziećmi, często szukamy specjalnych udogodnień - choćby krzesełka do karmienia.|H. Wyboru dokonujemy na podstawie naszych upodobań i możliwości – uwzględniając pogodę, ceny oraz imprezy odbywające się na miejscu w interesującym nas terminie.|I. Liczy się zdrowy rozsądek – wszystkiego zrobić i doświadczyć się nie da. Nieocenionym źródłem informacji są blogi podróżnicze, na których znajdziemy mnóstwo inspiracji i pomysłów.|J. To indywidualna kwestia, ale przed wyjazdem zawsze warto porozmawiać z zaprzyjaźnionym lekarzem. Sprawdźmy też wymagania i zalecenia dotyczące szczepień w kraju, do którego się wybieramy.|K. Szybki dojazd z lotniska czy dworca do wybranego miejsca to kwestia, którą należy zaplanować, zwłaszcza jeśli lądujemy lub dojeżdżamy nocą."
+  correctAnswer: "C. Pomoże nam znajomość waluty danego kraju oraz świadomość, że w niektórych miejscach kurs wymiany bywa mało atrakcyjny."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-06-r4-q1
+  passageRef: certyfikat-polski-B2-2022-06-read-4
+  questionType: true_false_not_given
+  questionText: "Prowadzone przed laty badania nie były dokładne ze względu na miejsce ich prowadzenia."
+  options: "TAK|NIE|BI"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-06-r4-q2
+  passageRef: certyfikat-polski-B2-2022-06-read-4
+  questionType: true_false_not_given
+  questionText: "Na spadającą liczbę owadów mają wpływ zjadające je ptaki."
+  options: "TAK|NIE|BI"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-06-r4-q3
+  passageRef: certyfikat-polski-B2-2022-06-read-4
+  questionType: true_false_not_given
+  questionText: "Stosowanie pestycydów to najpoważniejsza przyczyna ginięcia owadów."
+  options: "TAK|NIE|BI"
+  correctAnswer: BI
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-06-r4-q4
+  passageRef: certyfikat-polski-B2-2022-06-read-4
+  questionType: true_false_not_given
+  questionText: "Zanieczyszczenie powietrza ogranicza owadom możliwość dotarcia do roślin."
+  options: "TAK|NIE|BI"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-06-r4-q5
+  passageRef: certyfikat-polski-B2-2022-06-read-4
+  questionType: true_false_not_given
+  questionText: "Na zanieczyszczonych terenach rośliny wydają mniejsze owoce."
+  options: "TAK|NIE|BI"
+  correctAnswer: BI
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-06-r4-q6
+  passageRef: certyfikat-polski-B2-2022-06-read-4
+  questionType: true_false_not_given
+  questionText: "Na potrzeby eksperymentu celowo zanieczyszczono jedną z upraw gorczycy."
+  options: "TAK|NIE|BI"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-06-r4-q7
+  passageRef: certyfikat-polski-B2-2022-06-read-4
+  questionType: true_false_not_given
+  questionText: "Zawsze podejrzewano, że zanieczyszczone powietrze skutkuje zmniejszeniem liczebności owadów."
+  options: "TAK|NIE|BI"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-06-r4-q8
+  passageRef: certyfikat-polski-B2-2022-06-read-4
+  questionType: true_false_not_given
+  questionText: "Dla uwiarygodnienia wyników analiz należałoby je powtórzyć."
+  options: "TAK|NIE|BI"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-06-r4-q9
+  passageRef: certyfikat-polski-B2-2022-06-read-4
+  questionType: true_false_not_given
+  questionText: "Już teraz wiadomo, że nie ma sensu sadzić roślin przy drogach, gdyż owady ich nie wyczują."
+  options: "TAK|NIE|BI"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-06-r4-q10
+  passageRef: certyfikat-polski-B2-2022-06-read-4
+  questionType: true_false_not_given
+  questionText: "Dzięki ograniczeniu zanieczyszczenia powietrza znacząco zwiększymy populację owadów."
+  options: "TAK|NIE|BI"
+  correctAnswer: BI
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-06-r5-q1
+  passageRef: certyfikat-polski-B2-2022-06-read-5
+  questionType: word_bank
+  questionText: "Luka 1 w tekście „Po co nam tradycja?”"
+  options: "aktualne|dziedziczone|kończą|nadawane|nowoczesne|podkreślają|postępu|regionalne|uroku|wzmocnienia|zaostrzają|zabronione|zdawania|zjawiska"
+  correctAnswer: "zaostrzają"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-06-r5-q2
+  passageRef: certyfikat-polski-B2-2022-06-read-5
+  questionType: word_bank
+  questionText: "Luka 2 w tekście „Po co nam tradycja?”"
+  options: "aktualne|dziedziczone|kończą|nadawane|nowoczesne|podkreślają|postępu|regionalne|uroku|wzmocnienia|zaostrzają|zabronione|zdawania|zjawiska"
+  correctAnswer: wzmocnienia
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-06-r5-q3
+  passageRef: certyfikat-polski-B2-2022-06-read-5
+  questionType: word_bank
+  questionText: "Luka 3 w tekście „Po co nam tradycja?”"
+  options: "aktualne|dziedziczone|kończą|nadawane|nowoczesne|podkreślają|postępu|regionalne|uroku|wzmocnienia|zaostrzają|zabronione|zdawania|zjawiska"
+  correctAnswer: "podkreślają"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-06-r5-q4
+  passageRef: certyfikat-polski-B2-2022-06-read-5
+  questionType: word_bank
+  questionText: "Luka 4 w tekście „Po co nam tradycja?”"
+  options: "aktualne|dziedziczone|kończą|nadawane|nowoczesne|podkreślają|postępu|regionalne|uroku|wzmocnienia|zaostrzają|zabronione|zdawania|zjawiska"
+  correctAnswer: uroku
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-06-r5-q5
+  passageRef: certyfikat-polski-B2-2022-06-read-5
+  questionType: word_bank
+  questionText: "Luka 5 w tekście „Po co nam tradycja?”"
+  options: "aktualne|dziedziczone|kończą|nadawane|nowoczesne|podkreślają|postępu|regionalne|uroku|wzmocnienia|zaostrzają|zabronione|zdawania|zjawiska"
+  correctAnswer: zjawiska
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-06-r5-q6
+  passageRef: certyfikat-polski-B2-2022-06-read-5
+  questionType: word_bank
+  questionText: "Luka 6 w tekście „Po co nam tradycja?”"
+  options: "aktualne|dziedziczone|kończą|nadawane|nowoczesne|podkreślają|postępu|regionalne|uroku|wzmocnienia|zaostrzają|zabronione|zdawania|zjawiska"
+  correctAnswer: nadawane
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-06-r5-q7
+  passageRef: certyfikat-polski-B2-2022-06-read-5
+  questionType: word_bank
+  questionText: "Luka 7 w tekście „Po co nam tradycja?”"
+  options: "aktualne|dziedziczone|kończą|nadawane|nowoczesne|podkreślają|postępu|regionalne|uroku|wzmocnienia|zaostrzają|zabronione|zdawania|zjawiska"
+  correctAnswer: zdawania
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-06-r5-q8
+  passageRef: certyfikat-polski-B2-2022-06-read-5
+  questionType: word_bank
+  questionText: "Luka 8 w tekście „Po co nam tradycja?”"
+  options: "aktualne|dziedziczone|kończą|nadawane|nowoczesne|podkreślają|postępu|regionalne|uroku|wzmocnienia|zaostrzają|zabronione|zdawania|zjawiska"
+  correctAnswer: regionalne
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-06-r5-q9
+  passageRef: certyfikat-polski-B2-2022-06-read-5
+  questionType: word_bank
+  questionText: "Luka 9 w tekście „Po co nam tradycja?”"
+  options: "aktualne|dziedziczone|kończą|nadawane|nowoczesne|podkreślają|postępu|regionalne|uroku|wzmocnienia|zaostrzają|zabronione|zdawania|zjawiska"
+  correctAnswer: aktualne
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2022-06-r5-q10
+  passageRef: certyfikat-polski-B2-2022-06-read-5
+  questionType: word_bank
+  questionText: "Luka 10 w tekście „Po co nam tradycja?”"
+  options: "aktualne|dziedziczone|kończą|nadawane|nowoczesne|podkreślają|postępu|regionalne|uroku|wzmocnienia|zaostrzają|zabronione|zdawania|zjawiska"
+  correctAnswer: "postępu"
+  pointsQuarter: 2
 }

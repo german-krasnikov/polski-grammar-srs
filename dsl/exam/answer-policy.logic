@@ -1,0 +1,7 @@
+# Single-answer verdict priority. The caller supplies normalized match facts.
+DECISION disposition DEFAULT wrong
+  canonical AT 10 WHEN answer.matchesCanonical -> canonical
+  fullVariant AT 20 WHEN answer.variantQuarter == answer.maximumQuarter -> full_variant
+  partialVariant AT 30 WHEN answer.variantQuarter > 0 -> partial_variant
+  openUnknown AT 40 WHEN answer.openManual AND answer.answerNonblank -> open_unknown
+END

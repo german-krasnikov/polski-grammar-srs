@@ -1,0 +1,79 @@
+DSL 1
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-03-g1-q2-v1
+  itemRef: certyfikat-polski-C1-2022-03-g1-q2
+  answer: latami
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-03-g2-q1-v1
+  itemRef: certyfikat-polski-C1-2022-03-g2-q1
+  answer: "Rewolucję streamingową umożliwił szybki wzrost popularności urządzeń z dostępem do internetu."
+  earnedQuarter: 4
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-03-g2-q2-v1
+  itemRef: certyfikat-polski-C1-2022-03-g2-q2
+  answer: "Korzystanie z oferty wymaga utworzenia własnego profilu przez użytkownika."
+  earnedQuarter: 4
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-03-g2-q4-v1
+  itemRef: certyfikat-polski-C1-2022-03-g2-q4
+  answer: "Widzowie są zaskoczeni tak bogatą ofertą platform z płatnym dostępem do filmów."
+  earnedQuarter: 4
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-03-g2-q4-v2
+  itemRef: certyfikat-polski-C1-2022-03-g2-q4
+  answer: "Widzowie byli zaskoczeni tak bogatą ofertą platform z płatnym dostępem do filmów."
+  earnedQuarter: 4
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-03-g2-q5-v1
+  itemRef: certyfikat-polski-C1-2022-03-g2-q5
+  answer: "Fani zwykle zastanawiają się nad przyczynami nagłego zniknięcia ich ulubionego serialu z danej platformy."
+  earnedQuarter: 4
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-03-g3-q9-v1
+  itemRef: certyfikat-polski-C1-2022-03-g3-q9
+  answer: "związku"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-03-g6-q6-v1
+  itemRef: certyfikat-polski-C1-2022-03-g6-q6
+  answer: "tonące"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-03-g7-q1-v1
+  itemRef: certyfikat-polski-C1-2022-03-g7-q1
+  answer: "będą się rozlegać"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-03-g7-q1-v2
+  itemRef: certyfikat-polski-C1-2022-03-g7-q1
+  answer: "będą się rozlegały"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-03-g7-q4-v1
+  itemRef: certyfikat-polski-C1-2022-03-g7-q4
+  answer: "będą wspierać"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-03-g7-q4-v2
+  itemRef: certyfikat-polski-C1-2022-03-g7-q4
+  answer: "wesprą"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-03-g7-q8-v1
+  itemRef: certyfikat-polski-C1-2022-03-g7-q8
+  answer: "osiągnęły"
+  earnedQuarter: 2
+}

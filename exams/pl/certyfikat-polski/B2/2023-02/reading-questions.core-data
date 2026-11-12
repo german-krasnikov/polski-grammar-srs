@@ -1,0 +1,406 @@
+DSL 1
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-r1-q1
+  passageRef: certyfikat-polski-B2-2023-02-read-1
+  questionType: multiple_choice
+  questionText: "Z tekstu o górskich szlakach dowiadujemy się, że"
+  options: "a) osoby mające problemy z nogami nie powinny w górach nosić ciężkich plecaków.|b) na górskie wycieczki należy zabierać ze sobą wygodny ekwipunek.|c) lekkie wyposażenie plecaka jest szczególnie ważne dla osób mniej wysportowanych."
+  correctAnswer: "c) lekkie wyposażenie plecaka jest szczególnie ważne dla osób mniej wysportowanych."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-r1-q2
+  passageRef: certyfikat-polski-B2-2023-02-read-1
+  questionType: multiple_choice
+  questionText: "Z tekstu dowiadujemy się, że premetro"
+  options: "a) co godzinę będzie przewoziło średnio 14 tysięcy pasażerów.|b) pojedzie częściowo po istniejących w mieście torach.|c) będzie podziemnym odpowiednikiem tramwaju."
+  correctAnswer: "b) pojedzie częściowo po istniejących w mieście torach."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-r1-q3
+  passageRef: certyfikat-polski-B2-2023-02-read-1
+  questionType: multiple_choice
+  questionText: "Z tekstu dowiadujemy się, że drużyna polskich hokeistów"
+  options: "a) wygrała wbrew oczekiwaniom znawców tego sportu.|b) reprezentuje poziom zbliżony do drużyny ze Szwecji.|c) po raz kolejny swój sukces zawdzięcza szczęściu."
+  correctAnswer: "a) wygrała wbrew oczekiwaniom znawców tego sportu."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-r1-q4
+  passageRef: certyfikat-polski-B2-2023-02-read-1
+  questionType: multiple_choice
+  questionText: "Z tekstu dowiadujemy się, że od 1 października"
+  options: "a) przewlekle chorzy będą mogli zapisywać się do specjalistów bez skierowania.|b) zwiększą się możliwości lekarzy rodzinnych w zakresie diagnostyki pacjentów.|c) przychodnie będą musiały wprowadzić nowy system diagnostyki dla przewlekle chorych."
+  correctAnswer: "b) zwiększą się możliwości lekarzy rodzinnych w zakresie diagnostyki pacjentów."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-r1-q5
+  passageRef: certyfikat-polski-B2-2023-02-read-1
+  questionType: multiple_choice
+  questionText: "Z tekstu o nastolatkach i internecie dowiadujemy się, że"
+  options: "a) młodzież spędza w sieci więcej czasu niż dorośli.|b) opiekunowie zazwyczaj mają kontrolę nad aktywnością dziecka w sieci.|c) rodzicom brakuje innych pomysłów na organizację dzieciom czasu wolnego."
+  correctAnswer: "c) rodzicom brakuje innych pomysłów na organizację dzieciom czasu wolnego."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-r2-q1
+  passageRef: certyfikat-polski-B2-2023-02-read-2
+  questionType: gap_fill_fragment
+  questionText: "Luka 1 w tekście o odruchu kichania"
+  options: "A. w pewnych sytuacjach może bowiem stać się przyczyną tragedii|B. i od razu zaczynasz kichać|C. ciepło słoneczne sprawia|D. z jakiego powodu ciepło Słońca wywołuje kichanie|E. co przy dużych prędkościach często kończy się wypadkiem|F. jak dotąd nie ustalono ze stuprocentową pewnością|G. tę przypadłość dziedziczymy po przodkach|H. co podrażnia śluzówkę i w efekcie powoduje kichanie|I. co z kolei hamuje kichanie|J. jak się później okazało|K. na skutek niespodziewanego działania światła"
+  correctAnswer: "G. tę przypadłość dziedziczymy po przodkach"
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-r2-q2
+  passageRef: certyfikat-polski-B2-2023-02-read-2
+  questionType: gap_fill_fragment
+  questionText: "Luka 2 w tekście o odruchu kichania"
+  options: "A. w pewnych sytuacjach może bowiem stać się przyczyną tragedii|B. i od razu zaczynasz kichać|C. ciepło słoneczne sprawia|D. z jakiego powodu ciepło Słońca wywołuje kichanie|E. co przy dużych prędkościach często kończy się wypadkiem|F. jak dotąd nie ustalono ze stuprocentową pewnością|G. tę przypadłość dziedziczymy po przodkach|H. co podrażnia śluzówkę i w efekcie powoduje kichanie|I. co z kolei hamuje kichanie|J. jak się później okazało|K. na skutek niespodziewanego działania światła"
+  correctAnswer: "D. z jakiego powodu ciepło Słońca wywołuje kichanie"
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-r2-q3
+  passageRef: certyfikat-polski-B2-2023-02-read-2
+  questionType: gap_fill_fragment
+  questionText: "Luka 3 w tekście o odruchu kichania"
+  options: "A. w pewnych sytuacjach może bowiem stać się przyczyną tragedii|B. i od razu zaczynasz kichać|C. ciepło słoneczne sprawia|D. z jakiego powodu ciepło Słońca wywołuje kichanie|E. co przy dużych prędkościach często kończy się wypadkiem|F. jak dotąd nie ustalono ze stuprocentową pewnością|G. tę przypadłość dziedziczymy po przodkach|H. co podrażnia śluzówkę i w efekcie powoduje kichanie|I. co z kolei hamuje kichanie|J. jak się później okazało|K. na skutek niespodziewanego działania światła"
+  correctAnswer: "J. jak się później okazało"
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-r2-q4
+  passageRef: certyfikat-polski-B2-2023-02-read-2
+  questionType: gap_fill_fragment
+  questionText: "Luka 4 w tekście o odruchu kichania"
+  options: "A. w pewnych sytuacjach może bowiem stać się przyczyną tragedii|B. i od razu zaczynasz kichać|C. ciepło słoneczne sprawia|D. z jakiego powodu ciepło Słońca wywołuje kichanie|E. co przy dużych prędkościach często kończy się wypadkiem|F. jak dotąd nie ustalono ze stuprocentową pewnością|G. tę przypadłość dziedziczymy po przodkach|H. co podrażnia śluzówkę i w efekcie powoduje kichanie|I. co z kolei hamuje kichanie|J. jak się później okazało|K. na skutek niespodziewanego działania światła"
+  correctAnswer: "C. ciepło słoneczne sprawia"
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-r2-q5
+  passageRef: certyfikat-polski-B2-2023-02-read-2
+  questionType: gap_fill_fragment
+  questionText: "Luka 5 w tekście o odruchu kichania"
+  options: "A. w pewnych sytuacjach może bowiem stać się przyczyną tragedii|B. i od razu zaczynasz kichać|C. ciepło słoneczne sprawia|D. z jakiego powodu ciepło Słońca wywołuje kichanie|E. co przy dużych prędkościach często kończy się wypadkiem|F. jak dotąd nie ustalono ze stuprocentową pewnością|G. tę przypadłość dziedziczymy po przodkach|H. co podrażnia śluzówkę i w efekcie powoduje kichanie|I. co z kolei hamuje kichanie|J. jak się później okazało|K. na skutek niespodziewanego działania światła"
+  correctAnswer: "I. co z kolei hamuje kichanie"
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-r2-q6
+  passageRef: certyfikat-polski-B2-2023-02-read-2
+  questionType: gap_fill_fragment
+  questionText: "Luka 6 w tekście o odruchu kichania"
+  options: "A. w pewnych sytuacjach może bowiem stać się przyczyną tragedii|B. i od razu zaczynasz kichać|C. ciepło słoneczne sprawia|D. z jakiego powodu ciepło Słońca wywołuje kichanie|E. co przy dużych prędkościach często kończy się wypadkiem|F. jak dotąd nie ustalono ze stuprocentową pewnością|G. tę przypadłość dziedziczymy po przodkach|H. co podrażnia śluzówkę i w efekcie powoduje kichanie|I. co z kolei hamuje kichanie|J. jak się później okazało|K. na skutek niespodziewanego działania światła"
+  correctAnswer: "F. jak dotąd nie ustalono ze stuprocentową pewnością"
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-r2-q7
+  passageRef: certyfikat-polski-B2-2023-02-read-2
+  questionType: gap_fill_fragment
+  questionText: "Luka 7 w tekście o odruchu kichania"
+  options: "A. w pewnych sytuacjach może bowiem stać się przyczyną tragedii|B. i od razu zaczynasz kichać|C. ciepło słoneczne sprawia|D. z jakiego powodu ciepło Słońca wywołuje kichanie|E. co przy dużych prędkościach często kończy się wypadkiem|F. jak dotąd nie ustalono ze stuprocentową pewnością|G. tę przypadłość dziedziczymy po przodkach|H. co podrażnia śluzówkę i w efekcie powoduje kichanie|I. co z kolei hamuje kichanie|J. jak się później okazało|K. na skutek niespodziewanego działania światła"
+  correctAnswer: "K. na skutek niespodziewanego działania światła"
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-r2-q8
+  passageRef: certyfikat-polski-B2-2023-02-read-2
+  questionType: gap_fill_fragment
+  questionText: "Luka 8 w tekście o odruchu kichania"
+  options: "A. w pewnych sytuacjach może bowiem stać się przyczyną tragedii|B. i od razu zaczynasz kichać|C. ciepło słoneczne sprawia|D. z jakiego powodu ciepło Słońca wywołuje kichanie|E. co przy dużych prędkościach często kończy się wypadkiem|F. jak dotąd nie ustalono ze stuprocentową pewnością|G. tę przypadłość dziedziczymy po przodkach|H. co podrażnia śluzówkę i w efekcie powoduje kichanie|I. co z kolei hamuje kichanie|J. jak się później okazało|K. na skutek niespodziewanego działania światła"
+  correctAnswer: "H. co podrażnia śluzówkę i w efekcie powoduje kichanie"
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-r2-q9
+  passageRef: certyfikat-polski-B2-2023-02-read-2
+  questionType: gap_fill_fragment
+  questionText: "Luka 9 w tekście o odruchu kichania"
+  options: "A. w pewnych sytuacjach może bowiem stać się przyczyną tragedii|B. i od razu zaczynasz kichać|C. ciepło słoneczne sprawia|D. z jakiego powodu ciepło Słońca wywołuje kichanie|E. co przy dużych prędkościach często kończy się wypadkiem|F. jak dotąd nie ustalono ze stuprocentową pewnością|G. tę przypadłość dziedziczymy po przodkach|H. co podrażnia śluzówkę i w efekcie powoduje kichanie|I. co z kolei hamuje kichanie|J. jak się później okazało|K. na skutek niespodziewanego działania światła"
+  correctAnswer: "A. w pewnych sytuacjach może bowiem stać się przyczyną tragedii"
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-r2-q10
+  passageRef: certyfikat-polski-B2-2023-02-read-2
+  questionType: gap_fill_fragment
+  questionText: "Luka 10 w tekście o odruchu kichania"
+  options: "A. w pewnych sytuacjach może bowiem stać się przyczyną tragedii|B. i od razu zaczynasz kichać|C. ciepło słoneczne sprawia|D. z jakiego powodu ciepło Słońca wywołuje kichanie|E. co przy dużych prędkościach często kończy się wypadkiem|F. jak dotąd nie ustalono ze stuprocentową pewnością|G. tę przypadłość dziedziczymy po przodkach|H. co podrażnia śluzówkę i w efekcie powoduje kichanie|I. co z kolei hamuje kichanie|J. jak się później okazało|K. na skutek niespodziewanego działania światła"
+  correctAnswer: "E. co przy dużych prędkościach często kończy się wypadkiem"
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-r3-q1
+  passageRef: certyfikat-polski-B2-2023-02-read-3
+  questionType: matching
+  questionText: "Unikaj tłumów"
+  options: "A. Światło nadaje zdjęciu niepowtarzalnego klimatu. Z uroków „złotej godziny” można korzystać nie tylko po wschodzie słońca. Charakterystyczne złote odcienie uchwycisz także przed zmierzchem.|B. Zanim naciśniesz „spust” swojego smartfonowego aparatu, postaraj się, aby na zdjęciu nie było przypadkowych elementów, a te pożądane były odpowiednio „ułożone”.|C. Nie bój się sentymentalnych kadrów. Fotografia uwiecznia nie tylko osoby i miejsca, ale także twoje tęsknoty i zachwyty.|D. Popularne miejsca przyciągają rzesze turystów. W takich warunkach zrobienie dobrego zdjęcia zwykle graniczy z cudem.|E. Dodatkowe sztuczne światło, zwłaszcza nieumiejętnie stosowane powoduje powstawanie cieni, czerwonych oczu. Szukaj miejsc dobrze oświetlonych.|F. Większość zdjęć na blogach podróżniczych została zrobiona telefonami. To pokazuje, że dobre zdjęcie z podróży można wykonać każdym sprzętem, o ile się pamięta o kilku podstawowych zasadach.|G. Era stania na baczność, na wprost aparatu, minęła. Spróbuj ustrzelić zdjęcie w ruchu – będzie naturalniejsze i ciekawsze.|H. Naprawdę krzywych wież jest na świecie zaledwie kilka. Zadbaj więc, aby pozostałe budynki nie musiały z nią konkurować i nie sprawiały wrażenia, jakby miały za chwilę upaść.|I. Najlepsze kadry powstają, kiedy temat fotografii umieścimy w jednej trzeciej lewej bądź prawej części obrazu, resztę pozostawiając niejako otwartą.|J. Postaraj się uchwycić kadry, w których blask będzie przecinany np. przez konary drzew. Pamiętaj o przełączeniu aparatu na odpowiedni tryb, żeby ciemne miejsca nie były zbyt czarne, a te jasne – przepalone.|K. Jeśli głównym bohaterem zdjęcia ma być człowiek, zadbaj o to, aby zmieścił się na fotografii w całości. Oszczędź bliskim lub znajomym „obcinania” kończyn."
+  correctAnswer: "D. Popularne miejsca przyciągają rzesze turystów. W takich warunkach zrobienie dobrego zdjęcia zwykle graniczy z cudem."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-r3-q2
+  passageRef: certyfikat-polski-B2-2023-02-read-3
+  questionType: matching
+  questionText: "Trzymaj pion"
+  options: "A. Światło nadaje zdjęciu niepowtarzalnego klimatu. Z uroków „złotej godziny” można korzystać nie tylko po wschodzie słońca. Charakterystyczne złote odcienie uchwycisz także przed zmierzchem.|B. Zanim naciśniesz „spust” swojego smartfonowego aparatu, postaraj się, aby na zdjęciu nie było przypadkowych elementów, a te pożądane były odpowiednio „ułożone”.|C. Nie bój się sentymentalnych kadrów. Fotografia uwiecznia nie tylko osoby i miejsca, ale także twoje tęsknoty i zachwyty.|D. Popularne miejsca przyciągają rzesze turystów. W takich warunkach zrobienie dobrego zdjęcia zwykle graniczy z cudem.|E. Dodatkowe sztuczne światło, zwłaszcza nieumiejętnie stosowane powoduje powstawanie cieni, czerwonych oczu. Szukaj miejsc dobrze oświetlonych.|F. Większość zdjęć na blogach podróżniczych została zrobiona telefonami. To pokazuje, że dobre zdjęcie z podróży można wykonać każdym sprzętem, o ile się pamięta o kilku podstawowych zasadach.|G. Era stania na baczność, na wprost aparatu, minęła. Spróbuj ustrzelić zdjęcie w ruchu – będzie naturalniejsze i ciekawsze.|H. Naprawdę krzywych wież jest na świecie zaledwie kilka. Zadbaj więc, aby pozostałe budynki nie musiały z nią konkurować i nie sprawiały wrażenia, jakby miały za chwilę upaść.|I. Najlepsze kadry powstają, kiedy temat fotografii umieścimy w jednej trzeciej lewej bądź prawej części obrazu, resztę pozostawiając niejako otwartą.|J. Postaraj się uchwycić kadry, w których blask będzie przecinany np. przez konary drzew. Pamiętaj o przełączeniu aparatu na odpowiedni tryb, żeby ciemne miejsca nie były zbyt czarne, a te jasne – przepalone.|K. Jeśli głównym bohaterem zdjęcia ma być człowiek, zadbaj o to, aby zmieścił się na fotografii w całości. Oszczędź bliskim lub znajomym „obcinania” kończyn."
+  correctAnswer: "H. Naprawdę krzywych wież jest na świecie zaledwie kilka. Zadbaj więc, aby pozostałe budynki nie musiały z nią konkurować i nie sprawiały wrażenia, jakby miały za chwilę upaść."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-r3-q3
+  passageRef: certyfikat-polski-B2-2023-02-read-3
+  questionType: matching
+  questionText: "Zwróć uwagę na kontrasty"
+  options: "A. Światło nadaje zdjęciu niepowtarzalnego klimatu. Z uroków „złotej godziny” można korzystać nie tylko po wschodzie słońca. Charakterystyczne złote odcienie uchwycisz także przed zmierzchem.|B. Zanim naciśniesz „spust” swojego smartfonowego aparatu, postaraj się, aby na zdjęciu nie było przypadkowych elementów, a te pożądane były odpowiednio „ułożone”.|C. Nie bój się sentymentalnych kadrów. Fotografia uwiecznia nie tylko osoby i miejsca, ale także twoje tęsknoty i zachwyty.|D. Popularne miejsca przyciągają rzesze turystów. W takich warunkach zrobienie dobrego zdjęcia zwykle graniczy z cudem.|E. Dodatkowe sztuczne światło, zwłaszcza nieumiejętnie stosowane powoduje powstawanie cieni, czerwonych oczu. Szukaj miejsc dobrze oświetlonych.|F. Większość zdjęć na blogach podróżniczych została zrobiona telefonami. To pokazuje, że dobre zdjęcie z podróży można wykonać każdym sprzętem, o ile się pamięta o kilku podstawowych zasadach.|G. Era stania na baczność, na wprost aparatu, minęła. Spróbuj ustrzelić zdjęcie w ruchu – będzie naturalniejsze i ciekawsze.|H. Naprawdę krzywych wież jest na świecie zaledwie kilka. Zadbaj więc, aby pozostałe budynki nie musiały z nią konkurować i nie sprawiały wrażenia, jakby miały za chwilę upaść.|I. Najlepsze kadry powstają, kiedy temat fotografii umieścimy w jednej trzeciej lewej bądź prawej części obrazu, resztę pozostawiając niejako otwartą.|J. Postaraj się uchwycić kadry, w których blask będzie przecinany np. przez konary drzew. Pamiętaj o przełączeniu aparatu na odpowiedni tryb, żeby ciemne miejsca nie były zbyt czarne, a te jasne – przepalone.|K. Jeśli głównym bohaterem zdjęcia ma być człowiek, zadbaj o to, aby zmieścił się na fotografii w całości. Oszczędź bliskim lub znajomym „obcinania” kończyn."
+  correctAnswer: "J. Postaraj się uchwycić kadry, w których blask będzie przecinany np. przez konary drzew. Pamiętaj o przełączeniu aparatu na odpowiedni tryb, żeby ciemne miejsca nie były zbyt czarne, a te jasne – przepalone."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-r3-q4
+  passageRef: certyfikat-polski-B2-2023-02-read-3
+  questionType: matching
+  questionText: "Zadbaj o kompozycję"
+  options: "A. Światło nadaje zdjęciu niepowtarzalnego klimatu. Z uroków „złotej godziny” można korzystać nie tylko po wschodzie słońca. Charakterystyczne złote odcienie uchwycisz także przed zmierzchem.|B. Zanim naciśniesz „spust” swojego smartfonowego aparatu, postaraj się, aby na zdjęciu nie było przypadkowych elementów, a te pożądane były odpowiednio „ułożone”.|C. Nie bój się sentymentalnych kadrów. Fotografia uwiecznia nie tylko osoby i miejsca, ale także twoje tęsknoty i zachwyty.|D. Popularne miejsca przyciągają rzesze turystów. W takich warunkach zrobienie dobrego zdjęcia zwykle graniczy z cudem.|E. Dodatkowe sztuczne światło, zwłaszcza nieumiejętnie stosowane powoduje powstawanie cieni, czerwonych oczu. Szukaj miejsc dobrze oświetlonych.|F. Większość zdjęć na blogach podróżniczych została zrobiona telefonami. To pokazuje, że dobre zdjęcie z podróży można wykonać każdym sprzętem, o ile się pamięta o kilku podstawowych zasadach.|G. Era stania na baczność, na wprost aparatu, minęła. Spróbuj ustrzelić zdjęcie w ruchu – będzie naturalniejsze i ciekawsze.|H. Naprawdę krzywych wież jest na świecie zaledwie kilka. Zadbaj więc, aby pozostałe budynki nie musiały z nią konkurować i nie sprawiały wrażenia, jakby miały za chwilę upaść.|I. Najlepsze kadry powstają, kiedy temat fotografii umieścimy w jednej trzeciej lewej bądź prawej części obrazu, resztę pozostawiając niejako otwartą.|J. Postaraj się uchwycić kadry, w których blask będzie przecinany np. przez konary drzew. Pamiętaj o przełączeniu aparatu na odpowiedni tryb, żeby ciemne miejsca nie były zbyt czarne, a te jasne – przepalone.|K. Jeśli głównym bohaterem zdjęcia ma być człowiek, zadbaj o to, aby zmieścił się na fotografii w całości. Oszczędź bliskim lub znajomym „obcinania” kończyn."
+  correctAnswer: "B. Zanim naciśniesz „spust” swojego smartfonowego aparatu, postaraj się, aby na zdjęciu nie było przypadkowych elementów, a te pożądane były odpowiednio „ułożone”."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-r3-q5
+  passageRef: certyfikat-polski-B2-2023-02-read-3
+  questionType: matching
+  questionText: "Działaj zgodnie z zasadą trójpodziału"
+  options: "A. Światło nadaje zdjęciu niepowtarzalnego klimatu. Z uroków „złotej godziny” można korzystać nie tylko po wschodzie słońca. Charakterystyczne złote odcienie uchwycisz także przed zmierzchem.|B. Zanim naciśniesz „spust” swojego smartfonowego aparatu, postaraj się, aby na zdjęciu nie było przypadkowych elementów, a te pożądane były odpowiednio „ułożone”.|C. Nie bój się sentymentalnych kadrów. Fotografia uwiecznia nie tylko osoby i miejsca, ale także twoje tęsknoty i zachwyty.|D. Popularne miejsca przyciągają rzesze turystów. W takich warunkach zrobienie dobrego zdjęcia zwykle graniczy z cudem.|E. Dodatkowe sztuczne światło, zwłaszcza nieumiejętnie stosowane powoduje powstawanie cieni, czerwonych oczu. Szukaj miejsc dobrze oświetlonych.|F. Większość zdjęć na blogach podróżniczych została zrobiona telefonami. To pokazuje, że dobre zdjęcie z podróży można wykonać każdym sprzętem, o ile się pamięta o kilku podstawowych zasadach.|G. Era stania na baczność, na wprost aparatu, minęła. Spróbuj ustrzelić zdjęcie w ruchu – będzie naturalniejsze i ciekawsze.|H. Naprawdę krzywych wież jest na świecie zaledwie kilka. Zadbaj więc, aby pozostałe budynki nie musiały z nią konkurować i nie sprawiały wrażenia, jakby miały za chwilę upaść.|I. Najlepsze kadry powstają, kiedy temat fotografii umieścimy w jednej trzeciej lewej bądź prawej części obrazu, resztę pozostawiając niejako otwartą.|J. Postaraj się uchwycić kadry, w których blask będzie przecinany np. przez konary drzew. Pamiętaj o przełączeniu aparatu na odpowiedni tryb, żeby ciemne miejsca nie były zbyt czarne, a te jasne – przepalone.|K. Jeśli głównym bohaterem zdjęcia ma być człowiek, zadbaj o to, aby zmieścił się na fotografii w całości. Oszczędź bliskim lub znajomym „obcinania” kończyn."
+  correctAnswer: "I. Najlepsze kadry powstają, kiedy temat fotografii umieścimy w jednej trzeciej lewej bądź prawej części obrazu, resztę pozostawiając niejako otwartą."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-r3-q6
+  passageRef: certyfikat-polski-B2-2023-02-read-3
+  questionType: matching
+  questionText: "Unikaj lampy błyskowej"
+  options: "A. Światło nadaje zdjęciu niepowtarzalnego klimatu. Z uroków „złotej godziny” można korzystać nie tylko po wschodzie słońca. Charakterystyczne złote odcienie uchwycisz także przed zmierzchem.|B. Zanim naciśniesz „spust” swojego smartfonowego aparatu, postaraj się, aby na zdjęciu nie było przypadkowych elementów, a te pożądane były odpowiednio „ułożone”.|C. Nie bój się sentymentalnych kadrów. Fotografia uwiecznia nie tylko osoby i miejsca, ale także twoje tęsknoty i zachwyty.|D. Popularne miejsca przyciągają rzesze turystów. W takich warunkach zrobienie dobrego zdjęcia zwykle graniczy z cudem.|E. Dodatkowe sztuczne światło, zwłaszcza nieumiejętnie stosowane powoduje powstawanie cieni, czerwonych oczu. Szukaj miejsc dobrze oświetlonych.|F. Większość zdjęć na blogach podróżniczych została zrobiona telefonami. To pokazuje, że dobre zdjęcie z podróży można wykonać każdym sprzętem, o ile się pamięta o kilku podstawowych zasadach.|G. Era stania na baczność, na wprost aparatu, minęła. Spróbuj ustrzelić zdjęcie w ruchu – będzie naturalniejsze i ciekawsze.|H. Naprawdę krzywych wież jest na świecie zaledwie kilka. Zadbaj więc, aby pozostałe budynki nie musiały z nią konkurować i nie sprawiały wrażenia, jakby miały za chwilę upaść.|I. Najlepsze kadry powstają, kiedy temat fotografii umieścimy w jednej trzeciej lewej bądź prawej części obrazu, resztę pozostawiając niejako otwartą.|J. Postaraj się uchwycić kadry, w których blask będzie przecinany np. przez konary drzew. Pamiętaj o przełączeniu aparatu na odpowiedni tryb, żeby ciemne miejsca nie były zbyt czarne, a te jasne – przepalone.|K. Jeśli głównym bohaterem zdjęcia ma być człowiek, zadbaj o to, aby zmieścił się na fotografii w całości. Oszczędź bliskim lub znajomym „obcinania” kończyn."
+  correctAnswer: "E. Dodatkowe sztuczne światło, zwłaszcza nieumiejętnie stosowane powoduje powstawanie cieni, czerwonych oczu. Szukaj miejsc dobrze oświetlonych."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-r3-q7
+  passageRef: certyfikat-polski-B2-2023-02-read-3
+  questionType: matching
+  questionText: "Postaw na postać"
+  options: "A. Światło nadaje zdjęciu niepowtarzalnego klimatu. Z uroków „złotej godziny” można korzystać nie tylko po wschodzie słońca. Charakterystyczne złote odcienie uchwycisz także przed zmierzchem.|B. Zanim naciśniesz „spust” swojego smartfonowego aparatu, postaraj się, aby na zdjęciu nie było przypadkowych elementów, a te pożądane były odpowiednio „ułożone”.|C. Nie bój się sentymentalnych kadrów. Fotografia uwiecznia nie tylko osoby i miejsca, ale także twoje tęsknoty i zachwyty.|D. Popularne miejsca przyciągają rzesze turystów. W takich warunkach zrobienie dobrego zdjęcia zwykle graniczy z cudem.|E. Dodatkowe sztuczne światło, zwłaszcza nieumiejętnie stosowane powoduje powstawanie cieni, czerwonych oczu. Szukaj miejsc dobrze oświetlonych.|F. Większość zdjęć na blogach podróżniczych została zrobiona telefonami. To pokazuje, że dobre zdjęcie z podróży można wykonać każdym sprzętem, o ile się pamięta o kilku podstawowych zasadach.|G. Era stania na baczność, na wprost aparatu, minęła. Spróbuj ustrzelić zdjęcie w ruchu – będzie naturalniejsze i ciekawsze.|H. Naprawdę krzywych wież jest na świecie zaledwie kilka. Zadbaj więc, aby pozostałe budynki nie musiały z nią konkurować i nie sprawiały wrażenia, jakby miały za chwilę upaść.|I. Najlepsze kadry powstają, kiedy temat fotografii umieścimy w jednej trzeciej lewej bądź prawej części obrazu, resztę pozostawiając niejako otwartą.|J. Postaraj się uchwycić kadry, w których blask będzie przecinany np. przez konary drzew. Pamiętaj o przełączeniu aparatu na odpowiedni tryb, żeby ciemne miejsca nie były zbyt czarne, a te jasne – przepalone.|K. Jeśli głównym bohaterem zdjęcia ma być człowiek, zadbaj o to, aby zmieścił się na fotografii w całości. Oszczędź bliskim lub znajomym „obcinania” kończyn."
+  correctAnswer: "K. Jeśli głównym bohaterem zdjęcia ma być człowiek, zadbaj o to, aby zmieścił się na fotografii w całości. Oszczędź bliskim lub znajomym „obcinania” kończyn."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-r3-q8
+  passageRef: certyfikat-polski-B2-2023-02-read-3
+  questionType: matching
+  questionText: "Poluj na niepozowane ujęcia"
+  options: "A. Światło nadaje zdjęciu niepowtarzalnego klimatu. Z uroków „złotej godziny” można korzystać nie tylko po wschodzie słońca. Charakterystyczne złote odcienie uchwycisz także przed zmierzchem.|B. Zanim naciśniesz „spust” swojego smartfonowego aparatu, postaraj się, aby na zdjęciu nie było przypadkowych elementów, a te pożądane były odpowiednio „ułożone”.|C. Nie bój się sentymentalnych kadrów. Fotografia uwiecznia nie tylko osoby i miejsca, ale także twoje tęsknoty i zachwyty.|D. Popularne miejsca przyciągają rzesze turystów. W takich warunkach zrobienie dobrego zdjęcia zwykle graniczy z cudem.|E. Dodatkowe sztuczne światło, zwłaszcza nieumiejętnie stosowane powoduje powstawanie cieni, czerwonych oczu. Szukaj miejsc dobrze oświetlonych.|F. Większość zdjęć na blogach podróżniczych została zrobiona telefonami. To pokazuje, że dobre zdjęcie z podróży można wykonać każdym sprzętem, o ile się pamięta o kilku podstawowych zasadach.|G. Era stania na baczność, na wprost aparatu, minęła. Spróbuj ustrzelić zdjęcie w ruchu – będzie naturalniejsze i ciekawsze.|H. Naprawdę krzywych wież jest na świecie zaledwie kilka. Zadbaj więc, aby pozostałe budynki nie musiały z nią konkurować i nie sprawiały wrażenia, jakby miały za chwilę upaść.|I. Najlepsze kadry powstają, kiedy temat fotografii umieścimy w jednej trzeciej lewej bądź prawej części obrazu, resztę pozostawiając niejako otwartą.|J. Postaraj się uchwycić kadry, w których blask będzie przecinany np. przez konary drzew. Pamiętaj o przełączeniu aparatu na odpowiedni tryb, żeby ciemne miejsca nie były zbyt czarne, a te jasne – przepalone.|K. Jeśli głównym bohaterem zdjęcia ma być człowiek, zadbaj o to, aby zmieścił się na fotografii w całości. Oszczędź bliskim lub znajomym „obcinania” kończyn."
+  correctAnswer: "G. Era stania na baczność, na wprost aparatu, minęła. Spróbuj ustrzelić zdjęcie w ruchu – będzie naturalniejsze i ciekawsze."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-r3-q9
+  passageRef: certyfikat-polski-B2-2023-02-read-3
+  questionType: matching
+  questionText: "Włóż w zdjęcie trochę serca"
+  options: "A. Światło nadaje zdjęciu niepowtarzalnego klimatu. Z uroków „złotej godziny” można korzystać nie tylko po wschodzie słońca. Charakterystyczne złote odcienie uchwycisz także przed zmierzchem.|B. Zanim naciśniesz „spust” swojego smartfonowego aparatu, postaraj się, aby na zdjęciu nie było przypadkowych elementów, a te pożądane były odpowiednio „ułożone”.|C. Nie bój się sentymentalnych kadrów. Fotografia uwiecznia nie tylko osoby i miejsca, ale także twoje tęsknoty i zachwyty.|D. Popularne miejsca przyciągają rzesze turystów. W takich warunkach zrobienie dobrego zdjęcia zwykle graniczy z cudem.|E. Dodatkowe sztuczne światło, zwłaszcza nieumiejętnie stosowane powoduje powstawanie cieni, czerwonych oczu. Szukaj miejsc dobrze oświetlonych.|F. Większość zdjęć na blogach podróżniczych została zrobiona telefonami. To pokazuje, że dobre zdjęcie z podróży można wykonać każdym sprzętem, o ile się pamięta o kilku podstawowych zasadach.|G. Era stania na baczność, na wprost aparatu, minęła. Spróbuj ustrzelić zdjęcie w ruchu – będzie naturalniejsze i ciekawsze.|H. Naprawdę krzywych wież jest na świecie zaledwie kilka. Zadbaj więc, aby pozostałe budynki nie musiały z nią konkurować i nie sprawiały wrażenia, jakby miały za chwilę upaść.|I. Najlepsze kadry powstają, kiedy temat fotografii umieścimy w jednej trzeciej lewej bądź prawej części obrazu, resztę pozostawiając niejako otwartą.|J. Postaraj się uchwycić kadry, w których blask będzie przecinany np. przez konary drzew. Pamiętaj o przełączeniu aparatu na odpowiedni tryb, żeby ciemne miejsca nie były zbyt czarne, a te jasne – przepalone.|K. Jeśli głównym bohaterem zdjęcia ma być człowiek, zadbaj o to, aby zmieścił się na fotografii w całości. Oszczędź bliskim lub znajomym „obcinania” kończyn."
+  correctAnswer: "C. Nie bój się sentymentalnych kadrów. Fotografia uwiecznia nie tylko osoby i miejsca, ale także twoje tęsknoty i zachwyty."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-r3-q10
+  passageRef: certyfikat-polski-B2-2023-02-read-3
+  questionType: matching
+  questionText: "Wybierz odpowiednią porę"
+  options: "A. Światło nadaje zdjęciu niepowtarzalnego klimatu. Z uroków „złotej godziny” można korzystać nie tylko po wschodzie słońca. Charakterystyczne złote odcienie uchwycisz także przed zmierzchem.|B. Zanim naciśniesz „spust” swojego smartfonowego aparatu, postaraj się, aby na zdjęciu nie było przypadkowych elementów, a te pożądane były odpowiednio „ułożone”.|C. Nie bój się sentymentalnych kadrów. Fotografia uwiecznia nie tylko osoby i miejsca, ale także twoje tęsknoty i zachwyty.|D. Popularne miejsca przyciągają rzesze turystów. W takich warunkach zrobienie dobrego zdjęcia zwykle graniczy z cudem.|E. Dodatkowe sztuczne światło, zwłaszcza nieumiejętnie stosowane powoduje powstawanie cieni, czerwonych oczu. Szukaj miejsc dobrze oświetlonych.|F. Większość zdjęć na blogach podróżniczych została zrobiona telefonami. To pokazuje, że dobre zdjęcie z podróży można wykonać każdym sprzętem, o ile się pamięta o kilku podstawowych zasadach.|G. Era stania na baczność, na wprost aparatu, minęła. Spróbuj ustrzelić zdjęcie w ruchu – będzie naturalniejsze i ciekawsze.|H. Naprawdę krzywych wież jest na świecie zaledwie kilka. Zadbaj więc, aby pozostałe budynki nie musiały z nią konkurować i nie sprawiały wrażenia, jakby miały za chwilę upaść.|I. Najlepsze kadry powstają, kiedy temat fotografii umieścimy w jednej trzeciej lewej bądź prawej części obrazu, resztę pozostawiając niejako otwartą.|J. Postaraj się uchwycić kadry, w których blask będzie przecinany np. przez konary drzew. Pamiętaj o przełączeniu aparatu na odpowiedni tryb, żeby ciemne miejsca nie były zbyt czarne, a te jasne – przepalone.|K. Jeśli głównym bohaterem zdjęcia ma być człowiek, zadbaj o to, aby zmieścił się na fotografii w całości. Oszczędź bliskim lub znajomym „obcinania” kończyn."
+  correctAnswer: "A. Światło nadaje zdjęciu niepowtarzalnego klimatu. Z uroków „złotej godziny” można korzystać nie tylko po wschodzie słońca. Charakterystyczne złote odcienie uchwycisz także przed zmierzchem."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-r4-q1
+  passageRef: certyfikat-polski-B2-2023-02-read-4
+  questionType: true_false_not_given
+  questionText: "Mężczyzna postanowił przygarnąć kota i nie informować o tym żony."
+  options: "TAK|NIE|BI"
+  correctAnswer: BI
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-r4-q2
+  passageRef: certyfikat-polski-B2-2023-02-read-4
+  questionType: true_false_not_given
+  questionText: "Opieka nad zwierzęciem od razu zaczęła przynosić pozytywne rezultaty."
+  options: "TAK|NIE|BI"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-r4-q3
+  passageRef: certyfikat-polski-B2-2023-02-read-4
+  questionType: true_false_not_given
+  questionText: "Od czasów powojennych okolice zamieszkania leśniczego pełne są bezpańskich kotów."
+  options: "TAK|NIE|BI"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-r4-q4
+  passageRef: certyfikat-polski-B2-2023-02-read-4
+  questionType: true_false_not_given
+  questionText: "Leśniczy od początku wiedział, że ma do czynienia z chronionym drapieżnikiem."
+  options: "TAK|NIE|BI"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-r4-q5
+  passageRef: certyfikat-polski-B2-2023-02-read-4
+  questionType: true_false_not_given
+  questionText: "Pracownicy parku narodowego szybko przejęli opiekę nad żbikiem."
+  options: "TAK|NIE|BI"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-r4-q6
+  passageRef: certyfikat-polski-B2-2023-02-read-4
+  questionType: true_false_not_given
+  questionText: "Zagraniczne badania potwierdziły, że zwierzę należy do chronionego gatunku."
+  options: "TAK|NIE|BI"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-r4-q7
+  passageRef: certyfikat-polski-B2-2023-02-read-4
+  questionType: true_false_not_given
+  questionText: "Leśniczy obawiał się, czy młody żbik da sobie radę na wolności."
+  options: "TAK|NIE|BI"
+  correctAnswer: BI
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-r4-q8
+  passageRef: certyfikat-polski-B2-2023-02-read-4
+  questionType: true_false_not_given
+  questionText: "Wypuszczenie żbika zostało odpowiednio nagłośnione."
+  options: "TAK|NIE|BI"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-r4-q9
+  passageRef: certyfikat-polski-B2-2023-02-read-4
+  questionType: true_false_not_given
+  questionText: "Dzięki obroży udało się śledzić trasę przemieszczania się zwierzęcia."
+  options: "TAK|NIE|BI"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-r4-q10
+  passageRef: certyfikat-polski-B2-2023-02-read-4
+  questionType: true_false_not_given
+  questionText: "Od czasu tamtego wydarzenia leśniczy chętnie przygarnia porzucone zwierzęta."
+  options: "TAK|NIE|BI"
+  correctAnswer: BI
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-r5-q1
+  passageRef: certyfikat-polski-B2-2023-02-read-5
+  questionType: fill_gap
+  questionText: "Luka 1 w tekście „Edukacja pozaformalna”"
+  options: "ani|lecz|lęk|obrazowo|osobno|pomaga|przeciwdziała|przekaz|razem|sprzyja|świadomie|uwzględnia|współpraca|zawodowo"
+  correctAnswer: "uwzględnia"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-r5-q2
+  passageRef: certyfikat-polski-B2-2023-02-read-5
+  questionType: fill_gap
+  questionText: "Luka 2 w tekście „Edukacja pozaformalna”"
+  options: "ani|lecz|lęk|obrazowo|osobno|pomaga|przeciwdziała|przekaz|razem|sprzyja|świadomie|uwzględnia|współpraca|zawodowo"
+  correctAnswer: obrazowo
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-r5-q3
+  passageRef: certyfikat-polski-B2-2023-02-read-5
+  questionType: fill_gap
+  questionText: "Luka 3 w tekście „Edukacja pozaformalna”"
+  options: "ani|lecz|lęk|obrazowo|osobno|pomaga|przeciwdziała|przekaz|razem|sprzyja|świadomie|uwzględnia|współpraca|zawodowo"
+  correctAnswer: pomaga
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-r5-q4
+  passageRef: certyfikat-polski-B2-2023-02-read-5
+  questionType: fill_gap
+  questionText: "Luka 4 w tekście „Edukacja pozaformalna”"
+  options: "ani|lecz|lęk|obrazowo|osobno|pomaga|przeciwdziała|przekaz|razem|sprzyja|świadomie|uwzględnia|współpraca|zawodowo"
+  correctAnswer: zawodowo
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-r5-q5
+  passageRef: certyfikat-polski-B2-2023-02-read-5
+  questionType: fill_gap
+  questionText: "Luka 5 w tekście „Edukacja pozaformalna”"
+  options: "ani|lecz|lęk|obrazowo|osobno|pomaga|przeciwdziała|przekaz|razem|sprzyja|świadomie|uwzględnia|współpraca|zawodowo"
+  correctAnswer: przekaz
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-r5-q6
+  passageRef: certyfikat-polski-B2-2023-02-read-5
+  questionType: fill_gap
+  questionText: "Luka 6 w tekście „Edukacja pozaformalna”"
+  options: "ani|lecz|lęk|obrazowo|osobno|pomaga|przeciwdziała|przekaz|razem|sprzyja|świadomie|uwzględnia|współpraca|zawodowo"
+  correctAnswer: lecz
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-r5-q7
+  passageRef: certyfikat-polski-B2-2023-02-read-5
+  questionType: fill_gap
+  questionText: "Luka 7 w tekście „Edukacja pozaformalna”"
+  options: "ani|lecz|lęk|obrazowo|osobno|pomaga|przeciwdziała|przekaz|razem|sprzyja|świadomie|uwzględnia|współpraca|zawodowo"
+  correctAnswer: sprzyja
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-r5-q8
+  passageRef: certyfikat-polski-B2-2023-02-read-5
+  questionType: fill_gap
+  questionText: "Luka 8 w tekście „Edukacja pozaformalna”"
+  options: "ani|lecz|lęk|obrazowo|osobno|pomaga|przeciwdziała|przekaz|razem|sprzyja|świadomie|uwzględnia|współpraca|zawodowo"
+  correctAnswer: "lęk"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-r5-q9
+  passageRef: certyfikat-polski-B2-2023-02-read-5
+  questionType: fill_gap
+  questionText: "Luka 9 w tekście „Edukacja pozaformalna”"
+  options: "ani|lecz|lęk|obrazowo|osobno|pomaga|przeciwdziała|przekaz|razem|sprzyja|świadomie|uwzględnia|współpraca|zawodowo"
+  correctAnswer: "współpraca"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-B2-2023-02-r5-q10
+  passageRef: certyfikat-polski-B2-2023-02-read-5
+  questionType: fill_gap
+  questionText: "Luka 10 w tekście „Edukacja pozaformalna”"
+  options: "ani|lecz|lęk|obrazowo|osobno|pomaga|przeciwdziała|przekaz|razem|sprzyja|świadomie|uwzględnia|współpraca|zawodowo"
+  correctAnswer: razem
+  pointsQuarter: 2
+}

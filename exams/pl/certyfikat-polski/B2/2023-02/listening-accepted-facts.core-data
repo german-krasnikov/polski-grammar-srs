@@ -1,0 +1,25 @@
+DSL 1
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-B2-2023-02-l5-q3-fact-1
+  questionRef: certyfikat-polski-B2-2023-02-l5-q3
+  creditQuarter: 2
+  displayText: architektoniczna
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-B2-2023-02-l5-q3-fact-2
+  questionRef: certyfikat-polski-B2-2023-02-l5-q3
+  creditQuarter: 2
+  displayText: "społeczna"
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-B2-2023-02-l5-q8-fact-1
+  questionRef: certyfikat-polski-B2-2023-02-l5-q8
+  creditQuarter: 2
+  displayText: "cień"
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-B2-2023-02-l5-q8-fact-2
+  questionRef: certyfikat-polski-B2-2023-02-l5-q8
+  creditQuarter: 2
+  displayText: wiatr
+}

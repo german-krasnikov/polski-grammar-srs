@@ -1,0 +1,12 @@
+TEST "B2 2022-02 all five source-audited recording windows" PROFILE playmode
+  open exam="B2 Certyfikat 2022-02" module="listening"
+  auditSegment start=107 end=448
+  advanceTask count=1
+  auditSegment start=448 end=769
+  advanceTask count=1
+  auditSegment start=769 end=1241
+  advanceTask count=1
+  auditSegment start=1241 end=1609
+  advanceTask count=1
+  auditSegment start=1609 end=1923
+END

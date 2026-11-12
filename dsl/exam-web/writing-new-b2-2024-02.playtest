@@ -1,0 +1,23 @@
+TEST "B2 2024-02 official Writing set I retains Polish drafts and awaits manual assessment" PROFILE playmode
+  open exam="B2 Certyfikat 2024-02" module="writing"
+  ASSERT writing.setChoiceCount == 3
+  selectWritingSet set="I"
+  ASSERT writing.taskLabel == "Задание 1 / 2"
+  ASSERT writing.instructionOpening == "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy."
+  ASSERT writing.promptOpening == "Proszę napisać e-mail do swojej polskiej przyjaciółki / swojego polskiego przyjaciela i opisać w nim swój nowy samochód / swój nowy sprzęt kuchenny."
+  writeDraft text="Życzę Państwu sukcesów."
+  ASSERT writing.draft == "Życzę Państwu sukcesów."
+  nextWriting
+  ASSERT writing.taskLabel == "Задание 2 / 2"
+  ASSERT writing.promptOpening == "Współpracuje Pani/Pan z polską gazetą. Proszę napisać dla niej sprawozdanie z dwudniowej wystawy zoologicznej / targów zabawek i artykułów dla dzieci."
+  writeDraft text="Łódź inspiruje mnie do pisania."
+  back
+  ASSERT writing.draft == "Życzę Państwu sukcesów."
+  nextWriting
+  ASSERT writing.draft == "Łódź inspiruje mnie do pisania."
+  submitWriting
+  ASSERT writing.reviewCount == 2
+  ASSERT writing.reviewDrafts == "Życzę Państwu sukcesów.|Łódź inspiruje mnie do pisania."
+  ASSERT writing.manualPoints == "0|40|40"
+  ASSERT writing.autoScoreVisible == false
+END

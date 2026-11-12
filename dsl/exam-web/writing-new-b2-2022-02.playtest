@@ -1,0 +1,26 @@
+TEST "B2 2022-02 official Writing set I retains Polish drafts and awaits manual assessment" PROFILE playmode
+  open exam="B2 Certyfikat 2022-02" module="writing"
+  ASSERT writing.setChoiceCount == 3
+  selectWritingSet set="I"
+  ASSERT writing.taskLabel == "Задание 1 / 2"
+  ASSERT writing.instructionOpening == "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy."
+  ASSERT writing.promptOpening == "Jest Pani/Pan animatorem zabaw dla dzieci. Proszę zareklamować swoje usługi na polskim portalu internetowym „Atrakcje dla Najmłodszych”."
+  writeDraft text="Życzę Państwu sukcesów."
+  ASSERT writing.draft == "Życzę Państwu sukcesów."
+  nextWriting
+  ASSERT writing.taskLabel == "Задание 2 / 2"
+  ASSERT writing.promptOpening == "Proszę napisać opowiadanie zainspirowane poniższym zdjęciem."
+  waitImage
+  ASSERT exam.promptImageLoaded == true
+  ASSERT exam.promptImageAlt == "Dwie osoby w motorowej łodzi na jeziorze, widziane od przodu."
+  writeDraft text="Łódź inspiruje mnie do pisania."
+  back
+  ASSERT writing.draft == "Życzę Państwu sukcesów."
+  nextWriting
+  ASSERT writing.draft == "Łódź inspiruje mnie do pisania."
+  submitWriting
+  ASSERT writing.reviewCount == 2
+  ASSERT writing.reviewDrafts == "Życzę Państwu sukcesów.|Łódź inspiruje mnie do pisania."
+  ASSERT writing.manualPoints == "0|40|40"
+  ASSERT writing.autoScoreVisible == false
+END

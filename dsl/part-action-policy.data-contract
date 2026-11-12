@@ -1,0 +1,5 @@
+DSL 1
+RECORD PartActionPolicyOutcomeRow KEY disposition COUNT 5
+  disposition: string
+  mutation: enum ignore|apply_answer|select_set|move|submit
+END

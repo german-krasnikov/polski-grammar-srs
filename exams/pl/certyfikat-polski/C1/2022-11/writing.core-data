@@ -1,0 +1,51 @@
+DSL 1
+WRITING_TASK {
+  taskId: certyfikat-polski-C1-2022-11-write-i-a
+  examRef: certyfikat-polski-C1-2022-11
+  taskNumber: 1
+  setId: I
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III"
+  promptText: "Jest Pani/Pan dyrektorem firmy motoryzacyjnej (lub firmy produkującej zdrową żywność), która w tym roku obchodzi swoje dziesięciolecie. Proszę napisać przemówienie, które wygłosi Pani/Pan na uroczystości z okazji jubileuszu."
+  wordLimit: 100
+  genre: speech
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-C1-2022-11-write-i-b
+  examRef: certyfikat-polski-C1-2022-11
+  taskNumber: 1
+  setId: I
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III"
+  promptText: "Optymiści mają łatwiejsze życie? Proszę napisać tekst argumentacyjny (rozprawkę), w którym wyrazi Pani/Pan swoją opinię."
+  wordLimit: 300
+  genre: argument
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-C1-2022-11-write-ii-a
+  examRef: certyfikat-polski-C1-2022-11
+  taskNumber: 2
+  setId: II
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III"
+  promptText: "Pani/Pana pasją jest przerabianie niepotrzebnych, starych rzeczy na nowe, funkcjonalne przedmioty. Proszę napisać reklamę swoich usług, którą zamieści Pani/Pan na stronie internetowej „Ekologia i Sztuka Użytkowa”."
+  wordLimit: 80
+  genre: advertisement
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-C1-2022-11-write-ii-b
+  examRef: certyfikat-polski-C1-2022-11
+  taskNumber: 2
+  setId: II
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III"
+  promptText: "Jest Pani/Pan miłośnikiem kryminałów. Portal „Sztuka Dedukcji” ogłosił konkurs literacki na najlepsze opowiadanie detektywistyczne. Chce Pani/Pan wziąć udział w tym konkursie. Proszę napisać opowiadanie pt. „Zagadka kryminalna”."
+  wordLimit: 320
+  genre: story
+}
+WRITING_TASK {
+  taskId: certyfikat-polski-C1-2022-11-write-iii-a
+  examRef: certyfikat-polski-C1-2022-11
+  taskNumber: 3
+  setId: III
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III"
+  promptText: "„Ludzie mówią – »czas to pieniądz«. Ja mówię inaczej – »czas to miłość«. Pieniądz jest znikomy, a miłość trwa” (Stefan Wyszyński). Proszę napisać esej zainspirowany powyższym cytatem."
+  wordLimit: 400
+  genre: essay
+}

@@ -1,0 +1,15 @@
+TEST "C1 April 2024 official paired inflections confirm both items" PROFILE playmode
+  open exam="C1 Certyfikat 2024-04" module="grammar"
+  advance count=7
+  ASSERT grammar.context == "(kilka)"
+  enter text="kilkorgiem"
+  next
+  ASSERT grammar.context == "(przyjaciel)"
+  enter text="przyjaciół"
+  advance count=66
+  submit
+  inspectReview index=8
+  ASSERT grammar.reviewStatus == "correct"
+  inspectReview index=9
+  ASSERT grammar.reviewStatus == "correct"
+END

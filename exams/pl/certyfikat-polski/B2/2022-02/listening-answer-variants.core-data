@@ -1,0 +1,67 @@
+DSL 1
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2022-02-l5-q1-v1
+  questionRef: certyfikat-polski-B2-2022-02-l5-q1
+  answer: "setna rocznica urodzin kompozytora"
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2022-02-l5-q2-v1
+  questionRef: certyfikat-polski-B2-2022-02-l5-q2
+  answer: "jest darmowy"
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2022-02-l5-q2-v2
+  questionRef: certyfikat-polski-B2-2022-02-l5-q2
+  answer: "jest gratis"
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2022-02-l5-q2-v3
+  questionRef: certyfikat-polski-B2-2022-02-l5-q2
+  answer: "jest za darmo"
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2022-02-l5-q2-v4
+  questionRef: certyfikat-polski-B2-2022-02-l5-q2
+  answer: "nic nie kosztuje"
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2022-02-l5-q4-v1
+  questionRef: certyfikat-polski-B2-2022-02-l5-q4
+  answer: "w Łodzi"
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2022-02-l5-q4-v2
+  questionRef: certyfikat-polski-B2-2022-02-l5-q4
+  answer: "za dużą szafą"
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2022-02-l5-q4-v3
+  questionRef: certyfikat-polski-B2-2022-02-l5-q4
+  answer: "za wielką szafą"
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2022-02-l5-q6-v1
+  questionRef: certyfikat-polski-B2-2022-02-l5-q6
+  answer: "z biografiami trzech kompozytorów"
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2022-02-l5-q6-v2
+  questionRef: certyfikat-polski-B2-2022-02-l5-q6
+  answer: "z trzema biografiami"
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2022-02-l5-q7-v1
+  questionRef: certyfikat-polski-B2-2022-02-l5-q7
+  answer: "nagrania z archiwum Polskiego Radia"
+  earnedQuarter: 4
+}

@@ -1,0 +1,37 @@
+DSL 1
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-B2-2022-02-l5-q3-fact-1
+  questionRef: certyfikat-polski-B2-2022-02-l5-q3
+  creditQuarter: 2
+  displayText: opisy
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-B2-2022-02-l5-q3-fact-2
+  questionRef: certyfikat-polski-B2-2022-02-l5-q3
+  creditQuarter: 2
+  displayText: fotografie
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-B2-2022-02-l5-q3-fact-3
+  questionRef: certyfikat-polski-B2-2022-02-l5-q3
+  creditQuarter: 2
+  displayText: "filmy biograficzne"
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-B2-2022-02-l5-q3-fact-4
+  questionRef: certyfikat-polski-B2-2022-02-l5-q3
+  creditQuarter: 2
+  displayText: "filmy dokumentalne"
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-B2-2022-02-l5-q3-fact-5
+  questionRef: certyfikat-polski-B2-2022-02-l5-q3
+  creditQuarter: 2
+  displayText: "reportaże"
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-B2-2022-02-l5-q3-fact-6
+  questionRef: certyfikat-polski-B2-2022-02-l5-q3
+  creditQuarter: 2
+  displayText: playlisty
+}

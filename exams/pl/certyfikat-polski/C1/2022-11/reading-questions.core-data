@@ -1,0 +1,451 @@
+DSL 1
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-r1-q1
+  passageRef: certyfikat-polski-C1-2022-11-read-1
+  questionType: matching
+  questionText: "Ukojenie znad jezior"
+  options: "A. Purchawka to kulisty grzyb, który rośnie w każdym jasnym lesie, na polanie czy łące. Może być niebezpieczny ze względu na swoje właściwości narkotyczne – wywołuje stany półsnu lub snu na jawie oraz halucynacje słuchowe.|B. W medycynie ludowej stosowano wodę bagienną do leczenia chorób dróg oddechowych oraz przewlekłych bólów stawów i kości. Skuteczność kuracji zależała od stężenia dawki.|C. Specyficzna wydzielina z gruczołów ropuchy szarej działa żrąco na skórę, opary podrażniają błony śluzowe jamy ustnej i nosa. Osoby, które znalazły się pod jej wpływem, uskarżały się na krótkotrwałe złudzenia optyczne: wydawało im się, że widzą błyski, jaskrawe płomienie lub snop iskier.|D. Egzotyczne zwierzęta i rośliny fascynują nas znacznie bardziej niż polska przyroda nie tylko dlatego, że są kolorowe i dziwaczne, ale również z powodu swej tajemniczości i czyhających na człowieka zagrożeń.|E. Właściwości lecznicze tataraku porastającego brzegi sztucznych i naturalnych zbiorników wodnych są znane w Europie już od końca średniowiecza za sprawą otrzymywanego z niego olejku eterycznego, który stanowił antidotum na bezsenność, epilepsję, stany gorączkowe, depresję i nerwicę.|F. W polskich rzekach i jeziorach żyją ryby, po zjedzeniu których mogą wystąpić nie tylko klasyczne objawy zatrucia pokarmowego, ale również zaburzenia świadomości, połączone z utratą kontroli nad funkcjonowaniem organizmu.|G. W medycynie ludów syberyjskich podawano muchomora w stanach skrajnego osłabienia, a preparat z suszonych owocników zalanych zimną wodą stosowano jako antidotum przy ukąszeniach jadowitych węży. W homeopatii ów grzyb był uniwersalnym środkiem na zaburzenia systemu nerwowego.|H. Popularna bałtycka makrela ma w sobie groźną substancję, która jest mieszaniną wielu związków chemicznych, powstających w czasie bakteryjnego rozkładu tkanki skórnej i mięśniowej. Objawy zatrucia to kołatanie serca, silne bóle głowy, wymioty oraz wysypka.|I. Skóra salamandry zawiera gruczoły, które uwalniają jadowitą wydzielinę pod wpływem bodźców mechanicznych. W jadzie płaza odkryto alkaloidy, które po odpowiednim przetworzeniu wykorzystuje się do produkcji odurzających trunków.|J. W Europie znana była „czarodziejska” roślina z gatunku wrzosowatych – bagno zwyczajne, o której odurzających właściwościach pisano już w starożytności. Germanie używali jej do produkcji piwa ze względu na gorycz, której mu nadawała. Jednak tak doprawiony trunek spożywany w dużych ilościach wywoływał napady gniewu i furię.|K. Łubin zawiera wyjątkowy alkaloid – lupinidynę, która działa paraliżująco lub pobudzająco na centralny i wegetatywny układ nerwowy. W dużej ilości wywołuje nudności, ślinotok, trudności w przełykaniu."
+  correctAnswer: "E. Właściwości lecznicze tataraku porastającego brzegi sztucznych i naturalnych zbiorników wodnych są znane w Europie już od końca średniowiecza za sprawą otrzymywanego z niego olejku eterycznego, który stanowił antidotum na bezsenność, epilepsję, stany gorączkowe, depresję i nerwicę."
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-r1-q2
+  passageRef: certyfikat-polski-C1-2022-11-read-1
+  questionType: matching
+  questionText: "Gorzkie szaleństwo"
+  options: "A. Purchawka to kulisty grzyb, który rośnie w każdym jasnym lesie, na polanie czy łące. Może być niebezpieczny ze względu na swoje właściwości narkotyczne – wywołuje stany półsnu lub snu na jawie oraz halucynacje słuchowe.|B. W medycynie ludowej stosowano wodę bagienną do leczenia chorób dróg oddechowych oraz przewlekłych bólów stawów i kości. Skuteczność kuracji zależała od stężenia dawki.|C. Specyficzna wydzielina z gruczołów ropuchy szarej działa żrąco na skórę, opary podrażniają błony śluzowe jamy ustnej i nosa. Osoby, które znalazły się pod jej wpływem, uskarżały się na krótkotrwałe złudzenia optyczne: wydawało im się, że widzą błyski, jaskrawe płomienie lub snop iskier.|D. Egzotyczne zwierzęta i rośliny fascynują nas znacznie bardziej niż polska przyroda nie tylko dlatego, że są kolorowe i dziwaczne, ale również z powodu swej tajemniczości i czyhających na człowieka zagrożeń.|E. Właściwości lecznicze tataraku porastającego brzegi sztucznych i naturalnych zbiorników wodnych są znane w Europie już od końca średniowiecza za sprawą otrzymywanego z niego olejku eterycznego, który stanowił antidotum na bezsenność, epilepsję, stany gorączkowe, depresję i nerwicę.|F. W polskich rzekach i jeziorach żyją ryby, po zjedzeniu których mogą wystąpić nie tylko klasyczne objawy zatrucia pokarmowego, ale również zaburzenia świadomości, połączone z utratą kontroli nad funkcjonowaniem organizmu.|G. W medycynie ludów syberyjskich podawano muchomora w stanach skrajnego osłabienia, a preparat z suszonych owocników zalanych zimną wodą stosowano jako antidotum przy ukąszeniach jadowitych węży. W homeopatii ów grzyb był uniwersalnym środkiem na zaburzenia systemu nerwowego.|H. Popularna bałtycka makrela ma w sobie groźną substancję, która jest mieszaniną wielu związków chemicznych, powstających w czasie bakteryjnego rozkładu tkanki skórnej i mięśniowej. Objawy zatrucia to kołatanie serca, silne bóle głowy, wymioty oraz wysypka.|I. Skóra salamandry zawiera gruczoły, które uwalniają jadowitą wydzielinę pod wpływem bodźców mechanicznych. W jadzie płaza odkryto alkaloidy, które po odpowiednim przetworzeniu wykorzystuje się do produkcji odurzających trunków.|J. W Europie znana była „czarodziejska” roślina z gatunku wrzosowatych – bagno zwyczajne, o której odurzających właściwościach pisano już w starożytności. Germanie używali jej do produkcji piwa ze względu na gorycz, której mu nadawała. Jednak tak doprawiony trunek spożywany w dużych ilościach wywoływał napady gniewu i furię.|K. Łubin zawiera wyjątkowy alkaloid – lupinidynę, która działa paraliżująco lub pobudzająco na centralny i wegetatywny układ nerwowy. W dużej ilości wywołuje nudności, ślinotok, trudności w przełykaniu."
+  correctAnswer: "J. W Europie znana była „czarodziejska” roślina z gatunku wrzosowatych – bagno zwyczajne, o której odurzających właściwościach pisano już w starożytności. Germanie używali jej do produkcji piwa ze względu na gorycz, której mu nadawała. Jednak tak doprawiony trunek spożywany w dużych ilościach wywoływał napady gniewu i furię."
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-r1-q3
+  passageRef: certyfikat-polski-C1-2022-11-read-1
+  questionType: matching
+  questionText: "Lecznicze mokradła"
+  options: "A. Purchawka to kulisty grzyb, który rośnie w każdym jasnym lesie, na polanie czy łące. Może być niebezpieczny ze względu na swoje właściwości narkotyczne – wywołuje stany półsnu lub snu na jawie oraz halucynacje słuchowe.|B. W medycynie ludowej stosowano wodę bagienną do leczenia chorób dróg oddechowych oraz przewlekłych bólów stawów i kości. Skuteczność kuracji zależała od stężenia dawki.|C. Specyficzna wydzielina z gruczołów ropuchy szarej działa żrąco na skórę, opary podrażniają błony śluzowe jamy ustnej i nosa. Osoby, które znalazły się pod jej wpływem, uskarżały się na krótkotrwałe złudzenia optyczne: wydawało im się, że widzą błyski, jaskrawe płomienie lub snop iskier.|D. Egzotyczne zwierzęta i rośliny fascynują nas znacznie bardziej niż polska przyroda nie tylko dlatego, że są kolorowe i dziwaczne, ale również z powodu swej tajemniczości i czyhających na człowieka zagrożeń.|E. Właściwości lecznicze tataraku porastającego brzegi sztucznych i naturalnych zbiorników wodnych są znane w Europie już od końca średniowiecza za sprawą otrzymywanego z niego olejku eterycznego, który stanowił antidotum na bezsenność, epilepsję, stany gorączkowe, depresję i nerwicę.|F. W polskich rzekach i jeziorach żyją ryby, po zjedzeniu których mogą wystąpić nie tylko klasyczne objawy zatrucia pokarmowego, ale również zaburzenia świadomości, połączone z utratą kontroli nad funkcjonowaniem organizmu.|G. W medycynie ludów syberyjskich podawano muchomora w stanach skrajnego osłabienia, a preparat z suszonych owocników zalanych zimną wodą stosowano jako antidotum przy ukąszeniach jadowitych węży. W homeopatii ów grzyb był uniwersalnym środkiem na zaburzenia systemu nerwowego.|H. Popularna bałtycka makrela ma w sobie groźną substancję, która jest mieszaniną wielu związków chemicznych, powstających w czasie bakteryjnego rozkładu tkanki skórnej i mięśniowej. Objawy zatrucia to kołatanie serca, silne bóle głowy, wymioty oraz wysypka.|I. Skóra salamandry zawiera gruczoły, które uwalniają jadowitą wydzielinę pod wpływem bodźców mechanicznych. W jadzie płaza odkryto alkaloidy, które po odpowiednim przetworzeniu wykorzystuje się do produkcji odurzających trunków.|J. W Europie znana była „czarodziejska” roślina z gatunku wrzosowatych – bagno zwyczajne, o której odurzających właściwościach pisano już w starożytności. Germanie używali jej do produkcji piwa ze względu na gorycz, której mu nadawała. Jednak tak doprawiony trunek spożywany w dużych ilościach wywoływał napady gniewu i furię.|K. Łubin zawiera wyjątkowy alkaloid – lupinidynę, która działa paraliżująco lub pobudzająco na centralny i wegetatywny układ nerwowy. W dużej ilości wywołuje nudności, ślinotok, trudności w przełykaniu."
+  correctAnswer: "B. W medycynie ludowej stosowano wodę bagienną do leczenia chorób dróg oddechowych oraz przewlekłych bólów stawów i kości. Skuteczność kuracji zależała od stężenia dawki."
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-r1-q4
+  passageRef: certyfikat-polski-C1-2022-11-read-1
+  questionType: matching
+  questionText: "Ucisk w gardle"
+  options: "A. Purchawka to kulisty grzyb, który rośnie w każdym jasnym lesie, na polanie czy łące. Może być niebezpieczny ze względu na swoje właściwości narkotyczne – wywołuje stany półsnu lub snu na jawie oraz halucynacje słuchowe.|B. W medycynie ludowej stosowano wodę bagienną do leczenia chorób dróg oddechowych oraz przewlekłych bólów stawów i kości. Skuteczność kuracji zależała od stężenia dawki.|C. Specyficzna wydzielina z gruczołów ropuchy szarej działa żrąco na skórę, opary podrażniają błony śluzowe jamy ustnej i nosa. Osoby, które znalazły się pod jej wpływem, uskarżały się na krótkotrwałe złudzenia optyczne: wydawało im się, że widzą błyski, jaskrawe płomienie lub snop iskier.|D. Egzotyczne zwierzęta i rośliny fascynują nas znacznie bardziej niż polska przyroda nie tylko dlatego, że są kolorowe i dziwaczne, ale również z powodu swej tajemniczości i czyhających na człowieka zagrożeń.|E. Właściwości lecznicze tataraku porastającego brzegi sztucznych i naturalnych zbiorników wodnych są znane w Europie już od końca średniowiecza za sprawą otrzymywanego z niego olejku eterycznego, który stanowił antidotum na bezsenność, epilepsję, stany gorączkowe, depresję i nerwicę.|F. W polskich rzekach i jeziorach żyją ryby, po zjedzeniu których mogą wystąpić nie tylko klasyczne objawy zatrucia pokarmowego, ale również zaburzenia świadomości, połączone z utratą kontroli nad funkcjonowaniem organizmu.|G. W medycynie ludów syberyjskich podawano muchomora w stanach skrajnego osłabienia, a preparat z suszonych owocników zalanych zimną wodą stosowano jako antidotum przy ukąszeniach jadowitych węży. W homeopatii ów grzyb był uniwersalnym środkiem na zaburzenia systemu nerwowego.|H. Popularna bałtycka makrela ma w sobie groźną substancję, która jest mieszaniną wielu związków chemicznych, powstających w czasie bakteryjnego rozkładu tkanki skórnej i mięśniowej. Objawy zatrucia to kołatanie serca, silne bóle głowy, wymioty oraz wysypka.|I. Skóra salamandry zawiera gruczoły, które uwalniają jadowitą wydzielinę pod wpływem bodźców mechanicznych. W jadzie płaza odkryto alkaloidy, które po odpowiednim przetworzeniu wykorzystuje się do produkcji odurzających trunków.|J. W Europie znana była „czarodziejska” roślina z gatunku wrzosowatych – bagno zwyczajne, o której odurzających właściwościach pisano już w starożytności. Germanie używali jej do produkcji piwa ze względu na gorycz, której mu nadawała. Jednak tak doprawiony trunek spożywany w dużych ilościach wywoływał napady gniewu i furię.|K. Łubin zawiera wyjątkowy alkaloid – lupinidynę, która działa paraliżująco lub pobudzająco na centralny i wegetatywny układ nerwowy. W dużej ilości wywołuje nudności, ślinotok, trudności w przełykaniu."
+  correctAnswer: "K. Łubin zawiera wyjątkowy alkaloid – lupinidynę, która działa paraliżująco lub pobudzająco na centralny i wegetatywny układ nerwowy. W dużej ilości wywołuje nudności, ślinotok, trudności w przełykaniu."
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-r1-q5
+  passageRef: certyfikat-polski-C1-2022-11-read-1
+  questionType: matching
+  questionText: "Lepiej nie dotykać"
+  options: "A. Purchawka to kulisty grzyb, który rośnie w każdym jasnym lesie, na polanie czy łące. Może być niebezpieczny ze względu na swoje właściwości narkotyczne – wywołuje stany półsnu lub snu na jawie oraz halucynacje słuchowe.|B. W medycynie ludowej stosowano wodę bagienną do leczenia chorób dróg oddechowych oraz przewlekłych bólów stawów i kości. Skuteczność kuracji zależała od stężenia dawki.|C. Specyficzna wydzielina z gruczołów ropuchy szarej działa żrąco na skórę, opary podrażniają błony śluzowe jamy ustnej i nosa. Osoby, które znalazły się pod jej wpływem, uskarżały się na krótkotrwałe złudzenia optyczne: wydawało im się, że widzą błyski, jaskrawe płomienie lub snop iskier.|D. Egzotyczne zwierzęta i rośliny fascynują nas znacznie bardziej niż polska przyroda nie tylko dlatego, że są kolorowe i dziwaczne, ale również z powodu swej tajemniczości i czyhających na człowieka zagrożeń.|E. Właściwości lecznicze tataraku porastającego brzegi sztucznych i naturalnych zbiorników wodnych są znane w Europie już od końca średniowiecza za sprawą otrzymywanego z niego olejku eterycznego, który stanowił antidotum na bezsenność, epilepsję, stany gorączkowe, depresję i nerwicę.|F. W polskich rzekach i jeziorach żyją ryby, po zjedzeniu których mogą wystąpić nie tylko klasyczne objawy zatrucia pokarmowego, ale również zaburzenia świadomości, połączone z utratą kontroli nad funkcjonowaniem organizmu.|G. W medycynie ludów syberyjskich podawano muchomora w stanach skrajnego osłabienia, a preparat z suszonych owocników zalanych zimną wodą stosowano jako antidotum przy ukąszeniach jadowitych węży. W homeopatii ów grzyb był uniwersalnym środkiem na zaburzenia systemu nerwowego.|H. Popularna bałtycka makrela ma w sobie groźną substancję, która jest mieszaniną wielu związków chemicznych, powstających w czasie bakteryjnego rozkładu tkanki skórnej i mięśniowej. Objawy zatrucia to kołatanie serca, silne bóle głowy, wymioty oraz wysypka.|I. Skóra salamandry zawiera gruczoły, które uwalniają jadowitą wydzielinę pod wpływem bodźców mechanicznych. W jadzie płaza odkryto alkaloidy, które po odpowiednim przetworzeniu wykorzystuje się do produkcji odurzających trunków.|J. W Europie znana była „czarodziejska” roślina z gatunku wrzosowatych – bagno zwyczajne, o której odurzających właściwościach pisano już w starożytności. Germanie używali jej do produkcji piwa ze względu na gorycz, której mu nadawała. Jednak tak doprawiony trunek spożywany w dużych ilościach wywoływał napady gniewu i furię.|K. Łubin zawiera wyjątkowy alkaloid – lupinidynę, która działa paraliżująco lub pobudzająco na centralny i wegetatywny układ nerwowy. W dużej ilości wywołuje nudności, ślinotok, trudności w przełykaniu."
+  correctAnswer: "I. Skóra salamandry zawiera gruczoły, które uwalniają jadowitą wydzielinę pod wpływem bodźców mechanicznych. W jadzie płaza odkryto alkaloidy, które po odpowiednim przetworzeniu wykorzystuje się do produkcji odurzających trunków."
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-r1-q6
+  passageRef: certyfikat-polski-C1-2022-11-read-1
+  questionType: matching
+  questionText: "Słodkowodna toksyna"
+  options: "A. Purchawka to kulisty grzyb, który rośnie w każdym jasnym lesie, na polanie czy łące. Może być niebezpieczny ze względu na swoje właściwości narkotyczne – wywołuje stany półsnu lub snu na jawie oraz halucynacje słuchowe.|B. W medycynie ludowej stosowano wodę bagienną do leczenia chorób dróg oddechowych oraz przewlekłych bólów stawów i kości. Skuteczność kuracji zależała od stężenia dawki.|C. Specyficzna wydzielina z gruczołów ropuchy szarej działa żrąco na skórę, opary podrażniają błony śluzowe jamy ustnej i nosa. Osoby, które znalazły się pod jej wpływem, uskarżały się na krótkotrwałe złudzenia optyczne: wydawało im się, że widzą błyski, jaskrawe płomienie lub snop iskier.|D. Egzotyczne zwierzęta i rośliny fascynują nas znacznie bardziej niż polska przyroda nie tylko dlatego, że są kolorowe i dziwaczne, ale również z powodu swej tajemniczości i czyhających na człowieka zagrożeń.|E. Właściwości lecznicze tataraku porastającego brzegi sztucznych i naturalnych zbiorników wodnych są znane w Europie już od końca średniowiecza za sprawą otrzymywanego z niego olejku eterycznego, który stanowił antidotum na bezsenność, epilepsję, stany gorączkowe, depresję i nerwicę.|F. W polskich rzekach i jeziorach żyją ryby, po zjedzeniu których mogą wystąpić nie tylko klasyczne objawy zatrucia pokarmowego, ale również zaburzenia świadomości, połączone z utratą kontroli nad funkcjonowaniem organizmu.|G. W medycynie ludów syberyjskich podawano muchomora w stanach skrajnego osłabienia, a preparat z suszonych owocników zalanych zimną wodą stosowano jako antidotum przy ukąszeniach jadowitych węży. W homeopatii ów grzyb był uniwersalnym środkiem na zaburzenia systemu nerwowego.|H. Popularna bałtycka makrela ma w sobie groźną substancję, która jest mieszaniną wielu związków chemicznych, powstających w czasie bakteryjnego rozkładu tkanki skórnej i mięśniowej. Objawy zatrucia to kołatanie serca, silne bóle głowy, wymioty oraz wysypka.|I. Skóra salamandry zawiera gruczoły, które uwalniają jadowitą wydzielinę pod wpływem bodźców mechanicznych. W jadzie płaza odkryto alkaloidy, które po odpowiednim przetworzeniu wykorzystuje się do produkcji odurzających trunków.|J. W Europie znana była „czarodziejska” roślina z gatunku wrzosowatych – bagno zwyczajne, o której odurzających właściwościach pisano już w starożytności. Germanie używali jej do produkcji piwa ze względu na gorycz, której mu nadawała. Jednak tak doprawiony trunek spożywany w dużych ilościach wywoływał napady gniewu i furię.|K. Łubin zawiera wyjątkowy alkaloid – lupinidynę, która działa paraliżująco lub pobudzająco na centralny i wegetatywny układ nerwowy. W dużej ilości wywołuje nudności, ślinotok, trudności w przełykaniu."
+  correctAnswer: "F. W polskich rzekach i jeziorach żyją ryby, po zjedzeniu których mogą wystąpić nie tylko klasyczne objawy zatrucia pokarmowego, ale również zaburzenia świadomości, połączone z utratą kontroli nad funkcjonowaniem organizmu."
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-r1-q7
+  passageRef: certyfikat-polski-C1-2022-11-read-1
+  questionType: matching
+  questionText: "Majaki na łonie natury"
+  options: "A. Purchawka to kulisty grzyb, który rośnie w każdym jasnym lesie, na polanie czy łące. Może być niebezpieczny ze względu na swoje właściwości narkotyczne – wywołuje stany półsnu lub snu na jawie oraz halucynacje słuchowe.|B. W medycynie ludowej stosowano wodę bagienną do leczenia chorób dróg oddechowych oraz przewlekłych bólów stawów i kości. Skuteczność kuracji zależała od stężenia dawki.|C. Specyficzna wydzielina z gruczołów ropuchy szarej działa żrąco na skórę, opary podrażniają błony śluzowe jamy ustnej i nosa. Osoby, które znalazły się pod jej wpływem, uskarżały się na krótkotrwałe złudzenia optyczne: wydawało im się, że widzą błyski, jaskrawe płomienie lub snop iskier.|D. Egzotyczne zwierzęta i rośliny fascynują nas znacznie bardziej niż polska przyroda nie tylko dlatego, że są kolorowe i dziwaczne, ale również z powodu swej tajemniczości i czyhających na człowieka zagrożeń.|E. Właściwości lecznicze tataraku porastającego brzegi sztucznych i naturalnych zbiorników wodnych są znane w Europie już od końca średniowiecza za sprawą otrzymywanego z niego olejku eterycznego, który stanowił antidotum na bezsenność, epilepsję, stany gorączkowe, depresję i nerwicę.|F. W polskich rzekach i jeziorach żyją ryby, po zjedzeniu których mogą wystąpić nie tylko klasyczne objawy zatrucia pokarmowego, ale również zaburzenia świadomości, połączone z utratą kontroli nad funkcjonowaniem organizmu.|G. W medycynie ludów syberyjskich podawano muchomora w stanach skrajnego osłabienia, a preparat z suszonych owocników zalanych zimną wodą stosowano jako antidotum przy ukąszeniach jadowitych węży. W homeopatii ów grzyb był uniwersalnym środkiem na zaburzenia systemu nerwowego.|H. Popularna bałtycka makrela ma w sobie groźną substancję, która jest mieszaniną wielu związków chemicznych, powstających w czasie bakteryjnego rozkładu tkanki skórnej i mięśniowej. Objawy zatrucia to kołatanie serca, silne bóle głowy, wymioty oraz wysypka.|I. Skóra salamandry zawiera gruczoły, które uwalniają jadowitą wydzielinę pod wpływem bodźców mechanicznych. W jadzie płaza odkryto alkaloidy, które po odpowiednim przetworzeniu wykorzystuje się do produkcji odurzających trunków.|J. W Europie znana była „czarodziejska” roślina z gatunku wrzosowatych – bagno zwyczajne, o której odurzających właściwościach pisano już w starożytności. Germanie używali jej do produkcji piwa ze względu na gorycz, której mu nadawała. Jednak tak doprawiony trunek spożywany w dużych ilościach wywoływał napady gniewu i furię.|K. Łubin zawiera wyjątkowy alkaloid – lupinidynę, która działa paraliżująco lub pobudzająco na centralny i wegetatywny układ nerwowy. W dużej ilości wywołuje nudności, ślinotok, trudności w przełykaniu."
+  correctAnswer: "A. Purchawka to kulisty grzyb, który rośnie w każdym jasnym lesie, na polanie czy łące. Może być niebezpieczny ze względu na swoje właściwości narkotyczne – wywołuje stany półsnu lub snu na jawie oraz halucynacje słuchowe."
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-r1-q8
+  passageRef: certyfikat-polski-C1-2022-11-read-1
+  questionType: matching
+  questionText: "Co nas nie zabije, to nas wzmocni"
+  options: "A. Purchawka to kulisty grzyb, który rośnie w każdym jasnym lesie, na polanie czy łące. Może być niebezpieczny ze względu na swoje właściwości narkotyczne – wywołuje stany półsnu lub snu na jawie oraz halucynacje słuchowe.|B. W medycynie ludowej stosowano wodę bagienną do leczenia chorób dróg oddechowych oraz przewlekłych bólów stawów i kości. Skuteczność kuracji zależała od stężenia dawki.|C. Specyficzna wydzielina z gruczołów ropuchy szarej działa żrąco na skórę, opary podrażniają błony śluzowe jamy ustnej i nosa. Osoby, które znalazły się pod jej wpływem, uskarżały się na krótkotrwałe złudzenia optyczne: wydawało im się, że widzą błyski, jaskrawe płomienie lub snop iskier.|D. Egzotyczne zwierzęta i rośliny fascynują nas znacznie bardziej niż polska przyroda nie tylko dlatego, że są kolorowe i dziwaczne, ale również z powodu swej tajemniczości i czyhających na człowieka zagrożeń.|E. Właściwości lecznicze tataraku porastającego brzegi sztucznych i naturalnych zbiorników wodnych są znane w Europie już od końca średniowiecza za sprawą otrzymywanego z niego olejku eterycznego, który stanowił antidotum na bezsenność, epilepsję, stany gorączkowe, depresję i nerwicę.|F. W polskich rzekach i jeziorach żyją ryby, po zjedzeniu których mogą wystąpić nie tylko klasyczne objawy zatrucia pokarmowego, ale również zaburzenia świadomości, połączone z utratą kontroli nad funkcjonowaniem organizmu.|G. W medycynie ludów syberyjskich podawano muchomora w stanach skrajnego osłabienia, a preparat z suszonych owocników zalanych zimną wodą stosowano jako antidotum przy ukąszeniach jadowitych węży. W homeopatii ów grzyb był uniwersalnym środkiem na zaburzenia systemu nerwowego.|H. Popularna bałtycka makrela ma w sobie groźną substancję, która jest mieszaniną wielu związków chemicznych, powstających w czasie bakteryjnego rozkładu tkanki skórnej i mięśniowej. Objawy zatrucia to kołatanie serca, silne bóle głowy, wymioty oraz wysypka.|I. Skóra salamandry zawiera gruczoły, które uwalniają jadowitą wydzielinę pod wpływem bodźców mechanicznych. W jadzie płaza odkryto alkaloidy, które po odpowiednim przetworzeniu wykorzystuje się do produkcji odurzających trunków.|J. W Europie znana była „czarodziejska” roślina z gatunku wrzosowatych – bagno zwyczajne, o której odurzających właściwościach pisano już w starożytności. Germanie używali jej do produkcji piwa ze względu na gorycz, której mu nadawała. Jednak tak doprawiony trunek spożywany w dużych ilościach wywoływał napady gniewu i furię.|K. Łubin zawiera wyjątkowy alkaloid – lupinidynę, która działa paraliżująco lub pobudzająco na centralny i wegetatywny układ nerwowy. W dużej ilości wywołuje nudności, ślinotok, trudności w przełykaniu."
+  correctAnswer: "G. W medycynie ludów syberyjskich podawano muchomora w stanach skrajnego osłabienia, a preparat z suszonych owocników zalanych zimną wodą stosowano jako antidotum przy ukąszeniach jadowitych węży. W homeopatii ów grzyb był uniwersalnym środkiem na zaburzenia systemu nerwowego."
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-r1-q9
+  passageRef: certyfikat-polski-C1-2022-11-read-1
+  questionType: matching
+  questionText: "Morskie torsje"
+  options: "A. Purchawka to kulisty grzyb, który rośnie w każdym jasnym lesie, na polanie czy łące. Może być niebezpieczny ze względu na swoje właściwości narkotyczne – wywołuje stany półsnu lub snu na jawie oraz halucynacje słuchowe.|B. W medycynie ludowej stosowano wodę bagienną do leczenia chorób dróg oddechowych oraz przewlekłych bólów stawów i kości. Skuteczność kuracji zależała od stężenia dawki.|C. Specyficzna wydzielina z gruczołów ropuchy szarej działa żrąco na skórę, opary podrażniają błony śluzowe jamy ustnej i nosa. Osoby, które znalazły się pod jej wpływem, uskarżały się na krótkotrwałe złudzenia optyczne: wydawało im się, że widzą błyski, jaskrawe płomienie lub snop iskier.|D. Egzotyczne zwierzęta i rośliny fascynują nas znacznie bardziej niż polska przyroda nie tylko dlatego, że są kolorowe i dziwaczne, ale również z powodu swej tajemniczości i czyhających na człowieka zagrożeń.|E. Właściwości lecznicze tataraku porastającego brzegi sztucznych i naturalnych zbiorników wodnych są znane w Europie już od końca średniowiecza za sprawą otrzymywanego z niego olejku eterycznego, który stanowił antidotum na bezsenność, epilepsję, stany gorączkowe, depresję i nerwicę.|F. W polskich rzekach i jeziorach żyją ryby, po zjedzeniu których mogą wystąpić nie tylko klasyczne objawy zatrucia pokarmowego, ale również zaburzenia świadomości, połączone z utratą kontroli nad funkcjonowaniem organizmu.|G. W medycynie ludów syberyjskich podawano muchomora w stanach skrajnego osłabienia, a preparat z suszonych owocników zalanych zimną wodą stosowano jako antidotum przy ukąszeniach jadowitych węży. W homeopatii ów grzyb był uniwersalnym środkiem na zaburzenia systemu nerwowego.|H. Popularna bałtycka makrela ma w sobie groźną substancję, która jest mieszaniną wielu związków chemicznych, powstających w czasie bakteryjnego rozkładu tkanki skórnej i mięśniowej. Objawy zatrucia to kołatanie serca, silne bóle głowy, wymioty oraz wysypka.|I. Skóra salamandry zawiera gruczoły, które uwalniają jadowitą wydzielinę pod wpływem bodźców mechanicznych. W jadzie płaza odkryto alkaloidy, które po odpowiednim przetworzeniu wykorzystuje się do produkcji odurzających trunków.|J. W Europie znana była „czarodziejska” roślina z gatunku wrzosowatych – bagno zwyczajne, o której odurzających właściwościach pisano już w starożytności. Germanie używali jej do produkcji piwa ze względu na gorycz, której mu nadawała. Jednak tak doprawiony trunek spożywany w dużych ilościach wywoływał napady gniewu i furię.|K. Łubin zawiera wyjątkowy alkaloid – lupinidynę, która działa paraliżująco lub pobudzająco na centralny i wegetatywny układ nerwowy. W dużej ilości wywołuje nudności, ślinotok, trudności w przełykaniu."
+  correctAnswer: "H. Popularna bałtycka makrela ma w sobie groźną substancję, która jest mieszaniną wielu związków chemicznych, powstających w czasie bakteryjnego rozkładu tkanki skórnej i mięśniowej. Objawy zatrucia to kołatanie serca, silne bóle głowy, wymioty oraz wysypka."
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-r1-q10
+  passageRef: certyfikat-polski-C1-2022-11-read-1
+  questionType: matching
+  questionText: "Jadowite iluminacje"
+  options: "A. Purchawka to kulisty grzyb, który rośnie w każdym jasnym lesie, na polanie czy łące. Może być niebezpieczny ze względu na swoje właściwości narkotyczne – wywołuje stany półsnu lub snu na jawie oraz halucynacje słuchowe.|B. W medycynie ludowej stosowano wodę bagienną do leczenia chorób dróg oddechowych oraz przewlekłych bólów stawów i kości. Skuteczność kuracji zależała od stężenia dawki.|C. Specyficzna wydzielina z gruczołów ropuchy szarej działa żrąco na skórę, opary podrażniają błony śluzowe jamy ustnej i nosa. Osoby, które znalazły się pod jej wpływem, uskarżały się na krótkotrwałe złudzenia optyczne: wydawało im się, że widzą błyski, jaskrawe płomienie lub snop iskier.|D. Egzotyczne zwierzęta i rośliny fascynują nas znacznie bardziej niż polska przyroda nie tylko dlatego, że są kolorowe i dziwaczne, ale również z powodu swej tajemniczości i czyhających na człowieka zagrożeń.|E. Właściwości lecznicze tataraku porastającego brzegi sztucznych i naturalnych zbiorników wodnych są znane w Europie już od końca średniowiecza za sprawą otrzymywanego z niego olejku eterycznego, który stanowił antidotum na bezsenność, epilepsję, stany gorączkowe, depresję i nerwicę.|F. W polskich rzekach i jeziorach żyją ryby, po zjedzeniu których mogą wystąpić nie tylko klasyczne objawy zatrucia pokarmowego, ale również zaburzenia świadomości, połączone z utratą kontroli nad funkcjonowaniem organizmu.|G. W medycynie ludów syberyjskich podawano muchomora w stanach skrajnego osłabienia, a preparat z suszonych owocników zalanych zimną wodą stosowano jako antidotum przy ukąszeniach jadowitych węży. W homeopatii ów grzyb był uniwersalnym środkiem na zaburzenia systemu nerwowego.|H. Popularna bałtycka makrela ma w sobie groźną substancję, która jest mieszaniną wielu związków chemicznych, powstających w czasie bakteryjnego rozkładu tkanki skórnej i mięśniowej. Objawy zatrucia to kołatanie serca, silne bóle głowy, wymioty oraz wysypka.|I. Skóra salamandry zawiera gruczoły, które uwalniają jadowitą wydzielinę pod wpływem bodźców mechanicznych. W jadzie płaza odkryto alkaloidy, które po odpowiednim przetworzeniu wykorzystuje się do produkcji odurzających trunków.|J. W Europie znana była „czarodziejska” roślina z gatunku wrzosowatych – bagno zwyczajne, o której odurzających właściwościach pisano już w starożytności. Germanie używali jej do produkcji piwa ze względu na gorycz, której mu nadawała. Jednak tak doprawiony trunek spożywany w dużych ilościach wywoływał napady gniewu i furię.|K. Łubin zawiera wyjątkowy alkaloid – lupinidynę, która działa paraliżująco lub pobudzająco na centralny i wegetatywny układ nerwowy. W dużej ilości wywołuje nudności, ślinotok, trudności w przełykaniu."
+  correctAnswer: "C. Specyficzna wydzielina z gruczołów ropuchy szarej działa żrąco na skórę, opary podrażniają błony śluzowe jamy ustnej i nosa. Osoby, które znalazły się pod jej wpływem, uskarżały się na krótkotrwałe złudzenia optyczne: wydawało im się, że widzą błyski, jaskrawe płomienie lub snop iskier."
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-r2-q1
+  passageRef: certyfikat-polski-C1-2022-11-read-2
+  questionType: multiple_choice
+  questionText: "Układ i zdobienia budynku świadczą o"
+  options: "a) uznaniu żywionym przez faraonów dla pracy starożytnych architektów.|b) długim i dostatnim życiu władców dawnego Egiptu.|c) hierarchii panującej wśród czczonych bóstw."
+  correctAnswer: "c) hierarchii panującej wśród czczonych bóstw."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-r2-q2
+  passageRef: certyfikat-polski-C1-2022-11-read-2
+  questionType: multiple_choice
+  questionText: "Zdecydowano, że"
+  options: "a) badacze skupią się na płaskorzeźbach, które poddadzą skrupulatnym oględzinom.|b) należy dokładnie zbadać całą świątynię.|c) porównane zostaną reliefy pochodzące z różnych kaplic."
+  correctAnswer: "a) badacze skupią się na płaskorzeźbach, które poddadzą skrupulatnym oględzinom."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-r2-q3
+  passageRef: certyfikat-polski-C1-2022-11-read-2
+  questionType: multiple_choice
+  questionText: "Badane obiekty"
+  options: "a) były w złym stanie i wymagały natychmiastowej konserwacji.|b) cechowały się imponującą powierzchnią i wielością szczegółów.|c) były pełne tajemniczych zakamarków."
+  correctAnswer: "b) cechowały się imponującą powierzchnią i wielością szczegółów."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-r2-q4
+  passageRef: certyfikat-polski-C1-2022-11-read-2
+  questionType: multiple_choice
+  questionText: "Archeolodzy pracujący przy projekcie"
+  options: "a) w ciągu kilku lat zrekonstruowali płaskorzeźby na wszystkich ścianach świątyni.|b) przeznaczyli prawie dziesięć lat na szczegółowy opis analizowanych reliefów.|c) przetransportowali płaskorzeźby do bezpiecznego miejsca."
+  correctAnswer: "b) przeznaczyli prawie dziesięć lat na szczegółowy opis analizowanych reliefów."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-r2-q5
+  passageRef: certyfikat-polski-C1-2022-11-read-2
+  questionType: multiple_choice
+  questionText: "Czynności archeologiczne i konserwatorskie były prowadzone"
+  options: "a) na specjalnej konstrukcji zbudowanej na potrzeby projektu.|b) przy użyciu nowoczesnego skanera kamiennych murów.|c) wyłącznie na podstawie wykonanych wcześniej fotografii."
+  correctAnswer: "a) na specjalnej konstrukcji zbudowanej na potrzeby projektu."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-r2-q6
+  passageRef: certyfikat-polski-C1-2022-11-read-2
+  questionType: multiple_choice
+  questionText: "Zanim zbadano kaplicę Hatszepsut"
+  options: "a) podczas prac konserwatorskich przypadkowo zniszczono inny cenny zabytek.|b) dokładnie określono, jak z upływem czasu zmieniały się techniki pracy starożytnych twórców.|c) tajniki pracy egipskich artystów poznawano na podstawie uszkodzonych zabytków."
+  correctAnswer: "c) tajniki pracy egipskich artystów poznawano na podstawie uszkodzonych zabytków."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-r2-q7
+  passageRef: certyfikat-polski-C1-2022-11-read-2
+  questionType: multiple_choice
+  questionText: "Obecność wapienia w świątyni pozytywnie wpłynęła na wyniki badań, ponieważ ten rodzaj skały"
+  options: "a) jest odporny na wilgoć i odkształcenia.|b) pozwala na odtworzenie kolejnych czynności twórczych.|c) nie wchodzi w reakcję z preparatami stosowanymi przez badaczy."
+  correctAnswer: "b) pozwala na odtworzenie kolejnych czynności twórczych."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-r2-q8
+  passageRef: certyfikat-polski-C1-2022-11-read-2
+  questionType: multiple_choice
+  questionText: "Egipscy artyści przy pracy nad reliefami"
+  options: "a) używali popularnych do dziś narzędzi.|b) stosowali materiały izolujące.|c) zniszczyli wiele bloków skalnych."
+  correctAnswer: "a) używali popularnych do dziś narzędzi."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-r2-q9
+  passageRef: certyfikat-polski-C1-2022-11-read-2
+  questionType: multiple_choice
+  questionText: "Szczegółowa analiza reliefów w świątyni Hatszepsut"
+  options: "a) początkowo opierała się na błędnych założeniach badawczych.|b) pozwoliła zidentyfikować konkretnych artystów i udokumentować ich pracę.|c) wykazała elementy pracy zespołowej przy tworzeniu płaskorzeźb."
+  correctAnswer: "c) wykazała elementy pracy zespołowej przy tworzeniu płaskorzeźb."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-r2-q10
+  passageRef: certyfikat-polski-C1-2022-11-read-2
+  questionType: multiple_choice
+  questionText: "Z tekstu wynika, że"
+  options: "a) odkryto różnice między pracami mistrzów a pracami adeptów sztuki.|b) prace rzeźbiarzy były jednolite w artystycznym wyrazie i tworzone z wielką wprawą.|c) za uchybienia praktykantów karę ponosili też ich mistrzowie."
+  correctAnswer: "a) odkryto różnice między pracami mistrzów a pracami adeptów sztuki."
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-r3-q1
+  passageRef: certyfikat-polski-C1-2022-11-read-3
+  questionType: gap_fill_fragment
+  questionText: "Luka 1 w tekście „Arktyczny pojazd”"
+  options: "A. napędzany jest mocnym silnikiem|B. można go bez wysiłku holować|C. narastające niebezpieczeństwo grożące ludzkości|D. przypomina kabinę statku powietrznego|E. teren dla transportera z wyposażeniem|F. przemyślana konstrukcja wpływa na stabilność|G. może bezszelestnie zerwać się do lotu|H. rzetelne pomiary stacji badawczej|I. pojazd jest popychany przez śmigło|J. wykorzystując te podbiegunowe sanie|K. utrzymać się na powierzchni śnieżnych połaci|L. wytyczył naukowcom szczytne cele|M. może się poszczycić nowy środek transportu"
+  correctAnswer: "D. przypomina kabinę statku powietrznego"
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-r3-q2
+  passageRef: certyfikat-polski-C1-2022-11-read-3
+  questionType: gap_fill_fragment
+  questionText: "Luka 2 w tekście „Arktyczny pojazd”"
+  options: "A. napędzany jest mocnym silnikiem|B. można go bez wysiłku holować|C. narastające niebezpieczeństwo grożące ludzkości|D. przypomina kabinę statku powietrznego|E. teren dla transportera z wyposażeniem|F. przemyślana konstrukcja wpływa na stabilność|G. może bezszelestnie zerwać się do lotu|H. rzetelne pomiary stacji badawczej|I. pojazd jest popychany przez śmigło|J. wykorzystując te podbiegunowe sanie|K. utrzymać się na powierzchni śnieżnych połaci|L. wytyczył naukowcom szczytne cele|M. może się poszczycić nowy środek transportu"
+  correctAnswer: "I. pojazd jest popychany przez śmigło"
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-r3-q3
+  passageRef: certyfikat-polski-C1-2022-11-read-3
+  questionType: gap_fill_fragment
+  questionText: "Luka 3 w tekście „Arktyczny pojazd”"
+  options: "A. napędzany jest mocnym silnikiem|B. można go bez wysiłku holować|C. narastające niebezpieczeństwo grożące ludzkości|D. przypomina kabinę statku powietrznego|E. teren dla transportera z wyposażeniem|F. przemyślana konstrukcja wpływa na stabilność|G. może bezszelestnie zerwać się do lotu|H. rzetelne pomiary stacji badawczej|I. pojazd jest popychany przez śmigło|J. wykorzystując te podbiegunowe sanie|K. utrzymać się na powierzchni śnieżnych połaci|L. wytyczył naukowcom szczytne cele|M. może się poszczycić nowy środek transportu"
+  correctAnswer: "K. utrzymać się na powierzchni śnieżnych połaci"
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-r3-q4
+  passageRef: certyfikat-polski-C1-2022-11-read-3
+  questionType: gap_fill_fragment
+  questionText: "Luka 4 w tekście „Arktyczny pojazd”"
+  options: "A. napędzany jest mocnym silnikiem|B. można go bez wysiłku holować|C. narastające niebezpieczeństwo grożące ludzkości|D. przypomina kabinę statku powietrznego|E. teren dla transportera z wyposażeniem|F. przemyślana konstrukcja wpływa na stabilność|G. może bezszelestnie zerwać się do lotu|H. rzetelne pomiary stacji badawczej|I. pojazd jest popychany przez śmigło|J. wykorzystując te podbiegunowe sanie|K. utrzymać się na powierzchni śnieżnych połaci|L. wytyczył naukowcom szczytne cele|M. może się poszczycić nowy środek transportu"
+  correctAnswer: "E. teren dla transportera z wyposażeniem"
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-r3-q5
+  passageRef: certyfikat-polski-C1-2022-11-read-3
+  questionType: gap_fill_fragment
+  questionText: "Luka 5 w tekście „Arktyczny pojazd”"
+  options: "A. napędzany jest mocnym silnikiem|B. można go bez wysiłku holować|C. narastające niebezpieczeństwo grożące ludzkości|D. przypomina kabinę statku powietrznego|E. teren dla transportera z wyposażeniem|F. przemyślana konstrukcja wpływa na stabilność|G. może bezszelestnie zerwać się do lotu|H. rzetelne pomiary stacji badawczej|I. pojazd jest popychany przez śmigło|J. wykorzystując te podbiegunowe sanie|K. utrzymać się na powierzchni śnieżnych połaci|L. wytyczył naukowcom szczytne cele|M. może się poszczycić nowy środek transportu"
+  correctAnswer: "M. może się poszczycić nowy środek transportu"
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-r3-q6
+  passageRef: certyfikat-polski-C1-2022-11-read-3
+  questionType: gap_fill_fragment
+  questionText: "Luka 6 w tekście „Arktyczny pojazd”"
+  options: "A. napędzany jest mocnym silnikiem|B. można go bez wysiłku holować|C. narastające niebezpieczeństwo grożące ludzkości|D. przypomina kabinę statku powietrznego|E. teren dla transportera z wyposażeniem|F. przemyślana konstrukcja wpływa na stabilność|G. może bezszelestnie zerwać się do lotu|H. rzetelne pomiary stacji badawczej|I. pojazd jest popychany przez śmigło|J. wykorzystując te podbiegunowe sanie|K. utrzymać się na powierzchni śnieżnych połaci|L. wytyczył naukowcom szczytne cele|M. może się poszczycić nowy środek transportu"
+  correctAnswer: "F. przemyślana konstrukcja wpływa na stabilność"
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-r3-q7
+  passageRef: certyfikat-polski-C1-2022-11-read-3
+  questionType: gap_fill_fragment
+  questionText: "Luka 7 w tekście „Arktyczny pojazd”"
+  options: "A. napędzany jest mocnym silnikiem|B. można go bez wysiłku holować|C. narastające niebezpieczeństwo grożące ludzkości|D. przypomina kabinę statku powietrznego|E. teren dla transportera z wyposażeniem|F. przemyślana konstrukcja wpływa na stabilność|G. może bezszelestnie zerwać się do lotu|H. rzetelne pomiary stacji badawczej|I. pojazd jest popychany przez śmigło|J. wykorzystując te podbiegunowe sanie|K. utrzymać się na powierzchni śnieżnych połaci|L. wytyczył naukowcom szczytne cele|M. może się poszczycić nowy środek transportu"
+  correctAnswer: "B. można go bez wysiłku holować"
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-r3-q8
+  passageRef: certyfikat-polski-C1-2022-11-read-3
+  questionType: gap_fill_fragment
+  questionText: "Luka 8 w tekście „Arktyczny pojazd”"
+  options: "A. napędzany jest mocnym silnikiem|B. można go bez wysiłku holować|C. narastające niebezpieczeństwo grożące ludzkości|D. przypomina kabinę statku powietrznego|E. teren dla transportera z wyposażeniem|F. przemyślana konstrukcja wpływa na stabilność|G. może bezszelestnie zerwać się do lotu|H. rzetelne pomiary stacji badawczej|I. pojazd jest popychany przez śmigło|J. wykorzystując te podbiegunowe sanie|K. utrzymać się na powierzchni śnieżnych połaci|L. wytyczył naukowcom szczytne cele|M. może się poszczycić nowy środek transportu"
+  correctAnswer: "L. wytyczył naukowcom szczytne cele"
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-r3-q9
+  passageRef: certyfikat-polski-C1-2022-11-read-3
+  questionType: gap_fill_fragment
+  questionText: "Luka 9 w tekście „Arktyczny pojazd”"
+  options: "A. napędzany jest mocnym silnikiem|B. można go bez wysiłku holować|C. narastające niebezpieczeństwo grożące ludzkości|D. przypomina kabinę statku powietrznego|E. teren dla transportera z wyposażeniem|F. przemyślana konstrukcja wpływa na stabilność|G. może bezszelestnie zerwać się do lotu|H. rzetelne pomiary stacji badawczej|I. pojazd jest popychany przez śmigło|J. wykorzystując te podbiegunowe sanie|K. utrzymać się na powierzchni śnieżnych połaci|L. wytyczył naukowcom szczytne cele|M. może się poszczycić nowy środek transportu"
+  correctAnswer: "J. wykorzystując te podbiegunowe sanie"
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-r3-q10
+  passageRef: certyfikat-polski-C1-2022-11-read-3
+  questionType: gap_fill_fragment
+  questionText: "Luka 10 w tekście „Arktyczny pojazd”"
+  options: "A. napędzany jest mocnym silnikiem|B. można go bez wysiłku holować|C. narastające niebezpieczeństwo grożące ludzkości|D. przypomina kabinę statku powietrznego|E. teren dla transportera z wyposażeniem|F. przemyślana konstrukcja wpływa na stabilność|G. może bezszelestnie zerwać się do lotu|H. rzetelne pomiary stacji badawczej|I. pojazd jest popychany przez śmigło|J. wykorzystując te podbiegunowe sanie|K. utrzymać się na powierzchni śnieżnych połaci|L. wytyczył naukowcom szczytne cele|M. może się poszczycić nowy środek transportu"
+  correctAnswer: "C. narastające niebezpieczeństwo grożące ludzkości"
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-r4-q1
+  passageRef: certyfikat-polski-C1-2022-11-read-4
+  questionType: true_false_not_given
+  questionText: "Zwyżki oprocentowania nie dotyczą kredytów walutowych."
+  options: "TAK|NIE|BI"
+  correctAnswer: BI
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-r4-q2
+  passageRef: certyfikat-polski-C1-2022-11-read-4
+  questionType: true_false_not_given
+  questionText: "Dłużnicy będą mogli skorzystać ze wsparcia polegającego na zmniejszeniu stóp procentowych."
+  options: "TAK|NIE|BI"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-r4-q3
+  passageRef: certyfikat-polski-C1-2022-11-read-4
+  questionType: true_false_not_given
+  questionText: "Wniosek o wsparcie finansowe należy złożyć w najbliższym Urzędzie Miasta."
+  options: "TAK|NIE|BI"
+  correctAnswer: BI
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-r4-q4
+  passageRef: certyfikat-polski-C1-2022-11-read-4
+  questionType: true_false_not_given
+  questionText: "Odbiorcami propozycji Funduszu Wsparcia Kredytobiorców są między innymi rodziny wielodzietne obciążone kredytem."
+  options: "TAK|NIE|BI"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-r4-q5
+  passageRef: certyfikat-polski-C1-2022-11-read-4
+  questionType: true_false_not_given
+  questionText: "Beneficjentami rządowego programu nie mogą być osoby dyscyplinarnie usunięte z zakładu pracy."
+  options: "TAK|NIE|BI"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-r4-q6
+  passageRef: certyfikat-polski-C1-2022-11-read-4
+  questionType: true_false_not_given
+  questionText: "Odwlekanie spłaty całej raty kredytowej w czasie nie jest korzystnym rozwiązaniem."
+  options: "TAK|NIE|BI"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-r4-q7
+  passageRef: certyfikat-polski-C1-2022-11-read-4
+  questionType: true_false_not_given
+  questionText: "Kredytodawcy zachęcają klientów do negocjowania warunków kredytu."
+  options: "TAK|NIE|BI"
+  correctAnswer: BI
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-r4-q8
+  passageRef: certyfikat-polski-C1-2022-11-read-4
+  questionType: true_false_not_given
+  questionText: "Osoby posiadające więcej mieszkań powinny jak najszybciej sprzedać jedną nieruchomość."
+  options: "TAK|NIE|BI"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-r4-q9
+  passageRef: certyfikat-polski-C1-2022-11-read-4
+  questionType: true_false_not_given
+  questionText: "Korzystnym rozwiązaniem jest wpłata zgromadzonych oszczędności na poczet zaciągniętego długu."
+  options: "TAK|NIE|BI"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-r4-q10
+  passageRef: certyfikat-polski-C1-2022-11-read-4
+  questionType: true_false_not_given
+  questionText: "Zaproponowane scenariusze zachęcają dłużników do wejścia na drogę sądową z kredytodawcami."
+  options: "TAK|NIE|BI"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-r5-q1
+  passageRef: certyfikat-polski-C1-2022-11-read-5
+  questionType: multiple_choice
+  questionText: "Luka 1 w tekście „Wytęż wzrok”"
+  options: "skłania|podsyca|miesza|zwodzi"
+  correctAnswer: zwodzi
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-r5-q2
+  passageRef: certyfikat-polski-C1-2022-11-read-5
+  questionType: multiple_choice
+  questionText: "Luka 2 w tekście „Wytęż wzrok”"
+  options: "racje|kryteria|treści|wzory"
+  correctAnswer: kryteria
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-r5-q3
+  passageRef: certyfikat-polski-C1-2022-11-read-5
+  questionType: multiple_choice
+  questionText: "Luka 3 w tekście „Wytęż wzrok”"
+  options: "zaabsorbował|wywołał|zaangażował|uzyskał"
+  correctAnswer: "zaangażował"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-r5-q4
+  passageRef: certyfikat-polski-C1-2022-11-read-5
+  questionType: multiple_choice
+  questionText: "Luka 4 w tekście „Wytęż wzrok”"
+  options: "zdobywczyni|rekordzistka|następczyni|medalistka"
+  correctAnswer: zdobywczyni
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-r5-q5
+  passageRef: certyfikat-polski-C1-2022-11-read-5
+  questionType: multiple_choice
+  questionText: "Luka 5 w tekście „Wytęż wzrok”"
+  options: "efektywną|owocną|efektowną|charyzmatyczną"
+  correctAnswer: "efektowną"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-r5-q6
+  passageRef: certyfikat-polski-C1-2022-11-read-5
+  questionType: multiple_choice
+  questionText: "Luka 6 w tekście „Wytęż wzrok”"
+  options: "Ogarnęły|Zaintrygowały|Zwabiły|Skupiły"
+  correctAnswer: "Zaintrygowały"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-r5-q7
+  passageRef: certyfikat-polski-C1-2022-11-read-5
+  questionType: multiple_choice
+  questionText: "Luka 7 w tekście „Wytęż wzrok”"
+  options: "sprowadzają|kierują|przywodzą|przytaczają"
+  correctAnswer: "przywodzą"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-r5-q8
+  passageRef: certyfikat-polski-C1-2022-11-read-5
+  questionType: multiple_choice
+  questionText: "Luka 8 w tekście „Wytęż wzrok”"
+  options: "znużenia|złudzenia|urojenia|przywidzenia"
+  correctAnswer: "złudzenia"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-r5-q9
+  passageRef: certyfikat-polski-C1-2022-11-read-5
+  questionType: multiple_choice
+  questionText: "Luka 9 w tekście „Wytęż wzrok”"
+  options: "bywając|wojując|obcując|obradując"
+  correctAnswer: "obcując"
+  pointsQuarter: 2
+}
+READING_QUESTION {
+  questionId: certyfikat-polski-C1-2022-11-r5-q10
+  passageRef: certyfikat-polski-C1-2022-11-read-5
+  questionType: multiple_choice
+  questionText: "Luka 10 w tekście „Wytęż wzrok”"
+  options: "musu|wysiłku|natężenia|zabiegu"
+  correctAnswer: "wysiłku"
+  pointsQuarter: 2
+}

@@ -1,0 +1,79 @@
+DSL 1
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2024-06-g3-bank-1
+  testRef: certyfikat-polski-B2-2024-06-grammar-3
+  position: 1
+  text: bez
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2024-06-g3-bank-2
+  testRef: certyfikat-polski-B2-2024-06-grammar-3
+  position: 2
+  text: do
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2024-06-g3-bank-3
+  testRef: certyfikat-polski-B2-2024-06-grammar-3
+  position: 3
+  text: do
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2024-06-g3-bank-4
+  testRef: certyfikat-polski-B2-2024-06-grammar-3
+  position: 4
+  text: "dzięki"
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2024-06-g3-bank-5
+  testRef: certyfikat-polski-B2-2024-06-grammar-3
+  position: 5
+  text: o
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2024-06-g3-bank-6
+  testRef: certyfikat-polski-B2-2024-06-grammar-3
+  position: 6
+  text: od
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2024-06-g3-bank-7
+  testRef: certyfikat-polski-B2-2024-06-grammar-3
+  position: 7
+  text: po
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2024-06-g3-bank-8
+  testRef: certyfikat-polski-B2-2024-06-grammar-3
+  position: 8
+  text: pod
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2024-06-g3-bank-9
+  testRef: certyfikat-polski-B2-2024-06-grammar-3
+  position: 9
+  text: "pomiędzy"
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2024-06-g3-bank-10
+  testRef: certyfikat-polski-B2-2024-06-grammar-3
+  position: 10
+  text: przeciwko
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2024-06-g3-bank-11
+  testRef: certyfikat-polski-B2-2024-06-grammar-3
+  position: 11
+  text: w
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2024-06-g3-bank-12
+  testRef: certyfikat-polski-B2-2024-06-grammar-3
+  position: 12
+  text: w
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2024-06-g3-bank-13
+  testRef: certyfikat-polski-B2-2024-06-grammar-3
+  position: 13
+  text: za
+}

@@ -1,0 +1,44 @@
+# P9 forward contract: independent acceptance evidence
+
+Date: 2026-11-12. Scope: inactive P9 authored source and the shared fact/alias, paired Grammar and manual rubric migration in p11 at base `22e754a` plus concurrent uncommitted P9 developer changes. Accepted design: [P9-FORWARD-CONTRACT-PLAN.md](P9-FORWARD-CONTRACT-PLAN.md); developer account: [P9-FACT-MIGRATION-EVIDENCE.md](P9-FACT-MIGRATION-EVIDENCE.md). This is source and contract acceptance, not publication, native UI or media approval. Original arkusz/key PDFs are ignored local files in the main checkout, pinned in [P9 source provenance](P9-SOURCE-PROVENANCE.md).
+
+## Source review
+
+I rendered and independently read the official Listening V keys on physical p. 5 for the five B2 papers and C1 November 2022, and physical p. 6 for C1 April/November 2023. The current `listening-accepted-facts.core-data`, optional alias files and question rows were read through `biome read --format json`, not generated Kotlin. All **19** open-manual unordered questions in the eight papers have explicit fact IDs, **49** fact rows and **31** alias rows. The question IDs, fact identity, accepted source wording, required selections and per-fact quarter weights agree with those key pages:
+
+| Paper | Question IDs | Source-backed slots and credit |
+| --- | --- | --- |
+| B2/2022-02 | V/3 | Any 2 of 6 facts, 2 quarters each; longer descriptions and private-photo wording alias their fact. |
+| B2/2022-06 | V/3, V/8 | Two location/standard facts at 4 quarters; two appliances at 2 quarters. Printed shorter adjectives and accusative forms are aliases. |
+| B2/2023-02 | V/3, V/8 | Both facts in each question, 2 quarters each. |
+| B2/2023-06 | V/3, V/6, V/7 | Two geography and two medium facts at 2 quarters; any 1 of 3 inventions at 4 quarters. Expanded printed forms are aliases. |
+| B2/2024-06 | V/1, V/3 | Two facilities at 4 quarters; any 2 of 3 room features at 2 quarters. Optional qualifiers are aliases. |
+| C1/2022-11 | V/3 | `Inków` plus treasure/castle fact, 2 quarters each; `skarbu`, `zamku niedzickiego`, `zamku w Niedzicy` have one fact identity. |
+| C1/2023-04 | V/2, V/4, V/5, V/7 | Two facts each; V/4 at 4 quarters per fact, the others at 2. Key says parenthesized numbers are optional. |
+| C1/2023-11 | V/1, V/2, V/7, V/8 | Two selected facts; V/1 and V/2 offer four, V/7 three, V/8 two, each at 2 quarters. Slash wording within one fact has one ID. |
+
+The C1 April 2024 Grammar I key physical p. 8 expressly permits exactly three paired tuples: `kilku/przyjaciółmi`, `kilkoma/przyjaciółmi`, `kilkorgiem/przyjaciół`, each item worth 2 quarters. The authored pair rows match these three and contain no Cartesian product. The authored DSL pair oracle includes the three valid tuples, all three invalid crossed combinations (the third was added by this tester), each one-blank direction and both blank. The generic mapper marks both items as paired; context-free `score` cannot confirm a paired item. `gradeInAttempt` supplies matched-pair credit facts to the existing generated single-answer policy. Unknown nonblank crossed pairs remain pending manual, and blank items are wrong; no native pair-specific verdict ladder was found.
+
+The C1 November 2022 Grammar II key physical p. 7 prints **four separate 0.25-point components** for each of five transformations. The 20 authored rubric rows transcribe the bold/underlined components in source order at one quarter each, including both printed alternatives in II/3 and II/5. The typed model exposes these as review criteria only. A canonical full answer may confirm, blank is wrong and unlisted nonblank text remains pending up to four quarters; no substring or guessed partial automatic scoring was added. The source does not license automatic credit for arbitrary fragments.
+
+## Validation defect and correction
+
+I found a source-gate completeness defect by removing one C1/2023-04 Listening V/2 fact row **in memory** while keeping its printed `requiredSelections: 2`. `validateForwardSourceRecords` originally accepted the remaining one-fact group, which could never earn full credit. The test-only `tests/p9-forward-source-validation.test.ts` observed RED (one failed test expecting a source-line rejection). Root added a distinct-fact-ID count guard at the existing question validator. Focused Vitest then passed **3/3** cases: insufficient fact count at `listening-questions.core-data:<line>:1`, alias collision at the alias source line, and a wrong fact credit at the fact source line. No authored source file was changed by the negative controls.
+
+## Runtime and release status
+
+The tester regenerated the project after adding the third crossed-pair DSL case (`biome generate --project dsl/biome.project`, exit 0, `/tmp/p11-p9-tester-generate.log`). The generated commonTest oracle contains `c1-2024-crossed-c` (file timestamp 19:49:21 CET). The final focused Desktop/JS/Wasm run after the merge fix produced fresh XML for six selected classes on each target: **27 tests, zero failures, zero errors per target**. The classes cover authored P9 Listening and Grammar rubric oracles, the paired Grammar scorer, fact-set evaluation, generic answer evaluation and the session flow including the formerly failing merge. Command log: `/tmp/p11-p9-affected-three-targets.log` (exit 0, 57 seconds). These are common behavior tests executed in the Desktop JVM and browser runners; they do not establish P9 host UI or published playback.
+
+A new session integration test, `ExamSessionFlowTest.officialPairedAnswersSurviveSessionGrammarMerge`, constructs a certified sitting from the authored C1 April 2024 Grammar I pair rows. Desktop execution observed **RED**: `IllegalArgumentException: Pair marker mismatch for certyfikat-polski-C1-2024-04-g1-q8` in `GrammarTest` construction via `ExamSessionSession.kt:34`. The merge retained marked items but dropped their `answerPairs`. The web and Apple session merge constructors also flattened items and bank tokens without answer pairs. This prevented the new official paired source model from entering a sitting; direct scorer tests alone could not detect it. Root added shared `mergeGrammarTests` and used it in all three constructors. The same focused Desktop test is now **GREEN**, with fresh compilation and test execution (`/tmp/p11-p9-pair-merge-green.log`). The failing command and original stack are retained in `/tmp/p11-p9-pair-merge-red.log`; the current XML is the corrected result. Affected full target reruns remain pending.
+
+I found no host reference to `rubricComponents` or `criterionText` under `kotlin/composeApp/src` or `kotlin/apple-bridge/src`; the fields currently appear only in shared model and mapper. The November 2022 Grammar II official quarter-credit criteria are thus represented in source but have no demonstrated review display in a host. Treat host review visibility as **NOT RUN/open** for activation, independent of the source-rubric oracle.
+
+| Check | Status |
+| --- | --- |
+| Official key vs 19 fact-backed question groups, 49 identities/31 aliases, three Grammar pairs and 20 rubric components | **PASS** within cited pages and current authored rows. |
+| Focused source-gate negative controls and published source pipeline | **PASS 11/11** in Vitest across `p9-forward-source-validation.test.ts` (3) and `exam-published-generation.test.ts` (8), after initial missing-fact RED and production correction; `/tmp/p11-p9-source-vitest-final.log`. |
+| Focused shared Desktop/JS/Wasm scorer, source oracle and session flow | **PASS 27/27 per target** in fresh Desktop JVM, JS browser and Wasm browser XML after the merge correction; initial session integration RED and focused GREEN are retained in separate logs. |
+| Existing six published IDs/oracles and full Biome generation/check | Full generation **PASS** after tester's added tuple; full `biome generate --check --project dsl/biome.project` **PASS** after concurrent UiCopy regeneration, exit 0, `/tmp/p11-p9-tester-final-generate-check.log`. The published source pipeline tests are included in the Vitest 11/11 result. |
+| New-paper browser controls/media, native app and catalog publication | **NOT RUN** by this tester; P9 papers remain unpublished. B2 June 2022 damaged audio is a separate activation block. A separate native seek acceptance attempt reported an Apple bridge compilation failure on `mergeGrammarTests` import after the shared merge correction; no native XCTest result follows from that attempt. Root/native owner is handling this cross-host compile gate. |
+
+Tester-owned changes: one third crossed-pair row in `dsl/exam-scoring/c1-2024-pairs.core-data`, `tests/p9-forward-source-validation.test.ts`, the session integration test in `ExamSessionFlowTest.kt`, and this report. Biome regenerated the commonTest oracle. The tester made no production, official source, media, index or release change.

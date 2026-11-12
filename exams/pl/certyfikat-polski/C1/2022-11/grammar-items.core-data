@@ -1,0 +1,606 @@
+DSL 1
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g1-q1
+  testRef: certyfikat-polski-C1-2022-11-grammar-1
+  questionType: fill_gap
+  context: "(kilkadziesiąt)"
+  correctAnswer: "kilkudziesięciu"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g1-q2
+  testRef: certyfikat-polski-C1-2022-11-grammar-1
+  questionType: fill_gap
+  context: "(poszukiwacz)"
+  correctAnswer: poszukiwaczy
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g1-q3
+  testRef: certyfikat-polski-C1-2022-11-grammar-1
+  questionType: fill_gap
+  context: "(kilka)"
+  correctAnswer: kilku
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g1-q4
+  testRef: certyfikat-polski-C1-2022-11-grammar-1
+  questionType: fill_gap
+  context: "(rok)"
+  correctAnswer: laty
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g1-q5
+  testRef: certyfikat-polski-C1-2022-11-grammar-1
+  questionType: fill_gap
+  context: "(2.)"
+  correctAnswer: "drugą"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g1-q6
+  testRef: certyfikat-polski-C1-2022-11-grammar-1
+  questionType: fill_gap
+  context: "(pozycja)"
+  correctAnswer: "pozycję"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g1-q7
+  testRef: certyfikat-polski-C1-2022-11-grammar-1
+  questionType: fill_gap
+  context: "(dziewięć)"
+  correctAnswer: "dziewięciu"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g1-q8
+  testRef: certyfikat-polski-C1-2022-11-grammar-1
+  questionType: fill_gap
+  context: "(miesiąc)"
+  correctAnswer: "miesiącach"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g1-q9
+  testRef: certyfikat-polski-C1-2022-11-grammar-1
+  questionType: fill_gap
+  context: "()"
+  correctAnswer: trzydziestu
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g1-q10
+  testRef: certyfikat-polski-C1-2022-11-grammar-1
+  questionType: fill_gap
+  context: "(rozbitek)"
+  correctAnswer: rozbitkami
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g2-q1
+  testRef: certyfikat-polski-C1-2022-11-grammar-2
+  questionType: transform
+  context: "Agencje turystyczne obserwują, że wśród klientów spada zainteresowanie typowymi propozycjami. (odnotowywać)"
+  correctAnswer: "Agencje turystyczne odnotowują spadek zainteresowania klientów typowymi propozycjami."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g2-q2
+  testRef: certyfikat-polski-C1-2022-11-grammar-2
+  questionType: transform
+  context: "Właściciele biur podróży mają świadomość, że koniecznie powinni rozszerzyć ofertę o nowe atrakcje. (rozumieć)"
+  correctAnswer: "Właściciele biur podróży rozumieją konieczność rozszerzenia oferty o nowe atrakcje."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g2-q3
+  testRef: certyfikat-polski-C1-2022-11-grammar-2
+  questionType: transform
+  context: "Nowa odmiana survivalu to rodzaj aktywności, której nie ograniczają ani finanse, ani wiek uczestników. (pozbawiony)"
+  correctAnswer: "Nowa odmiana survivalu to rodzaj aktywności pozbawionej ograniczeń finansowych i wiekowych."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g2-q4
+  testRef: certyfikat-polski-C1-2022-11-grammar-2
+  questionType: transform
+  context: "Uczestnicy chcą sprawdzić, czy będą umieli poradzić sobie i przetrwać w surowych warunkach. (przetestować)"
+  correctAnswer: "Uczestnicy chcą przetestować umiejętność poradzenia sobie i przetrwania w surowych warunkach."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g2-q5
+  testRef: certyfikat-polski-C1-2022-11-grammar-2
+  questionType: transform
+  context: "Chętni mają świadomość, że mogą spędzić całą noc w lesie. (liczyć się)"
+  correctAnswer: "Chętni liczą się ze spędzeniem całej nocy w lesie."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g3-q1
+  testRef: certyfikat-polski-C1-2022-11-grammar-3
+  questionType: fill_gap
+  context: "(wskazywać)"
+  correctAnswer: "wskazówką"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g3-q2
+  testRef: certyfikat-polski-C1-2022-11-grammar-3
+  questionType: fill_gap
+  context: "(ustalić)"
+  correctAnswer: ustalenia
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g3-q3
+  testRef: certyfikat-polski-C1-2022-11-grammar-3
+  questionType: fill_gap
+  context: "(uniknąć)"
+  correctAnswer: "uniknięcia"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g3-q4
+  testRef: certyfikat-polski-C1-2022-11-grammar-3
+  questionType: fill_gap
+  context: "(prosić)"
+  correctAnswer: "prośbę"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g3-q5
+  testRef: certyfikat-polski-C1-2022-11-grammar-3
+  questionType: fill_gap
+  context: "(uciec)"
+  correctAnswer: ucieczki
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g3-q6
+  testRef: certyfikat-polski-C1-2022-11-grammar-3
+  questionType: fill_gap
+  context: "(rozwijać się)"
+  correctAnswer: rozwoju
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g3-q7
+  testRef: certyfikat-polski-C1-2022-11-grammar-3
+  questionType: fill_gap
+  context: "(pragnąć)"
+  correctAnswer: pragnienia
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g3-q8
+  testRef: certyfikat-polski-C1-2022-11-grammar-3
+  questionType: fill_gap
+  context: "(tęsknić)"
+  correctAnswer: "tęsknoty"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g3-q9
+  testRef: certyfikat-polski-C1-2022-11-grammar-3
+  questionType: fill_gap
+  context: "(ewoluować)"
+  correctAnswer: ewolucji
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g3-q10
+  testRef: certyfikat-polski-C1-2022-11-grammar-3
+  questionType: fill_gap
+  context: "(kłamać)"
+  correctAnswer: "kłamcami"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g4-q1
+  testRef: certyfikat-polski-C1-2022-11-grammar-4
+  questionType: fill_gap
+  context: "(koszt)"
+  correctAnswer: kosztowne
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g4-q2
+  testRef: certyfikat-polski-C1-2022-11-grammar-4
+  questionType: fill_gap
+  context: "(prestiż)"
+  correctAnswer: "prestiżowych"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g4-q3
+  testRef: certyfikat-polski-C1-2022-11-grammar-4
+  questionType: fill_gap
+  context: "(konstrukcja)"
+  correctAnswer: konstrukcyjne
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g4-q4
+  testRef: certyfikat-polski-C1-2022-11-grammar-4
+  questionType: fill_gap
+  context: "(bez/troska)"
+  correctAnswer: beztroskiego
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g4-q5
+  testRef: certyfikat-polski-C1-2022-11-grammar-4
+  questionType: fill_gap
+  context: "(ironia)"
+  correctAnswer: ironiczne
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g4-q6
+  testRef: certyfikat-polski-C1-2022-11-grammar-4
+  questionType: fill_gap
+  context: "(budowla)"
+  correctAnswer: budowlanej
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g4-q7
+  testRef: certyfikat-polski-C1-2022-11-grammar-4
+  questionType: fill_gap
+  context: "(bez/precedens)"
+  correctAnswer: bezprecedensowa
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g4-q8
+  testRef: certyfikat-polski-C1-2022-11-grammar-4
+  questionType: fill_gap
+  context: "(prawnik)"
+  correctAnswer: prawniczego
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g4-q9
+  testRef: certyfikat-polski-C1-2022-11-grammar-4
+  questionType: fill_gap
+  context: "(architektura)"
+  correctAnswer: architektonicznego
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g4-q10
+  testRef: certyfikat-polski-C1-2022-11-grammar-4
+  questionType: fill_gap
+  context: "(banał)"
+  correctAnswer: banalna
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g5-q1
+  testRef: certyfikat-polski-C1-2022-11-grammar-5
+  questionType: word_bank
+  context: "Luka 1 w tekście powyżej"
+  correctAnswer: "przecież"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g5-q2
+  testRef: certyfikat-polski-C1-2022-11-grammar-5
+  questionType: word_bank
+  context: "Luka 2 w tekście powyżej"
+  correctAnswer: "przy tym"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g5-q3
+  testRef: certyfikat-polski-C1-2022-11-grammar-5
+  questionType: word_bank
+  context: "Luka 3 w tekście powyżej"
+  correctAnswer: "choćby"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g5-q4
+  testRef: certyfikat-polski-C1-2022-11-grammar-5
+  questionType: word_bank
+  context: "Luka 4 w tekście powyżej"
+  correctAnswer: zaledwie
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g5-q5
+  testRef: certyfikat-polski-C1-2022-11-grammar-5
+  questionType: word_bank
+  context: "Luka 5 w tekście powyżej"
+  correctAnswer: "właśnie"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g5-q6
+  testRef: certyfikat-polski-C1-2022-11-grammar-5
+  questionType: word_bank
+  context: "Luka 6 w tekście powyżej"
+  correctAnswer: gdzie
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g5-q7
+  testRef: certyfikat-polski-C1-2022-11-grammar-5
+  questionType: word_bank
+  context: "Luka 7 w tekście powyżej"
+  correctAnswer: skoro
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g5-q8
+  testRef: certyfikat-polski-C1-2022-11-grammar-5
+  questionType: word_bank
+  context: "Luka 8 w tekście powyżej"
+  correctAnswer: "więc"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g5-q9
+  testRef: certyfikat-polski-C1-2022-11-grammar-5
+  questionType: word_bank
+  context: "Luka 9 w tekście powyżej"
+  correctAnswer: mianowicie
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g5-q10
+  testRef: certyfikat-polski-C1-2022-11-grammar-5
+  questionType: word_bank
+  context: "Luka 10 w tekście powyżej"
+  correctAnswer: natomiast
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g6-q1
+  testRef: certyfikat-polski-C1-2022-11-grammar-6
+  questionType: fill_gap
+  context: "(rozwinąć)"
+  correctAnswer: "rozwiniętej"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g6-q2
+  testRef: certyfikat-polski-C1-2022-11-grammar-6
+  questionType: fill_gap
+  context: "(dostrzec)"
+  correctAnswer: "dostrzeżone"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g6-q3
+  testRef: certyfikat-polski-C1-2022-11-grammar-6
+  questionType: fill_gap
+  context: "(przytłaczać)"
+  correctAnswer: "przytłaczające"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g6-q4
+  testRef: certyfikat-polski-C1-2022-11-grammar-6
+  questionType: fill_gap
+  context: "(Tworzyć)"
+  correctAnswer: "Tworząc"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g6-q5
+  testRef: certyfikat-polski-C1-2022-11-grammar-6
+  questionType: fill_gap
+  context: "(przełożyć)"
+  correctAnswer: "przełożone"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g6-q6
+  testRef: certyfikat-polski-C1-2022-11-grammar-6
+  questionType: fill_gap
+  context: "(dopisywać)"
+  correctAnswer: "dopisując"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g6-q7
+  testRef: certyfikat-polski-C1-2022-11-grammar-6
+  questionType: fill_gap
+  context: "(przeanalizować)"
+  correctAnswer: przeanalizowawszy
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g6-q8
+  testRef: certyfikat-polski-C1-2022-11-grammar-6
+  questionType: fill_gap
+  context: "(nadać)"
+  correctAnswer: nadanej
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g6-q9
+  testRef: certyfikat-polski-C1-2022-11-grammar-6
+  questionType: fill_gap
+  context: "(pasować)"
+  correctAnswer: "pasującym"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g6-q10
+  testRef: certyfikat-polski-C1-2022-11-grammar-6
+  questionType: fill_gap
+  context: "(zagubić)"
+  correctAnswer: zagubiony
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g7-q1
+  testRef: certyfikat-polski-C1-2022-11-grammar-7
+  questionType: fill_gap
+  context: "(przynosić/przynieść)"
+  correctAnswer: "przyniósł"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g7-q2
+  testRef: certyfikat-polski-C1-2022-11-grammar-7
+  questionType: fill_gap
+  context: "(wpływać/wpłynąć)"
+  correctAnswer: "wpłynęła"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g7-q3
+  testRef: certyfikat-polski-C1-2022-11-grammar-7
+  questionType: fill_gap
+  context: "(dochodzić/dojść)"
+  correctAnswer: "doszło"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g7-q4
+  testRef: certyfikat-polski-C1-2022-11-grammar-7
+  questionType: fill_gap
+  context: "(przystawać/przystać)"
+  correctAnswer: przystaje
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g7-q5
+  testRef: certyfikat-polski-C1-2022-11-grammar-7
+  questionType: fill_gap
+  context: "(dowodzić/dowieść)"
+  correctAnswer: "dowodzą"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g7-q6
+  testRef: certyfikat-polski-C1-2022-11-grammar-7
+  questionType: fill_gap
+  context: "(ulegać/ulec)"
+  correctAnswer: "ulegną"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g7-q7
+  testRef: certyfikat-polski-C1-2022-11-grammar-7
+  questionType: fill_gap
+  context: "(odnotowywać/odnotować)"
+  correctAnswer: odnotowano
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g7-q8
+  testRef: certyfikat-polski-C1-2022-11-grammar-7
+  questionType: fill_gap
+  context: "(doprowadzać/doprowadzić)"
+  correctAnswer: "doprowadzi się"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g7-q9
+  testRef: certyfikat-polski-C1-2022-11-grammar-7
+  questionType: fill_gap
+  context: "(powstawać/powstać)"
+  correctAnswer: "powstaną"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g7-q10
+  testRef: certyfikat-polski-C1-2022-11-grammar-7
+  questionType: fill_gap
+  context: "(wzrastać/wzrosnąć)"
+  correctAnswer: "wzrośnie"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g8-q1
+  testRef: certyfikat-polski-C1-2022-11-grammar-8
+  questionType: fill_gap
+  context: "(koń)"
+  correctAnswer: "końmi"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g8-q2
+  testRef: certyfikat-polski-C1-2022-11-grammar-8
+  questionType: fill_gap
+  context: "(one)"
+  correctAnswer: je
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g8-q3
+  testRef: certyfikat-polski-C1-2022-11-grammar-8
+  questionType: fill_gap
+  context: "(którykolwiek)"
+  correctAnswer: "którymkolwiek"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g8-q4
+  testRef: certyfikat-polski-C1-2022-11-grammar-8
+  questionType: fill_gap
+  context: "(sędzia)"
+  correctAnswer: "sędziemu"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g8-q5
+  testRef: certyfikat-polski-C1-2022-11-grammar-8
+  questionType: fill_gap
+  context: "(nadwozie – lm)"
+  correctAnswer: nadwozi
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g8-q6
+  testRef: certyfikat-polski-C1-2022-11-grammar-8
+  questionType: fill_gap
+  context: "(jakiś)"
+  correctAnswer: "jacyś"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g8-q7
+  testRef: certyfikat-polski-C1-2022-11-grammar-8
+  questionType: fill_gap
+  context: "(książę)"
+  correctAnswer: "książęta"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g8-q8
+  testRef: certyfikat-polski-C1-2022-11-grammar-8
+  questionType: fill_gap
+  context: "(myśliwy)"
+  correctAnswer: "myśliwi"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g8-q9
+  testRef: certyfikat-polski-C1-2022-11-grammar-8
+  questionType: fill_gap
+  context: "(wracający)"
+  correctAnswer: "wracający"
+  pointsQuarter: 2
+}
+GRAMMAR_ITEM {
+  itemId: certyfikat-polski-C1-2022-11-g8-q10
+  testRef: certyfikat-polski-C1-2022-11-grammar-8
+  questionType: fill_gap
+  context: "(trofeum – lm)"
+  correctAnswer: "trofeów"
+  pointsQuarter: 2
+}

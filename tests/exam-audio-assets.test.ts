@@ -5,7 +5,9 @@ import { join } from 'node:path';
 import { createServer } from 'node:http';
 import { afterEach, expect, it } from 'vitest';
 import type { ExamAudioAssetRow } from '../dsl/exam-assets/generated/ExamAudioRows.ts';
-import { prepareAudioAssets, verifyDistribution, verifyServing } from '../scripts/prepare-exam-audio.ts';
+import { EXAM_AUDIO_ASSET_ROW_ROWS } from '../dsl/exam-assets/generated/ExamAudioRows.ts';
+import { EXAM_PUBLICATION_ROW_ROWS } from '../dsl/exam-published/generated/ExamPublicationRows.ts';
+import { prepareAudioAssets, verifyDistribution, verifyOriginalSources, verifyPublishedAssetCoverage, verifyServing } from '../scripts/prepare-exam-audio.ts';
 
 const tempRoots: string[] = [];
 afterEach(async () => { await Promise.all(tempRoots.splice(0).map(path => rm(path, { recursive: true, force: true }))); });
@@ -64,6 +66,73 @@ it('does not publish an earlier row when a later row is missing', async () => {
   };
   await expect(prepareAudioAssets([f.row, missing], f.root, true)).rejects.toThrow(/missing/i);
   await expect(readFile(f.target)).rejects.toMatchObject({ code: 'ENOENT' });
+});
+
+it('stages a pinned web derivative offline without requiring its original', async () => {
+  const f = await fixture();
+  const webData = Buffer.from('separate web playback bytes');
+  const webLocalSourcePath = 'ExamBin/web/B1/2020/audio.mp3';
+  await mkdir(join(f.root, 'ExamBin/web/B1/2020'), { recursive: true });
+  await writeFile(join(f.root, webLocalSourcePath), webData);
+  const row = { ...f.row, webLocalSourcePath, webSha256: createHash('sha256').update(webData).digest('hex') };
+  await prepareAudioAssets([row], f.root, true);
+  expect(await readFile(f.target)).toEqual(webData);
+  const dist = join(f.root, 'dist');
+  await mkdir(join(dist, 'exam-audio'), { recursive: true });
+  await writeFile(join(dist, row.webPath), webData);
+  await expect(verifyDistribution([row], dist)).resolves.toBeUndefined();
+});
+
+it('rejects a partial derivative declaration before replacing valid output', async () => {
+  const f = await fixture();
+  await writeFile(f.source, f.data);
+  await prepareAudioAssets([f.row], f.root, true);
+  const partial = { ...f.row, webLocalSourcePath: 'ExamBin/web/B1/2020/audio.mp3' };
+  await expect(prepareAudioAssets([partial], f.root, true)).rejects.toThrow(/webSha256|derivative/i);
+  expect(await readFile(f.target)).toEqual(f.data);
+});
+
+it('rejects a missing or corrupt derivative without falling back to original', async () => {
+  const f = await fixture();
+  await writeFile(f.source, f.data);
+  const webLocalSourcePath = 'ExamBin/web/B1/2020/audio.mp3';
+  const row = { ...f.row, webLocalSourcePath, webSha256: createHash('sha256').update('expected').digest('hex') };
+  await expect(prepareAudioAssets([row], f.root, true)).rejects.toThrow(/missing/i);
+  await mkdir(join(f.root, 'ExamBin/web/B1/2020'), { recursive: true });
+  await writeFile(join(f.root, webLocalSourcePath), 'corrupt');
+  await expect(prepareAudioAssets([row], f.root, true)).rejects.toThrow(/sha-256/i);
+  await expect(readFile(f.target)).rejects.toMatchObject({ code: 'ENOENT' });
+});
+
+it('audits original bytes separately even when web delivery uses a derivative', async () => {
+  const f = await fixture();
+  const webLocalSourcePath = 'ExamBin/web/B1/2020/audio.mp3';
+  const row = { ...f.row, webLocalSourcePath, webSha256: createHash('sha256').update('web').digest('hex') };
+  await mkdir(join(f.root, 'ExamBin/web/B1/2020'), { recursive: true });
+  await writeFile(join(f.root, webLocalSourcePath), 'web');
+  await prepareAudioAssets([row], f.root, true);
+  await expect(verifyOriginalSources([row], f.root)).rejects.toThrow(/missing/i);
+  await writeFile(f.source, 'wrong original');
+  await expect(verifyOriginalSources([row], f.root)).rejects.toThrow(/sha-256/i);
+  await writeFile(f.source, f.data);
+  await expect(verifyOriginalSources([row], f.root)).resolves.toBeUndefined();
+});
+
+it('requires exact published ID coverage and rejects a duplicate browser path', async () => {
+  const f = await fixture();
+  expect(() => verifyPublishedAssetCoverage([f.row], [f.row.examId])).not.toThrow();
+  expect(() => verifyPublishedAssetCoverage([f.row], [f.row.examId, 'missing-paper'])).toThrow(/missing-paper/);
+  expect(() => verifyPublishedAssetCoverage([f.row], [])).toThrow(/surplus/);
+  expect(() => verifyPublishedAssetCoverage([f.row, { ...f.row, examId: 'second-paper' }], [f.row.examId, 'second-paper']))
+    .toThrow(/duplicate asset identity or path/);
+});
+
+it('covers the sixteen published paper IDs with eight pinned web derivatives', () => {
+  const publishedIds = EXAM_PUBLICATION_ROW_ROWS.map(row => row.examRef);
+  expect(publishedIds).toHaveLength(16);
+  expect(publishedIds).not.toContain('certyfikat-polski-B2-2022-06');
+  expect(() => verifyPublishedAssetCoverage(EXAM_AUDIO_ASSET_ROW_ROWS, publishedIds)).not.toThrow();
+  expect(EXAM_AUDIO_ASSET_ROW_ROWS.filter(row => row.webSha256 !== undefined)).toHaveLength(8);
 });
 
 

@@ -1,8 +1,15 @@
 // Generated from dsl/exam.data-contract
-// source-sha256=36cfafebca8fc22dc8a31c76161792ced0b69ac872ae298f7b83376d02344c88
+// source-sha256=c25663c7842effa836bb812b389b1c0384ddfb8c602fa15fdc03765737f8cfa6
 // Edit the source, then run biome generate.
 
 package polski.exam.data.b2y2019
+
+enum class ExamModuleRowModule(val tag: String) {
+    LISTENING("listening"),
+    READING("reading"),
+    GRAMMAR("grammar"),
+    WRITING("writing"),
+}
 
 enum class ListeningQuestionRowQuestionType(val tag: String) {
     MULTIPLE_CHOICE("multiple_choice"),
@@ -22,6 +29,11 @@ enum class ListeningQuestionRowAnswerMode(val tag: String) {
     UNORDERED_SET("unordered_set"),
 }
 
+enum class ListeningQuestionRowSetOverselectionMode(val tag: String) {
+    LEGACY_WRONG("legacy_wrong"),
+    MANUAL_REVIEW("manual_review"),
+}
+
 enum class ReadingQuestionRowQuestionType(val tag: String) {
     MULTIPLE_CHOICE("multiple_choice"),
     TRUE_FALSE_NOT_GIVEN("true_false_not_given"),
@@ -30,6 +42,22 @@ enum class ReadingQuestionRowQuestionType(val tag: String) {
     SHORT_ANSWER("short_answer"),
     GAP_FILL_FRAGMENT("gap_fill_fragment"),
     MATCHING("matching"),
+    WORD_BANK("word_bank"),
+}
+
+enum class ReadingQuestionRowGradingMode(val tag: String) {
+    EXACT("exact"),
+    OPEN_MANUAL("open_manual"),
+}
+
+enum class ReadingQuestionRowAnswerMode(val tag: String) {
+    SINGLE("single"),
+    UNORDERED_SET("unordered_set"),
+}
+
+enum class ReadingQuestionRowSetOverselectionMode(val tag: String) {
+    LEGACY_WRONG("legacy_wrong"),
+    MANUAL_REVIEW("manual_review"),
 }
 
 enum class GrammarItemRowQuestionType(val tag: String) {
@@ -62,6 +90,8 @@ enum class WritingTaskRowGenre(val tag: String) {
     REVIEW("review"),
     ADVERTISEMENT("advertisement"),
     APPLICATION("application"),
+    SPEECH("speech"),
+    CHARACTERIZATION("characterization"),
 }
 
 enum class ExamInventoryCaseRowSection(val tag: String) {
@@ -87,6 +117,25 @@ enum class AnswerEvaluationCaseRowExpectedStatus(val tag: String) {
     PENDING_MANUAL("pending_manual"),
 }
 
+enum class GrammarPairCaseRowStatus8(val tag: String) {
+    CONFIRMED_FULL("confirmed_full"),
+    WRONG("wrong"),
+    PENDING_MANUAL("pending_manual"),
+}
+
+enum class GrammarPairCaseRowStatus9(val tag: String) {
+    CONFIRMED_FULL("confirmed_full"),
+    WRONG("wrong"),
+    PENDING_MANUAL("pending_manual"),
+}
+
+enum class NovemberListeningCaseRowExpectedStatus(val tag: String) {
+    CONFIRMED_FULL("confirmed_full"),
+    CONFIRMED_PARTIAL("confirmed_partial"),
+    WRONG("wrong"),
+    PENDING_MANUAL("pending_manual"),
+}
+
 enum class UnorderedSetCaseRowMode(val tag: String) {
     EXACT("exact"),
     OPEN_MANUAL("open_manual"),
@@ -97,6 +146,13 @@ enum class UnorderedSetCaseRowExpectedStatus(val tag: String) {
     CONFIRMED_PARTIAL("confirmed_partial"),
     WRONG("wrong"),
     PENDING_MANUAL("pending_manual"),
+}
+
+enum class ExamModuleCaseRowModule(val tag: String) {
+    LISTENING("listening"),
+    READING("reading"),
+    GRAMMAR("grammar"),
+    WRITING("writing"),
 }
 
 enum class OpenItemGroupCaseRowSection(val tag: String) {
@@ -136,6 +192,22 @@ data class ExamRow(
     val license: String? = null,
 )
 
+data class ExamPublicationRow(
+    val routeId: String,
+    val examRef: String,
+    val displayTitle: String,
+    val sourceDir: String,
+)
+
+data class ExamModuleRow(
+    val moduleId: String,
+    val examRef: String,
+    val module: ExamModuleRowModule,
+    val order: Int,
+    val durationSeconds: Int,
+    val maximumQuarter: Int,
+)
+
 data class ListeningTaskRow(
     val taskId: String,
     val examRef: String,
@@ -161,6 +233,8 @@ data class ListeningQuestionRow(
     val gradingMode: ListeningQuestionRowGradingMode? = null,
     val answerMode: ListeningQuestionRowAnswerMode? = null,
     val creditPerCorrectQuarter: Int? = null,
+    val requiredSelections: Int? = null,
+    val setOverselectionMode: ListeningQuestionRowSetOverselectionMode? = null,
 )
 
 data class ListeningAnswerVariantRow(
@@ -168,6 +242,19 @@ data class ListeningAnswerVariantRow(
     val questionRef: String,
     val answer: String,
     val earnedQuarter: Int,
+)
+
+data class ListeningAcceptedFactRow(
+    val factId: String,
+    val questionRef: String,
+    val creditQuarter: Int,
+    val displayText: String,
+)
+
+data class ListeningAcceptedFactAliasRow(
+    val aliasId: String,
+    val factRef: String,
+    val answerText: String,
 )
 
 data class ReadingPassageRow(
@@ -189,7 +276,32 @@ data class ReadingQuestionRow(
     val correctAnswer: String,
     val points: Int? = null,
     val pointsQuarter: Int? = null,
+    val gradingMode: ReadingQuestionRowGradingMode? = null,
+    val answerMode: ReadingQuestionRowAnswerMode? = null,
+    val creditPerCorrectQuarter: Int? = null,
+    val requiredSelections: Int? = null,
+    val setOverselectionMode: ReadingQuestionRowSetOverselectionMode? = null,
     val relevantParagraph: Int? = null,
+)
+
+data class ReadingAnswerVariantRow(
+    val variantId: String,
+    val questionRef: String,
+    val answer: String,
+    val earnedQuarter: Int,
+)
+
+data class ReadingAcceptedFactRow(
+    val factId: String,
+    val questionRef: String,
+    val creditQuarter: Int,
+    val displayText: String,
+)
+
+data class ReadingAcceptedFactAliasRow(
+    val aliasId: String,
+    val factRef: String,
+    val answerText: String,
 )
 
 data class GrammarTestRow(
@@ -226,6 +338,24 @@ data class GrammarAnswerVariantRow(
     val answer: String,
     val earnedQuarter: Int,
     val onlyIfNotUsedBy: String? = null,
+)
+
+data class GrammarRubricComponentRow(
+    val componentId: String,
+    val itemRef: String,
+    val order: Int,
+    val creditQuarter: Int,
+    val criterionText: String,
+)
+
+data class GrammarAnswerPairRow(
+    val pairId: String,
+    val firstItemRef: String,
+    val firstAnswer: String,
+    val secondItemRef: String,
+    val secondAnswer: String,
+    val firstEarnedQuarter: Int,
+    val secondEarnedQuarter: Int,
 )
 
 data class WritingTaskRow(
@@ -319,6 +449,35 @@ data class AnswerAttemptCaseRow(
     val expectedFinal: Boolean,
 )
 
+data class GrammarPairCaseRow(
+    val id: String,
+    val answer8: String,
+    val answer9: String,
+    val status8: GrammarPairCaseRowStatus8,
+    val status9: GrammarPairCaseRowStatus9,
+    val confirmed8: Int,
+    val confirmed9: Int,
+    val pending8: Int,
+    val pending9: Int,
+)
+
+data class NovemberListeningCaseRow(
+    val id: String,
+    val answer: String,
+    val expectedStatus: NovemberListeningCaseRowExpectedStatus,
+    val confirmedQuarter: Int,
+    val pendingQuarter: Int,
+)
+
+data class GrammarRubricCaseRow(
+    val id: String,
+    val itemRef: String,
+    val componentCount: Int,
+    val maximumQuarter: Int,
+    val unknownAnswer: String,
+    val unknownPendingQuarter: Int,
+)
+
 data class UnorderedSetCaseRow(
     val id: String,
     val correctAnswer: String,
@@ -330,6 +489,25 @@ data class UnorderedSetCaseRow(
     val expectedStatus: UnorderedSetCaseRowExpectedStatus,
     val expectedConfirmedQuarter: Int,
     val expectedPendingQuarter: Int? = null,
+)
+
+data class ExamModuleCaseRow(
+    val id: String,
+    val examRef: String,
+    val module: ExamModuleCaseRowModule,
+    val order: Int,
+    val durationSeconds: Int,
+    val maximumQuarter: Int,
+)
+
+data class ReadingSetCaseRow(
+    val id: String,
+    val correctAnswer: String,
+    val options: String,
+    val answer: String,
+    val maximumQuarter: Int,
+    val creditPerCorrectQuarter: Int,
+    val expectedConfirmedQuarter: Int,
 )
 
 data class OpenItemGroupCaseRow(
@@ -2138,3 +2316,40 @@ private fun writingTaskRowRowsPart0(): List<WritingTaskRow> = listOf(
 )
 
 val WRITING_TASK_ROW_ROWS: List<WritingTaskRow> = writingTaskRowRowsPart0()
+
+private fun examModuleRowRowsPart0(): List<ExamModuleRow> = listOf(
+    ExamModuleRow(
+        moduleId = "certyfikat-polski-B2-2019-listening",
+        examRef = "certyfikat-polski-B2-2019",
+        module = ExamModuleRowModule.LISTENING,
+        order = 1,
+        durationSeconds = 1800,
+        maximumQuarter = 160,
+    ),
+    ExamModuleRow(
+        moduleId = "certyfikat-polski-B2-2019-reading",
+        examRef = "certyfikat-polski-B2-2019",
+        module = ExamModuleRowModule.READING,
+        order = 2,
+        durationSeconds = 3600,
+        maximumQuarter = 160,
+    ),
+    ExamModuleRow(
+        moduleId = "certyfikat-polski-B2-2019-grammar",
+        examRef = "certyfikat-polski-B2-2019",
+        module = ExamModuleRowModule.GRAMMAR,
+        order = 3,
+        durationSeconds = 3600,
+        maximumQuarter = 160,
+    ),
+    ExamModuleRow(
+        moduleId = "certyfikat-polski-B2-2019-writing",
+        examRef = "certyfikat-polski-B2-2019",
+        module = ExamModuleRowModule.WRITING,
+        order = 4,
+        durationSeconds = 5400,
+        maximumQuarter = 160,
+    ),
+)
+
+val EXAM_MODULE_ROW_ROWS: List<ExamModuleRow> = examModuleRowRowsPart0()

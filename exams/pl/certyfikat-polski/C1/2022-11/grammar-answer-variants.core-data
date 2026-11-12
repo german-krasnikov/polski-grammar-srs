@@ -1,0 +1,80 @@
+DSL 1
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-11-g1-q1-v1
+  itemRef: certyfikat-polski-C1-2022-11-g1-q1
+  answer: "kilkudziesięcioro"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-11-g1-q3-v1
+  itemRef: certyfikat-polski-C1-2022-11-g1-q3
+  answer: kilkoma
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-11-g1-q4-v1
+  itemRef: certyfikat-polski-C1-2022-11-g1-q4
+  answer: latami
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-11-g1-q9-v1
+  itemRef: certyfikat-polski-C1-2022-11-g1-q9
+  answer: trzydziestoma
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-11-g1-q9-v2
+  itemRef: certyfikat-polski-C1-2022-11-g1-q9
+  answer: "trzydzieściorgiem"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-11-g1-q10-v1
+  itemRef: certyfikat-polski-C1-2022-11-g1-q10
+  answer: "rozbitków"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-11-g2-q3-v1
+  itemRef: certyfikat-polski-C1-2022-11-g2-q3
+  answer: "Nowa odmiana survivalu to rodzaj aktywności pozbawiony ograniczeń finansowych i wiekowych."
+  earnedQuarter: 4
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-11-g2-q5-v1
+  itemRef: certyfikat-polski-C1-2022-11-g2-q5
+  answer: "Chętni liczą się z możliwością spędzenia całej nocy w lesie."
+  earnedQuarter: 4
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-11-g5-q4-v1
+  itemRef: certyfikat-polski-C1-2022-11-g5-q4
+  answer: mianowicie
+  earnedQuarter: 2
+  onlyIfNotUsedBy: certyfikat-polski-C1-2022-11-g5-q9
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-11-g7-q5-v1
+  itemRef: certyfikat-polski-C1-2022-11-g7-q5
+  answer: "dowiodły"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-11-g7-q7-v1
+  itemRef: certyfikat-polski-C1-2022-11-g7-q7
+  answer: "odnotowuje się"
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-11-g7-q8-v1
+  itemRef: certyfikat-polski-C1-2022-11-g7-q8
+  answer: doprowadzimy
+  earnedQuarter: 2
+}
+GRAMMAR_ANSWER_VARIANT {
+  variantId: certyfikat-polski-C1-2022-11-g8-q4-v1
+  itemRef: certyfikat-polski-C1-2022-11-g8-q4
+  answer: "sędzi"
+  earnedQuarter: 2
+}

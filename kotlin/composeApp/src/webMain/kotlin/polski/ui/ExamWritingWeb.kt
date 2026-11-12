@@ -4,29 +4,25 @@ import kotlinx.browser.document
 import org.w3c.dom.HTMLButtonElement
 import org.w3c.dom.HTMLElement
 import polski.presentation.UiCopy
+import polski.exam.writing.*
+import polski.exam.formatQuarterPoints
 import org.w3c.dom.HTMLTextAreaElement
 
-internal data class WritingTask(
-    val id: String,
-    val instruction: String,
-    val promptText: String,
-    val wordLimit: Int?,
-    val setId: String? = null,
-    val genre: String = "letter",
-    val promptImageUrl: String? = null,
-    val promptImageAlt: String? = null,
-)
-internal data class WritingExam(val tasks: List<WritingTask>) {
-    fun tasksForSet(setId: String?): List<WritingTask> =
-        if (setId == null) tasks.filter { it.setId == null } else tasks.filter { it.setId == setId }
-}
-
-internal class ExamWritingController(examId: String, private val onBack: () -> Unit) {
+internal class ExamWritingController(
+    examId: String, private val onBack: () -> Unit,
+    private val externalState: (() -> WritingExamState)? = null,
+    private val onAction: ((WritingExamAction) -> Unit)? = null,
+    private val onTimedFinish: (() -> Unit)? = null,
+) {
     private val exam = examWritingData[examId] ?: WritingExam(emptyList())
-    private var currentTaskIdx = 0
-    private var drafts = mutableMapOf<String, String>()
-    private var submitted = false
-    private var selectedSet: String? = null
+    private var ownState = WritingExamState(exam)
+    private val state get() = externalState?.invoke() ?: ownState
+    private val currentTaskIdx get() = state.currentIndex
+    private val drafts get() = state.drafts
+    private val submitted get() = state.submitted
+    private val selectedSet get() = state.selectedSetId
+    private fun dispatch(action: WritingExamAction) { if (onAction != null) onAction.invoke(action) else ownState = reduceWritingExam(ownState, action) }
+    fun close() { root = null }
     private var root: HTMLElement? = null
 
     private val sets = exam.tasks.mapNotNull { it.setId }.distinct()
@@ -46,8 +42,7 @@ internal class ExamWritingController(examId: String, private val onBack: () -> U
         c.appendChild(node("h2", "exam-title", UiCopy.SelectWritingSet))
         sets.forEach { setId ->
             c.appendChild(navBtn("${UiCopy.WritingSet} $setId") {
-                selectedSet = setId
-                currentTaskIdx = 0
+                dispatch(WritingExamAction.SelectSet(setId))
                 redraw()
             })
         }
@@ -56,12 +51,13 @@ internal class ExamWritingController(examId: String, private val onBack: () -> U
 
     private fun renderTask(c: HTMLElement) {
         val tasks = activeTasks
-        val task = tasks[currentTaskIdx]
+        val card = writingExamCardModel(state)
+        val task = requireNotNull(card.task)
         c.appendChild(node("div", "exam-progress").apply {
             appendChild(node("span", "exam-progress-text", "${UiCopy.Task} ${currentTaskIdx + 1} / ${tasks.size}"))
         })
         c.appendChild(node("h3", "exam-title", task.instruction))
-        if (sets.isNotEmpty()) c.appendChild(navBtn(UiCopy.ChangeWritingSet) { selectedSet = null; currentTaskIdx = 0; redraw() })
+        if (sets.isNotEmpty()) c.appendChild(navBtn(UiCopy.ChangeWritingSet) { dispatch(WritingExamAction.SelectSet(null)); redraw() })
         c.appendChild(node("div", "exam-writing-prompt").apply {
             setAttribute("lang", "pl")
             task.promptText.split("\n").forEach { line ->
@@ -82,7 +78,7 @@ internal class ExamWritingController(examId: String, private val onBack: () -> U
         val textarea = (document.createElement("textarea") as HTMLTextAreaElement).apply {
             className = "exam-textarea"; rows = 12; placeholder = "Napisz tutaj..."
             value = draft
-            addEventListener("input", { drafts[task.id] = this.value; updateWordCount(this) })
+            addEventListener("input", { dispatch(WritingExamAction.Answer(task.id, this.value)); updateWordCount(this) })
         }
         c.appendChild(textarea)
         c.appendChild(node("div", "exam-word-count").apply {
@@ -90,10 +86,10 @@ internal class ExamWritingController(examId: String, private val onBack: () -> U
             textContent = "Słów: $wordCount" + (task.wordLimit?.let { " / $it" } ?: "")
         })
         c.appendChild(node("div", "exam-nav").apply {
-            if (currentTaskIdx > 0) appendChild(navBtn("← Назад") { currentTaskIdx--; redraw() })
+            if (currentTaskIdx > 0) appendChild(navBtn("← Назад") { dispatch(WritingExamAction.Previous); redraw() })
             appendChild(node("span", "exam-nav-spacer"))
-            if (currentTaskIdx < tasks.lastIndex) appendChild(navBtn("Dalej →") { currentTaskIdx++; redraw() })
-            if (currentTaskIdx == tasks.lastIndex) appendChild(navBtn("Zakończ", true) { submitted = true; redraw() })
+            if (currentTaskIdx < tasks.lastIndex) appendChild(navBtn("Dalej →") { dispatch(WritingExamAction.Next); redraw() })
+            if (currentTaskIdx == tasks.lastIndex) appendChild(navBtn("Zakończ", true) { if (onTimedFinish != null) onTimedFinish.invoke() else { dispatch(WritingExamAction.Submit); redraw() } })
         })
     }
 
@@ -108,6 +104,9 @@ internal class ExamWritingController(examId: String, private val onBack: () -> U
         c.appendChild(node("h2", "exam-title", "Pisanie zakończone"))
         c.appendChild(node("div", "exam-writing-done").apply {
             appendChild(node("p", text = "Twoje odpowiedzi zostały zapisane. Część pisemna egzaminu jest oceniana przez egzaminatora — nie ma automatycznej oceny."))
+            state.result?.let { result ->
+                appendChild(node("p", "exam-writing-manual", "${UiCopy.ExamConfirmedPoints}: ${formatQuarterPoints(result.confirmedQuarter)} / ${formatQuarterPoints(result.possibleQuarter)} · ${UiCopy.ExamPendingPoints}: ${formatQuarterPoints(result.manualPendingQuarter)}"))
+            }
         })
         activeTasks.forEachIndexed { i, task ->
             c.appendChild(node("div", "exam-writing-review").apply {

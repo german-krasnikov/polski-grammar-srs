@@ -1,0 +1,43 @@
+DSL 1
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-06-l5-q1-v1
+  questionRef: certyfikat-polski-B2-2024-06-l5-q1
+  answer: "sala gimnastyczna|stołówka"
+  earnedQuarter: 8
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-06-l5-q2-v1
+  questionRef: certyfikat-polski-B2-2024-06-l5-q2
+  answer: "od 10 lat"
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-06-l5-q2-v2
+  questionRef: certyfikat-polski-B2-2024-06-l5-q2
+  answer: "dziesięć lat"
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-06-l5-q2-v3
+  questionRef: certyfikat-polski-B2-2024-06-l5-q2
+  answer: "od dziesięciu lat"
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-06-l5-q4-v1
+  questionRef: certyfikat-polski-B2-2024-06-l5-q4
+  answer: "wyremontowano ją"
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-06-l5-q6-v1
+  questionRef: certyfikat-polski-B2-2024-06-l5-q6
+  answer: "do szesnastej"
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-06-l5-q7-v1
+  questionRef: certyfikat-polski-B2-2024-06-l5-q7
+  answer: "na przyjęcie jeszcze większej liczby uczniów"
+  earnedQuarter: 4
+}

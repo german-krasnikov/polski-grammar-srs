@@ -1,0 +1,31 @@
+DSL 1
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-B2-2024-06-l5-q1-fact-1
+  questionRef: certyfikat-polski-B2-2024-06-l5-q1
+  creditQuarter: 4
+  displayText: "nowo wyremontowana sala gimnastyczna"
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-B2-2024-06-l5-q1-fact-2
+  questionRef: certyfikat-polski-B2-2024-06-l5-q1
+  creditQuarter: 4
+  displayText: "nowa stołówka"
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-B2-2024-06-l5-q3-fact-1
+  questionRef: certyfikat-polski-B2-2024-06-l5-q3
+  creditQuarter: 2
+  displayText: "są duże"
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-B2-2024-06-l5-q3-fact-2
+  questionRef: certyfikat-polski-B2-2024-06-l5-q3
+  creditQuarter: 2
+  displayText: "są jasne"
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-B2-2024-06-l5-q3-fact-3
+  questionRef: certyfikat-polski-B2-2024-06-l5-q3
+  creditQuarter: 2
+  displayText: "jest w nich nowy sprzęt"
+}

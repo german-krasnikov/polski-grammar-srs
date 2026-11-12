@@ -1,0 +1,350 @@
+DSL 1
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l1-q1
+  taskRef: certyfikat-polski-C1-2023-04-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a) polityka klimatyczna jest punktem spornym pomiędzy Niemcami a Francją.|b) państwa Unii Europejskiej dążą do ujednolicenia polityki klimatycznej.|c) zmniejszenie emisji jest jedynym celem polityki klimatycznej."
+  correctAnswer: "a) polityka klimatyczna jest punktem spornym pomiędzy Niemcami a Francją."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l1-q2
+  taskRef: certyfikat-polski-C1-2023-04-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a) pomysłodawca od początku był pewien powodzenia akcji.|b) niewidome dzieci odbyły lot helikopterem.|c) fundusze na wyjazd pochodziły z utylizacji telefonów."
+  correctAnswer: "c) fundusze na wyjazd pochodziły z utylizacji telefonów."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l1-q3
+  taskRef: certyfikat-polski-C1-2023-04-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a) Antoni Ptak dorobił się fortuny dzięki uprawie czereśni.|b) pierwsza praca Antoniego Ptaka była związana z ogrodnictwem.|c) Antoni Ptak przejął firmę ogrodniczą po rodzicach."
+  correctAnswer: "b) pierwsza praca Antoniego Ptaka była związana z ogrodnictwem."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l1-q4
+  taskRef: certyfikat-polski-C1-2023-04-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a) mężczyzna miał spore doświadczenie w pracy z dziećmi.|b) mężczyznę irytuje zachowanie prowadzących programy z dziećmi.|c) partnerskie podejście do dzieci nie przyniosło oczekiwanych efektów."
+  correctAnswer: "b) mężczyznę irytuje zachowanie prowadzących programy z dziećmi."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l1-q5
+  taskRef: certyfikat-polski-C1-2023-04-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a) zasypanie dziury nie będzie możliwe ze względu na brak dojazdu.|b) zapadlisko pojawiło się na jednym z osiedli mieszkaniowych.|c) usuwanie szkód muszą poprzedzić prace przygotowawcze."
+  correctAnswer: "c) usuwanie szkód muszą poprzedzić prace przygotowawcze."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l1-q6
+  taskRef: certyfikat-polski-C1-2023-04-listen-1
+  questionType: multiple_choice
+  questionText: "Z tego nagrania wynika, że"
+  options: "a) przejęcie kamienicy przez samorząd gminy było nieuniknione.|b) omawiana kamienica jest w nienagannym stanie.|c) spadkobiercy zostali pozbawieni prawa do dziedziczenia budynku."
+  correctAnswer: "a) przejęcie kamienicy przez samorząd gminy było nieuniknione."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l2-q1
+  taskRef: certyfikat-polski-C1-2023-04-listen-2
+  questionType: true_false
+  questionText: "Substancje potrzebne do biodruku umieszczone są w różnych zbiornikach w drukarce."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l2-q2
+  taskRef: certyfikat-polski-C1-2023-04-listen-2
+  questionType: true_false
+  questionText: "Zaraz po zakończeniu wydruku organ jest gotowy do wykorzystania."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l2-q3
+  taskRef: certyfikat-polski-C1-2023-04-listen-2
+  questionType: true_false
+  questionText: "Każdy z ośrodków zaangażowanych w projekt odpowiada za inny jego aspekt."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l2-q4
+  taskRef: certyfikat-polski-C1-2023-04-listen-2
+  questionType: true_false
+  questionText: "Według narratora za 3-4 lata przeszczepy drukowanych organów będą mogły być wykonywane na szeroką skalę."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l2-q5
+  taskRef: certyfikat-polski-C1-2023-04-listen-2
+  questionType: true_false
+  questionText: "Szacuje się, że w Polsce liczba chorych na cukrzycę wzrośnie do 5 milionów osób."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l2-q6
+  taskRef: certyfikat-polski-C1-2023-04-listen-2
+  questionType: true_false
+  questionText: "Narrator nakreśla kolejne etapy w rozwoju przeszczepów przy użyciu biodruku."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l2-q7
+  taskRef: certyfikat-polski-C1-2023-04-listen-2
+  questionType: true_false
+  questionText: "W bioprintingu wykorzystuje się materiał komórkowy osoby chorej."
+  options: "TAK|NIE"
+  correctAnswer: TAK
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l2-q8
+  taskRef: certyfikat-polski-C1-2023-04-listen-2
+  questionType: true_false
+  questionText: "Narrator uważa rozwiązania medyczne przedstawiane w utworach fantastycznych za mało prawdopodobne."
+  options: "TAK|NIE"
+  correctAnswer: NIE
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l3-q1
+  taskRef: certyfikat-polski-C1-2023-04-listen-3
+  questionType: multiple_choice
+  questionText: "Sylwia zajęła się remontem mieszkania, ponieważ"
+  options: "a) chciała pomóc fachowcom.|b) nalegała na to jej rodzina.|c) prace wykończeniowe zbytnio się przeciągały."
+  correctAnswer: "c) prace wykończeniowe zbytnio się przeciągały."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l3-q2
+  taskRef: certyfikat-polski-C1-2023-04-listen-3
+  questionType: multiple_choice
+  questionText: "Sylwia zaczęła uczyć się majsterkowania"
+  options: "a) podczas pisania artykułu na ten temat.|b) bez pomocy innych osób.|c) chodząc na warsztaty dla początkujących."
+  correctAnswer: "b) bez pomocy innych osób."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l3-q3
+  taskRef: certyfikat-polski-C1-2023-04-listen-3
+  questionType: multiple_choice
+  questionText: "Sylwia uważa, że"
+  options: "a) kobiety mają więcej zrozumienia dla jej pasji niż mężczyźni.|b) kupowanie gotowych rzeczy jest domeną kobiet.|c) mężczyźni mają opory przed proszeniem o pomoc lub radę."
+  correctAnswer: "c) mężczyźni mają opory przed proszeniem o pomoc lub radę."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l3-q4
+  taskRef: certyfikat-polski-C1-2023-04-listen-3
+  questionType: multiple_choice
+  questionText: "Bracia Sylwii"
+  options: "a) regularnie przywożą jej własne meble do naprawy.|b) przekonali siostrę do majsterkowania.|c) zmienili swoją opinię, widząc rezultaty wysiłków siostry."
+  correctAnswer: "c) zmienili swoją opinię, widząc rezultaty wysiłków siostry."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l3-q5
+  taskRef: certyfikat-polski-C1-2023-04-listen-3
+  questionType: multiple_choice
+  questionText: "Barbara w dzieciństwie"
+  options: "a) razem z przyjaciółkami odnawiała stare przedmioty.|b) obserwowała pracę znajomych nad naprawą mebli.|c) uczęszczała na zajęcia artystyczne prowadzone w ASP."
+  correctAnswer: "b) obserwowała pracę znajomych nad naprawą mebli."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l3-q6
+  taskRef: certyfikat-polski-C1-2023-04-listen-3
+  questionType: multiple_choice
+  questionText: "Barbara podczas remontu"
+  options: "a) odkryła, że z Sylwią łączy ją coś więcej niż tylko obowiązki zawodowe.|b) musiała wyrzucić wiele mebli z powodu ich złej jakości.|c) publikowała w sieci zdjęcia dokumentujące prace renowacyjne."
+  correctAnswer: "a) odkryła, że z Sylwią łączy ją coś więcej niż tylko obowiązki zawodowe."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l3-q7
+  taskRef: certyfikat-polski-C1-2023-04-listen-3
+  questionType: multiple_choice
+  questionText: "Oprócz renowacji mebli kobiety"
+  options: "a) wykonują ozdoby z nietypowych materiałów.|b) zajęły się naprawą starego sprzętu elektronicznego.|c) odnawiają starą i zniszczoną biżuterię."
+  correctAnswer: "a) wykonują ozdoby z nietypowych materiałów."
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l4-q1
+  taskRef: certyfikat-polski-C1-2023-04-listen-4
+  questionType: matching
+  questionText: "A. Podkreśla życiową przydatność cech wyniesionych z harcerstwa."
+  options: "1|2|3|4|5|6"
+  correctAnswer: "2"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l4-q2
+  taskRef: certyfikat-polski-C1-2023-04-listen-4
+  questionType: matching
+  questionText: "B. Jest przeciwieństwem stereotypowego wyobrażenia harcerza."
+  options: "1|2|3|4|5|6"
+  correctAnswer: "2"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l4-q3
+  taskRef: certyfikat-polski-C1-2023-04-listen-4
+  questionType: matching
+  questionText: "C. Dała się poznać szerszym kręgom dzięki rozwijaniu w harcerstwie swoich zainteresowań."
+  options: "1|2|3|4|5|6"
+  correctAnswer: "3"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l4-q4
+  taskRef: certyfikat-polski-C1-2023-04-listen-4
+  questionType: matching
+  questionText: "D. Tłumaczy pochodzenie swojego pseudonimu."
+  options: "1|2|3|4|5|6"
+  correctAnswer: "4"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l4-q5
+  taskRef: certyfikat-polski-C1-2023-04-listen-4
+  questionType: matching
+  questionText: "E. Nawiązuje do ważnej postaci z historii harcerstwa."
+  options: "1|2|3|4|5|6"
+  correctAnswer: "4|5"
+  pointsQuarter: 8
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l4-q6
+  taskRef: certyfikat-polski-C1-2023-04-listen-4
+  questionType: matching
+  questionText: "F. Przedstawia elementy wyróżniające Leśną Szkółkę."
+  options: "1|2|3|4|5|6"
+  correctAnswer: "1|6"
+  pointsQuarter: 8
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l4-q7
+  taskRef: certyfikat-polski-C1-2023-04-listen-4
+  questionType: matching
+  questionText: "G. Przybliża genezę jednej z zasad stosowanych w harcerstwie."
+  options: "1|2|3|4|5|6"
+  correctAnswer: "5"
+  pointsQuarter: 4
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l5-q1
+  taskRef: certyfikat-polski-C1-2023-04-listen-5
+  questionType: fill_gap
+  questionText: "Ile śmieci krąży po orbicie okołoziemskiej?"
+  correctAnswer: "Około 20 tys. śmieci"
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l5-q2
+  taskRef: certyfikat-polski-C1-2023-04-listen-5
+  questionType: fill_gap
+  questionText: "Co – oprócz części rakiet – znajduje się na orbicie okołoziemskiej?"
+  correctAnswer: "sprzęt astronautów|nieczynne satelity"
+  pointsQuarter: 4
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 2
+  gradingMode: open_manual
+  requiredSelections: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l5-q3
+  taskRef: certyfikat-polski-C1-2023-04-listen-5
+  questionType: fill_gap
+  questionText: "Jakie są konsekwencje zderzenia się obiektów na orbicie?"
+  correctAnswer: "Powstanie 2–3 tys. nowych śmieci"
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l5-q4
+  taskRef: certyfikat-polski-C1-2023-04-listen-5
+  questionType: fill_gap
+  questionText: "Jakie były następstwa pierwszego zderzenia się odpadów na orbicie?"
+  correctAnswer: "problemy komunikacyjne w Stanach Zjednoczonych|powstanie 600 nowych odpadów"
+  pointsQuarter: 8
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 4
+  gradingMode: open_manual
+  requiredSelections: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l5-q5
+  taskRef: certyfikat-polski-C1-2023-04-listen-5
+  questionType: fill_gap
+  questionText: "Jakie utrudnienia w codziennym życiu może spowodować uszkodzenie satelity?"
+  correctAnswer: "brak nawigacji samochodowej|brak dostępu do bieżących informacji"
+  pointsQuarter: 4
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 2
+  gradingMode: open_manual
+  requiredSelections: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l5-q6
+  taskRef: certyfikat-polski-C1-2023-04-listen-5
+  questionType: fill_gap
+  questionText: "Co było bezpośrednią przyczyną wypadku wahadłowca w 1983 roku?"
+  correctAnswer: "Odprysk farby uszkodził szybę."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l5-q7
+  taskRef: certyfikat-polski-C1-2023-04-listen-5
+  questionType: fill_gap
+  questionText: "Co jest szczególnie narażone na konsekwencje zetknięcia z kosmośmieciami?"
+  correctAnswer: "loty kosmiczne|międzynarodowa stacja kosmiczna"
+  pointsQuarter: 4
+  answerMode: unordered_set
+  creditPerCorrectQuarter: 2
+  gradingMode: open_manual
+  requiredSelections: 2
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l5-q8
+  taskRef: certyfikat-polski-C1-2023-04-listen-5
+  questionType: fill_gap
+  questionText: "Gdzie szukali schronienia astronauci pracujący w stacji kosmicznej?"
+  correctAnswer: "Schowali się w statku Sojuz."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}
+LISTENING_QUESTION {
+  questionId: certyfikat-polski-C1-2023-04-l5-q9
+  taskRef: certyfikat-polski-C1-2023-04-listen-5
+  questionType: fill_gap
+  questionText: "Dlaczego należy monitorować przemieszczanie się śmieci po orbitach?"
+  correctAnswer: "Aby móc zmienić położenie statku lub satelity."
+  pointsQuarter: 4
+  gradingMode: open_manual
+}

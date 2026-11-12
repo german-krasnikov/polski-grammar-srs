@@ -1,0 +1,9 @@
+# A submitted part is immutable. Each authorized semantic action has one disposition.
+DECISION disposition DEFAULT ignore
+  answerOther AT 10 WHEN NOT part.submitted AND part.action == answer AND part.kind != writing AND part.validTarget -> apply_answer
+  answerWriting AT 20 WHEN NOT part.submitted AND part.action == answer AND part.kind == writing AND part.validTarget AND part.targetInSelectedSet -> apply_answer
+  selectWritingSet AT 30 WHEN NOT part.submitted AND part.kind == writing AND part.action == select_set AND part.validSelectedSet -> select_set
+  moveNext AT 40 WHEN NOT part.submitted AND part.action == next AND NOT part.atLast -> move
+  movePrevious AT 50 WHEN NOT part.submitted AND part.action == previous AND NOT part.atFirst -> move
+  submit AT 60 WHEN NOT part.submitted AND part.action == submit -> submit
+END

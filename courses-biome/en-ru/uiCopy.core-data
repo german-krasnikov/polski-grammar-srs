@@ -234,3 +234,21 @@ UI_COPY {key: vocabularyImported text: "Vocabulary imported"}
 UI_COPY {key: vocabularyImportFailed text: "Vocabulary import failed"}
 UI_COPY {key: progressExported text: "Progress exported"}
 UI_COPY {key: progressImported text: "Progress imported"}
+UI_COPY {key: examTimedStart text: "Full timed exam"}
+UI_COPY {key: examTimedPart text: Part}
+UI_COPY {key: examTimedComplete text: "Exam completed"}
+UI_COPY {key: examBackToModules text: "← Modules"}
+UI_COPY {key: examPrevious text: "← Previous"}
+UI_COPY {key: examAnswerPrompt text: "Enter an answer"}
+UI_COPY {key: examNativeUnavailable text: "Not available on iPad yet"}
+UI_COPY {key: examChooseModule text: "Choose a part"}
+UI_COPY {key: examAudioPlay text: Play}
+UI_COPY {key: examAudioPause text: Pause}
+UI_COPY {key: examAudioReplay text: Replay}
+UI_COPY {key: examAudioSeek text: "Seek recording"}
+UI_COPY {key: examAudioElapsed text: Elapsed}
+UI_COPY {key: examAudioDuration text: Duration}
+UI_COPY {key: examAudioUnavailable text: "Offline audio is unavailable"}
+UI_COPY {key: examAudioInvalidSegment text: "Audio segment is unavailable"}
+UI_COPY {key: examAudioPlaybackFailed text: "Audio playback failed"}
+UI_COPY {key: examImageUnavailable text: "Image is unavailable"}

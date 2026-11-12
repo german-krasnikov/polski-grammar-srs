@@ -428,3 +428,101 @@ UI_COPY_CASE {
   enRu: "Progress imported"
   placeholders: ""
 }
+UI_COPY_CASE {
+  key: examTimedStart
+  plRu: "Полный экзамен по времени"
+  enRu: "Full timed exam"
+  placeholders: ""
+}
+UI_COPY_CASE {key: examTimedPart plRu: "Часть" enRu: Part placeholders: ""}
+UI_COPY_CASE {
+  key: examTimedComplete
+  plRu: "Экзамен завершён"
+  enRu: "Exam completed"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: examBackToModules
+  plRu: "← К модулям"
+  enRu: "← Modules"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: examPrevious
+  plRu: "← Назад"
+  enRu: "← Previous"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: examAnswerPrompt
+  plRu: "Введи ответ"
+  enRu: "Enter an answer"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: examNativeUnavailable
+  plRu: "Пока недоступно на iPad"
+  enRu: "Not available on iPad yet"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: examChooseModule
+  plRu: "Выберите часть"
+  enRu: "Choose a part"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: examAudioPlay
+  plRu: "Воспроизвести"
+  enRu: Play
+  placeholders: ""
+}
+UI_COPY_CASE {key: examAudioPause plRu: "Пауза" enRu: Pause placeholders: ""}
+UI_COPY_CASE {
+  key: examAudioReplay
+  plRu: "С начала"
+  enRu: Replay
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: examAudioSeek
+  plRu: "Перемотка записи"
+  enRu: "Seek recording"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: examAudioElapsed
+  plRu: "Прослушано"
+  enRu: Elapsed
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: examAudioDuration
+  plRu: "Длительность"
+  enRu: Duration
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: examAudioUnavailable
+  plRu: "Аудиозапись недоступна"
+  enRu: "Offline audio is unavailable"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: examAudioInvalidSegment
+  plRu: "Фрагмент аудиозаписи недоступен"
+  enRu: "Audio segment is unavailable"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: examAudioPlaybackFailed
+  plRu: "Не удалось воспроизвести аудиозапись"
+  enRu: "Audio playback failed"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: examImageUnavailable
+  plRu: "Изображение недоступно"
+  enRu: "Image is unavailable"
+  placeholders: ""
+}

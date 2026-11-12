@@ -1,0 +1,28 @@
+DSL 1
+# Public evaluator boundaries missing from the frozen exam-scoring answer oracle.
+ANSWER_EVALUATION_CASE {
+  id: policy-public-canonical-over-variant
+  consumer: grammar
+  mode: open_manual
+  fullAnswer: tak
+  variantAnswer: tak
+  variantQuarter: 1
+  maximumQuarter: 4
+  answer: tak
+  expectedStatus: confirmed_full
+  expectedConfirmedQuarter: 4
+  expectedPendingQuarter: 0
+}
+ANSWER_EVALUATION_CASE {
+  id: policy-public-full-variant
+  consumer: grammar
+  mode: exact
+  fullAnswer: tak
+  variantAnswer: owszem
+  variantQuarter: 4
+  maximumQuarter: 4
+  answer: owszem
+  expectedStatus: confirmed_full
+  expectedConfirmedQuarter: 4
+  expectedPendingQuarter: 0
+}

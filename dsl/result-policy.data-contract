@@ -1,0 +1,6 @@
+DSL 1
+RECORD ResultPolicyOutcomeRow KEY disposition COUNT 4
+  disposition: string
+  isFinal: bool
+  showFinalPercent: bool
+END

@@ -1,0 +1,43 @@
+DSL 1
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-B2-2023-06-l5-q3-fact-1
+  questionRef: certyfikat-polski-B2-2023-06-l5-q3
+  creditQuarter: 2
+  displayText: "w Ameryce"
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-B2-2023-06-l5-q3-fact-2
+  questionRef: certyfikat-polski-B2-2023-06-l5-q3
+  creditQuarter: 2
+  displayText: "w Europie"
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-B2-2023-06-l5-q6-fact-1
+  questionRef: certyfikat-polski-B2-2023-06-l5-q6
+  creditQuarter: 2
+  displayText: fotografia
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-B2-2023-06-l5-q6-fact-2
+  questionRef: certyfikat-polski-B2-2023-06-l5-q6
+  creditQuarter: 2
+  displayText: film
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-B2-2023-06-l5-q7-fact-1
+  questionRef: certyfikat-polski-B2-2023-06-l5-q7
+  creditQuarter: 4
+  displayText: "papier fotograficzny"
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-B2-2023-06-l5-q7-fact-2
+  questionRef: certyfikat-polski-B2-2023-06-l5-q7
+  creditQuarter: 4
+  displayText: "urządzenia do pomiaru intensywności barw"
+}
+LISTENING_ACCEPTED_FACT {
+  factId: certyfikat-polski-B2-2023-06-l5-q7-fact-3
+  questionRef: certyfikat-polski-B2-2023-06-l5-q7
+  creditQuarter: 4
+  displayText: "kamizelka kuloodporna"
+}

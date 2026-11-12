@@ -1,0 +1,8 @@
+DSL 1
+# Public status and quarter sources for each set-answer Logic disposition.
+RECORD SetPolicyOutcomeRow KEY disposition COUNT 5
+  disposition: string
+  status: enum confirmed_full|confirmed_partial|pending_manual|wrong
+  confirmedSource: enum maximum|known|zero
+  pendingSource: enum maximum|remaining|zero
+END

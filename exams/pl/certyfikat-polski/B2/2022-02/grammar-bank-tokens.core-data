@@ -1,0 +1,79 @@
+DSL 1
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2022-02-g4-bank-1
+  testRef: certyfikat-polski-B2-2022-02-grammar-4
+  position: 1
+  text: "dzięki"
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2022-02-g4-bank-2
+  testRef: certyfikat-polski-B2-2022-02-grammar-4
+  position: 2
+  text: na
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2022-02-g4-bank-3
+  testRef: certyfikat-polski-B2-2022-02-grammar-4
+  position: 3
+  text: na
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2022-02-g4-bank-4
+  testRef: certyfikat-polski-B2-2022-02-grammar-4
+  position: 4
+  text: nad
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2022-02-g4-bank-5
+  testRef: certyfikat-polski-B2-2022-02-grammar-4
+  position: 5
+  text: o
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2022-02-g4-bank-6
+  testRef: certyfikat-polski-B2-2022-02-grammar-4
+  position: 6
+  text: "pośród"
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2022-02-g4-bank-7
+  testRef: certyfikat-polski-B2-2022-02-grammar-4
+  position: 7
+  text: po
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2022-02-g4-bank-8
+  testRef: certyfikat-polski-B2-2022-02-grammar-4
+  position: 8
+  text: podczas
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2022-02-g4-bank-9
+  testRef: certyfikat-polski-B2-2022-02-grammar-4
+  position: 9
+  text: przez
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2022-02-g4-bank-10
+  testRef: certyfikat-polski-B2-2022-02-grammar-4
+  position: 10
+  text: u
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2022-02-g4-bank-11
+  testRef: certyfikat-polski-B2-2022-02-grammar-4
+  position: 11
+  text: w
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2022-02-g4-bank-12
+  testRef: certyfikat-polski-B2-2022-02-grammar-4
+  position: 12
+  text: z
+}
+GRAMMAR_BANK_TOKEN {
+  tokenId: certyfikat-polski-B2-2022-02-g4-bank-13
+  testRef: certyfikat-polski-B2-2022-02-grammar-4
+  position: 13
+  text: za
+}
