@@ -48,3 +48,9 @@ SSH-ключ GitHub в окружении не сработал, поэтому 
 ## Более поздняя проверка Kotlin-ветки
 
 Исторический отчёт выше относится к React baseline сентября 2026 года и не подтверждает новую Kotlin-сборку. На 24 сентября отдельная [виртуальная матрица приёмки](../Plans/Kotlin/FinalVirtualAcceptance-Tester.md) фиксирует React unit 201/201, React browser 21/21, Kotlin JS/Wasm browser по 174/174 в Chromium/Firefox/Playwright WebKit, iPhone/iPad Simulator XCTest по 14/14, iPad large/dark/landscape 1/1, iPhone Reduce Motion 1/1, Mac Compose Desktop 38/38 и свежий пакет `.app`. [Манифест](../Plans/Kotlin/Stage5FinalVirtualArtifactProvenance.md#fv-11) связывает исходники и сборки хешами. Взаимодействие с узким окном готового Mac-приложения, физические устройства, реальные IME и screen readers остаются **NOT RUN**. Независимый Reviewer не принял полный виртуальный gate из-за отсутствия Mac host UI evidence. Kotlin не переключён на опубликованный сайт, и эти результаты не являются проверкой его production deployment.
+
+## 2026-11-12: опубликованный Kotlin/Wasm и официальные экзамены
+
+Kotlin runtime `a753640` опубликован на GitHub Pages: 16 официальных экзаменов, все четыре письменных раздела. Основной Kotlin CI и Pages deployment PASS. Публичный сайт проверен Playwright в Chromium, Firefox и WebKit: реальный Wasm, аудио >41 секунды с движением прогресса и паузой; byte-range доставка 16/16 и source images 7/7 PASS. Полный локальный Chromium exam 92/92 PASS. Подробные команды/артефакты и неуспешные промежуточные прогоны — [итоговое evidence](../Plans/Architecture/P9-PUBLIC-DEPLOYMENT-EVIDENCE.md).
+
+План закрыт на 10/12: недоступна исправная запись B2/2022-06; настоящее изменение размера окна iPad Simulator не подтверждено. Физический iPad отложен владельцем. Эти ограничения не скрываются за успешной сборкой или landscape-проверкой.

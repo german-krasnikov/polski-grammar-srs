@@ -177,15 +177,15 @@ test('certified timed entry is available for sixteen complete source papers', as
     await page.getByRole('button', { name: '← Выберите экзамен' }).click();
   }
   await expect(page.locator('.exam-card').filter({ hasText: 'B2 Certyfikat 2022-06' })).toHaveCount(0);
-  await page.locator('.exam-card').filter({ hasText: 'B1 Przykładowy' }).getByRole('button', { name: 'Начать' }).click();
-  await expect(page.getByRole('button', { name: 'Полный экзамен по времени' })).toHaveCount(0);
+  await expect(page.locator('.exam-card')).toHaveCount(16);
+  await expect(page.locator('.exam-card').filter({ hasText: 'B1 Przykładowy' })).toHaveCount(0);
 });
 
 test('Chromium compatibility exam route loads the Wasm production bundle', async ({ page, browserName }) => {
   test.skip(browserName !== 'chromium');
   await page.goto('/#/exam');
   await expect(page.locator('script[src="originWasmComposeApp.js"]')).toHaveCount(1);
-  await expect(page.locator('.exam-card')).toHaveCount(17); // 16 certified papers plus the unscheduled sample.
+  await expect(page.locator('.exam-card')).toHaveCount(16);
 });
 
 test('all sixteen published recordings support byte-range delivery', async ({ baseURL }) => {
@@ -214,7 +214,7 @@ test('compatibility exam catalog remains available through the JS fallback', asy
   await forceJsCompatibilityFallback(page);
   await page.goto('/#/exam');
   await expect(page.locator('script[src="originJsComposeApp.js"]')).toHaveCount(1);
-  await expect(page.locator('.exam-card')).toHaveCount(17); // 16 certified papers plus the unscheduled sample.
+  await expect(page.locator('.exam-card')).toHaveCount(16);
 });
 
 test('JS fallback preserves Polish input and caret through the grammar PlayTest', async ({ page }) => {

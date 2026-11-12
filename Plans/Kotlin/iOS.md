@@ -187,3 +187,9 @@ Swift passes the rendered part's origin to the bridge for answers, navigation, a
 | Final corrected app native UI regression | **PASS** — entire `NativeExamUITests` class 10/10; retained official B1-2017 Grammar and typed Polish draft cases 1/1 each, with result bundles under `recovery-logs/20261112/p11-independent-native/` |
 | Independent staged MP3 tamper against corrected project | **PASS** — Xcode exits 65 at staged audio mismatch before resource copy; stage restored and `check-app` passes |
 | Physical iPad | **NOT RUN** — owner-deferred gate |
+
+### 2026-11-12: published sixteen-paper cohort
+
+The installed iPad Simulator app now includes 16 source-exact original MP3s and seven published source images. Independent `IosExamSessionTest` is **PASS 17/17**; published C1 April 2024 paired controls and November 2022 quarter-point rubric render correctly, and both retained B1-2017 Grammar/Polish draft cases pass. Rubric accessibility changed with an observed installed RED → GREEN; independent source review APPROVED. [Native publication evidence](../Architecture/P9-PUBLICATION-NATIVE-INDEPENDENT-EVIDENCE.md).
+
+Full four-part timed completion and extra-large text/landscape cases pass. A natural 40-minute Listening deadline was observed advancing to Reading; its interrupted long XCTest is NOT COMPLETED. Genuine window resizing remains NOT VERIFIED: system window gestures did not narrow the measured frame. The acceptance test remains preserved on `work/exam-dsl-native-pilot-20261108` at `a332681`. [Deadline and resize evidence](../Architecture/IOS-FULL-EXAM-INDEPENDENT-EVIDENCE.md). P11 remains open; physical iPad remains owner-deferred.

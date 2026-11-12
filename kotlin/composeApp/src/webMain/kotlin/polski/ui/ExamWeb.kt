@@ -24,8 +24,7 @@ internal data class ExamEntry(
     val writingCount: Int get() = examWritingData[id]?.tasks?.size ?: 0
 }
 
-private val exams = listOf(ExamEntry("b1-sample", "B1 Przykładowy", "B1", "sample")) +
-    ExamCatalog.entries.map { ExamEntry(it.routeId, it.displayTitle, it.level, it.year.toString()) }
+private val exams = ExamCatalog.entries.map { ExamEntry(it.routeId, it.displayTitle, it.level, it.year.toString()) }
 
 internal enum class ExamScreen { List, Modules, Grammar, Reading, Listening, Writing, Timed }
 
