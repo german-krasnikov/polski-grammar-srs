@@ -8,6 +8,10 @@ final class NativeExamUITests: XCTestCase {
         XCTAssertTrue(exam.waitForExistence(timeout: 15), app.debugDescription)
         exam.tap()
         let paper = app.buttons["exam-\(id)"]
+        for _ in 0..<10 {
+            if paper.exists { break }
+            app.swipeUp()
+        }
         XCTAssertTrue(paper.waitForExistence(timeout: 5), app.debugDescription)
         paper.tap()
         return app
@@ -286,5 +290,76 @@ final class NativeExamUITests: XCTestCase {
                                     "The transition must follow the natural 40-minute deadline")
         XCTAssertTrue(app.staticTexts["exam-part-text"].waitForExistence(timeout: 5), app.debugDescription)
         XCTAssertFalse(app.buttons["exam-audio-play"].exists, "Reading should replace Listening after timeout")
+    }
+
+    func testPublishedC1NovemberRubricAppearsOnlyAfterGrammarSubmit() {
+        let app = openPaper("c1-2022-11")
+        app.buttons["exam-module-grammar"].tap()
+        let rubricId = "exam-rubric-certyfikat-polski-C1-2022-11-g2-q1-c1"
+        XCTAssertFalse(app.descendants(matching: .any)[rubricId].exists,
+                       "Official rubric must be withheld while answering")
+        for _ in 0..<10 { app.buttons["exam-next"].tap() }
+        XCTAssertTrue(app.staticTexts["exam-context"].label.contains("Agencje turystyczne"), app.debugDescription)
+        let answer = app.textFields["exam-grammar-answer"]
+        XCTAssertTrue(answer.waitForExistence(timeout: 5), app.debugDescription)
+        answer.tap()
+        answer.typeText("Agencje turystyczne odnotowują spadek zainteresowania klientów.")
+        XCTAssertFalse(app.descendants(matching: .any)[rubricId].exists,
+                       "Rubric cannot reveal official criteria before submit")
+        for _ in 0..<100 {
+            if app.buttons["exam-submit"].exists { break }
+            let next = app.buttons["exam-next"]
+            XCTAssertTrue(next.exists, "The published Grammar sequence must reach Submit")
+            next.tap()
+        }
+        let submit = app.buttons["exam-submit"]
+        XCTAssertTrue(submit.waitForExistence(timeout: 5), app.debugDescription)
+        submit.tap()
+        XCTAssertTrue(app.staticTexts["Результаты"].waitForExistence(timeout: 5), app.debugDescription)
+        let first = app.descendants(matching: .any)[rubricId]
+        for _ in 0..<30 {
+            if first.exists { break }
+            app.swipeUp()
+        }
+        XCTAssertTrue(first.exists, "Submitted C1 November 2022 review must show source rubric: \(app.debugDescription)")
+        XCTAssertTrue(first.label.contains("odnotowują"), first.label)
+        XCTAssertTrue(first.label.contains("0,25"), first.label)
+        let fourth = app.descendants(matching: .any)["exam-rubric-certyfikat-polski-C1-2022-11-g2-q1-c4"]
+        XCTAssertTrue(fourth.exists, "All four source components must render in review")
+        XCTAssertTrue(fourth.label.contains("klientów"), fourth.label)
+    }
+
+    func testPublishedC1AprilPairRouteShowsSeparateSourceInputs() {
+        let app = XCUIApplication()
+        app.launch()
+        app.buttons["Экзамен"].tap()
+        let november = app.buttons["exam-c1-2023-11"]
+        let april = app.buttons["exam-c1-2024-04"]
+        for _ in 0..<10 {
+            if november.exists && april.exists { break }
+            app.swipeUp()
+        }
+        XCTAssertTrue(november.waitForExistence(timeout: 5), app.debugDescription)
+        XCTAssertTrue(april.exists, "Month-specific C1 routes must remain distinct")
+        XCTAssertTrue(april.label.contains("2024-04"), april.label)
+        april.tap()
+        app.buttons["exam-module-grammar"].tap()
+        for _ in 0..<7 { app.buttons["exam-next"].tap() }
+        XCTAssertEqual(app.staticTexts["exam-context"].label, "(kilka)")
+        let answer = app.textFields["exam-grammar-answer"]
+        XCTAssertTrue(answer.waitForExistence(timeout: 5), app.debugDescription)
+        answer.tap()
+        answer.typeText("kilkorgiem")
+        app.buttons["exam-next"].tap()
+        XCTAssertEqual(app.staticTexts["exam-context"].label, "(przyjaciel)")
+        answer.tap()
+        answer.typeText("przyjaciół")
+        app.buttons["exam-previous"].tap()
+        XCTAssertEqual(app.staticTexts["exam-context"].label, "(kilka)")
+        XCTAssertEqual(answer.value as? String, "kilkorgiem",
+                       "First paired inflection must survive moving to the second source item")
+        app.buttons["exam-next"].tap()
+        XCTAssertEqual(answer.value as? String, "przyjaciół",
+                       "Second paired inflection must survive back navigation")
     }
 }

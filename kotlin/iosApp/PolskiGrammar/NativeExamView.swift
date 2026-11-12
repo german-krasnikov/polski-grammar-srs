@@ -547,6 +547,7 @@ struct NativeExamView: View {
                             }
                         }
                     }
+                    .accessibilityElement(children: .contain)
                     .accessibilityIdentifier("exam-review-\(item.string("itemId"))")
                 }
             }
