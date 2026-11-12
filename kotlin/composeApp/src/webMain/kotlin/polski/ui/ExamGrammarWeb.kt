@@ -25,8 +25,7 @@ internal class ExamGrammarController(
     }.toMap()
     private val selectedBankTokenByItemId = mutableMapOf<String, String>()
     private var ownState = run {
-        val mergedBank = tests.flatMap { it.bankTokens }.mapIndexed { index, token -> token.copy(position = index + 1) }
-        val merged = GrammarTest(examId, tests.firstOrNull()?.instruction ?: "", tests.flatMap { it.items }, mergedBank)
+        val merged = mergeGrammarTests(examId, tests)
         GrammarExamState(test = merged)
     }
     private val state get() = externalState?.invoke() ?: ownState
