@@ -315,6 +315,7 @@ final class AppModel: ObservableObject {
     }
     func setPreference(_ field: String, _ value: String) {
         if let error = preferencesSession.set(field: field, value: value) { notice = error; return }
+        if field == "target" || field == "native" { send("refresh") }
         if field == "styleId" { send("styleId", value) }
         if field == "answerMode" { send("answerMode", value) }
     }
@@ -1128,41 +1129,45 @@ private struct MatrixView: View {
     }
 
     @ViewBuilder private var verbs: some View {
-        Section("Лицо × число × время") {
-            ChoiceMenu(title: uiText(model.state, "matrixVerb", fallback: "Глагол"), selected: matrix.string("verbId"), options: matrix.rows("verbs")) { model.send("matrixVerb", $0) }
-            ChoiceMenu(title: matrix.string("verbGenderControlLabel"), selected: matrix.bool("feminineGroup") ? "f" : "m",
-                       options: matrix.rows("verbGenderOptions")) { model.send("matrixGender", $0) }
-            Text(matrix.string("verbFutureExplanation"))
-        }
-        ForEach(Array(matrix.rows("verbsRows").enumerated()), id: \.offset) { _, row in
-            Section(row.string("title")) {
-                ForEach(["present", "past", "future"], id: \.self) { tense in
-                    Text(matrix.record("verbTenseLabels").string(tense)).font(.subheadline)
-                    NativeContrastPairView(pair: row.record("\(tense)Pair"), copy: model.state)
-                }
+        if matrix.string("targetLanguage") == "pl" {
+            Section("Лицо × число × время") {
+                ChoiceMenu(title: uiText(model.state, "matrixVerb", fallback: "Глагол"), selected: matrix.string("verbId"), options: matrix.rows("verbs")) { model.send("matrixVerb", $0) }
+                ChoiceMenu(title: matrix.string("verbGenderControlLabel"), selected: matrix.bool("feminineGroup") ? "f" : "m",
+                           options: matrix.rows("verbGenderOptions")) { model.send("matrixGender", $0) }
+                Text(matrix.string("verbFutureExplanation"))
             }
-        }
-        Section("Вид: процесс или результат") {
-            ForEach(Array(matrix.rows("aspectRows").enumerated()), id: \.offset) { aspect in
-                VStack(alignment: .leading, spacing: 10) {
-                    Text(aspect.element.string("label")).font(.headline)
-                    ForEach(Array(aspect.element.rows("entries").enumerated()), id: \.offset) { entry in
-                        if entry.element.bool("available") {
-                            comparisonRow(entry.element)
-                        } else {
-                            Text(matrix.string("aspectNoPresent"))
-                        }
+            ForEach(Array(matrix.rows("verbsRows").enumerated()), id: \.offset) { _, row in
+                Section(row.string("title")) {
+                    ForEach(["present", "past", "future"], id: \.self) { tense in
+                        Text(matrix.record("verbTenseLabels").string(tense)).font(.subheadline)
+                        NativeContrastPairView(pair: row.record("\(tense)Pair"), copy: model.state)
                     }
                 }
             }
-            Button(uiText(model.state, "matrixTrainTenses", fallback: "Тренировать времена")) { model.send("skill", "verb.past") }
-        }
-        Section("Время меняется, предложение остаётся целым") {
-            ForEach(Array(matrix.rows("tenseRows").enumerated()), id: \.offset) { entry in
-                comparisonRow(entry.element)
+            Section("Вид: процесс или результат") {
+                ForEach(Array(matrix.rows("aspectRows").enumerated()), id: \.offset) { aspect in
+                    VStack(alignment: .leading, spacing: 10) {
+                        Text(aspect.element.string("label")).font(.headline)
+                        ForEach(Array(aspect.element.rows("entries").enumerated()), id: \.offset) { entry in
+                            if entry.element.bool("available") {
+                                comparisonRow(entry.element)
+                            } else {
+                                Text(matrix.string("aspectNoPresent"))
+                            }
+                        }
+                    }
+                }
+                Button(uiText(model.state, "matrixTrainTenses", fallback: "Тренировать времена")) { model.send("skill", "verb.past") }
+            }
+            Section("Время меняется, предложение остаётся целым") {
+                ForEach(Array(matrix.rows("tenseRows").enumerated()), id: \.offset) { entry in
+                    comparisonRow(entry.element)
+                }
             }
         }
-        english
+        if matrix.string("targetLanguage") == "en" {
+            english
+        }
     }
 
     // EN-24 (UC-09 part 2/2, ios lane, EnRuPackPlan.md §5 gap H / §6): mirrors the web host's
@@ -1180,7 +1185,7 @@ private struct MatrixView: View {
 
     @ViewBuilder private var english: some View {
         Section("English: лицо × время (\"\(matrix.string("englishExampleLemma"))\")") {
-            Text("Формы читаются из forms.generated.json(en) тем же MatrixTableViewModel, что и польские таблицы выше — движок не знает, что это английский.")
+            Text("Формы английского глагола по лицам и временам.")
         }
         ForEach(Array(matrix.rows("englishVerbsRows").enumerated()), id: \.offset) { _, row in
             Section(row.string("title")) {
