@@ -1,5 +1,6 @@
 import { expect, test } from '@playwright/test';
 import { continueIntroductionIfPresent } from './kotlin-introduction';
+import { progressAsLegacyShape } from './polski-text';
 
 // EnRuAcceptance-2026-09-28.md §7 items 1-4 (ADR-37/ADR-38 core fixes + this task's web Settings
 // pickers): the web host had no target/native picker at all, and every place it rendered the
@@ -11,6 +12,86 @@ import { continueIntroductionIfPresent } from './kotlin-introduction';
 // proof, exercised here through the actual UI) — then switch back to pl-ru with pl-ru untouched.
 
 const CYRILLIC_OR_POLISH = /[а-яёА-ЯЁąćęłńóśźżĄĆĘŁŃÓŚŹŻ]/;
+const progressKey = 'polski-grammar-srs-kmp-preview-v1';
+
+test('matrix shows only the active target language through pl-ru → en-ru → pl-ru', async ({ page }) => {
+  const englishTables = page.locator('.matrix-page section.matrix-section').filter({
+    has: page.getByRole('heading', { name: /^(English: лицо × время|do-support: вопрос и отрицание)/ }),
+  });
+
+  await page.goto('/#/matrix');
+  await page.click('#matrix-section-verbs');
+  await expect(page.getByRole('heading', { name: 'Лицо × число × время' })).toBeVisible();
+  const loadedScripts = await page.evaluate(() => performance.getEntriesByType('resource')
+    .map((entry) => new URL(entry.name).pathname.split('/').pop())
+    .filter((name) => name === 'composeApp.js' || name === 'originWasmComposeApp.js' || name === 'originJsComposeApp.js'));
+  expect(loadedScripts).toContain('composeApp.js');
+  const compatibilityRuntime = loadedScripts.filter((name) => name?.startsWith('origin'));
+  if (process.env.KOTLIN_SPIKE_BRANCH === 'wasm') {
+    expect(compatibilityRuntime).toHaveLength(1);
+  } else {
+    expect(compatibilityRuntime).toHaveLength(0);
+  }
+  console.log(`P17_BROWSER_RUNTIME=${compatibilityRuntime[0] ?? 'direct-js'} scripts=${loadedScripts.join(',')}`);
+  await expect(englishTables).toHaveCount(0);
+  await expect(page.locator('.matrix-page')).not.toContainText('do-support');
+
+  await page.goto('/#/settings');
+  await page.getByRole('combobox', { name: 'Изучаемый язык' }).selectOption('en');
+  await page.goto('/#/matrix');
+  await page.click('#matrix-section-verbs');
+  await expect(englishTables).toHaveCount(2);
+  await expect(page.getByRole('heading', { name: 'Лицо × число × время' })).toHaveCount(0);
+  await expect(englishTables.first().getByRole('rowheader', { name: 'he', exact: true })).toBeVisible();
+
+  await page.goto('/#/settings');
+  await page.getByRole('combobox', { name: 'Изучаемый язык' }).selectOption('pl');
+  await page.goto('/#/matrix');
+  await page.click('#matrix-section-verbs');
+  await expect(page.getByRole('heading', { name: 'Лицо × число × время' })).toBeVisible();
+  await expect(englishTables).toHaveCount(0);
+  await expect(page.locator('.matrix-page')).not.toContainText('do-support');
+});
+
+test('switching course keeps rated Polish training progress', async ({ page }) => {
+  await page.goto('/#/training');
+  await continueIntroductionIfPresent(page);
+  await page.getByRole('button', { name: /^(Показать ответ|Проверить и показать ответ)$/ }).click();
+  await page.getByRole('button', { name: /2 Вспомнил/ }).click();
+  await expect.poll(async () => {
+    const raw = await page.evaluate((key) => localStorage.getItem(key), progressKey);
+    return raw ? (progressAsLegacyShape(raw) as { totalReviews: number }).totalReviews : 0;
+  }).toBe(1);
+  const savedRaw = await page.evaluate((key) => localStorage.getItem(key), progressKey);
+  expect(savedRaw).not.toBeNull();
+  type Progress = { cards: { skillId: string; card: unknown }[]; stats: Record<string, unknown>; totalReviews: number };
+  const savedPolishProgress = progressAsLegacyShape(savedRaw!) as Progress;
+  const savedIds = new Set(savedPolishProgress.cards.map((entry) => entry.skillId));
+  const assertPolishProgressPreserved = async () => {
+    const raw = await page.evaluate((key) => localStorage.getItem(key), progressKey);
+    expect(raw).not.toBeNull();
+    const current = progressAsLegacyShape(raw!) as Progress;
+    expect(current.totalReviews).toBe(savedPolishProgress.totalReviews);
+    expect(current.cards.filter((entry) => savedIds.has(entry.skillId))).toEqual(savedPolishProgress.cards);
+    for (const [skillId, stats] of Object.entries(savedPolishProgress.stats)) {
+      expect(current.stats[skillId]).toEqual(stats);
+    }
+  };
+
+  await page.goto('/#/settings');
+  await page.getByRole('combobox', { name: 'Изучаемый язык' }).selectOption('en');
+  await page.goto('/#/training');
+  await continueIntroductionIfPresent(page);
+  await expect(page.locator('.source-sentence')).toHaveAttribute('lang', 'en');
+  await assertPolishProgressPreserved();
+
+  await page.goto('/#/settings');
+  await page.getByRole('combobox', { name: 'Изучаемый язык' }).selectOption('pl');
+  await page.goto('/#/training');
+  await continueIntroductionIfPresent(page);
+  await expect(page.locator('.source-sentence')).toHaveAttribute('lang', 'pl');
+  await assertPolishProgressPreserved();
+});
 
 test.beforeEach(async ({ page }) => {
   if (process.env.KOTLIN_SPIKE_BRANCH === 'js') {

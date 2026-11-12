@@ -6,6 +6,7 @@ import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
 import polski.data.adjectives
+import polski.data.activeCoursePackOption
 import polski.data.comparisonNounIds
 import polski.data.courseAspectNoPresent
 import polski.data.courseMatrixIntroduction
@@ -57,8 +58,10 @@ import polski.core.engine.MatrixTableEngine
 // purpose: that shape is covered by IosMatrixSnapshotTest and the SwiftUI screens/screenshots.
 internal fun matrixSnapshot(state: AppUiState): JsonElement {
     val selection = state.matrixSelection
+    val targetLanguage = activeCoursePackOption.target
     return buildJsonObject {
         put("section", selection.section.name)
+        put("targetLanguage", targetLanguage)
         put("matrixIntroduction", courseMatrixIntroduction)
         put("aspectNoPresent", courseAspectNoPresent.ios)
         put("nounId", selection.nounId)
@@ -198,31 +201,31 @@ internal fun matrixSnapshot(state: AppUiState): JsonElement {
         // person, fixed example verb "see") plus a do-support table, both read through the shared
         // `enVerbsTable`/`enDoSupportTable` builders (`:shared` commonMain) every pl table above
         // already uses via MatrixTableEngine/MatrixTableViewModel.
-        val englishExampleVerbId = "see"
-        val englishExampleLemma = enVerbs.first { it.id == englishExampleVerbId }.lemma
-        put("englishExampleLemma", englishExampleLemma)
-        val englishTenses = listOf(Tense.PRESENT, Tense.PAST, Tense.FUTURE)
-        val englishVerbsTableView = enVerbsTable(englishExampleVerbId)
-        put("englishVerbsRows", JsonArray(enPersonalPronouns.mapIndexed { i, pronoun -> buildJsonObject {
-            put("title", pronoun.subject)
-            englishTenses.forEachIndexed { colIndex, tense ->
-                val cell = englishVerbsTableView.rows[i].cells[colIndex]
-                put(tense.id, cell.value)
-                put("${tense.id}Pair", contrastPairJson(requireNotNull(cell.contrast)))
-            }
-        } }))
-        // "do"/"does" (Present) and invariant "did" (Past); the future column has no do-support at
-        // all (plan §5 gap H — future is built with "will" alone) so it carries no pair, unlike
-        // every other matrix cell above.
-        val englishDoSupportTableView = enDoSupportTable()
-        put("englishDoSupportRows", JsonArray(enPersonalPronouns.mapIndexed { i, pronoun -> buildJsonObject {
-            put("title", pronoun.subject)
-            listOf(Tense.PRESENT, Tense.PAST).forEachIndexed { colIndex, tense ->
-                val cell = englishDoSupportTableView.rows[i].cells[colIndex]
-                put(tense.id, cell.value)
-                put("${tense.id}Pair", contrastPairJson(requireNotNull(cell.contrast)))
-            }
-        } }))
+        if (targetLanguage == "en") {
+            val englishExampleVerbId = "see"
+            val englishExampleLemma = enVerbs.first { it.id == englishExampleVerbId }.lemma
+            put("englishExampleLemma", englishExampleLemma)
+            val englishTenses = listOf(Tense.PRESENT, Tense.PAST, Tense.FUTURE)
+            val englishVerbsTableView = enVerbsTable(englishExampleVerbId)
+            put("englishVerbsRows", JsonArray(enPersonalPronouns.mapIndexed { i, pronoun -> buildJsonObject {
+                put("title", pronoun.subject)
+                englishTenses.forEachIndexed { colIndex, tense ->
+                    val cell = englishVerbsTableView.rows[i].cells[colIndex]
+                    put(tense.id, cell.value)
+                    put("${tense.id}Pair", contrastPairJson(requireNotNull(cell.contrast)))
+                }
+            } }))
+            // Future is built with "will" alone and has no do-support pair.
+            val englishDoSupportTableView = enDoSupportTable()
+            put("englishDoSupportRows", JsonArray(enPersonalPronouns.mapIndexed { i, pronoun -> buildJsonObject {
+                put("title", pronoun.subject)
+                listOf(Tense.PRESENT, Tense.PAST).forEachIndexed { colIndex, tense ->
+                    val cell = englishDoSupportTableView.rows[i].cells[colIndex]
+                    put(tense.id, cell.value)
+                    put("${tense.id}Pair", contrastPairJson(requireNotNull(cell.contrast)))
+                }
+            } }))
+        }
         put("pronounIntro", referencePronounTeaching.compactIntro)
         put("pronounFooter", referencePronounTeaching.nativeFooter)
         put("pronounContexts", JsonArray(referencePronounTeaching.contexts.map { context -> buildJsonObject {
