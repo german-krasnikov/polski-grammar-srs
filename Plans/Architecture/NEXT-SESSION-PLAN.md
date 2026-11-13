@@ -180,3 +180,10 @@ Web Rive lifecycle `56652d0`/`b748832` принят независимыми Tes
 Объединённый Web P14/P15 в `c2902b7`, итоговые tests/evidence `2dacf34` приняты независимым Reviewer. Biome check, typecheck, Vitest 322/322; shared Desktop 41/41, JS/Wasm по 479/479; свежие JS/Wasm/compat build и 16 audio pins PASS. Selected browser: Wasm Chromium 24/24; JS Chromium initial 22/24 + исправленные два artifact-fixture случая 2/2 PASS; Firefox/WebKit combined по 28/28 на каждом target. Дополнительные import/OFF/legacy/timed/variant/recovery и настоящий hidden на обоих targets PASS. Первоначальные ошибки стенда сохранены в [P19 evidence](P19-INTEGRATED-WEB-VERIFICATION.md). Публикация этого web-среза запускается отдельно от native.
 
 Native checkpoint `da80678`: developer bridge 34/34 и целевые iPad Simulator UI PASS; independent gate открыт. Независимый тест подтвердил ghost advance под Settings sheet (открытие через 0,52с после ответа, до двухсекундного timer); исправление возвращено разработчику. Общий статус остаётся **16/19**, P14/P15/P19 не закрыты.
+
+
+### P19 live visual follow-up
+
+Pages/Kotlin CI для `b81fcab` PASS. Live Chromium 140 на 375×667 проверил реальный Wasm и реальный JS: default ON, неверный первый ответ/блокировку/переход, frozen wrong/source report и OFF после reload — functional PASS, без page errors. Receipts `p19-integrated-web/live/live-feedback-b81fcab-{wasm,js}.json`. Отдельный просмотр PNG выявил **VISUAL FAIL отчёта на телефоне**: `flex`/`nowrap` сжимают context/выбранный ответ и обрезают эталон справа. Это остаётся P15/P19, исправление CSS и новый no-overflow PlayTest возвращены Developer; функциональный PASS не считается визуальным PASS. Исходные PNG и `live-report-visual-baseline.json` сохранены рядом с receipts.
+
+Native independent RED Settings-sheet и бледных disabled options исправлены в `694a695`/`edaa6b4`, повторные четыре UI cases PASS. Измеренный контраст исправленных вариантов 5,83/6,29 (light), 7,45/10,75 (dark); соседние numeric labels нейтральны. Остальная native приёмка продолжается, общий статус **16/19** не меняется.
