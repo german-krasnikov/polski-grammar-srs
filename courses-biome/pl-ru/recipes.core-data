@@ -61,6 +61,7 @@ RECIPE {
   ]
   tags: [acc]
   includeNounGenderTag: true
+  tileTargetSlots: [adjective noun]
 }
 RECIPE {
   skill: case.acc.f
@@ -303,6 +304,7 @@ RECIPE {
     }
   ]
   tags: [inst]
+  tileTargetSlots: [adjective noun]
 }
 RECIPE {
   skill: case.loc
@@ -361,6 +363,7 @@ RECIPE {
     }
   ]
   tags: [loc]
+  tileTargetSlots: [adjective noun]
 }
 RECIPE {
   skill: case.dat
@@ -419,6 +422,7 @@ RECIPE {
     }
   ]
   tags: [dat]
+  tileTargetSlots: [adjective noun]
 }
 RECIPE {
   skill: agreement.my
@@ -477,6 +481,7 @@ RECIPE {
     }
   ]
   tags: [agreement acc]
+  tileTargetSlots: [adjective noun]
   ownerDraw: {
     owners: [
       {lexeme: your labelKey: ownerYour}
@@ -584,6 +589,7 @@ RECIPE {
     }
   ]
   tags: [verb present nom]
+  tileTargetSlots: [adjective noun]
 }
 RECIPE {
   skill: verb.past
@@ -679,6 +685,7 @@ RECIPE {
     }
   ]
   tags: [verb past nom]
+  tileTargetSlots: [adjective noun]
 }
 RECIPE {
   skill: verb.future
@@ -807,6 +814,7 @@ RECIPE {
     }
   ]
   tags: [verb future nom]
+  tileTargetSlots: [adjective noun]
 }
 RECIPE {
   skill: aspect
@@ -884,6 +892,7 @@ RECIPE {
     }
   ]
   tags: [pronoun acc]
+  tileTargetSlots: [adjective noun]
 }
 RECIPE {
   skill: sentence.question
@@ -929,6 +938,7 @@ RECIPE {
     }
   ]
   tags: [question acc]
+  tileTargetSlots: [adjective noun]
 }
 RECIPE {
   skill: sentence.plural
@@ -987,6 +997,7 @@ RECIPE {
   ]
   tags: [plural acc]
   numberOverride: pl
+  tileTargetSlots: [adjective noun]
 }
 RECIPE {
   skill: mixed
@@ -1070,6 +1081,7 @@ RECIPE {
     }
   ]
   tags: [mixed gen past]
+  tileTargetSlots: [adjective noun]
 }
 
 # P18 comparison: content keys only; six distinct transformations share one FSRS skill.

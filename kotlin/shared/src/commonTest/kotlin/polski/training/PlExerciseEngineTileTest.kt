@@ -44,7 +44,7 @@ class PlExerciseEngineTileTest {
     }
 
     @Test fun skillWithoutTileTargetSlotsYieldsNoTileBuilderState() {
-        val exercise = factory(listOf(0.1)).generateForSkill("verb.past", SentenceSeed("wife", "beautiful"))
+        val exercise = factory(listOf(0.1)).generateForSkill("aspect", SentenceSeed("wife", "beautiful"))
         assertEquals(emptyList(), exercise.tileTargetSlots)
         assertNull(tileBuilderStateFor(exercise, Draws(listOf(0.1, 0.5, 0.9))))
     }

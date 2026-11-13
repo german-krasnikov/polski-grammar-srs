@@ -29,6 +29,7 @@ import polski.srs.StoredCard
 import polski.training.PlExerciseEngine
 import polski.core.engine.ExerciseIdFactory
 import polski.core.engine.RandomSource
+import polski.core.model.ScaffoldingLevel
 import polski.core.model.TileSegment
 import polski.training.sentenceSeeds
 
@@ -506,7 +507,7 @@ class TrainingStoreTest {
         assertEquals(emptyList(), builder.placed)
         assertNull(builder.result)
 
-        store.dispatch(AppAction.ChooseSkill("verb.past", sentenceSeeds.first()))
+        store.dispatch(AppAction.ChooseSkill("aspect", sentenceSeeds.first()))
         assertNull(store.state.value.tileBuilder)
         store.close()
     }
@@ -568,7 +569,15 @@ class TrainingStoreTest {
 
     @Test
     fun wrongTileFormIsIncorrectAndTapErrorFillsMiniRulePanel() = runTest {
-        val repo = FakeRepository(ProgressCodec.fresh(skills.map { it.id }, at, "2026-09-23", scheduler))
+        // SB-8: this test exercises every tile slot's own wrong-answer/error-tap behavior, which
+        // needs every tileTargetSlot to be a Choice — that's ScaffoldingLevel.Partial/None, not
+        // the fresh-document default Full (which locks all but ~30% of slots). Seed the rung so
+        // scaffolding-level progression (covered by its own test) doesn't change this test's setup.
+        val fresh = ProgressCodec.fresh(skills.map { it.id }, at, "2026-09-23", scheduler)
+        val seeded = fresh.copy(progress = fresh.progress.copy(
+            stats = fresh.progress.stats + ("case.acc.f" to fresh.progress.stats.getValue("case.acc.f").copy(tileScaffoldingRung = 1)),
+        ))
+        val repo = FakeRepository(seeded)
         val store = newStore(repo, backgroundScope)
         store.start()
         store.dispatch(AppAction.ChooseSkill("case.acc.f", sentenceSeeds.first()))
@@ -593,6 +602,11 @@ class TrainingStoreTest {
         store.dispatch(AppAction.Tile(id, TileAction.TapError(wrongChoice.position)))
         val explanation = assertNotNull(store.state.value.tileBuilder?.errorExplanation)
         assertTrue(explanation.isNotEmpty())
+        // SB-7 regression: the explanation is now the specific per-tile diff, not just any
+        // non-empty placeholder — its Changes item's "after" parts join back to the tapped
+        // tile's own correctForm.
+        val changes = explanation.filterIsInstance<Block.Changes>().single().items.single()
+        assertEquals(wrongChoice.correctForm, changes.after.joinToString("") { it.text })
         store.close()
     }
 
@@ -613,6 +627,61 @@ class TrainingStoreTest {
         assertNotEquals(id, store.state.value.exerciseId)
         store.close()
     }
+
+    // SB-8: all-correct TileBuilder cycles at case.acc.f promote the next exercise's scaffolding
+    // Full -> Partial (at the 3rd correct) -> None (at the 5th correct after that); one wrong
+    // cycle at None then demotes back to Partial.
+    @Test
+    fun scaffoldingLevelAdvancesAndDemotesWithTileBuilderProgress() = runTest {
+        val repo = FakeRepository(ProgressCodec.fresh(skills.map { it.id }, at, "2026-09-23", scheduler))
+        val store = newStore(repo, backgroundScope)
+        store.start()
+        store.dispatch(AppAction.ChooseSkill("case.acc.f", sentenceSeeds.first()))
+        store.dispatch(AppAction.SetAnswerMode(AnswerMode.TileBuilder))
+
+        fun playCycle(allCorrect: Boolean) {
+            val id = assertNotNull(store.state.value.exerciseId)
+            val choices = assertNotNull(store.state.value.tileBuilder).exercise.segments.filterIsInstance<TileSegment.Choice>()
+            if (allCorrect) {
+                choices.forEach { store.dispatch(AppAction.Tile(id, TileAction.Place(it.position, it.correctForm))) }
+            } else {
+                val wrong = choices.first { it.alternatives.isNotEmpty() }
+                choices.forEach {
+                    val form = if (it.position == wrong.position) it.alternatives.first() else it.correctForm
+                    store.dispatch(AppAction.Tile(id, TileAction.Place(it.position, form)))
+                }
+            }
+            store.dispatch(AppAction.Tile(id, TileAction.Check))
+            store.dispatch(AppAction.Rate(id, Rating.Good))
+        }
+
+        assertEquals(ScaffoldingLevel.Full, assertNotNull(store.state.value.tileBuilder).exercise.scaffolding)
+        repeat(2) { playCycle(allCorrect = true) }
+        assertEquals(ScaffoldingLevel.Full, assertNotNull(store.state.value.tileBuilder).exercise.scaffolding)
+        playCycle(allCorrect = true) // 3rd correct -> Partial
+        assertEquals(ScaffoldingLevel.Partial, assertNotNull(store.state.value.tileBuilder).exercise.scaffolding)
+
+        repeat(4) { playCycle(allCorrect = true) }
+        assertEquals(ScaffoldingLevel.Partial, assertNotNull(store.state.value.tileBuilder).exercise.scaffolding)
+        playCycle(allCorrect = true) // 5th correct at Partial -> None
+        assertEquals(ScaffoldingLevel.None, assertNotNull(store.state.value.tileBuilder).exercise.scaffolding)
+
+        playCycle(allCorrect = false) // wrong at None -> back to Partial
+        assertEquals(ScaffoldingLevel.Partial, assertNotNull(store.state.value.tileBuilder).exercise.scaffolding)
+        store.close()
+    }
+
+    // SB-8 install() fix: `tileBuilder` for the in-progress exercise is recomputed against the
+    // just-loaded document (same pattern as `introPending`). Not independently testable as its
+    // own regression today: `ExerciseGenerator.generateChain` never sets `tileTargetSlots`/
+    // `tilePhrase` (see `CoreExercise.tileTargetSlots` KDoc — "Empty = this skill has no
+    // sentence-builder support"), so the Chain mode's own initial exercise is never tile-eligible
+    // and its `tileBuilder` is null before and after this fix either way. The fix still matters
+    // the moment `generateChain` or an initial non-Chain mode ever becomes tile-eligible, and is
+    // otherwise exercised the same way as every other `deriveTileBuilder(..., document)` call —
+    // see `scaffoldingLevelAdvancesAndDemotesWithTileBuilderProgress` and
+    // `wrongTileFormIsIncorrectAndTapErrorFillsMiniRulePanel` above, both of which seed progress
+    // before `start()` and read it back correctly on the very first `ChooseSkill`.
 
     private fun newStore(repo: FakeRepository, scope: kotlinx.coroutines.CoroutineScope, clock: MutableTime = MutableTime(TimeCapture(at, "2026-09-23"))): TrainingStore {
         var id = 0

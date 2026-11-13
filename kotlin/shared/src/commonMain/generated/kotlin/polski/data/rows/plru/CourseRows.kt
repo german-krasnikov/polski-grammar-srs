@@ -5646,6 +5646,7 @@ private fun skillRecipeRowRowsPart0(): List<SkillRecipeRow> = listOf(
         ),
         tags = listOf("acc"),
         includeNounGenderTag = true,
+        tileTargetSlots = listOf("adjective", "noun"),
     ),
     SkillRecipeRow(
         skill = "case.acc.f",
@@ -5936,6 +5937,7 @@ private fun skillRecipeRowRowsPart0(): List<SkillRecipeRow> = listOf(
             ),
         ),
         tags = listOf("inst"),
+        tileTargetSlots = listOf("adjective", "noun"),
     ),
     SkillRecipeRow(
         skill = "case.loc",
@@ -6006,6 +6008,7 @@ private fun skillRecipeRowRowsPart0(): List<SkillRecipeRow> = listOf(
             ),
         ),
         tags = listOf("loc"),
+        tileTargetSlots = listOf("adjective", "noun"),
     ),
     SkillRecipeRow(
         skill = "case.dat",
@@ -6076,6 +6079,7 @@ private fun skillRecipeRowRowsPart0(): List<SkillRecipeRow> = listOf(
             ),
         ),
         tags = listOf("dat"),
+        tileTargetSlots = listOf("adjective", "noun"),
     ),
     SkillRecipeRow(
         skill = "agreement.my",
@@ -6158,6 +6162,7 @@ private fun skillRecipeRowRowsPart0(): List<SkillRecipeRow> = listOf(
             promptPrefixKey = "ownerPromptPrefix",
             promptSuffixKey = "ownerPromptSuffix",
         ),
+        tileTargetSlots = listOf("adjective", "noun"),
     ),
     SkillRecipeRow(
         skill = "verb.present",
@@ -6259,6 +6264,7 @@ private fun skillRecipeRowRowsPart0(): List<SkillRecipeRow> = listOf(
             ),
         ),
         tags = listOf("verb", "present", "nom"),
+        tileTargetSlots = listOf("adjective", "noun"),
     ),
     SkillRecipeRow(
         skill = "verb.past",
@@ -6360,6 +6366,7 @@ private fun skillRecipeRowRowsPart0(): List<SkillRecipeRow> = listOf(
             ),
         ),
         tags = listOf("verb", "past", "nom"),
+        tileTargetSlots = listOf("adjective", "noun"),
     ),
     SkillRecipeRow(
         skill = "verb.future",
@@ -6497,6 +6504,7 @@ private fun skillRecipeRowRowsPart0(): List<SkillRecipeRow> = listOf(
             ),
         ),
         tags = listOf("verb", "future", "nom"),
+        tileTargetSlots = listOf("adjective", "noun"),
     ),
     SkillRecipeRow(
         skill = "aspect",
@@ -6580,6 +6588,7 @@ private fun skillRecipeRowRowsPart0(): List<SkillRecipeRow> = listOf(
             ),
         ),
         tags = listOf("pronoun", "acc"),
+        tileTargetSlots = listOf("adjective", "noun"),
     ),
     SkillRecipeRow(
         skill = "sentence.question",
@@ -6631,6 +6640,7 @@ private fun skillRecipeRowRowsPart0(): List<SkillRecipeRow> = listOf(
             ),
         ),
         tags = listOf("question", "acc"),
+        tileTargetSlots = listOf("adjective", "noun"),
     ),
     SkillRecipeRow(
         skill = "sentence.plural",
@@ -6701,6 +6711,7 @@ private fun skillRecipeRowRowsPart0(): List<SkillRecipeRow> = listOf(
         ),
         tags = listOf("plural", "acc"),
         numberOverride = "pl",
+        tileTargetSlots = listOf("adjective", "noun"),
     ),
     SkillRecipeRow(
         skill = "mixed",
@@ -6796,6 +6807,7 @@ private fun skillRecipeRowRowsPart0(): List<SkillRecipeRow> = listOf(
             ),
         ),
         tags = listOf("mixed", "gen", "past"),
+        tileTargetSlots = listOf("adjective", "noun"),
     ),
     SkillRecipeRow(
         skill = "degree.comparison",
