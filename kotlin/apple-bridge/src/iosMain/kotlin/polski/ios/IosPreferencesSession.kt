@@ -90,6 +90,7 @@ class IosPreferencesSession(
                     put("appearance", result.value.appearance.name)
                     put("motion", result.value.motion.name)
                     put("animationsEnabled", result.value.animationsEnabled)
+                    put("immediateExamFeedbackEnabled", result.value.immediateExamFeedbackEnabled)
                     lastPackSwitchWarning?.let { put("packSwitchWarning", it) }
                 }
                 is PreferencesDecode.RecoveryRequired -> {
@@ -148,6 +149,7 @@ class IosPreferencesSession(
             "appearance" -> current.copy(appearance = Appearance.entries.firstOrNull { it.name == value } ?: return "Неизвестная тема")
             "motion" -> current.copy(motion = Motion.entries.firstOrNull { it.name == value } ?: return "Неизвестное движение")
             "animationsEnabled" -> current.copy(animationsEnabled = value.toBooleanStrictOrNull() ?: return "Неверное значение")
+            "immediateExamFeedbackEnabled" -> current.copy(immediateExamFeedbackEnabled = value.toBooleanStrictOrNull() ?: return "Неверное значение")
             else -> return "Неизвестная настройка"
         }
         if (field == "target" || field == "native") selectCoursePack("${next.target}-${next.native}")

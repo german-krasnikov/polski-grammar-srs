@@ -3,6 +3,26 @@ import AVFoundation
 import Combine
 import PolskiShared
 
+/// Keeps committed exam choices legible while the Button remains disabled to touch and VoiceOver.
+private struct ExamOptionButtonStyle: ButtonStyle {
+    let ink: Color
+    let selected: Bool
+
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .foregroundStyle(ink)
+            .padding(.horizontal, 12)
+            .padding(.vertical, 9)
+            .frame(minHeight: 44)
+            .background(Color(uiColor: .secondarySystemBackground), in: RoundedRectangle(cornerRadius: 9))
+            .overlay {
+                RoundedRectangle(cornerRadius: 9)
+                    .strokeBorder(selected ? ink : Color.secondary.opacity(0.45), lineWidth: selected ? 2 : 1)
+            }
+            .opacity(configuration.isPressed ? 0.85 : 1)
+    }
+}
+
 /// Scene-owned bridge state. Switching app tabs keeps the Kotlin answer snapshot intact.
 final class NativeExamModel: ObservableObject {
     @Published private(set) var state: Record = [:]
@@ -10,12 +30,20 @@ final class NativeExamModel: ObservableObject {
     private let session = IosExamSession()
     let audio = ExamSegmentPlayer()
     private var audioChange: AnyCancellable?
+    private var feedbackTask: Task<Void, Never>?
+    private struct FeedbackToken: Equatable {
+        let module: String
+        let groupId: String
+        let itemId: String
+        let generation: Int64
+    }
+    private var scheduledFeedback: FeedbackToken?
 
     init() {
         audioChange = audio.objectWillChange.sink { [weak self] _ in self?.objectWillChange.send() }
         refresh()
     }
-    deinit { audio.stop(); session.close() }
+    deinit { feedbackTask?.cancel(); audio.stop(); session.close() }
 
     private func refresh() {
         guard let data = session.currentSnapshot().data(using: .utf8),
@@ -23,14 +51,65 @@ final class NativeExamModel: ObservableObject {
         state = decoded
     }
 
-    func selectExam(_ routeId: String) { audio.stop(); setSlotDrafts.removeAll(); session.selectExam(routeId: routeId); refresh() }
+    private func visibleToken() -> FeedbackToken? {
+        let grammar = state.record("grammar")
+        let part = state.record("part")
+        let module = grammar.isEmpty ? part.string("module") : "grammar"
+        let card = module == "grammar" ? grammar : part
+        let visible = card.record("practice").record("visible")
+        guard visible.bool("mayAutoAdvance"), !visible.string("itemId").isEmpty,
+              let generation = visible.int64("generation") else { return nil }
+        return FeedbackToken(module: module,
+            groupId: module == "grammar" ? grammar.string("testId") : part.string("id"),
+            itemId: visible.string("itemId"), generation: generation)
+    }
+
+    private func scheduleFeedback() {
+        feedbackTask?.cancel()
+        guard let token = visibleToken() else { scheduledFeedback = nil; return }
+        scheduledFeedback = token
+        feedbackTask = Task { @MainActor [weak self] in
+            try? await Task.sleep(for: .seconds(2))
+            guard !Task.isCancelled else { return }
+            self?.advanceFeedback(token)
+        }
+    }
+
+    private func advanceFeedback(_ token: FeedbackToken) {
+        guard scheduledFeedback == token, visibleToken() == token else { return }
+        scheduledFeedback = nil
+        feedbackTask = nil
+        session.advancePracticeFocusInModule(module: token.module, groupId: token.groupId,
+            itemId: token.itemId, generation: token.generation, nowEpochMs: now)
+        refresh()
+    }
+
+    func cancelFeedback(clearVisible: Bool = true) {
+        feedbackTask?.cancel()
+        feedbackTask = nil
+        scheduledFeedback = nil
+        if clearVisible {
+            let module = state.record("grammar").isEmpty ? state.record("part").string("module") : "grammar"
+            if !module.isEmpty { session.clearPracticeFeedbackInModule(module: module); refresh() }
+        }
+    }
+
+    func setImmediateFeedbackEnabled(_ enabled: Bool) {
+        cancelFeedback(clearVisible: false)
+        session.setImmediateFeedbackEnabled(enabled: enabled)
+        refresh()
+    }
+
+    func selectExam(_ routeId: String) { cancelFeedback(); audio.stop(); setSlotDrafts.removeAll(); session.selectExam(routeId: routeId); refresh() }
     func selectModule(_ module: String) {
+        cancelFeedback()
         if state.record("part").bool("submitted") { setSlotDrafts.removeAll() }
         audio.stop(); session.selectModule(module: module); refresh()
         if module == "listening" { audio.checkAvailability(assetId: state.record("part").string("audioAssetId")) }
     }
     func selectGrammar() { selectModule("grammar") }
     func startTimed() {
+        cancelFeedback()
         audio.stop(); setSlotDrafts.removeAll(); session.startTimed(nowEpochMs: now); refresh()
         audio.checkAvailability(assetId: state.record("part").string("audioAssetId"))
     }
@@ -42,9 +121,11 @@ final class NativeExamModel: ObservableObject {
         if oldModule != state.record("sitting").string("module") { audio.stop() }
     }
     func answer(_ itemId: String, _ value: String, module: String) {
-        session.answerInModule(module: module, itemId: itemId, value: value, nowEpochMs: now); refresh()
+        if let token = visibleToken(), token.itemId != itemId { cancelFeedback() }
+        session.answerInModule(module: module, itemId: itemId, value: value, nowEpochMs: now); refresh(); scheduleFeedback()
     }
     func answerSetSlot(_ questionId: String, slot: Int, count: Int, text: String, module: String) {
+        if let token = visibleToken(), token.itemId != questionId { cancelFeedback() }
         var drafts = setSlotDrafts[questionId] ?? Array(repeating: "", count: count)
         if drafts.count < count { drafts += Array(repeating: "", count: count - drafts.count) }
         drafts[slot] = text
@@ -52,27 +133,35 @@ final class NativeExamModel: ObservableObject {
         let semanticAnswer = drafts.filter { !$0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
             .joined(separator: "|")
         session.answerInModule(module: module, itemId: questionId, value: semanticAnswer, nowEpochMs: now)
-        refresh()
+        refresh(); scheduleFeedback()
     }
     func answerBankToken(_ itemId: String, _ tokenId: String) {
-        session.answerBankTokenAt(itemId: itemId, tokenId: tokenId, nowEpochMs: now); refresh()
+        session.answerBankTokenAt(itemId: itemId, tokenId: tokenId, nowEpochMs: now); refresh(); scheduleFeedback()
     }
-    func next(module: String) { audio.stop(); session.nextInModule(module: module, nowEpochMs: now); refresh() }
-    func previous(module: String) { audio.stop(); session.previousInModule(module: module, nowEpochMs: now); refresh() }
-    func submit(module: String) { audio.stop(); session.submitInModule(module: module, nowEpochMs: now); refresh() }
+    func check(_ itemId: String, module: String) {
+        if let token = visibleToken(), token.itemId != itemId { cancelFeedback() }
+        session.checkPracticeAnswerInModule(module: module, itemId: itemId, nowEpochMs: now)
+        refresh(); scheduleFeedback()
+    }
+    func next(module: String) { cancelFeedback(); audio.stop(); session.nextInModule(module: module, nowEpochMs: now); refresh() }
+    func previous(module: String) { cancelFeedback(); audio.stop(); session.previousInModule(module: module, nowEpochMs: now); refresh() }
+    func submit(module: String) { cancelFeedback(); audio.stop(); session.submitInModule(module: module, nowEpochMs: now); refresh() }
     func selectWritingSet(_ id: String) {
         session.selectWritingSetAt(setId: id.isEmpty ? nil : id, nowEpochMs: now); refresh()
     }
     func exitGrammar() {
+        cancelFeedback()
         if state.record("part").bool("submitted") { setSlotDrafts.removeAll() }
         audio.stop(); session.exitGrammar(); refresh()
     }
-    func close() { audio.stop(); setSlotDrafts.removeAll(); session.close(); refresh() }
+    func close() { cancelFeedback(); audio.stop(); setSlotDrafts.removeAll(); session.close(); refresh() }
     private var now: Int64 { Int64(Date().timeIntervalSince1970 * 1000) }
 }
 
 struct NativeExamView: View {
     @Environment(\.scenePhase) private var scenePhase
+    @Environment(\.colorScheme) private var colorScheme
+    @AccessibilityFocusState private var focusedPracticeQuestion: String?
     @ObservedObject var model: NativeExamModel
     let copy: Record
     private let clock = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
@@ -95,10 +184,10 @@ struct NativeExamView: View {
         .onChange(of: model.state.record("part").string("id")) { _, _ in model.audio.stop() }
         .onChange(of: scenePhase) { _, phase in
             if phase == .active { model.tick() }
-            else { model.audio.pause() }
+            else { model.cancelFeedback(); model.audio.pause() }
         }
         .onAppear { model.tick() }
-        .onDisappear { model.audio.pause() }
+        .onDisappear { model.cancelFeedback(); model.audio.pause() }
     }
 
     private var catalog: some View {
@@ -162,18 +251,24 @@ struct NativeExamView: View {
                 }
                 Text("\(card.int("currentIndex") + 1) / \(card.int("itemCount"))")
                     .font(.subheadline).foregroundStyle(.secondary)
+                    .accessibilityIdentifier("exam-grammar-position")
                 Text(card.string("instruction"))
                     .font(.headline)
                     .accessibilityIdentifier("exam-instruction")
                 Text(card.string("context"))
                     .font(.title3)
                     .accessibilityIdentifier("exam-context")
+                    .accessibilityFocused($focusedPracticeQuestion, equals: itemId)
                 if !card.string("questionTarget").isEmpty {
                     Text(card.string("questionTarget"))
                         .fontWeight(.semibold)
                         .accessibilityIdentifier("exam-question-target")
                 }
                 answerControl(card: card, itemId: itemId)
+                practiceFeedback(card.record("practice").record("visible"), itemId: itemId)
+                if card.bool("committed") && card.record("practice").record("visible").string("itemId") != itemId {
+                    lockedNote(card.string("committedRaw"))
+                }
                 HStack(spacing: 12) {
                     Button(uiText(copy, "examPrevious", fallback: "examPrevious")) { model.previous(module: "grammar") }
                         .disabled(card.bool("isFirst"))
@@ -201,12 +296,14 @@ struct NativeExamView: View {
             .padding()
             .frame(maxWidth: .infinity, alignment: .leading)
         }
+        .onChange(of: card.string("itemId")) { _, id in focusedPracticeQuestion = id }
     }
 
     private var part: some View {
         let card = model.state.record("part")
         let module = card.string("module")
-        return ScrollView {
+        return ScrollViewReader { scroll in
+        ScrollView {
             VStack(alignment: .leading, spacing: 18) {
                 if model.state["sitting"] is Record {
                     let sitting = model.state.record("sitting")
@@ -217,6 +314,7 @@ struct NativeExamView: View {
                 Text(uiText(copy, module, fallback: module)).font(.title2.weight(.semibold))
                 Text("\(card.int("position")) / \(card.int("count"))")
                     .foregroundStyle(.secondary)
+                    .accessibilityIdentifier("exam-part-position")
                 if module == "writing", !card.strings("sets").isEmpty {
                     Picker(uiText(copy, "writingSet", fallback: "Writing set"), selection: Binding(
                         get: { card.string("selectedSet") },
@@ -257,6 +355,7 @@ struct NativeExamView: View {
                 } else {
                     ForEach(card.rows("questions"), id: \.stringQuestionId) { question in
                         questionControl(question, module: module)
+                            .id(question.string("id"))
                     }
                 }
                 if card.bool("submitted") {
@@ -269,6 +368,11 @@ struct NativeExamView: View {
             }
             .padding()
             .frame(maxWidth: .infinity, alignment: .leading)
+        }
+        .onChange(of: card.record("practice").string("focusedQuestionId")) { _, id in
+            guard !id.isEmpty else { return }
+            withAnimation(nil) { scroll.scrollTo(id, anchor: .center) }
+            focusedPracticeQuestion = id
         }
         .safeAreaInset(edge: .bottom) {
             if !card.bool("submitted") {
@@ -290,16 +394,23 @@ struct NativeExamView: View {
                 .background(.bar)
             }
         }
+        }
     }
 
     @ViewBuilder
     private func questionControl(_ question: Record, module: String) -> some View {
         let id = question.string("id")
+        let practice = model.state.record("part").record("practice")
+        let activeVisible = practice.record("visible")
+        let visible: Record = activeVisible.string("itemId") == id ? activeVisible : [:]
+        let committed = question.bool("committed")
+        let options = question.strings("options")
         VStack(alignment: .leading, spacing: 9) {
             Text(question.string("text")).fontWeight(.medium)
                 .accessibilityIdentifier("exam-question-\(id)")
+                .accessibilityFocused($focusedPracticeQuestion, equals: id)
             if question.string("answerMode") == "unordered_set" {
-                if question.strings("options").isEmpty {
+                if options.isEmpty {
                     ForEach(0..<max(1, question.int("answerSlotCount")), id: \.self) { slot in
                         TextField("\(slot + 1)", text: Binding(
                             get: {
@@ -309,10 +420,11 @@ struct NativeExamView: View {
                             set: { model.answerSetSlot(id, slot: slot, count: max(1, question.int("answerSlotCount")), text: $0, module: module) }
                         ))
                         .textFieldStyle(.roundedBorder)
+                        .disabled(committed)
                         .accessibilityIdentifier("exam-answer-\(id)-\(slot)")
                     }
                 } else {
-                    ForEach(question.strings("options"), id: \.self) { option in
+                    ForEach(options, id: \.self) { option in
                         let selected = question.string("answer").split(separator: "|").map(String.init)
                         Button {
                             var next = selected
@@ -322,14 +434,23 @@ struct NativeExamView: View {
                         } label: {
                             Label(option, systemImage: selected.contains(option) ? "checkmark.square.fill" : "square")
                         }
+                        .buttonStyle(ExamOptionButtonStyle(
+                            ink: optionTint(option, chosen: question.string("answer"), visible: visible),
+                            selected: selected.contains(option)))
+                        .disabled(committed)
                         .accessibilityAddTraits(selected.contains(option) ? [.isSelected] : [])
+                        .accessibilityIdentifier("exam-option-\(id)-\(option)")
                     }
                 }
-            } else if !question.strings("options").isEmpty {
-                ForEach(question.strings("options"), id: \.self) { option in
+            } else if !options.isEmpty {
+                ForEach(options, id: \.self) { option in
                     Button(option) { model.answer(id, option, module: module) }
-                        .buttonStyle(.bordered)
+                        .buttonStyle(ExamOptionButtonStyle(
+                            ink: optionTint(option, chosen: question.string("answer"), visible: visible),
+                            selected: question.string("answer") == option))
+                        .disabled(committed)
                         .accessibilityAddTraits(question.string("answer") == option ? [.isSelected] : [])
+                        .accessibilityIdentifier("exam-option-\(id)-\(option)")
                 }
             } else {
                 TextField(uiText(copy, "examAnswerPrompt", fallback: "Answer"), text: Binding(
@@ -339,8 +460,15 @@ struct NativeExamView: View {
                 .textInputAutocapitalization(.never)
                 .autocorrectionDisabled()
                 .textFieldStyle(.roundedBorder)
+                .disabled(committed)
                 .accessibilityIdentifier("exam-answer-\(id)")
             }
+            if options.isEmpty && practice.bool("enabled") && !committed && !question.string("answer").isEmpty {
+                Button(uiText(copy, "check", fallback: "Проверить")) { model.check(id, module: module) }
+                    .accessibilityIdentifier("exam-check-\(id)")
+            }
+            practiceFeedback(visible, itemId: id)
+            if committed && visible.string("itemId") != id { lockedNote(question.string("committedRaw")) }
             if question["status"] != nil {
                 Text(reviewStatus(question))
                     .font(.caption.weight(.semibold))
@@ -349,6 +477,63 @@ struct NativeExamView: View {
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
+    }
+
+    private func optionTint(_ option: String, chosen: String, visible: Record) -> Color {
+        guard !visible.string("itemId").isEmpty else { return .primary }
+        let selected = chosen.split(separator: "|").contains(Substring(option))
+        let official = visible.strings("officialExamples").contains(option)
+        if visible.string("status") == "Wrong" && selected && !official { return feedbackRed }
+        if official && visible.string("status") != "PendingManual" { return feedbackGreen }
+        return .primary
+    }
+
+    private var feedbackRed: Color {
+        colorScheme == .dark ? Color(red: 1.0, green: 0.54, blue: 0.50) : Color(red: 0.71, green: 0.14, blue: 0.09)
+    }
+
+    private var feedbackGreen: Color {
+        colorScheme == .dark ? Color(red: 0.45, green: 0.89, blue: 0.65) : Color(red: 0.09, green: 0.40, blue: 0.22)
+    }
+
+    @ViewBuilder
+    private func practiceFeedback(_ visible: Record, itemId: String) -> some View {
+        if visible.string("itemId") == itemId {
+            let status = visible.string("status")
+            VStack(alignment: .leading, spacing: 5) {
+                HStack(spacing: 5) {
+                    Image(systemName: status == "ConfirmedFull" ? "checkmark.circle.fill" :
+                        status == "Wrong" ? "xmark.circle.fill" : "info.circle.fill")
+                    Text(feedbackStatus(visible))
+                }
+                .font(.subheadline.weight(.semibold))
+                .foregroundStyle(status == "Wrong" ? feedbackRed : status == "ConfirmedFull" ? feedbackGreen : Color.primary)
+                Text("\(uiText(copy, "examYourAnswer", fallback: "Ваш ответ")): \(visible.string("chosen"))")
+                Text("\(uiText(copy, "examOfficialExamples", fallback: "Образцы из ключа")): \(visible.strings("officialExamples").joined(separator: " / "))")
+                    .foregroundStyle(status == "PendingManual" || status == "ConfirmedPartial" ? Color.primary : feedbackGreen)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(10)
+            .background(.quaternary.opacity(0.25), in: RoundedRectangle(cornerRadius: 9))
+            .accessibilityElement(children: .combine)
+            .accessibilityIdentifier("exam-feedback-\(itemId)")
+        }
+    }
+
+    private func feedbackStatus(_ visible: Record) -> String {
+        switch visible.string("status") {
+        case "ConfirmedFull": return uiText(copy, "examFeedbackCorrect", fallback: "Верно")
+        case "ConfirmedPartial": return "\(uiText(copy, "examFeedbackPartial", fallback: "Частично верно")) · +\(formatQuarter(visible.int("confirmedQuarter"))) / \(formatQuarter(visible.int("maximumQuarter")))"
+        case "PendingManual": return uiText(copy, "examManualReview", fallback: "Требует проверки")
+        default: return uiText(copy, "examFeedbackWrong", fallback: "Неверно")
+        }
+    }
+
+    private func lockedNote(_ raw: String) -> some View {
+        Text("\(uiText(copy, "examAnswerLocked", fallback: "Ответ зафиксирован")) · \(uiText(copy, "examYourAnswer", fallback: "Ваш ответ")): \(raw)")
+            .font(.footnote)
+            .foregroundStyle(.secondary)
+            .accessibilityIdentifier("exam-locked-answer")
     }
 
     @ViewBuilder
@@ -420,6 +605,7 @@ struct NativeExamView: View {
         let score = card.record("score")
         return VStack(alignment: .leading, spacing: 8) {
             Text(uiText(copy, "results", fallback: "Results")).font(.headline)
+                .accessibilityIdentifier("exam-part-result")
             Text("\(formatQuarter(score.int("confirmedQuarter"))) / \(formatQuarter(score.int("possibleQuarter")))")
             if score.int("manualPendingQuarter") > 0 {
                 Text("\(uiText(copy, "examManualReview", fallback: "Manual review")): \(formatQuarter(score.int("manualPendingQuarter")))")
@@ -427,8 +613,8 @@ struct NativeExamView: View {
             if score.bool("isFinal"), score["finalPercent"] != nil {
                 Text("\(score.int("finalPercent"))%")
             }
+            ForEach(card.rows("review"), id: \.stringItemId) { row in reviewRow(row) }
         }
-        .accessibilityIdentifier("exam-part-result")
     }
 
     private var sittingResult: some View {
@@ -456,6 +642,11 @@ struct NativeExamView: View {
                     }
                 }
             }
+            ForEach(sitting.rows("reviews"), id: \.stringModule) { moduleReview in
+                Section(uiText(copy, moduleReview.string("module"), fallback: moduleReview.string("module"))) {
+                    ForEach(moduleReview.rows("review"), id: \.stringItemId) { row in reviewRow(row) }
+                }
+            }
             Button(uiText(copy, "selectExam", fallback: "Select exam")) { model.close() }
         }
     }
@@ -473,19 +664,26 @@ struct NativeExamView: View {
 
     @ViewBuilder
     private func answerControl(card: Record, itemId: String) -> some View {
+        let visible = card.record("practice").record("visible")
+        let committed = card.bool("committed")
         switch card.string("questionType") {
         case "choose_form":
             ForEach(card.strings("options"), id: \.self) { option in
                 Button(option) { model.answer(itemId, option, module: "grammar") }
-                    .buttonStyle(.bordered)
-                    .tint(card.string("answer") == option ? .accentColor : .secondary)
+                    .buttonStyle(ExamOptionButtonStyle(
+                        ink: optionTint(option, chosen: card.string("answer"), visible: visible),
+                        selected: card.string("answer") == option))
+                    .disabled(committed)
                     .accessibilityAddTraits(card.string("answer") == option ? [.isSelected] : [])
                     .accessibilityIdentifier("exam-option-\(option)")
             }
         case "word_bank":
             ForEach(card.rows("bankTokens"), id: \.stringTokenId) { token in
                 Button(token.string("text")) { model.answerBankToken(itemId, token.string("tokenId")) }
-                    .buttonStyle(.bordered)
+                    .buttonStyle(ExamOptionButtonStyle(
+                        ink: optionTint(token.string("text"), chosen: card.string("answer"), visible: visible),
+                        selected: card.string("selectedBankTokenId") == token.string("tokenId")))
+                    .disabled(committed)
                     .accessibilityLabel("\(token.string("text")), \(token.int("position"))")
                     .accessibilityAddTraits(card.string("selectedBankTokenId") == token.string("tokenId") ? [.isSelected] : [])
                     .accessibilityIdentifier("exam-bank-\(token.string("tokenId"))")
@@ -498,7 +696,12 @@ struct NativeExamView: View {
             .textInputAutocapitalization(.never)
             .autocorrectionDisabled()
             .textFieldStyle(.roundedBorder)
+            .disabled(committed)
             .accessibilityIdentifier("exam-grammar-answer")
+            if card.record("practice").bool("enabled") && !committed && !card.string("answer").isEmpty {
+                Button(uiText(copy, "check", fallback: "Проверить")) { model.check(itemId, module: "grammar") }
+                    .accessibilityIdentifier("exam-grammar-check")
+            }
         default:
             Text(uiText(copy, "examNativeUnavailable", fallback: "examNativeUnavailable"))
         }
@@ -522,15 +725,7 @@ struct NativeExamView: View {
             Section(uiText(copy, "examOfficialExamples", fallback: "examOfficialExamples")) {
                 ForEach(graded.rows("review"), id: \.stringItemId) { item in
                     VStack(alignment: .leading, spacing: 5) {
-                        Text(item.string("context"))
-                        Text(item.string("answer"))
-                            .foregroundStyle(.secondary)
-                        Text(reviewStatus(item))
-                            .font(.caption.weight(.semibold))
-                        if item.string("status") != "ConfirmedFull" {
-                            Text(item.strings("officialExamples").joined(separator: " / "))
-                                .font(.footnote)
-                        }
+                        reviewRow(item)
                         if !item.rows("rubricComponents").isEmpty {
                             Text(uiText(copy, "examManualReview", fallback: "Manual review"))
                                 .font(.footnote.weight(.semibold))
@@ -548,7 +743,6 @@ struct NativeExamView: View {
                         }
                     }
                     .accessibilityElement(children: .contain)
-                    .accessibilityIdentifier("exam-review-\(item.string("itemId"))")
                 }
             }
             Button(uiText(copy, "tryAgain", fallback: "tryAgain")) { model.selectGrammar() }
@@ -559,10 +753,29 @@ struct NativeExamView: View {
     private func reviewStatus(_ item: Record) -> String {
         switch item.string("status") {
         case "ConfirmedFull": return uiText(copy, "matches", fallback: "matches")
-        case "ConfirmedPartial": return uiText(copy, "examConfirmedPoints", fallback: "examConfirmedPoints")
+        case "ConfirmedPartial": return uiText(copy, "examFeedbackPartial", fallback: "Частично верно")
         case "PendingManual": return uiText(copy, "examManualReview", fallback: "examManualReview")
         default: return uiText(copy, "differs", fallback: "differs")
         }
+    }
+
+    private func reviewRow(_ item: Record) -> some View {
+        VStack(alignment: .leading, spacing: 5) {
+            Text(item.string("context"))
+                .font(.subheadline.weight(.medium))
+            Text("\(uiText(copy, "examYourAnswer", fallback: "Ваш ответ")): \(item.string("chosenAnswer").isEmpty ? uiText(copy, "noAnswerEntered", fallback: "Ответ не введён") : item.string("chosenAnswer"))")
+            Text("\(reviewStatus(item)) · +\(formatQuarter(item.int("confirmedQuarter"))) / \(formatQuarter(item.int("maximumQuarter")))")
+                .font(.caption.weight(.semibold))
+            if item.int("pendingQuarter") > 0 {
+                Text("\(uiText(copy, "examManualReview", fallback: "Требует проверки")): \(formatQuarter(item.int("pendingQuarter")))")
+                    .font(.footnote)
+            }
+            Text("\(uiText(copy, "examOfficialExamples", fallback: "Образцы из ключа")): \(item.strings("officialExamples").joined(separator: " / "))")
+                .foregroundStyle(item.string("status") == "Wrong" ? feedbackGreen : Color.primary)
+                .font(.footnote)
+        }
+        .accessibilityElement(children: .combine)
+        .accessibilityIdentifier("exam-review-\(item.string("itemId"))")
     }
 }
 

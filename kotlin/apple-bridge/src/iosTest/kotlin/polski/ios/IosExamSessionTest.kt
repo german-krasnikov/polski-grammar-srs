@@ -16,6 +16,163 @@ class IosExamSessionTest {
     private fun IosExamSession.view() = Json.parseToJsonElement(currentSnapshot()).jsonObject
 
     @Test
+    fun firstWrongStandaloneChoicesExposeImmediatePracticeCommit() {
+        val session = IosExamSession()
+        session.selectExam("b1-2017")
+        session.selectModule("grammar")
+        val grammarId = session.view().getValue("grammar").jsonObject.getValue("itemId").jsonPrimitive.content
+        session.answerInModule("grammar", grammarId, "dobry teatr", 1_000L)
+        val grammar = session.view().getValue("grammar").jsonObject
+        assertTrue(grammar.containsKey("practice"), "first wrong grammar choice must expose practice feedback")
+        assertEquals(true, grammar.getValue("committed").jsonPrimitive.content.toBoolean())
+
+        session.selectModule("reading")
+        val question = session.view().getValue("part").jsonObject.getValue("questions").jsonArray.first().jsonObject
+        val readingId = question.getValue("id").jsonPrimitive.content
+        session.answerInModule("reading", readingId, "kioski internetowe są popularne w całym kraju", 2_000L)
+        val reading = session.view().getValue("part").jsonObject
+        assertTrue(reading.containsKey("practice"), "first wrong reading choice must expose practice feedback")
+        assertEquals(true, reading.getValue("questions").jsonArray.first().jsonObject.getValue("committed").jsonPrimitive.content.toBoolean())
+    }
+
+    @Test
+    fun firstCommitAndGenerationGuardKeepGrammarAnswerStable() {
+        val session = IosExamSession()
+        session.selectExam("b1-2017")
+        session.selectModule("grammar")
+        val first = session.view().getValue("grammar").jsonObject
+        val id = first.getValue("itemId").jsonPrimitive.content
+        session.answerInModule("grammar", id, "dobry teatr", 1_000L)
+        val committed = session.view().getValue("grammar").jsonObject
+        assertEquals("dobry teatr", committed.getValue("committedRaw").jsonPrimitive.content)
+        session.answerInModule("grammar", id, "dobrego teatru", 1_001L)
+        assertEquals("dobry teatr", session.view().getValue("grammar").jsonObject.getValue("answer").jsonPrimitive.content)
+        val practice = committed.getValue("practice").jsonObject
+        val generation = practice.getValue("generation").jsonPrimitive.long
+        session.advancePracticeFocusInModule("grammar", committed.getValue("testId").jsonPrimitive.content,
+            id, generation - 1, 3_000L)
+        assertEquals(id, session.view().getValue("grammar").jsonObject.getValue("itemId").jsonPrimitive.content)
+        session.advancePracticeFocusInModule("grammar", committed.getValue("testId").jsonPrimitive.content,
+            id, generation, 3_001L)
+        assertEquals(1, session.view().getValue("grammar").jsonObject.getValue("currentIndex").jsonPrimitive.content.toInt())
+    }
+
+    @Test
+    fun groupedFocusStaysInPassageAndPreferenceSwitchPreservesDrafts() {
+        val session = IosExamSession()
+        session.selectExam("b1-2017")
+        session.selectModule("reading")
+        val part = session.view().getValue("part").jsonObject
+        val id = part.getValue("questions").jsonArray.first().jsonObject.getValue("id").jsonPrimitive.content
+        val group = part.getValue("id").jsonPrimitive.content
+        session.answerInModule("reading", id, "kioski internetowe są popularne w całym kraju", 1_000L)
+        val practice = session.view().getValue("part").jsonObject.getValue("practice").jsonObject
+        assertEquals(true, practice.getValue("visible").jsonObject.getValue("mayAutoAdvance").jsonPrimitive.content.toBoolean())
+        session.advancePracticeFocusInModule("reading", group, id, practice.getValue("generation").jsonPrimitive.long, 3_000L)
+        val focused = session.view().getValue("part").jsonObject
+        assertEquals(group, focused.getValue("id").jsonPrimitive.content)
+        assertEquals(JsonNull, focused.getValue("practice").jsonObject.getValue("visible"))
+        assertTrue(focused.getValue("practice").jsonObject.getValue("focusedQuestionId").jsonPrimitive.content != id)
+        session.setImmediateFeedbackEnabled(false)
+        val off = session.view().getValue("part").jsonObject
+        assertEquals(false, off.getValue("questions").jsonArray.first().jsonObject.getValue("committed").jsonPrimitive.content.toBoolean())
+        assertEquals("kioski internetowe są popularne w całym kraju", off.getValue("questions").jsonArray.first().jsonObject.getValue("answer").jsonPrimitive.content)
+        session.answerInModule("reading", id, "kioski internetowe oferują dostęp do Internetu", 3_001L)
+        session.setImmediateFeedbackEnabled(true)
+        val on = session.view().getValue("part").jsonObject
+        assertEquals("kioski internetowe oferują dostęp do Internetu", on.getValue("questions").jsonArray.first().jsonObject.getValue("answer").jsonPrimitive.content)
+        assertEquals(false, on.getValue("questions").jsonArray.first().jsonObject.getValue("committed").jsonPrimitive.content.toBoolean())
+    }
+
+    @Test
+    fun frozenGroupedReviewUsesSubmittedAnswersIncludingBlank() {
+        val session = IosExamSession()
+        session.selectExam("b1-2019")
+        session.selectModule("listening")
+        val question = session.view().getValue("part").jsonObject.getValue("questions").jsonArray.first().jsonObject
+        val id = question.getValue("id").jsonPrimitive.content
+        session.answerInModule("listening", id, "a) w kinie.", 1_000L)
+        session.submitInModule("listening", 2_000L)
+        val review = session.view().getValue("part").jsonObject.getValue("review").jsonArray
+        assertTrue(review.size > 1)
+        assertEquals("a) w kinie.", review.first().jsonObject.getValue("chosenAnswer").jsonPrimitive.content)
+        assertTrue(review.first().jsonObject.getValue("officialExamples").jsonArray.isNotEmpty())
+        assertEquals(JsonNull, review[1].jsonObject.getValue("chosenAnswer"))
+        session.setImmediateFeedbackEnabled(false)
+        assertEquals(review, session.view().getValue("part").jsonObject.getValue("review").jsonArray)
+    }
+
+    @Test
+    fun textCheckAndClosedSetCommitOnlyWhenComplete() {
+        val session = IosExamSession()
+        session.selectExam("c1-2024-04")
+        session.selectModule("grammar")
+        val firstTextIndex = (0 until 20).first { index ->
+            while (session.view().getValue("grammar").jsonObject.getValue("currentIndex").jsonPrimitive.content.toInt() < index) session.next()
+            session.view().getValue("grammar").jsonObject.getValue("questionType").jsonPrimitive.content == "fill_gap"
+        }
+        val text = session.view().getValue("grammar").jsonObject
+        assertEquals(firstTextIndex, text.getValue("currentIndex").jsonPrimitive.content.toInt())
+        val id = text.getValue("itemId").jsonPrimitive.content
+        session.answerInModule("grammar", id, "próba", 1_000L)
+        assertEquals(false, session.view().getValue("grammar").jsonObject.getValue("committed").jsonPrimitive.content.toBoolean())
+        session.checkPracticeAnswerInModule("grammar", id, 1_001L)
+        assertEquals(true, session.view().getValue("grammar").jsonObject.getValue("committed").jsonPrimitive.content.toBoolean())
+        session.answerInModule("grammar", id, "zmiana", 1_002L)
+        assertEquals("próba", session.view().getValue("grammar").jsonObject.getValue("answer").jsonPrimitive.content)
+
+        val listening = IosExamSession()
+        listening.selectExam("b2-2017")
+        listening.selectModule("listening")
+        repeat(3) { listening.next() }
+        val question = listening.view().getValue("part").jsonObject.getValue("questions").jsonArray.first().jsonObject
+        assertEquals("unordered_set", question.getValue("answerMode").jsonPrimitive.content)
+        val questionId = question.getValue("id").jsonPrimitive.content
+        listening.answerInModule("listening", questionId, "1", 2_000L)
+        assertEquals(false, listening.view().getValue("part").jsonObject.getValue("questions").jsonArray.first().jsonObject
+            .getValue("committed").jsonPrimitive.content.toBoolean())
+        listening.answerInModule("listening", questionId, "1|3", 2_001L)
+        assertEquals(true, listening.view().getValue("part").jsonObject.getValue("questions").jsonArray.first().jsonObject
+            .getValue("committed").jsonPrimitive.content.toBoolean())
+    }
+
+    @Test
+    fun timedPartRemainsEditableWithoutEarlyKey() {
+        val session = IosExamSession()
+        session.selectExam("b1-2019")
+        session.startTimed(1_000L)
+        val part = session.view().getValue("part").jsonObject
+        val id = part.getValue("questions").jsonArray.first().jsonObject.getValue("id").jsonPrimitive.content
+        session.answerInModule("listening", id, "a) w kinie.", 1_001L)
+        session.answerInModule("listening", id, "b) w bibliotece.", 1_002L)
+        val current = session.view().getValue("part").jsonObject
+        assertEquals("b) w bibliotece.", current.getValue("questions").jsonArray.first().jsonObject.getValue("answer").jsonPrimitive.content)
+        assertEquals(false, current.getValue("practice").jsonObject.getValue("enabled").jsonPrimitive.content.toBoolean())
+        assertEquals(JsonNull, current.getValue("practice").jsonObject.getValue("visible"))
+        assertFalse(current.containsKey("review"))
+    }
+
+    @Test
+    fun timedReviewAppearsOnlyAfterPartFreezeAndRejectsLateDraft() {
+        val session = IosExamSession()
+        session.selectExam("b1-2019")
+        session.startTimed(1_000L)
+        val question = session.view().getValue("part").jsonObject.getValue("questions").jsonArray.first().jsonObject
+        val id = question.getValue("id").jsonPrimitive.content
+        assertTrue(session.view().getValue("sitting").jsonObject.getValue("reviews").jsonArray.isEmpty())
+        session.answerInModule("listening", id, "a) w kinie.", 1_001L)
+        session.submitInModule("listening", 1_002L)
+        val frozen = session.view().getValue("sitting").jsonObject.getValue("reviews").jsonArray.first().jsonObject
+        assertEquals("listening", frozen.getValue("module").jsonPrimitive.content)
+        val review = frozen.getValue("review").jsonArray
+        assertEquals("a) w kinie.", review.first().jsonObject.getValue("chosenAnswer").jsonPrimitive.content)
+        assertEquals(JsonNull, review[1].jsonObject.getValue("chosenAnswer"))
+        session.answerInModule("listening", id, "b) w bibliotece.", 1_003L)
+        assertEquals(review, session.view().getValue("sitting").jsonObject.getValue("reviews").jsonArray.first()
+            .jsonObject.getValue("review").jsonArray)
+    }
+
+    @Test
     fun publishedPartsExposeSourceCardsAndKeepIndependentDrafts() {
         val session = IosExamSession()
         session.selectExam("b1-2019")
@@ -199,6 +356,7 @@ class IosExamSessionTest {
     @Test
     fun compactOpenSetAnswerKeepsManualPendingRatherThanBecomingMalformed() {
         val session = IosExamSession()
+        session.setImmediateFeedbackEnabled(false) // Legacy direct answer bypasses current-task practice controls.
         session.selectExam("b2-2019")
         session.selectModule("listening")
         val questionId = "certyfikat-polski-B2-2019-listening-5-1"
@@ -393,6 +551,7 @@ class IosExamSessionTest {
     @Test
     fun conditionalWordBankVariantUsesWholeAttemptAndKeepsSelectedTokenId() {
         val first = IosExamSession()
+        first.setImmediateFeedbackEnabled(false) // Legacy whole-attempt fixture answers a later item directly.
         first.selectExam("b2-2020")
         first.selectModule("grammar")
         val atSix = "certyfikat-polski-B2-2020-grammar-2-6"
@@ -415,6 +574,7 @@ class IosExamSessionTest {
             status(first))
 
         val second = IosExamSession()
+        second.setImmediateFeedbackEnabled(false)
         second.selectExam("b2-2020")
         second.selectModule("grammar")
         second.answer(atEight, "w")
@@ -427,6 +587,7 @@ class IosExamSessionTest {
     fun authoredAnswersProduceTheSameReviewAsSharedScorer() {
         fun reviewed(routeId: String, itemId: String, answer: String): kotlinx.serialization.json.JsonObject {
             val session = IosExamSession()
+            session.setImmediateFeedbackEnabled(false) // Source scorer fixture is intentionally noninteractive.
             session.selectExam(routeId)
             session.selectModule("grammar")
             session.answer(itemId, answer)

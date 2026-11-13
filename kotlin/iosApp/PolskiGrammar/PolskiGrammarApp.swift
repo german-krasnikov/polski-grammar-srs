@@ -313,11 +313,13 @@ final class AppModel: ObservableObject {
     func exportVocabulary() -> ProgressFile? {
         vocabulary.exportJson().map(ProgressFile.init(text:))
     }
-    func setPreference(_ field: String, _ value: String) {
-        if let error = preferencesSession.set(field: field, value: value) { notice = error; return }
+    @discardableResult
+    func setPreference(_ field: String, _ value: String) -> Bool {
+        if let error = preferencesSession.set(field: field, value: value) { notice = error; return false }
         if field == "target" || field == "native" { send("refresh") }
         if field == "styleId" { send("styleId", value) }
         if field == "answerMode" { send("answerMode", value) }
+        return true
     }
     func exportPreferences() -> ProgressFile? {
         preferencesSession.exportJson().map(ProgressFile.init(text:))
@@ -488,6 +490,10 @@ struct PolskiGrammarApp: App {
     // transition this drives is always keyed by the switch that is actually happening.
     @State private var pagingEdge: Edge = .trailing
     private let tabOrder = ["Training", "Matrix", "Progress", "Vocabulary", "Exam"]
+    private var readyExamFeedbackPreference: Bool? {
+        guard model.preferences.string("status") == "Ready" else { return nil }
+        return model.preferences.bool("immediateExamFeedbackEnabled", default: true)
+    }
     private var selectedTab: String { examTabSelected ? "Exam" : model.state.string("tab") }
     private var tabBarItems: [TabBarItem] { [
         TabBarItem(tag: "Training", title: uiText(model.state, "trainingTab", fallback: "Тренировка"), icon: "square.stack"),
@@ -539,19 +545,26 @@ struct PolskiGrammarApp: App {
             .fileImporter(isPresented: $importingVocabulary, allowedContentTypes: [.json]) { model.importVocabularyFile($0) }
             .fileExporter(isPresented: $exportingVocabulary, document: vocabularyFile,
                           contentType: .json, defaultFilename: "polski-vocabulary-pl-ru") { _ in vocabularyFile = nil }
-            .fileImporter(isPresented: $importingPreferences, allowedContentTypes: [.json]) { model.importPreferencesFile($0) }
-            .fileExporter(isPresented: $exportingPreferences, document: preferencesFile,
-                          contentType: .json, defaultFilename: "polski-preferences-v2") { result in
-                if case let .failure(error) = result { model.notice = error.localizedDescription }
-                preferencesFile = nil
-            }
             .sheet(isPresented: $showingSettings) {
                 NavigationStack {
                     IosSettingsView(model: model, importing: $importingPreferences,
-                        exporting: $exportingPreferences, exportFile: $preferencesFile)
+                        exporting: $exportingPreferences, exportFile: $preferencesFile,
+                        setExamFeedback: { nativeExam.setImmediateFeedbackEnabled($0) })
+                }
+                .fileImporter(isPresented: $importingPreferences, allowedContentTypes: [.json]) { model.importPreferencesFile($0) }
+                .fileExporter(isPresented: $exportingPreferences, document: preferencesFile,
+                              contentType: .json, defaultFilename: "polski-preferences-v2") { result in
+                    if case let .failure(error) = result { model.notice = error.localizedDescription }
+                    preferencesFile = nil
                 }
             }
             .onChange(of: model.exportEffectId) { _, id in if id != nil { exporting = true } }
+            .onChange(of: readyExamFeedbackPreference) { _, enabled in
+                if let enabled { nativeExam.setImmediateFeedbackEnabled(enabled) }
+            }
+            .onAppear {
+                if let enabled = readyExamFeedbackPreference { nativeExam.setImmediateFeedbackEnabled(enabled) }
+            }
             .alert(uiText(model.state, "resetTitle", fallback: "Сбросить весь прогресс?"), isPresented: Binding(
                 get: { model.resetEffectId != nil },
                 set: { if !$0 && model.resetEffectId != nil { model.decideReset(false) } }
@@ -597,7 +610,10 @@ struct PolskiGrammarApp: App {
 
     private var settingsToolbar: some ToolbarContent {
         ToolbarItem(placement: .topBarTrailing) {
-            Button { showingSettings = true } label: { Label(uiText(model.state, "uiSettingsTab", fallback: "Настройки"), systemImage: "gearshape") }
+            Button {
+                nativeExam.cancelFeedback()
+                showingSettings = true
+            } label: { Label(uiText(model.state, "uiSettingsTab", fallback: "Настройки"), systemImage: "gearshape") }
                 .accessibilityIdentifier("openSettings")
         }
     }
@@ -621,6 +637,7 @@ private struct IosSettingsView: View {
     @Binding var importing: Bool
     @Binding var exporting: Bool
     @Binding var exportFile: ProgressFile?
+    let setExamFeedback: (Bool) -> Void
     @Environment(\.dismiss) private var dismiss
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     #if DEBUG
@@ -660,6 +677,15 @@ private struct IosSettingsView: View {
                     .accessibilityIdentifier("settingsNativePicker")
                 }
                 Section(uiText(model.state, "learningSection", fallback: "Обучение")) {
+                    Toggle(uiText(model.state, "examImmediateFeedbackSetting", fallback: "Сразу показывать ответ в тренировочном экзамене"), isOn: Binding(
+                        get: { model.preferences.bool("immediateExamFeedbackEnabled", default: true) },
+                        set: { enabled in
+                            if model.setPreference("immediateExamFeedbackEnabled", enabled ? "true" : "false") {
+                                setExamFeedback(enabled)
+                            }
+                        }
+                    ))
+                    .accessibilityIdentifier("settingsExamImmediateFeedback")
                     // UC-10/S1: 4 styles replace the old Logic/Situations selector — the picker's
                     // own selected-value row shows the label, the caption below shows its
                     // description (both prefer StyleRegistry's recipe text, see [styleOptions]).
