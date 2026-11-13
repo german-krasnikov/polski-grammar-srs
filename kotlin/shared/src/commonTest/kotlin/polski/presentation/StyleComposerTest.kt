@@ -3,6 +3,8 @@ package polski.presentation
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
+import polski.core.model.FeatureKey
+import polski.core.model.TileError
 import polski.data.MethodPresentation
 import polski.data.SkillPresentation
 import polski.data.SkillStyleContent
@@ -140,6 +142,56 @@ class StyleComposerTest {
         }
         assertTrue(changesPerStyle.all { it == changesPerStyle.first() })
         assertEquals(2, changesPerStyle.first()?.items?.size)
+    }
+
+    // SB-7: blocksForError returns exactly 2 blocks — the skill-level Rule (identical derivation
+    // to compose()'s own Rule branch) then a Changes item diffing the tapped tile's own
+    // selected/expected pair, with reason matched from exercise.changes by substring.
+    @Test fun blocksForErrorReturnsRuleThenMatchedChangeForTheTappedTile() {
+        val skill = skillById("case.acc.f")
+        val focus = presentationBySkillId("case.acc.f")
+        val content = styleContentBySkillId("case.acc.f")
+        val ex = exercise(changes = listOf(FormChange("moja córka", "moją córkę", "Изменяется вся группа слов."))).copy(primarySkill = "case.acc.f")
+        val error = TileError(position = 1, selected = "moja", expected = "moją", feature = FeatureKey("Case"))
+
+        val blocks = StyleComposer.blocksForError(ex, skill, focus, content, error)
+        assertEquals(2, blocks.size)
+
+        val rule = blocks[0] as Block.Rule
+        val expectedRule = StyleComposer.compose(registry.getValue(StyleId.RuleFirst), StylePhase.Back, ex, skill, focus, content)
+            .filterIsInstance<Block.Rule>().single()
+        assertEquals(expectedRule, rule)
+
+        val changes = (blocks[1] as Block.Changes).items.single()
+        assertEquals("moja", changes.before.joinToString("") { it.text })
+        assertEquals("moją", changes.after.joinToString("") { it.text })
+        assertEquals("Изменяется вся группа слов.", changes.reason)
+    }
+
+    // SB-7: when no exercise.changes entry's `to` contains the tile's own expected form, the
+    // reason falls back to the first (only) change entry — never throws, never null reason.
+    @Test fun blocksForErrorFallsBackToFirstChangeWhenNoneMatchByExpected() {
+        val skill = skillById("case.gen.neg")
+        val focus = presentationBySkillId("case.gen.neg")
+        val content = styleContentBySkillId("case.gen.neg")
+        val ex = exercise(changes = listOf(FormChange("mam", "nie mam", "polarity reason")))
+        val error = TileError(position = 0, selected = "wrongForm", expected = "rightForm", feature = FeatureKey("Case"))
+
+        val changes = (StyleComposer.blocksForError(ex, skill, focus, content, error)[1] as Block.Changes).items.single()
+        assertEquals("polarity reason", changes.reason)
+    }
+
+    // SB-7: an exercise with no changes at all falls back to exercise.explanation as the reason —
+    // documented degrade-safely behavior, never a null/crashing reason.
+    @Test fun blocksForErrorFallsBackToExerciseExplanationWhenChangesIsEmpty() {
+        val skill = skillById("case.gen.neg")
+        val focus = presentationBySkillId("case.gen.neg")
+        val content = styleContentBySkillId("case.gen.neg")
+        val ex = exercise(changes = emptyList())
+        val error = TileError(position = 0, selected = "a", expected = "b", feature = FeatureKey("Case"))
+
+        val changes = (StyleComposer.blocksForError(ex, skill, focus, content, error)[1] as Block.Changes).items.single()
+        assertEquals(ex.explanation, changes.reason)
     }
 
     // ST-06 (behavioral genericity): a fully invented, non-Polish skill/exercise/presentation

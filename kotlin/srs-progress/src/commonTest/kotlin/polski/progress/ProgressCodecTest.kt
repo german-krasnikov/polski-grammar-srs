@@ -68,10 +68,40 @@ class ProgressCodecTest {
         val golden = """{"version":1,"cards":[{"skillId":"case.acc.f","card":{"due":"2026-03-29T01:40:00.000Z",""" +
             """"stability":2.3065,"difficulty":2.11810397,"elapsed_days":0,"scheduled_days":0,"reps":1,"lapses":0,""" +
             """"learning_steps":1,"state":1,"last_review":"2026-03-29T01:30:00.000Z"}}],"stats":{"case.acc.f":""" +
-            """{"reviews":1,"correct":1,"streak":1,"mistakes":0}},"reviewsToday":1,"lastDay":"2026-03-29","totalReviews":1}"""
+            """{"reviews":1,"correct":1,"streak":1,"mistakes":0,"tileScaffoldingRung":0,"tileScaffoldingStreak":0}},""" +
+            """"reviewsToday":1,"lastDay":"2026-03-29","totalReviews":1}"""
         assertEquals(golden, ProgressCodec.encodeLegacyV1(document), "encodeLegacyV1 drifted from the pinned golden bytes")
         val decoded = assertIs<DecodeResult.Valid>(ProgressCodec.decode(golden)).document
         assertEquals(golden, ProgressCodec.encodeLegacyV1(decoded), "decode -> encode is not byte-identical")
+    }
+
+    // SB-8: a pre-SB-8 document (JSON missing tileScaffoldingRung/Streak entirely) still decodes
+    // Valid, with both defaulted to 0 — never Invalid just because the new fields are absent.
+    @Test
+    fun preSB8DocumentWithoutScaffoldingFieldsDecodesValidWithZeroDefaults() {
+        // A real fresh+legacy-encoded document, with the two SB-8 keys stripped back out, stands
+        // in for a document actually saved before SB-8 existed.
+        val legacy = ProgressCodec.encodeLegacyV1(ProgressCodec.fresh(listOf("known"), at, "2026-03-29", scheduler))
+        val raw = legacy.replace(""","tileScaffoldingRung":0,"tileScaffoldingStreak":0""", "")
+        val decoded = assertIs<DecodeResult.Valid>(ProgressCodec.decode(raw)).document
+        val stats = decoded.progress.stats.getValue("known")
+        assertEquals(0, stats.tileScaffoldingRung)
+        assertEquals(0, stats.tileScaffoldingStreak)
+    }
+
+    // SB-8: encodeText/decodeText round-trips non-zero scaffolding fields; a pre-SB-8 POLSKI-TEXT
+    // document (wire map missing both fields) still decodes Valid with zero defaults.
+    @Test
+    fun tileScaffoldingFieldsRoundTripThroughTextWireAndDefaultWhenAbsent() {
+        val fresh = ProgressCodec.fresh(listOf("case.acc.f"), at, "2026-03-29", scheduler)
+        val withScaffolding = fresh.copy(progress = fresh.progress.copy(
+            stats = mapOf("case.acc.f" to SkillStats(reviews = 4, correct = 3, streak = 2, mistakes = 1, tileScaffoldingRung = 1, tileScaffoldingStreak = 2)),
+        ))
+        val encoded = ProgressCodec.encodeText(withScaffolding)
+        val decoded = assertIs<DecodeResult.Valid>(ProgressCodec.decodeText(encoded)).document
+        val stats = decoded.progress.stats.getValue("case.acc.f")
+        assertEquals(1, stats.tileScaffoldingRung)
+        assertEquals(2, stats.tileScaffoldingStreak)
     }
 
     @Test

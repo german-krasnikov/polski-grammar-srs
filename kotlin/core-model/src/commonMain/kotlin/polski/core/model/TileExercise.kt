@@ -37,8 +37,10 @@ data class TileError(
     val selected: String,
     val expected: String,
     val feature: FeatureKey,
-    /** Always null out of core-engine's TileAnswerEvaluator (SB-3) — StyleComposer.blocksForError
-     *  (SB-7, out of this blueprint's scope) fills it from CoreExercise.changes/skill metadata. */
+    /** Always null out of core-engine's TileAnswerEvaluator (SB-3) and never read by
+     *  `StyleComposer.blocksForError` (SB-7), which derives its own reason text from
+     *  `Exercise.changes`/skill metadata instead of this field. Kept for a future evaluator that
+     *  computes a reason closer to the evaluation itself. */
     val reason: String? = null,
 )
 

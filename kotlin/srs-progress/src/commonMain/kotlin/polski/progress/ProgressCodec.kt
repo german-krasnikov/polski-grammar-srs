@@ -60,6 +60,10 @@ object ProgressCodec {
                 correct = value.nonnegativeInt("correct") ?: return DecodeResult.Invalid("Invalid correct for $skillId"),
                 streak = value.nonnegativeInt("streak") ?: return DecodeResult.Invalid("Invalid streak for $skillId"),
                 mistakes = value.nonnegativeInt("mistakes") ?: return DecodeResult.Invalid("Invalid mistakes for $skillId"),
+                // SB-8: additive fields — absent (every pre-SB-8 document) defaults to 0 (Full,
+                // no streak), never invalidates the document.
+                tileScaffoldingRung = value.nonnegativeInt("tileScaffoldingRung") ?: 0,
+                tileScaffoldingStreak = value.nonnegativeInt("tileScaffoldingStreak") ?: 0,
             )
         }
         val reviewsToday = root.nonnegativeInt("reviewsToday") ?: return DecodeResult.Invalid("Invalid reviewsToday")
@@ -100,6 +104,8 @@ object ProgressCodec {
                 "correct" to JsonPrimitive(value.correct),
                 "streak" to JsonPrimitive(value.streak),
                 "mistakes" to JsonPrimitive(value.mistakes),
+                "tileScaffoldingRung" to JsonPrimitive(value.tileScaffoldingRung),
+                "tileScaffoldingStreak" to JsonPrimitive(value.tileScaffoldingStreak),
             ))
         }
         val root = JsonObject(document.source + mapOf(
@@ -142,6 +148,8 @@ object ProgressCodec {
                 "correct"  to WireNode.WireI64(s.correct.toLong()),
                 "streak"   to WireNode.WireI64(s.streak.toLong()),
                 "mistakes" to WireNode.WireI64(s.mistakes.toLong()),
+                "tileScaffoldingRung"   to WireNode.WireI64(s.tileScaffoldingRung.toLong()),
+                "tileScaffoldingStreak" to WireNode.WireI64(s.tileScaffoldingStreak.toLong()),
             ))
         })
         val root = WireNode.WireMap(listOf(
@@ -200,6 +208,9 @@ object ProgressCodec {
                 correct  = (sm["correct"] as? WireNode.WireI64)?.value?.toInt() ?: return DecodeResult.Invalid("missing correct for $skillId"),
                 streak   = (sm["streak"] as? WireNode.WireI64)?.value?.toInt() ?: return DecodeResult.Invalid("missing streak for $skillId"),
                 mistakes = (sm["mistakes"] as? WireNode.WireI64)?.value?.toInt() ?: return DecodeResult.Invalid("missing mistakes for $skillId"),
+                // SB-8: additive fields — absent (every pre-SB-8 document) defaults to 0.
+                tileScaffoldingRung   = (sm["tileScaffoldingRung"] as? WireNode.WireI64)?.value?.toInt() ?: 0,
+                tileScaffoldingStreak = (sm["tileScaffoldingStreak"] as? WireNode.WireI64)?.value?.toInt() ?: 0,
             )
         }
         return DecodeResult.Valid(

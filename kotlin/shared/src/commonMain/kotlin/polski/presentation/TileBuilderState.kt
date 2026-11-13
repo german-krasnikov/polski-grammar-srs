@@ -13,7 +13,7 @@ import polski.model.Exercise
  * state, built from one [Exercise] whenever `AppUiState.answerMode == AnswerMode.TileBuilder`.
  * [placed] accumulates [TileAction.Place]/[TileAction.Remove]; [result] is set once
  * [TileAction.Check] runs `polski.core.engine.evaluateTileAnswer`; [errorExplanation] is filled by
- * `StyleComposer.blocksForError` (SB-7, out of this blueprint's scope) from a [TileAction.TapError].
+ * `StyleComposer.blocksForError` (SB-7) from a [TileAction.TapError].
  */
 data class TileBuilderState(
     val exercise: TileExercise,
@@ -36,7 +36,9 @@ sealed class TileAction {
  * [Exercise.tilePhrase] absent — every skill today) or the phrase can't be located in
  * [Exercise.expected]; callers fall back to Typed/Oral the same way the rest of
  * `AnswerMode.TileBuilder` already does (see [AnswerMode]'s own KDoc) until SB-6+ wires a host UI.
- * [scaffolding] is a placeholder parameter until SB-8 resolves it from progress (blueprint §5/§10).
+ * [scaffolding] defaults to [ScaffoldingLevel.Partial] for direct/test callers; `TrainingStore`
+ * (SB-8) resolves the real value from `SkillStats.tileScaffoldingRung` instead of relying on this
+ * default.
  */
 fun tileBuilderStateFor(exercise: Exercise, random: RandomSource, scaffolding: ScaffoldingLevel = ScaffoldingLevel.Partial): TileBuilderState? {
     // The same slots shape CoreExercise.slots carries (PlExerciseEngine.toExercise's own mapping, reversed) — ConstructionRealizer.slotFacts needs every slot the construction names, not just noun/adjective.

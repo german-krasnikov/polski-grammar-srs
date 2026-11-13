@@ -70,6 +70,79 @@ class ReviewReducerTest {
         assertEquals(original.progress.stats.getValue("a"), SkillStats(4, 3, 2, 1))
     }
 
+    // SB-8: a null tileCorrect (Oral/Typed review) never moves the scaffolding rung/streak.
+    @Test
+    fun nonTileReviewLeavesScaffoldingRungAndStreakUntouched() {
+        val scheduler = CountingScheduler()
+        val document = ProgressDocument(Progress(
+            cards = listOf(StoredCard("known", SrsCard(at))),
+            stats = mapOf("known" to SkillStats(reviews = 1, correct = 1, streak = 1, mistakes = 0, tileScaffoldingRung = 1, tileScaffoldingStreak = 2)),
+            lastDay = "2026-03-29",
+        ))
+        val result = assertIs<ReviewResult.Reviewed>(
+            ReviewReducer(scheduler, setOf("known")).recordReview(document, "known", Rating.Good, typedCorrect = true, at, "2026-03-29"),
+        ).document.progress
+        val stats = result.stats.getValue("known")
+        assertEquals(1, stats.tileScaffoldingRung)
+        assertEquals(2, stats.tileScaffoldingStreak)
+    }
+
+    // SB-8: correct TileBuilder reviews promote Full -> Partial at exactly toPartial, and
+    // Partial -> None at exactly toNone, resetting the streak on each promotion.
+    @Test
+    fun correctTileReviewsPromoteAtExactThresholds() {
+        val scheduler = CountingScheduler()
+        var document = ProgressDocument(Progress(
+            cards = listOf(StoredCard("known", SrsCard(at))),
+            stats = mapOf("known" to SkillStats()),
+            lastDay = "2026-03-29",
+        ))
+        val reducer = ReviewReducer(scheduler, setOf("known"), TilePromotionThresholds(toPartial = 3, toNone = 5))
+
+        fun reviewTile(correct: Boolean) {
+            document = (reducer.recordReview(document, "known", Rating.Good, null, at, "2026-03-29", tileCorrect = correct) as ReviewResult.Reviewed).document
+        }
+
+        reviewTile(true); reviewTile(true)
+        assertEquals(0, document.progress.stats.getValue("known").tileScaffoldingRung) // still Full, streak 2 < 3
+        assertEquals(2, document.progress.stats.getValue("known").tileScaffoldingStreak)
+        reviewTile(true) // 3rd correct -> promotes to Partial, streak resets
+        assertEquals(1, document.progress.stats.getValue("known").tileScaffoldingRung)
+        assertEquals(0, document.progress.stats.getValue("known").tileScaffoldingStreak)
+
+        reviewTile(true); reviewTile(true); reviewTile(true); reviewTile(true)
+        assertEquals(1, document.progress.stats.getValue("known").tileScaffoldingRung) // streak 4 < 5
+        reviewTile(true) // 5th correct at Partial -> promotes to None
+        assertEquals(2, document.progress.stats.getValue("known").tileScaffoldingRung)
+        assertEquals(0, document.progress.stats.getValue("known").tileScaffoldingStreak)
+    }
+
+    // SB-8: a wrong TileBuilder review at rung None rolls back to Partial; at Full/Partial it
+    // only resets the streak (no demotion below where the learner already was).
+    @Test
+    fun wrongTileReviewDemotesOnlyFromNoneAndOtherwiseResetsStreak() {
+        val scheduler = CountingScheduler()
+        val reducer = ReviewReducer(scheduler, setOf("known"))
+
+        val atFull = ProgressDocument(Progress(
+            cards = listOf(StoredCard("known", SrsCard(at))),
+            stats = mapOf("known" to SkillStats(tileScaffoldingRung = 0, tileScaffoldingStreak = 2)),
+            lastDay = "2026-03-29",
+        ))
+        val resultFull = (reducer.recordReview(atFull, "known", Rating.Again, null, at, "2026-03-29", tileCorrect = false) as ReviewResult.Reviewed).document
+        assertEquals(0, resultFull.progress.stats.getValue("known").tileScaffoldingRung)
+        assertEquals(0, resultFull.progress.stats.getValue("known").tileScaffoldingStreak)
+
+        val atNone = ProgressDocument(Progress(
+            cards = listOf(StoredCard("known", SrsCard(at))),
+            stats = mapOf("known" to SkillStats(tileScaffoldingRung = 2, tileScaffoldingStreak = 3)),
+            lastDay = "2026-03-29",
+        ))
+        val resultNone = (reducer.recordReview(atNone, "known", Rating.Again, null, at, "2026-03-29", tileCorrect = false) as ReviewResult.Reviewed).document
+        assertEquals(1, resultNone.progress.stats.getValue("known").tileScaffoldingRung)
+        assertEquals(0, resultNone.progress.stats.getValue("known").tileScaffoldingStreak)
+    }
+
     private class CountingScheduler : Scheduler {
         var reviewCalls = 0
         override fun newCard(skillId: String, at: Instant) = StoredCard(skillId, SrsCard(at))

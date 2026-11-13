@@ -13,12 +13,15 @@ import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.JsonObject
 import polski.core.engine.RandomSource
 import polski.core.engine.evaluateTileAnswer
+import polski.core.model.ScaffoldingLevel
 import polski.core.model.TileSegment
 import polski.core.model.TileSelection
 import polski.data.activePackSkillIds
 import polski.data.packRegistry
+import polski.data.presentationBySkillId
 import polski.data.skillById
 import polski.data.skills
+import polski.data.styleContentBySkillId
 import polski.data.nouns
 import polski.data.adjectives
 import polski.data.verbs
@@ -85,8 +88,24 @@ class TrainingStore(
 
     /** SB-6 blueprint §1.1: the single derivation site every `exercise = ...` assignment below
      *  reuses — unconditional (computed regardless of `answerMode`), `null` exactly when
-     *  [exercise] opts out of tiles ([tileBuilderStateFor]'s own documented fallback). */
-    private fun deriveTileBuilder(exercise: Exercise?): TileBuilderState? = exercise?.let { tileBuilderStateFor(it, tileRandom) }
+     *  [exercise] opts out of tiles ([tileBuilderStateFor]'s own documented fallback).
+     *  SB-8: [source] defaults to the `document` field so every existing single-arg call site
+     *  keeps compiling unchanged, picking up the right document because in every one of those
+     *  call sites `document` is already reassigned to the document this exercise's stats should
+     *  come from before this runs. The scaffolding rung comes from that document's own
+     *  [polski.progress.SkillStats.tileScaffoldingRung] for this exercise's skill, defaulting to 0
+     *  (Full) when there is no document yet or no stats recorded for this skill. */
+    private fun deriveTileBuilder(exercise: Exercise?, source: ProgressDocument? = document): TileBuilderState? =
+        exercise?.let {
+            val rung = source?.progress?.stats?.get(it.primarySkill)?.tileScaffoldingRung ?: 0
+            tileBuilderStateFor(it, tileRandom, scaffoldingLevelFor(rung))
+        }
+
+    private fun scaffoldingLevelFor(rung: Int): ScaffoldingLevel = when (rung) {
+        0 -> ScaffoldingLevel.Full
+        1 -> ScaffoldingLevel.Partial
+        else -> ScaffoldingLevel.None
+    }
 
     init {
         scope.launch {
@@ -226,6 +245,10 @@ class TrainingStore(
         mutableState.value = project(state.value.copy(
             loadStatus = LoadStatus.Ready, error = null,
             introPending = needsIntroduction(state.value.exercise, complete),
+            // SB-8: the first exercise's tileBuilder was derived before any document existed
+            // (the `mutableState` property initializer runs with `document == null`); recompute
+            // now that the real document — and its scaffolding rung — is known.
+            tileBuilder = deriveTileBuilder(state.value.exercise, complete),
         ), complete, captured)
         if (complete != source) queueSave(complete)
     }
@@ -358,13 +381,17 @@ class TrainingStore(
         }
     }
 
-    /** Interim bridge until SB-7 wires `StyleComposer.blocksForError` per-position (blueprint
-     *  §1.2): a generic skill-level Rule block, not yet the specific per-error reason
-     *  ([polski.core.model.TileError.reason] is always null out of [evaluateTileAnswer] today). */
+    /** SB-7: the specific per-tile explanation for the tapped error, via
+     *  [StyleComposer.blocksForError]. `state.tileBuilder?.result?.errors` is already guaranteed
+     *  non-null-for-this-position by the [accepts] guard for [TileAction.TapError]; the
+     *  `firstOrNull` here is a defensive fallback, not the primary guard. */
     private fun errorExplanationFor(state: AppUiState, position: Int): List<Block> {
         val exercise = state.exercise ?: return emptyList()
+        val error = state.tileBuilder?.result?.errors?.firstOrNull { it.position == position } ?: return emptyList()
         val skill = skillById(exercise.primarySkill)
-        return listOf(Block.Rule(skill.theory, exercise.explanation, emptyList()))
+        val focus = presentationBySkillId(exercise.primarySkill)
+        val content = styleContentBySkillId(exercise.primarySkill)
+        return StyleComposer.blocksForError(exercise, skill, focus, content, error)
     }
 
     private fun rate(action: AppAction.Rate) {
@@ -377,9 +404,10 @@ class TrainingStore(
             AnswerMode.TileBuilder -> current.tileBuilder?.result?.correct
             AnswerMode.Oral -> null
         }
+        val tileCorrect = correctness.takeIf { current.answerMode == AnswerMode.TileBuilder }
         val result = reviewReducer.recordReview(
             before, exercise.primarySkill, action.rating, correctness,
-            captured.at, captured.localDay,
+            captured.at, captured.localDay, tileCorrect,
         )
         if (result !is ReviewResult.Reviewed) {
             mutate { it.copy(error = "Неизвестный навык: ${exercise.primarySkill}") }
