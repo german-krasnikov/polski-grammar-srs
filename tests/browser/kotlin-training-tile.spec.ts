@@ -1,10 +1,10 @@
 import { expect, test, type Page } from '@playwright/test';
 import { installProgressReader } from './kotlin-storage';
 
-// SB6-AC1..AC11 (Plans/Architecture/SENTENCE-BUILDER-WEB-BLUEPRINT.md §5). `case.acc.f` is one of
-// the three pilot skills opted into tiles (commit 7d50aa6): its recipe sets
-// `tileTargetSlots: [adjective noun]`, so every generated exercise has exactly two
-// `TileSegment.Choice` positions and at least one locked word around them.
+// SB6-AC1..AC11 (Plans/Architecture/SENTENCE-BUILDER-WEB-BLUEPRINT.md §5). All 16 constructed
+// skills are opted into tiles. SB-8 scaffolding defaults to Full (rung 0), which activates
+// ~30% of tileTargetSlots as Choice — for a 2-slot skill that's 1 Choice tile. Tests use
+// dynamic counts rather than hardcoded expectations.
 
 const continueIntroductionIfPresent = async (page: Page) => {
   await page.getByRole('button', { name: /^(Перейти к заданию|Показать ответ)$/ }).first().waitFor();
@@ -16,13 +16,15 @@ const previewKey = 'polski-grammar-srs-kmp-preview-v1';
 const expectedBranch = process.env.KOTLIN_SPIKE_BRANCH;
 const errors = new WeakMap<Page, string[]>();
 
-/** Navigates to the Focused "Biernik · żeński" (`case.acc.f`) card and switches to TileBuilder. */
-const openTileCard = async (page: Page) => {
+/** Navigates to the Focused "Biernik · żeński" (`case.acc.f`) card and switches to TileBuilder.
+ *  Returns the number of Choice tiles on the card (depends on scaffolding level). */
+const openTileCard = async (page: Page): Promise<number> => {
   await page.getByRole('button', { name: 'Отдельный навык' }).click();
   await page.getByRole('region', { name: 'Выбор навыка' }).getByRole('button', { name: /Biernik · żeński/ }).click();
   await continueIntroductionIfPresent(page);
   await page.getByRole('button', { name: 'Собрать из слов' }).click();
   await expect(page.locator('.tile-row')).toBeVisible();
+  return page.locator('.tile-choice').count();
 };
 
 /** Opens the picker for the Nth empty choice tile and places `optionIndex` (0 = correctForm). */
@@ -58,20 +60,24 @@ test.afterEach(async ({ page }) => {
 });
 
 test('SB6-AC1/AC4: tile row starts with every choice empty, in position order, and Check stays disabled', async ({ page }) => {
-  await openTileCard(page);
-  await expect(page.locator('.tile-choice.tile-empty')).toHaveCount(2);
+  const choiceCount = await openTileCard(page);
+  expect(choiceCount).toBeGreaterThanOrEqual(1);
+  await expect(page.locator('.tile-choice.tile-empty')).toHaveCount(choiceCount);
   await expect(page.locator('.tile-choice.tile-empty').first()).toHaveText('___');
   const check = page.getByRole('button', { name: 'Проверить' });
   await expect(check).toBeDisabled();
-  await placeChoice(page, 0, 0);
-  await expect(check).toBeDisabled(); // one of two still empty
-  await placeChoice(page, 1, 0);
+  // Place all but the last — Check must stay disabled
+  for (let i = 0; i < choiceCount - 1; i += 1) await placeChoice(page, i, 0);
+  if (choiceCount > 1) await expect(check).toBeDisabled();
+  // Place the last — Check enables
+  await placeChoice(page, choiceCount - 1, 0);
   await expect(check).toBeEnabled();
 });
 
 test('SB6-AC2: a skill without tileTargetSlots disables the mode button and falls back to Oral, never a broken row', async ({ page }) => {
   await page.getByRole('button', { name: 'Отдельный навык' }).click();
-  await page.getByRole('region', { name: 'Выбор навыка' }).getByRole('button', { name: /Czas przeszły/ }).click();
+  // degree.comparison is a static/pool skill — no tileTargetSlots, no tile support.
+  await page.getByRole('region', { name: 'Выбор навыка' }).getByRole('button', { name: /Степени сравнения/ }).click();
   await continueIntroductionIfPresent(page);
   await expect(page.getByRole('button', { name: 'Собрать из слов' })).toBeDisabled();
   await expect(page.locator('.tile-row')).toHaveCount(0);
@@ -79,38 +85,39 @@ test('SB6-AC2: a skill without tileTargetSlots disables the mode button and fall
 });
 
 test('SB6-AC3/AC5/AC7: placing correct forms shows a green result, records the review, and the next card starts clean', async ({ page }) => {
-  await openTileCard(page);
-  await placeChoice(page, 0, 0);
-  await expect(page.locator('.tile-choice.tile-empty')).toHaveCount(1);
-  await placeChoice(page, 1, 0);
-  await expect(page.locator('.tile-choice.tile-empty')).toHaveCount(0);
+  const choiceCount = await openTileCard(page);
+  for (let i = 0; i < choiceCount; i += 1) {
+    await placeChoice(page, i, 0);
+    await expect(page.locator('.tile-choice.tile-empty')).toHaveCount(choiceCount - i - 1);
+  }
   await page.getByRole('button', { name: 'Проверить' }).click();
-  await expect(page.locator('.tile-correct')).toHaveCount(2);
+  await expect(page.locator('.tile-correct')).toHaveCount(choiceCount);
   await expect(page.locator('.tile-incorrect')).toHaveCount(0);
   await expect(page.locator('.typed-result.correct')).toContainText('Совпадает с правильным вариантом');
   await page.getByRole('button', { name: /2 Вспомнил/ }).click();
   await expect.poll(() => page.evaluate(key => (window as any).__readProgress(key, 'totalReviews'), previewKey)).toBe(1);
   // Next card: a fresh TileBuilder derivation, never carrying over the previous selection/result/open panel.
   await expect(page.locator('.tile-row')).toBeVisible();
-  await expect(page.locator('.tile-choice.tile-empty')).toHaveCount(2);
+  const nextChoiceCount = await page.locator('.tile-choice.tile-empty').count();
+  expect(nextChoiceCount).toBeGreaterThanOrEqual(1);
   await expect(page.locator('.typed-result')).toHaveCount(0);
   await expect(page.locator('.tile-option')).toHaveCount(0);
 });
 
 test('SB6-AC5/AC6: a wrong tile is red, its mini-rule toggles open/closed on tap, and a green tile is not a button', async ({ page }) => {
-  await openTileCard(page);
+  const choiceCount = await openTileCard(page);
+  // Place correct forms for all choices first, then find one with distractors to make wrong.
   const optionCounts: number[] = [];
-  for (let i = 0; i < 2; i += 1) {
+  for (let i = 0; i < choiceCount; i += 1) {
     await page.locator('.tile-choice').nth(i).click();
     optionCounts.push(await page.locator('.tile-option').count());
-    await page.locator('.tile-option').first().click(); // tentatively place the correct form, re-opened below
+    await page.locator('.tile-option').first().click();
   }
   const wrongIndex = optionCounts.findIndex(count => count > 1);
-  test.skip(wrongIndex === -1, 'neither pilot choice carries a distractor alternative in this content snapshot');
+  test.skip(wrongIndex === -1, 'no choice carries a distractor alternative in this content snapshot');
   await placeChoice(page, wrongIndex, 1); // the alternative, not correctForm
   await page.getByRole('button', { name: 'Проверить' }).click();
   await expect(page.locator('.tile-incorrect')).toHaveCount(1);
-  await expect(page.locator('.tile-correct')).toHaveCount(1);
   await expect(page.locator('.typed-result.incorrect')).toBeVisible();
   const wrongTile = page.locator('.tile-incorrect');
   await expect(wrongTile).toHaveAttribute('aria-label', /неверно, нажми для правила/);
@@ -119,9 +126,11 @@ test('SB6-AC5/AC6: a wrong tile is red, its mini-rule toggles open/closed on tap
   await expect(wrongTile).toHaveAttribute('aria-expanded', 'true');
   await wrongTile.click(); // toggles closed
   await expect(wrongTile).toHaveAttribute('aria-expanded', 'false');
-  // A correct tile renders as a <span>, not a button — tapping it must do nothing.
-  const greenTile = page.locator('.tile-correct');
-  await expect(greenTile).not.toHaveJSProperty('tagName', 'BUTTON');
+  // Correct tiles render as <span>s, not buttons.
+  if (choiceCount > 1) {
+    const greenTile = page.locator('.tile-correct').first();
+    await expect(greenTile).not.toHaveJSProperty('tagName', 'BUTTON');
+  }
 });
 
 test('SB6-AC8/AC9: tiles stay >=48px with 8px gap and wrap at 320px, and reduced motion opens the picker instantly', async ({ page }) => {
