@@ -96,7 +96,7 @@ final class NativeExamUITests: XCTestCase {
         XCTAssertTrue(wrong.waitForExistence(timeout: 5), app.debugDescription)
         wrong.tap()
         let feedback = app.descendants(matching: .any).matching(NSPredicate(format: "identifier BEGINSWITH %@", "exam-feedback-")).firstMatch
-        XCTAssertTrue(feedback.waitForExistence(timeout: 3), app.debugDescription)
+        XCTAssertTrue(feedback.exists, app.debugDescription)
         XCTAssertTrue(feedback.label.contains("kioski internetowe oferują dostęp do Internetu"), feedback.label)
         XCTAssertFalse(wrong.isEnabled)
         setImmediateFeedback(false, in: app)
@@ -228,6 +228,224 @@ final class NativeExamUITests: XCTestCase {
         XCTAssertTrue(app.staticTexts["exam-locked-answer"].waitForExistence(timeout: 5), app.debugDescription)
         XCTAssertFalse(app.buttons["exam-option-dobry teatr"].isEnabled)
         XCTAssertFalse(app.descendants(matching: .any)["exam-feedback-B1-2017-g1-1"].exists)
+    }
+
+    func testSettingsSheetCancelsPendingGrammarAdvanceWithoutChangingPreference() {
+        let app = openPaper("b1-2017")
+        setImmediateFeedback(true, in: app)
+        app.buttons["exam-module-grammar"].tap()
+        let settingsTap = app.buttons["openSettings"].coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
+        app.buttons["exam-option-dobry teatr"].tap()
+        settingsTap.tap()
+        XCTAssertTrue(app.switches["settingsExamImmediateFeedback"].waitForExistence(timeout: 5))
+        Thread.sleep(forTimeInterval: 2.5)
+        app.buttons["Готово"].tap()
+        XCTAssertEqual(app.staticTexts["exam-grammar-position"].label, "1 / 50")
+        XCTAssertTrue(app.staticTexts["exam-locked-answer"].waitForExistence(timeout: 5), app.debugDescription)
+        XCTAssertFalse(app.descendants(matching: .any)["exam-feedback-B1-2017-g1-1"].exists)
+    }
+
+    func testManualNextCancelsPendingGrammarAdvance() {
+        let app = openPaper("b1-2017")
+        setImmediateFeedback(true, in: app)
+        app.buttons["exam-module-grammar"].tap()
+        let nextTap = app.buttons["exam-next"].coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
+        app.buttons["exam-option-dobry teatr"].tap()
+        nextTap.tap()
+        XCTAssertEqual(app.staticTexts["exam-grammar-position"].label, "2 / 50")
+        Thread.sleep(forTimeInterval: 2.5)
+        XCTAssertEqual(app.staticTexts["exam-grammar-position"].label, "2 / 50")
+        app.buttons["exam-previous"].tap()
+        XCTAssertTrue(app.staticTexts["exam-locked-answer"].waitForExistence(timeout: 5))
+        XCTAssertFalse(app.descendants(matching: .any)["exam-feedback-B1-2017-g1-1"].exists)
+    }
+
+    func testExamTabExitCancelsPendingGrammarAdvance() {
+        let app = openPaper("b1-2017")
+        setImmediateFeedback(true, in: app)
+        app.buttons["exam-module-grammar"].tap()
+        let trainingTab = app.buttons["Тренировка"].coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
+        app.buttons["exam-option-dobry teatr"].tap()
+        trainingTab.tap()
+        Thread.sleep(forTimeInterval: 2.5)
+        app.buttons["Экзамен"].tap()
+        XCTAssertEqual(app.staticTexts["exam-grammar-position"].label, "1 / 50")
+        XCTAssertTrue(app.staticTexts["exam-locked-answer"].waitForExistence(timeout: 5))
+        XCTAssertFalse(app.descendants(matching: .any)["exam-feedback-B1-2017-g1-1"].exists)
+    }
+
+    func testTimedReadingAndGrammarStayEditableWithoutEarlyKey() {
+        let app = openPaper("b1-2017")
+        setImmediateFeedback(true, in: app)
+        app.buttons["exam-start-timed"].tap()
+        app.buttons["exam-submit"].tap() // Listening is first in the published sitting.
+        let readingWrong = app.buttons["exam-option-B1-2017-r1-1-kioski internetowe są popularne w całym kraju"]
+        let readingCorrect = app.buttons["exam-option-B1-2017-r1-1-kioski internetowe oferują dostęp do Internetu"]
+        XCTAssertTrue(readingWrong.waitForExistence(timeout: 5), app.debugDescription)
+        readingWrong.tap()
+        XCTAssertTrue(readingCorrect.isEnabled)
+        XCTAssertFalse(app.descendants(matching: .any).matching(NSPredicate(
+            format: "identifier BEGINSWITH %@", "exam-feedback-")).firstMatch.exists)
+        readingCorrect.tap()
+        XCTAssertTrue(readingCorrect.isSelected)
+        XCTAssertFalse(app.descendants(matching: .any).matching(NSPredicate(
+            format: "identifier BEGINSWITH %@", "exam-review-")).firstMatch.exists)
+        app.buttons["exam-submit"].tap()
+        let grammarWrong = app.buttons["exam-option-dobry teatr"]
+        let grammarCorrect = app.buttons["exam-option-dobrego teatru"]
+        XCTAssertTrue(grammarWrong.waitForExistence(timeout: 5), app.debugDescription)
+        grammarWrong.tap()
+        XCTAssertTrue(grammarCorrect.isEnabled)
+        XCTAssertFalse(app.descendants(matching: .any).matching(NSPredicate(
+            format: "identifier BEGINSWITH %@", "exam-feedback-")).firstMatch.exists)
+        grammarCorrect.tap()
+        XCTAssertTrue(grammarCorrect.isSelected)
+        app.buttons["exam-finish-part"].tap()
+        XCTAssertFalse(app.descendants(matching: .any).matching(NSPredicate(
+            format: "identifier BEGINSWITH %@", "exam-review-")).firstMatch.exists)
+    }
+
+    func testCaptureWrongAndCorrectDisabledOptionsInLightAndDark() {
+        for (theme, name) in [("Светлая", "p14-native-feedback-options-light"),
+                              ("Тёмная", "p14-native-feedback-options-dark")] {
+            let app = openPaper("b1-2017")
+            setAppearance(theme, in: app)
+            setImmediateFeedback(true, in: app)
+            app.buttons["exam-module-grammar"].tap()
+            let wrong = app.buttons["exam-option-dobry teatr"]
+            let correct = app.buttons["exam-option-dobrego teatru"]
+            wrong.tap()
+            XCTAssertTrue(app.descendants(matching: .any)["exam-feedback-B1-2017-g1-1"].firstMatch
+                .waitForExistence(timeout: 2), app.debugDescription)
+            XCTAssertFalse(wrong.isEnabled)
+            XCTAssertFalse(correct.isEnabled)
+            let shot = XCTAttachment(screenshot: app.screenshot())
+            shot.name = name
+            shot.lifetime = .keepAlways
+            add(shot)
+            app.terminate()
+        }
+    }
+
+    func testCaptureNeighboringMatchingOptionsDuringFirstQuestionFeedback() {
+        let app = openPaper("b1-2019")
+        setImmediateFeedback(true, in: app)
+        app.buttons["exam-module-listening"].tap()
+        for _ in 0..<3 { app.buttons["exam-next"].tap() }
+        let firstWrong = app.buttons["exam-option-B1-2019-lq4-1-1"]
+        let neighboringFour = app.buttons["exam-option-B1-2019-lq4-2-4"]
+        XCTAssertTrue(firstWrong.waitForExistence(timeout: 5), app.debugDescription)
+        XCTAssertTrue(neighboringFour.exists, app.debugDescription)
+        firstWrong.tap()
+        XCTAssertTrue(neighboringFour.isEnabled, "The neighboring question stays editable")
+        let shot = XCTAttachment(screenshot: app.screenshot())
+        shot.name = "p14-native-neighboring-matching-options"
+        shot.lifetime = .keepAlways
+        add(shot)
+    }
+
+    func testCapturePracticeFeedbackAtAccessibilityTextSize() {
+        let app = openPaper("b1-2017")
+        app.buttons["exam-module-grammar"].tap()
+        app.buttons["exam-option-dobry teatr"].tap()
+        let shot = XCTAttachment(screenshot: app.screenshot())
+        shot.name = "p14-native-accessibility-text-feedback"
+        shot.lifetime = .keepAlways
+        add(shot)
+    }
+
+    func testPracticeFeedbackWrapsInNarrowiPadWindow() {
+        let app = openPaper("b1-2017")
+        setImmediateFeedback(true, in: app)
+        app.buttons["exam-module-grammar"].tap()
+        let springboard = XCUIApplication(bundleIdentifier: "com.apple.springboard")
+        let tileControls = springboard.buttons["window-controls:dev.polski.grammarmatrix.ios"]
+        let before = app.windows.firstMatch.frame
+        XCTAssertGreaterThan(before.width, 800)
+        let reveal = springboard.coordinate(withNormalizedOffset: CGVector(dx: 0.50, dy: 0.01))
+        reveal.press(forDuration: 0.1, thenDragTo:
+            springboard.coordinate(withNormalizedOffset: CGVector(dx: 0.50, dy: 0.11)))
+        let controls = springboard.buttons["Window Controls"]
+        XCTAssertTrue(controls.waitForExistence(timeout: 5), springboard.debugDescription)
+        controls.tap()
+        springboard.buttons["Окно"].tap()
+        springboard.buttons["Move & Resize"].tap()
+        springboard.buttons["Left"].tap()
+        let after = app.windows.firstMatch.frame
+        XCTAssertLessThan(after.width, before.width - 100)
+        app.buttons["exam-option-dobry teatr"].tap()
+        let feedback = app.descendants(matching: .any)["exam-feedback-B1-2017-g1-1"].firstMatch
+        XCTAssertTrue(feedback.exists, app.debugDescription)
+        XCTAssertTrue(feedback.label.contains("dobry teatr") && feedback.label.contains("dobrego teatru"))
+        let shot = XCTAttachment(screenshot: XCUIScreen.main.screenshot())
+        shot.name = "p14-native-feedback-412pt-window"
+        shot.lifetime = .keepAlways
+        add(shot)
+        XCTAssertTrue(tileControls.waitForExistence(timeout: 5), springboard.debugDescription)
+        tileControls.tap()
+        springboard.buttons["Zoom-button"].tap()
+        XCTAssertGreaterThan(app.windows.firstMatch.frame.width, 800)
+    }
+
+    func testSettingsFileImportTurnsPracticeOffWithoutLosingLiveAnswerAndPersistsRestart() {
+        let app = openPaper("b1-2017")
+        setImmediateFeedback(true, in: app)
+        app.buttons["exam-module-grammar"].tap()
+        let settings = app.buttons["openSettings"].coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
+        let wrong = app.buttons["exam-option-dobry teatr"]
+        wrong.tap()
+        settings.tap()
+        for _ in 0..<5 {
+            if app.buttons["Импортировать настройки JSON"].exists { break }
+            app.swipeUp()
+        }
+        app.buttons["Импортировать настройки JSON"].tap()
+        let local = app.cells["DOC.sidebar.item.On My iPad"]
+        XCTAssertTrue(local.waitForExistence(timeout: 8), "File importer did not present\n\(app.debugDescription)")
+        local.tap()
+        let file = app.cells.matching(NSPredicate(format: "identifier BEGINSWITH %@", "p14-feedback-off-neutral.json")).firstMatch
+        XCTAssertTrue(file.waitForExistence(timeout: 8), "Neutral fixture missing from On My iPad\n\(app.debugDescription)")
+        file.tap()
+        let unlocked = XCTNSPredicateExpectation(predicate: NSPredicate(format: "enabled == true"), object: wrong)
+        XCTAssertEqual(XCTWaiter.wait(for: [unlocked], timeout: 8), .completed,
+                       "Import must propagate OFF to the live exam session\n\(app.debugDescription)")
+        XCTAssertEqual(app.staticTexts["exam-grammar-position"].label, "1 / 50")
+        XCTAssertTrue(wrong.isSelected, "Imported OFF must retain the raw wrong answer")
+        XCTAssertTrue(wrong.isEnabled, "Imported OFF must release the practice lock")
+        XCTAssertTrue(app.buttons["exam-option-dobrego teatru"].isEnabled)
+        XCTAssertFalse(app.staticTexts["exam-feedback-B1-2017-g1-1"].exists)
+        let shot = XCTAttachment(screenshot: XCUIScreen.main.screenshot())
+        shot.name = "p14-settings-import-off-live-answer"
+        shot.lifetime = .keepAlways
+        add(shot)
+        app.terminate()
+        app.launch()
+        XCTAssertTrue(app.buttons["openSettings"].waitForExistence(timeout: 15))
+        app.buttons["openSettings"].tap()
+        let afterRestart = app.switches["settingsExamImmediateFeedback"]
+        XCTAssertTrue(afterRestart.waitForExistence(timeout: 5))
+        XCTAssertEqual(afterRestart.value as? String, "0", "Imported OFF must survive process restart")
+    }
+
+    func testSettingsPreferencesExportSavesFilesDocument() {
+        let app = openPaper("b1-2017")
+        setImmediateFeedback(false, in: app)
+        app.buttons["openSettings"].tap()
+        for _ in 0..<5 {
+            if app.buttons["Экспортировать настройки JSON"].exists { break }
+            app.swipeUp()
+        }
+        app.buttons["Экспортировать настройки JSON"].tap()
+        XCTAssertTrue(app.cells["DOC.sidebar.item.On My iPad"].waitForExistence(timeout: 8),
+                      "Settings exporter must present Files\n\(app.debugDescription)")
+        print("EXPORT_FILES_AX_BEGIN\n\(app.debugDescription)\nEXPORT_FILES_AX_END")
+        let shot = XCTAttachment(screenshot: XCUIScreen.main.screenshot())
+        shot.name = "p14-settings-export-file-picker"
+        shot.lifetime = .keepAlways
+        add(shot)
+        let save = app.buttons["Save"]
+        XCTAssertTrue(save.waitForExistence(timeout: 5), app.debugDescription)
+        save.tap()
     }
 
     func testGrammarFrozenReportNamesWrongChoiceSourceAndBlank() {
