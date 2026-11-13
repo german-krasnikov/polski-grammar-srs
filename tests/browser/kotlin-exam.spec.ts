@@ -303,6 +303,20 @@ test('DSL grammar PlayTest: C1 April 2024 crossed inflections', async ({ page })
   await runExamPlaytest(page, resolve('dsl/exam-web/grammar-pair-c1-2024-crossed.playtest'));
 });
 
+test('DSL grammar PlayTest: C1 November 2022 valid number and noun pair', async ({ page }) => {
+  await runExamPlaytest(page, resolve('dsl/exam-web/grammar-pair-c1-2022-11-valid.playtest'));
+});
+
+test('DSL grammar PlayTest: C1 November 2022 crossed pair awaits review', async ({ page }) => {
+  await runExamPlaytest(page, resolve('dsl/exam-web/grammar-pair-c1-2022-11-crossed.playtest'));
+});
+
+for (const session of ['2022-03', '2023-04', '2023-11']) {
+  test(`DSL grammar PlayTest: C1 ${session} printed numeric operands`, async ({ page }) => {
+    await runExamPlaytest(page, resolve(`dsl/exam-web/grammar-numeric-context-c1-${session}.playtest`));
+  });
+}
+
 test('DSL grammar PlayTest: C1 November 2022 source rubric appears for manual review', async ({ page }) => {
   test.setTimeout(120_000);
   await runExamPlaytest(page, resolve('dsl/exam-web/grammar-rubric-c1-2022-11.playtest'));

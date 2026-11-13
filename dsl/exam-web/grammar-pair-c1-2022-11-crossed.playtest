@@ -1,0 +1,14 @@
+TEST "C1 November 2022 crossed number and noun require review" PROFILE playmode
+  open exam="C1 Certyfikat 2022-11" module="grammar"
+  advance count=8
+  enter text="trzydzieściorgiem"
+  next
+  enter text="rozbitkami"
+  advance count=65
+  submit
+  inspectReview index=9
+  ASSERT grammar.reviewStatus == "pending"
+  inspectReview index=10
+  ASSERT grammar.reviewStatus == "pending"
+  ASSERT exam.scoreDetail == "Ожидает проверки: 1"
+END

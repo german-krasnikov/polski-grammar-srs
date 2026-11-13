@@ -1,0 +1,28 @@
+DSL 1
+GRAMMAR_ANSWER_PAIR {
+  pairId: certyfikat-polski-C1-2022-11-g1-pair-1
+  firstItemRef: certyfikat-polski-C1-2022-11-g1-q9
+  firstAnswer: trzydziestu
+  secondItemRef: certyfikat-polski-C1-2022-11-g1-q10
+  secondAnswer: rozbitkami
+  firstEarnedQuarter: 2
+  secondEarnedQuarter: 2
+}
+GRAMMAR_ANSWER_PAIR {
+  pairId: certyfikat-polski-C1-2022-11-g1-pair-2
+  firstItemRef: certyfikat-polski-C1-2022-11-g1-q9
+  firstAnswer: trzydziestoma
+  secondItemRef: certyfikat-polski-C1-2022-11-g1-q10
+  secondAnswer: rozbitkami
+  firstEarnedQuarter: 2
+  secondEarnedQuarter: 2
+}
+GRAMMAR_ANSWER_PAIR {
+  pairId: certyfikat-polski-C1-2022-11-g1-pair-3
+  firstItemRef: certyfikat-polski-C1-2022-11-g1-q9
+  firstAnswer: "trzydzieściorgiem"
+  secondItemRef: certyfikat-polski-C1-2022-11-g1-q10
+  secondAnswer: "rozbitków"
+  firstEarnedQuarter: 2
+  secondEarnedQuarter: 2
+}

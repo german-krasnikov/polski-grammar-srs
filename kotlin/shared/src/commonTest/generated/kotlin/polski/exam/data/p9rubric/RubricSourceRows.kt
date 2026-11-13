@@ -679,7 +679,7 @@ val GRAMMAR_ITEM_ROW_ROWS: List<GrammarItemRow> = listOf(
         itemId = "certyfikat-polski-C1-2022-11-g1-q9",
         testRef = "certyfikat-polski-C1-2022-11-grammar-1",
         questionType = GrammarItemRowQuestionType.FILL_GAP,
-        context = "()",
+        context = "(30)",
         correctAnswer = "trzydziestu",
         pointsQuarter = 2,
     ),
