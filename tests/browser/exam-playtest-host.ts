@@ -48,6 +48,13 @@ export async function runExamPlaytest(page: Page, sourceFile: string) {
         'exam.score': document.querySelector('.exam-score-big')?.textContent ?? '',
         'exam.scoreDetail': document.querySelector('.exam-score-detail')?.textContent ?? '',
         'exam.reviewAnswer': answer,
+        'practice.progress': document.querySelector('.exam-progress-text')?.textContent ?? '',
+        'practice.feedback': document.querySelector('.exam-feedback')?.textContent ?? '',
+        'practice.wrongOption': document.querySelector('.exam-option.feedback-wrong')?.textContent ?? '',
+        'practice.correctOption': document.querySelector('.exam-option.feedback-correct')?.textContent ?? '',
+        'practice.readingSecondFocused': readingRows[1]?.classList.contains('practice-focused') ?? false,
+        'practice.reviewChosen': inspectedReview?.querySelector('.exam-review-chosen')?.textContent ?? '',
+        'practice.reviewSource': inspectedReview?.querySelector('.exam-review-correct')?.textContent ?? '',
         'exam.firstSelected': document.querySelector('.exam-option.selected')?.textContent ?? '',
         'exam.listVisible': !!document.querySelector('.exam-list'),
         'catalog.b12019Counts': catalogCounts('B1 Certyfikat 2019'),
@@ -310,6 +317,18 @@ export async function runExamPlaytest(page: Page, sourceFile: string) {
     if (matches.length !== 1) throw new Error(`Grammar option ${answer} has ${matches.length} exact matches: ${labels.join('|')}`);
     await options.nth(matches[0]).click();
   });
+  action('tapLockedGrammar', string('answer'), async args => {
+    const option = page.locator('.exam-option').filter({ hasText: String(args.answer) });
+    const box = await option.boundingBox();
+    if (!box) throw new Error(`Grammar option ${String(args.answer)} has no pointer target`);
+    await page.mouse.click(box.x + box.width / 2, box.y + box.height / 2);
+  });
+  action('advanceClock', [{ name: 'millis', type: 'number' }], async args => {
+    await page.clock.runFor(Number(args.millis));
+  });
+  action('pauseClock', [], async () => {
+    await page.clock.pauseAt(new Date((await page.evaluate(() => Date.now())) + 10_000));
+  });
   action('chooseBank', [...string('answer'), { name: 'occurrence', type: 'number' }], async args => {
     const matches = page.locator('.exam-word-bank .exam-option').filter({ hasText: new RegExp(`^${String(args.answer)}$`) });
     const position = Number(args.occurrence) - 1;
@@ -363,6 +382,10 @@ export async function runExamPlaytest(page: Page, sourceFile: string) {
     'exam.input': 'string', 'exam.focused': 'bool', 'exam.caret': 'number', 'exam.editorPreserved': 'bool',
     'exam.score': 'string', 'exam.scoreDetail': 'string', 'exam.reviewAnswer': 'string',
     'exam.firstSelected': 'string', 'exam.listVisible': 'bool',
+    'practice.progress': 'string', 'practice.feedback': 'string',
+    'practice.wrongOption': 'string', 'practice.correctOption': 'string',
+    'practice.readingSecondFocused': 'bool',
+    'practice.reviewChosen': 'string', 'practice.reviewSource': 'string',
     'catalog.b12019Counts': 'string', 'catalog.b12017Counts': 'string',
     'catalog.b12020Counts': 'string', 'catalog.b22017Counts': 'string', 'catalog.b22019Counts': 'string', 'catalog.b22020Counts': 'string',
     'catalog.b12020Visible': 'bool', 'catalog.b22017Visible': 'bool', 'catalog.b22020Visible': 'bool',
@@ -401,7 +424,7 @@ export async function runExamPlaytest(page: Page, sourceFile: string) {
     async nextBoundary() { await refresh(); },
     dispose() {},
   }, { wallTimeoutMs: 120_000 });
-  expect(receipt.verdict, JSON.stringify(receipt)).toBe('PASSED');
+  expect(receipt.verdict, JSON.stringify({ receipt, snapshot })).toBe('PASSED');
   expect(receipt.receipts).toHaveLength(1);
   return receipt;
 }

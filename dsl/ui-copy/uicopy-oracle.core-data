@@ -532,3 +532,39 @@ UI_COPY_CASE {
   enRu: "Image is unavailable"
   placeholders: ""
 }
+UI_COPY_CASE {
+  key: examImmediateFeedbackSetting
+  plRu: "Показывать правильный ответ сразу"
+  enRu: "Show the correct answer immediately"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: examYourAnswer
+  plRu: "Ваш ответ"
+  enRu: "Your answer"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: examFeedbackCorrect
+  plRu: "Верно"
+  enRu: Correct
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: examFeedbackWrong
+  plRu: "Неверно"
+  enRu: Incorrect
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: examFeedbackPartial
+  plRu: "Частично верно"
+  enRu: "Partly correct"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: examAnswerLocked
+  plRu: "Ответ зафиксирован"
+  enRu: "Answer locked"
+  placeholders: ""
+}

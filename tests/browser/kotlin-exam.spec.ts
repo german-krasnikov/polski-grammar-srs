@@ -9,6 +9,11 @@ async function forceJsCompatibilityFallback(page: Page) {
   });
 }
 
+function assertPracticeRuntime(loaded: string[]) {
+  const expected = process.env.KOTLIN_SPIKE_BRANCH === 'js' ? 'originJsComposeApp.js' : 'originWasmComposeApp.js';
+  expect(loaded.some(url => url.endsWith(`/${expected}`)), `Expected ${expected} in actual browser resources: ${loaded.join(', ')}`).toBe(true);
+}
+
 function colorContrast(foreground: string, background: string) {
   const luminance = (color: string) => {
     const channels = color.match(/[\d.]+/g)!.slice(0, 3).map(Number).map(value => {
@@ -33,11 +38,32 @@ test('DSL grammar PlayTest: Polish input, caret, return and score', async ({ pag
   await runExamPlaytest(page, resolve('dsl/exam-web/grammar.playtest'));
 });
 
+test('DSL practice PlayTest: first wrong grammar choice and frozen report', async ({ page }) => {
+  const loaded: string[] = [];
+  page.on('request', request => loaded.push(request.url()));
+  if (process.env.KOTLIN_SPIKE_BRANCH === 'js') await forceJsCompatibilityFallback(page);
+  await page.clock.install();
+  await runExamPlaytest(page, resolve('dsl/exam-web/practice-feedback-grammar-b1-2017.playtest'));
+  assertPracticeRuntime(loaded);
+});
+
+test('DSL practice PlayTest: wrong reading choice advances within its passage', async ({ page }) => {
+  const loaded: string[] = [];
+  page.on('request', request => loaded.push(request.url()));
+  if (process.env.KOTLIN_SPIKE_BRANCH === 'js') await forceJsCompatibilityFallback(page);
+  await page.clock.install();
+  await runExamPlaytest(page, resolve('dsl/exam-web/practice-feedback-reading-b1-2017.playtest'));
+  assertPracticeRuntime(loaded);
+});
+
 test('DSL catalog PlayTest: six official mapped papers', async ({ page }) => {
   await runExamPlaytest(page, resolve('dsl/exam-web/catalog-inventory.playtest'));
 });
 
 test('DSL grammar PlayTest: B2 2020 conditional word bank', async ({ page }) => {
+  // This legacy scoring scenario intentionally reselects a bank token in one attempt.
+  await page.goto('/#/settings');
+  await page.locator('#settings-exam-immediate-feedback').uncheck();
   await runExamPlaytest(page, resolve('dsl/exam-web/grammar-word-bank-2020.playtest'));
 });
 

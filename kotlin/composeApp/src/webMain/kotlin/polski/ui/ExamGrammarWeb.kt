@@ -1,6 +1,14 @@
 package polski.ui
 
 import kotlinx.browser.document
+import kotlinx.browser.window
+import org.w3c.dom.events.Event
+import polski.exam.PracticeFeedbackState
+import polski.exam.acceptGrammarPracticeInput
+import polski.exam.PracticeInputEvent
+import polski.exam.grammarReviewRows
+import polski.exam.clearPracticeFeedback
+import polski.exam.advancePracticeFocus
 import org.w3c.dom.HTMLButtonElement
 import org.w3c.dom.HTMLElement
 import polski.presentation.UiCopy
@@ -9,12 +17,14 @@ import polski.exam.QuestionType
 import polski.exam.ExamAnswerStatus
 import polski.exam.formatQuarterPoints
 import polski.exam.grammar.*
+import polski.grammar.normalize
 
 internal class ExamGrammarController(
     examId: String, private val onBack: () -> Unit,
     private val externalState: (() -> GrammarExamState)? = null,
     private val onAction: ((GrammarExamAction) -> Unit)? = null,
     private val onTimedFinish: (() -> Unit)? = null,
+    private val immediateFeedbackEnabled: () -> Boolean = { true },
 ) {
     private val tests = examGrammarData.getValue(examId)
     private val instructionsByItemId = tests.flatMap { test ->
@@ -31,11 +41,66 @@ internal class ExamGrammarController(
     private val state get() = externalState?.invoke() ?: ownState
     private var root: HTMLElement? = null
     private var inputRef: HTMLInputElement? = null
+    private var feedback = PracticeFeedbackState()
+    private var autoAdvanceTimer: Int? = null
+    private val onVisibilityChange: (Event) -> Unit = {
+        cancelFeedbackTimer()
+        updateInPlace()
+    }
 
-    fun render(container: HTMLElement) { root = container; redraw() }
-    fun close() { root = null }
+    private fun practiceFeedbackEnabled(): Boolean = onTimedFinish == null && externalState == null && immediateFeedbackEnabled()
+
+    private fun cancelFeedbackTimer() {
+        autoAdvanceTimer?.let(window::clearTimeout)
+        autoAdvanceTimer = null
+        feedback = clearPracticeFeedback(feedback)
+    }
+
+    private fun answerPractice(itemId: String, answer: String, event: PracticeInputEvent = PracticeInputEvent.Choice,
+                               tokenId: String? = null) {
+        if (!practiceFeedbackEnabled()) {
+            if (tokenId != null) selectedBankTokenByItemId[itemId] = tokenId
+            dispatch(GrammarExamAction.Answer(itemId, answer))
+            return
+        }
+        val next = acceptGrammarPracticeInput(feedback, state.test, itemId, answer, enabled = true,
+            existingAnswers = state.answers, event = event, selectedTokenId = tokenId)
+        if (next === feedback) return
+        feedback = next
+        if (tokenId != null) selectedBankTokenByItemId[itemId] = tokenId
+        dispatch(GrammarExamAction.Answer(itemId, answer))
+        updateInPlace()
+        val view = feedback.visible ?: return
+        if (!view.mayAutoAdvance || state.currentIndex >= state.test.items.lastIndex) return
+        val generation = view.generation
+        autoAdvanceTimer = window.setTimeout({
+            autoAdvanceTimer = null
+            if (root != null && feedback.generation == generation &&
+                state.test.items.getOrNull(state.currentIndex)?.itemId == itemId) {
+                feedback = advancePracticeFocus(feedback, state.test.items.map { it.itemId })
+                val targetId = feedback.focusedQuestionId
+                while (state.currentIndex < state.test.items.lastIndex &&
+                    state.test.items[state.currentIndex].itemId != targetId) {
+                    dispatch(GrammarExamAction.Next)
+                }
+            }
+            null
+        }, 2_000)
+    }
+
+    fun render(container: HTMLElement) {
+        root = container
+        document.addEventListener("visibilitychange", onVisibilityChange)
+        redraw()
+    }
+    fun close() {
+        cancelFeedbackTimer()
+        document.removeEventListener("visibilitychange", onVisibilityChange)
+        root = null
+    }
 
     private fun dispatch(action: GrammarExamAction) {
+        if (action == GrammarExamAction.Next || action == GrammarExamAction.Previous || action == GrammarExamAction.Submit) cancelFeedbackTimer()
         val oldIndex = state.currentIndex
         if (onAction != null) onAction.invoke(action) else ownState = reduceGrammarExam(ownState, action)
         if (state.submitted && state.result != null) { root?.let { it.innerHTML = ""; renderResult(it) }; return }
@@ -47,6 +112,26 @@ internal class ExamGrammarController(
     private fun updateInPlace() {
         val c = root ?: return
         val card = grammarExamCardModel(state)
+        c.querySelector(".exam-feedback")?.remove()
+        c.querySelector(".exam-choice-locked")?.remove()
+        val committedChoice = if (practiceFeedbackEnabled()) feedback.committed[card.item.itemId] else null
+        if (committedChoice != null && feedback.visible?.itemId != card.item.itemId) {
+            val note = node("p", "exam-choice-locked", "${UiCopy.ExamAnswerLocked} · ${UiCopy.ExamYourAnswer}: ${committedChoice.rawAnswer}")
+            note.setAttribute("role", "note")
+            c.querySelector(".exam-nav")?.let { c.insertBefore(note, it) }
+        }
+        feedback.visible?.takeIf { it.itemId == card.item.itemId && practiceFeedbackEnabled() }?.let { view ->
+            val label = when (view.evaluation.status) {
+                ExamAnswerStatus.Wrong -> UiCopy.ExamFeedbackWrong
+                ExamAnswerStatus.PendingManual -> UiCopy.ExamManualReview
+                ExamAnswerStatus.ConfirmedPartial -> UiCopy.ExamFeedbackPartial
+                else -> UiCopy.ExamFeedbackCorrect
+            }
+            val notice = node("div", "exam-feedback", "$label · ${UiCopy.ExamYourAnswer}: ${view.chosen} · ${UiCopy.ExamOfficialExamples}: ${view.officialExamples.joinToString(" / ")}")
+            notice.setAttribute("role", "status")
+            notice.setAttribute("aria-live", "polite")
+            c.querySelector(".exam-nav")?.let { c.insertBefore(notice, it) }
+        }
         // Update progress
         c.querySelector(".exam-progress-text")?.textContent = card.progress
         (c.querySelector(".exam-progress-fill") as? HTMLElement)?.style?.setProperty(
@@ -57,11 +142,32 @@ internal class ExamGrammarController(
             for (i in 0 until nodes.length) {
                 val btn = nodes.item(i) as? HTMLButtonElement ?: continue
                 val bankId = btn.getAttribute("data-bank-token-id")
-                val isSelected = if (bankId != null) selectedBankTokenByItemId[card.item.itemId] == bankId
+                val isSelected = if (bankId != null) committedChoice?.selectedTokenId == bankId || selectedBankTokenByItemId[card.item.itemId] == bankId
                     else card.item.options.getOrNull(i)?.let { it == card.currentAnswer } == true
-                btn.className = if (isSelected) "exam-option selected" else "exam-option"
+                val view = feedback.visible?.takeIf { it.itemId == card.item.itemId && practiceFeedbackEnabled() }
+                val option = card.item.options.getOrNull(i)
+                val optionText = if (bankId != null) btn.textContent else option
+                val wrong = view?.evaluation?.status == ExamAnswerStatus.Wrong &&
+                    (if (bankId != null) bankId == committedChoice?.selectedTokenId else optionText == view.chosen)
+                val correct = view != null && view.evaluation.status != ExamAnswerStatus.PendingManual &&
+                    optionText?.let { normalize(it) == normalize(card.item.correctAnswer) } == true && !wrong
+                btn.className = "exam-option" + (if (isSelected) " selected" else "") +
+                    (if (wrong) " feedback-wrong" else if (correct) " feedback-correct" else "") +
+                    (if (committedChoice != null && view == null) " locked" else "")
+                btn.disabled = committedChoice != null
+                if (committedChoice != null) btn.setAttribute("aria-disabled", "true") else btn.removeAttribute("aria-disabled")
             }
         }
+        (c.querySelector("#exam-grammar-input") as? HTMLInputElement)?.let { input ->
+            input.disabled = committedChoice != null
+            if (committedChoice != null) input.setAttribute("aria-disabled", "true") else input.removeAttribute("aria-disabled")
+            input.className = "exam-input" + when (feedback.visible?.takeIf { it.itemId == card.item.itemId }?.evaluation?.status) {
+                ExamAnswerStatus.Wrong -> " feedback-wrong"
+                ExamAnswerStatus.ConfirmedFull, ExamAnswerStatus.ConfirmedPartial -> " feedback-correct"
+                else -> ""
+            }
+        }
+        (c.querySelector(".exam-check-btn") as? HTMLButtonElement)?.let { it.disabled = committedChoice != null }
     }
 
     private fun redraw() {
@@ -105,39 +211,71 @@ internal class ExamGrammarController(
                         textContent = token.text
                         setAttribute("data-bank-token-id", token.tokenId)
                         setAttribute("aria-label", "${token.text}, $occurrence")
-                        addEventListener("click", {
-                            selectedBankTokenByItemId[card.item.itemId] = token.tokenId
-                            dispatch(GrammarExamAction.Answer(card.item.itemId, token.text))
-                        })
+                        val committed = if (practiceFeedbackEnabled()) feedback.committed[card.item.itemId] else null
+                        disabled = committed != null
+                        if (committed != null) setAttribute("aria-disabled", "true")
+                        addEventListener("click", { answerPractice(card.item.itemId, token.text, tokenId = token.tokenId) })
                     })
                 }
             })
         }
         QuestionType.ChooseForm -> {
             require(card.item.options.isNotEmpty()) { "Missing options for ${card.item.itemId}" }
+            val committedChoice = if (practiceFeedbackEnabled()) feedback.committed[card.item.itemId] else null
             c.appendChild(node("div", "exam-options").apply {
                 card.item.options.forEachIndexed { i, opt ->
                     appendChild((document.createElement("button") as HTMLButtonElement).apply {
                         type = "button"
-                        className = if (card.currentAnswer == opt) "exam-option selected" else "exam-option"
+                        className = "exam-option" + (if (card.currentAnswer == opt) " selected" else "") +
+                            (if (committedChoice != null) " locked" else "")
                         textContent = "${'A' + i}. $opt"
-                        addEventListener("click", { dispatch(GrammarExamAction.Answer(card.item.itemId, opt)) })
+                        disabled = committedChoice != null
+                        if (committedChoice != null) setAttribute("aria-disabled", "true")
+                        addEventListener("click", { answerPractice(card.item.itemId, opt) })
                     })
                 }
             })
         }
         QuestionType.FillGap, QuestionType.Transform, QuestionType.WordFormation, QuestionType.QuestionFormation -> {
+            val committed = if (practiceFeedbackEnabled()) feedback.committed[card.item.itemId] else null
             val input = (document.createElement("input") as HTMLInputElement).apply {
                 type = "text"; id = "exam-grammar-input"; className = "exam-input"; placeholder = "Wpisz odpowiedź..."
                 value = card.currentAnswer
-                addEventListener("input", {
-                    dispatch(GrammarExamAction.Answer(card.item.itemId, this.value))
-                })
+                disabled = committed != null
+                if (committed != null) setAttribute("aria-disabled", "true")
+                addEventListener("input", { dispatch(GrammarExamAction.Answer(card.item.itemId, this.value)) })
             }
             inputRef = input
-            c.appendChild(node("div", "exam-input-wrap").apply { appendChild(input) })
+            c.appendChild(node("div", "exam-input-wrap").apply {
+                appendChild(input)
+                if (practiceFeedbackEnabled()) appendChild(navBtn(UiCopy.ExamCheck) {
+                    answerPractice(card.item.itemId, input.value, PracticeInputEvent.Check)
+                }.apply {
+                    className += " exam-check-btn"
+                    disabled = committed != null
+                })
+            })
         }
         else -> error("Unsupported grammar control ${card.item.questionType} for ${card.item.itemId}")
+        }
+        if (practiceFeedbackEnabled() && feedback.visible?.itemId != card.item.itemId) {
+            feedback.committed[card.item.itemId]?.let { committed ->
+                c.appendChild(node("p", "exam-choice-locked", "${UiCopy.ExamAnswerLocked} · ${UiCopy.ExamYourAnswer}: ${committed.rawAnswer}").apply {
+                    setAttribute("role", "note")
+                })
+            }
+        }
+        feedback.visible?.takeIf { it.itemId == card.item.itemId && practiceFeedbackEnabled() }?.let { view ->
+            val label = when (view.evaluation.status) {
+                ExamAnswerStatus.Wrong -> UiCopy.ExamFeedbackWrong
+                ExamAnswerStatus.PendingManual -> UiCopy.ExamManualReview
+                ExamAnswerStatus.ConfirmedPartial -> UiCopy.ExamFeedbackPartial
+                else -> UiCopy.ExamFeedbackCorrect
+            }
+            c.appendChild(node("div", "exam-feedback", "$label · ${UiCopy.ExamYourAnswer}: ${view.chosen} · ${UiCopy.ExamOfficialExamples}: ${view.officialExamples.joinToString(" / ")}").apply {
+                setAttribute("role", "status")
+                setAttribute("aria-live", "polite")
+            })
         }
         c.appendChild(node("div", "exam-nav").apply {
             if (!card.isFirst) appendChild(navBtn("← Назад") { dispatch(GrammarExamAction.Previous) })
@@ -159,10 +297,12 @@ internal class ExamGrammarController(
                 appendChild(node("div", "exam-score-detail", "${UiCopy.ExamPendingPoints}: ${formatQuarterPoints(result.manualPendingQuarterPoints)}"))
             }
         })
+        val reviews = grammarReviewRows(state.test, state.answers)
         c.appendChild(node("div", "exam-review").apply {
             state.test.items.forEachIndexed { i, item ->
-                val answer = state.answers[item.itemId].orEmpty()
-                val evaluation = GrammarExamScorer.gradeInAttempt(state.test, item, state.answers)
+                val review = reviews[i]
+                val answer = review.chosenAnswer.orEmpty()
+                val evaluation = review.evaluation
                 val status = when (evaluation.status) {
                     ExamAnswerStatus.ConfirmedFull -> "correct"
                     ExamAnswerStatus.ConfirmedPartial -> "partial"
@@ -172,10 +312,11 @@ internal class ExamGrammarController(
                 appendChild(node("div", "exam-review-item $status").apply {
                     appendChild(node("span", "exam-review-num", "${i + 1}."))
                     appendChild(node("span", "exam-review-context", item.context.replace("___", if (answer.isNotEmpty()) "[$answer]" else "[—]")))
+                    appendChild(node("span", "exam-review-chosen", "${UiCopy.ExamYourAnswer}: ${answer.ifBlank { UiCopy.NoAnswerEntered }}"))
                     if (evaluation.status == ExamAnswerStatus.ConfirmedPartial) appendChild(node("span", "exam-review-correct", "+${formatQuarterPoints(evaluation.confirmedQuarter)} / ${formatQuarterPoints(item.maximumQuarter)}"))
                     if (evaluation.status == ExamAnswerStatus.PendingManual) appendChild(node("span", "exam-review-manual", UiCopy.ExamManualReview))
                     if (evaluation.status != ExamAnswerStatus.ConfirmedFull) {
-                        val examples = (listOf(item.correctAnswer) + item.scoredVariants.map { it.answer }).joinToString(" / ")
+                        val examples = review.officialExamples.joinToString(" / ")
                         appendChild(node("span", "exam-review-correct", "${UiCopy.ExamOfficialExamples}: $examples"))
                     }
                     if (item.rubricComponents.isNotEmpty()) {
@@ -195,7 +336,7 @@ internal class ExamGrammarController(
             appendChild(navBtn("← К модулям") { onBack() })
             appendChild(node("span", "exam-nav-spacer"))
             appendChild(navBtn(UiCopy.TryAgain, primary = true) {
-                ownState = GrammarExamState(test = state.test); selectedBankTokenByItemId.clear(); inputRef = null; redraw()
+                cancelFeedbackTimer(); feedback = PracticeFeedbackState(); ownState = GrammarExamState(test = state.test); selectedBankTokenByItemId.clear(); inputRef = null; redraw()
             })
         })
     }

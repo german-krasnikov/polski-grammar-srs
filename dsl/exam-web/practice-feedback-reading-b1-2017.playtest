@@ -1,0 +1,14 @@
+TEST "B1 2017 reading wrong answer focuses the next question in the same passage" PROFILE playmode
+  open exam="B1 Certyfikat 2017" module="reading"
+  ASSERT practice.progress == "Задание 1 / 5"
+  pauseClock
+  chooseReading index=1 answer="kioski internetowe są popularne w całym kraju"
+  ASSERT practice.feedback == "Неверно · Ваш ответ: kioski internetowe są popularne w całym kraju · Образцы из ключа: kioski internetowe oferują dostęp do Internetu"
+  ASSERT practice.wrongOption == "kioski internetowe są popularne w całym kraju"
+  ASSERT practice.correctOption == "kioski internetowe oferują dostęp do Internetu"
+  advanceClock millis=1999
+  ASSERT practice.readingSecondFocused == false
+  advanceClock millis=1
+  ASSERT practice.readingSecondFocused == true
+  ASSERT practice.progress == "Задание 1 / 5"
+END

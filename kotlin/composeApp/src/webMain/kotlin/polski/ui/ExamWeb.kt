@@ -29,6 +29,7 @@ private val exams = ExamCatalog.entries.map { ExamEntry(it.routeId, it.displayTi
 internal enum class ExamScreen { List, Modules, Grammar, Reading, Listening, Writing, Timed }
 
 internal class ExamWebController {
+    var immediateFeedbackEnabled: () -> Boolean = { true }
     private var screen = ExamScreen.List
     private var selectedExam: ExamEntry? = null
     private var grammarCtrl: ExamGrammarController? = null
@@ -100,15 +101,16 @@ internal class ExamWebController {
             }
             moduleRow(this, "I. Rozumienie ze słuchu", exam.listeningCount, exam.listeningCount > 0) {
                 close()
-                listeningCtrl = ExamListeningController(exam.id, onBack = { close(); screen = ExamScreen.Modules; redraw() })
+                listeningCtrl = ExamListeningController(exam.id, onBack = { close(); screen = ExamScreen.Modules; redraw() }, immediateFeedbackEnabled = immediateFeedbackEnabled)
                 screen = ExamScreen.Listening; redraw()
             }
             moduleRow(this, "II. Rozumienie tekstów pisanych", exam.readingCount, exam.readingCount > 0) {
-                readingCtrl = ExamReadingController(exam.id, onBack = { screen = ExamScreen.Modules; redraw() })
+                readingCtrl = ExamReadingController(exam.id, onBack = { readingCtrl?.close(); screen = ExamScreen.Modules; redraw() }, immediateFeedbackEnabled = immediateFeedbackEnabled)
                 screen = ExamScreen.Reading; redraw()
             }
             moduleRow(this, "III. Poprawność gramatyczna", exam.grammarCount, exam.grammarCount > 0) {
-                grammarCtrl = ExamGrammarController(exam.id, onBack = { screen = ExamScreen.Modules; redraw() })
+                grammarCtrl?.close()
+                grammarCtrl = ExamGrammarController(exam.id, onBack = { grammarCtrl?.close(); screen = ExamScreen.Modules; redraw() }, immediateFeedbackEnabled = immediateFeedbackEnabled)
                 screen = ExamScreen.Grammar; redraw()
             }
             moduleRow(this, "IV. Pisanie", exam.writingCount, exam.writingCount > 0) {

@@ -15,8 +15,9 @@ class UiCopyRowsTest {
             val pl = UiCopy.all()
             selectCoursePack("en-ru")
             val en = UiCopy.all()
-            assertEquals(221, pl.size)
-            assertEquals(221, en.size)
+            // 220 original keys + six practice keys + one official-writing disclosure key.
+            assertEquals(227, pl.size)
+            assertEquals(227, en.size)
             assertEquals(pl.keys, en.keys)
             assertTrue(pl.values.all(String::isNotBlank))
             assertTrue(en.values.all(String::isNotBlank))

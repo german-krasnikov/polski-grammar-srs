@@ -48,6 +48,8 @@ data class UserPreferencesV2(
      *  field on decode means enabled — see [UserPreferencesCodec]. Off keeps Rive entirely
      *  unloaded (no prewarm, no network requests) and all remaining CSS motion instant. */
     val animationsEnabled: Boolean = true,
+    /** Practice parts reveal a settled answer immediately; timed exam answers stay editable. */
+    val immediateExamFeedbackEnabled: Boolean = true,
 ) {
     /** [target]/[native]/[styleId] as one [CourseSelection], for the picker code in EN-22. */
     val course: CourseSelection get() = CourseSelection(target, native, styleId)

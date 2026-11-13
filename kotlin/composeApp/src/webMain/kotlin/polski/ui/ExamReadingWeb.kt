@@ -1,6 +1,7 @@
 package polski.ui
 
 import kotlinx.browser.document
+import kotlinx.browser.window
 import org.w3c.dom.HTMLButtonElement
 import org.w3c.dom.HTMLElement
 import polski.presentation.UiCopy
@@ -10,12 +11,20 @@ import polski.exam.reading.*
 import polski.exam.ExamAnswerStatus
 import polski.exam.ExamAnswerMode
 import polski.exam.formatQuarterPoints
+import polski.exam.PracticeFeedbackState
+import polski.exam.PracticeInputEvent
+import polski.exam.acceptReadingPracticeInput
+import polski.exam.advanceGroupedPracticeFocus
+import polski.exam.clearPracticeFeedback
+import polski.exam.readingReviewRows
+import org.w3c.dom.events.Event
 
 internal class ExamReadingController(
     examId: String, private val onBack: () -> Unit,
     private val externalState: (() -> ReadingExamState)? = null,
     private val onAction: ((ReadingExamAction) -> Unit)? = null,
     private val onTimedFinish: (() -> Unit)? = null,
+    private val immediateFeedbackEnabled: () -> Boolean = { true },
 ) {
     private val initialExam = examReadingData[examId] ?: ReadingExam(emptyList(), emptyList())
     private var ownState = ReadingExamState(initialExam)
@@ -26,10 +35,73 @@ internal class ExamReadingController(
     private val submitted get() = state.submitted
     private val setInputValues = mutableMapOf<String, MutableList<String>>()
     private fun dispatch(action: ReadingExamAction) { if (onAction != null) onAction.invoke(action) else ownState = reduceReadingExam(ownState, action) }
-    fun close() { root = null }
+    private var feedback = PracticeFeedbackState()
+    private var autoAdvanceTimer: Int? = null
+    private val onVisibilityChange: (Event) -> Unit = {
+        if (browserDocumentHidden()) { cancelFeedbackTimer(); updateCurrentRows() }
+    }
+    private fun practiceEnabled() = externalState == null && onTimedFinish == null && immediateFeedbackEnabled()
+    private fun cancelFeedbackTimer() {
+        autoAdvanceTimer?.let(window::clearTimeout)
+        autoAdvanceTimer = null
+        feedback = clearPracticeFeedback(feedback)
+    }
+    fun close() { cancelFeedbackTimer(); document.removeEventListener("visibilitychange", onVisibilityChange); root = null }
     private var root: HTMLElement? = null
 
-    fun render(container: HTMLElement) { root = container; redraw() }
+    fun render(container: HTMLElement) { root = container; document.removeEventListener("visibilitychange", onVisibilityChange); document.addEventListener("visibilitychange", onVisibilityChange); redraw() }
+
+    private fun onDraftInput(questionId: String) {
+        if (practiceEnabled() && feedback.visible?.itemId != questionId && autoAdvanceTimer != null) {
+            cancelFeedbackTimer()
+            updateCurrentRows()
+        }
+    }
+
+    private fun answerPractice(questionId: String, answer: String, event: PracticeInputEvent = PracticeInputEvent.Choice) {
+        if (!practiceEnabled()) { dispatch(ReadingExamAction.Answer(questionId, answer)); updateQuestionRow(questionId); return }
+        if (feedback.visible?.itemId != questionId && autoAdvanceTimer != null) {
+            cancelFeedbackTimer()
+            updateCurrentRows()
+        }
+        val card = readingExamCardModel(state)
+        val next = acceptReadingPracticeInput(feedback, exam, card.passage.id, questionId, answer,
+            enabled = true, existingAnswers = answers, event = event)
+        if (next === feedback) {
+            if (questionId in feedback.committed || event == PracticeInputEvent.Check) return
+            dispatch(ReadingExamAction.Answer(questionId, answer))
+            updateQuestionRow(questionId)
+            return
+        }
+        feedback = next
+        dispatch(ReadingExamAction.Answer(questionId, answer))
+        updateQuestionRow(questionId)
+        val view = feedback.visible ?: return
+        if (!view.mayAutoAdvance) return
+        val passageId = card.passage.id
+        val passageIndex = currentPassageIdx
+        val generation = view.generation
+        autoAdvanceTimer = window.setTimeout({
+            autoAdvanceTimer = null
+            if (root != null && !submitted && !browserDocumentHidden() && practiceEnabled() &&
+                currentPassageIdx == passageIndex && readingExamCardModel(state).passage.id == passageId &&
+                feedback.generation == generation) {
+                feedback = advanceGroupedPracticeFocus(feedback, card.questions.map { it.id })
+                feedback.focusedQuestionId?.let { focusGroupedQuestion(root, it) }
+                updateCurrentRows()
+            }
+            null
+        }, 2_000)
+    }
+
+    private fun updateQuestionRow(questionId: String) {
+        val question = readingExamCardModel(state).questions.firstOrNull { it.id == questionId } ?: return
+        val row = root?.querySelector(".exam-reading-q[data-question-id='$questionId']") as? HTMLElement ?: return
+        updateGroupedFeedbackRow(row, questionId, answers[questionId].orEmpty(), question.correctAnswer,
+            question.pointsQuarter, feedback, practiceEnabled())
+    }
+
+    private fun updateCurrentRows() { readingExamCardModel(state).questions.forEach { updateQuestionRow(it.id) } }
 
     private fun redraw() {
         val c = root ?: return; c.innerHTML = ""
@@ -62,6 +134,8 @@ internal class ExamReadingController(
         c.appendChild(node("div", "exam-reading-questions").apply {
             questions.forEachIndexed { i, q ->
                 appendChild(node("div", "exam-reading-q").apply {
+                    setAttribute("data-question-id", q.id)
+                    setAttribute("tabindex", "-1")
                     appendChild(node("div", "exam-reading-q-text", "${i + 1}. ${q.questionText}"))
                     if (q.answerMode == ExamAnswerMode.UnorderedSet) {
                         if (q.options.isNotEmpty()) {
@@ -75,8 +149,7 @@ internal class ExamReadingController(
                                         addEventListener("click", {
                                             val choices = answers[q.id].orEmpty().split("|").filter { it.isNotBlank() }.toMutableList()
                                             if (opt in choices) choices.remove(opt) else if (choices.size < q.answerSlotCount) choices.add(opt)
-                                            dispatch(ReadingExamAction.Answer(q.id, choices.joinToString("|")))
-                                            redraw()
+                                            answerPractice(q.id, choices.joinToString("|"))
                                         })
                                     })
                                 }
@@ -89,11 +162,16 @@ internal class ExamReadingController(
                                         type = "text"; className = "exam-input"; placeholder = "Wpisz..."
                                         value = values[index]
                                         addEventListener("input", {
+                                            onDraftInput(q.id)
                                             values[index] = this.value
-                                            dispatch(ReadingExamAction.Answer(q.id, values.filter { it.isNotBlank() }.joinToString("|")))
+                                            if (q.id !in feedback.committed || !practiceEnabled())
+                                                dispatch(ReadingExamAction.Answer(q.id, values.filter { it.isNotBlank() }.joinToString("|")))
                                         })
                                     })
                                 }
+                                if (practiceEnabled()) appendChild(navBtn(UiCopy.ExamCheck) {
+                                    answerPractice(q.id, values.joinToString("|"), PracticeInputEvent.Check)
+                                }.apply { className += " exam-check-btn" })
                             })
                         }
                     } else when (q.type) {
@@ -105,7 +183,7 @@ internal class ExamReadingController(
                                         type = "button"
                                         className = if (answers[q.id] == opt) "exam-option selected" else "exam-option"
                                         textContent = opt
-                                        addEventListener("click", { dispatch(ReadingExamAction.Answer(q.id, opt)); redraw() })
+                                        addEventListener("click", { answerPractice(q.id, opt) })
                                     })
                                 }
                             })
@@ -118,7 +196,7 @@ internal class ExamReadingController(
                                             type = "button"
                                             className = if (answers[q.id] == opt) "exam-option selected" else "exam-option"
                                             textContent = opt
-                                            addEventListener("click", { dispatch(ReadingExamAction.Answer(q.id, opt)); redraw() })
+                                            addEventListener("click", { answerPractice(q.id, opt) })
                                         })
                                     }
                                 })
@@ -127,8 +205,12 @@ internal class ExamReadingController(
                                     appendChild((document.createElement("input") as HTMLInputElement).apply {
                                         type = "text"; className = "exam-input"; placeholder = "Wpisz..."
                                         value = answers[q.id].orEmpty()
-                                        addEventListener("input", { dispatch(ReadingExamAction.Answer(q.id, this.value)) })
+                                        addEventListener("input", { onDraftInput(q.id); if (q.id !in feedback.committed || !practiceEnabled()) dispatch(ReadingExamAction.Answer(q.id, this.value)) })
                                     })
+                                    if (practiceEnabled()) appendChild(navBtn(UiCopy.ExamCheck) {
+                                        val input = querySelector(".exam-input") as? HTMLInputElement
+                                        answerPractice(q.id, input?.value.orEmpty(), PracticeInputEvent.Check)
+                                    }.apply { className += " exam-check-btn" })
                                 })
                             }
                         }
@@ -139,7 +221,7 @@ internal class ExamReadingController(
                                         type = "button"
                                         className = if (answers[q.id] == opt) "exam-option selected" else "exam-option"
                                         textContent = opt
-                                        addEventListener("click", { dispatch(ReadingExamAction.Answer(q.id, opt)); redraw() })
+                                        addEventListener("click", { answerPractice(q.id, opt) })
                                     })
                                 }
                             })
@@ -149,11 +231,12 @@ internal class ExamReadingController(
                 })
             }
         })
+        updateCurrentRows()
         c.appendChild(node("div", "exam-nav").apply {
-            if (currentPassageIdx > 0) appendChild(navBtn("← Назад") { dispatch(ReadingExamAction.Previous); redraw() })
+            if (currentPassageIdx > 0) appendChild(navBtn("← Назад") { cancelFeedbackTimer(); dispatch(ReadingExamAction.Previous); redraw() })
             appendChild(node("span", "exam-nav-spacer"))
-            if (currentPassageIdx < exam.passages.lastIndex) appendChild(navBtn(UiCopy.Next) { dispatch(ReadingExamAction.Next); redraw() })
-            if (currentPassageIdx == exam.passages.lastIndex) appendChild(navBtn(UiCopy.Finish, true) { if (onTimedFinish != null) onTimedFinish.invoke() else { dispatch(ReadingExamAction.Submit); redraw() } })
+            if (currentPassageIdx < exam.passages.lastIndex) appendChild(navBtn(UiCopy.Next) { cancelFeedbackTimer(); dispatch(ReadingExamAction.Next); redraw() })
+            if (currentPassageIdx == exam.passages.lastIndex) appendChild(navBtn(UiCopy.Finish, true) { cancelFeedbackTimer(); if (onTimedFinish != null) onTimedFinish.invoke() else { dispatch(ReadingExamAction.Submit); redraw() } })
         })
     }
 
@@ -169,10 +252,12 @@ internal class ExamReadingController(
             if (!result.isFinal) appendChild(node("div", "exam-score-detail", "${UiCopy.ExamPendingPoints}: ${formatQuarterPoints(result.manualPendingQuarter)}"))
             appendChild(node("div", "exam-score-detail", "${formatQuarterPoints(correct)} / ${formatQuarterPoints(total)}"))
         })
+        val reviews = readingReviewRows(exam, answers)
         c.appendChild(node("div", "exam-review").apply {
-            exam.questions.forEachIndexed { i, q ->
-                val ans = answers[q.id].orEmpty()
-                val evaluation = requireNotNull(result.evaluations[q.id])
+            reviews.forEachIndexed { i, review ->
+                val q = exam.questions.first { it.id == review.itemId }
+                val ans = review.chosenAnswer.orEmpty()
+                val evaluation = review.evaluation
                 val ok = evaluation.status == ExamAnswerStatus.ConfirmedFull
                 val status = when (evaluation.status) {
                     ExamAnswerStatus.ConfirmedFull -> "correct"
@@ -183,16 +268,17 @@ internal class ExamReadingController(
                 appendChild(node("div", "exam-review-item $status").apply {
                     appendChild(node("span", "exam-review-num", "${i + 1}."))
                     appendChild(node("span", "exam-review-context", "${q.questionText}: ${ans.ifEmpty { "[—]" }}"))
+                    appendChild(node("span", "exam-review-chosen", "${UiCopy.ExamYourAnswer}: ${ans.ifBlank { UiCopy.NoAnswerEntered }}"))
                     if (evaluation.status == ExamAnswerStatus.PendingManual) appendChild(node("span", "exam-review-manual", UiCopy.ExamManualReview))
                     if (evaluation.status == ExamAnswerStatus.ConfirmedPartial) appendChild(node("span", "exam-review-correct", "+${formatQuarterPoints(evaluation.confirmedQuarter)} / ${formatQuarterPoints(q.pointsQuarter)}"))
-                    if (!ok) appendChild(node("span", "exam-review-correct", "→ ${(listOf(q.correctAnswer) + q.scoredVariants.map { it.answer }).joinToString(" / ")}"))
+                    if (!ok) appendChild(node("span", "exam-review-correct", "${UiCopy.ExamOfficialExamples}: ${review.officialExamples.joinToString(" / ")}"))
                 })
             }
         })
         c.appendChild(node("div", "exam-nav").apply {
             appendChild(navBtn("← К модулям") { onBack() })
             appendChild(node("span", "exam-nav-spacer"))
-            appendChild(navBtn(UiCopy.TryAgain, true) { ownState = ReadingExamState(exam); setInputValues.clear(); redraw() })
+            appendChild(navBtn(UiCopy.TryAgain, true) { cancelFeedbackTimer(); feedback = PracticeFeedbackState(); ownState = ReadingExamState(exam); setInputValues.clear(); redraw() })
         })
     }
 
