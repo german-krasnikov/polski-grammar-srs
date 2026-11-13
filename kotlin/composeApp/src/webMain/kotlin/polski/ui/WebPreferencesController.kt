@@ -42,12 +42,17 @@ internal class WebPreferencesController(private val repository: WebPreferencesRe
     }
 
     fun setAnswerMode(mode: AnswerMode, store: TrainingStore) {
+        if (mode == AnswerMode.TileBuilder) {
+            if (store.state.value.phase == CardPhase.Question) store.dispatch(AppAction.SetAnswerMode(mode))
+            return
+        }
         if (save(value.copy(answerMode = if (mode == AnswerMode.Oral) PreferredAnswerMode.Oral else PreferredAnswerMode.Typed)) && store.state.value.phase == CardPhase.Question)
             store.dispatch(AppAction.SetAnswerMode(mode))
     }
 
     fun applyPendingAnswerMode(store: TrainingStore) {
         if (store.state.value.phase != CardPhase.Question) return
+        if (store.state.value.answerMode == AnswerMode.TileBuilder) return
         val mode = if (value.answerMode == PreferredAnswerMode.Typed) AnswerMode.Typed else AnswerMode.Oral
         if (store.state.value.answerMode != mode) store.dispatch(AppAction.SetAnswerMode(mode))
     }
