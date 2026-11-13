@@ -25,6 +25,31 @@ private fun IosPreferencesSession.snapshotString(key: String) =
 
 class IosPreferencesSessionTest {
     @Test
+    fun immediateFeedbackDefaultsOnAndExplicitFalseSurvivesExportImportRestart() {
+        val suite = "polski-ios-preferences-exam-feedback-${Random.nextLong()}"
+        val defaults = assertNotNull(NSUserDefaults(suiteName = suite))
+        defaults.removePersistentDomainForName(suite)
+        try {
+            val session = IosPreferencesSession(defaults)
+            assertEquals(true, session.snapshotBool("immediateExamFeedbackEnabled"))
+            assertEquals("Неверное значение", session.set("immediateExamFeedbackEnabled", "maybe"))
+            assertNull(session.set("immediateExamFeedbackEnabled", "false"))
+            assertEquals(false, session.snapshotBool("immediateExamFeedbackEnabled"))
+            val exported = assertNotNull(session.exportJson())
+            assertEquals(false, assertIs<PreferencesDecode.Loaded>(UserPreferencesCodec.decode(exported)).value.immediateExamFeedbackEnabled)
+            val restarted = IosPreferencesSession(defaults)
+            assertEquals(false, restarted.snapshotBool("immediateExamFeedbackEnabled"))
+            assertNull(restarted.importJson("""{"schemaVersion":2}"""))
+            assertEquals(true, restarted.snapshotBool("immediateExamFeedbackEnabled"))
+            val malformed = """{"schemaVersion":3,"explanationMethod":"Logic"}"""
+            defaults.setObject(malformed, forKey = "polski-preferences-v2")
+            assertEquals("RecoveryRequired", IosPreferencesSession(defaults).snapshotString("status"))
+            assertEquals(malformed, defaults.stringForKey("polski-preferences-v2"))
+        } finally {
+            defaults.removePersistentDomainForName(suite)
+        }
+    }
+    @Test
     fun firstLaunchMigratesLegacySituationsThroughExportRestartAndAppearanceEdit() {
         val suite = "polski-ios-preferences-legacy-${Random.nextLong()}"
         val defaults = assertNotNull(NSUserDefaults(suiteName = suite))
