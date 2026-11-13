@@ -52,6 +52,7 @@ internal fun renderTileBuilderSection(
     var currentOpenPicker = openPicker
     var currentOpenError = openError
     val choiceButtons = mutableMapOf<Int, HTMLButtonElement>()
+    val errorButtons = mutableMapOf<Int, HTMLButtonElement>()
 
     fun renderPickerCandidates(choice: TileSegment.Choice) {
         panelInner.textContent = ""
@@ -84,10 +85,13 @@ internal fun renderTileBuilderSection(
         val opening = currentOpenError != position
         currentOpenError = if (opening) position else null
         onToggleError(currentOpenError)
-        dispatch(AppAction.Tile(exerciseId, TileAction.TapError(position)))
-        panelInner.textContent = ""
-        if (opening) builder.errorExplanation?.let { renderCardBlocks(panelInner, it, "card-blocks-tile-error", langCode) }
-        applyCollapsible(panel, expanded = opening, isToggleEvent = true)
+        errorButtons.forEach { (pos, btn) -> btn.setAttribute("aria-expanded", (pos == currentOpenError).toString()) }
+        if (opening) {
+            dispatch(AppAction.Tile(exerciseId, TileAction.TapError(position)))
+        } else {
+            panelInner.textContent = ""
+            applyCollapsible(panel, expanded = false, isToggleEvent = true)
+        }
     }
 
     segments.forEach { segment ->
@@ -114,6 +118,7 @@ internal fun renderTileBuilderSection(
                         val tile = button(placedForm.orEmpty(), extraClass = "tile tile-incorrect") { toggleError(segment.position) }
                         tile.setAttribute("aria-expanded", (currentOpenError == segment.position).toString())
                         tile.setAttribute("aria-label", "$placedForm — неверно, нажми для правила")
+                        errorButtons[segment.position] = tile
                         row.appendChild(tile)
                     }
                 }

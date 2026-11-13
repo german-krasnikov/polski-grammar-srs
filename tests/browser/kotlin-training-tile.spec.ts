@@ -115,7 +115,7 @@ test('SB6-AC5/AC6: a wrong tile is red, its mini-rule toggles open/closed on tap
   const wrongTile = page.locator('.tile-incorrect');
   await expect(wrongTile).toHaveAttribute('aria-label', /неверно, нажми для правила/);
   await wrongTile.click();
-  await expect(page.locator('.rule-focus')).toBeVisible();
+  await expect(page.locator('.card-blocks-tile-error .rule-focus')).toBeVisible();
   await expect(wrongTile).toHaveAttribute('aria-expanded', 'true');
   await wrongTile.click(); // toggles closed
   await expect(wrongTile).toHaveAttribute('aria-expanded', 'false');
