@@ -260,3 +260,4 @@ UI_COPY {key: examYourAnswer text: "Your answer"}
 UI_COPY {key: examFeedbackCorrect text: Correct}
 UI_COPY {key: examFeedbackWrong text: Incorrect}
 UI_COPY {key: examFeedbackPartial text: "Partly correct"}
+UI_COPY {key: examAnswerLocked text: "Answer locked"}

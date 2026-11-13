@@ -114,3 +114,40 @@ test('real hidden tab clears feedback and prevents stale advance', async ({ page
     await emulation.detach();
   }
 });
+
+test('returned committed choice stays visibly and accessibly locked without stale verdict', async ({ page }) => {
+  await page.goto('/#/exam');
+  await page.locator('.exam-card').filter({ hasText: 'B1 Certyfikat 2017' }).getByRole('button', { name: 'Начать' }).click();
+  await page.locator('.exam-module-card').filter({ hasText: 'Poprawność gramatyczna' }).getByRole('button', { name: 'Начать' }).click();
+  await page.locator('.exam-option').filter({ hasText: 'dobry teatr' }).click();
+  await expect(page.getByRole('status')).toContainText('Неверно');
+  await page.getByRole('button', { name: 'Далее →' }).click();
+  await page.getByRole('button', { name: '← Назад' }).click();
+  await expect(page.locator('.exam-progress-text')).toContainText('1 / 50');
+  await expect(page.getByRole('status')).toHaveCount(0);
+  await expect(page.getByRole('note')).toContainText('Ответ зафиксирован');
+  await expect(page.getByRole('note')).toContainText('Ваш ответ: dobry teatr');
+  const options = page.locator('.exam-option');
+  await expect(options).toHaveCount(3);
+  for (const option of await options.all()) {
+    await expect(option).toBeDisabled();
+    await expect(option).toHaveAttribute('aria-disabled', 'true');
+  }
+  await expect(page.locator('.exam-option.selected')).toContainText('dobry teatr');
+  await expect(page.locator('.exam-option.feedback-wrong, .exam-option.feedback-correct')).toHaveCount(0);
+  const correct = await options.filter({ hasText: 'dobrego teatru' }).boundingBox();
+  if (!correct) throw new Error('Correct option has no pointer target');
+  await page.mouse.click(correct.x + correct.width / 2, correct.y + correct.height / 2);
+  await expect(page.locator('.exam-option.selected')).toContainText('dobry teatr');
+  await page.getByRole('button', { name: 'Далее →' }).focus();
+  await page.keyboard.press('Shift+Tab');
+  await expect(page.locator('.exam-option:focus')).toHaveCount(0);
+  await page.waitForTimeout(2_100);
+  await expect(page.locator('.exam-progress-text')).toContainText('1 / 50');
+  await expect(page.getByRole('status')).toHaveCount(0);
+  for (let i = 0; i < 49; i++) await page.getByRole('button', { name: 'Далее →' }).click();
+  await page.getByRole('button', { name: 'Завершить' }).click();
+  await expect(page.locator('.exam-score-big')).toContainText('0%');
+  await expect(page.locator('.exam-review-item').first()).toContainText('Ваш ответ: dobry teatr');
+  await expect(page.locator('.exam-review-item').first()).toHaveClass(/wrong/);
+});

@@ -1035,4 +1035,5 @@ val UI_COPY_ROW_ROWS: List<UiCopyRow> = listOf(
     UiCopyRow(key = "examFeedbackCorrect", text = "Correct"),
     UiCopyRow(key = "examFeedbackWrong", text = "Incorrect"),
     UiCopyRow(key = "examFeedbackPartial", text = "Partly correct"),
+    UiCopyRow(key = "examAnswerLocked", text = "Answer locked"),
 )

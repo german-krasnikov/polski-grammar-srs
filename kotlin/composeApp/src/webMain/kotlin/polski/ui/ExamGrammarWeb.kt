@@ -106,6 +106,14 @@ internal class ExamGrammarController(
         val c = root ?: return
         val card = grammarExamCardModel(state)
         c.querySelector(".exam-feedback")?.remove()
+        c.querySelector(".exam-choice-locked")?.remove()
+        val committedChoice = if (practiceChoiceEnabled() && card.item.questionType == QuestionType.ChooseForm)
+            feedback.committed[card.item.itemId] else null
+        if (committedChoice != null && feedback.visible?.itemId != card.item.itemId) {
+            val note = node("p", "exam-choice-locked", "${UiCopy.ExamAnswerLocked} · ${UiCopy.ExamYourAnswer}: ${committedChoice.rawAnswer}")
+            note.setAttribute("role", "note")
+            c.querySelector(".exam-nav")?.let { c.insertBefore(note, it) }
+        }
         feedback.visible?.takeIf { it.itemId == card.item.itemId && practiceChoiceEnabled() }?.let { view ->
             val label = when (view.evaluation.status) {
                 ExamAnswerStatus.Wrong -> UiCopy.ExamFeedbackWrong
@@ -135,8 +143,10 @@ internal class ExamGrammarController(
                 val wrong = view?.evaluation?.status == ExamAnswerStatus.Wrong && option == view.chosen
                 val correct = view != null && view.evaluation.status != ExamAnswerStatus.PendingManual && option == card.item.correctAnswer && !wrong
                 btn.className = "exam-option" + (if (isSelected) " selected" else "") +
-                    (if (wrong) " feedback-wrong" else if (correct) " feedback-correct" else "")
-                if (view != null) btn.setAttribute("aria-disabled", "true") else btn.removeAttribute("aria-disabled")
+                    (if (wrong) " feedback-wrong" else if (correct) " feedback-correct" else "") +
+                    (if (committedChoice != null && view == null) " locked" else "")
+                btn.disabled = committedChoice != null
+                if (committedChoice != null) btn.setAttribute("aria-disabled", "true") else btn.removeAttribute("aria-disabled")
             }
         }
     }
@@ -192,12 +202,16 @@ internal class ExamGrammarController(
         }
         QuestionType.ChooseForm -> {
             require(card.item.options.isNotEmpty()) { "Missing options for ${card.item.itemId}" }
+            val committedChoice = if (practiceChoiceEnabled()) feedback.committed[card.item.itemId] else null
             c.appendChild(node("div", "exam-options").apply {
                 card.item.options.forEachIndexed { i, opt ->
                     appendChild((document.createElement("button") as HTMLButtonElement).apply {
                         type = "button"
-                        className = if (card.currentAnswer == opt) "exam-option selected" else "exam-option"
+                        className = "exam-option" + (if (card.currentAnswer == opt) " selected" else "") +
+                            (if (committedChoice != null) " locked" else "")
                         textContent = "${'A' + i}. $opt"
+                        disabled = committedChoice != null
+                        if (committedChoice != null) setAttribute("aria-disabled", "true")
                         addEventListener("click", { answerChoice(card.item.itemId, opt) })
                     })
                 }
@@ -215,6 +229,13 @@ internal class ExamGrammarController(
             c.appendChild(node("div", "exam-input-wrap").apply { appendChild(input) })
         }
         else -> error("Unsupported grammar control ${card.item.questionType} for ${card.item.itemId}")
+        }
+        if (practiceChoiceEnabled() && feedback.visible?.itemId != card.item.itemId) {
+            feedback.committed[card.item.itemId]?.let { committed ->
+                c.appendChild(node("p", "exam-choice-locked", "${UiCopy.ExamAnswerLocked} · ${UiCopy.ExamYourAnswer}: ${committed.rawAnswer}").apply {
+                    setAttribute("role", "note")
+                })
+            }
         }
         feedback.visible?.takeIf { it.itemId == card.item.itemId && practiceChoiceEnabled() }?.let { view ->
             val label = when (view.evaluation.status) {

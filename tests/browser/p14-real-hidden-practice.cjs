@@ -46,11 +46,17 @@ async function check(endpoint, baseUrl, screenshotPath) {
   await expect(page.locator('.exam-progress-text')).toContainText('1 / 50');
   await expect(page.getByRole('status')).toHaveCount(0);
   await expect(page.locator('.exam-option.selected')).toContainText('dobry teatr');
+  await expect(page.getByRole('note')).toContainText('Ответ зафиксирован');
+  await expect(page.getByRole('note')).toContainText('Ваш ответ: dobry teatr');
+  const options = page.locator('.exam-option');
+  for (const option of await options.all()) await expect(option).toBeDisabled();
+  await expect(page.locator('.exam-option.feedback-wrong, .exam-option.feedback-correct')).toHaveCount(0);
   await page.screenshot({ path: screenshotPath });
   return {
     progress: await page.locator('.exam-progress-text').textContent(),
     statusCount: await page.getByRole('status').count(),
     selected: await page.locator('.exam-option.selected').textContent(),
+    locked: await page.getByRole('note').textContent(),
   };
 }
 

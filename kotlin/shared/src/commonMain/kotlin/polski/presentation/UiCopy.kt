@@ -48,6 +48,7 @@ object UiCopy {
     val ExamManualReview: String get() = text("examManualReview")
     val ExamImmediateFeedbackSetting: String get() = text("examImmediateFeedbackSetting")
     val ExamYourAnswer: String get() = text("examYourAnswer")
+    val ExamAnswerLocked: String get() = text("examAnswerLocked")
     val ExamFeedbackCorrect: String get() = text("examFeedbackCorrect")
     val ExamFeedbackPartial: String get() = text("examFeedbackPartial")
     val ExamFeedbackWrong: String get() = text("examFeedbackWrong")

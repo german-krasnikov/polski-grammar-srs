@@ -1084,4 +1084,5 @@ val UI_COPY_CASE_ROW_ROWS: List<UiCopyCaseRow> = listOf(
     UiCopyCaseRow(key = "examFeedbackCorrect", plRu = "Верно", enRu = "Correct", placeholders = ""),
     UiCopyCaseRow(key = "examFeedbackWrong", plRu = "Неверно", enRu = "Incorrect", placeholders = ""),
     UiCopyCaseRow(key = "examFeedbackPartial", plRu = "Частично верно", enRu = "Partly correct", placeholders = ""),
+    UiCopyCaseRow(key = "examAnswerLocked", plRu = "Ответ зафиксирован", enRu = "Answer locked", placeholders = ""),
 )
