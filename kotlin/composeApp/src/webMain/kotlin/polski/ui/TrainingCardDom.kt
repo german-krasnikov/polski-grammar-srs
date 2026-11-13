@@ -7,6 +7,7 @@ import org.w3c.dom.HTMLButtonElement
 import org.w3c.dom.HTMLElement
 import org.w3c.dom.HTMLSelectElement
 import org.w3c.dom.HTMLTextAreaElement
+import org.w3c.dom.events.Event
 import org.w3c.dom.events.KeyboardEvent
 import polski.data.activeCoursePackId
 import polski.data.availableCoursePacks
@@ -290,6 +291,19 @@ internal class TrainingCardDom(
             return
         }
         wrap.classList.add("revealing") // gates the CSS stagger fade-in for this render only
+        // The rating row moves while the answer expands. A pointer can press the button at its
+        // old position and release over the card after it has moved, losing the click in WebKit.
+        // Restore pointer hits when the row finishes or is canceled (e.g. Motion changes).
+        // The bound fallback also releases a detached/paused row without depending on CSS events.
+        val fallback = window.setTimeout({ wrap.classList.remove("revealing"); null }, 750)
+        val releaseWhenRatingsFinish: (Event) -> Unit = { event ->
+            if ((event.target as? HTMLElement)?.classList?.contains("ratings") == true) {
+                window.clearTimeout(fallback)
+                wrap.classList.remove("revealing")
+            }
+        }
+        wrap.addEventListener("animationend", releaseWhenRatingsFinish)
+        wrap.addEventListener("animationcancel", releaseWhenRatingsFinish)
         wrap.style.setProperty("transition", "none")
         wrap.style.setProperty("grid-template-rows", "0fr")
         wrap.getBoundingClientRect() // force layout: commits the collapsed frame before animating
