@@ -47,16 +47,53 @@ internal fun flipHalfDurationMs(): Int {
 }
 
 private var riveBridgeRequested = false
+private var riveBridgeRequestSequence = 0
 private var disposeSequence = 0
+private var nextOverlayOwner = 0
+private const val RIVE_BRIDGE_LOAD_TIMEOUT_MS = 3_200
 
-/** Loads `rive-bridge.js` at most once per page, shared by every card host (training,
- *  vocabulary) and by [prewarmRiveIfEnabled] — independent loaders would double the network
- *  request for the same script for no benefit. */
+private fun hideRiveLayers() {
+    for (id in arrayOf("polski-rive-overlay", "polski-rive-chain")) {
+        (document.getElementById(id) as? HTMLElement)?.apply {
+            removeAttribute("data-rive-effect")
+            removeAttribute("data-rive-chain")
+            removeAttribute("data-rive-owner")
+            style.setProperty("display", "none")
+        }
+    }
+}
+
+/** Shares one live `rive-bridge.js` load across training, vocabulary, and prewarm. A failed or
+ *  stalled request clears visible cues and allows a later trigger to retry the bridge. */
+@OptIn(kotlin.js.ExperimentalWasmJsInterop::class)
 private fun ensureRiveBridgeLoaded() {
     if (riveBridgeRequested) return
     riveBridgeRequested = true
+    val request = ++riveBridgeRequestSequence
     val script = document.createElement("script") as HTMLScriptElement
     script.src = "rive/rive-bridge.js"
+    var settled = false
+    val timeout = window.setTimeout({
+        if (!settled && request == riveBridgeRequestSequence) {
+            riveBridgeRequested = false
+            script.remove()
+            hideRiveLayers()
+        }
+        null
+    }, RIVE_BRIDGE_LOAD_TIMEOUT_MS)
+    script.addEventListener("load", {
+        settled = true
+        window.clearTimeout(timeout)
+    })
+    script.addEventListener("error", {
+        settled = true
+        window.clearTimeout(timeout)
+        script.remove()
+        if (request == riveBridgeRequestSequence) {
+            riveBridgeRequested = false
+            hideRiveLayers()
+        }
+    })
     document.head?.appendChild(script)
 }
 
@@ -132,10 +169,28 @@ private fun positionOverBounds(div: HTMLElement, bounds: HTMLElement) {
  */
 @OptIn(kotlin.js.ExperimentalWasmJsInterop::class)
 internal class RiveEffectOverlay {
-    private var ratingLayer: HTMLElement? = null
-    private var chainLayer: HTMLElement? = null
+    private val owner = (++nextOverlayOwner).toString()
+    private var closed = false
     private var ratingSequence = 0
     private var chainSequence = 0
+
+    /** Cancels this host's cues without closing the host, so a later route visit can play again. */
+    fun cancel() {
+        for (id in arrayOf("polski-rive-overlay", "polski-rive-chain")) {
+            val layer = document.getElementById(id) as? HTMLElement ?: continue
+            if (layer.getAttribute("data-rive-owner") != owner) continue
+            layer.removeAttribute("data-rive-effect")
+            layer.removeAttribute("data-rive-chain")
+            layer.removeAttribute("data-rive-owner")
+            layer.style.setProperty("display", "none")
+        }
+    }
+
+    fun close() {
+        if (closed) return
+        closed = true
+        cancel()
+    }
 
     /**
      * Plays the rating effect over [cardBounds], unless motion is reduced, Animations is off, or
@@ -144,22 +199,24 @@ internal class RiveEffectOverlay {
      * RiveCatalog.md §0.1).
      */
     fun trigger(root: HTMLElement, cardBounds: HTMLElement, effect: CardEffect) {
-        if (effect == CardEffect.None || riveGated()) return
-        val div = ratingLayer ?: ensureFixedLayer(root, "polski-rive-overlay", canvasCount = 2).also { ratingLayer = it }
+        if (closed || effect == CardEffect.None || riveGated()) return
+        val div = ensureFixedLayer(root, "polski-rive-overlay", canvasCount = 2)
         positionOverBounds(div, cardBounds)
         ensureRiveBridgeLoaded()
         ratingSequence += 1
         val kind = if (effect == CardEffect.Remembered) "remembered" else "again"
-        div.setAttribute("data-rive-effect", "$kind:$ratingSequence")
+        div.setAttribute("data-rive-owner", owner)
+        div.setAttribute("data-rive-effect", "$kind:$owner:$ratingSequence")
     }
 
     /** Plays the "Tada" celebration once, over [anchor], when a training chain finishes (FC2-10, R3). */
     fun triggerChainComplete(root: HTMLElement, anchor: HTMLElement) {
-        if (riveGated()) return
-        val div = chainLayer ?: ensureFixedLayer(root, "polski-rive-chain", canvasCount = 1).also { chainLayer = it }
+        if (closed || riveGated()) return
+        val div = ensureFixedLayer(root, "polski-rive-chain", canvasCount = 1)
         positionOverBounds(div, anchor)
         ensureRiveBridgeLoaded()
         chainSequence += 1
-        div.setAttribute("data-rive-chain", chainSequence.toString())
+        div.setAttribute("data-rive-owner", owner)
+        div.setAttribute("data-rive-chain", "$owner:$chainSequence")
     }
 }

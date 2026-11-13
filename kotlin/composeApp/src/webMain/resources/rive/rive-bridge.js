@@ -1,44 +1,61 @@
-// Hand-written glue between the Kotlin/JS+Wasm web host and the vendored Rive runtime
-// (rive.js + rive.wasm, from @rive-app/canvas-lite 2.43.1, THIRD_PARTY/credits.md).
-//
-// The host never calls into this file directly (no js()/dynamic Kotlin<->JS bindings, so the
-// same Kotlin code works unmodified on both the JS and Wasm targets). Instead it toggles DOM
-// attributes on two overlay elements; this script watches those attributes and drives the
-// actual Rive API:
-//   #polski-rive-overlay  data-rive-effect="<remembered|again>:<sequence>"   (rating cue)
-//   #polski-rive-chain    data-rive-chain="<sequence>"                       (chain-complete "Tada")
-//   <body>                data-rive-prewarm="1"                              (v3/D: warm the runtime once, idly)
-//   <body>                data-rive-dispose-all="<sequence>"                 (v3/C: Animations turned off — tear down everything now)
-// v4/UX4-06: the flip/reveal-in-progress ring cue (`.card-flip-rings`/`data-rive-rings`/
-// `rings.riv`) has been removed at the user's explicit request (FlipCardRivePlan.md §17.2).
+// DOM bridge shared by the Kotlin/JS and Kotlin/Wasm card hosts. Effect names and assets remain
+// in the generated DSL table; this file owns only browser resources and cue cancellation.
 (function () {
-  // Block A (DSL-MIGRATION-PLAN.md): the effect -> trigger table (RATING_EFFECTS/CHAIN_COMPLETE)
-  // used to be written inline here, duplicating the same table in the Android/iOS/macOS hosts. It
-  // now lives once in dsl/effects/card-effects.core-data and is printed as rive-effects.generated.js
-  // (plain globals, no module system — loaded the same lazy <script> way as rive.js itself below).
   var effectsData = null;
+  var effectsWaiters = [];
+  var effectsLoading = false;
+  var riveWaiters = [];
+  var riveLoading = false;
   var wasmConfigured = false;
-  var currentRating = []; // [{instance, hideTimer}] for the active rating layer's canvases
+  var ratingGeneration = 0;
+  var chainGeneration = 0;
+  var ratingTimer = null;
+  var chainTimer = null;
+  var currentRating = [];
+  var currentChain = null;
+  var lastRatingValue = '';
+  var lastChainValue = '';
 
-  function withEffects(onReady) {
-    if (effectsData) { onReady(effectsData); return; }
+  function gated() {
+    var root = document.documentElement;
+    return document.hidden || root.getAttribute('data-motion') === 'reduced' ||
+      root.getAttribute('data-animations') === 'off' || location.search.indexOf('riveDisabled=1') >= 0;
+  }
+
+  function loadScript(src, finished) {
     var script = document.createElement('script');
-    script.src = 'rive/rive-effects.generated.js';
-    script.onload = function () {
-      effectsData = { RATING_EFFECTS: window.RATING_EFFECTS, CHAIN_COMPLETE: window.CHAIN_COMPLETE };
-      onReady(effectsData);
-    };
-    script.onerror = function () {};
+    script.src = src;
+    script.onload = function () { finished(true); };
+    script.onerror = function () { script.remove(); finished(false); };
     document.head.appendChild(script);
   }
 
-  function withRive(onReady) {
-    if (window.rive && window.rive.Rive) { onReady(window.rive); return; }
-    var script = document.createElement('script');
-    script.src = 'rive/rive.js';
-    script.onload = function () { if (window.rive && window.rive.Rive) onReady(window.rive); };
-    script.onerror = function () {};
-    document.head.appendChild(script);
+  function withEffects(ready) {
+    if (effectsData) { ready(effectsData); return; }
+    effectsWaiters.push(ready);
+    if (effectsLoading) return;
+    effectsLoading = true;
+    loadScript('rive/rive-effects.generated.js', function (loaded) {
+      effectsLoading = false;
+      if (loaded && window.RATING_EFFECTS && window.CHAIN_COMPLETE) {
+        effectsData = { RATING_EFFECTS: window.RATING_EFFECTS, CHAIN_COMPLETE: window.CHAIN_COMPLETE };
+      }
+      var waiters = effectsWaiters.splice(0);
+      waiters.forEach(function (callback) { callback(effectsData); });
+    });
+  }
+
+  function withRive(ready) {
+    if (window.rive && window.rive.Rive) { ready(window.rive); return; }
+    riveWaiters.push(ready);
+    if (riveLoading) return;
+    riveLoading = true;
+    loadScript('rive/rive.js', function (loaded) {
+      riveLoading = false;
+      var runtime = loaded && window.rive && window.rive.Rive ? window.rive : null;
+      var waiters = riveWaiters.splice(0);
+      waiters.forEach(function (callback) { callback(runtime); });
+    });
   }
 
   function configureWasm(rive) {
@@ -50,176 +67,190 @@
   function fireInput(instance, stateMachine, name) {
     try {
       var inputs = instance.stateMachineInputs(stateMachine) || [];
-      for (var i = 0; i < inputs.length; i++) { if (inputs[i].name === name) { inputs[i].fire(); break; } }
+      for (var i = 0; i < inputs.length; i++) {
+        if (inputs[i].name === name) { inputs[i].fire(); break; }
+      }
     } catch (e) {}
   }
 
+  function clean(instance) { try { instance.cleanup(); } catch (e) {} }
   function stopRating() {
-    currentRating.forEach(function (entry) {
-      if (entry.hideTimer) clearTimeout(entry.hideTimer);
-      try { entry.instance.cleanup(); } catch (e) {}
-    });
+    currentRating.forEach(clean);
     currentRating = [];
   }
+  function stopChain() {
+    if (currentChain) clean(currentChain);
+    currentChain = null;
+  }
+  function cancelRating() {
+    ratingGeneration += 1;
+    if (ratingTimer !== null) clearTimeout(ratingTimer);
+    ratingTimer = null;
+    stopRating();
+    var overlay = document.getElementById('polski-rive-overlay');
+    if (overlay) overlay.style.display = 'none';
+  }
+  function cancelChain() {
+    chainGeneration += 1;
+    if (chainTimer !== null) clearTimeout(chainTimer);
+    chainTimer = null;
+    stopChain();
+    var overlay = document.getElementById('polski-rive-chain');
+    if (overlay) overlay.style.display = 'none';
+  }
+  function current(overlay, attribute, value, generation, chain) {
+    return (chain ? chainGeneration : ratingGeneration) === generation &&
+      overlay.isConnected && overlay.getAttribute(attribute) === value && !gated();
+  }
 
-  function playRating(overlay, canvases, kind) {
+  function playRating(overlay, value) {
+    cancelRating();
+    var generation = ratingGeneration;
+    var active = function () { return current(overlay, 'data-rive-effect', value, generation, false); };
+    if (!active()) return;
+    overlay.style.display = 'block';
+    // Arm cleanup before either lazy script starts. Network errors and background throttling
+    // cannot leave a visible layer waiting for an animation-completion event.
+    ratingTimer = setTimeout(function () { if (active()) cancelRating(); }, 2600);
     withEffects(function (effects) {
-      var specs = effects.RATING_EFFECTS[kind];
-      if (!specs) return;
+      if (!active()) return;
+      var specs = effects && effects.RATING_EFFECTS[value.split(':')[0]];
+      if (!specs) { cancelRating(); return; }
       withRive(function (rive) {
+        if (!active()) return;
+        if (!rive) { cancelRating(); return; }
         try {
           configureWasm(rive);
-          stopRating();
           var rect = overlay.getBoundingClientRect();
-          var created = [];
+          var canvases = overlay.querySelectorAll('canvas');
           specs.forEach(function (spec, index) {
             var canvas = canvases[index];
-            if (!canvas) return;
+            if (!canvas || !active()) return;
             canvas.width = Math.max(1, Math.round(rect.width));
             canvas.height = Math.max(1, Math.round(rect.height));
             var instance = new rive.Rive({
-              src: spec.src,
-              canvas: canvas,
-              stateMachines: spec.stateMachine,
-              autoplay: true,
-              onLoad: function () { fireInput(instance, spec.stateMachine, spec.input); },
+              src: spec.src, canvas: canvas, stateMachines: spec.stateMachine, autoplay: true,
+              onLoad: function () { if (active()) fireInput(instance, spec.stateMachine, spec.input); else if (instance) clean(instance); },
             });
-            created.push({ instance: instance });
+            if (active()) currentRating.push(instance); else clean(instance);
           });
-          var hideTimer = setTimeout(function () { overlay.style.display = 'none'; stopRating(); }, 2600);
-          created.forEach(function (entry) { entry.hideTimer = hideTimer; });
-          currentRating = created;
-        } catch (e) {
-          overlay.style.display = 'none';
-        }
+        } catch (e) { cancelRating(); }
       });
     });
   }
 
-  var currentChain = null;
-
-  function playChain(overlay, canvas) {
+  function playChain(overlay, value) {
+    cancelChain();
+    var generation = chainGeneration;
+    var active = function () { return current(overlay, 'data-rive-chain', value, generation, true); };
+    if (!active()) return;
+    overlay.style.display = 'block';
+    chainTimer = setTimeout(function () { if (active()) cancelChain(); }, 3200);
     withEffects(function (effects) {
+      if (!active()) return;
+      if (!effects || !effects.CHAIN_COMPLETE) { cancelChain(); return; }
       withRive(function (rive) {
+        if (!active()) return;
+        if (!rive) { cancelChain(); return; }
         try {
           configureWasm(rive);
-          if (currentChain) { try { currentChain.cleanup(); } catch (e) {} }
+          var canvas = overlay.querySelector('canvas');
+          if (!canvas) { cancelChain(); return; }
           var rect = overlay.getBoundingClientRect();
           canvas.width = Math.max(1, Math.round(rect.width));
           canvas.height = Math.max(1, Math.round(rect.height));
-          currentChain = new rive.Rive({
-            src: effects.CHAIN_COMPLETE.src,
-            canvas: canvas,
-            artboard: effects.CHAIN_COMPLETE.artboard,
-            animations: [effects.CHAIN_COMPLETE.animation],
-            autoplay: true,
+          var spec = effects.CHAIN_COMPLETE;
+          var instance = new rive.Rive({
+            src: spec.src, canvas: canvas, artboard: spec.artboard,
+            animations: [spec.animation], autoplay: true,
+            onLoad: function () { if (!active() && instance) clean(instance); },
           });
-          setTimeout(function () {
-            overlay.style.display = 'none';
-            if (currentChain) { try { currentChain.cleanup(); } catch (e) {} currentChain = null; }
-          }, 3200);
-        } catch (e) {
-          overlay.style.display = 'none';
-        }
+          if (active()) currentChain = instance; else clean(instance);
+        } catch (e) { cancelChain(); }
       });
     });
   }
 
-  // v3/D: warms rive.js + rive.wasm + one throwaway instance well before the first real effect,
-  // so that first trigger never pays the fetch/compile cost on the same frames as its own CSS
-  // motion (the diagnosed cause of first-reveal/first-flip jank). `confetti.riv` is reused (an
-  // asset already fetched for rating) rather than fetching a dedicated warmth-only asset. Runs at
-  // most once per page.
   var prewarmed = false;
   var prewarmScheduled = false;
   function prewarm() {
-    if (prewarmed) return;
-    prewarmed = true;
+    prewarmScheduled = false;
+    if (prewarmed || gated()) return;
     withRive(function (rive) {
+      if (!rive || gated() || prewarmed) return;
       try {
         configureWasm(rive);
+        prewarmed = true;
         var canvas = document.createElement('canvas');
         canvas.width = 1; canvas.height = 1;
         var instance = new rive.Rive({
-          src: 'rive/confetti.riv',
-          canvas: canvas,
-          stateMachines: 'State Machine 1',
-          autoplay: false,
-          onLoad: function () { try { instance.cleanup(); } catch (e) {} },
+          src: 'rive/confetti.riv', canvas: canvas, stateMachines: 'State Machine 1',
+          autoplay: false, onLoad: function () { if (instance) clean(instance); },
         });
-      } catch (e) {}
+      } catch (e) { prewarmed = false; }
     });
   }
   function schedulePrewarm() {
-    if (prewarmScheduled) return;
+    if (prewarmScheduled || prewarmed || gated()) return;
     prewarmScheduled = true;
     if (window.requestIdleCallback) window.requestIdleCallback(prewarm, { timeout: 2000 });
     else setTimeout(prewarm, 200);
   }
 
-  // v3/C: tears down every live Rive instance immediately when Animations is turned off, however
-  // it got started (rating/chain), and hides any overlay left visible mid-effect.
   function disposeAllRive() {
-    stopRating();
-    if (currentChain) { try { currentChain.cleanup(); } catch (e) {} currentChain = null; }
-    ['polski-rive-overlay', 'polski-rive-chain'].forEach(function (id) {
-      var el = document.getElementById(id);
-      if (el) el.style.display = 'none';
-    });
+    cancelRating();
+    cancelChain();
+    [['polski-rive-overlay', 'data-rive-effect'], ['polski-rive-chain', 'data-rive-chain']]
+      .forEach(function (pair) {
+        var overlay = document.getElementById(pair[0]);
+        if (overlay) { overlay.removeAttribute(pair[1]); overlay.removeAttribute('data-rive-owner'); }
+      });
+    lastRatingValue = '';
+    lastChainValue = '';
   }
 
-  function react(el) {
-    if (el.id === 'polski-rive-overlay') {
-      var value = el.getAttribute('data-rive-effect');
-      if (value) playRating(el, el.querySelectorAll('canvas'), value.split(':')[0]);
-    } else if (el.id === 'polski-rive-chain') {
-      if (el.getAttribute('data-rive-chain')) playChain(el, el.querySelector('canvas'));
+  function react(overlay) {
+    if (overlay.id === 'polski-rive-overlay') {
+      var rating = overlay.getAttribute('data-rive-effect') || '';
+      if (rating === lastRatingValue) return;
+      lastRatingValue = rating;
+      if (!rating || gated()) { cancelRating(); overlay.style.display = 'none'; return; }
+      playRating(overlay, rating);
+    } else if (overlay.id === 'polski-rive-chain') {
+      var chain = overlay.getAttribute('data-rive-chain') || '';
+      if (chain === lastChainValue) return;
+      lastChainValue = chain;
+      if (!chain || gated()) { cancelChain(); overlay.style.display = 'none'; return; }
+      playChain(overlay, chain);
     }
   }
 
-  function scan() {
-    ['#polski-rive-overlay[data-rive-effect]', '#polski-rive-chain[data-rive-chain]']
-      .forEach(function (selector) {
-        var nodes = document.querySelectorAll(selector);
-        for (var i = 0; i < nodes.length; i++) react(nodes[i]);
-      });
-    if (document.body && document.body.hasAttribute('data-rive-prewarm')) schedulePrewarm();
-  }
-
-  // A single subtree observer, set up once for the page's lifetime, replaces per-element
-  // observers entirely. This matters for correctness, not just simplicity: the rating/chain
-  // overlays are created lazily by Kotlin *after* this script starts loading — a per-element
-  // observer set up once at load time would never find an overlay that does not exist yet. A
-  // subtree observer has no such ordering requirement: it reacts to the attribute the moment any
-  // current or future matching element gets it, regardless of creation order.
   function attach() {
     if (!document.body || document.body.__polskiRiveObserved) return;
     document.body.__polskiRiveObserved = true;
     new MutationObserver(function (mutations) {
       for (var i = 0; i < mutations.length; i++) {
         var mutation = mutations[i];
-        if (mutation.attributeName === 'data-rive-prewarm') {
-          schedulePrewarm();
-        } else if (mutation.attributeName === 'data-rive-dispose-all') {
-          disposeAllRive();
-        } else {
-          react(mutation.target);
-        }
+        if (mutation.attributeName === 'data-rive-prewarm') schedulePrewarm();
+        else if (mutation.attributeName === 'data-rive-dispose-all') disposeAllRive();
+        else react(mutation.target);
       }
     }).observe(document.body, {
       attributes: true,
       attributeFilter: ['data-rive-effect', 'data-rive-chain', 'data-rive-prewarm', 'data-rive-dispose-all'],
       subtree: true,
     });
-    scan(); // catch anything set before this observer existed
+    new MutationObserver(function () { if (gated()) disposeAllRive(); }).observe(document.documentElement, {
+      attributes: true, attributeFilter: ['data-motion', 'data-animations'],
+    });
+    document.addEventListener('visibilitychange', function () { if (document.hidden) disposeAllRive(); });
+    var rating = document.getElementById('polski-rive-overlay');
+    var chain = document.getElementById('polski-rive-chain');
+    if (rating) react(rating);
+    if (chain) react(chain);
+    if (document.body.hasAttribute('data-rive-prewarm')) schedulePrewarm();
   }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', attach);
-  } else {
-    attach();
-  }
-  // document.body can be briefly unavailable extremely early in <head>-script execution; retry
-  // once shortly after in case attach() ran before it existed.
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', attach);
+  else attach();
   setTimeout(attach, 0);
 })();
