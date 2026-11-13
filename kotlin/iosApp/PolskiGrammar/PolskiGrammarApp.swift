@@ -545,17 +545,17 @@ struct PolskiGrammarApp: App {
             .fileImporter(isPresented: $importingVocabulary, allowedContentTypes: [.json]) { model.importVocabularyFile($0) }
             .fileExporter(isPresented: $exportingVocabulary, document: vocabularyFile,
                           contentType: .json, defaultFilename: "polski-vocabulary-pl-ru") { _ in vocabularyFile = nil }
-            .fileImporter(isPresented: $importingPreferences, allowedContentTypes: [.json]) { model.importPreferencesFile($0) }
-            .fileExporter(isPresented: $exportingPreferences, document: preferencesFile,
-                          contentType: .json, defaultFilename: "polski-preferences-v2") { result in
-                if case let .failure(error) = result { model.notice = error.localizedDescription }
-                preferencesFile = nil
-            }
             .sheet(isPresented: $showingSettings) {
                 NavigationStack {
                     IosSettingsView(model: model, importing: $importingPreferences,
                         exporting: $exportingPreferences, exportFile: $preferencesFile,
                         setExamFeedback: { nativeExam.setImmediateFeedbackEnabled($0) })
+                }
+                .fileImporter(isPresented: $importingPreferences, allowedContentTypes: [.json]) { model.importPreferencesFile($0) }
+                .fileExporter(isPresented: $exportingPreferences, document: preferencesFile,
+                              contentType: .json, defaultFilename: "polski-preferences-v2") { result in
+                    if case let .failure(error) = result { model.notice = error.localizedDescription }
+                    preferencesFile = nil
                 }
             }
             .onChange(of: model.exportEffectId) { _, id in if id != nil { exporting = true } }
