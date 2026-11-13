@@ -70,3 +70,6 @@ P14/P15 остаются открыты до нативной приёмки: we
 
 
 Web P14/P15 объединён в `c2902b7` и принят через P19 integration `2dacf34` (Reviewer APPROVED): shared Desktop 41/41, JS/Wasm по 479/479, Vitest 322/322, Biome/typecheck/production build/media PASS. Реальные JS/Wasm browser, настройки import/OFF/recovery и настоящий hidden прошли; исходные две JS ошибки fixtures и точечные исправления сохранены в [итоговом web evidence](../Plans/Architecture/P19-INTEGRATED-WEB-VERIFICATION.md). Этот web-срез отправляется на Pages отдельно. Native independent gate остаётся открытым, выявленный Settings-sheet timer исправляется; весь P19 пока не завершён.
+
+
+Live follow-up: найденное на375px переполнение нового отчёта исправлено вCSS `be422a4`. Независимые Wasm/JS Chromium по4/4, Wasm Firefox/WebKit8/8 при320/375/1200px, просмотр24PNG и контраст PASS; Reviewer APPROVED `ae0fad5`. [Детали и начальный визуальныйFAIL](../Plans/Architecture/P15-MOBILE-REPORT-LAYOUT-INDEPENDENT.md). Общие JS/Wasm binaries не изменились; новая CSS публикация идёт отдельно, native/P19 ещё открыты.

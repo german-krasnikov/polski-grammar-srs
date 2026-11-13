@@ -187,3 +187,10 @@ Native checkpoint `da80678`: developer bridge 34/34 и целевые iPad Simul
 Pages/Kotlin CI для `b81fcab` PASS. Live Chromium 140 на 375×667 проверил реальный Wasm и реальный JS: default ON, неверный первый ответ/блокировку/переход, frozen wrong/source report и OFF после reload — functional PASS, без page errors. Receipts `p19-integrated-web/live/live-feedback-b81fcab-{wasm,js}.json`. Отдельный просмотр PNG выявил **VISUAL FAIL отчёта на телефоне**: `flex`/`nowrap` сжимают context/выбранный ответ и обрезают эталон справа. Это остаётся P15/P19, исправление CSS и новый no-overflow PlayTest возвращены Developer; функциональный PASS не считается визуальным PASS. Исходные PNG и `live-report-visual-baseline.json` сохранены рядом с receipts.
 
 Native independent RED Settings-sheet и бледных disabled options исправлены в `694a695`/`edaa6b4`, повторные четыре UI cases PASS. Измеренный контраст исправленных вариантов 5,83/6,29 (light), 7,45/10,75 (dark); соседние numeric labels нейтральны. Остальная native приёмка продолжается, общий статус **16/19** не меняется.
+
+
+### Мобильная вёрстка отчёта принята
+
+CSS `be422a4` и test-only independent checkpoint `ae0fad5` устранили live VISUAL FAIL: номер и все текстовые детали теперь образуют переносимые строки; выбранное, source, partial/pending и C1 rubric не сжимаются в узкие колонки и не обрезаются. Developer реальный RED3/3 → GREEN, independent Wasm Chromium4/4, actualJS Chromium4/4, Wasm Firefox/WebKit8/8 с 320/375/1200px;24PNG просмотрены. Light/dark контраст сохранён (минимум5,47), Reviewer APPROVED. JS исходный transient viewport замер сохранён и исправлен observable-settle ожиданием в тесте. [Приёмка и hashes](P15-MOBILE-REPORT-LAYOUT-INDEPENDENT.md). Публикация CSS-среза запускается; P14/P15 native и общийP19 ещё открыты.
+
+Native `3ea8d0e` исправляет найденный independent import presenter RED: preferences file dialogs перенесены внутрь Settings sheet. Перепроверка actual import OFF в живой попытке и после restart идёт; готовность codec не подменяет этот UI gate. Все изменения и текущие ограничения записываются в независимом native receipt.
