@@ -610,7 +610,10 @@ struct PolskiGrammarApp: App {
 
     private var settingsToolbar: some ToolbarContent {
         ToolbarItem(placement: .topBarTrailing) {
-            Button { showingSettings = true } label: { Label(uiText(model.state, "uiSettingsTab", fallback: "Настройки"), systemImage: "gearshape") }
+            Button {
+                nativeExam.cancelFeedback()
+                showingSettings = true
+            } label: { Label(uiText(model.state, "uiSettingsTab", fallback: "Настройки"), systemImage: "gearshape") }
                 .accessibilityIdentifier("openSettings")
         }
     }

@@ -381,7 +381,8 @@ struct NativeExamView: View {
     private func questionControl(_ question: Record, module: String) -> some View {
         let id = question.string("id")
         let practice = model.state.record("part").record("practice")
-        let visible = practice.record("visible")
+        let activeVisible = practice.record("visible")
+        let visible: Record = activeVisible.string("itemId") == id ? activeVisible : [:]
         let committed = question.bool("committed")
         let options = question.strings("options")
         VStack(alignment: .leading, spacing: 9) {
