@@ -206,6 +206,11 @@ test('submitted Reading and Listening reviews name the chosen wrong answer and o
 });
 
 test('preference OFF keeps Reading and Listening answers editable without an early key', async ({ page }) => {
+  if (process.env.KOTLIN_SPIKE_BRANCH === 'js') {
+    await page.addInitScript(() => {
+      Object.defineProperty(WebAssembly, 'validate', { configurable: true, value: () => false });
+    });
+  }
   await page.goto('/#/settings');
   await page.locator('#settings-exam-immediate-feedback').uncheck();
   await openPart(page, 'B1 Certyfikat 2017', 'Rozumienie tekstów pisanych');

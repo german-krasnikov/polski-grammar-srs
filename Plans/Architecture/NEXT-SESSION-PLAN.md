@@ -173,3 +173,27 @@ Main integration: Biome generate/check, typecheck, focused shared tests и JS/Wa
 Web Rive lifecycle `56652d0`/`b748832` принят независимыми Tester/Reviewer и объединён в `d155627`: route/unmount/background/Reduced Motion/OFF отменяют принадлежащие хосту эффекты; поколения и таймеры не дают старым callbacks воскресить слой, сбой/зависание bridge ограничено 3,2 с и допускает повторную попытку. FSRS и grading не менялись. Независимые JS/Wasm по 34/34 в Chromium/Firefox/WebKit (по два документированных timer skips), настоящий hidden в обеих ветках и Animations OFF PASS. [Квитанции, hashes и исходные FAIL](P16-RIVE-LIFECYCLE-INDEPENDENT-VERIFICATION.md).
 
 После merge свежие Main JS/Wasm build с 16 audio, Biome check и typecheck PASS; Chromium по 6/6 и WebKit по 3/3 на каждом target подтвердили Rive и сохранение оценок P18. Завершённая ветка/worktree удалены с сохранением проверенных артефактов. Общий статус **16/19**. Остаются P14/P15 native и P19 объединённая приёмка/публикация. Нативный feedback lifecycle входит в эти оставшиеся gates; web PASS не означает запуск физического iPad.
+
+
+### P19: web/shared принят, native ещё открыт
+
+Объединённый Web P14/P15 в `c2902b7`, итоговые tests/evidence `2dacf34` приняты независимым Reviewer. Biome check, typecheck, Vitest 322/322; shared Desktop 41/41, JS/Wasm по 479/479; свежие JS/Wasm/compat build и 16 audio pins PASS. Selected browser: Wasm Chromium 24/24; JS Chromium initial 22/24 + исправленные два artifact-fixture случая 2/2 PASS; Firefox/WebKit combined по 28/28 на каждом target. Дополнительные import/OFF/legacy/timed/variant/recovery и настоящий hidden на обоих targets PASS. Первоначальные ошибки стенда сохранены в [P19 evidence](P19-INTEGRATED-WEB-VERIFICATION.md). Публикация этого web-среза запускается отдельно от native.
+
+Native checkpoint `da80678`: developer bridge 34/34 и целевые iPad Simulator UI PASS; independent gate открыт. Независимый тест подтвердил ghost advance под Settings sheet (открытие через 0,52с после ответа, до двухсекундного timer); исправление возвращено разработчику. Общий статус остаётся **16/19**, P14/P15/P19 не закрыты.
+
+
+### P19 live visual follow-up
+
+Pages/Kotlin CI для `b81fcab` PASS. Live Chromium 140 на 375×667 проверил реальный Wasm и реальный JS: default ON, неверный первый ответ/блокировку/переход, frozen wrong/source report и OFF после reload — functional PASS, без page errors. Receipts `p19-integrated-web/live/live-feedback-b81fcab-{wasm,js}.json`. Отдельный просмотр PNG выявил **VISUAL FAIL отчёта на телефоне**: `flex`/`nowrap` сжимают context/выбранный ответ и обрезают эталон справа. Это остаётся P15/P19, исправление CSS и новый no-overflow PlayTest возвращены Developer; функциональный PASS не считается визуальным PASS. Исходные PNG и `live-report-visual-baseline.json` сохранены рядом с receipts.
+
+Native independent RED Settings-sheet и бледных disabled options исправлены в `694a695`/`edaa6b4`, повторные четыре UI cases PASS. Измеренный контраст исправленных вариантов 5,83/6,29 (light), 7,45/10,75 (dark); соседние numeric labels нейтральны. Остальная native приёмка продолжается, общий статус **16/19** не меняется.
+
+
+### Мобильная вёрстка отчёта принята
+
+CSS `be422a4` и test-only independent checkpoint `ae0fad5` устранили live VISUAL FAIL: номер и все текстовые детали теперь образуют переносимые строки; выбранное, source, partial/pending и C1 rubric не сжимаются в узкие колонки и не обрезаются. Developer реальный RED3/3 → GREEN, independent Wasm Chromium4/4, actualJS Chromium4/4, Wasm Firefox/WebKit8/8 с 320/375/1200px;24 PNG просмотрены. Light/dark контраст сохранён (минимум5,47), Reviewer APPROVED. JS исходный transient viewport замер сохранён и исправлен observable-settle ожиданием в тесте. [Приёмка и hashes](P15-MOBILE-REPORT-LAYOUT-INDEPENDENT.md). Публикация CSS-среза запускается; P14/P15 native и общий P19 ещё открыты.
+
+Native `3ea8d0e` исправляет найденный independent import presenter RED: preferences file dialogs перенесены внутрь Settings sheet. Перепроверка actual import OFF в живой попытке и после restart идёт; готовность codec не подменяет этот UI gate. Все изменения и текущие ограничения записываются в независимом native receipt.
+
+
+Мобильный CSS опубликован в `893e3d4`: Pages и Kotlin CI PASS; live Chromium 375×667 проверил обе реальные runtime ветки и точный CSS hash. В отчёте все три текстовых поля имеют 263 px без intrinsic overflow внутри 319 px строки; ручной просмотр PNG подтверждает читаемость. Default ON, wrong lock/auto-next/report и persisted OFF также PASS. [Live receipts](P15-MOBILE-REPORT-LAYOUT-INDEPENDENT.md#published-follow-up--coordinator). Native остаётся на финальном actual import/restart gate; общий статус 16/19.

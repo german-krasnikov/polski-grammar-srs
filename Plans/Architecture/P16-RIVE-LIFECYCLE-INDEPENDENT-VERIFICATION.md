@@ -41,3 +41,8 @@ KOTLIN_SPIKE_DIST=kotlin/composeApp/build/dist/<js|wasmJs>/productionExecutable 
 ```
 
 В каждой строке параметры в угловых скобках означают два отдельных запуска: JS с первым портом, Wasm со вторым. Chromium **PASS 6/6 JS, 6/6 Wasm**: P18 numerals и valency сохранили по 6 reviews для стабильного skill, включая reload; P16 route exit, bridge abort/stall, обычный Rive canvas/asset и ровно один review за каждый из двух rating. WebKit **PASS 3/3 JS, 3/3 Wasm**: motion change во время reveal и возврат на карточку сохранили доступный rating hit target и счётчик; P16 stall очищен, возврат дал новый cue и ровно один review за click. Логи `main-integration/{js,wasm}-{chromium,webkit}.log` в том же внешнем evidence root. Все серверы на 4261–4264 закрыты. Ранее выполненный полный P16 suite 34/branch остаётся отдельным доказательством изолированного source; данный узкий gate проверяет совмещённый Main artifact, не притворяясь повтором всего suite. Native/device по-прежнему **NOT RUN**.
+
+
+## Публикация и live-проверка координатора
+
+Pages `43361865174` для `0818e07` PASS. После деплоя настоящий Playwright Chromium 140.0.7339.186 на 1280×800 загрузил Wasm, `rive-bridge.js` и `again.riv` (все HTTP 200), показал canvas эффекта после естественного reveal/rating и немедленно очистил overlay после кнопки «Таблицы и схема». Page errors отсутствуют. Live PASS receipt и screenshot: `../polski-grammar-srs-worktrees/recovery-logs/20261112/exam-learning-quality/p16/live/live-rive-0818e07.{json,png}`. Это проверка опубликованного P16, а не ещё не опубликованного web feedback P14/P15.

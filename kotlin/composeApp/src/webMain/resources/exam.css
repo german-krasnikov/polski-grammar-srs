@@ -24,15 +24,16 @@
 .exam-score-big { font-size: 3rem; font-weight: 700; color: var(--primary, #7eb6ff); }
 .exam-score-detail { font-size: 1.1rem; color: var(--on-surface-variant, #888); margin-top: 4px; }
 .exam-review { margin: 16px 0; display: flex; flex-direction: column; gap: 6px; }
-.exam-review-item { display: flex; align-items: baseline; gap: 8px; padding: 8px 12px; border-radius: 8px; font-size: 0.95rem; }
+.exam-review-item { display: grid; grid-template-columns: 24px minmax(0, 1fr); align-items: start; gap: 6px 8px; padding: 8px 12px; border-radius: 8px; font-size: 0.95rem; }
 .exam-review-item.correct { background: rgba(76, 175, 80, 0.1); }
 .exam-review-item.partial { background: rgba(255, 193, 7, 0.12); }
 .exam-review-item.pending { background: rgba(100, 149, 237, 0.12); }
 .exam-writing-image { display: block; max-width: 100%; height: auto; margin: 12px auto; border-radius: 8px; }
 .exam-review-item.wrong { background: rgba(244, 67, 54, 0.1); }
-.exam-review-num { font-weight: 600; min-width: 24px; }
-.exam-review-context { flex: 1; }
-.exam-review-correct { color: var(--green); font-weight: 600; white-space: nowrap; }
+.exam-review-num { grid-column: 1; grid-row: 1; font-weight: 600; }
+.exam-review-item > :not(.exam-review-num) { grid-column: 2; min-width: 0; overflow-wrap: anywhere; white-space: normal; }
+.exam-review-rubric { box-sizing: border-box; margin: 0; padding-left: 20px; }
+.exam-review-correct { color: var(--green); font-weight: 600; }
 .exam-review-item.partial .exam-review-correct { color: var(--text); }
 
 /* Exam list */
