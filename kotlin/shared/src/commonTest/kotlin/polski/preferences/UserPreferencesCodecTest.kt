@@ -5,8 +5,34 @@ import kotlin.test.assertEquals
 import kotlin.test.assertIs
 import kotlin.test.assertTrue
 import polski.data.packRegistry
+import polski.textwire.PolskiTextCodec
+import polski.textwire.WireNode
+import polski.textwire.DecodeResult
 
 class UserPreferencesCodecTest {
+    @Test fun immediateFeedbackDefaultsOnAndExplicitOffSurvivesBothWireFormats() {
+        assertTrue(UserPreferencesV2().immediateExamFeedbackEnabled)
+        for (version in 1..4) {
+            val raw = if (version == 4) """{"schemaVersion":4,"target":"pl","native":"ru"}""" else """{"schemaVersion":$version}"""
+            assertTrue(assertIs<PreferencesDecode.Loaded>(UserPreferencesCodec.decode(raw)).value.immediateExamFeedbackEnabled)
+        }
+        val off = UserPreferencesV2(immediateExamFeedbackEnabled = false)
+        assertEquals(off, assertIs<PreferencesDecode.Loaded>(UserPreferencesCodec.decode(UserPreferencesCodec.encode(off))).value)
+        val legacy = """{"schemaVersion":3,"immediateExamFeedbackEnabled":false}"""
+        assertEquals(false, assertIs<PreferencesDecode.Loaded>(UserPreferencesCodec.decode(legacy)).value.immediateExamFeedbackEnabled)
+        for (raw in listOf("""{"schemaVersion":3,"immediateExamFeedbackEnabled":"false"}""", """{"schemaVersion":3,"unknown":false}""")) {
+            assertEquals(raw, assertIs<PreferencesDecode.RecoveryRequired>(UserPreferencesCodec.decode(raw)).raw)
+        }
+    }
+
+    @Test fun unknownTextPreferenceFieldPreservesRawForRecovery() {
+        val encoded = UserPreferencesCodec.encode(UserPreferencesV2())
+        val root = assertIs<DecodeResult.Ok>(PolskiTextCodec.decode(encoded.encodeToByteArray())).root
+        val raw = PolskiTextCodec.encode(
+            WireNode.WireMap(root.children + ("future" to WireNode.WireBool(true))), "preferences", 3,
+        ).bytes.decodeToString()
+        assertEquals(raw, assertIs<PreferencesDecode.RecoveryRequired>(UserPreferencesCodec.decode(raw)).raw)
+    }
     @Test fun defaultsAndExplicitChoicesRoundTrip() {
         val chosen = UserPreferencesV2(
             styleId = PreferredStyle.SituationFirst,

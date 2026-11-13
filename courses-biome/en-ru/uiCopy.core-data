@@ -252,3 +252,11 @@ UI_COPY {key: examAudioUnavailable text: "Offline audio is unavailable"}
 UI_COPY {key: examAudioInvalidSegment text: "Audio segment is unavailable"}
 UI_COPY {key: examAudioPlaybackFailed text: "Audio playback failed"}
 UI_COPY {key: examImageUnavailable text: "Image is unavailable"}
+UI_COPY {
+  key: examImmediateFeedbackSetting
+  text: "Show the correct answer immediately"
+}
+UI_COPY {key: examYourAnswer text: "Your answer"}
+UI_COPY {key: examFeedbackCorrect text: Correct}
+UI_COPY {key: examFeedbackWrong text: Incorrect}
+UI_COPY {key: examFeedbackPartial text: "Partly correct"}

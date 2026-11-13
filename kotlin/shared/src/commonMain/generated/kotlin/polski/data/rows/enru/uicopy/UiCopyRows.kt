@@ -1030,4 +1030,9 @@ val UI_COPY_ROW_ROWS: List<UiCopyRow> = listOf(
     UiCopyRow(key = "examAudioInvalidSegment", text = "Audio segment is unavailable"),
     UiCopyRow(key = "examAudioPlaybackFailed", text = "Audio playback failed"),
     UiCopyRow(key = "examImageUnavailable", text = "Image is unavailable"),
+    UiCopyRow(key = "examImmediateFeedbackSetting", text = "Show the correct answer immediately"),
+    UiCopyRow(key = "examYourAnswer", text = "Your answer"),
+    UiCopyRow(key = "examFeedbackCorrect", text = "Correct"),
+    UiCopyRow(key = "examFeedbackWrong", text = "Incorrect"),
+    UiCopyRow(key = "examFeedbackPartial", text = "Partly correct"),
 )

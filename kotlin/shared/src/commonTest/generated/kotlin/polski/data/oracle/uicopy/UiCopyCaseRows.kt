@@ -1074,4 +1074,14 @@ val UI_COPY_CASE_ROW_ROWS: List<UiCopyCaseRow> = listOf(
         enRu = "Image is unavailable",
         placeholders = "",
     ),
+    UiCopyCaseRow(
+        key = "examImmediateFeedbackSetting",
+        plRu = "Показывать правильный ответ сразу",
+        enRu = "Show the correct answer immediately",
+        placeholders = "",
+    ),
+    UiCopyCaseRow(key = "examYourAnswer", plRu = "Ваш ответ", enRu = "Your answer", placeholders = ""),
+    UiCopyCaseRow(key = "examFeedbackCorrect", plRu = "Верно", enRu = "Correct", placeholders = ""),
+    UiCopyCaseRow(key = "examFeedbackWrong", plRu = "Неверно", enRu = "Incorrect", placeholders = ""),
+    UiCopyCaseRow(key = "examFeedbackPartial", plRu = "Частично верно", enRu = "Partly correct", placeholders = ""),
 )

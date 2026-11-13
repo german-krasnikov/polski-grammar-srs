@@ -255,3 +255,11 @@ UI_COPY {
   text: "Не удалось воспроизвести аудиозапись"
 }
 UI_COPY {key: examImageUnavailable text: "Изображение недоступно"}
+UI_COPY {
+  key: examImmediateFeedbackSetting
+  text: "Показывать правильный ответ сразу"
+}
+UI_COPY {key: examYourAnswer text: "Ваш ответ"}
+UI_COPY {key: examFeedbackCorrect text: "Верно"}
+UI_COPY {key: examFeedbackWrong text: "Неверно"}
+UI_COPY {key: examFeedbackPartial text: "Частично верно"}

@@ -29,6 +29,7 @@ private val exams = ExamCatalog.entries.map { ExamEntry(it.routeId, it.displayTi
 internal enum class ExamScreen { List, Modules, Grammar, Reading, Listening, Writing, Timed }
 
 internal class ExamWebController {
+    var immediateFeedbackEnabled: () -> Boolean = { true }
     private var screen = ExamScreen.List
     private var selectedExam: ExamEntry? = null
     private var grammarCtrl: ExamGrammarController? = null
@@ -108,7 +109,8 @@ internal class ExamWebController {
                 screen = ExamScreen.Reading; redraw()
             }
             moduleRow(this, "III. Poprawność gramatyczna", exam.grammarCount, exam.grammarCount > 0) {
-                grammarCtrl = ExamGrammarController(exam.id, onBack = { screen = ExamScreen.Modules; redraw() })
+                grammarCtrl?.close()
+                grammarCtrl = ExamGrammarController(exam.id, onBack = { grammarCtrl?.close(); screen = ExamScreen.Modules; redraw() }, immediateFeedbackEnabled = immediateFeedbackEnabled)
                 screen = ExamScreen.Grammar; redraw()
             }
             moduleRow(this, "IV. Pisanie", exam.writingCount, exam.writingCount > 0) {

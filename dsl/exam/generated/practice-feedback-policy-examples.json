@@ -1,0 +1,17 @@
+{
+  "generated": "from practice-feedback-policy.examples by npm run logic -- examples; do not edit",
+  "provenance": "A standalone practice choice commits only its first complete answer. The existing scorer supplies status. Dependent answers wait, pending manual and final items stay, and only settled answers with another question auto advance.",
+  "disposition": [
+    { "id": "first-wrong", "facts": { "mode": "practice", "preferenceEnabled": true, "event": "choice", "validTarget": true, "answerComplete": true, "alreadyCommitted": false, "dependenciesReady": true, "gradeStatus": "wrong", "hasNextQuestion": true }, "expected": "commit_show_advance" },
+    { "id": "first-correct", "facts": { "mode": "practice", "preferenceEnabled": true, "event": "choice", "validTarget": true, "answerComplete": true, "alreadyCommitted": false, "dependenciesReady": true, "gradeStatus": "confirmed_full", "hasNextQuestion": true }, "expected": "commit_show_advance" },
+    { "id": "final-wrong", "facts": { "mode": "practice", "preferenceEnabled": true, "event": "choice", "validTarget": true, "answerComplete": true, "alreadyCommitted": false, "dependenciesReady": true, "gradeStatus": "wrong", "hasNextQuestion": false }, "expected": "commit_show_stay" },
+    { "id": "pending-manual", "facts": { "mode": "practice", "preferenceEnabled": true, "event": "choice", "validTarget": true, "answerComplete": true, "alreadyCommitted": false, "dependenciesReady": true, "gradeStatus": "pending_manual", "hasNextQuestion": true }, "expected": "commit_show_stay" },
+    { "id": "unavailable", "facts": { "mode": "practice", "preferenceEnabled": true, "event": "choice", "validTarget": true, "answerComplete": true, "alreadyCommitted": false, "dependenciesReady": true, "gradeStatus": "none", "hasNextQuestion": true }, "expected": "commit_deferred" },
+    { "id": "dependent", "facts": { "mode": "practice", "preferenceEnabled": true, "event": "choice", "validTarget": true, "answerComplete": true, "alreadyCommitted": false, "dependenciesReady": false, "gradeStatus": "none", "hasNextQuestion": true }, "expected": "commit_deferred" },
+    { "id": "repeat-choice", "facts": { "mode": "practice", "preferenceEnabled": true, "event": "choice", "validTarget": true, "answerComplete": true, "alreadyCommitted": true, "dependenciesReady": true, "gradeStatus": "wrong", "hasNextQuestion": true }, "expected": "ignore" },
+    { "id": "timed", "facts": { "mode": "timed", "preferenceEnabled": true, "event": "choice", "validTarget": true, "answerComplete": true, "alreadyCommitted": false, "dependenciesReady": true, "gradeStatus": "wrong", "hasNextQuestion": true }, "expected": "editable" },
+    { "id": "preference-off", "facts": { "mode": "practice", "preferenceEnabled": false, "event": "choice", "validTarget": true, "answerComplete": true, "alreadyCommitted": false, "dependenciesReady": true, "gradeStatus": "wrong", "hasNextQuestion": true }, "expected": "editable" },
+    { "id": "unknown-target", "facts": { "mode": "practice", "preferenceEnabled": true, "event": "choice", "validTarget": false, "answerComplete": true, "alreadyCommitted": false, "dependenciesReady": false, "gradeStatus": "none", "hasNextQuestion": true }, "expected": "editable" },
+    { "id": "incomplete", "facts": { "mode": "practice", "preferenceEnabled": true, "event": "choice", "validTarget": true, "answerComplete": false, "alreadyCommitted": false, "dependenciesReady": true, "gradeStatus": "none", "hasNextQuestion": true }, "expected": "editable" }
+  ]
+}

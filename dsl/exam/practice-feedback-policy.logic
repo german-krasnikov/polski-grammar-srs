@@ -1,0 +1,7 @@
+# Only the first complete answer is committed. The existing scorer supplies status.
+DECISION disposition DEFAULT editable
+  repeated AT 10 WHEN practice.mode == practice AND practice.preferenceEnabled AND practice.event == choice AND practice.alreadyCommitted -> ignore
+  deferred AT 20 WHEN practice.mode == practice AND practice.preferenceEnabled AND practice.event == choice AND practice.validTarget AND practice.answerComplete AND NOT practice.alreadyCommitted AND (NOT practice.dependenciesReady OR practice.gradeStatus == none) -> commit_deferred
+  advance AT 30 WHEN practice.mode == practice AND practice.preferenceEnabled AND practice.event == choice AND practice.validTarget AND practice.answerComplete AND NOT practice.alreadyCommitted AND practice.dependenciesReady AND practice.gradeStatus != pending_manual AND practice.gradeStatus != none AND practice.hasNextQuestion -> commit_show_advance
+  stay AT 40 WHEN practice.mode == practice AND practice.preferenceEnabled AND practice.event == choice AND practice.validTarget AND practice.answerComplete AND NOT practice.alreadyCommitted AND practice.dependenciesReady -> commit_show_stay
+END

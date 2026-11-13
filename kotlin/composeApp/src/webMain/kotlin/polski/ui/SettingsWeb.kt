@@ -1,5 +1,7 @@
 package polski.ui
 
+import polski.presentation.UiCopy
+
 import kotlinx.browser.document
 import org.w3c.dom.HTMLAnchorElement
 import org.w3c.dom.HTMLButtonElement
@@ -72,6 +74,9 @@ internal fun renderSettingsWeb(
         preferences.setSwipeRating(it)
     })
     learning.appendChild(settingsNode("p", "muted", "Для грамматики и слов после раскрытия: влево — «Повторить», вправо — «Вспомнил». На компьютере также кнопки и ← →."))
+    learning.appendChild(settingsToggle(UiCopy.ExamImmediateFeedbackSetting, "settings-exam-immediate-feedback", preferences.value.immediateExamFeedbackEnabled) {
+        preferences.setImmediateExamFeedbackEnabled(it)
+    })
 
     val display = settingsNode("section", "card settings-panel")
     display.appendChild(settingsNode("h3", text = "Внешний вид"))

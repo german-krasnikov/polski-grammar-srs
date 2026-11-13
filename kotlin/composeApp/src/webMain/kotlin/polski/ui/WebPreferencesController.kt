@@ -70,6 +70,7 @@ internal class WebPreferencesController(private val repository: WebPreferencesRe
     fun setMotion(motion: Motion) = save(value.copy(motion = motion))
     fun setSwipeRating(enabled: Boolean) = save(value.copy(swipeRatingEnabled = enabled))
     fun setAnimationsEnabled(enabled: Boolean) = save(value.copy(animationsEnabled = enabled))
+    fun setImmediateExamFeedbackEnabled(enabled: Boolean) = save(value.copy(immediateExamFeedbackEnabled = enabled))
 
     fun import(raw: String, store: TrainingStore) {
         when (val result = repository.import(raw)) {

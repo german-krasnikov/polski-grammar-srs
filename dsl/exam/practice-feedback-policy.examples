@@ -1,0 +1,15 @@
+PROVENANCE "A standalone practice choice commits only its first complete answer. The existing scorer supplies status. Dependent answers wait, pending manual and final items stay, and only settled answers with another question auto advance."
+EXAMPLES disposition
+  id | mode | preferenceEnabled | event | validTarget | answerComplete | alreadyCommitted | dependenciesReady | gradeStatus | hasNextQuestion -> expected
+  first-wrong | practice | true | choice | true | true | false | true | wrong | true -> commit_show_advance
+  first-correct | practice | true | choice | true | true | false | true | confirmed_full | true -> commit_show_advance
+  final-wrong | practice | true | choice | true | true | false | true | wrong | false -> commit_show_stay
+  pending-manual | practice | true | choice | true | true | false | true | pending_manual | true -> commit_show_stay
+  unavailable | practice | true | choice | true | true | false | true | none | true -> commit_deferred
+  dependent | practice | true | choice | true | true | false | false | none | true -> commit_deferred
+  repeat-choice | practice | true | choice | true | true | true | true | wrong | true -> ignore
+  timed | timed | true | choice | true | true | false | true | wrong | true -> editable
+  preference-off | practice | false | choice | true | true | false | true | wrong | true -> editable
+  unknown-target | practice | true | choice | false | true | false | false | none | true -> editable
+  incomplete | practice | true | choice | true | false | false | true | none | true -> editable
+END

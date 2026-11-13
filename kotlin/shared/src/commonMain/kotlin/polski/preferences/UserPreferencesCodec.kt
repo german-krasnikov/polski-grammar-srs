@@ -23,7 +23,7 @@ object UserPreferencesCodec {
     private val json = Json { isLenient = false }
     private val fieldsV1 = setOf("schemaVersion", "coursePair", "explanationMethod", "answerMode", "appearance", "motion", "swipeRatingEnabled", "reminder")
     private val fieldsV2 = fieldsV1 + "glassTintPercent" + "animationsEnabled"
-    private val fieldsV3 = fieldsV2 - "explanationMethod" + "styleId"
+    private val fieldsV3 = fieldsV2 - "explanationMethod" + "styleId" + "immediateExamFeedbackEnabled"
     /** EN-08/EN-22: not yet written by [encode] (every host still exports v3), but decoded
      * tolerantly so a `target`/`native`-shaped export (a future v4 writer, or another KMP host
      * that already writes v4) is never treated as garbage. */
@@ -102,7 +102,9 @@ object UserPreferencesCodec {
         // Missing on decode (v1, or a v2 document saved before this field existed) means enabled.
         val animations = if (version == 1) defaults.animationsEnabled
             else root.optionalBoolean("animationsEnabled", defaults.animationsEnabled) ?: return invalid(raw, "Invalid animationsEnabled")
-        return PreferencesDecode.Loaded(UserPreferencesV2(3, target, native, style, answer, appearance, motion, swipe, reminder, tint, animations))
+        val immediateFeedback = if (version <= 2) defaults.immediateExamFeedbackEnabled
+            else root.optionalBoolean("immediateExamFeedbackEnabled", defaults.immediateExamFeedbackEnabled) ?: return invalid(raw, "Invalid immediateExamFeedbackEnabled")
+        return PreferencesDecode.Loaded(UserPreferencesV2(3, target, native, style, answer, appearance, motion, swipe, reminder, tint, animations, immediateFeedback))
     }
 
     /** NJ03 C6: text wire encoder. */
@@ -111,6 +113,7 @@ object UserPreferencesCodec {
         if (result !is polski.textwire.DecodeResult.Ok) return invalid(raw, "Invalid POLSKI-TEXT")
         if (result.kind != "preferences") return invalid(raw, "Wrong domain: ${result.kind}")
         val root = result.root
+        if (root.children.any { it.first !in fieldsV3 }) return invalid(raw, "Unknown preference field")
         val defaults = UserPreferencesV2()
         val coursePair = (root.get("coursePair") as? WireNode.WireString)?.value ?: return invalid(raw, "Missing coursePair")
         val parts = coursePair.split("-", limit = 2)
@@ -128,6 +131,9 @@ object UserPreferencesCodec {
         val tint = long("glassTintPercent", defaults.glassTintPercent.toLong()).toInt()
         if (tint !in 0..100) return invalid(raw, "Invalid glassTintPercent")
         val animations = bool("animationsEnabled", defaults.animationsEnabled)
+        val immediateFeedbackNode = root.get("immediateExamFeedbackEnabled")
+        if (immediateFeedbackNode != null && immediateFeedbackNode !is WireNode.WireBool) return invalid(raw, "Invalid immediateExamFeedbackEnabled")
+        val immediateFeedback = immediateFeedbackNode?.value ?: defaults.immediateExamFeedbackEnabled
         val reminderNode = root.get("reminder") as? WireNode.WireMap
         val reminder = if (reminderNode != null) {
             val enabled = (reminderNode.get("enabled") as? WireNode.WireBool)?.value ?: defaults.reminder.enabled
@@ -138,7 +144,7 @@ object UserPreferencesCodec {
             ReminderPreferences(enabled, localTime, days, qStart, qEnd)
         } else defaults.reminder
         if (!validReminder(reminder)) return invalid(raw, "Invalid reminder")
-        return PreferencesDecode.Loaded(UserPreferencesV2(3, target, native, style, answer, appearance, motion, swipe, reminder, tint, animations))
+        return PreferencesDecode.Loaded(UserPreferencesV2(3, target, native, style, answer, appearance, motion, swipe, reminder, tint, animations, immediateFeedback))
     }
 
     fun encodeText(value: UserPreferencesV2): ByteArray {
@@ -161,6 +167,7 @@ object UserPreferencesCodec {
             "swipeRatingEnabled" to WireNode.WireBool(value.swipeRatingEnabled),
             "glassTintPercent" to WireNode.WireI64(value.glassTintPercent.toLong()),
             "animationsEnabled" to WireNode.WireBool(value.animationsEnabled),
+            "immediateExamFeedbackEnabled" to WireNode.WireBool(value.immediateExamFeedbackEnabled),
             "reminder" to reminderNode,
         ))
         return PolskiTextCodec.encode(root, "preferences", 3).bytes
