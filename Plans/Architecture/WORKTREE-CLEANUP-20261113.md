@@ -13,3 +13,10 @@ git fetch ../polski-grammar-srs-worktrees/recovery-logs/20261113/worktree-cleanu
 ```
 
 Завершённые ветки больше не нужны для исполнения текущего плана. Активные задачи остаются изолированы; новые рабочие деревья создаются только для исполняемой задачи и удаляются после принятия/объединения. Исторические evidence могут указывать старые исходные пути: соответствие архивам записано в manifest, а результаты сохраняют свои исходные даты.
+
+
+## Завершённый P18
+
+После независимой приёмки P18 удалены worktree `p18-course-expansion` и локальная/remote ветка `work/p18-course-expansion-20261113`. HEAD `d88cc86` полностью входит в `main` через `f8bb4fb`; дерево перед удалением чистое. Remote удалён с lease на `23bc7311cd405449d196954a9a928539db059621`. `git branch -d` сначала отказал из-за отставшего upstream; после удаления remote и снятия upstream обычный `-d` прошёл, принудительное удаление не использовалось.
+
+Проверенные JS/Wasm distributions сохранены в `../polski-grammar-srs-worktrees/snapshots/p18-accepted-20261113/`; 22 файла JS/Wasm/CSS/index имеют SHA-256 в `worktree-cleanup/p18-retirement-manifest.json`. Нативные app, source receipts, `.xcresult`, Main app/data backup остаются в `recovery-logs/20261113/course-expansion/`. Активны только P14/native feedback и P16/Rive; их незавершённая работа не удалялась.
