@@ -7,7 +7,7 @@ import polski.data.skillById
 import polski.progress.Progress
 import polski.srs.SchedulePreview
 
-enum class TrainingMode { Chain, Schedule, Focused }
+enum class TrainingMode { Chain, Schedule, Focused, Daily }
 enum class AppTab { Training, Vocabulary, Matrix, Progress }
 // SB-4 blueprint §5: TileBuilder is additive — every existing `state.answerMode == AnswerMode.Typed`/
 // `== AnswerMode.Oral` check in TrainingCardModel.kt/TrainingStore.kt (no exhaustive `when` over
@@ -15,7 +15,7 @@ enum class AppTab { Training, Vocabulary, Matrix, Progress }
 // "Show answer" label) until SB-6+ wires its own UI — a deliberate, documented fallback, not an
 // oversight (blueprint AC4.3).
 enum class AnswerMode { Oral, Typed, TileBuilder }
-enum class CardPhase { Question, Revealed, ChainComplete, NoDue }
+enum class CardPhase { Question, Revealed, ChainComplete, NoDue, DailyComplete }
 // `Lifehacks` (EnRuPackPlan.md §4.3): a Matrix sub-section like the other four, so it shares the
 // reset-on-tab-entry/highlight/deep-link machinery below.
 enum class MatrixSection { Map, Cases, Verbs, Pronouns, Lifehacks }
@@ -69,6 +69,9 @@ data class AppUiState(
      *  doesn't support tiles ([tileBuilderStateFor]'s own documented fallback) — the UI treats
      *  `tileBuilder != null` as its single "is TileBuilder available" check. */
     val tileBuilder: TileBuilderState? = null,
+    /** M3 blueprint: session-only, `null` outside [TrainingMode.Daily] — same documented-fallback
+     *  pattern as [tileBuilder]. */
+    val daily: DailySessionState? = null,
 ) {
     val exerciseId: String? get() = exercise?.id
     val caseReferenceAvailable: Boolean get() = exercise?.let { skillById(it.primarySkill).caseReferenceAvailable } ?: true

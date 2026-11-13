@@ -37,6 +37,7 @@ import polski.progress.ReviewReducer
 import polski.progress.ReviewResult
 import polski.progress.SaveResult
 import polski.progress.SkillQueue
+import polski.srs.Rating
 import polski.srs.Scheduler
 import polski.training.PlExerciseEngine
 import polski.training.evaluate
@@ -200,6 +201,8 @@ class TrainingStore(
             is AppAction.StartChain -> startChain(action.seedIndex ?: s.seedIndex)
             is AppAction.SelectChainSeed -> startChain(action.index)
             AppAction.StartSchedule -> startSchedule()
+            AppAction.StartDaily -> startDaily()
+            AppAction.ContinueDaily -> continueDaily()
             is AppAction.ChooseSkill -> chooseSkill(action)
             is AppAction.SetAnswerMode -> mutate { it.copy(answerMode = action.mode) }
             is AppAction.SetStyle -> mutate { it.copy(styleId = action.styleId) }
@@ -216,7 +219,8 @@ class TrainingStore(
 
     private fun accepts(action: AppAction, s: AppUiState): Boolean = when (action) {
         is AppAction.StartChain, is AppAction.SelectChainSeed,
-        AppAction.StartSchedule, is AppAction.ChooseSkill -> s.loadStatus == LoadStatus.Ready
+        AppAction.StartSchedule, AppAction.StartDaily, is AppAction.ChooseSkill -> s.loadStatus == LoadStatus.Ready
+        AppAction.ContinueDaily -> s.loadStatus == LoadStatus.Ready && s.mode == TrainingMode.Daily && s.phase == CardPhase.DailyComplete
         AppAction.RequestReset -> s.loadStatus == LoadStatus.Ready && s.pendingEffects.none { it is UiEffect.ConfirmReset }
         is AppAction.SetAnswerMode, is AppAction.EditAnswer -> s.phase == CardPhase.Question
         AppAction.ContinueIntroduction -> s.phase == CardPhase.Question && s.introPending
@@ -299,7 +303,7 @@ class TrainingStore(
             chain = chain, chainIndex = 0, focusedSkillId = null, showSkillPicker = false,
             exercise = chain.first(), phase = CardPhase.Question, draft = "", frozenAnswer = null,
             evaluation = null, tileBuilder = deriveTileBuilder(chain.first()),
-            introPending = needsIntroduction(chain.first(), document), error = null,
+            introPending = needsIntroduction(chain.first(), document), error = null, daily = null,
         )
         addFocus(chain.first())
         refreshTime()
@@ -314,9 +318,85 @@ class TrainingStore(
             showSkillPicker = false, exercise = exercise,
             phase = if (exercise == null) CardPhase.NoDue else CardPhase.Question,
             draft = "", frozenAnswer = null, evaluation = null, tileBuilder = deriveTileBuilder(exercise),
-            introPending = needsIntroduction(exercise, document), error = null,
+            introPending = needsIntroduction(exercise, document), error = null, daily = null,
         ), document ?: return, captured)
         if (exercise != null) addFocus(exercise)
+    }
+
+    /** M3 blueprint: picks the first [DailySessionPlanner] step for a fresh session and generates
+     *  its exercise exactly like [startSchedule] does for its own card — same null-handling 1:1
+     *  (no due/eligible step at all → [CardPhase.NoDue], the fail-soft "nothing to do" case). */
+    private fun startDaily() {
+        val captured = time.capture()
+        val progress = document?.progress ?: return
+        val step = DailySessionPlanner.nextStep(progress, scheduler, skillQueue, skills, captured.at, completed = emptyList())
+        val exercise = step?.let { exerciseEngine.generateForSkill(it.skillId) }
+        val tileBuilder = deriveTileBuilder(exercise)
+        mutableState.value = project(state.value.copy(
+            tab = AppTab.Training, mode = TrainingMode.Daily, focusedSkillId = null,
+            showSkillPicker = false, exercise = exercise,
+            phase = if (exercise == null) CardPhase.NoDue else CardPhase.Question,
+            draft = "", frozenAnswer = null, evaluation = null, tileBuilder = tileBuilder,
+            answerMode = dailyAnswerMode(step, tileBuilder, state.value.answerMode),
+            introPending = needsIntroduction(exercise, document), error = null,
+            daily = DailySessionState(currentStep = step),
+        ), document ?: return, captured)
+        if (exercise != null) addFocus(exercise)
+    }
+
+    /** M3 blueprint: only reachable from [CardPhase.DailyComplete] ([accepts] guards it) — the
+     *  learner's voluntary "ещё одно задание"; marks [DailySessionState.extended] so a later
+     *  [advanceDaily] never re-triggers [CardPhase.DailyComplete] a second time for this session. */
+    private fun continueDaily() {
+        val current = state.value
+        val daily = current.daily ?: return
+        val captured = time.capture()
+        val progress = document?.progress ?: return
+        // Deviates from the blueprint's literal "from daily.history.map { it.kind }": once
+        // CardPhase.DailyComplete is reached, every DailyMix cap is necessarily already exhausted
+        // (planned == sum of caps, each kind bounded by its own cap — reaching the total forces
+        // every kind to its cap exactly), so replaying the full history here would make
+        // ContinueDaily always return null. A fresh per-kind budget for the bonus round keeps the
+        // same Review > New > Practice priority without that dead end (AI/decisions.md).
+        val step = DailySessionPlanner.nextStep(progress, scheduler, skillQueue, skills, captured.at, completed = emptyList())
+        val exercise = step?.let { exerciseEngine.generateForSkill(it.skillId) }
+        val tileBuilder = deriveTileBuilder(exercise)
+        mutableState.value = project(current.copy(
+            exercise = exercise, phase = if (exercise == null) CardPhase.NoDue else CardPhase.Question,
+            draft = "", frozenAnswer = null, evaluation = null, tileBuilder = tileBuilder,
+            answerMode = dailyAnswerMode(step, tileBuilder, current.answerMode),
+            introPending = needsIntroduction(exercise, document),
+            daily = daily.copy(extended = true, currentStep = step),
+        ), document ?: return, captured)
+        if (exercise != null) addFocus(exercise)
+    }
+
+    /** M3 blueprint: forces [AnswerMode.TileBuilder] for the one Practice step when the chosen
+     *  skill's exercise actually supports tiles; every other step keeps the learner's own
+     *  [fallback] untouched — a narrow, documented scaffolding exception, not a precedent for
+     *  overriding user choice elsewhere. */
+    private fun dailyAnswerMode(step: DailyStep?, tileBuilder: TileBuilderState?, fallback: AnswerMode): AnswerMode =
+        if (step?.kind == DailyStepKind.Practice && tileBuilder != null) AnswerMode.TileBuilder else fallback
+
+    /** M3 blueprint: called from [rate]'s own `when (current.mode)` branch, after
+     *  [ReviewReducer.recordReview] already ran. Appends this step's [classifyDailyOutcome] to
+     *  [DailySessionState.history]; once the planned volume is reached (and this session was never
+     *  extended), returns `null` with [DailySessionState.currentStep] cleared so [rate] can route
+     *  to [CardPhase.DailyComplete] — otherwise asks the planner for the next step. */
+    private fun advanceDaily(current: AppUiState, rating: Rating, newDocument: ProgressDocument, at: kotlin.time.Instant): Pair<Exercise?, DailySessionState> {
+        val daily = current.daily ?: return null to DailySessionState()
+        val step = daily.currentStep
+        val history = step?.let { daily.history + DailyStepOutcome(it.kind, it.skillId, classifyDailyOutcome(current, rating)) } ?: daily.history
+        if (history.size >= daily.planned && !daily.extended) {
+            return null to daily.copy(history = history, currentStep = null)
+        }
+        // Same fresh-budget reasoning as continueDaily's own deviation, for a session already past
+        // its planned volume (extended == true): the full history would already have every cap
+        // saturated, so a bonus round keeps flowing only with a fresh per-kind budget each step.
+        val completedForPlanner = if (daily.extended) emptyList() else history.map { it.kind }
+        val nextStep = DailySessionPlanner.nextStep(newDocument.progress, scheduler, skillQueue, skills, at, completed = completedForPlanner)
+        val nextExercise = nextStep?.let { exerciseEngine.generateForSkill(it.skillId) }
+        return nextExercise to daily.copy(history = history, currentStep = nextStep)
     }
 
     private fun chooseSkill(action: AppAction.ChooseSkill) {
@@ -341,7 +421,7 @@ class TrainingStore(
             tab = AppTab.Training, mode = TrainingMode.Focused, focusedSkillId = action.skillId,
             showSkillPicker = false, exercise = exercise, phase = CardPhase.Question,
             draft = "", frozenAnswer = null, evaluation = null, tileBuilder = deriveTileBuilder(exercise),
-            introPending = needsIntroduction(exercise, document), error = null,
+            introPending = needsIntroduction(exercise, document), error = null, daily = null,
         )
         addFocus(exercise)
         refreshTime()
@@ -415,22 +495,34 @@ class TrainingStore(
         }
         document = result.document
         // Replace the card synchronously. The old ID can never be rated twice, even while saving.
+        var nextDaily: DailySessionState? = null
         val nextExercise = when (current.mode) {
             TrainingMode.Chain -> current.chain.getOrNull(current.chainIndex + 1)
             TrainingMode.Focused -> exerciseEngine.generateForSkill(current.focusedSkillId ?: exercise.primarySkill)
             TrainingMode.Schedule ->
                 skillQueue.next(result.document.progress.cards, scheduler, captured.at)?.let { exerciseEngine.generateForSkill(it.skillId) }
+            TrainingMode.Daily -> {
+                val (ex, daily) = advanceDaily(current, action.rating, result.document, captured.at)
+                nextDaily = daily
+                ex
+            }
         }
         val phase = when {
             current.mode == TrainingMode.Chain && nextExercise == null -> CardPhase.ChainComplete
             current.mode == TrainingMode.Schedule && nextExercise == null -> CardPhase.NoDue
+            current.mode == TrainingMode.Daily && nextExercise == null && nextDaily?.currentStep == null &&
+                (nextDaily?.history?.size ?: 0) >= (nextDaily?.planned ?: 0) && nextDaily?.extended == false -> CardPhase.DailyComplete
+            current.mode == TrainingMode.Daily && nextExercise == null -> CardPhase.NoDue
             else -> CardPhase.Question
         }
+        val tileBuilder = deriveTileBuilder(nextExercise)
         val updated = current.copy(
             chainIndex = if (current.mode == TrainingMode.Chain && nextExercise != null) current.chainIndex + 1 else current.chainIndex,
             exercise = nextExercise, phase = phase, draft = "", frozenAnswer = null, evaluation = null,
-            tileBuilder = deriveTileBuilder(nextExercise),
+            tileBuilder = tileBuilder,
+            answerMode = if (current.mode == TrainingMode.Daily) dailyAnswerMode(nextDaily?.currentStep, tileBuilder, current.answerMode) else current.answerMode,
             introPending = needsIntroduction(nextExercise, result.document),
+            daily = if (current.mode == TrainingMode.Daily) nextDaily else current.daily,
         )
         mutableState.value = project(updated, result.document, captured)
         queueSave(result.document)
@@ -492,7 +584,7 @@ class TrainingStore(
             exercise = chain.first(), phase = CardPhase.Question, draft = "", frozenAnswer = null,
             evaluation = null, tileBuilder = deriveTileBuilder(chain.first()),
             introPending = needsIntroduction(chain.first(), fresh),
-            showSkillPicker = false, error = null,
+            showSkillPicker = false, error = null, daily = null,
         )
         mutableState.value = project(next, fresh, captured)
         val revision = state.value.revision + 1

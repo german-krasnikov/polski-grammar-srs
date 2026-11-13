@@ -671,6 +671,111 @@ class TrainingStoreTest {
         store.close()
     }
 
+    // M3 blueprint (DAILY-SESSION-BLUEPRINT.md §Verification): TrainingMode.Daily transitions.
+    // `reviews=1` for 4 already-known, already-due skills (none sharing `case.acc.f`'s New slot or
+    // `verb.present`'s) fills the default mix's Review cap (4) without the single-skill "due
+    // chases its own review" deadlock a totally fresh document would hit after only 2 steps (its
+    // own review always pushes a card's due forward past "now", so one just-reviewed skill can
+    // never immediately re-qualify for the very next step).
+    private val dailyReviewSeedIds = listOf("case.acc.n", "case.inst", "case.dat", "sentence.question")
+
+    /** M3 blueprint: `dailyAnswerMode` forces [AnswerMode.TileBuilder] for a Practice step whenever
+     *  the chosen skill's exercise supports tiles — now most constructed skills (commit
+     *  a67225e), so a Daily test can't just [revealAfterIntroduction]; it must fill every
+     *  [TileSegment.Choice] and [TileAction.Check] instead, same as the TileBuilder tests above. */
+    private fun answerDailyStep(store: TrainingStore, rating: Rating) {
+        val id = assertNotNull(store.state.value.exerciseId)
+        if (store.state.value.introPending) store.dispatch(AppAction.ContinueIntroduction)
+        val builder = store.state.value.tileBuilder
+        if (store.state.value.answerMode == AnswerMode.TileBuilder && builder != null) {
+            val choices = builder.exercise.segments.filterIsInstance<TileSegment.Choice>()
+            choices.forEach { store.dispatch(AppAction.Tile(id, TileAction.Place(it.position, it.correctForm))) }
+            store.dispatch(AppAction.Tile(id, TileAction.Check))
+        } else {
+            store.dispatch(AppAction.Reveal(id))
+        }
+        store.dispatch(AppAction.Rate(id, rating))
+    }
+
+    private fun dailyReadyDocument(): ProgressDocument {
+        val base = ProgressCodec.fresh(skills.map { it.id }, at, "2026-09-23", scheduler)
+        return base.copy(progress = base.progress.copy(
+            stats = base.progress.stats + dailyReviewSeedIds.associateWith { base.progress.stats.getValue(it).copy(reviews = 1, correct = 1) },
+        ))
+    }
+
+    @Test
+    fun startDailyRatingPlannedVolumeReachesDailyComplete() = runTest {
+        val repo = FakeRepository(dailyReadyDocument())
+        val store = newStore(repo, backgroundScope)
+        store.start()
+        store.dispatch(AppAction.StartDaily)
+        assertEquals(TrainingMode.Daily, store.state.value.mode)
+        assertNotNull(store.state.value.daily)
+
+        repeat(6) { answerDailyStep(store, Rating.Good) }
+        assertEquals(CardPhase.DailyComplete, store.state.value.phase)
+        assertEquals(6, assertNotNull(store.state.value.daily).history.size)
+        store.close()
+    }
+
+    @Test
+    fun continueDailyFromCompleteGoesBackToQuestionExtendedAndKeepsHistory() = runTest {
+        val repo = FakeRepository(dailyReadyDocument())
+        val store = newStore(repo, backgroundScope)
+        store.start()
+        store.dispatch(AppAction.StartDaily)
+        repeat(6) { answerDailyStep(store, Rating.Good) }
+        assertEquals(CardPhase.DailyComplete, store.state.value.phase)
+        val historyBefore = assertNotNull(store.state.value.daily).history
+
+        store.dispatch(AppAction.ContinueDaily)
+        assertEquals(CardPhase.Question, store.state.value.phase)
+        val daily = assertNotNull(store.state.value.daily)
+        assertTrue(daily.extended)
+        assertEquals(historyBefore, daily.history)
+        store.close()
+    }
+
+    @Test
+    fun eachDailyRateProducesExactlyOneReviewReducerWrite() = runTest {
+        // A fresh (unseeded) document is enough here — AC4 only needs two consecutive Daily
+        // ratings (New, then Practice falling back to the same just-introduced skill) to show no
+        // double-count; it does not need the full 6-step plan.
+        val repo = FakeRepository(ProgressCodec.fresh(skills.map { it.id }, at, "2026-09-23", scheduler))
+        val store = newStore(repo, backgroundScope)
+        store.start()
+        store.dispatch(AppAction.StartDaily)
+        for (index in 0..1) {
+            answerDailyStep(store, Rating.Good)
+            assertEquals(index + 1, store.state.value.progress?.totalReviews)
+        }
+        store.close()
+    }
+
+    @Test
+    fun switchingAwayFromAnInProgressDailySessionClearsDaily() = runTest {
+        val repo = FakeRepository(ProgressCodec.fresh(skills.map { it.id }, at, "2026-09-23", scheduler))
+        val store = newStore(repo, backgroundScope)
+        store.start()
+        store.dispatch(AppAction.StartDaily)
+        assertNotNull(store.state.value.daily)
+
+        store.dispatch(AppAction.StartChain())
+        assertNull(store.state.value.daily)
+
+        store.dispatch(AppAction.StartDaily)
+        assertNotNull(store.state.value.daily)
+        store.dispatch(AppAction.StartSchedule)
+        assertNull(store.state.value.daily)
+
+        store.dispatch(AppAction.StartDaily)
+        assertNotNull(store.state.value.daily)
+        store.dispatch(AppAction.ChooseSkill("case.acc.f", sentenceSeeds.first()))
+        assertNull(store.state.value.daily)
+        store.close()
+    }
+
     // SB-8 install() fix: `tileBuilder` for the in-progress exercise is recomputed against the
     // just-loaded document (same pattern as `introPending`). Not independently testable as its
     // own regression today: `ExerciseGenerator.generateChain` never sets `tileTargetSlots`/

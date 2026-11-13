@@ -2,6 +2,12 @@
 
 Новые сверху. Формат: решение → почему → где подробно.
 
+## ADR-62 · 2026-11-14 · M3 "Сегодня": свежий бюджет планировщика для продолжения сессии
+
+Отклонение от `Plans/Architecture/DAILY-SESSION-BLUEPRINT.md` (`continueDaily()`/`advanceDaily()`): блюпринт предписывал передавать в `DailySessionPlanner.nextStep` полную `daily.history.map { it.kind }` и для продолжения после `CardPhase.DailyComplete`. Арифметически это всегда возвращает `null`: `planned == reviews+new+practice`, каждый вид ограничен своей же квотой, поэтому к моменту `history.size >= planned` каждый вид гарантированно исчерпал именно свою квоту — повторный вызов планировщика с той же историей никогда не находит кандидата, и кнопка "Ещё одно задание" никогда не показывала бы следующий вопрос.
+
+Решение: `continueDaily()` всегда передаёт `completed = emptyList()`; `advanceDaily()` передаёт `emptyList()` вместо накопленной истории, когда `daily.extended == true` (сессия уже в бонусном режиме), и обычную историю — пока сессия идёт в пределах исходного плана (чтобы не ломать уже протестированные cap/backfill тесты `DailySessionPlannerTest`). Эффект: бонусный проход сохраняет приоритет Review → New → Practice, но с новым бюджетом на каждый шаг, без искусственного дедлока. Красный тест, зафиксировавший проблему: `TrainingStoreTest.continueDailyFromCompleteGoesBackToQuestionExtendedAndKeepsHistory`.
+
 ## ADR-61 · 2026-11-13 · Sentence Builder как Tier 0 механика вовлечённости
 
 Новый тип упражнения: сборка предложения из тайлов с выбором грамматической формы. Тайлы вычисляются из существующего `CoreExercise` + `Morphology`, не хранятся в DSL. Три уровня scaffolding (Full → Partial → None) определяются прогрессом, не автором. Ошибка в форме переводит в мини-правило через `StyleComposer`. Ядро (`core-model`, `core-engine`) не знает языков — `TileGenerator` работает для любого языка с таблицей форм.

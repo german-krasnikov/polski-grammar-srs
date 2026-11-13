@@ -21,6 +21,11 @@ data class TrainingHeader(val modes: List<ModeOption>, val selected: TrainingMod
 /** [displayCount]/[total] from [AppUiState.chainDisplayCount]; null outside [TrainingMode.Chain]. */
 data class ChainProgress(val displayCount: Int, val total: Int, val summary: String)
 
+/** M3 blueprint: [done]/[planned] from [AppUiState.daily]; null outside [TrainingMode.Daily].
+ *  [extended] mirrors [DailySessionState.extended] — true once the learner has voluntarily
+ *  continued past the originally planned volume. */
+data class DailyProgress(val done: Int, val planned: Int, val extended: Boolean)
+
 data class ReferenceToggle(val label: String, val enabled: Boolean, val expanded: Boolean)
 
 /** [label] stays plain ("Повторить"/"Вспомнил") — a host that wants a keyboard hint prepends its
@@ -40,13 +45,37 @@ data class TrainingCardModel(
     val introducing: Boolean,
     val hotkeys: Map<HotKey, AppAction>,
     val lifehackBadge: LifehackBadge?,
+    val dailyProgress: DailyProgress?,
 )
 
 private val modeLabel = mapOf(
     TrainingMode.Chain to "Цепочка предложений",
     TrainingMode.Schedule to "По расписанию",
     TrainingMode.Focused to "Отдельный навык",
+    TrainingMode.Daily to "Сегодня · ~5 мин",
 )
+
+/** M3 blueprint: pure, composes the completion summary from per-[DailyStepKind] counts. Total
+ *  (never throws): an empty [history] — only reachable if [AppAction.StartDaily] itself hit
+ *  [CardPhase.NoDue], not [CardPhase.DailyComplete] — still returns a neutral fallback string. */
+fun dailySummaryText(history: List<DailyStepOutcome>): String {
+    val reviews = history.count { it.kind == DailyStepKind.Review }
+    val news = history.count { it.kind == DailyStepKind.New }
+    val practice = history.count { it.kind == DailyStepKind.Practice }
+    if (reviews == 0 && news == 0 && practice == 0) return "Сегодня пока нечего показать — начни сессию ещё раз."
+    val parts = buildList {
+        if (reviews > 0) add("повторил $reviews ${skillWord(reviews)}")
+        if (news > 0) add("освоил $news ${skillWord(news)}")
+        if (practice > 0) add("потренировал $practice ${skillWord(practice)}")
+    }
+    return "Готово! ${parts.joinToString(", ")}."
+}
+
+private fun skillWord(count: Int): String = when {
+    count % 10 == 1 && count % 100 != 11 -> "навык"
+    count % 10 in 2..4 && count % 100 !in 12..14 -> "навыка"
+    else -> "навыков"
+}
 
 /**
  * Builds the one card-level view model every host's training screen renders from. Pure: the same
@@ -66,11 +95,15 @@ fun trainingCardModel(state: AppUiState, now: Instant? = state.now): TrainingCar
             ModeOption(TrainingMode.Chain, modeLabel.getValue(TrainingMode.Chain), AppAction.StartChain()),
             ModeOption(TrainingMode.Schedule, modeLabel.getValue(TrainingMode.Schedule), AppAction.StartSchedule),
             ModeOption(TrainingMode.Focused, modeLabel.getValue(TrainingMode.Focused), AppAction.OpenSkillPicker),
+            ModeOption(TrainingMode.Daily, modeLabel.getValue(TrainingMode.Daily), AppAction.StartDaily),
         ),
         selected = state.mode,
         dueCount = state.dueCount,
         todayCount = state.todayCount,
     )
+    val dailyProgress = if (state.mode == TrainingMode.Daily) {
+        state.daily?.let { DailyProgress(it.history.size, it.planned, it.extended) }
+    } else null
     val referenceToggle = ReferenceToggle(
         label = if (!introducing && state.showReference) "Скрыть таблицу" else "Таблица под рукой",
         enabled = !introducing && state.caseReferenceAvailable,
@@ -84,6 +117,7 @@ fun trainingCardModel(state: AppUiState, now: Instant? = state.now): TrainingCar
         header = header, chainProgress = chainProgress, referenceToggle = referenceToggle,
         front = emptyList(), back = emptyList(), ratingButtons = emptyList(),
         introducing = introducing, hotkeys = emptyMap(), lifehackBadge = null,
+        dailyProgress = dailyProgress,
     )
 
     val skill = skillById(exercise.primarySkill)
@@ -159,6 +193,6 @@ fun trainingCardModel(state: AppUiState, now: Instant? = state.now): TrainingCar
         LifehackBadge()
     } else null
 
-    return TrainingCardModel(header, chainProgress, referenceToggle, front, back, ratingButtons, introducing, hotkeys, lifehackBadge)
+    return TrainingCardModel(header, chainProgress, referenceToggle, front, back, ratingButtons, introducing, hotkeys, lifehackBadge, dailyProgress)
 }
 

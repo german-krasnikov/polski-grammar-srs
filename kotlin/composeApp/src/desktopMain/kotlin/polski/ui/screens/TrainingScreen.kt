@@ -47,6 +47,7 @@ import polski.presentation.HotKey
 import polski.presentation.LoadStatus
 import polski.presentation.TrainingMode
 import polski.presentation.StyleId
+import polski.presentation.dailySummaryText
 import polski.presentation.trainingCardModel
 import polski.training.sentenceSeeds
 
@@ -154,6 +155,14 @@ internal fun TrainingScreen(state: AppUiState, dispatch: (AppAction) -> Unit, fo
                         Text("Повторения на сейчас завершены", style = MaterialTheme.typography.headlineSmall)
                         Text(state.nextDue?.let { "Следующее: ${formatDate(it.toEpochMilliseconds())}" } ?: "Новых повторений пока нет.")
                         Button(onClick = { dispatch(AppAction.StartChain()) }) { Text("Потренировать цепочку") }
+                    }
+                    // M3 blueprint: web-first (composeApp/webMain) — this branch only keeps the
+                    // desktop preview compiling and functional; no dedicated desktop design pass yet.
+                    CardPhase.DailyComplete -> {
+                        Text("Сессия на сегодня готова", style = MaterialTheme.typography.headlineSmall)
+                        Text(dailySummaryText(state.daily?.history ?: emptyList()))
+                        Button(onClick = { dispatch(AppAction.ContinueDaily) }) { Text("Ещё одно задание") }
+                        OutlinedButton(onClick = { dispatch(AppAction.StartSchedule) }) { Text("К повторениям") }
                     }
                     CardPhase.Question, CardPhase.Revealed -> {
                         val exercise = state.exercise

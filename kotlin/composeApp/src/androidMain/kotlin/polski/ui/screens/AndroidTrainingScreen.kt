@@ -37,6 +37,7 @@ import polski.presentation.TrainingMode
 import polski.presentation.UiCopy
 import polski.presentation.builtInStyleIds
 import polski.presentation.StyleRegistry
+import polski.presentation.dailySummaryText
 import polski.presentation.trainingCardModel
 import polski.srs.Rating
 import polski.training.sentenceSeeds
@@ -116,6 +117,17 @@ internal fun AndroidTrainingScreen(
                 Text(state.nextDue?.let { "Следующее: ${formatDate(it.toEpochMilliseconds())}" } ?: UiCopy.NoDueTitle)
                 Button(onClick = { dispatch(AppAction.StartChain()) }, modifier = Modifier.fillMaxWidth()) {
                     Text("Потренировать цепочку")
+                }
+            }
+            // M3 blueprint: web-first (composeApp/webMain) — this branch only keeps the Android
+            // preview compiling and functional; no dedicated Android design pass yet.
+            CardPhase.DailyComplete -> AndroidInfoCard("Сессия на сегодня готова") {
+                Text(dailySummaryText(state.daily?.history ?: emptyList()))
+                Button(onClick = { dispatch(AppAction.ContinueDaily) }, modifier = Modifier.fillMaxWidth()) {
+                    Text("Ещё одно задание")
+                }
+                OutlinedButton(onClick = { dispatch(AppAction.StartSchedule) }, modifier = Modifier.fillMaxWidth()) {
+                    Text("К повторениям")
                 }
             }
             CardPhase.Question, CardPhase.Revealed -> {

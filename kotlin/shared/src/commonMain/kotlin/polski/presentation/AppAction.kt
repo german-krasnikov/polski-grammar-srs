@@ -8,6 +8,8 @@ sealed interface AppAction {
     data class StartChain(val seedIndex: Int? = null) : AppAction
     data class SelectChainSeed(val index: Int) : AppAction
     data object StartSchedule : AppAction
+    data object StartDaily : AppAction
+    data object ContinueDaily : AppAction
     data object OpenSkillPicker : AppAction
     data class ChooseSkill(val skillId: String, val preferredSeed: polski.model.SentenceSeed? = null) : AppAction
     data class SetAnswerMode(val mode: AnswerMode) : AppAction

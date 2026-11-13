@@ -86,6 +86,7 @@ internal class TrainingCardDom(
         }
         if (state.showSkillPicker) renderSkillPicker(main, state, dispatch)
         if (state.mode == TrainingMode.Chain) renderChainHeader(main, state, dispatch)
+        if (state.mode == TrainingMode.Daily) renderDailyProgress(main, state)
         val layout = node("div", if (model.referenceToggle.expanded) "study-layout with-reference" else "study-layout")
         main.appendChild(layout)
         val card = node("section", "flashcard card")
@@ -93,6 +94,7 @@ internal class TrainingCardDom(
         layout.appendChild(card)
         when (state.phase) {
             CardPhase.ChainComplete -> renderChainComplete(root, card, state, dispatch, enteringChainComplete)
+            CardPhase.DailyComplete -> renderDailyComplete(card, state, dispatch)
             CardPhase.NoDue -> renderNoDue(card, state, dispatch)
             CardPhase.Question, CardPhase.Revealed -> renderCard(root, card, state, swipeRatingEnabled, justRevealed, dispatch)
         }
@@ -208,11 +210,37 @@ internal class TrainingCardDom(
 
     private fun renderNoDue(card: HTMLElement, state: AppUiState, dispatch: (AppAction) -> Unit) {
         card.appendChild(node("div", "session-complete").apply {
-            appendChild(node("h2", text = "Повторения на сейчас завершены"))
+            appendChild(node("h2", text = if (state.mode == TrainingMode.Daily) "Сегодня нечего тренировать" else "Повторения на сейчас завершены"))
             appendChild(node("p", text = state.nextDue?.let {
                 "Следующее: ${browserFormatDate(it.toEpochMilliseconds().toDouble())}"
             } ?: UiCopy.NoDueTitle))
             appendChild(button("Потренировать цепочку") { dispatch(AppAction.StartChain()) })
+        })
+    }
+
+    /** M3 blueprint: a `role="progressbar"` element above the card, next to [renderChainHeader]'s
+     *  own position — "`done` / `planned`" plus "· продолжение" once [DailySessionState.extended]. */
+    private fun renderDailyProgress(main: HTMLElement, state: AppUiState) {
+        val daily = state.daily ?: return
+        val progress = node("div", "daily-progress")
+        progress.setAttribute("role", "progressbar")
+        progress.setAttribute("aria-valuenow", daily.history.size.toString())
+        progress.setAttribute("aria-valuemin", "0")
+        progress.setAttribute("aria-valuemax", daily.planned.toString())
+        progress.textContent = "${daily.history.size} / ${daily.planned}" + if (daily.extended) " · продолжение" else ""
+        main.appendChild(progress)
+    }
+
+    /** M3 blueprint: summary + "Ещё одно задание" (continue) / "К повторениям по расписанию"
+     *  (escape hatch, same as [renderChainComplete]'s own). */
+    private fun renderDailyComplete(card: HTMLElement, state: AppUiState, dispatch: (AppAction) -> Unit) {
+        val complete = node("div", "session-complete")
+        card.appendChild(complete)
+        complete.appendChild(node("h2", text = "Сессия на сегодня готова"))
+        complete.appendChild(node("p", text = dailySummaryText(state.daily?.history ?: emptyList())))
+        complete.appendChild(node("div", "actions").apply {
+            appendChild(button("Ещё одно задание", primary = true) { dispatch(AppAction.ContinueDaily) })
+            appendChild(button("К повторениям по расписанию") { dispatch(AppAction.StartSchedule) })
         })
     }
 
@@ -227,6 +255,13 @@ internal class TrainingCardDom(
                 TrainingMode.Chain -> "Цепочка · ${state.chainIndex + 1} / ${state.chain.size}"
                 TrainingMode.Schedule -> "Повторение по расписанию"
                 TrainingMode.Focused -> "Тренировка навыка"
+                // M3 blueprint ("дополнительная практика не маскируется под тест памяти"): honest
+                // per-step label by real DailyStepKind, not a generic "Сегодня".
+                TrainingMode.Daily -> if (state.daily?.currentStep?.kind == DailyStepKind.Practice) {
+                    "Короткая проверка применения"
+                } else {
+                    "Сегодня · шаг ${(state.daily?.history?.size ?: 0) + 1} / ${state.daily?.planned ?: 0}"
+                }
             }))
             appendChild(node("span", text = "${skill.level} · ${skill.title}"))
         })
