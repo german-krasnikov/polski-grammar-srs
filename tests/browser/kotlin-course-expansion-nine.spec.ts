@@ -181,8 +181,10 @@ test('rating hit target recovers when motion changes during reveal and after ret
   await page.getByRole('button', { name: 'Показать ответ' }).click();
   await page.getByRole('button', { name: 'Таблицы и схема' }).click();
   await page.goBack();
-  await expect(page.locator('.answer-sentence')).toBeVisible();
-  await expect.poll(() => page.locator('.ratings').evaluate(row => getComputedStyle(row).pointerEvents), { timeout: 600 }).toBe('auto');
-  await page.getByRole('button', { name: /2 Вспомнил/ }).click();
+  const activeCard = page.getByRole('region', { name: 'Учебная карточка' });
+  await expect(activeCard).toHaveCount(1);
+  await expect(activeCard.locator('.answer-sentence')).toBeVisible();
+  await expect.poll(() => activeCard.locator('.ratings').evaluate(row => getComputedStyle(row).pointerEvents), { timeout: 600 }).toBe('auto');
+  await activeCard.getByRole('button', { name: /2 Вспомнил/ }).click();
   await expect.poll(() => reviewCounts(page, 'numeral.agreement')).toEqual({ total: 4, skill: 4 });
 });

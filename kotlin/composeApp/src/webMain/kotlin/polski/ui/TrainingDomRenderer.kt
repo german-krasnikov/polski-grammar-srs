@@ -72,6 +72,7 @@ internal class TrainingDomRenderer(private val prewarmTimer: MatrixPrewarmTimer 
         slider.close()
         navigation?.close()
         navigation = null
+        riveOverlay.close()
         vocabulary.close()
         exam.close()
     }
@@ -174,6 +175,10 @@ internal class TrainingDomRenderer(private val prewarmTimer: MatrixPrewarmTimer 
         // decides WHICH of those two happens; `populate` itself is identical either way.
         val routeChangedFrom = previousRoute
         val routeChanged = old != null && routeChangedFrom != null && routeChangedFrom != route
+        if (routeChanged) {
+            if (routeChangedFrom == WebRoute.Training) riveOverlay.cancel()
+            if (routeChangedFrom == WebRoute.Vocabulary) vocabulary.deactivate()
+        }
         val app = (root.querySelector(":scope > .app") as? HTMLElement)
             ?: node("div", "app").also(root::appendChild)
         val nav = navigation ?: WebNav(app, navigate).also { navigation = it }

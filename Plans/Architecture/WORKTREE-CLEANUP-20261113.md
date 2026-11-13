@@ -13,3 +13,15 @@ git fetch ../polski-grammar-srs-worktrees/recovery-logs/20261113/worktree-cleanu
 ```
 
 Завершённые ветки больше не нужны для исполнения текущего плана. Активные задачи остаются изолированы; новые рабочие деревья создаются только для исполняемой задачи и удаляются после принятия/объединения. Исторические evidence могут указывать старые исходные пути: соответствие архивам записано в manifest, а результаты сохраняют свои исходные даты.
+
+
+## Завершённый P18
+
+После независимой приёмки P18 удалены worktree `p18-course-expansion` и локальная/remote ветка `work/p18-course-expansion-20261113`. HEAD `d88cc86` полностью входит в `main` через `f8bb4fb`; дерево перед удалением чистое. Remote удалён с lease на `23bc7311cd405449d196954a9a928539db059621`. `git branch -d` сначала отказал из-за отставшего upstream; после удаления remote и снятия upstream обычный `-d` прошёл, принудительное удаление не использовалось.
+
+Проверенные JS/Wasm distributions сохранены в `../polski-grammar-srs-worktrees/snapshots/p18-accepted-20261113/`; 22 файла JS/Wasm/CSS/index имеют SHA-256 в `worktree-cleanup/p18-retirement-manifest.json`. Нативные app, source receipts, `.xcresult`, Main app/data backup остаются в `recovery-logs/20261113/course-expansion/`. Активны только P14/native feedback и P16/Rive; их незавершённая работа не удалялась.
+
+
+## Завершённый P16
+
+Web Rive lifecycle принят независимыми Tester/Reviewer (`56652d0`/`b748832`) и объединён в Main `d155627`. Чистый worktree `p16-rive-lifecycle` и его локальная/remote ветка удалены; все commits входят в Main. Remote удалён с lease на `56652d0dfcc75cb4e01c9d86cb03d12dacf77edd`, локальная ветка — обычным `-d` после снятия upstream. Принятые JS/Wasm distributions сохранены в `../polski-grammar-srs-worktrees/snapshots/p16-accepted-20261113/`, 22 hashes и refs — в `worktree-cleanup/p16-retirement-manifest.json`; независимые логи остаются вне удалённого дерева. Интеграционная проверка объединения продолжается в основном checkout. Активным остаётся только дерево P14/P15 с нативными изменениями и их приёмкой.
