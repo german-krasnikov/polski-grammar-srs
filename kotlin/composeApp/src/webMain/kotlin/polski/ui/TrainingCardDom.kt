@@ -7,6 +7,7 @@ import org.w3c.dom.HTMLButtonElement
 import org.w3c.dom.HTMLElement
 import org.w3c.dom.HTMLSelectElement
 import org.w3c.dom.HTMLTextAreaElement
+import org.w3c.dom.events.Event
 import org.w3c.dom.events.KeyboardEvent
 import polski.data.activeCoursePackId
 import polski.data.availableCoursePacks
@@ -60,15 +61,17 @@ internal class TrainingCardDom(
         })
         methodLabel.appendChild(methodSelect)
         val model = trainingCardModel(state)
-        options.appendChild(button(model.referenceToggle.label) {
-            dispatch(AppAction.ToggleReference)
-        }.apply {
-            disabled = state.introPending
-            setAttribute("aria-expanded", (state.showReference && !state.introPending).toString())
-        })
+        if (state.caseReferenceAvailable) {
+            options.appendChild(button(model.referenceToggle.label) {
+                dispatch(AppAction.ToggleReference)
+            }.apply {
+                disabled = !model.referenceToggle.enabled
+                setAttribute("aria-expanded", model.referenceToggle.expanded.toString())
+            })
+        }
         if (state.showSkillPicker) renderSkillPicker(main, state, dispatch)
         if (state.mode == TrainingMode.Chain) renderChainHeader(main, state, dispatch)
-        val layout = node("div", if (state.showReference && !state.introPending) "study-layout with-reference" else "study-layout")
+        val layout = node("div", if (model.referenceToggle.expanded) "study-layout with-reference" else "study-layout")
         main.appendChild(layout)
         val card = node("section", "flashcard card")
         card.setAttribute("aria-label", "Учебная карточка")
@@ -78,7 +81,7 @@ internal class TrainingCardDom(
             CardPhase.NoDue -> renderNoDue(card, state, dispatch)
             CardPhase.Question, CardPhase.Revealed -> renderCard(root, card, state, swipeRatingEnabled, justRevealed, dispatch)
         }
-        if (state.showReference && !state.introPending) {
+        if (model.referenceToggle.expanded) {
             // UX4-20/22: animates in (fade + slight rise) exactly on the render where it just
             // turned on; a routine rebuild of an already-shown panel (timer, rating, …) must not
             // replay it. Hiding stays instant, matching this panel's existing conditional-mount
@@ -288,6 +291,19 @@ internal class TrainingCardDom(
             return
         }
         wrap.classList.add("revealing") // gates the CSS stagger fade-in for this render only
+        // The rating row moves while the answer expands. A pointer can press the button at its
+        // old position and release over the card after it has moved, losing the click in WebKit.
+        // Restore pointer hits when the row finishes or is canceled (e.g. Motion changes).
+        // The bound fallback also releases a detached/paused row without depending on CSS events.
+        val fallback = window.setTimeout({ wrap.classList.remove("revealing"); null }, 750)
+        val releaseWhenRatingsFinish: (Event) -> Unit = { event ->
+            if ((event.target as? HTMLElement)?.classList?.contains("ratings") == true) {
+                window.clearTimeout(fallback)
+                wrap.classList.remove("revealing")
+            }
+        }
+        wrap.addEventListener("animationend", releaseWhenRatingsFinish)
+        wrap.addEventListener("animationcancel", releaseWhenRatingsFinish)
         wrap.style.setProperty("transition", "none")
         wrap.style.setProperty("grid-template-rows", "0fr")
         wrap.getBoundingClientRect() // force layout: commits the collapsed frame before animating

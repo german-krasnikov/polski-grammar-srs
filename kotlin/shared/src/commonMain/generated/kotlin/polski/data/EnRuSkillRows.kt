@@ -16,7 +16,7 @@ internal val generatedEnRuSkills: List<Skill> = SKILL_ROW_ROWS.map { it.toSkill(
 internal val generatedEnRuPresentations: Map<String, SkillPresentation> = SKILL_ROW_ROWS.associate { it.id to it.toPresentation() }
 internal val generatedEnRuStyleContent: Map<String, SkillStyleContent> = SKILL_ROW_ROWS.associate { it.id to it.toStyleContent() }
 
-internal fun SkillRow.toSkill() = Skill(id, title, group, level.tag, formula, theory, hint, prerequisites)
+internal fun SkillRow.toSkill() = Skill(id, title, group, level.tag, formula, theory, hint, prerequisites, caseReferenceAvailable ?: true)
 
 internal fun SkillRow.toPresentation() =
     SkillPresentation(focus.before, focus.after, methods.logic.toPresentation(), methods.situations.toPresentation())

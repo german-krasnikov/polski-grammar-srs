@@ -50,7 +50,8 @@ test('migrated Kotlin text export reloads in a clean Kotlin profile with its rev
   };
   expect(imported.version).toBe(1);
   expect(imported.totalReviews).toBe(1);
-  expect(imported.cards.length).toBe(16);
+  // The original 16 cards survive migration; P18 adds 10 course skills to the export.
+  expect(imported.cards.length).toBe(26);
   expect(imported.cards.some(entry => entry.card.last_review !== undefined)).toBe(true);
   expect(await page.evaluate(key => localStorage.getItem(key), legacyKey)).toBe('');
   expect(await page.evaluate(key => localStorage.getItem(key), backupKey)).toBe('');

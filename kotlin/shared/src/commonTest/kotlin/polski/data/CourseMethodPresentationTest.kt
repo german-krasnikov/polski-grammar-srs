@@ -7,7 +7,7 @@ import kotlin.test.assertTrue
 class CourseMethodPresentationTest {
     @Test
     fun allSkillsExposeBothFourStageMethods() {
-        assertEquals(16, skills.size)
+        assertEquals(26, skills.size)
         skills.forEach { skill ->
             val presentation = presentationBySkillId(skill.id)
             listOf(presentation.logic, presentation.situations).forEach { method ->

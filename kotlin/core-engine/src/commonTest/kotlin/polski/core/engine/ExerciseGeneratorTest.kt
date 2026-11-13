@@ -30,7 +30,7 @@ class ExerciseGeneratorTest {
         ),
     )
 
-    private fun generator(constantSlots: List<ConstantSlot>): ExerciseGenerator {
+    private fun generator(constantSlots: List<ConstantSlot>, recipeOverride: SkillRecipe? = null): ExerciseGenerator {
         val realizer = ConstructionRealizer(mapOf("test.slot-presence" to template), morphology, LexemeFeatures { emptyMap() })
         val skill = SkillSpec(id = "test.skill", construction = "test.slot-presence")
         val recipe = SkillRecipe(
@@ -40,7 +40,7 @@ class ExerciseGeneratorTest {
         )
         return ExerciseGenerator(
             realizer = realizer, morphology = morphology, lexemeFeatures = LexemeFeatures { emptyMap() },
-            skills = mapOf(skill.id to skill), recipes = mapOf(recipe.skillId to recipe),
+            skills = mapOf(skill.id to skill), recipes = mapOf(recipe.skillId to (recipeOverride ?: recipe)),
             seeds = listOf(mapOf("noun" to "thing", "adjective" to "unused")),
             random = RandomSource { 0.0 }, ids = ExerciseIdFactory { "generated" },
             copy = PackCopy { it }, pattern = PackPattern { _, _ -> error("not used") },
@@ -69,5 +69,15 @@ class ExerciseGeneratorTest {
         val exercise = generator.generateForSkill("test.skill")
         assertEquals("thing", exercise.source)
         assertEquals("thing", exercise.expected)
+    }
+
+    @Test fun comparisonPracticeCyclesThroughDistinctAuthoredSentences() {
+        fun exercise(key: String) = StaticExercise(key, "prompt", "$key expected", "explanation", emptyList(), key, "$key expected", "reason", "thing", "unused", emptyList())
+        val pool = listOf("A", "B", "C", "D", "E", "F").map(::exercise)
+        val generator = generator(emptyList(), SkillRecipe("test.skill", staticPool = pool))
+        val firstCycle = (1..6).map { generator.generateForSkill("test.skill").source }
+        assertEquals(pool.map { it.sourceKey }.toSet(), firstCycle.toSet())
+        val seventh = generator.generateForSkill("test.skill").source
+        kotlin.test.assertNotEquals(firstCycle.last(), seventh)
     }
 }

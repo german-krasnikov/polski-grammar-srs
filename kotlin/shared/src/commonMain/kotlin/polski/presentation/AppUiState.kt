@@ -3,6 +3,7 @@ package polski.presentation
 import kotlin.time.Instant
 import polski.model.Evaluation
 import polski.model.Exercise
+import polski.data.skillById
 import polski.progress.Progress
 import polski.srs.SchedulePreview
 
@@ -60,5 +61,6 @@ data class AppUiState(
     val pendingEffects: List<UiEffect> = emptyList(),
 ) {
     val exerciseId: String? get() = exercise?.id
+    val caseReferenceAvailable: Boolean get() = exercise?.let { skillById(it.primarySkill).caseReferenceAvailable } ?: true
     val chainComplete: Boolean get() = phase == CardPhase.ChainComplete
 }

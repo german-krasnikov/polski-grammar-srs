@@ -19,6 +19,7 @@ RECORD SkillRow KEY id COUNT 1..
   fixed: [FeatureValueRow]
   lexicalFilter: LexicalFilterRow NULLABLE
   styleContent: StyleContentRow OPTIONAL
+  caseReferenceAvailable: bool OPTIONAL
 END
 
 RECORD FocusRow
@@ -615,6 +616,7 @@ RECORD SkillRecipeRow COUNT 1..
   ownerDraw: OwnerDrawRow OPTIONAL
   numberOverride: string OPTIONAL
   staticOverride: StaticExerciseRow OPTIONAL
+  staticPool: [StaticExerciseRow] OPTIONAL
 END
 
 # The second draw of a skill: one owner out of these, with the copy entry that names it in the prompt (the prompt is prefix, name, suffix).

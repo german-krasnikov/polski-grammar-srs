@@ -88,6 +88,9 @@ class ExerciseGenerator(
     private val verbLexeme: String,
     private val constantSlots: List<ConstantSlot> = emptyList(),
 ) {
+    private val remainingStaticIndexes = mutableMapOf<String, MutableList<Int>>()
+    private val lastStaticIndex = mutableMapOf<String, Int>()
+
     private fun <T> pick(items: List<T>): T {
         val draw = random.nextDouble()
         require(draw >= 0.0 && draw < 1.0) { "RandomSource must return [0, 1)" }
@@ -196,6 +199,18 @@ class ExerciseGenerator(
 
         val staticOverride = recipe.staticOverride
         if (staticOverride != null) return staticExercise(skillId, staticOverride)
+        if (recipe.staticPool.isNotEmpty()) {
+            val remaining = remainingStaticIndexes.getOrPut(skillId) { mutableListOf() }
+            val startingCycle = remaining.isEmpty()
+            if (remaining.isEmpty()) {
+                remaining += recipe.staticPool.indices
+            }
+            val choices = if (startingCycle && remaining.size > 1) remaining.filter { it != lastStaticIndex[skillId] } else remaining
+            val index = pick(choices)
+            remaining.remove(index)
+            lastStaticIndex[skillId] = index
+            return staticExercise(skillId, recipe.staticPool[index])
+        }
 
         var owner = defaultOwnerLexeme
         val prompt: String

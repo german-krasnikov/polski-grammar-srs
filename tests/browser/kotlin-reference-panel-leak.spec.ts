@@ -30,6 +30,12 @@ test('reference panel never leaks this exercise\'s own answer before reveal, for
     await continueIntroductionIfPresent(page);
 
     const referenceButton = page.getByRole('button', { name: /^(Таблица под рукой|Скрыть таблицу)$/ });
+    if (!(await referenceButton.count())) {
+      // Authored comparison exercises carry valid technical noun/adjective slots, but those
+      // are not words in the displayed sentence; there is no matching case table to reveal.
+      await expect(page.locator('.reference-panel')).toHaveCount(0);
+      continue;
+    }
     if ((await referenceButton.textContent())?.trim() === 'Таблица под рукой') await referenceButton.click();
     const panel = page.locator('.reference-panel');
     await expect(panel).toBeVisible();

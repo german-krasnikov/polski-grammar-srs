@@ -16,7 +16,7 @@ class PlRuSkillSpecsTest {
         assertEquals(
             listOf(
                 "case.acc.n", "case.acc.f", "case.acc.m", "case.gen.neg", "case.inst", "case.loc", "case.dat", "agreement.my",
-                "verb.present", "verb.past", "verb.future", "aspect", "pronouns", "mixed", "sentence.question", "sentence.plural",
+                "verb.present", "verb.past", "verb.future", "aspect", "pronouns", "mixed", "sentence.question", "sentence.plural", "degree.comparison", "verb.participles", "voice.impersonal", "wordform.nouns", "numeral.agreement", "wordform.adjectives", "sentence.connectives", "sentence.rephrase", "case.valency", "verb.mood",
             ),
             generatedPlRuSkillSpecs.map { it.id },
         )

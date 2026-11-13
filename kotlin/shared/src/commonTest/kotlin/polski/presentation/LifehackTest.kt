@@ -63,6 +63,6 @@ class LifehackTest {
         }
         // Restored: pl-ru's own answers are unchanged after the round trip.
         assertTrue(StaticPackLifehackProvider.hasLifehacks("case.gen.neg"))
-        assertEquals(16, StaticPackLifehackProvider.listAll().size)
+        assertEquals(26, StaticPackLifehackProvider.listAll().size)
     }
 }

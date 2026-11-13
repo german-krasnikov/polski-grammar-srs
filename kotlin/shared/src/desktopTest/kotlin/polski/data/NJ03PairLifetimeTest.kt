@@ -17,10 +17,12 @@ class NJ03PairLifetimeTest {
         selectCoursePack("pl-ru")
         val plSkills = skills
         // Exact count and identity match generatedPlRuSkills
-        assertEquals(16, plSkills.size)
+        assertEquals(26, plSkills.size)
         assertEquals(generatedPlRuSkills, plSkills, "pl-ru skills must equal generatedPlRuSkills typed source")
         assertEquals("case.acc.n", plSkills[0].id)
-        assertEquals("sentence.plural", plSkills.last().id)
+        assertEquals("sentence.plural", plSkills[15].id)
+        assertEquals("degree.comparison", plSkills[16].id)
+        assertEquals("verb.mood", plSkills.last().id)
     }
 
     @Test
