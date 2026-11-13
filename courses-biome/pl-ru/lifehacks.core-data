@@ -346,3 +346,111 @@ LIFEHACK {
   }
   status: editorial
 }
+
+LIFEHACK {
+  id: pl-ru.verb.participles.source-rule
+  skillId: verb.participles
+  text: "У формы на -ąc субъект тот же, что в главной части: Czytając list, Maria uśmiecha się. Русская конструкция с другим субъектом здесь не подходит."
+  source: {
+    kind: research
+    citation: "Swan (2002), A Grammar of Contemporary Polish, ch. 12, Participles, pp. 298–307: adjectival participles agree; adverbial participles are uninflected and share the main-clause subject."
+    url: "https://lektorek.org/lektorek/grammar.pdf"
+  }
+  status: editorial
+}
+
+LIFEHACK {
+  id: pl-ru.voice.impersonal.source-rule
+  skillId: voice.impersonal
+  text: "В форме naprawiono drogę слово drogę остаётся дополнением; в Droga została naprawiona оно уже подлежащее. Не переноси согласование одной конструкции в другую."
+  source: {
+    kind: research
+    citation: "Swan (2002), A Grammar of Contemporary Polish, ch. 12, Passive and Impersonal Forms, pp. 313–316: -no/-to impersonal past and passive subject/object mapping."
+    url: "https://lektorek.org/lektorek/grammar.pdf"
+  }
+  status: editorial
+}
+
+LIFEHACK {
+  id: pl-ru.wordform.nouns.source-rule
+  skillId: wordform.nouns
+  text: "После czytanie прямое дополнение становится зависимым родительным: czytam książki → czytanie książek. Русская фраза «читаю книги» не подсказывает новую польскую форму объекта."
+  source: {
+    kind: research
+    citation: "Swan (2002), A Grammar of Contemporary Polish, ch. 12, Verbal Nouns, pp. 308–310; ch. 5, Nominal Derivation: action nouns and their governed complements."
+    url: "https://lektorek.org/lektorek/grammar.pdf"
+  }
+  status: editorial
+}
+
+LIFEHACK {
+  id: pl-ru.numeral.agreement.source-rule
+  skillId: numeral.agreement
+  text: "Русское «пять студентов пришли» подталкивает к множественному глаголу; польское Pięciu studentów przyszło требует форму среднего единственного."
+  source: {
+    kind: research
+    citation: "Swan (2002), A Grammar of Contemporary Polish, ch. 8, Syntax of Cardinal Numerals, pp. 195–202: 2–4 versus 5+ noun and verb agreement, including masculine-personal forms."
+    url: "https://lektorek.org/lektorek/grammar.pdf"
+  }
+  status: editorial
+}
+
+LIFEHACK {
+  id: pl-ru.wordform.adjectives.source-rule
+  skillId: wordform.adjectives
+  text: "Не приклеивай один суффикс к каждому существительному: drewno → drewniany, но szkło → szklany. Сначала проверь производную основу, затем окончание."
+  source: {
+    kind: research
+    citation: "Swan (2002), A Grammar of Contemporary Polish, ch. 6, Relational Adjectives, pp. 139–143: denominal material and type adjectives, variable suffixes -n- and -ow-."
+    url: "https://lektorek.org/lektorek/grammar.pdf"
+  }
+  status: editorial
+}
+
+LIFEHACK {
+  id: pl-ru.sentence.connectives.source-rule
+  skillId: sentence.connectives
+  text: "Чтобы назвать цель, польское żeby требует зависимую часть: Uczę się polskiego, żeby rozmawiać z sąsiadami. Русское «чтобы» здесь помогает, но nie myl celu z przyczyną ponieważ."
+  source: {
+    kind: research
+    citation: "Swan (2002), A Grammar of Contemporary Polish, ch. 17, Conjunctions, pp. 402–407: coordinating and subordinating conjunctions for cause, contrast, condition, purpose and time."
+    url: "https://lektorek.org/lektorek/grammar.pdf"
+  }
+  status: editorial
+}
+
+LIFEHACK {
+  id: pl-ru.sentence.rephrase.source-rule
+  skillId: sentence.rephrase
+  text: "При замене tylko на nikt oprócz понадобится отрицание: Tylko Anna zna odpowiedź → Nikt oprócz Anny nie zna odpowiedzi. Второе dopełniacz связано и с oprócz, и с отрицанием."
+  source: {
+    kind: research
+    citation: "Swan (2002), A Grammar of Contemporary Polish, ch. 13, Negation and Genitive; ch. 17, Conjunctions, pp. 402–407: negative and subordinate-clause constructions used for equivalent reformulation."
+    url: "https://lektorek.org/lektorek/grammar.pdf"
+  }
+  status: editorial
+}
+
+LIFEHACK {
+  id: pl-ru.case.valency.source-rule
+  skillId: case.valency
+  text: "Русское «жду автобус» без предлога нельзя калькировать: Czekam na autobus. Польское czekać требует na с винительным."
+  source: {
+    kind: research
+    citation: "Swan (2002), A Grammar of Contemporary Polish, ch. 13, Verb Government, pp. 343–373: czekać na + accusative, korzystać z + genitive, interesować się + instrumental; słuchać + genitive and pomagać + dative."
+    url: "https://lektorek.org/lektorek/grammar.pdf"
+  }
+  status: editorial
+}
+
+LIFEHACK {
+  id: pl-ru.verb.mood.source-rule
+  skillId: verb.mood
+  text: "Русское «бы» пишется отдельно, польское -by соединяется с формой и личным окончанием: pisałbym, pisałabym. Род говорящего меняет форму даже в первом лице."
+  source: {
+    kind: research
+    citation: "Swan (2002), A Grammar of Contemporary Polish, ch. 10, Conditional Mood, pp. 257–259, and Imperative Mood, pp. 254–256: -by personal endings and command forms."
+    url: "https://lektorek.org/lektorek/grammar.pdf"
+  }
+  status: editorial
+}

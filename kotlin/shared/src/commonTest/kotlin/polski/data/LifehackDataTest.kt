@@ -16,7 +16,7 @@ class LifehackDataTest {
     @Test fun eachPackHas32TipsWithTheIdsOfItsOwnPairUsedOnce() {
         for ((pair, pack, _) in packs) {
             val ids = pack.lifehacks.map { it.id }
-            assertEquals(if (pair == "pl-ru") 33 else 32, ids.size, pair)
+            assertEquals(if (pair == "pl-ru") 42 else 32, ids.size, pair)
             assertEquals(ids.size, ids.toSet().size, pair)
             assertTrue(ids.all { it.startsWith("$pair.") }, pair)
         }
@@ -25,11 +25,11 @@ class LifehackDataTest {
     @Test fun everyTipIsForASkillOfItsOwnPackAndEverySkillHasTheLeastNumberOfTips() {
         for ((pair, pack, least) in packs) {
             val skillIds = pack.skills.map { it.id }
-            assertEquals(if (pair == "pl-ru") 17 else 16, skillIds.size, pair)
+            assertEquals(if (pair == "pl-ru") 26 else 16, skillIds.size, pair)
             val counts = pack.lifehacks.groupingBy { it.skillId }.eachCount()
             assertEquals(skillIds.toSet(), counts.keys, pair)
             for (id in skillIds) {
-                val minimum = if (id == "degree.comparison") 1 else least
+                val minimum = if (pair == "pl-ru" && id in generatedPlRuSkills.drop(16).map { it.id }) 1 else least
                 assertTrue(counts.getValue(id) >= minimum, "$pair $id has ${counts[id]} tips, wanted $minimum")
             }
             assertTrue(pack.lifehacks.all { it.topic == null }, pair)

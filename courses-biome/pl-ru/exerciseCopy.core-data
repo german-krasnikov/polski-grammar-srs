@@ -254,3 +254,775 @@ COPY {
   key: degreeCompareReason
   value: "Szybki → szybszy; после od нужен родительный падеж: tamtego roweru."
 }
+
+COPY {
+  key: participles1Source
+  value: "Kobieta, która czyta książkę, siedzi przy oknie."
+}
+COPY {
+  key: participles1Expected
+  value: "Kobieta czytająca książkę siedzi przy oknie."
+}
+COPY {
+  key: participles1Prompt
+  value: "Замени придаточное действительным причастием, сохрани всё предложение."
+}
+COPY {
+  key: participles1Explanation
+  value: "Читающая женщина — субъект обоих действий; форма согласуется с kobieta."
+}
+COPY {key: participles1From value: "która czyta"}
+COPY {key: participles1To value: "czytająca"}
+COPY {
+  key: participles1Reason
+  value: "Читающая женщина — субъект обоих действий; форма согласуется с kobieta."
+}
+COPY {
+  key: participles2Source
+  value: "Mężczyzna, który pracuje w sklepie, zna mojego brata."
+}
+COPY {
+  key: participles2Expected
+  value: "Mężczyzna pracujący w sklepie zna mojego brata."
+}
+COPY {
+  key: participles2Prompt
+  value: "Сверни придаточное в действительное причастие."
+}
+COPY {
+  key: participles2Explanation
+  value: "Действительное причастие мужского рода описывает mężczyzna."
+}
+COPY {key: participles2From value: "który pracuje"}
+COPY {key: participles2To value: "pracujący"}
+COPY {
+  key: participles2Reason
+  value: "Действительное причастие мужского рода описывает mężczyzna."
+}
+COPY {
+  key: participles3Source
+  value: "List, który został napisany wczoraj, leży na stole."
+}
+COPY {key: participles3Expected value: "List napisany wczoraj leży na stole."}
+COPY {
+  key: participles3Prompt
+  value: "Убери относительное придаточное, сохрани страдательное причастие."
+}
+COPY {
+  key: participles3Explanation
+  value: "Результат написания остаётся признаком письма."
+}
+COPY {key: participles3From value: "który został napisany"}
+COPY {key: participles3To value: napisany}
+COPY {
+  key: participles3Reason
+  value: "Результат написания остаётся признаком письма."
+}
+COPY {
+  key: participles4Source
+  value: "Drzwi, które zostały zamknięte rano, prowadzą do piwnicy."
+}
+COPY {
+  key: participles4Expected
+  value: "Drzwi zamknięte rano prowadzą do piwnicy."
+}
+COPY {
+  key: participles4Prompt
+  value: "Сверни придаточное со страдательным причастием."
+}
+COPY {
+  key: participles4Explanation
+  value: "Форма множественного числа согласуется с drzwi."
+}
+COPY {key: participles4From value: "które zostały zamknięte"}
+COPY {key: participles4To value: "zamknięte"}
+COPY {
+  key: participles4Reason
+  value: "Форма множественного числа согласуется с drzwi."
+}
+COPY {key: participles5Source value: "Maria czyta gazetę i pije kawę."}
+COPY {key: participles5Expected value: "Czytając gazetę, Maria pije kawę."}
+COPY {
+  key: participles5Prompt
+  value: "Сделай первое одновременное действие деепричастным."
+}
+COPY {
+  key: participles5Explanation
+  value: "Оба действия выполняет Maria; -ąc не склоняется."
+}
+COPY {key: participles5From value: "Maria czyta gazetę"}
+COPY {key: participles5To value: "Czytając gazetę"}
+COPY {
+  key: participles5Reason
+  value: "Оба действия выполняет Maria; -ąc не склоняется."
+}
+COPY {key: participles6Source value: "Piotr słucha muzyki i sprząta pokój."}
+COPY {key: participles6Expected value: "Słuchając muzyki, Piotr sprząta pokój."}
+COPY {
+  key: participles6Prompt
+  value: "Передай первое одновременное действие деепричастием."
+}
+COPY {
+  key: participles6Explanation
+  value: "Субъект Piotr остаётся общим для обоих действий."
+}
+COPY {key: participles6From value: "Piotr słucha muzyki"}
+COPY {key: participles6To value: "Słuchając muzyki"}
+COPY {
+  key: participles6Reason
+  value: "Субъект Piotr остаётся общим для обоих действий."
+}
+COPY {key: voice1Source value: "Ktoś zamknął sklep o szóstej."}
+COPY {key: voice1Expected value: "Zamknięto sklep o szóstej."}
+COPY {
+  key: voice1Prompt
+  value: "Замени неопределённого деятеля безличной формой на -to."
+}
+COPY {
+  key: voice1Explanation
+  value: "В безличной форме объект sklep остаётся дополнением."
+}
+COPY {key: voice1From value: "Ktoś zamknął"}
+COPY {key: voice1To value: "Zamknięto"}
+COPY {
+  key: voice1Reason
+  value: "В безличной форме объект sklep остаётся дополнением."
+}
+COPY {key: voice2Source value: "Ktoś otworzył okno rano."}
+COPY {key: voice2Expected value: "Otwarto okno rano."}
+COPY {key: voice2Prompt value: "Передай действие безличной формой на -to."}
+COPY {
+  key: voice2Explanation
+  value: "Форма otwarto не называет исполнителя; okno сохраняется."
+}
+COPY {key: voice2From value: "Ktoś otworzył"}
+COPY {key: voice2To value: Otwarto}
+COPY {
+  key: voice2Reason
+  value: "Форма otwarto не называет исполнителя; okno сохраняется."
+}
+COPY {key: voice3Source value: "Ktoś przeczytał list wczoraj."}
+COPY {key: voice3Expected value: "Przeczytano list wczoraj."}
+COPY {key: voice3Prompt value: "Убери неопределённого деятеля, употреби -no."}
+COPY {
+  key: voice3Explanation
+  value: "Прочитанный объект list остаётся винительным дополнением."
+}
+COPY {key: voice3From value: "Ktoś przeczytał"}
+COPY {key: voice3To value: Przeczytano}
+COPY {
+  key: voice3Reason
+  value: "Прочитанный объект list остаётся винительным дополнением."
+}
+COPY {key: voice4Source value: "Robotnicy naprawili drogę."}
+COPY {key: voice4Expected value: "Droga została naprawiona przez robotników."}
+COPY {
+  key: voice4Prompt
+  value: "Сделай объект подлежащим пассивного предложения и сохрани деятеля."
+}
+COPY {
+  key: voice4Explanation
+  value: "Droga — женское подлежащее; причастие naprawiona согласуется с ним."
+}
+COPY {key: voice4From value: "Robotnicy naprawili drogę"}
+COPY {key: voice4To value: "Droga została naprawiona przez robotników"}
+COPY {
+  key: voice4Reason
+  value: "Droga — женское подлежащее; причастие naprawiona согласуется с ним."
+}
+COPY {key: voice5Source value: "Policja zatrzymała kierowcę."}
+COPY {key: voice5Expected value: "Kierowca został zatrzymany przez policję."}
+COPY {
+  key: voice5Prompt
+  value: "Передай действие пассивом с названным деятелем."
+}
+COPY {
+  key: voice5Explanation
+  value: "Kierowca становится подлежащим, zatrzymany — мужская форма."
+}
+COPY {key: voice5From value: "Policja zatrzymała kierowcę"}
+COPY {key: voice5To value: "Kierowca został zatrzymany przez policję"}
+COPY {
+  key: voice5Reason
+  value: "Kierowca становится подлежащим, zatrzymany — мужская форма."
+}
+COPY {key: voice6Source value: "Nauczyciel sprawdził testy."}
+COPY {key: voice6Expected value: "Testy zostały sprawdzone przez nauczyciela."}
+COPY {
+  key: voice6Prompt
+  value: "Сделай testy подлежащим пассивного предложения."
+}
+COPY {
+  key: voice6Explanation
+  value: "Множественное testy требует zostały sprawdzone."
+}
+COPY {key: voice6From value: "Nauczyciel sprawdził testy"}
+COPY {key: voice6To value: "Testy zostały sprawdzone przez nauczyciela"}
+COPY {
+  key: voice6Reason
+  value: "Множественное testy требует zostały sprawdzone."
+}
+COPY {key: nouns1Source value: "To, że czytam książki, sprawia mi przyjemność."}
+COPY {key: nouns1Expected value: "Czytanie książek sprawia mi przyjemność."}
+COPY {
+  key: nouns1Prompt
+  value: "Замени придаточное названием действия, сохрани смысл."
+}
+COPY {
+  key: nouns1Explanation
+  value: "После названия действия объект переходит в родительный множественного числа."
+}
+COPY {key: nouns1From value: "czytam książki"}
+COPY {key: nouns1To value: "Czytanie książek"}
+COPY {
+  key: nouns1Reason
+  value: "После названия действия объект переходит в родительный множественного числа."
+}
+COPY {key: nouns2Source value: "To, że piszę listy, zajmuje dużo czasu."}
+COPY {key: nouns2Expected value: "Pisanie listów zajmuje dużo czasu."}
+COPY {
+  key: nouns2Prompt
+  value: "Назови действие существительным и перестрой объект."
+}
+COPY {key: nouns2Explanation value: "Pisanie управляет родительным listów."}
+COPY {key: nouns2From value: "piszę listy"}
+COPY {key: nouns2To value: "Pisanie listów"}
+COPY {key: nouns2Reason value: "Pisanie управляет родительным listów."}
+COPY {key: nouns3Source value: "To, że wspólnie gotujemy, jest dla nas ważne."}
+COPY {key: nouns3Expected value: "Wspólne gotowanie jest dla nas ważne."}
+COPY {key: nouns3Prompt value: "Замени придаточное названием действия."}
+COPY {
+  key: nouns3Explanation
+  value: "Наречие совместности передано согласованным прилагательным."
+}
+COPY {key: nouns3From value: "wspólnie gotujemy"}
+COPY {key: nouns3To value: "Wspólne gotowanie"}
+COPY {
+  key: nouns3Reason
+  value: "Наречие совместности передано согласованным прилагательным."
+}
+COPY {key: nouns4Source value: "To, że ten pokój jest czysty, ma znaczenie."}
+COPY {key: nouns4Expected value: "Czystość tego pokoju ma znaczenie."}
+COPY {key: nouns4Prompt value: "Замени описание качества существительным."}
+COPY {
+  key: nouns4Explanation
+  value: "Czystość называет качество; обладатель качества стоит в родительном."
+}
+COPY {key: nouns4From value: "ten pokój jest czysty"}
+COPY {key: nouns4To value: "Czystość tego pokoju"}
+COPY {
+  key: nouns4Reason
+  value: "Czystość называет качество; обладатель качества стоит в родительном."
+}
+COPY {
+  key: nouns5Source
+  value: "To, że ona jest młoda, nie przeszkadza jej w pracy."
+}
+COPY {key: nouns5Expected value: "Jej młodość nie przeszkadza jej w pracy."}
+COPY {
+  key: nouns5Prompt
+  value: "Назови качество существительным, сохрани субъект."
+}
+COPY {
+  key: nouns5Explanation
+  value: "Młodość — название качества, jej сохраняет обладателя."
+}
+COPY {key: nouns5From value: "ona jest młoda"}
+COPY {key: nouns5To value: "Jej młodość"}
+COPY {
+  key: nouns5Reason
+  value: "Młodość — название качества, jej сохраняет обладателя."
+}
+COPY {key: nouns6Source value: "To, że on jest odważny, pomaga mu w pracy."}
+COPY {key: nouns6Expected value: "Jego odwaga pomaga mu w pracy."}
+COPY {
+  key: nouns6Prompt
+  value: "Назови качество существительным, сохрани смысл."
+}
+COPY {
+  key: nouns6Explanation
+  value: "Odwaga — производное название качества; jego сохраняет обладателя."
+}
+COPY {key: nouns6From value: "on jest odważny"}
+COPY {key: nouns6To value: "Jego odwaga"}
+COPY {
+  key: nouns6Reason
+  value: "Odwaga — производное название качества; jego сохраняет обладателя."
+}
+COPY {key: numerals1Source value: "Na stole leży jedna książka."}
+COPY {key: numerals1Expected value: "Na stole leżą dwie książki."}
+COPY {
+  key: numerals1Prompt
+  value: "Измени количество на две книги и согласуй всё предложение."
+}
+COPY {
+  key: numerals1Explanation
+  value: "После dwie существительное и сказуемое имеют формы множественного числа."
+}
+COPY {key: numerals1From value: "jedna książka leży"}
+COPY {key: numerals1To value: "dwie książki leżą"}
+COPY {
+  key: numerals1Reason
+  value: "После dwie существительное и сказуемое имеют формы множественного числа."
+}
+COPY {key: numerals2Source value: "W pokoju stoją dwa krzesła."}
+COPY {key: numerals2Expected value: "W pokoju stoi pięć krzeseł."}
+COPY {key: numerals2Prompt value: "Измени количество на пять стульев."}
+COPY {
+  key: numerals2Explanation
+  value: "После pięć нужен родительный krzeseł и сказуемое среднего единственного."
+}
+COPY {key: numerals2From value: "dwa krzesła stoją"}
+COPY {key: numerals2To value: "pięć krzeseł stoi"}
+COPY {
+  key: numerals2Reason
+  value: "После pięć нужен родительный krzeseł и сказуемое среднего единственного."
+}
+COPY {key: numerals3Source value: "Dwaj studenci przyszli rano."}
+COPY {key: numerals3Expected value: "Pięciu studentów przyszło rano."}
+COPY {
+  key: numerals3Prompt
+  value: "Измени количество на пять студентов, сохрани время."
+}
+COPY {
+  key: numerals3Explanation
+  value: "Мужской личный тип: pięciu studentów и пришедшее событие в среднем единственном."
+}
+COPY {key: numerals3From value: "Dwaj studenci przyszli"}
+COPY {key: numerals3To value: "Pięciu studentów przyszło"}
+COPY {
+  key: numerals3Reason
+  value: "Мужской личный тип: pięciu studentów и пришедшее событие в среднем единственном."
+}
+COPY {key: numerals4Source value: "Mam jednego kota."}
+COPY {key: numerals4Expected value: "Mam trzy koty."}
+COPY {key: numerals4Prompt value: "Измени количество на три кота."}
+COPY {
+  key: numerals4Explanation
+  value: "После trzy в винительном неодушевлённо-неличной группы — koty."
+}
+COPY {key: numerals4From value: "jednego kota"}
+COPY {key: numerals4To value: "trzy koty"}
+COPY {
+  key: numerals4Reason
+  value: "После trzy в винительном неодушевлённо-неличной группы — koty."
+}
+COPY {key: numerals5Source value: "Widziałem dwie kobiety."}
+COPY {key: numerals5Expected value: "Widziałem pięć kobiet."}
+COPY {key: numerals5Prompt value: "Измени количество на пять женщин."}
+COPY {
+  key: numerals5Explanation
+  value: "Pięć требует родительного множественного kobiet."
+}
+COPY {key: numerals5From value: "dwie kobiety"}
+COPY {key: numerals5To value: "pięć kobiet"}
+COPY {
+  key: numerals5Reason
+  value: "Pięć требует родительного множественного kobiet."
+}
+COPY {key: numerals6Source value: "Czekam na jednego kolegę."}
+COPY {key: numerals6Expected value: "Czekam na dwóch kolegów."}
+COPY {key: numerals6Prompt value: "Измени количество на двух коллег."}
+COPY {
+  key: numerals6Explanation
+  value: "В винительном мужского личного типа: dwóch kolegów."
+}
+COPY {key: numerals6From value: "jednego kolegę"}
+COPY {key: numerals6To value: "dwóch kolegów"}
+COPY {
+  key: numerals6Reason
+  value: "В винительном мужского личного типа: dwóch kolegów."
+}
+COPY {key: adjectives1Source value: "To jest stół z drewna."}
+COPY {key: adjectives1Expected value: "To jest drewniany stół."}
+COPY {
+  key: adjectives1Prompt
+  value: "Замени указание материала производным прилагательным."
+}
+COPY {
+  key: adjectives1Explanation
+  value: "Drewno даёт drewniany; форма согласуется со stół."
+}
+COPY {key: adjectives1From value: "stół z drewna"}
+COPY {key: adjectives1To value: "drewniany stół"}
+COPY {
+  key: adjectives1Reason
+  value: "Drewno даёт drewniany; форма согласуется со stół."
+}
+COPY {key: adjectives2Source value: "To jest butelka ze szkła."}
+COPY {key: adjectives2Expected value: "To jest szklana butelka."}
+COPY {key: adjectives2Prompt value: "Замени указание материала прилагательным."}
+COPY {
+  key: adjectives2Explanation
+  value: "Szkło даёт szklany; женская форма szklana."
+}
+COPY {key: adjectives2From value: "butelka ze szkła"}
+COPY {key: adjectives2To value: "szklana butelka"}
+COPY {
+  key: adjectives2Reason
+  value: "Szkło даёт szklany; женская форма szklana."
+}
+COPY {key: adjectives3Source value: "To jest sweter z wełny."}
+COPY {key: adjectives3Expected value: "To jest wełniany sweter."}
+COPY {key: adjectives3Prompt value: "Передай материал прилагательным."}
+COPY {
+  key: adjectives3Explanation
+  value: "Wełna даёт wełniany, согласованное со sweter."
+}
+COPY {key: adjectives3From value: "sweter z wełny"}
+COPY {key: adjectives3To value: "wełniany sweter"}
+COPY {
+  key: adjectives3Reason
+  value: "Wełna даёт wełniany, согласованное со sweter."
+}
+COPY {key: adjectives4Source value: "To jest plan na tydzień."}
+COPY {key: adjectives4Expected value: "To jest tygodniowy plan."}
+COPY {
+  key: adjectives4Prompt
+  value: "Замени указание длительности прилагательным."
+}
+COPY {
+  key: adjectives4Explanation
+  value: "Tydzień даёт tygodniowy; здесь речь о плане на неделю."
+}
+COPY {key: adjectives4From value: "plan na tydzień"}
+COPY {key: adjectives4To value: "tygodniowy plan"}
+COPY {
+  key: adjectives4Reason
+  value: "Tydzień даёт tygodniowy; здесь речь о плане на неделю."
+}
+COPY {key: adjectives5Source value: "To jest podróż zimą."}
+COPY {key: adjectives5Expected value: "To jest zimowa podróż."}
+COPY {key: adjectives5Prompt value: "Передай время путешествия прилагательным."}
+COPY {
+  key: adjectives5Explanation
+  value: "Zima даёт zimowy; женская форма zimowa."
+}
+COPY {key: adjectives5From value: "podróż zimą"}
+COPY {key: adjectives5To value: "zimowa podróż"}
+COPY {key: adjectives5Reason value: "Zima даёт zimowy; женская форма zimowa."}
+COPY {key: adjectives6Source value: "To jest obiad z rodziną."}
+COPY {key: adjectives6Expected value: "To jest rodzinny obiad."}
+COPY {
+  key: adjectives6Prompt
+  value: "Сверни указание на семью в прилагательное."
+}
+COPY {
+  key: adjectives6Explanation
+  value: "Rodzina даёт rodzinny; контекст семейного обеда сохраняется."
+}
+COPY {key: adjectives6From value: "obiad z rodziną"}
+COPY {key: adjectives6To value: "rodzinny obiad"}
+COPY {
+  key: adjectives6Reason
+  value: "Rodzina даёт rodzinny; контекст семейного обеда сохраняется."
+}
+COPY {key: connectives1Source value: "Pada deszcz. Zostajemy w domu."}
+COPY {
+  key: connectives1Expected
+  value: "Zostajemy w domu, ponieważ pada deszcz."
+}
+COPY {
+  key: connectives1Prompt
+  value: "Соедини мысли союзом ponieważ, назвав причину."
+}
+COPY {
+  key: connectives1Explanation
+  value: "Дождь объясняет решение остаться дома."
+}
+COPY {key: connectives1From value: "Pada deszcz. Zostajemy w domu."}
+COPY {key: connectives1To value: "Zostajemy w domu, ponieważ pada deszcz."}
+COPY {key: connectives1Reason value: "Дождь объясняет решение остаться дома."}
+COPY {key: connectives2Source value: "Pada deszcz. Idziemy na spacer."}
+COPY {key: connectives2Expected value: "Pada deszcz, ale idziemy na spacer."}
+COPY {
+  key: connectives2Prompt
+  value: "Соедини мысли союзом ale, сохрани противопоставление."
+}
+COPY {key: connectives2Explanation value: "Прогулка происходит вопреки дождю."}
+COPY {key: connectives2From value: "Pada deszcz. Idziemy na spacer."}
+COPY {key: connectives2To value: "Pada deszcz, ale idziemy na spacer."}
+COPY {key: connectives2Reason value: "Прогулка происходит вопреки дождю."}
+COPY {key: connectives3Source value: "Będziesz miał czas. Przyjdź do mnie."}
+COPY {
+  key: connectives3Expected
+  value: "Jeśli będziesz miał czas, przyjdź do mnie."
+}
+COPY {
+  key: connectives3Prompt
+  value: "Соедини мысли союзом jeśli, обозначив условие."
+}
+COPY {key: connectives3Explanation value: "Время — условие приглашения."}
+COPY {key: connectives3From value: "Będziesz miał czas. Przyjdź do mnie."}
+COPY {key: connectives3To value: "Jeśli będziesz miał czas, przyjdź do mnie."}
+COPY {key: connectives3Reason value: "Время — условие приглашения."}
+COPY {
+  key: connectives4Source
+  value: "Uczę się polskiego. Chcę rozmawiać z sąsiadami."
+}
+COPY {
+  key: connectives4Expected
+  value: "Uczę się polskiego, żeby rozmawiać z sąsiadami."
+}
+COPY {key: connectives4Prompt value: "Вырази цель учёбы с помощью żeby."}
+COPY {
+  key: connectives4Explanation
+  value: "Желание разговаривать превращается в целевую часть."
+}
+COPY {key: connectives4From value: "Chcę rozmawiać z sąsiadami"}
+COPY {key: connectives4To value: "żeby rozmawiać z sąsiadami"}
+COPY {
+  key: connectives4Reason
+  value: "Желание разговаривать превращается в целевую часть."
+}
+COPY {key: connectives5Source value: "Jest zmęczona. Pracuje dalej."}
+COPY {key: connectives5Expected value: "Chociaż jest zmęczona, pracuje dalej."}
+COPY {
+  key: connectives5Prompt
+  value: "Соедини мысли союзом chociaż, назвав уступку."
+}
+COPY {
+  key: connectives5Explanation
+  value: "Работа продолжается несмотря на усталость."
+}
+COPY {key: connectives5From value: "Jest zmęczona. Pracuje dalej."}
+COPY {key: connectives5To value: "Chociaż jest zmęczona, pracuje dalej."}
+COPY {
+  key: connectives5Reason
+  value: "Работа продолжается несмотря на усталость."
+}
+COPY {key: connectives6Source value: "Skończę pracę. Zadzwonię do ciebie."}
+COPY {
+  key: connectives6Expected
+  value: "Kiedy skończę pracę, zadzwonię do ciebie."
+}
+COPY {
+  key: connectives6Prompt
+  value: "Соедини мысли союзом kiedy, назвав время звонка."
+}
+COPY {
+  key: connectives6Explanation
+  value: "Звонок следует после окончания работы."
+}
+COPY {key: connectives6From value: "Skończę pracę. Zadzwonię do ciebie."}
+COPY {key: connectives6To value: "Kiedy skończę pracę, zadzwonię do ciebie."}
+COPY {key: connectives6Reason value: "Звонок следует после окончания работы."}
+COPY {key: rephrase1Source value: "Piotr jest wyższy od Jana."}
+COPY {key: rephrase1Expected value: "Jan jest niższy od Piotra."}
+COPY {
+  key: rephrase1Prompt
+  value: "Сохрани сравнение, сделав Jan подлежащим и используя niższy."
+}
+COPY {
+  key: rephrase1Explanation
+  value: "Обратное сравнение сохраняет порядок роста."
+}
+COPY {key: rephrase1From value: "Piotr jest wyższy od Jana"}
+COPY {key: rephrase1To value: "Jan jest niższy od Piotra"}
+COPY {key: rephrase1Reason value: "Обратное сравнение сохраняет порядок роста."}
+COPY {key: rephrase2Source value: "Tylko Anna zna odpowiedź."}
+COPY {key: rephrase2Expected value: "Nikt oprócz Anny nie zna odpowiedzi."}
+COPY {key: rephrase2Prompt value: "Передай ограничение через nikt oprócz."}
+COPY {
+  key: rephrase2Explanation
+  value: "Отрицание и oprócz сохраняют исключительность Анны."
+}
+COPY {key: rephrase2From value: "Tylko Anna zna odpowiedź"}
+COPY {key: rephrase2To value: "Nikt oprócz Anny nie zna odpowiedzi"}
+COPY {
+  key: rephrase2Reason
+  value: "Отрицание и oprócz сохраняют исключительность Анны."
+}
+COPY {key: rephrase3Source value: "Chociaż pada deszcz, idziemy na spacer."}
+COPY {key: rephrase3Expected value: "Mimo deszczu idziemy na spacer."}
+COPY {
+  key: rephrase3Prompt
+  value: "Передай уступку сочетанием mimo + существительное."
+}
+COPY {
+  key: rephrase3Explanation
+  value: "Уступительный смысл сохраняется; mimo требует родительного."
+}
+COPY {key: rephrase3From value: "Chociaż pada deszcz"}
+COPY {key: rephrase3To value: "Mimo deszczu"}
+COPY {
+  key: rephrase3Reason
+  value: "Уступительный смысл сохраняется; mimo требует родительного."
+}
+COPY {key: rephrase4Source value: "Nie mogę przyjść, bo jestem chory."}
+COPY {key: rephrase4Expected value: "Z powodu choroby nie mogę przyjść."}
+COPY {key: rephrase4Prompt value: "Передай причину сочетанием z powodu."}
+COPY {key: rephrase4Explanation value: "Причина болезни остаётся той же."}
+COPY {key: rephrase4From value: "bo jestem chory"}
+COPY {key: rephrase4To value: "Z powodu choroby"}
+COPY {key: rephrase4Reason value: "Причина болезни остаётся той же."}
+COPY {key: rephrase5Source value: "Po zakończeniu pracy wrócił do domu."}
+COPY {key: rephrase5Expected value: "Kiedy skończył pracę, wrócił do domu."}
+COPY {
+  key: rephrase5Prompt
+  value: "Передай временную связь придаточным с kiedy."
+}
+COPY {
+  key: rephrase5Explanation
+  value: "Окончание работы предшествует возвращению."
+}
+COPY {key: rephrase5From value: "Po zakończeniu pracy"}
+COPY {key: rephrase5To value: "Kiedy skończył pracę"}
+COPY {key: rephrase5Reason value: "Окончание работы предшествует возвращению."}
+COPY {key: rephrase6Source value: "Maria napisała list."}
+COPY {key: rephrase6Expected value: "List został napisany przez Marię."}
+COPY {
+  key: rephrase6Prompt
+  value: "Перестрой предложение в пассив, сохрани деятеля."
+}
+COPY {
+  key: rephrase6Explanation
+  value: "Пассив меняет подлежащее, но сохраняет автора письма."
+}
+COPY {key: rephrase6From value: "Maria napisała list"}
+COPY {key: rephrase6To value: "List został napisany przez Marię"}
+COPY {
+  key: rephrase6Reason
+  value: "Пассив меняет подлежащее, но сохраняет автора письма."
+}
+COPY {key: valency1Source value: "Я жду автобус."}
+COPY {key: valency1Expected value: "Czekam na autobus."}
+COPY {
+  key: valency1Prompt
+  value: "Переведи с глаголом czekać и его польским управлением."
+}
+COPY {key: valency1Explanation value: "Czekać требует na + Biernik."}
+COPY {key: valency1From value: "жду автобус"}
+COPY {key: valency1To value: "czekam na autobus"}
+COPY {key: valency1Reason value: "Czekać требует na + Biernik."}
+COPY {key: valency2Source value: "Я слушаю музыку."}
+COPY {key: valency2Expected value: "Słucham muzyki."}
+COPY {
+  key: valency2Prompt
+  value: "Переведи с глаголом słuchać и его польским управлением."
+}
+COPY {
+  key: valency2Explanation
+  value: "Słuchać требует Dopełniacz без предлога."
+}
+COPY {key: valency2From value: "слушаю музыку"}
+COPY {key: valency2To value: "słucham muzyki"}
+COPY {key: valency2Reason value: "Słuchać требует Dopełniacz без предлога."}
+COPY {key: valency3Source value: "Я помогаю брату."}
+COPY {key: valency3Expected value: "Pomagam bratu."}
+COPY {
+  key: valency3Prompt
+  value: "Переведи с глаголом pomagać и его польским управлением."
+}
+COPY {key: valency3Explanation value: "Pomagać требует Celownik."}
+COPY {key: valency3From value: "помогаю брату"}
+COPY {key: valency3To value: "pomagam bratu"}
+COPY {key: valency3Reason value: "Pomagać требует Celownik."}
+COPY {key: valency4Source value: "Я пользуюсь телефоном."}
+COPY {key: valency4Expected value: "Korzystam z telefonu."}
+COPY {
+  key: valency4Prompt
+  value: "Переведи с глаголом korzystać и его польским управлением."
+}
+COPY {key: valency4Explanation value: "Korzystać z требует Dopełniacz."}
+COPY {key: valency4From value: "пользуюсь телефоном"}
+COPY {key: valency4To value: "korzystam z telefonu"}
+COPY {key: valency4Reason value: "Korzystać z требует Dopełniacz."}
+COPY {key: valency5Source value: "Я интересуюсь историей."}
+COPY {key: valency5Expected value: "Interesuję się historią."}
+COPY {
+  key: valency5Prompt
+  value: "Переведи с глаголом interesować się и его польским управлением."
+}
+COPY {key: valency5Explanation value: "Interesować się требует Narzędnik."}
+COPY {key: valency5From value: "интересуюсь историей"}
+COPY {key: valency5To value: "interesuję się historią"}
+COPY {key: valency5Reason value: "Interesować się требует Narzędnik."}
+COPY {key: valency6Source value: "Я ищу ключ."}
+COPY {key: valency6Expected value: "Szukam klucza."}
+COPY {
+  key: valency6Prompt
+  value: "Переведи с глаголом szukać и его польским управлением."
+}
+COPY {
+  key: valency6Explanation
+  value: "Szukać требует Dopełniacz; русский винительный здесь не переносится."
+}
+COPY {key: valency6From value: "ищу ключ"}
+COPY {key: valency6To value: "szukam klucza"}
+COPY {
+  key: valency6Reason
+  value: "Szukać требует Dopełniacz; русский винительный здесь не переносится."
+}
+COPY {key: mood1Source value: "Piszę list."}
+COPY {key: mood1Expected value: "Pisałbym list."}
+COPY {
+  key: mood1Prompt
+  value: "Скажи гипотетически от лица мужчины; сохрани несовершенный вид."
+}
+COPY {
+  key: mood1Explanation
+  value: "Мужская условная форма 1-го лица — pisałbym."
+}
+COPY {key: mood1From value: "Piszę"}
+COPY {key: mood1To value: "Pisałbym"}
+COPY {key: mood1Reason value: "Мужская условная форма 1-го лица — pisałbym."}
+COPY {key: mood2Source value: "Czytam tę książkę."}
+COPY {key: mood2Expected value: "Czytałabym tę książkę."}
+COPY {
+  key: mood2Prompt
+  value: "Скажи гипотетически от лица женщины; сохрани несовершенный вид."
+}
+COPY {
+  key: mood2Explanation
+  value: "Женская условная форма 1-го лица — czytałabym."
+}
+COPY {key: mood2From value: Czytam}
+COPY {key: mood2To value: "Czytałabym"}
+COPY {key: mood2Reason value: "Женская условная форма 1-го лица — czytałabym."}
+COPY {key: mood3Source value: "Otwierasz okno."}
+COPY {key: mood3Expected value: "Otwórz okno."}
+COPY {
+  key: mood3Prompt
+  value: "Преврати сообщение в команду завершить действие."
+}
+COPY {
+  key: mood3Explanation
+  value: "Совершенный вид otwórz просит завершить открытие."
+}
+COPY {key: mood3From value: Otwierasz}
+COPY {key: mood3To value: "Otwórz"}
+COPY {
+  key: mood3Reason
+  value: "Совершенный вид otwórz просит завершить открытие."
+}
+COPY {key: mood4Source value: "Wychodzisz teraz."}
+COPY {key: mood4Expected value: "Nie wychodź teraz."}
+COPY {key: mood4Prompt value: "Преврати сообщение в запрет на действие сейчас."}
+COPY {
+  key: mood4Explanation
+  value: "Отрицательная команда использует несовершенный wychodź."
+}
+COPY {key: mood4From value: Wychodzisz}
+COPY {key: mood4To value: "Nie wychodź"}
+COPY {
+  key: mood4Reason
+  value: "Отрицательная команда использует несовершенный wychodź."
+}
+COPY {key: mood5Source value: "Idziemy do domu."}
+COPY {key: mood5Expected value: "Chodźmy do domu."}
+COPY {key: mood5Prompt value: "Преврати сообщение в совместное побуждение."}
+COPY {
+  key: mood5Explanation
+  value: "Chodźmy приглашает собеседника идти вместе."
+}
+COPY {key: mood5From value: Idziemy}
+COPY {key: mood5To value: "Chodźmy"}
+COPY {key: mood5Reason value: "Chodźmy приглашает собеседника идти вместе."}
+COPY {key: mood6Source value: "Czy możesz mi pomóc?"}
+COPY {key: mood6Expected value: "Czy mógłbyś mi pomóc?"}
+COPY {key: mood6Prompt value: "Сделай просьбу вежливее, обращаясь к мужчине."}
+COPY {key: mood6Explanation value: "Условная форма mógłbyś смягчает просьбу."}
+COPY {key: mood6From value: "możesz"}
+COPY {key: mood6To value: "mógłbyś"}
+COPY {key: mood6Reason value: "Условная форма mógłbyś смягчает просьбу."}

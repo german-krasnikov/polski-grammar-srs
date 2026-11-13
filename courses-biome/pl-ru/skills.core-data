@@ -880,3 +880,453 @@ SKILL {
     why: "Простая форма меняет основу или окончание, а описательная добавляет bardziej. Второй предмет после od стоит в Dopełniaczu; при сравнении целых высказываний употребляется niż."
   }
 }
+
+# P18 verb.participles: introductory coverage of its exam family, not a CEFR mastery claim.
+SKILL {
+  id: verb.participles
+  title: "Причастия и деепричастия"
+  group: Czasowniki
+  level: B2
+  formula: "czytający / napisany / czytając: форма зависит от роли и времени действия"
+  theory: "Действительное причастие описывает того, кто действует; страдательное — предмет результата. Деепричастие на -ąc обозначает одновременное действие того же субъекта."
+  hint: "Найди общий субъект и назови требуемый тип формы."
+  prerequisites: [verb.past aspect]
+  focus: {before: "uczeń, który pisze" after: "uczeń piszący"}
+  methods: {
+    logic: {
+      introduction: "Определи роль действия: признак деятеля, признак объекта или одновременное действие."
+      promptLead: "Определи правило и преобразуй предложение."
+      introduce: "Определи роль действия: признак деятеля, признак объекта или одновременное действие."
+      retrieve: "Скажи целое предложение самостоятельно."
+      feedback: "Сверь смысл, форму и изменённый фрагмент с ответом."
+      review: "Оцени воспроизведение и реши следующий пример заново."
+    }
+    situations: {
+      introduction: "Кратко опиши человека или предмет, не теряя связи между действиями."
+      promptLead: "Представь ситуацию и произнеси целое предложение."
+      introduce: "Кратко опиши человека или предмет, не теряя связи между действиями."
+      retrieve: "Передай мысль целым предложением самостоятельно."
+      feedback: "Сверь, сохранился ли нужный смысл и верная форма."
+      review: "Оцени ответ и переходи к новой ситуации."
+    }
+  }
+  construction: core.sentence.participle
+  featureFocus: null
+  fixed: []
+  lexicalFilter: null
+  caseReferenceAvailable: false
+  styleContent: {
+    rule: "Для деятеля используй форму на -ący, для результата — страдательное причастие; при одном субъекте одновременность передаёт -ąc."
+    nativeParallel: [
+      {
+        native: "Женщина, читающая газету, ждёт поезд."
+        target: "Kobieta czytająca gazetę czeka na pociąg."
+        note: "Действительное причастие согласуется с kobieta; русское «читающая» помогает распознать роль."
+        matches: true
+      }
+    ]
+    examples: [
+      "Uczeń piszący list siedzi przy oknie."
+      "Czytając list, Maria uśmiecha się."
+    ]
+    why: "В польском причастие согласуется с существительным, а деепричастие не склоняется. Действие на -ąc должно относиться к субъекту главной части."
+  }
+}
+
+# P18 voice.impersonal: introductory coverage of its exam family, not a CEFR mastery claim.
+SKILL {
+  id: voice.impersonal
+  title: "Безличные формы и пассив"
+  group: Czasowniki
+  level: B2
+  formula: "zrobiono + Biernik; объект пассива → Mianownik"
+  theory: "Форма на -no/-to сообщает о выполненном действии без названного деятеля и сохраняет дополнение в Bierniku. В пассиве объект становится подлежащим, а причастие согласуется с ним."
+  hint: "Реши, нужно скрыть деятеля или сделать объект подлежащим."
+  prerequisites: [verb.past case.inst]
+  focus: {before: "Ktoś naprawił drogę." after: "Naprawiono drogę."}
+  methods: {
+    logic: {
+      introduction: "Сначала выдели деятеля и объект; затем выбери безличную или пассивную конструкцию."
+      promptLead: "Определи правило и преобразуй предложение."
+      introduce: "Сначала выдели деятеля и объект; затем выбери безличную или пассивную конструкцию."
+      retrieve: "Скажи целое предложение самостоятельно."
+      feedback: "Сверь смысл, форму и изменённый фрагмент с ответом."
+      review: "Оцени воспроизведение и реши следующий пример заново."
+    }
+    situations: {
+      introduction: "Сообщи о выполненной работе, сохранив участников там, где они названы."
+      promptLead: "Представь ситуацию и произнеси целое предложение."
+      introduce: "Сообщи о выполненной работе, сохранив участников там, где они названы."
+      retrieve: "Передай мысль целым предложением самостоятельно."
+      feedback: "Сверь, сохранился ли нужный смысл и верная форма."
+      review: "Оцени ответ и переходи к новой ситуации."
+    }
+  }
+  construction: core.sentence.voice
+  featureFocus: null
+  fixed: []
+  lexicalFilter: null
+  caseReferenceAvailable: false
+  styleContent: {
+    rule: "В безличной конструкции на -no/-to объект остаётся дополнением. В пассиве он становится подлежащим и управляет согласованием."
+    nativeParallel: [
+      {
+        native: "Кто-то открыл дверь утром."
+        target: "Otwarto drzwi rano."
+        note: "Польская форма -to позволяет не называть исполнителя, как русская неопределённо-личная фраза."
+        matches: true
+      }
+    ]
+    examples: ["Otworzono okno o świcie." "Obraz został namalowany przez Annę."]
+    why: "Безличная форма не называет подлежащее; пассив меняет синтаксическую роль объекта. Поэтому падеж и согласование проверяются по-разному."
+  }
+}
+
+# P18 wordform.nouns: introductory coverage of its exam family, not a CEFR mastery claim.
+SKILL {
+  id: wordform.nouns
+  title: "Образование существительных"
+  group: "Słowotwórstwo"
+  level: B2
+  formula: "czytać → czytanie; czysty → czystość: производная форма меняет структуру фразы"
+  theory: "От глагола образуется название действия на -nie/-cie, от прилагательного — название качества. При номинализации дополнение может перейти в родительный падеж."
+  hint: "Найди действие или качество; проверь зависимые слова после нового существительного."
+  prerequisites: [verb.present agreement.my]
+  focus: {before: "czytam → czynność" after: czytanie}
+  methods: {
+    logic: {
+      introduction: "Найди исходную часть речи, образуй существительное и перестрой зависимые слова."
+      promptLead: "Определи правило и преобразуй предложение."
+      introduce: "Найди исходную часть речи, образуй существительное и перестрой зависимые слова."
+      retrieve: "Скажи целое предложение самостоятельно."
+      feedback: "Сверь смысл, форму и изменённый фрагмент с ответом."
+      review: "Оцени воспроизведение и реши следующий пример заново."
+    }
+    situations: {
+      introduction: "Назови действие или свойство одним словом, сохранив смысл всего высказывания."
+      promptLead: "Представь ситуацию и произнеси целое предложение."
+      introduce: "Назови действие или свойство одним словом, сохранив смысл всего высказывания."
+      retrieve: "Передай мысль целым предложением самостоятельно."
+      feedback: "Сверь, сохранился ли нужный смысл и верная форма."
+      review: "Оцени ответ и переходи к новой ситуации."
+    }
+  }
+  construction: core.sentence.nominalization
+  featureFocus: null
+  fixed: []
+  lexicalFilter: null
+  caseReferenceAvailable: false
+  styleContent: {
+    rule: "Название действия: czytać → czytanie; название качества: czysty → czystość. После названия действия проверяй падеж объекта."
+    nativeParallel: [
+      {
+        native: "То, что я читаю книги, радует меня."
+        target: "Czytanie książek sprawia mi radość."
+        note: "После польского czytanie объект книги становится książek в родительном падеже."
+        matches: true
+      }
+    ]
+    examples: ["Pisanie listów zajmuje czas." "Czystość pokoju ma znaczenie."]
+    why: "Образование существительного меняет не только основу: глагольное дополнение нередко переходит в Dopełniacz, а признак становится самостоятельным именем."
+  }
+}
+
+# P18 numeral.agreement: introductory coverage of its exam family, not a CEFR mastery claim.
+SKILL {
+  id: numeral.agreement
+  title: "Числительные и согласование"
+  group: Liczebniki
+  level: B2
+  formula: "2–4: две/три/четыре формы; 5+: Dopełniacz + сказуемое ср. ед."
+  theory: "Числительные меняют форму существительного и иногда форму сказуемого. В мужском личном множественном числе формы числительного отличаются от неодушевлённых."
+  hint: "Сначала проверь число, затем класс существительного и падеж всей группы."
+  prerequisites: [sentence.plural case.gen.neg]
+  focus: {before: "dwa + krzesło" after: "dwa krzesła"}
+  methods: {
+    logic: {
+      introduction: "Проверь число и тип группы: предметы, женщины или мужчины-люди."
+      promptLead: "Определи правило и преобразуй предложение."
+      introduce: "Проверь число и тип группы: предметы, женщины или мужчины-люди."
+      retrieve: "Скажи целое предложение самостоятельно."
+      feedback: "Сверь смысл, форму и изменённый фрагмент с ответом."
+      review: "Оцени воспроизведение и реши следующий пример заново."
+    }
+    situations: {
+      introduction: "Пересчитай участников или предметы и скажи полное предложение."
+      promptLead: "Представь ситуацию и произнеси целое предложение."
+      introduce: "Пересчитай участников или предметы и скажи полное предложение."
+      retrieve: "Передай мысль целым предложением самостоятельно."
+      feedback: "Сверь, сохранился ли нужный смысл и верная форма."
+      review: "Оцени ответ и переходи к новой ситуации."
+    }
+  }
+  construction: core.sentence.numeral
+  featureFocus: null
+  fixed: []
+  lexicalFilter: null
+  caseReferenceAvailable: false
+  styleContent: {
+    rule: "После pięć в подлежащем обычно родительный множественного и сказуемое среднего единственного; после dwa/dwie — другая модель."
+    nativeParallel: [
+      {
+        native: "На полке стоят пять кружек."
+        target: "Na półce stoi pięć kubków."
+        note: "Русское «стоят» — множественное, польское stoi согласуется с числовой группой иначе."
+        matches: true
+      }
+    ]
+    examples: ["W ogrodzie rosną trzy drzewa." "Przyszło siedmiu gości."]
+    why: "Польское сказуемое при группе от пяти часто имеет форму среднего единственного числа, даже если русское сказуемое множественное."
+  }
+}
+
+# P18 wordform.adjectives: introductory coverage of its exam family, not a CEFR mastery claim.
+SKILL {
+  id: wordform.adjectives
+  title: "Образование прилагательных"
+  group: "Słowotwórstwo"
+  level: B2
+  formula: "drewno → drewniany; szkło → szklany; tydzień → tygodniowy"
+  theory: "Производное прилагательное называет материал, время или отношение к предмету. Суффикс зависит от основы и значения; новое прилагательное затем согласуется с существительным."
+  hint: "Определи отношение и проверь словарную форму производного прилагательного."
+  prerequisites: [agreement.my]
+  focus: {before: "drewno + stół" after: "drewniany stół"}
+  methods: {
+    logic: {
+      introduction: "Найди исходное существительное, образуй проверенное прилагательное и согласуй его."
+      promptLead: "Определи правило и преобразуй предложение."
+      introduce: "Найди исходное существительное, образуй проверенное прилагательное и согласуй его."
+      retrieve: "Скажи целое предложение самостоятельно."
+      feedback: "Сверь смысл, форму и изменённый фрагмент с ответом."
+      review: "Оцени воспроизведение и реши следующий пример заново."
+    }
+    situations: {
+      introduction: "Опиши предмет кратко по материалу, времени или назначению."
+      promptLead: "Представь ситуацию и произнеси целое предложение."
+      introduce: "Опиши предмет кратко по материалу, времени или назначению."
+      retrieve: "Передай мысль целым предложением самостоятельно."
+      feedback: "Сверь, сохранился ли нужный смысл и верная форма."
+      review: "Оцени ответ и переходи к новой ситуации."
+    }
+  }
+  construction: core.sentence.denominal
+  featureFocus: null
+  fixed: []
+  lexicalFilter: null
+  caseReferenceAvailable: false
+  styleContent: {
+    rule: "Материал и отношение часто передаются производным прилагательным, но суффикс выбирается по конкретному слову; затем проверь род и падеж."
+    nativeParallel: [
+      {
+        native: "Это деревянное окно."
+        target: "To jest drewniane okno."
+        note: "Название материала drewno даёт прилагательное drewniany; форма drewniane согласуется с okno."
+        matches: true
+      }
+    ]
+    examples: ["To jest szklany wazon." "To jest miesięczny raport."]
+    why: "Словообразование не сводится к одному механическому суффиксу: drewno → drewniany, szkło → szklany, tydzień → tygodniowy."
+  }
+}
+
+# P18 sentence.connectives: introductory coverage of its exam family, not a CEFR mastery claim.
+SKILL {
+  id: sentence.connectives
+  title: "Союзы и смысловые связи"
+  group: Zdania
+  level: B1
+  formula: "ponieważ — причина; ale — контраст; jeśli — условие; żeby — цель"
+  theory: "Союз выбирается по логической связи между частями: причина, противопоставление, условие, цель, уступка или время."
+  hint: "Назови связь и используй указанный союз, сохрани время и смысл."
+  prerequisites: [sentence.question mixed]
+  focus: {before: "przyczyna + skutek" after: "skutek, ponieważ przyczyna"}
+  methods: {
+    logic: {
+      introduction: "Определи отношение частей и поставь подходящую связку."
+      promptLead: "Определи правило и преобразуй предложение."
+      introduce: "Определи отношение частей и поставь подходящую связку."
+      retrieve: "Скажи целое предложение самостоятельно."
+      feedback: "Сверь смысл, форму и изменённый фрагмент с ответом."
+      review: "Оцени воспроизведение и реши следующий пример заново."
+    }
+    situations: {
+      introduction: "Соедини две мысли так, чтобы собеседник понял причинность или контраст."
+      promptLead: "Представь ситуацию и произнеси целое предложение."
+      introduce: "Соедини две мысли так, чтобы собеседник понял причинность или контраст."
+      retrieve: "Передай мысль целым предложением самостоятельно."
+      feedback: "Сверь, сохранился ли нужный смысл и верная форма."
+      review: "Оцени ответ и переходи к новой ситуации."
+    }
+  }
+  construction: core.sentence.connective
+  featureFocus: null
+  fixed: []
+  lexicalFilter: null
+  caseReferenceAvailable: false
+  styleContent: {
+    rule: "Причину вводит ponieważ, условие — jeśli, цель — żeby. Уступка chociaż не равна простому ale."
+    nativeParallel: [
+      {
+        native: "Я остаюсь дома, потому что идёт дождь."
+        target: "Zostaję w domu, ponieważ pada deszcz."
+        note: "Связка ponieważ называет причину, как русское «потому что»."
+        matches: true
+      }
+    ]
+    examples: [
+      "Jeśli będziesz miał czas, przyjdź."
+      "Chociaż jest późno, czytam dalej."
+    ]
+    why: "От перестановки или замены союза меняется отношение событий; поэтому сначала нужно понять связь."
+  }
+}
+
+# P18 sentence.rephrase: introductory coverage of its exam family, not a CEFR mastery claim.
+SKILL {
+  id: sentence.rephrase
+  title: "Смысловое преобразование фраз"
+  group: Zdania
+  level: B2
+  formula: "Сохрани утверждение, меняя форму и структуру предложения"
+  theory: "Перефразирование требует сохранить участников, время, причинность и ограничение, хотя синтаксическая форма меняется."
+  hint: "Найди неизменный смысл; затем примени названную конструкцию."
+  prerequisites: [sentence.connectives]
+  focus: {before: "tylko jedna osoba" after: "nikt oprócz tej osoby"}
+  methods: {
+    logic: {
+      introduction: "Сверь, кто действует, когда и почему; перестрой фразу по указанию."
+      promptLead: "Определи правило и преобразуй предложение."
+      introduce: "Сверь, кто действует, когда и почему; перестрой фразу по указанию."
+      retrieve: "Скажи целое предложение самостоятельно."
+      feedback: "Сверь смысл, форму и изменённый фрагмент с ответом."
+      review: "Оцени воспроизведение и реши следующий пример заново."
+    }
+    situations: {
+      introduction: "Скажи ту же мысль иначе, не меняя события или ограничения."
+      promptLead: "Представь ситуацию и произнеси целое предложение."
+      introduce: "Скажи ту же мысль иначе, не меняя события или ограничения."
+      retrieve: "Передай мысль целым предложением самостоятельно."
+      feedback: "Сверь, сохранился ли нужный смысл и верная форма."
+      review: "Оцени ответ и переходи к новой ситуации."
+    }
+  }
+  construction: core.sentence.rephrase
+  featureFocus: null
+  fixed: []
+  lexicalFilter: null
+  caseReferenceAvailable: false
+  styleContent: {
+    rule: "При перестройке сохрани истинность утверждения: отрицание, причина, время и участники должны остаться теми же."
+    nativeParallel: [
+      {
+        native: "Только Пётр пришёл."
+        target: "Nikt oprócz Piotra nie przyszedł."
+        note: "Русское «только» можно выразить польским nikt oprócz с обязательным отрицанием."
+        matches: true
+      }
+    ]
+    examples: [
+      "Mimo śniegu idziemy do szkoły."
+      "Kiedy przeczytał list, zadzwonił."
+    ]
+    why: "Новая конструкция меняет грамматику, но не утверждаемое событие; особенно легко потерять ограничение только или временную последовательность."
+  }
+}
+
+# P18 case.valency: introductory coverage of its exam family, not a CEFR mastery claim.
+SKILL {
+  id: case.valency
+  title: "Управление польских глаголов"
+  group: Przypadki
+  level: B2
+  formula: "czekać na + Biernik; słuchać + Dopełniacz; pomagać + Celownik"
+  theory: "Каждый глагол задаёт свою рамку дополнения. Сходный русский глагол может требовать другой предлог или падеж."
+  hint: "Переведи мысль с указанным польским глаголом и проверь его рамку."
+  prerequisites: [case.acc.m case.gen.neg case.dat case.inst case.loc]
+  focus: {before: "ждать + объект" after: "czekać na + Biernik"}
+  methods: {
+    logic: {
+      introduction: "Определи польский глагол, затем его предлог и падеж дополнения."
+      promptLead: "Определи правило и преобразуй предложение."
+      introduce: "Определи польский глагол, затем его предлог и падеж дополнения."
+      retrieve: "Скажи целое предложение самостоятельно."
+      feedback: "Сверь смысл, форму и изменённый фрагмент с ответом."
+      review: "Оцени воспроизведение и реши следующий пример заново."
+    }
+    situations: {
+      introduction: "Скажи собеседнику ту же мысль по-польски, выбрав форму дополнения."
+      promptLead: "Представь ситуацию и произнеси целое предложение."
+      introduce: "Скажи собеседнику ту же мысль по-польски, выбрав форму дополнения."
+      retrieve: "Передай мысль целым предложением самостоятельно."
+      feedback: "Сверь, сохранился ли нужный смысл и верная форма."
+      review: "Оцени ответ и переходи к новой ситуации."
+    }
+  }
+  construction: core.sentence.valency
+  featureFocus: null
+  fixed: []
+  lexicalFilter: null
+  caseReferenceAvailable: false
+  styleContent: {
+    rule: "Проверяй глагол вместе с управлением: czekać na autobus, słuchać muzyki, pomagać bratu, korzystać z telefonu."
+    nativeParallel: [
+      {
+        native: "Я жду поезд."
+        target: "Czekam na pociąg."
+        note: "Русское ждать без предлога; польское czekać na требует na + Biernik."
+        matches: true
+      }
+    ]
+    examples: ["Słucham radia." "Pomagam siostrze."]
+    why: "Знание падежа отдельно не подсказывает управление глагола; учи рамку вместе со словом."
+  }
+}
+
+# P18 verb.mood: introductory coverage of its exam family, not a CEFR mastery claim.
+SKILL {
+  id: verb.mood
+  title: "Условное и повелительное наклонение"
+  group: Czasowniki
+  level: B2
+  formula: "pisałbym / pisałabym; otwórz / nie wychodź / chodźmy"
+  theory: "Условное наклонение образуется с -by и личным окончанием на базе прошедшей формы. Повелительное выражает просьбу или побуждение; отрицательная команда часто требует несовершенного вида."
+  hint: "Назови говорящего, род, вид и требуемое намерение."
+  prerequisites: [aspect verb.future]
+  focus: {before: "piszę" after: "pisałbym / pisałabym"}
+  methods: {
+    logic: {
+      introduction: "Определи условность или команду; затем проверь лицо, род и вид."
+      promptLead: "Определи правило и преобразуй предложение."
+      introduce: "Определи условность или команду; затем проверь лицо, род и вид."
+      retrieve: "Скажи целое предложение самостоятельно."
+      feedback: "Сверь смысл, форму и изменённый фрагмент с ответом."
+      review: "Оцени воспроизведение и реши следующий пример заново."
+    }
+    situations: {
+      introduction: "Передай просьбу, предложение или гипотетическое действие целым предложением."
+      promptLead: "Представь ситуацию и произнеси целое предложение."
+      introduce: "Передай просьбу, предложение или гипотетическое действие целым предложением."
+      retrieve: "Передай мысль целым предложением самостоятельно."
+      feedback: "Сверь, сохранился ли нужный смысл и верная форма."
+      review: "Оцени ответ и переходи к новой ситуации."
+    }
+  }
+  construction: core.sentence.mood
+  featureFocus: null
+  fixed: []
+  lexicalFilter: null
+  caseReferenceAvailable: false
+  styleContent: {
+    rule: "В условном: pisałbym (мужчина), pisałabym (женщина). В команде проверь лицо и вид: otwórz, nie wychodź, chodźmy."
+    nativeParallel: [
+      {
+        native: "Я бы написал письмо."
+        target: "Napisałbym list."
+        note: "Польское -bym присоединяется к мужской форме прошедшего; русское «бы» стоит отдельно."
+        matches: true
+      }
+    ]
+    examples: ["Pisałabym list." "Czy mogłabyś zamknąć okno?"]
+    why: "Наклонение меняет отношение говорящего к событию; польская форма дополнительно показывает род и лицо."
+  }
+}

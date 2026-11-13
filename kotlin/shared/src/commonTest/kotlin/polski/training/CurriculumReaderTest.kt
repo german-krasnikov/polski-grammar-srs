@@ -49,8 +49,8 @@ class CurriculumReaderTest {
     private val filteredNounIds = listOf("wife", "husband", "friendM", "son", "child") // ExerciseFactory.kt:54
 
     @Test fun coversAllSixteenPolishSkillIdsExactlyOnce() {
-        assertEquals(polishSkillIds + "degree.comparison", curriculum.map { it.id }.toSet())
-        assertEquals(polishSkillIds.size + 1, curriculum.size)
+        assertEquals(polishSkillIds + expansionSkillIds, curriculum.map { it.id }.toSet())
+        assertEquals(polishSkillIds.size + expansionSkillIds.size, curriculum.size)
     }
 
     // ExerciseFactory.kt:50-52,63-69 — Case Nom→Acc, candidates filtered by the noun's gender.
@@ -205,3 +205,5 @@ private val polishSkillIds = setOf(
     "agreement.my", "verb.present", "verb.past", "verb.future", "aspect", "pronouns", "mixed",
     "sentence.question", "sentence.plural",
 )
+
+private val expansionSkillIds = listOf("degree.comparison", "verb.participles", "voice.impersonal", "wordform.nouns", "numeral.agreement", "wordform.adjectives", "sentence.connectives", "sentence.rephrase", "case.valency", "verb.mood")

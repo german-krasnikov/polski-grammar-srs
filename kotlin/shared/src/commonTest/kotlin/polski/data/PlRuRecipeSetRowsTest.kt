@@ -102,7 +102,7 @@ class PlRuRecipeSetRowsTest {
     @Test fun theRealRecipeSetHasTheSixteenSkillsInOrderAndTheFiveChainSteps() {
         val set = generatedPlRuRecipes
         assertEquals(
-            listOf("case.acc.n", "case.acc.f", "case.acc.m", "case.gen.neg", "case.inst", "case.loc", "case.dat", "agreement.my", "verb.present", "verb.past", "verb.future", "aspect", "pronouns", "sentence.question", "sentence.plural", "mixed", "degree.comparison"),
+            listOf("case.acc.n", "case.acc.f", "case.acc.m", "case.gen.neg", "case.inst", "case.loc", "case.dat", "agreement.my", "verb.present", "verb.past", "verb.future", "aspect", "pronouns", "sentence.question", "sentence.plural", "mixed", "degree.comparison", "verb.participles", "voice.impersonal", "wordform.nouns", "numeral.agreement", "wordform.adjectives", "sentence.connectives", "sentence.rephrase", "case.valency", "verb.mood"),
             set.skills.keys.toList(),
         )
         assertEquals(set.skills.keys, generatedPlRuSkillSpecs.map { it.id }.toSet())

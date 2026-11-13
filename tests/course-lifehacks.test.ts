@@ -33,7 +33,7 @@ for (const { pair, step, nouns, sha256, skill, other } of PAIRS) {
       expect(run.status, run.stderr).toBe(0);
       expect(sealed.pairId).toBe(pair);
       expect(rows.slice(0, 32).map(r => r.id)).toEqual(sealed.lifehacks.map((l: any) => l.id));
-      expect(rows).toHaveLength(pair === 'pl-ru' ? 33 : 32);
+      expect(rows).toHaveLength(pair === 'pl-ru' ? 42 : 32);
     });
 
     it('carries the id, skill, topic, text, source and status of every tip, and only the vote counts of 0 are left out', () => {
