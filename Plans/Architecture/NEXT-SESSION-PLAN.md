@@ -22,7 +22,7 @@
 
 ### Текущий срез — 2026-11-12
 
-Исходный план закрыт **12/12** с учётом явно согласованного владельцем исключения повреждённого B2/2022-06. По новому поручению добавлены семь обязательных пунктов P13–P19: общий текущий статус **16/19** (P13, P16, P17 и P18 закрыты). Исторические результаты ниже сохраняют свои даты и артефакты.
+Исходный план закрыт **12/12** с учётом явно согласованного владельцем исключения повреждённого B2/2022-06. По новому поручению добавлены семь обязательных пунктов P13–P19: общий текущий статус **18/19** (P13–P18 закрыты). Исторические результаты ниже сохраняют свои даты и артефакты.
 
 - **P3/P4 завершены:** финальный Chromium exam **92/92 PASS**; полный non-exam прогон дал 166 PASS / 2 SKIP / 1 FAIL, после исправления установки storage-reader в мобильном test fixture затронутый случай **1/1 PASS**. Каталог и 80 аудиоокон проверены в Chromium и Firefox. Ограничение локального WebKit и исходные неуспешные прогоны сохранены. Опубликованный сайт отдельно прошёл Chromium/Firefox/WebKit: 16 официальных вариантов, действительный Wasm, непрерывное аудио >41 секунды, движение времени/прогресса и пауза. Детали — [итоговая публикация](P9-PUBLIC-DEPLOYMENT-EVIDENCE.md).
 - **P9 завершён в изменённом владельцем составе:** 10 новых экзаменов опубликованы, всего 16 официальных. После безрезультатного поиска исправного MP3 владелец исключил взрослый B2/2022-06. Удалены только 14 неактивных DSL-файлов этого черновика; исходники, повреждённая запись и хеши сохранены в архиве. Остальные экзамены 2022 года и опубликованные/generated данные не изменились. Независимые Tester/Reviewer PASS/APPROVED, Vitest 21/21, Biome check, typecheck, JS/Wasm word-bank tests PASS; коммит `6e07011`. Это исключение из объёма, а не реализация повреждённого экзамена. [План](P9-B2-2022-06-WITHDRAWAL-PLAN.md), [evidence](P9-B2-2022-06-WITHDRAWAL-EVIDENCE.md).
@@ -197,3 +197,12 @@ Native `3ea8d0e` исправляет найденный independent import pres
 
 
 Мобильный CSS опубликован в `893e3d4`: Pages и Kotlin CI PASS; live Chromium 375×667 проверил обе реальные runtime ветки и точный CSS hash. В отчёте все три текстовых поля имеют 263 px без intrinsic overflow внутри 319 px строки; ручной просмотр PNG подтверждает читаемость. Default ON, wrong lock/auto-next/report и persisted OFF также PASS. [Live receipts](P15-MOBILE-REPORT-LAYOUT-INDEPENDENT.md#published-follow-up--coordinator). Native остаётся на финальном actual import/restart gate; общий статус 16/19.
+
+
+### P14/P15 закрыты — нативное принятие
+
+Native `3ea8d0e` + independent tests/docs `677d915` приняты Reviewer APPROVED_WITH_MINOR и объединены в Main `da8ad1a`. Common DSL/scorers управляют первым ответом, deferred/manual и quarter points; SwiftUI владеет отменяемым timer/input/media. Реальные iPad Simulator cases подтвердили все три раздела, grouped focus/last stay, wrong/blank/partial/pending frozen report, timed no early key, same-task audio, настройки и Files import/export2/2. Найденные Settings ghost advance, disabled contrast и presenter исправлены и перепроверены. Dynamic Type portrait/narrow/Increase Contrast PASS. [Полный native receipt и явные ограничения](P14-NATIVE-INDEPENDENT-VERIFICATION.md).
+
+На объединённом Main Biome generate --check, npm typecheck и iOS bridge tests **34/34 PASS** (25 exam+9 preference). Final cleaned Swift/test source compiled PASS. Восстановление owner data завершено Root: все прежние progress/preferences значения сохранены, fresh launch defaultON/catalog1/1 PASS; [инцидент и границы аудита](SIMULATOR-RESTORE-INCIDENT-20261113.md) раскрыты отдельно.
+
+Общий статус **18/19**. Остаётся P19: итоговая публикация/артефакты/проверка и очистка последнего завершённого worktree. Actual VoiceOver engine, отдельный iPhone Simulator и реальный landscape NOT RUN, физический iPad отложен владельцем. Незначительный предел: полный правильный unordered set виден зелёным текстом, но per-member option tint не реализован; scoring/полный эталон доступны.

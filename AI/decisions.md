@@ -1543,3 +1543,8 @@ Web — семантический DOM/CSS, Android — Compose Material 3, iOS/
 
 ### Уточнение P7: один приоритет оценки
 Пилот из трёх DECISION отклонён: условия canonical/variant/open повторялись в трёх цепочках. Принято одно `disposition` в `.logic` и типизированные DSL-строки `disposition → status/confirmedSource/pendingSource`. Kotlin только передаёт нормализованные факты, ищет сгенерированную строку и подставляет числовые источники баллов. Это сохраняет одно место правки предикатов/приоритета; прирост общего объёма кода фиксируется честно и сам по себе не является выгодой.
+
+
+## 2026-11-13 · Принятие нативного immediate feedback
+
+SwiftUI/Apple bridge P14/P15 используют тот же shared DSL commit/advance/evaluation и frozen review, что web. Нативная независимая приёмка и Reviewer APPROVED_WITH_MINOR завершены; Main `da8ad1a` bridge34/34 и финальная Swift компиляция PASS. Доступность проверена на iPad Simulator в заявленных границах; physical/VoiceOver engine не выдаются за выполненные. Подробности и небольшой предел per-member tint — в [native receipt](../Plans/Architecture/P14-NATIVE-INDEPENDENT-VERIFICATION.md). Восстановление owner данных и опасный прерванный ops-инцидент документированы отдельно, без утверждения полной форензики хоста.
