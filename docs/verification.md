@@ -62,7 +62,7 @@ Kotlin runtime `a753640` опубликован на GitHub Pages: 16 офици
 
 ## 2026-11-13: принятые P13, P17 и P18
 
-Общий статус плана — 18/19. P13 завершён после повторной сверки 2420 оцениваемых строк и 91 письменного задания всех 16 официальных сдач; критерии письма добавлены без выдуманной автоматической оценки. Независимые source/browser/iPad Simulator проверки и review PASS/APPROVED; опубликованный `ea81239` отдельно проверен live. [Аудит и receipts](../Plans/Architecture/P13-OFFICIAL-SOURCE-REAUDIT.md).
+Общий текущий статус плана — **19/19**; финальная приёмка приведена ниже. P13 завершён после повторной сверки 2420 оцениваемых строк и 91 письменного задания всех 16 официальных сдач; критерии письма добавлены без выдуманной автоматической оценки. Независимые source/browser/iPad Simulator проверки и review PASS/APPROVED; опубликованный `ea81239` отдельно проверен live. [Аудит и receipts](../Plans/Architecture/P13-OFFICIAL-SOURCE-REAUDIT.md).
 
 P17 принят: английская матрица отсутствует в польском курсе и остаётся в английском, смена пары сохраняет прогресс. P18 принят и объединён в `f8bb4fb`: 26 польских навыков, десять новых тем/60 упражнений, четыре стиля и сводки. Main integration: Biome generate/check, typecheck, focused shared и JS/Wasm build PASS; Chromium 5/5 и WebKit motion 1/1 PASS. Нативные новые темы проверены на iPad Simulator. [P17](../Plans/Architecture/P17-INDEPENDENT-VERIFICATION.md), [P18](../Plans/Architecture/P18-SLICES-BD-INDEPENDENT-VERIFICATION.md). Pages `43359159946` для `d57dd97` PASS; live Chromium 140 на 375×667 подтвердил 26 навыков, реальное новое упражнение/эталон, четыре стиля, сводку и каталог 16 экзаменов без page errors. Kotlin CI `43359160604` также PASS.
 
@@ -76,3 +76,7 @@ Live follow-up: найденное на375px переполнение новог
 
 
 Native P14/P15 приняты и объединены в Main `da8ad1a`: независимые Simulator cases/Files import-export2/2, финальные Main bridge34/34, Swift build-for-testing PASS, Reviewer APPROVED_WITH_MINOR. Owner данные восстановлены и семантически проверены; исходный unsafe restore incident/ограниченный host audit раскрыт в [отчёте](../Plans/Architecture/SIMULATOR-RESTORE-INCIDENT-20261113.md). [Native evidence и NOT RUN](../Plans/Architecture/P14-NATIVE-INDEPENDENT-VERIFICATION.md). P19 final publication/cleanup остаётся открытым.
+
+## Итоговая приёмка P19 — 19/19
+
+Runtime `4f51511`: Kotlin CI `43377406998` и Pages `43377407266` SUCCESS; live Playwright проверил реальные JS/Wasm на 375×667, feedback/report/settings PASS. Независимая итоговая сверка runtime и документации `de61ff4` — APPROVED. Сохранены проверенные web/native артефакты и recovery evidence, остались только main на обеих сторонах и основной worktree. [Финальная приёмка](../Plans/Architecture/P19-FINAL-ACCEPTANCE.md) перечисляет источники проверок и границы: 16 экзаменов, iPad Simulator, minor unordered-set tint; физический iPad отложен, actual VoiceOver/iPhone/landscape NOT RUN. Исходные progress/preferences восстановлены и проверены; ограниченный аудит не обнаружил посторонней потери host-данных, но не является полной forensic-гарантией.
