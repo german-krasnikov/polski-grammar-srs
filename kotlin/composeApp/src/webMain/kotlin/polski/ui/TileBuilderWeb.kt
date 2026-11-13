@@ -106,9 +106,10 @@ internal fun renderTileBuilderSection(
                         choiceButtons[segment.position] = tile
                         row.appendChild(tile)
                     }
-                    error == null -> row.appendChild(node("span", "tile tile-correct", placedForm.orEmpty()).apply {
+                    error == null && placedForm != null -> row.appendChild(node("span", "tile tile-correct", placedForm).apply {
                         setAttribute("aria-label", "$placedForm — верно")
                     })
+                    error == null -> row.appendChild(node("span", "tile tile-choice tile-empty", "___"))
                     else -> {
                         val tile = button(placedForm.orEmpty(), extraClass = "tile tile-incorrect") { toggleError(segment.position) }
                         tile.setAttribute("aria-expanded", (currentOpenError == segment.position).toString())

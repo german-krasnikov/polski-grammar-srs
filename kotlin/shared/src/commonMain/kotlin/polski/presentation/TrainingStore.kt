@@ -202,7 +202,10 @@ class TrainingStore(
         is AppAction.SetAnswerMode, is AppAction.EditAnswer -> s.phase == CardPhase.Question
         AppAction.ContinueIntroduction -> s.phase == CardPhase.Question && s.introPending
         is AppAction.Reveal -> s.loadStatus == LoadStatus.Ready && s.phase == CardPhase.Question &&
-            !s.introPending && s.exercise?.id == action.exerciseId
+            !s.introPending && s.exercise?.id == action.exerciseId &&
+            (s.answerMode != AnswerMode.TileBuilder || s.tileBuilder?.let { b ->
+                b.exercise.segments.filterIsInstance<TileSegment.Choice>().all { c -> b.placed.any { it.position == c.position } }
+            } == true)
         is AppAction.Rate -> s.loadStatus == LoadStatus.Ready && s.phase == CardPhase.Revealed &&
             s.exercise?.id == action.exerciseId && document != null
         is AppAction.Tile -> s.loadStatus == LoadStatus.Ready && s.exercise?.id == action.exerciseId && when (val a = action.action) {

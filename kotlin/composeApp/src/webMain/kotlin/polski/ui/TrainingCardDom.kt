@@ -271,7 +271,7 @@ internal class TrainingCardDom(
             // handler) — excluding interactive descendants (the reveal button itself, the typed-
             // answer textarea/mode buttons) via the same tap-vs-drag gesture the vocabulary flip
             // uses, so a text-selection drag on the source sentence never fires it.
-            if (!state.introPending) installTapGesture(front) { state.exerciseId?.let { dispatch(AppAction.Reveal(it)) } }
+            if (!state.introPending && state.answerMode != AnswerMode.TileBuilder) installTapGesture(front) { state.exerciseId?.let { dispatch(AppAction.Reveal(it)) } }
             renderAnswerArea(card, state, dispatch)
             return
         }
