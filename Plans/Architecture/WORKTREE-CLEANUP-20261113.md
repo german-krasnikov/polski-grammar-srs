@@ -25,3 +25,8 @@ git fetch ../polski-grammar-srs-worktrees/recovery-logs/20261113/worktree-cleanu
 ## Завершённый P16
 
 Web Rive lifecycle принят независимыми Tester/Reviewer (`56652d0`/`b748832`) и объединён в Main `d155627`. Чистый worktree `p16-rive-lifecycle` и его локальная/remote ветка удалены; все commits входят в Main. Remote удалён с lease на `56652d0dfcc75cb4e01c9d86cb03d12dacf77edd`, локальная ветка — обычным `-d` после снятия upstream. Принятые JS/Wasm distributions сохранены в `../polski-grammar-srs-worktrees/snapshots/p16-accepted-20261113/`, 22 hashes и refs — в `worktree-cleanup/p16-retirement-manifest.json`; независимые логи остаются вне удалённого дерева. Интеграционная проверка объединения продолжается в основном checkout. Активным остаётся только дерево P14/P15 с нативными изменениями и их приёмкой.
+
+
+## Неактивные Xcode-кэши P18
+
+С согласованным владением runtime нативный разработчик подтвердил, что использует только P14 DerivedData. Два принятых P18 `.app` сохранены в `worktree-cleanup/native-artifacts/p18-{slice-a,slices-bd}-accepted.app`; исходные и сохранённые деревья независимо совпали по hashes всех 38 файлов каждого приложения. Manifest `p18-native-artifacts.json` записывает первоначальные пути, новые пути и tree hashes. После проверки удалены только `course-expansion/{slice-a,slices-bd}/DerivedData` (около 4,7 GB логического размера build-кэшей). `.xcresult`, логи, Main app/data backups и активный P14 cache сохранены. Исторические receipts со старым путём `.app` теперь восстанавливаются по manifest.
