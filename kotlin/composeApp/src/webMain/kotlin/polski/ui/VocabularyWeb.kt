@@ -117,6 +117,7 @@ internal class VocabularyWebController {
     /** Stop listening for cross-tab writes; call once when the host unmounts. */
     fun close() {
         window.removeEventListener("storage", storageListener)
+        riveOverlay.close()
     }
 
     /**
@@ -126,6 +127,7 @@ internal class VocabularyWebController {
      */
     fun deactivate() {
         pendingRefresh = null
+        riveOverlay.cancel()
     }
 
     /** See [loadedForPackId]'s own KDoc. Resets the per-pack UI state a routine cross-tab [reload]
