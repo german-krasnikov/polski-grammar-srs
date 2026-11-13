@@ -23,6 +23,21 @@ internal class TrainingCardDom(
     private val riveOverlay: RiveEffectOverlay,
     private val isComposing: () -> Boolean,
 ) {
+    // SB-6 blueprint §2.5: "which picker/error panel is open" is a pure web display concern, not
+    // cross-host learning state (TileBuilderState carries none) — two instance vars on this
+    // renderer, which already outlives individual renders. Reset to null whenever the exercise
+    // changes (never survives into the next card); see [resetTileUiStateIfNewExercise].
+    private var openTilePicker: Int? = null
+    private var openTileError: Int? = null
+    private var tileUiExerciseId: String? = null
+
+    private fun resetTileUiStateIfNewExercise(exerciseId: String?) {
+        if (exerciseId == tileUiExerciseId) return
+        tileUiExerciseId = exerciseId
+        openTilePicker = null
+        openTileError = null
+    }
+
     fun renderTraining(root: HTMLElement, app: HTMLElement, state: AppUiState, swipeRatingEnabled: Boolean, enteringChainComplete: Boolean, justRevealed: Boolean, justShowedReference: Boolean, dispatch: (AppAction) -> Unit) {
         val main = node("main", "study-page")
         app.appendChild(main)
@@ -203,6 +218,7 @@ internal class TrainingCardDom(
 
     private fun renderCard(root: HTMLElement, card: HTMLElement, state: AppUiState, swipeRatingEnabled: Boolean, justRevealed: Boolean, dispatch: (AppAction) -> Unit) {
         val exercise = state.exercise ?: return
+        resetTileUiStateIfNewExercise(exercise.id)
         val skill = polski.data.skillById(exercise.primarySkill)
         val presentation = polski.data.presentationBySkillId(exercise.primarySkill)
         val method = if (state.styleId == StyleId.SituationFirst) presentation.situations else presentation.logic
@@ -323,22 +339,45 @@ internal class TrainingCardDom(
         modes.appendChild(button("Напечатать ответ", active = state.answerMode == AnswerMode.Typed, pressed = state.answerMode == AnswerMode.Typed) {
             dispatch(AppAction.SetAnswerMode(AnswerMode.Typed))
         })
-        if (state.answerMode == AnswerMode.Typed) {
-            val input = document.createElement("textarea") as HTMLTextAreaElement
-            input.id = "training-answer"
-            input.setAttribute("aria-label", "Ответ ${activeTargetAdverb()}")
-            input.placeholder = "Напиши целое предложение…"
-            input.value = state.draft
-            input.addEventListener("input", { dispatch(AppAction.EditAnswer(input.value)) })
-            input.addEventListener("keydown", { raw ->
-                val event = raw as KeyboardEvent
-                if (event.key == "Enter" && !event.shiftKey && !event.isComposing && !isComposing()) {
-                    event.preventDefault()
-                    state.exerciseId?.let { dispatch(AppAction.Reveal(it)) }
-                }
-            })
-            area.appendChild(input)
-        } else area.appendChild(node("p", "muted", "Произнеси целое предложение, затем переверни карточку."))
+        // SB6-AC1/AC2: disabled exactly when this exercise has no derived TileBuilderState
+        // (TrainingStore's own fail-soft — AppUiState.tileBuilder is `null`); the UI never
+        // re-derives eligibility itself.
+        modes.appendChild(button(
+            "Собрать из слов",
+            active = state.answerMode == AnswerMode.TileBuilder,
+            pressed = state.answerMode == AnswerMode.TileBuilder,
+        ) { dispatch(AppAction.SetAnswerMode(AnswerMode.TileBuilder)) }.apply { disabled = state.tileBuilder == null })
+        val tileBuilder = state.tileBuilder
+        val exerciseId = state.exerciseId
+        when {
+            state.answerMode == AnswerMode.Typed -> {
+                val input = document.createElement("textarea") as HTMLTextAreaElement
+                input.id = "training-answer"
+                input.setAttribute("aria-label", "Ответ ${activeTargetAdverb()}")
+                input.placeholder = "Напиши целое предложение…"
+                input.value = state.draft
+                input.addEventListener("input", { dispatch(AppAction.EditAnswer(input.value)) })
+                input.addEventListener("keydown", { raw ->
+                    val event = raw as KeyboardEvent
+                    if (event.key == "Enter" && !event.shiftKey && !event.isComposing && !isComposing()) {
+                        event.preventDefault()
+                        state.exerciseId?.let { dispatch(AppAction.Reveal(it)) }
+                    }
+                })
+                area.appendChild(input)
+            }
+            // SB6-AC2: a stale TileBuilder selection on a card that opts out (e.g. a restored
+            // session) falls back to the Oral prompt below, never a broken/empty tile row.
+            state.answerMode == AnswerMode.TileBuilder && tileBuilder != null && exerciseId != null -> {
+                val checkButton = renderTileBuilderSection(
+                    area, exerciseId, tileBuilder, openTilePicker, openTileError,
+                    activeTargetLangCode(), { openTilePicker = it }, { openTileError = it }, dispatch,
+                )
+                area.appendChild(checkButton)
+                return
+            }
+            else -> area.appendChild(node("p", "muted", "Произнеси целое предложение, затем переверни карточку."))
+        }
         area.appendChild(button(if (state.answerMode == AnswerMode.Typed) UiCopy.CheckAndShowAnswer else UiCopy.ShowAnswer, primary = true) {
             state.exerciseId?.let { dispatch(AppAction.Reveal(it)) }
         }.apply { id = "training-reveal"; className += " reveal-button" })
@@ -361,6 +400,17 @@ internal class TrainingCardDom(
                 appendChild(node("strong", text = if (result) UiCopy.Matches else UiCopy.CompareAnswer))
                 appendChild(node("p", text = state.frozenAnswer?.takeIf(String::isNotEmpty) ?: UiCopy.NoAnswerEntered))
             })
+        }
+        // SB-6 blueprint §2.2/§2.3: the Revealed face of a TileBuilder card — read-only
+        // green/red tile row, the tapped error's mini-rule panel, and its own correctness banner
+        // (appended by renderTileBuilderSection itself). The returned Check button is unused here
+        // — Check is only live in the Question-phase renderAnswerArea.
+        val tileBuilder = state.tileBuilder
+        if (state.answerMode == AnswerMode.TileBuilder && tileBuilder != null) {
+            renderTileBuilderSection(
+                back, exercise.id, tileBuilder, openTilePicker, openTileError,
+                activeTargetLangCode(), { openTilePicker = it }, { openTileError = it }, dispatch,
+            )
         }
         val mf = model.back.filterIsInstance<CardSection.MethodFeedback>().firstOrNull()
         if (mf != null) back.appendChild(node("div", "method-feedback").apply {

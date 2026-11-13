@@ -16,6 +16,8 @@ sealed interface AppAction {
     data class EditAnswer(val text: String) : AppAction
     data class Reveal(val exerciseId: String) : AppAction
     data class Rate(val exerciseId: String, val rating: Rating) : AppAction
+    /** SB-6 blueprint §1.2: carries one [TileAction] for the sentence-builder card. */
+    data class Tile(val exerciseId: String, val action: TileAction) : AppAction
     data object ToggleReference : AppAction
     data class SelectMatrixSection(val section: MatrixSection) : AppAction
     data class SetMatrixSelection(val selection: MatrixSelection) : AppAction

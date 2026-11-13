@@ -9,7 +9,9 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertIs
+import kotlin.test.assertNotEquals
 import kotlin.test.assertNotNull
+import kotlin.test.assertNull
 import kotlin.test.assertTrue
 import kotlin.time.Instant
 import polski.data.skills
@@ -27,6 +29,7 @@ import polski.srs.StoredCard
 import polski.training.PlExerciseEngine
 import polski.core.engine.ExerciseIdFactory
 import polski.core.engine.RandomSource
+import polski.core.model.TileSegment
 import polski.training.sentenceSeeds
 
 @OptIn(ExperimentalCoroutinesApi::class)
@@ -487,6 +490,128 @@ class TrainingStoreTest {
         held.complete(SaveResult.Saved)
         runCurrent()
         assertEquals(saved, store.state.value.savedRevision)
+    }
+
+    // SB-6 blueprint §1/§6: shared-layer TileBuilder wiring. `case.acc.f` is one of the three
+    // pilot recipes opted into tiles (commit 7d50aa6); `verb.past` carries none.
+
+    @Test
+    fun chooseSkillDerivesTileBuilderOnlyForAnOptedInSkill() = runTest {
+        val repo = FakeRepository(ProgressCodec.fresh(skills.map { it.id }, at, "2026-09-23", scheduler))
+        val store = newStore(repo, backgroundScope)
+        store.start()
+        store.dispatch(AppAction.ChooseSkill("case.acc.f", sentenceSeeds.first()))
+        val builder = assertNotNull(store.state.value.tileBuilder)
+        assertTrue(builder.exercise.segments.any { it is TileSegment.Choice })
+        assertEquals(emptyList(), builder.placed)
+        assertNull(builder.result)
+
+        store.dispatch(AppAction.ChooseSkill("verb.past", sentenceSeeds.first()))
+        assertNull(store.state.value.tileBuilder)
+        store.close()
+    }
+
+    @Test
+    fun tilePlaceAndRemoveMutateOnlyPlaced() = runTest {
+        val repo = FakeRepository(ProgressCodec.fresh(skills.map { it.id }, at, "2026-09-23", scheduler))
+        val store = newStore(repo, backgroundScope)
+        store.start()
+        store.dispatch(AppAction.ChooseSkill("case.acc.f", sentenceSeeds.first()))
+        val id = assertNotNull(store.state.value.exerciseId)
+        val choice = assertNotNull(store.state.value.tileBuilder).exercise.segments.filterIsInstance<TileSegment.Choice>().first()
+
+        store.dispatch(AppAction.Tile(id, TileAction.Place(choice.position, choice.correctForm)))
+        assertEquals(listOf(choice.position), assertNotNull(store.state.value.tileBuilder).placed.map { it.position })
+
+        store.dispatch(AppAction.Tile(id, TileAction.Place(choice.position, choice.alternatives.first())))
+        assertEquals(choice.alternatives.first(), assertNotNull(store.state.value.tileBuilder).placed.single().selectedForm)
+
+        store.dispatch(AppAction.Tile(id, TileAction.Remove(choice.position)))
+        assertEquals(emptyList(), assertNotNull(store.state.value.tileBuilder).placed)
+        store.close()
+    }
+
+    @Test
+    fun acceptsRejectsCheckUntilEveryChoiceIsFilled() = runTest {
+        val repo = FakeRepository(ProgressCodec.fresh(skills.map { it.id }, at, "2026-09-23", scheduler))
+        val store = newStore(repo, backgroundScope)
+        store.start()
+        store.dispatch(AppAction.ChooseSkill("case.acc.f", sentenceSeeds.first()))
+        val id = assertNotNull(store.state.value.exerciseId)
+        store.dispatch(AppAction.Tile(id, TileAction.Check))
+        assertEquals(CardPhase.Question, store.state.value.phase) // incomplete — rejected
+
+        val choices = assertNotNull(store.state.value.tileBuilder).exercise.segments.filterIsInstance<TileSegment.Choice>()
+        choices.forEach { store.dispatch(AppAction.Tile(id, TileAction.Place(it.position, it.correctForm))) }
+        store.dispatch(AppAction.Tile(id, TileAction.Check))
+        assertEquals(CardPhase.Revealed, store.state.value.phase)
+        store.close()
+    }
+
+    @Test
+    fun checkDelegatesToRevealAndComputesCorrectTileResult() = runTest {
+        val repo = FakeRepository(ProgressCodec.fresh(skills.map { it.id }, at, "2026-09-23", scheduler))
+        val store = newStore(repo, backgroundScope)
+        store.start()
+        store.dispatch(AppAction.ChooseSkill("case.acc.f", sentenceSeeds.first()))
+        store.dispatch(AppAction.SetAnswerMode(AnswerMode.TileBuilder))
+        val id = assertNotNull(store.state.value.exerciseId)
+        val choices = assertNotNull(store.state.value.tileBuilder).exercise.segments.filterIsInstance<TileSegment.Choice>()
+        choices.forEach { store.dispatch(AppAction.Tile(id, TileAction.Place(it.position, it.correctForm))) }
+        store.dispatch(AppAction.Tile(id, TileAction.Check))
+        assertEquals(CardPhase.Revealed, store.state.value.phase)
+        val result = assertNotNull(assertNotNull(store.state.value.tileBuilder).result)
+        assertTrue(result.correct)
+        assertEquals(emptyList(), result.errors)
+        store.close()
+    }
+
+    @Test
+    fun wrongTileFormIsIncorrectAndTapErrorFillsMiniRulePanel() = runTest {
+        val repo = FakeRepository(ProgressCodec.fresh(skills.map { it.id }, at, "2026-09-23", scheduler))
+        val store = newStore(repo, backgroundScope)
+        store.start()
+        store.dispatch(AppAction.ChooseSkill("case.acc.f", sentenceSeeds.first()))
+        store.dispatch(AppAction.SetAnswerMode(AnswerMode.TileBuilder))
+        val id = assertNotNull(store.state.value.exerciseId)
+        val choices = assertNotNull(store.state.value.tileBuilder).exercise.segments.filterIsInstance<TileSegment.Choice>()
+        val wrongChoice = choices.first { it.alternatives.isNotEmpty() }
+        choices.forEach {
+            val form = if (it.position == wrongChoice.position) it.alternatives.first() else it.correctForm
+            store.dispatch(AppAction.Tile(id, TileAction.Place(it.position, form)))
+        }
+        store.dispatch(AppAction.Tile(id, TileAction.Check))
+        val result = assertNotNull(assertNotNull(store.state.value.tileBuilder).result)
+        assertFalse(result.correct)
+        assertEquals(listOf(wrongChoice.position), result.errors.map { it.position })
+
+        // TapError on a non-error position is rejected by accepts().
+        val correctPosition = choices.first { it.position != wrongChoice.position }.position
+        store.dispatch(AppAction.Tile(id, TileAction.TapError(correctPosition)))
+        assertNull(store.state.value.tileBuilder?.errorExplanation)
+
+        store.dispatch(AppAction.Tile(id, TileAction.TapError(wrongChoice.position)))
+        val explanation = assertNotNull(store.state.value.tileBuilder?.errorExplanation)
+        assertTrue(explanation.isNotEmpty())
+        store.close()
+    }
+
+    @Test
+    fun rateRecordsTileBuilderCorrectnessIntoTheSameReviewAsTyped() = runTest {
+        val repo = FakeRepository(ProgressCodec.fresh(skills.map { it.id }, at, "2026-09-23", scheduler))
+        val store = newStore(repo, backgroundScope)
+        store.start()
+        store.dispatch(AppAction.ChooseSkill("case.acc.f", sentenceSeeds.first()))
+        store.dispatch(AppAction.SetAnswerMode(AnswerMode.TileBuilder))
+        val id = assertNotNull(store.state.value.exerciseId)
+        val choices = assertNotNull(store.state.value.tileBuilder).exercise.segments.filterIsInstance<TileSegment.Choice>()
+        choices.forEach { store.dispatch(AppAction.Tile(id, TileAction.Place(it.position, it.correctForm))) }
+        store.dispatch(AppAction.Tile(id, TileAction.Check))
+        store.dispatch(AppAction.Rate(id, Rating.Good))
+        assertEquals(1, store.state.value.progress?.stats?.get("case.acc.f")?.correct)
+        // A fresh exercise always re-derives tileBuilder rather than carrying the old one over.
+        assertNotEquals(id, store.state.value.exerciseId)
+        store.close()
     }
 
     private fun newStore(repo: FakeRepository, scope: kotlinx.coroutines.CoroutineScope, clock: MutableTime = MutableTime(TimeCapture(at, "2026-09-23"))): TrainingStore {

@@ -247,6 +247,24 @@ details{margin:16px 0;color:var(--muted);font-size:.875rem}summary{cursor:pointe
    + slight rise, added by TrainingWebApp.kt only for the render where it just turned on. */
 .reference-panel.panel-reveal{animation:panel-reveal .32s cubic-bezier(.16,1,.3,1)}
 @keyframes panel-reveal{from{opacity:0;transform:translateY(6px) scale(.98)}to{opacity:1;transform:none}}
+
+/* SB-6 blueprint §3: sentence-builder tile row + inline picker/error panel. `min-height`/
+   `min-width:48px` and `gap:8px` on the base rule (not only a mobile media query — SB-AC9) give
+   the same tap target on desktop and phone; `flex-wrap:wrap` (never `overflow-x:auto`) wraps a
+   long sentence to a second line instead of scrolling horizontally at any width. */
+.tile-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:4px 0 10px}
+.tile{min-height:48px;min-width:48px;padding:10px 14px;border-radius:10px;display:inline-flex;align-items:center;justify-content:center;font-size:1.05rem}
+.tile-locked{background:transparent;border:1px solid transparent;color:var(--text);padding-left:4px;padding-right:4px}
+.tile-choice{background:var(--button);border:2px solid var(--line);color:var(--button-text)}
+.tile-choice.tile-empty{border-style:dashed;color:var(--muted)}
+.tile-choice[aria-expanded=true]{border-color:var(--focus)}
+.tile-picker{display:flex;flex-wrap:wrap;gap:8px;padding:2px 0 4px}
+.tile-option{background:var(--surface-raised);border:1px solid var(--line)}
+.tile-correct{background:#183c2d;border-color:#2f6b4c;color:#a7e4bd}
+.tile-incorrect{background:#382228;border-color:#7a3c45;color:#efbbc3}
+:root[data-theme=light] .tile-correct{background:#d9f2e4;border-color:#5fa97c;color:#15533d}
+:root[data-theme=light] .tile-incorrect{background:#fce5e8;border-color:#c66b79;color:#812438}
+.tile-row+.collapsible{margin-bottom:10px}
 @media(max-width:600px){.top{padding-bottom:10px;margin-bottom:10px}.topstats b{font-size:1rem}.topstats span{font-size:.68rem}.app{padding-top:12px}nav{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));margin-bottom:12px}nav button{min-width:0;font-size:.65rem;padding:8px 1px;overflow-wrap:normal}.study-toolbar{margin-bottom:8px}.chain-header{margin:8px 0;min-width:0}.chain-header ol{flex-wrap:nowrap;overflow-x:auto;max-width:100%;min-width:0;padding-bottom:7px}.chain-header li{white-space:nowrap}.card-front{padding-top:18px;padding-bottom:12px}.source-sentence{margin:8px 0 14px}.answer-area{padding-bottom:18px}.answer-area .reveal-button{margin-top:12px}.settings-panel{padding:17px}}
 
 /* UX4-09: no dashed box any more — the whole face is now the swipe zone (and the element that

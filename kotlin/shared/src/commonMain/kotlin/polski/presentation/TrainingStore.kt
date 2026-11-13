@@ -11,8 +11,13 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.JsonObject
+import polski.core.engine.RandomSource
+import polski.core.engine.evaluateTileAnswer
+import polski.core.model.TileSegment
+import polski.core.model.TileSelection
 import polski.data.activePackSkillIds
 import polski.data.packRegistry
+import polski.data.skillById
 import polski.data.skills
 import polski.data.nouns
 import polski.data.adjectives
@@ -50,6 +55,10 @@ class TrainingStore(
     ownerScope: CoroutineScope,
     initialStyleId: StyleId = StyleId.RuleFirst,
     initialAnswerMode: AnswerMode = AnswerMode.Oral,
+    /** SB-6 blueprint §1.2: defaulted so every existing call site keeps compiling unchanged;
+     *  mirrors the `RandomSource { Random.nextDouble() }` pattern each host already builds for
+     *  [polski.training.PlExerciseEngine]. */
+    private val tileRandom: RandomSource = RandomSource { kotlin.random.Random.nextDouble() },
 ) {
     private val scope = CoroutineScope(ownerScope.coroutineContext + SupervisorJob(ownerScope.coroutineContext[Job]))
     private val writes = Channel<Write>(Channel.UNLIMITED)
@@ -67,9 +76,17 @@ class TrainingStore(
 
     private val initialChain = exerciseEngine.generateChain()
     private val mutableState = MutableStateFlow(
-        AppUiState(chain = initialChain.toList(), exercise = initialChain.first(), styleId = initialStyleId, answerMode = initialAnswerMode),
+        AppUiState(
+            chain = initialChain.toList(), exercise = initialChain.first(), styleId = initialStyleId,
+            answerMode = initialAnswerMode, tileBuilder = deriveTileBuilder(initialChain.first()),
+        ),
     )
     val state: StateFlow<AppUiState> = mutableState
+
+    /** SB-6 blueprint §1.1: the single derivation site every `exercise = ...` assignment below
+     *  reuses — unconditional (computed regardless of `answerMode`), `null` exactly when
+     *  [exercise] opts out of tiles ([tileBuilderStateFor]'s own documented fallback). */
+    private fun deriveTileBuilder(exercise: Exercise?): TileBuilderState? = exercise?.let { tileBuilderStateFor(it, tileRandom) }
 
     init {
         scope.launch {
@@ -174,6 +191,7 @@ class TrainingStore(
             is AppAction.EditAnswer -> mutate { it.copy(draft = action.text) }
             is AppAction.Reveal -> reveal(action.exerciseId)
             is AppAction.Rate -> rate(action)
+            is AppAction.Tile -> tile(action)
         }
     }
 
@@ -187,6 +205,13 @@ class TrainingStore(
             !s.introPending && s.exercise?.id == action.exerciseId
         is AppAction.Rate -> s.loadStatus == LoadStatus.Ready && s.phase == CardPhase.Revealed &&
             s.exercise?.id == action.exerciseId && document != null
+        is AppAction.Tile -> s.loadStatus == LoadStatus.Ready && s.exercise?.id == action.exerciseId && when (val a = action.action) {
+            is TileAction.Place, is TileAction.Remove -> s.phase == CardPhase.Question && s.tileBuilder != null
+            TileAction.Check -> s.phase == CardPhase.Question && s.tileBuilder?.let { b ->
+                b.exercise.segments.filterIsInstance<TileSegment.Choice>().all { c -> b.placed.any { it.position == c.position } }
+            } == true
+            is TileAction.TapError -> s.phase == CardPhase.Revealed && s.tileBuilder?.result?.errors?.any { it.position == a.position } == true
+        }
         else -> true
     }
 
@@ -247,7 +272,8 @@ class TrainingStore(
             tab = AppTab.Training, mode = TrainingMode.Chain, seedIndex = index,
             chain = chain, chainIndex = 0, focusedSkillId = null, showSkillPicker = false,
             exercise = chain.first(), phase = CardPhase.Question, draft = "", frozenAnswer = null,
-            evaluation = null, introPending = needsIntroduction(chain.first(), document), error = null,
+            evaluation = null, tileBuilder = deriveTileBuilder(chain.first()),
+            introPending = needsIntroduction(chain.first(), document), error = null,
         )
         addFocus(chain.first())
         refreshTime()
@@ -261,7 +287,7 @@ class TrainingStore(
             tab = AppTab.Training, mode = TrainingMode.Schedule, focusedSkillId = null,
             showSkillPicker = false, exercise = exercise,
             phase = if (exercise == null) CardPhase.NoDue else CardPhase.Question,
-            draft = "", frozenAnswer = null, evaluation = null,
+            draft = "", frozenAnswer = null, evaluation = null, tileBuilder = deriveTileBuilder(exercise),
             introPending = needsIntroduction(exercise, document), error = null,
         ), document ?: return, captured)
         if (exercise != null) addFocus(exercise)
@@ -288,7 +314,7 @@ class TrainingStore(
         mutableState.value = state.value.copy(
             tab = AppTab.Training, mode = TrainingMode.Focused, focusedSkillId = action.skillId,
             showSkillPicker = false, exercise = exercise, phase = CardPhase.Question,
-            draft = "", frozenAnswer = null, evaluation = null,
+            draft = "", frozenAnswer = null, evaluation = null, tileBuilder = deriveTileBuilder(exercise),
             introPending = needsIntroduction(exercise, document), error = null,
         )
         addFocus(exercise)
@@ -299,7 +325,43 @@ class TrainingStore(
         val current = state.value
         val exercise = current.exercise ?: return
         val evaluation = if (current.answerMode == AnswerMode.Typed) evaluate(current.draft, exercise) else null
-        mutate { it.copy(phase = CardPhase.Revealed, frozenAnswer = current.draft, evaluation = evaluation) }
+        val tileResult = current.tileBuilder?.takeIf { current.answerMode == AnswerMode.TileBuilder }
+            ?.let { evaluateTileAnswer(it.exercise, it.placed) }
+        mutate {
+            it.copy(
+                phase = CardPhase.Revealed, frozenAnswer = current.draft, evaluation = evaluation,
+                tileBuilder = current.tileBuilder?.copy(result = tileResult),
+            )
+        }
+    }
+
+    /** SB-6 blueprint §1.2: dispatched by [TileAction.Place]/[Remove]/[TapError] directly, and by
+     *  [TileAction.Check] which delegates to [reveal] — one `CardPhase` state machine for every
+     *  [AnswerMode] (blueprint §1.3): no duplicated freeze/evaluate logic. */
+    private fun tile(action: AppAction.Tile) {
+        val current = state.value
+        val builder = current.tileBuilder ?: return
+        when (val a = action.action) {
+            is TileAction.Place -> mutate {
+                it.copy(tileBuilder = builder.copy(placed = builder.placed.filterNot { p -> p.position == a.position } + TileSelection(a.position, a.form)))
+            }
+            is TileAction.Remove -> mutate {
+                it.copy(tileBuilder = builder.copy(placed = builder.placed.filterNot { p -> p.position == a.position }))
+            }
+            TileAction.Check -> reveal(action.exerciseId)
+            is TileAction.TapError -> mutate {
+                it.copy(tileBuilder = builder.copy(errorExplanation = errorExplanationFor(current, a.position)))
+            }
+        }
+    }
+
+    /** Interim bridge until SB-7 wires `StyleComposer.blocksForError` per-position (blueprint
+     *  §1.2): a generic skill-level Rule block, not yet the specific per-error reason
+     *  ([polski.core.model.TileError.reason] is always null out of [evaluateTileAnswer] today). */
+    private fun errorExplanationFor(state: AppUiState, position: Int): List<Block> {
+        val exercise = state.exercise ?: return emptyList()
+        val skill = skillById(exercise.primarySkill)
+        return listOf(Block.Rule(skill.theory, exercise.explanation, emptyList()))
     }
 
     private fun rate(action: AppAction.Rate) {
@@ -307,9 +369,13 @@ class TrainingStore(
         val exercise = current.exercise ?: return
         val before = document ?: return
         val captured = time.capture()
+        val correctness = when (current.answerMode) {
+            AnswerMode.Typed -> current.evaluation?.correct
+            AnswerMode.TileBuilder -> current.tileBuilder?.result?.correct
+            AnswerMode.Oral -> null
+        }
         val result = reviewReducer.recordReview(
-            before, exercise.primarySkill, action.rating,
-            if (current.answerMode == AnswerMode.Typed) current.evaluation?.correct else null,
+            before, exercise.primarySkill, action.rating, correctness,
             captured.at, captured.localDay,
         )
         if (result !is ReviewResult.Reviewed) {
@@ -332,6 +398,7 @@ class TrainingStore(
         val updated = current.copy(
             chainIndex = if (current.mode == TrainingMode.Chain && nextExercise != null) current.chainIndex + 1 else current.chainIndex,
             exercise = nextExercise, phase = phase, draft = "", frozenAnswer = null, evaluation = null,
+            tileBuilder = deriveTileBuilder(nextExercise),
             introPending = needsIntroduction(nextExercise, result.document),
         )
         mutableState.value = project(updated, result.document, captured)
@@ -347,7 +414,7 @@ class TrainingStore(
         if (current.mode == TrainingMode.Schedule && current.phase == CardPhase.NoDue && projected.dueCount > 0) {
             val exercise = skillQueue.next(doc.progress.cards, scheduler, captured.at)?.let { exerciseEngine.generateForSkill(it.skillId) }
             mutableState.value = project(projected.copy(
-                exercise = exercise, phase = CardPhase.Question,
+                exercise = exercise, phase = CardPhase.Question, tileBuilder = deriveTileBuilder(exercise),
                 introPending = needsIntroduction(exercise, doc),
             ), doc, captured)
             if (exercise != null) addFocus(exercise)
@@ -392,7 +459,8 @@ class TrainingStore(
             loadStatus = LoadStatus.Ready, tab = AppTab.Training, mode = TrainingMode.Chain,
             seedIndex = 0, chain = chain, chainIndex = 0, focusedSkillId = null,
             exercise = chain.first(), phase = CardPhase.Question, draft = "", frozenAnswer = null,
-            evaluation = null, introPending = needsIntroduction(chain.first(), fresh),
+            evaluation = null, tileBuilder = deriveTileBuilder(chain.first()),
+            introPending = needsIntroduction(chain.first(), fresh),
             showSkillPicker = false, error = null,
         )
         mutableState.value = project(next, fresh, captured)

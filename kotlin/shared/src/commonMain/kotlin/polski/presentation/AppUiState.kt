@@ -64,6 +64,11 @@ data class AppUiState(
     val savedRevision: Long = 0,
     val error: String? = null,
     val pendingEffects: List<UiEffect> = emptyList(),
+    /** SB-6 blueprint §1.1: derived from [exercise] alone, recomputed at every site that assigns a
+     *  new [exercise] (never carried over from the previous card). `null` exactly when [exercise]
+     *  doesn't support tiles ([tileBuilderStateFor]'s own documented fallback) — the UI treats
+     *  `tileBuilder != null` as its single "is TileBuilder available" check. */
+    val tileBuilder: TileBuilderState? = null,
 ) {
     val exerciseId: String? get() = exercise?.id
     val caseReferenceAvailable: Boolean get() = exercise?.let { skillById(it.primarySkill).caseReferenceAvailable } ?: true
