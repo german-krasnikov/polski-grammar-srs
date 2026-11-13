@@ -1,5 +1,15 @@
 import { expect, test } from '@playwright/test';
 import { continueIntroductionIfPresent } from './kotlin-introduction';
+import { progressAsLegacyShape } from './polski-text';
+
+const progressKey = 'polski-grammar-srs-kmp-preview-v1';
+async function reviewCounts(page: import('@playwright/test').Page, skillId: string) {
+  const raw = await page.evaluate(key => localStorage.getItem(key), progressKey);
+  if (!raw) return { total: 0, skill: 0 };
+  const progress = progressAsLegacyShape(raw);
+  const stats = progress.stats as Record<string, { reviews: number }>;
+  return { total: progress.totalReviews as number, skill: stats[skillId]?.reviews ?? 0 };
+}
 
 const topics = [
   { title: 'Причастия и деепричастия', level: 'B2', summary: 'Причастия и деепричастия', pairs: [
@@ -55,7 +65,7 @@ const topics = [
     ['Tylko Anna zna odpowiedź.', 'Nikt oprócz Anny nie zna odpowiedzi.'],
     ['Chociaż pada deszcz, idziemy na spacer.', 'Mimo deszczu idziemy na spacer.'],
     ['Nie mogę przyjść, bo jestem chory.', 'Z powodu choroby nie mogę przyjść.'],
-    ['Po zakończeniu pracy wrócił do domu.', 'Kiedy skończył pracę, wrócił do domu.'],
+    ['Piotr skończył pracę, a potem wrócił do domu.', 'Kiedy Piotr skończył pracę, wrócił do domu.'],
     ['Maria napisała list.', 'List został napisany przez Marię.'],
   ] },
   { title: 'Управление польских глаголов', level: 'B2', summary: 'Управление польских глаголов', pairs: [
@@ -103,22 +113,76 @@ test('nine added families have reachable training, authored styles and Matrix su
   }
 });
 
-test('numerals and valency give six different tasks before repetition', async ({ page }) => {
+test('numerals and valency persist six reviews per stable skill before repetition', async ({ page }) => {
   test.setTimeout(120_000);
-  for (const topic of [topics[3], topics[7]]) {
+  for (const [topic, id] of [[topics[3], 'numeral.agreement'], [topics[7], 'case.valency']] as const) {
     await startTopic(page, topic.title, topic.level);
+    await page.evaluate(() => {
+      (window as any).__p18Clicks = [];
+      document.addEventListener('click', event => {
+        (window as any).__p18Clicks.push((event.target as HTMLElement).closest('button')?.textContent ?? 'outside button');
+      }, true);
+    });
+    const before = await reviewCounts(page, id);
+    expect(before.skill).toBe(0);
     const seen = new Set<string>();
     for (let index = 0; index < 6; index += 1) {
+      await expect(page.locator('.card-meta')).toContainText(topic.title);
       const source = (await page.locator('.source-sentence').innerText()).trim();
       expect(seen.has(source)).toBe(false);
       seen.add(source);
       await page.getByRole('button', { name: 'Показать ответ' }).click();
       await expect(page.locator('.answer-sentence')).toHaveText(topic.pairs.find(([before]) => before === source)![1]);
       await page.getByRole('button', { name: /2 Вспомнил/ }).click();
-      await page.getByRole('button', { name: /^(Перейти к заданию|Показать ответ)$/ }).first().waitFor({ timeout: 20_000 });
+      const clicks = await page.evaluate(() => (window as any).__p18Clicks as string[]);
+      expect(clicks.filter(label => label.startsWith('2 Вспомнил')).length).toBe(index + 1);
+      await expect.poll(async () => reviewCounts(page, id)).toEqual({ total: before.total + index + 1, skill: index + 1 });
+      await expect(page.locator('.answer-sentence')).toHaveCount(0);
       await continueIntroductionIfPresent(page);
     }
     expect(seen.size).toBe(6);
     expect((await page.locator('.source-sentence').innerText()).trim()).not.toBe([...seen].at(-1));
+    expect(await reviewCounts(page, 'numeral.agreement')).toEqual({ total: before.total + 6, skill: 6 });
   }
+  expect(await reviewCounts(page, 'case.valency')).toEqual({ total: 12, skill: 6 });
+  await page.reload();
+  expect(await reviewCounts(page, 'numeral.agreement')).toEqual({ total: 12, skill: 6 });
+  expect(await reviewCounts(page, 'case.valency')).toEqual({ total: 12, skill: 6 });
+});
+
+test('rating hit target recovers when motion changes during reveal and after returning to training', async ({ page }) => {
+  await startTopic(page, topics[3].title, topics[3].level);
+  await page.getByRole('button', { name: 'Показать ответ' }).click();
+  await page.evaluate(() => document.documentElement.setAttribute('data-animations', 'off'));
+  await expect.poll(() => page.locator('.ratings').evaluate(row => getComputedStyle(row).pointerEvents), { timeout: 600 }).toBe('auto');
+  await page.getByRole('button', { name: /2 Вспомнил/ }).click();
+  await expect.poll(() => reviewCounts(page, 'numeral.agreement')).toEqual({ total: 1, skill: 1 });
+
+  await page.getByRole('button', { name: 'Показать ответ' }).click();
+  await page.getByRole('button', { name: 'Настройки' }).click();
+  await page.locator('#settings-animations').uncheck();
+  await page.goBack();
+  await expect(page.locator('.answer-sentence')).toBeVisible();
+  await expect.poll(() => page.locator('.ratings').evaluate(row => getComputedStyle(row).pointerEvents), { timeout: 600 }).toBe('auto');
+  await page.getByRole('button', { name: /2 Вспомнил/ }).click();
+  await expect.poll(() => reviewCounts(page, 'numeral.agreement')).toEqual({ total: 2, skill: 2 });
+
+  await page.getByRole('button', { name: 'Настройки' }).click();
+  await page.locator('#settings-animations').check();
+  await page.goBack();
+  await expect(page.locator('html')).toHaveAttribute('data-animations', 'on');
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.getByRole('button', { name: 'Показать ответ' }).click();
+  await expect(page.locator('.ratings')).toHaveCSS('pointer-events', 'auto', { timeout: 600 });
+  await page.getByRole('button', { name: /2 Вспомнил/ }).click();
+  await expect.poll(() => reviewCounts(page, 'numeral.agreement')).toEqual({ total: 3, skill: 3 });
+
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await page.getByRole('button', { name: 'Показать ответ' }).click();
+  await page.getByRole('button', { name: 'Таблицы и схема' }).click();
+  await page.goBack();
+  await expect(page.locator('.answer-sentence')).toBeVisible();
+  await expect.poll(() => page.locator('.ratings').evaluate(row => getComputedStyle(row).pointerEvents), { timeout: 600 }).toBe('auto');
+  await page.getByRole('button', { name: /2 Вспомнил/ }).click();
+  await expect.poll(() => reviewCounts(page, 'numeral.agreement')).toEqual({ total: 4, skill: 4 });
 });

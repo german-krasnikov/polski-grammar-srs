@@ -2240,7 +2240,7 @@ final class PolskiGrammarUITests: XCTestCase {
                 "Tylko Anna zna odpowiedź.": "Nikt oprócz Anny nie zna odpowiedzi.",
                 "Chociaż pada deszcz, idziemy na spacer.": "Mimo deszczu idziemy na spacer.",
                 "Nie mogę przyjść, bo jestem chory.": "Z powodu choroby nie mogę przyjść.",
-                "Po zakończeniu pracy wrócił do domu.": "Kiedy skończył pracę, wrócił do domu.",
+                "Piotr skończył pracę, a potem wrócił do domu.": "Kiedy Piotr skończył pracę, wrócił do domu.",
                 "Maria napisała list.": "List został napisany przez Marię.",
             ]),
             ("Управление польских глаголов", [
@@ -2307,5 +2307,42 @@ final class PolskiGrammarUITests: XCTestCase {
             for _ in 0..<35 { if summary.exists { break }; app.swipeUp() }
             XCTAssertTrue(summary.waitForExistence(timeout: 5), "Missing Matrix summary: \(title); \(app.debugDescription)")
         }
+    }
+
+    func testRephrasingKeepsExplicitPiotrAsActor() {
+        let app = XCUIApplication()
+        app.launch()
+        continueIntroductionIfPresent(app)
+        let source = "Piotr skończył pracę, a potem wrócił do domu."
+        let expected = "Kiedy Piotr skończył pracę, wrócił do domu."
+        for _ in 0..<6 {
+            app.buttons["Прогресс"].firstMatch.tap()
+            let row = app.buttons.matching(NSPredicate(format: "label CONTAINS %@", "Смысловое преобразование фраз")).firstMatch
+            for _ in 0..<30 { if row.isHittable { break }; app.swipeUp() }
+            XCTAssertTrue(row.isHittable, app.debugDescription)
+            row.tap()
+            continueIntroductionIfPresent(app)
+            if app.staticTexts[source].exists {
+                for _ in 0..<8 { if app.staticTexts[source].isHittable { break }; app.swipeDown() }
+                XCTAssertTrue(app.staticTexts[source].isHittable, app.debugDescription)
+                let question = XCTAttachment(screenshot: app.screenshot())
+                question.name = "rephrase-explicit-actor-question"
+                question.lifetime = .keepAlways
+                add(question)
+                let reveal = app.buttons["revealAnswer"]
+                for _ in 0..<8 { if reveal.isHittable { break }; app.swipeUp() }
+                XCTAssertTrue(reveal.isHittable, app.debugDescription)
+                reveal.tap()
+                XCTAssertTrue(app.staticTexts[expected].waitForExistence(timeout: 5), app.debugDescription)
+                for _ in 0..<8 { if app.staticTexts[expected].isHittable { break }; app.swipeUp() }
+                XCTAssertTrue(app.staticTexts[expected].isHittable, app.debugDescription)
+                let answer = XCTAttachment(screenshot: app.screenshot())
+                answer.name = "rephrase-explicit-actor-answer"
+                answer.lifetime = .keepAlways
+                add(answer)
+                return
+            }
+        }
+        XCTFail("The six-card rephrasing pool did not expose the explicit-actor sentence: \(app.debugDescription)")
     }
 }

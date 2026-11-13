@@ -599,13 +599,13 @@ COPY {key: numerals4Expected value: "Mam trzy koty."}
 COPY {key: numerals4Prompt value: "Измени количество на три кота."}
 COPY {
   key: numerals4Explanation
-  value: "После trzy в винительном неодушевлённо-неличной группы — koty."
+  value: "В Mam trzy koty винительный множественного совпадает с именительным: koty. Коты одушевлённые, но не относятся к мужскому личному типу."
 }
 COPY {key: numerals4From value: "jednego kota"}
 COPY {key: numerals4To value: "trzy koty"}
 COPY {
   key: numerals4Reason
-  value: "После trzy в винительном неодушевлённо-неличной группы — koty."
+  value: "В Mam trzy koty винительный множественного совпадает с именительным: koty. Коты одушевлённые, но не относятся к мужскому личному типу."
 }
 COPY {key: numerals5Source value: "Widziałem dwie kobiety."}
 COPY {key: numerals5Expected value: "Widziałem pięć kobiet."}
@@ -856,19 +856,28 @@ COPY {key: rephrase4Explanation value: "Причина болезни остаё
 COPY {key: rephrase4From value: "bo jestem chory"}
 COPY {key: rephrase4To value: "Z powodu choroby"}
 COPY {key: rephrase4Reason value: "Причина болезни остаётся той же."}
-COPY {key: rephrase5Source value: "Po zakończeniu pracy wrócił do domu."}
-COPY {key: rephrase5Expected value: "Kiedy skończył pracę, wrócił do domu."}
+COPY {
+  key: rephrase5Source
+  value: "Piotr skończył pracę, a potem wrócił do domu."
+}
+COPY {
+  key: rephrase5Expected
+  value: "Kiedy Piotr skończył pracę, wrócił do domu."
+}
 COPY {
   key: rephrase5Prompt
-  value: "Передай временную связь придаточным с kiedy."
+  value: "Передай последовательность придаточным с kiedy; оба действия выполняет Piotr."
 }
 COPY {
   key: rephrase5Explanation
-  value: "Окончание работы предшествует возвращению."
+  value: "Piotr закончил работу и затем вернулся домой; после перестройки оба действия остаются его."
 }
-COPY {key: rephrase5From value: "Po zakończeniu pracy"}
-COPY {key: rephrase5To value: "Kiedy skończył pracę"}
-COPY {key: rephrase5Reason value: "Окончание работы предшествует возвращению."}
+COPY {key: rephrase5From value: "Piotr skończył pracę, a potem"}
+COPY {key: rephrase5To value: "Kiedy Piotr skończył pracę"}
+COPY {
+  key: rephrase5Reason
+  value: "Piotr закончил работу и затем вернулся домой; после перестройки оба действия остаются его."
+}
 COPY {key: rephrase6Source value: "Maria napisała list."}
 COPY {key: rephrase6Expected value: "List został napisany przez Marię."}
 COPY {

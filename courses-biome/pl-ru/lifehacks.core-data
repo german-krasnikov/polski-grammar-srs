@@ -377,7 +377,7 @@ LIFEHACK {
   text: "После czytanie прямое дополнение становится зависимым родительным: czytam książki → czytanie książek. Русская фраза «читаю книги» не подсказывает новую польскую форму объекта."
   source: {
     kind: research
-    citation: "Swan (2002), A Grammar of Contemporary Polish, ch. 12, Verbal Nouns, pp. 308–310; ch. 5, Nominal Derivation: action nouns and their governed complements."
+    citation: "Swan (2002), A Grammar of Contemporary Polish, ch. 12, Verbal Nouns, pp. 308–310: action nouns and the Genitive of an original Accusative object."
     url: "https://lektorek.org/lektorek/grammar.pdf"
   }
   status: editorial
@@ -410,10 +410,10 @@ LIFEHACK {
 LIFEHACK {
   id: pl-ru.sentence.connectives.source-rule
   skillId: sentence.connectives
-  text: "Чтобы назвать цель, польское żeby требует зависимую часть: Uczę się polskiego, żeby rozmawiać z sąsiadami. Русское «чтобы» здесь помогает, но nie myl celu z przyczyną ponieważ."
+  text: "Чтобы назвать цель, польское żeby требует зависимую часть: Uczę się polskiego, żeby rozmawiać z sąsiadami. Русское «чтобы» здесь помогает: żeby называет цель («зачем?»), а ponieważ объясняет причину («почему?»)."
   source: {
     kind: research
-    citation: "Swan (2002), A Grammar of Contemporary Polish, ch. 17, Conjunctions, pp. 402–407: coordinating and subordinating conjunctions for cause, contrast, condition, purpose and time."
+    citation: "Swan (2002), A Grammar of Contemporary Polish, ch. 14, Conjunctions, pp. 402–407: coordinating and subordinating conjunctions for cause, contrast, condition, purpose and time."
     url: "https://lektorek.org/lektorek/grammar.pdf"
   }
   status: editorial
@@ -425,7 +425,7 @@ LIFEHACK {
   text: "При замене tylko на nikt oprócz понадобится отрицание: Tylko Anna zna odpowiedź → Nikt oprócz Anny nie zna odpowiedzi. Второе dopełniacz связано и с oprócz, и с отрицанием."
   source: {
     kind: research
-    citation: "Swan (2002), A Grammar of Contemporary Polish, ch. 13, Negation and Genitive; ch. 17, Conjunctions, pp. 402–407: negative and subordinate-clause constructions used for equivalent reformulation."
+    citation: "Swan (2002), A Grammar of Contemporary Polish, ch. 13, Uses of the Cases, pp. 333–340 (Genitive of negation); ch. 14, Conjunctions, pp. 402–407: negative and subordinate-clause constructions used for equivalent reformulation."
     url: "https://lektorek.org/lektorek/grammar.pdf"
   }
   status: editorial
@@ -437,7 +437,7 @@ LIFEHACK {
   text: "Русское «жду автобус» без предлога нельзя калькировать: Czekam na autobus. Польское czekać требует na с винительным."
   source: {
     kind: research
-    citation: "Swan (2002), A Grammar of Contemporary Polish, ch. 13, Verb Government, pp. 343–373: czekać na + accusative, korzystać z + genitive, interesować się + instrumental; słuchać + genitive and pomagać + dative."
+    citation: "Swan (2002), A Grammar of Contemporary Polish, ch. 14, Simple Sentence Syntax, p. 394: genitive, dative, instrumental and prepositional complements (szukać, słuchać, pomagać, interesować się, czekać na); ch. 13, Uses of the Cases, pp. 337–373: korzystać z + genitive and case/preposition frames."
     url: "https://lektorek.org/lektorek/grammar.pdf"
   }
   status: editorial
@@ -449,7 +449,7 @@ LIFEHACK {
   text: "Русское «бы» пишется отдельно, польское -by соединяется с формой и личным окончанием: pisałbym, pisałabym. Род говорящего меняет форму даже в первом лице."
   source: {
     kind: research
-    citation: "Swan (2002), A Grammar of Contemporary Polish, ch. 10, Conditional Mood, pp. 257–259, and Imperative Mood, pp. 254–256: -by personal endings and command forms."
+    citation: "Swan (2002), A Grammar of Contemporary Polish, ch. 9, Present Tense and Imperative, pp. 239–243: commands and inclusive chodźmy; ch. 10, Conditional Mood, pp. 257–259: -by personal endings."
     url: "https://lektorek.org/lektorek/grammar.pdf"
   }
   status: editorial

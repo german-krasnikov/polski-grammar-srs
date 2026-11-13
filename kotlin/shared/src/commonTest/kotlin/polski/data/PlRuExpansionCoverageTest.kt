@@ -69,6 +69,17 @@ class PlRuExpansionCoverageTest {
             val front = styleContentBySkillId(id)
             assertTrue(cycle.none { exercise -> front.nativeParallel.any { it.target == exercise.expected } }, "$id: native parallel reveals an answer")
             assertTrue(cycle.none { exercise -> front.examples.contains(exercise.expected) }, "$id: examples reveal an answer")
+            if (id == "numeral.agreement") {
+                val cats = cycle.single { it.source == "Mam jednego kota." }
+                assertTrue("не относятся к мужскому личному типу" in cats.explanation)
+                assertFalse("неодушевлённо" in cats.explanation)
+            }
+            if (id == "sentence.rephrase") {
+                assertTrue(cycle.any {
+                    it.source == "Piotr skończył pracę, a potem wrócił do domu." &&
+                        it.expected == "Kiedy Piotr skończył pracę, wrócił do domu."
+                })
+            }
             assertNotEquals(cycle.last().source, engine.generateForSkill(id).source, "$id: cycle boundary")
         }
     }
