@@ -101,11 +101,11 @@ internal class ExamWebController {
             }
             moduleRow(this, "I. Rozumienie ze słuchu", exam.listeningCount, exam.listeningCount > 0) {
                 close()
-                listeningCtrl = ExamListeningController(exam.id, onBack = { close(); screen = ExamScreen.Modules; redraw() })
+                listeningCtrl = ExamListeningController(exam.id, onBack = { close(); screen = ExamScreen.Modules; redraw() }, immediateFeedbackEnabled = immediateFeedbackEnabled)
                 screen = ExamScreen.Listening; redraw()
             }
             moduleRow(this, "II. Rozumienie tekstów pisanych", exam.readingCount, exam.readingCount > 0) {
-                readingCtrl = ExamReadingController(exam.id, onBack = { screen = ExamScreen.Modules; redraw() })
+                readingCtrl = ExamReadingController(exam.id, onBack = { readingCtrl?.close(); screen = ExamScreen.Modules; redraw() }, immediateFeedbackEnabled = immediateFeedbackEnabled)
                 screen = ExamScreen.Reading; redraw()
             }
             moduleRow(this, "III. Poprawność gramatyczna", exam.grammarCount, exam.grammarCount > 0) {

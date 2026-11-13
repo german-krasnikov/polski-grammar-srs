@@ -32,7 +32,8 @@
 .exam-review-item.wrong { background: rgba(244, 67, 54, 0.1); }
 .exam-review-num { font-weight: 600; min-width: 24px; }
 .exam-review-context { flex: 1; }
-.exam-review-correct { color: var(--primary, #7eb6ff); font-weight: 600; white-space: nowrap; }
+.exam-review-correct { color: var(--green); font-weight: 600; white-space: nowrap; }
+.exam-review-item.partial .exam-review-correct { color: var(--text); }
 
 /* Exam list */
 .exam-list { display: flex; flex-direction: column; gap: 12px; }
@@ -83,12 +84,15 @@
 .player-progress-fill { height: 100%; background: var(--primary, #7eb6ff); border-radius: 3px; transition: width 0.1s linear; width: 0; }
 .player-time { font-size: 0.85rem; color: var(--on-surface-variant, #888); white-space: nowrap; min-width: 80px; text-align: right; }
 
-.exam-option.feedback-wrong { border-color: #c62828; background: rgba(198, 40, 40, 0.14); }
-.exam-option.feedback-correct { border-color: #2e7d32; background: rgba(46, 125, 50, 0.14); }
+.exam-option.feedback-wrong { border-color: var(--before); background: rgba(198, 40, 40, 0.14); color: var(--before); }
+.exam-option.feedback-correct { border-color: var(--green); background: rgba(46, 125, 50, 0.14); color: var(--green); }
+.exam-option.feedback-partial { border-color: #a36a00; background: rgba(163, 106, 0, 0.14); color: var(--text); }
 .exam-input.feedback-wrong { border-color: #c62828; background: rgba(198, 40, 40, 0.08); }
 .exam-input.feedback-correct { border-color: #2e7d32; background: rgba(46, 125, 50, 0.08); }
-.exam-input:disabled { cursor: not-allowed; opacity: 0.72; }
+.exam-input:disabled { cursor: not-allowed; opacity: 1; color: var(--text); }
 .exam-check-btn { margin-top: 8px; }
 .exam-feedback { border: 1px solid currentColor; border-radius: 8px; padding: 10px 14px; margin-bottom: 16px; }
-.exam-option.locked { cursor: not-allowed; opacity: 0.72; }
+.exam-option:disabled { cursor: not-allowed; opacity: 1; }
+.exam-option.locked { color: var(--text); }
 .exam-choice-locked { border: 1px dashed var(--outline, #444); border-radius: 8px; padding: 10px 14px; margin-bottom: 16px; }
+.exam-reading-q.practice-focused { outline: 2px solid var(--primary, #7eb6ff); outline-offset: 4px; border-radius: 6px; }

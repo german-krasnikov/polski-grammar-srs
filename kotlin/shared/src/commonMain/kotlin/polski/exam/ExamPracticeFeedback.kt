@@ -4,6 +4,10 @@ import polski.exam.grammar.GrammarExamScorer
 import polski.exam.grammar.GrammarItem
 import polski.exam.grammar.GrammarTest
 import polski.exam.practicefeedbackpolicy.Policy
+import polski.exam.reading.ReadingExam
+import polski.exam.reading.ReadingExamScorer
+import polski.exam.listening.ListeningExam
+import polski.exam.listening.ListeningExamScorer
 
 /** A source answer is fixed at its first valid practice commit. Bank identity is kept separately from grading text. */
 data class CommittedAnswer(val itemId: String, val rawAnswer: String, val selectedTokenId: String? = null)
@@ -110,4 +114,97 @@ fun advancePracticeFocus(state: PracticeFeedbackState, sourceOrderedQuestionIds:
     val currentIndex = sourceOrderedQuestionIds.indexOf(state.focusedQuestionId)
     val next = sourceOrderedQuestionIds.drop(currentIndex + 1).firstOrNull { it !in state.committed }
     return clearPracticeFeedback(state).copy(focusedQuestionId = next ?: state.focusedQuestionId)
+}
+
+/** Keep grouped practice inside its source passage/task, wrapping to an earlier unanswered question. */
+fun advanceGroupedPracticeFocus(state: PracticeFeedbackState, groupQuestionIds: List<String>): PracticeFeedbackState {
+    val next = nextGroupedQuestion(state.focusedQuestionId, groupQuestionIds, state.committed.keys)
+    return clearPracticeFeedback(state).copy(focusedQuestionId = next ?: state.focusedQuestionId)
+}
+
+private fun nextGroupedQuestion(currentId: String?, ids: List<String>, committedIds: Set<String>): String? {
+    val index = ids.indexOf(currentId)
+    if (index < 0) return null
+    return (ids.drop(index + 1) + ids.take(index)).firstOrNull { it !in committedIds }
+}
+
+fun acceptReadingPracticeInput(
+    state: PracticeFeedbackState, exam: ReadingExam, currentPassageId: String, questionId: String,
+    rawAnswer: String, enabled: Boolean, existingAnswers: Map<String, String> = emptyMap(),
+    timed: Boolean = false, event: PracticeInputEvent = PracticeInputEvent.Choice,
+): PracticeFeedbackState {
+    val group = exam.passages.firstOrNull { it.id == currentPassageId } ?: return state
+    val questions = exam.questions.filter { it.passageId == group.id }
+    val question = questions.firstOrNull { it.id == questionId } ?: return state
+    val options = when (question.type) {
+        QuestionType.TrueFalse -> question.options.ifEmpty { listOf("TAK", "NIE") }
+        QuestionType.TrueFalseNotGiven -> question.options.ifEmpty { listOf("TAK", "NIE", "BRAK INFORMACJI") }
+        else -> question.options
+    }
+    val complete = practiceAnswerComplete(rawAnswer, options, question.answerMode, question.answerSlotCount)
+    val checkRequired = options.isEmpty()
+    val evaluation = if (complete && enabled && !timed && questionId !in state.committed) {
+        ReadingExamScorer.grade(question, rawAnswer)
+    } else null
+    return acceptGroupedInput(state, questionId, rawAnswer, event, enabled, timed, complete, checkRequired,
+        questions.map { it.id }, evaluation, listOf(question.correctAnswer) + question.scoredVariants.map { it.answer })
+}
+
+fun acceptListeningPracticeInput(
+    state: PracticeFeedbackState, exam: ListeningExam, currentTaskId: String, questionId: String,
+    rawAnswer: String, enabled: Boolean, existingAnswers: Map<String, String> = emptyMap(),
+    timed: Boolean = false, event: PracticeInputEvent = PracticeInputEvent.Choice,
+): PracticeFeedbackState {
+    val task = exam.tasks.firstOrNull { it.id == currentTaskId } ?: return state
+    val question = task.questions.firstOrNull { it.id == questionId } ?: return state
+    val options = if (question.type == QuestionType.TrueFalse) question.options.ifEmpty { listOf("PRAWDA", "FAŁSZ") }
+        else question.options
+    val complete = practiceAnswerComplete(rawAnswer, options, question.answerMode, question.answerSlotCount)
+    val checkRequired = options.isEmpty()
+    val evaluation = if (complete && enabled && !timed && questionId !in state.committed) {
+        ListeningExamScorer.grade(question, rawAnswer)
+    } else null
+    return acceptGroupedInput(state, questionId, rawAnswer, event, enabled, timed, complete, checkRequired,
+        task.questions.map { it.id }, evaluation, listOf(question.correctAnswer) + question.scoredVariants.map { it.answer })
+}
+
+private fun practiceAnswerComplete(raw: String, options: List<String>, mode: ExamAnswerMode, slots: Int): Boolean {
+    val parts = if (mode == ExamAnswerMode.UnorderedSet) raw.split("|").map { it.trim() }.filter { it.isNotEmpty() }
+        else listOf(raw.trim()).filter { it.isNotEmpty() }
+    if (parts.size != slots || parts.distinct().size != parts.size) return false
+    return options.isEmpty() || parts.all { it in options }
+}
+
+private fun acceptGroupedInput(
+    state: PracticeFeedbackState, questionId: String, rawAnswer: String, event: PracticeInputEvent,
+    enabled: Boolean, timed: Boolean, complete: Boolean, checkRequired: Boolean,
+    groupIds: List<String>, evaluation: ExamAnswerEvaluation?, examples: List<String>,
+): PracticeFeedbackState {
+    val nextCommitted = state.committed + (questionId to CommittedAnswer(questionId, rawAnswer))
+    val disposition = Policy.disposition(Policy.DispositionInput(
+        alreadyCommitted = questionId in state.committed,
+        answerComplete = complete,
+        dependenciesReady = true,
+        mode = if (timed) "timed" else "practice",
+        preferenceEnabled = enabled,
+        event = event.policyTag,
+        explicitCheckRequired = checkRequired,
+        gradeStatus = evaluation?.status?.tag ?: "none",
+        hasNextQuestion = nextGroupedQuestion(questionId, groupIds, nextCommitted.keys) != null,
+        validTarget = true,
+    ))
+    if (disposition != Policy.DispositionValues.CommitShowStay &&
+        disposition != Policy.DispositionValues.CommitShowAdvance &&
+        disposition != Policy.DispositionValues.CommitDeferred) return state
+    val generation = state.generation + 1
+    return state.copy(
+        committed = nextCommitted,
+        focusedQuestionId = questionId,
+        generation = generation,
+        evaluations = if (evaluation != null) state.evaluations + (questionId to evaluation) else state.evaluations,
+        visible = evaluation?.let {
+            FeedbackView(questionId, rawAnswer, examples.distinct(), it, generation,
+                disposition == Policy.DispositionValues.CommitShowAdvance)
+        },
+    )
 }

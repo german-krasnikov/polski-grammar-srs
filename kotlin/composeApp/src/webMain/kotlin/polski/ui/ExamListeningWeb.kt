@@ -1,6 +1,7 @@
 package polski.ui
 
 import kotlinx.browser.document
+import kotlinx.browser.window
 import org.w3c.dom.HTMLAudioElement
 import org.w3c.dom.HTMLButtonElement
 import org.w3c.dom.HTMLElement
@@ -11,12 +12,20 @@ import polski.exam.QuestionType
 import polski.exam.ExamAnswerMode
 import polski.exam.ExamAnswerStatus
 import polski.presentation.UiCopy
+import polski.exam.PracticeFeedbackState
+import polski.exam.PracticeInputEvent
+import polski.exam.acceptListeningPracticeInput
+import polski.exam.advanceGroupedPracticeFocus
+import polski.exam.clearPracticeFeedback
+import polski.exam.listeningReviewRows
+import org.w3c.dom.events.Event
 
 internal class ExamListeningController(
     examId: String, private val onBack: () -> Unit,
     private val externalState: (() -> ListeningExamState)? = null,
     private val onAction: ((ListeningExamAction) -> Unit)? = null,
     private val onTimedFinish: (() -> Unit)? = null,
+    private val immediateFeedbackEnabled: () -> Boolean = { true },
 ) {
     private val exam = examListeningData[examId] ?: ListeningExam(emptyList(), "")
     private var ownState = ListeningExamState(exam)
@@ -38,14 +47,79 @@ internal class ExamListeningController(
     private var playInFlight = false
     private var replaySeekPending = false
     private var playbackError: String? = null
+    private var feedback = PracticeFeedbackState()
+    private var autoAdvanceTimer: Int? = null
+    private val onVisibilityChange: (Event) -> Unit = {
+        if (browserDocumentHidden()) { cancelFeedbackTimer(); updateCurrentRows() }
+    }
+    private fun practiceEnabled() = externalState == null && onTimedFinish == null && immediateFeedbackEnabled()
+    private fun cancelFeedbackTimer() {
+        autoAdvanceTimer?.let(window::clearTimeout)
+        autoAdvanceTimer = null
+        feedback = clearPracticeFeedback(feedback)
+    }
 
-    fun render(container: HTMLElement) { root = container; setupAudio(); redraw() }
+    fun render(container: HTMLElement) { root = container; document.removeEventListener("visibilitychange", onVisibilityChange); document.addEventListener("visibilitychange", onVisibilityChange); setupAudio(); redraw() }
+
+    private fun onDraftInput(questionId: String) {
+        if (practiceEnabled() && feedback.visible?.itemId != questionId && autoAdvanceTimer != null) {
+            cancelFeedbackTimer()
+            updateCurrentRows()
+        }
+    }
 
     /** Releases the single media element when the exam route or module is left. */
     fun close() {
+        cancelFeedbackTimer()
+        document.removeEventListener("visibilitychange", onVisibilityChange)
         disposeAudio()
         root = null
     }
+
+    private fun answerPractice(questionId: String, answer: String, event: PracticeInputEvent = PracticeInputEvent.Choice) {
+        if (!practiceEnabled()) { dispatch(ListeningExamAction.Answer(questionId, answer)); updateQuestionRow(questionId); return }
+        if (feedback.visible?.itemId != questionId && autoAdvanceTimer != null) {
+            cancelFeedbackTimer()
+            updateCurrentRows()
+        }
+        val task = exam.tasks[currentTaskIdx]
+        val next = acceptListeningPracticeInput(feedback, exam, task.id, questionId, answer,
+            enabled = true, existingAnswers = answers, event = event)
+        if (next === feedback) {
+            if (questionId in feedback.committed || event == PracticeInputEvent.Check) return
+            dispatch(ListeningExamAction.Answer(questionId, answer))
+            updateQuestionRow(questionId)
+            return
+        }
+        feedback = next
+        dispatch(ListeningExamAction.Answer(questionId, answer))
+        updateQuestionRow(questionId)
+        val view = feedback.visible ?: return
+        if (!view.mayAutoAdvance) return
+        val taskIndex = currentTaskIdx
+        val taskId = task.id
+        val generation = view.generation
+        autoAdvanceTimer = window.setTimeout({
+            autoAdvanceTimer = null
+            if (root != null && !submitted && !browserDocumentHidden() && practiceEnabled() &&
+                currentTaskIdx == taskIndex && exam.tasks[currentTaskIdx].id == taskId &&
+                feedback.generation == generation) {
+                feedback = advanceGroupedPracticeFocus(feedback, task.questions.map { it.id })
+                feedback.focusedQuestionId?.let { focusGroupedQuestion(root, it) }
+                updateCurrentRows()
+            }
+            null
+        }, 2_000)
+    }
+
+    private fun updateQuestionRow(questionId: String) {
+        val question = exam.tasks.getOrNull(currentTaskIdx)?.questions?.firstOrNull { it.id == questionId } ?: return
+        val row = root?.querySelector(".exam-reading-q[data-question-id='$questionId']") as? HTMLElement ?: return
+        updateGroupedFeedbackRow(row, questionId, answers[questionId].orEmpty(), question.correctAnswer,
+            question.pointsQuarter, feedback, practiceEnabled())
+    }
+
+    private fun updateCurrentRows() { exam.tasks.getOrNull(currentTaskIdx)?.questions?.forEach { updateQuestionRow(it.id) } }
 
     private fun disposeAudio() {
         cancelPlayback()
@@ -240,6 +314,8 @@ internal class ExamListeningController(
         c.appendChild(node("div", "exam-listening-questions").apply {
             task.questions.forEachIndexed { i, q ->
                 appendChild(node("div", "exam-reading-q").apply {
+                    setAttribute("data-question-id", q.id)
+                    setAttribute("tabindex", "-1")
                     appendChild(node("div", "exam-reading-q-text", "${i + 1}. ${q.questionText}"))
                     when (q.type) {
                         QuestionType.TrueFalse -> appendChild(trueFalseOptions(q))
@@ -251,11 +327,12 @@ internal class ExamListeningController(
                 })
             }
         })
+        updateCurrentRows()
         c.appendChild(node("div", "exam-nav").apply {
-            if (currentTaskIdx > 0) appendChild(navBtn("← Назад") { dispatch(ListeningExamAction.Previous); redraw() })
+            if (currentTaskIdx > 0) appendChild(navBtn("← Назад") { cancelFeedbackTimer(); dispatch(ListeningExamAction.Previous); redraw() })
             appendChild(node("span", "exam-nav-spacer"))
-            if (currentTaskIdx < exam.tasks.lastIndex) appendChild(navBtn(UiCopy.Next) { dispatch(ListeningExamAction.Next); redraw() })
-            if (currentTaskIdx == exam.tasks.lastIndex) appendChild(navBtn(UiCopy.Finish, true) { if (onTimedFinish != null) onTimedFinish.invoke() else { dispatch(ListeningExamAction.Submit); redraw() } })
+            if (currentTaskIdx < exam.tasks.lastIndex) appendChild(navBtn(UiCopy.Next) { cancelFeedbackTimer(); dispatch(ListeningExamAction.Next); redraw() })
+            if (currentTaskIdx == exam.tasks.lastIndex) appendChild(navBtn(UiCopy.Finish, true) { cancelFeedbackTimer(); if (onTimedFinish != null) onTimedFinish.invoke() else { dispatch(ListeningExamAction.Submit); redraw() } })
         })
     }
 
@@ -278,20 +355,7 @@ internal class ExamListeningController(
             else if (choices.size < current.answerSlotCount) choices.add(answer)
             choices
         } else mutableListOf(answer)
-        dispatch(ListeningExamAction.Answer(questionId, selected.joinToString("|")))
-        val question = root?.querySelectorAll(".exam-reading-q") ?: return
-        for (i in 0 until question.length) {
-            val row = question.item(i) as? HTMLElement ?: continue
-            val buttons = row.querySelectorAll(".exam-option")
-            if (buttons.length == 0) continue
-            val matches = exam.tasks[currentTaskIdx].questions.getOrNull(i)?.id == questionId
-            if (!matches) continue
-            for (j in 0 until buttons.length) {
-                val button = buttons.item(j) as? HTMLButtonElement ?: continue
-                button.className = if (button.textContent in selected) "exam-option selected" else "exam-option"
-            }
-            return
-        }
+        answerPractice(questionId, selected.joinToString("|"))
     }
 
     private fun mcOptions(q: ListeningQ) = node("div", "exam-options").apply {
@@ -309,8 +373,12 @@ internal class ExamListeningController(
         appendChild((document.createElement("input") as HTMLInputElement).apply {
             type = "text"; className = "exam-input"; placeholder = "Wpisz odpowiedź..."
             value = answers[q.id].orEmpty()
-            addEventListener("input", { dispatch(ListeningExamAction.Answer(q.id, this.value)) })
+            addEventListener("input", { onDraftInput(q.id); if (q.id !in feedback.committed || !practiceEnabled()) dispatch(ListeningExamAction.Answer(q.id, this.value)) })
         })
+        if (practiceEnabled()) appendChild(navBtn(UiCopy.ExamCheck) {
+            val input = querySelector(".exam-input") as? HTMLInputElement
+            answerPractice(q.id, input?.value.orEmpty(), PracticeInputEvent.Check)
+        }.apply { className += " exam-check-btn" })
     }
 
     private fun unorderedFillInputs(q: ListeningQ) = node("div", "exam-input-wrap exam-set-inputs").apply {
@@ -322,17 +390,22 @@ internal class ExamListeningController(
                 setAttribute("aria-label", "${q.questionText} ${index + 1}")
                 value = values[index]
                 addEventListener("input", {
+                    onDraftInput(q.id)
                     values[index] = this.value
-                    dispatch(ListeningExamAction.Answer(q.id, values.filter { it.isNotBlank() }.joinToString("|")))
+                    if (q.id !in feedback.committed || !practiceEnabled())
+                        dispatch(ListeningExamAction.Answer(q.id, values.filter { it.isNotBlank() }.joinToString("|")))
                 })
             })
         }
+        if (practiceEnabled()) appendChild(navBtn(UiCopy.ExamCheck) {
+            answerPractice(q.id, values.joinToString("|"), PracticeInputEvent.Check)
+        }.apply { className += " exam-check-btn" })
     }
 
     private fun renderResult(c: HTMLElement) {
         val questions = exam.tasks.flatMap { it.questions }
+        val reviews = listeningReviewRows(exam, answers)
         val result = requireNotNull(state.result)
-        val evaluations = questions.map { result.evaluations.getValue(it.id) }
         val earnedQuarter = result.confirmedQuarter
         val pendingQuarter = result.manualPendingQuarter
         val totalQuarter = result.possibleQuarter
@@ -349,8 +422,9 @@ internal class ExamListeningController(
         })
         c.appendChild(node("div", "exam-review").apply {
             questions.forEachIndexed { i, q ->
-                val ans = answers[q.id].orEmpty()
-                val evaluation = evaluations[i]
+                val review = reviews[i]
+                val ans = review.chosenAnswer.orEmpty()
+                val evaluation = review.evaluation
                 val status = when (evaluation.status) {
                     ExamAnswerStatus.ConfirmedFull -> "correct"
                     ExamAnswerStatus.ConfirmedPartial -> "partial"
@@ -360,11 +434,11 @@ internal class ExamListeningController(
                 appendChild(node("div", "exam-review-item $status").apply {
                     appendChild(node("span", "exam-review-num", "${i + 1}."))
                     appendChild(node("span", "exam-review-context", "${q.questionText}: ${ans.ifEmpty { "[—]" }}"))
+                    appendChild(node("span", "exam-review-chosen", "${UiCopy.ExamYourAnswer}: ${ans.ifBlank { UiCopy.NoAnswerEntered }}"))
                     if (evaluation.status == ExamAnswerStatus.ConfirmedPartial) appendChild(node("span", "exam-review-correct", "+${formatQuarterPoints(evaluation.confirmedQuarter)} / ${formatQuarterPoints(q.pointsQuarter)}"))
                     if (evaluation.status == ExamAnswerStatus.PendingManual) appendChild(node("span", "exam-review-manual", UiCopy.ExamManualReview))
                     if (evaluation.status != ExamAnswerStatus.ConfirmedFull) {
-                        val examples = (listOf(q.correctAnswer) + q.scoredVariants.map { it.answer }).joinToString(" / ")
-                        appendChild(node("span", "exam-review-correct", "${UiCopy.ExamOfficialExamples}: $examples"))
+                        appendChild(node("span", "exam-review-correct", "${UiCopy.ExamOfficialExamples}: ${review.officialExamples.joinToString(" / ")}"))
                     }
                 })
             }
@@ -373,7 +447,7 @@ internal class ExamListeningController(
             appendChild(navBtn("← К модулям") { onBack() })
             appendChild(node("span", "exam-nav-spacer"))
             appendChild(navBtn(UiCopy.TryAgain, true) {
-                disposeAudio(); ownState = ListeningExamState(exam); setInputValues.clear(); setupAudio(); redraw()
+                cancelFeedbackTimer(); feedback = PracticeFeedbackState(); disposeAudio(); ownState = ListeningExamState(exam); setInputValues.clear(); setupAudio(); redraw()
             })
         })
     }

@@ -3,8 +3,12 @@ package polski.exam
 import polski.exam.grammar.GrammarExamScorer
 import polski.exam.grammar.GrammarItem
 import polski.exam.grammar.GrammarTest
+import polski.exam.reading.ReadingExam
+import polski.exam.reading.ReadingExamScorer
+import polski.exam.listening.ListeningExam
+import polski.exam.listening.ListeningExamScorer
 
-/** A read-only review of the submitted, frozen grammar answer map. */
+/** A read-only review of a submitted part's frozen answer map. */
 data class ExamReviewRow(
     val itemId: String,
     val chosenAnswer: String?,
@@ -33,3 +37,21 @@ fun officialGrammarExamples(item: GrammarItem, test: GrammarTest? = null): List<
     }
     return (listOf(item.correctAnswer) + item.scoredVariants.map { it.answer } + paired).distinct()
 }
+
+fun readingReviewRows(exam: ReadingExam, frozenAnswers: Map<String, String>): List<ExamReviewRow> =
+    exam.passages.flatMap { passage ->
+        exam.questions.filter { it.passageId == passage.id }.map { question ->
+            ExamReviewRow(question.id, frozenAnswers[question.id]?.takeIf { it.isNotBlank() },
+                (listOf(question.correctAnswer) + question.scoredVariants.map { it.answer }).distinct(),
+                ReadingExamScorer.grade(question, frozenAnswers[question.id].orEmpty()), question.pointsQuarter)
+        }
+    }
+
+fun listeningReviewRows(exam: ListeningExam, frozenAnswers: Map<String, String>): List<ExamReviewRow> =
+    exam.tasks.flatMap { task ->
+        task.questions.map { question ->
+            ExamReviewRow(question.id, frozenAnswers[question.id]?.takeIf { it.isNotBlank() },
+                (listOf(question.correctAnswer) + question.scoredVariants.map { it.answer }).distinct(),
+                ListeningExamScorer.grade(question, frozenAnswers[question.id].orEmpty()), question.pointsQuarter)
+        }
+    }
